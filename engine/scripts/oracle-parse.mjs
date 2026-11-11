@@ -13293,6 +13293,19 @@ function counterIntoAt(sentences, i, ctx) {
     }
     return { effect, used: 2 };
   }
+  // "If an artifact or creature spell is countered this way, put that card
+  // onto the battlefield under your control instead of into its owner's
+  // graveyard." (Desertion).
+  if (
+    /^if an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard\.$/i.test(
+      rider,
+    )
+  ) {
+    return {
+      effect: counter("battlefield", { intoIf: { typesAnyOf: ["artifact", "creature"] } })(ctx.target("spell")),
+      used: 2,
+    };
+  }
   const suspended = /^if the spell is countered this way, exile it with (\w+) time counters on it instead of putting it into its owner's graveyard\.$/i.exec(rider);
   const counters = suspended === null ? undefined : NUMBERS[suspended[1].toLowerCase()];
   if (counters !== undefined && /^if it doesn't have suspend, it gains suspend\.$/i.test(sentences[i + 2] ?? "")) {

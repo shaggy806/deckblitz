@@ -1502,6 +1502,11 @@ interface EnterOptions {
    * its replacements and every trigger that sees it arrive see that face.
    * Only `Game.meldByEffect` passes it. */
   readonly melded?: MeldedInfo;
+  /** From the stack, but not a spell resolving: a countered spell's card put
+   * onto the battlefield instead of into a graveyard (Desertion). It arrives
+   * as a new object (rule 400.7) that was never cast: not kicked, X is 0, no
+   * mana was spent on it. Only `Game.counterObject` passes it. */
+  readonly notResolving?: true;
   /** Not about entering: a move to a library says where in it the card is
    * going (the move itself puts it on the bottom, and the caller places it
    * after), so a commander whose 903.9b choice defers the move still goes
@@ -50540,6 +50545,8 @@ controlledBy,
     if (types?.faceDown === undefined && this.askEnterChoice(target.object, under ?? object.owner, transformed)) return true;
     this.moveObject(target.object, "battlefield", {
       tapped: enterTapped,
+      // A card on the stack put there by an effect isn't a spell resolving.
+      ...(object.zone === "stack" ? { notResolving: true as const } : {}),
       ...(under !== undefined ? { under } : {}),
       ...(transformed ? { transformed: true } : {}),
       ...(flipped ? { flipped: true } : {}),
@@ -53715,11 +53722,16 @@ controlledBy,
 
   private counterSpellByEffect(
     target: TargetRef,
-    into: "hand" | "exile" | "library-top" | "library-bottom" | undefined,
+    into: "hand" | "exile" | "library-top" | "library-bottom" | "battlefield" | undefined,
     lockSource: boolean,
     controller: PlayerId,
     timeCounters?: number,
-  ): { readonly countered: boolean; readonly sourcePermanent?: ObjectId; readonly exiledInstead?: ObjectId } {
+  ): {
+    readonly countered: boolean;
+    readonly sourcePermanent?: ObjectId;
+    readonly exiledInstead?: ObjectId;
+    readonly asked?: true;
+  } {
     if (target.kind !== "object") return { countered: false };
     // Trickbind's "that permanent": the ability's source as it was put on
     // the stack — a permanent then, and still that permanent (rule 400.7).
@@ -53736,6 +53748,20 @@ controlledBy,
       return this.state.objects[target.object]?.zone === "exile"
         ? { countered: false, exiledInstead: target.object }
         : { countered: false };
+    }
+    // Desertion's card makes its "as this enters" choices before anything
+    // moves (rule 614.12), its new controller choosing: countered once
+    // they're answered.
+    if (
+      into === "battlefield" &&
+      ability?.kind === "card" &&
+      ability.zone === "stack" &&
+      ability.isCopy !== true &&
+      !this.cantBeCountered(ability) &&
+      this.state.players[controller]?.hasLost === false &&
+      this.askEnterChoice(target.object, controller)
+    ) {
+      return { countered: false, asked: true };
     }
     const sourceId = ability?.kind === "ability" ? ability.sourceObjectId : null;
     const stint = ability?.lastKnownRefs?.source;
@@ -53767,7 +53793,7 @@ controlledBy,
   private counterObject(
     id: ObjectId,
     by: PlayerId,
-    into: "graveyard" | "hand" | "exile" | "library-top" | "library-bottom" = "graveyard",
+    into: "graveyard" | "hand" | "exile" | "library-top" | "library-bottom" | "battlefield" = "graveyard",
   ): boolean {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return false;
@@ -53810,6 +53836,13 @@ controlledBy,
     const castBy = object.castFrom !== undefined ? spellCaster(object) : undefined;
     if (into === "library-top" || into === "library-bottom") {
       this.putOnLibrary(id, into === "library-top" ? "top" : "bottom");
+    } else if (into === "battlefield") {
+      // Under the control of whoever countered it (Desertion), its "as this
+      // enters" choices already made (`counterSpellByEffect`). One that
+      // can't enter is countered into the graveyard as usual; an Aura with
+      // nothing to enchant is put there by the move itself (rule 303.4g).
+      this.putOntoBattlefieldByEffect({ kind: "object", object: id }, by, true, false);
+      if (this.state.objects[id]?.zone === "stack") this.moveObject(id, "graveyard");
     } else {
       this.moveObject(id, into);
     }
@@ -60429,8 +60462,14 @@ controlledBy,
       return false;
     }
     const leavingBattlefield = object.zone === "battlefield" && to !== "battlefield";
+    // A permanent spell becoming the permanent as it resolves (rule 608.3):
+    // what was chosen and paid as it was cast goes with it. A countered spell's
+    // card put onto the battlefield instead (`EnterOptions.notResolving`) is a
+    // new object with no memory of the spell (rule 400.7).
+    const resolving = object.zone === "stack" && to === "battlefield" && enter.notResolving !== true;
     // A Room spell's half — the door that enters unlocked (rule 709.5d).
-    const castHalf = object.zone === "stack" && object.isCopy !== true ? (object.face ?? 0) : 0;
+    const castHalf =
+      object.zone === "stack" && object.isCopy !== true && (to !== "battlefield" || resolving) ? (object.face ?? 0) : 0;
     // Last-known information (rules 603.10a, 608.2h), taken before anything
     // below resets control, counters, modifiers or a copy effect: everything a
     // leaves-the-battlefield trigger or a resolving ability may still ask
@@ -60706,21 +60745,20 @@ controlledBy,
     // paid for is an ETB trigger that only fires once the permanent is
     // already here (Verix Bladewing). Cleared like any other zone-scoped
     // flag on the *next* move, so a Verix that dies and returns is unkicked.
-    const enteringKicked = object.zone === "stack" && to === "battlefield" && object.kicked === true;
-    const enteringAlternativeCost = object.zone === "stack" && to === "battlefield" ? object.alternativeCostPaid : undefined;
-    const enteringSpectacle = object.zone === "stack" && to === "battlefield" && object.spectaclePaid === true;
-    const enteringSurge = object.zone === "stack" && to === "battlefield" && object.surgePaid === true;
-    const enteringProwl = object.zone === "stack" && to === "battlefield" && object.prowlPaid === true;
+    const enteringKicked = resolving && object.kicked === true;
+    const enteringAlternativeCost = resolving ? object.alternativeCostPaid : undefined;
+    const enteringSpectacle = resolving && object.spectaclePaid === true;
+    const enteringSurge = resolving && object.surgePaid === true;
+    const enteringProwl = resolving && object.prowlPaid === true;
     const enteringTimesKicked = enteringKicked ? object.timesKicked : undefined;
     const enteringKickedWith = enteringKicked ? object.kickedWith : undefined;
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
-    const enteringConvokedBy = object.zone === "stack" && to === "battlefield" ? object.convokedBy : undefined;
-    const enteringPhyrexianLife =
-      object.zone === "stack" && to === "battlefield" ? object.phyrexianPaidWithLife : undefined;
+    const enteringConvokedBy = resolving ? object.convokedBy : undefined;
+    const enteringPhyrexianLife = resolving ? object.phyrexianPaidWithLife : undefined;
     // Its gift's opponent, the same way (rule 702.174b's "if its gift cost
     // was paid" is an ETB trigger).
-    const enteringGiftTo = object.zone === "stack" && to === "battlefield" ? object.giftTo : undefined;
+    const enteringGiftTo = resolving ? object.giftTo : undefined;
     // A prototyped spell's characteristics stay with the permanent it
     // becomes; any other move drops them (rule 718.3b). So does what the
     // spell got for how it was cast (`castRider` — rules 400.7b, 611.3d), or
@@ -60730,7 +60768,7 @@ controlledBy,
     // 707.10f).
     const keptPrototype = enteringToken
       ? object.modifiers
-      : object.zone === "stack" && to === "battlefield"
+      : resolving
         ? object.modifiers.filter(
             (m) => m.prototype === true || m.castRider === true || (object.isToken && m.copiable === true),
           )
@@ -60753,7 +60791,7 @@ controlledBy,
     // The mana spent to cast a spell stays with the permanent it becomes (an
     // "if N mana was spent to cast it" enters trigger reads it there) and
     // ends with any other move.
-    if (!(object.zone === "stack" && to === "battlefield")) object.manaSpent = undefined;
+    if (!resolving) object.manaSpent = undefined;
 
     // Rule 400.7: wherever it goes, it arrives as a new object, so a move
     // into a graveyard records this turn and where it came from ("put there
@@ -60802,7 +60840,7 @@ controlledBy,
         ? undefined
         : {
             from: previousZone,
-            ...(previousZone === "stack" && object.kind === "card" && object.castFrom !== undefined
+            ...(resolving && object.kind === "card" && object.castFrom !== undefined
               ? {
                   cast: {
                     by: spellCaster(object),
@@ -61149,6 +61187,13 @@ controlledBy,
     object.enteredGiftTo = enteringGiftTo;
     object.entry = entry;
     object.castFrom = undefined;
+    if (previousZone === "stack" && to === "battlefield" && !resolving) {
+      // Not the spell resolved: its X is 0 here (rule 107.3i), and how it was
+      // cast is nobody's to ask.
+      object.xValue = null;
+      object.castVia = null;
+      object.webSlingingManaValue = undefined;
+    }
     delete object.putOnStackBy;
     delete object.seatTargetWaiting;
     delete object.convokedBy;
@@ -61174,7 +61219,7 @@ controlledBy,
     object.overloaded = undefined;
     // A bestowed Aura spell becomes a bestowed Aura (rule 702.103b); any
     // other move ends it.
-    if (!(previousZone === "stack" && to === "battlefield")) object.bestowed = undefined;
+    if (!resolving) object.bestowed = undefined;
     // A Licid's Aura effect was this permanent's (rule 400.7), and so was
     // an enchant ability an effect gave it (`swap-enchant`).
     delete object.licid;

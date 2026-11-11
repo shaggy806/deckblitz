@@ -8,7 +8,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, cast, destroy, graveyard, lands, pickModes, pickTargets, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, cast, counters, destroy, graveyard, lands, pickModes, pickTargets, ref, settle, spawn, table, toHand, zone } from "./harness.js";
 
 const library = (game: Game, player: PlayerId = A): readonly ObjectId[] => game.state.zones.perPlayer[player].library;
 
@@ -255,5 +255,99 @@ describe("Guile: instead of countering, exile and offer", () => {
     destroy(game, guile);
     settle(game);
     expect(zone(game, guile)).toBe("library");
+  });
+});
+
+describe("a countered spell's card put onto the battlefield (Desertion)", () => {
+  /** Bob's Desertion at Alice's `spell`, which she holds priority over. */
+  function desert(game: Game, spell: ObjectId): ObjectId {
+    lands(game, "Island", 5, B);
+    game.dispatch({ type: "pass-priority", player: A });
+    const desertion = toHand(game, "Desertion", B);
+    cast(game, desertion, { player: B, targets: [ref(spell)] });
+    return desertion;
+  }
+
+  it("a creature spell: countered, and its card is Bob's permanent, still Alice's card", () => {
+    const { game } = table();
+    const bears = spellOnStack(game, "Grizzly Bears");
+    const desertion = desert(game, bears);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.objects[bears].controller).toBe(B);
+    expect(game.state.objects[bears].owner).toBe(A);
+    expect(graveyard(game, B)).toEqual([desertion]);
+    expect(graveyard(game)).toEqual([]);
+    expect(game.state.eventLog.some((e) => e.type === "spell-countered" && e.object === bears)).toBe(true);
+    // It wasn't cast onto the battlefield (rule 400.7).
+    expect(game.state.objects[bears].entry?.cast).toBeUndefined();
+    destroy(game, bears);
+    settle(game);
+    expect(graveyard(game)).toEqual([bears]);
+  });
+
+  it("an artifact spell too", () => {
+    const { game } = table();
+    const ring = spellOnStack(game, "Sol Ring");
+    desert(game, ring);
+    expect(zone(game, ring)).toBe("battlefield");
+    expect(game.state.objects[ring].controller).toBe(B);
+  });
+
+  it("any other spell goes to its owner's graveyard", () => {
+    const { game } = table();
+    lands(game, "Island", 1);
+    const divination = spellOnStack(game, "Divination");
+    const before = game.state.zones.perPlayer[A].hand.length;
+    desert(game, divination);
+    expect(graveyard(game)).toEqual([divination]);
+    expect(game.state.zones.perPlayer[A].hand.length).toBe(before);
+  });
+
+  it("a kicked creature isn't kicked on the battlefield: a new object", () => {
+    const { game } = table();
+    lands(game, "Swamp", 3);
+    const victim = spawn(game, "Grizzly Bears");
+    const gatekeeper = toHand(game, "Gatekeeper of Malakir");
+    cast(game, gatekeeper, { kicked: true, settle: false });
+    desert(game, gatekeeper);
+    expect(zone(game, gatekeeper)).toBe("battlefield");
+    expect(game.state.objects[gatekeeper].controller).toBe(B);
+    expect(game.state.objects[gatekeeper].enteredKicked).toBe(false);
+    expect(zone(game, victim)).toBe("battlefield");
+  });
+
+  it("a spell's X is 0 on the battlefield (rule 107.3i)", () => {
+    const { game } = table();
+    lands(game, "Forest", 6);
+    const ballista = toHand(game, "Walking Ballista");
+    cast(game, ballista, { x: 3, settle: false });
+    desert(game, ballista);
+    // A 0/0 with no counters: it dies, to its owner's graveyard.
+    expect(graveyard(game)).toEqual([ballista]);
+    expect(counters(game, ballista)).toBe(0);
+  });
+
+  it("its as-enters choice is the new controller's (rule 614.12)", () => {
+    const { game, a, b } = table();
+    const angel = spawn(game, "Serra Angel");
+    a.chooseCopyFn = () => {
+      throw new Error("Alice isn't the one putting it onto the battlefield");
+    };
+    b.chooseCopyFn = () => angel;
+    lands(game, "Island", 1);
+    const clone = spellOnStack(game, "Clone");
+    desert(game, clone);
+    expect(zone(game, clone)).toBe("battlefield");
+    expect(game.state.objects[clone].controller).toBe(B);
+    expect(game.state.objects[clone].copyOf).toBe("Serra Angel");
+  });
+
+  it("a spell that can't be countered resolves", () => {
+    const { game } = table();
+    const revenge = spellOnStack(game, "Gaea's Revenge");
+    desert(game, revenge);
+    expect(zone(game, revenge)).toBe("battlefield");
+    expect(game.state.objects[revenge].controller).toBe(A);
+    expect(game.state.objects[revenge].entry?.cast?.by).toBe(A);
   });
 });

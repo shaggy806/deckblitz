@@ -4332,8 +4332,18 @@ export type EffectSpec =
        * player's graveyard" (Memory Lapse, Spell Crumple; Hinder's "your choice
        * of the top or bottom" is an `each-player-may` of the two). A commander
        * sent to a library may still go to the command zone (rule 903.9b).
+       * `"battlefield"`: "put that card onto the battlefield under your
+       * control instead of into its owner's graveyard" (Desertion) — the
+       * card, a new object that was never cast (rule 400.7: not kicked, its X
+       * 0, rule 107.3i), its "as this enters" choices its new controller's
+       * and made first (614.12). An Aura with nothing to enchant goes to the
+       * graveyard after all (303.4g).
        */
-      readonly into?: "hand" | "exile" | "library-top" | "library-bottom";
+      readonly into?: "hand" | "exile" | "library-top" | "library-bottom" | "battlefield";
+      /** "If **an artifact or creature spell** is countered this way, …
+       * instead" (Desertion): `into` is only for a spell matching this, as it
+       * is on the stack; any other is countered into the graveyard. */
+      readonly intoIf?: CardFilter;
       /** With `into: "exile"`: "exile it **with three time counters on it**
        * … If it doesn't have suspend, it gains suspend" (Delay — rule
        * 702.62b). Only when the spell was countered, and it is the card that
@@ -11659,10 +11669,14 @@ export interface EffectApi {
    * of their graveyard with `into: "hand"`. */
   counterSpell(
     target: TargetRef,
-    into?: "hand" | "exile" | "library-top" | "library-bottom",
+    into?: "hand" | "exile" | "library-top" | "library-bottom" | "battlefield",
     lockSource?: boolean,
     timeCounters?: number,
   ): {
+    /** With `into: "battlefield"`: it stopped to ask the card's "as this
+     * enters" choice first (rule 614.12). Nothing is countered yet, and the
+     * step runs again once it's answered. */
+    readonly asked?: true;
     readonly countered: boolean;
     /** The ability's source, still the permanent it was as the ability went
      * on the stack (rule 400.7). */
@@ -17037,12 +17051,23 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "counter": {
       const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
-      const { countered, sourcePermanent, exiledInstead } = ctx.counterSpell(
+      // "If an artifact or creature spell is countered this way": the spell
+      // as it is on the stack.
+      const into =
+        spec.intoIf !== undefined && !(target.kind === "object" && ctx.cardMatches(target.object, spec.intoIf))
+          ? undefined
+          : spec.into;
+      const parked = ctx.parkedCount();
+      const { countered, sourcePermanent, exiledInstead, asked } = ctx.counterSpell(
         target,
-        spec.into,
+        into,
         spec.lockSource === true,
         spec.withTimeCounters,
       );
+      if (asked === true) {
+        ctx.resumeAfterDecisions(spec, parked);
+        return;
+      }
       if (exiledInstead !== undefined) {
         // Guile's "you may play that card without paying its mana cost", this
         // resolution's own instruction: declined, it stays exiled for good.

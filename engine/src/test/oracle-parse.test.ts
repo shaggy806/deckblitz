@@ -18505,3 +18505,21 @@ describe("loyalty abilities twice this turn", () => {
     });
   });
 });
+
+describe("a countered spell's card put onto the battlefield", () => {
+  it("reads Desertion", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text:
+        "Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.",
+    } as never) as unknown as Record<string, unknown>;
+    expect(face.targets).toEqual(["spell"]);
+    expect(face.effect).toEqual({
+      kind: "counter",
+      target: 0,
+      into: "battlefield",
+      intoIf: { typesAnyOf: ["artifact", "creature"] },
+    });
+  });
+});
