@@ -2414,6 +2414,11 @@ export function parseTrigger(clause) {
   if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
     return [{ on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } }];
   }
+  // "A spell with cascade" (Aurora Phoenix): printed on it or granted, `spellHas`.
+  if ((m = /^Whenever (you|an opponent|a player) casts? a spell (?:with|that has) cascade$/.exec(c))) {
+    const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
+    return [{ on: "cast-spell", who, spellHas: "cascade" }];
+  }
   // "Using mana produced by Tecutlan" (Barracks of the Thousand): this very
   // permanent's mana, `manaSpent`'s `from: { fromSource: true }`. A permanent spell is any of the
   // permanent types.

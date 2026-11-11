@@ -32602,6 +32602,7 @@ export class Game {
         }
         if (spec.modal === true && !this.isModalSpell(event.object)) return false;
         if (spec.withTargets === true && this.spellTargetCount(event.object) === 0) return false;
+        if (spec.spellHas === "cascade" && !this.spellHasCascade(event.object)) return false;
         if (spec.sharesNoCreatureType === true && this.sharesCreatureTypeWithOwn(event.object, event.player)) {
           return false;
         }
@@ -33077,6 +33078,15 @@ export class Game {
   private isModalSpell(id: ObjectId): boolean {
     const object = this.state.objects[id];
     return object !== undefined && this.registry.get(rulesTextName(object)).castModal !== null;
+  }
+
+  /** A spell with cascade (rule 702.85a): one of the abilities it has on the
+   * stack, printed or granted, is the "when you cast this spell" cascade. */
+  private spellHasCascade(id: ObjectId): boolean {
+    return this.effectiveTriggeredEntries(id).some(
+      (entry) =>
+        entry.lost !== true && entry.ability.trigger.on === "this-cast" && entry.ability.effect?.kind === "cascade",
+    );
   }
 
   /** Whether the spell `id` shares a creature type with a creature `player`

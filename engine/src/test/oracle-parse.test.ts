@@ -1913,6 +1913,9 @@ describe("costs and triggers", () => {
     expect(parseTrigger("Whenever you cast a spell that has convoke")).toEqual([
       { on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } },
     ]);
+    expect(parseTrigger("Whenever you cast a spell with cascade")).toEqual([
+      { on: "cast-spell", who: "you", spellHas: "cascade" },
+    ]);
     expect(parseTrigger("Whenever ~ deals combat damage to a player or battle")).toEqual([
       { on: "deals-combat-damage-to-player", who: "self", orBattle: true },
     ]);

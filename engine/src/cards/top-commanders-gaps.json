@@ -2202,7 +2202,8 @@
   "effect:search-then-act-on-found",
   "static:prohibit-by-player-turn-history",
   "static:prohibit-by-player-turn-history",
-  "effect:look-and-choose-destination-choice"
+  "effect:look-and-choose-destination-choice",
+  "trigger:cast-spell-with-cascade"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -2294,6 +2294,13 @@ export type TriggerKind =
        * "whenever you cast a spell with one or more targets". `{ triggerValue:
        * true }` is then how many targets it has ("draw that many cards"). */
       readonly withTargets?: boolean;
+      /** Only a spell with this "when you cast this spell" keyword ability as
+       * it's cast, printed or granted — Aurora Phoenix's "whenever you cast a
+       * spell **with cascade**" (rule 702.85a). Read off the abilities the
+       * spell has on the stack, so "spells you cast have cascade" (Maelstrom
+       * Nexus, The First Sliver, Yidris's grant) counts and a card that only
+       * was cast *by* a cascade doesn't. */
+      readonly spellHas?: "cascade";
       /**
        * Make `{ triggerValue: true }` the number of spells matching this
        * filter that the caster cast this turn **before** this one — read as
