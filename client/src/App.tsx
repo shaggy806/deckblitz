@@ -19,6 +19,7 @@ import type {
   WaterbendOffer,
 } from 'engine/client'
 import {
+  EVERY_CREATURE_TYPE,
   anyNumberSlot,
   attackCompanyViolations,
   attackingViolations,
@@ -36,6 +37,7 @@ import {
   groupPowerExceeded,
   isOptionalSpec,
   manaValue,
+  maxXForTargets,
   parseManaCost,
   rangeTargetCount,
   slotOptions,
@@ -46,6 +48,7 @@ import {
   shareACreatureType,
   tapPicksPower,
   targetCountAtX,
+  targetsWithinTaxes,
   waterbendAt,
 } from 'engine/client'
 import type { SeatStatus, TutorialInfo } from 'protocol'
@@ -307,6 +310,10 @@ const castExtras = (cast: CastAction) => ({
   // Not echoed either: how many distinct targets are affordable, which the
   // targeting steps keep inside (`currentSlotOptions`).
   ...(cast.targetCount !== undefined ? { targetCount: cast.targetCount } : {}),
+  // Nor these: what a target adds to the cost (Boreal Elemental's "costs {2}
+  // more to cast") or takes off it, which the targeting steps keep payable.
+  ...(cast.targetTaxes !== undefined ? { targetTaxes: cast.targetTaxes } : {}),
+  ...(cast.xCost !== undefined ? { xCost: cast.xCost } : {}),
   // Not `escapeExile`: that's an offer to pick from, not a field to echo.
   // `startCast` asks for the picks and carries them as `CastPicks`.
   ...(cast.convoke !== undefined && cast.convoke.candidates.length > 0
@@ -582,6 +589,13 @@ interface Targeting {
    * ("controlled by different players", "total power 10 or less") — off the
    * view the choice began on (`viewTargetFacts`). */
   readonly facts?: TargetFacts
+  /** What some targets add to a spell's cost and how much more can be paid
+   * (the cast offer's `targetTaxes`): a target past it isn't offered. */
+  readonly targetTaxes?: CastAction['targetTaxes']
+  /** An X spell's offer: with `xValue` chosen, a target is offered only
+   * while that X stays payable with it (a taxed target lowers the most X, a
+   * cost-reducing one may be what affords it — `maxXForTargets`). */
+  readonly xCost?: CastAction['xCost']
   /** Chosen modes for a targeted modal spell (Phase 11 EG-2). */
   readonly modes?: readonly number[]
   /** Chosen value for `{X}`, when casting an X spell. */
@@ -678,6 +692,21 @@ function modePlayerIndex(
   return i >= 0 ? i : null
 }
 
+/** `options` less the targets that would price the spell out of reach: a
+ * taxed one past what's left to pay, or, at the X already chosen, one that
+ * leaves that X unpayable. The engine refuses those casts; never offering
+ * them saves the player the refusal. */
+function payableOptions(t: Targeting, options: readonly TargetRef[]): readonly TargetRef[] {
+  const { targetTaxes, xCost, xValue } = t
+  const taxedX = xCost !== undefined && xValue !== undefined && (xCost.targetTaxes !== undefined || xCost.maxXUnreduced !== undefined)
+  if (targetTaxes === undefined && !taxedX) return options
+  return options.filter((ref) => {
+    const picked = [...t.picked, ref]
+    if (taxedX) return maxXForTargets(xCost, t.targetCount, picked) >= xValue
+    return targetsWithinTaxes({ targetTaxes }, picked)
+  })
+}
+
 /**
  * The options for the slot being filled: what `slotOptions` allows ("another
  * target" leaves out what an earlier slot took), less any that would leave
@@ -687,7 +716,7 @@ function modePlayerIndex(
  */
 function currentSlotOptions(t: Targeting): readonly TargetRef[] {
   const i = t.picked.length
-  const options = slotOptions(t.specs, t.options, i, t.picked, t.facts)
+  const options = payableOptions(t, slotOptions(t.specs, t.options, i, t.picked, t.facts))
   const range = t.targetCount
   if (range === undefined) return options
   // Inside an "any number of" group, the fewest is Done's to check
@@ -719,6 +748,31 @@ const viewTargetFacts = (view: PlayerView): TargetFacts => ({
     ref.kind === 'object' && view.zones.battlefield.includes(ref.object)
       ? (view.objects[ref.object]?.stackCount ?? 1)
       : 1,
+  // What the relations between targets read (equal toughness, different
+  // names, a shared type, "attached to it"): without them every target legal
+  // alone was offered, and a broken pair refused only when sent.
+  toughnessOf: (ref) => (ref.kind === 'object' ? (view.objects[ref.object]?.toughness ?? 0) : 0),
+  nameOf: (ref) => {
+    const o = ref.kind === 'object' ? view.objects[ref.object] : undefined
+    // The name it has now: a copy exception's, else a copy's, else its face's.
+    return o === undefined ? '' : (o.name ?? o.copyOf ?? o.faceName)
+  },
+  shareTypes: (a, b, share) => {
+    const one = a.kind === 'object' ? view.objects[a.object] : undefined
+    const other = b.kind === 'object' ? view.objects[b.object] : undefined
+    if (one === undefined || other === undefined) return false
+    if (share.kind === 'card') {
+      return one.types.some((t) => (share.among === undefined || share.among.includes(t)) && other.types.includes(t))
+    }
+    // The view's subtypes are the printed words: every creature type is a flag.
+    const creatureTypes = (o: VisibleObject): readonly string[] =>
+      o.everyCreatureType === true ? [...o.subtypes, EVERY_CREATURE_TYPE] : o.subtypes
+    return shareACreatureType([creatureTypes(one), creatureTypes(other)])
+  },
+  attachedTo: (ref) => {
+    if (ref.kind !== 'object' || !view.zones.battlefield.includes(ref.object)) return undefined
+    return view.objects[ref.object]?.attachedTo ?? undefined
+  },
 })
 
 /** The most tokens of the stack `id` an "any number of" group could hold,

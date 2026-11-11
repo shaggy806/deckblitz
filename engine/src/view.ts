@@ -69,7 +69,7 @@ import {
   perspectiveOf,
   playersControlledBy,
 } from "./player-control.js";
-import { withoutTypeMarkers } from "./subtypes.js";
+import { EVERY_CREATURE_TYPE, withoutTypeMarkers } from "./subtypes.js";
 import type { TargetRef } from "./target.js";
 
 export interface PublicPlayerInfo {
@@ -221,6 +221,9 @@ export interface VisibleObject {
    * (`effectiveSupertypes`). */
   readonly supertypes: readonly Supertype[];
   readonly subtypes: readonly string[];
+  /** It is every creature type (changeling, rule 702.73a, or an effect that
+   * says so): `subtypes` lists only the printed words. */
+  readonly everyCreatureType?: true;
   /** Computed power/toughness; `null` for objects that are not creatures. */
   readonly power: number | null;
   readonly toughness: number | null;
@@ -757,6 +760,9 @@ function visible(
     // is an engine marker (`subtypes.ts`), not a word on the card — its
     // changeling keyword says so instead.
     subtypes: withoutTypeMarkers(computed.subtypes),
+    // …but not every source of it is the keyword (Maskwood Nexus), and a
+    // client narrowing "shares a creature type" needs to know.
+    ...(computed.subtypes.includes(EVERY_CREATURE_TYPE) ? { everyCreatureType: true as const } : {}),
     power: isCreature ? computed.power : null,
     toughness: isCreature ? computed.toughness : null,
     // On the battlefield, its loyalty counters; anywhere else, the loyalty

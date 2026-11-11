@@ -21,6 +21,7 @@ export type * from "./index.js";
 export * from "./primitives.js";
 export * from "./mana.js";
 export * from "./target.js";
+export { EVERY_CREATURE_TYPE } from "./subtypes.js";
 export * from "./target-count.js";
 export * from "./turn.js";
 export * from "./state.js";

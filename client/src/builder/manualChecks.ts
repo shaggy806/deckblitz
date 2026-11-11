@@ -12016,4 +12016,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Stifle: the log names a countered ability by its source",
     board({ you: { bf: ['Rod of Ruin', 'Wastes*3', 'Island'], hand: ['Stifle'] } }),
   ),
+  preset(
+    'V.A.T.S.: after one target, only creatures of equal toughness can be picked',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['V.A.T.S.'] },
+      opp: { bf: ['Grizzly Bears', 'Runeclaw Bear', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    "Boreal Elemental: a target whose tax you can't pay isn't offered",
+    board({
+      you: { bf: ['Mountain'], hand: ['Shock'] },
+      opp: { bf: ['Boreal Elemental', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Spellwild Ouphe: at an X only its discount affords, only it can be targeted',
+    board({
+      you: { bf: ['Mountain*2', 'Spellwild Ouphe'], hand: ['Blaze'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

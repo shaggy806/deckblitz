@@ -7976,3 +7976,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Trinisphere: a one-mana spell costs three
 - **Do:** Cast Lightning Bolt at Bob.
 - **Expect:** Casting it taps all three Mountains; Bob loses 3 life. Ornithopter can't be cast afterwards (it would cost {3}).
+
+## Targets narrowed by their relation (2026-11-11)
+
+### V.A.T.S.: after one target, only creatures of equal toughness can be picked
+- **Do:** Cast V.A.T.S. and click Bob's Grizzly Bears, then Hill Giant, then Runeclaw Bear.
+- **Expect:** The click on Hill Giant (toughness 3) does nothing: the banner stays at "1 chosen". Runeclaw Bear (toughness 2) is taken, and with nothing else to pick the spell is cast: both Bears are destroyed and Hill Giant stays.
+
+### Boreal Elemental: a target whose tax you can't pay isn't offered
+- **Do:** With one Mountain, cast Shock and click Bob's Boreal Elemental, then Grizzly Bears.
+- **Expect:** The click on Boreal Elemental does nothing (Shock would cost {2} more, and there's one land): no error toast. Grizzly Bears is taken and Shock kills it.
+
+### Spellwild Ouphe: at an X only its discount affords, only it can be targeted
+- **Do:** With two Mountains, cast Blaze and confirm X at 3 (the most offered). Click Bob's Grizzly Bears, then your Spellwild Ouphe.
+- **Expect:** The click on Grizzly Bears does nothing: X=3 is payable only with the Ouphe's {2} less. The Ouphe is taken and Blaze deals 3 damage to it.
