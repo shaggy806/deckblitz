@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Action } from "../actions.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, graveyard, lands, life, ref, table, toGraveyard, toHand, zone } from "./harness.js";
+import { A, B, cast, graveyard, lands, life, ref, spawn, table, toGraveyard, toHand, tokensNamed, zone } from "./harness.js";
 
 type CastSpellAction = Extract<Action, { type: "cast-spell" }>;
 
@@ -72,6 +72,36 @@ describe("Finale of Promise", () => {
     cast(game, finale, { x: 10, targets: [ref(bolt), ref(spike)] });
     expect(life(game, B)).toBe(20 - 9);
     expect(zone(game, spike)).toBe("graveyard");
+  });
+
+  // In a graveyard a split card has both halves' card types and their
+  // combined mana value (rules 709.4b, 709.4c), and one object may be chosen
+  // once for each instance of "target" (rule 115.3) — the ruling: an instant
+  // // sorcery split card may be the target twice, but is only cast once.
+  it("an instant // sorcery split card fills both slots, and is cast once", () => {
+    const { game, a, finale } = board(12);
+    const split = toGraveyard(game, "Thrash // Threat");
+    // Something for Thrash to target, so both halves can be cast.
+    spawn(game, "Grizzly Bears");
+    spawn(game, "Grizzly Bears", B);
+    // Thrash // Threat's combined mana value is 6.
+    expect(() => cast(game, finale, { x: 5, targets: [ref(split), null] })).toThrow();
+    const offers: number[][] = [];
+    a.chooseCastNowFn = (_view, offer) => {
+      const casts = offer.casts.filter((c) => c.card === split);
+      offers.push(casts.map((c) => c.face ?? 0));
+      const threat = casts.find((c) => c.face === 2);
+      return threat === undefined
+        ? null
+        : ({ type: "cast-spell", player: A, card: split, face: 2, targets: [], via: "effect", free: true } as CastSpellAction);
+    };
+    cast(game, finale, { x: 10, targets: [ref(split), ref(split)] });
+    // Offered once, either half; cast as Threat, it isn't offered again.
+    expect(offers).toHaveLength(1);
+    expect(offers[0]).toEqual([1, 2]);
+    // Threat and its two copies: three Beasts.
+    expect(tokensNamed(game, "Beast Token (Red-Green)", A)).toBe(3);
+    expect(zone(game, split)).toBe("exile");
   });
 
   it("each card needs mana value X or less, and the right card type for its slot", () => {

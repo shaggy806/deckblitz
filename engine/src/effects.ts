@@ -14145,8 +14145,10 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.playersInScope("each-opponent").flatMap((p) => ctx.cardsIn(p, "graveyard"));
     } else if (from === "targets") {
       // An illegal target's slot is blank (rule 608.2b); one already cast
-      // is on the stack now, which the offer passes over.
-      cards = ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : []));
+      // is on the stack now, which the offer passes over. A card in two
+      // slots (rule 115.3 — an instant // sorcery split card as both of
+      // Finale of Promise's targets) is one card, offered once.
+      cards = [...new Set(ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])))];
     } else if (typeof from === "object" && "graveyardOf" in from) {
       const owner = resolvePlayerRef(from.graveyardOf, ctx);
       cards = owner === undefined ? [] : ctx.cardsIn(owner, "graveyard");
