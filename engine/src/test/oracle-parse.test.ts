@@ -10987,6 +10987,19 @@ describe("a static acting on a player", () => {
   const aura = (line: string) => face("Enchantment — Aura Curse", `Enchant player\n${line}`);
   const creatures = { type: "creature", controlledBy: "enchanted-player" };
 
+  it("reads the enchanted player drawing a card, and who 'they' is (Curse of Fool's Wisdom)", () => {
+    expect(aura("Whenever enchanted player draws a card, they lose 2 life and you gain 2 life.").triggered[0]).toMatchObject({
+      trigger: { on: "draws", who: "attached" },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "lose-life", amount: 2, who: "trigger-controller" },
+          { kind: "gain-life", amount: 2 },
+        ],
+      },
+    });
+  });
+
   it("reads what the enchanted player controls", () => {
     expect(aura("Creatures enchanted player controls get -1/-1.").static[0]).toMatchObject({
       affects: { scope: "filter", filter: creatures },

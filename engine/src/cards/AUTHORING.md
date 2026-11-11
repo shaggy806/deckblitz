@@ -1377,7 +1377,9 @@ player (Trespasser's Curse's "that player loses 1 life"). "At the beginning of
 with `who: "attached"`: it fires only in that player's own step, so "that
 player" is `"active-player"` (Curse of the Bloody Tome, Cruel Reality, Torment
 of Scarabs' `unless` with `chooser: "active-player"`); the scaffolder reads the
-trigger clause.
+trigger clause. "Whenever **enchanted player** draws a card" is a `draws`
+trigger with `who: "attached"`, once per card, "they" being who drew,
+`"trigger-controller"` (Curse of Fool's Wisdom).
 
 **An `unless`'s options**, one kind per payment (rule 118.12a), each offered only to
 a player who can do all of it: `{ pay, times?, andLife?, ifPaid?, waterbend?, text }` ("{1} and 1

@@ -2510,6 +2510,11 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever (you|an opponent|a player) draws? a card$/.exec(c))) {
     return [{ on: "draws", who: { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]] }];
   }
+  // A Curse's "whenever enchanted player draws a card" (Curse of Fool's
+  // Wisdom): the player the Aura is attached to, `who: "attached"`.
+  if (c === "Whenever enchanted player draws a card") {
+    return [{ on: "draws", who: "attached" }];
+  }
   // "Whenever an opponent draws their second card each turn" (Faerie
   // Mastermind), "their first card each turn" (Zurzoth, Chaos Rider): the
   // timing wrapper's `nthEachTurn`, counted per drawing player.
@@ -5889,6 +5894,12 @@ export function parseSentence(sentence, ctx) {
     if ((m = re(`that player loses ${N} life`).exec(s))) {
       return { kind: "lose-life", amount: amount(m[1]), who: "trigger-controller" };
     }
+  }
+  // "Whenever enchanted player draws a card, they lose 2 life and you gain 2
+  // life" (Curse of Fool's Wisdom): who drew, the drawn card's controller.
+  if (ctx.thatPlayer === "trigger-controller" && (m = re(`they lose ${N} life( and you gain ${N} life)?`).exec(s))) {
+    const loss = { kind: "lose-life", amount: amount(m[1]), who: "trigger-controller" };
+    return m[2] === undefined ? loss : { kind: "sequence", effects: [loss, { kind: "gain-life", amount: amount(m[3]) }] };
   }
   // Mana Flare's "that player adds one mana of any type that land produced",
   // Extraplanar Lens's "its controller adds …" (a triggered mana ability, rule
@@ -17665,6 +17676,9 @@ function thatPlayerOf(triggers) {
   // "When the chosen player draws a card with the chosen name, … that
   // player" (Booby Trap): who drew, the drawn card's controller.
   if (triggers.every((t) => t.on === "draws" && t.who === "chosen-player")) return "trigger-controller";
+  // "Whenever enchanted player draws a card, they …" (Curse of Fool's
+  // Wisdom): the same.
+  if (triggers.every((t) => t.on === "draws" && t.who === "attached")) return "trigger-controller";
   return undefined;
 }
 
