@@ -2208,7 +2208,8 @@
   "stat:players-dealt-combat-damage-by-name-this-game",
   "target:loyalty-ability",
   "target:loyalty-ability",
-  "static:attack-as-though-haste"
+  "static:attack-as-though-haste",
+  "static:per-keyword-pump"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

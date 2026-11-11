@@ -37008,7 +37008,7 @@ controlledBy,
           : this.battlefieldMatching(controller, what).forEach((id) =>
               this.switchPt({ kind: "object", object: id }, lastingHere(duration), false),
             ),
-      modifyPtAll: (filter, power, toughness, duration, exceptSource, scopeTo) =>
+      modifyPtAll: (filter, power, toughness, duration, exceptSource, scopeTo, perMatchOf) =>
         this.modifyPtAll(
           scopeTo ?? controller,
           filter,
@@ -37016,6 +37016,8 @@ controlledBy,
           toughness,
           lastingHere(duration),
           exceptSource === true ? this.oneTokenSpared(source) : undefined,
+          perMatchOf,
+          source,
         ),
       grantToxic: (on, amount, duration, exceptSource) => {
         const lasting = lastingHere(duration);
@@ -46346,11 +46348,23 @@ controlledBy,
     toughness: number,
     duration: Expiry,
     except?: ObjectId,
+    perMatchOf?: readonly CardFilter[],
+    source?: ObjectId,
   ): void {
-    for (const id of this.battlefieldMatching(you, filter)) {
-      if (id === except) continue;
-      this.modifyPt({ kind: "object", object: id }, power, toughness, duration, false);
-    }
+    const matched = this.battlefieldMatching(you, filter).filter((id) => id !== except);
+    // `perMatchOf`: each one's count is read before any is changed (rule
+    // 611.2c — Akroma, Vision of Ixidor's ruling).
+    const times = matched.map((id) =>
+      perMatchOf === undefined
+        ? 1
+        : perMatchOf.filter((each) =>
+            matchesFilter(this.state, this.registry, id, each, { you, ...(source !== undefined ? { source } : {}) }),
+          ).length,
+    );
+    matched.forEach((id, i) => {
+      if (times[i] === 0) return;
+      this.modifyPt({ kind: "object", object: id }, power * times[i], toughness * times[i], duration, false);
+    });
   }
 
   private doublePtAll(

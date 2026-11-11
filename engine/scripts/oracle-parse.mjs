@@ -6812,6 +6812,29 @@ export function parseSentence(sentence, ctx) {
     };
   }
 
+  // "+1/+1 if it has flying, +1/+1 if it has first strike, and so on for …"
+  // (Akroma, Vision of Ixidor): the amount once a listed ability
+  // (`perMatchOf`), hexproof and protection in any variant, partner off the
+  // text box.
+  if ((m = re(`until end of turn, each other creature you control gets ([+-]\\d+)/([+-]\\d+) if it has ([a-z ]+), \\1/\\2 if it has ([a-z ]+), and so on for ([a-z, ]+)`).exec(s))) {
+    const listed = [m[3], m[4], ...m[5].split(/, (?:and )?/)].map((name) => {
+      const word = name.toLowerCase();
+      if (word === "hexproof" || word === "protection") return { keywordVariant: word };
+      if (word === "partner") return { hasKeyword: "partner" };
+      return KEYWORDS[word] === undefined ? null : { keyword: KEYWORDS[word] };
+    });
+    if (listed.every((filter) => filter !== null)) {
+      return {
+        kind: "modify-pt-all",
+        filter: { type: "creature", controlledBy: "you" },
+        power: Number(m[1]),
+        toughness: Number(m[2]),
+        duration: "end-of-turn",
+        exceptSource: true,
+        perMatchOf: listed,
+      };
+    }
+  }
   // Everyone's creatures until end of turn.
   if ((m = re(`all creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return { kind: "modify-pt-all", filter: { type: "creature" }, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };

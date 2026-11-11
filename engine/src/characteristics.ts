@@ -4389,6 +4389,7 @@ function filterReadsKeywords(filter: CardFilter): boolean {
     // "Creatures you control with toxic" (Skrelv's Hive): toxic granted in
     // layer 6 counts too (rule 613.8).
     filter.hasToxic !== undefined ||
+    filter.keywordVariant !== undefined ||
     (filter.anyOf?.some(filterReadsKeywords) ?? false) ||
     (filter.not !== undefined && filterReadsKeywords(filter.not))
   );

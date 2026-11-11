@@ -5379,6 +5379,14 @@ export type EffectSpec =
        * (Silumgar, the Drifting Death: `"trigger-player"`, on a
        * `creature-attacks`). Nothing when it names nobody. */
       readonly controlledByPlayer?: PlayerRef;
+      /** Each permanent gets the amount once for each of these filters it
+       * matches, and nothing for none — "gets +1/+1 if it has flying, +1/+1
+       * if it has first strike, and so on for …" (Akroma, Vision of Ixidor:
+       * one `{ keyword }` filter a listed ability). Every permanent is
+       * counted before any is changed, so no bonus can change another's
+       * count: which are affected and by how much is settled as the effect
+       * begins (rule 611.2c; Akroma's ruling). */
+      readonly perMatchOf?: readonly CardFilter[];
     }
   | {
       /** Double each matching permanent's *current* power and toughness
@@ -11523,6 +11531,7 @@ export interface EffectApi {
     duration: PermanentDuration,
     exceptSource?: boolean,
     scopeTo?: PlayerId,
+    perMatchOf?: readonly CardFilter[],
   ): void;
   /** Grant `keyword` to every battlefield permanent matching `filter`. */
   grantKeywordAll(
@@ -17758,6 +17767,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.duration,
         spec.exceptSource === true,
         named ?? scopedController(spec.controlledByTarget, ctx),
+        spec.perMatchOf,
       );
       return;
     }

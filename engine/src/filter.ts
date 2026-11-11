@@ -968,6 +968,13 @@ export interface CardFilter {
    * creature you control with toxic" (Slaughter Singer), "if that creature
    * has toxic" (Hexgold Slash). Read on the battlefield; not on a snapshot. */
   readonly hasToxic?: boolean;
+  /** Has this keyword in any of its variants, printed or granted — "if it
+   * has hexproof … protection" (Akroma, Vision of Ixidor), where `keyword`
+   * asks for the plain ability alone: `"hexproof"` is hexproof or any
+   * "hexproof from [quality]" (rule 702.11d: a hexproof ability),
+   * `"protection"` any "protection from [quality]" (rule 702.16a). Read on
+   * the battlefield; a snapshot keeps only its plain keywords. */
+  readonly keywordVariant?: "hexproof" | "protection";
   /** Has an Aura attached to it, whoever controls the Aura (rule 303.4). */
   readonly enchanted?: boolean;
   /** Is itself attached to a permanent matching this filter — an Aura or
@@ -1922,7 +1929,8 @@ function hasParity(state: GameState, value: number, clause: ParityClause, source
  * `CardFilter.hasKeyword` can ask. */
 export type CardKeyword =
   | "convoke" | "cycling" | "disguise" | "flashback" | "kicker" | "morph" | "mutate" | "suspend"
-  | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth";
+  | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth"
+  | "partner";
 
 /** Whether a printed line of `def`'s text is this keyword ability: for the
  * keywords a card authors as their parts, with no field of their own. */
@@ -1952,6 +1960,10 @@ const CARD_KEYWORD_READS = {
   fading: (def) => hasKeywordLine(def, "Fading"),
   modular: (def) => hasKeywordLine(def, "Modular"),
   unearth: (def) => hasKeywordLine(def, "Unearth"),
+  // "Partner" or "partner with [name]", not the other partner abilities —
+  // friends forever, choose a Background and the rest (rule 702.124f; Akroma,
+  // Vision of Ixidor's ruling).
+  partner: (def) => def.pairing?.kind === "partner" || def.pairing?.kind === "partner-with",
 } as const satisfies Record<CardKeyword, (def: CardDefinition, live: GameObject | undefined) => boolean>;
 
 /** Does object `id` satisfy every clause of `filter`?
@@ -3131,6 +3143,34 @@ export function matchesFilter(
             : !hasLostAbilities(state, registry, live) && registry.get(rulesTextName(live)).toxic > 0
           : computeCharacteristics(state, registry, id).toxic > 0;
     if (has !== filter.hasToxic) return false;
+  }
+
+  if (filter.keywordVariant !== undefined) {
+    // Inside the layer fold, as far as the fold has got (no fold within the
+    // fold); a snapshot keeps the plain keyword and no "from [quality]".
+    let has: boolean;
+    if (live === undefined) {
+      has = filter.keywordVariant === "hexproof" && (lki?.keywords.includes("hexproof") ?? false);
+    } else if (layered !== undefined) {
+      has =
+        filter.keywordVariant === "protection"
+          ? layered.hasProtection?.() === true
+          : (layered.keywords?.().has("hexproof") ??
+            (!hasLostAbilities(state, registry, live) && registry.get(rulesTextName(live)).keywords.includes("hexproof")));
+    } else if (live.zone !== "battlefield") {
+      has = false;
+    } else {
+      const c = computeCharacteristics(state, registry, id);
+      const from = filter.keywordVariant === "protection" ? c.protectionFrom : c.hexproofFrom;
+      has =
+        (filter.keywordVariant === "hexproof" && c.keywords.has("hexproof")) ||
+        from.colors.size > 0 ||
+        from.types.size > 0 ||
+        from.filters.length > 0 ||
+        (filter.keywordVariant === "protection" &&
+          (c.protectionFrom.boundFilters.length > 0 || c.protectionFrom.players.size > 0));
+    }
+    if (!has) return false;
   }
 
 

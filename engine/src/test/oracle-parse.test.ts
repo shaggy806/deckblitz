@@ -16931,3 +16931,32 @@ describe("tapping a creature the triggering attacker's defending player controls
     expect(face.triggered[0]?.targets ?? []).not.toEqual(tapDefender);
   });
 });
+
+describe("an amount once for each listed ability a creature has", () => {
+  it("reads Akroma, Vision of Ixidor's combat trigger", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Creature — Angel",
+      oracle_text:
+        "At the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.",
+    }) as unknown as { triggered: { trigger: unknown; effect: Record<string, unknown> }[] };
+    expect(face.triggered[0]?.trigger).toEqual({ on: "step-begins", step: "begin-combat", who: "any" });
+    expect(face.triggered[0]?.effect).toMatchObject({ kind: "modify-pt-all", power: 1, toughness: 1, exceptSource: true });
+    expect(face.triggered[0]?.effect.perMatchOf).toEqual([
+      { keyword: "flying" },
+      { keyword: "first-strike" },
+      { keyword: "double-strike" },
+      { keyword: "deathtouch" },
+      { keyword: "haste" },
+      { keywordVariant: "hexproof" },
+      { keyword: "indestructible" },
+      { keyword: "lifelink" },
+      { keyword: "menace" },
+      { keywordVariant: "protection" },
+      { keyword: "reach" },
+      { keyword: "trample" },
+      { keyword: "vigilance" },
+      { hasKeyword: "partner" },
+    ]);
+  });
+});
