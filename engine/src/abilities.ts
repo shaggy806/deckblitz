@@ -320,6 +320,14 @@ export interface AbilityCost {
    * Eldraine): the color its permanent's controller chose as it entered
    * (`chooseOnEnter`). With none chosen, no mana can pay. */
   readonly spendOnlyChosenColor?: true;
+  /** "Spend only black mana on X" (Crypt Rats, Crimson Hellkite): the part of
+   * the cost that is the `{X}` in `mana` is paid with mana of this colour
+   * alone — each X one mana of it, as a coloured symbol is (rule 107.4a), so
+   * the X offered goes only as high as that mana does. Anything that lowers
+   * the cost's generic mana takes the rest of the generic part first, then X
+   * (`Game.activatedAbilityManaCost`). A colour word, which a text change
+   * reaches (rule 612.2). */
+  readonly xSpendOnly?: "W" | "U" | "B" | "R" | "G";
   /** Whether `{T}` (tap this permanent) is part of the cost. */
   readonly tap: boolean;
   /**

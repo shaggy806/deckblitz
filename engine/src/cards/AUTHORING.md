@@ -7068,7 +7068,12 @@ Delete an entry in the same commit as the feature that retires it.
     (`chooseOnEnter`): Throne of Eldraine's "only to cast monocolored spells of
     that color" is `spell: { multicolored: false }, chosenColor: true`. The cost's
     own `spendOnlyChosenColor` is its "spend only mana of the chosen color to
-    activate this ability";
+    activate this ability", and its `xSpendOnly: "B"` is "**Spend only black
+    mana on X**" (Crypt Rats' `cost: { mana: "{X}", tap: false, xSpendOnly:
+    "B" }`, Crimson Hellkite): the {X} is paid as that many mana of the
+    colour, so the X offered stops at what there is; a generic reduction
+    (Heartstone) still lowers it. One colour, an activated ability's cost
+    only — a spell's (Consume Spirit) isn't built;
     `abilityOf` adds the "…or activate an ability of" half — of a
     permanent on the battlefield ("abilities of creatures" means creature
     permanents: Castle Garenbrig's ruling), unless `abilityOfAnyZone: true`

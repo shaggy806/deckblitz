@@ -17174,6 +17174,25 @@ describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () 
   });
 });
 
+describe("spend only one colour of mana on an ability's X (Crypt Rats)", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Rats", type_line: "Creature — Rat", mana_cost: "{2}{B}", oracle_text }, { tokenFor: () => null });
+
+  it("the cost's xSpendOnly, the whole card read", () => {
+    const rats = face("{X}: This creature deals X damage to each creature and each player. Spend only black mana on X.");
+    expect(rats.complete).toBe(true);
+    expect(rats.activated[0].cost).toEqual({ mana: "{X}", tap: false, xSpendOnly: "B" });
+    const hellkite = face("{X}, {T}: This creature deals X damage to target creature. Spend only red mana on X.");
+    expect(hellkite.complete).toBe(true);
+    expect(hellkite.activated[0].cost).toEqual({ mana: "{X}", tap: true, xSpendOnly: "R" });
+    expect(hellkite.activated[0].effect).toEqual({ kind: "damage", amount: "x", target: 0 });
+  });
+
+  it("is left to a person on a cost with no {X}", () => {
+    expect(face("{2}: This creature deals 1 damage to each creature. Spend only black mana on X.").complete).toBe(false);
+  });
+});
+
 describe("a floor on a spell's total cost (Trinisphere, rule 601.2f)", () => {
   it("each spell that would cost less than three mana costs three, while untapped", () => {
     const sphere = parseFace(

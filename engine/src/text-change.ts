@@ -133,6 +133,8 @@ export const COLOR_WORD_KEYS: ReadonlySet<string> = new Set([
   "setColors",
   "addColors",
   "devotionTo",
+  // "Spend only black mana on X" (Crypt Rats — `AbilityCost.xSpendOnly`).
+  "xSpendOnly",
   // Adamant's "at least three white mana was spent" (`ManaSpentQuery.colorWord`);
   // a mana-spent clause's `type` is a symbol, {U}{B} (Mythos of Brokkos), and stays.
   "colorWord",

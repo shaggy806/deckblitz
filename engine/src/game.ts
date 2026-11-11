@@ -23402,8 +23402,22 @@ export class Game {
       x: 0,
       hybrid: parsed.hybrid,
     };
-    const cost = colored.length > 0 ? reduceManaCost(whole, 0, colored) : whole;
-    return { cost: ability.powerUp === true ? this.poweredUp(cost, sourceId) : cost, chosenX };
+    const reduced = colored.length > 0 ? reduceManaCost(whole, 0, colored) : whole;
+    const unrestricted = ability.powerUp === true ? this.poweredUp(reduced, sourceId) : reduced;
+    // "Spend only black mana on X" (Crypt Rats): what's left of X in the
+    // generic part is paid as that many symbols of the colour. A reduction
+    // has taken the cost's other generic mana first.
+    const only = ability.cost.xSpendOnly;
+    const onX = only === undefined ? 0 : Math.min(unrestricted.generic, parsed.x * chosenX);
+    const cost: ManaCost =
+      only === undefined || onX === 0
+        ? unrestricted
+        : {
+            ...unrestricted,
+            generic: unrestricted.generic - onX,
+            colored: { ...unrestricted.colored, [only]: unrestricted.colored[only] + onX },
+          };
+    return { cost, chosenX };
   }
 
   /**

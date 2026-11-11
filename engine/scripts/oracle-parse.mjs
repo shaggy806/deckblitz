@@ -15862,6 +15862,13 @@ function parseFaceAsWritten(face, ctx = {}) {
         });
       }
       let rest = line.slice(colon + 2);
+      // "Spend only black mana on X" (Crypt Rats, Crimson Hellkite): the
+      // cost's `xSpendOnly`, when its mana has an {X}.
+      rest = rest.replace(/ Spend only (white|blue|black|red|green) mana on X\.$/, (whole, word) => {
+        if (typeof ability.cost.mana !== "string" || !ability.cost.mana.includes("{X}")) return whole;
+        ability.cost = { ...ability.cost, xSpendOnly: { white: "W", blue: "U", black: "B", red: "R", green: "G" }[word] };
+        return "";
+      });
       // "This ability costs {1} less to activate for each other artifact you
       // control" (Tamiyo's Logbook): the ability's `costReduction`.
       rest = rest.replace(/ This ability costs \{1\} less to activate for each ((?:other )?.+? you control)\.$/, (whole, each) => {

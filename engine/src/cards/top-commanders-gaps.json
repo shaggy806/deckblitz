@@ -2229,7 +2229,8 @@
   "cost:flashback-exile-x-cost",
   "cost:flashback-exile-x-cost",
   "static:protection-spares-own-attachments",
-  "effect:counter-targeting-spell-or-ability"
+  "effect:counter-targeting-spell-or-ability",
+  "cost:x-spend-only-color"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
