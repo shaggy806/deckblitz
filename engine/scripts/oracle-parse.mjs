@@ -19527,6 +19527,21 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "During your turn, you may cast cards exiled with ~ and you may cast them
+  // as though they had flash. Mana of any type can be spent to cast those
+  // spells." (Azula, Cunning Usurper): the linked permission with its own
+  // flash (`flash`, rule 601.3c).
+  if (
+    /^During your turn, you may cast cards exiled with ~ and you may cast them as though they had flash\. Mana of any type can be spent to cast those spells\.$/.test(
+      line,
+    )
+  ) {
+    return {
+      affects: { scope: "self" },
+      mayPlay: { from: "exile", filter: {}, linked: true, yourTurnOnly: true, flash: true, spendAs: "any-type" },
+      text,
+    };
+  }
   // "[During your turn, ]you may play cards exiled with ~[. If you cast a
   // spell this way, pay life equal to its mana value rather than pay its mana
   // cost.]" (Valgavoth, Terror Eater).

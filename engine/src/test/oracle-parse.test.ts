@@ -8528,6 +8528,17 @@ describe("counters put or removed this way", () => {
     ]);
   });
 
+  it("reads Azula, Cunning Usurper's flash for the cards exiled with her", () => {
+    const azula = face(
+      "Azula, Cunning Usurper",
+      "Legendary Creature — Human Noble Rogue",
+      "Firebending 2 (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)\nWhen Azula enters, target opponent exiles a nontoken creature they control, then they exile a nonland card from their graveyard.\nDuring your turn, you may cast cards exiled with Azula and you may cast them as though they had flash. Mana of any type can be spent to cast those spells.",
+    );
+    expect(azula.static.map((s: { mayPlay?: unknown }) => s.mayPlay)).toEqual([
+      { from: "exile", filter: {}, linked: true, yourTurnOnly: true, flash: true, spendAs: "any-type" },
+    ]);
+  });
+
   it("reads Canoptek Wraith's basics with the same name as the chosen land", () => {
     const wraith = face(
       "Canoptek Wraith",

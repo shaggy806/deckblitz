@@ -2288,7 +2288,8 @@
   "condition:noted-life-total",
   "condition:noted-life-total",
   "condition:filter-same-name-as-chosen",
-  "zone:cast-from-library-top-flash"
+  "zone:cast-from-library-top-flash",
+  "zone:linked-exile-cast-as-though-flash"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
