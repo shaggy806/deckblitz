@@ -300,12 +300,17 @@ export interface JournalOrigin {
 /** How a {@link JournalWhat} is read: entries of `kind` passing `match`,
  * kept in the list of the player `whose` names (default the entry's own
  * `player`; `"target"`, the player it was done to), counted once per object
- * and stint with `distinct`. */
+ * and stint with `distinct`. `oncePerList` is the same for a count that takes
+ * a filter (`journalCount`): each object counted once per stint in each
+ * player's list, among the entries the filter passes, each matched as it was
+ * then — a double striker that dealt a player combat damage twice is one of
+ * "three or more Pirates" (Admiral Beckett Brass's ruling). */
 export interface JournalView {
   readonly kind: JournalKind;
   readonly whose?: "target";
   readonly match?: (entry: JournalEntry, read: JournalReader) => boolean;
   readonly distinct?: true;
+  readonly oncePerList?: true;
 }
 
 /** What a view's match may read beside the entry: the state, and an object's
@@ -329,6 +334,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     kind: "damage",
     whose: "target",
     match: (e) => e.combat !== undefined && e.target?.kind === "player",
+    oncePerList: true,
   },
   attackers: { kind: "attacked", distinct: true },
   "turned-face-up": { kind: "turned-face-up" },

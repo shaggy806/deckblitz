@@ -17811,3 +17811,24 @@ describe("any player may pay life to counter the spell", () => {
     });
   });
 });
+
+describe("a target controlled by a player who was dealt combat damage by N or more of a kind", () => {
+  it("reads Admiral Beckett Brass's end step trigger", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Creature — Human Pirate",
+      oracle_text:
+        "At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.",
+    }) as unknown as { triggered: { targets: unknown; effect: unknown }[] };
+    expect(face.triggered[0]?.targets).toEqual([
+      {
+        kind: "permanent",
+        filter: {
+          notTypes: ["land"],
+          controllerTurnHistory: { what: "combat-damaged-by", filter: { subtype: "Pirate" }, atLeast: 3 },
+        },
+      },
+    ]);
+    expect(face.triggered[0]?.effect).toEqual({ kind: "gain-control", target: 0, untilEndOfTurn: false });
+  });
+});

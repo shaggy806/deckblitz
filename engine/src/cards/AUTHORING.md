@@ -2339,6 +2339,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   this turn can't cast spells"); on a filter, `controllerThisTurn: { stat: "spells-cast" }` ("each opponent who cast a spell this turn can't
   attack with creatures" is `cant-attack` on `{ type: "creature", controlledBy: "opponent", controllerThisTurn: … }`). Angelic Arbiter. What
   the player did before the permanent arrived counts (the journal).
+- **"Controlled by a player who was dealt combat damage by three or more Pirates this turn"** is a filter clause over that controller's
+  journal list, `controllerTurnHistory: { what: "combat-damaged-by", filter: { subtype: "Pirate" }, atLeast: 3 }` (any `JournalWhat`,
+  `window?`; the `turn-history` condition's count, asked of the one player). Each source counts once for a player however often it dealt
+  them combat damage (double strike), as it was when it did. Admiral Beckett Brass; the scaffolder reads the line.
 - **"Players can't search libraries"** is a `prohibits` `search` act (Mindlock Orb, Stranglehold; `causedByThemselves`, Ashiok; `ignoreCost: "{2}"`, Leonin Arbiter, rule 116.2d); "this turn" is the `prohibit` effect's (Shadow of Doubt). Every `search-library` obeys it unwritten: it finds nothing and still shuffles, a `may` or `each-player-may` around it isn't asked, and an and/or `modal` loses that mode.
 - **"Damage that would reduce your life total to less than N reduces it to N instead"** is a static,
   `damageLifeFloor: N` (Ali from Cairo; with a `condition`, Worship, Elderscale Wurm), or for a while a

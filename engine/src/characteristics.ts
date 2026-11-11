@@ -2018,7 +2018,10 @@ export function journalCount(
   only?: { readonly id: ObjectId; readonly stint: number },
 ): number {
   let n = 0;
-  const entries = journalEntries(journalReader(state, registry), JOURNAL_VIEWS[what], players, options?.window ?? "this-turn", you);
+  const view = JOURNAL_VIEWS[what];
+  const entries = journalEntries(journalReader(state, registry), view, players, options?.window ?? "this-turn", you);
+  // `oncePerList`: the objects already counted, each per stint and list.
+  const counted = view.oncePerList === true ? new Set<string>() : undefined;
   for (const entry of entries) {
     if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
     if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
@@ -2038,6 +2041,12 @@ export function journalCount(
         snapshot !== undefined ? { you, snapshot } : { you, ...(asNow ? {} : { lastKnown: true }) },
       );
       if (!matched) continue;
+    }
+    if (counted !== undefined && entry.object !== undefined) {
+      const list = view.whose === "target" ? (entry.target?.kind === "player" ? entry.target.player : "") : (entry.player ?? "");
+      const key = `${entry.object}@${at ?? ""}@${list}`;
+      if (counted.has(key)) continue;
+      counted.add(key);
     }
     n += entry.count ?? 1;
   }

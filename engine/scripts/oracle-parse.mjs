@@ -1187,9 +1187,35 @@ function partedTargetOf(phrase) {
   }
   return undefined;
 }
+/** "Target nonland permanent controlled by a player who was dealt combat
+ * damage by three or more Pirates this turn" (Admiral Beckett Brass): the
+ * target before the clause, its controller's `combat-damaged-by` list read by
+ * `controllerTurnHistory`. */
+function historyControllerTargetOf(phrase) {
+  const m = /^(target .+?) controlled by a player who was dealt combat damage by (\w+) or more (.+?) this turn$/.exec(phrase);
+  if (m === null || NUMBERS[m[2]] === undefined) return undefined;
+  // The fixed phrases' one-word targets, as the filters they stand for.
+  const worded = { "nonland-permanent": { notTypes: ["land"] }, permanent: {}, creature: { type: "creature" } };
+  const fixed = TARGET_PHRASES.find(([p]) => p === m[1])?.[1];
+  const base =
+    typeof fixed === "string"
+      ? worded[fixed] === undefined
+        ? undefined
+        : { kind: "permanent", filter: worded[fixed] }
+      : (fixed ?? modifiedTargetOf(m[1]));
+  // The phrase arrives lowercased; a creature type is read capitalised.
+  const kind = singularTarget(m[3]);
+  const by = parseTypePhrase(kind) ?? parseTypePhrase(kind[0].toUpperCase() + kind.slice(1));
+  if (base === undefined || base.kind !== "permanent" || base.whose !== undefined || by === null || Object.keys(by).length === 0) return undefined;
+  return {
+    ...base,
+    filter: { ...base.filter, controllerTurnHistory: { what: "combat-damaged-by", filter: by, atLeast: NUMBERS[m[2]] } },
+  };
+}
 const targetOf = (phrase) =>
   TARGET_PHRASES.find(([p]) => p === phrase.toLowerCase())?.[1] ??
   partedTargetOf(phrase.toLowerCase()) ??
+  historyControllerTargetOf(phrase.toLowerCase()) ??
   modifiedTargetOf(phrase.toLowerCase());
 
 /** "nonland permanents you control" → "nonland permanent you control". */

@@ -25,6 +25,7 @@ import {
   hasLostAbilities,
   hasActivatedAbilityOf,
   hasManaAbility,
+  journalCount,
   journalReader,
   pairedPartner,
   turnStatOf,
@@ -901,6 +902,21 @@ export interface CardFilter {
    * journal, so what the player did before the asking permanent arrived
    * counts (its ruling). */
   readonly controllerThisTurn?: TurnDid;
+  /** Its controller has at least `atLeast` (1) things in one of their journal
+   * lists (`JournalWhat`; `window` default this turn), each matching `filter`
+   * as it was then, from the filtering player's side — "target nonland
+   * permanent controlled by **a player who was dealt combat damage by three
+   * or more Pirates this turn**" is `{ what: "combat-damaged-by", filter: {
+   * subtype: "Pirate" }, atLeast: 3 }` (Admiral Beckett Brass). The count is
+   * the `turn-history` condition's (`journalCount`), asked of that one
+   * player: what happened before the asking permanent arrived counts, and so
+   * does a source that has since left or changed (its ruling). */
+  readonly controllerTurnHistory?: {
+    readonly what: JournalWhat;
+    readonly filter?: CardFilter;
+    readonly atLeast?: number;
+    readonly window?: JournalWindow;
+  };
   /** A battle protected by the filtering player / anyone else (rule 310.8) —
    * Portent Tracker's "if **an opponent protects** it". Nothing that has no
    * protector matches either. */
@@ -2612,6 +2628,13 @@ export function matchesFilter(
     turnStatOf(state, controller, filter.controllerThisTurn.stat) < (filter.controllerThisTurn.atLeast ?? 1)
   ) {
     return false;
+  }
+  if (filter.controllerTurnHistory !== undefined) {
+    const asked = filter.controllerTurnHistory;
+    const n = journalCount(state, registry, [controller], asked.what, asked.filter, ctx.you, undefined, {
+      ...(asked.window !== undefined ? { window: asked.window } : {}),
+    });
+    if (n < (asked.atLeast ?? 1)) return false;
   }
   if (filter.ownedBy === "you" && owner !== ctx.you) return false;
   if (filter.ownedBy === "opponent" && owner === ctx.you) return false;

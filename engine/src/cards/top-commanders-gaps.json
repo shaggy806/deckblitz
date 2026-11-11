@@ -2258,7 +2258,8 @@
   "replacement:roll-as-enters",
   "replacement:roll-as-enters",
   "effect:phased-out-this-way-count",
-  "cost:sacrifice-cost-mv-x-plus-one"
+  "cost:sacrifice-cost-mv-x-plus-one",
+  "target:player-dealt-combat-damage-by-n-filter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
