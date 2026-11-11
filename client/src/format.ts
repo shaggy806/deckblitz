@@ -700,7 +700,31 @@ export const logNameAt = (
    * the seat knows it as now would say what was drawn ("Silumgar draws
    * Swamp", once the Swamp is played). */
   hiddenThen = false,
-): string => publicNameAt(publicStints, id, seq) ?? (hiddenThen ? HIDDEN_CARD : logName(id, nameOf(id)))
+  /** Each ability the history put on the stack, and what it's an ability of
+   * ({@link abilitySourcesOf}): an ability is no card and has no public
+   * stint, so it's named by its source, on the stack and after. */
+  abilities?: ReadonlyMap<ObjectId, ObjectId>,
+): string => {
+  const source = abilities?.get(id)
+  if (source !== undefined) return `${logNameAt(publicStints, nameOf, source, seq)}'s ability`
+  return publicNameAt(publicStints, id, seq) ?? (hiddenThen ? HIDDEN_CARD : logName(id, nameOf(id)))
+}
+
+/** Each ability `events` put on the stack (activated, triggered or copied),
+ * mapped to the object it's an ability of. */
+export function abilitySourcesOf(events: readonly GameEvent[]): ReadonlyMap<ObjectId, ObjectId> {
+  const sources = new Map<ObjectId, ObjectId>()
+  for (const event of events) {
+    if (event.type === 'ability-activated') {
+      if (event.ability !== undefined) sources.set(event.ability, event.source)
+    } else if (event.type === 'ability-triggered') {
+      sources.set(event.object, event.source)
+    } else if (event.type === 'ability-copied') {
+      if (event.source !== null) sources.set(event.copy, event.source)
+    }
+  }
+  return sources
+}
 
 /** `text` — a refusal from the engine or server, which names players by
  * seat id ("bob is not being asked to block") and objects by id — with each

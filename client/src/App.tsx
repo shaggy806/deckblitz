@@ -109,7 +109,7 @@ import { setShare } from './game/divideShares.ts'
 import { StableLabel } from './ui/StableLabel.tsx'
 import { usePlayback } from './game/usePlayback.ts'
 import { AnimationBus } from './game/animationBus.ts'
-import { describeEvent, isDetailOnlyEvent, logNameAt, playerLabel, possessive, seatClassOf, withNames } from './format.ts'
+import { abilitySourcesOf, describeEvent, isDetailOnlyEvent, logNameAt, playerLabel, possessive, seatClassOf, withNames } from './format.ts'
 import { PhaseTrack } from './ui/PhaseTrack.tsx'
 import { TurnBanner } from './ui/TurnBanner.tsx'
 import { AnimationLayer } from './ui/AnimationLayer.tsx'
@@ -878,7 +878,8 @@ export default function App() {
           .map((e) =>
             describeEvent(
               e,
-              (id, heldBy) => logNameAt(view.publicStints, nameOf, id, e.seq, heldBy !== undefined && heldBy !== seat),
+              (id, heldBy) =>
+                logNameAt(view.publicStints, nameOf, id, e.seq, heldBy !== undefined && heldBy !== seat, abilitySourcesOf(view.events)),
               seats,
             ),
           )
@@ -1618,9 +1619,10 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
             </div>
             <EventLog
               events={view.events}
-              nameAt={(id, seq, heldBy) =>
-                logNameAt(view.publicStints, game.nameOf, id, seq, heldBy !== undefined && heldBy !== game.seat)
-              }
+              nameAt={((abilities) => (id: ObjectId, seq: number, heldBy?: PlayerId) =>
+                logNameAt(view.publicStints, game.nameOf, id, seq, heldBy !== undefined && heldBy !== game.seat, abilities))(
+                abilitySourcesOf(view.events),
+              )}
               seats={game.seats}
               onSelect={(event) => {
                 // Close the log so the board is in view, then point the

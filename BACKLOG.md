@@ -263,7 +263,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **A hover card's reminder can name a keyword the card lacks** — Dragonmaster Outcast shows a Flying reminder, from the token its text makes.
 - **Deck builder rough edges** — long deck titles cut off, the hover preview covers the search box, the search box's count ignores the colour filter, re-importing makes a second deck of the same name, "1 issue(s)".
 - **The game's top bar and labels stay small at 2560×1440** — judged by eye; measure before changing.
-- **A resolved ability's own log lines can still read "a card"** — a countered ability, a crime and a cast copy are named now (2026-11-11); any other line naming an ability object after it has left the stack falls back to "a card". None seen; fix as found (`format.ts`, the event's `source`).
 - **The X prompt and shown cost ignore a target's tax** — `App.tsx` doesn't read `xCost.targetTaxes`/`maxXUnreduced`, so a taxed target at too high an X is refused rather than never offered, and the shown cost omits the tax.
 - **A hand card's types show as printed under a static outside the battlefield** — `view.ts` under `typesOutsideBattlefield` (Conspiracy, Arcane Adaptation); the filters read the new types.
 - **A human's target picks aren't narrowed by the new target relations** — `viewTargetFacts` lacks `shareTypes`, `toughnessOf`, `nameOf` and `attachedTo`, so a broken pair is refused only when sent (found 2026-10-31).

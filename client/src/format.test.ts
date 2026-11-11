@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
-import { HIDDEN_CARD, describeEvent, forYou, logName, logNameAt, possessive, withNames } from './format.ts'
+import { HIDDEN_CARD, abilitySourcesOf, describeEvent, forYou, logName, logNameAt, possessive, withNames } from './format.ts'
 
 const p1 = 'p1' as PlayerId
 const p2 = 'p2' as PlayerId
@@ -70,6 +70,23 @@ describe('describeEvent', () => {
 describe('logNameAt', () => {
   const id = 'obj-84' as ObjectId
   const stints = { [id]: [{ from: 5, until: 9, name: 'Grizzly Bears' }] }
+
+  it("names an ability by its source, on the stack and once it has left", () => {
+    const ability = 'obj-90' as ObjectId
+    const abilities = abilitySourcesOf([
+      event({ type: 'ability-activated', seq: 6, source: id, player: p1, onStack: true, ability }),
+      event({ type: 'ability-activated', seq: 7, source: id, player: p1, onStack: false }),
+    ])
+    expect(logNameAt(stints, (o) => o, ability, 7, false, abilities)).toBe("Grizzly Bears's ability")
+    expect(logNameAt(stints, (o) => o, ability, 7)).toBe(HIDDEN_CARD)
+    // A targeting line names it too.
+    const line = describeEvent(
+      event({ type: 'object-targeted', seq: 7, object: id, source: ability, by: 'activated' }),
+      (o) => logNameAt(stints, (x) => x, o, 7, false, abilities),
+      seats,
+    )
+    expect(line).toBe("Grizzly Bears becomes the target of Grizzly Bears's ability (activated)")
+  })
 
   it('keeps the name a card was publicly known by when the event happened', () => {
     expect(logNameAt(stints, (o) => o, id, 6)).toBe('Grizzly Bears')
