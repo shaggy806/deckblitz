@@ -408,6 +408,15 @@ export interface EntersBattlefieldReplacement {
    */
   readonly rollAsEnters?: { readonly sides: number; readonly count: EffectAmount | "x" };
   /**
+   * "As this enchantment enters, note your life total" (Sigarda's Splendor):
+   * the number is read as it enters (rule 614.1c — part of the replacement,
+   * so nothing can respond and nothing that stops enters triggers stops it)
+   * and kept on the permanent for this stint as the number it chose
+   * (`GameObject.chosenOnEnter`, read as `{ chosenNumber: true }`). A later
+   * `note` effect replaces it: "the last noted life total".
+   */
+  readonly notes?: EffectAmount;
+  /**
    * "As this creature enters, remove all counters from all permanents"
    * (Thief of Blood): as it enters (rule 614.1c — part of the replacement, so
    * nothing can respond between), every counter of every kind comes off each

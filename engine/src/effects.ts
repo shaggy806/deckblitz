@@ -8399,6 +8399,17 @@ export type EffectSpec =
       readonly value: "day" | "night";
     }
   | {
+      /** "Then **note** your life total" (Sigarda's Splendor): the source
+       * permanent keeps `amount`, read now, as the number it last noted —
+       * `GameObject.chosenOnEnter`, where a `choose-value`'s `remember` and
+       * an entering `notes` replacement put theirs, read back as
+       * `{ chosenNumber: true }`. It replaces any number noted before; a
+       * source that has left the battlefield, or come back as a new object
+       * (rule 400.7), notes nothing. */
+      readonly kind: "note";
+      readonly amount: EffectAmount;
+    }
+  | {
       /**
        * "… becomes prepared" (rule 722.3a): `target` — a slot, or
        * `"source"` (Emeritus of Woe's "this creature becomes prepared") — or
@@ -12487,6 +12498,8 @@ export interface EffectApi {
   attackRandomOpponent(target: ObjectId, notAttackedLastCombat: boolean): boolean;
   /** The game becomes day or night (rule 726). */
   setDayNight(value: "day" | "night"): void;
+  /** The source permanent notes `n` — see the `"note"` {@link EffectSpec}. */
+  noteNumberOnSource(n: number): void;
   /** `who` becomes the monarch (rule 720). */
   becomeMonarch(who: PlayerScope | undefined, via?: "combat-damage"): void;
   /** One player becomes the monarch — a `become-monarch`'s target slot's. */
@@ -19613,6 +19626,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "day-night":
       ctx.setDayNight(spec.value);
+      return;
+    case "note":
+      ctx.noteNumberOnSource(signedAmountValue(spec.amount, ctx));
       return;
     case "become-monarch": {
       if (typeof spec.who === "number") {

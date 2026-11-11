@@ -8939,6 +8939,25 @@ export function parseEffect(text, outer) {
     };
   }
 
+  // "Draw a card if your life total is greater than or equal to the last noted
+  // life total for ~. Then note your life total." (Sigarda's Splendor): the
+  // number its permanent last noted (`{ chosenNumber }`), noted again by the
+  // `note` effect whether or not a card was drawn.
+  if (/^draw a card if your life total is greater than or equal to the last noted life total for ~\. Then note your life total\.$/i.test(text)) {
+    const noted = {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "conditional",
+          condition: { kind: "amounts", left: { lifeTotal: "you" }, op: "gte", right: { chosenNumber: true } },
+          then: { kind: "draw", amount: 1 },
+        },
+        { kind: "note", amount: { lifeTotal: "you" } },
+      ],
+    };
+    return { effect: noted, todo: [], hints: [] };
+  }
+
   // "Exile target spell. It becomes plotted." (Aven Interrupter — rule
   // 702.170c): the spell exiled, then the card plotted for its owner.
   if (/^Exile target spell\. It becomes plotted\.$/.test(text)) {
@@ -20247,6 +20266,11 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // Sigarda's Splendor's "As ~ enters, note your life total." (rule 614.1c):
+  // the number is kept on the permanent, read back as `{ chosenNumber }`.
+  if (line === "As ~ enters, note your life total.") {
+    return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", notes: { lifeTotal: "you" } }, text };
   }
   // Neverwinter Hydra's "As ~ enters, roll X d6. It enters with a number of
   // +1/+1 counters on it equal to the total of those results." (rules 614.1c,

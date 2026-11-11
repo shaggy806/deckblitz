@@ -8399,6 +8399,27 @@ describe("counters put or removed this way", () => {
     expect(ability.effect).toEqual({ kind: "put-onto-battlefield", target: 0 });
   });
 
+  it("reads Sigarda's Splendor's noted life total: as it enters, compared and noted again", () => {
+    const splendor = face(
+      "Sigarda's Splendor",
+      "Enchantment",
+      "As this enchantment enters, note your life total.\nAt the beginning of your upkeep, draw a card if your life total is greater than or equal to the last noted life total for this enchantment. Then note your life total.\nWhenever you cast a white spell, you gain 1 life.",
+    );
+    expect(splendor.complete).toBe(true);
+    expect(splendor.static[0].replacement).toEqual({ event: "enters-battlefield", notes: { lifeTotal: "you" } });
+    expect(splendor.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "conditional",
+          condition: { kind: "amounts", left: { lifeTotal: "you" }, op: "gte", right: { chosenNumber: true } },
+          then: { kind: "draw", amount: 1 },
+        },
+        { kind: "note", amount: { lifeTotal: "you" } },
+      ],
+    });
+  });
+
   it("reads Neverwinter Hydra's roll as it enters and the counters it enters with", () => {
     const hydra = face(
       "Neverwinter Hydra",

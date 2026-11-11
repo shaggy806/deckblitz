@@ -1548,6 +1548,8 @@ interface EnteringReplacement {
   readonly tributeUnpaid: boolean;
   /** It enters prepared (rule 722.3a — its own `prepared` replacement). */
   readonly prepared: boolean;
+  /** The number it notes as it enters (its own `notes` replacement). */
+  readonly noted?: number;
 }
 
 /** Riot's two answers (rule 702.136a), as its `choose-creature-type` menu
@@ -39700,6 +39702,11 @@ controlledBy,
         if (t.kind === "object") this.flipPermanent(t.object);
       },
       setDayNight: (value) => this.setDayNight(value),
+      noteNumberOnSource: (n) => {
+        // Only the permanent this ability refers to (rule 400.7).
+        if (!sourceStillOn()) return;
+        this.state.objects[source].chosenOnEnter = String(n);
+      },
       becomeMonarch: (who, via) => {
         for (const p of scoped(who ?? "you")) {
           this.setMonarch(p, via ?? "effect");
@@ -44639,6 +44646,7 @@ controlledBy,
       }
       // Entering prepared (rule 722.3a), each token makes a copy of its own
       // (722.3c): a batch is never one prepared stack.
+      if (entering.noted !== undefined) this.state.objects[id].chosenOnEnter = String(entering.noted);
       if (entering.prepared) {
         for (let n = this.state.objects[id].stackCount ?? 1; n > 1; n -= 1) {
           this.becomePrepared(this.splitOneFromStack(id));
@@ -58829,6 +58837,7 @@ controlledBy,
     let untappedBy: ObjectId | undefined;
     let transformed = effectTransformed;
     let prepared = false;
+    let noted: number | undefined;
     let painIfUntapped = 0;
     let mayPayLife = 0;
     let choseTappedThen: EffectSpec | undefined;
@@ -58966,6 +58975,11 @@ controlledBy,
                     : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
         );
       }
+      // "As this enters, note your life total" (Sigarda's Splendor, rule
+      // 614.1c): read as it enters, as written (a life total can be below 0).
+      if (r.notes !== undefined) {
+        noted = signedAmountValue(r.notes, this.makeResolutionContext(id, object.controller, [], object.xValue ?? 0, 0, id));
+      }
       // A counter of the kind picked for each card it exiled.
       if (r.asEnters?.exile?.counterForEach !== undefined) {
         for (const kind of asEntersCounters ?? []) addCounters(kind, 1);
@@ -59086,6 +59100,7 @@ controlledBy,
       riotHaste,
       tributeUnpaid,
       prepared,
+      ...(noted !== undefined ? { noted } : {}),
     };
   }
 
@@ -61149,6 +61164,8 @@ controlledBy,
       // It enters prepared (rule 722.3a): the designation, and its prepare
       // spell's copy in exile, are there before anything sees it arrive.
       if (entering.prepared) this.becomePrepared(id);
+      // "As this enters, note …": the number is on it before anything sees it.
+      if (entering.noted !== undefined) object.chosenOnEnter = String(entering.noted);
       // The door it entered with unlocked was unlocked (rule 709.5h): its
       // "when you unlock this door" triggers as it enters.
       const door = object.doors?.left === true ? "left" : object.doors?.right === true ? "right" : null;

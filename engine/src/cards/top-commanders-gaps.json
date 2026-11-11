@@ -2275,7 +2275,8 @@
   "replacement:as-turned-face-up-attach-aura",
   "replacement:as-turned-face-up-attach-aura",
   "effect:target-dealt-damage-this-turn",
-  "effect:copy-starting-loyalty"
+  "effect:copy-starting-loyalty",
+  "condition:noted-life-total"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
