@@ -1456,6 +1456,7 @@ import _poolAshnodsTransmogrant from "./pool/ashnods-transmogrant.js";
 import _poolAshrootAnimist from "./pool/ashroot-animist.js";
 import _poolAsinineAntics from "./pool/asinine-antics.js";
 import _poolAsmiraHolyAvenger from "./pool/asmira-holy-avenger.js";
+import _poolAsmodeusTheArchfiend from "./pool/asmodeus-the-archfiend.js";
 import _poolAsmoranomardicadaistinaculdacar from "./pool/asmoranomardicadaistinaculdacar.js";
 import _poolAspectOfGorgon from "./pool/aspect-of-gorgon.js";
 import _poolAspectOfHydra from "./pool/aspect-of-hydra.js";
@@ -29040,6 +29041,7 @@ import _poolUncoverTheMoonLetters from "./pool/uncover-the-moon-letters.js";
 import _poolUncoveredClues from "./pool/uncovered-clues.js";
 import _poolUnctusGrandMetatect from "./pool/unctus-grand-metatect.js";
 import _poolUnctussRetrofitter from "./pool/unctuss-retrofitter.js";
+import _poolUndeadAlchemist from "./pool/undead-alchemist.js";
 import _poolUndeadAugur from "./pool/undead-augur.js";
 import _poolUndeadButler from "./pool/undead-butler.js";
 import _poolUndeadExecutioner from "./pool/undead-executioner.js";
@@ -30499,6 +30501,7 @@ import _poolWatchfulAutomaton from "./pool/watchful-automaton.js";
 import _poolWatchfulBlisterzoa from "./pool/watchful-blisterzoa.js";
 import _poolWatchfulGiant from "./pool/watchful-giant.js";
 import _poolWatchfulNaga from "./pool/watchful-naga.js";
+import _poolWatchfulRadstag from "./pool/watchful-radstag.js";
 import _poolWatchwingScarecrow from "./pool/watchwing-scarecrow.js";
 import _poolWatchwolf from "./pool/watchwolf.js";
 import _poolWaterElemental from "./pool/water-elemental.js";
@@ -33877,6 +33880,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAshrootAnimist,
   _poolAsinineAntics,
   _poolAsmiraHolyAvenger,
+  _poolAsmodeusTheArchfiend,
   _poolAsmoranomardicadaistinaculdacar,
   _poolAspectOfGorgon,
   _poolAspectOfHydra,
@@ -61461,6 +61465,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUncoveredClues,
   _poolUnctusGrandMetatect,
   _poolUnctussRetrofitter,
+  _poolUndeadAlchemist,
   _poolUndeadAugur,
   _poolUndeadButler,
   _poolUndeadExecutioner,
@@ -62920,6 +62925,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWatchfulBlisterzoa,
   _poolWatchfulGiant,
   _poolWatchfulNaga,
+  _poolWatchfulRadstag,
   _poolWatchwingScarecrow,
   _poolWatchwolf,
   _poolWaterElemental,
@@ -66311,6 +66317,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ashroot-animist": _poolAshrootAnimist,
   "pool/asinine-antics": _poolAsinineAntics,
   "pool/asmira-holy-avenger": _poolAsmiraHolyAvenger,
+  "pool/asmodeus-the-archfiend": _poolAsmodeusTheArchfiend,
   "pool/asmoranomardicadaistinaculdacar": _poolAsmoranomardicadaistinaculdacar,
   "pool/aspect-of-gorgon": _poolAspectOfGorgon,
   "pool/aspect-of-hydra": _poolAspectOfHydra,
@@ -93895,6 +93902,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/uncovered-clues": _poolUncoveredClues,
   "pool/unctus-grand-metatect": _poolUnctusGrandMetatect,
   "pool/unctuss-retrofitter": _poolUnctussRetrofitter,
+  "pool/undead-alchemist": _poolUndeadAlchemist,
   "pool/undead-augur": _poolUndeadAugur,
   "pool/undead-butler": _poolUndeadButler,
   "pool/undead-executioner": _poolUndeadExecutioner,
@@ -95354,6 +95362,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/watchful-blisterzoa": _poolWatchfulBlisterzoa,
   "pool/watchful-giant": _poolWatchfulGiant,
   "pool/watchful-naga": _poolWatchfulNaga,
+  "pool/watchful-radstag": _poolWatchfulRadstag,
   "pool/watchwing-scarecrow": _poolWatchwingScarecrow,
   "pool/watchwolf": _poolWatchwolf,
   "pool/water-elemental": _poolWaterElemental,

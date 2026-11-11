@@ -960,6 +960,7 @@ import _poolWarmongerHellkite from "../pool/warmonger-hellkite.js";
 import _poolWarpArtifact from "../pool/warp-artifact.js";
 import _poolWastelandRaider from "../pool/wasteland-raider.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
+import _poolWatchfulRadstag from "../pool/watchful-radstag.js";
 import _poolWaterbendingLesson from "../pool/waterbending-lesson.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
 import _poolWaveOfRats from "../pool/wave-of-rats.js";
@@ -1981,6 +1982,7 @@ const shard: CardShard = {
     _poolWarpArtifact,
     _poolWastelandRaider,
     _poolWatcherOfTheWayside,
+    _poolWatchfulRadstag,
     _poolWaterbendingLesson,
     _poolWaterfallAerialist,
     _poolWaveOfRats,

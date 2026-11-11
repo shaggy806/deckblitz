@@ -44,6 +44,7 @@ import _poolArtifactWard from "../pool/artifact-ward.js";
 import _poolAshcloudPhoenix from "../pool/ashcloud-phoenix.js";
 import _poolAshenmoorLiege from "../pool/ashenmoor-liege.js";
 import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
+import _poolAsmodeusTheArchfiend from "../pool/asmodeus-the-archfiend.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
@@ -1079,6 +1080,7 @@ const shard: CardShard = {
     _poolAshcloudPhoenix,
     _poolAshenmoorLiege,
     _poolAshnodsBattleGear,
+    _poolAsmodeusTheArchfiend,
     _poolAspiringChampion,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,

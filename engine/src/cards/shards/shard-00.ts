@@ -917,6 +917,7 @@ import _poolUglukOfTheWhiteHand from "../pool/ugluk-of-the-white-hand.js";
 import _poolUktabiWildcats from "../pool/uktabi-wildcats.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUmaroRagingYeti from "../pool/umaro-raging-yeti.js";
+import _poolUndeadAlchemist from "../pool/undead-alchemist.js";
 import _poolUnexpectedResults from "../pool/unexpected-results.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
@@ -1935,6 +1936,7 @@ const shard: CardShard = {
     _poolUktabiWildcats,
     _poolUltramarinesHonourGuard,
     _poolUmaroRagingYeti,
+    _poolUndeadAlchemist,
     _poolUnexpectedResults,
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
