@@ -34,28 +34,18 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   its type line 8.5px, on a tilted card; hovering makes one readable. The mulligan's fan looks the same.
 - **The stack's card hides a seat's board** (found 2026-11-02). At 1366×768 it sits over the fourth player's
   board, just when you're deciding whether to respond to what's on it.
-- **The Cycle popup is easy to miss and ignores Escape** (found 2026-11-02). It's a small button under the
-  hover card, and Escape leaves it open, though Escape closes Settings.
-- **A hover card's reminder can name a keyword the card lacks** (found 2026-11-02). Dragonmaster Outcast
-  shows a Flying reminder panel, read from "create a 5/5 red Dragon creature token with flying".
-- **Deck builder rough edges** (found 2026-11-02). A long deck title is cut off ("IMPORTED: ATRAXA, PRAETOR");
-  the hover preview can cover the search box and filters; the search box says 26980 while the colour-filtered
-  count says 20874; re-importing makes a second deck of the same name; "1 issue(s)".
+- **A hand card's Cycle, Foretell and Plot buttons are small** (found 2026-11-02). Plain buttons under the card,
+  easy to miss. They aren't a popup, so there is nothing for Escape to close (the first report said otherwise).
+- **The deck builder's hover preview can cover the search box and filters** (found 2026-11-02). The last of
+  its rough edges; the rest landed 2026-11-11.
 - **The game's top bar and labels stay small at 2560×1440** (found 2026-11-02). Judged by eye from a
   screenshot, on the user's own monitor size; measure before changing.
-- **The X prompt and shown cost ignore a target's tax** (found 2026-11-01). `client/src/App.tsx`
-  starts the X prompt at `maxX` and doesn't read `xCost.targetTaxes` or `maxXUnreduced`, so a taxed
-  target at too high an X is refused rather than never offered (no wrong cast), and the spell's
-  shown cost leaves out a `targetedBySpellsCost` tax (Boreal Elemental, Kopala).
+- **A spell's shown cost leaves out a target's tax** (found 2026-11-01). The cost drawn on the card and the X
+  prompt's line don't add a `targetedBySpellsCost` tax (Boreal Elemental, Kopala). Targets the tax prices out of
+  reach are no longer offered (`payableOptions`, 2026-11-11), so this is display only.
 - **A hand card's types show as printed under a static outside the battlefield** (found
   2026-11-01). `view.ts` shows printed types for a card in hand under `typesOutsideBattlefield`
   (Conspiracy, Arcane Adaptation), though the filters read the new types.
-- **A human's target picks aren't narrowed by the new target relations** (found 2026-10-31).
-  `viewTargetFacts` (`client/src/App.tsx`, ~line 640) doesn't supply the optional facts the
-  target relations built that night read — `shareTypes`, `toughnessOf`, `nameOf`, `attachedTo` —
-  so the client offers every legal-alone target (Legerdemain's second pick, V.A.T.S.'s equal
-  toughness, Fiery Annihilation's Equipment) and the engine refuses a broken choice with an error
-  when it's sent. The bots get the full facts. Fix: fill them in from the view.
 - **Cultivate's split prompt doesn't say which find goes where** (found 2026-10-31). The older
   `restDestination` split (Cultivate, Kodama's Reach) asks "Choose up to 2 cards" without saying
   that the one picked goes onto the battlefield and the other to the hand. Fix: move those cards
@@ -193,10 +183,3 @@ Soulbond (rule 702.95, batch 185) pairs two creatures; the engine's view gives e
 grants (Silverblade Paladin's double strike on both), not which two are paired, which matters
 when two soulbond creatures are out or a partner is about to leave. A small link marker on both
 cards (hovering one highlights the other, as an Aura's host is) would do.
-
-**X is picked before targets, blind to a target's cost reduction**
-
-A cast offer's `maxXUnreduced` says the largest X only a cost-reducing target (Spellwild Ouphe's
-"spells that target it cost {2} less") pays for; the client asks for X before targets and doesn't
-read it, so a player can pick an X the targets they then choose can't pay, and the engine refuses
-the cast. Found 2026-11-06, re-landing Shatterskull Smashing.

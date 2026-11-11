@@ -244,7 +244,6 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
-- **X is picked before targets, blind to a target's cost reduction** (a cast with Spellwild Ouphe's reduction can be refused after the player picks X).
 
 
 - **The die rolling animation needs adjusting** — with the loss of gradients, the vertical bounces look like the shape is just growing and shrinking (`client/src/App.css`'s `die-land`).
@@ -256,13 +255,11 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The history log's layout** — a full-screen popup you can't read beside the board, event numbers on every line, and the phase banner draws over it.
 - **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
 - **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
-- **The Cycle popup is easy to miss and ignores Escape** — a small button under the hover card; Settings closes on Escape and this doesn't.
-- **A hover card's reminder can name a keyword the card lacks** — Dragonmaster Outcast shows a Flying reminder, from the token its text makes.
-- **Deck builder rough edges** — long deck titles cut off, the hover preview covers the search box, the search box's count ignores the colour filter, re-importing makes a second deck of the same name, "1 issue(s)".
+- **A hand card's Cycle, Foretell and Plot buttons are small** — plain buttons under the card, easy to miss beside it (they aren't a popup: nothing for Escape to close).
+- **The deck builder's hover preview can cover the search box and filters** — the last of its rough edges.
 - **The game's top bar and labels stay small at 2560×1440** — judged by eye; measure before changing.
-- **The X prompt and shown cost ignore a target's tax** — `App.tsx` doesn't read `xCost.targetTaxes`/`maxXUnreduced`, so a taxed target at too high an X is refused rather than never offered, and the shown cost omits the tax.
+- **A spell's shown cost leaves out a target's tax** — Boreal Elemental's {2} more isn't in the cost drawn on the card or the X prompt's line (targets you can't afford are no longer offered, 2026-11-11).
 - **A hand card's types show as printed under a static outside the battlefield** — `view.ts` under `typesOutsideBattlefield` (Conspiracy, Arcane Adaptation); the filters read the new types.
-- **A human's target picks aren't narrowed by the new target relations** — `viewTargetFacts` lacks `shareTypes`, `toughnessOf`, `nameOf` and `attachedTo`, so a broken pair is refused only when sent (found 2026-10-31).
 - **Cultivate's split prompt doesn't say which find goes where** — "Choose up to 2 cards"; `search-library.instead` with `pick: "one"` would ask properly (found 2026-10-31).
 - **Playback stalls when your cast triggers your own targeted ability** — the cast showcase never ends and the target prompt never shows (found 2026-10-30 by `run-check`; Briarknit Kami, Ichormoon Gauntlet). Seen again 2026-11-11 with Wasteland Strangler's manual check, which can't be played to its end until this is fixed.
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
