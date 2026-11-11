@@ -7908,8 +7908,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ## A ward cost read as it resolves (2026-11-11)
 
 ### Raubahn, Bull of Ala Mhigo: ward costs life equal to its power
-- **Do:** Cast Shock on Bob's Raubahn (a 3/3 under Glorious Anthem).
-- **Expect:** A popup offers "Pay ward—Pay 3 life" or letting Shock be countered. Paying puts you at 17 and Shock deals 2 damage to Raubahn.
+- **Do:** Cast Shock on Bob's Raubahn (a 3/3 under Glorious Anthem) and pass priority to the ward trigger.
+- **Expect:** The banner asks "Pay ward—Pay 3 life (or Shock is countered)", Pay or Don't pay. Paying costs you 3 life and Shock deals 2 damage to Raubahn.
 
 ## "Those players" a batch of attackers attacked (2026-11-11)
 
@@ -7921,4 +7921,4 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 ### Trinisphere: a one-mana spell costs three
 - **Do:** Cast Lightning Bolt at Bob.
-- **Expect:** Casting it taps all three Mountains; Bob goes to 17. Ornithopter can't be cast afterwards (it would cost {3}).
+- **Expect:** Casting it taps all three Mountains; Bob loses 3 life. Ornithopter can't be cast afterwards (it would cost {3}).
