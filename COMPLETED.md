@@ -4141,6 +4141,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Tooling / docs
 
+- **"Playback stalls when your cast triggers your own targeted ability" was run-check's own early return** (2026-11-11): the game never stalled. `run-check`'s settle loop took the view's decision for the screen's, a second or so before the frame's animations ended and the banner came up, and the run ended there with "Resolving…" still showing. It now waits while the top strip says so (`Snapshot.playing`); the Ichormoon Gauntlet and Wasteland Strangler checks play through.
 - **Verify faster: the plain fuzzers after the engine suite, one card registry per test worker**
   (2026-11-10): the fuzzers no longer take the suite's memory (2 players in two processes, 4 in
   five, beside the server suite), and `table()` shares one whole-pool registry per worker

@@ -35,6 +35,9 @@ interface Snapshot {
   readonly holding: boolean
   /** The top of the stack is this seat's. */
   readonly ownTop: boolean
+  /** A frame is still playing out: the view is ahead of the screen (a
+   * decision's banner isn't up yet). */
+  readonly playing: boolean
 }
 
 /** Text as a case-blind pattern, a hyphen matching a minus sign too (the
@@ -103,6 +106,8 @@ function snapshot(page: Page): Promise<Snapshot> {
       deciding: seat !== null && view?.awaiting != null && (view.answering ?? view.awaiting.player) === seat,
       holding: seat !== null && view?.priority.active === true && (view.answering ?? view.priority.holder) === seat,
       ownTop: seat !== null && view?.objects[view.zones.stack.at(-1) ?? '']?.controller === seat,
+      // The top strip says so while a frame's animations play.
+      playing: document.querySelector('.ts-acting')?.textContent?.trim() === 'Resolving…',
     }
   })
 }
@@ -129,6 +134,10 @@ async function settle(page: Page, forBots: boolean): Promise<Snapshot> {
       continue
     }
     if (Date.now() - since < 700) continue
+    // Never settled mid-animation: the snapshot's view has the decision
+    // before its banner is drawn, which read as a stall (a cast triggering
+    // its caster's own targeted ability, 2026-10-30).
+    if (now.playing) continue
     if (sawStack && now.stack.length === 0 && !now.deciding) return now
     if (now.holding && now.ownTop && !now.deciding) {
       // Not there or not enabled yet: the next round tries again.
