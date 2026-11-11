@@ -98,7 +98,7 @@ import {
   readsGraveyardOrder,
 } from "./cards/define.js";
 import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause } from "./cards/define.js";
-import { costActMaxX, costActPaidLast, costActPayable, payableCostAct } from "./cost-acts.js";
+import { costActMaxX, costActPaidLast, costActPayable, costActReadsX, payableCostAct } from "./cost-acts.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -5543,6 +5543,15 @@ export class Game {
           // are, lands tapped for the spell's mana among them.
           : xPlan === null && sacrificeX === undefined && def.additionalCost?.returnToHandX !== undefined
             ? permanentCount(this.state, this.battlefieldMatching(player, { ...def.additionalCost.returnToHandX, controlledBy: "you" }))
+          // "Blight X" (Soul Immolation): an act as the cost that reads X, as
+          // much as the act could pay and no more than the card's own
+          // "X can't be greater than …" (rule 601.2b).
+          : xPlan === null && sacrificeX === undefined && this.additionalCostActX(def) !== undefined
+            ? Math.min(
+                costActMaxX(this.additionalCostActX(def)!, this.makeResolutionContext(card, player, [])) ??
+                  Game.MAX_EFFECT_INSTANCES,
+                def.maxX !== undefined ? this.costAmount(def.maxX, player, card, card) : Game.MAX_EFFECT_INSTANCES,
+              )
             : undefined;
       const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
       // A divided total that reads X ("X plus 1"): one per X, which bounds
@@ -17306,6 +17315,15 @@ export class Game {
    * gets more expensive monotonically in X, so each is binary-searched, and
    * the cheapest to reach the best X wins, tapping the fewest creatures.
    */
+  /** A spell's additional cost that's an act reading X — "blight X" (Soul
+   * Immolation: `additionalCost.also.do` with an `"x"` amount). It makes the
+   * spell an X spell though its mana cost has no {X}: X is announced as it's
+   * cast (rules 107.3a, 601.2b) and the act paid at it (601.2h). */
+  private additionalCostActX(def: CardDefinition): EffectSpec | undefined {
+    const act = def.additionalCost?.also?.do;
+    return act !== undefined && costActReadsX(act) ? act : undefined;
+  }
+
   private xPlanFor(
     player: PlayerId,
     cardId: ObjectId,
@@ -20797,6 +20815,7 @@ export class Game {
       def.additionalCost?.discard === "x" ||
       def.additionalCost?.exileFromGraveyard?.count === "x" ||
       def.additionalCost?.returnToHandX !== undefined ||
+      this.additionalCostActX(def) !== undefined ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
       (altCost && this.ownAltCost(def)?.exileFromHand?.manaValueX === true);
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
@@ -47918,6 +47937,9 @@ controlledBy,
         ? this.blightable(player)
         : this.battlefieldMatching(player, { type: "creature", controlledBy: "you" });
     if (eligible.length === 0) return;
+    // "Blight X" at X = 0 (Soul Immolation): no counters go anywhere, so with
+    // nothing reading the blighted creature there's nothing to choose.
+    if (amount <= 0 && opts.then === undefined) return;
     const then: EffectSpec = {
       kind: "sequence",
       effects: [

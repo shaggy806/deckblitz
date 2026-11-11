@@ -3211,6 +3211,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(
       face("As an additional cost to cast this spell, return X Swamps you control to their owner's hand.", "Sorcery", {}).additionalCost,
     ).toEqual({ returnToHandX: { subtype: "Swamp" } });
+    // Soul Immolation's X: the blight's, under the card's own ceiling.
+    const immolation = face(
+      "As an additional cost to cast this spell, blight X. X can't be greater than the greatest toughness among creatures you control. (Put X -1/-1 counters on a creature you control.)\nThis spell deals X damage to each opponent and each creature they control.",
+      "Sorcery",
+      {},
+    );
+    expect(immolation.additionalCost).toEqual({ also: { text: "Blight X", do: { kind: "blight", amount: "x" } } });
+    expect(immolation.maxX).toEqual({ aggregate: "max", of: "toughness", filter: { type: "creature", controlledBy: "you" } });
     const explosion = face(
       "As an additional cost to cast this spell, exile a creature card from your graveyard.\nThis spell deals damage equal to the exiled card's power to each creature and each planeswalker.",
       "Sorcery",

@@ -2491,7 +2491,9 @@ export type EffectSpec =
        * the Weird): the player in that slot, nobody if it's illegal (608.2b).
        */
       readonly kind: "blight";
-      readonly amount: number;
+      /** `"x"` is "blight X": the X announced for the spell or ability (Soul
+       * Immolation's additional cost). */
+      readonly amount: number | "x";
       readonly who?: PlayerScope | { readonly target: number };
       readonly then?: EffectSpec;
       /** Set by the engine on the copy it parks when one player's choice is
@@ -16317,7 +16319,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const pendingBefore = ctx.decisionPending();
       for (let i = 0; i < players.length; i += 1) {
         const parked = ctx.parkedCount();
-        ctx.blight(players[i], spec.amount, spec.then);
+        ctx.blight(players[i], amountValue(spec.amount, ctx), spec.then);
         if (i + 1 < players.length && !pendingBefore && ctx.decisionPending()) {
           ctx.resumeAfterDecisions({ ...spec, remaining: players.slice(i + 1) }, parked);
           return;

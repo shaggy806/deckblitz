@@ -15057,6 +15057,17 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "Blight X. X can't be greater than the greatest toughness among
+    // creatures you control." (Soul Immolation): an act as the cost that
+    // reads X, and the card's ceiling on it.
+    if (
+      isSpell &&
+      (m = /^As an additional cost to cast ~, blight X\.(?: X can't be greater than the greatest (power|toughness) among creatures you control\.)?$/.exec(line))
+    ) {
+      out.additionalCost = { also: { text: "Blight X", do: { kind: "blight", amount: "x" } } };
+      if (m[1] !== undefined) out.maxX = { aggregate: "max", of: m[1], filter: { type: "creature", controlledBy: "you" } };
+      continue;
+    }
     // "Tap two untapped creatures you control" (Shared Discovery), "return a
     // land you control to its owner's hand" (Deprive): `also`, as a keyword's
     // non-mana cost; "… or pay {1}" (Disruption Protocol) a branch of a choice.

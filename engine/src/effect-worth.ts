@@ -406,7 +406,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       const who = effect.who ?? "you";
       const players = playersIn(who, ctx);
       return (
-        onPlayers(players, -effect.amount, ctx) +
+        onPlayers(players, -(effect.amount === "x" ? 1 : effect.amount), ctx) +
         (who === "you" && effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
       );
     }

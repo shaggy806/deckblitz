@@ -2233,7 +2233,8 @@
   "cost:x-spend-only-color",
   "cost:x-spend-only-color",
   "condition:filter-attacking-your-opponents",
-  "mechanic:planar-die"
+  "mechanic:planar-die",
+  "cost:blight-x-additional-cost"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
