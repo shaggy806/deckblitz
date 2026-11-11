@@ -39,7 +39,7 @@ import { FIRST_GAME_PARAM, LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
 import { localMode } from '../local/localMode.ts'
 import { localStart } from '../lobby/localStart.ts'
-import { listDecks } from '../deck-builder/decks.ts'
+import { createDeckFromImport, listDecks } from '../deck-builder/decks.ts'
 import { HybridSocket, isLocalRoom } from '../local/localSocket.ts'
 import type { RoomSocket } from '../local/localSocket.ts'
 
@@ -70,6 +70,9 @@ export interface BlitzReport {
   readonly deckName: string
   readonly substituted: readonly { readonly from: string; readonly to: string }[]
   readonly dropped: readonly string[]
+  /** The list is short of a Commander deck's 100 cards: how many it has. It
+   * is played as it is, with a word of warning. */
+  readonly short?: number
 }
 
 /** A stable empty list, so "no frame yet" doesn't look like a changed
@@ -278,6 +281,15 @@ export interface NetworkGame {
    * been told about. */
   readonly blitzReport: BlitzReport | null
   dismissBlitzReport: () => void
+  /** The pasted deck this tab is blitzing, for the result screen's offer to
+   * save it: a blitz saves nothing by itself. Null for the first game's
+   * starter deck, in any other room, and after a reload. */
+  readonly blitzDeck: WireDeck | null
+  /** Whether {@link saveBlitzDeck} has kept it. */
+  readonly blitzDeckSaved: boolean
+  /** Keeps the blitzed deck in this browser's decks, as the active one (the
+   * Game menu and the result screen offer it). Does nothing a second time. */
+  saveBlitzDeck: () => void
   /** Whether the joined room is one this tab blitzed into, so its rematch
    * can be offered as "Blitz again". Forgotten on a reload, which only
    * costs the name. */
@@ -486,6 +498,13 @@ export function useNetworkGame(): NetworkGame {
   const [builder, setBuilder] = useState<BuilderInfo | null>(null)
   const [blitzing, setBlitzing] = useState(false)
   const [blitzReport, setBlitzReport] = useState<BlitzReport | null>(null)
+  const [blitzDeck, setBlitzDeck] = useState<WireDeck | null>(null)
+  const [blitzDeckSaved, setBlitzDeckSaved] = useState(false)
+  const saveBlitzDeck = useCallback(() => {
+    if (blitzDeck === null || blitzDeckSaved) return
+    createDeckFromImport(blitzDeck.name ?? 'Blitzed deck', blitzDeck.cards, blitzDeck.commanders ?? [], blitzDeck.printings)
+    setBlitzDeckSaved(true)
+  }, [blitzDeck, blitzDeckSaved])
   const [blitzRoomId, setBlitzRoomId] = useState<string | null>(null)
   const [gameNumber, setGameNumber] = useState(0)
   const [canRematch, setCanRematch] = useState(false)
@@ -889,7 +908,11 @@ export function useNetworkGame(): NetworkGame {
         sent: false,
       }
       setBlitzing(true)
-      setBlitzReport(report.substituted.length > 0 || report.dropped.length > 0 ? report : null)
+      setBlitzDeck(against === 'upgraded' ? deck : null)
+      setBlitzDeckSaved(false)
+      setBlitzReport(
+        report.substituted.length > 0 || report.dropped.length > 0 || report.short !== undefined ? report : null,
+      )
       sendSolo({ type: 'create-room', hostToken, players: BLITZ_PLAYERS })
     },
     [sendSolo],
@@ -1373,6 +1396,9 @@ export function useNetworkGame(): NetworkGame {
     blitz,
     blitzing,
     blitzReport,
+    blitzDeck: blitzRoomId !== null && blitzRoomId === roomId ? blitzDeck : null,
+    blitzDeckSaved,
+    saveBlitzDeck,
     dismissBlitzReport,
     blitzRoom: blitzRoomId !== null && blitzRoomId === roomId,
     gameNumber,

@@ -1063,18 +1063,25 @@ function BlitzReportToast({ report, onDismiss }: { readonly report: BlitzReport;
     const t = window.setTimeout(onDismiss, BLITZ_REPORT_LINGER_MS)
     return () => window.clearTimeout(t)
   }, [report, onDismiss])
-  const { substituted, dropped } = report
+  const { substituted, dropped, short } = report
   const shown = substituted.slice(0, BLITZ_REPORT_SHOWN)
   const more = substituted.length - shown.length
   const counts = [
     substituted.length > 0 ? `${substituted.length} stand-in${substituted.length === 1 ? '' : 's'}` : null,
     dropped.length > 0 ? `${dropped.length} card${dropped.length === 1 ? '' : 's'} left out` : null,
+    short !== undefined ? `only ${short} of 100 cards` : null,
   ].filter((c) => c !== null)
   return (
     <div className="toast info toast-long blitz-report" role="status" onClick={onDismiss} title="Click to dismiss">
       <div>
-        {report.deckName}: {counts.join(', ')}. Change them in the deck builder.
+        {report.deckName}: {counts.join(', ')}.
+        {substituted.length > 0 || dropped.length > 0
+          ? ' Save the deck from the Game menu to change them in the deck builder.'
+          : ''}
       </div>
+      {short !== undefined ? (
+        <div className="blitz-report-list">A Commander deck is 100 cards: this one's library will run out early.</div>
+      ) : null}
       {shown.length > 0 ? (
         <div className="blitz-report-list">
           {shown.map((s) => `${s.from} → ${s.to}`).join(' · ')}
@@ -1117,6 +1124,7 @@ function GameResultPanel({
   offer,
   onRematch,
   rematchAsked,
+  saveDeck,
 }: {
   readonly view: PlayerView
   readonly seat: PlayerId
@@ -1126,6 +1134,9 @@ function GameResultPanel({
   readonly onRematch: () => void
   /** Asked, and neither dealt nor refused yet: one click deals one game. */
   readonly rematchAsked: boolean
+  /** The pasted deck a blitz played, which it didn't save: offered here
+   * (and in the Game menu). Null when there's none to offer. */
+  readonly saveDeck: { readonly saved: boolean; readonly save: () => void } | null
 }) {
   useEscape(onDismiss)
   const { winner, reason } = view.result
@@ -1198,6 +1209,16 @@ function GameResultPanel({
           >
             Main menu
           </button>
+          {saveDeck !== null ? (
+            <button
+              type="button"
+              disabled={saveDeck.saved}
+              title="Keep this deck in your decks, to edit in the deck builder or play again"
+              onClick={saveDeck.save}
+            >
+              {saveDeck.saved ? 'Deck saved ✓' : 'Save deck'}
+            </button>
+          ) : null}
           {offer?.kind === 'button' ? (
             <button type="button" className="result-primary" disabled={rematchAsked} onClick={onRematch}>
               {offer.label}
@@ -1649,6 +1670,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
           })}
           onRematch={askRematch}
           rematchAsked={rematchAskedAt === game.errorSeq}
+          saveDeck={game.blitzDeck !== null ? { saved: game.blitzDeckSaved, save: game.saveBlitzDeck } : null}
         />
       ) : null}
 

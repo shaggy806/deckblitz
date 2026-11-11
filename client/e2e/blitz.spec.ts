@@ -82,9 +82,9 @@ test('blitzing the clipboard starts a game against three bots', async ({ page, c
   await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
 
   await expectBlitzStarted(page, 'click')
-  // The deck was saved, and is now the active one.
+  // Blitzing saves nothing: the result screen offers to keep the deck.
   const saved = await page.evaluate(() => window.localStorage.getItem('mtg-engine:decks'))
-  expect(saved).toContain('Imported: Ghalta, Primal Hunger')
+  expect(saved ?? '').not.toContain('Imported: Ghalta, Primal Hunger')
   expect(errors).toEqual([])
 })
 

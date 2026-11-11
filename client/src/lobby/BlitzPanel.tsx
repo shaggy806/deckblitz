@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
-import { createDeckFromImport } from '../deck-builder/decks.ts'
 import { importDecklist, looksLikeDecklist, resolveImport } from '../deck-builder/importDeck.ts'
 import type { ImportProgress } from '../deck-builder/importDeck.ts'
 
@@ -14,7 +13,7 @@ type Phase =
  * Blitzing — goldfishing against bots. One button at the foot of the landing
  * page, no explanation beyond its label: the decklist on the clipboard, run
  * through the deck import (an unimplemented card swapped for its stand-in,
- * one with none dropped), saved as the active deck, and played at once
+ * one with none dropped) and played at once, nothing saved,
  * against three bots on random starter decks (`NetworkGame.blitz`), with no
  * seat board in between.
  *
@@ -23,6 +22,9 @@ type Phase =
  * clipboard holds no "N Card Name" line, a box opens to paste the list into
  * instead, so the button never just does nothing.
  */
+/** A Commander deck's size, commander included (rule 903.5a). */
+const COMMANDER_DECK_SIZE = 100
+
 export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
   const [phase, setPhase] = useState<Phase>({ kind: 'idle' })
   const [pasted, setPasted] = useState('')
@@ -48,13 +50,20 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
           )
         }
         if (resolved.cards.length === 0) throw new Error('None of the cards in that list could be played.')
-        const deck = createDeckFromImport(resolved.name, resolved.cards, resolved.commanders, resolved.printings)
+        // Nothing is saved here: the result screen offers to keep the deck.
+        const size = resolved.cards.length + resolved.commanders.length
         game.blitz(
-          { cards: deck.cards, commanders: deck.commanders, name: deck.name, printings: deck.printings },
           {
-            deckName: deck.name,
+            cards: resolved.cards,
+            commanders: resolved.commanders,
+            name: resolved.name,
+            ...(Object.keys(resolved.printings).length > 0 ? { printings: resolved.printings } : {}),
+          },
+          {
+            deckName: resolved.name,
             substituted: resolved.report.substituted.map(({ from, to }) => ({ from, to })),
             dropped: resolved.report.dropped,
+            ...(size < COMMANDER_DECK_SIZE ? { short: size } : {}),
           },
         )
         setPhase({ kind: 'idle' })

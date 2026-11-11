@@ -112,6 +112,16 @@ export function SeatMenu({
               </button>
             </div>
           ) : null}
+          {game.blitzDeck !== null ? (
+            <button
+              type="button"
+              disabled={game.blitzDeckSaved}
+              title="Keep this deck in your decks, to edit in the deck builder or play again"
+              onClick={game.saveBlitzDeck}
+            >
+              {game.blitzDeckSaved ? 'Deck saved ✓' : 'Save deck'}
+            </button>
+          ) : null}
           {game.isHost && game.canRematch && !view.result.over ? (
             <div className="seat-menu-slot">
               <div className={`seat-menu-confirm${confirmingRestart ? '' : ' slot-hidden'}`} aria-hidden={!confirmingRestart}>
