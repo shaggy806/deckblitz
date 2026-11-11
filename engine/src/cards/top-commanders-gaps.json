@@ -2204,7 +2204,8 @@
   "static:prohibit-by-player-turn-history",
   "effect:look-and-choose-destination-choice",
   "trigger:cast-spell-with-cascade",
-  "static:attack-direction-restriction"
+  "static:attack-direction-restriction",
+  "stat:players-dealt-combat-damage-by-name-this-game"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

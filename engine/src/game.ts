@@ -391,6 +391,7 @@ import {
   entriesThisTurn,
   journalTotal,
   modesDoneThisTurn,
+  noteCombatDamagedBy,
 } from "./journal.js";
 import {
   flipsSince,
@@ -51605,6 +51606,11 @@ controlledBy,
           ...(hit !== undefined ? { targetStint: hit.zoneChangeCount ?? 0 } : {}),
           ...(event.combat ? { combat: this.state.turn.combatPhases ?? 1 } : {}),
         });
+        // "Dealt combat damage this game by a creature named …": the whole
+        // game's record, by the name it had as it dealt the damage.
+        if (event.combat && event.target.kind === "player" && was !== undefined && was.types.includes("creature")) {
+          noteCombatDamagedBy(this.state, event.target.player, lastKnownNames(this.registry, was));
+        }
         return;
       }
       case "attackers-declared": {

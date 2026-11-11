@@ -1504,6 +1504,16 @@ export type StaticCondition =
    * cast", is `atLeast: 2`: the spell resolving was one of them.
    */
   | { readonly kind: "spells-cast-this-game"; readonly named: string; readonly atLeast: number }
+  /**
+   * You've been dealt combat damage this game by a creature with this name,
+   * as it was named then, whoever controlled it (the journal's
+   * `combatDamagedBy`, kept all game). Gollum, Obsessed Stalker's "each
+   * opponent dealt combat damage this game by a creature named Gollum,
+   * Obsessed Stalker" asks it of each opponent: a `for-each-player` over
+   * `"each-opponent"` whose effect is a `conditional` on this inside
+   * `of-player` `"that-player"`.
+   */
+  | { readonly kind: "combat-damaged-this-game"; readonly byCreatureNamed: string }
   /** The source's `chosenOnEnter` label equals `value` — Frontier Siege's
    * "Khans" / "Dragons" halves. Which abilities the permanent has, not an
    * "if" of the ability's: on a triggered ability it gates the triggering,

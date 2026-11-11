@@ -199,6 +199,25 @@ export interface Journal {
   turns: JournalTurn[];
   /** The whole game's count of each kind, per player: "this game". */
   game: Partial<Record<PlayerId, Partial<Record<JournalKind, number>>>>;
+  /** The whole game's record of who dealt each player combat damage: the
+   * names of the creatures that did, each as it was named then, whoever
+   * controlled it ("dealt combat damage this game by a creature named
+   * Gollum, Obsessed Stalker"). Kept past the round the entries last. */
+  combatDamagedBy?: Partial<Record<PlayerId, string[]>>;
+}
+
+/** Note that a creature with these `names` dealt `player` combat damage
+ * (`Journal.combatDamagedBy`). */
+export function noteCombatDamagedBy(state: GameState, player: PlayerId, names: readonly string[]): void {
+  if (names.length === 0) return;
+  const journal = (state.journal ??= emptyJournal());
+  const list = ((journal.combatDamagedBy ??= {})[player] ??= []);
+  for (const name of names) if (!list.includes(name)) list.push(name);
+}
+
+/** Whether a creature named `name` has dealt `player` combat damage this game. */
+export function combatDamagedByNamed(state: GameState, player: PlayerId, name: string): boolean {
+  return state.journal?.combatDamagedBy?.[player]?.includes(name) === true;
 }
 
 /**

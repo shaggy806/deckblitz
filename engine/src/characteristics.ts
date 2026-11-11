@@ -110,6 +110,7 @@ import { CREATURE_TYPES } from "./creature-types.js";
 import {
   JOURNAL_VIEWS,
   abilityCountThisTurn,
+  combatDamagedByNamed,
   entriesThisTurn,
   journalEntries,
   journalTotal,
@@ -879,6 +880,8 @@ function evalStaticCondition(
     }
     case "spells-cast-this-game":
       return (state.players[you]?.spellNamesCastThisGame?.[condition.named] ?? 0) >= condition.atLeast;
+    case "combat-damaged-this-game":
+      return combatDamagedByNamed(state, you, condition.byCreatureNamed);
     case "library-size": {
       const inBounds = (n: number): boolean =>
         (condition.atMost === undefined || n <= condition.atMost) &&
