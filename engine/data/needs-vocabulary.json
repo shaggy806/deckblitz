@@ -8146,6 +8146,16 @@
    "family": "decision:choose-creature-type-on-resolution",
    "example": "Long List of the Ents: note a creature type not yet noted, remembered per Saga."
   },
+  "condition:creatures-died-this-turn-count-in-static": {
+   "family": "condition:filter-this-turn-history",
+   "example": "Gimli, Mournful Avenger: a static whose condition is an amounts compare on creaturesDiedThisTurn did not grant indestructible after two of its controller's creatures died (B296).",
+   "description": "A static ability's condition counting the creatures that died under your control this turn. Tried in B296 as an `amounts` condition on a static and it read under 2 after two deaths; not debugged."
+  },
+  "cost:sacrifice-x-of-token-stack": {
+   "family": "cost:sacrifice-multiple",
+   "example": "Lonis, Cryptozoologist: sacrifice X Clues with X = 2 and two Clue tokens in one stack sacrificed one (B296).",
+   "description": "An ability cost sacrificing X permanents (`sacrifice: { filter, count: \"x\" }`) where they are tokens in one stack: B296's test saw one sacrificed for X = 2. May be the test sending no ids; not debugged."
+  },
   "trigger:reflexive-on-nth-resolution": {
    "family": "trigger:nth-each-turn",
    "example": "Gimli, Mournful Avenger: \"when this ability resolves for the third time this turn\"."

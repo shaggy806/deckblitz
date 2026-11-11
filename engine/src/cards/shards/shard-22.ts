@@ -292,6 +292,7 @@ import _poolFlatman from "../pool/flatman.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFloatingDreamZubera from "../pool/floating-dream-zubera.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
+import _poolFontOfMagic from "../pool/font-of-magic.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
 import _poolFootNinjas from "../pool/foot-ninjas.js";
 import _poolFootstepsOfTheGoryo from "../pool/footsteps-of-the-goryo.js";
@@ -1319,6 +1320,7 @@ const shard: CardShard = {
     _poolFlickerOfFate,
     _poolFloatingDreamZubera,
     _poolFlowstoneShambler,
+    _poolFontOfMagic,
     _poolFontOfVigor,
     _poolFootNinjas,
     _poolFootstepsOfTheGoryo,

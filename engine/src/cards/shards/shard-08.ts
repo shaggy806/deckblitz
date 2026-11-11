@@ -668,6 +668,7 @@ import _poolPlanarCollapse from "../pool/planar-collapse.js";
 import _poolPolukranosUnchained from "../pool/polukranos-unchained.js";
 import _poolPortRazer from "../pool/port-razer.js";
 import _poolPowerArtifact from "../pool/power-artifact.js";
+import _poolPox from "../pool/pox.js";
 import _poolPracticedScrollsmith from "../pool/practiced-scrollsmith.js";
 import _poolPrecursorGolem from "../pool/precursor-golem.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
@@ -1716,6 +1717,7 @@ const shard: CardShard = {
     _poolPolukranosUnchained,
     _poolPortRazer,
     _poolPowerArtifact,
+    _poolPox,
     _poolPracticedScrollsmith,
     _poolPrecursorGolem,
     _poolPreemptiveStrike,

@@ -944,6 +944,7 @@ import _poolVodalianMindsinger from "../pool/vodalian-mindsinger.js";
 import _poolVoiceOfResurgence from "../pool/voice-of-resurgence.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
+import _poolVraskaTheSilencer from "../pool/vraska-the-silencer.js";
 import _poolVulshokBattlemaster from "../pool/vulshok-battlemaster.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
 import _poolWallOfVipers from "../pool/wall-of-vipers.js";
@@ -1957,6 +1958,7 @@ const shard: CardShard = {
     _poolVoiceOfResurgence,
     _poolVolcanicFallout,
     _poolVolcanicSubmersion,
+    _poolVraskaTheSilencer,
     _poolVulshokBattlemaster,
     _poolVulshokFactory,
     _poolWallOfVipers,

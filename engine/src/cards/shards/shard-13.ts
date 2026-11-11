@@ -98,6 +98,7 @@ import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
 import _poolBloodbondMarch from "../pool/bloodbond-march.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
+import _poolBloodthirstyAdversary from "../pool/bloodthirsty-adversary.js";
 import _poolBoardingAction from "../pool/boarding-action.js";
 import _poolBogImp from "../pool/bog-imp.js";
 import _poolBogardanHellkite from "../pool/bogardan-hellkite.js";
@@ -598,6 +599,7 @@ import _poolPrideOfTheClouds from "../pool/pride-of-the-clouds.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
+import _poolProphetOfTheScarab from "../pool/prophet-of-the-scarab.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
 import _poolPupuUfo from "../pool/pupu-ufo.js";
 import _poolQuash from "../pool/quash.js";
@@ -1076,6 +1078,7 @@ const shard: CardShard = {
     _poolBloodPact,
     _poolBloodbondMarch,
     _poolBloodfireExpert,
+    _poolBloodthirstyAdversary,
     _poolBoardingAction,
     _poolBogImp,
     _poolBogardanHellkite,
@@ -1576,6 +1579,7 @@ const shard: CardShard = {
     _poolPrideOfTheRoad,
     _poolPridemalkin,
     _poolPrisonRealm,
+    _poolProphetOfTheScarab,
     _poolProtectionMagic,
     _poolPupuUfo,
     _poolQuash,

@@ -35,6 +35,7 @@ import _poolAnimalAttendant from "../pool/animal-attendant.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
 import _poolApheliaViperWhisperer from "../pool/aphelia-viper-whisperer.js";
+import _poolApothecaryWhite from "../pool/apothecary-white.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
 import _poolArachnePsionicWeaver from "../pool/arachne-psionic-weaver.js";
 import _poolArcaneInvestigator from "../pool/arcane-investigator.js";
@@ -816,6 +817,7 @@ import _poolTalonOfPain from "../pool/talon-of-pain.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTattermungeWitch from "../pool/tattermunge-witch.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
+import _poolTectonicSplit from "../pool/tectonic-split.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTeferisVeil from "../pool/teferis-veil.js";
 import _poolTelepathicSpies from "../pool/telepathic-spies.js";
@@ -1036,6 +1038,7 @@ const shard: CardShard = {
     _poolAnnihilatingGlare,
     _poolAnotherChance,
     _poolApheliaViperWhisperer,
+    _poolApothecaryWhite,
     _poolAppealToEirdu,
     _poolArachnePsionicWeaver,
     _poolArcaneInvestigator,
@@ -1817,6 +1820,7 @@ const shard: CardShard = {
     _poolTangledVale,
     _poolTattermungeWitch,
     _poolTavernBrawler,
+    _poolTectonicSplit,
     _poolTeferisProtege,
     _poolTeferisVeil,
     _poolTelepathicSpies,

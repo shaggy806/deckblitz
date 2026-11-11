@@ -1006,6 +1006,7 @@ import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolWrennAndSix from "../pool/wrenn-and-six.js";
 import _poolXenagosTheReveler from "../pool/xenagos-the-reveler.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
+import _poolYennettCrypticSovereign from "../pool/yennett-cryptic-sovereign.js";
 import _poolYesManPersonalSecuritron from "../pool/yes-man-personal-securitron.js";
 import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
 import _poolZahurGlorysPast from "../pool/zahur-glorys-past.js";
@@ -2032,6 +2033,7 @@ const shard: CardShard = {
     _poolWrennAndSix,
     _poolXenagosTheReveler,
     _poolYathanRoadwatcher,
+    _poolYennettCrypticSovereign,
     _poolYesManPersonalSecuritron,
     _poolZahidDjinnOfTheLamp,
     _poolZahurGlorysPast,

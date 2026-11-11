@@ -288,6 +288,7 @@ import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js
 import _poolForfend from "../pool/forfend.js";
 import _poolFortressCrab from "../pool/fortress-crab.js";
 import _poolFoulRenewal from "../pool/foul-renewal.js";
+import _poolFranticScapegoat from "../pool/frantic-scapegoat.js";
 import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
 import _poolFrenziedTilling from "../pool/frenzied-tilling.js";
 import _poolFrostpeakYeti from "../pool/frostpeak-yeti.js";
@@ -633,6 +634,7 @@ import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
 import _poolQuartzwoodCrasher from "../pool/quartzwood-crasher.js";
 import _poolQuench from "../pool/quench.js";
 import _poolQuicken from "../pool/quicken.js";
+import _poolQuicksilverFountain from "../pool/quicksilver-fountain.js";
 import _poolQuilledGreatwurm from "../pool/quilled-greatwurm.js";
 import _poolQuistisTrepe from "../pool/quistis-trepe.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
@@ -1236,6 +1238,7 @@ const shard: CardShard = {
     _poolForfend,
     _poolFortressCrab,
     _poolFoulRenewal,
+    _poolFranticScapegoat,
     _poolFreeFromFlesh,
     _poolFrenziedTilling,
     _poolFrostpeakYeti,
@@ -1581,6 +1584,7 @@ const shard: CardShard = {
     _poolQuartzwoodCrasher,
     _poolQuench,
     _poolQuicken,
+    _poolQuicksilverFountain,
     _poolQuilledGreatwurm,
     _poolQuistisTrepe,
     _poolRagingGoblinoids,

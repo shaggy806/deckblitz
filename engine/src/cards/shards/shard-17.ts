@@ -880,6 +880,7 @@ import _poolTsaboTavoc from "../pool/tsabo-tavoc.js";
 import _poolTurbulentMoor from "../pool/turbulent-moor.js";
 import _poolTurnAgainst from "../pool/turn-against.js";
 import _poolTurntimberAscetic from "../pool/turntimber-ascetic.js";
+import _poolTwinsOfDiscord from "../pool/twins-of-discord.js";
 import _poolTyranidInvasion from "../pool/tyranid-invasion.js";
 import _poolTyranidPrime from "../pool/tyranid-prime.js";
 import _poolUSSEnterpriseESovereign from "../pool/u-s-s-enterprise-e-sovereign.js";
@@ -1878,6 +1879,7 @@ const shard: CardShard = {
     _poolTurbulentMoor,
     _poolTurnAgainst,
     _poolTurntimberAscetic,
+    _poolTwinsOfDiscord,
     _poolTyranidInvasion,
     _poolTyranidPrime,
     _poolUSSEnterpriseESovereign,

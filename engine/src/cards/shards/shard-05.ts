@@ -669,6 +669,7 @@ import _poolRallyTheTroops from "../pool/rally-the-troops.js";
 import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRaphaelMostAttitude from "../pool/raphael-most-attitude.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
+import _poolRasaadYnBashir from "../pool/rasaad-yn-bashir.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
 import _poolRazorHippogriff from "../pool/razor-hippogriff.js";
 import _poolRazorgrassScreen from "../pool/razorgrass-screen.js";
@@ -1668,6 +1669,7 @@ const shard: CardShard = {
     _poolRampartSmasher,
     _poolRaphaelMostAttitude,
     _poolRapidAugmenter,
+    _poolRasaadYnBashir,
     _poolRavenousIntruder,
     _poolRazorHippogriff,
     _poolRazorgrassScreen,

@@ -717,6 +717,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Blocked cards re-read against today's vocabulary, first batch** (2026-11-10, B296): a read-only pass over 194 old records judged 62 authorable; one agent, stopped at 31 of them, authored 28 (Pox, Hypergenesis, Yennett, Obosh, Sage of Hours, Vraska the Silencer, Quicksilver Fountain, Namor the Sub-Mariner, Bloodthirsty Adversary, ...) with no engine code. Auron, Gimli and Lonis failed their tests and stay blocked, two on new keys (`condition:creatures-died-this-turn-count-in-static`, `cost:sacrifice-x-of-token-stack`). The other 31 judged authorable are untried; the verdicts are in `engine/.cache/comb/` on the PC only.
+
 - **Marvel: Darkhold Destiny's previews (MDD 7, MDC 1) and Mystery Booster Commander Edition (MBC
   69) whole: 42 of 77 new cards authored** (2026-11-06, batch 269; `engine/data/sweep-3/B269.json`)
   — one card-author agent of 70 and the lead's seven the scaffolder finished. 35 blocked: nine on

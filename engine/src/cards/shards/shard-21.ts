@@ -349,6 +349,7 @@ import _poolGokaTheUnjust from "../pool/goka-the-unjust.js";
 import _poolGoldenDemise from "../pool/golden-demise.js";
 import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
 import _poolGontiLordOfLuxury from "../pool/gonti-lord-of-luxury.js";
+import _poolGorMuldrakAmphinologist from "../pool/gor-muldrak-amphinologist.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
 import _poolGraniteShard from "../pool/granite-shard.js";
@@ -390,6 +391,7 @@ import _poolHoneyMammoth from "../pool/honey-mammoth.js";
 import _poolHourglassOfTheLost from "../pool/hourglass-of-the-lost.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
+import _poolHypergenesis from "../pool/hypergenesis.js";
 import _poolIcewroughtSentry from "../pool/icewrought-sentry.js";
 import _poolIchneumonDruid from "../pool/ichneumon-druid.js";
 import _poolIgnobleSoldier from "../pool/ignoble-soldier.js";
@@ -1306,6 +1308,7 @@ const shard: CardShard = {
     _poolGoldenDemise,
     _poolGoldmeadowDodger,
     _poolGontiLordOfLuxury,
+    _poolGorMuldrakAmphinologist,
     _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,
     _poolGraniteShard,
@@ -1347,6 +1350,7 @@ const shard: CardShard = {
     _poolHourglassOfTheLost,
     _poolHugsGrislyGuardian,
     _poolHydraTroopers,
+    _poolHypergenesis,
     _poolIcewroughtSentry,
     _poolIchneumonDruid,
     _poolIgnobleSoldier,

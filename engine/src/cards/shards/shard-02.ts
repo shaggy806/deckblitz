@@ -363,7 +363,9 @@ import _poolGideonBlackblade from "../pool/gideon-blackblade.js";
 import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
 import _poolGlenElendrasAnswer from "../pool/glen-elendras-answer.js";
 import _poolGlimmerburst from "../pool/glimmerburst.js";
+import _poolGlissasRetriever from "../pool/glissas-retriever.js";
 import _poolGloomshrieker from "../pool/gloomshrieker.js";
+import _poolGnollWarBand from "../pool/gnoll-war-band.js";
 import _poolGodhunterOctopus from "../pool/godhunter-octopus.js";
 import _poolGoldForgeGarrison from "../pool/gold-forge-garrison.js";
 import _poolGolgariLocket from "../pool/golgari-locket.js";
@@ -570,6 +572,7 @@ import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
 import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolMysticGenesis from "../pool/mystic-genesis.js";
 import _poolMysticVisionary from "../pool/mystic-visionary.js";
+import _poolNamorTheSubMariner from "../pool/namor-the-sub-mariner.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNaturalAffinity from "../pool/natural-affinity.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
@@ -1373,7 +1376,9 @@ const shard: CardShard = {
     _poolGlaringFleshraker,
     _poolGlenElendrasAnswer,
     _poolGlimmerburst,
+    _poolGlissasRetriever,
     _poolGloomshrieker,
+    _poolGnollWarBand,
     _poolGodhunterOctopus,
     _poolGoldForgeGarrison,
     _poolGolgariLocket,
@@ -1580,6 +1585,7 @@ const shard: CardShard = {
     _poolMyojinOfToweringMight,
     _poolMysticGenesis,
     _poolMysticVisionary,
+    _poolNamorTheSubMariner,
     _poolNarsetsReversal,
     _poolNaturalAffinity,
     _poolNavigatorsRuin,

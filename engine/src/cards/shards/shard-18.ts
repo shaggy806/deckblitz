@@ -520,6 +520,7 @@ import _poolMiracleWorker from "../pool/miracle-worker.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMirrorOfLifeTrapping from "../pool/mirror-of-life-trapping.js";
 import _poolMirrorshellCrab from "../pool/mirrorshell-crab.js";
+import _poolMishrasCommand from "../pool/mishras-command.js";
 import _poolMisleadingMotes from "../pool/misleading-motes.js";
 import _poolMisstep from "../pool/misstep.js";
 import _poolMistRaven from "../pool/mist-raven.js";
@@ -1525,6 +1526,7 @@ const shard: CardShard = {
     _poolMirkwoodSpider,
     _poolMirrorOfLifeTrapping,
     _poolMirrorshellCrab,
+    _poolMishrasCommand,
     _poolMisleadingMotes,
     _poolMisstep,
     _poolMistRaven,

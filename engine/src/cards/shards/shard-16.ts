@@ -416,6 +416,7 @@ import _poolImperialMoth from "../pool/imperial-moth.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
 import _poolIncubationIncongruity from "../pool/incubation-incongruity.js";
 import _poolIndathaTriome from "../pool/indatha-triome.js";
+import _poolInfernoOfTheStarMounts from "../pool/inferno-of-the-star-mounts.js";
 import _poolInkmothNexus from "../pool/inkmoth-nexus.js";
 import _poolInsatiableFrugivore from "../pool/insatiable-frugivore.js";
 import _poolInspiredInventor from "../pool/inspired-inventor.js";
@@ -1487,6 +1488,7 @@ const shard: CardShard = {
     _poolImperiousInkmage,
     _poolIncubationIncongruity,
     _poolIndathaTriome,
+    _poolInfernoOfTheStarMounts,
     _poolInkmothNexus,
     _poolInsatiableFrugivore,
     _poolInspiredInventor,

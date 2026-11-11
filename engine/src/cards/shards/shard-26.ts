@@ -83,6 +83,7 @@ import _poolAzraBladeseeker from "../pool/azra-bladeseeker.js";
 import _poolBagelAndSchmear from "../pool/bagel-and-schmear.js";
 import _poolBalduvianAtrocity from "../pool/balduvian-atrocity.js";
 import _poolBaneOfTheLiving from "../pool/bane-of-the-living.js";
+import _poolBanonTheReturnersLeader from "../pool/banon-the-returners-leader.js";
 import _poolBanquetGuests from "../pool/banquet-guests.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
 import _poolBasaltRavager from "../pool/basalt-ravager.js";
@@ -576,6 +577,7 @@ import _poolNyxathid from "../pool/nyxathid.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
 import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
+import _poolOkoyeMightyAndAdored from "../pool/okoye-mighty-and-adored.js";
 import _poolOliviaVoldaren from "../pool/olivia-voldaren.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
 import _poolOneLastJob from "../pool/one-last-job.js";
@@ -973,6 +975,7 @@ import _poolWarpingWail from "../pool/warping-wail.js";
 import _poolWarpingWurm from "../pool/warping-wurm.js";
 import _poolWarriorsOfWakanda from "../pool/warriors-of-wakanda.js";
 import _poolWebspinnerCuff from "../pool/webspinner-cuff.js";
+import _poolWeftwalking from "../pool/weftwalking.js";
 import _poolWelcomeHome from "../pool/welcome-home.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
 import _poolWhispergearSneak from "../pool/whispergear-sneak.js";
@@ -1100,6 +1103,7 @@ const shard: CardShard = {
     _poolBagelAndSchmear,
     _poolBalduvianAtrocity,
     _poolBaneOfTheLiving,
+    _poolBanonTheReturnersLeader,
     _poolBanquetGuests,
     _poolBaralAndKariZev,
     _poolBasaltRavager,
@@ -1593,6 +1597,7 @@ const shard: CardShard = {
     _poolObyrasAttendants,
     _poolOffalsnout,
     _poolOgreErrant,
+    _poolOkoyeMightyAndAdored,
     _poolOliviaVoldaren,
     _poolOmnathLocusOfTheRoil,
     _poolOneLastJob,
@@ -1990,6 +1995,7 @@ const shard: CardShard = {
     _poolWarpingWurm,
     _poolWarriorsOfWakanda,
     _poolWebspinnerCuff,
+    _poolWeftwalking,
     _poolWelcomeHome,
     _poolWeldingJar,
     _poolWhispergearSneak,

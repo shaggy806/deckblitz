@@ -1,0 +1,227 @@
+{
+ "batch": "B296",
+ "status": "done",
+ "ranks": "The comb (2026-11-10): blocked cards a read-only re-read judged authorable with today's vocabulary; one agent, stopped early at 31 of 62",
+ "authored": [
+  {
+   "name": "Dire Fleet Ravager",
+   "files": [
+    "engine/src/cards/pool/dire-fleet-ravager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pox",
+   "files": [
+    "engine/src/cards/pool/pox.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prophet of the Scarab",
+   "files": [
+    "engine/src/cards/pool/prophet-of-the-scarab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inferno of the Star Mounts",
+   "files": [
+    "engine/src/cards/pool/inferno-of-the-star-mounts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage of Hours",
+   "files": [
+    "engine/src/cards/pool/sage-of-hours.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twins of Discord",
+   "files": [
+    "engine/src/cards/pool/twins-of-discord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gor Muldrak, Amphinologist",
+   "files": [
+    "engine/src/cards/pool/gor-muldrak-amphinologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksilver Fountain",
+   "files": [
+    "engine/src/cards/pool/quicksilver-fountain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tectonic Split",
+   "files": [
+    "engine/src/cards/pool/tectonic-split.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Apothecary White",
+   "files": [
+    "engine/src/cards/pool/apothecary-white.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Okoye, Mighty and Adored",
+   "files": [
+    "engine/src/cards/pool/okoye-mighty-and-adored.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frantic Scapegoat",
+   "files": [
+    "engine/src/cards/pool/frantic-scapegoat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Midnight Arsonist",
+   "files": [
+    "engine/src/cards/pool/midnight-arsonist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Namor the Sub-Mariner",
+   "files": [
+    "engine/src/cards/pool/namor-the-sub-mariner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yennett, Cryptic Sovereign",
+   "files": [
+    "engine/src/cards/pool/yennett-cryptic-sovereign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rasaad yn Bashir",
+   "files": [
+    "engine/src/cards/pool/rasaad-yn-bashir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obosh, the Preypiercer",
+   "files": [
+    "engine/src/cards/pool/obosh-the-preypiercer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnoll War Band",
+   "files": [
+    "engine/src/cards/pool/gnoll-war-band.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vraska, the Silencer",
+   "files": [
+    "engine/src/cards/pool/vraska-the-silencer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ugin's Binding",
+   "files": [
+    "engine/src/cards/pool/ugins-binding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Banon, the Returners' Leader",
+   "files": [
+    "engine/src/cards/pool/banon-the-returners-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glissa's Retriever",
+   "files": [
+    "engine/src/cards/pool/glissas-retriever.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hypergenesis",
+   "files": [
+    "engine/src/cards/pool/hypergenesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodthirsty Adversary",
+   "files": [
+    "engine/src/cards/pool/bloodthirsty-adversary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Halo Forager",
+   "files": [
+    "engine/src/cards/pool/halo-forager.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mishra's Command",
+   "files": [
+    "engine/src/cards/pool/mishras-command.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Font of Magic",
+   "files": [
+    "engine/src/cards/pool/font-of-magic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Weftwalking",
+   "files": [
+    "engine/src/cards/pool/weftwalking.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Auron, Venerated Guardian",
+   "needs": [
+    "bug:reflexive-target-compare-bound-at-creation"
+   ],
+   "why": "Tried in B296: a reflexive trigger about the source with a defending-player target of lesser power offered no target (a 2/2 against Auron at 3 power)."
+  },
+  {
+   "name": "Gimli, Mournful Avenger",
+   "needs": [
+    "condition:creatures-died-this-turn-count-in-static",
+    "trigger:reflexive-on-nth-resolution"
+   ],
+   "why": "Tried in B296: the static did not grant indestructible after two creatures died; the third-resolution trigger was not reached."
+  },
+  {
+   "name": "Lonis, Cryptozoologist",
+   "needs": [
+    "cost:sacrifice-x-of-token-stack"
+   ],
+   "why": "Tried in B296: X = 2 with two Clue tokens sacrificed one; the reveal and the put onto the battlefield worked."
+  }
+ ]
+}

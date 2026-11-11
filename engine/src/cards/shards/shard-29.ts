@@ -190,6 +190,7 @@ import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
 import _poolDesperateSentry from "../pool/desperate-sentry.js";
 import _poolDestructorDragon from "../pool/destructor-dragon.js";
+import _poolDireFleetRavager from "../pool/dire-fleet-ravager.js";
 import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDissensionInTheRanks from "../pool/dissension-in-the-ranks.js";
 import _poolDistantMemories from "../pool/distant-memories.js";
@@ -678,6 +679,7 @@ import _poolSacredArmory from "../pool/sacred-armory.js";
 import _poolSacredGuide from "../pool/sacred-guide.js";
 import _poolSacredMesa from "../pool/sacred-mesa.js";
 import _poolSaddleOfTheCavalier from "../pool/saddle-of-the-cavalier.js";
+import _poolSageOfHours from "../pool/sage-of-hours.js";
 import _poolSaheeliRadiantCreator from "../pool/saheeli-radiant-creator.js";
 import _poolSaintTraftAndRemKarolus from "../pool/saint-traft-and-rem-karolus.js";
 import _poolSaltblast from "../pool/saltblast.js";
@@ -1188,6 +1190,7 @@ const shard: CardShard = {
     _poolDesolationTwin,
     _poolDesperateSentry,
     _poolDestructorDragon,
+    _poolDireFleetRavager,
     _poolDispellingExhale,
     _poolDissensionInTheRanks,
     _poolDistantMemories,
@@ -1676,6 +1679,7 @@ const shard: CardShard = {
     _poolSacredGuide,
     _poolSacredMesa,
     _poolSaddleOfTheCavalier,
+    _poolSageOfHours,
     _poolSaheeliRadiantCreator,
     _poolSaintTraftAndRemKarolus,
     _poolSaltblast,

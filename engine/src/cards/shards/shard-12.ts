@@ -525,6 +525,7 @@ import _poolMentorsGuidance from "../pool/mentors-guidance.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
 import _poolMetamorphicBlast from "../pool/metamorphic-blast.js";
 import _poolMetathranAerostat from "../pool/metathran-aerostat.js";
+import _poolMidnightArsonist from "../pool/midnight-arsonist.js";
 import _poolMightOfAlara from "../pool/might-of-alara.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
 import _poolMilitantAngel from "../pool/militant-angel.js";
@@ -1529,6 +1530,7 @@ const shard: CardShard = {
     _poolMerrowReejerey,
     _poolMetamorphicBlast,
     _poolMetathranAerostat,
+    _poolMidnightArsonist,
     _poolMightOfAlara,
     _poolMigratoryRoute,
     _poolMilitantAngel,

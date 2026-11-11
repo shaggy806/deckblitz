@@ -919,6 +919,7 @@ import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTurnTheEarth from "../pool/turn-the-earth.js";
 import _poolTwinstrike from "../pool/twinstrike.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
+import _poolUginsBinding from "../pool/ugins-binding.js";
 import _poolUltima from "../pool/ultima.js";
 import _poolUltimateMagicHoly from "../pool/ultimate-magic-holy.js";
 import _poolUlvenwaldObserver from "../pool/ulvenwald-observer.js";
@@ -1947,6 +1948,7 @@ const shard: CardShard = {
     _poolTurnTheEarth,
     _poolTwinstrike,
     _poolTyvarsStand,
+    _poolUginsBinding,
     _poolUltima,
     _poolUltimateMagicHoly,
     _poolUlvenwaldObserver,
