@@ -18629,3 +18629,27 @@ describe("a land played or a spell cast from anywhere other than the hand", () =
     });
   });
 });
+
+describe("exiling cards with total mana value N or greater as a cost", () => {
+  it("reads The Capitoline Triad whole", () => {
+    const historic = { anyOf: [{ type: "artifact" }, { supertype: "legendary" }, { subtype: "Saga" }] };
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — God Artificer",
+      oracle_text:
+        'Those Who Came Before — This spell costs {1} less to cast for each historic card in your graveyard. (Artifacts, legendaries, and Sagas are historic.)\nExile any number of historic cards from your graveyard with total mana value 30 or greater: You get an emblem with "Creatures you control have base power and toughness 9/9."',
+    } as never) as unknown as { activated: Record<string, unknown>[]; selfCostReduction: unknown; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.selfCostReduction).toEqual({
+      condition: { kind: "controls", filter: {}, atLeast: 0 },
+      reduceGeneric: { countInGraveyard: { ownedBy: "you", ...historic } },
+    });
+    expect(face.activated[0]).toMatchObject({
+      cost: { mana: null, tap: false, collectEvidence: { totalManaValue: 30, filter: historic } },
+      effect: {
+        kind: "create-emblem",
+        static: { affects: { scope: "creatures-you-control" }, setBasePt: { power: 9, toughness: 9 } },
+      },
+    });
+  });
+});

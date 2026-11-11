@@ -1725,6 +1725,15 @@ export function parseCost(text) {
       const { count, filter, noun } = handRevealOf(m[1]);
       cost.reveal = { count, filter, text: noun };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
+    // "Exile any number of historic cards from your graveyard with total mana
+    // value 30 or greater" (The Capitoline Triad): collect evidence's payment
+    // over the matching cards only, and no evidence collected.
+    else if (
+      (m = /^Exile any number of (.+?) cards from your graveyard with total mana value (\d+) or greater$/.exec(part)) &&
+      graveyardKindOf(m[1]) !== null
+    ) {
+      cost.collectEvidence = { totalManaValue: Number(m[2]), filter: graveyardKindOf(m[1]) };
+    }
     // "Collect evidence 3" (rule 701.59a — Forensic Researcher, Cryptex).
     else if ((m = /^Collect evidence (\d+)$/.exec(part))) cost.collectEvidence = Number(m[1]);
     // "Tap enchanted land" (Earthlore): the one permanent the source is on.
@@ -2988,6 +2997,16 @@ function emblemStaticOf(quoted) {
         filter: { typesAnyOf: ["instant", "sorcery"] },
         triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "storm" }, resolve: null, text: "Storm" }],
       },
+      text,
+    };
+  }
+  // "Creatures you control have base power and toughness 9/9." (The
+  // Capitoline Triad): a layer 7b set (rule 613.4b), from the emblem's timestamp.
+  const based = /^Creatures you control have base power and toughness (\d+)\/(\d+)\.$/.exec(quoted);
+  if (based !== null) {
+    return {
+      affects: { scope: "creatures-you-control" },
+      setBasePt: { power: Number(based[1]), toughness: Number(based[2]) },
       text,
     };
   }
@@ -19265,6 +19284,11 @@ function costEachAmount(phrase) {
   }[phrase];
   if (fixed !== undefined) return fixed;
   let m;
+  // "For each historic card in your graveyard" (The Capitoline Triad).
+  if ((m = /^(.+?) card in your graveyard$/.exec(phrase)) && !/ you control and each /.test(phrase)) {
+    const kind = graveyardKindOf(m[1]);
+    if (kind !== null) return { countInGraveyard: { ownedBy: "you", ...kind } };
+  }
   if ((m = /^(.+?) you control and each (.+?) card in your graveyard$/.exec(phrase))) {
     const here = parseTypePhrase(m[1]);
     const there = parseTypePhrase(m[2]);
@@ -19281,6 +19305,14 @@ function costEachAmount(phrase) {
     };
   }
   return null;
+}
+
+/** A kind of card in a graveyard as a filter: "historic" (an artifact, a
+ * legendary or a Saga), or what `parseTypePhrase` reads. `null` if unread. */
+function graveyardKindOf(phrase) {
+  if (phrase === "historic") return { anyOf: [{ type: "artifact" }, { supertype: "legendary" }, { subtype: "Saga" }] };
+  const filter = parseTypePhrase(phrase);
+  return filter === null || Object.keys(filter).length === 0 ? null : filter;
 }
 
 /** An amount of mana in a cost line, parted as a reduction takes it. */

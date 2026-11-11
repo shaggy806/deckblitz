@@ -908,6 +908,7 @@ import _poolTetsukoUmezawaPursuer from "../pool/tetsuko-umezawa-pursuer.js";
 import _poolTezzeretTheSchemer from "../pool/tezzeret-the-schemer.js";
 import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
+import _poolTheCapitolineTriad from "../pool/the-capitoline-triad.js";
 import _poolTheEleventhDoctor from "../pool/the-eleventh-doctor.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
 import _poolTheFaceOfBoe from "../pool/the-face-of-boe.js";
@@ -1973,6 +1974,7 @@ const shard: CardShard = {
     _poolTezzeretTheSchemer,
     _poolTezzeretsGambit,
     _poolThaliaGuardianOfThraben,
+    _poolTheCapitolineTriad,
     _poolTheEleventhDoctor,
     _poolTheEmperorOfPalamecia,
     _poolTheFaceOfBoe,

@@ -758,6 +758,7 @@ import _poolSpellBlast from "../pool/spell-blast.js";
 import _poolSpellbookSeeker from "../pool/spellbook-seeker.js";
 import _poolSpellbreakerBehemoth from "../pool/spellbreaker-behemoth.js";
 import _poolSphinxMindbreaker from "../pool/sphinx-mindbreaker.js";
+import _poolSpiderMan2099 from "../pool/spider-man-2099.js";
 import _poolSpiderSense from "../pool/spider-sense.js";
 import _poolSpinalVillain from "../pool/spinal-villain.js";
 import _poolSpinedSliver from "../pool/spined-sliver.js";
@@ -1742,6 +1743,7 @@ const shard: CardShard = {
     _poolSpellbookSeeker,
     _poolSpellbreakerBehemoth,
     _poolSphinxMindbreaker,
+    _poolSpiderMan2099,
     _poolSpiderSense,
     _poolSpinalVillain,
     _poolSpinedSliver,

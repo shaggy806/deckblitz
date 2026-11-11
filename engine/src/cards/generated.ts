@@ -25331,6 +25331,7 @@ import _poolSpiderGirlLegacyHero from "./pool/spider-girl-legacy-hero.js";
 import _poolSpiderGwenFreeSpirit from "./pool/spider-gwen-free-spirit.js";
 import _poolSpiderHamPeterPorker from "./pool/spider-ham-peter-porker.js";
 import _poolSpiderIslanders from "./pool/spider-islanders.js";
+import _poolSpiderMan2099 from "./pool/spider-man-2099.js";
 import _poolSpiderManBrooklynVisionary from "./pool/spider-man-brooklyn-visionary.js";
 import _poolSpiderManHometownHero from "./pool/spider-man-hometown-hero.js";
 import _poolSpiderManIndia from "./pool/spider-man-india.js";
@@ -27425,6 +27426,7 @@ import _poolTheBrokenSky from "./pool/the-broken-sky.js";
 import _poolTheBrothersWar from "./pool/the-brothers-war.js";
 import _poolTheBrute from "./pool/the-brute.js";
 import _poolTheCabbageMerchant from "./pool/the-cabbage-merchant.js";
+import _poolTheCapitolineTriad from "./pool/the-capitoline-triad.js";
 import _poolTheCauldronOfEternity from "./pool/the-cauldron-of-eternity.js";
 import _poolTheCaveOfTwoLovers from "./pool/the-cave-of-two-lovers.js";
 import _poolTheCavesOfAndrozani from "./pool/the-caves-of-androzani.js";
@@ -57789,6 +57791,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpiderGwenFreeSpirit,
   _poolSpiderHamPeterPorker,
   _poolSpiderIslanders,
+  _poolSpiderMan2099,
   _poolSpiderManBrooklynVisionary,
   _poolSpiderManHometownHero,
   _poolSpiderManIndia,
@@ -59883,6 +59886,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheBrothersWar,
   _poolTheBrute,
   _poolTheCabbageMerchant,
+  _poolTheCapitolineTriad,
   _poolTheCauldronOfEternity,
   _poolTheCaveOfTwoLovers,
   _poolTheCavesOfAndrozani,
@@ -90260,6 +90264,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spider-gwen-free-spirit": _poolSpiderGwenFreeSpirit,
   "pool/spider-ham-peter-porker": _poolSpiderHamPeterPorker,
   "pool/spider-islanders": _poolSpiderIslanders,
+  "pool/spider-man-2099": _poolSpiderMan2099,
   "pool/spider-man-brooklyn-visionary": _poolSpiderManBrooklynVisionary,
   "pool/spider-man-hometown-hero": _poolSpiderManHometownHero,
   "pool/spider-man-india": _poolSpiderManIndia,
@@ -92354,6 +92359,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-brothers-war": _poolTheBrothersWar,
   "pool/the-brute": _poolTheBrute,
   "pool/the-cabbage-merchant": _poolTheCabbageMerchant,
+  "pool/the-capitoline-triad": _poolTheCapitolineTriad,
   "pool/the-cauldron-of-eternity": _poolTheCauldronOfEternity,
   "pool/the-cave-of-two-lovers": _poolTheCaveOfTwoLovers,
   "pool/the-caves-of-androzani": _poolTheCavesOfAndrozani,

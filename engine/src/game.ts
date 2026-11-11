@@ -19,6 +19,7 @@ import {
   chosenCounterCost,
   costAnnouncesX,
   discardCostFilterAtX,
+  evidenceCostOf,
   isEquipAbility,
   isManaAbility,
   isDelayedManaAbility,
@@ -24423,8 +24424,11 @@ export class Game {
         return `${def.name}'s ability can't collect evidence as part of that cost`;
       }
       // Rule 701.59b: not enough in the graveyard, no collecting.
-      if (!this.canCollectEvidence(player, ability.cost.collectEvidence)) {
-        return `${player}'s graveyard can't collect evidence ${ability.cost.collectEvidence} for ${def.name}'s cost`;
+      const evidence = evidenceCostOf(ability.cost.collectEvidence, sourceId);
+      if (!this.canCollectEvidence(player, evidence.amount, evidence.among)) {
+        return evidence.among !== undefined
+          ? `${player}'s graveyard lacks cards with total mana value ${evidence.amount} for ${def.name}'s cost`
+          : `${player}'s graveyard can't collect evidence ${evidence.amount} for ${def.name}'s cost`;
       }
     }
     if (ability.cost.craft !== undefined) {
@@ -24909,7 +24913,12 @@ export class Game {
       const evidence = ability.cost.collectEvidence;
       if (evidence !== undefined) {
         this.withDecisionSource(sourceId, () =>
-          this.beginCollectEvidence(player, sourceId, evidence, { x: chosenX, priorityTo: player, thenManaAbility: manaAfter }),
+          this.beginCollectEvidence(player, sourceId, evidenceCostOf(evidence, sourceId).amount, {
+            x: chosenX,
+            priorityTo: player,
+            thenManaAbility: manaAfter,
+            among: evidenceCostOf(evidence, sourceId).among,
+          }),
         );
       }
       // "Discard a card: Add {B}" (Skirge Familiar): the same wait where
@@ -25156,10 +25165,12 @@ export class Game {
     if (craft !== undefined) this.withDecisionSource(sourceId, () => this.beginCraft(player, sourceId, craft));
     // "Collect evidence N" (rule 701.59a): which cards, chosen now too.
     if (ability.cost.collectEvidence !== undefined) {
+      const evidence = evidenceCostOf(ability.cost.collectEvidence, sourceId);
       this.withDecisionSource(sourceId, () =>
-        this.beginCollectEvidence(player, sourceId, ability.cost.collectEvidence as number, {
+        this.beginCollectEvidence(player, sourceId, evidence.amount, {
           x: chosenX,
           priorityTo: player,
+          among: evidence.among,
         }),
       );
     }
@@ -48313,8 +48324,11 @@ controlledBy,
 
   /** Whether `player` could collect evidence `amount` (rule 701.59b): their
    * graveyard holds cards with that much total mana value. */
-  private canCollectEvidence(player: PlayerId, amount: number): boolean {
-    const graveyard = this.state.zones.perPlayer[player]?.graveyard ?? [];
+  private canCollectEvidence(player: PlayerId, amount: number, among?: { filter: CardFilter; except: ObjectId }): boolean {
+    const graveyard =
+      among !== undefined
+        ? this.graveyardCostCandidates(player, among.filter, among.except)
+        : (this.state.zones.perPlayer[player]?.graveyard ?? []);
     let total = 0;
     for (const id of graveyard) total += manaValueOfObject(this.registry, this.state.objects[id]);
     return total >= amount;
@@ -48330,7 +48344,9 @@ controlledBy,
    * decision with a `"total"` rule; nothing happens if they don't hold that
    * much (701.59b — whatever offers it checks first, `canCollectEvidence`).
    * Once some are exiled, `evidence-collected`, then `then` with the exiled
-   * cards as its targets.
+   * cards as its targets. With `among`, the same payment over the matching
+   * cards only ("exile any number of historic cards … with total mana value
+   * 30 or greater"), which collects no evidence.
    */
   private beginCollectEvidence(
     player: PlayerId,
@@ -48346,13 +48362,19 @@ controlledBy,
       readonly priorityTo?: PlayerId;
       /** A mana ability's cost (Cryptex): its mana, once this is answered. */
       readonly thenManaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"];
+      /** Only these cards, and no evidence collected. */
+      readonly among?: { readonly filter: CardFilter; readonly except: ObjectId } | undefined;
     } = {},
   ): void {
-    if (this.state.players[player]?.hasLost !== false || !this.canCollectEvidence(player, amount)) return;
-    const eligible = [...this.state.zones.perPlayer[player].graveyard];
+    const among = opts.among;
+    if (this.state.players[player]?.hasLost !== false || !this.canCollectEvidence(player, amount, among)) return;
+    // The whole graveyard is on show (it's public); only the matching cards
+    // may be picked.
+    const ids = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== among?.except);
+    const eligible = among !== undefined ? this.graveyardCostCandidates(player, among.filter, among.except) : ids;
     // Collect evidence 0 from an empty graveyard: nothing to choose, and
     // evidence is collected all the same.
-    if (opts.required === true && eligible.length === 0) {
+    if (opts.required === true && among === undefined && eligible.length === 0) {
       this.emit({ type: "evidence-collected", player, objects: [], amount });
       return;
     }
@@ -48362,7 +48384,7 @@ controlledBy,
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
-      ids: eligible,
+      ids,
       eligible,
       min: opts.optional === true || amount <= 0 ? 0 : 1,
       max: eligible.length,
@@ -48373,9 +48395,12 @@ controlledBy,
         tags,
         atLeast: amount,
         ...(opts.optional === true ? { orNone: true } : {}),
-        text: `with total mana value ${amount} or greater (collect evidence ${amount})`,
+        text:
+          among !== undefined
+            ? `with total mana value ${amount} or greater`
+            : `with total mana value ${amount} or greater (collect evidence ${amount})`,
       },
-      collectEvidence: amount,
+      ...(among === undefined ? { collectEvidence: amount } : {}),
       ...(opts.required === true ? { collectEvidenceRequired: true as const } : {}),
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),

@@ -2188,7 +2188,10 @@ collect evidence **X**. When you do, … X damage" (Incinerator of the Guilty) i
 `collect-evidence { amount: "x", required: true }` and the `reflexive-trigger`, which reads the
 same X. `required` is a collecting whose may was already answered: it can't be declined, and
 evidence 0 with nothing exiled still counts (that card's ruling). As an activated ability's cost it's
-`cost.collectEvidence: N` — Forensic Researcher; as a spell's "you may collect evidence N"
+`cost.collectEvidence: N` — Forensic Researcher (the record `{ totalManaValue: N, filter }` is the
+same payment over the matching cards only, and no collecting of evidence: The Capitoline Triad's
+"Exile any number of historic cards from your graveyard with total mana value 30 or greater");
+as a spell's "you may collect evidence N"
 additional cost, `kicker: { cost: "", keyword: "collect-evidence", collectEvidence: N }`, with
 "if evidence was collected" the spell being kicked — Crimestopper Sprite),
 `explore { target, times? }` ("it explores", rule 701.44 — Cenote Scout: `target: "source"`;

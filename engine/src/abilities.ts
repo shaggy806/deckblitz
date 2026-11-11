@@ -665,8 +665,15 @@ export interface AbilityCost {
    * your graveyard holds that much (701.59b). A mana ability's (Cryptex)
    * waits for the answer and adds its mana then (rule 605.3b). Not
    * beside another cost that asks a question.
+   *
+   * The record is the same payment over some of the cards only, and no
+   * collecting of evidence (nothing that watches for one sees it): "Exile any
+   * number of historic cards from your graveyard with total mana value 30 or
+   * greater" (The Capitoline Triad) is `{ totalManaValue: 30, filter }`.
+   * Activatable only while the matching cards there hold that much (rule
+   * 602.2b, paid as 601.2h); the source never counts.
    */
-  readonly collectEvidence?: number;
+  readonly collectEvidence?: number | { readonly totalManaValue: number; readonly filter: CardFilter };
   /**
    * Craft's materials (rule 702.167a — "Craft with [materials] [cost]"): the
    * other half of the cost beside `exileSelf`, exiled from among permanents
@@ -2729,6 +2736,18 @@ export interface StackAbility {
  * (Bureau Headmaster) names; "Equipped …" isn't one. */
 export function isEquipAbility(ability: ActivatedAbility): boolean {
   return /^Equip\b/.test(ability.text);
+}
+
+/** An `AbilityCost.collectEvidence` as the total it asks for and, for the
+ * record that isn't collecting evidence, the cards it's paid from: those
+ * matching its filter, never `source` (the ability's own). */
+export function evidenceCostOf(
+  cost: NonNullable<AbilityCost["collectEvidence"]>,
+  source: ObjectId,
+): { readonly amount: number; readonly among?: { readonly filter: CardFilter; readonly except: ObjectId } } {
+  return typeof cost === "number"
+    ? { amount: cost }
+    : { amount: cost.totalManaValue, among: { filter: cost.filter, except: source } };
 }
 
 /** A mana ability adds mana, has no targets, and never uses the stack. A cost
