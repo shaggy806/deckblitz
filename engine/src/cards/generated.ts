@@ -214,6 +214,7 @@ import _poolAdelizTheCinderWind from "./pool/adeliz-the-cinder-wind.js";
 import _poolAdeptWatershaper from "./pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "./pool/adewale-breaker-of-chains.js";
 import _poolAdherentOfHope from "./pool/adherent-of-hope.js";
+import _poolAdmiralBeckettBrass from "./pool/admiral-beckett-brass.js";
 import _poolAdmiralBrassUnsinkable from "./pool/admiral-brass-unsinkable.js";
 import _poolAdmiralsOrder from "./pool/admirals-order.js";
 import _poolAdmonitionAngel from "./pool/admonition-angel.js";
@@ -5308,6 +5309,7 @@ import _poolCorruptOfficial from "./pool/corrupt-official.js";
 import _poolCorrupt from "./pool/corrupt.js";
 import _poolCorruptedConscience from "./pool/corrupted-conscience.js";
 import _poolCorruptedConviction from "./pool/corrupted-conviction.js";
+import _poolCorruptedCrossroads from "./pool/corrupted-crossroads.js";
 import _poolCorruptedGrafstone from "./pool/corrupted-grafstone.js";
 import _poolCorruptedHarvester from "./pool/corrupted-harvester.js";
 import _poolCorruptedRoots from "./pool/corrupted-roots.js";
@@ -28266,6 +28268,7 @@ import _poolTophTheFirstMetalbender from "./pool/toph-the-first-metalbender.js";
 import _poolTopiaryLecturer from "./pool/topiary-lecturer.js";
 import _poolTopiaryPanther from "./pool/topiary-panther.js";
 import _poolTopiaryStomper from "./pool/topiary-stomper.js";
+import _poolTopographyTracker from "./pool/topography-tracker.js";
 import _poolToppleTheStatue from "./pool/topple-the-statue.js";
 import _poolTopple from "./pool/topple.js";
 import _poolTopplegeist from "./pool/topplegeist.js";
@@ -32629,6 +32632,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAdeptWatershaper,
   _poolAdewaleBreakerOfChains,
   _poolAdherentOfHope,
+  _poolAdmiralBeckettBrass,
   _poolAdmiralBrassUnsinkable,
   _poolAdmiralsOrder,
   _poolAdmonitionAngel,
@@ -37723,6 +37727,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCorrupt,
   _poolCorruptedConscience,
   _poolCorruptedConviction,
+  _poolCorruptedCrossroads,
   _poolCorruptedGrafstone,
   _poolCorruptedHarvester,
   _poolCorruptedRoots,
@@ -60681,6 +60686,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTopiaryLecturer,
   _poolTopiaryPanther,
   _poolTopiaryStomper,
+  _poolTopographyTracker,
   _poolToppleTheStatue,
   _poolTopple,
   _poolTopplegeist,
@@ -65057,6 +65063,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/adept-watershaper": _poolAdeptWatershaper,
   "pool/adewale-breaker-of-chains": _poolAdewaleBreakerOfChains,
   "pool/adherent-of-hope": _poolAdherentOfHope,
+  "pool/admiral-beckett-brass": _poolAdmiralBeckettBrass,
   "pool/admiral-brass-unsinkable": _poolAdmiralBrassUnsinkable,
   "pool/admirals-order": _poolAdmiralsOrder,
   "pool/admonition-angel": _poolAdmonitionAngel,
@@ -70151,6 +70158,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/corrupt": _poolCorrupt,
   "pool/corrupted-conscience": _poolCorruptedConscience,
   "pool/corrupted-conviction": _poolCorruptedConviction,
+  "pool/corrupted-crossroads": _poolCorruptedCrossroads,
   "pool/corrupted-grafstone": _poolCorruptedGrafstone,
   "pool/corrupted-harvester": _poolCorruptedHarvester,
   "pool/corrupted-roots": _poolCorruptedRoots,
@@ -93109,6 +93117,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/topiary-lecturer": _poolTopiaryLecturer,
   "pool/topiary-panther": _poolTopiaryPanther,
   "pool/topiary-stomper": _poolTopiaryStomper,
+  "pool/topography-tracker": _poolTopographyTracker,
   "pool/topple-the-statue": _poolToppleTheStatue,
   "pool/topple": _poolTopple,
   "pool/topplegeist": _poolTopplegeist,

@@ -164,6 +164,7 @@ import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
 import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
 import _poolCorrosiveMentor from "../pool/corrosive-mentor.js";
+import _poolCorruptedCrossroads from "../pool/corrupted-crossroads.js";
 import _poolCouncilsJudgment from "../pool/councils-judgment.js";
 import _poolCountervailingWinds from "../pool/countervailing-winds.js";
 import _poolCourtHussar from "../pool/court-hussar.js";
@@ -886,6 +887,7 @@ import _poolTitaniumGolem from "../pool/titanium-golem.js";
 import _poolTolarianSerpent from "../pool/tolarian-serpent.js";
 import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
 import _poolToothCollector from "../pool/tooth-collector.js";
+import _poolTopographyTracker from "../pool/topography-tracker.js";
 import _poolTorbranThaneOfRedFell from "../pool/torbran-thane-of-red-fell.js";
 import _poolTorchSong from "../pool/torch-song.js";
 import _poolTormentOfVenom from "../pool/torment-of-venom.js";
@@ -1171,6 +1173,7 @@ const shard: CardShard = {
     _poolCorpseberryCultivator,
     _poolCorpsesOfTheLost,
     _poolCorrosiveMentor,
+    _poolCorruptedCrossroads,
     _poolCouncilsJudgment,
     _poolCountervailingWinds,
     _poolCourtHussar,
@@ -1893,6 +1896,7 @@ const shard: CardShard = {
     _poolTolarianSerpent,
     _poolTomakulScrapsmith,
     _poolToothCollector,
+    _poolTopographyTracker,
     _poolTorbranThaneOfRedFell,
     _poolTorchSong,
     _poolTormentOfVenom,
