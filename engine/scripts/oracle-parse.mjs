@@ -12455,6 +12455,26 @@ function exiledCardPickAt(sentences, i, ctx) {
   }
   const pay = /^you may pay ((?:\{[^}]+\})+) and (\d+) life\.$/i.exec(first);
   const done = /^if you do, (.+)$/i.exec(next);
+  // "You may pay {2} and sacrifice a token. If you do, create a 4/4 green
+  // Rhino Warrior creature token." (Killer Service): the sacrifice is part of
+  // the one cost (`may.costSacrifice`, rule 118.3).
+  const paySacrifice = /^you may pay ((?:\{[^}]+\})+) and sacrifice (an?|another) (.+?)\.$/i.exec(first);
+  if (paySacrifice !== null && done !== null) {
+    const filter = /^token$/i.test(paySacrifice[3]) ? { token: true } : parseTypePhrase(paySacrifice[3]);
+    const effect = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    if (filter === null || Object.keys(filter).length === 0 || effect === null || containsUndefined(effect)) return null;
+    const another = paySacrifice[2].toLowerCase() === "another";
+    return {
+      effect: {
+        kind: "may",
+        prompt: `Pay ${paySacrifice[1]} and sacrifice ${paySacrifice[2].toLowerCase()} ${paySacrifice[3]}?`,
+        cost: paySacrifice[1],
+        costSacrifice: { filter, ...(another ? { exceptSource: true } : {}) },
+        effect,
+      },
+      used: 2,
+    };
+  }
   // "You may pay 2 life. If you do, draw a card." (Sanguine Spy).
   const payLife = /^you may pay (\d+) life\.$/i.exec(first);
   if (payLife !== null && done !== null) {

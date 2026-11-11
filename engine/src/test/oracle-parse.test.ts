@@ -18289,6 +18289,28 @@ describe("living at 0 or less life", () => {
   });
 });
 
+describe("a may whose cost is mana and a sacrifice", () => {
+  it("reads Killer Service's end-step ability", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text:
+        "At the beginning of your end step, you may pay {2} and sacrifice a token. If you do, create a 4/4 green Rhino Warrior creature token.",
+    } as never, { tokenFor: () => "Rhino Warrior Token" } as never) as unknown as { triggered: Record<string, unknown>[]; todo: string[] };
+    expect(face.todo).toEqual([]);
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "step-begins", step: "end", who: "you" },
+      effect: {
+        kind: "may",
+        prompt: "Pay {2} and sacrifice a token?",
+        cost: "{2}",
+        costSacrifice: { filter: { token: true } },
+        effect: { kind: "create-token", token: "Rhino Warrior Token", count: 1 },
+      },
+    });
+  });
+});
+
 describe("exiling a face-down permanent to play its card", () => {
   it("reads Primordial Mist's two abilities", () => {
     const face = parseFace({

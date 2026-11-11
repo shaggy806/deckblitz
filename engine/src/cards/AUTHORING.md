@@ -2473,7 +2473,7 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   and **not with `announced`**: a triggered ability that picks its mode at
   random as it goes on the stack, before its targets (Summon: Magus Sisters'
   chapters), isn't built. Logged as a `chosen-at-random` event.
-- **`may { effect, prompt, cost?, costTimes?, costLife?, costEnergy?, costEnergyX?, then?, else?, oncePerTurn? }`** — "You may [effect]". One
+- **`may { effect, prompt, cost?, costTimes?, costLife?, costEnergy?, costEnergyX?, costSacrifice?, then?, else?, oncePerTurn? }`** — "You may [effect]". One
   optional mode; same targeting rule as `modal`. `costTimes: true` is "you may pay {1}{G} any number of
   times" (`maxX: 3` for "up to three times"): how many times is asked from 1, it's paid all at once, and
   that number is `"x"` to `effect`, normally a `reflexive-trigger` ("when you pay this cost one or more
@@ -2487,7 +2487,13 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   the `may` applies — Zoraline, Cosmos Caller's "you may pay {W}{B} and 2
   life", Tymna the Weaver's "you may pay X life", "you may pay {E}{E}": the
   choice is offered only when every part can be paid (life: at least that
-  much, rule 119.4), and all of it is paid together as it's answered. Say
+  much, rule 119.4), and all of it is paid together as it's answered.
+  `costSacrifice: { filter, count?, exceptSource? }` is a sacrifice in that
+  cost — "you may pay {2} **and sacrifice a token**. If you do, …" (Killer
+  Service): asked only when that many would be left to sacrifice once the
+  mana is paid (the mana is planned around them, and a Treasure spent on it
+  can't pay twice — rule 118.3); which is chosen as a `sacrifice` effect
+  asks, before `effect`. `may-cost-sacrifice.test.ts`. Say
   the whole cost in `prompt`, which is what the player sees. `then`
   applies only when `effect` was chosen ("If you do, …" — Ob Nixilis, the
   Fallen); `else` only when it was declined ("If you didn't, …", or an

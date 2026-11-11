@@ -25,6 +25,7 @@ import type {
   EnterTypes,
   LookAndChooseLeftoverIf,
   ManaSplitRiders,
+  ModesCostSacrifice,
   PileFateWord,
   ResolvedEnterAttacking,
   ResolvedSearchInstead,
@@ -4456,6 +4457,10 @@ export type AwaitingDecision =
        * and `may.costEnergy` — paid alongside `cost` as the choice is made. */
       readonly costLife?: number;
       readonly costEnergy?: number;
+      /** A sacrifice in a `may`'s cost — see `may.costSacrifice`: saying yes
+       * pays `cost` with these permanents reached for last, and only while
+       * that many are left to sacrifice (rule 118.3). */
+      readonly costSacrifice?: ModesCostSacrifice;
       /** The ability's source had become a new object by the time it
        * resolved (rule 400.7 — `ResolutionContext.sourceLost`), so "~" in
        * the modes finds nothing: a Bloodghast exiled and put back in the

@@ -317,6 +317,7 @@ import type {
   CopyForEach,
   WardCost,
   ModeOption,
+  ModesCostSacrifice,
   PileFate,
   PlayerScope,
   ResolutionContext,
@@ -8189,6 +8190,8 @@ export class Game {
       readonly energyX?: "one-or-more" | "any";
       /** `cost` paid X times over — see `may`'s `costTimes`. */
       readonly costTimes?: true;
+      /** A sacrifice in the cost — see `may`'s `costSacrifice`. */
+      readonly costSacrifice?: ModesCostSacrifice;
       /** A vote's question (rule 701.38): never answered along with
        * identical triggers', and with `secret`, see the `choose-modes`
        * decision's `secret`. */
@@ -8249,6 +8252,16 @@ export class Game {
       (ability.costWaterbend === true && cost !== undefined
         ? this.modesWaterbendPayment(controller, cost) === null
         : this.withLifeChoice(Number.MAX_SAFE_INTEGER, () => this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true, ability.costFor))) === null)
+    ) {
+      decline();
+      return;
+    }
+    // "You may pay {2} and sacrifice a token" (`may.costSacrifice`): one
+    // cost, all of it or none (rule 118.3) — not asked unless that many are
+    // left to sacrifice once the mana is paid.
+    if (
+      ability.costSacrifice !== undefined &&
+      this.modesCostSacrificePlan(controller, source, ability.costSacrifice, baseline, otherCostPurpose(cost ?? null, ability.costHasX === true, ability.costFor), true) === null
     ) {
       decline();
       return;
@@ -8331,6 +8344,7 @@ export class Game {
       ...(onlyUnchosen && ever ? { chosenEver: true as const } : {}),
       ...(costLife > 0 ? { costLife } : {}),
       ...(costEnergy > 0 ? { costEnergy } : {}),
+      ...(ability.costSacrifice !== undefined ? { costSacrifice: ability.costSacrifice } : {}),
       // Kept when it's the chooser too: the choice's `"that-player"` is the
       // chooser either way (Dwarven Driller targeting its controller's land).
       ...(ability.modesController !== undefined
@@ -8340,6 +8354,36 @@ export class Game {
       ...(trigger !== undefined ? { trigger } : {}),
       ...(ability.vote?.secret === true ? { secret: true } : {}),
     };
+  }
+
+  /**
+   * Whether a `may`'s cost with a sacrifice in it (`may.costSacrifice`) can
+   * be paid in full (rule 118.3), and how its mana would be: the plan for
+   * `mana`, made with every permanent that could be sacrificed reached for
+   * last, as `costSacrificeRemaining` plans an activated ability's — one the
+   * plan sacrifices for mana (a Treasure) can't pay twice. `"no-mana"` when
+   * there is no mana in the cost and enough to sacrifice; `null` when the
+   * mana can't be paid or fewer than `count` would be left.
+   */
+  private modesCostSacrificePlan(
+    player: PlayerId,
+    source: ObjectId,
+    sacrifice: ModesCostSacrifice,
+    mana: ManaCost | null,
+    purpose: ManaPurpose,
+    /** As the question is raised: payable if the player could name their
+     * life for it (rule 119.4), as the mana alone is asked. */
+    asking = false,
+  ): ManaPayment | "no-mana" | null {
+    const candidates = this.costSacrificeCandidates(player, [{ filter: sacrifice.filter }], sacrifice.except, source);
+    const left = (plan: ManaPayment | null): number =>
+      plan === null
+        ? permanentCount(this.state, [...candidates])
+        : [...this.costSacrificeLeftAfter(candidates, plan).values()].reduce((sum, n) => sum + n, 0);
+    if (mana === null) return left(null) >= sacrifice.count ? "no-mana" : null;
+    const pay = (): ManaPayment | null => this.payMana(player, mana, undefined, undefined, purpose, { last: candidates });
+    const plan = asking ? this.withLifeChoice(Number.MAX_SAFE_INTEGER, pay) : pay();
+    return plan !== null && left(plan) >= sacrifice.count ? plan : null;
   }
 
   /** Can `player` pay `life` life (rule 119.4: only with at least that much;
@@ -8503,10 +8547,22 @@ export class Game {
           this.tapForWaterbend(bent.taps, player, true);
         }
       } else {
-        const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true, awaiting.costFor));
-        if (payment === null) chosen = [];
+        // A sacrifice in the same cost: the mana is paid around what could
+        // be sacrificed, and none of it when too few would be left.
+        const purpose = otherCostPurpose(cost, awaiting.costHasX === true, awaiting.costFor);
+        const payment =
+          awaiting.costSacrifice !== undefined
+            ? this.modesCostSacrificePlan(player, source, awaiting.costSacrifice, concrete, purpose)
+            : this.payMana(player, concrete, undefined, undefined, purpose);
+        if (payment === null || payment === "no-mana") chosen = [];
         else this.executePayment(player, payment);
       }
+    } else if (
+      chosen.length > 0 &&
+      awaiting.costSacrifice !== undefined &&
+      this.modesCostSacrificePlan(player, source, awaiting.costSacrifice, null, null) === null
+    ) {
+      chosen = [];
     }
     // An amount of energy (`may.costEnergyX`): X counters removed (rule
     // 107.14), all of them or — the board having moved — none.
@@ -40184,6 +40240,7 @@ controlledBy,
             ...(otherCost?.maxX !== undefined ? { maxX: otherCost.maxX } : {}),
             ...(otherCost?.energyX !== undefined ? { energyX: otherCost.energyX } : {}),
             ...(otherCost?.costTimes === true ? { costTimes: true as const } : {}),
+            ...(otherCost?.sacrifice !== undefined ? { costSacrifice: otherCost.sacrifice } : {}),
             ...(about !== undefined ? { about } : {}),
             ...(aboutCard !== undefined ? { aboutCard } : {}),
             ...(xColor !== undefined ? { xColor } : {}),

@@ -1372,6 +1372,14 @@ export function wardCostText(cost: WardCost): string {
  */
 export type UnlessTimes = { readonly times?: EffectAmount };
 
+/** A `may`'s `costSacrifice` as the `choose-modes` decision keeps it: that
+ * many permanents matching `filter`, never `except` ("another"). */
+export interface ModesCostSacrifice {
+  readonly filter: CardFilter;
+  readonly count: number;
+  readonly except?: ObjectId;
+}
+
 export type UnlessOption =
   | ({
       readonly pay: string;
@@ -9045,6 +9053,25 @@ export type EffectSpec =
        * ("you get X {E}, then you may pay any amount of {E}").
        */
       readonly costEnergyX?: "one-or-more" | "any";
+      /**
+       * A sacrifice as part of that cost — "you may pay {2} **and sacrifice a
+       * token**. If you do, create a 4/4 Rhino Warrior" (Killer Service),
+       * "you may pay {G} and sacrifice a land" — with `cost`, or on its own.
+       * All of the cost is paid or none of it (rule 118.3), so the question
+       * is only asked when `count` (one when absent) permanents matching
+       * `filter` would still be the player's to sacrifice once the mana is
+       * paid: the mana is planned with those permanents reached for last,
+       * and one the plan has to sacrifice for mana (a Treasure) can't pay
+       * twice. Which to sacrifice is chosen once the mana is paid, as a
+       * `sacrifice` effect asks; `effect` then reads it as any sacrifice
+       * (`this-way`'s `"sacrificed"`, "the sacrificed creature's power").
+       * `exceptSource` is "sacrifice **another** creature".
+       */
+      readonly costSacrifice?: {
+        readonly filter: CardFilter;
+        readonly count?: number;
+        readonly exceptSource?: boolean;
+      };
       /** "If you do, [effect]" (rule 608.2h) — applied only when `effect` was
        * actually chosen (Ob Nixilis, the Fallen: "you may have target player
        * lose 3 life. If you do, put three +1/+1 counters on Ob Nixilis.").
@@ -12697,6 +12724,9 @@ export interface EffectApi {
       readonly energyX?: "one-or-more" | "any";
       /** `cost` paid a chosen number of times — `may.costTimes`. */
       readonly costTimes?: true;
+      /** A sacrifice in the cost — `may.costSacrifice`, its "another" as
+       * the object left out. */
+      readonly sacrifice?: ModesCostSacrifice;
     },
     /** The player the question is about — see `may`'s `aboutThatPlayer`. */
     about?: PlayerId,
@@ -20046,10 +20076,26 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (spec.else !== undefined) applyEffectSpec(spec.else, ctx);
         return;
       }
+      // A sacrifice in the cost is the first thing saying yes does, once the
+      // mana is paid (`costSacrifice`).
+      const costSacrifice = spec.costSacrifice;
+      const chosenSteps: readonly EffectSpec[] = [
+        ...(costSacrifice === undefined
+          ? []
+          : [
+              {
+                kind: "sacrifice" as const,
+                who: "you" as const,
+                filter: costSacrifice.filter,
+                count: costSacrifice.count ?? 1,
+                ...(costSacrifice.exceptSource === true ? { exceptSource: true } : {}),
+              },
+            ]),
+        spec.effect,
+        ...(spec.then === undefined ? [] : [spec.then]),
+      ];
       const chosenEffect: EffectSpec =
-        spec.then === undefined
-          ? spec.effect
-          : { kind: "sequence", effects: [spec.effect, spec.then] };
+        chosenSteps.length === 1 ? chosenSteps[0] : { kind: "sequence", effects: chosenSteps };
       ctx.chooseModes(
         0,
         1,
@@ -20058,9 +20104,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.cost,
         spec.oncePerTurn === true,
         spec.costLife === undefined && spec.costEnergy === undefined && spec.maxX === undefined &&
-          spec.costEnergyX === undefined && spec.costTimes === undefined
+          spec.costEnergyX === undefined && spec.costTimes === undefined && costSacrifice === undefined
           ? undefined
           : {
+              ...(costSacrifice !== undefined
+                ? {
+                    sacrifice: {
+                      filter: costSacrifice.filter,
+                      count: costSacrifice.count ?? 1,
+                      ...(costSacrifice.exceptSource === true ? { except: ctx.source } : {}),
+                    },
+                  }
+                : {}),
               ...(spec.costLife !== undefined ? { life: amountValue(spec.costLife, ctx) } : {}),
               ...(spec.costEnergy !== undefined ? { energy: amountValue(spec.costEnergy, ctx) } : {}),
               ...(spec.maxX !== undefined ? { maxX: amountValue(spec.maxX, ctx) } : {}),
