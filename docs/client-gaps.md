@@ -66,11 +66,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   screenshot, on the user's own monitor size; measure before changing.
 - **Two log lines read wrong** (found 2026-11-01). A card that begins on the battlefield from an opening
   hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints as raw JSON (`format.ts` ~591).
-- **Clear can't undo an attacker that already has a target** (found 2026-11-01). In `App.tsx`'s attack bar,
-  Clear only empties `attackPicks`, so once a creature is in `attackAssignments` it stays disabled and each
-  attacker has to be clicked off. All attack does that at two players, by giving a creature with one legal
-  defender its target outright; at four players (2026-11-02) sending one attacker at a seat does too. Older
-  than the night's work; seen playing Silent Arbiter's check.
 - **The discard prompt says "any number" under a cap** (found 2026-11-01). `client/src/App.tsx`
   (~6015) words a discard with `atMost` (Jaya Ballard's +1) as "any number of cards". The engine
   enforces the cap, so only the wording is wrong.
