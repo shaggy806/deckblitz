@@ -2203,7 +2203,8 @@
   "static:prohibit-by-player-turn-history",
   "static:prohibit-by-player-turn-history",
   "effect:look-and-choose-destination-choice",
-  "trigger:cast-spell-with-cascade"
+  "trigger:cast-spell-with-cascade",
+  "static:attack-direction-restriction"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

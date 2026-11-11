@@ -40,6 +40,7 @@ const RESTRICTION_TEXT: Record<CombatWord, string> = {
   'must-block': 'must block',
   'must-be-blocked': 'must be blocked by every creature able',
   'must-be-blocked-if-able': 'must be blocked if able',
+  'attack-only-nearest': 'may attack only the nearest opponent in the chosen direction',
   'doesnt-untap': "doesn't untap during its controller's untap step",
   'cant-be-blocked': "can't be blocked",
   'cant-turn-face-up': "can't be turned face up",

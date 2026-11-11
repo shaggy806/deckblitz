@@ -17,6 +17,7 @@
 
 import type { CardDefinition, CardRegistry, Keyword } from "../cards.js";
 import {
+  combatPlayerEffects,
   computedCacheMemo,
   computeCharacteristics,
   effectiveTypes,
@@ -39,6 +40,7 @@ import type { GameObject, GameState } from "../state.js";
 import { LANDWALK } from "../subtypes.js";
 import { permanentSource, protectionBlocks } from "../targeting.js";
 import { aimNames, playerTestHolds, recordsOfKind, recordsOn } from "./rules.js";
+import { attackCovers } from "./tax.js";
 import type { AttackAim, AttackerAim, CantAttack, CantBlock, MustAttack, RuleInForce } from "./rules.js";
 
 
@@ -307,7 +309,12 @@ function whyCannotAttackUncached(
   if (!canBeAttacked(state, registry, target)) return `${def.name} can't attack that permanent: it can't be attacked`;
   const defendingPlayer = defendingPlayerOf(state, target);
   const nearest = nearestOpponentRule(state, registry, player);
-  if (nearest !== null && !nearest.includes(defendingPlayer)) {
+  // The opponent and planeswalkers they control: never a battle, whoever
+  // protects it (rule 310.5 has battles attacked in their own right).
+  if (
+    nearest !== null &&
+    (!nearest.includes(defendingPlayer) || !attackCovers(state, registry, "you-and-planeswalkers", defendingPlayer, target))
+  ) {
     return nearest.length === 0
       ? `${def.name} can't attack: the directions chosen disagree, so there's no opponent to attack`
       : `${def.name} may attack only ${nearest[0]} (the nearest opponent in the chosen direction)`;
@@ -562,6 +569,17 @@ export function nearestOpponentRule(
       );
     if (governs) directions.add(source.chosenOnEnter);
   }
+  // The resolved ones (Teyo, Geometric Tactician): of several one permanent's
+  // ability made, the last chosen direction; each permanent's applies.
+  const chosen = new Map<string, "left" | "right">();
+  for (const effect of combatPlayerEffects(state)) {
+    for (const rule of effect.combat?.rules ?? []) {
+      if (typeof rule === "string" || rule.kind !== "attack-only-nearest") continue;
+      const key = rule.from === undefined ? `effect ${chosen.size}` : `${rule.from.object} ${rule.from.stint}`;
+      chosen.set(key, rule.direction);
+    }
+  }
+  for (const direction of chosen.values()) directions.add(direction);
   if (directions.size === 0) return null;
   const order = state.turnOrder;
   const from = order.indexOf(player);

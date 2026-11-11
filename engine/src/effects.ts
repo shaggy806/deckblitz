@@ -18423,6 +18423,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         player: (ref) => resolvePlayerRef(ref, ctx),
         object: (ref) => (illegalSlot(ref, ctx) ? undefined : objectRefAct(ref, ctx)),
         stint: (id) => ctx.zoneChangeCountOf(id) ?? 0,
+        source: ctx.source,
       };
       const rules = spec.restrictions.flatMap((rule) => bindCombatRule(rule, refs) ?? []);
       // Naming only what's gone, nothing is left to obey (rule 608.2b).

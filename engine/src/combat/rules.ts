@@ -65,6 +65,9 @@ export type CombatWord =
    * has to block it with at least one creature (two, with menace) when they
    * can. */
   | "must-be-blocked-if-able"
+  /** "Each player may attack only the nearest opponent in a direction":
+   * always the {@link AttackOnlyNearest} record, which says which. */
+  | "attack-only-nearest"
   /** The restrictions keyed to the other creatures declared with it (rules
    * 508.1c, 509.1b, `combat/company.ts`): those of its controller's creatures,
    * whatever they attack or block. */
@@ -211,9 +214,32 @@ export interface MustBeBlockedIfAble {
   readonly you?: PlayerId;
 }
 
+/**
+ * "Each player may attack only the nearest opponent in the last chosen
+ * direction and planeswalkers controlled by that opponent", as a resolved
+ * effect (Teyo, Geometric Tactician's "choose left or right. Until your next
+ * turn, …": a `restrict` over `filter: {}` per mode, lasting
+ * `"until-your-next-turn"`). A rule for every player (rule 508.1c), whatever
+ * the filter says: left is the next player in turn order, right the one
+ * before, skipping anyone who has left the game. Read by
+ * `nearestOpponentRule` beside the static form (Pramikon's
+ * `attackOnlyNearestOpponent`); all of them apply at once, so two that
+ * disagree leave nobody to attack while three or more players are left (the
+ * ruling). `from` is the permanent whose ability chose, set as the rule is
+ * bound: of several from one permanent only the **last** chosen direction
+ * counts.
+ */
+export interface AttackOnlyNearest {
+  readonly kind: "attack-only-nearest";
+  readonly direction: "left" | "right";
+  readonly from?: { readonly object: ObjectId; readonly stint: number };
+  readonly you?: PlayerId;
+}
+
 /** A rule with parameters. `you`: whose side it's read from, set as it's bound
  * by an effect; a static's is its controller's, as it's read. */
 export type CombatRecord =
+  | AttackOnlyNearest
   | CantAttack
   | MustAttack
   | CantBlock
@@ -254,6 +280,8 @@ export interface CombatRuleRefs {
   object(ref: ObjectRef): TargetRef | undefined;
   /** How many zone changes the object has made (rule 400.7). */
   stint(object: ObjectId): number;
+  /** The object whose spell or ability is making the rule. */
+  readonly source?: ObjectId;
 }
 
 function boundObject(target: TargetRef | undefined, refs: CombatRuleRefs): { readonly object: ObjectId; readonly stint: number } | undefined {
@@ -306,6 +334,9 @@ export function bindCombatRule(rule: CombatRule, refs: CombatRuleRefs): CombatRu
     if (rule.attacker === undefined) return { ...rule, you: refs.you };
     const attacker = bindAttacker(rule.attacker, refs);
     return attacker === undefined ? undefined : { ...rule, attacker, you: refs.you };
+  }
+  if (rule.kind === "attack-only-nearest" && refs.source !== undefined) {
+    return { ...rule, from: { object: refs.source, stint: refs.stint(refs.source) }, you: refs.you };
   }
   return { ...rule, you: refs.you };
 }
