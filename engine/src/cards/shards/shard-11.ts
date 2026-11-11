@@ -465,6 +465,7 @@ import _poolKarolinaDeanRunaway from "../pool/karolina-dean-runaway.js";
 import _poolKarplusanStrider from "../pool/karplusan-strider.js";
 import _poolKashiTribeElite from "../pool/kashi-tribe-elite.js";
 import _poolKaslemsStonetree from "../pool/kaslems-stonetree.js";
+import _poolKayaTheInexorable from "../pool/kaya-the-inexorable.js";
 import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
 import _poolKeeperOfTheLight from "../pool/keeper-of-the-light.js";
 import _poolKeldonFlamesage from "../pool/keldon-flamesage.js";
@@ -1485,6 +1486,7 @@ const shard: CardShard = {
     _poolKarplusanStrider,
     _poolKashiTribeElite,
     _poolKaslemsStonetree,
+    _poolKayaTheInexorable,
     _poolKedissEmberclawFamiliar,
     _poolKeeperOfTheLight,
     _poolKeldonFlamesage,

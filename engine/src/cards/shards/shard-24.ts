@@ -129,6 +129,7 @@ import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
 import _poolCabalPatriarch from "../pool/cabal-patriarch.js";
 import _poolCallToTheKindred from "../pool/call-to-the-kindred.js";
+import _poolCampfire from "../pool/campfire.js";
 import _poolCampusGuide from "../pool/campus-guide.js";
 import _poolCaptainSisay from "../pool/captain-sisay.js";
 import _poolCaptainStormCosmiumRaider from "../pool/captain-storm-cosmium-raider.js";
@@ -1143,6 +1144,7 @@ const shard: CardShard = {
     _poolButcherOfMalakir,
     _poolCabalPatriarch,
     _poolCallToTheKindred,
+    _poolCampfire,
     _poolCampusGuide,
     _poolCaptainSisay,
     _poolCaptainStormCosmiumRaider,

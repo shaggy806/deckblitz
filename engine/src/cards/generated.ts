@@ -3794,6 +3794,7 @@ import _poolCamaraderie from "./pool/camaraderie.js";
 import _poolCamel from "./pool/camel.js";
 import _poolCameraLauncher from "./pool/camera-launcher.js";
 import _poolCampaignOfVengeance from "./pool/campaign-of-vengeance.js";
+import _poolCampfire from "./pool/campfire.js";
 import _poolCampsiteCuisine from "./pool/campsite-cuisine.js";
 import _poolCampusComposer from "./pool/campus-composer.js";
 import _poolCampusCrier from "./pool/campus-crier.js";
@@ -14405,6 +14406,7 @@ import _poolKayaGeistHunter from "./pool/kaya-geist-hunter.js";
 import _poolKayaGhostAssassin from "./pool/kaya-ghost-assassin.js";
 import _poolKayaIntangibleSlayer from "./pool/kaya-intangible-slayer.js";
 import _poolKayaOrzhovUsurper from "./pool/kaya-orzhov-usurper.js";
+import _poolKayaTheInexorable from "./pool/kaya-the-inexorable.js";
 import _poolKayasGhostform from "./pool/kayas-ghostform.js";
 import _poolKayasGuile from "./pool/kayas-guile.js";
 import _poolKayasOnslaught from "./pool/kayas-onslaught.js";
@@ -23805,6 +23807,7 @@ import _poolShellSkulkin from "./pool/shell-skulkin.js";
 import _poolShelldockIsle from "./pool/shelldock-isle.js";
 import _poolShellshock from "./pool/shellshock.js";
 import _poolShelobChildOfUngoliant from "./pool/shelob-child-of-ungoliant.js";
+import _poolShelobDreadWeaver from "./pool/shelob-dread-weaver.js";
 import _poolShelobsAmbush from "./pool/shelobs-ambush.js";
 import _poolShelter from "./pool/shelter.js";
 import _poolShelteredAerie from "./pool/sheltered-aerie.js";
@@ -36193,6 +36196,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCamel,
   _poolCameraLauncher,
   _poolCampaignOfVengeance,
+  _poolCampfire,
   _poolCampsiteCuisine,
   _poolCampusComposer,
   _poolCampusCrier,
@@ -46804,6 +46808,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKayaGhostAssassin,
   _poolKayaIntangibleSlayer,
   _poolKayaOrzhovUsurper,
+  _poolKayaTheInexorable,
   _poolKayasGhostform,
   _poolKayasGuile,
   _poolKayasOnslaught,
@@ -56204,6 +56209,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShelldockIsle,
   _poolShellshock,
   _poolShelobChildOfUngoliant,
+  _poolShelobDreadWeaver,
   _poolShelobsAmbush,
   _poolShelter,
   _poolShelteredAerie,
@@ -68605,6 +68611,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/camel": _poolCamel,
   "pool/camera-launcher": _poolCameraLauncher,
   "pool/campaign-of-vengeance": _poolCampaignOfVengeance,
+  "pool/campfire": _poolCampfire,
   "pool/campsite-cuisine": _poolCampsiteCuisine,
   "pool/campus-composer": _poolCampusComposer,
   "pool/campus-crier": _poolCampusCrier,
@@ -79216,6 +79223,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kaya-ghost-assassin": _poolKayaGhostAssassin,
   "pool/kaya-intangible-slayer": _poolKayaIntangibleSlayer,
   "pool/kaya-orzhov-usurper": _poolKayaOrzhovUsurper,
+  "pool/kaya-the-inexorable": _poolKayaTheInexorable,
   "pool/kayas-ghostform": _poolKayasGhostform,
   "pool/kayas-guile": _poolKayasGuile,
   "pool/kayas-onslaught": _poolKayasOnslaught,
@@ -88616,6 +88624,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shelldock-isle": _poolShelldockIsle,
   "pool/shellshock": _poolShellshock,
   "pool/shelob-child-of-ungoliant": _poolShelobChildOfUngoliant,
+  "pool/shelob-dread-weaver": _poolShelobDreadWeaver,
   "pool/shelobs-ambush": _poolShelobsAmbush,
   "pool/shelter": _poolShelter,
   "pool/sheltered-aerie": _poolShelteredAerie,
