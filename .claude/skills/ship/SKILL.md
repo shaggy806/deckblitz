@@ -16,11 +16,13 @@ output — never ship past one.
 cd "$(git rev-parse --show-toplevel)" && npm run -s verify
 ```
 
-`scripts/verify.mjs` runs, fastest-failing first: gen:cards, the build, the
-backlog re-marks, typecheck + lint, the engine suite then server + client,
-the test files you added type-checked, card:verify (offline), and side by
-side the fuzzer at 2 and 4 players, the fuzzer with every pool card the
-change adds forced in (`-- --with "Name"` adds more), and the bot gate. It
+`scripts/verify.mjs` runs, fastest-failing first: the build (gen:cards is
+its first step; the stand-ins check runs beside it), the engine's and the
+server's tests type-checked + lint, the engine suite then server + client,
+card:verify (offline), and in the background the backlog re-marks, the
+situation fuzzer and a few games with every pool card the change adds
+(`-- --with "Name"` adds more), and the bot gate; a full run also plays the
+plain fuzzer at 2 and 4 players once the engine suite ends. It
 prints one line per step and a log path for a failure. `-- --skip
 fuzz,gate` and the like for a docs-only or client-only change.
 
