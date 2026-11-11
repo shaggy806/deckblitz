@@ -10909,6 +10909,14 @@ describe("a static acting on a player", () => {
     expect(amulet.complete).toBe(true);
     expect(amulet.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", player: "you", playerOnly: true, byOpponentOnly: true });
     expect(amulet.triggered[0].effect).toEqual({ kind: "ward", cost: { mana: "{1}" } });
+    // Nothing to pay: "counter that spell or ability" (Shimmering Glasskite).
+    const glasskite = face(
+      "Creature",
+      "Whenever this creature becomes the target of a spell or ability for the first time each turn, counter that spell or ability.",
+    );
+    expect(glasskite.complete).toBe(true);
+    expect(glasskite.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", firstTimeEachTurn: true });
+    expect(glasskite.triggered[0].effect).toEqual({ kind: "ward", cost: null });
     const mariner = face(
       "Creature",
       "Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.",
@@ -14192,6 +14200,17 @@ describe("how one player's state compares with another's", () => {
         },
       },
       effect: { kind: "create-token", count: 2 },
+    });
+    // "Creatures you control have …" the same way (Kira, Great Glass-Spinner).
+    const kira = read(
+      "Legendary Creature — Spirit",
+      'Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time each turn, counter that spell or ability."',
+    );
+    expect(kira.complete).toBe(true);
+    expect(kira.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", controlledBy: "you" } });
+    expect(kira.static[0].grantsTriggered[0]).toMatchObject({
+      trigger: { on: "becomes-target", who: "self", firstTimeEachTurn: true },
+      effect: { kind: "ward", cost: null },
     });
   });
 

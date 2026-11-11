@@ -3236,6 +3236,9 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^counter that spell or ability unless its controller pays (\{\d+\})\.$/i.exec(s))) {
     return { kind: "ward", cost: { mana: m[1] } };
   }
+  // The same with nothing to pay: "counter that spell or ability" (Kira,
+  // Great Glass-Spinner; Shimmering Glasskite).
+  if (/^counter that spell or ability\.$/i.test(s)) return { kind: "ward", cost: null };
   // "Players can't search libraries this turn" (Shadow of Doubt).
   if (/^players can't search libraries this turn\.$/i.test(s)) {
     return { kind: "prohibit", prohibits: [{ act: "search", who: "each-player" }], duration: "end-of-turn" };
@@ -14101,12 +14104,21 @@ function parseFaceAsWritten(face, ctx = {}) {
     // A Background's "Commander creatures you own have 'Whenever this creature
     // attacks a player, if …'": the quoted trigger read as a line of its own,
     // left to a person when anything else comes with it.
-    const grantedTrigger = /^Commander creatures you own have "((?:When|Whenever|At) [^"]+\.)"$/.exec(printed(raw));
+    // "Creatures you control have 'Whenever this creature becomes the target
+    // of a spell or ability for the first time each turn, counter that spell
+    // or ability.'" (Kira, Great Glass-Spinner) likewise.
+    const grantedTrigger = /^(Commander creatures you own|Creatures you control) have "((?:When|Whenever|At) [^"]+\.)"$/.exec(printed(raw));
     if (grantedTrigger !== null) {
-      const read = parseFace({ ...face, type_line: "Creature", oracle_text: grantedTrigger[1] }, ctx);
+      const read = parseFace({ ...face, type_line: "Creature", oracle_text: grantedTrigger[2] }, ctx);
       if (read.complete && read.triggered.length === 1 && read.activated.length + read.static.length + read.keywords.length === 0) {
         out.static.push({
-          affects: { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
+          affects: {
+            scope: "filter",
+            filter:
+              grantedTrigger[1] === "Creatures you control"
+                ? { type: "creature", controlledBy: "you" }
+                : { type: "creature", isCommander: true, ownedBy: "you" },
+          },
           grantsTriggered: read.triggered,
           text: printed(raw),
         });

@@ -2225,7 +2225,8 @@
   "effect:copy-spells-cast-this-way",
   "cost:flashback-exile-x-cost",
   "cost:flashback-exile-x-cost",
-  "static:protection-spares-own-attachments"
+  "static:protection-spares-own-attachments",
+  "effect:counter-targeting-spell-or-ability"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

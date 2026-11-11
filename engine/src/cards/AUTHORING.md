@@ -4702,6 +4702,15 @@ and the client offers it from the exile viewer. `while-suspended.test.ts`.
 
 ---
 
+**"Counter that spell or ability"**, nothing to pay (rule 701.6a) — the same
+effect with `cost: null` on a `becomes-target` trigger written out: Shimmering
+Glasskite's "Whenever this creature becomes the target of a spell or ability
+for the first time each turn, counter that spell or ability" is
+`{ trigger: { on: "becomes-target", who: "self", firstTimeEachTurn: true },
+targets: [], effect: { kind: "ward", cost: null } }` (anyone's spell or
+ability, its controller's too), and Kira, Great Glass-Spinner grants that to
+"creatures you control" through `grantsTriggered`. Nobody is asked.
+
 **Ward** (rule 702.21) — `ward(cost)` from `helpers.ts` builds the whole
 triggered ability: a `becomes-target` trigger (`who: "self"`,
 `byOpponentOnly`) whose effect is `{ kind: "ward", cost }`. Put it in

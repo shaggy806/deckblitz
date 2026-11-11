@@ -9220,9 +9220,15 @@ export type EffectSpec =
        * whether to pay, as a `choose-modes` decision; declining, or being
        * unable to pay, counters it. A spell that can't be countered resolves
        * anyway. Does nothing once that spell or ability has left the stack.
+       *
+       * `cost: null` is the same counter with nothing to pay: a
+       * becomes-target trigger's plain "**counter that spell or ability**"
+       * (rule 701.6a — Kira, Great Glass-Spinner; Shimmering Glasskite), whose
+       * "for the first time each turn" is the trigger's `firstTimeEachTurn`.
+       * Nobody is asked anything.
        */
       readonly kind: "ward";
-      readonly cost: WardCost;
+      readonly cost: WardCost | null;
     }
   | {
       /**
@@ -11803,7 +11809,7 @@ export interface EffectApi {
     },
   ): void;
   /** See the `"ward"` {@link EffectSpec}. */
-  ward(cost: WardCost): void;
+  ward(cost: WardCost | null): void;
   /** See the `"player-effect"` {@link EffectSpec}. */
   /** `during`: the effect applies only during that player's next turn
    * (`GameState.laterPlayerEffects`); `effect.expires` is then ignored. */

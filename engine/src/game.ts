@@ -29748,7 +29748,7 @@ export class Game {
     const context = {
       ...base,
       ...(targetedBy !== undefined
-        ? { ward: (cost: WardCost) => this.beginWard(source, object.controller, targetedBy, cost) }
+        ? { ward: (cost: WardCost | null) => this.beginWard(source, object.controller, targetedBy, cost) }
         : {}),
     };
     const outerSourceTimestamp = this.resolvingSourceTimestamp;
@@ -52913,7 +52913,7 @@ controlledBy,
     warded: ObjectId,
     controller: PlayerId,
     targetedBy: TargetedBy,
-    cost: WardCost,
+    cost: WardCost | null,
   ): void {
     const spell = this.state.objects[targetedBy.object];
     // Already gone — resolved, countered, or left and come back as a new
@@ -52927,6 +52927,12 @@ controlledBy,
     }
     const payer = targetedBy.player;
     const spellRef: TargetRef = { kind: "object", object: targetedBy.object };
+    // No cost at all: "counter that spell or ability" (rule 701.6a — Kira,
+    // Great Glass-Spinner), nobody asked.
+    if (cost === null) {
+      applyEffectSpec({ kind: "counter", target: 0 }, this.makeResolutionContext(warded, controller, [spellRef]));
+      return;
+    }
     if (!this.canPayWardCost(payer, cost)) {
       this.emit({ type: "ward-unpaid", object: warded, player: payer, spell: targetedBy.object });
       // The ward ability's own effect (Guile reads whose it is).
