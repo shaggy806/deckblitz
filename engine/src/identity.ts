@@ -52,7 +52,9 @@ export function colorIdentityOf(def: CardDefinition, faces?: FaceLookup): Set<Co
 
 /** One face's colours and mana symbols, into `identity`. */
 function addIdentityOf(def: CardDefinition, identity: Set<Color>): void {
-  for (const c of def.colors) identity.add(c);
+  // "This ability doesn't affect its color identity" (Fallaji Wayfarer): the
+  // colours its characteristic-defining ability gives it don't count.
+  if (def.colorsOutsideIdentity !== true) for (const c of def.colors) identity.add(c);
   colorsInText(def.manaCost ?? "", identity);
   colorsInText(def.text, identity);
   for (const ability of def.activated) {

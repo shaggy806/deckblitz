@@ -15328,6 +15328,15 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
     if ((m = /^Mayhem((?: (?:\{[^}]+\})+)?)$/.exec(line))) { out.mayhem = m[1] ? { cost: m[1].trim() } : {}; continue; }
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }
+    // "~ is all colors" (Transguild Courier): a characteristic-defining
+    // ability (rule 604.3) the card's `colors` already hold. "This ability
+    // doesn't affect its color identity" (Fallaji Wayfarer) keeps them out of
+    // it — `colorsOutsideIdentity`.
+    if (line === "~ is all colors.") continue;
+    if (line === "~ is all colors. This ability doesn't affect its color identity.") {
+      out.colorsOutsideIdentity = true;
+      continue;
+    }
     // "This spell can't be copied." (See Double — `cantBeCopied`).
     if (line === "~ can't be copied.") { out.cantBeCopied = true; continue; }
     // The Mirage block's flash-and-sacrifice (`flashThenSacrifice`).
@@ -19594,7 +19603,10 @@ function parseStatic(line, text) {
     const filter =
       m[1] === undefined
         ? {}
-        : lowered !== null && !(typeof lowered.subtype === "string" && /^[a-z]/.test(lowered.subtype))
+        : m[1] === "Multicolored"
+          ? // "Multicolored spells you cast have convoke" (Fallaji Wayfarer).
+            { multicolored: true }
+          : lowered !== null && !(typeof lowered.subtype === "string" && /^[a-z]/.test(lowered.subtype))
           ? lowered
           : parseTypePhrase(m[1]);
     if (filter !== null && (m[1] === undefined || Object.keys(filter).length > 0)) {

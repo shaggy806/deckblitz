@@ -5212,6 +5212,12 @@ export interface CardDefinition {
    * replicate, a copy of its own) makes nothing; it's still a legal target
    * for one. An ability's is `ActivatedAbility.cantBeCopied`. */
   readonly cantBeCopied?: true;
+  /** "~ is all colors. This ability doesn't affect its color identity"
+   * (Fallaji Wayfarer): `colors` holds what its characteristic-defining
+   * ability says (rule 604.3, in every zone, like Transguild Courier's), and
+   * `colorIdentityOf` leaves them out — an exception the card itself makes to
+   * rule 903.4, so only its mana symbols count. */
+  readonly colorsOutsideIdentity?: true;
   /** Foretell (rule 702.143 — ROADMAP Phase 6b) — during your turn you may pay
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
@@ -5759,6 +5765,7 @@ const PRINTED_ABILITY: {
   castWhileSearchingLibrary: (def) => def.castWhileSearchingLibrary !== undefined,
   moreThanMeetsTheEye: (def) => def.moreThanMeetsTheEye !== undefined,
   cantBeCopied: (def) => def.cantBeCopied !== undefined,
+  colorsOutsideIdentity: (def) => def.colorsOutsideIdentity === true,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
   faces: false,
@@ -6020,6 +6027,8 @@ interface CardDraft {
   moreThanMeetsTheEye?: { readonly cost: string };
   /** See {@link CardDefinition.cantBeCopied}. */
   cantBeCopied?: true;
+  /** See {@link CardDefinition.colorsOutsideIdentity}. */
+  colorsOutsideIdentity?: true;
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: { readonly cost: string };
@@ -6385,5 +6394,6 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),
     ...(draft.moreThanMeetsTheEye !== undefined ? { moreThanMeetsTheEye: draft.moreThanMeetsTheEye } : {}),
     ...(draft.cantBeCopied !== undefined ? { cantBeCopied: draft.cantBeCopied } : {}),
+    ...(draft.colorsOutsideIdentity === true ? { colorsOutsideIdentity: true as const } : {}),
   };
 }

@@ -249,6 +249,26 @@ describe("players who can't search libraries, and a floor under a life total", (
       floor("As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead."),
     ).toMatchObject({ condition: { kind: "life-total", atLeast: 7 }, damageLifeFloor: 7 });
   });
+  it("reads all colours kept out of the colour identity, and multicolored spells' convoke (Fallaji Wayfarer)", () => {
+    const wayfarer = parseFace(
+      {
+        name: "Fallaji Wayfarer",
+        type_line: "Creature — Human Scout",
+        oracle_text:
+          "Fallaji Wayfarer is all colors. This ability doesn't affect its color identity. (It can be in any deck whose commander's color identity includes green.)\nMulticolored spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a multicolored spell pays for {1} or one mana of a color that creature is.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(wayfarer.colorsOutsideIdentity).toBe(true);
+    expect(wayfarer.static[0]).toMatchObject({ grantsToSpells: { filter: { multicolored: true }, convoke: true } });
+    expect(wayfarer.complete).toBe(true);
+    const courier = parseFace(
+      { name: "Transguild Courier", type_line: "Artifact Creature — Golem", oracle_text: "Transguild Courier is all colors." },
+      { tokenFor: () => null },
+    );
+    expect(courier.colorsOutsideIdentity).toBeUndefined();
+    expect(courier.complete).toBe(true);
+  });
   it("reads damage that causes no loss of life, under its condition (Archon of Coronation)", () => {
     expect(
       read(
