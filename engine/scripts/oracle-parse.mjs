@@ -2462,6 +2462,18 @@ export function parseTrigger(clause) {
       },
     ];
   }
+  // "Whenever a noncreature artifact is sacrificed or destroyed" (Jaws,
+  // Relentless Predator): anyone's, one trigger per event (rules 701.21a,
+  // 701.8) — a permanent is never both. "Is destroyed" alone is the second.
+  if ((m = /^Whenever (?:a|an) (.+) is (sacrificed or )?destroyed$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    const narrowed = Object.keys(filter).length > 0 ? { filter } : {};
+    return [
+      ...(m[2] !== undefined ? [{ on: "sacrifice", who: "any", ...narrowed }] : []),
+      { on: "destroyed", who: "any", ...narrowed },
+    ];
+  }
   if (/^Whenever you discard one or more cards$/.test(c)) return [{ on: "discards", who: "you" }];
   // The turn's first discard, read off its history (Rielle, the Everwise).
   if (/^Whenever you discard one or more cards for the first time each turn$/.test(c)) {

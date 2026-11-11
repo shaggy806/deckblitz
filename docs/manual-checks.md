@@ -7898,3 +7898,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Circle of Protection: Red: a commander in the command zone as the source
 - **Do:** Activate Circle of Protection: Red.
 - **Expect:** A popup offers Krenko, Mob Boss, from the command zone. Choosing it and confirming resolves the ability with no error.
+
+## "Is destroyed" (2026-11-10)
+
+### Jaws, Relentless Predator: the legend rule isn't a destroy
+- **Do:** Cast the Mox Amber in your hand and keep either one. Then cast Shatter on Bob's Sol Ring.
+- **Expect:** Bob stays at 20 when the legend rule puts a Mox Amber into your graveyard (not sacrificed, not destroyed). Shatter destroys Sol Ring and Jaws deals 1 damage to Bob: 19.

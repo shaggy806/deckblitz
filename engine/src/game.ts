@@ -1829,6 +1829,7 @@ const LOOK_BACK_TRIGGERS: ReadonlySet<TriggerSpec["on"]> = new Set<TriggerSpec["
   "dies",
   "leaves-battlefield",
   "sacrifice",
+  "destroyed",
   // Leaving the battlefield is losing control of it: Khârn the Betrayer's
   // 2022-10-07 ruling and Gustha's Scepter's 2004-10-04 one.
   "loses-control",
@@ -32213,6 +32214,21 @@ export class Game {
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           !(spec.otherOnly === true && event.object === self.id) &&
           !(spec.selfOnly === true && event.object !== self.id) &&
+          this.triggerFilterOk(spec.filter, event.object, self, true)
+        );
+      case "destroyed":
+        // Rule 701.8b: only a "destroy" effect and the two damage checks
+        // destroy; the event's other reasons (the legend rule, 0 loyalty, an
+        // Aura with nothing to enchant) are put into a graveyard, not
+        // destroyed. Umbra armor's Aura is destroyed by the damage check.
+        return (
+          event.type === "permanent-destroyed" &&
+          (event.reason === "destroyed" ||
+            event.reason === "lethal damage" ||
+            event.reason === "deathtouch" ||
+            event.reason === "umbra armor") &&
+          this.matchesWho(spec.who, event.object, self, true) &&
+          !(spec.otherOnly === true && event.object === self.id) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
       case "tapped-for-mana":

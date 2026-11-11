@@ -322,6 +322,21 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Is destroyed" — built 2026-11-10
+
+The commander gap's `trigger:destroyed`. A **`destroyed`** trigger (`who`,
+`filter?`, `otherOnly?`): a permanent destroyed by a "destroy" effect or by the
+state-based actions for lethal damage and deathtouch damage (rules 701.8b,
+704.5g-h). The `permanent-destroyed` event is shared with the legend rule, 0
+loyalty and an Aura with nothing to enchant, which put a permanent into a
+graveyard without destroying it, so the trigger reads the event's reason. It
+looks back in time as a sacrifice trigger does (603.10a). Jaws, Relentless
+Predator (commander 461) is the only card in the Oracle snapshot with the
+wording: its "sacrificed or destroyed" is a `sacrifice` trigger and a `destroyed`
+one with the same effect. Karmic Justice's "a spell or ability an opponent
+controls destroys" (`trigger:destroyed-by-opponent-trigger`) is not this: it
+needs the destroying effect's controller on the event.
+
 ### A search, then something about the card it found — no engine code, 2026-11-10
 
 The key `effect:search-then-act-on-found`, asked for by name (the strong bot

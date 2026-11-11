@@ -13872,6 +13872,20 @@ describe("a triggered mana ability that does more than add mana", () => {
     expect(gauntlet.static[0].affects).toEqual({ scope: "all-creatures", chosenColorOnly: true });
   });
 
+  it("'is sacrificed or destroyed' is a sacrifice trigger and a destroyed one (Jaws)", () => {
+    const jaws = card(
+      "Jaws, Relentless Predator",
+      "Legendary Creature — Shark",
+      "Whenever a noncreature artifact is sacrificed or destroyed, Jaws deals 1 damage to each opponent.",
+    );
+    expect(jaws.complete).toBe(true);
+    expect(jaws.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "sacrifice", who: "any", filter: { type: "artifact", notTypes: ["creature"] } },
+      { on: "destroyed", who: "any", filter: { type: "artifact", notTypes: ["creature"] } },
+    ]);
+    expect(jaws.triggered[1].effect).toEqual({ kind: "damage", amount: 1, who: "each-opponent" });
+  });
+
   it("leaves a trigger from anything else on the stack (605.5a), and lasting haste", () => {
     const novelist = card(
       "Crime Novelist",

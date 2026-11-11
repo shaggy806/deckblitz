@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-488 already implemented / 12 missing
+489 already implemented / 11 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -464,7 +464,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  458  Yusri, Fortune's Flame                          6649 decks  {1}{U}{R}        Legendary Creature — Efreet
 [x]  459  Greasefang, Okiba Boss                          6625 decks  {1}{W}{B}        Legendary Creature — Rat Pilot
 [x]  460  Maha, Its Feathers Night                        6622 decks  {3}{B}{B}        Legendary Creature — Elemental Bird
-[ ]  461  Jaws, Relentless Predator                       6620 decks  {3}{R}{R}        Legendary Creature — Shark
+[x]  461  Jaws, Relentless Predator                       6620 decks  {3}{R}{R}        Legendary Creature — Shark
 [x]  462  Dr. Madison Li                                  6610 decks  {U}{R}{W}        Legendary Creature — Human Scientist
 [x]  463  Kydele, Chosen of Kruphix                       6594 decks  {2}{G}{U}        Legendary Creature — Human Wizard
 [x]  464  Aang, at the Crossroads                         6565 decks  {2}{G}{W}{U}     Legendary Creature — Human Avatar Ally // Legendary Creature — Avatar Ally

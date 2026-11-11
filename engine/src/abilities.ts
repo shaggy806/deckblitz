@@ -1583,6 +1583,25 @@ export type TriggerKind =
       readonly selfOnly?: boolean;
     }
   | {
+      /** A permanent was destroyed (rule 701.8): by an effect that says
+       * "destroy", or by the state-based actions for lethal damage and
+       * deathtouch damage (701.8b, 704.5g-h) — not a sacrifice, 0 toughness,
+       * the legend rule or any other way into a graveyard, and not a destroy
+       * that regeneration or indestructible stopped. Wherever it went: a
+       * destroyed commander moved to the command zone was still destroyed.
+       * `who` is the destroyed permanent's controller as it left
+       * (`"you-control"`, `"opponent"`, `"any"`, `"self"`); `filter` is
+       * matched against it as it last existed on the battlefield, and it is
+       * the trigger object. A leaves-the-battlefield ability, so it looks
+       * back in time (603.10a): its source destroyed alongside sees the
+       * others. Jaws, Relentless Predator's "whenever a noncreature artifact
+       * is sacrificed or destroyed" is this beside a `sacrifice` trigger. */
+      readonly on: "destroyed";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
+      readonly otherOnly?: boolean;
+    }
+  | {
       /** A permanent turned over to its other face (rule 712.10 — ROADMAP
        * Phase 10b). `who: "self"` = this permanent transformed; `"you-control"`
        * = one you control did. `intoFront` narrows to a transform *into* the

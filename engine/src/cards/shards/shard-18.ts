@@ -410,6 +410,7 @@ import _poolJackOLantern from "../pool/jack-o-lantern.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJaredCarthalionTrueHeir from "../pool/jared-carthalion-true-heir.js";
+import _poolJawsRelentlessPredator from "../pool/jaws-relentless-predator.js";
 import _poolJeanLucMonCapitaine from "../pool/jean-luc-mon-capitaine.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
 import _poolJeditOjanenOfEfrava from "../pool/jedit-ojanen-of-efrava.js";
@@ -1414,6 +1415,7 @@ const shard: CardShard = {
     _poolJagwaspSwarm,
     _poolJamieMccrimmon,
     _poolJaredCarthalionTrueHeir,
+    _poolJawsRelentlessPredator,
     _poolJeanLucMonCapitaine,
     _poolJeditOjanenMercenary,
     _poolJeditOjanenOfEfrava,

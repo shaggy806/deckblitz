@@ -16,15 +16,16 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**488 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
+**489 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
 `npm run cmdrs:mark -w engine`). An imported decklist usually has its commander substituted, and
 that one card is the reason the deck exists. Live numbers for everything below come from
 `npm run cmdrs:gaps -w engine`.
 
 - **Ready to author, no engine work: none.** B294 (2026-11-09) re-attempted all 18 still missing
   and authored 6 (Mr. House, Hazel of the Rootbloom, Indoraptor, Orvar, Noctis, Minsc & Boo). Each
-  of the other 12 waits on one narrow key, recorded in `engine/src/cards/top-commanders-gaps.json`.
-- **The 12 left, each with its key** (`cmdrs:gaps` ranks them; when a key lands, add it to that
+  of the other 12 waited on one narrow key, recorded in `engine/src/cards/top-commanders-gaps.json`;
+  Jaws, Relentless Predator's (`trigger:destroyed`) was built 2026-11-10.
+- **The 11 left, each with its key** (`cmdrs:gaps` ranks them; when a key lands, add it to that
   file's `built` array and author its commander in the same commit): Omnath, Locus of All
   `effect:add-mana-combination-of-card-colors`; Ob Nixilis, Captive Kingpin
   `trigger:opponents-lose-exactly-n-life`; Indominus Rex, Alpha
@@ -33,7 +34,7 @@ that one card is the reason the deck exists. Live numbers for everything below c
   `effect:clash-with-named-opponent`; Arna Kennerüd, Skycaptain `effect:token-copy-enters-attached`;
   Winter, Cynical Opportunist `decision:zone-choice-card-types-among`; The Mimeoplasm
   `replacement:copy-on-enter-exile-two-counters-from-other`; Magar of the Magic Strings
-  `effect:noted-card-name-copy`; Jaws, Relentless Predator `trigger:destroyed`; Tevesh Szat, Doom of
+  `effect:noted-card-name-copy`; Tevesh Szat, Doom of
   Fools `effect:put-commanders-onto-battlefield`; Jorn, God of Winter
   `zone:play-from-graveyard-this-turn-enters-tapped`.
 

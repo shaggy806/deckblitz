@@ -11913,4 +11913,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
     }),
   ),
+  // --- "Is destroyed" (2026-11-10, the commander gap) ---
+  preset(
+    "Jaws, Relentless Predator: the legend rule isn't a destroy",
+    board({
+      you: { bf: ['Jaws, Relentless Predator', 'Mox Amber', 'Mountain*2'], hand: ['Mox Amber', 'Shatter'] },
+      opp: { bf: ['Sol Ring'] },
+    }),
+  ),
 ]

@@ -13866,6 +13866,7 @@ import _poolJawboneDuelist from "./pool/jawbone-duelist.js";
 import _poolJawboneSkulkin from "./pool/jawbone-skulkin.js";
 import _poolJawsOfDefeat from "./pool/jaws-of-defeat.js";
 import _poolJawsOfStone from "./pool/jaws-of-stone.js";
+import _poolJawsRelentlessPredator from "./pool/jaws-relentless-predator.js";
 import _poolJaxisTheTroublemaker from "./pool/jaxis-the-troublemaker.js";
 import _poolJayaBallardTaskMage from "./pool/jaya-ballard-task-mage.js";
 import _poolJayaBallard from "./pool/jaya-ballard.js";
@@ -46044,6 +46045,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJawboneSkulkin,
   _poolJawsOfDefeat,
   _poolJawsOfStone,
+  _poolJawsRelentlessPredator,
   _poolJaxisTheTroublemaker,
   _poolJayaBallardTaskMage,
   _poolJayaBallard,
@@ -78235,6 +78237,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jawbone-skulkin": _poolJawboneSkulkin,
   "pool/jaws-of-defeat": _poolJawsOfDefeat,
   "pool/jaws-of-stone": _poolJawsOfStone,
+  "pool/jaws-relentless-predator": _poolJawsRelentlessPredator,
   "pool/jaxis-the-troublemaker": _poolJaxisTheTroublemaker,
   "pool/jaya-ballard-task-mage": _poolJayaBallardTaskMage,
   "pool/jaya-ballard": _poolJayaBallard,
