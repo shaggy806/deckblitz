@@ -1,9 +1,15 @@
 // Which decks `deck-winrates.mjs` deals tables from, shared with its worker
-// (which inherits the environment): every starter deck, or with `--pool
-// upgraded` the five Tarkir: Dragonstorm precons beside their upgrades
-// (`UPGRADED_DECKS`), to measure what an upgrade is worth.
-import { SAMPLE_DECKS, UPGRADED_DECKS } from "../dist/index.js";
+// (which inherits the environment): every starter deck; with `--pool
+// upgraded` the precons beside their upgrades (`UPGRADED_DECKS`), to measure
+// what an upgrade is worth; with `--pool blitz` the upgrades alone, the
+// field a blitz deals from, to see how even it is; or with `--pool strong`
+// the real players' decks (`STRONG_DECKS`) against those upgrades.
+import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS } from "../dist/index.js";
 
-export const DECK_POOL = process.env.DECK_POOL === "upgraded"
-  ? [...SAMPLE_DECKS.filter((d) => UPGRADED_DECKS.some((u) => u.upgradeOf === d.name)), ...UPGRADED_DECKS]
-  : SAMPLE_DECKS;
+const POOLS = {
+  upgraded: () => [...SAMPLE_DECKS.filter((d) => UPGRADED_DECKS.some((u) => u.upgradeOf === d.name)), ...UPGRADED_DECKS],
+  blitz: () => [...UPGRADED_DECKS],
+  strong: () => [...UPGRADED_DECKS, ...STRONG_DECKS],
+};
+
+export const DECK_POOL = POOLS[process.env.DECK_POOL]?.() ?? SAMPLE_DECKS;

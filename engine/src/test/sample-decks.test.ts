@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { createDefaultRegistry } from "../cards.js";
 import { validateCommanderDeck } from "../deck-validation.js";
-import { SAMPLE_DECKS, UPGRADED_DECKS } from "../sample-decks.js";
+import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS } from "../sample-decks.js";
 
 const reg = createDefaultRegistry();
 
@@ -53,8 +53,8 @@ describe("SAMPLE_DECKS", () => {
 });
 
 describe("UPGRADED_DECKS", () => {
-  it("upgrades each Tarkir: Dragonstorm precon once", () => {
-    expect(UPGRADED_DECKS.map((d) => d.upgradeOf)).toEqual(SAMPLE_DECKS.slice(0, 5).map((d) => d.name));
+  it("upgrades each starter precon once", () => {
+    expect(UPGRADED_DECKS.map((d) => d.upgradeOf)).toEqual(SAMPLE_DECKS.map((d) => d.name));
     expect(new Set(UPGRADED_DECKS.map((d) => d.name)).size).toBe(UPGRADED_DECKS.length);
   });
 
@@ -76,6 +76,38 @@ describe("UPGRADED_DECKS", () => {
         }
         expect(deck.cards.filter(isLand)).toHaveLength(base.cards.filter(isLand).length);
         expect(deck.commanders).toEqual(base.commanders);
+      });
+    });
+  }
+});
+
+describe("STRONG_DECKS", () => {
+  it("has a name of its own for every deck, none a starter deck's", () => {
+    const names = [...SAMPLE_DECKS, ...UPGRADED_DECKS, ...STRONG_DECKS].map((d) => d.name);
+    expect(new Set(names).size).toBe(names.length);
+  });
+
+  for (const deck of STRONG_DECKS) {
+    describe(deck.name, () => {
+      it("is a legal 100-card Commander deck of implemented cards", () => {
+        expect(deck.commanders).toHaveLength(1);
+        const unimplemented = [...deck.commanders!, ...deck.cards].filter((n) => !reg.has(n));
+        expect(unimplemented).toEqual([]);
+        const result = validateCommanderDeck({ commanders: deck.commanders!, cards: deck.cards, size: 100 }, reg);
+        expect(result.violations).toEqual([]);
+        expect(result.legal).toBe(true);
+      });
+
+      it("credits its creator, with the deck's Archidekt page", () => {
+        expect(deck.credit?.author).toBeTruthy();
+        expect(deck.credit?.archidektId).toBeGreaterThan(0);
+        expect(deck.name).toContain(`by ${deck.credit?.author}`);
+      });
+
+      it("plays its creator's list exactly: no stand-ins", () => {
+        expect(deck.printed).toHaveLength(99);
+        expect(deck.substitutions).toEqual([]);
+        expect(deck.cards).toEqual(deck.printed);
       });
     });
   }
@@ -104,7 +136,8 @@ describe("starter deck printings", () => {
       const base = SAMPLE_DECKS.find((d) => d.name === deck.upgradeOf);
       for (const [cut, add] of deck.swaps ?? []) {
         expect(deck.printings?.[add], `${deck.name}: ${add}`).toBeUndefined();
-        expect(deck.printings?.[cut], `${deck.name}: ${cut}`).toBeUndefined();
+        // A basic land cut once is still played: its other copies stay.
+        if (!deck.cards.includes(cut)) expect(deck.printings?.[cut], `${deck.name}: ${cut}`).toBeUndefined();
       }
       for (const [name, id] of Object.entries(deck.printings ?? {})) {
         expect(base?.printings?.[name]).toBe(id);

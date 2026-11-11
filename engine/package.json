@@ -54,6 +54,7 @@
     "cards:goal": "node scripts/rank-goal.mjs",
     "cards:sets": "node scripts/set-backlog.mjs",
     "decks:stand-ins": "node scripts/stand-ins.mjs",
+    "decks:strong": "node scripts/gen-strong-decks.mjs",
     "prebuild": "node scripts/gen-cards.mjs",
     "build": "node scripts/dist-complete.mjs && tsc && node scripts/bundle-shards.mjs",
     "pretypecheck": "node scripts/gen-cards.mjs",

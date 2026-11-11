@@ -38,6 +38,11 @@ const bot = flag("bot", "v2");
 const players = Math.min(4, Math.max(2, Number(flag("players", "4"))));
 const rounds = Number(flag("rounds", "30"));
 const workers = Number(flag("workers", String(Math.max(1, os.cpus().length - 4))));
+// `--budget MS`: each v2 decision on a wall clock, as live rooms play
+// (`BOT_DECISION_BUDGET_MS`, 1000). Off by default, since a clock makes a
+// seed's game unrepeatable; on, a decision on a huge board can't run for
+// minutes (strong-deck pilot, 2026-11-09: 40-80 simulations of 3-9 s each).
+const budgetMs = Number(flag("budget", "0"));
 const timeoutMs = Number(flag("timeout", "900")) * 1000;
 const out = flag("out", join(ROOT, ".scratch", `deck-winrates-${bot}-${players}p${process.env.DECK_POOL ? `-${process.env.DECK_POOL}` : ""}.ndjson`));
 mkdirSync(dirname(out), { recursive: true });
@@ -89,6 +94,7 @@ if (existsSync(out)) {
 const queue = jobs.filter((j) => !done.has(j.seed));
 console.log(
   `deck win rates — ${bot} in every seat, ${players}p, ${n} decks, ${jobs.length} games` +
+    (budgetMs > 0 ? `, ${budgetMs} ms a decision` : "") +
     (done.size > 0 ? ` (${done.size} already in ${out})` : "") +
     `; ${workers} workers`,
 );
@@ -101,6 +107,31 @@ function wilson(k, total) {
   const c = (p + (z * z) / (2 * total)) / d;
   const h = (z * Math.sqrt((p * (1 - p)) / total + (z * z) / (4 * total * total))) / d;
   return [c - h, c + h];
+}
+
+// The spells the bots most often could cast and didn't, over the games where
+// each was castable at some point: what a win rate over a few dozen games
+// can't show about a single card.
+function usageReport(rows) {
+  const cards = new Map();
+  for (const r of rows) {
+    (r.usage ?? []).forEach((u, seat) => {
+      const commander = DECK_POOL.find((d) => d.name === r.decks[seat])?.commanders ?? [];
+      for (const name of u.castable) {
+        if (commander.includes(name)) continue;
+        const c = cards.get(name) ?? { castable: 0, cast: 0 };
+        c.castable += 1;
+        if (u.cast.includes(name)) c.cast += 1;
+        cards.set(name, c);
+      }
+    });
+  }
+  const held = [...cards].filter(([, c]) => c.castable >= 5).sort((a, b) => a[1].cast / a[1].castable - b[1].cast / b[1].castable);
+  if (held.length === 0) return;
+  console.log(`\nCastable but least often cast (at least 5 games castable, ${held.length} cards):`);
+  for (const [name, c] of held.slice(0, 40)) {
+    console.log(`  ${name.padEnd(36)} cast in ${String(c.cast).padStart(3)} of ${String(c.castable).padStart(3)} games`);
+  }
 }
 
 function summary() {
@@ -144,6 +175,7 @@ function summary() {
     `\n${rows.length} games, ${unfinished} without a winner (draw, timeout or error); ` +
       `median length ${turns.sort((a, b) => a - b)[Math.floor(turns.length / 2)] ?? "-"} turns. * = bench deck.`,
   );
+  usageReport(rows);
   console.log(`results: ${out}`);
 }
 
@@ -157,7 +189,7 @@ if (queue.length === 0) summary();
 else
   runPool({
     url: new URL("./deck-winrates-worker.mjs", import.meta.url),
-    workerData: { bot },
+    workerData: { bot, budgetMs },
     jobs: queue,
     workers,
     timeoutMs,

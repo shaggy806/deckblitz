@@ -1,0 +1,759 @@
+1. "Krenko and the Goblin Horde" by MagicApple:
+1 Ancient Tomb (plst) TMP-315
+1 Arcane Signet (moc) 348
+1 Arena of Glory (mh3) 215
+1 Battle Cry Goblin (j25) 127
+1 Battle Hymn (avr) 128
+1 Brightstone Ritual (ons) 191
+1 Castle Embereth (tdc) 347
+1 Cavern of Souls (lci) 269
+1 Chaos Warp (drc) 48
+1 Command Beacon (c15) 56
+1 Conspicuous Snoop (m21) 364
+1 Crystal Vein (plst) MIR-325
+1 Deflecting Swat (cmm) 214
+1 Diamond City (pip) 147
+1 Fountainport (blb) 253
+1 Gamble (ema) 132
+1 Gemstone Caverns (tsr) 280
+1 General Kreat, the Boltbringer (j25) 48
+1 Goblin Bombardment (wot) 43
+1 Goblin Bushwhacker (zen) 125
+1 Goblin Chieftain (jmp) 324
+1 Goblin Chirurgeon (fem) 54c
+1 Goblin Engineer (tsr) 345
+1 Goblin Grenade (m12) 140
+1 Goblin King (3ed) 155
+1 Goblin Lackey (usg) 190
+1 Goblin Matron (dmr) 123
+1 Goblin Motivator (plst) M19-143
+1 Goblin Piledriver (plst) ORI-151
+1 Goblin Recruiter (6ed) 186
+1 Goblin Ringleader (m20) 143
+1 Goblin Sharpshooter (c13) 111
+1 Goblin Trashmaster (m19) 144
+1 Goblin War Strike (scg) 96
+1 Goblin Warchief (plst) DOM-130
+1 Goro-Goro, Disciple of Ryusei (pneo) 145★
+1 Grenzo, Havoc Raiser (cmm) 228
+1 Hexing Squelcher (ecl) 145
+1 Hobgoblin Bandit Lord (afr) 147
+1 Howlsquad Heavy (dft) 134
+1 Impact Tremors (wot) 44
+1 Imperial Recruiter (mh2) 281
+1 Jeska's Will (clb) 799
+1 Kiki-Jiki, Mirror Breaker (j22) 79
+C Krenko, Mob Boss (m13) 138
+1 Krenko, Tin Street Kingpin (war) 137
+1 Last-Ditch Effort (ulg) 83
+1 Lightning Bolt (pd2) 17
+1 Lightning Greaves (drc) 55
+1 Liquimetal Torque (mh2) 228
+1 Lotus Petal (plst) TMP-294
+1 Marvin, Murderous Mimic (dsk) 253
+1 Mass Hysteria (inr) 164
+1 Molten Gatekeeper (mh3) 128
+1 Moria Marauder (ltr) 138
+21 Mountain (tle) 295
+1 Muxus, Goblin Grandee (plst) JMP-24
+1 Pashalik Mons (mh1) 138
+1 Pinnacle Monk // Mystic Peak (mh3) 246
+1 Rite of Flame (csp) 96
+1 Ruby Medallion (mh3) 295
+1 Rundvelt Hordemaster (dmu) 409
+1 Scuzzback Scrounger (ecl) 153
+1 Shared Animosity (lcc) 231
+1 Siege-Gang Commander (dmr) 330
+1 Simian Spirit Guide (a25) 148
+1 Skirk Prospector (plst) DOM-144
+1 Skullclamp (msc) 210
+1 Sol Ring (moc) 381
+1 Sundering Eruption // Volcanic Fissure (mh3) 248
+1 Swiftfoot Boots (fdn) 258
+1 Three Tree City (blb) 260
+1 Torch Courier (grn) 119
+1 Treasure Nabber (ltc) 230
+1 Urza's Saga (mh2) 259
+1 Valakut Awakening // Valakut Stoneforge (plst) ZNR-174
+1 Volley Veteran (m19) 168
+1 War Room (cmm) 1054
+1 Warren Instigator (zen) 154
+1 Warren Torchmaster (ecl) 163
+
+2. "High Power Aristocrats" by Ozymandias-:
+1 And They Shall Know No Fear (40k) 9
+1 Anguished Unmaking (2x2) 170
+1 Arid Mesa (mh2) 244
+1 Authority of the Consuls (fdn) 137
+1 Ayara, First of Locthwain (eld) 75
+1 Bartolomé del Presidio (lci) 301
+1 Beseech the Mirror (woe) 82
+1 Blood Artist (lcc) 182
+1 Blood Crypt (unf) 279
+1 Blood Seeker (m12) 81
+1 Bloodchief Ascension (cmm) 636
+1 Bloodletter of Aclazotz (lci) 92
+1 Bloodstained Mire (mh3) 216
+1 Bloodthirsty Conqueror (fdn) 426
+1 Bojuka Bog (otc) 273
+1 Bolas's Citadel (war) 79
+1 Captivating Vampire (plst) M11-87
+1 Cavern of Souls (ltc) 362
+1 Caves of Koilos (otc) 277
+1 Changeling Outcast (otc) 128
+1 Charismatic Conqueror (lcc) 70
+1 City of Brass (2x2) 403
+1 Clavileño, First of the Blessed (lcc) 18
+1 Command Tower (otc) 280
+1 Contamination (plst) USG-123
+1 Cordial Vampire (lcc) 189
+1 Creeping Bloodsucker (j22) 21
+1 Cruel Celebrant (lcc) 267
+1 Culling the Weak (exo) 55
+1 Dark Ritual (sld) 1170
+1 Dictate of Erebos (jou) 65
+1 Dragonskull Summit (otc) 289
+C Edgar Markov (pj21) 3
+1 Elas il-Kor, Sadistic Pilgrim (dmu) 297
+1 Elenda, the Dusk Rose (lcc) 268
+1 Florian, Voldaren Scion (mid) 223
+1 Funeral Room // Awakening Hall (dsk) 100
+1 Godless Shrine (unf) 282
+1 Grand Abolisher (cmm) 460
+1 Grave Pact (cmm) 639
+1 Impact Tremors (wot) 44
+1 Indulgent Aristocrat (lcc) 200
+1 Inkshield (c21) 398
+1 Isolated Chapel (otc) 301
+1 Kalastria Highborn (plst) WWK-59
+1 Kambal, Consul of Allocation (2x2) 237
+1 Legion Lieutenant (lcc) 275
+1 Luxury Suite (clb) 355
+1 Malakir Bloodwitch (voc) 131
+1 Mana Confluence (sld) 1012a
+1 Markov Baron (mat) 14
+1 Marsh Flats (mh2) 248
+1 Master of Dark Rites (lcc) 51
+1 Mountain (otj) 283
+1 Necropotence (slc) 1995
+1 Nykthos, Shrine to Nyx (plst) THS-223
+1 Oathsworn Vampire (rix) 80
+1 Olivia's Wrath (lcc) 205
+1 Pact of the Serpent (lcc) 206
+1 Path of Ancestry (otc) 310
+1 Path to Exile (pf20) 1
+1 Phyrexian Altar (2x2) 396
+1 Phyrexian Tower (sld) 208
+3 Plains (otj) 277
+1 Priest of Forgotten Gods (rvr) 90
+1 Pulse Tracker (ddm) 43
+1 Rite of Oblivion (dbl) 237
+1 Ruthless Lawbringer (otj) 229
+1 Sacred Foundry (unf) 285
+1 Sanctum Seeker (lcc) 209
+1 Scrubland (3ed) 286
+1 Secluded Courtyard (lcc) 350
+1 Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel (fin) 317
+1 Skullclamp (sld) 1112
+1 Sol Ring (cmm) 703
+1 Spectator Seating (cmm) 427
+5 Swamp (otj) 282
+1 Swords to Plowshares (sld) 364
+1 Teferi's Protection (sld) 1691
+1 The Meathook Massacre (pmid) 112p
+1 Twilight Prophet (mkc) 143
+1 Unclaimed Territory (lcc) 366
+1 Urborg, Tomb of Yawgmoth (ltc) 375
+1 Vampiric Tutor (dmr) 108
+1 Vault of Champions (cmm) 436
+1 Vengeful Bloodwitch (fdn) 325
+1 Vicious Conquistador (xln) 128
+1 Viscera Seer (lcc) 213
+1 Vito, Thorn of the Dusk Rose (j22) 487
+1 Voldaren Estate (lcc) 369
+1 Vraan, Executioner Thane (one) 114
+1 Welcoming Vampire (vow) 46
+1 Yahenni, Undying Partisan (2x2) 99
+1 Yawgmoth, Thran Physician (dmr) 110
+
+
+3. "The Ur-Dragon" by Lat-er-alus:
+1 An Offer You Can't Refuse (slp) 7
+1 Ancient Copper Dragon (clb) 368
+1 Ancient Silver Dragon (clb) 366
+1 Ancient Tomb (v12) 1
+1 Arcane Signet (p30m) 1F★
+1 Badlands (3ed) 282
+1 Bala Ged Recovery // Bala Ged Sanctuary (znr) 180
+1 Bayou (3ed) 283
+1 Beast Within (who) 819
+1 Birds of Paradise (cn2) 176
+1 Bloodstained Mire (mh3) 216
+1 Bloom Tender (sld) 284
+1 Boseiju, Who Endures (pneo) 266p
+1 Breeding Pool (prna) 246p
+1 Cavern of Souls (zne) 22
+1 Cavern-Hoard Dragon (ltc) 433
+1 Chaos Warp (sta) 99
+1 Chrome Mox (slc) 2003
+1 Command Tower (cmm) 420
+1 Crux of Fate (sta) 88
+1 Cyclonic Rift (cmm) 485
+1 Deflecting Swat (cmm) 698
+1 Delighted Halfling (ltr) 609
+1 Demonic Tutor (sta) 27
+1 Dragon Tempest (pl24) 7
+1 Dragon's Hoard (sld) 709
+1 Dragonborn Champion (afc) 314
+1 Dragonlord Dromoka (2x2) 487
+1 Esika, God of the Tree // The Prismatic Bridge (khm) 314
+1 Eternal Witness (puma) U16
+1 Exotic Orchard (who) 493
+1 Farewell (neo) 436
+1 Farseek (f13) 3
+1 Fellwar Stone (sld) 708
+1 Finale of Devastation (cmm) 559
+1 Forest (tdm) 276
+1 Goldspan Dragon (khm) 358
+1 Haven of the Spirit Dragon (dtk) 249
+1 Hellkite Courser (cmr) 183
+1 Heroic Intervention (cmm) 563
+1 Ignoble Hierarch (mh2) 414
+1 Jeska's Will (cmr) 668
+1 Kaalia of the Vast (mh3) 343
+1 Ketria Triome (iko) 310
+1 Klauth, Unrivaled Ancient (afc) 50
+1 Lotus Petal (p30m) 2
+1 Mana Confluence (sld) 1012a
+1 Mana Drain (cmr) 637
+1 Mana Vault (puma) U29
+1 Marang River Regent // Coil and Catch (tdm) 378
+1 Miirym, Sentinel Wyrm (clb) 542
+1 Misty Rainforest (mh2) 250
+1 Morophon, the Boundless (cmm) 453
+1 Mountain (tdm) 275
+1 Nature's Lore (clb) 244
+1 Nicol Bolas, the Ravager // Nicol Bolas, the Arisen (sld) 1158
+1 Noble Hierarch (2xm) 352
+1 Noxious Revival (spg) 73
+1 Old Gnawbone (afr) 296
+1 Otawara, Soaring City (neo) 271
+1 Overgrown Tomb (pgrn) 253p
+1 Phyrexian Metamorph (2xm) 341
+1 Polluted Delta (ktk) 239
+1 Ramos, Dragon Engine (cmr) 545
+1 Reanimate (cc2) 5
+1 Reflecting Pool (clb) 358
+1 Rhystic Study (wot) 25
+1 Roaming Throne (lci) 258
+1 Sarkhan Unbroken (med) WS8
+1 Savannah (3ed) 285
+1 Scion of the Ur-Dragon (tsp) 246
+1 Scrubland (3ed) 286
+1 Selvala, Heart of the Wilds (cmm) 571
+1 Sol Ring (pfdn) 1
+1 Starting Town (fin) 289
+1 Steam Vents (pgrn) 257p
+1 Stomping Ground (prna) 259p
+1 Summon: Bahamut (fin) 356
+1 Swords to Plowshares (sta) 73
+1 Taiga (3ed) 287
+1 Teferi's Protection (sta) 11
+1 Temple Garden (rtr) 248
+1 Temur Ascendancy (ktk) 207
+1 Terror of the Peaks (potj) 149p
+1 The Great Henge (cmm) 562
+1 The One Ring (ltr) 451
+C The Ur-Dragon (sld) 11
+1 Three Steps Ahead (otj) 323
+1 Three Visits (cmr) 261
+1 Tiamat (sld) 1017
+1 Tropical Island (3ed) 288
+1 Twinflame Tyrant (fdn) 395
+1 Two-Headed Hellkite (dmc) 90
+1 Vampiric Tutor (dmr) 108
+1 Verdant Catacombs (mh2) 260
+1 Volrath's Stronghold (sth) 143
+1 Wheel of Fortune (3ed) 185
+1 Windswept Heath (ktk) 248
+1 Wood Elves (dci) 1
+1 Wooded Foothills (ktk) 249
+
+4. "Y'shtola, the Group Slug" by Scorge:
+1 Ancient Tomb (ltc) 387
+1 Arcane Signet (sld) 1492★
+1 Baleful Mastery (stx) 301
+1 Beseech the Mirror (sld) 2527
+1 Black Market Connections (acr) 198
+1 Blind Obedience (wot) 1
+1 Boromir, Warden of the Tower (ltr) 794
+1 Chrome Mox (slc) 2003
+1 City of Brass (2x2) 403
+1 Command Tower (sld) 1496★
+1 Commandeer (otp) 9
+1 Consecrated Sphinx (mp2) 8
+1 Curiosity (wot) 17
+1 Cyclonic Rift (rvr) 313
+1 Deadly Rollick (sld) 1754
+1 Decanter of Endless Water (clb) 309
+1 Decorum Dissertation (sos) 292
+1 Delney, Streetwise Lookout (pwcs) 2025-3
+1 Dismember (soa) 158
+1 Displacer Kitten (clb) 560
+1 Enlightened Tutor (j20) 2
+1 Esper Sentinel (h2r) 2
+1 Exotic Orchard (sld) 1231
+1 Fellwar Stone (sld) 708
+1 Fierce Guardianship (cmm) 694
+1 Flooded Strand (zne) 1
+1 Force of Negation (2x2) 429
+1 Force of Will (mp2) 14
+1 Frantic Search (dmr) 285
+1 Gemstone Caverns (ltc) 394
+1 Godless Shrine (unf) 533
+1 Hallowed Fountain (unf) 528
+1 Helm of the Ghastlord (shm) 166
+1 Horizon of Progress (m3c) 78
+1 Imperial Seal (j16) 6
+1 Insight Engine (eoc) 26
+1 Irma, Part-Time Mutant (tmc) 12
+1 Island (unf) 492
+1 King T'Challa // Black Panther, Hope Enduring (msh) 373
+1 Logic Knot (fut) 52
+1 Lotho, Corrupt Shirriff (ltr) 781
+1 Mana Confluence (eos) 115
+1 Mana Vault (2x2) 560
+1 March of Swirling Mist (neo) 372
+1 Marsh Flats (spg) 115
+1 Mindbreak Trap (otp) 68
+1 Mirrormade (eld) 55
+1 Misdirection (sld) 1272
+1 Misleading Signpost (woc) 47
+1 Misty Rainforest (exp) 25
+1 Morphic Pool (zne) 17
+1 Mox Diamond (v10) 10
+1 Mox Opal (sld) 1072
+1 Mystic Gate (exp) 26
+1 Mystic Remora (sld) 406
+1 Mystical Dispute (pr23) 1
+1 Ophidian Eye (tsp) 70
+1 Otawara, Soaring City (neo) 414
+1 Plains (unf) 491
+1 Plaza of Heroes (eos) 168
+1 Polluted Delta (mh3) 356
+1 Raffine's Tower (snc) 292
+1 Reflecting Pool (ltc) 403
+1 Relic of Legends (fic) 354
+1 Reliquary Tower (40k) 291★
+1 Rhystic Study (wot) 91
+1 Roaming Throne (lci) 344
+1 Sakashima the Impostor (sld) 1232
+1 Scalding Tarn (spg) 117
+1 Sea Gate Restoration // Sea Gate, Reborn (znr) 76
+1 Sea of Clouds (zne) 16
+1 Sevinne's Reclamation (cmm) 472
+1 Sheoldred, the Apocalypse (dmu) 369
+1 Sink into Stupor // Soporific Springs (mh3) 241
+1 Snuff Out (mb2) 187
+1 Sol Ring (sld) 1494★
+1 Spellskite (j17) 7
+1 Sunken Ruins (exp) 27
+1 Swan Song (sld) 1591
+1 Swords to Plowshares (pf25) 12
+1 Talisman of Dominance (sld) 1053
+1 Talisman of Progress (fic) 367
+1 Talon Gates of Madara (m3c) 82
+1 Tataru Taru (fic) 466
+1 Teferi, Time Raveler (blc) 92
+1 Teferi's Protection (2x2) 424
+1 Tezzeret, Cruel Captain (eoe) 287
+1 The One Ring (ltr) 791
+1 The Queen of Dale (hob) 253
+1 The Theorist, Jace Beleren (fra) 43
+1 Trouble in Pairs (mkc) 15
+1 Undercity Sewers (mkm) 332
+1 Unstoppable Plan (dft) 442
+1 Unwinding Clock (nph) 164
+1 Urborg, Tomb of Yawgmoth (ltc) 405
+1 Vampiric Tutor (soa) 165
+1 Watery Grave (unf) 529
+1 Witch Enchanter // Witch-Blessed Meadow (sld) 2655
+C Y'shtola, Night's Blessed (fic) 215
+1 Yawgmoth's Will (g07) 3
+
+
+5. "Elven Madness" by joedf:
+1 Abrupt Decay (otp) 34
+1 Allosaurus Shepherd (2x2) 132
+1 Alpha Authority (gtc) 114
+1 Alpha Status (scg) 110
+1 Arcane Signet (mkc) 223
+1 Asceticism (plst) SOM-110
+1 Assassin's Trophy (mkm) 412
+1 Beast Whisperer (khc) 54
+1 Bitter Triumph (soa) 26
+1 Champions of the Perfect (ecl) 171
+1 Circle of Dreams Druid (afr) 176
+1 Collective Resistance (mh3) 147
+1 Command Tower (khc) 108
+1 Deathcap Glade (sos) 253
+1 Deserted Temple (mh3) 301
+1 Diabolic Revelation (m13) 87
+1 Dig Up (vow) 197
+1 Dina's Guidance (sos) 184
+1 Eclipsed Realms (ecl) 263
+1 Elven Ambush (khm) 391
+1 Elven Passage (hob) 181
+1 Elves of Deep Shadow (rav) 161
+1 Elvish Archdruid (khc) 57
+1 Elvish Guidance (ons) 255
+1 Elvish Harbinger (evg) 4
+1 Elvish Promenade (khc) 59
+1 Elvish Warmaster (khm) 167
+1 Essence Warden (plc) 145
+1 Exotic Orchard (cmm) 993
+1 Ezuri, Renegade Leader (som) 119
+1 Fallen Ideal (c15) 125
+1 Familiar Ground (7ed) 243
+1 Festering Thicket (eoc) 41
+5 Forest (khm) 398
+1 Forest (snc) 270
+1 Formidable Speaker (ecl) 176
+1 Gaea's Blessing (dom) 161
+1 Grim Backwoods (dka) 156
+1 Herald's Horn (c17) 53
+1 Heritage Reclamation (tdm) 145
+1 Imperious Perfect (khc) 64
+1 Kindred Dominance (woc) 113
+1 Kindred Summons (afc) 163
+1 Kodama's Reach (c20) 180
+C Lathril, Blade of the Elves (khc) 1
+1 Lightning Greaves (c17) 215
+1 Llanowar Elves (fdn) 227
+1 Llanowar Reborn (lcc) 341
+1 Llanowar Wastes (c21) 297
+1 Mana Reflection (2xm) 175
+1 Marwyn, the Nurturer (khc) 68
+1 Myriad Landscape (khc) 115
+1 Necroblossom Snarl (cmm) 1015
+1 Necrodominance (mh3) 102
+1 Night's Whisper (soc) 221
+1 Ohran Frostfang (c19) 33
+1 Opal Palace (cmr) 352
+1 Oubliette (plst) 2XM-100
+1 Overgrown Tomb (ecl) 266
+1 Pact of the Serpent (khc) 9
+1 Path of Ancestry (khc) 117
+1 Phyrexian Arena (one) 104
+1 Priest of Titania (mh3) 286
+1 Quest for Renewal (wwk) 110
+1 Reclamation Sage (khc) 72
+1 Rogue's Passage (znc) 138
+1 Saryth, the Viper's Fang (mid) 197
+1 Secluded Courtyard (neo) 275
+1 Seedborn Muse (c19) 179
+1 Selfless Safewright (ecl) 193
+1 Shamanic Revelation (ncc) 311
+1 Skullclamp (c17) 222
+1 Skyshroud Claim (bbd) 213
+1 Sol Ring (khc) 104
+1 Staff of Domination (cmr) 343
+1 Survivors' Encampment (hou) 184
+4 Swamp (khm) 396
+1 Swiftfoot Boots (cmr) 474
+1 Tainted Wood (cmm) 1040
+1 Twilight Mire (soc) 418
+1 Tyvar Kell (khm) 287
+1 Tyvar's Stand (one) 190
+1 Umbral Mantle (plst) SHM-267
+1 Unclaimed Territory (voc) 188
+1 Vernal Fen (eoc) 24
+1 Vitalize (wth) 145
+1 Whispersilk Cloak (dst) 160
+1 Wirewood Channeler (khc) 79
+1 Wirewood Lodge (plst) DD1-26
+1 Wirewood Symbiote (mh3) 288
+1 Wolverine Riders (khc) 14
+1 Woodland Cemetery (dom) 248
+1 Worldly Tutor (dmr) 353
+
+
+6. "Miku Angelic Life Gain" by SmokyCashew01:
+1 Aetherflux Reservoir (kld) 192
+1 Akroma's Vengeance (a25) 3
+1 Akroma's Will (prm) 86052
+1 Alhammarret's Archive (plst) ORI-221
+1 Angel of Destiny (znr) 2
+1 Angel of Jubilation (avr) 2
+1 Angelic Arbiter (m11) 4
+1 Angelic Skirmisher (gtc) 3
+1 Archaeomancer's Map (plst) C21-12
+1 Archangel of Thune (sld) 2430
+1 Archangel of Tithes (ori) 4
+1 Armageddon (sld) 1854
+1 Avacyn, Angel of Hope (avr) 6
+1 Baneslayer Angel (v15) 6
+1 Battle Angels of Tyr (clb) 370
+1 Brisela, Voice of Nightmares (emn) 15b
+1 Bruna, the Fading Light (emn) 15
+1 Caduceus, Staff of Hermes (acr) 173
+1 Catastrophe (plst) USG-6
+1 Celestial Mantle (zen) 6
+1 Court of Grace (plst) CMR-16
+1 Darksteel Plate (2x2) 304
+1 Dawn Charm (cmr) 371
+1 Elspeth, Knight-Errant (sld) 1001
+1 Elspeth, Knight-Errant Emblem (tmd1) 4
+1 Emeria, the Sky Ruin (zen) 213
+1 Exalted Sunborn (eoe) 15
+1 Exemplar of Light (fdn) 297
+1 Firemane Commando (moc) 81
+1 Flare of Fortitude (mh3) 321
+1 Folk Hero (clb) 608
+1 Fumigate (onc) 69
+C Giada, Font of Hope (sld) 1586
+1 Gisela, the Broken Blade (emn) 28
+1 Hall of Heliod's Generosity (woc) 162
+1 Herald of Eternal Dawn (fdn) 299
+1 Herald of War (avr) 24
+1 Herald's Horn (m3c) 296
+1 Homeward Path (c16) 301
+1 Hour of Revelation (znc) 17
+1 Land Tax (wot) 9
+1 Lapse of Certainty (con) 9
+1 Linvala, Keeper of Silence (jmp) 119
+1 Luminarch Ascension (a25) 23
+1 Lyra Dawnbringer (dmr) 413
+1 Lyra, Archangel of Dawn (fra) 294
+1 Oketra's Monument (akh) 233
+1 Open the Armory (cmr) 34
+1 Pearl Medallion (mh3) 347
+7 Plains (sld) 2441
+20 Plains (dmu) 277
+1 Ravages of War (pip) 354
+1 Rebuff the Wicked (plc) 12
+1 Resplendent Angel (lci) 334
+1 Righteous Valkyrie (khm) 24
+1 Rogue's Passage (who) 299
+1 Sephara, Sky's Blade (pm20) 36p
+1 Seraph Sanctuary (sld) 733
+1 Serra's Emissary (mh2) 30
+1 Smothering Tithe (prm) 102227
+1 Sol Ring (sld) 1604
+1 Starnheim Aspirant (j22) 250
+1 Steelshaper's Gift (cmm) 59
+1 Swiftfoot Boots (fdn) 355
+1 Sword of the Animist (afc) 218
+1 Teferi's Protection (pz2) 65701
+1 Test of Endurance (dmr) 414
+1 The Book of Exalted Deeds (afr) 4
+1 The Wind Crystal (fin) 43
+1 True Conviction (ss2) 6
+1 Urza's Incubator (mh3) 297
+1 Valkyrie Harbinger (j22) 261
+1 Vanquish the Horde (inr) 302
+1 Witch's Clinic (c21) 81
+1 Worldslayer (mrd) 276
+1 Wrath of God (dmr) 416
+1 Youthful Valkyrie (sld) 1588
+
+7. "Lizard Lizard Lizard Lizard......... Lizard" by DeltaCubes20:
+1 Airbender Ascension (tla) 6
+1 Akroma's Will (lcc) 125
+1 Apex Altisaur (lcc) 232
+1 Arbor Elf (m13) 160
+1 Avacyn's Pilgrim (scd) 171
+1 Bronzebeak Foragers (lcc) 69
+1 Canopy Vista (blc) 296
+1 Chandra's Ignition (lcc) 220
+1 Cinder Glade (blc) 299
+1 Clifftop Retreat (blc) 300
+1 Command Tower (rex) 26
+1 Curious Altisaur (lcc) 90
+1 Dawn's Truce (blb) 9
+1 Devil Dinosaur (msc) 719
+1 Dinosaurs on a Spaceship (who) 122
+1 Earthshaker Dreadmaw (lci) 325
+1 Elemental Bond (scd) 180
+1 Elvish Mystic (cmm) 284
+1 Emiel the Blessed (j22) 180
+1 Entish Restoration (ltr) 163
+1 Ephemerate (sld) 1990
+1 Etali, Primal Conqueror // Etali, Primal Sickness (mom) 298
+1 Etali, Primal Storm (fdn) 194
+1 Farseek (m13) 170
+1 Forerunner of the Empire (rix) 102
+1 Forest (rex) 25
+6 Forest (lci) 291
+1 Garruk's Uprising (wot) 53
+1 Gathering Place (msh) 381
+1 Ghalta and Mavren (mom) 307
+1 Ghalta, Stampede Tyrant (lci) 326
+1 Gishath, Sun's Avatar (xln) 222
+1 Heroic Intervention (ltc) 249
+1 Hulking Raptor (lci) 327
+1 Hunting Velociraptor (rex) 4
+1 Invasion of Ikoria // Zilortha, Apex of Ikoria (mom) 190
+1 Jetmir's Garden (snc) 250
+1 Jungle Shrine (otc) 303
+1 Kinjalli's Sunwing (lcc) 130
+1 Kogla and Yidaro (mom) 311
+1 Last March of the Ents (ltr) 172
+1 Llanowar Elves (7ed) 253
+1 Marauding Raptor (lcc) 228
+1 Monster Manual // Zoological Study (clb) 242
+2 Mountain (rex) 24
+3 Mountain (lci) 290
+1 Multiversal Passage (spm) 180
+1 Myriad Landscape (dsc) 289
+1 Nature's Lore (clb) 244
+C Pantlaza, Sun-Favored (lcc) 4
+1 Path of Ancestry (blc) 322
+1 Path to Exile (otp) 6
+1 Plains (rex) 21
+3 Plains (lci) 287
+1 Polyraptor (spg) 12
+1 Pugnacious Hammerskull (lci) 328
+1 Ravenous Tyrannosaurus (rex) 18
+1 Regisaur Alpha (lcc) 286
+1 Reliquary Tower (dsc) 295
+1 Rhythm of the Wild (sld) 1740
+1 Rootbound Crag (blc) 326
+1 Sakura-Tribe Scout (plst) SOK-144
+1 Sauron, Dino Devotee (msc) 731
+1 Savage Order (rex) 6
+1 Scion of Calamity (lcc) 93
+1 Secluded Courtyard (lcc) 350
+1 Smuggler's Surprise (otj) 180
+1 Sol Ring (lcc) 313
+1 Spire Garden (clb) 361
+1 Stomping Ground (rvr) 289
+1 Stroke of Midnight (tdc) 132
+1 Stump Stomp // Burnwillow Clearing (mh3) 259
+1 Sunbillow Verge (dft) 264
+1 Sunfrill Imitator (lcc) 94
+1 Teleportation Circle (afr) 39
+1 Temple Altisaur (lcc) 138
+1 Temple Garden (grn) 258
+1 The Skullspore Nexus (lci) 212
+1 Three Visits (cmr) 261
+1 Topiary Stomper (lcc) 261
+1 Training Compound (msh) 384
+1 Tranquil Frillback (mat) 74
+1 Triceraton Commander (tmt) 25
+1 Unclaimed Territory (lcc) 366
+1 Vaultborn Tyrant (big) 20
+1 Wakening Sun's Avatar (lcc) 139
+1 Wayward Swordtooth (lcc) 263
+1 Welcome to . . . // Jurassic Park (rex) 7
+1 Wooded Foothills (mh3) 236
+1 Wrathful Raptors (lcc) 88
+
+8. "Phyrexian Proliferate" by pmaddox:
+1 Arcane Sanctum (afc) 223
+1 Arcane Signet (afc) 197
+1 Atraxa, Grand Unifier (one) 196
+C Atraxa, Praetors' Voice (mul) 33
+1 Beseech the Mirror (woe) 82
+1 Blightbelly Rat (one) 85
+1 Blind Obedience (wot) 1
+1 Bloated Contaminator (one) 159
+1 Blooming Marsh (otj) 266
+1 Breach the Multiverse (mom) 94
+1 Breeding Pool (eoe) 278
+1 Brimaz, Blight of Oreskos (moc) 2
+1 Cavern of Souls (lci) 269
+1 Chrome Host Seedshark (mom) 51
+1 Command Tower (afc) 230
+1 Concealed Courtyard (otj) 268
+1 Contaminant Grafter (onc) 17
+1 Counterspell (cmm) 630
+1 Day of Judgment (fdn) 422
+1 Deathcap Glade (inr) 275
+1 Deserted Beach (inr) 276
+1 Doubling Season (fdn) 216
+1 Drown in Ichor (one) 91
+1 Eerie Interference (woe) 12
+1 Eiganjo, Seat of the Empire (neo) 413
+1 Elesh Norn // The Argent Etchings (mom) 12
+1 Elesh Norn, Grand Cenobite (mul) 3
+1 Elesh Norn, Mother of Machines (one) 10
+1 Essence of Orthodoxy (mom) 323
+1 Exotic Orchard (afc) 236
+1 Ezuri, Claw of Progress (mul) 38
+1 Ezuri, Stalker of Spheres (one) 201
+1 Farewell (fic) 242
+1 Fierce Guardianship (cmm) 94
+1 Flooded Strand (mh3) 464
+1 Food (tmoc) 35
+1 Forest (one) 266
+1 Forest (one) 271
+1 Glissa, Herald of Predation (mom) 226
+1 Godless Shrine (eoe) 254
+1 Grafted Butcher (mom) 109
+1 Green Sun's Twilight (one) 169
+1 Hallowed Fountain (clu) 277
+1 Human (twoe) 2
+8 Incubator // Phyrexian (tmom) 17
+1 Innkeeper's Talent (blb) 180
+1 Jin-Gitaxias // The Great Synthesis (mom) 65
+1 Karn's Bastion (lcc) 339
+1 Knight (twoe) 3
+1 Lightning Greaves (afc) 331
+1 Metastatic Evangel (mh3) 35
+1 Meticulous Archive (mkm) 264
+1 Mithril Coat (ltr) 245
+1 Mondrak, Glory Dominus (one) 23
+1 Nature's Will (wot) 82
+1 Necrogen Rotpriest (one) 212
+1 On an Adventure (twoe) 18
+1 Opulent Palace (tdm) 264
+1 Orc Army (tltr) 5
+1 Orcish Bowmasters (ltr) 103
+1 Overgrown Tomb (ecl) 266
+1 Phyrexian Arena (one) 104
+1 Phyrexian Atlas (one) 237
+1 Plains (mom) 282
+1 Progenitor Exarch (mom) 32
+1 Realmbreaker, the Invasion Tree (mom) 263
+1 Reanimate (ltc) 206
+1 Reject Imperfection (one) 67
+1 Reprieve (ltr) 26
+1 Restless Cottage (woe) 258
+1 Restless Fortress (woe) 305
+1 Rhystic Study (wot) 25
+1 Rona, Herald of Invasion // Rona, Tolarian Obliterator (mom) 295
+1 Sandsteppe Citadel (tdm) 266
+1 Scheming Aspirant (one) 107
+1 Sea of Clouds (bbd) 84
+1 Shattered Sanctum (inr) 283
+1 Sheoldred's Edict (one) 108
+1 Skithiryx, the Blight Dragon (mul) 17
+1 Skrelv, Defector Mite (one) 301
+1 Smothering Tithe (cmm) 57
+1 Sol Ring (afc) 215
+1 Staff of Compleation (one) 242
+1 Stroke of Midnight (woe) 33
+1 Sunfall (mom) 40
+1 Swords to Plowshares (nec) 89
+1 Tekuthal, Inquiry Dominus (one) 71
+1 Temple of Enlightenment (nec) 180
+1 The One Ring (ltr) 246
+1 Thriving Grove (j25) 776
+1 Thriving Heath (cmm) 431
+1 Thriving Isle (afc) 270
+1 Thriving Moor (afc) 271
+1 Toxic Deluge (mh3) 277
+1 Treasure (tspm) 7
+1 Tyrranax Rex (one) 189
+1 Underground Mortuary (mkm) 333
+1 Urza's Incubator (mh3) 297
+1 Venerated Rotpriest (one) 192
+1 Victimize (afc) 112
+1 Virtue of Loyalty // Ardenvale Fealty (woe) 38
+1 Vorinclex // The Grand Evolution (mom) 213
+1 Vraan, Executioner Thane (one) 114
+1 Vraska, Betrayal's Sting (one) 115
+1 Vraska's Fall (one) 116
+1 Watery Grave (eoe) 261
+1 Zopandrel, Hunger Dominus (one) 195
