@@ -15491,6 +15491,52 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads a discard and its reflexive -X/-X on a creature the attacker's defending player controls", () => {
+    const armix = parseFace(
+      {
+        name: "Card",
+        type_line: "Legendary Artifact Creature — Golem",
+        oracle_text:
+          "Whenever ~ attacks, you may discard a card. When you do, target creature defending player controls gets -X/-X until end of turn, where X is the number of artifacts you control plus the number of artifact cards in your graveyard.",
+      },
+      { tokenFor: (d: string) => d },
+    );
+    expect(armix.complete).toBe(true);
+    const x = {
+      product: [{ sum: [{ countOf: { type: "artifact", controlledBy: "you" } }, { countInGraveyard: { type: "artifact", ownedBy: "you" } }] }, -1],
+    };
+    expect(armix.triggered[0].targets).toEqual([]);
+    expect(armix.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "discard", target: "you", amount: 1 },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "discarded" },
+            then: {
+              kind: "reflexive-trigger",
+              targets: ["creature-defending-player-controls"],
+              effect: { kind: "modify-pt", target: 0, power: x, toughness: x, duration: "end-of-turn" },
+            },
+          },
+        ],
+      },
+    });
+    // Another creature's attack isn't the source's: left to a person.
+    const other = parseFace(
+      {
+        name: "Card",
+        type_line: "Enchantment",
+        oracle_text:
+          "Whenever a creature you control attacks, you may discard a card. When you do, target creature defending player controls gets -X/-X until end of turn, where X is the number of artifacts you control plus the number of artifact cards in your graveyard.",
+      },
+      { tokenFor: (d: string) => d },
+    );
+    expect(other.complete).toBe(false);
+  });
+
   it("reads life lost from radiation gained instead, and rad counters beside +1/+1 counters", () => {
     const strong = read(
       "Legendary Creature — Mutant Berserker",

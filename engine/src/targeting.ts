@@ -19,11 +19,13 @@ import {
 } from "./characteristics.js";
 import { filterReadsX, manaValueOfObject, matchesFilter, stackObjectTargetsMatch } from "./filter.js";
 import type { CardFilter } from "./filter.js";
+import { entriesThisTurn } from "./journal.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { activePlayerOf, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo } from "./state.js";
 import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
+import { phaseOfStep } from "./turn.js";
 import {
   anyNumberSlot,
   concreteTargetSpecs,
@@ -449,12 +451,26 @@ function isLivingCreature(
  * attacking: "defending player" of `"creature-defending-player-controls"` and
  * the `whose: "defending-player"` specs. */
 function defendingPlayerOf(state: GameState, source: TargetSource | undefined): PlayerId | undefined {
-  const attacking = source?.object !== undefined ? state.objects[source.object]?.attacking : undefined;
-  if (attacking === null || attacking === undefined) return undefined;
-  if (state.players[attacking as PlayerId] !== undefined) return attacking as PlayerId;
-  // An attacked battle's defending player is its protector (rule 310.9d).
-  const attacked = state.objects[attacking as ObjectId];
-  return attacked?.protector ?? attacked?.controller;
+  if (source?.object === undefined) return undefined;
+  const of = (at: PlayerId | ObjectId): PlayerId | undefined => {
+    if (state.players[at as PlayerId] !== undefined) return at as PlayerId;
+    // An attacked battle's defending player is its protector (rule 310.9d).
+    const attacked = state.objects[at as ObjectId];
+    return attacked?.protector ?? attacked?.controller;
+  };
+  const attacking = state.objects[source.object]?.attacking;
+  if (attacking !== null && attacking !== undefined) return of(attacking);
+  // No longer attacking — it left the battlefield or was removed from combat
+  // with its ability still to choose a target (Armix, Filigree Thrasher's
+  // "when you do"): the player it was attacking before that (rule 508.5),
+  // from this combat's journal entry, as an effect's "defending player" is.
+  if (phaseOfStep(state.turn.step) !== "combat") return undefined;
+  const combat = state.turn.combatPhases ?? 1;
+  const declared = entriesThisTurn(state, "attacked")
+    .filter((e) => e.object === source.object && e.combat === combat)
+    .at(-1);
+  if (declared?.target === undefined) return undefined;
+  return declared.target.kind === "player" ? declared.target.player : of(declared.target.object);
 }
 
 function isSpellOnStack(state: GameState, id: ObjectId): boolean {

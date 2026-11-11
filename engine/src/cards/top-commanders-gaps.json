@@ -7,6 +7,7 @@
     "condition:face-down-is-creature-card",
     "replacement:all-hand-spells-exiled-linked",
     "replacement:life-loss-from-radiation",
+    "bug:defending-player-after-removal",
     "effect:target-different-controllers",
     "cost:first-targeting-ability-cost-reduction",
     "keyword:warp-from-graveyard-and-life-cost",

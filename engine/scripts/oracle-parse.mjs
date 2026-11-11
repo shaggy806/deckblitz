@@ -3193,6 +3193,22 @@ export function parseSentence(sentence, ctx) {
     const token = ctx.tokenFor?.(m[1]) ?? null;
     if (token === null) return null;
     return { kind: "create-token", token, count: { damageDealtThisTurn: true, who: "each-player", to: "source" } };
+  // The attacker's own ability (rule 508.5: the player it's attacking, or was
+  // before it was removed from combat): "target creature defending player
+  // controls gets -X/-X until end of turn, where X is the number of artifacts
+  // you control plus the number of artifact cards in your graveyard" (Armix,
+  // Filigree Thrasher).
+  if (
+    ctx?.thatPlayer === "trigger-player" &&
+    ctx.it === "source" &&
+    (m = sentenceRe("target creature defending player controls gets -x/-x until end of turn, where x is the number of (.+?) you control plus the number of (.+?) cards in your graveyard").exec(s))
+  ) {
+    const here = parseTypePhrase(m[1]);
+    const there = parseTypePhrase(m[2]);
+    if (here !== null && there !== null) {
+      const x = { product: [{ sum: [{ countOf: { ...here, controlledBy: "you" } }, { countInGraveyard: { ...there, ownedBy: "you" } }] }, -1] };
+      return { kind: "modify-pt", target: ctx.target("creature-defending-player-controls"), power: x, toughness: x, duration: "end-of-turn" };
+    }
   }
   // "Amass Orcs X, where X is that excess damage" (Fall of Cair Andros): an
   // excess `dealt-damage` trigger's value is the excess.
@@ -8149,6 +8165,39 @@ function reflexiveAboutAt(sentences, i, ctx) {
 }
 
 /**
+ * "You may discard a card. When you do, target creature defending player
+ * controls gets -X/-X until end of turn, where X is …" (Armix, Filigree
+ * Thrasher): the discard, and a reflexive ability (rule 603.12) whose target
+ * is its own, chosen as it's put on the stack. Only the one clause the
+ * sentence reader knows a self-attack trigger's defending player for; `null`
+ * otherwise.
+ */
+function discardWhenYouDoAt(sentences, i, ctx) {
+  if (!/^you may discard a card\.$/i.test(sentences[i] ?? "")) return null;
+  const clause = /^When you do, (target creature defending player controls gets .+\.)$/.exec(sentences[i + 1] ?? "");
+  if (clause === null) return null;
+  const targets = [];
+  const inner = { ...ctx, targets, target: (spec) => targets.push(spec) - 1 };
+  const effect = parseSentence(`${clause[1][0].toUpperCase()}${clause[1].slice(1)}`, inner);
+  if (effect === null || effect === undefined || containsUndefined(effect) || targets.length !== 1) return null;
+  return {
+    kind: "may",
+    prompt: "Discard a card?",
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "discard", target: "you", amount: 1 },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "discarded" },
+          then: { kind: "reflexive-trigger", targets, effect, text: sentences[i + 1] },
+        },
+      ],
+    },
+  };
+}
+
+/**
  * "You may pay {1}{W} any number of times. When you pay this cost one or more
  * times, put that many valor counters on this creature." (Intrepid Adversary;
  * "up to three times", `maxX`): a `may` whose `cost` is paid a chosen number of
@@ -9640,6 +9689,11 @@ export function parseEffect(text, outer) {
         parsed.push(effect);
         hints.push({ sentence, effect });
       }
+    // "You may discard a card. When you do, …" (`discardWhenYouDoAt`).
+    const discardThen = discardWhenYouDoAt(sentences, i, ctx);
+    if (discardThen !== null) {
+      parsed.push(discardThen);
+      hints.push({ sentence, effect: discardThen });
       skip = 1;
       continue;
     }

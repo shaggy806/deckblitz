@@ -126,7 +126,9 @@ export type TargetSpec =
    * controls", the player her Faeries dealt combat damage to).
    * `"defending-player"` is the player the ability's source is attacking, as
    * for `"creature-defending-player-controls"` (Kogla, the Titan Ape's
-   * "target artifact or enchantment defending player controls").
+   * "target artifact or enchantment defending player controls") — or, once
+   * it has left combat, the player it was attacking this combat (rule 508.5:
+   * Armix, Filigree Thrasher's reflexive target with Armix gone).
    * `{ seat }` is one player, `seat` places after the spell's or ability's
    * controller in turn order (see {@link playerAtSeat}) — a slot bound to
    * "that player": Dismantling Wave's "for each opponent, destroy up to one
