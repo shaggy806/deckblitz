@@ -18758,6 +18758,8 @@ function parseStatic(line, text) {
     "Each opponent can cast spells only any time they could cast a sorcery.": { prohibits: [{ act: "cast", who: "opponents", unless: "sorcery-timing" }] },
     "You may activate abilities of creatures you control as though those creatures had haste.": { activateAsThoughHaste: { type: "creature" } },
     "You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.": { loyaltyActivationsEachTurn: 2 },
+    // Its own alone (Urza, Planeswalker).
+    "You may activate the loyalty abilities of ~ twice each turn rather than only once.": { loyaltyActivationsEachTurn: { times: 2, of: "self" } },
     "Creatures you control can boast twice during each of your turns rather than once.": { boastsEachOfYourTurns: 2 },
     "Players can't activate planeswalkers' loyalty abilities.": {
       prohibits: [{ act: "activate", who: "each-player", of: { type: "planeswalker" }, only: "loyalty" }],

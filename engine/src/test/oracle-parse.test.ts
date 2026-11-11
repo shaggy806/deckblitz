@@ -603,6 +603,15 @@ describe("when a spell may be cast or an ability activated", () => {
       staticOf("All creatures can attack your opponents and planeswalkers your opponents control as though those creatures had haste."),
     ).toMatchObject({ affects: { scope: "all-creatures" }, attackAsThoughHaste: "your-opponents" });
     expect(staticOf("You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.")?.loyaltyActivationsEachTurn).toBe(2);
+    // Its own alone: Urza, Planeswalker's, the name shortened as its text has it.
+    expect(
+      (parseFace({
+        name: "Urza, Planeswalker",
+        type_line: "Legendary Planeswalker — Urza",
+        oracle_text: "You may activate the loyalty abilities of Urza twice each turn rather than only once.",
+        loyalty: "7",
+      } as never) as unknown as { static?: Record<string, unknown>[] }).static?.[0]?.loyaltyActivationsEachTurn,
+    ).toEqual({ times: 2, of: "self" });
     expect(staticOf("Creatures you control can boast twice during each of your turns rather than once.")?.boastsEachOfYourTurns).toBe(2);
     expect(staticOf("Players can't activate planeswalkers' loyalty abilities.")?.prohibits).toEqual([{ act: "activate", who: "each-player", of: { type: "planeswalker" }, only: "loyalty" }]);
     expect(staticOf("Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.")?.prohibits).toEqual([{ act: "activate", who: "enchanted-player", except: ["mana", "loyalty"], anyZone: true }]);

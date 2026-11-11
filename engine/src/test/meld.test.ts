@@ -18,11 +18,15 @@ import {
   A,
   B,
   activate,
+  counters,
   destroy,
+  enter,
   graveyard,
   hand,
   keywords,
   lands,
+  life,
+  loyalty,
   pickPermanents,
   pt,
   ref,
@@ -30,6 +34,7 @@ import {
   settle,
   spawn,
   table,
+  toHand,
   toStep,
   tokensNamed,
   zone,
@@ -223,6 +228,102 @@ describe("an activated meld: Hanweir Battlements", () => {
     destroy(game, garrison);
     expect(zone(game, battlements)).toBe("battlefield");
     expect(showing(game, TOWNSHIP)).toEqual([]);
+  });
+});
+
+describe("a melded planeswalker: Urza, Lord Protector and The Mightstone and Weakstone", () => {
+  const URZA = "Urza, Planeswalker";
+  const canActivate = (game: Game, source: ObjectId): boolean =>
+    game.legalActions(A).some((a) => a.kind === "activate-ability" && a.source === source);
+  /** Alice's Urza, melded for {7} in her main phase. */
+  function meldUrza(): { game: Game; a: ReturnType<typeof table>["a"]; urza: ObjectId } {
+    const t = table();
+    const lord = spawn(t.game, "Urza, Lord Protector");
+    spawn(t.game, "The Mightstone and Weakstone");
+    lands(t.game, "Island", 7);
+    activate(t.game, lord, 0);
+    const [urza] = showing(t.game, URZA);
+    return { game: t.game, a: t.a, urza };
+  }
+
+  it("melds into a planeswalker that enters with its loyalty (rule 306.5b), white and blue, mana value 8", () => {
+    const { game, urza } = meldUrza();
+    expect(urza).toBeDefined();
+    expect(counters(game, urza, "loyalty")).toBe(7);
+    expect(game.viewFor(A).objects[urza]?.faceName).toBe(URZA);
+    // {1}{W}{U} + {5} (202.3c).
+    expect(manaValueOfObject(registryOf(game), game.state.objects[urza])).toBe(8);
+    expect(game.state.zones.shared.exile).toEqual([]);
+  });
+
+  it("melds only as a sorcery", () => {
+    const { game } = table();
+    const lord = spawn(game, "Urza, Lord Protector");
+    spawn(game, "The Mightstone and Weakstone");
+    lands(game, "Island", 7);
+    toStep(game, "upkeep");
+    expect(canActivate(game, lord)).toBe(false);
+    toStep(game, "precombat-main");
+    expect(canActivate(game, lord)).toBe(true);
+  });
+
+  it("its own loyalty abilities twice a turn, never a third time, and no other planeswalker's (rule 606.3)", () => {
+    const { game, urza } = meldUrza();
+    const teferi = enter(game, "Teferi, Time Raveler");
+    // 0: two Soldiers; +1: draw two, discard one.
+    activate(game, urza, 2);
+    expect(tokensNamed(game, "Soldier Artifact Token", A)).toBe(2);
+    expect(canActivate(game, urza)).toBe(true);
+    activate(game, urza, 1);
+    expect(counters(game, urza, "loyalty")).toBe(8);
+    expect(canActivate(game, urza)).toBe(false);
+    // "Of Urza": Teferi's are still once.
+    const before = counters(game, teferi, "loyalty");
+    loyalty(game, teferi, 1);
+    expect(counters(game, teferi, "loyalty")).toBe(before + 1);
+    expect(canActivate(game, teferi)).toBe(false);
+  });
+
+  it("+2 makes artifact, instant and sorcery spells cost {2} less this turn and gains 2 life", () => {
+    const { game, urza } = meldUrza();
+    const before = life(game, A);
+    activate(game, urza, 0);
+    expect(life(game, A)).toBe(before + 2);
+    expect(counters(game, urza, "loyalty")).toBe(9);
+    // All seven Islands are tapped: a {2} artifact is free, a creature isn't.
+    const rock = toHand(game, "Mind Stone");
+    const bears = toHand(game, "Grizzly Bears");
+    const castable = (card: ObjectId): boolean => game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === card);
+    expect(castable(rock)).toBe(true);
+    expect(castable(bears)).toBe(false);
+  });
+
+  it("−10 destroys every nonland permanent but its controller's artifacts and planeswalkers", () => {
+    const { game, urza } = meldUrza();
+    game.state.objects[urza].counters.loyalty = 10;
+    const rock = spawn(game, "Mind Stone");
+    const mine = spawn(game, "Grizzly Bears");
+    const theirRock = spawn(game, "Mind Stone", B);
+    activate(game, urza, 4);
+    expect(zone(game, rock)).toBe("battlefield");
+    expect(zone(game, mine)).toBe("graveyard");
+    expect(zone(game, theirRock)).toBe("graveyard");
+    // Indestructible, but at no loyalty: it's put into the graveyard (704.5i), as its two cards.
+    expect(showing(game, URZA)).toEqual([]);
+    const names = graveyard(game, A).map((id) => game.state.objects[id].cardName);
+    expect(names).toContain("Urza, Lord Protector");
+    expect(names).toContain("The Mightstone and Weakstone");
+  });
+
+  it("the front face's discount: artifact, instant and sorcery spells cost {1} less", () => {
+    const { game } = table();
+    spawn(game, "Urza, Lord Protector");
+    lands(game, "Island", 1);
+    const rock = toHand(game, "Mind Stone");
+    const bears = toHand(game, "Grizzly Bears");
+    const castable = (card: ObjectId): boolean => game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === card);
+    expect(castable(rock)).toBe(true);
+    expect(castable(bears)).toBe(false);
   });
 });
 

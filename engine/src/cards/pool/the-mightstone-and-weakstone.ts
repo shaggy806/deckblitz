@@ -2,10 +2,9 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 3032.
 //
-// The front half of a meld pair, as Hanweir Garrison is: melding is Urza, Lord Protector's
-// ability, not this card's, and Urza isn't in the pool, so nothing on this card is left out —
-// its line about melding is reminder text. (Meld rulings, 2022-10-14, concern only the melded
-// permanent and the instruction to meld.)
+// The front half of a meld pair (`meldCard`), as Hanweir Garrison is: melding is Urza, Lord
+// Protector's ability, not this card's — its line about melding is reminder text. (Meld
+// rulings, 2022-10-14, concern only the melded permanent and the instruction to meld.)
 //
 // The modes are chosen as the trigger goes on the stack (rule 700.2b — `announced`, Aether
 // Channeler's shape). The mana is Karn, Legacy Reforged's deny-list (`notSpell`).
@@ -21,6 +20,7 @@ export default defineCard({
   supertypes: ["legendary"],
   types: ["artifact"],
   subtypes: ["Powerstone"],
+  meldCard: true,
   text: `${ETB_TEXT}\n${DRAW_MODE}\n${SHRINK_MODE}\n${MANA_TEXT}\n(Melds with Urza, Lord Protector.)`,
   triggered: [
     {

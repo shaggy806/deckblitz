@@ -2317,8 +2317,10 @@ export interface StaticAbility extends TypePatch, ColorPatch {
   /** "You may activate the loyalty abilities of planeswalkers you control
    * **twice each turn** rather than only once" (Oath of Teferi, rule 606.3):
    * how many times this permanent's controller may. Two of them are still
-   * twice (its ruling). */
-  readonly loyaltyActivationsEachTurn?: 2;
+   * twice (its ruling). `{ times: 2, of: "self" }` is this permanent's own
+   * loyalty abilities alone: "You may activate the loyalty abilities of
+   * **Urza** twice each turn rather than only once" (Urza, Planeswalker). */
+  readonly loyaltyActivationsEachTurn?: 2 | { readonly times: 2; readonly of: "self" };
   /** "Creatures you control can boast **twice** during each of your turns
    * rather than once" (Birgi, God of Storytelling, rule 702.142b): how many
    * times each boast ability of its controller's creatures may be activated

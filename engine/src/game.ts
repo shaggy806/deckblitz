@@ -23883,7 +23883,7 @@ export class Game {
         ? null
         : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
       if (timing !== null) return timing;
-      if (this.loyaltyActivationsOf(source) >= this.loyaltyActivationsAllowed(player)) {
+      if (this.loyaltyActivationsOf(source) >= this.loyaltyActivationsAllowed(player, source)) {
         return `a loyalty ability of ${def.name} has already been activated this turn`;
       }
       // A "−X" cost removes the X announced (rule 107.3a), so it needs that
@@ -26524,9 +26524,12 @@ export class Game {
   }
 
   /** How many times `player` may activate loyalty abilities of a permanent
-   * this turn: once (rule 606.3), or twice with Oath of Teferi's static. */
-  private loyaltyActivationsAllowed(player: PlayerId): number {
-    return this.controlsActiveStatic(player, (ability) => ability.loyaltyActivationsEachTurn !== undefined) ? 2 : 1;
+   * this turn: once (rule 606.3), or twice with Oath of Teferi's static for
+   * every planeswalker they control, or with `source`'s own for itself alone
+   * (Urza, Planeswalker's "the loyalty abilities of Urza"). */
+  private loyaltyActivationsAllowed(player: PlayerId, source: GameObject): number {
+    if (this.hasOwnStatic(source, (ability) => typeof ability.loyaltyActivationsEachTurn === "object")) return 2;
+    return this.controlsActiveStatic(player, (ability) => ability.loyaltyActivationsEachTurn === 2) ? 2 : 1;
   }
 
   /** How many times each boast ability of `source` may be activated this turn:
