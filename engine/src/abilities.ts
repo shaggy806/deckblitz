@@ -1350,8 +1350,10 @@ export type TriggerKind =
        * the target of a spell" (Dormant Gomazoa, Amulet of Safekeeping). */
       readonly playerOnly?: true;
       /** Only an *ability* targeting it, not a spell — "becomes the target of
-       * an ability you control" (Loki, God of Mischief). */
-      readonly abilityOnly?: true;
+       * an ability you control" (Loki, God of Mischief). `"activated"` is
+       * only an activated ability, never a triggered one: "become the target
+       * of an activated ability" (Professor Hojo). */
+      readonly abilityOnly?: true | "activated";
     }
   | {
       /**

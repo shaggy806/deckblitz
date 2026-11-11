@@ -9237,6 +9237,26 @@ describe("costs keyed to a spell's target", () => {
     expect(esior.static[0].targetedBySpellsCost).toEqual({ payGeneric: 3, targeting: { isCommander: true, controlledBy: "you" } });
   });
 
+  it("reads 'the first activated ability you activate during your turn that targets a creature you control' and its trigger", () => {
+    const hojo = face(
+      "Professor Hojo",
+      "Legendary Creature — Human Scientist",
+      "The first activated ability you activate during your turn that targets a creature you control costs {2} less to activate.\nWhenever one or more creatures you control become the target of an activated ability, draw a card. This ability triggers only once each turn.",
+    );
+    expect(hojo.complete).toBe(true);
+    expect(hojo.static[0].condition).toEqual({ kind: "your-turn" });
+    expect(hojo.static[0].abilityCostModification).toEqual({
+      applies: {},
+      anyZone: true,
+      byYou: true,
+      targeting: { type: "creature", controlledBy: "you" },
+      reduceGeneric: 2,
+      firstEachTurn: true,
+    });
+    expect(hojo.triggered[0].trigger).toEqual({ on: "becomes-target", who: "you-control", filter: { type: "creature" }, abilityOnly: "activated" });
+    expect(hojo.triggered[0].oncePerTurn).toBe(true);
+  });
+
   it("reads the same line quoted, granted to what it names", () => {
     const skybonder = face(
       "Jubilant Skybonder",

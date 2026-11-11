@@ -2059,6 +2059,13 @@ export function parseTrigger(clause) {
     if (filter === null || filter.type === undefined) return null;
     return [{ on: "becomes-target", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // "Whenever one or more creatures you control become the target of an
+  // activated ability" (Professor Hojo): never a triggered one.
+  if ((m = /^Whenever one or more (\w+?)s you control become the target of an activated ability$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || filter.type === undefined) return null;
+    return [{ on: "becomes-target", who: "you-control", filter, abilityOnly: "activated" }];
+  }
   // A player becoming a target (rule 115.7): "whenever you become the target
   // of a spell[ or ability][ an opponent controls]" (Amulet of Safekeeping,
   // Dormant Gomazoa), "whenever you or a permanent you control becomes …"
@@ -18506,6 +18513,26 @@ function parseStatic(line, text) {
           byOpponents: true,
           targeting: { ...targeting, controlledBy: "you" },
           increaseGeneric: Number(m[2]),
+        },
+        text,
+      };
+    }
+  }
+  // "The first activated ability you activate during your turn that targets a
+  // creature you control costs {2} less to activate." (Professor Hojo).
+  if ((m = /^The first activated ability you activate during your turn that targets an? (.+?) you control costs \{(\d+)\} less to activate\.$/.exec(line))) {
+    const targeting = parseTypePhrase(m[1]);
+    if (targeting !== null && Object.keys(targeting).length > 0) {
+      return {
+        affects: { scope: "self" },
+        condition: { kind: "your-turn" },
+        abilityCostModification: {
+          applies: {},
+          anyZone: true,
+          byYou: true,
+          targeting: { ...targeting, controlledBy: "you" },
+          reduceGeneric: Number(m[2]),
+          firstEachTurn: true,
         },
         text,
       };

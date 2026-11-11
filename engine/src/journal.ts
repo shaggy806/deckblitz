@@ -67,7 +67,10 @@ export type JournalKind =
    * (`"loyalty"`: 606.3, `"equip"`: 702.6), `ability` which one where a limit
    * or a reader counts it ("activate only once each turn", 602.5b; "if this
    * ability has been activated four or more times this turn"). Kept only for
-   * those: a mana ability nothing limits isn't journaled. */
+   * those: a mana ability nothing limits isn't journaled. `how: "targeting"`
+   * is one permanent it was activated targeting (`target`, in `targetStint`,
+   * `targetWas` as it was then), an entry per permanent: "the first activated
+   * ability you activate that targets a creature you control". */
   | "activated"
   /** A triggered ability `ability` of `object` (its source, in `stint`)
    * triggered, `player` its controller — kept for "this ability triggers
@@ -83,7 +86,8 @@ export type JournalKind =
   /** The ability `ability` did its thing (an `add-mana` with
    * `marksAbilityDone` that added mana — Carpet of Flowers). */
   | "done"
-  /** `player`'s spell or ability (`how`: `"spell"` or `"ability"`) targeted
+  /** `player`'s spell or ability (`how`: `"spell"`, `"activated"` for an
+   * activated ability, `"ability"` for any other) targeted
    * the permanent `object` in `stint` (rule 115.1): valiant's and Angelic
    * Cub's "for the first time each turn". */
   | "targeted"

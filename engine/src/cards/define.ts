@@ -3656,8 +3656,19 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * with a target matching this, from this static's controller's side; once
      * however many match (its ruling). Triggered abilities are never reached
      * (rule 602: this is an activation's cost). With `increaseGeneric`, an
-     * offer leaves out a target its activator can't afford this way. */
+     * offer leaves out a target its activator can't afford this way; with
+     * `reduceGeneric`, one affordable only through the reduction is offered
+     * only with targets that earn it. */
     readonly targeting?: CardFilter;
+    /** With `targeting`: "**The first** activated ability you activate
+     * during your turn that targets a creature you control costs {2} less"
+     * (Professor Hojo, with `byYou`, `anyZone` and the static's `your-turn`
+     * condition) — only while its activator hasn't yet activated an ability
+     * this turn with such a target, each earlier target read as it was then
+     * (the journal's `activated` entries; rules 602.2b and 601.2c fix the
+     * targets before 601.2f totals the cost). Earlier activations are judged by their activator
+     * and targets alone, not by `applies` or `abilityKind`. */
+    readonly firstEachTurn?: true;
     /** A loyalty cost change with `abilityKind: "loyalty"`: "cost an
      * additional [+1] to activate" (Carth the Lion) is `increaseLoyalty: 1`.
      * Combined with the ability's own loyalty cost into one (rule 606.5): a

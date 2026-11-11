@@ -4295,17 +4295,19 @@ export class Game {
       // A target that costs more (Kopala): only those it can be paid for.
       const taxed = this.abilityTaxReaches(source, ability, player);
       const affordable = (all: readonly (readonly TargetRef[])[], x: number | undefined): TargetRef[][] =>
-        all.map((slot) =>
-          slot.filter(
-            (ref) =>
-              this.payMana(
-                player,
-                this.activatedAbilityManaCost(player, source, ability, x, [ref]).cost,
-                undefined,
-                ability.cost.tap ? source : undefined,
-                { kind: "ability", source, ability },
-              ) !== null,
-          ),
+        this.abilityOptionsAffordable(
+          source,
+          ability,
+          player,
+          all,
+          (refs) =>
+            this.payMana(
+              player,
+              this.activatedAbilityManaCost(player, source, ability, x, refs).cost,
+              undefined,
+              ability.cost.tap ? source : undefined,
+              { kind: "ability", source, ability },
+            ) !== null,
         );
       // "Choose one —" (rule 700.2b): offered once per choice of modes, each
       // with its modes' targets, as a mana ability is once per colour.
@@ -16395,7 +16397,7 @@ export class Game {
   ): TargetRef[][] {
     // A target that costs more (Kopala) is judged at the price it would have.
     const all = this.abilityTaxReaches(sourceId, ability, player)
-      ? options.map((slot) => slot.filter((ref) => affordableWith([ref])))
+      ? this.abilityOptionsAffordable(sourceId, ability, player, options, affordableWith)
       : options.map((slot) => [...slot]);
     const reduction = ability.targetCostReduction;
     if (reduction === undefined) return this.targetingSourceOptions(ability, player, sourceId, all, fullPriceOk, affordableWith);
@@ -16427,6 +16429,44 @@ export class Game {
     return this.abilityCostModifiers().some(
       ({ controller, source, mod }) =>
         mod.targeting !== undefined && this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod),
+    );
+  }
+
+  /** An ability's target options, each slot kept to the targets the
+   * activation can be paid for, where an `abilityCostModification` prices it
+   * by its targets (`targeting`): each judged chosen alone — a target that
+   * costs more (Kopala) left out when it's too dear — or, where a target
+   * elsewhere earns a reduction ("…that targets a creature you control costs
+   * {2} less" — Professor Hojo), beside one that does. */
+  private abilityOptionsAffordable(
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+    player: PlayerId,
+    options: readonly (readonly TargetRef[])[],
+    affordableWith: (targets: readonly TargetRef[]) => boolean,
+  ): TargetRef[][] {
+    const alone = options.map((slot) => slot.filter((ref) => affordableWith([ref])));
+    if (options.length < 2) return alone;
+    const discounts = this.abilityCostModifiers().filter(
+      ({ controller, source, mod }) =>
+        mod.targeting !== undefined &&
+        mod.reduceGeneric !== undefined &&
+        this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod),
+    );
+    if (discounts.length === 0) return alone;
+    const earns = (ref: TargetRef): boolean =>
+      ref.kind === "object" &&
+      this.state.objects[ref.object]?.zone === "battlefield" &&
+      discounts.some(({ controller, source, mod }) =>
+        matchesFilter(this.state, this.registry, ref.object, mod.targeting!, { you: controller, source }),
+      );
+    const earners = alone.map((slot) => slot.find(earns));
+    return options.map((slot, i) =>
+      slot.filter(
+        (ref) =>
+          alone[i].includes(ref) ||
+          earners.some((earner, j) => j !== i && earner !== undefined && affordableWith([ref, earner])),
+      ),
     );
   }
 
@@ -23357,15 +23397,27 @@ export class Game {
       // dear (`abilityTargetReductionOptions`).
       if (mod.targeting !== undefined) {
         const filter = mod.targeting;
-        if (
-          targets?.some(
-            (t) =>
-              t?.kind === "object" &&
-              this.state.objects[t.object]?.zone === "battlefield" &&
-              matchesFilter(this.state, this.registry, t.object, filter, { you: controller, source }),
-          ) === true
-        ) {
+        // "The first activated ability you activate … that targets a creature
+        // you control" (Professor Hojo): an earlier one this turn was it.
+        if (mod.firstEachTurn === true && this.activatedTargetingThisTurn(player, filter, controller, source)) continue;
+        const matches = (t: TargetRef | null | undefined): boolean =>
+          t?.kind === "object" &&
+          this.state.objects[t.object]?.zone === "battlefield" &&
+          matchesFilter(this.state, this.registry, t.object, filter, { you: controller, source });
+        if (targets?.some(matches) === true) {
           increaseGeneric += amount(mod.increaseGeneric, source);
+        }
+        // A reduction, while the ability is only offered, is assumed when a
+        // legal target would earn it (as `targetCostReduction`'s is).
+        if (
+          mod.reduceGeneric !== undefined &&
+          (targets !== undefined
+            ? targets.some(matches)
+            : !this.targetCostReductionOff &&
+              this.targetOptionsFor(ability.targets, player, this.permanentSource(sourceId)).flat().some(matches))
+        ) {
+          if (mod.leavesOneMana === true) reduceGenericLeavingOne += amount(mod.reduceGeneric, source);
+          else reduceGeneric += amount(mod.reduceGeneric, source);
         }
         continue;
       }
@@ -23412,6 +23464,20 @@ export class Game {
       }
     }
     return { increaseGeneric, reduceGeneric, reduceGenericLeavingOne };
+  }
+
+  /** Whether `player` has already activated an ability this turn with a
+   * target matching `filter` (as it was then, from `controller`'s side) —
+   * what uses up a `firstEachTurn` modification. The journal's. */
+  private activatedTargetingThisTurn(player: PlayerId, filter: CardFilter, controller: PlayerId, source: ObjectId): boolean {
+    return entriesThisTurn(this.state, "activated").some(
+      (e) =>
+        e.how === "targeting" &&
+        e.player === player &&
+        e.target?.kind === "object" &&
+        e.targetWas !== undefined &&
+        matchesFilter(this.state, this.registry, e.target.object, filter, { you: controller, source, snapshot: e.targetWas }),
+    );
   }
 
   /** Whether one `abilityCostModification` static (its `controller`'s, on
@@ -24622,6 +24688,26 @@ export class Game {
         ? { sacrificedToActivate: true as const }
         : {}),
     });
+    // What it was activated targeting, each permanent as it was: "the first
+    // activated ability you activate … that targets a creature you control"
+    // (Professor Hojo — `abilityCostModification`'s `firstEachTurn`). After
+    // its cost was worked out and paid, so it never counts itself.
+    const journaledTargets = new Set<ObjectId>();
+    for (const target of chosen) {
+      if (target?.kind !== "object" || journaledTargets.has(target.object)) continue;
+      const targeted = this.state.objects[target.object];
+      if (targeted === undefined || targeted.zone !== "battlefield") continue;
+      journaledTargets.add(target.object);
+      this.journal({
+        kind: "activated",
+        how: "targeting",
+        player,
+        object: sourceId,
+        target,
+        targetStint: targeted.zoneChangeCount ?? 0,
+        targetWas: this.takeLastKnown(target.object),
+      });
+    }
     this.announceTargeted(chosen, player, sourceId, false, abilityId);
     this.commitCrimeIfAny(chosen, player, abilityId);
     // Rule 601.2h: in any order, but random parts and those moving a card from
@@ -25604,7 +25690,9 @@ export class Game {
         player: by,
         object: target.object,
         stint: object.zoneChangeCount ?? 0,
-        how: bySpell ? "spell" : "ability",
+        // An activated ability's apart ("the target of an activated
+        // ability" — Professor Hojo): a triggered one is plain "ability".
+        how: bySpell ? "spell" : this.state.objects[stackObject]?.abilityKind === "activated" ? "activated" : "ability",
       });
       this.emit({ type: "object-targeted", object: target.object, by, source, stackObject, bySpell });
     }
@@ -31835,7 +31923,8 @@ export class Game {
               (spec.byControllerOnly !== true || e.player === self.controller) &&
               (spec.byOpponentOnly !== true || e.player !== self.controller) &&
               (spec.spellOnly !== true || e.how === "spell") &&
-              (spec.abilityOnly !== true || e.how === "ability"),
+              (spec.abilityOnly === undefined || e.how !== "spell") &&
+              (spec.abilityOnly !== "activated" || e.how === "activated"),
           ) - 1
         );
       }
@@ -32150,7 +32239,9 @@ export class Game {
           // "… becomes the target of a spell" — not an ability, or the
           // other way round (Loki).
           (spec.spellOnly !== true || event.bySpell) &&
-          (spec.abilityOnly !== true || !event.bySpell);
+          (spec.abilityOnly === undefined || !event.bySpell) &&
+          // "… of an activated ability" (Professor Hojo): never a triggered one.
+          (spec.abilityOnly !== "activated" || this.state.objects[event.stackObject]?.abilityKind === "activated");
         if (event.type === "player-targeted") {
           // "Whenever you become the target" (Amulet of Safekeeping), "a
           // player or permanent" (Loki).
