@@ -76,6 +76,29 @@ describe("Littjara Mirrorlake", () => {
     expect(counters(game, second as ObjectId)).toBe(0);
   });
 
+  it("a doubler's extra copy has the counter too; Chatterfang's Squirrel, a different token, doesn't", () => {
+    const doubled = table();
+    const lake = mirrorlake(doubled.game);
+    spawn(doubled.game, "Parallel Lives");
+    const bears = spawn(doubled.game, "Grizzly Bears");
+    activate(doubled.game, lake, 1, { targets: [ref(bears)] });
+    const copies = tokens(doubled.game, "Grizzly Bears");
+    expect(copies).toHaveLength(2);
+    expect(copies.map((id) => counters(doubled.game, id))).toEqual([1, 1]);
+
+    const { game } = table();
+    const second = mirrorlake(game);
+    spawn(game, "Chatterfang, Squirrel General");
+    const giant = spawn(game, "Hill Giant");
+    activate(game, second, 1, { targets: [ref(giant)] });
+    const [copy] = tokens(game, "Hill Giant");
+    expect(counters(game, copy)).toBe(1);
+    const squirrels = game.battlefield.filter((id) => game.state.objects[id].isToken === true && id !== copy);
+    expect(squirrels).toHaveLength(1);
+    expect(counters(game, squirrels[0])).toBe(0);
+    expect(pt(game, squirrels[0])).toEqual({ power: 1, toughness: 1 });
+  });
+
   it("is only at sorcery speed", () => {
     const { game } = table({ step: "upkeep" });
     const lake = mirrorlake(game);

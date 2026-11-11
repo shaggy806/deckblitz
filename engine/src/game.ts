@@ -44200,8 +44200,6 @@ controlledBy,
         group.sacrificeAtEndStep,
         group.goadedForGameBy,
         group.exileAtEndStep || group.sacrificeAtEndStep,
-        undefined,
-        group.withCounters,
       ),
     );
   }
