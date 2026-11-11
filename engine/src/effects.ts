@@ -3597,10 +3597,20 @@ export type EffectSpec =
        * graveyard with total mana value N or more — offered only while it
        * holds that much (701.59b), and declining is choosing none. "If you
        * do" / "when you do" is `then`, with the exiled cards as its targets,
-       * run only when evidence was collected. */
+       * run only when evidence was collected.
+       *
+       * `amount` is read as the effect resolves: "collect evidence **X**"
+       * (Incinerator of the Guilty) is a `choose-value` of `"number"` — X
+       * chosen then, from 0 to the graveyard's total mana value — around this
+       * with `amount: "x"`. `required` is for a collecting whose "you may" was
+       * already answered (the `may` around that choice): it can't be
+       * declined, and collecting evidence 0 by exiling nothing is still
+       * collecting evidence (the card's ruling), so `evidence-collected`
+       * follows and a `sequence` goes on to its "when you do". */
       readonly kind: "collect-evidence";
-      readonly amount: number;
+      readonly amount: EffectAmount;
       readonly then?: EffectSpec;
+      readonly required?: true;
     }
   | {
       /** "If you do, it becomes plotted" (rule 702.170c): a card an
@@ -12425,7 +12435,7 @@ export interface EffectApi {
   ): void;
   /** The controller may collect evidence `amount` — see the
    * `collect-evidence` effect. */
-  collectEvidence(amount: number, then: EffectSpec | undefined): void;
+  collectEvidence(amount: number, then: EffectSpec | undefined, required?: boolean): void;
   /** The source, a Case, becomes solved — see the `solve` effect. */
   solveSource(): void;
   /** A card in exile becomes foretold — see the `become-foretold` effect. */
@@ -17260,7 +17270,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "collect-evidence":
-      ctx.collectEvidence(spec.amount, spec.then);
+      ctx.collectEvidence(Math.max(0, Math.floor(amountValue(spec.amount, ctx))), spec.then, spec.required === true);
       return;
     case "solve":
       ctx.solveSource();

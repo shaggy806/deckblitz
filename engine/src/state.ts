@@ -3518,6 +3518,10 @@ export type AwaitingDecision =
        * the chosen graveyard cards are exiled by `destination` and, if any
        * were, an `evidence-collected` event follows (before `then`). */
       readonly collectEvidence?: number;
+      /** That collecting can't be declined (the `collect-evidence` effect's
+       * `required`): the event follows even with nothing exiled, which is
+       * collecting evidence 0 (Incinerator of the Guilty's ruling). */
+      readonly collectEvidenceRequired?: true;
       /**
        * Only an **order** is asked: every card in `ids` is picked, and the
        * order picked is where each goes (rule 401.4 — the owner arranges

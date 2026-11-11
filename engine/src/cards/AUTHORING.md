@@ -2181,7 +2181,13 @@ radiation", 728.1a, isn't told apart yet),
 Monitor: exile any number of graveyard cards with total mana value N or more, a choice the
 player may decline, offered only when the graveyard holds that much; `then` is "if you do" /
 "when you do", the exiled cards its targets; every collecting fires `evidence-collected`
-triggers — "whenever you collect evidence". As an activated ability's cost it's
+triggers — "whenever you collect evidence". `amount` is any amount, read as it resolves: "you may
+collect evidence **X**. When you do, … X damage" (Incinerator of the Guilty) is a `may` around a
+`choose-value` of `"number"` (`min: 0`, `max` the graveyard's total mana value, an `aggregate`
+`"sum"` of `"mana-value"` `in: "graveyards"`, rule 701.59b) whose `then` is a `sequence` of
+`collect-evidence { amount: "x", required: true }` and the `reflexive-trigger`, which reads the
+same X. `required` is a collecting whose may was already answered: it can't be declined, and
+evidence 0 with nothing exiled still counts (that card's ruling). As an activated ability's cost it's
 `cost.collectEvidence: N` — Forensic Researcher; as a spell's "you may collect evidence N"
 additional cost, `kicker: { cost: "", keyword: "collect-evidence", collectEvidence: N }`, with
 "if evidence was collected" the spell being kicked — Crimestopper Sprite),

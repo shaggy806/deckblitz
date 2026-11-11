@@ -73,7 +73,7 @@ export const COST_ACTS = {
   },
   blight: {},
   behold: {},
-  "collect-evidence": { payable: (spec, ctx) => ctx.canCollectEvidence(spec.amount) },
+  "collect-evidence": { payable: (spec, ctx) => ctx.canCollectEvidence(amountValue(spec.amount, ctx)) },
   "pay-energy": {
     payable: (spec, ctx) => ctx.energyOf(ctx.controller) >= amountValue(spec.amount, ctx),
     maxX: (_spec, ctx) => ctx.energyOf(ctx.controller),

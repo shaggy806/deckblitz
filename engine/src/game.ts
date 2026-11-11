@@ -11313,7 +11313,7 @@ export class Game {
     }
     // Collect evidence (rule 701.59a): "whenever you collect evidence" sees
     // it before "if you do" runs.
-    if (awaiting.collectEvidence !== undefined && chosen.length > 0) {
+    if (awaiting.collectEvidence !== undefined && (chosen.length > 0 || awaiting.collectEvidenceRequired === true)) {
       this.emit({ type: "evidence-collected", player, objects: [...chosen], amount: awaiting.collectEvidence });
     }
     this.state.awaiting = null;
@@ -39359,8 +39359,12 @@ controlledBy,
         invalidateComputedCache();
         this.emit({ type: "case-solved", object: source });
       },
-      collectEvidence: (amount, then) =>
-        this.beginCollectEvidence(controller, source, amount, { optional: true, x, ...(then !== undefined ? { then } : {}) }),
+      collectEvidence: (amount, then, required) =>
+        this.beginCollectEvidence(controller, source, amount, {
+          ...(required === true ? { required: true } : { optional: true }),
+          x,
+          ...(then !== undefined ? { then } : {}),
+        }),
       devouredBySource: (filter) => {
         // In the stint this refers to, as it last existed once it has left
         // (rule 608.2h): "for each creature it devoured" holds though it's gone.
@@ -48334,6 +48338,9 @@ controlledBy,
     amount: number,
     opts: {
       readonly optional?: boolean;
+      /** The effect's `required`: not declinable, and collecting evidence 0
+       * with nothing exiled still counts (Incinerator of the Guilty's ruling). */
+      readonly required?: boolean;
       readonly then?: EffectSpec;
       readonly x?: number;
       readonly priorityTo?: PlayerId;
@@ -48343,6 +48350,12 @@ controlledBy,
   ): void {
     if (this.state.players[player]?.hasLost !== false || !this.canCollectEvidence(player, amount)) return;
     const eligible = [...this.state.zones.perPlayer[player].graveyard];
+    // Collect evidence 0 from an empty graveyard: nothing to choose, and
+    // evidence is collected all the same.
+    if (opts.required === true && eligible.length === 0) {
+      this.emit({ type: "evidence-collected", player, objects: [], amount });
+      return;
+    }
     const tags = Object.fromEntries(
       eligible.map((id) => [id, [String(manaValueOfObject(this.registry, this.state.objects[id]))]]),
     );
@@ -48351,7 +48364,7 @@ controlledBy,
       player,
       ids: eligible,
       eligible,
-      min: opts.optional === true ? 0 : 1,
+      min: opts.optional === true || amount <= 0 ? 0 : 1,
       max: eligible.length,
       destination: "exile",
       leftover: "stay",
@@ -48363,6 +48376,7 @@ controlledBy,
         text: `with total mana value ${amount} or greater (collect evidence ${amount})`,
       },
       collectEvidence: amount,
+      ...(opts.required === true ? { collectEvidenceRequired: true as const } : {}),
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
       ...(opts.thenManaAbility !== undefined ? { thenManaAbility: opts.thenManaAbility } : {}),

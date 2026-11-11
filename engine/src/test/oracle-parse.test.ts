@@ -339,6 +339,46 @@ describe("a cost removing all of a kind of counter, the number the X", () => {
   });
 });
 
+describe("collect evidence X and its reflexive ability (Incinerator of the Guilty)", () => {
+  it("the may, X chosen up to the graveyard's total, the collecting, then the reflexive ability reading X", () => {
+    const whenYouDo = "When you do, this creature deals X damage to each creature and planeswalker that player controls.";
+    const ability = parseFace(
+      {
+        name: "Card",
+        type_line: "Creature — Dragon",
+        oracle_text: `Whenever this creature deals combat damage to a player, you may collect evidence X. ${whenYouDo} (To collect evidence X, exile cards with total mana value X or greater from your graveyard.)`,
+        power: "6",
+        toughness: "6",
+      },
+      { tokenFor: (d: string) => d },
+    ).triggered[0];
+    expect(ability.targets).toEqual([]);
+    expect(ability.effect).toEqual({
+      kind: "may",
+      prompt: "Collect evidence X?",
+      effect: {
+        kind: "choose-value",
+        value: "number",
+        min: 0,
+        max: { aggregate: "sum", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+        prompt: "Collect evidence X: choose X",
+        then: {
+          kind: "sequence",
+          effects: [
+            { kind: "collect-evidence", amount: "x", required: true },
+            {
+              kind: "reflexive-trigger",
+              targets: [],
+              effect: { kind: "damage-all", filter: { typesAnyOf: ["creature", "planeswalker"] }, amount: "x", whose: "trigger-player" },
+              text: whenYouDo,
+            },
+          ],
+        },
+      },
+    });
+  });
+});
+
 describe("a cost paid a chosen number of times", () => {
   const read = (oracle_text: string) =>
     parseFace({ name: "Card", type_line: "Creature — Human", oracle_text, power: "3", toughness: "1" }, { tokenFor: (d: string) => d }).triggered[0];

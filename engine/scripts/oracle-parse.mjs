@@ -8373,6 +8373,56 @@ function reflexiveAboutAt(sentences, i, ctx) {
 }
 
 /**
+ * "You may collect evidence X. When you do, this creature deals X damage to
+ * each creature and planeswalker that player controls." (Incinerator of the
+ * Guilty; rule 701.59a): the may, X chosen as it resolves up to the
+ * graveyard's total mana value (701.59b), the collecting — `required`, the
+ * may already answered, so collecting evidence 0 counts — and a reflexive
+ * ability (rule 603.12) reading X. Its clause takes no target here; `null`
+ * when it isn't read whole or doesn't read X.
+ */
+function collectEvidenceXAt(sentences, i, ctx) {
+  if (!/^you may collect evidence X\.$/i.test(sentences[i] ?? "")) return null;
+  const clause = /^When you do, (.+\.)$/.exec(sentences[i + 1] ?? "");
+  if (clause === null) return null;
+  const slots = ctx.targets.length;
+  // "… deals X damage to each creature and planeswalker that player
+  // controls": the player its trigger names, when it names one.
+  const sweep = /^(?:~|this creature|it) deals X damage to each (creature|creature and planeswalker) that player controls\.$/i.exec(clause[1]);
+  const effect =
+    sweep !== null && ctx.thatPlayer === "trigger-player"
+      ? {
+          kind: "damage-all",
+          filter: sweep[1].toLowerCase() === "creature" ? { type: "creature" } : { typesAnyOf: ["creature", "planeswalker"] },
+          amount: "x",
+          whose: "trigger-player",
+        }
+      : parseSentence(`${clause[1][0].toUpperCase()}${clause[1].slice(1)}`, ctx);
+  if (effect === null || effect === undefined || containsUndefined(effect) || ctx.targets.length !== slots || !JSON.stringify(effect).includes('"x"')) {
+    ctx.targets.length = slots;
+    return null;
+  }
+  return {
+    kind: "may",
+    prompt: "Collect evidence X?",
+    effect: {
+      kind: "choose-value",
+      value: "number",
+      min: 0,
+      max: { aggregate: "sum", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+      prompt: "Collect evidence X: choose X",
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "collect-evidence", amount: "x", required: true },
+          { kind: "reflexive-trigger", targets: [], effect, text: sentences[i + 1].replaceAll("~", "this creature") },
+        ],
+      },
+    },
+  };
+}
+
+/**
  * "You may discard a card. When you do, target creature defending player
  * controls gets -X/-X until end of turn, where X is …" (Armix, Filigree
  * Thrasher): the discard, and a reflexive ability (rule 603.12) whose target
@@ -10036,6 +10086,14 @@ export function parseEffect(text, outer) {
         parsed.push(effect);
         hints.push({ sentence, effect });
       }
+      skip = 1;
+      continue;
+    }
+    // "You may collect evidence X. When you do, …" (`collectEvidenceXAt`).
+    const evidenceX = collectEvidenceXAt(sentences, i, ctx);
+    if (evidenceX !== null) {
+      parsed.push(evidenceX);
+      hints.push({ sentence, effect: evidenceX });
       skip = 1;
       continue;
     }
