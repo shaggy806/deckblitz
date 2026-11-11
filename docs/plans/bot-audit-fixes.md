@@ -9,7 +9,8 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 5, sub-step 2** (hand quality, Q2; sub-step 1, the scenarios, is built).
+- Next: **step 5, sub-step 3** (engines that aren't draw or creature tokens, Q4; sub-steps 1,
+  the scenarios, and 2, hand quality, are built).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
@@ -599,7 +600,7 @@ then (`docs-challenge` in the audit's notes): it is the first point at which str
 correctness or speed, is what changed.
 
 - [x] 1. Asymmetric scenarios (2026-11-10; `1103c8bb4`)
-- [ ] 2. Hand quality, and the rules it retires
+- [x] 2. Hand quality, and the rules it retires (2026-11-10; `726ca9237`)
 - [ ] 3. Engines that aren't draw or creature tokens
 - [ ] 4. Interaction scored on the affected opponent
 - [ ] 5. The sequencing rules retired; the A/B
@@ -623,6 +624,84 @@ is two Craw Wurms and two more lands). No weight or rule changed, so no `bot:dif
 - **Left out on purpose**: a trailing player's Craw Wurm with carol ahead, and a tutor on the
   stack. The audit calls holding the counter defensible in both, so neither answer is asserted.
   Move a training scenario to the gate (drop its `kind`) in the sub-step that turns it right.
+
+### As built (2026-11-10): sub-step 2, hand quality
+
+A new feature, `handQuality` (`engine/src/bot/hand-worth.ts`), at `hand`'s weight of 2: the sum
+over our own hand of each card's **quality** less 1, where 1 is an average card and the range is
+0.5 to 1.5. `hand` and `handManaValue` are unchanged, so a hand of average cards scores what it
+did.
+
+- **Card flow** (the old rule's `isCardFlow`, now `card-flow.ts`, returning the cards netted):
+  0.4 for each card it leaves us up, less the cards a discard cost throws. Opt, Ponder,
+  Brainstorm, Preordain, Thrill of Possibility 0.4; Divination 0.8; Harmonize 1.2.
+- **A tutor into hand**: 0.85 of the best cards in the library its filter matches.
+- **Any other untargeted instant or sorcery**: 0.85 of `effectWorth` over 2.
+- **A creature**: a fifth of its board terms (2.5 + half its power and toughness), and never
+  under 1 if it has any ability. Bears 0.9, a 3/3 1.1, a Craw Wurm the cap.
+- **A land**: 1.25 for the first in hand below seven lands (the next land drop), 1 for the
+  rest, 0.5 at seven or more.
+- **Everything else** (targets, an additional cost, a noncreature permanent): 1.
+- **Reach**: 15% off per mana past lands + 1, down to half, by the card's cheapest face.
+
+**Where it differs from the plan.** The plan priced every spell by `effectWorth`. Card flow
+isn't: `effectWorth` adds half a card for a scry and doesn't see a put-back, so Opt came out at
+1.06 and Brainstorm at the cap, and casting either was a loss. Pricing a cantrip at 0.85 of an
+average card was the second try, and `bot:diff` showed what is wrong with it: the rollouts read
+the real library, so Preordain was held on turn two because the top card was out of reach, and
+Harmonize and Deep Analysis were held on poor tops. At 0.4 a card (under the least any card
+can be) drawing is a gain whatever is on top. Removal and counterspells are left at 1 on
+purpose: what they are worth in hand is sub-step 4's.
+
+**The search's pick had to agree.** A tutor is priced on the best card, but the rollout took
+v1's pick, which ranked every land the board was short of above any spell: Demonic Tutor at
+four lands found a Forest, and the tutor priced on a Craw Wurm scored a loss. A search into
+our own hand now ranks by the same quality (`chooseFromZone`), and "the first land in hand is
+1.25" is what keeps the land when the hand has none.
+
+**Rules, one off at a time** (the gate, 192 scenarios without the captures; `ablate.mjs`'s
+loader hooks no longer match `eval-bot.ts`, so this was a small script of prototype overrides):
+
+| Rule off | Before the feature (audit) | With it |
+| --- | --- | --- |
+| `isCantripDue` | 4 fail (Opt, Ponder, Expressive Iteration, Compulsive Research) and the tutor | none |
+| `isSuspendDue` | 1 | 1 (Ancestral Vision) |
+| `isFreeFetch` | 4 | 4 (the fetch-land plays) |
+
+So **`isCantripDue` is deleted**, cantrips and tutors both. One piece of it stays under its
+own name, `isSacrificeForCardsDue`: Deadly Dispute and Village Rites paid with a spare
+creature, which is the price of a creature (two and a half cards for a Grizzly Bears), not of
+a card in hand (`bot-sacrifice.test.ts` fails without it). `isSuspendDue` and `isFreeFetch`
+stay, as the audit half expected: a suspended card and a cracked fetch aren't cards in hand,
+so nothing here prices them. The tutor branch's "instant tutors wait for the end of the turn"
+went with the rule.
+
+**Scenarios.** "Holds Opt earlier in the round" asserted the rule's timing, not a reason, and
+is replaced by four that give the reason: Opt is cast at the end of the turn before ours and
+earlier in the round when nothing else wants its Island; held earlier in the round while two
+Islands hold up Counterspell (the `answers` reserve); cast beside Counterspell at the last
+window. New: "casts Opt in its own main phase to look for a land" (the audit's -0.05). Two of
+the five fail on `origin/main` (the earlier cast and the main-phase cast). Gate 215 of 215.
+Tests: `bot-hand-worth.test.ts` (the prices), `bot-tutor.test.ts` (what a tutor finds).
+
+**`bot:diff`** against `origin/main`, six four-player games, 35 of 12,132 decisions:
+
+- Cantrips and loots cast sooner: Thrill of Possibility and Think Twice in the main phase,
+  Opt before a charge-counter ability, a cycler cycled where it passed. Right.
+- Scry, discard and search picks by quality (7): a Plains kept over Archmage Emeritus at four
+  lands, a commander discarded rather than a land (it goes to the command zone), Magma Opus
+  thrown before Tempest Technique. Right or a judgment call.
+- Phyrexian Reclamation not activated (6, one combat): two mana and 2 life for a small
+  creature card, which is now worth less than a card. A judgment call.
+- Order within a turn (about 12): a ramp spell or a cheap one before the big creature, whose
+  quality in hand is the cap, so casting it gains a point less than it did. Harmonize and
+  Canopy Gargantuan "passed" before combat were cast after it. Gaze of Granite over Rampaging
+  Baloths is the one to watch: the wipe was already close.
+- Two attack declarations differ, downstream of the plays the rollouts now make.
+
+**Left for later.** Reach ignores a cost the card reduces itself (Blasphemous Act reads as
+out of reach). A hand at seven cards still holds a draw-three, since the cleanup discard is
+priced. `followUps` and the sequencing rules are sub-step 5's.
 
 ## Housekeeping, any time
 

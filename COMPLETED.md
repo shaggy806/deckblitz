@@ -3347,6 +3347,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 5, sub-step 2: a card in hand has a quality** (2026-11-10;
+  `726ca9237`; `docs/plans/bot-audit-fixes.md`, *As built*): the `handQuality` feature
+  (`bot/hand-worth.ts`) prices card flow under the cards it draws, a tutor at 0.85 of the best
+  card it finds, a creature by its body, a land by whether the board wants it, and what the
+  lands can't reach at less. `isCantripDue` is deleted (the search casts cantrips and tutors
+  itself; its sacrifice-for-cards branch stays as `isSacrificeForCardsDue`); `isSuspendDue` and
+  `isFreeFetch` are still needed. A search into hand takes the card of the highest quality.
 - **The bot audit's fixes, step 5, sub-step 1: scenarios for answers at an uneven table**
   (2026-11-10; `1103c8bb4`; `docs/plans/bot-audit-fixes.md`, *As built*): three training scenarios
   the evaluation gets wrong (Rhystic Study and Smothering Tithe from a player who isn't ahead,

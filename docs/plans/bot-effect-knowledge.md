@@ -668,6 +668,25 @@ with v1's answer. So on a board too big to search, v2 plays roughly v1's casts a
 answers, at v1's speed, and searches again when a new turn's first rollout fits.
 `bot-audit-fixes.md` step 2 has the mechanism and the measurements.
 
+### The audit's step 5: a card in hand has a quality (2026-11-10)
+
+`hand` counted a card as a card, so one card traded for another scored a wash, and a rule cast
+each kind anyway (`isCantripDue`: cantrips, then tutors). The evaluation now has `handQuality`
+(`bot/hand-worth.ts`): each card of our own hand is worth its quality, 1 for an average card,
+0.5 to 1.5. Card flow is 0.4 a card netted, so drawing is always a gain; a tutor is 0.85 of the
+best card it can find; a creature goes by its body; a land is 1.25 as the next land drop and
+0.5 once seven are out; a card the lands can't reach is marked down. Targeted spells and
+noncreature permanents stay at 1.
+
+What changed in how v2 picks: it casts cantrips, loots and tutors because the search scores
+them a gain, at any window where nothing else wants the mana (in its own main phase before the
+land drop, not only at the end of the turn before its own); it holds one when the evaluation
+has a reason (`answers`: the mana holds up a counterspell). `isCantripDue` is deleted. What is
+left of it is `isSacrificeForCardsDue` (Deadly Dispute on a spare creature), beside
+`isSuspendDue` and `isFreeFetch`, which price things that aren't cards in hand. A search into
+our own hand takes the card of the highest quality, in v1 too, so a rollout finds the card
+the tutor was priced on. `bot-audit-fixes.md` step 5 has the prices and the diff.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until
