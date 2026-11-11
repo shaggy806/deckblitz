@@ -434,7 +434,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.otherwise);
   },
   "exchange-control-all": (n, v) => v.touch(n.with, "harm", DECISIVE),
-  "cant-be-sacrificed": (n, v) => v.touch(n.target, "help", MINOR),
+  "cant-be-sacrificed": (n, v) => {
+    if (n.target !== undefined) v.touch(n.target, "help", MINOR);
+  },
   "block-additional": (n, v) => v.touch(n.target, "help", MINOR),
   "attack-despite-defender": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "help", MINOR);

@@ -1906,6 +1906,11 @@ export interface PtModifier {
    * `"cant-be-sacrificed"` effect). The static equivalent is
    * `StaticAbility.cantBeSacrificed`. */
   cantBeSacrificed?: boolean;
+  /** This player can't sacrifice it (the `"cant-be-sacrificed"` effect's
+   * `by` — Call for Aid's "you can't sacrifice those creatures this turn").
+   * A rule about it and that player, not an ability: it holds through a loss
+   * of abilities, and nobody else is bound. See `Game.canBeSacrificed`. */
+  cantBeSacrificedBy?: PlayerId;
   /** Layer 6 — it "can block an additional creature" (or `"any"` number of
    * creatures) for the duration (the `block-additional` effect —
    * `StaticAbility.blockAdditional` is the static form). */

@@ -18412,3 +18412,30 @@ describe("a token copy that enters with counters", () => {
     });
   });
 });
+
+describe("what you can't do with the creatures you took this turn", () => {
+  it("reads Call for Aid whole", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      oracle_text:
+        "Gain control of all creatures target opponent controls until end of turn. Untap those creatures. They gain haste until end of turn. You can't attack that player this turn. You can't sacrifice those creatures this turn.",
+    } as never) as unknown as { complete: boolean; targets: unknown[]; effect: { effects: Record<string, unknown>[] } };
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual(["opponent"]);
+    expect(face.effect.effects[0]).toEqual({
+      kind: "gain-control-all",
+      filter: { type: "creature" },
+      untilEndOfTurn: true,
+      controlledByTarget: 0,
+    });
+    expect(face.effect.effects.slice(3)).toEqual([
+      {
+        kind: "restrict",
+        filter: { type: "creature", controlledBy: "you" },
+        restrictions: [{ kind: "cant-attack", at: { target: 0 } }],
+      },
+      { kind: "cant-be-sacrificed", filter: { thisWay: "control-effect" }, by: "you", duration: "end-of-turn" },
+    ]);
+  });
+});

@@ -12,6 +12,7 @@ import type { AttackCost, AttackPermanentCost, BlockTaxRates, BlockerTax, Combat
 import type { CardRegistry, CombatPermanentTax, CombatTax, StaticAbility } from "../cards.js";
 import {
   cantBeSacrificed,
+  sacrificeProhibitedByController,
   computeCharacteristics,
   countValue,
   hasLostAbilities,
@@ -173,7 +174,7 @@ export function attackCostAmong(
       object !== undefined &&
       object.controller === player &&
       matchesFilter(state, registry, id, tax.filter, { you: player, source }) &&
-      (tax.do !== "sacrifice" || !cantBeSacrificed(state, registry, id))
+      (tax.do !== "sacrifice" || (!cantBeSacrificed(state, registry, id) && !sacrificeProhibitedByController(state, id)))
     );
   });
 }

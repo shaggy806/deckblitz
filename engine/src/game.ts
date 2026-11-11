@@ -125,6 +125,7 @@ import {
   assignedCombatDamage,
   unblockedAssignmentOf,
   cantBeSacrificed,
+  sacrificeProhibitedByController,
   countValue,
   damageDealtThisTurn,
   journalCount,
@@ -37391,6 +37392,7 @@ controlledBy,
         this.exchangeControlAll(controller, filter, other, untilEndOfTurn),
       grantCantBeSacrificed: (target, duration) =>
         this.grantCantBeSacrificed(target, lastingHere(duration)),
+      prohibitSacrificeBy: (object, player, duration) => this.prohibitSacrificeBy(object, player, lastingHere(duration)),
       grantBlockAdditional: (target, amount, duration) =>
         this.grantBlockAdditional(target, amount, lastingHere(duration)),
       mill: (target, amount) => this.millByEffect(target, amount),
@@ -53508,7 +53510,24 @@ controlledBy,
   /** Rule 701.21a: whether `id`'s controller could sacrifice it — not if it
    * can't be sacrificed (`cantBeSacrificed` in `characteristics.ts`). */
   private canBeSacrificed(id: ObjectId): boolean {
-    return !cantBeSacrificed(this.state, this.registry, id);
+    return !cantBeSacrificed(this.state, this.registry, id) && !sacrificeProhibitedByController(this.state, id);
+  }
+
+  /** See the `"cant-be-sacrificed"` {@link EffectSpec}'s `by`: `player` can't
+   * sacrifice `id` for `duration` (`PtModifier.cantBeSacrificedBy`). A token
+   * stack is bound whole: the modifier goes with each token split from it. */
+  private prohibitSacrificeBy(id: ObjectId, player: PlayerId, duration: Expiry): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
+    object.modifiers.push({
+      timestamp: this.freshTimestamp(),
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      cantBeSacrificedBy: player,
+      ...durationFields(duration),
+    });
+    invalidateComputedCache();
   }
 
   /** Counter a spell on the stack (rule 701.5): it's removed from the stack and

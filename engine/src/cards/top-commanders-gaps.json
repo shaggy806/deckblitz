@@ -2291,7 +2291,8 @@
   "zone:cast-from-library-top-flash",
   "zone:linked-exile-cast-as-though-flash",
   "effect:face-down-as-any-characteristics",
-  "bug:door-unlock-timestamp"
+  "bug:door-unlock-timestamp",
+  "effect:cant-sacrifice-those-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

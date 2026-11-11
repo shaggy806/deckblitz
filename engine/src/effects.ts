@@ -4525,9 +4525,23 @@ export type EffectSpec =
        * Shattered One) — until end of turn, or (`"permanent"`) for as long
        * as it stays on the battlefield. A modifier, like a keyword grant;
        * the static form is `StaticAbility.cantBeSacrificed`, which says what
-       * it stops (rule 701.21a). */
+       * it stops (rule 701.21a).
+       *
+       * `filter` instead of `target`: every permanent matching it as this
+       * resolves (rule 611.2c), a token stack whole — "those creatures" is
+       * `{ thisWay: "control-effect" }`.
+       *
+       * `by`: "**You** can't sacrifice those creatures this turn" (Call for
+       * Aid) — a rule over that player and those permanents rather than an
+       * ability they gain: it holds through a loss of abilities, and binds
+       * only that player, so a creature that changes hands again can be
+       * sacrificed by whoever has it. Asked to sacrifice one, the player
+       * can't and it stays; it can't pay a sacrifice cost either (the card's
+       * rulings). Naming nobody, nothing. */
       readonly kind: "cant-be-sacrificed";
-      readonly target: ObjectRef;
+      readonly target?: ObjectRef;
+      readonly filter?: CardFilter;
+      readonly by?: PlayerRef;
       readonly duration: PermanentDuration;
     }
   | {
@@ -11682,6 +11696,9 @@ export interface EffectApi {
   /** `target` gains "This creature can't be sacrificed" — see the
    * `"cant-be-sacrificed"` {@link EffectSpec}. */
   grantCantBeSacrificed(target: TargetRef, duration: PermanentDuration): void;
+  /** `player` can't sacrifice `object` (a token stack whole) for `duration` —
+   * the `"cant-be-sacrificed"` {@link EffectSpec}'s `by`. */
+  prohibitSacrificeBy(object: ObjectId, player: PlayerId, duration: PermanentDuration): void;
   /** See the `"block-additional"` {@link EffectSpec}. */
   grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PermanentDuration): void;
   /** `target` (a player) mills `amount` cards. */
@@ -17093,8 +17110,21 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "cant-be-sacrificed": {
+      const by = spec.by === undefined ? undefined : resolvePlayerRef(spec.by, ctx);
+      if (spec.by !== undefined && by === undefined) return;
+      if (spec.filter !== undefined) {
+        // Fixed as this resolves (rule 611.2c), a stack whole.
+        for (const { object } of ctx.permanentsMatching(spec.filter)) {
+          if (by !== undefined) ctx.prohibitSacrificeBy(object, by, spec.duration);
+          else ctx.grantCantBeSacrificed({ kind: "object", object }, spec.duration);
+        }
+        return;
+      }
+      if (spec.target === undefined) return;
       const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.grantCantBeSacrificed(target, spec.duration);
+      if (target === undefined) return;
+      if (by === undefined) ctx.grantCantBeSacrificed(target, spec.duration);
+      else if (target.kind === "object") ctx.prohibitSacrificeBy(target.object, by, spec.duration);
       return;
     }
     case "block-additional": {

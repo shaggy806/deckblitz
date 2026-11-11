@@ -5247,6 +5247,14 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`gain control of (${TARGET})( until end of turn)?`).exec(s))) {
     return { kind: "gain-control", target: slot(m[1]), untilEndOfTurn: m[2] !== undefined };
   }
+  // "Gain control of all creatures target opponent controls until end of
+  // turn" (Call for Aid): that one player's, `controlledByTarget`.
+  if ((m = re("gain control of all (.+) target (player|opponent) controls until end of turn").exec(s))) {
+    const ofTheirs = parseTypePhrase(m[1]);
+    if (ofTheirs !== null && Object.keys(ofTheirs).length > 0) {
+      return { kind: "gain-control-all", filter: ofTheirs, untilEndOfTurn: true, controlledByTarget: ctx.target(m[2].toLowerCase()) };
+    }
+  }
   // "Gain control of all artifacts your opponents control until end of turn"
   // (Broadcast Takeover), "… all creatures with power 4 or greater …" (Mob Rule).
   if ((m = re(`gain control of all (.+) until end of turn`).exec(s))) {
@@ -10913,6 +10921,28 @@ export function parseEffect(text, outer) {
       };
       parsed.push(...both.effects);
       hints.push({ sentence, effect: both });
+      continue;
+    }
+    // Call for Aid's last two sentences, after a gain-control-all of one
+    // target player's creatures: "You can't attack that player this turn."
+    // (a turn-wide rule over your creatures, rule 611.2c) and "You can't
+    // sacrifice those creatures this turn." (the ones control was gained of;
+    // a rule over you and them, not an ability they gain).
+    const tookFromTarget = parsed.find((step) => step.kind === "gain-control-all" && step.controlledByTarget !== undefined);
+    if (tookFromTarget !== undefined && /^you can't attack that player this turn\.$/i.test(sentence)) {
+      const noAttack = {
+        kind: "restrict",
+        filter: { type: "creature", controlledBy: "you" },
+        restrictions: [{ kind: "cant-attack", at: { target: tookFromTarget.controlledByTarget } }],
+      };
+      parsed.push(noAttack);
+      hints.push({ sentence, effect: noAttack });
+      continue;
+    }
+    if (tookFromTarget !== undefined && /^you can't sacrifice those creatures this turn\.$/i.test(sentence)) {
+      const noSacrifice = { kind: "cant-be-sacrificed", filter: { thisWay: "control-effect" }, by: "you", duration: "end-of-turn" };
+      parsed.push(noSacrifice);
+      hints.push({ sentence, effect: noSacrifice });
       continue;
     }
     // What the step before did, read by this one. "Untap them" / "Untap those

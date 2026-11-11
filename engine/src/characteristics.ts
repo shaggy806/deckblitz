@@ -6267,6 +6267,19 @@ export function cantBeSacrificed(state: GameState, registry: CardRegistry, id: O
 }
 
 /**
+ * Whether the controller of permanent `id` is a player who can't sacrifice it
+ * (`PtModifier.cantBeSacrificedBy` — Call for Aid's "you can't sacrifice
+ * those creatures this turn"). Only a permanent's controller sacrifices it
+ * (rule 701.21a), so this is the whole question. Not an ability: it isn't
+ * lost with the permanent's abilities.
+ */
+export function sacrificeProhibitedByController(state: GameState, id: ObjectId): boolean {
+  const object = state.objects[id];
+  if (object === undefined || object.zone !== "battlefield") return false;
+  return object.modifiers.some((m) => m.cantBeSacrificedBy === object.controller);
+}
+
+/**
  * Whether the legend rule (704.5j) passes over the permanent `id`: some
  * permanent on the battlefield has "the 'legend rule' doesn't apply to …"
  * and it reaches `id` — printed (`StaticAbility.legendRuleOff`, scoped by its
