@@ -537,6 +537,9 @@ export type GameEvent =
       /** Chosen and not moved (a `destination: "stay"` choice — Sylvan
        * Library's two cards): what's done with them comes next. */
       readonly chosenOnly?: true;
+      /** A split search (Cultivate): only the first of `objects` went to
+       * `to`; the others went here. */
+      readonly rest?: "hand" | "battlefield";
       /** Where the chosen cards were put, when not a hand or a library: the
        * log says "puts onto the battlefield", "puts into a graveyard" or
        * "exiles" rather than "takes". */

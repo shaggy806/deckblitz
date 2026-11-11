@@ -7990,3 +7990,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Spellwild Ouphe: at an X only its discount affords, only it can be targeted
 - **Do:** With two Mountains, cast Blaze and confirm X at 3 (the most offered). Click Bob's Grizzly Bears, then your Spellwild Ouphe.
 - **Expect:** The click on Grizzly Bears does nothing: X=3 is payable only with the Ouphe's {2} less. The Ouphe is taken and Blaze deals 3 damage to it.
+
+## A split search's prompt (2026-11-11)
+
+### Cultivate: the prompt says which find goes where
+- **Do:** Cast Cultivate. In the search, click Swamp, then Island, and confirm.
+- **Expect:** The popup's title reads "Choose up to 2 cards: the first you pick goes onto the battlefield, the other into your hand". The Swamp enters tapped and the Island is in your hand.

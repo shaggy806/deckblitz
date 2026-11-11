@@ -508,6 +508,8 @@ describe("outsideBattlefield", () => {
     const inHand = toHand(game, "Hill Giant");
     expect(subtypes(game, permanent)).toEqual(["Elf"]);
     expect(subtypes(game, inHand)).toEqual(["Elf"]);
+    // The hand card's tile shows it too: the view reads the same layer.
+    expect(game.viewFor(A).objects[inHand].subtypes).toEqual(["Elf"]);
   });
 
   it("Maskwood Nexus: every creature type, and nothing once it's gone", () => {

@@ -318,13 +318,26 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
           : `${who(event.player)} chooses nothing`
       }
       if (event.objects.length === 0) return `${who(event.player)} takes nothing`
-      return event.to === 'battlefield'
-        ? `${who(event.player)} puts ${event.objects.map(name).join(', ')} onto the battlefield`
-        : event.to === 'graveyard'
-          ? `${who(event.player)} puts ${event.objects.map(name).join(', ')} into a graveyard`
-          : event.to === 'exile'
-            ? `${who(event.player)} exiles ${event.objects.map(name).join(', ')}`
-            : `${who(event.player)} takes ${event.objects.map(name).join(', ')}`
+      {
+        const went = (to: typeof event.to, cards: string): string =>
+          to === 'battlefield'
+            ? `puts ${cards} onto the battlefield`
+            : to === 'graveyard'
+              ? `puts ${cards} into a graveyard`
+              : to === 'exile'
+                ? `exiles ${cards}`
+                : `takes ${cards}`
+        // A split search (Cultivate): the first find one way, the rest another.
+        if (event.rest !== undefined && event.objects.length > 1) {
+          const [first, ...others] = event.objects.map(name)
+          return `${who(event.player)} ${went(event.to, first)} and ${went(event.rest === 'hand' ? undefined : event.rest, others.join(', '))}`
+        }
+        return `${who(event.player)} ${went(event.to, event.objects.map(name).join(', '))}`
+      }
+    case 'library-searched':
+      return event.owner === event.player
+        ? `${who(event.player)} searches their library`
+        : `${who(event.player)} searches ${possessive(who(event.owner))} library`
     case 'library-shuffled':
       return `${who(event.player)} shuffles their library`
     case 'scried':

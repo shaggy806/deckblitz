@@ -11331,6 +11331,7 @@ export class Game {
         objects: [...chosen],
         ...(awaiting.destination === "stay" ? { chosenOnly: true as const } : {}),
         ...(to !== undefined ? { to } : {}),
+        ...(awaiting.restDestination !== undefined ? { rest: awaiting.restDestination } : {}),
       });
     }
     // Collect evidence (rule 701.59a): "whenever you collect evidence" sees

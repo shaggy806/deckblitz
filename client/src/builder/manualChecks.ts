@@ -12037,4 +12037,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Cultivate: the prompt says which find goes where',
+    board({ you: { bf: ['Forest*3'], hand: ['Cultivate'], lib: ['Island', 'Swamp', 'Grizzly Bears'] } }),
+  ),
 ]

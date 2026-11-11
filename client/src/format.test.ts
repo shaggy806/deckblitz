@@ -166,6 +166,12 @@ describe('log lines that name where a thing went or came from', () => {
       'Toby puts Hill Giant into a graveyard',
     )
     expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o], to: 'exile' })).toBe('Toby exiles Hill Giant')
+    // A split search: the first find one way, the other another (Cultivate).
+    expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o, o], to: 'battlefield', rest: 'hand' })).toBe(
+      'Toby puts Hill Giant onto the battlefield and takes Hill Giant',
+    )
+    expect(line({ type: 'library-searched', player: p1, owner: p1 })).toBe('Toby searches their library')
+    expect(line({ type: 'library-searched', player: p1, owner: p2 })).toBe("Toby searches P2's library")
   })
 
   it("names a countered or criminal ability by its source, the ability being gone", () => {

@@ -468,7 +468,15 @@ function zoneChoiceTitle(
     together?.rule === 'one-each'
       ? together.text
       : `${action.max === 1 ? 'a card' : `${n} cards`}${together ? ` ${together.text}` : ''}`
-  if (action.split === true) return `Choose ${cards}`
+  // A split (Cultivate): which find goes where is the order they're picked in.
+  if (action.split === true) {
+    const first =
+      action.destination === 'battlefield' ? 'onto the battlefield' : action.destination === 'hand' ? 'into your hand' : null
+    const others = action.rest === 'battlefield' ? 'onto the battlefield' : action.rest === 'hand' ? 'into your hand' : null
+    return first === null || others === null || action.max < 2
+      ? `Choose ${cards}`
+      : `Choose ${cards}: the first you pick goes ${first}, the ${action.max === 2 ? 'other' : 'rest'} ${others}`
+  }
   // Rule 103.6a, before turn 1: the Leylines in an opening hand, or the
   // Chancellors to reveal from it (rule 103.6b).
   if (action.openingHand === true && action.destination === 'reveal') return 'Opening hand: choose any of these to reveal'

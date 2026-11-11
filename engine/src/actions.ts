@@ -2052,6 +2052,9 @@ export type LegalAction =
       /** A split tutor (Cultivate): only the first chosen card goes to
        * `destination`, the rest elsewhere. */
       readonly split?: true;
+      /** Where a split's other cards go, for the prompt to say ("the first
+       * you pick goes onto the battlefield, the rest into your hand"). */
+      readonly rest?: "hand" | "battlefield";
       /** Only an **order** is being asked (rule 401.4 — "the rest on the
        * bottom of your library in any order", a scry's kept cards): every
        * card in `ids` is picked (`min` = `max` = all of them), and the order

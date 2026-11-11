@@ -43,14 +43,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 - **A spell's shown cost leaves out a target's tax** (found 2026-11-01). The cost drawn on the card and the X
   prompt's line don't add a `targetedBySpellsCost` tax (Boreal Elemental, Kopala). Targets the tax prices out of
   reach are no longer offered (`payableOptions`, 2026-11-11), so this is display only.
-- **A hand card's types show as printed under a static outside the battlefield** (found
-  2026-11-01). `view.ts` shows printed types for a card in hand under `typesOutsideBattlefield`
-  (Conspiracy, Arcane Adaptation), though the filters read the new types.
-- **Cultivate's split prompt doesn't say which find goes where** (found 2026-10-31). The older
-  `restDestination` split (Cultivate, Kodama's Reach) asks "Choose up to 2 cards" without saying
-  that the one picked goes onto the battlefield and the other to the hand. Fix: move those cards
-  to `search-library.instead` with `pick: "one"` (built 2026-10-31), which asks its own prompt.
-  Final Parting waits on the same thing (its split search just says "Choose 2 cards").
 
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or

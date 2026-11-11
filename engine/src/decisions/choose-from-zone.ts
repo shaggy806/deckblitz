@@ -49,7 +49,7 @@ export const chooseFromZone = defineDecision({
       min: awaiting.min,
       max: awaiting.max,
       destination: awaiting.destination,
-      ...(awaiting.restDestination !== undefined ? { split: true } : {}),
+      ...(awaiting.restDestination !== undefined ? { split: true, rest: awaiting.restDestination } : {}),
       ...(awaiting.together !== undefined ? { together: awaiting.together } : {}),
       ...(awaiting.order === true ? { order: true } : {}),
       ...(awaiting.searchRest?.shuffle != null ? { shuffledIn: true as const } : {}),

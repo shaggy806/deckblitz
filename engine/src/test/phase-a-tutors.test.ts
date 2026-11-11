@@ -62,11 +62,19 @@ describe("Cultivate — a tutor that splits its finds", () => {
     expect(awaiting?.kind).toBe("choose-from-zone");
     if (awaiting?.kind !== "choose-from-zone") return;
     const [first, second] = awaiting.eligible;
+    // The prompt can say which find goes where…
+    expect(game.legalActions(A).find((a) => a.kind === "choose-from-zone")).toMatchObject({ split: true, rest: "hand" });
     game.dispatch({ type: "choose-from-zone", player: A, chosen: [first, second] });
 
     expect(zoneOf(game, first)).toBe("battlefield");
     expect(game.state.objects[first].tapped).toBe(true);
     expect(zoneOf(game, second)).toBe("hand");
+    // …and so can the log.
+    expect(game.eventsOfType("cards-chosen-from-zone").at(-1)).toMatchObject({
+      objects: [first, second],
+      to: "battlefield",
+      rest: "hand",
+    });
   });
 
   it("puts a lone find onto the battlefield, not into hand", () => {
