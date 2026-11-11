@@ -294,6 +294,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 ## Code health
 
 - **Playwright can't run in parallel yet**: 4 workers took 7.2 minutes against 18, with 19 failures, mostly different tests from run to run (2026-11-04). It needs a dev-rooms server per worker, no room shared between spec files (FOURP, TWOAA and CASTN are), and the frame-timed specs kept serial.
+- **`resolve-arrows.spec.ts`'s 2-player creature test fails after the 4-player one** (found 2026-11-11): run as a whole file, "2p: a spell at a creature" at 1920x1080 or 2560x1440 loses its target click about every other run (the Bolt stays in hand, no error); alone it passes 12 of 12. Present before the day's client changes too. Only the daily full suite runs those sizes.
 - **Blank target slots don't survive JSON** (found 2026-10-31 by the situation fuzzer, ~1
   scenario in 100): a blank target slot is `undefined` by design (`ResolvedTargets`, in
   `GameObject.targets`, `SpellSnapshot.targets` — `lastOnStack` — and delayed and pending
