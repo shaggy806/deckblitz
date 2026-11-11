@@ -867,6 +867,7 @@ import _poolTerrorOfThePeaks from "../pool/terror-of-the-peaks.js";
 import _poolTerror from "../pool/terror.js";
 import _poolTetsukoUmezawaFugitive from "../pool/tetsuko-umezawa-fugitive.js";
 import _poolTetsuoUmezawa from "../pool/tetsuo-umezawa.js";
+import _poolTeyoGeometricTactician from "../pool/teyo-geometric-tactician.js";
 import _poolTezzeretCruelMachinist from "../pool/tezzeret-cruel-machinist.js";
 import _poolThaliaHereticCathar from "../pool/thalia-heretic-cathar.js";
 import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
@@ -1885,6 +1886,7 @@ const shard: CardShard = {
     _poolTerror,
     _poolTetsukoUmezawaFugitive,
     _poolTetsuoUmezawa,
+    _poolTeyoGeometricTactician,
     _poolTezzeretCruelMachinist,
     _poolThaliaHereticCathar,
     _poolThatsRoughBuddy,

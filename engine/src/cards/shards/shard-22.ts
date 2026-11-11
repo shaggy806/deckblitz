@@ -46,6 +46,7 @@ import _poolAssemblyWorker from "../pool/assembly-worker.js";
 import _poolAtlanteanSkirmisher from "../pool/atlantean-skirmisher.js";
 import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
 import _poolAugerSpree from "../pool/auger-spree.js";
+import _poolAuroraPhoenix from "../pool/aurora-phoenix.js";
 import _poolAutumnalGloom from "../pool/autumnal-gloom.js";
 import _poolAvabruckCaretaker from "../pool/avabruck-caretaker.js";
 import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
@@ -935,6 +936,7 @@ import _poolVantressPaladin from "../pool/vantress-paladin.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
 import _poolVeilingOddity from "../pool/veiling-oddity.js";
 import _poolVenerableKnight from "../pool/venerable-knight.js";
+import _poolVerdantCommand from "../pool/verdant-command.js";
 import _poolVeteranSurvivor from "../pool/veteran-survivor.js";
 import _poolVexingDevil from "../pool/vexing-devil.js";
 import _poolVexingDrone from "../pool/vexing-drone.js";
@@ -1076,6 +1078,7 @@ const shard: CardShard = {
     _poolAtlanteanSkirmisher,
     _poolAtmosphereSurgeon,
     _poolAugerSpree,
+    _poolAuroraPhoenix,
     _poolAutumnalGloom,
     _poolAvabruckCaretaker,
     _poolAvenFleetwing,
@@ -1965,6 +1968,7 @@ const shard: CardShard = {
     _poolVectorAsp,
     _poolVeilingOddity,
     _poolVenerableKnight,
+    _poolVerdantCommand,
     _poolVeteranSurvivor,
     _poolVexingDevil,
     _poolVexingDrone,

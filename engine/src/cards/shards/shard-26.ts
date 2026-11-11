@@ -24,6 +24,7 @@ import _poolAjaniVengeant from "../pool/ajani-vengeant.js";
 import _poolAkoumTeeth from "../pool/akoum-teeth.js";
 import _poolAkromaAngelOfFury from "../pool/akroma-angel-of-fury.js";
 import _poolAkromaAngelOfWrath from "../pool/akroma-angel-of-wrath.js";
+import _poolAkromaVisionOfIxidor from "../pool/akroma-vision-of-ixidor.js";
 import _poolAlquistProftMasterSleuth from "../pool/alquist-proft-master-sleuth.js";
 import _poolAmbitiousAugmenter from "../pool/ambitious-augmenter.js";
 import _poolAmbrosiaWhiteheart from "../pool/ambrosia-whiteheart.js";
@@ -1050,6 +1051,7 @@ const shard: CardShard = {
     _poolAkoumTeeth,
     _poolAkromaAngelOfFury,
     _poolAkromaAngelOfWrath,
+    _poolAkromaVisionOfIxidor,
     _poolAlquistProftMasterSleuth,
     _poolAmbitiousAugmenter,
     _poolAmbrosiaWhiteheart,

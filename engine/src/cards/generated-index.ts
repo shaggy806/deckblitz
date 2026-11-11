@@ -703,6 +703,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Wall Token (Builder's Talent)",
   "Wall Token (Invisible Woman)",
   "Wall Token (Rammas Echor, Ancient Shield)",
+  "Wall Token (Teyo, Geometric Tactician)",
   "Wall Token (The Fantastic Four)",
   "Wall Token (artifact, defender)",
   "Warrior Token",

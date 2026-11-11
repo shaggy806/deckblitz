@@ -522,6 +522,7 @@ import _poolAkroanSergeant from "./pool/akroan-sergeant.js";
 import _poolAkroanSkyguard from "./pool/akroan-skyguard.js";
 import _poolAkromaAngelOfFury from "./pool/akroma-angel-of-fury.js";
 import _poolAkromaAngelOfWrath from "./pool/akroma-angel-of-wrath.js";
+import _poolAkromaVisionOfIxidor from "./pool/akroma-vision-of-ixidor.js";
 import _poolAkromasBlessing from "./pool/akromas-blessing.js";
 import _poolAkromasDevoted from "./pool/akromas-devoted.js";
 import _poolAkromasMemorial from "./pool/akromas-memorial.js";
@@ -1625,6 +1626,7 @@ import _poolAuroraChampion from "./pool/aurora-champion.js";
 import _poolAuroraEidolon from "./pool/aurora-eidolon.js";
 import _poolAuroraGriffin from "./pool/aurora-griffin.js";
 import _poolAuroraOfEmrakul from "./pool/aurora-of-emrakul.js";
+import _poolAuroraPhoenix from "./pool/aurora-phoenix.js";
 import _poolAuroraShifter from "./pool/aurora-shifter.js";
 import _poolAuroralProcession from "./pool/auroral-procession.js";
 import _poolAuspiciousAncestor from "./pool/auspicious-ancestor.js";
@@ -9995,6 +9997,7 @@ import _poolFrenziedGoblin from "./pool/frenzied-goblin.js";
 import _poolFrenziedGorespawn from "./pool/frenzied-gorespawn.js";
 import _poolFrenziedRage from "./pool/frenzied-rage.js";
 import _poolFrenziedRaptor from "./pool/frenzied-raptor.js";
+import _poolFrenziedSaddlebrute from "./pool/frenzied-saddlebrute.js";
 import _poolFrenziedTilling from "./pool/frenzied-tilling.js";
 import _poolFrenziedTrapbreaker from "./pool/frenzied-trapbreaker.js";
 import _poolFrenzySliver from "./pool/frenzy-sliver.js";
@@ -11263,6 +11266,7 @@ import _poolGoliathPaladin from "./pool/goliath-paladin.js";
 import _poolGoliathSphinx from "./pool/goliath-sphinx.js";
 import _poolGoliathSpider from "./pool/goliath-spider.js";
 import _poolGoliathTruck from "./pool/goliath-truck.js";
+import _poolGollumObsessedStalker from "./pool/gollum-obsessed-stalker.js";
 import _poolGollumPatientPlotter from "./pool/gollum-patient-plotter.js";
 import _poolGollumRiddleMaster from "./pool/gollum-riddle-master.js";
 import _poolGollumSilentSlinker from "./pool/gollum-silent-slinker.js";
@@ -13521,6 +13525,7 @@ import _poolInspiritedVanguard from "./pool/inspirited-vanguard.js";
 import _poolInstantRamen from "./pool/instant-ramen.js";
 import _poolInstigatorGang from "./pool/instigator-gang.js";
 import _poolInstigator from "./pool/instigator.js";
+import _poolInstillEnergy from "./pool/instill-energy.js";
 import _poolInstillFuror from "./pool/instill-furor.js";
 import _poolInstillInfection from "./pool/instill-infection.js";
 import _poolInstrumentOfTheBards from "./pool/instrument-of-the-bards.js";
@@ -27235,6 +27240,7 @@ import _poolTevalTheBalancedScale from "./pool/teval-the-balanced-scale.js";
 import _poolTevalsJudgment from "./pool/tevals-judgment.js";
 import _poolTextbookTabulator from "./pool/textbook-tabulator.js";
 import _poolTeyoDiamondbladeMage from "./pool/teyo-diamondblade-mage.js";
+import _poolTeyoGeometricTactician from "./pool/teyo-geometric-tactician.js";
 import _poolTeyoLightshieldExpert from "./pool/teyo-lightshield-expert.js";
 import _poolTeyoTheShieldmage from "./pool/teyo-the-shieldmage.js";
 import _poolTeyosLightshield from "./pool/teyos-lightshield.js";
@@ -29585,6 +29591,7 @@ import _poolVenusTornBetweenWorlds from "./pool/venus-torn-between-worlds.js";
 import _poolVerazolTheSplitCurrent from "./pool/verazol-the-split-current.js";
 import _poolVerdantAutomaton from "./pool/verdant-automaton.js";
 import _poolVerdantCatacombs from "./pool/verdant-catacombs.js";
+import _poolVerdantCommand from "./pool/verdant-command.js";
 import _poolVerdantConfluence from "./pool/verdant-confluence.js";
 import _poolVerdantCrescendo from "./pool/verdant-crescendo.js";
 import _poolVerdantEidolon from "./pool/verdant-eidolon.js";
@@ -32292,6 +32299,7 @@ import _tokensWallTokenArtifactDefender from "./tokens/wall-token-artifact-defen
 import _tokensWallTokenBuildersTalent from "./tokens/wall-token-builders-talent.js";
 import _tokensWallTokenInvisibleWoman from "./tokens/wall-token-invisible-woman.js";
 import _tokensWallTokenRammasEchorAncientShield from "./tokens/wall-token-rammas-echor-ancient-shield.js";
+import _tokensWallTokenTeyoGeometricTactician from "./tokens/wall-token-teyo-geometric-tactician.js";
 import _tokensWallTokenTheFantasticFour from "./tokens/wall-token-the-fantastic-four.js";
 import _tokensWarriorTokenValorsReachTagTeam from "./tokens/warrior-token-valors-reach-tag-team.js";
 import _tokensWarriorTokenVigilance from "./tokens/warrior-token-vigilance.js";
@@ -32882,6 +32890,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAkroanSkyguard,
   _poolAkromaAngelOfFury,
   _poolAkromaAngelOfWrath,
+  _poolAkromaVisionOfIxidor,
   _poolAkromasBlessing,
   _poolAkromasDevoted,
   _poolAkromasMemorial,
@@ -33985,6 +33994,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAuroraEidolon,
   _poolAuroraGriffin,
   _poolAuroraOfEmrakul,
+  _poolAuroraPhoenix,
   _poolAuroraShifter,
   _poolAuroralProcession,
   _poolAuspiciousAncestor,
@@ -42355,6 +42365,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFrenziedGorespawn,
   _poolFrenziedRage,
   _poolFrenziedRaptor,
+  _poolFrenziedSaddlebrute,
   _poolFrenziedTilling,
   _poolFrenziedTrapbreaker,
   _poolFrenzySliver,
@@ -43623,6 +43634,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoliathSphinx,
   _poolGoliathSpider,
   _poolGoliathTruck,
+  _poolGollumObsessedStalker,
   _poolGollumPatientPlotter,
   _poolGollumRiddleMaster,
   _poolGollumSilentSlinker,
@@ -45881,6 +45893,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInstantRamen,
   _poolInstigatorGang,
   _poolInstigator,
+  _poolInstillEnergy,
   _poolInstillFuror,
   _poolInstillInfection,
   _poolInstrumentOfTheBards,
@@ -59595,6 +59608,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTevalsJudgment,
   _poolTextbookTabulator,
   _poolTeyoDiamondbladeMage,
+  _poolTeyoGeometricTactician,
   _poolTeyoLightshieldExpert,
   _poolTeyoTheShieldmage,
   _poolTeyosLightshield,
@@ -61945,6 +61959,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVerazolTheSplitCurrent,
   _poolVerdantAutomaton,
   _poolVerdantCatacombs,
+  _poolVerdantCommand,
   _poolVerdantConfluence,
   _poolVerdantCrescendo,
   _poolVerdantEidolon,
@@ -64658,6 +64673,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensWallTokenBuildersTalent,
   _tokensWallTokenInvisibleWoman,
   _tokensWallTokenRammasEchorAncientShield,
+  _tokensWallTokenTeyoGeometricTactician,
   _tokensWallTokenTheFantasticFour,
   _tokensWarriorTokenValorsReachTagTeam,
   _tokensWarriorTokenVigilance,
@@ -65255,6 +65271,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/akroan-skyguard": _poolAkroanSkyguard,
   "pool/akroma-angel-of-fury": _poolAkromaAngelOfFury,
   "pool/akroma-angel-of-wrath": _poolAkromaAngelOfWrath,
+  "pool/akroma-vision-of-ixidor": _poolAkromaVisionOfIxidor,
   "pool/akromas-blessing": _poolAkromasBlessing,
   "pool/akromas-devoted": _poolAkromasDevoted,
   "pool/akromas-memorial": _poolAkromasMemorial,
@@ -66358,6 +66375,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aurora-eidolon": _poolAuroraEidolon,
   "pool/aurora-griffin": _poolAuroraGriffin,
   "pool/aurora-of-emrakul": _poolAuroraOfEmrakul,
+  "pool/aurora-phoenix": _poolAuroraPhoenix,
   "pool/aurora-shifter": _poolAuroraShifter,
   "pool/auroral-procession": _poolAuroralProcession,
   "pool/auspicious-ancestor": _poolAuspiciousAncestor,
@@ -74728,6 +74746,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/frenzied-gorespawn": _poolFrenziedGorespawn,
   "pool/frenzied-rage": _poolFrenziedRage,
   "pool/frenzied-raptor": _poolFrenziedRaptor,
+  "pool/frenzied-saddlebrute": _poolFrenziedSaddlebrute,
   "pool/frenzied-tilling": _poolFrenziedTilling,
   "pool/frenzied-trapbreaker": _poolFrenziedTrapbreaker,
   "pool/frenzy-sliver": _poolFrenzySliver,
@@ -75996,6 +76015,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goliath-sphinx": _poolGoliathSphinx,
   "pool/goliath-spider": _poolGoliathSpider,
   "pool/goliath-truck": _poolGoliathTruck,
+  "pool/gollum-obsessed-stalker": _poolGollumObsessedStalker,
   "pool/gollum-patient-plotter": _poolGollumPatientPlotter,
   "pool/gollum-riddle-master": _poolGollumRiddleMaster,
   "pool/gollum-silent-slinker": _poolGollumSilentSlinker,
@@ -78254,6 +78274,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/instant-ramen": _poolInstantRamen,
   "pool/instigator-gang": _poolInstigatorGang,
   "pool/instigator": _poolInstigator,
+  "pool/instill-energy": _poolInstillEnergy,
   "pool/instill-furor": _poolInstillFuror,
   "pool/instill-infection": _poolInstillInfection,
   "pool/instrument-of-the-bards": _poolInstrumentOfTheBards,
@@ -91968,6 +91989,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tevals-judgment": _poolTevalsJudgment,
   "pool/textbook-tabulator": _poolTextbookTabulator,
   "pool/teyo-diamondblade-mage": _poolTeyoDiamondbladeMage,
+  "pool/teyo-geometric-tactician": _poolTeyoGeometricTactician,
   "pool/teyo-lightshield-expert": _poolTeyoLightshieldExpert,
   "pool/teyo-the-shieldmage": _poolTeyoTheShieldmage,
   "pool/teyos-lightshield": _poolTeyosLightshield,
@@ -94318,6 +94340,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/verazol-the-split-current": _poolVerazolTheSplitCurrent,
   "pool/verdant-automaton": _poolVerdantAutomaton,
   "pool/verdant-catacombs": _poolVerdantCatacombs,
+  "pool/verdant-command": _poolVerdantCommand,
   "pool/verdant-confluence": _poolVerdantConfluence,
   "pool/verdant-crescendo": _poolVerdantCrescendo,
   "pool/verdant-eidolon": _poolVerdantEidolon,
@@ -97025,6 +97048,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/wall-token-builders-talent": _tokensWallTokenBuildersTalent,
   "tokens/wall-token-invisible-woman": _tokensWallTokenInvisibleWoman,
   "tokens/wall-token-rammas-echor-ancient-shield": _tokensWallTokenRammasEchorAncientShield,
+  "tokens/wall-token-teyo-geometric-tactician": _tokensWallTokenTeyoGeometricTactician,
   "tokens/wall-token-the-fantastic-four": _tokensWallTokenTheFantasticFour,
   "tokens/warrior-token-valors-reach-tag-team": _tokensWarriorTokenValorsReachTagTeam,
   "tokens/warrior-token-vigilance": _tokensWarriorTokenVigilance,

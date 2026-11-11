@@ -437,6 +437,7 @@ import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
 import _poolInnocuousResearcher from "../pool/innocuous-researcher.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
+import _poolInstillEnergy from "../pool/instill-energy.js";
 import _poolInstillFuror from "../pool/instill-furor.js";
 import _poolIridescentAngel from "../pool/iridescent-angel.js";
 import _poolIronLadYoungAvenger from "../pool/iron-lad-young-avenger.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolIngotChewer,
     _poolInnocuousResearcher,
     _poolInspiringVantage,
+    _poolInstillEnergy,
     _poolInstillFuror,
     _poolIridescentAngel,
     _poolIronLadYoungAvenger,

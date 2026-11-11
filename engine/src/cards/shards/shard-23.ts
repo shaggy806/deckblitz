@@ -314,6 +314,7 @@ import _poolFortifyingDraught from "../pool/fortifying-draught.js";
 import _poolFoulPlay from "../pool/foul-play.js";
 import _poolFranticPurification from "../pool/frantic-purification.js";
 import _poolFreewindEquenaut from "../pool/freewind-equenaut.js";
+import _poolFrenziedSaddlebrute from "../pool/frenzied-saddlebrute.js";
 import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
 import _poolFrontierMastodon from "../pool/frontier-mastodon.js";
@@ -346,6 +347,7 @@ import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
 import _poolGodsend from "../pool/godsend.js";
 import _poolGodtoucher from "../pool/godtoucher.js";
+import _poolGollumObsessedStalker from "../pool/gollum-obsessed-stalker.js";
 import _poolGoryosVengeance from "../pool/goryos-vengeance.js";
 import _poolGovernTheGuildless from "../pool/govern-the-guildless.js";
 import _poolGrakkThePacifist from "../pool/grakk-the-pacifist.js";
@@ -1332,6 +1334,7 @@ const shard: CardShard = {
     _poolFoulPlay,
     _poolFranticPurification,
     _poolFreewindEquenaut,
+    _poolFrenziedSaddlebrute,
     _poolFreyaliseLlanowarsFury,
     _poolFrogButler,
     _poolFrontierMastodon,
@@ -1364,6 +1367,7 @@ const shard: CardShard = {
     _poolGoblinTraprunner,
     _poolGodsend,
     _poolGodtoucher,
+    _poolGollumObsessedStalker,
     _poolGoryosVengeance,
     _poolGovernTheGuildless,
     _poolGrakkThePacifist,
