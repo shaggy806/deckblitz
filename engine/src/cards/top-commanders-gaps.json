@@ -2238,7 +2238,9 @@
   "cost:blight-x-additional-cost",
   "effect:search-split-count",
   "static:surveil-additional-cards",
-  "cost:x-cant-be-zero"
+  "cost:x-cant-be-zero",
+  "cost:x-cant-be-zero",
+  "effect:target-spell-cant-be-countered"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

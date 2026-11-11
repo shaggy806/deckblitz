@@ -17430,3 +17430,22 @@ describe("\"X can't be 0\" closing a spell with {X} in its cost", () => {
     });
   });
 });
+
+describe("\"Target spell can't be countered\"", () => {
+  it("reads Vexing Shusher whole", () => {
+    const shusher = parseFace(
+      {
+        name: "Vexing Shusher",
+        type_line: "Creature — Goblin Shaman",
+        mana_cost: "{R/G}{R/G}",
+        oracle_text: "This spell can't be countered.\n{R/G}: Target spell can't be countered.",
+      },
+      { tokenFor: () => null },
+    ) as unknown as { cantBeCountered: unknown; complete: boolean; activated: { cost: unknown; targets: unknown; effect: unknown }[] };
+    expect(shusher.complete).toBe(true);
+    expect(shusher.cantBeCountered).toBe(true);
+    expect(shusher.activated[0].cost).toEqual({ mana: "{R/G}", tap: false });
+    expect(shusher.activated[0].targets).toEqual(["spell"]);
+    expect(shusher.activated[0].effect).toEqual({ kind: "spell-cant-be-countered", target: 0 });
+  });
+});

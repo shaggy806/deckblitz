@@ -5438,6 +5438,12 @@ export function parseSentence(sentence, ctx) {
     if (typeof t === "string" ? !/(spell|triggered-ability)$/.test(t) : t?.kind !== "spell") return null;
     return { kind: "counter", target: slot(m[1]) };
   }
+  // Vexing Shusher: the spell marked for as long as it's on the stack.
+  if ((m = re(`(${TARGET}) can't be countered`).exec(s))) {
+    const t = targetOf(m[1]);
+    if (typeof t === "string" ? !/(^|-)spell$/.test(t) : t?.kind !== "spell") return null;
+    return { kind: "spell-cant-be-countered", target: slot(m[1]) };
+  }
   if ((m = /^return (target .+? card from your graveyard) to your hand\.$/i.exec(s))) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "return-to-hand", target: i, from: "graveyard" };

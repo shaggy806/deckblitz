@@ -4260,6 +4260,17 @@ export type EffectSpec =
       readonly chosen?: true;
     }
   | {
+      /** "Target spell **can't be countered**" (Vexing Shusher): the spell in
+       * `target` can't be countered for as long as it's on the stack — the
+       * same mark Cavern of Souls' mana leaves (`GameObject.uncounterable`).
+       * A spell or ability that would counter it may still target it, and
+       * does everything else it says: only the countering (rule 701.6a)
+       * can't happen (rule 101.2 — Vexing Shusher's ruling). Nothing for an
+       * ability on the stack, which isn't a spell. */
+      readonly kind: "spell-cant-be-countered";
+      readonly target: ObjectRef;
+    }
+  | {
       /** Counter a target spell on the stack — it moves to its owner's
        * graveyard without resolving (rule 701.5). A spell that can't be
        * countered stays on the stack and resolves, and a copy of a spell
@@ -11460,6 +11471,9 @@ export interface EffectApi {
   /** `a` and `b` (both creatures) fight; with `oneSided` only `a` deals,
    * to a creature or a planeswalker. */
   fight(a: TargetRef, b: TargetRef, oneSided: boolean): void;
+  /** This spell on the stack can't be countered while it stays there
+   * (`GameObject.uncounterable`); nothing for anything else. */
+  spellCantBeCountered(spell: ObjectId): void;
   /** Counter a target spell on the stack — into its owner's hand instead
    * of their graveyard with `into: "hand"`. */
   counterSpell(
@@ -16782,6 +16796,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // Its targets are an answer only once it has asked.
       ctx.createdTokensFight(spec.among, spec.asked, spec.asked === undefined ? [] : ctx.targets);
       return;
+    case "spell-cant-be-countered": {
+      const target = objectRefAct(spec.target, ctx);
+      if (target?.kind === "object") ctx.spellCantBeCountered(target.object);
+      return;
+    }
     case "counter": {
       const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;

@@ -37067,6 +37067,10 @@ export class Game {
       couldEnterBattlefield: (card) => this.couldEnterBattlefield(card),
       counterSpell: (target, into, lockSource, timeCounters) =>
         this.counterSpellByEffect(target, into, lockSource === true, controller, timeCounters),
+      spellCantBeCountered: (spell) => {
+        const object = this.state.objects[spell];
+        if (object !== undefined && object.zone === "stack" && object.kind !== "ability") object.uncounterable = true;
+      },
       onTheStack: (spells, abilities, whose) => {
         const stack = this.state.zones.shared.stack;
         // What's resolving stays on the stack until it's done (rule 608.2n):
