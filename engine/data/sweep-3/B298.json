@@ -846,7 +846,7 @@
    "needs": [
     "effect:other-player-adds-mana-choice"
    ],
-   "size": "small",
+   "size": "major",
    "why": "Re-read in B298 (small): The chosen player adds one mana of the colour they choose."
   },
   {

@@ -12353,6 +12353,7 @@ import _poolHellholeFlailer from "./pool/hellhole-flailer.js";
 import _poolHellholeRats from "./pool/hellhole-rats.js";
 import _poolHellionCrucible from "./pool/hellion-crucible.js";
 import _poolHellionEruption from "./pool/hellion-eruption.js";
+import _poolHellishRebuke from "./pool/hellish-rebuke.js";
 import _poolHellishSideswipe from "./pool/hellish-sideswipe.js";
 import _poolHellkiteCharger from "./pool/hellkite-charger.js";
 import _poolHellkiteCourser from "./pool/hellkite-courser.js";
@@ -44819,6 +44820,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHellholeRats,
   _poolHellionCrucible,
   _poolHellionEruption,
+  _poolHellishRebuke,
   _poolHellishSideswipe,
   _poolHellkiteCharger,
   _poolHellkiteCourser,
@@ -77298,6 +77300,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hellhole-rats": _poolHellholeRats,
   "pool/hellion-crucible": _poolHellionCrucible,
   "pool/hellion-eruption": _poolHellionEruption,
+  "pool/hellish-rebuke": _poolHellishRebuke,
   "pool/hellish-sideswipe": _poolHellishSideswipe,
   "pool/hellkite-charger": _poolHellkiteCharger,
   "pool/hellkite-courser": _poolHellkiteCourser,
