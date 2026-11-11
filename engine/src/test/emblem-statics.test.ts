@@ -379,6 +379,8 @@ describe("what is read off an emblem", () => {
     "replacement",
     // The legend rule (`exemptFromLegendRule`) - Hall of Echoes' timed static.
     "legendRuleOff",
+    // `playerDamageLifeFloor` reads emblems (Serra the Benevolent).
+    "damageLifeFloor",
     // Permissions.
     "mayPlay",
     "alternativeCostForSpells",

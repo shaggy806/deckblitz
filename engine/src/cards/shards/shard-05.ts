@@ -252,6 +252,7 @@ import _poolDragonloftIdol from "../pool/dragonloft-idol.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDrakeFamiliar from "../pool/drake-familiar.js";
 import _poolDreadfulApathy from "../pool/dreadful-apathy.js";
+import _poolDreamHarvest from "../pool/dream-harvest.js";
 import _poolDreamspoilerWitches from "../pool/dreamspoiler-witches.js";
 import _poolDreyKeeper from "../pool/drey-keeper.js";
 import _poolDriftingDjinn from "../pool/drifting-djinn.js";
@@ -864,6 +865,8 @@ import _poolTheGoldenThrone from "../pool/the-golden-throne.js";
 import _poolTheHorusHeresy from "../pool/the-horus-heresy.js";
 import _poolTheIrencrag from "../pool/the-irencrag.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
+import _poolTheLostAndTheDamned from "../pool/the-lost-and-the-damned.js";
+import _poolTheMyriadPools from "../pool/the-myriad-pools.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheRingGoesSouth from "../pool/the-ring-goes-south.js";
 import _poolTheThanosCopter from "../pool/the-thanos-copter.js";
@@ -1252,6 +1255,7 @@ const shard: CardShard = {
     _poolDragonsPresence,
     _poolDrakeFamiliar,
     _poolDreadfulApathy,
+    _poolDreamHarvest,
     _poolDreamspoilerWitches,
     _poolDreyKeeper,
     _poolDriftingDjinn,
@@ -1864,6 +1868,8 @@ const shard: CardShard = {
     _poolTheHorusHeresy,
     _poolTheIrencrag,
     _poolTheLadyOfTheMountain,
+    _poolTheLostAndTheDamned,
+    _poolTheMyriadPools,
     _poolTheOzolith,
     _poolTheRingGoesSouth,
     _poolTheThanosCopter,

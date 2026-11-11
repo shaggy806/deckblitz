@@ -329,6 +329,7 @@ import _poolFrostveilAmbush from "../pool/frostveil-ambush.js";
 import _poolFumulusTheInfestation from "../pool/fumulus-the-infestation.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGaeasAvenger from "../pool/gaeas-avenger.js";
+import _poolGaleWaterdeepProdigy from "../pool/gale-waterdeep-prodigy.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
 import _poolGargoyleCastle from "../pool/gargoyle-castle.js";
 import _poolGarnetPrincessOfAlexandria from "../pool/garnet-princess-of-alexandria.js";
@@ -532,6 +533,7 @@ import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLeylineAxe from "../pool/leyline-axe.js";
 import _poolLeylineOfTheVoid from "../pool/leyline-of-the-void.js";
 import _poolLiarsPendulum from "../pool/liars-pendulum.js";
+import _poolLife from "../pool/life.js";
 import _poolLilianaDreadhordeGeneral from "../pool/liliana-dreadhorde-general.js";
 import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
@@ -1394,6 +1396,7 @@ const shard: CardShard = {
     _poolFumulusTheInfestation,
     _poolFungalInfection,
     _poolGaeasAvenger,
+    _poolGaleWaterdeepProdigy,
     _poolGallifreyCouncilChamber,
     _poolGargoyleCastle,
     _poolGarnetPrincessOfAlexandria,
@@ -1597,6 +1600,7 @@ const shard: CardShard = {
     _poolLeylineAxe,
     _poolLeylineOfTheVoid,
     _poolLiarsPendulum,
+    _poolLife,
     _poolLilianaDreadhordeGeneral,
     _poolLilianasSpoils,
     _poolLilysplashMentor,

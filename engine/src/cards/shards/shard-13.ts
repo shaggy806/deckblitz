@@ -200,6 +200,7 @@ import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
 import _poolDeafeningSilence from "../pool/deafening-silence.js";
 import _poolDeathSpeakers from "../pool/death-speakers.js";
+import _poolDeath from "../pool/death.js";
 import _poolDeathbringerThoctar from "../pool/deathbringer-thoctar.js";
 import _poolDeathcapMarionette from "../pool/deathcap-marionette.js";
 import _poolDeathlessKnight from "../pool/deathless-knight.js";
@@ -946,6 +947,7 @@ import _poolWordsOfWaste from "../pool/words-of-waste.js";
 import _poolWorthyCause from "../pool/worthy-cause.js";
 import _poolWrexialTheRisenDeep from "../pool/wrexial-the-risen-deep.js";
 import _poolYaroksFenlurker from "../pool/yaroks-fenlurker.js";
+import _poolYasharnImplacableEarth from "../pool/yasharn-implacable-earth.js";
 import _poolYewSpirit from "../pool/yew-spirit.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZenithFlare from "../pool/zenith-flare.js";
@@ -1180,6 +1182,7 @@ const shard: CardShard = {
     _poolDawnhartDisciple,
     _poolDeafeningSilence,
     _poolDeathSpeakers,
+    _poolDeath,
     _poolDeathbringerThoctar,
     _poolDeathcapMarionette,
     _poolDeathlessKnight,
@@ -1926,6 +1929,7 @@ const shard: CardShard = {
     _poolWorthyCause,
     _poolWrexialTheRisenDeep,
     _poolYaroksFenlurker,
+    _poolYasharnImplacableEarth,
     _poolYewSpirit,
     _poolYouSeeAPairOfGoblins,
     _poolZenithFlare,

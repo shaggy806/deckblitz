@@ -227,6 +227,7 @@ import _poolDivineSacrament from "../pool/divine-sacrament.js";
 import _poolDivineVisitation from "../pool/divine-visitation.js";
 import _poolDivinersPortent from "../pool/diviners-portent.js";
 import _poolDokaiWeaverOfLife from "../pool/dokai-weaver-of-life.js";
+import _poolDoomsdayExcruciator from "../pool/doomsday-excruciator.js";
 import _poolDoranTheSiegeTower from "../pool/doran-the-siege-tower.js";
 import _poolDragonArch from "../pool/dragon-arch.js";
 import _poolDragonMask from "../pool/dragon-mask.js";
@@ -545,6 +546,7 @@ import _poolMccoyNotABricklayer from "../pool/mccoy-not-a-bricklayer.js";
 import _poolMelesseSpirit from "../pool/melesse-spirit.js";
 import _poolMemorialToWar from "../pool/memorial-to-war.js";
 import _poolMeneldorSwiftSavior from "../pool/meneldor-swift-savior.js";
+import _poolMercurialSpelldancer from "../pool/mercurial-spelldancer.js";
 import _poolMetallurgicSummonings from "../pool/metallurgic-summonings.js";
 import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
@@ -1240,6 +1242,7 @@ const shard: CardShard = {
     _poolDivineVisitation,
     _poolDivinersPortent,
     _poolDokaiWeaverOfLife,
+    _poolDoomsdayExcruciator,
     _poolDoranTheSiegeTower,
     _poolDragonArch,
     _poolDragonMask,
@@ -1558,6 +1561,7 @@ const shard: CardShard = {
     _poolMelesseSpirit,
     _poolMemorialToWar,
     _poolMeneldorSwiftSavior,
+    _poolMercurialSpelldancer,
     _poolMetallurgicSummonings,
     _poolMicaReaderOfRuins,
     _poolMidnightCharm,

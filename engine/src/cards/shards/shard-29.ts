@@ -823,6 +823,7 @@ import _poolSurgeOfSalvation from "../pool/surge-of-salvation.js";
 import _poolSurveyTheWreckage from "../pool/survey-the-wreckage.js";
 import _poolSurvivalCache from "../pool/survival-cache.js";
 import _poolSylvanCaryatid from "../pool/sylvan-caryatid.js";
+import _poolSzatsWill from "../pool/szats-will.js";
 import _poolTahngarthsRage from "../pool/tahngarths-rage.js";
 import _poolTaiga from "../pool/taiga.js";
 import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
@@ -1823,6 +1824,7 @@ const shard: CardShard = {
     _poolSurveyTheWreckage,
     _poolSurvivalCache,
     _poolSylvanCaryatid,
+    _poolSzatsWill,
     _poolTahngarthsRage,
     _poolTaiga,
     _poolTakeUpTheShield,

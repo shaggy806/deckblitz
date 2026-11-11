@@ -490,6 +490,7 @@ import _poolMageIlVec from "../pool/mage-il-vec.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
 import _poolMagusOfTheMoon from "../pool/magus-of-the-moon.js";
+import _poolMajesticGenesis from "../pool/majestic-genesis.js";
 import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
 import _poolMalcolmAlluringScoundrel from "../pool/malcolm-alluring-scoundrel.js";
 import _poolManicScribe from "../pool/manic-scribe.js";
@@ -707,6 +708,7 @@ import _poolSelflessSpirit from "../pool/selfless-spirit.js";
 import _poolSentryBot from "../pool/sentry-bot.js";
 import _poolSepticRats from "../pool/septic-rats.js";
 import _poolSerraRedeemer from "../pool/serra-redeemer.js";
+import _poolSerraTheBenevolent from "../pool/serra-the-benevolent.js";
 import _poolServantOfVolrath from "../pool/servant-of-volrath.js";
 import _poolSethronHurloonGeneral from "../pool/sethron-hurloon-general.js";
 import _poolSewerRats from "../pool/sewer-rats.js";
@@ -1440,6 +1442,7 @@ const shard: CardShard = {
     _poolMaggotTherapy,
     _poolMagitekScythe,
     _poolMagusOfTheMoon,
+    _poolMajesticGenesis,
     _poolMakeshiftMunitions,
     _poolMalcolmAlluringScoundrel,
     _poolManicScribe,
@@ -1657,6 +1660,7 @@ const shard: CardShard = {
     _poolSentryBot,
     _poolSepticRats,
     _poolSerraRedeemer,
+    _poolSerraTheBenevolent,
     _poolServantOfVolrath,
     _poolSethronHurloonGeneral,
     _poolSewerRats,

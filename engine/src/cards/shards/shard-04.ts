@@ -9,6 +9,7 @@ import _poolAbuJafar from "../pool/abu-jafar.js";
 import _poolAbzanAscendancy from "../pool/abzan-ascendancy.js";
 import _poolAdditiveEvolution from "../pool/additive-evolution.js";
 import _poolAetherHelix from "../pool/aether-helix.js";
+import _poolAetherRefinery from "../pool/aether-refinery.js";
 import _poolAjanisChosen from "../pool/ajanis-chosen.js";
 import _poolAlacrianJaguar from "../pool/alacrian-jaguar.js";
 import _poolAlelaCunningConqueror from "../pool/alela-cunning-conqueror.js";
@@ -616,6 +617,7 @@ import _poolRaisedByGiants from "../pool/raised-by-giants.js";
 import _poolRallyTheMonastery from "../pool/rally-the-monastery.js";
 import _poolRampagingGeoderm from "../pool/rampaging-geoderm.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
+import _poolRaphaelFiendishSavior from "../pool/raphael-fiendish-savior.js";
 import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
 import _poolRavenGuildMaster from "../pool/raven-guild-master.js";
 import _poolRavenousVampire from "../pool/ravenous-vampire.js";
@@ -998,6 +1000,7 @@ const shard: CardShard = {
     _poolAbzanAscendancy,
     _poolAdditiveEvolution,
     _poolAetherHelix,
+    _poolAetherRefinery,
     _poolAjanisChosen,
     _poolAlacrianJaguar,
     _poolAlelaCunningConqueror,
@@ -1605,6 +1608,7 @@ const shard: CardShard = {
     _poolRallyTheMonastery,
     _poolRampagingGeoderm,
     _poolRangersLongbow,
+    _poolRaphaelFiendishSavior,
     _poolRaucousEntertainer,
     _poolRavenGuildMaster,
     _poolRavenousVampire,

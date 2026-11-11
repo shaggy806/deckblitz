@@ -1,0 +1,581 @@
+{
+ "batch": "B297",
+ "status": "done",
+ "ranks": "Blocked cards re-attempted by EDHREC rank toward rank 10,000 (2026-11-11): ranks 4,938-5,915, the 75 best-ranked whose record predates B291",
+ "authored": [
+  {
+   "name": "Wakka, Devoted Guardian",
+   "files": [
+    "engine/src/cards/pool/wakka-devoted-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relentless Dead",
+   "files": [
+    "engine/src/cards/pool/relentless-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gale, Waterdeep Prodigy",
+   "files": [
+    "engine/src/cards/pool/gale-waterdeep-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tend the Pests",
+   "files": [
+    "engine/src/cards/pool/tend-the-pests.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bigger on the Inside",
+   "files": [
+    "engine/src/cards/pool/bigger-on-the-inside.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "South Pole Voyager",
+   "files": [
+    "engine/src/cards/pool/south-pole-voyager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beregond of the Guard",
+   "files": [
+    "engine/src/cards/pool/beregond-of-the-guard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gemcutter Buccaneer",
+   "files": [
+    "engine/src/cards/pool/gemcutter-buccaneer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Everflowing Well // The Myriad Pools",
+   "files": [
+    "engine/src/cards/pool/the-everflowing-well.ts",
+    "engine/src/cards/pool/the-myriad-pools.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shredder, Shadow Master",
+   "files": [
+    "engine/src/cards/pool/shredder-shadow-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomsday Excruciator",
+   "files": [
+    "engine/src/cards/pool/doomsday-excruciator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rampant Frogantua",
+   "files": [
+    "engine/src/cards/pool/rampant-frogantua.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Szat's Will",
+   "files": [
+    "engine/src/cards/pool/szats-will.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greymond, Avacyn's Stalwart",
+   "files": [
+    "engine/src/cards/pool/greymond-avacyns-stalwart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yasharn, Implacable Earth",
+   "files": [
+    "engine/src/cards/pool/yasharn-implacable-earth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agatha of the Vile Cauldron",
+   "files": [
+    "engine/src/cards/pool/agatha-of-the-vile-cauldron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Refinery",
+   "files": [
+    "engine/src/cards/pool/aether-refinery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raul, Trouble Shooter",
+   "files": [
+    "engine/src/cards/pool/raul-trouble-shooter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serra the Benevolent",
+   "files": [
+    "engine/src/cards/pool/serra-the-benevolent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Lost and the Damned",
+   "files": [
+    "engine/src/cards/pool/the-lost-and-the-damned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thada Adel, Acquisitor",
+   "files": [
+    "engine/src/cards/pool/thada-adel-acquisitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Display of Power",
+   "files": [
+    "engine/src/cards/pool/display-of-power.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raphael, Fiendish Savior",
+   "files": [
+    "engine/src/cards/pool/raphael-fiendish-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brotherhood Headquarters",
+   "files": [
+    "engine/src/cards/pool/brotherhood-headquarters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Majestic Genesis",
+   "files": [
+    "engine/src/cards/pool/majestic-genesis.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Price of Glory",
+   "files": [
+    "engine/src/cards/pool/price-of-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ephara, God of the Polis",
+   "files": [
+    "engine/src/cards/pool/ephara-god-of-the-polis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Harvest",
+   "files": [
+    "engine/src/cards/pool/dream-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Life // Death",
+   "files": [
+    "engine/src/cards/pool/life-death.ts",
+    "engine/src/cards/pool/life.ts",
+    "engine/src/cards/pool/death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Response // Resurgence",
+   "files": [
+    "engine/src/cards/pool/response-resurgence.ts",
+    "engine/src/cards/pool/response.ts",
+    "engine/src/cards/pool/resurgence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valkyrie's Call",
+   "files": [
+    "engine/src/cards/pool/valkyries-call.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mercurial Spelldancer",
+   "files": [
+    "engine/src/cards/pool/mercurial-spelldancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa of Shadowed Boughs",
+   "files": [
+    "engine/src/cards/pool/nissa-of-shadowed-boughs.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Timeline Culler",
+   "needs": [
+    "keyword:warp-from-graveyard-and-life-cost"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Warp from the graveyard for {B} and 2 life: warp is a mana cost from hand."
+  },
+  {
+   "name": "Professor Hojo",
+   "needs": [
+    "cost:first-targeting-ability-cost-reduction"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): abilityCostModification has byYou and targeting now; only \"the first each turn\" on the reduction is missing."
+  },
+  {
+   "name": "Cloud's Limit Break",
+   "needs": [
+    "effect:target-different-controllers"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): An any-number group has sameController only, not \"each controlled by a different player\"."
+  },
+  {
+   "name": "Aurora Phoenix",
+   "needs": [
+    "trigger:cast-spell-with-cascade"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): hasKeyword has no cascade row for a cast spell."
+  },
+  {
+   "name": "Teyo, Geometric Tactician",
+   "needs": [
+    "static:attack-direction-restriction"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): The combat rule reads a permanent's chosenOnEnter; no timed version with a direction chosen on resolution."
+  },
+  {
+   "name": "Gollum, Obsessed Stalker",
+   "needs": [
+    "stat:players-dealt-combat-damage-by-name-this-game"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): No per-game record of players dealt combat damage by a creature of this name."
+  },
+  {
+   "name": "Verdant Command",
+   "needs": [
+    "target:loyalty-ability"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): An ability target's abilityKind is activated or triggered only."
+  },
+  {
+   "name": "Instill Energy",
+   "needs": [
+    "static:attack-as-though-haste"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Only activateAsThoughHaste exists."
+  },
+  {
+   "name": "Akroma, Vision of Ixidor",
+   "needs": [
+    "static:per-keyword-pump"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Writable as one pump per keyword, but no filter for \"has partner\" or \"has protection\" of any kind."
+  },
+  {
+   "name": "Gideon's Sacrifice",
+   "needs": [
+    "decision:damage-redirect-order"
+   ],
+   "size": "major",
+   "why": "Re-read in B297 (major): No player choice among redirects."
+  },
+  {
+   "name": "Fblthp, Lost on the Range",
+   "needs": [
+    "zone:plot-from-library-top"
+   ],
+   "size": "major",
+   "why": "Re-read in B297 (major): Plotting the top card of the library."
+  },
+  {
+   "name": "Minthara, Merciless Soul",
+   "needs": [
+    "decision:ward-dynamic-x"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): WardCost.mana is a fixed string."
+  },
+  {
+   "name": "Zurzoth, Chaos Rider",
+   "needs": [
+    "effect:attacked-players-scope"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): No scope for \"those players\" a batch of attackers attacked."
+  },
+  {
+   "name": "Trinisphere",
+   "needs": [
+    "cost:minimum-total-cost"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): No floor on a spell's total cost."
+  },
+  {
+   "name": "Gatta and Luzzu",
+   "needs": [
+    "amount:damage-that-would-be-dealt"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): A damage rule's then counts damage prevented only."
+  },
+  {
+   "name": "Sab-Sunen, Luxa Embodied",
+   "needs": [
+    "condition:counter-parity-condition"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Parity exists for mana value and power, not a counter count."
+  },
+  {
+   "name": "Share the Spoils",
+   "needs": [
+    "zone:shared-impulse-pool-each-player"
+   ],
+   "size": "major",
+   "why": "Re-read in B297 (major): One exile pool every player may play from, refilled as cards leave it."
+  },
+  {
+   "name": "Mariposa Military Base",
+   "needs": [
+    "replacement:enter-tapped-optional-rider"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): An optional payment as it enters, tapped otherwise, with a rider."
+  },
+  {
+   "name": "Cosima, God of the Voyage",
+   "needs": [
+    "effect:exiled-card-gains-trigger"
+   ],
+   "size": "major",
+   "why": "Re-read in B297 (major): A card in exile gaining a triggered ability and counters."
+  },
+  {
+   "name": "Karn, Scion of Urza",
+   "needs": [
+    "effect:look-and-choose-leftover-exile-with-counters"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): The -1 is writable now; the +1's leftover exiled with a silver counter is missing."
+  },
+  {
+   "name": "Perplexing Chimera",
+   "needs": [
+    "effect:exchange-control-permanent-and-spell"
+   ],
+   "size": "major",
+   "why": "Re-read in B297 (major): Exchanging control of a permanent and a spell."
+  },
+  {
+   "name": "Archangel Elspeth",
+   "needs": [
+    "bug:creature-subtype-needs-creature-type"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Tested in B297: an Angel subtype given permanently stays after the permanent stops being a creature (rule 205.1b)."
+  },
+  {
+   "name": "Chef's Kiss",
+   "needs": [
+    "effect:copy-spell-random-retarget"
+   ],
+   "size": "major",
+   "why": "Re-read in B297 (major): gain-control-spell exists; random reselection of targets excluding you and your permanents doesn't."
+  },
+  {
+   "name": "Karn, Living Legacy",
+   "needs": [
+    "effect:emblem-activated-abilities"
+   ],
+   "size": "major",
+   "why": "Re-read in B297 (major): create-emblem takes statics and triggers, no activated ability of the emblem's own."
+  },
+  {
+   "name": "Make an Example",
+   "needs": [
+    "mechanic:piles-each-opponent-simultaneous"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Piles per opponent in a for-each-player run one opponent at a time, not all separate, then all choose, then one sacrifice; exact at two players only."
+  },
+  {
+   "name": "Summons of Saruman",
+   "needs": [
+    "cost:flashback-exile-x-cost"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Flashback with an X cost paid by exiling; the spell half is writable."
+  },
+  {
+   "name": "Benevolent Blessing",
+   "needs": [
+    "static:protection-spares-own-attachments"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Only doesntRemoveSource and doesntRemoveAuras exist."
+  },
+  {
+   "name": "Kira, Great Glass-Spinner",
+   "needs": [
+    "effect:counter-targeting-spell-or-ability"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): counter has no reference to the spell or ability that targeted."
+  },
+  {
+   "name": "Abstruse Archaic",
+   "needs": [
+    "target:ability-source-filter"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): An ability target filters its source by sourceTypes only."
+  },
+  {
+   "name": "Cemetery Prowler",
+   "needs": [
+    "cost:reduction-per-type-shared-with-exiled"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): No reduction per card type shared with the cards exiled with it."
+  },
+  {
+   "name": "Finale of Promise",
+   "needs": [
+    "effect:copy-spells-cast-this-way"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Copying the spells cast this way X times."
+  },
+  {
+   "name": "Crypt Rats",
+   "needs": [
+    "cost:x-spend-only-color"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): xColor is on a may's cost only, not an activated ability's {X}."
+  },
+  {
+   "name": "Roar of Resistance",
+   "needs": [
+    "condition:filter-attacking-your-opponents"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): attackingOpponent covers the player only, not their planeswalkers."
+  },
+  {
+   "name": "Fractured Powerstone",
+   "needs": [
+    "mechanic:planar-die"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): A die roll with no numeric result that still fires roll triggers."
+  },
+  {
+   "name": "Soul Immolation",
+   "needs": [
+    "cost:blight-x-additional-cost"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Blight X as an additional cost."
+  },
+  {
+   "name": "Viewpoint Synchronization",
+   "needs": [
+    "effect:search-split-count"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): A search's restDestination has no count."
+  },
+  {
+   "name": "Enhanced Surveillance",
+   "needs": [
+    "static:surveil-additional-cards"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): The shuffle half exists (Feldon's Cane); enlarging a surveil doesn't."
+  },
+  {
+   "name": "Mind Grind",
+   "needs": [
+    "cost:x-cant-be-zero"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): The each-opponent reveal is writable; \"X can't be 0\" on a spell's own {X} isn't (minX is kicker and ability only)."
+  },
+  {
+   "name": "Vexing Shusher",
+   "needs": [
+    "effect:target-spell-cant-be-countered"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Making a target spell uncounterable."
+  },
+  {
+   "name": "Tam, Mindful First-Year",
+   "needs": [
+    "keyword:hexproof-from-own-colors"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): \"Becomes all colors\" exists; hexproof from the affected creature's own colours doesn't."
+  },
+  {
+   "name": "Shelob, Dread Weaver",
+   "needs": [
+    "cost:cost-move-linked-exiled-card"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): putFromExile is any card an opponent owns, not \"a creature card exiled with Shelob\"."
+  },
+  {
+   "name": "Kaya the Inexorable",
+   "needs": [
+    "effect:cast-now-from-hand-graveyard-or-owned-exile"
+   ],
+   "size": "small",
+   "why": "Re-read in B297 (small): Casting a legendary spell from hand, graveyard or among cards you own in exile, free."
+  }
+ ]
+}

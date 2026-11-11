@@ -200,3 +200,9 @@ so a choice raised by one player's draw (dredge, a draw replacement) comes befor
 answers. The seven tempting offers (Tempt with Bunnies among them) and Kwain share the shape.
 Found 2026-11-06, building Tempt with Bunnies.
 
+**A creature type outlives being a creature.** Rule 205.1b: a creature subtype is lost when the permanent stops being a creature. A Forest animated by Life, then given Angel by a permanent `become { addSubtypes }`, still shows `["Forest", "Angel"]` after the animation ends (B297, tested). Blocks Archangel Elspeth; Valkyrie's Call and Guide of Souls are in the pool with it (a Vehicle or animated land that returns keeps "Angel" while not a creature).
+
+**`sameAbilityAs` counts one way only.** Set on two abilities pointing at each other, "the second time this ability has resolved" never counted across them; only the second entry naming the first works, and nothing warns (B297, South Pole Voyager).
+
+**A back face spawned by name isn't a working permanent.** `debugSpawn("The Myriad Pools")` could not tap for mana; spawning the front and transforming it worked. Seen only in a test (B297); not chased.
+

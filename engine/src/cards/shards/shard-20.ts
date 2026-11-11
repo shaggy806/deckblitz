@@ -89,6 +89,7 @@ import _poolBellowingElk from "../pool/bellowing-elk.js";
 import _poolBellowingTanglewurm from "../pool/bellowing-tanglewurm.js";
 import _poolBenalishLancer from "../pool/benalish-lancer.js";
 import _poolBenedictionOfMoons from "../pool/benediction-of-moons.js";
+import _poolBeregondOfTheGuard from "../pool/beregond-of-the-guard.js";
 import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
 import _poolBiomanticMastery from "../pool/biomantic-mastery.js";
 import _poolBitterDownfall from "../pool/bitter-downfall.js";
@@ -718,6 +719,7 @@ import _poolRentIsDue from "../pool/rent-is-due.js";
 import _poolReptilianReflection from "../pool/reptilian-reflection.js";
 import _poolResilientRoadrunner from "../pool/resilient-roadrunner.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
+import _poolResurgence from "../pool/resurgence.js";
 import _poolRetether from "../pool/retether.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
@@ -1148,6 +1150,7 @@ const shard: CardShard = {
     _poolBellowingTanglewurm,
     _poolBenalishLancer,
     _poolBenedictionOfMoons,
+    _poolBeregondOfTheGuard,
     _poolBillowingShriekmass,
     _poolBiomanticMastery,
     _poolBitterDownfall,
@@ -1777,6 +1780,7 @@ const shard: CardShard = {
     _poolReptilianReflection,
     _poolResilientRoadrunner,
     _poolRestrictedOffice,
+    _poolResurgence,
     _poolRetether,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,

@@ -365,6 +365,7 @@ import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
 import _poolGallowbraid from "../pool/gallowbraid.js";
 import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
+import _poolGemcutterBuccaneer from "../pool/gemcutter-buccaneer.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
 import _poolGeneralsKabuto from "../pool/generals-kabuto.js";
 import _poolGenerousGift from "../pool/generous-gift.js";
@@ -1424,6 +1425,7 @@ const shard: CardShard = {
     _poolGallowbraid,
     _poolGarlandKnightOfCornelia,
     _poolGarrukVeiledButcher,
+    _poolGemcutterBuccaneer,
     _poolGeneralThunderboltRoss,
     _poolGeneralsKabuto,
     _poolGenerousGift,

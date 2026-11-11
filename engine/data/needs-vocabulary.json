@@ -8146,6 +8146,21 @@
    "family": "decision:choose-creature-type-on-resolution",
    "example": "Long List of the Ents: note a creature type not yet noted, remembered per Saga."
   },
+  "effect:emblem-activated-abilities": {
+   "family": "effect:emblem-triggered-abilities",
+   "example": "Karn, Living Legacy: an emblem with \"Tap an untapped artifact you control: This emblem deals 1 damage to any target.\"",
+   "description": "An emblem with an activated ability of its own: create-emblem takes statics and triggers only (B297)."
+  },
+  "mechanic:piles-each-opponent-simultaneous": {
+   "family": "decision:separate-into-piles",
+   "example": "Make an Example: each opponent separates their creatures into two piles, then you choose one pile for each, then all are sacrificed at once.",
+   "description": "Piles for every opponent in three shared steps (all separate, then all are chosen, then one simultaneous sacrifice); a for-each-player runs one opponent through all three at a time, exact at two players only (B297)."
+  },
+  "cost:x-cant-be-zero": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Mind Grind: \"X can't be 0\" on the spell's own {X}.",
+   "description": "A floor on a spell's own {X}: minX exists for kicker and abilities only (B297)."
+  },
   "condition:creatures-died-this-turn-count-in-static": {
    "family": "condition:filter-this-turn-history",
    "example": "Gimli, Mournful Avenger: a static whose condition is an amounts compare on creaturesDiedThisTurn did not grant indestructible after two of its controller's creatures died (B296).",

@@ -365,6 +365,7 @@ import _poolGravitySphere from "../pool/gravity-sphere.js";
 import _poolGreaterGood from "../pool/greater-good.js";
 import _poolGreedsGambit from "../pool/greeds-gambit.js";
 import _poolGreyHostReinforcements from "../pool/grey-host-reinforcements.js";
+import _poolGreymondAvacynsStalwart from "../pool/greymond-avacyns-stalwart.js";
 import _poolGrimMonolith from "../pool/grim-monolith.js";
 import _poolGrimPhysician from "../pool/grim-physician.js";
 import _poolGrindstone from "../pool/grindstone.js";
@@ -1368,6 +1369,7 @@ const shard: CardShard = {
     _poolGreaterGood,
     _poolGreedsGambit,
     _poolGreyHostReinforcements,
+    _poolGreymondAvacynsStalwart,
     _poolGrimMonolith,
     _poolGrimPhysician,
     _poolGrindstone,

@@ -663,6 +663,7 @@ import _poolRepulse from "../pool/repulse.js";
 import _poolRescueSkiff from "../pool/rescue-skiff.js";
 import _poolResistanceIsFutile from "../pool/resistance-is-futile.js";
 import _poolResize from "../pool/resize.js";
+import _poolResponseResurgence from "../pool/response-resurgence.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRestoreBalance from "../pool/restore-balance.js";
 import _poolRetromancer from "../pool/retromancer.js";
@@ -1659,6 +1660,7 @@ const shard: CardShard = {
     _poolRescueSkiff,
     _poolResistanceIsFutile,
     _poolResize,
+    _poolResponseResurgence,
     _poolRestorativeTechnique,
     _poolRestoreBalance,
     _poolRetromancer,

@@ -67,6 +67,7 @@ import _poolBattlefieldMedic from "../pool/battlefield-medic.js";
 import _poolBattlesongBerserker from "../pool/battlesong-berserker.js";
 import _poolBelakorTheDarkMaster from "../pool/belakor-the-dark-master.js";
 import _poolBenalishHero from "../pool/benalish-hero.js";
+import _poolBiggerOnTheInside from "../pool/bigger-on-the-inside.js";
 import _poolBishopOfRebirth from "../pool/bishop-of-rebirth.js";
 import _poolBlackcleaveCliffs from "../pool/blackcleave-cliffs.js";
 import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
@@ -224,6 +225,7 @@ import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
+import _poolDisplayOfPower from "../pool/display-of-power.js";
 import _poolDivinePresence from "../pool/divine-presence.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
 import _poolDocOcksTentacles from "../pool/doc-ocks-tentacles.js";
@@ -583,6 +585,7 @@ import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNightscapeBattlemage from "../pool/nightscape-battlemage.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
+import _poolNissaOfShadowedBoughs from "../pool/nissa-of-shadowed-boughs.js";
 import _poolNocturnalRaid from "../pool/nocturnal-raid.js";
 import _poolNoggleBandit from "../pool/noggle-bandit.js";
 import _poolNorthWindAvatar from "../pool/north-wind-avatar.js";
@@ -1095,6 +1098,7 @@ const shard: CardShard = {
     _poolBattlesongBerserker,
     _poolBelakorTheDarkMaster,
     _poolBenalishHero,
+    _poolBiggerOnTheInside,
     _poolBishopOfRebirth,
     _poolBlackcleaveCliffs,
     _poolBlackcleaveGoblin,
@@ -1252,6 +1256,7 @@ const shard: CardShard = {
     _poolDiscordantDirge,
     _poolDisfigure,
     _poolDisplacerKitten,
+    _poolDisplayOfPower,
     _poolDivinePresence,
     _poolDivineResilience,
     _poolDocOcksTentacles,
@@ -1611,6 +1616,7 @@ const shard: CardShard = {
     _poolNightscapeBattlemage,
     _poolNikoLightOfHope,
     _poolNimbleclawAdept,
+    _poolNissaOfShadowedBoughs,
     _poolNocturnalRaid,
     _poolNoggleBandit,
     _poolNorthWindAvatar,

@@ -243,6 +243,7 @@ import _poolEmergeUnscathed from "../pool/emerge-unscathed.js";
 import _poolEmeriaShepherd from "../pool/emeria-shepherd.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
+import _poolEpharaGodOfThePolis from "../pool/ephara-god-of-the-polis.js";
 import _poolEpharasRadiance from "../pool/epharas-radiance.js";
 import _poolEpiphanyAtTheDrownyard from "../pool/epiphany-at-the-drownyard.js";
 import _poolEronTheRelentless from "../pool/eron-the-relentless.js";
@@ -489,6 +490,7 @@ import _poolLeviathan from "../pool/leviathan.js";
 import _poolLeylineOfAnticipation from "../pool/leyline-of-anticipation.js";
 import _poolLeylineOfPunishment from "../pool/leyline-of-punishment.js";
 import _poolLieInWait from "../pool/lie-in-wait.js";
+import _poolLifeDeath from "../pool/life-death.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLilianaDeathWielder from "../pool/liliana-death-wielder.js";
@@ -1272,6 +1274,7 @@ const shard: CardShard = {
     _poolEmeriaShepherd,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
+    _poolEpharaGodOfThePolis,
     _poolEpharasRadiance,
     _poolEpiphanyAtTheDrownyard,
     _poolEronTheRelentless,
@@ -1518,6 +1521,7 @@ const shard: CardShard = {
     _poolLeylineOfAnticipation,
     _poolLeylineOfPunishment,
     _poolLieInWait,
+    _poolLifeDeath,
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
     _poolLilianaDeathWielder,

@@ -617,6 +617,7 @@ import _poolPowerfulBroker from "../pool/powerful-broker.js";
 import _poolPreacherOfTheSchism from "../pool/preacher-of-the-schism.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
+import _poolPriceOfGlory from "../pool/price-of-glory.js";
 import _poolPrickleFaeries from "../pool/prickle-faeries.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolPrishesWanderings from "../pool/prishes-wanderings.js";
@@ -1645,6 +1646,7 @@ const shard: CardShard = {
     _poolPreacherOfTheSchism,
     _poolPrecisionBolt,
     _poolPredatorsStrike,
+    _poolPriceOfGlory,
     _poolPrickleFaeries,
     _poolPrimordialHydra,
     _poolPrishesWanderings,

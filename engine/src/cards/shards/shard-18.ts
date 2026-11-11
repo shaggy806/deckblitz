@@ -827,6 +827,7 @@ import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTemporalMastery from "../pool/temporal-mastery.js";
 import _poolTemporalTribulation from "../pool/temporal-tribulation.js";
+import _poolTendThePests from "../pool/tend-the-pests.js";
 import _poolTendrilsOfCorruption from "../pool/tendrils-of-corruption.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
@@ -932,6 +933,7 @@ import _poolVraskaTheUnseen from "../pool/vraska-the-unseen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
 import _poolWaitingInTheWeeds from "../pool/waiting-in-the-weeds.js";
 import _poolWakandanTusker from "../pool/wakandan-tusker.js";
+import _poolWakkaDevotedGuardian from "../pool/wakka-devoted-guardian.js";
 import _poolWallCrawl from "../pool/wall-crawl.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
 import _poolWallOfTombstones from "../pool/wall-of-tombstones.js";
@@ -1833,6 +1835,7 @@ const shard: CardShard = {
     _poolTeferisTimeTwist,
     _poolTemporalMastery,
     _poolTemporalTribulation,
+    _poolTendThePests,
     _poolTendrilsOfCorruption,
     _poolTerastodon,
     _poolTerraHeraldOfHope,
@@ -1938,6 +1941,7 @@ const shard: CardShard = {
     _poolVulshokSorcerer,
     _poolWaitingInTheWeeds,
     _poolWakandanTusker,
+    _poolWakkaDevotedGuardian,
     _poolWallCrawl,
     _poolWallOfAir,
     _poolWallOfTombstones,

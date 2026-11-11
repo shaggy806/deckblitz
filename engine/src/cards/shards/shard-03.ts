@@ -7,6 +7,7 @@ import _poolAbyssalGatekeeper from "../pool/abyssal-gatekeeper.js";
 import _poolAcidWebSpider from "../pool/acid-web-spider.js";
 import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
 import _poolAerieWorshippers from "../pool/aerie-worshippers.js";
+import _poolAgathaOfTheVileCauldron from "../pool/agatha-of-the-vile-cauldron.js";
 import _poolAggressiveMining from "../pool/aggressive-mining.js";
 import _poolAkkiLavarunner from "../pool/akki-lavarunner.js";
 import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
@@ -575,6 +576,7 @@ import _poolRaidersKarve from "../pool/raiders-karve.js";
 import _poolRakdosPitDragon from "../pool/rakdos-pit-dragon.js";
 import _poolRalsDispersal from "../pool/rals-dispersal.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
+import _poolRampantFrogantua from "../pool/rampant-frogantua.js";
 import _poolRankleAndTorbran from "../pool/rankle-and-torbran.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
 import _poolRavagersMace from "../pool/ravagers-mace.js";
@@ -925,6 +927,7 @@ const shard: CardShard = {
     _poolAcidWebSpider,
     _poolAdricMathematicalGenius,
     _poolAerieWorshippers,
+    _poolAgathaOfTheVileCauldron,
     _poolAggressiveMining,
     _poolAkkiLavarunner,
     _poolAkkiWarPaint,
@@ -1493,6 +1496,7 @@ const shard: CardShard = {
     _poolRakdosPitDragon,
     _poolRalsDispersal,
     _poolRampagingHippo,
+    _poolRampantFrogantua,
     _poolRankleAndTorbran,
     _poolRaugrinCrystal,
     _poolRavagersMace,

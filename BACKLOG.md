@@ -575,6 +575,9 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
+- **A creature type outlives being a creature** — rule 205.1b: an Angel subtype given permanently stays on a permanent that stops being a creature; blocks Archangel Elspeth, and Valkyrie's Call and Guide of Souls carry it (`docs/engine-gaps.md`).
+- **`sameAbilityAs` counts one way only** — two abilities naming each other never count as one; only the second naming the first does, and nothing warns (`docs/engine-gaps.md`).
+- **A back face spawned by name isn't a working permanent** — `debugSpawn("The Myriad Pools")` couldn't tap for mana; test-only so far (`docs/engine-gaps.md`).
 - **A bot's cast the engine refuses takes the shard down** — live, 2026-11-10: a bot's Conclave Tribunal (convoke) threw "cannot pay the cost" and the uncaught throw lost every room on the shard (`docs/engine-gaps.md`).
 - **Token events a `may` replacement doesn't reach (Moonlit Meditation)** — amass, incubate, encore, myriad and populate make tokens without offering a `becomes` (`docs/engine-gaps.md`). (2026-11-09: amass, incubate, populate and encore fixed; myriad, amass with `who` and other direct `createTokens` callers are left.)
 

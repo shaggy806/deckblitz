@@ -785,6 +785,7 @@ import _poolSorinVampireLord from "../pool/sorin-vampire-lord.js";
 import _poolSoulEnervation from "../pool/soul-enervation.js";
 import _poolSoulSear from "../pool/soul-sear.js";
 import _poolSoulmender from "../pool/soulmender.js";
+import _poolSouthPoleVoyager from "../pool/south-pole-voyager.js";
 import _poolSparasHeadquarters from "../pool/sparas-headquarters.js";
 import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
 import _poolSpectacleMage from "../pool/spectacle-mage.js";
@@ -1768,6 +1769,7 @@ const shard: CardShard = {
     _poolSoulEnervation,
     _poolSoulSear,
     _poolSoulmender,
+    _poolSouthPoleVoyager,
     _poolSparasHeadquarters,
     _poolSpawnbedProtector,
     _poolSpectacleMage,

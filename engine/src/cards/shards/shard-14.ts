@@ -755,6 +755,7 @@ import _poolShivanMeteor from "../pool/shivan-meteor.js";
 import _poolShockTroops from "../pool/shock-troops.js";
 import _poolShorecomberCrab from "../pool/shorecomber-crab.js";
 import _poolShortCircuit from "../pool/short-circuit.js";
+import _poolShredderShadowMaster from "../pool/shredder-shadow-master.js";
 import _poolShriekmaw from "../pool/shriekmaw.js";
 import _poolShrineSteward from "../pool/shrine-steward.js";
 import _poolShuFootSoldiers from "../pool/shu-foot-soldiers.js";
@@ -980,6 +981,7 @@ import _poolZellixSanityFlayer from "../pool/zellix-sanity-flayer.js";
 import _poolZhalfirinCommander from "../pool/zhalfirin-commander.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
 import _poolZukosOffense from "../pool/zukos-offense.js";
+import _tokensAetherbornToken from "../tokens/aetherborn-token.js";
 import _tokensApeToken from "../tokens/ape-token.js";
 import _tokensAvatarToken44Flying from "../tokens/avatar-token-4-4-flying.js";
 import _tokensBlueBlackFaerieRogueToken from "../tokens/blue-black-faerie-rogue-token.js";
@@ -1763,6 +1765,7 @@ const shard: CardShard = {
     _poolShockTroops,
     _poolShorecomberCrab,
     _poolShortCircuit,
+    _poolShredderShadowMaster,
     _poolShriekmaw,
     _poolShrineSteward,
     _poolShuFootSoldiers,
@@ -1990,6 +1993,7 @@ const shard: CardShard = {
     _poolZukosOffense,
   ],
   tokens: [
+    _tokensAetherbornToken,
     _tokensApeToken,
     _tokensAvatarToken44Flying,
     _tokensBlueBlackFaerieRogueToken,

@@ -121,6 +121,7 @@ import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
 import _poolBrokenAmbitions from "../pool/broken-ambitions.js";
+import _poolBrotherhoodHeadquarters from "../pool/brotherhood-headquarters.js";
 import _poolBubblingCauldron from "../pool/bubbling-cauldron.js";
 import _poolBuildersBane from "../pool/builders-bane.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
@@ -661,6 +662,7 @@ import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
 import _poolReckonerShakedown from "../pool/reckoner-shakedown.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
 import _poolReconstructedThopter from "../pool/reconstructed-thopter.js";
+import _poolRelentlessDead from "../pool/relentless-dead.js";
 import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
 import _poolRenegadeFreighter from "../pool/renegade-freighter.js";
 import _poolRepopulate from "../pool/repopulate.js";
@@ -1141,6 +1143,7 @@ const shard: CardShard = {
     _poolBriarbridgeTracker,
     _poolBristlebudFarmer,
     _poolBrokenAmbitions,
+    _poolBrotherhoodHeadquarters,
     _poolBubblingCauldron,
     _poolBuildersBane,
     _poolBulwarkOx,
@@ -1681,6 +1684,7 @@ const shard: CardShard = {
     _poolReckonerShakedown,
     _poolReclamationSage,
     _poolReconstructedThopter,
+    _poolRelentlessDead,
     _poolReluctantDounguard,
     _poolRenegadeFreighter,
     _poolRepopulate,
