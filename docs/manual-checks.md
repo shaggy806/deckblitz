@@ -7995,6 +7995,12 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** With two Mountains, cast Blaze and confirm X at 3 (the most offered). Click Bob's Grizzly Bears, then your Spellwild Ouphe.
 - **Expect:** The click on Grizzly Bears does nothing: X=3 is payable only with the Ouphe's {2} less. The Ouphe is taken and Blaze deals 3 damage to it.
 
+## Several triggers at once on the stack (2026-11-11)
+
+### Landfall: several triggers stack in one column
+- **Do:** Play the Forest: five landfall abilities trigger at once.
+- **Expect:** The stack's entries sit in one column on the right, each offset the same way as the one before it; none is shifted sideways the other way, while they arrive or once they're down.
+
 ## A split search's prompt (2026-11-11)
 
 ### Cultivate: the prompt says which find goes where

@@ -2215,9 +2215,16 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  /* The entry's box is as wide as its label, wider than its card: only what
-     it draws takes a click or a hover, so the bare edge of a buried card
-     beside it can be picked (a source of damage, a spell to counter). */
+  /* The box is the card's width, whatever its lines' (they overflow it
+     evenly on both sides, centred): it was as wide as its widest line, and,
+     anchored by its right edge with the card centred in it, put a card with
+     a long label further left than one with a short label. A deeper entry
+     could sit to the right of the one above it (several landfall triggers
+     at once, the user's report, 2026-11-11). */
+  width: var(--card-w);
+  /* Only what the entry draws takes a click or a hover, so the bare edge of
+     a buried card beside it can be picked (a source of damage, a spell to
+     counter). */
   pointer-events: none;
   transition:
     top 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),

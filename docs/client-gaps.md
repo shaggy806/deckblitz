@@ -5,10 +5,6 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
-- **Stack entries shift sideways the wrong way** (the user, 2026-11-11). "When I had multiple triggers going on the
-  stack from a land entering, sometimes the stack would have items horizontally shifted the wrong way." Not
-  reproduced. First try: a landfall board with three or more triggers at once (Omnath, Locus of Creation beside
-  two landfall creatures), at 2 and 4 players, watching the stack column as the triggers fly in.
 - **Auto-pass pauses on each opposing spell** (found 2026-11-02, a UX pass; a design call). Auto-pass paused on
   both opposing spells seen, each needing a "Resolve stack" click. (The other half of this item, a land's
   ability stopping every step, is `skipAbilityOnly`, 2026-11-11.)

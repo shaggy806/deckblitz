@@ -12042,6 +12042,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({ you: { bf: ['Mountain*3'], hand: ['Shock'] }, opp: { bf: ['Boreal Elemental'] } }),
   ),
   preset(
+    'Landfall: several triggers stack in one column',
+    board({
+      you: {
+        bf: ['Lotus Cobra', 'Grazing Gladehart', 'Rampaging Baloths', 'Tireless Tracker', 'Scute Swarm'],
+        hand: ['Forest'],
+      },
+    }),
+  ),
+  preset(
     'Cultivate: the prompt says which find goes where',
     board({ you: { bf: ['Forest*3'], hand: ['Cultivate'], lib: ['Island', 'Swamp', 'Grizzly Bears'] } }),
   ),
