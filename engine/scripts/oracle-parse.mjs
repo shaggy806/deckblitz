@@ -19435,6 +19435,7 @@ function parseStatic(line, text) {
   // long as you're the monarch"): rule 120.3a's result alone, not dealt damage.
   if (line === "Damage doesn't cause you to lose life.") {
     return { affects: { scope: "self" }, prohibits: [{ act: "lose-life", who: "you", from: "damage" }], text };
+  }
   // "You don't lose the game for having 0 or less life" (Lich's Tomb,
   // Phyrexian Unlife): rule 704.5a's loss alone.
   if (line === "You don't lose the game for having 0 or less life.") {
