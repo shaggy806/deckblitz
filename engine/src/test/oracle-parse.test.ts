@@ -17720,6 +17720,49 @@ describe("revealing a face-down permanent", () => {
   });
 });
 
+describe("one of the permanents chosen, at random", () => {
+  it("reads Chaos Defiler: a choice per opponent, one of them destroyed at random, on entering and on dying", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Artifact Creature — Demon Construct",
+      oracle_text:
+        "Trample\nBattle Cannon — When this creature enters or dies, for each opponent, choose a nonland permanent that player controls. Destroy one of them chosen at random.",
+      power: "5",
+      toughness: "4",
+    } as never) as unknown as { triggered: { trigger: unknown; effect: unknown }[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.triggered.map((t) => t.trigger)).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { on: "dies", who: "self" },
+    ]);
+    for (const { effect } of face.triggered) {
+      expect(effect).toEqual({
+        kind: "sequence",
+        effects: [
+          {
+            kind: "vote",
+            choose: true,
+            who: "you",
+            for: {
+              permanent: { notTypes: ["land"] },
+              about: "each-opponent",
+              prompt: "Choose a nonland permanent: one of those chosen is destroyed at random",
+            },
+          },
+          {
+            kind: "choose-permanents",
+            random: true,
+            filter: { thisWay: "chosen", notKeyword: "indestructible" },
+            upTo: 1,
+            prompt: "One of the chosen permanents, at random",
+            then: { kind: "destroy", target: 0 },
+          },
+        ],
+      });
+    }
+  });
+});
+
 describe("up to twice X target cards from graveyards", () => {
   const spell = (line: string): { targets: unknown; effect: unknown } =>
     parseFace({ name: "Thing", type_line: "Instant", mana_cost: "{X}{B}", oracle_text: line } as never) as never;

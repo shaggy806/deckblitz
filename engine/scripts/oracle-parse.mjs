@@ -1865,6 +1865,8 @@ export function parseTrigger(clause) {
   }
   if (/^When(?:ever)? ~ enters$/.test(c)) return self("enters-battlefield");
   if (/^When(?:ever)? ~ enters or attacks$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
+  // Two abilities, one for each event (Gulping Scraptrap, Chaos Defiler).
+  if (/^When ~ enters or dies$/.test(c)) return [...self("enters-battlefield"), ...self("dies")];
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");
   if (/^When(?:ever)? ~ leaves the battlefield$/.test(c)) return self("leaves-battlefield");
   // Changes of control (rule 603.10d): Khârn the Betrayer, Risky Move, Zidane.
@@ -13426,9 +13428,41 @@ function castNowTermsAt(sentences, i, ctx) {
 function youChoosePerPlayerAt(sentences, i) {
   const m = /^for each (player|opponent), (?:you )?choose (an? (.+?)) that player controls\.$/i.exec(sentences[i]);
   if (m === null) return null;
-  if (!/^destroy the chosen (?:permanents|creatures|lands|artifacts)\.$/i.test(sentences[i + 1] ?? "")) return null;
+  // "Destroy one of them chosen at random." (Chaos Defiler): one of what was
+  // chosen this way, by the game — and, by its ruling, one that can be
+  // destroyed, so never an indestructible one while another isn't.
+  const atRandom = /^destroy one of them chosen at random\.$/i.test(sentences[i + 1] ?? "");
+  if (!atRandom && !/^destroy the chosen (?:permanents|creatures|lands|artifacts)\.$/i.test(sentences[i + 1] ?? "")) return null;
   const filter = parseTypePhrase(m[3]);
   if (filter === null) return null;
+  if (atRandom) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          {
+            kind: "vote",
+            choose: true,
+            who: "you",
+            for: {
+              permanent: filter,
+              about: m[1].toLowerCase() === "player" ? "each-player" : "each-opponent",
+              prompt: `Choose ${m[2]}: one of those chosen is destroyed at random`,
+            },
+          },
+          {
+            kind: "choose-permanents",
+            random: true,
+            filter: { thisWay: "chosen", notKeyword: "indestructible" },
+            upTo: 1,
+            prompt: "One of the chosen permanents, at random",
+            then: { kind: "destroy", target: 0 },
+          },
+        ],
+      },
+      used: 2,
+    };
+  }
   return {
     effect: {
       kind: "sequence",
