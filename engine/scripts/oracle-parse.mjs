@@ -13589,6 +13589,33 @@ function pilesAt(sentences, i, ctx) {
   // chooses one of those piles. Put that pile into your graveyard. Look at the
   // cards in the other pile. You may cast a spell from among them without paying
   // its mana cost. Put the rest into your hand." (Abstract Performance).
+  // Nor this: "Put two +1/+1 counters on target creature. It becomes an Angel
+  // in addition to its other types and gains flying." (Archangel Elspeth) —
+  // no duration, so for as long as it stays on the battlefield.
+  const creatureCounters = new RegExp(`^put ${N} \\+1/\\+1 counters? on target creature( you control)?\\.$`, "i").exec(s(0));
+  const alsoA = /^it becomes an? ([A-Z][a-z]+) in addition to its other types(?: and gains ([a-z ]+))?\.$/i.exec(s(1));
+  if (creatureCounters !== null && alsoA !== null && (alsoA[2] === undefined || KEYWORDS[alsoA[2].toLowerCase()] !== undefined)) {
+    const amount = numberOf(creatureCounters[1]);
+    if (typeof amount === "number") {
+      const target = ctx.target(creatureCounters[2] === undefined ? "creature" : "creature-you-control");
+      return {
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "add-counter", target, counter: "+1/+1", amount },
+            {
+              kind: "become",
+              target,
+              addSubtypes: [alsoA[1]],
+              ...(alsoA[2] !== undefined ? { keywords: [KEYWORDS[alsoA[2].toLowerCase()]] } : {}),
+              duration: "permanent",
+            },
+          ],
+        },
+        used: 2,
+      };
+    }
+  }
   const exiled = new RegExp(
     `^exile the top ${N} cards of your library in a face-down pile, then exile the top ${N} cards of your library in (another face-down|a face-up) pile\\.$`,
     "i",

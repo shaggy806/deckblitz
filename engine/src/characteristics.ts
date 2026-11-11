@@ -3421,12 +3421,32 @@ function outsideLayerFour(state: GameState, registry: CardRegistry, object: Game
  * before statics could grant types, and still the whole answer whenever no
  * type-granting static is on the battlefield. */
 function ownLayerFour(registry: CardRegistry, object: GameObject): LayerFour {
-  let types: readonly CardType[] = printedDefinition(registry, object).types;
-  let subtypes = printedSubtypes(registry, object);
+  const printedTypes: readonly CardType[] = printedDefinition(registry, object).types;
+  const printedSubs = printedSubtypes(registry, object);
+  let types = printedTypes;
+  let subtypes = printedSubs;
   for (const modifier of typeModifiers(object)) {
     ({ types, subtypes } = applyModifierTypes(modifier, types, subtypes));
   }
+  if (types !== printedTypes || subtypes !== printedSubs) subtypes = subtypesFitting(subtypes, types);
   return { types, subtypes, addedSupertypes: NO_SUPERTYPES, removedSupertypes: NO_SUPERTYPES, applied: NO_STATICS };
+}
+
+/**
+ * The subtypes an object has once every layer-4 effect has applied: only
+ * those that go with a card type it has now (rule 205.3d — "An object can't
+ * gain a subtype that doesn't correspond to one of that object's types").
+ * An effect that gave a creature a creature type keeps applying after the
+ * permanent stops being a creature, but gives it nothing until it's one
+ * again (Archangel Elspeth's ruling: "it will also stop being an Angel until
+ * it becomes a creature again") — so this is asked of the fold's end, not of
+ * each effect as it applies. The same array when everything fits.
+ */
+function subtypesFitting(subtypes: readonly string[], types: readonly CardType[]): readonly string[] {
+  for (const subtype of subtypes) {
+    if (!subtypeFitsTypes(subtype, types)) return subtypes.filter((s) => subtypeFitsTypes(s, types));
+  }
+  return subtypes;
 }
 
 /**
@@ -3607,7 +3627,7 @@ function foldLayerFourOnce(
   return {
     four: {
       types,
-      subtypes,
+      subtypes: subtypesFitting(subtypes, types),
       addedSupertypes: supertypes.filter((s) => !baseSupertypes.includes(s)),
       removedSupertypes: baseSupertypes.filter((s) => !supertypes.includes(s)),
       applied,

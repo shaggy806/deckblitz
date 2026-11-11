@@ -17120,3 +17120,23 @@ describe("look-and-choose's leftover exiled with counters", () => {
     });
   });
 });
+
+describe("counters, then a creature type for good", () => {
+  it("reads Archangel Elspeth's −2", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Legendary Planeswalker — Elspeth",
+      loyalty: "4",
+      oracle_text:
+        "−2: Put two +1/+1 counters on target creature. It becomes an Angel in addition to its other types and gains flying.",
+    }) as unknown as { activated: { effect: unknown; targets: unknown }[] };
+    expect(face.activated[0]?.targets).toEqual(["creature"]);
+    expect(face.activated[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "+1/+1", amount: 2 },
+        { kind: "become", target: 0, addSubtypes: ["Angel"], keywords: ["flying"], duration: "permanent" },
+      ],
+    });
+  });
+});

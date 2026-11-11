@@ -2216,7 +2216,8 @@
   "target:loyalty-ability",
   "static:attack-as-though-haste",
   "static:per-keyword-pump",
-  "effect:look-and-choose-leftover-exile-with-counters"
+  "effect:look-and-choose-leftover-exile-with-counters",
+  "bug:creature-subtype-needs-creature-type"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

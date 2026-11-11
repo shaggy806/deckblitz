@@ -140,6 +140,9 @@ const ARTIFACT_TYPE_SET: ReadonlySet<string> = new Set([
   "Bobblehead",
   "Book",
   "Clue",
+  // Newer than the 2026-09-25 rules' list: "Artifact — Communicator
+  // Equipment" (Combadge, Starfleet Communicator).
+  "Communicator",
   "Contraption",
   "Equipment",
   "Food",
