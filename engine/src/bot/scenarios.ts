@@ -1319,7 +1319,7 @@ const SCENARIOS: readonly BotScenario[] = [
       ["counters the leader's big threat", "Craw Wurm", C, "Forest", true, true, false],
       ["saves Counterspell from a trailing player's mana rock", "Arcane Signet", B, "Forest", true, false, false],
       ["counters a draw engine from a player who isn't ahead", "Rhystic Study", B, "Island", true, true, true],
-      ["counters a tax engine", "Smothering Tithe", B, "Plains", false, true, true],
+      ["counters a tax engine", "Smothering Tithe", B, "Plains", false, true, false],
       ["counters a tax engine from a player who isn't ahead", "Smothering Tithe", B, "Plains", true, true, true],
     ] as const
   ).map(([name, card, caster, land, carolAhead, counter, training]) =>
@@ -1573,6 +1573,47 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  ...(
+    [
+      [
+        "removal takes the drain engine",
+        "Zulaport Cutthroat",
+        "Zulaport Cutthroat takes a life from every opponent each time a creature of theirs dies; a Grizzly Bears is only itself.",
+      ],
+      [
+        "removal takes the cost reducer",
+        "Goblin Electromancer",
+        "Goblin Electromancer is a 2/2 and a mana a turn; a Grizzly Bears is only a 2/2.",
+      ],
+    ] as const
+  ).map(([name, engine, rule]) =>
+    asked({
+      name,
+      rule,
+      position(registry) {
+        // The audit's Q4: an engine that makes neither cards nor creature
+        // tokens was a blank permanent, so the bigger or the first body was
+        // the target. `valueEngines` is the drain's rate; a reducer counts in
+        // `nonlandMana`, as the mana it saves.
+        const game = table(registry, [A, B, C, D], A);
+        for (const player of [A, B, C, D]) lands(game, player === A ? "Swamp" : "Mountain", player, 4);
+        game.debugSpawn("Murder", A, "hand");
+        onBoard(game, "Grizzly Bears", B);
+        const target = onBoard(game, engine, B);
+        return {
+          game,
+          player: A,
+          judge(action) {
+            const hit = firstTarget(action);
+            return {
+              passed: action.type === "cast-spell" && hit === target,
+              detail: action.type === "cast-spell" ? `killed ${cardOf(game, hit)}` : `chose ${describeAction(action)}`,
+            };
+          },
+        };
+      },
+    }),
+  ),
   asked({
     name: "removal takes the creature that has been drawing cards",
     rule: "A Grizzly Bears that has drawn three cards and dealt six in two rounds is the engine; a vanilla 4/4 is only itself.",

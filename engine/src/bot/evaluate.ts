@@ -183,6 +183,11 @@ export interface EvalWeights {
    * (`hand-worth.ts`): each card's quality less 1. Kept at `hand`'s weight,
    * so a card of quality 1 is worth exactly what `hand` says. */
   readonly handQuality: number;
+  /** What our engines that make neither cards nor creatures keep paying, in
+   * cards a round (`valueRate` in `features.ts`): resource tokens at four a
+   * card (Smothering Tithe) and life taken from opponents at four a card
+   * (Zulaport Cutthroat, Purphoros). */
+  readonly valueEngines: number;
   /** How much the strongest opponent's score subtracts from yours. */
   readonly opponent: number;
   /** Added for each opponent eliminated, scaled by the round
@@ -414,6 +419,9 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   trackRecord: 3,
   // `hand`'s own weight: the feature is in cards. The audit's Q2.
   handQuality: 2,
+  // `drawEngines`' weight: the feature is already in cards a round. The
+  // audit's Q4: at 0 a Smothering Tithe was a blank permanent.
+  valueEngines: 4,
   opponent: 1,
   // Per opponent eliminated, at full strength from round 10 and a quarter of
   // it in round 1 (`eliminationShare`). Before it a kill scored nothing, or

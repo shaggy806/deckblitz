@@ -103,6 +103,7 @@ export const FEATURE_KEYS = [
   "lifeSurplus",
   "trackRecord",
   "handQuality",
+  "valueEngines",
 ] as const;
 
 export type FeatureKey = (typeof FEATURE_KEYS)[number];
@@ -463,6 +464,29 @@ function manaPerTurn(def: CardDefinition): number {
   return found;
 }
 
+const reductionMemo = new WeakMap<CardDefinition, number>();
+
+/**
+ * The mana a permanent saves its controller each turn: the generic mana its
+ * best static takes off spells they cast (Goblin Electromancer 1, Urza's
+ * Incubator 2; 1 for a counted amount), once, as for one spell a turn.
+ * Counted with {@link manaPerTurn} in `nonlandMana`, so a reducer is a mana
+ * rock for the spells it reaches. The audit's Q4 ("cost reduction as mana").
+ */
+function reductionPerTurn(def: CardDefinition): number {
+  let found = reductionMemo.get(def);
+  if (found === undefined) {
+    found = 0;
+    for (const ability of def.static) {
+      const mod = ability.costModification;
+      if (mod?.reduceGeneric === undefined || mod.when?.caster === "opponent") continue;
+      found = Math.max(found, typeof mod.reduceGeneric === "number" ? Math.max(0, mod.reduceGeneric) : 1);
+    }
+    reductionMemo.set(def, found);
+  }
+  return found;
+}
+
 /** A trigger that fires once in a permanent's life — its own entering, dying,
  * leaving, being cast — draws once, not every turn. */
 function isOneShot(trigger: TriggeredAbility["trigger"]): boolean {
@@ -727,6 +751,111 @@ function tokenRate(registry: CardRegistry, def: CardDefinition, opponents: numbe
 /** Life taken from opponents counted as a card: 4 life is a card in the
  * evaluation (`life` 0.5 against `hand` 2). */
 const LIFE_PER_CARD = 4;
+/** Resource tokens counted as a card: a Treasure is about a mana, a quarter
+ * of a card (`resourceTokens` 0.5 against `hand` 2). */
+const RESOURCE_TOKENS_PER_CARD = 4;
+/** The most one value engine is credited a round, in cards: six Treasures or
+ * six life. Below {@link DRAW_RATE_CAP}, as neither is a card. */
+const VALUE_RATE_CAP = 1.5;
+
+/**
+ * The most `leaf` reads off any one instruction of a firing of `effect`.
+ * `leaf` answers for a node it prices (0 for one of its kind that makes
+ * nothing for us) and `null` for any other, which is searched. Halved under
+ * an `unless` an opponent can pay to stop it (Smothering Tithe), as
+ * {@link drawsPerFiring} halves Rhystic Study.
+ */
+function mostPerFiring(
+  effect: unknown,
+  leaf: (node: Readonly<Record<string, unknown>>) => number | null,
+  unless = false,
+): number {
+  if (effect === null || typeof effect !== "object") return 0;
+  if (Array.isArray(effect)) return Math.max(0, ...effect.map((e) => mostPerFiring(e, leaf, unless)));
+  const node = effect as Readonly<Record<string, unknown>>;
+  const made = leaf(node);
+  if (made !== null) return unless ? made / 2 : made;
+  const inner = unless || node.kind === "unless";
+  return Math.max(
+    0,
+    ...Object.values(node).map((value) =>
+      value !== null && typeof value === "object" ? mostPerFiring(value, leaf, inner) : 0,
+    ),
+  );
+}
+
+/** Resource tokens (Treasure, Clue, Food: {@link isResourceToken}) one
+ * firing of `effect` makes its controller. */
+function resourcesPerFiring(registry: CardRegistry, effect: unknown): number {
+  return mostPerFiring(effect, (node) => {
+    if (node.kind !== "create-token") return null;
+    if (node.who !== undefined && node.who !== "you") return 0;
+    if (typeof node.token !== "string" || !isResourceToken(registry, node.token)) return 0;
+    return typeof node.count === "number" ? node.count : 1;
+  });
+}
+
+/** Life one firing of `effect` takes from opponents: from each of them
+ * (`each`: Zulaport Cutthroat's loss, Purphoros's damage) or from one, a
+ * targeted player's loss (Blood Artist). 1 for a counted amount. Damage aimed
+ * at a target isn't counted: it may be a creature's. */
+function drainPerFiring(effect: unknown, each: boolean): number {
+  return mostPerFiring(effect, (node) => {
+    if (node.kind !== "lose-life" && node.kind !== "damage") return null;
+    const hitsEach = node.who === "each-opponent";
+    const hitsOne = node.kind === "lose-life" && node.who === undefined && typeof node.target === "number";
+    if (each ? !hitsEach : !hitsOne) return 0;
+    return typeof node.amount === "number" ? Math.max(0, node.amount) : 1;
+  });
+}
+
+interface ValueRates {
+  readonly resources: EngineRate;
+  readonly drainEach: EngineRate;
+  readonly drainOne: EngineRate;
+}
+
+const valueMemo = new WeakMap<CardDefinition, ValueRates>();
+
+function valueRates(registry: CardRegistry, def: CardDefinition): ValueRates {
+  let rates = valueMemo.get(def);
+  if (rates === undefined) {
+    const repeatable = (a: CardDefinition["activated"][number]): boolean =>
+      !costLosesSource(a.cost) && !isManaAbility(a) && a.loyaltyCost !== "-x" && (a.loyaltyCost ?? 0) >= 0;
+    rates = {
+      resources: engineRate(def, (effect) => resourcesPerFiring(registry, effect), repeatable),
+      drainEach: engineRate(def, (effect) => drainPerFiring(effect, true), repeatable),
+      drainOne: engineRate(def, (effect) => drainPerFiring(effect, false), repeatable),
+    };
+    valueMemo.set(def, rates);
+  }
+  return rates;
+}
+
+const perRound = (rate: EngineRate, opponents: number): number => rate.fixed + rate.perOpponent * opponents;
+
+/** Life a permanent's printed abilities take from opponents each round of
+ * the table: see {@link valueRate}. */
+function drainRate(registry: CardRegistry, def: CardDefinition, opponents: number): number {
+  const rates = valueRates(registry, def);
+  return perRound(rates.drainEach, opponents) * opponents + perRound(rates.drainOne, opponents);
+}
+
+/**
+ * What an engine that makes neither cards nor creatures keeps paying its
+ * controller each round of the table, in cards — 0 for one that doesn't.
+ * Resource tokens at {@link RESOURCE_TOKENS_PER_CARD} (Smothering Tithe's
+ * Treasures, Tireless Tracker's Clues) and life taken from opponents at
+ * {@link LIFE_PER_CARD} (Zulaport Cutthroat, Purphoros, Blood Artist), each
+ * by {@link engineRate}. The audit's Q4: Smothering Tithe was a blank
+ * four-mana permanent, worth less than a Grizzly Bears, and was never
+ * countered or aimed at. A cost reduction is mana, not this:
+ * {@link reductionPerTurn}.
+ */
+function valueRate(registry: CardRegistry, def: CardDefinition, opponents: number): number {
+  const resources = perRound(valueRates(registry, def).resources, opponents) / RESOURCE_TOKENS_PER_CARD;
+  return Math.min(VALUE_RATE_CAP, resources + drainRate(registry, def, opponents) / LIFE_PER_CARD);
+}
 /** The most a permanent's track record is credited a round, as for
  * {@link DRAW_RATE_CAP}: one that has drawn a hand in a turn shouldn't
  * outweigh the board. */
@@ -787,9 +916,12 @@ export function trackRecordOf(
   // Rounds of the table it has been here for, at least one.
   const rounds = Math.max(1, turns / Math.max(1, opponents + 1));
   const name = rulesTextName(object);
-  const printed = registry.has(name) ? drawRate(registry.get(name), opponents) : 0;
+  const def = registry.has(name) ? registry.get(name) : undefined;
+  const printed = def === undefined ? 0 : drawRate(def, opponents);
   const extraDraws = Math.max(0, tally.cardsDrawn - printed * rounds);
-  const life = tally.lifeTaken / LIFE_PER_CARD;
+  // Less the drain its text already says it does, which `valueEngines` counts.
+  const printedLife = def === undefined ? 0 : drainRate(registry, def, opponents);
+  const life = Math.max(0, tally.lifeTaken - printedLife * rounds) / LIFE_PER_CARD;
   // Less than a card's worth isn't a record: one hit for 2 is a creature
   // doing what its power says, and a search that plays on past the turn
   // would otherwise credit the hits it only simulated.
@@ -815,6 +947,7 @@ export function engineScore(state: GameState, registry: CardRegistry, id: Object
   return (
     drawRate(def, opponents) +
     tokenRate(registry, def, opponents) / 2 +
+    valueRate(registry, def, opponents) +
     trackRecordOf(state, registry, id, opponents)
   );
 }
@@ -949,6 +1082,7 @@ function playerFeaturesUncached(
   let nonlandMana = 0;
   let drawEngines = 0;
   let tokenEngines = 0;
+  let valueEngines = 0;
   let trackRecord = 0;
   const opponents = state.turnOrder.filter((p) => p !== player && !state.players[p].hasLost).length;
   let commanderOnBoard = 0;
@@ -1019,9 +1153,10 @@ function playerFeaturesUncached(
     const name = rulesTextName(object);
     if (!isLand && registry.has(name)) {
       const def = registry.get(name);
-      nonlandMana += manaPerTurn(def) * n;
+      nonlandMana += (manaPerTurn(def) + reductionPerTurn(def)) * n;
       drawEngines += drawRate(def, opponents) * n;
       tokenEngines += tokenRate(registry, def, opponents) * n;
+      valueEngines += valueRate(registry, def, opponents) * n;
     }
     trackRecord += trackRecordOf(state, registry, id, opponents);
     if (object.isCommander && object.owner === player) commanderOnBoard += 1;
@@ -1210,6 +1345,7 @@ function playerFeaturesUncached(
     answers,
     resourceTokens,
     tokenEngines,
+    valueEngines,
     earlyRemoval,
     // Mana from rocks and creatures in the opening rounds, on top of
     // `nonlandMana`: a turn-one Sol Ring is worth killing then and much less
