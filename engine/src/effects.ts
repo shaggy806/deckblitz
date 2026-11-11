@@ -7315,6 +7315,17 @@ export type EffectSpec =
        * card doesn't have suspend, it gains suspend" (rule 702.62b — Gandalf
        * of the Secret Fire). */
       readonly timeCounters?: number;
+      /** "Exile it instead of putting it into **a** graveyard" (River Song's
+       * Diary, on "whenever **a player** casts …"): whoever owns the spell,
+       * not only this effect's controller — still only a card its owner
+       * would put into their own graveyard, and its owner makes the rule
+       * 616.1 choice. */
+      readonly anyOwner?: true;
+      /** The card is exiled **with this effect's source** (rule 607.2a —
+       * `GameObject.exiledWith`), in the stint the resolving ability refers
+       * to, so a linked ability of it finds the card: River Song's Diary's
+       * "if there are four or more cards exiled with this artifact". */
+      readonly linked?: true;
       /** Only the engine sets this: the answer to that rule 616.1 choice,
        * applied to the spell `spell` that has just resolved — `true` to
        * apply this replacement first, `false` to let the other. */
@@ -12213,7 +12224,12 @@ export interface EffectApi {
   copyTriggerSpellForEach(spell: SpellSnapshot, each: CopyForEach, copier: PlayerId): void;
   /** See the `exile-spell-as-it-resolves` {@link EffectSpec}: mark the
    * trigger's spell. */
-  exileTriggerSpellAsItResolves(returnAtNextEndStep: boolean, plotted: boolean, timeCounters?: number): void;
+  exileTriggerSpellAsItResolves(
+    returnAtNextEndStep: boolean,
+    plotted: boolean,
+    timeCounters?: number,
+    how?: { readonly anyOwner?: boolean; readonly linked?: boolean },
+  ): void;
   /** The controller may collect evidence `amount` — see the
    * `collect-evidence` effect. */
   collectEvidence(amount: number, then: EffectSpec | undefined): void;
@@ -18870,7 +18886,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (spec.applyFirst !== undefined) {
         ctx.finishExiledAsItResolves(spec.applyFirst.spell, spec.applyFirst.feather, spec.applyFirst.intoHand);
       }
-      else ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true, spec.timeCounters);
+      else {
+        ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true, spec.timeCounters, {
+          anyOwner: spec.anyOwner === true,
+          linked: spec.linked === true,
+        });
+      }
       return;
     case "copy-spell": {
       const newTargets = spec.newTargets === true;

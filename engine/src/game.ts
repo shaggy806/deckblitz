@@ -29274,6 +29274,9 @@ export class Game {
     object.targets = null;
     if (object.zone !== "exile" || (object.zoneChangeCount ?? 0) === before) return;
     this.emit({ type: "graveyard-replaced-with-exile", object: id });
+    // "Imprint" (River Song's Diary): exiled with the permanent whose
+    // ability set this up (rule 607.2a).
+    if (mark.link !== undefined) this.linkExiledToSource([id], mark.link.source, mark.link.zoneChangeCount);
     // "If you do, it becomes plotted" (Lilah, Undefeated Slickshot).
     if (mark.plotted === true) this.makePlotted(mark.player, id, before);
     // "…with three time counters on it. Then if the exiled card doesn't have
@@ -39206,7 +39209,7 @@ controlledBy,
           looksAtFaceDown: true,
         };
       },
-      exileTriggerSpellAsItResolves: (returnAtNextEndStep, plotted, timeCounters) => {
+      exileTriggerSpellAsItResolves: (returnAtNextEndStep, plotted, timeCounters, how) => {
         // "That card" — the spell that fired this, still that spell on the
         // stack (rule 400.7).
         if (triggerObject === undefined || refs.triggerSpell === undefined) return;
@@ -39220,12 +39223,18 @@ controlledBy,
         ) {
           return;
         }
+        // "Exiled with this" (rule 607.2a): the stint the resolving ability
+        // refers to, as `exile`'s `linked` reads it.
+        const src = this.state.objects[source];
+        const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
         spell.exileAsItResolves = {
-          player: controller,
+          // "Into a graveyard" (River Song's Diary): whoever owns it.
+          player: how?.anyOwner === true ? spell.owner : controller,
           source,
           ...(returnAtNextEndStep ? { returnAtNextEndStep: true as const } : {}),
           ...(plotted ? { plotted: true as const } : {}),
           ...(timeCounters !== undefined ? { timeCounters } : {}),
+          ...(how?.linked === true && stint !== undefined ? { link: { source, zoneChangeCount: stint } } : {}),
         };
       },
       finishExiledAsItResolves: (spell, feather, intoHand) =>

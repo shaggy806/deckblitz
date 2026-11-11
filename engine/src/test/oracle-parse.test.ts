@@ -15686,6 +15686,26 @@ describe("time counters that reach a suspended card", () => {
     );
     expect(gandalf.effect).toEqual({ kind: "exile-spell-as-it-resolves", timeCounters: 3 });
   });
+  it("reads River Song's Diary whole: every player's hand spells exiled with it, one cast at random", () => {
+    const diary = parseFace(
+      {
+        name: "Card",
+        type_line: "Artifact — Book",
+        oracle_text:
+          "Imprint — Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.\nAt the beginning of your upkeep, if there are four or more cards exiled with this artifact, choose one of them at random. You may cast it without paying its mana cost.",
+      },
+      { tokenFor: (d: string) => d },
+    );
+    expect(diary.complete).toBe(true);
+    expect(diary.triggered[0].trigger).toEqual({ on: "cast-spell", who: "any", from: "hand", filter: { typesAnyOf: ["instant", "sorcery"] } });
+    expect(diary.triggered[0].effect).toEqual({ kind: "exile-spell-as-it-resolves", anyOwner: true, linked: true });
+    expect(diary.triggered[1].condition).toEqual({ kind: "exiled-with-source", atLeast: 4, now: true });
+    expect(diary.triggered[1].effect).toEqual({
+      kind: "choose-random-card",
+      zone: "exiled-with-source",
+      then: { kind: "cast-now", target: 0, free: true },
+    });
+  });
 });
 
 describe("an effect that names a permanent", () => {

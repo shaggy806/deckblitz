@@ -9914,6 +9914,24 @@ export function parseEffect(text, outer) {
       skip = 1;
       continue;
     }
+    // "…cards exiled with ~, choose one of them at random. You may cast it
+    // without paying its mana cost." (River Song's Diary): "them" is the
+    // cards the ability's intervening-if has just counted, written out by
+    // the trigger reader.
+    if (
+      /^choose a card at random exiled with ~\.$/i.test(sentence) &&
+      /^you may cast (?:it|that card) without paying its mana cost\.$/i.test(sentences[i + 1] ?? "")
+    ) {
+      const pick = {
+        kind: "choose-random-card",
+        zone: "exiled-with-source",
+        then: { kind: "cast-now", target: 0, free: true },
+      };
+      parsed.push(pick);
+      hints.push({ sentence, effect: pick });
+      skip = 1;
+      continue;
+    }
     // A wish that may take a face-up exiled card instead (rule 701.23j):
     // "You may reveal an artifact card you own from outside the game or
     // choose a face-up artifact card you own in exile. Put that card into
@@ -14402,6 +14420,19 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.triggered.push(echo({ payGeneric: { lifeTotal: "you" }, text: "Pay {X}" }));
       continue;
     }
+    // River Song's Diary: every player's instant or sorcery spell cast from
+    // their hand is exiled as it resolves — with this permanent under Imprint
+    // (rule 607.2a) — into whoever's graveyard it would have gone.
+    if ((m = /^(Imprint — )?Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves\.$/i.exec(whole))) {
+      out.triggered.push({
+        trigger: { on: "cast-spell", who: "any", from: "hand", filter: { typesAnyOf: ["instant", "sorcery"] } },
+        targets: [],
+        effect: { kind: "exile-spell-as-it-resolves", anyOwner: true, ...(m[1] ? { linked: true } : {}) },
+        resolve: null,
+        text: printed(raw),
+      });
+      continue;
+    }
     // Imprint's exile is linked to this permanent (rule 607.2a — Mirror Golem).
     if (/^Imprint — When (?:~|this creature|this artifact) enters, you may exile target card from a graveyard\.$/i.test(whole)) {
       out.triggered.push({
@@ -16395,6 +16426,11 @@ function parseFaceAsWritten(face, ctx = {}) {
         // "… if this creature attacked or blocked this combat, remove a counter
         // from it": no event names an object, so "it" is the source.
         if (condition === ATTACKED_OR_BLOCKED_THIS_COMBAT) rest = rest.replace(/ from it\.$/, " from ~.");
+        // "If there are four or more cards exiled with ~, choose one of them
+        // at random" (River Song's Diary): "them" is the cards just counted.
+        if (condition?.kind === "exiled-with-source") {
+          rest = rest.replace(/^Choose one of them at random\./, "Choose a card at random exiled with ~.");
+        }
       } else rest = rest.length > 0 ? rest[0].toUpperCase() + rest.slice(1) : rest;
       // "Target creature of defending player's choice" (Erithizon), "… of
       // that player's choice" (Bladegriff Prototype): the player the event
@@ -17156,6 +17192,13 @@ const INTERVENING_IFS = {
   "if you have a full party,": { kind: "full-party" },
   // Rule 702.131 (Rivals of Ixalan's ascend).
   "if you have the city's blessing,": { kind: "citys-blessing" },
+  // How many cards are still exiled with it (rule 607.2a — River Song's Diary).
+  ...Object.fromEntries(
+    ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"].map((word, i) => [
+      `if there are ${word} or more cards exiled with ~,`,
+      { kind: "exiled-with-source", atLeast: i + 2, now: true },
+    ]),
+  ),
 };
 
 /** "If your devotion to white and black is seven or greater," (March of the

@@ -1965,7 +1965,10 @@ after the trigger's source has left. When another replacement would exile it too
 a Kess-style permission, Rest in Peace, an Adventure), its owner chooses which applies first
 (rule 616.1) — a `choose-modes` decision; only Feather's brings the card back. `plotted: true`
 is Lilah, Undefeated Slickshot's "if you do, it becomes plotted" (rule 702.170): the card it
-exiles is plotted; exiled by the other replacement instead, it isn't.
+exiles is plotted; exiled by the other replacement instead, it isn't. `anyOwner: true` is "exile
+it instead of putting it into **a** graveyard" on "whenever **a player** casts …" (River Song's
+Diary): whoever owns the spell, who also makes the rule 616.1 choice; `linked: true` exiles the
+card **with** the effect's source (rule 607.2a, Imprint), for `exiled-with-source` reads.
 
 `become-plotted { target }` is "if you do, it becomes plotted" after an instruction that
 exiled a card (rule 702.170c) — the `then` of an exiling `look-and-choose`, whose chosen card is
