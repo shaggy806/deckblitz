@@ -53,6 +53,7 @@ import _poolArcSpitter from "../pool/arc-spitter.js";
 import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
+import _poolArmixFiligreeThrasher from "../pool/armix-filigree-thrasher.js";
 import _poolArmoredSkyhunter from "../pool/armored-skyhunter.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
@@ -833,6 +834,7 @@ import _poolStrangeInversion from "../pool/strange-inversion.js";
 import _poolStrayFromHistory from "../pool/stray-from-history.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
+import _poolStrongTheBrutishThespian from "../pool/strong-the-brutish-thespian.js";
 import _poolSubterraneanHangar from "../pool/subterranean-hangar.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSunglassesOfUrza from "../pool/sunglasses-of-urza.js";
@@ -1081,6 +1083,7 @@ const shard: CardShard = {
     _poolArcumsAstrolabe,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
+    _poolArmixFiligreeThrasher,
     _poolArmoredSkyhunter,
     _poolArtificerClass,
     _poolAshcoatBear,
@@ -1861,6 +1864,7 @@ const shard: CardShard = {
     _poolStrayFromHistory,
     _poolStrokeOfMidnight,
     _poolStromkirkCondemned,
+    _poolStrongTheBrutishThespian,
     _poolSubterraneanHangar,
     _poolSummitSentinel,
     _poolSunglassesOfUrza,

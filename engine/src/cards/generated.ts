@@ -1299,6 +1299,7 @@ import _poolArmed from "./pool/armed.js";
 import _poolArmguardFamiliar from "./pool/armguard-familiar.js";
 import _poolArmillarySphere from "./pool/armillary-sphere.js";
 import _poolArmistice from "./pool/armistice.js";
+import _poolArmixFiligreeThrasher from "./pool/armix-filigree-thrasher.js";
 import _poolArmorOfFaith from "./pool/armor-of-faith.js";
 import _poolArmorOfShadows from "./pool/armor-of-shadows.js";
 import _poolArmorOfThorns from "./pool/armor-of-thorns.js";
@@ -22055,6 +22056,7 @@ import _poolRiverMerfolk from "./pool/river-merfolk.js";
 import _poolRiverOfTears from "./pool/river-of-tears.js";
 import _poolRiverSerpent from "./pool/river-serpent.js";
 import _poolRiverSneak from "./pool/river-sneak.js";
+import _poolRiverSongsDiary from "./pool/river-songs-diary.js";
 import _poolRiverchurnMonument from "./pool/riverchurn-monument.js";
 import _poolRiverfallMimic from "./pool/riverfall-mimic.js";
 import _poolRiverglidePathway from "./pool/riverglide-pathway.js";
@@ -26145,6 +26147,7 @@ import _poolStromkirkMentor from "./pool/stromkirk-mentor.js";
 import _poolStromkirkNoble from "./pool/stromkirk-noble.js";
 import _poolStromkirkOccultist from "./pool/stromkirk-occultist.js";
 import _poolStromkirkPatrol from "./pool/stromkirk-patrol.js";
+import _poolStrongTheBrutishThespian from "./pool/strong-the-brutish-thespian.js";
 import _poolStrongarmMonk from "./pool/strongarm-monk.js";
 import _poolStrongarmTactics from "./pool/strongarm-tactics.js";
 import _poolStrongarmThug from "./pool/strongarm-thug.js";
@@ -33705,6 +33708,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArmguardFamiliar,
   _poolArmillarySphere,
   _poolArmistice,
+  _poolArmixFiligreeThrasher,
   _poolArmorOfFaith,
   _poolArmorOfShadows,
   _poolArmorOfThorns,
@@ -54461,6 +54465,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRiverOfTears,
   _poolRiverSerpent,
   _poolRiverSneak,
+  _poolRiverSongsDiary,
   _poolRiverchurnMonument,
   _poolRiverfallMimic,
   _poolRiverglidePathway,
@@ -58551,6 +58556,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStromkirkNoble,
   _poolStromkirkOccultist,
   _poolStromkirkPatrol,
+  _poolStrongTheBrutishThespian,
   _poolStrongarmMonk,
   _poolStrongarmTactics,
   _poolStrongarmThug,
@@ -66124,6 +66130,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/armguard-familiar": _poolArmguardFamiliar,
   "pool/armillary-sphere": _poolArmillarySphere,
   "pool/armistice": _poolArmistice,
+  "pool/armix-filigree-thrasher": _poolArmixFiligreeThrasher,
   "pool/armor-of-faith": _poolArmorOfFaith,
   "pool/armor-of-shadows": _poolArmorOfShadows,
   "pool/armor-of-thorns": _poolArmorOfThorns,
@@ -86880,6 +86887,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/river-of-tears": _poolRiverOfTears,
   "pool/river-serpent": _poolRiverSerpent,
   "pool/river-sneak": _poolRiverSneak,
+  "pool/river-songs-diary": _poolRiverSongsDiary,
   "pool/riverchurn-monument": _poolRiverchurnMonument,
   "pool/riverfall-mimic": _poolRiverfallMimic,
   "pool/riverglide-pathway": _poolRiverglidePathway,
@@ -90970,6 +90978,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stromkirk-noble": _poolStromkirkNoble,
   "pool/stromkirk-occultist": _poolStromkirkOccultist,
   "pool/stromkirk-patrol": _poolStromkirkPatrol,
+  "pool/strong-the-brutish-thespian": _poolStrongTheBrutishThespian,
   "pool/strongarm-monk": _poolStrongarmMonk,
   "pool/strongarm-tactics": _poolStrongarmTactics,
   "pool/strongarm-thug": _poolStrongarmThug,
