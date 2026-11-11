@@ -1941,6 +1941,12 @@ export type ThisWayKind =
    * tapping them, then this. One already tapped isn't tapped again, and so
    * isn't counted. */
   | "tapped"
+  /** Permanents it phased out, directly or with what they're attached to
+   * (rule 702.26g) — Out of Time's "a time counter for each creature that
+   * phased out this way" (`filter: { type: "creature" }`). Each is read as it
+   * last was on the battlefield, counted by who controlled it then, a stack
+   * as every token in it. */
+  | "phased-out"
   /** Coins it flipped, by how they landed (rule 705): won and lost are of
    * flips with a call (705.2), heads and tails of any. Read from the journal,
    * by the flipper; no object is involved. */

@@ -8320,6 +8320,26 @@ describe("counters put or removed this way", () => {
     });
   });
 
+  it("reads Out of Time: the untap and phasing until it leaves, a counter for each creature phased out this way, vanishing without a number", () => {
+    const out = face(
+      "Out of Time",
+      "Enchantment",
+      "When this enchantment enters, untap all creatures, then those creatures phase out until this enchantment leaves the battlefield. Put a time counter on this enchantment for each creature that phased out this way.\nVanishing (At the beginning of your upkeep, remove a time counter from this enchantment. When the last is removed, sacrifice it.)",
+    );
+    expect(out.complete).toBe(true);
+    expect(out.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "untap-all", filter: { type: "creature" } },
+        { kind: "phase-out", filter: { type: "creature" }, untilSourceLeaves: true },
+        { kind: "add-counter", target: "source", counter: "time", amount: { thisWay: "phased-out", filter: { type: "creature" } } },
+      ],
+    });
+    // Rule 702.63b: nothing to enter with, the upkeep removal and the sacrifice.
+    expect(out.static ?? []).toHaveLength(0);
+    expect(out.triggered).toHaveLength(3);
+  });
+
   it("reads Neverwinter Hydra's roll as it enters and the counters it enters with", () => {
     const hydra = face(
       "Neverwinter Hydra",

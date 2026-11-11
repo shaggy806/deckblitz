@@ -325,6 +325,16 @@ export function thisWayEntries(
           }
         }
         break;
+      case "phased-out":
+        // Directly or indirectly (rule 702.26g). One still phased out is
+        // asked about as it last was on the battlefield.
+        if (event.type === "permanents-phased-out") {
+          for (const id of event.objects) {
+            const object = state.objects[id];
+            add(id, object?.phasedOut?.controller ?? object?.controller, object?.phasedOut !== undefined);
+          }
+        }
+        break;
       case "counters-removed":
         // Each counter taken off a permanent or a suspended card, one entry a
         // removal, counted by the counters it took.

@@ -539,6 +539,12 @@ function keywordPart(part, faceName, typeLine = "") {
     const v = vanishing(Number(m[1]));
     return { static: [...v.static], triggered: [...v.triggered] };
   }
+  // Vanishing without a number (rule 702.63b — Out of Time): no counters to
+  // enter with.
+  if (/^vanishing$/i.test(p)) {
+    const v = vanishing();
+    return { static: [...v.static], triggered: [...v.triggered] };
+  }
   if ((m = new RegExp(`^suspend (\\d+)—${COST}$`, "i").exec(p))) return { card: { suspend: { n: Number(m[1]), cost: m[2] } } };
   // Suspend X (every one of them says X can't be 0).
   if ((m = new RegExp(`^suspend x—${COST}\\. x can't be 0\\.?$`, "i").exec(p))) return { card: { suspend: { n: "x", cost: m[1] } } };
@@ -10643,6 +10649,28 @@ export function parseEffect(text, outer) {
         hints.push({ sentence, effect: haste });
         continue;
       }
+    }
+    // Out of Time's "Untap all creatures, then those creatures phase out
+    // until ~ leaves the battlefield." (rule 610.4), and after it "Put a time
+    // counter on ~ for each creature that phased out this way."
+    const untapPhase = /^untap all ([a-z ]+?)s, then those \1s phase out until ~ leaves the battlefield\.$/i.exec(sentence);
+    const untapPhaseFilter = untapPhase === null ? null : parseTypePhrase(untapPhase[1]);
+    if (untapPhaseFilter !== null) {
+      const steps = [
+        { kind: "untap-all", filter: untapPhaseFilter },
+        { kind: "phase-out", filter: untapPhaseFilter, untilSourceLeaves: true },
+      ];
+      parsed.push(...steps);
+      hints.push({ sentence, effect: { kind: "sequence", effects: steps } });
+      continue;
+    }
+    const perPhased = /^put an? ([+-]\d+\/[+-]\d+|[a-z]+) counter on ~ for each ([a-z ]+?) that phased out this way\.$/i.exec(sentence);
+    const perPhasedFilter = perPhased === null ? null : parseTypePhrase(perPhased[2]);
+    if (perPhased !== null && perPhasedFilter !== null && priorStep?.kind === "phase-out") {
+      const put = { kind: "add-counter", target: "source", counter: perPhased[1], amount: { thisWay: "phased-out", filter: perPhasedFilter } };
+      parsed.push(put);
+      hints.push({ sentence, effect: put });
+      continue;
     }
     // "~ deals damage to you equal to the number of cards revealed this way."
     // after a reveal-until (Madcap Experiment, Audacious Reshapers).
