@@ -2242,7 +2242,9 @@
   "cost:x-cant-be-zero",
   "effect:target-spell-cant-be-countered",
   "keyword:hexproof-from-own-colors",
-  "cost:cost-move-linked-exiled-card"
+  "cost:cost-move-linked-exiled-card",
+  "cost:cost-move-linked-exiled-card",
+  "effect:cast-now-from-hand-graveyard-or-owned-exile"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

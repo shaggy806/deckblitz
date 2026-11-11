@@ -17485,3 +17485,20 @@ describe("a card exiled with it put into its owner's graveyard as a cost", () =>
     });
   });
 });
+
+describe("a spell cast from the hand, the graveyard or the exiled cards you own", () => {
+  it("reads Kaya the Inexorable's emblem's trigger", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Enchantment",
+      oracle_text:
+        "At the beginning of your upkeep, you may cast a legendary spell from your hand, from your graveyard, or from among cards you own in exile without paying its mana cost.",
+    }) as unknown as { triggered: { effect: unknown }[] };
+    expect(face.triggered[0]?.effect).toEqual({
+      kind: "cast-now",
+      from: { zones: ["hand", "graveyard", "exile"] },
+      spell: { supertype: "legendary" },
+      free: true,
+    });
+  });
+});

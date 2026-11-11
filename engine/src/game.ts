@@ -38705,6 +38705,15 @@ controlledBy,
             (object.counters?.[counter] ?? 0) > 0
           );
         }),
+      exiledOwnedSeen: (owner) =>
+        this.state.zones.shared.exile.filter((id) => {
+          const object = this.state.objects[id];
+          if (object === undefined || object.isToken || object.owner !== owner) return false;
+          // A face-down one only if they may look at it (rule 406.3b); the
+          // player who foretold a card may (702.143a).
+          if (object.exiledFaceDown !== undefined) return object.exiledFaceDown.lookers.includes(owner);
+          return true;
+        }),
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
       cantSearchLibrary: (player, owner) => this.cantSearchLibrary(player, owner),
       beginSearchControl: (player) => this.beginSearchControl(player),

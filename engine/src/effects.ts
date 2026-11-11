@@ -4812,8 +4812,11 @@ export type EffectSpec =
         | { readonly graveyardOf: PlayerRef }
         /** Several of the effect's controller's zones at once: "you may cast
          * an artifact spell **from your hand or graveyard**" (Anrakyr the
-         * Traveller), one spell from among them all. */
-        | { readonly zones: readonly ("hand" | "graveyard")[] }
+         * Traveller), one spell from among them all. `"exile"` is "from
+         * among cards you own in exile" (Kaya the Inexorable's emblem): every
+         * card there they own, a face-down one only if they may look at it
+         * (rule 406.3b). */
+        | { readonly zones: readonly ("hand" | "graveyard" | "exile")[] }
         /** The face-up cards the effect's controller owns in exile with this
          * kind of counter on them, as this applies: "copy each exiled card you
          * own **with a kick counter on it**" (Zethi, Arcane Blademaster, with
@@ -11208,6 +11211,10 @@ export interface EffectApi {
   /** The face-up cards `owner` owns in exile with a `counter` counter on them
    * — a `cast-now`'s `exiledOwnedWithCounter`. */
   exiledOwnedWithCounter(owner: PlayerId, counter: string): readonly ObjectId[];
+  /** The cards `owner` owns in exile that they can see: every face-up one,
+   * and a face-down one they may look at (rule 406.3b) — a `cast-now`'s
+   * `zones`' `"exile"`. */
+  exiledOwnedSeen(owner: PlayerId): readonly ObjectId[];
   /** The cards in `player`'s hand or graveyard. */
   cardsIn(player: PlayerId, zone: "hand" | "graveyard" | "library"): readonly ObjectId[];
   /** The cards in `player`'s library they may cast while searching it
@@ -14179,7 +14186,7 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       const owner = resolvePlayerRef(from.graveyardOf, ctx);
       cards = owner === undefined ? [] : ctx.cardsIn(owner, "graveyard");
     } else if (typeof from === "object" && "zones" in from) {
-      cards = from.zones.flatMap((z) => ctx.cardsIn(ctx.controller, z));
+      cards = from.zones.flatMap((z) => (z === "exile" ? ctx.exiledOwnedSeen(ctx.controller) : ctx.cardsIn(ctx.controller, z)));
     } else if (typeof from === "object" && "exiledOwnedWithCounter" in from) {
       cards = ctx.exiledOwnedWithCounter(ctx.controller, from.exiledOwnedWithCounter);
     } else {

@@ -13056,6 +13056,20 @@ function castNowTermsAt(sentences, i, ctx) {
     if (spell === null) return null;
     return followed({ kind: "cast-now", from: { zones: ["hand", "graveyard"] }, spell, ...castNowTerms(fromZones[2]) }, 1);
   }
+  // "… from your hand, from your graveyard, or from among cards you own in
+  // exile" (Kaya the Inexorable's emblem): the exiled cards they own too.
+  const fromThree = new RegExp(
+    `^you may cast an? (.+?) spell from your hand, from your graveyard, or from among cards you own in exile${CAST_NOW_TERMS}\\.$`,
+    "i",
+  ).exec(sentences[i]);
+  if (fromThree !== null) {
+    const spell = parseTypePhrase(fromThree[1]);
+    if (spell === null) return null;
+    return followed(
+      { kind: "cast-now", from: { zones: ["hand", "graveyard", "exile"] }, spell, ...castNowTerms(fromThree[2]) },
+      1,
+    );
+  }
   // "Target land gains "{T}: Add {U}, {B}, or {R}" until this card is cast from
   // exile. You may cast this card for as long as it remains exiled." (Glamorous
   // Outlaw's cycle, after "{2}, Exile this card from your hand:".)
