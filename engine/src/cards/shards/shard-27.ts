@@ -403,6 +403,7 @@ import _poolInvadingManticore from "../pool/invading-manticore.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
 import _poolIwamoriOfTheOpenFist from "../pool/iwamori-of-the-open-fist.js";
+import _poolJaceMirrorMage from "../pool/jace-mirror-mage.js";
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
 import _poolJaheirasRespite from "../pool/jaheiras-respite.js";
 import _poolJandorFortunedTraveler from "../pool/jandor-fortuned-traveler.js";
@@ -528,6 +529,7 @@ import _poolNahiriTheLithomancer from "../pool/nahiri-the-lithomancer.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNaturalObsolescence from "../pool/natural-obsolescence.js";
+import _poolNeedleDrop from "../pool/needle-drop.js";
 import _poolNeedlebiteTrap from "../pool/needlebite-trap.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
@@ -1385,6 +1387,7 @@ const shard: CardShard = {
     _poolIronLeagueSteed,
     _poolIronManTitanOfInnovation,
     _poolIwamoriOfTheOpenFist,
+    _poolJaceMirrorMage,
     _poolJadeCastSentinel,
     _poolJaheirasRespite,
     _poolJandorFortunedTraveler,
@@ -1510,6 +1513,7 @@ const shard: CardShard = {
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNaturalObsolescence,
+    _poolNeedleDrop,
     _poolNeedlebiteTrap,
     _poolNegate,
     _poolNicolBolas,

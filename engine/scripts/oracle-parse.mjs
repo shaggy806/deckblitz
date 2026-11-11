@@ -4600,6 +4600,7 @@ export function parseSentence(sentence, ctx) {
     const of = typeof n === "number" ? slot(m[1]) : undefined;
     if (of === undefined) return null;
     return { kind: "create-token-copy", of, count: 1, withCounters: { kind: m[3], amount: n } };
+  }
   // "Create a token that's a copy of ~, except it's not legendary [and its
   // starting loyalty is 1]" (Ran and Shaw; Jace, Mirror Mage): of the source,
   // its exceptions read whole or not at all.

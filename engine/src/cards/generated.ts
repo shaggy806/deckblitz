@@ -13877,6 +13877,7 @@ import _poolJaceBeleren from "./pool/jace-beleren.js";
 import _poolJaceCunningCastaway from "./pool/jace-cunning-castaway.js";
 import _poolJaceIngeniousMindMage from "./pool/jace-ingenious-mind-mage.js";
 import _poolJaceMemoryAdept from "./pool/jace-memory-adept.js";
+import _poolJaceMirrorMage from "./pool/jace-mirror-mage.js";
 import _poolJaceMultiverseArchitect from "./pool/jace-multiverse-architect.js";
 import _poolJaceRealitySculptor from "./pool/jace-reality-sculptor.js";
 import _poolJaceReawakened from "./pool/jace-reawakened.js";
@@ -18060,6 +18061,7 @@ import _poolNecroticSliver from "./pool/necrotic-sliver.js";
 import _poolNecroticWound from "./pool/necrotic-wound.js";
 import _poolNectarFaerie from "./pool/nectar-faerie.js";
 import _poolNeedForSpeed from "./pool/need-for-speed.js";
+import _poolNeedleDrop from "./pool/needle-drop.js";
 import _poolNeedleSpecter from "./pool/needle-specter.js";
 import _poolNeedleSpires from "./pool/needle-spires.js";
 import _poolNeedleStorm from "./pool/needle-storm.js";
@@ -46306,6 +46308,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJaceCunningCastaway,
   _poolJaceIngeniousMindMage,
   _poolJaceMemoryAdept,
+  _poolJaceMirrorMage,
   _poolJaceMultiverseArchitect,
   _poolJaceRealitySculptor,
   _poolJaceReawakened,
@@ -50489,6 +50492,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNecroticWound,
   _poolNectarFaerie,
   _poolNeedForSpeed,
+  _poolNeedleDrop,
   _poolNeedleSpecter,
   _poolNeedleSpires,
   _poolNeedleStorm,
@@ -78748,6 +78752,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jace-cunning-castaway": _poolJaceCunningCastaway,
   "pool/jace-ingenious-mind-mage": _poolJaceIngeniousMindMage,
   "pool/jace-memory-adept": _poolJaceMemoryAdept,
+  "pool/jace-mirror-mage": _poolJaceMirrorMage,
   "pool/jace-multiverse-architect": _poolJaceMultiverseArchitect,
   "pool/jace-reality-sculptor": _poolJaceRealitySculptor,
   "pool/jace-reawakened": _poolJaceReawakened,
@@ -82931,6 +82936,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/necrotic-wound": _poolNecroticWound,
   "pool/nectar-faerie": _poolNectarFaerie,
   "pool/need-for-speed": _poolNeedForSpeed,
+  "pool/needle-drop": _poolNeedleDrop,
   "pool/needle-specter": _poolNeedleSpecter,
   "pool/needle-spires": _poolNeedleSpires,
   "pool/needle-storm": _poolNeedleStorm,
