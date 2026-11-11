@@ -79,6 +79,7 @@ import _poolBeastbreakerOfBalaGed from "../pool/beastbreaker-of-bala-ged.js";
 import _poolBecomeBrutes from "../pool/become-brutes.js";
 import _poolBedeck from "../pool/bedeck.js";
 import _poolBeholdTheUnspeakable from "../pool/behold-the-unspeakable.js";
+import _poolBeltOfGiantStrength from "../pool/belt-of-giant-strength.js";
 import _poolBeornsHospitality from "../pool/beorns-hospitality.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
 import _poolBilboThiefInTheNight from "../pool/bilbo-thief-in-the-night.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolBecomeBrutes,
     _poolBedeck,
     _poolBeholdTheUnspeakable,
+    _poolBeltOfGiantStrength,
     _poolBeornsHospitality,
     _poolBewilderingBlizzard,
     _poolBilboThiefInTheNight,

@@ -846,6 +846,7 @@ import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
 import _poolSunstarExpansionist from "../pool/sunstar-expansionist.js";
 import _poolSurgeMare from "../pool/surge-mare.js";
 import _poolSurgeToVictory from "../pool/surge-to-victory.js";
+import _poolSurrakElusiveHunter from "../pool/surrak-elusive-hunter.js";
 import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
 import _poolSwallowedByLeviathan from "../pool/swallowed-by-leviathan.js";
 import _poolSwatAway from "../pool/swat-away.js";
@@ -1879,6 +1880,7 @@ const shard: CardShard = {
     _poolSunstarExpansionist,
     _poolSurgeMare,
     _poolSurgeToVictory,
+    _poolSurrakElusiveHunter,
     _poolSurveillancePhantasm,
     _poolSwallowedByLeviathan,
     _poolSwatAway,

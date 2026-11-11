@@ -2335,6 +2335,7 @@ import _poolBelonging from "./pool/belonging.js";
 import _poolBelovedBeggar from "./pool/beloved-beggar.js";
 import _poolBelovedChaplain from "./pool/beloved-chaplain.js";
 import _poolBelovedPrincess from "./pool/beloved-princess.js";
+import _poolBeltOfGiantStrength from "./pool/belt-of-giant-strength.js";
 import _poolBelunaGrandsquall from "./pool/beluna-grandsquall.js";
 import _poolBelunasGatekeeper from "./pool/belunas-gatekeeper.js";
 import _poolBenBenAkkiHermit from "./pool/ben-ben-akki-hermit.js";
@@ -21358,6 +21359,7 @@ import _poolRedMagesRapier from "./pool/red-mages-rapier.js";
 import _poolRedManaBattery from "./pool/red-mana-battery.js";
 import _poolRedRoomRecruit from "./pool/red-room-recruit.js";
 import _poolRedScarab from "./pool/red-scarab.js";
+import _poolRedSunsTwilight from "./pool/red-suns-twilight.js";
 import _poolRedSunsZenith from "./pool/red-suns-zenith.js";
 import _poolRedTigerMechan from "./pool/red-tiger-mechan.js";
 import _poolRedWard from "./pool/red-ward.js";
@@ -26514,6 +26516,7 @@ import _poolSurlyFarrier from "./pool/surly-farrier.js";
 import _poolSurpriseDeployment from "./pool/surprise-deployment.js";
 import _poolSurrakAndGoreclaw from "./pool/surrak-and-goreclaw.js";
 import _poolSurrakDragonclaw from "./pool/surrak-dragonclaw.js";
+import _poolSurrakElusiveHunter from "./pool/surrak-elusive-hunter.js";
 import _poolSurrakTheHuntCaller from "./pool/surrak-the-hunt-caller.js";
 import _poolSurrakarBanisher from "./pool/surrakar-banisher.js";
 import _poolSurrakarMarauder from "./pool/surrakar-marauder.js";
@@ -34773,6 +34776,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBelovedBeggar,
   _poolBelovedChaplain,
   _poolBelovedPrincess,
+  _poolBeltOfGiantStrength,
   _poolBelunaGrandsquall,
   _poolBelunasGatekeeper,
   _poolBenBenAkkiHermit,
@@ -53796,6 +53800,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRedManaBattery,
   _poolRedRoomRecruit,
   _poolRedScarab,
+  _poolRedSunsTwilight,
   _poolRedSunsZenith,
   _poolRedTigerMechan,
   _poolRedWard,
@@ -58952,6 +58957,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSurpriseDeployment,
   _poolSurrakAndGoreclaw,
   _poolSurrakDragonclaw,
+  _poolSurrakElusiveHunter,
   _poolSurrakTheHuntCaller,
   _poolSurrakarBanisher,
   _poolSurrakarMarauder,
@@ -67224,6 +67230,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/beloved-beggar": _poolBelovedBeggar,
   "pool/beloved-chaplain": _poolBelovedChaplain,
   "pool/beloved-princess": _poolBelovedPrincess,
+  "pool/belt-of-giant-strength": _poolBeltOfGiantStrength,
   "pool/beluna-grandsquall": _poolBelunaGrandsquall,
   "pool/belunas-gatekeeper": _poolBelunasGatekeeper,
   "pool/ben-ben-akki-hermit": _poolBenBenAkkiHermit,
@@ -86247,6 +86254,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/red-mana-battery": _poolRedManaBattery,
   "pool/red-room-recruit": _poolRedRoomRecruit,
   "pool/red-scarab": _poolRedScarab,
+  "pool/red-suns-twilight": _poolRedSunsTwilight,
   "pool/red-suns-zenith": _poolRedSunsZenith,
   "pool/red-tiger-mechan": _poolRedTigerMechan,
   "pool/red-ward": _poolRedWard,
@@ -91403,6 +91411,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/surprise-deployment": _poolSurpriseDeployment,
   "pool/surrak-and-goreclaw": _poolSurrakAndGoreclaw,
   "pool/surrak-dragonclaw": _poolSurrakDragonclaw,
+  "pool/surrak-elusive-hunter": _poolSurrakElusiveHunter,
   "pool/surrak-the-hunt-caller": _poolSurrakTheHuntCaller,
   "pool/surrakar-banisher": _poolSurrakarBanisher,
   "pool/surrakar-marauder": _poolSurrakarMarauder,

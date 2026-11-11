@@ -645,6 +645,7 @@ import _poolRapaciousOne from "../pool/rapacious-one.js";
 import _poolRaulTroubleShooter from "../pool/raul-trouble-shooter.js";
 import _poolRazorBarrier from "../pool/razor-barrier.js";
 import _poolRecklessDetective from "../pool/reckless-detective.js";
+import _poolRedSunsTwilight from "../pool/red-suns-twilight.js";
 import _poolRedcapRaiders from "../pool/redcap-raiders.js";
 import _poolRedemptionArc from "../pool/redemption-arc.js";
 import _poolReidaneGodOfTheWorthy from "../pool/reidane-god-of-the-worthy.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolRaulTroubleShooter,
     _poolRazorBarrier,
     _poolRecklessDetective,
+    _poolRedSunsTwilight,
     _poolRedcapRaiders,
     _poolRedemptionArc,
     _poolReidaneGodOfTheWorthy,
