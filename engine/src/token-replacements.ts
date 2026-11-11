@@ -33,6 +33,11 @@ export interface TokenKind {
 export interface PlannedTokens {
   readonly name: string | null;
   readonly count: number;
+  /** Of a named token's `count`, how many stand in place of the token the
+   * effect named (Divine Visitation's Angels) rather than beside it
+   * (Chatterfang's Squirrels): those enter as the effect said its tokens
+   * enter. None when absent. */
+  readonly inPlace?: number;
 }
 
 /** One replacement in the search; `key` tells copies of a card apart. */
@@ -73,11 +78,21 @@ function kindsOf(search: Search, name: string | null): TokenKind {
   return name === null ? search.base : search.kindOf(name);
 }
 
-function addTo(tokens: readonly PlannedTokens[], name: string, count: number, cap: number): readonly PlannedTokens[] {
+function addTo(
+  tokens: readonly PlannedTokens[],
+  name: string,
+  count: number,
+  cap: number,
+  inPlace = 0,
+): readonly PlannedTokens[] {
   if (count <= 0) return tokens;
   const at = tokens.findIndex((t) => t.name === name);
-  if (at < 0) return [...tokens, { name, count: Math.min(count, cap) }];
-  return tokens.map((t, i) => (i === at ? { name, count: Math.min(t.count + count, cap) } : t));
+  const made = (total: number, standing: number): PlannedTokens => {
+    const capped = Math.min(total, cap);
+    return standing > 0 ? { name, count: capped, inPlace: Math.min(standing, capped) } : { name, count: capped };
+  };
+  if (at < 0) return [...tokens, made(count, inPlace)];
+  return tokens.map((t, i) => (i === at ? made(t.count + count, (t.inPlace ?? 0) + inPlace) : t));
 }
 
 function applies(search: Search, r: TokenMultiplierReplacement, tokens: readonly PlannedTokens[]): boolean {
@@ -99,10 +114,15 @@ function applyOne(
   // Ojer Taq's "three times that many" of the tokens `ofTokens` names.
   if (r.instead?.modify.times !== undefined) {
     const by = r.instead.modify.times;
-    return tokens.map((t) =>
-      matching(t) ? { name: t.name, count: Math.min(t.count * by, Math.max(search.cap, t.count)) } : t,
-    );
+    return tokens.map((t) => {
+      if (!matching(t)) return t;
+      const count = Math.min(t.count * by, Math.max(search.cap, t.count));
+      return t.inPlace === undefined ? { name: t.name, count } : { name: t.name, count, inPlace: Math.min(t.inPlace * by, count) };
+    });
   }
+  // How many of the tokens replaced stood for the effect's own.
+  const standing = (ts: readonly PlannedTokens[]): number =>
+    ts.reduce((sum, t) => sum + (t.name === null ? t.count : (t.inPlace ?? 0)), 0);
   if (instead !== undefined) {
     const that = tokens.filter(matching).reduce((sum, t) => sum + t.count, 0);
     return addTo(
@@ -110,12 +130,14 @@ function applyOne(
       instead,
       that,
       search.cap,
+      standing(tokens.filter(matching)),
     );
   }
   if (r.oneOfEach !== undefined) {
     const that = tokens.filter(matching).reduce((sum, t) => sum + t.count, 0);
+    const stood = standing(tokens.filter(matching));
     let out: readonly PlannedTokens[] = tokens.filter((t) => !matching(t));
-    for (const name of r.oneOfEach) out = addTo(out, name, that, search.cap);
+    for (const name of r.oneOfEach) out = addTo(out, name, that, search.cap, stood);
     return out;
   }
   return tokens;
@@ -189,10 +211,12 @@ export function planTokenEvent(
   const ordered = [...replacements].sort((a, b) => rank(a.replacement) - rank(b.replacement));
   const { tokens, used } = best({ base, kindOf, cap, memo: new Map() }, original, ordered);
   return {
-    tokens: tokens.map((t) => ({
-      name: t.name,
-      count: t.name === null ? t.count * multiplier : Math.min(t.count * multiplier, cap),
-    })),
+    tokens: tokens.map((t) => {
+      const made = t.name === null ? t.count * multiplier : Math.min(t.count * multiplier, cap);
+      return t.inPlace === undefined
+        ? { name: t.name, count: made }
+        : { name: t.name, count: made, inPlace: Math.min(t.inPlace * multiplier, made) };
+    }),
     used,
   };
 }

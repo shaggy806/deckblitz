@@ -44016,7 +44016,9 @@ controlledBy,
       controller,
       copyName,
       total: plan.find((t) => t.name === null)?.count ?? 0,
-      replaced: plan.flatMap((t) => (t.name === null ? [] : [{ name: t.name, count: t.count }])),
+      replaced: plan.flatMap((t) =>
+        t.name === null ? [] : [{ name: t.name, count: t.count, ...(t.inPlace !== undefined ? { inPlace: t.inPlace } : {}) }],
+      ),
       modifiers,
       riders: modifiers.filter((m) => m.copiable !== true),
       tapped: opts.tapped === true,
@@ -44187,21 +44189,28 @@ controlledBy,
   /** Chatterfang's Squirrels and Divine Visitation's Angels: nothing of what
    * was copied, only what the effect does to the tokens (the ruling). */
   private mintReplacedTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies): readonly ObjectId[] {
-    return group.replaced.flatMap((t) =>
+    const mint = (name: string, count: number, withCounters?: { readonly kind: string; readonly amount: number }) =>
       this.mintTokenBatch(
         group.controller,
-        t.name,
+        name,
         null,
-        t.count,
-        [...this.tokenNameModifier(t.name), ...group.riders.map((m) => ({ ...m }))],
+        count,
+        [...this.tokenNameModifier(name), ...group.riders.map((m) => ({ ...m }))],
         group.exileAtEndStep,
         false,
         group.tapped,
         group.sacrificeAtEndStep,
         group.goadedForGameBy,
         group.exileAtEndStep || group.sacrificeAtEndStep,
-      ),
-    );
+        undefined,
+        withCounters,
+      );
+    return group.replaced.flatMap((t) => {
+      // The counters the copies enter with go on what's made in a copy's
+      // place (an Angel), not on what's made beside them (a Squirrel).
+      const inPlace = group.withCounters === undefined ? 0 : Math.min(t.inPlace ?? 0, t.count);
+      return [...mint(t.name, inPlace, group.withCounters), ...mint(t.name, t.count - inPlace)];
+    });
   }
 
   /** What an effect does with the token copies it made, once they're there. */

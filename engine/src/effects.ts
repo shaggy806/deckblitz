@@ -8227,10 +8227,11 @@ export type EffectSpec =
        * how the tokens enter, so replacements of counters see them and an
        * enters trigger finds them there; the amount is read once as the
        * copies are made. Not a copiable value: a copy of one of these
-       * tokens enters with none of it. It's the copies' alone: more of the
-       * same copy from a doubler have it (Parallel Lives), a different token
-       * a replacement adds or makes instead doesn't (Chatterfang's
-       * Squirrels, Divine Visitation's Angels). */
+       * tokens enters with none of it. More of the same copy from a
+       * doubler have it (Parallel Lives), and so does a token a replacement
+       * makes in a copy's place (Divine Visitation's Angel: what the effect
+       * says of its tokens still applies); one a replacement makes beside
+       * them doesn't (Chatterfang's Squirrels). */
       readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
     }
   | {
@@ -13278,6 +13279,7 @@ export type TokenRiders = Partial<
     | "goadedForGame"
     | "linkedToSource"
     | "thenCounters"
+    | "withCounters"
   >
 >;
 
@@ -13309,6 +13311,7 @@ export function tokenRiders(spec: EffectSpec): TokenRiders {
     ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
     ...(spec.kind === "create-token-copy"
       ? {
+          ...(spec.withCounters !== undefined ? { withCounters: spec.withCounters } : {}),
           ...(spec.gainsHaste !== undefined ? { gainsHaste: spec.gainsHaste } : {}),
           ...(spec.exileAtEndOfCombat !== undefined ? { exileAtEndOfCombat: spec.exileAtEndOfCombat } : {}),
           ...(spec.sacrificeAtEndOfCombat !== undefined ? { sacrificeAtEndOfCombat: spec.sacrificeAtEndOfCombat } : {}),

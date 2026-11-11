@@ -5081,7 +5081,7 @@ export interface EnteringTokenCopies {
   readonly controller: PlayerId;
   /** What a would-create-token replacement made instead of some of them
    * (Divine Visitation's Angels), with what the effect does to those. */
-  readonly replaced: readonly { readonly name: string; readonly count: number }[];
+  readonly replaced: readonly { readonly name: string; readonly count: number; readonly inPlace?: number }[];
   readonly riders: readonly PtModifier[];
   readonly tapped: boolean;
   /** "The tokens are goaded for the rest of the game", by this player. */

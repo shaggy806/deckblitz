@@ -99,6 +99,29 @@ describe("Littjara Mirrorlake", () => {
     expect(pt(game, squirrels[0])).toEqual({ power: 1, toughness: 1 });
   });
 
+  it("an Angel made in the copy's place enters with the counter; with Chatterfang too, only the one in a copy's place", () => {
+    const { game } = table();
+    const lake = mirrorlake(game);
+    spawn(game, "Divine Visitation");
+    const bears = spawn(game, "Grizzly Bears");
+    activate(game, lake, 1, { targets: [ref(bears)] });
+    expect(tokens(game, "Grizzly Bears")).toHaveLength(0);
+    const angels = game.battlefield.filter((id) => game.state.objects[id].isToken === true);
+    expect(angels).toHaveLength(1);
+    expect(counters(game, angels[0])).toBe(1);
+    expect(pt(game, angels[0])).toEqual({ power: 5, toughness: 5 });
+
+    // The Squirrel beside the copy becomes an Angel too, with no counter.
+    const both = table();
+    const second = mirrorlake(both.game);
+    spawn(both.game, "Divine Visitation");
+    spawn(both.game, "Chatterfang, Squirrel General");
+    const giant = spawn(both.game, "Hill Giant");
+    activate(both.game, second, 1, { targets: [ref(giant)] });
+    const made = both.game.battlefield.filter((id) => both.game.state.objects[id].isToken === true);
+    expect(made.map((id) => counters(both.game, id)).sort()).toEqual([0, 1]);
+  });
+
   it("is only at sorcery speed", () => {
     const { game } = table({ step: "upkeep" });
     const lake = mirrorlake(game);
