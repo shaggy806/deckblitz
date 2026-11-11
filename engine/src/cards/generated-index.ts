@@ -236,6 +236,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Drake Token",
   "Drake Token (Leafdrake Roost)",
   "Drone Token",
+  "Drone Token (Kaito, Dancing Shadow)",
   "Dwarf Berserker Token",
   "Dwarf Token",
   "Egg Token",

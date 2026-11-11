@@ -990,6 +990,7 @@ import _poolZephyrim from "../pool/zephyrim.js";
 import _tokensAlienToken from "../tokens/alien-token.js";
 import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
+import _tokensDroneTokenKaitoDancingShadow from "../tokens/drone-token-kaito-dancing-shadow.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensGoblinWarriorToken from "../tokens/goblin-warrior-token.js";
 import _tokensInsectTokenGreen61Shroud from "../tokens/insect-token-green-6-1-shroud.js";
@@ -1992,6 +1993,7 @@ const shard: CardShard = {
     _tokensAlienToken,
     _tokensBatTokenGreedsGambit,
     _tokensCatTokenArahboTheFirstFang,
+    _tokensDroneTokenKaitoDancingShadow,
     _tokensEldraziScionToken,
     _tokensGoblinWarriorToken,
     _tokensInsectTokenGreen61Shroud,

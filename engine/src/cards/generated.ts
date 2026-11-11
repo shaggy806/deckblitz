@@ -3751,6 +3751,7 @@ import _poolCalixDestinysHand from "./pool/calix-destinys-hand.js";
 import _poolCalixGuidedByFate from "./pool/calix-guided-by-fate.js";
 import _poolCallASurpriseWitness from "./pool/call-a-surprise-witness.js";
 import _poolCallDamageControl from "./pool/call-damage-control.js";
+import _poolCallForAid from "./pool/call-for-aid.js";
 import _poolCallForBlood from "./pool/call-for-blood.js";
 import _poolCallForUnity from "./pool/call-for-unity.js";
 import _poolCallForthTheTempest from "./pool/call-forth-the-tempest.js";
@@ -14255,6 +14256,7 @@ import _poolKairiTheSwirlingSky from "./pool/kairi-the-swirling-sky.js";
 import _poolKaisoMemoryOfLoyalty from "./pool/kaiso-memory-of-loyalty.js";
 import _poolKaitoBaneOfNightmares from "./pool/kaito-bane-of-nightmares.js";
 import _poolKaitoCunningInfiltrator from "./pool/kaito-cunning-infiltrator.js";
+import _poolKaitoDancingShadow from "./pool/kaito-dancing-shadow.js";
 import _poolKaitoShizuki from "./pool/kaito-shizuki.js";
 import _poolKaitosPursuit from "./pool/kaitos-pursuit.js";
 import _poolKalainReclusivePainter from "./pool/kalain-reclusive-painter.js";
@@ -20417,6 +20419,7 @@ import _poolProtectTheNegotiators from "./pool/protect-the-negotiators.js";
 import _poolProtect from "./pool/protect.js";
 import _poolProtectionMagic from "./pool/protection-magic.js";
 import _poolProtectionOfTheHekma from "./pool/protection-of-the-hekma.js";
+import _poolProtectionRacket from "./pool/protection-racket.js";
 import _poolProtectiveBubble from "./pool/protective-bubble.js";
 import _poolProtectiveParents from "./pool/protective-parents.js";
 import _poolProtectiveResponse from "./pool/protective-response.js";
@@ -31867,6 +31870,7 @@ import _tokensDragonTokenFirebreathing from "./tokens/dragon-token-firebreathing
 import _tokensDragonTokenWakeTheDragon from "./tokens/dragon-token-wake-the-dragon.js";
 import _tokensDrakeTokenLeafdrakeRoost from "./tokens/drake-token-leafdrake-roost.js";
 import _tokensDrakeToken from "./tokens/drake-token.js";
+import _tokensDroneTokenKaitoDancingShadow from "./tokens/drone-token-kaito-dancing-shadow.js";
 import _tokensDroneToken from "./tokens/drone-token.js";
 import _tokensDwarfBerserkerToken from "./tokens/dwarf-berserker-token.js";
 import _tokensDwarfToken from "./tokens/dwarf-token.js";
@@ -36201,6 +36205,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCalixGuidedByFate,
   _poolCallASurpriseWitness,
   _poolCallDamageControl,
+  _poolCallForAid,
   _poolCallForBlood,
   _poolCallForUnity,
   _poolCallForthTheTempest,
@@ -46705,6 +46710,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKaisoMemoryOfLoyalty,
   _poolKaitoBaneOfNightmares,
   _poolKaitoCunningInfiltrator,
+  _poolKaitoDancingShadow,
   _poolKaitoShizuki,
   _poolKaitosPursuit,
   _poolKalainReclusivePainter,
@@ -52867,6 +52873,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProtect,
   _poolProtectionMagic,
   _poolProtectionOfTheHekma,
+  _poolProtectionRacket,
   _poolProtectiveBubble,
   _poolProtectiveParents,
   _poolProtectiveResponse,
@@ -64323,6 +64330,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensDragonTokenWakeTheDragon,
   _tokensDrakeTokenLeafdrakeRoost,
   _tokensDrakeToken,
+  _tokensDroneTokenKaitoDancingShadow,
   _tokensDroneToken,
   _tokensDwarfBerserkerToken,
   _tokensDwarfToken,
@@ -68664,6 +68672,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/calix-guided-by-fate": _poolCalixGuidedByFate,
   "pool/call-a-surprise-witness": _poolCallASurpriseWitness,
   "pool/call-damage-control": _poolCallDamageControl,
+  "pool/call-for-aid": _poolCallForAid,
   "pool/call-for-blood": _poolCallForBlood,
   "pool/call-for-unity": _poolCallForUnity,
   "pool/call-forth-the-tempest": _poolCallForthTheTempest,
@@ -79168,6 +79177,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kaiso-memory-of-loyalty": _poolKaisoMemoryOfLoyalty,
   "pool/kaito-bane-of-nightmares": _poolKaitoBaneOfNightmares,
   "pool/kaito-cunning-infiltrator": _poolKaitoCunningInfiltrator,
+  "pool/kaito-dancing-shadow": _poolKaitoDancingShadow,
   "pool/kaito-shizuki": _poolKaitoShizuki,
   "pool/kaitos-pursuit": _poolKaitosPursuit,
   "pool/kalain-reclusive-painter": _poolKalainReclusivePainter,
@@ -85330,6 +85340,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/protect": _poolProtect,
   "pool/protection-magic": _poolProtectionMagic,
   "pool/protection-of-the-hekma": _poolProtectionOfTheHekma,
+  "pool/protection-racket": _poolProtectionRacket,
   "pool/protective-bubble": _poolProtectiveBubble,
   "pool/protective-parents": _poolProtectiveParents,
   "pool/protective-response": _poolProtectiveResponse,
@@ -96780,6 +96791,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/dragon-token-wake-the-dragon": _tokensDragonTokenWakeTheDragon,
   "tokens/drake-token-leafdrake-roost": _tokensDrakeTokenLeafdrakeRoost,
   "tokens/drake-token": _tokensDrakeToken,
+  "tokens/drone-token-kaito-dancing-shadow": _tokensDroneTokenKaitoDancingShadow,
   "tokens/drone-token": _tokensDroneToken,
   "tokens/dwarf-berserker-token": _tokensDwarfBerserkerToken,
   "tokens/dwarf-token": _tokensDwarfToken,

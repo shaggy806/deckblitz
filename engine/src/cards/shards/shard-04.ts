@@ -98,6 +98,7 @@ import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
 import _poolButchersCleaver from "../pool/butchers-cleaver.js";
 import _poolBygoneBishop from "../pool/bygone-bishop.js";
 import _poolCachedDefenses from "../pool/cached-defenses.js";
+import _poolCallForAid from "../pool/call-for-aid.js";
 import _poolCankerbloom from "../pool/cankerbloom.js";
 import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolButchersCleaver,
     _poolBygoneBishop,
     _poolCachedDefenses,
+    _poolCallForAid,
     _poolCankerbloom,
     _poolCaprichrome,
     _poolCarnageTyrant,
