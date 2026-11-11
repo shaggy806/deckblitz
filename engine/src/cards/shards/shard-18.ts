@@ -433,6 +433,7 @@ import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKeldonMarauders from "../pool/keldon-marauders.js";
 import _poolKiller from "../pool/killer.js";
+import _poolKinbinding from "../pool/kinbinding.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKirdChieftain from "../pool/kird-chieftain.js";
 import _poolKitsuneBlademaster from "../pool/kitsune-blademaster.js";
@@ -473,6 +474,7 @@ import _poolLightningReaver from "../pool/lightning-reaver.js";
 import _poolLightningSkelemental from "../pool/lightning-skelemental.js";
 import _poolLightningStormkin from "../pool/lightning-stormkin.js";
 import _poolLilianasShade from "../pool/lilianas-shade.js";
+import _poolLittjaraMirrorlake from "../pool/littjara-mirrorlake.js";
 import _poolLlanowarGreenwidow from "../pool/llanowar-greenwidow.js";
 import _poolLlanowarWastes from "../pool/llanowar-wastes.js";
 import _poolLoathsomeChimera from "../pool/loathsome-chimera.js";
@@ -1446,6 +1448,7 @@ const shard: CardShard = {
     _poolKefkaRulerOfRuin,
     _poolKeldonMarauders,
     _poolKiller,
+    _poolKinbinding,
     _poolKinsbaileCavalier,
     _poolKirdChieftain,
     _poolKitsuneBlademaster,
@@ -1486,6 +1489,7 @@ const shard: CardShard = {
     _poolLightningSkelemental,
     _poolLightningStormkin,
     _poolLilianasShade,
+    _poolLittjaraMirrorlake,
     _poolLlanowarGreenwidow,
     _poolLlanowarWastes,
     _poolLoathsomeChimera,
