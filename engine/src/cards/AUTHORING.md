@@ -4027,7 +4027,11 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   Hireling) is `count: "x"`, an X announced with the activation though the
   mana cost has none (rule 107.3a), which the effect reads as `"x"` and the
   offer caps (`xCost.maxX`) at what there is to sacrifice. `minX: 1` on the
-  ability is "X can't be 0" (Ruthless Technomancer); a target filter reading
+  ability is "X can't be 0" (Ruthless Technomancer); `xIs: { manaValueOf:
+  "exiled-with-source" }` on the ability is an X its own text defines
+  (rule 107.3c — Prototype Portal's "{X}, {T}: … X is the mana value of that
+  card"): offered at that one X, any other refused, and not activatable
+  while the ref reads nothing; a target filter reading
   X is offered once per X, as for an `{X}` in the mana cost. `{ each:
   [filterA, filterB] }` is one of each, every one a different permanent —
   Jarad, Golgari Lich Lord's "Sacrifice a Swamp and a Forest" (a land that is

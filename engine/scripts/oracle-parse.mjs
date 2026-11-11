@@ -18705,6 +18705,22 @@ function fillEffect(ability, text, ctx, lines, i) {
     else ability.__todo = [...(ability.__todo ?? []), `the modes: ${bullets.join(" / ")}`];
     return j - 1;
   }
+  // "{X}, {T}: Create a token that's a copy of the exiled card. X is the mana
+  // value of that card." (Prototype Portal, Soul Foundry; Elite Arcanist's
+  // "X is the exiled card's mana value"): the cost's X is defined by the
+  // ability, not chosen (rule 107.3c) — `xIs`, the closing sentence dropped.
+  const definedX = / X is (?:the mana value of (?:that|the exiled) card|(?:that|the exiled) card's mana value)\.$/.exec(text);
+  if (
+    definedX !== null &&
+    ability.cost !== undefined &&
+    ability.trigger === undefined &&
+    typeof ability.cost.mana === "string" &&
+    ability.cost.mana.includes("{X}") &&
+    /\bthe exiled card\b/.test(text)
+  ) {
+    text = text.slice(0, definedX.index);
+    ability.xIs = { manaValueOf: "exiled-with-source" };
+  }
   // An activated ability's "target … of an opponent's choice" (rules 602.2b,
   // 601.2c); a triggered one has no opponent to name.
   const theirSlots = ability.cost !== undefined && ability.trigger === undefined ? [] : undefined;

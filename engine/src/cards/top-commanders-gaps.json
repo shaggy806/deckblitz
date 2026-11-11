@@ -2304,7 +2304,8 @@
   "stat:lands-played-not-from-hand-this-turn",
   "stat:lands-played-not-from-hand-this-turn",
   "cost:exile-from-graveyard-total-mana-value",
-  "static:keywords-from-exiled-with-source"
+  "static:keywords-from-exiled-with-source",
+  "amount:exiled-card-mana-value"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

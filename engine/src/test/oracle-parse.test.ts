@@ -18689,3 +18689,20 @@ describe("exiling cards with total mana value N or greater as a cost", () => {
     });
   });
 });
+
+describe("a cost's X defined by the ability", () => {
+  it("reads Prototype Portal's X as the exiled card's mana value", () => {
+    const face = parseFace({
+      name: "Test Portal",
+      type_line: "Artifact",
+      oracle_text:
+        "Imprint — When this artifact enters, you may exile an artifact card from your hand.\n{X}, {T}: Create a token that's a copy of the exiled card. X is the mana value of that card.",
+    });
+    expect(face.activated[0]).toMatchObject({
+      cost: { mana: "{X}", tap: true },
+      xIs: { manaValueOf: "exiled-with-source" },
+      effect: { kind: "create-token-copy", of: "exiled-with-source", count: 1 },
+    });
+    expect(face.activated[0].__todo).toBeUndefined();
+  });
+});

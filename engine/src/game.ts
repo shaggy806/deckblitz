@@ -4244,9 +4244,14 @@ export class Game {
       const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX, lifeX, doX].filter(
         (n): n is number => n !== undefined,
       );
-      const maxX = caps.length === 0 ? undefined : Math.min(...caps);
+      const payableX = caps.length === 0 ? undefined : Math.min(...caps);
+      // "X is the mana value of that card" (rule 107.3c): the one X the
+      // ability's text defines, offered when it can be paid.
+      const definedX = this.definedAbilityX(player, source, ability);
+      if (definedX !== undefined && (payableX === undefined || definedX === null || definedX > payableX)) return;
+      const maxX = definedX ?? payableX;
       // "X can't be 0" (Ruthless Technomancer).
-      const minX = ability.minX ?? 0;
+      const minX = definedX ?? ability.minX ?? 0;
       if (maxX !== undefined && maxX < minX) return;
       const plainMana = plainTapMana(ability, makes);
       // "Unattach an Equipment from Captain America" (rule 701.3d): what this
@@ -24203,6 +24208,13 @@ export class Game {
     const sacrificeParts = sacrificeCostParts(ability.cost.sacrifice, x ?? ability.minX ?? 0);
     if (x !== undefined && x < (ability.minX ?? 0)) {
       return `${def.name}'s ability can't be activated with X less than ${ability.minX ?? 0}`;
+    }
+    // An X the ability's own text defines (rule 107.3c) isn't chosen: only
+    // that X, and none while it's undefined.
+    const definedX = this.definedAbilityX(player, sourceId, ability);
+    if (definedX === null) return `${def.name}'s ability can't be activated: its X isn't defined`;
+    if (definedX !== undefined && x !== undefined && x !== definedX) {
+      return `${def.name}'s ability is activated with X = ${definedX}`;
     }
     if (sacrificeParts !== null) {
       if (this.costSacrificePool(player, sourceId, ability, sacrificeParts, x ?? 0) === null) {
@@ -47022,6 +47034,18 @@ controlledBy,
    * (601.2f, 602.2b), read with `sourceId`, the object doing the modifying, as
    * the source and `pricedId` as the `"priced"` object: at least 0 (107.1b). A
    * number builds no context, since this is asked on every legal-action query. */
+  /** The X an activated ability's own text defines (`ActivatedAbility.xIs`,
+   * rule 107.3c), as it would be activated now: `undefined` when the ability
+   * defines none (X is chosen, 107.3a), `null` while what it reads isn't
+   * there (Prototype Portal with no card exiled: X is undefined and the
+   * cost can't be paid). */
+  private definedAbilityX(player: PlayerId, sourceId: ObjectId, ability: ActivatedAbility): number | null | undefined {
+    if (ability.xIs === undefined) return undefined;
+    const ctx = this.makeResolutionContext(sourceId, player, []);
+    const ref = objectRefRead(ability.xIs.manaValueOf, ctx);
+    return ref === undefined ? null : Math.max(0, ctx.manaValueOf(ref));
+  }
+
   private costAmount(amount: EffectAmount, player: PlayerId, sourceId: ObjectId, pricedId?: ObjectId): number {
     if (typeof amount === "number") return amount;
     return Math.max(

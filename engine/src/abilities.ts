@@ -15,6 +15,7 @@ import type { EffectAmount, EffectSpec, SpellResolver } from "./effects.js";
 import { costActLosesSource, costActMovesLibrary, costActReadsX } from "./cost-acts.js";
 import type { GameState, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
+import type { ObjectRef } from "./refs.js";
 import type { CardFilter } from "./filter.js";
 import { filterReadsX } from "./filter.js";
 import type { TargetSpec } from "./target.js";
@@ -925,6 +926,16 @@ export interface ActivatedAbility {
    * "Sacrifice X artifacts: … X can't be 0." Absent: 0. The offer's
    * `xCost.minX` says it, and an activation below it is refused. */
   readonly minX?: number;
+  /** The cost's X is **defined by the ability's own text**, not chosen (rule
+   * 107.3c): Prototype Portal's "{X}, {T}: Create a token that's a copy of
+   * the exiled card. X is the mana value of that card." is `xIs: {
+   * manaValueOf: "exiled-with-source" }` — the mana value of what the ref
+   * reads as the ability is activated (an {X} in that card's own cost is 0
+   * off the stack, rule 202.3e). The one X it's offered at (`xCost.minX ===
+   * maxX`), and any other is refused; while the ref reads nothing (no card
+   * exiled with it) X is undefined and the ability can't be activated (the
+   * card's ruling). The effect reads it as `"x"` like any other. */
+  readonly xIs?: { readonly manaValueOf: ObjectRef };
   /** "N damage divided as you choose among one or two targets" (Skarrgan
    * Hellkite): the targets from `slot` on — an `any-number` group — share
    * `total`, split as the ability is activated (rules 602.2b, 601.2d: the
