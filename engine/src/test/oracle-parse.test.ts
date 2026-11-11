@@ -18751,6 +18751,31 @@ describe("the next loyalty ability copied", () => {
       text: "Copy that spell or ability twice. You may choose new targets for the copies.",
     });
   });
+
+  it("reads a return's counters only if a creature enters (Recommission, What Must Be Done)", () => {
+    const one = parseFace({
+      name: "Test Recommission",
+      type_line: "Sorcery",
+      oracle_text:
+        "Return target artifact or creature card from your graveyard to the battlefield. If a creature enters this way, it enters with an additional +1/+1 counter on it.",
+    });
+    expect(one.effect).toEqual({
+      kind: "put-onto-battlefield",
+      target: 0,
+      withCounters: { kind: "+1/+1", amount: 1, ifCreature: true },
+    });
+    const two = parseFace({
+      name: "Test Juno",
+      type_line: "Sorcery",
+      oracle_text:
+        "Return target artifact or creature card from your graveyard to the battlefield. It enters with two additional +1/+1 counters on it if it's a creature.",
+    });
+    expect(two.effect).toEqual({
+      kind: "put-onto-battlefield",
+      target: 0,
+      withCounters: { kind: "+1/+1", amount: 2, ifCreature: true },
+    });
+  });
 });
 
 describe("a mass grant of a quoted triggered ability", () => {

@@ -3983,8 +3983,13 @@ export type EffectSpec =
       readonly enterTapped?: boolean;
       /** Counters it enters with (Undying: "with a +1/+1 counter on it";
        * Admiral Brass, Unsinkable: "with a finality counter on it" — a
-       * finality counter needs nothing more, since `moveObject` reads it). */
-      readonly withCounters?: { readonly kind: string; readonly amount: number };
+       * finality counter needs nothing more, since `moveObject` reads it).
+       * `ifCreature`: only if it's a creature as it enters, judged as it
+       * exists on the battlefield (rule 614.12) — Recommission's "If a
+       * creature enters this way, it enters with an additional +1/+1 counter
+       * on it", What Must Be Done's "It enters with two additional +1/+1
+       * counters on it if it's a creature". */
+      readonly withCounters?: { readonly kind: string; readonly amount: number; readonly ifCreature?: true };
       /** "If it would leave the battlefield, exile it instead of putting it
        * anywhere else" (Whip of Erebos) — sets
        * `GameObject.exileIfItWouldLeave` on the permanent it becomes: a
@@ -12819,7 +12824,7 @@ export interface EffectApi {
      * effect's controller for "under your control", or another player. */
     under: PlayerId | undefined,
     enterTapped: boolean,
-    withCounters?: { readonly kind: string; readonly amount: number },
+    withCounters?: { readonly kind: string; readonly amount: number; readonly ifCreature?: true },
     exileIfItWouldLeave?: boolean | "ability",
     /** It enters transformed (`true`), or flipped (`"flipped"` — rule 710). */
     transformed?: boolean | "flipped",

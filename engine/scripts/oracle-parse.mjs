@@ -9900,6 +9900,24 @@ export function parseEffect(text, outer) {
     }
     ctx.targets.length = slots;
   }
+  // "Return target … card from your graveyard to the battlefield. If a
+  // creature enters this way, it enters with an additional +1/+1 counter on
+  // it" (Recommission); "… It enters with two additional +1/+1 counters on it
+  // if it's a creature" (What Must Be Done): the put's `withCounters`, only
+  // if it's a creature on the battlefield (`ifCreature`, rule 614.12).
+  const entersIfCreature =
+    /^(.+? to the battlefield\.) (?:If a creature enters this way, it enters with (an|two|three) additional \+1\/\+1 counters? on it|It enters with (an|two|three) additional \+1\/\+1 counters? on it if it's a creature)\.(?: \(Artifacts, legendaries, and Sagas are historic\.\))?$/.exec(
+      text,
+    );
+  if (entersIfCreature !== null) {
+    const slots = ctx.targets.length;
+    const put = parseSentence(entersIfCreature[1], ctx);
+    if (put?.kind === "put-onto-battlefield" && put.withCounters === undefined) {
+      const amount = { an: 1, two: 2, three: 3 }[entersIfCreature[2] ?? entersIfCreature[3]];
+      return { effect: { ...put, withCounters: { kind: "+1/+1", amount, ifCreature: true } }, todo: [], hints: [] };
+    }
+    ctx.targets.length = slots;
+  }
   // "If that mana is spent on a multicolored creature spell, that creature
   // enters with an additional +1/+1 counter on it" (Guildmages' Forum, Animal
   // Attendant); "if you spend this mana to cast your commander, it enters with

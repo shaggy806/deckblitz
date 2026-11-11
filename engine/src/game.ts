@@ -50620,7 +50620,7 @@ controlledBy,
     controller: PlayerId,
     underYourControl: boolean,
     enterTapped: boolean,
-    withCounters?: { readonly kind: string; readonly amount: number },
+    withCounters?: { readonly kind: string; readonly amount: number; readonly ifCreature?: true },
     exileIfItWouldLeave: boolean | "ability" = false,
     turned: boolean | "flipped" = false,
     underPlayer?: PlayerId,
@@ -50682,7 +50682,13 @@ controlledBy,
       });
       invalidateComputedCache();
     }
-    if (withCounters !== undefined) {
+    // "If a creature enters this way, it enters with …" (`ifCreature`): what
+    // it is on the battlefield, every effect applying (rule 614.12).
+    if (
+      withCounters !== undefined &&
+      (withCounters.ifCreature !== true ||
+        computeCharacteristics(this.state, this.registry, target.object).types.includes("creature"))
+    ) {
       // Put there, counters and all, by whoever puts it onto the battlefield.
       this.addCounter(target, withCounters.kind, withCounters.amount, true, under ?? controller);
     }
