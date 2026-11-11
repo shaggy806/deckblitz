@@ -838,7 +838,7 @@
    "needs": [
     "target:any-number-group-before-targeting-mode"
    ],
-   "size": "small",
+   "size": "major",
    "why": "Re-read in B298 (small): With both modes chosen, the first mode's any-number group of lands comes before the second mode's target creature; a group must be its list's last slot, and swapping the modes would deal the damage before the lands animate."
   },
   {
