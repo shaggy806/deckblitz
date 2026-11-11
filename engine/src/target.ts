@@ -497,6 +497,13 @@ export type TargetSpec =
        * Future). Each member is an `other` slot with `sameController` (see
        * it) — {@link concreteTargetSpecs}. Needs {@link TargetFacts}. */
       readonly sameController?: true | { readonly slot: number };
+      /** No two members share a controller — "any number of target tapped
+       * creatures **with different controllers**" (Cloud's Limit Break). Each
+       * member past the first is an `other` slot with `differentController`
+       * (see it) — {@link concreteTargetSpecs} — so as it resolves, two
+       * members one player controls by then are both illegal (rule 608.2b).
+       * Needs {@link TargetFacts}. */
+      readonly differentControllers?: true;
     };
 
 /**
@@ -787,6 +794,9 @@ export function concreteTargetSpecs(specs: readonly TargetSpec[], count: number)
             of: spec.of,
             than: { slots: than },
             ...(same !== undefined ? { sameController: true } : {}),
+            // "With different controllers": none controlled by an earlier
+            // member's controller.
+            ...(spec.differentControllers === true ? { differentController: true } : {}),
           },
     );
   }
@@ -1080,6 +1090,11 @@ export function slotOptions(
       if (anchorRef !== null && anchorRef !== undefined) {
         left = left.filter((ref) => player !== undefined && playerOfTarget(ref, facts) === player);
       }
+    }
+    // "With different controllers": none whose controller a member has.
+    if (typeof spec === "object" && spec.kind === "any-number" && spec.differentControllers === true) {
+      const controllers = new Set(taken.map((t) => facts.controllerOf(t)));
+      left = left.filter((ref) => !controllers.has(facts.controllerOf(ref)));
     }
     // "With total power 10 or less": only what still fits.
     const most = groupMaxTotalPower(spec);

@@ -1241,13 +1241,17 @@ function quantifiedSlots(phrase, ctx) {
   }
   // "Any number of target creatures with equal toughness" (V.A.T.S.), "up
   // to six target creature cards with different names from your graveyard"
-  // (Behold the Sinister Six!): a group whose members keep the relation.
-  if ((m = /^(any number of|up to (?:two|three|four|five|six)) (target .+?) with (equal toughness|different names)( from .+)?$/i.exec(phrase))) {
+  // (Behold the Sinister Six!), "any number of target tapped creatures with
+  // different controllers" (Cloud's Limit Break): a group whose members keep
+  // the relation.
+  if ((m = /^(any number of|up to (?:two|three|four|five|six)) (target .+?) with (equal toughness|different names|different controllers)( from .+)?$/i.exec(phrase))) {
     const n = m[1].toLowerCase() === "any number of" ? undefined : numberOf(m[1].slice(6));
     const phrase1 = `${singularTarget(m[2])}${m[4] ?? ""}`;
     const of = m[4] ? graveyardTargetOf(phrase1) : targetOf(phrase1);
     if (of === undefined || (n !== undefined && typeof n !== "number")) return undefined;
-    const relation = /toughness/i.test(m[3]) ? { equalToughness: true } : { differentNames: true };
+    const relation = /toughness/i.test(m[3])
+      ? { equalToughness: true }
+      : /controllers/i.test(m[3]) ? { differentControllers: true } : { differentNames: true };
     const group = { kind: "any-number", of, ...(n !== undefined ? { max: n } : {}), ...relation };
     return { slots: [ctx.target(group)], group: true };
   }
@@ -4972,8 +4976,9 @@ export function parseSentence(sentence, ctx) {
   }
   // "Destroy up to X target artifacts", "tap X target creatures" (rule
   // 601.2c): a group as big as X, each member acted on — destroyed or exiled
-  // together (Word of Binding's, By Force's shapes).
-  if ((m = /^(destroy|exile|tap|untap) ((?:up to )?X target .+|(?:up to )?(?:two|three|four|five) target .*cards from (?:a single|an opponent's) graveyard)\.$/i.exec(s))) {
+  // together (Word of Binding's, By Force's shapes). So is "any number of
+  // target tapped creatures with different controllers" (Cloud's Limit Break).
+  if ((m = /^(destroy|exile|tap|untap) ((?:up to )?X target .+|(?:up to )?(?:two|three|four|five) target .*cards from (?:a single|an opponent's) graveyard|any number of target .+ with different controllers)\.$/i.exec(s))) {
     const got = quantifiedSlots(m[2], ctx);
     if (got === undefined || !got.group) return null;
     const kind = m[1].toLowerCase();

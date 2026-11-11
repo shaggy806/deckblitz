@@ -3574,7 +3574,11 @@ ability, read with its bounds below — Orcus, Prince of Undeath), and
 creatures **with equal toughness**" (V.A.T.S.): as it resolves, the members
 still legal no longer all equal makes every one illegal (a lone one never
 breaks it); `differentNames: true` is "up to six target creature cards **with
-different names**" (Behold the Sinister Six!).
+different names**" (Behold the Sinister Six!); `differentControllers: true`
+is "any number of target tapped creatures **with different controllers**"
+(Cloud's Limit Break): each member past the first an `other` slot with
+`differentController`, so two one player controls as it resolves are both
+illegal.
 
 **"…that share a card type" / "a creature type" / "share no creature
 types"** is `shares` on an `other` slot with a slot relation — a

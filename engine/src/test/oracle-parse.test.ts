@@ -8885,6 +8885,13 @@ describe("target relations among the chosen targets: shared types, equal toughne
     );
     expect(vats.targets).toEqual([{ kind: "any-number", of: "creature", equalToughness: true }]);
     expect(vats.effect).toEqual({ kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "destroy", target: 0 } });
+    // "With different controllers" (Cloud's Limit Break's Blade Beam).
+    const beam = face("Test Beam", "Instant", "Destroy any number of target tapped creatures with different controllers.");
+    expect(beam.complete).toBe(true);
+    expect(beam.targets).toEqual([
+      { kind: "any-number", of: { kind: "permanent", filter: { type: "creature", tapped: true } }, differentControllers: true },
+    ]);
+    expect(beam.effect).toEqual({ kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "destroy", target: 0 } });
     const six = face(
       "Behold the Sinister Six!",
       "Sorcery",
