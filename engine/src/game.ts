@@ -41666,7 +41666,14 @@ controlledBy,
     }
     const offer =
       spec.options !== undefined
-        ? this.optionModes(player, spec.options, source, targets, x)
+        ? // A life amount was read for this player before they were asked.
+          this.optionModes(
+            player,
+            spec.options.filter((option): option is BoundUnlessOption => !("payLifeAmount" in option)),
+            source,
+            targets,
+            x,
+          )
         : spec.effect !== undefined
           ? { modes: [{ text: spec.prompt ?? "Do it?", effect: spec.effect }] }
           : spec.prompt !== undefined

@@ -1424,6 +1424,14 @@ counts as their not doing it: "they may tap that permanent. If they don't, you
 create …" is `who: "trigger-player"` (the opponent it entered under), `ifDidnt`
 the token, and the token comes with it already tapped or gone (Charismatic
 Conqueror, rule 701.26a).
+"When you cast this spell, **any player may pay 5 life. If a player does, counter
+~**" (Dash Hopes) is an `each-player-may` of `who: "each-player"` with the
+payment in `options` and `ifDid: { kind: "counter", target: "source" }`: everyone
+is asked, even after one has paid (the ruling). An `each-player-may`'s option may
+be `{ payLifeAmount, text: "Pay {X} life" }`, read for each player as they're
+asked, a per-player amount being their own: "any player may pay **half their
+life**, rounded up" (Temporal Extortion) is `{ half: { lifeTotal: "each" }, round:
+"up" }`. The scaffolder reads both sentences. `each-player-may-life-amount.test.ts`.
 Not yet: "**if** any player pays {2}, [effect]" (Rhystic Scrying), or one asked per object (Cleansing's
 "for each land … unless any player pays 1 life"). The scaffolder reads the
 "[effect] unless any player pays {N}." and "Unless any player pays {N}, [effect]."

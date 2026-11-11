@@ -17719,3 +17719,34 @@ describe("revealing a face-down permanent", () => {
     });
   });
 });
+
+describe("any player may pay life to counter the spell", () => {
+  const whenCast = (line: string): unknown => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Sorcery",
+      oracle_text: `${line}\nTake an extra turn after this one.`,
+    } as never) as unknown as { triggered: { trigger: unknown; effect: unknown }[]; effect: unknown };
+    expect(face.triggered[0]?.trigger).toEqual({ on: "this-cast" });
+    expect(face.effect).toEqual({ kind: "take-extra-turn" });
+    return face.triggered[0]?.effect;
+  };
+
+  it("reads Temporal Extortion: half of each asked player's own life", () => {
+    expect(whenCast("When you cast this spell, any player may pay half their life, rounded up. If a player does, counter Thing.")).toEqual({
+      kind: "each-player-may",
+      who: "each-player",
+      options: [{ payLifeAmount: { half: { lifeTotal: "each" }, round: "up" }, text: "Pay {X} life" }],
+      ifDid: { kind: "counter", target: "source" },
+    });
+  });
+
+  it("reads Dash Hopes: a fixed amount", () => {
+    expect(whenCast("When you cast this spell, any player may pay 5 life. If a player does, counter Thing.")).toEqual({
+      kind: "each-player-may",
+      who: "each-player",
+      options: [{ payLife: 5, text: "Pay 5 life" }],
+      ifDid: { kind: "counter", target: "source" },
+    });
+  });
+});

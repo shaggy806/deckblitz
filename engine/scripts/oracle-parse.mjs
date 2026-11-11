@@ -8796,6 +8796,22 @@ export function parseEffect(text, outer) {
   const tempting = temptingOfferOf(text, outer);
   if (tempting !== null) return { effect: tempting, todo: [], hints: [] };
 
+  // "Any player may pay 5 life. If a player does, counter ~." (Dash Hopes), "…
+  // pay half their life, rounded up" (Temporal Extortion): each player asked
+  // in turn (rule 101.4), the life their own, any payment countering it.
+  const payToCounter = /^Any player may pay (?:(\d+) life|half their life, rounded (up|down))\. If a player does, counter ~\.$/.exec(text);
+  if (payToCounter !== null) {
+    const option =
+      payToCounter[1] !== undefined
+        ? { payLife: Number(payToCounter[1]), text: `Pay ${payToCounter[1]} life` }
+        : { payLifeAmount: { half: { lifeTotal: "each" }, round: payToCounter[2] }, text: "Pay {X} life" };
+    return {
+      effect: { kind: "each-player-may", who: "each-player", options: [option], ifDid: { kind: "counter", target: "source" } },
+      todo: [],
+      hints: [],
+    };
+  }
+
   // "Exile target spell. It becomes plotted." (Aven Interrupter — rule
   // 702.170c): the spell exiled, then the card plotted for its owner.
   if (/^Exile target spell\. It becomes plotted\.$/.test(text)) {

@@ -9245,7 +9245,11 @@ export type EffectSpec =
         | { readonly ownerOf: number };
       readonly prompt?: string;
       readonly effect?: EffectSpec;
-      readonly options?: readonly BoundUnlessOption[];
+      /** A `payLifeAmount` here is read for each player as they're asked, a
+       * per-player amount being their own: "any player may pay **half their
+       * life**, rounded up" (Temporal Extortion) is `{ payLifeAmount: { half:
+       * { lifeTotal: "each" }, round: "up" }, text: "Pay {X} life" }`. */
+      readonly options?: readonly (BoundUnlessOption | Extract<UnlessOption, { readonly payLifeAmount: EffectAmount }>)[];
       /**
        * Instead of a "may": a choice each of them **must** make between
        * these — "each opponent faces a villainous choice — [one], or
@@ -13337,7 +13341,20 @@ function applyEachPlayerMay(
     if (spec.effect !== undefined && !mayBeDone(spec.effect, ctx.asPlayer(player))) continue;
     const parked = ctx.parkedCount();
     const pendingBefore = ctx.decisionPending();
-    ctx.askEachPlayerMay(player, spec, deferred);
+    // "Half their life": a life amount is the asked player's own, read now
+    // (a payment before theirs was another player's).
+    const theirs =
+      spec.options?.some((option) => "payLifeAmount" in option) === true
+        ? {
+            ...spec,
+            options: spec.options.map((option): BoundUnlessOption => {
+              if (!("payLifeAmount" in option)) return option;
+              const n = Math.max(0, amountValue(option.payLifeAmount, ctx, player));
+              return { payLife: n, text: option.text.split("{X}").join(`${n}`) };
+            }),
+          }
+        : spec;
+    ctx.askEachPlayerMay(player, theirs, deferred);
     if (!pendingBefore && ctx.decisionPending()) {
       park({ since, asked, toAsk }, parked);
       return;
