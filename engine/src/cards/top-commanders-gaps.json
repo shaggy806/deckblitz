@@ -8,6 +8,7 @@
     "cost:minimum-total-cost",
     "effect:attacked-players-scope",
     "decision:ward-dynamic-x",
+    "replacement:enter-tapped-optional-rider",
     "condition:counter-parity-condition",
     "trigger:destroyed",
     "effect:delayed-trigger-intervening-if",

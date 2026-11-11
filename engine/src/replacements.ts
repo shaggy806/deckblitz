@@ -340,6 +340,19 @@ export interface EntersBattlefieldReplacement {
    * much life to have it enter untapped; otherwise it enters tapped. Raised
    * as a `pay-life-for-untapped` decision. */
   readonly mayPayLife?: number;
+  /**
+   * "You **may have this land enter tapped. If you do**, you get two rad
+   * counters" (Mariposa Military Base): its controller's choice as it's about
+   * to enter (rule 614.1c), asked before it moves (`Game.askEnterChoice`,
+   * rule 614.12) as a `choose-creature-type` over "Enter untapped" / "Enter
+   * tapped" with the ability's text as the prompt. Chosen, this is an
+   * "enters tapped" like any other — an "enters untapped" applied after it
+   * (Spelunking, rule 616.1) still untaps it — and `then` happens as it
+   * enters, for its controller: part of the replacement, not a trigger, so
+   * nobody can respond. `then` must ask nothing. Entering some way that never
+   * asks (a token copy), it isn't chosen.
+   */
+  readonly mayEnterTapped?: { readonly then?: EffectSpec };
   /** It enters with these counters already on it. `amount: "x"` reads the
    * `{X}` chosen when it was cast (Walking Ballista); `"times-kicked"` the
    * number of times its multikicker was paid (Everflowing Chalice's "a

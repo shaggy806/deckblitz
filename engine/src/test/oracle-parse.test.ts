@@ -6233,6 +6233,21 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
       ],
     });
   });
+
+  it("reads 'you may have this land enter tapped. If you do, …' (Mariposa Military Base)", () => {
+    const base = face(
+      "Mariposa Military Base",
+      "Land",
+      "You may have this land enter tapped. If you do, you get two rad counters.\n{T}: Add {C}.\n{5}, {T}: Draw a card. This ability costs {1} less to activate for each rad counter you have.",
+    );
+    expect(base.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      replacement: {
+        event: "enters-battlefield",
+        mayEnterTapped: { then: { kind: "add-player-counters", counter: "rad", amount: 2 } },
+      },
+    });
+  });
 });
 
 describe("the turn history's graveyard tallies (discarded, to-graveyard)", () => {

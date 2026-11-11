@@ -895,6 +895,9 @@ export interface GameObject {
     /** Unleash's choice (rule 702.98a): whether it enters with the
      * additional +1/+1 counter. */
     readonly unleash?: boolean;
+    /** Its controller's answer to "you may have this land enter tapped"
+     * (`EntersBattlefieldReplacement.mayEnterTapped`). */
+    readonly enterTapped?: boolean;
     /** The permanent it exchanges text boxes with as it enters
      * (`CardDefinition.exchangeTextOnEnter` — Deadpool), or `null` when its
      * controller declined or there was none. */
@@ -3853,6 +3856,10 @@ export type AwaitingDecision =
        * as `source` is about to enter (rule 702.98a): the first option takes
        * the counter. */
       readonly unleash?: true;
+      /** "You may have this land enter tapped. If you do, …" as `source` is
+       * about to enter (`EntersBattlefieldReplacement.mayEnterTapped`): the
+       * second option has it enter tapped. `prompt` is the ability's text. */
+      readonly enterTapped?: true;
       /** The kind of counter it enters with for one card its `AsEntersAction`
        * exiled (`counterForEach` — Frankenstein's Monster). */
       readonly asEntersCounter?: true;

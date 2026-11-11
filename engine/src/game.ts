@@ -1531,6 +1531,9 @@ interface EnteringReplacement {
   readonly counters: readonly { readonly kind: string; readonly amount: number }[];
   readonly painIfUntapped: number;
   readonly mayPayLife: number;
+  /** Its controller chose to have it enter tapped (`mayEnterTapped`): what
+   * happens as it does. */
+  readonly choseTappedThen?: EffectSpec;
   /** Riot (rule 702.136a) gives it haste: its controller didn't have it
    * enter with the +1/+1 counter. */
   readonly riotHaste: boolean;
@@ -1553,6 +1556,10 @@ const RIOT_COUNTER = "+1/+1 counter";
 const RIOT_OPTIONS: readonly string[] = [RIOT_COUNTER, "Haste"];
 /** Unleash's choice (rule 702.98a): the first option takes the counter. */
 const UNLEASH_OPTIONS: readonly string[] = [RIOT_COUNTER, "No counter"];
+/** "You may have this land enter tapped" (`mayEnterTapped`): the second option
+ * is to. Declining is first, which a seat with no opinion takes: the rider may
+ * be no gift (Mariposa Military Base's rad counters). */
+const MAY_ENTER_TAPPED_OPTIONS: readonly string[] = ["Enter untapped", "Enter tapped"];
 
 /** A bestow cast's mana purpose (rule 702.103b): the spell is an Aura, not a
  * creature, so a restriction reads it bestowed — "spend this mana only to
@@ -7899,7 +7906,9 @@ export class Game {
                 }
               : awaiting.unleash === true
                 ? { ...source.enterChoice, unleash: creatureType === UNLEASH_OPTIONS[0] }
-                : awaiting.asEntersCounter === true
+                : awaiting.enterTapped === true
+                  ? { ...source.enterChoice, enterTapped: creatureType === MAY_ENTER_TAPPED_OPTIONS[1] }
+                  : awaiting.asEntersCounter === true
                   ? {
                       ...source.enterChoice,
                       asEntersCounters: [...(source.enterChoice?.asEntersCounters ?? []), creatureType],
@@ -14231,6 +14240,7 @@ export class Game {
     | { readonly kind: "behold"; readonly spec: BeholdSpec }
     | { readonly kind: "riot" }
     | { readonly kind: "unleash" }
+    | { readonly kind: "may-tapped"; readonly text: string }
     | { readonly kind: "tribute"; readonly amount: number }
     | { readonly kind: "exchange-text"; readonly filter: CardFilter }
     | { readonly kind: "devour"; readonly filter: CardFilter }
@@ -14367,6 +14377,14 @@ export class Game {
     // Unleash (rule 702.98a): "you may have this permanent enter with an
     // additional +1/+1 counter on it" — printed or copied, as riot.
     if (answered?.unleash === undefined && becoming.keywords.includes("unleash")) return { kind: "unleash" };
+    // "You may have this land enter tapped. If you do, …" (Mariposa Military
+    // Base) — printed, or a copy's.
+    if (answered?.enterTapped === undefined) {
+      for (const ability of becoming.static) {
+        const r = ability.replacement;
+        if (r?.event === "enters-battlefield" && r.mayEnterTapped !== undefined) return { kind: "may-tapped", text: ability.text };
+      }
+    }
     // Tribute N (rule 702.104a): "as this creature enters, choose an
     // opponent. That player may put an additional N +1/+1 counters on it" —
     // printed, or a copy's.
@@ -15019,6 +15037,18 @@ export class Game {
           options: UNLEASH_OPTIONS,
           catalog: false,
           unleash: true,
+        };
+        return true;
+      }
+      if (next.kind === "may-tapped") {
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player: chooser,
+          source: id,
+          options: MAY_ENTER_TAPPED_OPTIONS,
+          catalog: false,
+          enterTapped: true,
+          prompt: next.text,
         };
         return true;
       }
@@ -58271,6 +58301,7 @@ controlledBy,
     amplified?: number,
     asEntersDone?: number,
     asEntersCounters?: readonly string[],
+    choseTapped?: boolean,
   ): EnteringReplacement {
     // It isn't on the battlefield yet as these are judged (rule 614.12), so
     // its mana cost — and what enters with it — doesn't count toward a
@@ -58289,6 +58320,7 @@ controlledBy,
         amplified,
         asEntersDone,
         asEntersCounters,
+        choseTapped,
       ),
     );
     this.enterBatch?.add(id);
@@ -58345,6 +58377,7 @@ controlledBy,
     amplified?: number,
     asEntersDone?: number,
     asEntersCounters?: readonly string[],
+    choseTapped?: boolean,
   ): EnteringReplacement {
     const object = this.state.objects[id];
     // Its text as changed (rule 612.2), a permanent spell's change kept (400.7a).
@@ -58361,6 +58394,7 @@ controlledBy,
     let prepared = false;
     let painIfUntapped = 0;
     let mayPayLife = 0;
+    let choseTappedThen: EffectSpec | undefined;
     const counters: { kind: string; amount: number }[] = [];
     // What it enters with, by kind, as the replacements give it; changed by
     // the counter replacements once each kind is totalled (below).
@@ -58428,6 +58462,15 @@ controlledBy,
       }
       if (r.painIfUntapped !== undefined) painIfUntapped = r.painIfUntapped;
       if (r.mayPayLife !== undefined) mayPayLife = r.mayPayLife;
+      // "You may have this land enter tapped. If you do, …": chosen before
+      // it moved (`askEnterChoice`), an "enters tapped" of its own.
+      // Still waiting on the object when the order of an "enters tapped" and
+      // an "enters untapped" is asked (`enterTapOrderAsked`).
+      if (r.mayEnterTapped !== undefined && (choseTapped ?? object.enterChoice?.enterTapped) === true) {
+        tapped = true;
+        tappedBy = id;
+        choseTappedThen = r.mayEnterTapped.then;
+      }
       if (r.transformed) transformed = true;
       if (r.prepared === true) prepared = true;
       // Thief of Blood's "as this creature enters, remove all counters from
@@ -58580,6 +58623,7 @@ controlledBy,
       counters: placed,
       painIfUntapped: tapped ? 0 : painIfUntapped,
       mayPayLife: tapped || untapped ? 0 : mayPayLife,
+      ...(choseTappedThen !== undefined ? { choseTappedThen } : {}),
       riotHaste,
       tributeUnpaid,
       prepared,
@@ -60557,6 +60601,7 @@ controlledBy,
         enterChoice?.amplified,
         enterChoice?.asEntersDone,
         enterChoice?.asEntersCounters,
+        enterChoice?.enterTapped,
       );
       object.tapped = entering.tapped;
       for (const c of entering.counters) {
@@ -60570,6 +60615,12 @@ controlledBy,
           { kind: "player", player: enteringController },
           entering.painIfUntapped,
         );
+      }
+      // "You may have this land enter tapped. If you do, you get two rad
+      // counters" (Mariposa Military Base): as it enters, part of the same
+      // replacement (rule 614.1c) — nothing triggers, nobody can respond.
+      if (entering.choseTappedThen !== undefined) {
+        applyEffectSpec(entering.choseTappedThen, this.makeResolutionContext(id, enteringController, [], 0));
       }
       // A shock land (rule 614.13): "you may pay N life; if you don't, it
       // enters tapped". It enters tapped by default; if its controller can

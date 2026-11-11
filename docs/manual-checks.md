@@ -28,6 +28,13 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## A land you may have enter tapped (2026-11-11)
+
+### Mariposa Military Base: you may have it enter tapped for two rad counters
+- **Do:** Play Mariposa Military Base and pick 'Enter tapped'. Then activate its draw ability.
+- **Expect:** Before it enters: 'Mariposa Military Base — You may have this land enter tapped. If you do, you get two rad counters.' with [Enter untapped] and [Enter tapped]. It enters tapped and you have two rad counters, with nothing on the stack. Next turn its draw ability costs {3}.
+- **Not a bug:** At your next first main phase the rad counters mill you two cards; each nonland card costs 1 life and one rad counter.
+
 ## Chosen cards, one choice of where they go (2026-11-10)
 
 ### Green Sun's Twilight: battlefield or hand, one choice for both

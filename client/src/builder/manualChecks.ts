@@ -11945,4 +11945,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Trinisphere'] },
     }),
   ),
+  // --- A land you may have enter tapped (2026-11-11) ---
+  preset(
+    'Mariposa Military Base: you may have it enter tapped for two rad counters',
+    board({ you: { bf: ['Wastes*3'], hand: ['Mariposa Military Base'] } }),
+  ),
 ]

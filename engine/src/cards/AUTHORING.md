@@ -6441,7 +6441,10 @@ clause (section 9):
   doesn't enter was never created (§15).
   `mayPayLife: N` is a shock land (a `pay-life-for-untapped` decision, via the
   `shockLand` helper); `painIfUntapped: N` deals damage if it *did* end up
-  entering untapped (Rockfall Vale).
+  entering untapped (Rockfall Vale). `mayEnterTapped: { then? }` is "you may
+  have this land enter tapped. If you do, [then]" (Mariposa Military Base):
+  asked before it moves ("Enter untapped" / "Enter tapped"), and `then` — an
+  effect that asks nothing — happens as it enters, not as a trigger.
 - `{ event: "would-begin-turn", who: "you" | "opponent" | "any", extraOnly?, may?, thenUntapSource? }` —
   "if [a player] would begin [a turn], that player skips that turn instead" (rules 500.11, 614.10), whose
   read from this permanent's controller; `extraOnly` is "an extra turn" (Gerrard's Hourglass Pendant,

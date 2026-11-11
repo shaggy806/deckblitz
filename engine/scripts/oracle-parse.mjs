@@ -15772,6 +15772,20 @@ function parseFaceAsWritten(face, ctx = {}) {
       });
       continue;
     }
+    // "You may have this land enter tapped. If you do, you get two rad
+    // counters." (Mariposa Military Base): the choice asked as it enters
+    // (rule 614.12), the rider part of the same replacement (614.1c).
+    if ((m = /^You may have ~ enter tapped\. If you do, (.+)$/.exec(line))) {
+      const r = parseEffect(`${m[1][0].toUpperCase()}${m[1].slice(1)}`, { targets: [], tokenFor });
+      if (r.effect != null && r.todo.length === 0 && r.targets === undefined) {
+        out.static.push({
+          affects: { scope: "self" },
+          replacement: { event: "enters-battlefield", mayEnterTapped: { then: r.effect } },
+          text: printed(raw),
+        });
+        continue;
+      }
+    }
     if (line === "~ enters tapped unless it's your first, second, or third turn of the game.") {
       out.static.push({
         affects: { scope: "self" },
