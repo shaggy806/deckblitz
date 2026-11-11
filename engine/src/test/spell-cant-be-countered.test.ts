@@ -85,6 +85,54 @@ describe("Vexing Shusher", () => {
     expect(zone(game, bears)).toBe("graveyard");
   });
 
+  // Rule 707.10: a copy has the spell's characteristics and the decisions made
+  // for it, not an effect applied to it or what was spent on it.
+  describe("a copy of the spell", () => {
+    /** Alice's Double Major on her creature `spell`, resolved; Bob then
+     * counters the copy. How many of `name` she ends with. */
+    const copyThenCounterTheCopy = (game: Game, spell: ObjectId, name: string): { marked: boolean | undefined; count: number } => {
+      lands(game, "Tropical Island", 2);
+      cast(game, toHand(game, "Double Major"), { targets: [obj(spell)], settle: false });
+      pass(game, A);
+      pass(game, B);
+      const copy = game.state.zones.shared.stack.at(-1)!;
+      expect(copy).not.toBe(spell);
+      const marked = game.state.objects[copy].uncounterable;
+      pass(game, A);
+      cast(game, toHand(game, "Counterspell", B), { player: B, targets: [obj(copy)] });
+      const count = game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === name).length;
+      return { marked, count };
+    };
+
+    it("isn't shushed with it: the copy is countered, the spell resolves", () => {
+      const { game, shusher, bears } = setUp();
+      shush(game, shusher, bears);
+      expect(copyThenCounterTheCopy(game, bears, "Grizzly Bears")).toEqual({ marked: undefined, count: 1 });
+    });
+
+    it("doesn't have Cavern of Souls' mana behind it either", () => {
+      const { game } = table();
+      lands(game, "Island", 2, B);
+      const cavern = toHand(game, "Cavern of Souls");
+      game.dispatch({ type: "play-land", player: A, card: cavern });
+      game.dispatch({ type: "choose-creature-type", player: A, creatureType: "Bear" });
+      spawn(game, "Plains");
+      const bears = toHand(game, "Grizzly Bears");
+      cast(game, bears, { settle: false });
+      expect(game.state.objects[bears].uncounterable).toBe(true);
+      expect(copyThenCounterTheCopy(game, bears, "Grizzly Bears")).toEqual({ marked: undefined, count: 1 });
+    });
+
+    it("keeps a printed \"this spell can't be countered\"", () => {
+      const { game } = table();
+      lands(game, "Taiga", 2);
+      lands(game, "Island", 2, B);
+      const shusher = toHand(game, "Vexing Shusher");
+      cast(game, shusher, { settle: false });
+      expect(copyThenCounterTheCopy(game, shusher, "Vexing Shusher")).toEqual({ marked: undefined, count: 2 });
+    });
+  });
+
   it("can't itself be countered", () => {
     const { game } = table();
     lands(game, "Taiga", 2);
