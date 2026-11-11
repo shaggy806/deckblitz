@@ -2221,7 +2221,8 @@
   "mechanic:piles-each-opponent-simultaneous",
   "target:ability-source-filter",
   "target:ability-source-filter",
-  "cost:reduction-per-type-shared-with-exiled"
+  "cost:reduction-per-type-shared-with-exiled",
+  "effect:copy-spells-cast-this-way"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

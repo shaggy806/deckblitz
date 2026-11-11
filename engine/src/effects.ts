@@ -7195,6 +7195,14 @@ export type EffectSpec =
       readonly kind: "copy-all";
       readonly what: "spells" | "other-abilities";
       readonly newTargets?: true;
+      /** Only the stack objects in this set, each still the object it was
+       * (rule 400.7) — "copy each of **those spells**" after a `cast-now`
+       * (Finale of Promise: `what: "spells"`, `of: { thisWay: "cast" }`). */
+      readonly of?: ObjectSetRef;
+      /** "Copy each of those spells **twice**" (Finale of Promise: 2): how
+       * many copies of each, every one its own instruction to copy and its
+       * own turn in the order the controller chooses. Once when omitted. */
+      readonly times?: number;
       /** Only the engine sets this: the stack objects still to copy (one
        * entry per ability instance), and the one chosen to go next. */
       readonly progress?: {
@@ -18880,6 +18888,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const parked = ctx.parkedCount();
       const newTargets = spec.newTargets === true;
       let left = spec.progress?.left ?? ctx.stackObjectsToCopy(spec.what);
+      if (spec.progress === undefined && spec.of !== undefined) {
+        // "Each of those spells": the set's members still on the stack as
+        // the objects they were.
+        const those = new Set(
+          ctx.objectSet(spec.of).flatMap((member) => (ctx.stintNow(member.object) === member.stint ? [member.object] : [])),
+        );
+        left = left.filter((o) => those.has(o.id));
+      }
+      if (spec.progress === undefined && spec.times !== undefined) {
+        const times = Math.min(Math.max(0, spec.times), MAX_COPY_COUNT);
+        left = left.flatMap((o) => Array.from({ length: times }, () => o));
+      }
       const copyOne = (id: ObjectId): void => {
         const target = { kind: "object", object: id } as const;
         if (spec.what === "spells") ctx.spellCopyEvent(() => ctx.copySpell(target, newTargets));

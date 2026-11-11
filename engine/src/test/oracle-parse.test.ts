@@ -55,6 +55,34 @@ describe("copy target ability you control", () => {
   });
 });
 
+describe("copy each of the spells cast this way", () => {
+  it("Finale of Promise: a cast-now of its targets, then a copy-all of what it cast", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{X}{R}{R}",
+      oracle_text:
+        "You may cast up to one target instant card and/or up to one target sorcery card from your graveyard each with mana value X or less without paying their mana costs. If a spell cast this way would be put into your graveyard, exile it instead. If X is 10 or more, copy each of those spells twice. You may choose new targets for the copies.",
+    });
+    const slot = (type: string) => ({
+      kind: "optional",
+      of: { kind: "card-in-graveyard", whose: "you", filter: { type, manaValue: { op: "lte", n: "x" } } },
+    });
+    expect(parsed.targets).toEqual([slot("instant"), slot("sorcery")]);
+    expect(parsed.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "cast-now", from: "targets", repeat: true, free: true, exileAfter: true },
+        {
+          kind: "conditional",
+          condition: { kind: "x", compare: { op: "gte", n: 10 } },
+          then: { kind: "copy-all", what: "spells", of: { thisWay: "cast" }, times: 2, newTargets: true },
+        },
+      ],
+    });
+  });
+});
+
 describe("what an ability goes on to say about its token", () => {
   it("Feldon of the Third Path's copy of a graveyard card", () => {
     const parsed = parseFace({

@@ -9428,6 +9428,35 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // "You may cast up to one target instant card and/or up to one target
+  // sorcery card from your graveyard each with mana value X or less without
+  // paying their mana costs. … If X is 10 or more, copy each of those spells
+  // twice. You may choose new targets for the copies." (Finale of Promise):
+  // a `cast-now` of its targets, then a `copy-all` of the spells cast this way.
+  const castsThenCopies =
+    /^You may cast up to one target instant card and\/or up to one target sorcery card from your graveyard each with mana value X or less without paying their mana costs\. If a spell cast this way would be put into your graveyard, exile it instead\. If X is (\d+) or more, copy each of those spells (twice|three times)\. You may choose new targets for the copies\.$/.exec(
+      text,
+    );
+  if (castsThenCopies !== null) {
+    for (const type of ["instant", "sorcery"]) {
+      ctx.target({ kind: "optional", of: { kind: "card-in-graveyard", whose: "you", filter: { type, manaValue: { op: "lte", n: "x" } } } });
+    }
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "cast-now", from: "targets", repeat: true, free: true, exileAfter: true },
+          {
+            kind: "conditional",
+            condition: { kind: "x", compare: { op: "gte", n: Number(castsThenCopies[1]) } },
+            then: { kind: "copy-all", what: "spells", of: { thisWay: "cast" }, times: castsThenCopies[2] === "twice" ? 2 : 3, newTargets: true },
+          },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   const looksThenCasts =/^(You may look|Look) at that player's hand\. (?:If you do, you|You) may cast a spell from among those cards without paying its mana cost\.$/.exec(text);
   if (looksThenCasts !== null) {
     const castNow = { kind: "cast-now", from: { handOf: "trigger-player", look: true }, free: true };
