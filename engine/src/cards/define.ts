@@ -2258,6 +2258,14 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     /** That player's running total for a turn stat — Knowledge Is Power's "+X/+X,
      * where X is the number of cards you've drawn this turn". */
     readonly turnStat?: TurnStat;
+    /** How many things of one of that player's this-turn journal lists there
+     * are (`JournalWhat`), each matched against `filter` as it was then, so
+     * one that has since left still counts — Kinbinding's "+X/+X, where X is
+     * the number of creatures that entered the battlefield under your control
+     * this turn" is `{ turnHistory: { what: "entered", filter: { type:
+     * "creature" } }, pt: [1, 1] }`. Read from snapshots, so the P/T fold
+     * doesn't recurse. */
+    readonly turnHistory?: { readonly what: JournalWhat; readonly filter?: CardFilter };
     /** That player's unspent mana (rule 106.4): `{}` for all of it, `{ type:
      * "G" }` for "each unspent green mana you have" (Omnath, Locus of Mana). */
     readonly unspentMana?: { readonly type?: ManaType };

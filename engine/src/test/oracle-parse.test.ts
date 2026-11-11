@@ -10163,6 +10163,12 @@ describe("P/T bonuses per amount", () => {
       per("Enchantment", "Creatures you control get +X/+X, where X is the number of cards you've drawn this turn.").grantPtPerCount,
     ).toEqual({ turnStat: "cards-drawn", pt: [1, 1] });
     expect(
+      per(
+        "Enchantment",
+        "Creatures you control get +X/+X, where X is the number of creatures that entered the battlefield under your control this turn.",
+      ).grantPtPerCount,
+    ).toEqual({ turnHistory: { what: "entered", filter: { type: "creature" } }, pt: [1, 1] });
+    expect(
       per("Artifact — Equipment", "Equipped creature gets +1/+1 for each basic land type among lands you control.").grantPtPerCount,
     ).toEqual({ basicLandTypes: true, pt: [1, 1] });
     expect(per("Creature — Human", "This creature gets +2/+0 for every seven cards in your graveyard.").grantPtPerCount).toEqual({

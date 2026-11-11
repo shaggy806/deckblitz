@@ -5,6 +5,7 @@
     "static:all-colors-cda",
     "trigger:enchanted-player-draws",
     "replacement:damage-doesnt-cause-life-loss",
+    "static:pt-per-turn-history",
     "effect:random-choice-among-chosen",
     "decision:twice-x-target-count",
     "effect:any-player-may-pay-to-counter",

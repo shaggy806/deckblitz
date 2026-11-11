@@ -18589,6 +18589,19 @@ function perAmountStaticOf(line, text) {
       text,
     };
   }
+  // "…where X is the number of creatures that entered the battlefield under
+  // your control this turn" (Kinbinding): the journal's `entered` list.
+  if (
+    (m = new RegExp(
+      `^${P}\\+X/\\+(X|0), where X is the number of (creature|artifact|enchantment|land)s that entered(?: the battlefield)? under your control this turn\\.$`,
+    ).exec(line))
+  ) {
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: { turnHistory: { what: "entered", filter: { type: m[3] } }, pt: [1, m[2] === "X" ? 1 : 0] },
+      text,
+    };
+  }
   if ((m = new RegExp(`^${P}\\+X/\\+(X|0), where X is the number of cards you've drawn this turn\\.$`).exec(line))) {
     return { affects: subjectOf(m[1]), grantPtPerCount: { turnStat: "cards-drawn", pt: [1, m[2] === "X" ? 1 : 0] }, text };
   }

@@ -322,6 +322,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A static P/T bonus per thing that happened this turn — built 2026-11-11
+
+By EDHREC rank: Kinbinding (6510). `grantPtPerCount.turnHistory: { what,
+filter? }` reads one of the controller's this-turn journal lists
+(`journalCount`), each entry as it was then, so a creature that entered and
+has since died still counts. The scaffolder reads "+X/+X, where X is the
+number of [type]s that entered the battlefield under your control this turn".
+Key: static:pt-per-turn-history.
+
 ### A floor on a spell's total cost — built 2026-11-11
 
 The key `cost:minimum-total-cost` (the rank goal). `costModification`'s

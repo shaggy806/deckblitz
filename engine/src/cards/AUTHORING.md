@@ -4907,7 +4907,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `countersAmong: { counter, filter }` (Gleam of Authority), `playerCounters` with
   `playerCountersOf: "opponents"` (Mycosynth Fiend), `anyCountersOnSource` (Kyler),
   `anyCountersOnAffected` (Luxior's "for each counter on it"),
-  `turnStat` (Knowledge Is Power), `basicLandTypes` (domain — Manaforce Mace),
+  `turnStat` (Knowledge Is Power), `turnHistory: { what, filter? }` (a this-turn
+  journal list, each as it was — Kinbinding's "creatures that entered the
+  battlefield under your control this turn"), `basicLandTypes` (domain — Manaforce Mace),
   `opponents`; `fromAffectedController` counts from the affected permanent's
   controller's side (Disturbing Conversion); `step` divides the count, rounded
   down (Dark Matter Manipulator's "for every seven"), and `max` caps it.

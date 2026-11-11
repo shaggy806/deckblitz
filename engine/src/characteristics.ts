@@ -5546,6 +5546,8 @@ function collectStaticEffects(
           ? Object.values(target.counters).reduce((total, count) => total + (count ?? 0), 0)
           : per.turnStat !== undefined
           ? turnStatOf(state, side, per.turnStat)
+          : per.turnHistory !== undefined
+          ? journalCount(state, registry, [side], per.turnHistory.what, per.turnHistory.filter, side)
           : per.unspentMana !== undefined
           ? unspentManaOf(state, side, per.unspentMana.type)
           : per.basicLandTypes === true
