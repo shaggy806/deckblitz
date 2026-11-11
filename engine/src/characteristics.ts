@@ -1784,6 +1784,52 @@ function staticProtection(
 }
 
 /**
+ * What a `sharesKeywords` static gives now ("~ has flying as long as an
+ * exiled card used to craft it has flying. The same is true for …"): the
+ * listed keywords some card in the set has, each "hexproof from [quality]"
+ * ability of theirs when hexproof is listed (rule 702.11d-e), and each
+ * protection ability when protection is (702.16a). A card has what its text
+ * gives itself without condition; its protection is read as `source`'s own.
+ */
+function sharedKeywordsOf(
+  state: GameState,
+  registry: CardRegistry,
+  ability: StaticAbility,
+  source: GameObject,
+): {
+  readonly keywords: readonly Keyword[];
+  readonly protections: readonly NonNullable<AppliedEffect["protection"]>[];
+  readonly hexproofs: readonly NonNullable<StaticAbility["hexproofFrom"]>[];
+} | null {
+  const shared = ability.sharesKeywords;
+  if (shared === undefined) return null;
+  const ctx = { you: source.controller, source: source.id };
+  const cards = (liveReferenceObjects(state, registry, shared.from, ctx) ?? []).filter(
+    (id) =>
+      state.objects[id] !== undefined &&
+      (shared.filter === undefined || matchesFilter(state, registry, id, shared.filter, ctx)),
+  );
+  const keywords = new Set<Keyword>();
+  const protections: NonNullable<AppliedEffect["protection"]>[] = [];
+  const hexproofs: NonNullable<StaticAbility["hexproofFrom"]>[] = [];
+  for (const id of cards) {
+    const has = computeCharacteristics(state, registry, id).keywords;
+    for (const keyword of shared.keywords) if (has.has(keyword)) keywords.add(keyword);
+    for (const own of registry.get(rulesTextName(state.objects[id]!)).static) {
+      if (own.affects.scope !== "self" || own.condition !== undefined) continue;
+      if (shared.keywords.includes("hexproof") && own.hexproofFrom !== undefined && own.hexproofFrom.notHexproof !== true) {
+        hexproofs.push(own.hexproofFrom);
+      }
+      if (shared.protection === true) {
+        const protection = staticProtection(state, registry, own, source);
+        if (protection !== null) protections.push(protection);
+      }
+    }
+  }
+  return { keywords: [...keywords], protections, hexproofs };
+}
+
+/**
  * Keyword counters (rule 122.1b): a permanent with a flying, lifelink,
  * vigilance… counter on it has that keyword, in layer 6 alongside every other
  * ability-adding effect. The counter's kind is the keyword's own name here
@@ -5313,6 +5359,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.grantPt !== undefined ||
     ability.grantPtPerCount !== undefined ||
     ability.grantKeywords !== undefined ||
+    ability.sharesKeywords !== undefined ||
     ability.loseKeywords !== undefined ||
     ability.cantHaveKeywords !== undefined ||
     ability.grantToxic !== undefined ||
@@ -5633,11 +5680,16 @@ function collectStaticEffects(
       scaledToughness = n * per.pt[1];
     }
     const walk = staticLandwalk(ability, source);
+    const granted = walk.keyword !== null ? [...(ability.grantKeywords ?? []), walk.keyword] : (ability.grantKeywords ?? []);
     return {
       timestamp,
       power: (ability.grantPt?.[0] ?? 0) + scaledPower,
       toughness: (ability.grantPt?.[1] ?? 0) + scaledToughness,
-      keywords: walk.keyword !== null ? [...(ability.grantKeywords ?? []), walk.keyword] : (ability.grantKeywords ?? []),
+      // "… as long as an exiled card used to craft it has flying".
+      keywords:
+        ability.sharesKeywords !== undefined
+          ? [...granted, ...(sharedKeywordsOf(state, registry, ability, source)?.keywords ?? [])]
+          : granted,
       loseKeywords: ability.loseKeywords ?? [],
       cantHaveKeywords: ability.cantHaveKeywords ?? [],
       ownAt: source.id === target.id && timestamp === source.timestamp ? -Infinity : timestamp,
@@ -5666,6 +5718,36 @@ function collectStaticEffects(
     if (!staticReaches(state, registry, source, ability, target, { inFold: true })) continue;
     const effect = applied(source, ability, timestamp);
     if (effect !== null) out.push(effect);
+    // The protection and "hexproof from" abilities a `sharesKeywords` static
+    // finds, each its own ability (rules 702.16a, 702.11f): one effect apiece,
+    // at the static's timestamp.
+    if (effect !== null && ability.sharesKeywords !== undefined) {
+      const shared = sharedKeywordsOf(state, registry, ability, source);
+      const bare: AppliedEffect = {
+        timestamp: effect.timestamp,
+        ownAt: effect.ownAt,
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        loseKeywords: [],
+        cantHaveKeywords: [],
+        toxic: 0,
+        restrictions: [],
+        combatDamageByToughness: undefined,
+        canAttackAsThoughNoDefender: false,
+        canAttackAttackersDespiteDefender: false,
+        assignAsThoughUnblocked: false,
+        cantBeSacrificed: false,
+        blockAdditional: 0,
+        protection: null,
+        hexproofFrom: null,
+        bandsWithOther: null,
+        landwalk: null,
+        setBase: null,
+      };
+      for (const protection of shared?.protections ?? []) out.push({ ...bare, protection });
+      for (const hexproofFrom of shared?.hexproofs ?? []) out.push({ ...bare, hexproofFrom });
+    }
   }
   if (keywordScoped) {
     let keywords: Set<Keyword> | null = null;

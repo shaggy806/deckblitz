@@ -2303,7 +2303,8 @@
   "effect:delayed-cast-trigger-through-player-next-turn",
   "stat:lands-played-not-from-hand-this-turn",
   "stat:lands-played-not-from-hand-this-turn",
-  "cost:exile-from-graveyard-total-mana-value"
+  "cost:exile-from-graveyard-total-mana-value",
+  "static:keywords-from-exiled-with-source"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -20786,6 +20786,45 @@ function parseStatic(line, text) {
       };
     }
   }
+  // "~'s power and toughness are each equal to the total power of the exiled
+  // cards used to craft it" (Wretched Bonemass; Mastercraft Raptor's power
+  // alone): craft's materials, linked to what it became (rule 702.167c).
+  {
+    const w = /^~'s power (is|and toughness are each) equal to the total power of the exiled cards used to craft it\.$/.exec(line);
+    if (w !== null) {
+      return {
+        affects: { scope: "self" },
+        setBasePtFromCount: {
+          countOf: { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" },
+          plusPower: 0,
+          plusToughness: 0,
+          ...(w[1] === "is" ? { only: "power" } : {}),
+        },
+        text,
+      };
+    }
+  }
+  // "~ has flying as long as an exiled card used to craft it has flying. The
+  // same is true for first strike, … protection, …" (Wretched Bonemass; Urborg
+  // Scavengers' "a card exiled with it"): `sharesKeywords` over the cards
+  // exiled with it, "protection" every protection ability of theirs.
+  {
+    const w = /^~ has flying as long as (?:an exiled card used to craft it|a card exiled with it) has flying\. The same is true for (.+)\.$/.exec(line);
+    const words = w === null ? [] : w[1].split(/, and |, | and /);
+    const listed = words.filter((word) => word !== "protection").map((word) => word.replace(/ /g, "-"));
+    const known = new Set(["first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance", "defender", "flash", "shroud"]);
+    if (w !== null && listed.every((keyword) => known.has(keyword))) {
+      return {
+        affects: { scope: "self" },
+        sharesKeywords: {
+          from: "exiled-with-source",
+          keywords: ["flying", ...listed],
+          ...(words.includes("protection") ? { protection: true } : {}),
+        },
+        text,
+      };
+    }
+  }
   // "If ~ would enter, sacrifice a Swamp instead. If you do, put ~ onto the
   // battlefield. If you don't, put it into its owner's graveyard." — and Mox
   // Diamond's discard, Sheltered Valley's and Overlaid Terrain's sacrifices

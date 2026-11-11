@@ -18606,6 +18606,42 @@ describe("a delayed whenever about the defending player", () => {
   });
 });
 
+describe("keywords of the exiled cards used to craft it", () => {
+  it("reads Wretched Bonemass whole", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Skeleton Horror",
+      oracle_text:
+        "Test Card's power and toughness are each equal to the total power of the exiled cards used to craft it.\nThis creature has flying as long as an exiled card used to craft it has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.",
+    } as never) as unknown as { static: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" }, plusPower: 0, plusToughness: 0 },
+    });
+    expect((face.static[0].setBasePtFromCount as { only?: string }).only).toBeUndefined();
+    expect(face.static[1]).toMatchObject({
+      affects: { scope: "self" },
+      sharesKeywords: {
+        from: "exiled-with-source",
+        keywords: ["flying", "first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance"],
+        protection: true,
+      },
+    });
+  });
+
+  it("and a card exiled with it, with no protection listed", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Horror",
+      oracle_text:
+        "This creature has flying as long as a card exiled with it has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.",
+    } as never) as unknown as { static: { sharesKeywords: { keywords: string[]; protection?: boolean } }[] };
+    expect(face.static[0].sharesKeywords.keywords).toHaveLength(12);
+    expect(face.static[0].sharesKeywords.protection).toBeUndefined();
+  });
+});
+
 describe("a land played or a spell cast from anywhere other than the hand", () => {
   it("reads Spider-Man 2099's end step trigger", () => {
     const face = parseFace({

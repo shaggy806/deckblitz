@@ -2530,6 +2530,28 @@ export interface StaticAbility extends TypePatch, ColorPatch {
   readonly spellsHaveDelve?: boolean;
   /** Keywords granted in layer 6. */
   readonly grantKeywords?: readonly Keyword[];
+  /**
+   * "~ has flying as long as an exiled card used to craft it has flying. The
+   * same is true for first strike, double strike, …" (Wretched Bonemass;
+   * Urborg Scavengers' "a card exiled with it"): each of `keywords` that some
+   * card in `from` has now, granted in layer 6 for as long as one does. `from`
+   * is the cards in exile linked to the static's source (rule 607.2a;
+   * 702.167c for craft), matching `filter` if given.
+   *
+   * `"hexproof"` among them brings each "hexproof from [quality]" ability
+   * those cards have too (a hexproof ability, rule 702.11d-e; Kathril, Aspect
+   * Warper's ruling). `protection` is "protection" in the list: every
+   * protection ability those cards have (rule 702.16a; Cairn Wanderer's
+   * ruling), read as this static's source's own. A card "has" what its text
+   * gives itself without condition; a quality only a choice made on the
+   * battlefield names ("the chosen color") is nothing in exile.
+   */
+  readonly sharesKeywords?: {
+    readonly from: "exiled-with-source";
+    readonly filter?: CardFilter;
+    readonly keywords: readonly Keyword[];
+    readonly protection?: true;
+  };
   /** Keywords it takes away in layer 6 — "equipped creature … **loses
    * flying**" (Starforged Sword). A loss applies at the static's timestamp
    * (rule 613.7): it removes the keyword from what had it before — printed,
