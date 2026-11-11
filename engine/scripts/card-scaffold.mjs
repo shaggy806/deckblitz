@@ -250,6 +250,7 @@ function faceSource(face, ctx) {
     mayPlaySelf: parsed.mayPlaySelf,
     castWhileSearchingLibrary: parsed.castWhileSearchingLibrary,
     morph: parsed.morph,
+    asTurnedFaceUp: parsed.asTurnedFaceUp,
     disturb: parsed.disturb,
     suspend: parsed.suspend,
     selfCostReduction: parsed.selfCostReduction,

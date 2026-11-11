@@ -2489,6 +2489,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       text: "Sacrifice two Mountains",
     });
     expect(face("Morph—Pay 5 life.").morph?.also).toEqual({ payLife: 5 });
+    // "As this is turned face up": its counters, or an effect done as it is.
+    expect(face("As this creature is turned face up, put five +1/+1 counters on it.").asTurnedFaceUp).toEqual({ counters: 5 });
+    const gift = face("As this Aura is turned face up, you may attach it to a creature.", "Enchantment — Aura");
+    expect(gift.complete).toBe(true);
+    expect(gift.asTurnedFaceUp).toEqual({
+      effect: {
+        kind: "attach",
+        attachment: "source",
+        target: { among: { type: "creature" }, prompt: expect.stringMatching(/^You may attach .+ to a creature$/), optional: true },
+      },
+    });
     expect(face("Morph—Reveal a blue card in your hand.").morph).toEqual({
       keyword: "morph",
       cost: "",

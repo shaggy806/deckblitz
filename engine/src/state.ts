@@ -5943,6 +5943,41 @@ export interface GameState {
     };
   };
   /**
+   * A face-down permanent whose turn-face-up cost is paid but for a choice
+   * still being answered (a morph cost's "Sacrifice another creature", a
+   * discard, a reveal): it turns face up once that's answered (rule 702.37e —
+   * "pay that cost, then turn the permanent face up"), before any state-based
+   * action is checked or anyone gets priority. `megamorph`: it gets its
+   * +1/+1 counter (702.37b); `x`: the X paid. Absent otherwise.
+   */
+  pendingTurnFaceUp?: {
+    readonly object: ObjectId;
+    /** Its `zoneChangeCount` then: one that left since isn't turned (400.7). */
+    readonly stint: number;
+    readonly player: PlayerId;
+    readonly megamorph: boolean;
+    readonly x: number;
+  };
+  /**
+   * Permanents just turned face up whose card says something else happens "as
+   * this is turned face up" (`CardDefinition.asTurnedFaceUp`'s `effect` — Gift
+   * of Doom's "you may attach it to a creature"), still to be done: each the
+   * next time priority is looked at, before the state-based actions, its
+   * choice answered before they're checked (rule 704.3). `priorityTo`: the
+   * player whose special action turned it, who has priority after that
+   * choice (116.3); absent when an effect turned it. Absent otherwise.
+   */
+  pendingAsTurnedFaceUp?: readonly {
+    readonly object: ObjectId;
+    readonly stint: number;
+    readonly x: number;
+    readonly priorityTo?: PlayerId;
+    /** Its choice is being answered: done with once that's answered. Listed
+     * until then, an Aura here isn't put into a graveyard for being
+     * unattached (704.5m). */
+    readonly asked?: true;
+  }[];
+  /**
    * The commander whose owner is being asked whether to put it into the
    * command zone (rule 903.9), or `null`. Either it's in the graveyard or
    * exile it was put into, and this is the state-based action of 903.9a; or

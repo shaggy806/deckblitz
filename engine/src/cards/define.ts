@@ -5354,9 +5354,12 @@ export interface CardDefinition {
   /**
    * "As this creature is turned face up, put N +1/+1 counters on it" (Hooded
    * Hydra): a replacement on turning it face up (rule 708.8 — it doesn't
-   * enter), however it's turned. Absent for none.
+   * enter), however it's turned. `effect` is anything else it says happens
+   * as it's turned face up, done by its controller before anyone can act and
+   * with nothing targeted (Gift of Doom's "you may attach it to a creature":
+   * an `attach` to a host chosen `among`). Absent for none.
    */
-  readonly asTurnedFaceUp?: { readonly counters: number };
+  readonly asTurnedFaceUp?: { readonly counters: number } | { readonly effect: EffectSpec };
   /** Escape (rule 702.139 — ROADMAP Phase 6b) — cast from your graveyard for
    * `cost` plus exiling `exileCount` other cards from your graveyard as an
    * additional cost. Unlike flashback the spell resolves normally (it can be
@@ -6057,7 +6060,7 @@ interface CardDraft {
   evoke?: NonNullable<CardDefinition["evoke"]>;
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: MorphCost;
-  asTurnedFaceUp?: { readonly counters: number };
+  asTurnedFaceUp?: { readonly counters: number } | { readonly effect: EffectSpec };
   suspend?: { readonly n: number | "x"; readonly cost: string };
   cycling?: CyclingAbility;
   moreCycling?: readonly CyclingAbility[];

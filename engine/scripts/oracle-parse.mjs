@@ -15804,6 +15804,25 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "As this creature is turned face up, put five +1/+1 counters on it."
+    // (Hooded Hydra) and "As this Aura is turned face up, you may attach it
+    // to a creature." (Gift of Doom): `asTurnedFaceUp`, its counters or the
+    // effect done as it's turned (rule 708.8), a host chosen and not targeted.
+    if ((m = new RegExp(`^As ~ is turned face up, put ${N} \\+1/\\+1 counters? on it\\.$`).exec(line))) {
+      const counters = numberOf(m[1]);
+      if (typeof counters === "number") {
+        out.asTurnedFaceUp = { counters };
+        continue;
+      }
+    }
+    if ((m = /^As ~ is turned face up, you may attach it to (an?) (.+)\.$/.exec(line)) && /\bAura\b/.test(face.type_line ?? "")) {
+      const among = parseTypePhrase(m[2]);
+      if (among !== null) {
+        const prompt = `You may attach ${face.name} to ${m[1]} ${m[2]}`;
+        out.asTurnedFaceUp = { effect: { kind: "attach", attachment: "source", target: { among, prompt, optional: true } } };
+        continue;
+      }
+    }
     // "~ enters under the control of an opponent of your choice." (Xantcha,
     // Sleeper Agent; Captive Audience): the choice, and who it's for.
     if (/^~ enters under the control of an opponent of your choice\.$/.test(line)) {

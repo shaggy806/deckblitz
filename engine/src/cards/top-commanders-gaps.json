@@ -2271,7 +2271,8 @@
   "target:player-dealt-combat-damage-by-n-filter",
   "target:player-dealt-combat-damage-by-n-filter",
   "replacement:explore-replacement",
-  "filter:has-devoid"
+  "filter:has-devoid",
+  "replacement:as-turned-face-up-attach-aura"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

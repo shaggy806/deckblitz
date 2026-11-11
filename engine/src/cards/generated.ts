@@ -10712,6 +10712,7 @@ import _poolGideonsReproach from "./pool/gideons-reproach.js";
 import _poolGideonsResolve from "./pool/gideons-resolve.js";
 import _poolGideonsTriumph from "./pool/gideons-triumph.js";
 import _poolGiftOfCompleation from "./pool/gift-of-compleation.js";
+import _poolGiftOfDoom from "./pool/gift-of-doom.js";
 import _poolGiftOfEstates from "./pool/gift-of-estates.js";
 import _poolGiftOfFangs from "./pool/gift-of-fangs.js";
 import _poolGiftOfGranite from "./pool/gift-of-granite.js";
@@ -43140,6 +43141,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGideonsResolve,
   _poolGideonsTriumph,
   _poolGiftOfCompleation,
+  _poolGiftOfDoom,
   _poolGiftOfEstates,
   _poolGiftOfFangs,
   _poolGiftOfGranite,
@@ -75581,6 +75583,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gideons-resolve": _poolGideonsResolve,
   "pool/gideons-triumph": _poolGideonsTriumph,
   "pool/gift-of-compleation": _poolGiftOfCompleation,
+  "pool/gift-of-doom": _poolGiftOfDoom,
   "pool/gift-of-estates": _poolGiftOfEstates,
   "pool/gift-of-fangs": _poolGiftOfFangs,
   "pool/gift-of-granite": _poolGiftOfGranite,

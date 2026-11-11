@@ -329,6 +329,7 @@ import _poolGeneralTazri from "../pool/general-tazri.js";
 import _poolGhoulsteed from "../pool/ghoulsteed.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGideonTheOathsworn from "../pool/gideon-the-oathsworn.js";
+import _poolGiftOfDoom from "../pool/gift-of-doom.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGigantoad from "../pool/gigantoad.js";
 import _poolGleamOfAuthority from "../pool/gleam-of-authority.js";
@@ -1315,6 +1316,7 @@ const shard: CardShard = {
     _poolGhoulsteed,
     _poolGiantsBoulder,
     _poolGideonTheOathsworn,
+    _poolGiftOfDoom,
     _poolGiftOfParadise,
     _poolGigantoad,
     _poolGleamOfAuthority,

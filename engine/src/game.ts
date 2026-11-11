@@ -9878,6 +9878,19 @@ export class Game {
       if (guard > 1000) {
         throw new Error("prepareForPriority did not settle; likely an engine bug");
       }
+      // A permanent whose turn-face-up cost has just been paid turns now, and
+      // what one says happens "as this is turned face up" is done: before the
+      // SBAs, which would put an Aura not yet attached into a graveyard, and
+      // with its choice answered before they're next checked (rule 704.3).
+      if (this.state.awaiting === null) {
+        if (this.finishTurningFaceUp()) continue;
+        if (this.applyNextAsTurnedFaceUp()) {
+          const asked = this.state.awaiting as GameState["awaiting"];
+          if (asked === null) continue;
+          this.grantPriority(asked.player);
+          return;
+        }
+      }
       // Before the SBAs, so a commander still waiting on the battlefield for
       // its 903.9b choice is asked about rather than swept up by them.
       this.raiseNextCommanderChoice();
@@ -50854,15 +50867,82 @@ controlledBy,
         );
       });
     }
-    this.becomeFaceUp(id, player, morph && card.morph?.keyword === "megamorph", chosenX);
+    const megamorph = morph && card.morph?.keyword === "megamorph";
+    // A cost's choice is still being answered: it turns face up once it is
+    // (rule 702.37e: the cost is paid, then it's turned), in
+    // `finishTurningFaceUp`, so nothing sees it face up with its cost unpaid.
+    if (this.state.awaiting !== null) {
+      this.state.pendingTurnFaceUp = { object: id, stint: object.zoneChangeCount ?? 0, player, megamorph, x: chosenX };
+    } else {
+      this.becomeFaceUp(id, player, megamorph, chosenX, player);
+    }
     this.afterPlayerAction(player);
+  }
+
+  /** What the next permanent in `pendingAsTurnedFaceUp` says happens "as
+   * this is turned face up", done now by its controller: `true` if one was
+   * waiting. One that left since does nothing (rule 400.7). A choice it asks
+   * is left up, and the player whose special action turned it has priority
+   * once it's answered (rule 116.3). */
+  private applyNextAsTurnedFaceUp(): boolean {
+    const [next, ...rest] = this.state.pendingAsTurnedFaceUp ?? [];
+    if (next === undefined) return false;
+    const done = (): true => {
+      if (rest.length > 0) this.state.pendingAsTurnedFaceUp = rest;
+      else delete this.state.pendingAsTurnedFaceUp;
+      return true;
+    };
+    const object = this.state.objects[next.object];
+    if (
+      next.asked === true ||
+      object === undefined ||
+      object.zone !== "battlefield" ||
+      object.faceDown !== undefined ||
+      (object.zoneChangeCount ?? 0) !== next.stint
+    ) {
+      return done();
+    }
+    const as = this.registry.get(rulesTextName(object)).asTurnedFaceUp;
+    if (as === undefined || !("effect" in as)) return done();
+    this.withDecisionSource(next.object, () =>
+      applyEffectSpec(as.effect, this.makeResolutionContext(next.object, object.controller, [], next.x)),
+    );
+    const asked = this.state.awaiting as GameState["awaiting"];
+    if (asked === null) return done();
+    // Its choice is up: it stays listed, kept from the state-based actions,
+    // until that's answered and priority is next looked at.
+    this.state.pendingAsTurnedFaceUp = [{ ...next, asked: true }, ...rest];
+    if (next.priorityTo !== undefined && asked.kind === "choose-permanents" && asked.priorityTo === undefined) {
+      this.state.awaiting = { ...asked, priorityTo: next.priorityTo };
+    }
+    return true;
+  }
+
+  /** Turn `pendingTurnFaceUp`'s permanent face up, its cost's choice answered:
+   * `true` if one was waiting. Nothing turns if it left meanwhile (400.7). */
+  private finishTurningFaceUp(): boolean {
+    const pending = this.state.pendingTurnFaceUp;
+    if (pending === undefined) return false;
+    delete this.state.pendingTurnFaceUp;
+    const object = this.state.objects[pending.object];
+    if (
+      object !== undefined &&
+      object.zone === "battlefield" &&
+      object.faceDown !== undefined &&
+      (object.zoneChangeCount ?? 0) === pending.stint
+    ) {
+      this.becomeFaceUp(pending.object, pending.player, pending.megamorph, pending.x, pending.player);
+    }
+    return true;
   }
 
   /** Face-down `id` has its own characteristics again, shown to everyone
    * (rule 708.8): both ways of turning it, its special action's cost paid or
    * by an effect. `megamorphCounter`: turned up for its megamorph cost
-   * (702.37b). `x`: the X paid in that cost, 0 by any other way. */
-  private becomeFaceUp(id: ObjectId, player: PlayerId, megamorphCounter: boolean, x = 0): void {
+   * (702.37b). `x`: the X paid in that cost, 0 by any other way.
+   * `priorityTo`: the player whose special action this was, who has priority
+   * again after any choice an "as this is turned face up" asks. */
+  private becomeFaceUp(id: ObjectId, player: PlayerId, megamorphCounter: boolean, x = 0, priorityTo?: PlayerId): void {
     const object = this.state.objects[id];
     const card = this.registry.get(object.cardName);
     delete object.faceDown;
@@ -50871,7 +50951,17 @@ controlledBy,
     this.revealFaceDown(id);
     const ref = { kind: "object", object: id } as const;
     if (megamorphCounter) this.addCounter(ref, "+1/+1", 1, false, player);
-    if (card.asTurnedFaceUp !== undefined) this.addCounter(ref, "+1/+1", card.asTurnedFaceUp.counters, false, player);
+    const as = card.asTurnedFaceUp;
+    if (as !== undefined && "counters" in as) this.addCounter(ref, "+1/+1", as.counters, false, player);
+    // Anything else it says (Gift of Doom's "you may attach it to a
+    // creature") is done the next time priority is looked at, ahead of the
+    // state-based actions (rule 704.3) — see `applyNextAsTurnedFaceUp`.
+    if (as !== undefined && "effect" in as) {
+      this.state.pendingAsTurnedFaceUp = [
+        ...(this.state.pendingAsTurnedFaceUp ?? []),
+        { object: id, stint: object.zoneChangeCount ?? 0, x, ...(priorityTo !== undefined ? { priorityTo } : {}) },
+      ];
+    }
     this.emit({ type: "permanent-turned-face-up", player, object: id, ...(x > 0 ? { x } : {}) });
   }
 
@@ -57679,6 +57769,10 @@ controlledBy,
       // bestowed one becomes a creature again instead — 702.103f, above.)
       const def = object.bestowed === true ? this.registry.get(printedCardName(object)) : this.attachmentDefinition(object);
       if (!def.subtypes.includes("Aura")) continue;
+      // Still being turned face up: "as this Aura is turned face up, you may
+      // attach it to a creature" (Gift of Doom) hasn't been done, or its
+      // choice answered, and nothing is checked in between (the ruling).
+      if (this.state.pendingAsTurnedFaceUp?.some((turning) => turning.object === id) === true) continue;
       if (object.attachedTo !== null && this.canEnchant(id, object.attachedTo, object.controller, def)) continue;
       // A Curse on a player who has left the game, or one it can no longer
       // enchant ("Enchant opponent" after a control change), goes too.
