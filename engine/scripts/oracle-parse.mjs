@@ -10007,6 +10007,7 @@ export function parseEffect(text, outer) {
       counterIntoAt(sentences, i, ctx) ??
       exiledUntilOrWhileAt(sentences, i) ??
       counterAbilityAt(sentences, i, ctx) ??
+      copyAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx) ??
       youChooseInEachGraveyardAt(sentences, i) ??
       youChoosePerPlayerAt(sentences, i) ??
@@ -12507,6 +12508,44 @@ function counterIntoAt(sentences, i, ctx) {
     return { effect: counter("exile", { withTimeCounters: counters })(ctx.target("spell")), used: 3 };
   }
   return null;
+}
+
+/** An ability on the stack copied: "Copy target activated or triggered ability
+ * you control. You may choose new targets for the copy." (Lithoform Engine),
+ * "… target triggered ability you control" (Strionic Resonator), "… from an
+ * enchantment source" (Weaver of Harmony), "… from a colorless source"
+ * (Abstruse Archaic), "… from another legendary source that's not a
+ * commander" (The Peregrine Dynamo). */
+function copyAbilityAt(sentences, i, ctx) {
+  const m =
+    /^copy target (activated or triggered|activated|triggered) ability you control(?: from (?:an? |(another ))([a-z]+) source( that's not a commander)?)?\.$/i.exec(
+      sentences[i],
+    );
+  if (m === null) return null;
+  const newTargets = /^you may choose new targets for the copy\.$/i.test(sentences[i + 1] ?? "");
+  const word = m[3]?.toLowerCase();
+  const source =
+    word === undefined
+      ? {}
+      : CARD_TYPES.includes(word)
+        ? { sourceTypes: [word] }
+        : word === "colorless"
+          ? { sourceFilter: { colorless: true } }
+          : word === "legendary"
+            ? { sourceFilter: { supertype: "legendary" } }
+            : null;
+  if (source === null) return null;
+  if (m[4] !== undefined) source.sourceFilter = { ...source.sourceFilter, isCommander: false };
+  const kind = m[1].toLowerCase();
+  const target = ctx.target({
+    kind: "ability",
+    whose: "you",
+    ...(kind === "activated or triggered" ? {} : { abilityKind: kind }),
+    ...(source.sourceTypes !== undefined ? { sourceTypes: source.sourceTypes } : {}),
+    ...(m[2] !== undefined ? { otherSource: true } : {}),
+    ...(source.sourceFilter !== undefined ? { sourceFilter: source.sourceFilter } : {}),
+  });
+  return { effect: { kind: "copy-ability", target, ...(newTargets ? { newTargets: true } : {}) }, used: newTargets ? 2 : 1 };
 }
 
 /** An ability on the stack countered: "Counter target spell, activated ability,

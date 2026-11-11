@@ -34,6 +34,27 @@ describe("counter target ability from a source", () => {
   });
 });
 
+describe("copy target ability you control", () => {
+  const line = (text: string) =>
+    parseFace({ name: "Test Card", type_line: "Artifact", oracle_text: `{1}, {T}: ${text} You may choose new targets for the copy.` }).activated[0];
+  it("reads the kind of ability and its source's type, colour or supertype", () => {
+    const copy = { kind: "copy-ability", target: 0, newTargets: true };
+    expect(line("Copy target triggered ability you control.")).toMatchObject({
+      targets: [{ kind: "ability", whose: "you", abilityKind: "triggered" }],
+      effect: copy,
+    });
+    expect(line("Copy target activated or triggered ability you control from an enchantment source.").targets).toEqual([
+      { kind: "ability", whose: "you", sourceTypes: ["enchantment"] },
+    ]);
+    expect(line("Copy target activated or triggered ability you control from a colorless source.").targets).toEqual([
+      { kind: "ability", whose: "you", sourceFilter: { colorless: true } },
+    ]);
+    expect(
+      line("Copy target activated or triggered ability you control from another legendary source that's not a commander.").targets,
+    ).toEqual([{ kind: "ability", whose: "you", otherSource: true, sourceFilter: { supertype: "legendary", isCommander: false } }]);
+  });
+});
+
 describe("what an ability goes on to say about its token", () => {
   it("Feldon of the Third Path's copy of a graveyard card", () => {
     const parsed = parseFace({

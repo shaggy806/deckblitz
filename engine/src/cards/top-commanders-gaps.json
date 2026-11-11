@@ -2218,7 +2218,8 @@
   "static:per-keyword-pump",
   "effect:look-and-choose-leftover-exile-with-counters",
   "bug:creature-subtype-needs-creature-type",
-  "mechanic:piles-each-opponent-simultaneous"
+  "mechanic:piles-each-opponent-simultaneous",
+  "target:ability-source-filter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

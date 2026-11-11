@@ -128,30 +128,65 @@ export function abilitySourceTypes(
   registry: CardRegistry,
   ability: GameObject,
 ): readonly CardType[] {
+  const as = abilitySourceAs(state, ability);
+  if (as === undefined) return [];
+  if (as.snapshot !== undefined) return as.snapshot.types;
+  return as.live.zone === "battlefield"
+    ? effectiveTypes(state, registry, as.live)
+    : registry.get(printedCardName(as.live)).types;
+}
+
+/**
+ * The source of `ability`, an ability object on the stack, as the rules read
+ * it — the one answer behind "from an enchantment source" (`sourceTypes`) and
+ * "from a colorless source" (`sourceFilter`): the object itself (`live`)
+ * while it's still the object it was as the ability went on the stack (rule
+ * 400.7), or a card that left a zone other than the battlefield (the card it
+ * still is — a cycled card in a graveyard); else its last-known information
+ * (rule 113.7a), a `snapshot` of it as it last existed on the battlefield.
+ * Undefined for an ability with no source.
+ */
+function abilitySourceAs(
+  state: GameState,
+  ability: GameObject,
+): { readonly live: GameObject; readonly snapshot?: undefined } | { readonly snapshot: LastKnownInfo } | undefined {
   const id = ability.sourceObjectId;
-  if (id === null) return [];
+  if (id === null) return undefined;
   const source = state.objects[id];
-  if (source === undefined) return state.ceasedTokens?.[id]?.types ?? [];
+  if (source === undefined) {
+    const ceased = state.ceasedTokens?.[id];
+    return ceased !== undefined ? { snapshot: ceased } : undefined;
+  }
   const asPermanent = ability.lastKnownRefs?.source;
   if (asPermanent !== undefined) {
-    if (source.zone === "battlefield" && (source.zoneChangeCount ?? 0) === asPermanent) {
-      return effectiveTypes(state, registry, source);
-    }
+    if (source.zone === "battlefield" && (source.zoneChangeCount ?? 0) === asPermanent) return { live: source };
     const known = [source.lastKnown, ...(source.earlierLastKnown ?? [])].find(
       (k) => k !== undefined && k.zoneChangeCount === asPermanent,
     );
-    if (known !== undefined) return known.types;
+    if (known !== undefined) return { snapshot: known };
   }
   const stint = ability.sourceZoneChangeCount;
-  if (stint === undefined || (source.zoneChangeCount ?? 0) === stint) {
-    return source.zone === "battlefield"
-      ? effectiveTypes(state, registry, source)
-      : registry.get(printedCardName(source)).types;
-  }
+  if (stint === undefined || (source.zoneChangeCount ?? 0) === stint) return { live: source };
   const departed = [source.lastKnown, ...(source.earlierLastKnown ?? [])].find(
     (known) => known !== undefined && known.zoneChangeCount === stint,
   );
-  return departed !== undefined ? departed.types : registry.get(printedCardName(source)).types;
+  return departed !== undefined ? { snapshot: departed } : { live: source };
+}
+
+/** Does the source of `ability` (see `abilitySourceAs`) match `filter`? */
+function abilitySourceMatches(
+  state: GameState,
+  registry: CardRegistry,
+  ability: GameObject,
+  filter: CardFilter,
+  forPlayer: PlayerId,
+): boolean {
+  const as = abilitySourceAs(state, ability);
+  if (as === undefined || ability.sourceObjectId === null) return false;
+  return matchesFilter(state, registry, ability.sourceObjectId, filter, {
+    you: forPlayer,
+    ...(as.snapshot !== undefined ? { snapshot: as.snapshot } : {}),
+  });
 }
 
 /** Does `target`'s protection (rule 702.16) stop `source` from affecting it?
@@ -679,6 +714,13 @@ function isLegalTargetUncached(
     if (spec.sourceTypes !== undefined) {
       const types = abilitySourceTypes(state, registry, ability);
       if (!spec.sourceTypes.some((t) => types.includes(t))) return false;
+    }
+    // "From another … source": not the source of the ability choosing.
+    if (spec.otherSource === true && source?.object !== undefined && ability.sourceObjectId === source.object) {
+      return false;
+    }
+    if (spec.sourceFilter !== undefined && !abilitySourceMatches(state, registry, ability, spec.sourceFilter, forPlayer)) {
+      return false;
     }
     return true;
   }

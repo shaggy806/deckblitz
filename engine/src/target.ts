@@ -307,6 +307,17 @@ export type TargetSpec =
        * went on the stack; a card in another zone (a channel ability's) by
        * its printed types. */
       readonly sourceTypes?: readonly CardType[];
+      /** Its source matches this filter, read the same way as `sourceTypes`
+       * (the object while it's still the one the ability came from, else as
+       * it last existed on the battlefield — rule 113.7a): "from a
+       * **colorless** source" (Abstruse Archaic, `{ colorless: true }`),
+       * "from another **legendary** source **that's not a commander**" (The
+       * Peregrine Dynamo, `{ supertype: "legendary", isCommander: false }`).
+       * An ability with no source (the monarch's) never matches. */
+      readonly sourceFilter?: CardFilter;
+      /** "From **another** … source" (The Peregrine Dynamo): not an ability
+       * of the permanent whose ability is choosing this target. */
+      readonly otherSource?: true;
     }
   /**
    * A spell or an ability on the stack, in one slot — "target spell or
