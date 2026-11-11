@@ -8344,6 +8344,8 @@ const MANA_SPEND_PURPOSE_LINES = {
   },
   "Spend this mana only to cast a spell from anywhere other than your hand.": { castFrom: { notZones: ["hand"] } },
   "Spend this mana only to cast kicked spells.": { purposes: ["kicked-spell"] },
+  // Corrupted Crossroads: the printed keyword, not any colorless spell.
+  "Spend this mana only to cast a spell with devoid.": { spell: { hasKeyword: "devoid" } },
   "Spend this mana only to cast an instant or sorcery spell or a kicked spell.": {
     spell: { typesAnyOf: ["instant", "sorcery"] },
     purposes: ["kicked-spell"],

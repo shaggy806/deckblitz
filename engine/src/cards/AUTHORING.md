@@ -719,7 +719,9 @@ from that player's side). All are bound as the effect applies; only `"source"`, 
 `greatestInZone` and `greatestAmongItsController` take `least: true`. `hasKeyword: CardKeyword` is one
 row per printed keyword read off the text box (morph, madness, kicker, flashback, cycling, fading, ...);
 `keyword` is still the computed evergreen list. `hasKeyword: "partner"` is partner or "partner with",
-not the other partner abilities (702.124f). `keywordVariant: "hexproof" | "protection"` is the keyword in
+not the other partner abilities (702.124f). `hasKeyword: "devoid"` is the printed devoid line (702.114a),
+which a devoid card's `colors: []` alone doesn't say — "a spell with devoid" (Corrupted Crossroads's
+`spendOnly: { spell: { hasKeyword: "devoid" } }`; the scaffolder reads the line). `keywordVariant: "hexproof" | "protection"` is the keyword in
 any variant, printed or granted — hexproof or a "hexproof from [quality]" (702.11d), any "protection from"
 (702.16a) — where `keyword: "hexproof"` is the plain ability alone. `hasActivatedAbility: { mana?: boolean }` is a non-mana
 activated ability (605.1a). `castFrom` takes `{ not: ZoneType }`. `aboveSourceInGraveyard` reads

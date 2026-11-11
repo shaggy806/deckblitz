@@ -1956,12 +1956,12 @@ function hasParity(state: GameState, value: number, clause: ParityClause, source
 export type CardKeyword =
   | "convoke" | "cycling" | "disguise" | "flashback" | "kicker" | "morph" | "mutate" | "suspend"
   | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth"
-  | "partner";
+  | "partner" | "devoid";
 
 /** Whether a printed line of `def`'s text is this keyword ability: for the
  * keywords a card authors as their parts, with no field of their own. */
 function hasKeywordLine(def: CardDefinition, keyword: string): boolean {
-  return new RegExp(`(^|\\n)${keyword} `).test(def.text);
+  return new RegExp(`(^|\\n)${keyword}( |\\n|$)`).test(def.text);
 }
 
 /** One row per keyword, so a new one is a row: `live` is there for what a
@@ -1990,6 +1990,10 @@ const CARD_KEYWORD_READS = {
   // friends forever, choose a Background and the rest (rule 702.124f; Akroma,
   // Vision of Ixidor's ruling).
   partner: (def) => def.pairing?.kind === "partner" || def.pairing?.kind === "partner-with",
+  // Devoid (rule 702.114a) is authored as its colours alone (`colors: []`), so
+  // its printed line is what tells a spell with devoid from any other
+  // colorless one (Corrupted Crossroads's ruling).
+  devoid: (def) => hasKeywordLine(def, "Devoid"),
 } as const satisfies Record<CardKeyword, (def: CardDefinition, live: GameObject | undefined) => boolean>;
 
 /** Does object `id` satisfy every clause of `filter`?

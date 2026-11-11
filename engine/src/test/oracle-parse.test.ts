@@ -17834,6 +17834,23 @@ describe("a target controlled by a player who was dealt combat damage by N or mo
 });
 
 describe("if a creature you control would explore, instead it explores, then it explores again", () => {
+  it("reads Corrupted Crossroads whole: mana for a spell with devoid", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Land",
+      oracle_text:
+        "{T}: Add {C}. ({C} represents colorless mana.)\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a spell with devoid.",
+    }) as unknown as { complete: boolean; activated: { cost: unknown; effect: unknown }[] };
+    expect(face.complete).toBe(true);
+    expect(face.activated[1]?.cost).toEqual({ mana: null, tap: true, payLife: 1 });
+    expect(face.activated[1]?.effect).toEqual({
+      kind: "add-mana",
+      mana: "any-color",
+      amount: 1,
+      spendOnly: { spell: { hasKeyword: "devoid" }, text: "Spend this mana only to cast a spell with devoid." },
+    });
+  });
+
   it("reads Topography Tracker's replacement", () => {
     const face = parseFace({
       name: "Thing",
