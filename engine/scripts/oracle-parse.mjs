@@ -4249,6 +4249,14 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) gets ${N} rad counters?`).exec(s))) {
     return { kind: "add-player-counters", counter: "rad", amount: amount(m[2]), target: slot(m[1]) };
   }
+  // "You get three rad counters and put three +1/+1 counters on ~" (Strong,
+  // the Brutish Thespian): two instructions, in order.
+  if ((m = re(`you get ${N} rad counters? and (put .+)`).exec(s))) {
+    const then = parseSentence(`${m[2][0].toUpperCase()}${m[2].slice(1)}.`, ctx);
+    if (then !== null) {
+      return { kind: "sequence", effects: [{ kind: "add-player-counters", counter: "rad", amount: amount(m[1]) }, then] };
+    }
+  }
   if ((m = re(`(you get|each player gets|each opponent gets) ${N} rad counters?`).exec(s))) {
     const who = { "you get": undefined, "each player gets": "each-player", "each opponent gets": "each-opponent" }[m[1].toLowerCase()];
     return { kind: "add-player-counters", counter: "rad", amount: amount(m[2]), ...(who !== undefined ? { who } : {}) };
@@ -19280,6 +19288,15 @@ function parseStatic(line, text) {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
       replacement: { event: "would-lose-life", who: "opponent", instead: { modify: { times: 2 } } },
+      text,
+    };
+  }
+  // Life lost as a result of the rad counters' ability (rule 728.1a), gained
+  // instead (Strong, the Brutish Thespian).
+  if (line === "You gain life rather than lose life from radiation.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-lose-life", who: "you", from: "radiation", instead: { effect: { kind: "gain-life", amount: "x" } } },
       text,
     };
   }

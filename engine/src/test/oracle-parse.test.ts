@@ -15491,6 +15491,24 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads life lost from radiation gained instead, and rad counters beside +1/+1 counters", () => {
+    const strong = read(
+      "Legendary Creature — Mutant Berserker",
+      "Enrage — Whenever ~ is dealt damage, you get three rad counters and put three +1/+1 counters on ~.\nYou gain life rather than lose life from radiation.",
+    );
+    expect(strong.complete).toBe(true);
+    expect(strong.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-player-counters", counter: "rad", amount: 3 },
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: 3 },
+      ],
+    });
+    expect(strong.static[0]).toMatchObject({
+      replacement: { event: "would-lose-life", who: "you", from: "radiation", instead: { effect: { kind: "gain-life", amount: "x" } } },
+    });
+  });
+
   it("reads a turn's triggered mana ability, a player's or only yours", () => {
     const tide = read("Instant", "Until end of turn, whenever a player taps an Island for mana, that player adds an additional {U}.");
     expect(tide.complete).toBe(true);

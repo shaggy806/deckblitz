@@ -35848,7 +35848,16 @@ export class Game {
         return types.size;
       },
       gainLife: (player, amount) => this.changeLife(player, amount),
-      loseLife: (player, amount) => this.loseLifeTallied(player, amount),
+      // Life lost as a result of the rad counters' own ability is lost "from
+      // radiation" (rule 728.1a) — a copy of that ability's too.
+      loseLife: (player, amount) =>
+        this.loseLifeTallied(
+          player,
+          amount,
+          this.state.objects[source] !== undefined && printedCardName(this.state.objects[source]) === RAD_CARD
+            ? "radiation"
+            : undefined,
+        ),
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
       addMana: (player, mana, amount, spec) => {
         this.addMana(
@@ -55261,9 +55270,9 @@ controlledBy,
    * permanent that put the ability on the stack (rule 400.7) and the player
    * losing is one of its controller's opponents. What was actually lost, so
    * a life total that can't change counts nothing. */
-  private loseLifeTallied(player: PlayerId, amount: number): void {
+  private loseLifeTallied(player: PlayerId, amount: number, cause?: LifeLossReplacement["from"]): void {
     const before = this.state.players[player]?.life;
-    this.changeLife(player, -amount);
+    this.changeLife(player, -amount, false, cause);
     const lost = before === undefined ? 0 : before - this.state.players[player].life;
     const resolving = this.state.resolvingSource;
     if (lost <= 0 || resolving === undefined) return;
@@ -56022,12 +56031,30 @@ controlledBy,
 
   /** `amount` life `player` would lose, changed: "…they lose twice that much
    * life instead" (Bloodletter of Aclazotz, each one doubling it again). */
-  private lifeLossReplaced(player: PlayerId, amount: number): number {
+  private lifeLossReplaced(player: PlayerId, amount: number, cause?: LifeLossReplacement["from"]): number {
     let loss = amount;
     for (const { r } of this.playerEventReplacements(player)) {
-      if (r.event === "would-lose-life") loss *= insteadModify(r.instead)?.times ?? 1;
+      if (r.event === "would-lose-life" && (r.from === undefined || r.from === cause)) {
+        loss *= insteadModify(r.instead)?.times ?? 1;
+      }
     }
     return loss;
+  }
+
+  /** What `player`'s loss of life from `cause` becomes instead of happening
+   * (rule 614.6) — "you gain life rather than lose life from radiation"
+   * (Strong, the Brutish Thespian: rule 728.1a) — and whose replacement it
+   * is, or `undefined`. */
+  private lifeLossInstead(
+    player: PlayerId,
+    cause: LifeLossReplacement["from"],
+  ): { readonly effect: EffectSpec; readonly by: { readonly id: ObjectId; readonly controller: PlayerId } } | undefined {
+    for (const { r, by } of this.playerEventReplacements(player)) {
+      if (r.event !== "would-lose-life" || (r.from !== undefined && r.from !== cause)) continue;
+      const effect = insteadEffect(r.instead)?.effect;
+      if (effect !== undefined) return { effect, by };
+    }
+    return undefined;
   }
 
   /** The would-gain-life replacements on `player`'s gain, for them to order
@@ -56098,7 +56125,7 @@ controlledBy,
     };
   }
 
-  private changeLife(player: PlayerId, delta: number, lossReplaced = false): void {
+  private changeLife(player: PlayerId, delta: number, lossReplaced = false, cause?: LifeLossReplacement["from"]): void {
     if (this.dryRunningEvents) {
       if (delta > 0 && this.state.awaiting === null && !playerGainLifeProhibited(this.state, this.registry, player)) {
         this.lifeOrderAsked(player, delta);
@@ -56110,7 +56137,18 @@ controlledBy,
     if (delta < 0 && playerCantLoseLife(this.state, this.registry, player)) return;
     // Every loss comes through here: an effect's, damage's (having asked for
     // itself, for the floor beside it), a cost's, a set or exchanged total's.
-    if (delta < 0 && !lossReplaced) delta = -this.lifeLossReplaced(player, -delta);
+    if (delta < 0 && !lossReplaced) {
+      const loss = this.lifeLossReplaced(player, -delta, cause);
+      // Something else instead of the loss, which then never happens (rule
+      // 614.6): after any doubling, the order that leaves the player losing
+      // the most to turn into Strong's gain (rule 616.1, theirs to choose).
+      const instead = this.lifeLossInstead(player, cause);
+      if (instead !== undefined) {
+        this.runReplacedBy(instead.effect, instead.by.id, instead.by.controller, { x: loss, player });
+        return;
+      }
+      delta = -loss;
+    }
     // "Your life total can't change" or "can't gain life" (rule 119.7): no
     // gain either — and so nothing that would replace one applies (the
     // Teferi's Protection and Stigma Lasher rulings).

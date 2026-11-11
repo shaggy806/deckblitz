@@ -942,7 +942,16 @@ export interface LifeGainReplacement {
 export interface LifeLossReplacement {
   readonly event: "would-lose-life";
   readonly who: "opponent" | "you" | "any-player" | "enchanted-player";
+  /** `{ modify: { times } }` for a doubling; `{ effect }` for something else
+   * instead of the loss, which never happens (rule 614.6), "that much" being
+   * `"x"`: "you gain life rather than lose life from radiation" (Strong, the
+   * Brutish Thespian). An `{ effect }` is read for an effect's loss, a cost's
+   * and a set total's, not for damage's (which asks ahead for the floor
+   * beside it), so it wants a `from`. */
   readonly instead: Instead;
+  /** Only life lost **from radiation**: as a result of the triggered ability
+   * rad counters bring (rule 728.1a), a copy of it included. */
+  readonly from?: "radiation";
 }
 
 /**

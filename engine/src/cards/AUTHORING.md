@@ -6721,7 +6721,12 @@ The `prevent-damage` family makes the same record.
   "if an opponent would lose life during your turn, they lose twice that much
   life instead", with a `your-turn` `condition`. Every loss, damage's and a life
   payment's included (rule 119); the damage itself doesn't change, so lifelink
-  doesn't either.
+  doesn't either. `from: "radiation"` narrows it to life lost as a result of the
+  rad counters' own ability (rule 728.1a), and `instead: { effect }` is something
+  else instead of the loss, "that much" being `"x"`: Strong, the Brutish
+  Thespian's "you gain life rather than lose life from radiation" (`who: "you"`,
+  `from: "radiation"`, `instead: { effect: { kind: "gain-life", amount: "x" } }`).
+  An `{ effect }` isn't read for damage's loss, so give it a `from`.
 - `{ event: "would-gain-life", who, instead?: { modify: { plus?, times? } } | { effect }, prevent?, becomesLoss? }` — Bilbo, Birthday
   Celebrant's "if you would gain life, you gain that much life plus 1
   instead" (`who: "you"`, `modify: { plus: 1 }`), or "your opponents can't gain life"
