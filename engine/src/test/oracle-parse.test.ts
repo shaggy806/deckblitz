@@ -18017,3 +18017,20 @@ describe("living at 0 or less life", () => {
     ]);
   });
 });
+
+describe("a token copy that enters with counters", () => {
+  it("reads Littjara Mirrorlake's last ability", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Land",
+      oracle_text:
+        "{2}{G}{G}{U}, {T}, Sacrifice this land: Create a token that's a copy of target creature you control, except it enters with an additional +1/+1 counter on it. Activate only as a sorcery.",
+    } as never) as unknown as { activated: Record<string, unknown>[] };
+    expect(face.activated[0]).toMatchObject({
+      cost: { mana: "{2}{G}{G}{U}", tap: true, sacrifice: "self" },
+      targets: ["creature-you-control"],
+      effect: { kind: "create-token-copy", of: 0, count: 1, withCounters: { kind: "+1/+1", amount: 1 } },
+      sorcerySpeed: true,
+    });
+  });
+});

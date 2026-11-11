@@ -8219,6 +8219,16 @@ export type EffectSpec =
       readonly attacksThisCombat?: boolean;
       /** `create-token`'s, for the same reason. */
       readonly thenCounters?: { readonly kind: string; readonly amount: EffectAmount };
+      /** The copies **enter with** these counters on them, beside whatever
+       * else they enter with (rule 122.6): Littjara Mirrorlake's "except it
+       * enters with an additional +1/+1 counter on it", Ochre Jelly's "the
+       * token enters with half that many +1/+1 counters on it, rounded down"
+       * (`{ half: { countersOn: "source", counter: "+1/+1" } }`). Part of
+       * how the tokens enter, so replacements of counters see them and an
+       * enters trigger finds them there; the amount is read once as the
+       * copies are made. Not a copiable value: a copy of one of these
+       * tokens enters with none of it. */
+      readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
     }
   | {
       /** Attach an Aura, Equipment or Fortification (rule 701.3a). `attachment`
@@ -12405,6 +12415,8 @@ export interface EffectApi {
       attacksThisCombat?: boolean;
       /** Counters this effect's controller puts on each, once they're made. */
       thenCounters?: { readonly kind: string; readonly amount: number };
+      /** Counters each enters with — the effect's `withCounters`, read. */
+      withCounters?: { readonly kind: string; readonly amount: number };
       /** Keywords and triggered abilities they gain with no end (not
        * copiable — see the effect's `gains`). */
       gainKeywords?: readonly Keyword[];
@@ -13263,6 +13275,7 @@ export type TokenRiders = Partial<
     | "goadedForGame"
     | "linkedToSource"
     | "thenCounters"
+    | "withCounters"
   >
 >;
 
@@ -13294,6 +13307,7 @@ export function tokenRiders(spec: EffectSpec): TokenRiders {
     ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
     ...(spec.kind === "create-token-copy"
       ? {
+          ...(spec.withCounters !== undefined ? { withCounters: spec.withCounters } : {}),
           ...(spec.gainsHaste !== undefined ? { gainsHaste: spec.gainsHaste } : {}),
           ...(spec.exileAtEndOfCombat !== undefined ? { exileAtEndOfCombat: spec.exileAtEndOfCombat } : {}),
           ...(spec.sacrificeAtEndOfCombat !== undefined ? { sacrificeAtEndOfCombat: spec.sacrificeAtEndOfCombat } : {}),
@@ -19433,6 +19447,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.attacksThisCombat === true ? { attacksThisCombat: true } : {}),
           ...(spec.thenCounters !== undefined
             ? { thenCounters: { kind: spec.thenCounters.kind, amount: amountValue(spec.thenCounters.amount, ctx) } }
+            : {}),
+          ...(spec.withCounters !== undefined
+            ? { withCounters: { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx) } }
             : {}),
         });
       const specCount = amountValue(spec.count, ctx);

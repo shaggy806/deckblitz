@@ -5091,6 +5091,8 @@ export interface EnteringTokenCopies {
   readonly effectController?: PlayerId;
   /** Counters the effect's controller puts on each once they're made. */
   readonly thenCounters?: { readonly kind: string; readonly amount: number };
+  /** Counters each enters with (`create-token-copy`'s `withCounters`). */
+  readonly withCounters?: { readonly kind: string; readonly amount: number };
 }
 
 /**

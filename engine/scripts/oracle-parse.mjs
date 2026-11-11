@@ -4578,6 +4578,19 @@ export function parseSentence(sentence, ctx) {
     slot(m[1]);
     return { kind: "create-token", token: name, count: amount(m[2]), who: "target-controller" };
   }
+  // "Create a token that's a copy of target creature you control, except it
+  // enters with an additional +1/+1 counter on it" (Littjara Mirrorlake): the
+  // copy effect's `withCounters`, no copiable value (rule 707.9e).
+  if (
+    (m = re(
+      `create a token that's a copy of (${TARGET}), except it enters with ${N} additional (\\+1/\\+1|-1/-1) counters? on it`,
+    ).exec(s))
+  ) {
+    const n = amount(m[2]);
+    const of = typeof n === "number" ? slot(m[1]) : undefined;
+    if (of === undefined) return null;
+    return { kind: "create-token-copy", of, count: 1, withCounters: { kind: m[3], amount: n } };
+  }
   // A token copy of a linked source: the creature enchanted, a card exiled
   // with this (rule 607.2a), or "the exiled card" — of the cost when the cost
   // exiled one, otherwise of the linked ability. Exceptions only as far as

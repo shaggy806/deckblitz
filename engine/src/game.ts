@@ -43900,6 +43900,8 @@ controlledBy,
       attacksThisCombat?: boolean;
       /** Counters this effect's controller puts on each once they're made. */
       thenCounters?: { readonly kind: string; readonly amount: number };
+      /** Counters each enters with, beside its own (rule 122.6). */
+      withCounters?: { readonly kind: string; readonly amount: number };
       /** "The tokens are goaded for the rest of the game", by this player. */
       goadedForGameBy?: PlayerId;
       /** The effect making them, for a delayed trigger it sets up. */
@@ -44014,6 +44016,7 @@ controlledBy,
       ...(opts.effectController !== undefined ? { effectController: opts.effectController } : {}),
       ...(opts.createdWith !== undefined ? { createdWith: opts.createdWith } : {}),
       ...(opts.thenCounters !== undefined ? { thenCounters: opts.thenCounters } : {}),
+      ...(opts.withCounters !== undefined && opts.withCounters.amount > 0 ? { withCounters: opts.withCounters } : {}),
     };
     if (this.heldTokenCopies !== null) this.heldTokenCopies.push(planned);
     else this.carryOutTokenCopies([planned]);
@@ -44129,6 +44132,8 @@ controlledBy,
             continue;
           }
           if (group.goadedForGameBy !== undefined) this.state.objects[id].goadedForGameBy = [group.goadedForGameBy];
+          // What the effect has it enter with, before its entry is announced.
+          this.enterWithCounters(id, group.withCounters, group.controller);
           this.noteTokensCreated(group.controller);
           if (!copiedAgain && group.created !== true) this.emit({ type: "permanent-copied", object: id, copyOf: copyName });
           this.emit({ type: "permanent-entered-battlefield", object: id });
@@ -44156,6 +44161,8 @@ controlledBy,
         planned.sacrificeAtEndStep,
         planned.goadedForGameBy,
         planned.exileAtEndStep || planned.sacrificeAtEndStep || planned.thenCounters !== undefined,
+        undefined,
+        planned.withCounters,
       ),
       ...this.mintReplacedTokenCopies(planned),
     ]));
@@ -44178,6 +44185,8 @@ controlledBy,
         group.sacrificeAtEndStep,
         group.goadedForGameBy,
         group.exileAtEndStep || group.sacrificeAtEndStep,
+        undefined,
+        group.withCounters,
       ),
     );
   }
@@ -44403,6 +44412,9 @@ controlledBy,
     /** Each one attached to this permanent as it enters — `createTokens`'
      * `attachTo`, already found legal. */
     attachTo?: ObjectId,
+    /** Counters each enters with, beside its own — a token copy's
+     * `withCounters`. They're made one object each. */
+    withCounters?: { readonly kind: string; readonly amount: number },
   ): readonly ObjectId[] {
     if (total <= 0) return [];
     this.noteTokensCreated(controller);
@@ -44422,6 +44434,8 @@ controlledBy,
           tapped,
           sacrificeAtEndStep,
           goadedForGameBy,
+          1,
+          withCounters,
         );
         made.push(id);
         if (copied) this.emit({ type: "permanent-copied", object: id, copyOf: printedName });
@@ -44447,7 +44461,7 @@ controlledBy,
     // what the battlefield handles. Nor are tokens linked to their source:
     // "then exile all other tokens created with this" tells them from the
     // older ones by object.
-    if (separate || tapped || this.mintingLink !== null || !this.isStackableTokenName(printedName)) {
+    if (separate || tapped || withCounters !== undefined || this.mintingLink !== null || !this.isStackableTokenName(printedName)) {
       return mintIndividually();
     }
     const repId = this.mintFreshTokenObject(
@@ -44515,6 +44529,9 @@ controlledBy,
      * before the counters it enters with are announced, so a "whenever
      * counters are put on" watcher sees every token get them. */
     count = 1,
+    /** Counters the effect making it has it enter with, beside its own (a
+     * token copy's `withCounters`): part of the one entry (rule 122.6). */
+    withCounters?: { readonly kind: string; readonly amount: number },
   ): ObjectId {
     const id = this.mintObjectId();
     this.state.objects[id] = {
@@ -44567,7 +44584,13 @@ controlledBy,
     // (a Treasure-like) or the effect that created it ("create thirteen
     // **tapped** Zombie tokens") — short of a replacement that has it enter
     // untapped instead.
-    const entering = this.entersBattlefieldReplacement(id, tapped);
+    const entering = this.entersBattlefieldReplacement(
+      id,
+      tapped,
+      false,
+      undefined,
+      withCounters !== undefined ? { counters: [withCounters] } : undefined,
+    );
     this.state.objects[id].tapped = entering.tapped;
     for (const c of entering.counters) {
       this.state.objects[id].counters[c.kind] =

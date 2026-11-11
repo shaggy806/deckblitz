@@ -322,6 +322,19 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A token copy that enters with counters — built 2026-11-11
+
+By EDHREC rank: Ochre Jelly (6738), Littjara Mirrorlake (7463).
+`create-token-copy`'s `withCounters: { kind, amount }`: the copies enter with
+those counters beside their own (122.6), folded into the one entry where the
+tokens are minted (`mintFreshTokenObject`, through the entering replacement's
+counters, so a counter replacement sees one placement) and put on before the
+entry is announced where they wait on an "as this enters" choice
+(`enterTokenCopies`). Not copiable (707.9e). The scaffolder reads "a copy of
+[target], except it enters with N additional +1/+1 counters on it"; Ochre
+Jelly's Split line recurs nowhere and has no template. Key:
+effect:token-copy-enters-with-counters.
+
 ### Damage dealt to you as though its source had infect — built 2026-11-11
 
 By EDHREC rank: Phyrexian Unlife (6722), the only card. `damageAsThoughSourceHad`
