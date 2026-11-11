@@ -40,6 +40,7 @@ import { activePlayerOf } from "../state.js";
 import type { GameState } from "../state.js";
 import { appendJournal, journalTotal, type JournalKind } from "../journal.js";
 import type { CardRegistry } from "../cards/card-registry.js";
+import { createDefaultRegistry } from "../cards/registry.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
 export const A = asPlayerId("alice");
@@ -47,6 +48,28 @@ export const B = asPlayerId("bob");
 export const C = asPlayerId("carol");
 export const D = asPlayerId("dave");
 const SEATS = [A, B, C, D];
+
+/**
+ * The one registry every `table()` of a worker plays with, unless the test
+ * hands in its own. `Game.create` without one builds the whole pool's registry
+ * afresh (~3 ms, 32,000 entries), and nearly every test's game did: about a
+ * sixth of the suite's test time (2026-11-10). Shared, it must never change
+ * under another file's tests (`isolate` is off: a worker keeps its modules),
+ * so registering on it throws; a test with a card of its own asks for a
+ * registry of its own (`table({ ownRegistry: true })`).
+ */
+let shared: CardRegistry | undefined;
+function sharedRegistry(): CardRegistry {
+  if (shared === undefined) {
+    shared = createDefaultRegistry();
+    shared.register = (def) => {
+      throw new Error(
+        `harness: "${def.name}" registered on the registry every test shares — build the table with its own: table({ ownRegistry: true })`,
+      );
+    };
+  }
+  return shared;
+}
 
 export interface Table {
   readonly game: Game;
@@ -78,13 +101,16 @@ export function table(
     openingHandSize?: number;
     /** The cards the game plays with, for a test that defines its own. */
     registry?: CardRegistry;
+    /** A whole-pool registry of this table's own, for a test that registers a
+     * card of its own on `game.registry` (the shared one refuses). */
+    ownRegistry?: boolean;
   } = {},
 ): Table {
   const players = SEATS.slice(0, opts.players ?? 2);
   const seats = players.map((p) => new ScriptedController(p));
   const game = Game.create({
     seed: opts.seed ?? 1,
-    ...(opts.registry !== undefined ? { registry: opts.registry } : {}),
+    registry: opts.registry ?? (opts.ownRegistry === true ? createDefaultRegistry() : sharedRegistry()),
     shuffle: false,
     startingPlayer: A,
     rules: {

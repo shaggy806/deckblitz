@@ -123,7 +123,7 @@ describe("counters: the order putting on the most +1/+1, the fewest -1/-1", () =
   });
 
   it("-1/-1 counters: doubled before the plus, the fewer", () => {
-    const { game } = table();
+    const { game } = table({ ownRegistry: true });
     game.registry.register(blightEngine);
     spawn(game, BLIGHT_ENGINE, A);
     spawn(game, "Doubling Season", A);

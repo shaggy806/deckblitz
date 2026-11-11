@@ -3634,6 +3634,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Tooling / docs
 
+- **Verify faster: the plain fuzzers after the engine suite, one card registry per test worker**
+  (2026-11-10): the fuzzers no longer take the suite's memory (2 players in two processes, 4 in
+  five, beside the server suite), and `table()` shares one whole-pool registry per worker
+  (`ownRegistry` for a test that registers a card): the engine suite 117 s to 92 s alone. Full run
+  287 s to ~250 s, quick 192 s to ~145 s (`docs/plans/verify-speed-audit.md`).
 - **Verify faster: five small changes from the speed audit** (2026-11-10, `dc9b9a552`): card:verify
   reads the bundled barrel (28 s to 1.5 s), the server suite imports the built engine through Node
   (47 s to 16 s), the typecheck runs only the two tests configs directly (9 s to 3 s), gen:cards runs

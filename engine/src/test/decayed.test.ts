@@ -78,7 +78,7 @@ describe("decayed", () => {
   });
 
   it("a creature that gains decayed has its trigger too", () => {
-    const { game, a } = table();
+    const { game, a } = table({ ownRegistry: true });
     game.registry.register(touchOfRot);
     const bears = spawn(game, "Grizzly Bears");
     cast(game, toHand(game, ROT), { targets: [ref(bears)] });

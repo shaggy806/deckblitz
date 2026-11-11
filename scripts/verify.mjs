@@ -7,8 +7,9 @@
 //      step (its prebuild), so it has no step of its own here
 //   2. build (every workspace), with the sample decks' stand-ins check beside
 //      it — and, from here on, in the background beside
-//      everything below (they need only the build): the fuzzer at 2 and 4
-//      players; for every card this change adds (or `--with` names), the
+//      everything below (they need only the build; the plain fuzzer at 2
+//      and 4 players starts later, when the engine suite ends, in several
+//      processes): for every card this change adds (or `--with` names), the
 //      situation fuzzer (`situation-fuzz.mjs`: each card cast or activated
 //      in small random boards, `SITUATIONS`) and a few 4-player games with
 //      them forced in (at most 10 a deck: `fuzzWithPlan`), stopped at turn
@@ -507,30 +508,43 @@ const background = (start) => {
     };
   } else start();
 };
-/** A 4-player run of `count` games, as two processes over halves of its
- * seeds (`--start`): the same games, in about half the time — it's the
- * longest step, and the machine has the cores. */
-const fourPlayer = (name, count, extra) => {
-  const half = SMALL ? count : Math.ceil(count / 2);
-  return [
-    [1, half],
-    [half + 1, count - half],
-  ]
-    .filter(([, n]) => n > 0)
-    .map(([start, n], i) =>
+/** A plain fuzzer run of `count` games as `parts` processes over ranges of
+ * its seeds (`--start`): the same games, each process one thread. */
+const fuzzParts = (name, count, parts, extra) => {
+  const size = Math.ceil(count / parts);
+  const runs = [];
+  for (let start = 1; start <= count; start += size) {
+    const n = Math.min(size, count - start + 1);
+    const label = parts === 1 ? name : `${name} (${runs.length + 1} of ${Math.ceil(count / size)})`;
+    runs.push(() =>
       run(
-        SMALL ? name : `${name} (${i + 1} of 2)`,
+        label,
         "node",
-        ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...extra],
+        ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), ...extra],
         ENGINE,
       ),
     );
+  }
+  return runs;
 };
+/** The plain fuzzers start when the engine suite ends, beside the server and
+ * client suites, 2 players in two processes and 4 players in five (eleven
+ * were no faster, 246 s a run against 252 s, and the server suite beside them
+ * took 45 s against 35 s). Beside the
+ * engine suite (three processes from the build on, until 2026-11-10) they
+ * took the memory it needs — 169 s for the suite against 119 s — and ran half
+ * as fast themselves, so the last of them ended at 287-306 s whatever the
+ * main chain did. A small machine plays them after all three suites, one
+ * process each, as before. */
+let startPlainFuzz = () => {};
 if (!skip.has("fuzz")) {
-  background(() => {
-    late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
-    late.push(...fourPlayer("fuzz 4p", Math.ceil(games / 2), []));
-  });
+  const plain = [
+    ...fuzzParts("fuzz 2p", games, SMALL ? 1 : 2, []),
+    ...fuzzParts("fuzz 4p", Math.ceil(games / 2), SMALL ? 1 : 5, ["--players", "4"]),
+  ];
+  const start = () => late.push(...plain.map((s) => s()));
+  if (SMALL) background(start);
+  else startPlainFuzz = start;
 }
 // The situation fuzzer beside the suites at 4 workers (the engine suite takes
 // 8); on a small machine after them, on every core but one.
@@ -663,6 +677,7 @@ if (retryFiles) {
 }
 report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
 if (!engineTests.ok) stop();
+startPlainFuzz();
 // Side by side at 4 workers each — but on a small machine one after the
 // other at vitest's default, or the server's timed capture tests run past
 // their 5 s (they take 2 s alone; 2026-10-25).

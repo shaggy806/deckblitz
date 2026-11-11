@@ -264,7 +264,7 @@ describe("replacing a roll", () => {
 
 describe("triggers on a result", () => {
   it("rolls-dice reads the result, its modifier included (706.2)", () => {
-    const { game } = table({ seed: 7 });
+    const { game } = table({ seed: 7, ownRegistry: true });
     registryOf(game).register(
       defineCard({
         name: "Test Puzzlebox",
@@ -320,7 +320,7 @@ describe("triggers on a result", () => {
 
   it("loses-coin-flip fires on a lost flip only", () => {
     const seen = SEEDS.map((seed) => {
-      const { game } = table({ seed });
+      const { game } = table({ seed, ownRegistry: true });
       registryOf(game).register(
         defineCard({
           name: "Test Loser",

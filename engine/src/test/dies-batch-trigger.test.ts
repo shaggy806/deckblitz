@@ -59,7 +59,7 @@ const watcher = (name: string, filter: CardFilter, effect: EffectSpec) =>
 
 /** A table with the test's two watchers known to its game. */
 const board = (): Table => {
-  const t = table();
+  const t = table({ ownRegistry: true });
   t.game.registry.register(watcher(COUNTER, { type: "creature" }, { kind: "gain-life", amount: { triggerValue: true } }));
   t.game.registry.register(watcher(ARTIFACT_WATCH, { type: "artifact" }, { kind: "gain-life", amount: 1 }));
   return t;
@@ -165,7 +165,7 @@ describe("a batched dies trigger", () => {
   });
 
   it("with 'other', doesn't see its own death alone, but sees those dying with it", () => {
-    const t = table();
+    const t = table({ ownRegistry: true });
     t.game.registry.register(
       defineCard({
         name: "Test Batch Other",

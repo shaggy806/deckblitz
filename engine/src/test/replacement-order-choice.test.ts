@@ -124,7 +124,7 @@ const shielded = defineCard({
 
 describe("protection beside a creature's own damage replacement (616.1)", () => {
   it("left alone, protection goes first and the creature's own follow-up doesn't happen", () => {
-    const { game } = table();
+    const { game } = table({ ownRegistry: true });
     game.registry.register(blackBolt);
     game.registry.register(shielded);
     const phantom = spawn(game, SHIELDED, B);
@@ -134,7 +134,7 @@ describe("protection beside a creature's own damage replacement (616.1)", () => 
   });
 
   it("its controller can take the replacement first", () => {
-    const { game, b } = table();
+    const { game, b } = table({ ownRegistry: true });
     game.registry.register(blackBolt);
     game.registry.register(shielded);
     const phantom = spawn(game, SHIELDED, B);
@@ -303,7 +303,7 @@ const secondLich = defineCard({
 
 describe("mandatory draw replacements (616.1)", () => {
   it("beside an optional one, every mandatory one is offered", () => {
-    const { game, a } = table();
+    const { game, a } = table({ ownRegistry: true });
     game.registry.register(secondLich);
     spawn(game, "Underrealm Lich");
     spawn(game, SECOND_LICH);
@@ -321,7 +321,7 @@ describe("mandatory draw replacements (616.1)", () => {
   });
 
   it("two different mandatory ones are the player's to choose between", () => {
-    const { game, a } = table();
+    const { game, a } = table({ ownRegistry: true });
     game.registry.register(secondLich);
     spawn(game, "Underrealm Lich");
     spawn(game, SECOND_LICH);

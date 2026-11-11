@@ -772,10 +772,11 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
-- **Make verify faster, the rest** (2026-11-10): `docs/plans/verify-speed-audit.md` items 5 (the plain
-  fuzzers after the engine suite, in more processes: they bound a full run at 287 s), 6 (one shared
-  card registry per test worker) and 8 (the engine tests typecheck beside the build), and the five
-  coverage holes it lists in verify's change selection.
+- **Verify's change selection has five coverage holes** (2026-11-10): listed in
+  `docs/plans/verify-speed-audit.md` (quick mode skipping the server suite when its inputs changed,
+  staged-then-edited cards, tokens and edited cards outside the fuzz stamp, `--landing`'s short list,
+  background results lost on a main-chain failure); its item 8 (the engine tests typecheck beside
+  the build) is the one speed-up left.
 - **Confirm the box's room cap of 6 with a load test there** (2026-10-18): `MAX_ROOMS_PER_SHARD`
   went from 8 to 6 on the dev PC's measurement of the bots' one-second budget
   (`docs/plans/room-shards.md`, "The one-second budget"); run `npm run load-test -w server` on the

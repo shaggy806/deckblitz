@@ -1,6 +1,9 @@
 # Verify speed audit (2026-11-10)
 
-Status: **items 1-4 and 7 built (2026-11-10); 5, 6 and 8 open** (`BACKLOG.md`, "Tooling / docs").
+Status: **items 1-7 built (2026-11-10); 8 and the coverage holes open** (`BACKLOG.md`, "Tooling /
+docs"). With all seven, on the same 12 cards: a full run 330 s to **~250 s**, a quick run 192 s to
+**~145 s**; the engine suite alone 117 s to 92 s (item 6). The paragraph below is where items 1-4
+and 7 alone had got to.
 
 After them, re-timed on the same 12 cards: a full run 330 s to **287 s**, now bounded by the plain
 fuzzers (item 5), not the main chain (251 s). A quick run on a cards-only change 192 s to about
