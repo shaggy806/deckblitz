@@ -13740,6 +13740,36 @@ describe("the greatest power among creatures on the battlefield", () => {
   });
 });
 
+describe("a token copy of the source, with its exceptions", () => {
+  const effectOf = (oracle_text: string) => {
+    const card = parseFace({ name: "Jace, Mirror Mage", type_line: "Legendary Planeswalker — Jace", oracle_text }, { tokenFor: (d: string) => d });
+    return card.triggered[0];
+  };
+  it("not legendary, and a starting loyalty", () => {
+    const kicked = effectOf(
+      "Kicker {2}\nWhen Jace enters, if Jace was kicked, create a token that's a copy of Jace, except it's not legendary and its starting loyalty is 1.",
+    );
+    expect(kicked.condition).toEqual({ kind: "self-kicked" });
+    expect(kicked.effect).toEqual({
+      kind: "create-token-copy",
+      of: "source",
+      count: 1,
+      who: "you",
+      exceptions: { removeSupertypes: ["legendary"], loyalty: 1 },
+    });
+    expect(effectOf("When Jace enters, create a token that's a copy of Jace, except it's not legendary.").effect).toEqual({
+      kind: "create-token-copy",
+      of: "source",
+      count: 1,
+      who: "you",
+      exceptions: { removeSupertypes: ["legendary"] },
+    });
+  });
+  it("leaves an exception it can't read to the author", () => {
+    expect(effectOf("When Jace enters, create a token that's a copy of Jace, except it has flying and its starting loyalty is 1.").effect).toBeNull();
+  });
+});
+
 describe("one target slot over players and permanents", () => {
   const targetOfLine = (oracle_text: string) => {
     const card = parseFace({ name: "Card", type_line: "Creature", oracle_text }, { tokenFor: (d: string) => d });

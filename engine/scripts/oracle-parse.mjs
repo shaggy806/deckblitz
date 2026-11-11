@@ -4600,6 +4600,13 @@ export function parseSentence(sentence, ctx) {
     const of = typeof n === "number" ? slot(m[1]) : undefined;
     if (of === undefined) return null;
     return { kind: "create-token-copy", of, count: 1, withCounters: { kind: m[3], amount: n } };
+  // "Create a token that's a copy of ~, except it's not legendary [and its
+  // starting loyalty is 1]" (Ran and Shaw; Jace, Mirror Mage): of the source,
+  // its exceptions read whole or not at all.
+  if ((m = re("create a token that's a copy of ~, except (.+)").exec(s))) {
+    const except = tokenCopyExceptOf(m[1].replace(/^it's not legendary/i, "it isn't legendary"));
+    if (except === null) return null;
+    return { kind: "create-token-copy", of: "source", count: 1, who: "you", ...except };
   }
   // A token copy of a linked source: the creature enchanted, a card exiled
   // with this (rule 607.2a), or "the exiled card" — of the cost when the cost
@@ -17863,6 +17870,10 @@ function additionOf(phrase) {
 function tokenCopyExceptOf(phrase) {
   const pt = /^(?:the token|it)(?: is|'s) (\d+)\/(\d+)$/i.exec(phrase);
   if (pt !== null) return { exceptions: { power: Number(pt[1]), toughness: Number(pt[2]) } };
+  // "…except it's not legendary and its starting loyalty is 1" (Jace, Mirror
+  // Mage): the copy's starting loyalty, a `CopyExceptions.loyalty`.
+  const loyal = /^it(?:'s not| isn't) legendary and its starting loyalty is (\d+)$/i.exec(phrase);
+  if (loyal !== null) return { exceptions: { removeSupertypes: ["legendary"], loyalty: Number(loyal[1]) } };
   if (/^it isn't legendary$/i.test(phrase)) return { exceptions: { removeSupertypes: ["legendary"] } };
   const both = /^it isn't legendary and is (.+) in addition to its other types$/i.exec(phrase);
   const also = both?.[1] ?? /^it's (.+) in addition to its other types$/i.exec(phrase)?.[1];

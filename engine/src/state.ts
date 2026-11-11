@@ -1930,6 +1930,11 @@ export interface PtModifier {
    * … with no mana cost" (rules 702.128a, 702.129a): mana value 0. Read
    * through {@link manaCostOverride}. */
   noManaCost?: true;
+  /** Its starting loyalty is this — a copy exception's "except its starting
+   * loyalty is 1" (Jace, Mirror Mage): a copiable value (rule 707.9b), so a
+   * copy of the copy has it too. Read through
+   * {@link startingLoyaltyOverride} as it enters (306.5b). */
+  startingLoyalty?: number;
   /** Its mana cost is this instead — a prototyped spell's or permanent's
    * (rule 718.3b). Read through {@link manaCostOverride}. */
   setManaCost?: string;
@@ -6652,6 +6657,12 @@ export const manaCostOverride = (object: GameObject): string | null | undefined 
   }
   return undefined;
 };
+
+/** The starting loyalty a copiable value gives it in place of its printed
+ * one (`startingLoyalty` — "except its starting loyalty is 1"), the latest
+ * such; `undefined` when it has its printed loyalty. */
+export const startingLoyaltyOverride = (object: GameObject): number | undefined =>
+  object.modifiers.findLast((m) => m.copiable === true && m.startingLoyalty !== undefined)?.startingLoyalty;
 
 export const nameOf = (object: GameObject): string => {
   // An effect that names it (Awakening of Vitu-Ghazi, Witness Protection) beats

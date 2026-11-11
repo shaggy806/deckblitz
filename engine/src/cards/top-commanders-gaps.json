@@ -2274,7 +2274,8 @@
   "filter:has-devoid",
   "replacement:as-turned-face-up-attach-aura",
   "replacement:as-turned-face-up-attach-aura",
-  "effect:target-dealt-damage-this-turn"
+  "effect:target-dealt-damage-this-turn",
+  "effect:copy-starting-loyalty"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

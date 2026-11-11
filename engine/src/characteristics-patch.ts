@@ -107,6 +107,11 @@ export type ResolvedPatch = CharacteristicsPatch<number>;
 export interface CopyExceptions<Pt = number> extends CharacteristicsPatch<Pt> {
   /** "…with no mana cost" (eternalize, embalm): its mana value is 0. */
   readonly noManaCost?: boolean;
+  /** "…and its **starting loyalty is 1**" (Jace, Mirror Mage): the loyalty
+   * the copy enters with in place of the copied planeswalker's printed
+   * loyalty (rule 306.5b). Nothing to a copy that isn't a planeswalker with
+   * a printed loyalty. */
+  readonly loyalty?: number;
   /** "…except it has **this ability**" (Thespian's Stage, Court of Vantress):
    * the ability of `card`'s definition at that index of its `activated` or
    * `triggered` list, the very ability making the copy, named by its card

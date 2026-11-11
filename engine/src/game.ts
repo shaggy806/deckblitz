@@ -480,6 +480,7 @@ import {
   faceName,
   isTokenNow,
   manaCostOverride,
+  startingLoyaltyOverride,
   permanentCount,
   phasedOutIds,
   heldThroughUntapStepOf,
@@ -1380,6 +1381,7 @@ function copyExceptionModifier(exceptions: ResolvedPatch & CopyExceptions, regis
     }),
     ...(exceptions.legendRuleOff !== undefined ? { legendRuleOff: exceptions.legendRuleOff } : {}),
     ...(exceptions.noManaCost === true ? { noManaCost: true as const } : {}),
+    ...(exceptions.loyalty !== undefined ? { startingLoyalty: exceptions.loyalty } : {}),
     untilEndOfTurn: false,
     copiable: true,
     timestamp: -1,
@@ -58923,7 +58925,16 @@ controlledBy,
             : this.enteringCounterAmount(id, object.controller, id, r.rollAsEnters.count);
         if (dice > 0) rolledAsEnters = this.rollDice(object.controller, id, r.rollAsEnters.sides, dice, 0);
       }
-      if (r.counters) {
+      // A copy whose "starting loyalty is 1" (Jace, Mirror Mage — a copiable
+      // value, rule 707.9b) enters with that many in place of the printed
+      // loyalty its card's own enters-with-loyalty says (306.5b).
+      const startingLoyalty =
+        r.counters?.kind === "loyalty" && def.loyalty !== null && def.static.includes(ability)
+          ? startingLoyaltyOverride(object)
+          : undefined;
+      if (r.counters && startingLoyalty !== undefined) {
+        addCounters("loyalty", startingLoyalty);
+      } else if (r.counters) {
         // "x" is the X it was cast with (rule 107.3m). A live amount is read
         // as it enters, never counting itself or what enters with it (Aeve,
         // Progenitor Ooze's "for each other Ooze you control").
