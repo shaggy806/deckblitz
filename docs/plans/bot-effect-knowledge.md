@@ -700,6 +700,25 @@ that makes our own spells cheaper counts the generic mana it takes off as mana a
 removal's target ranking sees these engines, and a printed drain is taken off `trackRecord` so
 it isn't counted twice.
 
+### The audit's step 5: an interaction is scored on the player it hits (2026-11-10)
+
+`scoreOutcome` weighs opponents by standings: the strongest in full, the rest averaged at
+`otherOpponents`, so a permanent of anyone but the leader counts at a quarter at four players.
+That is right for a race and wrong for an answer: Rhystic Study was countered from the leader
+and let through from anyone else. So a **counterspell, removal or a wipe** is scored on the
+opponent it was aimed at. `bot/interaction.ts` reads that off the action: a target an opponent
+controls (a permanent, or a spell on the stack) aims it at that opponent, and an effect that
+destroys, exiles, damages, returns or has sacrificed everything a filter matches aims it at
+all of them. `aimedOutcome` (`evaluate.ts`) puts beside the outcome how each player aimed at
+stood in this decision's pass, and `scoreOutcome` takes the one left furthest below that, puts
+them back at the pass's score in the standings, and subtracts what they lost at `opponent`:
+what the answer took counts in full, once (a wipe counts one board in full, not three), and
+everything else that changed is weighed as before. The priority search does this for each
+candidate and for the tie-break's lone scores; the turn planner's `value` hook does it for a
+line with such a step in it, against the same pass. A player as a target isn't an
+interaction (burn at a face is a race), nor is an attack: a softened leader for every move
+lost its bench (`deck-autopsies.md`).
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

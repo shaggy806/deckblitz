@@ -9,8 +9,9 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 5, sub-step 4** (interaction scored on the affected opponent at full weight,
-  Q4; sub-steps 1, the scenarios, 2, hand quality, and 3, the other engines, are built).
+- Next: **step 5, sub-step 5** (the sequencing rules retired, then the step's one A/B;
+  sub-steps 1, the scenarios, 2, hand quality, 3, the other engines, and 4, interaction on
+  the player it hits, are built).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
@@ -602,7 +603,7 @@ correctness or speed, is what changed.
 - [x] 1. Asymmetric scenarios (2026-11-10; `1103c8bb4`)
 - [x] 2. Hand quality, and the rules it retires (2026-11-10; `726ca9237`)
 - [x] 3. Engines that aren't draw or creature tokens (2026-11-10; `1a0be1bed`)
-- [ ] 4. Interaction scored on the affected opponent
+- [x] 4. Interaction scored on the affected opponent (2026-11-10; `8a141debe`)
 - [ ] 5. The sequencing rules retired; the A/B
 
 ### As built (2026-11-10): sub-step 1, the scenarios
@@ -754,6 +755,63 @@ quarter there, which is sub-step 4's. Gate 218 of 218. Tests: `bot-value-engines
 reads as paid as often as Rhystic Study's {1}: 1.5 points is low for the card, and it only
 just turns the level-table counter. Tax effects on opponents (Thalia, Sphere of Resistance)
 are still blank. Sub-step 4 is what makes any of this count for a player who isn't ahead.
+
+### As built (2026-11-10): sub-step 4, interaction scored on the player it hits
+
+A counterspell, removal or a wipe is scored by what it took from the opponent it was aimed
+at, in full, instead of by where that opponent stands.
+
+- **Which actions** (`engine/src/bot/interaction.ts`, new): read off the action, not the card.
+  A spell or ability with a target an opponent controls, a permanent or a spell on the stack,
+  is aimed at that opponent; one with no such target whose effect tree has `destroy-all`,
+  `exile-all`, `damage-all`, `return-to-hand-all` or a `sacrifice-all` is aimed at every
+  opponent. A player as a target is not interaction (burn at a face is a race), nor is an
+  attack.
+- **The score** (`aimedOutcome`, `scoreOutcome` in `evaluate.ts`): the outcome carries how each
+  player aimed at stood in this decision's pass (`EvalOutcome.hit`; `players` names each of
+  `theirs`). Of those, the one left furthest below the pass is put back at the pass's score
+  among the standings, and what they lost is subtracted at `opponent`. So the answer counts
+  once in full, a wipe counts one board in full and the others by standings, the result is
+  never below the plain score, and an action that took nothing scores as before.
+- **Where**: the priority search's `score` and `scoreAlone` (each against its own pass), and
+  the turn planner, whose `value` hook now takes the line's steps and the board each was made
+  from (`aimedByLine`); under `plan: "next-turn"` the line keeps that difference on top of its
+  next turn's plain value. `scenario-fit.ts` replays it: the trace hands over the outcome as
+  scored.
+
+**Where it differs from the plan.** "Removal" isn't read from the effect: any target an
+opponent controls counts, since a spell pointed at an opponent's object that takes nothing
+from them changes no score. `followUps`' `scoreFrom` is left plain (unreachable under the
+default plan, and sub-step 5 deletes it).
+
+**Scenarios.** *Counters a draw engine from a player who isn't ahead* and *counters a tax
+engine from a player who isn't ahead* move from training to the gate; both fail on
+`25aa95b54`. *Saves Counterspell from a trailing player's mana rock* still holds. No wipe
+scenario: Wrath of God was already cast at a single Grizzly Bears on a trailing board with a
+creatureless leader, so nothing there fails first (and that eagerness is worth a look in
+sub-step 5's A/B). Gate 220 of 220. Tests: `bot-interaction.test.ts`.
+
+**`bot:diff`** against `origin/main`, six four-player games, 9 of 12,755 decisions, all in
+the bot's own main phase (no counterspell came up):
+
+- Removal over a developing play (2): Abrade on dave's Emmara over a Talisman on turn 14;
+  Lightning Bolt on bob's Elsha over Shivan Devastator at X=1. Judgment calls, the first the
+  more doubtful.
+- A wipe cast (3): Gaze of Granite at X=1 over the commander Hearthhull and at X=3 over
+  Eumidian Wastewaker; Chandra's Ignition from Lathliss over Anger. The pilot's usage report
+  had sweepers cast in 0 of 10 games they could have been; whether these are right was not
+  checked board by board, and is what the step's A/B is for.
+- Targets gathered on one player (2): Swords to Plowshares at alice's Dragonhawk rather than
+  dave's Teval; Baral's Expertise at three of alice's creatures rather than two and carol's
+  commander. The fix at work: one player's loss counts in full.
+- A line (1): Basilisk Collar equipped to Lathliss before Chandra's Ignition, where the old
+  bot cast the Ignition bare. Right.
+- One attack declaration lists the same attackers in another order.
+
+**Left for later.** A triggered ability's target chosen as it goes on the stack (Ravenous
+Chupacabra) isn't in the cast action, so the creature is scored by standings. Edicts aren't
+wipes here. The A/B at the end of step 5 is the first measure of whether the freer removal
+and wipes win games.
 
 ## Housekeeping, any time
 

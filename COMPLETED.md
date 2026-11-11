@@ -3347,6 +3347,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 5, sub-step 4: an interaction is scored on the player it hits**
+  (2026-11-10; `8a141debe`; `docs/plans/bot-audit-fixes.md`, *As built*): a counterspell,
+  removal or a wipe (`bot/interaction.ts`: a target an opponent controls, or a mass effect)
+  counts what it took from the opponent it was aimed at in full, where standings counted a
+  trailing player's permanent at a quarter (`aimedOutcome` and `scoreOutcome` in
+  `evaluate.ts`), in the priority search and the turn planner. "Counters a draw engine" and
+  "counters a tax engine", each "from a player who isn't ahead", move to the gate.
 - **The bot audit's fixes, step 5, sub-step 3: engines that aren't draw or creature tokens**
   (2026-11-10; `1a0be1bed`; `docs/plans/bot-audit-fixes.md`, *As built*): the `valueEngines`
   feature prices what a permanent keeps paying a round in resource tokens (Smothering Tithe)
