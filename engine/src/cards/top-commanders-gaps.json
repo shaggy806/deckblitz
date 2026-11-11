@@ -2232,7 +2232,8 @@
   "effect:counter-targeting-spell-or-ability",
   "cost:x-spend-only-color",
   "cost:x-spend-only-color",
-  "condition:filter-attacking-your-opponents"
+  "condition:filter-attacking-your-opponents",
+  "mechanic:planar-die"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

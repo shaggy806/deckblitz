@@ -17226,6 +17226,18 @@ describe("creatures attacking your opponents and/or planeswalkers they control (
   });
 });
 
+describe("roll the planar die (Fractured Powerstone)", () => {
+  it("a roll-dice of the planar die, at sorcery speed", () => {
+    const stone = parseFace(
+      { name: "Test Stone", type_line: "Artifact", mana_cost: "{2}", oracle_text: "{T}: Add {C}.\n{T}: Roll the planar die. Activate only as a sorcery." },
+      { tokenFor: () => null },
+    );
+    expect(stone.complete).toBe(true);
+    expect(stone.activated[1].effect).toEqual({ kind: "roll-dice", sides: "planar" });
+    expect(stone.activated[1].sorcerySpeed).toBe(true);
+  });
+});
+
 describe("a floor on a spell's total cost (Trinisphere, rule 601.2f)", () => {
   it("each spell that would cost less than three mana costs three, while untapped", () => {
     const sphere = parseFace(

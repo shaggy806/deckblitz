@@ -6882,6 +6882,9 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`all creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return { kind: "modify-pt-all", filter: { type: "creature" }, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
   }
+  // "Roll the planar die" (Fractured Powerstone): nothing outside a
+  // Planechase game, which the engine doesn't play (rule 901.3).
+  if (re(`roll the planar die`).test(s)) return { kind: "roll-dice", sides: "planar" };
   // Roar of Resistance: whoever controls them, as it resolves.
   if ((m = re(`creatures attacking your opponents and/or planeswalkers they control get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return {

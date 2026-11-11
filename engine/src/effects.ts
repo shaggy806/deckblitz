@@ -6496,9 +6496,19 @@ export type EffectSpec =
        * ("create a number of Treasure tokens equal to the result" is a
        * `create-token` of `{ roll: "total" }`). The roll is kept on
        * `GameState.lastRoll`, so a step after a decision still reads it.
+       *
+       * `sides: "planar"` is "Roll the planar die" (Fractured Powerstone):
+       * the die of the Planechase variant (rule 901.3a), which only a
+       * Planechase game has (901.3). The engine plays none, so the
+       * instruction can't be performed and nothing happens (rule 101.3; the
+       * card's ruling: "In non-Planechase games, Fractured Powerstone's
+       * second ability will have no effect") — no die is thrown, no
+       * `dice-rolled` event, no draw from the random stream. It takes no
+       * `count`, `modifier`, `table` or `then`: the planar die has no
+       * numerical result (706.7).
        */
       readonly kind: "roll-dice";
-      readonly sides: number;
+      readonly sides: number | "planar";
       readonly count?: EffectAmount;
       readonly modifier?: EffectAmount;
       /** "Roll two d20 and ignore the lower roll", "ignore all but the
@@ -18495,6 +18505,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "roll-dice": {
+      // The planar die: there is none outside a Planechase game (rule 901.3),
+      // so the instruction is ignored (101.3).
+      if (spec.sides === "planar") return;
       const count = spec.count === undefined ? 1 : Math.max(0, Math.floor(amountValue(spec.count, ctx)));
       if (count === 0) return;
       // Signed: "roll a d20 and subtract the number of cards in your hand"

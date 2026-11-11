@@ -2069,7 +2069,10 @@ step; "if it's the first end step of the turn" is a `conditional` on
 
 **Rolling dice** (rule 706) is `{ kind: "roll-dice", sides, count?, modifier?, table?, then? }` (`modifier` is signed — The Deck of Many Things' "subtract the number of cards in your hand" is `{ product: [{ cardsInHand: "you" }, -1] }`, and a row with a low `min` and `max: 0` is "0 or less"; a row's `mayRollAgain: true` is its "You may roll again", Delina, Wild Mage, rule 706.3c):
 the controller rolls `count` (1 by default; 0 rolls nothing) `sides`-sided dice
-as one roll on the seeded stream. `table` is a results table (706.3a) — rows
+as one roll on the seeded stream. `sides: "planar"` alone is "**Roll the
+planar die**" (Fractured Powerstone): Planechase's die (rule 901.3), which
+no game the engine plays has, so nothing happens — no roll, no roll trigger
+(rule 101.3 and the card's ruling). `table` is a results table (706.3a) — rows
 `{ min, max?, effect }`, the first holding the result applying (no `max` is
 "N+"); `then` follows any row. Amounts read the roll: `{ roll: "total" }` is
 the result (the natural total plus `modifier`), `{ roll: "odd" }` /
