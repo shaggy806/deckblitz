@@ -4215,6 +4215,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       qualities(`Enchant creature\nEnchanted creature has protection from ${quality}. This effect doesn't remove ${spares}.`, "Enchantment — Aura").static[0];
     expect(ward("white").protection).toEqual({ colors: ["W"], doesntRemoveSource: true });
     expect(ward("the chosen color").protection).toEqual({ chosenColor: true, doesntRemoveSource: true });
+    expect(ward("the chosen color", "Auras and Equipment you control that are already attached to it").protection).toEqual({
+      chosenColor: true,
+      doesntRemoveAttached: true,
+    });
     expect(ward("each color among permanents you control").protection).toEqual({
       colorsAmong: { controlledBy: "you" },
       doesntRemoveSource: true,

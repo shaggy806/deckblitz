@@ -3446,6 +3446,17 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * instance of the same quality still removes them, and an Aura spell still
      * can't target it. */
     readonly doesntRemoveAuras?: true;
+    /** "This effect **doesn't remove Auras and Equipment you control that are
+     * already attached to it**" (rule 702.16p — Benevolent Blessing): the
+     * Auras and Equipment the static's controller controls that were on the
+     * creature when this protection started to apply, the static's own Aura
+     * among them, don't fall off as a state-based action. "Already attached"
+     * is read off timestamps: an attachment gets a new one each time it
+     * becomes attached (rule 613.7e), so one no later than the source's own
+     * was there first, and one moved off and back was not. Nothing with the
+     * quality can become attached afterwards, and another instance of the
+     * same quality removes them as normal. */
+    readonly doesntRemoveAttached?: true;
     /** "Protection from **each color among permanents you control**" (Pledge of
      * Loyalty): the colours of the permanents matching this filter, from the
      * static's controller's side, as they are now. */

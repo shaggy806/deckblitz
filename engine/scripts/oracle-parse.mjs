@@ -15637,7 +15637,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     // The same with colours (White Ward, Pentarch Ward, Pledge of Loyalty), and
     // every Aura spared (Spectra Ward).
     if (
-      (m = /^Enchanted creature (?:gets ([+-]\d+)\/([+-]\d+) and )?has protection from (white|blue|black|red|green|the chosen color|each color|each color among permanents you control)\. This effect doesn't remove (this Aura|~|Auras)\.$/.exec(line))
+      (m = /^Enchanted creature (?:gets ([+-]\d+)\/([+-]\d+) and )?has protection from (white|blue|black|red|green|the chosen color|each color|each color among permanents you control)\. This effect doesn't remove (this Aura|~|Auras|Auras and Equipment you control that are already attached to it)\.$/.exec(line))
     ) {
       out.static.push({
         affects: { scope: "attached" },
@@ -15650,7 +15650,12 @@ function parseFaceAsWritten(face, ctx = {}) {
               : m[3] === "each color among permanents you control"
                 ? { colorsAmong: { controlledBy: "you" } }
                 : { colors: [COLOR_WORD[m[3]]] }),
-          ...(m[4] === "Auras" ? { doesntRemoveAuras: true } : { doesntRemoveSource: true }),
+          // "… that are already attached to it" (rule 702.16p — Benevolent Blessing).
+          ...(m[4] === "Auras"
+            ? { doesntRemoveAuras: true }
+            : m[4].startsWith("Auras and Equipment")
+              ? { doesntRemoveAttached: true }
+              : { doesntRemoveSource: true }),
         },
         text: printed(raw),
       });

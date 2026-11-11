@@ -5631,7 +5631,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   chosen color**", the colour the source named as it entered (`chooseOnEnter`
   over the five — Flickering Ward), `chosenCardType` "from the chosen card
   type" (`chooseOnEnter: [...CARD_TYPE_CHOICES]` — Serra's Emissary);
-  `colorsAmong` is "each color among permanents you control" (a filter, Pledge of Loyalty); `doesntRemoveAuras` is "This effect doesn't remove Auras", every one of them (Spectra Ward); `doesntRemoveSource` is "This effect
+  `colorsAmong` is "each color among permanents you control" (a filter, Pledge of Loyalty); `doesntRemoveAuras` is "This effect doesn't remove Auras", every one of them (Spectra Ward); `doesntRemoveAttached` is "This effect doesn't remove Auras and Equipment you control that are already attached to it" (rule 702.16p — Benevolent Blessing: its controller's attachments on the creature no later than the Aura itself, by timestamp, rule 613.7e; nothing of the quality can become attached afterwards); `doesntRemoveSource` is "This effect
   doesn't remove this Aura" (rule 702.16n): that instance doesn't make its own
   Aura fall off, though it stops everything else and another instance of the
   same colour or card type removes the Aura as normal (Tattoo Ward). Granting

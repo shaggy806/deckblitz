@@ -1632,8 +1632,10 @@ export interface Characteristics {
       readonly otherColors: ReadonlySet<Color>;
       readonly otherTypes: ReadonlySet<CardType>;
       readonly instances: readonly {
-        /** The Aura it spares, or `"all"` of them (Spectra Ward). */
-        readonly aura: ObjectId | "all";
+        /** The Aura it spares, or `"all"` of them (Spectra Ward), or the
+         * Auras and Equipment `controller` controls that became attached no
+         * later than timestamp `by` (rule 702.16p — Benevolent Blessing). */
+        readonly aura: SparedAttachments;
         readonly colors: readonly Color[];
         readonly types: readonly CardType[];
       }[];
@@ -1702,6 +1704,12 @@ export function chosenProtectionQualities(
   return { colors, types };
 }
 
+/** What an instance of protection that "doesn't remove" attachments spares:
+ * one Aura, `"all"` Auras (rule 702.16n), or the Auras and Equipment
+ * `controller` controls that became attached no later than timestamp `by`
+ * (rule 702.16p). */
+export type SparedAttachments = ObjectId | "all" | { readonly controller: PlayerId; readonly by: number };
+
 /** The players a protection from players names (rule 702.16k): "each of your
  * opponents", `source`'s controller's as things are now, or the player chosen
  * for `source` as it entered. Shared by a permanent's protection and a
@@ -1733,6 +1741,7 @@ function staticProtection(
     p.chosenCardType !== true &&
     p.doesntRemoveSource !== true &&
     p.doesntRemoveAuras !== true &&
+    p.doesntRemoveAttached !== true &&
     p.colorsAmong === undefined &&
     p.filter === undefined &&
     p.fromPlayers === undefined &&
@@ -1765,6 +1774,11 @@ function staticProtection(
     ...(p.fromPlayers !== undefined ? { players: protectionPlayers(state, p.fromPlayers, source) } : {}),
     ...(p.doesntRemoveSource === true ? { sparesAura: source.id } : {}),
     ...(p.doesntRemoveAuras === true ? { sparesAura: "all" as const } : {}),
+    // "Already attached": no later than this protection began, which is the
+    // source's own timestamp (rules 613.7e, 702.16p).
+    ...(p.doesntRemoveAttached === true
+      ? { sparesAura: { controller: source.controller, by: source.timestamp } }
+      : {}),
   };
 }
 
@@ -5143,8 +5157,9 @@ interface AppliedEffect {
     filterSource?: ObjectId;
     /** Protection from these players (702.16k). */
     players?: readonly PlayerId[];
-    /** The Aura this instance doesn't remove (702.16n). */
-    sparesAura?: ObjectId | "all";
+    /** The Aura this instance doesn't remove (702.16n), or the attachments
+     * already there (702.16p). */
+    sparesAura?: SparedAttachments;
   } | null;
   /** "Hexproof from …" it grants — the same shape as `protection`, with the
    * qualifiers of a printed "can't be the target of …". */
@@ -5749,7 +5764,7 @@ function assertSameCharacteristics(
       protFilters: c.protectionFrom.filters.map((f) => JSON.stringify(f)).sort(),
       protBoundFilters: c.protectionFrom.boundFilters.map((f) => JSON.stringify(f)).sort(),
       protPlayers: [...c.protectionFrom.players].sort(),
-      protSparing: c.protectionFrom.sparing === undefined ? null : c.protectionFrom.sparing.instances.map((i) => `${i.aura}:${[...i.colors].sort().join("")}:${[...i.types].sort().join("")}`).sort(),
+      protSparing: c.protectionFrom.sparing === undefined ? null : c.protectionFrom.sparing.instances.map((i) => `${typeof i.aura === "string" ? i.aura : JSON.stringify(i.aura)}:${[...i.colors].sort().join("")}:${[...i.types].sort().join("")}`).sort(),
       hexColors: [...c.hexproofFrom.colors].sort(),
       hexTypes: [...c.hexproofFrom.types].sort(),
       hexFilters: c.hexproofFrom.filters.map((f) => JSON.stringify(f)).sort(),
@@ -5828,7 +5843,7 @@ function computeCharacteristicsUncached(
   const protBoundFilters: { filter: CardFilter; source: ObjectId }[] = [];
   const protPlayers = new Set<PlayerId>();
   // 702.16n's instances, and every other instance's qualities (`sparing`).
-  const protSparing: { aura: ObjectId | "all"; colors: readonly Color[]; types: readonly CardType[] }[] = [];
+  const protSparing: { aura: SparedAttachments; colors: readonly Color[]; types: readonly CardType[] }[] = [];
   const protOtherColors = new Set<Color>();
   const protOtherTypes = new Set<CardType>();
   const hexColors = new Set<Color>();

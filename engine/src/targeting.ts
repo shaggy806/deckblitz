@@ -190,8 +190,9 @@ function abilitySourceMatches(
 }
 
 /** Does `target`'s protection (rule 702.16) stop `source` from affecting it?
- * `enchanting` is the Aura whose attachment is the question (702.16c): an
- * instance that "doesn't remove" that Aura is left out for it (702.16n). `by`
+ * `enchanting` is the Aura or Equipment whose attachment is the question
+ * (702.16c-d): an instance that "doesn't remove" it is left out for it
+ * (702.16n, 702.16p). `by`
  * is who controls the spell or ability doing it, when that's known and needn't
  * be its source's controller (702.16k): the one targeting, the Aura's. */
 export function protectionBlocks(
@@ -209,8 +210,24 @@ export function protectionBlocks(
   if (enchanting !== undefined && sparing !== undefined) {
     const colors = new Set(sparing.otherColors);
     const types = new Set(sparing.otherTypes);
+    const attachment = state.objects[enchanting];
+    const spared = (aura: (typeof sparing.instances)[number]["aura"]): boolean => {
+      // "Doesn't remove Auras" (Spectra Ward): an Equipment still falls off.
+      if (aura === "all") {
+        return attachment !== undefined && hasSubtype(effectiveSubtypes(state, registry, attachment), "Aura");
+      }
+      if (typeof aura === "string") return aura === enchanting;
+      // "Already attached" (rule 702.16p): on this permanent since no later
+      // than the protection began, and that player's.
+      return (
+        attachment !== undefined &&
+        attachment.attachedTo === target &&
+        attachment.controller === aura.controller &&
+        attachment.timestamp <= aura.by
+      );
+    };
     for (const instance of sparing.instances) {
-      if (instance.aura !== "all" && instance.aura !== enchanting) {
+      if (!spared(instance.aura)) {
         for (const c of instance.colors) colors.add(c);
         for (const t of instance.types) types.add(t);
       }

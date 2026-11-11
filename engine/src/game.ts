@@ -15318,7 +15318,9 @@ export class Game {
     // equip (rule 301.5c), so it doesn't move there (701.3b) and falls off
     // one that stops qualifying (704.5n).
     if (!this.attachOnlyToAllows(equipment, host)) return false;
-    return !protectionBlocks(this.state, this.registry, host, this.permanentSource(equipment));
+    // Named as the attachment in question, for an instance of protection that
+    // doesn't remove what was already attached (rule 702.16p).
+    return !protectionBlocks(this.state, this.registry, host, this.permanentSource(equipment), equipment);
   }
 
   /** Whether `id` has reconfigure (rule 702.151a) — one of its two abilities,
