@@ -908,8 +908,10 @@ export interface ActivatedAbility {
     readonly filter: CardFilter;
     /** `"target-colors"`: "{1} less for each color of the creature it
      * targets" (Dragonfire Blade), read as the targets are chosen; offered
-     * for the targets it's affordable with. */
-    readonly reduceGeneric: number | "target-colors";
+     * for the targets it's affordable with. `"target-power"`: "{X} less,
+     * where X is the power of the creature it targets" (Belt of Giant
+     * Strength), the same way; a power below 0 takes nothing off. */
+    readonly reduceGeneric: number | "target-colors" | "target-power";
     readonly count?: number;
   };
   /** The least X the ability may be activated with — Ruthless Technomancer's

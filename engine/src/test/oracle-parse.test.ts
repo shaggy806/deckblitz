@@ -11270,6 +11270,27 @@ describe("a static acting on a player", () => {
     });
   });
 
+  it("reads an equip priced by the creature it targets, and a fixed base P/T on the host", () => {
+    const belt = face(
+      "Artifact — Equipment",
+      "Equipped creature has base power and toughness 10/10.\nEquip {10}. This ability costs {X} less to activate, where X is the power of the creature it targets.",
+    );
+    expect(belt.complete).toBe(true);
+    expect(belt.static[0]).toMatchObject({ affects: { scope: "attached" }, setBasePt: { power: 10, toughness: 10 } });
+    expect(belt.activated[0]).toMatchObject({
+      cost: { mana: "{10}", tap: false },
+      targets: ["creature-you-control"],
+      targetCostReduction: { filter: {}, reduceGeneric: "target-power" },
+      effect: { kind: "attach", target: 0 },
+      sorcerySpeed: true,
+    });
+    const blade = face(
+      "Artifact — Equipment",
+      "Equip {4}. This ability costs {1} less to activate for each color of the creature it targets.",
+    );
+    expect(blade.activated[0].targetCostReduction).toEqual({ filter: {}, reduceGeneric: "target-colors" });
+  });
+
   it("reads a player becoming a target, and the first time each turn by anyone (rule 115.7)", () => {
     const amulet = face(
       "Artifact",

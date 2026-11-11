@@ -14970,6 +14970,22 @@ function parseFaceAsWritten(face, ctx = {}) {
       });
       continue;
     }
+    // "Equip {10}. This ability costs {X} less to activate, where X is the
+    // power of the creature it targets." (Belt of Giant Strength), "… costs
+    // {1} less to activate for each color of the creature it targets."
+    // (Dragonfire Blade): a `targetCostReduction` read off the target.
+    if ((m = /^Equip ((?:\{[^}]+\})+)\. This ability costs (?:(\{X\}) less to activate, where X is the power of the creature it targets|\{1\} less to activate for each color of the creature it targets)\.$/.exec(line))) {
+      out.activated.push({
+        cost: { mana: m[1], tap: false },
+        targets: ["creature-you-control"],
+        targetCostReduction: { filter: {}, reduceGeneric: m[2] !== undefined ? "target-power" : "target-colors" },
+        effect: { kind: "attach", target: 0 },
+        resolve: null,
+        text: printed(raw),
+        sorcerySpeed: true,
+      });
+      continue;
+    }
     // "Equip commander {3}" (rule 702.6a's "Equip [quality]"): a commander you
     // control, whoever owns it.
     if ((m = /^Equip commander ((?:\{[^}]+\})+)$/.exec(line))) {
@@ -16249,6 +16265,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     // chosen type" (Riders of Gavony): read off this permanent.
     if (out.chooseCreatureTypeOnEnter === true && (m = /^([A-Z]\w+) creatures you control have protection from creatures of the chosen type\.$/.exec(line))) {
       out.static.push({ affects: { scope: "creatures-you-control", subtype: m[1] }, protection: { filter: { type: "creature", ofChosenType: true } }, text: printed(raw) });
+      continue;
+    }
+    // "Equipped creature has base power and toughness 10/10." (Belt of Giant
+    // Strength): a layer-7b set on the host, alone on its line.
+    if ((m = /^(Equipped|Enchanted) creature has base power and toughness (\d+)\/(\d+)\.$/.exec(line))) {
+      out.static.push({ affects: { scope: "attached" }, setBasePt: { power: Number(m[2]), toughness: Number(m[3]) }, text: printed(raw) });
       continue;
     }
     // "Equipped creature has base power and toughness X/X, where X is your

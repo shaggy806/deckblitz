@@ -4548,7 +4548,12 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   the targets are chosen (rule 601.2f): keep the printed targets as printed
   — never split the ability by target case, which would make a target that
   stops matching in response illegal. An offer only affordable with it
-  offers only the targets that earn it.
+  offers only the targets that earn it. `reduceGeneric` may read the target
+  instead, with `filter: {}`: `"target-colors"` is "{1} less for each color
+  of the creature it targets" (Dragonfire Blade), `"target-power"` "{X}
+  less, where X is the power of the creature it targets" (Belt of Giant
+  Strength; a power below 0 takes nothing off) — offered for the targets
+  it's affordable on.
 
 ---
 

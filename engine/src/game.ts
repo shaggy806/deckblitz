@@ -16519,10 +16519,13 @@ export class Game {
     );
   }
 
-  /** "{1} less for each color of the creature it targets" (rule 601.2f): the
-   * colors of the target chosen, or, while it's only offered, of the most
-   * colorful legal one. */
-  private targetColorReduction(
+  /** A reduction read off the target (rule 601.2f, the cost fixed once the
+   * targets are chosen): "{1} less for each color of the creature it
+   * targets", "{X} less, where X is the power of the creature it targets" —
+   * of the target chosen, or, while it's only offered, of the legal one that
+   * takes the most off. Never below 0: a negative power reduces nothing. */
+  private targetReadReduction(
+    read: "target-colors" | "target-power",
     ability: ActivatedAbility,
     player: PlayerId,
     sourceId: ObjectId,
@@ -16532,7 +16535,8 @@ export class Game {
     let most = 0;
     for (const t of named) {
       if (t?.kind !== "object") continue;
-      most = Math.max(most, computeCharacteristics(this.state, this.registry, t.object).colors.size);
+      const chars = computeCharacteristics(this.state, this.registry, t.object);
+      most = Math.max(most, read === "target-colors" ? chars.colors.size : (chars.power ?? 0));
     }
     return most;
   }
@@ -16580,7 +16584,7 @@ export class Game {
       : options.map((slot) => [...slot]);
     const reduction = ability.targetCostReduction;
     if (reduction === undefined) return this.targetingSourceOptions(ability, player, sourceId, all, fullPriceOk, affordableWith);
-    if (reduction.reduceGeneric === "target-colors") return all.map((slot) => slot.filter((ref) => affordableWith([ref])));
+    if (typeof reduction.reduceGeneric !== "number") return all.map((slot) => slot.filter((ref) => affordableWith([ref])));
     const earning = all.map((slot) =>
       slot.filter(
         (ref) =>
@@ -23538,7 +23542,7 @@ export class Game {
             );
       if (earned) {
         const off = ability.targetCostReduction.reduceGeneric;
-        generic -= off === "target-colors" ? this.targetColorReduction(ability, player, sourceId, targets) : off;
+        generic -= typeof off === "number" ? off : this.targetReadReduction(off, ability, player, sourceId, targets);
       }
     }
     generic -= mod.reduceGeneric;
