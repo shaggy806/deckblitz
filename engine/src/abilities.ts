@@ -2264,8 +2264,17 @@ export type TriggerKind =
        * `"you"` is this permanent's controller — Mikaeus, the Unhallowed's
        * "whenever a Human deals damage to you". `"self"` is this permanent
        * itself — Vraska the Unseen's "whenever a creature deals combat damage
-       * to Vraska". */
-      readonly to?: "player" | "opponent" | "you" | "permanent" | "creature" | "planeswalker" | "self";
+       * to Vraska". `"spell-caster"`, on an ability a spell grants, is the
+       * player who cast that spell — Hellish Rebuke's "deals damage to the
+       * player who cast Hellish Rebuke": the grant writes that player into
+       * `spellCaster` as the spell resolves. */
+      readonly to?: "player" | "opponent" | "you" | "permanent" | "creature" | "planeswalker" | "self" | "spell-caster";
+      /** With `to: "spell-caster"`, who cast the granting spell. Written by
+       * `grant-triggered` and `grant-triggered-all` as they resolve, never by
+       * a card: the caster stays that player though another came to control
+       * the spell (rule 112.2), and a copy that wasn't cast (rule 707.10)
+       * has none, so its ability never triggers (the rulings). */
+      readonly spellCaster?: PlayerId;
       /** A filter on a *permanent* recipient ("deals damage to a creature an
        * opponent controls"). Never matches a player. */
       readonly toFilter?: CardFilter;

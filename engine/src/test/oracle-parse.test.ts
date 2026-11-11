@@ -18752,3 +18752,25 @@ describe("the next loyalty ability copied", () => {
     });
   });
 });
+
+describe("a mass grant of a quoted triggered ability", () => {
+  it("reads Hellish Rebuke: damage to the player who cast it", () => {
+    const face = parseFace({
+      name: "Test Rebuke",
+      type_line: "Instant",
+      oracle_text:
+        'Until end of turn, permanents your opponents control gain "When this permanent deals damage to the player who cast Test Rebuke, sacrifice this permanent. You lose 2 life."',
+    });
+    expect(face.complete).toBe(true);
+    expect(face.effect).toMatchObject({
+      kind: "grant-triggered-all",
+      filter: { controlledBy: "opponent" },
+      duration: "end-of-turn",
+      ability: {
+        trigger: { on: "deals-damage", who: "self", to: "spell-caster" },
+        targets: [],
+        effect: { kind: "sequence", effects: [{ kind: "sacrifice-source" }, { kind: "lose-life", amount: 2 }] },
+      },
+    });
+  });
+});

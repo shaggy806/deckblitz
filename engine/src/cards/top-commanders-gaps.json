@@ -2307,7 +2307,8 @@
   "static:keywords-from-exiled-with-source",
   "amount:exiled-card-mana-value",
   "amount:exiled-card-mana-value",
-  "effect:copy-next-loyalty-ability"
+  "effect:copy-next-loyalty-ability",
+  "trigger:granted-deals-damage-to-spell-caster"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

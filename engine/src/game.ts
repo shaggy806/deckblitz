@@ -33491,8 +33491,11 @@ export class Game {
       if (spec.toFilter !== undefined) return false;
       if (spec.to === "opponent" && target.player === self.controller) return false;
       if (spec.to === "you" && target.player !== self.controller) return false;
+      // "The player who cast [the granting spell]": none for a copy that
+      // wasn't cast, which then never triggers.
+      if (spec.to === "spell-caster" && target.player !== spec.spellCaster) return false;
     } else {
-      if (spec.to === "player" || spec.to === "opponent" || spec.to === "you") return false;
+      if (spec.to === "player" || spec.to === "opponent" || spec.to === "you" || spec.to === "spell-caster") return false;
       // "Deals combat damage to Vraska": the ability's own source.
       if (spec.to === "self" && target.object !== self.id) return false;
       if (spec.to === "creature" || spec.to === "planeswalker") {
@@ -38749,8 +38752,9 @@ controlledBy,
         return refs.roll ?? last?.roll;
       },
       grantTriggered: (target, ability, duration) =>
-        this.grantTriggered(target, ability, lastingHere(duration)),
-      grantTriggeredAll: (filter, ability, duration) => {
+        this.grantTriggered(target, this.boundToSpellCaster(ability, source), lastingHere(duration)),
+      grantTriggeredAll: (filter, unbound, duration) => {
+        const ability = this.boundToSpellCaster(unbound, source);
         const timestamp = this.freshTimestamp();
         const kept = lastingHere(duration);
         for (const id of this.battlefieldMatching(controller, filter)) {
@@ -47123,6 +47127,22 @@ controlledBy,
       const current = this.state.objects[id].counters[counterKind] ?? 0;
       if (current > 0) this.addCounter({ kind: "object", object: id }, counterKind, current, false, you);
     }
+  }
+
+  /** A triggered ability about to be granted, with "the player who cast
+   * [this spell]" settled (a `deals-damage` trigger's `to: "spell-caster"`):
+   * who cast the resolving spell `source`, whoever controls it now (rule
+   * 112.2). A copy that wasn't cast (rule 707.10) and an ability's source
+   * name nobody, and the granted ability then never triggers. */
+  private boundToSpellCaster(ability: TriggeredAbility, source: ObjectId): TriggeredAbility {
+    const trigger = ability.trigger;
+    if (trigger.on !== "deals-damage" || trigger.to !== "spell-caster") return ability;
+    const spell = this.state.objects[source];
+    const { spellCaster: _unset, ...rest } = trigger;
+    if (spell === undefined || spell.zone !== "stack" || spell.castFrom === undefined) {
+      return { ...ability, trigger: rest };
+    }
+    return { ...ability, trigger: { ...rest, spellCaster: spellCaster(spell) } };
   }
 
   /** Attach a triggered ability to one permanent — see the

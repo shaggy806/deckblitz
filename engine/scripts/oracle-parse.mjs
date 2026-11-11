@@ -2096,6 +2096,13 @@ export function parseTrigger(clause) {
     ];
   }
   if (c === "Whenever ~ deals damage") return [{ on: "deals-damage", who: "self" }];
+  // "…to an opponent" (Arm with Aether's granted ability), "…to the player who
+  // cast ~" (Hellish Rebuke's, where `massQuotedTriggerOf` reads it: the
+  // granting spell's name and "this permanent" are both ~ by then).
+  if ((m = /^When(?:ever)? ~ deals damage to (an opponent|a player|the player who cast ~)$/.exec(c))) {
+    const to = { "an opponent": "opponent", "a player": "player", "the player who cast ~": "spell-caster" }[m[1]];
+    return [{ on: "deals-damage", who: "self", to }];
+  }
   if (c === "Whenever ~ is dealt damage") return [{ on: "dealt-damage", who: "self" }];
   // "N or more" dealt at once, on either side (`atLeast`).
   if ((m = /^Whenever ~ deals (\d+) or more damage(?: to (an opponent|a player))?$/.exec(c))) {
@@ -8663,6 +8670,31 @@ function becomesAllTypesOf(text) {
   };
 }
 
+// "Until end of turn, creatures you control gain "Whenever …"" (Arm with
+// Aether), "permanents your opponents control gain "When this permanent deals
+// damage to the player who cast ~, …"" (Hellish Rebuke): `grant-triggered-all`,
+// the quoted ability read as a face of its own. "The player who cast ~" is the
+// trigger's `to: "spell-caster"`, which the grant settles as it resolves.
+// `null` for anything else.
+function massQuotedTriggerOf(text) {
+  const m = /^Until end of turn, (creatures|permanents) (you control|your opponents control) gain "(.+)"$/s.exec(text);
+  if (m === null) return null;
+  const one = m[1] === "creatures" ? "creature" : "permanent";
+  const ability = m[3].replace(/~/g, "this creature");
+  const inner = parseFace({ name: "Quoted Ability", type_line: "Creature", oracle_text: ability });
+  if (inner.complete !== true || inner.triggered.length !== 1 || inner.static.length !== 0 || inner.activated.length !== 0) return null;
+  const granted = { ...inner.triggered[0], text: m[3] };
+  return {
+    kind: "grant-triggered-all",
+    filter: {
+      ...(one === "creature" ? { type: "creature" } : {}),
+      controlledBy: m[2] === "you control" ? "you" : "opponent",
+    },
+    ability: granted,
+    duration: "end-of-turn",
+  };
+}
+
 /**
  * "~ becomes a 3/3 red and green Elemental creature with "Whenever …"": `become`
  * with the whole ability granted beside it (`grant-triggered`, `grant-static`,
@@ -9067,6 +9099,8 @@ export function parseEffect(text, outer) {
   let skip = 0;
   const becomes = becomesWithAbilitiesOf(text) ?? becomesAllTypesOf(text);
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
+  const massGrant = massQuotedTriggerOf(text);
+  if (massGrant !== null) return { effect: massGrant, todo: [], hints: [] };
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
   const tempting = temptingOfferOf(text, outer);
