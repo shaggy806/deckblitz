@@ -32,6 +32,13 @@ describe('tooltips for a card', () => {
   it('explains a keyword the text grants, and tells storm from Dragonstorm', () => {
     expect(tipsFor([], 'Target creature gains first strike until end of turn.').map((t) => t.name)).toEqual(['First strike'])
     expect(tipsFor([], 'Search for Breaching Dragonstorm.')).toEqual([])
+    // A token's keywords aren't the card's.
+    expect(
+      tipsFor([], 'At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying.'),
+    ).toEqual([])
+    expect(
+      tipsFor([], 'Create two 1/1 white Spirit creature tokens with flying. Target creature gains lifelink until end of turn.').map((t) => t.name),
+    ).toEqual(['Lifelink'])
     expect(tipsFor([], 'This creature is equipped.')).toEqual([])
   })
 })

@@ -364,8 +364,12 @@ export function tipsFor(keywords: readonly Keyword[], text: string): Tip[] {
     tips.push(tip)
   }
   for (const keyword of keywords) add({ key: keyword, keyword, ...KEYWORD_REMINDER[keyword] })
+  // A keyword the text gives a token it makes ("create a 5/5 red Dragon
+  // creature token with flying") isn't one this card has or grants: its box,
+  // with the keyword's icon, read as the card's own (Dragonmaster Outcast).
+  const ownText = text.replace(/\b(tokens?) with [^.\n"“]*/gi, '$1')
   for (const { keyword, pattern } of ENGINE_TERMS) {
-    if (pattern.test(text)) add({ key: keyword, keyword, ...KEYWORD_REMINDER[keyword] })
+    if (pattern.test(ownText)) add({ key: keyword, keyword, ...KEYWORD_REMINDER[keyword] })
   }
   for (const term of TERMS) {
     if (term.pattern.test(text)) add({ key: term.key, name: term.name, text: term.text })
