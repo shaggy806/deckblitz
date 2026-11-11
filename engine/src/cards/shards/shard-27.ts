@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAIMBot from "../pool/a-i-m-bot.js";
 import _poolAbhorrentOculus from "../pool/abhorrent-oculus.js";
 import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brute.js";
+import _poolAbstruseArchaic from "../pool/abstruse-archaic.js";
 import _poolAbzanGuide from "../pool/abzan-guide.js";
 import _poolAcidicSliver from "../pool/acidic-sliver.js";
 import _poolAcolyteOfTheInferno from "../pool/acolyte-of-the-inferno.js";
@@ -987,6 +988,7 @@ const shard: CardShard = {
     _poolAIMBot,
     _poolAbhorrentOculus,
     _poolAbominationIrradiatedBrute,
+    _poolAbstruseArchaic,
     _poolAbzanGuide,
     _poolAcidicSliver,
     _poolAcolyteOfTheInferno,

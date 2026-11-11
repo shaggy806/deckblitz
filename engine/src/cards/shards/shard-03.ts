@@ -666,6 +666,7 @@ import _poolShelteredThicket from "../pool/sheltered-thicket.js";
 import _poolSheoldredWhisperingOne from "../pool/sheoldred-whispering-one.js";
 import _poolSheoldredsHeadcleaver from "../pool/sheoldreds-headcleaver.js";
 import _poolShimmerdriftVale from "../pool/shimmerdrift-vale.js";
+import _poolShimmeringGlasskite from "../pool/shimmering-glasskite.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShockmawDragon from "../pool/shockmaw-dragon.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
@@ -797,6 +798,7 @@ import _poolTheGaffer from "../pool/the-gaffer.js";
 import _poolTheGrandEvolution from "../pool/the-grand-evolution.js";
 import _poolTheImmortalSun from "../pool/the-immortal-sun.js";
 import _poolTheIncredibleHulk from "../pool/the-incredible-hulk.js";
+import _poolThePeregrineDynamo from "../pool/the-peregrine-dynamo.js";
 import _poolTheScorpionGod from "../pool/the-scorpion-god.js";
 import _poolTheSpearOfBashenga from "../pool/the-spear-of-bashenga.js";
 import _poolTheUnspeakable from "../pool/the-unspeakable.js";
@@ -1591,6 +1593,7 @@ const shard: CardShard = {
     _poolSheoldredWhisperingOne,
     _poolSheoldredsHeadcleaver,
     _poolShimmerdriftVale,
+    _poolShimmeringGlasskite,
     _poolShivanBranchBurner,
     _poolShockmawDragon,
     _poolShopkeepersBane,
@@ -1722,6 +1725,7 @@ const shard: CardShard = {
     _poolTheGrandEvolution,
     _poolTheImmortalSun,
     _poolTheIncredibleHulk,
+    _poolThePeregrineDynamo,
     _poolTheScorpionGod,
     _poolTheSpearOfBashenga,
     _poolTheUnspeakable,

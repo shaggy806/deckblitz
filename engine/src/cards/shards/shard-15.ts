@@ -782,6 +782,7 @@ import _poolStrengthOfWill from "../pool/strength-of-will.js";
 import _poolStripedBears from "../pool/striped-bears.js";
 import _poolSulfurousSprings from "../pool/sulfurous-springs.js";
 import _poolSultaiBanner from "../pool/sultai-banner.js";
+import _poolSummonsOfSaruman from "../pool/summons-of-saruman.js";
 import _poolSunhomeGuildmage from "../pool/sunhome-guildmage.js";
 import _poolSuperMutantScavenger from "../pool/super-mutant-scavenger.js";
 import _poolSupplyDrop from "../pool/supply-drop.js";
@@ -1740,6 +1741,7 @@ const shard: CardShard = {
     _poolStripedBears,
     _poolSulfurousSprings,
     _poolSultaiBanner,
+    _poolSummonsOfSaruman,
     _poolSunhomeGuildmage,
     _poolSuperMutantScavenger,
     _poolSupplyDrop,

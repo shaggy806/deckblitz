@@ -97,6 +97,7 @@ import _poolBarrenMoor from "../pool/barren-moor.js";
 import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
 import _poolBenalishEmissary from "../pool/benalish-emissary.js";
 import _poolBenevolentAncestor from "../pool/benevolent-ancestor.js";
+import _poolBenevolentBlessing from "../pool/benevolent-blessing.js";
 import _poolBenthicBehemoth from "../pool/benthic-behemoth.js";
 import _poolBeornTheFierce from "../pool/beorn-the-fierce.js";
 import _poolBetrayalOfFlesh from "../pool/betrayal-of-flesh.js";
@@ -1149,6 +1150,7 @@ const shard: CardShard = {
     _poolBattleflySwarm,
     _poolBenalishEmissary,
     _poolBenevolentAncestor,
+    _poolBenevolentBlessing,
     _poolBenthicBehemoth,
     _poolBeornTheFierce,
     _poolBetrayalOfFlesh,

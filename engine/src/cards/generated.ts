@@ -87,6 +87,7 @@ import _poolAbstergoEntertainment from "./pool/abstergo-entertainment.js";
 import _poolAbstractPaintmage from "./pool/abstract-paintmage.js";
 import _poolAbstractPerformance from "./pool/abstract-performance.js";
 import _poolAbstruseAppropriation from "./pool/abstruse-appropriation.js";
+import _poolAbstruseArchaic from "./pool/abstruse-archaic.js";
 import _poolAbstruseInterference from "./pool/abstruse-interference.js";
 import _poolAbuJafar from "./pool/abu-jafar.js";
 import _poolAbueloAncestralEcho from "./pool/abuelo-ancestral-echo.js";
@@ -2354,6 +2355,7 @@ import _poolBenedictionOfMoons from "./pool/benediction-of-moons.js";
 import _poolBenefactionOfRhonas from "./pool/benefaction-of-rhonas.js";
 import _poolBenefactorsDraught from "./pool/benefactors-draught.js";
 import _poolBenevolentAncestor from "./pool/benevolent-ancestor.js";
+import _poolBenevolentBlessing from "./pool/benevolent-blessing.js";
 import _poolBenevolentBodyguard from "./pool/benevolent-bodyguard.js";
 import _poolBenevolentGeist from "./pool/benevolent-geist.js";
 import _poolBenevolentHydra from "./pool/benevolent-hydra.js";
@@ -4159,6 +4161,7 @@ import _poolCemeteryGate from "./pool/cemetery-gate.js";
 import _poolCemeteryGatekeeper from "./pool/cemetery-gatekeeper.js";
 import _poolCemeteryIlluminator from "./pool/cemetery-illuminator.js";
 import _poolCemeteryProtector from "./pool/cemetery-protector.js";
+import _poolCemeteryProwler from "./pool/cemetery-prowler.js";
 import _poolCemeteryPuca from "./pool/cemetery-puca.js";
 import _poolCemeteryReaper from "./pool/cemetery-reaper.js";
 import _poolCemeteryRecruitment from "./pool/cemetery-recruitment.js";
@@ -9345,6 +9348,7 @@ import _poolFinalWordPhantom from "./pool/final-word-phantom.js";
 import _poolFinaleOfDevastation from "./pool/finale-of-devastation.js";
 import _poolFinaleOfEternity from "./pool/finale-of-eternity.js";
 import _poolFinaleOfGlory from "./pool/finale-of-glory.js";
+import _poolFinaleOfPromise from "./pool/finale-of-promise.js";
 import _poolFinaleOfRevelation from "./pool/finale-of-revelation.js";
 import _poolFinality from "./pool/finality.js";
 import _poolFinchFormation from "./pool/finch-formation.js";
@@ -14648,6 +14652,7 @@ import _poolKioraTheRisingTide from "./pool/kiora-the-rising-tide.js";
 import _poolKiorasDambreaker from "./pool/kioras-dambreaker.js";
 import _poolKiorasDismissal from "./pool/kioras-dismissal.js";
 import _poolKiorasFollower from "./pool/kioras-follower.js";
+import _poolKiraGreatGlassSpinner from "./pool/kira-great-glass-spinner.js";
 import _poolKirdApe from "./pool/kird-ape.js";
 import _poolKirdChieftain from "./pool/kird-chieftain.js";
 import _poolKiriOnna from "./pool/kiri-onna.js";
@@ -23863,6 +23868,7 @@ import _poolShimmercreep from "./pool/shimmercreep.js";
 import _poolShimmerdriftVale from "./pool/shimmerdrift-vale.js";
 import _poolShimmeringBarrier from "./pool/shimmering-barrier.js";
 import _poolShimmeringEfreet from "./pool/shimmering-efreet.js";
+import _poolShimmeringGlasskite from "./pool/shimmering-glasskite.js";
 import _poolShimmeringGrotto from "./pool/shimmering-grotto.js";
 import _poolShimmeringMirage from "./pool/shimmering-mirage.js";
 import _poolShimmeringWings from "./pool/shimmering-wings.js";
@@ -26289,6 +26295,7 @@ import _poolSummonersPact from "./pool/summoners-pact.js";
 import _poolSummonersSending from "./pool/summoners-sending.js";
 import _poolSummoningMateria from "./pool/summoning-materia.js";
 import _poolSummoningStation from "./pool/summoning-station.js";
+import _poolSummonsOfSaruman from "./pool/summons-of-saruman.js";
 import _poolSunBlessedGuardian from "./pool/sun-blessed-guardian.js";
 import _poolSunBlessedHealer from "./pool/sun-blessed-healer.js";
 import _poolSunBlessedMount from "./pool/sun-blessed-mount.js";
@@ -27523,6 +27530,7 @@ import _poolTheOneRing from "./pool/the-one-ring.js";
 import _poolTheOoze from "./pool/the-ooze.js";
 import _poolTheOzolith from "./pool/the-ozolith.js";
 import _poolThePartingOfTheWays from "./pool/the-parting-of-the-ways.js";
+import _poolThePeregrineDynamo from "./pool/the-peregrine-dynamo.js";
 import _poolThePrideOfHullClade from "./pool/the-pride-of-hull-clade.js";
 import _poolThePrimaVista from "./pool/the-prima-vista.js";
 import _poolThePrincessTakesFlight from "./pool/the-princess-takes-flight.js";
@@ -32465,6 +32473,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAbstractPaintmage,
   _poolAbstractPerformance,
   _poolAbstruseAppropriation,
+  _poolAbstruseArchaic,
   _poolAbstruseInterference,
   _poolAbuJafar,
   _poolAbueloAncestralEcho,
@@ -34732,6 +34741,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBenefactionOfRhonas,
   _poolBenefactorsDraught,
   _poolBenevolentAncestor,
+  _poolBenevolentBlessing,
   _poolBenevolentBodyguard,
   _poolBenevolentGeist,
   _poolBenevolentHydra,
@@ -36537,6 +36547,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCemeteryGatekeeper,
   _poolCemeteryIlluminator,
   _poolCemeteryProtector,
+  _poolCemeteryProwler,
   _poolCemeteryPuca,
   _poolCemeteryReaper,
   _poolCemeteryRecruitment,
@@ -41723,6 +41734,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFinaleOfDevastation,
   _poolFinaleOfEternity,
   _poolFinaleOfGlory,
+  _poolFinaleOfPromise,
   _poolFinaleOfRevelation,
   _poolFinality,
   _poolFinchFormation,
@@ -47026,6 +47038,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKiorasDambreaker,
   _poolKiorasDismissal,
   _poolKiorasFollower,
+  _poolKiraGreatGlassSpinner,
   _poolKirdApe,
   _poolKirdChieftain,
   _poolKiriOnna,
@@ -56241,6 +56254,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShimmerdriftVale,
   _poolShimmeringBarrier,
   _poolShimmeringEfreet,
+  _poolShimmeringGlasskite,
   _poolShimmeringGrotto,
   _poolShimmeringMirage,
   _poolShimmeringWings,
@@ -58667,6 +58681,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSummonersSending,
   _poolSummoningMateria,
   _poolSummoningStation,
+  _poolSummonsOfSaruman,
   _poolSunBlessedGuardian,
   _poolSunBlessedHealer,
   _poolSunBlessedMount,
@@ -59901,6 +59916,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheOoze,
   _poolTheOzolith,
   _poolThePartingOfTheWays,
+  _poolThePeregrineDynamo,
   _poolThePrideOfHullClade,
   _poolThePrimaVista,
   _poolThePrincessTakesFlight,
@@ -64856,6 +64872,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/abstract-paintmage": _poolAbstractPaintmage,
   "pool/abstract-performance": _poolAbstractPerformance,
   "pool/abstruse-appropriation": _poolAbstruseAppropriation,
+  "pool/abstruse-archaic": _poolAbstruseArchaic,
   "pool/abstruse-interference": _poolAbstruseInterference,
   "pool/abu-jafar": _poolAbuJafar,
   "pool/abuelo-ancestral-echo": _poolAbueloAncestralEcho,
@@ -67123,6 +67140,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/benefaction-of-rhonas": _poolBenefactionOfRhonas,
   "pool/benefactors-draught": _poolBenefactorsDraught,
   "pool/benevolent-ancestor": _poolBenevolentAncestor,
+  "pool/benevolent-blessing": _poolBenevolentBlessing,
   "pool/benevolent-bodyguard": _poolBenevolentBodyguard,
   "pool/benevolent-geist": _poolBenevolentGeist,
   "pool/benevolent-hydra": _poolBenevolentHydra,
@@ -68928,6 +68946,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cemetery-gatekeeper": _poolCemeteryGatekeeper,
   "pool/cemetery-illuminator": _poolCemeteryIlluminator,
   "pool/cemetery-protector": _poolCemeteryProtector,
+  "pool/cemetery-prowler": _poolCemeteryProwler,
   "pool/cemetery-puca": _poolCemeteryPuca,
   "pool/cemetery-reaper": _poolCemeteryReaper,
   "pool/cemetery-recruitment": _poolCemeteryRecruitment,
@@ -74114,6 +74133,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/finale-of-devastation": _poolFinaleOfDevastation,
   "pool/finale-of-eternity": _poolFinaleOfEternity,
   "pool/finale-of-glory": _poolFinaleOfGlory,
+  "pool/finale-of-promise": _poolFinaleOfPromise,
   "pool/finale-of-revelation": _poolFinaleOfRevelation,
   "pool/finality": _poolFinality,
   "pool/finch-formation": _poolFinchFormation,
@@ -79417,6 +79437,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kioras-dambreaker": _poolKiorasDambreaker,
   "pool/kioras-dismissal": _poolKiorasDismissal,
   "pool/kioras-follower": _poolKiorasFollower,
+  "pool/kira-great-glass-spinner": _poolKiraGreatGlassSpinner,
   "pool/kird-ape": _poolKirdApe,
   "pool/kird-chieftain": _poolKirdChieftain,
   "pool/kiri-onna": _poolKiriOnna,
@@ -88632,6 +88653,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shimmerdrift-vale": _poolShimmerdriftVale,
   "pool/shimmering-barrier": _poolShimmeringBarrier,
   "pool/shimmering-efreet": _poolShimmeringEfreet,
+  "pool/shimmering-glasskite": _poolShimmeringGlasskite,
   "pool/shimmering-grotto": _poolShimmeringGrotto,
   "pool/shimmering-mirage": _poolShimmeringMirage,
   "pool/shimmering-wings": _poolShimmeringWings,
@@ -91058,6 +91080,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/summoners-sending": _poolSummonersSending,
   "pool/summoning-materia": _poolSummoningMateria,
   "pool/summoning-station": _poolSummoningStation,
+  "pool/summons-of-saruman": _poolSummonsOfSaruman,
   "pool/sun-blessed-guardian": _poolSunBlessedGuardian,
   "pool/sun-blessed-healer": _poolSunBlessedHealer,
   "pool/sun-blessed-mount": _poolSunBlessedMount,
@@ -92292,6 +92315,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-ooze": _poolTheOoze,
   "pool/the-ozolith": _poolTheOzolith,
   "pool/the-parting-of-the-ways": _poolThePartingOfTheWays,
+  "pool/the-peregrine-dynamo": _poolThePeregrineDynamo,
   "pool/the-pride-of-hull-clade": _poolThePrideOfHullClade,
   "pool/the-prima-vista": _poolThePrimaVista,
   "pool/the-princess-takes-flight": _poolThePrincessTakesFlight,

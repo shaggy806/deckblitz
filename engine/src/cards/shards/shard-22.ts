@@ -285,6 +285,7 @@ import _poolFellStinger from "../pool/fell-stinger.js";
 import _poolFesteringEvil from "../pool/festering-evil.js";
 import _poolFieryEncore from "../pool/fiery-encore.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
+import _poolFinaleOfPromise from "../pool/finale-of-promise.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFireforgersPuzzleknot from "../pool/fireforgers-puzzleknot.js";
 import _poolFirestormHellkite from "../pool/firestorm-hellkite.js";
@@ -1318,6 +1319,7 @@ const shard: CardShard = {
     _poolFesteringEvil,
     _poolFieryEncore,
     _poolFightingDrake,
+    _poolFinaleOfPromise,
     _poolFirebirdBlazingRanger,
     _poolFireforgersPuzzleknot,
     _poolFirestormHellkite,

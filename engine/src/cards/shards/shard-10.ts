@@ -133,6 +133,7 @@ import _poolCatacombDragon from "../pool/catacomb-dragon.js";
 import _poolCavernsOfDespair from "../pool/caverns-of-despair.js";
 import _poolCelestialArchon from "../pool/celestial-archon.js";
 import _poolCelestialMessenger from "../pool/celestial-messenger.js";
+import _poolCemeteryProwler from "../pool/cemetery-prowler.js";
 import _poolCentaurGarden from "../pool/centaur-garden.js";
 import _poolCephalidLooter from "../pool/cephalid-looter.js";
 import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
@@ -1138,6 +1139,7 @@ const shard: CardShard = {
     _poolCavernsOfDespair,
     _poolCelestialArchon,
     _poolCelestialMessenger,
+    _poolCemeteryProwler,
     _poolCentaurGarden,
     _poolCephalidLooter,
     _poolChampionOfTheClachan,

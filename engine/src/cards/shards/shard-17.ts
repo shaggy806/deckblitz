@@ -468,6 +468,7 @@ import _poolKeysToTheHouse from "../pool/keys-to-the-house.js";
 import _poolKhabalGhoul from "../pool/khabal-ghoul.js";
 import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
+import _poolKiraGreatGlassSpinner from "../pool/kira-great-glass-spinner.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
 import _poolKitsuneDiviner from "../pool/kitsune-diviner.js";
 import _poolKohTheFaceStealer from "../pool/koh-the-face-stealer.js";
@@ -1470,6 +1471,7 @@ const shard: CardShard = {
     _poolKhabalGhoul,
     _poolKickoffCelebrations,
     _poolKilnFiend,
+    _poolKiraGreatGlassSpinner,
     _poolKishlaSkimmer,
     _poolKitsuneDiviner,
     _poolKohTheFaceStealer,
