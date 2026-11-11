@@ -6266,7 +6266,11 @@ clause (section 9):
   "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",
   "creature"] } }`; Dimir Strandcatcher's "three or more cards … into your
   graveyard from anywhere other than the battlefield" `{ what: "to-graveyard",
-  notFrom: ["battlefield"], atLeast: 3 }`. Éowyn, Shieldmaiden's "if another Human entered the battlefield
+  notFrom: ["battlefield"], atLeast: 3 }`; `what: "lands-played"` takes the
+  same two for the zone a land was played from (rule 305.1), Spider-Man 2099's
+  "played a land … from anywhere other than your hand" `{ what:
+  "lands-played", who: "you", notFrom: ["hand"] }`, in an `any` with the
+  `cast-this-turn` read of `castFrom: { not: "hand" }`. Éowyn, Shieldmaiden's "if another Human entered the battlefield
   under your control this turn" is `{ what: "entered", filter: { subtype:
   "Human" }, excludeSelf: true }` (a Human that entered and left since still
   counts); "if a creature died under your control this turn" is `{ what:

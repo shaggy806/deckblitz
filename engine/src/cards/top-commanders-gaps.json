@@ -2300,7 +2300,8 @@
   "effect:counter-into-battlefield",
   "effect:counter-into-battlefield",
   "static:grant-read-ahead",
-  "effect:delayed-cast-trigger-through-player-next-turn"
+  "effect:delayed-cast-trigger-through-player-next-turn",
+  "stat:lands-played-not-from-hand-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

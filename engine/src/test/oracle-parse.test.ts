@@ -18605,3 +18605,27 @@ describe("a delayed whenever about the defending player", () => {
     });
   });
 });
+
+describe("a land played or a spell cast from anywhere other than the hand", () => {
+  it("reads Spider-Man 2099's end step trigger", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Spider Human Hero",
+      oracle_text:
+        "At the beginning of your end step, if you've played a land or cast a spell this turn from anywhere other than your hand, Test Card deals damage equal to his power to any target.",
+    } as never) as unknown as { triggered: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "step-begins", step: "end", who: "you" },
+      condition: {
+        kind: "any",
+        of: [
+          { kind: "turn-history", what: "lands-played", who: "you", notFrom: ["hand"] },
+          { kind: "cast-this-turn", who: "you", filter: { castFrom: { not: "hand" } } },
+        ],
+      },
+      targets: ["any-target"],
+      effect: { kind: "damage", amount: { powerOf: "source" }, target: 0 },
+    });
+  });
+});

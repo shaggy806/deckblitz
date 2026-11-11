@@ -14370,7 +14370,7 @@ export class Game {
       this.spendPlay(underPermission);
     }
     this.state.objects[cardId].face = face;
-    this.journal({ kind: "land-played", player, object: cardId });
+    this.journal({ kind: "land-played", player, object: cardId, from });
     this.finishLandPlay({ kind: "land", object: cardId, player, from, ...(tapped ? { tapped: true as const } : {}) });
     this.afterPlayerAction(player);
   }
@@ -20747,7 +20747,7 @@ export class Game {
       // it leaves exile (406.3a), and it enters as any land played does.
       const from = this.state.objects[cast.card].zone;
       this.state.objects[cast.card].face = face;
-      this.journal({ kind: "land-played", player, object: cast.card });
+      this.journal({ kind: "land-played", player, object: cast.card, from });
       this.finishLandPlay({ kind: "land", object: cast.card, player, from });
       this.prepareForPriority(this.activePlayer);
       return;

@@ -98,7 +98,8 @@ export type JournalKind =
   /** `player` bent (`how`: water, earth, fire or air — rules 701.65b,
    * 701.66b, 701.67c, 702.189b). */
   | "bent"
-  /** `player` played a land (305.1). */
+  /** `player` played a land (305.1), from the zone `from` ("played a land
+   * from anywhere other than your hand"). */
   | "land-played"
   /** `player` drew a card (121.1). */
   | "card-drawn"
@@ -157,7 +158,8 @@ export interface JournalEntry {
   readonly count?: number;
   /** A quantity: damage, life, counters, mana, energy. */
   readonly amount?: number;
-  /** The zone a move came from (`to-graveyard`). */
+  /** The zone a move came from (`to-graveyard`), or a land was played from
+   * (`land-played`). */
   readonly from?: ZoneType;
   /** The zone a move went to (`left`). */
   readonly to?: ZoneType;

@@ -5902,6 +5902,12 @@ export function parseSentence(sentence, ctx) {
       from: "attached",
     };
   }
+  // "~ deals damage equal to his power to any target" (Spider-Man 2099): the
+  // source's own power, as it last was if it's gone (rule 608.2h).
+  if ((m = re(`~ deals damage equal to (?:its|his|her) power to (${TARGET})`).exec(s))) {
+    const target = slot(m[1]);
+    if (target !== undefined) return { kind: "damage", amount: { powerOf: "source" }, target };
+  }
   // "Exile target creature card from a graveyard. That card deals damage equal
   // to its power to ~" (Selfless Exorcist): the card in its target slot, in exile.
   if (ctx.targets.length === 1 && re("that card deals damage equal to its power to ~").test(s)) {
@@ -17906,6 +17912,15 @@ const INTERVENING_IFS = {
   // Rule 702.112b: the source's renowned designation.
   "if it's renowned,": { kind: "source", filter: { renowned: true } },
   "if ~ is renowned,": { kind: "source", filter: { renowned: true } },
+  // A land played (rule 305.1) or a spell cast from any zone but the hand
+  // (Spider-Man 2099): the journal's `land-played` keeps the zone it came from.
+  "if you've played a land or cast a spell this turn from anywhere other than your hand,": {
+    kind: "any",
+    of: [
+      { kind: "turn-history", what: "lands-played", who: "you", notFrom: ["hand"] },
+      { kind: "cast-this-turn", who: "you", filter: { castFrom: { not: "hand" } } },
+    ],
+  },
   // Rule 700.13 (Outlaws of Thunder Junction).
   "if you've committed a crime this turn,": { kind: "committed-crime-this-turn" },
   // Rule 701.59c: the spell's collect-evidence additional cost was paid.
