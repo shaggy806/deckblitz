@@ -3193,6 +3193,7 @@ export function parseSentence(sentence, ctx) {
     const token = ctx.tokenFor?.(m[1]) ?? null;
     if (token === null) return null;
     return { kind: "create-token", token, count: { damageDealtThisTurn: true, who: "each-player", to: "source" } };
+  }
   // The attacker's own ability (rule 508.5: the player it's attacking, or was
   // before it was removed from combat): "target creature defending player
   // controls gets -X/-X until end of turn, where X is the number of artifacts
