@@ -765,6 +765,7 @@ import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSinProdder from "../pool/sin-prodder.js";
 import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
+import _poolSixSidedDie from "../pool/six-sided-die.js";
 import _poolSkirkCommando from "../pool/skirk-commando.js";
 import _poolSkophosWarleader from "../pool/skophos-warleader.js";
 import _poolSkullRend from "../pool/skull-rend.js";
@@ -1749,6 +1750,7 @@ const shard: CardShard = {
     _poolSinProdder,
     _poolSinuousStriker,
     _poolSirensRuse,
+    _poolSixSidedDie,
     _poolSkirkCommando,
     _poolSkophosWarleader,
     _poolSkullRend,

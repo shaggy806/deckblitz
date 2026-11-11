@@ -198,6 +198,7 @@ import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
 import _poolDaringThief from "../pool/daring-thief.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
+import _poolDawnBlessedPennant from "../pool/dawn-blessed-pennant.js";
 import _poolDawnrayArcher from "../pool/dawnray-archer.js";
 import _poolDawntreaderElk from "../pool/dawntreader-elk.js";
 import _poolDeadDrop from "../pool/dead-drop.js";
@@ -415,6 +416,7 @@ import _poolHecatomb from "../pool/hecatomb.js";
 import _poolHelmOfPossession from "../pool/helm-of-possession.js";
 import _poolHickoryWoodlot from "../pool/hickory-woodlot.js";
 import _poolHiddenPath from "../pool/hidden-path.js";
+import _poolHidetsuguAndKairi from "../pool/hidetsugu-and-kairi.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
@@ -718,6 +720,7 @@ import _poolSamiteAlchemist from "../pool/samite-alchemist.js";
 import _poolSanctifierOfSouls from "../pool/sanctifier-of-souls.js";
 import _poolSanctimony from "../pool/sanctimony.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
+import _poolSanctumOfTheSun from "../pool/sanctum-of-the-sun.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
 import _poolSandbarCrocodile from "../pool/sandbar-crocodile.js";
 import _poolSanguinePraetor from "../pool/sanguine-praetor.js";
@@ -1204,6 +1207,7 @@ const shard: CardShard = {
     _poolDaringThief,
     _poolDarkmossBridge,
     _poolDarksteelGargoyle,
+    _poolDawnBlessedPennant,
     _poolDawnrayArcher,
     _poolDawntreaderElk,
     _poolDeadDrop,
@@ -1421,6 +1425,7 @@ const shard: CardShard = {
     _poolHelmOfPossession,
     _poolHickoryWoodlot,
     _poolHiddenPath,
+    _poolHidetsuguAndKairi,
     _poolHonorboundPage,
     _poolHornetSting,
     _poolHowlpackAvenger,
@@ -1724,6 +1729,7 @@ const shard: CardShard = {
     _poolSanctifierOfSouls,
     _poolSanctimony,
     _poolSanctumOfCalmWaters,
+    _poolSanctumOfTheSun,
     _poolSanctumOfUgin,
     _poolSandbarCrocodile,
     _poolSanguinePraetor,

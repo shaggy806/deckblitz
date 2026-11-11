@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangAndKatara from "../pool/aang-and-katara.js";
 import _poolAangSwiftSavior from "../pool/aang-swift-savior.js";
 import _poolAbandonThePost from "../pool/abandon-the-post.js";
 import _poolAbsorbingManAndTitania from "../pool/absorbing-man-and-titania.js";
@@ -199,6 +200,7 @@ import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
 import _poolCourierOfComestibles from "../pool/courier-of-comestibles.js";
 import _poolCourtHomunculus from "../pool/court-homunculus.js";
 import _poolCoward from "../pool/coward.js";
+import _poolCrabomination from "../pool/crabomination.js";
 import _poolCranialArchive from "../pool/cranial-archive.js";
 import _poolCrashingBoars from "../pool/crashing-boars.js";
 import _poolCrimeNovelist from "../pool/crime-novelist.js";
@@ -418,6 +420,7 @@ import _poolHauntedMire from "../pool/haunted-mire.js";
 import _poolHauntedPlateMail from "../pool/haunted-plate-mail.js";
 import _poolHawkeyeYoungAvenger from "../pool/hawkeye-young-avenger.js";
 import _poolHealingGrace from "../pool/healing-grace.js";
+import _poolHeartlessConscription from "../pool/heartless-conscription.js";
 import _poolHedgewitchsMask from "../pool/hedgewitchs-mask.js";
 import _poolHedronCrawler from "../pool/hedron-crawler.js";
 import _poolHelixPinnacle from "../pool/helix-pinnacle.js";
@@ -430,6 +433,7 @@ import _poolHiddenPredators from "../pool/hidden-predators.js";
 import _poolHighlandBerserker from "../pool/highland-berserker.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
+import _poolHiveMind from "../pool/hive-mind.js";
 import _poolHiveheartShaman from "../pool/hiveheart-shaman.js";
 import _poolHomarid from "../pool/homarid.js";
 import _poolHonoredCropCaptain from "../pool/honored-crop-captain.js";
@@ -850,6 +854,7 @@ import _poolSylvanParadise from "../pool/sylvan-paradise.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
 import _poolTailSwipe from "../pool/tail-swipe.js";
 import _poolTalShiarAnalyst from "../pool/tal-shiar-analyst.js";
+import _poolTamiyoCollectorOfTales from "../pool/tamiyo-collector-of-tales.js";
 import _poolTandemTakedown from "../pool/tandem-takedown.js";
 import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
@@ -859,6 +864,7 @@ import _poolTempleBell from "../pool/temple-bell.js";
 import _poolTempleOfDeceit from "../pool/temple-of-deceit.js";
 import _poolTempleOfMalady from "../pool/temple-of-malady.js";
 import _poolTendTheSprigs from "../pool/tend-the-sprigs.js";
+import _poolTheCauldronOfEternity from "../pool/the-cauldron-of-eternity.js";
 import _poolTheDarknessCrystal from "../pool/the-darkness-crystal.js";
 import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheGoldenThrone from "../pool/the-golden-throne.js";
@@ -1006,6 +1012,7 @@ import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-
 
 const shard: CardShard = {
   pool: [
+    _poolAangAndKatara,
     _poolAangSwiftSavior,
     _poolAbandonThePost,
     _poolAbsorbingManAndTitania,
@@ -1202,6 +1209,7 @@ const shard: CardShard = {
     _poolCourierOfComestibles,
     _poolCourtHomunculus,
     _poolCoward,
+    _poolCrabomination,
     _poolCranialArchive,
     _poolCrashingBoars,
     _poolCrimeNovelist,
@@ -1421,6 +1429,7 @@ const shard: CardShard = {
     _poolHauntedPlateMail,
     _poolHawkeyeYoungAvenger,
     _poolHealingGrace,
+    _poolHeartlessConscription,
     _poolHedgewitchsMask,
     _poolHedronCrawler,
     _poolHelixPinnacle,
@@ -1433,6 +1442,7 @@ const shard: CardShard = {
     _poolHighlandBerserker,
     _poolHinderingLight,
     _poolHireACrew,
+    _poolHiveMind,
     _poolHiveheartShaman,
     _poolHomarid,
     _poolHonoredCropCaptain,
@@ -1853,6 +1863,7 @@ const shard: CardShard = {
     _poolTaboraxHopesDemise,
     _poolTailSwipe,
     _poolTalShiarAnalyst,
+    _poolTamiyoCollectorOfTales,
     _poolTandemTakedown,
     _poolTarmogoyfNest,
     _poolTarmogoyf,
@@ -1862,6 +1873,7 @@ const shard: CardShard = {
     _poolTempleOfDeceit,
     _poolTempleOfMalady,
     _poolTendTheSprigs,
+    _poolTheCauldronOfEternity,
     _poolTheDarknessCrystal,
     _poolTheGoldSaucer,
     _poolTheGoldenThrone,

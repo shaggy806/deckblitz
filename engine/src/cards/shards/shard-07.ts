@@ -54,6 +54,7 @@ import _poolAuspiciousStarrix from "../pool/auspicious-starrix.js";
 import _poolAustereCommand from "../pool/austere-command.js";
 import _poolAutumnWillowHarmony from "../pool/autumn-willow-harmony.js";
 import _poolAvidReclaimer from "../pool/avid-reclaimer.js";
+import _poolAyaraFurnaceQueen from "../pool/ayara-furnace-queen.js";
 import _poolBackdraftHellkite from "../pool/backdraft-hellkite.js";
 import _poolBakeryRaid from "../pool/bakery-raid.js";
 import _poolBalambGardenAirborne from "../pool/balamb-garden-airborne.js";
@@ -294,6 +295,7 @@ import _poolFieryIntervention from "../pool/fiery-intervention.js";
 import _poolFinFangFoom from "../pool/fin-fang-foom.js";
 import _poolFinalFlare from "../pool/final-flare.js";
 import _poolFinalWordPhantom from "../pool/final-word-phantom.js";
+import _poolFireLordSozin from "../pool/fire-lord-sozin.js";
 import _poolFirebladeCharger from "../pool/fireblade-charger.js";
 import _poolFirstResponder from "../pool/first-responder.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
@@ -371,6 +373,7 @@ import _poolHaldirLorienLieutenant from "../pool/haldir-lorien-lieutenant.js";
 import _poolHalfElfMonk from "../pool/half-elf-monk.js";
 import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
 import _poolHaloHopper from "../pool/halo-hopper.js";
+import _poolHancockGhoulishMayor from "../pool/hancock-ghoulish-mayor.js";
 import _poolHandOfCruelty from "../pool/hand-of-cruelty.js";
 import _poolHandOfDeath from "../pool/hand-of-death.js";
 import _poolHandsOfBinding from "../pool/hands-of-binding.js";
@@ -1085,6 +1088,7 @@ const shard: CardShard = {
     _poolAustereCommand,
     _poolAutumnWillowHarmony,
     _poolAvidReclaimer,
+    _poolAyaraFurnaceQueen,
     _poolBackdraftHellkite,
     _poolBakeryRaid,
     _poolBalambGardenAirborne,
@@ -1325,6 +1329,7 @@ const shard: CardShard = {
     _poolFinFangFoom,
     _poolFinalFlare,
     _poolFinalWordPhantom,
+    _poolFireLordSozin,
     _poolFirebladeCharger,
     _poolFirstResponder,
     _poolFlamebornViron,
@@ -1402,6 +1407,7 @@ const shard: CardShard = {
     _poolHalfElfMonk,
     _poolHaliyaAscendantCadet,
     _poolHaloHopper,
+    _poolHancockGhoulishMayor,
     _poolHandOfCruelty,
     _poolHandOfDeath,
     _poolHandsOfBinding,

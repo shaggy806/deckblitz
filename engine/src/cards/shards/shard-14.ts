@@ -25,6 +25,7 @@ import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
 import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
+import _poolAppaTheVigilant from "../pool/appa-the-vigilant.js";
 import _poolArachnusWeb from "../pool/arachnus-web.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
 import _poolArborColossus from "../pool/arbor-colossus.js";
@@ -53,6 +54,7 @@ import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
 import _poolBackupAgent from "../pool/backup-agent.js";
 import _poolBadDeal from "../pool/bad-deal.js";
+import _poolBagEndBanquet from "../pool/bag-end-banquet.js";
 import _poolBagOfTricks from "../pool/bag-of-tricks.js";
 import _poolBalduvianTradingPost from "../pool/balduvian-trading-post.js";
 import _poolBalothCageTrap from "../pool/baloth-cage-trap.js";
@@ -411,6 +413,7 @@ import _poolHellspurBrute from "../pool/hellspur-brute.js";
 import _poolHemosymbicMite from "../pool/hemosymbic-mite.js";
 import _poolHeraldOfThePantheon from "../pool/herald-of-the-pantheon.js";
 import _poolHeroOfTheGames from "../pool/hero-of-the-games.js";
+import _poolHeroesInAHalfShell from "../pool/heroes-in-a-half-shell.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHiddenCataract from "../pool/hidden-cataract.js";
 import _poolHieromancersCage from "../pool/hieromancers-cage.js";
@@ -533,6 +536,7 @@ import _poolMakeObsolete from "../pool/make-obsolete.js";
 import _poolMakindiPatrol from "../pool/makindi-patrol.js";
 import _poolManaFlare from "../pool/mana-flare.js";
 import _poolMarchOfOtherworldlyLight from "../pool/march-of-otherworldly-light.js";
+import _poolMarchesaResoluteMonarch from "../pool/marchesa-resolute-monarch.js";
 import _poolMasterOfBarbs from "../pool/master-of-barbs.js";
 import _poolMaximumCarnage from "../pool/maximum-carnage.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
@@ -1035,6 +1039,7 @@ const shard: CardShard = {
     _poolAncientOfTheEquinox,
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
+    _poolAppaTheVigilant,
     _poolArachnusWeb,
     _poolArbiterOfWoe,
     _poolArborColossus,
@@ -1063,6 +1068,7 @@ const shard: CardShard = {
     _poolAzureMage,
     _poolBackupAgent,
     _poolBadDeal,
+    _poolBagEndBanquet,
     _poolBagOfTricks,
     _poolBalduvianTradingPost,
     _poolBalothCageTrap,
@@ -1421,6 +1427,7 @@ const shard: CardShard = {
     _poolHemosymbicMite,
     _poolHeraldOfThePantheon,
     _poolHeroOfTheGames,
+    _poolHeroesInAHalfShell,
     _poolHexplateWallbreaker,
     _poolHiddenCataract,
     _poolHieromancersCage,
@@ -1543,6 +1550,7 @@ const shard: CardShard = {
     _poolMakindiPatrol,
     _poolManaFlare,
     _poolMarchOfOtherworldlyLight,
+    _poolMarchesaResoluteMonarch,
     _poolMasterOfBarbs,
     _poolMaximumCarnage,
     _poolMedusaInhumanQueen,

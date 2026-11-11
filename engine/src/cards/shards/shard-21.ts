@@ -130,6 +130,7 @@ import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolCeremoniousRejection from "../pool/ceremonious-rejection.js";
 import _poolCetaceanOps from "../pool/cetacean-ops.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
+import _poolChakraMeditation from "../pool/chakra-meditation.js";
 import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
 import _poolChaosSpewer from "../pool/chaos-spewer.js";
@@ -160,6 +161,7 @@ import _poolColossusOfAkros from "../pool/colossus-of-akros.js";
 import _poolColossusOfTheBloodAge from "../pool/colossus-of-the-blood-age.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
+import _poolCommandTheDreadhorde from "../pool/command-the-dreadhorde.js";
 import _poolCommonBond from "../pool/common-bond.js";
 import _poolComplexAutomaton from "../pool/complex-automaton.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
@@ -602,6 +604,7 @@ import _poolPitSpawn from "../pool/pit-spawn.js";
 import _poolPitTrap from "../pool/pit-trap.js";
 import _poolPlagueFiend from "../pool/plague-fiend.js";
 import _poolPlarggDeanOfChaos from "../pool/plargg-dean-of-chaos.js";
+import _poolPollutedCisternDimOubliette from "../pool/polluted-cistern-dim-oubliette.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
 import _poolPrecipitousDrop from "../pool/precipitous-drop.js";
 import _poolPredatoryFocus from "../pool/predatory-focus.js";
@@ -652,6 +655,7 @@ import _poolRestlessSpire from "../pool/restless-spire.js";
 import _poolRetroMutation from "../pool/retro-mutation.js";
 import _poolReveilleSquad from "../pool/reveille-squad.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
+import _poolRevenge from "../pool/revenge.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRhoxPikemaster from "../pool/rhox-pikemaster.js";
 import _poolRiddleform from "../pool/riddleform.js";
@@ -907,6 +911,7 @@ import _poolWarriorEnKor from "../pool/warrior-en-kor.js";
 import _poolWarriorsOath from "../pool/warriors-oath.js";
 import _poolWaterElemental from "../pool/water-elemental.js";
 import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
+import _poolWeepingAngel from "../pool/weeping-angel.js";
 import _poolWeiStrikeForce from "../pool/wei-strike-force.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
@@ -1089,6 +1094,7 @@ const shard: CardShard = {
     _poolCeremoniousRejection,
     _poolCetaceanOps,
     _poolChainReaction,
+    _poolChakraMeditation,
     _poolChampionOfTheWeird,
     _poolChandrasMagmutt,
     _poolChaosSpewer,
@@ -1119,6 +1125,7 @@ const shard: CardShard = {
     _poolColossusOfTheBloodAge,
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
+    _poolCommandTheDreadhorde,
     _poolCommonBond,
     _poolComplexAutomaton,
     _poolConclaveTribunal,
@@ -1561,6 +1568,7 @@ const shard: CardShard = {
     _poolPitTrap,
     _poolPlagueFiend,
     _poolPlarggDeanOfChaos,
+    _poolPollutedCisternDimOubliette,
     _poolPotionOfHealing,
     _poolPrecipitousDrop,
     _poolPredatoryFocus,
@@ -1611,6 +1619,7 @@ const shard: CardShard = {
     _poolRetroMutation,
     _poolReveilleSquad,
     _poolRevengeOfRavens,
+    _poolRevenge,
     _poolRewriteRegrets,
     _poolRhoxPikemaster,
     _poolRiddleform,
@@ -1866,6 +1875,7 @@ const shard: CardShard = {
     _poolWarriorsOath,
     _poolWaterElemental,
     _poolWaterloggedGrove,
+    _poolWeepingAngel,
     _poolWeiStrikeForce,
     _poolWeightOfMemory,
     _poolWeldfastMonitor,

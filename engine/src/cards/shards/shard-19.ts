@@ -56,6 +56,7 @@ import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
 import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
 import _poolAyliEternalPilgrim from "../pool/ayli-eternal-pilgrim.js";
+import _poolAzorsGateway from "../pool/azors-gateway.js";
 import _poolBackwoodsSurvivalists from "../pool/backwoods-survivalists.js";
 import _poolBalduvianFrostwaker from "../pool/balduvian-frostwaker.js";
 import _poolBalemurkLeech from "../pool/balemurk-leech.js";
@@ -290,6 +291,7 @@ import _poolEnrage from "../pool/enrage.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolEntering from "../pool/entering.js";
 import _poolEntropicEidolon from "../pool/entropic-eidolon.js";
+import _poolEpicExperiment from "../pool/epic-experiment.js";
 import _poolEqualTreatment from "../pool/equal-treatment.js";
 import _poolErhnamDjinn from "../pool/erhnam-djinn.js";
 import _poolEruptingDreadwolf from "../pool/erupting-dreadwolf.js";
@@ -542,6 +544,7 @@ import _poolLifeOfTheParty from "../pool/life-of-the-party.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
 import _poolLightningMauler from "../pool/lightning-mauler.js";
+import _poolLilianasTalent from "../pool/lilianas-talent.js";
 import _poolLinebreakerBaloth from "../pool/linebreaker-baloth.js";
 import _poolLlanowarAugur from "../pool/llanowar-augur.js";
 import _poolLoneWolf from "../pool/lone-wolf.js";
@@ -1041,6 +1044,7 @@ import _poolZombieBrute from "../pool/zombie-brute.js";
 import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZoologicalStudy from "../pool/zoological-study.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
+import _tokens00TrampleOozeToken from "../tokens/0-0-trample-ooze-token.js";
 import _tokens11BlackBirdTokenTheRavenMan from "../tokens/1-1-black-bird-token-the-raven-man.js";
 import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
@@ -1116,6 +1120,7 @@ const shard: CardShard = {
     _poolAwakenTheAges,
     _poolAwakenTheWoods,
     _poolAyliEternalPilgrim,
+    _poolAzorsGateway,
     _poolBackwoodsSurvivalists,
     _poolBalduvianFrostwaker,
     _poolBalemurkLeech,
@@ -1350,6 +1355,7 @@ const shard: CardShard = {
     _poolEnslavedDwarf,
     _poolEntering,
     _poolEntropicEidolon,
+    _poolEpicExperiment,
     _poolEqualTreatment,
     _poolErhnamDjinn,
     _poolEruptingDreadwolf,
@@ -1602,6 +1608,7 @@ const shard: CardShard = {
     _poolLifecraftersBestiary,
     _poolLifelink,
     _poolLightningMauler,
+    _poolLilianasTalent,
     _poolLinebreakerBaloth,
     _poolLlanowarAugur,
     _poolLoneWolf,
@@ -2103,6 +2110,7 @@ const shard: CardShard = {
     _poolZukosExile,
   ],
   tokens: [
+    _tokens00TrampleOozeToken,
     _tokens11BlackBirdTokenTheRavenMan,
     _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,

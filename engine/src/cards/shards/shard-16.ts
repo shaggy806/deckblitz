@@ -493,6 +493,7 @@ import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
 import _poolLittjaraKinseekers from "../pool/littjara-kinseekers.js";
 import _poolLivingHistory from "../pool/living-history.js";
 import _poolLobberCrew from "../pool/lobber-crew.js";
+import _poolLocusOfEnlightenment from "../pool/locus-of-enlightenment.js";
 import _poolLodestoneGolem from "../pool/lodestone-golem.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLoneRevenant from "../pool/lone-revenant.js";
@@ -706,6 +707,7 @@ import _poolReprobation from "../pool/reprobation.js";
 import _poolRetributiveWand from "../pool/retributive-wand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
 import _poolRevelation from "../pool/revelation.js";
+import _poolRevival from "../pool/revival.js";
 import _poolRevive from "../pool/revive.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
 import _poolRidesEnd from "../pool/rides-end.js";
@@ -1565,6 +1567,7 @@ const shard: CardShard = {
     _poolLittjaraKinseekers,
     _poolLivingHistory,
     _poolLobberCrew,
+    _poolLocusOfEnlightenment,
     _poolLodestoneGolem,
     _poolLokisScepter,
     _poolLoneRevenant,
@@ -1778,6 +1781,7 @@ const shard: CardShard = {
     _poolRetributiveWand,
     _poolReturnToDust,
     _poolRevelation,
+    _poolRevival,
     _poolRevive,
     _poolRhysticStudy,
     _poolRidesEnd,

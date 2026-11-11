@@ -45,6 +45,15 @@ What blocks each unimplemented card, and which cards a built feature may have un
 the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists go there; this
 section keeps only what to do next.
 
+- **The rank goal (the user's, 2026-11-11): every card to EDHREC rank 10,000, but for those needing
+  a major engine change.** `npm run -s cards:goal -w engine` lists what's left, best rank first,
+  each with its open need keys and its size; `-- --size small --keys` is the build list, one key a
+  unit. After B296-B298 (161 cards re-attempted and authored with no engine code) 383 are left:
+  189 sized **small** (a field, an amount, a filter clause, a trigger event), 45 **major** (a new
+  decision, a new subsystem, a core rule changed — flagged, not built), 149 **unsized** (records
+  from B291-B296, read against today's engine but before sizes were recorded: size each as it is
+  picked up). Every one needs engine work; the sizes are the authoring agents' estimates from
+  reading, not checked against the code.
 - **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
   `ASSIMILATE` in `helpers.ts`), and so are Marvel: Darkhold Destiny's previews (MDD, MDC) and
@@ -515,7 +524,7 @@ section keeps only what to do next.
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 8207 on (batch 148 took 7949–8197). Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 5 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 4 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
   banding (`keyword:banding` — 36, every one on nothing else, 2026-10-23; rule 702.22, and the
@@ -575,6 +584,8 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
+- **`triggerValue` reads 0 inside an `unless`'s `otherwise`** — B298: Archfiend of Spite's "loses that much life" lost none once the opponent declined; pool cards reading `triggerValue` there may be wrong (`docs/engine-gaps.md`).
+- **Definition traps that fail silently** — B298: "opponent" on a `targetsChosenBy` trigger is read from the ability's controller, not the chooser; a spell's any-number bound other than a literal `"x"` becomes 0; `exile` of a card in hand without `fromHand` does nothing; `look-and-choose` over `exiled-this-way` with `max: 0` skips `leftover` (`docs/engine-gaps.md`).
 - **A creature type outlives being a creature** — rule 205.1b: an Angel subtype given permanently stays on a permanent that stops being a creature; blocks Archangel Elspeth, and Valkyrie's Call and Guide of Souls carry it (`docs/engine-gaps.md`).
 - **`sameAbilityAs` counts one way only** — two abilities naming each other never count as one; only the second naming the first does, and nothing warns (`docs/engine-gaps.md`).
 - **A back face spawned by name isn't a working permanent** — `debugSpawn("The Myriad Pools")` couldn't tap for mana; test-only so far (`docs/engine-gaps.md`).

@@ -124,6 +124,7 @@ import _poolCastIntoTheFire from "../pool/cast-into-the-fire.js";
 import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
 import _poolCecilRedeemedPaladin from "../pool/cecil-redeemed-paladin.js";
+import _poolCelebr8000 from "../pool/celebr-8000.js";
 import _poolCephalidRetainer from "../pool/cephalid-retainer.js";
 import _poolCeremonialGuard from "../pool/ceremonial-guard.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
@@ -281,6 +282,7 @@ import _poolForbiddenRitual from "../pool/forbidden-ritual.js";
 import _poolForceOfDespair from "../pool/force-of-despair.js";
 import _poolForerunnerOfTheCoalition from "../pool/forerunner-of-the-coalition.js";
 import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
+import _poolFork from "../pool/fork.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
@@ -433,6 +435,7 @@ import _poolKefkaDancingMad from "../pool/kefka-dancing-mad.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKellanTheFaeBlooded from "../pool/kellan-the-fae-blooded.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
+import _poolKethisTheHiddenHand from "../pool/kethis-the-hidden-hand.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
 import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
 import _poolKithkinZephyrnaut from "../pool/kithkin-zephyrnaut.js";
@@ -1121,6 +1124,7 @@ const shard: CardShard = {
     _poolCatapultMaster,
     _poolCauldronsGift,
     _poolCecilRedeemedPaladin,
+    _poolCelebr8000,
     _poolCephalidRetainer,
     _poolCeremonialGuard,
     _poolCetaDisciple,
@@ -1278,6 +1282,7 @@ const shard: CardShard = {
     _poolForceOfDespair,
     _poolForerunnerOfTheCoalition,
     _poolForgingTheAnchor,
+    _poolFork,
     _poolForumOfAmity,
     _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
@@ -1430,6 +1435,7 @@ const shard: CardShard = {
     _poolKeldonWarlord,
     _poolKellanTheFaeBlooded,
     _poolKenrithTheReturnedKing,
+    _poolKethisTheHiddenHand,
     _poolKillmongerScourgeOfWakanda,
     _poolKioraMasterOfTheDepths,
     _poolKithkinZephyrnaut,

@@ -151,6 +151,7 @@ import _poolColossalMight from "../pool/colossal-might.js";
 import _poolCombustionMan from "../pool/combustion-man.js";
 import _poolCompulsoryRest from "../pool/compulsory-rest.js";
 import _poolConcoct from "../pool/concoct.js";
+import _poolConfusionInTheRanks from "../pool/confusion-in-the-ranks.js";
 import _poolCongregationAtDawn from "../pool/congregation-at-dawn.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
 import _poolConspiracy from "../pool/conspiracy.js";
@@ -611,6 +612,7 @@ import _poolOnslaught from "../pool/onslaught.js";
 import _poolOpenTheGates from "../pool/open-the-gates.js";
 import _poolOrbweaverKumo from "../pool/orbweaver-kumo.js";
 import _poolOreRichStalactite from "../pool/ore-rich-stalactite.js";
+import _poolOriPlateStacker from "../pool/ori-plate-stacker.js";
 import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
 import _poolOrimsThunder from "../pool/orims-thunder.js";
 import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
@@ -1166,6 +1168,7 @@ const shard: CardShard = {
     _poolCombustionMan,
     _poolCompulsoryRest,
     _poolConcoct,
+    _poolConfusionInTheRanks,
     _poolCongregationAtDawn,
     _poolConscriptedInfantry,
     _poolConspiracy,
@@ -1626,6 +1629,7 @@ const shard: CardShard = {
     _poolOpenTheGates,
     _poolOrbweaverKumo,
     _poolOreRichStalactite,
+    _poolOriPlateStacker,
     _poolOriginOfTheAvengers,
     _poolOrimsThunder,
     _poolOrzhovRacketeers,

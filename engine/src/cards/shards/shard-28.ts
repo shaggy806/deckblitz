@@ -272,6 +272,7 @@ import _poolEsikaGodOfTheTree from "../pool/esika-god-of-the-tree.js";
 import _poolEsperSojourners from "../pool/esper-sojourners.js";
 import _poolEternalSkylord from "../pool/eternal-skylord.js";
 import _poolEtherealValkyrie from "../pool/ethereal-valkyrie.js";
+import _poolEtrataTheSilencer from "../pool/etrata-the-silencer.js";
 import _poolExoticOrchard from "../pool/exotic-orchard.js";
 import _poolExperimentalLab from "../pool/experimental-lab.js";
 import _poolExplore from "../pool/explore.js";
@@ -571,6 +572,7 @@ import _poolNightshadePeddler from "../pool/nightshade-peddler.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
 import _poolNihilisticGlee from "../pool/nihilistic-glee.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
+import _poolNivMizzetReborn from "../pool/niv-mizzet-reborn.js";
 import _poolNivmagusElemental from "../pool/nivmagus-elemental.js";
 import _poolNorthernPaladin from "../pool/northern-paladin.js";
 import _poolNoyanDarRoilShaper from "../pool/noyan-dar-roil-shaper.js";
@@ -658,6 +660,7 @@ import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRapierWit from "../pool/rapier-wit.js";
 import _poolRappellingScouts from "../pool/rappelling-scouts.js";
 import _poolRavagingRiftwurm from "../pool/ravaging-riftwurm.js";
+import _poolRavenloftAdventurer from "../pool/ravenloft-adventurer.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
 import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
@@ -684,6 +687,7 @@ import _poolReturnFromExtinction from "../pool/return-from-extinction.js";
 import _poolReturnToTheRanks from "../pool/return-to-the-ranks.js";
 import _poolReturnedPhalanx from "../pool/returned-phalanx.js";
 import _poolReveillark from "../pool/reveillark.js";
+import _poolRevivalRevenge from "../pool/revival-revenge.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
 import _poolRhoxMeditant from "../pool/rhox-meditant.js";
@@ -1297,6 +1301,7 @@ const shard: CardShard = {
     _poolEsperSojourners,
     _poolEternalSkylord,
     _poolEtherealValkyrie,
+    _poolEtrataTheSilencer,
     _poolExoticOrchard,
     _poolExperimentalLab,
     _poolExplore,
@@ -1596,6 +1601,7 @@ const shard: CardShard = {
     _poolNightwindGlider,
     _poolNihilisticGlee,
     _poolNissasPilgrimage,
+    _poolNivMizzetReborn,
     _poolNivmagusElemental,
     _poolNorthernPaladin,
     _poolNoyanDarRoilShaper,
@@ -1683,6 +1689,7 @@ const shard: CardShard = {
     _poolRapierWit,
     _poolRappellingScouts,
     _poolRavagingRiftwurm,
+    _poolRavenloftAdventurer,
     _poolRazortideBridge,
     _poolRazortrapGorge,
     _poolRazorvergeThicket,
@@ -1709,6 +1716,7 @@ const shard: CardShard = {
     _poolReturnToTheRanks,
     _poolReturnedPhalanx,
     _poolReveillark,
+    _poolRevivalRevenge,
     _poolReviveTheShire,
     _poolRevokeDemise,
     _poolRhoxMeditant,

@@ -109,6 +109,7 @@ import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
 import _poolCentaurRootcaster from "../pool/centaur-rootcaster.js";
 import _poolChadichInvestigator from "../pool/chadich-investigator.js";
 import _poolChancellorOfTheDross from "../pool/chancellor-of-the-dross.js";
+import _poolChandraDressedToKill from "../pool/chandra-dressed-to-kill.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharisma from "../pool/charisma.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
@@ -338,6 +339,7 @@ import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolGuildscornWard from "../pool/guildscorn-ward.js";
 import _poolGustcloakCavalier from "../pool/gustcloak-cavalier.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
+import _poolHadesSorcererOfEld from "../pool/hades-sorcerer-of-eld.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHaloForager from "../pool/halo-forager.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
@@ -535,6 +537,7 @@ import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
 import _poolOrderChaos from "../pool/order-chaos.js";
 import _poolOrosTheAvenger from "../pool/oros-the-avenger.js";
+import _poolOsteomancerAdept from "../pool/osteomancer-adept.js";
 import _poolOupheVandals from "../pool/ouphe-vandals.js";
 import _poolOvercome from "../pool/overcome.js";
 import _poolPackGuardian from "../pool/pack-guardian.js";
@@ -680,6 +683,7 @@ import _poolSkullbriarTheWalkingGrave from "../pool/skullbriar-the-walking-grave
 import _poolSkulltap from "../pool/skulltap.js";
 import _poolSkylinePredator from "../pool/skyline-predator.js";
 import _poolSleightOfHand from "../pool/sleight-of-hand.js";
+import _poolSlimeAgainstHumanity from "../pool/slime-against-humanity.js";
 import _poolSlinkingGiant from "../pool/slinking-giant.js";
 import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
@@ -1029,6 +1033,7 @@ const shard: CardShard = {
     _poolCentaurRootcaster,
     _poolChadichInvestigator,
     _poolChancellorOfTheDross,
+    _poolChandraDressedToKill,
     _poolChangelingTitan,
     _poolCharisma,
     _poolCharmedClothier,
@@ -1258,6 +1263,7 @@ const shard: CardShard = {
     _poolGuildscornWard,
     _poolGustcloakCavalier,
     _poolGutsplitterGang,
+    _poolHadesSorcererOfEld,
     _poolHalimarDepths,
     _poolHaloForager,
     _poolHammerDropper,
@@ -1455,6 +1461,7 @@ const shard: CardShard = {
     _poolOrcristGoblinCleaver,
     _poolOrderChaos,
     _poolOrosTheAvenger,
+    _poolOsteomancerAdept,
     _poolOupheVandals,
     _poolOvercome,
     _poolPackGuardian,
@@ -1600,6 +1607,7 @@ const shard: CardShard = {
     _poolSkulltap,
     _poolSkylinePredator,
     _poolSleightOfHand,
+    _poolSlimeAgainstHumanity,
     _poolSlinkingGiant,
     _poolSlitheringCryptid,
     _poolSmeagolHelpfulGuide,

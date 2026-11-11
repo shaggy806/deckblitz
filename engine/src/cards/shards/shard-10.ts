@@ -154,6 +154,7 @@ import _poolClearTheLand from "../pool/clear-the-land.js";
 import _poolCoastlineChimera from "../pool/coastline-chimera.js";
 import _poolColossusHammer from "../pool/colossus-hammer.js";
 import _poolCombatResearch from "../pool/combat-research.js";
+import _poolCommanderLiaraPortyr from "../pool/commander-liara-portyr.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolConniveConcoct from "../pool/connive-concoct.js";
 import _poolContainmentConstruct from "../pool/containment-construct.js";
@@ -1158,6 +1159,7 @@ const shard: CardShard = {
     _poolCoastlineChimera,
     _poolColossusHammer,
     _poolCombatResearch,
+    _poolCommanderLiaraPortyr,
     _poolCompellingArgument,
     _poolConniveConcoct,
     _poolContainmentConstruct,

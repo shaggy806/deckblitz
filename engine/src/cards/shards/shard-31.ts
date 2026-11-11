@@ -657,6 +657,7 @@ import _poolOverbeingOfMyth from "../pool/overbeing-of-myth.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolOvinize from "../pool/ovinize.js";
 import _poolPacifism from "../pool/pacifism.js";
+import _poolPaintersServant from "../pool/painters-servant.js";
 import _poolPaladinsShield from "../pool/paladins-shield.js";
 import _poolPalanisHatcher from "../pool/palanis-hatcher.js";
 import _poolPaleoloth from "../pool/paleoloth.js";
@@ -954,6 +955,7 @@ import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
 import _poolTwinningStaff from "../pool/twinning-staff.js";
 import _poolUginEyeOfTheStorms from "../pool/ugin-eye-of-the-storms.js";
+import _poolUginsNexus from "../pool/ugins-nexus.js";
 import _poolUltimateMagicMeteor from "../pool/ultimate-magic-meteor.js";
 import _poolUlvenwaldMystics from "../pool/ulvenwald-mystics.js";
 import _poolUmbralJuke from "../pool/umbral-juke.js";
@@ -1724,6 +1726,7 @@ const shard: CardShard = {
     _poolOverkill,
     _poolOvinize,
     _poolPacifism,
+    _poolPaintersServant,
     _poolPaladinsShield,
     _poolPalanisHatcher,
     _poolPaleoloth,
@@ -2021,6 +2024,7 @@ const shard: CardShard = {
     _poolTweeze,
     _poolTwinningStaff,
     _poolUginEyeOfTheStorms,
+    _poolUginsNexus,
     _poolUltimateMagicMeteor,
     _poolUlvenwaldMystics,
     _poolUmbralJuke,

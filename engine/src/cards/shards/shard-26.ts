@@ -57,6 +57,7 @@ import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAshenmoorCohort from "../pool/ashenmoor-cohort.js";
 import _poolAshioksAdept from "../pool/ashioks-adept.js";
+import _poolAsinineAntics from "../pool/asinine-antics.js";
 import _poolAsmiraHolyAvenger from "../pool/asmira-holy-avenger.js";
 import _poolAssertAuthority from "../pool/assert-authority.js";
 import _poolAstuteTerraformer from "../pool/astute-terraformer.js";
@@ -186,6 +187,7 @@ import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCrosswinds from "../pool/crosswinds.js";
 import _poolCruelSadist from "../pool/cruel-sadist.js";
+import _poolCruelclawsHeist from "../pool/cruelclaws-heist.js";
 import _poolCrushUnderfoot from "../pool/crush-underfoot.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCursedMonstrosity from "../pool/cursed-monstrosity.js";
@@ -422,6 +424,7 @@ import _poolInspiredTinkering from "../pool/inspired-tinkering.js";
 import _poolInspiringCleric from "../pool/inspiring-cleric.js";
 import _poolInspiringUnicorn from "../pool/inspiring-unicorn.js";
 import _poolInterceptorMechan from "../pool/interceptor-mechan.js";
+import _poolIntrepidPaleontologist from "../pool/intrepid-paleontologist.js";
 import _poolInvasionOfKarsus from "../pool/invasion-of-karsus.js";
 import _poolIronGiant from "../pool/iron-giant.js";
 import _poolItThatRidesAsOne from "../pool/it-that-rides-as-one.js";
@@ -861,6 +864,7 @@ import _poolTestOfPriorities from "../pool/test-of-priorities.js";
 import _poolThassaGodOfTheSea from "../pool/thassa-god-of-the-sea.js";
 import _poolTheAetherspark from "../pool/the-aetherspark.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
+import _poolTheEnigmaJewel from "../pool/the-enigma-jewel.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
@@ -1079,6 +1083,7 @@ const shard: CardShard = {
     _poolAshcoatBear,
     _poolAshenmoorCohort,
     _poolAshioksAdept,
+    _poolAsinineAntics,
     _poolAsmiraHolyAvenger,
     _poolAssertAuthority,
     _poolAstuteTerraformer,
@@ -1208,6 +1213,7 @@ const shard: CardShard = {
     _poolCroakingCounterpart,
     _poolCrosswinds,
     _poolCruelSadist,
+    _poolCruelclawsHeist,
     _poolCrushUnderfoot,
     _poolCurseOfTheRestlessDead,
     _poolCursedMonstrosity,
@@ -1444,6 +1450,7 @@ const shard: CardShard = {
     _poolInspiringCleric,
     _poolInspiringUnicorn,
     _poolInterceptorMechan,
+    _poolIntrepidPaleontologist,
     _poolInvasionOfKarsus,
     _poolIronGiant,
     _poolItThatRidesAsOne,
@@ -1883,6 +1890,7 @@ const shard: CardShard = {
     _poolThassaGodOfTheSea,
     _poolTheAetherspark,
     _poolTheEchoverseFulcrum,
+    _poolTheEnigmaJewel,
     _poolTheFireCrystal,
     _poolTheGreatHenge,
     _poolTheMagicMirror,

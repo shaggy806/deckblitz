@@ -186,6 +186,7 @@ import _poolDetritivore from "../pool/detritivore.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
 import _poolDiligentExcavator from "../pool/diligent-excavator.js";
+import _poolDimOubliette from "../pool/dim-oubliette.js";
 import _poolDimensionalInfiltrator from "../pool/dimensional-infiltrator.js";
 import _poolDiminish from "../pool/diminish.js";
 import _poolDirgurIslandDragon from "../pool/dirgur-island-dragon.js";
@@ -265,6 +266,7 @@ import _poolFalseProphet from "../pool/false-prophet.js";
 import _poolFangsOfKalonia from "../pool/fangs-of-kalonia.js";
 import _poolFarmsteadGleaner from "../pool/farmstead-gleaner.js";
 import _poolFascination from "../pool/fascination.js";
+import _poolFastForward from "../pool/fast-forward.js";
 import _poolFathomMage from "../pool/fathom-mage.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
@@ -274,6 +276,7 @@ import _poolFerenginar from "../pool/ferenginar.js";
 import _poolFeverCharm from "../pool/fever-charm.js";
 import _poolFieldOfRuin from "../pool/field-of-ruin.js";
 import _poolFierceRetribution from "../pool/fierce-retribution.js";
+import _poolFiliAndKiliJoyous from "../pool/fili-and-kili-joyous.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
 import _poolFinish from "../pool/finish.js";
 import _poolFireRimForm from "../pool/fire-rim-form.js";
@@ -712,6 +715,7 @@ import _poolSearingMeditation from "../pool/searing-meditation.js";
 import _poolSecurityBlockade from "../pool/security-blockade.js";
 import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSelvalaHeartOfTheWilds from "../pool/selvala-heart-of-the-wilds.js";
+import _poolSensationalSpiderMan from "../pool/sensational-spider-man.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolSerrasHymn from "../pool/serras-hymn.js";
 import _poolSevenDwarves from "../pool/seven-dwarves.js";
@@ -804,6 +808,7 @@ import _poolSummonAlexander from "../pool/summon-alexander.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
 import _poolSunforger from "../pool/sunforger.js";
 import _poolSunhomeEnforcer from "../pool/sunhome-enforcer.js";
+import _poolSuperCombo from "../pool/super-combo.js";
 import _poolSuperiorFoesOfSpiderMan from "../pool/superior-foes-of-spider-man.js";
 import _poolSupernaturalRescue from "../pool/supernatural-rescue.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
@@ -1194,6 +1199,7 @@ const shard: CardShard = {
     _poolDevotedDruid,
     _poolDevoutChaplain,
     _poolDiligentExcavator,
+    _poolDimOubliette,
     _poolDimensionalInfiltrator,
     _poolDiminish,
     _poolDirgurIslandDragon,
@@ -1273,6 +1279,7 @@ const shard: CardShard = {
     _poolFangsOfKalonia,
     _poolFarmsteadGleaner,
     _poolFascination,
+    _poolFastForward,
     _poolFathomMage,
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,
@@ -1282,6 +1289,7 @@ const shard: CardShard = {
     _poolFeverCharm,
     _poolFieldOfRuin,
     _poolFierceRetribution,
+    _poolFiliAndKiliJoyous,
     _poolFinaleOfGlory,
     _poolFinish,
     _poolFireRimForm,
@@ -1720,6 +1728,7 @@ const shard: CardShard = {
     _poolSecurityBlockade,
     _poolSelesnyaKeyrune,
     _poolSelvalaHeartOfTheWilds,
+    _poolSensationalSpiderMan,
     _poolSentinelSpider,
     _poolSerrasHymn,
     _poolSevenDwarves,
@@ -1812,6 +1821,7 @@ const shard: CardShard = {
     _poolSummonKujata,
     _poolSunforger,
     _poolSunhomeEnforcer,
+    _poolSuperCombo,
     _poolSuperiorFoesOfSpiderMan,
     _poolSupernaturalRescue,
     _poolSuqataLancer,

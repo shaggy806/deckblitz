@@ -610,6 +610,7 @@ import _poolPiruTheVolatile from "../pool/piru-the-volatile.js";
 import _poolPlatedWurm from "../pool/plated-wurm.js";
 import _poolPlumeveil from "../pool/plumeveil.js";
 import _poolPoisonTheCup from "../pool/poison-the-cup.js";
+import _poolPollutedCistern from "../pool/polluted-cistern.js";
 import _poolPollutedDelta from "../pool/polluted-delta.js";
 import _poolPompousBattlemage from "../pool/pompous-battlemage.js";
 import _poolPoreOverThePages from "../pool/pore-over-the-pages.js";
@@ -1639,6 +1640,7 @@ const shard: CardShard = {
     _poolPlatedWurm,
     _poolPlumeveil,
     _poolPoisonTheCup,
+    _poolPollutedCistern,
     _poolPollutedDelta,
     _poolPompousBattlemage,
     _poolPoreOverThePages,

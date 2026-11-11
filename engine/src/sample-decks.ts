@@ -1203,7 +1203,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Time Wipe", 1],
     ],
     substitutions: [
-      sub("Arthur, Marigold Knight", "Adeline, Resplendent Cathar", "White creature that adds attackers when it attacks."),
       sub("Shield Broker", "Act of Treason", "Takes an opponent's creature."),
     ],
   }),

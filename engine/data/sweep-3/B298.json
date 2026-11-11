@@ -1,0 +1,2254 @@
+{
+ "batch": "B298",
+ "status": "done",
+ "ranks": "Blocked cards re-attempted by EDHREC rank toward rank 10,000 (2026-11-11): ranks 5,923-10,000, the 292 left whose record predates B291 or that had none; four agents",
+ "authored": [
+  {
+   "name": "Intrepid Paleontologist",
+   "files": [
+    "engine/src/cards/pool/intrepid-paleontologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kagha, Shadow Archdruid",
+   "files": [
+    "engine/src/cards/pool/kagha-shadow-archdruid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravenloft Adventurer",
+   "files": [
+    "engine/src/cards/pool/ravenloft-adventurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emet-Selch, Unsundered",
+   "files": [
+    "engine/src/cards/pool/emet-selch-unsundered.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cruelclaw's Heist",
+   "files": [
+    "engine/src/cards/pool/cruelclaws-heist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Osteomancer Adept",
+   "files": [
+    "engine/src/cards/pool/osteomancer-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawn-Blessed Pennant",
+   "files": [
+    "engine/src/cards/pool/dawn-blessed-pennant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alesha, Who Smiles at Death",
+   "files": [
+    "engine/src/cards/pool/alesha-who-smiles-at-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scalelord Reckoner",
+   "files": [
+    "engine/src/cards/pool/scalelord-reckoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Long River Lurker",
+   "files": [
+    "engine/src/cards/pool/long-river-lurker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cavalier of Gales",
+   "files": [
+    "engine/src/cards/pool/cavalier-of-gales.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Etrata, the Silencer",
+   "files": [
+    "engine/src/cards/pool/etrata-the-silencer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celebr-8000",
+   "files": [
+    "engine/src/cards/pool/celebr-8000.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hive Mind",
+   "files": [
+    "engine/src/cards/pool/hive-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bladegraft Aspirant",
+   "files": [
+    "engine/src/cards/pool/bladegraft-aspirant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kheru Spellsnatcher",
+   "files": [
+    "engine/src/cards/pool/kheru-spellsnatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tegwyll's Scouring",
+   "files": [
+    "engine/src/cards/pool/tegwylls-scouring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pumpkin Bombs",
+   "files": [
+    "engine/src/cards/pool/pumpkin-bombs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashes of the Abhorrent",
+   "files": [
+    "engine/src/cards/pool/ashes-of-the-abhorrent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arena",
+   "files": [
+    "engine/src/cards/pool/arena.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Synth Eradicator",
+   "files": [
+    "engine/src/cards/pool/synth-eradicator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Here Comes a New Hero!",
+   "files": [
+    "engine/src/cards/pool/here-comes-a-new-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Kenriths' Royal Funeral",
+   "files": [
+    "engine/src/cards/pool/the-kenriths-royal-funeral.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weeping Angel",
+   "files": [
+    "engine/src/cards/pool/weeping-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bebop, Skull & Crossbones",
+   "files": [
+    "engine/src/cards/pool/bebop-skull-crossbones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Celestus",
+   "files": [
+    "engine/src/cards/pool/the-celestus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hancock, Ghoulish Mayor",
+   "files": [
+    "engine/src/cards/pool/hancock-ghoulish-mayor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakdos, the Showstopper",
+   "files": [
+    "engine/src/cards/pool/rakdos-the-showstopper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Epic Experiment",
+   "files": [
+    "engine/src/cards/pool/epic-experiment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mizzix of the Izmagnus",
+   "files": [
+    "engine/src/cards/pool/mizzix-of-the-izmagnus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Enigma Jewel // Locus of Enlightenment",
+   "files": [
+    "engine/src/cards/pool/the-enigma-jewel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crabomination",
+   "files": [
+    "engine/src/cards/pool/crabomination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cone of Cold",
+   "files": [
+    "engine/src/cards/pool/cone-of-cold.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slime Against Humanity",
+   "files": [
+    "engine/src/cards/pool/slime-against-humanity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Painter's Servant",
+   "files": [
+    "engine/src/cards/pool/painters-servant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigurd, Jarl of Ravensthorpe",
+   "files": [
+    "engine/src/cards/pool/sigurd-jarl-of-ravensthorpe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Berserker's Frenzy",
+   "files": [
+    "engine/src/cards/pool/berserkers-frenzy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Endless Detour",
+   "files": [
+    "engine/src/cards/pool/endless-detour.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kethis, the Hidden Hand",
+   "files": [
+    "engine/src/cards/pool/kethis-the-hidden-hand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radagast the Brown",
+   "files": [
+    "engine/src/cards/pool/radagast-the-brown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rem Karolus, Stalwart Slayer",
+   "files": [
+    "engine/src/cards/pool/rem-karolus-stalwart-slayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eradicator Valkyrie",
+   "files": [
+    "engine/src/cards/pool/eradicator-valkyrie.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arthur, Marigold Knight",
+   "files": [
+    "engine/src/cards/pool/arthur-marigold-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fast Forward",
+   "files": [
+    "engine/src/cards/pool/fast-forward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heroes in a Half Shell",
+   "files": [
+    "engine/src/cards/pool/heroes-in-a-half-shell.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jacob Frye",
+   "files": [
+    "engine/src/cards/pool/jacob-frye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Appa, the Vigilant",
+   "files": [
+    "engine/src/cards/pool/appa-the-vigilant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tamiyo, Collector of Tales",
+   "files": [
+    "engine/src/cards/pool/tamiyo-collector-of-tales.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super Combo",
+   "files": [
+    "engine/src/cards/pool/super-combo.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crystalline Armor",
+   "files": [
+    "engine/src/cards/pool/crystalline-armor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Game Over",
+   "files": [
+    "engine/src/cards/pool/game-over.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niv-Mizzet Reborn",
+   "files": [
+    "engine/src/cards/pool/niv-mizzet-reborn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bag End Banquet",
+   "files": [
+    "engine/src/cards/pool/bag-end-banquet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Twisted Sewer-Witch",
+   "files": [
+    "engine/src/cards/pool/twisted-sewer-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Technomancer",
+   "files": [
+    "engine/src/cards/pool/technomancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Lord Ozai",
+   "files": [
+    "engine/src/cards/pool/fire-lord-ozai.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heartless Conscription",
+   "files": [
+    "engine/src/cards/pool/heartless-conscription.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Don't Make a Sound",
+   "files": [
+    "engine/src/cards/pool/dont-make-a-sound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle at the Helvault",
+   "files": [
+    "engine/src/cards/pool/battle-at-the-helvault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blitzball Stadium",
+   "files": [
+    "engine/src/cards/pool/blitzball-stadium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Command the Dreadhorde",
+   "files": [
+    "engine/src/cards/pool/command-the-dreadhorde.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Fiora // Marchesa, Resolute Monarch",
+   "files": [
+    "engine/src/cards/pool/invasion-of-fiora.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Polluted Cistern // Dim Oubliette",
+   "files": [
+    "engine/src/cards/pool/polluted-cistern-dim-oubliette.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liliana's Talent",
+   "files": [
+    "engine/src/cards/pool/lilianas-talent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unidentified Hovership",
+   "files": [
+    "engine/src/cards/pool/unidentified-hovership.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ugin's Nexus",
+   "files": [
+    "engine/src/cards/pool/ugins-nexus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fork",
+   "files": [
+    "engine/src/cards/pool/fork.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Huskburster Swarm",
+   "files": [
+    "engine/src/cards/pool/huskburster-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Confusion in the Ranks",
+   "files": [
+    "engine/src/cards/pool/confusion-in-the-ranks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidetsugu and Kairi",
+   "files": [
+    "engine/src/cards/pool/hidetsugu-and-kairi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Confounding Conundrum",
+   "files": [
+    "engine/src/cards/pool/confounding-conundrum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Asinine Antics",
+   "files": [
+    "engine/src/cards/pool/asinine-antics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mowu, Loyal Companion",
+   "files": [
+    "engine/src/cards/pool/mowu-loyal-companion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smaug the Impenetrable",
+   "files": [
+    "engine/src/cards/pool/smaug-the-impenetrable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azor's Gateway // Sanctum of the Sun",
+   "files": [
+    "engine/src/cards/pool/azors-gateway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tax Collector",
+   "files": [
+    "engine/src/cards/pool/tax-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chakra Meditation",
+   "files": [
+    "engine/src/cards/pool/chakra-meditation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Six-Sided Die",
+   "files": [
+    "engine/src/cards/pool/six-sided-die.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fíli and Kíli, Joyous",
+   "files": [
+    "engine/src/cards/pool/fili-and-kili-joyous.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ori, Plate Stacker",
+   "files": [
+    "engine/src/cards/pool/ori-plate-stacker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sensational Spider-Man",
+   "files": [
+    "engine/src/cards/pool/sensational-spider-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kenessos, Priest of Thassa",
+   "files": [
+    "engine/src/cards/pool/kenessos-priest-of-thassa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shellshock",
+   "files": [
+    "engine/src/cards/pool/shellshock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tersa Lightshatter",
+   "files": [
+    "engine/src/cards/pool/tersa-lightshatter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revival",
+   "files": [
+    "engine/src/cards/pool/revival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reidane, God of the Worthy",
+   "files": [
+    "engine/src/cards/pool/reidane-god-of-the-worthy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Rise of Sozin // Fire Lord Sozin",
+   "files": [
+    "engine/src/cards/pool/the-rise-of-sozin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra, Dressed to Kill",
+   "files": [
+    "engine/src/cards/pool/chandra-dressed-to-kill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ayara, Widow of the Realm // Ayara, Furnace Queen",
+   "files": [
+    "engine/src/cards/pool/ayara-widow-of-the-realm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anje, Maid of Dishonor",
+   "files": [
+    "engine/src/cards/pool/anje-maid-of-dishonor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necklace of Girion",
+   "files": [
+    "engine/src/cards/pool/necklace-of-girion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Role Reversal",
+   "files": [
+    "engine/src/cards/pool/role-reversal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon: Brynhildr",
+   "files": [
+    "engine/src/cards/pool/summon-brynhildr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commander Liara Portyr",
+   "files": [
+    "engine/src/cards/pool/commander-liara-portyr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Circuits Act",
+   "files": [
+    "engine/src/cards/pool/circuits-act.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blitzwing, Cruel Tormentor // Blitzwing, Adaptive Assailant",
+   "files": [
+    "engine/src/cards/pool/blitzwing-cruel-tormentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Compy Swarm",
+   "files": [
+    "engine/src/cards/pool/compy-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aang and Katara",
+   "files": [
+    "engine/src/cards/pool/aang-and-katara.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dead Man's Chest",
+   "files": [
+    "engine/src/cards/pool/dead-mans-chest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Cauldron of Eternity",
+   "files": [
+    "engine/src/cards/pool/the-cauldron-of-eternity.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Disorienting Choice",
+   "needs": [
+    "amount:chosen-targets-remaining"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Each controller's 'may exile it' must be chosen first and done together; and nothing counts the chosen targets still on the battlefield. (same; not re-verified in depth)"
+  },
+  {
+   "name": "Watchful Radstag",
+   "needs": [
+    "trigger:evolves-trigger"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'whenever this creature evolves' trigger and token copy of it"
+  },
+  {
+   "name": "Kinbinding",
+   "needs": [
+    "static:pt-per-turn-history"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): grantPtPerCount can't read the turnHistory 'entered' tally (creatures that entered under your control this turn, including ones since gone)"
+  },
+  {
+   "name": "Phyrexian Unlife",
+   "needs": [
+    "static:damage-to-you-as-though-infect"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"Don't lose at 0 life\" exists now; damageAsThoughSourceHad covers all damage, with no \"to you\" scope"
+  },
+  {
+   "name": "Knowledge Pool",
+   "needs": [
+    "effect:exile-cast-spell-then-cast-linked-exiled"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Imprint each player's top three linked to it, then 'whenever a player casts a spell from their hand, that player exiles it; if they do, they may cast a spell from among other cards exiled with this artifact' free: no exile-the-cast-spell effect, and cast-now can't offer another player's cast from the linked exile."
+  },
+  {
+   "name": "Needle Drop",
+   "needs": [
+    "effect:target-dealt-damage-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'any target that was dealt damage this turn' includes players; no such target filter"
+  },
+  {
+   "name": "Jace, Mirror Mage",
+   "needs": [
+    "effect:copy-starting-loyalty"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): A token copy except it has loyalty 1."
+  },
+  {
+   "name": "Raubahn, Bull of Ala Mhigo",
+   "needs": [
+    "decision:ward-dynamic-x"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Ward—Pay life equal to Raubahn's power."
+  },
+  {
+   "name": "Canoptek Wraith",
+   "needs": [
+    "condition:filter-same-name-as-chosen"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): A choose-permanents then may not ask, so it can't hold the search; no confirmed \"chosen this way\" set for sameNameWith"
+  },
+  {
+   "name": "Hellish Rebuke",
+   "needs": [
+    "trigger:granted-deals-damage-to-spell-caster"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The granted trigger must fire only on damage to the player who cast the spell; deals-damage's to can't name that player, which matters in multiplayer."
+  },
+  {
+   "name": "Emergent Ultimatum",
+   "needs": [
+    "effect:opponent-chooses-among-exiled-shuffle-in"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): search-library's instead sends the opponent's pick straight to the library; it's never exiled first."
+  },
+  {
+   "name": "Belt of Giant Strength",
+   "needs": [
+    "cost:ability-cost-reduction-by-target-stats"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Equip costs {X} less, X the targeted creature's power."
+  },
+  {
+   "name": "Roaring Furnace // Steaming Sauna",
+   "needs": [
+    "bug:door-unlock-timestamp"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Steaming Sauna's ruling: unlocked after a 'your maximum hand size is N' permanent entered, its 'no maximum hand size' wins (the door's static takes the unlock's timestamp); the engine keeps the Room's entry timestamp (unlockDoor: 'same object, same timestamp'), so The Ten Rings / Twenty-Toed Toad / Cecily would wrongly win."
+  },
+  {
+   "name": "Protection Racket",
+   "needs": [
+    "decision:each-opponent-may-pay-life-for-revealed-card"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): payLifeAmount options exist now; moving the revealed top card to exile or hand inside reveal-top per opponent is unverified"
+  },
+  {
+   "name": "The Capitoline Triad",
+   "needs": [
+    "cost:exile-from-graveyard-total-mana-value"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The emblem's \"Creatures you control have base power and toughness 9/9\" is a layer-7b set, and an emblem's static folds only grantPt/keywords (setBase null in characteristics.ts); the cost \"Exile any number of historic cards from your graveyard with total mana value 30 or greater\" has no vocabulary (exileFromGraveyard is a fixed count); the Those Who Came Before reduction is expressible (selfCostReduction reduceGeneric cardsInGraveyard over the historic anyOf filter, counted after the card moves to the stack)."
+  },
+  {
+   "name": "Altar of the Wretched // Wretched Bonemass",
+   "needs": [
+    "static:keywords-from-exiled-with-source"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The P/T is expressible and most keywords could be conditional statics; whatever protections the exiled cards have is not"
+  },
+  {
+   "name": "Kamahl's Will",
+   "needs": [
+    "target:any-number-group-before-targeting-mode"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): With both modes chosen, the first mode's any-number group of lands comes before the second mode's target creature; a group must be its list's last slot, and swapping the modes would deal the damage before the lands animate."
+  },
+  {
+   "name": "Spectral Searchlight",
+   "needs": [
+    "effect:other-player-adds-mana-choice"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The chosen player adds one mana of the colour they choose."
+  },
+  {
+   "name": "Chiss-Goria, Forge Tyrant",
+   "needs": [
+    "zone:impulse-one-cast-grants-affinity"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): upTo: 1 covers the single cast; nothing grants affinity to a spell cast through a permission"
+  },
+  {
+   "name": "Curse of Hospitality",
+   "needs": [
+    "trigger:combat-damage-to-enchanted-player"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): creatures attacking enchanted player have trample and a play-exiled-card trigger (family trigger:combat-damage-to-you-trigger)"
+  },
+  {
+   "name": "Ixidron",
+   "needs": [
+    "replacement:as-enters-turn-others-face-down"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'As this enters, turn all other nontoken creatures face down' can't be said as an as-enters action."
+  },
+  {
+   "name": "Jaya's Phoenix",
+   "needs": [
+    "effect:copy-next-loyalty-ability"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"Copy the next loyalty ability you activate this turn when you activate it\": a delayed copy of an activation."
+  },
+  {
+   "name": "Midnight Crusader Shuttle",
+   "needs": [
+    "effect:put-into-combat-attacking"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Villainous option 2: gain control of a creature of your choice, tap it, and 'it's attacking that player' - no effect puts a creature already on the battlefield into combat as an attacker."
+  },
+  {
+   "name": "God-Eternal Kefnet",
+   "needs": [
+    "decision:may-reveal-first-draw"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): reveal the first card drawn, copy it and cast the copy for {2} less"
+  },
+  {
+   "name": "Demonic Covenant",
+   "needs": [
+    "condition:milled-share-all-card-types"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'If two cards that share all their card types were milled this way, sacrifice this enchantment': the this-way condition can count milled cards (or the card types among them) but can't ask whether two of them have exactly the same set of card types (an artifact creature and a creature don't)."
+  },
+  {
+   "name": "Unstable Glyphbridge // Sandswirl Wanderglyph",
+   "needs": [
+    "effect:choose-per-player-destroy-rest",
+    "effect:player-cant-attack-you-this-turn",
+    "static:attacked-you-cant-cast-spells"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The front face fits Eternal Wanderer's vote-choose pattern; the back face's two prohibitions are missing"
+  },
+  {
+   "name": "What Must Be Done",
+   "needs": [
+    "effect:enters-with-counters-if-type"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Release Juno's \"It enters with two additional +1/+1 counters on it if it's a creature\": put-onto-battlefield's withCounters has no type condition judged as the permanent enters (rule 614.12 — a noncreature artifact or Saga returned under March of the Machines or Starfield of Nyx enters as a creature and gets them); a conditional on the graveyard card's types would miss that. Mode 1 (destroy-all typesAnyOf artifact, creature) and the historic permanent target are fine."
+  },
+  {
+   "name": "Pulmonic Sliver",
+   "needs": [
+    "replacement:graveyard-to-library-top-optional"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): All Slivers' optional \"put it on top of its owner's library instead\" replacement isn't expressible as a granted static."
+  },
+  {
+   "name": "Black Panther, Wakandan King",
+   "needs": [
+    "amount:counters-moved-this-way"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): move-counters ifMoved has no amount for how many moved (\"gain that much life\")"
+  },
+  {
+   "name": "Barrin, Tolarian Archmage",
+   "needs": [
+    "condition:permanent-put-into-hand-from-battlefield-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): if a permanent was put into your hand from the battlefield this turn"
+  },
+  {
+   "name": "Printlifter Ooze",
+   "needs": [
+    "effect:create-token-enters-with-counters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'The token enters with X +1/+1 counters on it': create-token's thenCounters puts them on after it entered as a 0/0, so 'whenever a creature with power N or less enters' (Wispdrinker Vampire) sees a 0/0; no enters-with option on a created token."
+  },
+  {
+   "name": "Silverfur Partisan",
+   "needs": [
+    "trigger:becomes-target-by-spell-type"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Becomes the target of an instant or sorcery spell': no spell-type narrowing."
+  },
+  {
+   "name": "Once Upon a Time",
+   "needs": [
+    "condition:first-spell-cast-this-game"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): cast without paying its mana cost if it's the first spell you've cast this game"
+  },
+  {
+   "name": "Zilortha, Strength Incarnate",
+   "needs": [
+    "static:lethal-damage-by-power"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): lethal damage judged by power"
+  },
+  {
+   "name": "Market Gnome",
+   "needs": [
+    "trigger:exiled-while-crafting"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'When exiled from the battlefield while you're activating a craft ability'."
+  },
+  {
+   "name": "Vampire Nocturnus",
+   "needs": [
+    "condition:top-card-of-library-matches"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Revealing the top card is built; 'as long as the top card of your library is black' has no condition."
+  },
+  {
+   "name": "Deification",
+   "needs": [
+    "static:planeswalker-zero-loyalty-survives",
+    "effect:choose-planeswalker-type"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): 'damage would remove all loyalty counters -> all but one' replacement doesn't exist; no 'choose a planeswalker type' as-enters choice or ofChosenType for planeswalker subtypes"
+  },
+  {
+   "name": "Dwalin, Weaponmaster",
+   "needs": [
+    "mechanic:hone-counters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Hone counters (rule 122.1j: +1/+0 to the creature the Equipment is attached to) aren't modeled."
+  },
+  {
+   "name": "Spinerock Tyrant",
+   "needs": [
+    "effect:spell-on-stack-gains-keyword"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Those spells gain wither' includes the original; gains reaches only the copy."
+  },
+  {
+   "name": "Sting, Bilbo's Sword",
+   "needs": [
+    "mechanic:hone-counters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Hone counters (each grants +1/+0 to the creature the Equipment is attached to, from the counter itself) aren't modeled anywhere in the engine."
+  },
+  {
+   "name": "Master of Predicaments",
+   "needs": [
+    "decision:opponent-guesses-mana-value"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): An opponent guesses whether a hidden card's mana value is greater than 4."
+  },
+  {
+   "name": "Dragon's Approach",
+   "needs": [
+    "cost:may-exile-self-and-named-from-graveyard"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): exiling it and four named cards from the graveyard; the any-number deck exemption"
+  },
+  {
+   "name": "Realm Seekers",
+   "needs": [
+    "amount:entering-card-counts-itself-in-hand"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Counts itself when put onto the battlefield from a hand (ruling); the enters-with amount reads after it left."
+  },
+  {
+   "name": "Boxing Ring",
+   "needs": [
+    "condition:filter-fought-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): a creature that fought this turn (family condition:filter-this-turn-history)"
+  },
+  {
+   "name": "Elrond of the White Council",
+   "needs": [
+    "effect:voter-chooses-permanent"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): \"For each fellowship vote, the voter chooses a creature they control\" — a choice the voter makes after the vote; the secret vote itself is built."
+  },
+  {
+   "name": "Enduring Angel",
+   "needs": [
+    "replacement:life-to-zero-transform-instead"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): P/T equal to life and doubling life are built; \"if your life total would be reduced to 0 or less, transform instead and it becomes 3\" is not"
+  },
+  {
+   "name": "Thieves' Auction",
+   "needs": [
+    "decision:each-player-chooses-exiled-card",
+    "effect:repeat-until-no-player-acts"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Players take turns choosing among the cards exiled this way until none are left."
+  },
+  {
+   "name": "Hunted by The Family",
+   "needs": [
+    "effect:per-target-villainous-choice-turn-order"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Per target, its controller faces a villainous choice; the ruling has them asked in turn order, but for-each-target goes in target order (and nesting each-player-may inside for-each-target is untested)."
+  },
+  {
+   "name": "Campfire",
+   "needs": [
+    "effect:put-all-commanders-into-hand"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): No 'all commanders you own from the command zone and graveyard into your hand' without a hardcoded cap on look-and-choose."
+  },
+  {
+   "name": "Neverwinter Hydra",
+   "needs": [
+    "replacement:roll-as-enters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'As this creature enters, roll X d6. It enters with that many +1/+1 counters': an enters-with-counters replacement can't roll."
+  },
+  {
+   "name": "Out of Time",
+   "needs": [
+    "effect:phased-out-this-way-count"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): No this-way count of creatures phased out."
+  },
+  {
+   "name": "Firkraag, Cunning Instigator",
+   "needs": [
+    "stat:had-to-attack-condition"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): 'if that creature had to attack this combat' isn't tracked; Dragons-attack-an-opponent goad trigger too (same: \"had to attack\" isn't recorded)"
+  },
+  {
+   "name": "River Song's Diary",
+   "needs": [
+    "replacement:all-hand-spells-exiled-linked"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Every player's instant and sorcery spells cast from hand exiled as they resolve and linked to the artifact, then a random one of those cards cast free."
+  },
+  {
+   "name": "Valki, God of Lies",
+   "needs": [
+    "effect:exile-from-revealed-hand-per-opponent-until-leaves"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Each opponent reveals, you exile a creature card from each until Valki leaves; plus its copy ability. (same; not fully re-verified, and the copy-by-X ability and Tibalt's emblem face are also open)"
+  },
+  {
+   "name": "Asmodeus the Archfiend",
+   "needs": [
+    "replacement:draw-replacement-exile-face-down"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): draw replacement exiling face down, and returning the cards 'exiled with' it"
+  },
+  {
+   "name": "Ochre Jelly",
+   "needs": [
+    "effect:token-copy-enters-with-counters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Split: the delayed token copy enters with half the dead creature's +1/+1 counters"
+  },
+  {
+   "name": "Gift of Doom",
+   "needs": [
+    "replacement:as-turned-face-up-attach-aura"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'As this is turned face up, you may attach it to a creature': `asTurnedFaceUp` takes only counters."
+  },
+  {
+   "name": "Sudden Substitution",
+   "needs": [
+    "effect:exchange-control-permanent-and-spell"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): An exchange of a spell and a creature."
+  },
+  {
+   "name": "Sigarda's Splendor",
+   "needs": [
+    "condition:noted-life-total"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): No per-permanent noted life total, set as it enters and re-noted on each upkeep trigger's resolution, for the draw condition to compare against"
+  },
+  {
+   "name": "Elsha of the Infinite",
+   "needs": [
+    "zone:cast-from-library-top-flash"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): castFromLibraryTop has no flash rider and castAsThoughFlash's filter can't say 'from the top of your library'; flash for every noncreature spell would be wrong"
+  },
+  {
+   "name": "Red Sun's Twilight",
+   "needs": [
+    "effect:token-copy-each-destroyed-this-way"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): create-token-copy of a this-way set copies the cards as cards, not the destroyed permanents' copiable values (wrong for tokens and copies)"
+  },
+  {
+   "name": "Jace, Architect of Thought",
+   "needs": [
+    "decision:search-each-library-before-choosing",
+    "effect:pile-fate-library-bottom-any-order"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): The -8 looks through every library before any choice is final; the -2 puts a pile on the bottom in any order."
+  },
+  {
+   "name": "Spider-Man 2099",
+   "needs": [
+    "stat:lands-played-not-from-hand-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Nothing records where a played land came from."
+  },
+  {
+   "name": "Incinerator of the Guilty",
+   "needs": [
+    "keyword:collect-evidence-x"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'You may collect evidence X. When you do, ... deals X damage' needs X chosen as the trigger resolves and read by the reflexive trigger; the collect-evidence effect takes only a fixed number."
+  },
+  {
+   "name": "Soulfire Eruption",
+   "needs": [
+    "amount:exiled-card-mana-value"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): per target, damage equal to the mana value of the card just exiled"
+  },
+  {
+   "name": "Recommission",
+   "needs": [
+    "effect:enters-with-counters-if-type"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"If a creature enters this way, it enters with an additional +1/+1 counter\" is judged as it enters (a copy effect can make it a creature); a check of the graveyard card misses that."
+  },
+  {
+   "name": "Lich's Mastery",
+   "needs": [
+    "effect:exile-per-life-lost-mixed-zones"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): for each 1 life lost, exile a permanent you control or a card from your hand or graveyard"
+  },
+  {
+   "name": "Amzu, Swarm's Hunger",
+   "needs": [
+    "amount:greatest-among-cards-left-graveyard"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): An aggregate can't read a leaves-graveyard batch once the cards are in a hand or library."
+  },
+  {
+   "name": "Pirated Copy",
+   "needs": [
+    "effect:copy-exception-subtype-if-creature"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): CopyExceptions.addSubtypes is unconditional, and by the ruling there's no Pirate if it doesn't enter as a creature."
+  },
+  {
+   "name": "Phyrexian Processor",
+   "needs": [
+    "cost:pay-any-amount-of-life-as-enters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): pay any amount of life as it enters, remembered for an X/X token later"
+  },
+  {
+   "name": "Parker Luck",
+   "needs": [
+    "effect:mutual-reveal-cross-life-loss"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Two players reveal, each loses life by the other's card."
+  },
+  {
+   "name": "Spry and Mighty",
+   "needs": [
+    "effect:choose-permanents-this-way"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): X is read once for both pumps; modify-pt-all's thisWay chosen matches nothing after choose-permanents, and per-slot modify-pt reads X again. (same; the suggested shape is unconfirmed)"
+  },
+  {
+   "name": "Wall of Shards",
+   "needs": [
+    "cost:cumulative-upkeep-opponent-gains-life"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): An unless { doing } option could write it, but it skips the payability check (an opponent who can't gain life, rule 118.3)"
+  },
+  {
+   "name": "Stick Together",
+   "needs": [
+    "effect:choose-party-sacrifice-rest"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): each player chooses a party and sacrifices the rest"
+  },
+  {
+   "name": "Night Shift of the Living Dead",
+   "needs": [
+    "replacement:modify-die-result-after-roll"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): After you roll a die, you may pay 1 life to change the result by 1, once each turn"
+  },
+  {
+   "name": "Mutated Cultist",
+   "needs": [
+    "effect:remove-all-counters-from-player"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): remove-player-counters covers poison, experience and rad only, not all kinds at once"
+  },
+  {
+   "name": "Last Night Together",
+   "needs": [
+    "effect:extra-combat-after-this-main-only-chosen-attack"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): "
+  },
+  {
+   "name": "Prototype Portal",
+   "needs": [
+    "amount:exiled-card-mana-value"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): X is the imprinted card's mana value; token copy of the exiled card"
+  },
+  {
+   "name": "Aurora Awakener",
+   "needs": [
+    "effect:reveal-until-count-put-any-number"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): reveal-until-count puts every found card; it can't put 'any number of' them."
+  },
+  {
+   "name": "Visions of Phyrexia",
+   "needs": [
+    "condition:played-card-from-exile-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"If you didn't play a card from exile this turn\": no this-turn condition covers lands played from exile."
+  },
+  {
+   "name": "Edgar, Master Machinist",
+   "needs": [
+    "zone:graveyard-cast-enters-tapped"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"If you cast a spell this way, that artifact enters tapped\": castFromGraveyard (Karador's once-per-turn permission) has no enters-tapped rider on spells cast through it."
+  },
+  {
+   "name": "Geth's Summons",
+   "needs": [
+    "condition:per-opponent-target-slot-condition"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Corrupted half: one optional target slot per opponent, each present only if that opponent had 3+ poison as you cast it; the seat slots (Sepulchral Primordial) carry no per-slot condition"
+  },
+  {
+   "name": "Optimus Prime, Hero // Optimus Prime, Autobot Leader",
+   "needs": [
+    "effect:delayed-trigger-watching-bolstered"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Never triaged: \"the chosen creature\" from bolster has no ref for its delayed trigger to watch; not fully examined otherwise"
+  },
+  {
+   "name": "Karplusan Minotaur",
+   "needs": [
+    "trigger:loses-coin-flip",
+    "keyword:cumulative-upkeep-flip-coin",
+    "target:triggered-opponents-choice"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): loses-coin-flip exists now and the cumulative upkeep can be hand-written; targetsChosenBy still has no \"an opponent\""
+  },
+  {
+   "name": "Goliath Daydreamer",
+   "needs": [
+    "effect:exile-spell-as-it-resolves-with-counter"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): exile-spell-as-it-resolves can't add a dream counter."
+  },
+  {
+   "name": "Swooping Pteranodon",
+   "needs": [
+    "effect:delayed-trigger-targets"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Never triaged: \"at the beginning of the next end step, target land deals 3 damage\" needs the target chosen as the delayed trigger fires"
+  },
+  {
+   "name": "Thrasta, Tempest's Roar",
+   "needs": [
+    "mechanic:trample-over-planeswalkers"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): trample over planeswalkers isn't modeled"
+  },
+  {
+   "name": "Panoptic Mirror",
+   "needs": [
+    "decision:choose-one-exiled-with-source-to-copy"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Copy a card exiled with this artifact' is one chosen card; cast-now from exiled-with-source copies every imprinted card in turn."
+  },
+  {
+   "name": "Forger's Foundry",
+   "needs": [
+    "effect:exile-spell-as-it-resolves-linked"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The mana's whenSpent rider must let you *choose* to exile the spell as it resolves and link it to this artifact (\"cards exiled with this artifact\" for the {3}{U}{U} free casts); exile-spell-as-it-resolves is mandatory and links nothing."
+  },
+  {
+   "name": "Phyrexian Fleshgorger",
+   "needs": [
+    "decision:ward-pay-life-dynamic"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"Ward—Pay life equal to this creature's power\": WardCost.payLife is a fixed number."
+  },
+  {
+   "name": "Hauntwoods Shrieker",
+   "needs": [
+    "condition:face-down-is-creature-card"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Reveal a face-down permanent and turn it up only if it's a creature card: a condition sees the face-down 2/2, not the hidden card's types."
+  },
+  {
+   "name": "Havengul Lich",
+   "needs": [
+    "static:gain-activated-abilities-of-card"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): casting a targeted creature card from any graveyard plus gaining that card's activated abilities on cast"
+  },
+  {
+   "name": "Sidisi, Regent of the Mire",
+   "needs": [
+    "cost:sacrifice-cost-mv-x-plus-one"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): sacrifice a creature with MV X, return card with MV X+1"
+  },
+  {
+   "name": "Strong, the Brutish Thespian",
+   "needs": [
+    "replacement:life-loss-from-radiation"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The rad ability's life loss is a plain lose-life, so loss from radiation can't be told apart or replaced."
+  },
+  {
+   "name": "Admiral Beckett Brass",
+   "needs": [
+    "target:player-dealt-combat-damage-by-n-filter"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): A per-player count of the Pirates that dealt them combat damage this turn, as a target restriction."
+  },
+  {
+   "name": "Topography Tracker",
+   "needs": [
+    "replacement:explore-replacement"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'If a creature you control would explore, instead it explores, then explores again': no explore replacement. (same: there is still no would-explore replacement)"
+  },
+  {
+   "name": "Erebos's Intervention",
+   "needs": [
+    "decision:twice-x-target-count"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Written and tried: a spell's any-number group bound takes only a literal \"x\" (specsAtX), so twice X reads as 0"
+  },
+  {
+   "name": "Whirlwind Denial",
+   "needs": [
+    "effect:counter-each-unless-pays"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): for-each-on-stack effects mustn't ask anything, and the ruling needs choices in turn order then all countered at once"
+  },
+  {
+   "name": "Comet, Stellar Pup",
+   "needs": [
+    "effect:extra-loyalty-activations-this-turn",
+    "decision:choose-creature-or-player-on-resolution"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): The 6 row's 'you may activate Comet's loyalty ability two more times this turn', and the 4-5 row's damage to a creature or player chosen as it resolves, not targeted."
+  },
+  {
+   "name": "Archon of Coronation",
+   "needs": [
+    "replacement:damage-doesnt-cause-life-loss"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'As long as you're the monarch, damage doesn't cause you to lose life' (the damage is still dealt: lifelink, damage triggers and commander damage still count): no static or replacement for it. (same: damage-rule has no field for it)"
+  },
+  {
+   "name": "_____ Goblin",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Name stickers (Unfinity, rule 123) aren't modeled: no sticker sheets, no 'put a name sticker on it', no vowels-on-the-sticker count."
+  },
+  {
+   "name": "Primordial Mist",
+   "needs": [
+    "cost:exile-face-down-permanent-face-up"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Exile a face-down permanent you control face up: you may play that card this turn': no cost exiles a face-down permanent face up with a play permission."
+  },
+  {
+   "name": "Grothama, All-Devouring",
+   "needs": [
+    "stat:damage-to-object-by-controller"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Other creatures' granted attack trigger must fight Grothama (the static's source, not the trigger's), and the leave trigger needs damage dealt to Grothama this turn split by each source's controller."
+  },
+  {
+   "name": "Warp World",
+   "needs": [
+    "effect:shuffle-permanents-reveal-that-many"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): Shuffle all permanents into libraries, reveal that many, put permanents back."
+  },
+  {
+   "name": "Surrak, Elusive Hunter",
+   "needs": [
+    "trigger:becomes-target-spell-on-stack"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Or a creature spell you control becomes the target' — only battlefield targets are announced."
+  },
+  {
+   "name": "Barbara Wright",
+   "needs": [
+    "static:grant-read-ahead"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): read ahead exists only as a card field; nothing grants it"
+  },
+  {
+   "name": "Desertion",
+   "needs": [
+    "effect:counter-into-battlefield"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): A countered artifact or creature spell onto the battlefield under your control: `counter`'s `into` is a hand or exile. (same: counter.into is hand, exile or library only)"
+  },
+  {
+   "name": "Kaito, Dancing Shadow",
+   "needs": [
+    "effect:loyalty-abilities-twice-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Only the static form exists; no one-shot 'twice this turn' for one planeswalker."
+  },
+  {
+   "name": "Vesuvan Shapeshifter",
+   "needs": [
+    "effect:become-copy-until-turned-face-down"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): A copy that lasts until it's turned face down, the upkeep trigger the copy keeps, and the choice as it's turned face up."
+  },
+  {
+   "name": "Repeated Reverberation",
+   "needs": [
+    "effect:copy-next-loyalty-ability"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): the next-spell copy can't also cover \"or activate a loyalty ability\""
+  },
+  {
+   "name": "Ratchet, Field Medic // Ratchet, Rescue Racer",
+   "needs": [
+    "condition:converted-this-way"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): "
+  },
+  {
+   "name": "Neerdiv, Devious Diver",
+   "needs": [
+    "trigger:activates-ability-from-graveyard"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Or activate an ability of a card in your graveyard' as a trigger. (same: activates-ability has no graveyard-source filter)"
+  },
+  {
+   "name": "Genesis of the Daleks",
+   "needs": [
+    "effect:amount-total-power-died-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Chapter IV: 'loses life equal to the total power of Daleks that died this turn' - turnHistory counts died entries but can't sum their power. (same: turn history counts but can't sum power)"
+  },
+  {
+   "name": "Mosswood Dreadknight // Dread Whispers",
+   "needs": [
+    "zone:graveyard-cast-as-adventure"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): dies trigger: 'you may cast it from your graveyard as an Adventure until the end of your next turn' — no permission to cast only the Adventure half from the graveyard (Dread Whispers itself is trivial, but the card ships whole)"
+  },
+  {
+   "name": "The Valeyard",
+   "needs": [
+    "replacement:villainous-choice-additional-time"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Replacement making opponents face a villainous choice twice, and an extra vote (rule 701.38d) - neither is built. (same (the extra-vote half is built))"
+  },
+  {
+   "name": "The Ruinous Powers",
+   "needs": [
+    "trigger:cast-this-way-from-lasting-permission"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): "
+  },
+  {
+   "name": "Ertha Jo, Frontier Mentor",
+   "needs": [
+    "trigger:activates-ability-targeting"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The activates-ability trigger can't be narrowed to abilities that target a creature or player (only ninjutsu/loyalty/source filters exist)."
+  },
+  {
+   "name": "Breathkeeper Seraph",
+   "needs": [
+    "effect:delayed-return-from-graveyard-your-next-upkeep"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Re-triaged now soulbond is built: the granted dies trigger returns the card at the beginning of your next upkeep, a delayed return from the graveyard nothing expresses."
+  },
+  {
+   "name": "Extract Brain",
+   "needs": [
+    "effect:opponent-picks-n-from-own-hand-you-may-cast"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): A target opponent chooses X cards from their own hand; you look at them and may cast one without paying its mana cost: no shape has the opponent pick from their hand for you to cast from."
+  },
+  {
+   "name": "Adrestia",
+   "needs": [
+    "condition:crewed-by-filter-as-tapped"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The rulings need the crewer as it was when tapped, and crewedSource reads the creature now."
+  },
+  {
+   "name": "Frontline Heroism",
+   "needs": [
+    "effect:copy-spell-retarget-created-token"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): retargetTo takes only the source or a target slot, not the token the same effect just made. (same: retargetTo is only \"source\" or a slot)"
+  },
+  {
+   "name": "Etrata, Deadly Fugitive",
+   "needs": [
+    "effect:turn-face-up-or-exile-and-cast"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The granted ability turns the face-down permanent up, and if it can't, exiles it and you may cast it: no can't-turn-up fallback."
+  },
+  {
+   "name": "Taii Wakeen, Perfect Shot",
+   "needs": [
+    "trigger:damage-equal-to-toughness"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): No deals-damage trigger clause for \"noncombat damage to a creature equal to that creature's toughness\", and no effect that creates a turn-long \"+X damage\" replacement (would-deal-damage plus is static-only)."
+  },
+  {
+   "name": "Strago and Relm",
+   "needs": [
+    "effect:cast-now-grants-abilities"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"If you cast a creature spell this way, it gains haste and 'At the beginning of the end step, sacrifice this creature.'\": cast-now can't give the spell it casts (and the permanent it becomes) abilities; the reveal-until and free cast themselves are Chaos Wand's shape."
+  },
+  {
+   "name": "Crown of Doom",
+   "needs": [
+    "filter:player-other-than-owner"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"Target player other than this artifact's owner gains control of it\": a player target can't exclude the source's owner (OtherThan covers only source, trigger object, trigger player and slots)."
+  },
+  {
+   "name": "Havengul Laboratory // Havengul Mystery",
+   "needs": [
+    "trigger:leaves-put-onto-battlefield-by-source"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Not attempted for time; may be writable with turn-history sacrificed, a transforms trigger and a leaves trigger filtered by putThereBySource"
+  },
+  {
+   "name": "Gollum, Scheming Guide",
+   "needs": [
+    "decision:opponent-guesses-card-kind"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): an opponent guesses land/nonland for the top card, and 'remove Gollum from combat' has no effect"
+  },
+  {
+   "name": "Vaevictis Asmadi, the Dire",
+   "needs": [
+    "effect:per-player-targets-sacrifice-reveal-put"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): one target per player, sacrificed, then reveal and put"
+  },
+  {
+   "name": "Gale's Redirection",
+   "needs": [
+    "effect:exile-target-spell"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Not attempted: the d20 modifier needs the exiled spell's mana value as it was on the stack, X included"
+  },
+  {
+   "name": "Suppressor Skyguard",
+   "needs": [
+    "condition:attacking-player-left-an-opponent-unattacked"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Its damage-modification need is built; condition:attacking-player-left-an-opponent-unattacked is still open."
+  },
+  {
+   "name": "Scion of Halaster",
+   "needs": [
+    "static:grants-replacement-effect"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): A would-draw replacement granted through grantsStatic never applied (tested)."
+  },
+  {
+   "name": "Return the Past",
+   "needs": [
+    "bug:granted-flashback-split-card-cost"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Its ruling: a split card that gains flashback pays only the half being cast; grantsToGraveyard flashback 'mana-cost' reads the whole card's combined manaCost (game.ts flashbacksOf), so Expansion // Explosion and Fuss // Bother would be wrong. Iroh, Grand Lotus and Lier share the defect."
+  },
+  {
+   "name": "Scrambleverse",
+   "needs": [
+    "effect:random-player-per-permanent"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): A random player chosen for each nonland permanent, each gaining control of theirs."
+  },
+  {
+   "name": "Baba Lysaga, Night Witch",
+   "needs": [
+    "cost:sacrifice-up-to-n"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The card-types condition is expressible now; \"sacrifice up to three\" has no ceiling (no maxX on activated abilities)"
+  },
+  {
+   "name": "Ob Nixilis of the Black Oath",
+   "needs": [
+    "effect:emblem-own-activated-ability"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): create-emblem carries no activated ability of its own."
+  },
+  {
+   "name": "Furygale Flocking",
+   "needs": [
+    "effect:token-attacks-player-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"For each opponent, create two tokens that attack that opponent this turn if able\": create-token has only attacksThisCombat (any defender, this combat); a per-opponent attack requirement aimed at that player for the turn exists only inside the encore effect."
+  },
+  {
+   "name": "Urza, Lord Protector",
+   "needs": [
+    "static:loyalty-twice-self-only"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): It melds only into Urza, Planeswalker, which waits on the self-only loyalty grant. (same, and Urza, Planeswalker isn't in the pool)"
+  },
+  {
+   "name": "Tangled Colony",
+   "needs": [
+    "amount:damage-dealt-to-object-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'X is the amount of damage dealt to it this turn': no amount reads the damage dealt to a creature this turn."
+  },
+  {
+   "name": "Tyvar the Bellicose",
+   "needs": [
+    "trigger:mana-ability-resolves-amount-produced"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): No granted 'whenever a mana ability of this creature resolves' trigger carrying the amount produced; 'they gain deathtouch' needs the attack batch. (same (the Elves-attack half is now expressible))"
+  },
+  {
+   "name": "Armix, Filigree Thrasher",
+   "needs": [
+    "bug:defending-player-after-removal"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Reflexive target 'creature defending player controls' reads live attacking; rule 508.5 keeps the defending player if Armix left combat."
+  },
+  {
+   "name": "Corrupted Crossroads",
+   "needs": [
+    "filter:has-devoid"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): CardKeyword has no devoid row"
+  },
+  {
+   "name": "Temporal Extortion",
+   "needs": [
+    "effect:any-player-may-pay-to-counter"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): any player may pay half their life to counter on cast: no vocabulary"
+  },
+  {
+   "name": "Chaos Defiler",
+   "needs": [
+    "effect:random-choice-among-chosen"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): choose one per opponent, then destroy one of the chosen at random"
+  },
+  {
+   "name": "Undead Alchemist",
+   "needs": [
+    "replacement:combat-damage-becomes-mill"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'If a Zombie you control would deal combat damage to a player, instead that player mills that many cards': no replacement turns the damage into the damaged player milling."
+  },
+  {
+   "name": "The Peregrine Dynamo",
+   "needs": [
+    "target:ability-source-filter"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'From another legendary source that's not a commander'."
+  },
+  {
+   "name": "Curse of Fool's Wisdom",
+   "needs": [
+    "trigger:enchanted-player-draws"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Madness is built; no trigger fires on the enchanted player drawing a card."
+  },
+  {
+   "name": "Fallaji Wayfarer",
+   "needs": [
+    "static:all-colors-cda"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): granting convoke to multicolored spells; being all colors while keeping a green-only identity"
+  },
+  {
+   "name": "Mishra, Claimed by Gix",
+   "needs": [
+    "effect:meld-enters-attacking"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Its meld puts Mishra, Lost to Phyrexia onto the battlefield tapped and attacking: the `meld` effect has no attacking entry. (same, and Mishra, Lost to Phyrexia isn't in the pool)"
+  },
+  {
+   "name": "Fatespinner",
+   "needs": [
+    "effect:skip-steps-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): skip-step has no main phase, and that player must choose"
+  },
+  {
+   "name": "Xanathar, Guild Kingpin",
+   "needs": [
+    "zone:play-from-opponent-library-top"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): no until-end-of-turn permission to look at and play the top card of a target opponent's library (with any-color spending)"
+  },
+  {
+   "name": "Killer Service",
+   "needs": [
+    "effect:may-pay-mana-and-sacrifice"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): end-step 'you may pay {2} and sacrifice a token. If you do' is one combined optional cost; `may` takes mana/life/energy but no sacrifice, and each-player-may's options are alternatives, not a pair"
+  },
+  {
+   "name": "Averna, the Chaos Bloom",
+   "needs": [
+    "static:cascade-put-land"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): As you cascade, put a land card from among the exiled cards onto the battlefield tapped."
+  },
+  {
+   "name": "Karn Liberated",
+   "needs": [
+    "mechanic:restart-the-game"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): The −14 restarts the game (and the +4's exile is linked to Karn)."
+  },
+  {
+   "name": "Azula, Cunning Usurper",
+   "needs": [
+    "zone:linked-exile-cast-as-though-flash"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): playFromExile has no flash option; castAsThoughFlash can't single out cards exiled with the source."
+  },
+  {
+   "name": "Illithid Harvester // Plant Tadpoles",
+   "needs": [
+    "effect:face-down-as-any-characteristics"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'It's a 2/2 Horror creature': `FaceDownAs` is a closed union of three shapes, none a Horror."
+  },
+  {
+   "name": "Nuka-Nuke Launcher",
+   "needs": [
+    "effect:delayed-cast-trigger-through-player-next-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Until the end of defending player's next turn, that player gets two rad counters whenever they cast a spell': no delayed trigger that fires repeatedly on a named player's spell casts and lasts through the end of that player's next turn (delayed nextSpell is the controller's, once, this turn)."
+  },
+  {
+   "name": "Littjara Mirrorlake",
+   "needs": [
+    "effect:token-copy-enters-with-counters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): a token copy that enters with an additional +1/+1 counter"
+  },
+  {
+   "name": "Call for Aid",
+   "needs": [
+    "effect:cant-sacrifice-those-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"Can't attack that player\" is expressible now; \"you can't sacrifice those creatures\" isn't (cant-be-sacrificed takes one target)"
+  },
+  {
+   "name": "Zoetic Cavern",
+   "needs": [
+    "mechanic:morph-land"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): morph on a land: the engine offers a land only as a land play, never a face-down cast"
+  },
+  {
+   "name": "Yidaro, Wandering Monster",
+   "needs": [
+    "condition:cycled-named-card-this-game"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): counts the times you've cycled a card named Yidaro this game"
+  },
+  {
+   "name": "Archmage Ascension",
+   "needs": [
+    "replacement:draw-replacement-search"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"If you would draw a card, you may instead search your library for a card.\""
+  },
+  {
+   "name": "Fortune, Loyal Steed",
+   "needs": [
+    "effect:flicker-source-and-chosen"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): flicker { all } might work, but saddledSource in a delayed trigger after Fortune leaves is unverified"
+  },
+  {
+   "name": "Brokkos, Apex of Forever",
+   "needs": [
+    "mechanic:mutate-from-graveyard"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): cast from your graveyard using its mutate ability"
+  },
+  {
+   "name": "Illusion of Choice",
+   "needs": [
+    "effect:choose-how-players-vote"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): \"You choose how each player votes this turn.\""
+  },
+  {
+   "name": "Hierophant Bio-Titan",
+   "needs": [
+    "cost:spell-additional-cost-remove-counters"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Removing any number of +1/+1 counters from among your creatures as a spell's optional additional cost, {2} less each: only abilities' costs remove chosen counters."
+  },
+  {
+   "name": "Frenzied Saddlebrute",
+   "needs": [
+    "static:attack-as-though-haste"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): creatures can attack your opponents as though they had haste"
+  },
+  {
+   "name": "Neera, Wild Mage",
+   "needs": [
+    "effect:put-cast-spell-on-library-if-did"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): put the spell on the bottom; if you do, cast another (family effect:possibility-storm-exile-spell-on-cast)"
+  },
+  {
+   "name": "Luxurious Locomotive",
+   "needs": [
+    "amount:creatures-crewed-it-this-turn"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'Create a Treasure for each creature that crewed it this turn': no amount counts them, including those that have left (its ruling)."
+  },
+  {
+   "name": "Sanctum Lurker",
+   "needs": [
+    "static:planeswalker-zero-loyalty-survives"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): No exemption from the 704.5i 0-loyalty SBA, and no static granting a loyalty ability (+2) to planeswalkers you control."
+  },
+  {
+   "name": "Seasons Past",
+   "needs": [
+    "effect:targets-different-mana-values"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): differentManaValues exists for targets only, not an untargeted choice"
+  },
+  {
+   "name": "This Is How It Ends",
+   "needs": [
+    "effect:player-shuffles-chosen-permanent-into-library"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): The target's OWNER (each-player-may has only controllerOfTarget) chooses 'another creature they own' to shuffle in - no owner scope, and no effect where that player picks a permanent to shuffle."
+  },
+  {
+   "name": "Grell Philosopher",
+   "needs": [
+    "cost:spend-mana-as-any-color"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): gains another artifact's activated abilities"
+  },
+  {
+   "name": "Quintorius, Loremaster",
+   "needs": [
+    "effect:cast-now-bottom-of-library-after"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): PlayTerms has exileAfter but no bottom-of-library-after"
+  },
+  {
+   "name": "Celestial Reunion",
+   "needs": [
+    "cost:choose-creature-type-as-cast"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Behold is built (batch 64); the creature type chosen as it is cast, and read on resolution, is not."
+  },
+  {
+   "name": "Bilbo, Fellow Conspirator",
+   "needs": [
+    "replacement:plus-tokens-per-named-token"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): plusTokens adds as many as every token made, not just the Foods"
+  },
+  {
+   "name": "Tablet of the Guilds",
+   "needs": [
+    "decision:choose-two-colors-on-enter"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): choose two colors as it enters; life for each chosen color a spell is"
+  },
+  {
+   "name": "Curse of Shaken Faith",
+   "needs": [
+    "trigger:enchanted-player-casts",
+    "trigger:nth-spell-of-turn-any-player"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): whenever enchanted player casts a spell other than their first each turn (family mechanic:curses)"
+  },
+  {
+   "name": "Harold and Bob, First Numens",
+   "needs": [
+    "effect:return-as-aura-with-granted-ability"
+   ],
+   "size": "major",
+   "why": "Re-read in B298 (major): The dies trigger returns it as an Aura enchantment with enchant Forest you control, granting the Forest '{T}: Add three mana of any one color. You get two rad counters.' and losing all other abilities; put-onto-battlefield has setTypes but no Aura subtype/enchant restriction, granted ability or ability loss."
+  },
+  {
+   "name": "Doomsday Confluence",
+   "needs": [
+    "effect:cast-modal-x-modes"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): castModal's min and max modes are numbers, so \"Choose X\" with repeats, chosen as it's cast, can't be said."
+  },
+  {
+   "name": "Zurgo and Ojutai",
+   "needs": [
+    "trigger:batch-damage-player-or-battle"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"Whenever one or more Dragons you control deal combat damage to a player or battle\" is a batched trigger once per player/battle damaged (the ruling), and \"you may return one of those Dragons\" needs the batch's creatures; deals-damage-batch is player-only with no reference to the batch."
+  },
+  {
+   "name": "Scourge of Nel Toth",
+   "needs": [
+    "cost:graveyard-cast-sacrifice-count"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): GraveyardCastCosts.sacrifice takes one permanent; it sacrifices two creatures."
+  },
+  {
+   "name": "Mysterious Stranger",
+   "needs": [
+    "effect:target-per-graveyard-with-match"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"For each graveyard with an instant or sorcery card in it, exile target ... from that graveyard\" needs one mandatory target per qualifying graveyard (per-seat optional slots would let it skip one), and \"if two or more were exiled, choose one of them at random and copy it\" needs a random pick among the cards exiled this way."
+  },
+  {
+   "name": "Archfiend of Spite",
+   "needs": [
+    "bug:trigger-value-lost-in-unless-otherwise"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Written and tested, then dropped: { triggerValue: true } reads 0 inside an unless's otherwise (no life lost; 2 lost with a fixed 2)"
+  },
+  {
+   "name": "Puca's Mischief",
+   "needs": [
+    "filter:target-stat-relative-to-other-target"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Maybe writable now with { amount: { manaValueOf: 0 } } in a target filter; unverified"
+  },
+  {
+   "name": "Eater of Virtue",
+   "needs": [
+    "static:keywords-of-linked-exile"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): equipped creature has the keywords of cards exiled with it (family condition:linked-exile-currently-exiled)"
+  },
+  {
+   "name": "Ghired's Belligerence",
+   "needs": [
+    "effect:delayed-trigger-dealt-damage-this-way-dies"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): \"whenever a creature dealt damage this way dies this turn, populate\""
+  },
+  {
+   "name": "Silver Scrutiny",
+   "needs": [
+    "effect:flash-if-x-at-most"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): `flashIf`'s condition is read before X is announced, so 'as though it had flash if X is 3 or less' can't read X."
+  },
+  {
+   "name": "Slumbering Trudge",
+   "needs": [
+    "replacement:enters-tapped-if-x"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): 'If X is 2 or less, it enters tapped' — tappedUnless's StaticCondition gets no X (the 'x' kind reads opts.x, not passed there); the 3-minus-X stun counters are expressible ({ difference: [3, 'x'] })"
+  },
+  {
+   "name": "Nethergoyf",
+   "needs": [
+    "cost:exile-from-graveyard-card-types"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): Its escape cost exiles 'any number of other cards from your graveyard with four or more card types among them'; escape's exileCount is a fixed count with no card-type-total constraint (the CDA itself is Tarmogoyf's shape with ownedBy you)."
+  },
+  {
+   "name": "Sphinx Ambassador",
+   "needs": [
+    "decision:trigger-player-names-after-hidden-search"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): choose-card-name's chooser is only a target slot, so the damaged player can't name while 'you' keeps the may-put."
+  },
+  {
+   "name": "Scrap Welder",
+   "needs": [
+    "cost:sacrifice-mana-value-x"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): sacrifice an artifact with mana value X; target filter reads X"
+  },
+  {
+   "name": "Sentinel Tower",
+   "needs": [
+    "stat:spells-cast-before-trigger-spell"
+   ],
+   "size": "small",
+   "why": "Re-read in B298 (small): castThisTurn counts as of resolution, so it includes spells cast in response"
+  }
+ ]
+}

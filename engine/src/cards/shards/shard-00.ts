@@ -191,6 +191,7 @@ import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
 import _poolCrosswayVampire from "../pool/crossway-vampire.js";
 import _poolCrushingCanopy from "../pool/crushing-canopy.js";
 import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
+import _poolCrystallineArmor from "../pool/crystalline-armor.js";
 import _poolCultOfTheWaxingMoon from "../pool/cult-of-the-waxing-moon.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
 import _poolCurseOfInertia from "../pool/curse-of-inertia.js";
@@ -391,6 +392,7 @@ import _poolHeavyFog from "../pool/heavy-fog.js";
 import _poolHelldozer from "../pool/helldozer.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHellsCaretaker from "../pool/hells-caretaker.js";
+import _poolHereComesANewHero from "../pool/here-comes-a-new-hero.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
 import _poolHiredGiant from "../pool/hired-giant.js";
 import _poolHissingMiasma from "../pool/hissing-miasma.js";
@@ -488,6 +490,7 @@ import _poolLightningRift from "../pool/lightning-rift.js";
 import _poolLightstallInquisitor from "../pool/lightstall-inquisitor.js";
 import _poolLlanowarEmpath from "../pool/llanowar-empath.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
+import _poolLongRiverLurker from "../pool/long-river-lurker.js";
 import _poolLoseFocus from "../pool/lose-focus.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
 import _poolLostInTheMaze from "../pool/lost-in-the-maze.js";
@@ -542,6 +545,7 @@ import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
 import _poolMountainTitan from "../pool/mountain-titan.js";
 import _poolMourning from "../pool/mourning.js";
+import _poolMowuLoyalCompanion from "../pool/mowu-loyal-companion.js";
 import _poolMultaniMaroSorcerer from "../pool/multani-maro-sorcerer.js";
 import _poolMultipleChoice from "../pool/multiple-choice.js";
 import _poolMurasaPyromancer from "../pool/murasa-pyromancer.js";
@@ -1205,6 +1209,7 @@ const shard: CardShard = {
     _poolCrosswayVampire,
     _poolCrushingCanopy,
     _poolCryptcallerChariot,
+    _poolCrystallineArmor,
     _poolCultOfTheWaxingMoon,
     _poolCunningCoyote,
     _poolCurseOfInertia,
@@ -1405,6 +1410,7 @@ const shard: CardShard = {
     _poolHelldozer,
     _poolHellkiteCourser,
     _poolHellsCaretaker,
+    _poolHereComesANewHero,
     _poolHiredClaw,
     _poolHiredGiant,
     _poolHissingMiasma,
@@ -1502,6 +1508,7 @@ const shard: CardShard = {
     _poolLightstallInquisitor,
     _poolLlanowarEmpath,
     _poolLluwenExchangeStudent,
+    _poolLongRiverLurker,
     _poolLoseFocus,
     _poolLostInSpace,
     _poolLostInTheMaze,
@@ -1556,6 +1563,7 @@ const shard: CardShard = {
     _poolMortivore,
     _poolMountainTitan,
     _poolMourning,
+    _poolMowuLoyalCompanion,
     _poolMultaniMaroSorcerer,
     _poolMultipleChoice,
     _poolMurasaPyromancer,

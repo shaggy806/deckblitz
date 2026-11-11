@@ -30,6 +30,7 @@ import _poolAngelicShield from "../pool/angelic-shield.js";
 import _poolAngrathTheFlameChained from "../pool/angrath-the-flame-chained.js";
 import _poolAngrathsAmbusher from "../pool/angraths-ambusher.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
+import _poolAnjeMaidOfDishonor from "../pool/anje-maid-of-dishonor.js";
 import _poolAnzragsRampage from "../pool/anzrags-rampage.js";
 import _poolApothecaryStomper from "../pool/apothecary-stomper.js";
 import _poolAragornTheUniter from "../pool/aragorn-the-uniter.js";
@@ -76,6 +77,7 @@ import _poolBazaarOfWonders from "../pool/bazaar-of-wonders.js";
 import _poolBearsCompanion from "../pool/bears-companion.js";
 import _poolBearscape from "../pool/bearscape.js";
 import _poolBeastMode from "../pool/beast-mode.js";
+import _poolBebopSkullCrossbones from "../pool/bebop-skull-crossbones.js";
 import _poolBeifongsBountyHunters from "../pool/beifongs-bounty-hunters.js";
 import _poolBenalishMarshal from "../pool/benalish-marshal.js";
 import _poolBenalishMissionary from "../pool/benalish-missionary.js";
@@ -168,6 +170,7 @@ import _poolCommandChair from "../pool/command-chair.js";
 import _poolCommunalBrewing from "../pool/communal-brewing.js";
 import _poolCommuneWithLava from "../pool/commune-with-lava.js";
 import _poolCommuneWithTheGods from "../pool/commune-with-the-gods.js";
+import _poolConeOfCold from "../pool/cone-of-cold.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
@@ -718,6 +721,7 @@ import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolSavingGrace from "../pool/saving-grace.js";
 import _poolScaledHulk from "../pool/scaled-hulk.js";
+import _poolScalelordReckoner from "../pool/scalelord-reckoner.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolSchemingAspirant from "../pool/scheming-aspirant.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
@@ -1044,6 +1048,7 @@ const shard: CardShard = {
     _poolAngrathTheFlameChained,
     _poolAngrathsAmbusher,
     _poolAngrathsRampage,
+    _poolAnjeMaidOfDishonor,
     _poolAnzragsRampage,
     _poolApothecaryStomper,
     _poolAragornTheUniter,
@@ -1090,6 +1095,7 @@ const shard: CardShard = {
     _poolBearsCompanion,
     _poolBearscape,
     _poolBeastMode,
+    _poolBebopSkullCrossbones,
     _poolBeifongsBountyHunters,
     _poolBenalishMarshal,
     _poolBenalishMissionary,
@@ -1182,6 +1188,7 @@ const shard: CardShard = {
     _poolCommunalBrewing,
     _poolCommuneWithLava,
     _poolCommuneWithTheGods,
+    _poolConeOfCold,
     _poolCongregationGryff,
     _poolCoolButRude,
     _poolCoordinatedCharge,
@@ -1732,6 +1739,7 @@ const shard: CardShard = {
     _poolSarkhanFireblood,
     _poolSavingGrace,
     _poolScaledHulk,
+    _poolScalelordReckoner,
     _poolScapeshift,
     _poolSchemingAspirant,
     _poolScholarOfTheLostTrove,

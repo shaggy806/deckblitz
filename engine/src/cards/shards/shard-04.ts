@@ -29,6 +29,7 @@ import _poolAphettoExterminator from "../pool/aphetto-exterminator.js";
 import _poolApostlesBlessing from "../pool/apostles-blessing.js";
 import _poolArmWithAether from "../pool/arm-with-aether.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
+import _poolAshesOfTheAbhorrent from "../pool/ashes-of-the-abhorrent.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAssassinsBlade from "../pool/assassins-blade.js";
@@ -629,6 +630,7 @@ import _poolRedeemTheLost from "../pool/redeem-the-lost.js";
 import _poolRedemptorDreadnought from "../pool/redemptor-dreadnought.js";
 import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
 import _poolReflectiveGolem from "../pool/reflective-golem.js";
+import _poolRemKarolusStalwartSlayer from "../pool/rem-karolus-stalwart-slayer.js";
 import _poolRenoAndRude from "../pool/reno-and-rude.js";
 import _poolReplicate from "../pool/replicate.js";
 import _poolRequitingHex from "../pool/requiting-hex.js";
@@ -967,6 +969,7 @@ import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
 import _poolZygonInfiltrator from "../pool/zygon-infiltrator.js";
 import _tokens11ThrullToken from "../tokens/1-1-thrull-token.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
+import _tokensAvacynToken from "../tokens/avacyn-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensCatTokenLoyaltyCounters from "../tokens/cat-token-loyalty-counters.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
@@ -1020,6 +1023,7 @@ const shard: CardShard = {
     _poolApostlesBlessing,
     _poolArmWithAether,
     _poolArmoryVeteran,
+    _poolAshesOfTheAbhorrent,
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
     _poolAssassinsBlade,
@@ -1620,6 +1624,7 @@ const shard: CardShard = {
     _poolRedemptorDreadnought,
     _poolRedtoothVanguard,
     _poolReflectiveGolem,
+    _poolRemKarolusStalwartSlayer,
     _poolRenoAndRude,
     _poolReplicate,
     _poolRequitingHex,
@@ -1960,6 +1965,7 @@ const shard: CardShard = {
   tokens: [
     _tokens11ThrullToken,
     _tokens55ElephantToken,
+    _tokensAvacynToken,
     _tokensBallisticBoulderToken,
     _tokensCatTokenLoyaltyCounters,
     _tokensDragonTokenAvatarRoku,

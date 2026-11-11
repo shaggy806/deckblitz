@@ -79,6 +79,7 @@ import _poolBeckettMarinerImpetuousEnsign from "../pool/beckett-mariner-impetuou
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
 import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
+import _poolBerserkersFrenzy from "../pool/berserkers-frenzy.js";
 import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
 import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackScarab from "../pool/black-scarab.js";
@@ -89,6 +90,7 @@ import _poolBlessedAlliance from "../pool/blessed-alliance.js";
 import _poolBlightBreathCatoblepas from "../pool/blight-breath-catoblepas.js";
 import _poolBlightedWoodland from "../pool/blighted-woodland.js";
 import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
+import _poolBlitzballStadium from "../pool/blitzball-stadium.js";
 import _poolBloatflySwarm from "../pool/bloatfly-swarm.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
@@ -482,6 +484,7 @@ import _poolKavuClimber from "../pool/kavu-climber.js";
 import _poolKazuulsCliffs from "../pool/kazuuls-cliffs.js";
 import _poolKeenEyedArchers from "../pool/keen-eyed-archers.js";
 import _poolKeldonHalberdier from "../pool/keldon-halberdier.js";
+import _poolKheruSpellsnatcher from "../pool/kheru-spellsnatcher.js";
 import _poolKingpinsEnforcers from "../pool/kingpins-enforcers.js";
 import _poolKingpinsPet from "../pool/kingpins-pet.js";
 import _poolKinsbaileCourier from "../pool/kinsbaile-courier.js";
@@ -595,6 +598,7 @@ import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNautiloidShip from "../pool/nautiloid-ship.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNeckBreaker from "../pool/neck-breaker.js";
+import _poolNecklaceOfGirion from "../pool/necklace-of-girion.js";
 import _poolNecratog from "../pool/necratog.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNestingWurm from "../pool/nesting-wurm.js";
@@ -681,6 +685,7 @@ import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPull from "../pool/pull.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
+import _poolPumpkinBombs from "../pool/pumpkin-bombs.js";
 import _poolPurify from "../pool/purify.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolQonos from "../pool/qonos.js";
@@ -842,6 +847,7 @@ import _poolStormscapeMaster from "../pool/stormscape-master.js";
 import _poolStoryCircle from "../pool/story-circle.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
+import _poolSummonBrynhildr from "../pool/summon-brynhildr.js";
 import _poolSummonLeviathan from "../pool/summon-leviathan.js";
 import _poolSunhomeStalwart from "../pool/sunhome-stalwart.js";
 import _poolSunscourgeChampion from "../pool/sunscourge-champion.js";
@@ -1107,6 +1113,7 @@ const shard: CardShard = {
     _poolBeetleformMage,
     _poolBelunaGrandsquall,
     _poolBenevolentRiverSpirit,
+    _poolBerserkersFrenzy,
     _poolBilboBirthdayCelebrant,
     _poolBlackPantherVanguard,
     _poolBlackScarab,
@@ -1117,6 +1124,7 @@ const shard: CardShard = {
     _poolBlightBreathCatoblepas,
     _poolBlightedWoodland,
     _poolBlightreaperThallid,
+    _poolBlitzballStadium,
     _poolBloatflySwarm,
     _poolBloodArtist,
     _poolBloodPet,
@@ -1510,6 +1518,7 @@ const shard: CardShard = {
     _poolKazuulsCliffs,
     _poolKeenEyedArchers,
     _poolKeldonHalberdier,
+    _poolKheruSpellsnatcher,
     _poolKingpinsEnforcers,
     _poolKingpinsPet,
     _poolKinsbaileCourier,
@@ -1623,6 +1632,7 @@ const shard: CardShard = {
     _poolNautiloidShip,
     _poolNayaBattlemage,
     _poolNeckBreaker,
+    _poolNecklaceOfGirion,
     _poolNecratog,
     _poolNessianBoar,
     _poolNestingWurm,
@@ -1709,6 +1719,7 @@ const shard: CardShard = {
     _poolPugnaciousPugilist,
     _poolPull,
     _poolPumpkinBombardment,
+    _poolPumpkinBombs,
     _poolPurify,
     _poolPurpleCrystalCrab,
     _poolQonos,
@@ -1870,6 +1881,7 @@ const shard: CardShard = {
     _poolStoryCircle,
     _poolStreamOfUnconsciousness,
     _poolStridingShotcaller,
+    _poolSummonBrynhildr,
     _poolSummonLeviathan,
     _poolSunhomeStalwart,
     _poolSunscourgeChampion,

@@ -290,6 +290,7 @@ import _poolEmrakulTheWorldAnew from "../pool/emrakul-the-world-anew.js";
 import _poolEnchantedRiversGrasp from "../pool/enchanted-rivers-grasp.js";
 import _poolEnduringTenacity from "../pool/enduring-tenacity.js";
 import _poolEnlistedWurm from "../pool/enlisted-wurm.js";
+import _poolEradicatorValkyrie from "../pool/eradicator-valkyrie.js";
 import _poolEsperBattlemage from "../pool/esper-battlemage.js";
 import _poolEsperCormorants from "../pool/esper-cormorants.js";
 import _poolEssenceBacklash from "../pool/essence-backlash.js";
@@ -487,6 +488,7 @@ import _poolKastralTheWindcrested from "../pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKembaKhaRegent from "../pool/kemba-kha-regent.js";
+import _poolKenessosPriestOfThassa from "../pool/kenessos-priest-of-thassa.js";
 import _poolKianneCorruptedMemory from "../pool/kianne-corrupted-memory.js";
 import _poolKillingWave from "../pool/killing-wave.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
@@ -564,6 +566,7 @@ import _poolMirrorform from "../pool/mirrorform.js";
 import _poolMirrorwingDragon from "../pool/mirrorwing-dragon.js";
 import _poolMischievousPoltergeist from "../pool/mischievous-poltergeist.js";
 import _poolMisthollowGriffin from "../pool/misthollow-griffin.js";
+import _poolMizzixOfTheIzmagnus from "../pool/mizzix-of-the-izmagnus.js";
 import _poolMobilizedDistrict from "../pool/mobilized-district.js";
 import _poolMoltenTributary from "../pool/molten-tributary.js";
 import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
@@ -1351,6 +1354,7 @@ const shard: CardShard = {
     _poolEnchantedRiversGrasp,
     _poolEnduringTenacity,
     _poolEnlistedWurm,
+    _poolEradicatorValkyrie,
     _poolEsperBattlemage,
     _poolEsperCormorants,
     _poolEssenceBacklash,
@@ -1548,6 +1552,7 @@ const shard: CardShard = {
     _poolKataraBendingProdigy,
     _poolKazanduMammoth,
     _poolKembaKhaRegent,
+    _poolKenessosPriestOfThassa,
     _poolKianneCorruptedMemory,
     _poolKillingWave,
     _poolKindlyCustomer,
@@ -1625,6 +1630,7 @@ const shard: CardShard = {
     _poolMirrorwingDragon,
     _poolMischievousPoltergeist,
     _poolMisthollowGriffin,
+    _poolMizzixOfTheIzmagnus,
     _poolMobilizedDistrict,
     _poolMoltenTributary,
     _poolMoltensteelDragon,

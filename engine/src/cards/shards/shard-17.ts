@@ -26,6 +26,7 @@ import _poolAkroanLineBreaker from "../pool/akroan-line-breaker.js";
 import _poolAkutaBornOfAsh from "../pool/akuta-born-of-ash.js";
 import _poolAlabasterDragon from "../pool/alabaster-dragon.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
+import _poolAleshaWhoSmilesAtDeath from "../pool/alesha-who-smiles-at-death.js";
 import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
 import _poolAlhammarretsArchive from "../pool/alhammarrets-archive.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
@@ -50,6 +51,7 @@ import _poolArcticTreeline from "../pool/arctic-treeline.js";
 import _poolArcumsWhistle from "../pool/arcums-whistle.js";
 import _poolArdentElectromancer from "../pool/ardent-electromancer.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
+import _poolArthurMarigoldKnight from "../pool/arthur-marigold-knight.js";
 import _poolArzakon from "../pool/arzakon.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
 import _poolAshayaSoulOfTheWild from "../pool/ashaya-soul-of-the-wild.js";
@@ -416,6 +418,7 @@ import _poolHuntingKavu from "../pool/hunting-kavu.js";
 import _poolHuntingWilds from "../pool/hunting-wilds.js";
 import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
+import _poolHuskbursterSwarm from "../pool/huskburster-swarm.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
 import _poolHypochondria from "../pool/hypochondria.js";
 import _poolHypothesizzle from "../pool/hypothesizzle.js";
@@ -1025,6 +1028,7 @@ const shard: CardShard = {
     _poolAkutaBornOfAsh,
     _poolAlabasterDragon,
     _poolAlabornCavalier,
+    _poolAleshaWhoSmilesAtDeath,
     _poolAleshasVanguard,
     _poolAlhammarretsArchive,
     _poolAloraMerryThief,
@@ -1049,6 +1053,7 @@ const shard: CardShard = {
     _poolArcumsWhistle,
     _poolArdentElectromancer,
     _poolArdentRecruit,
+    _poolArthurMarigoldKnight,
     _poolArzakon,
     _poolAscendantAcolyte,
     _poolAshayaSoulOfTheWild,
@@ -1415,6 +1420,7 @@ const shard: CardShard = {
     _poolHuntingWilds,
     _poolHuntmasterLiger,
     _poolHushwoodVerge,
+    _poolHuskbursterSwarm,
     _poolHydroidKrasis,
     _poolHypochondria,
     _poolHypothesizzle,

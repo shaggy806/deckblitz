@@ -16386,6 +16386,50 @@
   "bug:copy-exception-static-self-reference": {
    "family": "effect:copy-exception-static-ability",
    "example": "Firion, Wild Rose Warrior: A create-token-copy exception's static can't say 'this Equipment': bindDynamicCompares binds isSource inside it to the resolving ability's source (Firion), and abilityCostModifiers reads printed statics only."
+  },
+  "amount:counters-moved-this-way": {
+   "family": "effect:amount-new-variants",
+   "example": "Black Panther, Wakandan King: move-counters ifMoved has no amount for how many moved (\"gain that much life\")"
+  },
+  "replacement:life-to-zero-transform-instead": {
+   "family": "replacement:new-event-replacements",
+   "example": "Enduring Angel: P/T equal to life and doubling life are built; \"if your life total would be reduced to 0 or less, transform instead and it becomes 3\" is not"
+  },
+  "replacement:modify-die-result-after-roll": {
+   "family": "replacement:new-event-replacements",
+   "example": "Night Shift of the Living Dead: After you roll a die, you may pay 1 life to change the result by 1, once each turn"
+  },
+  "effect:delayed-trigger-watching-bolstered": {
+   "family": "effect:choices-by-other-players",
+   "example": "Optimus Prime, Hero // Optimus Prime, Autobot Leader: Never triaged: \"the chosen creature\" from bolster has no ref for its delayed trigger to watch; not fully examined otherwise"
+  },
+  "effect:delayed-trigger-targets": {
+   "family": "effect:choices-by-other-players",
+   "example": "Swooping Pteranodon: Never triaged: \"at the beginning of the next end step, target land deals 3 damage\" needs the target chosen as the delayed trigger fires"
+  },
+  "static:grant-read-ahead": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Barbara Wright: read ahead exists only as a card field; nothing grants it"
+  },
+  "trigger:leaves-put-onto-battlefield-by-source": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Havengul Laboratory // Havengul Mystery: Not attempted for time; may be writable with turn-history sacrificed, a transforms trigger and a leaves trigger filtered by putThereBySource"
+  },
+  "cost:sacrifice-up-to-n": {
+   "family": "effect:this-way-results",
+   "example": "Baba Lysaga, Night Witch: The card-types condition is expressible now; \"sacrifice up to three\" has no ceiling (no maxX on activated abilities)"
+  },
+  "effect:cant-sacrifice-those-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Call for Aid: \"Can't attack that player\" is expressible now; \"you can't sacrifice those creatures\" isn't (cant-be-sacrificed takes one target)"
+  },
+  "replacement:plus-tokens-per-named-token": {
+   "family": "replacement:new-event-replacements",
+   "example": "Bilbo, Fellow Conspirator: plusTokens adds as many as every token made, not just the Foods"
+  },
+  "bug:trigger-value-lost-in-unless-otherwise": {
+   "family": "bug:cda-all-zones",
+   "example": "Archfiend of Spite: Written and tested, then dropped: { triggerValue: true } reads 0 inside an unless's otherwise (no life lost; 2 lost with a fixed 2)"
   }
  },
  "groups": [

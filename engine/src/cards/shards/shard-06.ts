@@ -81,6 +81,7 @@ import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBarbedFoliage from "../pool/barbed-foliage.js";
 import _poolBasriDevotedPaladin from "../pool/basri-devoted-paladin.js";
 import _poolBatteringWurm from "../pool/battering-wurm.js";
+import _poolBattleAtTheHelvault from "../pool/battle-at-the-helvault.js";
 import _poolBattleRattleShaman from "../pool/battle-rattle-shaman.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
@@ -460,6 +461,7 @@ import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolIroncladRevolutionary from "../pool/ironclad-revolutionary.js";
 import _poolIvoryCup from "../pool/ivory-cup.js";
 import _poolIvoryGuardians from "../pool/ivory-guardians.js";
+import _poolJacobFrye from "../pool/jacob-frye.js";
 import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJelevaNephaliasScourge from "../pool/jeleva-nephalias-scourge.js";
@@ -760,6 +762,7 @@ import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
 import _poolSiegeBehemoth from "../pool/siege-behemoth.js";
 import _poolSiegecraft from "../pool/siegecraft.js";
 import _poolSigardaFontOfBlessings from "../pool/sigarda-font-of-blessings.js";
+import _poolSigurdJarlOfRavensthorpe from "../pool/sigurd-jarl-of-ravensthorpe.js";
 import _poolSilentObserver from "../pool/silent-observer.js";
 import _poolSilumgarsCommand from "../pool/silumgars-command.js";
 import _poolSilvergillPeddler from "../pool/silvergill-peddler.js";
@@ -1088,6 +1091,7 @@ const shard: CardShard = {
     _poolBarbedFoliage,
     _poolBasriDevotedPaladin,
     _poolBatteringWurm,
+    _poolBattleAtTheHelvault,
     _poolBattleRattleShaman,
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
@@ -1467,6 +1471,7 @@ const shard: CardShard = {
     _poolIroncladRevolutionary,
     _poolIvoryCup,
     _poolIvoryGuardians,
+    _poolJacobFrye,
     _poolJadeSeedstones,
     _poolJarvisEarthsMightiestButler,
     _poolJelevaNephaliasScourge,
@@ -1767,6 +1772,7 @@ const shard: CardShard = {
     _poolSiegeBehemoth,
     _poolSiegecraft,
     _poolSigardaFontOfBlessings,
+    _poolSigurdJarlOfRavensthorpe,
     _poolSilentObserver,
     _poolSilumgarsCommand,
     _poolSilvergillPeddler,

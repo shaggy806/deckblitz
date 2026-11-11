@@ -92,6 +92,7 @@ import _poolBigMotherMouser from "../pool/big-mother-mouser.js";
 import _poolBlackLotus from "../pool/black-lotus.js";
 import _poolBlackbloomBog from "../pool/blackbloom-bog.js";
 import _poolBladeSplicer from "../pool/blade-splicer.js";
+import _poolBladegraftAspirant from "../pool/bladegraft-aspirant.js";
 import _poolBlaze from "../pool/blaze.js";
 import _poolBlitzballShot from "../pool/blitzball-shot.js";
 import _poolBloodVassal from "../pool/blood-vassal.js";
@@ -659,6 +660,7 @@ import _poolQuillSlingerBoggart from "../pool/quill-slinger-boggart.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
 import _poolQuinjetTechnician from "../pool/quinjet-technician.js";
 import _poolRacecourseFury from "../pool/racecourse-fury.js";
+import _poolRadagastTheBrown from "../pool/radagast-the-brown.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
 import _poolRadiantPurge from "../pool/radiant-purge.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
@@ -777,6 +779,7 @@ import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
 import _poolSlipOutTheBack from "../pool/slip-out-the-back.js";
 import _poolSliverHivelord from "../pool/sliver-hivelord.js";
 import _poolSludgeCrawler from "../pool/sludge-crawler.js";
+import _poolSmaugTheImpenetrable from "../pool/smaug-the-impenetrable.js";
 import _poolSmirkingSpelljacker from "../pool/smirking-spelljacker.js";
 import _poolSoldeviGolem from "../pool/soldevi-golem.js";
 import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
@@ -926,6 +929,7 @@ import _poolUrzasAvenger from "../pool/urzas-avenger.js";
 import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
 import _poolUtterInsignificance from "../pool/utter-insignificance.js";
 import _poolUyoSilentProphet from "../pool/uyo-silent-prophet.js";
+import _poolValkmiraProtectorsShield from "../pool/valkmira-protectors-shield.js";
 import _poolVampireBats from "../pool/vampire-bats.js";
 import _poolVampiricEmbrace from "../pool/vampiric-embrace.js";
 import _poolVantressGargoyle from "../pool/vantress-gargoyle.js";
@@ -1106,6 +1110,7 @@ const shard: CardShard = {
     _poolBlackLotus,
     _poolBlackbloomBog,
     _poolBladeSplicer,
+    _poolBladegraftAspirant,
     _poolBlaze,
     _poolBlitzballShot,
     _poolBloodVassal,
@@ -1673,6 +1678,7 @@ const shard: CardShard = {
     _poolQuilledSlagwurm,
     _poolQuinjetTechnician,
     _poolRacecourseFury,
+    _poolRadagastTheBrown,
     _poolRadiantGrove,
     _poolRadiantPurge,
     _poolRadiantSummit,
@@ -1791,6 +1797,7 @@ const shard: CardShard = {
     _poolSlipOutTheBack,
     _poolSliverHivelord,
     _poolSludgeCrawler,
+    _poolSmaugTheImpenetrable,
     _poolSmirkingSpelljacker,
     _poolSoldeviGolem,
     _poolSolkanarTheSwampKing,
@@ -1940,6 +1947,7 @@ const shard: CardShard = {
     _poolUthrosTitanicGodcore,
     _poolUtterInsignificance,
     _poolUyoSilentProphet,
+    _poolValkmiraProtectorsShield,
     _poolVampireBats,
     _poolVampiricEmbrace,
     _poolVantressGargoyle,

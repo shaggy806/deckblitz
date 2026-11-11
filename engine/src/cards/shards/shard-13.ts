@@ -224,6 +224,7 @@ import _poolDivinerSpirit from "../pool/diviner-spirit.js";
 import _poolDjinnIlluminatus from "../pool/djinn-illuminatus.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
+import _poolDontMakeASound from "../pool/dont-make-a-sound.js";
 import _poolDoomsday from "../pool/doomsday.js";
 import _poolDovinArchitectOfLaw from "../pool/dovin-architect-of-law.js";
 import _poolDragonhawkFatesTempest from "../pool/dragonhawk-fates-tempest.js";
@@ -423,6 +424,7 @@ import _poolJukaiPreserver from "../pool/jukai-preserver.js";
 import _poolJump from "../pool/jump.js";
 import _poolJuniperOrderRanger from "../pool/juniper-order-ranger.js";
 import _poolKaervekTheSpiteful from "../pool/kaervek-the-spiteful.js";
+import _poolKaghaShadowArchdruid from "../pool/kagha-shadow-archdruid.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
 import _poolKashiTribeReaver from "../pool/kashi-tribe-reaver.js";
 import _poolKatildaDawnhartMartyr from "../pool/katilda-dawnhart-martyr.js";
@@ -843,6 +845,7 @@ import _poolTheEternalWanderer from "../pool/the-eternal-wanderer.js";
 import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
+import _poolTheRiseOfSozin from "../pool/the-rise-of-sozin.js";
 import _poolTheoristsProxy from "../pool/theorists-proxy.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
@@ -1206,6 +1209,7 @@ const shard: CardShard = {
     _poolDjinnIlluminatus,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
+    _poolDontMakeASound,
     _poolDoomsday,
     _poolDovinArchitectOfLaw,
     _poolDragonhawkFatesTempest,
@@ -1405,6 +1409,7 @@ const shard: CardShard = {
     _poolJump,
     _poolJuniperOrderRanger,
     _poolKaervekTheSpiteful,
+    _poolKaghaShadowArchdruid,
     _poolKamahlsDruidicVow,
     _poolKashiTribeReaver,
     _poolKatildaDawnhartMartyr,
@@ -1825,6 +1830,7 @@ const shard: CardShard = {
     _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
     _poolTheManaRig,
+    _poolTheRiseOfSozin,
     _poolTheoristsProxy,
     _poolThespiansStage,
     _poolThornwindFaeries,

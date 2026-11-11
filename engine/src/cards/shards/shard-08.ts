@@ -64,6 +64,7 @@ import _poolArchitectOfTheUntamed from "../pool/architect-of-the-untamed.js";
 import _poolArchiveTrap from "../pool/archive-trap.js";
 import _poolArchonOfEmeria from "../pool/archon-of-emeria.js";
 import _poolArchwayOfInnovation from "../pool/archway-of-innovation.js";
+import _poolArena from "../pool/arena.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArmadaWurm from "../pool/armada-wurm.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
@@ -167,6 +168,7 @@ import _poolCompositeGolem from "../pool/composite-golem.js";
 import _poolConduitGoblin from "../pool/conduit-goblin.js";
 import _poolConduitOfRuin from "../pool/conduit-of-ruin.js";
 import _poolConfiscate from "../pool/confiscate.js";
+import _poolConfoundingConundrum from "../pool/confounding-conundrum.js";
 import _poolConsulsLieutenant from "../pool/consuls-lieutenant.js";
 import _poolContemplation from "../pool/contemplation.js";
 import _poolCopycrook from "../pool/copycrook.js";
@@ -1113,6 +1115,7 @@ const shard: CardShard = {
     _poolArchiveTrap,
     _poolArchonOfEmeria,
     _poolArchwayOfInnovation,
+    _poolArena,
     _poolArgothianPixies,
     _poolArmadaWurm,
     _poolArtificersAssistant,
@@ -1216,6 +1219,7 @@ const shard: CardShard = {
     _poolConduitGoblin,
     _poolConduitOfRuin,
     _poolConfiscate,
+    _poolConfoundingConundrum,
     _poolConsulsLieutenant,
     _poolContemplation,
     _poolCopycrook,

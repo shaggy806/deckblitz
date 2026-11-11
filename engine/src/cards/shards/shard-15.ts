@@ -69,6 +69,7 @@ import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
 import _poolBlessingOfFrost from "../pool/blessing-of-frost.js";
 import _poolBlight from "../pool/blight.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
+import _poolBlitzwingAdaptiveAssailant from "../pool/blitzwing-adaptive-assailant.js";
 import _poolBloodHost from "../pool/blood-host.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodcrazedGoblin from "../pool/bloodcrazed-goblin.js";
@@ -235,6 +236,7 @@ import _poolEliteScaleguard from "../pool/elite-scaleguard.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolEmbalmedBrawler from "../pool/embalmed-brawler.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
+import _poolEmetSelchUnsundered from "../pool/emet-selch-unsundered.js";
 import _poolEmissaryOfDespair from "../pool/emissary-of-despair.js";
 import _poolEnergyVortex from "../pool/energy-vortex.js";
 import _poolEomerKingOfRohan from "../pool/eomer-king-of-rohan.js";
@@ -271,6 +273,7 @@ import _poolFesteringGulch from "../pool/festering-gulch.js";
 import _poolFetidImp from "../pool/fetid-imp.js";
 import _poolFilterOut from "../pool/filter-out.js";
 import _poolFireAmbush from "../pool/fire-ambush.js";
+import _poolFireLordOzai from "../pool/fire-lord-ozai.js";
 import _poolFireTempest from "../pool/fire-tempest.js";
 import _poolFirebornKnight from "../pool/fireborn-knight.js";
 import _poolFirefistAdept from "../pool/firefist-adept.js";
@@ -298,6 +301,7 @@ import _poolFuriousResistance from "../pool/furious-resistance.js";
 import _poolFyndhornElder from "../pool/fyndhorn-elder.js";
 import _poolGallantry from "../pool/gallantry.js";
 import _poolGallifreyStands from "../pool/gallifrey-stands.js";
+import _poolGameOver from "../pool/game-over.js";
 import _poolGanaxAstralHunter from "../pool/ganax-astral-hunter.js";
 import _poolGarrisonGriffin from "../pool/garrison-griffin.js";
 import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
@@ -794,6 +798,7 @@ import _poolTandemLookout from "../pool/tandem-lookout.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTattermungeDuo from "../pool/tattermunge-duo.js";
 import _poolTeaEarlGreyHot from "../pool/tea-earl-grey-hot.js";
+import _poolTegwyllsScouring from "../pool/tegwylls-scouring.js";
 import _poolTekuthalInquiryDominus from "../pool/tekuthal-inquiry-dominus.js";
 import _poolTelimtorsEdict from "../pool/telimtors-edict.js";
 import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
@@ -857,6 +862,7 @@ import _poolTyrsBlessing from "../pool/tyrs-blessing.js";
 import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-aquarium.js";
 import _poolUndo from "../pool/undo.js";
 import _poolUnholyHunger from "../pool/unholy-hunger.js";
+import _poolUnidentifiedHovership from "../pool/unidentified-hovership.js";
 import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
@@ -1021,6 +1027,7 @@ const shard: CardShard = {
     _poolBlessingOfFrost,
     _poolBlight,
     _poolBlightstepPathway,
+    _poolBlitzwingAdaptiveAssailant,
     _poolBloodHost,
     _poolBloodMoney,
     _poolBloodcrazedGoblin,
@@ -1187,6 +1194,7 @@ const shard: CardShard = {
     _poolElvishMystic,
     _poolEmbalmedBrawler,
     _poolEmbraceTheUnknown,
+    _poolEmetSelchUnsundered,
     _poolEmissaryOfDespair,
     _poolEnergyVortex,
     _poolEomerKingOfRohan,
@@ -1223,6 +1231,7 @@ const shard: CardShard = {
     _poolFetidImp,
     _poolFilterOut,
     _poolFireAmbush,
+    _poolFireLordOzai,
     _poolFireTempest,
     _poolFirebornKnight,
     _poolFirefistAdept,
@@ -1250,6 +1259,7 @@ const shard: CardShard = {
     _poolFyndhornElder,
     _poolGallantry,
     _poolGallifreyStands,
+    _poolGameOver,
     _poolGanaxAstralHunter,
     _poolGarrisonGriffin,
     _poolGastalBlockbuster,
@@ -1746,6 +1756,7 @@ const shard: CardShard = {
     _poolTangleSpider,
     _poolTattermungeDuo,
     _poolTeaEarlGreyHot,
+    _poolTegwyllsScouring,
     _poolTekuthalInquiryDominus,
     _poolTelimtorsEdict,
     _poolTemperamentalOozewagg,
@@ -1809,6 +1820,7 @@ const shard: CardShard = {
     _poolUnderwaterTunnelSlimyAquarium,
     _poolUndo,
     _poolUnholyHunger,
+    _poolUnidentifiedHovership,
     _poolUnitedBattlefront,
     _poolUnmarkedGrave,
     _poolUrzasFactory,
