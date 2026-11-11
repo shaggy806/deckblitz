@@ -15163,6 +15163,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.flashback = { cost: m[1], discard: m[2] === "a card" ? 1 : "x" };
       continue;
     }
+    // "Flashback—{3}{U}{R}, Exile X cards from your graveyard." (Summons of
+    // Saruman): X announced for the cast, never the card itself.
+    if (isSpell && (m = /^Flashback—((?:\{[^}]+\})+), Exile (X|a|two|three|four|five) cards? from your graveyard\.$/.exec(line))) {
+      const count = { X: "x", a: 1, two: 2, three: 3, four: 4, five: 5 }[m[2]];
+      out.flashback = { cost: m[1], exileFromGraveyard: { count } };
+      continue;
+    }
     // "Flashback—{R}{R}, Sacrifice X Mountains." (Firecat Blitz): X announced
     // for the cast though the flashback's mana has none.
     if (isSpell && (m = /^Flashback—((?:\{[^}]+\})+), Sacrifice X (.+)\.$/.exec(line))) {

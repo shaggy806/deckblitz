@@ -5089,6 +5089,14 @@ export interface CardDefinition {
      * "Flashback—Tap three untapped white creatures you control" (Battle
      * Screech), summoning-sick ones too (rule 302.6 asks only of {T} costs). */
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
+    /** Cards exiled from the caster's graveyard as part of the cost, chosen as
+     * it's paid (rule 601.2h) and never the spell itself, as
+     * `additionalCost.exileFromGraveyard`'s are — but only on this cast, not
+     * one from hand. `"x"` is Summons of Saruman's "Flashback—{3}{U}{R}, Exile
+     * X cards from your graveyard": an X announced for this cast though the
+     * flashback's mana has none, which the spell then reads (rules 107.3a,
+     * 601.2b), at most the other matching cards there (rule 118.3). */
+    readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter };
   } | null;
   /** Harmonize (rule 702.180a) — this card may be cast from its owner's
    * graveyard for `cost`, tapping up to one untapped creature they control,

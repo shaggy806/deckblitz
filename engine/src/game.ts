@@ -2121,6 +2121,9 @@ type FlashbackOption = {
   readonly returnToHand?: { readonly filter: CardFilter; readonly count: number };
   /** Creatures tapped for it — only a printed one's (Battle Screech). */
   readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
+  /** Cards exiled from the graveyard for it — only a printed one's (Summons
+   * of Saruman's "Exile X cards from your graveyard"). */
+  readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter };
   /** What gave it: the effect's source (Past in Flames) or the permanent
    * whose static grants it. Absent for the card's own. */
   readonly grantor?: ObjectId;
@@ -5504,7 +5507,11 @@ export class Game {
       // hand — the spell can't discard itself (rule 601.2h).
       // "Exile X cards from your graveyard" (Harvest Pyre): as many as match
       // there, the spell itself not among them when it's cast from there.
-      const graveyardExileCost = def.additionalCost?.exileFromGraveyard;
+      // A flashback's own "Exile X cards from your graveyard" (Summons of
+      // Saruman) likewise, on that cast alone.
+      const graveyardExileCost =
+        def.additionalCost?.exileFromGraveyard ??
+        (via === "flashback" ? this.flashbackOf(card, graveyardGrant)?.exileFromGraveyard : undefined);
       const discardX =
         xPlan === null && sacrificeX === undefined && def.additionalCost?.discard === "x"
           ? this.discardCandidates(player, def.additionalCost.discardFilter, card).length
@@ -18258,6 +18265,16 @@ export class Game {
       if (discards !== undefined && this.state.zones.perPlayer[player].hand.length < discards) {
         return `${player} has no card to discard for ${def.name}'s ${flashback.keyword ?? "flashback"}`;
       }
+      // "Flashback—{3}{U}{R}, Exile X cards from your graveyard" (Summons of
+      // Saruman): as many other cards there as the X announced (rule 118.3).
+      const exiles = flashback.exileFromGraveyard;
+      if (
+        exiles !== undefined &&
+        this.graveyardCostCandidates(player, exiles.filter, cardId).length <
+          (exiles.count === "x" ? Math.max(0, Math.floor(xValue)) : exiles.count)
+      ) {
+        return `${player} has too few cards in their graveyard for ${def.name}'s flashback`;
+      }
     } else if (via === "escape") {
       const escape = this.escapeOf(cardId, face, graveyardGrant);
       if (escape === null) {
@@ -20734,6 +20751,7 @@ export class Game {
       def.additionalCost?.sacrificeCount === "x" ||
       (via === "flashback"&& this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
       (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.discard === "x") ||
+      (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.exileFromGraveyard?.count === "x") ||
       def.additionalCost?.discard === "x" ||
       def.additionalCost?.exileFromGraveyard?.count === "x" ||
       def.additionalCost?.returnToHandX !== undefined ||
@@ -21434,7 +21452,10 @@ export class Game {
       flashback?.behold;
     // "Exile two creature cards from your graveyard" (Skaab Ruinator):
     // which, chosen now as the cost is paid (601.2h).
-    const graveyardExile = def.additionalCost?.exileFromGraveyard;
+    // A flashback's own "Exile X cards from your graveyard" (Summons of
+    // Saruman) is paid the same way, on that cast alone.
+    const graveyardExile: NonNullable<CardDefinition["additionalCost"]>["exileFromGraveyard"] =
+      def.additionalCost?.exileFromGraveyard ?? flashback?.exileFromGraveyard;
     // "Return three Islands you control to their owner's hand rather than
     // pay" (Thwart): which, chosen now too, as an activated ability's
     // `returnToHand` cost is.
@@ -51960,7 +51981,8 @@ controlledBy,
             f.behold === option.behold &&
             f.discard === option.discard &&
             f.returnToHand === option.returnToHand &&
-            f.tapCreatures === option.tapCreatures,
+            f.tapCreatures === option.tapCreatures &&
+            f.exileFromGraveyard === option.exileFromGraveyard,
         )
       ) {
         return;
@@ -51972,7 +51994,7 @@ controlledBy,
       add(
         printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined &&
           printed.discard === undefined && printed.keyword === undefined && printed.tapCreatures === undefined &&
-          printed.returnToHand === undefined
+          printed.returnToHand === undefined && printed.exileFromGraveyard === undefined
           ? { cost: printed.cost }
           : { ...printed },
       );

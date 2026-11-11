@@ -2222,7 +2222,8 @@
   "target:ability-source-filter",
   "target:ability-source-filter",
   "cost:reduction-per-type-shared-with-exiled",
-  "effect:copy-spells-cast-this-way"
+  "effect:copy-spells-cast-this-way",
+  "cost:flashback-exile-x-cost"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -1342,6 +1342,13 @@ describe("costs and triggers", () => {
       oracle_text: "Flashback—{R}{R}, Sacrifice X Mountains. (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
     });
     expect(blitz.flashback).toEqual({ cost: "{R}{R}", sacrifice: { filter: { subtype: "Mountain" }, count: "x" } });
+    const summons = parseFace({
+      name: "Summons of Saruman",
+      mana_cost: "{X}{U}{R}",
+      type_line: "Sorcery",
+      oracle_text: "Flashback—{3}{U}{R}, Exile X cards from your graveyard.",
+    });
+    expect(summons.flashback).toEqual({ cost: "{3}{U}{R}", exileFromGraveyard: { count: "x" } });
   });
 
   it("reads parley's three sentences as one reveal-top, the effect scaled by the cards revealed", () => {
