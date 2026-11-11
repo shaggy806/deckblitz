@@ -531,6 +531,7 @@ import _poolMirari from "../pool/mirari.js";
 import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMirrorwoodTreefolk from "../pool/mirrorwood-treefolk.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
+import _poolMishraClaimedByGix from "../pool/mishra-claimed-by-gix.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMistDragon from "../pool/mist-dragon.js";
 import _poolMistformUltimus from "../pool/mistform-ultimus.js";
@@ -1492,6 +1493,7 @@ const shard: CardShard = {
     _poolMirrormade,
     _poolMirrorwoodTreefolk,
     _poolMischievousChimera,
+    _poolMishraClaimedByGix,
     _poolMisshapenFiend,
     _poolMistDragon,
     _poolMistformUltimus,

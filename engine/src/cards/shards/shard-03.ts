@@ -749,6 +749,7 @@ import _poolStrongholdDiscipline from "../pool/stronghold-discipline.js";
 import _poolStudentOfWarfare from "../pool/student-of-warfare.js";
 import _poolStunningReversal from "../pool/stunning-reversal.js";
 import _poolStunningStrike from "../pool/stunning-strike.js";
+import _poolSuddenSubstitution from "../pool/sudden-substitution.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
 import _poolSumalaSentry from "../pool/sumala-sentry.js";
 import _poolSummonEsperMaduin from "../pool/summon-esper-maduin.js";
@@ -1676,6 +1677,7 @@ const shard: CardShard = {
     _poolStudentOfWarfare,
     _poolStunningReversal,
     _poolStunningStrike,
+    _poolSuddenSubstitution,
     _poolSulfurVent,
     _poolSumalaSentry,
     _poolSummonEsperMaduin,

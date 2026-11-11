@@ -9046,6 +9046,7 @@ import _poolFateholdCharm from "./pool/fatehold-charm.js";
 import _poolFateholdChronologist from "./pool/fatehold-chronologist.js";
 import _poolFatesReversal from "./pool/fates-reversal.js";
 import _poolFateshaperAspirant from "./pool/fateshaper-aspirant.js";
+import _poolFatespinner from "./pool/fatespinner.js";
 import _poolFatestitcher from "./pool/fatestitcher.js";
 import _poolFathomFeeder from "./pool/fathom-feeder.js";
 import _poolFathomFleetBoarder from "./pool/fathom-fleet-boarder.js";
@@ -17206,8 +17207,10 @@ import _poolMisfortune from "./pool/misfortune.js";
 import _poolMisfortunesGain from "./pool/misfortunes-gain.js";
 import _poolMisguidedRage from "./pool/misguided-rage.js";
 import _poolMishraArtificerProdigy from "./pool/mishra-artificer-prodigy.js";
+import _poolMishraClaimedByGix from "./pool/mishra-claimed-by-gix.js";
 import _poolMishraEminentOne from "./pool/mishra-eminent-one.js";
 import _poolMishraExcavationProdigy from "./pool/mishra-excavation-prodigy.js";
+import _poolMishraLostToPhyrexia from "./pool/mishra-lost-to-phyrexia.js";
 import _poolMishraTamerOfMakFawa from "./pool/mishra-tamer-of-mak-fawa.js";
 import _poolMishrasBauble from "./pool/mishras-bauble.js";
 import _poolMishrasCommand from "./pool/mishras-command.js";
@@ -26258,6 +26261,7 @@ import _poolSuddenSpoiling from "./pool/sudden-spoiling.js";
 import _poolSuddenStorm from "./pool/sudden-storm.js";
 import _poolSuddenStrength from "./pool/sudden-strength.js";
 import _poolSuddenStrike from "./pool/sudden-strike.js";
+import _poolSuddenSubstitution from "./pool/sudden-substitution.js";
 import _poolSuffering from "./pool/suffering.js";
 import _poolSuffocatingBlast from "./pool/suffocating-blast.js";
 import _poolSuffocatingFumes from "./pool/suffocating-fumes.js";
@@ -41480,6 +41484,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFateholdChronologist,
   _poolFatesReversal,
   _poolFateshaperAspirant,
+  _poolFatespinner,
   _poolFatestitcher,
   _poolFathomFeeder,
   _poolFathomFleetBoarder,
@@ -49640,8 +49645,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMisfortunesGain,
   _poolMisguidedRage,
   _poolMishraArtificerProdigy,
+  _poolMishraClaimedByGix,
   _poolMishraEminentOne,
   _poolMishraExcavationProdigy,
+  _poolMishraLostToPhyrexia,
   _poolMishraTamerOfMakFawa,
   _poolMishrasBauble,
   _poolMishrasCommand,
@@ -58692,6 +58699,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSuddenStorm,
   _poolSuddenStrength,
   _poolSuddenStrike,
+  _poolSuddenSubstitution,
   _poolSuffering,
   _poolSuffocatingBlast,
   _poolSuffocatingFumes,
@@ -73927,6 +73935,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fatehold-chronologist": _poolFateholdChronologist,
   "pool/fates-reversal": _poolFatesReversal,
   "pool/fateshaper-aspirant": _poolFateshaperAspirant,
+  "pool/fatespinner": _poolFatespinner,
   "pool/fatestitcher": _poolFatestitcher,
   "pool/fathom-feeder": _poolFathomFeeder,
   "pool/fathom-fleet-boarder": _poolFathomFleetBoarder,
@@ -82087,8 +82096,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/misfortunes-gain": _poolMisfortunesGain,
   "pool/misguided-rage": _poolMisguidedRage,
   "pool/mishra-artificer-prodigy": _poolMishraArtificerProdigy,
+  "pool/mishra-claimed-by-gix": _poolMishraClaimedByGix,
   "pool/mishra-eminent-one": _poolMishraEminentOne,
   "pool/mishra-excavation-prodigy": _poolMishraExcavationProdigy,
+  "pool/mishra-lost-to-phyrexia": _poolMishraLostToPhyrexia,
   "pool/mishra-tamer-of-mak-fawa": _poolMishraTamerOfMakFawa,
   "pool/mishras-bauble": _poolMishrasBauble,
   "pool/mishras-command": _poolMishrasCommand,
@@ -91139,6 +91150,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sudden-storm": _poolSuddenStorm,
   "pool/sudden-strength": _poolSuddenStrength,
   "pool/sudden-strike": _poolSuddenStrike,
+  "pool/sudden-substitution": _poolSuddenSubstitution,
   "pool/suffering": _poolSuffering,
   "pool/suffocating-blast": _poolSuffocatingBlast,
   "pool/suffocating-fumes": _poolSuffocatingFumes,

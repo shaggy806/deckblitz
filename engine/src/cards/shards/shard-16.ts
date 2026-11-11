@@ -551,6 +551,7 @@ import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMiserysShadow from "../pool/miserys-shadow.js";
+import _poolMishraLostToPhyrexia from "../pool/mishra-lost-to-phyrexia.js";
 import _poolMishrasBauble from "../pool/mishras-bauble.js";
 import _poolMisterHydeMonsterWithin from "../pool/mister-hyde-monster-within.js";
 import _poolMnemonicSliver from "../pool/mnemonic-sliver.js";
@@ -1627,6 +1628,7 @@ const shard: CardShard = {
     _poolMirranBardiche,
     _poolMirrorpool,
     _poolMiserysShadow,
+    _poolMishraLostToPhyrexia,
     _poolMishrasBauble,
     _poolMisterHydeMonsterWithin,
     _poolMnemonicSliver,

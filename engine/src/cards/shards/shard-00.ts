@@ -279,6 +279,7 @@ import _poolFaithlessLooting from "../pool/faithless-looting.js";
 import _poolFaithlessSalvaging from "../pool/faithless-salvaging.js";
 import _poolFangrenPathcutter from "../pool/fangren-pathcutter.js";
 import _poolFatedClash from "../pool/fated-clash.js";
+import _poolFatespinner from "../pool/fatespinner.js";
 import _poolFearfulVillager from "../pool/fearful-villager.js";
 import _poolFearlessHalberdier from "../pool/fearless-halberdier.js";
 import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
@@ -1298,6 +1299,7 @@ const shard: CardShard = {
     _poolFaithlessSalvaging,
     _poolFangrenPathcutter,
     _poolFatedClash,
+    _poolFatespinner,
     _poolFearfulVillager,
     _poolFearlessHalberdier,
     _poolFearsomeWerewolf,
