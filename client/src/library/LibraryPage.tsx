@@ -6,6 +6,7 @@ import {
   COMMANDER_BANNED,
   canCommandAlone,
   edhrecRankOf,
+  releaseDateOf,
   flavorNamesOf,
   isCardFront,
   isTokenCard,
@@ -56,7 +57,7 @@ const COLOR_NAME: Record<ColorFilter, string> = {
 
 // Popularity first, the default (the user, 2026-10-07): the cards people
 // actually play at the top, rather than an alphabetical wall.
-const SORTS = ['edhrec', 'name', 'mana', 'color', 'type'] as const
+const SORTS = ['edhrec', 'name', 'released', 'mana', 'color', 'type'] as const
 type Sort = (typeof SORTS)[number]
 
 /** What the grid lists: the pool's cards, the ones not in it yet, or (in
@@ -66,6 +67,7 @@ type Show = 'pool' | 'missing' | 'asap'
 const SORT_LABEL: Record<Sort, string> = {
   name: 'Name',
   edhrec: 'Popularity',
+  released: 'Release date',
   mana: 'Mana value',
   color: 'Colour',
   type: 'Type',
@@ -135,6 +137,8 @@ interface Row {
   readonly haystack: string
   readonly mv: number
   readonly edhrec: number
+  /** The day it was first printed, `YYYY-MM-DD`, or `''` when unknown. */
+  readonly released: string
   readonly colorRank: number
   readonly typeRank: number
   readonly colorKeys: readonly ColorFilter[]
@@ -169,6 +173,7 @@ function buildMissingEntry(card: MissingCard): MissingEntry {
     haystack: `${card.name} \n ${card.typeLine}`.toLowerCase(),
     mv: card.manaValue,
     edhrec: card.edhrecRank ?? Infinity,
+    released: releaseDateOf(card.name) ?? '',
     colorRank: colorRankOf(colors),
     typeRank: typeRankOf(types),
     colorKeys: colors.length === 0 ? ['C'] : (colors as ColorFilter[]),
@@ -201,6 +206,12 @@ function sortRows<T extends Row>(rows: readonly T[], sort: Sort, descending: boo
     // least-played cards are the ones with the biggest rank, not no rank.
     if (sort === 'edhrec' && (a.edhrec === Infinity) !== (b.edhrec === Infinity)) {
       return a.edhrec === Infinity ? 1 : -1
+    }
+    // Newest first, as popularity is most played first; a card with no known
+    // date last either way.
+    if (sort === 'released') {
+      if ((a.released === '') !== (b.released === '')) return a.released === '' ? 1 : -1
+      return a.released === b.released ? byName(a, b) : sign * (a.released < b.released ? 1 : -1)
     }
     const key =
       sort === 'mana'
@@ -293,6 +304,7 @@ function buildEntry(def: CardDefinition): Entry {
       .toLowerCase(),
     mv: manaValue(parseManaCost(def.manaCost)),
     edhrec: edhrecRankOf(def.name) ?? Infinity,
+    released: releaseDateOf(def.name) ?? '',
     colorRank: colorRankOf(def.colors),
     typeRank: typeRankOf(def.types),
     colorKeys: def.colors.length === 0 ? ['C'] : (def.colors as readonly ColorFilter[]),

@@ -28,9 +28,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 - **The lobby's starting life shows two controls** (found 2026-11-02). Starting life shows both the 20/30/40
   buttons and a field, and the small "Add bot" sits close under an open seat's "Pick a deck". (Ready is drawn as
   the primary button since 2026-11-11.)
-- **The library can't sort by release date** (asked 2026-11-07). The user wants release date as a sort option.
-  `client/src/library/LibraryPage.tsx`'s `SORTS` has edhrec, name, mana, color and type; the set list
-  already carries each set's `releasedAt`.
 - **The history log's layout** (found 2026-11-02). It's a full-screen popup, so it can't be read beside the
   board; each line carries its event number; and the phase banner ("MAIN PHASE") draws over it.
 - **The hand's rules text is tiny at rest** (found 2026-11-02). At 1366×768 a hand card's rules are 9.5px and

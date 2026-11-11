@@ -253,7 +253,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Too many priority stops with a land like Bountiful Landscape** (a design call) — a non-mana ability on the battlefield stopped the game about 40 times in one four-player round, and Auto-pass pauses on each opposing spell.
 - **Blitz is the last thing on the landing page** — the site's main feature sits under the navigation, in the same yellow as "Create a game", with its paste form's button just below the fold at 768px.
 - **The lobby's starting life shows two controls** — the 20/30/40 buttons and a number field side by side; the small "Add bot" still sits close under an open seat's "Pick a deck".
-- **The library can't sort by release date** — the user wants it as a sort option beside EDHREC, name, mana, color and type.
 - **The history log's layout** — a full-screen popup you can't read beside the board, event numbers on every line, and the phase banner draws over it.
 - **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
 - **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
@@ -296,7 +295,7 @@ delete its detail there and move this line to `COMPLETED.md`.
   destroys the Aura itself instead). Have `destroy()` check state-based actions after it.
 - **Refresh the snapshots.** The EDHREC ranking snapshots (`top-commander-cards.txt`,
   `top-commanders.txt`) and `edhrec-rank.ts` are frozen. Re-fetching them moves the roster, so
-  do it on purpose.
+  do it on purpose. `release-date.ts` (the library's first-printing dates) wants `npm run gen:release-dates -w engine` after each `gen:oracle` or a batch of new cards: a card it doesn't list sorts last.
 - **Keyword-action citations on an older numbering** (found 2026-10-13, fixing 701.19b): section
   701 was renumbered in a later edition and many comments still cite the old numbers —
   regeneration as 701.15 (Goad now; regenerate is 701.19), reveal as 701.16 (Investigate; reveal
