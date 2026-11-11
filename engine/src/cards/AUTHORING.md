@@ -6543,7 +6543,8 @@ replacement's `event` and its flat fields say what it matches; `instead` says wh
 it ("instead that damage is dealt, but …"). Amounts are `EffectAmount`s, read as the event would happen. In the effect
 `"x"` is "that much", `"trigger-object"` "that card" or the damage's source, `"trigger-recipient"` and `"trigger-player"`
 who it would have happened to; it's run by the replacement's controller, so "that player" draws is an `as-player` or a
-`who: "trigger-player"`. It mustn't repeat its own event after a decision (rule 614.5): use `also`. Damage has its own
+`who: "trigger-player"` (Undead Alchemist's combat damage become `{ kind: "mill", target: "trigger-player", amount: "x" }`,
+with `combat: true`, a `source` filter and `to: "player"`). It mustn't repeat its own event after a decision (rule 614.5): use `also`. Damage has its own
 `{ prevent, then?, perEvent?, thenCountsUnprevented? }` (`prevent`: `true`, a number, `{ allBut }` or `{ half }`) and
 `{ redirect }`; the leave event takes a destination (`"exile"`, `"library-top"`, `"library-bottom"`, `"hand"`). `may: true`
 is "you may instead", only on events that can wait for the answer (draw, tokens, turn begin): `test/instead-replacements.test.ts`

@@ -17909,3 +17909,39 @@ describe("if a creature you control would explore, instead it explores, then it 
     });
   });
 });
+
+describe("combat damage to a player become that player's mill", () => {
+  const face = parseFace(
+    {
+      name: "Thing",
+      type_line: "Creature — Zombie",
+      oracle_text:
+        "If a Zombie you control would deal combat damage to a player, instead that player mills that many cards.\nWhenever a creature card is put into an opponent's graveyard from their library, exile that card and create a 2/2 black Zombie creature token.",
+      power: "4",
+      toughness: "2",
+    } as never,
+    { tokenFor: (desc: string) => `<${desc}>` },
+  ) as unknown as { static: { replacement: unknown }[]; triggered: { trigger: unknown; effect: unknown }[] };
+  it("reads Undead Alchemist's replacement, the damaged player the one who mills", () => {
+    expect(face.static[0]?.replacement).toEqual({
+      event: "would-deal-damage",
+      combat: true,
+      source: { subtype: "Zombie", controlledBy: "you" },
+      to: "player",
+      instead: { effect: { kind: "mill", target: "trigger-player", amount: "x" } },
+    });
+  });
+  it("reads its trigger on a card put into an opponent's graveyard from their library, and \"that card\"", () => {
+    expect(face.triggered[0]?.trigger).toEqual({ on: "put-into-graveyard", who: "opponent", filter: { type: "creature" }, from: "library" });
+    expect(face.triggered[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: "trigger-object" },
+        { kind: "create-token", token: "<2/2 black Zombie creature>", count: 1 },
+      ],
+    });
+  });
+  it("leaves \"that card\" alone where no card is the event's", () => {
+    expect(parseSentence("Exile that card.", { targets: [], it: "trigger-object" } as never)).not.toEqual({ kind: "exile", target: "trigger-object" });
+  });
+});

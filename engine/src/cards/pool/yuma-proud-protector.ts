@@ -33,7 +33,7 @@ export default defineCard({
     { trigger: { on: "enters-battlefield", who: "self" }, targets: [], effect: sacrificeALand, resolve: null, text: SAC_TEXT },
     { trigger: { on: "attacks", who: "self" }, targets: [], effect: sacrificeALand, resolve: null, text: SAC_TEXT },
     {
-      trigger: { on: "put-into-graveyard", who: "you", filter: { subtype: "Desert", token: false } },
+      trigger: { on: "put-into-graveyard", who: "you", filter: { subtype: "Desert" } },
       targets: [],
       effect: { kind: "create-token", token: "Plant Warrior Token", count: 1 },
       resolve: null,

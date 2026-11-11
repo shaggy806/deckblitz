@@ -1914,6 +1914,24 @@ export function parseTrigger(clause) {
       },
     ];
   }
+  // A card put into a graveyard, once per card: "whenever a creature card is
+  // put into an opponent's graveyard from anywhere" (Profane Memento), "… from
+  // their library" (Undead Alchemist), "whenever a card is put into an
+  // opponent's graveyard from anywhere" (Vulturous Zombie).
+  if (
+    (m = /^Whenever an? (?:(.+?) )?card is put into (an opponent's|your|a) graveyard from (anywhere|their library|your library|a library)$/.exec(c))
+  ) {
+    const filter = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return [
+      {
+        on: "put-into-graveyard",
+        who: { "an opponent's": "opponent", your: "you", a: "any" }[m[2]],
+        ...(Object.keys(filter).length > 0 ? { filter } : {}),
+        ...(m[3] === "anywhere" ? {} : { from: "library" }),
+      },
+    ];
+  }
   // "Whenever a player taps a nonbasic land for mana" (Burning Earth), "whenever
   // an opponent taps a Mountain for mana" (Sanctimony), "whenever a land is
   // tapped for mana" (Storm Cauldron), "whenever you tap ~ for mana" (Zhur-Taa
@@ -3034,6 +3052,21 @@ export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
+  // "Exile that card [and create a 2/2 black Zombie creature token]": the card
+  // a put-into-a-graveyard trigger is about, found in that graveyard and
+  // nowhere else (rule 400.7 — Undead Alchemist). The token is made whether
+  // or not the card was still there (Undead Alchemist's ruling).
+  const exileThatCard =
+    ctx?.cardEvent === true && ctx.it === "trigger-object" && ctx.targets.length === 0
+      ? /^exile that card(?: and (create .+))?\.$/i.exec(s)
+      : null;
+  if (exileThatCard !== null) {
+    const exile = { kind: "exile", target: "trigger-object" };
+    if (exileThatCard[1] === undefined) return exile;
+    const then = parseSentence(`${exileThatCard[1][0].toUpperCase()}${exileThatCard[1].slice(1)}.`, ctx);
+    if (then !== null && then !== undefined && then.kind === "create-token") return { kind: "sequence", effects: [exile, then] };
+    return null;
+  }
   // "You and those players each draw a card, then discard a card at random"
   // (Zurzoth, Chaos Rider): the players a batch of attackers was declared
   // attacking — the `"attacked-players"` scopes.
@@ -16659,6 +16692,8 @@ function parseFaceAsWritten(face, ctx = {}) {
           departed: departedOf(triggers),
           // "Copy it" in a cast trigger: the spell cast (`"trigger-spell"`).
           ...(triggers.every((t) => t.on === "cast-spell") ? { castSpell: true } : {}),
+          // "That card" of a card put into a graveyard.
+          ...(triggers.every((t) => t.on === "put-into-graveyard" && t.batched !== true) ? { cardEvent: true } : {}),
           ...(thatPlayerOf(triggers) !== undefined ? { thatPlayer: thatPlayerOf(triggers) } : {}),
           // "Those creatures": the attackers of an attack read as one batch.
           ...(triggers.every((t) => t.on === "attacks-batch" || t.on === "attack-with" || t.on === "attacks-player")
@@ -17939,6 +17974,8 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "becomes-attached")) return "trigger-object";
   // "That creature" a counter went on (Kros, Defense Contractor).
   if (triggers.every((t) => t.on === "counters-put" && t.byYou === true && t.who === "any")) return "trigger-object";
+  // "That card": the one put into the graveyard, when it's once per card.
+  if (triggers.every((t) => t.on === "put-into-graveyard" && t.batched !== true)) return "trigger-object";
   // "Whenever Ma Chao attacks alone, it …".
   if (triggers.every((t) => t.on === "attacks-alone" && t.who === "self")) return "source";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
@@ -18069,6 +18106,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     it: ctx.it,
     departed: ctx.departed,
     ...(ctx.castSpell === true ? { castSpell: true } : {}),
+    ...(ctx.cardEvent === true ? { cardEvent: true } : {}),
     divided,
     // A cost that discards one card: "the discarded card" is that card.
     ...(ability.cost?.discard?.count === 1 ? { costDiscarded: true } : {}),
@@ -19777,6 +19815,27 @@ function parseStatic(line, text) {
       },
       text,
     };
+  }
+  // Combat damage to a player become that player's mill (rule 614.1a; the
+  // damage never happens, 614.6): "if a Zombie you control would deal combat
+  // damage to a player, instead that player mills that many cards" (Undead
+  // Alchemist). The damaged player is the effect's `"trigger-player"`.
+  m = /^If an? (.+?) you control would deal combat damage to a player, instead that player mills that many cards\.$/.exec(line);
+  if (m !== null) {
+    const source = parseTypePhrase(m[1]);
+    if (source !== null) {
+      return {
+        affects: { scope: "self" },
+        replacement: {
+          event: "would-deal-damage",
+          combat: true,
+          source: { ...source, controlledBy: "you" },
+          to: "player",
+          instead: { effect: { kind: "mill", target: "trigger-player", amount: "x" } },
+        },
+        text,
+      };
+    }
   }
   // A static prevention (rule 615): "prevent all noncombat damage that would
   // be dealt to other creatures you control" (Crystal Barricade, Tajic).
