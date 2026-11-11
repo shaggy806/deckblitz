@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import type { FocusEvent, MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
 import type { CardDefinition, CardType, Color } from 'engine/client'
@@ -23,6 +23,7 @@ import { resolveArtUrl } from '../ui/art.ts'
 import { fetchAsap, setAsap } from './buildAsap.ts'
 import { fetchMissingCards, namesOfMissing } from './missingCards.ts'
 import type { MissingCard } from './missingCards.ts'
+import { matchesTerms, searchTerms } from './search.ts'
 import { fetchSetCards, fetchSets } from './setFilter.ts'
 import type { SetCards, SetInfo, SetPrinting } from './setFilter.ts'
 import './library.css'
@@ -177,7 +178,7 @@ function buildMissingEntry(card: MissingCard): MissingEntry {
 /** The rows a search and the filters leave. */
 function matchesFilters(
   e: Row,
-  q: string,
+  terms: readonly string[],
   typeFilter: CardType | null,
   colorFilter: readonly ColorFilter[],
   setCode: string | null,
@@ -187,7 +188,7 @@ function matchesFilters(
   if (setCode !== null && (setNames === null || !e.names.some((n) => setNames.has(n)))) return false
   if (typeFilter !== null && !e.types.includes(typeFilter)) return false
   if (colorFilter.length > 0 && !e.colorKeys.some((c) => colorFilter.includes(c))) return false
-  return q === '' || e.haystack.includes(q)
+  return matchesTerms(e.haystack, terms)
 }
 
 /** `rows`, already in name order, in the chosen sort. */
@@ -230,6 +231,9 @@ interface Entry extends Row {
    * separate *image* (an adventure prints both halves on one face). */
   readonly other: CardDefinition | null
   readonly flippable: boolean
+  /** A split card's two halves (rule 709): side by side on its one face, so
+   * there's nothing to turn over and no "other" face. Empty otherwise. */
+  readonly halves: readonly CardDefinition[]
   readonly isToken: boolean
   readonly haystack: string
   readonly mv: number
@@ -257,7 +261,10 @@ function typeLineOf(def: CardDefinition): string {
 function buildEntry(def: CardDefinition): Entry {
   // A preparation card's prepare spell shows as its other half too (rule
   // 722.2: printed in an inset frame on the one face).
-  const otherName = def.faces && def.faces.length > 1 ? def.faces[1] : def.prepareSpell
+  const halves = def.split
+    ? (def.faces ?? []).slice(1).flatMap((name) => cardPool().byName.get(name) ?? [])
+    : []
+  const otherName = def.split ? null : def.faces && def.faces.length > 1 ? def.faces[1] : def.prepareSpell
   const other = otherName === null ? null : (cardPool().byName.get(otherName) ?? null)
   return {
     def,
@@ -265,13 +272,22 @@ function buildEntry(def: CardDefinition): Entry {
     names: [def.name],
     types: def.types,
     other,
+    halves,
     // An adventure's two halves share one printed face, so there's nothing to
     // flip *to* — unlike a transforming DFC or an MDFC, which have a real
     // back-face image.
     flippable: other !== null && !def.adventure && !def.omen && def.prepareSpell === null,
     isToken: isTokenCard(def),
     // The names it's printed under too ("Princess Sarah" finds Azusa).
-    haystack: [def.name, ...flavorNamesOf(def.name), typeLineOf(def), def.text, other?.name, other?.text]
+    haystack: [
+      def.name,
+      ...flavorNamesOf(def.name),
+      typeLineOf(def),
+      def.text,
+      other?.name,
+      other?.text,
+      ...halves.map((h) => h.name),
+    ]
       .filter(Boolean)
       .join(' \n ')
       .toLowerCase(),
@@ -503,17 +519,17 @@ export function LibraryPage() {
   }, [show, showMissing, missing, asap])
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    const terms = searchTerms(query)
     const rows = entries.filter(
-      (e) => (showTokens || !e.isToken) && matchesFilters(e, q, typeFilter, colorFilter, setCode, setNames),
+      (e) => (showTokens || !e.isToken) && matchesFilters(e, terms, typeFilter, colorFilter, setCode, setNames),
     )
     return sortRows(rows, sort, descending)
   }, [entries, query, typeFilter, colorFilter, sort, descending, showTokens, setCode, setNames])
 
   const missingFiltered = useMemo(() => {
     if (missingRows === null) return []
-    const q = query.trim().toLowerCase()
-    const rows = missingRows.filter((e) => matchesFilters(e, q, typeFilter, colorFilter, setCode, setNames))
+    const terms = searchTerms(query)
+    const rows = missingRows.filter((e) => matchesFilters(e, terms, typeFilter, colorFilter, setCode, setNames))
     return sortRows(rows, sort, descending)
   }, [missingRows, query, typeFilter, colorFilter, sort, descending, setCode, setNames])
 
@@ -777,10 +793,10 @@ export function LibraryPage() {
               : showMissing
               ? setCode !== null
                 ? `Every one of ${setName}'s cards that matches is in the pool.`
-                : 'No card not in the pool matches — try a shorter search.'
+                : 'No card not in the pool matches — try fewer words.'
               : setCode !== null
                 ? `None of ${setName}'s cards match — or none are implemented yet.`
-                : `No cards match. The pool is ${cardCount} implemented cards — try a shorter search.`}
+                : `No cards match. The pool is ${cardCount} implemented cards — try fewer words.`}
           </p>
         ) : (
           <>
@@ -1016,7 +1032,24 @@ function CardOverlay({
               deck with it.
             </p>
           ) : null}
-          <FaceText def={entry.def} />
+          {entry.halves.length === 0 ? (
+            <FaceText def={entry.def} />
+          ) : (
+            entry.halves.map((half, i) => (
+              <Fragment key={half.name}>
+                {i > 0 ? (
+                  <div className="lib-face-divider">
+                    <span>{half.aftermath ? 'Aftermath' : 'Other half'}</span>
+                  </div>
+                ) : null}
+                <div className="lib-overlay-title">
+                  <h2>{half.name}</h2>
+                  {half.manaCost ? <Symbols text={half.manaCost} /> : null}
+                </div>
+                <FaceText def={half} />
+              </Fragment>
+            ))
+          )}
           {entry.other ? (
             <>
               <div className="lib-face-divider">
@@ -1286,6 +1319,7 @@ function MechanicChips({ def, isToken }: { readonly def: CardDefinition; readonl
   if (def.adventure) chips.push('adventure')
   else if (def.omen) chips.push('omen')
   else if (def.transform) chips.push('transforms')
+  else if (def.split) chips.push(def.fuse ? 'split — fuse' : 'split')
   else if (def.faces && def.faces.length > 1) chips.push('modal double-faced')
   if (def.chapters) chips.push(`saga — ${def.chapters.length} chapters`)
   if (def.castModal) chips.push('modal')

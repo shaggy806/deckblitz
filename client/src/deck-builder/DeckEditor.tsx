@@ -21,6 +21,7 @@ import type { HoverTarget } from '../ui/CardHoverPreview.tsx'
 import { CardContextMenu } from './CardContextMenu.tsx'
 import { StableLabel } from '../ui/StableLabel.tsx'
 import type { MenuAnchor, MenuItem } from './CardContextMenu.tsx'
+import { matchesTerms, searchTerms } from '../library/search.ts'
 import { PrintingPicker } from './PrintingPicker.tsx'
 import type { SavedDeck } from './decks.ts'
 import { MAX_SIDEBOARD } from './decks.ts'
@@ -57,6 +58,20 @@ function buildableCards(): readonly CardDefinition[] {
     )
     .map((r) => r.def)
   return buildable
+}
+
+const searchTexts = new WeakMap<CardDefinition, string>()
+
+/** What the pool's search reads of a card, lowercase: its name, the names
+ * it's printed under too ("Princess Sarah" finds Azusa), its subtypes and
+ * its rules text. Built once a card. */
+function searchTextOf(def: CardDefinition): string {
+  let text = searchTexts.get(def)
+  if (text === undefined) {
+    text = [def.name, ...flavorNamesOf(def.name), def.subtypes.join(' '), def.text].join(' \n ').toLowerCase()
+    searchTexts.set(def, text)
+  }
+  return text
 }
 
 /** Every definition, including the ones the buildable pool hides: a deck
@@ -185,18 +200,12 @@ export function DeckEditor({
   const identityFilter = inIdentityOnly ? commanderIdentity : null
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    // Every word, in any order, as the library's search reads it.
+    const terms = searchTerms(query)
     return buildableCards().filter((c) => {
       if (typeFilter && !c.types.includes(typeFilter as CardDefinition['types'][number])) return false
       if (identityFilter !== null && !withinIdentity(identityOf(c), identityFilter)) return false
-      if (!q) return true
-      return (
-        c.name.toLowerCase().includes(q) ||
-        // The names it's printed under too ("Princess Sarah" finds Azusa).
-        flavorNamesOf(c.name).some((n) => n.toLowerCase().includes(q)) ||
-        c.text.toLowerCase().includes(q) ||
-        c.subtypes.some((s) => s.toLowerCase().includes(q))
-      )
+      return terms.length === 0 || matchesTerms(searchTextOf(c), terms)
     })
   }, [query, typeFilter, identityFilter])
 
