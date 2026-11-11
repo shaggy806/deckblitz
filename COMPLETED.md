@@ -3634,6 +3634,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Tooling / docs
 
+- **Verify faster: five small changes from the speed audit** (2026-11-10, `dc9b9a552`): card:verify
+  reads the bundled barrel (28 s to 1.5 s), the server suite imports the built engine through Node
+  (47 s to 16 s), the typecheck runs only the two tests configs directly (9 s to 3 s), gen:cards runs
+  once, and stand-ins and the marks left the main chain. Full run 330 s to 287 s
+  (`docs/plans/verify-speed-audit.md`).
 - **`batch-review.mjs` reads a card's own name** (2026-11-06): it searched from the
   `import { defineCard }` line, so a helper above the call could lend its `name:` (Captain Kirk,
   Boldly Going read as Starship Enterprise; 47 pool cards in all, mostly "Chandra's X" cards named
