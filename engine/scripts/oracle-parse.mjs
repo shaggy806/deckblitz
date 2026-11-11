@@ -19422,6 +19422,24 @@ function parseStatic(line, text) {
   // long as you're the monarch"): rule 120.3a's result alone, not dealt damage.
   if (line === "Damage doesn't cause you to lose life.") {
     return { affects: { scope: "self" }, prohibits: [{ act: "lose-life", who: "you", from: "damage" }], text };
+  // "You don't lose the game for having 0 or less life" (Lich's Tomb,
+  // Phyrexian Unlife): rule 704.5a's loss alone.
+  if (line === "You don't lose the game for having 0 or less life.") {
+    return { affects: { scope: "self" }, prohibits: [{ act: "lose-game", who: "you", only: "zero-life" }], text };
+  }
+  // "As long as you have 0 or less life, all damage is dealt to you as though
+  // its source had infect" (Phyrexian Unlife), reminder text or none.
+  if (
+    (m = /^As long as you have (\d+) or less life, all damage is dealt to you as though its source had infect\.(?: \(.+\))?$/.exec(
+      line,
+    ))
+  ) {
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "life-total", who: "you", atMost: Number(m[1]) },
+      damageAsThoughSourceHad: { keyword: "infect", to: "you" },
+      text,
+    };
   }
   // A static acting on a player. Abyssal Persecutor; the player a Curse
   // enchants: what they control, the damage dealt to them, the life they gain.

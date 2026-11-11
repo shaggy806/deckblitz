@@ -2867,9 +2867,14 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * whoever controls it, is dealt as a source with that keyword deals it
    * (rules 120.3d, 702.80a; `"infect"` 702.90b-c as well) — without the
    * source having the keyword, so nothing that asks whether it has wither
-   * sees it.
+   * sees it. `to: "you"` is only the damage dealt to this permanent's
+   * controller: Phyrexian Unlife's "as long as you have 0 or less life, all
+   * damage is dealt to you as though its source had infect" (with a
+   * `life-total` `condition`), poison counters in place of loss of life
+   * (702.90b). Damage dealt at once is read as it stood before any of it:
+   * the damage that takes you to 0 or less is all loss of life.
    */
-  readonly damageAsThoughSourceHad?: { readonly keyword: "wither" | "infect" };
+  readonly damageAsThoughSourceHad?: { readonly keyword: "wither" | "infect"; readonly to?: "you" };
   /** "Blitz costs you pay cost {1} less for each time you've cast your
    * commander from the command zone this game" (Henzie): every blitz cost
    * this permanent's controller pays, printed or granted, less that much

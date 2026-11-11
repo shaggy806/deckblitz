@@ -2331,6 +2331,10 @@ export class Game {
     /** "If damage is prevented this way, …" owed for this event, per shield:
      * once, for all it prevented (rule 615.5). */
     readonly shieldThens: Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }>;
+    /** Whether damage to a player is dealt as though its source had a
+     * keyword (`allDamageAsThough`), as it stood before any of this event's
+     * damage was dealt, by `keyword:player`. */
+    readonly asThoughTo: Map<string, boolean>;
     readonly dealtDamage: Map<
       string,
       { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
@@ -55734,7 +55738,7 @@ controlledBy,
       // From a source with infect it's that many poison counters instead of
       // life (rules 120.3a-b, 702.90b): the source's controller gives them.
       const giver = sourceLastKnown?.controller ?? this.state.objects[source]?.controller ?? target.player;
-      if (this.sourceHasDamageKeyword(source, "infect", sourceLastKnown)) {
+      if (this.sourceHasDamageKeyword(source, "infect", sourceLastKnown, target.player)) {
         this.changePlayerCounters(target.player, "poison", amount, giver);
       } else if (playerLosesNoLifeToDamage(this.state, this.registry, target.player)) {
         // "Damage doesn't cause you to lose life" (Archon of Coronation):
@@ -55865,8 +55869,9 @@ controlledBy,
     source: ObjectId,
     keyword: "infect" | "wither",
     sourceLastKnown?: LastKnownInfo,
+    toPlayer?: PlayerId,
   ): boolean {
-    if (this.allDamageAsThough(keyword)) return true;
+    if (this.allDamageAsThough(keyword, toPlayer)) return true;
     if (sourceLastKnown !== undefined) return sourceLastKnown.keywords.includes(keyword);
     const object = this.state.objects[source];
     if (object === undefined || object.kind !== "card") return false;
@@ -55874,13 +55879,31 @@ controlledBy,
   }
 
   /** Whether a permanent's static `damageAsThoughSourceHad` has all damage
-   * dealt as though its source had `keyword` (Everlasting Torment). */
-  private allDamageAsThough(keyword: "infect" | "wither"): boolean {
+   * dealt as though its source had `keyword` (Everlasting Torment), or all
+   * damage dealt to `toPlayer`, its controller (`to: "you"` — Phyrexian
+   * Unlife). Damage dealt at once is one event (rule 510.2), so within a
+   * damage batch a player's answer is the one from before any of it was
+   * dealt: at 1 life, two attackers' damage is all loss of life, though the
+   * first of it takes "0 or less life" true. */
+  private allDamageAsThough(keyword: "infect" | "wither", toPlayer?: PlayerId): boolean {
+    const memo = toPlayer === undefined ? undefined : this.damageBatch?.asThoughTo;
+    const key = `${keyword}:${toPlayer}`;
+    const known = memo?.get(key);
+    if (known !== undefined) return known;
+    const holds = this.allDamageAsThoughNow(keyword, toPlayer);
+    memo?.set(key, holds);
+    return holds;
+  }
+
+  private allDamageAsThoughNow(keyword: "infect" | "wither", toPlayer?: PlayerId): boolean {
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
       for (const ability of this.registry.get(rulesTextName(object)).static) {
-        if (ability.damageAsThoughSourceHad?.keyword === keyword && this.staticActive(object, ability)) return true;
+        const as = ability.damageAsThoughSourceHad;
+        if (as?.keyword !== keyword) continue;
+        if (as.to === "you" && toPlayer !== object.controller) continue;
+        if (this.staticActive(object, ability)) return true;
       }
     }
     return false;
@@ -56020,6 +56043,7 @@ controlledBy,
       lifelink: new Map<ObjectId, { controller: PlayerId; amount: number }>(),
       nextTimeSpent: [] as ActiveReplacement[],
       shieldThens: new Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }>(),
+      asThoughTo: new Map<string, boolean>(),
       dealtDamage: new Map<
         string,
         { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }

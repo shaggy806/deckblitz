@@ -322,6 +322,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Damage dealt to you as though its source had infect — built 2026-11-11
+
+By EDHREC rank: Phyrexian Unlife (6722), the only card. `damageAsThoughSourceHad`
+takes `to: "you"`: only damage dealt to the static's controller (120.3b,
+702.90b), under the static's own `condition` ("as long as you have 0 or less
+life"). Damage dealt at once is one event (510.2), so a damage batch reads
+the answer once, before any of it: the damage that takes you to 0 or less is
+all loss of life. The scaffolder reads both of the card's lines ("You don't
+lose the game for having 0 or less life" too). Key:
+static:damage-to-you-as-though-infect.
+
 ### A static P/T bonus per thing that happened this turn — built 2026-11-11
 
 By EDHREC rank: Kinbinding (6510). `grantPtPerCount.turnHistory: { what,

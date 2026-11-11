@@ -17995,3 +17995,25 @@ describe("a draw become a face-down exile", () => {
     });
   });
 });
+
+describe("living at 0 or less life", () => {
+  it("reads Phyrexian Unlife's two statics", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      mana_cost: "{2}{W}",
+      colors: ["W"],
+      cmc: 3,
+      oracle_text:
+        "You don't lose the game for having 0 or less life.\nAs long as you have 0 or less life, all damage is dealt to you as though its source had infect. (Damage is dealt to you in the form of poison counters.)",
+    } as never) as unknown as { static: Record<string, unknown>[] };
+    expect(face.static.map(({ text: _text, ...rest }) => rest)).toEqual([
+      { affects: { scope: "self" }, prohibits: [{ act: "lose-game", who: "you", only: "zero-life" }] },
+      {
+        affects: { scope: "self" },
+        condition: { kind: "life-total", who: "you", atMost: 0 },
+        damageAsThoughSourceHad: { keyword: "infect", to: "you" },
+      },
+    ]);
+  });
+});
