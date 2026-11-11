@@ -886,6 +886,10 @@ export type GameEvent =
       /** Put by a resolving training ability: the creature trained (rule
        * 702.149c — a `trains` trigger). */
       readonly training?: true;
+      /** Put by a resolving evolve ability: the creature evolved (rule
+       * 702.100b — an `evolves` trigger). Once, however many counters a
+       * replacement made of the one. */
+      readonly evolved?: true;
     })
   | (Base & {
       /** Counters removed — by an ability's cost (Walking Ballista), an

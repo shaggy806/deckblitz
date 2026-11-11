@@ -2103,7 +2103,9 @@ export const embalmAbility = (cost: string, text: string): ActivatedAbility => (
  * `conditional`, the entering creature read as it last existed if it has
  * left — the Gyre Sage ruling). Power is compared with power and toughness
  * with toughness, never across. Each instance triggers on its own
- * (702.100d). Put the keyword line in `text`.
+ * (702.100d). Its counter is marked, so "whenever this creature evolves"
+ * (702.100b) is a `{ on: "evolves", who: "self" }` trigger. Put the keyword
+ * line in `text`.
  */
 export const evolve = (): TriggeredAbility => {
   const bigger: CardFilter = {
@@ -2119,7 +2121,7 @@ export const evolve = (): TriggeredAbility => {
     effect: {
       kind: "conditional",
       condition: { kind: "trigger-object", filter: bigger },
-      then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+      then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1, evolve: true },
     },
     resolve: null,
     text:

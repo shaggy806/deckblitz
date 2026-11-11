@@ -17945,3 +17945,20 @@ describe("combat damage to a player become that player's mill", () => {
     expect(parseSentence("Exile that card.", { targets: [], it: "trigger-object" } as never)).not.toEqual({ kind: "exile", target: "trigger-object" });
   });
 });
+
+describe("whenever this creature evolves", () => {
+  it("reads Watchful Radstag: evolve's marked counter, and a copy of the creature itself", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Creature — Elk Mutant",
+      oracle_text:
+        "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nWhenever this creature evolves, create a token that's a copy of it.",
+      power: "2",
+      toughness: "2",
+    } as never) as unknown as { triggered: { trigger: unknown; effect: { then?: unknown } }[]; todo: string[] };
+    expect(face.todo).toEqual([]);
+    expect(face.triggered[0]?.effect.then).toEqual({ kind: "add-counter", target: "source", counter: "+1/+1", amount: 1, evolve: true });
+    expect(face.triggered[1]?.trigger).toEqual({ on: "evolves", who: "self" });
+    expect(face.triggered[1]?.effect).toEqual({ kind: "create-token-copy", of: "source", count: 1 });
+  });
+});

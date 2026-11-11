@@ -8,6 +8,7 @@
     "effect:random-choice-among-chosen",
     "decision:twice-x-target-count",
     "effect:any-player-may-pay-to-counter",
+    "trigger:evolves-trigger",
     "replacement:combat-damage-becomes-mill",
     "static:loyalty-twice-self-only",
     "amount:damage-dealt-to-object-this-turn",

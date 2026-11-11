@@ -32533,6 +32533,12 @@ export class Game {
           event.training === true &&
           this.matchesWho(spec.who, event.object, self)
         );
+      case "evolves":
+        return (
+          event.type === "counter-added" &&
+          event.evolved === true &&
+          this.matchesWho(spec.who, event.object, self)
+        );
       case "exploits":
         return (
           event.type === "permanent-sacrificed" &&
@@ -37480,8 +37486,8 @@ controlledBy,
       connived: (object, player, nonland) => this.emit({ type: "connived", object, player, nonland }),
       conniveDrawsFirst: (player) => this.activeStaticsOf(player, (a) => a.conniveDrawsFirst === true).length,
       earthbent: () => this.emit({ type: "bent", player: controller, how: "earth" }),
-      addCounter: (target, counter, amount, by, training) =>
-        this.addCounter(target, counter, amount, true, by ?? controller, training),
+      addCounter: (target, counter, amount, by, keywordAct) =>
+        this.addCounter(target, counter, amount, true, by ?? controller, keywordAct),
       amass: (amount, creatureType, onto, player, noToken) =>
         this.amass(player ?? controller, amount, creatureType, source, x, onto, noToken),
       exert: (target, asItAttacks) => {
@@ -47229,7 +47235,7 @@ controlledBy,
     amount: number,
     split = true,
     by?: PlayerId,
-    training = false,
+    keywordAct?: "training" | "evolve",
   ): void {
     // Zero counters is no counters (a "for each" that came to none): nothing
     // is put, nothing is announced, and no token is split off a stack for it.
@@ -47270,7 +47276,8 @@ controlledBy,
       amount: total,
       by: by ?? object.controller,
       after: before + total,
-      ...(training && total > 0 ? { training: true as const } : {}),
+      ...(keywordAct === "training" && total > 0 ? { training: true as const } : {}),
+      ...(keywordAct === "evolve" && total > 0 ? { evolved: true as const } : {}),
     });
     if (counter === "lore" && total > 0) this.triggerChapters(id, before, before + total);
   }

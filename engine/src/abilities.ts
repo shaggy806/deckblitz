@@ -1511,6 +1511,18 @@ export type TriggerKind =
     }
   | {
       /**
+       * "Whenever this creature evolves" (rule 702.100b): a resolving evolve
+       * ability put one or more +1/+1 counters on it — the `add-counter`
+       * with `evolve: true` that `evolve()` writes. Once per evolve ability
+       * that puts any, however many a replacement makes of its one (Watchful
+       * Radstag's ruling); none put (the creature gone, or counters that
+       * can't be put on it), no trigger. Watchful Radstag.
+       */
+      readonly on: "evolves";
+      readonly who: TriggerWho;
+    }
+  | {
+      /**
        * "Whenever day becomes night or night becomes day" (rule 731.1a): the
        * game lost one designation and gained the other. The first "it
        * becomes day" (from neither) isn't one. `becomes` narrows it to one

@@ -5673,6 +5673,10 @@ export type EffectSpec =
        * helper): putting one or more makes the creature "train" (702.149c),
        * which a `trains` trigger watches for (`counter-added`'s `training`). */
       readonly training?: true;
+      /** The evolve ability's counter (rule 702.100 — the `evolve()` helper):
+       * putting one or more makes the creature "evolve" (702.100b), which an
+       * `evolves` trigger watches for (`counter-added`'s `evolved`). */
+      readonly evolve?: true;
     }
   | {
       /**
@@ -12072,8 +12076,10 @@ export interface EffectApi {
   /** See the `"double-counters-all"` {@link EffectSpec}. */
   doubleCountersAll(filter: CardFilter, counterKind: string): void;
   /** `by` is who puts them — the effect's controller when absent;
-   * `training` marks training's counter (702.149c). */
-  addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId, training?: boolean): void;
+   * `keywordAct` marks the counter a keyword's own ability puts, which the
+   * creature is then said to have done: training's (702.149c), evolve's
+   * (702.100b). */
+  addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId, keywordAct?: "training" | "evolve"): void;
   /** `object` connived (rule 701.50a) under `player`, `nonland` nonland
    * cards discarded: announces it ("whenever a creature you control
    * connives"). */
@@ -18496,7 +18502,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // "That player puts a counter on it": no such player, no counter.
       const by = spec.by === undefined ? undefined : resolvePlayerRef(spec.by, ctx);
       if (spec.by !== undefined && by === undefined) return;
-      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by, spec.training === true);
+      const keywordAct = spec.training === true ? "training" : spec.evolve === true ? "evolve" : undefined;
+      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by, keywordAct);
       return;
     }
     case "time-travel":

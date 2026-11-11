@@ -2174,6 +2174,8 @@ export function parseTrigger(clause) {
   if (/^Whenever (?:~|this creature) explores$/.test(c)) return [{ on: "explores", who: "self" }];
   // Training's "trains" (rule 702.149c) and exploit's "exploits" (702.110b).
   if (/^Whenever (?:~|this creature) trains$/.test(c)) return [{ on: "trains", who: "self" }];
+  // Evolve's "evolves" (rule 702.100b — Watchful Radstag).
+  if (/^Whenever (?:~|this creature) evolves$/.test(c)) return [{ on: "evolves", who: "self" }];
   if (/^When (?:~|this creature) exploits a creature$/.test(c)) return [{ on: "exploits", who: "self" }];
   if ((m = /^Whenever a creature you control exploits a (nontoken )?creature$/.exec(c))) {
     return [{ on: "exploits", who: "you-control", ...(m[1] ? { filter: { type: "creature", token: false } } : {}) }];
@@ -7185,6 +7187,11 @@ export function parseSentence(sentence, ctx) {
   }
   // Followed Footsteps, Mechanized Production: read as the trigger resolves.
   // What the trigger names: Ondu Spiritdancer's enchantment.
+  // "Whenever this creature evolves, create a token that's a copy of it"
+  // (Watchful Radstag): "it" is the creature whose ability this is.
+  if (ctx.it === "source" && ctx.evolved === true && ctx.targets.length === 0 && /^create a token that's a copy of it\.$/i.test(s)) {
+    return { kind: "create-token-copy", of: "source", count: 1 };
+  }
   if (ctx.it === "trigger-object" && ctx.targets.length === 0 && /^create a token that's a copy of it\.$/i.test(s)) {
     return { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" };
   }
@@ -16694,6 +16701,7 @@ function parseFaceAsWritten(face, ctx = {}) {
           ...(triggers.every((t) => t.on === "cast-spell") ? { castSpell: true } : {}),
           // "That card" of a card put into a graveyard.
           ...(triggers.every((t) => t.on === "put-into-graveyard" && t.batched !== true) ? { cardEvent: true } : {}),
+          ...(triggers.every((t) => t.on === "evolves" && t.who === "self") ? { evolved: true } : {}),
           ...(thatPlayerOf(triggers) !== undefined ? { thatPlayer: thatPlayerOf(triggers) } : {}),
           // "Those creatures": the attackers of an attack read as one batch.
           ...(triggers.every((t) => t.on === "attacks-batch" || t.on === "attack-with" || t.on === "attacks-player")
@@ -17976,8 +17984,9 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "counters-put" && t.byYou === true && t.who === "any")) return "trigger-object";
   // "That card": the one put into the graveyard, when it's once per card.
   if (triggers.every((t) => t.on === "put-into-graveyard" && t.batched !== true)) return "trigger-object";
-  // "Whenever Ma Chao attacks alone, it …".
-  if (triggers.every((t) => t.on === "attacks-alone" && t.who === "self")) return "source";
+  // "Whenever Ma Chao attacks alone, it …"; "whenever this creature evolves, …
+  // a copy of it".
+  if (triggers.every((t) => (t.on === "attacks-alone" || t.on === "evolves") && t.who === "self")) return "source";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
@@ -18107,6 +18116,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     departed: ctx.departed,
     ...(ctx.castSpell === true ? { castSpell: true } : {}),
     ...(ctx.cardEvent === true ? { cardEvent: true } : {}),
+    ...(ctx.evolved === true ? { evolved: true } : {}),
     divided,
     // A cost that discards one card: "the discarded card" is that card.
     ...(ability.cost?.discard?.count === 1 ? { costDiscarded: true } : {}),

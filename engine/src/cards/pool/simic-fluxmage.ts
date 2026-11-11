@@ -33,7 +33,7 @@ export default defineCard({
       effect: {
         kind: "conditional",
         condition: { kind: "trigger-object", filter: EVOLVE_FILTER },
-        then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1, evolve: true },
       },
       resolve: null,
       text: "Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)",

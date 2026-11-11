@@ -28,7 +28,7 @@ export default defineCard({
       effect: {
         kind: "conditional",
         condition: { kind: "trigger-object", filter: BIGGER },
-        then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1, evolve: true },
       },
       resolve: null,
       text: EVOLVE_TEXT,
