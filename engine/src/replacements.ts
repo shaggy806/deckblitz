@@ -366,12 +366,29 @@ export interface EntersBattlefieldReplacement {
    * Blood's "a +1/+1 counter on it for each counter removed this way").
    * `"done-as-enters"` is how many cards its `asEnters` exiled or returned, times
    * `eachDone`: Mimeoplasm's "three +1/+1 counters on it for each creature card
-   * exiled this way". */
+   * exiled this way". `"rolled-as-enters"` is the total its `rollAsEnters`
+   * rolled (Neverwinter Hydra's "equal to the total of those results"). */
   readonly counters?: {
     readonly kind: string;
-    readonly amount: EffectAmount | "times-kicked" | "web-slinging-mana-value" | "removed-as-enters" | "done-as-enters";
+    readonly amount:
+      | EffectAmount
+      | "times-kicked"
+      | "web-slinging-mana-value"
+      | "removed-as-enters"
+      | "done-as-enters"
+      | "rolled-as-enters";
     readonly eachDone?: number;
   };
+  /**
+   * "As this creature enters, roll X d6" (Neverwinter Hydra): its controller
+   * rolls `count` dice of `sides` sides as it enters (rules 614.1c, 706) —
+   * part of the replacement, so nothing can respond between, though the roll
+   * is a roll like any other (a `rolls-dice` trigger sees it, a "roll an
+   * additional die" replacement changes it). `count: "x"` is the X it was
+   * cast with (rule 107.3m); with no dice, nothing is rolled. The total is
+   * `counters`' `"rolled-as-enters"`.
+   */
+  readonly rollAsEnters?: { readonly sides: number; readonly count: EffectAmount | "x" };
   /**
    * "As this creature enters, remove all counters from all permanents"
    * (Thief of Blood): as it enters (rule 614.1c — part of the replacement, so

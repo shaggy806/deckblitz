@@ -12818,6 +12818,41 @@ export class Game {
   }
 
   /**
+   * `player` rolls `count` dice of `sides` sides for `source` (rule 706): the
+   * total of the results kept, plus `modifier` (706.2). An effect's roll, and
+   * one made as a permanent enters (`rollAsEnters`).
+   */
+  private rollDice(player: PlayerId, source: ObjectId, sides: number, count: number, modifier: number, keep?: number): number {
+    // Each source adds its own die and ignores its own lowest (614.5).
+    let ignoring = 0;
+    let extra = 0;
+    for (const { by, replacement } of this.staticReplacementsFor(player, "would-roll-dice")) {
+      const plus = replacement.instead.modify.plus;
+      const added = plus === undefined ? 0 : this.replacementAmount(plus, by);
+      extra += added;
+      if (replacement.ignoreLowest === true) ignoring += added;
+    }
+    // Each die has `sides` equally likely outcomes, 1 to N (rule 706.1a).
+    const rolled: number[] = [];
+    for (let i = 0; i < count + extra; i += 1) rolled.push(1 + Math.floor(this.rng.next() * sides));
+    this.state.rngState = this.rng.seed;
+    // What's ignored never happened (706.6): nothing reads it.
+    const kept = count + extra - ignoring;
+    const { kept: results, ignored } = keepHighest(rolled, Math.min(keep ?? kept, kept));
+    const from = this.state.objects[source];
+    this.emit({
+      type: "dice-rolled",
+      player,
+      sides,
+      results,
+      ...(modifier !== 0 ? { modifier } : {}),
+      ...(ignored.length > 0 ? { ignored } : {}),
+      ...(from !== undefined ? { source } : {}),
+    });
+    return results.reduce((n, r) => n + r, 0) + modifier;
+  }
+
+  /**
    * How `count` coins `player` is about to flip will land, one list a coin:
    * one landing, or the two sides a flipper who ignores one may keep, heads
    * first. A named result is the result, with no flip made (rule 705.3); each
@@ -38477,35 +38512,7 @@ controlledBy,
       clashed: (results) => {
         for (const { player, won } of results) this.emit({ type: "clashed", player, won });
       },
-      rollDice: (sides, count, modifier, keep) => {
-        // Each source adds its own die and ignores its own lowest (614.5).
-        let ignoring = 0;
-        let extra = 0;
-        for (const { by, replacement } of this.staticReplacementsFor(controller, "would-roll-dice")) {
-          const plus = replacement.instead.modify.plus;
-          const added = plus === undefined ? 0 : this.replacementAmount(plus, by);
-          extra += added;
-          if (replacement.ignoreLowest === true) ignoring += added;
-        }
-        // Each die has `sides` equally likely outcomes, 1 to N (rule 706.1a).
-        const rolled: number[] = [];
-        for (let i = 0; i < count + extra; i += 1) rolled.push(1 + Math.floor(this.rng.next() * sides));
-        this.state.rngState = this.rng.seed;
-        // What's ignored never happened (706.6): nothing reads it.
-        const kept = count + extra - ignoring;
-        const { kept: results, ignored } = keepHighest(rolled, Math.min(keep ?? kept, kept));
-        const from = this.state.objects[source];
-        this.emit({
-          type: "dice-rolled",
-          player: controller,
-          sides,
-          results,
-          ...(modifier !== 0 ? { modifier } : {}),
-          ...(ignored.length > 0 ? { ignored } : {}),
-          ...(from !== undefined ? { source } : {}),
-        });
-        return results.reduce((n, r) => n + r, 0) + modifier;
-      },
+      rollDice: (sides, count, modifier, keep) => this.rollDice(controller, source, sides, count, modifier, keep),
       lastRoll: () => {
         const last = lastRollEntry(this.state, controller);
         // One this resolution made, or the roll this ability triggered on.
@@ -58526,10 +58533,22 @@ controlledBy,
    * "enters untapped" both reach (Archelos's ruling): the one applied last
    * says how it enters, and it's its controller's to choose. Asked before it
    * moves, with its other "as this enters" choices; says whether it asked. */
+  /** Set while {@link enterTapOrderAsked} reads how a permanent would enter
+   * without entering it. */
+  private probingEnter = false;
+
   private enterTapOrderAsked(id: ObjectId, chooser: PlayerId): boolean {
     const answers = `enter:${id}`;
     if (this.state.awaiting !== null || this.state.replacementAnswers?.[answers] !== undefined) return false;
-    const { tapOrder } = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () => this.enteringReplacementOf(id, false));
+    // Only a look: what it does as it enters (counters taken off, dice
+    // rolled) waits for the entry itself.
+    this.probingEnter = true;
+    let tapOrder: EnteringReplacement["tapOrder"];
+    try {
+      ({ tapOrder } = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () => this.enteringReplacementOf(id, false)));
+    } finally {
+      this.probingEnter = false;
+    }
     if (tapOrder === undefined) return false;
     const objects = this.state.objects;
     this.state.awaiting = {
@@ -58666,12 +58685,23 @@ controlledBy,
       // all permanents" (rule 614.1c): off what's already there, never itself
       // or anything entering with it (614.12).
       let removedAsEnters = 0;
-      if (r.removeAllCountersFrom !== undefined) {
+      if (r.removeAllCountersFrom !== undefined && !this.probingEnter) {
         const entering = this.enterBatch ?? new Set<ObjectId>();
         for (const other of this.battlefieldMatching(object.controller, r.removeAllCountersFrom, undefined, id)) {
           if (other === id || entering.has(other)) continue;
           removedAsEnters += this.removeCountersFrom(other, "any", "all", false);
         }
+      }
+      // Neverwinter Hydra's "as this creature enters, roll X d6" (rule
+      // 614.1c): rolled by its controller as it enters, part of the
+      // replacement, so nothing can respond between. No dice, no roll.
+      let rolledAsEnters = 0;
+      if (r.rollAsEnters !== undefined && !this.probingEnter) {
+        const dice =
+          r.rollAsEnters.count === "x"
+            ? (object.xValue ?? 0)
+            : this.enteringCounterAmount(id, object.controller, id, r.rollAsEnters.count);
+        if (dice > 0) rolledAsEnters = this.rollDice(object.controller, id, r.rollAsEnters.sides, dice, 0);
       }
       if (r.counters) {
         // "x" is the X it was cast with (rule 107.3m). A live amount is read
@@ -58691,6 +58721,8 @@ controlledBy,
                   : 0
                 : r.counters.amount === "removed-as-enters"
                   ? removedAsEnters
+                  : r.counters.amount === "rolled-as-enters"
+                    ? rolledAsEnters
                   : r.counters.amount === "done-as-enters"
                     ? (asEntersDone ?? 0) * (r.counters.eachDone ?? 1)
                     : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),

@@ -19916,6 +19916,23 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Neverwinter Hydra's "As ~ enters, roll X d6. It enters with a number of
+  // +1/+1 counters on it equal to the total of those results." (rules 614.1c,
+  // 706): one replacement, `rollAsEnters` and the total.
+  {
+    const w = /^As ~ enters, roll (X|\d+) d(\d+)\. It enters with a number of ([+-]\d+\/[+-]\d+|[a-z]+) counters on it equal to the total of those results\.$/.exec(line);
+    if (w !== null) {
+      return {
+        affects: { scope: "self" },
+        replacement: {
+          event: "enters-battlefield",
+          rollAsEnters: { sides: Number(w[2]), count: w[1] === "X" ? "x" : Number(w[1]) },
+          counters: { kind: w[3], amount: "rolled-as-enters" },
+        },
+        text,
+      };
+    }
+  }
   // Something done as it's about to enter (rule 614.1c — `AsEntersAction`):
   // "As ~ enters, you may return a nonland permanent you control to its owner's
   // hand. If you do, ~ enters with a +1/+1 counter on it." (Rescuer Sphinx);

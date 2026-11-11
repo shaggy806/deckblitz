@@ -6432,6 +6432,12 @@ clause (section 9):
   614.1c; never itself or what enters with it, 614.12; players' counters
   stay), and `counters: { kind: "+1/+1", amount: "removed-as-enters" }` is
   "a +1/+1 counter on it for each counter removed this way".
+  `rollAsEnters: { sides, count }` is "As this creature enters, roll X d6"
+  (Neverwinter Hydra — `{ sides: 6, count: "x" }`): its controller rolls as it
+  enters (rules 614.1c, 706), a roll like any other to roll triggers and
+  replacements, nothing rolled with no dice, and `counters: { kind: "+1/+1",
+  amount: "rolled-as-enters" }` is "counters equal to the total of those
+  results".
   `tapped` is unconditional; `tappedUnless: StaticCondition` is the check-land
   cycle (Rootbound Crag: `{ kind: "controls", filter: { subtypes: [...] },
   atLeast: 1 }`, via the `checkLandStatic`/`enterTappedUnlessLands` helpers),

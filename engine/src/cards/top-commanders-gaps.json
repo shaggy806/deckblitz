@@ -2251,7 +2251,8 @@
   "cost:cost-move-linked-exiled-card",
   "cost:cost-move-linked-exiled-card",
   "effect:cast-now-from-hand-graveyard-or-owned-exile",
-  "effect:put-all-commanders-into-hand"
+  "effect:put-all-commanders-into-hand",
+  "replacement:roll-as-enters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

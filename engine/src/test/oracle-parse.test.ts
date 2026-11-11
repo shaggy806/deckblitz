@@ -8320,6 +8320,20 @@ describe("counters put or removed this way", () => {
     });
   });
 
+  it("reads Neverwinter Hydra's roll as it enters and the counters it enters with", () => {
+    const hydra = face(
+      "Neverwinter Hydra",
+      "Creature — Hydra",
+      "As this creature enters, roll X d6. It enters with a number of +1/+1 counters on it equal to the total of those results.\nTrample\nWard {4} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}.)",
+    );
+    expect(hydra.complete).toBe(true);
+    expect(hydra.static[0].replacement).toEqual({
+      event: "enters-battlefield",
+      rollAsEnters: { sides: 6, count: "x" },
+      counters: { kind: "+1/+1", amount: "rolled-as-enters" },
+    });
+  });
+
   it("reads the damage dealt to it this turn, a dies trigger's intervening if", () => {
     const zubera = face(
       "Rushing-Tide Zubera",
