@@ -410,8 +410,12 @@ export interface CardFilter {
   readonly attackingYou?: boolean;
   /** Attacking an opponent of the filtering player — the player, not a
    * planeswalker or battle of theirs: Blast-Furnace Hellkite's "creatures
-   * **attacking your opponents** have double strike", whoever controls them. */
-  readonly attackingOpponent?: true;
+   * **attacking your opponents** have double strike", whoever controls them.
+   * `"or-their-planeswalkers"` adds a planeswalker an opponent controls
+   * (rule 506.2), never a battle one protects: Roar of Resistance's
+   * "creatures attacking your opponents **and/or planeswalkers they
+   * control**". */
+  readonly attackingOpponent?: true | "or-their-planeswalkers";
   /** Attacking the filtering source's **chosen player** (`GameObject.
    * chosenPlayer`) — the player, not a planeswalker or battle of theirs:
    * Triarch Stalker's "creatures attacking **the last chosen player** have
@@ -2349,9 +2353,15 @@ export function matchesFilter(
     const attackingYou = live?.zone === "battlefield" && live.attacking === ctx.you;
     if (attackingYou !== filter.attackingYou) return false;
   }
-  if (filter.attackingOpponent === true) {
+  if (filter.attackingOpponent !== undefined) {
     const attacked = live?.zone === "battlefield" ? live.attacking : null;
-    if (attacked === null || attacked === ctx.you || state.players[attacked as PlayerId] === undefined) return false;
+    if (attacked === null || attacked === ctx.you) return false;
+    if (state.players[attacked as PlayerId] === undefined) {
+      // A planeswalker or a battle (rule 506.2): only a battle has a
+      // protector (310.9), and a planeswalker is its controller's.
+      const permanent = filter.attackingOpponent === true ? undefined : state.objects[attacked as ObjectId];
+      if (permanent === undefined || permanent.protector !== undefined || permanent.controller === ctx.you) return false;
+    }
   }
   if (filter.attackingChosenPlayer === true) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];

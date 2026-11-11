@@ -6148,7 +6148,10 @@ clause (section 9):
   has left combat since. "Each creature attacking you" (Blessed Reversal) is
   the filter `attackingYou: true`, which also leaves planeswalkers out;
   "creatures attacking your opponents" (Blast-Furnace Hellkite)
-  `attackingOpponent: true`, whoever controls them.
+  `attackingOpponent: true`, whoever controls them; "creatures attacking
+  your opponents **and/or planeswalkers they control**" (Roar of Resistance)
+  `attackingOpponent: "or-their-planeswalkers"` — a battle an opponent
+  protects is neither.
 - `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, from?, notFrom? }` —
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
   this turn: "if you've discarded a card this turn" is `{ what: "discarded"

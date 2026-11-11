@@ -6882,6 +6882,16 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`all creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return { kind: "modify-pt-all", filter: { type: "creature" }, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
   }
+  // Roar of Resistance: whoever controls them, as it resolves.
+  if ((m = re(`creatures attacking your opponents and/or planeswalkers they control get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    return {
+      kind: "modify-pt-all",
+      filter: { type: "creature", attackingOpponent: "or-their-planeswalkers" },
+      power: Number(m[1]),
+      toughness: Number(m[2]),
+      duration: "end-of-turn",
+    };
+  }
   if ((m = re(`creatures your opponents control get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return {
       kind: "modify-pt-all",
@@ -11976,6 +11986,23 @@ function exiledCardPickAt(sentences, i, ctx) {
         effect: animate === null ? copy : { kind: "sequence", effects: [copy, animate] },
       },
       used: animate === null ? 2 : 3,
+    };
+  }
+  // "You may pay {1}{R}. If you do, creatures attacking your opponents and/or
+  // planeswalkers they control get +2/+0 until end of turn." (Roar of
+  // Resistance).
+  if (payMana !== null && done !== null && /^creatures attacking your opponents and\/or planeswalkers they control get /i.test(done[1])) {
+    const pump = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    if (pump === null || containsUndefined(pump) || pump.kind !== "modify-pt-all") return null;
+    const m = /get ([+-]\d+\/[+-]\d+) until end of turn\.$/.exec(done[1]);
+    return {
+      effect: {
+        kind: "may",
+        prompt: `Pay ${payMana[1]} to give creatures attacking your opponents and/or planeswalkers they control ${m[1]} until end of turn?`,
+        cost: payMana[1],
+        effect: pump,
+      },
+      used: 2,
     };
   }
   return null;
@@ -18857,6 +18884,16 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // "Creature tokens you control have haste." (Brudiclad, Roar of Resistance).
+  // Haste alone: the pool writes the deathtouch ones another way
+  // (`creatures-you-control` with `tokenOnly`), which means the same.
+  if (line === "Creature tokens you control have haste.") {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", token: true, controlledBy: "you" } },
+      grantKeywords: ["haste"],
+      text,
+    };
   }
   if ((m = /^Creatures attacking your opponents have (first strike|double strike)\.$/.exec(line))) {
     return {

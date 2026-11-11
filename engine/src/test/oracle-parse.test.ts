@@ -17193,6 +17193,39 @@ describe("spend only one colour of mana on an ability's X (Crypt Rats)", () => {
   });
 });
 
+describe("creatures attacking your opponents and/or planeswalkers they control (Roar of Resistance)", () => {
+  it("the whole card: the token haste static, and the paid pump over the attackers aimed at opponents", () => {
+    const roar = parseFace(
+      {
+        name: "Test Roar",
+        type_line: "Enchantment",
+        mana_cost: "{1}{R}",
+        oracle_text:
+          "Creature tokens you control have haste.\nWhenever one or more creatures attack, you may pay {1}{R}. If you do, creatures attacking your opponents and/or planeswalkers they control get +2/+0 until end of turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(roar.complete).toBe(true);
+    expect(roar.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", token: true, controlledBy: "you" } },
+      grantKeywords: ["haste"],
+    });
+    expect(roar.triggered[0].trigger).toEqual({ on: "attacks-batch", who: "any" });
+    expect(roar.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Pay {1}{R} to give creatures attacking your opponents and/or planeswalkers they control +2/+0 until end of turn?",
+      cost: "{1}{R}",
+      effect: {
+        kind: "modify-pt-all",
+        filter: { type: "creature", attackingOpponent: "or-their-planeswalkers" },
+        power: 2,
+        toughness: 0,
+        duration: "end-of-turn",
+      },
+    });
+  });
+});
+
 describe("a floor on a spell's total cost (Trinisphere, rule 601.2f)", () => {
   it("each spell that would cost less than three mana costs three, while untapped", () => {
     const sphere = parseFace(
