@@ -19323,6 +19323,11 @@ function parseStatic(line, text) {
     const inner = parseStatic(`${m[1]}.`, text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition: mostCommon };
   }
+  // "Damage doesn't cause you to lose life" (Archon of Coronation, under "As
+  // long as you're the monarch"): rule 120.3a's result alone, not dealt damage.
+  if (line === "Damage doesn't cause you to lose life.") {
+    return { affects: { scope: "self" }, prohibits: [{ act: "lose-life", who: "you", from: "damage" }], text };
+  }
   // A static acting on a player. Abyssal Persecutor; the player a Curse
   // enchants: what they control, the damage dealt to them, the life they gain.
   if (line === "You can't win the game and your opponents can't lose the game.") {

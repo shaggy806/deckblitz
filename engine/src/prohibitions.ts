@@ -156,9 +156,14 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly who: W;
     }
   | {
-      /** "Can't lose life" (rule 119.8): damage is still dealt. */
+      /** "Can't lose life" (rule 119.8): damage is still dealt.
+       * `from: "damage"`: "damage doesn't cause you to lose life" (Archon of
+       * Coronation), which stops rule 120.3a's result alone: the damage is
+       * dealt, with every other result it has, and life is still lost to an
+       * effect or paid as a cost. */
       readonly act: "lose-life";
       readonly who: W;
+      readonly from?: "damage";
     }
   | {
       /** "Can't gain life" (rule 119.7), for a resolved effect that names its
@@ -393,9 +398,16 @@ export function playerGainLifeProhibited(state: GameState, registry: CardRegistr
  * change can't lose it either. */
 export function playerCantLoseLife(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
   return (
-    prohibitionsOnPlayer(state, registry, "lose-life", player).length > 0 ||
+    prohibitionsOnPlayer(state, registry, "lose-life", player).some(({ prohibition }) => prohibition.from === undefined) ||
     playerLifeCantChange(state, registry, player)
   );
+}
+
+/** Whether damage dealt to `player` doesn't cause them to lose life (a
+ * `lose-life` prohibition `from: "damage"`): rule 120.3a's result is the one
+ * thing that doesn't happen. */
+export function playerLosesNoLifeToDamage(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
+  return prohibitionsOnPlayer(state, registry, "lose-life", player).some(({ prohibition }) => prohibition.from === "damage");
 }
 
 /** Whether `searcher` can't search `owner`'s library right now, for a search

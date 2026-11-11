@@ -5279,7 +5279,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   - `{ act: "play-land", who, filter?, from?, notFrom? }`, rule 305.2.
   - `{ act: "activate", who, of?, except?: ["mana", "loyalty"], only?: "loyalty" | "tap", anyZone?, unless? }` — `of` reaches permanents alone unless `anyZone` (Pithing Needle's "of sources"); no `of` is every permanent.
   - `{ act: "draw", who, perTurn }` — `0` is "can't draw cards"; it stops the draw before anything could replace it.
-  - `{ act: "search", who, causedByThemselves?, ignoreCost? }`; `{ act: "lose-game", who, only?: "zero-life" }`; `{ act: "win-game", who }`; `{ act: "lose-life", who }`; `{ act: "change-life", who }` (Platinum Emperion); `{ act: "become-monarch", who }`.
+  - `{ act: "search", who, causedByThemselves?, ignoreCost? }`; `{ act: "lose-game", who, only?: "zero-life" }`; `{ act: "win-game", who }`; `{ act: "lose-life", who, from?: "damage" }` (`from: "damage"` is "damage doesn't cause you to lose life", rule 120.3a's result alone: the damage is dealt, and an effect's loss or a life payment goes through — Archon of Coronation); `{ act: "change-life", who }` (Platinum Emperion); `{ act: "become-monarch", who }`.
   - `{ act: "pay-life", who, except? }` and `{ act: "sacrifice-for-cost", who, filter?, except? }` — costs to cast or activate only: a shock land's life is still paid (Angel of Jubilation; `except: ["mana"]`, Karn's Sylex).
   - `{ act: "be-caused", who, what: "discard" | "sacrifice" }` — `who` is protected from their opponents' spells and abilities (Sigarda).
 

@@ -249,6 +249,17 @@ describe("players who can't search libraries, and a floor under a life total", (
       floor("As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead."),
     ).toMatchObject({ condition: { kind: "life-total", atLeast: 7 }, damageLifeFloor: 7 });
   });
+  it("reads damage that causes no loss of life, under its condition (Archon of Coronation)", () => {
+    expect(
+      read(
+        "Creature — Archon",
+        "As long as you're the monarch, damage doesn't cause you to lose life. (When a creature deals combat damage to you, its controller still becomes the monarch.)",
+      ).static[0],
+    ).toMatchObject({
+      condition: { kind: "monarch", who: "you" },
+      prohibits: [{ act: "lose-life", who: "you", from: "damage" }],
+    });
+  });
 });
 
 describe("a cost removing all of a kind of counter, the number the X", () => {

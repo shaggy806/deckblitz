@@ -207,6 +207,7 @@ import {
   playerCantSearchLibrary,
   playerCantWinGame,
   playerGainLifeProhibited,
+  playerLosesNoLifeToDamage,
   prohibitionsOnPlayer,
   reachesObject,
   whoBinds,
@@ -55728,6 +55729,10 @@ controlledBy,
       const giver = sourceLastKnown?.controller ?? this.state.objects[source]?.controller ?? target.player;
       if (this.sourceHasDamageKeyword(source, "infect", sourceLastKnown)) {
         this.changePlayerCounters(target.player, "poison", amount, giver);
+      } else if (playerLosesNoLifeToDamage(this.state, this.registry, target.player)) {
+        // "Damage doesn't cause you to lose life" (Archon of Coronation):
+        // rule 120.3a's result alone doesn't happen, so nothing that would
+        // replace the loss applies either.
       } else {
         // A doubling first, then the floor: the order the player losing would
         // take among the replacements (rule 616.1).
