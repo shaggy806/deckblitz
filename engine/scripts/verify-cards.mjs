@@ -617,17 +617,36 @@ function chunk(arr, size) {
 }
 
 async function main() {
-  const files = readdirSync(POOL_DIR)
-    .filter((f) => f.endsWith(".js"))
-    .sort()
-    .slice(start, Number.isFinite(limit) ? start + limit : undefined);
-
+  const end = Number.isFinite(limit) ? start + limit : undefined;
   const entries = [];
-  for (const file of files) {
-    const mod = await import(pathToFileURL(path.join(POOL_DIR, file)).href);
-    const def = mod.default;
-    if (def === undefined || def.name === undefined) continue;
-    entries.push({ file, def });
+  if (dirArg === "pool") {
+    // The pool comes from the built barrel (`dist/cards/generated.js`, one
+    // bundled module holding every definition by file): ~1 s, where importing
+    // the 31,400 files of `dist/cards/pool` one at a time took 28 s
+    // (2026-11-10). The same definitions — `bundle-shards.mjs` rebuilds the
+    // barrel from the same emit on every build — less the leftover build of a
+    // card since deleted, which is in no pool.
+    const { CARD_FILES } = await import(new URL("../dist/cards/generated.js", import.meta.url).href);
+    const files = Object.keys(CARD_FILES)
+      .filter((f) => f.startsWith("pool/"))
+      .sort()
+      .slice(start, end);
+    for (const key of files) {
+      const def = CARD_FILES[key];
+      if (def === undefined || def.name === undefined) continue;
+      entries.push({ file: `${key.slice("pool/".length)}.js`, def });
+    }
+  } else {
+    const files = readdirSync(POOL_DIR)
+      .filter((f) => f.endsWith(".js"))
+      .sort()
+      .slice(start, end);
+    for (const file of files) {
+      const mod = await import(pathToFileURL(path.join(POOL_DIR, file)).href);
+      const def = mod.default;
+      if (def === undefined || def.name === undefined) continue;
+      entries.push({ file, def });
+    }
   }
 
   // Pass 1: the batch collection endpoint, ceil(N/75) requests total.

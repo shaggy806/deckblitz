@@ -3,8 +3,10 @@
 // command, in the order that fails fastest — the checks the `ship` skill
 // lists, run for you. Node, not bash: a CRLF checkout breaks a shell script.
 //
-//   1. gen:cards (the card barrel and shards)
-//   2. build (every workspace) — and, from here on, in the background beside
+//   1. gen:cards (the card barrel and shards) — the engine build's own first
+//      step (its prebuild), so it has no step of its own here
+//   2. build (every workspace), with the sample decks' stand-ins check beside
+//      it — and, from here on, in the background beside
 //      everything below (they need only the build): the fuzzer at 2 and 4
 //      players; for every card this change adds (or `--with` names), the
 //      situation fuzzer (`situation-fuzz.mjs`: each card cast or activated
@@ -14,11 +16,12 @@
 //      4-player run as two processes over halves of its seeds; and the bot
 //      gate (on 4 cores or fewer, after the test suites instead, each
 //      4-player run one process)
-//   3. the backlog lists re-marked against the build and any sample-deck
-//      stand-in for a card now in the pool dropped
-//   4. typecheck (the engine's tests included — vitest never type-checks a
-//      test, so a wrong chooser signature or a cast could make one pass
-//      without testing) + lint, side by side
+//   3. the backlog lists re-marked against the build (in the background:
+//      nothing below reads them)
+//   4. typecheck — the engine's and the server's tests configs (vitest never
+//      type-checks a test, so a wrong chooser signature or a cast could make
+//      one pass without testing; the build has checked everything else) +
+//      lint, side by side
 //   5. the engine suite (a worker per core, at most 8), then server + client
 //      side by side
 //   6. card:verify against the Oracle snapshot (offline)
@@ -420,8 +423,21 @@ console.log("");
 const held = fuzzNewOnly ? await takeSlot((m) => console.log(m)) : await takeMachine();
 process.on("exit", () => release(held));
 
-await stopOnFailure(await run("gen:cards", "npm", ["run", "-s", "gen:cards", "-w", "engine"]));
+// A sample deck's stand-in for a card that's now in the pool goes (and
+// BACKLOG's count with it) — `sample-decks.test.ts` would fail on it. It reads
+// the pool's sources and the triage records, not the build, so it runs beside
+// the build (9 s alone; 8-29 s when it sat on the main chain after the marks,
+// 2026-11-10); the rare run that removes one rewrites `src/sample-decks.ts`
+// under the build, which is then run again.
+const standIns = skip.has("marks") ? null : run("stand-ins", "node", ["scripts/stand-ins.mjs", "--implemented"], ENGINE);
+// The engine's prebuild is gen:cards: no step of its own before it (it ran
+// three times a verify, with the typecheck's pre-hook).
 await stopOnFailure(await run("build", "npm", ["run", "build"]));
+if (standIns !== null) {
+  const subs = await standIns;
+  report(subs, grab(subs.out, /Removed|No stand-in/));
+  if (/^Removed /m.test(subs.out)) await stopOnFailure(await run("build (after stand-ins)", "npm", ["run", "build"]));
+}
 
 // A small machine (a 4-core cloud session) can't hold the engine suite's
 // workers beside five fuzz and gate processes: the suite was killed for memory
@@ -527,23 +543,28 @@ if (!skip.has("fuzzwith") && cards.length > 0) {
 }
 if (!skip.has("gate")) background(() => late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"])));
 
-if (!skip.has("marks")) {
-  const marks = await Promise.all([
-    run("cards:mark", "node", ["scripts/top-commander-cards.mjs", "--refresh"], ENGINE),
-    run("cmdrs:mark", "node", ["scripts/top-commanders.mjs", "--refresh"], ENGINE),
-    // The library's "Not in the pool yet" list (client/public/missing-cards.json).
-    run("missing-cards", "node", ["scripts/gen-missing-cards.mjs"], ENGINE),
-  ]);
-  for (const m of marks) report(m, grab(m.out, /implemented|not in the pool/));
-  // A sample deck's stand-in for a card that's now in the pool goes (and
-  // BACKLOG's count with it) — `sample-decks.test.ts` would fail on it.
-  const subs = await run("stand-ins", "node", ["scripts/stand-ins.mjs", "--implemented"], ENGINE);
-  report(subs, grab(subs.out, /Removed|No stand-in/));
-}
+// The backlog lists, re-marked against the build. Nothing below reads what
+// they write, so nothing waits for them: reported with the background runs.
+const marks = skip.has("marks")
+  ? []
+  : [
+      run("cards:mark", "node", ["scripts/top-commander-cards.mjs", "--refresh"], ENGINE),
+      run("cmdrs:mark", "node", ["scripts/top-commanders.mjs", "--refresh"], ENGINE),
+      // The library's "Not in the pool yet" list (client/public/missing-cards.json).
+      run("missing-cards", "node", ["scripts/gen-missing-cards.mjs"], ENGINE),
+    ];
+// The two tests configs, straight through tsc, side by side: the build above
+// has just checked the protocol, the server's source and the client on the
+// same tsconfigs (and stops the run on an error), so the root `npm run
+// typecheck` — those three again, gen:cards again, through two layers of npm —
+// was 9 s for 3 s of new checking (2026-11-10). Lint the same way: oxlint is
+// under 2 s without npm's shells.
+const TSC = path.join(ROOT, "node_modules/typescript/bin/tsc");
 await stopOnFailure(
   ...(await Promise.all([
-    run("typecheck", "npm", ["run", "typecheck"]),
-    ...(skip.has("lint") ? [] : [run("lint", "npm", ["run", "lint"])]),
+    run("typecheck", "node", [TSC, "-p", "tsconfig.tests.json"], ENGINE),
+    run("typecheck (server tests)", "node", [TSC, "-p", "tsconfig.tests.json"], path.join(ROOT, "server")),
+    ...(skip.has("lint") ? [] : [run("lint", "node", [path.join(ROOT, "node_modules/oxlint/bin/oxlint")], path.join(ROOT, "client"))]),
   ])),
 );
 
@@ -670,6 +691,7 @@ if (!skip.has("cardverify")) {
   report(r, grab(r.out, /checked,/));
 }
 
+for (const m of await Promise.all(marks)) report(m, grab(m.out, /implemented|not in the pool/));
 for (const r of await Promise.all(late)) report(r, grab(r.out, r.name === "situations" ? SITUATION_SUMMARY : /games —|avg turns|\d+\/\d+ passed/));
 
 console.log(failures.length === 0 ? `

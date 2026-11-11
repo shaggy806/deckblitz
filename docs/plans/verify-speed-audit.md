@@ -1,7 +1,12 @@
 # Verify speed audit (2026-11-10)
 
-Status: **audit done, nothing built.** The findings below are ranked; `BACKLOG.md` ("Tooling /
-docs") carries the one line of open work.
+Status: **items 1-4 and 7 built (2026-11-10); 5, 6 and 8 open** (`BACKLOG.md`, "Tooling / docs").
+
+After them, re-timed on the same 12 cards: a full run 330 s to **287 s**, now bounded by the plain
+fuzzers (item 5), not the main chain (251 s). A quick run on a cards-only change 192 s to about
+**174 s**: the steps removed came to ~45 s, but the engine suite now starts 20 s sooner and overlaps
+the new-card checks for longer, which slowed it from 119 s to 146 s — memory again (item 6 and
+fewer workers' worth of memory are what would get the rest back).
 
 An audit of `npm run verify` (`scripts/verify.mjs`) and every step it runs, to make it faster
 without changing what it catches. Eleven read-only analysts each took one area, a skeptic
