@@ -82,9 +82,8 @@ function castExtras(legal: CastSpellLegal): {
     ...(sacrifice !== undefined && sacrifice.choices.length > 0
       ? { sacrifice: sacrifice.choices[sacrifice.choices.length - 1] }
       : {}),
-    // Tap as many creatures as the generic portion allows. Convoke is only
-    // ever offered when it might be *needed* to afford the spell, so paying
-    // the maximum is the filling most likely to be legal.
+    // Convoke is only ever offered when it might be *needed* to afford the
+    // spell, and the offer carries a payment that works (`convokeProofFor`).
     // An X spell is cast at its largest X (below), which convoking may be
     // what pays for: take the payment the offer proved for it.
     ...(convoke?.xProof !== undefined && legal.xCost !== undefined
@@ -92,12 +91,16 @@ function castExtras(legal: CastSpellLegal): {
           const payment = convokeProofFor(convoke, legal.xCost.maxX);
           return payment.length > 0 ? { convoke: payment } : {};
         })()
-      : convoke !== undefined && convoke.candidates.length > 0 && convoke.maxGeneric > 0
-      ? {
-          convoke: convoke.candidates
-            .slice(0, convoke.maxGeneric)
-            .map((creature): ConvokePayment => ({ creature, pays: "generic" })),
-        }
+      : convoke !== undefined
+      ? (() => {
+          // The allocation the offer proved castable, as v1 echoes it
+          // (`controller.ts`): the first creatures all paying generic left a
+          // coloured pip only a creature could pay uncovered, so the cast
+          // was refused in every simulation, and dispatched unscored under a
+          // clock it threw (`bot-convoke.test.ts`).
+          const payment = convokeProofFor(convoke);
+          return payment.length > 0 ? { convoke: payment } : {};
+        })()
       : {}),
   };
 }
