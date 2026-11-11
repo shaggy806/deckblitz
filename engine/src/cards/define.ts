@@ -1582,8 +1582,25 @@ export type StaticCondition =
    * Deicide's "exile target enchantment. If **the exiled card** is a God
    * card": a Theros God that wasn't a creature on the battlefield had no
    * creature type there (rule 205.1b), but is a God card in exile.
+   *
+   * `cardTypes`: and the **card** it is has one of these types as printed,
+   * whatever the permanent is on the battlefield — face down, a copy, or
+   * changed by an effect. Hauntwoods Shrieker's "Reveal target face-down
+   * permanent. **If it's a creature card**, you may turn it face up" is
+   * `{ kind: "target", index: 0, filter: { faceDown: true }, cardTypes:
+   * ["creature"] }`: a face-down permanent is always a creature (rule
+   * 708.2a), so `filter` can't ask; its ruling has the answer consider only
+   * the printed card (March of the Machines doesn't make a face-down
+   * artifact card one). A double-faced card is its front face; a token is no
+   * card (rule 111.6).
    */
-  | { readonly kind: "target"; readonly index: number; readonly filter: CardFilter; readonly now?: true }
+  | {
+      readonly kind: "target";
+      readonly index: number;
+      readonly filter: CardFilter;
+      readonly now?: true;
+      readonly cardTypes?: readonly CardType[];
+    }
   /**
    * Slot `index`'s target is still legal as the spell or ability resolves
    * (rule 608.2b) — a player or an object alike. Witness the Future's

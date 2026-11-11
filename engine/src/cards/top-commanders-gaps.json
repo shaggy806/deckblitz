@@ -4,6 +4,7 @@
  "built": [
     "static:loyalty-twice-self-only",
     "amount:damage-dealt-to-object-this-turn",
+    "condition:face-down-is-creature-card",
     "effect:target-different-controllers",
     "cost:first-targeting-ability-cost-reduction",
     "keyword:warp-from-graveyard-and-life-cost",

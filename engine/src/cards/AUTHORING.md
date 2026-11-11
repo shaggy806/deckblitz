@@ -2011,7 +2011,10 @@ controller doesn't control (rule 708.5), in a look they close, as `look-at-hand`
 ("look at target face-down creature": a `{ kind: "permanent", filter: { type: "creature", faceDown:
 true } }` slot) or a player ("any face-down creatures they control", Spy Network); `filter` every one
 it matches (Revealing Wind's "each face-down creature that's attacking or blocking"). None to look at
-asks nothing. "Any time" is a static's `visibility` (Keeper of the Lens), or a `grant-static` of it
+asks nothing. `reveal: true` is "**reveal** target face-down permanent" (Hauntwoods Shrieker): shown to
+every player (rule 701.20a), whoever controls it, and still face down; "if it's a creature **card**"
+after it is the `target` condition's `cardTypes: ["creature"]` (with `filter: { faceDown: true }`),
+which reads the printed card — a face-down permanent is always a creature, so a filter can't ask. "Any time" is a static's `visibility` (Keeper of the Lens), or a `grant-static` of it
 for a turn (Lumbering Laundry).
 
 **What a source reads off the cards exiled with it** (rule 607.2a). The condition `{ kind:

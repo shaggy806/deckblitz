@@ -39,6 +39,7 @@ import {
   hand,
   lands,
   nextTurn,
+  pickModes,
   pickPermanents,
   pickTargets,
   pt,
@@ -245,6 +246,102 @@ describe("an instant or sorcery card (rules 701.40g, 701.58g)", () => {
     expect(pt(game, bolt)).toEqual({ power: 2, toughness: 2 });
     expect(turnedUpEvents(game, bolt)).toBe(0);
     expect(game.state.eventLog.filter((e) => e.type === "cards-revealed").length).toBe(before + 1);
+  });
+});
+
+describe("Hauntwoods Shrieker: reveal it, and turn it up only if it's a creature card", () => {
+  const reveals = (game: Game, id: ObjectId): number =>
+    game.state.eventLog.filter((e) => e.type === "cards-revealed" && e.objects.includes(id)).length;
+  const shrieker = (game: Game): ObjectId => {
+    lands(game, "Forest", 2);
+    return spawn(game, "Hauntwoods Shrieker");
+  };
+
+  it("a creature card: revealed, then turned face up if its controller's opponent says so", () => {
+    const { game, a } = table();
+    const source = shrieker(game);
+    const giant = faceDown(game, "Hill Giant", B);
+    pickModes(a, 0);
+    activate(game, source, 0, { targets: [ref(giant)] });
+    expect(reveals(game, giant)).toBeGreaterThanOrEqual(1);
+    expect(game.state.objects[giant].faceDown).toBeUndefined();
+    expect(pt(game, giant)).toEqual({ power: 3, toughness: 3 });
+    expect(turnedUpEvents(game, giant)).toBe(1);
+    expect(controller(game, giant)).toBe(B);
+  });
+
+  it("\"you may\": declined, it's revealed and stays face down", () => {
+    const { game, a } = table();
+    const source = shrieker(game);
+    const bears = faceDown(game, "Grizzly Bears");
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return [];
+    };
+    activate(game, source, 0, { targets: [ref(bears)] });
+    expect(asked).toBe(1);
+    expect(reveals(game, bears)).toBe(1);
+    expect(game.state.objects[bears].faceDown).toBeDefined();
+    expect(turnedUpEvents(game, bears)).toBe(0);
+  });
+
+  it("a land or artifact card: revealed, nothing asked, still a face-down 2/2", () => {
+    for (const name of ["Forest", "Mind Stone", "Lightning Bolt"]) {
+      const { game, a } = table();
+      const source = shrieker(game);
+      const card = faceDown(game, name, B);
+      let asked = 0;
+      a.chooseModesFn = () => {
+        asked += 1;
+        return [0];
+      };
+      activate(game, source, 0, { targets: [ref(card)] });
+      expect(asked, name).toBe(0);
+      expect(reveals(game, card), name).toBe(1);
+      expect(game.state.objects[card].faceDown, name).toBeDefined();
+      expect(pt(game, card), name).toEqual({ power: 2, toughness: 2 });
+    }
+  });
+
+  it("only the printed card counts: March of the Machines makes no artifact card a creature card (the ruling)", () => {
+    const { game, a } = table();
+    const source = shrieker(game);
+    spawn(game, "March of the Machines");
+    const stone = faceDown(game, "Mind Stone");
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return [0];
+    };
+    activate(game, source, 0, { targets: [ref(stone)] });
+    expect(asked).toBe(0);
+    expect(game.state.objects[stone].faceDown).toBeDefined();
+  });
+
+  it("a creature turned face down by an effect is turned up too; a face-up permanent is no target", () => {
+    const { game, a } = table();
+    const source = shrieker(game);
+    const bears = spawn(game, "Grizzly Bears", B);
+    expect(() => activate(game, source, 0, { targets: [ref(bears)] })).toThrow();
+    game.debugApplyEffect(A, { kind: "turn-face-down", target: 0 }, [ref(bears)]);
+    settle(game);
+    pickModes(a, 0);
+    activate(game, source, 0, { targets: [ref(bears)] });
+    expect(game.state.objects[bears].faceDown).toBeUndefined();
+  });
+
+  it("manifests dread when it attacks", () => {
+    const { game, a } = table();
+    const source = spawn(game, "Hauntwoods Shrieker");
+    toLibrary(game, "Hill Giant");
+    toLibrary(game, "Grizzly Bears");
+    const before = game.state.zones.perPlayer[A].graveyard.length;
+    a.declareAttackersFn = () => [{ attacker: source, defender: B }];
+    toStep(game, "postcombat-main");
+    const down = game.battlefield.filter((id) => game.state.objects[id].faceDown !== undefined);
+    expect(down).toHaveLength(1);
+    expect(game.state.zones.perPlayer[A].graveyard.length).toBe(before + 1);
   });
 });
 

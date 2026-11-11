@@ -3608,10 +3608,18 @@ export type EffectSpec =
        * permanent it matches (Revealing Wind's "each face-down creature that's
        * attacking or blocking"). None to look at asks nothing. The "any time"
        * form is a static's `visibility` (Keeper of the Lens), or a `grant-static`
-       * of it (Lumbering Laundry). */
+       * of it (Lumbering Laundry).
+       *
+       * `reveal`: "**Reveal** target face-down permanent" (Hauntwoods
+       * Shrieker) — shown to every player instead (rule 701.20a), its
+       * controller included and whoever controls it, and it stays face down:
+       * nobody is asked anything, the reveal is an event the log names the
+       * card in. What it's revealed to be is the `target` condition's
+       * `cardTypes`. */
       readonly kind: "look-at-face-down";
       readonly target?: number;
       readonly filter?: CardFilter;
+      readonly reveal?: true;
     }
   | {
       /** Put a target permanent into exile — or, with `"trigger-object"`,
@@ -12215,8 +12223,9 @@ export interface EffectApi {
   becomeForetold(card: ObjectId, costReducedBy?: number): void;
   /** The effect's controller looks at these, those of them face down
    * permanents (`controlledBy`'s alone, given) — see the `look-at-face-down`
-   * effect. */
-  lookAtFaceDown(objects: readonly ObjectId[], controlledBy?: PlayerId): void;
+   * effect. `reveal`: every player is shown them instead, the controller's
+   * own too. */
+  lookAtFaceDown(objects: readonly ObjectId[], controlledBy?: PlayerId, reveal?: boolean): void;
   /** A card in exile becomes plotted — see the `become-plotted` effect. */
   becomePlotted(card: ObjectId): void;
   /** How many times the source's spell paid its multikicker or squad cost
@@ -17009,9 +17018,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "look-at-face-down": {
       const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
-      if (target?.kind === "object") ctx.lookAtFaceDown([target.object]);
-      else if (target?.kind === "player") ctx.lookAtFaceDown(ctx.permanentsMatching({ faceDown: true }).map((p) => p.object), target.player);
-      else if (spec.filter !== undefined) ctx.lookAtFaceDown(ctx.permanentsMatching({ ...spec.filter, faceDown: true }).map((p) => p.object));
+      const reveal = spec.reveal === true;
+      if (target?.kind === "object") ctx.lookAtFaceDown([target.object], undefined, reveal);
+      else if (target?.kind === "player") ctx.lookAtFaceDown(ctx.permanentsMatching({ faceDown: true }).map((p) => p.object), target.player, reveal);
+      else if (spec.filter !== undefined) ctx.lookAtFaceDown(ctx.permanentsMatching({ ...spec.filter, faceDown: true }).map((p) => p.object), undefined, reveal);
       return;
     }
     case "return-exiled-by-source": {

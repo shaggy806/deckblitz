@@ -34887,7 +34887,17 @@ export class Game {
           return this.state.objects[ref.object] !== undefined &&
             matchesFilter(this.state, this.registry, ref.object, condition.filter, { you: controller, source });
         }
-        return matchesKnown(ref.object, condition.filter);
+        if (!matchesKnown(ref.object, condition.filter)) return false;
+        // "If it's a creature **card**": the card itself as printed, whatever
+        // the permanent is on the battlefield (Hauntwoods Shrieker's ruling).
+        // A token is no card (rule 111.6).
+        if (condition.cardTypes !== undefined) {
+          const card = this.state.objects[ref.object];
+          if (card === undefined || card.isToken) return false;
+          const printed = this.registry.get(card.cardName).types;
+          return condition.cardTypes.some((type) => printed.includes(type));
+        }
+        return true;
       }
       // "If mana from a Treasure was spent to activate this ability."
       if (condition.kind === "ability-mana-spent") {
@@ -39154,18 +39164,25 @@ controlledBy,
         if (costReducedBy !== undefined) object.foretoldReducedBy = costReducedBy;
         this.forgetStints([card], since);
       },
-      lookAtFaceDown: (objects, controlledBy) => {
+      lookAtFaceDown: (objects, controlledBy, reveal) => {
         const ids = objects.filter((id) => {
           const object = this.state.objects[id];
           return (
             object?.zone === "battlefield" &&
             object.faceDown !== undefined &&
             (controlledBy === undefined || object.controller === controlledBy) &&
-            // Their own they may look at any time (708.5).
-            object.controller !== controller
+            // Their own they may look at any time (708.5); a reveal shows
+            // those to everyone else.
+            (reveal === true || object.controller !== controller)
           );
         });
         if (ids.length === 0) return;
+        // "Reveal target face-down permanent" (rule 701.20a): every player is
+        // shown it, and it stays face down.
+        if (reveal === true) {
+          for (const id of ids) this.revealFaceDown(id);
+          return;
+        }
         this.state.awaiting = {
           kind: "choose-from-zone",
           player: controller,

@@ -8149,6 +8149,28 @@ function reflexiveAboutAt(sentences, i, ctx) {
  * the creating ability's: a clause with one, or "choose up to that many"'s
  * modes, is left to be authored. `null` when not read whole.
  */
+/**
+ * "Reveal target face-down permanent. If it's a creature card, you may turn
+ * it face up." (Hauntwoods Shrieker): shown to everyone, then asked only when
+ * the card itself is a creature card as printed — a face-down permanent is
+ * always a creature, so the `target` condition reads `cardTypes`. The two
+ * effects, or `null`.
+ */
+function revealFaceDownAt(sentences, i, ctx) {
+  if (!/^reveal target face-down permanent\.$/i.test(sentences[i] ?? "")) return null;
+  const then = /^if it's an? (artifact|creature|enchantment|land|planeswalker) card, you may turn it face up\.$/i.exec(sentences[i + 1] ?? "");
+  if (then === null || ctx.targets.length > 0) return null;
+  const target = ctx.target({ kind: "permanent", filter: { faceDown: true } });
+  return [
+    { kind: "look-at-face-down", target, reveal: true },
+    {
+      kind: "conditional",
+      condition: { kind: "target", index: target, filter: { faceDown: true }, cardTypes: [then[1].toLowerCase()] },
+      then: { kind: "may", prompt: `Turn the revealed ${then[1].toLowerCase()} card face up?`, effect: { kind: "turn-face-up", target } },
+    },
+  ];
+}
+
 function payTimesAt(sentences, i, ctx) {
   const pay = /^you may pay ((?:\{[^}]+\})+) (any number of times|up to (one|two|three|four|five) times?)\.$/i.exec(sentences[i] ?? "");
   const clause = /^when you pay this cost one or more times, (.+\.)$/i.exec(sentences[i + 1] ?? "");
@@ -9599,6 +9621,17 @@ export function parseEffect(text, outer) {
     if (payTimes !== null) {
       parsed.push(payTimes);
       hints.push({ sentence, effect: payTimes });
+      skip = 1;
+      continue;
+    }
+    // "Reveal target face-down permanent. If it's a creature card, you may
+    // turn it face up." (`revealFaceDownAt`).
+    const revealed = revealFaceDownAt(sentences, i, ctx);
+    if (revealed !== null) {
+      for (const effect of revealed) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
       skip = 1;
       continue;
     }

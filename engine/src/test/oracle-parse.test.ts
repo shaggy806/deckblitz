@@ -17560,3 +17560,27 @@ describe("tokens for the damage dealt to it this turn", () => {
     ).toBeNull();
   });
 });
+
+describe("revealing a face-down permanent", () => {
+  it("reads Hauntwoods Shrieker: revealed, then turned up only if the card is a creature card", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Creature — Beast",
+      oracle_text: "{1}{G}: Reveal target face-down permanent. If it's a creature card, you may turn it face up.",
+      power: "3",
+      toughness: "3",
+    } as never) as unknown as { activated: { targets: unknown; effect: unknown }[] };
+    expect(face.activated[0]?.targets).toEqual([{ kind: "permanent", filter: { faceDown: true } }]);
+    expect(face.activated[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "look-at-face-down", target: 0, reveal: true },
+        {
+          kind: "conditional",
+          condition: { kind: "target", index: 0, filter: { faceDown: true }, cardTypes: ["creature"] },
+          then: { kind: "may", prompt: "Turn the revealed creature card face up?", effect: { kind: "turn-face-up", target: 0 } },
+        },
+      ],
+    });
+  });
+});
