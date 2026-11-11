@@ -39156,8 +39156,16 @@ controlledBy,
         ),
       copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
       stackObjectsToCopy: (what) => this.stackObjectsToCopy(controller, what),
-      changeTargets: (target, how, toSource, optional) =>
-        this.changeStackTargets(controller, source, target, how, toSource, optional),
+      changeTargets: (target, how, toSource, optional, byItsController) =>
+        this.changeStackTargets(
+          (byItsController && target.kind === "object" ? this.state.objects[target.object]?.controller : undefined) ??
+            controller,
+          source,
+          target,
+          how,
+          toSource,
+          optional,
+        ),
       gainControlOfSpell: (target) => this.gainControlOfSpell(controller, target),
       copyAbility: (target, newTargets) => this.copyAbilityByEffect(controller, target, triggerObject, newTargets),
       triggerSpell: () => {
@@ -45243,14 +45251,19 @@ controlledBy,
   /** See the `"gain-control-spell"` {@link EffectSpec}. Each such effect is kept
    * on the spell (`controlEffects`, oldest first), so that the one before it
    * applies again if `player` leaves the game (800.4a, `leaveGame`). */
-  private gainControlOfSpell(player: PlayerId, target: TargetRef): void {
+  private gainControlOfSpell(player: PlayerId, target: TargetRef, timestamp?: number): void {
     if (target.kind !== "object") return;
     const spell = this.state.objects[target.object];
     if (spell === undefined || spell.zone !== "stack" || spell.kind === "ability") return;
     spell.putOnStackBy ??= spell.controller;
     spell.controlEffects = [
       ...(spell.controlEffects ?? []),
-      { controller: player, timestamp: this.freshTimestamp(), untilEndOfTurn: false, madeAtSeq: this.state.eventSeq },
+      {
+        controller: player,
+        timestamp: timestamp ?? this.freshTimestamp(),
+        untilEndOfTurn: false,
+        madeAtSeq: this.state.eventSeq,
+      },
     ];
     const previousController = spell.controller;
     if (previousController === player) return;
@@ -53273,15 +53286,24 @@ controlledBy,
     if (first.kind !== "object" || second.kind !== "object") return false;
     const a = this.state.objects[first.object];
     const b = this.state.objects[second.object];
-    if (a === undefined || b === undefined || a.zone !== "battlefield" || b.zone !== "battlefield") return false;
+    if (a === undefined || b === undefined) return false;
+    // Either may be a spell on the stack (Sudden Substitution's "target
+    // noncreature spell and target creature"), never an ability.
+    const exchangeable = (o: GameObject): boolean =>
+      o.zone === "battlefield" || (o.zone === "stack" && o.kind !== "ability");
+    if (!exchangeable(a) || !exchangeable(b)) return false;
     if (a.id === b.id || a.controller === b.controller) return false;
     const [toB, toA] = [a.controller, b.controller];
     if (this.state.players[toB]?.hasLost !== false || this.state.players[toA]?.hasLost !== false) return false;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
+    const give = (player: PlayerId, ref: TargetRef, object: GameObject): void => {
+      if (object.zone === "stack") this.gainControlOfSpell(player, ref, timestamp);
+      else this.gainControlByEffect(player, ref, false, false, { timestamp });
+    };
     this.withControlBatch(() => {
-      this.gainControlByEffect(toA, first, false, false, { timestamp });
-      this.gainControlByEffect(toB, second, false, false, { timestamp });
+      give(toA, first, a);
+      give(toB, second, b);
     });
     return true;
   }

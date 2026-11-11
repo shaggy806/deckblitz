@@ -16575,6 +16575,27 @@ describe("gaining control of a spell", () => {
     });
     expect(face.targets).toEqual(["spell"]);
   });
+
+  it("reads Sudden Substitution's exchange of a spell and a creature, the spell's controller choosing", () => {
+    const face = parseFace({
+      name: "Sudden Substitution",
+      type_line: "Instant",
+      mana_cost: "{2}{U}{U}",
+      colors: ["U"],
+      oracle_text:
+        "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nExchange control of target noncreature spell and target creature. Then the spell's controller may choose new targets for it.",
+    });
+    expect(face.splitSecond).toBe(true);
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual(["noncreature-spell", "creature"]);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exchange-control", objects: [0, 1] },
+        { kind: "change-targets", target: 0, how: "choose-new", by: "its-controller" },
+      ],
+    });
+  });
 });
 
 describe("a Praetor's flip", () => {

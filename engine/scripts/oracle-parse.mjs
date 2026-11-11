@@ -15298,6 +15298,9 @@ function parseFaceAsWritten(face, ctx = {}) {
       }
       continue;
     }
+    // Split second (rule 702.61a), on a spell of any type (Sudden Shock,
+    // Sudden Substitution).
+    if (line === "Split second") { out.splitSecond = true; continue; }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Paradigm (rule 702.192a): the spell's last part, then exiled.
     if (isSpell && line === "Paradigm") { paradigm = true; continue; }
@@ -18028,6 +18031,26 @@ function enterAsAt(sentences, i, ctx) {
  * so the new targets are judged from the new controller's side.
  */
 function gainControlSpellAt(sentences, i, ctx) {
+  // "Exchange control of target noncreature spell and target creature. Then
+  // the spell's controller may choose new targets for it." (Sudden
+  // Substitution — rule 701.12b): the spell's controller, whoever that is
+  // after the exchange, chooses.
+  if (/^then the spell's controller may choose new targets for it\.$/i.test(sentences[i + 1] ?? "")) {
+    const x = /^exchange control of target (noncreature )?spell and (target [a-z' ]+)\.$/i.exec(sentences[i]);
+    const other = x === null ? undefined : targetOf(x[2]);
+    if (x === null || other === undefined) return null;
+    const spell = ctx.target(x[1] !== undefined ? "noncreature-spell" : "spell");
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "exchange-control", objects: [spell, ctx.target(other)] },
+          { kind: "change-targets", target: spell, how: "choose-new", by: "its-controller" },
+        ],
+      },
+      used: 2,
+    };
+  }
   if (!/^you may choose new targets for it\.$/i.test(sentences[i + 1] ?? "")) return null;
   const m = /^gain control of target (noncreature )?spell\.$/i.exec(sentences[i]);
   if (m === null) return null;

@@ -208,6 +208,7 @@ function faceSource(face, ctx) {
     openingHandReveal: parsed.openingHandReveal,
     mulliganHandAbility: parsed.mulliganHandAbility,
     cantBeCountered: parsed.cantBeCountered,
+    splitSecond: parsed.splitSecond,
     colorsOutsideIdentity: parsed.colorsOutsideIdentity,
     flashThenSacrifice: parsed.flashThenSacrifice,
     flashIf: parsed.flashIf,

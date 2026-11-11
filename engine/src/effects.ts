@@ -4412,6 +4412,11 @@ export type EffectSpec =
        * changes hands. `then` is done if they were exchanged (Volatile
        * Stormdrake's "If you do"), `otherwise` if not (Gilded Drake's "If you
        * don't or can't make an exchange, sacrifice this creature").
+       *
+       * Either may be a **spell on the stack** (Sudden Substitution's "target
+       * noncreature spell and target creature"): its new controller controls
+       * it as `gain-control-spell` has it (rule 112.2), and the permanent it
+       * becomes (110.2b). The same all or nothing.
        */
       readonly kind: "exchange-control";
       readonly objects: readonly [ObjectRef, ObjectRef];
@@ -7288,6 +7293,10 @@ export type EffectSpec =
       readonly to?: "source";
       /** "You may change…" (Hydroelectric Specimen): keeping it is a choice. */
       readonly optional?: true;
+      /** "Then **the spell's controller** may choose new targets for it"
+       * (Sudden Substitution): whoever controls it as this is done chooses,
+       * not this effect's controller. */
+      readonly by?: "its-controller";
     }
   | {
       /**
@@ -12234,7 +12243,13 @@ export interface EffectApi {
   /** Change the targets of the spell or ability at `TargetRef` on the stack,
    * this effect's controller choosing — see the `change-targets`
    * {@link EffectSpec}. */
-  changeTargets(target: TargetRef, how: "change" | "change-one" | "choose-new", toSource: boolean, optional: boolean): void;
+  changeTargets(
+    target: TargetRef,
+    how: "change" | "change-one" | "choose-new",
+    toSource: boolean,
+    optional: boolean,
+    byItsController?: boolean,
+  ): void;
   /** This effect's controller gains control of the spell at `TargetRef` — see
    * the `gain-control-spell` {@link EffectSpec}. */
   gainControlOfSpell(target: TargetRef): void;
@@ -19039,7 +19054,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "change-targets": {
       const target = ctx.targets[spec.target];
-      if (target !== undefined) ctx.changeTargets(target, spec.how, spec.to === "source", spec.optional === true);
+      if (target !== undefined) {
+        ctx.changeTargets(target, spec.how, spec.to === "source", spec.optional === true, spec.by === "its-controller");
+      }
       return;
     }
     case "gain-control-spell": {

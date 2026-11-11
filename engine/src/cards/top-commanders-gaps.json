@@ -230,6 +230,7 @@
   "zone:graveyard-cast-permission-one-use",
   "effect:exile-transform-return",
   "effect:gain-control-spell",
+  "effect:exchange-control-permanent-and-spell",
   "effect:greatest-among-discarded",
   "cost:exile-cards-from-hand-cost-reduction",
   "effect:exiled-with-source-to-graveyard",
