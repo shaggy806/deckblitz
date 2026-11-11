@@ -6519,6 +6519,56 @@ describe("meld (rule 701.42)", () => {
       into: "Urza, Planeswalker",
     });
   });
+
+  it("reads a meld of two attackers that enters tapped and attacking, after a drain for the attackers", () => {
+    const mishra = parseFace(
+      {
+        name: "Mishra, Claimed by Gix",
+        type_line: "Legendary Creature — Phyrexian Human Artificer",
+        oracle_text:
+          "Whenever you attack, each opponent loses X life and you gain X life, where X is the number of attacking creatures. If Mishra, Claimed by Gix and a creature named Phyrexian Dragon Engine are attacking, and you both own and control them, exile them, then meld them into Mishra, Lost to Phyrexia. It enters tapped and attacking.",
+      },
+      { tokenFor: () => null },
+    );
+    const amount = { countOf: { type: "creature", attacking: true } };
+    expect(mishra.complete).toBe(true);
+    expect(mishra.triggered[0].trigger).toEqual({ on: "attack-with", who: "you", atLeast: 1 });
+    expect(mishra.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "sequence",
+          effects: [
+            { kind: "lose-life", amount, who: "each-opponent" },
+            { kind: "gain-life", amount },
+          ],
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "source", filter: { attacking: true } },
+          then: {
+            kind: "meld",
+            partner: { name: "Phyrexian Dragon Engine", type: "creature", attacking: true },
+            into: "Mishra, Lost to Phyrexia",
+            tapped: true,
+            attacking: "choose",
+          },
+        },
+      ],
+    });
+  });
+
+  it("reads 'choose three —' as a trigger's modal head", () => {
+    const lost = parseFace(
+      {
+        name: "Mishra, Lost to Phyrexia",
+        type_line: "Legendary Artifact Creature — Phyrexian Artificer",
+        oracle_text: "Whenever Mishra enters or attacks, choose three —\n• Draw a card.\n• You gain 2 life.\n• Scry 1.\n• Create a Treasure token.",
+      },
+      { tokenFor: () => "Treasure Token" },
+    );
+    expect(lost.triggered[0].effect).toMatchObject({ kind: "modal", minModes: 3, maxModes: 3 });
+  });
 });
 
 describe("counters of chosen kinds removed (remove-counters, a target's orPlayer)", () => {

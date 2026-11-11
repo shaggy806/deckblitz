@@ -2096,6 +2096,15 @@ export type ResolvedEnterAttacking =
   | { readonly player: PlayerId | undefined; readonly orTheirPlaneswalker: boolean }
   | { readonly defender: PlayerId | ObjectId };
 
+/** How a melded permanent enters, when its `meld` says: `tapped`, and
+ * `attacking` as authored (kept for the effect asked again once a partner is
+ * chosen) with `attackingAt` its resolved form. */
+export interface MeldEntry {
+  readonly tapped?: true;
+  readonly attacking?: EnterAttacking;
+  readonly attackingAt?: ResolvedEnterAttacking;
+}
+
 /** One row of a die roll's results table (rule 706.3a): a result from `min`
  * to `max` (any result from `min` up, without one) gets `effect`. */
 export interface DieResultRow {
@@ -4269,6 +4278,14 @@ export type EffectSpec =
       readonly partner: CardFilter;
       /** The combined back face: a definition whose `meldOf` is the pair. */
       readonly into: string;
+      /** "It enters **tapped**…" (Mishra, Claimed by Gix). */
+      readonly tapped?: true;
+      /** "…**and attacking**": the melded permanent is put onto the
+       * battlefield attacking (rule 508.4) — never declared, so nothing that
+       * triggers on attacking sees it. See {@link EnterAttacking}. The "are
+       * attacking" its text asks of the pair is the card's: an `attacking`
+       * clause on `partner`, and a `conditional` on the source around this. */
+      readonly attacking?: EnterAttacking;
       /** Never authored: the partner already chosen, in target slot 0 —
        * the `choose-permanents` answer's `then`. */
       readonly chosen?: true;
@@ -11538,7 +11555,13 @@ export interface EffectApi {
    * already chosen (`null`: chosen, and gone since), else it's found (and
    * asked for, among several). The source is the resolving ability's own,
    * `undefined` if it has become a new object since (rule 400.7). */
-  meld(source: ObjectId | undefined, partnerFilter: CardFilter, into: string, partner?: ObjectId | null): void;
+  meld(
+    source: ObjectId | undefined,
+    partnerFilter: CardFilter,
+    into: string,
+    partner?: ObjectId | null,
+    entry?: MeldEntry,
+  ): void;
   /** Grant flashback to `target` (an instant/sorcery card in a graveyard) for
    * the rest of the turn, at a flashback cost equal to its mana cost
    * (Snapcaster Mage), or at `cost` when given (Archmage's Newt's {0}). */
@@ -17409,6 +17432,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.partner,
         spec.into,
         spec.chosen !== true ? undefined : chosen?.kind === "object" ? chosen.object : null,
+        spec.tapped === undefined && spec.attacking === undefined
+          ? undefined
+          : { tapped: spec.tapped, attacking: spec.attacking, attackingAt: resolveEnterAttacking(spec.attacking, ctx) },
       );
       return;
     }

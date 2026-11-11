@@ -17,6 +17,7 @@ import { printedCardName } from "../state.js";
 import {
   A,
   B,
+  C,
   activate,
   counters,
   destroy,
@@ -27,6 +28,7 @@ import {
   lands,
   life,
   loyalty,
+  pickModes,
   pickPermanents,
   pt,
   ref,
@@ -324,6 +326,86 @@ describe("a melded planeswalker: Urza, Lord Protector and The Mightstone and Wea
     const castable = (card: ObjectId): boolean => game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === card);
     expect(castable(rock)).toBe(true);
     expect(castable(bears)).toBe(false);
+  });
+});
+
+describe("a meld that enters tapped and attacking: Mishra, Claimed by Gix and Phyrexian Dragon Engine", () => {
+  const LOST = "Mishra, Lost to Phyrexia";
+
+  it("drains for the attackers, then melds the two attackers into one that's tapped and attacking, never declared (rule 508.4)", () => {
+    const { game, a } = table();
+    const mishra = spawn(game, "Mishra, Claimed by Gix");
+    const engine = spawn(game, "Phyrexian Dragon Engine");
+    // Entering, it chooses three: menace and trample, -1/-1, two Powerstones.
+    pickModes(a, 3, 4, 5);
+    a.declareAttackersFn = () => [mishra, engine].map((attacker) => ({ attacker, defender: B }));
+    toStep(game, "declare-blockers");
+    const [lost] = showing(game, LOST);
+    expect(lost).toBeDefined();
+    // X is 2: both were attacking as the trigger resolved.
+    expect(life(game, B)).toBe(18);
+    expect(life(game, A)).toBe(22);
+    const melded = game.state.objects[lost];
+    expect(melded.tapped).toBe(true);
+    expect(melded.attacking).toBe(B);
+    expect(melded.attackedThisTurn).toBeFalsy();
+    expect(game.events.filter((e) => e.type === "entered-attacking")).toHaveLength(1);
+    expect(game.state.zones.shared.exile).toEqual([]);
+    expect(pt(game, lost)).toEqual({ power: 9, toughness: 9 });
+    // Its "enters" ability triggered; "attacks" didn't (one trigger: two
+    // Powerstones, not four).
+    expect(tokensNamed(game, "Powerstone Token", A)).toBe(2);
+    expect(keywords(game, lost).has("menace")).toBe(true);
+    toStep(game, "postcombat-main");
+    expect(life(game, B)).toBe(9);
+  });
+
+  it("melds nothing when the Dragon Engine isn't attacking", () => {
+    const { game, a } = table();
+    const mishra = spawn(game, "Mishra, Claimed by Gix");
+    const engine = spawn(game, "Phyrexian Dragon Engine");
+    a.declareAttackersFn = () => [{ attacker: mishra, defender: B }];
+    toStep(game, "declare-blockers");
+    expect(showing(game, LOST)).toEqual([]);
+    expect(zone(game, mishra)).toBe("battlefield");
+    expect(zone(game, engine)).toBe("battlefield");
+    expect(life(game, B)).toBe(19);
+    expect(life(game, A)).toBe(21);
+  });
+
+  it("melds nothing when Mishra isn't attacking, though you attacked", () => {
+    const { game, a } = table();
+    const mishra = spawn(game, "Mishra, Claimed by Gix");
+    const engine = spawn(game, "Phyrexian Dragon Engine");
+    a.declareAttackersFn = () => [{ attacker: engine, defender: B }];
+    toStep(game, "declare-blockers");
+    expect(showing(game, LOST)).toEqual([]);
+    expect(zone(game, mishra)).toBe("battlefield");
+    expect(life(game, B)).toBe(19);
+  });
+
+  it("melds nothing with a Dragon Engine you control but don't own", () => {
+    const { game, a } = table();
+    const mishra = spawn(game, "Mishra, Claimed by Gix");
+    const engine = spawn(game, "Phyrexian Dragon Engine", B);
+    game.debugApplyEffect(A, { kind: "gain-control", target: 0, untilEndOfTurn: false }, [ref(engine)]);
+    game.state.objects[engine].summoningSick = false;
+    a.declareAttackersFn = () => [mishra, engine].map((attacker) => ({ attacker, defender: B }));
+    toStep(game, "declare-blockers");
+    expect(showing(game, LOST)).toEqual([]);
+    expect(zone(game, engine)).toBe("battlefield");
+  });
+
+  it("its controller chooses which player it attacks as it enters", () => {
+    const { game, a } = table({ players: 3 });
+    const mishra = spawn(game, "Mishra, Claimed by Gix");
+    const engine = spawn(game, "Phyrexian Dragon Engine");
+    pickModes(a, 3, 4, 5);
+    a.chooseAttackTargetsFn = (_view, creatures) => creatures.map((cr) => ({ object: cr.object, target: C }));
+    a.declareAttackersFn = () => [mishra, engine].map((attacker) => ({ attacker, defender: B }));
+    toStep(game, "declare-blockers");
+    const [lost] = showing(game, LOST);
+    expect(game.state.objects[lost].attacking).toBe(C);
   });
 });
 

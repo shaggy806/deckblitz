@@ -6882,7 +6882,12 @@ vocabulary before adding one back.
   trigger the same "if" is also its intervening if, `condition: { kind:
   "meld-ready", partner: { … } }`. The melded permanent is one new object with
   Y's characteristics and the fronts' mana values summed; leaving, it's two
-  cards. The counterpart's "(Melds with …)" line is reminder text.
+  cards. The counterpart's "(Melds with …)" line is reminder text. "It
+  enters tapped and attacking" (Mishra, Claimed by Gix) is the effect's
+  `tapped: true, attacking: "choose"` (rule 508.4), and "if ~ and a creature
+  named X are attacking" an `attacking: true` on `partner` with a
+  `conditional` on `{ kind: "source", filter: { attacking: true } }` around
+  the `meld`.
   `graf-rats.ts`, `midnight-scavengers.ts` → `chittering-host.ts`;
   `hanweir-battlements.ts`; `meld.test.ts`.
 - **Adventure** — `adventure: true` on both faces + `faces: [creatureName,

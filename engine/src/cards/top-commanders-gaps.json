@@ -231,6 +231,7 @@
   "effect:exile-transform-return",
   "effect:gain-control-spell",
   "effect:exchange-control-permanent-and-spell",
+  "effect:meld-enters-attacking",
   "effect:greatest-among-discarded",
   "cost:exile-cards-from-hand-cost-reduction",
   "effect:exiled-with-source-to-graveyard",

@@ -3278,6 +3278,19 @@ export function parseSentence(sentence, ctx) {
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   let m;
+  // "Each opponent loses X life and you gain X life, where X is the number of
+  // attacking creatures" (Mishra, Claimed by Gix): every attacking creature,
+  // counted as it resolves.
+  if (/^each opponent loses X life and you gain X life, where X is the number of attacking creatures\.$/i.test(s)) {
+    const amount = { countOf: { type: "creature", attacking: true } };
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "lose-life", amount, who: "each-opponent" },
+        { kind: "gain-life", amount },
+      ],
+    };
+  }
   // "Create X [tokens], where X is the amount of damage dealt to it this
   // turn" (Tangled Colony's dies trigger): all the turn's damage to the
   // source, in the stint it refers to. A quoted ability's closing comma
@@ -10317,6 +10330,16 @@ export function parseEffect(text, outer) {
       parsed.push(copied.effect);
       hints.push({ sentence, effect: copied.effect });
       skip = copied.used - 1;
+      continue;
+    }
+    // "If ~ and a creature named … are attacking, and you both own and
+    // control them, exile them, then meld them into …. It enters tapped and
+    // attacking." (Mishra, Claimed by Gix)
+    const meldedIn = meldAttackingAt(sentences, i);
+    if (meldedIn !== null) {
+      parsed.push(meldedIn.effect);
+      hints.push({ sentence, effect: meldedIn.effect });
+      skip = meldedIn.used - 1;
       continue;
     }
     // "Gain control of target spell. You may choose new targets for it."
@@ -18026,6 +18049,35 @@ function enterAsAt(sentences, i, ctx) {
 }
 
 /**
+ * A meld whose pair must be attacking, the melded permanent entering tapped
+ * and attacking (Mishra, Claimed by Gix — rules 701.42, 508.4): the source's
+ * "is attacking" a `conditional` around the `meld`, the counterpart's on its
+ * `partner` filter.
+ */
+function meldAttackingAt(sentences, i) {
+  if (!/^it enters tapped and attacking\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const m =
+    /^if ~ and an? (creature|artifact) named (.+?) are attacking, and you both own and control them, exile them, then meld them into (.+)\.$/i.exec(
+      sentences[i],
+    );
+  if (m === null) return null;
+  return {
+    effect: {
+      kind: "conditional",
+      condition: { kind: "source", filter: { attacking: true } },
+      then: {
+        kind: "meld",
+        partner: { name: m[2], type: m[1].toLowerCase(), attacking: true },
+        into: m[3],
+        tapped: true,
+        attacking: "choose",
+      },
+    },
+    used: 2,
+  };
+}
+
+/**
  * "Gain control of target [noncreature] spell. You may choose new targets for
  * it." (Commandeer, Aethersnatch — rule 115.7d): the change of control first,
  * so the new targets are judged from the new controller's side.
@@ -18225,7 +18277,7 @@ function fillEffect(ability, text, ctx, lines, i) {
   // "Choose one at random —" (Umaro, Raging Yeti): the mode is the game's, as it
   // goes on the stack; "you choose one instead" (Typhoid Mary, Fractured).
   const randomHead = /^Choose one at random(?: —|\. (If you discarded a card this turn), you choose one instead\.)$/.exec(text.trim());
-  const modalHead = randomHead !== null ? ["", "one"] : /^Choose (one|two|one or both|one or more)( that hasn't been chosen( this turn)?)? —$/.exec(text.trim());
+  const modalHead = randomHead !== null ? ["", "one"] : /^Choose (one|two|three|one or both|one or more)( that hasn't been chosen( this turn)?)? —$/.exec(text.trim());
   if (modalHead) {
     let j = i + 1;
     const bullets = [];
@@ -18305,7 +18357,7 @@ const containsTarget = (e) =>
   e !== null && typeof e === "object" && (typeof e.target === "number" || typeof e.b === "number" || Object.values(e).some(containsTarget));
 
 const modeCounts = (head, n) =>
-  ({ one: [1, 1], two: [2, 2], "one or both": [1, 2], "one or more": [1, n] })[head];
+  ({ one: [1, 1], two: [2, 2], three: [3, 3], "one or both": [1, 2], "one or more": [1, n] })[head];
 
 /** "Choose one —" and its bullets on a spell: a `castModal` (modes may
  * target). `undefined` when the spell isn't modal; `null` when a mode

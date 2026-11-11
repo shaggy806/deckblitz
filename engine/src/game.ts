@@ -322,6 +322,7 @@ import type {
   ResolutionContext,
   ChoosePermanentsTogether,
   ResolvedEnterAttacking,
+  MeldEntry,
   ReturnToHandZone,
   ResolvedSearchTogether,
   CreatedTokenFights,
@@ -37022,7 +37023,8 @@ export class Game {
         ),
       oneTokenEvent: (fn) => this.withTokenCopyEvent(fn),
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
-      meld: (self, partnerFilter, into, partner) => this.meldByEffect(controller, x, self, partnerFilter, into, partner),
+      meld: (self, partnerFilter, into, partner, entry) =>
+        this.meldByEffect(controller, x, self, partnerFilter, into, partner, entry),
       returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under) =>
         this.returnFlickeredByEffect(
           link,
@@ -51147,6 +51149,7 @@ controlledBy,
     partnerFilter: CardFilter,
     into: string,
     partner?: ObjectId | null,
+    entry?: MeldEntry,
   ): void {
     if (self === undefined || partner === null) return;
     const partners = meldPartners(this.state, this.registry, self, controller, partnerFilter);
@@ -51161,7 +51164,14 @@ controlledBy,
         min: 1,
         max: 1,
         prompt: `Choose the permanent to meld into ${into}`,
-        then: { kind: "meld", partner: partnerFilter, into, chosen: true },
+        then: {
+          kind: "meld",
+          partner: partnerFilter,
+          into,
+          chosen: true,
+          ...(entry?.tapped === true ? { tapped: true as const } : {}),
+          ...(entry?.attacking !== undefined ? { attacking: entry.attacking } : {}),
+        },
         source: self,
         x,
       };
@@ -51191,7 +51201,12 @@ controlledBy,
       return;
     }
     const [main, rest] = a.isCommander || (!b.isCommander && a.cardName === meldOf[0]) ? [a, b] : [b, a];
-    if (!this.moveObject(main.id, "battlefield", { melded: { into, with: [{ cardName: rest.cardName, owner: rest.owner }] } })) {
+    if (
+      !this.moveObject(main.id, "battlefield", {
+        melded: { into, with: [{ cardName: rest.cardName, owner: rest.owner }] },
+        ...(entry?.tapped === true ? { tapped: true } : {}),
+      })
+    ) {
       return;
     }
     if (this.state.objects[main.id]?.zone !== "battlefield") return;
@@ -51203,6 +51218,11 @@ controlledBy,
     if (stint !== undefined) stint.until = this.state.eventSeq;
     delete this.state.objects[rest.id];
     invalidateComputedCache();
+    // "It enters tapped and attacking" (rule 508.4): as it enters, before
+    // anything sees it arrive.
+    if (entry?.attackingAt !== undefined) {
+      this.putIntoAttack([main.id], this.state.objects[main.id].controller, entry.attackingAt);
+    }
     this.emit({ type: "permanent-entered-battlefield", object: main.id });
   }
 

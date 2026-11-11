@@ -24,6 +24,7 @@ export default defineCard({
   colors: [],
   types: ["artifact", "creature"],
   subtypes: ["Phyrexian", "Dragon"],
+  meldCard: true,
   power: 2,
   toughness: 2,
   keywords: ["double-strike"],
