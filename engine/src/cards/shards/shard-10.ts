@@ -914,6 +914,7 @@ import _poolUnbreakableFormation from "../pool/unbreakable-formation.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
 import _poolUnerringSling from "../pool/unerring-sling.js";
 import _poolUnyaroBeeSting from "../pool/unyaro-bee-sting.js";
+import _poolUrzaPlaneswalker from "../pool/urza-planeswalker.js";
 import _poolUugguuTheOmniplasm from "../pool/uugguu-the-omniplasm.js";
 import _poolValorMadeReal from "../pool/valor-made-real.js";
 import _poolVampireOfTheDireMoon from "../pool/vampire-of-the-dire-moon.js";
@@ -1920,6 +1921,7 @@ const shard: CardShard = {
     _poolUndeadButler,
     _poolUnerringSling,
     _poolUnyaroBeeSting,
+    _poolUrzaPlaneswalker,
     _poolUugguuTheOmniplasm,
     _poolValorMadeReal,
     _poolVampireOfTheDireMoon,

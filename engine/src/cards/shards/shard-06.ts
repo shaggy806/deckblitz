@@ -914,6 +914,7 @@ import _poolUnstoppableAsh from "../pool/unstoppable-ash.js";
 import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
 import _poolUrgorosTheEmptyOne from "../pool/urgoros-the-empty-one.js";
+import _poolUrzaLordProtector from "../pool/urza-lord-protector.js";
 import _poolValkyriesCall from "../pool/valkyries-call.js";
 import _poolVault11VotersDilemma from "../pool/vault-11-voters-dilemma.js";
 import _poolVebulid from "../pool/vebulid.js";
@@ -1926,6 +1927,7 @@ const shard: CardShard = {
     _poolUnyieldingGatekeeper,
     _poolUpdraftElemental,
     _poolUrgorosTheEmptyOne,
+    _poolUrzaLordProtector,
     _poolValkyriesCall,
     _poolVault11VotersDilemma,
     _poolVebulid,

@@ -12129,6 +12129,7 @@ import _poolHauntingFigment from "./pool/haunting-figment.js";
 import _poolHauntingHymn from "./pool/haunting-hymn.js";
 import _poolHauntingMisery from "./pool/haunting-misery.js";
 import _poolHauntingVoyage from "./pool/haunting-voyage.js";
+import _poolHauntwoodsShrieker from "./pool/hauntwoods-shrieker.js";
 import _poolHaveABite from "./pool/have-a-bite.js";
 import _poolHaveForDinner from "./pool/have-for-dinner.js";
 import _poolHavenOfTheHarvest from "./pool/haven-of-the-harvest.js";
@@ -26877,6 +26878,7 @@ import _poolTangleWire from "./pool/tangle-wire.js";
 import _poolTangle from "./pool/tangle.js";
 import _poolTanglebloom from "./pool/tanglebloom.js";
 import _poolTangleclawWerewolf from "./pool/tangleclaw-werewolf.js";
+import _poolTangledColony from "./pool/tangled-colony.js";
 import _poolTangledFlorahedron from "./pool/tangled-florahedron.js";
 import _poolTangledIslet from "./pool/tangled-islet.js";
 import _poolTangledSkyline from "./pool/tangled-skyline.js";
@@ -29291,6 +29293,8 @@ import _poolUrtetRemnantOfMemnarch from "./pool/urtet-remnant-of-memnarch.js";
 import _poolUrukHaiBerserker from "./pool/uruk-hai-berserker.js";
 import _poolUrzaChiefArtificer from "./pool/urza-chief-artificer.js";
 import _poolUrzaLordHighArtificer from "./pool/urza-lord-high-artificer.js";
+import _poolUrzaLordProtector from "./pool/urza-lord-protector.js";
+import _poolUrzaPlaneswalker from "./pool/urza-planeswalker.js";
 import _poolUrzaPowerstoneProdigy from "./pool/urza-powerstone-prodigy.js";
 import _poolUrzaPrinceOfKroog from "./pool/urza-prince-of-kroog.js";
 import _poolUrzasArmor from "./pool/urzas-armor.js";
@@ -44531,6 +44535,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHauntingHymn,
   _poolHauntingMisery,
   _poolHauntingVoyage,
+  _poolHauntwoodsShrieker,
   _poolHaveABite,
   _poolHaveForDinner,
   _poolHavenOfTheHarvest,
@@ -59279,6 +59284,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTangle,
   _poolTanglebloom,
   _poolTangleclawWerewolf,
+  _poolTangledColony,
   _poolTangledFlorahedron,
   _poolTangledIslet,
   _poolTangledSkyline,
@@ -61693,6 +61699,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrukHaiBerserker,
   _poolUrzaChiefArtificer,
   _poolUrzaLordHighArtificer,
+  _poolUrzaLordProtector,
+  _poolUrzaPlaneswalker,
   _poolUrzaPowerstoneProdigy,
   _poolUrzaPrinceOfKroog,
   _poolUrzasArmor,
@@ -76946,6 +76954,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/haunting-hymn": _poolHauntingHymn,
   "pool/haunting-misery": _poolHauntingMisery,
   "pool/haunting-voyage": _poolHauntingVoyage,
+  "pool/hauntwoods-shrieker": _poolHauntwoodsShrieker,
   "pool/have-a-bite": _poolHaveABite,
   "pool/have-for-dinner": _poolHaveForDinner,
   "pool/haven-of-the-harvest": _poolHavenOfTheHarvest,
@@ -91694,6 +91703,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tangle": _poolTangle,
   "pool/tanglebloom": _poolTanglebloom,
   "pool/tangleclaw-werewolf": _poolTangleclawWerewolf,
+  "pool/tangled-colony": _poolTangledColony,
   "pool/tangled-florahedron": _poolTangledFlorahedron,
   "pool/tangled-islet": _poolTangledIslet,
   "pool/tangled-skyline": _poolTangledSkyline,
@@ -94108,6 +94118,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/uruk-hai-berserker": _poolUrukHaiBerserker,
   "pool/urza-chief-artificer": _poolUrzaChiefArtificer,
   "pool/urza-lord-high-artificer": _poolUrzaLordHighArtificer,
+  "pool/urza-lord-protector": _poolUrzaLordProtector,
+  "pool/urza-planeswalker": _poolUrzaPlaneswalker,
   "pool/urza-powerstone-prodigy": _poolUrzaPowerstoneProdigy,
   "pool/urza-prince-of-kroog": _poolUrzaPrinceOfKroog,
   "pool/urzas-armor": _poolUrzasArmor,

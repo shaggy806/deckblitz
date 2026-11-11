@@ -365,6 +365,7 @@ import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
 import _poolHardyVeteran from "../pool/hardy-veteran.js";
 import _poolHareRaising from "../pool/hare-raising.js";
 import _poolHarmonize from "../pool/harmonize.js";
+import _poolHauntwoodsShrieker from "../pool/hauntwoods-shrieker.js";
 import _poolHeadstrongBrute from "../pool/headstrong-brute.js";
 import _poolHeartPiercerManticore from "../pool/heart-piercer-manticore.js";
 import _poolHeirOfFalkenrath from "../pool/heir-of-falkenrath.js";
@@ -854,6 +855,7 @@ import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
 import _poolTamMindfulFirstYear from "../pool/tam-mindful-first-year.js";
+import _poolTangledColony from "../pool/tangled-colony.js";
 import _poolTeferisReproach from "../pool/teferis-reproach.js";
 import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
 import _poolTemper from "../pool/temper.js";
@@ -1396,6 +1398,7 @@ const shard: CardShard = {
     _poolHardyVeteran,
     _poolHareRaising,
     _poolHarmonize,
+    _poolHauntwoodsShrieker,
     _poolHeadstrongBrute,
     _poolHeartPiercerManticore,
     _poolHeirOfFalkenrath,
@@ -1885,6 +1888,7 @@ const shard: CardShard = {
     _poolSyrVondamTheLucent,
     _poolTajuruPathwarden,
     _poolTamMindfulFirstYear,
+    _poolTangledColony,
     _poolTeferisReproach,
     _poolTelJiladLifebreather,
     _poolTemper,
