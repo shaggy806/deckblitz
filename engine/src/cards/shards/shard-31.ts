@@ -741,6 +741,7 @@ import _poolRidgelineRager from "../pool/ridgeline-rager.js";
 import _poolRielleTheEverwise from "../pool/rielle-the-everwise.js";
 import _poolRimrockKnight from "../pool/rimrock-knight.js";
 import _poolRitualOfRestoration from "../pool/ritual-of-restoration.js";
+import _poolRoarOfResistance from "../pool/roar-of-resistance.js";
 import _poolRobobrainWarMind from "../pool/robobrain-war-mind.js";
 import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRoilingWaters from "../pool/roiling-waters.js";
@@ -1810,6 +1811,7 @@ const shard: CardShard = {
     _poolRielleTheEverwise,
     _poolRimrockKnight,
     _poolRitualOfRestoration,
+    _poolRoarOfResistance,
     _poolRobobrainWarMind,
     _poolRockBadger,
     _poolRoilingWaters,

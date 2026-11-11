@@ -5526,6 +5526,7 @@ import _poolCrimsonAcolyte from "./pool/crimson-acolyte.js";
 import _poolCrimsonCaravaneer from "./pool/crimson-caravaneer.js";
 import _poolCrimsonCowlMasterOfEvil from "./pool/crimson-cowl-master-of-evil.js";
 import _poolCrimsonFleetCommodore from "./pool/crimson-fleet-commodore.js";
+import _poolCrimsonHellkite from "./pool/crimson-hellkite.js";
 import _poolCrimsonHonorGuard from "./pool/crimson-honor-guard.js";
 import _poolCrimsonKobolds from "./pool/crimson-kobolds.js";
 import _poolCrimsonMage from "./pool/crimson-mage.js";
@@ -5653,6 +5654,7 @@ import _poolCryptIncursion from "./pool/crypt-incursion.js";
 import _poolCryptLurker from "./pool/crypt-lurker.js";
 import _poolCryptOfAgadeem from "./pool/crypt-of-agadeem.js";
 import _poolCryptOfTheEternals from "./pool/crypt-of-the-eternals.js";
+import _poolCryptRats from "./pool/crypt-rats.js";
 import _poolCryptRipper from "./pool/crypt-ripper.js";
 import _poolCryptSliver from "./pool/crypt-sliver.js";
 import _poolCryptbornHorror from "./pool/cryptborn-horror.js";
@@ -9961,6 +9963,7 @@ import _poolFractalize from "./pool/fractalize.js";
 import _poolFracture from "./pool/fracture.js";
 import _poolFracturedIdentity from "./pool/fractured-identity.js";
 import _poolFracturedLoyalty from "./pool/fractured-loyalty.js";
+import _poolFracturedPowerstone from "./pool/fractured-powerstone.js";
 import _poolFracturedRealm from "./pool/fractured-realm.js";
 import _poolFracturedSanity from "./pool/fractured-sanity.js";
 import _poolFracturingGust from "./pool/fracturing-gust.js";
@@ -22086,6 +22089,7 @@ import _poolRoarOfChallenge from "./pool/roar-of-challenge.js";
 import _poolRoarOfEndlessSong from "./pool/roar-of-endless-song.js";
 import _poolRoarOfJukai from "./pool/roar-of-jukai.js";
 import _poolRoarOfReclamation from "./pool/roar-of-reclamation.js";
+import _poolRoarOfResistance from "./pool/roar-of-resistance.js";
 import _poolRoarOfTheCrowd from "./pool/roar-of-the-crowd.js";
 import _poolRoarOfTheFifthPeople from "./pool/roar-of-the-fifth-people.js";
 import _poolRoarOfTheKha from "./pool/roar-of-the-kha.js";
@@ -37915,6 +37919,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrimsonCaravaneer,
   _poolCrimsonCowlMasterOfEvil,
   _poolCrimsonFleetCommodore,
+  _poolCrimsonHellkite,
   _poolCrimsonHonorGuard,
   _poolCrimsonKobolds,
   _poolCrimsonMage,
@@ -38042,6 +38047,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCryptLurker,
   _poolCryptOfAgadeem,
   _poolCryptOfTheEternals,
+  _poolCryptRats,
   _poolCryptRipper,
   _poolCryptSliver,
   _poolCryptbornHorror,
@@ -42350,6 +42356,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFracture,
   _poolFracturedIdentity,
   _poolFracturedLoyalty,
+  _poolFracturedPowerstone,
   _poolFracturedRealm,
   _poolFracturedSanity,
   _poolFracturingGust,
@@ -54475,6 +54482,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRoarOfEndlessSong,
   _poolRoarOfJukai,
   _poolRoarOfReclamation,
+  _poolRoarOfResistance,
   _poolRoarOfTheCrowd,
   _poolRoarOfTheFifthPeople,
   _poolRoarOfTheKha,
@@ -70317,6 +70325,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crimson-caravaneer": _poolCrimsonCaravaneer,
   "pool/crimson-cowl-master-of-evil": _poolCrimsonCowlMasterOfEvil,
   "pool/crimson-fleet-commodore": _poolCrimsonFleetCommodore,
+  "pool/crimson-hellkite": _poolCrimsonHellkite,
   "pool/crimson-honor-guard": _poolCrimsonHonorGuard,
   "pool/crimson-kobolds": _poolCrimsonKobolds,
   "pool/crimson-mage": _poolCrimsonMage,
@@ -70444,6 +70453,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crypt-lurker": _poolCryptLurker,
   "pool/crypt-of-agadeem": _poolCryptOfAgadeem,
   "pool/crypt-of-the-eternals": _poolCryptOfTheEternals,
+  "pool/crypt-rats": _poolCryptRats,
   "pool/crypt-ripper": _poolCryptRipper,
   "pool/crypt-sliver": _poolCryptSliver,
   "pool/cryptborn-horror": _poolCryptbornHorror,
@@ -74752,6 +74762,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fracture": _poolFracture,
   "pool/fractured-identity": _poolFracturedIdentity,
   "pool/fractured-loyalty": _poolFracturedLoyalty,
+  "pool/fractured-powerstone": _poolFracturedPowerstone,
   "pool/fractured-realm": _poolFracturedRealm,
   "pool/fractured-sanity": _poolFracturedSanity,
   "pool/fracturing-gust": _poolFracturingGust,
@@ -86877,6 +86888,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/roar-of-endless-song": _poolRoarOfEndlessSong,
   "pool/roar-of-jukai": _poolRoarOfJukai,
   "pool/roar-of-reclamation": _poolRoarOfReclamation,
+  "pool/roar-of-resistance": _poolRoarOfResistance,
   "pool/roar-of-the-crowd": _poolRoarOfTheCrowd,
   "pool/roar-of-the-fifth-people": _poolRoarOfTheFifthPeople,
   "pool/roar-of-the-kha": _poolRoarOfTheKha,

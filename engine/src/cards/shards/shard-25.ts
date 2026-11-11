@@ -185,6 +185,7 @@ import _poolCrudeBentBlade from "../pool/crude-bent-blade.js";
 import _poolCruelEdict from "../pool/cruel-edict.js";
 import _poolCruelWitness from "../pool/cruel-witness.js";
 import _poolCryogenRelic from "../pool/cryogen-relic.js";
+import _poolCryptRats from "../pool/crypt-rats.js";
 import _poolDaharMaster from "../pool/dahar-master.js";
 import _poolDanithaCapashenParagon from "../pool/danitha-capashen-paragon.js";
 import _poolDanseMacabre from "../pool/danse-macabre.js";
@@ -1170,6 +1171,7 @@ const shard: CardShard = {
     _poolCruelEdict,
     _poolCruelWitness,
     _poolCryogenRelic,
+    _poolCryptRats,
     _poolDaharMaster,
     _poolDanithaCapashenParagon,
     _poolDanseMacabre,

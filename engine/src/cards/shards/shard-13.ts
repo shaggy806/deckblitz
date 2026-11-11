@@ -307,6 +307,7 @@ import _poolFolkHero from "../pool/folk-hero.js";
 import _poolFoulImp from "../pool/foul-imp.js";
 import _poolFountainOfYouth from "../pool/fountain-of-youth.js";
 import _poolFractalMascot from "../pool/fractal-mascot.js";
+import _poolFracturedPowerstone from "../pool/fractured-powerstone.js";
 import _poolFrayingSanity from "../pool/fraying-sanity.js";
 import _poolFrodoAdventurousHobbit from "../pool/frodo-adventurous-hobbit.js";
 import _poolFrostFairLureFish from "../pool/frost-fair-lure-fish.js";
@@ -1292,6 +1293,7 @@ const shard: CardShard = {
     _poolFoulImp,
     _poolFountainOfYouth,
     _poolFractalMascot,
+    _poolFracturedPowerstone,
     _poolFrayingSanity,
     _poolFrodoAdventurousHobbit,
     _poolFrostFairLureFish,
