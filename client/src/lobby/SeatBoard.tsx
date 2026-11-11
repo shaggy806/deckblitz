@@ -261,7 +261,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                       ) : (
                         <button
                           type="button"
-                          className="seat-panel-ready-btn"
+                          className="seat-panel-ready-btn next"
                           data-tour="lobby-ready"
                           onClick={readyUp}
                           disabled={refused !== null}
@@ -318,8 +318,10 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
             {/* Always there (empty for a host with everyone ready), two lines
                 tall, so the box holds its height. */}
             <p className="muted seat-board-hint">
-              {!allReady
-                ? 'Waiting for everyone to ready up…'
+              {!amReady
+                ? 'Press Ready on your seat when your deck is picked.'
+                : !allReady
+                  ? 'Waiting for everyone to ready up…'
                 : !host
                   ? `Waiting for ${hostSeat ? playerLabel(hostSeat.player, game.seats) : 'the host'} to start the game…`
                   : null}

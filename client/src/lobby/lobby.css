@@ -327,6 +327,17 @@ button.seat-add-panel:hover {
 .seat-panel-ready-btn {
   font-weight: 600;
 }
+/* Mine, not pressed yet: the next thing to do, drawn as the page's primary
+   button so it doesn't read as one more plain control beside "Pick a deck". */
+.seat-panel-ready-btn.next:not(:disabled) {
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.seat-panel-ready-btn.next:hover:not(:disabled) {
+  background: var(--gold);
+  border-color: var(--gold);
+}
 .seat-panel-ready-btn.active {
   color: var(--good);
   border-color: var(--good);
