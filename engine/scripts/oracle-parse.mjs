@@ -9707,6 +9707,9 @@ export function parseEffect(text, outer) {
         parsed.push(effect);
         hints.push({ sentence, effect });
       }
+      skip = 1;
+      continue;
+    }
     // "You may discard a card. When you do, …" (`discardWhenYouDoAt`).
     const discardThen = discardWhenYouDoAt(sentences, i, ctx);
     if (discardThen !== null) {
