@@ -670,6 +670,13 @@ describe("what a spell costs: amounts, colours and targets", () => {
       reduceGeneric: { countInGraveyard: { ownedBy: "you" }, sameNameAs: "priced" },
       when: { caster: "you" },
     });
+    expect(
+      staticOf("Spells you cast cost {1} less to cast for each card type they share with cards exiled with this creature."),
+    ).toEqual({
+      applies: {},
+      reduceGeneric: { cardTypesSharedWith: "exiled-with-source", of: "priced" },
+      when: { caster: "you" },
+    });
     expect(staticOf("Spells your opponents cast from graveyards or from exile cost {2} more to cast.")).toEqual({
       applies: {},
 

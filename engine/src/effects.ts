@@ -1087,6 +1087,16 @@ export type EffectAmount =
    * multi-face card has its front face's types there (rule 712.8a). */
   | { readonly cardTypesInGraveyard: CardFilter }
   /**
+   * How many card types the spell whose cost is being worked out (`"priced"`)
+   * shares with the cards exiled with this source (rule 607.2a, linked
+   * abilities) — Cemetery Prowler's "Spells you cast cost {1} less to cast
+   * for each card type they share with cards exiled with this creature", a
+   * `costModification`'s `reduceGeneric`. Each card type once, however many
+   * exiled cards have it (the ruling); the spell's types as it is being cast,
+   * the exiled cards' as they are in exile. 0 outside a cost.
+   */
+  | { readonly cardTypesSharedWith: "exiled-with-source"; readonly of: "priced" }
+  /**
    * How many cards the resolving spell or ability has made players
    * **discard, draw or mill**, or permanents **sacrifice**, so far — "draw a
    * card for each card discarded this way", "that many cards plus one". Every
@@ -14453,6 +14463,13 @@ export function signedAmountValue(
     return opponentsVoting(ctx.votes(), ctx.controller, ctx.playersInScope("each-opponent"), false).length;
   }
   if ("cardTypesInGraveyard" in amount) return ctx.cardTypesInGraveyard(amount.cardTypesInGraveyard);
+  if ("cardTypesSharedWith" in amount) {
+    if (ctx.priced === undefined) return 0;
+    const exiled = new Set(
+      ctx.cardsExiledWithSource(true).flatMap((card) => ctx.cardTypesOf({ kind: "object", object: card })),
+    );
+    return ctx.cardTypesOf({ kind: "object", object: ctx.priced }).filter((type) => exiled.has(type)).length;
+  }
   if ("opponentsAttacked" in amount) return ctx.opponentsAttacked();
   if ("objectTargets" in amount) {
     return ctx.targets.filter((t, slot) => t?.kind === "object" && !illegalSlot(slot, ctx)).length;

@@ -18244,6 +18244,10 @@ function spellCostStaticOf(line, text) {
     const each = { countInGraveyard: { ownedBy: "you" }, sameNameAs: "priced" };
     return made({ applies: {}, when: { caster: "you" }, reduceGeneric: m[1] === "1" ? each : { product: [each, Number(m[1])] } });
   }
+  // Cemetery Prowler: each card type the spell shares with the linked exile.
+  if (/^Spells you cast cost \{1\} less to cast for each card type they share with cards exiled with (?:~|this creature|this permanent)\.$/.test(line)) {
+    return made({ applies: {}, when: { caster: "you" }, reduceGeneric: { cardTypesSharedWith: "exiled-with-source", of: "priced" } });
+  }
   if ((m = /^Spells you cast from your graveyard( or from exile)? cost \{(\d+)\} less to cast\.$/.exec(line))) {
     return made({ applies: {}, caster: "you", castFrom: m[1] !== undefined ? ["graveyard", "exile"] : "graveyard", reduceGeneric: Number(m[2]) });
   }
