@@ -2002,6 +2002,7 @@ import _poolBaradDur from "./pool/barad-dur.js";
 import _poolBaralAndKariZev from "./pool/baral-and-kari-zev.js";
 import _poolBaralChiefOfCompliance from "./pool/baral-chief-of-compliance.js";
 import _poolBaralsExpertise from "./pool/barals-expertise.js";
+import _poolBarbaraWright from "./pool/barbara-wright.js";
 import _poolBarbarianBully from "./pool/barbarian-bully.js";
 import _poolBarbarianClass from "./pool/barbarian-class.js";
 import _poolBarbarianGeneral from "./pool/barbarian-general.js";
@@ -6637,6 +6638,7 @@ import _poolDesertedBeach from "./pool/deserted-beach.js";
 import _poolDesertedTemple from "./pool/deserted-temple.js";
 import _poolDesertersDisciple from "./pool/deserters-disciple.js";
 import _poolDesertersQuarters from "./pool/deserters-quarters.js";
+import _poolDesertion from "./pool/desertion.js";
 import _poolDesertsDue from "./pool/deserts-due.js";
 import _poolDesertsHold from "./pool/deserts-hold.js";
 import _poolDesiccatedNaga from "./pool/desiccated-naga.js";
@@ -18506,6 +18508,7 @@ import _poolNucklavee from "./pool/nucklavee.js";
 import _poolNuclearFallout from "./pool/nuclear-fallout.js";
 import _poolNuisanceEngine from "./pool/nuisance-engine.js";
 import _poolNukaColaVendingMachine from "./pool/nuka-cola-vending-machine.js";
+import _poolNukaNukeLauncher from "./pool/nuka-nuke-launcher.js";
 import _poolNullBrooch from "./pool/null-brooch.js";
 import _poolNullCaller from "./pool/null-caller.js";
 import _poolNullChampion from "./pool/null-champion.js";
@@ -34456,6 +34459,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBaralAndKariZev,
   _poolBaralChiefOfCompliance,
   _poolBaralsExpertise,
+  _poolBarbaraWright,
   _poolBarbarianBully,
   _poolBarbarianClass,
   _poolBarbarianGeneral,
@@ -39091,6 +39095,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDesertedTemple,
   _poolDesertersDisciple,
   _poolDesertersQuarters,
+  _poolDesertion,
   _poolDesertsDue,
   _poolDesertsHold,
   _poolDesiccatedNaga,
@@ -50960,6 +50965,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNuclearFallout,
   _poolNuisanceEngine,
   _poolNukaColaVendingMachine,
+  _poolNukaNukeLauncher,
   _poolNullBrooch,
   _poolNullCaller,
   _poolNullChampion,
@@ -66923,6 +66929,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/baral-and-kari-zev": _poolBaralAndKariZev,
   "pool/baral-chief-of-compliance": _poolBaralChiefOfCompliance,
   "pool/barals-expertise": _poolBaralsExpertise,
+  "pool/barbara-wright": _poolBarbaraWright,
   "pool/barbarian-bully": _poolBarbarianBully,
   "pool/barbarian-class": _poolBarbarianClass,
   "pool/barbarian-general": _poolBarbarianGeneral,
@@ -71558,6 +71565,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deserted-temple": _poolDesertedTemple,
   "pool/deserters-disciple": _poolDesertersDisciple,
   "pool/deserters-quarters": _poolDesertersQuarters,
+  "pool/desertion": _poolDesertion,
   "pool/deserts-due": _poolDesertsDue,
   "pool/deserts-hold": _poolDesertsHold,
   "pool/desiccated-naga": _poolDesiccatedNaga,
@@ -83427,6 +83435,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nuclear-fallout": _poolNuclearFallout,
   "pool/nuisance-engine": _poolNuisanceEngine,
   "pool/nuka-cola-vending-machine": _poolNukaColaVendingMachine,
+  "pool/nuka-nuke-launcher": _poolNukaNukeLauncher,
   "pool/null-brooch": _poolNullBrooch,
   "pool/null-caller": _poolNullCaller,
   "pool/null-champion": _poolNullChampion,

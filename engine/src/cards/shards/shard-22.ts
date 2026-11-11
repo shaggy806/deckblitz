@@ -561,6 +561,7 @@ import _poolNobleVestige from "../pool/noble-vestige.js";
 import _poolNomadOutpost from "../pool/nomad-outpost.js";
 import _poolNowForWrathNowForRuin from "../pool/now-for-wrath-now-for-ruin.js";
 import _poolNukaColaVendingMachine from "../pool/nuka-cola-vending-machine.js";
+import _poolNukaNukeLauncher from "../pool/nuka-nuke-launcher.js";
 import _poolNyxbornCourser from "../pool/nyxborn-courser.js";
 import _poolObNixilissCruelty from "../pool/ob-nixiliss-cruelty.js";
 import _poolObeliskOfUrd from "../pool/obelisk-of-urd.js";
@@ -1596,6 +1597,7 @@ const shard: CardShard = {
     _poolNomadOutpost,
     _poolNowForWrathNowForRuin,
     _poolNukaColaVendingMachine,
+    _poolNukaNukeLauncher,
     _poolNyxbornCourser,
     _poolObNixilissCruelty,
     _poolObeliskOfUrd,

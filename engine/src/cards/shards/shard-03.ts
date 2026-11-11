@@ -53,6 +53,7 @@ import _poolAxiomEngraver from "../pool/axiom-engraver.js";
 import _poolAyumiTheLastVisitor from "../pool/ayumi-the-last-visitor.js";
 import _poolAzusasManyJourneys from "../pool/azusas-many-journeys.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
+import _poolBarbaraWright from "../pool/barbara-wright.js";
 import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
 import _poolBarrowgoyf from "../pool/barrowgoyf.js";
 import _poolBattlefrontKrushok from "../pool/battlefront-krushok.js";
@@ -982,6 +983,7 @@ const shard: CardShard = {
     _poolAyumiTheLastVisitor,
     _poolAzusasManyJourneys,
     _poolBakeIntoAPie,
+    _poolBarbaraWright,
     _poolBaronStruckerHydraOverlord,
     _poolBarrowgoyf,
     _poolBattlefrontKrushok,

@@ -222,6 +222,7 @@ import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
 import _poolDeprive from "../pool/deprive.js";
 import _poolDescendantOfMasumaro from "../pool/descendant-of-masumaro.js";
 import _poolDesertWarfare from "../pool/desert-warfare.js";
+import _poolDesertion from "../pool/desertion.js";
 import _poolDevelopment from "../pool/development.js";
 import _poolDiamondMare from "../pool/diamond-mare.js";
 import _poolDiaochanArtfulBeauty from "../pool/diaochan-artful-beauty.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolDeprive,
     _poolDescendantOfMasumaro,
     _poolDesertWarfare,
+    _poolDesertion,
     _poolDevelopment,
     _poolDiamondMare,
     _poolDiaochanArtfulBeauty,
