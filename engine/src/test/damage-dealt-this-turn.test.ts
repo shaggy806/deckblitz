@@ -15,15 +15,19 @@ import {
   C,
   activate,
   cast,
+  destroy,
   hand,
   lands,
   life,
+  nextTurn,
   pickTargets,
   ref,
   settle,
   spawn,
   table,
   toHand,
+  tokensNamed,
+  toStep,
   zone,
 } from "./harness.js";
 
@@ -167,6 +171,59 @@ describe("Blazing Effigy", () => {
     pickTargets(a, victim);
     burn(game, "Lightning Bolt", second);
     expect(game.state.objects[victim].damageMarked).toBe(3);
+  });
+});
+
+describe("Tangled Colony: a Rat for each damage dealt to it this turn", () => {
+  it("counts all of one hit, past lethal", () => {
+    const { game } = table();
+    lands(game, "Mountain", 1);
+    const colony = spawn(game, "Tangled Colony", B);
+    burn(game, "Lightning Bolt", colony);
+    expect(zone(game, colony)).toBe("graveyard");
+    expect(tokensNamed(game, "Rat Token (Can't Block)", B)).toBe(3);
+  });
+
+  it("adds up the turn's hits from every source, and none if it dies undamaged", () => {
+    const { game } = table();
+    lands(game, "Mountain", 2);
+    const colony = spawn(game, "Tangled Colony", B);
+    game.state.objects[colony].counters["+1/+1"] = 3; // 6/5
+    burn(game, "Shock", colony);
+    burn(game, "Lightning Bolt", colony);
+    expect(zone(game, colony)).toBe("graveyard");
+    expect(tokensNamed(game, "Rat Token (Can't Block)", B)).toBe(5);
+
+    const other = spawn(game, "Tangled Colony", A);
+    destroy(game, other);
+    expect(tokensNamed(game, "Rat Token (Can't Block)", A)).toBe(0);
+  });
+
+  it("an earlier turn's damage isn't this turn's", () => {
+    const { game } = table();
+    lands(game, "Mountain", 1);
+    const colony = spawn(game, "Tangled Colony", B);
+    game.state.objects[colony].counters["+1/+1"] = 2; // 5/4
+    burn(game, "Lightning Bolt", colony);
+    nextTurn(game);
+    nextTurn(game);
+    expect(zone(game, colony)).toBe("battlefield");
+    lands(game, "Mountain", 1);
+    game.state.objects[colony].counters["+1/+1"] = 0;
+    burn(game, "Shock", colony);
+    expect(zone(game, colony)).toBe("graveyard");
+    expect(tokensNamed(game, "Rat Token (Can't Block)", B)).toBe(2);
+  });
+
+  it("combat damage counts: blocked by a 6/6, six Rats", () => {
+    const { game, a, b } = table();
+    const colony = spawn(game, "Tangled Colony", A);
+    const maw = spawn(game, "Colossal Dreadmaw", B);
+    a.declareAttackersFn = () => [{ attacker: colony, defender: B }];
+    b.declareBlockersFn = () => [{ blocker: maw, attacker: colony }];
+    toStep(game, "postcombat-main");
+    expect(zone(game, colony)).toBe("graveyard");
+    expect(tokensNamed(game, "Rat Token (Can't Block)", A)).toBe(6);
   });
 });
 

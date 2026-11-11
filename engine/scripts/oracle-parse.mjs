@@ -3181,6 +3181,19 @@ export function parseSentence(sentence, ctx) {
   // The one exception: "for each … counter removed this way", which is the
   // cost's X (`removeCounter.count: "x"`), read by the mana templates below.
   let m;
+  // "Create X [tokens], where X is the amount of damage dealt to it this
+  // turn" (Tangled Colony's dies trigger): all the turn's damage to the
+  // source, in the stint it refers to. A quoted ability's closing comma
+  // ('… can't block," where X is') is the sentence's.
+  if ((m = /^create X (.+?) tokens( with .+?)?(,"|,) where X is the amount of damage dealt to (it|~|this creature) this turn\.$/i.exec(s))) {
+    if (m[4] === "it" && (ctx.it !== "source" || ctx.targets.length > 0)) return null;
+    // The token is the card's own of that name and P/T, whatever it's "with"
+    // (a quoted ability included, which the plain template leaves alone).
+    if (/ or | and an? /.test(m[1]) || /^X\/X /.test(m[1])) return null;
+    const token = ctx.tokenFor?.(m[1]) ?? null;
+    if (token === null) return null;
+    return { kind: "create-token", token, count: { damageDealtThisTurn: true, who: "each-player", to: "source" } };
+  }
   // "Amass Orcs X, where X is that excess damage" (Fall of Cair Andros): an
   // excess `dealt-damage` trigger's value is the excess.
   if ((m = sentenceRe(`amass ([A-Z][a-z]+) X, where X is that excess damage`).exec(s))) {

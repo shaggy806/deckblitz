@@ -17536,3 +17536,27 @@ describe("all commanders you own, from the command zone and the graveyard", () =
     });
   });
 });
+
+describe("tokens for the damage dealt to it this turn", () => {
+  const dies = (oracle_text: string): unknown =>
+    (
+      parseFace(
+        { name: "Thing", type_line: "Creature — Rat", oracle_text, power: "3", toughness: "2" } as never,
+        { tokenFor: (desc: string) => `<${desc}>` },
+      ) as unknown as { triggered: { effect: unknown }[] }
+    ).triggered[0]?.effect;
+  it("reads Tangled Colony, its token's quoted ability and all", () => {
+    expect(
+      dies('When this creature dies, create X 1/1 black Rat creature tokens with "This token can\'t block," where X is the amount of damage dealt to it this turn.'),
+    ).toEqual({
+      kind: "create-token",
+      token: "<1/1 black Rat creature>",
+      count: { damageDealtThisTurn: true, who: "each-player", to: "source" },
+    });
+  });
+  it("not another creature's damage", () => {
+    expect(
+      dies("Whenever another creature dies, create X 1/1 black Rat creature tokens, where X is the amount of damage dealt to it this turn."),
+    ).toBeNull();
+  });
+});
