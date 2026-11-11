@@ -207,8 +207,13 @@ export type PermissionDuration = Extract<
 export type DamageRuleDuration = Extract<Duration, "end-of-turn" | "until-your-next-turn" | "while-source">;
 
 /** How long a "whenever" watch lasts (`DelayedWhenever`): this turn when
- * omitted. */
-export type WatchDuration = Extract<
+ * omitted. `{ throughTurnOf }` is "until the end of **that player's** next
+ * turn" (Nuka-Nuke Launcher's defending player), read as it's set up. */
+export type WatchDuration = WatchExpiry | Extract<Duration, { readonly throughTurnOf: DurationPlayer }>;
+
+/** A {@link WatchDuration} as the game keeps it: `{ throughTurnOf }` is
+ * `"until-end-of-your-next-turn"` with the watch's `turnOf` that player. */
+export type WatchExpiry = Extract<
   Duration,
   | "end-of-turn"
   | "until-your-next-turn"

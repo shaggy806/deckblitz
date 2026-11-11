@@ -9618,7 +9618,11 @@ export class Game {
     this.state.delayedTriggers = this.state.delayedTriggers
       .filter((t) => !("whenever" in t.at && t.at.until === "until-your-next-turn" && beginningFor.includes(t.controller)))
       .map((t) =>
-        "whenever" in t.at && t.at.until === "until-end-of-your-next-turn" && beginningFor.includes(t.controller)
+        "whenever" in t.at &&
+        t.at.until === "until-end-of-your-next-turn" &&
+        // Its controller's, or the player's it names ("until the end of
+        // defending player's next turn" — Nuka-Nuke Launcher).
+        beginningFor.includes(t.at.turnOf ?? t.controller)
           ? { ...t, at: { ...t.at, inLastTurn: true as const } }
           : t,
       );
@@ -30629,9 +30633,12 @@ export class Game {
       }
       // "...deals combat damage to that player this turn" (Great Train
       // Heist): only damage dealt to the player it was set up for.
+      // "…whenever they cast a spell" (Nuka-Nuke Launcher): only a spell
+      // that player casts.
       if (
         at.player !== undefined &&
-        !(event.type === "damage-dealt" && event.target.kind === "player" && event.target.player === at.player)
+        !(event.type === "damage-dealt" && event.target.kind === "player" && event.target.player === at.player) &&
+        !(event.type === "spell-cast" && event.player === at.player)
       ) {
         continue;
       }
@@ -51823,6 +51830,7 @@ controlledBy,
         whenever: at.whenever,
         ...(at.targets !== undefined ? { targets: at.targets } : {}),
         until: at.until ?? "end-of-turn",
+        ...(at.turnOf !== undefined && at.turnOf !== controller ? { turnOf: at.turnOf } : {}),
         ...(at.player !== undefined ? { player: at.player } : {}),
         ...(watching !== undefined ? { watching } : {}),
         ...(at.once === true ? { once: true as const } : {}),

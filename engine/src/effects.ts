@@ -43,6 +43,7 @@ import type {
   PlayerDuration,
   PointDuration,
   WatchDuration,
+  WatchExpiry,
 } from "./duration.js";
 import { resolvePlayerDuration } from "./duration.js";
 import type { DelayedAt, DelayedStepWatch } from "./delayed-at.js";
@@ -490,6 +491,12 @@ export interface DelayedWhenever {
    * Heist): a target slot holding a player, fixed as this resolves; only
    * damage dealt to them fires it. */
   readonly toPlayer?: number;
+  /** "…**that player** gets two rad counters whenever **they** cast a spell"
+   * (Nuka-Nuke Launcher): the one player whose doing fires it, read as this
+   * resolves — with a `cast-spell` trigger, only a spell that player casts.
+   * The watch is still its controller's (rule 603.7e), who needn't be that
+   * player; with no such player nothing is set up. */
+  readonly byPlayer?: PlayerRef;
   /**
    * "Whenever **target creature** deals damage this turn" (Paladin of Prahv),
    * "whenever **either of those creatures** deals combat damage" (Tamiyo,
@@ -517,7 +524,10 @@ export interface DelayedWhenever {
 }
 
 /** A {@link DelayedWhenever} with what it names read as it's set up. */
-export type DelayedWheneverAt = Omit<DelayedWhenever, "watching" | "orLosesControl"> & {
+export type DelayedWheneverAt = Omit<DelayedWhenever, "watching" | "orLosesControl" | "byPlayer" | "until"> & {
+  readonly until?: WatchExpiry;
+  /** Whose next turn `until` waits for, when it isn't the controller's. */
+  readonly turnOf?: PlayerId;
   readonly player?: PlayerId;
   readonly watched?: readonly ObjectId[];
   readonly orLosesControlOf?: ObjectId;
@@ -17741,7 +17751,25 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           if (target?.kind !== "player") return;
           player = target.player;
         }
-        const { watching, orLosesControl, ...at } = spec.at;
+        // "Whenever they cast a spell": that player, as this resolves.
+        if (spec.at.byPlayer !== undefined) {
+          player = resolvePlayerRef(spec.at.byPlayer, ctx);
+          if (player === undefined) return;
+        }
+        const { watching, orLosesControl, byPlayer: _byPlayer, until: lasts, ...rest } = spec.at;
+        // "Until the end of that player's next turn": whose, as this resolves.
+        let turnOf: PlayerId | undefined;
+        if (typeof lasts === "object") {
+          turnOf = resolvePlayerRef(lasts.throughTurnOf, ctx);
+          if (turnOf === undefined) return;
+        }
+        const at = {
+          ...rest,
+          ...(lasts !== undefined
+            ? { until: typeof lasts === "object" ? ("until-end-of-your-next-turn" as const) : lasts }
+            : {}),
+          ...(turnOf !== undefined ? { turnOf } : {}),
+        };
         // "Target creature", "those creatures": the permanents `"self"` reads
         // as, fixed now. `delayTrigger` drops any no longer on the battlefield.
         let watched: readonly ObjectId[] | undefined;

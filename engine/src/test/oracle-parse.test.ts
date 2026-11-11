@@ -18541,3 +18541,27 @@ describe("read ahead given to Sagas", () => {
     expect(face.pairing).toEqual({ kind: "doctors-companion" });
   });
 });
+
+describe("a delayed whenever about the defending player", () => {
+  it("reads Nuka-Nuke Launcher's attack trigger", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Artifact — Equipment",
+      oracle_text:
+        "Equipped creature gets +3/+0 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever equipped creature attacks, until the end of defending player's next turn, that player gets two rad counters whenever they cast a spell.\nEquip {3}",
+    } as never) as unknown as { triggered: Record<string, unknown>[] };
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "attacks", who: "attached" },
+      targets: [],
+      effect: {
+        kind: "delayed-trigger",
+        at: {
+          whenever: { on: "cast-spell", who: "any" },
+          byPlayer: "trigger-player",
+          until: { throughTurnOf: "trigger-player" },
+        },
+        effect: { kind: "add-player-counters", counter: "rad", amount: 2, who: "trigger-controller" },
+      },
+    });
+  });
+});

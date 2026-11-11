@@ -9,7 +9,7 @@
  *   read.
  */
 
-import type { WatchDuration } from "./duration.js";
+import type { WatchExpiry } from "./duration.js";
 import type { PlayerId } from "./primitives.js";
 import type { PlayerRef } from "./refs.js";
 import type { Step } from "./turn.js";
@@ -99,7 +99,7 @@ export function isStepWatch(at: object | string): at is DelayedStepWatch {
 }
 
 /** Whether a "whenever" watch lives past the turn it was made in. */
-export function watchOutlastsItsTurn(until: WatchDuration): boolean {
+export function watchOutlastsItsTurn(until: WatchExpiry): boolean {
   return until !== "end-of-turn" && until !== "until-end-of-combat";
 }
 

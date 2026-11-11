@@ -38,7 +38,7 @@ import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, ManaProductionRule, ManaType, ManaUnit, SpendAs, SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { DelayedStepWatch } from "./delayed-at.js";
-import type { Expiry, UntilCast, UntilPoint, WatchDuration, WhileSource } from "./duration.js";
+import type { Expiry, UntilCast, UntilPoint, WatchExpiry, WhileSource } from "./duration.js";
 import type { RollRecord } from "./random-results.js";
 import type { ReplacementSpec } from "./replacements.js";
 import type { CardPlayPermission, CastNowTerms, EffectPlay } from "./play-permission.js";
@@ -4732,11 +4732,15 @@ export interface DelayedWheneverWatch {
   readonly targets?: readonly TargetSpec[];
   /** How long it lasts: `DelayedWhenever.until`, `"end-of-turn"` if that was
    * omitted. */
-  readonly until: WatchDuration;
+  readonly until: WatchExpiry;
+  /** Whose next turn `"until-end-of-your-next-turn"` means, when it isn't
+   * its controller's — `DelayedWhenever.until`'s `{ throughTurnOf }`. */
+  readonly turnOf?: PlayerId;
   /** `"until-end-of-your-next-turn"`: that turn has begun and is this one, so
    * the next turn to begin ends it. */
   readonly inLastTurn?: true;
-  /** Only damage dealt to this player — `DelayedWhenever.toPlayer`. */
+  /** Only damage dealt to this player — `DelayedWhenever.toPlayer` — or only
+   * what this player does (a spell they cast) — `DelayedWhenever.byPlayer`. */
   readonly player?: PlayerId;
   /** What `"self"` in `whenever` reads as, each in its stint on the
    * battlefield, instead of the object that set it up —

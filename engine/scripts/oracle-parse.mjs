@@ -3232,6 +3232,27 @@ export function parseSentence(sentence, ctx) {
   if (/^attach ~ to target creature an opponent controls\.$/i.test(s)) {
     return { kind: "attach", target: ctx.target("creature-an-opponent-controls") };
   }
+  // Nuka-Nuke Launcher: a delayed "whenever" about the defending player,
+  // through that player's next turn; the watch is still its controller's.
+  const radWatch =
+    /^until the end of defending player's next turn, that player gets (a|two|three|four) rad counters? whenever they cast a spell\.$/i.exec(s);
+  if (radWatch !== null) {
+    return {
+      kind: "delayed-trigger",
+      at: {
+        whenever: { on: "cast-spell", who: "any" },
+        byPlayer: "trigger-player",
+        until: { throughTurnOf: "trigger-player" },
+      },
+      effect: {
+        kind: "add-player-counters",
+        counter: "rad",
+        amount: radWatch[1].toLowerCase() === "a" ? 1 : NUMBERS[radWatch[1].toLowerCase()],
+        who: "trigger-controller",
+      },
+      text: `Whenever that player casts a spell, they get ${radWatch[1].toLowerCase()} rad counter${radWatch[1].toLowerCase() === "a" ? "" : "s"}.`,
+    };
+  }
   // Getaway Glamer: about the target as it resolves, a tie destroying it.
   if (/^destroy target creature if no other creature has greater power\.$/i.test(s)) {
     const target = ctx.target("creature");
