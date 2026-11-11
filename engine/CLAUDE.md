@@ -117,7 +117,8 @@ except `cards/pool.test.ts`. Each major mechanic has its own test file; read it 
 example. `vitest.config.ts` turns off `isolate` (one card-barrel import per worker), which is
 safe only while **no engine test mocks, spies, stubs a global or fakes timers**, and serves
 the barrel as one bundled module (`scripts/vitest-card-bundle.mjs`) — a card's definition must
-reach tests only through the barrel or a shard, never by importing its file directly. **A card's
+reach tests only through the barrel or a shard, never by importing its file directly. `table()` plays every game of a worker on one shared whole-pool registry, which refuses
+`register`: a test with a card of its own builds `table({ ownRegistry: true })`. **A card's
 test starts from `src/test/harness.ts`** (`table`, `spawn`/`enter`, `cast` that throws the
 engine's refusal, `pick*` answers, reads); vitest doesn't type-check tests, so `npm run typecheck -w engine`
 does (`typecheck:tests` alone; `npm run verify` and CI run it). **While
