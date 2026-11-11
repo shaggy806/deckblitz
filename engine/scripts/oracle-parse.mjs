@@ -9813,6 +9813,32 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // "Destroy up to X target artifacts. If X is 5 or more, for each artifact
+  // destroyed this way, create a token that's a copy of it. Those tokens gain
+  // haste. Exile them at the beginning of the next end step." (Red Sun's
+  // Twilight): a copy of each `{ thisWay: "destroyed" }` as it last existed.
+  const destroysThenCopies =
+    /^Destroy up to X target (artifact|creature)s\. If X is (\d+) or more, for each (artifact|creature) destroyed this way, create a token that's a copy of it\. Those tokens gain haste\. Exile them at the beginning of the next end step\.$/.exec(
+      text,
+    );
+  if (destroysThenCopies !== null && destroysThenCopies[1] === destroysThenCopies[3]) {
+    ctx.target({ kind: "any-number", of: destroysThenCopies[1], max: "x" });
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "destroy", target: 0 } },
+          {
+            kind: "conditional",
+            condition: { kind: "x", compare: { op: "gte", n: Number(destroysThenCopies[2]) } },
+            then: { kind: "create-token-copy", of: { thisWay: "destroyed" }, count: 1, who: "you", gains: { keywords: ["haste"] }, exileAtEndStep: true },
+          },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   // "You may cast up to one target instant card and/or up to one target
   // sorcery card from your graveyard each with mana value X or less without
   // paying their mana costs. … If X is 10 or more, copy each of those spells

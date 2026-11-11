@@ -114,10 +114,16 @@ export function isObjectSetRef(value: unknown): value is ObjectSetRef {
 }
 
 /** Whether a set's members are cards rather than permanents: everything but
- * a trigger's batch, what's attached to the source and a target group —
- * what a `create-token-copy` copies as the card it is. */
+ * a trigger's batch, what's attached to the source, a target group and the
+ * permanents this resolution destroyed or had sacrificed ("each artifact
+ * destroyed this way") — what a `create-token-copy` copies as the card it
+ * is. A permanent set's member that has left is copied as it last existed
+ * (rule 608.2h). */
 export function isCardSet(ref: ObjectSetRef): boolean {
-  return ref !== "trigger-batch" && !(typeof ref === "object" && ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref));
+  if (ref === "trigger-batch") return false;
+  if (typeof ref !== "object") return true;
+  if ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref) return false;
+  return !("thisWay" in ref && (ref.thisWay === "destroyed" || ref.thisWay === "died" || ref.thisWay === "sacrificed"));
 }
 
 /** `sets` with `members` appended to one of its sets — the one writer, so a

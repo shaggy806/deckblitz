@@ -39663,7 +39663,10 @@ controlledBy,
       // "a copy of that creature" of one that died — copies it as it last
       // existed there (rule 608.2h): its source, triggering object or a
       // target, by stint.
-      createTokenCopy: (of, count, { linkedToSource, ...opts }) =>
+      // A set member that left in the act carries what it last was (`was`:
+      // "each artifact destroyed this way" — a token that has ceased to exist
+      // included).
+      createTokenCopy: (of, count, { linkedToSource, was, ...opts }) =>
         this.createTokenCopy(
           of,
           count,
@@ -39675,9 +39678,11 @@ controlledBy,
           },
           opts.asCard === true
             ? undefined
-            : of === source
-              ? departedSource()
-              : lastKnownOf({ kind: "object", object: of }),
+            : was !== undefined
+              ? was
+              : of === source
+                ? departedSource()
+                : lastKnownOf({ kind: "object", object: of }),
         ),
       conditionMet,
       unattach: (target) => {

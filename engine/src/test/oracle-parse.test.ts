@@ -83,6 +83,31 @@ describe("copy each of the spells cast this way", () => {
   });
 });
 
+describe("a token copy of each permanent destroyed this way", () => {
+  it("Red Sun's Twilight: destroy the targets, then at X of 5 or more a copy of each destroyed", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{X}{R}{R}",
+      oracle_text:
+        "Destroy up to X target artifacts. If X is 5 or more, for each artifact destroyed this way, create a token that's a copy of it. Those tokens gain haste. Exile them at the beginning of the next end step.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.targets).toEqual([{ kind: "any-number", of: "artifact", max: "x" }]);
+    expect(parsed.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "destroy", target: 0 } },
+        {
+          kind: "conditional",
+          condition: { kind: "x", compare: { op: "gte", n: 5 } },
+          then: { kind: "create-token-copy", of: { thisWay: "destroyed" }, count: 1, who: "you", gains: { keywords: ["haste"] }, exileAtEndStep: true },
+        },
+      ],
+    });
+  });
+});
+
 describe("what an ability goes on to say about its token", () => {
   it("Feldon of the Third Path's copy of a graveyard card", () => {
     const parsed = parseFace({

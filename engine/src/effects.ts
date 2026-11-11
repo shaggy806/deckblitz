@@ -55,6 +55,7 @@ import type {
   AwaitingDecision,
   EnterAttachHost,
   FaceDownAs,
+  LastKnownInfo,
   LeaveDestination,
   HeldPlayerCounter,
   PlayerCounterKind,
@@ -8160,7 +8161,14 @@ export type EffectSpec =
        * ability's cost — Dollhouse of Horrors, Osgir's "two tokens that are
        * copies of the exiled card". `{ thisWay: "exiled" }` is each card this
        * resolution has exiled so far — Foggy Swamp Visions. Any other card
-       * set (`ObjectSetRef`) copies its members the same way.
+       * set (`ObjectSetRef`) copies its members the same way. Not the
+       * permanents this resolution destroyed or had sacrificed
+       * (`{ thisWay: "destroyed" | "died" | "sacrificed" }`): "for each
+       * artifact destroyed this way, create a token that's a copy of it"
+       * (Red Sun's Twilight) copies each as it last existed on the
+       * battlefield (rule 608.2h) — a token's or a copy's copiable values,
+       * not the card in the graveyard — under its last controller unless
+       * `who` says otherwise.
        * `{ eachExiled }` is each face-up card in exile matching the filter,
        * from this effect's controller's side — Altaïr Ibn-La'Ahad. */
       readonly of:
@@ -12468,6 +12476,9 @@ export interface EffectApi {
     of: ObjectId,
     count: number,
     opts: {
+      /** `of` as it last existed, where the effect knows it (a set member
+       * that left in the act: "each artifact destroyed this way"). */
+      readonly was?: LastKnownInfo;
       /** Controller for the new token; defaults to the copied permanent's. */
       readonly under?: PlayerId;
       /** "The tokens are goaded for the rest of the game", by this player. */
@@ -19503,8 +19514,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const handedTo = spec.who === undefined || spec.who === "you" ? undefined : spec.who;
       const named = handedTo === undefined ? undefined : resolvePlayerRef(handedTo, ctx);
       if (handedTo !== undefined && named === undefined) return;
-      const copy = (of: ObjectId, count: number): void =>
+      const copy = (of: ObjectId, count: number, was?: LastKnownInfo): void =>
         ctx.createTokenCopy(of, count, {
+          ...(was !== undefined ? { was } : {}),
           ...(spec.goadedForGame === true ? { goadedForGameBy: ctx.controller } : {}),
           gainsHaste: spec.gainsHaste ?? false,
           sacrificeAtEndStep: spec.sacrificeAtEndStep ?? false,
@@ -19533,7 +19545,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (ofSet !== undefined && permanentSet) {
         const members = ctx.objectSet(ofSet);
         ctx.oneTokenEvent(() => {
-          for (const member of members) copy(member.object, specCount * memberCount(member));
+          // A member that left in the act (destroyed or sacrificed this way)
+          // is copied as it last existed on the battlefield (rule 608.2h).
+          for (const member of members) copy(member.object, specCount * memberCount(member), member.was);
         });
         return;
       }
