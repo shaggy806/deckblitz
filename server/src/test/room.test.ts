@@ -1045,5 +1045,22 @@ describe("Room: passing preferences and stops", () => {
       expect(room.game.state.priority.holder).toBe(other);
       expect(room.game.state.zones.shared.stack.length).toBe(1);
     });
+
+    it("keeps the combat windows of a player who is being attacked", () => {
+      const { room, active, activeConn, other, otherConn } = landscapeTable();
+      room.setPassSettings(otherConn, SKIP_MANA);
+      room.setPassSettings(activeConn, { ...NONE });
+      const bears = room.game.debugSpawn("Grizzly Bears", active, "battlefield", { summoningSick: false });
+      // The active player passes up to their attack, and attacks.
+      for (let i = 0; i < 6 && room.game.state.awaiting?.kind !== "attackers"; i += 1) {
+        room.dispatch(activeConn, { type: "pass-priority", player: active });
+      }
+      expect(room.game.state.awaiting?.kind).toBe("attackers");
+      room.dispatch(activeConn, { type: "declare-attackers", player: active, attackers: [{ attacker: bears, defender: other }] });
+      room.dispatch(activeConn, { type: "pass-priority", player: active });
+      // No spell is on the stack, but the attack is aimed at them: the window
+      // in the declare-attackers step is theirs, the Landscape's ability in it.
+      expect(at(room)).toEqual({ holder: other, step: "declare-attackers", active });
+    });
   });
 });

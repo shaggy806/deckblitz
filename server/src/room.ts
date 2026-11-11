@@ -1031,6 +1031,16 @@ export class Room {
     return this.interruptSince(seat, state, from);
   }
 
+  /** Whether an attacking creature is aimed at `player`, or at a
+   * planeswalker or battle they control (rule 506.2's defending player). */
+  private isBeingAttacked(state: GameState, player: PlayerId): boolean {
+    return state.zones.shared.battlefield.some((id) => {
+      const defender = state.objects[id]?.attacking ?? null;
+      if (defender === null) return false;
+      return defender === player || state.objects[defender as ObjectId]?.controller === player;
+    });
+  }
+
   /**
    * Why a seat's standing fast-forward should stop, or `null` to carry on.
    *
@@ -1376,6 +1386,9 @@ export class Room {
       seat.pass.skipAbilityOnly !== false &&
       s.zones.shared.stack.length === 0 &&
       !ownMain &&
+      // Being attacked is no spell on the stack, but it is the moment such an
+      // ability is for (the user, 2026-11-11): those combat windows are kept.
+      !this.isBeingAttacked(s, holder) &&
       this.game.isDeadButForAbilities(holder) &&
       // A window with nothing but mana abilities is `skipManaOnly`'s to pass
       // or keep (a player holding priority with mana up, to bluff).
