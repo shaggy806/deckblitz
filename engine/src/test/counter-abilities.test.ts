@@ -23,6 +23,7 @@ import {
   lands,
   life,
   named,
+  pickModes,
   pickTargets,
   ref,
   settle,
@@ -351,6 +352,21 @@ describe("Verdant Command: a loyalty ability of a planeswalker (rule 606.2)", ()
     expect(counters(game, jace, "loyalty")).toBe(before + 2);
     expect(life(game, B)).toBe(23);
     expect(zone(game, command)).toBe("graveyard");
+  });
+
+  it("takes a copy of a loyalty ability: a copy is what it copies (rule 707.10)", () => {
+    const { game, a } = table();
+    spawn(game, "Rings of Brighthearth");
+    const jace = spawn(game, "Jace Beleren");
+    lands(game, "Wastes", 2);
+    pickModes(a, 0);
+    activate(game, jace, 0, { settle: false });
+    const copyOf = (): ObjectId | undefined =>
+      game.state.zones.shared.stack.find((id) => game.state.objects[id].isCopy === true);
+    game.advanceUntil(() => copyOf() !== undefined);
+    const copy = copyOf()!;
+    expect(game.state.objects[copy].kind).toBe("ability");
+    expect(canTarget(game, copy, LOYALTY, B)).toBe(true);
   });
 
   it("takes no other activated ability, and no triggered one", () => {
