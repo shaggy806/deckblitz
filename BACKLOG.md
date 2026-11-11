@@ -249,7 +249,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 - **Stack entries shift sideways the wrong way** (the user, 2026-11-11) — with several triggers going on the stack at once from a land entering, some entries sat horizontally shifted the wrong way; not reproduced yet (`docs/client-gaps.md`).
 - **Too many priority stops with a land like Bountiful Landscape** (a design call) — a non-mana ability on the battlefield stopped the game about 40 times in one four-player round, and Auto-pass pauses on each opposing spell.
-- **Blitz is the last thing on the landing page** — the site's main feature sits under the navigation, in the same yellow as "Create a game", with its paste form's button just below the fold at 768px.
 - **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
 - **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
 - **A hand card's Cycle, Foretell and Plot buttons are small** — plain buttons under the card, easy to miss beside it (they aren't a popup: nothing for Escape to close).

@@ -287,6 +287,15 @@
   background: var(--gold);
   border-color: var(--gold);
 }
+/* "Create a game", under the Blitz button: the same control, outlined, so
+   the page has one filled button and it's the one above. */
+.landing-cta.quiet {
+  color: var(--accent);
+  background: none;
+}
+.landing-cta.quiet:hover:not(:disabled) {
+  color: var(--on-accent);
+}
 
 .landing-join-form {
   display: flex;

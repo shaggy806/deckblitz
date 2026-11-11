@@ -212,10 +212,16 @@ export function LandingScreen({
         </p>
       ) : null}
 
+      {/* Blitz first: it's what the site is named for, and the one button a
+          first visit needs (the user's call, 2026-11-11; it was the last
+          thing on the page, under the navigation). A room with friends is
+          the quieter pair below it. */}
+      <BlitzPanel game={game} />
+
       <div className="landing-actions">
         <section className="landing-card">
           <h2>Start a game</h2>
-          <button type="button" className="landing-cta" data-tour="landing-create" onClick={() => game.createRoom()}>
+          <button type="button" className="landing-cta quiet" data-tour="landing-create" onClick={() => game.createRoom()}>
             Create a game
           </button>
         </section>
@@ -287,8 +293,6 @@ export function LandingScreen({
           </button>
         ) : null}
       </nav>
-
-      <BlitzPanel game={game} />
 
       {/* The Fan Content Policy notice under everything, and the hero art's
           credit (an art crop, which Scryfall asks to be credited where it's
