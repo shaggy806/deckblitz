@@ -258,7 +258,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **A hand card's Cycle, Foretell and Plot buttons are small** — plain buttons under the card, easy to miss beside it (they aren't a popup: nothing for Escape to close).
 - **The deck builder's hover preview can cover the search box and filters** — the last of its rough edges.
 - **The game's top bar and labels stay small at 2560×1440** — judged by eye; measure before changing.
-- **A spell's shown cost leaves out a target's tax** — Boreal Elemental's {2} more isn't in the cost drawn on the card or the X prompt's line (targets you can't afford are no longer offered, 2026-11-11).
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **Quality-of-life room options (house rules)**, opt-in per room.

@@ -40,9 +40,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   its rough edges; the rest landed 2026-11-11.
 - **The game's top bar and labels stay small at 2560×1440** (found 2026-11-02). Judged by eye from a
   screenshot, on the user's own monitor size; measure before changing.
-- **A spell's shown cost leaves out a target's tax** (found 2026-11-01). The cost drawn on the card and the X
-  prompt's line don't add a `targetedBySpellsCost` tax (Boreal Elemental, Kopala). Targets the tax prices out of
-  reach are no longer offered (`payableOptions`, 2026-11-11), so this is display only.
 
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or

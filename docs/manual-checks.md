@@ -7987,6 +7987,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** With one Mountain, cast Shock and click Bob's Boreal Elemental, then Grizzly Bears.
 - **Expect:** The click on Boreal Elemental does nothing (Shock would cost {2} more, and there's one land): no error toast. Grizzly Bears is taken and Shock kills it.
 
+### Boreal Elemental: the target prompt names its tax
+- **Do:** With three Mountains, cast Shock and read the prompt, then click Bob's Boreal Elemental.
+- **Expect:** The prompt reads "Cast Shock: choose any target (1/1) · Boreal Elemental costs {2} more". Taking it taps all three Mountains and deals 2 damage to the Elemental.
+
 ### Spellwild Ouphe: at an X only its discount affords, only it can be targeted
 - **Do:** With two Mountains, cast Blaze and confirm X at 3 (the most offered). Click Bob's Grizzly Bears, then your Spellwild Ouphe.
 - **Expect:** The click on Grizzly Bears does nothing: X=3 is payable only with the Ouphe's {2} less. The Ouphe is taken and Blaze deals 3 damage to it.

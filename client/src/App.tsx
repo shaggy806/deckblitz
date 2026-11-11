@@ -700,6 +700,17 @@ function modePlayerIndex(
   return i >= 0 ? i : null
 }
 
+/** "Boreal Elemental costs {2} more" for each taxed object the slot being
+ * filled offers, so the player sees the price before clicking it. */
+function targetTaxNotes(t: Targeting, nameOf: (id: ObjectId) => string): readonly string[] {
+  const taxes = t.targetTaxes?.taxes
+  if (taxes === undefined || taxes.length === 0) return []
+  const offered = currentSlotOptions(t)
+  return taxes
+    .filter((tax) => tax.generic > 0 && offered.some((ref) => ref.kind === 'object' && ref.object === tax.object))
+    .map((tax) => `${nameOf(tax.object)} costs {${tax.generic}} more`)
+}
+
 /** `options` less the targets that would price the spell out of reach: a
  * taxed one past what's left to pay, or, at the X already chosen, one that
  * leaves that X unpayable. The engine refuses those casts; never offering
@@ -6088,6 +6099,15 @@ function Table({
           {grouped
             ? `— ${groupPicked} chosen`
             : `(${activeTargeting.picked.length + 1}/${activeTargeting.specs.length})`}
+          {/* What a target on offer adds to the cost (Boreal Elemental's
+              "costs {2} more to cast"): the card's own cost can't say it,
+              since it's the target that's taxed. */}
+          {targetTaxNotes(activeTargeting, game.nameOf).map((note) => (
+            <span key={note} className="target-tax-note">
+              {' · '}
+              <Symbols text={note} />
+            </span>
+          ))}
         </span>
         {zoneTargetIds.length > 0 && zoneTargetCollapsed ? (
           <button type="button" onClick={() => setZoneTargetHidden(null)}>

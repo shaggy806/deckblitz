@@ -12038,6 +12038,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Boreal Elemental: the target prompt names its tax',
+    board({ you: { bf: ['Mountain*3'], hand: ['Shock'] }, opp: { bf: ['Boreal Elemental'] } }),
+  ),
+  preset(
     'Cultivate: the prompt says which find goes where',
     board({ you: { bf: ['Forest*3'], hand: ['Cultivate'], lib: ['Island', 'Swamp', 'Grizzly Bears'] } }),
   ),
