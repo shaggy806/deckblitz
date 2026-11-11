@@ -5,6 +5,7 @@
     "effect:token-copy-each-destroyed-this-way",
     "cost:ability-cost-reduction-by-target-stats",
     "trigger:becomes-target-spell-on-stack",
+    "effect:opponent-chooses-among-exiled-shuffle-in",
     "effect:may-pay-mana-and-sacrifice",
     "cost:exile-face-down-permanent-face-up",
     "static:all-colors-cda",

@@ -18330,6 +18330,45 @@ describe("exiling a face-down permanent to play its card", () => {
   });
 });
 
+describe("an opponent shuffles one of the exiled finds back", () => {
+  it("reads Emergent Ultimatum whole", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      oracle_text:
+        "Search your library for up to three monocolored cards with different names and exile them. An opponent chooses one of those cards. Shuffle that card into your library. You may cast the other cards without paying their mana costs. Exile Test Card.",
+    } as never) as unknown as { effect: unknown; exileOnResolve?: boolean; todo: string[] };
+    expect(face.todo).toEqual([]);
+    expect(face.exileOnResolve).toBe(true);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "search-library",
+          filter: { multicolored: false, colorless: false },
+          destination: "exile",
+          min: 0,
+          max: 3,
+          together: { distinctNames: true },
+          shufflesLater: true,
+        },
+        {
+          kind: "look-and-choose",
+          zone: "exiled-this-way",
+          chooser: "an-opponent",
+          min: 1,
+          max: 1,
+          destination: "library-top",
+          leftover: "stay",
+          prompt: "Choose a card to shuffle into its owner's library",
+        },
+        { kind: "shuffle-library", searchers: true },
+        { kind: "cast-now", from: "exiled-this-way", repeat: true, free: true },
+      ],
+    });
+  });
+});
+
 describe("a token copy that enters with counters", () => {
   it("reads Littjara Mirrorlake's last ability", () => {
     const face = parseFace({

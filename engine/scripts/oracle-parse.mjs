@@ -10507,6 +10507,7 @@ export function parseEffect(text, outer) {
       mayOnceEachTurnAt(sentences, i, ctx) ??
       revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
+      opponentShufflesOneExiledFindAt(sentences, i) ??
       opponentPicksRestExiledWithCounterAt(sentences, i) ??
       distinctSetAt(sentences, i) ??
       counterIntoAt(sentences, i, ctx) ??
@@ -12981,6 +12982,58 @@ function opponentPicksRestExiledWithCounterAt(sentences, i) {
       },
     },
     used: 3,
+  };
+}
+
+/** "Search your library for up to three monocolored cards with different names
+ * and exile them. An opponent chooses one of those cards. Shuffle that card
+ * into your library. You may cast the other cards without paying their mana
+ * costs." (Emergent Ultimatum): the finds are exiled, the search leaving its
+ * shuffle for later; an opponent picks one from exile, which goes back with
+ * that one shuffle (rule 701.24d); the others may be cast now. */
+function opponentShufflesOneExiledFindAt(sentences, i) {
+  const search = /^search your library for (up to )?(\w+) (?:(.+?) )?cards?( with different names)? and exile them\.$/i.exec(sentences[i]);
+  if (search === null) return null;
+  if (!/^an opponent chooses one of those cards\.$/i.test(sentences[i + 1] ?? "")) return null;
+  if (!/^shuffle that card into your library\.$/i.test(sentences[i + 2] ?? "")) return null;
+  if (!/^you may cast the other cards without paying their mana costs\.$/i.test(sentences[i + 3] ?? "")) return null;
+  const count = numberOf(search[2]);
+  if (typeof count !== "number") return null;
+  const filter =
+    search[3] === undefined
+      ? {}
+      : /^monocolored$/i.test(search[3])
+        ? { multicolored: false, colorless: false }
+        : parseTypePhrase(search[3], { cards: true });
+  if (filter === null) return null;
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "search-library",
+          filter,
+          destination: "exile",
+          min: search[1] === undefined ? count : 0,
+          max: count,
+          ...(search[4] === undefined ? {} : { together: { distinctNames: true } }),
+          shufflesLater: true,
+        },
+        {
+          kind: "look-and-choose",
+          zone: "exiled-this-way",
+          chooser: "an-opponent",
+          min: 1,
+          max: 1,
+          destination: "library-top",
+          leftover: "stay",
+          prompt: "Choose a card to shuffle into its owner's library",
+        },
+        { kind: "shuffle-library", searchers: true },
+        { kind: "cast-now", from: "exiled-this-way", repeat: true, free: true },
+      ],
+    },
+    used: 4,
   };
 }
 
