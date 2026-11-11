@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { listDecks, playableSideboard } from './decks.ts'
+import { listDecks, playableSideboard, unusedDeckName } from './decks.ts'
 
 const DECKS_KEY = 'mtg-engine:decks'
 
@@ -75,6 +75,14 @@ describe('saved-deck migrations', () => {
     const before = storage.writes
     expect(listDecks()).toEqual([{ id: 'a', name: 'New', commanders: [], cards: ['Forest'] }])
     expect(storage.writes).toBe(before)
+  })
+})
+
+describe('unusedDeckName', () => {
+  it('keeps a free name, and numbers one that is taken', () => {
+    expect(unusedDeckName('Atraxa', [])).toBe('Atraxa')
+    expect(unusedDeckName('Atraxa', ['Atraxa'])).toBe('Atraxa (2)')
+    expect(unusedDeckName('Atraxa', ['Atraxa', 'Atraxa (2)'])).toBe('Atraxa (3)')
   })
 })
 

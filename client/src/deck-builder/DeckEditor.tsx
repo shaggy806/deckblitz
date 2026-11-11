@@ -199,6 +199,17 @@ export function DeckEditor({
   }, [deck.commanders])
   const identityFilter = inIdentityOnly ? commanderIdentity : null
 
+  /** How many cards the type and identity filters leave, whatever is typed. */
+  const inFilters = useMemo(
+    () =>
+      buildableCards().filter(
+        (c) =>
+          (!typeFilter || c.types.includes(typeFilter as CardDefinition['types'][number])) &&
+          (identityFilter === null || withinIdentity(identityOf(c), identityFilter)),
+      ).length,
+    [typeFilter, identityFilter],
+  )
+
   const filtered = useMemo(() => {
     // Every word, in any order, as the library's search reads it.
     const terms = searchTerms(query)
@@ -419,6 +430,10 @@ export function DeckEditor({
         ) : (
           <input
             className="db-name-input"
+            // As wide as its name, so a long one ("Imported: Atraxa,
+            // Praetors' Voice") isn't cut off at an input's default width.
+            size={Math.max(12, name.length + 1)}
+            title={name}
             value={name}
             onChange={(e) => setName(e.target.value)}
             onBlur={() => {
@@ -479,7 +494,7 @@ export function DeckEditor({
         <div className="db-legality-line">
           <strong>
             {!legality.legal
-              ? `✗ ${legality.violations.length} issue(s)`
+              ? `✗ ${legality.violations.length} ${legality.violations.length === 1 ? 'issue' : 'issues'}`
               : legality.banned.length > 0
                 ? `✓ Playable — ${legality.banned.length} banned in Commander`
                 : '✓ Commander-legal'}
@@ -550,7 +565,10 @@ export function DeckEditor({
           <div className="db-search-row">
             <input
               className="db-search"
-              placeholder={`Search ${buildableCards().length} cards…`}
+              // The cards the filters leave, which is what a search looks
+              // through: the pool's whole size beside a filtered count read
+              // as two different totals.
+              placeholder={`Search ${query.trim() === '' ? filtered.length : inFilters} cards…`}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />

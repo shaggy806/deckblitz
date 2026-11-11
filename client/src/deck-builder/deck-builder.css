@@ -143,6 +143,9 @@
   border-radius: 0;
   padding: 2px 6px;
   color: var(--text);
+  /* Sized to its text (the `size` attribute), never past the head's width. */
+  min-width: 0;
+  max-width: 100%;
 }
 .db-name-input:hover,
 .db-name-input:focus {

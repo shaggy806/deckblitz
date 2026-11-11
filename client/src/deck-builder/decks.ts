@@ -166,6 +166,15 @@ export function createDeck(name: string): SavedDeck {
   return deck
 }
 
+/** `name`, or `name (2)`, `name (3)`… — the first that no deck in `taken` has. */
+export function unusedDeckName(name: string, taken: readonly string[]): string {
+  if (!taken.includes(name)) return name
+  for (let n = 2; ; n += 1) {
+    const candidate = `${name} (${n})`
+    if (!taken.includes(candidate)) return candidate
+  }
+}
+
 /** Same as `createDeck`, but pre-populated — for the deck builder's decklist
  * import flow, once it's resolved a final card list (implemented cards
  * as-is, an already-implemented stand-in for anything the engine doesn't
@@ -179,7 +188,8 @@ export function createDeckFromImport(
 ): SavedDeck {
   const deck: SavedDeck = {
     id: newId(),
-    name,
+    // The same list imported twice is two decks nothing told apart.
+    name: unusedDeckName(name, readDecks().map((d) => d.name)),
     cards,
     commanders,
     ...(sideboard.length > 0 ? { sideboard } : {}),
