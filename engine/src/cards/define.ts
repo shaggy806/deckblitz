@@ -2926,6 +2926,14 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * layer system. `"each-player"` is Folio of Fancies' "players have no maximum
    * hand size". */
   readonly noMaxHandSize?: boolean | "each-player";
+  /** "You may look at an additional two cards each time you surveil"
+   * (Enhanced Surveillance: `2`): its controller's surveils of one or more
+   * look at that many more cards, which are among those that may go to the
+   * graveyard or stay on top in any order (rule 701.25b). Not a replacement
+   * effect, and a surveil of 0 isn't one to enlarge (701.25c). Several add
+   * up. Always taken — every card looked at may stay where it was. Read in
+   * `Game.beginScry`. */
+  readonly surveilAdditional?: number;
   /** "If a creature you control would connive, instead you draw a card,
    * then that creature connives" (Leader, Super-Genius): a replacement
    * (rule 614.1a) its controller applies once per such ability (614.5 — each

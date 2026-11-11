@@ -2236,7 +2236,8 @@
   "mechanic:planar-die",
   "cost:blight-x-additional-cost",
   "cost:blight-x-additional-cost",
-  "effect:search-split-count"
+  "effect:search-split-count",
+  "static:surveil-additional-cards"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

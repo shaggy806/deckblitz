@@ -20306,6 +20306,11 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } } }], text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // "You may look at an additional two cards each time you surveil."
+  // (Enhanced Surveillance, rule 701.25b).
+  if ((m = /^You may look at an additional (\w+) cards? each time you surveil\.$/.exec(line)) && NUMBERS[m[1]] !== undefined) {
+    return { affects: { scope: "self" }, surveilAdditional: NUMBERS[m[1]], text };
+  }
   // "This Equipment can be attached only to a creature with power 3 or
   // greater" (O-Naginata, Gate Smasher — rule 301.5c).
   if ((m = /^~ can be attached only to a creature with (power|toughness) (\d+) or (greater|less)\.$/.exec(line))) {

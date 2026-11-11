@@ -40959,6 +40959,22 @@ controlledBy,
         }
       }
     }
+    // "You may look at an additional two cards each time you surveil"
+    // (Enhanced Surveillance): the extra cards are among those that may go
+    // to the graveyard or stay on top in any order (rule 701.25b). Each such
+    // static adds its own; a surveil of 0 is no surveil (701.25c). Always
+    // taken: every card looked at may stay where it was, so declining gives
+    // the player nothing.
+    if (mode === "surveil" && amount > 0) {
+      for (const id of this.staticSourceIds()) {
+        const by = this.state.objects[id];
+        if (by === undefined || by.controller !== player || hasLostAbilities(this.state, this.registry, by)) continue;
+        for (const ability of this.staticsOfSource(by)) {
+          if (ability.surveilAdditional === undefined || !this.staticActive(by, ability)) continue;
+          amount += ability.surveilAdditional;
+        }
+      }
+    }
     const cards = this.state.zones.perPlayer[player].library.slice(0, amount);
     if (cards.length === 0) {
       // Nothing to look at — skip straight to the follow-up effect. A scry

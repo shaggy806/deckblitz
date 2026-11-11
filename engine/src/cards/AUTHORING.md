@@ -4914,6 +4914,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   minus: { cardTypesInGraveyard: { ownedBy: "you" } } }` (a `CountSpec`)
   behind its delirium `condition`; `adjust` adds to it. Never below 0.
 - `noMaxHandSize: true` — "You have no maximum hand size" (Thought Vessel).
+- `surveilAdditional: N` — "You may look at an additional two cards each time
+  you surveil" (Enhanced Surveillance: `2`): its controller's surveils of one
+  or more look at N more cards, each of which may go to the graveyard or stay
+  on top in any order (rule 701.25b). Not a replacement; a surveil of 0 isn't
+  one (701.25c); several add up. The "may" is always taken — every card
+  looked at may stay where it was. `surveil-additional.test.ts`.
 - `keepsUnspentMana: ["R"]` — "You don't lose unspent red mana as steps and
   phases end" (Leyline Tyrant): mana of those types stays in its
   controller's pool through every step, cleanup included, so into later turns

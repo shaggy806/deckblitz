@@ -553,6 +553,24 @@ describe("when a spell may be cast or an ability activated", () => {
     };
   const staticOf = (text: string): Record<string, unknown> | undefined => face("Artifact", text).static?.[0];
 
+  it("reads Enhanced Surveillance whole: more cards looked at each surveil, and its exile-to-shuffle", () => {
+    const card = face(
+      "Enchantment",
+      "You may look at an additional two cards each time you surveil.\nExile this enchantment: Shuffle your graveyard into your library.",
+    );
+    expect(card.static).toEqual([
+      {
+        affects: { scope: "self" },
+        surveilAdditional: 2,
+        text: "You may look at an additional two cards each time you surveil.",
+      },
+    ]);
+    expect(card.activated?.[0]).toMatchObject({
+      cost: { tap: false, do: { kind: "exile", target: "source" } },
+      effect: { kind: "shuffle-graveyard-into-library", target: "you" },
+    });
+  });
+
   it("reads flash for an extra cost, and a condition on being countered", () => {
     expect(face("Sorcery", "You may cast this spell as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)").kicker).toEqual({
       cost: "{2}",
