@@ -4119,7 +4119,11 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   random — the rulings). Gates activation on there being N. Not on a mana
   ability, nor beside another cost that asks. A spell's "as an additional
   cost" is `additionalCost.putFromExile` (Processor Assault).
-  `put-exiled-into-graveyard.test.ts`.
+  `put-exiled-into-graveyard.test.ts`. An ability's also takes `{ count,
+  linked: true, filter? }`: the cards **exiled with this permanent** in its
+  current stint (rule 607.2a), whoever owns them — Shelob, Dread Weaver's
+  "Put a creature card exiled with Shelob into its owner's graveyard"
+  (`put-linked-exiled-cost.test.ts`).
 - `tapOthers: { count, filter, includeSelf?, shareCreatureType? }` — tap *other*
   permanents you control (Gravespawn Sovereign's "Tap five untapped Zombies you
   control"), as opposed to `tap`, which taps the source. `includeSelf` lets the

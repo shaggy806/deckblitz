@@ -2241,7 +2241,8 @@
   "cost:x-cant-be-zero",
   "cost:x-cant-be-zero",
   "effect:target-spell-cant-be-countered",
-  "keyword:hexproof-from-own-colors"
+  "keyword:hexproof-from-own-colors",
+  "cost:cost-move-linked-exiled-card"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

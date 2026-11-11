@@ -32,6 +32,7 @@ import {
 } from "./abilities.js";
 import type {
   AbilityCost,
+  PutFromExileCost,
   ActivatedAbility,
   CraftMaterials,
   DefenderLife,
@@ -24257,8 +24258,11 @@ export class Game {
         return `${def.name}'s ability can't put cards from exile into a graveyard beside that cost`;
       }
       // Rule 118.3: not enough such cards, no paying it.
-      if (this.putFromExileCandidateCount(player, sourceId) < ability.cost.putFromExile) {
-        return `${player}'s opponents own too few cards in exile to pay ${def.name}'s cost`;
+      const putCost = ability.cost.putFromExile;
+      if (this.putFromExileCandidateCount(player, sourceId, putCost) < (typeof putCost === "number" ? putCost : putCost.count)) {
+        return typeof putCost === "number"
+          ? `${player}'s opponents own too few cards in exile to pay ${def.name}'s cost`
+          : `Too few such cards are exiled with ${def.name} to pay its cost`;
       }
     }
     return null;
@@ -25649,9 +25653,11 @@ export class Game {
    * cards of different opponents allowed, and gets priority back once it's
    * paid (117.3c). No more such cards than that is no choice.
    */
-  private payPutFromExileCost(player: PlayerId, source: ObjectId, count: number, priorityTo: PlayerId = player): void {
+  private payPutFromExileCost(player: PlayerId, source: ObjectId, cost: PutFromExileCost, priorityTo: PlayerId = player): void {
+    const count = typeof cost === "number" ? cost : cost.count;
     if (count <= 0) return;
-    const { eligible, faceDownGroups } = this.exileChoiceCandidates(player, { ownedBy: "opponent" }, undefined, source);
+    const linked = typeof cost !== "number";
+    const { eligible, faceDownGroups } = this.putFromExileCandidates(player, source, cost);
     if (eligible.length <= count) {
       this.withGraveyardEnterBatch(() => {
         for (const id of eligible) this.moveObject(id, "graveyard");
@@ -25667,8 +25673,11 @@ export class Game {
       max: count,
       destination: "graveyard",
       leftover: "stay",
-      prompt:
-        count === 1
+      prompt: linked
+        ? count === 1
+          ? `Choose a card exiled with ${nameOf(this.state.objects[source])} to put into its owner's graveyard`
+          : `Choose ${count} cards exiled with ${nameOf(this.state.objects[source])} to put into their owners' graveyards`
+        : count === 1
           ? "Choose a card an opponent owns in exile to put into its owner's graveyard"
           : `Choose ${count} cards your opponents own in exile to put into their owners' graveyards`,
       ...(faceDownGroups.length > 0 ? { faceDownGroups } : {}),
@@ -25676,10 +25685,28 @@ export class Game {
     };
   }
 
-  /** How many cards an opponent of `player` owns in exile — what a
-   * `putFromExile` cost can take (rule 118.3: no paying it without enough). */
-  private putFromExileCandidateCount(player: PlayerId, source: ObjectId): number {
-    return this.exileChoiceCandidates(player, { ownedBy: "opponent" }, undefined, source).eligible.length;
+  /** The cards a `putFromExile` cost can take: the ones an opponent of
+   * `player` owns, or — its `linked` form — the ones exiled with `source`
+   * in the stint it's in now (rule 607.2a), matching its filter. */
+  private putFromExileCandidates(
+    player: PlayerId,
+    source: ObjectId,
+    cost: PutFromExileCost,
+  ): { eligible: ObjectId[]; faceDownGroups: ObjectId[][] } {
+    if (typeof cost === "number") return this.exileChoiceCandidates(player, { ownedBy: "opponent" }, undefined, source);
+    const object = this.state.objects[source];
+    const stint = object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined;
+    const among = this.state.zones.shared.exile.filter((id) => {
+      const card = this.state.objects[id];
+      return card !== undefined && this.linkedToStint(card, source, stint);
+    });
+    return this.exileChoiceCandidates(player, cost.filter, undefined, source, among);
+  }
+
+  /** How many cards a `putFromExile` cost can take (rule 118.3: no paying it
+   * without enough). */
+  private putFromExileCandidateCount(player: PlayerId, source: ObjectId, cost: PutFromExileCost = 1): number {
+    return this.putFromExileCandidates(player, source, cost).eligible.length;
   }
 
   /** Pay an activated ability's `returnToHand` cost: every permanent that

@@ -17469,3 +17469,19 @@ describe("hexproof from each of its colors, and becoming all colors", () => {
     expect(tam.activated[0].effect).toEqual({ kind: "become", target: 0, setColors: ["W", "U", "B", "R", "G"], duration: "end-of-turn" });
   });
 });
+
+describe("a card exiled with it put into its owner's graveyard as a cost", () => {
+  it("reads Shelob, Dread Weaver's second ability", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Creature — Spider",
+      oracle_text:
+        "{2}{B}, Put a creature card exiled with Thing into its owner's graveyard: Put two +1/+1 counters on Thing. Draw a card.",
+    }) as unknown as { activated: { cost: unknown }[] };
+    expect(face.activated[0]?.cost).toEqual({
+      mana: "{2}{B}",
+      tap: false,
+      putFromExile: { count: 1, linked: true, filter: { type: "creature" } },
+    });
+  });
+});

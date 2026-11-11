@@ -1745,6 +1745,13 @@ export function parseCost(text) {
     // A processor's "Put a card an opponent owns from exile into that
     // player's graveyard" (Void Attendant), chosen as it's paid.
     else if (part === "Put a card an opponent owns from exile into that player's graveyard") cost.putFromExile = 1;
+    // "Put a creature card exiled with ~ into its owner's graveyard"
+    // (Shelob, Dread Weaver): one of the cards linked to it (rule 607.2a).
+    else if ((m = /^Put an? (?:(.+?) )?card exiled with (?:~|this \w+) into its owner's graveyard$/.exec(part))) {
+      const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
+      if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
+      cost.putFromExile = { count: 1, linked: true, ...(filter !== undefined ? { filter } : {}) };
+    }
     // "Exert this creature" as a cost (rule 701.43 — Steward of Solidarity).
     else if (part === "Exert ~") addCostAct(cost, { kind: "exert", target: "source" });
     // "Unattach this Equipment" (rule 701.3d — Sunforger).

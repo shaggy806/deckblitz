@@ -313,6 +313,12 @@ export interface CraftMaterials {
   readonly text: string;
 }
 
+/** {@link AbilityCost.putFromExile}: how many cards an opponent owns, or how
+ * many of the cards exiled with the source (`linked`). */
+export type PutFromExileCost =
+  | number
+  | { readonly count: number; readonly linked: true; readonly filter?: CardFilter };
+
 export interface AbilityCost {
   /** Mana portion of the cost, e.g. `"{2}"`; `null` for no mana. */
   readonly mana: string | null;
@@ -526,8 +532,15 @@ export interface AbilityCost {
    * chosen, and a face-down one is taken from its group at random (the
    * rulings). Gates activation on there being that many (rule 118.3). Not on
    * a mana ability, nor beside another cost that asks.
+   *
+   * The record form is the cards **exiled with this permanent** instead
+   * (rule 607.2a — `GameObject.exiledWith`, in the stint it's in as the cost
+   * is paid), whoever owns them, matching `filter`: Shelob, Dread Weaver's
+   * "{2}{B}, Put a creature card exiled with Shelob into its owner's
+   * graveyard" is `{ count: 1, linked: true, filter: { type: "creature" } }`.
+   * Chosen and gated the same way.
    */
-  readonly putFromExile?: number;
+  readonly putFromExile?: PutFromExileCost;
   /**
    * Reveal `count` cards from your hand matching `filter` as part of the
    * cost — the Coldsnap Martyrs' "{1}, Reveal X white cards from your hand,
