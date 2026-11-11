@@ -1834,6 +1834,7 @@ import _poolAzraBladeseeker from "./pool/azra-bladeseeker.js";
 import _poolAzraOddsmaker from "./pool/azra-oddsmaker.js";
 import _poolAzraSmokeshaper from "./pool/azra-smokeshaper.js";
 import _poolAzulaAlwaysLies from "./pool/azula-always-lies.js";
+import _poolAzulaCunningUsurper from "./pool/azula-cunning-usurper.js";
 import _poolAzulaOnTheHunt from "./pool/azula-on-the-hunt.js";
 import _poolAzureBeastbinder from "./pool/azure-beastbinder.js";
 import _poolAzureDrake from "./pool/azure-drake.js";
@@ -13152,6 +13153,7 @@ import _poolIllegitimateBusiness from "./pool/illegitimate-business.js";
 import _poolIllicitAuction from "./pool/illicit-auction.js";
 import _poolIllicitMasquerade from "./pool/illicit-masquerade.js";
 import _poolIllicitShipment from "./pool/illicit-shipment.js";
+import _poolIllithidHarvester from "./pool/illithid-harvester.js";
 import _poolIllnessInTheRanks from "./pool/illness-in-the-ranks.js";
 import _poolIlluminateHistory from "./pool/illuminate-history.js";
 import _poolIlluminate from "./pool/illuminate.js";
@@ -19950,6 +19952,7 @@ import _poolPlanetaryPatrol from "./pool/planetary-patrol.js";
 import _poolPlanewideCelebration from "./pool/planewide-celebration.js";
 import _poolPlantBeans from "./pool/plant-beans.js";
 import _poolPlantElemental from "./pool/plant-elemental.js";
+import _poolPlantTadpoles from "./pool/plant-tadpoles.js";
 import _poolPlarggAndNassari from "./pool/plargg-and-nassari.js";
 import _poolPlarggDeanOfChaos from "./pool/plargg-dean-of-chaos.js";
 import _poolPlasmCapture from "./pool/plasm-capture.js";
@@ -22129,6 +22132,8 @@ import _poolRoarOfTheFifthPeople from "./pool/roar-of-the-fifth-people.js";
 import _poolRoarOfTheKha from "./pool/roar-of-the-kha.js";
 import _poolRoarOfTheWurm from "./pool/roar-of-the-wurm.js";
 import _poolRoaringEarth from "./pool/roaring-earth.js";
+import _poolRoaringFurnaceSteamingSauna from "./pool/roaring-furnace-steaming-sauna.js";
+import _poolRoaringFurnace from "./pool/roaring-furnace.js";
 import _poolRoaringPrimadox from "./pool/roaring-primadox.js";
 import _poolRoaringSlagwurm from "./pool/roaring-slagwurm.js";
 import _poolRoast from "./pool/roast.js";
@@ -25810,6 +25815,7 @@ import _poolSteamVines from "./pool/steam-vines.js";
 import _poolSteamclaw from "./pool/steamclaw.js";
 import _poolSteamcoreScholar from "./pool/steamcore-scholar.js";
 import _poolSteamcoreWeird from "./pool/steamcore-weird.js";
+import _poolSteamingSauna from "./pool/steaming-sauna.js";
 import _poolSteampathCharger from "./pool/steampath-charger.js";
 import _poolSteelDromedary from "./pool/steel-dromedary.js";
 import _poolSteelExemplar from "./pool/steel-exemplar.js";
@@ -34278,6 +34284,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAzraOddsmaker,
   _poolAzraSmokeshaper,
   _poolAzulaAlwaysLies,
+  _poolAzulaCunningUsurper,
   _poolAzulaOnTheHunt,
   _poolAzureBeastbinder,
   _poolAzureDrake,
@@ -45596,6 +45603,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIllicitAuction,
   _poolIllicitMasquerade,
   _poolIllicitShipment,
+  _poolIllithidHarvester,
   _poolIllnessInTheRanks,
   _poolIlluminateHistory,
   _poolIlluminate,
@@ -52394,6 +52402,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPlanewideCelebration,
   _poolPlantBeans,
   _poolPlantElemental,
+  _poolPlantTadpoles,
   _poolPlarggAndNassari,
   _poolPlarggDeanOfChaos,
   _poolPlasmCapture,
@@ -54573,6 +54582,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRoarOfTheKha,
   _poolRoarOfTheWurm,
   _poolRoaringEarth,
+  _poolRoaringFurnaceSteamingSauna,
+  _poolRoaringFurnace,
   _poolRoaringPrimadox,
   _poolRoaringSlagwurm,
   _poolRoast,
@@ -58254,6 +58265,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSteamclaw,
   _poolSteamcoreScholar,
   _poolSteamcoreWeird,
+  _poolSteamingSauna,
   _poolSteampathCharger,
   _poolSteelDromedary,
   _poolSteelExemplar,
@@ -66735,6 +66747,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/azra-oddsmaker": _poolAzraOddsmaker,
   "pool/azra-smokeshaper": _poolAzraSmokeshaper,
   "pool/azula-always-lies": _poolAzulaAlwaysLies,
+  "pool/azula-cunning-usurper": _poolAzulaCunningUsurper,
   "pool/azula-on-the-hunt": _poolAzulaOnTheHunt,
   "pool/azure-beastbinder": _poolAzureBeastbinder,
   "pool/azure-drake": _poolAzureDrake,
@@ -78053,6 +78066,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/illicit-auction": _poolIllicitAuction,
   "pool/illicit-masquerade": _poolIllicitMasquerade,
   "pool/illicit-shipment": _poolIllicitShipment,
+  "pool/illithid-harvester": _poolIllithidHarvester,
   "pool/illness-in-the-ranks": _poolIllnessInTheRanks,
   "pool/illuminate-history": _poolIlluminateHistory,
   "pool/illuminate": _poolIlluminate,
@@ -84851,6 +84865,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/planewide-celebration": _poolPlanewideCelebration,
   "pool/plant-beans": _poolPlantBeans,
   "pool/plant-elemental": _poolPlantElemental,
+  "pool/plant-tadpoles": _poolPlantTadpoles,
   "pool/plargg-and-nassari": _poolPlarggAndNassari,
   "pool/plargg-dean-of-chaos": _poolPlarggDeanOfChaos,
   "pool/plasm-capture": _poolPlasmCapture,
@@ -87030,6 +87045,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/roar-of-the-kha": _poolRoarOfTheKha,
   "pool/roar-of-the-wurm": _poolRoarOfTheWurm,
   "pool/roaring-earth": _poolRoaringEarth,
+  "pool/roaring-furnace-steaming-sauna": _poolRoaringFurnaceSteamingSauna,
+  "pool/roaring-furnace": _poolRoaringFurnace,
   "pool/roaring-primadox": _poolRoaringPrimadox,
   "pool/roaring-slagwurm": _poolRoaringSlagwurm,
   "pool/roast": _poolRoast,
@@ -90711,6 +90728,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/steamclaw": _poolSteamclaw,
   "pool/steamcore-scholar": _poolSteamcoreScholar,
   "pool/steamcore-weird": _poolSteamcoreWeird,
+  "pool/steaming-sauna": _poolSteamingSauna,
   "pool/steampath-charger": _poolSteampathCharger,
   "pool/steel-dromedary": _poolSteelDromedary,
   "pool/steel-exemplar": _poolSteelExemplar,

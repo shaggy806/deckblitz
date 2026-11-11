@@ -84,6 +84,7 @@ import _poolAvenInitiate from "../pool/aven-initiate.js";
 import _poolAwakenTheErstwhile from "../pool/awaken-the-erstwhile.js";
 import _poolAzogMoriasRuin from "../pool/azog-morias-ruin.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
+import _poolAzulaCunningUsurper from "../pool/azula-cunning-usurper.js";
 import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
 import _poolBagEndPorter from "../pool/bag-end-porter.js";
 import _poolBaldursGate from "../pool/baldurs-gate.js";
@@ -427,6 +428,7 @@ import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceCage from "../pool/ice-cage.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
+import _poolIllithidHarvester from "../pool/illithid-harvester.js";
 import _poolIlluminatedFolio from "../pool/illuminated-folio.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
@@ -1138,6 +1140,7 @@ const shard: CardShard = {
     _poolAwakenTheErstwhile,
     _poolAzogMoriasRuin,
     _poolAzoriusLocket,
+    _poolAzulaCunningUsurper,
     _poolAzusaLostButSeeking,
     _poolBagEndPorter,
     _poolBaldursGate,
@@ -1481,6 +1484,7 @@ const shard: CardShard = {
     _poolIceCage,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
+    _poolIllithidHarvester,
     _poolIlluminatedFolio,
     _poolImmaculateMagistrate,
     _poolImmoralBargain,

@@ -680,6 +680,7 @@ import _poolRighteousWar from "../pool/righteous-war.js";
 import _poolRikkuResourcefulGuardian from "../pool/rikku-resourceful-guardian.js";
 import _poolRitualOfSubdual from "../pool/ritual-of-subdual.js";
 import _poolRiverBoa from "../pool/river-boa.js";
+import _poolRoaringFurnace from "../pool/roaring-furnace.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRockslideAmbush from "../pool/rockslide-ambush.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
@@ -1642,6 +1643,7 @@ const shard: CardShard = {
     _poolRikkuResourcefulGuardian,
     _poolRitualOfSubdual,
     _poolRiverBoa,
+    _poolRoaringFurnace,
     _poolRockSoldiers,
     _poolRockslideAmbush,
     _poolRoilCartographer,

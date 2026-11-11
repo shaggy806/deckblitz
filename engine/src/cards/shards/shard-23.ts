@@ -699,6 +699,7 @@ import _poolRitualOfHope from "../pool/ritual-of-hope.js";
 import _poolRiverSongsDiary from "../pool/river-songs-diary.js";
 import _poolRoarOfTheFifthPeople from "../pool/roar-of-the-fifth-people.js";
 import _poolRoarOfTheKha from "../pool/roar-of-the-kha.js";
+import _poolRoaringFurnaceSteamingSauna from "../pool/roaring-furnace-steaming-sauna.js";
 import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRoilingVortex from "../pool/roiling-vortex.js";
@@ -1720,6 +1721,7 @@ const shard: CardShard = {
     _poolRiverSongsDiary,
     _poolRoarOfTheFifthPeople,
     _poolRoarOfTheKha,
+    _poolRoaringFurnaceSteamingSauna,
     _poolRoaringSlagwurm,
     _poolRoilingCanopy,
     _poolRoilingVortex,

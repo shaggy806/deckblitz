@@ -620,6 +620,7 @@ import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlanarNexus from "../pool/planar-nexus.js";
 import _poolPlaneswalkersMirth from "../pool/planeswalkers-mirth.js";
 import _poolPlanewideCelebration from "../pool/planewide-celebration.js";
+import _poolPlantTadpoles from "../pool/plant-tadpoles.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
 import _poolPoetsQuill from "../pool/poets-quill.js";
 import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
@@ -1629,6 +1630,7 @@ const shard: CardShard = {
     _poolPlanarNexus,
     _poolPlaneswalkersMirth,
     _poolPlanewideCelebration,
+    _poolPlantTadpoles,
     _poolPlatedSpider,
     _poolPoetsQuill,
     _poolPoisonTheWaters,
