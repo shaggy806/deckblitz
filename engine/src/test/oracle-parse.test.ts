@@ -8789,6 +8789,21 @@ describe("a choice drawn from several zones, or one card a slot", () => {
       together: { distinctNames: true },
       instead: { destination: "graveyard", pick: { exactly: 2 }, chooser: "an-opponent" },
     });
+    // The searcher's own split of three: two onto the battlefield, the other to hand.
+    const viewpoint = face(
+      "Viewpoint Synchronization",
+      "Sorcery",
+      "Freerunning {2}{G} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nSearch your library for up to three basic land cards and reveal them. Put two of them onto the battlefield tapped and the other into your hand, then shuffle.",
+    );
+    expect(viewpoint.effect).toEqual({
+      kind: "search-library",
+      filter: { supertype: "basic", type: "land" },
+      min: 0,
+      max: 3,
+      reveal: true,
+      destination: "hand",
+      instead: { destination: "battlefield", enterTapped: true, pick: { exactly: 2 } },
+    });
     // Each player chooses in turn, and the chosen cards enter at once.
     const exhume = face(
       "Exhume",

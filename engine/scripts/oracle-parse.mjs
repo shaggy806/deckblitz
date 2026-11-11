@@ -11606,6 +11606,30 @@ function searchInsteadAt(sentences, i) {
       used: 3,
     };
   }
+  // "Search your library for up to three basic land cards and reveal them.
+  // Put two of them onto the battlefield tapped and the other into your
+  // hand, then shuffle." (Viewpoint Synchronization): exactly two onto the
+  // battlefield, every find when there are no more than two.
+  const three = /^search your library for up to three (.+?) cards and reveal them\.$/i.exec(sentences[i] ?? "");
+  const two = /^put two of them onto the battlefield( tapped)? and the other into your hand, then shuffle\.$/i.exec(
+    sentences[i + 1] ?? "",
+  );
+  if (three !== null && two !== null) {
+    const filter = parseTypePhrase(three[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      effect: {
+        kind: "search-library",
+        filter,
+        min: 0,
+        max: 3,
+        reveal: true,
+        destination: "hand",
+        instead: { destination: "battlefield", ...(two[1] ? { enterTapped: true } : {}), pick: { exactly: 2 } },
+      },
+      used: 2,
+    };
+  }
   // "[You may s]earch your library for an artifact card and reveal it. Put
   // it onto the battlefield [tapped] if its mana value is 2 or less / if
   // it's a land card. Otherwise, put it into your hand. Then shuffle. / If

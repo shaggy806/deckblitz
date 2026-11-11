@@ -227,3 +227,59 @@ describe("withCounters (rule 122.6)", () => {
     expect(keywords(game, solemn).has("haste")).toBe(true);
   });
 });
+
+describe("two of three finds onto the battlefield, the other to hand (Viewpoint Synchronization)", () => {
+  it("asks which two enter tapped once three are found; the third goes to the hand", () => {
+    const { game, a } = table();
+    lands(game, "Forest", 5);
+    const forest = toLibrary(game, "Forest");
+    const island = toLibrary(game, "Island");
+    const swamp = toLibrary(game, "Swamp");
+    // A nonbasic land isn't one to find.
+    const tower = toLibrary(game, "Command Tower");
+    const offered = answerInTurn(a, [forest, island, swamp], [island, swamp]);
+    const before = game.events.length;
+    game.dispatch({ type: "cast-spell", player: A, card: toHand(game, "Viewpoint Synchronization"), targets: [] });
+    game.advanceUntil(quiet);
+    expect(offered).toHaveLength(2);
+    // The library's other basic lands are findable too; the nonbasic isn't.
+    expect(offered[0]).toEqual(expect.arrayContaining([forest, island, swamp]));
+    expect(offered[0]).not.toContain(tower);
+    expect([...offered[1]].sort()).toEqual([forest, island, swamp].sort());
+    expect(zone(game, island)).toBe("battlefield");
+    expect(zone(game, swamp)).toBe("battlefield");
+    expect(game.state.objects[island].tapped).toBe(true);
+    expect(game.state.objects[swamp].tapped).toBe(true);
+    expect(zone(game, forest)).toBe("hand");
+    expect(zone(game, tower)).toBe("library");
+    const events = game.events.slice(before);
+    expect(events.filter((e) => e.type === "cards-revealed")).toHaveLength(1);
+    expect(events.filter((e) => e.type === "library-shuffled" && e.player === A)).toHaveLength(1);
+  });
+
+  it("two finds both enter tapped, unasked, and nothing goes to the hand (rule 609.3)", () => {
+    const { game, a } = table();
+    lands(game, "Forest", 5);
+    const island = toLibrary(game, "Island");
+    const swamp = toLibrary(game, "Swamp");
+    const offered = answerInTurn(a, [island, swamp]);
+    game.dispatch({ type: "cast-spell", player: A, card: toHand(game, "Viewpoint Synchronization"), targets: [] });
+    game.advanceUntil(quiet);
+    expect(offered).toHaveLength(1);
+    expect(zone(game, island)).toBe("battlefield");
+    expect(zone(game, swamp)).toBe("battlefield");
+    expect(game.state.objects[island].tapped).toBe(true);
+  });
+
+  it("the searcher may find fewer than are there: one found, it enters tapped", () => {
+    const { game, a } = table();
+    lands(game, "Forest", 5);
+    const island = toLibrary(game, "Island");
+    const swamp = toLibrary(game, "Swamp");
+    answerInTurn(a, [island]);
+    game.dispatch({ type: "cast-spell", player: A, card: toHand(game, "Viewpoint Synchronization"), targets: [] });
+    game.advanceUntil(quiet);
+    expect(zone(game, island)).toBe("battlefield");
+    expect(zone(game, swamp)).toBe("library");
+  });
+});
