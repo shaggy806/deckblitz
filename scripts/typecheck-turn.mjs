@@ -10,7 +10,7 @@
 //
 // The slots are `machine-slots.mjs`'s, shared by every worktree on the
 // machine; a verify takes all of them, so a command here also waits while one
-// runs (`author-walks-local` runs several sessions' agents and verifies on one
+// runs (several local sessions' agents and verifies can share one
 // machine).
 //
 // Usage: node scripts/typecheck-turn.mjs <command...>

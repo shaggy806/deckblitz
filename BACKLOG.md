@@ -44,7 +44,7 @@ What blocks each unimplemented card, and which cards a built feature may have un
 the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists go there; this
 section keeps only what to do next.
 
-- **The set walk, upcoming sets first** (`author-by-set`): Star Trek (TRK) and Star Trek Commander
+- **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
   `ASSIMILATE` in `helpers.ts`), and so are Marvel: Darkhold Destiny's previews (MDD, MDC) and
   Mystery Booster Commander (MBC) (batch 269). **The walk is caught up**: every released and
@@ -63,8 +63,7 @@ section keeps only what to do next.
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
   lists of about 100 (no open need, or every open need judged to exist), `engine/data/recheck/R1.txt`
-  to `R9.txt`. They are worked as parallel rounds from a fresh session: `author-walks-parallel`'s
-  "A recheck round", one list per child under the `author-recheck` skill. Lists done: R1 (B235, 73 authored, 27 still blocked; the token-copy as-enters gap,
+  to `R9.txt`. They were worked as parallel rounds from a fresh session, one list per child. Lists done: R1 (B235, 73 authored, 27 still blocked; the token-copy as-enters gap,
   `bug:token-copy-skips-as-enters-choices`, now blocks seven), R2 (B236: 20 authored, 80 still blocked on narrow keys), R3 (B237: 23 authored, 77 still blocked on narrow keys), R5 (B239: 15 authored, 85 still blocked on narrow keys; built `skip-untap-step`), R4 (B238: 51 authored, 49 blocked on 20 new narrow keys and open ones), R7 (B241: 26 authored, 74 still blocked, 17 new narrow keys; fixed `latestByCard`'s tie on date, which had listed half of R7 on coarse first records though later ones named narrow keys), R9 (B243: 21 authored, 42 still blocked on 29 new narrow keys and open ones), R6 (B240: 25 authored, 75 still blocked, 29 new narrow keys; built the opening-hand reveal, rule 103.6b), R8 (B242: 16 authored, 84 still blocked on narrow keys — 39 new; `static:static-types-outside-battlefield` now blocks five of them, `replacement:token-creation-add-extra` four).
   All nine lists done 2026-10-28 (rounds one and two, B235–B243). **Now Phase 2: build in greedy
   order, a family per session, in series** (the `build-family` skill, from a fresh session each;
@@ -510,7 +509,7 @@ section keeps only what to do next.
   check, likely authorable: Invert Polarity, Foreboding Steamboat, Last Chance, Aang, Airbending Master (airbend and upkeep lines unread).
   **The re-attempt (B294, 2026-11-09):** all 245 cards still missing from the top 5,000 and the top 500 commanders, read against today's vocabulary: 120 authored, 125 blocked on 124 narrow keys (only `effect:additional-beginning-phase` serves two). So about half the blocker records were out of date. 10 of the keys are new; the rest were already true. Top 5,000: 4,885 of 5,000 (116 authored here); commanders 488 of 500. The queue (`--stale`) stays empty.
   **The queue emptied again 2026-11-09 (B293):** the 20 cards theme 15 and the last engine gaps freed, 19 authored (Forth Eorlingas!, Skirge Familiar, Screeching Scorchbeast, Xira, Evil Twin, Callidus Assassin, Human Torch, ...), Sanctum Prelate blocked (`static:choose-any-number-on-enter`). What comes next is in `docs/plans/after-the-themes.md`.
-  **The freed queue is empty (B291, 2026-11-09):** the last 145 cards, 109 authored and 36 blocked on 32 narrow keys (`effect:player-cant-gain-life-bound` for Screaming Nemesis, Stigma Lasher and Flames of the Blood Hand; `amount:scavenge-power-in-graveyard`, `trigger:becomes-crewed-first-time` and `filter:directly-above-in-graveyard` two each). `cards:needs -- --stale` lists nothing until more keys land, so `next-theme` (theme 15) and then `build-family` are next. Tonight's gap agents then authored 12 of those 36 (`COMPLETED.md`, Engine rules gaps).
+  **The freed queue is empty (B291, 2026-11-09):** the last 145 cards, 109 authored and 36 blocked on 32 narrow keys (`effect:player-cant-gain-life-bound` for Screaming Nemesis, Stigma Lasher and Flames of the Blood Hand; `amount:scavenge-power-in-graveyard`, `trigger:becomes-crewed-first-time` and `filter:directly-above-in-graveyard` two each). `cards:needs -- --stale` lists nothing until more keys land, so theme 15 and then `build-family` are next. Tonight's gap agents then authored 12 of those 36 (`COMPLETED.md`, Engine rules gaps).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next

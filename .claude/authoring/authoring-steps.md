@@ -1,6 +1,6 @@
 # Authoring a batch: the steps the authoring skills share
 
-Steps 2 and 3 of the retired `author-by-set` skill (the set walks finished in November 2026), kept
+Steps 2 and 3 of the set walks' procedure (the walks finished in November 2026), kept
 because `author-freed`, `author-flagged`, `author-top-cards` and `author-top-commanders` follow them.
 Where a step says "the set", read the batch the calling skill picked. `agent-batches.md` beside
 this file is the procedure for batches authored by agents.

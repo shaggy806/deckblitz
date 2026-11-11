@@ -70,7 +70,7 @@ pool, its latest record:
   check are short reading tasks for a Sonnet or Haiku agent with a brief (Phase 0.5 picks which, per step). Building a feature and
   authoring cards use the usual `card-author` agents and sessions.
 - **One phase step per session, coordinated from a fresh session.** The same rule as
-  `author-walks-parallel`. Parallel sessions own families the way the walks owned sets: they
+  the parallel set walks had. Parallel sessions own families the way the walks owned sets: they
   never overlap, are recorded in `BACKLOG.md` before starting, and land under the landing lock.
 - **Singletons wait for the card.** A key that blocks one card is checked when that card is
   attempted, never on its own.
@@ -295,9 +295,8 @@ missing. Re-run `--greedy` for Phase 2's order.
   `card:scaffold -- --dry-run` over the no-open-need cards auto-finishes only 6, so the rest is
   authoring work. The lists are frozen in `engine/data/recheck/R1.txt` to `R9.txt`
   (`--recheck --freeze`): R1 holds the 61 meta-only cards, and the rest go in need order. Each
-  list goes to an `author-recheck` session, run as a parallel round by
-  `author-walks-parallel` ("A recheck round"). That means a parallel round run from a fresh session under
-  `author-walks-parallel`'s rules, with a recheck batch per child in place of a range of sets. A
+  list goes to a recheck session, run as a parallel round from a fresh session under
+  the parallel set walks' rules, with a recheck batch per child in place of a range of sets. A
   card still blocked gets a narrow new key, and the coarse key's description is tightened.
 - **Greedy after the merge:** 10 keys free 331 cards, 50 free 1,002, 100 free 1,466 and 400 free
   3,043. `--greedy` doesn't score the groups yet; that is Phase 2's first tooling item (done 2026-10-28:
@@ -313,7 +312,7 @@ missing. Re-run `--greedy` for Phase 2's order.
   card `--feature <key>` lists for them through `card-author` agents (a normal batch, ~100
   cards, one verify). From 2026-10-29 the two halves are separate sessions: `build-family`
   builds families with only their proving cards, and `author-freed` batches the freed cards. Up to five sessions run in parallel, each on its own families, under
-  `author-walks-parallel`'s rules: ranges become families, and the same lock, numbering and
+  the parallel set walks' rules: ranges become families, and the same lock, numbering and
   hand-off apply. Banding (46) and other single large keys get a session of their own.
 - **Tier B** (2–9 cards each, ~1,000 keys and ~1,500 cards): no session of their own. A Tier A
   session building in a family also takes that family's Tier B keys when the same code covers

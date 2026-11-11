@@ -29,7 +29,7 @@
 //
 // Before step 1 it takes the machine (`machine-slots.mjs`): one verify at a
 // time, with no typecheck or build beside it — several sessions on one PC
-// share it (the `author-walks-local` skill).
+// share it.
 //
 // Steps 1, 2, 4 and 5 stop the run on failure (later results would mean
 // nothing), stopping the background runs too; the rest all run, and the exit

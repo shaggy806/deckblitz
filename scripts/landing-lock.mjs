@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // One parallel set-walk session at a time merges, verifies and pushes to main
-// (the `author-walks-parallel` skill). Without it each session that landed
+// (several sessions landing batches at once). Without it each session that landed
 // after another had to merge and re-verify once per batch that landed under
 // it: round thirteen (2026-10-26, five sessions) re-ran `verify --only
 // fuzzwith` five times, B194 alone merging three times over half an hour.

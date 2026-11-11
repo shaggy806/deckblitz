@@ -12,8 +12,7 @@
 //   … --top 50        keep only that share of each set's ranked new cards (percent, default 100)
 //   … --ranked-only   leave out the cards EDHREC hasn't ranked yet (kept by default, last)
 //   … --refresh       fetch Scryfall's set list and first printings again (cached 3 days)
-//   … --oldest        walk the other way: oldest set first (`--sets N` the oldest N; the
-//                     `author-by-set-oldest` skill's order)
+//   … --oldest        walk the other way: oldest set first (`--sets N` the oldest N)
 //   … --released-only leave out the paper sets not out yet. By default they're walked
 //                     like any other, newest first, through their previewed cards
 //                     (which Scryfall calls not Commander-legal until release, and

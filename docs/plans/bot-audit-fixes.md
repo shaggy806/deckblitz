@@ -6,7 +6,7 @@ what each step changes, and how each is checked. Three choices near the end are 
 
 ## Progress
 
-One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
+One step a session. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
 - Next: **nothing: every step is built** (2026-11-10). What's left is "What this plan does

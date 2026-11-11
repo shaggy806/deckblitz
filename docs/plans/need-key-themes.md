@@ -78,7 +78,7 @@ touch. Each step:
    - **Done 2026-11-08 (B289).** Keyword values and a doubler by any event (theme 16: `engine/src/keyword-values.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Djinn Illuminatus and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-09 (B290).** One prohibition record (theme 3c: `engine/src/prohibitions.ts`, see its design note and *As built*). 33 cards: Frozen in Ice (flagged), Grafdigger's Cage, Angel of Jubilation, Sigarda, Lich's Tomb and 28 of the theme's top keys; 24 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-09 (B292).** One step timing, one watch duration, one intervening "if" (theme 15: `engine/src/delayed-at.ts`, see its design note and *As built*). 12 cards: Fight for the Throne and Loki Laufeyson (flagged) and 10 of the theme's top keys; 11 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: the themes are done. `author-freed` for `--stale`, then the order in `docs/plans/after-the-themes.md`. (The `next-theme` skill, which read this line, was retired 2026-11-10.)
+   - Next: the themes are done. `author-freed` for `--stale`, then the order in `docs/plans/after-the-themes.md`.
 
 ## How this was measured
 
