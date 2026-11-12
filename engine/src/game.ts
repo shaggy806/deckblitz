@@ -3806,13 +3806,20 @@ export class Game {
           }
           continue;
         }
-        out.push(
-          ...this.castSpellActions(player, card, def.name, def, {
-            via: "impulse",
-            ...faceProp,
-            costString: def.manaCost,
-          }),
-        );
+        // Under a `perType` group (Aminatou's Augury), one offer per type it
+        // could be cast as, naming the type it spends (the ruling: an
+        // artifact creature as either).
+        const typed = this.impulseGroupTypes(player, card, face ?? 0);
+        for (const asType of typed !== undefined && typed.length > 0 ? typed : [undefined]) {
+          out.push(
+            ...this.castSpellActions(player, card, def.name, def, {
+              via: "impulse",
+              ...faceProp,
+              costString: def.manaCost,
+              ...(asType !== undefined ? { graveyardGrant: { source: card, asType } } : {}),
+            }),
+          );
+        }
       }
     }
 
@@ -14463,7 +14470,7 @@ export class Game {
       (graveyardGrant !== undefined || !this.mayPlayFromGraveyard(player, cardId, face))
     ) {
       const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant);
-      if (found !== null) this.spendGraveyardGrant(found);
+      if (found !== null) this.spendGraveyardGrant(found, this.faceDef(cardId, face).types);
     }
 
     const from = this.state.objects[cardId].zone;
@@ -18804,6 +18811,10 @@ export class Game {
       if (!this.mayPlayFromExile(player, cardId, face)) {
         return `${def.name} is not playable from exile by ${player}`;
       }
+      const asType = graveyardGrant?.asType;
+      if (asType !== undefined && this.impulseGroupTypes(player, cardId, face)?.includes(asType) !== true) {
+        return `${def.name} can't be cast as ${asType} from exile now`;
+      }
     } else if (via === "other-hand") {
       if (this.state.objects[cardId]?.zone !== "hand" || this.playOptions(player, cardId, face).length === 0) {
         return `${player} may not cast ${def.name} from that hand`;
@@ -18955,10 +18966,12 @@ export class Game {
       }
     }
     // It names the permission a graveyard-permission cast spends, or which of
-    // several escapes, flashbacks, harmonizes or sneaks such a cast uses.
+    // several escapes, flashbacks, harmonizes or sneaks such a cast uses — or
+    // the type an impulse cast spends of a `perType` group (Aminatou's Augury).
     if (
       graveyardGrant !== undefined &&
       via !== "graveyard-permission" &&
+      via !== "impulse" &&
       via !== "escape" &&
       via !== "flashback" &&
       via !== "harmonize" &&
@@ -21385,7 +21398,7 @@ export class Game {
     if (via === "graveyard-permission") {
       const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant, chosenX);
       if (found !== null) {
-        this.spendGraveyardGrant(found);
+        this.spendGraveyardGrant(found, this.faceDef(cardId, face).types);
         graveyardPermission = found.permission;
       }
     }
@@ -21404,7 +21417,7 @@ export class Game {
             this.castNeedsPermissionFlash(player, cardId, def, face, kicked),
           )
         : undefined;
-    if (underPermission !== undefined) this.spendPlay(underPermission);
+    if (underPermission !== undefined) this.spendPlay(underPermission, graveyardGrant?.asType, def.types);
     const permissionTerms = via === "graveyard-permission" ? graveyardPermission : underPermission?.terms;
     // Commit: move to the stack, pay, announce. The targets are recorded
     // once the costs are paid, below. A face-down spell goes there face down
@@ -42509,8 +42522,8 @@ controlledBy,
     }
 
     this.endUntilNextExile(grant.duration, source, taken);
-    // "One of those cards": one play shared among them all.
-    const group = grant.upTo !== undefined ? this.newPermissionGroup(grant.upTo) : undefined;
+    // "One of those cards": one play shared among them all (or one per type).
+    const group = this.permissionGroupFor(grant);
     // "Until your next turn, players may play cards they exiled this way"
     // (Memory Vessel): "your" is the effect's, whoever may play the card.
     const permissionFor = (owner: PlayerId): CardPlayPermission =>
@@ -42793,10 +42806,10 @@ controlledBy,
 
   /** Spend what this permission uses up as a card is played under it — before
    * the card moves. `asType`: which permanent type a `perType` play spends. */
-  private spendPlay(option: PlayOption, asType?: CardType): void {
+  private spendPlay(option: PlayOption, asType?: CardType, faceTypes: readonly CardType[] = []): void {
     const { carrier, terms } = option;
     if (carrier.kind === "card") {
-      this.spendPermissionGroup(carrier.permission.group);
+      this.spendPermissionGroup(carrier.permission.group, faceTypes, asType);
       if (terms.oncePerTurn === true && carrier.permission.source !== undefined) {
         const source = this.state.objects[carrier.permission.source.id];
         if (source !== undefined) this.stampPlayUse(source, true);
@@ -42840,7 +42853,7 @@ controlledBy,
     const out: PlayOption[] = [];
     // On the card itself.
     const own = card.playPermission;
-    if (own !== undefined && own.player === player && this.cardPermissionOpen(own, card, cardId, isLand, player)) {
+    if (own !== undefined && own.player === player && this.cardPermissionOpen(own, card, cardId, isLand, player, def.types)) {
       out.push({ terms: own, carrier: { kind: "card", permission: own } });
     }
     // Its own text, for its owner (rule 113.6f), face up.
@@ -42928,9 +42941,10 @@ controlledBy,
     cardId: ObjectId,
     isLand: boolean,
     player: PlayerId,
+    faceTypes: readonly CardType[],
   ): boolean {
     if (isLand && permission.play !== true) return false;
-    if (!this.permissionGroupOpen(permission.group)) return false;
+    if (!this.permissionGroupOpen(permission.group, faceTypes)) return false;
     if (permission.yourTurnOnly === true && this.activePlayer !== player) return false;
     if (permission.fromTurn !== undefined && this.state.turn.number < permission.fromTurn) return false;
     // "Exiled with Maralen": an ability of that permanent, so only while it's
@@ -43163,8 +43177,8 @@ controlledBy,
 
   /** Spend a graveyard permission as the card is played — before it leaves
    * the graveyard. */
-  private spendGraveyardGrant(found: GraveyardGrantOption): void {
-    this.spendPlay(found.option, found.grant.asType);
+  private spendGraveyardGrant(found: GraveyardGrantOption, faceTypes: readonly CardType[]): void {
+    this.spendPlay(found.option, found.grant.asType, faceTypes);
   }
 
   /** The `grant-play` effect: each of `cards` still in exile or a graveyard
@@ -43175,7 +43189,7 @@ controlledBy,
       return object !== undefined && !object.isToken && (object.zone === "exile" || object.zone === "graveyard");
     });
     if (named.length === 0) return;
-    const group = grant.upTo !== undefined ? this.newPermissionGroup(grant.upTo) : undefined;
+    const group = this.permissionGroupFor(grant);
     for (const id of named) {
       const object = this.state.objects[id];
       object.playPermission = this.cardPermissionFrom(grant, controller, source, object.owner, group, to);
@@ -43189,27 +43203,62 @@ controlledBy,
    * cards" (Locke, Treasure Hunter), "one of those cards" (Unlucky Witness).
    * Its id: one past the highest in use, so never one a permission still
    * names (an entry goes only once none does). */
-  private newPermissionGroup(left: number): number {
+  private newPermissionGroup(left: number, types?: readonly CardType[]): number {
     const groups = (this.state.permissionGroups ??= []);
     const id = groups.reduce((most, g) => Math.max(most, g.id), 0) + 1;
-    groups.push({ id, left });
+    groups.push({ id, left, ...(types !== undefined ? { types: [...types] } : {}) });
     return id;
   }
 
-  /** Whether a permission sharing `group` may still be used: a play left. */
-  private permissionGroupOpen(group: number | undefined): boolean {
+  /** The group a grant over several cards shares among them: `upTo` plays,
+   * or one of each `perType` type (Aminatou's Augury). */
+  private permissionGroupFor(grant: PlayGrant): number | undefined {
+    if (grant.perType !== undefined) return this.newPermissionGroup(grant.perType.length, grant.perType);
+    return grant.upTo !== undefined ? this.newPermissionGroup(grant.upTo) : undefined;
+  }
+
+  /** The types of `faceTypes` a `perType` group has left; `undefined` for a
+   * group that doesn't count types (or none). */
+  private permissionGroupTypes(group: number | undefined, faceTypes: readonly CardType[]): readonly CardType[] | undefined {
+    if (group === undefined) return undefined;
+    const left = this.state.permissionGroups?.find((g) => g.id === group)?.types;
+    return left === undefined ? undefined : left.filter((t) => faceTypes.includes(t));
+  }
+
+  /** The types a card in exile may be cast as under its own permission's
+   * `perType` group, for `player` as face `face`; `undefined` when that
+   * isn't how it's playable. */
+  private impulseGroupTypes(player: PlayerId, cardId: ObjectId, face: number): readonly CardType[] | undefined {
+    const own = this.state.objects[cardId]?.playPermission;
+    if (own === undefined || own.player !== player || own.perType === undefined) return undefined;
+    return this.permissionGroupTypes(own.group, this.faceDef(cardId, face).types);
+  }
+
+  /** Whether a permission sharing `group` may still be used by a card of
+   * `faceTypes`: a play left, or for a `perType` group a type of its left. */
+  private permissionGroupOpen(group: number | undefined, faceTypes: readonly CardType[]): boolean {
     if (group === undefined) return true;
+    const types = this.permissionGroupTypes(group, faceTypes);
+    if (types !== undefined) return types.length > 0;
     return (this.state.permissionGroups?.find((g) => g.id === group)?.left ?? 0) > 0;
   }
 
   /** A card has been played under a permission sharing `group`: one play
-   * fewer for every card that shares it. */
-  private spendPermissionGroup(group: number | undefined): void {
+   * fewer for every card that shares it — or, for a `perType` group, the type
+   * `asType` it was played as (the first it could be, when none is named). */
+  private spendPermissionGroup(group: number | undefined, faceTypes: readonly CardType[], asType?: CardType): void {
     const groups = this.state.permissionGroups;
     if (group === undefined || groups === undefined) return;
     const index = groups.findIndex((g) => g.id === group);
     if (index < 0) return;
-    groups[index] = { id: group, left: Math.max(0, groups[index].left - 1) };
+    const entry = groups[index];
+    if (entry.types !== undefined) {
+      const could = entry.types.filter((t) => faceTypes.includes(t));
+      const spent = asType !== undefined && could.includes(asType) ? asType : could[0];
+      groups[index] = { ...entry, types: entry.types.filter((t) => t !== spent) };
+    } else {
+      groups[index] = { id: group, left: Math.max(0, entry.left - 1) };
+    }
     invalidateComputedCache();
   }
 

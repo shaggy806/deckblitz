@@ -29,6 +29,7 @@ import _poolAlquistProftMasterSleuth from "../pool/alquist-proft-master-sleuth.j
 import _poolAmbitiousAugmenter from "../pool/ambitious-augmenter.js";
 import _poolAmbrosiaWhiteheart from "../pool/ambrosia-whiteheart.js";
 import _poolAmbuscadeShaman from "../pool/ambuscade-shaman.js";
+import _poolAminatousAugury from "../pool/aminatous-augury.js";
 import _poolAnalyzeThePollen from "../pool/analyze-the-pollen.js";
 import _poolAnathemancer from "../pool/anathemancer.js";
 import _poolAncestralKatana from "../pool/ancestral-katana.js";
@@ -1067,6 +1068,7 @@ const shard: CardShard = {
     _poolAmbitiousAugmenter,
     _poolAmbrosiaWhiteheart,
     _poolAmbuscadeShaman,
+    _poolAminatousAugury,
     _poolAnalyzeThePollen,
     _poolAnathemancer,
     _poolAncestralKatana,

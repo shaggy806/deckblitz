@@ -653,7 +653,10 @@ export type Action =
        * choose. */
       readonly escapeExile?: readonly ObjectId[];
       /** For `via: "graveyard-permission"`: which permission pays for it —
-       * see {@link GraveyardGrant}. Echoed back from the variant. */
+       * see {@link GraveyardGrant}. Echoed back from the variant. For
+       * `via: "impulse"`, only its `asType` counts: the card type a card
+       * spends of its permission's `perType` group (Aminatou's Augury — an
+       * artifact creature as either), `source` the card itself. */
       readonly graveyardGrant?: GraveyardGrant;
       /** How many of the cost's Phyrexian pips to pay with 2 life each
        * rather than mana (rule 107.4f) — at most the offer's

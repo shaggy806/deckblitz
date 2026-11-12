@@ -722,6 +722,7 @@ import _poolAmbush from "./pool/ambush.js";
 import _poolAmethystDragon from "./pool/amethyst-dragon.js";
 import _poolAminatouTheFateshifter from "./pool/aminatou-the-fateshifter.js";
 import _poolAminatouVeilPiercer from "./pool/aminatou-veil-piercer.js";
+import _poolAminatousAugury from "./pool/aminatous-augury.js";
 import _poolAmmitEternal from "./pool/ammit-eternal.js";
 import _poolAmnesia from "./pool/amnesia.js";
 import _poolAmoeboidChangeling from "./pool/amoeboid-changeling.js";
@@ -33344,6 +33345,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAmethystDragon,
   _poolAminatouTheFateshifter,
   _poolAminatouVeilPiercer,
+  _poolAminatousAugury,
   _poolAmmitEternal,
   _poolAmnesia,
   _poolAmoeboidChangeling,
@@ -65979,6 +65981,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/amethyst-dragon": _poolAmethystDragon,
   "pool/aminatou-the-fateshifter": _poolAminatouTheFateshifter,
   "pool/aminatou-veil-piercer": _poolAminatouVeilPiercer,
+  "pool/aminatous-augury": _poolAminatousAugury,
   "pool/ammit-eternal": _poolAmmitEternal,
   "pool/amnesia": _poolAmnesia,
   "pool/amoeboid-changeling": _poolAmoeboidChangeling,

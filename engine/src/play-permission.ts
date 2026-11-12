@@ -67,6 +67,11 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  * - `oncePerTurn`: one play a turn among everything this source gives it.
  * - `perType`: Muldrotha's: once a turn per permanent type, the player naming
  *   which a multi-typed card spends; `"land"` is what lets it play a land.
+ *   Given over cards, one play of each type among them all, for as long as
+ *   the grant lasts — Aminatou's Augury's "for each nonland card type, you
+ *   may cast a spell of that type from among the exiled cards" (a
+ *   `GameState.permissionGroups` entry's `types`; the cast names the type
+ *   in `graveyardGrant.asType`).
  * - `upTo`: this many plays in all under this permission, "a spell from among
  *   those cards".
  *
@@ -204,7 +209,7 @@ export interface CardPlayPermission extends Omit<PlayTerms, "upTo"> {
   readonly source?: { readonly id: ObjectId; readonly zoneChangeCount: number };
   readonly whileSource?: boolean;
   /** The `GameState.permissionGroups` entry it shares with the other cards the
-   * same effect gave it (`upTo`). */
+   * same effect gave it (`upTo`, or `perType`: the types the group has left). */
   readonly group?: number;
 }
 

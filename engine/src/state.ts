@@ -6430,8 +6430,14 @@ export interface GameState {
    * `GameObject.impulse.group`) names its entry; one card played under it
    * spends one for them all, and at none left none of them may be. An entry
    * no permission names any more goes as a turn begins.
+   *
+   * `types`: a `perType` group's card types not yet spent — "for each
+   * nonland card type, you may cast a spell of that type from among the
+   * exiled cards" (Aminatou's Augury): a card is playable under it while it
+   * has one of them, and playing it spends the one its caster names (a
+   * multi-typed card as either type — the ruling). `left` is unused then.
    */
-  permissionGroups?: { readonly id: number; readonly left: number }[];
+  permissionGroups?: { readonly id: number; readonly left: number; readonly types?: readonly CardType[] }[];
   /** What has happened this round and this game: the one record every "this
    * turn", "last turn" and "this game" read asks (`journal.ts`). State, not
    * `eventLog`, because bot simulations empty the log. Absent until something
