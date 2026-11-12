@@ -11962,9 +11962,11 @@ import _poolHadesSorcererOfEld from "./pool/hades-sorcerer-of-eld.js";
 import _poolHagHedgeMage from "./pool/hag-hedge-mage.js";
 import _poolHaggle from "./pool/haggle.js";
 import _poolHagiMob from "./pool/hagi-mob.js";
+import _poolHagraBroodpit from "./pool/hagra-broodpit.js";
 import _poolHagraConstrictor from "./pool/hagra-constrictor.js";
 import _poolHagraCrocodile from "./pool/hagra-crocodile.js";
 import _poolHagraDiabolist from "./pool/hagra-diabolist.js";
+import _poolHagraMauling from "./pool/hagra-mauling.js";
 import _poolHagraSharpshooter from "./pool/hagra-sharpshooter.js";
 import _poolHailOfArrows from "./pool/hail-of-arrows.js";
 import _poolHailStorm from "./pool/hail-storm.js";
@@ -22111,6 +22113,7 @@ import _poolRiseOfTheDreadMarn from "./pool/rise-of-the-dread-marn.js";
 import _poolRiseOfTheEldrazi from "./pool/rise-of-the-eldrazi.js";
 import _poolRiseOfTheHobgoblins from "./pool/rise-of-the-hobgoblins.js";
 import _poolRiseOfTheVarmints from "./pool/rise-of-the-varmints.js";
+import _poolRiseOfTheWitchKing from "./pool/rise-of-the-witch-king.js";
 import _poolRiseToGlory from "./pool/rise-to-glory.js";
 import _poolRiseToTheChallenge from "./pool/rise-to-the-challenge.js";
 import _poolRisenExecutioner from "./pool/risen-executioner.js";
@@ -44569,9 +44572,11 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHagHedgeMage,
   _poolHaggle,
   _poolHagiMob,
+  _poolHagraBroodpit,
   _poolHagraConstrictor,
   _poolHagraCrocodile,
   _poolHagraDiabolist,
+  _poolHagraMauling,
   _poolHagraSharpshooter,
   _poolHailOfArrows,
   _poolHailStorm,
@@ -54718,6 +54723,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRiseOfTheEldrazi,
   _poolRiseOfTheHobgoblins,
   _poolRiseOfTheVarmints,
+  _poolRiseOfTheWitchKing,
   _poolRiseToGlory,
   _poolRiseToTheChallenge,
   _poolRisenExecutioner,
@@ -77189,9 +77195,11 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hag-hedge-mage": _poolHagHedgeMage,
   "pool/haggle": _poolHaggle,
   "pool/hagi-mob": _poolHagiMob,
+  "pool/hagra-broodpit": _poolHagraBroodpit,
   "pool/hagra-constrictor": _poolHagraConstrictor,
   "pool/hagra-crocodile": _poolHagraCrocodile,
   "pool/hagra-diabolist": _poolHagraDiabolist,
+  "pool/hagra-mauling": _poolHagraMauling,
   "pool/hagra-sharpshooter": _poolHagraSharpshooter,
   "pool/hail-of-arrows": _poolHailOfArrows,
   "pool/hail-storm": _poolHailStorm,
@@ -87338,6 +87346,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rise-of-the-eldrazi": _poolRiseOfTheEldrazi,
   "pool/rise-of-the-hobgoblins": _poolRiseOfTheHobgoblins,
   "pool/rise-of-the-varmints": _poolRiseOfTheVarmints,
+  "pool/rise-of-the-witch-king": _poolRiseOfTheWitchKing,
   "pool/rise-to-glory": _poolRiseToGlory,
   "pool/rise-to-the-challenge": _poolRiseToTheChallenge,
   "pool/risen-executioner": _poolRisenExecutioner,

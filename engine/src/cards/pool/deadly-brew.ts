@@ -13,7 +13,8 @@ import { defineCard } from "../define.js";
 //     Brew resolves, after permanents are sacrificed.
 // "If you sacrificed a permanent this way" is Tip the Scales' `this-way`
 // condition, narrowed to you; "another" leaves out the card you sacrificed
-// (`notThisWay`). A permanent card is anything but an instant or sorcery
+// (`notThisWay`, `thisWayBy: "you"`: one you own that an opponent sacrificed
+// may come back). A permanent card is anything but an instant or sorcery
 // (Aether Helix).
 const TEXT =
   "Each player sacrifices a creature or planeswalker of their choice. If you sacrificed a permanent this way, you may return another permanent card from your graveyard to your hand.";
@@ -36,7 +37,7 @@ export default defineCard({
           prompt: "Return another permanent card from your graveyard to your hand?",
           effect: {
             kind: "return-from-graveyard",
-            filter: { notTypes: ["instant", "sorcery"], notThisWay: "sacrificed" },
+            filter: { notTypes: ["instant", "sorcery"], notThisWay: "sacrificed", thisWayBy: "you" },
             destination: "hand",
             count: 1,
           },

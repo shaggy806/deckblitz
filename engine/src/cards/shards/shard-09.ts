@@ -382,6 +382,7 @@ import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
 import _poolGunnerConscript from "../pool/gunner-conscript.js";
 import _poolGwafaHazidProfiteer from "../pool/gwafa-hazid-profiteer.js";
 import _poolGwyndalaTheProgeny from "../pool/gwyndala-the-progeny.js";
+import _poolHagraBroodpit from "../pool/hagra-broodpit.js";
 import _poolHammerheimDeadeye from "../pool/hammerheim-deadeye.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHappyHoganBodyguard from "../pool/happy-hogan-bodyguard.js";
@@ -1421,6 +1422,7 @@ const shard: CardShard = {
     _poolGunnerConscript,
     _poolGwafaHazidProfiteer,
     _poolGwyndalaTheProgeny,
+    _poolHagraBroodpit,
     _poolHammerheimDeadeye,
     _poolHamperingSnare,
     _poolHappyHoganBodyguard,

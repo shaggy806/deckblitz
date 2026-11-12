@@ -363,6 +363,7 @@ import _poolGuardianOfTheGuildpact from "../pool/guardian-of-the-guildpact.js";
 import _poolGuma from "../pool/guma.js";
 import _poolGustSkimmer from "../pool/gust-skimmer.js";
 import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
+import _poolHagraMauling from "../pool/hagra-mauling.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHaphazardBombardment from "../pool/haphazard-bombardment.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolGuma,
     _poolGustSkimmer,
     _poolGuulDrazVampire,
+    _poolHagraMauling,
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
     _poolHaphazardBombardment,

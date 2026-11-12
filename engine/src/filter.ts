@@ -1346,6 +1346,15 @@ export interface CardFilter {
    */
   readonly notThisWay?: ThisWayKind;
   /**
+   * Narrows `thisWay` and `notThisWay` to what **you** did this way — the
+   * entries whose player (`ThisWayEntry.player`: who sacrificed, discarded,
+   * milled it…) is the filter's "you". Rise of the Witch-king's "you may
+   * return **another** permanent card" after "each player sacrifices" bars
+   * only the card you sacrificed (its ruling), not one you own that an
+   * opponent sacrificed: `{ notThisWay: "sacrificed", thisWayBy: "you" }`.
+   */
+  readonly thisWayBy?: "you";
+  /**
    * One of the members of a set (`object-sets.ts`), in the stint the set
    * found it in (rule 400.7), whatever it has become since: `"trigger-batch"`
    * is "those creatures", "each of them" — the attackers that counted for an
@@ -2094,10 +2103,14 @@ export function matchesFilter(
     return false;
   }
   if (filter.inZone !== undefined && state.objects[id]?.zone !== filter.inZone) return false;
-  if (filter.thisWay !== undefined && !thisWayEntries(state, filter.thisWay).some((e) => e.object === id)) {
+  const byScope = (e: { readonly player: PlayerId }): boolean => filter.thisWayBy !== "you" || e.player === ctx.you;
+  if (filter.thisWay !== undefined && !thisWayEntries(state, filter.thisWay).some((e) => e.object === id && byScope(e))) {
     return false;
   }
-  if (filter.notThisWay !== undefined && thisWayEntries(state, filter.notThisWay).some((e) => e.object === id)) {
+  if (
+    filter.notThisWay !== undefined &&
+    thisWayEntries(state, filter.notThisWay).some((e) => e.object === id && byScope(e))
+  ) {
     return false;
   }
   if (filter.inSet !== undefined) return false;

@@ -1015,6 +1015,10 @@ export type StaticCondition =
       readonly kind: "opponent-controls";
       readonly filter: CardFilter;
       readonly atLeast: number;
+      /** And no more than this many: Hagra Mauling's "if an opponent controls
+       * **no** basic lands" is `{ atLeast: 0, atMost: 0 }` — some one opponent
+       * whose own count is within the bounds. */
+      readonly atMost?: number;
     }
   /** *Some one* opponent controls **more** permanents matching `filter` than
    * you do — Land Tax and Knight of the White Orchid's "if an opponent

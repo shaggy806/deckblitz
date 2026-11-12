@@ -1128,17 +1128,16 @@ function evalStaticCondition(
     case "opponent-controls":
       // "an opponent controls three or more creatures" — one opponent must
       // meet the count on their own, so count per player and take the best.
-      return state.turnOrder.some(
-        (p) =>
-          p !== you &&
-          !state.players[p].hasLost &&
-          reaches(
-            condition.atLeast,
-            (id) =>
-              state.objects[id].controller === p &&
-              matchesFilter(state, registry, id, condition.filter, { you: p }),
-          ),
-      );
+      return state.turnOrder.some((p) => {
+        if (p === you || state.players[p].hasLost) return false;
+        const theirs = (id: ObjectId): boolean =>
+          state.objects[id].controller === p && matchesFilter(state, registry, id, condition.filter, { you: p });
+        if (condition.atMost !== undefined) {
+          const n = countWhere(theirs);
+          return n >= condition.atLeast && n <= condition.atMost;
+        }
+        return reaches(condition.atLeast, theirs);
+      });
     case "opponent-controls-more": {
       const mine = countWhere(
         (id) =>

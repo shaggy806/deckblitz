@@ -3366,7 +3366,10 @@ doesn't, so use `look-and-choose`. Between resolutions it
 matches nothing. `notThisWay` is its opposite — everything *but* what was done
 that to: Martial Coup's "create X Soldier tokens … destroy all other
 creatures" is `{ type: "creature", notThisWay: "created" }` (with the tokens
-made `separate`). `attacking` asks whether the permanent is currently attacking
+made `separate`). `thisWayBy: "you"` narrows either to what *you* did that
+way: Rise of the Witch-king's "another permanent card" after "each player
+sacrifices" is `{ notThisWay: "sacrificed", thisWayBy: "you" }`, so a card you
+own that an opponent sacrificed may still come back. `attacking` asks whether the permanent is currently attacking
 (Kangee's Lieutenant); `unblocked` whether it's an unblocked attacker (rule
 509.1h: attacking, with blockers declared and none for it, or put onto the
 battlefield attacking since — 508.4d) — from the declare blockers step on,
@@ -6105,6 +6108,9 @@ clause (section 9):
   a combined count summed across *every* opponent (Turbulent Fen: "unless your
   opponents control eight or more lands" — plural "opponents" sums, unlike
   `opponent-controls`'s singular "an opponent").
+- `opponent-controls`' `atMost` bounds the one opponent's count from above:
+  Hagra Mauling's "if an opponent controls **no** basic lands" is
+  `{ kind: "opponent-controls", filter: { type: "land", supertype: "basic" }, atLeast: 0, atMost: 0 }`.
 - `{ kind: "your-turn" }`
 - `{ kind: "turns-taken", atMost }` — you've taken at most that many turns this
   game, the one under way included (extra turns count, a skipped one doesn't).
