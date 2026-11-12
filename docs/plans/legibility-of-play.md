@@ -249,11 +249,6 @@ not), then an effect in `AnimationLayer` — an `.animate()` on the tile for an 
   pile and the counts run down, then jump back when the board lands. A reverse peel onto the pile
   would close it, once the move back announces itself: `finishCascade` and `placeRevealed` move
   the cards with no event (`cards-put-on-bottom` is only a hand's).
-- **A permanent exiled from the battlefield animates filters that don't interpolate**: `runDeath`'s
-  exile keyframes go `brightness blur` → `brightness saturate drop-shadow` → `brightness saturate
-  blur`, lists that differ, so the filter steps discretely. The mill peel's did the same and
-  Chromium painted its last filter from the start (black cards); give every keyframe one list, as
-  `peelCards` now does, and look at it live.
 - **The crown has only been seen popping in**, not flying between players: that needs one
   player taking the monarchy from another (combat damage), which no dev room sets up. It uses
   the same captured flight as a change of control, which was checked.

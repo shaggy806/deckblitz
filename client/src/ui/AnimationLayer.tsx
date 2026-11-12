@@ -430,19 +430,25 @@ function runDeath(object: ObjectId, toZone: string): void {
   }
   const base = srcBaseTransform(el)
   if (toZone === 'exile') {
+    // One filter list in every keyframe, so it interpolates: lists that
+    // differ (`brightness blur` → `brightness saturate drop-shadow`) step
+    // from one to the next instead, as the mill peel's did (black cards).
     el.animate(
       [
-        { opacity: 1, filter: 'brightness(1) blur(0)', transform: `translateY(0) scale(1) ${base}` },
         {
           opacity: 1,
-          filter:
-            'brightness(2) saturate(0.3) drop-shadow(0 0 12px rgba(150, 220, 255, 0.95))',
+          filter: 'brightness(1) saturate(1) blur(0px) drop-shadow(0 0 0px rgba(150, 220, 255, 0))',
+          transform: `translateY(0) scale(1) ${base}`,
+        },
+        {
+          opacity: 1,
+          filter: 'brightness(2) saturate(0.3) blur(0px) drop-shadow(0 0 12px rgba(150, 220, 255, 0.95))',
           transform: `translateY(0) scale(1.05) ${base}`,
           offset: 0.3,
         },
         {
           opacity: 0,
-          filter: 'brightness(2.4) saturate(0) blur(4px)',
+          filter: 'brightness(2.4) saturate(0) blur(4px) drop-shadow(0 0 12px rgba(150, 220, 255, 0))',
           transform: `translateY(-18%) scale(1.12) ${base}`,
         },
       ],
@@ -453,7 +459,7 @@ function runDeath(object: ObjectId, toZone: string): void {
   if (toZone === 'graveyard') {
     el.animate(
       [
-        { opacity: 1, filter: 'grayscale(0)', transform: `translateY(0) scale(1) ${base}` },
+        { opacity: 1, filter: 'grayscale(0) brightness(1)', transform: `translateY(0) scale(1) ${base}` },
         {
           opacity: 0.9,
           filter: 'grayscale(0.8) brightness(0.8)',
@@ -626,14 +632,23 @@ function runStackExit(ev: GameEvent, view: PlayerView, seat: PlayerId, putDown: 
       ghost.box,
       ghost.box.animate(
         [
-          { transform: 'translateY(0) scale(1)', opacity: 1, filter: 'brightness(1)' },
+          // One filter list throughout, so it interpolates (see runDeath).
+          {
+            transform: 'translateY(0) scale(1)',
+            opacity: 1,
+            filter: 'brightness(1) blur(0px) drop-shadow(0 0 0px rgba(255, 200, 90, 0))',
+          },
           {
             transform: 'translateY(0) scale(1.05)',
             opacity: 1,
-            filter: 'brightness(1.6) drop-shadow(0 0 14px rgba(255, 200, 90, 0.9))',
+            filter: 'brightness(1.6) blur(0px) drop-shadow(0 0 14px rgba(255, 200, 90, 0.9))',
             offset: 0.3,
           },
-          { transform: 'translateY(-12%) scale(0.95)', opacity: 0, filter: 'brightness(2) blur(3px)' },
+          {
+            transform: 'translateY(-12%) scale(0.95)',
+            opacity: 0,
+            filter: 'brightness(2) blur(3px) drop-shadow(0 0 14px rgba(255, 200, 90, 0))',
+          },
         ],
         { duration, easing: 'ease-in', fill: 'forwards' },
       ),
