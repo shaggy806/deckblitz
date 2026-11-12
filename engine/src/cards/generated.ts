@@ -18592,6 +18592,7 @@ import _poolNoviceOccultist from "./pool/novice-occultist.js";
 import _poolNovijenHeartOfProgress from "./pool/novijen-heart-of-progress.js";
 import _poolNovijenSages from "./pool/novijen-sages.js";
 import _poolNowForWrathNowForRuin from "./pool/now-for-wrath-now-for-ruin.js";
+import _poolNowhereToRun from "./pool/nowhere-to-run.js";
 import _poolNoxiousAssault from "./pool/noxious-assault.js";
 import _poolNoxiousDragon from "./pool/noxious-dragon.js";
 import _poolNoxiousField from "./pool/noxious-field.js";
@@ -51225,6 +51226,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNovijenHeartOfProgress,
   _poolNovijenSages,
   _poolNowForWrathNowForRuin,
+  _poolNowhereToRun,
   _poolNoxiousAssault,
   _poolNoxiousDragon,
   _poolNoxiousField,
@@ -83871,6 +83873,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/novijen-heart-of-progress": _poolNovijenHeartOfProgress,
   "pool/novijen-sages": _poolNovijenSages,
   "pool/now-for-wrath-now-for-ruin": _poolNowForWrathNowForRuin,
+  "pool/nowhere-to-run": _poolNowhereToRun,
   "pool/noxious-assault": _poolNoxiousAssault,
   "pool/noxious-dragon": _poolNoxiousDragon,
   "pool/noxious-field": _poolNoxiousField,

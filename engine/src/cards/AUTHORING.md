@@ -6004,6 +6004,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   entering: CardFilter }` narrows what is entering: Torpor Orb's "creatures
   entering don't cause abilities to trigger" is `{ who: "everyone",
   entering: { type: "creature" } }` — a land's landfall still triggers.
+- `suppressWardTriggers: CardFilter` — "ward abilities of [these] don't trigger" (Nowhere to Run,
+  `{ type: "creature", controlledBy: "opponent" }`): a matching permanent's ward (the `ward`
+  helper's ability, printed or granted) doesn't trigger as it becomes a target.
 - `doubleTriggers: { cause, filter? }` — "if [something] causes a triggered
   ability of a permanent you control to trigger, that ability triggers an
   additional time", for **any** trigger that event causes. `cause` is

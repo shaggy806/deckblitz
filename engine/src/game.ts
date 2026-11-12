@@ -17624,6 +17624,22 @@ export class Game {
     return false;
   }
 
+  /** Whether `permanent`'s ward abilities don't trigger (rule 702.21a;
+   * `suppressWardTriggers` — Nowhere to Run). */
+  private wardTriggersSuppressed(permanent: ObjectId): boolean {
+    if (this.state.objects[permanent]?.zone !== "battlefield") return false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const filter = ability.suppressWardTriggers;
+        if (filter === undefined || !this.staticActive(source, ability)) continue;
+        if (matchesFilter(this.state, this.registry, permanent, filter, { you: source.controller, source: id })) return true;
+      }
+    }
+    return false;
+  }
+
   private entryTriggerDoublers(controller: PlayerId, enteringId: ObjectId): number {
     let count = 0;
     for (const id of this.state.zones.shared.battlefield) {
@@ -31270,7 +31286,9 @@ export class Game {
           !(
             event.type === "permanent-entered-battlefield" &&
             this.entryTriggersSuppressed(object.controller, event.object)
-          )
+          ) &&
+          // Nowhere to Run: this permanent's ward abilities don't trigger.
+          !(ability.effect?.kind === "ward" && this.wardTriggersSuppressed(id))
         ) {
           // "… deals 3 damage to that player" — the player whose spell or
           // ability did the targeting. (A combat damage trigger's "that

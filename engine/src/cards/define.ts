@@ -3927,6 +3927,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     | "opponents"
     | "everyone"
     | { readonly who: "opponents" | "everyone"; readonly entering: CardFilter };
+  /**
+   * "Ward abilities of [these permanents] don't trigger" (Nowhere to Run's
+   * "Ward abilities of those creatures don't trigger" — creatures your
+   * opponents control): a ward ability (rule 702.21a, the `ward` effect) of a
+   * permanent matching the filter, read from this static's controller,
+   * doesn't trigger while the static applies. Whether it triggers is decided
+   * as the permanent becomes a target (rule 603.2), so the static leaving
+   * later starts no ward trigger (the card's ruling).
+   */
+  readonly suppressWardTriggers?: CardFilter;
   readonly text: string;
 }
 

@@ -540,6 +540,7 @@ import _poolNissasChosen from "../pool/nissas-chosen.js";
 import _poolNissasRenewal from "../pool/nissas-renewal.js";
 import _poolNomadStadium from "../pool/nomad-stadium.js";
 import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
+import _poolNowhereToRun from "../pool/nowhere-to-run.js";
 import _poolNullCaller from "../pool/null-caller.js";
 import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolOblivion from "../pool/oblivion.js";
@@ -1532,6 +1533,7 @@ const shard: CardShard = {
     _poolNissasRenewal,
     _poolNomadStadium,
     _poolNoosegrafMob,
+    _poolNowhereToRun,
     _poolNullCaller,
     _poolNurglesRot,
     _poolOblivion,
