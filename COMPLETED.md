@@ -3847,6 +3847,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **A fresh commander isn't worth a Swords; held removal fades out** (2026-11-11, 21d3d00ca; the user's report the same day): `earlyRemoval` fades from round 3 to nothing by round 6 instead of stopping after round 2, and `commanderOnBoard` is 1 (was 3). Gate scenario "holds Swords from a two-mana commander on its third turn"; `bot:diff`: 17 of 12,186 decisions, removal held. Detail in `docs/plans/bot-effect-knowledge.md`.
 - **v2 casts a passive permanent ahead of a same-cost creature** (2026-11-11): the upgraded
   decks' games had it holding Ghostly Prison (cast in 0 of 8 games castable), Smothering Tithe
   (1 of 11) and Parallel Lives (0 of 4), because a noncreature permanent the engine rates don't
