@@ -8054,3 +8054,19 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Opt with the Island, then pass (Space) without attacking until your second main phase, and keep passing.
 - **Expect:** After the second main phase the step bar goes to Untap, Upkeep and Draw again: the Island untaps and you draw a card. Then the end step, still the same turn.
 - **Not a bug:** No third main phase comes after that draw step: the turn goes straight to its end.
+
+## The top 5000's last cards, batch 311 (2026-11-12)
+
+### Aminatou's Augury: an artifact creature is cast as either type
+- **Do:** Cast Aminatou's Augury with the Islands, put the Forest onto the battlefield, then open your exile.
+- **Expect:** Ornithopter offers two casts, "as artifact" and "as creature". Cast it as an artifact: Grizzly Bears can still be cast free; cast it as a creature instead and Grizzly Bears can't.
+- **Not a bug:** Opt is offered too (an instant), and only one of each type all turn.
+
+### The Unagi of Kyoshi Island: its ward is paid by tapping creatures and artifacts
+- **Do:** Cast Shock on the opponent's Unagi with the Mountain.
+- **Expect:** The ward asks you to pay Waterbend {4}, letting you pick your Grizzly Bears, Ornithopter and Darksteel Relic to tap, one each for {1}. Tap all four: Shock resolves and the Unagi has 2 damage.
+- **Not a bug:** Declining counters Shock.
+
+### Odric, Master Tactician: you declare the blocks, this combat only
+- **Do:** Attack with Odric and the three Grizzly Bears.
+- **Expect:** Once Odric's trigger resolves, you declare the opponent's blocks (or none) in the declare blockers step.

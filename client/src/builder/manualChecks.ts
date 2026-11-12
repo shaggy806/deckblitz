@@ -12095,6 +12095,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Sphinx of the Second Sun: a second untap, upkeep and draw before the end step',
     board({ you: { bf: ['Sphinx of the Second Sun', 'Island'], hand: ['Opt'] } }),
   ),
+  preset(
+    "Aminatou's Augury: an artifact creature is cast as either type",
+    board({
+      you: {
+        bf: [{ name: 'Island', n: 8 }],
+        hand: ["Aminatou's Augury"],
+        lib: ['Ornithopter', 'Grizzly Bears', 'Forest', 'Opt', 'Wastes', 'Wastes', 'Wastes', 'Wastes'],
+      },
+    }),
+  ),
+  preset(
+    'The Unagi of Kyoshi Island: its ward is paid by tapping creatures and artifacts',
+    board({
+      you: { bf: ['Mountain', 'Grizzly Bears', 'Grizzly Bears', 'Ornithopter', 'Darksteel Relic'], hand: ['Shock'] },
+      opp: { bf: ['The Unagi of Kyoshi Island'] },
+    }),
+  ),
+  preset(
+    'Odric, Master Tactician: you declare the blocks, this combat only',
+    board({
+      you: { bf: ['Odric, Master Tactician', 'Grizzly Bears', 'Grizzly Bears', 'Grizzly Bears'] },
+      opp: { bf: ['Hill Giant', 'Grizzly Bears'] },
+    }),
+  ),
   preset('Game menu: leaving a game being played asks first', board({ you: { bf: ['Forest'] } })),
   preset('A turn that ends on its own says so', board({ you: { hand: ['Forest'] } })),
 ]

@@ -1,0 +1,78 @@
+{
+ "batch": "B311",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 2441–2796 (2026-11-12): the next ten of the cards still missing from top-commander-cards.txt, each blocked on one small feature (B294) — built best rank first, no agents. Features: `shuffle-library` `exceptTop` and `repeat` `mayAgain.costLife` (Lim-Dûl's Vault), `perType` on a grant over cards with the cast naming its type (Aminatou's Augury), `choose-combat` `thisCombat` (Odric, Master Tactician), the `attack-triggers-own-ability` trigger event (Firebender Ascension), filter `ownedByRef` (Expropriate), `remove-counters` `inExile` (Mari, the Killing Quill), triggered `resolvesDespiteIllegalTargets` (Gilded Drake), `FlickerCounters.and` (Semester's End), `spellGains.uncounterable` (Boseiju, Who Shelters All), `WardCost.waterbend` (The Unagi of Kyoshi Island). Next, still on their B294 records: Duplicant, Nowhere to Run, Paradox Haze, Emet-Selch of the Third Seat, Wyll's Reversal, Sovereign Okinec Ahau, Lae'zel's Acrobatics, Magewright's Stone, Biomancer's Familiar, Rottenmouth Viper and the rest of the list.",
+ "authored": [
+  {
+   "name": "Lim-Dûl's Vault",
+   "files": [
+    "engine/src/cards/pool/lim-duls-vault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aminatou's Augury",
+   "files": [
+    "engine/src/cards/pool/aminatous-augury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Odric, Master Tactician",
+   "files": [
+    "engine/src/cards/pool/odric-master-tactician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firebender Ascension",
+   "files": [
+    "engine/src/cards/pool/firebender-ascension.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expropriate",
+   "files": [
+    "engine/src/cards/pool/expropriate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mari, the Killing Quill",
+   "files": [
+    "engine/src/cards/pool/mari-the-killing-quill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilded Drake",
+   "files": [
+    "engine/src/cards/pool/gilded-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Semester's End",
+   "files": [
+    "engine/src/cards/pool/semesters-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boseiju, Who Shelters All",
+   "files": [
+    "engine/src/cards/pool/boseiju-who-shelters-all.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Unagi of Kyoshi Island",
+   "files": [
+    "engine/src/cards/pool/the-unagi-of-kyoshi-island.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}
