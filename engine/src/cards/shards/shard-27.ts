@@ -754,6 +754,7 @@ import _poolSoulSalvage from "../pool/soul-salvage.js";
 import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
 import _poolSoulswornJury from "../pool/soulsworn-jury.js";
+import _poolSovereignOkinecAhau from "../pool/sovereign-okinec-ahau.js";
 import _poolSparkElemental from "../pool/spark-elemental.js";
 import _poolSpectersShriek from "../pool/specters-shriek.js";
 import _poolSpectraWard from "../pool/spectra-ward.js";
@@ -1745,6 +1746,7 @@ const shard: CardShard = {
     _poolSoulreaperOfMogis,
     _poolSoulsMajesty,
     _poolSoulswornJury,
+    _poolSovereignOkinecAhau,
     _poolSparkElemental,
     _poolSpectersShriek,
     _poolSpectraWard,

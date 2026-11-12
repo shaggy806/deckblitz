@@ -16221,6 +16221,7 @@ import _poolMagesContest from "./pool/mages-contest.js";
 import _poolMagesGuile from "./pool/mages-guile.js";
 import _poolMagetaTheLion from "./pool/mageta-the-lion.js";
 import _poolMagetasBoon from "./pool/magetas-boon.js";
+import _poolMagewrightsStone from "./pool/magewrights-stone.js";
 import _poolMaggotCarrier from "./pool/maggot-carrier.js";
 import _poolMaggotTherapy from "./pool/maggot-therapy.js";
 import _poolMagicDamper from "./pool/magic-damper.js";
@@ -25260,6 +25261,7 @@ import _poolSouthernAirTemple from "./pool/southern-air-temple.js";
 import _poolSouthernElephant from "./pool/southern-elephant.js";
 import _poolSouthernPaladin from "./pool/southern-paladin.js";
 import _poolSouvenirSnatcher from "./pool/souvenir-snatcher.js";
+import _poolSovereignOkinecAhau from "./pool/sovereign-okinec-ahau.js";
 import _poolSovereignsBite from "./pool/sovereigns-bite.js";
 import _poolSovereignsMacuahuitl from "./pool/sovereigns-macuahuitl.js";
 import _poolSovereignsOfLostAlara from "./pool/sovereigns-of-lost-alara.js";
@@ -48852,6 +48854,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMagesGuile,
   _poolMagetaTheLion,
   _poolMagetasBoon,
+  _poolMagewrightsStone,
   _poolMaggotCarrier,
   _poolMaggotTherapy,
   _poolMagicDamper,
@@ -57891,6 +57894,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSouthernElephant,
   _poolSouthernPaladin,
   _poolSouvenirSnatcher,
+  _poolSovereignOkinecAhau,
   _poolSovereignsBite,
   _poolSovereignsMacuahuitl,
   _poolSovereignsOfLostAlara,
@@ -81496,6 +81500,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mages-guile": _poolMagesGuile,
   "pool/mageta-the-lion": _poolMagetaTheLion,
   "pool/magetas-boon": _poolMagetasBoon,
+  "pool/magewrights-stone": _poolMagewrightsStone,
   "pool/maggot-carrier": _poolMaggotCarrier,
   "pool/maggot-therapy": _poolMaggotTherapy,
   "pool/magic-damper": _poolMagicDamper,
@@ -90535,6 +90540,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/southern-elephant": _poolSouthernElephant,
   "pool/southern-paladin": _poolSouthernPaladin,
   "pool/souvenir-snatcher": _poolSouvenirSnatcher,
+  "pool/sovereign-okinec-ahau": _poolSovereignOkinecAhau,
   "pool/sovereigns-bite": _poolSovereignsBite,
   "pool/sovereigns-macuahuitl": _poolSovereignsMacuahuitl,
   "pool/sovereigns-of-lost-alara": _poolSovereignsOfLostAlara,

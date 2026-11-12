@@ -565,6 +565,11 @@ export interface FlickerOptions {
   /** The effect named its own source (`target: "source"`). */
   readonly fromSource?: boolean;
 }
+/** `add-counter-all`'s per-permanent amounts, each read off the permanent
+ * that gets the counters — see its `amount`. */
+export type OwnCounterAmount = "own-toughness" | "own-power-over-base-power";
+export const isOwnCounterAmount = (amount: unknown): amount is OwnCounterAmount =>
+  amount === "own-toughness" || amount === "own-power-over-base-power";
 /** A numeric amount in an effect: a literal, `"x"` for the value chosen for
  * `{X}` when the spell/ability was put on the stack (`ResolutionContext.x`),
  * or a live count of battlefield permanents matching a filter, evaluated from
@@ -6010,8 +6015,14 @@ export type EffectSpec =
        * toughness — Canopy Gargantuan's "a number of +1/+1 counters on each
        * other creature you control equal to **that creature's** toughness".
        * Every permanent's toughness is read before any counter goes on, so
-       * none is sized by another's new counters. */
-      readonly amount: EffectAmount | "own-toughness";
+       * none is sized by another's new counters.
+       * `"own-power-over-base-power"`: as many as its power exceeds its
+       * base power (none where it doesn't) — Sovereign Okinec Ahau's "for
+       * each creature you control with power greater than that creature's
+       * base power, put a number of +1/+1 counters on that creature equal to
+       * the difference", its filter `power: { op: "gt", n: { own:
+       * "basePower" } }`. */
+      readonly amount: EffectAmount | OwnCounterAmount;
       /** Spare the effect's own source — "put a +1/+1 counter on each
        * **other** creature you control" (Finneas, Ace Archer). */
       readonly exceptSource?: boolean;
@@ -12378,7 +12389,7 @@ export interface EffectApi {
   addCounterAll(
     filter: CardFilter,
     counter: string,
-    amount: number | "own-toughness",
+    amount: number | OwnCounterAmount,
     exceptSource?: boolean,
     /** Whose side `filter` is read from — see `controlledByTarget`. */
     scopeTo?: PlayerId,
@@ -18490,13 +18501,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.addCounterAll(
         spec.filter,
         spec.counter,
-        spec.amount === "own-toughness" ? spec.amount : amountValue(spec.amount, ctx),
+        isOwnCounterAmount(spec.amount) ? spec.amount : amountValue(spec.amount, ctx),
         spec.exceptSource === true,
         scopeTo,
         spec.putByTarget === true ? scopeTo : undefined,
         spared?.kind === "object" ? spared.object : undefined,
       );
-      if (spec.andSuspended === true && spec.amount !== "own-toughness") ctx.timeCountersOnSuspended(amountValue(spec.amount, ctx));
+      if (spec.andSuspended === true && !isOwnCounterAmount(spec.amount)) ctx.timeCountersOnSuspended(amountValue(spec.amount, ctx));
       return;
     }
     case "double-counters-all":

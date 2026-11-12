@@ -5056,18 +5056,22 @@ export function hasManaAbility(
 
 /**
  * Whether `object` has an activated ability (rule 602), printed or granted:
- * with `mana` given, only one that is or isn't a mana ability (rule 605.1a).
+ * with `mana` given, only one that is or isn't a mana ability (rule 605.1a);
+ * with `tapCost`, only one with the {T} symbol in its cost (rule 107.5) — a
+ * basic land type's intrinsic "{T}: Add" (rule 305.6) among them.
  */
 export function hasActivatedAbilityOf(
   state: GameState,
   registry: CardRegistry,
   object: GameObject,
-  mana: boolean | undefined,
+  want: { readonly mana?: boolean; readonly tapCost?: boolean },
   view: TargetView = {},
 ): boolean {
   const onBattlefield = object.zone === "battlefield";
   const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
-  const fits = (ability: ActivatedAbility): boolean => mana === undefined || isManaAbility(ability) === mana;
+  const mana = want.mana;
+  const fits = (ability: ActivatedAbility): boolean =>
+    (mana === undefined || isManaAbility(ability) === mana) && (want.tapCost !== true || ability.cost.tap === true);
   const def = registry.get(rulesTextName(object));
   if (lostAt === null && def.activated.some((a, i) => fits(a) && !inactiveStandIn(state, registry, object, i))) return true;
   // A basic land type's mana ability (rule 305.6).

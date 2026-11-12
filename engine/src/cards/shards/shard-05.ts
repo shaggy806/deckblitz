@@ -544,6 +544,7 @@ import _poolLupariShield from "../pool/lupari-shield.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMaelstromMuse from "../pool/maelstrom-muse.js";
+import _poolMagewrightsStone from "../pool/magewrights-stone.js";
 import _poolMagmaroth from "../pool/magmaroth.js";
 import _poolMagusOfTheLibrary from "../pool/magus-of-the-library.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
@@ -1557,6 +1558,7 @@ const shard: CardShard = {
     _poolLyseHext,
     _poolMadameNullPowerBroker,
     _poolMaelstromMuse,
+    _poolMagewrightsStone,
     _poolMagmaroth,
     _poolMagusOfTheLibrary,
     _poolMalachiteGolem,

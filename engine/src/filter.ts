@@ -1060,9 +1060,13 @@ export interface CardFilter {
   /**
    * Has an activated ability (rule 602): with `mana: false`, one that isn't a
    * mana ability (rule 605.1a) — Ravager Wurm's "target land with an activated
-   * ability that isn't a mana ability"; `mana: true`, one that is.
+   * ability that isn't a mana ability"; `mana: true`, one that is. With
+   * `tapCost: true`, one with the {T} symbol in its cost (rule 107.5) —
+   * Magewright's Stone's "a creature that has an activated ability with {T} in
+   * its cost"; a cost that taps other permanents ("tap an untapped creature
+   * you control") doesn't count, per its ruling.
    */
-  readonly hasActivatedAbility?: { readonly mana?: boolean };
+  readonly hasActivatedAbility?: { readonly mana?: boolean; readonly tapCost?: boolean };
   /** Above the applying permanent in its owner's graveyard (rule 404.2: a
    * graveyard keeps its order): Nether Shadow's "with three or more creature
    * cards above it". The top is the card put there last. */
@@ -2918,7 +2922,7 @@ export function matchesFilter(
   }
   if (filter.hasActivatedAbility !== undefined) {
     if (live === undefined) return false;
-    if (!hasActivatedAbilityOf(state, registry, live, filter.hasActivatedAbility.mana, layered !== undefined ? { inFold: true, types: layered.types, subtypes: layered.subtypes, supertypes: layered.supertypes, keywords: layered.keywords } : {})) return false;
+    if (!hasActivatedAbilityOf(state, registry, live, filter.hasActivatedAbility, layered !== undefined ? { inFold: true, types: layered.types, subtypes: layered.subtypes, supertypes: layered.supertypes, keywords: layered.keywords } : {})) return false;
   }
   if (filter.suspended !== undefined) {
     const suspended = live !== undefined && live.zone === "exile" && live.suspended === true && (live.counters.time ?? 0) > 0;

@@ -38798,7 +38798,12 @@ controlledBy,
           .filter((id) => id !== sparedSource && id !== except)
           .map((id) => ({
             id,
-            n: amount === "own-toughness" ? this.characteristics(id).toughness : amount,
+            n:
+              amount === "own-toughness"
+                ? this.characteristics(id).toughness
+                : amount === "own-power-over-base-power"
+                  ? Math.max(0, this.characteristics(id).power - this.characteristics(id).basePower)
+                  : amount,
           }));
         this.withCounterBatch(() => {
           for (const { id, n } of each) {
