@@ -3348,14 +3348,16 @@ function Table({
               ? { picks: permanentPicks }
               : mode === 'separate-piles'
                 ? { picks: pilePicks }
-                : null
+                : mode === 'proliferate'
+                  ? { picks: proliferatePicks.flatMap((t) => (t.kind === 'object' ? [t.object] : [])) }
+                  : null
       if (picking) {
         const fresh = ids.find((i) => !picking.picks.includes(i))
         if (fresh !== undefined) return fresh
       }
       return ids[0]
     },
-    [mode, activeTargeting, pendingSac, copyChoiceAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, pilePicks],
+    [mode, activeTargeting, pendingSac, copyChoiceAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, pilePicks, proliferatePicks],
   )
 
   const clickPermanent = useCallback(
@@ -4177,9 +4179,13 @@ function Table({
       selected = pick !== undefined
       if (pick !== undefined) badge = pick === 1 ? '+1 time' : '−1 time'
     } else if (mode === 'proliferate' && proliferateAction) {
-      const taken = proliferatePicks.filter((t) => t.kind === 'object' && t.object === id).length
-      const of = proliferateAction.copies?.[id] ?? 1
-      highlight = eligibleToProliferate(proliferateAction, id) && taken === 0
+      // Every member of a folded tile (identical tokens with the same
+      // counters), each a pick of its own; a compacted stack's count is
+      // chosen from its menu.
+      const members = ids.filter((i) => eligibleToProliferate(proliferateAction, i))
+      const taken = proliferatePicks.filter((t) => t.kind === 'object' && members.includes(t.object)).length
+      const of = members.reduce((n, i) => n + (proliferateAction.copies?.[i] ?? 1), 0)
+      highlight = members.length > 0 && taken === 0
       selected = taken > 0
       if (of > 1 && taken > 0) badge = `✓ ${taken}/${of}`
     } else if (mode === 'priority') {

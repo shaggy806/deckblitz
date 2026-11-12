@@ -253,13 +253,6 @@ Follow-on ideas, approved by the user on 2026-09-30:
   off a stack and folded back before the frame is drawn
   (`refoldSplitTokens`, Tribute to the World Tree): only the `counter-added` naming the
   surviving stack floats its "+1/+1 ×2"; the rest name objects gone from the view.
-- **The board folds identical tokens only when they carry no counters** (`board.ts`'s
-  `stackable` needs empty `counters`, though `tileKey` already compares them). Tokens that were
-  never one engine stack — three Warriors made below the stacking threshold, then grown alike by
-  Cathars' Crusade — stay a tile each. Dropping the condition needs every decision that picks
-  from a folded tile to take a fresh member per click first: proliferate's toggle acts on
-  `ids[0]` (`pickIdForClick` has no proliferate case), so a folded tile of three could only ever
-  give one of them a counter. Found 2026-10-03 (`docs/plans/token-stack-choices.md`).
 - **Half the sounds are still synthesised placeholders** (`game/sound.ts`): the table's own noises
   are recorded now (draw, land, shuffle, discard, mill, counters, dice, a countered spell, and
   combat's sword declarations and hits; CC0 packs, `client/public/sfx/CREDITS.md`), but cast,
