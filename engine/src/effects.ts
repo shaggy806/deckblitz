@@ -9626,6 +9626,18 @@ export type EffectSpec =
       readonly ifDid?: EffectSpec;
       readonly ifDidnt?: EffectSpec;
       readonly resultsFor?: PlayerScope;
+      /**
+       * The question asked this many times of each player, all of one
+       * player's in a row before the next player's — Rottenmouth Viper's "for
+       * each blight counter on it, each opponent loses 4 life unless that
+       * player sacrifices a nonland permanent of their choice or discards a
+       * card": each opponent in turn order makes all of their choices, a card
+       * or permanent chosen once not offered again, then everything they
+       * chose happens at once (its rulings; rule 101.4). Read once, as it
+       * starts. `ifDid` / `ifDidnt` follow once per answer, all together as
+       * one simultaneous event — they may ask nothing more.
+       */
+      readonly rounds?: EffectAmount;
       /** Set by the engine on the copy it parks between questions. */
       readonly progress?: EachPlayerMayProgress;
     }
@@ -12414,6 +12426,9 @@ export interface EffectApi {
   /** Whether `player` took what an `"each-player-may"` that began at event
    * `since` offered them — their first answer for this source since. */
   tookEachPlayerMay(player: PlayerId, since: number): boolean;
+  /** Each answer `player` gave this `each-player-may` since event `since`,
+   * in order: whether they took it (its `rounds`). */
+  eachPlayerMayAnswers(player: PlayerId, since: number): readonly boolean[];
   /** The permanent `player` sacrificed in answer to an `"each-player-may"`
    * begun at event `since` — the first they sacrificed after their answer —
    * or `undefined` when they sacrificed none. */
@@ -13735,7 +13750,15 @@ function applyEachPlayerMay(
 ): void {
   const since = spec.progress?.since ?? ctx.nextEventSeq();
   let asked = spec.progress?.asked ?? [];
-  let toAsk = spec.progress?.toAsk ?? eachPlayerMayAsks(spec.who, ctx, spec.startingWithYou === true);
+  let toAsk =
+    spec.progress?.toAsk ??
+    (() => {
+      const players = eachPlayerMayAsks(spec.who, ctx, spec.startingWithYou === true);
+      if (spec.rounds === undefined) return players;
+      // All of one player's questions before the next player's.
+      const n = Math.min(Math.max(0, Math.floor(amountValue(spec.rounds, ctx))), MAX_ROUNDS);
+      return players.flatMap((player) => Array<PlayerId>(n).fill(player));
+    })();
   const park = (progress: EachPlayerMayProgress, below: number): void =>
     ctx.resumeAfterDecisions({ ...spec, progress }, below);
   // An effect that asks nothing more of the player — draw, discard their
@@ -13845,6 +13868,27 @@ function applyEachPlayerMay(
     }
   }
   if (spec.ifDid === undefined && spec.ifDidnt === undefined) return;
+  if (spec.rounds !== undefined) {
+    // One follow-up per answer, in turn order, all as one event: Rottenmouth
+    // Viper's life lost for each "neither" (its rulings). A player asked
+    // fewer times than the rest (nothing left to choose) didn't, those times.
+    const counted = spec.resultsFor === undefined ? undefined : new Set(ctx.playersInScope(spec.resultsFor));
+    const answered = new Map<PlayerId, number>();
+    const each = asked
+      .filter((player) => counted === undefined || counted.has(player))
+      .map((player) => {
+        const k = answered.get(player) ?? 0;
+        answered.set(player, k + 1);
+        return { player, did: ctx.eachPlayerMayAnswers(player, since)[k] === true };
+      });
+    ctx.simultaneously(() => {
+      for (const { player, did } of each) {
+        const followUp = did ? spec.ifDid : spec.ifDidnt;
+        if (followUp !== undefined) applyEffectSpec(followUp, ctx.aboutPlayer(player));
+      }
+    });
+    return;
+  }
   let results =
     spec.progress?.results ??
     (() => {
@@ -14776,6 +14820,8 @@ function placeCastNowRest(
  * same resource bound as `Game.MAX_EFFECT_INSTANCES`, which this module
  * can't import (a real cycle). No real game gets near it. */
 const MAX_COPY_COUNT = 1000;
+/** An `each-player-may`'s `rounds`, at most — a question per round. */
+const MAX_ROUNDS = 1000;
 
 /** Resolve an {@link EffectAmount} against the resolution context. `each`
  * is the player a scoped effect is being applied to right now, for a

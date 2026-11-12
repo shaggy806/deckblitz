@@ -22444,6 +22444,7 @@ import _poolRottedHulk from "./pool/rotted-hulk.js";
 import _poolRottedHystrix from "./pool/rotted-hystrix.js";
 import _poolRottenReunion from "./pool/rotten-reunion.js";
 import _poolRottenheartGhoul from "./pool/rottenheart-ghoul.js";
+import _poolRottenmouthViper from "./pool/rottenmouth-viper.js";
 import _poolRottingFensnake from "./pool/rotting-fensnake.js";
 import _poolRottingGiant from "./pool/rotting-giant.js";
 import _poolRottingLegion from "./pool/rotting-legion.js";
@@ -55084,6 +55085,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRottedHystrix,
   _poolRottenReunion,
   _poolRottenheartGhoul,
+  _poolRottenmouthViper,
   _poolRottingFensnake,
   _poolRottingGiant,
   _poolRottingLegion,
@@ -87737,6 +87739,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rotted-hystrix": _poolRottedHystrix,
   "pool/rotten-reunion": _poolRottenReunion,
   "pool/rottenheart-ghoul": _poolRottenheartGhoul,
+  "pool/rottenmouth-viper": _poolRottenmouthViper,
   "pool/rotting-fensnake": _poolRottingFensnake,
   "pool/rotting-giant": _poolRottingGiant,
   "pool/rotting-legion": _poolRottingLegion,

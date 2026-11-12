@@ -38793,6 +38793,10 @@ controlledBy,
         }
       },
       tookEachPlayerMay: (player, since) => this.tookEachPlayerMay(source, player, since),
+      eachPlayerMayAnswers: (player, since) =>
+        this.eventsSince(since).flatMap((event) =>
+          event.type === "modes-chosen" && event.source === source && event.player === player ? [event.modes.length > 0] : [],
+        ),
       sacrificedForEachPlayerMay: (player, since) => {
         let answered = false;
         for (const event of this.eventsSince(since)) {
@@ -42216,7 +42220,7 @@ controlledBy,
         return object?.zone === "battlefield" && object.controller === player;
       }
       if ("discard" in option) {
-        return this.state.zones.perPlayer[player].hand.length >= option.discard;
+        return this.discardCandidates(player).length >= option.discard;
       }
       if ("putFromHand" in option) {
         return this.state.zones.perPlayer[player].hand.some((id) =>
@@ -42236,12 +42240,16 @@ controlledBy,
         }, 0);
         return reach >= option.totalPowerAtLeast;
       }
+      // One already chosen while choices are held isn't chosen again.
+      const chosen = new Set(
+        this.state.pendingSacrificeVictims.filter((v) => v.player === player).map((v) => v.object),
+      );
       return (
         this.eligibleSacrifices(
           player,
           option.sacrifice,
           option.exceptSource === true ? source : spared(option.exceptTarget),
-        ).length >= (option.count ?? 1)
+        ).filter((id) => !chosen.has(id)).length >= (option.count ?? 1)
       );
     };
     const available = options.filter(payable);
@@ -55540,12 +55548,13 @@ controlledBy,
       }
       return;
     }
+    const narrowed = filter !== undefined || hand.length < this.state.zones.perPlayer[player].hand.length;
     this.state.awaiting = {
       kind: "discard",
       player,
       count: amount,
       fromEffect: true,
-      ...(filter !== undefined ? { eligible: hand } : {}),
+      ...(narrowed ? { eligible: hand } : {}),
       ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       ...(unlessOne !== undefined
         ? {
@@ -55561,9 +55570,15 @@ controlledBy,
    * `filter` (printed characteristics — layer effects don't reach a hand),
    * never `except` (an ability's own source card). */
   private discardCandidates(player: PlayerId, filter?: CardFilter, except?: ObjectId, x?: number): ObjectId[] {
+    // A card already chosen to be discarded while choices are held isn't
+    // chosen again (Rottenmouth Viper's rulings).
+    const held = new Set(
+      (this.state.heldChoices?.discards ?? []).filter((d) => d.player === player).flatMap((d) => d.objects),
+    );
     return this.state.zones.perPlayer[player].hand.filter(
       (id) =>
         id !== except &&
+        !held.has(id) &&
         (filter === undefined ||
           matchesFilter(this.state, this.registry, id, filter, { you: player, ...(x !== undefined ? { x } : {}) })),
     );

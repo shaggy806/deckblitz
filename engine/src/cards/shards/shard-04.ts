@@ -665,6 +665,7 @@ import _poolRoilmagesTrick from "../pool/roilmages-trick.js";
 import _poolRootElemental from "../pool/root-elemental.js";
 import _poolRootSliver from "../pool/root-sliver.js";
 import _poolRootgrapple from "../pool/rootgrapple.js";
+import _poolRottenmouthViper from "../pool/rottenmouth-viper.js";
 import _poolRowanFearlessSparkmage from "../pool/rowan-fearless-sparkmage.js";
 import _poolRoyalTreatment from "../pool/royal-treatment.js";
 import _poolRubblebeltRunner from "../pool/rubblebelt-runner.js";
@@ -1666,6 +1667,7 @@ const shard: CardShard = {
     _poolRootElemental,
     _poolRootSliver,
     _poolRootgrapple,
+    _poolRottenmouthViper,
     _poolRowanFearlessSparkmage,
     _poolRoyalTreatment,
     _poolRubblebeltRunner,

@@ -2674,7 +2674,7 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   don't pay is still the **controller's** effect — an opponent who declines
   Rhystic Study's {1} lets *you* draw, and Smothering Tithe's Treasure is
   yours — so an `otherwise` that is itself a `may` asks the controller.
-- **`each-player-may { who, prompt?, effect?, options?, choices?, ifDid?, ifDidnt?, resultsFor? }`**
+- **`each-player-may { who, prompt?, effect?, options?, choices?, ifDid?, ifDidnt?, resultsFor?, rounds? }`**
   — a choice that belongs to other players, or to several: "each player
   may …", "each opponent may …", "its controller may …" (`who:
   "trigger-controller"` — Selvala, Heart of the Wilds), "the player whose
@@ -2708,6 +2708,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `this-way` condition of `"that-player"`).
   `resultsFor` keeps the follow-ups to a scope: Kynaios and Tiro's "then each
   **opponent** who didn't draws a card" asks `"each-player"` with
+  `resultsFor: "each-opponent"`. `rounds: EffectAmount` asks each player that many times in a row
+  (Rottenmouth Viper's "for each blight counter on it, each opponent loses 4 life unless …" —
+  `{ countersOn: "source", counter: "blight" }`): a card or permanent chosen once isn't offered
+  again, everything chosen happens at once, then one follow-up per answer, all as one event.
   `resultsFor: "each-opponent"`. A player with nothing they could take isn't
   asked, and didn't. A permanent a player **sacrificed** in answer (a
   `sacrifice` option) is their follow-up's `"sacrificed"`, so
