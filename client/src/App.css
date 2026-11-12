@@ -3969,6 +3969,20 @@
      :hover rule below can still win over it without a specificity fight. */
   z-index: var(--z, 0);
 }
+/* The hover box reaches down over the fan's droop: a card's lower edge is
+   drawn below its own box (`--y`, the tilt), and with the pointer there the
+   card grew, lifted off the pointer, let go of the hover, dropped back under
+   it and grew again — bobbing for as long as the pointer stayed (the user,
+   2026-11-11). Under the card it belongs to, so it never takes a hover from
+   a neighbour drawn over it. */
+.hand-cards .hand-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: calc(24px + var(--card-w) * 0.16);
+}
 .hand-cards .hand-card:hover,
 .hand-cards .hand-card.hover-carry,
 .hand-cards .hand-card:focus-within {
