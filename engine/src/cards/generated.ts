@@ -15189,6 +15189,7 @@ import _poolLadySun from "./pool/lady-sun.js";
 import _poolLadyZhurongWarriorQueen from "./pool/lady-zhurong-warrior-queen.js";
 import _poolLaeliaTheBladeReforged from "./pool/laelia-the-blade-reforged.js";
 import _poolLaezelVlaakithsChampion from "./pool/laezel-vlaakiths-champion.js";
+import _poolLaezelsAcrobatics from "./pool/laezels-acrobatics.js";
 import _poolLagacLizard from "./pool/lagac-lizard.js";
 import _poolLagomosHandOfHatred from "./pool/lagomos-hand-of-hatred.js";
 import _poolLagonnaBandElder from "./pool/lagonna-band-elder.js";
@@ -47827,6 +47828,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLadyZhurongWarriorQueen,
   _poolLaeliaTheBladeReforged,
   _poolLaezelVlaakithsChampion,
+  _poolLaezelsAcrobatics,
   _poolLagacLizard,
   _poolLagomosHandOfHatred,
   _poolLagonnaBandElder,
@@ -80478,6 +80480,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lady-zhurong-warrior-queen": _poolLadyZhurongWarriorQueen,
   "pool/laelia-the-blade-reforged": _poolLaeliaTheBladeReforged,
   "pool/laezel-vlaakiths-champion": _poolLaezelVlaakithsChampion,
+  "pool/laezels-acrobatics": _poolLaezelsAcrobatics,
   "pool/lagac-lizard": _poolLagacLizard,
   "pool/lagomos-hand-of-hatred": _poolLagomosHandOfHatred,
   "pool/lagonna-band-elder": _poolLagonnaBandElder,

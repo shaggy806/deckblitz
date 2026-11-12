@@ -775,6 +775,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "additional-upkeep-steps": none,
   "additional-end-step": none,
   "additional-upkeep-step": none,
+  reflicker: none,
   "additional-beginning-phase": none,
   "additional-land-drop": none,
   // Your own library thinned, or an opponent's known top undone.

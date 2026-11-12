@@ -4325,6 +4325,20 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Return those cards to the battlefield under their owner's control,
+       * then exile them again" (Lae'zel's Acrobatics' 10—20 row): every card
+       * this resolution's `flicker` with `returnAt` exiled, still in exile and
+       * still waiting on that delayed return, comes back now under its
+       * owner's control (each a new object, rule 400.7; its "as this enters"
+       * choices asked first, rule 614.12) and is exiled again at once — still
+       * linked to the same delayed return, which brings back "those cards"
+       * at its time (rule 610.3). Returning them is one event and exiling
+       * them is another (603.2c).
+       */
+      readonly kind: "reflicker";
+    }
+  | {
+      /**
        * The delayed half of a `flicker` with `returnAt` — never authored on a
        * card: the flicker builds it as it resolves, since `link` only exists
        * once something has been exiled. Returns every card still in exile
@@ -11688,6 +11702,10 @@ export interface EffectApi {
    * `true` when it stopped first to ask an "as this enters" choice (nothing
    * has moved; apply it again once that's answered). */
   putExiledThisWayOntoBattlefield(filter?: CardFilter): boolean;
+  /** See the `"reflicker"` {@link EffectSpec}. `true` when it stopped first
+   * to ask an "as this enters" choice (nothing has moved; apply it again once
+   * that's answered). */
+  reflicker(): boolean;
   /** See the `"move-exiled-this-way"` {@link EffectSpec}. */
   moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter): void;
   /** See the `"put-arrived-onto-battlefield"` {@link EffectSpec}. `true`
@@ -17655,6 +17673,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "move-exiled-this-way":
       ctx.moveExiledThisWay(spec.to, spec.filter);
       return;
+    case "reflicker": {
+      const parked = ctx.parkedCount();
+      if (ctx.reflicker()) ctx.resumeAfterDecisions(spec, parked);
+      return;
+    }
     case "put-arrived-onto-battlefield": {
       const parked = ctx.parkedCount();
       if (ctx.putArrivedOntoBattlefield(spec)) ctx.resumeAfterDecisions(spec, parked);

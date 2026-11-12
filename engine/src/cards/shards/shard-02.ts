@@ -496,6 +496,7 @@ import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolKrrikSonOfYawgmoth from "../pool/krrik-son-of-yawgmoth.js";
 import _poolKudzu from "../pool/kudzu.js";
 import _poolKytheonsTactics from "../pool/kytheons-tactics.js";
+import _poolLaezelsAcrobatics from "../pool/laezels-acrobatics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLandrovalHorizonWitness from "../pool/landroval-horizon-witness.js";
 import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
@@ -1517,6 +1518,7 @@ const shard: CardShard = {
     _poolKrrikSonOfYawgmoth,
     _poolKudzu,
     _poolKytheonsTactics,
+    _poolLaezelsAcrobatics,
     _poolLambholtRavager,
     _poolLandrovalHorizonWitness,
     _poolLapisLazuliTalisman,

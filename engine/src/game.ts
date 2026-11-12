@@ -37512,6 +37512,37 @@ export class Game {
         });
         return false;
       },
+      reflicker: () => {
+        // The cards this resolution's delayed-return flicker exiled, each the
+        // same object still waiting on its link (any zone change clears it).
+        const waiting = [
+          ...new Set(
+            thisWayEntries(this.state, "exiled", since)
+              .map((e) => e.object)
+              .filter((id) => {
+                const object = this.state.objects[id];
+                return object?.zone === "exile" && object.flickerLink !== undefined && !object.isToken;
+              }),
+          ),
+        ];
+        if (waiting.some((id) => this.askEnterChoice(id, this.state.objects[id].owner))) return true;
+        const links = new Map(waiting.map((id) => [id, this.state.objects[id].flickerLink!]));
+        for (const id of waiting) this.state.objects[id].flickerLink = undefined;
+        this.completeFlickerReturn(waiting);
+        const back = waiting.filter((id) => this.state.objects[id]?.zone === "battlefield");
+        this.withLeaveBatch(() => {
+          this.snapshotLeaving(back);
+          for (const id of back) {
+            if (!this.moveObject(id, "exile") || this.state.objects[id]?.zone !== "exile") continue;
+            this.emit({ type: "permanent-exiled", object: id });
+            // A merged or melded permanent's every card (730.3c), as `flicker` links them.
+            for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
+              if (this.state.objects[card]?.zone === "exile") this.state.objects[card].flickerLink = links.get(id);
+            }
+          }
+        });
+        return false;
+      },
       moveExiledThisWay: (to, filter) => {
         // Every card this resolution exiled, from anywhere — a permanent too
         // (Worlds Within Worlds' "exile all creatures … then put all cards
