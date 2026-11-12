@@ -18429,6 +18429,7 @@ import _poolNimraiserPaladin from "./pool/nimraiser-paladin.js";
 import _poolNimrodelWatcher from "./pool/nimrodel-watcher.js";
 import _poolNinThePainArtist from "./pool/nin-the-pain-artist.js";
 import _poolNineFingersKeene from "./pool/nine-fingers-keene.js";
+import _poolNineLivesFamiliar from "./pool/nine-lives-familiar.js";
 import _poolNineLives from "./pool/nine-lives.js";
 import _poolNineRingedBo from "./pool/nine-ringed-bo.js";
 import _poolNineTailWhiteFox from "./pool/nine-tail-white-fox.js";
@@ -51045,6 +51046,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNimrodelWatcher,
   _poolNinThePainArtist,
   _poolNineFingersKeene,
+  _poolNineLivesFamiliar,
   _poolNineLives,
   _poolNineRingedBo,
   _poolNineTailWhiteFox,
@@ -83674,6 +83676,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nimrodel-watcher": _poolNimrodelWatcher,
   "pool/nin-the-pain-artist": _poolNinThePainArtist,
   "pool/nine-fingers-keene": _poolNineFingersKeene,
+  "pool/nine-lives-familiar": _poolNineLivesFamiliar,
   "pool/nine-lives": _poolNineLives,
   "pool/nine-ringed-bo": _poolNineRingedBo,
   "pool/nine-tail-white-fox": _poolNineTailWhiteFox,

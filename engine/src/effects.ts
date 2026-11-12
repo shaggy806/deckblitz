@@ -4005,8 +4005,11 @@ export type EffectSpec =
        * exists on the battlefield (rule 614.12) — Recommission's "If a
        * creature enters this way, it enters with an additional +1/+1 counter
        * on it", What Must Be Done's "It enters with two additional +1/+1
-       * counters on it if it's a creature". */
-      readonly withCounters?: { readonly kind: string; readonly amount: number; readonly ifCreature?: true };
+       * counters on it if it's a creature". `amount` may be read as it
+       * resolves: Nine-Lives Familiar's "return it … with one fewer revival
+       * counter on it" is `{ difference: [{ countersOn: "trigger-object",
+       * counter: "revival" }, 1] }`, the counters it died with (608.2h). */
+      readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount; readonly ifCreature?: true };
       /** "If it would leave the battlefield, exile it instead of putting it
        * anywhere else" (Whip of Erebos) — sets
        * `GameObject.exileIfItWouldLeave` on the permanent it becomes: a
@@ -17511,7 +17514,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           target,
           under,
           spec.enterTapped === true,
-          spec.withCounters,
+          spec.withCounters === undefined
+            ? undefined
+            : { ...spec.withCounters, amount: Math.max(0, amountValue(spec.withCounters.amount, ctx)) },
           spec.exileIfItWouldLeave,
           spec.flipped === true ? "flipped" : spec.transformed === true,
           spec.setTypes !== undefined ||
