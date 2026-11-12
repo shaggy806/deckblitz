@@ -4287,6 +4287,65 @@
   font-size: var(--text-sm);
   padding: 2px 8px;
 }
+/* What else a hand card can do (Cycle, Foretell, Plot, Suspend, an ability
+   that works from the hand): gold pills on the card's top edge, half over
+   it. They were plain buttons under the card, small, and the rightmost
+   cards' sat under the Pass bar (the user, 2026-11-02); on the top edge
+   they show in the lowered tray too. They turn and droop with their card
+   (its own rotate and translate, about the same point — the tile's bottom
+   centre, a card's height below the pills' lowest edge), and ride up to the
+   top edge of the card grown under the pointer — still over it, so the
+   pointer keeps the card grown while it follows them. */
+.hand-card-actions {
+  --act-h: calc(22px * var(--ui));
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - var(--act-h) / 2);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 3px;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: 50% calc(100% + var(--card-w) * 1.4 - var(--act-h) / 2);
+  rotate: var(--r, 0deg);
+  translate: 0 var(--y, 0px);
+  transition:
+    translate 0.15s ease,
+    rotate 0.15s ease;
+}
+/* The grown card (`.hand-card:hover .card-tile`: lifted 30px, upright, 1.65x
+   from its bottom edge, and taller by --read-extra for a wordy one). */
+.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, :focus-within) > .hand-card-actions,
+.hand-strip .hand-cards .hand-card[data-sweep] > .hand-card-actions {
+  rotate: 0deg;
+  translate: 0 calc(-30px - (var(--card-w) * 1.4 + var(--read-extra, 0px)) * 0.65 - var(--read-extra, 0px));
+}
+:root[data-reduce-motion] .hand-card-actions {
+  transition: none;
+}
+.hand-card-actions > button {
+  pointer-events: auto;
+  height: var(--act-h);
+  padding: 0 calc(10px * var(--ui));
+  font-size: var(--text-sm);
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--on-accent);
+  background: var(--accent);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  box-shadow: var(--shadow-raised);
+}
+.hand-card-actions > button:hover {
+  background: var(--gold);
+}
+/* The "All cards" grid's cards hold their pills too (they aren't fanned:
+   no --r or --y). */
+.hand-grid .hand-card {
+  position: relative;
+}
 /* More than three ways to cast a card: stacked above it, over the board, and
    scrolling if even that isn't room enough. */
 .hand-card-ways {

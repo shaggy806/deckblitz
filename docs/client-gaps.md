@@ -10,8 +10,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   ability stopping every step, is `skipAbilityOnly`, 2026-11-11.)
 - **The stack's card hides a seat's board** (found 2026-11-02). At 1366×768 it sits over the fourth player's
   board, just when you're deciding whether to respond to what's on it.
-- **A hand card's Cycle, Foretell and Plot buttons are small** (found 2026-11-02). Plain buttons under the card,
-  easy to miss. They aren't a popup, so there is nothing for Escape to close (the first report said otherwise).
 - **The deck builder's hover preview can cover the search box and filters** (found 2026-11-02). The last of
   its rough edges; the rest landed 2026-11-11.
 

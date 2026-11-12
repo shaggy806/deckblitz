@@ -7566,6 +7566,10 @@ function Table({
                     </button>
                   )))
                 : null}
+              {/* What else the card can do from the hand: pills on its top
+                  edge (App.css), seen in the lowered tray too. */}
+              {suspend || foretell || plot || cycle || handAbilities.length > 0 ? (
+              <div className="hand-card-actions">
               {suspend ? (
                 <button
                   type="button"
@@ -7613,6 +7617,8 @@ function Table({
                   <Symbols text={handAbilityLabel(ab.text)} />
                 </button>
               ))}
+              </div>
+              ) : null}
             </div>
           )
         })}

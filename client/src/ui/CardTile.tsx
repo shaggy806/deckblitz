@@ -226,9 +226,12 @@ export function CardTile({
     const el = textRef.current
     if (!artFirst || !el) return
     const tile = el.closest<HTMLElement>('.card-tile')
+    // `--read-extra` goes on the hand card's own box when it's in one, where
+    // the actions over the card read it as well as the tile (App.css).
+    const holder = tile?.parentElement?.classList.contains('hand-card') === true ? tile.parentElement : tile
     el.style.removeProperty('--fit-scale')
     el.style.removeProperty('--read-scale')
-    tile?.style.removeProperty('--read-extra')
+    holder?.style.removeProperty('--read-extra')
     let scale = 1
     // The floor is low enough for a Saga's three chapters (Urza's Saga).
     while (el.scrollHeight > el.clientHeight && scale > 0.45) {
@@ -241,7 +244,7 @@ export function CardTile({
     // scale up to READ_SCALE whose text fits a card at most READ_GROW_MAX
     // taller, and how much taller (`--read-extra`, in the tile's own px). The
     // hovered card grows upward by that much (App.css).
-    if (scale < READ_SCALE && tile !== null && el.closest('.hand-card') !== null) {
+    if (scale < READ_SCALE && tile !== null && holder != null && el.closest('.hand-card') !== null) {
       const room = el.clientHeight
       const cap = tile.offsetHeight * READ_GROW_MAX
       let read = READ_SCALE
@@ -254,7 +257,7 @@ export function CardTile({
       el.style.setProperty('--fit-scale', String(scale))
       if (read > scale) {
         el.style.setProperty('--read-scale', String(read))
-        tile.style.setProperty('--read-extra', `${Math.ceil(extra)}px`)
+        holder.style.setProperty('--read-extra', `${Math.ceil(extra)}px`)
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
