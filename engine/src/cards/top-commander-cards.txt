@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4888 already implemented / 112 missing (marks refreshed 2026-11-12)
+4899 already implemented / 101 missing (marks refreshed 2026-11-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1928,7 +1928,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1935  Dreamstone Hedron                        {6}              Artifact
 [x]  1936  One with the Multiverse                  {6}{U}{U}        Enchantment
 [x]  1937  Wild Magic Surge                         {R}{R}           Instant
-[ ]  1938  Rise of the Witch-king                   {2}{B}{G}        Sorcery
+[x]  1938  Rise of the Witch-king                   {2}{B}{G}        Sorcery
 [x]  1939  For the Common Good                      {X}{X}{G}        Sorcery
 [x]  1940  Brawn                                    {3}{G}           Creature — Incarnation
 [x]  1941  The Walls of Ba Sing Se                  {8}              Legendary Artifact Creature — Wall
@@ -2083,7 +2083,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2090  Paradise Druid                           {1}{G}           Creature — Elf Druid
 [x]  2091  Ruthless Technomancer                    {3}{B}           Creature — Human Wizard
 [x]  2092  Patrolling Peacemaker                    {2}{W}           Artifact Creature — Robot Soldier
-[ ]  2093  Hagra Mauling // Hagra Broodpit          {4}              Instant // Land
+[x]  2093  Hagra Mauling // Hagra Broodpit          {4}              Instant // Land
 [x]  2094  Azorius Guildgate                        {0}              Land — Gate
 [x]  2095  Cold-Eyed Selkie                         {1}{G/U}{G/U}    Creature — Merfolk Rogue
 [x]  2096  Atomize                                  {2}{B}{G}        Instant
@@ -2210,7 +2210,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2217  Seraph Sanctuary                         {0}              Land
 [x]  2218  Warden of the Grove                      {2}{G}           Creature — Hydra
 [x]  2219  Cauldron of Essence                      {1}{B}{G}        Artifact
-[ ]  2220  Deep Gnome Terramancer                   {1}{W}           Creature — Gnome Wizard
+[x]  2220  Deep Gnome Terramancer                   {1}{W}           Creature — Gnome Wizard
 [x]  2221  Circuit Mender                           {3}              Artifact Creature — Insect
 [x]  2222  Brainstealer Dragon                      {5}{B}{B}        Creature — Dragon Horror
 [x]  2223  Ral, Crackling Wit                       {2}{U}{R}        Legendary Planeswalker — Ral
@@ -2367,7 +2367,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2374  Frenzied Baloth                          {G}{G}           Creature — Beast
 [x]  2375  The Indomitable                          {2}{U}{U}        Legendary Artifact — Vehicle
 [x]  2376  Banishing Light                          {2}{W}           Enchantment
-[ ]  2377  Aetheric Amplifier                       {3}              Artifact
+[x]  2377  Aetheric Amplifier                       {3}              Artifact
 [x]  2378  Halvar, God of Battle // Sword of the Realms {4}              Legendary Creature — God // Legendary Artifact — Equipment
 [x]  2379  Qarsi Revenant                           {1}{B}{B}        Creature — Vampire
 [x]  2380  Orthion, Hero of Lavabrink               {3}{R}           Legendary Creature — Human Soldier
@@ -2375,7 +2375,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2382  Greater Auramancy                        {1}{W}           Enchantment
 [x]  2383  Steelbane Hydra                          {X}{G}{G}        Creature — Turtle Hydra
 [x]  2384  Darksteel Monolith                       {8}              Artifact
-[ ]  2385  Sphinx of the Second Sun                 {6}{U}{U}        Creature — Sphinx
+[x]  2385  Sphinx of the Second Sun                 {6}{U}{U}        Creature — Sphinx
 [x]  2386  Ringsight                                {1}{U}{B}        Sorcery
 [x]  2387  Together Forever                         {W}{W}           Enchantment
 [x]  2388  Nether Traitor                           {B}{B}           Creature — Spirit
@@ -2408,7 +2408,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2415  God-Pharaoh's Statue                     {6}              Legendary Artifact
 [x]  2416  Icon of Ancestry                         {3}              Artifact
 [x]  2417  Regal Behemoth                           {4}{G}{G}        Creature — Dinosaur
-[ ]  2418  Nine-Lives Familiar                      {1}{B}{B}        Creature — Cat
+[x]  2418  Nine-Lives Familiar                      {1}{B}{B}        Creature — Cat
 [x]  2419  Mutilate                                 {2}{B}{B}        Sorcery
 [x]  2420  Ioreth of the Healing House              {2}{U}           Legendary Creature — Human Cleric
 [x]  2421  Lightning, Army of One                   {1}{R}{W}        Legendary Creature — Human Soldier
@@ -2489,7 +2489,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2496  Yuriko, the Tiger's Shadow               {1}{U}{B}        Legendary Creature — Human Ninja
 [x]  2497  Unquestioned Authority                   {2}{W}           Enchantment — Aura
 [x]  2498  Endless Atlas                            {2}              Artifact
-[ ]  2499  Selfless Squire                          {3}{W}           Creature — Human Soldier
+[x]  2499  Selfless Squire                          {3}{W}           Creature — Human Soldier
 [x]  2500  Ghoulcaller Gisa                         {3}{B}{B}        Legendary Creature — Human Wizard
 [x]  2501  Animist's Awakening                      {X}{G}           Sorcery
 [x]  2502  Empty the Warrens                        {3}{R}           Sorcery
@@ -2691,7 +2691,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2698  Worldsoul's Rage                         {X}{R}{G}        Sorcery
 [x]  2699  Careful Study                            {U}              Sorcery
 [x]  2700  Anzrag, the Quake-Mole                   {2}{R}{G}        Legendary Creature — Mole God
-[ ]  2701  Camellia, the Seedmiser                  {1}{B}{G}        Legendary Creature — Squirrel Warlock
+[x]  2701  Camellia, the Seedmiser                  {1}{B}{G}        Legendary Creature — Squirrel Warlock
 [x]  2702  Murmuring Bosk                           {0}              Land — Forest
 [x]  2703  Heroes' Podium                           {5}              Legendary Artifact
 [x]  2704  Hyena Umbra                              {W}              Enchantment — Aura
@@ -2772,7 +2772,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2779  Tishana's Tidebinder                     {2}{U}           Creature — Merfolk Wizard
 [x]  2780  Nightshade Dryad                         {1}{G}           Creature — Dryad
 [x]  2781  Aetherspouts                             {3}{U}{U}        Instant
-[ ]  2782  Lurrus of the Dream-Den                  {1}{W/B}{W/B}    Legendary Creature — Cat Nightmare
+[x]  2782  Lurrus of the Dream-Den                  {1}{W/B}{W/B}    Legendary Creature — Cat Nightmare
 [x]  2783  Time Sieve                               {U}{B}           Artifact
 [x]  2784  Aettir and Priwen                        {6}              Legendary Artifact — Equipment
 [x]  2785  Mirrorpool                               {0}              Land
@@ -2831,7 +2831,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2838  Rionya, Fire Dancer                      {3}{R}{R}        Legendary Creature — Human Wizard
 [x]  2839  Preposterous Proportions                 {5}{G}{G}        Sorcery
 [x]  2840  Weathered Sentinels                      {3}              Artifact Creature — Wall
-[ ]  2841  The Chain Veil                           {4}              Legendary Artifact
+[x]  2841  The Chain Veil                           {4}              Legendary Artifact
 [x]  2842  Zur the Enchanter                        {1}{W}{U}{B}     Legendary Creature — Human Wizard
 [x]  2843  Abundant Countryside                     {0}              Land
 [x]  2844  Gisa, Glorious Resurrector               {2}{B}{B}        Legendary Creature — Human Wizard
@@ -3660,7 +3660,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3667  Oltec Matterweaver                       {2}{W}           Creature — Human Artificer
 [ ]  3668  Riptide Gearhulk                         {1}{W}{W}{U}{U}  Artifact Creature — Construct
 [x]  3669  Eclipsed Steppe                          {0}              Land — Plains Swamp
-[ ]  3670  Shadow of the Second Sun                 {4}{U}{U}        Enchantment — Aura
+[x]  3670  Shadow of the Second Sun                 {4}{U}{U}        Enchantment — Aura
 [x]  3671  Skullwinder                              {2}{G}           Creature — Snake
 [x]  3672  Ral, Storm Conduit                       {2}{U}{R}        Legendary Planeswalker — Ral
 [x]  3673  Charix, the Raging Isle                  {2}{U}{U}        Legendary Creature — Leviathan Crab
