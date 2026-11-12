@@ -208,9 +208,13 @@ function answerHandScale(state: GameState, player: PlayerId): number {
   return Math.min(ANSWER_HAND_SCALE_MAX, cards / opponents.length / ANSWER_HAND);
 }
 
-/** The rounds of the game in which removal in hand counts `earlyRemoval`:
- * every player's first two turns. */
+/** The rounds of the game in which removal in hand counts `earlyRemoval` in
+ * full: every player's first two turns… */
 const EARLY_REMOVAL_ROUNDS = 2;
+/** …fading to nothing by this one (the user's report, 2026-11-11: it fell
+ * off a cliff at round 3, and the bots spent Swords on a fresh two-mana
+ * commander on their third turn). */
+const EARLY_REMOVAL_END = 6;
 
 /** `earlyMana` counts a permanent's mana in full through this round… */
 const EARLY_MANA_FULL = 2;
@@ -1296,7 +1300,11 @@ function playerFeaturesUncached(
   // spent Swords to Plowshares on a Wall of Reverence on its second turn and
   // had nothing for Lathliss later. Later in the game `hand` prices it like
   // any card, as before.
-  const early = roundOf(state) <= EARLY_REMOVAL_ROUNDS;
+  const round = roundOf(state);
+  const early =
+    round <= EARLY_REMOVAL_ROUNDS
+      ? 1
+      : Math.max(0, (EARLY_REMOVAL_END - round) / (EARLY_REMOVAL_END - EARLY_REMOVAL_ROUNDS));
   let earlyRemoval = 0;
   if (isMe) {
     const answerCosts: number[] = [];
@@ -1306,7 +1314,7 @@ function playerFeaturesUncached(
       const def = registry.get(object.cardName);
       if (!def.types.includes("land")) handManaValue += manaValueOf(registry, def.name);
       if (isAnswer(def)) answerCosts.push(manaValueOf(registry, def.name));
-      if (early && isRemoval(def)) earlyRemoval += 1;
+      if (early > 0 && isRemoval(def)) earlyRemoval += early;
     }
     let open = untappedMana;
     for (const cost of answerCosts.sort((x, y) => x - y)) {

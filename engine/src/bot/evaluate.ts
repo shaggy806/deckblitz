@@ -343,8 +343,12 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // from lethal commander damage ("kills the commander one hit from lethal
   // commander damage") — nothing else in the evaluation looks at the next
   // attack. Hand-tuned to that scenario (step 8); it values the bot's own on
-  // the battlefield the same way.
-  commanderOnBoard: 3,
+  // the battlefield the same way. 1 since 2026-11-11 (it was 3): that
+  // scenario passes at 0 now, and at 3 a fresh two-mana commander was worth
+  // a Swords to Plowshares on its owner's third turn, though it only goes
+  // back to the command zone to be cast again ("holds Swords from a two-mana
+  // commander on its third turn", which fails at 2).
+  commanderOnBoard: 1,
   // **Keep equal to `power`.** Not a free weight: `power` is the combat damage
   // a creature could deal, and one that can't attack deals none, so this
   // takes back exactly what `power` credits it. At zero, v2 enchanted its own
@@ -393,7 +397,8 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // killing a Wall of Reverence then scores 6 ("holds Swords to Plowshares
   // for more than a wall") and a ramped Craw Wurm 8 ("kills a Craw Wurm
   // ramped out on turn two"), so 7 holds the first and fires at the second,
-  // each by a point. From round 3 it counts nothing.
+  // each by a point. In full through round 2, fading to nothing by round 6
+  // since 2026-11-11 (it stopped dead at round 3: `features.ts`).
   earlyRemoval: 7,
   // Per mana a turn, on top of `nonlandMana`, in full through round 2 and gone
   // by round 6 (the user's ask, 2026-10-04: kill acceleration early, not

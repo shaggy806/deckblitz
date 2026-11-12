@@ -5394,6 +5394,31 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "holds Swords from a two-mana commander on its third turn",
+    rule: "A cheap commander early is no threat yet, and it comes back: removal waits for one.",
+    position(registry) {
+      // The user's report, 2026-11-11: the bots blew up their two-mana
+      // commander on turn three, removal that bigger threats later wanted.
+      // `earlyRemoval` holds removal through round 2 only, and every
+      // commander on the battlefield is worth `commanderOnBoard` on top of
+      // its body — though its owner just casts it again.
+      const game = table(registry, [A, B, C, D], A);
+      game.state.turn.number = 9;
+      for (const player of [A, B, C, D]) lands(game, player === A ? "Plains" : "Forest", player, 3);
+      game.debugSpawn("Swords to Plowshares", A, "hand");
+      const commander = onBoard(game, "Light-Paws, Emperor's Voice", B);
+      game.state.objects[commander].isCommander = true;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && firstTarget(action) === commander),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "holds Swords to Plowshares for more than a wall",
     rule: "Removal isn't spent in the first two rounds on a creature that threatens nothing.",
     position(registry) {

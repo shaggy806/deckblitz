@@ -630,6 +630,20 @@ showed Necropolis Fiend shrinking its own creatures on both builds: `amountSign`
 the three fixes: 19 of 14,310 decisions, the Fiend now aimed at opponents, the rest attack splits
 and spell order; the X=0 activation it still makes is in BACKLOG.
 
+**After the plan: early removal fades, a commander counts less (2026-11-11, the user's ask).**
+The user saw the bots spend Swords on a fresh two-mana commander on their third turn. Two
+reasons: `earlyRemoval` stopped dead after round 2, and `commanderOnBoard` (3) made any
+commander on the battlefield worth a removal spell on its own. Now `earlyRemoval` fades like
+`earlyMana` — in full through round 2, to nothing by round 6 — and `commanderOnBoard` is 1
+(a commander comes back from the command zone, so killing one buys little; what it does is
+counted elsewhere). A turn-two Sol Ring or a Rhystic Study is still worth answering through
+`earlyMana` and the draw engines. Pinned by "holds Swords from a two-mana commander on its third
+turn"; the fade alone didn't pass it. Gate 227/227. `bot:diff` against 9e7c907b4: 17 of 12,186
+decisions over 6 four-player games — a Lightning Bolt held from a Pest token and a face (5), an
+Infernal Grasp and a Worldsoul's Rage held in rounds 3 and 5, and four casts where the bot played
+another spell before its own commander (Emmara, Elsha): a commander worth less on the board is
+cast a little later; the rest attack splits.
+
 **The initiative and dungeons (2026-10-19).** Two new things for the bots (`docs/plans/
 initiative-dungeons.md`). The venture decision: v1's `chooseVenture`, which v2 inherits, scores
 each room's ability with `effectWorth`, aiming any targets at the best legal ones (`roomWorth`;
