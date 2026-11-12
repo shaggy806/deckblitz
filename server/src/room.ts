@@ -211,6 +211,11 @@ const BOT_LINGER_MS: Readonly<Record<BotSpeed, number>> = {
 
 const SETTLE_BUDGET = 10_000;
 
+/** How many spells and abilities one auto-pass scan may play out on a copy
+ * to see whether they'd affect the seat (`Room.affects`), each ~70 ms on a
+ * crowded four-player board; past it, the scan pauses instead. */
+const AFFECTS_PER_SCAN = 6;
+
 /**
  * How long one `settle()` may run in `"realtime"` pacing before it gives the
  * event loop back and carries on from a timer (see `settleNow`).
@@ -1059,20 +1064,23 @@ export class Room {
    */
   private interruptSince(seat: Seat, state: GameState, from: number): string | null {
     const events = this.game.events;
+    const budget = { left: AFFECTS_PER_SCAN };
     for (let index = from; index < events.length; index += 1) {
       const event = events[index];
       // An opponent's spell or activation that would affect this seat or its
       // board when it resolves — targeted or not, a Wrath as much as a Bolt
       // (the user, 2026-11-11: "auto pass should be paused whenever a
       // spell/ability would affect you or your board"). A creature cast or a
-      // tutor passes by. Their triggers aren't asked: only a deliberate cast
-      // or activation is, as before; one aimed at this seat's things is
-      // `object-targeted`, below.
+      // tutor passes by. Their triggered abilities too (the user, the same
+      // day): a drain, an edict on entering, a "each opponent discards".
       if (event.type === "spell-cast" && event.player !== seat.player) {
-        if (this.affects(index, event.object, seat.player)) return "an opponent's spell would affect you";
+        if (this.affects(index, event.object, seat.player, budget)) return "an opponent's spell would affect you";
       }
       if (event.type === "ability-activated" && event.player !== seat.player && event.ability !== undefined) {
-        if (this.affects(index, event.ability, seat.player)) return "an opponent's ability would affect you";
+        if (this.affects(index, event.ability, seat.player, budget)) return "an opponent's ability would affect you";
+      }
+      if (event.type === "ability-triggered" && event.controller !== seat.player) {
+        if (this.affects(index, event.object, seat.player, budget)) return "an opponent's trigger would affect you";
       }
       // Something of this seat's is being pointed at, by anyone but them.
       if (
@@ -1118,12 +1126,18 @@ export class Room {
    * affect `player` (`wouldAffectPlayer`), asked once and remembered: the
    * scan above re-reads every event since it was armed at each window. Read
    * while the object is still on the stack — every player gets priority
-   * before it resolves — and `false` once it has gone unasked.
+   * before it resolves — and `false` once it has gone unasked. Past the
+   * scan's `budget` of new questions (a Mesmeric Orb's thirty triggers, each
+   * a copy of the game) the answer is "yes, pause": one click, where thirty
+   * copies would hold the room up for seconds.
    */
-  private affects(index: number, object: ObjectId, player: PlayerId): boolean {
+  private affects(index: number, object: ObjectId, player: PlayerId, budget: { left: number }): boolean {
     const key = `${index}:${object}:${player}`;
     const known = this.affectsSeen.get(key);
     if (known !== undefined) return known;
+    if (!this.game.state.zones.shared.stack.includes(object)) return false;
+    if (budget.left <= 0) return true;
+    budget.left -= 1;
     const verdict = wouldAffectPlayer(this.game.state, cardRegistry(), object, player) ?? false;
     this.affectsSeen.set(key, verdict);
     return verdict;

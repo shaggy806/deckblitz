@@ -552,6 +552,37 @@ describe("Room", () => {
       expect(room.game.state.turn.step).not.toBe(stepAtCast);
     });
 
+    it("pauses for an opponent's trigger that would affect the seat, not one that wouldn't", () => {
+      // Fleshbag Marauder: the creature spell touches nothing of Bob's, but
+      // its "each player sacrifices a creature" on entering takes his Bears.
+      // Elvish Visionary's draw on entering is Alice's alone.
+      function enters(name: string) {
+        const { room, aliceConn, bobConn } = interruptibleRoom("bob");
+        room.game.debugSpawn("Grizzly Bears", BOB, "battlefield");
+        room.game.debugSpawn("Swamp", ALICE, "battlefield");
+        room.game.debugSpawn("Forest", ALICE, "battlefield");
+        room.game.debugSpawn("Forest", ALICE, "battlefield");
+        const card = room.game.debugSpawn(name, ALICE, "hand");
+        room.requestAutoPass(bobConn);
+        room.dispatch(aliceConn, { type: "cast-spell", player: ALICE, card });
+        // Alice passes her own windows (the spell, then its trigger).
+        for (let i = 0; i < 4; i += 1) {
+          if (room.game.state.priority.holder !== ALICE || room.game.state.zones.shared.stack.length === 0) break;
+          room.dispatch(aliceConn, { type: "pass-priority", player: ALICE });
+        }
+        return room;
+      }
+      const marauder = enters("Fleshbag Marauder");
+      expect(marauder.game.state.zones.shared.stack).toHaveLength(1);
+      expect(marauder.game.state.objects[marauder.game.state.zones.shared.stack[0]].kind).not.toBe("card");
+      expect(marauder.game.state.priority.holder).toBe(BOB);
+      expect(marauder.isAutoPassPaused(BOB)).toBe(true);
+
+      const visionary = enters("Elvish Visionary");
+      expect(visionary.game.state.zones.shared.stack).toHaveLength(0);
+      expect(visionary.isAutoPassPaused(BOB)).toBe(false);
+    });
+
     it("doesn't pause again for what the interrupting spell made you do", () => {
       // An edict: Bob is paused by the cast, lets it resolve, and sacrifices
       // his Bears to it. That sacrifice is "a permanent you own left the

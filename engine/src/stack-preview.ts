@@ -1,7 +1,7 @@
 /**
  * Would a spell or ability on the stack affect a player — them, or anything
- * of theirs? The server's auto-pass asks this of an opponent's spell or
- * activation (the user's rule, 2026-11-11: "auto pass should be paused
+ * of theirs? The server's auto-pass asks this of an opponent's spell,
+ * activation or trigger (the user's rule, 2026-11-11: "auto pass should be paused
  * whenever a spell/ability would affect you or your board"), so it stops for
  * a Wrath or a discard spell, targeted or not, and carries on past a creature
  * cast or a tutor.
