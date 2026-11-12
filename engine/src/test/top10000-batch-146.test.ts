@@ -4,6 +4,7 @@
  */
 import { describe, expect, it } from "vitest";
 
+import type { ObjectId } from "../primitives.js";
 import { nameOf, playerCountersHeld } from "../state.js";
 
 import { A, B, C, attack, destroy, enter, hand, life, pickModes, pickTargets, ref, settle, spawn, table, tokensNamed, zone } from "./harness.js";
@@ -101,7 +102,7 @@ describe("The Ghoul, Gunslinger — if that player is you", () => {
 });
 
 describe("Megatron — the excess redirect converts it, and the convert's \"if you do\"", () => {
-  const destructiveForce = (game: Table["game"]): string => {
+  const destructiveForce = (game: Table["game"]): ObjectId => {
     const megatron = spawn(game, "Megatron, Tyrant");
     game.debugApplyEffect(A, { kind: "transform", target: 0 }, [ref(megatron)]);
     return megatron;
