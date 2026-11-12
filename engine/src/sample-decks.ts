@@ -793,7 +793,10 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
   }),
   precon({
     name: "First Flight",
-    commander: "Isperia, Supreme Judge",
+    // Led by the deck's alternate commander, Kangee, Sky Warden, rather than
+    // its face commander, Isperia, Supreme Judge (the user, 2026-11-11);
+    // Isperia takes Kangee's place in the 99.
+    commander: "Kangee, Sky Warden",
     description: "White-blue fliers: evasive creatures, card draw and countermagic.",
     // 2022 Starter Commander Deck (MTGJSON `SCD`).
     printed: [
@@ -829,8 +832,8 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Hedron Archive", 1],
       ["Inspired Sphinx", 1],
       ["Island", 15],
+      ["Isperia, Supreme Judge", 1],
       ["Jubilant Skybonder", 1],
-      ["Kangee, Sky Warden", 1],
       ["Kangee's Lieutenant", 1],
       ["Meandering River", 1],
       ["Migratory Route", 1],
@@ -1827,7 +1830,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("First Flight", {
-    description: "Isperia's fliers on an untapped mana base, with Angels and Sphinxes that take over a game, taxes on attackers and steady card draw beside its counterspells.",
+    description: "Kangee's fliers on an untapped mana base, with Angels and Sphinxes that take over a game, taxes on attackers and steady card draw beside its counterspells.",
     cards: [
       ["Angler Turtle", "Consecrated Sphinx"],
       ["Skyscanner", "Watcher of the Spheres"],
