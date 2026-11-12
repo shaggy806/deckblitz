@@ -261,6 +261,7 @@ import _poolEliteArchers from "../pool/elite-archers.js";
 import _poolElvishHandservant from "../pool/elvish-handservant.js";
 import _poolElvishHarbinger from "../pool/elvish-harbinger.js";
 import _poolEmbercleave from "../pool/embercleave.js";
+import _poolEmetSelchOfTheThirdSeat from "../pool/emet-selch-of-the-third-seat.js";
 import _poolEmrakulsEvangel from "../pool/emrakuls-evangel.js";
 import _poolEngulfingFlames from "../pool/engulfing-flames.js";
 import _poolEnigmaticIncarnation from "../pool/enigmatic-incarnation.js";
@@ -1283,6 +1284,7 @@ const shard: CardShard = {
     _poolElvishHandservant,
     _poolElvishHarbinger,
     _poolEmbercleave,
+    _poolEmetSelchOfTheThirdSeat,
     _poolEmrakulsEvangel,
     _poolEngulfingFlames,
     _poolEnigmaticIncarnation,

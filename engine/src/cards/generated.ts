@@ -8192,6 +8192,7 @@ import _poolEmeritusOfConflict from "./pool/emeritus-of-conflict.js";
 import _poolEmeritusOfIdeation from "./pool/emeritus-of-ideation.js";
 import _poolEmeritusOfTruce from "./pool/emeritus-of-truce.js";
 import _poolEmeritusOfWoe from "./pool/emeritus-of-woe.js";
+import _poolEmetSelchOfTheThirdSeat from "./pool/emet-selch-of-the-third-seat.js";
 import _poolEmetSelchUnsundered from "./pool/emet-selch-unsundered.js";
 import _poolEmielTheBlessed from "./pool/emiel-the-blessed.js";
 import _poolEmilVastlandsRoamer from "./pool/emil-vastlands-roamer.js";
@@ -40827,6 +40828,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmeritusOfIdeation,
   _poolEmeritusOfTruce,
   _poolEmeritusOfWoe,
+  _poolEmetSelchOfTheThirdSeat,
   _poolEmetSelchUnsundered,
   _poolEmielTheBlessed,
   _poolEmilVastlandsRoamer,
@@ -73475,6 +73477,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emeritus-of-ideation": _poolEmeritusOfIdeation,
   "pool/emeritus-of-truce": _poolEmeritusOfTruce,
   "pool/emeritus-of-woe": _poolEmeritusOfWoe,
+  "pool/emet-selch-of-the-third-seat": _poolEmetSelchOfTheThirdSeat,
   "pool/emet-selch-unsundered": _poolEmetSelchUnsundered,
   "pool/emiel-the-blessed": _poolEmielTheBlessed,
   "pool/emil-vastlands-roamer": _poolEmilVastlandsRoamer,

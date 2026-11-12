@@ -17038,7 +17038,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       else {
         // "Each opponent loses half their life": each one's own amount,
         // read as their turn in APNAP order comes.
-        for (const p of ctx.playersInScope(spec.who)) ctx.loseLife(p, amountValue(spec.amount, ctx, p));
+        // One simultaneous loss (rule 603.2c).
+        const scope = spec.who;
+        ctx.simultaneously(() => {
+          for (const p of ctx.playersInScope(scope)) ctx.loseLife(p, amountValue(spec.amount, ctx, p));
+        });
       }
       return;
     }

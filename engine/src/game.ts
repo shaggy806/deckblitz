@@ -2390,6 +2390,12 @@ export class Game {
    * `counterBatch`. */
   private millBatch: Map<string, { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }> | null = null;
 
+  /** Batched `loses-life` triggers owed for the simultaneous life loss under
+   * way (`withLifeLossBatch`), per watcher ability. Not game state, like
+   * `counterBatch`. */
+  private lifeLossBatch: Map<string, { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }> | null =
+    null;
+
   /** The permanents that have left the battlefield so far in the one
    * simultaneous event being carried out — a wrath, a sweep of state-based
    * actions, an edict every player answers — plus the commanders whose move
@@ -31627,6 +31633,25 @@ export class Game {
             }
             return;
           }
+          // "Whenever one or more opponents lose life": once for a
+          // simultaneous loss, however many of them lost life (rule 603.2c),
+          // "that much" the total.
+          if (
+            ability.trigger.on === "loses-life" &&
+            ability.trigger.batched === true &&
+            event.type === "life-changed" &&
+            this.lifeLossBatch !== null
+          ) {
+            const key = `${id}#${index}`;
+            const owed = this.lifeLossBatch.get(key);
+            const trigger = withoutTriggerPlayer(base);
+            if (owed === undefined) {
+              this.lifeLossBatch.set(key, { ability, trigger, multiplier });
+            } else {
+              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + (trigger.triggerValue ?? 0) };
+            }
+            return;
+          }
           // "Whenever one or more nonland cards are milled": once for a
           // simultaneous mill, whoever milled, "that many" the total (rule
           // 603.2c; The Wise Mothman's ruling).
@@ -37499,7 +37524,11 @@ export class Game {
       simultaneously: (fn) =>
         this.withLeaveBatch(() =>
           this.withGraveyardLeaveBatch(() =>
-            this.withEnterBatch(() => this.withDamageBatch(() => this.withTokenEvent(() => this.withCounterBatch(() => this.withMillBatch(fn))))),
+            this.withEnterBatch(() =>
+              this.withDamageBatch(() =>
+                this.withTokenEvent(() => this.withCounterBatch(() => this.withMillBatch(() => this.withLifeLossBatch(fn)))),
+              ),
+            ),
           ),
         ),
       oneTokenEvent: (fn) => this.withTokenCopyEvent(fn),
@@ -40706,10 +40735,13 @@ controlledBy,
             ...(xColor !== undefined ? { xColor } : {}),
           },
         ),
+      // "Each opponent loses 2 life": one simultaneous loss (rule 603.2c).
       changeLifeScoped: (who, delta) =>
-        typeof who === "object"
-          ? scoped(who).forEach((player) => this.changeLife(player, delta))
-          : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
+        this.withLifeLossBatch(() =>
+          typeof who === "object"
+            ? scoped(who).forEach((player) => this.changeLife(player, delta))
+            : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
+        ),
       searchLibrary: (
         player,
         filter,
@@ -57031,6 +57063,20 @@ controlledBy,
    * triggers once for "each player mills", for every card milled. Nested
    * batches join the outer one; each player's own `cards-milled` stands.
    */
+  private withLifeLossBatch<T>(fn: () => T): T {
+    if (this.lifeLossBatch !== null) return fn();
+    const batch: NonNullable<Game["lifeLossBatch"]> = new Map();
+    this.lifeLossBatch = batch;
+    let result: T;
+    try {
+      result = fn();
+    } finally {
+      this.lifeLossBatch = null;
+    }
+    for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);
+    return result;
+  }
+
   private withMillBatch<T>(fn: () => T): T {
     if (this.millBatch !== null) return fn();
     const batch: NonNullable<Game["millBatch"]> = new Map();
@@ -57089,8 +57135,9 @@ controlledBy,
     };
     this.damageBatch = batch;
     try {
-      // Wither's and infect's counters go on with the damage (rule 120.3d).
-      this.withCounterBatch(fn);
+      // Wither's and infect's counters go on with the damage (rule 120.3d);
+      // the life it costs players is one loss (rule 603.2c).
+      this.withCounterBatch(() => this.withLifeLossBatch(fn));
     } finally {
       this.damageBatch = null;
     }

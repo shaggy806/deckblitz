@@ -1242,6 +1242,12 @@ export type TriggerKind =
        * Harrower of Souls, with `firstTimeEachTurn`): only while that player
        * is the active player. */
       readonly duringTheirTurn?: true;
+      /** "Whenever **one or more** opponents lose life" (Emet-Selch of the
+       * Third Seat): once per simultaneous loss, however many of `who` lost
+       * life in it (rule 603.2c) — damage dealt at once (a combat damage
+       * step, "each opponent"), or an effect's "each opponent loses N life".
+       * No trigger player; `{ triggerValue: true }` is the total lost. */
+      readonly batched?: true;
     }
   | {
       /**
