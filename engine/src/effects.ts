@@ -5632,9 +5632,13 @@ export type EffectSpec =
        * there, put on the way a targeted `add-counter` puts them, so a
        * Doubling Season applies. A permanent with no counters is untouched.
        * `counter` doubles just that kind — Voracious Hydra's "double the
-       * number of +1/+1 counters on this creature". */
+       * number of +1/+1 counters on this creature". `target: "you"` doubles
+       * each kind **you have** instead — Aetheric Amplifier's "double the
+       * number of each kind of counter you have": poison, experience, rad,
+       * energy and the rest, each kind as it is now, given the way any
+       * effect gives a player counters (rule 122.1). */
       readonly kind: "double-counters";
-      readonly target: ObjectRef;
+      readonly target: ObjectRef | "you";
       readonly counter?: string;
     }
   | {
@@ -18426,7 +18430,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.doubleCountersAll(spec.filter, spec.counterKind);
       return;
     case "double-counters": {
-      const target = objectRefAct(spec.target, ctx);
+      const target: TargetRef | undefined =
+        spec.target === "you" ? { kind: "player", player: ctx.controller } : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.doubleCounters(target, spec.counter);
       return;
     }

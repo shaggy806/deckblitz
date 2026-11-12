@@ -558,7 +558,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // belongs on is the creature's.
   "switch-pt": (n, v) => v.touch(n.target, "either", MAJOR),
   "double-counters-all": none,
-  "double-counters": (n, v) => v.touch(n.target, "help", MAJOR),
+  "double-counters": (n, v) => (n.target === "you" ? undefined : v.touch(n.target, "help", MAJOR)),
   // Taking a +1/+1 counter off an opponent's creature is as good as adding
   // one to your own.
   "another-counter-of-each-kind": (n, v) => v.touch(n.target, n.orRemove === true ? "either" : "help", MAJOR),

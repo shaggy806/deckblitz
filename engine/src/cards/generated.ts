@@ -328,6 +328,7 @@ import _poolAetherflameWall from "./pool/aetherflame-wall.js";
 import _poolAetherfluxConduit from "./pool/aetherflux-conduit.js";
 import _poolAetherfluxReservoir from "./pool/aetherflux-reservoir.js";
 import _poolAethergeodeMiner from "./pool/aethergeode-miner.js";
+import _poolAethericAmplifier from "./pool/aetheric-amplifier.js";
 import _poolAetherize from "./pool/aetherize.js";
 import _poolAetherjacket from "./pool/aetherjacket.js";
 import _poolAetherling from "./pool/aetherling.js";
@@ -32938,6 +32939,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAetherfluxConduit,
   _poolAetherfluxReservoir,
   _poolAethergeodeMiner,
+  _poolAethericAmplifier,
   _poolAetherize,
   _poolAetherjacket,
   _poolAetherling,
@@ -65561,6 +65563,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aetherflux-conduit": _poolAetherfluxConduit,
   "pool/aetherflux-reservoir": _poolAetherfluxReservoir,
   "pool/aethergeode-miner": _poolAethergeodeMiner,
+  "pool/aetheric-amplifier": _poolAethericAmplifier,
   "pool/aetherize": _poolAetherize,
   "pool/aetherjacket": _poolAetherjacket,
   "pool/aetherling": _poolAetherling,

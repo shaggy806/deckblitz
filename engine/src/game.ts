@@ -35989,6 +35989,21 @@ export class Game {
       librarySizeOf: (player) => this.state.zones.perPlayer[player]?.library.length ?? 0,
       graveyardSizeOf: (player) => this.state.zones.perPlayer[player]?.graveyard.length ?? 0,
       doubleCounters: (target, counter) => {
+        if (target.kind === "player") {
+          // Each kind the player has, read before any is given.
+          const ps = this.state.players[target.player];
+          if (ps === undefined || ps.hasLost) return;
+          const energy = ps.energy;
+          const kinds = Object.entries({ ...ps.counters }) as [PlayerCounterKind, number | undefined][];
+          if (energy > 0 && (counter === undefined || counter === "energy")) {
+            this.changeEnergy(target.player, energy, controller);
+          }
+          for (const [kind, current] of kinds) {
+            if (counter !== undefined && kind !== counter) continue;
+            if ((current ?? 0) > 0) this.changePlayerCounters(target.player, kind, current ?? 0, controller);
+          }
+          return;
+        }
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
         if (object === undefined || object.zone !== "battlefield") return;

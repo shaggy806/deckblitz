@@ -13,6 +13,7 @@ import _poolAerieOuphes from "../pool/aerie-ouphes.js";
 import _poolAetherGust from "../pool/aether-gust.js";
 import _poolAetherHub from "../pool/aether-hub.js";
 import _poolAetherSwooper from "../pool/aether-swooper.js";
+import _poolAethericAmplifier from "../pool/aetheric-amplifier.js";
 import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAfterlife from "../pool/afterlife.js";
@@ -1040,6 +1041,7 @@ const shard: CardShard = {
     _poolAetherGust,
     _poolAetherHub,
     _poolAetherSwooper,
+    _poolAethericAmplifier,
     _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
     _poolAfterlife,
