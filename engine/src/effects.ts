@@ -7657,6 +7657,17 @@ export type EffectSpec =
       readonly kind: "additional-end-step";
     }
   | {
+      /** "That player gets an additional upkeep step after this step"
+       * (Paradox Haze, rule 500.10): another upkeep step straight after the
+       * upkeep under way, ahead of any added after it earlier, with no other
+       * step added along. Only for `who` on their own turn (500.10a: no step
+       * is added to another player's turn), and only from an upkeep step, the
+       * one place its card resolves it. "At the beginning of [your] upkeep"
+       * triggers again in it (the card's ruling). */
+      readonly kind: "additional-upkeep-step";
+      readonly who: PlayerRef;
+    }
+  | {
       /** "N damage divided as you choose among any number of targets"
        * (Magma Opus): each target of the group starting at slot `from` is
        * dealt its share of the spell's `division`. A target that has become
@@ -12643,6 +12654,8 @@ export interface EffectApi {
   additionalBeginningPhase(): void;
   /** See the `additional-end-step` {@link EffectSpec}. */
   additionalEndStep(): void;
+  /** See the `additional-upkeep-step` {@link EffectSpec}. */
+  additionalUpkeepStep(player: PlayerId): void;
   /** See the `additional-land-drop` {@link EffectSpec}. */
   additionalLandDrops(amount: number): void;
   /** Untap every battlefield permanent matching `filter`. */
@@ -19573,6 +19586,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "additional-end-step":
       ctx.additionalEndStep();
       return;
+    case "additional-upkeep-step": {
+      const player = resolvePlayerRef(spec.who, ctx);
+      if (player !== undefined) ctx.additionalUpkeepStep(player);
+      return;
+    }
     case "additional-land-drop":
       ctx.additionalLandDrops(amountValue(spec.amount, ctx));
       return;

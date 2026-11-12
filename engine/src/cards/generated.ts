@@ -19445,6 +19445,7 @@ import _poolParadiseMantle from "./pool/paradise-mantle.js";
 import _poolParadisePlume from "./pool/paradise-plume.js";
 import _poolParadoxEngine from "./pool/paradox-engine.js";
 import _poolParadoxGardens from "./pool/paradox-gardens.js";
+import _poolParadoxHaze from "./pool/paradox-haze.js";
 import _poolParadoxShaper from "./pool/paradox-shaper.js";
 import _poolParadoxSurveyor from "./pool/paradox-surveyor.js";
 import _poolParadoxZone from "./pool/paradox-zone.js";
@@ -52082,6 +52083,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolParadisePlume,
   _poolParadoxEngine,
   _poolParadoxGardens,
+  _poolParadoxHaze,
   _poolParadoxShaper,
   _poolParadoxSurveyor,
   _poolParadoxZone,
@@ -84732,6 +84734,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/paradise-plume": _poolParadisePlume,
   "pool/paradox-engine": _poolParadoxEngine,
   "pool/paradox-gardens": _poolParadoxGardens,
+  "pool/paradox-haze": _poolParadoxHaze,
   "pool/paradox-shaper": _poolParadoxShaper,
   "pool/paradox-surveyor": _poolParadoxSurveyor,
   "pool/paradox-zone": _poolParadoxZone,

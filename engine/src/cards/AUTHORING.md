@@ -2121,6 +2121,11 @@ a delayed "next end step" made during the first fires in it. Only from an end
 step; "if it's the first end step of the turn" is a `conditional` on
 `{ kind: "turn-structure", endStep: 1 }`.
 
+`additional-upkeep-step` (`who: PlayerRef`) is Paradox Haze's "that player gets an additional
+upkeep step after this step" (rule 500.10): another upkeep straight after the one under way,
+only for `who` on their own turn (500.10a) and only from an upkeep. "Enchanted player's **first**
+upkeep each turn" is the `step-begins` trigger with `firstTimeEachTurn: true` (upkeeps only).
+
 ### Format extras
 
 **Rolling dice** (rule 706) is `{ kind: "roll-dice", sides, count?, modifier?, table?, then? }` (`modifier` is signed — The Deck of Many Things' "subtract the number of cards in your hand" is `{ product: [{ cardsInHand: "you" }, -1] }`, and a row with a low `min` and `max: 0` is "0 or less"; a row's `mayRollAgain: true` is its "You may roll again", Delina, Wild Mage, rule 706.3c):

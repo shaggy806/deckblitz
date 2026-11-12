@@ -239,6 +239,8 @@ export function timingCountable(spec: TriggerSpec): boolean {
       return true;
     case "becomes-target":
       return spec.playerOnly !== true;
+    case "step-begins":
+      return spec.step === "upkeep";
     case "deals-combat-damage-to-player":
       // A narrowing asked as the damage is dealt can't be asked again of
       // earlier damage: only the plain and `toOpponent` shapes count.

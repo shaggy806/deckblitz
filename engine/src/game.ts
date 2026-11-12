@@ -9471,6 +9471,8 @@ export class Game {
     delete this.state.turn.mainPhases;
     delete this.state.turn.endSteps;
     delete this.state.turn.extraEndSteps;
+    delete this.state.turn.upkeepSteps;
+    delete this.state.turn.extraUpkeepSteps;
     delete this.state.turn.addedCombat;
     delete this.state.extraCombatMarks;
     delete this.state.combatChoices;
@@ -9914,6 +9916,7 @@ export class Game {
     }
     if (isMainPhase(step)) this.state.turn.mainPhases = (this.state.turn.mainPhases ?? 0) + 1;
     if (step === "end") this.state.turn.endSteps = (this.state.turn.endSteps ?? 0) + 1;
+    if (step === "upkeep") this.state.turn.upkeepSteps = (this.state.turn.upkeepSteps ?? 0) + 1;
     // Mana empties as each step and phase ends (rule 500.5), except units
     // whose source said otherwise — Savage Ventmaw's "you don't lose this
     // mana as steps and phases end". That permission is for the turn only, so
@@ -10256,6 +10259,15 @@ export class Game {
     }
     // The combat phase is over: nothing is in combat any more (rule 511.3).
     if (this.state.turn.step === "end-combat") this.removeAllFromCombat();
+    // "That player gets an additional upkeep step after this step" (rule
+    // 500.10): another upkeep step, and no other step with it.
+    if (this.state.turn.step === "upkeep" && (this.state.turn.extraUpkeepSteps ?? 0) > 0) {
+      const owed = (this.state.turn.extraUpkeepSteps ?? 0) - 1;
+      if (owed > 0) this.state.turn.extraUpkeepSteps = owed;
+      else delete this.state.turn.extraUpkeepSteps;
+      this.enterStep("upkeep");
+      return;
+    }
     // Phases added after the combat phase that just ended (rule 500.8), or
     // after the additional beginning phase that did, which came after it: the
     // next one owed. "After this phase, there is an additional combat phase"
@@ -32599,6 +32611,11 @@ export class Game {
         }
         return count(journaled, (e) => e.player === subjects.player) - 1;
       }
+      case "step-begins":
+        // "Enchanted player's first upkeep each turn" (Paradox Haze): the
+        // upkeep steps begun this turn, this one included.
+        if (event.type !== "step-began" || event.step !== "upkeep" || spec.step !== "upkeep") return undefined;
+        return (this.state.turn.upkeepSteps ?? 1) - 1;
       case "gains-life":
       case "loses-life": {
         if (event.type !== "life-changed") return undefined;
@@ -39985,6 +40002,11 @@ controlledBy,
       additionalEndStep: () => {
         if (this.state.turn.step !== "end") return;
         this.state.turn.extraEndSteps = (this.state.turn.extraEndSteps ?? 0) + 1;
+      },
+      // Only on that player's own turn (rule 500.10a), from an upkeep step.
+      additionalUpkeepStep: (player) => {
+        if (this.state.turn.step !== "upkeep" || player !== this.activePlayer) return;
+        this.state.turn.extraUpkeepSteps = (this.state.turn.extraUpkeepSteps ?? 0) + 1;
       },
       additionalLandDrops: (amount) => {
         const seat = this.state.players[controller];

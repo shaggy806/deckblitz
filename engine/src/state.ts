@@ -3190,6 +3190,13 @@ export interface TurnState {
   /** Additional end steps owed straight after the end step under way (rule
    * 500.9 — the `additional-end-step` effect). */
   extraEndSteps?: number;
+  /** How many upkeep steps have begun this turn, the one under way included
+   * — "enchanted player's **first** upkeep each turn" (Paradox Haze), the
+   * `step-begins` trigger's `firstTimeEachTurn`. Reset as each turn begins. */
+  upkeepSteps?: number;
+  /** Additional upkeep steps owed straight after the upkeep step under way
+   * (rule 500.10 — the `additional-upkeep-step` effect). */
+  extraUpkeepSteps?: number;
   /** The mark of the additional combat phase under way, if it has one — see
    * `AddedPhase.mark`. */
   addedCombat?: number;
