@@ -252,11 +252,8 @@ not), then an effect in `AnimationLayer` — an `.animate()` on the tile for an 
 
 Follow-on ideas, approved by the user on 2026-09-30:
 
-- **Tokens merged into an engine stack arrive unanimated**: a second Raise the Alarm's Soldiers
-  are folded by the engine into the first two's stack (`stackCount`), so the object their
-  `permanent-entered-battlefield` names is gone from the view and nothing plays. The stack's tile
-  could glow and say "+2", as a tile the board folded them into already does (`runEnters`).
-  Likewise counters put on tokens peeled off a stack and folded back before the frame is drawn
+- **Counters on tokens folded back into a stack float only once**: counters put on tokens peeled
+  off a stack and folded back before the frame is drawn
   (`refoldSplitTokens`, Tribute to the World Tree): only the `counter-added` naming the
   surviving stack floats its "+1/+1 ×2"; the rest name objects gone from the view.
 - **The board folds identical tokens only when they carry no counters** (`board.ts`'s

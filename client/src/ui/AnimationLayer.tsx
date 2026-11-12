@@ -1560,17 +1560,34 @@ function runLeaves(
  * in once and says "×N"; one already on the board that some joined just
  * glows and says "+N" rather than arriving again.
  */
-function runEnters(
-  cues: readonly { readonly object: ObjectId; readonly isToken: boolean; readonly delay: number }[],
-): void {
+interface EnterCue {
+  readonly object: ObjectId
+  readonly isToken: boolean
+  readonly delay: number
+  /** How many tokens the event stands for (`permanent-entered-battlefield`'s
+   * `count`). */
+  readonly count: number
+  readonly prev: PlayerView | null
+}
+
+function runEnters(cues: readonly EnterCue[]): void {
   const arriving = new Set(cues.map((c) => c.object))
   const byTile = new Map<HTMLElement, { first: (typeof cues)[number]; count: number }>()
+  // Tokens the engine folded straight into a stack already out (a second
+  // Raise the Alarm's Soldiers into the first two's `stackCount`): their
+  // arrival names the stack, which was on the board before the frame, so
+  // the stack's tile glows and says how many joined it rather than playing
+  // as if it had just arrived.
+  const joined = new Map<HTMLElement, { first: (typeof cues)[number]; count: number }>()
   for (const cue of cues) {
     const wrap = boardTileOf(cue.object)
     if (!wrap) continue
-    const seen = byTile.get(wrap)
-    if (seen) seen.count += 1
-    else byTile.set(wrap, { first: cue, count: 1 })
+    const into = cue.prev?.objects[cue.object]?.zone === 'battlefield' ? joined : null
+    const map = into ?? byTile
+    const seen = map.get(wrap)
+    const n = into ? cue.count : 1
+    if (seen) seen.count += n
+    else map.set(wrap, { first: cue, count: n })
   }
   for (const [wrap, { first, count }] of byTile) {
     const shown = wrap.dataset.objId as ObjectId | undefined
@@ -1583,6 +1600,13 @@ function runEnters(
       if (tile) glow(tile, 'gain', first.delay, duration)
       floatText(wrap, `+${count}`, 'gain', first.delay, duration * 1.5)
     }
+  }
+  for (const [wrap, { first, count }] of joined) {
+    if (byTile.has(wrap)) continue
+    const duration = scaled(ENTER_STEP_MS)
+    const tile = wrap.querySelector<HTMLElement>('.mini-tile')
+    if (tile) glow(tile, 'gain', first.delay, duration)
+    floatText(wrap, `+${count}`, 'gain', first.delay, duration * 1.5)
   }
 }
 
@@ -2676,7 +2700,7 @@ export function AnimationLayer({
       // A new frame: any card still held up from the last one won't land.
       if (cues.some((c) => c.half === 'before')) dropAllLifted()
       // Arrivals are gathered and played per tile after the loop (`runEnters`).
-      const enters: { object: ObjectId; isToken: boolean; delay: number }[] = []
+      const enters: EnterCue[] = []
       // So are permanents leaving (`runLeaves`), so part of a stack going
       // reads as the stack going down rather than as the tile leaving.
       const leaves: AnimationCue[] = []
@@ -2736,7 +2760,13 @@ export function AnimationLayer({
             // One sound per tile, as one animation: a folded member is silent.
             const tile = boardTileOf(object)
             const folded = tile !== null && enters.some((e) => boardTileOf(e.object) === tile)
-            enters.push({ object, isToken: cue.view.objects[object]?.isToken ?? false, delay: cue.delay })
+            enters.push({
+              object,
+              isToken: cue.view.objects[object]?.isToken ?? false,
+              delay: cue.delay,
+              count: cue.event.count ?? 1,
+              prev: cue.prev,
+            })
             if (folded) continue
             enterSound(cue.view.objects[object], cue.delay)
           } else if (
