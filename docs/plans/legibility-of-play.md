@@ -260,9 +260,6 @@ Follow-on ideas, approved by the user on 2026-09-30:
   from a folded tile to take a fresh member per click first: proliferate's toggle acts on
   `ids[0]` (`pickIdForClick` has no proliferate case), so a folded tile of three could only ever
   give one of them a counter. Found 2026-10-03 (`docs/plans/token-stack-choices.md`).
-- **A dies trigger's source can't pulse**: `runPulse` lights the source's tile on the new board,
-  and a creature whose own death triggered is gone from it. It would need a pulse in the frame's
-  first half, over the old board, for a source that isn't on the new one.
 - **A history entry whose cards have left the board highlights nothing**: `highlightEvent` finds
   only what's still drawn (a permanent, a stack entry, your hand, a player's panel). It could
   open the zone the card went to instead.

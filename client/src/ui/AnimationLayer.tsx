@@ -1391,11 +1391,78 @@ function measureFlight(cue: AnimationCue): number {
  * stack there); a source that has already left, a dies trigger's, has no
  * tile to light. Under reduced motion it glows without the swell.
  */
+/**
+ * Sources of a frame's triggers that won't be on its new board (a creature
+ * whose own death triggered), snapshotted over the old board as the frame
+ * starts (`captureGoneSources`), so their pulse can still play where they
+ * stood (`runPulse`).
+ */
+const goneSources = new Map<ObjectId, HTMLElement>()
+
+function captureGoneSources(cue: AnimationCue): void {
+  const { view, prev } = cue
+  if (prev === null || motionPrefs().reduced) return
+  const last = prev.events.at(-1)?.seq ?? -1
+  for (let i = view.events.length - 1; i >= 0; i -= 1) {
+    const ev = view.events[i]
+    if (ev.seq <= last) break
+    if (ev.type !== 'ability-triggered' || goneSources.has(ev.source)) continue
+    if (view.objects[ev.source]?.zone === 'battlefield') continue
+    const tile = document.querySelector<HTMLElement>(`[data-obj-id="${CSS.escape(ev.source)}"] .mini-tile`)
+    const rect = tile?.getBoundingClientRect()
+    if (!tile || !rect || rect.width === 0) continue
+    const box = document.createElement('div')
+    box.className = 'ghost-flight'
+    box.style.setProperty('--mini-w', `${tile.offsetWidth}px`)
+    box.style.left = `${rect.left}px`
+    box.style.top = `${rect.top}px`
+    box.style.width = `${rect.width}px`
+    box.style.height = `${rect.height}px`
+    box.style.visibility = 'hidden'
+    box.appendChild(tile.cloneNode(true))
+    document.body.appendChild(box)
+    goneSources.set(ev.source, box)
+    window.setTimeout(() => {
+      if (goneSources.get(ev.source) === box) goneSources.delete(ev.source)
+      box.remove()
+    }, 15_000)
+  }
+}
+
 function runPulse(source: ObjectId, delay: number): void {
   const tile = document.querySelector<HTMLElement>(
     `[data-obj-id="${CSS.escape(source)}"] .mini-tile`,
   )
-  if (!tile) return
+  if (!tile) {
+    // Gone from the board (its own death triggered it): its snapshot comes
+    // back where it stood, pulses, and fades.
+    const box = goneSources.get(source)
+    goneSources.delete(source)
+    if (!box) return
+    const duration = scaled(TRIGGER_STEP_MS)
+    box.style.visibility = 'visible'
+    const ghost = box.firstElementChild as HTMLElement | null
+    ghost?.animate(
+      [
+        { boxShadow: '0 0 0 0 rgba(255, 190, 70, 0)', filter: 'grayscale(0.6) brightness(0.8)' },
+        {
+          boxShadow: '0 0 0 3px rgba(255, 198, 86, 0.95), 0 0 20px 6px rgba(255, 160, 40, 0.7)',
+          filter: 'grayscale(0) brightness(1.2)',
+          offset: 0.35,
+        },
+        { boxShadow: '0 0 0 0 rgba(255, 190, 70, 0)', filter: 'grayscale(1) brightness(0.6)' },
+      ],
+      { duration, delay, easing: 'ease-out', fill: 'both' },
+    )
+    const fade = box.animate([{ opacity: 0 }, { opacity: 0.85, offset: 0.2 }, { opacity: 0.85, offset: 0.6 }, { opacity: 0 }], {
+      duration,
+      delay,
+      fill: 'both',
+    })
+    fade.onfinish = () => box.remove()
+    fade.oncancel = () => box.remove()
+    return
+  }
   const timing: KeyframeAnimationOptions = { duration: scaled(TRIGGER_STEP_MS), delay, easing: 'ease-out' }
   tile.animate(
     [
@@ -2738,7 +2805,12 @@ export function AnimationLayer({
 
     return bus.subscribe((cues) => {
       // A new frame: any card still held up from the last one won't land.
-      if (cues.some((c) => c.half === 'before')) dropAllLifted()
+      const opening = cues.find((c) => c.half === 'before')
+      if (opening) {
+        dropAllLifted()
+        // Over the old board, before anything leaves it.
+        captureGoneSources(opening)
+      }
       // Arrivals are gathered and played per tile after the loop (`runEnters`).
       const enters: EnterCue[] = []
       // So are permanents leaving (`runLeaves`), so part of a stack going
