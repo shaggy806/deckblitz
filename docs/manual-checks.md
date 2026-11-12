@@ -30,6 +30,11 @@ engine terms. A second thing to check is a second test.
 
 ## Prompts and log lines that say what the engine checks (2026-11-11)
 
+### Assault Suit: it asks nothing while it's on no creature
+- **Do:** End your turn without equipping the Suit, and watch Bob's upkeep.
+- **Expect:** No question from Assault Suit: Bob's turn goes on to his draw. Your Grizzly Bears stays yours.
+- **Not a bug:** Once the Suit is on a creature it does ask, at each opponent's upkeep.
+
 ### Mogg Flunkies: the attack button is off while it would attack alone
 - **Do:** In the declare-attackers prompt, send only Mogg Flunkies at Bob. Then send Grizzly Bears too.
 - **Expect:** With the Flunkies alone the prompt adds "Mogg Flunkies can't attack without another attacker" and the Attack button is off. With the Bears as well the line goes and the button works.

@@ -6,6 +6,7 @@ import {
   attack,
   cast,
   controller,
+  destroy,
   graveyard,
   hand,
   lands,
@@ -55,6 +56,39 @@ describe("R3 group C — Assault Suit", () => {
     expect(game.state.objects[bears].tapped).toBe(false);
     nextTurn(game);
     expect(controller(game, bears)).toBe(A);
+  });
+
+  // A bug report, 2026-11-11: the Suit asked at every opponent's upkeep while
+  // it was on nothing. There's no equipped creature to hand over, and a player
+  // can't choose an impossible option (rule 608.2d), so nothing is asked.
+  it("asks nothing while it isn't on a creature", () => {
+    const { game, a } = table();
+    spawn(game, "Assault Suit");
+    const bears = spawn(game, "Grizzly Bears");
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return [0];
+    };
+    nextTurn(game, "draw");
+    expect(asked).toBe(0);
+    expect(controller(game, bears)).toBe(A);
+  });
+
+  it("asks nothing once the creature it was on has gone", () => {
+    const { game, a } = table();
+    lands(game, "Wastes", 3);
+    const suit = spawn(game, "Assault Suit");
+    const bears = spawn(game, "Grizzly Bears");
+    activate(game, suit, 0, { targets: [ref(bears)] });
+    destroy(game, bears);
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return [0];
+    };
+    nextTurn(game, "draw");
+    expect(asked).toBe(0);
   });
 });
 

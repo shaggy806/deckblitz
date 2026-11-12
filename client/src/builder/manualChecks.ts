@@ -12054,4 +12054,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Cultivate: the prompt says which find goes where',
     board({ you: { bf: ['Forest*3'], hand: ['Cultivate'], lib: ['Island', 'Swamp', 'Grizzly Bears'] } }),
   ),
+  preset(
+    "Assault Suit: it asks nothing while it's on no creature",
+    board({ you: { bf: ['Assault Suit', 'Grizzly Bears'] }, opp: { bf: ['Hill Giant'] } }),
+  ),
 ]

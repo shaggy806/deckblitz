@@ -15981,6 +15981,11 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // card (an empty library revealed nothing), or "into your hand" with nothing
   // exiled this way: an impossible option isn't one to choose (rule 608.2d).
   if (action.kind === "put-into-graveyard") return objectRefAct(action.target, ctx)?.kind === "object";
+  // "You may have that player gain control of equipped creature" while the
+  // Equipment is on nothing, or once what it was on has gone: there is no
+  // such creature to hand over (Assault Suit asked at every opponent's
+  // upkeep; a bug report, 2026-11-11).
+  if (action.kind === "gain-control") return objectRefAct(action.target, ctx) !== undefined;
   if (action.kind === "move-exiled-this-way" && action.filter === undefined) return ctx.cardsExiledThisWay().length > 0;
   // "You may blight 1": a player who controls no creature the counters can
   // go on can't choose to (rule 701.68b).
