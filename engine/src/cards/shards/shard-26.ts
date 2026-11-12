@@ -938,6 +938,7 @@ import _poolUnholyFiend from "../pool/unholy-fiend.js";
 import _poolUrenisRebuff from "../pool/urenis-rebuff.js";
 import _poolUrsineMonstrosity from "../pool/ursine-monstrosity.js";
 import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
+import _poolValkoIndorian from "../pool/valko-indorian.js";
 import _poolValleyRally from "../pool/valley-rally.js";
 import _poolVanishment from "../pool/vanishment.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
@@ -1970,6 +1971,7 @@ const shard: CardShard = {
     _poolUrenisRebuff,
     _poolUrsineMonstrosity,
     _poolUtopiaSprawl,
+    _poolValkoIndorian,
     _poolValleyRally,
     _poolVanishment,
     _poolVarinaLichQueen,

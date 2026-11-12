@@ -978,6 +978,7 @@ import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
 import _poolWhoosh from "../pool/whoosh.js";
+import _poolWhtzTheBibliophile from "../pool/whtz-the-bibliophile.js";
 import _poolWickerWarcrawler from "../pool/wicker-warcrawler.js";
 import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
@@ -2014,6 +2015,7 @@ const shard: CardShard = {
     _poolWelkinTern,
     _poolWhisperingShade,
     _poolWhoosh,
+    _poolWhtzTheBibliophile,
     _poolWickerWarcrawler,
     _poolWildGriffin,
     _poolWildslayerElves,

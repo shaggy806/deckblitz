@@ -524,6 +524,7 @@ import _poolMassacre from "../pool/massacre.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMasticore from "../pool/masticore.js";
 import _poolMatzalantliTheGreatDoor from "../pool/matzalantli-the-great-door.js";
+import _poolMaularTheNextEvolution from "../pool/maular-the-next-evolution.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
@@ -1537,6 +1538,7 @@ const shard: CardShard = {
     _poolMasterfulReplication,
     _poolMasticore,
     _poolMatzalantliTheGreatDoor,
+    _poolMaularTheNextEvolution,
     _poolMelokuTheCloudedMirror,
     _poolMendingTouch,
     _poolMentorsGuidance,

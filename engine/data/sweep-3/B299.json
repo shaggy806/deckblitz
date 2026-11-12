@@ -1,0 +1,57 @@
+{
+ "batch": "B299",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): the Rulebreaker commanders, freed by building mechanic:rulebreaker and condition:starting-deck-size (2026-11-12)",
+ "authored": [
+  {
+   "name": "The Everforger",
+   "files": [
+    "engine/src/cards/pool/the-everforger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maular, the Next Evolution",
+   "files": [
+    "engine/src/cards/pool/maular-the-next-evolution.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grizzlegom, Hurloon Hero",
+   "files": [
+    "engine/src/cards/pool/grizzlegom-hurloon-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seluma, Light of Aysen",
+   "files": [
+    "engine/src/cards/pool/seluma-light-of-aysen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valko Indorian",
+   "files": [
+    "engine/src/cards/pool/valko-indorian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolabow, Loch Rascal",
+   "files": [
+    "engine/src/cards/pool/tolabow-loch-rascal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whtz, the Bibliophile",
+   "files": [
+    "engine/src/cards/pool/whtz-the-bibliophile.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

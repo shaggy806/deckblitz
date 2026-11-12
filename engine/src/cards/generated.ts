@@ -11686,6 +11686,7 @@ import _poolGrizzledLeotau from "./pool/grizzled-leotau.js";
 import _poolGrizzledOutcasts from "./pool/grizzled-outcasts.js";
 import _poolGrizzledOutrider from "./pool/grizzled-outrider.js";
 import _poolGrizzledWolverine from "./pool/grizzled-wolverine.js";
+import _poolGrizzlegomHurloonHero from "./pool/grizzlegom-hurloon-hero.js";
 import _poolGrizzlyBears from "./pool/grizzly-bears.js";
 import _poolGrizzlyFate from "./pool/grizzly-fate.js";
 import _poolGrizzlyGhoul from "./pool/grizzly-ghoul.js";
@@ -16637,6 +16638,7 @@ import _poolMatzalantliTheGreatDoor from "./pool/matzalantli-the-great-door.js";
 import _poolMauhurUrukHaiCaptain from "./pool/mauhur-uruk-hai-captain.js";
 import _poolMaulOfTheSkyclaves from "./pool/maul-of-the-skyclaves.js";
 import _poolMaulSplicer from "./pool/maul-splicer.js";
+import _poolMaularTheNextEvolution from "./pool/maular-the-next-evolution.js";
 import _poolMaulfistDoorbuster from "./pool/maulfist-doorbuster.js";
 import _poolMaulfistRevolutionary from "./pool/maulfist-revolutionary.js";
 import _poolMaulfistSquad from "./pool/maulfist-squad.js";
@@ -23500,6 +23502,7 @@ import _poolSelhoffOccultist from "./pool/selhoff-occultist.js";
 import _poolSelkieHedgeMage from "./pool/selkie-hedge-mage.js";
 import _poolSellSwordBrute from "./pool/sell-sword-brute.js";
 import _poolSellerOfSongbirds from "./pool/seller-of-songbirds.js";
+import _poolSelumaLightOfAysen from "./pool/seluma-light-of-aysen.js";
 import _poolSelvalaEagerTrailblazer from "./pool/selvala-eager-trailblazer.js";
 import _poolSelvalaExplorerReturned from "./pool/selvala-explorer-returned.js";
 import _poolSelvalaHeartOfTheWilds from "./pool/selvala-heart-of-the-wilds.js";
@@ -27481,6 +27484,7 @@ import _poolTheEternalWanderer from "./pool/the-eternal-wanderer.js";
 import _poolTheEternityElevator from "./pool/the-eternity-elevator.js";
 import _poolTheEverChangingDane from "./pool/the-ever-changing-dane.js";
 import _poolTheEverflowingWell from "./pool/the-everflowing-well.js";
+import _poolTheEverforger from "./pool/the-everforger.js";
 import _poolTheFabulousFrogMan from "./pool/the-fabulous-frog-man.js";
 import _poolTheFaceOfBoe from "./pool/the-face-of-boe.js";
 import _poolTheFairBasilica from "./pool/the-fair-basilica.js";
@@ -28240,6 +28244,7 @@ import _poolToil from "./pool/toil.js";
 import _poolToilsOfNightAndDay from "./pool/toils-of-night-and-day.js";
 import _poolTokTokVolcanoBorn from "./pool/tok-tok-volcano-born.js";
 import _poolTokkaRahzarTerribleTwos from "./pool/tokka-rahzar-terrible-twos.js";
+import _poolTolabowLochRascal from "./pool/tolabow-loch-rascal.js";
 import _poolTolariaWest from "./pool/tolaria-west.js";
 import _poolTolaria from "./pool/tolaria.js";
 import _poolTolarianAcademy from "./pool/tolarian-academy.js";
@@ -29430,6 +29435,7 @@ import _poolValiantGuard from "./pool/valiant-guard.js";
 import _poolValiantKnight from "./pool/valiant-knight.js";
 import _poolValiantVeteran from "./pool/valiant-veteran.js";
 import _poolValkmiraProtectorsShield from "./pool/valkmira-protectors-shield.js";
+import _poolValkoIndorian from "./pool/valko-indorian.js";
 import _poolValkyrieAerialUnit from "./pool/valkyrie-aerial-unit.js";
 import _poolValkyrieHarbinger from "./pool/valkyrie-harbinger.js";
 import _poolValkyriesCall from "./pool/valkyries-call.js";
@@ -30826,6 +30832,7 @@ import _poolWhiteout from "./pool/whiteout.js";
 import _poolWhitesunsPassage from "./pool/whitesuns-passage.js";
 import _poolWhitewaterNaiads from "./pool/whitewater-naiads.js";
 import _poolWhoosh from "./pool/whoosh.js";
+import _poolWhtzTheBibliophile from "./pool/whtz-the-bibliophile.js";
 import _poolWibblyWobblyTimeyWimey from "./pool/wibbly-wobbly-timey-wimey.js";
 import _poolWiccanRisingMagician from "./pool/wiccan-rising-magician.js";
 import _poolWiccanYoungAvenger from "./pool/wiccan-young-avenger.js";
@@ -44155,6 +44162,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrizzledOutcasts,
   _poolGrizzledOutrider,
   _poolGrizzledWolverine,
+  _poolGrizzlegomHurloonHero,
   _poolGrizzlyBears,
   _poolGrizzlyFate,
   _poolGrizzlyGhoul,
@@ -49106,6 +49114,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMauhurUrukHaiCaptain,
   _poolMaulOfTheSkyclaves,
   _poolMaulSplicer,
+  _poolMaularTheNextEvolution,
   _poolMaulfistDoorbuster,
   _poolMaulfistRevolutionary,
   _poolMaulfistSquad,
@@ -55969,6 +55978,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSelkieHedgeMage,
   _poolSellSwordBrute,
   _poolSellerOfSongbirds,
+  _poolSelumaLightOfAysen,
   _poolSelvalaEagerTrailblazer,
   _poolSelvalaExplorerReturned,
   _poolSelvalaHeartOfTheWilds,
@@ -59950,6 +59960,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheEternityElevator,
   _poolTheEverChangingDane,
   _poolTheEverflowingWell,
+  _poolTheEverforger,
   _poolTheFabulousFrogMan,
   _poolTheFaceOfBoe,
   _poolTheFairBasilica,
@@ -60709,6 +60720,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolToilsOfNightAndDay,
   _poolTokTokVolcanoBorn,
   _poolTokkaRahzarTerribleTwos,
+  _poolTolabowLochRascal,
   _poolTolariaWest,
   _poolTolaria,
   _poolTolarianAcademy,
@@ -61899,6 +61911,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolValiantKnight,
   _poolValiantVeteran,
   _poolValkmiraProtectorsShield,
+  _poolValkoIndorian,
   _poolValkyrieAerialUnit,
   _poolValkyrieHarbinger,
   _poolValkyriesCall,
@@ -63295,6 +63308,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhitesunsPassage,
   _poolWhitewaterNaiads,
   _poolWhoosh,
+  _poolWhtzTheBibliophile,
   _poolWibblyWobblyTimeyWimey,
   _poolWiccanRisingMagician,
   _poolWiccanYoungAvenger,
@@ -76637,6 +76651,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grizzled-outcasts": _poolGrizzledOutcasts,
   "pool/grizzled-outrider": _poolGrizzledOutrider,
   "pool/grizzled-wolverine": _poolGrizzledWolverine,
+  "pool/grizzlegom-hurloon-hero": _poolGrizzlegomHurloonHero,
   "pool/grizzly-bears": _poolGrizzlyBears,
   "pool/grizzly-fate": _poolGrizzlyFate,
   "pool/grizzly-ghoul": _poolGrizzlyGhoul,
@@ -81588,6 +81603,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mauhur-uruk-hai-captain": _poolMauhurUrukHaiCaptain,
   "pool/maul-of-the-skyclaves": _poolMaulOfTheSkyclaves,
   "pool/maul-splicer": _poolMaulSplicer,
+  "pool/maular-the-next-evolution": _poolMaularTheNextEvolution,
   "pool/maulfist-doorbuster": _poolMaulfistDoorbuster,
   "pool/maulfist-revolutionary": _poolMaulfistRevolutionary,
   "pool/maulfist-squad": _poolMaulfistSquad,
@@ -88451,6 +88467,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/selkie-hedge-mage": _poolSelkieHedgeMage,
   "pool/sell-sword-brute": _poolSellSwordBrute,
   "pool/seller-of-songbirds": _poolSellerOfSongbirds,
+  "pool/seluma-light-of-aysen": _poolSelumaLightOfAysen,
   "pool/selvala-eager-trailblazer": _poolSelvalaEagerTrailblazer,
   "pool/selvala-explorer-returned": _poolSelvalaExplorerReturned,
   "pool/selvala-heart-of-the-wilds": _poolSelvalaHeartOfTheWilds,
@@ -92432,6 +92449,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-eternity-elevator": _poolTheEternityElevator,
   "pool/the-ever-changing-dane": _poolTheEverChangingDane,
   "pool/the-everflowing-well": _poolTheEverflowingWell,
+  "pool/the-everforger": _poolTheEverforger,
   "pool/the-fabulous-frog-man": _poolTheFabulousFrogMan,
   "pool/the-face-of-boe": _poolTheFaceOfBoe,
   "pool/the-fair-basilica": _poolTheFairBasilica,
@@ -93191,6 +93209,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/toils-of-night-and-day": _poolToilsOfNightAndDay,
   "pool/tok-tok-volcano-born": _poolTokTokVolcanoBorn,
   "pool/tokka-rahzar-terrible-twos": _poolTokkaRahzarTerribleTwos,
+  "pool/tolabow-loch-rascal": _poolTolabowLochRascal,
   "pool/tolaria-west": _poolTolariaWest,
   "pool/tolaria": _poolTolaria,
   "pool/tolarian-academy": _poolTolarianAcademy,
@@ -94381,6 +94400,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/valiant-knight": _poolValiantKnight,
   "pool/valiant-veteran": _poolValiantVeteran,
   "pool/valkmira-protectors-shield": _poolValkmiraProtectorsShield,
+  "pool/valko-indorian": _poolValkoIndorian,
   "pool/valkyrie-aerial-unit": _poolValkyrieAerialUnit,
   "pool/valkyrie-harbinger": _poolValkyrieHarbinger,
   "pool/valkyries-call": _poolValkyriesCall,
@@ -95777,6 +95797,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/whitesuns-passage": _poolWhitesunsPassage,
   "pool/whitewater-naiads": _poolWhitewaterNaiads,
   "pool/whoosh": _poolWhoosh,
+  "pool/whtz-the-bibliophile": _poolWhtzTheBibliophile,
   "pool/wibbly-wobbly-timey-wimey": _poolWibblyWobblyTimeyWimey,
   "pool/wiccan-rising-magician": _poolWiccanRisingMagician,
   "pool/wiccan-young-avenger": _poolWiccanYoungAvenger,

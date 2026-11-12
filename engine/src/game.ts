@@ -7045,6 +7045,7 @@ export class Game {
         for (const c of colorIdentityOf(this.registry.get(name), this.registry)) identity.add(c);
       }
       this.state.players[player].commanderIdentity = COLORS.filter((c) => identity.has(c));
+      this.state.players[player].startingDeckSize = cards.length + commanderNames.length;
       this.state.zones.perPlayer[player] = {
         library: [],
         hand: [],

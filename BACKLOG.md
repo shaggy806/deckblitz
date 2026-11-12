@@ -266,6 +266,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 
 
+- **Importing or blitzing a deck with no clear commander should ask which** (2026-11-12): a list with no commander section or trailing commander line (an alphabetically sorted Archidekt export) has its commander guessed (`commanderSource: null` in `server/src/import-deck.ts`); instead a pop-up should offer the list's valid potential commanders to pick from.
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The Pass bar sits over the rightmost hand cards** (2026-11-11): at 1366x768 their lower edges and the lowered tray's last cards are under it, so the pointer reaching them leaves the hand and the raised tray drops.
 - **The scenario builder can't hold the initiative or a dungeon position** — "Edit from here" drops both (`ScenarioSpec`), so a check of them has to reach them in play.

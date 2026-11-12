@@ -797,6 +797,8 @@ function evalStaticCondition(
         : condition.who === "nobody"
           ? state.monarch === null
           : state.monarch !== null && state.monarch !== you;
+    case "starting-deck-size":
+      return (state.players[you]?.startingDeckSize ?? 0) >= condition.atLeast;
     case "spells-cast-last-turn": {
       const last = state.spellsCastLastTurn ?? { total: 0, mostByOnePlayer: 0 };
       if (condition.none === true && last.total !== 0) return false;

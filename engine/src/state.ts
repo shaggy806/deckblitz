@@ -2876,6 +2876,13 @@ export interface PlayerState {
    * one — and then it makes nothing (the rulings).
    */
   commanderIdentity?: readonly Color[];
+  /**
+   * How many cards this player's starting deck had — its library and its
+   * commanders, as dealt at setup (rule 103.1): what "if you had 200 or more
+   * cards in your starting deck" (Whtz, the Bibliophile) reads. Absent on a
+   * board built by hand, whose decks are nobody's starting deck.
+   */
+  startingDeckSize?: number;
 }
 
 export interface GameRules {

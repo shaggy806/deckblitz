@@ -338,6 +338,7 @@ import _poolGremlinMine from "../pool/gremlin-mine.js";
 import _poolGriffinSentinel from "../pool/griffin-sentinel.js";
 import _poolGrimHireling from "../pool/grim-hireling.js";
 import _poolGrislyTransformation from "../pool/grisly-transformation.js";
+import _poolGrizzlegomHurloonHero from "../pool/grizzlegom-hurloon-hero.js";
 import _poolGrowthSpasm from "../pool/growth-spasm.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
 import _poolGruulSpellbreaker from "../pool/gruul-spellbreaker.js";
@@ -1335,6 +1336,7 @@ const shard: CardShard = {
     _poolGriffinSentinel,
     _poolGrimHireling,
     _poolGrislyTransformation,
+    _poolGrizzlegomHurloonHero,
     _poolGrowthSpasm,
     _poolGruffTriplets,
     _poolGruulSpellbreaker,

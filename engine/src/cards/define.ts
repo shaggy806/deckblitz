@@ -1124,6 +1124,10 @@ export type StaticCondition =
    * "if an opponent is the monarch") — false while nobody is — or
    * `"nobody"`: "if there is no monarch" (M'Baku, Jabari Chieftain). */
   | { readonly kind: "monarch"; readonly who: "you" | "opponent" | "nobody" }
+  /** "If you had [N] or more cards in your starting deck" (Whtz, the
+   * Bibliophile): `PlayerState.startingDeckSize`, fixed at setup. False on a
+   * board built by hand, which has no starting deck. */
+  | { readonly kind: "starting-deck-size"; readonly atLeast: number }
   /** Who has the initiative (rule 726): you, or any opponent. False while
    * nobody does. */
   | { readonly kind: "initiative"; readonly who: "you" | "opponent" }
@@ -5623,6 +5627,12 @@ export interface CardDefinition {
    * with none. A deckbuilding rule, read by `deck-validation.ts`'s
    * {@link copiesAllowed} and nothing in play. */
   readonly deckCopies: "any" | number | null;
+  /** "Rulebreaker — A deck with this commander can have …" (Mystery Booster
+   * Commander Edition): the commander's own exception to the deckbuilding
+   * rules (rules 903.4–903.5; the card wins, rule 101.1), `null` for a card
+   * with none. Read by `deck-validation.ts` and nothing in play: a
+   * Rulebreaker ability has no effect during a game. See {@link Rulebreaker}. */
+  readonly rulebreaker: Rulebreaker | null;
   /** "Companion—[Condition]" (rule 702.139), `null` for a card without it. It
    * functions outside the game alone: the condition is read as the card is
    * offered for revealing (103.2b, `companion.ts`), and in the deck the card
@@ -5837,6 +5847,7 @@ const PRINTED_ABILITY: {
   pairing: (def) => def.pairing !== null,
   canBeCommander: (def) => def.canBeCommander,
   deckCopies: (def) => def.deckCopies !== null,
+  rulebreaker: (def) => def.rulebreaker !== null,
   companion: (def) => def.companion !== null,
   beginsOnBattlefield: (def) => def.beginsOnBattlefield !== false,
   openingHandReveal: (def) => def.openingHandReveal !== null,
@@ -5881,6 +5892,41 @@ export type CommanderPairing =
   | { readonly kind: "partner-group"; readonly group: string }
   | { readonly kind: "choose-a-background" }
   | { readonly kind: "doctors-companion" };
+
+/**
+ * Cards a Rulebreaker commander lets its deck have "of any color identity":
+ * a card is one when it has every type, supertype and subtype listed (a
+ * subtype by `hasSubtype`'s rule — a changeling is every creature type) and,
+ * with `minManaValue`, at least that mana value. "Any basic land cards" is
+ * `{ supertypes: ["basic"], types: ["land"] }`; "artifact creature and
+ * Equipment cards" is two of these.
+ */
+export interface RulebreakerCards {
+  readonly types?: readonly CardType[];
+  readonly supertypes?: readonly Supertype[];
+  readonly subtypes?: readonly string[];
+  readonly minManaValue?: number;
+}
+
+/**
+ * A commander's Rulebreaker ability (Mystery Booster Commander Edition): an
+ * exception to the deckbuilding rules for a deck it commands — never more
+ * than one of either commander's. Each part is optional:
+ * - `anyIdentity` — those cards may be outside the commanders' colour
+ *   identity (903.5c). Singleton (903.5b) still holds.
+ * - `extraColorFor` — "the color identity of instant and sorcery cards in
+ *   your deck can include one color of your choice not in your commander's
+ *   color identity" (Tolabow): one colour, the same for every such card,
+ *   chosen as the deck is built — so a deck is legal when some one colour
+ *   covers them all. The commanders' own identity is unchanged in play.
+ * - `noMaximumSize` — "has no maximum deck size" (Whtz): the hundred
+ *   (903.5a) is a minimum.
+ */
+export interface Rulebreaker {
+  readonly anyIdentity?: readonly RulebreakerCards[];
+  readonly extraColorFor?: readonly CardType[];
+  readonly noMaximumSize?: true;
+}
 
 /** One chapter ability of a Saga (rule 714.2c). `at` lists the lore-counter
  * counts that fire it — usually `[1]` / `[2]` / `[3]`, but a shared "I, II"
@@ -6129,6 +6175,7 @@ interface CardDraft {
   pairing?: CommanderPairing;
   canBeCommander?: boolean;
   deckCopies?: "any" | number;
+  rulebreaker?: Rulebreaker;
   companion?: CompanionCondition;
   beginsOnBattlefield?: boolean | BeginsOnBattlefieldWith;
   openingHandReveal?: OpeningHandReveal;
@@ -6412,6 +6459,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     pairing: draft.pairing ?? null,
     canBeCommander: draft.canBeCommander ?? false,
     deckCopies: draft.deckCopies ?? null,
+    rulebreaker: draft.rulebreaker ?? null,
     companion: draft.companion ?? null,
     beginsOnBattlefield: draft.beginsOnBattlefield ?? false,
     openingHandReveal: draft.openingHandReveal ?? null,

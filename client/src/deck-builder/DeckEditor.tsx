@@ -11,6 +11,8 @@ import {
   hasPartner,
   identityString,
   isDeckableCard,
+  fitsDeckIdentity,
+  rulebreakersOf,
   validateCommanderDeck,
   withinIdentity,
 } from 'engine/client'
@@ -201,16 +203,23 @@ export function DeckEditor({
     return identity
   }, [deck.commanders])
   const identityFilter = inIdentityOnly ? commanderIdentity : null
+  /** Whether a card may go in this deck by colour identity: within the
+   * commanders', or let in by a commander's Rulebreaker. */
+  const fitsIdentity = useMemo(() => {
+    if (identityFilter === null) return () => true
+    const rulebreakers = rulebreakersOf(deck.commanders, cardPool().registry)
+    return (c: CardDefinition) =>
+      withinIdentity(identityOf(c), identityFilter) ||
+      (rulebreakers.length > 0 && fitsDeckIdentity(c, identityFilter, rulebreakers, cardPool().registry))
+  }, [identityFilter, deck.commanders])
 
   /** How many cards the type and identity filters leave, whatever is typed. */
   const inFilters = useMemo(
     () =>
       buildableCards().filter(
-        (c) =>
-          (!typeFilter || c.types.includes(typeFilter as CardDefinition['types'][number])) &&
-          (identityFilter === null || withinIdentity(identityOf(c), identityFilter)),
+        (c) => (!typeFilter || c.types.includes(typeFilter as CardDefinition['types'][number])) && fitsIdentity(c),
       ).length,
-    [typeFilter, identityFilter],
+    [typeFilter, fitsIdentity],
   )
 
   const filtered = useMemo(() => {
@@ -218,10 +227,10 @@ export function DeckEditor({
     const terms = searchTerms(query)
     return buildableCards().filter((c) => {
       if (typeFilter && !c.types.includes(typeFilter as CardDefinition['types'][number])) return false
-      if (identityFilter !== null && !withinIdentity(identityOf(c), identityFilter)) return false
+      if (!fitsIdentity(c)) return false
       return terms.length === 0 || matchesTerms(searchTextOf(c), terms)
     })
-  }, [query, typeFilter, identityFilter])
+  }, [query, typeFilter, fitsIdentity])
 
   const [poolPage, setPoolPage] = useState(0)
   const poolPageCount = Math.max(1, Math.ceil(filtered.length / POOL_PAGE_SIZE))

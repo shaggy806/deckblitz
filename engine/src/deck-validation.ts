@@ -14,8 +14,11 @@
 import { colorIdentityOf, identityString, withinIdentity } from "./identity.js";
 import { isCardFront, isTokenCard } from "./cards/classify.js";
 import { COMMANDER_BANNED } from "./cards/generated-index.js";
+import { manaValue, parseManaCost } from "./mana.js";
 import type { Color } from "./mana.js";
+import { hasSubtype, isCreatureType } from "./subtypes.js";
 import type { CardDefinition, CardRegistry } from "./cards.js";
+import type { Rulebreaker, RulebreakerCards } from "./cards/define.js";
 
 export interface DeckToValidate {
   /** One or two commander card names (two = Partner / Background). */
@@ -223,6 +226,57 @@ function notACardReason(name: string, def: CardDefinition): string | null {
   return null;
 }
 
+/** The Rulebreaker abilities of a deck's commanders (the implemented ones). */
+export function rulebreakersOf(commanders: readonly string[], registry: CardRegistry): readonly Rulebreaker[] {
+  const out: Rulebreaker[] = [];
+  for (const name of commanders) {
+    if (!registry.has(name)) continue;
+    const r = registry.get(name).rulebreaker;
+    if (r !== null) out.push(r);
+  }
+  return out;
+}
+
+/** Whether `def` is one of the cards a {@link RulebreakerCards} names. A
+ * changeling is every creature type in every zone (702.73a). */
+function isRulebreakerCard(def: CardDefinition, cards: RulebreakerCards): boolean {
+  if (cards.types?.some((t) => !def.types.includes(t))) return false;
+  if (cards.supertypes?.some((t) => !def.supertypes.includes(t))) return false;
+  const changeling = def.keywords.includes("changeling");
+  if (cards.subtypes?.some((t) => !hasSubtype(def.subtypes, t) && !(changeling && isCreatureType(t)))) return false;
+  if (cards.minManaValue !== undefined && manaValue(parseManaCost(def.manaCost)) < cards.minManaValue) return false;
+  return true;
+}
+
+/** The colours of `def`'s identity outside `identity`. */
+function colorsOutside(def: CardDefinition, identity: ReadonlySet<Color>, registry: CardRegistry): Color[] {
+  return [...colorIdentityOf(def, registry)].filter((c) => !identity.has(c));
+}
+
+/**
+ * Whether a deck commanded by `identity` with these Rulebreakers may hold
+ * `def` as far as colour identity goes (903.5c and the Rulebreakers'
+ * exceptions), one card at a time: a Tolabow-style extra colour is allowed
+ * here for any one colour, since which one is the deck's choice — the deck
+ * as a whole is held to one by {@link validateCommanderDeck}. The deck
+ * builder's "in identity" filter reads this.
+ */
+export function fitsDeckIdentity(
+  def: CardDefinition,
+  identity: ReadonlySet<Color>,
+  rulebreakers: readonly Rulebreaker[],
+  registry: CardRegistry,
+): boolean {
+  if (withinIdentity(colorIdentityOf(def, registry), identity)) return true;
+  for (const r of rulebreakers) {
+    if (r.anyIdentity?.some((cards) => isRulebreakerCard(def, cards))) return true;
+    if (r.extraColorFor?.some((t) => def.types.includes(t)) && colorsOutside(def, identity, registry).length <= 1) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export function validateCommanderDeck(
   deck: DeckToValidate,
   registry: CardRegistry,
@@ -269,6 +323,9 @@ export function validateCommanderDeck(
   }
 
   // --- the 99 ----------------------------------------------------------
+  const rulebreakers = rulebreakersOf(deck.commanders, registry);
+  // A Tolabow-style extra colour: each colour some card needs, with them.
+  const extraColors = new Map<Color, string[]>();
   const counts = new Map<string, number>();
   for (const name of deck.cards) {
     counts.set(name, (counts.get(name) ?? 0) + 1);
@@ -287,15 +344,33 @@ export function validateCommanderDeck(
           : `${copies}× "${name}" — a deck can have up to ${allowed} cards with that name`,
       );
     }
-    if (!withinIdentity(colorIdentityOf(registry.get(name), registry), commanderIdentity)) {
+    const def = registry.get(name);
+    if (!fitsDeckIdentity(def, commanderIdentity, rulebreakers, registry)) {
       violations.push(
         `"${name}" is outside the commander's colour identity (${identityString(commanderIdentity) || "colourless"})`,
       );
+    } else if (
+      !withinIdentity(colorIdentityOf(def, registry), commanderIdentity) &&
+      !rulebreakers.some((r) => r.anyIdentity?.some((cards) => isRulebreakerCard(def, cards)))
+    ) {
+      // Allowed only by an extra colour: the deck chooses one for them all.
+      for (const c of colorsOutside(def, commanderIdentity, registry)) {
+        extraColors.set(c, [...(extraColors.get(c) ?? []), name]);
+      }
     }
+  }
+  if (extraColors.size > 1) {
+    violations.push(
+      `the commander allows one colour outside its identity for instants and sorceries, this deck uses ${extraColors.size} (` +
+        [...extraColors].map(([c, names]) => `${c}: ${names.map((n) => `"${n}"`).join(", ")}`).join("; ") +
+        ")",
+    );
   }
 
   const total = deck.commanders.length + deck.cards.length;
-  if (total !== size) {
+  if (rulebreakers.some((r) => r.noMaximumSize === true)) {
+    if (total < size) violations.push(`deck has ${total} cards, the format wants at least ${size}`);
+  } else if (total !== size) {
     violations.push(`deck has ${total} cards, the format wants ${size}`);
   }
 
