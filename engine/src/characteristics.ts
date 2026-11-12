@@ -835,7 +835,8 @@ function evalStaticCondition(
       // "That player" is known only to a trigger or a resolution
       // (`thatPlayer`); a static has nobody it's about.
       if (condition.who === "that-player") {
-        const that = conditionPlayerOf(state, "that-player", opts);
+        // `asTheyLeave`: the player losing the game, read as they lose it.
+        const that = condition.asTheyLeave === true ? opts.thatPlayer : conditionPlayerOf(state, "that-player", opts);
         return that !== undefined && has(that);
       }
       return condition.who === "you"

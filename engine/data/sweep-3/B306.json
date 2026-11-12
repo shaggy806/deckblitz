@@ -1,0 +1,15 @@
+{
+ "batch": "B306",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): Miss Highwater, the set's last card (2026-11-12); built trigger:player-loses-game-copy-permanents",
+ "authored": [
+  {
+   "name": "Miss Highwater",
+   "files": [
+    "engine/src/cards/pool/miss-highwater.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

@@ -12082,6 +12082,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Overgrown Tomb: "prompted by" has a line of its own above the stack',
     board({ you: { bf: ['Windswept Heath'], lib: ['Forest', 'Overgrown Tomb', 'Forest'] } }),
   ),
+  // Mystery Booster Commander's last card (2026-11-12).
+  preset(
+    'Miss Highwater: a contract counter shows beside the player',
+    board({
+      you: { bf: ['Miss Highwater'] },
+      opp: [{ human: true, hand: ['Grizzly Bears', 'Forest'] }, { bf: ['Forest'] }],
+    }),
+  ),
   preset('Game menu: leaving a game being played asks first', board({ you: { bf: ['Forest'] } })),
   preset('A turn that ends on its own says so', board({ you: { hand: ['Forest'] } })),
 ]

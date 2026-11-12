@@ -425,6 +425,62 @@ describe("Yume, Chronicler of Valor", () => {
   });
 });
 
+describe("Miss Highwater", () => {
+  const copiesOf = (game: Game, name: string, player: PlayerId): number =>
+    game.state.zones.shared.battlefield.filter((id) => {
+      const o = game.state.objects[id];
+      return o.isToken === true && o.cardName === name && o.controller === player;
+    }).length;
+
+  it("a hit player takes the deal: a new hand of seven and a contract counter; no second deal", () => {
+    const { game, a, b } = table({ players: 3 });
+    const highwater = spawn(game, "Miss Highwater");
+    toHand(game, "Grizzly Bears", B);
+    pickModes(b, 0);
+    attack(game, a, [highwater]);
+    expect(hand(game, B)).toHaveLength(7);
+    expect(game.state.players[B].counters.contract).toBe(1);
+    // Once they have one, her trigger doesn't trigger for them.
+    toStep(game, "precombat-main", A);
+    attack(game, a, [highwater]);
+    expect(game.state.players[B].counters.contract).toBe(1);
+  });
+
+  it("when they lose the game, you get a copy of each artifact and creature they controlled", () => {
+    const { game, a, b } = table({ players: 3 });
+    const highwater = spawn(game, "Miss Highwater");
+    spawn(game, "Grizzly Bears", B);
+    spawn(game, "Ornithopter", B);
+    spawn(game, "Forest", B);
+    pickModes(b, 0);
+    attack(game, a, [highwater]);
+    game.state.players[B].life = 0;
+    // State-based actions on the way to the end step (rule 704.5a).
+    toStep(game, "end");
+    settle(game);
+    expect(game.state.players[B].hasLost).toBe(true);
+    expect(copiesOf(game, "Grizzly Bears", A)).toBe(1);
+    expect(copiesOf(game, "Ornithopter", A)).toBe(1);
+    expect(copiesOf(game, "Forest", A)).toBe(0);
+  });
+
+  it("a player who declines has no contract, and their loss copies nothing", () => {
+    const { game, a, b } = table({ players: 3 });
+    const highwater = spawn(game, "Miss Highwater");
+    spawn(game, "Grizzly Bears", B);
+    const before = hand(game, B).length;
+    pickModes(b);
+    attack(game, a, [highwater]);
+    expect(hand(game, B)).toHaveLength(before);
+    expect(game.state.players[B].counters.contract ?? 0).toBe(0);
+    game.state.players[B].life = 0;
+    toStep(game, "end");
+    settle(game);
+    expect(game.state.players[B].hasLost).toBe(true);
+    expect(copiesOf(game, "Grizzly Bears", A)).toBe(0);
+  });
+});
+
 describe("Matoc, Lavamancer", () => {
   it("its own 2 damage to a player exiles the top card", () => {
     const { game } = table();

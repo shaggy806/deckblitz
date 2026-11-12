@@ -513,6 +513,7 @@ import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
 import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
 import _poolMirrorWall from "../pool/mirror-wall.js";
+import _poolMissHighwater from "../pool/miss-highwater.js";
 import _poolMistformStalker from "../pool/mistform-stalker.js";
 import _poolMistformWakecaster from "../pool/mistform-wakecaster.js";
 import _poolMistmeadowWitch from "../pool/mistmeadow-witch.js";
@@ -1551,6 +1552,7 @@ const shard: CardShard = {
     _poolMintstrosity,
     _poolMirenTheMoaningWell,
     _poolMirrorWall,
+    _poolMissHighwater,
     _poolMistformStalker,
     _poolMistformWakecaster,
     _poolMistmeadowWitch,

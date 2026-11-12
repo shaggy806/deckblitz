@@ -8041,3 +8041,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Tireless Provisioner: one Food-or-Treasure answer for all three
 - **Do:** Play the Forest, then pass (Space). When the first Tireless Provisioner asks you to choose, tick **Same for all 3** and click "Create a Treasure token.", then keep passing until the stack is empty.
 - **Expect:** Neither of the other two asks: three Treasure tokens arrive, one from each Provisioner.
+
+## A contract counter (2026-11-12)
+
+### Miss Highwater: a contract counter shows beside the player
+- **Do:** Attack Bob with Miss Highwater. Sit at Bob's seat and accept the deal (discard your hand, draw seven).
+- **Expect:** Bob's panel shows "✍ contract" beside his name, and hovering it explains the counter. Attacking Bob with her again next turn asks him nothing.

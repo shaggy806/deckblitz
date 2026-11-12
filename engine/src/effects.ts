@@ -8290,6 +8290,10 @@ export type EffectSpec =
        * tokens that are copies of …, where X is one plus the number of
        * instant and sorcery spells you've cast this turn". */
       readonly count: EffectAmount;
+      /** With a set of permanents in `of`: only its members matching this, as
+       * they are or last were — Miss Highwater's "for each **artifact and
+       * creature** they controlled" of a loss trigger's batch. */
+      readonly ofMatching?: CardFilter;
       /** With `of: "exiled-with-source"`: "a card exiled with this" — one
        * of them, chosen as this resolves if there's more than one (Mimic
        * Vat's melded-pair ruling), rather than a copy of each. */
@@ -19757,7 +19761,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         });
       const specCount = amountValue(spec.count, ctx);
       if (ofSet !== undefined && permanentSet) {
-        const members = ctx.objectSet(ofSet);
+        const all = ctx.objectSet(ofSet);
+        const members = spec.ofMatching === undefined ? all : all.filter((m) => ctx.memberMatches(m, spec.ofMatching!));
         ctx.oneTokenEvent(() => {
           // A member that left in the act (destroyed or sacrificed this way)
           // is copied as it last existed on the battlefield (rule 608.2h).

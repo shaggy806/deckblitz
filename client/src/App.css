@@ -501,6 +501,10 @@
   font-size: var(--text-sm);
   color: #e0d24a;
 }
+.pp-contract {
+  font-size: var(--text-sm);
+  color: #c98bd6;
+}
 /* Speed (rule 702.179), beside the counters; brighter at max speed, which is
    what the cards ask about. */
 .pp-speed {

@@ -1807,6 +1807,10 @@ export type TriggerKind =
        * `{ triggerValue: true }` is how much it dealt. */
       readonly on: "deals-combat-damage-to-player";
       readonly who: TriggerWho;
+      /** "…to a player **who doesn't have a contract counter**" (Miss
+       * Highwater): asked of the player dealt the damage as `"that-player"`,
+       * as it triggers. */
+      readonly toPlayerIf?: StaticCondition;
       /** A filter on the creature that dealt the damage — Sharding Sphinx's
        * "whenever an **artifact** creature you control deals combat damage to
        * a player". */

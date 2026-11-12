@@ -30768,7 +30768,9 @@ export class Game {
       if (
         at.player !== undefined &&
         !(event.type === "damage-dealt" && event.target.kind === "player" && event.target.player === at.player) &&
-        !(event.type === "spell-cast" && event.player === at.player)
+        !(event.type === "spell-cast" && event.player === at.player) &&
+        // "…when **they** lose the game" (Miss Highwater).
+        !(event.type === "player-lost" && event.player === at.player)
       ) {
         continue;
       }
@@ -30777,7 +30779,11 @@ export class Game {
       if (subject === undefined) continue;
       const object = subject.controller === trigger.controller ? subject : { ...subject, controller: trigger.controller };
       if (!this.triggerMatches(at.whenever, event, object)) continue;
-      if (!this.delayedIfHolds(trigger, this.eventTriggerObject(at.whenever, event))) continue;
+      const triggerObject = this.eventTriggerObject(at.whenever, event);
+      const atRefs = this.withAttackedTogether(this.refsAtTrigger(source, undefined, event, triggerObject), at.whenever, event, object);
+      const refs = event.type === "player-lost" ? this.withLoserPermanents(atRefs, event.player) : atRefs;
+      // Its "if" reads the event as its resolution will ("that player").
+      if (!this.delayedIfHolds(trigger, triggerObject, refs)) continue;
       if (at.until === "while-exiled") {
         const stints = trigger.targetStints ?? [];
         const anyLeft = trigger.targets.some(
@@ -30792,9 +30798,7 @@ export class Game {
         }
       }
       if (at.once === true) usedUp.push(trigger);
-      const triggerObject = this.eventTriggerObject(at.whenever, event);
       const triggerValue = this.triggerValueOf(at.whenever, event, object);
-      const refs = this.withAttackedTogether(this.refsAtTrigger(source, undefined, event, triggerObject), at.whenever, event, object);
       const pending: PendingTrigger = {
         sourceObjectId: trigger.source,
         cardName: trigger.sourceName,
@@ -32975,6 +32979,9 @@ export class Game {
           !(spec.otherOnly === true && event.source === self.id) &&
           this.triggerFilterOk(spec.filter, event.source, self) &&
           (spec.toOpponent !== true || (event.target.kind === "player" && event.target.player !== self.controller)) &&
+          (spec.toPlayerIf === undefined ||
+            (event.target.kind === "player" &&
+              staticConditionMet(this.state, this.registry, self, spec.toPlayerIf, { thatPlayer: event.target.player }))) &&
           (spec.toPlayerControlsMore === undefined ||
             (event.target.kind === "player" &&
             this.countBattlefieldMatching(event.target.player, { ...spec.toPlayerControlsMore, controlledBy: "you" }) >
@@ -62020,6 +62027,24 @@ controlledBy,
     } else {
       this.emit({ type: "cards-put-into-exile", arrivals: [arrival], ...this.exileCause() });
     }
+  }
+
+  /** A trigger on `player` losing the game, with "the permanents they
+   * controlled" as its batch (`"trigger-batch"`): read as the loss is
+   * announced, before they leave the game (800.4a), each with what it was
+   * then (608.2h) — Miss Highwater's "for each artifact and creature they
+   * controlled, create a token that's a copy of it". */
+  private withLoserPermanents(refs: LastKnownRefs | undefined, player: PlayerId): LastKnownRefs {
+    const members = this.state.zones.shared.battlefield
+      .filter((id) => this.state.objects[id]?.controller === player)
+      .map((id) => ({
+        object: id,
+        stint: this.state.objects[id]?.zoneChangeCount ?? 0,
+        was: this.takeLastKnown(id),
+        count: this.state.objects[id]?.stackCount ?? 1,
+      }));
+    // "They" — the player the event names, for "that player".
+    return { ...(refs ?? {}), player, sets: addToSet(refs?.sets, "batch", members) };
   }
 
   /** Who caused cards to be exiled now, for `cards-put-into-exile`'s

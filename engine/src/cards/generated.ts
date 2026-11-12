@@ -17249,6 +17249,7 @@ import _poolMishrasWorkshop from "./pool/mishras-workshop.js";
 import _poolMisinformation from "./pool/misinformation.js";
 import _poolMisleadingMotes from "./pool/misleading-motes.js";
 import _poolMisleadingSignpost from "./pool/misleading-signpost.js";
+import _poolMissHighwater from "./pool/miss-highwater.js";
 import _poolMisshapenFiend from "./pool/misshapen-fiend.js";
 import _poolMissionBriefing from "./pool/mission-briefing.js";
 import _poolMisstep from "./pool/misstep.js";
@@ -49740,6 +49741,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMisinformation,
   _poolMisleadingMotes,
   _poolMisleadingSignpost,
+  _poolMissHighwater,
   _poolMisshapenFiend,
   _poolMissionBriefing,
   _poolMisstep,
@@ -82244,6 +82246,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/misinformation": _poolMisinformation,
   "pool/misleading-motes": _poolMisleadingMotes,
   "pool/misleading-signpost": _poolMisleadingSignpost,
+  "pool/miss-highwater": _poolMissHighwater,
   "pool/misshapen-fiend": _poolMisshapenFiend,
   "pool/mission-briefing": _poolMissionBriefing,
   "pool/misstep": _poolMisstep,

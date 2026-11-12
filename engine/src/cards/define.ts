@@ -1119,6 +1119,10 @@ export type StaticCondition =
       readonly counter: HeldPlayerCounter;
       readonly who: "you" | "opponent" | "that-player";
       readonly atLeast: number;
+      /** With `"that-player"`: still that player as they lose the game, where
+       * a player who has left is otherwise nobody — Miss Highwater's "for as
+       * long as they have a contract counter, when they lose the game". */
+      readonly asTheyLeave?: true;
     }
   /** Who is the monarch (rule 720): you, or any opponent (Queen Marchesa's
    * "if an opponent is the monarch") — false while nobody is — or

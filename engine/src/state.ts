@@ -2588,7 +2588,9 @@ export interface ReflexiveTrigger {
 
 /** A kind of counter a player can have (rule 122.1), apart from energy — see
  * `PlayerState.counters`. */
-export type PlayerCounterKind = "poison" | "experience" | "rad";
+/** `"contract"`: Miss Highwater's ("they … get a contract counter"), which
+ * does nothing of itself — her lasting effect reads it. */
+export type PlayerCounterKind = "poison" | "experience" | "rad" | "contract";
 
 /** A permanent that left the battlefield, and where to. */
 export interface LeftBattlefield {
