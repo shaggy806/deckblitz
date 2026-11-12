@@ -2189,6 +2189,89 @@ function peelCards(
 }
 
 /**
+ * Cards exiled from a library going back under it (`cards-returned-to-library`:
+ * a cascade's or discover's misses), as a mulligan's hand goes back
+ * (`runReturnHand`): each held face up beside the pile, where the peel that
+ * exiled it had shown it, then flying onto the pile and turning face down as
+ * it settles, one after another within `MULLIGAN_RETURN_MS`, with a draw's
+ * sound. The pile's count is already the board's. At most seven are shown.
+ */
+function runPutBack(ev: GameEvent, view: PlayerView, delay: number): void {
+  if (ev.type !== 'cards-returned-to-library' || motionPrefs().reduced) return
+  const top = libraryCardOf(ev.player)
+  const r = top?.getBoundingClientRect()
+  if (!top || !r || r.width === 0) return
+  const cards = ev.objects.slice(0, 7)
+  const total = scaled(MULLIGAN_RETURN_MS)
+  const flight = total * 0.55
+  const stagger = cards.length > 1 ? (total - flight) / (cards.length - 1) : 0
+  const height = Math.min(r.height, r.width * 1.4)
+  const grow = Math.min(2.2, Math.max(1.35, 170 / r.width))
+  const step = r.width * grow * 0.62
+  const toward = r.left + r.width / 2 > window.innerWidth / 2 ? -1 : 1
+  const seat = getComputedStyle(top).getPropertyValue('--seat').trim()
+  cards.forEach((object, i) => {
+    // Its face as it was last seen (in exile), held where a peel holds one.
+    const stint = view.publicStints[object]?.at(-1)
+    const face = stint === undefined ? null : peelFace({ object, seq: stint.from }, view)
+    const card = document.createElement('div')
+    card.className = 'peel-card'
+    if (seat !== '') {
+      card.classList.add('seat-tinted')
+      card.style.setProperty('--seat', seat)
+    }
+    card.style.left = `${r.left}px`
+    card.style.top = `${r.top}px`
+    card.style.width = `${r.width}px`
+    card.style.height = `${height}px`
+    card.style.setProperty('--card-w', `${r.width}px`)
+    const flip = card.appendChild(document.createElement('div'))
+    flip.className = 'peel-flip'
+    const back = flip.appendChild(document.createElement('div'))
+    back.className = 'card-back peel-side'
+    const front = flip.appendChild(document.createElement('div'))
+    front.className = 'peel-side peel-front'
+    front.appendChild(document.createElement('div')).className = 'card-back'
+    document.body.appendChild(card)
+    const root = createRoot(front)
+    const render = (obj: VisibleObject | null): void => {
+      if (obj !== null && card.isConnected) root.render(<CardTile obj={obj} layout="art-first" />)
+    }
+    if (face !== null) {
+      if ('now' in face) render(face.now)
+      else void face.later.then(render, () => {})
+    }
+    const at = delay + i * stagger
+    const dx = toward * step * (cards.length - i)
+    const held = `translate(${dx}px, -60%) scale(${grow})`
+    const timing: KeyframeAnimationOptions = { duration: flight, delay: at, easing: 'ease-in-out', fill: 'both' }
+    const a = card.animate(
+      [
+        { opacity: 0, transform: held },
+        { opacity: 1, transform: held, offset: 0.15 },
+        { opacity: 1, transform: `translate(${dx * 0.35}px, -40%) scale(${grow * 0.8})`, offset: 0.6 },
+        { opacity: 1, transform: 'translate(0px, 0%) scale(1)' },
+      ],
+      timing,
+    )
+    // Face up while held (a face-down one stays a back), face down on the pile.
+    flip.animate(
+      face === null
+        ? [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(0deg)' }]
+        : [{ transform: 'rotateY(180deg)' }, { transform: 'rotateY(180deg)', offset: 0.45 }, { transform: 'rotateY(0deg)' }],
+      timing,
+    )
+    playSound('draw', at + flight * 0.8)
+    const done = (): void => {
+      card.remove()
+      window.setTimeout(() => root.unmount(), 0)
+    }
+    a.onfinish = done
+    a.oncancel = done
+  })
+}
+
+/**
  * The viewer's mulligan sending the hand on screen (in the mulligan popup)
  * back onto the library: a draw in reverse (`flyOutOfHand`), card after card
  * from the right, within `MULLIGAN_RETURN_MS`, each with a draw's sound. The
@@ -2904,6 +2987,10 @@ export function AnimationLayer({
             runCrown(cue.event, cue.delay)
           } else if (cue.event.type === 'life-changed' || cue.event.type === 'damage-dealt') {
             runHurt(cue.event, cue.delay)
+          } else if (cue.event.type === 'cards-returned-to-library') {
+            runPutBack(cue.event, cue.view, cue.delay)
+            // Its draws are heard card by card (`runPutBack`).
+            continue
           }
           const ev = cue.event
           const before = cue.prev

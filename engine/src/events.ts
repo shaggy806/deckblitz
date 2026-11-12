@@ -1702,6 +1702,17 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
     })
   | (Base & {
+      /** Cards exiled from a library going back under it: a cascade's
+       * misses (rule 702.85a), discover's (701.57a), the rest of a
+       * reveal-until that exiled — on the bottom of their owner's
+       * (`player`'s) library in a random order. Not a choice from a hand
+       * (`cards-put-on-bottom`, which "put on the bottom this way" counts):
+       * what the client flies back onto the pile. */
+      readonly type: "cards-returned-to-library";
+      readonly player: PlayerId;
+      readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
       /** Cards an effect shuffled into `player`'s library from a public zone
        * (rule 701.24a — `shuffle-graveyard-into-library`'s graveyard cards,
        * `put-on-libraries`' `"shuffle"`), logged once the library is

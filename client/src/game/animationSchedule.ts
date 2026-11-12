@@ -470,6 +470,8 @@ type SlotKind =
   | 'move'
   | 'crown'
   | 'shuffle'
+  // Cards exiled from a library going back under it (a cascade's misses).
+  | 'putBack'
   // Attackers or a blocker declared: the new board's arrows drawing in.
   | 'arrows'
   // Nothing drawn, only heard (a declaration whose combat damage is in the
@@ -500,6 +502,7 @@ const AFTER_ORDER: readonly SlotKind[] = [
   'handDraw',
   'enter',
   'move',
+  'putBack',
   'flip',
   'counter',
   'buff',
@@ -539,6 +542,7 @@ const PACED: ReadonlySet<SlotKind> = new Set<SlotKind>([
   'move',
   'crown',
   'shuffle',
+  'putBack',
   'arrows',
 ])
 /** Kinds where a run in one frame plays together on one beat rather than one
@@ -764,6 +768,11 @@ function slotFor(ev: GameEvent, phase: { current: Phase }, reduced: boolean, hit
   // keeps only its sound, where it happened, ahead of the hits.
   if (ev.type === 'attackers-declared' || ev.type === 'blocker-declared') {
     return hitsFollow ? { event: ev, kind: 'sound', duration: 0 } : { event: ev, kind: 'arrows', duration: ARROW_DRAW_MS }
+  }
+  // A cascade's or discover's misses flying back onto the pile, as a
+  // mulligan's hand does (`AnimationLayer`'s `runPutBack`). Movement only.
+  if (ev.type === 'cards-returned-to-library') {
+    return reduced ? null : { event: ev, kind: 'putBack', duration: MULLIGAN_RETURN_MS }
   }
   // A mulligan shuffles the hand back in without a `library-shuffled`. Pure
   // movement, so reduced motion keeps only its sound.

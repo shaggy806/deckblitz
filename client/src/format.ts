@@ -665,6 +665,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
         : `${who(event.player)} keeps their opening hand`
     case 'cards-put-on-bottom':
       return `${who(event.player)} puts ${event.objects.map(name).join(', ')} on the bottom of their library`
+    case 'cards-returned-to-library':
+      return `${who(event.player)} puts ${event.objects.length === 1 ? 'an exiled card' : `${event.objects.length} exiled cards`} on the bottom of their library`
     case 'cards-shuffled-into-library':
       return `${who(event.player)} shuffles ${event.objects.map(name).join(', ')} into their library`
     case 'commander-zone-decision': {

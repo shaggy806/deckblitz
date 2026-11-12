@@ -45716,6 +45716,17 @@ controlledBy,
       this.moveObject(id, "library", { libraryPlacement: { randomlyAmong: cards } });
     }
     this.state.rngState = this.rng.seed;
+    // Announced per owner, in the order they were exiled, for the client to
+    // fly back onto each pile (`cards-returned-to-library`).
+    const byOwner = new Map<PlayerId, ObjectId[]>();
+    for (const id of cards) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "library") continue;
+      const list = byOwner.get(object.owner) ?? [];
+      list.push(id);
+      byOwner.set(object.owner, list);
+    }
+    for (const [player, objects] of byOwner) this.emit({ type: "cards-returned-to-library", player, objects });
   }
 
   /** Discover N's exiling (rule 701.57a): from the top of `player`'s

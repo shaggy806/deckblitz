@@ -166,6 +166,10 @@ describe("Cascade — Bloodbraid Elf", () => {
     const island = revealed.exiled.find((id) => game.state.objects[id].cardName === "Island")!;
     expect(game.state.objects[island].zone).toBe("library");
     expect(game.state.zones.perPlayer[A].library.at(-1)).toBe(island);
+    // ...and says so, for the client to fly it back onto the pile.
+    expect(game.eventsOfType("cards-returned-to-library")).toEqual([
+      expect.objectContaining({ player: A, objects: [island] }),
+    ]);
   });
 });
 

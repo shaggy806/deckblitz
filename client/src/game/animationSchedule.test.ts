@@ -264,6 +264,15 @@ describe('scheduleEvents', () => {
     expect(s.afterMs).toBe(MOVE_STEP_MS)
   })
 
+  it("flies a cascade's misses back onto the library over the new board, as a mulligan's hand goes", () => {
+    const back = ev({ type: 'cards-returned-to-library', player: 'p1', objects: ['a', 'b'] })
+    const s = scheduleEvents([back], 'precombat-main')
+    expect(types(s.after)).toEqual(['cards-returned-to-library'])
+    expect(s.afterMs).toBe(MULLIGAN_RETURN_MS)
+    // Movement only: nothing under reduced motion.
+    expect(scheduleEvents([back], 'precombat-main', { scale: 1, reduced: true }).after).toEqual([])
+  })
+
   it('flies the initiative like the crown, and holds a beat for a venture', () => {
     const s = scheduleEvents(
       [

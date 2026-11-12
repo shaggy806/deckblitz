@@ -237,23 +237,7 @@ a small follow-up: a `slotFor` entry (which half of the frame, paced or not, sha
 not), then an effect in `AnimationLayer` — an `.animate()` on the tile for an `after` cue, or
 `flyGhost` for a move — and each must honour `motionPrefs` (speed and reduced motion).
 
-- **Cards exiled from a library and put back in the same resolution aren't animated going back**:
-  cascade's and discover's misses (and an "exile until" whose rest go to the bottom) peel off the
-  pile and the counts run down, then jump back when the board lands. A reverse peel onto the pile
-  would close it, once the move back announces itself: `finishCascade` and `placeRevealed` move
-  the cards with no event (`cards-put-on-bottom` is only a hand's).
-
-Follow-on ideas, approved by the user on 2026-09-30:
-
 - **Counters on tokens folded back into a stack float only once**: counters put on tokens peeled
   off a stack and folded back before the frame is drawn
   (`refoldSplitTokens`, Tribute to the World Tree): only the `counter-added` naming the
   surviving stack floats its "+1/+1 ×2"; the rest name objects gone from the view.
-- **Half the sounds are still synthesised placeholders** (`game/sound.ts`): the table's own noises
-  are recorded now (draw, land, shuffle, discard, mill, counters, dice, a countered spell, and
-  combat's sword declarations and hits; CC0 packs, `client/public/sfx/CREDITS.md`), but cast,
-  death, exile, life, turn and tap are still Web Audio tones. Cues with nothing yet: noncombat damage, bounce, your
-  turn and your priority (viewer-only), a player eliminated, defeat (victory has its tune), a token arriving,
-  a trigger, a transform, a change of control, and a commander cast; and `game-started`, if a
-  frame ever carries it to the client. A new cue is a `SoundCue`, a `SAMPLES` entry and a
-  `soundFor` case; an event with no animation needs a `sound` slot (`animationSchedule.ts`).
