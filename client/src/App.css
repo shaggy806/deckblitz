@@ -2286,6 +2286,56 @@
 .stack-entry > * {
   pointer-events: auto;
 }
+/* See-through (holding Alt, or the eye tab): at 1366x768 in a four-player
+   room the top card covers most of a right-hand board. The pile fades to a
+   ghost and takes no clicks, so the board under it can be read and used;
+   nothing moves (docs/client-gaps.md's option the user picked, 2026-11-11). */
+.stack-pile {
+  transition: opacity 0.15s ease;
+}
+.stack-overlay.see-through .stack-pile {
+  opacity: 0.15;
+}
+.stack-overlay.see-through .stack-entry > * {
+  pointer-events: none;
+}
+/* The tab: just above the top card's right corner, where the board is bare
+   (the card's own label row is below it), and never faded itself. */
+.stack-see-through {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.4vh);
+  width: calc(var(--card-w) * 0.18);
+  height: calc(var(--card-w) * 0.13);
+  padding: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--card-w) * 0.04);
+  box-shadow: var(--shadow-raised);
+}
+.stack-see-through:hover {
+  color: var(--text);
+  border-color: var(--muted-dim);
+}
+.stack-see-through.pinned {
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.stack-see-through svg {
+  width: 70%;
+  height: 70%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .stack-entry.is-new {
   /* 0.45s rather than the 0.3s this started at, which read as a flinch: the
      point of the beat is that you notice something arrived. Deliberately a

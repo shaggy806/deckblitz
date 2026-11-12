@@ -266,7 +266,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 
 
-- **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The Pass bar sits over the rightmost hand cards** (2026-11-11): at 1366x768 their lower edges and the lowered tray's last cards are under it, so the pointer reaching them leaves the hand and the raised tray drops.
 - **The scenario builder can't hold the initiative or a dungeon position** — "Edit from here" drops both (`ScenarioSpec`), so a check of them has to reach them in play.

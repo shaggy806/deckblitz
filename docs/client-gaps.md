@@ -5,17 +5,6 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
-- **The stack's card hides a seat's board** (found 2026-11-02; a design call, 2026-11-11). At 1366×768 in a
-  4-player room the pile's top card is 188px wide and, as a full-text tile, up to ~460px tall, centred on the
-  screen's middle right of centre: it covers the right end of the top-right board and most of the
-  bottom-right one (a screenshot taken for the user, 2026-11-11). Options put to the
-  user: (a) smaller and card-shaped in 4-player rooms on short screens, its text shrunk to fit — covers about
-  half as much; (b) see-through on demand — a tab on the pile, or holding Alt, fades it to ~15% and lets clicks
-  through to the board under it, nothing moving (recommended); (c) the right-hand boards keep the pile's width
-  free while the stack isn't empty — nothing hidden, but they reflow whenever something is cast or resolves;
-  (d) the pile, smaller, in the seam between the four boards — a little of each board covered instead of a
-  lot of one.
-
 - **The Pass bar sits over the rightmost hand cards** (found 2026-11-11). At 1366x768 the fixed
   `.priority-actions` bar (Pass, Pass Turn, Auto-pass) covers the lower edges of the fan's last cards, and in the
   lowered tray their whole peek: the pointer moving onto that part of a card is over the bar, outside

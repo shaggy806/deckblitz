@@ -130,6 +130,8 @@ import { OtherFace } from './ui/OtherFace.tsx'
 import { CommanderTile } from './ui/CommanderTile.tsx'
 import { AbilityMenu } from './ui/AbilityMenu.tsx'
 import { Stack } from './ui/Stack.tsx'
+import { useStackSeeThrough } from './ui/stackSeeThrough.ts'
+import type { StackSeeThrough } from './ui/stackSeeThrough.ts'
 import { EventLog } from './ui/EventLog.tsx'
 import { CapturePanel } from './ui/CapturePanel.tsx'
 import { ZoneViewer } from './ui/ZoneViewer.tsx'
@@ -1459,6 +1461,8 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // animations rather than racing ahead of them.
   const shown = usePlayback(game.frame, bus, game.ackFrame, game.spectating ? null : game.seat)
   const view = shown.view
+  // The stack's card faded to show the board under it (Alt, or its eye tab).
+  const stackSeeThrough = useStackSeeThrough(view?.zones.stack ?? [])
   // My seat, and the seat the table is drawn from: the same, unless I'm making
   // another player's decisions (rule 723, Master Warcraft). Then everything the
   // table does (the hand, the board, the actions naming a player) is theirs, and
@@ -1686,6 +1690,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
         boardDrag={boardDrag}
         aims={bus.aims}
         dungeonView={{ of: dungeonViewOf, set: setDungeonViewOf }}
+        stackSeeThrough={stackSeeThrough}
       />
 
       {showHistory ? (
@@ -1817,6 +1822,9 @@ interface TableProps {
    * `GameScreen`, so the map stays open as frames land (it closed on every
    * one, and a venture's marker could never be seen moving). */
   readonly dungeonView: { readonly of: PlayerId | null; readonly set: (of: PlayerId | null) => void }
+  /** The stack faded to show the board under it — owned by `GameScreen`, so
+   * a pinned tab outlasts the frames landing while it's up. */
+  readonly stackSeeThrough: StackSeeThrough
 }
 
 /**
@@ -1840,6 +1848,7 @@ function Table({
   boardDrag,
   aims,
   dungeonView,
+  stackSeeThrough,
 }: TableProps) {
 
   const [targeting, setTargeting] = useState<Targeting | null>(null)
@@ -7929,6 +7938,7 @@ function Table({
           onFocusEntry={setStackFocus}
           seats={game.seats}
           previousStack={previousView?.zones.stack ?? null}
+          seeThrough={stackSeeThrough}
         />
       ) : null}
       {/* What points at what: the aimed stack entry's targets (or what's

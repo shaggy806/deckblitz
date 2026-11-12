@@ -6,6 +6,7 @@ import { describeTarget, playerLabel, seatClassOf } from '../format.ts'
 import { CardTile } from './CardTile.tsx'
 import { stackDepthVars } from './stackDepth.ts'
 import { stackRuns } from '../game/stackCopies.ts'
+import type { StackSeeThrough } from './stackSeeThrough.ts'
 
 /** A permanent drawn on the stack as its card: none of its state on the
  * battlefield — tapped, damage, counters, combat, attachments — which is
@@ -60,6 +61,9 @@ export interface StackProps {
   /** The decision this board was waiting on has been answered — a later
    * frame is playing over it — so no "prompted by" card is drawn. */
   readonly answered?: boolean
+  /** Faded to show the board under it, and the eye tab that pins that
+   * (`stackSeeThrough.ts`); absent, neither. */
+  readonly seeThrough?: StackSeeThrough
 }
 
 /**
@@ -92,6 +96,7 @@ export function Stack({
   seats,
   previousStack = null,
   answered = false,
+  seeThrough,
 }: StackProps) {
   const before = previousStack === null ? null : new Set(previousStack)
   // The card that caused the decision you're being asked, when it isn't
@@ -137,7 +142,24 @@ export function Stack({
     targetSlot.some((o) => o.kind === 'object' && o.object === id)
 
   return (
-    <div className="stack-overlay">
+    <div className={`stack-overlay${seeThrough?.on === true ? ' see-through' : ''}`}>
+      {seeThrough !== undefined ? (
+        // Beside the top card, never faded itself: the way back.
+        <button
+          type="button"
+          className={`stack-see-through${seeThrough.pinned ? ' pinned' : ''}`}
+          aria-pressed={seeThrough.pinned}
+          aria-label="See the board under the stack"
+          title="See the board under the stack (or hold Alt)"
+          onClick={seeThrough.toggle}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+            <circle cx="12" cy="12" r="3" />
+            {seeThrough.pinned ? <path d="M3 3l18 18" /> : null}
+          </svg>
+        </button>
+      ) : null}
       <div className="stack-pile">
         {runs.map((run, depth) => {
           const id = run[0]
