@@ -1293,6 +1293,11 @@ export interface WardCost {
    * experience counters you have", "Pay life equal to Raubahn's power". The
    * payment prompt shows the bound numbers instead. */
   readonly text?: string;
+  /** "Ward—Waterbend {4}" (The Unagi of Kyoshi Island): `mana` is paid as
+   * waterbend (rule 701.67a) — for each generic mana in it the payer may tap
+   * an untapped artifact or creature they control instead, as the
+   * `choose-modes` decision's `costWaterbend` pays. */
+  readonly waterbend?: true;
 }
 
 /** A ward cost with its read amounts fixed, as the ward ability resolves
@@ -1366,7 +1371,7 @@ export function wardCostText(cost: WardCost): string {
     return cost.payGeneric !== undefined && cost.payLifeAmount === undefined ? ` ${cost.text}` : `—${cost.text}.`;
   }
   const parts: string[] = [];
-  if (cost.mana !== undefined) parts.push(cost.mana);
+  if (cost.mana !== undefined) parts.push(cost.waterbend === true ? `Waterbend ${cost.mana}` : cost.mana);
   if (cost.payLife !== undefined) parts.push(`Pay ${cost.payLife} life`);
   if (cost.sacrifice !== undefined) parts.push(cost.sacrifice.text);
   if (cost.discard !== undefined) {
@@ -1374,7 +1379,7 @@ export function wardCostText(cost: WardCost): string {
     parts.push(cost.discard === 1 ? `Discard a card${random}` : `Discard ${cost.discard} cards${random}`);
   }
   if (cost.blight !== undefined) parts.push(`Blight ${cost.blight}`);
-  const onlyMana = cost.mana !== undefined && parts.length === 1;
+  const onlyMana = cost.mana !== undefined && parts.length === 1 && cost.waterbend !== true;
   return onlyMana ? ` ${cost.mana}` : `—${parts.join(", ")}.`;
 }
 

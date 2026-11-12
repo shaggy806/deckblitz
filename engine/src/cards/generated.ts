@@ -27814,6 +27814,7 @@ import _poolTheTricksterGodsHeist from "./pool/the-trickster-gods-heist.js";
 import _poolTheTriumphOfAnax from "./pool/the-triumph-of-anax.js";
 import _poolTheTrueScriptures from "./pool/the-true-scriptures.js";
 import _poolTheTwelfthDoctor from "./pool/the-twelfth-doctor.js";
+import _poolTheUnagiOfKyoshiIsland from "./pool/the-unagi-of-kyoshi-island.js";
 import _poolTheUnbeatableSquirrelGirl from "./pool/the-unbeatable-squirrel-girl.js";
 import _poolTheUnderworldCookbook from "./pool/the-underworld-cookbook.js";
 import _poolTheUnicomplex from "./pool/the-unicomplex.js";
@@ -60444,6 +60445,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheTriumphOfAnax,
   _poolTheTrueScriptures,
   _poolTheTwelfthDoctor,
+  _poolTheUnagiOfKyoshiIsland,
   _poolTheUnbeatableSquirrelGirl,
   _poolTheUnderworldCookbook,
   _poolTheUnicomplex,
@@ -93087,6 +93089,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-triumph-of-anax": _poolTheTriumphOfAnax,
   "pool/the-true-scriptures": _poolTheTrueScriptures,
   "pool/the-twelfth-doctor": _poolTheTwelfthDoctor,
+  "pool/the-unagi-of-kyoshi-island": _poolTheUnagiOfKyoshiIsland,
   "pool/the-unbeatable-squirrel-girl": _poolTheUnbeatableSquirrelGirl,
   "pool/the-underworld-cookbook": _poolTheUnderworldCookbook,
   "pool/the-unicomplex": _poolTheUnicomplex,

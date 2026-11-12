@@ -54225,6 +54225,10 @@ controlledBy,
       undefined,
       // Countering is the ward ability's own effect, not the payer's.
       controller,
+      undefined,
+      undefined,
+      // "Ward—Waterbend {4}": its mana paid as waterbend (rule 701.67a).
+      cost.waterbend === true ? { costWaterbend: true } : {},
     );
     const awaiting = this.state.awaiting;
     if (awaiting?.kind === "choose-modes" && awaiting.player === payer) {
@@ -54252,7 +54256,10 @@ controlledBy,
     if (state === undefined || state.hasLost) return false;
     let lifeLeft = state.life;
     const spent = new Map<ObjectId, number>();
-    if (cost.mana !== undefined) {
+    // "Ward—Waterbend {4}": taps and mana together (rule 701.67a).
+    if (cost.mana !== undefined && cost.waterbend === true) {
+      if (this.modesWaterbendPayment(player, cost.mana) === null) return false;
+    } else if (cost.mana !== undefined) {
       const plan = this.payMana(player, parseManaCost(cost.mana));
       if (plan === null) return false;
       lifeLeft -= plan.life;

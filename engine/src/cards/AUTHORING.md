@@ -4843,7 +4843,8 @@ to others with `grantsTriggered: [ward(...)]`. `cost` is a `WardCost` —
 `{ discard: 1 }`, `{ discard: 1, discardAtRandom: true }` (Ward—Discard a card
 at random: Alpharael, Stonechosen — nobody picks which), `{ blight: 2 }` (Ward—Blight 2: the payer puts two -1/-1
 counters on a creature they control, rule 701.68a — payable only with one,
-701.68b). A part whose size is read as the ward ability resolves (rule
+701.68b), `{ mana: "{4}", waterbend: true }` (Ward—Waterbend {4}, The Unagi of Kyoshi Island: the payer
+may tap their untapped artifacts and creatures for its generic mana, rule 701.67a). A part whose size is read as the ward ability resolves (rule
 608.2h) is `payGeneric` or `payLifeAmount`, an `EffectAmount` each, with
 `text` the cost as printed after "Ward": `{ payGeneric: { playerCounters:
 "experience" }, text: "{X}, where X is the number of experience counters you

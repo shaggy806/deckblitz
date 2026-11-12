@@ -879,6 +879,7 @@ import _poolTheMyriadPools from "../pool/the-myriad-pools.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheRingGoesSouth from "../pool/the-ring-goes-south.js";
 import _poolTheThanosCopter from "../pool/the-thanos-copter.js";
+import _poolTheUnagiOfKyoshiIsland from "../pool/the-unagi-of-kyoshi-island.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThievesFortune from "../pool/thieves-fortune.js";
 import _poolThinkTank from "../pool/think-tank.js";
@@ -1891,6 +1892,7 @@ const shard: CardShard = {
     _poolTheOzolith,
     _poolTheRingGoesSouth,
     _poolTheThanosCopter,
+    _poolTheUnagiOfKyoshiIsland,
     _poolTheWaterCrystal,
     _poolThievesFortune,
     _poolThinkTank,
