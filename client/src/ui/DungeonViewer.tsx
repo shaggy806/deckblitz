@@ -6,6 +6,9 @@ import { useEscape } from './useEscape.ts'
 interface ViewProps {
   readonly kind: 'view'
   readonly title: string
+  /** Whose dungeon (`data-player` on the box): a venture's cue finds the
+   * open map's marker by it (`AnimationLayer`'s `runVenture`). */
+  readonly player: string
   readonly map: DungeonMapData | null
   readonly marker: number | null
   readonly completed: readonly string[]
@@ -52,6 +55,7 @@ export function DungeonViewer(props: DungeonViewerProps) {
         className={`zone-viewer-box dungeon-box${props.kind === 'dungeon' ? ' dungeon-box--wide' : ''}`}
         role="dialog"
         aria-label={props.title}
+        data-player={props.kind === 'view' ? props.player : undefined}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="zone-viewer-head">

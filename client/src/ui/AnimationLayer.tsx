@@ -2288,6 +2288,8 @@ function captureMove(ev: GameEvent): void {
   if (ev.type === 'control-changed') el = boardTileOf(ev.object)
   else if (ev.type === 'permanent-attached') el = boardTileOf(ev.source)
   else if (ev.type === 'monarch-changed') el = document.querySelector<HTMLElement>('.pp-monarch')
+  else if (ev.type === 'initiative-taken') el = document.querySelector<HTMLElement>('.pp-initiative')
+  else if (ev.type === 'ventured') el = openMapMarker(ev.player)
   if (!el || motionPrefs().reduced) return
   const rect = el.getBoundingClientRect()
   if (rect.width === 0) return
@@ -2366,12 +2368,56 @@ function runMove(ev: GameEvent, delay: number): void {
   if (attachment) flyCaptured(ev.seq, attachment, delay, duration)
 }
 
-/** The monarch's crown passing to its new holder: it flies from the old
- * holder's panel to the new one's, or pops in if nobody had it. */
+/** The venture marker on `player`'s dungeon map, if their map is open. */
+function openMapMarker(player: string): HTMLElement | null {
+  return document.querySelector<HTMLElement>(
+    `.dungeon-box[data-player="${CSS.escape(player)}"] .dungeon-room-marker`,
+  )
+}
+
+/** A venture (rule 701.49): the player's dungeon chip, whose count just
+ * ticked, pops; on their map, if it's open, the marker flies from the room it
+ * was in to the new one (or the room glows, entering a dungeon). */
+function runVenture(ev: GameEvent, delay: number): void {
+  if (ev.type !== 'ventured') return
+  const duration = scaled(CROWN_STEP_MS)
+  const reduced = motionPrefs().reduced
+  const chip = document.querySelector<HTMLElement>(`[data-player-id="${CSS.escape(ev.player)}"] .pp-dungeon`)
+  chip?.animate(
+    reduced
+      ? [{ filter: 'brightness(1.8)' }, { filter: 'brightness(1)' }]
+      : [
+          { scale: '1', filter: 'brightness(1)' },
+          { scale: '1.3', filter: 'brightness(1.7)', offset: 0.4 },
+          { scale: '1', filter: 'brightness(1)' },
+        ],
+    { duration, delay, easing: 'ease-out', fill: 'backwards' },
+  )
+  const marker = openMapMarker(ev.player)
+  if (!marker) {
+    captured.get(ev.seq)?.box.remove()
+    captured.delete(ev.seq)
+    return
+  }
+  if (flyCaptured(ev.seq, marker, delay, duration)) return
+  marker.closest<HTMLElement>('.dungeon-room')?.animate(
+    [{ filter: 'brightness(1.8)' }, { filter: 'brightness(1)' }],
+    { duration, delay, easing: 'ease-out', fill: 'backwards' },
+  )
+}
+
+/** A designation passing to its new holder — the monarch's crown, the
+ * initiative's key: it flies from the old holder's panel to the new one's,
+ * or pops in if nobody had it. */
 function runCrown(ev: GameEvent, delay: number): void {
-  if (ev.type !== 'monarch-changed') return
+  if (ev.type === 'ventured') {
+    runVenture(ev, delay)
+    return
+  }
+  if (ev.type !== 'monarch-changed' && ev.type !== 'initiative-taken') return
+  const chip = ev.type === 'monarch-changed' ? '.pp-monarch' : '.pp-initiative'
   const crown = document.querySelector<HTMLElement>(
-    `[data-player-id="${CSS.escape(ev.player)}"] .pp-monarch`,
+    `[data-player-id="${CSS.escape(ev.player)}"] ${chip}`,
   )
   if (!crown) return
   const duration = scaled(CROWN_STEP_MS)
@@ -2693,8 +2739,13 @@ export function AnimationLayer({
           } else if (cue.event.type === 'permanent-transformed') runFlip(cue.event.object, cue.delay)
           else if (cue.event.type === 'control-changed' || cue.event.type === 'permanent-attached') {
             runMove(cue.event, cue.delay)
-          } else if (cue.event.type === 'monarch-changed') runCrown(cue.event, cue.delay)
-          else if (cue.event.type === 'life-changed' || cue.event.type === 'damage-dealt') {
+          } else if (
+            cue.event.type === 'monarch-changed' ||
+            cue.event.type === 'initiative-taken' ||
+            cue.event.type === 'ventured'
+          ) {
+            runCrown(cue.event, cue.delay)
+          } else if (cue.event.type === 'life-changed' || cue.event.type === 'damage-dealt') {
             runHurt(cue.event, cue.delay)
           }
           const ev = cue.event
@@ -2707,7 +2758,9 @@ export function AnimationLayer({
         if (
           cue.event.type === 'control-changed' ||
           cue.event.type === 'permanent-attached' ||
-          cue.event.type === 'monarch-changed'
+          cue.event.type === 'monarch-changed' ||
+          cue.event.type === 'initiative-taken' ||
+          cue.event.type === 'ventured'
         ) {
           captureMove(cue.event)
           continue

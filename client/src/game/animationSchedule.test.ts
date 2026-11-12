@@ -4,6 +4,7 @@ import {
   ARROW_DRAW_MS,
   CARD_HOLD_MS,
   CARD_STEP_MS,
+  CROWN_STEP_MS,
   DEATH_STEP_MS,
   ENTER_STEP_MS,
   HIT_STEP_MS,
@@ -261,6 +262,21 @@ describe('scheduleEvents', () => {
     expect(s.totalMs).toBe(DEATH_STEP_MS)
     expect(types(s.after)).toEqual(['control-changed'])
     expect(s.afterMs).toBe(MOVE_STEP_MS)
+  })
+
+  it('flies the initiative like the crown, and holds a beat for a venture', () => {
+    const s = scheduleEvents(
+      [
+        ev({ type: 'initiative-taken', player: 'p2', via: 'combat-damage' }),
+        ev({ type: 'ventured', player: 'p2', dungeon: 'Undercity', room: 1, roomName: 'Forge', entered: false }),
+      ],
+      'precombat-main',
+    )
+    // Each is captured over the old board (no time) and plays over the new.
+    expect(types(s.items)).toEqual(['initiative-taken', 'ventured'])
+    expect(s.totalMs).toBe(0)
+    expect(types(s.after)).toEqual(['initiative-taken', 'ventured'])
+    expect(s.afterMs).toBe(CROWN_STEP_MS)
   })
 
   it('shows a mill and a discard on the old board, and an exile only from a library', () => {

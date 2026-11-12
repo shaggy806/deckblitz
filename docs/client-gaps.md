@@ -111,12 +111,9 @@ The game log prints "a card resolves" for a cast copy and "commits a crime with 
 `logName`'s "a card" (it was the raw id until 2026-11-02), and the copy, gone by then, should be
 named. Seen 2026-11-02 playing Collected Conjuring's copies; not caused by that family.
 
-**The initiative and the venture marker have no animation**
+**The scenario builder can't hold the initiative or a dungeon position**
 
-The plan (`docs/plans/initiative-dungeons.md`, section 6) asks for two small cues through
-`animationSchedule.ts`. One is the designation flying from panel to panel, which the monarch's
-crown could share. The other is the marker stepping room to room while a map is open. Today the
-chip just moves and the panel's "Undercity 2/5" ticks over. Separately, the scenario builder's
+The scenario builder's
 `ScenarioSpec` (`protocol/src/scenario.ts`) has no field for the initiative or a dungeon
 position. "Edit from here" drops both, so a manual check has to reach them in play: cast an
 initiative card.

@@ -670,7 +670,11 @@ function slotsFor(
       { event: ev, kind: 'move', duration: MOVE_STEP_MS },
     ]
   }
-  if (ev.type === 'monarch-changed') {
+  // A designation changing hands (the monarch's crown, the initiative's key)
+  // flies from the old holder's panel to the new one's; a venture moves the
+  // marker on an open map from where it was (`docs/plans/initiative-dungeons.md`
+  // §6), so it's captured over the old board as well.
+  if (ev.type === 'monarch-changed' || ev.type === 'initiative-taken' || ev.type === 'ventured') {
     return [
       { event: ev, kind: 'capture', duration: 0 },
       { event: ev, kind: 'crown', duration: CROWN_STEP_MS },

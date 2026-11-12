@@ -1441,6 +1441,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // close itself the moment anything happened — including the card you just
   // played from inside it.
   const [handGrid, setHandGrid] = useState(false)
+  // Whose dungeon map is open: here rather than in `Table`, so it stays open
+  // across frames (`TableProps.dungeonView`).
+  const [dungeonViewOf, setDungeonViewOf] = useState<PlayerId | null>(null)
   const hand = useMemo(
     () => ({ handRaised, setHandRaised, handGrid, setHandGrid }),
     [handRaised, handGrid],
@@ -1682,6 +1685,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
         answered={shown.answered}
         boardDrag={boardDrag}
         aims={bus.aims}
+        dungeonView={{ of: dungeonViewOf, set: setDungeonViewOf }}
       />
 
       {showHistory ? (
@@ -1805,6 +1809,10 @@ interface TableProps {
    * it, for the targeted marks (`aim`) and `ArrowLayer` (owned by the
    * animation bus, which outlives this component's per-frame remount). */
   readonly aims: ResolveAims
+  /** Whose dungeon map is open (their progress chip), or nobody's — owned by
+   * `GameScreen`, so the map stays open as frames land (it closed on every
+   * one, and a venture's marker could never be seen moving). */
+  readonly dungeonView: { readonly of: PlayerId | null; readonly set: (of: PlayerId | null) => void }
 }
 
 /**
@@ -1827,6 +1835,7 @@ function Table({
   answered,
   boardDrag,
   aims,
+  dungeonView,
 }: TableProps) {
 
   const [targeting, setTargeting] = useState<Targeting | null>(null)
@@ -2071,7 +2080,7 @@ function Table({
   // How many of each kind come off each object, keyed `${object}|${kind}`.
   const [counterPicks, setCounterPicks] = useState<Readonly<Record<string, number>>>({})
   // Whose dungeon map is open (their progress chip), or nobody's.
-  const [dungeonViewOf, setDungeonViewOf] = useState<PlayerId | null>(null)
+  const { of: dungeonViewOf, set: setDungeonViewOf } = dungeonView
   const [zoneView, setZoneView] = useState<{
     readonly title: string
     readonly ids: readonly ObjectId[]
@@ -8271,6 +8280,7 @@ function Table({
       {dungeonViewOf !== null ? (
         <DungeonViewer
           kind="view"
+          player={dungeonViewOf}
           title={`${possessive(playerLabel(dungeonViewOf, game.seats))} dungeon${
             view.players[dungeonViewOf]?.dungeon ? ` — ${view.players[dungeonViewOf]?.dungeon?.name}` : ''
           }`}
