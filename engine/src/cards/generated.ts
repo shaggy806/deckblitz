@@ -4496,6 +4496,7 @@ import _poolChimericStaff from "./pool/chimeric-staff.js";
 import _poolChimilTheInnerSun from "./pool/chimil-the-inner-sun.js";
 import _poolChimneyImp from "./pool/chimney-imp.js";
 import _poolChimneyRabble from "./pool/chimney-rabble.js";
+import _poolChiraAllIn from "./pool/chira-all-in.js";
 import _poolChiseiHeartOfOceans from "./pool/chisei-heart-of-oceans.js";
 import _poolChishiroTheShatteredBlade from "./pool/chishiro-the-shattered-blade.js";
 import _poolChitinGravestalker from "./pool/chitin-gravestalker.js";
@@ -36983,6 +36984,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChimilTheInnerSun,
   _poolChimneyImp,
   _poolChimneyRabble,
+  _poolChiraAllIn,
   _poolChiseiHeartOfOceans,
   _poolChishiroTheShatteredBlade,
   _poolChitinGravestalker,
@@ -69483,6 +69485,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chimil-the-inner-sun": _poolChimilTheInnerSun,
   "pool/chimney-imp": _poolChimneyImp,
   "pool/chimney-rabble": _poolChimneyRabble,
+  "pool/chira-all-in": _poolChiraAllIn,
   "pool/chisei-heart-of-oceans": _poolChiseiHeartOfOceans,
   "pool/chishiro-the-shattered-blade": _poolChishiroTheShatteredBlade,
   "pool/chitin-gravestalker": _poolChitinGravestalker,

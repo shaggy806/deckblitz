@@ -1,0 +1,15 @@
+{
+ "batch": "B303",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): Chira, All In (2026-11-12); built trigger:random-action",
+ "authored": [
+  {
+   "name": "Chira, All In",
+   "files": [
+    "engine/src/cards/pool/chira-all-in.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

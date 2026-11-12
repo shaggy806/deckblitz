@@ -1519,6 +1519,18 @@ export type GameEvent =
       readonly to: PlayerId;
     })
   | (Base & {
+      /** A player did one of the things done "at random", once per
+       * instruction however many cards, targets, modes, coins or dice it
+       * took: discarded at random, selected targets at random (`randomTargets`),
+       * chose modes at random, flipped coins, rolled dice — what Chira, All
+       * In's "whenever you discard one or more cards at random, select one or
+       * more targets at random, …" watches (`acts-at-random`). A new random
+       * act in the engine emits it too. */
+      readonly type: "acted-at-random";
+      readonly player: PlayerId;
+      readonly act: "discard" | "targets" | "modes" | "coins" | "dice";
+    })
+  | (Base & {
       /** A player flipped a coin (rule 705) and won or lost the flip. */
       readonly type: "coin-flipped";
       readonly player: PlayerId;

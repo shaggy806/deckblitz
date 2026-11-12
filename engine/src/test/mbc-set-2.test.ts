@@ -23,6 +23,7 @@ import {
   ref,
   toHand,
   toLibrary,
+  tokensNamed,
   zone,
   settle,
   spawn,
@@ -238,6 +239,62 @@ describe("Massimo, the Magician", () => {
     pickTargets(a, helix);
     enter(game, "Grizzly Bears");
     expect(zone(game, helix)).toBe("graveyard");
+  });
+});
+
+describe("Chira, All In", () => {
+  const grew = (game: Game, chira: ObjectId): { counters: number; treasures: number } => ({
+    counters: counters(game, chira),
+    treasures: tokensNamed(game, "Treasure Token", A),
+  });
+
+  it("three coins flipped at once is one flip; two dice rolled is one roll", () => {
+    const { game } = table();
+    const chira = spawn(game, "Chira, All In");
+    apply(game, A, { kind: "flip-coin", count: 3 });
+    expect(grew(game, chira)).toEqual({ counters: 1, treasures: 1 });
+    apply(game, A, { kind: "roll-dice", sides: 6, count: 2 });
+    expect(grew(game, chira)).toEqual({ counters: 2, treasures: 2 });
+    const treasure = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName === "Treasure Token");
+    expect(game.state.objects[treasure!].tapped).toBe(true);
+  });
+
+  it("discarding at random and choosing a mode at random", () => {
+    const { game } = table();
+    const chira = spawn(game, "Chira, All In");
+    toHand(game, "Grizzly Bears");
+    apply(game, A, { kind: "discard", target: "you", amount: 1, random: true });
+    expect(grew(game, chira).counters).toBe(1);
+    // A chosen discard isn't at random.
+    toHand(game, "Grizzly Bears");
+    apply(game, A, {
+      kind: "modal",
+      minModes: 1,
+      maxModes: 1,
+      random: true,
+      modes: [
+        { text: "Gain 1 life.", effect: { kind: "gain-life", amount: 1 } },
+        { text: "Gain 2 life.", effect: { kind: "gain-life", amount: 2 } },
+      ],
+    });
+    expect(grew(game, chira).counters).toBe(2);
+  });
+
+  it("targets selected at random (Goblin Test Pilot)", () => {
+    const { game } = table();
+    const chira = spawn(game, "Chira, All In");
+    const pilot = spawn(game, "Goblin Test Pilot");
+    activate(game, pilot);
+    expect(grew(game, chira).counters).toBe(1);
+  });
+
+  it("not an opponent's flip, nor a discard of your choosing", () => {
+    const { game } = table();
+    const chira = spawn(game, "Chira, All In");
+    apply(game, B, { kind: "flip-coin", count: 1 });
+    toHand(game, "Grizzly Bears");
+    apply(game, A, { kind: "discard", target: "you", amount: 1 });
+    expect(grew(game, chira)).toEqual({ counters: 0, treasures: 0 });
   });
 });
 

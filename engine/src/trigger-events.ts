@@ -67,6 +67,11 @@ export const TRIGGER_EVENTS = {
    * passes the trigger's `die` test, the value being that die's result
    * (`diceOccurrences`). */
   "rolls-die": row({ type: "dice-rolled", player: (e) => e.player }),
+  /** "Whenever you discard one or more cards at random, select one or more
+   * targets at random, choose one or more modes at random, flip one or more
+   * coins, or roll one or more dice" (Chira, All In): once per such
+   * instruction (`acted-at-random`). */
+  "acts-at-random": row({ type: "acted-at-random", player: (e) => e.player }),
   /** "Whenever you take the initiative" (rule 726) — again when they already
    * had it (726.5). */
   "takes-initiative": row({ type: "initiative-taken", player: (e) => e.player }),

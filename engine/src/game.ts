@@ -11986,7 +11986,10 @@ export class Game {
   ): number {
     const index = Math.min(count - 1, Math.floor(this.rng.next() * count));
     this.state.rngState = this.rng.seed;
-    this.emit({ type: "chosen-at-random", player: controller, source, chosen: pick(index) });
+    const chosen = pick(index);
+    this.emit({ type: "chosen-at-random", player: controller, source, chosen });
+    // A mode chosen at random ("choose one at random") — one choice of modes.
+    if (chosen.kind === "mode") this.emit({ type: "acted-at-random", player: controller, act: "modes" });
     return index;
   }
 
@@ -12002,7 +12005,7 @@ export class Game {
     options: readonly (readonly TargetRef[])[],
   ): (TargetRef | undefined)[] {
     const chosen: TargetRef[] = [];
-    return options.map((slot) => {
+    const selected = options.map((slot) => {
       const left = slot.filter((option) => !chosen.some((t) => sameTargetRef(t, option)));
       if (left.length === 0) return undefined;
       const tokens = (ref: TargetRef): number =>
@@ -12030,6 +12033,10 @@ export class Game {
       chosen.push(picked);
       return picked;
     });
+    // One selection, however many targets (Chira, All In's "select one or more
+    // targets at random") — one candidate is still selected at random.
+    if (chosen.length > 0) this.emit({ type: "acted-at-random", player: controller, act: "targets" });
+    return selected;
   }
 
   /** End every modifier that lasts "until end of combat" (rule 500.5a) —
@@ -13025,6 +13032,7 @@ export class Game {
       ...(ignored.length > 0 ? { ignored } : {}),
       ...(from !== undefined ? { source } : {}),
     });
+    if (count + extra > 0) this.emit({ type: "acted-at-random", player, act: "dice" });
     return results.reduce((n, r) => n + r, 0) + modifier;
   }
 
@@ -13035,6 +13043,9 @@ export class Game {
    * "flip two and ignore one" doubles the coins (614.5). One draw per coin.
    */
   private flipCoinOutcomes(player: PlayerId, count: number, sides: boolean): readonly (readonly FlipLanding[])[] {
+    // One instruction to flip, however many coins (Chira, All In's "flip one
+    // or more coins").
+    if (count > 0) this.emit({ type: "acted-at-random", player, act: "coins" });
     let named: FlipLanding | undefined;
     let flips = 1;
     for (const { replacement } of this.staticReplacementsFor(player, "would-flip-coin")) {
@@ -54619,6 +54630,7 @@ controlledBy,
       this.state.rngState = this.rng.seed;
       if (picked.length === 0) return;
       this.discardCards(player, picked);
+      this.emit({ type: "acted-at-random", player, act: "discard" });
       return;
     }
     // Someone is already being asked — "each opponent discards a card"

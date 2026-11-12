@@ -160,6 +160,7 @@ import _poolChanneledForce from "../pool/channeled-force.js";
 import _poolChaosDefiler from "../pool/chaos-defiler.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
+import _poolChiraAllIn from "../pool/chira-all-in.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
 import _poolChromescaleDrake from "../pool/chromescale-drake.js";
 import _poolCidTimelessArtificer from "../pool/cid-timeless-artificer.js";
@@ -1193,6 +1194,7 @@ const shard: CardShard = {
     _poolChaosDefiler,
     _poolChaosTheEndless,
     _poolChaplainsBlessing,
+    _poolChiraAllIn,
     _poolChromaticOrrery,
     _poolChromescaleDrake,
     _poolCidTimelessArtificer,
