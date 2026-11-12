@@ -26,6 +26,12 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   (d) the pile, smaller, in the seam between the four boards — a little of each board covered instead of a
   lot of one.
 
+- **The Pass bar sits over the rightmost hand cards** (found 2026-11-11). At 1366x768 the fixed
+  `.priority-actions` bar (Pass, Pass Turn, Auto-pass) covers the lower edges of the fan's last cards, and in the
+  lowered tray their whole peek: the pointer moving onto that part of a card is over the bar, outside
+  `.hand-strip`, so the raised tray drops (traced 2026-11-11 while fixing the hover bob). Options: keep the fan
+  clear of the bar (narrower on short screens, or shifted left), or lift the bar above the raised tray's cards.
+
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or
   face-down card, no effects lasting a turn, and nothing on the stack — so "Edit from here"
