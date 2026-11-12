@@ -2648,6 +2648,14 @@ export interface TriggeredAbility {
    */
   readonly targetsAtRandom?: true;
   /**
+   * "This ability still resolves if its target becomes illegal" (Gilded
+   * Drake): with every target illegal it isn't removed from the stack (rule
+   * 608.2b's own exception — the ability's text says otherwise); it
+   * resolves, and what it would do to an illegal target it doesn't (the
+   * exchange fails, so its `otherwise` is done).
+   */
+  readonly resolvesDespiteIllegalTargets?: true;
+  /**
    * Eminence — this ability functions while its card is in the **command
    * zone**, not only on the battlefield, because its text says so (rule
    * 113.6b; Eminence is an ability word, rule 207.2c, with no rules meaning

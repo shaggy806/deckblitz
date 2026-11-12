@@ -30246,7 +30246,11 @@ export class Game {
       object.autoTargetSlots,
       object.targetZones ?? [],
     );
-    if (legality.fizzles) {
+    // "This ability still resolves if its target becomes illegal" (Gilded
+    // Drake): its own text says otherwise, so 608.2b doesn't remove it.
+    const resolvesAnyway =
+      object.abilityKind === "triggered" && (ability as TriggeredAbility).resolvesDespiteIllegalTargets === true;
+    if (legality.fizzles && !resolvesAnyway) {
       this.removeAbilityFromStack(id);
       this.emit({
         type: "spell-fizzled",

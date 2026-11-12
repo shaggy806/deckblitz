@@ -333,6 +333,7 @@ import _poolGideonTheOathsworn from "../pool/gideon-the-oathsworn.js";
 import _poolGiftOfDoom from "../pool/gift-of-doom.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGigantoad from "../pool/gigantoad.js";
+import _poolGildedDrake from "../pool/gilded-drake.js";
 import _poolGleamOfAuthority from "../pool/gleam-of-authority.js";
 import _poolGleamOfResistance from "../pool/gleam-of-resistance.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolGiftOfDoom,
     _poolGiftOfParadise,
     _poolGigantoad,
+    _poolGildedDrake,
     _poolGleamOfAuthority,
     _poolGleamOfResistance,
     _poolGoblinBalloonBrigade,

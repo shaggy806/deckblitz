@@ -10804,6 +10804,7 @@ import _poolGilanraCallerOfWirewood from "./pool/gilanra-caller-of-wirewood.js";
 import _poolGild from "./pool/gild.js";
 import _poolGildedAssaultCart from "./pool/gilded-assault-cart.js";
 import _poolGildedCerodon from "./pool/gilded-cerodon.js";
+import _poolGildedDrake from "./pool/gilded-drake.js";
 import _poolGildedGhoda from "./pool/gilded-ghoda.js";
 import _poolGildedGoose from "./pool/gilded-goose.js";
 import _poolGildedLight from "./pool/gilded-light.js";
@@ -43431,6 +43432,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGild,
   _poolGildedAssaultCart,
   _poolGildedCerodon,
+  _poolGildedDrake,
   _poolGildedGhoda,
   _poolGildedGoose,
   _poolGildedLight,
@@ -76071,6 +76073,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gild": _poolGild,
   "pool/gilded-assault-cart": _poolGildedAssaultCart,
   "pool/gilded-cerodon": _poolGildedCerodon,
+  "pool/gilded-drake": _poolGildedDrake,
   "pool/gilded-ghoda": _poolGildedGhoda,
   "pool/gilded-goose": _poolGildedGoose,
   "pool/gilded-light": _poolGildedLight,
