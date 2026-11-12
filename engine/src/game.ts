@@ -52176,6 +52176,8 @@ controlledBy,
         this.addCounter({ kind: "object", object: id }, counters.kind, counters.amount);
       }
     }
+    // "…and an additional loyalty counter if it's a planeswalker".
+    if (counters.and !== undefined) this.putFlickerCounters(entered, counters.and);
   }
 
   /** Unattach everything attached to `id`, which is coming back as a new

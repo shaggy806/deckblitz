@@ -762,6 +762,7 @@ import _poolSedgeTroll from "../pool/sedge-troll.js";
 import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSelflessGlyphweaver from "../pool/selfless-glyphweaver.js";
+import _poolSemestersEnd from "../pool/semesters-end.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
 import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
 import _poolSentinelsMark from "../pool/sentinels-mark.js";
@@ -1844,6 +1845,7 @@ const shard: CardShard = {
     _poolSeizeOpportunity,
     _poolSelesnyaGuildmage,
     _poolSelflessGlyphweaver,
+    _poolSemestersEnd,
     _poolSenateCourier,
     _poolSentinelOfTheNamelessCity,
     _poolSentinelsMark,

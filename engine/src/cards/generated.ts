@@ -23621,6 +23621,7 @@ import _poolSelvalasEnforcer from "./pool/selvalas-enforcer.js";
 import _poolSelvalasStampede from "./pool/selvalas-stampede.js";
 import _poolSemblanceAnvil from "./pool/semblance-anvil.js";
 import _poolSemesterForeseer from "./pool/semester-foreseer.js";
+import _poolSemestersEnd from "./pool/semesters-end.js";
 import _poolSenTriplets from "./pool/sen-triplets.js";
 import _poolSenateCourier from "./pool/senate-courier.js";
 import _poolSenateGriffin from "./pool/senate-griffin.js";
@@ -56249,6 +56250,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSelvalasStampede,
   _poolSemblanceAnvil,
   _poolSemesterForeseer,
+  _poolSemestersEnd,
   _poolSenTriplets,
   _poolSenateCourier,
   _poolSenateGriffin,
@@ -88890,6 +88892,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/selvalas-stampede": _poolSelvalasStampede,
   "pool/semblance-anvil": _poolSemblanceAnvil,
   "pool/semester-foreseer": _poolSemesterForeseer,
+  "pool/semesters-end": _poolSemestersEnd,
   "pool/sen-triplets": _poolSenTriplets,
   "pool/senate-courier": _poolSenateCourier,
   "pool/senate-griffin": _poolSenateGriffin,

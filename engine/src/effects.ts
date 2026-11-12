@@ -379,6 +379,12 @@ export interface FlickerCounters {
    * (rule 122.6), so its enters triggers see them. Without it they're put
    * on after it has returned, as Essence Flux's are. */
   readonly entering?: boolean;
+  /** More counters put on at the same time, each with its own `onlyIf`
+   * (its `entering` is this one's) — Semester's End's "an additional +1/+1
+   * counter on it if it's a creature and an additional loyalty counter on
+   * it if it's a planeswalker", read as each returns (its ruling): a
+   * planeswalker creature gets both. */
+  readonly and?: FlickerCounters;
 }
 
 /**
