@@ -369,6 +369,13 @@ function sacrificeNoun(
   }
   return 'permanent'
 }
+/** A zone being browsed (a player panel's graveyard, exile, … count): which
+ * zone and whose, not the cards in it — `Table` reads those off each frame's
+ * view, so the popup stays open and current as cards come and go. */
+interface OpenZone {
+  readonly zone: 'graveyard' | 'exile' | 'sideboard' | 'companion' | 'hand' | 'emblems'
+  readonly player: PlayerId
+}
 type LandAction = Extract<LegalAction, { kind: 'play-land' }>
 type SuspendAction = Extract<LegalAction, { kind: 'suspend' }>
 type ForetellAction = Extract<LegalAction, { kind: 'foretell' }>
@@ -1450,6 +1457,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // Whose dungeon map is open: here rather than in `Table`, so it stays open
   // across frames (`TableProps.dungeonView`).
   const [dungeonViewOf, setDungeonViewOf] = useState<PlayerId | null>(null)
+  // The zone being browsed, for the same reason: held in `Table` it closed
+  // whenever anything happened (an opponent's spell, a trigger).
+  const [openZoneOf, setOpenZoneOf] = useState<OpenZone | null>(null)
   const hand = useMemo(
     () => ({ handRaised, setHandRaised, handGrid, setHandGrid }),
     [handRaised, handGrid],
@@ -1713,6 +1723,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
         boardDrag={boardDrag}
         aims={bus.aims}
         dungeonView={{ of: dungeonViewOf, set: setDungeonViewOf }}
+        zoneBrowse={{ of: openZoneOf, set: setOpenZoneOf }}
         stackSeeThrough={stackSeeThrough}
       />
 
@@ -1845,6 +1856,9 @@ interface TableProps {
    * `GameScreen`, so the map stays open as frames land (it closed on every
    * one, and a venture's marker could never be seen moving). */
   readonly dungeonView: { readonly of: PlayerId | null; readonly set: (of: PlayerId | null) => void }
+  /** The zone being browsed (a graveyard, exile, …), or none — owned by
+   * `GameScreen` for the same reason, so it stays open while frames land. */
+  readonly zoneBrowse: { readonly of: OpenZone | null; readonly set: (of: OpenZone | null) => void }
   /** The stack faded to show the board under it — owned by `GameScreen`, so
    * a pinned tab outlasts the frames landing while it's up. */
   readonly stackSeeThrough: StackSeeThrough
@@ -1871,6 +1885,7 @@ function Table({
   boardDrag,
   aims,
   dungeonView,
+  zoneBrowse,
   stackSeeThrough,
 }: TableProps) {
 
@@ -2120,12 +2135,7 @@ function Table({
   const [counterPicks, setCounterPicks] = useState<Readonly<Record<string, number>>>({})
   // Whose dungeon map is open (their progress chip), or nobody's.
   const { of: dungeonViewOf, set: setDungeonViewOf } = dungeonView
-  const [zoneView, setZoneView] = useState<{
-    readonly title: string
-    readonly ids: readonly ObjectId[]
-    /** Draws what isn't in `view.objects` (emblems); the view's objects otherwise. */
-    readonly resolve?: (id: ObjectId) => VisibleObject | undefined
-  } | null>(null)
+  const { of: openZoneOf, set: setZoneView } = zoneBrowse
   // A forced-decision popup (choose-from-zone, scry/surveil, the creature-type
   // picker) hidden via its "View board" button so the board can be read before
   // answering. The way back is a "Show choices" button in the decision strip.
@@ -4810,8 +4820,38 @@ function Table({
   // object here for any seat that can't look at it.
   const exileOf = (pid: PlayerId): readonly ObjectId[] =>
     view.zones.exile.filter((id) => view.zones.exileOwners[id] === pid)
-  const openZone = (title: string, ids: readonly ObjectId[]) =>
-    setZoneView({ title, ids })
+  const openZone = (zone: OpenZone['zone'], player: PlayerId) => setZoneView({ zone, player })
+  // The browsed zone as this frame's view has it: its cards now, not when it
+  // was opened.
+  const zoneView = ((): {
+    readonly title: string
+    readonly ids: readonly ObjectId[]
+    /** Draws what isn't in `view.objects` (emblems); the view's objects otherwise. */
+    readonly resolve?: (id: ObjectId) => VisibleObject | undefined
+  } | null => {
+    if (openZoneOf === null) return null
+    const pid = openZoneOf.player
+    const whose = possessive(playerLabel(pid, game.seats))
+    switch (openZoneOf.zone) {
+      case 'graveyard':
+        return { title: `${whose} graveyard`, ids: view.zones.graveyards[pid] ?? [] }
+      case 'exile':
+        return { title: `${whose} exile`, ids: exileOf(pid) }
+      case 'sideboard':
+        return { title: 'Your sideboard', ids: view.zones.sideboard }
+      case 'companion': {
+        const card = view.players[pid]?.companion ?? null
+        return { title: `${whose} companion`, ids: card === null ? [] : [card] }
+      }
+      case 'hand':
+        return { title: `${whose} hand`, ids: view.zones.hands[pid] ?? [] }
+      case 'emblems': {
+        const cards = view.emblems.flatMap((e, i) => (e.owner === pid ? [emblemToVisible(e, i)] : []))
+        const byId = new Map(cards.map((c) => [c.id, c]))
+        return { title: `${whose} emblems`, ids: cards.map((c) => c.id), resolve: (id) => byId.get(id) }
+      }
+    }
+  })()
 
   let controls: ReactNode
   if (view.result.over) {
@@ -7094,23 +7134,12 @@ function Table({
             ]
           : []
       })}
-      onOpenEmblems={() => {
-        const cards = view.emblems.flatMap((e, i) => (e.owner === pid ? [emblemToVisible(e, i)] : []))
-        const byId = new Map(cards.map((c) => [c.id, c]))
-        setZoneView({
-          title: `${possessive(playerLabel(pid, game.seats))} emblems`,
-          ids: cards.map((c) => c.id),
-          resolve: (id) => byId.get(id),
-        })
-      }}
-      onOpenGraveyard={() =>
-        openZone(`${possessive(playerLabel(pid, game.seats))} graveyard`, view.zones.graveyards[pid] ?? [])
-      }
-      onOpenExile={() => openZone(`${possessive(playerLabel(pid, game.seats))} exile`, exileOf(pid))}
-      onOpenSideboard={pid === seat ? () => openZone('Your sideboard', view.zones.sideboard) : undefined}
+      onOpenEmblems={() => openZone('emblems', pid)}
+      onOpenGraveyard={() => openZone('graveyard', pid)}
+      onOpenExile={() => openZone('exile', pid)}
+      onOpenSideboard={pid === seat ? () => openZone('sideboard', pid) : undefined}
       onOpenCompanion={() => {
-        const card = view.players[pid].companion
-        if (card !== null) openZone(`${possessive(playerLabel(pid, game.seats))} companion`, [card])
+        if (view.players[pid].companion !== null) openZone('companion', pid)
       }}
       {...(view.players[pid].companion !== null
         ? { companionName: view.objects[view.players[pid].companion]?.cardName }
@@ -7124,7 +7153,7 @@ function Table({
       onOpenHand={
         pid === seat
           ? undefined
-          : () => openZone(`${possessive(playerLabel(pid, game.seats))} hand`, view.zones.hands[pid] ?? [])
+          : () => openZone('hand', pid)
       }
       targetable={playerIsTargetable(pid)}
       selected={
