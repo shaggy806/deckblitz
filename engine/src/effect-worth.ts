@@ -138,8 +138,9 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       const slot = ctx.targets[scope.target];
       return slot?.kind === "player" ? [slot.player] : null;
     }
-    const of = "controllerOf" in scope ? scope.controllerOf : "ownerOf" in scope ? scope.ownerOf : scope.defendingPlayerOf;
-    if ("defendingPlayerOf" in scope) return null;
+    // Who helped pay, or whom it's attacking: not known ahead.
+    if ("defendingPlayerOf" in scope || "assistantOf" in scope) return null;
+    const of = "controllerOf" in scope ? scope.controllerOf : scope.ownerOf;
     const object = refObjectNow(of, ctx);
     if (object === undefined) return null;
     return ["controllerOf" in scope ? object.controller : object.owner];

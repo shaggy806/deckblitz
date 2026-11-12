@@ -904,6 +904,7 @@ import _poolXindiSurveyors from "../pool/xindi-surveyors.js";
 import _poolYorvoLordOfGarenbrig from "../pool/yorvo-lord-of-garenbrig.js";
 import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
+import _poolYumeChroniclerOfValor from "../pool/yume-chronicler-of-valor.js";
 import _poolZaraRenegadeRecruiter from "../pool/zara-renegade-recruiter.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
 import _poolZombieMusher from "../pool/zombie-musher.js";
@@ -1837,6 +1838,7 @@ const shard: CardShard = {
     _poolYorvoLordOfGarenbrig,
     _poolYoungRedDragon,
     _poolYoungWeiRecruits,
+    _poolYumeChroniclerOfValor,
     _poolZaraRenegadeRecruiter,
     _poolZhalfirinLancer,
     _poolZombieMusher,

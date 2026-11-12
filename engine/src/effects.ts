@@ -12310,6 +12310,8 @@ export interface EffectApi {
   /** Double the X of the spell whose casting fired this — see the
    * `"double-x"` {@link EffectSpec}. */
   doubleTriggerSpellX(): void;
+  /** Who helped pay for that spell through assist (`GameObject.assistedBy`). */
+  assistantOf(target: TargetRef): PlayerId | undefined;
   /** Set the X of the spell or ability whose casting or activation fired
    * this — see the `"set-x"` {@link EffectSpec}. */
   setTriggerX(which: "trigger-spell" | "trigger-ability", value: number): void;
@@ -15446,7 +15448,7 @@ function isPlayerRef(ref: ObjectRef | PlayerRef): ref is PlayerRef {
       ref === "that-player" || ref === "chosen-player" || ref === "player-to-your-left" || ref === "player-to-your-right"
     );
   }
-  return "target" in ref || "controllerOf" in ref || "ownerOf" in ref || "defendingPlayerOf" in ref;
+  return "target" in ref || "controllerOf" in ref || "ownerOf" in ref || "defendingPlayerOf" in ref || "assistantOf" in ref;
 }
 
 /** Whether slot `ref` held a target found illegal as the spell or ability
@@ -15529,9 +15531,19 @@ export function resolvePlayerRef(ref: PlayerRef, ctx: ResolutionContext): Player
     const target = ctx.targets[ref.target];
     return target?.kind === "player" ? target.player : undefined;
   }
-  const inner = objectRefRead("controllerOf" in ref ? ref.controllerOf : "ownerOf" in ref ? ref.ownerOf : ref.defendingPlayerOf, ctx);
+  const inner = objectRefRead(
+    "controllerOf" in ref ? ref.controllerOf : "ownerOf" in ref ? ref.ownerOf : "assistantOf" in ref ? ref.assistantOf : ref.defendingPlayerOf,
+    ctx,
+  );
   if (inner === undefined) return undefined;
-  const player = "controllerOf" in ref ? ctx.controllerOf(inner) : "ownerOf" in ref ? ctx.ownerOf(inner) : ctx.defendingPlayerOf(inner);
+  const player =
+    "controllerOf" in ref
+      ? ctx.controllerOf(inner)
+      : "ownerOf" in ref
+        ? ctx.ownerOf(inner)
+        : "assistantOf" in ref
+          ? ctx.assistantOf(inner)
+          : ctx.defendingPlayerOf(inner);
   return player !== undefined && ctx.playersInScope("each-player").includes(player) ? player : undefined;
 }
 

@@ -1076,6 +1076,8 @@ function slotsOf(ref: unknown): readonly number[] {
 function slotOfPlayer(who: PlayerScope): number | undefined {
   if (typeof who !== "object" || "otherThan" in who) return undefined;
   if ("target" in who) return who.target;
+  // Who helped pay isn't the slot's holder.
+  if ("assistantOf" in who) return undefined;
   const of = "controllerOf" in who ? who.controllerOf : "ownerOf" in who ? who.ownerOf : who.defendingPlayerOf;
   return typeof of === "number" ? of : undefined;
 }

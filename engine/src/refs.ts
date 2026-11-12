@@ -97,4 +97,8 @@ export type PlayerRef =
   | { readonly target: number }
   | { readonly controllerOf: ObjectRef }
   | { readonly ownerOf: ObjectRef }
-  | { readonly defendingPlayerOf: ObjectRef };
+  | { readonly defendingPlayerOf: ObjectRef }
+  /** The player who helped pay for that spell through assist (rule
+   * 702.132a) — Yume, Chronicler of Valor's "you and **that player** each
+   * draw a card". Nobody when nobody did. */
+  | { readonly assistantOf: ObjectRef };

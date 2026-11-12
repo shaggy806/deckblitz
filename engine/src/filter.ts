@@ -1245,6 +1245,10 @@ export interface CardFilter {
   /** It entered the battlefield (this stint) as a spell that was cast and
    * resolved — "if it was cast" (see `GameObject.entry`). */
   readonly cast?: boolean;
+  /** Another player helped pay for it through assist (rule 702.132a,
+   * `GameObject.assistedBy`): "if another player spent mana to cast it"
+   * (Yume, Chronicler of Valor). As it was last cast. */
+  readonly assisted?: boolean;
   /** …cast by **you** — "if you cast it" (Anti-Venom, Rocco, Tiamat). */
   readonly castBy?: "you";
   /** …cast from this zone — "if it was cast from a graveyard". Asked of a
@@ -2723,6 +2727,7 @@ export function matchesFilter(
   if (filter.targets !== undefined && (live === undefined || !spellTargetsMatch(state, registry, live, filter.targets, ctx))) {
     return false;
   }
+  if (filter.assisted !== undefined && (state.objects[id]?.assistedBy !== undefined) !== filter.assisted) return false;
   if (
     filter.damagedThisTurnBy !== undefined ||
     filter.excessDamageThisTurn !== undefined ||

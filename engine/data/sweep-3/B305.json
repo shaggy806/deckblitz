@@ -1,0 +1,15 @@
+{
+ "batch": "B305",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): Yume, Chronicler of Valor (2026-11-12); built static:grant-assist-to-first-spell (assist itself, rule 702.132, was already in the engine)",
+ "authored": [
+  {
+   "name": "Yume, Chronicler of Valor",
+   "files": [
+    "engine/src/cards/pool/yume-chronicler-of-valor.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

@@ -31533,6 +31533,7 @@ import _poolYuffieMateriaHunter from "./pool/yuffie-materia-hunter.js";
 import _poolYukiOnna from "./pool/yuki-onna.js";
 import _poolYukoraThePrisoner from "./pool/yukora-the-prisoner.js";
 import _poolYumaProudProtector from "./pool/yuma-proud-protector.js";
+import _poolYumeChroniclerOfValor from "./pool/yume-chronicler-of-valor.js";
 import _poolYunaGrandSummoner from "./pool/yuna-grand-summoner.js";
 import _poolYunaHopeOfSpira from "./pool/yuna-hope-of-spira.js";
 import _poolYunasDecision from "./pool/yunas-decision.js";
@@ -64023,6 +64024,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYukiOnna,
   _poolYukoraThePrisoner,
   _poolYumaProudProtector,
+  _poolYumeChroniclerOfValor,
   _poolYunaGrandSummoner,
   _poolYunaHopeOfSpira,
   _poolYunasDecision,
@@ -96526,6 +96528,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/yuki-onna": _poolYukiOnna,
   "pool/yukora-the-prisoner": _poolYukoraThePrisoner,
   "pool/yuma-proud-protector": _poolYumaProudProtector,
+  "pool/yume-chronicler-of-valor": _poolYumeChroniclerOfValor,
   "pool/yuna-grand-summoner": _poolYunaGrandSummoner,
   "pool/yuna-hope-of-spira": _poolYunaHopeOfSpira,
   "pool/yunas-decision": _poolYunasDecision,

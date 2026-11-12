@@ -1458,6 +1458,11 @@ export interface GameObject {
    * resolves into, and cleared by any other zone change. An activated
    * ability's is on `lastKnownRefs.manaSpent`, for "this ability". */
   manaSpent?: readonly SpentMana[];
+  /** The player who helped pay for this spell through assist (rule
+   * 702.132a), when they paid any of it — "if another player spent mana to
+   * cast it" (Yume, Chronicler of Valor). Set, or cleared, each time it's
+   * cast, so a trigger reads it after the spell has left the stack. */
+  assistedBy?: PlayerId;
   /** For a triggered ability object: the target slots its triggering event
    * filled rather than its controller choosing — a saboteur's "that player"
    * (Hypnotic Specter's discard). Those aren't targets (rule 115.1), so

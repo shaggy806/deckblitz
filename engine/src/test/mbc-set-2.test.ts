@@ -375,6 +375,56 @@ describe("Itazura, Lingering Wick", () => {
   });
 });
 
+describe("Yume, Chronicler of Valor", () => {
+  const assistOffers = (game: Game, card: ObjectId): (PlayerId | undefined)[] =>
+    game
+      .legalActions(A)
+      .filter((a): a is Extract<typeof a, { kind: "cast-spell" }> => a.kind === "cast-spell" && a.card === card)
+      .map((a) => a.assist);
+
+  it("your first spell on your turn has assist; when another player helps, you both draw", () => {
+    const { game } = table();
+    spawn(game, "Yume, Chronicler of Valor");
+    lands(game, "Forest", 1);
+    lands(game, "Island", 3, B);
+    const bears = toHand(game, "Grizzly Bears");
+    expect(assistOffers(game, bears)).toContain(B);
+    const mine = hand(game).length;
+    const theirs = hand(game, B).length;
+    cast(game, bears, { assist: B, settle: false });
+    game.dispatch({ type: "choose-number", player: B, number: 1 });
+    settle(game);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.objects[bears].assistedBy).toBe(B);
+    // The Bears left hand; Yume's trigger drew one back, and Bob one.
+    expect(hand(game).length).toBe(mine);
+    expect(hand(game, B).length).toBe(theirs + 1);
+  });
+
+  it("no help, no draw; and the second spell has no assist", () => {
+    const { game } = table();
+    spawn(game, "Yume, Chronicler of Valor");
+    lands(game, "Forest", 4);
+    lands(game, "Island", 3, B);
+    const first = toHand(game, "Grizzly Bears");
+    const theirs = hand(game, B).length;
+    cast(game, first);
+    expect(hand(game, B).length).toBe(theirs);
+    const second = toHand(game, "Grizzly Bears");
+    expect(assistOffers(game, second)).not.toContain(B);
+  });
+
+  it("not on an opponent's turn", () => {
+    const { game } = table();
+    spawn(game, "Yume, Chronicler of Valor");
+    lands(game, "Island", 3, B);
+    const bolt = toHand(game, "Lightning Bolt");
+    lands(game, "Mountain", 1);
+    toStep(game, "upkeep", B);
+    expect(assistOffers(game, bolt)).not.toContain(B);
+  });
+});
+
 describe("Matoc, Lavamancer", () => {
   it("its own 2 damage to a player exiles the top card", () => {
     const { game } = table();

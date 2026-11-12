@@ -3054,6 +3054,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * optional, asked after their first). Read off the battlefield like
    * `keepsUnspentMana`; `affects` is ignored. */
   readonly votesAdditionalTime?: boolean;
+  /** "The first spell you cast during each of your turns has assist" (Yume,
+   * Chronicler of Valor — rule 702.132): its controller's spell cast while
+   * it's their turn and they've cast no other spell this turn. Read off the
+   * battlefield like `votesAdditionalTime`; `affects` is ignored. */
+  readonly assistFirstSpellOfYourTurns?: true;
   /** "Reveal the first card you draw on each of your turns" (Keranos, God of
    * Storms — rule 701.16): as its controller draws their first card of a
    * turn of theirs, every player sees it. Its "whenever you reveal a land

@@ -3,6 +3,8 @@
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
     "trigger:random-action",
+    "mechanic:assist",
+    "static:grant-assist-to-first-spell",
     "effect:attach-each-aura-on-you-to-chosen-opponent",
     "effect:opponent-casts-from-your-exiled-cards",
     "mechanic:rulebreaker",

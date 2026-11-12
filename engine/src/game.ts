@@ -17657,7 +17657,7 @@ export class Game {
     floor: number,
   ): number {
     const choice = this.assistChoice;
-    if (choice === undefined || choice.for !== cardId || !def.assist) return floor;
+    if (choice === undefined || choice.for !== cardId || !this.spellHasAssist(player, def)) return floor;
     return this.withFace(cardId, face, () => {
       const purpose: ManaPurpose = { kind: "cast", card: cardId, ...castPaying(undefined, costString) };
       const payable = (k: number): boolean => {
@@ -19447,6 +19447,22 @@ export class Game {
     }
   }
 
+  /** Whether `player`'s spell `def` has assist (rule 702.132): its own, or
+   * granted to "the first spell you cast during each of your turns" (Yume,
+   * Chronicler of Valor's `assistFirstSpellOfYourTurns`) — while it's their turn
+   * and they've cast no spell yet this turn, this one counting only once cast. */
+  private spellHasAssist(player: PlayerId, def: CardDefinition): boolean {
+    if (def.assist) return true;
+    if (this.activePlayer !== player || (this.state.players[player]?.spellsCastThisTurn ?? 0) > 0) return false;
+    return this.state.zones.shared.battlefield.some((id) => {
+      const o = this.state.objects[id];
+      if (o === undefined || o.controller !== player || hasLostAbilities(this.state, this.registry, o)) return false;
+      return this.registry
+        .get(rulesTextName(o))
+        .static.some((s) => s.assistFirstSpellOfYourTurns === true && this.staticActive(o, s));
+    });
+  }
+
   /** Who `caster` may choose to assist them (rule 702.132a, "another
    * player"): every other player still in the game. */
   private assistCandidates(caster: PlayerId): PlayerId[] {
@@ -19476,7 +19492,7 @@ export class Game {
   private judgeAssist(player: PlayerId, cardId: ObjectId, def: CardDefinition, generic: number): string | number {
     const choice = this.assistChoice;
     if (choice === undefined) return 0;
-    if (!def.assist) return `${def.name} doesn't have assist`;
+    if (!this.spellHasAssist(player, def)) return `${def.name} doesn't have assist`;
     if (!this.assistCandidates(player).includes(choice.player)) return `${choice.player} can't assist ${player}`;
     if (choice.strict && generic === 0) return `${def.name}'s total cost has no generic mana for another player to pay`;
     let amount: number;
@@ -19534,7 +19550,7 @@ export class Game {
       );
     }
     const alone = this.castSpellActionsAlone(player, card, cardName, def, opts);
-    if (!def.assist || this.assistChoice !== undefined) return alone;
+    if (!this.spellHasAssist(player, def) || this.assistChoice !== undefined) return alone;
     const helped: LegalAction[] = [];
     for (const other of this.assistCandidates(player)) {
       const most = this.assistCapacity(other, card, this.manaCapacityOf(other));
@@ -21463,6 +21479,10 @@ export class Game {
     // the pool paid, an assisting player's among them.
     const ownSpent = ownUnits.length;
     object.manaSpent = [...assistSpent, ...ownUnits];
+    // Who helped pay (Yume, Chronicler of Valor's "if another player spent
+    // mana to cast it").
+    if (assist !== undefined && assistSpent.length > 0) object.assistedBy = assist.player;
+    else delete object.assistedBy;
     // Each Phyrexian pip paid with life cost 2 (rule 107.4f) — compleated
     // (702.150a) reads how many. Life paid rather than mana (K'rrik) pays no
     // Phyrexian symbol.
@@ -39484,6 +39504,8 @@ controlledBy,
         spell.xValue *= 2;
         invalidateComputedCache();
       },
+      assistantOf: (target) =>
+        target.kind === "object" ? this.state.objects[target.object]?.assistedBy : undefined,
       setTriggerX: (which, value) => {
         if (triggerObject === undefined) return;
         const object = this.state.objects[triggerObject];
