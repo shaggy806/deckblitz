@@ -12090,6 +12090,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ human: true, hand: ['Grizzly Bears', 'Forest'] }, { bf: ['Forest'] }],
     }),
   ),
+  // The top 5000's last cards (2026-11-12).
+  preset(
+    'Sphinx of the Second Sun: a second untap, upkeep and draw before the end step',
+    board({ you: { bf: ['Sphinx of the Second Sun', 'Island'], hand: ['Opt'] } }),
+  ),
   preset('Game menu: leaving a game being played asks first', board({ you: { bf: ['Forest'] } })),
   preset('A turn that ends on its own says so', board({ you: { hand: ['Forest'] } })),
 ]

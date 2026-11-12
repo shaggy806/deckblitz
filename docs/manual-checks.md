@@ -8047,3 +8047,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Miss Highwater: a contract counter shows beside the player
 - **Do:** Attack Bob with Miss Highwater. Sit at Bob's seat and accept the deal (discard your hand, draw seven).
 - **Expect:** Bob's panel shows "✍ contract" beside his name, and hovering it explains the counter. Attacking Bob with her again next turn asks him nothing.
+
+## An additional beginning phase (2026-11-12)
+
+### Sphinx of the Second Sun: a second untap, upkeep and draw before the end step
+- **Do:** Cast Opt with the Island, then pass (Space) without attacking until your second main phase, and keep passing.
+- **Expect:** After the second main phase the step bar goes to Untap, Upkeep and Draw again: the Island untaps and you draw a card. Then the end step, still the same turn.
+- **Not a bug:** No third main phase comes after that draw step: the turn goes straight to its end.

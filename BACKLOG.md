@@ -68,7 +68,12 @@ section keeps only what to do next.
   Second Sun, and Cyclonus). Size each against today's engine first (B294 read them on
   2026-11-09; some may run now), then build the small ones best rank first, asking once about the
   majors (likely Odric, Master Tactician; Leyline of Transformation; Teferi, Who Slows the Sunset;
-  New Blood). The tail past rank 10,000 waits. **After that:**
+  New Blood). **B310** built the first ten (ranks 2002–2870, 12 cards with Cyclonus; the user
+  approved the additional beginning phase). **Next:** Lim-Dûl's Vault (rank 2441 — `repeat`'s
+  `mayAgain` paid in life, and a shuffle that leaves the looked-at cards on top), then Aminatou's
+  Augury, Odric (choose-combat for this combat only — likely small), Firebender Ascension,
+  Expropriate, Mari, Gilded Drake, Semester's End, Boseiju, The Unagi of Kyoshi Island
+  (`B310.json` names them; each keeps its B294 record). The tail past rank 10,000 waits. **After that:**
   B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
   `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
   Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,

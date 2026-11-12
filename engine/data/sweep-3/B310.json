@@ -1,0 +1,94 @@
+{
+ "batch": "B310",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 2002–2870 (2026-11-12): the best-ranked of the 110 cards still missing from top-commander-cards.txt, each blocked on one small feature (B294) — built best rank first, no agents. Features: filter `thisWayBy: \"you\"` (Rise of the Witch-king; Deadly Brew fixed by the same ruling), `opponent-controls` `atMost` (Hagra Mauling), `double-counters` on you (Aetheric Amplifier), filter `played` (Deep Gnome Terramancer), `additional-beginning-phase` (the user said build it: Sphinx and Shadow of the Second Sun, Cyclonus from B308), `put-onto-battlefield` counter amounts (Nine-Lives Familiar), the `damage-to-player-prevented` trigger event (Selfless Squire), `player-effect` `extraLoyaltyActivation` (The Chain Veil), batched `sacrifice` triggers (Camellia), graveyard permissions read at the announced X (Lurrus). Not reached, in rank order, still on their B294 records: Lim-Dûl's Vault, Aminatou's Augury, Odric, Firebender Ascension, Expropriate, Mari, Gilded Drake, Semester's End, Boseiju, The Unagi of Kyoshi Island and the rest of the list.",
+ "authored": [
+  {
+   "name": "Rise of the Witch-king",
+   "files": [
+    "engine/src/cards/pool/rise-of-the-witch-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hagra Mauling // Hagra Broodpit",
+   "files": [
+    "engine/src/cards/pool/hagra-mauling.ts",
+    "engine/src/cards/pool/hagra-broodpit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aetheric Amplifier",
+   "files": [
+    "engine/src/cards/pool/aetheric-amplifier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deep Gnome Terramancer",
+   "files": [
+    "engine/src/cards/pool/deep-gnome-terramancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx of the Second Sun",
+   "files": [
+    "engine/src/cards/pool/sphinx-of-the-second-sun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadow of the Second Sun",
+   "files": [
+    "engine/src/cards/pool/shadow-of-the-second-sun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cyclonus, the Saboteur // Cyclonus, Cybertronian Fighter",
+   "files": [
+    "engine/src/cards/pool/cyclonus-the-saboteur.ts",
+    "engine/src/cards/pool/cyclonus-cybertronian-fighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nine-Lives Familiar",
+   "files": [
+    "engine/src/cards/pool/nine-lives-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selfless Squire",
+   "files": [
+    "engine/src/cards/pool/selfless-squire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Chain Veil",
+   "files": [
+    "engine/src/cards/pool/the-chain-veil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Camellia, the Seedmiser",
+   "files": [
+    "engine/src/cards/pool/camellia-the-seedmiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lurrus of the Dream-Den",
+   "files": [
+    "engine/src/cards/pool/lurrus-of-the-dream-den.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}
