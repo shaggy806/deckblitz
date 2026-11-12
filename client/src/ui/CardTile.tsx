@@ -152,6 +152,13 @@ function bodyText(obj: VisibleObject, text: string): string {
   return text
 }
 
+/** The scale a hovered hand card's shrunk rules text reads at (10.5px ×
+ * 0.8 × the 1.65 grow: 13.9px at 1080p), and how much taller than a card
+ * the hovered card may grow to fit it at that scale (a fraction of its
+ * height) before the scale gives way instead. */
+const READ_SCALE = 0.8
+const READ_GROW_MAX = 0.7
+
 export function CardTile({
   obj,
   highlight = false,
@@ -211,17 +218,44 @@ export function CardTile({
   // font-size doesn't reduce wrapped line count linearly, so this measures
   // and re-checks after each step instead -- cheap enough for a few lines of
   // text on the modest number of cards a hand ever holds.
+  // The scale is set as `--fit-scale`, which App.css turns into the
+  // `--text-scale` the text and its symbols read, so a hovered hand card can
+  // swap in its reading scale below.
   const textRef = useRef<HTMLSpanElement>(null)
   useLayoutEffect(() => {
     const el = textRef.current
     if (!artFirst || !el) return
-    el.style.removeProperty('--text-scale')
+    const tile = el.closest<HTMLElement>('.card-tile')
+    el.style.removeProperty('--fit-scale')
+    el.style.removeProperty('--read-scale')
+    tile?.style.removeProperty('--read-extra')
     let scale = 1
-    // The floor is low enough for a Saga's three chapters (Urza's Saga): a
-    // hand card grows 1.65x on hover, which is where it's read.
+    // The floor is low enough for a Saga's three chapters (Urza's Saga).
     while (el.scrollHeight > el.clientHeight && scale > 0.45) {
       scale = Math.round((scale - 0.05) * 100) / 100
-      el.style.setProperty('--text-scale', String(scale))
+      el.style.setProperty('--fit-scale', String(scale))
+    }
+    // A hand card grows 1.65x on hover, which is where it's read; but text
+    // shrunk to fit stayed too small to read even then (The Dawning Archaic
+    // at 0.55, the user, 2026-10-15). So for the hovered card: the largest
+    // scale up to READ_SCALE whose text fits a card at most READ_GROW_MAX
+    // taller, and how much taller (`--read-extra`, in the tile's own px). The
+    // hovered card grows upward by that much (App.css).
+    if (scale < READ_SCALE && tile !== null && el.closest('.hand-card') !== null) {
+      const room = el.clientHeight
+      const cap = tile.offsetHeight * READ_GROW_MAX
+      let read = READ_SCALE
+      let extra = 0
+      for (; read > scale; read = Math.round((read - 0.05) * 100) / 100) {
+        el.style.setProperty('--fit-scale', String(read))
+        extra = el.scrollHeight - room
+        if (extra <= cap) break
+      }
+      el.style.setProperty('--fit-scale', String(scale))
+      if (read > scale) {
+        el.style.setProperty('--read-scale', String(read))
+        tile.style.setProperty('--read-extra', `${Math.ceil(extra)}px`)
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artFirst, displayText, keywordLine, showText, counters.length, obj.spellFace])

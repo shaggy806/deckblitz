@@ -2926,6 +2926,9 @@
   /* --text-scale: set by CardTile.tsx only for the hand's art-first layout,
      when the printed text doesn't fit this fixed box at normal size
      (Wurmcoil Engine and the like) -- unset (1) everywhere else. */
+  /* CardTile sets the fit as `--fit-scale`, so a hovered hand card can swap
+     in its reading scale (`--read-scale`) for itself and its symbols. */
+  --text-scale: var(--fit-scale, 1);
   font-size: calc(9.5px * var(--text-scale, 1) * var(--ct-scale, 1));
   line-height: 1.35;
   overflow: hidden;
@@ -4049,7 +4052,24 @@
    rules, 8.5px type line, 46% art) a hand card at 1366x768 was readable only
    hovered (the user, 2026-11-02). */
 .hand-card .card-tile.art-first .ct-art {
-  flex-basis: 40%;
+  /* 40% of the card, in length rather than a percentage, so a hovered card
+     grown taller for its text (below) gives the room to the text. */
+  flex-basis: calc(var(--card-w) * 1.4 * 0.4);
+}
+/* A wordy card read under the pointer: its text was shrunk to fit the hand's
+   card (to 0.55 of its size for The Dawning Archaic), too small to read even
+   grown 1.65x (the user, 2026-10-15). CardTile measures the scale it reads
+   at instead (`--read-scale`, up to 0.8) and how much taller the card must be
+   for it (`--read-extra`); the hovered card grows upward by that much, its
+   bottom edge where it was. */
+.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, :focus-within) > .card-tile,
+.hand-strip .hand-cards .hand-card[data-sweep] > .card-tile {
+  height: calc(var(--card-w) * 1.4 + var(--read-extra, 0px));
+  margin-top: calc(-1 * var(--read-extra, 0px));
+}
+.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, :focus-within) > .card-tile .ct-text,
+.hand-strip .hand-cards .hand-card[data-sweep] > .card-tile .ct-text {
+  --text-scale: var(--read-scale, var(--fit-scale, 1));
 }
 .hand-card .card-tile.art-first .ct-name-row .ct-name {
   font-size: calc(12px * var(--name-scale, 1) * var(--ct-scale, 1));

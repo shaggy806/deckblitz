@@ -65,10 +65,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   viewer box grows and shrinks with whether the card has associated tokens.
   `client/src/library/LibraryPage.tsx`, `library.css`.
 
-- **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15). Hovering The
-  Dawning Archaic in the hand (Reach, a cost reduction, an attack trigger that casts from the
-  graveyard) grows the card, but its rules text is shrunk to fit the frame and can't be read.
-  The user isn't sure how to fix it; for discussion.
 - **The game page's own rendering on a slow laptop** (2026-10-13/14). **Mostly fixed; one
   cost left, no Lite setting needed yet.** The user's i5-6300U laptop (2 cores / 4 threads,
   16 GB, Chrome 153, 1366x768) ran a local blitz on 2026-10-13 at ~42 fps with ~120 main-thread
