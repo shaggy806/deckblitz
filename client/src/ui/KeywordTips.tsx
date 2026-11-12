@@ -16,12 +16,31 @@ import { Symbols } from './Symbols.tsx'
  * CSS's delay), so sweeping across the board or the hand doesn't flash a
  * column of boxes over everything.
  */
-export function KeywordTips({ obj, className = '' }: { readonly obj: VisibleObject; readonly className?: string }) {
+export function KeywordTips({
+  obj,
+  className = '',
+  notes = [],
+}: {
+  readonly obj: VisibleObject
+  readonly className?: string
+  /** What else the board's hover card says about the permanent — summoning
+   * sickness, counters, a goad (`CardFlags`' `flagNotes`) — first in the
+   * column, in the same boxes as the keywords (the user, 2026-11-11). */
+  readonly notes?: readonly { readonly key: string; readonly name: string; readonly text: string }[]
+}) {
   const text = stripReminders([obj.text, obj.spellFace?.text ?? ''].filter(Boolean).join('\n'))
   const tips = tipsFor(obj.keywords, text)
-  if (tips.length === 0) return null
+  if (tips.length === 0 && notes.length === 0) return null
   return (
     <div className={`keyword-tips ${className}`}>
+      {notes.map((note) => (
+        <div key={note.key} className="keyword-tip keyword-note">
+          <span className="kt-head">{note.name}</span>
+          <span className="kt-text">
+            <Symbols text={note.text} />
+          </span>
+        </div>
+      ))}
       {tips.map((tip) => (
         <div key={tip.key} className="keyword-tip">
           <span className="kt-head">

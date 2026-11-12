@@ -66,6 +66,9 @@ export interface CardTileProps {
    * mockup's own hand-card treatment (real mana-symbol SVGs via `Symbols`
    * in place of its placeholder colored circles). */
   readonly layout?: 'title' | 'art-first'
+  /** Leave the flag chips (`CardFlags`) and the counters off the card: the
+   * board's hover card lists them in its tips column instead (`MiniTile`). */
+  readonly notesAside?: boolean
   readonly onClick?: () => void
   /** The owner's seat class (`seatClassOf`), for a face-down permanent's
    * card back in their colour (`faceDownArtClass`); `null` for the plain
@@ -177,6 +180,7 @@ export function CardTile({
   chosenPlayer = null,
   layout = 'title',
   ownerSeat = null,
+  notesAside = false,
   onClick,
 }: CardTileProps) {
   // A Clone renders the *copied* card's face; a multi-face card renders its up
@@ -487,7 +491,7 @@ export function CardTile({
             <Symbols text={displayText} />
           </span>
         ) : null}
-        {counters.length > 0 || obj.regenerationShields > 0 ? (
+        {!notesAside && (counters.length > 0 || obj.regenerationShields > 0) ? (
           <span className="ct-counters">{counterSummary(counters, obj.regenerationShields)}</span>
         ) : null}
       </span>
@@ -506,7 +510,9 @@ export function CardTile({
       {stackCount !== null && stackCount > 1 ? (
         <span className="card-stack">×{stackCount}</span>
       ) : null}
-      <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} chosenPlayer={chosenPlayer} compact={false} />
+      {notesAside ? null : (
+        <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} chosenPlayer={chosenPlayer} compact={false} />
+      )}
       {obj.tapped && TAP_ICON_URL ? (
         <img className="tap-icon" src={TAP_ICON_URL} alt="" />
       ) : null}

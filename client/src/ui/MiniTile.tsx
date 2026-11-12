@@ -11,7 +11,9 @@ import { cardTint } from './symbols.ts'
 import { LoyaltyCounter } from './Symbols.tsx'
 import { manaSymbolUrl } from './mana.ts'
 import { TargetedMark } from './TargetedMark.tsx'
-import { CardFlags, lightPartner } from './CardFlags.tsx'
+import { CardFlags, flagNotes, lightPartner } from './CardFlags.tsx'
+import type { FlagSources } from './CardFlags.tsx'
+import { counterSummary } from './counterSummary.ts'
 import { CounterChips } from './CounterChips.tsx'
 import type { Goader } from './CardFlags.tsx'
 import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
@@ -79,6 +81,17 @@ export interface HeldCard {
  * The popover is portalled to `document.body` and placed from JS — see
  * `useHoverPopover` for why it can't just be a CSS-revealed child.
  */
+/** The board hover card's notes for its tips column: what its chips say,
+ * then its counters (`KeywordTips`' `notes`). */
+function boardNotes(obj: VisibleObject, sources: FlagSources): { key: string; name: string; text: string }[] {
+  const counters = Object.entries(obj.counters).filter(([k, n]) => n !== 0 && k !== 'loyalty')
+  const notes = flagNotes(sources)
+  if (counters.length > 0 || obj.regenerationShields > 0) {
+    notes.push({ key: 'counters', name: 'Counters', text: counterSummary(counters, obj.regenerationShields) })
+  }
+  return notes
+}
+
 export function MiniTile({
   obj,
   highlight = false,
@@ -242,9 +255,12 @@ export function MiniTile({
                 goaders={goaders}
                 enchanting={enchanting}
                 ownerSeat={ownerSeat}
+                notesAside
               />
               <OtherFace obj={obj} />
-              <KeywordTips obj={obj} />
+              {/* Summoning sickness, counters and the other chips, as tips
+                  beside the card rather than along its bottom. */}
+              <KeywordTips obj={obj} notes={boardNotes(obj, { obj, goaders, enchanting, protectedBy, chosenPlayer })} />
               {held.length > 0 ? (
                 <div className={`popover-held held-${Math.min(held.length, 3)}`}>
                   <span className="popover-held-label">Exiled with it</span>
