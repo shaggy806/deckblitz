@@ -302,6 +302,7 @@ import _poolFieldTrip from "../pool/field-trip.js";
 import _poolFieryAnnihilation from "../pool/fiery-annihilation.js";
 import _poolFinCladeFugitives from "../pool/fin-clade-fugitives.js";
 import _poolFinalReward from "../pool/final-reward.js";
+import _poolFirebenderAscension from "../pool/firebender-ascension.js";
 import _poolFirestorm from "../pool/firestorm.js";
 import _poolFirstVolley from "../pool/first-volley.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
@@ -1317,6 +1318,7 @@ const shard: CardShard = {
     _poolFieryAnnihilation,
     _poolFinCladeFugitives,
     _poolFinalReward,
+    _poolFirebenderAscension,
     _poolFirestorm,
     _poolFirstVolley,
     _poolFixerTechnoTerror,

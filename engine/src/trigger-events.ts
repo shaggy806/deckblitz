@@ -58,6 +58,15 @@ function row<T extends GameEvent["type"]>(r: TriggerEventRow<T>): TriggerEventRo
 }
 
 export const TRIGGER_EVENTS = {
+  /** "Whenever a creature you control attacking causes a triggered ability
+   * of that creature to trigger" (Firebender Ascension): the subject is that
+   * ability, put on the stack just now — `who` reads its controller, and
+   * `"trigger-ability"` is it ("copy that ability"). */
+  "attack-triggers-own-ability": row({
+    type: "ability-triggered",
+    when: (e) => e.byOwnAttack === true,
+    object: (e) => e.object,
+  }),
   /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
   forages: row({ type: "foraged", player: (e) => e.player }),
   /** "Whenever you roll one or more dice" (rule 706); the value is the

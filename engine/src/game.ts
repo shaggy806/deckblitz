@@ -17435,6 +17435,15 @@ export class Game {
   /** How many active `doubleEntryTriggers` statics `controller` has that
    * apply to `enteringId` entering (Panharmonicon-style — needed-cards P15).
    * Two such statics make an ETB trigger fire three times total (1 + 2). */
+  /** Whether `event` is an attack declaration that names `id` among its
+   * attackers — so a trigger of `id`'s it caused was caused by that creature
+   * attacking (the events `doubleTriggers`' `"attacks"` cause reads). */
+  private attackNamed(event: GameEvent, id: ObjectId): boolean {
+    if (event.type === "attacker-declared" || event.type === "attacked-alone") return event.attacker === id;
+    if (event.type === "attackers-declared" || event.type === "player-attacked") return event.attackers.includes(id);
+    return false;
+  }
+
   /** How many `doubleTriggers` statics `controller` has that this event
    * causes (rule 603.2): each makes a trigger it causes fire once more.
    * `sourceId` is whose ability it is, for a static's `source`. */
@@ -31299,7 +31308,9 @@ export class Game {
           // Which stint on the battlefield the source and the triggering
           // object were in — what the ability means by "it" and "that
           // creature" if either has left by the time it resolves (608.2h).
-          const atTrigger = this.refsAtTrigger(live, lastSeen, event, triggerObject);
+          const refsNow = this.refsAtTrigger(live, lastSeen, event, triggerObject);
+          // Its own source attacking caused it (Firebender Ascension).
+          const atTrigger = this.attackNamed(event, id) ? { ...(refsNow ?? {}), byOwnAttack: true as const } : refsNow;
           // "For each of them": which permanents the batched entry brought.
           const lastKnownRefs =
             ability.trigger.on === "enters-battlefield" &&
@@ -34805,7 +34816,13 @@ export class Game {
     }
     if (targetedBy !== undefined) this.state.objects[abilityId].targetedBy = targetedBy;
     if (reflexive !== undefined) this.state.objects[abilityId].reflexiveTrigger = reflexive;
-    this.emit({ type: "ability-triggered", source: sourceId, controller, object: abilityId });
+    this.emit({
+      type: "ability-triggered",
+      source: sourceId,
+      controller,
+      object: abilityId,
+      ...(refs?.byOwnAttack === true ? { byOwnAttack: true as const } : {}),
+    });
     // Its targets are locked in as it goes on the stack (rule 603.3d), which
     // is when anything it targets "becomes the target of" an ability.
     this.announceTargeted(

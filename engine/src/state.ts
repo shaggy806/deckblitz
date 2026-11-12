@@ -2451,6 +2451,12 @@ export interface LastKnownRefs {
    * put on a permanent at once are one event for it (rule 603.2c), so one
    * trigger carries them all. */
   readonly counters?: readonly { readonly kind: string; readonly amount: number }[];
+  /** This triggered ability triggered because its own source attacked — the
+   * attack declaration named it (rule 508.1, the events Isshin's `"attacks"`
+   * cause reads): "a creature you control attacking causes a triggered
+   * ability of that creature to trigger" (Firebender Ascension). Carried
+   * onto its `ability-triggered` event. */
+  readonly byOwnAttack?: true;
 }
 
 /**

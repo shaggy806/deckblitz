@@ -857,6 +857,8 @@ export type GameEvent =
       /** The ability on the stack — what a client finds its entry by, to fly
        * it there from its source. */
       readonly object: ObjectId;
+      /** Its source attacking caused it (`LastKnownRefs.byOwnAttack`). */
+      readonly byOwnAttack?: true;
     })
   | (Base & {
       /** Identical tokens folded into one stack object (`Game.foldTokensInto`:
