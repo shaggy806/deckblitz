@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4899 already implemented / 101 missing (marks refreshed 2026-11-12)
+4909 already implemented / 91 missing (marks refreshed 2026-11-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2386,7 +2386,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2393  Wirewood Lodge                           {0}              Land
 [x]  2394  Dowsing Dagger // Lost Vale              {2}              Artifact — Equipment // Land
 [x]  2395  Llanowar Reborn                          {0}              Land
-[ ]  2396  Lim-Dûl's Vault                          {U}{B}           Instant
+[x]  2396  Lim-Dûl's Vault                          {U}{B}           Instant
 [x]  2397  Sol Talisman                             {0}              Artifact
 [x]  2398  Perch Protection                         {4}{W}{W}        Instant
 [x]  2399  Berserkers' Onslaught                    {3}{R}{R}        Enchantment
@@ -2431,7 +2431,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2438  Encroaching Dragonstorm                  {3}{G}           Enchantment
 [x]  2439  Villainous Wealth                        {X}{B}{G}{U}     Sorcery
 [x]  2440  Faerie Seer                              {U}              Creature — Faerie Wizard
-[ ]  2441  Odric, Master Tactician                  {2}{W}{W}        Legendary Creature — Human Soldier
+[x]  2441  Odric, Master Tactician                  {2}{W}{W}        Legendary Creature — Human Soldier
 [x]  2442  Harsh Mentor                             {1}{R}           Creature — Human Cleric
 [x]  2443  Harvest Season                           {2}{G}           Sorcery
 [x]  2444  Mogis, God of Slaughter                  {2}{B}{R}        Legendary Enchantment Creature — God
@@ -2472,12 +2472,12 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2479  Kozilek, the Broken Reality              {9}              Legendary Creature — Eldrazi
 [x]  2480  Manor Gate                               {0}              Land — Gate
 [x]  2481  Inga and Esika                           {2}{G}{U}        Legendary Creature — Human God
-[ ]  2482  Aminatou's Augury                        {6}{U}{U}        Sorcery
+[x]  2482  Aminatou's Augury                        {6}{U}{U}        Sorcery
 [x]  2483  Weatherlight                             {4}              Legendary Artifact — Vehicle
 [x]  2484  Infectious Inquiry                       {2}{B}           Sorcery
 [x]  2485  Fear of Missing Out                      {1}{R}           Enchantment Creature — Nightmare
 [x]  2486  Valley Rotcaller                         {1}{B}           Creature — Squirrel Warlock
-[ ]  2487  Expropriate                              {7}{U}{U}        Sorcery
+[x]  2487  Expropriate                              {7}{U}{U}        Sorcery
 [x]  2488  Captivating Vampire                      {1}{B}{B}        Creature — Vampire
 [x]  2489  The Regalia                              {4}              Legendary Artifact — Vehicle
 [x]  2490  Agna Qel'a                               {0}              Land
@@ -2552,7 +2552,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2559  Black Dragon Gate                        {0}              Land — Gate
 [x]  2560  Reiterate                                {1}{R}{R}        Instant
 [x]  2561  Baldur's Gate                            {0}              Legendary Land — Gate
-[ ]  2562  Mari, the Killing Quill                  {1}{B}{B}        Legendary Creature — Vampire Assassin
+[x]  2562  Mari, the Killing Quill                  {1}{B}{B}        Legendary Creature — Vampire Assassin
 [x]  2563  Somberwald Sage                          {2}{G}           Creature — Human Druid
 [x]  2564  Nature's Will                            {2}{G}{G}        Enchantment
 [x]  2565  Leechridden Swamp                        {0}              Land — Swamp
@@ -2640,7 +2640,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2647  Voyager Quickwelder                      {2}{W}           Artifact Creature — Robot Artificer
 [x]  2648  Cursed Totem                             {2}              Artifact
 [x]  2649  Scholar of New Horizons                  {1}{W}           Creature — Human Scout
-[ ]  2650  Firebender Ascension                     {1}{R}           Enchantment
+[x]  2650  Firebender Ascension                     {1}{R}           Enchantment
 [x]  2651  Quick Study                              {2}{U}           Instant
 [x]  2652  Thousand-Faced Shadow                    {U}              Creature — Human Ninja
 [x]  2653  Prologue to Phyresis                     {1}{U}           Instant
@@ -2673,7 +2673,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2680  Archfiend of Despair                     {6}{B}{B}        Creature — Demon
 [x]  2681  Tifa Lockhart                            {1}{G}           Legendary Creature — Human Monk
 [x]  2682  Freyalise, Llanowar's Fury               {3}{G}{G}        Legendary Planeswalker — Freyalise
-[ ]  2683  Gilded Drake                             {1}{U}           Creature — Drake
+[x]  2683  Gilded Drake                             {1}{U}           Creature — Drake
 [x]  2684  Jwari Disruption // Jwari Ruins          {2}              Instant // Land
 [x]  2685  Gandalf the White                        {3}{W}{W}        Legendary Creature — Avatar Wizard
 [x]  2686  Shadrix Silverquill                      {3}{W}{B}        Legendary Creature — Elder Dragon
@@ -2732,9 +2732,9 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2739  Bite Down                                {1}{G}           Instant
 [x]  2740  Clifftop Lookout                         {2}{G}           Creature — Frog Scout
 [x]  2741  Aether Spellbomb                         {1}              Artifact
-[ ]  2742  Boseiju, Who Shelters All                {0}              Legendary Land
+[x]  2742  Boseiju, Who Shelters All                {0}              Legendary Land
 [x]  2743  Zombie Master                            {1}{B}{B}        Creature — Zombie
-[ ]  2744  Semester's End                           {3}{W}           Instant
+[x]  2744  Semester's End                           {3}{W}           Instant
 [x]  2745  Miscast                                  {U}              Instant
 [x]  2746  Dina, Soul Steeper                       {B}{G}           Legendary Creature — Dryad Druid
 [x]  2747  Fog Bank                                 {1}{U}           Creature — Wall
@@ -2953,7 +2953,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2960  Settle the Wreckage                      {2}{W}{W}        Instant
 [x]  2961  Tower Defense                            {1}{G}           Instant
 [x]  2962  Rampaging Yao Guai                       {X}{G}{G}{G}     Creature — Bear Mutant
-[ ]  2963  The Unagi of Kyoshi Island               {3}{U}{U}        Legendary Creature — Serpent
+[x]  2963  The Unagi of Kyoshi Island               {3}{U}{U}        Legendary Creature — Serpent
 [x]  2964  Tyvar, the Pummeler                      {1}{G}{G}        Legendary Creature — Elf Warrior
 [x]  2965  Mindsplice Apparatus                     {3}{U}           Artifact
 [x]  2966  Will of the Sultai                       {4}{G}           Sorcery
