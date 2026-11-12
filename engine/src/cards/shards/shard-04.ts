@@ -299,6 +299,7 @@ import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
 import _poolGalvanicDischarge from "../pool/galvanic-discharge.js";
+import _poolGandalfPartyGuest from "../pool/gandalf-party-guest.js";
 import _poolGargantosTheEndbringer from "../pool/gargantos-the-endbringer.js";
 import _poolGaseousForm from "../pool/gaseous-form.js";
 import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
@@ -1299,6 +1300,7 @@ const shard: CardShard = {
     _poolGalacticWayfarer,
     _poolGalliaOfTheEndlessDance,
     _poolGalvanicDischarge,
+    _poolGandalfPartyGuest,
     _poolGargantosTheEndbringer,
     _poolGaseousForm,
     _poolGatekeeperGargoyle,

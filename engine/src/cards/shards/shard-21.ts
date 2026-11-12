@@ -502,6 +502,7 @@ import _poolMessengerDrake from "../pool/messenger-drake.js";
 import _poolMetallicMastery from "../pool/metallic-mastery.js";
 import _poolMetathranZombie from "../pool/metathran-zombie.js";
 import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
+import _poolMichelangeloOnTheScene from "../pool/michelangelo-on-the-scene.js";
 import _poolMicromancer from "../pool/micromancer.js";
 import _poolMigratoryGreathorn from "../pool/migratory-greathorn.js";
 import _poolMindHarness from "../pool/mind-harness.js";
@@ -833,6 +834,7 @@ import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolTheSoundOfDrums from "../pool/the-sound-of-drums.js";
 import _poolTheoreticalDuplication from "../pool/theoretical-duplication.js";
+import _poolThorinCompanysLeader from "../pool/thorin-companys-leader.js";
 import _poolThornbowArcher from "../pool/thornbow-archer.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThoughtErasure from "../pool/thought-erasure.js";
@@ -1472,6 +1474,7 @@ const shard: CardShard = {
     _poolMetallicMastery,
     _poolMetathranZombie,
     _poolMethodsOfTheMighty,
+    _poolMichelangeloOnTheScene,
     _poolMicromancer,
     _poolMigratoryGreathorn,
     _poolMindHarness,
@@ -1803,6 +1806,7 @@ const shard: CardShard = {
     _poolTheSibsigCeremony,
     _poolTheSoundOfDrums,
     _poolTheoreticalDuplication,
+    _poolThorinCompanysLeader,
     _poolThornbowArcher,
     _poolThornwoodFalls,
     _poolThoughtErasure,

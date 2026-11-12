@@ -327,6 +327,7 @@ import _poolGlintwingInvoker from "../pool/glintwing-invoker.js";
 import _poolGlorifierOfDusk from "../pool/glorifier-of-dusk.js";
 import _poolGloriousGale from "../pool/glorious-gale.js";
 import _poolGoblinFestival from "../pool/goblin-festival.js";
+import _poolGoblinGoliath from "../pool/goblin-goliath.js";
 import _poolGoblinKites from "../pool/goblin-kites.js";
 import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
 import _poolGoblinSkyRaider from "../pool/goblin-sky-raider.js";
@@ -462,6 +463,7 @@ import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLavaBlister from "../pool/lava-blister.js";
 import _poolLensOfClarity from "../pool/lens-of-clarity.js";
 import _poolLesserGargadon from "../pool/lesser-gargadon.js";
+import _poolLethalProtection from "../pool/lethal-protection.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
 import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
@@ -1371,6 +1373,7 @@ const shard: CardShard = {
     _poolGlorifierOfDusk,
     _poolGloriousGale,
     _poolGoblinFestival,
+    _poolGoblinGoliath,
     _poolGoblinKites,
     _poolGoblinRabblemaster,
     _poolGoblinSkyRaider,
@@ -1506,6 +1509,7 @@ const shard: CardShard = {
     _poolLavaBlister,
     _poolLensOfClarity,
     _poolLesserGargadon,
+    _poolLethalProtection,
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
     _poolLifecraftAwakening,

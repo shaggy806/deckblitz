@@ -245,6 +245,7 @@ import _poolDomriAnarchOfBolas from "../pool/domri-anarch-of-bolas.js";
 import _poolDonatelloTheBrains from "../pool/donatello-the-brains.js";
 import _poolDoomskarTitan from "../pool/doomskar-titan.js";
 import _poolDorotheaVengefulVictim from "../pool/dorothea-vengeful-victim.js";
+import _poolDoubleTrouble from "../pool/double-trouble.js";
 import _poolDouse from "../pool/douse.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
 import _poolDragonMoose from "../pool/dragon-moose.js";
@@ -387,6 +388,7 @@ import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGremlinInfestation from "../pool/gremlin-infestation.js";
+import _poolGrimGiganotosaurus from "../pool/grim-giganotosaurus.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
 import _poolGrounded from "../pool/grounded.js";
 import _poolGroundswell from "../pool/groundswell.js";
@@ -600,6 +602,7 @@ import _poolMoanOfTheUnhallowed from "../pool/moan-of-the-unhallowed.js";
 import _poolMoggBombers from "../pool/mogg-bombers.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
+import _poolMomoRambunctiousRascal from "../pool/momo-rambunctious-rascal.js";
 import _poolMonstrousVortex from "../pool/monstrous-vortex.js";
 import _poolMoonlitMeditation from "../pool/moonlit-meditation.js";
 import _poolMoonveilRegent from "../pool/moonveil-regent.js";
@@ -614,6 +617,7 @@ import _poolMycosynthFiend from "../pool/mycosynth-fiend.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
 import _poolNantukoMonastery from "../pool/nantuko-monastery.js";
 import _poolNashiMoonSagesScion from "../pool/nashi-moon-sages-scion.js";
+import _poolNathanDrakeTreasureHunter from "../pool/nathan-drake-treasure-hunter.js";
 import _poolNaturalSpring from "../pool/natural-spring.js";
 import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
 import _poolNeedleStorm from "../pool/needle-storm.js";
@@ -1323,6 +1327,7 @@ const shard: CardShard = {
     _poolDonatelloTheBrains,
     _poolDoomskarTitan,
     _poolDorotheaVengefulVictim,
+    _poolDoubleTrouble,
     _poolDouse,
     _poolDrMadisonLi,
     _poolDragonMoose,
@@ -1465,6 +1470,7 @@ const shard: CardShard = {
     _poolGreenDragon,
     _poolGreenwheelLiberator,
     _poolGremlinInfestation,
+    _poolGrimGiganotosaurus,
     _poolGrotesqueMutation,
     _poolGrounded,
     _poolGroundswell,
@@ -1678,6 +1684,7 @@ const shard: CardShard = {
     _poolMoggBombers,
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
+    _poolMomoRambunctiousRascal,
     _poolMonstrousVortex,
     _poolMoonlitMeditation,
     _poolMoonveilRegent,
@@ -1692,6 +1699,7 @@ const shard: CardShard = {
     _poolMyojinOfBloomingDawn,
     _poolNantukoMonastery,
     _poolNashiMoonSagesScion,
+    _poolNathanDrakeTreasureHunter,
     _poolNaturalSpring,
     _poolNebelgastIntruder,
     _poolNeedleStorm,

@@ -16472,6 +16472,34 @@
   "mechanic:attractions": {
    "family": "mechanic:assemble-contraptions",
    "example": "\"Lifetime\" Pass Holder: open an Attraction; roll to visit your Attractions (rule 717)."
+  },
+  "replacement:reroll-dice": {
+   "family": "mechanic:dice-rolling",
+   "example": "Monitor Monitor: \"you may pay {1} once each turn to reroll\" dice you just rolled."
+  },
+  "amount:type-count": {
+   "family": "effect:amount-new-variants",
+   "example": "Embiggen: the number of supertypes, card types and subtypes a permanent has, as the spell resolves."
+  },
+  "effect:return-exiled-with-counter": {
+   "family": "zone:play-from-exile-with-counter",
+   "example": "Flamewar, Brash Veteran: \"put all exiled cards you own with intel counters on them into your hand\" — face-down exiled cards picked by a counter."
+  },
+  "amount:spell-target-count": {
+   "family": "effect:amount-new-variants",
+   "example": "Arcee, Sharpshooter: how many creatures and Vehicles you control the triggering spell targets, fixed as it's cast."
+  },
+  "trigger:cards-put-into-library": {
+   "family": "trigger:put-into-graveyard",
+   "example": "Wan Shi Tong, All-Knowing: \"whenever one or more cards are put into a library from anywhere\" (batched; scry and surveil reordering don't count, per its ruling)."
+  },
+  "replacement:modify-roll-result": {
+   "family": "mechanic:dice-rolling",
+   "example": "Xenosquirrels: after a roll, the player may pay to raise or lower the result by 1."
+  },
+  "replacement:extra-die-chosen-ignore": {
+   "family": "mechanic:dice-rolling",
+   "example": "Bamboozling Beeble: a target player's next roll this turn rolls an extra die, and the effect's controller chooses which to ignore."
   }
  },
  "groups": [

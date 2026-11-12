@@ -73,9 +73,9 @@ section keeps only what to do next.
   `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
   Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,
   Cyclonus's `effect:additional-beginning-phase` (`B308.json` says what each lacks) — and
-  Starlight Spectacular's ordering decision to ask about. **B309** (the next 60, ranks
-  12,838–15,470) was dispatched to a `card-author` agent on 2026-11-12: integrate its worktree branch
-  (`git worktree list`) and build what its blocked cards need. And the nine starter precons' 4 stand-ins
+  Starlight Spectacular's ordering decision to ask about. **B309** (ranks 12,838–15,470): 44
+  authored, 16 left — 8 on majors (Attractions ×7, Malik's secret choice) and 8 small keys,
+  `B309.json`. And the nine starter precons' 4 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land. `docs/plans/after-the-themes.md`
   has the order agreed before the goal (step 3 next). How the need keys were worked down to here
   (the recheck rounds, the families, the freed-card batches, the themes) is in `COMPLETED.md`.

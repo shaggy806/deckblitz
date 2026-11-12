@@ -760,6 +760,7 @@ import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
 import _poolSkulkingFugitive from "../pool/skulking-fugitive.js";
 import _poolSlicerHiredMuscle from "../pool/slicer-hired-muscle.js";
 import _poolSlickSequence from "../pool/slick-sequence.js";
+import _poolSlightMalfunction from "../pool/slight-malfunction.js";
 import _poolSlithPredator from "../pool/slith-predator.js";
 import _poolSlithermuse from "../pool/slithermuse.js";
 import _poolSmitingHelix from "../pool/smiting-helix.js";
@@ -1781,6 +1782,7 @@ const shard: CardShard = {
     _poolSkulkingFugitive,
     _poolSlicerHiredMuscle,
     _poolSlickSequence,
+    _poolSlightMalfunction,
     _poolSlithPredator,
     _poolSlithermuse,
     _poolSmitingHelix,

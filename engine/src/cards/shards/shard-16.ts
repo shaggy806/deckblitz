@@ -1069,6 +1069,7 @@ import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
 import _tokensPilotToken from "../tokens/pilot-token.js";
 import _tokensPlaguebearerOfNurgle from "../tokens/plaguebearer-of-nurgle.js";
+import _tokensRavageToken from "../tokens/ravage-token.js";
 import _tokensRobotHeroToken from "../tokens/robot-hero-token.js";
 import _tokensRobotWarriorToken from "../tokens/robot-warrior-token.js";
 import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
@@ -2152,6 +2153,7 @@ const shard: CardShard = {
     _tokensPhyrexianWurmLifelink,
     _tokensPilotToken,
     _tokensPlaguebearerOfNurgle,
+    _tokensRavageToken,
     _tokensRobotHeroToken,
     _tokensRobotWarriorToken,
     _tokensShapeshifterToken,

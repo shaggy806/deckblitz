@@ -333,6 +333,7 @@ import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
 import _poolGoblinTombRaider from "../pool/goblin-tomb-raider.js";
 import _poolGoldenWish from "../pool/golden-wish.js";
 import _poolGraspingDunes from "../pool/grasping-dunes.js";
+import _poolGraspingTentacles from "../pool/grasping-tentacles.js";
 import _poolGrasslandCrusader from "../pool/grassland-crusader.js";
 import _poolGravelgillAxeshark from "../pool/gravelgill-axeshark.js";
 import _poolGreatDivideGuide from "../pool/great-divide-guide.js";
@@ -744,6 +745,7 @@ import _poolSmeltWardIgnus from "../pool/smelt-ward-ignus.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
 import _poolSnuffOut from "../pool/snuff-out.js";
 import _poolSoTiny from "../pool/so-tiny.js";
+import _poolSokkaAndSuki from "../pool/sokka-and-suki.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
 import _poolSokkaWolfCovesProtector from "../pool/sokka-wolf-coves-protector.js";
 import _poolSolsticeRevelations from "../pool/solstice-revelations.js";
@@ -982,6 +984,7 @@ import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensReplicatedRingToken from "../tokens/replicated-ring-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
 import _tokensShrineToken from "../tokens/shrine-token.js";
+import _tokensSoldierTokenRed22 from "../tokens/soldier-token-red-2-2.js";
 import _tokensSpiritWarriorToken from "../tokens/spirit-warrior-token.js";
 import _tokensVampireKnightToken from "../tokens/vampire-knight-token.js";
 import _tokensVarmintToken from "../tokens/varmint-token.js";
@@ -1321,6 +1324,7 @@ const shard: CardShard = {
     _poolGoblinTombRaider,
     _poolGoldenWish,
     _poolGraspingDunes,
+    _poolGraspingTentacles,
     _poolGrasslandCrusader,
     _poolGravelgillAxeshark,
     _poolGreatDivideGuide,
@@ -1732,6 +1736,7 @@ const shard: CardShard = {
     _poolSnappingCreeper,
     _poolSnuffOut,
     _poolSoTiny,
+    _poolSokkaAndSuki,
     _poolSokkaLateralStrategist,
     _poolSokkaWolfCovesProtector,
     _poolSolsticeRevelations,
@@ -1972,6 +1977,7 @@ const shard: CardShard = {
     _tokensReplicatedRingToken,
     _tokensScionOfTheDeepToken,
     _tokensShrineToken,
+    _tokensSoldierTokenRed22,
     _tokensSpiritWarriorToken,
     _tokensVampireKnightToken,
     _tokensVarmintToken,

@@ -254,6 +254,7 @@ import _poolEkthiContaminatorPriest from "../pool/ekthi-contaminator-priest.js";
 import _poolEldaConjurerOfSpectacle from "../pool/elda-conjurer-of-spectacle.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
+import _poolElmarUlvenwaldInformant from "../pool/elmar-ulvenwald-informant.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPioneer from "../pool/elvish-pioneer.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
@@ -317,6 +318,7 @@ import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
 import _poolGallifreyFalls from "../pool/gallifrey-falls.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
+import _poolGandalfShadowsFoe from "../pool/gandalf-shadows-foe.js";
 import _poolGavelOfTheRighteous from "../pool/gavel-of-the-righteous.js";
 import _poolGelatinousGenesis from "../pool/gelatinous-genesis.js";
 import _poolGenesisStorm from "../pool/genesis-storm.js";
@@ -1290,6 +1292,7 @@ const shard: CardShard = {
     _poolEldaConjurerOfSpectacle,
     _poolEldritchPact,
     _poolElectricEel,
+    _poolElmarUlvenwaldInformant,
     _poolElminstersSimulacrum,
     _poolElvishPioneer,
     _poolElvishPiper,
@@ -1353,6 +1356,7 @@ const shard: CardShard = {
     _poolGallantCavalry,
     _poolGallifreyFalls,
     _poolGalvanicArc,
+    _poolGandalfShadowsFoe,
     _poolGavelOfTheRighteous,
     _poolGelatinousGenesis,
     _poolGenesisStorm,

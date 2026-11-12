@@ -474,6 +474,7 @@ import _poolKuldothaForgemaster from "../pool/kuldotha-forgemaster.js";
 import _poolKwendePrideOfFemeref from "../pool/kwende-pride-of-femeref.js";
 import _poolKyoshiVillage from "../pool/kyoshi-village.js";
 import _poolLaboratoryBrute from "../pool/laboratory-brute.js";
+import _poolLaraCroftTombRaider from "../pool/lara-croft-tomb-raider.js";
 import _poolLeadenMyr from "../pool/leaden-myr.js";
 import _poolLeafDancer from "../pool/leaf-dancer.js";
 import _poolLeafGilder from "../pool/leaf-gilder.js";
@@ -936,6 +937,7 @@ import _poolVisionSpectralSynthezoid from "../pool/vision-spectral-synthezoid.js
 import _poolVituGhaziGuildmage from "../pool/vitu-ghazi-guildmage.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
 import _poolVividRevival from "../pool/vivid-revival.js";
+import _poolVogarNecropolisTyrant from "../pool/vogar-necropolis-tyrant.js";
 import _poolVoldarenThrillseeker from "../pool/voldaren-thrillseeker.js";
 import _poolVraskasFall from "../pool/vraskas-fall.js";
 import _poolWakandanShieldGuard from "../pool/wakandan-shield-guard.js";
@@ -1491,6 +1493,7 @@ const shard: CardShard = {
     _poolKwendePrideOfFemeref,
     _poolKyoshiVillage,
     _poolLaboratoryBrute,
+    _poolLaraCroftTombRaider,
     _poolLeadenMyr,
     _poolLeafDancer,
     _poolLeafGilder,
@@ -1953,6 +1956,7 @@ const shard: CardShard = {
     _poolVituGhaziGuildmage,
     _poolVividMeadow,
     _poolVividRevival,
+    _poolVogarNecropolisTyrant,
     _poolVoldarenThrillseeker,
     _poolVraskasFall,
     _poolWakandanShieldGuard,

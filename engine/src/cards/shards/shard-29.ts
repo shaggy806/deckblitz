@@ -466,6 +466,7 @@ import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLongshotSquad from "../pool/longshot-squad.js";
 import _poolLostAuramancers from "../pool/lost-auramancers.js";
+import _poolLostInMemories from "../pool/lost-in-memories.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
 import _poolLuminatePrimordial from "../pool/luminate-primordial.js";
 import _poolLurkingRoper from "../pool/lurking-roper.js";
@@ -1480,6 +1481,7 @@ const shard: CardShard = {
     _poolLonelySandbar,
     _poolLongshotSquad,
     _poolLostAuramancers,
+    _poolLostInMemories,
     _poolLoxodonAnchorite,
     _poolLuminatePrimordial,
     _poolLurkingRoper,

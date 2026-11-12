@@ -143,6 +143,7 @@ import _poolBurnBright from "../pool/burn-bright.js";
 import _poolBurningEarth from "../pool/burning-earth.js";
 import _poolButcherOfTheHorde from "../pool/butcher-of-the-horde.js";
 import _poolCabalTrainee from "../pool/cabal-trainee.js";
+import _poolCalculatingLich from "../pool/calculating-lich.js";
 import _poolCallTheCavalry from "../pool/call-the-cavalry.js";
 import _poolCanopyDragon from "../pool/canopy-dragon.js";
 import _poolCanopyVista from "../pool/canopy-vista.js";
@@ -1214,6 +1215,7 @@ const shard: CardShard = {
     _poolBurningEarth,
     _poolButcherOfTheHorde,
     _poolCabalTrainee,
+    _poolCalculatingLich,
     _poolCallTheCavalry,
     _poolCanopyDragon,
     _poolCanopyVista,

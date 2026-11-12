@@ -855,6 +855,7 @@ import _poolSusanForeman from "../pool/susan-foreman.js";
 import _poolSwoopingProtector from "../pool/swooping-protector.js";
 import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
 import _poolSystemsOverride from "../pool/systems-override.js";
+import _poolTadeasJuniperAscendant from "../pool/tadeas-juniper-ascendant.js";
 import _poolTaigamMasterOpportunist from "../pool/taigam-master-opportunist.js";
 import _poolTakeIntoCustody from "../pool/take-into-custody.js";
 import _poolTandemTactics from "../pool/tandem-tactics.js";
@@ -1880,6 +1881,7 @@ const shard: CardShard = {
     _poolSwoopingProtector,
     _poolSyrAlinTheLionsClaw,
     _poolSystemsOverride,
+    _poolTadeasJuniperAscendant,
     _poolTaigamMasterOpportunist,
     _poolTakeIntoCustody,
     _poolTandemTactics,

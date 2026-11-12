@@ -821,6 +821,7 @@ import _poolTerravore from "../pool/terravore.js";
 import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
 import _poolTezzeretsAmbition from "../pool/tezzerets-ambition.js";
 import _poolTheBelligerent from "../pool/the-belligerent.js";
+import _poolTheHowlingAbomination from "../pool/the-howling-abomination.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
 import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheOoze from "../pool/the-ooze.js";
@@ -833,6 +834,7 @@ import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
 import _poolThousandFacedShadow from "../pool/thousand-faced-shadow.js";
+import _poolThranduilTheStrategist from "../pool/thranduil-the-strategist.js";
 import _poolThroesOfChaos from "../pool/throes-of-chaos.js";
 import _poolThunderingMightmare from "../pool/thundering-mightmare.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
@@ -1787,6 +1789,7 @@ const shard: CardShard = {
     _poolTerritorialHammerskull,
     _poolTezzeretsAmbition,
     _poolTheBelligerent,
+    _poolTheHowlingAbomination,
     _poolTheHungerTideRises,
     _poolTheNightOfTheDoctor,
     _poolTheOoze,
@@ -1799,6 +1802,7 @@ const shard: CardShard = {
     _poolThinkTwice,
     _poolThornLieutenant,
     _poolThousandFacedShadow,
+    _poolThranduilTheStrategist,
     _poolThroesOfChaos,
     _poolThunderingMightmare,
     _poolThunderwolfCavalry,

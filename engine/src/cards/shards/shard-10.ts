@@ -317,6 +317,7 @@ import _poolFoggyBottomSwamp from "../pool/foggy-bottom-swamp.js";
 import _poolFortifiedBeachhead from "../pool/fortified-beachhead.js";
 import _poolFortuneThief from "../pool/fortune-thief.js";
 import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
+import _poolFranticConfrontation from "../pool/frantic-confrontation.js";
 import _poolFruitOfTizerus from "../pool/fruit-of-tizerus.js";
 import _poolFurious from "../pool/furious.js";
 import _poolGaeasMight from "../pool/gaeas-might.js";
@@ -992,6 +993,7 @@ import _poolYurlokOfScorchThrash from "../pool/yurlok-of-scorch-thrash.js";
 import _poolZadaHedronGrinder from "../pool/zada-hedron-grinder.js";
 import _poolZarichiTiger from "../pool/zarichi-tiger.js";
 import _poolZealousConscripts from "../pool/zealous-conscripts.js";
+import _poolZukoSeekingHonor from "../pool/zuko-seeking-honor.js";
 import _poolZulaportCutthroat from "../pool/zulaport-cutthroat.js";
 import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
@@ -1330,6 +1332,7 @@ const shard: CardShard = {
     _poolFortifiedBeachhead,
     _poolFortuneThief,
     _poolFranciscoFowlMarauder,
+    _poolFranticConfrontation,
     _poolFruitOfTizerus,
     _poolFurious,
     _poolGaeasMight,
@@ -2005,6 +2008,7 @@ const shard: CardShard = {
     _poolZadaHedronGrinder,
     _poolZarichiTiger,
     _poolZealousConscripts,
+    _poolZukoSeekingHonor,
     _poolZulaportCutthroat,
   ],
   tokens: [

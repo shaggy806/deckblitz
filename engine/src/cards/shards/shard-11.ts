@@ -28,6 +28,7 @@ import _poolAlmsBeast from "../pool/alms-beast.js";
 import _poolAlpineMeadow from "../pool/alpine-meadow.js";
 import _poolAltarOfTheWretched from "../pool/altar-of-the-wretched.js";
 import _poolAmorphousAxe from "../pool/amorphous-axe.js";
+import _poolAncestorDragon from "../pool/ancestor-dragon.js";
 import _poolAncestralTribute from "../pool/ancestral-tribute.js";
 import _poolAncientCarp from "../pool/ancient-carp.js";
 import _poolAncientCrab from "../pool/ancient-crab.js";
@@ -1000,6 +1001,7 @@ import _poolZelyonSword from "../pool/zelyon-sword.js";
 import _poolZetalpaPrimalDawn from "../pool/zetalpa-primal-dawn.js";
 import _poolZogTriceratonCastaway from "../pool/zog-triceraton-castaway.js";
 import _poolZombieMaster from "../pool/zombie-master.js";
+import _poolZukoAvatarHunter from "../pool/zuko-avatar-hunter.js";
 import _poolZuriWarriorOfWakanda from "../pool/zuri-warrior-of-wakanda.js";
 import _tokens22BlackBirdToken from "../tokens/2-2-black-bird-token.js";
 import _tokensCentaurToken33 from "../tokens/centaur-token-3-3.js";
@@ -1053,6 +1055,7 @@ const shard: CardShard = {
     _poolAlpineMeadow,
     _poolAltarOfTheWretched,
     _poolAmorphousAxe,
+    _poolAncestorDragon,
     _poolAncestralTribute,
     _poolAncientCarp,
     _poolAncientCrab,
@@ -2025,6 +2028,7 @@ const shard: CardShard = {
     _poolZetalpaPrimalDawn,
     _poolZogTriceratonCastaway,
     _poolZombieMaster,
+    _poolZukoAvatarHunter,
     _poolZuriWarriorOfWakanda,
   ],
   tokens: [

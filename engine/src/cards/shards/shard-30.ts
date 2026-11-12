@@ -252,6 +252,8 @@ import _poolEarlyFrost from "../pool/early-frost.js";
 import _poolEarthKingdomGeneral from "../pool/earth-kingdom-general.js";
 import _poolEdgewalker from "../pool/edgewalker.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
+import _poolElephantMandrill from "../pool/elephant-mandrill.js";
+import _poolEllieAndAlanPaleontologists from "../pool/ellie-and-alan-paleontologists.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
 import _poolElvishWarmaster from "../pool/elvish-warmaster.js";
 import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
@@ -808,6 +810,7 @@ import _poolSoothingBalm from "../pool/soothing-balm.js";
 import _poolSoulScarMage from "../pool/soul-scar-mage.js";
 import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
+import _poolSoundwaveSuperiorCaptain from "../pool/soundwave-superior-captain.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
 import _poolSpatialAnomaly from "../pool/spatial-anomaly.js";
 import _poolSpawnOfMayhem from "../pool/spawn-of-mayhem.js";
@@ -833,6 +836,7 @@ import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
 import _poolStandDeliver from "../pool/stand-deliver.js";
 import _poolStarCharter from "../pool/star-charter.js";
+import _poolStardewValley from "../pool/stardew-valley.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
 import _poolStartFinish from "../pool/start-finish.js";
@@ -1289,6 +1293,8 @@ const shard: CardShard = {
     _poolEarthKingdomGeneral,
     _poolEdgewalker,
     _poolElasIlKorSadisticPilgrim,
+    _poolElephantMandrill,
+    _poolEllieAndAlanPaleontologists,
     _poolElvishSkysweeper,
     _poolElvishWarmaster,
     _poolEmeraldMedallion,
@@ -1845,6 +1851,7 @@ const shard: CardShard = {
     _poolSoulScarMage,
     _poolSoulbladeRenewer,
     _poolSoulcatchersAerie,
+    _poolSoundwaveSuperiorCaptain,
     _poolSouthernAirTemple,
     _poolSpatialAnomaly,
     _poolSpawnOfMayhem,
@@ -1870,6 +1877,7 @@ const shard: CardShard = {
     _poolStalkingDrone,
     _poolStandDeliver,
     _poolStarCharter,
+    _poolStardewValley,
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,
     _poolStartFinish,

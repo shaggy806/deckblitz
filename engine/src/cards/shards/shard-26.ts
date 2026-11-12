@@ -117,6 +117,7 @@ import _poolBonnyPallClearcutter from "../pool/bonny-pall-clearcutter.js";
 import _poolBorborygmosEnraged from "../pool/borborygmos-enraged.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBorosMastiff from "../pool/boros-mastiff.js";
+import _poolBoscoJustABear from "../pool/bosco-just-a-bear.js";
 import _poolBranchingBolt from "../pool/branching-bolt.js";
 import _poolBrassGnat from "../pool/brass-gnat.js";
 import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
@@ -791,6 +792,7 @@ import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
 import _poolSoltariEmissary from "../pool/soltari-emissary.js";
 import _poolSoltariMonk from "../pool/soltari-monk.js";
 import _poolSongbirdsBlessing from "../pool/songbirds-blessing.js";
+import _poolSophinaSpearsageDeserter from "../pool/sophina-spearsage-deserter.js";
 import _poolSoratamiCloudskater from "../pool/soratami-cloudskater.js";
 import _poolSorceresssSchemes from "../pool/sorceresss-schemes.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
@@ -839,6 +841,7 @@ import _poolStrayFromHistory from "../pool/stray-from-history.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolStrongTheBrutishThespian from "../pool/strong-the-brutish-thespian.js";
+import _poolStudyTheClassics from "../pool/study-the-classics.js";
 import _poolSubterraneanHangar from "../pool/subterranean-hangar.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSunglassesOfUrza from "../pool/sunglasses-of-urza.js";
@@ -1152,6 +1155,7 @@ const shard: CardShard = {
     _poolBorborygmosEnraged,
     _poolBorealShelf,
     _poolBorosMastiff,
+    _poolBoscoJustABear,
     _poolBranchingBolt,
     _poolBrassGnat,
     _poolBrassTalonChimera,
@@ -1826,6 +1830,7 @@ const shard: CardShard = {
     _poolSoltariEmissary,
     _poolSoltariMonk,
     _poolSongbirdsBlessing,
+    _poolSophinaSpearsageDeserter,
     _poolSoratamiCloudskater,
     _poolSorceresssSchemes,
     _poolSorinsThirst,
@@ -1874,6 +1879,7 @@ const shard: CardShard = {
     _poolStrokeOfMidnight,
     _poolStromkirkCondemned,
     _poolStrongTheBrutishThespian,
+    _poolStudyTheClassics,
     _poolSubterraneanHangar,
     _poolSummitSentinel,
     _poolSunglassesOfUrza,

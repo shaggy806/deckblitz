@@ -256,6 +256,7 @@ import _poolDuskwalker from "../pool/duskwalker.js";
 import _poolDutifulReturn from "../pool/dutiful-return.js";
 import _poolEarthServant from "../pool/earth-servant.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
+import _poolEarthshakerGiant from "../pool/earthshaker-giant.js";
 import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
 import _poolEchoingReturn from "../pool/echoing-return.js";
@@ -827,6 +828,7 @@ import _poolSteelOfTheGodhead from "../pool/steel-of-the-godhead.js";
 import _poolStickytongueSentinel from "../pool/stickytongue-sentinel.js";
 import _poolStoneCatapult from "../pool/stone-catapult.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
+import _poolStormOfMemories from "../pool/storm-of-memories.js";
 import _poolStudentOfElements from "../pool/student-of-elements.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
@@ -1275,6 +1277,7 @@ const shard: CardShard = {
     _poolDutifulReturn,
     _poolEarthServant,
     _poolEarthblighter,
+    _poolEarthshakerGiant,
     _poolEbondeathDracolich,
     _poolEccentricApprentice,
     _poolEchoingReturn,
@@ -1846,6 +1849,7 @@ const shard: CardShard = {
     _poolStickytongueSentinel,
     _poolStoneCatapult,
     _poolStonecoilSerpent,
+    _poolStormOfMemories,
     _poolStudentOfElements,
     _poolSublimeEpiphany,
     _poolSubtleStrike,

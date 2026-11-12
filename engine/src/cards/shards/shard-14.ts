@@ -441,6 +441,7 @@ import _poolIdeasUnbound from "../pool/ideas-unbound.js";
 import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
 import _poolIllunaApexOfWishes from "../pool/illuna-apex-of-wishes.js";
 import _poolIllusion from "../pool/illusion.js";
+import _poolImaryllElfhameElite from "../pool/imaryll-elfhame-elite.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInBolassClutches from "../pool/in-bolass-clutches.js";
@@ -521,6 +522,7 @@ import _poolLordOfTheVoid from "../pool/lord-of-the-void.js";
 import _poolLordOfTresserhorn from "../pool/lord-of-tresserhorn.js";
 import _poolLotusRing from "../pool/lotus-ring.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
+import _poolLoyalFireSage from "../pool/loyal-fire-sage.js";
 import _poolLoyalUnicorn from "../pool/loyal-unicorn.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuSuWuAdvisor from "../pool/lu-su-wu-advisor.js";
@@ -1457,6 +1459,7 @@ const shard: CardShard = {
     _poolIdolOfTheDeepKing,
     _poolIllunaApexOfWishes,
     _poolIllusion,
+    _poolImaryllElfhameElite,
     _poolImpassionedOrator,
     _poolImposingVisage,
     _poolInBolassClutches,
@@ -1537,6 +1540,7 @@ const shard: CardShard = {
     _poolLordOfTresserhorn,
     _poolLotusRing,
     _poolLoxodonStalwart,
+    _poolLoyalFireSage,
     _poolLoyalUnicorn,
     _poolLoyalWarhound,
     _poolLuSuWuAdvisor,

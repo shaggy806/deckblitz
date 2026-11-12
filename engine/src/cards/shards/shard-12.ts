@@ -420,6 +420,7 @@ import _poolHelmOfPossession from "../pool/helm-of-possession.js";
 import _poolHickoryWoodlot from "../pool/hickory-woodlot.js";
 import _poolHiddenPath from "../pool/hidden-path.js";
 import _poolHidetsuguAndKairi from "../pool/hidetsugu-and-kairi.js";
+import _poolHighcliffFelidar from "../pool/highcliff-felidar.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHowlpackAvenger from "../pool/howlpack-avenger.js";
@@ -512,6 +513,7 @@ import _poolLunarMystic from "../pool/lunar-mystic.js";
 import _poolLunge from "../pool/lunge.js";
 import _poolLushGrowth from "../pool/lush-growth.js";
 import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
+import _poolMaeveInsidiousSinger from "../pool/maeve-insidious-singer.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarathWillOfTheWild from "../pool/marath-will-of-the-wild.js";
@@ -524,6 +526,7 @@ import _poolMaskOfTheMimic from "../pool/mask-of-the-mimic.js";
 import _poolMassacre from "../pool/massacre.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMasticore from "../pool/masticore.js";
+import _poolMathiseSurgeChanneler from "../pool/mathise-surge-channeler.js";
 import _poolMatzalantliTheGreatDoor from "../pool/matzalantli-the-great-door.js";
 import _poolMaularTheNextEvolution from "../pool/maular-the-next-evolution.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
@@ -1005,6 +1008,7 @@ import _tokensElementalToken55 from "../tokens/elemental-token-5-5.js";
 import _tokensElementalTokenDinOfTheFireherd from "../tokens/elemental-token-din-of-the-fireherd.js";
 import _tokensFaerieTokenGlenElendrasAnswer from "../tokens/faerie-token-glen-elendras-answer.js";
 import _tokensHamsterToken from "../tokens/hamster-token.js";
+import _tokensLaserbeakToken from "../tokens/laserbeak-token.js";
 import _tokensNinjaTokenDarkLeoShredder from "../tokens/ninja-token-dark-leo-shredder.js";
 import _tokensPhyrexianGolemToken from "../tokens/phyrexian-golem-token.js";
 import _tokensPhyrexianMyrTokenMyrSire from "../tokens/phyrexian-myr-token-myr-sire.js";
@@ -1438,6 +1442,7 @@ const shard: CardShard = {
     _poolHickoryWoodlot,
     _poolHiddenPath,
     _poolHidetsuguAndKairi,
+    _poolHighcliffFelidar,
     _poolHonorboundPage,
     _poolHornetSting,
     _poolHowlpackAvenger,
@@ -1530,6 +1535,7 @@ const shard: CardShard = {
     _poolLunge,
     _poolLushGrowth,
     _poolLysAlanaInformant,
+    _poolMaeveInsidiousSinger,
     _poolManaTithe,
     _poolManifestDread,
     _poolMarathWillOfTheWild,
@@ -1542,6 +1548,7 @@ const shard: CardShard = {
     _poolMassacre,
     _poolMasterfulReplication,
     _poolMasticore,
+    _poolMathiseSurgeChanneler,
     _poolMatzalantliTheGreatDoor,
     _poolMaularTheNextEvolution,
     _poolMelokuTheCloudedMirror,
@@ -2025,6 +2032,7 @@ const shard: CardShard = {
     _tokensElementalTokenDinOfTheFireherd,
     _tokensFaerieTokenGlenElendrasAnswer,
     _tokensHamsterToken,
+    _tokensLaserbeakToken,
     _tokensNinjaTokenDarkLeoShredder,
     _tokensPhyrexianGolemToken,
     _tokensPhyrexianMyrTokenMyrSire,

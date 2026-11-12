@@ -779,6 +779,7 @@ import _poolSoulOfWindgrace from "../pool/soul-of-windgrace.js";
 import _poolSoulOfZendikar from "../pool/soul-of-zendikar.js";
 import _poolSoulsurgeElemental from "../pool/soulsurge-elemental.js";
 import _poolSoundTheCall from "../pool/sound-the-call.js";
+import _poolSoundwaveSonicSpy from "../pool/soundwave-sonic-spy.js";
 import _poolSparktongueDragon from "../pool/sparktongue-dragon.js";
 import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
@@ -1783,6 +1784,7 @@ const shard: CardShard = {
     _poolSoulOfZendikar,
     _poolSoulsurgeElemental,
     _poolSoundTheCall,
+    _poolSoundwaveSonicSpy,
     _poolSparktongueDragon,
     _poolSpectralRider,
     _poolSpellSwindle,

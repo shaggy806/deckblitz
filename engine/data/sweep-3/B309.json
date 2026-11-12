@@ -1,0 +1,448 @@
+{
+ "batch": "B309",
+ "status": "done",
+ "ranks": "EDHREC ranks 12838–15470 (2026-11-12), one card-author agent dispatched beside B308's features; no engine code — its blocked cards' small features wait for a later session (the user moved the focus to the top 5000's last cards). The agent saw a `turn-history` condition with `who: \"that-player\"` inside `countPlayers.where` count every player (Azula uses an `of-player` wrapper instead): unconfirmed.",
+ "authored": [
+  {
+   "name": "Ancestor Dragon",
+   "files": [
+    "engine/src/cards/pool/ancestor-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azula, Ruthless Firebender",
+   "files": [
+    "engine/src/cards/pool/azula-ruthless-firebender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boing!",
+   "files": [
+    "engine/src/cards/pool/boing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bosco, Just a Bear",
+   "files": [
+    "engine/src/cards/pool/bosco-just-a-bear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calculating Lich",
+   "files": [
+    "engine/src/cards/pool/calculating-lich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Double Trouble",
+   "files": [
+    "engine/src/cards/pool/double-trouble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earthshaker Giant",
+   "files": [
+    "engine/src/cards/pool/earthshaker-giant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elephant-Mandrill",
+   "files": [
+    "engine/src/cards/pool/elephant-mandrill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ellie and Alan, Paleontologists",
+   "files": [
+    "engine/src/cards/pool/ellie-and-alan-paleontologists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elmar, Ulvenwald Informant",
+   "files": [
+    "engine/src/cards/pool/elmar-ulvenwald-informant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frantic Confrontation",
+   "files": [
+    "engine/src/cards/pool/frantic-confrontation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gandalf, Party Guest",
+   "files": [
+    "engine/src/cards/pool/gandalf-party-guest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gandalf, Shadow's Foe",
+   "files": [
+    "engine/src/cards/pool/gandalf-shadows-foe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Goliath",
+   "files": [
+    "engine/src/cards/pool/goblin-goliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grasping Tentacles",
+   "files": [
+    "engine/src/cards/pool/grasping-tentacles.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gregor, Shrewd Magistrate",
+   "files": [
+    "engine/src/cards/pool/gregor-shrewd-magistrate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Giganotosaurus",
+   "files": [
+    "engine/src/cards/pool/grim-giganotosaurus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Highcliff Felidar",
+   "files": [
+    "engine/src/cards/pool/highcliff-felidar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imaryll, Elfhame Elite",
+   "files": [
+    "engine/src/cards/pool/imaryll-elfhame-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lara Croft, Tomb Raider",
+   "files": [
+    "engine/src/cards/pool/lara-croft-tomb-raider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lethal Protection",
+   "files": [
+    "engine/src/cards/pool/lethal-protection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lost in Memories",
+   "files": [
+    "engine/src/cards/pool/lost-in-memories.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loyal Fire Sage",
+   "files": [
+    "engine/src/cards/pool/loyal-fire-sage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Maeve, Insidious Singer",
+   "files": [
+    "engine/src/cards/pool/maeve-insidious-singer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mathise, Surge Channeler",
+   "files": [
+    "engine/src/cards/pool/mathise-surge-channeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Michelangelo, On the Scene",
+   "files": [
+    "engine/src/cards/pool/michelangelo-on-the-scene.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Momo, Rambunctious Rascal",
+   "files": [
+    "engine/src/cards/pool/momo-rambunctious-rascal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monoxa, Midway Manager",
+   "files": [
+    "engine/src/cards/pool/monoxa-midway-manager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nathan Drake, Treasure Hunter",
+   "files": [
+    "engine/src/cards/pool/nathan-drake-treasure-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slight Malfunction",
+   "files": [
+    "engine/src/cards/pool/slight-malfunction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sokka and Suki",
+   "files": [
+    "engine/src/cards/pool/sokka-and-suki.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sokka, Swordmaster",
+   "files": [
+    "engine/src/cards/pool/sokka-swordmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sophina, Spearsage Deserter",
+   "files": [
+    "engine/src/cards/pool/sophina-spearsage-deserter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soundwave, Sonic Spy // Soundwave, Superior Captain",
+   "files": [
+    "engine/src/cards/pool/soundwave-sonic-spy.ts",
+    "engine/src/cards/pool/soundwave-superior-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stardew Valley",
+   "files": [
+    "engine/src/cards/pool/stardew-valley.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm of Memories",
+   "files": [
+    "engine/src/cards/pool/storm-of-memories.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Study the Classics",
+   "files": [
+    "engine/src/cards/pool/study-the-classics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tadeas, Juniper Ascendant",
+   "files": [
+    "engine/src/cards/pool/tadeas-juniper-ascendant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Howling Abomination",
+   "files": [
+    "engine/src/cards/pool/the-howling-abomination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thorin, Company's Leader",
+   "files": [
+    "engine/src/cards/pool/thorin-companys-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thranduil the Strategist",
+   "files": [
+    "engine/src/cards/pool/thranduil-the-strategist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vogar, Necropolis Tyrant",
+   "files": [
+    "engine/src/cards/pool/vogar-necropolis-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zuko, Avatar Hunter",
+   "files": [
+    "engine/src/cards/pool/zuko-avatar-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zuko, Seeking Honor",
+   "files": [
+    "engine/src/cards/pool/zuko-seeking-honor.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Deadbeat Attendant",
+   "needs": [
+    "mechanic:attractions"
+   ],
+   "size": "major",
+   "why": "The Attraction deck, opening an Attraction and rolling to visit (rule 717) aren't built — the user deferred Attractions on 2026-11-12."
+  },
+  {
+   "name": "Discourtesy Clerk",
+   "needs": [
+    "mechanic:attractions"
+   ],
+   "size": "major",
+   "why": "The Attraction deck, opening an Attraction and rolling to visit (rule 717) aren't built — the user deferred Attractions on 2026-11-12."
+  },
+  {
+   "name": "Step Right Up",
+   "needs": [
+    "mechanic:attractions"
+   ],
+   "size": "major",
+   "why": "The Attraction deck, opening an Attraction and rolling to visit (rule 717) aren't built — the user deferred Attractions on 2026-11-12."
+  },
+  {
+   "name": "Quick Fixer",
+   "needs": [
+    "mechanic:attractions"
+   ],
+   "size": "major",
+   "why": "The Attraction deck, opening an Attraction and rolling to visit (rule 717) aren't built — the user deferred Attractions on 2026-11-12."
+  },
+  {
+   "name": "Monitor Monitor",
+   "needs": [
+    "mechanic:attractions",
+    "replacement:reroll-dice"
+   ],
+   "size": "major",
+   "why": "The Attraction deck, opening an Attraction and rolling to visit (rule 717) aren't built — the user deferred Attractions on 2026-11-12. It also lets you pay {1} once each turn to reroll dice you just rolled."
+  },
+  {
+   "name": "Myra the Magnificent",
+   "needs": [
+    "mechanic:attractions"
+   ],
+   "size": "major",
+   "why": "The Attraction deck, opening an Attraction and rolling to visit (rule 717) aren't built — the user deferred Attractions on 2026-11-12. It also needs midway counters and a \"whenever you visit it\" delayed trigger."
+  },
+  {
+   "name": "Command Performance",
+   "needs": [
+    "mechanic:attractions",
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "The Attraction deck, opening an Attraction and rolling to visit (rule 717) aren't built — the user deferred Attractions on 2026-11-12. It also needs stickers and tickets ({TK})."
+  },
+  {
+   "name": "Malik, Grim Manipulator",
+   "needs": [
+    "mechanic:secret-choice"
+   ],
+   "size": "major",
+   "why": "You and an opponent each secretly choose one of that player's creatures, then both are revealed and sacrificed: a secret simultaneous choice is a new kind of decision."
+  },
+  {
+   "name": "Embiggen",
+   "needs": [
+    "amount:type-count"
+   ],
+   "size": "small",
+   "why": "No amount counts a permanent's supertypes, card types and subtypes as the spell resolves."
+  },
+  {
+   "name": "Flamewar, Brash Veteran // Flamewar, Streetwise Operative",
+   "needs": [
+    "effect:return-exiled-with-counter"
+   ],
+   "size": "small",
+   "why": "\"Put all exiled cards you own with intel counters on them into your hand\": those cards are face down, and look-and-choose in exile can't pick a face-down card by a counter filter."
+  },
+  {
+   "name": "Arcee, Sharpshooter // Arcee, Acrobatic Coupe",
+   "needs": [
+    "amount:spell-target-count"
+   ],
+   "size": "small",
+   "why": "\"That many\" is how many creatures and Vehicles you control the triggering spell targets, fixed as it's cast; counting at resolution goes wrong if a target leaves first."
+  },
+  {
+   "name": "Wan Shi Tong, All-Knowing",
+   "needs": [
+    "trigger:cards-put-into-library"
+   ],
+   "size": "small",
+   "why": "No batched \"one or more cards are put into a library from anywhere\" trigger; per its ruling, scry and surveil reordering don't count."
+  },
+  {
+   "name": "Blaster, Combat DJ // Blaster, Morale Booster",
+   "needs": [
+    "keyword:modular"
+   ],
+   "size": "small",
+   "why": "No static grants modular (its enters-with-counters replacement and dies trigger) to other nontoken artifact creatures and Vehicles."
+  },
+  {
+   "name": "Xenosquirrels",
+   "needs": [
+    "replacement:modify-roll-result"
+   ],
+   "size": "small",
+   "why": "Nothing lets a player, after rolling, pay to raise or lower the result by 1."
+  },
+  {
+   "name": "Bamboozling Beeble",
+   "needs": [
+    "replacement:extra-die-chosen-ignore"
+   ],
+   "size": "small",
+   "why": "A one-shot replacement on a target player's next roll this turn, where the effect's controller chooses which die to ignore (Barbarian Class only ignores the lowest)."
+  },
+  {
+   "name": "The Fourteenth Doctor",
+   "needs": [
+    "replacement:copy-on-enter-options"
+   ],
+   "size": "small",
+   "why": "copyOnEnter can't add \"if you do, it gains haste until end of turn\" as part of the replacement; a whenYouDo would make it a trigger that can be responded to."
+  }
+ ]
+}

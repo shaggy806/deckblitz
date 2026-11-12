@@ -360,6 +360,7 @@ import _poolGravityWell from "../pool/gravity-well.js";
 import _poolGraywatersFixer from "../pool/graywaters-fixer.js";
 import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
+import _poolGregorShrewdMagistrate from "../pool/gregor-shrewd-magistrate.js";
 import _poolGrimFlowering from "../pool/grim-flowering.js";
 import _poolGrimStrider from "../pool/grim-strider.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
@@ -560,6 +561,7 @@ import _poolMoltenFrame from "../pool/molten-frame.js";
 import _poolMoltingHarpy from "../pool/molting-harpy.js";
 import _poolMomentOfGlory from "../pool/moment-of-glory.js";
 import _poolMomentumBreaker from "../pool/momentum-breaker.js";
+import _poolMonoxaMidwayManager from "../pool/monoxa-midway-manager.js";
 import _poolMonsterMashup from "../pool/monster-mashup.js";
 import _poolMoonBoyDinoRider from "../pool/moon-boy-dino-rider.js";
 import _poolMoonstoneHarbinger from "../pool/moonstone-harbinger.js";
@@ -793,6 +795,7 @@ import _poolSmite from "../pool/smite.js";
 import _poolSnowfall from "../pool/snowfall.js";
 import _poolSnowhornRider from "../pool/snowhorn-rider.js";
 import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
+import _poolSokkaSwordmaster from "../pool/sokka-swordmaster.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
 import _poolSoldOut from "../pool/sold-out.js";
 import _poolSorinVengefulBloodlord from "../pool/sorin-vengeful-bloodlord.js";
@@ -1398,6 +1401,7 @@ const shard: CardShard = {
     _poolGraywatersFixer,
     _poolGreaterBasilisk,
     _poolGreenhouseRicketyGazebo,
+    _poolGregorShrewdMagistrate,
     _poolGrimFlowering,
     _poolGrimStrider,
     _poolGrindingStation,
@@ -1598,6 +1602,7 @@ const shard: CardShard = {
     _poolMoltingHarpy,
     _poolMomentOfGlory,
     _poolMomentumBreaker,
+    _poolMonoxaMidwayManager,
     _poolMonsterMashup,
     _poolMoonBoyDinoRider,
     _poolMoonstoneHarbinger,
@@ -1831,6 +1836,7 @@ const shard: CardShard = {
     _poolSnowfall,
     _poolSnowhornRider,
     _poolSoaringLightbringer,
+    _poolSokkaSwordmaster,
     _poolSokkasSwordTraining,
     _poolSoldOut,
     _poolSorinVengefulBloodlord,
