@@ -8011,3 +8011,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Cultivate: the prompt says which find goes where
 - **Do:** Cast Cultivate. In the search, click Swamp, then Island, and confirm.
 - **Expect:** The popup's title reads "Choose up to 2 cards: the first you pick goes onto the battlefield, the other into your hand". The Swamp enters tapped and the Island is in your hand.
+
+## "Same for all" on a choice of modes (2026-11-11)
+
+### Tireless Provisioner: one Food-or-Treasure answer for all three
+- **Do:** Play the Forest, then pass (Space). When the first Tireless Provisioner asks you to choose, tick **Same for all 3** and click "Create a Treasure token.", then keep passing until the stack is empty.
+- **Expect:** Neither of the other two asks: three Treasure tokens arrive, one from each Provisioner.

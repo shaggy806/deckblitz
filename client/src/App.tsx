@@ -2001,6 +2001,9 @@ function Table({
   // The X typed for a "you may pay {X}" / "any amount of {E}" (the offer's
   // `xCost`): null until edited, meaning the most it may be.
   const [modeX, setModeX] = useState<number | null>(null)
+  // "Same for all" ticked on a trigger's choice among modes (the offer's
+  // `sameForAll`): the answer goes for its identical triggers too.
+  const [modesForAll, setModesForAll] = useState(false)
   const [sacrificePicks, setSacrificePicks] = useState<readonly ObjectId[]>([])
   const [permanentPicks, setPermanentPicks] = useState<readonly ObjectId[]>([])
   // The permanents put into the first pile so far, separating on the board.
@@ -4953,6 +4956,10 @@ function Table({
             ? [...prev.slice(1), i]
             : [...prev, i],
       )
+    // A choice among modes with identical triggers under it: ticked, the
+    // answer goes for all of them (a "you may" has its own buttons below).
+    const offerForAll = !optional && sameForAll !== undefined
+    const forAll = offerForAll && modesForAll ? { forAll: true } : {}
     controls = (
       <div className="controls">
         <span>
@@ -4969,6 +4976,15 @@ function Table({
           {/* …or once per card (Sylvan Library). */}
           {aboutCard !== undefined ? ` — ${game.nameOf(aboutCard)}` : ''}
         </span>
+        {offerForAll ? (
+          <label
+            className="modes-for-all"
+            title={`The same choice for this trigger and the ${sameForAll} identical ${sameForAll === 1 ? 'one' : 'ones'} under it on the stack`}
+          >
+            <input type="checkbox" checked={modesForAll} onChange={(e) => setModesForAll(e.target.checked)} />
+            Same for all {(sameForAll ?? 0) + 1}
+          </label>
+        ) : null}
         {optional ? (
           <>
             {xCost !== undefined && (
@@ -5053,7 +5069,7 @@ function Table({
                 type="button"
                 onClick={() =>
                   askLifeThen(modesChoiceAction,(life) =>
-                    sendModes({ type: 'choose-modes', player: seat, modes: [i], ...life }),
+                    sendModes({ type: 'choose-modes', player: seat, modes: [i], ...forAll, ...life }),
                   )
                 }
               >
@@ -5063,7 +5079,7 @@ function Table({
             {oneOrNone && (
               <button
                 type="button"
-                onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [] })}
+                onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [], ...forAll })}
               >
                 Choose none
               </button>
@@ -5087,7 +5103,7 @@ function Table({
               disabled={modePicks.length < minModes || modePicks.length > maxModes}
               onClick={() =>
                 askLifeThen(modesChoiceAction,(life) =>
-                  sendModes({ type: 'choose-modes', player: seat, modes: [...modePicks], ...life }),
+                  sendModes({ type: 'choose-modes', player: seat, modes: [...modePicks], ...forAll, ...life }),
                 )
               }
             >
@@ -5098,7 +5114,7 @@ function Table({
             {orNone && (
               <button
                 type="button"
-                onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [] })}
+                onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [], ...forAll })}
               >
                 Choose none
               </button>

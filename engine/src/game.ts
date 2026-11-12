@@ -8330,13 +8330,16 @@ export class Game {
       for (const mode of modes) applyEffectSpec(mode.effect, context);
       return;
     }
-    // A resolving trigger's "you may": the same question for identical
-    // triggers under it can be answered along with this one. Not an amount
-    // of energy, which each pays from what is left.
+    // A resolving trigger's "you may", or its choice among several modes:
+    // the same question for identical triggers under it can be answered
+    // along with this one. Not an amount of energy, which each pays from what
+    // is left, nor a vote. Nor a choice among modes asked once per player or
+    // card (myriad, Sylvan Library), whose questions differ.
     const resolving = this.resolvingTrigger;
+    const yesOrNo = minModes === 0 && maxModes === 1 && offered.length === 1;
     const trigger =
-      resolving !== null && ability.vote === undefined && energyX === undefined && minModes === 0 &&
-        maxModes === 1 && offered.length === 1
+      resolving !== null && ability.vote === undefined && energyX === undefined &&
+        (yesOrNo || (ability.about === undefined && ability.aboutObject === undefined && ability.aboutCard === undefined))
         ? { ...resolving, ...this.identicalTriggers(resolving.signature, resolving.object) }
         : undefined;
     this.state.awaiting = {
@@ -8537,7 +8540,8 @@ export class Game {
 
     // "The same for all of them": the identical triggers under this one get
     // this answer as each resolves (a shortcut, rule 732.2a). Only the
-    // yes-or-no — each chose its own targets as it went on the stack.
+    // yes-or-no or the modes chosen — each chose its own targets as it went
+    // on the stack.
     const trigger = awaiting.trigger;
     if (forAll && trigger !== undefined && trigger.alikeCount > 0) {
       (this.state.standingModeAnswers ??= []).push({
@@ -28619,6 +28623,8 @@ export class Game {
     const outerSourceTimestamp = this.resolvingSourceTimestamp;
     this.resolvingSourceTimestamp = next.sourceTimestamp ?? null;
     this.state.decisionSource = next.decisionSource;
+    const outerTrigger = this.resolvingTrigger;
+    this.resolvingTrigger = next.resolvingTrigger ?? null;
     try {
       applyEffectSpec(
         next.effect,
@@ -28644,6 +28650,7 @@ export class Game {
       );
     } finally {
       this.resolvingSourceTimestamp = outerSourceTimestamp;
+      this.resolvingTrigger = outerTrigger;
       // As `withDecisionSource` leaves it: a queued prompt carries its own.
       if (this.state.awaiting === null) this.state.decisionSource = null;
     }
@@ -30209,21 +30216,31 @@ export class Game {
    * What makes two triggered abilities the *same* trigger, for answering
    * their "you may"s together (`GameState.standingModeAnswers`): the same
    * controller, and the same ability of a card with the same name — or the
-   * same ability granted by the same static. `null` for anything else: an
-   * activated ability, a chapter, a delayed or reflexive trigger, or one a
-   * resolved effect granted.
+   * same ability granted by the same static — or the same ability a
+   * resolved effect granted (`modifier`: its text and effect, which is all
+   * that names it once granted). `null` for anything else: an activated
+   * ability, a chapter, a delayed or reflexive trigger.
    */
   private triggerSignature(object: GameObject): string | null {
     if (object.kind !== "ability" || object.abilityKind !== "triggered") return null;
     if (object.delayedTrigger !== undefined || object.reflexiveTrigger !== undefined) return null;
     const granted = object.grantedAbility;
-    if (granted !== undefined && granted.kind !== "static" && granted.kind !== "card-triggered") return null;
+    if (
+      granted !== undefined &&
+      granted.kind !== "static" &&
+      granted.kind !== "card-triggered" &&
+      granted.kind !== "modifier"
+    ) {
+      return null;
+    }
     const which =
       granted === undefined
         ? `${printedCardName(object)}:${object.abilityIndex ?? 0}`
         : granted.kind === "card-triggered"
           ? `${granted.cardName}:${granted.index}`
-          : `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`;
+          : granted.kind === "modifier"
+            ? `modifier:${granted.ability.text}:${JSON.stringify(granted.ability.effect)}`
+            : `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`;
     return `${object.controller}|${which}`;
   }
 
@@ -35491,6 +35508,7 @@ export class Game {
           ...(opts.division !== undefined ? { division: [...opts.division] } : {}),
           ...(timestamp !== null ? { sourceTimestamp: timestamp } : {}),
           decisionSource: this.state.decisionSource,
+          ...(this.resolvingTrigger !== null ? { resolvingTrigger: this.resolvingTrigger } : {}),
         });
       },
       // A source that has left the battlefield deals its damage as it last

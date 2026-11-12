@@ -50,11 +50,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   The pages read only printed fields, each ability's text (colour identity)
   and the tokens a card makes. A generated catalog of just those, sharded the same way, would be
   a fraction of the size. The game page loads no definitions up front.
-- **"Same for all" covers only a trigger's yes-or-no "you may"**
-  (`GameState.standingModeAnswers`). Not yet: a resolving trigger's choice among several modes, a
-  "you may" asked after another decision in the same resolution (it parks, and loses
-  `Game.resolvingTrigger`), the second player of an "each player may", and a trigger an effect
-  granted (`grantedAbility` kind `modifier`, which has no signature).
 - **The library's card viewer has no printings panel** (the user's ask, 2026-10-09). Add "just
   a scrollable list of all the sets/printings of a card"; clicking a printing changes the
   displayed one to it. Also keep the next/previous buttons still: today they move as the

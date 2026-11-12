@@ -4508,7 +4508,9 @@ export type AwaitingDecision =
        * stack under it — `alikeCount` counts each copy a stack object stands
        * for (`stackCount`). With any there, the chooser may answer for all of
        * them at once (`choose-modes`' `forAll` — a shortcut, rule 732.2a).
-       * Absent for a spell, a ward payment, or a choice among several modes.
+       * Also a resolving trigger's choice among several modes, unless it's
+       * asked once per player or card (`about`). Absent for a spell, a ward
+       * payment, a vote or an amount of energy.
        */
       readonly trigger?: {
         readonly object: ObjectId;
@@ -5175,6 +5177,10 @@ export interface ParkedSteps {
   /** What the resolution's decisions are said to come from — restored while
    * the rest runs, so a decision it raises still names its card. */
   readonly decisionSource: DecisionSource | null;
+  /** The triggered ability resolving (`Game.triggerSignature`), restored
+   * while the rest runs: a "you may" asked after another decision in the
+   * same resolution still offers "the same for all" (`standingModeAnswers`). */
+  readonly resolvingTrigger?: { readonly object: ObjectId; readonly signature: string };
 }
 
 
@@ -5622,8 +5628,9 @@ export interface GameState {
   modesChosenEver?: Record<string, number[]>;
   /**
    * "The same for all of them": a player's answer to one trigger's "you
-   * may", standing for the identical triggers that were under it on the
-   * stack (`choose-modes`' `forAll`). Each is answered with it as it
+   * may" or choice of modes — the controller's, or another player's asked
+   * by an "each player may" — standing for the identical triggers that were
+   * under it on the stack (`choose-modes`' `forAll`). Each is answered with it as it
    * resolves, so long as nothing new has gone on the stack since (`stack`
    * is the stack as it was answered: anything added — a response, a new
    * trigger — ends the shortcut, rule 732.2b) and the question is still the

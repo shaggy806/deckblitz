@@ -2304,10 +2304,11 @@ export type LegalAction =
        * "Choose Bob" after the seat; a driver labels the mode with the
        * player's own name from this instead. */
       readonly modePlayers?: readonly (PlayerId | null)[];
-      /** A triggered ability's "you may" with identical triggers still on
-       * the stack under it: how many. The answer's `forAll` gives each of
-       * them the same answer. Their targets were chosen as each went on the
-       * stack, so only the yes-or-no is shared. */
+      /** A triggered ability's "you may", or its choice among several modes
+       * as it resolves, with identical triggers still on the stack under it:
+       * how many. The answer's `forAll` gives each of them the same answer.
+       * Their targets were chosen as each went on the stack, so only the
+       * yes-or-no, or the modes, are shared. */
       readonly sameForAll?: number;
       /** A ward payment (rule 702.21a): mode 0 pays the ward cost of
        * `source`, and choosing none lets `spell` — the chooser's own spell or

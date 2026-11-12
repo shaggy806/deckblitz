@@ -1567,6 +1567,20 @@
   flex: 0 0 100%;
   text-align: left;
 }
+/* "Same for all N" on a trigger's choice among modes: a tick box beside the
+   choices, which it changes. */
+.modes-for-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  cursor: pointer;
+}
+.modes-for-all input {
+  margin: 0;
+  cursor: pointer;
+}
 /* assign-combat-damage: a row per group of interchangeable blockers (see
    game/damageAssignment.ts), in a list that scrolls rather than grows. This
    panel grows *upward* over the board, and with a token stack blocking it

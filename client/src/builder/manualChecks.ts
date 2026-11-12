@@ -12058,4 +12058,8 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     "Assault Suit: it asks nothing while it's on no creature",
     board({ you: { bf: ['Assault Suit', 'Grizzly Bears'] }, opp: { bf: ['Hill Giant'] } }),
   ),
+  preset(
+    'Tireless Provisioner: one Food-or-Treasure answer for all three',
+    board({ you: { bf: ['Tireless Provisioner*3'], hand: ['Forest'] } }),
+  ),
 ]
