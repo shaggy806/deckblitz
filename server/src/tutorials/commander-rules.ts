@@ -295,7 +295,7 @@ export const COMMANDER_RULES: Lesson = {
         {
           id: "the-sums",
           title: "Add it up",
-          body: "Rowan still has 16 life, far more than your commander's 7 power. But the chip says 14, and 14 and 7 make 21. Mira has 3 life, and your other two creatures have 3 power.",
+          body: "Rowan still has 23 life, far more than your commander's 7 power. But the chip says 14, and 14 and 7 make 21. Mira has 3 life, and your other two creatures have 3 power.",
           anchor: "tour:game-commander-damage",
           placement: "bottom",
         },
