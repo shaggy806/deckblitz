@@ -7,9 +7,24 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 
 - **Auto-pass pauses on each opposing spell** (found 2026-11-02, a UX pass; a design call). Auto-pass paused on
   both opposing spells seen, each needing a "Resolve stack" click. (The other half of this item, a land's
-  ability stopping every step, is `skipAbilityOnly`, 2026-11-11.)
-- **The stack's card hides a seat's board** (found 2026-11-02). At 1366×768 it sits over the fourth player's
-  board, just when you're deciding whether to respond to what's on it.
+  ability stopping every step, is `skipAbilityOnly`, 2026-11-11.) Today an armed auto-pass pauses until the
+  stack is empty on any opponent's spell or activation, something of yours targeted or leaving, a player
+  losing, or an attack on you (`Room.interruptSince`). Options put to the user, 2026-11-11: (a) only what
+  touches you — a spell or ability targeting you or yours, an attack on you; quiet, but no chance to answer an
+  untargeted wrath or bomb; (b) only when you could respond — today's triggers, but no pause when the seat holds
+  nothing castable or activatable at instant speed beyond mana (the engine's dead-for-mana / dead-but-for-
+  abilities reads); a deck with no instants never pauses, a counterspell deck pauses whenever it could answer
+  (recommended); (c) a Settings choice of the three, defaulting to (b).
+- **The stack's card hides a seat's board** (found 2026-11-02; a design call, 2026-11-11). At 1366×768 in a
+  4-player room the pile's top card is 188px wide and, as a full-text tile, up to ~460px tall, centred on the
+  screen's middle right of centre: it covers the right end of the top-right board and most of the
+  bottom-right one (a screenshot taken for the user, 2026-11-11). Options put to the
+  user: (a) smaller and card-shaped in 4-player rooms on short screens, its text shrunk to fit — covers about
+  half as much; (b) see-through on demand — a tab on the pile, or holding Alt, fades it to ~15% and lets clicks
+  through to the board under it, nothing moving (recommended); (c) the right-hand boards keep the pile's width
+  free while the stack isn't empty — nothing hidden, but they reflow whenever something is cast or resolves;
+  (d) the pile, smaller, in the seam between the four boards — a little of each board covered instead of a
+  lot of one.
 
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or
