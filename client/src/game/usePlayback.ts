@@ -4,7 +4,7 @@ import { phaseOfStep } from 'engine/client'
 import type { TutorialInfo } from 'protocol'
 import { retimeFlights, scheduleEvents } from './animationSchedule.ts'
 import type { ScheduledEvent } from './animationSchedule.ts'
-import type { AnimationBus, AnimationCue } from './animationBus.ts'
+import type { AnimationBus, AnimationCue, BoardMounted } from './animationBus.ts'
 import { motionPrefs } from './motionPrefs.ts'
 import { tilesOf } from './board.ts'
 import { stackCopiesOf } from './stackCopies.ts'
@@ -212,6 +212,9 @@ export function usePlayback(
     readonly finish: () => void
     readonly timer: number | null
   } | null>(null)
+  /** The frame whose board is about to mount, for the layout effect below to
+   * hand the bus (`AnimationBus.board`). */
+  const mountedRef = useRef<BoardMounted | null>(null)
   /** The board on screen when a frame starts playing — the one its first
    * half runs over. Handed to every cue as `prev`, for what only the old
    * board knows (whose a permanent that has since left was). */
@@ -351,6 +354,15 @@ export function usePlayback(
       // whatever happens — and the layout effect below shortens it to what
       // the flights measure on the new board.
       if (afterMs > 0) timerRef.current = window.setTimeout(finish, afterMs)
+      // The new board's mount, for what changed with no event (`bus.board`).
+      if (watching && prev !== null && events.length > 0) {
+        mountedRef.current = {
+          view: next.view,
+          prev,
+          events,
+          lastBeat: schedule.after.reduce((last, i) => Math.max(last, i.offset), 0),
+        }
+      }
       if (watching && schedule.after.length > 0) {
         pendingAfterRef.current = {
           view: next.view,
@@ -418,6 +430,9 @@ export function usePlayback(
   // of the component that renders `Table` runs after every tile is in the DOM
   // and before any of it is painted.
   useLayoutEffect(() => {
+    const mounted = mountedRef.current
+    mountedRef.current = null
+    if (mounted !== null) busRef.current.board(mounted)
     const pending = pendingAfterRef.current
     if (pending === null) return
     pendingAfterRef.current = null

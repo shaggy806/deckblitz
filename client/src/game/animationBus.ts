@@ -45,6 +45,16 @@ export interface AnimationCue {
 }
 
 type Listener = (cues: readonly AnimationCue[]) => void
+
+/** See `AnimationBus.board`. */
+export interface BoardMounted {
+  readonly view: PlayerView
+  readonly prev: PlayerView
+  /** The frame's new events. */
+  readonly events: readonly GameEvent[]
+  readonly lastBeat: number
+}
+type BoardListener = (mounted: BoardMounted) => void
 /** How long a second-half `putDown` cue's flight takes on the board now
  * mounted (ms, at the viewer's speed). */
 type FlightMeasure = (cue: AnimationCue) => number
@@ -63,6 +73,24 @@ export class AnimationBus {
     return () => {
       if (this.listener === fn) this.listener = null
     }
+  }
+
+  /** A frame's new board has just mounted, before it's painted — whether or
+   * not the frame has a second half to publish: what changed without an
+   * event to say so (a static buff) is read off the two boards
+   * (`AnimationLayer`'s `runStaticBuffs`). `lastBeat` is the second half's
+   * last cue's delay (0 with none). */
+  private boardListener: BoardListener | null = null
+
+  onBoard(fn: BoardListener): () => void {
+    this.boardListener = fn
+    return () => {
+      if (this.boardListener === fn) this.boardListener = null
+    }
+  }
+
+  board(mounted: BoardMounted): void {
+    this.boardListener?.(mounted)
   }
 
   publish(cues: readonly AnimationCue[]): void {

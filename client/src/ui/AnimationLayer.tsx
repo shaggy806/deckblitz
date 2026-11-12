@@ -52,7 +52,7 @@ import {
   libraryPeels,
 } from '../game/animationSchedule.ts'
 import type { PeelPart } from '../game/animationSchedule.ts'
-import type { AnimationBus, AnimationCue } from '../game/animationBus.ts'
+import type { AnimationBus, AnimationCue, BoardMounted } from '../game/animationBus.ts'
 import { motionPrefs, useMotionPrefs } from '../game/motionPrefs.ts'
 import { playSound, preloadSounds } from '../game/sound.ts'
 
@@ -1751,6 +1751,43 @@ function runMark(ev: GameEvent, delay: number): void {
   floatText(wrap, text, tone, delay, duration * 1.5)
 }
 
+/**
+ * A static buff: an anthem or a lord coming or going changes other
+ * permanents' P/T through the layers, with no event naming them (Lord of
+ * Lineage's "other Vampires get +2/+2"). On the new board, every permanent
+ * whose P/T moved while nothing in the frame named it gets the buff's glow
+ * and its "+2/+2", at the frame's last beat. Not across a turn's end, where
+ * a turn's pumps simply wear off.
+ */
+function runStaticBuffs({ view, prev, events, lastBeat }: BoardMounted): void {
+  if (view.turn.number !== prev.turn.number || view.turn.step === 'cleanup') return
+  const named = new Set<string>()
+  for (const event of events) {
+    for (const [key, value] of Object.entries(event)) {
+      if (key === 'seq' || key === 'type') continue
+      if (typeof value === 'string') named.add(value)
+      else if (Array.isArray(value)) for (const v of value) if (typeof v === 'string') named.add(v)
+    }
+  }
+  const delay = lastBeat
+  const duration = scaled(MARK_STEP_MS)
+  const sign = (n: number): string => (n >= 0 ? `+${n}` : `−${-n}`)
+  for (const [id, obj] of Object.entries(view.objects) as [ObjectId, (typeof view.objects)[ObjectId]][]) {
+    if (obj.zone !== 'battlefield' || obj.power === null || obj.toughness === null || named.has(id)) continue
+    const was = prev.objects[id]
+    if (was?.zone !== 'battlefield' || was.power === null || was.toughness === null) continue
+    const dp = obj.power - was.power
+    const dt = obj.toughness - was.toughness
+    if (dp === 0 && dt === 0) continue
+    const wrap = boardTileOf(id)
+    const tile = wrap?.querySelector<HTMLElement>('.mini-tile')
+    if (!wrap || !tile) continue
+    const tone: Tone = dp + dt < 0 ? 'loss' : 'info'
+    glow(tile, tone, delay, duration)
+    floatText(wrap, `${sign(dp)}/${sign(dt)}`, tone, delay, duration * 1.5)
+  }
+}
+
 /** A double-faced card turning over: the new face swings in edge-on. */
 function runFlip(object: ObjectId, delay: number): void {
   const tile = boardTileOf(object)?.querySelector<HTMLElement>('.mini-tile')
@@ -2554,6 +2591,9 @@ export function AnimationLayer({
     },
     [],
   )
+
+  // What changed on a new board with no event to say so.
+  useEffect(() => bus.onBoard(runStaticBuffs), [bus])
 
   useEffect(() => {
     const advanceBannerQueue = () => {
