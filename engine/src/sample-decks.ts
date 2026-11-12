@@ -531,9 +531,9 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
   precon({
     name: "Jeskai Striker",
     bench: true,
-    // The deck's two legendary leads swapped: Shiko and Narset commands it,
-    // and Elsha plays in the 99 — the same 100 cards.
-    commander: "Shiko and Narset, Unified",
+    // Led by its face commander, Elsha, again (the user, 2026-11-11), with
+    // Shiko and Narset, Unified (its commander from 2026-10) in the 99.
+    commander: "Elsha, Threefold Master",
     description: "Jeskai spells: cheap instants and sorceries, prowess and Monk tokens.",
     printed: [
       ["Abrade", 1],
@@ -561,7 +561,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Deep Analysis", 1],
       ["Dismantling Wave", 1],
       ["Electrodominance", 1],
-      ["Elsha, Threefold Master", 1],
       ["Evolving Wilds", 1],
       ["Exotic Orchard", 1],
       ["Expansion // Explosion", 1],
@@ -599,6 +598,7 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Reliquary Tower", 1],
       ["Rite of Replication", 1],
       ["Rugged Prairie", 1],
+      ["Shiko and Narset, Unified", 1],
       ["Shiny Impetus", 1],
       ["Shivan Reef", 1],
       ["Skycloud Expanse", 1],
@@ -1300,7 +1300,10 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
   precon({
     name: "World Shaper",
     bench: true,
-    commander: "Hearthhull, the Worldseed",
+    // Led by its alternate commander, Szarel, Genesis Shepherd, rather than
+    // its face commander, Hearthhull, the Worldseed (the user, 2026-11-11);
+    // Hearthhull takes Szarel's place in the 99.
+    commander: "Szarel, Genesis Shepherd",
     description: "Jund lands: ramp, sacrifice lands and replay them from the graveyard.",
     // Edge of Eternities Commander (MTGJSON `EOC`).
     printed: [
@@ -1337,6 +1340,7 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Groundskeeper", 1],
       ["Hammer of Purphoros", 1],
       ["Harrow", 1],
+      ["Hearthhull, the Worldseed", 1],
       ["Horizon Explorer", 1],
       ["Infernal Grasp", 1],
       ["Juri, Master of the Revue", 1],
@@ -1376,7 +1380,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Sprouting Goblin", 1],
       ["Sulfurous Springs", 1],
       ["Swamp", 5],
-      ["Szarel, Genesis Shepherd", 1],
       ["Tear Asunder", 1],
       ["Terramorphic Expanse", 1],
       ["The Gitrog Monster", 1],
@@ -1678,7 +1681,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("Jeskai Striker", {
-    description: "Shiko and Narset's spells on duals, shocks and fetches, with more bodies that turn every spell into tokens or damage, cheap removal to copy, and a handful of counterspells.",
+    description: "Elsha's spells on duals, shocks and fetches, with more bodies that turn every spell into tokens or damage, cheap removal to copy, and a handful of counterspells.",
     // Kept from the bots (2026-11-11, the user's allowance for a deck no list
     // fix helps): 4 wins in 48 games among the upgrades, then 2 in 48 after
     // its list fix. Ten replayed losses put it on the bots, not the list:
@@ -1701,7 +1704,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Expansion // Explosion", "Murmuring Mystic"],
       ["Sublime Epiphany", "Narset, Enlightened Exile"],
       ["Adaptive Training Post", "Archmage of Runes"],
-      ["Elsha, Threefold Master", "Shiko, Paragon of the Way"],
+      ["Shiko and Narset, Unified", "Shiko, Paragon of the Way"],
       ["Aligned Heart", "Rhystic Study"],
       ["Voracious Bibliophile", "Smothering Tithe"],
       ["Electrodominance", "Lightning Helix"],
@@ -2080,7 +2083,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("World Shaper", {
-    description: "Hearthhull's lands deck on duals, shocks and a full set of fetches to sacrifice, with extra land drops, lands replayed from the graveyard and the strongest landfall payoffs.",
+    description: "Szarel's lands deck on duals, shocks and a full set of fetches to sacrifice, with extra land drops, lands replayed from the graveyard and the strongest landfall payoffs.",
     cards: [
       ["World Breaker", "Avenger of Zendikar"],
       ["Groundskeeper", "Lotus Cobra"],
