@@ -185,6 +185,10 @@ function takeFirstGameFromUrl(): boolean {
 /** The starter deck for someone just out of Learn Commander. */
 const FIRST_GAME_DECK = 'First Flight'
 
+/** How long a seat-board request may wait on the server before the board
+ * takes clicks again anyway (`NetworkGame.lobbyBusy`). */
+const LOBBY_REQUEST_TIMEOUT_MS = 5000
+
 /** What a capture-enabled server has answered so far — see
  * `NetworkGame.capture`. */
 export interface CaptureState {
@@ -340,7 +344,7 @@ export interface NetworkGame {
   sendPassSettings: (settings: PassSettings) => void
   /** Fills an open seat with a basic heuristic bot instead of a human.
    * Omitted `deck` falls back to that seat's positional starter deck. */
-  addBot: (seat: PlayerId, deck?: WireDeck) => void
+  addBot: (seat: PlayerId, deck?: WireDeck, pool?: string) => void
   /** Adds one more seat to the table, up to four — how the table is sized,
    * now that the landing page doesn't ask. Only usable before the game
    * starts. */
@@ -357,6 +361,18 @@ export interface NetworkGame {
   /** Explicitly starts the game — only takes effect once every seat is
    * filled and ready; the server rejects it otherwise. */
   startGame: () => void
+  /**
+   * The seat board's request still waiting on the server, by key
+   * (`'add-seat'`, `'add-bot:<seat>:<pool>'`, `'remove-seat:<seat>'`,
+   * `'ready'`, `'deck:<seat>'`, `'settings'`, `'start'`), or `null`. While
+   * one waits, the seat board's other requests are ignored: each changes
+   * the board only once the server answers (a `room-joined` refresh, or an
+   * `error`), so a second click went out against the board as it was — a
+   * second bot over the first, the same seat removed twice, a solo game
+   * started twice (the user's report, 2026-11-11). Cleared by that answer,
+   * or after `LOBBY_REQUEST_TIMEOUT_MS`.
+   */
+  lobbyBusy: string | null
   dispatch: (action: Action) => void
   passTurn: () => void
   /** Toggles auto-passing my priority windows clean through an opponent's
@@ -490,6 +506,29 @@ export function useNetworkGame(): NetworkGame {
   const [isHost, setIsHost] = useState(false)
   const [botSpeed, setBotSpeedState] = useState<BotSpeed>('slow')
   const [roomSettings, setRoomSettingsState] = useState<RoomSettings | null>(null)
+  // The seat board's request in flight (`NetworkGame.lobbyBusy`): the ref is
+  // what refuses a second click at once, the state what the board draws.
+  const [lobbyBusy, setLobbyBusy] = useState<string | null>(null)
+  const lobbyBusyRef = useRef<string | null>(null)
+  const lobbyTimerRef = useRef<number | null>(null)
+  const endLobbyRequest = useCallback(() => {
+    if (lobbyTimerRef.current !== null) window.clearTimeout(lobbyTimerRef.current)
+    lobbyTimerRef.current = null
+    if (lobbyBusyRef.current === null) return
+    lobbyBusyRef.current = null
+    setLobbyBusy(null)
+  }, [])
+  /** Runs `request` unless another of the seat board's is still waiting. */
+  const lobbyRequest = useCallback(
+    (key: string, request: () => void): void => {
+      if (lobbyBusyRef.current !== null) return
+      lobbyBusyRef.current = key
+      setLobbyBusy(key)
+      lobbyTimerRef.current = window.setTimeout(endLobbyRequest, LOBBY_REQUEST_TIMEOUT_MS)
+      request()
+    },
+    [endLobbyRequest],
+  )
   const [firstPlayerChosen, setFirstPlayerChosen] = useState(false)
   const [stopped, setStopped] = useState<string | null>(null)
   const [botsPaused, setBotsPausedState] = useState(false)
@@ -610,6 +649,8 @@ export function useNetworkGame(): NetworkGame {
           // A seat-board refresh the server sent before it saw my
           // `leave-room` — I've already left, so it mustn't pull me back in.
           if (message.roomId !== roomIdRef.current) return
+          // The seat board as the server now has it: whatever it was asked.
+          endLobbyRequest()
           joiningRef.current = false
           roomIdRef.current = message.roomId
           setRoomId(message.roomId)
@@ -721,6 +762,7 @@ export function useNetworkGame(): NetworkGame {
           return
         }
         case 'state': {
+          endLobbyRequest()
           // The frame carries only the events this socket hasn't had: put
           // the whole log back together, which is what everything past here
           // sees. One that doesn't follow on is dropped, never shown or
@@ -811,6 +853,7 @@ export function useNetworkGame(): NetworkGame {
           return
         }
         case 'error': {
+          endLobbyRequest()
           if (joiningRef.current) {
             // The room itself doesn't exist (e.g. the server restarted) —
             // distinct from a rejected seat claim or in-game dispatch.
@@ -990,9 +1033,9 @@ export function useNetworkGame(): NetworkGame {
     (settings: Partial<RoomSettings>) => {
       const id = roomIdRef.current
       if (id === null) return
-      send({ type: 'set-room-settings', roomId: id, settings })
+      lobbyRequest('settings', () => send({ type: 'set-room-settings', roomId: id, settings }))
     },
-    [send],
+    [send, lobbyRequest],
   )
 
   const setBotsPaused = useCallback(
@@ -1022,11 +1065,14 @@ export function useNetworkGame(): NetworkGame {
       const token = existing && existing.seat === chosen ? existing.clientToken : newClientToken()
       // Not persisted yet — the `room-joined`/`state` handlers store it once
       // the server confirms the claim (see `pendingClaimRef`).
-      pendingClaimRef.current = { seat: chosen, clientToken: token }
-      if (deck !== undefined) noteSentDeck(id, chosen, deck)
-      send({ type: 'claim-seat', roomId: id, seat: chosen, clientToken: token, displayName, deck, ready })
+      const key = ready === true ? 'ready' : deck !== undefined ? `deck:${chosen}` : `claim:${chosen}`
+      lobbyRequest(key, () => {
+        pendingClaimRef.current = { seat: chosen, clientToken: token }
+        if (deck !== undefined) noteSentDeck(id, chosen, deck)
+        send({ type: 'claim-seat', roomId: id, seat: chosen, clientToken: token, displayName, deck, ready })
+      })
     },
-    [send, noteSentDeck],
+    [send, noteSentDeck, lobbyRequest],
   )
 
   const takeSeat = useCallback(
@@ -1093,23 +1139,27 @@ export function useNetworkGame(): NetworkGame {
   )
 
   const addBot = useCallback(
-    (seat: PlayerId, deck?: WireDeck) => {
+    (seat: PlayerId, deck?: WireDeck, pool?: string) => {
       const id = roomIdRef.current
       if (id === null) return
-      if (deck !== undefined) noteSentDeck(id, seat, deck)
-      send({ type: 'add-bot', roomId: id, seat, deck })
+      lobbyRequest(`add-bot:${seat}:${pool ?? ''}`, () => {
+        if (deck !== undefined) noteSentDeck(id, seat, deck)
+        send({ type: 'add-bot', roomId: id, seat, deck })
+      })
     },
-    [send, noteSentDeck],
+    [send, noteSentDeck, lobbyRequest],
   )
 
   const setBotDeck = useCallback(
     (seat: PlayerId, deck: WireDeck) => {
       const id = roomIdRef.current
       if (id === null) return
-      noteSentDeck(id, seat, deck)
-      send({ type: 'set-bot-deck', roomId: id, seat, deck })
+      lobbyRequest(`deck:${seat}`, () => {
+        noteSentDeck(id, seat, deck)
+        send({ type: 'set-bot-deck', roomId: id, seat, deck })
+      })
     },
-    [send, noteSentDeck],
+    [send, noteSentDeck, lobbyRequest],
   )
 
   const leaveRoom = useCallback(() => {
@@ -1145,25 +1195,25 @@ export function useNetworkGame(): NetworkGame {
   const addSeat = useCallback(() => {
     const id = roomIdRef.current
     if (id === null) return
-    send({ type: 'add-seat', roomId: id })
-  }, [send])
+    lobbyRequest('add-seat', () => send({ type: 'add-seat', roomId: id }))
+  }, [send, lobbyRequest])
 
   const removeSeat = useCallback(
     (seat: PlayerId) => {
       const id = roomIdRef.current
       if (id === null) return
-      send({ type: 'remove-seat', roomId: id, seat })
+      lobbyRequest(`remove-seat:${seat}`, () => send({ type: 'remove-seat', roomId: id, seat }))
     },
-    [send],
+    [send, lobbyRequest],
   )
 
   const setReady = useCallback(
     (ready: boolean) => {
       const id = roomIdRef.current
       if (id === null) return
-      send({ type: 'set-ready', roomId: id, ready })
+      lobbyRequest('ready', () => send({ type: 'set-ready', roomId: id, ready }))
     },
-    [send],
+    [send, lobbyRequest],
   )
 
   /**
@@ -1173,7 +1223,7 @@ export function useNetworkGame(): NetworkGame {
    * in this tab's worker and started there, and the server's room is left.
    * Anything else, or no local rooms in this tab, starts it on the server.
    */
-  const startGame = useCallback(() => {
+  const startGameNow = useCallback(() => {
     const id = roomIdRef.current
     if (id === null) return
     const verdict = localMode()
@@ -1216,6 +1266,10 @@ export function useNetworkGame(): NetworkGame {
     setBlitzReport(null)
     sendSolo({ type: 'create-room', hostToken, players: seats.length })
   }, [send, sendSolo, seats, seat, isHost, roomPending, roomSpectators, roomSettings, botSpeed])
+
+  /** `startGameNow`, once: a second click before the server (or the local
+   * start) answers started a solo game twice (`lobbyBusy`). */
+  const startGame = useCallback(() => lobbyRequest('start', startGameNow), [lobbyRequest, startGameNow])
 
   const rematch = useCallback(
     (restart = false) => {
@@ -1419,6 +1473,7 @@ export function useNetworkGame(): NetworkGame {
     addBot,
     setBotDeck,
     addSeat,
+    lobbyBusy,
     removeSeat,
     setReady,
     startGame,

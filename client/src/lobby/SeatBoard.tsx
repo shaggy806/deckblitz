@@ -150,8 +150,13 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
       ? playerLabel(s.player, game.seats)
       : `Player ${game.seats.indexOf(s) + 1}`
 
+  // The request still waiting on the server (`NetworkGame.lobbyBusy`): the
+  // board takes no clicks till it's answered, and the control pressed says so.
+  const busy = game.lobbyBusy
+  const pending = (key: string): string => (busy === key ? ' pending' : '')
+
   return (
-    <div className="seat-board">
+    <div className="seat-board" aria-busy={busy !== null}>
       <div className="seat-board-main">
         <div className="overlay-box seat-board-box" data-tour="lobby-room">
           {children}
@@ -219,7 +224,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                     {removable ? (
                       <button
                         type="button"
-                        className="seat-panel-remove"
+                        className={`seat-panel-remove${pending(`remove-seat:${s.player}`)}`}
                         title="Remove this seat"
                         aria-label={`Remove seat ${i + 1}`}
                         onClick={() => game.removeSeat(s.player)}
@@ -233,6 +238,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                     deck={deck}
                     editable={deckEditable}
                     tour={isMySeat ? 'lobby-my-deck' : undefined}
+                    pending={busy === `deck:${s.player}`}
                     onClick={() => setPickerSeat(s.player)}
                   />
                   {refused !== null ? (
@@ -252,7 +258,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                       amReady ? (
                         <button
                           type="button"
-                          className="seat-panel-ready-btn active"
+                          className={`seat-panel-ready-btn active${pending('ready')}`}
                           data-tour="lobby-ready"
                           onClick={() => game.setReady(false)}
                         >
@@ -261,7 +267,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                       ) : (
                         <button
                           type="button"
-                          className="seat-panel-ready-btn next"
+                          className={`seat-panel-ready-btn next${pending('ready')}`}
                           data-tour="lobby-ready"
                           onClick={readyUp}
                           disabled={refused !== null}
@@ -282,10 +288,10 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                           <button
                             key={pool}
                             type="button"
-                            className="seat-panel-add-bot"
+                            className={`seat-panel-add-bot${pending(`add-bot:${s.player}:${pool}`)}`}
                             title={hint}
                             aria-label={`Add ${label.toLowerCase()} bot`}
-                            onClick={() => game.addBot(s.player, randomBotDeck(game.seats, Math.random, pool))}
+                            onClick={() => game.addBot(s.player, randomBotDeck(game.seats, Math.random, pool), pool)}
                           >
                             {label}
                           </button>
@@ -299,7 +305,13 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
 
             {Array.from({ length: MAX_SEATS - game.seats.length }, (_, i) =>
               canAddSeat ? (
-                <button key={`add-${i}`} type="button" className="seat-add-panel" onClick={game.addSeat}>
+                <button
+                  key={`add-${i}`}
+                  type="button"
+                  // The new seat comes in at the first empty place.
+                  className={`seat-add-panel${i === 0 ? pending('add-seat') : ''}`}
+                  onClick={game.addSeat}
+                >
                   <span className="seat-add-plus">+</span>
                   <span className="seat-add-label">Add player</span>
                 </button>
@@ -317,12 +329,12 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
             {host ? (
               <button
                 type="button"
-                className="start-game-btn"
+                className={`start-game-btn${pending('start')}`}
                 data-tour="lobby-start"
                 disabled={!allReady}
                 onClick={game.startGame}
               >
-                Start Game
+                {busy === 'start' ? 'Starting…' : 'Start Game'}
               </button>
             ) : null}
             {/* Always there (empty for a host with everyone ready), two lines
@@ -365,10 +377,13 @@ function DeckSlot({
   deck,
   editable,
   tour,
+  pending = false,
   onClick,
 }: {
   readonly deck: SlotDeck | null
   readonly editable: boolean
+  /** A deck chosen for it is still on its way to the server. */
+  readonly pending?: boolean
   /** Its `data-tour` name, for my own seat's slot. */
   readonly tour?: string
   readonly onClick: () => void
@@ -379,7 +394,7 @@ function DeckSlot({
     <button
       type="button"
       data-tour={tour}
-      className={`seat-deck-slot${deck ? '' : ' blank'}${editable ? ' editable' : ''}`}
+      className={`seat-deck-slot${deck ? '' : ' blank'}${editable ? ' editable' : ''}${pending ? ' pending' : ''}`}
       onClick={editable ? onClick : undefined}
       disabled={!editable}
     >

@@ -37,7 +37,11 @@ export function RoomSettingsPanel({
   const speedLabel = BOT_SPEEDS.find((s) => s.speed === game.botSpeed)?.label ?? game.botSpeed
 
   return (
-    <section className="room-settings" aria-label="Room settings" data-tour="lobby-settings">
+    <section
+      className={`room-settings${game.lobbyBusy === 'settings' ? ' pending' : ''}`}
+      aria-label="Room settings"
+      data-tour="lobby-settings"
+    >
       <h3 className="room-settings-title">Room settings</h3>
       <div className="room-settings-fields">
         <div className="rs-field">

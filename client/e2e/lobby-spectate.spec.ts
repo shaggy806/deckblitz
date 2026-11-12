@@ -76,6 +76,49 @@ test('the seat board keeps four places: adding a player moves no one', async ({ 
   await host.context().close()
 })
 
+test('a click waiting on the server shows it, and a second one goes nowhere', async ({ browser }) => {
+  const host = await newPage(browser)
+  const errors = pageErrors(host)
+  // A slow connection: everything the page sends leaves 800ms late.
+  await host.addInitScript(() => {
+    const send = WebSocket.prototype.send
+    WebSocket.prototype.send = function (data) {
+      setTimeout(() => send.call(this, data), 800)
+    }
+  })
+  const sent: string[] = []
+  host.on('websocket', (ws) =>
+    ws.on('framesent', ({ payload }) => {
+      const type = typeof payload === 'string' ? /"type":"([a-z-]+)"/.exec(payload)?.[1] : undefined
+      if (type === 'add-seat' || type === 'add-bot') sent.push(type)
+    }),
+  )
+  await host.goto('/')
+  await host.getByRole('button', { name: 'Create a game' }).click()
+  const grid = host.locator('.seat-board-grid')
+  await expect(grid.locator('.seat-panel')).toHaveCount(2, paced)
+
+  await grid.getByRole('button', { name: /Add player/ }).first().dblclick()
+  // Waiting: the board takes no clicks, and the tile pressed says so.
+  await expect(host.locator('.seat-board')).toHaveAttribute('aria-busy', 'true')
+  await expect(grid.locator('.seat-add-panel.pending')).toHaveCount(1)
+  await expect(grid.locator('.seat-panel')).toHaveCount(3, paced)
+  await expect(host.locator('.seat-board')).toHaveAttribute('aria-busy', 'false')
+  // One seat, not two.
+  await host.waitForTimeout(1500)
+  await expect(grid.locator('.seat-panel')).toHaveCount(3)
+  expect(sent).toEqual(['add-seat'])
+
+  // A bot's button, double-clicked: one bot.
+  await host.getByRole('button', { name: 'Add precon bot' }).first().dblclick()
+  await expect(grid.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(1, paced)
+  await host.waitForTimeout(1500)
+  await expect(grid.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(1)
+  expect(sent).toEqual(['add-seat', 'add-bot'])
+  expect(errors).toEqual([])
+  await host.context().close()
+})
+
 test('the host can allow only Commander-legal decks, and everyone sees it', async ({ browser }) => {
   const { host, guest } = await twoPlayerRoom(browser)
   const decks = (page: Page) => page.locator('.rs-options[aria-label="Decks"]')

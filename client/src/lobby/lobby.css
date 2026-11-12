@@ -613,3 +613,68 @@ button.seat-add-panel:hover {
     align-items: center;
   }
 }
+
+/* A seat-board request still waiting on the server (`NetworkGame.lobbyBusy`):
+   the board takes no clicks till it's answered — a second click went out
+   against the board as it was (a second bot over the first, a solo game
+   started twice; the user's report, 2026-11-11) — and shows the wait with
+   the progress cursor. The control pressed gets an accent outline and a
+   small spinner on its corner, from 150ms on, so an answer that comes at
+   once never flashes them. */
+.seat-board[aria-busy='true'] {
+  cursor: progress;
+  /* A double click's second click, passing through the control it pressed,
+     would select a word elsewhere on the board. */
+  user-select: none;
+}
+.seat-board[aria-busy='true'] :is(button, select, input) {
+  pointer-events: none;
+}
+/* A double click on a tile selected its words. */
+.seat-board button {
+  user-select: none;
+}
+.seat-board .pending {
+  position: relative;
+  animation: lobby-pending-outline 0s linear 150ms both;
+}
+.seat-board .pending::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent);
+  border-right-color: transparent;
+  border-radius: 50%;
+  background: var(--panel);
+  animation:
+    lobby-pending-show 0s linear 150ms both,
+    lobby-spin 0.7s linear infinite;
+  z-index: 1;
+}
+@keyframes lobby-pending-outline {
+  from {
+    outline: 0 solid transparent;
+  }
+  to {
+    outline: 2px solid var(--accent);
+  }
+}
+@keyframes lobby-pending-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lobby-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+:root[data-reduce-motion] .seat-board .pending::after {
+  animation: lobby-pending-show 0s linear 150ms both;
+}
