@@ -43551,6 +43551,9 @@ controlledBy,
       for (const id of candidates) {
         if (!used.has(id) || (this.state.objects[id].stackCount ?? 1) > 1) continue;
         const picks = spec.totalPower !== undefined || spec.anyNumber === true ? unused.length + 1 : spec.count;
+        // "Tap X untapped artifacts" at X = 0 (Merchant's Dockhand): nothing is
+        // picked, so there's no subset to try — and a size of -1 never ends.
+        if (picks < 1) continue;
         const payable = (rest: readonly ObjectId[]): boolean =>
           this.payMana(player, manaCost, avoid, exclude, purpose, { withheld: new Set([id, ...rest]) }) !== null;
         if (everySubsetHolds(unused, picks - 1, TAP_CHOICE_TRIALS, payable)) unused.push(id);

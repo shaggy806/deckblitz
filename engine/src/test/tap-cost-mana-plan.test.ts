@@ -69,4 +69,11 @@ describe("a tap cost's choices and the mana plan", () => {
     const { game, dock, artifacts } = board("Sol Ring", "Sol Ring", "Sol Ring");
     expect([...offerAt(game, dock, 2)!.choices].sort()).toEqual([...artifacts].sort());
   });
+
+  it("at X = 0, with the mana paid by the artifacts, offers none and returns", () => {
+    // A situation-fuzzer find (B309): the plan taps the Sol Rings, and a pick
+    // of zero asked for every subset of size -1, which recursed forever.
+    const { game, dock } = board("Sol Ring", "Sol Ring");
+    expect(offerAt(game, dock, 0)!.choices).toEqual([]);
+  });
 });
