@@ -18816,7 +18816,9 @@ export class Game {
         return `${player} may not cast ${def.name} from the top of their library`;
       }
     } else if (via === "graveyard-permission") {
-      const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant);
+      // At the X announced (601.3e): Lurrus's "mana value 2 or less" reaches
+      // an {X} spell only at an X that keeps it there (its ruling).
+      const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant, Math.max(0, Math.floor(xValue)));
       if (found === null) {
         return `${player} has no permission to cast ${def.name} from their graveyard`;
       }
@@ -21381,7 +21383,7 @@ export class Game {
     // while the grant lookup can still see it there.
     let graveyardPermission: PlayTerms | undefined;
     if (via === "graveyard-permission") {
-      const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant);
+      const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant, chosenX);
       if (found !== null) {
         this.spendGraveyardGrant(found);
         graveyardPermission = found.permission;
@@ -43096,14 +43098,14 @@ controlledBy,
    * other cards after the resolved permissions (using it would take the play
    * from them too), then the permanents in battlefield order.
    */
-  private graveyardGrantsFor(player: PlayerId, card: ObjectId, face = 0): GraveyardGrantOption[] {
+  private graveyardGrantsFor(player: PlayerId, card: ObjectId, face = 0, x?: number): GraveyardGrantOption[] {
     const object = this.state.objects[card];
     if (object === undefined || object.zone !== "graveyard") return [];
     const def = this.faceDef(card, face);
     const isLand = def.types.includes("land");
     const out: GraveyardGrantOption[] = [];
     let ownShared: GraveyardGrantOption | undefined;
-    for (const option of this.playOptions(player, card, face)) {
+    for (const option of this.playOptions(player, card, face, x)) {
       const { carrier, terms } = option;
       if (carrier.kind === "card") {
         const entry = { grant: { source: card }, permission: terms, option };
@@ -43149,8 +43151,9 @@ controlledBy,
     card: ObjectId,
     face: number,
     grant: GraveyardGrant | undefined,
+    x?: number,
   ): GraveyardGrantOption | null {
-    const grants = this.graveyardGrantsFor(player, card, face);
+    const grants = this.graveyardGrantsFor(player, card, face, x);
     if (grant === undefined) return grants[0] ?? null;
     return grants.find((g) => g.grant.source === grant.source && g.grant.asType === grant.asType) ?? null;
   }

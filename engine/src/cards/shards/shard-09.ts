@@ -510,6 +510,7 @@ import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLoyalSentry from "../pool/loyal-sentry.js";
 import _poolLumberingSatyr from "../pool/lumbering-satyr.js";
+import _poolLurrusOfTheDreamDen from "../pool/lurrus-of-the-dream-den.js";
 import _poolLushPortico from "../pool/lush-portico.js";
 import _poolLyevSkyknight from "../pool/lyev-skyknight.js";
 import _poolLysAlanaDignitary from "../pool/lys-alana-dignitary.js";
@@ -1551,6 +1552,7 @@ const shard: CardShard = {
     _poolLordOfTheUndead,
     _poolLoyalSentry,
     _poolLumberingSatyr,
+    _poolLurrusOfTheDreamDen,
     _poolLushPortico,
     _poolLyevSkyknight,
     _poolLysAlanaDignitary,

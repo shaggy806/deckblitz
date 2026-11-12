@@ -16107,6 +16107,7 @@ import _poolLurkingNightstalker from "./pool/lurking-nightstalker.js";
 import _poolLurkingPredators from "./pool/lurking-predators.js";
 import _poolLurkingRoper from "./pool/lurking-roper.js";
 import _poolLurkingSkirge from "./pool/lurking-skirge.js";
+import _poolLurrusOfTheDreamDen from "./pool/lurrus-of-the-dream-den.js";
 import _poolLushGrowth from "./pool/lush-growth.js";
 import _poolLushOasis from "./pool/lush-oasis.js";
 import _poolLushPortico from "./pool/lush-portico.js";
@@ -48727,6 +48728,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLurkingPredators,
   _poolLurkingRoper,
   _poolLurkingSkirge,
+  _poolLurrusOfTheDreamDen,
   _poolLushGrowth,
   _poolLushOasis,
   _poolLushPortico,
@@ -81360,6 +81362,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lurking-predators": _poolLurkingPredators,
   "pool/lurking-roper": _poolLurkingRoper,
   "pool/lurking-skirge": _poolLurkingSkirge,
+  "pool/lurrus-of-the-dream-den": _poolLurrusOfTheDreamDen,
   "pool/lush-growth": _poolLushGrowth,
   "pool/lush-oasis": _poolLushOasis,
   "pool/lush-portico": _poolLushPortico,
