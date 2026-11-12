@@ -21,6 +21,10 @@ export interface HoverTarget {
   readonly y: number
   /** The printing this deck brings for the card, if it isn't the default. */
   readonly art?: string | null
+  /** A line (viewport y) the preview stays below while it fits on screen:
+   * the top of the list it hangs off, so a row near the top doesn't put it
+   * over the search box and filters above the list. */
+  readonly clearAbove?: number
 }
 
 /**
@@ -46,7 +50,7 @@ export function CardHoverPreview({ target }: { readonly target: HoverTarget | nu
   const left = previewLeft(target.x, width, window.innerWidth, GAP)
   const toLeft = left < target.x
   const top = Math.min(
-    Math.max(GAP, target.y - PREVIEW_H / 2),
+    Math.max(GAP, target.clearAbove ?? GAP, target.y - PREVIEW_H / 2),
     Math.max(GAP, window.innerHeight - PREVIEW_H - GAP),
   )
 

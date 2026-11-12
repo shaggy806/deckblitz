@@ -375,12 +375,18 @@ export function DeckEditor({
     if (def === undefined) return {}
     // The preview shows the printing this deck brings, not the pool's own
     // art — otherwise picking one gave no feedback anywhere in the builder.
-    const at = (e: MouseEvent): HoverTarget => ({
-      def,
-      x: e.clientX,
-      y: e.clientY,
-      art: deck.printings?.[def.name] ?? null,
-    })
+    // Below the pool list's top: a row near it put the preview over the
+    // search box and the filters (2026-11-02).
+    const at = (e: MouseEvent): HoverTarget => {
+      const list = (e.currentTarget as HTMLElement).closest('.db-card-list')
+      return {
+        def,
+        x: e.clientX,
+        y: e.clientY,
+        art: deck.printings?.[def.name] ?? null,
+        ...(list !== null ? { clearAbove: list.getBoundingClientRect().top } : {}),
+      }
+    }
     return {
       onMouseEnter: (e: MouseEvent) => setHover(at(e)),
       onMouseMove: (e: MouseEvent) => setHover(at(e)),
