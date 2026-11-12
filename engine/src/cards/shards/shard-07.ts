@@ -125,6 +125,7 @@ import _poolCalixDestinysHand from "../pool/calix-destinys-hand.js";
 import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousGiant from "../pool/callous-giant.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
+import _poolCamelliaTheSeedmiser from "../pool/camellia-the-seedmiser.js";
 import _poolCanopySurge from "../pool/canopy-surge.js";
 import _poolCaptainAmericaLivingLegend from "../pool/captain-america-living-legend.js";
 import _poolCaptainMichaelBurnham from "../pool/captain-michael-burnham.js";
@@ -1166,6 +1167,7 @@ const shard: CardShard = {
     _poolCallTheScions,
     _poolCallousGiant,
     _poolCallousInspector,
+    _poolCamelliaTheSeedmiser,
     _poolCanopySurge,
     _poolCaptainAmericaLivingLegend,
     _poolCaptainMichaelBurnham,

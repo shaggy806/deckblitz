@@ -3814,6 +3814,7 @@ import _poolCalmingVerse from "./pool/calming-verse.js";
 import _poolCaltrops from "./pool/caltrops.js";
 import _poolCamaraderie from "./pool/camaraderie.js";
 import _poolCamel from "./pool/camel.js";
+import _poolCamelliaTheSeedmiser from "./pool/camellia-the-seedmiser.js";
 import _poolCameraLauncher from "./pool/camera-launcher.js";
 import _poolCampaignOfVengeance from "./pool/campaign-of-vengeance.js";
 import _poolCampfire from "./pool/campfire.js";
@@ -36433,6 +36434,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaltrops,
   _poolCamaraderie,
   _poolCamel,
+  _poolCamelliaTheSeedmiser,
   _poolCameraLauncher,
   _poolCampaignOfVengeance,
   _poolCampfire,
@@ -69065,6 +69067,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/caltrops": _poolCaltrops,
   "pool/camaraderie": _poolCamaraderie,
   "pool/camel": _poolCamel,
+  "pool/camellia-the-seedmiser": _poolCamelliaTheSeedmiser,
   "pool/camera-launcher": _poolCameraLauncher,
   "pool/campaign-of-vengeance": _poolCampaignOfVengeance,
   "pool/campfire": _poolCampfire,

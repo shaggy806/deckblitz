@@ -1663,6 +1663,11 @@ export type TriggerKind =
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
       readonly selfOnly?: boolean;
+      /** "Whenever you sacrifice **one or more** Foods" (Camellia, the
+       * Seedmiser — rule 603.2c): once per simultaneous event, however many
+       * of its sacrifices match. Its trigger object is the first; don't read
+       * it. */
+      readonly batched?: boolean;
     }
   | {
       /** A permanent was destroyed (rule 701.8): by an effect that says

@@ -2513,6 +2513,9 @@ export class Game {
    * `lastTapSeq` is how the next tapping tells. Not game state: nothing waits
    * between two events of one tapping. */
   private readonly tapBatchFired = new Set<string>();
+  /** Batched `sacrifice` triggers that have fired, each with the leave batch
+   * it fired in (`enterBatchAlreadyFired`). Transient, like `leaveBatch`. */
+  private readonly sacrificeBatchFired = new Map<string, object>();
   private tapBatchHeld = false;
   private lastTapSeq = -2;
   /** Resolutions since a player last did anything but pass priority, and
@@ -31446,6 +31449,10 @@ export class Game {
           if (ability.trigger.on === "becomes-tapped" && ability.trigger.batched === true) {
             this.tapBatchFired.add(`${id}#${index}`);
           }
+          if (ability.trigger.on === "sacrifice" && ability.trigger.batched === true) {
+            if (this.leaveBatch === null) this.sacrificeBatchFired.clear();
+            else this.sacrificeBatchFired.set(`${id}#${index}`, this.leaveBatch);
+          }
           // Each token of the watcher's own stack has the ability, and each
           // triggers (rule 603.2) — except for counters a batch entering
           // with them brought onto it: those were put on the new tokens only
@@ -32359,6 +32366,11 @@ export class Game {
    */
   private enterBatchAlreadyFired(spec: TriggerSpec, key: string): boolean {
     if (spec.on === "becomes-tapped") return spec.batched === true && this.tapBatchFired.has(key);
+    // "Whenever you sacrifice one or more Foods" (Camellia): once per
+    // simultaneous event, the leave batch the sacrifices were made in.
+    if (spec.on === "sacrifice") {
+      return spec.batched === true && this.leaveBatch !== null && this.sacrificeBatchFired.get(key) === this.leaveBatch;
+    }
     return (
       spec.on === "enters-battlefield" &&
       spec.batched === true &&
