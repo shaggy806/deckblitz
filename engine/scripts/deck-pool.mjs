@@ -2,7 +2,8 @@
 // (which inherits the environment): every starter deck; with `--pool
 // upgraded` the precons beside their upgrades (`UPGRADED_DECKS`), to measure
 // what an upgrade is worth; with `--pool blitz` the upgrades alone, the
-// field a blitz deals from, to see how even it is; or with `--pool strong`
+// field a blitz deals from, to see how even it is; with `--pool upgrades`
+// every upgrade, those kept from the bots too; or with `--pool strong`
 // the real players' decks (`STRONG_DECKS`) against those upgrades.
 import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS, botPool } from "../dist/index.js";
 
@@ -10,6 +11,9 @@ const POOLS = {
   upgraded: () => [...SAMPLE_DECKS.filter((d) => UPGRADED_DECKS.some((u) => u.upgradeOf === d.name)), ...UPGRADED_DECKS],
   // What a blitz really deals: less the decks kept from the bots.
   blitz: () => [...botPool(UPGRADED_DECKS)],
+  // Every upgrade, those kept from the bots too (`bots: false`): the field
+  // `upgraded-decks.md`'s Run 3 measured, for comparing against it.
+  upgrades: () => [...UPGRADED_DECKS],
   strong: () => [...UPGRADED_DECKS, ...STRONG_DECKS],
 };
 

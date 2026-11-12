@@ -138,6 +138,23 @@ What run 3 shows:
   static text, so they are cast earlier now) and opponents' removal, which now counts an
   enchantment or artifact as worth destroying. Open, below.
 
+**4. Three new commanders** (2026-11-11, the user's swaps: First Flight led by Kangee, Sky
+Warden; World Shaper by Szarel, Genesis Shepherd; Jeskai Striker by Elsha, Threefold Master — each
+old commander in its 99). `--pool upgrades` (every upgrade, Jeskai Striker too: run 3's field)
+`--rounds 4`, the tables run 3 dealt first: 56 games, 16 a deck, about ±24 points, so only a big
+change would show.
+
+| Deck (Upgraded) | Run 3 (old commander) | Run 4 (new) | Run 4's 95% CI | commander cast |
+|---|---|---|---|---|
+| First Flight | 31.3% (Isperia) | 37.5% (6/16) | 18-61 | 14 of 16 games |
+| World Shaper | 20.8% (Hearthhull) | 25.0% (4/16) | 10-49 | 13 of 16 |
+| Jeskai Striker | 4.2% (Shiko and Narset) | 0.0% (0/16) | 0-19 | 16 of 16 |
+
+No change big enough to see in 16 games: First Flight and World Shaper sit a few points above
+their run-3 rates, well inside the noise, and Jeskai Striker is still last (its average finish
+3.25 of 4) with Elsha cast in every game. The rest of the field landed where run 3 had it (Temur
+Roar first at 50%). A full 12-round run would tell a 10-point change from noise; this one can't.
+
 ## The four weakest decks, diagnosed
 
 After run 2, ten losses of each of Abzan Armor, Jeskai Striker, Grave Danger and Chaos Incarnate
