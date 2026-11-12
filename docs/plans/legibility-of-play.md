@@ -260,9 +260,6 @@ Follow-on ideas, approved by the user on 2026-09-30:
   from a folded tile to take a fresh member per click first: proliferate's toggle acts on
   `ids[0]` (`pickIdForClick` has no proliferate case), so a folded tile of three could only ever
   give one of them a counter. Found 2026-10-03 (`docs/plans/token-stack-choices.md`).
-- **A history entry whose cards have left the board highlights nothing**: `highlightEvent` finds
-  only what's still drawn (a permanent, a stack entry, your hand, a player's panel). It could
-  open the zone the card went to instead.
 - **Half the sounds are still synthesised placeholders** (`game/sound.ts`): the table's own noises
   are recorded now (draw, land, shuffle, discard, mill, counters, dice, a countered spell, and
   combat's sword declarations and hits; CC0 packs, `client/public/sfx/CREDITS.md`), but cast,

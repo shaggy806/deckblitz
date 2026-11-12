@@ -1730,8 +1730,12 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
               seats={game.seats}
               onSelect={(event) => {
                 // The board is in view beside the panel: point the entry's
-                // cards and players out on it.
-                highlightEvent(event)
+                // cards and players out on it — or, for a card since gone to
+                // a graveyard or exile, in that zone.
+                highlightEvent(event, (id) => {
+                  const o = view.objects[id]
+                  return o === undefined ? undefined : { zone: o.zone, owner: o.owner }
+                })
               }}
             />
           </div>

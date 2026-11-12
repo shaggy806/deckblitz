@@ -29,13 +29,19 @@ export function idsInvolved(ev: GameEvent): { objects: ObjectId[]; players: Play
   return { objects: [...objects], players: [...players] }
 }
 
+/** Where a card is now, as the view says: its zone and its owner. */
+export type Locate = (id: ObjectId) => { readonly zone: string; readonly owner: PlayerId } | undefined
+
 /**
  * Points out on the board what a history entry was about: each permanent or
  * spell it names that's still on screen, and each player's panel, pulse twice
- * in the accent colour. Returns how many things it found, so the caller can
- * say when there's nothing left to show (a card since gone to a graveyard).
+ * in the accent colour. When none of its cards is still drawn and one has
+ * gone to a graveyard or to exile (`locate`), that zone opens — through the
+ * owner's own zone button, as a click would — and the card pulses in it.
+ * Returns how many things it found, so the caller can say when there's
+ * nothing left to show.
  */
-export function highlightEvent(ev: GameEvent): number {
+export function highlightEvent(ev: GameEvent, locate?: Locate): number {
   const { objects, players } = idsInvolved(ev)
   const els: HTMLElement[] = []
   for (const id of objects) {
@@ -46,22 +52,46 @@ export function highlightEvent(ev: GameEvent): number {
       document.querySelector<HTMLElement>(`.hand-cards [data-obj-id="${esc}"]`)
     if (el) els.push(el)
   }
+  let opened = 0
+  if (els.length === 0 && locate) {
+    for (const id of objects) {
+      const where = locate(id)
+      if (where === undefined || (where.zone !== 'graveyard' && where.zone !== 'exile')) continue
+      const link = document.querySelector<HTMLButtonElement>(
+        `[data-${where.zone}-count-of="${CSS.escape(where.owner)}"]`,
+      )
+      if (!link || link.disabled) continue
+      link.click()
+      opened = 1
+      // The viewer mounts on the next render.
+      window.setTimeout(() => {
+        const card = document.querySelector<HTMLElement>(`[data-zone-card="${CSS.escape(id)}"] .card-tile`)
+        if (!card) return
+        card.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+        pulse(card)
+      }, 80)
+      break
+    }
+  }
   for (const p of players) {
     const el = document.querySelector<HTMLElement>(`[data-player-id="${CSS.escape(p)}"]`)
     if (el) els.push(el)
   }
-  for (const el of els) {
-    el.animate(
-      [
-        { boxShadow: '0 0 0 0 rgba(120, 200, 255, 0)' },
-        { boxShadow: '0 0 0 4px rgba(120, 200, 255, 0.95), 0 0 24px 8px rgba(90, 170, 255, 0.6)', offset: 0.25 },
-        { boxShadow: '0 0 0 0 rgba(120, 200, 255, 0)', offset: 0.5 },
-        { boxShadow: '0 0 0 4px rgba(120, 200, 255, 0.95), 0 0 24px 8px rgba(90, 170, 255, 0.6)', offset: 0.75 },
-        { boxShadow: '0 0 0 0 rgba(120, 200, 255, 0)' },
-      ],
-      { duration: 1600, easing: 'ease-in-out' },
-    )
-  }
+  for (const el of els) pulse(el)
   if (els[0]) els[0].scrollIntoView({ block: 'nearest', inline: 'nearest' })
-  return els.length
+  return els.length + opened
+}
+
+/** Two accent pulses. */
+function pulse(el: HTMLElement): void {
+  el.animate(
+    [
+      { boxShadow: '0 0 0 0 rgba(120, 200, 255, 0)' },
+      { boxShadow: '0 0 0 4px rgba(120, 200, 255, 0.95), 0 0 24px 8px rgba(90, 170, 255, 0.6)', offset: 0.25 },
+      { boxShadow: '0 0 0 0 rgba(120, 200, 255, 0)', offset: 0.5 },
+      { boxShadow: '0 0 0 4px rgba(120, 200, 255, 0.95), 0 0 24px 8px rgba(90, 170, 255, 0.6)', offset: 0.75 },
+      { boxShadow: '0 0 0 0 rgba(120, 200, 255, 0)' },
+    ],
+    { duration: 1600, easing: 'ease-in-out' },
+  )
 }

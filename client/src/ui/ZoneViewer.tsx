@@ -239,7 +239,9 @@ export function ZoneViewer({
             const other = otherFaceOf(obj, lookup)
             const showOther = other !== null && flipped.has(obj.id)
             return (
-              <div key={obj.id} className="zone-viewer-card">
+              // `data-zone-card`: a History entry about it points it out here
+              // (`ui/highlight.ts`).
+              <div key={obj.id} className="zone-viewer-card" data-zone-card={obj.id}>
                 <CardTile
                   obj={showOther ? other : obj}
                   selected={isPicked}
