@@ -9444,6 +9444,7 @@ export class Game {
     delete this.state.turnUnblockedAssignments;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
+    delete this.state.turn.addedBeginning;
     delete this.state.turn.addedMain;
     delete this.state.turn.endsAfterAddedCombat;
     delete this.state.turn.skipsThisTurn;
@@ -10203,6 +10204,7 @@ export class Game {
     delete this.state.extraMainPhases;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
+    delete this.state.turn.addedBeginning;
     delete this.state.turn.addedMain;
     delete this.state.turn.endsAfterAddedCombat;
     delete this.state.turn.cleanupHadPriority;
@@ -10248,9 +10250,33 @@ export class Game {
     if (addedUpkeepEnding) delete this.state.turn.addedUpkeep;
     const addedMainEnding = this.state.turn.step === "postcombat-main" && this.state.turn.addedMain === true;
     if (addedMainEnding) delete this.state.turn.addedMain;
+    // An additional beginning phase is over with its draw step: what it came
+    // after decides what follows (below).
+    const beginningEnded = this.state.turn.step === "draw" ? this.state.turn.addedBeginning : undefined;
+    if (beginningEnded !== undefined) delete this.state.turn.addedBeginning;
     const after = this.state.phasesAfterThisCombat;
-    if ((this.state.turn.step === "end-combat" || addedUpkeepEnding) && after !== undefined && after.length > 0) {
+    // An additional beginning phase owed next, from wherever it was made.
+    if (
+      (this.state.turn.step === "end-combat" ||
+        this.state.turn.step === "postcombat-main" ||
+        addedUpkeepEnding ||
+        beginningEnded !== undefined) &&
+      after?.[0]?.kind === "beginning"
+    ) {
       const [next, ...rest] = after;
+      if (rest.length > 0) this.state.phasesAfterThisCombat = rest;
+      else delete this.state.phasesAfterThisCombat;
+      this.state.turn.addedBeginning = next.after;
+      this.enterStep("untap");
+      return;
+    }
+    if (
+      (this.state.turn.step === "end-combat" || addedUpkeepEnding || beginningEnded !== undefined) &&
+      after !== undefined &&
+      after.length > 0
+    ) {
+      const [next, ...rest] = after;
+      if (next.kind === "beginning") return; // Taken above.
       if (next.kind === "main") {
         if (rest.length > 0) this.state.phasesAfterThisCombat = rest;
         else delete this.state.phasesAfterThisCombat;
@@ -10308,8 +10334,23 @@ export class Game {
       }
     }
     // Then the turn goes on as it would have after that combat phase.
-    if (addedUpkeepEnding) {
+    if (addedUpkeepEnding || beginningEnded === "combat") {
       this.enterStep("postcombat-main");
+      return;
+    }
+    // Or after that postcombat main phase: the combats and main phases still
+    // owed after it, then the ending phase (Sphinx of the Second Sun's rulings).
+    if (beginningEnded === "main") {
+      if (this.state.extraCombats > 0) {
+        this.beginOwedCombat();
+        return;
+      }
+      if ((this.state.extraMainPhases ?? 0) > 0) {
+        this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) - 1;
+        this.enterStep("postcombat-main");
+        return;
+      }
+      this.enterStep("end");
       return;
     }
     // Additional combat (Aggravated Assault — rule 500.8): when the postcombat
@@ -10455,11 +10496,16 @@ export class Game {
       // is each turn, so one whose loyalty abilities may be activated on any
       // player's turn (Teferi, Master of Time) gets one on this turn too.
       if (object.controller !== active) continue;
-      // Summoning sickness wears off as the controller's turn begins.
-      object.summoningSick = false;
-      object.combatDamagedPlayersThisTurn = [];
-      object.attackedThisTurn = false;
-      delete object.attacksThisTurn;
+      // Summoning sickness wears off as the controller's turn begins — not in
+      // an additional beginning phase's untap step, which is still this turn
+      // (rule 302.6; Sphinx of the Second Sun's rulings), nor do the turn's
+      // records reset there.
+      if (this.state.turn.addedBeginning === undefined) {
+        object.summoningSick = false;
+        object.combatDamagedPlayersThisTurn = [];
+        object.attackedThisTurn = false;
+        delete object.attacksThisTurn;
+      }
       if (object.zone !== "battlefield") continue;
       // Exerted (rule 701.43a): not during its exerter's next untap step —
       // this one, if that's who's active. Nor one an effect said doesn't
@@ -39807,6 +39853,15 @@ controlledBy,
         }));
         (this.state.phasesAfterThisCombat ??= []).unshift(...added);
       },
+      // "After this phase": directly after the postcombat main phase or the
+      // combat phase under way, ahead of anything added after it before
+      // (rule 500.8). The turn's, whoever's ability it is.
+      additionalBeginningPhase: () => {
+        const step = this.state.turn.step;
+        const after = PHASE_OF_STEP[step] === "combat" ? "combat" : step === "postcombat-main" ? "main" : undefined;
+        if (after === undefined) return;
+        (this.state.phasesAfterThisCombat ??= []).unshift({ kind: "beginning", after });
+      },
       // "After this step": only from an end step, the one place its card
       // resolves it (rule 500.9).
       additionalEndStep: () => {
@@ -52329,7 +52384,7 @@ controlledBy,
       active: this.activePlayer,
       laterTurn,
       madeInThisEndStep: !laterTurn && trigger.createdDuringEndStep && !anotherEndStep,
-      addedUpkeep: this.state.turn.addedUpkeep === true,
+      addedUpkeep: this.state.turn.addedUpkeep === true || this.state.turn.addedBeginning !== undefined,
     });
   }
 

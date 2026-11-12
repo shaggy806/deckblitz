@@ -7584,6 +7584,18 @@ export type EffectSpec =
       readonly amount: EffectAmount;
     }
   | {
+      /** "There is an additional beginning phase after this phase" (Sphinx of
+       * the Second Sun, Shadow of the Second Sun, Cyclonus — rule 500.8): an
+       * untap, an upkeep and a draw step, directly after the main or combat
+       * phase under way, ahead of any phase added after it earlier. Then the
+       * turn goes on as it would have after that phase: to the ending phase
+       * from a postcombat main phase (the rulings), to the main phase from a
+       * combat phase. It's the active player's, all within this turn: "until
+       * your next turn" doesn't end and summoning sickness doesn't wear off.
+       * Nothing from a beginning phase or a precombat main phase. */
+      readonly kind: "additional-beginning-phase";
+    }
+  | {
       /** "There is an additional end step after this step" (Y'shtola Rhul,
        * rule 500.9): another end step straight after the end step under way,
        * ahead of any added after it earlier, with no other step added along —
@@ -12570,6 +12582,8 @@ export interface EffectApi {
   limitBlockers(players: readonly PlayerId[], most: number): void;
   /** See the `additional-upkeep-steps` {@link EffectSpec}. */
   additionalUpkeeps(count: number): void;
+  /** See the `additional-beginning-phase` {@link EffectSpec}. */
+  additionalBeginningPhase(): void;
   /** See the `additional-end-step` {@link EffectSpec}. */
   additionalEndStep(): void;
   /** See the `additional-land-drop` {@link EffectSpec}. */
@@ -19475,6 +19489,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "additional-upkeep-steps":
       ctx.additionalUpkeeps(amountValue(spec.amount, ctx));
+      return;
+    case "additional-beginning-phase":
+      ctx.additionalBeginningPhase();
       return;
     case "additional-end-step":
       ctx.additionalEndStep();

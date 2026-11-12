@@ -3099,6 +3099,11 @@ export type AddedPhase =
       readonly regular?: true;
     }
   | { readonly kind: "upkeep" }
+  /** A whole additional beginning phase — untap, upkeep and draw steps
+   * (Sphinx of the Second Sun — rules 500.8, 501.1) — made in the phase
+   * `after` names: once it's over the turn goes on to what followed that
+   * phase (`TurnState.addedBeginning`). */
+  | { readonly kind: "beginning"; readonly after: "main" | "combat" }
   /** The additional main phase of a `withMain` combat, directly after it
    * (rule 500.8) with more phases still to come behind it. */
   | { readonly kind: "main" };
@@ -3123,6 +3128,13 @@ export interface TurnState {
    * `"upkeep"`): when it ends, the turn goes on to whatever followed the
    * combat phase it came after, never to a draw step. */
   addedUpkeep?: boolean;
+  /** The beginning phase under way is an additional one (an `AddedPhase` of
+   * kind `"beginning"`), made in a main phase or a combat phase: when its
+   * draw step ends, the turn goes on to what followed that phase — the
+   * ending phase, or the main phase after combat — never to a main phase of
+   * its own. Its untap step isn't the turn beginning: summoning sickness and
+   * the turn's records don't reset (rule 302.6). */
+  addedBeginning?: "main" | "combat";
   /** The `"postcombat-main"` step under way is an `AddedPhase` of kind
    * `"main"`: a combat queued behind it doesn't end the turn, whose own
    * main phase is still to come. */

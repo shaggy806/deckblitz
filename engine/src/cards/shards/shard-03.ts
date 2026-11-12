@@ -714,6 +714,7 @@ import _poolSpectralSailor from "../pool/spectral-sailor.js";
 import _poolSpeedwayFanatic from "../pool/speedway-fanatic.js";
 import _poolSpellSnip from "../pool/spell-snip.js";
 import _poolSphinxOfForesight from "../pool/sphinx-of-foresight.js";
+import _poolSphinxOfTheSecondSun from "../pool/sphinx-of-the-second-sun.js";
 import _poolSphinxsDecree from "../pool/sphinxs-decree.js";
 import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
@@ -1652,6 +1653,7 @@ const shard: CardShard = {
     _poolSpeedwayFanatic,
     _poolSpellSnip,
     _poolSphinxOfForesight,
+    _poolSphinxOfTheSecondSun,
     _poolSphinxsDecree,
     _poolSpiderManNoir,
     _poolSpikedCorridor,

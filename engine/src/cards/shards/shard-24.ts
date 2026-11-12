@@ -209,6 +209,7 @@ import _poolCurseOfTheForsaken from "../pool/curse-of-the-forsaken.js";
 import _poolCursedLand from "../pool/cursed-land.js";
 import _poolCursedScroll from "../pool/cursed-scroll.js";
 import _poolCustodiSoulcaller from "../pool/custodi-soulcaller.js";
+import _poolCyclonusCybertronianFighter from "../pool/cyclonus-cybertronian-fighter.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
 import _poolCytoplastManipulator from "../pool/cytoplast-manipulator.js";
 import _poolDakkonBlackblade from "../pool/dakkon-blackblade.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolCursedLand,
     _poolCursedScroll,
     _poolCustodiSoulcaller,
+    _poolCyclonusCybertronianFighter,
     _poolCylianElf,
     _poolCytoplastManipulator,
     _poolDakkonBlackblade,

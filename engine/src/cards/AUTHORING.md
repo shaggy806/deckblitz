@@ -2099,6 +2099,18 @@ recent first (500.8), so an additional combat made during end of combat comes
 before the upkeeps. Nothing is added on another player's turn (500.10a), and
 only a combat phase can be "this phase" — use it from a combat trigger.
 
+`additional-beginning-phase` (no fields) is Sphinx of the Second Sun's "there
+is an additional beginning phase after this phase": untap, upkeep and draw
+steps straight after the postcombat main phase or the combat phase under way
+(rule 500.8), most recent first among phases added after the same one. Then
+the turn goes on as it would have after that phase — to the ending phase
+from a postcombat main phase (the rulings), to the main phase from a combat
+phase (Cyclonus, Cybertronian Fighter). It's the turn's own, whoever's
+ability it is (Shadow of the Second Sun's enchanted player), and still the
+same turn: permanents untap and a card is drawn, but summoning sickness
+doesn't wear off (302.6) and "until your next turn" doesn't end. Nothing from
+a beginning phase or a precombat main phase.
+
 `additional-end-step` (no fields) is Y'shtola Rhul's "there is an additional
 end step after this step" (rule 500.9): another end step straight after the
 one under way, no cleanup step between (its ruling), so "until end of turn"

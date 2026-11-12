@@ -5885,6 +5885,8 @@ import _poolCycloneSire from "./pool/cyclone-sire.js";
 import _poolCycloneSummoner from "./pool/cyclone-summoner.js";
 import _poolCyclone from "./pool/cyclone.js";
 import _poolCyclonicRift from "./pool/cyclonic-rift.js";
+import _poolCyclonusCybertronianFighter from "./pool/cyclonus-cybertronian-fighter.js";
+import _poolCyclonusTheSaboteur from "./pool/cyclonus-the-saboteur.js";
 import _poolCyclopeanGiant from "./pool/cyclopean-giant.js";
 import _poolCyclopeanMummy from "./pool/cyclopean-mummy.js";
 import _poolCyclopeanSnare from "./pool/cyclopean-snare.js";
@@ -23799,6 +23801,7 @@ import _poolShadowOfDoubt from "./pool/shadow-of-doubt.js";
 import _poolShadowOfMortality from "./pool/shadow-of-mortality.js";
 import _poolShadowOfTheGoblin from "./pool/shadow-of-the-goblin.js";
 import _poolShadowOfTheGrave from "./pool/shadow-of-the-grave.js";
+import _poolShadowOfTheSecondSun from "./pool/shadow-of-the-second-sun.js";
 import _poolShadowProphecy from "./pool/shadow-prophecy.js";
 import _poolShadowPuppeteers from "./pool/shadow-puppeteers.js";
 import _poolShadowRider from "./pool/shadow-rider.js";
@@ -25425,6 +25428,7 @@ import _poolSphinxOfNewPrahv from "./pool/sphinx-of-new-prahv.js";
 import _poolSphinxOfTheFinalWord from "./pool/sphinx-of-the-final-word.js";
 import _poolSphinxOfTheGuildpact from "./pool/sphinx-of-the-guildpact.js";
 import _poolSphinxOfTheRevelation from "./pool/sphinx-of-the-revelation.js";
+import _poolSphinxOfTheSecondSun from "./pool/sphinx-of-the-second-sun.js";
 import _poolSphinxOfTheSteelWind from "./pool/sphinx-of-the-steel-wind.js";
 import _poolSphinxOfUthuun from "./pool/sphinx-of-uthuun.js";
 import _poolSphinxSovereign from "./pool/sphinx-sovereign.js";
@@ -38497,6 +38501,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCycloneSummoner,
   _poolCyclone,
   _poolCyclonicRift,
+  _poolCyclonusCybertronianFighter,
+  _poolCyclonusTheSaboteur,
   _poolCyclopeanGiant,
   _poolCyclopeanMummy,
   _poolCyclopeanSnare,
@@ -56411,6 +56417,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShadowOfMortality,
   _poolShadowOfTheGoblin,
   _poolShadowOfTheGrave,
+  _poolShadowOfTheSecondSun,
   _poolShadowProphecy,
   _poolShadowPuppeteers,
   _poolShadowRider,
@@ -58037,6 +58044,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSphinxOfTheFinalWord,
   _poolSphinxOfTheGuildpact,
   _poolSphinxOfTheRevelation,
+  _poolSphinxOfTheSecondSun,
   _poolSphinxOfTheSteelWind,
   _poolSphinxOfUthuun,
   _poolSphinxSovereign,
@@ -71122,6 +71130,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cyclone-summoner": _poolCycloneSummoner,
   "pool/cyclone": _poolCyclone,
   "pool/cyclonic-rift": _poolCyclonicRift,
+  "pool/cyclonus-cybertronian-fighter": _poolCyclonusCybertronianFighter,
+  "pool/cyclonus-the-saboteur": _poolCyclonusTheSaboteur,
   "pool/cyclopean-giant": _poolCyclopeanGiant,
   "pool/cyclopean-mummy": _poolCyclopeanMummy,
   "pool/cyclopean-snare": _poolCyclopeanSnare,
@@ -89036,6 +89046,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shadow-of-mortality": _poolShadowOfMortality,
   "pool/shadow-of-the-goblin": _poolShadowOfTheGoblin,
   "pool/shadow-of-the-grave": _poolShadowOfTheGrave,
+  "pool/shadow-of-the-second-sun": _poolShadowOfTheSecondSun,
   "pool/shadow-prophecy": _poolShadowProphecy,
   "pool/shadow-puppeteers": _poolShadowPuppeteers,
   "pool/shadow-rider": _poolShadowRider,
@@ -90662,6 +90673,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sphinx-of-the-final-word": _poolSphinxOfTheFinalWord,
   "pool/sphinx-of-the-guildpact": _poolSphinxOfTheGuildpact,
   "pool/sphinx-of-the-revelation": _poolSphinxOfTheRevelation,
+  "pool/sphinx-of-the-second-sun": _poolSphinxOfTheSecondSun,
   "pool/sphinx-of-the-steel-wind": _poolSphinxOfTheSteelWind,
   "pool/sphinx-of-uthuun": _poolSphinxOfUthuun,
   "pool/sphinx-sovereign": _poolSphinxSovereign,
