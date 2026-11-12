@@ -3188,6 +3188,7 @@ import _poolBortukBonerattle from "./pool/bortuk-bonerattle.js";
 import _poolBoscoJustABear from "./pool/bosco-just-a-bear.js";
 import _poolBoseijuReachesSkyward from "./pool/boseiju-reaches-skyward.js";
 import _poolBoseijuWhoEndures from "./pool/boseiju-who-endures.js";
+import _poolBoseijuWhoSheltersAll from "./pool/boseiju-who-shelters-all.js";
 import _poolBoshIronGolem from "./pool/bosh-iron-golem.js";
 import _poolBoskBanneret from "./pool/bosk-banneret.js";
 import _poolBossUramonShadowsReach from "./pool/boss-uramon-shadows-reach.js";
@@ -35817,6 +35818,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoscoJustABear,
   _poolBoseijuReachesSkyward,
   _poolBoseijuWhoEndures,
+  _poolBoseijuWhoSheltersAll,
   _poolBoshIronGolem,
   _poolBoskBanneret,
   _poolBossUramonShadowsReach,
@@ -68459,6 +68461,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bosco-just-a-bear": _poolBoscoJustABear,
   "pool/boseiju-reaches-skyward": _poolBoseijuReachesSkyward,
   "pool/boseiju-who-endures": _poolBoseijuWhoEndures,
+  "pool/boseiju-who-shelters-all": _poolBoseijuWhoSheltersAll,
   "pool/bosh-iron-golem": _poolBoshIronGolem,
   "pool/bosk-banneret": _poolBoskBanneret,
   "pool/boss-uramon-shadows-reach": _poolBossUramonShadowsReach,

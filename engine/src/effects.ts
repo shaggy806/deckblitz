@@ -3014,9 +3014,15 @@ export type EffectSpec =
        * of turn, and so does the permanent it becomes (a `castRider`). */
       readonly spellGains?: {
         readonly spell?: CardFilter;
-        readonly keywords: readonly Keyword[];
+        readonly keywords?: readonly Keyword[];
         /** "It gains riot" (Domri, Chaos Bringer): with no end. */
         readonly lasting?: true;
+        /** "If that mana is spent on an instant or sorcery spell, that spell
+         * can't be countered" (Boseiju, Who Shelters All): the spell is
+         * stamped `GameObject.uncounterable`, as Cavern of Souls' is, but the
+         * mana is spent on anything (Cavern's is restricted). The spell's
+         * copies aren't (its ruling). */
+        readonly uncounterable?: true;
       };
       /** "If that mana is spent to cast a [filter] spell, that creature enters
        * with an additional +1/+1 counter on it" (Guildmages' Forum, Animal

@@ -94,6 +94,7 @@ import _poolBoobyTrap from "../pool/booby-trap.js";
 import _poolBorealGriffin from "../pool/boreal-griffin.js";
 import _poolBoreasCharger from "../pool/boreas-charger.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
+import _poolBoseijuWhoSheltersAll from "../pool/boseiju-who-shelters-all.js";
 import _poolBossUramonShadowsReach from "../pool/boss-uramon-shadows-reach.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
@@ -1099,6 +1100,7 @@ const shard: CardShard = {
     _poolBorealGriffin,
     _poolBoreasCharger,
     _poolBorosStrikeCaptain,
+    _poolBoseijuWhoSheltersAll,
     _poolBossUramonShadowsReach,
     _poolBosssChauffeur,
     _poolBoundInSilence,

@@ -240,7 +240,12 @@ export interface ManaUnit {
   /** "If that mana is spent on a [filter] spell, it gains [keywords] until
    * end of turn" (Carnelian Orb of Dragonkind — rule 106.6): what the spell
    * this unit pays for gets, as `add-mana`'s `spellGains` says. */
-  readonly spellGains?: { readonly spell?: CardFilter; readonly keywords: readonly Keyword[]; readonly lasting?: true };
+  readonly spellGains?: {
+    readonly spell?: CardFilter;
+    readonly keywords?: readonly Keyword[];
+    readonly lasting?: true;
+    readonly uncounterable?: true;
+  };
   /** "If that mana is spent to cast a [filter] spell, that creature enters
    * with an additional +1/+1 counter on it" (rule 106.6), as `add-mana`'s
    * `spellEntersWith` says. */

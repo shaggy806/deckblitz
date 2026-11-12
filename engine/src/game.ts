@@ -28146,6 +28146,9 @@ export class Game {
         if (gains.spell !== undefined && !matchesFilter(this.state, this.registry, purpose.card, gains.spell, { you: player })) {
           continue;
         }
+        // "That spell can't be countered" (Boseiju).
+        if (gains.uncounterable === true) spell.uncounterable = true;
+        if (gains.keywords === undefined || gains.keywords.length === 0) continue;
         spell.modifiers.push({
           timestamp: this.freshTimestamp(),
           power: 0,

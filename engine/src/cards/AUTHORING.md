@@ -7272,7 +7272,9 @@ Delete an entry in the same commit as the feature that retires it.
     "Spend only mana produced by creatures to cast this spell" (Myr Superion;
     Imperiosaur's basic lands). `chooseCreatureTypeMenu` limits
     `chooseCreatureTypeOnEnter` to a list (Eclipsed Realms).
-  - `spellGains: { spell?, keywords }` — "If that mana is spent on a Dragon
+  - `spellGains: { spell?, keywords?, lasting?, uncounterable? }` (`uncounterable`: Boseiju, Who
+    Shelters All's "if that mana is spent on an instant or sorcery spell, that spell can't be
+    countered" — unrestricted mana, unlike Cavern of Souls' `spendOnly`) — "If that mana is spent on a Dragon
     creature spell, it gains haste until end of turn" (Carnelian Orb of
     Dragonkind — rule 106.6): not a trigger, so nothing can respond and the
     source needn't be around; the spell, and the permanent it becomes, gains
