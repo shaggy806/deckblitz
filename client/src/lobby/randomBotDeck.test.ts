@@ -47,6 +47,18 @@ describe('the upgraded pool', () => {
   })
 })
 
+describe('a deck kept from the bots', () => {
+  it('is never dealt, however the dice fall, and is still a starter deck', () => {
+    const kept = UPGRADED_DECKS.filter((d) => d.bots === false).map((d) => d.name)
+    expect(kept).toContain('Jeskai Striker (Upgraded)')
+    for (let i = 0; i < UPGRADED_DECKS.length; i += 1) {
+      const deck = randomBotDeck([], () => (i + 0.5) / UPGRADED_DECKS.length, 'upgraded')
+      expect(kept).not.toContain(deck.name)
+    }
+    expect(STARTER_DECKS.map((d) => d.name)).toContain('Jeskai Striker (Upgraded)')
+  })
+})
+
 describe('the strong pool', () => {
   it("deals the real players' decks, each named for its creator", () => {
     const decks = randomBotDecks(3, [], () => 0, 'strong')

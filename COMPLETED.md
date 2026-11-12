@@ -3847,6 +3847,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **v2 casts a passive permanent ahead of a same-cost creature** (2026-11-11): the upgraded
+  decks' games had it holding Ghostly Prison (cast in 0 of 8 games castable), Smothering Tithe
+  (1 of 11) and Parallel Lives (0 of 4), because a noncreature permanent the engine rates don't
+  price scored under half a vanilla creature of its cost. `standingEffects` (`standingWorth`,
+  `bot/features.ts`) is the floor under the rates: mana value plus 1.5, less what the rates
+  score, shrinking as an attack threatens. Four gate scenarios, 226 of 226; `bot:diff` 25 of
+  12,208 decisions. The lists' twenty creature-for-enchantment swaps were reverted with it, and
+  the blue decks got their counterspells back (the user's calls). Ten losses each of the four
+  weakest decks were replayed and read: list fixes for Abzan Armor (4% to 15%), Grave Danger and
+  Chaos Incarnate, and Jeskai Striker (Upgraded) kept from the bots (`SampleDeck.bots`).
+  `docs/plans/bot-effect-knowledge.md`, `docs/plans/upgraded-decks.md`.
 - **Upgraded lists for all fourteen precons, and the strong decks as a third bot pool**
   (2026-11-11): `UPGRADED_DECKS` rebuilt by hand, the five from October replaced and the other
   nine added: one strong mana base in every deck (duals, shocks, fetches, the untapped two-colour

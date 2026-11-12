@@ -4,11 +4,12 @@
 // what an upgrade is worth; with `--pool blitz` the upgrades alone, the
 // field a blitz deals from, to see how even it is; or with `--pool strong`
 // the real players' decks (`STRONG_DECKS`) against those upgrades.
-import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS } from "../dist/index.js";
+import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS, botPool } from "../dist/index.js";
 
 const POOLS = {
   upgraded: () => [...SAMPLE_DECKS.filter((d) => UPGRADED_DECKS.some((u) => u.upgradeOf === d.name)), ...UPGRADED_DECKS],
-  blitz: () => [...UPGRADED_DECKS],
+  // What a blitz really deals: less the decks kept from the bots.
+  blitz: () => [...botPool(UPGRADED_DECKS)],
   strong: () => [...UPGRADED_DECKS, ...STRONG_DECKS],
 };
 

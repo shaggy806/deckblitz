@@ -228,20 +228,30 @@ Shiko or the other spell, and haste enablers in the crackback).
   `bot:scenarios` and `bot:fit-scenarios` read as training scenarios, as does each blunder
   `bot:behaviour` shows. `npm run bot:captures -w engine` lists them with v2's answer today;
   once one is fixed, `-- resolve` moves it to `captures/resolved/`, where it gates.
-- **The upgraded precons aren't an even field, and two aren't diagnosed** (2026-11-11): among
-  the fourteen, Temur Roar (Upgraded) wins 65% of its games, Abzan Armor 4% and Jeskai Striker
-  8%; nine sit within noise of 25%. Why the two lose isn't known yet. The bots do read
-  toughness-as-damage (`combatDamageOf` in `bot/combat-math.ts`, `bot/features.ts`,
-  `controller.ts`) and Shiko's second spell (`b17096d2e`); an earlier note here saying otherwise
-  was wrong. One replayed Abzan loss had Felothar removed four times, with walls that can't
-  attack without her. Next: `deck-autopsy.mjs` over ten losses of each, then a list change or a
-  `COMMANDER_BIASES` entry (`deck-bias.ts`), whichever the losses call for.
-  `docs/plans/upgraded-decks.md`, "Open".
-- **v2 leaves passive enchantments and mana rocks in hand** (2026-11-11, the upgraded decks'
-  card-usage report): Guardian Project cast in 0 of 6 games it could have been, Ghostly Prison 0
-  of 8, Rooftop Storm 1 of 4, Fellwar Stone 4 of 10, Mind Stone 2 of 6. The lists took creatures
-  with the same effect instead; a fix would be an evaluation term for what such a permanent will
-  be worth (`docs/plans/upgraded-decks.md`).
+- **What the four weak upgraded decks' autopsies found in the bots** (2026-11-11; ten replayed
+  losses each, `docs/plans/upgraded-decks.md`, "The four weakest decks"). None is fixed:
+  - `graveyardCastable` counts only a card's own flashback, escape or `mayPlaySelf`
+    (`castableFromGraveyard`, `bot/features.ts`), not a card a static `mayPlay` on our
+    battlefield lets us cast: Gisa and Geralf's Zombies and Muldrotha's permanents score as
+    plain graveyard cards.
+  - A commander is recast in preference to a castable five- to seven-drop (Kardur in six of ten
+    Chaos Incarnate replays; Felothar five times in one Abzan game, about 40 mana).
+  - Sweepers into its own best board (Jeskai: Vanquish the Horde at 47:T23 and 8:T32), and
+    Pongify on its own Soldier token with no opposing creature (8:T12).
+  - A draw spell loses to a same-cost creature as a passive permanent did before
+    `standingEffects` (Read the Bones cast in 5 of 15 games castable, Faithless Looting and
+    Frantic Search held from the opening hand while stuck on three lands).
+  - With Shiko out, the second spell of a turn was one she copies in 4 of 12 two-spell turns.
+  - Walls sent for chip damage with no vigilance, leaving no blockers (Abzan 144:T29, 44:T20).
+- **Reign of Dragons (Upgraded) fell from 40% to 17%** of its games between two runs with its
+  list unchanged (2026-11-11), across the `standingEffects` change and the other decks' list
+  revisions: noise, the bot change, or opponents' removal now aimed at its artifacts. To settle:
+  a `bot:ab` of the term on the bench decks, and autopsies of its losses
+  (`docs/plans/upgraded-decks.md`, "Open").
+- **Jeskai Striker (Upgraded) is kept from the bots** (2026-11-11, `SampleDeck.bots: false`): 2
+  wins in 48 games after its list fix. Back in the pool when the bot habits its autopsy found
+  (the item above) are fixed. Grave Danger, Abzan Armor and Chaos Incarnate sit at 15-17%, above
+  the roughly 10% at which a deck comes out (the user's allowance).
 - **The About page doesn't say how a creator can have a strong deck removed** (2026-11-11): the
   site has no contact route; the user's call what it should be
   (`docs/plans/strong-bot-decks.md`).

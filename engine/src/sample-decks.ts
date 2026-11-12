@@ -78,6 +78,9 @@ export interface SampleDeck {
   readonly swaps?: readonly (readonly [cut: string, add: string])[];
   /** For a real player's deck (`STRONG_DECKS`): who built it, and where. */
   readonly credit?: DeckCredit;
+  /** `false`: never dealt to a bot (`botPool`), because the bots pilot it too
+   * badly to be an opponent. Still a starter deck a player can pick. */
+  readonly bots?: false;
   /**
    * The printing each card had in the real product: card name → Scryfall
    * card id, as a saved deck's `printings` (the client's `SavedDeck`), so a
@@ -1404,6 +1407,8 @@ function upgraded(
   base: string,
   deck: {
     readonly description: string;
+    /** `false`: kept from the bots (`SampleDeck.bots`). */
+    readonly bots?: false;
     readonly cards: readonly (readonly [string, string])[];
     readonly lands: readonly (readonly [string, string])[];
   },
@@ -1429,9 +1434,14 @@ function upgraded(
     cards,
     upgradeOf: base,
     swaps,
+    ...(deck.bots === false ? { bots: false as const } : {}),
     ...(printings !== undefined ? { printings } : {}),
   };
 }
+
+/** The decks of `pool` a bot may be dealt: all but those kept from the bots
+ * (`SampleDeck.bots`). What "Add bot" and a blitz deal from. */
+export const botPool = (pool: readonly SampleDeck[]): readonly SampleDeck[] => pool.filter((d) => d.bots !== false);
 
 /**
  * The upgraded decks: every starter precon, upgraded by hand (2026-11-11, the
@@ -1454,10 +1464,14 @@ function upgraded(
  * and each cut one of the precon's weakest. What that came to: more one- and
  * two-mana ramp, card draw that needs no decisions (Rhystic Study, Beast
  * Whisperer), cheap removal, and the threats and payoffs that win from the
- * battlefield. Left out on purpose, because the bots misuse them:
- * counterspells (the precons' own are cut), tutors, X spells, combo pieces
- * and engines that need a choice every turn. Modal double-faced lands,
- * channel lands and lands that name a creature type are left out too.
+ * battlefield. The blue decks keep or gain a few counterspells (the user's
+ * call: these stand for the decks people play against), and passive
+ * enchantments go in on their merits: where the bots held one in hand, the
+ * bots were fixed (`standingEffects`, `bot/features.ts`) and the list left
+ * alone. Left out on purpose, because the bots misuse them: tutors, X
+ * spells, combo pieces and engines that need a choice every turn. Modal
+ * double-faced lands, channel lands and lands that name a creature type are
+ * left out too.
  * Design record and measurements: `docs/plans/upgraded-decks.md`.
  */
 export const UPGRADED_DECKS: readonly SampleDeck[] = [
@@ -1513,8 +1527,8 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Necropolis Fiend", "Muldrotha, the Gravetide"],
       ["Woe Strider", "Kheru Goldkeeper"],
       ["Lord of the Forsaken", "Sidisi, Brood Tyrant"],
-      ["Reassembling Skeleton", "Tireless Tracker"],
-      ["Essence Anchor", "World Shaper"],
+      ["Reassembling Skeleton", "Six"],
+      ["Essence Anchor", "Hedge Shredder"],
       ["Tasigur, the Golden Fang", "The Scarab God"],
       ["Amphin Mutineer", "Tatyova, Benthic Druid"],
       ["Treasure Cruise", "Rhystic Study"],
@@ -1530,7 +1544,8 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Gravecrawler", "Three Visits"],
       ["Floral Evoker", "Uro, Titan of Nature's Wrath"],
       ["Kishla Skimmer", "Ramunap Excavator"],
-      ["Lethal Scheme", "Baleful Strix"],
+      ["Lethal Scheme", "Insidious Roots"],
+      ["Afterlife from the Loam", "Counterspell"],
     ],
     lands: [
       ["Contaminated Aquifer", "Underground Sea"],
@@ -1559,24 +1574,22 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("Abzan Armor", {
-    description: "Felothar's walls on duals, shocks and fetches, with every \"toughness is damage\" lord, the best high-toughness bodies, more ramp and card draw.",
+    description: "Felothar's walls on duals, shocks and fetches, with every \"toughness is damage\" lord, more ways for a defender to attack and to keep Felothar alive, and answers to fliers.",
     cards: [
       ["Staff of Compleation", "Betor, Kin to All"],
       ["Protector of the Wastes", "Doran, Besieged by Time"],
       ["Betor, Ancestor's Voice", "Tree of Perdition"],
       ["Indulging Patrician", "Fecund Greenshell"],
-      ["Wall of Limbs", "Shield Sphere"],
+      ["Wall of Limbs", "Silklash Spider"],
       ["Rhox Faithmender", "Bedrock Tortoise"],
-      ["Hornet Nest", "MacCready, Lamplight Mayor"],
-      ["Wakestone Gargoyle", "Crystal Barricade"],
+      ["Hornet Nest", "Lightning Greaves"],
       ["Wall of Reverence", "Sapling of Colfenor"],
       ["Nyx-Fleece Ram", "Doran, the Siege Tower"],
       ["Arasta of the Endless Web", "Huatli, the Sun's Heart"],
       ["Zetalpa, Primal Dawn", "Ohran Frostfang"],
-      ["Jaddi Offshoot", "Rammas Echor, Ancient Shield"],
+      ["Jaddi Offshoot", "Rolling Stones"],
       ["Shadrix Silverquill", "Path to Exile"],
-      ["Wingmantle Chaplain", "Cultivate"],
-      ["Colfenor's Urn", "Last March of the Ents"],
+      ["Wingmantle Chaplain", "Spidersilk Armor"],
       ["Blight Pile", "Farseek"],
       ["Canopy Gargantuan", "Rasaad yn Bashir"],
       ["Tip the Scales", "Assassin's Trophy"],
@@ -1584,6 +1597,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Weathered Sentinels", "Beast Whisperer"],
       ["Jaws of Defeat", "Ancient Lumberknot"],
       ["Reunion of the House", "Three Visits"],
+      ["Tower Defense", "Guardian Project"],
     ],
     lands: [
       ["Canopy Vista", "Savannah"],
@@ -1633,9 +1647,9 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Twilight Drover", "Mondrak, Glory Dominus"],
       ["Gix, Yawgmoth Praetor", "Blood Artist"],
       ["Infantry Shield", "Anguished Unmaking"],
-      ["Within Range", "Elesh Norn, Grand Cenobite"],
+      ["Within Range", "Cathars' Crusade"],
       ["Ironwill Forger", "Smothering Tithe"],
-      ["Blade of Selves", "Hellrider"],
+      ["Blade of Selves", "Goblin Bombardment"],
       ["Kaya, Geist Hunter", "Grave Titan"],
     ],
     lands: [
@@ -1661,9 +1675,16 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("Jeskai Striker", {
-    description: "Shiko and Narset's spells on duals, shocks and fetches, with more bodies that turn every spell into tokens or damage, cheap removal to copy, and no counterspells.",
+    description: "Shiko and Narset's spells on duals, shocks and fetches, with more bodies that turn every spell into tokens or damage, cheap removal to copy, and a handful of counterspells.",
+    // Kept from the bots (2026-11-11, the user's allowance for a deck no list
+    // fix helps): 4 wins in 48 games among the upgrades, then 2 in 48 after
+    // its list fix. Ten replayed losses put it on the bots, not the list:
+    // loot spells and rocks held, sweepers into its own board, a second
+    // spell Shiko doesn't copy (`docs/plans/upgraded-decks.md`). Back in the
+    // pool when those are fixed.
+    bots: false,
     cards: [
-      ["Shiny Impetus", "Hinata, Dawn-Crowned"],
+      ["Shiny Impetus", "Adeline, Resplendent Cathar"],
       ["Transforming Flourish", "Balmor, Battlemage Captain"],
       ["Ancestral Vision", "Brainstorm"],
       ["Mangara, the Diplomat", "Path to Exile"],
@@ -1680,11 +1701,18 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Elsha, Threefold Master", "Shiko, Paragon of the Way"],
       ["Aligned Heart", "Rhystic Study"],
       ["Voracious Bibliophile", "Smothering Tithe"],
-      ["Narset's Reversal", "Chaos Warp"],
       ["Electrodominance", "Lightning Helix"],
       ["Mana Geyser", "Talisman of Creativity"],
       ["Dismantling Wave", "Generous Gift"],
       ["Caldera Pyremaw", "Bria, Riptide Rogue"],
+      ["Faithless Looting", "Ledger Shredder"],
+      ["Frantic Search", "Clarion Spirit"],
+      ["Compulsive Research", "Counterspell"],
+      ["Big Score", "Negate"],
+      ["Deep Analysis", "Arcane Denial"],
+      ["Lier, Disciple of the Drowned", "Tolarian Terror"],
+      ["Vanquish the Horde", "Sprite Dragon"],
+      ["Rite of Replication", "Poppet Stitcher"],
     ],
     lands: [
       ["Prairie Stream", "Tundra"],
@@ -1766,12 +1794,12 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Great Oak Guardian", "Elspeth, Sun's Champion"],
       ["Dawn of Hope", "Parallel Lives"],
       ["Ajani, Caller of the Pride", "Elesh Norn, Grand Cenobite"],
-      ["Valor in Akros", "Deep Forest Hermit"],
+      ["Valor in Akros", "Divine Visitation"],
       ["Overwhelming Instinct", "Beastmaster Ascension"],
-      ["Commander's Insignia", "Angel of Invention"],
+      ["Commander's Insignia", "Cathars' Crusade"],
       ["Commander's Sphere", "Nature's Lore"],
       ["Hornet Nest", "Mondrak, Glory Dominus"],
-      ["Sylvan Reclamation", "Avenger of Zendikar"],
+      ["Sylvan Reclamation", "Beast Within"],
       ["Conclave Tribunal", "Generous Gift"],
       ["Devouring Light", "Anointed Procession"],
       ["Citywide Bust", "Three Visits"],
@@ -1799,7 +1827,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("First Flight", {
-    description: "Isperia's fliers on an untapped mana base, with Angels and Sphinxes that take over a game, taxes on attackers, steady card draw and no counterspells.",
+    description: "Isperia's fliers on an untapped mana base, with Angels and Sphinxes that take over a game, taxes on attackers and steady card draw beside its counterspells.",
     cards: [
       ["Angler Turtle", "Consecrated Sphinx"],
       ["Skyscanner", "Watcher of the Spheres"],
@@ -1809,7 +1837,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Pilgrim's Eye", "Errant and Giada"],
       ["Sky Diamond", "Fellwar Stone"],
       ["Soul Snare", "Rhystic Study"],
-      ["Condemn", "Angel of Invention"],
+      ["Condemn", "Propaganda"],
       ["Diluvian Primordial", "Avacyn, Angel of Hope"],
       ["Faerie Formation", "Baneslayer Angel"],
       ["Hanged Executioner", "Smothering Tithe"],
@@ -1820,9 +1848,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Aven Gagglemaster", "Dragonlord Ojutai"],
       ["Hedron Archive", "Mind Stone"],
       ["Storm Herd", "Resplendent Angel"],
-      ["Absorb", "Archangel of Tithes"],
-      ["Counterspell", "Faerie Mastermind"],
-      ["Negate", "Mulldrifter"],
+      ["Absorb", "Ghostly Prison"],
       ["Aetherize", "Reconnaissance Mission"],
       ["Crush Contraband", "Archangel of Thune"],
       ["Ever-Watching Threshold", "Giada, Font of Hope"],
@@ -1843,9 +1869,9 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("Grave Danger", {
-    description: "Gisa and Geralf's Zombies on an untapped mana base, with every Zombie lord, Rooftop Storm, the big Zombie makers and removal in place of counterspells.",
+    description: "Gisa and Geralf's Zombies on an untapped mana base, with every Zombie lord, Rooftop Storm, the big Zombie makers and better counterspells and removal.",
     cards: [
-      ["Unstable Obelisk", "Bladestitched Skaab"],
+      ["Unstable Obelisk", "Rooftop Storm"],
       ["Spark Reaper", "Gravecrawler"],
       ["Withered Wretch", "Death Baron"],
       ["Deep Analysis", "Rhystic Study"],
@@ -1856,7 +1882,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Cruel Revival", "Go for the Throat"],
       ["Lotleth Giant", "Grave Titan"],
       ["Gravespawn Sovereign", "Liliana, Dreadhorde General"],
-      ["Syphon Flesh", "Gisa, Glorious Resurrector"],
+      ["Syphon Flesh", "Endless Ranks of the Dead"],
       ["Liliana's Devotee", "Headless Rider"],
       ["Vampiric Rites", "Phyrexian Arena"],
       ["Overseer of the Damned", "The Scarab God"],
@@ -1865,12 +1891,16 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Pilfered Plans", "Cryptbreaker"],
       ["Josu Vess, Lich Knight", "Lord of the Undead"],
       ["Liliana's Standard Bearer", "Geralf, Visionary Stitcher"],
-      ["Sinister Sabotage", "Infernal Grasp"],
-      ["Undermine", "Mikaeus, the Unhallowed"],
+      ["Sinister Sabotage", "Counterspell"],
       ["Lazotep Plating", "Stitcher's Supplier"],
       ["Laboratory Drudge", "Plague Belcher"],
       ["Commander's Sphere", "Mind Stone"],
       ["Loyal Subordinate", "Archghoul of Thraben"],
+      ["Zombie Apocalypse", "Ravenous Chupacabra"],
+      ["Necrotic Hex", "Massacre Wurm"],
+      ["Distant Melody", "Arcane Denial"],
+      ["Open the Graves", "Noosegraf Mob"],
+      ["Grimoire of the Dead", "Gisa, Glorious Resurrector"],
     ],
     lands: [
       ["Dismal Backwater", "Underground Sea"],
@@ -1886,7 +1916,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
     ],
   }),
   upgraded("Chaos Incarnate", {
-    description: "Kardur's forced attacks on an untapped mana base, with more ways to goad, payoffs for every creature that dies, and the best black and red threats.",
+    description: "Kardur's forced attacks on an untapped mana base, with payoffs for every creature that dies, more sweepers for a deck that is usually behind on board, and the best black and red threats.",
     cards: [
       ["Thermo-Alchemist", "Blood Artist"],
       ["Magmatic Force", "Sheoldred, Whispering One"],
@@ -1895,7 +1925,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Breath of Malfegor", "Bedevil"],
       ["Guttersnipe", "Karazikar, the Eye Tyrant"],
       ["Scythe Specter", "Grave Titan"],
-      ["Reign of the Pit", "Disrupt Decorum"],
+      ["Reign of the Pit", "Damnation"],
       ["Nihil Spellbomb", "Fellwar Stone"],
       ["Wildfire Devils", "Sheoldred, the Apocalypse"],
       ["Ambition's Cost", "Phyrexian Arena"],
@@ -1903,7 +1933,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Hate Mirage", "Night's Whisper"],
       ["Wayfarer's Bauble", "Kokusho, the Evening Star"],
       ["Burnished Hart", "Harvester of Souls"],
-      ["Theater of Horrors", "Conjurer's Closet"],
+      ["Theater of Horrors", "Decree of Pain"],
       ["Sunbird's Invocation", "Inferno Titan"],
       ["Profane Command", "Infernal Grasp"],
       ["Rakshasa Debaser", "Massacre Wurm"],
@@ -1912,6 +1942,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Fireball", "Gray Merchant of Asphodel"],
       ["Mana Geyser", "Terror of the Peaks"],
       ["Spiteful Visions", "Mahadi, Emporium Master"],
+      ["Dictate of the Twin Gods", "Thran Dynamo"],
     ],
     lands: [
       ["Akoum Refuge", "Badlands"],
@@ -1980,7 +2011,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Restoration Angel", "Nesting Dovehawk"],
       ["Murmuration", "Exalted Sunborn"],
       ["Stolen by the Fae", "Generous Gift"],
-      ["Aetherize", "Chaos Warp"],
+      ["Aetherize", "Counterspell"],
       ["Calamity of Cinders", "Purphoros, God of the Forge"],
       ["Act of Treason", "Rumor Gatherer"],
       ["Echoing Assault", "Elesh Norn, Mother of Machines"],
@@ -2057,7 +2088,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Binding the Old Gods", "Assassin's Trophy"],
       ["Loamcrafter Faun", "Ramunap Excavator"],
       ["Escape to the Wilds", "Ancient Greenwarden"],
-      ["Hammer of Purphoros", "Mina and Denn, Wildborn"],
+      ["Hammer of Purphoros", "Crucible of Worlds"],
       ["Gaze of Granite", "Tireless Provisioner"],
       ["Sprouting Goblin", "Dryad of the Ilysian Grove"],
       ["Pest Infestation", "Exploration"],
