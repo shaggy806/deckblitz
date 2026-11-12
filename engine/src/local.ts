@@ -27,6 +27,7 @@ export { autoAnswerFor, decisionHasSource, mayActOn } from "./decisions/registry
 export * from "./game.js";
 export * from "./controller.js";
 export * from "./auto-settle.js";
+export { wouldAffectPlayer } from "./stack-preview.js";
 // The bots themselves, not `bot/index.ts`: its training scenarios build the
 // whole pool.
 export * from "./bot/eval-bot.js";

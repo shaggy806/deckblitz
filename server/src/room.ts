@@ -29,7 +29,7 @@
  */
 
 import { EvalBotController, Game, LIVE_BOT_BUDGET_MS, actionPlayer, activePlayerOf, isSettled } from "engine/local";
-import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZoneChoice, playersControlledBy, stackCopyKey, standInFor } from "engine/local";
+import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZoneChoice, playersControlledBy, stackCopyKey, standInFor, wouldAffectPlayer } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
 import type {
@@ -465,6 +465,8 @@ export class Room {
   readonly game: Game;
   private readonly seats: Seat[];
   private readonly bots = new Map<PlayerId, PlayerController>();
+  /** `affects`'s answers, by event index, object and player. */
+  private readonly affectsSeen = new Map<string, boolean>();
   private lastActivityAt: number;
   /** Mutable so a transport can bind itself to a room it didn't build — see
    * `RoomOptions.onUpdate`. */
@@ -1056,15 +1058,21 @@ export class Room {
    * two can't drift apart.
    */
   private interruptSince(seat: Seat, state: GameState, from: number): string | null {
-    for (const event of this.game.events.slice(from)) {
-      // An opponent acting into the window. Their *own* triggers going on the
-      // stack are not this: a trigger is `ability-triggered`, and only a
-      // deliberate cast or activation reaches here.
+    const events = this.game.events;
+    for (let index = from; index < events.length; index += 1) {
+      const event = events[index];
+      // An opponent's spell or activation that would affect this seat or its
+      // board when it resolves — targeted or not, a Wrath as much as a Bolt
+      // (the user, 2026-11-11: "auto pass should be paused whenever a
+      // spell/ability would affect you or your board"). A creature cast or a
+      // tutor passes by. Their triggers aren't asked: only a deliberate cast
+      // or activation is, as before; one aimed at this seat's things is
+      // `object-targeted`, below.
       if (event.type === "spell-cast" && event.player !== seat.player) {
-        return "an opponent cast a spell";
+        if (this.affects(index, event.object, seat.player)) return "an opponent's spell would affect you";
       }
-      if (event.type === "ability-activated" && event.player !== seat.player) {
-        return "an opponent activated an ability";
+      if (event.type === "ability-activated" && event.player !== seat.player && event.ability !== undefined) {
+        if (this.affects(index, event.ability, seat.player)) return "an opponent's ability would affect you";
       }
       // Something of this seat's is being pointed at, by anyone but them.
       if (
@@ -1103,6 +1111,22 @@ export class Room {
       }
     }
     return null;
+  }
+
+  /**
+   * Whether the spell or ability an event at `index` put on the stack would
+   * affect `player` (`wouldAffectPlayer`), asked once and remembered: the
+   * scan above re-reads every event since it was armed at each window. Read
+   * while the object is still on the stack — every player gets priority
+   * before it resolves — and `false` once it has gone unasked.
+   */
+  private affects(index: number, object: ObjectId, player: PlayerId): boolean {
+    const key = `${index}:${object}:${player}`;
+    const known = this.affectsSeen.get(key);
+    if (known !== undefined) return known;
+    const verdict = wouldAffectPlayer(this.game.state, cardRegistry(), object, player) ?? false;
+    this.affectsSeen.set(key, verdict);
+    return verdict;
   }
 
   /**

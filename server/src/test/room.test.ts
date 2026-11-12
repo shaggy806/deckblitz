@@ -498,26 +498,31 @@ describe("Room", () => {
       return { room, aliceConn, bobConn };
     }
 
-    /** Alice's own Forest + a one-mana instant, so she can act into Bob's
+    /** Alice's own Mountain + a Lightning Bolt, so she can act into Bob's
      * auto-passing window the way an opponent actually would. */
     function giveAliceAnInstant(room: Room): ObjectId {
-      room.game.debugSpawn("Forest", ALICE, "battlefield");
-      return room.game.debugSpawn("Fog", ALICE, "hand");
+      room.game.debugSpawn("Mountain", ALICE, "battlefield");
+      return room.game.debugSpawn("Lightning Bolt", ALICE, "hand");
     }
 
-    it("pauses a seat's auto-pass when an opponent casts a spell", () => {
+    /** That Bolt, cast at Bob: a spell that would affect him, though nothing
+     * of his is an object it targets. */
+    const boltBob = (bolt: ObjectId) =>
+      ({ type: "cast-spell", player: ALICE, card: bolt, targets: [{ kind: "player", player: BOB }] }) as const;
+
+    it("pauses a seat's auto-pass when an opponent casts a spell that would affect them", () => {
       const { room, aliceConn, bobConn } = interruptibleRoom("bob");
-      const fog = giveAliceAnInstant(room);
+      const bolt = giveAliceAnInstant(room);
 
       room.requestAutoPass(bobConn);
       expect(room.isAutoPassing(BOB)).toBe(true);
 
-      room.dispatch(aliceConn, { type: "cast-spell", player: ALICE, card: fog });
+      room.dispatch(aliceConn, boltBob(bolt));
 
       // Alice's own window after casting is a forced pass (a land needs an
-      // empty stack, and her Forest paid for the Fog), so the settle carries
+      // empty stack, and her Mountain paid for the Bolt), so the settle carries
       // straight on to Bob — whose auto-pass should have stopped rather than
-      // resolving the Fog for him. Paused, not switched off: it's still armed.
+      // resolving the Bolt for him. Paused, not switched off: it's still armed.
       expect(room.game.state.zones.shared.stack).toHaveLength(1);
       expect(room.game.state.priority.holder).toBe(BOB);
       expect(room.isAutoPassing(BOB)).toBe(true);
@@ -526,12 +531,12 @@ describe("Room", () => {
 
     it("resumes a paused auto-pass by itself once the stack is clear", () => {
       const { room, aliceConn, bobConn } = interruptibleRoom("bob");
-      const fog = giveAliceAnInstant(room);
+      const bolt = giveAliceAnInstant(room);
       room.requestAutoPass(bobConn);
-      room.dispatch(aliceConn, { type: "cast-spell", player: ALICE, card: fog });
+      room.dispatch(aliceConn, boltBob(bolt));
       const stepAtCast = room.game.state.turn.step;
 
-      // Bob lets the Fog resolve, and the window after it is Alice's.
+      // Bob lets the Bolt resolve, and the window after it is Alice's.
       room.dispatch(bobConn, { type: "pass-priority", player: BOB });
       expect(room.game.state.zones.shared.stack).toHaveLength(0);
       expect(room.game.state.priority.holder).toBe(ALICE);
@@ -585,14 +590,14 @@ describe("Room", () => {
     });
 
     it("still passes an interrupted window whose only legal action is passing", () => {
-      // Bob has nothing on the battlefield, so his window against the Fog is
+      // Bob has nothing on the battlefield, so his window against the Bolt is
       // a *forced* pass: there is nothing to respond with, and stopping him
       // there would be a dead click.
       const { room, aliceConn, bobConn } = interruptibleRoom();
-      const fog = giveAliceAnInstant(room);
+      const bolt = giveAliceAnInstant(room);
 
       room.requestAutoPass(bobConn);
-      room.dispatch(aliceConn, { type: "cast-spell", player: ALICE, card: fog });
+      room.dispatch(aliceConn, boltBob(bolt));
 
       expect(room.game.state.zones.shared.stack).toHaveLength(0);
       // The interruption didn't hold up a window that was going to pass
@@ -607,13 +612,46 @@ describe("Room", () => {
       // skipping those windows is a standing preference an interruption
       // doesn't take back.
       const { room, aliceConn, bobConn } = interruptibleRoom("bob");
-      const fog = giveAliceAnInstant(room);
+      const bolt = giveAliceAnInstant(room);
 
       skipManaStops(room, bobConn, true);
+      room.requestAutoPass(bobConn);
+      room.dispatch(aliceConn, boltBob(bolt));
+
+      expect(room.game.state.zones.shared.stack).toHaveLength(0);
+    });
+
+    it("pauses for an untargeted spell that would hit the seat's board", () => {
+      // Pyroclasm targets nothing, so no `object-targeted` stops it: only
+      // reading what it would do to Bob's Bears does.
+      const { room, aliceConn, bobConn } = interruptibleRoom("bob");
+      room.game.debugSpawn("Grizzly Bears", BOB, "battlefield");
+      room.game.debugSpawn("Mountain", ALICE, "battlefield");
+      room.game.debugSpawn("Forest", ALICE, "battlefield");
+      const pyroclasm = room.game.debugSpawn("Pyroclasm", ALICE, "hand");
+
+      room.requestAutoPass(bobConn);
+      room.dispatch(aliceConn, { type: "cast-spell", player: ALICE, card: pyroclasm });
+
+      expect(room.game.state.zones.shared.stack).toHaveLength(1);
+      expect(room.game.state.priority.holder).toBe(BOB);
+      expect(room.isAutoPassPaused(BOB)).toBe(true);
+    });
+
+    it("passes by an opponent's spell that wouldn't affect the seat", () => {
+      // The same window as the Pyroclasm above, Bob's Bears and all: a Fog
+      // changes nothing of his, so his auto-pass carries on and resolves it.
+      const { room, aliceConn, bobConn } = interruptibleRoom("bob");
+      room.game.debugSpawn("Grizzly Bears", BOB, "battlefield");
+      room.game.debugSpawn("Forest", ALICE, "battlefield");
+      const fog = room.game.debugSpawn("Fog", ALICE, "hand");
+
       room.requestAutoPass(bobConn);
       room.dispatch(aliceConn, { type: "cast-spell", player: ALICE, card: fog });
 
       expect(room.game.state.zones.shared.stack).toHaveLength(0);
+      expect(room.isAutoPassPaused(BOB)).toBe(false);
+      expect(room.isAutoPassing(BOB)).toBe(true);
     });
 
     it("carries a seat through an opponent's turn when nothing real happens", () => {
