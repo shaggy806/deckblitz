@@ -2740,6 +2740,12 @@ export interface TriggeredAbility {
    * permanent that leaves and returns is a new object that may trigger again.
    */
   readonly oncePerTurn?: boolean;
+  /** "This ability triggers only once" — ever, for this object (Mystery
+   * Booster Commander's Collectors): once it has triggered, it never
+   * triggers again; a permanent that leaves and returns is a new object
+   * (rule 400.7) that may. Kept for the game in the journal
+   * (`triggeredOnceEver`), as `oncePerTurn` is for the turn. */
+  readonly triggersOnlyOnce?: true;
   /** A firebending ability (rule 702.189a — the `firebending()` helper): as
    * it resolves, its controller firebends (702.189b — `bent`). */
   readonly firebending?: true;

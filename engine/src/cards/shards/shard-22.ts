@@ -124,6 +124,7 @@ import _poolCarbonize from "../pool/carbonize.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCaseOfTheLockedHothouse from "../pool/case-of-the-locked-hothouse.js";
+import _poolCaseOfTheLostWitness from "../pool/case-of-the-lost-witness.js";
 import _poolCaseOfTheUneatenFeast from "../pool/case-of-the-uneaten-feast.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
 import _poolCelestialGatekeeper from "../pool/celestial-gatekeeper.js";
@@ -1163,6 +1164,7 @@ const shard: CardShard = {
     _poolCareeningMineCart,
     _poolCartographersHawk,
     _poolCaseOfTheLockedHothouse,
+    _poolCaseOfTheLostWitness,
     _poolCaseOfTheUneatenFeast,
     _poolCatharticReunion,
     _poolCelestialGatekeeper,

@@ -1971,6 +1971,11 @@ export interface PtModifier {
    * spell copy's "the copy gains haste", `copy-spell`'s `gains`). Kept from
    * the stack onto the battlefield like `prototype`. */
   castRider?: true;
+  /** "Perpetually" — MTG Arena's, which the Comprehensive Rules don't have
+   * (the user's call, 2026-11-12, for Pearl Collector): the change stays with
+   * the card through every zone change for the rest of the game, kept by
+   * `moveObject` where every other modifier ends. Not a copiable value. */
+  perpetual?: true;
   /** Layer 3 — a text-changing effect (rule 612.1): every instance of one
    * colour word or basic land type in its text becomes another (the
    * `change-text` effect — Sleight of Mind, Magical Hack). Read through

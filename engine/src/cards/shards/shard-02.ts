@@ -617,6 +617,7 @@ import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
 import _poolOrimsThunder from "../pool/orims-thunder.js";
 import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
+import _poolOvercooked from "../pool/overcooked.js";
 import _poolPainsReward from "../pool/pains-reward.js";
 import _poolPaladinOfAtonement from "../pool/paladin-of-atonement.js";
 import _poolPaleBears from "../pool/pale-bears.js";
@@ -712,6 +713,7 @@ import _poolRoots from "../pool/roots.js";
 import _poolRootwaterCommando from "../pool/rootwater-commando.js";
 import _poolRotlungReanimator from "../pool/rotlung-reanimator.js";
 import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
+import _poolRubyCollector from "../pool/ruby-collector.js";
 import _poolRuinRaider from "../pool/ruin-raider.js";
 import _poolRukhEgg from "../pool/rukh-egg.js";
 import _poolRumorGatherer from "../pool/rumor-gatherer.js";
@@ -1634,6 +1636,7 @@ const shard: CardShard = {
     _poolOrimsThunder,
     _poolOrzhovRacketeers,
     _poolOrzhovaTheChurchOfDeals,
+    _poolOvercooked,
     _poolPainsReward,
     _poolPaladinOfAtonement,
     _poolPaleBears,
@@ -1729,6 +1732,7 @@ const shard: CardShard = {
     _poolRootwaterCommando,
     _poolRotlungReanimator,
     _poolRoughRhinoCavalry,
+    _poolRubyCollector,
     _poolRuinRaider,
     _poolRukhEgg,
     _poolRumorGatherer,

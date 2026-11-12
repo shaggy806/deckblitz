@@ -395,6 +395,8 @@ import { TRIGGER_EVENTS, timingCountable, triggerEventObject, triggerEventPlayer
 import {
   abilityCountThisTurn,
   appendJournal,
+  noteTriggeredOnceEver,
+  triggeredOnceEver,
   beginJournalTurn,
   entriesThisTurn,
   journalTotal,
@@ -31120,6 +31122,10 @@ export class Game {
             ability.oncePerTurn === true &&
             this.triggeredOnceThisTurn(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount)
           ) &&
+          !(
+            ability.triggersOnlyOnce === true &&
+            triggeredOnceEver(this.state, this.onceKey(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount))
+          ) &&
           // "… Do this only once each turn" (rule 603.2h): once its controller
           // has done it this turn, the ability doesn't trigger at all.
           !this.didOnceThisTurn(ability, id, index, ref) &&
@@ -31369,6 +31375,10 @@ export class Game {
             // is one ability printed as two entries (`sameAbilityAs`): its
             // once a turn is shared (MACH-1, Swooping Scoundrel).
             this.markTriggeredOnce(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount);
+          }
+          // "This ability triggers only once": this firing is its one.
+          if (ability.triggersOnlyOnce === true) {
+            noteTriggeredOnceEver(this.state, this.onceKey(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount));
           }
           // "Whenever one or more … enter": this firing is the entry's one
           // (see `enterBatchAlreadyFired`), whatever the batch count.
@@ -38724,8 +38734,8 @@ controlledBy,
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
       canBehold: (spec) => this.canBehold(controller, spec),
       canBlight: (player) => this.canBlight(player),
-      grantKeyword: (target, keyword, duration) =>
-        this.grantKeyword(target, keyword, lastingHere(duration)),
+      grantKeyword: (target, keyword, duration, perpetually) =>
+        this.grantKeyword(target, keyword, lastingHere(duration), true, undefined, perpetually === true),
       incubate: (amount) => {
         // Each Incubator is its own object: one may transform without the rest.
         this.incubating = amount;
@@ -39510,6 +39520,36 @@ controlledBy,
         if (spell?.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell || spell.xValue === null) return;
         spell.xValue *= 2;
         invalidateComputedCache();
+      },
+      conjure: (name, to, attachTo) => {
+        // A new card owned by the conjurer, made outside the game and then
+        // moved in, so it arrives as any card does (MTG Arena's conjure).
+        const id = this.makeCardObject(name, controller, { zone: "outside" });
+        ((this.state.outside ??= {})[controller] ??= []).push(id);
+        if (to === "battlefield") {
+          this.putOntoBattlefieldByEffect(
+            { kind: "object", object: id },
+            controller,
+            false,
+            false,
+            undefined,
+            false,
+            false,
+            controller,
+            undefined,
+            undefined,
+            attachTo,
+          );
+          // One that couldn't enter (an Aura with nothing it may enchant) was
+          // never in the game: it's gone.
+          if (this.state.objects[id]?.zone === "outside") {
+            const outside = this.state.outside?.[controller];
+            if (outside !== undefined) this.state.outside![controller] = outside.filter((o) => o !== id);
+            delete this.state.objects[id];
+          }
+        } else {
+          this.moveObject(id, to);
+        }
       },
       assistantOf: (target) =>
         target.kind === "object" ? this.state.objects[target.object]?.assistedBy : undefined,
@@ -46294,6 +46334,8 @@ controlledBy,
     duration: Expiry,
     split = true,
     timestamp?: number,
+    /** Perpetually (MTG Arena's): kept through zone changes. */
+    perpetually = false,
   ): void {
     if (target.kind !== "object") return;
     const id = split ? this.splitOneFromStack(target.object) : target.object;
@@ -46313,6 +46355,7 @@ controlledBy,
       toughness: 0,
       keywords: [keyword],
       ...(onStack ? { castRider: true as const } : {}),
+      ...(perpetually ? { perpetual: true as const } : {}),
       ...durationFields(duration),
     });
     this.emit({
@@ -61104,9 +61147,11 @@ controlledBy,
       ? object.modifiers
       : resolving
         ? object.modifiers.filter(
-            (m) => m.prototype === true || m.castRider === true || (object.isToken && m.copiable === true),
+            (m) =>
+              m.prototype === true || m.castRider === true || m.perpetual === true || (object.isToken && m.copiable === true),
           )
-        : [];
+        : // A perpetual change goes with the card wherever it goes.
+          object.modifiers.filter((m) => m.perpetual === true);
     // Last-known information for a spell leaving the stack: its mana value
     // with X, read by "that spell's mana value" after it's gone (Mana Drain).
     // Deliberately not cleared by later moves: it's only ever read through a

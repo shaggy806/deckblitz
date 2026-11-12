@@ -679,6 +679,7 @@ import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
+import _poolPerforatorCrocodile from "../pool/perforator-crocodile.js";
 import _poolPeriBrown from "../pool/peri-brown.js";
 import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPersecute from "../pool/persecute.js";
@@ -1754,6 +1755,7 @@ const shard: CardShard = {
     _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPerfectedForm,
+    _poolPerforatorCrocodile,
     _poolPeriBrown,
     _poolPermafrostTrap,
     _poolPersecute,

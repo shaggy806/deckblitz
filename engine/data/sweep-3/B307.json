@@ -1,0 +1,78 @@
+{
+ "batch": "B307",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): its ten conjure cards (2026-11-12), on MTG Arena's definitions of conjure and perpetually (the user's call: the Comprehensive Rules define neither); built effect:conjure, effect:perpetually and triggered abilities that trigger only once",
+ "authored": [
+  {
+   "name": "Oracle of the Alpha",
+   "files": [
+    "engine/src/cards/pool/oracle-of-the-alpha.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruby Collector",
+   "files": [
+    "engine/src/cards/pool/ruby-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sapphire Collector",
+   "files": [
+    "engine/src/cards/pool/sapphire-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emerald Collector",
+   "files": [
+    "engine/src/cards/pool/emerald-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jet Collector",
+   "files": [
+    "engine/src/cards/pool/jet-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pearl Collector",
+   "files": [
+    "engine/src/cards/pool/pearl-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perforator Crocodile",
+   "files": [
+    "engine/src/cards/pool/perforator-crocodile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overcooked",
+   "files": [
+    "engine/src/cards/pool/overcooked.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Lost Witness",
+   "files": [
+    "engine/src/cards/pool/case-of-the-lost-witness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Euru, Acorn Scrounger",
+   "files": [
+    "engine/src/cards/pool/euru-acorn-scrounger.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

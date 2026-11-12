@@ -246,6 +246,7 @@ import _poolEssenceCapture from "../pool/essence-capture.js";
 import _poolEssenceDrain from "../pool/essence-drain.js";
 import _poolEssenceReliquary from "../pool/essence-reliquary.js";
 import _poolEtherswornCanonist from "../pool/ethersworn-canonist.js";
+import _poolEuruAcornScrounger from "../pool/euru-acorn-scrounger.js";
 import _poolEvelynTheCovetous from "../pool/evelyn-the-covetous.js";
 import _poolExaltedSunborn from "../pool/exalted-sunborn.js";
 import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
@@ -586,6 +587,7 @@ import _poolObscuraInitiate from "../pool/obscura-initiate.js";
 import _poolOilGorgerTroll from "../pool/oil-gorger-troll.js";
 import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
+import _poolOracleOfTheAlpha from "../pool/oracle-of-the-alpha.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolOrimsTouch from "../pool/orims-touch.js";
 import _poolOstrichHorse from "../pool/ostrich-horse.js";
@@ -1209,6 +1211,7 @@ const shard: CardShard = {
     _poolEssenceDrain,
     _poolEssenceReliquary,
     _poolEtherswornCanonist,
+    _poolEuruAcornScrounger,
     _poolEvelynTheCovetous,
     _poolExaltedSunborn,
     _poolExecutionersCapsule,
@@ -1549,6 +1552,7 @@ const shard: CardShard = {
     _poolOilGorgerTroll,
     _poolOlogHaiCrusher,
     _poolOmenOfTheSea,
+    _poolOracleOfTheAlpha,
     _poolOrdinaryBear,
     _poolOrimsTouch,
     _poolOstrichHorse,

@@ -210,6 +210,22 @@ export interface Journal {
    * controlled it ("dealt combat damage this game by a creature named
    * Gollum, Obsessed Stalker"). Kept past the round the entries last. */
   combatDamagedBy?: Partial<Record<PlayerId, string[]>>;
+  /** The triggered abilities that "trigger only once" and have, this game:
+   * each one ability of one object in one stint (rule 400.7) — the Collectors
+   * of Mystery Booster Commander. Kept past the round the entries last. */
+  triggeredOnceEver?: string[];
+}
+
+/** Note that the "triggers only once" ability `key` has triggered. */
+export function noteTriggeredOnceEver(state: GameState, key: string): void {
+  const journal = (state.journal ??= emptyJournal());
+  const list = (journal.triggeredOnceEver ??= []);
+  if (!list.includes(key)) list.push(key);
+}
+
+/** Whether the "triggers only once" ability `key` has triggered this game. */
+export function triggeredOnceEver(state: GameState, key: string): boolean {
+  return state.journal?.triggeredOnceEver?.includes(key) === true;
 }
 
 /** Note that a creature with these `names` dealt `player` combat damage

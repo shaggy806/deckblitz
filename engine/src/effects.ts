@@ -6200,6 +6200,26 @@ export type EffectSpec =
     }
   | {
       /**
+       * **Conjure** — a digital-only keyword action the Comprehensive Rules
+       * don't define, taken from MTG Arena's (the user's call, 2026-11-12, for
+       * Mystery Booster Commander's conjure cards): create a new card named
+       * `name` — a card, not a token (so it stays a card in every zone),
+       * owned by the effect's controller — and put it into `to`: their hand,
+       * the top of their library ("conjure … into your library, then
+       * shuffle" is this then a `shuffle-library` step), or the battlefield
+       * under their control, entering as any card put there does (its enters
+       * triggers and replacements), `attachedTo` what it enters attached to
+       * (an Aura — Perforator Crocodile's Stab Wound). `count` of them, one at
+       * a time. With `attachedTo` naming nothing, none is made.
+       */
+      readonly kind: "conjure";
+      readonly name: string;
+      readonly to: "hand" | "library" | "battlefield";
+      readonly count?: EffectAmount;
+      readonly attachedTo?: AttachHostRef;
+    }
+  | {
+      /**
        * "You may have the value of X become 5" (Glava, Five-Advents Mage): the
        * X of the spell whose casting, or the ability whose activation, fired
        * this, while it's still that spell or ability on the stack (rule
@@ -6263,6 +6283,10 @@ export type EffectSpec =
       readonly target: ObjectRef;
       readonly keyword: Keyword;
       readonly duration: PermanentDuration;
+      /** "**Perpetually** gains" — MTG Arena's (Pearl Collector), with
+       * `duration: "permanent"`: the keyword stays with the card through every
+       * zone change for the rest of the game (`PtModifier.perpetual`). */
+      readonly perpetually?: true;
     }
   | {
       /**
@@ -12316,6 +12340,9 @@ export interface EffectApi {
   doubleTriggerSpellX(): void;
   /** Who helped pay for that spell through assist (`GameObject.assistedBy`). */
   assistantOf(target: TargetRef): PlayerId | undefined;
+  /** Conjure a card named `name` into `to` for the effect's controller — see
+   * the `"conjure"` {@link EffectSpec}. */
+  conjure(name: string, to: "hand" | "library" | "battlefield", attachTo?: EnterAttachHost): void;
   /** Set the X of the spell or ability whose casting or activation fired
    * this — see the `"set-x"` {@link EffectSpec}. */
   setTriggerX(which: "trigger-spell" | "trigger-ability", value: number): void;
@@ -12337,7 +12364,7 @@ export interface EffectApi {
   splitMana?(ask: ManaSplitAsk): void;
   /** See the `"enter-blocking"` {@link EffectSpec}. */
   enterBlocking(blocker: ObjectId, attacker: ObjectId): void;
-  grantKeyword(target: TargetRef, keyword: Keyword, duration: PermanentDuration): void;
+  grantKeyword(target: TargetRef, keyword: Keyword, duration: PermanentDuration, perpetually?: boolean): void;
   /** See the `"incubate"` {@link EffectSpec}. */
   incubate(amount: number): void;
   /** See the `"remove-from-combat"` {@link EffectSpec}. */
@@ -18823,6 +18850,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "set-x":
       ctx.setTriggerX(spec.target, spec.value);
       return;
+    case "conjure": {
+      const host = spec.attachedTo === undefined ? undefined : attachHost(spec.attachedTo, ctx);
+      if (host === null) return;
+      const n = spec.count === undefined ? 1 : Math.max(0, Math.floor(amountValue(spec.count, ctx)));
+      for (let i = 0; i < n; i += 1) ctx.conjure(spec.name, spec.to, host);
+      return;
+    }
     case "give-suspend": {
       const counters = spec.timeCounters === "mana-value" ? "mana-value" : amountValue(spec.timeCounters, ctx);
       const options = {
@@ -18847,7 +18881,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "grant-keyword": {
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
-        ctx.grantKeyword(target, spec.keyword, spec.duration);
+        ctx.grantKeyword(target, spec.keyword, spec.duration, spec.perpetually === true);
       }
       return;
     }
