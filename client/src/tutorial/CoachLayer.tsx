@@ -28,6 +28,8 @@ import './coach.css'
  * waiting, rather than showing nothing. Long enough for a room to be created
  * or a page's cards to load, short enough that nobody wonders if it broke. */
 const WAIT_NOTICE_MS = 1500
+/** The longest the ring waits for its card to land (`settling`). */
+const MAX_SETTLE_MS = 2500
 
 const resolveAnchor = (anchor: Anchor): Element | null =>
   typeof anchor === 'string' ? document.querySelector(anchor) : anchor()
@@ -51,6 +53,30 @@ const turnedTile = (el: Element): HTMLElement | null => {
   if (!el.matches('.hand-card')) return null
   const tile = el.querySelector(':scope > .card-tile')
   return tile instanceof HTMLElement ? tile : null
+}
+
+/**
+ * Whether the anchor's card is still on its way to where it's drawn: dealt
+ * into the hand (held hidden, `data-arriving`), put down onto its tile, or
+ * gliding with the fan — the element is already in its final place while a
+ * flying copy or a scripted animation carries what the player sees. The ring
+ * waits for it to land: it showed up on the empty spot before the card
+ * slotted in, and trailed a card that moved (the user, 2026-11-11). Only
+ * finite scripted animations count, never a CSS transition (a hover's grow)
+ * or a looping pulse.
+ */
+const settling = (el: Element): boolean => {
+  const holder = el.closest('.hand-card, .mini-tile-wrap, .stack-entry') ?? el
+  if (holder.closest('[data-arriving]') !== null) return true
+  const shown = holder instanceof HTMLElement ? getComputedStyle(holder) : null
+  if (shown !== null && (shown.visibility === 'hidden' || shown.opacity === '0')) return true
+  return holder.getAnimations({ subtree: true }).some(
+    (a) =>
+      !(a instanceof CSSTransition) &&
+      !(a instanceof CSSAnimation) &&
+      a.playState === 'running' &&
+      a.effect?.getTiming().iterations !== Infinity,
+  )
 }
 
 const rectOf = (r: DOMRect): Rect => ({ left: r.left, top: r.top, width: r.width, height: r.height })
@@ -186,6 +212,8 @@ function StepView({
     // rewritten only when something moved.
     let lastRing: string | null = null
     let missingSince = performance.now()
+    // Since when the anchor's card has been landing (`settling`), or null.
+    let settleSince: number | null = null
     let scrolled = false
     let done = false
     const show = (next: Phase) => {
@@ -211,6 +239,22 @@ function StepView({
       const card = cardRef.current
       const cardSize = { width: card?.offsetWidth ?? 0, height: card?.offsetHeight ?? 0 }
       const el = onPage && step.anchor !== undefined ? resolveAnchor(step.anchor) : null
+      // A card still landing: nothing moves this frame, and the ring is
+      // hidden until it's down (then placed afresh).
+      const now = performance.now()
+      const landing = el !== null && settling(el)
+      if (!landing) settleSince = null
+      else settleSince ??= now
+      // …but never for long: an anchor held hidden for good is shown as is.
+      if (landing && settleSince !== null && now - settleSince < MAX_SETTLE_MS) {
+        const ring = ringRef.current
+        if (ring !== null) ring.style.visibility = 'hidden'
+        lastRing = null
+        missingSince = performance.now()
+        raf = requestAnimationFrame(tick)
+        return
+      }
+      if (ringRef.current !== null) ringRef.current.style.visibility = ''
       const r = el?.getBoundingClientRect()
       const tile = el === null ? null : turnedTile(el)
       // The hole spans the card as drawn, grown on hover, so it can be clicked.
