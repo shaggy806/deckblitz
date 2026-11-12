@@ -1802,7 +1802,11 @@ function runMark(ev: GameEvent, delay: number): void {
   if (ev.type === 'counter-added') {
     const shrinking = ev.counter.startsWith('-')
     tone = shrinking ? 'loss' : 'gain'
-    text = counterText(ev.counter, ev.amount)
+    // Several tokens of a stack, each with these counters: said once, with
+    // how many (`count`, which `mergeFoldedCounters` adds up for tokens
+    // folded back into the stack).
+    const tokens = ev.count ?? 1
+    text = counterText(ev.counter, ev.amount) + (tokens > 1 ? ` on ${tokens}` : '')
     if (shrinking) glow(tile, 'loss', delay, duration)
     else glow(tile, 'gain', delay, duration)
   } else if (ev.type === 'pt-modified') {

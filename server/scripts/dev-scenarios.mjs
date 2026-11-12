@@ -407,7 +407,7 @@ export default {
       "Warrior tokens and Tribute to the World Tree. Cast Secure the Wastes for 3: the three " +
       "new Warriors fold into the stack as they enter, Tribute triggers once for each and " +
       "puts two +1/+1 counters on one Warrior at a time, and the three end up one tile (x3, " +
-      "+1/+1 2) beside the untouched ten.",
+      "+1/+1 2) beside the untouched ten, the counters floating once off it: \"+1/+1 ×2 on 3\".",
     players: ["alice", "bob"],
     lands: { alice: 8, bob: 5 },
     hand: { alice: ["Secure the Wastes"] },

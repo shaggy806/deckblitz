@@ -27,6 +27,7 @@ import {
   handDrawBeatMs,
   handDrawStaggerMs,
   libraryPeels,
+  mergeFoldedCounters,
   millDurationMs,
   retimeFlights,
   scheduleEvents,
@@ -165,6 +166,40 @@ describe('scheduleEvents', () => {
     expect(types(s.after)).toEqual(['permanent-tapped', 'permanent-tapped', 'ability-activated'])
     expect(s.after[2].event).toMatchObject({ source: 'pinger', ability: 'ab1' })
     expect(s.afterMs).toBe(TAP_STEP_MS + TRIGGER_STEP_MS)
+  })
+
+  it("points counters on tokens folded back into a stack at the stack, as one float", () => {
+    // Tribute to the World Tree on each of three tokens split off a stack:
+    // t1, t2 and t3 each get two +1/+1 counters, then t2 and t3 fold into t1.
+    const s = scheduleEvents(
+      [
+        ev({ type: 'counter-added', object: 't1', counter: '+1/+1', amount: 2 }),
+        ev({ type: 'counter-added', object: 't2', counter: '+1/+1', amount: 2 }),
+        ev({ type: 'counter-added', object: 't3', counter: '+1/+1', amount: 2 }),
+        ev({ type: 'counter-added', object: 'other', counter: '+1/+1', amount: 1 }),
+        ev({ type: 'tokens-folded', into: 't1', folded: ['t2', 't3'] }),
+      ],
+      'precombat-main',
+    )
+    expect(s.after.map((i) => i.event)).toMatchObject([
+      { type: 'counter-added', object: 't1', amount: 2, count: 3 },
+      { type: 'counter-added', object: 'other', amount: 1 },
+    ])
+  })
+
+  it('folds a chain, and keeps a second round of counters on one token apart', () => {
+    const merged = mergeFoldedCounters([
+      ev({ type: 'counter-added', object: 'a', counter: '+1/+1', amount: 1 }),
+      ev({ type: 'counter-added', object: 'b', counter: '+1/+1', amount: 1 }),
+      // b again: another effect's counter, its own float.
+      ev({ type: 'counter-added', object: 'b', counter: '+1/+1', amount: 1 }),
+      ev({ type: 'tokens-folded', into: 'b', folded: ['a'] }),
+      ev({ type: 'tokens-folded', into: 'c', folded: ['b'] }),
+    ])
+    expect(merged.filter((e) => e.type === 'counter-added')).toMatchObject([
+      { object: 'c', count: 2 },
+      { object: 'c', count: 1 },
+    ])
   })
 
   it('groups the second half by kind: arrivals, then counters, then triggers', () => {

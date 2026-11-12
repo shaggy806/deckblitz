@@ -105,6 +105,17 @@ describe("a token split off a stack folds back once it's identical again", () =>
     expect(warriors[0].counters["+1/+1"]).toBe(2);
     const c = computeCharacteristics(game.state, registry, warriors[0].id);
     expect([c.power, c.toughness]).toEqual([3, 3]);
+
+    // And it says so: every id a counter landed on is the stack now or was
+    // folded into it (`tokens-folded`, for a client to find them on it).
+    const folded = new Map<ObjectId, ObjectId>();
+    for (const e of game.state.eventLog) {
+      if (e.type === "tokens-folded") for (const id of e.folded) folded.set(id, e.into);
+    }
+    const rootOf = (id: ObjectId): ObjectId => (folded.has(id) ? rootOf(folded.get(id) as ObjectId) : id);
+    const countered = game.state.eventLog.flatMap((e) => (e.type === "counter-added" ? [e.object] : []));
+    expect(countered).toHaveLength(10);
+    expect(new Set(countered.map(rootOf))).toEqual(new Set([warriors[0].id]));
   });
 
   it("three Warriors joining a stack of ten end up a stack of three beside it", () => {

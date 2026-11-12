@@ -794,11 +794,62 @@ function slotFor(ev: GameEvent, phase: { current: Phase }, reduced: boolean, hit
   return null
 }
 
+/**
+ * Counters put on tokens one at a time and then folded back into one stack
+ * (`tokens-folded`, the engine's `refoldSplitTokens`: Tribute to the World
+ * Tree's two +1/+1 counters on each token of a stack entering): each
+ * `counter-added` names a token split off the stack, and all but one of those
+ * ids are gone by the board the frame shows, so only one "+1/+1 ×2" floated
+ * (a legibility follow-up, 2026-11-11). Here each such event is pointed at
+ * the stack it folded into, and the ones that land on one stack with the same
+ * counters become one, its `count` the tokens that got them — one float,
+ * "+1/+1 ×2 on 5", not five on one tile (which would read as ten counters).
+ * An object met a second time starts a new float: another effect's counters.
+ * Everything else passes through as it was.
+ */
+export function mergeFoldedCounters(events: readonly GameEvent[]): readonly GameEvent[] {
+  const into = new Map<ObjectId, ObjectId>()
+  for (const ev of events) {
+    if (ev.type === 'tokens-folded') for (const id of ev.folded) into.set(id, ev.into)
+  }
+  if (into.size === 0) return events
+  const rootOf = (id: ObjectId): ObjectId => {
+    let at = id
+    for (let hops = 0; into.has(at) && hops < 64; hops += 1) at = into.get(at) as ObjectId
+    return at
+  }
+  const roots = new Set([...into.keys()].map(rootOf))
+  const out: GameEvent[] = []
+  // The float under way for each stack and kind of counter: where it sits in
+  // `out`, and the objects it already counts.
+  const open = new Map<string, { at: number; objects: Set<ObjectId> }>()
+  for (const ev of events) {
+    if (ev.type !== 'counter-added' || ev.amount <= 0 || !(into.has(ev.object) || roots.has(ev.object))) {
+      out.push(ev)
+      continue
+    }
+    const root = rootOf(ev.object)
+    const key = `${root}\u0001${ev.counter}\u0001${ev.amount}`
+    const tokens = ev.count ?? 1
+    const float = open.get(key)
+    const merged = out[float?.at ?? -1]
+    if (float !== undefined && !float.objects.has(ev.object) && merged?.type === 'counter-added') {
+      float.objects.add(ev.object)
+      out[float.at] = { ...merged, count: (merged.count ?? 1) + tokens }
+      continue
+    }
+    open.set(key, { at: out.length, objects: new Set([ev.object]) })
+    out.push({ ...ev, object: root, count: tokens })
+  }
+  return out
+}
+
 export function scheduleEvents(
-  events: readonly GameEvent[],
+  allEvents: readonly GameEvent[],
   startPhase: Phase,
   options: ScheduleOptions = NORMAL_SPEED,
 ): EventSchedule {
+  const events = mergeFoldedCounters(allEvents)
   const { scale, reduced } = options
   const landings = findLandings(events, reduced)
   // A card flies on only where both ends of its move kept their slot under

@@ -6824,6 +6824,8 @@ export class Game {
       delete survivor.splitFromStack;
       delete survivor.splitFrom;
     }
+    // For a client: what an earlier event named by these ids is now `into`.
+    if (others.length > 0) this.emit({ type: "tokens-folded", into, folded: [...others] });
     return [...others];
   }
 

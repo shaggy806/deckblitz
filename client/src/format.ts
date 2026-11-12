@@ -98,6 +98,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   // The dying, milling or discarding that put them there has its own line.
   'cards-put-into-graveyard',
   'cards-put-into-exile',
+  // Bookkeeping: identical tokens drawn as one stack again.
+  'tokens-folded',
 ])
 
 /** Whether `event` only shows up in the history's detailed mode. */
@@ -459,6 +461,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} becomes the target of ${name(event.source)} (${event.by})`
     case 'ability-triggered':
       return `${name(event.source)}'s trigger goes on the stack (${who(event.controller)})`
+    case 'tokens-folded':
+      return `${event.folded.length + 1} ${name(event.into)} tokens are one stack again`
     case 'delayed-trigger-created':
       return `${name(event.source)} sets up a later trigger: ${event.text}`
     case 'trigger-removed':

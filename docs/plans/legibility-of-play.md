@@ -237,7 +237,5 @@ a small follow-up: a `slotFor` entry (which half of the frame, paced or not, sha
 not), then an effect in `AnimationLayer` — an `.animate()` on the tile for an `after` cue, or
 `flyGhost` for a move — and each must honour `motionPrefs` (speed and reduced motion).
 
-- **Counters on tokens folded back into a stack float only once**: counters put on tokens peeled
-  off a stack and folded back before the frame is drawn
-  (`refoldSplitTokens`, Tribute to the World Tree): only the `counter-added` naming the
-  surviving stack floats its "+1/+1 ×2"; the rest name objects gone from the view.
+None are open: the last, counters on tokens folded back into a stack, landed 2026-11-11.
+

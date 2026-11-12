@@ -859,6 +859,17 @@ export type GameEvent =
       readonly object: ObjectId;
     })
   | (Base & {
+      /** Identical tokens folded into one stack object (`Game.foldTokensInto`:
+       * split-off tokens back together once nothing tells them apart, or the
+       * cleanup compaction). Not a game event — the tokens didn't go
+       * anywhere — but the ids `folded` stop existing, so a client finds what
+       * an earlier event named them for (Tribute to the World Tree's counters,
+       * one token at a time) on `into`. Nothing triggers on it. */
+      readonly type: "tokens-folded";
+      readonly into: ObjectId;
+      readonly folded: readonly ObjectId[];
+    })
+  | (Base & {
       /** A delayed triggered ability was set up (rule 603.7) — it fires at
        * some later step, not now. */
       readonly type: "delayed-trigger-created";
