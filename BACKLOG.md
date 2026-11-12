@@ -283,6 +283,11 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
+- **`bot:ab` runs out of worker memory** (2026-11-11): 39 of the first 40 games ended "JS heap
+  out of memory" at 18 workers, with no change to the state's shape between the two builds
+  (`e62e9ba2c` against the commit after it). Each worker holds two builds, so two card pools of
+  32,000 definitions, under the 768 MB cap (`scripts/worker-limits.mjs`). Until the cap or the
+  pools' footprint is dealt with, an A/B across commits can't be run; `bot:diff` still works.
 - **Verify's change selection has five coverage holes** (2026-11-10): listed in
   `docs/plans/verify-speed-audit.md` (quick mode skipping the server suite when its inputs changed,
   staged-then-edited cards, tokens and edited cards outside the fuzz stamp, `--landing`'s short list,

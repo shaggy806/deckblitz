@@ -173,9 +173,11 @@ budgets, so they are other games of the same pods, not the clocked games themsel
 
 ## Open
 
-- **Reign of Dragons' drop** between runs 2 and 3. A `bot:ab` of the bot with `standingEffects`
-  against the one before it, on the bench decks (Reign of Dragons is one), says whether the term
-  costs strength; `deck-autopsy.mjs` on its run 3 losses says what changed in its games.
+- **Reign of Dragons' drop** between runs 2 and 3, left as it is (the user's call, 2026-11-11:
+  the field plays more evenly and no bot is noticeably weak, so the risk is low). A `bot:ab` of
+  the bot with `standingEffects` against the one before it was started and stopped: 39 of its
+  first 40 games ran out of worker memory (`BACKLOG.md`, Tooling). If the deck looks weak in
+  play, `deck-autopsy.mjs` on its losses is the next step.
 - **Three decks sit at 15-17%** (Grave Danger, Abzan Armor, Chaos Incarnate), above the roughly
   10% at which a deck comes out of the pool and inside the noise of 20%. What's left for them is
   in the bots (`BACKLOG.md`: a commander recast over a threat, graveyard casts the evaluation
