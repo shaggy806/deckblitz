@@ -1396,6 +1396,10 @@ export type GameEvent =
       readonly player: PlayerId;
       readonly delta: number;
       readonly life: number;
+      /** A loss an effect caused (rule 119.3): the controller of the spell or
+       * ability whose effect it was. Absent for damage's (119.2), a cost's,
+       * and a gain. */
+      readonly byEffectOf?: PlayerId;
     })
   | (Base & {
       readonly type: "permanent-destroyed";

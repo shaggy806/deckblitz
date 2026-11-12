@@ -1,0 +1,36 @@
+{
+ "batch": "B301",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): four more blocked commanders (2026-11-12); built trigger:deals-damage-event-any-recipient-exactly, trigger:lose-exactly-n-life-caused-by-you effect:set-x-value and static:grant-to-cards-outside-battlefield",
+ "authored": [
+  {
+   "name": "Matoc, Lavamancer",
+   "files": [
+    "engine/src/cards/pool/matoc-lavamancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sahir, Visitor in Darkness",
+   "files": [
+    "engine/src/cards/pool/sahir-visitor-in-darkness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glava, Five-Advents Mage",
+   "files": [
+    "engine/src/cards/pool/glava-five-advents-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Muckslinger Gang",
+   "files": [
+    "engine/src/cards/pool/the-muckslinger-gang.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

@@ -1230,6 +1230,13 @@ export type TriggerKind =
        * how much (Exquisite Blood). */
       readonly on: "loses-life";
       readonly who: TriggerWho;
+      /** Only a loss an effect caused (rule 119.3) — not damage's, nor a
+       * cost's — of a spell or ability this player controls, relative to this
+       * permanent: Sahir, Visitor in Darkness's "whenever a spell or ability
+       * **you control** causes you to lose exactly 1 life" is `"you"`. */
+      readonly byEffectOf?: "you";
+      /** Only exactly this much lost at once ("exactly 1 life"). */
+      readonly exactly?: number;
       /** "…loses life … **during each of their turns**" (Valgavoth,
        * Harrower of Souls, with `firstTimeEachTurn`): only while that player
        * is the active player. */
@@ -2283,6 +2290,12 @@ export type TriggerKind =
       /** Only exactly this much damage to that recipient (Ghyrson Starn's
        * "exactly 1 damage"). */
       readonly exactly?: number;
+      /** With no recipient named, once per damage event as ever, but only if
+       * at least one permanent or player was dealt exactly this much of it —
+       * Matoc, Lavamancer's "whenever a source you control deals damage, if at
+       * least one permanent or player was dealt exactly 2 of that damage".
+       * Unlike `exactly`, three recipients each dealt 2 trigger it once. */
+      readonly anyRecipientExactly?: number;
       /** Only `N` or more dealt by one source at once, never a total added up
        * over separate events (the Deus of Calamity and Dragonborn Champion
        * rulings). With a recipient named, what that recipient was dealt: "deals

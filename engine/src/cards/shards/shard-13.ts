@@ -848,6 +848,7 @@ import _poolTheEternalWanderer from "../pool/the-eternal-wanderer.js";
 import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
+import _poolTheMuckslingerGang from "../pool/the-muckslinger-gang.js";
 import _poolTheRiseOfSozin from "../pool/the-rise-of-sozin.js";
 import _poolTheoristsProxy from "../pool/theorists-proxy.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
@@ -1836,6 +1837,7 @@ const shard: CardShard = {
     _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
     _poolTheManaRig,
+    _poolTheMuckslingerGang,
     _poolTheRiseOfSozin,
     _poolTheoristsProxy,
     _poolThespiansStage,

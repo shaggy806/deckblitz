@@ -10864,6 +10864,7 @@ import _poolGlasspoolShore from "./pool/glasspool-shore.js";
 import _poolGlasswingGrace from "./pool/glasswing-grace.js";
 import _poolGlassworksShatteredYard from "./pool/glassworks-shattered-yard.js";
 import _poolGlassworks from "./pool/glassworks.js";
+import _poolGlavaFiveAdventsMage from "./pool/glava-five-advents-mage.js";
 import _poolGlazeFiend from "./pool/glaze-fiend.js";
 import _poolGleamOfAuthority from "./pool/gleam-of-authority.js";
 import _poolGleamOfBattle from "./pool/gleam-of-battle.js";
@@ -16627,6 +16628,7 @@ import _poolMasticore from "./pool/masticore.js";
 import _poolMatcaRioters from "./pool/matca-rioters.js";
 import _poolMathasFiendSeeker from "./pool/mathas-fiend-seeker.js";
 import _poolMathemagics from "./pool/mathemagics.js";
+import _poolMatocLavamancer from "./pool/matoc-lavamancer.js";
 import _poolMatoyaArchonElder from "./pool/matoya-archon-elder.js";
 import _poolMatsuTribeBirdstalker from "./pool/matsu-tribe-birdstalker.js";
 import _poolMatsuTribeDecoy from "./pool/matsu-tribe-decoy.js";
@@ -22661,6 +22663,7 @@ import _poolSaheelisArtistry from "./pool/saheelis-artistry.js";
 import _poolSaheelisDirective from "./pool/saheelis-directive.js";
 import _poolSaheelisLattice from "./pool/saheelis-lattice.js";
 import _poolSaheelisSilverwing from "./pool/saheelis-silverwing.js";
+import _poolSahirVisitorInDarkness from "./pool/sahir-visitor-in-darkness.js";
 import _poolSaiMasterThopterist from "./pool/sai-master-thopterist.js";
 import _poolSaibaCryptomancer from "./pool/saiba-cryptomancer.js";
 import _poolSaibaTrespassers from "./pool/saiba-trespassers.js";
@@ -27593,6 +27596,7 @@ import _poolTheMonumentalFacade from "./pool/the-monumental-facade.js";
 import _poolTheMotherlodeExcavator from "./pool/the-motherlode-excavator.js";
 import _poolTheMountainKingsReturn from "./pool/the-mountain-kings-return.js";
 import _poolTheMouthOfSauron from "./pool/the-mouth-of-sauron.js";
+import _poolTheMuckslingerGang from "./pool/the-muckslinger-gang.js";
 import _poolTheMycosynthGardens from "./pool/the-mycosynth-gardens.js";
 import _poolTheMycotyrant from "./pool/the-mycotyrant.js";
 import _poolTheMyriadPools from "./pool/the-myriad-pools.js";
@@ -43345,6 +43349,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlasswingGrace,
   _poolGlassworksShatteredYard,
   _poolGlassworks,
+  _poolGlavaFiveAdventsMage,
   _poolGlazeFiend,
   _poolGleamOfAuthority,
   _poolGleamOfBattle,
@@ -49108,6 +49113,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMatcaRioters,
   _poolMathasFiendSeeker,
   _poolMathemagics,
+  _poolMatocLavamancer,
   _poolMatoyaArchonElder,
   _poolMatsuTribeBirdstalker,
   _poolMatsuTribeDecoy,
@@ -55142,6 +55148,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSaheelisDirective,
   _poolSaheelisLattice,
   _poolSaheelisSilverwing,
+  _poolSahirVisitorInDarkness,
   _poolSaiMasterThopterist,
   _poolSaibaCryptomancer,
   _poolSaibaTrespassers,
@@ -60074,6 +60081,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheMotherlodeExcavator,
   _poolTheMountainKingsReturn,
   _poolTheMouthOfSauron,
+  _poolTheMuckslingerGang,
   _poolTheMycosynthGardens,
   _poolTheMycotyrant,
   _poolTheMyriadPools,
@@ -75839,6 +75847,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glasswing-grace": _poolGlasswingGrace,
   "pool/glassworks-shattered-yard": _poolGlassworksShatteredYard,
   "pool/glassworks": _poolGlassworks,
+  "pool/glava-five-advents-mage": _poolGlavaFiveAdventsMage,
   "pool/glaze-fiend": _poolGlazeFiend,
   "pool/gleam-of-authority": _poolGleamOfAuthority,
   "pool/gleam-of-battle": _poolGleamOfBattle,
@@ -81602,6 +81611,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/matca-rioters": _poolMatcaRioters,
   "pool/mathas-fiend-seeker": _poolMathasFiendSeeker,
   "pool/mathemagics": _poolMathemagics,
+  "pool/matoc-lavamancer": _poolMatocLavamancer,
   "pool/matoya-archon-elder": _poolMatoyaArchonElder,
   "pool/matsu-tribe-birdstalker": _poolMatsuTribeBirdstalker,
   "pool/matsu-tribe-decoy": _poolMatsuTribeDecoy,
@@ -87636,6 +87646,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/saheelis-directive": _poolSaheelisDirective,
   "pool/saheelis-lattice": _poolSaheelisLattice,
   "pool/saheelis-silverwing": _poolSaheelisSilverwing,
+  "pool/sahir-visitor-in-darkness": _poolSahirVisitorInDarkness,
   "pool/sai-master-thopterist": _poolSaiMasterThopterist,
   "pool/saiba-cryptomancer": _poolSaibaCryptomancer,
   "pool/saiba-trespassers": _poolSaibaTrespassers,
@@ -92568,6 +92579,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-motherlode-excavator": _poolTheMotherlodeExcavator,
   "pool/the-mountain-kings-return": _poolTheMountainKingsReturn,
   "pool/the-mouth-of-sauron": _poolTheMouthOfSauron,
+  "pool/the-muckslinger-gang": _poolTheMuckslingerGang,
   "pool/the-mycosynth-gardens": _poolTheMycosynthGardens,
   "pool/the-mycotyrant": _poolTheMycotyrant,
   "pool/the-myriad-pools": _poolTheMyriadPools,

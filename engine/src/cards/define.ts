@@ -2806,6 +2806,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     /** "Are the chosen type" with no "in addition" (Conspiracy): every other
      * creature type goes (rule 205.1a). */
     readonly setsChosenCreatureType?: true;
+    /** Layer 7c off the battlefield: "creature spells you control and
+     * creature cards you own in any zone other than the battlefield or the
+     * stack get +3/+3" (The Muckslinger Gang) — what a P/T-reading filter, a
+     * "power 2 or less" tutor or reanimation, then sees. */
+    readonly grantPt?: readonly [number, number];
   };
   /**
    * An alternative cost (rule 118.9) for the spells this permanent's

@@ -362,6 +362,7 @@ import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
 import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
+import _poolGlavaFiveAdventsMage from "../pool/glava-five-advents-mage.js";
 import _poolGlimpseTheImpossible from "../pool/glimpse-the-impossible.js";
 import _poolGlitteringStockpile from "../pool/glittering-stockpile.js";
 import _poolGoblinBoomKeg from "../pool/goblin-boom-keg.js";
@@ -1419,6 +1420,7 @@ const shard: CardShard = {
     _poolGlacierwoodSiege,
     _poolGlaringAegis,
     _poolGlasspoolShore,
+    _poolGlavaFiveAdventsMage,
     _poolGlimpseTheImpossible,
     _poolGlitteringStockpile,
     _poolGoblinBoomKeg,

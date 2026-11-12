@@ -6200,6 +6200,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * "You may have the value of X become 5" (Glava, Five-Advents Mage): the
+       * X of the spell whose casting, or the ability whose activation, fired
+       * this, while it's still that spell or ability on the stack (rule
+       * 400.7). As `double-x`: no mana is paid or refunded, the spell's mana
+       * value there counts the new X (202.3e) and its permanent keeps it
+       * (107.3m). One with no X (`null`) is left alone.
+       */
+      readonly kind: "set-x";
+      readonly target: "trigger-spell" | "trigger-ability";
+      readonly value: number;
+    }
+  | {
+      /**
        * Time counters on exiled cards, which then have suspend (rule
        * 702.62b — a card is suspended if it's in exile, has suspend, and has
        * a time counter on it). Two forms:
@@ -12290,6 +12303,9 @@ export interface EffectApi {
   /** Double the X of the spell whose casting fired this — see the
    * `"double-x"` {@link EffectSpec}. */
   doubleTriggerSpellX(): void;
+  /** Set the X of the spell or ability whose casting or activation fired
+   * this — see the `"set-x"` {@link EffectSpec}. */
+  setTriggerX(which: "trigger-spell" | "trigger-ability", value: number): void;
   /** Time counters on exiled cards, which have suspend — see the
    * `"give-suspend"` {@link EffectSpec}. `target` is the card the spec's
    * `target` names, resolved; absent for the "exiled this way" form. */
@@ -18780,6 +18796,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "double-x":
       ctx.doubleTriggerSpellX();
+      return;
+    case "set-x":
+      ctx.setTriggerX(spec.target, spec.value);
       return;
     case "give-suspend": {
       const counters = spec.timeCounters === "mana-value" ? "mana-value" : amountValue(spec.timeCounters, ctx);

@@ -485,6 +485,7 @@ import _poolMarduWoeReaper from "../pool/mardu-woe-reaper.js";
 import _poolMarshmistTitan from "../pool/marshmist-titan.js";
 import _poolMaskwoodNexus from "../pool/maskwood-nexus.js";
 import _poolMasterDecoy from "../pool/master-decoy.js";
+import _poolMatocLavamancer from "../pool/matoc-lavamancer.js";
 import _poolMazeAbomination from "../pool/maze-abomination.js";
 import _poolMegaFlare from "../pool/mega-flare.js";
 import _poolMegatog from "../pool/megatog.js";
@@ -1471,6 +1472,7 @@ const shard: CardShard = {
     _poolMarshmistTitan,
     _poolMaskwoodNexus,
     _poolMasterDecoy,
+    _poolMatocLavamancer,
     _poolMazeAbomination,
     _poolMegaFlare,
     _poolMegatog,

@@ -615,6 +615,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   proliferate: (n, v) => v.child(n.then),
   "time-travel": none,
   "double-x": none,
+  "set-x": none,
   // Its card is never a target: a card found, the spell itself, or the
   // cards exiled this way.
   "give-suspend": none,

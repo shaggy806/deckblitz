@@ -2365,10 +2365,11 @@ export class Game {
       { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
     >;
     /** Unqualified `deals-damage` triggers owed, once per watcher ability and
-     * source for the whole event ({@link dealsDamageOncePerEvent}). */
+     * source for the whole event ({@link dealsDamageOncePerEvent}). `exactlyHit`:
+     * some recipient was dealt exactly its `anyRecipientExactly`. */
     readonly dealsDamage: Map<
       string,
-      { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+      { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number; exactlyHit?: boolean }
     >;
   } | null = null;
 
@@ -31524,14 +31525,18 @@ export class Game {
             const amount =
               event.target.kind === "object" ? event.amount * (this.state.objects[event.target.object]?.stackCount ?? 1) : event.amount;
             const owed = damageBatch.dealsDamage.get(key);
+            const exactly = ability.trigger.on === "deals-damage" ? ability.trigger.anyRecipientExactly : undefined;
+            const hit = exactly !== undefined && event.amount / (event.sources ?? 1) === exactly;
             if (owed === undefined) {
               damageBatch.dealsDamage.set(key, {
                 ability,
                 trigger: { ...withoutTriggerPlayer(base), triggerValue: amount },
                 multiplier,
+                exactlyHit: hit,
               });
             } else {
               owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + amount };
+              if (hit) owed.exactlyHit = true;
             }
             return;
           }
@@ -32565,7 +32570,9 @@ export class Game {
           event.type === "life-changed" &&
           event.delta < 0 &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
-          (spec.duringTheirTurn !== true || event.player === this.activePlayer)
+          (spec.duringTheirTurn !== true || event.player === this.activePlayer) &&
+          (spec.exactly === undefined || -event.delta === spec.exactly) &&
+          (spec.byEffectOf === undefined || event.byEffectOf === self.controller)
         );
       case "counters-put":
         // "… or player": a player's counters, energy among them (rule 107.14).
@@ -33514,6 +33521,14 @@ export class Game {
   ): boolean {
     if (spec.combat !== undefined && event.combat !== spec.combat) return false;
     if (spec.exactly !== undefined && event.amount / (event.sources ?? 1) !== spec.exactly) return false;
+    // Outside a damage batch an event is its one recipient's.
+    if (
+      spec.anyRecipientExactly !== undefined &&
+      this.damageBatch === null &&
+      event.amount / (event.sources ?? 1) !== spec.anyRecipientExactly
+    ) {
+      return false;
+    }
     // A trigger that names no recipient reads the whole event's total, settled
     // with its damage batch ({@link dealsDamageOncePerEvent}).
     if (
@@ -36185,6 +36200,7 @@ export class Game {
           this.state.objects[source] !== undefined && printedCardName(this.state.objects[source]) === RAD_CARD
             ? "radiation"
             : undefined,
+          controller,
         ),
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
       addMana: (player, mana, amount, spec) => {
@@ -39427,6 +39443,19 @@ controlledBy,
         const spell = this.state.objects[triggerObject];
         if (spell?.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell || spell.xValue === null) return;
         spell.xValue *= 2;
+        invalidateComputedCache();
+      },
+      setTriggerX: (which, value) => {
+        if (triggerObject === undefined) return;
+        const object = this.state.objects[triggerObject];
+        if (object?.zone !== "stack" || object.xValue === null) return;
+        if (which === "trigger-spell") {
+          // Still that spell (rule 400.7).
+          if (refs.triggerSpell === undefined || (object.zoneChangeCount ?? 0) !== refs.triggerSpell) return;
+        } else if (object.kind !== "ability") {
+          return;
+        }
+        object.xValue = value;
         invalidateComputedCache();
       },
       shuffleLibrary: (player) => this.shuffleLibraryOf(player ?? controller),
@@ -55994,9 +56023,16 @@ controlledBy,
    * permanent that put the ability on the stack (rule 400.7) and the player
    * losing is one of its controller's opponents. What was actually lost, so
    * a life total that can't change counts nothing. */
-  private loseLifeTallied(player: PlayerId, amount: number, cause?: LifeLossReplacement["from"]): void {
+  private loseLifeTallied(
+    player: PlayerId,
+    amount: number,
+    cause?: LifeLossReplacement["from"],
+    /** The controller of the spell or ability whose effect this is
+     * (`life-changed`'s `byEffectOf`). */
+    byEffectOf?: PlayerId,
+  ): void {
     const before = this.state.players[player]?.life;
-    this.changeLife(player, -amount, false, cause);
+    this.changeLife(player, -amount, false, cause, byEffectOf);
     const lost = before === undefined ? 0 : before - this.state.players[player].life;
     const resolving = this.state.resolvingSource;
     if (lost <= 0 || resolving === undefined) return;
@@ -56693,7 +56729,7 @@ controlledBy,
       >(),
       dealsDamage: new Map<
         string,
-        { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+        { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number; exactlyHit?: boolean }
       >(),
     };
     this.damageBatch = batch;
@@ -56723,7 +56759,9 @@ controlledBy,
     for (const { ability, trigger, multiplier } of batch.countersRemoved.values()) {
       this.queueTrigger(ability, trigger, multiplier);
     }
-    for (const { ability, trigger, multiplier } of batch.dealsDamage.values()) {
+    for (const { ability, trigger, multiplier, exactlyHit } of batch.dealsDamage.values()) {
+      const exactly = ability.trigger.on === "deals-damage" ? ability.trigger.anyRecipientExactly : undefined;
+      if (exactly !== undefined && exactlyHit !== true) continue;
       if (enough(ability, trigger)) this.queueTrigger(ability, trigger, multiplier);
     }
     for (const owed of batch.damageTo.values()) {
@@ -56873,7 +56911,14 @@ controlledBy,
     };
   }
 
-  private changeLife(player: PlayerId, delta: number, lossReplaced = false, cause?: LifeLossReplacement["from"]): void {
+  private changeLife(
+    player: PlayerId,
+    delta: number,
+    lossReplaced = false,
+    cause?: LifeLossReplacement["from"],
+    /** A loss an effect caused: its spell's or ability's controller (rule 119.3). */
+    byEffectOf?: PlayerId,
+  ): void {
     if (this.dryRunningEvents) {
       if (delta > 0 && this.state.awaiting === null && !playerGainLifeProhibited(this.state, this.registry, player)) {
         this.lifeOrderAsked(player, delta);
@@ -56935,6 +56980,7 @@ controlledBy,
       player,
       delta,
       life: playerState.life,
+      ...(delta < 0 && byEffectOf !== undefined ? { byEffectOf } : {}),
     });
   }
 
@@ -57052,7 +57098,7 @@ controlledBy,
   ): void {
     if (delta === 0) return;
     for (const p of this.scopedPlayers(controller, who, triggerObject, triggerLastKnown, triggerPlayer, false, triggerSpellController)) {
-      if (delta < 0) this.loseLifeTallied(p, -delta);
+      if (delta < 0) this.loseLifeTallied(p, -delta, undefined, controller);
       else this.changeLife(p, delta);
     }
   }

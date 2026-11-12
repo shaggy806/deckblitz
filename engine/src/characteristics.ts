@@ -6259,6 +6259,17 @@ function computeCharacteristicsUncached(
     power += modifier.power;
     toughness += modifier.toughness;
   }
+  // Off the battlefield, a static reaching there (rule 604.1): "creature
+  // spells you control and creature cards you own in any zone other than the
+  // battlefield or the stack get +3/+3" (The Muckslinger Gang).
+  if (!onBattlefield && object.kind === "card") {
+    for (const { source, ability } of outsideTypeSources(state, registry)) {
+      const grant = ability.outsideBattlefield?.grantPt;
+      if (grant === undefined || !outsideReaches(state, registry, source, ability, object, types)) continue;
+      power += grant[0];
+      toughness += grant[1];
+    }
+  }
   // Rule 613.4d — switches, after every other P/T effect and counter (the
   // 7c above). Each takes the power as it stands to the toughness and back.
   for (const modifier of object.modifiers) {
