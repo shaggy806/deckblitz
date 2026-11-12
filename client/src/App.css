@@ -4358,6 +4358,18 @@
   overflow-y: auto;
   padding-bottom: 4px;
 }
+/* Room inside the scrolling box for what a tile draws outside itself: a
+   picked card's gold ring and glow, and the hover lift. A scrolling box clips
+   at its edge, so the top row's ring was cut off under the header and the
+   first column's at the left (the user, 2026-11-11). The margins take the
+   same room back, so nothing moves: the top's is the gap under the header,
+   the sides' come out of the box's own padding. Only the viewer's own list,
+   a child of the box: a pile's (`PileViewer`) sits right under its "Choose"
+   button, which the room above would cover. */
+.zone-viewer-box > .zone-viewer-cards {
+  padding: 10px 8px 8px;
+  margin: -10px -8px -4px;
+}
 /* a read-only display, not an interactive board — full visibility regardless
    of the tile's own disabled/clickable state (same trick the stack uses) */
 .zone-viewer-cards .card-tile:disabled {
