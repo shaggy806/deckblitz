@@ -16,7 +16,6 @@ async function control(request: APIRequestContext, body: object): Promise<void> 
 test('a scrolled log shows nothing above its sticky header', async ({ page, request }) => {
   await control(request, { op: 'reset', room: 'TWOAA' })
   await page.goto('/?room=TWOAA')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await page.getByRole('button', { name: 'History', exact: true }).click()
   const box = page.locator('.event-log')
   await expect(box.locator('li').first()).toBeVisible()
@@ -50,7 +49,6 @@ test('the History lists the whole game after many frames, and again after a relo
     }),
   )
   await page.goto('/?room=CASTN')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   const pass = page.getByRole('button', { name: 'Pass (space)' })
   await expect(pass).toBeEnabled({ timeout: 20_000 })
   /** The History's lines, each led by its event's number. */

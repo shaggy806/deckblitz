@@ -21,12 +21,11 @@ for (const { room, size } of CASES) {
     expect((await request.post(CONTROL, { data: { op: 'reset', room } })).ok()).toBe(true)
     await page.setViewportSize(size)
     await page.goto(`/?room=${room}`)
-    await page.getByRole('button', { name: 'Ready', exact: true }).click()
     await expect(page.getByText(`room ${room}`)).toBeVisible()
 
     const top = page.locator('.library-top')
     await expect(top).toBeVisible()
-    // Off the board: Ready's click left the pointer where a tile now is.
+    // The pointer off the board, so no tile's popover is up to start with.
     await page.mouse.move(5, 5)
     await expect(page.locator('.mini-tile-popover')).toHaveCount(0)
     await top.hover()

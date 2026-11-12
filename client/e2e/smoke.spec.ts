@@ -21,10 +21,9 @@ function pageErrors(page: Page): string[] {
   return errors
 }
 
-/** Open a room and claim its first (human) seat. */
+/** Open a room: a dev build takes its first free seat (alice's) itself. */
 async function takeSeat(page: Page, room: string): Promise<void> {
   await page.goto(`/?room=${room}`)
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.getByText(`room ${room}`)).toBeVisible()
 }
 
@@ -49,7 +48,7 @@ test('a 2-player table', async ({ page, request }) => {
   const errors = pageErrors(page)
   await takeSeat(page, 'TWOAA')
 
-  await expect(page.getByText("Player 1's Turn")).toBeVisible()
+  await expect(page.getByText("Alice's Turn")).toBeVisible()
   for (const card of ['Colossal Dreadmaw', 'Serra Angel', 'Hill Giant']) {
     await expect(page.getByText(card, { exact: true }).first()).toBeVisible()
   }
@@ -63,7 +62,7 @@ test('a 4-player table fits a short screen', async ({ page, request }) => {
   const errors = pageErrors(page)
   await takeSeat(page, 'FOURP')
 
-  for (const seat of ['Bob', 'Carol', 'Dave', 'Player 1']) {
+  for (const seat of ['Bob', 'Carol', 'Dave', 'Alice']) {
     await expect(page.getByText(seat, { exact: true }).first()).toBeVisible()
   }
   await expectNoHorizontalScroll(page)

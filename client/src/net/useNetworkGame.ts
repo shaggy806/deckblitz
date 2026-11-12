@@ -9,7 +9,8 @@
  * gets `status: 'no-room'` and can create or join one. Once a room is joined,
  * a previously-claimed seat (its token stored in sessionStorage, keyed by
  * room id) is reclaimed automatically; otherwise `status: 'choosing-seat'`
- * lists the open seats to pick from.
+ * lists the open seats to pick from — except in a dev build joining a game
+ * already under way (a dev-rooms board), which takes the first free seat.
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -731,8 +732,13 @@ export function useNetworkGame(): NetworkGame {
             return
           }
           const stored = loadStoredSeat(message.roomId)
-          // A scenario builder just opened: take the first seat free.
-          if (!stored && pendingBuilderRef.current && message.pending !== true) {
+          // A scenario builder just opened, or — in a dev build — a game
+          // already under way with no seat of this tab's (a dev-rooms
+          // board): take the first seat free and go straight to the board.
+          // The seat picker there was the lobby's seat board, deck pickers
+          // and a Ready button that only claimed the seat. A full room still
+          // gets the picker, to spectate.
+          if (!stored && message.pending !== true && (pendingBuilderRef.current || import.meta.env.DEV)) {
             pendingBuilderRef.current = false
             const free = message.seats.find((s) => !s.claimed && !s.isBot)
             if (free !== undefined) {

@@ -107,7 +107,6 @@ for (const { room, size, animScale } of [
       window.localStorage.setItem('mtg.motion', JSON.stringify({ animScale: scale }))
     }, animScale)
     await page.goto(`/?room=${room}`)
-    await page.getByRole('button', { name: 'Ready', exact: true }).click()
     await expect(page.getByRole('button', { name: 'Pass (space)' })).toBeEnabled({ timeout: 20_000 })
     const shot = (name: string) =>
       page.screenshot({ path: test.info().outputPath(`${room}-${size.width}x${size.height}-${name}.png`) })

@@ -108,7 +108,6 @@ function countsDown(seen: readonly string[] | undefined, from: number, to: numbe
 
 async function takeSeat(page: Page, room: string): Promise<void> {
   await page.goto(`/?room=${room}`)
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.getByText(`room ${room}`)).toBeVisible()
   await expect(page.getByRole('button', { name: 'Pass (space)' })).toBeEnabled()
 }

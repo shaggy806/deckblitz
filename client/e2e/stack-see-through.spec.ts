@@ -28,7 +28,6 @@ test('the stack fades to show the board under it: Alt held, or its tab pinned', 
   await control(request, { op: 'reset', room: 'PUTD4' })
   await page.setViewportSize({ width: 1366, height: 768 })
   await page.goto('/?room=PUTD4')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.locator('.hand-strip')).toBeVisible({ timeout: 20_000 })
   await control(request, { op: 'spawn', room: 'PUTD4', player: 'bob', zone: 'stack', cards: ['The Dawning Archaic'] })
   const pile = page.locator('.stack-overlay')

@@ -29,7 +29,6 @@ for (const { room, size } of [
     await control(request, { op: 'life', room, player: 'bob', value: 10_000 })
     await page.setViewportSize(size)
     await page.goto(`/?room=${room}`)
-    await page.getByRole('button', { name: 'Ready', exact: true }).click()
     const pass = page.getByRole('button', { name: 'Pass (space)' })
     await expect(pass).toBeEnabled({ timeout: 20_000 })
     await pass.click()
@@ -63,7 +62,6 @@ test('SCUT4: a stack asks how many attack each opponent', async ({ page, request
   for (const player of ['bob', 'carol']) await control(request, { op: 'life', room: 'SCUT4', player, value: 10_000 })
   await page.setViewportSize({ width: 1366, height: 768 })
   await page.goto('/?room=SCUT4')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   const pass = page.getByRole('button', { name: 'Pass (space)' })
   await expect(pass).toBeEnabled({ timeout: 20_000 })
   await pass.click()
@@ -105,7 +103,6 @@ for (const size of [
     await control(request, { op: 'reset', room: 'SCUTB' })
     await page.setViewportSize(size)
     await page.goto('/?room=SCUTB')
-    await page.getByRole('button', { name: 'Ready', exact: true }).click()
 
     // It's bob's turn: he attacks with his stack of 150; alice declares blockers.
     await expect(page.getByText(/Declare blockers/)).toBeVisible({ timeout: 90_000 })

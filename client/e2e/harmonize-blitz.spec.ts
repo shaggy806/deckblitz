@@ -45,7 +45,6 @@ async function openRoom(page: Page, request: APIRequestContext, room: string): P
   await control(request, { op: 'reset', room })
   const state = await control<RoomState>(request, { op: 'state', room })
   await page.goto(`/?room=${room}`)
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.getByText(`room ${room}`)).toBeVisible()
   return state
 }

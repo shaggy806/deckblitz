@@ -36,7 +36,6 @@ const clickEmptyBoard = async (page: Page, player: string) => {
 const toAttackers = async (page: Page, room: string) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await page.goto(`/?room=${room}`)
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   const pass = page.getByRole('button', { name: 'Pass (space)' })
   await expect(pass).toBeEnabled({ timeout: 20_000 })
   await pass.click()
@@ -189,7 +188,6 @@ test("a long name's word stays whole on the stack and on a hover card", async ({
   await control(request, { op: 'spawn', room: 'TWOPW', player: 'bob', cards: ['Sphinx of Enlightenment'] })
   await page.setViewportSize({ width: 1366, height: 768 })
   await page.goto('/?room=TWOPW')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.getByRole('button', { name: 'Pass (space)' })).toBeEnabled({ timeout: 20_000 })
 
   const lines = (name: Locator) =>

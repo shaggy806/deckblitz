@@ -26,7 +26,6 @@ test('the hand keeps its spacing through a resize and back', async ({ page, requ
   await control(request, { op: 'reset', room: 'SCUTB' })
   await page.setViewportSize({ width: 2560, height: 1392 })
   await page.goto('/?room=SCUTB')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.locator('.hand-cards .hand-card')).toHaveCount(7, { timeout: 20_000 })
   await page.waitForTimeout(1000)
   const first = await fan(page)

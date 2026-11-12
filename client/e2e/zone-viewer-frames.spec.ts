@@ -19,7 +19,6 @@ test('a graveyard viewer stays open, and current, as a new frame lands', async (
   await control(request, { op: 'reset', room: 'ARRWS' })
   await control(request, { op: 'move', room: 'ARRWS', names: ['Grizzly Bears'], to: 'graveyard' })
   await page.goto('/?room=ARRWS')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.locator('.hand-strip')).toBeVisible({ timeout: 20_000 })
 
   await page.locator('[data-graveyard-count-of="bob"]').click()

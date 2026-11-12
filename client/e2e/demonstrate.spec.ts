@@ -39,7 +39,6 @@ test('DEMON: demonstrate copies for alice and then for bob, whose copy is on top
   const flourish = state.players.alice.hand.find((l) => l.endsWith('Transforming Flourish'))!.split(' ')[0]
   const bears = state.players.bob.battlefield.find((l) => l.includes('Grizzly Bears'))!.split(' ')[0]
   await page.goto('/?room=DEMON')
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.getByRole('button', { name: 'Pass (space)' })).toBeEnabled(paced)
   // One way to cast it: the card is the button. The fanned hand never holds
   // still for a click.

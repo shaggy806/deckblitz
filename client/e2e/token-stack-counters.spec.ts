@@ -74,7 +74,6 @@ function pageErrors(page: Page): string[] {
 
 async function takeSeat(page: Page, room: string): Promise<void> {
   await page.goto(`/?room=${room}`)
-  await page.getByRole('button', { name: 'Ready', exact: true }).click()
   await expect(page.getByText(`room ${room}`)).toBeVisible()
 }
 

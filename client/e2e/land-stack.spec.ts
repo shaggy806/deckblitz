@@ -60,7 +60,6 @@ for (const room of ['LANDS', 'LAND4']) {
     const errors: string[] = []
     page.on('pageerror', (error) => errors.push(error.message))
     await page.goto(`/?room=${room}`)
-    await page.getByRole('button', { name: 'Ready', exact: true }).click()
     await expect(page.getByText(`room ${room}`)).toBeVisible()
 
     const before = await forests(request, room)
