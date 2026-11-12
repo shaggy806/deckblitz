@@ -470,6 +470,7 @@ import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
 import _poolLilianaDeathMage from "../pool/liliana-death-mage.js";
 import _poolLilianasIndignation from "../pool/lilianas-indignation.js";
+import _poolLimDulsVault from "../pool/lim-duls-vault.js";
 import _poolLivingEnd from "../pool/living-end.js";
 import _poolLlanowarSentinel from "../pool/llanowar-sentinel.js";
 import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
@@ -1462,6 +1463,7 @@ const shard: CardShard = {
     _poolLightningReflexes,
     _poolLilianaDeathMage,
     _poolLilianasIndignation,
+    _poolLimDulsVault,
     _poolLivingEnd,
     _poolLlanowarSentinel,
     _poolLoathsomeCurator,

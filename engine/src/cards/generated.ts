@@ -15687,6 +15687,7 @@ import _poolLimDulsCohort from "./pool/lim-duls-cohort.js";
 import _poolLimDulsHex from "./pool/lim-duls-hex.js";
 import _poolLimDulsHighGuard from "./pool/lim-duls-high-guard.js";
 import _poolLimDulsPaladin from "./pool/lim-duls-paladin.js";
+import _poolLimDulsVault from "./pool/lim-duls-vault.js";
 import _poolLimestoneGolem from "./pool/limestone-golem.js";
 import _poolLiminalHold from "./pool/liminal-hold.js";
 import _poolLimitedResources from "./pool/limited-resources.js";
@@ -48308,6 +48309,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLimDulsHex,
   _poolLimDulsHighGuard,
   _poolLimDulsPaladin,
+  _poolLimDulsVault,
   _poolLimestoneGolem,
   _poolLiminalHold,
   _poolLimitedResources,
@@ -80942,6 +80944,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lim-duls-hex": _poolLimDulsHex,
   "pool/lim-duls-high-guard": _poolLimDulsHighGuard,
   "pool/lim-duls-paladin": _poolLimDulsPaladin,
+  "pool/lim-duls-vault": _poolLimDulsVault,
   "pool/limestone-golem": _poolLimestoneGolem,
   "pool/liminal-hold": _poolLiminalHold,
   "pool/limited-resources": _poolLimitedResources,

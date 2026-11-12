@@ -6633,8 +6633,10 @@ export type EffectSpec =
       /** "You may repeat this process any number of times" (Ad Nauseam,
        * Forbidden Ritual): after a pass (and `again`, if it holds), its
        * controller is asked whether to go again — `cost` is "you may pay
-       * {G}. If you do, repeat" (Forgotten Lore). */
-      readonly mayAgain?: true | { readonly cost: string };
+       * {G}. If you do, repeat" (Forgotten Lore); `costLife` is life paid
+       * for each pass the same way — Lim-Dûl's Vault's "as many times as you
+       * choose, you may pay 1 life, …" (the `may`'s own `costLife`). */
+      readonly mayAgain?: true | { readonly cost?: string; readonly costLife?: EffectAmount };
       /** Engine-built, never authored: passes done, the resolution's own
        * "this way" start (restored once the last pass is done, so what
        * follows reads every pass — Demonlord Belzenlok's "for each card put
@@ -7694,6 +7696,14 @@ export type EffectSpec =
        * with Discovery), each once, however many times they searched: whoever
        * a `search-library`'s `shufflesLater` left owing a shuffle. */
       readonly searchers?: true;
+      /** All but the top this-many cards are shuffled, those staying on top
+       * in their order — Lim-Dûl's Vault's "shuffle and put the last cards
+       * you looked at this way on top" (its ruling: "shuffle the rest of
+       * your library and then put the top five cards back on top"; a
+       * `look-and-choose` `top-any-order` after it orders them). Still a
+       * shuffle of that library (rule 701.24): "whenever a player shuffles"
+       * sees it. Not with `searchers`. */
+      readonly exceptTop?: EffectAmount;
     }
   | {
       /** "You may play an additional land this turn" (Explore) — `amount`
@@ -12570,8 +12580,8 @@ export interface EffectApi {
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
   finishExiledAsItResolves(spell: ObjectId, feather: boolean, intoHand?: true): void;
   /** Shuffle the controller's library — or `player`'s — see the
-   * `shuffle-library` {@link EffectSpec}. */
-  shuffleLibrary(player?: PlayerId): void;
+   * `shuffle-library` {@link EffectSpec}; `exceptTop` cards stay on top. */
+  shuffleLibrary(player?: PlayerId, exceptTop?: number): void;
   /** The resolving spell's division of a divided amount — see
    * `GameObject.division`. Empty outside one. */
   readonly division: readonly number[];
@@ -14109,7 +14119,10 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
             prompt: "Repeat this process?",
             effect: next,
             else: declined,
-            ...(typeof spec.mayAgain === "object" ? { cost: spec.mayAgain.cost } : {}),
+            ...(typeof spec.mayAgain === "object" && spec.mayAgain.cost !== undefined ? { cost: spec.mayAgain.cost } : {}),
+            ...(typeof spec.mayAgain === "object" && spec.mayAgain.costLife !== undefined
+              ? { costLife: spec.mayAgain.costLife }
+              : {}),
           },
           ctx,
         );
@@ -19517,12 +19530,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ctx.shuffleSearchers();
         return;
       }
+      const keep = spec.exceptTop === undefined ? undefined : amountValue(spec.exceptTop, ctx);
       if (spec.target === undefined) {
-        ctx.shuffleLibrary();
+        ctx.shuffleLibrary(undefined, keep);
         return;
       }
       const whose = ctx.targets[spec.target];
-      if (whose?.kind === "player") ctx.shuffleLibrary(whose.player);
+      if (whose?.kind === "player") ctx.shuffleLibrary(whose.player, keep);
       return;
     }
     case "damage-divided":

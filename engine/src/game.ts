@@ -39673,7 +39673,7 @@ controlledBy,
         object.xValue = value;
         invalidateComputedCache();
       },
-      shuffleLibrary: (player) => this.shuffleLibraryOf(player ?? controller),
+      shuffleLibrary: (player, exceptTop) => this.shuffleLibraryOf(player ?? controller, exceptTop),
       division: opts.division ?? [],
       copyTriggerSpell: (spell, copyOpts) => {
         const original = copyOpts.original ?? triggerObject;
@@ -42674,13 +42674,16 @@ controlledBy,
     return object.zone !== "battlefield" || (object.faceDown === undefined && !hasLostAbilities(this.state, this.registry,object));
   }
 
-  private shuffleLibraryOf(player: PlayerId): void {
+  /** `exceptTop`: that many cards stay on top in their order, the rest
+   * shuffled under them (Lim-Dûl's Vault) — still this library shuffled. */
+  private shuffleLibraryOf(player: PlayerId, exceptTop = 0): void {
     const library = this.state.zones.perPlayer[player].library;
-    const order = shuffle([...library], this.rng);
+    const kept = library.slice(0, Math.max(0, exceptTop));
+    const order = shuffle(library.slice(kept.length), this.rng);
     library.length = 0;
-    library.push(...order);
+    library.push(...kept, ...order);
     this.state.rngState = this.rng.seed;
-    this.forgetStints(library);
+    this.forgetStints(order);
     this.emit({ type: "library-shuffled", player });
   }
 
