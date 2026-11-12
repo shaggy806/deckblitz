@@ -15704,6 +15704,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesColorWith" in value ||
       "attachedToObject" in value ||
       "controlledByRef" in value ||
+      "ownedByRef" in value ||
       "wasAttachedTo" in value ||
       "inSet" in value ||
       "createdWithSource" in value ||
@@ -15988,6 +15989,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const { controlledByRef: ref, ...rest } = walked;
       const player = resolvePlayerRef(ref as PlayerRef, ctx);
       walked = { ...rest, controllerIn: player === undefined ? [] : [player] };
+    }
+    // "A permanent owned by the voter": likewise, its owner.
+    if (walked["ownedByRef"] !== undefined) {
+      const { ownedByRef: ref, ...rest } = walked;
+      const player = resolvePlayerRef(ref as PlayerRef, ctx);
+      walked = { ...rest, ownerIn: player === undefined ? [] : [player] };
     }
     // "An Equipment that was attached to Zack Fair" (sacrificed for the
     // cost), "all Equipment attached to that creature" as it dies: what was

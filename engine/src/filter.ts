@@ -923,6 +923,13 @@ export interface CardFilter {
   readonly protectedBy?: "you" | "opponent";
   /** Owned by the filtering player / anyone else (zone-agnostic, for graveyards). */
   readonly ownedBy?: "you" | "opponent";
+  /** Owned by the one player a {@link PlayerRef} names, whoever chooses —
+   * Expropriate's "for each money vote, choose a permanent **owned by the
+   * voter**" (`"that-player"` in a `for-each-vote`). Bound to `ownerIn` as an
+   * effect applies, as `controlledByRef` is; unbound, it matches nothing. */
+  readonly ownedByRef?: PlayerRef;
+  /** Owned by one of these players — `ownedByRef` bound, never authored. */
+  readonly ownerIn?: readonly PlayerId[];
   /** Its controller isn't its owner (rule 108.4) — read from the object's
    * side, not the filtering player's: Gonti, Night Minister's "whenever a
    * player casts **a spell they don't own**". */
@@ -2664,6 +2671,8 @@ export function matchesFilter(
   }
   if (filter.ownedBy === "you" && owner !== ctx.you) return false;
   if (filter.ownedBy === "opponent" && owner === ctx.you) return false;
+  if (filter.ownerIn !== undefined && !filter.ownerIn.includes(owner)) return false;
+  if (filter.ownedByRef !== undefined) return false;
   if (filter.notOwnedByController === true && owner === controller) return false;
   if (filter.protectedBy !== undefined) {
     // A battle stops having a protector as it leaves the battlefield.

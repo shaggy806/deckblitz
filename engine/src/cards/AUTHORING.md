@@ -716,7 +716,8 @@ trigger object also matches itself, as "that permanent and all others with the s
 `sharesColorWith`, `sharesCardTypeWith` / `sharesPermanentTypeWith` / `sharesCreatureTypeWith` /
 `sharesLandTypeWith`, `attachedToObject`, and `controlledByRef: PlayerRef` ("all lands that player
 controls"; `controlledByTarget` on an effect is the older form, for a slot, and reads the whole filter
-from that player's side). All are bound as the effect applies; only `"source"`, `"attached"` and
+from that player's side), and `ownedByRef: PlayerRef` (Expropriate's "choose a permanent **owned by the
+voter**", `"that-player"` in a `for-each-vote`, the caster choosing). All are bound as the effect applies; only `"source"`, `"attached"` and
 `{ attachmentsOf: "source" }` read inside a static (a test holds the pool to it).
 "Choose a land you control. Then search … for basic land cards **which have the same name as the
 chosen land**" (Canoptek Wraith) is a `choose-permanents` with `remember: true` and an empty `then`,

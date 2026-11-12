@@ -8775,6 +8775,7 @@ import _poolExposeTheCulprit from "./pool/expose-the-culprit.js";
 import _poolExposeToDaylight from "./pool/expose-to-daylight.js";
 import _poolExpressiveFiredancer from "./pool/expressive-firedancer.js";
 import _poolExpressiveIteration from "./pool/expressive-iteration.js";
+import _poolExpropriate from "./pool/expropriate.js";
 import _poolExpunge from "./pool/expunge.js";
 import _poolExquisiteArchangel from "./pool/exquisite-archangel.js";
 import _poolExquisiteBlood from "./pool/exquisite-blood.js";
@@ -41400,6 +41401,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExposeToDaylight,
   _poolExpressiveFiredancer,
   _poolExpressiveIteration,
+  _poolExpropriate,
   _poolExpunge,
   _poolExquisiteArchangel,
   _poolExquisiteBlood,
@@ -74038,6 +74040,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/expose-to-daylight": _poolExposeToDaylight,
   "pool/expressive-firedancer": _poolExpressiveFiredancer,
   "pool/expressive-iteration": _poolExpressiveIteration,
+  "pool/expropriate": _poolExpropriate,
   "pool/expunge": _poolExpunge,
   "pool/exquisite-archangel": _poolExquisiteArchangel,
   "pool/exquisite-blood": _poolExquisiteBlood,
