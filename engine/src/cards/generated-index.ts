@@ -587,6 +587,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Scryb Sprites Token",
   "Sculpture Token",
   "Sculpture Treasure Token",
+  "Selenia's Curse Token",
   "Serf Token",
   "Servo Token",
   "Settlement Token",

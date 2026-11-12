@@ -9666,6 +9666,7 @@ import _poolFlipTheSwitch from "./pool/flip-the-switch.js";
 import _poolFlitterstepEidolon from "./pool/flitterstep-eidolon.js";
 import _poolFlitterwingNuisance from "./pool/flitterwing-nuisance.js";
 import _poolFlittingGuerrilla from "./pool/flitting-guerrilla.js";
+import _poolFlitwingLyevDetective from "./pool/flitwing-lyev-detective.js";
 import _poolFloatingDreamZubera from "./pool/floating-dream-zubera.js";
 import _poolFloatingShield from "./pool/floating-shield.js";
 import _poolFlockImpostor from "./pool/flock-impostor.js";
@@ -23472,6 +23473,7 @@ import _poolSelaTalShiarParadox from "./pool/sela-tal-shiar-paradox.js";
 import _poolSelectForInspection from "./pool/select-for-inspection.js";
 import _poolSelectiveMemory from "./pool/selective-memory.js";
 import _poolSeleniaDarkAngel from "./pool/selenia-dark-angel.js";
+import _poolSeleniaTheCursedHeart from "./pool/selenia-the-cursed-heart.js";
 import _poolSelesnyaCharm from "./pool/selesnya-charm.js";
 import _poolSelesnyaCluestone from "./pool/selesnya-cluestone.js";
 import _poolSelesnyaEulogist from "./pool/selesnya-eulogist.js";
@@ -28626,6 +28628,7 @@ import _poolTrespassersCurse from "./pool/trespassers-curse.js";
 import _poolTrespassingSouleater from "./pool/trespassing-souleater.js";
 import _poolTresserhornSinks from "./pool/tresserhorn-sinks.js";
 import _poolTresserhornSkyknight from "./pool/tresserhorn-skyknight.js";
+import _poolTresserhornsLordReturned from "./pool/tresserhorns-lord-returned.js";
 import _poolTrestleTroll from "./pool/trestle-troll.js";
 import _poolTrevaTheRenewer from "./pool/treva-the-renewer.js";
 import _poolTrevasAttendant from "./pool/trevas-attendant.js";
@@ -29680,6 +29683,7 @@ import _poolVenserCorpsePuppet from "./pool/venser-corpse-puppet.js";
 import _poolVenserFerventForger from "./pool/venser-fervent-forger.js";
 import _poolVenserShaperSavant from "./pool/venser-shaper-savant.js";
 import _poolVenserTheSojourner from "./pool/venser-the-sojourner.js";
+import _poolVenserVisionaryTraveler from "./pool/venser-visionary-traveler.js";
 import _poolVensersDiffusion from "./pool/vensers-diffusion.js";
 import _poolVensersJournal from "./pool/vensers-journal.js";
 import _poolVensersSliver from "./pool/vensers-sliver.js";
@@ -32279,6 +32283,7 @@ import _tokensScrapToken from "./tokens/scrap-token.js";
 import _tokensScrybSpritesToken from "./tokens/scryb-sprites-token.js";
 import _tokensSculptureToken from "./tokens/sculpture-token.js";
 import _tokensSculptureTreasureToken from "./tokens/sculpture-treasure-token.js";
+import _tokensSeleniasCurseToken from "./tokens/selenias-curse-token.js";
 import _tokensSerfToken from "./tokens/serf-token.js";
 import _tokensServoToken from "./tokens/servo-token.js";
 import _tokensSettlementToken from "./tokens/settlement-token.js";
@@ -42142,6 +42147,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlitterstepEidolon,
   _poolFlitterwingNuisance,
   _poolFlittingGuerrilla,
+  _poolFlitwingLyevDetective,
   _poolFloatingDreamZubera,
   _poolFloatingShield,
   _poolFlockImpostor,
@@ -55948,6 +55954,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSelectForInspection,
   _poolSelectiveMemory,
   _poolSeleniaDarkAngel,
+  _poolSeleniaTheCursedHeart,
   _poolSelesnyaCharm,
   _poolSelesnyaCluestone,
   _poolSelesnyaEulogist,
@@ -61102,6 +61109,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrespassingSouleater,
   _poolTresserhornSinks,
   _poolTresserhornSkyknight,
+  _poolTresserhornsLordReturned,
   _poolTrestleTroll,
   _poolTrevaTheRenewer,
   _poolTrevasAttendant,
@@ -62156,6 +62164,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVenserFerventForger,
   _poolVenserShaperSavant,
   _poolVenserTheSojourner,
+  _poolVenserVisionaryTraveler,
   _poolVensersDiffusion,
   _poolVensersJournal,
   _poolVensersSliver,
@@ -64761,6 +64770,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensScrybSpritesToken,
   _tokensSculptureToken,
   _tokensSculptureTreasureToken,
+  _tokensSeleniasCurseToken,
   _tokensSerfToken,
   _tokensServoToken,
   _tokensSettlementToken,
@@ -74631,6 +74641,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flitterstep-eidolon": _poolFlitterstepEidolon,
   "pool/flitterwing-nuisance": _poolFlitterwingNuisance,
   "pool/flitting-guerrilla": _poolFlittingGuerrilla,
+  "pool/flitwing-lyev-detective": _poolFlitwingLyevDetective,
   "pool/floating-dream-zubera": _poolFloatingDreamZubera,
   "pool/floating-shield": _poolFloatingShield,
   "pool/flock-impostor": _poolFlockImpostor,
@@ -88437,6 +88448,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/select-for-inspection": _poolSelectForInspection,
   "pool/selective-memory": _poolSelectiveMemory,
   "pool/selenia-dark-angel": _poolSeleniaDarkAngel,
+  "pool/selenia-the-cursed-heart": _poolSeleniaTheCursedHeart,
   "pool/selesnya-charm": _poolSelesnyaCharm,
   "pool/selesnya-cluestone": _poolSelesnyaCluestone,
   "pool/selesnya-eulogist": _poolSelesnyaEulogist,
@@ -93591,6 +93603,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trespassing-souleater": _poolTrespassingSouleater,
   "pool/tresserhorn-sinks": _poolTresserhornSinks,
   "pool/tresserhorn-skyknight": _poolTresserhornSkyknight,
+  "pool/tresserhorns-lord-returned": _poolTresserhornsLordReturned,
   "pool/trestle-troll": _poolTrestleTroll,
   "pool/treva-the-renewer": _poolTrevaTheRenewer,
   "pool/trevas-attendant": _poolTrevasAttendant,
@@ -94645,6 +94658,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/venser-fervent-forger": _poolVenserFerventForger,
   "pool/venser-shaper-savant": _poolVenserShaperSavant,
   "pool/venser-the-sojourner": _poolVenserTheSojourner,
+  "pool/venser-visionary-traveler": _poolVenserVisionaryTraveler,
   "pool/vensers-diffusion": _poolVensersDiffusion,
   "pool/vensers-journal": _poolVensersJournal,
   "pool/vensers-sliver": _poolVensersSliver,
@@ -97244,6 +97258,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/scryb-sprites-token": _tokensScrybSpritesToken,
   "tokens/sculpture-token": _tokensSculptureToken,
   "tokens/sculpture-treasure-token": _tokensSculptureTreasureToken,
+  "tokens/selenias-curse-token": _tokensSeleniasCurseToken,
   "tokens/serf-token": _tokensSerfToken,
   "tokens/servo-token": _tokensServoToken,
   "tokens/settlement-token": _tokensSettlementToken,

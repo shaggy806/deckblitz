@@ -1066,6 +1066,7 @@ import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensPhyrexianWurmToken from "../tokens/phyrexian-wurm-token.js";
 import _tokensRedGiantToken44 from "../tokens/red-giant-token-4-4.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
+import _tokensSeleniasCurseToken from "../tokens/selenias-curse-token.js";
 import _tokensSkeletonToken from "../tokens/skeleton-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
 import _tokensSpiritTokenWhite33Flying from "../tokens/spirit-token-white-3-3-flying.js";
@@ -2141,6 +2142,7 @@ const shard: CardShard = {
     _tokensPhyrexianWurmToken,
     _tokensRedGiantToken44,
     _tokensRedWhiteSoldierHasteToken,
+    _tokensSeleniasCurseToken,
     _tokensSkeletonToken,
     _tokensSliverToken,
     _tokensSpiritTokenWhite33Flying,

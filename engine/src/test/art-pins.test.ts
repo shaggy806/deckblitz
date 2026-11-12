@@ -149,6 +149,9 @@ const NO_TOKEN_PRINTING = new Set([
   // Zagorka, Mother of Sanctum's Sanctum land: the card lists no token in the Oracle
   // snapshot's `all_parts` (checked 2026-11-07).
   "Sanctum Token",
+  // Selenia, the Cursed Heart's Selenia's Curse Aura: the card lists no token in the
+  // Oracle snapshot's `all_parts` (checked 2026-11-12).
+  "Selenia's Curse Token",
 ]);
 
 describe("token art", () => {

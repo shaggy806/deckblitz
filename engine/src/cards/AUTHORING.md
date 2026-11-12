@@ -1408,7 +1408,10 @@ instead: Hidden Horror), `{ payEnergy }` (Rush of Inspiration), `{ sacrifice, ex
 `tapped: false` and `controlledBy: "you"`, you being the chooser), `{ sacrificeThat }`
 ("sacrifices it" — Enchanter's Bane with a slot, Curse Artifact with `"attached"`,
 only while the chooser controls it), `{ discard }`, `{ exileFromGraveyard }`,
-`{ putFromHand }`, `{ takeDamage }`.
+`{ putFromHand }`, `{ takeDamage }`. Several at once — "unless you sacrifice three
+creatures, pay 3 life, and have target opponent draw three cards" (Tresserhorn's Lord,
+Returned) — is one `{ allOf: [...parts], text }`: offered only when every part can be
+done (rule 118.3), then each done in order; no part may pay mana.
 
 **"Unless any player pays {N}"** (Prophecy's rhystic cards — Rhystic Tutor,
 Wild Might, Icy Prison, Soul Strings' `payGeneric: "x"`) is `unless` with

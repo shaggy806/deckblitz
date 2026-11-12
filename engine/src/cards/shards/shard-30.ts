@@ -308,6 +308,7 @@ import _poolFitOfRage from "../pool/fit-of-rage.js";
 import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFleshmadSteed from "../pool/fleshmad-steed.js";
+import _poolFlitwingLyevDetective from "../pool/flitwing-lyev-detective.js";
 import _poolFloodbringer from "../pool/floodbringer.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFlourishingFox from "../pool/flourishing-fox.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolFleetFootedMonk,
     _poolFleetingReflection,
     _poolFleshmadSteed,
+    _poolFlitwingLyevDetective,
     _poolFloodbringer,
     _poolFloodfarmVerge,
     _poolFlourishingFox,

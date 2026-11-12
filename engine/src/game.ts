@@ -15526,7 +15526,21 @@ export class Game {
    * no protection stops it (the Role rulings: otherwise "the Role token
    * isn't created"). Anything but an Aura can't be created attached.
    */
-  private canCreateAttached(def: CardDefinition, host: ObjectId, controller: PlayerId): boolean {
+  private canCreateAttached(def: CardDefinition, host: ObjectId | { readonly player: PlayerId }, controller: PlayerId): boolean {
+    if (typeof host === "object") {
+      // Enchanting a player (rule 303.4) — `canEnchantPlayer`'s questions,
+      // asked of the token before it exists.
+      const player = host.player;
+      if (this.state.players[player]?.hasLost !== false) return false;
+      if (!def.subtypes.includes("Aura") || def.types.includes("creature")) return false;
+      if (playerHasProtectionFromEverything(this.state, player)) return false;
+      const enchant = def.targets[0];
+      if (enchant === undefined) return false;
+      if (playerProtectionBlocks(this.state, this.registry, player, this.enteringSource(def), controller)) return false;
+      return isLegalTarget(this.state, this.registry, enchant, { kind: "player", player }, controller, undefined, {
+        notTargeted: true,
+      });
+    }
     const target = this.state.objects[host];
     if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
     if (!def.subtypes.includes("Aura") || def.types.includes("creature")) return false;
@@ -41749,7 +41763,9 @@ controlledBy,
     };
     const hasPermanent = (filter: CardFilter): boolean =>
       this.state.zones.shared.battlefield.some((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
-    const available = options.filter((option) => {
+    const payable = (option: BoundUnlessOption): boolean => {
+      // Every part, or none of it (rule 118.3). Bound parts (`unless`'s binder).
+      if ("allOf" in option) return (option.allOf as readonly BoundUnlessOption[]).every(payable);
       if ("pay" in option) {
         // "Unless you waterbend {2}" (rule 701.67a): mana and taps together.
         if (option.waterbend === true) return this.modesWaterbendPayment(player, option.pay) !== null;
@@ -41808,7 +41824,8 @@ controlledBy,
           option.exceptSource === true ? source : spared(option.exceptTarget),
         ).length >= (option.count ?? 1)
       );
-    });
+    };
+    const available = options.filter(payable);
     if (available.length === 0) return null;
     const mana = available.find((o): o is Extract<BoundUnlessOption, { pay: string }> => "pay" in o);
     // Forage's ways (rule 701.61a) announce it once done, for "whenever you
@@ -41825,10 +41842,13 @@ controlledBy,
       then,
       prompt,
     });
-    const modes = available.map(
-      (option): ModeOption => ({
-        text: option.text,
-        effect: withForage(
+    const effectOf = (option: BoundUnlessOption): EffectSpec => {
+      if ("allOf" in option) {
+        const parts = option.allOf as readonly BoundUnlessOption[];
+        if (parts.some((part) => "pay" in part)) throw new Error(`"${option.text}": an allOf option can't pay mana`);
+        return { kind: "sequence", effects: parts.map(effectOf) };
+      }
+      return withForage(
           option,
           "doing" in option
             ? option.doing
@@ -41903,9 +41923,9 @@ controlledBy,
                         ...(option.ifPaid !== undefined ? [option.ifPaid] : []),
                       ],
                     },
-        ),
-      }),
-    );
+      );
+    };
+    const modes = available.map((option): ModeOption => ({ text: option.text, effect: effectOf(option) }));
     return {
       modes,
       ...(mana !== undefined ? { cost: mana.pay } : {}),
@@ -43782,8 +43802,9 @@ controlledBy,
     /** Created attached to this permanent ("a Monster Role token attached to
      * target creature"): `null`, or one an Aura of this kind can't legally
      * enchant, and none is created (the Role rulings). See the effect's
-     * `attachedTo`. */
-    attachTo?: ObjectId | null,
+     * `attachedTo`. `{ player }`: an Aura token enchanting a player
+     * (Selenia's Curse, "attached to target opponent" — rule 303.4). */
+    attachTo?: ObjectId | { readonly player: PlayerId } | null,
     /** The colour words changed in the text making them (`tokenTextChanges`). */
     textChanges?: readonly TextChange[],
   ): readonly ObjectId[] {
@@ -43793,7 +43814,7 @@ controlledBy,
       if (attachTo === null || !this.canCreateAttached(def, attachTo, controller)) return [];
       // One token of a compacted stack is the one it goes on, as an attach
       // singles it out (`attachPermanent`).
-      attachTo = this.splitOneFromStack(attachTo);
+      if (typeof attachTo === "string") attachTo = this.splitOneFromStack(attachTo);
       separate = true;
     }
     // The would-create-token replacements (rule 614): the tokens themselves
@@ -44695,9 +44716,9 @@ controlledBy,
     sacrificeAtEndStep = false,
     goadedForGameBy?: PlayerId,
     separate = false,
-    /** Each one attached to this permanent as it enters — `createTokens`'
-     * `attachTo`, already found legal. */
-    attachTo?: ObjectId,
+    /** Each one attached to this permanent, or player, as it enters —
+     * `createTokens`' `attachTo`, already found legal. */
+    attachTo?: ObjectId | { readonly player: PlayerId },
     /** Counters each enters with, beside its own — a token copy's
      * `withCounters`. They're made one object each. */
     withCounters?: { readonly kind: string; readonly amount: number },
@@ -44727,7 +44748,10 @@ controlledBy,
         if (copied) this.emit({ type: "permanent-copied", object: id, copyOf: printedName });
         // Attached as it enters (a Role), so whatever sees it arrive sees it
         // on its host.
-        if (attachTo !== undefined) {
+        if (typeof attachTo === "object") {
+          this.state.objects[id].attachedToPlayer = attachTo.player;
+          this.emit({ type: "permanent-attached-to-player", source: id, player: attachTo.player });
+        } else if (attachTo !== undefined) {
           this.state.objects[id].attachedTo = attachTo;
           this.emit({ type: "permanent-attached", source: id, target: attachTo });
         }

@@ -738,6 +738,7 @@ import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
 import _poolSecretPassage from "../pool/secret-passage.js";
 import _poolSecurityBypass from "../pool/security-bypass.js";
 import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
+import _poolSeleniaTheCursedHeart from "../pool/selenia-the-cursed-heart.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolSerpentGenerator from "../pool/serpent-generator.js";
@@ -1725,6 +1726,7 @@ const shard: CardShard = {
     _poolSecretPassage,
     _poolSecurityBypass,
     _poolSeedglaiveMentor,
+    _poolSeleniaTheCursedHeart,
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,
     _poolSerpentGenerator,

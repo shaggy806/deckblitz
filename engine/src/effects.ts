@@ -1500,7 +1500,14 @@ export type UnlessOption =
   /** "Any player may have Browbeat **deal 5 damage to them**": the effect's
    * source deals that much damage to the player who takes it. Always open —
    * being dealt damage needs nothing (prevented, it was still chosen). */
-  | { readonly takeDamage: number; readonly text: string };
+  | { readonly takeDamage: number; readonly text: string }
+  /** Several at once — "…unless you sacrifice three creatures, pay 3 life,
+   * and have target opponent draw three cards" (Tresserhorn's Lord,
+   * Returned): one option, takeable only when every part is (a cost is paid
+   * only in full, rule 118.3), each part then done in order. No part may pay
+   * mana (`pay`, `payGeneric`, `payManaCostOf`): a mana option's payment rides
+   * on the decision itself. */
+  | { readonly allOf: readonly UnlessOption[]; readonly text: string };
 
 /** Which permanents a `copy-spell`'s `forEachItCouldTarget` makes a copy for.
  * `chooseAndPayEach`: "you may choose any number of other creatures that spell
@@ -7909,6 +7916,10 @@ export type EffectSpec =
        * there, **isn't created** (the Role rulings). Each token is its own
        * object (never a stack), and two of one player's Roles on one
        * permanent leave only the newest (rule 704.5z).
+       * A slot holding a **player** makes an Aura token enchanting that
+       * player (rule 303.4 — Selenia, the Cursed Heart's "Aura Curse
+       * enchantment token … attached to target opponent"): created only
+       * where the token's enchant ability allows, protection included.
        */
       readonly attachedTo?: ObjectRef;
       /** "**The tokens are goaded for the rest of the game**" (Rendmaw,
@@ -12556,9 +12567,9 @@ export interface EffectApi {
     attacksThisCombat?: boolean,
     /** Keywords the new tokens gain with no end (not copiable). */
     gainKeywords?: readonly Keyword[],
-    /** Each new token is created attached to this permanent — see the
-     * effect's `attachedTo`; `null` for nothing there (none is created). */
-    attachTo?: ObjectId | null,
+    /** Each new token is created attached to this permanent, or player — see
+     * the effect's `attachedTo`; `null` for nothing there (none is created). */
+    attachTo?: ObjectId | { readonly player: PlayerId } | null,
     /** The new tokens remember this effect's source (`GameObject.createdWith`). */
     linkedToSource?: boolean,
     /** The colour words changed in the creating text (`tokenTextChanges`). */
@@ -19518,7 +19529,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ? undefined
           : illegalSlot(spec.attachedTo, ctx)
             ? null
-            : ((host) => (host?.kind === "object" ? host.object : null))(objectRefAct(spec.attachedTo, ctx)),
+            : ((host) =>
+                host?.kind === "object" ? host.object : host?.kind === "player" ? { player: host.player } : null)(
+                objectRefAct(spec.attachedTo, ctx),
+              ),
         spec.linkedToSource === true,
         spec.tokenTextChanges,
       );
@@ -20650,7 +20664,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "unless": {
       // A generic amount, and the mana cost of an object, are fixed as the
       // effect applies.
-      const options = spec.options.flatMap((option): BoundUnlessOption[] => {
+      const bind = (option: UnlessOption): BoundUnlessOption[] => {
+        if ("allOf" in option) {
+          // Every part bound, or the option isn't there to take.
+          const parts = option.allOf.map(bind);
+          return parts.some((p) => p.length === 0) ? [] : [{ allOf: parts.flat(), text: option.text }];
+        }
         if ("payGeneric" in option) {
           const n = amountValue(option.payGeneric, ctx);
           return [
@@ -20679,7 +20698,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ];
         }
         return [bindUnlessTimes(option, ctx)];
-      });
+      };
+      const options = spec.options.flatMap(bind);
       const chooser = spec.chooser;
       const about = spec.aboutObject;
       if (typeof chooser === "object" && "anyOf" in chooser) {

@@ -1,0 +1,46 @@
+{
+ "batch": "B300",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): four more of its blocked commanders (2026-11-12); built cost:unless-combined-costs (an unless option allOf) and effect:create-aura-token-attached-to-player; Venser and Flitwing needed nothing new",
+ "authored": [
+  {
+   "name": "Venser, Visionary Traveler",
+   "files": [
+    "engine/src/cards/pool/venser-visionary-traveler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flitwing, Lyev Detective",
+   "files": [
+    "engine/src/cards/pool/flitwing-lyev-detective.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tresserhorn's Lord, Returned",
+   "files": [
+    "engine/src/cards/pool/tresserhorns-lord-returned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selenia, the Cursed Heart",
+   "files": [
+    "engine/src/cards/pool/selenia-the-cursed-heart.ts",
+    "engine/src/cards/tokens/selenias-curse-token.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "The Unluckiest Planeswalker",
+   "needs": [
+    "effect:attach-each-aura-on-you-to-chosen-opponent"
+   ],
+   "size": "minor",
+   "why": "Re-read in B300: Rulebreaker is built (B299) and the +1 mana rider is whenSpent (Pyromancer's Goggles); the −3 moves each Aura attached to you onto an opponent chosen for it, and attach's {among} host picks only permanents. (B269 recorded create-aura-token-attached-to-player, which it doesn't need.)"
+  }
+ ]
+}

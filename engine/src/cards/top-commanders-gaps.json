@@ -4,6 +4,10 @@
  "built": [
     "mechanic:rulebreaker",
     "condition:starting-deck-size",
+    "cost:unless-combined-costs",
+    "effect:create-aura-token-attached-to-player",
+    "filter:wasnt-cast-from-hand-entering",
+    "replacement:optional-token-replacement",
     "effect:enters-with-counters-if-type",
     "keyword:collect-evidence-x",
     "effect:token-copy-each-destroyed-this-way",

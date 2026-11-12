@@ -911,6 +911,7 @@ import _poolVeinwitchCoven from "../pool/veinwitch-coven.js";
 import _poolVengefulTracker from "../pool/vengeful-tracker.js";
 import _poolVenomEvilUnleashed from "../pool/venom-evil-unleashed.js";
 import _poolVenomousBrutalizer from "../pool/venomous-brutalizer.js";
+import _poolVenserVisionaryTraveler from "../pool/venser-visionary-traveler.js";
 import _poolVeteranIceClimber from "../pool/veteran-ice-climber.js";
 import _poolViciousOffering from "../pool/vicious-offering.js";
 import _poolViewFromAbove from "../pool/view-from-above.js";
@@ -1914,6 +1915,7 @@ const shard: CardShard = {
     _poolVengefulTracker,
     _poolVenomEvilUnleashed,
     _poolVenomousBrutalizer,
+    _poolVenserVisionaryTraveler,
     _poolVeteranIceClimber,
     _poolViciousOffering,
     _poolViewFromAbove,

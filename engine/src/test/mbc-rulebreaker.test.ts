@@ -4,7 +4,10 @@ import type { ObjectId } from "../primitives.js";
 import {
   A,
   B,
+  C,
   activate,
+  loyalty,
+  toStep,
   attack,
   cast,
   counters,
@@ -13,10 +16,13 @@ import {
   keywords,
   lands,
   life,
+  enter,
   pickModes,
+  pickPermanents,
   pickTargets,
   pt,
   ref,
+  settle,
   spawn,
   table,
   toGraveyard,
@@ -174,5 +180,168 @@ describe("Rulebreaker commanders in play", () => {
     cast(game, toHand(game, "Ornithopter"));
     const thopters = game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === "Ornithopter");
     expect(thopters.length).toBe(3);
+  });
+});
+
+describe("Tresserhorn's Lord, Returned", () => {
+  it("kept by sacrificing three creatures, paying 3 life and the opponent drawing three", () => {
+    const { game, a } = table();
+    const fodder = [spawn(game, "Grizzly Bears"), spawn(game, "Grizzly Bears"), spawn(game, "Ornithopter")];
+    const mine = hand(game).length;
+    const theirs = hand(game, B).length;
+    pickTargets(a, B);
+    pickModes(a, 0);
+    pickPermanents(a, ...fodder);
+    const lord = enter(game, "Tresserhorn's Lord, Returned");
+    expect(zone(game, lord)).toBe("battlefield");
+    expect(fodder.every((id) => zone(game, id) === "graveyard")).toBe(true);
+    expect(life(game)).toBe(17);
+    expect(hand(game, B).length).toBe(theirs + 3);
+    // Each creature sacrificed draws a card.
+    expect(hand(game).length).toBe(mine + 3);
+  });
+
+  it("sacrificed when one part can't be done: one Bear and him aren't three", () => {
+    const { game, a } = table();
+    const fodder = [spawn(game, "Grizzly Bears")];
+    const theirs = hand(game, B).length;
+    pickTargets(a, B);
+    pickModes(a, 0);
+    const lord = enter(game, "Tresserhorn's Lord, Returned");
+    expect(zone(game, lord)).toBe("graveyard");
+    expect(fodder.every((id) => zone(game, id) === "battlefield")).toBe(true);
+    expect(life(game)).toBe(20);
+    expect(hand(game, B).length).toBe(theirs);
+  });
+
+  it("sacrificed when life can't pay 3, however many creatures", () => {
+    const { game, a } = table({ life: 2 });
+    for (let i = 0; i < 3; i += 1) spawn(game, "Grizzly Bears");
+    pickTargets(a, B);
+    pickModes(a, 0);
+    const lord = enter(game, "Tresserhorn's Lord, Returned");
+    expect(zone(game, lord)).toBe("graveyard");
+    expect(life(game)).toBe(2);
+  });
+
+  it("declining sacrifices him", () => {
+    const { game, a } = table();
+    for (let i = 0; i < 3; i += 1) spawn(game, "Grizzly Bears");
+    pickTargets(a, B);
+    pickModes(a);
+    const lord = enter(game, "Tresserhorn's Lord, Returned");
+    expect(zone(game, lord)).toBe("graveyard");
+    expect(life(game)).toBe(20);
+  });
+});
+
+describe("Selenia, the Cursed Heart", () => {
+  it("doubles your life gain", () => {
+    const { game } = table();
+    spawn(game, "Selenia, the Cursed Heart");
+    game.debugApplyEffect(A, { kind: "gain-life", amount: 3 }, []);
+    settle(game);
+    expect(life(game)).toBe(26);
+  });
+
+  it("dying, it curses the target opponent, whose life loss is then doubled", () => {
+    const { game, a } = table();
+    const selenia = spawn(game, "Selenia, the Cursed Heart");
+    pickTargets(a, B);
+    game.debugApplyEffect(A, { kind: "destroy", target: 0 }, [ref(selenia)]);
+    settle(game);
+    const curse = game.state.zones.shared.battlefield.find(
+      (id) => game.state.objects[id].cardName === "Selenia's Curse Token",
+    );
+    expect(curse).toBeDefined();
+    expect(game.state.objects[curse!].attachedToPlayer).toBe(B);
+    expect(game.state.objects[curse!].controller).toBe(A);
+    game.debugApplyEffect(A, { kind: "lose-life", amount: 2, who: "each-opponent" }, []);
+    settle(game);
+    expect(life(game, B)).toBe(16);
+    // Only the enchanted player's.
+    game.debugApplyEffect(B, { kind: "lose-life", amount: 2, who: "each-opponent" }, []);
+    settle(game);
+    expect(life(game)).toBe(18);
+  });
+});
+
+describe("Flitwing, Lyev Detective", () => {
+  it("creating tokens, you may make that many Clues instead", () => {
+    const { game, a } = table();
+    spawn(game, "Flitwing, Lyev Detective");
+    pickModes(a, 1); // the replacement's yes
+    game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 3 }, []);
+    settle(game);
+    expect(tokensNamed(game, "Clue Token", A)).toBe(3);
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(0);
+  });
+
+  it("declining keeps the tokens, and an opponent's tokens aren't replaced", () => {
+    const { game, a } = table();
+    spawn(game, "Flitwing, Lyev Detective");
+    pickModes(a, 0); // no
+    game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 2 }, []);
+    settle(game);
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
+    expect(tokensNamed(game, "Clue Token", A)).toBe(0);
+    game.debugApplyEffect(B, { kind: "create-token", token: "Soldier Token", count: 1 }, []);
+    settle(game);
+    expect(tokensNamed(game, "Soldier Token", B)).toBe(1);
+  });
+});
+
+describe("Venser, Visionary Traveler", () => {
+  it("a creature cast from your hand enters with no counters", () => {
+    const { game } = table();
+    spawn(game, "Venser, Visionary Traveler");
+    lands(game, "Forest", 2);
+    const bears = toHand(game, "Grizzly Bears");
+    cast(game, bears);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(counters(game, bears)).toBe(0);
+  });
+
+  it("a creature put onto the battlefield, never cast, enters with two", () => {
+    const { game } = table();
+    spawn(game, "Venser, Visionary Traveler");
+    const bears = toGraveyard(game, "Grizzly Bears");
+    game.debugApplyEffect(A, { kind: "put-onto-battlefield", target: 0 }, [ref(bears)]);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(counters(game, bears)).toBe(2);
+    expect(pt(game, bears)).toEqual({ power: 4, toughness: 4 });
+  });
+
+  it("a token doesn't get them, and an opponent's creature doesn't either", () => {
+    const { game } = table();
+    spawn(game, "Venser, Visionary Traveler");
+    game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 1 }, []);
+    const soldier = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName === "Soldier Token");
+    expect(counters(game, soldier!)).toBe(0);
+    const theirs = toGraveyard(game, "Grizzly Bears", B);
+    game.debugApplyEffect(B, { kind: "put-onto-battlefield", target: 0 }, [ref(theirs)]);
+    expect(counters(game, theirs)).toBe(0);
+  });
+
+  it("+1 flickers your creature, which comes back at the end step with two counters", () => {
+    const { game } = table();
+    const venser = spawn(game, "Venser, Visionary Traveler");
+    const bears = spawn(game, "Grizzly Bears");
+    loyalty(game, venser, 1, { targets: [ref(bears)] });
+    expect(zone(game, bears as ObjectId)).not.toBe("battlefield");
+    toStep(game, "cleanup");
+    const back = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName === "Grizzly Bears");
+    expect(back).toBeDefined();
+    expect(counters(game, back!)).toBe(2);
+  });
+
+  it("−2 returns up to one nonland permanent of each opponent", () => {
+    const { game } = table({ players: 3 });
+    const venser = spawn(game, "Venser, Visionary Traveler");
+    const bobs = spawn(game, "Grizzly Bears", B);
+    const carols = spawn(game, "Ornithopter", C);
+    loyalty(game, venser, -2, { targets: [ref(bobs), ref(carols), null] });
+    expect(zone(game, bobs)).toBe("hand");
+    expect(zone(game, carols)).toBe("hand");
   });
 });

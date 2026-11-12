@@ -14205,6 +14205,11 @@
    "description": "Exile it and the top N cards of your library in a face-down pile, shuffle that pile and put it back on top.",
    "example": "Triumph of Saint Katherine"
   },
+  "effect:attach-each-aura-on-you-to-chosen-opponent": {
+   "family": "effect:attach-extensions",
+   "example": "The Unluckiest Planeswalker",
+   "description": "Moving each Aura attached to you onto an opponent chosen for that Aura ('For each Aura attached to you, attach it to an opponent of your choice'): `attach`'s `{ among }` host picks permanents only, not players."
+  },
   "effect:reattach-curse-random-opponent": {
    "family": "effect:attach-extensions",
    "example": "Maddening Hex",
