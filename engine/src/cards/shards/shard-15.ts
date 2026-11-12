@@ -930,6 +930,7 @@ import _poolWorstFears from "../pool/worst-fears.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
+import _poolWyllsReversal from "../pool/wylls-reversal.js";
 import _poolYanlingsHarbinger from "../pool/yanlings-harbinger.js";
 import _poolYavimayaKavu from "../pool/yavimaya-kavu.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
@@ -1898,6 +1899,7 @@ const shard: CardShard = {
     _poolWorthyKnight,
     _poolWurmcoilEngine,
     _poolWurmwallSweeper,
+    _poolWyllsReversal,
     _poolYanlingsHarbinger,
     _poolYavimayaKavu,
     _poolYoungPyromancer,

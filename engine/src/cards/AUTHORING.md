@@ -3880,7 +3880,7 @@ stopped covering:
   activated for a loyalty cost (rule 606.2): "target loyalty ability of a
   planeswalker" (Verdant Command) is `{ kind: "ability", loyalty: true,
   sourceTypes: ["planeswalker"] }`. `copy-ability` copies one (§6).
-- `{ kind: "stack", spells: "any" | "instant-or-sorcery" | "none", abilities: boolean, singleTarget?: true }` —
+- `{ kind: "stack", spells: "any" | "instant-or-sorcery" | "none", abilities: boolean, singleTarget?: true, withTargets?: true }` —
   a spell or an ability on the stack in one slot: "target spell or ability"
   (Deflecting Swat, Spellskite), "target instant spell, sorcery spell,
   activated ability, or triggered ability" (Return the Favor: `spells:
@@ -3888,7 +3888,7 @@ stopped covering:
   target**" (Imp's Mischief: `abilities: false, singleTarget: true` — one
   target chosen as it went on the stack, the same one twice counting as two,
   however many are still legal: rule 115.9a; a slot its own rules filled
-  isn't a target). Never a mana ability. `copy-spell` copies an ability in
+  isn't a target); `withTargets: true` is "with one or more targets" (Wyll's Reversal). Never a mana ability. `copy-spell` copies an ability in
   such a slot as `copy-ability` does; `change-targets` (§6) changes its
   targets.
 - `{ kind: "card-in-graveyard", whose?: "any" | "you" | "opponent" | "defending-player" | "trigger-player", filter?: CardFilter }`

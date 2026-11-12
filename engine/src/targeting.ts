@@ -725,10 +725,11 @@ function isLegalTargetUncached(
     }
     // "With a single target" (rule 115.9a): the targets chosen as it went
     // on the stack, each instance counted, a slot its rules filled not one.
-    if (spec.singleTarget === true) {
+    if (spec.singleTarget === true || spec.withTargets === true) {
       const auto = new Set(object.autoTargetSlots ?? []);
       const chosen = (object.targets ?? []).filter((t, i) => t !== undefined && t !== null && !auto.has(i));
-      if (chosen.length !== 1) return false;
+      if (spec.singleTarget === true && chosen.length !== 1) return false;
+      if (spec.withTargets === true && chosen.length === 0) return false;
     }
     if (spec.whose === "you" && object.controller !== forPlayer) return false;
     if (spec.whose === "opponent" && object.controller === forPlayer) return false;

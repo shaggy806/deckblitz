@@ -346,6 +346,9 @@ export type TargetSpec =
        * stack (rule 115.9a — the same object twice is two), however many of
        * them are still legal. A slot its own rules filled isn't a target. */
       readonly singleTarget?: true;
+      /** "With one or more targets" (Wyll's Reversal): at least one target
+       * chosen as it went on the stack, counted as `singleTarget` counts. */
+      readonly withTargets?: true;
       /** "…an opponent controls" (Teferi's Response): its controller. */
       readonly whose?: "any" | "you" | "opponent";
       /** "…that targets a land you control" (Teferi's Response): what it
@@ -1499,7 +1502,7 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
       spec.spells === "none" ? null : spec.spells === "instant-or-sorcery" ? "instant or sorcery spell" : "spell";
     const nouns = [spells, spec.abilities ? "ability" : null].filter((n) => n !== null).join(" or ");
     const whose = spec.whose === "you" ? " you control" : spec.whose === "opponent" ? " an opponent controls" : "";
-    return `${nouns}${whose}${spec.singleTarget === true ? " with a single target" : ""}`;
+    return `${nouns}${whose}${spec.singleTarget === true ? " with a single target" : ""}${spec.withTargets === true ? " with one or more targets" : ""}`;
   }
   if (spec.kind === "ability") {
     const from = spec.sourceTypes === undefined ? "" : ` from ${spec.sourceTypes.join(" or ")} source`;

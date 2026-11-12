@@ -31520,6 +31520,7 @@ import _poolWydwenTheBitingGale from "./pool/wydwen-the-biting-gale.js";
 import _poolWylethSoulOfSteel from "./pool/wyleth-soul-of-steel.js";
 import _poolWylieDukeAtiinHero from "./pool/wylie-duke-atiin-hero.js";
 import _poolWyllBladeOfFrontiers from "./pool/wyll-blade-of-frontiers.js";
+import _poolWyllsReversal from "./pool/wylls-reversal.js";
 import _poolWyluliWolf from "./pool/wyluli-wolf.js";
 import _poolWyrmsCrossingPatrol from "./pool/wyrms-crossing-patrol.js";
 import _poolX23DeadlyWeapon from "./pool/x-23-deadly-weapon.js";
@@ -64154,6 +64155,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWylethSoulOfSteel,
   _poolWylieDukeAtiinHero,
   _poolWyllBladeOfFrontiers,
+  _poolWyllsReversal,
   _poolWyluliWolf,
   _poolWyrmsCrossingPatrol,
   _poolX23DeadlyWeapon,
@@ -96801,6 +96803,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wyleth-soul-of-steel": _poolWylethSoulOfSteel,
   "pool/wylie-duke-atiin-hero": _poolWylieDukeAtiinHero,
   "pool/wyll-blade-of-frontiers": _poolWyllBladeOfFrontiers,
+  "pool/wylls-reversal": _poolWyllsReversal,
   "pool/wyluli-wolf": _poolWyluliWolf,
   "pool/wyrms-crossing-patrol": _poolWyrmsCrossingPatrol,
   "pool/x-23-deadly-weapon": _poolX23DeadlyWeapon,
