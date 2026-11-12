@@ -61,7 +61,14 @@ section keeps only what to do next.
   narrow keys to the few it left half-covered (Twists and Turns, Diplomatic Escort, Light Up the
   Night, Urgent Necropsy, Consume Spirit, Soul Burn). Past rank 10,000 the order is still EDHREC
   rank (`author-top-cards`, which since 2026-11-12 builds the small features its cards need
-  rather than blocking them; `cards:needs -- --next 60` lists the next untriaged). **Next for it:**
+  rather than blocking them; `cards:needs -- --next 60` lists the next untriaged). **First, the
+  top 5000 (the user's call, 2026-11-12):** the 112 cards still missing from
+  `top-commander-cards.txt` (110 with B294 records, `cards:goal` at rank ≤ 5000) need 109
+  different features, one each but `effect:additional-beginning-phase` (Sphinx and Shadow of the
+  Second Sun, and Cyclonus). Size each against today's engine first (B294 read them on
+  2026-11-09; some may run now), then build the small ones best rank first, asking once about the
+  majors (likely Odric, Master Tactician; Leyline of Transformation; Teferi, Who Slows the Sunset;
+  New Blood). The tail past rank 10,000 waits. **After that:**
   B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
   `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
   Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,
