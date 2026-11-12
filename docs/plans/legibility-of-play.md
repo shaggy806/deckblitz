@@ -237,10 +237,6 @@ a small follow-up: a `slotFor` entry (which half of the frame, paced or not, sha
 not), then an effect in `AnimationLayer` — an `.animate()` on the tile for an `after` cue, or
 `flyGhost` for a move — and each must honour `motionPrefs` (speed and reduced motion).
 
-- **Re-measure the bot speeds.** Most events now hold the game for their animation, and the host
-  can pause or step the bots, so `BOT_LINGER_MS` (`server/src/room.ts`: slow 1.6s, normal 0.7s,
-  after each frame) may now make "slow" too slow; the library peel has since grown to 1.1s a
-  step, too. Watch a 4-player bot game at each speed before changing it.
 - **Cards exiled from a library and put back in the same resolution aren't animated going back**:
   cascade's and discover's misses (and an "exile until" whose rest go to the bottom) peel off the
   pile and the counts run down, then jump back when the board lands. A reverse peel onto the pile
