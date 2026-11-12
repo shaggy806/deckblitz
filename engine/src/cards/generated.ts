@@ -13840,6 +13840,7 @@ import _poolItOfTheHorridSwarm from "./pool/it-of-the-horrid-swarm.js";
 import _poolItThatBetrays from "./pool/it-that-betrays.js";
 import _poolItThatHeraldsTheEnd from "./pool/it-that-heralds-the-end.js";
 import _poolItThatRidesAsOne from "./pool/it-that-rides-as-one.js";
+import _poolItazuraLingeringWick from "./pool/itazura-lingering-wick.js";
 import _poolItemShopkeep from "./pool/item-shopkeep.js";
 import _poolIthHighArcanist from "./pool/ith-high-arcanist.js";
 import _poolIthilienKingfisher from "./pool/ithilien-kingfisher.js";
@@ -27691,6 +27692,7 @@ import _poolTheTwelfthDoctor from "./pool/the-twelfth-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "./pool/the-unbeatable-squirrel-girl.js";
 import _poolTheUnderworldCookbook from "./pool/the-underworld-cookbook.js";
 import _poolTheUnicomplex from "./pool/the-unicomplex.js";
+import _poolTheUnluckiestPlaneswalker from "./pool/the-unluckiest-planeswalker.js";
 import _poolTheUnspeakable from "./pool/the-unspeakable.js";
 import _poolTheUrDragon from "./pool/the-ur-dragon.js";
 import _poolTheUrSphinx from "./pool/the-ur-sphinx.js";
@@ -46328,6 +46330,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolItThatBetrays,
   _poolItThatHeraldsTheEnd,
   _poolItThatRidesAsOne,
+  _poolItazuraLingeringWick,
   _poolItemShopkeep,
   _poolIthHighArcanist,
   _poolIthilienKingfisher,
@@ -60179,6 +60182,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheUnbeatableSquirrelGirl,
   _poolTheUnderworldCookbook,
   _poolTheUnicomplex,
+  _poolTheUnluckiestPlaneswalker,
   _poolTheUnspeakable,
   _poolTheUrDragon,
   _poolTheUrSphinx,
@@ -78829,6 +78833,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/it-that-betrays": _poolItThatBetrays,
   "pool/it-that-heralds-the-end": _poolItThatHeraldsTheEnd,
   "pool/it-that-rides-as-one": _poolItThatRidesAsOne,
+  "pool/itazura-lingering-wick": _poolItazuraLingeringWick,
   "pool/item-shopkeep": _poolItemShopkeep,
   "pool/ith-high-arcanist": _poolIthHighArcanist,
   "pool/ithilien-kingfisher": _poolIthilienKingfisher,
@@ -92680,6 +92685,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-unbeatable-squirrel-girl": _poolTheUnbeatableSquirrelGirl,
   "pool/the-underworld-cookbook": _poolTheUnderworldCookbook,
   "pool/the-unicomplex": _poolTheUnicomplex,
+  "pool/the-unluckiest-planeswalker": _poolTheUnluckiestPlaneswalker,
   "pool/the-unspeakable": _poolTheUnspeakable,
   "pool/the-ur-dragon": _poolTheUrDragon,
   "pool/the-ur-sphinx": _poolTheUrSphinx,

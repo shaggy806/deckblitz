@@ -1,0 +1,22 @@
+{
+ "batch": "B304",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): two more blocked commanders (2026-11-12) that needed no new engine code: the Unluckiest Planeswalker's −3 is for-each-permanent over Auras attached to you with choose-opponent's that-player as the host, and Itazura's secret numbers are Wheel of Misfortune's secret vote",
+ "authored": [
+  {
+   "name": "The Unluckiest Planeswalker",
+   "files": [
+    "engine/src/cards/pool/the-unluckiest-planeswalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Itazura, Lingering Wick",
+   "files": [
+    "engine/src/cards/pool/itazura-lingering-wick.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

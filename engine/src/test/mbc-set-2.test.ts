@@ -16,7 +16,9 @@ import {
   enter,
   hand,
   pickTargets,
+  graveyard,
   lands,
+  loyalty,
   life,
   pickModes,
   pt,
@@ -295,6 +297,81 @@ describe("Chira, All In", () => {
     toHand(game, "Grizzly Bears");
     apply(game, A, { kind: "discard", target: "you", amount: 1 });
     expect(grew(game, chira)).toEqual({ counters: 0, treasures: 0 });
+  });
+});
+
+describe("The Unluckiest Planeswalker", () => {
+  it("−3: discard, draw twice your Auras, and move each Aura on you to an opponent", () => {
+    const { game } = table();
+    const walker = spawn(game, "The Unluckiest Planeswalker");
+    const curse = spawn(game, "Curse of Bloodletting");
+    game.state.objects[curse].attachedToPlayer = A;
+    toHand(game, "Grizzly Bears");
+    loyalty(game, walker, -3, { atLeast: 4 });
+    expect(game.state.objects[curse].attachedToPlayer).toBe(B);
+    // One Aura you control: the hand of one went, two came.
+    expect(hand(game).length).toBe(2);
+    expect(graveyard(game).some((id) => game.state.objects[id].cardName === "Grizzly Bears")).toBe(true);
+  });
+
+  it("−3 with three players: each Aura goes to the opponent chosen for it", () => {
+    const { game, a } = table({ players: 3 });
+    const walker = spawn(game, "The Unluckiest Planeswalker");
+    const curse = spawn(game, "Curse of Bloodletting");
+    game.state.objects[curse].attachedToPlayer = A;
+    pickModes(a, 1);
+    loyalty(game, walker, -3, { atLeast: 4 });
+    expect(game.state.objects[curse].attachedToPlayer).toBe(C);
+  });
+
+  it("+1: its mana spent on an Aura spell makes a Gremlin", () => {
+    const { game, a } = table();
+    const walker = spawn(game, "The Unluckiest Planeswalker");
+    const bears = spawn(game, "Grizzly Bears");
+    // The colour is asked as modes, W U B R G.
+    pickModes(a, 4);
+    loyalty(game, walker, 1);
+    cast(game, toHand(game, "Rancor"), { targets: [ref(bears)] });
+    expect(tokensNamed(game, "Gremlin Token", A)).toBe(1);
+  });
+});
+
+describe("Itazura, Lingering Wick", () => {
+  it("the highest number is dealt that much and casts one free; you take one of the rest", () => {
+    const { game, b, c } = table({ players: 3 });
+    spawn(game, "Itazura, Lingering Wick");
+    const island = toLibrary(game, "Island");
+    const bolt = toLibrary(game, "Lightning Bolt");
+    const bears = toLibrary(game, "Grizzly Bears");
+    b.chooseNumberFn = () => 3;
+    c.chooseNumberFn = () => 1;
+    b.chooseCastNowFn = (_view, offer) => {
+      const way = offer.casts.find((w) => w.card === bears);
+      return way === undefined ? null : { type: "cast-spell", player: B, card: bears, targets: [], via: way.via, free: true };
+    };
+    toStep(game, "upkeep", A);
+    settle(game);
+    expect(life(game, B)).toBe(17);
+    expect(life(game, C)).toBe(20);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.objects[bears].controller).toBe(B);
+    // One of the other two is yours, the other stays in exile.
+    const kept = [island, bolt].filter((id) => zone(game, id) === "hand");
+    expect(kept).toHaveLength(1);
+    expect([island, bolt].filter((id) => zone(game, id) === "exile")).toHaveLength(1);
+  });
+
+  it("a declined cast leaves all three to choose from", () => {
+    const { game, b } = table();
+    spawn(game, "Itazura, Lingering Wick");
+    const cards = [toLibrary(game, "Island"), toLibrary(game, "Forest"), toLibrary(game, "Plains")];
+    b.chooseNumberFn = () => 0;
+    b.chooseCastNowFn = () => null;
+    toStep(game, "upkeep", A);
+    settle(game);
+    expect(life(game, B)).toBe(20);
+    expect(cards.filter((id) => zone(game, id) === "hand")).toHaveLength(1);
+    expect(cards.filter((id) => zone(game, id) === "exile")).toHaveLength(2);
   });
 });
 

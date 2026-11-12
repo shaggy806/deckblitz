@@ -414,6 +414,7 @@ import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
 import _poolInvigoratedRampage from "../pool/invigorated-rampage.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolIsarethTheAwakener from "../pool/isareth-the-awakener.js";
+import _poolItazuraLingeringWick from "../pool/itazura-lingering-wick.js";
 import _poolJadelightRanger from "../pool/jadelight-ranger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
 import _poolJoinerAdept from "../pool/joiner-adept.js";
@@ -1451,6 +1452,7 @@ const shard: CardShard = {
     _poolInvigoratedRampage,
     _poolIronwillForger,
     _poolIsarethTheAwakener,
+    _poolItazuraLingeringWick,
     _poolJadelightRanger,
     _poolJeskaiDevotee,
     _poolJoinerAdept,
