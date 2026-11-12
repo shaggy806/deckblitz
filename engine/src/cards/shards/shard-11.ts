@@ -217,6 +217,7 @@ import _poolDeathIsIrrelevant from "../pool/death-is-irrelevant.js";
 import _poolDebtorsPulpit from "../pool/debtors-pulpit.js";
 import _poolDecommission from "../pool/decommission.js";
 import _poolDeemWorthy from "../pool/deem-worthy.js";
+import _poolDeepGnomeTerramancer from "../pool/deep-gnome-terramancer.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDefendersOfHumanity from "../pool/defenders-of-humanity.js";
 import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
@@ -1245,6 +1246,7 @@ const shard: CardShard = {
     _poolDebtorsPulpit,
     _poolDecommission,
     _poolDeemWorthy,
+    _poolDeepGnomeTerramancer,
     _poolDefacingDuskmage,
     _poolDefendersOfHumanity,
     _poolDelusionsOfMediocrity,

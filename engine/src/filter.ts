@@ -1264,6 +1264,11 @@ export interface CardFilter {
    * Lord Zuko), "came from a graveyard" (a spell's entry comes from the
    * stack; `castFrom` says where it was cast). */
   readonly enteredFrom?: ZoneType;
+  /** It's a land that entered by being played (rule 305.1), this stint
+   * (`EntryRecord.played`) — Deep Gnome Terramancer's "lands enter … without
+   * being played" is `played: false`; a land an effect put there wasn't
+   * played. */
+  readonly played?: boolean;
   /** It was (or wasn't) put onto the battlefield by an ability of the
    * permanent applying the filter, this stint of it — Kodama of the East
    * Tree's "if it wasn't put onto the battlefield with this ability". Needs
@@ -2702,6 +2707,7 @@ export function matchesFilter(
     filter.castFrom !== undefined ||
     filter.castVia !== undefined ||
     filter.enteredFrom !== undefined ||
+    filter.played !== undefined ||
     filter.putThereBySource !== undefined
   ) {
     const entry = live !== undefined ? (live.zone === "battlefield" ? live.entry : undefined) : lki!.entry;
@@ -2722,6 +2728,7 @@ export function matchesFilter(
     // A foretold card cast for a cost it was given was foretold all the same (702.143c).
     if (filter.castVia !== undefined && (cast?.via === "foretell-given" ? "foretell" : cast?.via) !== filter.castVia) return false;
     if (filter.enteredFrom !== undefined && entry?.from !== filter.enteredFrom) return false;
+    if (filter.played !== undefined && (entry?.played === true) !== filter.played) return false;
     if (filter.putThereBySource !== undefined) {
       const by = entry?.by;
       const asker = ctx.source === undefined ? undefined : state.objects[ctx.source];

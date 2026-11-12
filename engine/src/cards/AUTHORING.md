@@ -3334,8 +3334,9 @@ loyalty — Maarika, Brutal Gladiator's `toFilter`) and
 turn" (Spear of Heliod), with `combat: true` for combat damage (Witch-king of Angmar: a sacrifice keeps "you" as
 the effect's controller, not the player choosing). The condition `{ kind: "self-hasnt-dealt-damage", combat? }`
 is "as long as it hasn't dealt [combat] damage yet" (Karakyk Guardian, Ruric Thar). `cast` / `castBy: "you"` / `castFrom` / `enteredFrom` /
-`putThereBySource` read how a permanent came onto the battlefield, this stint
-(`GameObject.entry`): as a spell that was cast and resolved ("if you cast it"
+`played` / `putThereBySource` read how a permanent came onto the battlefield,
+this stint (`GameObject.entry`): played as a land (rule 305.1 — Deep Gnome
+Terramancer's "lands enter … without being played" is `played: false`), as a spell that was cast and resolved ("if you cast it"
 — Anti-Venom's enters trigger is `{ on: "enters-battlefield", who: "self",
 filter: { cast: true, castBy: "you" } }`, since whether it was cast never
 changes; a copy of a spell was never cast), cast from which zone (asked of a

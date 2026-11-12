@@ -5023,6 +5023,9 @@ export interface EntryRecord {
    * timestamp then — Kodama of the East Tree's "if it wasn't put onto the
    * battlefield with this ability". */
   readonly by?: { readonly source: ObjectId; readonly timestamp: number };
+  /** It's a land that was played (rule 305.1) — Deep Gnome Terramancer's
+   * "enter … without being played" is the filter's `played: false`. */
+  readonly played?: true;
 }
 
 /**

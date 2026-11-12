@@ -6394,6 +6394,7 @@ import _poolDeepAnalysis from "./pool/deep-analysis.js";
 import _poolDeepCavernBat from "./pool/deep-cavern-bat.js";
 import _poolDeepForestHermit from "./pool/deep-forest-hermit.js";
 import _poolDeepFreeze from "./pool/deep-freeze.js";
+import _poolDeepGnomeTerramancer from "./pool/deep-gnome-terramancer.js";
 import _poolDeepGoblinSkulltaker from "./pool/deep-goblin-skulltaker.js";
 import _poolDeepReconnaissance from "./pool/deep-reconnaissance.js";
 import _poolDeepSeaKraken from "./pool/deep-sea-kraken.js";
@@ -39005,6 +39006,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeepCavernBat,
   _poolDeepForestHermit,
   _poolDeepFreeze,
+  _poolDeepGnomeTerramancer,
   _poolDeepGoblinSkulltaker,
   _poolDeepReconnaissance,
   _poolDeepSeaKraken,
@@ -71629,6 +71631,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deep-cavern-bat": _poolDeepCavernBat,
   "pool/deep-forest-hermit": _poolDeepForestHermit,
   "pool/deep-freeze": _poolDeepFreeze,
+  "pool/deep-gnome-terramancer": _poolDeepGnomeTerramancer,
   "pool/deep-goblin-skulltaker": _poolDeepGoblinSkulltaker,
   "pool/deep-reconnaissance": _poolDeepReconnaissance,
   "pool/deep-sea-kraken": _poolDeepSeaKraken,

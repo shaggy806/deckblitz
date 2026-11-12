@@ -1475,6 +1475,8 @@ interface PlannedTokenCopies extends Omit<EnteringTokenCopies, "tokens"> {
 interface EnterOptions {
   /** "…onto the battlefield tapped". */
   readonly tapped?: boolean;
+  /** A land being played (rule 305.1) — `EntryRecord.played`. */
+  readonly played?: true;
   /** "…under your control", when that isn't its owner. */
   readonly under?: PlayerId;
   /** "…onto the battlefield transformed" — a transforming double-faced card
@@ -14453,6 +14455,7 @@ export class Game {
     const owner = this.state.objects[cardId]?.owner;
     const under = owner !== undefined && owner !== player ? player : undefined;
     const entered = this.moveObject(cardId, "battlefield", {
+      played: true,
       ...(under !== undefined ? { under } : {}),
       ...(entry.tapped === true ? { tapped: true } : {}),
     });
@@ -61267,6 +61270,7 @@ controlledBy,
                 }
               : {}),
             ...(this.state.resolvingSource !== undefined ? { by: this.state.resolvingSource } : {}),
+            ...(enter.played === true ? { played: true as const } : {}),
           };
     const from = this.zoneList(object.zone, object.owner);
     const index = from.indexOf(id);
