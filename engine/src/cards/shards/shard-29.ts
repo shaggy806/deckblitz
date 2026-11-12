@@ -19,6 +19,7 @@ import _poolAlchemistsGambit from "../pool/alchemists-gambit.js";
 import _poolAliBaba from "../pool/ali-baba.js";
 import _poolAlliedAssault from "../pool/allied-assault.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
+import _poolAmazingAlliance from "../pool/amazing-alliance.js";
 import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
 import _poolAnchorToReality from "../pool/anchor-to-reality.js";
 import _poolAngelOfDestiny from "../pool/angel-of-destiny.js";
@@ -485,6 +486,7 @@ import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMartyrsBond from "../pool/martyrs-bond.js";
 import _poolMasterWarcraft from "../pool/master-warcraft.js";
 import _poolMastercraftRaptor from "../pool/mastercraft-raptor.js";
+import _poolMatchTheOdds from "../pool/match-the-odds.js";
 import _poolMatsuTribeBirdstalker from "../pool/matsu-tribe-birdstalker.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMedicineRunner from "../pool/medicine-runner.js";
@@ -778,6 +780,7 @@ import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSparkshaperVisionary from "../pool/sparkshaper-visionary.js";
+import _poolSpecialMove from "../pool/special-move.js";
 import _poolSpeciesGorger from "../pool/species-gorger.js";
 import _poolSpellweaverDuo from "../pool/spellweaver-duo.js";
 import _poolSphereOfSafety from "../pool/sphere-of-safety.js";
@@ -1030,6 +1033,7 @@ const shard: CardShard = {
     _poolAliBaba,
     _poolAlliedAssault,
     _poolAllosaurusShepherd,
+    _poolAmazingAlliance,
     _poolAmbitiousAssault,
     _poolAnchorToReality,
     _poolAngelOfDestiny,
@@ -1496,6 +1500,7 @@ const shard: CardShard = {
     _poolMartyrsBond,
     _poolMasterWarcraft,
     _poolMastercraftRaptor,
+    _poolMatchTheOdds,
     _poolMatsuTribeBirdstalker,
     _poolMechanAssembler,
     _poolMedicineRunner,
@@ -1789,6 +1794,7 @@ const shard: CardShard = {
     _poolSoulcoilViper,
     _poolSoulknifeSpy,
     _poolSparkshaperVisionary,
+    _poolSpecialMove,
     _poolSpeciesGorger,
     _poolSpellweaverDuo,
     _poolSphereOfSafety,

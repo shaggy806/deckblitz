@@ -535,6 +535,7 @@ import _poolMasterThief from "../pool/master-thief.js";
 import _poolMawOfTheObzedat from "../pool/maw-of-the-obzedat.js";
 import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
 import _poolMedicineBag from "../pool/medicine-bag.js";
+import _poolMegatronDestructiveForce from "../pool/megatron-destructive-force.js";
 import _poolMemoryLapse from "../pool/memory-lapse.js";
 import _poolMemorySluice from "../pool/memory-sluice.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
@@ -873,6 +874,7 @@ import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheRedTerror from "../pool/the-red-terror.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolTheWeaverKing from "../pool/the-weaver-king.js";
+import _poolThemberchaud from "../pool/themberchaud.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
 import _poolThornscapeFamiliar from "../pool/thornscape-familiar.js";
@@ -1571,6 +1573,7 @@ const shard: CardShard = {
     _poolMawOfTheObzedat,
     _poolMechanizedNinjaCavalry,
     _poolMedicineBag,
+    _poolMegatronDestructiveForce,
     _poolMemoryLapse,
     _poolMemorySluice,
     _poolMerchantOfSecrets,
@@ -1909,6 +1912,7 @@ const shard: CardShard = {
     _poolTheRedTerror,
     _poolTheShire,
     _poolTheWeaverKing,
+    _poolThemberchaud,
     _poolThornMammoth,
     _poolThornglintBridge,
     _poolThornscapeFamiliar,

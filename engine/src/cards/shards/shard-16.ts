@@ -201,6 +201,7 @@ import _poolDerangedHermit from "../pool/deranged-hermit.js";
 import _poolDerelor from "../pool/derelor.js";
 import _poolDescendantOfKiyomaro from "../pool/descendant-of-kiyomaro.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
+import _poolDesperatePlea from "../pool/desperate-plea.js";
 import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDewdropSpy from "../pool/dewdrop-spy.js";
 import _poolDisasterRadius from "../pool/disaster-radius.js";
@@ -349,6 +350,7 @@ import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
 import _poolGiantLadybug from "../pool/giant-ladybug.js";
 import _poolGiantManGargantuanGenius from "../pool/giant-man-gargantuan-genius.js";
 import _poolGiftOfWrath from "../pool/gift-of-wrath.js";
+import _poolGisasFavoriteShovel from "../pool/gisas-favorite-shovel.js";
 import _poolGlacialWall from "../pool/glacial-wall.js";
 import _poolGlimmerBairn from "../pool/glimmer-bairn.js";
 import _poolGlissaTheTraitor from "../pool/glissa-the-traitor.js";
@@ -357,6 +359,7 @@ import _poolGlitterfang from "../pool/glitterfang.js";
 import _poolGluttonousSlug from "../pool/gluttonous-slug.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
 import _poolGogoMasterOfMimicry from "../pool/gogo-master-of-mimicry.js";
+import _poolGoldbugHumanitysAlly from "../pool/goldbug-humanitys-ally.js";
 import _poolGoldenTailTrainer from "../pool/golden-tail-trainer.js";
 import _poolGolgariDecoy from "../pool/golgari-decoy.js";
 import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
@@ -1279,6 +1282,7 @@ const shard: CardShard = {
     _poolDerelor,
     _poolDescendantOfKiyomaro,
     _poolDesolateLighthouse,
+    _poolDesperatePlea,
     _poolDevouringStrossus,
     _poolDewdropSpy,
     _poolDisasterRadius,
@@ -1427,6 +1431,7 @@ const shard: CardShard = {
     _poolGiantLadybug,
     _poolGiantManGargantuanGenius,
     _poolGiftOfWrath,
+    _poolGisasFavoriteShovel,
     _poolGlacialWall,
     _poolGlimmerBairn,
     _poolGlissaTheTraitor,
@@ -1435,6 +1440,7 @@ const shard: CardShard = {
     _poolGluttonousSlug,
     _poolGoblinChirurgeon,
     _poolGogoMasterOfMimicry,
+    _poolGoldbugHumanitysAlly,
     _poolGoldenTailTrainer,
     _poolGolgariDecoy,
     _poolGorionWiseMentor,

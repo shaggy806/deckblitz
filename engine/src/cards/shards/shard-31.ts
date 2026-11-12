@@ -163,6 +163,7 @@ import _poolCloudElemental from "../pool/cloud-elemental.js";
 import _poolCloudhoofKirin from "../pool/cloudhoof-kirin.js";
 import _poolCloudkinSeer from "../pool/cloudkin-seer.js";
 import _poolCloudreachCavalry from "../pool/cloudreach-cavalry.js";
+import _poolClowningAround from "../pool/clowning-around.js";
 import _poolCoalitionWarbrute from "../pool/coalition-warbrute.js";
 import _poolCoercedConfession from "../pool/coerced-confession.js";
 import _poolCoercedToKill from "../pool/coerced-to-kill.js";
@@ -578,6 +579,7 @@ import _poolMarrowChomper from "../pool/marrow-chomper.js";
 import _poolMasterOfThePearlTrident from "../pool/master-of-the-pearl-trident.js";
 import _poolMatcaRioters from "../pool/matca-rioters.js";
 import _poolMechHangar from "../pool/mech-hangar.js";
+import _poolMechanicalGlider from "../pool/mechanical-glider.js";
 import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
@@ -1239,6 +1241,7 @@ const shard: CardShard = {
     _poolCloudhoofKirin,
     _poolCloudkinSeer,
     _poolCloudreachCavalry,
+    _poolClowningAround,
     _poolCoalitionWarbrute,
     _poolCoercedConfession,
     _poolCoercedToKill,
@@ -1654,6 +1657,7 @@ const shard: CardShard = {
     _poolMasterOfThePearlTrident,
     _poolMatcaRioters,
     _poolMechHangar,
+    _poolMechanicalGlider,
     _poolMechanizedWarfare,
     _poolMendTheWilds,
     _poolMerchantOfTruth,

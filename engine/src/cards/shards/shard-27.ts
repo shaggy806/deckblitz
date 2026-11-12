@@ -591,6 +591,7 @@ import _poolPrimalBoost from "../pool/primal-boost.js";
 import _poolPrimevalsGloriousRebirth from "../pool/primevals-glorious-rebirth.js";
 import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
+import _poolPrincessYue from "../pool/princess-yue.js";
 import _poolPrismaticBoon from "../pool/prismatic-boon.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProftSinisterMastermind from "../pool/proft-sinister-mastermind.js";
@@ -1578,6 +1579,7 @@ const shard: CardShard = {
     _poolPrimevalsGloriousRebirth,
     _poolPrimordialWurm,
     _poolPrinceImrahilTheFair,
+    _poolPrincessYue,
     _poolPrismaticBoon,
     _poolPrivilegedPosition,
     _poolProftSinisterMastermind,

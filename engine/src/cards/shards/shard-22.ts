@@ -204,6 +204,7 @@ import _poolDemonicAppetite from "../pool/demonic-appetite.js";
 import _poolDemonicRising from "../pool/demonic-rising.js";
 import _poolDepartedDeckhand from "../pool/departed-deckhand.js";
 import _poolDesperateStand from "../pool/desperate-stand.js";
+import _poolDimensionXPizzasaur from "../pool/dimension-x-pizzasaur.js";
 import _poolDireStrainAnarchist from "../pool/dire-strain-anarchist.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
@@ -298,6 +299,7 @@ import _poolFloatingDreamZubera from "../pool/floating-dream-zubera.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfMagic from "../pool/font-of-magic.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
+import _poolFootChopper from "../pool/foot-chopper.js";
 import _poolFootNinjas from "../pool/foot-ninjas.js";
 import _poolFootstepsOfTheGoryo from "../pool/footsteps-of-the-goryo.js";
 import _poolForgottenMonument from "../pool/forgotten-monument.js";
@@ -480,6 +482,7 @@ import _poolLoseHope from "../pool/lose-hope.js";
 import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
 import _poolLowlandOaf from "../pool/lowland-oaf.js";
+import _poolLucyMacleanPositivelyArmed from "../pool/lucy-maclean-positively-armed.js";
 import _poolLumengridAugur from "../pool/lumengrid-augur.js";
 import _poolLureboundScarecrow from "../pool/lurebound-scarecrow.js";
 import _poolMadcapExperiment from "../pool/madcap-experiment.js";
@@ -489,6 +492,7 @@ import _poolMagicalHack from "../pool/magical-hack.js";
 import _poolMagusOfTheAbyss from "../pool/magus-of-the-abyss.js";
 import _poolMagusOfTheMind from "../pool/magus-of-the-mind.js";
 import _poolMagusOfTheVineyard from "../pool/magus-of-the-vineyard.js";
+import _poolMaiAndZuko from "../pool/mai-and-zuko.js";
 import _poolMajesticAuricorn from "../pool/majestic-auricorn.js";
 import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolManaChargedDragon from "../pool/mana-charged-dragon.js";
@@ -1244,6 +1248,7 @@ const shard: CardShard = {
     _poolDemonicRising,
     _poolDepartedDeckhand,
     _poolDesperateStand,
+    _poolDimensionXPizzasaur,
     _poolDireStrainAnarchist,
     _poolDireWolfProwler,
     _poolDispellersCapsule,
@@ -1338,6 +1343,7 @@ const shard: CardShard = {
     _poolFlowstoneShambler,
     _poolFontOfMagic,
     _poolFontOfVigor,
+    _poolFootChopper,
     _poolFootNinjas,
     _poolFootstepsOfTheGoryo,
     _poolForgottenMonument,
@@ -1520,6 +1526,7 @@ const shard: CardShard = {
     _poolLotusEyeMystics,
     _poolLotusPathDjinn,
     _poolLowlandOaf,
+    _poolLucyMacleanPositivelyArmed,
     _poolLumengridAugur,
     _poolLureboundScarecrow,
     _poolMadcapExperiment,
@@ -1529,6 +1536,7 @@ const shard: CardShard = {
     _poolMagusOfTheAbyss,
     _poolMagusOfTheMind,
     _poolMagusOfTheVineyard,
+    _poolMaiAndZuko,
     _poolMajesticAuricorn,
     _poolMalakirBloodPriest,
     _poolManaChargedDragon,

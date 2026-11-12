@@ -125,6 +125,7 @@ import _poolCaptainsClaws from "../pool/captains-claws.js";
 import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
 import _poolCarrionGrub from "../pool/carrion-grub.js";
+import _poolCasalLurkwoodPathfinder from "../pool/casal-lurkwood-pathfinder.js";
 import _poolCementShoes from "../pool/cement-shoes.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolCeremoniousRejection from "../pool/ceremonious-rejection.js";
@@ -189,6 +190,7 @@ import _poolCurseOfTheSwine from "../pool/curse-of-the-swine.js";
 import _poolDaemogothTitan from "../pool/daemogoth-titan.js";
 import _poolDaggerCaster from "../pool/dagger-caster.js";
 import _poolDaggerfangDuo from "../pool/daggerfang-duo.js";
+import _poolDainOfTheAncientHalls from "../pool/dain-of-the-ancient-halls.js";
 import _poolDarajaGriffin from "../pool/daraja-griffin.js";
 import _poolDaredevilManWithoutFear from "../pool/daredevil-man-without-fear.js";
 import _poolDarkFavor from "../pool/dark-favor.js";
@@ -316,6 +318,7 @@ import _poolGeordiLaForgeInnovator from "../pool/geordi-la-forge-innovator.js";
 import _poolGetawayGlamer from "../pool/getaway-glamer.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
 import _poolGhastlyMimicry from "../pool/ghastly-mimicry.js";
+import _poolGhostSpiderGwenStacy from "../pool/ghost-spider-gwen-stacy.js";
 import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
 import _poolGiantCaterpillar from "../pool/giant-caterpillar.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
@@ -800,6 +803,7 @@ import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTeferisWavecaster from "../pool/teferis-wavecaster.js";
 import _poolTelJiladChosen from "../pool/tel-jilad-chosen.js";
 import _poolTelepathy from "../pool/telepathy.js";
+import _poolTempestraDameOfGames from "../pool/tempestra-dame-of-games.js";
 import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
 import _poolTemptedByTheOriq from "../pool/tempted-by-the-oriq.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
@@ -1091,6 +1095,7 @@ const shard: CardShard = {
     _poolCapturedByLagacs,
     _poolCarnivorousPlant,
     _poolCarrionGrub,
+    _poolCasalLurkwoodPathfinder,
     _poolCementShoes,
     _poolCephalidFacetaker,
     _poolCeremoniousRejection,
@@ -1155,6 +1160,7 @@ const shard: CardShard = {
     _poolDaemogothTitan,
     _poolDaggerCaster,
     _poolDaggerfangDuo,
+    _poolDainOfTheAncientHalls,
     _poolDarajaGriffin,
     _poolDaredevilManWithoutFear,
     _poolDarkFavor,
@@ -1282,6 +1288,7 @@ const shard: CardShard = {
     _poolGetawayGlamer,
     _poolGevScaledScorch,
     _poolGhastlyMimicry,
+    _poolGhostSpiderGwenStacy,
     _poolGhostlyKeybearer,
     _poolGiantCaterpillar,
     _poolGiganticBigBear,
@@ -1766,6 +1773,7 @@ const shard: CardShard = {
     _poolTeferisWavecaster,
     _poolTelJiladChosen,
     _poolTelepathy,
+    _poolTempestraDameOfGames,
     _poolTemporalCleansing,
     _poolTemptedByTheOriq,
     _poolTendrilsOfAgony,

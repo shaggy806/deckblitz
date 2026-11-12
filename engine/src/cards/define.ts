@@ -1835,6 +1835,13 @@ export type StaticCondition =
    */
   | { readonly kind: "target-controlled-by-you"; readonly index: number }
   /**
+   * The player in this target slot is the ability's controller — The Ghoul,
+   * Gunslinger's "target player gets two rad counters. **If that player is
+   * you**, create a Treasure token". Asked of the target as it resolves; an
+   * illegal one (blanked) is nobody. Only a resolution can answer it.
+   */
+  | { readonly kind: "target-is-you"; readonly index: number }
+  /**
    * The ability's own source matches `filter` — "as long as ~ is equipped",
    * "if ~ is attacking", "if ~ is tapped". A triggered ability whose source
    * was a permanent that has since left (its own dies trigger) reads it as it

@@ -1971,6 +1971,12 @@ export type ThisWayKind =
    * tapping them, then this. One already tapped isn't tapped again, and so
    * isn't counted. */
   | "tapped"
+  /** Permanents it transformed or converted (rules 701.27, 701.28 —
+   * turned to their other face) — Megatron, Tyrant's "you may convert
+   * Megatron. **If you do**, add {C} …": nothing when it couldn't (gone, or
+   * already transformed or converted since the ability went on the stack,
+   * 701.27f). */
+  | "transformed"
   /** Permanents it phased out, directly or with what they're attached to
    * (rule 702.26g) — Out of Time's "a time counter for each creature that
    * phased out this way" (`filter: { type: "creature" }`). Each is read as it
@@ -2897,9 +2903,13 @@ export type EffectSpec =
        * beyond lethal (`lethalDamageTo`: toughness less damage marked, 1 from
        * deathtouch) goes to its controller, both dealt at once. `ifSourceHas`
        * makes it conditional on the source's keyword ("if the creature you
-       * control has trample").
+       * control has trample"). `then` is what else the redirect does
+       * ("…instead that damage is dealt to that creature's controller **and
+       * you convert Megatron**" — Megatron, Destructive Force): it happens
+       * whenever there was excess to redirect, after the damage, whether or
+       * not the controller's share was then prevented (the card's ruling).
        */
-      readonly excessToController?: { readonly ifSourceHas?: Keyword };
+      readonly excessToController?: { readonly ifSourceHas?: Keyword; readonly then?: EffectSpec };
     }
   | {
       /** `mana: "any-color"` — one mana of any of the five colours, the
@@ -16781,6 +16791,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               if (lethal > 0) ctx.dealDamage(target, lethal, spec.from);
               ctx.dealDamage({ kind: "player", player: controller }, amount - lethal, spec.from);
             });
+            if (excess.then !== undefined) applyEffectSpec(excess.then, ctx);
             return;
           }
         }

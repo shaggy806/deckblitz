@@ -21,6 +21,7 @@ import _poolAjanisLastStand from "../pool/ajanis-last-stand.js";
 import _poolAjanisWelcome from "../pool/ajanis-welcome.js";
 import _poolAlchorsTomb from "../pool/alchors-tomb.js";
 import _poolAllFatesStalker from "../pool/all-fates-stalker.js";
+import _poolAlliedTeamwork from "../pool/allied-teamwork.js";
 import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
 import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
@@ -618,6 +619,7 @@ import _poolOvergrownPest from "../pool/overgrown-pest.js";
 import _poolOxDrover from "../pool/ox-drover.js";
 import _poolPactOfTheSerpent from "../pool/pact-of-the-serpent.js";
 import _poolPactdollTerror from "../pool/pactdoll-terror.js";
+import _poolPairODiceLost from "../pool/pair-o-dice-lost.js";
 import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick.js";
 import _poolPanacea from "../pool/panacea.js";
 import _poolParasiticGrasp from "../pool/parasitic-grasp.js";
@@ -1035,6 +1037,7 @@ const shard: CardShard = {
     _poolAjanisWelcome,
     _poolAlchorsTomb,
     _poolAllFatesStalker,
+    _poolAlliedTeamwork,
     _poolAlpineHoundmaster,
     _poolAncientOfTheEquinox,
     _poolAndTheyShallKnowNoFear,
@@ -1632,6 +1635,7 @@ const shard: CardShard = {
     _poolOxDrover,
     _poolPactOfTheSerpent,
     _poolPactdollTerror,
+    _poolPairODiceLost,
     _poolPaladinDanseSteelMaverick,
     _poolPanacea,
     _poolParasiticGrasp,

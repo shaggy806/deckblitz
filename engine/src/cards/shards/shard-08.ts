@@ -142,6 +142,7 @@ import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCarthTheLion from "../pool/carth-the-lion.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
+import _poolCasalPathbreakerOwlbear from "../pool/casal-pathbreaker-owlbear.js";
 import _poolCateranOverlord from "../pool/cateran-overlord.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
 import _poolCathedralMembrane from "../pool/cathedral-membrane.js";
@@ -308,6 +309,7 @@ import _poolFallajiChaindancer from "../pool/fallaji-chaindancer.js";
 import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
 import _poolFallajiVanguard from "../pool/fallaji-vanguard.js";
 import _poolFangFearlessLcie from "../pool/fang-fearless-lcie.js";
+import _poolFangRokusCompanion from "../pool/fang-rokus-companion.js";
 import _poolFatalMutation from "../pool/fatal-mutation.js";
 import _poolFearOfIsolation from "../pool/fear-of-isolation.js";
 import _poolFearsomeTemper from "../pool/fearsome-temper.js";
@@ -901,6 +903,7 @@ import _poolTheAntiquitiesWar from "../pool/the-antiquities-war.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolTheCloningOfShredder from "../pool/the-cloning-of-shredder.js";
+import _poolTheDukeRebelSentry from "../pool/the-duke-rebel-sentry.js";
 import _poolTheHauntOfHightower from "../pool/the-haunt-of-hightower.js";
 import _poolTheInfamousCruelclaw from "../pool/the-infamous-cruelclaw.js";
 import _poolTheMasterFormedAnew from "../pool/the-master-formed-anew.js";
@@ -1200,6 +1203,7 @@ const shard: CardShard = {
     _poolCarnageAltar,
     _poolCarthTheLion,
     _poolCartoucheOfZeal,
+    _poolCasalPathbreakerOwlbear,
     _poolCateranOverlord,
     _poolCatharCommando,
     _poolCathedralMembrane,
@@ -1366,6 +1370,7 @@ const shard: CardShard = {
     _poolFallajiExcavation,
     _poolFallajiVanguard,
     _poolFangFearlessLcie,
+    _poolFangRokusCompanion,
     _poolFatalMutation,
     _poolFearOfIsolation,
     _poolFearsomeTemper,
@@ -1959,6 +1964,7 @@ const shard: CardShard = {
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
     _poolTheCloningOfShredder,
+    _poolTheDukeRebelSentry,
     _poolTheHauntOfHightower,
     _poolTheInfamousCruelclaw,
     _poolTheMasterFormedAnew,

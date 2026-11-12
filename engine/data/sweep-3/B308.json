@@ -1,0 +1,442 @@
+{
+ "batch": "B308",
+ "status": "done",
+ "ranks": "EDHREC ranks 10246–12810 (2026-11-12), the first batch under author-top-cards' \"build first, don't block\": built trigger:deals-combat-damage-first-time-each-turn (Raphael), decision:target-player-other-than-trigger-object-controller (Lucy MacLean), condition:target-player-is-you (The Ghoul), condition:excess-redirected-this-way and condition:transformed-this-way (Megatron); Dimension X Pizzasaur needed none (`this-way` counters-put)",
+ "authored": [
+  {
+   "name": "Allied Teamwork",
+   "files": [
+    "engine/src/cards/pool/allied-teamwork.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amazing Alliance",
+   "files": [
+    "engine/src/cards/pool/amazing-alliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "April O'Neil, Human Element",
+   "files": [
+    "engine/src/cards/pool/april-oneil-human-element.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "April O'Neil, Live on the Scene",
+   "files": [
+    "engine/src/cards/pool/april-oneil-live-on-the-scene.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bjorna, Nightfall Alchemist",
+   "files": [
+    "engine/src/cards/pool/bjorna-nightfall-alchemist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bohn, Beguiling Balladeer",
+   "files": [
+    "engine/src/cards/pool/bohn-beguiling-balladeer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bumi's Feast Lecture",
+   "files": [
+    "engine/src/cards/pool/bumis-feast-lecture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Casal, Lurkwood Pathfinder // Casal, Pathbreaker Owlbear",
+   "files": [
+    "engine/src/cards/pool/casal-lurkwood-pathfinder.ts",
+    "engine/src/cards/pool/casal-pathbreaker-owlbear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clowning Around",
+   "files": [
+    "engine/src/cards/pool/clowning-around.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dáin of the Ancient Halls",
+   "files": [
+    "engine/src/cards/pool/dain-of-the-ancient-halls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desperate Plea",
+   "files": [
+    "engine/src/cards/pool/desperate-plea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dimension X Pizzasaur",
+   "files": [
+    "engine/src/cards/pool/dimension-x-pizzasaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon's Desire",
+   "files": [
+    "engine/src/cards/pool/dragons-desire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ellie, Brick Master",
+   "files": [
+    "engine/src/cards/pool/ellie-brick-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evin, Waterdeep Opportunist",
+   "files": [
+    "engine/src/cards/pool/evin-waterdeep-opportunist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exploding Barrel",
+   "files": [
+    "engine/src/cards/pool/exploding-barrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fang, Roku's Companion",
+   "files": [
+    "engine/src/cards/pool/fang-rokus-companion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Nation Occupation",
+   "files": [
+    "engine/src/cards/pool/fire-nation-occupation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foot Chopper",
+   "files": [
+    "engine/src/cards/pool/foot-chopper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghost-Spider, Gwen Stacy",
+   "files": [
+    "engine/src/cards/pool/ghost-spider-gwen-stacy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gisa's Favorite Shovel",
+   "files": [
+    "engine/src/cards/pool/gisas-favorite-shovel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goldbug, Humanity's Ally // Goldbug, Scrappy Scout",
+   "files": [
+    "engine/src/cards/pool/goldbug-humanitys-ally.ts",
+    "engine/src/cards/pool/goldbug-scrappy-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jet, Rebel Leader",
+   "files": [
+    "engine/src/cards/pool/jet-rebel-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jetfire, Ingenious Scientist // Jetfire, Air Guardian",
+   "files": [
+    "engine/src/cards/pool/jetfire-air-guardian.ts",
+    "engine/src/cards/pool/jetfire-ingenious-scientist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Katara's Reversal",
+   "files": [
+    "engine/src/cards/pool/kataras-reversal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Long-Lost Lances",
+   "files": [
+    "engine/src/cards/pool/long-lost-lances.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lucy MacLean, Positively Armed",
+   "files": [
+    "engine/src/cards/pool/lucy-maclean-positively-armed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mai and Zuko",
+   "files": [
+    "engine/src/cards/pool/mai-and-zuko.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master's Guidance",
+   "files": [
+    "engine/src/cards/pool/masters-guidance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Match the Odds",
+   "files": [
+    "engine/src/cards/pool/match-the-odds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mechanical Glider",
+   "files": [
+    "engine/src/cards/pool/mechanical-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Megatron, Tyrant // Megatron, Destructive Force",
+   "files": [
+    "engine/src/cards/pool/megatron-destructive-force.ts",
+    "engine/src/cards/pool/megatron-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Miles \"Tails\" Prower",
+   "files": [
+    "engine/src/cards/pool/miles-tails-prower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mole Module",
+   "files": [
+    "engine/src/cards/pool/mole-module.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Owen Grady, Raptor Trainer",
+   "files": [
+    "engine/src/cards/pool/owen-grady-raptor-trainer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pair o' Dice Lost",
+   "files": [
+    "engine/src/cards/pool/pair-o-dice-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Princess Yue",
+   "files": [
+    "engine/src/cards/pool/princess-yue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raphael, Tag Team Tough",
+   "files": [
+    "engine/src/cards/pool/raphael-tag-team-tough.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rashel, Fist of Torm",
+   "files": [
+    "engine/src/cards/pool/rashel-fist-of-torm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seismic Tutelage",
+   "files": [
+    "engine/src/cards/pool/seismic-tutelage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Special Move",
+   "files": [
+    "engine/src/cards/pool/special-move.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man 2099, Miguel O'Hara",
+   "files": [
+    "engine/src/cards/pool/spider-man-2099-miguel-ohara.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spider-Man, Peter Parker",
+   "files": [
+    "engine/src/cards/pool/spider-man-peter-parker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swift Demise",
+   "files": [
+    "engine/src/cards/pool/swift-demise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempestra, Dame of Games",
+   "files": [
+    "engine/src/cards/pool/tempestra-dame-of-games.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Duke, Rebel Sentry",
+   "files": [
+    "engine/src/cards/pool/the-duke-rebel-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Ghoul, Gunslinger",
+   "files": [
+    "engine/src/cards/pool/the-ghoul-gunslinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Themberchaud",
+   "files": [
+    "engine/src/cards/pool/themberchaud.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tokka & Rahzar, Unsupervised",
+   "files": [
+    "engine/src/cards/pool/tokka-rahzar-unsupervised.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tui and La, Moon and Ocean",
+   "files": [
+    "engine/src/cards/pool/tui-and-la-moon-and-ocean.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venom, Deadly Devourer",
+   "files": [
+    "engine/src/cards/pool/venom-deadly-devourer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venom, Eddie Brock",
+   "files": [
+    "engine/src/cards/pool/venom-eddie-brock.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Exchange of Words",
+   "needs": [
+    "effect:exchange-text-boxes"
+   ],
+   "size": "major",
+   "why": "Swaps two creatures' text boxes for as long as it stays on the battlefield (layer 3): text-changing effects aren't built. The user chose to leave it for later (2026-11-12)."
+  },
+  {
+   "name": "\"Lifetime\" Pass Holder",
+   "needs": [
+    "mechanic:attractions"
+   ],
+   "size": "major",
+   "why": "Opens an Attraction and returns on a roll to visit your Attractions: the Attraction deck and visits (rule 717) aren't built. The user chose to leave it for later (2026-11-12)."
+  },
+  {
+   "name": "Starlight Spectacular",
+   "needs": [
+    "decision:order-creatures-one-at-a-time"
+   ],
+   "size": "major",
+   "why": "Parade! — choose each creature you control one at a time, each +1/+1 for every creature chosen before it: ordering permanents is a new kind of decision with its own UI. Ask the user before building."
+  },
+  {
+   "name": "Prowl, Stoic Strategist // Prowl, Pursuit Vehicle",
+   "needs": [
+    "trigger:plays-card-exiled-with-source"
+   ],
+   "size": "small",
+   "why": "\"Whenever a player plays a card exiled with Prowl, you draw a card and convert Prowl\": no trigger on playing a card exiled with the source. The back face's \"second time this ability has resolved this turn\" is `resolved-this-turn`. Not reached in B308."
+  },
+  {
+   "name": "Ian Malcolm, Chaotician",
+   "needs": [
+    "zone:cast-cards-you-dont-own"
+   ],
+   "size": "small",
+   "why": "Each player, during their own turn, may cast a spell from among the cards they don't own exiled with Ian Malcolm, spending mana as though any type. Not reached in B308."
+  },
+  {
+   "name": "Priority Boarding",
+   "needs": [
+    "condition:roll-result-compare",
+    "trigger:reveal-this-way-reflexive"
+   ],
+   "size": "small",
+   "why": "\"Whenever you reveal a card with mana value less than the result this way, you may exile it\": a trigger on the reveal that carries the card and the die result. Not reached in B308."
+  },
+  {
+   "name": "Reckless Blaze",
+   "needs": [
+    "effect:delayed-trigger-dealt-damage-this-way-dies"
+   ],
+   "size": "small",
+   "why": "\"Whenever a creature you control dealt damage this way dies this turn, add {R}\": a delayed watch over the creatures this spell damaged. Not reached in B308."
+  },
+  {
+   "name": "Cyclonus, the Saboteur // Cyclonus, Cybertronian Fighter",
+   "needs": [
+    "effect:additional-beginning-phase"
+   ],
+   "size": "small",
+   "why": "\"Convert it. If you do, there is an additional beginning phase after this phase\": additional combat phases exist, an additional beginning phase (untap, upkeep, draw — rule 500.8) doesn't. Not reached in B308."
+  }
+ ]
+}

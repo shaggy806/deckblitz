@@ -782,6 +782,7 @@ import _poolSpectacleSummit from "../pool/spectacle-summit.js";
 import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
 import _poolSpellShrivel from "../pool/spell-shrivel.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
+import _poolSpiderMan2099MiguelOhara from "../pool/spider-man-2099-miguel-ohara.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
 import _poolSpiritWaterRevival from "../pool/spirit-water-revival.js";
 import _poolSpoilsOfTheHunt from "../pool/spoils-of-the-hunt.js";
@@ -1802,6 +1803,7 @@ const shard: CardShard = {
     _poolSpectralShepherd,
     _poolSpellShrivel,
     _poolSpellStutter,
+    _poolSpiderMan2099MiguelOhara,
     _poolSpinedMegalodon,
     _poolSpiritWaterRevival,
     _poolSpoilsOfTheHunt,

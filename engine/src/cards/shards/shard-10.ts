@@ -542,6 +542,7 @@ import _poolMnemonicNexus from "../pool/mnemonic-nexus.js";
 import _poolMobilize from "../pool/mobilize.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoldervineCloak from "../pool/moldervine-cloak.js";
+import _poolMoleModule from "../pool/mole-module.js";
 import _poolMoltenHydra from "../pool/molten-hydra.js";
 import _poolMonkClass from "../pool/monk-class.js";
 import _poolMonumentToPerfection from "../pool/monument-to-perfection.js";
@@ -996,6 +997,7 @@ import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
 import _tokensBirdTokenWhiteBlue from "../tokens/bird-token-white-blue.js";
 import _tokensBlueThopterToken from "../tokens/blue-thopter-token.js";
+import _tokensCordycepsInfectedToken from "../tokens/cordyceps-infected-token.js";
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
@@ -1553,6 +1555,7 @@ const shard: CardShard = {
     _poolMobilize,
     _poolMockingbird,
     _poolMoldervineCloak,
+    _poolMoleModule,
     _poolMoltenHydra,
     _poolMonkClass,
     _poolMonumentToPerfection,
@@ -2009,6 +2012,7 @@ const shard: CardShard = {
     _tokensBeastTokenGarrukVeiledButcher,
     _tokensBirdTokenWhiteBlue,
     _tokensBlueThopterToken,
+    _tokensCordycepsInfectedToken,
     _tokensDinosaurToken33,
     _tokensDragonToken66,
     _tokensEverywhereToken,

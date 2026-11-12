@@ -913,6 +913,11 @@ export type OtherThan =
   | "source"
   | "trigger-object"
   | "trigger-player"
+  /** The controller of the object whose event fired the trigger, as it last
+   * existed if it has left — Lucy MacLean, Positively Armed's "Whenever a
+   * token enters, you may have target player **other than its controller**
+   * create a token that's a copy of it". Only for a player slot. */
+  | "trigger-object-controller"
   /** The permanent the source is attached to — Pain for All's "any **other**
    * target" of its enchanted creature's damage. */
   | "host"
@@ -1465,7 +1470,9 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
         ? `${inner} other than that one`
         : than === "host"
           ? `${inner} other than the one it's attached to`
-          : `${inner} other than that player`;
+          : than === "trigger-object-controller"
+            ? `${inner} other than its controller`
+            : `${inner} other than that player`;
   }
   if (spec.kind === "opponent-compared") {
     const what = {

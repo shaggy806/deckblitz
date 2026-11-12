@@ -42,6 +42,7 @@ import _poolAngerOfTheGods from "../pool/anger-of-the-gods.js";
 import _poolAnnex from "../pool/annex.js";
 import _poolAnticausalVestige from "../pool/anticausal-vestige.js";
 import _poolAppetiteForBrains from "../pool/appetite-for-brains.js";
+import _poolAprilOneilLiveOnTheScene from "../pool/april-oneil-live-on-the-scene.js";
 import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js";
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArachnusSpinner from "../pool/arachnus-spinner.js";
@@ -845,6 +846,7 @@ import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
 import _poolTheCavesOfAndrozani from "../pool/the-caves-of-androzani.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheEternalWanderer from "../pool/the-eternal-wanderer.js";
+import _poolTheGhoulGunslinger from "../pool/the-ghoul-gunslinger.js";
 import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
@@ -874,6 +876,7 @@ import _poolTrailblazer from "../pool/trailblazer.js";
 import _poolTriumphOfTheHordes from "../pool/triumph-of-the-hordes.js";
 import _poolTrollHornCameo from "../pool/troll-horn-cameo.js";
 import _poolTrygonPredator from "../pool/trygon-predator.js";
+import _poolTuiAndLaMoonAndOcean from "../pool/tui-and-la-moon-and-ocean.js";
 import _poolTunnelerWurm from "../pool/tunneler-wurm.js";
 import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
@@ -1031,6 +1034,7 @@ const shard: CardShard = {
     _poolAnnex,
     _poolAnticausalVestige,
     _poolAppetiteForBrains,
+    _poolAprilOneilLiveOnTheScene,
     _poolAprilReporterOfTheWeird,
     _poolAquitectsWill,
     _poolArachnusSpinner,
@@ -1834,6 +1838,7 @@ const shard: CardShard = {
     _poolTheCavesOfAndrozani,
     _poolTheDrossPits,
     _poolTheEternalWanderer,
+    _poolTheGhoulGunslinger,
     _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
     _poolTheManaRig,
@@ -1863,6 +1868,7 @@ const shard: CardShard = {
     _poolTriumphOfTheHordes,
     _poolTrollHornCameo,
     _poolTrygonPredator,
+    _poolTuiAndLaMoonAndOcean,
     _poolTunnelerWurm,
     _poolTurtleLair,
     _poolUkudCobra,

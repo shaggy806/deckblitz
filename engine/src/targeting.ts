@@ -503,6 +503,17 @@ function excludedAsOther(state: GameState, than: OtherThan, ref: TargetRef, sour
   if (than === "trigger-player") {
     return ref.kind === "player" && source.triggerPlayer !== undefined && ref.player === source.triggerPlayer;
   }
+  if (than === "trigger-object-controller") {
+    if (ref.kind !== "player" || source.triggerObject === undefined) return false;
+    const object = state.objects[source.triggerObject];
+    const controller =
+      object === undefined
+        ? state.ceasedTokens?.[source.triggerObject]?.controller
+        : object.zone === "battlefield"
+          ? object.controller
+          : (object.lastKnown?.controller ?? object.controller);
+    return controller !== undefined && ref.player === controller;
+  }
   const id = than === "source" ? source.object : source.triggerObject;
   return ref.kind === "object" && id !== undefined && ref.object === id;
 }

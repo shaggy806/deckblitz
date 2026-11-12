@@ -45,6 +45,7 @@ import _poolAntQueen from "../pool/ant-queen.js";
 import _poolAnthroplasm from "../pool/anthroplasm.js";
 import _poolAnvilOfBogardan from "../pool/anvil-of-bogardan.js";
 import _poolAphettoAlchemist from "../pool/aphetto-alchemist.js";
+import _poolAprilOneilHumanElement from "../pool/april-oneil-human-element.js";
 import _poolArbalestElite from "../pool/arbalest-elite.js";
 import _poolArborbackStomper from "../pool/arborback-stomper.js";
 import _poolArchangelsLight from "../pool/archangels-light.js";
@@ -697,6 +698,7 @@ import _poolRalsReinforcements from "../pool/rals-reinforcements.js";
 import _poolRampagingMonument from "../pool/rampaging-monument.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRankAndFile from "../pool/rank-and-file.js";
+import _poolRaphaelTagTeamTough from "../pool/raphael-tag-team-tough.js";
 import _poolRatcatcherTrainee from "../pool/ratcatcher-trainee.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
 import _poolRatonhnhakeTon from "../pool/ratonhnhake-ton.js";
@@ -1114,6 +1116,7 @@ const shard: CardShard = {
     _poolAnthroplasm,
     _poolAnvilOfBogardan,
     _poolAphettoAlchemist,
+    _poolAprilOneilHumanElement,
     _poolArbalestElite,
     _poolArborbackStomper,
     _poolArchangelsLight,
@@ -1766,6 +1769,7 @@ const shard: CardShard = {
     _poolRampagingMonument,
     _poolRancorousArchaic,
     _poolRankAndFile,
+    _poolRaphaelTagTeamTough,
     _poolRatcatcherTrainee,
     _poolRatcatcher,
     _poolRatonhnhakeTon,

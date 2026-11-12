@@ -560,6 +560,7 @@ import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
 import _poolMarshlandBloodcaster from "../pool/marshland-bloodcaster.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
 import _poolMaskOfMemory from "../pool/mask-of-memory.js";
+import _poolMastersGuidance from "../pool/masters-guidance.js";
 import _poolMatoyaArchonElder from "../pool/matoya-archon-elder.js";
 import _poolMaulOfTheSkyclaves from "../pool/maul-of-the-skyclaves.js";
 import _poolMaverickThopterist from "../pool/maverick-thopterist.js";
@@ -1571,6 +1572,7 @@ const shard: CardShard = {
     _poolMarshlandBloodcaster,
     _poolMartyrForTheCause,
     _poolMaskOfMemory,
+    _poolMastersGuidance,
     _poolMatoyaArchonElder,
     _poolMaulOfTheSkyclaves,
     _poolMaverickThopterist,

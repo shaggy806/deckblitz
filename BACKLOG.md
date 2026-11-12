@@ -60,8 +60,15 @@ section keeps only what to do next.
   the run's keys freed wait in `cards:needs -- --stale` for `author-freed`, which will also give
   narrow keys to the few it left half-covered (Twists and Turns, Diplomatic Escort, Light Up the
   Night, Urgent Necropsy, Consume Spirit, Soul Burn). Past rank 10,000 the order is still EDHREC
-  rank (`author-top-cards`; `cards:needs -- --next 60` lists the next untriaged, `-- --by-rank` and
-  `-- --rank` what blocks the most), and the nine starter precons' 4 stand-ins
+  rank (`author-top-cards`, which since 2026-11-12 builds the small features its cards need
+  rather than blocking them; `cards:needs -- --next 60` lists the next untriaged). **Next for it:**
+  B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
+  `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
+  Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,
+  Cyclonus's `effect:additional-beginning-phase` (`B308.json` says what each lacks) — and
+  Starlight Spectacular's ordering decision to ask about. **B309** (the next 60, ranks
+  12,838–15,470) was dispatched to a `card-author` agent on 2026-11-12: integrate its worktree branch
+  (`git worktree list`) and build what its blocked cards need. And the nine starter precons' 4 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land. `docs/plans/after-the-themes.md`
   has the order agreed before the goal (step 3 next). How the need keys were worked down to here
   (the recheck rounds, the families, the freed-card batches, the themes) is in `COMPLETED.md`.

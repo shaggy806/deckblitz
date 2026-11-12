@@ -268,6 +268,7 @@ import _poolFesteringWound from "../pool/festering-wound.js";
 import _poolFieldOfTheDead from "../pool/field-of-the-dead.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
+import _poolFireNationOccupation from "../pool/fire-nation-occupation.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
 import _poolFirebrandRanger from "../pool/firebrand-ranger.js";
 import _poolFlamewakePhoenix from "../pool/flamewake-phoenix.js";
@@ -397,6 +398,7 @@ import _poolJandorsSaddlebags from "../pool/jandors-saddlebags.js";
 import _poolJavelinOfLightning from "../pool/javelin-of-lightning.js";
 import _poolJelennSphinx from "../pool/jelenn-sphinx.js";
 import _poolJetCollector from "../pool/jet-collector.js";
+import _poolJetfireAirGuardian from "../pool/jetfire-air-guardian.js";
 import _poolJoven from "../pool/joven.js";
 import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
@@ -583,6 +585,7 @@ import _poolRalsDispersal from "../pool/rals-dispersal.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
 import _poolRampantFrogantua from "../pool/rampant-frogantua.js";
 import _poolRankleAndTorbran from "../pool/rankle-and-torbran.js";
+import _poolRashelFistOfTorm from "../pool/rashel-fist-of-torm.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
 import _poolRavagersMace from "../pool/ravagers-mace.js";
 import _poolRavenousSkirge from "../pool/ravenous-skirge.js";
@@ -1203,6 +1206,7 @@ const shard: CardShard = {
     _poolFieldOfTheDead,
     _poolFireFieldOgre,
     _poolFireImp,
+    _poolFireNationOccupation,
     _poolFireSprites,
     _poolFirebrandRanger,
     _poolFlamewakePhoenix,
@@ -1332,6 +1336,7 @@ const shard: CardShard = {
     _poolJavelinOfLightning,
     _poolJelennSphinx,
     _poolJetCollector,
+    _poolJetfireAirGuardian,
     _poolJoven,
     _poolKaZarOfTheSavageLand,
     _poolKamiOfTwistedReflection,
@@ -1518,6 +1523,7 @@ const shard: CardShard = {
     _poolRampagingHippo,
     _poolRampantFrogantua,
     _poolRankleAndTorbran,
+    _poolRashelFistOfTorm,
     _poolRaugrinCrystal,
     _poolRavagersMace,
     _poolRavenousSkirge,

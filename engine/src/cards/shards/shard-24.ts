@@ -88,6 +88,7 @@ import _poolBetorAncestorsVoice from "../pool/betor-ancestors-voice.js";
 import _poolBioengineeredFuture from "../pool/bioengineered-future.js";
 import _poolBirthingHulk from "../pool/birthing-hulk.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
+import _poolBjornaNightfallAlchemist from "../pool/bjorna-nightfall-alchemist.js";
 import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
 import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
 import _poolBlackPoplarShaman from "../pool/black-poplar-shaman.js";
@@ -1104,6 +1105,7 @@ const shard: CardShard = {
     _poolBioengineeredFuture,
     _poolBirthingHulk,
     _poolBitterbowSharpshooters,
+    _poolBjornaNightfallAlchemist,
     _poolBlackBoltInhumanKing,
     _poolBlackOakOfOdunos,
     _poolBlackPoplarShaman,

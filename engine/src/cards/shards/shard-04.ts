@@ -500,6 +500,7 @@ import _poolMasterHealer from "../pool/master-healer.js";
 import _poolMasterOfTheHunt from "../pool/master-of-the-hunt.js";
 import _poolMawcor from "../pool/mawcor.js";
 import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
+import _poolMegatronTyrant from "../pool/megatron-tyrant.js";
 import _poolMelirasKeepers from "../pool/meliras-keepers.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMemorysJourney from "../pool/memorys-journey.js";
@@ -854,6 +855,7 @@ import _poolTipTheScales from "../pool/tip-the-scales.js";
 import _poolTitaniasCommand from "../pool/titanias-command.js";
 import _poolTithingBlade from "../pool/tithing-blade.js";
 import _poolTobiasAndrion from "../pool/tobias-andrion.js";
+import _poolTokkaRahzarUnsupervised from "../pool/tokka-rahzar-unsupervised.js";
 import _poolToothAndNail from "../pool/tooth-and-nail.js";
 import _poolTorturedExistence from "../pool/tortured-existence.js";
 import _poolTouchOfInvisibility from "../pool/touch-of-invisibility.js";
@@ -1498,6 +1500,7 @@ const shard: CardShard = {
     _poolMasterOfTheHunt,
     _poolMawcor,
     _poolMeetingOfTheFive,
+    _poolMegatronTyrant,
     _poolMelirasKeepers,
     _poolMemnarchTheWarden,
     _poolMemorysJourney,
@@ -1852,6 +1855,7 @@ const shard: CardShard = {
     _poolTitaniasCommand,
     _poolTithingBlade,
     _poolTobiasAndrion,
+    _poolTokkaRahzarUnsupervised,
     _poolToothAndNail,
     _poolTorturedExistence,
     _poolTouchOfInvisibility,

@@ -1515,6 +1515,7 @@ function evalStaticCondition(
     case "target-is-source":
     case "host-now":
     case "target-controlled-by-you":
+    case "target-is-you":
     case "target-legal":
       // A static ability has no triggering object, no chosen targets and no
       // resolution in progress — these kinds are only meaningful inside a

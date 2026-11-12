@@ -273,6 +273,7 @@ import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
 import _poolEvanescentIntellect from "../pool/evanescent-intellect.js";
 import _poolEvangelize from "../pool/evangelize.js";
 import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
+import _poolEvinWaterdeepOpportunist from "../pool/evin-waterdeep-opportunist.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
@@ -535,6 +536,7 @@ import _poolMetamorphicWurm from "../pool/metamorphic-wurm.js";
 import _poolMetathranSoldier from "../pool/metathran-soldier.js";
 import _poolMidnightClock from "../pool/midnight-clock.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
+import _poolMilesTailsPrower from "../pool/miles-tails-prower.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
 import _poolMindlessConscription from "../pool/mindless-conscription.js";
 import _poolMindlockOrb from "../pool/mindlock-orb.js";
@@ -1296,6 +1298,7 @@ const shard: CardShard = {
     _poolEvanescentIntellect,
     _poolEvangelize,
     _poolEvendoWakingHaven,
+    _poolEvinWaterdeepOpportunist,
     _poolEvolvingAdaptive,
     _poolExclusionMage,
     _poolExpeditionHealer,
@@ -1558,6 +1561,7 @@ const shard: CardShard = {
     _poolMetathranSoldier,
     _poolMidnightClock,
     _poolMiirymSentinelWyrm,
+    _poolMilesTailsPrower,
     _poolMinamoSchoolAtWatersEdge,
     _poolMindlessConscription,
     _poolMindlockOrb,

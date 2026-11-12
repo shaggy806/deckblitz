@@ -479,6 +479,7 @@ import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLlanowarMentor from "../pool/llanowar-mentor.js";
 import _poolLoamLarva from "../pool/loam-larva.js";
 import _poolLobeliaDefenderOfBagEnd from "../pool/lobelia-defender-of-bag-end.js";
+import _poolLongLostLances from "../pool/long-lost-lances.js";
 import _poolLowlandTracker from "../pool/lowland-tracker.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
@@ -1514,6 +1515,7 @@ const shard: CardShard = {
     _poolLlanowarMentor,
     _poolLoamLarva,
     _poolLobeliaDefenderOfBagEnd,
+    _poolLongLostLances,
     _poolLowlandTracker,
     _poolLucentLiminid,
     _poolLuciusTheEternal,

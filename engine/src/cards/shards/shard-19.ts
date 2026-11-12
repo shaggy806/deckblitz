@@ -282,6 +282,7 @@ import _poolEldraziSkyspawner from "../pool/eldrazi-skyspawner.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolEleshNorn from "../pool/elesh-norn.js";
 import _poolElfhameDruid from "../pool/elfhame-druid.js";
+import _poolEllieBrickMaster from "../pool/ellie-brick-master.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenCache from "../pool/elven-cache.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
@@ -309,6 +310,7 @@ import _poolEvershrike from "../pool/evershrike.js";
 import _poolEvilTwin from "../pool/evil-twin.js";
 import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
+import _poolExplodingBarrel from "../pool/exploding-barrel.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExpunge from "../pool/expunge.js";
 import _poolExquisiteArchangel from "../pool/exquisite-archangel.js";
@@ -1349,6 +1351,7 @@ const shard: CardShard = {
     _poolElectrozoa,
     _poolEleshNorn,
     _poolElfhameDruid,
+    _poolEllieBrickMaster,
     _poolElvenAmbush,
     _poolElvenCache,
     _poolElvenRaftSteerer,
@@ -1376,6 +1379,7 @@ const shard: CardShard = {
     _poolEvilTwin,
     _poolExemplarOfStrength,
     _poolExperimentTwelve,
+    _poolExplodingBarrel,
     _poolExploreTheVastlands,
     _poolExpunge,
     _poolExquisiteArchangel,

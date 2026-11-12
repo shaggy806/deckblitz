@@ -315,6 +315,15 @@ export function thisWayEntries(
           }
         }
         break;
+      case "transformed":
+        if (event.type === "permanent-transformed" && !seen.has(event.object)) {
+          const object = state.objects[event.object];
+          if (object !== undefined) {
+            seen.add(event.object);
+            out.push({ object: event.object, player: object.controller, departed: false, count: 1 });
+          }
+        }
+        break;
       case "tapped":
         // A stack tapped whole is every token in it.
         if (event.type === "permanent-tapped" && !seen.has(event.object)) {

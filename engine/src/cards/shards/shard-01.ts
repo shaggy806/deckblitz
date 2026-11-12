@@ -416,6 +416,7 @@ import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
 import _poolJadeAvenger from "../pool/jade-avenger.js";
 import _poolJanjeetSentry from "../pool/janjeet-sentry.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
+import _poolJetfireIngeniousScientist from "../pool/jetfire-ingenious-scientist.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
 import _poolJoustingLance from "../pool/jousting-lance.js";
 import _poolJudgeOfCurrents from "../pool/judge-of-currents.js";
@@ -428,6 +429,7 @@ import _poolKarakas from "../pool/karakas.js";
 import _poolKarrthusTyrantOfJund from "../pool/karrthus-tyrant-of-jund.js";
 import _poolKarstoderm from "../pool/karstoderm.js";
 import _poolKasminaEnigmaticMentor from "../pool/kasmina-enigmatic-mentor.js";
+import _poolKatarasReversal from "../pool/kataras-reversal.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeeperOfTheLens from "../pool/keeper-of-the-lens.js";
@@ -1418,6 +1420,7 @@ const shard: CardShard = {
     _poolJadeAvenger,
     _poolJanjeetSentry,
     _poolJenaraAsuraOfWar,
+    _poolJetfireIngeniousScientist,
     _poolJhessianLookout,
     _poolJoustingLance,
     _poolJudgeOfCurrents,
@@ -1430,6 +1433,7 @@ const shard: CardShard = {
     _poolKarrthusTyrantOfJund,
     _poolKarstoderm,
     _poolKasminaEnigmaticMentor,
+    _poolKatarasReversal,
     _poolKavuGlider,
     _poolKazanduBlademaster,
     _poolKeeperOfTheLens,

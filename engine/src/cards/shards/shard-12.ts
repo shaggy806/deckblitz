@@ -95,6 +95,7 @@ import _poolBloodlordOfVaasgoth from "../pool/bloodlord-of-vaasgoth.js";
 import _poolBlurOfBlades from "../pool/blur-of-blades.js";
 import _poolBogGlider from "../pool/bog-glider.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
+import _poolBohnBeguilingBalladeer from "../pool/bohn-beguiling-balladeer.js";
 import _poolBolassCitadel from "../pool/bolass-citadel.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
 import _poolBonusRound from "../pool/bonus-round.js";
@@ -817,6 +818,7 @@ import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSphinxOfTheRevelation from "../pool/sphinx-of-the-revelation.js";
 import _poolSpiderFood from "../pool/spider-food.js";
+import _poolSpiderManPeterParker from "../pool/spider-man-peter-parker.js";
 import _poolSpiderVerse from "../pool/spider-verse.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSpitefulReturned from "../pool/spiteful-returned.js";
@@ -932,6 +934,7 @@ import _poolVectisDominator from "../pool/vectis-dominator.js";
 import _poolVengefulBloodwitch from "../pool/vengeful-bloodwitch.js";
 import _poolVengefulReaper from "../pool/vengeful-reaper.js";
 import _poolVengefulWarchief from "../pool/vengeful-warchief.js";
+import _poolVenomEddieBrock from "../pool/venom-eddie-brock.js";
 import _poolVenserShaperSavant from "../pool/venser-shaper-savant.js";
 import _poolVenserTheSojourner from "../pool/venser-the-sojourner.js";
 import _poolVerdantCatacombs from "../pool/verdant-catacombs.js";
@@ -1110,6 +1113,7 @@ const shard: CardShard = {
     _poolBlurOfBlades,
     _poolBogGlider,
     _poolBoggartCursecrafter,
+    _poolBohnBeguilingBalladeer,
     _poolBolassCitadel,
     _poolBonecacheOverseer,
     _poolBonusRound,
@@ -1832,6 +1836,7 @@ const shard: CardShard = {
     _poolSpellgyre,
     _poolSphinxOfTheRevelation,
     _poolSpiderFood,
+    _poolSpiderManPeterParker,
     _poolSpiderVerse,
     _poolSpireMangler,
     _poolSpitefulReturned,
@@ -1947,6 +1952,7 @@ const shard: CardShard = {
     _poolVengefulBloodwitch,
     _poolVengefulReaper,
     _poolVengefulWarchief,
+    _poolVenomEddieBrock,
     _poolVenserShaperSavant,
     _poolVenserTheSojourner,
     _poolVerdantCatacombs,

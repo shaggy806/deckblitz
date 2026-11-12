@@ -122,6 +122,7 @@ import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js
 import _poolBrunaLightOfAlabaster from "../pool/bruna-light-of-alabaster.js";
 import _poolBrunaTheFadingLight from "../pool/bruna-the-fading-light.js";
 import _poolBruseTarlRovingRancher from "../pool/bruse-tarl-roving-rancher.js";
+import _poolBumisFeastLecture from "../pool/bumis-feast-lecture.js";
 import _poolBurdenOfGuilt from "../pool/burden-of-guilt.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
@@ -452,6 +453,7 @@ import _poolJayaBallardTaskMage from "../pool/jaya-ballard-task-mage.js";
 import _poolJennyGeneratedAnomaly from "../pool/jenny-generated-anomaly.js";
 import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
+import _poolJetRebelLeader from "../pool/jet-rebel-leader.js";
 import _poolJhoirasTimebug from "../pool/jhoiras-timebug.js";
 import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
 import _poolJorKadeenThePrevailer from "../pool/jor-kadeen-the-prevailer.js";
@@ -1158,6 +1160,7 @@ const shard: CardShard = {
     _poolBrunaLightOfAlabaster,
     _poolBrunaTheFadingLight,
     _poolBruseTarlRovingRancher,
+    _poolBumisFeastLecture,
     _poolBurdenOfGuilt,
     _poolBurglarRat,
     _poolBurnBurnTreeAndFern,
@@ -1488,6 +1491,7 @@ const shard: CardShard = {
     _poolJennyGeneratedAnomaly,
     _poolJeskaWarriorAdept,
     _poolJeskaiAscendancy,
+    _poolJetRebelLeader,
     _poolJhoirasTimebug,
     _poolJolraelVoiceOfZhalfir,
     _poolJorKadeenThePrevailer,

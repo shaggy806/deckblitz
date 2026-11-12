@@ -16440,6 +16440,38 @@
   "bug:trigger-value-lost-in-unless-otherwise": {
    "family": "bug:cda-all-zones",
    "example": "Archfiend of Spite: Written and tested, then dropped: { triggerValue: true } reads 0 inside an unless's otherwise (no life lost; 2 lost with a fixed 2)"
+  },
+  "trigger:deals-combat-damage-first-time-each-turn": {
+   "family": "trigger:nth-each-turn",
+   "example": "Raphael, Tag Team Tough: \"deals combat damage to a player for the first time each turn\" — the timing wrapper did not count deals-combat-damage-to-player."
+  },
+  "decision:target-player-other-than-trigger-object-controller": {
+   "family": "effect:target-spec-additions",
+   "example": "Lucy MacLean, Positively Armed: \"target player other than its controller\" (the token that entered)."
+  },
+  "condition:target-player-is-you": {
+   "family": "effect:this-way-results",
+   "example": "The Ghoul, Gunslinger: \"target player gets two rad counters. If that player is you, create a Treasure token.\""
+  },
+  "condition:excess-redirected-this-way": {
+   "family": "mechanic:more-than-meets-the-eye",
+   "example": "Megatron, Destructive Force: \"…instead that damage is dealt to that creature’s controller and you convert Megatron.\""
+  },
+  "condition:transformed-this-way": {
+   "family": "mechanic:more-than-meets-the-eye",
+   "example": "Megatron, Tyrant: \"you may convert Megatron. If you do, add {C} …\""
+  },
+  "trigger:reveal-this-way-reflexive": {
+   "family": "mechanic:dice-rolling",
+   "example": "Priority Boarding: \"Whenever you reveal a card with mana value less than the result this way, you may exile it\" — a trigger on the reveal, carrying the card and the roll."
+  },
+  "decision:order-creatures-one-at-a-time": {
+   "family": "decision:choose-permanent",
+   "example": "Starlight Spectacular: Parade! — \"choose creatures you control one at a time until each … has been chosen\", each pumped by how many came before it."
+  },
+  "mechanic:attractions": {
+   "family": "mechanic:assemble-contraptions",
+   "example": "\"Lifetime\" Pass Holder: open an Attraction; roll to visit your Attractions (rule 717)."
   }
  },
  "groups": [

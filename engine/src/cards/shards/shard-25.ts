@@ -356,6 +356,7 @@ import _poolGoblinFirestarter from "../pool/goblin-firestarter.js";
 import _poolGoblinFurrier from "../pool/goblin-furrier.js";
 import _poolGoblinMotivator from "../pool/goblin-motivator.js";
 import _poolGoldForgedSentinel from "../pool/gold-forged-sentinel.js";
+import _poolGoldbugScrappyScout from "../pool/goldbug-scrappy-scout.js";
 import _poolGoldenEgg from "../pool/golden-egg.js";
 import _poolGoldnightCommander from "../pool/goldnight-commander.js";
 import _poolGolemsHeart from "../pool/golems-heart.js";
@@ -913,6 +914,7 @@ import _poolVampireNeonate from "../pool/vampire-neonate.js";
 import _poolVampiricRites from "../pool/vampiric-rites.js";
 import _poolVastwoodAnimist from "../pool/vastwood-animist.js";
 import _poolVedalkenArchmage from "../pool/vedalken-archmage.js";
+import _poolVenomDeadlyDevourer from "../pool/venom-deadly-devourer.js";
 import _poolVensersSliver from "../pool/vensers-sliver.js";
 import _poolVerdantAutomaton from "../pool/verdant-automaton.js";
 import _poolVesuva from "../pool/vesuva.js";
@@ -1344,6 +1346,7 @@ const shard: CardShard = {
     _poolGoblinFurrier,
     _poolGoblinMotivator,
     _poolGoldForgedSentinel,
+    _poolGoldbugScrappyScout,
     _poolGoldenEgg,
     _poolGoldnightCommander,
     _poolGolemsHeart,
@@ -1901,6 +1904,7 @@ const shard: CardShard = {
     _poolVampiricRites,
     _poolVastwoodAnimist,
     _poolVedalkenArchmage,
+    _poolVenomDeadlyDevourer,
     _poolVensersSliver,
     _poolVerdantAutomaton,
     _poolVesuva,

@@ -713,6 +713,7 @@ import _poolSealOfCleansing from "../pool/seal-of-cleansing.js";
 import _poolSealOfPrimordium from "../pool/seal-of-primordium.js";
 import _poolSeasideHaven from "../pool/seaside-haven.js";
 import _poolSeedbornMuse from "../pool/seedborn-muse.js";
+import _poolSeismicTutelage from "../pool/seismic-tutelage.js";
 import _poolSeizeTheStorm from "../pool/seize-the-storm.js";
 import _poolSelflessSpirit from "../pool/selfless-spirit.js";
 import _poolSentryBot from "../pool/sentry-bot.js";
@@ -1678,6 +1679,7 @@ const shard: CardShard = {
     _poolSealOfPrimordium,
     _poolSeasideHaven,
     _poolSeedbornMuse,
+    _poolSeismicTutelage,
     _poolSeizeTheStorm,
     _poolSelflessSpirit,
     _poolSentryBot,

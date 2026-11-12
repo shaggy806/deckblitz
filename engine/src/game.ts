@@ -32494,6 +32494,22 @@ export class Game {
         const stint = stintOf(event.attacker);
         return count("attacked", (e) => e.object === event.attacker && e.stint === stint) - 1;
       }
+      case "deals-combat-damage-to-player": {
+        // "Deals combat damage to a player for the first time each turn"
+        // (Raphael, Tag Team Tough): this creature's earlier combat damage to
+        // a player this turn, in this stint — each damage event one entry.
+        if (event.type !== "damage-dealt" || !event.combat || event.target.kind !== "player") return undefined;
+        const stint = stintOf(event.source);
+        return count(
+          "damage",
+          (e) =>
+            e.object === event.source &&
+            e.stint === stint &&
+            e.combat !== undefined &&
+            e.target?.kind === "player" &&
+            (spec.toOpponent !== true || e.target.player !== self.controller),
+        ) - 1;
+      }
       case "becomes-saddled": {
         if (event.type !== "became-saddled") return undefined;
         const stint = stintOf(event.object);
@@ -35436,6 +35452,10 @@ export class Game {
         const ref = targets[condition.index];
         if (ref?.kind !== "object") return false;
         return (lastKnownOf(ref)?.controller ?? this.state.objects[ref.object]?.controller) === controller;
+      }
+      if (condition.kind === "target-is-you") {
+        const ref = targets[condition.index];
+        return ref?.kind === "player" && ref.player === controller;
       }
       if (condition.kind === "excess-damage-this-way") {
         if (condition.to === undefined) return excessDamageSince(this.state, since) > 0;

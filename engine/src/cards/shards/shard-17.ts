@@ -818,6 +818,7 @@ import _poolSupremePhantom from "../pool/supreme-phantom.js";
 import _poolSurgingFlame from "../pool/surging-flame.js";
 import _poolSwarmSurge from "../pool/swarm-surge.js";
 import _poolSwelter from "../pool/swelter.js";
+import _poolSwiftDemise from "../pool/swift-demise.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
@@ -1822,6 +1823,7 @@ const shard: CardShard = {
     _poolSurgingFlame,
     _poolSwarmSurge,
     _poolSwelter,
+    _poolSwiftDemise,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
