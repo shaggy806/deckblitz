@@ -1403,8 +1403,13 @@
      the clicks for whatever it covered beside the fan — at 1366x768 your
      commander in the command rail, once the hand's cards grew to 150px
      (a tutorial step that clicks it straight after a land, 2026-11-11). */
-  width: fit-content;
-  max-width: 100%;
+  /* The fan's own widest (`.hand-cards`' max-width), not `fit-content`: the
+     row spaces its cards to fit its width (App.tsx's HAND_CARD_GAP), so a
+     width taken from those cards ratcheted — any moment the row was
+     narrower (a resize, a frame with more cards) closed the gaps, the row
+     shrank to them and never grew back, down to the overlap floor (a bug
+     report, 2026-11-11: "Hand shrunk way too far"). */
+  width: min(100%, 88vw, calc(var(--card-w) * 7.2));
   /* ...and only the cards' own row takes the pointer (below), from its
      cards' top edge: the 16px over them is margin, not the row's padding,
      so a 4-player board's commander just above the fan takes its click. */
