@@ -1220,6 +1220,11 @@ export interface GameObject {
    * turn, so no sweep clears it — and any zone change clears it (rule
    * 400.7). */
   exileIfDiesTurn?: number;
+  /** "The next time [it] adapts this turn, it adapts as though it had no
+   * +1/+1 counters on it" (Biomancer's Familiar): the turn number it was
+   * said on, while its next adapt hasn't used it up. Stale past that turn;
+   * any zone change clears it (rule 400.7). */
+  adaptAsThoughNoCountersTurn?: number;
   /** True while this card is foretold — exiled face-down for `{2}`, castable
    * later for its foretell cost (rule 702.143 — ROADMAP Phase 6b).
    * `foretoldOnTurn` is the turn it was foretold (can't be cast the same
@@ -6926,6 +6931,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.regenerationShields ?? 0,
     o.cantBeRegeneratedTurn ?? null,
     o.exileIfDiesTurn ?? null,
+    o.adaptAsThoughNoCountersTurn ?? null,
   ]);
 }
 

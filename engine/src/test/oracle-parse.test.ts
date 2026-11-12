@@ -3927,11 +3927,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
     expect(demon.triggered[0].condition).toEqual({ kind: "self-spectacle-paid" });
     const eel = face("{2}{U}: Adapt 2.", "Creature — Fish");
-    expect(eel.activated[0].effect).toEqual({
-      kind: "conditional",
-      condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "eq", n: 0 } },
-      then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 2 },
-    });
+    expect(eel.activated[0].effect).toEqual({ kind: "adapt", amount: 2 });
   });
 
   it("tribute (rule 702.104): the keyword and its \"if tribute wasn't paid\" trigger", () => {

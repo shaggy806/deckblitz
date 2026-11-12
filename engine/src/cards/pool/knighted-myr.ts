@@ -17,11 +17,7 @@ export default defineCard({
     {
       cost: { mana: "{2}{W}", tap: false },
       targets: [],
-      effect: {
-        kind: "conditional",
-        condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "eq", n: 0 } },
-        then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
-      },
+      effect: { kind: "adapt", amount: 1 },
       resolve: null,
       text: "{2}{W}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)",
     },

@@ -92,6 +92,7 @@ import _poolBenalishLancer from "../pool/benalish-lancer.js";
 import _poolBenedictionOfMoons from "../pool/benediction-of-moons.js";
 import _poolBeregondOfTheGuard from "../pool/beregond-of-the-guard.js";
 import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
+import _poolBiomancersFamiliar from "../pool/biomancers-familiar.js";
 import _poolBiomanticMastery from "../pool/biomantic-mastery.js";
 import _poolBitterDownfall from "../pool/bitter-downfall.js";
 import _poolBlackCatCunningThief from "../pool/black-cat-cunning-thief.js";
@@ -1165,6 +1166,7 @@ const shard: CardShard = {
     _poolBenedictionOfMoons,
     _poolBeregondOfTheGuard,
     _poolBillowingShriekmass,
+    _poolBiomancersFamiliar,
     _poolBiomanticMastery,
     _poolBitterDownfall,
     _poolBlackCatCunningThief,

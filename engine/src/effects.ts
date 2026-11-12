@@ -3277,6 +3277,28 @@ export type EffectSpec =
       readonly target: number;
     }
   | {
+      /**
+       * Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on
+       * it, put N +1/+1 counters on it" — the ability's own permanent, as
+       * the object it was (rule 400.7). Unless the next adapt of this
+       * permanent this turn was to be "as though it had no +1/+1 counters"
+       * (`adapt-as-though-no-counters` — Biomancer's Familiar), which this
+       * adapt uses up whether or not it had any.
+       */
+      readonly kind: "adapt";
+      readonly amount: EffectAmount;
+    }
+  | {
+      /** "The next time target creature adapts this turn, it adapts as
+       * though it had no +1/+1 counters on it" (Biomancer's Familiar): the
+       * permanent in target slot `target`'s next `adapt` this turn puts its
+       * counters on whatever counters it has (rule 701.46a). It adds and
+       * removes no counters itself (the card's ruling); a zone change ends
+       * it (400.7), as does the turn. */
+      readonly kind: "adapt-as-though-no-counters";
+      readonly target: number;
+    }
+  | {
       /** "If that creature would die this turn, exile it instead" (Lava Coil,
        * Scorching Dragonfire — rule 614.1a): a replacement that follows the
        * permanent in `target` until the turn ends or it leaves the
@@ -11210,6 +11232,12 @@ export interface EffectApi {
   putOnBottomOfLibrary(target: TargetRef): void;
   /** See the `"exile-if-dies-this-turn"` {@link EffectSpec}. */
   exileIfDiesThisTurn(target: TargetRef): void;
+  /** See the `"adapt-as-though-no-counters"` {@link EffectSpec}: mark it. */
+  adaptAsThoughNoCounters(target: TargetRef): void;
+  /** Whether `target`'s adapt now is to be as though it had no +1/+1
+   * counters — the mark used up, either way (see the `"adapt"`
+   * {@link EffectSpec}). */
+  takeAdaptAsThoughNoCounters(target: TargetRef): boolean;
   /** See the `"exile-if-dies-this-turn"` {@link EffectSpec}'s
    * `dealtDamageThisWay`. */
   exileDamagedThisWayIfTheyDie(creaturesOnly: boolean): void;
@@ -17110,6 +17138,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // "That player untaps it": no such player, nothing is untapped.
       if (spec.by !== undefined && resolvePlayerRef(spec.by, ctx) === undefined) return;
       ctx.untapPermanent(target);
+      return;
+    }
+    case "adapt": {
+      const target = objectRefAct("source", ctx);
+      if (target === undefined) return;
+      const asThoughNone = ctx.takeAdaptAsThoughNoCounters(target);
+      if (!asThoughNone && ctx.countersOf(target, "+1/+1") > 0) return;
+      applyEffectSpec({ kind: "add-counter", target: "source", counter: "+1/+1", amount: spec.amount }, ctx);
+      return;
+    }
+    case "adapt-as-though-no-counters": {
+      const target = ctx.targets[spec.target];
+      if (target !== undefined && target !== null && !illegalSlot(spec.target, ctx)) ctx.adaptAsThoughNoCounters(target);
       return;
     }
     case "exile-if-dies-this-turn": {

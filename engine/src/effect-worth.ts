@@ -504,6 +504,9 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "add-counter":
       if (typeof effect.target === "number") return 0;
       return onObjectRef(effect.target, HARMFUL_COUNTERS.has(effect.counter) ? -1 : 1, ctx);
+    // Adapt (rule 701.46a): +1/+1 counters on its own permanent.
+    case "adapt":
+      return onObjectRef("source", 1, ctx);
     case "put-counters-of":
       // Onto the tokens it just made: the controller's own.
       if (effect.target === "created") return 1;

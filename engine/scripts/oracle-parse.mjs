@@ -3855,13 +3855,7 @@ export function parseSentence(sentence, ctx) {
   }
   // Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on it,
   // put N +1/+1 counters on it."
-  if ((m = /^Adapt (\d+)\.$/.exec(s))) {
-    return {
-      kind: "conditional",
-      condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "eq", n: 0 } },
-      then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: Number(m[1]) },
-    };
-  }
+  if ((m = /^Adapt (\d+)\.$/.exec(s))) return { kind: "adapt", amount: Number(m[1]) };
   const re = sentenceRe;
   const amount = (w) => numberOf(w);
   const slot = (phrase) => {

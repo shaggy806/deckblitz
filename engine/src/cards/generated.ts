@@ -2481,6 +2481,7 @@ import _poolBiogenicOoze from "./pool/biogenic-ooze.js";
 import _poolBiogenicUpgrade from "./pool/biogenic-upgrade.js";
 import _poolBiolumeEgg from "./pool/biolume-egg.js";
 import _poolBiolumeSerpent from "./pool/biolume-serpent.js";
+import _poolBiomancersFamiliar from "./pool/biomancers-familiar.js";
 import _poolBiomanticMastery from "./pool/biomantic-mastery.js";
 import _poolBiomassMutation from "./pool/biomass-mutation.js";
 import _poolBiomathematician from "./pool/biomathematician.js";
@@ -35120,6 +35121,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBiogenicUpgrade,
   _poolBiolumeEgg,
   _poolBiolumeSerpent,
+  _poolBiomancersFamiliar,
   _poolBiomanticMastery,
   _poolBiomassMutation,
   _poolBiomathematician,
@@ -67772,6 +67774,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/biogenic-upgrade": _poolBiogenicUpgrade,
   "pool/biolume-egg": _poolBiolumeEgg,
   "pool/biolume-serpent": _poolBiolumeSerpent,
+  "pool/biomancers-familiar": _poolBiomancersFamiliar,
   "pool/biomantic-mastery": _poolBiomanticMastery,
   "pool/biomass-mutation": _poolBiomassMutation,
   "pool/biomathematician": _poolBiomathematician,

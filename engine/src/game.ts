@@ -38865,6 +38865,21 @@ controlledBy,
         if (counter === undefined) return Object.values(counters).reduce((n, k) => n + k, 0);
         return counters[counter] ?? 0;
       },
+      adaptAsThoughNoCounters: (target) => {
+        if (target.kind !== "object") return;
+        const id = this.splitOneFromStack(target.object);
+        const object = this.state.objects[id];
+        if (object === undefined || object.zone !== "battlefield") return;
+        object.adaptAsThoughNoCountersTurn = this.state.turn.number;
+      },
+      takeAdaptAsThoughNoCounters: (target) => {
+        if (target.kind !== "object") return false;
+        const object = this.state.objects[target.object];
+        if (object?.adaptAsThoughNoCountersTurn === undefined) return false;
+        const now = object.adaptAsThoughNoCountersTurn === this.state.turn.number;
+        object.adaptAsThoughNoCountersTurn = undefined;
+        return now;
+      },
       exileIfDiesThisTurn: (target) => {
         if (target.kind !== "object") return;
         const id = this.splitOneFromStack(target.object);
@@ -61963,6 +61978,7 @@ controlledBy,
     // that just left (rule 400.7).
     object.exileIfItWouldLeave = undefined;
     object.exileIfDiesTurn = undefined;
+    object.adaptAsThoughNoCountersTurn = undefined;
     // So was having transformed (rule 701.28f) — and entering transformed
     // isn't transforming.
     object.transformedAtSeq = undefined;

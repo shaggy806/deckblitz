@@ -22,11 +22,7 @@ export default defineCard({
     {
       cost: { mana: "{6}{G/U}{G/U}", tap: false },
       targets: [],
-      effect: {
-        kind: "conditional",
-        condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "eq", n: 0 } },
-        then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 3 },
-      },
+      effect: { kind: "adapt", amount: 3 },
       resolve: null,
       text: ADAPT_TEXT,
     },
