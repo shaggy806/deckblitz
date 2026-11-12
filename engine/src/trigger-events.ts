@@ -136,6 +136,15 @@ export const TRIGGER_EVENTS = {
   /** "Whenever this Vehicle becomes crewed" (rule 702.122c): as its crew
    * ability resolves. The value is how many creatures crewed it. */
   "becomes-crewed": row({ type: "became-crewed", object: (e) => e.object, amount: (e) => e.crew.length, journaled: "crewed" }),
+  /** "Whenever damage that would be dealt to you is prevented" (Selfless
+   * Squire): any prevention, protection's included (rule 615, 702.16e), one
+   * occurrence per prevention applied. The value is how much it prevented. */
+  "damage-to-player-prevented": row({
+    type: "damage-prevented",
+    when: (e) => e.target.kind === "player",
+    player: (e) => (e.target.kind === "player" ? e.target.player : undefined),
+    amount: (e) => e.amount,
+  }),
 } satisfies Record<string, TriggerEventRow>;
 
 export type TriggerEventName = keyof typeof TRIGGER_EVENTS;

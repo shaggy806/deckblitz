@@ -23597,6 +23597,7 @@ import _poolSelflessSafewright from "./pool/selfless-safewright.js";
 import _poolSelflessSamurai from "./pool/selfless-samurai.js";
 import _poolSelflessSavior from "./pool/selfless-savior.js";
 import _poolSelflessSpirit from "./pool/selfless-spirit.js";
+import _poolSelflessSquire from "./pool/selfless-squire.js";
 import _poolSelhoffEntomber from "./pool/selhoff-entomber.js";
 import _poolSelhoffOccultist from "./pool/selhoff-occultist.js";
 import _poolSelkieHedgeMage from "./pool/selkie-hedge-mage.js";
@@ -56214,6 +56215,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSelflessSamurai,
   _poolSelflessSavior,
   _poolSelflessSpirit,
+  _poolSelflessSquire,
   _poolSelhoffEntomber,
   _poolSelhoffOccultist,
   _poolSelkieHedgeMage,
@@ -88844,6 +88846,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/selfless-samurai": _poolSelflessSamurai,
   "pool/selfless-savior": _poolSelflessSavior,
   "pool/selfless-spirit": _poolSelflessSpirit,
+  "pool/selfless-squire": _poolSelflessSquire,
   "pool/selhoff-entomber": _poolSelhoffEntomber,
   "pool/selhoff-occultist": _poolSelhoffOccultist,
   "pool/selkie-hedge-mage": _poolSelkieHedgeMage,
