@@ -5463,6 +5463,9 @@ export interface PlayerEffect {
    * `Game.tokenCreatorAfterRedirects`. */
   readonly tokensComeToOwner?: true;
   readonly looksAtOwnLibraryTop?: true;
+  /** One more loyalty activation of each permanent `owner` controls (The
+   * Chain Veil): see the `player-effect` spec's. */
+  readonly extraLoyaltyActivation?: true;
   /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
    * rule 614.1d): a permanent matching this as it would enter, from
    * `owner`'s side, enters tapped while this lasts. */

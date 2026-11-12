@@ -876,6 +876,7 @@ import _poolTerraStomper from "../pool/terra-stomper.js";
 import _poolTerrainGenerator from "../pool/terrain-generator.js";
 import _poolThadaAdelAcquisitor from "../pool/thada-adel-acquisitor.js";
 import _poolTheBearsOfLittjara from "../pool/the-bears-of-littjara.js";
+import _poolTheChainVeil from "../pool/the-chain-veil.js";
 import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
 import _poolTheCrowdGoesWild from "../pool/the-crowd-goes-wild.js";
 import _poolTheCrueltyOfGix from "../pool/the-cruelty-of-gix.js";
@@ -1903,6 +1904,7 @@ const shard: CardShard = {
     _poolTerrainGenerator,
     _poolThadaAdelAcquisitor,
     _poolTheBearsOfLittjara,
+    _poolTheChainVeil,
     _poolTheChaseIsOn,
     _poolTheCrowdGoesWild,
     _poolTheCrueltyOfGix,

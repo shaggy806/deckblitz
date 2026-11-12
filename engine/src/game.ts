@@ -26917,6 +26917,15 @@ export class Game {
    * every planeswalker they control, or with `source`'s own for itself alone
    * (Urza, Planeswalker's "the loyalty abilities of Urza"). */
   private loyaltyActivationsAllowed(player: PlayerId, source: GameObject): number {
+    // "As though none of its loyalty abilities have been activated this turn"
+    // (The Chain Veil): one more each time one resolved, on top of the rest.
+    const extra = (this.state.playerEffects ?? []).filter(
+      (e) => e.owner === player && e.extraLoyaltyActivation === true,
+    ).length;
+    return extra + this.loyaltyActivationsBase(player, source);
+  }
+
+  private loyaltyActivationsBase(player: PlayerId, source: GameObject): number {
     // A resolved "twice this turn" for this permanent (Kaito, Dancing Shadow).
     if (source.modifiers.some((m) => m.loyaltyActivations === 2)) return 2;
     if (this.hasOwnStatic(source, (ability) => typeof ability.loyaltyActivationsEachTurn === "object")) return 2;

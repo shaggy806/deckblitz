@@ -27558,6 +27558,7 @@ import _poolTheCauldronOfEternity from "./pool/the-cauldron-of-eternity.js";
 import _poolTheCaveOfTwoLovers from "./pool/the-cave-of-two-lovers.js";
 import _poolTheCavesOfAndrozani from "./pool/the-caves-of-androzani.js";
 import _poolTheCelestus from "./pool/the-celestus.js";
+import _poolTheChainVeil from "./pool/the-chain-veil.js";
 import _poolTheChaseIsOn from "./pool/the-chase-is-on.js";
 import _poolTheChiefWarg from "./pool/the-chief-warg.js";
 import _poolTheCircleOfLoyalty from "./pool/the-circle-of-loyalty.js";
@@ -60176,6 +60177,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheCaveOfTwoLovers,
   _poolTheCavesOfAndrozani,
   _poolTheCelestus,
+  _poolTheChainVeil,
   _poolTheChaseIsOn,
   _poolTheChiefWarg,
   _poolTheCircleOfLoyalty,
@@ -92807,6 +92809,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-cave-of-two-lovers": _poolTheCaveOfTwoLovers,
   "pool/the-caves-of-androzani": _poolTheCavesOfAndrozani,
   "pool/the-celestus": _poolTheCelestus,
+  "pool/the-chain-veil": _poolTheChainVeil,
   "pool/the-chase-is-on": _poolTheChaseIsOn,
   "pool/the-chief-warg": _poolTheChiefWarg,
   "pool/the-circle-of-loyalty": _poolTheCircleOfLoyalty,

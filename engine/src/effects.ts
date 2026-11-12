@@ -6496,6 +6496,13 @@ export type EffectSpec =
        * player's is tapped but not attacking. */
       readonly tokensComeToOwner?: true;
       readonly looksAtOwnLibraryTop?: true;
+      /** "For each planeswalker you control, you may activate one of its
+       * loyalty abilities once this turn as though none of its loyalty
+       * abilities have been activated this turn" (The Chain Veil — rule
+       * 606.3): one more loyalty activation of each permanent the player
+       * controls, one that comes under their control later included. Each
+       * resolution adds another (its ruling). */
+      readonly extraLoyaltyActivation?: true;
       /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
        * rule 614.1d): a replacement for the duration over each permanent
        * matching this as it would enter, from the controller's side
@@ -18954,6 +18961,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           : {}),
         ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
         ...(spec.looksAtOwnLibraryTop === true ? { looksAtOwnLibraryTop: true as const } : {}),
+        ...(spec.extraLoyaltyActivation === true ? { extraLoyaltyActivation: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.manaProduction !== undefined ? { manaProduction: spec.manaProduction } : {}),
         ...(spec.protectionFromEverything !== undefined
