@@ -7611,6 +7611,7 @@ import _poolDungeonShade from "./pool/dungeon-shade.js";
 import _poolDungeoneersPack from "./pool/dungeoneers-pack.js";
 import _poolDungroveElder from "./pool/dungrove-elder.js";
 import _poolDunlandCrebain from "./pool/dunland-crebain.js";
+import _poolDuplicant from "./pool/duplicant.js";
 import _poolDuplicity from "./pool/duplicity.js";
 import _poolDurableCoilbug from "./pool/durable-coilbug.js";
 import _poolDurableHandicraft from "./pool/durable-handicraft.js";
@@ -40247,6 +40248,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDungeoneersPack,
   _poolDungroveElder,
   _poolDunlandCrebain,
+  _poolDuplicant,
   _poolDuplicity,
   _poolDurableCoilbug,
   _poolDurableHandicraft,
@@ -72896,6 +72898,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dungeoneers-pack": _poolDungeoneersPack,
   "pool/dungrove-elder": _poolDungroveElder,
   "pool/dunland-crebain": _poolDunlandCrebain,
+  "pool/duplicant": _poolDuplicant,
   "pool/duplicity": _poolDuplicity,
   "pool/durable-coilbug": _poolDurableCoilbug,
   "pool/durable-handicraft": _poolDurableHandicraft,

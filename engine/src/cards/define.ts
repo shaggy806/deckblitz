@@ -2151,6 +2151,19 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly setBasePt?: { readonly power?: StaticPt<CountSpec>; readonly toughness?: StaticPt<CountSpec> };
   /**
+   * "As long as a card exiled with this creature is a creature card, this
+   * creature has the power, toughness, and creature types of the last
+   * creature card exiled with it. It's still a Shapeshifter." (Duplicant):
+   * while a card linked to this permanent in exile (rule 607.2a) matches
+   * `filter`, the last of them to be exiled sets its base power and
+   * toughness (layer 7b, so counters and bonuses still apply) and its
+   * creature types (layer 4, replacing its own — rule 205.1a — but for
+   * `keepCreatureTypes`). The card is read as it is in exile, live: a `*`
+   * its characteristic-defining ability sets counts, nothing else does (the
+   * rulings), and a changeling gives every creature type.
+   */
+  readonly takesLastExiledCard?: { readonly filter: CardFilter; readonly keepCreatureTypes?: readonly string[] };
+  /**
    * A layer-7d bonus that *scales* with a live count — Skycat Sovereign's
    * "gets +1/+1 for each **other** creature you control with flying".
    *

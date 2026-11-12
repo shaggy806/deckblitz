@@ -3687,6 +3687,18 @@ function foldLayerFourOnce(
         subtypes = [...subtypes.filter((s) => subtypeKind(s) !== "creature"), chosen];
       }
     }
+    if (ability.takesLastExiledCard !== undefined) {
+      // Duplicant: the last exiled creature card's creature types, in place
+      // of its own (205.1a) — "it's still a Shapeshifter".
+      const card = lastExiledCard(state, registry, source, ability.takesLastExiledCard.filter);
+      if (card !== undefined) {
+        const taken = layerFour(state, registry, state.objects[card]!).subtypes.filter((s) => subtypeKind(s) === "creature");
+        subtypes = union(
+          [...subtypes.filter((s) => subtypeKind(s) !== "creature"), ...taken],
+          ability.takesLastExiledCard.keepCreatureTypes ?? [],
+        );
+      }
+    }
     applied.push(grant);
   };
   const see = (): void => {
@@ -3773,7 +3785,8 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.loseCreatureTypes === true ||
     ability.addsChosenCreatureType === true ||
     ability.setsChosenCreatureType === true ||
-    ability.setsChosenLandType === true
+    ability.setsChosenLandType === true ||
+    ability.takesLastExiledCard !== undefined
   );
 }
 
@@ -4294,6 +4307,37 @@ function countSide(state: GameState, object: GameObject, forChosenPlayer: true |
   if (forChosenPlayer !== true) return object.controller;
   const chosen = object.chosenPlayer;
   return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
+}
+
+/** The last card exiled with `source` (rule 607.2a) that matches `filter`,
+ * if any — the shared exile zone keeps its cards in the order they arrived
+ * (`takesLastExiledCard`, Duplicant). */
+function lastExiledCard(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  filter: CardFilter,
+): ObjectId | undefined {
+  const ctx = { you: source.controller, source: source.id };
+  const linked = liveReferenceObjects(state, registry, "exiled-with-source", ctx) ?? [];
+  for (let i = linked.length - 1; i >= 0; i -= 1) {
+    if (matchesFilter(state, registry, linked[i], filter, ctx)) return linked[i];
+  }
+  return undefined;
+}
+
+/** A `takesLastExiledCard`'s base P/T: that card's, as it is in exile —
+ * null while there's none. */
+function lastExiledCardPt(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  filter: CardFilter,
+): { readonly power: number; readonly toughness: number } | null {
+  const card = lastExiledCard(state, registry, source, filter);
+  if (card === undefined) return null;
+  const c = computeCharacteristics(state, registry, card);
+  return { power: c.power, toughness: c.toughness };
 }
 
 /** A static's `setBasePt` as it reaches `target`: each value read live, the
@@ -5380,7 +5424,8 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.hexproofFrom !== undefined ||
     ability.bandsWithOther !== undefined ||
     ability.landwalk !== undefined ||
-    ability.setBasePt !== undefined
+    ability.setBasePt !== undefined ||
+    ability.takesLastExiledCard !== undefined
   );
 }
 
@@ -5712,7 +5757,12 @@ function collectStaticEffects(
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,
       landwalk: walk.land,
-      setBase: ability.setBasePt === undefined ? null : staticBasePt(state, registry, source, ability.setBasePt, target),
+      setBase:
+        ability.setBasePt !== undefined
+          ? staticBasePt(state, registry, source, ability.setBasePt, target)
+          : ability.takesLastExiledCard !== undefined
+            ? lastExiledCardPt(state, registry, source, ability.takesLastExiledCard.filter)
+            : null,
     };
   };
   let keywordScoped = false;

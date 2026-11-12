@@ -5491,6 +5491,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   a lone `toughness` is "have base toughness 1"). In timestamp order with
   `become`'s set P/T, under counters (7c) and bonuses (7d). Distinct from the
   `"self"`-only `setBasePtFromCount` CDA, which applies first.
+- `takesLastExiledCard: { filter, keepCreatureTypes? }` — Duplicant's "as long as a card exiled
+  with this creature is a creature card, this creature has the power, toughness, and creature
+  types of the last creature card exiled with it. It's still a Shapeshifter" (`filter: { type:
+  "creature" }, keepCreatureTypes: ["Shapeshifter"]`): the last linked card (exiled with
+  `linked: true`) matching the filter sets base P/T (7b) and creature types (layer 4), read live
+  as it is in exile.
 - `setBasePtFromAffectedCounters: "<kind>"` — layer 7b, each affected permanent
   by its own count of those counters: Spark Rupture's "a creature with power
   and toughness each equal to the number of loyalty counters on it".
