@@ -2064,6 +2064,11 @@ export type LegalAction =
        * chosen card goes on it means nothing (Threats Undetected's "shuffle
        * the chosen cards into your library"): no order to show. */
       readonly shuffledIn?: true;
+      /** `ids` are a library search's finds (rule 701.23), and that library
+       * is shuffled afterwards: the order they're listed in means nothing, so
+       * a client may sort them and show identical cards as one. A look at the
+       * top of a library has no such flag: there the order is information. */
+      readonly search?: true;
       /** A rule the chosen cards must obey as a set (Myriad Landscape's
        * "that share a land type"): `fitsTogether` says whether a pick does. */
       readonly together?: ZoneChoiceTogether;

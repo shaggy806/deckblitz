@@ -12062,4 +12062,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Tireless Provisioner: one Food-or-Treasure answer for all three',
     board({ you: { bf: ['Tireless Provisioner*3'], hand: ['Forest'] } }),
   ),
+  // The site check's fixes (2026-11-11).
+  preset(
+    'Windswept Heath: its finds are sorted, the same card as one tile',
+    board({
+      you: {
+        bf: ['Windswept Heath'],
+        lib: ['Forest', 'Taiga', 'Forest', 'Plains', 'Overgrown Tomb', 'Forest', 'Island', 'Plains', 'Forest'],
+      },
+    }),
+  ),
+  preset(
+    'Myriad Landscape: two of the same basic from one tile',
+    board({
+      you: { bf: ['Myriad Landscape', 'Island*2'], lib: ['Forest', 'Swamp', 'Forest', 'Swamp', 'Forest', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Overgrown Tomb: "prompted by" has a line of its own above the stack',
+    board({ you: { bf: ['Windswept Heath'], lib: ['Forest', 'Overgrown Tomb', 'Forest'] } }),
+  ),
+  preset('Game menu: leaving a game being played asks first', board({ you: { bf: ['Forest'] } })),
+  preset('A turn that ends on its own says so', board({ you: { hand: ['Forest'] } })),
 ]

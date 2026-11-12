@@ -28,6 +28,30 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## The site check's fixes (2026-11-11)
+
+### Windswept Heath: its finds are sorted, the same card as one tile
+- **Do:** Use Windswept Heath. In the search, click the Forest tile, then Overgrown Tomb.
+- **Expect:** Four tiles, not eight cards: Overgrown Tomb, Taiga, then "Forest ×4" and "Plains ×2". The Forest tile reads "✓ 1 of 4" once clicked; clicking Overgrown Tomb moves the pick to it, and Confirm turns gold.
+- **Not a bug:** The Island isn't shown: the Heath can't find it.
+
+### Myriad Landscape: two of the same basic from one tile
+- **Do:** Use Myriad Landscape. Click the Forest tile three times.
+- **Expect:** The tile reads "✓ 1 of 4", then "✓ 2 of 4", then goes back to "×4" with nothing picked.
+
+### Overgrown Tomb: "prompted by" has a line of its own above the stack
+- **Do:** Use Windswept Heath and find Overgrown Tomb.
+- **Expect:** While it asks about paying 2 life, the stack shows two lines that don't touch: "PROMPTED BY", and under it "… · Windswept Heath's ability". The eye button sits above both.
+
+### Game menu: leaving a game being played asks first
+- **Do:** Open **Game** in the top strip and press "Leave the room…". Press Cancel.
+- **Expect:** "Leave this game?" with Leave and Cancel in the button's place; Cancel puts the button back and you're still in the game.
+
+### A turn that ends on its own says so
+- **Do:** Play the Forest and wait.
+- **Expect:** As Bob's turn begins, a notice at the top: "Your turn ended on its own: nothing was left that you could play. Settings has the stops." It fades after a few seconds.
+- **Not a bug:** A device is told three times, then never again. Pressing Pass or Pass Turn yourself that turn means no notice.
+
 ## Prompts and log lines that say what the engine checks (2026-11-11)
 
 ### Assault Suit: it asks nothing while it's on no creature

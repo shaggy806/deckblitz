@@ -242,6 +242,15 @@ button:disabled:not(.card-tile, .mini-tile, .commander-tile, .lib-card-open, .se
   border-color: var(--border);
   box-shadow: none;
 }
+/* The one button that is the next thing to do (a mulligan's Keep, a choice's
+   Confirm once something is picked): the accent fill, as the lobby's Ready
+   and the result screen's rematch have. */
+button.primary:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
 
 /* Text fields got the same baseline as buttons, which they had never had --
    the landing page's room-code box and the seat panel's name box were the

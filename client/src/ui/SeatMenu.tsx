@@ -28,6 +28,7 @@ export function SeatMenu({
   const [open, setOpen] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [confirmingRestart, setConfirmingRestart] = useState(false)
+  const [confirmingLeave, setConfirmingLeave] = useState(false)
   const boxRef = useRef<HTMLDivElement>(null)
 
   // Closes on a click anywhere else, or Escape, as the animations panel does.
@@ -69,6 +70,7 @@ export function SeatMenu({
           // Opening it never starts on a half-finished concession.
           setConfirming(false)
           setConfirmingRestart(false)
+          setConfirmingLeave(false)
           setOpen((o) => !o)
         }}
       >
@@ -161,9 +163,35 @@ export function SeatMenu({
               Game result
             </button>
           ) : null}
-          <button type="button" onClick={() => window.location.assign('/')}>
-            Leave the room
-          </button>
+          {/* Leaving a game being played asks first, as conceding and
+              restarting do: it was the one item here a stray click acted on
+              (the site check, 2026-11-11). Watching, or once the game is
+              over, there's nothing to lose and it just goes. */}
+          {inGame ? (
+            <div className="seat-menu-slot">
+              <div className={`seat-menu-confirm${confirmingLeave ? '' : ' slot-hidden'}`} aria-hidden={!confirmingLeave}>
+                <span>Leave this game?</span>
+                <button type="button" className="seat-menu-danger" onClick={() => window.location.assign('/')}>
+                  Leave
+                </button>
+                <button type="button" onClick={() => setConfirmingLeave(false)}>
+                  Cancel
+                </button>
+              </div>
+              <button
+                type="button"
+                className={confirmingLeave ? 'slot-hidden' : undefined}
+                aria-hidden={confirmingLeave}
+                onClick={() => setConfirmingLeave(true)}
+              >
+                Leave the room…
+              </button>
+            </div>
+          ) : (
+            <button type="button" onClick={() => window.location.assign('/')}>
+              Leave the room
+            </button>
+          )}
           {/* The Fan Content Policy notice and credits, in a tab of its own
               so the game isn't left. */}
           <a className="seat-menu-link" href="/about" target="_blank" rel="noreferrer">

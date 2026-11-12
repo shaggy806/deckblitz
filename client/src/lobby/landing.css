@@ -21,16 +21,6 @@
      panels above them, and the "or" rule runs down the centre of the same
      channel the gap below it opens. */
   --landing-split: clamp(24px, 2.6vw, 38px);
-  /* How wide one full repeat of the commander tile is drawn — i.e. the zoom.
-     The tile is a 10-wide grid, so 300vw puts about three cards across the
-     screen. Clamped at the top so a very wide monitor doesn't upscale the
-     source past the point where even the baked-in blur hides it, and at the
-     bottom so a phone stays zoomed in rather than showing the whole grid. */
-  --backdrop-tile: clamp(1400px, 300vw, 4200px);
-  --backdrop-angle: -14deg;
-  /* One full tile of travel. ~23px/s at a 1366px viewport: present, but not
-     something you catch yourself watching. */
-  --backdrop-period: 180s;
   padding: clamp(18px, 4vh, 54px) clamp(16px, 4vw, 40px);
   overflow-y: auto;
   position: relative;
@@ -70,6 +60,18 @@
  * file that ships is 1536px wide and 152KB, from a 241MB source.
  */
 .landing-backdrop {
+  /* Its own settings, here rather than on `.landing`: the waiting room draws
+     the same backdrop (`MenuBackdrop`) outside that page. */
+  /* How wide one full repeat of the commander tile is drawn — i.e. the zoom.
+     The tile is a 10-wide grid, so 300vw puts about three cards across the
+     screen. Clamped at the top so a very wide monitor doesn't upscale the
+     source past the point where even the baked-in blur hides it, and at the
+     bottom so a phone stays zoomed in rather than showing the whole grid. */
+  --backdrop-tile: clamp(1400px, 300vw, 4200px);
+  --backdrop-angle: -14deg;
+  /* One full tile of travel. ~23px/s at a 1366px viewport: present, but not
+     something you catch yourself watching. */
+  --backdrop-period: 180s;
   /*
    * Oversized so the rotated rectangle still covers all four corners of the
    * viewport. Rotating the viewport into this element's frame needs

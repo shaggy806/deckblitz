@@ -17,6 +17,7 @@ import { SAMPLE_DECKS } from 'engine/client'
 import type { Action, LegalAction, ObjectId, PlayerId, PlayerView } from 'engine/client'
 import type { Frame } from '../game/usePlayback.ts'
 import { realId } from '../game/stackMembers.ts'
+import { noteHandPass } from '../game/turnPassedNotice.ts'
 import type {
   BotSpeed,
   BuilderInfo,
@@ -1124,6 +1125,8 @@ export function useNetworkGame(): NetworkGame {
         action.type === 'cast-spell' && action.via === 'effect'
           ? { type: 'cast-now', player: action.player, cast: action }
           : action
+      // A pass made by hand, for the "your turn ended on its own" notice.
+      if (sent.type === 'pass-priority') noteHandPass()
       send({ type: 'dispatch', roomId: id, action: sent })
     },
     [send],
@@ -1284,18 +1287,21 @@ export function useNetworkGame(): NetworkGame {
   const passTurn = useCallback(() => {
     const id = roomIdRef.current
     if (id === null) return
+    noteHandPass()
     send({ type: 'pass-turn', roomId: id })
   }, [send])
 
   const autoPass = useCallback(() => {
     const id = roomIdRef.current
     if (id === null) return
+    noteHandPass()
     send({ type: 'auto-pass', roomId: id })
   }, [send])
 
   const resolveAll = useCallback(() => {
     const id = roomIdRef.current
     if (id === null) return
+    noteHandPass()
     send({ type: 'resolve-all', roomId: id })
   }, [send])
 

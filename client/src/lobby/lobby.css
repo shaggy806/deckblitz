@@ -3,11 +3,23 @@
    Scoped to its own `--card-w` (bigger than the in-game default — this
    screen's whole point is to be legible before anyone's squinting at a real
    board) so nothing outside this subtree is affected. */
+/* The waiting room's page: the landing page's drifting backdrop behind the
+   board (`MenuBackdrop`), on the table's flat colour. It was the bare scrim,
+   which after the front door read as a different, unfinished site (the site
+   check, 2026-11-11). `isolation` keeps the backdrop's negative z-index in
+   here, above this background and below the board. */
+.overlay.menu-overlay {
+  background: var(--bg);
+  isolation: isolate;
+}
 .seat-board {
-  --card-w: clamp(110px, 15vw, 190px);
+  /* The caps grow with the interface's scale (`--ui`): at 1440p the text is
+     1.3x and the seats were still 1080p's, so the board sat small in the
+     middle of the screen with its words crowded. */
+  --card-w: clamp(110px, 15vw, calc(190px * var(--ui)));
   /* The room-settings column's width, and a container the seats size
      against (`cqw`), so their width doesn't depend on the row they're in. */
-  --side-w: clamp(200px, 17vw, 240px);
+  --side-w: clamp(200px, 17vw, calc(240px * var(--ui)));
   /* What the column takes from the seats' row; nothing once it moves
      under them (the container query below). */
   --side-room: calc(var(--side-w) + var(--seat-gap));
@@ -358,13 +370,16 @@ button.seat-add-panel:hover {
   gap: clamp(2px, 0.2vw, 4px);
 }
 .seat-panel-add-bots-label {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--muted);
   white-space: nowrap;
 }
+/* The size of the page's other small buttons, not a size below them: these
+   three are how most tables get their opponents (the site check, 2026-11-11,
+   found them the smallest controls on the screen). */
 .seat-panel-add-bot {
-  font-size: var(--text-xs);
-  padding: 4px clamp(2px, 0.2vw, 3px);
+  font-size: var(--text-sm);
+  padding: 4px clamp(3px, 0.35vw, 6px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

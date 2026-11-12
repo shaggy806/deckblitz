@@ -2403,6 +2403,20 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+/* Over an entry still on the stack (a fetch land's ability mid-resolution,
+   while the land it found asks whether to pay life), that entry's own line
+   shows too, a few pixels below this one: the two were drawn through each
+   other (the site check, 2026-11-11). This one moves up a line, so they read
+   as two lines; the card stays where it is. */
+.stack-entry.is-prompt:not(:only-child) .stack-entry-label {
+  translate: 0 -100%;
+}
+/* The eye tab stands just above the label row, where that line now is: it
+   goes up by the line's height (the label's font size, its line and its
+   padding and border) to stay clear of it. */
+.stack-overlay:has(.stack-entry.is-prompt:not(:only-child)) .stack-see-through {
+  bottom: calc(100% + 0.4vh + clamp(13px, calc(var(--card-w) * 0.1), 21px) * 1.5 + 6px);
+}
 /* Read a buried card at full size without resolving everything in front of
    it: hovering (or focusing, for keyboard/touch -- a targetable entry is a
    real focusable button, see CardTile's `clickable`) any entry cancels its

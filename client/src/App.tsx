@@ -61,6 +61,7 @@ import { fitWidth } from './game/boardFit.ts'
 import { needsOwnButton } from './game/castWay.ts'
 import { isWordChoice, waitingLabel } from './game/waitingLabel.ts'
 import { gameStats } from './game/gameStats.ts'
+import { useTurnPassedNotice } from './game/turnPassedNotice.ts'
 import { cueLengthMs, playSound } from './game/sound.ts'
 import { useMusic } from './game/music.ts'
 import { mulliganLive, tableActions } from './game/tableActions.ts'
@@ -146,6 +147,7 @@ import { motionPrefs } from './game/motionPrefs.ts'
 import { LibraryTopCard } from './ui/LibraryTopCard.tsx'
 import { SeatBoard } from './lobby/SeatBoard.tsx'
 import { LandingScreen } from './lobby/LandingScreen.tsx'
+import { MenuBackdrop } from './lobby/MenuBackdrop.tsx'
 import { CornerToolbar } from './ui/CornerToolbar.tsx'
 import { CoachLayer } from './tutorial/CoachLayer.tsx'
 import type { PageId } from './tutorial/types.ts'
@@ -1353,7 +1355,8 @@ function BackToMenu({ game }: { readonly game: NetworkGame }) {
 function SeatPickerScreen({ game }: { readonly game: NetworkGame }) {
   const roomFull = game.seats.every((s) => s.claimed || s.isBot)
   return (
-    <div className="overlay">
+    <div className="overlay menu-overlay">
+      <MenuBackdrop />
       <SeatBoard game={game}>
         <BackToMenu game={game} />
         <h2>Room {game.roomId ?? ''}</h2>
@@ -1385,7 +1388,8 @@ function SeatPickerScreen({ game }: { readonly game: NetworkGame }) {
  * here. */
 function WaitingForPlayersScreen({ game }: { readonly game: NetworkGame }) {
   return (
-    <div className="overlay">
+    <div className="overlay menu-overlay">
+      <MenuBackdrop />
       <SeatBoard game={game}>
         <BackToMenu game={game} />
         <h2>Room {game.roomId ?? ''}</h2>
@@ -1480,6 +1484,20 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
     return i < 0 ? game.opponents.filter((p) => order.includes(p)) : [...order.slice(i + 1), ...order.slice(0, i)]
   }, [view, seat, game.opponents])
   const botPlaying = game.seats.find((s) => s.player === ownSeat)?.isBot === true
+  // "Your turn ended on its own", the first few times it does
+  // (`game/turnPassedNotice.ts`): not for someone watching, a seat a bot has,
+  // a lesson (the coach does the explaining) or a game that's over.
+  const turnPassed = useTurnPassedNotice(
+    view?.turn.number ?? null,
+    view !== null && ownSeat !== null && view.turnOrder[view.turn.activePlayerIndex] === ownSeat,
+    view !== null &&
+      !game.spectating &&
+      !botPlaying &&
+      game.tutorial === null &&
+      !view.result.over &&
+      ownSeat !== null &&
+      view.players[ownSeat]?.hasLost === false,
+  )
   // My passing preferences live on this device and the server does the
   // passing: sent when the game screen opens and whenever they change.
   const passSettings = usePassSettings()
@@ -1654,6 +1672,11 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
             {game.firstPlayerChosen
               ? `${playerLabel(view.startingPlayer, game.seats)} goes first, the host's pick`
               : `🎲 ${playerLabel(view.startingPlayer, game.seats)} won the highroll and goes first`}
+          </HighrollToast>
+        ) : null}
+        {turnPassed.show ? (
+          <HighrollToast onDismiss={turnPassed.dismiss}>
+            Your turn ended on its own: nothing was left that you could play. Settings has the stops.
           </HighrollToast>
         ) : null}
         {/* Last: an error comes and goes, and above the notices that stay it
@@ -7357,7 +7380,9 @@ function Table({
         </span>
         {renderHand()}
         <div className="mulligan-modal-actions">
-          <button type="button" disabled={locked} onClick={() => confirmMulligan(true)}>
+          {/* Keeping is what most hands do: the primary button, so the pair
+              doesn't read as two equal choices. */}
+          <button type="button" className="primary" disabled={locked} onClick={() => confirmMulligan(true)}>
             Keep
           </button>
           {mulliganAction.mustKeep ? null : (
@@ -8123,6 +8148,8 @@ function Table({
             ...(zoneChoiceAction.openingHand === true && zoneChoiceAction.destination !== 'reveal' ? { noneLabel: 'Keep them in hand' } : {}),
             // A look alone (Glasses of Urza): closing it is the answer.
             ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),
+            // A library search's finds: sorted, identical cards as one tile.
+            ...(zoneChoiceAction.search === true ? { unordered: true } : {}),
             ...(zoneChoiceAction.together
               ? {
                   fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked),

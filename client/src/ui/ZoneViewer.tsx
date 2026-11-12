@@ -6,6 +6,7 @@ import { Symbols } from './Symbols.tsx'
 import { otherFaceOf } from './otherFace.ts'
 import { requestCards, useCardData } from '../cards/cardData.ts'
 import { StableLabel } from './StableLabel.tsx'
+import { clickFolded, foldSearch } from './zoneFold.ts'
 
 /** Where a card in a zone-spanning choice is, under its tile. */
 const ZONE_CAPTION: Partial<Record<VisibleObject['zone'], string>> = {
@@ -77,6 +78,10 @@ export interface ZoneViewerProps {
      * at before a card type is chosen — Arachne, Psionic Weaver): a button per
      * answer in the footer, in place of Confirm. */
     readonly answers?: readonly { readonly label: string; readonly onChoose: () => void }[]
+    /** The cards' order means nothing (a library search's finds, shuffled
+     * away afterwards): they're sorted, and identical ones are one tile with
+     * a count (`zoneFold.ts`). Never with `ordered`. */
+    readonly unordered?: boolean
   }
   /** Selection mode only: hidden so the board can be seen ("View board").
    * The component stays mounted, so picks made so far survive; the owner
@@ -132,20 +137,26 @@ export function ZoneViewer({
     if (faceNames.length > 0) requestCards(faceNames.split('\n'))
   }, [faceNames])
 
-  const toggle = (id: ObjectId) => {
-    if (!selection || !selection.eligible.includes(id)) return
-    setPicked((cur) => {
-      if (cur.includes(id)) return cur.filter((x) => x !== id)
-      // "With different powers": a click swaps out the pick it can't sit beside.
-      const sits = selection.sits ?? selection.fits
-      let kept = selection.swaps === true ? cur.filter((x) => sits?.([x, id]) ?? true) : cur
-      // One of each: the oldest pick gives way to one that can't join them all.
-      if (selection.sits !== undefined) {
-        while (kept.length > 0 && !selection.sits([...kept, id])) kept = kept.slice(1)
-      }
-      if (kept.length >= selection.max) return cur
-      return [...kept, id]
-    })
+  /** The picks with `id` added, or as they were when it can't be. */
+  const add = (cur: readonly ObjectId[], id: ObjectId): readonly ObjectId[] => {
+    if (!selection) return cur
+    // "With different powers": a click swaps out the pick it can't sit beside.
+    const sits = selection.sits ?? selection.fits
+    let kept = selection.swaps === true ? cur.filter((x) => sits?.([x, id]) ?? true) : cur
+    // One of each: the oldest pick gives way to one that can't join them all.
+    if (selection.sits !== undefined) {
+      while (kept.length > 0 && !selection.sits([...kept, id])) kept = kept.slice(1)
+    }
+    // A choice of one card: a click on another moves the pick to it, rather
+    // than doing nothing until the first is clicked off.
+    if (kept.length >= selection.max) return selection.max === 1 ? [id] : cur
+    return [...kept, id]
+  }
+  /** A click on a tile: `members` is the one card it shows, or every identical
+   * card a folded tile stands for (`clickFolded` has the rule). */
+  const toggle = (members: readonly ObjectId[]) => {
+    if (!selection || !members.every((id) => selection.eligible.includes(id))) return
+    setPicked((cur) => clickFolded(cur, members, add))
   }
 
   const canConfirm =
@@ -163,6 +174,12 @@ export function ZoneViewer({
   // A choice spanning zones (behold: a card in your hand or a permanent you
   // control) says where each one is, or two copies of a card look alike.
   const mixedZones = new Set(ids.map((id) => resolve(id)?.zone).filter((z) => z !== undefined)).size > 1
+
+  // One tile per card, or, for a search's finds, per set of identical cards.
+  const tiles: readonly (readonly ObjectId[])[] =
+    selection?.unordered === true && selection.ordered !== true
+      ? foldSearch(ids, resolve, selection.eligible)
+      : ids.map((id) => [id])
 
   return (
     <div className="zone-viewer-overlay" onClick={selection ? undefined : onClose}>
@@ -206,7 +223,8 @@ export function ZoneViewer({
           )}
         </div>
         <div className="zone-viewer-cards">
-          {ids.map((id) => {
+          {tiles.map((members) => {
+            const id = members[0]!
             const obj = resolve(id)
             if (!obj) {
               // A face-down card in exile a choice may still take — a
@@ -221,7 +239,7 @@ export function ZoneViewer({
                       className={`card-back zv-hidden-pick${isPicked ? ' picked' : ''}`}
                       title="face-down card — one of its group is taken at random"
                       aria-pressed={isPicked}
-                      onClick={() => toggle(id)}
+                      onClick={() => toggle(members)}
                     >
                       {isPicked ? '✓ Picked' : 'Face down'}
                     </button>
@@ -231,7 +249,10 @@ export function ZoneViewer({
               return <div key={id} className="card-back" title="face-down card" />
             }
             const isEligible = !selection || selection.eligible.includes(obj.id)
-            const isPicked = picked.includes(obj.id)
+            // How many of the tile's cards are picked: one card's 0 or 1, or a
+            // folded tile's count.
+            const pickedHere = members.filter((member) => picked.includes(member)).length
+            const isPicked = pickedHere > 0
             const castHere =
               !selection && castable && castable.ids.includes(obj.id) ? castable : null
             const variants = castHere?.variants?.(obj.id) ?? []
@@ -250,6 +271,12 @@ export function ZoneViewer({
                   badge={
                     selection?.ordered === true && isPicked
                       ? `${picked.indexOf(obj.id) + 1}`
+                      : members.length > 1
+                      ? // A folded tile: how many it stands for, and how many
+                        // of them are picked.
+                        isPicked
+                        ? `✓ ${pickedHere} of ${members.length}`
+                        : `×${members.length}`
                       : isPicked
                       ? '✓ Picked'
                       : obj.suspended
@@ -262,7 +289,7 @@ export function ZoneViewer({
                   }
                   onClick={
                     selection && isEligible
-                      ? () => toggle(obj.id)
+                      ? () => toggle(members)
                       : castHere && !waysHaveButtons
                         ? () => castHere.onCast(obj.id)
                         : undefined
@@ -310,6 +337,9 @@ export function ZoneViewer({
           <div className="zone-viewer-footer">
             <button
               type="button"
+              // With cards picked, confirming is the next thing to do: the
+              // page's primary button, not one more plain control in a corner.
+              className={picked.length > 0 ? 'primary' : undefined}
               disabled={!canConfirm}
               onClick={() => selection.onConfirm(picked)}
             >
