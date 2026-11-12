@@ -18788,6 +18788,7 @@ import _poolOdiousTrow from "./pool/odious-trow.js";
 import _poolOdiousWitch from "./pool/odious-witch.js";
 import _poolOdricBloodCursed from "./pool/odric-blood-cursed.js";
 import _poolOdricLunarchMarshal from "./pool/odric-lunarch-marshal.js";
+import _poolOdricMasterTactician from "./pool/odric-master-tactician.js";
 import _poolOdricsOutrider from "./pool/odrics-outrider.js";
 import _poolOdunosRiverTrawler from "./pool/odunos-river-trawler.js";
 import _poolOdylicWraith from "./pool/odylic-wraith.js";
@@ -51411,6 +51412,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOdiousWitch,
   _poolOdricBloodCursed,
   _poolOdricLunarchMarshal,
+  _poolOdricMasterTactician,
   _poolOdricsOutrider,
   _poolOdunosRiverTrawler,
   _poolOdylicWraith,
@@ -84047,6 +84049,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/odious-witch": _poolOdiousWitch,
   "pool/odric-blood-cursed": _poolOdricBloodCursed,
   "pool/odric-lunarch-marshal": _poolOdricLunarchMarshal,
+  "pool/odric-master-tactician": _poolOdricMasterTactician,
   "pool/odrics-outrider": _poolOdricsOutrider,
   "pool/odunos-river-trawler": _poolOdunosRiverTrawler,
   "pool/odylic-wraith": _poolOdylicWraith,

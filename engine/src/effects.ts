@@ -7136,12 +7136,16 @@ export type EffectSpec =
        * (`blocks: "all"` — Master Warcraft; `"opponents"`, those your opponents
        * control — Brutal Hordechief, with `blockIfAble`: "creatures your
        * opponents control block this turn if able"). A rule over the rest of
-       * the turn: a creature arriving later is covered too.
+       * the turn: a creature arriving later is covered too. `thisCombat`:
+       * over this combat only, ending with it — Odric, Master Tactician's
+       * "you choose which creatures block this combat and how those
+       * creatures block".
        */
       readonly kind: "choose-combat";
       readonly attackers?: true;
       readonly blocks?: "all" | "opponents";
       readonly blockIfAble?: true;
+      readonly thisCombat?: true;
     }
   | {
       /**
@@ -19260,6 +19264,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.attackers === true ? { attackers: true } : {}),
         ...(spec.blocks !== undefined ? { blocks: spec.blocks } : {}),
         ...(spec.blockIfAble === true ? { blockIfAble: true } : {}),
+        ...(spec.thisCombat === true ? { thisCombat: true } : {}),
       });
       return;
     }

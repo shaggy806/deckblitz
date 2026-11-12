@@ -3294,6 +3294,10 @@ export interface CombatChoice {
   readonly blocks?: "all" | "opponents";
   /** And those creatures block this turn if able. */
   readonly blockIfAble?: true;
+  /** Only for the combat it's made in: "you choose which creatures block
+   * this combat" (Odric, Master Tactician) — gone as that combat ends (rule
+   * 511.3), not with the turn. */
+  readonly thisCombat?: true;
 }
 
 /** One effect a player can apply first (rule 616.1): named by the card that

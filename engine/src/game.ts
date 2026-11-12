@@ -13863,6 +13863,10 @@ export class Game {
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
       (t) => !("whenever" in t.at && t.at.until === "until-end-of-combat"),
     );
+    // "You choose which creatures block this combat" (Odric) ends with it.
+    if (this.state.combatChoices?.some((c) => c.thisCombat === true) === true) {
+      this.state.combatChoices = this.state.combatChoices.filter((c) => c.thisCombat !== true);
+    }
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       object.attacking = null;

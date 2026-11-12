@@ -587,6 +587,7 @@ import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolNyotaUhuraCommunications from "../pool/nyota-uhura-communications.js";
 import _poolNyxathid from "../pool/nyxathid.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
+import _poolOdricMasterTactician from "../pool/odric-master-tactician.js";
 import _poolOffalsnout from "../pool/offalsnout.js";
 import _poolOgreErrant from "../pool/ogre-errant.js";
 import _poolOkoyeMightyAndAdored from "../pool/okoye-mighty-and-adored.js";
@@ -1626,6 +1627,7 @@ const shard: CardShard = {
     _poolNyotaUhuraCommunications,
     _poolNyxathid,
     _poolObyrasAttendants,
+    _poolOdricMasterTactician,
     _poolOffalsnout,
     _poolOgreErrant,
     _poolOkoyeMightyAndAdored,
