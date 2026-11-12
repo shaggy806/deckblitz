@@ -1399,8 +1399,16 @@
   padding-top: 0;
 }
 .hand-strip.peekable .hand-strip-inner {
-  width: 100%;
-  pointer-events: auto;
+  /* Only as wide as the fan, not the tray: the raised tray's empty box took
+     the clicks for whatever it covered beside the fan — at 1366x768 your
+     commander in the command rail, once the hand's cards grew to 150px
+     (a tutorial step that clicks it straight after a land, 2026-11-11). */
+  width: fit-content;
+  max-width: 100%;
+  /* ...and only the cards' own row takes the pointer (below), from its
+     cards' top edge: the 16px over them is margin, not the row's padding,
+     so a 4-player board's commander just above the fan takes its click. */
+  pointer-events: none;
   /* Show the top 20% of a card face, so the peek reads as a hand of cards
      you could reach for rather than a strip of chrome. Derived from the card
      itself (a tile is `--card-w` wide and 1.4x that tall, see .card-tile) and
@@ -1416,6 +1424,11 @@
 .hand-strip.peekable.raised .hand-strip-inner,
 .hand-strip.peekable:focus-within .hand-strip-inner {
   translate: 0 0;
+}
+.hand-strip.peekable .hand-cards {
+  pointer-events: auto;
+  padding-top: 0;
+  margin-top: 16px;
 }
 /* A decision on the hand itself (discard, put-on-bottom) holds the tray open
    and asks in the bottom-right .decision-banner like every other decision.
