@@ -5886,6 +5886,11 @@ export type EffectSpec =
       readonly kind: "remove-counters";
       readonly from?: CardFilter;
       readonly anyController?: true;
+      /** `from` over the cards in exile, whoever owns them, rather than the
+       * battlefield — Mari, the Killing Quill's "you may remove a hit
+       * counter from a card that player owns in exile" (`from: { ownedByRef:
+       * "that-player" }`). A suspended card gives only time counters. */
+      readonly inExile?: true;
       readonly target?: ObjectRef;
       readonly counter: string;
       readonly orKinds?: readonly string[];
@@ -12993,6 +12998,7 @@ export interface EffectApi {
     spec: {
       readonly from?: CardFilter;
       readonly anyController?: boolean;
+      readonly inExile?: boolean;
       readonly target?: TargetRef;
       readonly counter: string;
       readonly orKinds?: readonly string[];
@@ -18858,6 +18864,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         {
           ...(spec.from !== undefined ? { from: spec.from } : {}),
           ...(spec.anyController === true ? { anyController: true } : {}),
+          ...(spec.inExile === true ? { inExile: true } : {}),
           ...(target !== undefined ? { target } : {}),
           counter: spec.counter,
           ...(spec.orKinds !== undefined ? { orKinds: spec.orKinds } : {}),

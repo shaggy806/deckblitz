@@ -16531,6 +16531,7 @@ import _poolMarduStrikeLeader from "./pool/mardu-strike-leader.js";
 import _poolMarduWarshrieker from "./pool/mardu-warshrieker.js";
 import _poolMarduWoeReaper from "./pool/mardu-woe-reaper.js";
 import _poolMarhaultElsdragon from "./pool/marhault-elsdragon.js";
+import _poolMariTheKillingQuill from "./pool/mari-the-killing-quill.js";
 import _poolMarinaVendrell from "./pool/marina-vendrell.js";
 import _poolMarinaVendrellsGrimoire from "./pool/marina-vendrells-grimoire.js";
 import _poolMarionetteApprentice from "./pool/marionette-apprentice.js";
@@ -49157,6 +49158,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarduWarshrieker,
   _poolMarduWoeReaper,
   _poolMarhaultElsdragon,
+  _poolMariTheKillingQuill,
   _poolMarinaVendrell,
   _poolMarinaVendrellsGrimoire,
   _poolMarionetteApprentice,
@@ -81796,6 +81798,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mardu-warshrieker": _poolMarduWarshrieker,
   "pool/mardu-woe-reaper": _poolMarduWoeReaper,
   "pool/marhault-elsdragon": _poolMarhaultElsdragon,
+  "pool/mari-the-killing-quill": _poolMariTheKillingQuill,
   "pool/marina-vendrell": _poolMarinaVendrell,
   "pool/marina-vendrells-grimoire": _poolMarinaVendrellsGrimoire,
   "pool/marionette-apprentice": _poolMarionetteApprentice,

@@ -33,9 +33,11 @@ export function removalOffer(state: GameState, awaiting: Awaiting): Offer {
     const here = state.objects[object];
     if (here === undefined) return [];
     // A token stack gives every token's, unless they all come from one
-    // permanent; a suspended card only its time counters.
+    // permanent; a suspended card only its time counters, another card in
+    // exile any (Mari, the Killing Quill's hit counters).
     const tokens = awaiting.single === true ? 1 : (here.stackCount ?? 1);
-    const suspended = here.zone === "exile";
+    const exiled = here.zone === "exile";
+    const suspended = exiled && here.suspended === true;
     const allowed = Object.fromEntries(
       Object.entries(here.counters)
         .filter(
@@ -45,7 +47,7 @@ export function removalOffer(state: GameState, awaiting: Awaiting): Offer {
         .map(([kind, n]) => [kind, n * tokens]),
     );
     return Object.keys(allowed).length > 0
-      ? [{ object, counters: allowed, controller: suspended ? here.owner : here.controller }]
+      ? [{ object, counters: allowed, controller: exiled ? here.owner : here.controller }]
       : [];
   });
   return {

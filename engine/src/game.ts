@@ -38810,6 +38810,7 @@ controlledBy,
             kind: spec.counter,
             ...(spec.orKinds !== undefined ? { orKinds: spec.orKinds } : {}),
             ...(spec.from !== undefined ? { from: spec.from } : {}),
+            ...(spec.inExile === true ? { inExile: true as const } : {}),
           },
           spec.among !== true,
         ).total,
@@ -38825,6 +38826,7 @@ controlledBy,
             ...(spec.orKinds !== undefined ? { orKinds: spec.orKinds } : {}),
             ...(spec.from !== undefined ? { from: spec.from } : {}),
             ...(spec.anyController === true ? { anyController: true as const } : {}),
+            ...(spec.inExile === true ? { inExile: true as const } : {}),
             ...(target !== undefined ? { target } : {}),
           },
           single,
@@ -48331,6 +48333,10 @@ controlledBy,
       readonly target?: ObjectId;
       readonly excludeSource?: true;
       readonly orSuspended?: true;
+      /** `from` over the cards in exile, whoever owns them, not the
+       * battlefield (Mari, the Killing Quill: "a card that player owns in
+       * exile"). */
+      readonly inExile?: true;
     },
     single: boolean,
   ): { readonly eligible: ObjectId[]; readonly kinds: string[] | null; readonly total: number; readonly most: number } {
@@ -48338,6 +48344,10 @@ controlledBy,
     const ids =
       spec.target !== undefined
         ? [spec.target]
+        : spec.inExile === true
+          ? this.state.zones.shared.exile.filter((id) =>
+              matchesFilter(this.state, this.registry, id, spec.from ?? {}, { you: player, source: sourceId }),
+            )
         : spec.from === undefined
           ? [sourceId]
           : this.battlefieldMatching(
@@ -48348,7 +48358,7 @@ controlledBy,
             ).filter(
               (id) => spec.excludeSource !== true || id !== sourceId,
             );
-    const candidates = ids.filter((id) => this.state.objects[id]?.zone === "battlefield");
+    const candidates = ids.filter((id) => this.state.objects[id]?.zone === (spec.inExile === true ? "exile" : "battlefield"));
     if (spec.orSuspended === true) {
       for (const id of this.state.zones.shared.exile) {
         if (this.isSuspended(id) && this.state.objects[id]?.owner === player) candidates.push(id);
@@ -48358,7 +48368,7 @@ controlledBy,
     let most = 0;
     const eligible = candidates.filter((id) => {
       const object = this.state.objects[id];
-      const suspended = object.zone === "exile";
+      const suspended = object.zone === "exile" && spec.inExile !== true;
       const n = Object.entries(object.counters).reduce(
         (sum, [kind, count]) =>
           (suspended ? kind === "time" && (kinds === null || kinds.includes("time")) : kinds === null || kinds.includes(kind))
@@ -48435,7 +48445,8 @@ controlledBy,
           this.removeTimeCounter(object, left);
           break;
         }
-        if (now.zone !== "battlefield" || (now.counters[kind] ?? 0) <= 0) break;
+        // A card in exile keeps counters too (rule 122.1; `inExile`).
+        if ((now.zone !== "battlefield" && now.zone !== "exile") || (now.counters[kind] ?? 0) <= 0) break;
         const id = this.splitOneFromStack(object);
         const one = this.state.objects[id];
         const n = Math.min(left, one.counters[kind] ?? 0);
