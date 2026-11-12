@@ -1331,6 +1331,9 @@
   display: none;
 }
 .hand-strip {
+  /* The hand's own card size (index.css's --hand-card-w), for the tray's
+     peek height as well as the cards. */
+  --card-w: var(--hand-card-w);
   flex: none;
   display: flex;
   flex-direction: column;
@@ -3775,6 +3778,7 @@
    dialog, not a persistent browsing tray, so it stays capped well short of
    the viewport instead of matching that width 1:1. */
 .mulligan-modal {
+  --card-w: var(--hand-card-w);
   position: fixed;
   top: 50%;
   left: calc((100vw - var(--side-panel)) / 2);
@@ -3892,7 +3896,9 @@
      while the lift cap stays a fixed 38px, so the same droop eats a steadily
      bigger share of a steadily smaller card. Reserving it here is what keeps
      the bottom of the fan on screen at any size. */
-  padding-bottom: calc(38px + var(--card-w) * 0.27);
+  /* (Since 2026-11-11 the caps are 24px and 18 degrees: sin(18deg) / 2 is
+     about 0.16.) */
+  padding-bottom: calc(24px + var(--card-w) * 0.16);
 }
 /* symmetric fan (see App.tsx's HAND_FAN_STEP_DEG) -- --r/--y are set inline
    per card (as custom properties, which inherit to .card-tile below without
@@ -4023,6 +4029,23 @@
    that doesn't fit clips via .card-tile's own existing overflow:hidden. */
 .hand-card .card-tile {
   height: calc(var(--card-w) * 1.4);
+}
+/* The hand is read where it sits, not only grown under the pointer: its type
+   line and rules text a point larger than other card tiles', with a little
+   of the art's share of the card given to them. At the shared sizes (9.5px
+   rules, 8.5px type line, 46% art) a hand card at 1366x768 was readable only
+   hovered (the user, 2026-11-02). */
+.hand-card .card-tile.art-first .ct-art {
+  flex-basis: 40%;
+}
+.hand-card .card-tile.art-first .ct-name-row .ct-name {
+  font-size: calc(12px * var(--name-scale, 1) * var(--ct-scale, 1));
+}
+.hand-card .card-tile .ct-type {
+  font-size: calc(9.5px * var(--type-scale, 1) * var(--ct-scale, 1));
+}
+.hand-card .card-tile .ct-text {
+  font-size: calc(10.5px * var(--text-scale, 1) * var(--ct-scale, 1));
 }
 /* A card you currently can't play is still a real card in your hand, not a
    ghost of one -- unlike the board/stack/zone-viewer, "disabled" here only

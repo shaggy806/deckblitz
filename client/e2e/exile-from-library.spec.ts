@@ -114,6 +114,12 @@ async function takeSeat(page: Page, room: string): Promise<void> {
 }
 
 async function cast(page: Page, card: string): Promise<void> {
+  // Raise the tray first, as a player's pointer does: in the lowered tray
+  // only a sliver of each card shows, and an eleven-card fan's neighbours
+  // overlap it.
+  const trigger = await page.locator('.hand-trigger').boundingBox()
+  if (trigger) await page.mouse.move(trigger.x + 4, trigger.y + trigger.height - 2)
+  await expect(page.locator('.hand-strip.raised')).toBeVisible()
   await page.locator('.hand-cards [data-obj-id]').filter({ hasText: card }).first().click()
   // Off the hand, so the raised fan doesn't cover the board.
   await page.mouse.move(400, 40)

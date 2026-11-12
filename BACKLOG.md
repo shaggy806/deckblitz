@@ -267,7 +267,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 
 - **Auto-pass pauses on each opposing spell** (a design call) — it stops for every spell an opponent casts, each needing a "Resolve stack" click; whether it should carry on past spells that don't touch you.
-- **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
 - **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
 - **A hand card's Cycle, Foretell and Plot buttons are small** — plain buttons under the card, easy to miss beside it (they aren't a popup: nothing for Escape to close).
 - **The deck builder's hover preview can cover the search box and filters** — the last of its rough edges.

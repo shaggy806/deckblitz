@@ -99,6 +99,12 @@
      still derives from one number rather than re-deriving the clamp. */
   --card-w-max: clamp(96px, calc((100vw - var(--side-panel)) * 0.09), calc(150px * var(--ui)));
   --card-w: var(--card-w-max);
+  /* The hand's cards (the peek tray and the mulligan popup): never narrower
+     than a 1080p board card. The board's width shrinks with a narrow screen
+     because every seat's permanents share it, but the hand is a tray drawn
+     over the board, and at 1366x768 the board's 123px left its rules text 9.5px
+     on a card too small to fit it (the user, 2026-11-02). */
+  --hand-card-w: max(var(--card-w-max), min(11vw, calc(150px * var(--ui))));
   /* Card text is sized for a card `--card-w-max` wide at 1080p, and scales
      with its card from there (`--ct-scale`, which a subtree with cards of
      another size sets for itself). */

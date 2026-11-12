@@ -160,8 +160,10 @@ import './App.css'
 // popup -- the hand should read as the same tray whether it's peeking,
 // raised, or shown inside a decision popup, not switch between a flat and a
 // fanned look depending on which.
-const HAND_FAN_STEP_DEG = 4.4
-const HAND_FAN_STEP_Y = 5.2
+// Flattened on 2026-11-11 (from 4.4 degrees and 5.2px): a tilted card's text
+// is the hardest to read, and the hand is read where it sits.
+const HAND_FAN_STEP_DEG = 2.6
+const HAND_FAN_STEP_Y = 3.4
 // The per-card step above is tuned against the mockup's own tested range (up
 // to 14 cards -- see the mockup source linked from BOARD_REDESIGN_PLAN.md), where the
 // outermost card lands well under these caps and nothing here changes
@@ -172,8 +174,8 @@ const HAND_FAN_STEP_Y = 5.2
 // card's own rotation, so a large hand compresses its per-card step instead
 // of blowing past a sane maximum -- same "shrink only once actually needed"
 // shape as HAND_CARD_GAP's overlap floor below.
-const HAND_FAN_MAX_ROT_DEG = 32
-const HAND_FAN_MAX_LIFT_PX = 38
+const HAND_FAN_MAX_ROT_DEG = 18
+const HAND_FAN_MAX_LIFT_PX = 24
 
 // The hand row never wraps to a second line and never shrinks card width
 // below its normal --card-w size -- once N cards no longer fit the row at

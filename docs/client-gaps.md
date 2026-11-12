@@ -8,8 +8,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 - **Auto-pass pauses on each opposing spell** (found 2026-11-02, a UX pass; a design call). Auto-pass paused on
   both opposing spells seen, each needing a "Resolve stack" click. (The other half of this item, a land's
   ability stopping every step, is `skipAbilityOnly`, 2026-11-11.)
-- **The hand's rules text is tiny at rest** (found 2026-11-02). At 1366×768 a hand card's rules are 9.5px and
-  its type line 8.5px, on a tilted card; hovering makes one readable. The mulligan's fan looks the same.
 - **The stack's card hides a seat's board** (found 2026-11-02). At 1366×768 it sits over the fourth player's
   board, just when you're deciding whether to respond to what's on it.
 - **A hand card's Cycle, Foretell and Plot buttons are small** (found 2026-11-02). Plain buttons under the card,
