@@ -741,6 +741,67 @@ A cast with convoke takes the payment its offer proved (`castExtras`, `candidate
 Before, every creature paid generic, the engine refused the cast wherever a creature had to
 pay a colour, and v2 never cast such a spell: a decision to watch now that it can.
 
+### A passive permanent is worth a creature of its cost (2026-11-11)
+
+The upgraded decks' card-usage report (`docs/plans/upgraded-decks.md`) showed v2 leaving
+enchantments in hand: Ghostly Prison cast in 0 of 8 games it could have been, Smothering Tithe
+in 1 of 11, Parallel Lives in 0 of 4, Guardian Project in 0 of 6. A probe (thirty such cards,
+each alone, then beside a same-cost vanilla creature with mana for one, then with mana for
+both) found the shape of it: v2 cast every one of them alone and with mana to spare, and the
+creature first whenever it had to choose, except for the engines `drawEngines` already
+prices. A hand that keeps drawing creatures never has the mana to spare.
+
+The cause is in the shared weights. A creature of mana value N scores `creatures` 2.5, its
+stats (about N), `untappedCreatures` 0.5 and half its mana value; a noncreature permanent
+scores `otherPermanents` 2 and half its mana value, so a four-mana enchantment the rates
+don't price is 4 beside a 4/4's 9. Yesterday's engine rates cover cards, tokens, Treasures,
+drain and mana; a token doubler, an attack tax, a trigger doubler or a free cast has no rate
+and never will have all of them.
+
+`standingEffects` (`standingWorth` in `bot/features.ts`) is the floor under the rates, in
+points at weight 1: a nontoken noncreature permanent with a static ability, a trigger that
+can fire again or a Saga's chapters is worth its mana value plus 1.5, less what the rates
+already score it, never below zero. So Parallel Lives scores a little over a 4/4, Smothering
+Tithe the same (its 1.5 points of Treasure taken off), Phyrexian Arena half a point more
+than before, Rhystic Study nothing more. Not an Aura or Equipment (the host's worth), not a
+planeswalker (`loyalty`), not a permanent whose only trigger is its own entering, not a
+mana rock (only activated abilities; `earlyMana` already casts those first in the opening
+rounds). For the bot's own permanents the floor shrinks with what could attack it: whole
+while that is under a third of its life, nothing when it would be lethal, so a blocker still
+comes first under pressure.
+
+Scenarios, all gated: *casts a tax engine before a body* (Smothering Tithe and a Rumbling
+Baloth, mana for one, four players), *casts an attack tax before a body*, *casts a token
+doubler before a body*, each failing at weight 0; and *casts the blocker before a tax engine
+when an attack is coming* (6 life, facing a Craw Wurm), which failed until the pressure
+share. Gate 226 of 226. Tests: `bot-standing-effects.test.ts`.
+
+The first `bot:diff` (27 of 12,923 decisions, six four-player games) was the intended kind,
+an enchantment or artifact ahead of a creature and the reorderings that follow, plus two
+over-reaches it exposed and that were then excluded: planeswalkers (Ajani ahead of the
+commander; a planeswalker's definition carries a static) and one-shot enter triggers (Bitter
+Reunion ahead of Sarkhan). It also showed removal going at an opponent's enchantment where
+it used to cast a creature (Pest Infestation on Aligned Heart over Rampaging Baloths): the
+floor counts for opponents too, as it should, and that one is a judgment call.
+
+The second `bot:diff`, after those two: 25 of 12,208 decisions.
+
+- A passive permanent ahead of a creature or a cantrip (7): Hearthhull (an artifact
+  commander) ahead of Eumidian Wastewaker twice, Ghostly Prison ahead of Think Twice, Jaws of
+  Defeat ahead of Carven Caryatid, Collective Blessing ahead of Emmara, Herald's Horn ahead of
+  a Carnelian Orb, Aligned Heart where it passed. Intended.
+- Removal or a rock where it cast something else or passed (4): Pest Infestation on an
+  opponent's enchantment over Rampaging Baloths, Protector of the Wastes over Feed the Swarm,
+  Izzet Signet where it passed, Fire Diamond ahead of an Orb. Judgment calls.
+- Order within a turn (3): Lathliss and her Dragons in another order, Ajani's +1 before
+  Avacyn's Pilgrim.
+- Attack declarations (10): the same attacker at another opponent, or one creature sent or
+  held, since an opponent's enchantments now count towards who is ahead. Judgment calls.
+
+Blind to synergy: Parallel Lives is priced the same in a deck with no tokens. The decks the
+bots play carry such cards for a reason, and a rate for each class can replace the floor for
+that class when one is written.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

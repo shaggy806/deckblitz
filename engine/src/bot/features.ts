@@ -104,6 +104,7 @@ export const FEATURE_KEYS = [
   "trackRecord",
   "handQuality",
   "valueEngines",
+  "standingEffects",
 ] as const;
 
 export type FeatureKey = (typeof FEATURE_KEYS)[number];
@@ -856,6 +857,53 @@ function valueRate(registry: CardRegistry, def: CardDefinition, opponents: numbe
   const resources = perRound(valueRates(registry, def).resources, opponents) / RESOURCE_TOKENS_PER_CARD;
   return Math.min(VALUE_RATE_CAP, resources + drainRate(registry, def, opponents) / LIFE_PER_CARD);
 }
+/** What a vanilla creature scores over a noncreature permanent of the same
+ * mana value before either does anything, less the mana value itself: on the
+ * shared weights a creature of mana value N with N power and N toughness is
+ * `creatures` 2.5 + its stats N + `untappedCreatures` 0.5 against
+ * `otherPermanents`' 2, both with `permanentManaValue`. Half a point over,
+ * so that on a quiet board the permanent that keeps working goes first. */
+const STANDING_BASE = 1.5;
+/** What the engine terms already score a permanent, in points a unit of each
+ * rate: the shipped weights of `drawEngines`, `valueEngines`, `tokenEngines`
+ * and `nonlandMana`. Constants, not the live weights: a feature is a count,
+ * and this one is the points those terms leave short. */
+const PRICED = { draw: 4, value: 4, token: 2, mana: 0.5 } as const;
+
+/**
+ * What a passive permanent is worth beyond what the engine terms price, in
+ * points: 0 for one they already bring up to a creature of its mana value.
+ *
+ * A noncreature permanent scored `otherPermanents` + half its mana value,
+ * less than half a vanilla creature of the same cost, so v2 cast every
+ * creature in hand first and an enchantment only with mana left over: in the
+ * upgraded decks' games Ghostly Prison was cast in 0 of 8 it could have been,
+ * Smothering Tithe in 1 of 11, Parallel Lives in 0 of 4 (2026-11-11). The
+ * rates price the engines they know (cards, tokens, Treasures, drain, mana);
+ * the long tail (a token doubler, an attack tax, a trigger doubler, a free
+ * cast) has no rate. This is the floor under all of them: a card costs about
+ * what it is worth, so a permanent that keeps doing something is taken to be
+ * worth a creature of its mana value until a rate says more.
+ *
+ * Only a permanent with a static ability, a trigger that can fire again, or
+ * a Saga's chapters: one with only activated abilities is a mana rock or a
+ * tool, priced where its use shows, and one whose only trigger is its own
+ * entering has done its work (Bitter Reunion). Not an Aura or an Equipment,
+ * whose worth is its host's, nor a planeswalker, which `loyalty` prices.
+ */
+function standingWorth(registry: CardRegistry, def: CardDefinition, opponents: number): number {
+  const keepsWorking =
+    def.static.length > 0 || def.triggered.some((t) => !isOneShot(t.trigger)) || (def.chapters?.length ?? 0) > 0;
+  if (!keepsWorking || def.types.includes("planeswalker")) return 0;
+  if (def.subtypes.includes("Aura") || def.subtypes.includes("Equipment")) return 0;
+  const priced =
+    PRICED.draw * drawRate(def, opponents) +
+    PRICED.value * valueRate(registry, def, opponents) +
+    PRICED.token * tokenRate(registry, def, opponents) +
+    PRICED.mana * (manaPerTurn(def) + reductionPerTurn(def));
+  return Math.max(0, manaValue(parseManaCost(def.manaCost)) + STANDING_BASE - priced);
+}
+
 /** The most a permanent's track record is credited a round, as for
  * {@link DRAW_RATE_CAP}: one that has drawn a hand in a turn shouldn't
  * outweigh the board. */
@@ -1083,6 +1131,7 @@ function playerFeaturesUncached(
   let drawEngines = 0;
   let tokenEngines = 0;
   let valueEngines = 0;
+  let standingEffects = 0;
   let trackRecord = 0;
   const opponents = state.turnOrder.filter((p) => p !== player && !state.players[p].hasLost).length;
   let commanderOnBoard = 0;
@@ -1157,6 +1206,7 @@ function playerFeaturesUncached(
       drawEngines += drawRate(def, opponents) * n;
       tokenEngines += tokenRate(registry, def, opponents) * n;
       valueEngines += valueRate(registry, def, opponents) * n;
+      if (!isCreature && !object.isToken) standingEffects += standingWorth(registry, def, opponents) * n;
     }
     trackRecord += trackRecordOf(state, registry, id, opponents);
     if (object.isCommander && object.owner === player) commanderOnBoard += 1;
@@ -1180,6 +1230,7 @@ function playerFeaturesUncached(
   // swinging at it ("kills the creature attacking it, not the leader's").
   let threat = 0;
   if (isMe) {
+    let incoming = 0;
     const living = state.turnOrder.filter((q) => !state.players[q].hasLost);
     const attackedBy = p.lastAttackedBy ?? {};
     const lostThisTurn = journalTotal(state, "life-lost", p.id, "amount");
@@ -1219,7 +1270,14 @@ function playerFeaturesUncached(
         THREAT_LIFE / Math.max(1, Math.min(life, commanderLeft)),
       );
       threat += combatDamageOf(c) * (object.stackCount ?? 1) * share * scale;
+      incoming += combatDamageOf(c) * (object.stackCount ?? 1) * share;
     }
+    // A permanent that pays later is worth less to someone about to be hit:
+    // the floor is whole while what could come at us is under a third of our
+    // life and gone when it would kill us, so a blocker is cast first then.
+    // Without this, at 6 life facing a Craw Wurm v2 cast Smothering Tithe
+    // over the 4/4 beside it ("casts the blocker before a tax engine").
+    standingEffects *= Math.min(1, Math.max(0, (p.life - incoming) / ((p.life * 2) / 3)));
   }
 
   let handManaValue = 0;
@@ -1346,6 +1404,7 @@ function playerFeaturesUncached(
     resourceTokens,
     tokenEngines,
     valueEngines,
+    standingEffects,
     earlyRemoval,
     // Mana from rocks and creatures in the opening rounds, on top of
     // `nonlandMana`: a turn-one Sol Ring is worth killing then and much less

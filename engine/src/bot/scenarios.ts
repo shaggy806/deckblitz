@@ -1190,6 +1190,62 @@ const SCENARIOS: readonly BotScenario[] = [
     }),
   ),
 
+  // A permanent that keeps working, beside a creature of the same cost with
+  // the mana for one of them: the upgraded decks' games (2026-11-11), where
+  // v2 cast every creature in hand first and Smothering Tithe sat there in
+  // 10 games of 11. Four players, nobody attacking yet: the engine goes
+  // first (`standingEffects`). Each failed before the term.
+  ...(
+    [
+      ["casts a tax engine before a body", "Smothering Tithe", "Plains", "Rumbling Baloth", 4],
+      ["casts an attack tax before a body", "Ghostly Prison", "Plains", "Centaur Courser", 3],
+      ["casts a token doubler before a body", "Parallel Lives", "Forest", "Rumbling Baloth", 4],
+    ] as const
+  ).map(([name, card, land, body, count]) =>
+    asked({
+      name,
+      rule: "A permanent that keeps working is worth a creature of its cost, and sooner is better.",
+      position(registry) {
+        const game = table(registry, [A, B, C, D], A);
+        lands(game, land, A, 1);
+        lands(game, "Forest", A, count - 1);
+        holding(game, [B, C, D], 3);
+        game.debugSpawn(card, A, "hand");
+        game.debugSpawn(body, A, "hand");
+        return {
+          game,
+          player: A,
+          judge: (action) => ({
+            passed: action.type === "cast-spell" && game.state.objects[action.card]?.cardName === card,
+            detail: `with ${card} and ${body}, and mana for one, chose ${describeAction(action)}`,
+          }),
+        };
+      },
+    }),
+  ),
+  // The other way round: with an attacker bearing down, the blocker first.
+  asked({
+    name: "casts the blocker before a tax engine when an attack is coming",
+    rule: "A permanent that pays later doesn't come before the creature that saves life now.",
+    position(registry) {
+      const game = table(registry, [A, B], A);
+      lands(game, "Plains", A, 1);
+      lands(game, "Forest", A, 3);
+      game.state.players[A].life = 6;
+      onBoard(game, "Craw Wurm", B);
+      game.debugSpawn("Smothering Tithe", A, "hand");
+      game.debugSpawn("Rumbling Baloth", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && game.state.objects[action.card]?.cardName === "Rumbling Baloth",
+          detail: `at 6 life facing a Craw Wurm, chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+
   // --- answers -------------------------------------------------------------
   asked({
     name: "counters a big threat",

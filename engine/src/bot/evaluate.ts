@@ -188,6 +188,11 @@ export interface EvalWeights {
    * card (Smothering Tithe) and life taken from opponents at four a card
    * (Zulaport Cutthroat, Purphoros). */
   readonly valueEngines: number;
+  /** What our passive permanents are worth beyond what the engine terms
+   * already price, in points (`standingWorth` in `features.ts`): an
+   * enchantment or artifact with a static or triggered ability is brought
+   * up to about a vanilla creature of its mana value. */
+  readonly standingEffects: number;
   /** How much the strongest opponent's score subtracts from yours. */
   readonly opponent: number;
   /** Added for each opponent eliminated, scaled by the round
@@ -422,6 +427,12 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // `drawEngines`' weight: the feature is already in cards a round. The
   // audit's Q4: at 0 a Smothering Tithe was a blank permanent.
   valueEngines: 4,
+  // The feature is already in points, the gap to a vanilla creature of the
+  // same mana value. At 0 a four-mana enchantment the engine terms don't
+  // price scored 4 beside a 4/4's 9, so v2 cast every creature in hand
+  // first and left Smothering Tithe, Ghostly Prison and Parallel Lives
+  // there (the upgraded decks' card-usage report, 2026-11-11).
+  standingEffects: 1,
   opponent: 1,
   // Per opponent eliminated, at full strength from round 10 and a quarter of
   // it in round 1 (`eliminationShare`). Before it a kill scored nothing, or

@@ -70,6 +70,7 @@ export const SHIPPED_2026_09_27: Champion = {
     trackRecord: 0,
     handQuality: 0,
     valueEngines: 0,
+    standingEffects: 0,
     opponent: 1,
     eliminations: 0,
     otherOpponents: 0.5,
