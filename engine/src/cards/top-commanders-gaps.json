@@ -9,6 +9,7 @@
     "trigger:lose-exactly-n-life-caused-by-you",
     "effect:set-x-value",
     "static:grant-to-cards-outside-battlefield",
+    "trigger:cards-exiled-from-opponent-library-by-you",
     "effect:create-aura-token-attached-to-player",
     "filter:wasnt-cast-from-hand-entering",
     "replacement:optional-token-replacement",

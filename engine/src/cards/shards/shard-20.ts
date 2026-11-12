@@ -545,6 +545,7 @@ import _poolMarkovWaltzer from "../pool/markov-waltzer.js";
 import _poolMarshFlats from "../pool/marsh-flats.js";
 import _poolMassProduction from "../pool/mass-production.js";
 import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
+import _poolMassimoTheMagician from "../pool/massimo-the-magician.js";
 import _poolMeandersGuide from "../pool/meanders-guide.js";
 import _poolMechanicalMobster from "../pool/mechanical-mobster.js";
 import _poolMeditate from "../pool/meditate.js";
@@ -1611,6 +1612,7 @@ const shard: CardShard = {
     _poolMarshFlats,
     _poolMassProduction,
     _poolMassacreGirlMostWanted,
+    _poolMassimoTheMagician,
     _poolMeandersGuide,
     _poolMechanicalMobster,
     _poolMeditate,

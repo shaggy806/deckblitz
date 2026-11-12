@@ -3,20 +3,27 @@ import type { Game } from "../game.js";
 import { computeCharacteristics } from "../characteristics.js";
 import type { EffectSpec } from "../effects.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
+import type { TargetRef } from "../target.js";
+import type { ScriptedController } from "../controller.js";
 import {
   A,
   B,
   C,
   activate,
+  attack,
   cast,
   counters,
+  enter,
   hand,
+  pickTargets,
   lands,
   life,
   pickModes,
   pt,
   ref,
   toHand,
+  toLibrary,
+  zone,
   settle,
   spawn,
   table,
@@ -147,6 +154,90 @@ describe("The Muckslinger Gang", () => {
     game.debugApplyEffect(A, { kind: "destroy", target: 0 }, [ref(gang)]);
     settle(game);
     expect(computeCharacteristics(game.state, game.registry, card).power).toBe(2);
+  });
+});
+
+describe("The Madcap Jester", () => {
+  it("attacking, each opponent exiles their top card, which you may play — spending any mana", () => {
+    const { game, a } = table({ players: 3 });
+    const jester = spawn(game, "The Madcap Jester");
+    const bolt = toLibrary(game, "Lightning Bolt", B);
+    const carols = toLibrary(game, "Mountain", C);
+    attack(game, a, [jester]);
+    expect(zone(game, bolt)).toBe("exile");
+    expect(zone(game, carols)).toBe("exile");
+    // Carol's Mountain is a land play from exile.
+    game.dispatch({ type: "play-land", player: A, card: carols });
+    settle(game);
+    expect(zone(game, carols)).toBe("battlefield");
+    // Bob's Bolt, cast with colourless mana (any type can be spent).
+    lands(game, "Wastes", 1);
+    cast(game, bolt, { targets: [ref(B)], via: "impulse" });
+    expect(life(game, B)).toBe(14);
+  });
+
+  it("not a card exiled from an opponent's library outside a spell or ability of yours", () => {
+    const { game } = table();
+    spawn(game, "The Madcap Jester");
+    const top = toLibrary(game, "Mountain", B);
+    // An effect applied outside any resolution: no spell or ability caused it.
+    apply(game, B, { kind: "exile-from-library", whose: "you", amount: 1 });
+    expect(zone(game, top)).toBe("exile");
+    expect(() => game.dispatch({ type: "play-land", player: A, card: top })).toThrow();
+  });
+});
+
+/** The seat casts every free copy offered, aimed at `targets`; records each. */
+function castCopies(game: Game, seat: ScriptedController, targets: readonly TargetRef[]): { cast: string[] } {
+  const seen = { cast: [] as string[] };
+  seat.chooseCastNowFn = (_view, offer) => {
+    const way = offer.casts[0];
+    if (way === undefined) return null;
+    seen.cast.push(game.state.objects[way.card]?.cardName ?? "?");
+    return { type: "cast-spell", player: seat.playerId, card: way.card, targets, via: way.via, ...(offer.free ? { free: true } : {}) };
+  };
+  return seen;
+}
+
+describe("Massimo, the Magician", () => {
+  it("an entering creature exiles a 1-drop instant and copies it on combat damage", () => {
+    const { game, a } = table();
+    spawn(game, "Massimo, the Magician");
+    const bolt = toGraveyard(game, "Lightning Bolt");
+    pickTargets(a, bolt);
+    const bears = enter(game, "Grizzly Bears");
+    expect(zone(game, bolt)).toBe("exile");
+    const seen = castCopies(game, a, [ref(B)]);
+    attack(game, a, [bears]);
+    expect(seen.cast).toEqual(["Lightning Bolt"]);
+    expect(life(game, B)).toBe(15);
+    // The card stays in exile; it was a copy that was cast.
+    expect(zone(game, bolt)).toBe("exile");
+  });
+
+  it("two grants remember their own two cards", () => {
+    const { game, a } = table();
+    spawn(game, "Massimo, the Magician");
+    const bolt = toGraveyard(game, "Lightning Bolt");
+    const shock = toGraveyard(game, "Shock");
+    pickTargets(a, bolt);
+    const bears = enter(game, "Grizzly Bears");
+    pickTargets(a, shock);
+    const elves = enter(game, "Llanowar Elves");
+    const seen = castCopies(game, a, [ref(B)]);
+    attack(game, a, [bears, elves]);
+    expect([...seen.cast].sort()).toEqual(["Lightning Bolt", "Shock"]);
+    // 2 + 1 combat, 3 + 2 from the copies.
+    expect(life(game, B)).toBe(12);
+  });
+
+  it("not a card of mana value 2", () => {
+    const { game, a } = table();
+    spawn(game, "Massimo, the Magician");
+    const helix = toGraveyard(game, "Lightning Helix");
+    pickTargets(a, helix);
+    enter(game, "Grizzly Bears");
+    expect(zone(game, helix)).toBe("graveyard");
   });
 });
 

@@ -1549,6 +1549,9 @@ export type GameEvent =
         readonly from: ZoneType;
         readonly owner: PlayerId;
       }[];
+      /** The controller of the spell or ability whose effect exiled them;
+       * absent outside a resolution (a cost, a state-based action). */
+      readonly byEffectOf?: PlayerId;
     })
   | (Base & {
       /** Prohibitions for the rest of the turn (the `prohibit` effect):

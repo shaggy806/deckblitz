@@ -6944,6 +6944,13 @@ export type EffectSpec =
       readonly target: ObjectRef;
       readonly ability: TriggeredAbility;
       readonly duration: PermanentDuration;
+      /** Sets the granted ability remembers, captured as this resolves and
+       * read in its effect as `{ remembered: name }` (as a delayed trigger's
+       * `remember`): Massimo, the Magician's "that creature gains 'Whenever
+       * this creature deals combat damage to a player, copy **the exiled
+       * card**'" is `{ card: { set: { thisWay: "exiled" } } }` — each grant
+       * its own card. A member is acted on only while it's in its stint. */
+      readonly remember?: { readonly [name: string]: RememberSpec };
     }
   | {
       /**
@@ -19090,7 +19097,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "grant-triggered": {
       const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.grantTriggered(target, spec.ability, spec.duration);
+      if (target === undefined) return;
+      // The sets it remembers, captured now and kept on the granted ability.
+      const ability =
+        spec.remember === undefined ? spec.ability : { ...spec.ability, remembered: rememberSets(spec.remember, ctx) };
+      ctx.grantTriggered(target, ability, spec.duration);
       return;
     }
     case "grant-triggered-all":

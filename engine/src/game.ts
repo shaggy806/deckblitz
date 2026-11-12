@@ -31212,6 +31212,19 @@ export class Game {
                       })),
                     ),
                   }
+                : // "You may play those cards": the cards exiled at once.
+                  ability.trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
+                  ? {
+                      ...(atTrigger ?? {}),
+                      sets: addToSet(
+                        atTrigger?.sets,
+                        "batch",
+                        this.exileArrivals(ability.trigger, event.arrivals, object).map((card) => ({
+                          object: card,
+                          stint: this.state.objects[card]?.zoneChangeCount ?? 0,
+                        })),
+                      ),
+                    }
                 : // "Return one of them": the cards among what died. A token
                   // is no card to return (rule 111.1).
                   ability.trigger.on === "dies" && event.type === "permanents-died"
@@ -31264,7 +31277,21 @@ export class Game {
               : textName !== undefined
                 ? { grantedAbility: { kind: "card-triggered" as const, cardName: textName, index } }
                 : {}),
-            ...(lastKnownRefs !== undefined ? { lastKnownRefs } : {}),
+            // A granted ability's remembered sets (`grant-triggered`'s
+            // `remember`) go with each firing.
+            ...(ability.remembered !== undefined
+              ? {
+                  lastKnownRefs: {
+                    ...(lastKnownRefs ?? {}),
+                    sets: {
+                      ...(lastKnownRefs?.sets ?? {}),
+                      remembered: { ...(lastKnownRefs?.sets?.remembered ?? {}), ...ability.remembered },
+                    },
+                  },
+                }
+              : lastKnownRefs !== undefined
+                ? { lastKnownRefs }
+                : {}),
             ...(ability.stackFirst === true ? { stackFirst: true } : {}),
           };
           // A stacked source's ability really fires once per creature it
@@ -33045,6 +33072,7 @@ export class Game {
       case "put-into-exile":
         return (
           event.type === "cards-put-into-exile" &&
+          (spec.byEffectOf === undefined || event.byEffectOf === self.controller) &&
           this.exileArrivals(spec, event.arrivals, self).length > 0
         );
       case "leaves-graveyard":
@@ -61867,7 +61895,7 @@ controlledBy,
     }
     if (batch.length > 1) this.queueGraveyardOrders(batch.map((arrival) => arrival.object));
     if (batch.length > 0) this.emit({ type: "cards-put-into-graveyard", arrivals: batch });
-    if (exiled.length > 0) this.emit({ type: "cards-put-into-exile", arrivals: exiled });
+    if (exiled.length > 0) this.emit({ type: "cards-put-into-exile", arrivals: exiled, ...this.exileCause() });
   }
 
   /**
@@ -61956,8 +61984,17 @@ controlledBy,
     if (this.exileEnterBatch !== null) {
       this.exileEnterBatch.push(arrival);
     } else {
-      this.emit({ type: "cards-put-into-exile", arrivals: [arrival] });
+      this.emit({ type: "cards-put-into-exile", arrivals: [arrival], ...this.exileCause() });
     }
+  }
+
+  /** Who caused cards to be exiled now, for `cards-put-into-exile`'s
+   * `byEffectOf`: the controller of the spell or ability resolving, whose
+   * effect it is. Nothing outside a resolution — a cost (delve), a
+   * state-based action. */
+  private exileCause(): { readonly byEffectOf?: PlayerId } {
+    const by = this.state.resolvingController;
+    return by === undefined ? {} : { byEffectOf: by };
   }
 
   /** The cards of a `cards-put-into-exile` that count toward a

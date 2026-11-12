@@ -1,0 +1,22 @@
+{
+ "batch": "B302",
+ "status": "done",
+ "ranks": "Mystery Booster Commander Edition (MBC, 2026-10-19): two more blocked commanders (2026-11-12); built trigger:cards-exiled-from-opponent-library-by-you, and grant-triggered remember for Massimo (its keys were marked built earlier but the granted trigger couldn't name the card it copies)",
+ "authored": [
+  {
+   "name": "The Madcap Jester",
+   "files": [
+    "engine/src/cards/pool/the-madcap-jester.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Massimo, the Magician",
+   "files": [
+    "engine/src/cards/pool/massimo-the-magician.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

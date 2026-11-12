@@ -16,6 +16,7 @@ import { costActLosesSource, costActMovesLibrary, costActReadsX } from "./cost-a
 import type { GameState, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { ObjectRef } from "./refs.js";
+import type { SetMember } from "./object-sets.js";
 import type { CardFilter } from "./filter.js";
 import { filterReadsX } from "./filter.js";
 import type { TargetSpec } from "./target.js";
@@ -2105,6 +2106,12 @@ export type TriggerKind =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly from?: readonly ZoneType[];
+      /** "Whenever a spell or ability **you control** causes one or more
+       * cards to be exiled from an opponent's library" (The Madcap Jester):
+       * only an exile a resolving spell or ability of this permanent's
+       * controller did (`cards-put-into-exile`'s `byEffectOf`). The cards
+       * are the trigger's batch (`"trigger-batch"`, "those cards"). */
+      readonly byEffectOf?: "you";
     }
   | {
       /**
@@ -2695,6 +2702,9 @@ export interface TriggeredAbility {
    * one ability they are — Victor, Valgavoth's Seneschal's "if this is the
    * first time this ability has resolved this turn". */
   readonly sameAbilityAs?: number;
+  /** Engine-set, never authored: the sets a `grant-triggered`'s `remember`
+   * captured as it granted this, given to each firing as `{ remembered }`. */
+  readonly remembered?: { readonly [name: string]: readonly SetMember[] };
   readonly targets: readonly TargetSpec[];
   readonly effect: EffectSpec | null;
   readonly resolve: SpellResolver | null;

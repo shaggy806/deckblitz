@@ -16583,6 +16583,7 @@ import _poolMassacreGirlMostWanted from "./pool/massacre-girl-most-wanted.js";
 import _poolMassacreGirl from "./pool/massacre-girl.js";
 import _poolMassacreWurm from "./pool/massacre-wurm.js";
 import _poolMassacre from "./pool/massacre.js";
+import _poolMassimoTheMagician from "./pool/massimo-the-magician.js";
 import _poolMassiveMight from "./pool/massive-might.js";
 import _poolMassiveRaid from "./pool/massive-raid.js";
 import _poolMasterApothecary from "./pool/master-apothecary.js";
@@ -27571,6 +27572,7 @@ import _poolTheLordOfPain from "./pool/the-lord-of-pain.js";
 import _poolTheLordOfTheEagles from "./pool/the-lord-of-the-eagles.js";
 import _poolTheLostAndTheDamned from "./pool/the-lost-and-the-damned.js";
 import _poolTheLunarWhale from "./pool/the-lunar-whale.js";
+import _poolTheMadcapJester from "./pool/the-madcap-jester.js";
 import _poolTheMagicMirror from "./pool/the-magic-mirror.js";
 import _poolTheManaRig from "./pool/the-mana-rig.js";
 import _poolTheMasterFormedAnew from "./pool/the-master-formed-anew.js";
@@ -49068,6 +49070,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMassacreGirl,
   _poolMassacreWurm,
   _poolMassacre,
+  _poolMassimoTheMagician,
   _poolMassiveMight,
   _poolMassiveRaid,
   _poolMasterApothecary,
@@ -60056,6 +60059,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheLordOfTheEagles,
   _poolTheLostAndTheDamned,
   _poolTheLunarWhale,
+  _poolTheMadcapJester,
   _poolTheMagicMirror,
   _poolTheManaRig,
   _poolTheMasterFormedAnew,
@@ -81566,6 +81570,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/massacre-girl": _poolMassacreGirl,
   "pool/massacre-wurm": _poolMassacreWurm,
   "pool/massacre": _poolMassacre,
+  "pool/massimo-the-magician": _poolMassimoTheMagician,
   "pool/massive-might": _poolMassiveMight,
   "pool/massive-raid": _poolMassiveRaid,
   "pool/master-apothecary": _poolMasterApothecary,
@@ -92554,6 +92559,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-lord-of-the-eagles": _poolTheLordOfTheEagles,
   "pool/the-lost-and-the-damned": _poolTheLostAndTheDamned,
   "pool/the-lunar-whale": _poolTheLunarWhale,
+  "pool/the-madcap-jester": _poolTheMadcapJester,
   "pool/the-magic-mirror": _poolTheMagicMirror,
   "pool/the-mana-rig": _poolTheManaRig,
   "pool/the-master-formed-anew": _poolTheMasterFormedAnew,
