@@ -9231,6 +9231,7 @@ export class Game {
     // As a resolution does: what it does from here on is "this way", and
     // what it puts onto the battlefield is its source's doing.
     this.state.resolutionSince = this.state.eventSeq;
+    this.state.resolvingController = player;
     delete this.state.namedOffSlot;
     const debugSource = opts.source === undefined ? undefined : this.state.objects[opts.source];
     if (debugSource !== undefined) {
@@ -32359,6 +32360,10 @@ export class Game {
       // becomes-target trigger (Black Bolt, Inhuman King: "destroy target
       // nonland permanent that player controls").
       player = event.by;
+    } else if (event.type === "permanent-destroyed" && event.by !== undefined) {
+      // Whoever controls the spell or ability that destroyed it — "that
+      // opponent" of Karmic Justice.
+      player = event.by;
     } else if (event.type === "cards-discarded" && event.cause !== undefined) {
       // Whoever controls the spell or ability that caused the discard (Psychic
       // Purge: "… causes you to discard this card, that player loses 5 life").
@@ -33414,6 +33419,12 @@ export class Game {
             event.reason === "umbra armor") &&
           this.matchesWho(spec.who, event.object, self, true) &&
           !(spec.otherOnly === true && event.object === self.id) &&
+          // "A spell or ability an opponent controls destroys": an effect's,
+          // by an opponent of this ability's controller as it last was.
+          (spec.byOpponent !== true ||
+            (event.reason === "destroyed" &&
+              event.by !== undefined &&
+              event.by !== (self.zone === "battlefield" ? self.controller : (self.lastKnown?.controller ?? self.controller)))) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
       case "tapped-for-mana":
@@ -50327,10 +50338,13 @@ controlledBy,
       return;
     }
     if (!this.moveObject(id, "graveyard")) return;
+    // Whose spell or ability did it: the one resolving (rule 608.2).
+    const by = this.state.resolvingController;
     this.emit({
       type: "permanent-destroyed",
       object: id,
       reason: "destroyed",
+      ...(by !== undefined ? { by } : {}),
     });
   }
 

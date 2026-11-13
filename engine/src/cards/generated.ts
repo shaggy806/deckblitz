@@ -14442,6 +14442,7 @@ import _poolKarlovOfTheGhostCouncil from "./pool/karlov-of-the-ghost-council.js"
 import _poolKarlovWatchdog from "./pool/karlov-watchdog.js";
 import _poolKarma from "./pool/karma.js";
 import _poolKarmicGuide from "./pool/karmic-guide.js";
+import _poolKarmicJustice from "./pool/karmic-justice.js";
 import _poolKarnArgentDefender from "./pool/karn-argent-defender.js";
 import _poolKarnGildedGuardian from "./pool/karn-gilded-guardian.js";
 import _poolKarnLegacyReforged from "./pool/karn-legacy-reforged.js";
@@ -47131,6 +47132,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKarlovWatchdog,
   _poolKarma,
   _poolKarmicGuide,
+  _poolKarmicJustice,
   _poolKarnArgentDefender,
   _poolKarnGildedGuardian,
   _poolKarnLegacyReforged,
@@ -79833,6 +79835,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/karlov-watchdog": _poolKarlovWatchdog,
   "pool/karma": _poolKarma,
   "pool/karmic-guide": _poolKarmicGuide,
+  "pool/karmic-justice": _poolKarmicJustice,
   "pool/karn-argent-defender": _poolKarnArgentDefender,
   "pool/karn-gilded-guardian": _poolKarnGildedGuardian,
   "pool/karn-legacy-reforged": _poolKarnLegacyReforged,

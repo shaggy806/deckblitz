@@ -1414,6 +1414,11 @@ export type GameEvent =
       readonly type: "permanent-destroyed";
       readonly object: ObjectId;
       readonly reason: string;
+      /** A "destroy" effect's (rule 701.8): who controls the spell or ability
+       * that destroyed it — "a spell or ability an opponent controls destroys
+       * …" (Karmic Justice). Absent for the state-based actions' and for
+       * anything else put into a graveyard. */
+      readonly by?: PlayerId;
     })
   | (Base & {
       /** Despite the name, also a card returned from a graveyard or exile,

@@ -7,7 +7,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { printedCardName } from "../state.js";
-import { B, activate, cast, destroy, lands, nextTurn, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, activate, cast, destroy, lands, nextTurn, pickModes, pickTargets, ref, settle, spawn, table, toHand, zone } from "./harness.js";
 
 const named = (game: Game, id: ObjectId): string => printedCardName(game.state.objects[id]);
 const tokensOf = (game: Game, name: string): ObjectId[] =>
@@ -109,5 +109,49 @@ describe("Firion, Wild Rose Warrior: a token copy of an entering Equipment that 
     expect(game.characteristics(firion).keywords).not.toContain("haste");
     expect(game.state.objects[token].isToken).toBe(true);
     expect(tokensOf(game, "Bonesplitter")).toHaveLength(1);
+  });
+});
+
+describe("Karmic Justice: an opponent's spell or ability destroys your noncreature permanent", () => {
+  const setup = () => {
+    const t = table();
+    const { game, a } = t;
+    const justice = spawn(game, "Karmic Justice");
+    const ring = spawn(game, "Sol Ring");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    pickTargets(a, theirs);
+    pickModes(a, 0);
+    return { game, a, justice, ring, theirs };
+  };
+
+  it("lets you destroy a permanent that opponent controls", () => {
+    const { game, ring, theirs } = setup();
+    destroy(game, ring, B);
+    expect(zone(game, ring)).toBe("graveyard");
+    expect(zone(game, theirs)).toBe("graveyard");
+  });
+
+  it("triggers when it is the one destroyed", () => {
+    const { game, justice, theirs } = setup();
+    destroy(game, justice, B);
+    expect(zone(game, justice)).toBe("graveyard");
+    expect(zone(game, theirs)).toBe("graveyard");
+  });
+
+  it("is a may: declined, nothing is destroyed", () => {
+    const { game, a, ring, theirs } = setup();
+    pickModes(a);
+    destroy(game, ring, B);
+    expect(zone(game, theirs)).toBe("battlefield");
+  });
+
+  it("not for a creature, nor for your own effect", () => {
+    const { game, ring, theirs } = setup();
+    const mine = spawn(game, "Grizzly Bears");
+    destroy(game, mine, B);
+    expect(zone(game, theirs)).toBe("battlefield");
+    destroy(game, ring, A);
+    expect(zone(game, ring)).toBe("graveyard");
+    expect(zone(game, theirs)).toBe("battlefield");
   });
 });

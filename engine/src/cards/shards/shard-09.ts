@@ -472,6 +472,7 @@ import _poolKaldraCompleat from "../pool/kaldra-compleat.js";
 import _poolKamahlsSummons from "../pool/kamahls-summons.js";
 import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKarlovWatchdog from "../pool/karlov-watchdog.js";
+import _poolKarmicJustice from "../pool/karmic-justice.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKeeperOfTheBeasts from "../pool/keeper-of-the-beasts.js";
@@ -1519,6 +1520,7 @@ const shard: CardShard = {
     _poolKamahlsSummons,
     _poolKamisFlare,
     _poolKarlovWatchdog,
+    _poolKarmicJustice,
     _poolKayasWrath,
     _poolKeeneyeAven,
     _poolKeeperOfTheBeasts,

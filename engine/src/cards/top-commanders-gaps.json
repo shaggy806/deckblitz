@@ -2396,7 +2396,8 @@
   "replacement:next-enter-as-copy",
   "replacement:others-enter-as-copy",
   "effect:token-copy-of-spell-target",
-  "bug:copy-exception-static-self-reference"
+  "bug:copy-exception-static-self-reference",
+  "trigger:destroyed-by-opponent-trigger"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

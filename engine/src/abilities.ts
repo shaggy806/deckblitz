@@ -1698,6 +1698,12 @@ export type TriggerKind =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
+      /** "Whenever **a spell or ability an opponent controls destroys** …"
+       * (Karmic Justice): only an effect's destruction (never the damage
+       * checks', 704.5g-h), by a spell or ability an opponent of this
+       * ability's controller controls. "That opponent" is then
+       * `"trigger-player"`. */
+      readonly byOpponent?: true;
     }
   | {
       /** A permanent turned over to its other face (rule 712.10 — ROADMAP
