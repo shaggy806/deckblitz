@@ -8095,3 +8095,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Sower of Discord; choose Bob, then Carol. Then cast Lightning Bolt at Bob.
 - **Expect:** The second question reads "Choose a second player" and doesn't offer Bob. Bob takes 3 and Carol loses 3 life.
 - **Not a bug:** You may choose yourself as either player.
+
+### Victory Chimes: choose who adds the mana
+- **Do:** Click Victory Chimes, and choose the entry that says Bob adds it.
+- **Expect:** The menu has one entry per player, each ending "(… adds it)". Victory Chimes taps; the History log, with Detailed ticked, reads "Bob adds 1{C}", and Victory Chimes untaps in Bob's untap step.
+- **Not a bug:** With nothing else to do, your turn passes at once, so Bob's {C} empties before you can see it.

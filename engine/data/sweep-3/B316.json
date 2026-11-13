@@ -1,0 +1,29 @@
+{
+ "batch": "B316",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 3596–3964 (2026-11-12): The Masamune and the next ten of the cards still missing from top-commander-cards.txt (B294/B315 records), built best rank first, no agents. Features: granted trigger doublers and `selfOrEmblems` (emblems' triggers reach a doubler that names them — The Masamune), `add-mana`'s `playerOfChoice` with the activation's `manaFor` (Victory Chimes; the client labels each player's menu entry), `may`'s `xIs` (Transmute Artifact), the `lose-counters` prohibition (Fear of Sleep Paralysis), `be-caused`'s `by: \"own-triggered\"` with an exile act (The Master, Multiplied), `add-mana`'s `notGeneric` (Jegantha, the Wellspring), the `entry-triggers-own-ability` event (Aboleth Spawn), `return-from-graveyard`'s `from: \"command-zone\"` (Tevesh Szat, Doom of Fools). No majors. Metalworker and Mystic Reflection not reached (small).",
+ "authored": [
+  { "name": "The Masamune", "files": ["engine/src/cards/pool/the-masamune.ts"], "tested": true },
+  { "name": "Victory Chimes", "files": ["engine/src/cards/pool/victory-chimes.ts"], "tested": true },
+  { "name": "Transmute Artifact", "files": ["engine/src/cards/pool/transmute-artifact.ts"], "tested": true },
+  { "name": "Fear of Sleep Paralysis", "files": ["engine/src/cards/pool/fear-of-sleep-paralysis.ts"], "tested": true },
+  { "name": "The Master, Multiplied", "files": ["engine/src/cards/pool/the-master-multiplied.ts"], "tested": true },
+  { "name": "Jegantha, the Wellspring", "files": ["engine/src/cards/pool/jegantha-the-wellspring.ts"], "tested": true },
+  { "name": "Aboleth Spawn", "files": ["engine/src/cards/pool/aboleth-spawn.ts"], "tested": true },
+  { "name": "Tevesh Szat, Doom of Fools", "files": ["engine/src/cards/pool/tevesh-szat-doom-of-fools.ts"], "tested": true }
+ ],
+ "blocked": [
+  {
+   "name": "Metalworker",
+   "needs": ["effect:reveal-from-hand-in-mana-ability"],
+   "size": "small",
+   "why": "Not reached. Researched: a mana ability's choices are made as it's activated — offered as variants (`manaColors`, `manaFor`) — but which artifact cards to reveal is a hidden-information pick a variant per subset can't carry. The precedent to follow: a mana ability whose cost sacrifices several pauses on the `sacrifice` decision (`pendingCostSacrifice`) and resolves in `finishCostSacrifice`; a reveal would pause on a choose-from-zone of the hand's artifact cards (any number) the same way, then add {C}{C} each. The auto-payer leaves it out (its output is a choice)."
+  },
+  {
+   "name": "Mystic Reflection",
+   "needs": ["replacement:next-enter-as-copy"],
+   "size": "small",
+   "why": "Not reached. Needs a resolved one-shot replacement (an `ActiveReplacement`, `next` shield, this turn) over the next enter batch of creatures or planeswalkers: each enters as a copy of the chosen creature's copiable values as it last existed (rule 707.9, its rulings), applied before the entering permanent's own enters-as-copy and other replacements (control, then copy, then the rest). Foretell is built."
+  }
+ ]
+}

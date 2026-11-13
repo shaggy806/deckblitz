@@ -666,6 +666,17 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 316 (2026-11-12, `author-top-cards` on the top 5000's last cards, ranks 3596–3964)** —
+  8 authored, each on a small feature built for it: The Masamune (granted trigger doublers, and
+  emblems' triggers in them), Victory Chimes (a player of your choice adds the mana, one menu entry
+  per player), Transmute Artifact (a `may` paying a fixed {X}), Fear of Sleep Paralysis (counters
+  that can't be removed), The Master, Multiplied (your own triggers can't sacrifice or exile your
+  creature tokens), Jegantha, the Wellspring (mana that can't pay generic costs), Aboleth Spawn (an
+  entering creature's own triggers, as an event), Tevesh Szat, Doom of Fools (every commander from
+  the command zone onto the battlefield). Blocked (`B316.json`), small and not reached, the
+  research in their records: Metalworker (a reveal choice inside a mana ability), Mystic
+  Reflection (the next creatures entering this turn enter as copies). The other ~46 keep their B294
+  records, Metalworker first.
 - **Batch 315 (2026-11-12, `author-top-cards` on the top 5000's last cards, ranks 3479–3698)** —
   8 authored, each on a small feature built for it: Spider-Punk (abilities can't be countered),
   Jeweled Amulet (noting the type of mana spent), Thryx, the Sudden Storm (a cost reduction's mana

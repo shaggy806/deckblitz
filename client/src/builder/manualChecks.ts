@@ -12153,4 +12153,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Victory Chimes: choose who adds the mana',
+    board({
+      you: { bf: ['Victory Chimes'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

@@ -73,12 +73,7 @@ section keeps only what to do next.
   Rottenmouth Viper, and Drach'Nyen and Phantom Carriage on the way), **B313** the next ten (ranks
   3173–3469, Autumn's Veil to Selective Obliteration; all small, no majors), **B315** eight of the
   next ten (ranks 3479–3698, Spider-Punk to Final Act; Nicol Bolas, Dragon-God's +1 left major by
-  the user). **Next:** The Masamune (rank 3596, small, not reached — `B315.json` has the research:
-  granted statics and emblems in the trigger doublers), then Victory Chimes, Transmute Artifact,
-  Fear of Sleep Paralysis, The Master, Multiplied, Jegantha, Metalworker, Aboleth Spawn, Tevesh
-  Szat, Mystic Reflection (`npm run -s cards:goal -w engine` in rank order; each keeps its B294
-  record, unsized: size it against today's engine first — Strong Back's turned out to need
-  nothing). The tail past rank 10,000 waits. **After that:**
+  the user), **B316** eight of the next ten (ranks 3596–3964, The Masamune to Tevesh Szat; no majors). **Next:** Metalworker (rank 3865) and Mystic Reflection (3964), both small and not reached — `B316.json` has the research for each — then Vesuvan Duplimancy, Firion, Wild Rose Warrior, Karmic Justice, Chaos Dragon, Hushbringer, Tezzeret, Betrayer of Flesh (`npm run -s cards:goal -w engine` in rank order; each keeps its B294 record, unsized: size it against today's engine first). The tail past rank 10,000 waits. **After that:**
   B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
   `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
   Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,
