@@ -14392,12 +14392,15 @@ function applyClash(spec: Extract<EffectSpec, { kind: "clash" }>, ctx: Resolutio
       applyClash({ ...spec, opponent: opponents[0] }, ctx);
       return;
     }
+    // Each mode is that opponent's (`about-player`), its text naming the
+    // seat as it is, so a client puts the player's name there (the
+    // choose-modes offer's `modePlayers`) and they can be picked on the board.
     ctx.chooseModes(
       1,
       1,
       opponents.map((player) => ({
-        text: `Clash with ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
-        effect: { ...spec, opponent: player },
+        text: `Clash with ${player}`,
+        effect: { kind: "about-player", player, effect: { ...spec, opponent: player } },
       })),
     );
     return;

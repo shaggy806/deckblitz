@@ -17,6 +17,11 @@ export interface LocalStart {
   readonly seatIndex: number
   /** The bots' decks, in seat order without yours. */
   readonly bots: readonly WireDeck[]
+  /** Your name at the table, if you gave one: the game moved here keeps it,
+   * where it had been the seat's own label ("Alice") on the board. */
+  readonly name: string | null
+  /** The bots' names there, in the same order as `bots`, so they keep them. */
+  readonly botNames: readonly (string | null)[]
   readonly settings: RoomSettings | null
   readonly botSpeed: BotSpeed
 }
@@ -63,6 +68,8 @@ export function localStart(lobby: LobbyState): LocalStartVerdict {
       deck: decks[seatIndex],
       seatIndex,
       bots: decks.filter((_, i) => i !== seatIndex),
+      name: lobby.seats[seatIndex].displayName,
+      botNames: others.map((s) => s.displayName),
       settings: lobby.settings,
       botSpeed: lobby.botSpeed,
     },

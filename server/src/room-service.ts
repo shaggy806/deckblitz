@@ -564,7 +564,7 @@ export class RoomService {
         const room = this.requireRoom(message.roomId);
         try {
           requireHost(room, connection, "add bots");
-          room.addBot(message.seat, message.deck);
+          room.addBot(message.seat, message.deck, message.displayName);
         } catch (err) {
           connection.send({
             type: "error",

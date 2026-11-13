@@ -246,6 +246,10 @@ export type ClientMessage =
       readonly roomId: string;
       readonly seat: PlayerId;
       readonly deck?: WireDeck;
+      /** The bot's name: a waiting room's game moved into this tab keeps the
+       * names its bots had there (`client/src/lobby/localStart.ts`). Omitted,
+       * one is chosen to fit its deck. */
+      readonly displayName?: string;
     }
   | {
       /** Changes which deck an already-bot-filled seat is bringing — only
