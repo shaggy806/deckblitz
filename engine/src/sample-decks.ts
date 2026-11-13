@@ -954,7 +954,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
     ],
     substitutions: [
       sub("Havengul Lich", "Bloodgift Demon", "Five-mana value creature."),
-      sub("Scourge of Nel Toth", "Rakshasa Debaser", "Six-mana black finisher that returns creatures from graveyards to the battlefield."),
     ],
   }),
   precon({

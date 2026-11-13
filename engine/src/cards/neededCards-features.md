@@ -368,8 +368,10 @@ the source's spell (702.51a), each as it last existed. Proving: Everything
 Comes to Dust, Cryptic Gateway. Test: `shares-type-with-set.test.ts`.
 ### Sacrifice costs of a chosen count — built 2026-11-13
 
-By EDHREC rank: Lonis, Cryptozoologist (5342), Baba Lysaga, Night Witch
-(9676), Scrap Welder (9878). Two needed no engine code: Lonis's "Sacrifice X
+By EDHREC rank: Lonis, Cryptozoologist (5342), Scourge of Nel Toth (9256),
+Baba Lysaga, Night Witch (9676), Scrap Welder (9878). Scourge's "by paying
+{B}{B} and sacrificing two creatures" is `PlayTerms.sacrificeCount`, chosen
+as paid through `spellSacrificeParts`. Two needed no engine code: Lonis's "Sacrifice X
 Clues" (B296's one-Clue-left was Lonis's own investigate, off the creature it
 put onto the battlefield) and Scrap Welder's "an artifact with mana value X"
 (Sidisi's filter reading X). "Up to three" is `ActivatedAbility.maxX` on a
@@ -377,7 +379,8 @@ put onto the battlefield) and Scrap Welder's "an artifact with mana value X"
 `{ cardTypesAmong: ObjectSetRef }` amount. Each line is the only one of its
 kind, so no scaffolder templates. A spell's additional cost reading X
 (Nahiri's Sacrifice) is still missing. Keys: cost:sacrifice-x-of-token-stack,
-cost:sacrifice-mana-value-x (activated abilities), cost:sacrifice-up-to-n.
+cost:sacrifice-mana-value-x (activated abilities), cost:sacrifice-up-to-n,
+cost:graveyard-cast-sacrifice-count.
 
 ### Mana whose rider copies the ability it paid for — built 2026-11-13
 

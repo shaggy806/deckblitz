@@ -54,7 +54,7 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  *   permission (Bolas's Citadel, Raffine's Guidance). Another permission reaching
  *   the card may still let it be cast for its mana cost (601.3).
  * - `byDiscarding`, `byPayingEnergy`: `cast-now`'s alone.
- * - `alsoPaying`, `payLife`, `sacrifice`, `exileOthers` + `exileFilter`, `discard`,
+ * - `alsoPaying`, `payLife`, `sacrifice` (+ `sacrificeCount`), `exileOthers` + `exileFilter`, `discard`,
  *   `costIncreasePerOther`, `do` (an action, the `cost-acts.ts` table: "by
  *   removing a counter from a creature you control"): additional costs (601.2f),
  *   paid in full or not offered (601.2h).
@@ -117,6 +117,12 @@ export interface PlayTerms {
   readonly alsoPaying?: string;
   readonly payLife?: number;
   readonly sacrifice?: CardFilter;
+  /** `sacrifice` takes this many — Scourge of Nel Toth's "by paying {B}{B}
+   * and **sacrificing two creatures**". Which ones is chosen as the cost is
+   * paid (601.2h), once the spell is on the stack and its mana paid, as
+   * `additionalCost.sacrificeCount`'s are; without it, one, named on the
+   * cast. */
+  readonly sacrificeCount?: number;
   readonly exileOthers?: number;
   readonly exileFilter?: CardFilter;
   readonly discard?: number;
@@ -290,6 +296,7 @@ const PLAY_GRANT_KEYS = [
   "alsoPaying",
   "payLife",
   "sacrifice",
+  "sacrificeCount",
   "exileOthers",
   "exileFilter",
   "discard",

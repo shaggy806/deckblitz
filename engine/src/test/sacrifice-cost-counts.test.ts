@@ -3,7 +3,8 @@
  * one token stack or apart (Lonis, Cryptozoologist); "Sacrifice an
  * artifact with mana value X" (Scrap Welder); "Sacrifice up to three
  * permanents", the card types among them read off the paid set (Baba
- * Lysaga, Night Witch — `maxX`, `{ cardTypesAmong }`).
+ * Lysaga, Night Witch — `maxX`, `{ cardTypesAmong }`); a graveyard cast's
+ * "sacrificing two creatures" (Scourge of Nel Toth — `PlayTerms.sacrificeCount`).
  */
 import { describe, expect, it } from "vitest";
 
@@ -14,8 +15,10 @@ import {
   B,
   C,
   activate,
+  cast,
   hand,
   keywords,
+  lands,
   life,
   named,
   pickFromZone,
@@ -189,5 +192,56 @@ describe("Baba Lysaga, Night Witch", () => {
     expect(zone(game, bears)).toBe("graveyard");
     expect(life(game, B)).toBe(20);
     expect(hand(game).length).toBe(cards);
+  });
+});
+
+describe("Scourge of Nel Toth", () => {
+  type CastOffer = Extract<LegalAction, { kind: "cast-spell" }>;
+  const graveyardCast = (game: Game, card: ObjectId): CastOffer | undefined =>
+    game
+      .legalActions(A)
+      .find((a): a is CastOffer => a.kind === "cast-spell" && a.card === card && a.via === "graveyard-permission");
+
+  it("is cast from the graveyard for {B}{B} and two creatures, chosen as the cost is paid", () => {
+    const { game, a } = table();
+    const scourge = toGraveyard(game, "Scourge of Nel Toth");
+    lands(game, "Swamp", 2);
+    const bears = spawn(game, "Grizzly Bears");
+    const elves = spawn(game, "Llanowar Elves");
+    const ogre = spawn(game, "Gray Ogre");
+    expect(graveyardCast(game, scourge)).toBeDefined();
+    a.chooseSacrificesFn = () => [bears, ogre];
+    cast(game, scourge, { via: "graveyard-permission" });
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(zone(game, ogre)).toBe("graveyard");
+    expect(zone(game, elves)).toBe("battlefield");
+    expect(zone(game, scourge)).toBe("battlefield");
+  });
+
+  it("isn't offered with one creature to sacrifice, nor without {B}{B}", () => {
+    const { game } = table();
+    const scourge = toGraveyard(game, "Scourge of Nel Toth");
+    lands(game, "Swamp", 2);
+    spawn(game, "Grizzly Bears");
+    expect(graveyardCast(game, scourge)).toBeUndefined();
+    expect(() => cast(game, scourge, { via: "graveyard-permission" })).toThrow(/sacrifice/i);
+    const { game: other } = table();
+    const again = toGraveyard(other, "Scourge of Nel Toth");
+    lands(other, "Swamp", 1);
+    spawn(other, "Grizzly Bears");
+    spawn(other, "Llanowar Elves");
+    expect(graveyardCast(other, again)).toBeUndefined();
+  });
+
+  it("takes both without asking when there are exactly two", () => {
+    const { game } = table();
+    const scourge = toGraveyard(game, "Scourge of Nel Toth");
+    lands(game, "Swamp", 2);
+    const bears = spawn(game, "Grizzly Bears");
+    const elves = spawn(game, "Llanowar Elves");
+    cast(game, scourge, { via: "graveyard-permission", settle: false });
+    expect(game.state.awaiting?.kind).not.toBe("sacrifice");
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(zone(game, elves)).toBe("graveyard");
   });
 });

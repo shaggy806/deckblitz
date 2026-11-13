@@ -18677,7 +18677,10 @@ export class Game {
       return emerge === null ? undefined : Game.emergeFilter(emerge);
     }
     if (!isPermissionCast(via)) return undefined;
-    return this.castPermission(player, card, face, via, grant)?.sacrifice;
+    const permission = this.castPermission(player, card, face, via, grant);
+    // Several ("sacrificing two creatures") are chosen as they're paid, not
+    // named on the cast: `spellSacrificeParts`.
+    return permission?.sacrificeCount === undefined ? permission?.sacrifice : undefined;
   }
 
   /** What emerge sacrifices (rule 702.119): a creature, or a permanent of
@@ -19774,7 +19777,7 @@ export class Game {
     // A creature tapped to convoke is no longer untapped to tap for mana. A
     // sacrifice of several needs what it takes still there once the mana is
     // paid — what could pay it is tried last (`costSacrificeRemaining`).
-    const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked, altCost, costOption);
+    const sacrificeParts = this.spellSacrificeParts(player, face, cardId, def, via, graveyardGrant, xValue, kicked, altCost, costOption);
     const sacrificeCandidates =
       sacrificeParts === null ? undefined : this.costSacrificeCandidates(player, sacrificeParts, undefined);
     // So is an artifact or creature tapped to waterbend (rule 701.67a), and
@@ -21620,7 +21623,7 @@ export class Game {
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": chosen
     // once the spell is on the stack, below.
     // A bargain's artifact, enchantment or token too (rule 702.166a).
-    const severalSacrificed = this.spellSacrificeParts(cardId, def, via, graveyardGrant, chosenX, kicked, altCost, costOption);
+    const severalSacrificed = this.spellSacrificeParts(player, face, cardId, def, via, graveyardGrant, chosenX, kicked, altCost, costOption);
 
     if (def.castModal !== null && modes === undefined) {
       throw new Error(`${def.name} is a modal spell — choose modes to cast it`);
@@ -23124,9 +23127,13 @@ export class Game {
    * — "sacrifice X creatures" (Eliminate the Competition), at `x` — and,
    * cast with flashback, that flashback's (Dread Return's "Flashback—
    * Sacrifice three creatures"), and a bargained spell's artifact,
-   * enchantment or token (rule 702.166a). `null` for none.
+   * enchantment or token (rule 702.166a); cast under a permission that
+   * sacrifices several, that permission's (Scourge of Nel Toth's "sacrificing
+   * two creatures" — `PlayTerms.sacrificeCount`). `null` for none.
    */
   private spellSacrificeParts(
+    player: PlayerId,
+    face: number,
     cardId: ObjectId,
     def: CardDefinition,
     via: CastVia | undefined,
@@ -23159,6 +23166,12 @@ export class Game {
       // "Flashback—{R}{R}, Sacrifice X Mountains" (Firecat Blitz).
       if (flashback !== undefined) {
         parts.push({ filter: flashback.filter, count: flashback.count === "x" ? Math.max(0, Math.floor(x)) : flashback.count });
+      }
+    }
+    if (isPermissionCast(via)) {
+      const permission = this.castPermission(player, cardId, face, via, grant);
+      if (permission?.sacrifice !== undefined && permission.sacrificeCount !== undefined) {
+        parts.push({ filter: permission.sacrifice, count: permission.sacrificeCount });
       }
     }
     return parts.length === 0 ? null : parts;
