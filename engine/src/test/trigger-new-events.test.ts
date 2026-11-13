@@ -32,6 +32,7 @@ import {
   tokensNamed,
   zone,
 } from "./harness.js";
+import { defineCard } from "../cards/define.js";
 import { investigate } from "../cards/helpers.js";
 
 describe("mills, per card (Glowing One, Infesting Radroach)", () => {
@@ -339,6 +340,51 @@ describe("phases out (The War Doctor, Teferi's Imp)", () => {
     // It phased in at Alice's untap step and drew; her draw step drew one too.
     expect(zone(game, imp)).toBe("battlefield");
     expect(hand(game, A).length).toBeGreaterThanOrEqual(before + 2);
+  });
+});
+
+describe("scrying cards to the bottom (The Temporal Anchor's trigger)", () => {
+  // The Temporal Anchor itself waits on exiling from the bottom of a library
+  // (`zone:exile-from-library-bottom`): its trigger's event is proved on a
+  // card of the test's own.
+  const watcher = defineCard({
+    name: "Test Scry Bottom Watcher",
+    manaCost: "{1}",
+    colors: [],
+    types: ["artifact"],
+    text: "Whenever you choose to put one or more cards on the bottom of your library while scrying, you gain that much life.",
+    triggered: [
+      {
+        trigger: { on: "event", event: "scry-bottoms", who: "you" },
+        targets: [],
+        effect: { kind: "gain-life", amount: { triggerValue: true } },
+        resolve: null,
+        text: "Whenever you choose to put one or more cards on the bottom of your library while scrying, you gain that much life.",
+      },
+    ],
+  });
+
+  it("triggers once per scry that bottomed any, that many", () => {
+    const { game, a } = table({ players: 2, ownRegistry: true });
+    game.registry.register(watcher);
+    spawn(game, "Test Scry Bottom Watcher");
+    a.chooseScryFn = (_view, cards) => cards.slice(0, 2);
+    game.debugApplyEffect(A, { kind: "scry", amount: 3 });
+    settle(game);
+    expect(life(game, A)).toBe(22);
+  });
+
+  it("not a scry keeping them all on top, a surveil, or an opponent's scry", () => {
+    const { game, a, b } = table({ players: 2, ownRegistry: true });
+    game.registry.register(watcher);
+    spawn(game, "Test Scry Bottom Watcher");
+    game.debugApplyEffect(A, { kind: "scry", amount: 2 });
+    a.chooseScryFn = (_view, cards) => cards;
+    game.debugApplyEffect(A, { kind: "surveil", amount: 2 });
+    b.chooseScryFn = (_view, cards) => cards;
+    game.debugApplyEffect(B, { kind: "scry", amount: 2 });
+    settle(game);
+    expect(life(game, A)).toBe(20);
   });
 });
 

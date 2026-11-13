@@ -102,6 +102,15 @@ export const TRIGGER_EVENTS = {
   /** "Whenever you surveil" (rule 701.25) — once per surveil, however many
    * cards; one of 0 isn't one. The value is how many were looked at. */
   surveils: row({ type: "scried", when: (e) => e.mode === "surveil", player: (e) => e.player, amount: (e) => e.looked }),
+  /** "Whenever you choose to put one or more cards on the bottom of your
+   * library while scrying" (rule 701.22a — The Temporal Anchor): a scry
+   * that bottomed any; the value is how many. */
+  "scry-bottoms": row({
+    type: "scried",
+    when: (e) => e.mode === "scry" && e.movedAway > 0,
+    player: (e) => e.player,
+    amount: (e) => e.movedAway,
+  }),
   /** "Whenever you search your library" (rule 701.23): their own library
    * only (the rulings). */
   "searches-library": row({ type: "library-searched", when: (e) => e.owner === e.player, player: (e) => e.player }),

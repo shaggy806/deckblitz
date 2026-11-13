@@ -18925,6 +18925,12 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you pay life")).toEqual([{ on: "event", event: "pays-life", who: "you" }]);
   });
 
+  it("reads a scry's cards put on the bottom (The Temporal Anchor)", () => {
+    expect(
+      parseTrigger("Whenever you choose to put one or more cards on the bottom of your library while scrying"),
+    ).toEqual([{ on: "event", event: "scry-bottoms", who: "you" }]);
+  });
+
   it("reads phasing out and in (Teferi's Imp)", () => {
     expect(parseTrigger("Whenever this creature phases out")).toEqual([{ on: "event", event: "phases-out", who: "self" }]);
     expect(parseTrigger("Whenever this creature phases in")).toEqual([{ on: "event", event: "phases-in", who: "self" }]);

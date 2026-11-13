@@ -529,6 +529,10 @@ vocabulary, `test/trigger-new-events.test.ts`.
   permanents their phase-out triggers, read as they last existed), and
   `withPhaseOutBatch` making one instruction's phasings one event. The War
   Doctor, Teferi's Imp, Ertai's Familiar.
+- `trigger:scry-bottom-count` — the `scry-bottoms` row over `scried`
+  (`movedAway`), proved on a test card: The Temporal Anchor still waits on
+  `zone:exile-from-library-bottom` (exile-from-library has no "from the
+  bottom").
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 

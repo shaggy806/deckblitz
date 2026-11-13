@@ -2659,6 +2659,10 @@ export function parseTrigger(clause) {
   if (/^Whenever one or more other permanents phase out$/.test(c)) {
     return [{ on: "event", event: "phases-out", batched: true, filter: { isSource: false } }];
   }
+  // Rule 701.22a (The Temporal Anchor): a scry that bottomed any.
+  if (/^Whenever you choose to put one or more cards on the bottom of your library while scrying$/.test(c)) {
+    return [{ on: "event", event: "scry-bottoms", who: "you" }];
+  }
   // Rule 714.2e, as it triggers (Historian's Boon).
   if (/^Whenever the final chapter ability of a Saga you control triggers$/.test(c)) {
     return [{ on: "event", event: "final-chapter-triggers", who: "you-control" }];

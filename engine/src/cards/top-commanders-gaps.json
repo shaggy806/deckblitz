@@ -2454,7 +2454,8 @@
   "trigger:mana-ability-resolves-amount-produced",
   "trigger:untap-trigger",
   "trigger:saga-final-chapter-triggers",
-  "trigger:phases-out"
+  "trigger:phases-out",
+  "trigger:scry-bottom-count"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
