@@ -314,6 +314,39 @@ export type ShareReference =
   | { readonly permanents: CardFilter }
   | { readonly graveyard: CardFilter; readonly itsController?: true };
 
+/**
+ * What a `shares…TypeWith` clause compares with. A bare `ShareReference`
+ * keeps its reference objects in whatever their types — "target creature and
+ * each other creature that shares a creature type with it" (Killer), the
+ * Crowns' host. `{ typesOf }` is the plain words, by types alone: a reference
+ * object is in only if it has a type of that kind in common with one of them,
+ * itself included, so a creature with no creature type shares none, even
+ * with itself (rule 205.3m) — Everything Comes to Dust's "except those that
+ * share a creature type with a creature that convoked this spell", whose
+ * convokers are among what it exiles. `each: true` asks for a type in common
+ * with **each** of them rather than any one — Cryptic Gateway's "a creature
+ * card … that shares a creature type with each creature tapped this way"
+ * (its ruling: an Elf Warrior for an Elf Wizard and a Human Warrior). With no
+ * reference objects, `each` holds (nothing to fail) and the plain reading
+ * doesn't (nothing to share with).
+ */
+export type TypeShareReference =
+  | ShareReference
+  | { readonly typesOf: ShareReference; readonly each?: true };
+
+/** `reference` as its objects' reference and how it reads them — see
+ * `TypeShareReference`. */
+export function typeShareParts(reference: TypeShareReference): {
+  readonly reference: ShareReference;
+  readonly strict: boolean;
+  readonly each: boolean;
+} {
+  if (typeof reference === "object" && reference !== null && "typesOf" in reference) {
+    return { reference: reference.typesOf, strict: true, each: reference.each === true };
+  }
+  return { reference, strict: false, each: false };
+}
+
 /** One bound `shares…TypeWith` clause: the reference objects themselves
  * (each always matches — "target creature and each other creature that
  * shares a creature type with it") and the types they had of that `kind`,
@@ -1321,16 +1354,18 @@ export interface CardFilter {
    * the countered spell in target slot 0). The reference is read as it last
    * existed if it has left since (rule 608.2h). Bound to `sharesTypeWith`
    * as the effect applies (`bindDynamicCompares`); unbound, anywhere
-   * nothing could answer it, it matches nothing.
+   * nothing could answer it, it matches nothing. `{ typesOf }` reads the
+   * reference by its types alone, and `each` asks for each of them (see
+   * `TypeShareReference`), for all four clauses.
    */
-  readonly sharesCardTypeWith?: ShareReference;
+  readonly sharesCardTypeWith?: TypeShareReference;
   /**
    * As `sharesCardTypeWith`, but only the **permanent types** count (rule
    * 110.4: artifact, battle, creature, enchantment, land, planeswalker — not
    * kindred) — Cloudstone Curio's "another permanent you control that shares
    * a permanent type with it".
    */
-  readonly sharesPermanentTypeWith?: ShareReference;
+  readonly sharesPermanentTypeWith?: TypeShareReference;
   /**
    * It is the reference object, or shares at least one **creature type**
    * (rule 205.3m) with it — Heirloom Blade's "a creature card that shares a
@@ -1343,15 +1378,18 @@ export interface CardFilter {
    * creature that shares a creature type with it" (slot 0). A changeling on
    * either side (rule 702.73a) shares one with anything that has a creature
    * type (`hasSubtype`). Bound to `sharesTypeWith` as the effect applies.
+   * `{ typesOf: "convokers" }` is Everything Comes to Dust's "a creature that
+   * convoked this spell"; `{ typesOf: { paid: "tapped" }, each: true }`
+   * Cryptic Gateway's "each creature tapped this way".
    */
-  readonly sharesCreatureTypeWith?: ShareReference;
+  readonly sharesCreatureTypeWith?: TypeShareReference;
   /**
    * As `sharesCreatureTypeWith`, for **land types** (rule 205.3i) — Hiveheart
    * Shaman's "a basic land card that **doesn't** share a land type with a
    * land you control" is `{ not: { sharesLandTypeWith: { controlled: { type:
    * "land" } } } }`.
    */
-  readonly sharesLandTypeWith?: ShareReference;
+  readonly sharesLandTypeWith?: TypeShareReference;
   /** The `shares…TypeWith` clauses bound — written by `bindDynamicCompares`,
    * never authored. Every entry must hold. */
   readonly sharesTypeWith?: readonly SharedTypes[];
@@ -2094,16 +2132,19 @@ export function matchesFilter(
     filter.sharesCreatureTypeWith !== undefined ||
     filter.sharesLandTypeWith !== undefined
   ) {
-    const shares = (reference: ShareReference, kind: SharedTypes["kind"]): boolean => {
+    const shares = (clause: TypeShareReference, kind: SharedTypes["kind"]): boolean => {
+      const { reference, strict, each } = typeShareParts(clause);
       // Inside the layer fold only what the static's own host is can be read
       // without folding again (Konda's Banner, in layer 7).
       if (ctx.layered !== undefined && reference !== "attached") return false;
       const objects = liveReferenceObjects(state, registry, reference, ctx, live?.controller ?? lki?.controller);
       if (objects === undefined) return false;
-      if (objects.includes(id)) return true;
+      if (!strict && objects.includes(id)) return true;
+      // "With each of them" (`each`), or with any one.
+      const ofThem = (test: (other: ObjectId) => boolean): boolean => (each ? objects.every(test) : objects.some(test));
       if (kind === "card" || kind === "permanent") {
         const mine = live !== undefined ? effectiveTypes(state, registry, live) : lki!.types;
-        return objects.some((other) => {
+        return ofThem((other) => {
           const object = state.objects[other];
           if (object === undefined) return false;
           return effectiveTypes(state, registry, object).some(
@@ -2112,7 +2153,7 @@ export function matchesFilter(
         });
       }
       const mine = live !== undefined ? (ctx.layered?.subtypes ?? effectiveSubtypes(state, registry, live)) : lki!.subtypes;
-      return objects.some((other) => {
+      return ofThem((other) => {
         const object = state.objects[other];
         if (object === undefined) return false;
         return effectiveSubtypes(state, registry, object).some((s) =>

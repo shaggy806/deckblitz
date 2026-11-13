@@ -6,6 +6,8 @@
     "effect:token-copy-of-graveyard-cards",
     "effect:token-copy-enters-attached",
     "replacement:prevention-then-names-damaged-player",
+    "filter:shares-creature-type-with-convokers",
+    "filter:shares-creature-type-with-each-of-set",
     "effect:flicker-optional-immediate-or-delayed",
     "effect:grant-state-trigger-to-returned-card",
     "effect:enters-with-counter-until-your-next-turn",

@@ -36186,6 +36186,19 @@ export class Game {
               }));
         return cards.map((id) => ({ object: id, stint: this.state.objects[id]?.zoneChangeCount ?? 0 }));
       }
+      if (ref === "convokers") {
+        // The creatures that convoked the resolving spell (rule 702.51a), each
+        // as it is while it's in the stint that tapped, else as it last
+        // existed in it (608.2h).
+        return (this.convokersOf(source) ?? []).map((record): SetMember => {
+          const live = this.state.objects[record.object];
+          if (live?.zone === "battlefield" && (live.zoneChangeCount ?? 0) === record.stint) {
+            return { object: record.object, stint: record.stint };
+          }
+          const was = this.lastKnownOfStint(record.object, record.stint);
+          return { object: record.object, stint: record.stint, ...(was !== undefined ? { was } : {}) };
+        });
+      }
       if (typeof ref === "object" && "targetsOf" in ref) {
         // The spell a cast trigger fired on: what it targeted then, each as
         // it is in that stint or as it last existed in it (608.2h).

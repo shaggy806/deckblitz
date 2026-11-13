@@ -3373,7 +3373,18 @@ card that **doesn't** share a land type with a land you control" is `not: {
 sharesLandTypeWith: { controlled: { type: "land" } } }`). The reference
 objects themselves always match — "X **and each other** creature that
 shares…" needs no `anyOf`; write `exceptTarget`/`exceptSource` for a bare
-"each other". An effect's filter is bound as the effect applies; a changeling
+"each other". **`{ typesOf: <reference>, each?: true }`** reads the reference
+by its types alone (a reference object is in only if it shares one, so one
+with no type of that kind shares none, even with itself), and `each` asks for
+a type in common with **each** of them rather than any: Everything Comes to
+Dust's "exile all creatures except those that share a creature type with a
+creature that convoked this spell" is `{ type: "creature", not: {
+sharesCreatureTypeWith: { typesOf: "convokers" } } }` (the `"convokers"` set:
+the creatures that convoked the source's spell, as each last existed), and
+Cryptic Gateway's "a creature card … that shares a creature type with each
+creature tapped this way" `sharesCreatureTypeWith: { typesOf: { paid:
+"tapped" }, each: true }` — with no reference objects `each` holds and the
+plain reading doesn't. An effect's filter is bound as the effect applies; a changeling
 on either side shares a creature type with anything that has one, a creature
 with none shares nothing, and with no reference (gone, an illegal target)
 nothing shares. Unbound — a static's or a trigger's filter — it matches

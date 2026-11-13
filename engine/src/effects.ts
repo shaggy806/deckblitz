@@ -22,7 +22,8 @@ import type {
   CountersPutSpec,
   TurnStat,
 } from "./cards.js";
-import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes } from "./filter.js";
+import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes, TypeShareReference } from "./filter.js";
+import { typeShareParts } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { differentManaSplits, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -16195,11 +16196,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     const bound: SharedTypes[] = [];
     for (const [key, kind] of SHARE_CLAUSES) {
       if (!(key in rest)) continue;
-      const { [key]: reference, ...others } = rest;
+      const { [key]: clause, ...others } = rest;
       rest = others;
-      const objects = shareReferenceObjects(reference as ShareReference, ctx);
-      const types = new Set<string>();
-      for (const object of objects) {
+      const { reference, strict, each } = typeShareParts(clause as TypeShareReference);
+      const objects = shareReferenceObjects(reference, ctx);
+      const typesOf = (object: ObjectId): Set<string> => {
+        const types = new Set<string>();
         const ref: TargetRef = { kind: "object", object };
         if (kind === "card" || kind === "permanent") {
           for (const t of ctx.cardTypesOf(ref)) if (kind === "card" || PERMANENT_TYPES.has(t)) types.add(t);
@@ -16210,8 +16212,18 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
             if (fits) types.add(s);
           }
         }
+        return types;
+      };
+      if (each) {
+        // "With each creature tapped this way": one clause a reference
+        // object, each of which must hold — none with no objects at all.
+        for (const object of objects) bound.push({ kind, objects: strict ? [] : [object], types: [...typesOf(object)] });
+        continue;
       }
-      bound.push({ kind, objects, types: [...types] });
+      const types = new Set<string>();
+      for (const object of objects) for (const t of typesOf(object)) types.add(t);
+      // `{ typesOf }`: the reference objects are in only by their types.
+      bound.push({ kind, objects: strict ? [] : objects, types: [...types] });
     }
     if (bound.length === 0) return filter;
     const already = (rest["sharesTypeWith"] as readonly SharedTypes[] | undefined) ?? [];

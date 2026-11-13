@@ -5269,6 +5269,18 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`destroy all creatures that share a creature type with the sacrificed creature`).exec(s))) {
     return { kind: "destroy-all", filter: { type: "creature", sharesCreatureTypeWith: { paid: "sacrificed" } } };
   }
+  // "Exile all creatures except those that share a creature type with a
+  // creature that convoked this spell, all artifacts, and all enchantments"
+  // (Everything Comes to Dust): the convokers read by their types alone; the
+  // exception is the creatures' only, so each further "all Xs" is its own
+  // branch.
+  if ((m = /^(destroy|exile) all creatures except those that share a creature type with a creature that convoked (?:~|this spell)((?:, all [a-z]+s)*(?:,? and all [a-z]+s)?)\.$/i.exec(s))) {
+    const others = [...m[2].matchAll(/all ([a-z]+)s/gi)].map((x) => x[1].toLowerCase());
+    if (!others.every((t) => ["artifact", "enchantment", "land", "planeswalker", "battle"].includes(t))) return null;
+    const creatures = { type: "creature", not: { sharesCreatureTypeWith: { typesOf: "convokers" } } };
+    const filter = others.length === 0 ? creatures : { anyOf: [creatures, ...others.map((type) => ({ type }))] };
+    return { kind: `${m[1].toLowerCase()}-all`, filter };
+  }
   // "Destroy up to X target artifacts", "tap X target creatures" (rule
   // 601.2c): a group as big as X, each member acted on — destroyed or exiled
   // together (Word of Binding's, By Force's shapes). So is "any number of
@@ -5777,6 +5789,22 @@ export function parseSentence(sentence, ctx) {
           },
         },
       ],
+    };
+  }
+  // "You may put a creature card from your hand that shares a creature type
+  // with each creature tapped this way onto the battlefield" (Cryptic
+  // Gateway): the cost's tapped set, each of them, by types alone.
+  if ((m = /^you may put an? (.+?) card from your hand that shares a creature type with each creature tapped this way onto the battlefield\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 0,
+      max: 1,
+      destination: "battlefield",
+      leftover: "stay",
+      filter: { ...filter, sharesCreatureTypeWith: { typesOf: { paid: "tapped" }, each: true } },
     };
   }
   // "You may put a land card from your hand onto the battlefield" (Burgeoning).

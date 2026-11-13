@@ -322,6 +322,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Sharing a creature type with a set's members, by types, any or each — built 2026-11-13
+
+The group `filter:shares-creature-type-with-convokers` +
+`filter:shares-creature-type-with-each-of-set`. The four `shares…TypeWith`
+clauses take a `TypeShareReference`: a bare `ShareReference` as before (its
+objects always in), or `{ typesOf, each? }`, the plain words — a reference
+object in only by a type it has (rule 205.3m), and `each` a type in common
+with every one. The new `"convokers"` object set is the creatures that convoked
+the source's spell (702.51a), each as it last existed. Proving: Everything
+Comes to Dust, Cryptic Gateway. Test: `shares-type-with-set.test.ts`.
+
 ### A token copy that enters with counters — built 2026-11-11
 
 By EDHREC rank: Ochre Jelly (6738), Littjara Mirrorlake (7463).
@@ -3934,7 +3945,8 @@ them, `manaFrom.fromSource` and `ManaOrigin.object`/`stint`. Proving: Secluded
 Starforge, Necron Overlord, Aryel, Weight of Conscience, Thousand Moons Smithy //
 Barracks of the Thousand. Left on the key's cards: Resonance Technician's "target
 spell with mana value X" (a `stack` target doesn't read X yet), Cryptic Gateway's
-`filter:shares-creature-type-with-this-way`, Invasion of New Phyrexia's emblem.
+`filter:shares-creature-type-with-this-way` (built 2026-11-13 as
+`filter:shares-creature-type-with-each-of-set`), Invasion of New Phyrexia's emblem.
 
 ### Sacrifice costs of a number, in parts, and in a mana ability — built 2026-11-01
 

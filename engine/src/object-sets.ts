@@ -83,12 +83,17 @@ export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "
  *   slot names nothing).
  * - `{ remembered }` — a set a delayed or reflexive trigger captured as it
  *   was made (`remember`).
+ * - `"convokers"` — the creatures that convoked the source's spell (rule
+ *   702.51a, `GameObject.convokedBy`, or `enteredConvokedBy` for the
+ *   permanent it became), each as it was in the stint that tapped:
+ *   Everything Comes to Dust's "a creature that convoked this spell".
  */
 export type ObjectSetRef =
   | { readonly thisWay: ThisWayKind; readonly who?: PlayerScope | "each" | "each-other"; readonly byOwner?: true }
   | { readonly paid: PaidKind }
   | "exiled-with-source"
   | "trigger-batch"
+  | "convokers"
   | { readonly attachmentsOf: ObjectRef }
   | { readonly targetsOf: ObjectRef }
   | { readonly targets: readonly number[] }
@@ -113,7 +118,7 @@ export interface ObjectSets {
 /** Whether `value` is an `ObjectSetRef` rather than a slot, a string ref of
  * another kind or a filter object. */
 export function isObjectSetRef(value: unknown): value is ObjectSetRef {
-  if (value === "exiled-with-source" || value === "trigger-batch") return true;
+  if (value === "exiled-with-source" || value === "trigger-batch" || value === "convokers") return true;
   if (typeof value !== "object" || value === null) return false;
   return "thisWay" in value || "paid" in value || "targets" in value || "remembered" in value || "attachmentsOf" in value || "targetsOf" in value;
 }
@@ -127,7 +132,7 @@ export function isObjectSetRef(value: unknown): value is ObjectSetRef {
  * that has left is copied as it last existed (rule 608.2h): a sacrificed
  * clone's copiable values, a token's (rule 707.2). */
 export function isCardSet(ref: ObjectSetRef): boolean {
-  if (ref === "trigger-batch") return false;
+  if (ref === "trigger-batch" || ref === "convokers") return false;
   if (typeof ref !== "object") return true;
   if ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref) return false;
   if ("paid" in ref && (ref.paid === "sacrificed" || ref.paid === "tapped" || ref.paid === "unattached")) return false;
@@ -210,6 +215,9 @@ export function staticSetMembers(state: GameState, ref: ObjectSetRef, source: Ob
       }
     }
     return out;
+  }
+  if (ref === "convokers") {
+    return (object.convokedBy ?? object.enteredConvokedBy ?? []).map(({ object: id, stint }) => ({ object: id, stint }));
   }
   if (typeof ref === "object" && "attachmentsOf" in ref && ref.attachmentsOf === "source") {
     if (object.zone !== "battlefield") return [];

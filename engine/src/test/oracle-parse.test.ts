@@ -1885,6 +1885,41 @@ describe("costs and triggers", () => {
       filter: { type: "creature", sharesCreatureTypeWith: { paid: "sacrificed" } },
       cantBeRegenerated: true,
     });
+    // By types alone, against a set: the convokers (any of them), the
+    // creatures tapped for the cost (each of them).
+    const dust = parseFace({
+      name: "Everything Comes to Dust",
+      type_line: "Sorcery",
+      oracle_text:
+        "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nExile all creatures except those that share a creature type with a creature that convoked this spell, all artifacts, and all enchantments.",
+    });
+    expect(dust.complete).toBe(true);
+    expect(dust.effect).toEqual({
+      kind: "exile-all",
+      filter: {
+        anyOf: [
+          { type: "creature", not: { sharesCreatureTypeWith: { typesOf: "convokers" } } },
+          { type: "artifact" },
+          { type: "enchantment" },
+        ],
+      },
+    });
+    const gateway = parseFace({
+      name: "Cryptic Gateway",
+      type_line: "Artifact",
+      oracle_text:
+        "Tap two untapped creatures you control: You may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield.",
+    });
+    expect(gateway.complete).toBe(true);
+    expect(gateway.activated[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 0,
+      max: 1,
+      destination: "battlefield",
+      leftover: "stay",
+      filter: { type: "creature", sharesCreatureTypeWith: { typesOf: { paid: "tapped" }, each: true } },
+    });
     expect(
       parseEffect(
         "Search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.",
