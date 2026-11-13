@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4945 already implemented / 55 missing (marks refreshed 2026-11-13)
+4951 already implemented / 49 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3890,7 +3890,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3897  Roadside Reliquary                       {0}              Land
 [x]  3898  Skyknight Vanguard                       {R}{W}           Creature — Human Knight
 [x]  3899  Vohar, Vodalian Desecrator               {U}{B}           Legendary Creature — Phyrexian Merfolk Wizard
-[ ]  3900  Mystic Reflection                        {1}{U}           Instant
+[x]  3900  Mystic Reflection                        {1}{U}           Instant
 [x]  3901  Eroded Canyon                            {0}              Land — Desert
 [x]  3902  Rug of Smothering                        {3}              Artifact Creature — Construct
 [x]  3903  Spider Manifestation                     {1}{R/G}         Creature — Spider Avatar
@@ -3903,10 +3903,10 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3910  Sunblast Angel                           {4}{W}{W}        Creature — Angel
 [x]  3911  Bovine Intervention                      {1}{W}           Instant
 [x]  3912  Gemrazer                                 {3}{G}           Creature — Beast
-[ ]  3913  Karmic Justice                           {2}{W}           Enchantment
+[x]  3913  Karmic Justice                           {2}{W}           Enchantment
 [x]  3914  Tevesh Szat, Doom of Fools               {4}{B}           Legendary Planeswalker — Szat
 [x]  3915  Squee, Goblin Nabob                      {2}{R}           Legendary Creature — Goblin
-[ ]  3916  Metalworker                              {3}              Artifact Creature — Construct
+[x]  3916  Metalworker                              {3}              Artifact Creature — Construct
 [x]  3917  Nils, Discipline Enforcer                {2}{W}           Legendary Creature — Human Cleric
 [x]  3918  Haste Magic                              {1}{R}           Instant
 [x]  3919  Cactus Preserve                          {0}              Land — Desert
@@ -3961,7 +3961,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3968  Pariah's Shield                          {5}              Artifact — Equipment
 [x]  3969  Annoyed Altisaur                         {5}{G}{G}        Creature — Dinosaur
 [x]  3970  Ob Nixilis, Unshackled                   {4}{B}{B}        Legendary Creature — Demon
-[ ]  3971  Vesuvan Duplimancy                       {3}{U}           Enchantment
+[x]  3971  Vesuvan Duplimancy                       {3}{U}           Enchantment
 [x]  3972  Elementalist's Palette                   {3}              Artifact
 [ ]  3973  Hushbringer                              {1}{W}           Creature — Faerie
 [x]  3974  Wizards of Thay                          {3}{U}           Creature — Human Wizard
@@ -3981,7 +3981,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3988  Muxus, Goblin Grandee                    {4}{R}{R}        Legendary Creature — Goblin Noble
 [x]  3989  Devastation Tide                         {3}{U}{U}        Sorcery
 [x]  3990  Swift Reconfiguration                    {W}              Enchantment — Aura
-[ ]  3991  Chaos Dragon                             {1}{R}{R}        Creature — Dragon
+[x]  3991  Chaos Dragon                             {1}{R}{R}        Creature — Dragon
 [x]  3992  Virtue of Courage // Embereth Blaze      {3}{R}{R} // {1}{R} Enchantment // Instant — Adventure
 [x]  3993  Arcane Adaptation                        {2}{U}           Enchantment
 [x]  3994  Scavenged Brawler                        {6}              Artifact Creature — Construct
@@ -4086,7 +4086,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4093  Lux Cannon                               {4}              Artifact
 [x]  4094  Honor-Worn Shaku                         {3}              Artifact
 [x]  4095  Aragorn, King of Gondor                  {1}{U}{R}{W}     Legendary Creature — Human Noble
-[ ]  4096  Firion, Wild Rose Warrior                {2}{R}           Legendary Creature — Human Rebel Warrior
+[x]  4096  Firion, Wild Rose Warrior                {2}{R}           Legendary Creature — Human Rebel Warrior
 [x]  4097  Inspiring Refrain                        {4}{U}{U}        Sorcery
 [x]  4098  Haru, Hidden Talent                      {1}{G}           Legendary Creature — Human Peasant Ally
 [x]  4099  Earthcraft                               {1}{G}           Enchantment
