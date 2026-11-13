@@ -23893,6 +23893,7 @@ import _poolShadowcloakVampire from "./pool/shadowcloak-vampire.js";
 import _poolShadowedCaravel from "./pool/shadowed-caravel.js";
 import _poolShadowfaxLordOfHorses from "./pool/shadowfax-lord-of-horses.js";
 import _poolShadowfeed from "./pool/shadowfeed.js";
+import _poolShadowgrangeArchfiend from "./pool/shadowgrange-archfiend.js";
 import _poolShadowheartDarkJusticiar from "./pool/shadowheart-dark-justiciar.js";
 import _poolShadowmageInfiltrator from "./pool/shadowmage-infiltrator.js";
 import _poolShadowsLair from "./pool/shadows-lair.js";
@@ -56608,6 +56609,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShadowedCaravel,
   _poolShadowfaxLordOfHorses,
   _poolShadowfeed,
+  _poolShadowgrangeArchfiend,
   _poolShadowheartDarkJusticiar,
   _poolShadowmageInfiltrator,
   _poolShadowsLair,
@@ -89336,6 +89338,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shadowed-caravel": _poolShadowedCaravel,
   "pool/shadowfax-lord-of-horses": _poolShadowfaxLordOfHorses,
   "pool/shadowfeed": _poolShadowfeed,
+  "pool/shadowgrange-archfiend": _poolShadowgrangeArchfiend,
   "pool/shadowheart-dark-justiciar": _poolShadowheartDarkJusticiar,
   "pool/shadowmage-infiltrator": _poolShadowmageInfiltrator,
   "pool/shadows-lair": _poolShadowsLair,

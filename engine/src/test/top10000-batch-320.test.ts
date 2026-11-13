@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, cast, counters, keywords, lands, named, pickModes, pt, ref, settle, spawn, table, toHand, tokensNamed } from "./harness.js";
+import { A, B, C, cast, counters, keywords, lands, life, named, pickModes, pt, ref, settle, spawn, table, toHand, tokensNamed, zone } from "./harness.js";
 
 describe("Jinnie Fay, Jetmir's Second: you may make that many Cats or Dogs instead", () => {
   const CAT = "2/2 Green Cat Token (Haste)";
@@ -134,5 +134,56 @@ describe("Tifa's Limit Break: tiered, doubling or tripling power and toughness",
     const bear = spawn(game, "Grizzly Bears");
     cast(game, toHand(game, "Tifa's Limit Break"), { modes: [1], targets: [ref(bear)] });
     expect(pt(game, bear)).toEqual({ power: 4, toughness: 4 });
+  });
+});
+
+describe("Shadowgrange Archfiend: madness paid with {2}{B} and 8 life; the greatest power, as life", () => {
+  function castForMadness(seat: ReturnType<typeof table>["a"]): void {
+    seat.chooseCastNowFn = (_view, offer) => {
+      const way = offer.casts[0]!;
+      return { type: "cast-spell", player: seat.playerId, card: way.card, targets: [], via: way.via };
+    };
+  }
+
+  it("discarded and cast for madness: three lands and 8 life; each opponent sacrifices its biggest", () => {
+    const { game, a } = table();
+    lands(game, "Swamp", 3);
+    const fiend = toHand(game, "Shadowgrange Archfiend");
+    a.chooseDiscardsFn = () => [fiend];
+    castForMadness(a);
+    const dreadmaw = spawn(game, "Colossal Dreadmaw", B);
+    const bear = spawn(game, "Grizzly Bears", B);
+    const before = life(game, A);
+    game.debugApplyEffect(A, { kind: "discard", target: "you", amount: 1 });
+    settle(game);
+    expect(zone(game, fiend)).toBe("battlefield");
+    expect(zone(game, dreadmaw)).toBe("graveyard");
+    expect(zone(game, bear)).toBe("battlefield");
+    // Paid 8 life, gained the Dreadmaw's 6.
+    expect(life(game, A)).toBe(before - 8 + 6);
+  });
+
+  it("with less than 8 life to pay, it can't be cast for madness", () => {
+    const { game, a } = table();
+    lands(game, "Swamp", 3);
+    game.state.players[A].life = 7;
+    const fiend = toHand(game, "Shadowgrange Archfiend");
+    a.chooseDiscardsFn = () => [fiend];
+    castForMadness(a);
+    game.debugApplyEffect(A, { kind: "discard", target: "you", amount: 1 });
+    settle(game);
+    expect(zone(game, fiend)).toBe("graveyard");
+    expect(life(game, A)).toBe(7);
+  });
+
+  it("cast from hand, the greatest power among everything sacrificed (4 players)", () => {
+    const { game } = table({ players: 4 });
+    lands(game, "Swamp", 7);
+    spawn(game, "Grizzly Bears", B);
+    const dreadmaw = spawn(game, "Colossal Dreadmaw", C);
+    const before = life(game, A);
+    cast(game, toHand(game, "Shadowgrange Archfiend"));
+    expect(zone(game, dreadmaw)).toBe("graveyard");
+    expect(life(game, A)).toBe(before + 6);
   });
 });

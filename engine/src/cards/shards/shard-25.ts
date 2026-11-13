@@ -747,6 +747,7 @@ import _poolSerpentGenerator from "../pool/serpent-generator.js";
 import _poolSerumTank from "../pool/serum-tank.js";
 import _poolSevenOfNine from "../pool/seven-of-nine.js";
 import _poolSeverSoul from "../pool/sever-soul.js";
+import _poolShadowgrangeArchfiend from "../pool/shadowgrange-archfiend.js";
 import _poolShadowstormVizier from "../pool/shadowstorm-vizier.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolShapersOfNature from "../pool/shapers-of-nature.js";
@@ -1740,6 +1741,7 @@ const shard: CardShard = {
     _poolSerumTank,
     _poolSevenOfNine,
     _poolSeverSoul,
+    _poolShadowgrangeArchfiend,
     _poolShadowstormVizier,
     _poolShaperGuildmage,
     _poolShapersOfNature,

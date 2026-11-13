@@ -5349,8 +5349,10 @@ export interface CardDefinition {
    * graveyard", and "When this card is exiled this way, its owner may cast it
    * by paying [cost] rather than paying its mana cost. If that player
    * doesn't, they put this card into their graveyard." `cost` is the madness
-   * cost. `null` for a card without madness. */
-  readonly madness: { readonly cost: string } | null;
+   * cost; `also` its part that isn't mana ("Madness—{2}{B}, Pay 8 life":
+   * Shadowgrange Archfiend), paid with it as the spell is cast (601.2h). `null`
+   * for a card without madness. */
+  readonly madness: { readonly cost: string; readonly also?: KickerAlsoCost } | null;
   /** "If a spell or ability an opponent controls causes you to discard this
    * card, put it onto the battlefield [with two +1/+1 counters on it] instead
    * of putting it into your graveyard" (Obstinate Baloth, Dodecapod): a
@@ -6258,7 +6260,7 @@ interface CardDraft {
   colorsOutsideIdentity?: true;
   harmonize?: { readonly cost: string };
   retrace?: boolean;
-  madness?: { readonly cost: string };
+  madness?: NonNullable<CardDefinition["madness"]>;
   discardedByOpponentEnters?: NonNullable<CardDefinition["discardedByOpponentEnters"]>;
   miracle?: { readonly cost: string };
   foretell?: { readonly cost: string };

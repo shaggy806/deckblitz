@@ -44395,7 +44395,15 @@ controlledBy,
     const flashbackReturn = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.returnToHand : undefined;
     const fromFlashback: KickerAlsoCost | undefined =
       flashbackReturn !== undefined ? { text: "Beam me up", returnToHand: flashbackReturn } : undefined;
+    // A madness cost's part that isn't mana (Shadowgrange Archfiend's "Pay 8
+    // life"), when it's cast for its madness cost (rule 702.35a).
+    const madnessAlso =
+      via === "effect" && def.madness?.also !== undefined &&
+      this.castNowOffer(this.state.objects[cardId]?.owner, cardId)?.madness !== undefined
+        ? def.madness.also
+        : undefined;
     const additional = [
+      ...(madnessAlso !== undefined ? [madnessAlso] : []),
       ...(own !== undefined ? [own] : []),
       ...(branch !== undefined ? [branch] : []),
       ...(altAlso !== undefined ? [altAlso] : []),
