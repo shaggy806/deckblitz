@@ -2652,6 +2652,13 @@ export function parseTrigger(clause) {
   if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
   // Rule 119.4: any payment of life (Font of Agonies).
   if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
+  // Rule 702.26b-c; phasing out looks back (603.10b) — Teferi's Imp.
+  if ((m = /^When(?:ever)? (?:~|this (?:creature|permanent|artifact|enchantment|land)) phases (out|in)$/.exec(c))) {
+    return [{ on: "event", event: m[1] === "out" ? "phases-out" : "phases-in", who: "self" }];
+  }
+  if (/^Whenever one or more other permanents phase out$/.test(c)) {
+    return [{ on: "event", event: "phases-out", batched: true, filter: { isSource: false } }];
+  }
   // Rule 714.2e, as it triggers (Historian's Boon).
   if (/^Whenever the final chapter ability of a Saga you control triggers$/.test(c)) {
     return [{ on: "event", event: "final-chapter-triggers", who: "you-control" }];

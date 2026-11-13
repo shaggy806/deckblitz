@@ -2417,6 +2417,9 @@ export class Game {
   /** Each player's mill in the simultaneous mill under way, announced
    * together once all of them are done (`withMillBatch`). */
   private millAnnouncements: { player: PlayerId; objects: ObjectId[] }[] | null = null;
+  /** What the simultaneous phasing under way has phased out so far,
+   * announced as one event once it's done (`withPhaseOutBatch`). */
+  private phaseOutAnnouncements: ObjectId[] | null = null;
 
   /** Batched `loses-life` triggers owed for the simultaneous life loss under
    * way (`withLifeLossBatch`), per watcher ability. Not game state, like
@@ -31859,7 +31862,11 @@ export class Game {
       candidates.add(id);
       suspendedOnly.add(id);
     }
-    const leaving = isLeaveEvent(event) || event.type === "permanents-died" || event.type === "permanents-left";
+    const leaving =
+      isLeaveEvent(event) ||
+      event.type === "permanents-died" ||
+      event.type === "permanents-left" ||
+      event.type === "permanents-phased-out";
     for (const id of candidates) {
       const live = this.state.objects[id];
       if (live === undefined) continue;
@@ -31945,7 +31952,13 @@ export class Game {
         if (onlyThisCycled && ability.trigger.on !== "this-cycled") return;
         if (discardedOnly.has(id) && ability.trigger.on !== "this-discarded") return;
         if (onlyThisPlotted && ability.trigger.on !== "this-plotted") return;
-        if (onlyLookBack && !LOOK_BACK_TRIGGERS.has(ability.trigger.on)) return;
+        if (
+          onlyLookBack &&
+          !LOOK_BACK_TRIGGERS.has(ability.trigger.on) &&
+          !(ability.trigger.on === "event" && ability.trigger.event === "phases-out")
+        ) {
+          return;
+        }
         // A triggered mana ability (rule 605.1b) doesn't use the stack:
         // `tappedForManaExtras` made its mana with the rest.
         if (ability.trigger.on === "tapped-for-mana" && isTriggeredManaAbility(ability)) return;
@@ -32936,6 +32949,11 @@ export class Game {
    * was: its subject is the only departed object that sees it.
    */
   private lookBackSources(event: GameEvent): ReadonlySet<ObjectId> {
+    // A phase-out trigger looks back too (rule 603.10b): what phased out
+    // sees itself and the rest of them go.
+    if (event.type === "permanents-phased-out") {
+      return new Set(event.objects.filter((id) => this.state.objects[id]?.zone === "phased-out"));
+    }
     // "Whenever one or more creatures die" is announced once the event is
     // done: everything that left in it sees it, its own deaths included.
     if (event.type === "permanents-died") {
@@ -38464,7 +38482,9 @@ export class Game {
           this.withGraveyardLeaveBatch(() =>
             this.withEnterBatch(() =>
               this.withDamageBatch(() =>
-                this.withTokenEvent(() => this.withCounterBatch(() => this.withMillBatch(() => this.withLifeLossBatch(fn)))),
+                this.withTokenEvent(() =>
+                  this.withCounterBatch(() => this.withMillBatch(() => this.withPhaseOutBatch(() => this.withLifeLossBatch(fn)))),
+                ),
               ),
             ),
           ),
@@ -51309,7 +51329,8 @@ controlledBy,
       object.zone = "phased-out";
     }
     invalidateComputedCache();
-    this.emit({ type: "permanents-phased-out", objects: order });
+    if (this.phaseOutAnnouncements !== null) this.phaseOutAnnouncements.push(...order);
+    else this.emit({ type: "permanents-phased-out", objects: order });
     this.endWhileSourceEffects(order);
     return order;
   }
@@ -58251,6 +58272,25 @@ controlledBy,
       this.queueTrigger(ability, trigger, multiplier);
     }
     return result;
+  }
+
+  /** One instruction phasing out several permanents one at a time ("any
+   * number of target creatures you control phase out") phases them out at
+   * once (rule 702.26b): one `permanents-phased-out` for all of them, once
+   * done, for "whenever one or more other permanents phase out" (The War
+   * Doctor). Nested batches join the outer one. */
+  private withPhaseOutBatch<T>(fn: () => T): T {
+    if (this.phaseOutAnnouncements !== null) return fn();
+    const phased: ObjectId[] = [];
+    this.phaseOutAnnouncements = phased;
+    try {
+      const result = fn();
+      this.phaseOutAnnouncements = null;
+      if (phased.length > 0) this.emit({ type: "permanents-phased-out", objects: phased });
+      return result;
+    } finally {
+      this.phaseOutAnnouncements = null;
+    }
   }
 
   private withMillBatch<T>(fn: () => T): T {

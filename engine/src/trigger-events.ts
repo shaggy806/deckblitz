@@ -162,6 +162,12 @@ export const TRIGGER_EVENTS = {
   /** "Whenever you become the monarch" (rule 725): the new monarch. A
    * player who already is doesn't become it again (`Game.setMonarch`). */
   "becomes-monarch": row({ type: "monarch-changed", player: (e) => e.player }),
+  /** "Whenever this creature phases out" (rule 702.26b — Teferi's Imp), and
+   * with `batched` "whenever one or more other permanents phase out" (The
+   * War Doctor): each permanent that phased out, directly or indirectly. It
+   * looks back in time (rule 603.10b): what phased out sees itself and the
+   * rest go, read as it last existed (`Game.lookBackSources`). */
+  "phases-out": row({ type: "permanents-phased-out", objects: (e) => e.objects }),
   /** "Whenever this creature phases in" (rule 702.26c): each permanent that
    * phased in, one occurrence apiece. */
   "phases-in": row({ type: "permanents-phased-in", objects: (e) => e.objects }),

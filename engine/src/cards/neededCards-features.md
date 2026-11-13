@@ -524,6 +524,11 @@ vocabulary, `test/trigger-new-events.test.ts`.
 - `trigger:saga-final-chapter-triggers` — `chapter-triggered` (`final`),
   announced by `triggerChapters` as each chapter ability is queued, and the
   `final-chapter-triggers` row. Historian's Boon.
+- `trigger:phases-out` — the `phases-out` row over `permanents-phased-out`,
+  looking back (rule 603.10b: `lookBackSources` gives the phased-out
+  permanents their phase-out triggers, read as they last existed), and
+  `withPhaseOutBatch` making one instruction's phasings one event. The War
+  Doctor, Teferi's Imp, Ertai's Familiar.
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 

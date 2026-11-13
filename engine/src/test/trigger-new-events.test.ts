@@ -8,14 +8,19 @@ import {
   B,
   C,
   activate,
+  attack,
   cast,
   counters,
+  destroy,
   enter,
+  graveyard,
   hand,
   keywords,
   lands,
   life,
+  nextTurn,
   pickModes,
+  pickTargets,
   ref,
   settle,
   spawn,
@@ -247,6 +252,93 @@ describe("a Saga's final chapter ability triggers (Historian's Boon)", () => {
     expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
     enter(game, "Phyrexian Arena", B);
     expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
+  });
+});
+
+describe("phases out (The War Doctor, Teferi's Imp)", () => {
+  type G = ReturnType<typeof table>["game"];
+  const phaseOut = (game: G, ids: readonly string[]): void => {
+    game.debugApplyEffect(
+      A,
+      { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "phase-out", target: 0 } },
+      ids.map((id) => ref(id as never)),
+    );
+    settle(game);
+  };
+
+  it("The War Doctor gets a time counter as one or more other permanents phase out, once", () => {
+    const { game } = table({ players: 2 });
+    const doctor = spawn(game, "The War Doctor");
+    const one = spawn(game, "Grizzly Bears", B);
+    const two = spawn(game, "Grizzly Bears", B);
+    phaseOut(game, [one, two]);
+    expect(counters(game, doctor, "time")).toBe(1);
+  });
+
+  it("phasing out with another, it sees it go (rule 603.10b) but can't be given the counter (702.26b)", () => {
+    const { game } = table({ players: 2 });
+    const doctor = spawn(game, "The War Doctor");
+    const bears = spawn(game, "Grizzly Bears", B);
+    phaseOut(game, [doctor, bears]);
+    expect(game.state.eventLog.some((e) => e.type === "ability-triggered" && e.source === doctor)).toBe(true);
+    expect(counters(game, doctor, "time")).toBe(0);
+  });
+
+  it("not as it phases out alone", () => {
+    const { game } = table({ players: 2 });
+    const doctor = spawn(game, "The War Doctor");
+    phaseOut(game, [doctor]);
+    expect(counters(game, doctor, "time")).toBe(0);
+  });
+
+  it("and as one or more other cards are put into exile, from anywhere", () => {
+    const { game } = table({ players: 2 });
+    const doctor = spawn(game, "The War Doctor");
+    const card = toGraveyard(game, "Grizzly Bears", B);
+    game.debugApplyEffect(A, { kind: "exile", target: 0 }, [ref(card)]);
+    settle(game);
+    expect(counters(game, doctor, "time")).toBe(1);
+  });
+
+  it("attacking deals its time counters' worth, exiling a creature that would die this turn", () => {
+    const { game, a } = table({ players: 2 });
+    const doctor = spawn(game, "The War Doctor");
+    game.state.objects[doctor].counters.time = 2;
+    const bears = spawn(game, "Grizzly Bears", B);
+    pickTargets(a, bears);
+    attack(game, a, [doctor]);
+    expect(zone(game, bears)).toBe("exile");
+  });
+
+  it("Ertai's Familiar mills three as it phases out, or as it leaves, and {U} keeps it from phasing out", () => {
+    const { game } = table({ players: 2 });
+    const familiar = spawn(game, "Ertai's Familiar");
+    phaseOut(game, [familiar]);
+    expect(graveyard(game, A).length).toBe(3);
+    const other = spawn(game, "Ertai's Familiar");
+    destroy(game, other);
+    settle(game);
+    expect(graveyard(game, A).length).toBe(7);
+    const held = spawn(game, "Ertai's Familiar");
+    lands(game, "Island", 1);
+    activate(game, held);
+    phaseOut(game, [held]);
+    expect(zone(game, held)).toBe("battlefield");
+  });
+
+  it("Teferi's Imp discards as it phases out, though phased out by then (rule 603.10b), and draws as it phases in", () => {
+    const { game } = table({ players: 2 });
+    const imp = spawn(game, "Teferi's Imp");
+    const held = hand(game, A).length;
+    phaseOut(game, [imp]);
+    expect(hand(game, A).length).toBe(held - 1);
+    expect(game.state.eventLog.some((e) => e.type === "cards-discarded" && e.player === A)).toBe(true);
+    const before = hand(game, A).length;
+    nextTurn(game, "upkeep");
+    toStep(game, "precombat-main", A);
+    // It phased in at Alice's untap step and drew; her draw step drew one too.
+    expect(zone(game, imp)).toBe("battlefield");
+    expect(hand(game, A).length).toBeGreaterThanOrEqual(before + 2);
   });
 });
 

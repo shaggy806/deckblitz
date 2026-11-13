@@ -18925,6 +18925,14 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you pay life")).toEqual([{ on: "event", event: "pays-life", who: "you" }]);
   });
 
+  it("reads phasing out and in (Teferi's Imp)", () => {
+    expect(parseTrigger("Whenever this creature phases out")).toEqual([{ on: "event", event: "phases-out", who: "self" }]);
+    expect(parseTrigger("Whenever this creature phases in")).toEqual([{ on: "event", event: "phases-in", who: "self" }]);
+    expect(parseTrigger("Whenever one or more other permanents phase out")).toEqual([
+      { on: "event", event: "phases-out", batched: true, filter: { isSource: false } },
+    ]);
+  });
+
   it("reads a final chapter ability triggering (Historian's Boon)", () => {
     expect(parseTrigger("Whenever the final chapter ability of a Saga you control triggers")).toEqual([
       { on: "event", event: "final-chapter-triggers", who: "you-control" },
