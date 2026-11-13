@@ -105,3 +105,73 @@ describe("Empowered Autogenerator", () => {
     expect(counters(game, gen, "charge")).toBe(5);
   });
 });
+
+/**
+ * A first instruction that asks: Metalworker's "Reveal any number of artifact
+ * cards in your hand. Add {C}{C} for each card revealed this way." The reveal
+ * is asked as it's activated, the mana added once it's answered, all without
+ * the stack (rule 605.3b) and with priority back to whoever activated it.
+ */
+describe("Metalworker", () => {
+  const setup = () => {
+    const { game } = table();
+    const worker = spawn(game, "Metalworker");
+    const ring = toHand(game, "Sol Ring");
+    const vault = toHand(game, "Mind Stone");
+    const bear = toHand(game, "Grizzly Bears");
+    return { game, worker, ring, vault, bear };
+  };
+  const tap = (game: Game, id: ObjectId): void => {
+    game.dispatch({ type: "activate-ability", player: A, source: id, abilityIndex: 0, targets: [] });
+  };
+
+  it("asks which artifact cards to reveal, then adds {C}{C} for each, with no stack", () => {
+    const { game, worker, ring, vault, bear } = setup();
+    tap(game, worker);
+    const asked = game.state.awaiting;
+    expect(asked?.kind).toBe("choose-from-zone");
+    if (asked?.kind !== "choose-from-zone") return;
+    expect([...asked.eligible].sort()).toEqual([ring, vault].sort());
+    expect(asked.eligible).not.toContain(bear);
+    expect(asked.min).toBe(0);
+    expect(pool(game)).toEqual([]);
+    game.dispatch({ type: "choose-from-zone", player: A, chosen: [ring, vault] });
+    expect(pool(game)).toEqual(["C", "C", "C", "C"]);
+    expect(game.state.zones.shared.stack).toHaveLength(0);
+    expect(zone(game, ring)).toBe("hand");
+    expect(zone(game, vault)).toBe("hand");
+    expect(game.state.awaiting).toBeNull();
+  });
+
+  it("reveals only the ones picked, and counts only those", () => {
+    const { game, worker, ring } = setup();
+    tap(game, worker);
+    game.dispatch({ type: "choose-from-zone", player: A, chosen: [ring] });
+    expect(pool(game)).toEqual(["C", "C"]);
+    const revealed = game.state.eventLog.filter((e) => e.type === "cards-revealed");
+    expect(revealed.at(-1)).toMatchObject({ objects: [ring] });
+  });
+
+  it("may reveal none, for no mana", () => {
+    const { game, worker } = setup();
+    tap(game, worker);
+    game.dispatch({ type: "choose-from-zone", player: A, chosen: [] });
+    expect(pool(game)).toEqual([]);
+    expect(game.state.objects[worker].tapped).toBe(true);
+  });
+
+  it("with no artifact card in hand, adds nothing and asks nothing", () => {
+    const { game } = table();
+    const worker = spawn(game, "Metalworker");
+    toHand(game, "Grizzly Bears");
+    tap(game, worker);
+    expect(game.state.awaiting).toBeNull();
+    expect(pool(game)).toEqual([]);
+  });
+
+  it("the auto-payer leaves it alone: its mana is a choice", () => {
+    const { game, vault } = setup();
+    // Mind Stone costs {2}: Metalworker could pay it, revealing Sol Ring.
+    expect(() => cast(game, vault)).toThrow(/cannot pay/);
+  });
+});

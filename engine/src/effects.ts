@@ -3112,7 +3112,9 @@ export type EffectSpec =
        * there). The auto-payer sizes the mana the same way when `first` is
        * an `add-counter` of a fixed number on `"source"` (`Game`'s
        * `liveManaAmount`); any other `first` is activated by hand. An
-       * activated mana ability's only. */
+       * activated mana ability's only. The one `first` that may ask is a
+       * reveal from the hand — Metalworker's "Reveal any number of artifact
+       * cards in your hand" — asked as it's activated (`Game.manaRevealFirst`). */
       readonly first?: EffectSpec;
       /** Who adds it, when that isn't the effect's controller — "each
        * player adds {B}{R}{G}" (Yurlok of Scorch Thrash). For mana with no

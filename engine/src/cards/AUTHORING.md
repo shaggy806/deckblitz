@@ -4468,7 +4468,13 @@ target: "source", counter: "charge", amount: 1 } }` — the new counter counts,
 doubled under Doubling Season (never `{ sum: [1, …] }`). The auto-payer sizes
 it the same way when `first` is a fixed number of counters on `"source"`; any
 other `first` is activated by hand. Activated mana abilities only. The
-scaffolder reads "[sentence]. Add …" this way.
+scaffolder reads "[sentence]. Add …" this way. A `first` that asks is a
+`look-and-choose` from the hand with `destination: "reveal"`, `leftover:
+"stay"` and `min: 0` — Metalworker's "Reveal any number of artifact cards in
+your hand. Add {C}{C} for each card revealed this way" (`amount: { product:
+[2, { thisWay: "revealed", who: "you" }] }`): asked as the ability is
+activated, the mana added once it's answered (`Game.manaRevealFirst`). No
+other `first` may stop to ask.
 
 `add-mana`'s `who` (a `PlayerScope`) is "**each player** adds {B}{R}{G}"
 (Yurlok of Scorch Thrash) — for mana with no choice in it. In a mana ability,

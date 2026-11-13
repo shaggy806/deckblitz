@@ -3641,6 +3641,11 @@ export type AwaitingDecision =
         readonly abilityIndex: number;
         readonly x: number;
         readonly manaColors?: readonly ManaType[];
+        /** This choice is the mana ability's own first step, a reveal from
+         * the hand (`add-mana`'s `first` — Metalworker's "Reveal any number
+         * of artifact cards in your hand"), not a cost: the `eventSeq` it
+         * was asked at, from which its mana reads "revealed this way". */
+        readonly revealSince?: number;
       };
       /** For `destination: "exile-face-down"` (hideaway — rule 702.75a) and
        * `"exile"` (imprint, face up): the permanent, in the stint it's in,

@@ -16998,6 +16998,7 @@ import _poolMetallurgeon from "./pool/metallurgeon.js";
 import _poolMetallurgicSummonings from "./pool/metallurgic-summonings.js";
 import _poolMetalspinnersPuzzleknot from "./pool/metalspinners-puzzleknot.js";
 import _poolMetalworkColossus from "./pool/metalwork-colossus.js";
+import _poolMetalworker from "./pool/metalworker.js";
 import _poolMetamorphicBlast from "./pool/metamorphic-blast.js";
 import _poolMetamorphicWurm from "./pool/metamorphic-wurm.js";
 import _poolMetamorphose from "./pool/metamorphose.js";
@@ -49682,6 +49683,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMetallurgicSummonings,
   _poolMetalspinnersPuzzleknot,
   _poolMetalworkColossus,
+  _poolMetalworker,
   _poolMetamorphicBlast,
   _poolMetamorphicWurm,
   _poolMetamorphose,
@@ -82379,6 +82381,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/metallurgic-summonings": _poolMetallurgicSummonings,
   "pool/metalspinners-puzzleknot": _poolMetalspinnersPuzzleknot,
   "pool/metalwork-colossus": _poolMetalworkColossus,
+  "pool/metalworker": _poolMetalworker,
   "pool/metamorphic-blast": _poolMetamorphicBlast,
   "pool/metamorphic-wurm": _poolMetamorphicWurm,
   "pool/metamorphose": _poolMetamorphose,

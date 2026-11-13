@@ -11365,6 +11365,9 @@ export class Game {
       waiting.manaColors,
       this.activatedRefFor(waiting.source, waiting.abilityIndex),
       undefined,
+      undefined,
+      undefined,
+      waiting.revealSince,
     );
   }
 
@@ -25316,6 +25319,38 @@ export class Game {
         this.afterPlayerAction(player);
         return;
       }
+      // "Reveal any number of artifact cards in your hand. Add {C}{C} for
+      // each card revealed this way" (Metalworker): its first instruction
+      // asks, and the mana waits on the answer, nobody getting priority
+      // (rule 605.3b). The mana reads "this way" from the question on.
+      const reveal = Game.manaRevealFirst(ability);
+      if (reveal !== undefined) {
+        const revealSince = this.state.eventSeq;
+        const eligible = this.state.zones.perPlayer[player].hand.filter(
+          (id) => id !== sourceId && (reveal.filter === undefined || matchesFilter(this.state, this.registry, id, reveal.filter, { you: player, source: sourceId })),
+        );
+        if (eligible.length > 0) {
+          this.state.awaiting = {
+            kind: "choose-from-zone",
+            player,
+            ids: this.state.zones.perPlayer[player].hand.filter((id) => id !== sourceId),
+            eligible,
+            min: 0,
+            max: eligible.length,
+            destination: "reveal",
+            leftover: "stay",
+            priorityTo: player,
+            thenManaAbility: { source: sourceId, abilityIndex, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}), revealSince },
+          };
+          const object = this.state.objects[sourceId];
+          this.state.decisionSource = object === undefined ? null : { object: sourceId, cardName: printedCardName(object) };
+          this.afterPlayerAction(player);
+          return;
+        }
+        // Nothing to reveal: the mana, none of it for a revealed card.
+        this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, revealSince);
+        return;
+      }
       this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice);
       return;
     }
@@ -25601,13 +25636,32 @@ export class Game {
     sacrificedCouldMake?: readonly ManaType[],
     /** Who "a player of your choice adds" names (the action's `manaFor`). */
     manaFor?: PlayerId,
+    /** Its reveal (`Game.manaRevealFirst`) is done, asked at this `eventSeq`:
+     * the mana alone is left, reading "revealed this way" from there. */
+    revealSince?: number,
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
-    const base = this.makeResolutionContext(sourceId, player, [], chosenX, 0, undefined, 1, 0, [], {
-      ...(paidSets !== undefined ? { sets: paidSets } : {}),
-      ...(manaGranter !== undefined ? { granter: manaGranter } : {}),
-    });
+    if (revealSince !== undefined && ability.effect?.kind === "add-mana" && ability.effect.first !== undefined) {
+      const { first: _done, ...mana } = ability.effect;
+      ability = { ...ability, effect: mana };
+    }
+    const base = this.makeResolutionContext(
+      sourceId,
+      player,
+      [],
+      chosenX,
+      0,
+      undefined,
+      1,
+      0,
+      [],
+      {
+        ...(paidSets !== undefined ? { sets: paidSets } : {}),
+        ...(manaGranter !== undefined ? { granter: manaGranter } : {}),
+      },
+      revealSince !== undefined ? { since: revealSince } : {},
+    );
     // The colour(s) the activating player picked, one per unit whose type
     // was theirs to pick: an "any color" / "any combination of" ability's
     // own units first (see `standaloneManaChoices`), then one per
@@ -27069,6 +27123,25 @@ export class Game {
     first: EffectSpec,
   ): first is Extract<EffectSpec, { kind: "add-counter" }> & { readonly amount: number } {
     return first.kind === "add-counter" && first.target === "source" && typeof first.amount === "number" && first.by === undefined;
+  }
+
+  /** A mana ability whose `add-mana` first has its controller reveal any
+   * number of cards from their hand (Metalworker): the `look-and-choose`,
+   * asked by `activateAbility` before the mana — a mana ability's
+   * instructions can't park as a resolution's do (rule 605.3b). Any number:
+   * `min` 0, any `max`. */
+  private static manaRevealFirst(ability: ActivatedAbility): Extract<EffectSpec, { kind: "look-and-choose" }> | undefined {
+    const first = ability.effect?.kind === "add-mana" ? ability.effect.first : undefined;
+    return first?.kind === "look-and-choose" &&
+      first.zone === "hand" &&
+      first.player === undefined &&
+      first.from === undefined &&
+      first.chooser === undefined &&
+      first.destination === "reveal" &&
+      first.leftover === "stay" &&
+      first.min === 0
+      ? first
+      : undefined;
   }
 
   /** Whether an `add-mana` amount is read for the colour being made — a
@@ -35316,13 +35389,16 @@ export class Game {
       readonly priced?: ObjectId;
       /** A cost act is being paid, by this player, to whom priority goes (`Game.payCostAct`). */
       readonly payingCost?: PlayerId;
+      /** Where "this way" starts, for a mana ability whose first instruction
+       * waited on a decision (`Game.manaRevealFirst`). */
+      readonly since?: number;
     } = {},
   ): ResolutionContext {
     const refs = lastKnownRefs;
     const createRefs = refs;
     // Where "this way" starts: the resolution under way (every continuation
     // of it reads the same), or — outside one — this context's own start.
-    const since = this.state.resolutionSince ?? this.state.eventSeq;
+    const since = opts.since ?? this.state.resolutionSince ?? this.state.eventSeq;
     const expectedZoneOf = (target: TargetRef): ZoneType | null => {
       if (target.kind !== "object") return null;
       const i = (opts.readTargets ?? targets).findIndex(

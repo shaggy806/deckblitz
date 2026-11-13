@@ -552,6 +552,7 @@ import _poolMemorialToWar from "../pool/memorial-to-war.js";
 import _poolMeneldorSwiftSavior from "../pool/meneldor-swift-savior.js";
 import _poolMercurialSpelldancer from "../pool/mercurial-spelldancer.js";
 import _poolMetallurgicSummonings from "../pool/metallurgic-summonings.js";
+import _poolMetalworker from "../pool/metalworker.js";
 import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
 import _poolMightyEmergence from "../pool/mighty-emergence.js";
@@ -1575,6 +1576,7 @@ const shard: CardShard = {
     _poolMeneldorSwiftSavior,
     _poolMercurialSpelldancer,
     _poolMetallurgicSummonings,
+    _poolMetalworker,
     _poolMicaReaderOfRuins,
     _poolMidnightCharm,
     _poolMightyEmergence,
