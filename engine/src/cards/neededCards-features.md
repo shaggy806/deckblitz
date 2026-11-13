@@ -477,6 +477,18 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### A pool of exiled cards every player may play from — built 2026-11-13
+
+The key `zone:shared-impulse-pool-each-player`. A static `mayPlay`'s
+`eachPlayer` makes every player its holder (`Game.playStaticsOf`), with
+`yourTurnOnly`, `linked` and `oncePerTurn` one play a turn by whoever's turn
+it is. A card played under a permanent's permission is announced with it
+(`spell-cast` / `land-played`'s `permission`, a `PlayedUnder`), and
+`plays-card`'s `underThis` fires only on those — the permanent's "when they
+do". A cast trigger's `"trigger-player"` is now the caster, as a land play's
+is the player. Share the Spoils (with `loses-game` for "whenever an opponent
+loses the game"). `test/each-player-linked-play.test.ts`.
+
 ### An impulse permission for only some of the cards exiled — built 2026-11-13
 
 The key `zone:impulse-free-lesser-mana-value-than-own`. `impulse-exile`'s

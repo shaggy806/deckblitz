@@ -42,7 +42,7 @@ import type { DelayedStepWatch } from "./delayed-at.js";
 import type { Expiry, UntilCast, UntilPoint, WatchExpiry, WhileSource } from "./duration.js";
 import type { RollRecord } from "./random-results.js";
 import type { ReplacementSpec } from "./replacements.js";
-import type { CardPlayPermission, CastNowTerms, EffectPlay } from "./play-permission.js";
+import type { CardPlayPermission, CastNowTerms, EffectPlay, PlayedUnder } from "./play-permission.js";
 import type { Journal } from "./journal.js";
 import type { ObjectSets, SetMember } from "./object-sets.js";
 export type { JournalOrigin, JournalWhat } from "./journal.js";
@@ -5188,6 +5188,9 @@ export type PendingEntry =
       /** "If you do, it gains '[trigger]'" — the permission's
        * `gainsTriggered`, the land's from the moment it enters. */
       readonly gainsTriggered?: readonly TriggeredAbility[];
+      /** The permanent whose permission it's played under, for the
+       * `land-played` event. */
+      readonly permission?: PlayedUnder;
     }
   | {
       /** The answer to a `choose-from-zone` decision, not yet carried out

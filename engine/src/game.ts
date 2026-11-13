@@ -12,7 +12,7 @@ import type { KeywordAbilityName } from "./characteristics-patch.js";
 import { keywordCostString } from "./keyword-values.js";
 import type { KeywordCostsPaid, KeywordValue, KeywordValueName } from "./keyword-values.js";
 import { playCostMode, playSpendsSomething, playGrantOf } from "./play-permission.js";
-import type { CardPlayPermission, EffectPlay, PlayFrom, PlayGrant, PlayTerms, StaticPlay } from "./play-permission.js";
+import type { CardPlayPermission, EffectPlay, PlayedUnder, PlayFrom, PlayGrant, PlayTerms, StaticPlay } from "./play-permission.js";
 import { objectRefRead, resolvePlayerRef, tokenRiders } from "./effects.js";
 import {
   abilityLifeCost,
@@ -14670,6 +14670,7 @@ export class Game {
     // the card is still there. An unnamed one prefers an unlimited permission
     // (Ramunap Excavator), which spends nothing.
     let graveyardTerms: PlayTerms | undefined;
+    let playedUnder: PlayedUnder | undefined;
     if (
       this.state.objects[cardId].zone === "graveyard" &&
       (graveyardGrant !== undefined || !this.mayPlayFromGraveyard(player, cardId, face))
@@ -14677,6 +14678,7 @@ export class Game {
       const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant);
       if (found !== null) this.spendGraveyardGrant(found, this.faceDef(cardId, face).types);
       graveyardTerms = found?.option.terms;
+      playedUnder = this.playedUnder(found?.option);
     }
 
     const from = this.state.objects[cardId].zone;
@@ -14693,6 +14695,7 @@ export class Game {
     if (underPermission !== undefined) {
       tapped = underPermission.terms.landsEnterTapped === true;
       this.spendPlay(underPermission, undefined, this.faceDef(cardId, face).types);
+      playedUnder = this.playedUnder(underPermission);
     }
     this.state.objects[cardId].face = face;
     this.journal({ kind: "land-played", player, object: cardId, from });
@@ -14704,6 +14707,7 @@ export class Game {
       from,
       ...(tapped ? { tapped: true as const } : {}),
       ...(gainsTriggered !== undefined ? { gainsTriggered } : {}),
+      ...(playedUnder !== undefined ? { permission: playedUnder } : {}),
     });
     this.afterPlayerAction(player);
   }
@@ -14745,7 +14749,13 @@ export class Game {
       });
       invalidateComputedCache();
     }
-    this.emit({ type: "land-played", player, object: cardId, from });
+    this.emit({
+      type: "land-played",
+      player,
+      object: cardId,
+      from,
+      ...(entry.permission !== undefined ? { permission: entry.permission } : {}),
+    });
     // Lake of the Dead that wasn't paid for never entered (`EnterInstead`).
     if (entered) this.emit({ type: "permanent-entered-battlefield", object: cardId });
   }
@@ -21876,11 +21886,13 @@ export class Game {
     // Spend the graveyard permission *before* the card leaves the graveyard,
     // while the grant lookup can still see it there.
     let graveyardPermission: PlayTerms | undefined;
+    let graveyardUnder: PlayedUnder | undefined;
     if (via === "graveyard-permission") {
       const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant, chosenX);
       if (found !== null) {
         this.spendGraveyardGrant(found, this.faceDef(cardId, face).types);
         graveyardPermission = found.permission;
+        graveyardUnder = this.playedUnder(found.option);
       }
     }
 
@@ -21900,6 +21912,7 @@ export class Game {
         : undefined;
     if (underPermission !== undefined) this.spendPlay(underPermission, graveyardGrant?.asType, def.types);
     const permissionTerms = via === "graveyard-permission" ? graveyardPermission : underPermission?.terms;
+    const playedUnder = via === "graveyard-permission" ? graveyardUnder : this.playedUnder(underPermission);
     // Commit: move to the stack, pay, announce. The targets are recorded
     // once the costs are paid, below. A face-down spell goes there face down
     // (708.4): nobody else ever learns what was cast.
@@ -22196,6 +22209,7 @@ export class Game {
       x: hasX ? chosenX : null,
       spellsThisTurn: this.state.players[player].spellsCastThisTurn,
       ...(via !== undefined ? { via: freeCastOf ?? via } : {}),
+      ...(playedUnder !== undefined ? { permission: playedUnder } : {}),
       from: castFrom,
     });
     if (exiledStint !== undefined) this.endUntilCastEffects(cardId, exiledStint);
@@ -32849,9 +32863,11 @@ export class Game {
     } else if (event.type === "permanent-tapped-for-mana") {
       // "That player" of "whenever a player taps a land for mana" (Manabarbs).
       player = event.player;
-    } else if (event.type === "land-played") {
+    } else if (event.type === "land-played" || event.type === "spell-cast") {
       // "Whenever a player plays a land, that player draws a card" (Horn of
-      // Greed): who played it, under whomever's control it entered.
+      // Greed): who played it, under whomever's control it entered. Who cast
+      // a spell, likewise (Share the Spoils' "when they do, exile the top
+      // card of their library").
       player = event.player;
     } else if (event.type === "library-searched") {
       // Who searched (Ob Nixilis, Unshackled: "that player sacrifices …").
@@ -33792,6 +33808,14 @@ export class Game {
         if (event.type !== "land-played" && event.type !== "spell-cast") return false;
         if (!this.matchesWhoPlayer(spec.who, event.player, self)) return false;
         if (spec.from !== undefined && event.from !== spec.from) return false;
+        // "When they do": played under this permanent's own permission, in
+        // the stint it's in now (Share the Spoils).
+        if (
+          spec.underThis === true &&
+          (event.permission?.source !== self.id || event.permission.stint !== (self.zoneChangeCount ?? 0))
+        ) {
+          return false;
+        }
         // A copy of a card cast isn't a card played (Recycle's ruling).
         if (event.type === "spell-cast" && this.state.objects[event.object]?.isCopy === true) return false;
         // The card played: the land on the battlefield, the spell on the stack.
@@ -43991,6 +44015,19 @@ controlledBy,
     return playSpendsSomething(terms);
   }
 
+  /** The permanent, in its stint, whose permission `option` is: a static's
+   * source, or the source a permission on the card is linked to. What the
+   * `spell-cast` / `land-played` event says it was played under. */
+  private playedUnder(option: PlayOption | undefined): PlayedUnder | undefined {
+    if (option === undefined) return undefined;
+    const { carrier } = option;
+    if (carrier.kind === "static") return { source: carrier.source.id, stint: carrier.source.zoneChangeCount ?? 0 };
+    if (carrier.kind === "card" && carrier.permission.source !== undefined) {
+      return { source: carrier.permission.source.id, stint: carrier.permission.source.zoneChangeCount };
+    }
+    return undefined;
+  }
+
   /** Spend what this permission uses up as a card is played under it — before
    * the card moves. `asType`: which permanent type a `perType` play spends. */
   private spendPlay(option: PlayOption, asType?: CardType, faceTypes: readonly CardType[] = []): void {
@@ -44209,9 +44246,13 @@ controlledBy,
       const out: { source: GameObject; play: StaticPlay }[] = [];
       for (const id of this.staticSourceIds()) {
         const source = this.state.objects[id];
-        if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+        if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+        // Its controller's, or every player's with `eachPlayer` (Share the
+        // Spoils).
+        const mine = source.controller === player;
         for (const ability of this.staticsOfSource(source)) {
-          if (ability.mayPlay !== undefined && this.staticActive(source, ability)) out.push({ source, play: ability.mayPlay });
+          if (ability.mayPlay === undefined || !(mine || ability.mayPlay.eachPlayer === true)) continue;
+          if (this.staticActive(source, ability)) out.push({ source, play: ability.mayPlay });
         }
       }
       return out;

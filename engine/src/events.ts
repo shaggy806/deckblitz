@@ -12,6 +12,7 @@ import type { LeftBattlefield, PlayerCounterKind, ZoneType } from "./state.js";
 import type { TargetRef } from "./target.js";
 import type { Phase, Step } from "./turn.js";
 import type { Expiry } from "./duration.js";
+import type { PlayedUnder } from "./play-permission.js";
 
 /**
  * What one vote was for (rule 701.38b): one of a vote's named options (its
@@ -628,6 +629,9 @@ export type GameEvent =
        * library. What a "whenever you play a card from exile" trigger reads
        * (Prosper, Tome-Bound). */
       readonly from: ZoneType;
+      /** The permanent whose permission it was played under — see
+       * `spell-cast`'s. */
+      readonly permission?: PlayedUnder;
     })
   | (Base & {
       readonly type: "permanent-tapped";
@@ -671,6 +675,10 @@ export type GameEvent =
       /** The alternative permission the spell was cast under, if any (Phase 6
        * — flashback / escape / foretell / suspend / cascade). */
       readonly via?: CastVia;
+      /** The permanent whose permission it was cast under, in that stint (a
+       * static `mayPlay`, or one on the card linked to a source) — read by
+       * `plays-card`'s `underThis` (Share the Spoils' "when they do"). */
+      readonly permission?: PlayedUnder;
       /** The caster's spell count *including* this spell (the storm count —
        * ROADMAP Phase 8). Absent for a copy (a copy isn't cast). */
       readonly spellsThisTurn?: number;

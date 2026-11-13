@@ -1299,6 +1299,12 @@ export type TriggerKind =
        * spell on the stack: Rendmaw, Creaking Nest's "a card with two or
        * more card types". */
       readonly filter?: CardFilter;
+      /** Only a card played under this permanent's own permission, in its
+       * present stint — Share the Spoils' "that player may play a land or
+       * cast a spell from among cards exiled with this enchantment … When
+       * they do, exile the top card of their library" (the event's
+       * `permission`). The player who played it is `"trigger-player"`. */
+      readonly underThis?: true;
     }
   | {
       /**

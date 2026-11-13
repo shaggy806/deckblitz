@@ -182,6 +182,14 @@ export interface PlayGrant extends PlayTerms {
  *   allowances a turn, one land played and one spell cast, each spent apart
  *   (`GameObject.playUses`'s `land` and `spell`). With `play`. Another
  *   permission's plays don't spend them (Coram's rulings).
+ * - `eachPlayer`: **every** player holds it, not only the permanent's
+ *   controller — Share the Spoils' "during each player's turn, that player
+ *   may play a land or cast a spell from among cards exiled with this
+ *   enchantment" (with `yourTurnOnly`, `linked` and `oncePerTurn`: one play a
+ *   turn, spent on the permanent, by whoever's turn it is). A play under it
+ *   is announced with the permanent (`spell-cast` / `land-played`'s
+ *   `permission`), for the permanent's "when they do" (`plays-card`'s
+ *   `underThis`).
  */
 export interface StaticPlay extends PlayTerms {
   readonly from: Exclude<PlayFrom, "hand">;
@@ -189,6 +197,7 @@ export interface StaticPlay extends PlayTerms {
   readonly linked?: boolean;
   readonly anyGraveyard?: true;
   readonly landAndSpell?: true;
+  readonly eachPlayer?: true;
 }
 
 /**
@@ -238,6 +247,13 @@ export interface CardPlayPermission extends Omit<PlayTerms, "upTo"> {
   /** The `GameState.permissionGroups` entry it shares with the other cards the
    * same effect gave it (`upTo`, or `perType`: the types the group has left). */
   readonly group?: number;
+}
+
+/** The permanent, in that stint, whose permission a card was played under —
+ * on the `spell-cast` and `land-played` events. */
+export interface PlayedUnder {
+  readonly source: ObjectId;
+  readonly stint: number;
 }
 
 /** The {@link PlayTerms} a `cast-now` takes: what the spell may be and what it
