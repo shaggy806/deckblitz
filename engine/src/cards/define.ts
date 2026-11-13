@@ -3951,11 +3951,28 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * what is entering — Torpor Orb's "**creatures** entering don't cause
    * abilities to trigger" is `{ who: "everyone", entering: { type:
    * "creature" } }`, matched against the permanent as it entered.
+   *
+   * `dying` does the same for a permanent dying (Hushbringer's "creatures
+   * entering **or dying** don't cause abilities to trigger" adds `dying: {
+   * type: "creature" }`), matched as the permanent last existed on the
+   * battlefield (rule 603.10a): its `dies` and leaves-the-battlefield
+   * triggers, batched ones with it left out, and "put into a graveyard"
+   * triggers. Not what caused the death — a `sacrifice` or `destroyed`
+   * trigger still fires (the card's rulings). A static that dies in the same
+   * event still applies, looking back like the dying permanents' own
+   * leaves-the-battlefield abilities do — except to a "from anywhere"
+   * graveyard trigger, which doesn't look back and so sees it gone, and
+   * which a dying card's own such ability ignores. With `dying` alone,
+   * entering is left alone.
    */
   readonly suppressEntryTriggers?:
     | "opponents"
     | "everyone"
-    | { readonly who: "opponents" | "everyone"; readonly entering: CardFilter };
+    | {
+        readonly who: "opponents" | "everyone";
+        readonly entering?: CardFilter;
+        readonly dying?: CardFilter;
+      };
   /**
    * "Ward abilities of [these permanents] don't trigger" (Nowhere to Run's
    * "Ward abilities of those creatures don't trigger" — creatures your

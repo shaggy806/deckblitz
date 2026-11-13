@@ -13069,6 +13069,7 @@ import _poolHurrJackal from "./pool/hurr-jackal.js";
 import _poolHurricane from "./pool/hurricane.js";
 import _poolHurskaSweetTooth from "./pool/hurska-sweet-tooth.js";
 import _poolHush from "./pool/hush.js";
+import _poolHushbringer from "./pool/hushbringer.js";
 import _poolHushwingGryff from "./pool/hushwing-gryff.js";
 import _poolHushwoodVerge from "./pool/hushwood-verge.js";
 import _poolHuskbursterSwarm from "./pool/huskburster-swarm.js";
@@ -45763,6 +45764,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHurricane,
   _poolHurskaSweetTooth,
   _poolHush,
+  _poolHushbringer,
   _poolHushwingGryff,
   _poolHushwoodVerge,
   _poolHuskbursterSwarm,
@@ -78470,6 +78472,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hurricane": _poolHurricane,
   "pool/hurska-sweet-tooth": _poolHurskaSweetTooth,
   "pool/hush": _poolHush,
+  "pool/hushbringer": _poolHushbringer,
   "pool/hushwing-gryff": _poolHushwingGryff,
   "pool/hushwood-verge": _poolHushwoodVerge,
   "pool/huskburster-swarm": _poolHuskbursterSwarm,

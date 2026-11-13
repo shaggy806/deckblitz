@@ -864,6 +864,14 @@ function lifeStepText(step: LifeGainStep): string {
  * source and controller. */
 type DamageReplacer = Pick<GameObject, "id" | "controller" | "attachedTo" | "attachedToPlayer">;
 
+/** A static barring deaths from causing triggers (Hushbringer), as
+ * `Game.deathSuppressors` found it. */
+type DeathSuppressor = {
+  readonly controller: PlayerId;
+  readonly who: "opponents" | "everyone";
+  readonly dying: CardFilter;
+};
+
 /** One effect that would change a damage event — see `Game.damageSteps`. */
 type DamageStep = DamageStepKind & {
   /** Only when each source's share is this much or less, or this much or
@@ -17842,7 +17850,8 @@ export class Game {
         const who = typeof s === "string" ? s : s.who;
         if (
           typeof s !== "string" &&
-          !matchesFilter(this.state, this.registry, entering, s.entering, { you: source.controller })
+          (s.entering === undefined ||
+            !matchesFilter(this.state, this.registry, entering, s.entering, { you: source.controller }))
         ) {
           continue;
         }
@@ -17850,6 +17859,99 @@ export class Game {
       }
     }
     return false;
+  }
+
+  /**
+   * The statics that bar deaths from causing triggers (Hushbringer's
+   * `suppressEntryTriggers.dying`) that this event can see: those on the
+   * battlefield, and — `departed` — those of permanents that died in this
+   * very event, read as they last existed (rule 603.10a; the card's ruling
+   * that one dying at the same time still applies), unconditional ones only.
+   * `null` when nothing in play bars a death, which is nearly always.
+   */
+  private deathSuppressors(
+    event: GameEvent,
+  ): { readonly live: readonly DeathSuppressor[]; readonly departed: readonly DeathSuppressor[] } | null {
+    const live: DeathSuppressor[] = [];
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const s = ability.suppressEntryTriggers;
+        if (typeof s !== "object" || s.dying === undefined || !this.staticActive(source, ability)) continue;
+        live.push({ controller: source.controller, who: s.who, dying: s.dying });
+      }
+    }
+    const departed: DeathSuppressor[] = [];
+    const gone: ObjectId[] =
+      event.type === "cards-put-into-graveyard"
+        ? event.arrivals.filter((a) => a.from === "battlefield").map((a) => a.object)
+        : [...(isLeaveEvent(event) ? [event.object] : []), ...this.lookBackSources(event)];
+    for (const id of gone) {
+      const was = this.state.objects[id];
+      const last = was?.lastKnown;
+      if (was === undefined || was.zone === "battlefield" || last === undefined || last.lostAbilities) continue;
+      for (const ability of this.registry.get(last.textName ?? last.name).static) {
+        const s = ability.suppressEntryTriggers;
+        if (typeof s !== "object" || s.dying === undefined || ability.condition !== undefined) continue;
+        departed.push({ controller: last.controller, who: s.who, dying: s.dying });
+      }
+    }
+    return live.length === 0 && departed.length === 0 ? null : { live, departed };
+  }
+
+  /**
+   * `event` as `controller`'s ability `ability` of `sourceId` sees it once
+   * the deaths a Hushbringer bars are taken out of it (see
+   * {@link deathSuppressors}): unchanged when none are, `null` when nothing
+   * is left to trigger on. A lone death goes whole; a batch ("one or more
+   * creatures die", "one or more cards are put into graveyards") loses the
+   * barred ones only, so what it counts is right too.
+   */
+  private withoutBarredDeaths(
+    event: GameEvent,
+    suppressors: NonNullable<ReturnType<Game["deathSuppressors"]>>,
+    controller: PlayerId,
+    ability: TriggeredAbility,
+    sourceId: ObjectId,
+  ): GameEvent | null {
+    const barredBy = (list: readonly DeathSuppressor[], id: ObjectId): boolean =>
+      list.some(
+        (s) =>
+          (s.who === "everyone" || s.controller !== controller) &&
+          matchesFilter(this.state, this.registry, id, s.dying, { you: s.controller, lastKnown: true }),
+      );
+    const all = [...suppressors.live, ...suppressors.departed];
+    switch (event.type) {
+      case "permanent-left-battlefield":
+        return event.toZone === "graveyard" && barredBy(all, event.object) ? null : event;
+      case "permanents-died": {
+        const died = event.died.filter((id) => !barredBy(all, id));
+        if (died.length === event.died.length) return event;
+        return died.length === 0 ? null : { ...event, died };
+      }
+      case "permanents-left": {
+        const left = event.left.filter((l) => l.to !== "graveyard" || !barredBy(all, l.object));
+        if (left.length === event.left.length) return event;
+        return left.length === 0 ? null : { ...event, left };
+      }
+      case "cards-put-into-graveyard": {
+        // "From the battlefield" is a leaves-the-battlefield ability and looks
+        // back (rule 603.10a); "from anywhere" doesn't — it sees the game
+        // after the event, a Hushbringer that died in it gone — and a dying
+        // card's own such ability isn't barred (the card's rulings).
+        const trigger = ability.trigger;
+        const looksBack = trigger.on === "put-into-graveyard" && trigger.from === "battlefield";
+        const list = looksBack ? all : suppressors.live;
+        const arrivals = event.arrivals.filter(
+          (a) => a.from !== "battlefield" || (!looksBack && a.object === sourceId) || !barredBy(list, a.object),
+        );
+        if (arrivals.length === event.arrivals.length) return event;
+        return arrivals.length === 0 ? null : { ...event, arrivals };
+      }
+      default:
+        return event;
+    }
   }
 
   /** Whether `permanent`'s ward abilities don't trigger (rule 702.21a;
@@ -31453,6 +31555,15 @@ export class Game {
     // though the engine has already moved them. They contribute only their
     // leaves-the-battlefield abilities: nothing else of theirs is watching.
     const lookBack = this.lookBackSources(event);
+    // Hushbringer's "creatures dying don't cause abilities to trigger", read
+    // once for the event and only for a death's events.
+    const deathBars =
+      (event.type === "permanent-left-battlefield" && event.toZone === "graveyard") ||
+      event.type === "permanents-died" ||
+      event.type === "permanents-left" ||
+      event.type === "cards-put-into-graveyard"
+        ? this.deathSuppressors(event)
+        : null;
     for (const id of lookBack) {
       candidates.add(id);
       eminenceOnly.delete(id);
@@ -31553,11 +31664,17 @@ export class Game {
         lookedBack === undefined
           ? since
           : [...since, ...lookedBack.filter((e) => !since.some((c) => sameGrantRef(c.ref, e.ref)))];
+      const unbarred = event;
       entries.forEach(({ ability, ref, lost }, index) => {
         // Layer 6 — a printed ability it has lost doesn't trigger.
         if (lost === true) return;
         // "You lose control of this": whoever had it just before (603.10d).
-        const object = this.controlLookedBack(ability.trigger, event, seen);
+        const object = this.controlLookedBack(ability.trigger, unbarred, seen);
+        // Hushbringer: the deaths it bars are no part of the event for this
+        // ability — gone whole, or left out of a batch.
+        const event =
+          deathBars === null ? unbarred : this.withoutBarredDeaths(unbarred, deathBars, object.controller, ability, id);
+        if (event === null) return;
         if (this.state.players[object.controller]?.hasLost === true) return;
         if (onlyEminence && ability.fromCommandZone !== true) return;
         if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;

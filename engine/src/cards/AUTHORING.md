@@ -6071,6 +6071,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   entering: CardFilter }` narrows what is entering: Torpor Orb's "creatures
   entering don't cause abilities to trigger" is `{ who: "everyone",
   entering: { type: "creature" } }` — a land's landfall still triggers.
+  `dying: CardFilter` does the same for deaths (Hushbringer, beside `entering`):
+  dies and leaves-the-battlefield triggers and "put into a graveyard" ones,
+  read as the permanent last existed; a sacrifice or destroy trigger still fires.
 - `suppressWardTriggers: CardFilter` — "ward abilities of [these] don't trigger" (Nowhere to Run,
   `{ type: "creature", controlledBy: "opponent" }`): a matching permanent's ward (the `ward`
   helper's ability, printed or granted) doesn't trigger as it becomes a target.

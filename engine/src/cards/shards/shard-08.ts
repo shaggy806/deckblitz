@@ -427,6 +427,7 @@ import _poolHuntedDragon from "../pool/hunted-dragon.js";
 import _poolHuntedNightmare from "../pool/hunted-nightmare.js";
 import _poolHuntingTriad from "../pool/hunting-triad.js";
 import _poolHurlyBurly from "../pool/hurly-burly.js";
+import _poolHushbringer from "../pool/hushbringer.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceCage from "../pool/ice-cage.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
@@ -1488,6 +1489,7 @@ const shard: CardShard = {
     _poolHuntedNightmare,
     _poolHuntingTriad,
     _poolHurlyBurly,
+    _poolHushbringer,
     _poolHyalopterousLemure,
     _poolIceCage,
     _poolIceridgeSerpent,
