@@ -1000,6 +1000,7 @@ import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-fi
 import _tokensDroneTokenKaitoDancingShadow from "../tokens/drone-token-kaito-dancing-shadow.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensGoblinWarriorToken from "../tokens/goblin-warrior-token.js";
+import _tokensGreenDogToken31Vigilance from "../tokens/green-dog-token-3-1-vigilance.js";
 import _tokensInsectTokenGreen61Shroud from "../tokens/insect-token-green-6-1-shroud.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
 import _tokensRatRogueTokenTributeToHorobi from "../tokens/rat-rogue-token-tribute-to-horobi.js";
@@ -2010,6 +2011,7 @@ const shard: CardShard = {
     _tokensDroneTokenKaitoDancingShadow,
     _tokensEldraziScionToken,
     _tokensGoblinWarriorToken,
+    _tokensGreenDogToken31Vigilance,
     _tokensInsectTokenGreen61Shroud,
     _tokensMutavaultToken,
     _tokensRatRogueTokenTributeToHorobi,

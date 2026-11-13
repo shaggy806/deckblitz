@@ -14181,6 +14181,7 @@ import _poolJinGitaxiasCoreAugur from "./pool/jin-gitaxias-core-augur.js";
 import _poolJinGitaxiasProgressTyrant from "./pool/jin-gitaxias-progress-tyrant.js";
 import _poolJinGitaxias from "./pool/jin-gitaxias.js";
 import _poolJinSakaiGhostOfTsushima from "./pool/jin-sakai-ghost-of-tsushima.js";
+import _poolJinnieFayJetmirsSecond from "./pool/jinnie-fay-jetmirs-second.js";
 import _poolJinx from "./pool/jinx.js";
 import _poolJinxedChoker from "./pool/jinxed-choker.js";
 import _poolJinxedIdol from "./pool/jinxed-idol.js";
@@ -32225,7 +32226,9 @@ import _tokensGolemTrampleToken from "./tokens/golem-trample-token.js";
 import _tokensGolemVigilanceToken from "./tokens/golem-vigilance-token.js";
 import _tokensGravebornToken from "./tokens/graveborn-token.js";
 import _tokensGreenCatToken11 from "./tokens/green-cat-token-1-1.js";
+import _tokensGreenCatToken22Haste from "./tokens/green-cat-token-2-2-haste.js";
 import _tokensGreenDogToken11 from "./tokens/green-dog-token-1-1.js";
+import _tokensGreenDogToken31Vigilance from "./tokens/green-dog-token-3-1-vigilance.js";
 import _tokensGreenElementalToken22 from "./tokens/green-elemental-token-2-2.js";
 import _tokensGreenElementalToken44 from "./tokens/green-elemental-token-4-4.js";
 import _tokensGreenElementalToken77Trample from "./tokens/green-elemental-token-7-7-trample.js";
@@ -46891,6 +46894,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJinGitaxiasProgressTyrant,
   _poolJinGitaxias,
   _poolJinSakaiGhostOfTsushima,
+  _poolJinnieFayJetmirsSecond,
   _poolJinx,
   _poolJinxedChoker,
   _poolJinxedIdol,
@@ -64941,7 +64945,9 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensGolemVigilanceToken,
   _tokensGravebornToken,
   _tokensGreenCatToken11,
+  _tokensGreenCatToken22Haste,
   _tokensGreenDogToken11,
+  _tokensGreenDogToken31Vigilance,
   _tokensGreenElementalToken22,
   _tokensGreenElementalToken44,
   _tokensGreenElementalToken77Trample,
@@ -79614,6 +79620,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jin-gitaxias-progress-tyrant": _poolJinGitaxiasProgressTyrant,
   "pool/jin-gitaxias": _poolJinGitaxias,
   "pool/jin-sakai-ghost-of-tsushima": _poolJinSakaiGhostOfTsushima,
+  "pool/jinnie-fay-jetmirs-second": _poolJinnieFayJetmirsSecond,
   "pool/jinx": _poolJinx,
   "pool/jinxed-choker": _poolJinxedChoker,
   "pool/jinxed-idol": _poolJinxedIdol,
@@ -97658,7 +97665,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/golem-vigilance-token": _tokensGolemVigilanceToken,
   "tokens/graveborn-token": _tokensGravebornToken,
   "tokens/green-cat-token-1-1": _tokensGreenCatToken11,
+  "tokens/green-cat-token-2-2-haste": _tokensGreenCatToken22Haste,
   "tokens/green-dog-token-1-1": _tokensGreenDogToken11,
+  "tokens/green-dog-token-3-1-vigilance": _tokensGreenDogToken31Vigilance,
   "tokens/green-elemental-token-2-2": _tokensGreenElementalToken22,
   "tokens/green-elemental-token-4-4": _tokensGreenElementalToken44,
   "tokens/green-elemental-token-7-7-trample": _tokensGreenElementalToken77Trample,

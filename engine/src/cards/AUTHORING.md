@@ -6819,6 +6819,11 @@ The `prevent-damage` family makes the same record.
   another token in place of the ones `ofTokens` names (Draconic Visitor,
   Fisher's Talent: `atLevel` it for a Class). `oneOfEach: ["<token>", …]` is
   Academy Manufactor: each token `ofTokens` names becomes one of each.
+  `mayTokensInsteadOneOf: [{ token, text }, …]` is "you may instead create that
+  many <token>" (Jinnie Fay's Cats or Dogs, Flitwing's Clues): asked before the
+  event, the one taken a `tokensInstead` over every token of it, the effect
+  still making them, so its riders (tapped, attacking, exiled at end of
+  combat) hold — unlike `becomes`, which replaces the whole effect.
   `modify.times` with `ofTokens` multiplies just those tokens (Ojer Taq, Deepest
   Foundation, three times creature tokens), in the search rather than last.
   `anyController: true` on it, as on `would-add-counter`'s, is Primal Vigor's

@@ -615,6 +615,17 @@ export interface TokenMultiplierReplacement {
   readonly firstEachTurn?: true;
   readonly may?: true;
   /**
+   * Jinnie Fay's "if you would create one or more tokens, you may instead
+   * create that many 2/2 green Cat creature tokens with haste or that many
+   * 3/1 green Dog creature tokens with vigilance": the creating player is
+   * asked, before the tokens are made, to keep them or take one of these
+   * tokens; the one taken is a `tokensInstead` over every token of that one
+   * event. Unlike `becomes`, the effect is still the one making them, so what
+   * it says of its tokens besides what they are — tapped, attacking, "they
+   * gain haste", exiled at end of combat — still holds (the ruling).
+   */
+  readonly mayTokensInsteadOneOf?: readonly { readonly token: string; readonly text: string }[];
+  /**
    * "One or more **artifact** tokens": applies only when the event would make
    * a token of this kind, and so can start to when another replacement adds
    * one (rule 616.1). A token is what it would be created as, its definition

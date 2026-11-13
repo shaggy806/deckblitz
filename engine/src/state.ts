@@ -4477,6 +4477,10 @@ export type AwaitingDecision =
          * as the replaced effect, with this after its targets, so what that
          * effect says of its tokens still reads as it did. */
         readonly copyHost?: ObjectId;
+        /** Per mode, a token the effect's own tokens are made as instead
+         * (Jinnie Fay's Cats or Dogs): that mode is the original effect, run
+         * as the first is, with this one `tokensInstead` in its event. */
+        readonly tokensInstead?: readonly (string | null)[];
       };
       readonly nextDrawFor?: {
         readonly effects: readonly (number | null | "draw" | { readonly printed: ObjectId })[];

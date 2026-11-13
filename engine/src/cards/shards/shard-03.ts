@@ -401,6 +401,7 @@ import _poolJavelinOfLightning from "../pool/javelin-of-lightning.js";
 import _poolJelennSphinx from "../pool/jelenn-sphinx.js";
 import _poolJetCollector from "../pool/jet-collector.js";
 import _poolJetfireAirGuardian from "../pool/jetfire-air-guardian.js";
+import _poolJinnieFayJetmirsSecond from "../pool/jinnie-fay-jetmirs-second.js";
 import _poolJoven from "../pool/joven.js";
 import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
@@ -1343,6 +1344,7 @@ const shard: CardShard = {
     _poolJelennSphinx,
     _poolJetCollector,
     _poolJetfireAirGuardian,
+    _poolJinnieFayJetmirsSecond,
     _poolJoven,
     _poolKaZarOfTheSavageLand,
     _poolKamiOfTwistedReflection,

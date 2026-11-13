@@ -1,8 +1,9 @@
 import { defineCard } from "../define.js";
 
 // Mystery Booster Commander Edition. "You may create that many Clue tokens
-// instead": a may-replacement of the whole creation (614.1a), the count
-// carried over as `x` — Moonlit Meditation's shape, with Clues for the copies.
+// instead": asked as the tokens would be created (614.1a), and the effect
+// still makes them, as Clues — Jinnie Fay's shape, so what it says of its
+// tokens besides what they are (tapped, exiled at end of combat) still holds.
 const REPLACE_TEXT =
   'If you would create one or more tokens, you may create that many Clue tokens instead. (They\'re artifacts with "{2}, Sacrifice this token: Draw a card.")';
 
@@ -22,11 +23,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-create-token",
-        may: true,
-        becomes: {
-          effect: { kind: "create-token", token: "Clue Token", count: "x" },
-          text: "Create that many Clue tokens",
-        },
+        mayTokensInsteadOneOf: [{ token: "Clue Token", text: "Create that many Clue tokens instead" }],
       },
       text: REPLACE_TEXT,
     },

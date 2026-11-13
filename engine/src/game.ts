@@ -2581,6 +2581,9 @@ export class Game {
    * makes several kinds of token: see {@link withTokenEvent}. Not game state:
    * it only ever spans one synchronous call. */
   private tokenEventUsed: Set<string> | null = null;
+  /** The token a `mayTokensInsteadOneOf` replacement's controller took for
+   * the event now being made (Jinnie Fay's Cats or Dogs), or null. */
+  private chosenTokensInstead: string | null = null;
   /** Token copies one instruction is making of several permanents, planned
    * and not yet made, so they settle their "as this enters" choices and enter
    * together: see {@link withTokenCopyEvent}. Not game state: it only ever
@@ -8572,10 +8575,20 @@ export class Game {
     // Meditation): the first mode makes the tokens as the effect said, under
     // its own source; the other is the replacement's effect.
     if (awaiting.replacedFor !== undefined) {
-      const { source: from, controller: by, targets, x, copyHost } = awaiting.replacedFor;
+      const { source: from, controller: by, targets, x, copyHost, tokensInstead } = awaiting.replacedFor;
       const chosen = awaiting.modes[modeIndices[0] ?? 0];
       this.state.awaiting = null;
-      if (chosen !== undefined) {
+      const insteadToken = tokensInstead?.[modeIndices[0] ?? 0] ?? null;
+      if (chosen !== undefined && tokensInstead !== undefined) {
+        // Jinnie Fay: the effect makes its tokens, as the one taken.
+        const outer = this.chosenTokensInstead;
+        this.chosenTokensInstead = insteadToken;
+        try {
+          applyEffectSpec(chosen.effect, this.makeResolutionContext(from, by, targets, x));
+        } finally {
+          this.chosenTokensInstead = outer;
+        }
+      } else if (chosen !== undefined) {
         const ctx = (modeIndices[0] ?? 0) === 0
           ? this.makeResolutionContext(from, by, targets, x)
           : copyHost !== undefined
@@ -45260,8 +45273,28 @@ controlledBy,
       if (by.controller !== controller || hasLostAbilities(this.state, this.registry, by)) continue;
       for (const ability of this.registry.get(rulesTextName(by)).static) {
         const r = ability.replacement;
-        if (r?.event !== "would-create-token" || r.becomes === undefined || (r.firstEachTurn === true && !first)) continue;
-        if (!this.staticActive(by, ability)) continue;
+        if (r?.event !== "would-create-token" || (r.firstEachTurn === true && !first)) continue;
+        // Jinnie Fay's "you may instead create that many Cats or Dogs": the
+        // effect still makes its tokens, as one of these if one is taken.
+        if (r.mayTokensInsteadOneOf !== undefined && this.staticActive(by, ability)) {
+          const keep: EffectSpec = { ...spec, replacementAsked: true };
+          this.state.awaiting = {
+            kind: "choose-modes",
+            player: controller,
+            source: by.id,
+            minModes: 1,
+            maxModes: 1,
+            modes: [
+              { text: "Create the tokens", effect: keep },
+              ...r.mayTokensInsteadOneOf.map((o) => ({ text: o.text, effect: keep })),
+            ],
+            x: count,
+            targets: [],
+            replacedFor: { source, controller, targets: [...targets], x, tokensInstead: [null, ...r.mayTokensInsteadOneOf.map((o) => o.token)] },
+          };
+          return true;
+        }
+        if (r.becomes === undefined || !this.staticActive(by, ability)) continue;
         // Its own tokens are not a new event for it to replace (614.5), however
         // deep they sit in its effect (behind a choice, say).
         const replaced = tokensAlreadyAsked(r.becomes.effect) as EffectSpec;
@@ -45363,6 +45396,8 @@ controlledBy,
         const r = statics[i].replacement;
         if (r?.event !== "would-create-token" || !this.staticActive(object, statics[i])) continue;
         if (object.controller !== controller && r.anyController !== true) continue;
+        // Asked before the event, in `tokenEventReplaced`.
+        if (r.mayTokensInsteadOneOf !== undefined) continue;
         // A plain doubler multiplies what the search returns.
         if (r.instead?.modify.times !== undefined && r.ofTokens === undefined) continue;
         for (let n = 0; n < (object.stackCount ?? 1); n++) {
@@ -45370,6 +45405,11 @@ controlledBy,
           if (used?.has(key) !== true) replacements.push({ key, replacement: r });
         }
       }
+    }
+    // Jinnie Fay's Cats or Dogs, taken for this event (rule 616.1: one more
+    // replacement its controller orders among the others).
+    if (this.chosenTokensInstead !== null) {
+      replacements.push({ key: "chosen", replacement: { event: "would-create-token", tokensInstead: this.chosenTokensInstead } });
     }
     const plan = planTokenEvent(
       kind,
