@@ -56,10 +56,9 @@ section keeps only what to do next.
   recorded: size each as it is picked up). Every one needs engine work; the sizes are the
   authoring agents' estimates from reading, and held well on the small list: of 95 units tried,
   three were really major (Kamahl's Will, Soulfire Eruption, Spectral Searchlight) and about one in five needed no engine
-  code. The next small units are Chiss-Goria's key, then Ratchet's and Curse of Hospitality's (read, not started). 23 triaged cards
-  the run's keys freed wait in `cards:needs -- --stale` for `author-freed`, which will also give
-  narrow keys to the few it left half-covered (Twists and Turns, Diplomatic Escort, Light Up the
-  Night, Urgent Necropsy, Consume Spirit, Soul Burn). Past rank 10,000 the order is still EDHREC
+  code. The next small units are Chiss-Goria's key, then Ratchet's and Curse of Hospitality's (read, not started). The 28
+  triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13
+  authored, 15 given narrow keys (`B314.json`), and `cards:needs -- --stale` is empty. Past rank 10,000 the order is still EDHREC
   rank (`author-top-cards`, which since 2026-11-12 builds the small features its cards need
   rather than blocking them; `cards:needs -- --next 60` lists the next untriaged). **First, the
   top 5000 (the user's call, 2026-11-12):** the 112 cards still missing from
@@ -122,6 +121,7 @@ section keeps only what to do next.
 - **Definition traps that fail silently** — B298: "opponent" on a `targetsChosenBy` trigger is read from the ability's controller, not the chooser; a spell's any-number bound other than a literal `"x"` becomes 0; `exile` of a card in hand without `fromHand` does nothing; `look-and-choose` over `exiled-this-way` with `max: 0` skips `leftover` (`docs/engine-gaps.md`).
 - **`thenCounters` reaches tokens a replacement adds** — a token copy's `thenCounters` also lands on tokens made in addition (Chatterfang's Squirrels); `withCounters` tells them apart since 2026-11-11 (`docs/engine-gaps.md`).
 - **An exile cost asks the sacrifice prohibition** — an `exilesSacrifice` cost (Food Chain, Primordial Mist) is refused under "can't sacrifice … to activate abilities", though nothing is sacrificed (`docs/engine-gaps.md`).
+- **Several cards at random move one at a time** — Make a Wish's two random returns are two moves, so a "one or more cards leave your graveyard" trigger fires twice; Capricious Hellraiser waits on the fix (`effect:random-cards-exiled-together`, `docs/engine-gaps.md`).
 - **Combat damage replaced one attacker at a time** — several Zombies under Undead Alchemist mill in separate events, so a "one or more cards are milled" trigger fires once per attacker (`docs/engine-gaps.md`).
 - **A door's unlock timestamp is read by some statics only** — P/T, keywords, restrictions, protection and hand size read it; a type-granting or other rule-changing door static would not (`docs/engine-gaps.md`).
 - **`sameAbilityAs` counts one way only** — two abilities naming each other never count as one; only the second naming the first does, and nothing warns (`docs/engine-gaps.md`).

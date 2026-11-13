@@ -1688,7 +1688,8 @@
    "example": "Kasmina, Enigmatic Mentor: can't tax opponents' spells by what they target"
   },
   "cost:cost-move-linked-exiled-card": {
-   "example": "Shelob, Dread Weaver: cost 'put a creature card exiled with Shelob into its owner's graveyard' and X-matched linked-exile target"
+   "example": "Shelob, Dread Weaver: cost 'put a creature card exiled with Shelob into its owner's graveyard' and X-matched linked-exile target",
+   "description": "Doesn't record which card the cost moved: see filter:same-name-as-cost-moved-card."
   },
   "cost:cost-reduction-creatures-died-this-turn": {
    "family": "cost:cost-modification-extensions",
@@ -1909,7 +1910,8 @@
    "example": "Klauth's Will: Its second mode deals damage divided among any number of targets; the engine allows an any-number target group only as the last slot of a non-modal list (any-number-targets.test.ts)."
   },
   "decision:attacker-chooses-blocks": {
-   "example": "Odric, Master Tactician: no way for the attacking player to declare the defenders' blocks"
+   "example": "Odric, Master Tactician: no way for the attacking player to declare the defenders' blocks",
+   "description": "As an effect for one combat only: see static:attacking-player-chooses-blocks."
   },
   "decision:cast-one-per-card-type-from-exile": {
    "family": "decision:free-cast-choices",
@@ -3199,7 +3201,8 @@
   },
   "effect:random-choice-among-chosen": {
    "family": "effect:random-choice",
-   "example": "Chaos Defiler: choose per opponent then destroy one at random"
+   "example": "Chaos Defiler: choose per opponent then destroy one at random",
+   "description": "Not among targets, nor among a search's finds: see effect:random-choice-among-targets, effect:random-card-from-revealed."
   },
   "effect:random-opponent-attack-requirement": {
    "family": "effect:random-choice",
@@ -4317,7 +4320,8 @@
   },
   "replacement:damage-prevented-trigger": {
    "family": "replacement:damage-modification",
-   "example": "Selfless Squire: no 'prevent all damage to you this turn' player effect and no 'whenever damage to you is prevented, that many' trigger"
+   "example": "Selfless Squire: no 'prevent all damage to you this turn' player effect and no 'whenever damage to you is prevented, that many' trigger",
+   "description": "Not a 'prevented this way' trigger tied to one effect: see trigger:damage-prevented-this-way."
   },
   "replacement:damage-redirection": {
    "family": "replacement:damage-modification",
@@ -4584,7 +4588,8 @@
    "example": "Carnelian Orb of Dragonkind: Haste for the Dragon creature spell that mana paid for."
   },
   "static:all-colors-cda": {
-   "example": "Fallaji Wayfarer: granting convoke to multicolored spells; being all colors while keeping a green-only identity"
+   "example": "Fallaji Wayfarer: granting convoke to multicolored spells; being all colors while keeping a green-only identity",
+   "description": "Built; Invasion of Alara's front is effect:reveal-until-two-cast-one-hand-one."
   },
   "static:all-colors-static": {
    "example": "Leyline of the Guildpact: Begin the game with it on the battlefield; each nonland permanent is all colors; lands are every basic land type."
@@ -5356,7 +5361,7 @@
   "zone:exile-player-hand-play-exiled": {
    "family": "zone:impulse-permission-options",
    "example": "Elder Brain: no exile-a-player's-hand-then-draw-that-many with play permission and spend-as-any-color",
-   "description": "Exile a player's hand (or cards from it) and let a player look at and play the exiled cards (Fiend of the Shadows, Shared Fate, Elder Brain)."
+   "description": "Exile a player's hand (or cards from it) and let a player look at and play the exiled cards (Fiend of the Shadows, Shared Fate, Elder Brain). Grants the source's controller only: see static:each-player-plays-cards-they-exiled-with-source."
   },
   "zone:exiled-with-source-play": {
    "family": "zone:impulse-permission-options",
@@ -7227,7 +7232,8 @@
   },
   "effect:search-split-count": {
    "family": "effect:put-onto-battlefield-options",
-   "example": "search-library's split with a count for `destination` before `restDestination` takes the rest — 'put two of them onto the battlefield tapped and the other into your hand' (Viewpoint Synchronization), the first N finds (all when N or fewer) going to `destination`."
+   "example": "search-library's split with a count for `destination` before `restDestination` takes the rest — 'put two of them onto the battlefield tapped and the other into your hand' (Viewpoint Synchronization), the first N finds (all when N or fewer) going to `destination`.",
+   "description": "Two destinations only, both yours: see effect:search-split-to-opponent-battlefield."
   },
   "effect:search-zones-chosen-by-target-player": {
    "family": "effect:choices-by-other-players",
@@ -7718,7 +7724,8 @@
   },
   "keyword:collect-evidence-x": {
    "family": "keyword:collect-evidence",
-   "example": "Collect evidence X with a variable X: chosen as an effect resolves and read by what follows ('you may collect evidence X. When you do, ... X damage' — Incinerator of the Guilty), or computed as a mandatory additional cost from the spell's targets' total mana value (Urgent Necropsy)."
+   "example": "Collect evidence X with a variable X: chosen as an effect resolves and read by what follows ('you may collect evidence X. When you do, ... X damage' — Incinerator of the Guilty), or computed as a mandatory additional cost from the spell's targets' total mana value (Urgent Necropsy).",
+   "description": "Built only as chosen while an effect resolves (Incinerator of the Guilty); the additional cost from the targets' mana value is cost:collect-evidence-x-target-mana-value."
   },
   "decision:ward-collect-evidence": {
    "family": "decision:ward-payment",
@@ -7806,7 +7813,8 @@
   },
   "replacement:explore-replacement": {
    "family": "keyword:explore",
-   "example": "Replace an exploration: \"if a creature you control would explore, instead …\" — scry 1 first (Twists and Turns), explore twice (Topography Tracker); each copy applies once more (the rulings)."
+   "example": "Replace an exploration: \"if a creature you control would explore, instead …\" — scry 1 first (Twists and Turns), explore twice (Topography Tracker); each copy applies once more (the rulings).",
+   "description": "Only 'explores N times' (modify.times); a scry first isn't run: see replacement:explore-replacement-scry-first."
   },
   "stat:cast-using-mana-from-this-source": {
    "family": "stat:mana-spent-to-cast",
@@ -8096,7 +8104,8 @@
   },
   "effect:copy-next-loyalty-ability": {
    "family": "effect:copy-ability",
-   "example": "Jaya's Phoenix: \"Copy the next loyalty ability you activate this turn when you activate it\": a delayed copy of an activation."
+   "example": "Jaya's Phoenix: \"Copy the next loyalty ability you activate this turn when you activate it\": a delayed copy of an activation.",
+   "description": "Not a chosen planeswalker type's every activation: see decision:choose-planeswalker-type."
   },
   "effect:manifest-count-amount": {
    "family": "effect:amount-fields-dynamic",
@@ -13482,7 +13491,7 @@
   "effect:copy-spells-cast-this-way": {
    "family": "effect:copy-spell-extensions",
    "example": "Finale of Promise: Copy the spells a cast-now just cast.",
-   "description": "Copy the spells a cast-now just cast."
+   "description": "Copy the spells a cast-now just cast. Only spells the effect's controller controls: see effect:copy-spell-cast-this-way-by-opponent."
   },
   "effect:copy-spell-retarget-created-token": {
    "family": "effect:copy-spell-extensions",
@@ -13727,7 +13736,7 @@
   "cost:ability-cost-reduction-by-target-stats": {
    "family": "cost:cost-modification-extensions",
    "example": "Belt of Giant Strength",
-   "description": "An ability's cost reduced by a number read off its target ('{X} less, where X is the power of the creature it targets', '{1} less for each +1/+1 counter on the creature it targets'): targetCostReduction is a fixed number."
+   "description": "An ability's cost reduced by a number read off its target ('{X} less, where X is the power of the creature it targets', '{1} less for each +1/+1 counter on the creature it targets'): targetCostReduction is a fixed number. Reads the target's power, not its counters: see cost:ability-cost-reduction-by-target-counters."
   },
   "cost:reduction-per-type-shared-with-exiled": {
    "family": "cost:cost-modification-extensions",
@@ -15384,7 +15393,7 @@
   },
   "effect:loyalty-abilities-twice-this-turn": {
    "family": "effect:cast-and-activate-restrictions",
-   "description": "Only the static form exists; no one-shot 'twice this turn' for one planeswalker.",
+   "description": "Only the static form exists; no one-shot 'twice this turn' for one planeswalker. One planeswalker only: see effect:loyalty-twice-all-your-planeswalkers-this-turn.",
    "example": "Kaito, Dancing Shadow"
   },
   "effect:remove-all-counters-from-player": {
@@ -16500,6 +16509,76 @@
   "replacement:extra-die-chosen-ignore": {
    "family": "mechanic:dice-rolling",
    "example": "Bamboozling Beeble: a target player's next roll this turn rolls an extra die, and the effect's controller chooses which to ignore."
+  },
+  "filter:same-name-as-cost-moved-card": {
+   "family": "cost:cost-move-linked-exiled-card",
+   "description": "'Counter target spell if it has the same name as that card': a putFromExile cost records nothing about the card it moved, so the effect can't read its name (sameNameWith 'exiled-with-source' matches any linked card).",
+   "example": "Jester's Scepter"
+  },
+  "decision:choose-planeswalker-type": {
+   "family": "effect:copy-ability",
+   "description": "'Choose a planeswalker type' as an effect resolves, read by what follows (Leori's copy of every activation of that type this turn): choose-value has no planeswalker-type choice.",
+   "example": "Leori, Sparktouched Hunter"
+  },
+  "effect:copy-spell-cast-this-way-by-opponent": {
+   "family": "effect:copy-spell-extensions",
+   "description": "'If they do, you copy that spell': copy the spell another player cast through a cast-now; copy-all of { thisWay: 'cast' } copies only spells the effect's controller controls.",
+   "example": "Cmdr. Troi, Outgoing Empath"
+  },
+  "effect:loyalty-twice-all-your-planeswalkers-this-turn": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "'You may activate the loyalty abilities of planeswalkers you control twice this turn': a turn-long grant to every planeswalker you control, those arriving later included; loyalty-activations covers one permanent, and a timed static can't carry loyaltyActivationsEachTurn.",
+   "example": "Urza Assembles the Titans"
+  },
+  "effect:search-split-to-opponent-battlefield": {
+   "family": "effect:put-onto-battlefield-options",
+   "description": "A search's finds split three ways, one onto the battlefield tapped under an opponent's control (chosen on resolution): search-library's instead makes a two-way split and `under` takes only you.",
+   "example": "Verdant Mastery"
+  },
+  "replacement:explore-replacement-scry-first": {
+   "family": "keyword:explore",
+   "description": "'If a creature you control would explore, instead you scry 1, then that creature explores': a would-explore replacement doing something first; Game.exploreTimes reads only modify.times, never `also`.",
+   "example": "Twists and Turns // Mycoid Maze"
+  },
+  "cost:ability-cost-reduction-by-target-counters": {
+   "family": "cost:cost-modification-extensions",
+   "description": "'{1} less to activate for each +1/+1 counter on the creature it targets': targetCostReduction.reduceGeneric reads a number, the target's colors or its power, not its counters.",
+   "example": "Warrior's Blades"
+  },
+  "static:attacking-player-chooses-blocks": {
+   "family": "decision:attacker-chooses-blocks",
+   "description": "'The attacking player chooses how each creature blocks each combat' as a static: choose-combat is a one-shot effect for one combat.",
+   "example": "Invasion Plans"
+  },
+  "effect:random-choice-among-targets": {
+   "family": "effect:random-choice",
+   "description": "'Choose three target cards. Return two of them at random': choose-among-targets has no random chooser.",
+   "example": "Sinister Waltz"
+  },
+  "cost:collect-evidence-x-target-mana-value": {
+   "family": "keyword:collect-evidence",
+   "description": "Collect evidence X as a mandatory additional cost, X the total mana value of the permanents the spell targets, fixed after targets are chosen: kicker.collectEvidence is a fixed, optional number.",
+   "example": "Urgent Necropsy"
+  },
+  "trigger:damage-prevented-this-way": {
+   "family": "replacement:damage-modification",
+   "description": "'Whenever damage from a creature is prevented this way, …': a triggered ability tied to one prevention effect and its source's type; damage-rule's `then` happens at once (rule 615.5) and the damage-to-player-prevented event can't be narrowed to one effect.",
+   "example": "Judgment of Alexander"
+  },
+  "static:each-player-plays-cards-they-exiled-with-source": {
+   "family": "zone:impulse-permission-options",
+   "description": "'Each player may look at and play cards they exiled with this': a permission per exiling player, not only the permanent's controller, with the exile made by a draw replacement recorded as that player's.",
+   "example": "Shared Fate"
+  },
+  "effect:reveal-until-two-cast-one-hand-one": {
+   "family": "effect:reveal-until",
+   "description": "'Exile until two such cards. You may cast one free. Put one into your hand', the other staying exiled if none was cast (the ruling): reveal-until's count keeps the found cards together.",
+   "example": "Invasion of Alara // Awaken the Maelstrom"
+  },
+  "effect:random-cards-exiled-together": {
+   "family": "effect:random-choice",
+   "description": "'Exile three cards at random from your graveyard' as one event: choose-random-card picks one card, so three in a row are three moves and a 'one or more cards leave your graveyard' trigger fires three times (rule 603.2c). Make a Wish, in the pool, has the same gap.",
+   "example": "Capricious Hellraiser"
   }
  },
  "groups": [

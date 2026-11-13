@@ -926,6 +926,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-07: `author-freed`, batch 275, with need-key themes step 1** (`docs/plans/need-key-themes.md`). 33 authored (one agent of 44, a blind reader over all of them, 0 wrong), 16 given 15 new narrow keys; 13 duplicate keys merged, nine keys built (six with no engine code); `--stale` 0.
 - **2026-11-09: `author-freed overnight`, batch 291: the queue is empty.** The last 145 freed cards: 109 authored, 36 blocked on 32 narrow keys (`B291.json`). A blind read of all 131 files found one card that could never pay its cost (Osgir) and two that broke a ruling (scavenge reading power from exile), all blocked; the situation fuzzer found the journal reading a stale cache.
 - **2026-11-09: `author-freed`, batch 293.** The 20 cards theme 15 and the last engine gaps freed: 19 authored, one blocked. The queue is empty again.
+- **2026-11-12: `author-freed`, batch 314.** The 28 cards the rank goal's small keys freed: 13 authored, 15 blocked on narrow keys (`B314.json`). The queue is empty a third time.
 
 ## Rough size
 

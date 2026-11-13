@@ -1,0 +1,206 @@
+{
+ "batch": "B314",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by cost-move-linked-exiled-card, flashback-exile-x-cost, counter-targeting-spell-or-ability, random-choice-among-chosen, attacker-chooses-blocks and 16 more keys (28, the queue)",
+ "authored": [
+  {
+   "name": "Void Maw",
+   "files": [
+    "engine/src/cards/pool/void-maw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flash of Insight",
+   "files": [
+    "engine/src/cards/pool/flash-of-insight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diplomatic Escort",
+   "files": [
+    "engine/src/cards/pool/diplomatic-escort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glyph Keeper",
+   "files": [
+    "engine/src/cards/pool/glyph-keeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jetting Glasskite",
+   "files": [
+    "engine/src/cards/pool/jetting-glasskite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ichor Elixir",
+   "files": [
+    "engine/src/cards/pool/ichor-elixir.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The First Doctor",
+   "files": [
+    "engine/src/cards/pool/the-first-doctor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Melee",
+   "files": [
+    "engine/src/cards/pool/melee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sokenzan Smelter",
+   "files": [
+    "engine/src/cards/pool/sokenzan-smelter.ts",
+    "engine/src/cards/tokens/construct-token-3-1-haste.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Parker Luck",
+   "files": [
+    "engine/src/cards/pool/parker-luck.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abuelo's Awakening",
+   "files": [
+    "engine/src/cards/pool/abuelos-awakening.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Possession",
+   "files": [
+    "engine/src/cards/pool/psychic-possession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Krasis",
+   "files": [
+    "engine/src/cards/pool/renegade-krasis.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Jester's Scepter",
+   "needs": [
+    "filter:same-name-as-cost-moved-card"
+   ],
+   "why": "The putFromExile cost records nothing about the card it moved, so 'the same name as that card' has nothing to read; sameNameWith 'exiled-with-source' matches any linked card."
+  },
+  {
+   "name": "Leori, Sparktouched Hunter",
+   "needs": [
+    "decision:choose-planeswalker-type"
+   ],
+   "why": "choose-value has no planeswalker-type choice, and every activation of that type this turn is copied, not just the next."
+  },
+  {
+   "name": "Cmdr. Troi, Outgoing Empath",
+   "needs": [
+    "effect:copy-spell-cast-this-way-by-opponent"
+   ],
+   "why": "copy-all of { thisWay: 'cast' } copies only spells the effect's controller controls; the opponent cast this one."
+  },
+  {
+   "name": "Urza Assembles the Titans",
+   "needs": [
+    "effect:loyalty-twice-all-your-planeswalkers-this-turn"
+   ],
+   "why": "loyalty-activations covers one permanent; chapter III covers every planeswalker you control this turn, later arrivals included."
+  },
+  {
+   "name": "Verdant Mastery",
+   "needs": [
+    "effect:search-split-to-opponent-battlefield"
+   ],
+   "why": "One find goes onto the battlefield under an opponent's control; search-library's split is two-way and `under` takes only you."
+  },
+  {
+   "name": "Twists and Turns // Mycoid Maze",
+   "needs": [
+    "replacement:explore-replacement-scry-first"
+   ],
+   "why": "Game.exploreTimes reads only modify.times, so the replacement's scry 1 first would never run."
+  },
+  {
+   "name": "Warrior's Blades",
+   "needs": [
+    "cost:ability-cost-reduction-by-target-counters"
+   ],
+   "why": "targetCostReduction reads a number, the target's colors or its power, not its +1/+1 counters."
+  },
+  {
+   "name": "Invasion Plans",
+   "needs": [
+    "static:attacking-player-chooses-blocks"
+   ],
+   "why": "choose-combat is a one-shot effect; no static form for every combat."
+  },
+  {
+   "name": "Signal the Clans",
+   "needs": [
+    "effect:random-card-from-revealed"
+   ],
+   "why": "Nothing picks one at random among a search's finds, gated on three distinct names, with the rest shuffled back."
+  },
+  {
+   "name": "Sinister Waltz",
+   "needs": [
+    "effect:random-choice-among-targets"
+   ],
+   "why": "choose-among-targets has no random chooser."
+  },
+  {
+   "name": "Urgent Necropsy",
+   "needs": [
+    "cost:collect-evidence-x-target-mana-value"
+   ],
+   "why": "kicker.collectEvidence is a fixed optional number; the card's is a mandatory cost of the targets' total mana value."
+  },
+  {
+   "name": "Judgment of Alexander",
+   "needs": [
+    "trigger:damage-prevented-this-way"
+   ],
+   "why": "'Whenever damage from a creature is prevented this way' is a trigger tied to this effect; damage-rule's `then` happens at once and the prevented event can't be narrowed to one effect."
+  },
+  {
+   "name": "Shared Fate",
+   "needs": [
+    "static:each-player-plays-cards-they-exiled-with-source"
+   ],
+   "why": "Each player may play only the cards they exiled with it; StaticPlay grants the controller alone."
+  },
+  {
+   "name": "Invasion of Alara // Awaken the Maelstrom",
+   "needs": [
+    "effect:reveal-until-two-cast-one-hand-one"
+   ],
+   "why": "The front's cast one, hand one, the other staying exiled if none is cast (the ruling); both faces wait."
+  },
+  {
+   "name": "Capricious Hellraiser",
+   "needs": [
+    "effect:random-cards-exiled-together"
+   ],
+   "why": "Three cards at random as one event: three choose-random-card moves would fire a 'one or more cards leave your graveyard' trigger three times (rule 603.2c). Authored by the agent, dropped in review."
+  }
+ ]
+}

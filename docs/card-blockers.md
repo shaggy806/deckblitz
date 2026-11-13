@@ -646,6 +646,26 @@ Five more passes, all merged (156 cards):
   Luck (B298, "two target players each reveal …") shows in `--stale` off Keen Duelist's key but
   needs a two-target scope `{ youAnd }` doesn't give. The other ~66 keep their B294 records,
   Spider-Punk first (`B313.json`).
+- **Batch 314 (2026-11-12, `author-freed`: the 28 cards on the freed queue)** — 13 authored by one
+  card-author agent: Void Maw, Flash of Insight, Diplomatic Escort, Glyph Keeper, Jetting
+  Glasskite, Ichor Elixir (its planar-dice replacement never applies, as Fractured Powerstone's
+  die never rolls), The First Doctor, Melee, Sokenzan Smelter, Parker Luck, Abuelo's Awakening,
+  Psychic Possession, Renegade Krasis. 15 blocked, each on a narrow key in the built key's family
+  (`B314.json`): Jester's Scepter (`filter:same-name-as-cost-moved-card`), Leori
+  (`decision:choose-planeswalker-type`), Cmdr. Troi (`effect:copy-spell-cast-this-way-by-opponent`),
+  Urza Assembles the Titans (`effect:loyalty-twice-all-your-planeswalkers-this-turn`), Verdant
+  Mastery (`effect:search-split-to-opponent-battlefield`), Twists and Turns
+  (`replacement:explore-replacement-scry-first`), Warrior's Blades
+  (`cost:ability-cost-reduction-by-target-counters`), Invasion Plans
+  (`static:attacking-player-chooses-blocks`), Signal the Clans (`effect:random-card-from-revealed`),
+  Sinister Waltz (`effect:random-choice-among-targets`), Urgent Necropsy
+  (`cost:collect-evidence-x-target-mana-value`), Judgment of Alexander
+  (`trigger:damage-prevented-this-way`), Shared Fate
+  (`static:each-player-plays-cards-they-exiled-with-source`), Invasion of Alara
+  (`effect:reveal-until-two-cast-one-hand-one`), Capricious Hellraiser
+  (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
+  descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
+  says what it leaves out.
 - **Batch 294 (2026-11-09, the re-attempt, `docs/plans/after-the-themes.md` step 2: every card still missing from the top 5,000 and the top 500 commanders, 245)** — 120 authored by four card-author agents of 61-62 (Minsc & Boo, Protean Hulk, Mr. House, Noctis, Hazel, Orvar, Elesh Norn, Kozilek, Elspeth Conquers Death, Winding Constrictor, Thief of Sanity and the rest; `B294.json`). 125 blocked on 124 narrow keys, 10 new (`effect:additional-beginning-phase` alone serves two), so about half the records were out of date. A fresh reader over all 137 files found 3; each checked against the code: Brainstealer Dragon's any-color and Satoru's token copy fixed, Rise of the Witch-king blocked (`filter:not-this-way-by-you`). Firion blocked on a filter-binding bug (`bug:copy-exception-static-self-reference`). Desert authored: its old `bug:attackers-through-end-of-combat` record no longer held.
 - **Batch 295 (2026-11-10, asked for by name: the ten cards the bots' strong decks play stand-ins for)** — all ten authored, plus Instrument of the Bards and Revival of the Ancestors, which shared their keys (`B295.json`). Seven of the ten records were out of date and needed no engine code; three keys were built (`static:prohibit-by-player-turn-history`, `effect:saga-chapter-divided`, `effect:no-max-hand-size-while-you-control-source`). Freed and not yet read against their text: Enduring Angel (`effect:double-life-total`), Summon: Brynhildr (`effect:trigger-spell-gains-keyword`; its "when you next cast" is a delayed trigger, so try it first).
 - **Batch 291 (2026-11-09, need-keys Phase 2: `author-freed overnight`, the last of the queue, 145 cards)** — 109 authored, among them Atarka's Command, Fires of Invention, Dack Fayden, Elder Brain, Restore Balance and Balancing Act. 36 blocked on 32 narrow keys (`B291.json`). Shared: a can't-gain-life bound to one named player (Screaming Nemesis, Stigma Lasher, Flames of the Blood Hand), scavenge's power as it last existed in the graveyard (Dodgy Jalopy, Young Deathclaws), becomes crewed for the first time each turn (Mighty Servant of Leuk-o, Mindlink Mech), directly above in a graveyard (Death Spark, Krovikan Horror). 51 of the 109 have no test of their own; a fresh reader read all of them against Oracle.
