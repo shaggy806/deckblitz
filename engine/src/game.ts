@@ -10785,6 +10785,9 @@ export class Game {
     // counter comes off either (rule 122.1d is a replacement of an untap).
     if (objectProhibited(this.state, this.registry, "untap", id)) return false;
     if ((object.counters.stun ?? 0) > 0) {
+      // A stun counter that can't be removed (Fear of Sleep Paralysis): the
+      // untap is still replaced, and the counter stays (its ruling).
+      if (this.countersLocked(id, "stun")) return false;
       object.counters.stun -= 1;
       if (object.counters.stun <= 0) delete object.counters.stun;
       invalidateComputedCache();
@@ -48449,6 +48452,9 @@ controlledBy,
     if (source?.zone !== "battlefield" || dest?.zone !== "battlefield") return 0;
     // One that can't be put there can't be moved there (rule 122.5).
     if (this.countersPrevented({ object: to.object }, counter)) return 0;
+    // Nor one that can't be removed (Fear of Sleep Paralysis's ruling: it
+    // doesn't move, and nothing is put on the other).
+    if (this.countersLocked(from.object, counter)) return 0;
     const have = source.counters[counter] ?? 0;
     if (have <= 0) return 0;
     const n = Math.min(amount, have);
@@ -48822,6 +48828,7 @@ controlledBy,
         }
         // A card in exile keeps counters too (rule 122.1; `inExile`).
         if ((now.zone !== "battlefield" && now.zone !== "exile") || (now.counters[kind] ?? 0) <= 0) break;
+        if (this.countersLocked(object, kind)) break;
         const id = this.splitOneFromStack(object);
         const one = this.state.objects[id];
         const n = Math.min(left, one.counters[kind] ?? 0);
@@ -48917,7 +48924,9 @@ controlledBy,
     if (counter === "any" && amount !== "all") return 0;
     const before = this.state.objects[id];
     if (before === undefined || before.zone !== "battlefield") return 0;
-    const kinds = (counter === "any" ? Object.keys(before.counters) : [counter]).filter((k) => (before.counters[k] ?? 0) > 0);
+    const kinds = (counter === "any" ? Object.keys(before.counters) : [counter]).filter(
+      (k) => (before.counters[k] ?? 0) > 0 && !this.countersLocked(id, k),
+    );
     if (kinds.length === 0) return 0;
     let removed = 0;
     const at = split ? this.splitOneFromStack(id) : id;
@@ -53664,6 +53673,15 @@ controlledBy,
       if ("player" in on) return prohibition.who !== undefined && whoBinds(this.state, source, prohibition.who, on.player);
       return reachesObject(this.state, this.registry, live, on.object);
     });
+  }
+
+  /** Whether a `lose-counters` prohibition (Fear of Sleep Paralysis) keeps
+   * counters of `kind` on permanent `id`: none of them can be removed. */
+  private countersLocked(id: ObjectId, kind: string): boolean {
+    if (this.state.objects[id]?.zone !== "battlefield") return false;
+    return liveProhibitions(this.state, this.registry, "lose-counters").some(
+      (live) => (live.prohibition.kind === undefined || live.prohibition.kind === kind) && reachesObject(this.state, this.registry, live, id),
+    );
   }
 
   private activeStaticsOf(

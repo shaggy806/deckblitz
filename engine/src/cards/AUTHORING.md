@@ -6788,6 +6788,12 @@ The `prevent-damage` family makes the same record.
   "you" }, kind: "-1/-1" }`). Not a replacement: the counters just aren't put — by an effect,
   infect or wither damage, a move (122.5), a Saga's lore counter — a cost that would put them
   can't be paid, and a permanent enters without them unless the static enters with it.
+- A static's `prohibits` `lose-counters` act (`object`, `kind?`) is "counters can't be removed
+  from …" (Fear of Sleep Paralysis: `{ act: "lose-counters", kind: "stun", object: {
+  controlledBy: "opponent" } }`). They stay through an effect's removal, chosen or not, and a
+  move to another permanent (nothing is put on that one); a stun counter's untap replacement
+  still applies, so the permanent doesn't untap and the counter stays (rule 122.1d). Not yet a
+  cost's own removal.
   Energy counts as a player counter; a card in exile isn't a permanent and still gets them.
 - A card's own "if this would be put into a graveyard from anywhere, reveal it and shuffle it
   into its owner's library instead" (Blightsteel Colossus, Nexus of Fate, Progenitus) is the

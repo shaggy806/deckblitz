@@ -2385,7 +2385,8 @@
   "effect:lose-all-player-counters",
   "static:granted-dies-trigger-doubling",
   "effect:mana-ability-chosen-player-adds",
-  "effect:pay-mana-value-difference"
+  "effect:pay-mana-value-difference",
+  "static:stun-counters-cant-be-removed"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -288,6 +288,7 @@ import _poolFanningTheFlames from "../pool/fanning-the-flames.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
 import _poolFatesReversal from "../pool/fates-reversal.js";
+import _poolFearOfSleepParalysis from "../pool/fear-of-sleep-paralysis.js";
 import _poolFearOfSurveillance from "../pool/fear-of-surveillance.js";
 import _poolFeatherOfFlight from "../pool/feather-of-flight.js";
 import _poolFervor from "../pool/fervor.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
     _poolFatesReversal,
+    _poolFearOfSleepParalysis,
     _poolFearOfSurveillance,
     _poolFeatherOfFlight,
     _poolFervor,

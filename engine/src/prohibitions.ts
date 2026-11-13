@@ -228,6 +228,17 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly act: "get-counters";
       readonly who?: W;
       readonly kind?: string;
+    } & ObjectSide)
+  | ({
+      /** "Stun counters can't be removed from permanents your opponents
+       * control" (Fear of Sleep Paralysis): counters of `kind` (any kind
+       * without it) stay on a permanent it reaches — an effect removing
+       * them, chosen or not, a move to another permanent, or the stun
+       * counter's own untap replacement (rule 122.1d: it doesn't untap, and
+       * the counter stays). Not yet a cost's own counter removal (no card
+       * removes a locked kind for a cost). See `Game.countersLocked`. */
+      readonly act: "lose-counters";
+      readonly kind?: string;
     } & ObjectSide);
 
 /** A prohibition as an effect writes it, before it resolves. */

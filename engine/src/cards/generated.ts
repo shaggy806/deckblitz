@@ -9141,6 +9141,7 @@ import _poolFearOfInfinity from "./pool/fear-of-infinity.js";
 import _poolFearOfIsolation from "./pool/fear-of-isolation.js";
 import _poolFearOfLostTeeth from "./pool/fear-of-lost-teeth.js";
 import _poolFearOfMissingOut from "./pool/fear-of-missing-out.js";
+import _poolFearOfSleepParalysis from "./pool/fear-of-sleep-paralysis.js";
 import _poolFearOfSurveillance from "./pool/fear-of-surveillance.js";
 import _poolFear from "./pool/fear.js";
 import _poolFearfulVillager from "./pool/fearful-villager.js";
@@ -41819,6 +41820,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFearOfIsolation,
   _poolFearOfLostTeeth,
   _poolFearOfMissingOut,
+  _poolFearOfSleepParalysis,
   _poolFearOfSurveillance,
   _poolFear,
   _poolFearfulVillager,
@@ -74510,6 +74512,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fear-of-isolation": _poolFearOfIsolation,
   "pool/fear-of-lost-teeth": _poolFearOfLostTeeth,
   "pool/fear-of-missing-out": _poolFearOfMissingOut,
+  "pool/fear-of-sleep-paralysis": _poolFearOfSleepParalysis,
   "pool/fear-of-surveillance": _poolFearOfSurveillance,
   "pool/fear": _poolFear,
   "pool/fearful-villager": _poolFearfulVillager,

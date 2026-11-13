@@ -9,11 +9,15 @@ import {
   B,
   activate,
   cast,
+  counters,
   destroy,
+  enter,
   life,
   lands,
+  nextTurn,
   pickFromZone,
   pickModes,
+  pickTargets,
   ref,
   settle,
   spawn,
@@ -134,5 +138,29 @@ describe("Transmute Artifact: pay the difference or lose the find", () => {
     pickFromZone(a, thopter);
     cast(game, spell);
     expect(zone(game, thopter)).toBe("battlefield");
+  });
+});
+
+describe("Fear of Sleep Paralysis: an opponent's stun counters stay", () => {
+  it("stuns on entering, and the opponent's creature never untaps", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    pickTargets(a, bears);
+    enter(game, "Fear of Sleep Paralysis");
+    expect(counters(game, bears, "stun")).toBe(1);
+    nextTurn(game);
+    nextTurn(game);
+    expect(game.state.objects[bears].tapped).toBe(true);
+    expect(counters(game, bears, "stun")).toBe(1);
+  });
+
+  it("its controller's own stunned creature untaps as usual", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    pickTargets(a, bears);
+    enter(game, "Fear of Sleep Paralysis");
+    nextTurn(game);
+    nextTurn(game);
+    expect(counters(game, bears, "stun")).toBe(0);
   });
 });
