@@ -4413,8 +4413,17 @@ export type EffectSpec =
        * linked to the same delayed return, which brings back "those cards"
        * at its time (rule 610.3). Returning them is one event and exiling
        * them is another (603.2c).
+       *
+       * `exileAgain: false` returns them now and leaves them: "You may return
+       * that card to the battlefield under its owner's control. If you
+       * don't, at the beginning of the next end step, return that card …"
+       * (Gilraen, Dúnedain Protector) is a `may` of this after the flicker.
+       * Each returned card is a new object (rule 400.7), so the delayed
+       * return finds nothing left to bring back, and its `thenCounters`
+       * aren't put on a card returned now.
        */
       readonly kind: "reflicker";
+      readonly exileAgain?: false;
     }
   | {
       /**
@@ -7612,9 +7621,13 @@ export type EffectSpec =
        * - `"change-one"` — "change a target" (115.7b): one of them.
        * - `"choose-new"` — "you may choose new targets" (115.7d): any number,
        *   each kept even if it's no longer legal (Deflecting Swat).
+       *
+       * `"trigger-object"` is the spell whose casting fired this triggered
+       * ability, as long as it's still that spell on the stack (Perplexing
+       * Chimera's "you may choose new targets for the spell").
        */
       readonly kind: "change-targets";
-      readonly target: number;
+      readonly target: number | "trigger-object";
       readonly how: "change" | "change-one" | "choose-new";
       /** "…to this creature": the one new target there is is this effect's
        * own permanent (Spellskite, Hydroelectric Specimen). */
@@ -11849,8 +11862,8 @@ export interface EffectApi {
   putExiledThisWayOntoBattlefield(filter?: CardFilter): boolean;
   /** See the `"reflicker"` {@link EffectSpec}. `true` when it stopped first
    * to ask an "as this enters" choice (nothing has moved; apply it again once
-   * that's answered). */
-  reflicker(): boolean;
+   * that's answered). `exileAgain` false returns them and leaves them. */
+  reflicker(exileAgain: boolean): boolean;
   /** See the `"move-exiled-this-way"` {@link EffectSpec}. */
   moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter): void;
   /** See the `"put-arrived-onto-battlefield"` {@link EffectSpec}. `true`
@@ -17921,7 +17934,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "reflicker": {
       const parked = ctx.parkedCount();
-      if (ctx.reflicker()) ctx.resumeAfterDecisions(spec, parked);
+      if (ctx.reflicker(spec.exileAgain !== false)) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
     case "put-arrived-onto-battlefield": {
@@ -19749,7 +19762,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "change-targets": {
-      const target = ctx.targets[spec.target];
+      const target = typeof spec.target === "number" ? ctx.targets[spec.target] : objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.changeTargets(target, spec.how, spec.to === "source", spec.optional === true, spec.by === "its-controller");
       }

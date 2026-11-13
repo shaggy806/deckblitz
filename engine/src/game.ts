@@ -11381,9 +11381,13 @@ export class Game {
     // "Each player reveals the top five cards of their library, puts all land
     // cards revealed this way onto the battlefield tapped, and exiles the
     // rest" (Clear the Land): what's put waits in the library with the
-    // others', and the rest goes now.
+    // others', and the rest goes now — or stays where it is (Vaevictis
+    // Asmadi's "reveals the top card of their library, then puts it onto the
+    // battlefield if it's a permanent card").
     const lookedAtFind =
-      !searchFind && awaiting.leftoverIf === undefined && ["graveyard", "exile", "hand"].includes(awaiting.leftover);
+      !searchFind &&
+      awaiting.leftoverIf === undefined &&
+      ["graveyard", "exile", "hand", "stay"].includes(awaiting.leftover);
     if (
       held !== undefined &&
       awaiting.priorityTo === undefined &&
@@ -38300,7 +38304,7 @@ export class Game {
         });
         return false;
       },
-      reflicker: () => {
+      reflicker: (exileAgain) => {
         // The cards this resolution's delayed-return flicker exiled, each the
         // same object still waiting on its link (any zone change clears it).
         const waiting = [
@@ -38317,6 +38321,9 @@ export class Game {
         const links = new Map(waiting.map((id) => [id, this.state.objects[id].flickerLink!]));
         for (const id of waiting) this.state.objects[id].flickerLink = undefined;
         this.completeFlickerReturn(waiting);
+        // Gilraen's "you may return that card": back for good, and the
+        // delayed return, its link cleared, finds nothing.
+        if (!exileAgain) return false;
         const back = waiting.filter((id) => this.state.objects[id]?.zone === "battlefield");
         this.withLeaveBatch(() => {
           this.snapshotLeaving(back);
@@ -59295,14 +59302,22 @@ controlledBy,
    * Rule 603.8: each battlefield permanent's state triggers whose state is
    * true now trigger — unless that ability already has an instance waiting
    * to go on the stack or on it, which holds it off until that one is gone.
-   * Only printed state triggers are looked for (no card grants one).
+   * Printed state triggers are looked for, and those an effect granted the
+   * permanent (`grant-triggered` — Olivia, Crimson Bride's "It gains 'When
+   * you don't control a legendary Vampire, exile this creature'"); no static
+   * grants one.
    */
   private checkStateTriggers(): void {
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || this.state.players[object.controller]?.hasLost === true) continue;
       const printed = this.registry.get(rulesTextName(object)).triggered;
-      if (!printed.some((t) => t.trigger.on === "state")) continue;
+      if (
+        !printed.some((t) => t.trigger.on === "state") &&
+        !object.modifiers.some((m) => m.grantsTriggered?.some((t) => t.trigger.on === "state") === true)
+      ) {
+        continue;
+      }
       this.effectiveTriggeredEntries(id).forEach(({ ability, ref, lost }, index) => {
         if (lost === true || ability.trigger.on !== "state") return;
         const waiting =
@@ -61253,6 +61268,24 @@ controlledBy,
         if (r.enterAs !== undefined) {
           object.modifiers.push({ timestamp: object.timestamp, ...patchModifier(r.enterAs), untilEndOfTurn: false });
         }
+      }
+    }
+    // A resolved one that lasts (rule 611.2c), from its controller's side, the
+    // spell or ability's source gone or not — Arlinn, the Pack's Hope's "until
+    // your next turn, … each creature you control enters with an additional
+    // +1/+1 counter on it". A "next time" shield is Mystic Reflection's copy,
+    // read where copies are.
+    for (const active of this.state.activeReplacements) {
+      const r = active.replacement;
+      if (r.event !== "others-enter-battlefield" || r.asCopyOf !== undefined) continue;
+      if (active.next === true || active.left !== undefined) continue;
+      if (this.state.players[active.owner]?.hasLost === true) continue;
+      if (!matchesFilter(this.state, this.registry, id, r.filter, { you: active.owner, source: active.source })) continue;
+      if (r.counters !== undefined) {
+        addCounters(r.counters.kind, this.enteringCounterAmount(active.source, active.owner, id, r.counters.amount));
+      }
+      if (r.enterAs !== undefined) {
+        object.modifiers.push({ timestamp: object.timestamp, ...patchModifier(r.enterAs), untilEndOfTurn: false });
       }
     }
     // A resolved "lands you control enter tapped this turn" (Nahiri's
