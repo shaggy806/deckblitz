@@ -2877,7 +2877,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     `on` ("choose a counter on target permanent" — Ichormoon Gauntlet), or
     on a permanent matching `among`; `CHOSEN_COUNTER` is the kind (`add-counter
     { counter: CHOSEN_COUNTER }`). None there: nothing is chosen and `then`
-    doesn't happen. "Remove a counter from …" of the player's choice is
+    doesn't happen. A **player** in the slot works too — "choose a counter on
+    target permanent **or player**. Give that permanent or player another
+    counter of that kind" (Animation Module, a `"permanent-or-player"`
+    target): the kinds that player has, energy among them, and the
+    `add-counter` puts one on the player. "Remove a counter from …" of the player's choice is
     `remove-counters { counter: "any" }`, not this (Medicine Runner).
   - `value: "number"`: any whole number from `min` (0), up to `max` if the
     card bounds it — the `choose-number` decision. `then` reads it as

@@ -930,6 +930,7 @@ import _poolAnimateDead from "./pool/animate-dead.js";
 import _poolAnimateLand from "./pool/animate-land.js";
 import _poolAnimateWall from "./pool/animate-wall.js";
 import _poolAnimatingFaerie from "./pool/animating-faerie.js";
+import _poolAnimationModule from "./pool/animation-module.js";
 import _poolAnimistsAwakening from "./pool/animists-awakening.js";
 import _poolAnimistsMight from "./pool/animists-might.js";
 import _poolAnimusOfNightsReach from "./pool/animus-of-nights-reach.js";
@@ -33639,6 +33640,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnimateLand,
   _poolAnimateWall,
   _poolAnimatingFaerie,
+  _poolAnimationModule,
   _poolAnimistsAwakening,
   _poolAnimistsMight,
   _poolAnimusOfNightsReach,
@@ -66361,6 +66363,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/animate-land": _poolAnimateLand,
   "pool/animate-wall": _poolAnimateWall,
   "pool/animating-faerie": _poolAnimatingFaerie,
+  "pool/animation-module": _poolAnimationModule,
   "pool/animists-awakening": _poolAnimistsAwakening,
   "pool/animists-might": _poolAnimistsMight,
   "pool/animus-of-nights-reach": _poolAnimusOfNightsReach,

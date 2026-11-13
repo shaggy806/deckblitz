@@ -22,6 +22,7 @@ import _poolAncientSilverDragon from "../pool/ancient-silver-dragon.js";
 import _poolAngelOfGrace from "../pool/angel-of-grace.js";
 import _poolAngelsFeather from "../pool/angels-feather.js";
 import _poolAngelsong from "../pool/angelsong.js";
+import _poolAnimationModule from "../pool/animation-module.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
 import _poolAnthemOfRakdos from "../pool/anthem-of-rakdos.js";
 import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js";
@@ -963,6 +964,7 @@ const shard: CardShard = {
     _poolAngelOfGrace,
     _poolAngelsFeather,
     _poolAngelsong,
+    _poolAnimationModule,
     _poolAnodetLurker,
     _poolAnthemOfRakdos,
     _poolAppetiteForTheUnnatural,

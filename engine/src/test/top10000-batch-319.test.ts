@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, loyalty, named, nextTurn, pickFromZone, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toStep, types, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, loyalty, named, nextTurn, pickFromZone, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, tokensNamed, toStep, types, zone } from "./harness.js";
 import { computeCharacteristics } from "../characteristics.js";
 import { manaValueOfObject } from "../filter.js";
 import { printedCardName } from "../state.js";
@@ -456,5 +456,53 @@ describe("Teferi, Who Slows the Sunset: untap yours, tap theirs; an emblem that 
     // Not in your own draw step: one card, your own.
     nextTurn(game);
     expect(hand(game, A).length).toBe(before + 2);
+  });
+});
+
+describe("Animation Module: a Servo for +1/+1 counters, and another counter of a kind a permanent or player has", () => {
+  it("pays {1} for a Servo once per permanent that gets +1/+1 counters", () => {
+    const { game, a } = table();
+    spawn(game, "Animation Module");
+    lands(game, "Wastes", 3);
+    const bear = spawn(game, "Grizzly Bears");
+    const other = spawn(game, "Grizzly Bears");
+    pickModes(a, 0);
+    game.debugApplyEffect(A, { kind: "add-counter-all", filter: { type: "creature", controlledBy: "you" }, counter: "+1/+1", amount: 2 }, []);
+    settle(game);
+    expect(counters(game, bear)).toBe(2);
+    expect(counters(game, other)).toBe(2);
+    expect(tokensNamed(game, "Servo Token", A)).toBe(2);
+  });
+
+  it("gives a player another counter of the kind chosen", () => {
+    const { game, a } = table();
+    const module = spawn(game, "Animation Module");
+    lands(game, "Wastes", 3);
+    game.debugApplyEffect(A, { kind: "add-player-counters", counter: "poison", amount: 2, who: "each-opponent" }, []);
+    settle(game);
+    const asked: string[][] = [];
+    a.chooseCreatureTypeFn = (_view, _source, options) => {
+      asked.push([...options]);
+      return "poison";
+    };
+    activate(game, module, 0, { targets: [ref(B)] });
+    expect(game.state.players[B].counters.poison).toBe(3);
+    // One kind there: nothing to ask (or only that kind offered).
+    expect(asked.every((options) => options.length === 1 && options[0] === "poison")).toBe(true);
+  });
+
+  it("a player with no counters gets none; a permanent gets one more of the kind picked", () => {
+    const { game, a } = table();
+    const module = spawn(game, "Animation Module");
+    lands(game, "Wastes", 6);
+    activate(game, module, 0, { targets: [ref(B)] });
+    expect(game.state.players[B].counters.poison ?? 0).toBe(0);
+    game.state.objects[module].tapped = false;
+    const bear = spawn(game, "Grizzly Bears", B);
+    game.state.objects[bear].counters = { "-1/-1": 1, stun: 1 };
+    a.chooseCreatureTypeFn = () => "stun";
+    activate(game, module, 0, { targets: [ref(bear)] });
+    expect(counters(game, bear, "stun")).toBe(2);
+    expect(counters(game, bear, "-1/-1")).toBe(1);
   });
 });

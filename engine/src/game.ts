@@ -37925,16 +37925,23 @@ export class Game {
           // `among`: only kinds actually there can be chosen, and with none
           // nothing is chosen and the rest doesn't happen.
           const holders: ObjectId[] = [];
+          const kinds = new Set<string>();
           if (spec.on !== undefined) {
             const ref = targets[spec.on];
             if (ref?.kind === "object" && this.state.objects[ref.object] !== undefined) holders.push(ref.object);
+            // "Choose a counter on target permanent **or player**" (Animation
+            // Module): the kinds that player has, energy among them.
+            const ps = ref?.kind === "player" ? this.state.players[ref.player] : undefined;
+            if (ps !== undefined && !ps.hasLost) {
+              if (ps.energy > 0) kinds.add("energy");
+              for (const [kind, n] of Object.entries(ps.counters)) if ((n ?? 0) > 0) kinds.add(kind);
+            }
           }
           if (spec.among !== undefined) {
             for (const id of this.state.zones.shared.battlefield) {
               if (matchesFilter(this.state, this.registry, id, spec.among, { you: controller, source })) holders.push(id);
             }
           }
-          const kinds = new Set<string>();
           for (const id of holders) {
             for (const [kind, n] of Object.entries(this.state.objects[id].counters)) if (n > 0) kinds.add(kind);
           }
@@ -38784,8 +38791,19 @@ controlledBy,
       connived: (object, player, nonland) => this.emit({ type: "connived", object, player, nonland }),
       conniveDrawsFirst: (player) => this.activeStaticsOf(player, (a) => a.conniveDrawsFirst === true).length,
       earthbent: () => this.emit({ type: "bent", player: controller, how: "earth" }),
-      addCounter: (target, counter, amount, by, keywordAct) =>
-        this.addCounter(target, counter, amount, true, by ?? controller, keywordAct),
+      addCounter: (target, counter, amount, by, keywordAct) => {
+        // A counter on a player — "give that … player another counter of
+        // that kind" (Animation Module): theirs, energy among them.
+        if (target.kind === "player") {
+          // (Not in the dry run that asks about replacement orders: that
+          // run changes nothing, as `Game.addCounter`'s doesn't.)
+          if (amount <= 0 || this.dryRunningEvents) return;
+          if (counter === "energy") this.changeEnergy(target.player, amount, by ?? controller);
+          else this.changePlayerCounters(target.player, counter as PlayerCounterKind, amount, by ?? controller);
+          return;
+        }
+        this.addCounter(target, counter, amount, true, by ?? controller, keywordAct);
+      },
       amass: (amount, creatureType, onto, player, noToken) =>
         this.amass(player ?? controller, amount, creatureType, source, x, onto, noToken),
       exert: (target, asItAttacks) => {
