@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, keywords, named, pickModes, pt, settle, spawn, table, tokensNamed } from "./harness.js";
+import { A, B, cast, counters, keywords, lands, named, pickModes, pt, settle, spawn, table, toHand, tokensNamed } from "./harness.js";
 
 describe("Jinnie Fay, Jetmir's Second: you may make that many Cats or Dogs instead", () => {
   const CAT = "2/2 Green Cat Token (Haste)";
@@ -65,5 +65,44 @@ describe("Jinnie Fay, Jetmir's Second: you may make that many Cats or Dogs inste
     settle(game);
     expect(tokensNamed(game, CAT, A)).toBe(1);
     expect(named(game, "Grizzly Bears", A)).toHaveLength(1);
+  });
+});
+
+describe("Master Chef: commander creatures you own have two enters-with-a-counter replacements", () => {
+  it("the commander enters with an additional counter (rule 614.12), and other creatures after it with one", () => {
+    const { game } = table();
+    spawn(game, "Master Chef");
+    lands(game, "Forest", 4);
+    const commander = toHand(game, "Grizzly Bears");
+    game.state.objects[commander].isCommander = true;
+    cast(game, commander);
+    expect(counters(game, commander)).toBe(1);
+    const bear = toHand(game, "Grizzly Bears");
+    cast(game, bear);
+    expect(counters(game, bear)).toBe(1);
+  });
+
+  it("without the commander out, others get nothing; an opponent's creatures never do", () => {
+    const { game } = table();
+    spawn(game, "Master Chef");
+    lands(game, "Forest", 2);
+    const bear = toHand(game, "Grizzly Bears");
+    cast(game, bear);
+    expect(counters(game, bear)).toBe(0);
+    const commander = spawn(game, "Grizzly Bears");
+    game.state.objects[commander].isCommander = true;
+    const theirs = spawn(game, "Grizzly Bears", B);
+    expect(counters(game, theirs)).toBe(0);
+  });
+
+  it("a commander you don't own gets nothing", () => {
+    const { game } = table();
+    spawn(game, "Master Chef");
+    lands(game, "Forest", 2);
+    const commander = toHand(game, "Grizzly Bears");
+    game.state.objects[commander].isCommander = true;
+    (game.state.objects[commander] as { owner: typeof B }).owner = B;
+    cast(game, commander);
+    expect(counters(game, commander)).toBe(0);
   });
 });

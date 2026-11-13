@@ -5653,9 +5653,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   sources grant two instances. Its effects take the later of the two
   timestamps; a later loss of all abilities takes it away (613.7). Read
   through `grantedStatics`, so it reaches the layer fold (P/T, keywords,
-  restrictions), "can't lose the game", untap restrictions and block rules —
-  not a cost modification (Acolyte of Bahamut), a layer-4 part, or another
-  `grantsStatic`. Each granted static needs its own `text` (the quoted line).
+  restrictions), "can't lose the game", untap restrictions and block rules,
+  and an `others-enter-battlefield` replacement; an `enters-battlefield` one
+  ("this creature enters with an additional +1/+1 counter") applies as the
+  object enters when it'll have the grant there (rule 614.12,
+  `enteringGrantedStatics` — Master Chef) — but not a cost modification
+  (Acolyte of Bahamut), a layer-4 part, or another `grantsStatic`. Each
+  granted static needs its own `text` (the quoted line).
   The scaffolder reads "Equipped creature / Commander creatures you own / All
   Sliver creatures / Creatures you control has|have [keyword and] '<static>'"
   when it can read the quoted line. `granted-statics.test.ts`.

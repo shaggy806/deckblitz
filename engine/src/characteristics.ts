@@ -2935,6 +2935,31 @@ export function enteringKeywordInstances(
   return instances;
 }
 
+/**
+ * The static abilities battlefield statics will grant a card about to enter
+ * under `under` (rule 614.12): Master Chef's "commander creatures you own have
+ * 'this creature enters with an additional +1/+1 counter on it'" applies as
+ * the commander enters. Matched as {@link enteringKeywordInstances} matches.
+ * Usually none, and then cheaply.
+ */
+export function enteringGrantedStatics(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  under: PlayerId,
+): readonly StaticAbility[] {
+  const granting = staticGrantSources(state, registry);
+  const out: StaticAbility[] = [];
+  for (const { source, ability } of granting) {
+    if (source.id === object.id || state.players[source.controller]?.hasLost === true) continue;
+    if (ability.affects.scope === "attached" || ability.affects.scope === "paired" || ability.affects.scope === "chosen") continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    if (!staticAffects(state, registry, ability.affects, source, object, { entering: true, enteringUnder: under })) continue;
+    out.push(...(ability.grantsStatic ?? []));
+  }
+  return out;
+}
+
 /** The board scan behind {@link staticAbilityLosses}. */
 function computeStaticAbilityLosses(state: GameState, registry: CardRegistry): StaticLosses {
   interface Pending {

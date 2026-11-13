@@ -508,6 +508,7 @@ import _poolMarthaJones from "../pool/martha-jones.js";
 import _poolMarvelBoyNohVarr from "../pool/marvel-boy-noh-varr.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
 import _poolMaskedAdmirers from "../pool/masked-admirers.js";
+import _poolMasterChef from "../pool/master-chef.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMelancholy from "../pool/melancholy.js";
@@ -1500,6 +1501,7 @@ const shard: CardShard = {
     _poolMarvelBoyNohVarr,
     _poolMaryReadAndAnneBonny,
     _poolMaskedAdmirers,
+    _poolMasterChef,
     _poolMasterOfEtherium,
     _poolMastersGuideMural,
     _poolMelancholy,

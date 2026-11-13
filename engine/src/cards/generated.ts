@@ -16701,6 +16701,7 @@ import _poolMassiveMight from "./pool/massive-might.js";
 import _poolMassiveRaid from "./pool/massive-raid.js";
 import _poolMasterApothecary from "./pool/master-apothecary.js";
 import _poolMasterBiomancer from "./pool/master-biomancer.js";
+import _poolMasterChef from "./pool/master-chef.js";
 import _poolMasterDecoy from "./pool/master-decoy.js";
 import _poolMasterHealer from "./pool/master-healer.js";
 import _poolMasterOfArms from "./pool/master-of-arms.js";
@@ -49414,6 +49415,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMassiveRaid,
   _poolMasterApothecary,
   _poolMasterBiomancer,
+  _poolMasterChef,
   _poolMasterDecoy,
   _poolMasterHealer,
   _poolMasterOfArms,
@@ -82140,6 +82142,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/massive-raid": _poolMassiveRaid,
   "pool/master-apothecary": _poolMasterApothecary,
   "pool/master-biomancer": _poolMasterBiomancer,
+  "pool/master-chef": _poolMasterChef,
   "pool/master-decoy": _poolMasterDecoy,
   "pool/master-healer": _poolMasterHealer,
   "pool/master-of-arms": _poolMasterOfArms,

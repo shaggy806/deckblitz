@@ -152,6 +152,7 @@ import {
   objHasKeyword,
   effectiveSubtypes,
   effectiveTypes,
+  enteringGrantedStatics,
   enteringKeywordInstances,
   entersWithoutAbilities,
   exemptFromLegendRule,
@@ -60962,7 +60963,11 @@ controlledBy,
     // What a copy's exception added counts as printed here (rule 707.9b:
     // Flesh Duplicate's vanishing 3 enters with its time counters).
     const copiedStatics = object.modifiers.flatMap((m) => (m.copiable === true ? (m.grantsStatic ?? []) : []));
-    for (const ability of ownLost ? [] : copiedStatics.length === 0 ? def.static : [...def.static, ...copiedStatics]) {
+    // And what a battlefield static will grant it there (rule 614.12 —
+    // Master Chef's commander "enters with an additional +1/+1 counter").
+    const grantedOnEntry = ownLost ? [] : enteringGrantedStatics(this.state, this.registry, object, object.controller);
+    const ownStatics = copiedStatics.length === 0 ? def.static : [...def.static, ...copiedStatics];
+    for (const ability of ownLost ? [] : grantedOnEntry.length === 0 ? ownStatics : [...ownStatics, ...grantedOnEntry]) {
       const r = ability.replacement;
       if (r === undefined || r.event !== "enters-battlefield") continue;
       if (!this.staticActive(object, ability)) continue;
@@ -61143,7 +61148,11 @@ controlledBy,
       // An eliminated player's permanents stop affecting the game (see
       // `matchesFilter`).
       if (this.state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      // Its own statics and those granted it (Master Chef's commander has
+      // "other creatures you control enter with an additional +1/+1 counter").
+      const printedStatics = this.registry.get(rulesTextName(source)).static;
+      const granted = grantedStatics(this.state, this.registry, source, (a) => a.replacement?.event === "others-enter-battlefield");
+      for (const ability of granted.length === 0 ? printedStatics : [...printedStatics, ...granted]) {
         const r = ability.replacement;
         if (r?.event !== "others-enter-battlefield") continue;
         if (!this.staticActive(source, ability)) continue;
