@@ -468,6 +468,7 @@ import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLegionsOfLimDul from "../pool/legions-of-lim-dul.js";
 import _poolLembas from "../pool/lembas.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
+import _poolLeylineOfTransformation from "../pool/leyline-of-transformation.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
 import _poolLilianaDeathMage from "../pool/liliana-death-mage.js";
@@ -1464,6 +1465,7 @@ const shard: CardShard = {
     _poolLegionsOfLimDul,
     _poolLembas,
     _poolLeylineDowser,
+    _poolLeylineOfTransformation,
     _poolLightningHelix,
     _poolLightningReflexes,
     _poolLilianaDeathMage,

@@ -2298,6 +2298,28 @@ export function spellHasSplitSecond(state: GameState, registry: CardRegistry, sp
   return false;
 }
 
+/** Whether an ability on the stack can't be countered (rule 701.5f): a
+ * `grantsToSpells` static with `cantBeCountered` and `andAbilities` on the
+ * battlefield or an emblem — Spider-Punk's "spells and abilities can't be
+ * countered" — reaching every player's (`allSpells`) or its controller's. */
+function abilityCantBeCountered(state: GameState, registry: CardRegistry, ability: GameObject): boolean {
+  if (ability.zone !== "stack") return false;
+  const reaches = (source: GameObject, granting: StaticAbility): boolean => {
+    const grant = granting.grantsToSpells;
+    if (grant?.cantBeCountered !== true || grant.andAbilities !== true) return false;
+    if ((source.zone !== "battlefield" && source.kind !== "emblem") || hasLostAbilities(state, registry, source)) return false;
+    if (state.players[source.controller]?.hasLost === true) return false;
+    if (grant.allSpells !== true && ability.controller !== source.controller) return false;
+    return granting.condition === undefined || staticConditionMet(state, registry, source, granting.condition);
+  };
+  for (const id of state.zones.shared.battlefield) {
+    const source = state.objects[id];
+    if (source === undefined) continue;
+    if (registry.get(rulesTextName(source)).static.some((granting) => reaches(source, granting))) return true;
+  }
+  return emblemStatics(state).some(({ source, ability: granting }) => reaches(source, granting));
+}
+
 /** Whether `spell`, on the stack, can't be countered (rule 701.5f): printed
  * ("this spell can't be countered"), or given by a `grantsToSpells` static
  * on the battlefield ("creature spells you control can't be countered").
@@ -2311,6 +2333,7 @@ export function spellCantBeCountered(
   spell: GameObject,
   by?: GameObject,
 ): boolean {
+  if (spell.kind === "ability") return abilityCantBeCountered(state, registry, spell);
   if (spell.kind !== "card") return false;
   const printed = registry.get(rulesTextName(spell)).cantBeCountered;
   if (printed === true) return true;

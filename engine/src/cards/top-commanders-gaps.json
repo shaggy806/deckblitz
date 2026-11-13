@@ -2374,7 +2374,15 @@
   "amount:exiled-card-mana-value",
   "amount:exiled-card-mana-value",
   "effect:copy-next-loyalty-ability",
-  "trigger:granted-deals-damage-to-spell-caster"
+  "trigger:granted-deals-damage-to-spell-caster",
+  "static:spells-and-abilities-cant-be-countered",
+  "stat:note-mana-type",
+  "cost:cost-modification-mana-value-with-x",
+  "effect:put-into-library-nth-from-top-together",
+  "bug:simultaneous-discards",
+  "mechanic:opening-hand-enter-choice",
+  "decision:choose-two-players-on-enter",
+  "effect:lose-all-player-counters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -284,6 +284,7 @@ import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFieryTemper from "../pool/fiery-temper.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
+import _poolFinalAct from "../pool/final-act.js";
 import _poolFireJuggler from "../pool/fire-juggler.js";
 import _poolFirefistStriker from "../pool/firefist-striker.js";
 import _poolFistsOfTheDemigod from "../pool/fists-of-the-demigod.js";
@@ -1278,6 +1279,7 @@ const shard: CardShard = {
     _poolFieryJustice,
     _poolFieryTemper,
     _poolFiliThePathfinder,
+    _poolFinalAct,
     _poolFireJuggler,
     _poolFirefistStriker,
     _poolFistsOfTheDemigod,

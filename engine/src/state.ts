@@ -805,6 +805,12 @@ export interface GameObject {
    * player"). What a `"chosen-player"` scope, trigger subject or filter
    * reads off its source. Cleared on any zone change (rule 400.7). */
   chosenPlayer?: PlayerId;
+  /** The second of the two players chosen as this permanent entered
+   * (`CardDefinition.chooseTwoPlayersOnEnter` — Sower of Discord), beside
+   * `chosenPlayer`, the first: what the `"chosen-players"` damage recipient
+   * and the `"other-chosen-player"` scope read. Cleared on any zone change
+   * (rule 400.7). */
+  otherChosenPlayer?: PlayerId;
   /** What was chosen for this permanent (`chosenPlayer`, `chosenCreatureType`)
    * was chosen **secretly** — "secretly choose an opponent" (Stalking Leonin,
    * Guardian Archon), "secretly choose Human, Merfolk, or Goblin" (A Killer
@@ -947,6 +953,10 @@ export interface GameObject {
      * (`CardDefinition.choosePlayerOnEnter`), or `null` with nobody to
      * choose. Lands on `GameObject.chosenPlayer`. */
     readonly chosenPlayer?: PlayerId | null;
+    /** The second of two players chosen as it was about to enter
+     * (`CardDefinition.chooseTwoPlayersOnEnter`), or `null` with nobody
+     * else to choose. Lands on `GameObject.otherChosenPlayer`. */
+    readonly otherChosenPlayer?: PlayerId | null;
     /** `chosenPlayer` was chosen secretly, by this player
      * (`CardDefinition.secretChoiceOnEnter`). Lands on
      * `GameObject.secretChoice`. */
@@ -2251,6 +2261,9 @@ export interface LastKnownInfo {
   /** `GameObject.chosenPlayer` as it left — "the chosen player" for an
    * ability of it that resolves after it has gone (rule 608.2h). */
   readonly chosenPlayer?: PlayerId;
+  /** `GameObject.otherChosenPlayer` as it left (Sower of Discord's "the
+   * other chosen player", resolving after it has died — its ruling). */
+  readonly otherChosenPlayer?: PlayerId;
   /** `GameObject.chosenPermanent` as it left — "the chosen creature" for an
    * ability of it that resolves after it has gone (rule 608.2h: Tyrannical
    * Pitlord's leaves trigger, Dauntless Bodyguard sacrificed for its cost). */
@@ -3588,6 +3601,11 @@ export type AwaitingDecision =
        * 701.22a, 701.25a). Nothing is taken, so no `cards-chosen-from-zone`.
        */
       readonly order?: true;
+      /** With `order` and `destination: "library-top"`: the cards go **Nth
+       * from the top** instead, the first chosen there and the rest beneath
+       * it in order (Riptide Gearhulk's "third from the top", several of one
+       * owner's at once — rule 401.4). */
+      readonly libraryFromTop?: number;
       /** An `order` over cards in `player`'s own graveyard, which stay there:
        * rule 404.3's "the owner of those cards may arrange them in any order",
        * or Fossil Find's "reorder your graveyard as you choose". The first
@@ -3977,6 +3995,10 @@ export type AwaitingDecision =
        * (`CardDefinition.choosePlayerOnEnter`) — `options` are the players
        * who may be chosen, recorded as `enterChoice.chosenPlayer`. */
       readonly choosePlayer?: true;
+      /** With `choosePlayer`: the **second** of "choose two players"
+       * (`CardDefinition.chooseTwoPlayersOnEnter`), recorded as
+       * `enterChoice.otherChosenPlayer`. */
+      readonly secondPlayer?: true;
       /** "**Secretly** choose …": the answer stays out of the log (a
        * `secret-choice-made` event names who chose, not what) and, with
        * `remember` or `choosePlayer`, is marked `GameObject.secretChoice`. */
@@ -5135,6 +5157,17 @@ export type PendingEntry =
       readonly objects: readonly ObjectId[];
     }
   | {
+      /** Cards a player chose to begin the game with on the battlefield from
+       * their opening hand (rule 103.6a — the Leylines), waiting on one's "as
+       * this enters" choice (Leyline of Transformation's creature type);
+       * `next` and `destination` are `Game.applyOpeningHand`'s. */
+      readonly kind: "opening-hand";
+      readonly player: PlayerId;
+      readonly objects: readonly ObjectId[];
+      readonly next: number;
+      readonly destination: string;
+    }
+  | {
       /** Cards players chose to put from their hands onto the battlefield
        * while their choices were held (rule 101.4 — Show and Tell), entering
        * together once each has made its "as this enters" choices. */
@@ -6000,6 +6033,11 @@ export interface GameState {
     /** `cause`: who controlled the spell or ability that made them choose
      * — the discard's cause once it happens (`cards-discarded`). */
     readonly discards: readonly { readonly player: PlayerId; readonly objects: readonly ObjectId[]; readonly cause?: PlayerId }[];
+    /** Opened by an "each player discards … at random" (Burning Inquiry):
+     * random picks are held too, to be discarded together. Any other hold
+     * (an `each-player-may` — Apathy's "may discard a card at random. If the
+     * player does …") lets a random discard happen at once. */
+    readonly randomDiscards?: true;
     readonly entries?: readonly {
       readonly player: PlayerId;
       readonly objects: readonly ObjectId[];

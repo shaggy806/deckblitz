@@ -92,6 +92,11 @@ export type PlayerRef =
   | "trigger-player"
   | "that-player"
   | "chosen-player"
+  /** Of the two players chosen as the source entered (`chosenPlayer`,
+   * `otherChosenPlayer`), the one that isn't the trigger's player — Sower of
+   * Discord's "the other chosen player". Nobody when that player isn't one
+   * of them. */
+  | "other-chosen-player"
   | "player-to-your-left"
   | "player-to-your-right"
   | { readonly target: number }

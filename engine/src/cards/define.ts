@@ -2985,6 +2985,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * Every spell its controller controls counts, a copy too, and not only
      * ones cast from the hand. */
     readonly cantBeCountered?: boolean;
+    /** With `cantBeCountered`: **abilities** can't be countered either —
+     * Spider-Punk's "spells **and abilities** can't be countered" (with
+     * `allSpells`). Every activated and triggered ability on the stack (rule
+     * 113.1b's objects there; mana abilities never are), whoever's when
+     * `allSpells`, otherwise this permanent's controller's; `filter` and
+     * `castFrom`, which describe a spell, don't apply to them. Still
+     * targetable by "counter target ability" — it just isn't countered
+     * (the card's ruling). Read where a spell's grant is
+     * (`spellCantBeCountered`). */
+    readonly andAbilities?: boolean;
     /** Every player's spells, not just this permanent's controller's —
      * Lier, Disciple of the Drowned's "**Spells** can't be countered". */
     readonly allSpells?: boolean;
@@ -5071,6 +5081,14 @@ export interface CardDefinition {
    */
   readonly secretChoiceOnEnter?: true;
   /**
+   * "As this creature enters, choose **two** players" (Sower of Discord),
+   * with `choosePlayerOnEnter: "player"`: after the first, a second,
+   * different player (its ruling — its controller may be either), kept as
+   * `GameObject.otherChosenPlayer`. Read by the `"chosen-players"` damage
+   * recipient and the `"other-chosen-player"` scope.
+   */
+  readonly chooseTwoPlayersOnEnter?: true;
+  /**
    * "This enters **under the control of an opponent of your choice**" (Xantcha,
    * Sleeper Agent; Captive Audience), with `choosePlayerOnEnter: "opponent"`: a
    * replacement (rule 614.1d), so no player gets to act while it's yours. Asked
@@ -5831,6 +5849,7 @@ const PRINTED_ABILITY: {
   chooseOnEnterLook: (def) => def.chooseOnEnterLook !== null,
   choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
   secretChoiceOnEnter: false,
+  chooseTwoPlayersOnEnter: false,
   entersUnderChosenPlayer: false,
   choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
   loyalty: false,
@@ -6144,6 +6163,7 @@ interface CardDraft {
   chooseOnEnterLook?: "opponent-hand";
   choosePlayerOnEnter?: "player" | "opponent";
   secretChoiceOnEnter?: true;
+  chooseTwoPlayersOnEnter?: true;
   entersUnderChosenPlayer?: true;
   choosePermanentOnEnter?: PermanentOnEnter;
   loyalty?: number;
@@ -6527,6 +6547,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
     ...(draft.minX !== undefined ? { minX: draft.minX } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
+    ...(draft.chooseTwoPlayersOnEnter === true ? { chooseTwoPlayersOnEnter: true as const } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),

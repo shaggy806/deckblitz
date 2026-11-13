@@ -694,6 +694,7 @@ import _poolRestore from "../pool/restore.js";
 import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
 import _poolRhoxMaulers from "../pool/rhox-maulers.js";
 import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
+import _poolRiptideGearhulk from "../pool/riptide-gearhulk.js";
 import _poolRisenRiptide from "../pool/risen-riptide.js";
 import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
 import _poolRisingMiasma from "../pool/rising-miasma.js";
@@ -1700,6 +1701,7 @@ const shard: CardShard = {
     _poolReturnToTheLightRealms,
     _poolRhoxMaulers,
     _poolRimekinRecluse,
+    _poolRiptideGearhulk,
     _poolRisenRiptide,
     _poolRishadanDockhand,
     _poolRisingMiasma,

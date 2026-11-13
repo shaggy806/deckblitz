@@ -7321,6 +7321,18 @@ export class Game {
       this.beginOpeningHandActions(next);
       return;
     }
+    // Each makes its "as this enters" choices first (rule 614.12 — Leyline of
+    // Transformation's creature type), the entry parked while one is asked.
+    for (const id of chosen) {
+      if (this.state.objects[id]?.zone !== "hand") continue;
+      if (this.askEnterChoice(id, player)) {
+        this.state.suspendedResolutions.push({
+          effect: null,
+          enter: { kind: "opening-hand", player, objects: [...chosen], next, destination },
+        });
+        return;
+      }
+    }
     let owed = 0;
     this.withEnterBatch(() => {
       for (const id of chosen) {
@@ -7998,6 +8010,8 @@ export class Game {
         source.enterChoice = { ...source.enterChoice, tributeFrom: creatureType as PlayerId };
       } else if (awaiting.lookAt === true) {
         source.enterChoice = { ...source.enterChoice, lookAt: creatureType as PlayerId };
+      } else if (awaiting.choosePlayer === true && awaiting.secondPlayer === true) {
+        source.enterChoice = { ...source.enterChoice, otherChosenPlayer: creatureType as PlayerId };
       } else if (awaiting.choosePlayer === true) {
         source.enterChoice = {
           ...source.enterChoice,
@@ -11608,7 +11622,7 @@ export class Game {
   private beginLibraryOrder(
     player: PlayerId,
     cards: readonly ObjectId[],
-    position: "top" | "bottom",
+    position: "top" | "bottom" | { readonly fromTop: number },
     thenOrder?: { readonly cards: readonly ObjectId[]; readonly position: "top" | "bottom" },
   ): boolean {
     if (!this.libraryOrderMatters(cards)) {
@@ -11622,7 +11636,8 @@ export class Game {
       eligible: [...cards],
       min: cards.length,
       max: cards.length,
-      destination: position === "top" ? "library-top" : "library-bottom",
+      destination: position === "bottom" ? "library-bottom" : "library-top",
+      ...(typeof position === "object" ? { libraryFromTop: position.fromTop } : {}),
       leftover: "stay",
       order: true,
       ...(thenOrder !== undefined ? { thenOrder } : {}),
@@ -11909,7 +11924,12 @@ export class Game {
     // 701.24b — "shuffle, *then* put that card on top"). Last chosen first,
     // so a multi-card find ends up in the order it was chosen.
     if (awaiting.destination === "library-top") {
-      for (const id of [...chosen].reverse()) if (!toCommandZone.has(id)) this.putPickOnLibrary(id, "top");
+      // Nth from the top: the last chosen goes in there first, so each one
+      // before it lands above it — the first chosen Nth.
+      const at = awaiting.libraryFromTop;
+      for (const id of [...chosen].reverse()) {
+        if (!toCommandZone.has(id)) this.putPickOnLibrary(id, at === undefined ? "top" : { fromTop: at });
+      }
     }
     // "Put the chosen cards on top of your library in any order" (Doomsday):
     // on top now, so only their order is asked.
@@ -14615,7 +14635,7 @@ export class Game {
     | { readonly kind: "amplify"; readonly as: CardDefinition }
     | { readonly kind: "protector"; readonly siege: boolean }
     | { readonly kind: "name"; readonly spec: CardNameOnEnter }
-    | { readonly kind: "player"; readonly among: "player" | "opponent"; readonly secret?: true }
+    | { readonly kind: "player"; readonly among: "player" | "opponent"; readonly secret?: true; readonly second?: true }
     | { readonly kind: "permanent"; readonly spec: PermanentOnEnter }
     | { readonly kind: "attach-host"; readonly filter: CardFilter }
     | null {
@@ -14722,6 +14742,15 @@ export class Game {
         among: becoming.choosePlayerOnEnter,
         ...(becoming.secretChoiceOnEnter === true ? { secret: true as const } : {}),
       };
+    }
+    // "As this enters, choose two players" (Sower of Discord): a second,
+    // different from the first (its ruling).
+    if (
+      answered?.chosenPlayer !== undefined &&
+      answered.otherChosenPlayer === undefined &&
+      becoming.chooseTwoPlayersOnEnter === true
+    ) {
+      return { kind: "player", among: "player", second: true };
     }
     // "As this enters, choose another creature you control" — printed, or a
     // copy's.
@@ -15281,9 +15310,30 @@ export class Game {
         // only among two or more.
         const at = this.state.turnOrder.indexOf(chooser);
         const rotated = [...this.state.turnOrder.slice(at + 1), ...this.state.turnOrder.slice(0, at + 1)];
+        const first = object.enterChoice?.chosenPlayer;
         const options = rotated.filter(
-          (p) => this.state.players[p]?.hasLost === false && (next.among === "player" || p !== chooser),
+          (p) =>
+            this.state.players[p]?.hasLost === false &&
+            (next.among === "player" || p !== chooser) &&
+            (next.second !== true || p !== first),
         );
+        if (next.second === true) {
+          if (options.length > 1) {
+            this.state.awaiting = {
+              kind: "choose-creature-type",
+              player: chooser,
+              source: id,
+              options,
+              catalog: false,
+              choosePlayer: true,
+              secondPlayer: true,
+              prompt: "Choose a second player",
+            };
+            return true;
+          }
+          object.enterChoice = { ...object.enterChoice, otherChosenPlayer: options[0] ?? null };
+          continue;
+        }
         if (options.length > 1) {
           this.state.awaiting = {
             kind: "choose-creature-type",
@@ -17303,7 +17353,7 @@ export class Game {
     const increaseColored: Record<Color, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
     let reduceGeneric = 0;
     const colored: ColoredReduction[] = [];
-    for (const { source, mod } of this.reachingCostModifications(player, cardId)) {
+    for (const { source, mod } of this.reachingCostModifications(player, cardId, xValue)) {
       // "Those spells cost {G} less to cast if you paid life this way" (the
       // Defilers): only with that source's optional life paid (rule 601.2b).
       if (mod.optionalLife !== undefined && this.optionalLifePick?.includes(source.id) !== true) continue;
@@ -17376,6 +17426,7 @@ export class Game {
   private reachingCostModifications(
     player: PlayerId,
     cardId: ObjectId,
+    xValue?: number,
   ): { readonly source: GameObject; readonly mod: NonNullable<StaticAbility["costModification"]> }[] {
     const reaching: { readonly source: GameObject; readonly mod: NonNullable<StaticAbility["costModification"]> }[] = [];
     // The command zone joins the scan for Eminence's static form (The
@@ -17409,7 +17460,15 @@ export class Game {
         // controller's artifact spells, not anyone's) — fixed alongside
         // needed-cards P16's Temur Battlecrier, which needs the same
         // scoping for its live count.
-        if (!matchesFilter(this.state, this.registry, cardId, applies, { you: source.controller, source: source.id })) {
+        // Its mana value counts the X just announced (rules 202.3e, 601.2f —
+        // Thryx's ruling): a card still in hand is judged as that spell.
+        if (
+          !matchesFilter(this.state, this.registry, cardId, applies, {
+            you: source.controller,
+            source: source.id,
+            ...(xValue !== undefined ? { castX: xValue } : {}),
+          })
+        ) {
           continue;
         }
         if (
@@ -29175,6 +29234,7 @@ export class Game {
     else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
     else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters, entry.enterAs, entry.tapped, entry.shuffles);
     else if (entry.kind === "token-copies") this.enterTokenCopies(entry);
+    else if (entry.kind === "opening-hand") this.applyOpeningHand(entry.player, entry.objects, entry.next, entry.destination);
     else this.finishZoneChoice(entry);
   }
 
@@ -33912,8 +33972,19 @@ export class Game {
       // "The player who cast [the granting spell]": none for a copy that
       // wasn't cast, which then never triggers.
       if (spec.to === "spell-caster" && target.player !== spec.spellCaster) return false;
+      if (spec.to === "chosen-players" && target.player !== self.chosenPlayer && target.player !== self.otherChosenPlayer) {
+        return false;
+      }
     } else {
-      if (spec.to === "player" || spec.to === "opponent" || spec.to === "you" || spec.to === "spell-caster") return false;
+      if (
+        spec.to === "player" ||
+        spec.to === "opponent" ||
+        spec.to === "you" ||
+        spec.to === "spell-caster" ||
+        spec.to === "chosen-players"
+      ) {
+        return false;
+      }
       // "Deals combat damage to Vraska": the ability's own source.
       if (spec.to === "self" && target.object !== self.id) return false;
       if (spec.to === "creature" || spec.to === "planeswalker") {
@@ -35312,6 +35383,16 @@ export class Game {
         const departed = departedSource();
         const p = departed !== undefined ? departed.chosenPlayer : this.state.objects[source]?.chosenPlayer;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
+      }
+      if (who === "other-chosen-player") {
+        // The one of the two that isn't the trigger's player, read off the
+        // source as it last existed if it has gone (Sower of Discord's ruling).
+        const departed = departedSource();
+        const was = departed ?? this.state.objects[source];
+        const pair = [was?.chosenPlayer, was?.otherChosenPlayer];
+        if (refs.player === undefined || !pair.includes(refs.player)) return [];
+        const other = pair.find((p) => p !== undefined && p !== refs.player);
+        return other === undefined || this.state.players[other]?.hasLost !== false ? [] : [other];
       }
       if (who === "players-dealt-damage-this-way") {
         const dealt = new Set<PlayerId>();
@@ -38618,7 +38699,11 @@ controlledBy,
         return true;
       },
       putOnLibrariesTogether: (placements) => {
-        const moved: { object: ObjectId; owner: PlayerId; position: "top" | "bottom" | "shuffle" | "bottom-random" }[] = [];
+        const moved: {
+          object: ObjectId;
+          owner: PlayerId;
+          position: "top" | "bottom" | "shuffle" | "bottom-random" | { readonly fromTop: number };
+        }[] = [];
         // "On the bottom in a random order": the owner arranges nothing, so
         // none of these reaches the orders below.
         const randomly = placements.filter((p) => p.position === "bottom-random").map((p) => p.object);
@@ -38654,10 +38739,17 @@ controlledBy,
         // token there is gone at the next state-based check (rule 704.5d),
         // never ordered.
         const steps: LibraryOrderStep[] = [];
+        const nths = [
+          ...new Set(moved.flatMap((m) => (typeof m.position === "object" ? [m.position.fromTop] : []))),
+        ].map((fromTop) => ({ fromTop }));
+        const at = (m: (typeof moved)[number], position: LibraryOrderStep["position"]): boolean =>
+          typeof position === "object"
+            ? typeof m.position === "object" && m.position.fromTop === position.fromTop
+            : m.position === position;
         for (const player of this.apnapOrder()) {
-          for (const position of ["top", "bottom"] as const) {
+          for (const position of [...nths, "top", "bottom"] as const) {
             const cards = moved
-              .filter((m) => m.owner === player && m.position === position)
+              .filter((m) => m.owner === player && at(m, position))
               .map((m) => m.object)
               .filter((id) => {
                 const object = this.state.objects[id];
@@ -38851,8 +38943,8 @@ controlledBy,
           this.makeResolutionContext(source, player, targets, x, triggerValue, triggerObject, 1, 0, targetZones, refs),
         );
       },
-      holdChoices: () => {
-        this.state.heldChoices ??= { discards: [] };
+      holdChoices: (randomDiscards) => {
+        this.state.heldChoices ??= { discards: [], ...(randomDiscards === true ? { randomDiscards: true as const } : {}) };
       },
       choicesHeld: () => this.state.heldChoices !== undefined,
       releaseHeldChoices: () => this.releaseHeldChoices(),
@@ -40470,10 +40562,10 @@ controlledBy,
         if (t.kind === "object") this.flipPermanent(t.object);
       },
       setDayNight: (value) => this.setDayNight(value),
-      noteNumberOnSource: (n) => {
+      noteOnSource: (value) => {
         // Only the permanent this ability refers to (rule 400.7).
         if (!sourceStillOn()) return;
-        this.state.objects[source].chosenOnEnter = String(n);
+        this.state.objects[source].chosenOnEnter = value;
       },
       becomeMonarch: (who, via) => {
         for (const p of scoped(who ?? "you")) {
@@ -40559,7 +40651,9 @@ controlledBy,
         for (const [kind, n] of Object.entries(counts)) {
           if (n <= 0) continue;
           if (kind === "energy") this.changeEnergy(player, -Math.min(n, this.state.players[player]?.energy ?? 0));
-          else if (kind === "poison" || kind === "experience" || kind === "rad") this.changePlayerCounters(player, kind, -n);
+          else if (kind === "poison" || kind === "experience" || kind === "rad" || kind === "contract") {
+            this.changePlayerCounters(player, kind, -n);
+          }
         }
       },
       createEmblem: (text, staticAbility, triggered, owner, moreStatics) => {
@@ -40897,7 +40991,8 @@ controlledBy,
       // "Each opponent loses 2 life": one simultaneous loss (rule 603.2c).
       changeLifeScoped: (who, delta) =>
         this.withLifeLossBatch(() =>
-          typeof who === "object"
+          // A source's chosen player(s) only a resolution knows.
+          typeof who === "object" || who === "chosen-player" || who === "other-chosen-player"
             ? scoped(who).forEach((player) => this.changeLife(player, delta))
             : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
         ),
@@ -53282,7 +53377,7 @@ controlledBy,
   /** {@link putOnLibrary} for a `choose-from-zone`'s pick. A commander in exile
    * was asked 903.9b before anything moved (`finishZoneChoice`) and is going to
    * the library by that answer, so `moveObject` mustn't ask again. */
-  private putPickOnLibrary(id: ObjectId, position: "top" | "bottom"): void {
+  private putPickOnLibrary(id: ObjectId, position: "top" | "bottom" | { readonly fromTop: number }): void {
     const object = this.state.objects[id];
     const answered = object?.zone === "exile" && object.isCommander === true;
     if (answered) this.completingCommanderMove = id;
@@ -55152,7 +55247,11 @@ controlledBy,
       const picked = shuffle(this.state.zones.perPlayer[player].hand, this.rng).slice(0, amount);
       this.state.rngState = this.rng.seed;
       if (picked.length === 0) return;
-      this.discardCards(player, picked);
+      // "Each player … discards three cards at random" (Burning Inquiry):
+      // each player's picked in turn order, then all discarded at the same
+      // time (its ruling) — held with the rest until the release.
+      if (this.state.heldChoices?.randomDiscards === true) this.holdDiscard(player, picked);
+      else this.discardCards(player, picked);
       this.emit({ type: "acted-at-random", player, act: "discard" });
       return;
     }
@@ -57600,7 +57699,8 @@ controlledBy,
       who === "players-dealt-damage-this-way" ||
       who === "attacked-players" ||
       who === "you-and-attacked-players" ||
-      who === "chosen-player"
+      who === "chosen-player" ||
+      who === "other-chosen-player"
     ) {
       return [];
     }
@@ -60905,6 +61005,7 @@ controlledBy,
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
       ...(object.chosenNames !== undefined ? { chosenNames: [...object.chosenNames] } : {}),
       ...(object.chosenPlayer !== undefined ? { chosenPlayer: object.chosenPlayer } : {}),
+      ...(object.otherChosenPlayer !== undefined ? { otherChosenPlayer: object.otherChosenPlayer } : {}),
       ...(object.chosenPermanent !== undefined ? { chosenPermanent: object.chosenPermanent } : {}),
       ...(object.enteredBattlefieldOnTurn !== null ? { enteredOnTurn: object.enteredBattlefieldOnTurn } : {}),
       ...(object.turnedFaceUpOnTurn !== undefined ? { turnedFaceUpOnTurn: object.turnedFaceUpOnTurn } : {}),
@@ -61845,6 +61946,7 @@ controlledBy,
     delete object.chosenOnEnter;
     delete object.chosenNames;
     delete object.chosenPlayer;
+    delete object.otherChosenPlayer;
     delete object.secretChoice;
     delete object.chosenPermanent;
     // A battle's protector was this stint's (rule 400.7).
@@ -61889,6 +61991,7 @@ controlledBy,
       }
       if (enterChoice.chosenName != null) object.chosenNames = [enterChoice.chosenName];
       if (enterChoice.chosenPlayer != null) object.chosenPlayer = enterChoice.chosenPlayer;
+      if (enterChoice.otherChosenPlayer != null) object.otherChosenPlayer = enterChoice.otherChosenPlayer;
       if (enterChoice.chosenSecretlyBy !== undefined) object.secretChoice = { by: enterChoice.chosenSecretlyBy };
       // A battle enters protected by the player chosen for it (rule 310.9a).
       if (enterChoice.protector !== undefined) object.protector = enterChoice.protector;

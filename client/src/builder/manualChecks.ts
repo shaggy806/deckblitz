@@ -12139,4 +12139,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   ),
   preset('Game menu: leaving a game being played asks first', board({ you: { bf: ['Forest'] } })),
   preset('A turn that ends on its own says so', board({ you: { hand: ['Forest'] } })),
+  preset(
+    'Leyline of Transformation: begun on the battlefield, it asks for a creature type',
+    board({
+      openingHands: true,
+      you: { hand: ['Leyline of Transformation', 'Grizzly Bears', 'Forest*5'] },
+    }),
+  ),
+  preset(
+    'Sower of Discord: choose two different players',
+    board({
+      you: { bf: ['Swamp*6', 'Mountain'], hand: ['Sower of Discord', 'Lightning Bolt'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

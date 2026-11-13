@@ -8086,3 +8086,12 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Nowhere to Run: an opponent's ward doesn't trigger
 - **Do:** Cast Shock on the opponent's Adrix and Nev.
 - **Expect:** No ward question: Shock resolves and Adrix and Nev dies.
+
+### Leyline of Transformation: begun on the battlefield, it asks for a creature type
+- **Do:** Keep your hand, then choose to begin the game with Leyline of Transformation on the battlefield.
+- **Expect:** Before the first turn you're asked to choose a creature type; the Leyline is on the battlefield with it, and the Grizzly Bears in your hand show that type beside Bear.
+
+### Sower of Discord: choose two different players
+- **Do:** Cast Sower of Discord; choose Bob, then Carol. Then cast Lightning Bolt at Bob.
+- **Expect:** The second question reads "Choose a second player" and doesn't offer Bob. Bob takes 3 and Carol loses 3 life.
+- **Not a bug:** You may choose yourself as either player.

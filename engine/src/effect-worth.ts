@@ -189,6 +189,12 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       const chosen = ctx.source !== undefined ? state.objects[ctx.source]?.chosenPlayer : undefined;
       return chosen !== undefined ? [chosen] : null;
     }
+    case "other-chosen-player": {
+      const object = ctx.source !== undefined ? state.objects[ctx.source] : undefined;
+      const pair = [object?.chosenPlayer, object?.otherChosenPlayer];
+      const other = pair.find((p) => p !== undefined && p !== ctx.triggerPlayer);
+      return other !== undefined && ctx.triggerPlayer !== undefined && pair.includes(ctx.triggerPlayer) ? [other] : null;
+    }
     case "trigger-controller": {
       const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
       return object !== undefined ? [object.controller] : null;

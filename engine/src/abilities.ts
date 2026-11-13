@@ -2301,8 +2301,20 @@ export type TriggerKind =
        * to Vraska". `"spell-caster"`, on an ability a spell grants, is the
        * player who cast that spell — Hellish Rebuke's "deals damage to the
        * player who cast Hellish Rebuke": the grant writes that player into
-       * `spellCaster` as the spell resolves. */
-      readonly to?: "player" | "opponent" | "you" | "permanent" | "creature" | "planeswalker" | "self" | "spell-caster";
+       * `spellCaster` as the spell resolves. `"chosen-players"` is either of
+       * the two players chosen as this entered (`chosenPlayer`,
+       * `otherChosenPlayer` — Sower of Discord's "damage is dealt to one of
+       * the chosen players"). */
+      readonly to?:
+        | "player"
+        | "opponent"
+        | "you"
+        | "permanent"
+        | "creature"
+        | "planeswalker"
+        | "self"
+        | "spell-caster"
+        | "chosen-players";
       /** With `to: "spell-caster"`, who cast the granting spell. Written by
        * `grant-triggered` and `grant-triggered-all` as they resolve, never by
        * a card: the caster stays that player though another came to control

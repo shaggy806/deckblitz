@@ -1873,7 +1873,7 @@ export function coloredManaSymbolsIn(cost: ManaCost): number {
  * would be with X announced as `castX` (`FilterContext.castX`). */
 export function manaValueOfObject(registry: CardRegistry, object: GameObject, castX?: number): number {
   const cost = parseManaCost(printedManaCost(registry, object));
-  const x = object.zone === "stack" ? (object.xValue ?? 0) : (castX ?? 0);
+  const x = object.zone === "stack" ? (object.xValue ?? castX ?? 0) : (castX ?? 0);
   return manaValue(cost) + cost.x * Math.max(0, x);
 }
 

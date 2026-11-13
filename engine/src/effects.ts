@@ -1568,7 +1568,8 @@ export interface PutOnLibrariesProgress {
 export interface LibraryOrderStep {
   readonly player: PlayerId;
   readonly cards: readonly ObjectId[];
-  readonly position: "top" | "bottom";
+  /** `{ fromTop }`: together Nth from the top (Riptide Gearhulk). */
+  readonly position: "top" | "bottom" | { readonly fromTop: number };
 }
 
 export interface EachPlayerMayProgress {
@@ -5426,12 +5427,17 @@ export type EffectSpec =
        *
        * `"bottom-random"` is "on the bottom of their library **in a random
        * order**" (Endurance): nothing to arrange, since the effect fixes the
-       * order rule 401.4 would have left to the owner. */
+       * order rule 401.4 would have left to the owner.
+       *
+       * `{ fromTop: N }` is "into its owner's library **Nth from the top**"
+       * (Riptide Gearhulk's third): beneath the top N−1 cards, or on the
+       * bottom of a library with fewer; one owner's several there at once
+       * are theirs to arrange (rule 401.4), the first they pick Nth. */
       readonly what:
         | { readonly targetsFrom: number }
         | { readonly all: CardFilter }
         | { readonly graveyardOf: number | PlayerScope };
-      readonly position: "top" | "bottom" | "owner-chooses" | "shuffle" | "bottom-random";
+      readonly position: "top" | "bottom" | "owner-chooses" | "shuffle" | "bottom-random" | { readonly fromTop: number };
       /** The resolving spell goes with them — "shuffle **Serene Remembrance
        * and** up to three target cards from a single graveyard into their
        * owners' libraries". A copy of a spell can't, and ceases to exist
@@ -8732,9 +8738,15 @@ export type EffectSpec =
        * an entering `notes` replacement put theirs, read back as
        * `{ chosenNumber: true }`. It replaces any number noted before; a
        * source that has left the battlefield, or come back as a new object
-       * (rule 400.7), notes nothing. */
+       * (rule 400.7), notes nothing.
+       *
+       * With `manaTypeSpent` instead of `amount`: "note the **type of mana**
+       * spent to pay this activation cost" (Jeweled Amulet) — W, U, B, R, G
+       * or C (rule 106.1b), kept in the same place, read back by `add-mana`'s
+       * `"chosen"` ("add one mana of this artifact's last noted type"). */
       readonly kind: "note";
-      readonly amount: EffectAmount;
+      readonly amount?: EffectAmount;
+      readonly manaTypeSpent?: true;
     }
   | {
       /**
@@ -8870,9 +8882,11 @@ export type EffectSpec =
        * one rad counter from themselves" (rule 728.1), Survivor's Med Kit's
        * "target player loses all rad counters". Never below none. To the
        * effect's controller by default, a `PlayerScope`, or the player in
-       * target slot `target`. */
+       * target slot `target`. `"every-kind"` with `amount: "all"` is "loses
+       * all counters" — Final Act's "each opponent loses all counters": every
+       * kind a player can have (rule 122.1), energy too (its ruling). */
       readonly kind: "remove-player-counters";
-      readonly counter: PlayerCounterKind;
+      readonly counter: PlayerCounterKind | "every-kind";
       readonly amount: EffectAmount | "all";
       readonly who?: PlayerScope;
       readonly target?: number;
@@ -12244,7 +12258,10 @@ export interface EffectApi {
    * owner's cards now on one end of their library, in turn order from the
    * active player, top before bottom, only where the order is a choice. */
   putOnLibrariesTogether(
-    placements: readonly { readonly object: ObjectId; readonly position: "top" | "bottom" | "shuffle" | "bottom-random" }[],
+    placements: readonly {
+      readonly object: ObjectId;
+      readonly position: "top" | "bottom" | "shuffle" | "bottom-random" | { readonly fromTop: number };
+    }[],
   ): readonly LibraryOrderStep[];
   /** Ask `step.player` the order of `step.cards` on that end of their
    * library — those still there. `false` when there was nothing to ask. */
@@ -12434,7 +12451,8 @@ export interface EffectApi {
   /** Rule 101.4: hold the discards and sacrifices the players of an
    * `"each-player-may"` choose until every one of them has chosen
    * (`GameState.heldChoices`) — a no-op when already held. */
-  holdChoices(): void;
+  /** `randomDiscards`: random picks are held too (Burning Inquiry). */
+  holdChoices(randomDiscards?: boolean): void;
   /** Whether choices are held right now — by an enclosing `"each-player-may"`
    * or scoped discard, which releases them itself. */
   choicesHeld(): boolean;
@@ -12914,8 +12932,9 @@ export interface EffectApi {
   attackRandomOpponent(target: ObjectId, notAttackedLastCombat: boolean): boolean;
   /** The game becomes day or night (rule 726). */
   setDayNight(value: "day" | "night"): void;
-  /** The source permanent notes `n` — see the `"note"` {@link EffectSpec}. */
-  noteNumberOnSource(n: number): void;
+  /** The source permanent notes `value` (a number, or a mana type) — see the
+   * `"note"` {@link EffectSpec}. */
+  noteOnSource(value: string): void;
   /** `who` becomes the monarch (rule 720). */
   becomeMonarch(who: PlayerScope | undefined, via?: "combat-damage"): void;
   /** One player becomes the monarch — a `become-monarch`'s target slot's. */
@@ -18507,10 +18526,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // from the active player, the chosen cards staying face down in hand
       // (101.4a) so no later player sees an earlier one's discard, and then
       // they're all discarded at once. At random nobody chooses. Already
-      // held by an enclosing choice, that one releases them.
-      const hold = typeof spec.target !== "number" && players.length > 1 && spec.random !== true && !ctx.choicesHeld();
+      // held by an enclosing choice, that one releases them. At random
+      // nobody chooses, but the picks are still made in turn order and the
+      // cards discarded at once (Burning Inquiry's ruling).
+      const hold = typeof spec.target !== "number" && players.length > 1 && !ctx.choicesHeld();
       if (hold) {
-        ctx.holdChoices();
+        ctx.holdChoices(spec.random === true);
         const parked = ctx.parkedCount();
         const pendingBefore = ctx.decisionPending();
         const ordered = ctx.apnap(players.flatMap((ref) => (ref.kind === "player" ? [ref.player] : [])));
@@ -18518,7 +18539,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ctx.discardCards(
             { kind: "player", player },
             amountValue(spec.anyNumber === true ? (spec.atMost ?? 0) : spec.amount, ctx, player),
-            false,
+            spec.random === true,
             spec.unlessOne,
             spec.anyNumber === true,
             spec.filter,
@@ -20224,9 +20245,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "day-night":
       ctx.setDayNight(spec.value);
       return;
-    case "note":
-      ctx.noteNumberOnSource(signedAmountValue(spec.amount, ctx));
+    case "note": {
+      if (spec.amount !== undefined) {
+        ctx.noteOnSource(String(signedAmountValue(spec.amount, ctx)));
+        return;
+      }
+      // The type of the mana spent on this ability's cost (Jeweled Amulet):
+      // nothing noted when none was spent. Its cost is one mana, so one
+      // type; were it raised to several of different types, the first.
+      const spent = ctx.manaSpentOnThisAbility()[0];
+      if (spec.manaTypeSpent === true && spent !== undefined) ctx.noteOnSource(spent.type);
       return;
+    }
     case "become-monarch": {
       if (typeof spec.who === "number") {
         // "Target opponent becomes the monarch" (Jared Carthalion).
@@ -20311,6 +20341,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             )
           : ctx.playersInScope(spec.who ?? "you");
       for (const player of players) {
+        if (spec.counter === "every-kind") {
+          // Every kind at once; an amount other than "all" isn't a wording.
+          if (spec.amount === "all") ctx.removePlayerCounters(player, ctx.playerCounterKinds(player));
+          continue;
+        }
         const n =
           spec.amount === "all" ? ctx.playerCountersOf(player, spec.counter) : amountValue(spec.amount, ctx, player);
         if (n > 0) ctx.addPlayerCounters(player, spec.counter, -n);

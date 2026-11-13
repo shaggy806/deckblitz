@@ -128,6 +128,7 @@ import _poolBurdenOfGuilt from "../pool/burden-of-guilt.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
 import _poolBurnTheImpure from "../pool/burn-the-impure.js";
+import _poolBurningInquiry from "../pool/burning-inquiry.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCacklingFlames from "../pool/cackling-flames.js";
@@ -1173,6 +1174,7 @@ const shard: CardShard = {
     _poolBurglarRat,
     _poolBurnBurnTreeAndFern,
     _poolBurnTheImpure,
+    _poolBurningInquiry,
     _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
     _poolCacklingFlames,

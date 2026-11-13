@@ -803,6 +803,7 @@ import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
 import _poolSparkRupture from "../pool/spark-rupture.js";
 import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
+import _poolSpiderPunk from "../pool/spider-punk.js";
 import _poolSpikeWeaver from "../pool/spike-weaver.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
 import _poolSpinneretAndSpiderling from "../pool/spinneret-and-spiderling.js";
@@ -1832,6 +1833,7 @@ const shard: CardShard = {
     _poolSparkRupture,
     _poolSpectralInterference,
     _poolSphinxOfFalseConclusions,
+    _poolSpiderPunk,
     _poolSpikeWeaver,
     _poolSpinnerOfSouls,
     _poolSpinneretAndSpiderling,
