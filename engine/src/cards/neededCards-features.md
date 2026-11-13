@@ -393,6 +393,18 @@ the queued rider waits (`PendingTrigger.awaitsActivation`) and
 pays for (605.3b) leaves it nothing to copy. The line recurs nowhere, so no
 scaffolder template. Key: effect:when-spent-on-ability.
 
+### An "any number of target …" group that isn't its list's last slot — built 2026-11-13
+
+The group `decision:two-any-number-groups` +
+`target:any-number-group-before-targeting-mode`. A group anywhere but last —
+two in a list, or one with a slot after it (a modal spell's earlier mode) —
+has its members ended by an empty slot in the flat target list
+(`targetSpans`, `nextTargetSlot`, `groupMembers` in `target.ts`); every check
+of a choice reads it through `concreteTargetSpecs(specs, chosen)`, the client's
+Done and the bots write the empty slot, and `for-each-target`'s `group` reaches
+a later group (a member found illegal isn't read as the end, 608.2b). Proving:
+Filigree Vector, Kamahl's Will. Test: `target-groups.test.ts`.
+
 ### A token copy that enters with counters — built 2026-11-11
 
 By EDHREC rank: Ochre Jelly (6738), Littjara Mirrorlake (7463).

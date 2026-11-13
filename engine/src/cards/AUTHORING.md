@@ -3844,19 +3844,27 @@ it's put on the stack (rule 603.3d), an activation before its costs are paid
 sacrificed) — and the offer and the `choose-targets` prompt carry the
 number. Too few legal targets for its `min` removes a trigger (603.3d).
 In a **`castModal` mode** a group works too (Heliod's Intervention's "destroy
-X target artifacts and/or enchantments", Reality Spasm), where no later mode
-that can be chosen with it has targets: a modal spell's targets are its
-chosen modes', in order (rule 700.2), so the group is still last. X is asked
-after the modes (601.2b), and the bots fit their picks to it with
-`fitModalXGroup`.
-It is always the **last** slot of its list (one per list;
-`any-number-targets.test.ts` walks the pool for this),
-and the player fills it with none, one or as many distinct targets as there
-are (rule 601.2c): the chosen targets are one flat list, the slots before the
-group keeping their indexes and every member taking the next one on. The
+X target artifacts and/or enchantments", Reality Spasm), a later mode's
+targets after it or not (Kamahl's Will): a modal spell's targets are its
+chosen modes', in order (rule 700.2), each mode's slice found through
+`targetSpans`. X is asked after the modes (601.2b), and the bots fit their
+picks to it with `fitModalXGroup` (an X group still last).
+A group is usually the **last** slot of its list, and the player fills it
+with none, one or as many distinct targets as there are (rule 601.2c): the
+chosen targets are one flat list, the slots before the group keeping their
+indexes and every member taking the next one on. **A group anywhere else** —
+two in one list (Filigree Vector: `[{ kind: "any-number", of: "creature" },
+{ kind: "any-number", of: { kind: "permanent", filter: { type: "artifact" }
+} }]`), or one with a slot after it — has its members ended by an empty slot
+(`null` in the choice, a hole on the stack: `targetSpans`), which the client's
+Done and the bots put there; the slots after it sit past it. An effect reaches
+such a group with `for-each-target`'s `group`: `{ from: 0, group: 1 }` is the
+second of the groups in a row from slot 0 (a member found illegal isn't read
+as the end). An announced triggered mode's group is still last
+(`any-number-targets.test.ts` walks the pool for this). The
 offer lists the group as a single slot with its `of` options; every check of
 a choice — the cast, an activation, a trigger's answer, and the resolution —
-judges it against `concreteTargetSpecs(specs, chosen.length)`, one slot per
+judges it against `concreteTargetSpecs(specs, chosen)`, one slot per
 member, each distinct from the ones before it, so a spell goes on the stack
 with its shape fixed and never re-derives it from the board. With none
 chosen it has no targets at all and resolves; with some chosen and every one

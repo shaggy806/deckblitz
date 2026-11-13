@@ -12268,4 +12268,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Gilraen, Dúnedain Protector', 'Grizzly Bears', 'Plains*2'] },
     }),
   ),
+  preset(
+    'Filigree Vector: the creatures, Done, then the artifacts',
+    board({
+      you: { bf: ['Plains*4', 'Grizzly Bears', 'Ornithopter', 'Sol Ring'], hand: ['Filigree Vector'] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    "Kamahl's Will: both modes, the lands then Carol's Serra Angel",
+    board({
+      you: { bf: ['Forest*6', { name: 'Krenko, Mob Boss', commander: true }], hand: ["Kamahl's Will"] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Serra Angel'] }, { bf: ['Hill Giant'] }],
+    }),
+  ),
 ]

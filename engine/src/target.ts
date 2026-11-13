@@ -450,11 +450,15 @@ export type TargetSpec =
   /**
    * "Any number of target …" (rule 601.2c: none, one, or as many distinct
    * ones as there are) — Eerie Interlude's "exile any number of target
-   * creatures you control". A *group*: always the last slot of its list, and
-   * at most one per list. An offer lists it as one slot with `of`'s
-   * options; a choice fills it with as many distinct targets as the player
-   * picks, each one slot of the flat target list from the group's index on,
-   * so the slots before it keep their positions. The count chosen is fixed
+   * creatures you control". A *group*, usually its list's last slot. An
+   * offer lists it as one slot with `of`'s options; a choice fills it with
+   * as many distinct targets as the player picks, each one slot of the flat
+   * target list from the group's place on, so the slots before it keep their
+   * positions. A group anywhere else — two in one list (Filigree Vector), or
+   * one with a slot after it (Kamahl's Will with both modes) — has its
+   * members ended by an empty slot in the flat list ({@link targetSpans});
+   * an effect reaches a later one through `for-each-target`'s `group`. The
+   * count chosen is fixed
    * as the spell or ability goes on the stack — see
    * {@link concreteTargetSpecs}, which every check of a choice goes through.
    * An effect reaches the members with `for-each-target` (one at a time,
@@ -698,11 +702,8 @@ export function groupMaxTotalManaValue(spec: TargetSpec | undefined): number | u
 /** Does this list have an "any number of target …" group whose size is tied
  * to the spell's X (`min` or `max` of `"x"`)? */
 export function groupReadsX(specs: readonly TargetSpec[]): boolean {
-  const spec = specs[anyNumberSlot(specs)];
-  return (
-    typeof spec === "object" &&
-    spec.kind === "any-number" &&
-    (xMultiple(spec.max) !== undefined || xMultiple(spec.min) !== undefined)
+  return specs.some(
+    (spec) => isGroupSpec(spec) && (xMultiple(spec.max) !== undefined || xMultiple(spec.min) !== undefined),
   );
 }
 
@@ -721,8 +722,7 @@ export function xMultiple(amount: EffectAmount | undefined): number | undefined 
  * `"x"` total mana value) fixed at `x` — what a choice made at that X is
  * judged against (rule 601.2c). */
 export function specsAtX(specs: readonly TargetSpec[], x: number): readonly TargetSpec[] {
-  const spec = specs[anyNumberSlot(specs)];
-  if (!groupReadsX(specs) && !(typeof spec === "object" && spec.kind === "any-number" && spec.maxTotalManaValue === "x")) {
+  if (!groupReadsX(specs) && !specs.some((spec) => isGroupSpec(spec) && spec.maxTotalManaValue === "x")) {
     return specs;
   }
   return specs.map((spec) =>
@@ -741,24 +741,22 @@ export function specsAtX(specs: readonly TargetSpec[], x: number): readonly Targ
  * that isn't a number yet — an amount (or `"x"`) an ability reads as its
  * targets are chosen? */
 export function groupReadsAmount(specs: readonly TargetSpec[]): boolean {
-  const spec = specs[anyNumberSlot(specs)];
-  return (
-    typeof spec === "object" &&
-    spec.kind === "any-number" &&
-    [spec.max, spec.min, spec.maxTotalManaValue].some((a) => a !== undefined && typeof a !== "number")
+  return specs.some(
+    (spec) =>
+      isGroupSpec(spec) &&
+      [spec.max, spec.min, spec.maxTotalManaValue].some((a) => a !== undefined && typeof a !== "number"),
   );
 }
 
 /** Does this list's group have a bound or a total that's an amount other
  * than a spell's `"x"`, which a spell reads as it's cast? */
 export function groupReadsCastAmount(specs: readonly TargetSpec[]): boolean {
-  const spec = specs[anyNumberSlot(specs)];
-  return (
-    typeof spec === "object" &&
-    spec.kind === "any-number" &&
-    [spec.max, spec.min, spec.maxTotalManaValue].some(
-      (a) => a !== undefined && typeof a !== "number" && xMultiple(a) === undefined,
-    )
+  return specs.some(
+    (spec) =>
+      isGroupSpec(spec) &&
+      [spec.max, spec.min, spec.maxTotalManaValue].some(
+        (a) => a !== undefined && typeof a !== "number" && xMultiple(a) === undefined,
+      ),
   );
 }
 
@@ -806,51 +804,197 @@ export function anyNumberSlot(specs: readonly TargetSpec[]): number {
   return specs.findIndex((spec) => typeof spec === "object" && spec.kind === "any-number");
 }
 
+/** Whether `spec` is an "any number of target …" group. */
+function isGroupSpec(spec: TargetSpec | undefined): spec is Extract<TargetSpec, { kind: "any-number" }> {
+  return typeof spec === "object" && spec.kind === "any-number";
+}
+
+/** Whether a list has a group that isn't its last slot — two groups
+ * (Filigree Vector), or one with a slot after it (Kamahl's Will with both
+ * modes). Such a group's members end at an empty slot ({@link targetSpans}). */
+export function hasClosedGroup(specs: readonly TargetSpec[]): boolean {
+  return specs.some((spec, i) => i < specs.length - 1 && isGroupSpec(spec));
+}
+
 /**
- * A spec list as `count` chosen targets fill it: the slots before an
- * "any number of target …" group as declared, then one slot per member of
- * the group — each of its `of` spec, and each after the first "other than"
- * the members before it, since one instance of the word "target" names an
- * object once (rule 601.2c). A list without a group comes back as it is.
- *
- * The count is the length of the chosen target list — at a cast, an
- * activation or a trigger's choice, and again as it resolves, from the
- * targets it went on the stack with — so every check of a choice judges it
- * against specs of its own shape, and a resolution never re-derives its
- * shape from the board.
+ * Where one declared slot of a target list sits in the flat list a choice
+ * fills — see {@link targetSpans}.
  */
-export function concreteTargetSpecs(specs: readonly TargetSpec[], count: number): readonly TargetSpec[] {
+export interface SlotSpan {
+  /** Its first place in the flat list. */
+  readonly start: number;
+  /** How many targets it holds there: 1 for a plain slot (a hole where an
+   * optional one was skipped), a group's members for a group. */
+  readonly members: number;
+  /** A group that isn't its list's last slot whose members have ended: the
+   * empty slot that ends them follows them, at `start + members`. */
+  readonly closed: boolean;
+}
+
+/**
+ * Where each declared slot of `specs` sits in the flat target list `chosen`
+ * (or, where every group is its list's last slot, a list of that length).
+ * A plain slot is one place. An "any number of target …" group is as many
+ * as it has members (rule 601.2c): as the list's last slot, every place from
+ * its start on; anywhere else — two groups in one list (Filigree Vector's
+ * "on each of any number of target creatures and … on each of any number of
+ * target artifacts"), or a group with a slot after it (Kamahl's Will's first
+ * mode with its second) — its members run to the first empty slot, which
+ * ends them and is no target. A partly filled list leaves a group it hasn't
+ * ended open, holding everything after its start, and the slots after it
+ * not reached (`start` the list's length, no members).
+ */
+export function targetSpans(
+  specs: readonly TargetSpec[],
+  chosen: number | readonly (TargetRef | null | undefined)[],
+): readonly SlotSpan[] {
+  const length = typeof chosen === "number" ? chosen : chosen.length;
+  const empty = (i: number): boolean => typeof chosen !== "number" && (chosen[i] === null || chosen[i] === undefined);
+  const out: SlotSpan[] = [];
+  let at = 0;
+  specs.forEach((spec, slot) => {
+    const start = Math.min(at, length);
+    if (!isGroupSpec(spec)) {
+      out.push({ start, members: at < length ? 1 : 0, closed: false });
+      at += 1;
+      return;
+    }
+    if (slot === specs.length - 1) {
+      out.push({ start, members: Math.max(0, length - at), closed: false });
+      at = Math.max(at, length);
+      return;
+    }
+    let end = at;
+    while (end < length && !empty(end)) end += 1;
+    const closed = end < length;
+    out.push({ start, members: Math.max(0, end - at), closed });
+    // An open group holds the rest, so nothing after it is reached.
+    at = closed ? end + 1 : Number.POSITIVE_INFINITY;
+  });
+  return out;
+}
+
+/** Each group of `specs` with the targets `chosen` gave it — its members,
+ * in the order chosen, holes (a member found illegal) left out — and where
+ * they sit (`start`, `count`). `shape` is the list as it was chosen, for a
+ * `chosen` with members blanked since (rule 608.2b), whose holes would
+ * otherwise read as the empty slot that ends a group. */
+export function groupMembers(
+  specs: readonly TargetSpec[],
+  chosen: readonly (TargetRef | null | undefined)[],
+  shape: readonly (TargetRef | null | undefined)[] = chosen,
+): readonly {
+  readonly slot: number;
+  readonly spec: TargetSpec;
+  readonly start: number;
+  readonly count: number;
+  readonly members: readonly TargetRef[];
+}[] {
+  const spans = targetSpans(specs, shape);
+  return specs.flatMap((spec, slot) => {
+    if (!isGroupSpec(spec)) return [];
+    const { start, members } = spans[slot];
+    return [
+      {
+        slot,
+        spec,
+        start,
+        count: members,
+        members: chosen
+          .slice(start, start + members)
+          .filter((ref): ref is TargetRef => ref !== null && ref !== undefined),
+      },
+    ];
+  });
+}
+
+/**
+ * The declared slot the next pick into a partly filled list `picked` fills,
+ * and where in the flat list it goes (`at`, `picked`'s length) — for a
+ * group, where its members `start`. A group not yet ended takes the next
+ * pick, as another member or the empty slot that ends it. `slot` is
+ * `specs.length` once every slot is filled.
+ */
+export function nextTargetSlot(
+  specs: readonly TargetSpec[],
+  picked: readonly (TargetRef | null | undefined)[],
+): { readonly slot: number; readonly start: number } {
+  const spans = targetSpans(specs, picked);
+  for (let slot = 0; slot < specs.length; slot += 1) {
+    const span = spans[slot];
+    if (isGroupSpec(specs[slot])) {
+      if (span.closed) continue;
+      // An open group takes the next pick — the last slot's always does.
+      if (span.start + span.members >= picked.length) return { slot, start: span.start };
+      continue;
+    }
+    if (span.start >= picked.length) return { slot, start: span.start };
+  }
+  return { slot: specs.length, start: picked.length };
+}
+
+/**
+ * A spec list as the chosen targets fill it ({@link targetSpans}): each
+ * plain slot as declared, then for a group one slot per member — each of its
+ * `of` spec, and each after the first "other than" the members before it,
+ * since one instance of the word "target" names an object once (rule
+ * 601.2c) — and, for a group that isn't the list's last slot, the empty
+ * slot that ends it (optional, never filled). A slot's relation to an
+ * earlier slot follows that slot to where it sits. A list without a group
+ * comes back as it is.
+ *
+ * `chosen` is the chosen target list — at a cast, an activation or a
+ * trigger's choice, and again as it resolves, from the targets it went on
+ * the stack with — so every check of a choice judges it against specs of its
+ * own shape, and a resolution never re-derives its shape from the board. Its
+ * length will do where every group is its list's last slot.
+ */
+export function concreteTargetSpecs(
+  specs: readonly TargetSpec[],
+  chosen: number | readonly (TargetRef | null | undefined)[],
+): readonly TargetSpec[] {
   const group = anyNumberSlot(specs);
   if (group < 0) return specs;
-  const spec = specs[group];
-  if (typeof spec !== "object" || spec.kind !== "any-number") return specs;
-  const out: TargetSpec[] = specs.slice(0, group);
-  // "From a single graveyard": each member shares its player with the ones
-  // before it — and, tied to a slot, with that slot's.
-  const same = spec.sameController;
-  const anchor = typeof same === "object" ? [same.slot] : [];
-  // A group `other` than an earlier slot ("…and up to one other target
-  // creature", Graceful Takedown): every member differs from that slot too,
-  // in the one `than` a slot's relation is read from.
-  const tiedTo = otherThan(spec.of);
-  const tied = typeof tiedTo === "object" ? otherThanSlots(tiedTo) : [];
-  for (let member = 0; member < Math.max(0, count - group); member += 1) {
-    const before = Array.from({ length: member }, (_unused, i) => group + i);
-    const than = [...anchor, ...(anchor.length + before.length > 0 ? tied : []), ...before];
-    out.push(
-      than.length === 0
-        ? spec.of
-        : {
-            kind: "other",
-            of: spec.of,
-            than: { slots: than },
-            ...(same !== undefined ? { sameController: true } : {}),
-            // "With different controllers": none controlled by an earlier
-            // member's controller.
-            ...(spec.differentControllers === true ? { differentController: true } : {}),
-          },
-    );
-  }
+  const spans = targetSpans(specs, chosen);
+  // Where each declared slot now starts, for the relations that name one.
+  const moved = new Map(spans.map((span, slot) => [slot, span.start] as const));
+  const shifted = spans.some((span, slot) => span.start !== slot);
+  const out: TargetSpec[] = [];
+  specs.forEach((spec, slot) => {
+    const span = spans[slot];
+    if (!isGroupSpec(spec)) {
+      out.push(shifted && slot > group ? renumberOtherSlots(spec, moved) : spec);
+      return;
+    }
+    // "From a single graveyard": each member shares its player with the ones
+    // before it — and, tied to a slot, with that slot's.
+    const same = spec.sameController;
+    const anchor = typeof same === "object" ? [moved.get(same.slot) ?? same.slot] : [];
+    // A group `other` than an earlier slot ("…and up to one other target
+    // creature", Graceful Takedown): every member differs from that slot too,
+    // in the one `than` a slot's relation is read from.
+    const tiedTo = otherThan(spec.of);
+    const tied = typeof tiedTo === "object" ? otherThanSlots(tiedTo).map((s) => moved.get(s) ?? s) : [];
+    for (let member = 0; member < span.members; member += 1) {
+      const before = Array.from({ length: member }, (_unused, i) => span.start + i);
+      const than = [...anchor, ...(anchor.length + before.length > 0 ? tied : []), ...before];
+      out.push(
+        than.length === 0
+          ? spec.of
+          : {
+              kind: "other",
+              of: spec.of,
+              than: { slots: than },
+              ...(same !== undefined ? { sameController: true } : {}),
+              // "With different controllers": none controlled by an earlier
+              // member's controller.
+              ...(spec.differentControllers === true ? { differentController: true } : {}),
+            },
+      );
+    }
+    // The empty slot that ends a group with a slot after it.
+    if (span.closed) out.push({ kind: "optional", of: spec.of });
+  });
   return out;
 }
 
@@ -1109,6 +1253,64 @@ const sameTarget = (a: TargetRef, b: TargetRef): boolean =>
  * for the slots before it — what a chooser filling the slots in order should
  * offer. Every other slot's options come back as they are.
  */
+/**
+ * For a list with a group that isn't its last slot ({@link hasClosedGroup}):
+ * the list the next pick into `picked` is judged in — every place already
+ * filled as its own slot ({@link concreteTargetSpecs}), then the declared
+ * slot the pick fills ({@link nextTargetSlot}), its relations moved to where
+ * the slots they name now sit. That slot is the list's last, so a group
+ * there is read as any last group is, and a plain one by its place. `null`
+ * once every slot is filled.
+ */
+function localTargetList(
+  specs: readonly TargetSpec[],
+  options: readonly (readonly TargetRef[])[],
+  head: readonly (TargetRef | null | undefined)[],
+): { readonly specs: readonly TargetSpec[]; readonly options: readonly (readonly TargetRef[])[] } | null {
+  const { slot, start } = nextTargetSlot(specs, head);
+  const spec = specs[slot];
+  if (spec === undefined) return null;
+  const moved = new Map(targetSpans(specs, head).map((span, s) => [s, span.start] as const));
+  const before = concreteTargetSpecs(specs, head).slice(0, start);
+  let here: TargetSpec = renumberOtherSlots(spec, moved);
+  if (isGroupSpec(spec)) {
+    const same = spec.sameController;
+    here = {
+      ...spec,
+      of: renumberOtherSlots(spec.of, moved),
+      ...(typeof same === "object" ? { sameController: { slot: moved.get(same.slot) ?? same.slot } } : {}),
+    };
+  }
+  return {
+    specs: [...before, here],
+    options: [...Array.from({ length: start }, (): readonly TargetRef[] => []), options[slot] ?? []],
+  };
+}
+
+/** {@link targetsFillable} for a list with a group that isn't its last
+ * slot: a search over the picks in order, each group ended as soon as it
+ * has its fewest members. */
+function closedTargetsFillable(
+  specs: readonly TargetSpec[],
+  options: readonly (readonly TargetRef[])[],
+  picked: readonly (TargetRef | null)[],
+  facts: TargetFacts | undefined,
+): boolean {
+  const { slot, start } = nextTargetSlot(specs, picked);
+  const spec = specs[slot];
+  if (spec === undefined) return true;
+  if (isGroupSpec(spec)) {
+    const members = picked.length - start;
+    if (members >= groupBounds(spec).min) {
+      return slot === specs.length - 1 || closedTargetsFillable(specs, options, [...picked, null], facts);
+    }
+  }
+  for (const ref of slotOptions(specs, options, picked.length, picked, facts)) {
+    if (closedTargetsFillable(specs, options, [...picked, ref], facts)) return true;
+  }
+  return !isGroupSpec(spec) && isOptionalSpec(spec) && closedTargetsFillable(specs, options, [...picked, null], facts);
+}
+
 export function slotOptions(
   specs: readonly TargetSpec[],
   options: readonly (readonly TargetRef[])[],
@@ -1116,6 +1318,14 @@ export function slotOptions(
   picked: readonly (TargetRef | null | undefined)[],
   facts?: TargetFacts,
 ): readonly TargetRef[] {
+  // A group that isn't the last slot: the pick at `i` judged in a list of
+  // its own, one slot per place before it, as it was filled, then the slot
+  // it fills — last, so read as below.
+  if (hasClosedGroup(specs)) {
+    const local = localTargetList(specs, options, picked.slice(0, i));
+    if (local === null) return [];
+    return slotOptions(local.specs, local.options, i, picked.slice(0, i), facts);
+  }
   // Past an "any number of target …" group's start, every pick is another
   // member of that one group: its options, less what it has already named.
   const group = anyNumberSlot(specs);
@@ -1240,6 +1450,7 @@ export function targetsFillable(
   from = picked.length,
   facts?: TargetFacts,
 ): boolean {
+  if (hasClosedGroup(specs)) return closedTargetsFillable(specs, options, picked.slice(0, from), facts);
   const group = anyNumberSlot(specs);
   // At or partway through an "any number of" group with a floor: the members
   // so far and what's still offered must reach it — "two target cards from an
@@ -1342,35 +1553,31 @@ export function otherSlotConflict(
   return null;
 }
 
-/** Whether `chosen`'s "any number of target …" group breaks its "total
- * power N or less" (Reunion of the House) — always `false` without one, or
- * without the facts to tell. */
-export function groupPowerExceeded(
-  specs: readonly TargetSpec[],
-  chosen: readonly (TargetRef | null | undefined)[],
-  facts?: TargetFacts,
+/** Whether one group's `members` break a limit of its `spec` — "total
+ * power N or less" (Reunion of the House), "total mana value N or less"
+ * (Patch Up), "each a different mana value" (Agadeem's Awakening), "with
+ * equal toughness" (V.A.T.S.), "with different names" (Behold the Sinister
+ * Six!) — or, with `only`, one kind of them. `false` without the facts to
+ * tell. */
+export function groupBroken(
+  spec: TargetSpec,
+  members: readonly TargetRef[],
+  facts: TargetFacts | undefined,
+  only?: "mana-value" | "relation",
 ): boolean {
-  const group = anyNumberSlot(specs);
-  if (group < 0 || facts === undefined) return false;
-  const members = chosen.slice(group).filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
-  const most = groupMaxTotalPower(specs[group]);
-  if (most !== undefined && members.reduce((n, ref) => n + facts.powerOf(ref), 0) > most) return true;
-  return groupManaValueBroken(specs, chosen, facts) || groupRelationBroken(specs, chosen, facts);
-}
-
-/** Whether `chosen`'s group breaks its "with equal toughness" (V.A.T.S.)
- * or its "with different names" (Behold the Sinister Six!) — `false`
- * without either, or without the facts to tell. Holes are left out: as it
- * resolves, only the members still legal count (V.A.T.S.'s ruling). */
-export function groupRelationBroken(
-  specs: readonly TargetSpec[],
-  chosen: readonly (TargetRef | null | undefined)[],
-  facts?: TargetFacts,
-): boolean {
-  const group = anyNumberSlot(specs);
-  const spec = specs[group];
-  if (group < 0 || facts === undefined || typeof spec !== "object" || spec.kind !== "any-number") return false;
-  const members = chosen.slice(group).filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
+  if (facts === undefined || !isGroupSpec(spec)) return false;
+  const most = groupMaxTotalPower(spec);
+  if (only === undefined && most !== undefined && members.reduce((n, ref) => n + facts.powerOf(ref), 0) > most) {
+    return true;
+  }
+  const manaValueOf = facts.manaValueOf;
+  if (only !== "relation" && manaValueOf !== undefined) {
+    const values = members.map(manaValueOf);
+    const mostMv = groupMaxTotalManaValue(spec);
+    if (mostMv !== undefined && values.reduce((n, v) => n + v, 0) > mostMv) return true;
+    if (spec.differentManaValues === true && new Set(values).size < values.length) return true;
+  }
+  if (only === "mana-value") return false;
   const toughnessOf = facts.toughnessOf;
   if (spec.equalToughness === true && toughnessOf !== undefined && new Set(members.map(toughnessOf)).size > 1) {
     return true;
@@ -1379,26 +1586,35 @@ export function groupRelationBroken(
   return spec.differentNames === true && nameOf !== undefined && new Set(members.map(nameOf)).size < members.length;
 }
 
-/** Whether `chosen`'s group breaks its "total mana value N or less" (Patch
- * Up) or its "each a different mana value" (Agadeem's Awakening) — `false`
- * without either, or without the facts to tell. */
+/** Whether a group of `chosen` breaks a limit ({@link groupBroken}) — always
+ * `false` without one, or without the facts to tell. Holes are left out: as
+ * it resolves, only the members still legal count (V.A.T.S.'s ruling). */
+export function groupPowerExceeded(
+  specs: readonly TargetSpec[],
+  chosen: readonly (TargetRef | null | undefined)[],
+  facts?: TargetFacts,
+): boolean {
+  return groupMembers(specs, chosen).some(({ spec, members }) => groupBroken(spec, members, facts));
+}
+
+/** Whether `chosen`'s groups break "with equal toughness" or "with
+ * different names" ({@link groupBroken}). */
+export function groupRelationBroken(
+  specs: readonly TargetSpec[],
+  chosen: readonly (TargetRef | null | undefined)[],
+  facts?: TargetFacts,
+): boolean {
+  return groupMembers(specs, chosen).some(({ spec, members }) => groupBroken(spec, members, facts, "relation"));
+}
+
+/** Whether `chosen`'s groups break a total or "different" mana value
+ * ({@link groupBroken}). */
 export function groupManaValueBroken(
   specs: readonly TargetSpec[],
   chosen: readonly (TargetRef | null | undefined)[],
   facts?: TargetFacts,
 ): boolean {
-  const group = anyNumberSlot(specs);
-  const manaValueOf = facts?.manaValueOf;
-  if (group < 0 || manaValueOf === undefined) return false;
-  const spec = specs[group];
-  const values = chosen
-    .slice(group)
-    .filter((ref): ref is TargetRef => ref !== null && ref !== undefined)
-    .map(manaValueOf);
-  const most = groupMaxTotalManaValue(spec);
-  if (most !== undefined && values.reduce((n, v) => n + v, 0) > most) return true;
-  const distinct = typeof spec === "object" && spec.kind === "any-number" && spec.differentManaValues === true;
-  return distinct && new Set(values).size < values.length;
+  return groupMembers(specs, chosen).some(({ spec, members }) => groupBroken(spec, members, facts, "mana-value"));
 }
 
 /** The nouns a target label is built from: the word a count makes plural. */

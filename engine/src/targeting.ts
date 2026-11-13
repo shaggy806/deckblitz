@@ -30,6 +30,7 @@ import { phaseOfStep } from "./turn.js";
 import {
   anyNumberSlot,
   concreteTargetSpecs,
+  targetSpans,
   groupBounds,
   groupManaValueBroken,
   groupPowerExceeded,
@@ -1272,16 +1273,21 @@ export function invalidTargetReason(
   source?: TargetSource,
 ): string | null {
   const declared = specs;
-  const group = anyNumberSlot(specs);
-  if (group >= 0) {
+  if (anyNumberSlot(specs) >= 0) {
     // A group tied to X is judged at the X chosen (`specsAtX`) — by then its
-    // bounds are numbers.
-    const { min, max } = groupBounds(specs[group]);
-    const members = Math.max(0, chosen.length - group);
-    if (members > max) return `${name} takes at most ${max} of those targets`;
-    if (members < min) return `${name} takes at least ${min} of those targets`;
+    // bounds are numbers. Each group that isn't the list's last slot ends at
+    // an empty slot (`targetSpans`).
+    const spans = targetSpans(specs, chosen);
+    for (const [slot, spec] of specs.entries()) {
+      if (typeof spec !== "object" || spec.kind !== "any-number") continue;
+      const { min, max } = groupBounds(spec);
+      const members = spans[slot].members;
+      if (members > max) return `${name} takes at most ${max} of those targets`;
+      if (members < min) return `${name} takes at least ${min} of those targets`;
+      if (slot < specs.length - 1 && !spans[slot].closed) return `${name}'s group of targets ${slot + 1} isn't ended`;
+    }
   }
-  specs = concreteTargetSpecs(specs, chosen.length);
+  specs = concreteTargetSpecs(specs, chosen);
   if (chosen.length !== specs.length) {
     return `${name} takes ${specs.length} target(s), got ${chosen.length}`;
   }

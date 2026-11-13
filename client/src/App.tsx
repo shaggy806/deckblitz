@@ -41,6 +41,7 @@ import {
   parseManaCost,
   rangeTargetCount,
   slotOptions,
+  nextTargetSlot,
   specsAtX,
   defaultAssignment,
   delvePicksFit,
@@ -762,7 +763,7 @@ function currentSlotOptions(t: Targeting): readonly TargetRef[] {
   // A range of an X group's members (`from` — Spinning Wheel Kick): the
   // slots before the group are outside it.
   if (range.from !== undefined) return options
-  const later = t.specs.length - i - 1
+  const later = t.specs.length - nextTargetSlot(t.specs, t.picked).slot - 1
   return options.filter((ref) => {
     const n = distinctTargetCount([...t.picked, ref], range.copies)
     return n <= range.max && n + later >= range.min
@@ -814,7 +815,7 @@ const viewTargetFacts = (view: PlayerView): TargetFacts => ({
  * with its other members as picked: each counts against the group's limits
  * (`currentSlotOptions`), so this is the top of the stack's count menu. */
 function mostOfStackInGroup(t: Targeting, id: ObjectId, size: number): number {
-  const group = anyNumberSlot(t.specs)
+  const group = groupStartOf(t)
   const named = (r: TargetRef | null): boolean => r?.kind === 'object' && r.object === id
   let picked: readonly (TargetRef | null)[] = [...t.picked.slice(0, group), ...t.picked.slice(group).filter((r) => !named(r))]
   let most = 0
@@ -825,28 +826,43 @@ function mostOfStackInGroup(t: Targeting, id: ObjectId, size: number): number {
   return most
 }
 
+/** Where the members of the "any number of target …" group the next pick
+ * goes into start in `picked`, or -1 when the next pick fills a plain slot.
+ * A group is usually the last slot; one that isn't is ended by an empty
+ * slot, Done's `null` (`nextTargetSlot`). */
+function groupStartOf(t: Pick<Targeting, 'specs' | 'picked'>): number {
+  const { slot, start } = nextTargetSlot(t.specs, t.picked)
+  return slot < t.specs.length && anyNumberSlot([t.specs[slot]]) === 0 ? start : -1
+}
+
 /** Whether the next pick is another member of an "any number of target …"
- * group — always the last slot, and every pick past its start. */
+ * group. */
 function inTargetGroup(t: Pick<Targeting, 'specs' | 'picked'>): boolean {
-  const group = anyNumberSlot(t.specs)
-  return group >= 0 && t.picked.length >= group
+  return groupStartOf(t) >= 0
+}
+
+/** Whether the group being filled is its list's last slot, so Done ends the
+ * choice rather than moving on to the next slot. */
+function inLastGroup(t: Pick<Targeting, 'specs' | 'picked'>): boolean {
+  return nextTargetSlot(t.specs, t.picked).slot === t.specs.length - 1
 }
 
 /** Whether an "any number of" group may end with what's picked: at least
  * its fewest ("exile X target creatures" — Curse of the Swine, its specs
  * fixed at the X chosen), and the fewest distinct targets the cast allows. */
 function mayFinishGroup(t: Pick<Targeting, 'specs' | 'picked' | 'targetCount'>): boolean {
-  const group = anyNumberSlot(t.specs)
-  if (group < 0) return true
-  if (t.picked.length - group < groupBounds(t.specs[group]).min) return false
+  const { slot, start } = nextTargetSlot(t.specs, t.picked)
+  const spec = t.specs[slot]
+  if (spec === undefined || anyNumberSlot([spec]) !== 0) return true
+  if (t.picked.length - start < groupBounds(spec).min) return false
+  // Only the last group ends the choice, which the fewest is judged at.
   const range = t.targetCount
-  return range === undefined || rangeTargetCount(t.picked, range) >= range.min
+  return range === undefined || slot < t.specs.length - 1 || rangeTargetCount(t.picked, range) >= range.min
 }
 
 /** The spec the next pick fills: the group's, once inside it. */
 function currentSpec(t: Pick<Targeting, 'specs' | 'picked'>): TargetSpec | undefined {
-  const group = anyNumberSlot(t.specs)
-  return group >= 0 && t.picked.length >= group ? t.specs[group] : t.specs[t.picked.length]
+  return t.specs[nextTargetSlot(t.specs, t.picked).slot]
 }
 
 /** Whether an optional slot may be skipped: not when the slots after it
@@ -855,7 +871,7 @@ function currentSpec(t: Pick<Targeting, 'specs' | 'picked'>): TargetSpec | undef
 function maySkipSlot(t: Targeting): boolean {
   const range = t.targetCount
   if (range === undefined || range.from !== undefined) return true
-  const later = t.specs.length - t.picked.length - 1
+  const later = t.specs.length - nextTargetSlot(t.specs, t.picked).slot - 1
   return distinctTargetCount(t.picked, range.copies) + later >= range.min
 }
 
@@ -2898,7 +2914,10 @@ function Table({
     (t: Omit<Targeting, 'picked'>) => {
       // Nothing to choose — no slots, or only an "any number of" group with
       // no candidates, whose empty choice is the only one.
-      if (t.specs.length === 0 || (anyNumberSlot(t.specs) === 0 && slotOptions(t.specs, t.options, 0, []).length === 0)) {
+      if (
+        t.specs.length === 0 ||
+        (t.specs.length === 1 && anyNumberSlot(t.specs) === 0 && slotOptions(t.specs, t.options, 0, []).length === 0)
+      ) {
         finishTargets(t, [])
         return
       }
@@ -3261,31 +3280,47 @@ function Table({
         else setTargeting(null)
         finishTargets(t, picked)
       }
-      const group = anyNumberSlot(t.specs)
+      // What's picked so far, moved on past what leaves no choice: a group
+      // with no candidates (none it is), and a group whose every candidate
+      // is taken — the choice done after the last slot's, the empty slot
+      // that ends one with a slot after it (`targetSpans`) otherwise.
+      const settle = (picked: readonly (TargetRef | null)[]): void => {
+        for (;;) {
+          const { slot, start } = nextTargetSlot(t.specs, picked)
+          const spec = t.specs[slot]
+          if (spec === undefined) {
+            finish(picked)
+            return
+          }
+          const grouped = anyNumberSlot([spec]) === 0
+          const empty =
+            grouped &&
+            (picked.length === start
+              ? (t.options[slot] ?? []).length === 0
+              : slotOptions(t.specs, t.options, picked.length, picked, t.facts).length === 0)
+          if (!empty) {
+            commit(picked)
+            return
+          }
+          if (slot === t.specs.length - 1) {
+            finish(picked)
+            return
+          }
+          picked = [...picked, null]
+        }
+      }
       if (inTargetGroup(t)) {
         // Another member of an "any number of" group — or `null`, Done.
         if (ref === null) {
           if (!mayFinishGroup(t)) return
-          finish(t.picked)
+          if (inLastGroup(t)) finish(t.picked)
+          else settle([...t.picked, null])
           return
         }
-        const picked = [...t.picked, ref]
-        // Every candidate taken leaves nothing to add.
-        if (slotOptions(t.specs, t.options, picked.length, picked, t.facts).length === 0) finish(picked)
-        else commit(picked)
+        settle([...t.picked, ref])
         return
       }
-      const picked = [...t.picked, ref]
-      // The fixed slots are done and the group has no candidates: none it is.
-      if (group >= 0 && picked.length === group && (t.options[group] ?? []).length === 0) {
-        finish(picked)
-        return
-      }
-      if (picked.length < t.specs.length) {
-        commit(picked)
-        return
-      }
-      finish(picked)
+      settle([...t.picked, ref])
     },
     [activeTargeting, finishTargets],
   )
@@ -3296,9 +3331,18 @@ function Table({
     (refs: readonly TargetRef[]) => {
       const t = activeTargeting
       if (!t) return
+      const picked = [...t.picked, ...refs]
+      // A group with a slot after it ends at an empty slot, and the choice
+      // goes on (`targetSpans`).
+      if (!inLastGroup(t)) {
+        const next = [...picked, null]
+        if (t.kind === 'choose-targets') setCtPicks(next)
+        else setTargeting({ ...t, picked: next })
+        return
+      }
       if (t.kind === 'choose-targets') setCtPicks([])
       else setTargeting(null)
-      finishTargets(t, [...t.picked, ...refs])
+      finishTargets(t, picked)
     },
     [activeTargeting, finishTargets],
   )
@@ -3308,7 +3352,7 @@ function Table({
     (ref: TargetRef): boolean => {
       const t = activeTargeting
       if (!t || !inTargetGroup(t)) return false
-      const group = anyNumberSlot(t.specs)
+      const group = groupStartOf(t)
       const same = (r: TargetRef | null): boolean =>
         r !== null &&
         (r.kind === 'player'
@@ -6182,7 +6226,7 @@ function Table({
     // An "any number of" group keeps its prompt even over stack targets:
     // Done is how it ends.
     const grouped = inTargetGroup(activeTargeting)
-    const groupPicked = grouped ? activeTargeting.picked.length - anyNumberSlot(activeTargeting.specs) : 0
+    const groupPicked = grouped ? activeTargeting.picked.length - groupStartOf(activeTargeting) : 0
     const slotSpec = currentSpec(activeTargeting)
     // A copy's target can always be kept, whether or not it's still there to
     // click — and so can a spell's whose targets an effect lets its player
@@ -6216,7 +6260,7 @@ function Table({
           {activeTargeting.label}: choose {slotSpec === undefined ? 'a target' : describeTargetSpec(slotSpec)}{' '}
           {grouped
             ? `— ${groupPicked} chosen`
-            : `(${activeTargeting.picked.length + 1}/${activeTargeting.specs.length})`}
+            : `(${nextTargetSlot(activeTargeting.specs, activeTargeting.picked).slot + 1}/${activeTargeting.specs.length})`}
           {/* What a target on offer adds to the cost (Boreal Elemental's
               "costs {2} more to cast"): the card's own cost can't say it,
               since it's the target that's taxed. */}
@@ -7206,7 +7250,7 @@ function Table({
           }
         : mode === 'targeting' && activeTargeting && inTargetGroup(activeTargeting)
         ? ((t: Targeting) => {
-            const group = anyNumberSlot(t.specs)
+            const group = groupStartOf(t)
             const objects = t.picked.slice(group).flatMap((r) => (r?.kind === 'object' ? [r.object] : []))
             const of = t.facts?.stackSize?.({ kind: 'object', object: stackMenu }) ?? 1
             const others = objects.filter((x) => x !== stackMenu).length
@@ -8221,8 +8265,8 @@ function Table({
                   min: 0,
                   max: Math.min(
                     zoneTargetIds.length,
-                    groupBounds(activeTargeting.specs[anyNumberSlot(activeTargeting.specs)] ?? 'card').max -
-                      (activeTargeting.picked.length - anyNumberSlot(activeTargeting.specs)),
+                    groupBounds(currentSpec(activeTargeting) ?? 'creature').max -
+                      (activeTargeting.picked.length - groupStartOf(activeTargeting)),
                   ),
                   eligible: zoneTargetIds,
                   noneLabel: 'Choose none',

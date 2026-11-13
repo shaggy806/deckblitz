@@ -2,7 +2,7 @@
 // modifications count (Hinata, Dawn-Crowned). Pure: no state, no registry, so
 // the engine, the controllers and the bot can all ask the same questions.
 
-import { anyNumberSlot, groupReadsX, isOptionalSpec, xMultiple } from "./target.js";
+import { anyNumberSlot, groupReadsX, hasClosedGroup, isOptionalSpec, xMultiple } from "./target.js";
 import type { ObjectId } from "./primitives.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 
@@ -157,6 +157,8 @@ export function fitTargetCount(
 ): (TargetRef | null)[] | null {
   const out = [...chosen];
   const count = () => rangeTargetCount(out, range);
+  // A group that isn't the last slot (`targetSpans`): taken as chosen.
+  if (hasClosedGroup(specs)) return count() >= range.min && count() <= range.max ? out : null;
   const group = anyNumberSlot(specs);
   if (group >= 0) {
     while (count() > range.max && out.length > group) out.pop();

@@ -8,7 +8,7 @@
  * untouched.
  */
 
-import { anyNumberSlot, groupBounds, isOptionalSpec, otherSlotConflict } from "../../target.js";
+import { concreteTargetSpecs, groupBounds, hasClosedGroup, isOptionalSpec, otherSlotConflict } from "../../target.js";
 import type { TargetRef, TargetSpec } from "../../target.js";
 
 /**
@@ -28,19 +28,24 @@ export function targetCombos(
     return [];
   }
   let combos: (TargetRef | null)[][] = [[]];
-  const group = anyNumberSlot(specs);
+  // A group that isn't the last slot ends at an empty one (`targetSpans`),
+  // and the slots after it sit past its members.
+  const closed = hasClosedGroup(specs);
+  const conflict = (extended: readonly (TargetRef | null)[]) =>
+    otherSlotConflict(closed ? concreteTargetSpecs(specs, extended) : specs, extended);
   optionLists.forEach((options, i) => {
-    // An "any number of" group (always last) ends each combination with a
-    // few of its answers rather than every subset: none, the best one, two,
+    // An "any number of" group (usually last) adds a few of its answers to
+    // each combination rather than every subset: none, the best one, two,
     // three… (a prefix of the options, which the bots rank best first —
     // `aimOffer`) up to the group's `max` (Magma Opus's four), then each of
     // the rest alone. Prefixes come first because the cap bites: offered as
     // none, each alone and all of them, a seven-creature board cut "all of
     // them" off, and Curse of the Swine ("exile X target creatures") was
     // only ever cast for X of 1.
-    if (i === group) {
-      const spec = specs[group];
-      const { min, max } = groupBounds(spec ?? "creature");
+    const spec = specs[i];
+    if (typeof spec === "object" && spec.kind === "any-number") {
+      const { min, max } = groupBounds(spec);
+      const end: readonly null[] = i < optionLists.length - 1 ? [null] : [];
       const most = Number.isFinite(max) ? Math.min(max, options.length) : options.length;
       const prefixes = Array.from({ length: most }, (_, k) => options.slice(0, k + 1));
       // None of them only where none is a number the group allows (not
@@ -52,7 +57,7 @@ export function targetCombos(
       for (const combo of combos) {
         for (const tail of tails) {
           if (next.length >= limit) break;
-          next.push([...combo, ...tail]);
+          next.push([...combo, ...tail, ...end]);
         }
         if (next.length >= limit) break;
       }
@@ -73,7 +78,7 @@ export function targetCombos(
         // filled, so the cap never fills up with combos that break one — the
         // six slots of "up to six target permanents" would otherwise spend
         // it all on the first permanent chosen six times.
-        if (otherSlotConflict(specs, extended) === null) next.push(extended);
+        if (conflict(extended) === null) next.push(extended);
       }
       if (next.length >= limit) break;
     }

@@ -193,11 +193,16 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
     for (const modes of choices) {
       // A mode with an "any number of" group takes as many of its best as
       // the cap lists (the fit below trims them to what X allows).
-      const picked = modes.flatMap((index) => {
+      const picked = modes.flatMap((index, k) => {
         const { targetOptions, targetSpecs } = modal.modes[index];
         if (anyNumberSlot(targetSpecs) < 0) return targetCombos(targetOptions, 1, targetSpecs)[0] ?? [];
         const combos = targetCombos(targetOptions, MAX_TARGET_COMBOS, targetSpecs);
-        return combos.reduce<(TargetRef | null)[]>((best, c) => (c.length > best.length ? c : best), combos[0] ?? []);
+        const best = combos.reduce<(TargetRef | null)[]>((most, c) => (c.length > most.length ? c : most), combos[0] ?? []);
+        // A mode ending in a group with a later mode's targets after it: an
+        // empty slot ends the group (Kamahl's Will — `targetSpans`).
+        const last = targetSpecs[targetSpecs.length - 1];
+        const later = modes.slice(k + 1).some((m) => modal.modes[m].targetSpecs.length > 0);
+        return typeof last === "object" && last.kind === "any-number" && later ? [...best, null] : best;
       });
       const fitted = fitTargets(
         legal,

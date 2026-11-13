@@ -493,10 +493,12 @@ const fillableOptions = (
   );
 
 /**
- * An "any number of" group (slot `group`, always last) topped up to its `min`
- * from `candidates`, in their order, each still fitting what's been taken —
- * Reckless Spite's "two target nonblack creatures" is a group of exactly two,
- * so one member alone is no legal cast (rule 601.2c).
+ * An "any number of" group (declared slot `group`, its members from place
+ * `start` of `picked`) topped up to its `min` from `candidates`, in their
+ * order, each still fitting what's been taken — Reckless Spite's "two target
+ * nonblack creatures" is a group of exactly two, so one member alone is no
+ * legal cast (rule 601.2c). A group that isn't the last slot is then ended
+ * with an empty one (`targetSpans`); `true` when it was the last.
  */
 const topUpGroup = (
   specs: readonly TargetSpec[],
@@ -505,15 +507,19 @@ const topUpGroup = (
   group: number,
   candidates: readonly TargetRef[],
   facts?: TargetFacts,
-): void => {
+  start = group,
+): boolean => {
   const { min } = groupBounds(specs[group] ?? "creature");
   for (const ref of candidates) {
-    if (picked.length - group >= min) break;
+    if (picked.length - start >= min) break;
     // A token stack can be taken once per token.
-    while (picked.length - group < min && slotOptions(specs, options, picked.length, picked, facts).includes(ref)) {
+    while (picked.length - start < min && slotOptions(specs, options, picked.length, picked, facts).includes(ref)) {
       picked.push(ref);
     }
   }
+  if (group === specs.length - 1) return true;
+  picked.push(null);
+  return false;
 };
 
 const firstOfEach = (
@@ -524,17 +530,16 @@ const firstOfEach = (
   // Slot by slot, so an "another target" slot skips what an earlier one took
   // — and never takes what a later one is left needing.
   const picked: (TargetRef | null)[] = [];
-  const group = anyNumberSlot(specs);
   for (let i = 0; i < legalOptions.length; i += 1) {
-    const fillable = fillableOptions(specs, legalOptions, i, picked, facts);
+    const fillable = fillableOptions(specs, legalOptions, picked.length, picked, facts);
     const first = fillable[0];
-    // An "any number of" group (always last) takes one member, or none —
-    // never a hole, which would be a member with no target — or as many as
-    // its `min` asks.
-    if (i === group) {
+    // An "any number of" group takes one member, or none — never a hole,
+    // which would be a member with no target — or as many as its `min` asks.
+    if (anyNumberSlot([specs[i] ?? "creature"]) === 0) {
+      const start = picked.length;
       if (first !== undefined) picked.push(first);
-      topUpGroup(specs, legalOptions, picked, group, fillable, facts);
-      break;
+      if (topUpGroup(specs, legalOptions, picked, i, fillable, facts, start)) break;
+      continue;
     }
     picked.push(first ?? null);
   }
@@ -1758,16 +1763,16 @@ export class RandomController extends AutomaticController {
     specs: readonly TargetSpec[] = [],
   ): ChosenTargets {
     const picked: (TargetRef | null)[] = [];
-    const group = anyNumberSlot(specs);
     for (let i = 0; i < options.length; i += 1) {
       // Narrowed by an "another target" relation to an earlier slot's pick.
-      const choices = fillableOptions(specs, options, i, picked, this.facts);
-      // An "any number of" group (always last): a random subset of its
-      // candidates, none included.
-      if (i === group) {
+      const choices = fillableOptions(specs, options, picked.length, picked, this.facts);
+      // An "any number of" group: a random subset of its candidates, none
+      // included — ended by an empty slot where it isn't the last.
+      if (anyNumberSlot([specs[i] ?? "creature"]) === 0) {
+        const group = picked.length;
         // No more than the group's `max` (Magma Opus's four); a group without
         // one draws exactly as it always has.
-        const spec = specs[group];
+        const spec = specs[i];
         const { min, max } = groupBounds(spec ?? "creature");
         // Each still fitting what's been taken (Reunion of the House's "total
         // power 10 or less") — drawn for first, so the draws don't change.
@@ -1782,9 +1787,11 @@ export class RandomController extends AutomaticController {
         // without one draws exactly as it always has.
         for (const ref of choices) {
           if (picked.length - group >= min) break;
-          if (!picked.includes(ref) && fits(ref)) picked.push(ref);
+          if (!picked.slice(group).includes(ref) && fits(ref)) picked.push(ref);
         }
-        break;
+        if (i === options.length - 1) break;
+        picked.push(null);
+        continue;
       }
       if (choices.length === 0) picked.push(null);
       else if (isOptionalSpec(specs[i] ?? "creature") && this.random() < 0.25) picked.push(null);
@@ -3861,11 +3868,10 @@ export class HeuristicBotController extends AutomaticController {
   ): ChosenTargets {
     if (polarities === null) return firstOfEach(legalOptions, specs, stateTargetFacts(state, this.registry));
     const picked: (TargetRef | null)[] = [];
-    const group = anyNumberSlot(specs);
     const doomed = polarities.includes("harm") ? doomedByOurStack(state, this.registry, this.playerId) : null;
     for (let i = 0; i < legalOptions.length; i += 1) {
       const polarity = polarities[i] ?? "either";
-      let fillable = fillableOptions(specs, legalOptions, i, picked, stateTargetFacts(state, this.registry));
+      let fillable = fillableOptions(specs, legalOptions, picked.length, picked, stateTargetFacts(state, this.registry));
       // A permanent our own destroy or exile on the stack is already taking
       // isn't worth a second: a harmful slot goes at something else on the
       // opponents' side while there is something (a live misplay,
@@ -3876,12 +3882,13 @@ export class HeuristicBotController extends AutomaticController {
       }
       const ranked = rankTargets(state, this.registry, this.playerId, fillable, polarity, targetValue, damages[i]);
       const best = ranked[0];
-      // An "any number of" group (always last) takes one member, or none,
-      // as `firstOfEach` does — or as many as its `min` asks, best first.
-      if (i === group) {
+      // An "any number of" group takes one member, or none, as `firstOfEach`
+      // does — or as many as its `min` asks, best first.
+      if (anyNumberSlot([specs[i] ?? "creature"]) === 0) {
+        const start = picked.length;
         if (best !== undefined) picked.push(best);
-        topUpGroup(specs, legalOptions, picked, group, ranked, stateTargetFacts(state, this.registry));
-        break;
+        if (topUpGroup(specs, legalOptions, picked, i, ranked, stateTargetFacts(state, this.registry), start)) break;
+        continue;
       }
       // "Up to one target creature" with only the wrong side to point at is
       // a choice to point at nothing.

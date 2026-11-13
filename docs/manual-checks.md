@@ -8173,3 +8173,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Gilraen's ability on Grizzly Bears and answer No to "Return the exiled card to the battlefield now?". Pass to your end step.
 - **Expect:** The Bears stay in exile until your end step, then come back with a vigilance counter and a lifelink counter.
 - **Not a bug:** Answering Yes brings the Bears back at once with no counters, and nothing more happens at the end step.
+
+## Two target groups in one ability, decisions lane (2026-11-13)
+
+### Filigree Vector: the creatures, Done, then the artifacts
+- **Do:** Cast Filigree Vector. For its enters ability, choose Grizzly Bears, Ornithopter and Bob's Hill Giant, click Done, then choose Ornithopter and Sol Ring and click Done.
+- **Expect:** After the first Done the prompt asks for artifacts, and Ornithopter can be chosen again. Grizzly Bears, Ornithopter and the Hill Giant each get a +1/+1 counter; Ornithopter and Sol Ring each get a charge counter.
+
+### Kamahl's Will: both modes, the lands then Carol's Serra Angel
+- **Do:** Cast Kamahl's Will choosing both modes. Choose two untapped Forests, click Done, then choose Carol's Serra Angel.
+- **Expect:** The two Forests become 1/1 creatures with vigilance, indestructible and haste, and Serra Angel dies (3 from Krenko and 1 from each Forest).

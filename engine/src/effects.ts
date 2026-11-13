@@ -2464,9 +2464,18 @@ export type EffectSpec =
        * `simultaneous` makes the members one instruction, as a `sequence`'s
        * does: "any number of target players each mill two cards" mills them
        * at once.
+       *
+       * `group` is for a list with several groups, one after another from
+       * slot `from` (Filigree Vector's "a +1/+1 counter on each of any
+       * number of target creatures and a charge counter on each of any
+       * number of target artifacts" is groups 0 and 1 from slot 0): each
+       * group but the last ends at an empty slot (`targetSpans`), so group
+       * `n` is the members after `n` of those, up to the next one. Without
+       * it, every target from `from` on.
        */
       readonly kind: "for-each-target";
       readonly from: number;
+      readonly group?: number;
       readonly effect: EffectSpec;
       readonly simultaneous?: boolean;
     }
@@ -16859,8 +16868,22 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // as steps of a `sequence`, so a member's effect that stops to ask
       // something holds the rest until it's answered.
       const members: number[] = [];
-      for (let index = spec.from; index < ctx.targets.length; index += 1) {
-        if (ctx.targets[index] !== undefined) members.push(index);
+      if (spec.group === undefined) {
+        for (let index = spec.from; index < ctx.targets.length; index += 1) {
+          if (ctx.targets[index] !== undefined) members.push(index);
+        }
+      } else {
+        // One of several groups in a row: each ends at an empty slot, which a
+        // member found illegal as it resolved (blanked too, rule 608.2b) isn't.
+        const illegal = ctx.illegalTargets ?? [];
+        const ends = (index: number): boolean => ctx.targets[index] === undefined && !illegal.includes(index);
+        let index = spec.from;
+        for (let skipped = 0; skipped < spec.group && index < ctx.targets.length; index += 1) {
+          if (ends(index)) skipped += 1;
+        }
+        for (; index < ctx.targets.length && !ends(index); index += 1) {
+          if (ctx.targets[index] !== undefined) members.push(index);
+        }
       }
       if (members.length === 0) return;
       // Target players each told to do the same thing act — and make their

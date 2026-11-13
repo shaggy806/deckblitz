@@ -579,7 +579,9 @@ import {
   attachedToThanOf,
   divisionOf as spellDivision,
   groupBounds,
-  groupPowerExceeded,
+  groupBroken,
+  groupMembers,
+  targetSpans,
   groupReadsAmount,
   groupReadsCastAmount,
   groupReadsX,
@@ -8861,16 +8863,21 @@ export class Game {
     } else if (trig !== null) {
       this.state.pendingTargetedTrigger = null;
       const queue = [...chosen];
-      const last = trig.slots[trig.slots.length - 1];
-      const grouped = last !== undefined && "spec" in last && anyNumberSlot([last.spec]) === 0;
-      // An "any number of" group is always the last slot: it takes every
-      // answer left, however many — or none, and then no slot at all.
-      const targets = [
-        ...(grouped ? trig.slots.slice(0, -1) : trig.slots).map((s) =>
-          "auto" in s ? s.auto : "skip" in s ? undefined : (queue.shift() as TargetRef),
-        ),
-        ...(grouped ? queue : []),
-      ];
+      // An "any number of" group as the last slot takes every answer left,
+      // however many — or none, and then no slot at all; anywhere else, the
+      // answers up to the empty one that ends it, which stays as its hole
+      // (`targetSpans`).
+      const targets: (TargetRef | undefined)[] = [];
+      trig.slots.forEach((s, k) => {
+        if ("auto" in s) targets.push(s.auto);
+        else if ("skip" in s) targets.push(undefined);
+        else if (anyNumberSlot([s.spec]) !== 0) targets.push((queue.shift() ?? undefined) as TargetRef);
+        else if (k === trig.slots.length - 1) targets.push(...queue.splice(0).map((ref) => ref ?? undefined));
+        else {
+          for (let ref = queue.shift(); ref != null; ref = queue.shift()) targets.push(ref);
+          targets.push(undefined);
+        }
+      });
       const abilityId = this.mintTriggerAbility(
         trig.sourceObjectId,
         trig.cardName,
@@ -17330,34 +17337,55 @@ export class Game {
       // target nonblack creatures" is exactly two — rule 601.2c), the rest
       // optional. Fewer candidates than its `min`, and it can't be cast.
       const group = anyNumberSlot(declared);
-      const bounds = group >= 0 ? groupBounds(declared[group]) : { min: 0, max: 0 };
       // A stack is one member per token, the most any cost could want of it
       // capped so an enormous stack doesn't make this a quadratic slot list.
       const facts = stateTargetFacts(this.state, this.registry);
-      const units = (offered[group] ?? []).reduce(
-        (n, ref) => n + Math.min(Game.MAX_GROUP_TOKENS_PRICED, facts.stackSize?.(ref) ?? 1),
-        0,
-      );
-      const members = group >= 0 ? Math.min(units, bounds.max) : 0;
-      if (group >= 0 && members < bounds.min) return null;
+      // Each group at its most (a list may hold several, or one with a slot
+      // after it — `targetSpans`), as a chosen list shaped that way.
+      const shape: (TargetRef | null)[] = [];
+      const options: (readonly TargetRef[])[] = [];
+      const required: boolean[] = [];
+      let fewest = 0;
+      for (const [slot, spec] of declared.entries()) {
+        if (typeof spec !== "object" || spec.kind !== "any-number") {
+          shape.push({ kind: "player", player });
+          options.push(offered[slot] ?? []);
+          required.push(true);
+          continue;
+        }
+        const bounds = groupBounds(spec);
+        const units = (offered[slot] ?? []).reduce(
+          (n, ref) => n + Math.min(Game.MAX_GROUP_TOKENS_PRICED, facts.stackSize?.(ref) ?? 1),
+          0,
+        );
+        const members = Math.min(units, bounds.max);
+        if (members < bounds.min) return null;
+        fewest += bounds.min;
+        for (let m = 0; m < members; m += 1) {
+          shape.push({ kind: "player", player });
+          options.push(offered[slot] ?? []);
+          required.push(m < bounds.min);
+        }
+        if (slot < declared.length - 1) {
+          shape.push(null);
+          options.push([]);
+          required.push(false);
+        }
+      }
       const specs =
         group < 0
           ? declared
-          : concreteTargetSpecs(declared, group + members).map((spec, i) =>
-              i >= group + bounds.min ? ({ kind: "optional", of: spec } as const) : spec,
+          : concreteTargetSpecs(declared, shape).map((spec, i) =>
+              required[i] === false && !isOptionalSpec(spec) ? ({ kind: "optional", of: spec } as const) : spec,
             );
-      const options =
-        group < 0
-          ? offered
-          : [...offered.slice(0, group), ...Array.from({ length: members }, () => offered[group] ?? [])];
       const here = this.targetCopies(options.flat());
       Object.assign(copies, here);
-      const range = targetCountBounds(options, specs, here);
+      const range = targetCountBounds(group < 0 ? offered : options, specs, here);
       // The group's members are distinct objects (rule 601.2c), which the
       // cover above, letting one target fill several slots, doesn't know.
-      return range === null || range.min >= bounds.min
+      return range === null || range.min >= fewest
         ? range
-        : { ...range, min: bounds.min, max: Math.max(range.max, bounds.min) };
+        : { ...range, min: fewest, max: Math.max(range.max, fewest) };
     };
     const withCopies = (range: TargetCountRange): TargetCountRange =>
       Object.keys(copies).length > 0 ? { ...range, copies } : range;
@@ -30053,11 +30081,20 @@ export class Game {
         // chose is illegal does nothing happen, target-less modes included.
         let offset = 0;
         const steps: { effect: EffectSpec; ctx: ResolutionContext }[] = [];
+        // Where each part's first slot sits in the flat list: an "any number
+        // of target …" group is a flat target per member, and one that isn't
+        // the list's last slot ends at an empty slot of its own (Kamahl's
+        // Will's lands before its second mode's creature — `targetSpans`).
+        const shape = targetSpans(castSpecs, object.targets ?? []);
+        let declaredEnd = 0;
         for (const [k, mode] of parts.entries()) {
-          // An "any number of target …" group is always the last slot of its
-          // list, one flat target per member, so the last part's slice runs
-          // to the end of the list.
-          const count = mode?.count ?? (k === parts.length - 1 ? targets.length - offset : (mode?.targets?.length ?? 0));
+          declaredEnd += mode?.targets?.length ?? 0;
+          // The last part's slice runs to the end of the list.
+          const count =
+            mode?.count ??
+            (k === parts.length - 1
+              ? targets.length - offset
+              : (shape[declaredEnd]?.start ?? offset + (mode?.targets?.length ?? 0)) - offset);
           const slice = targets.slice(offset, offset + count);
           const zoneSlice = (object.targetZones ?? []).slice(offset, offset + count);
           const illegal = legality.illegal.filter((i) => i >= offset && i < offset + count).map((i) => i - offset);
@@ -35339,11 +35376,15 @@ export class Game {
       chooserSlots.length > 0 &&
       chooserSlots.every((s) => s.options.length === 1 && (atRandom || !isOptionalSpec(s.spec)));
     if (chooserSlots.length === 0 || forced) {
-      // A skipped slot is a hole — or, for an "any number of" group, which
-      // is always last, no slot at all.
-      const filled = slots.map((s) => ("auto" in s ? s.auto : "skip" in s ? undefined : s.options[0]));
-      const group = anyNumberSlot(specs);
-      const targets = group >= 0 && filled[group] === undefined ? filled.slice(0, group) : filled;
+      // A skipped slot is a hole — or, for an "any number of" group, no
+      // member at all, and a group that isn't last ends at a hole of its own
+      // (`targetSpans`).
+      const targets = slots.flatMap((s, i) => {
+        const ref = "auto" in s ? s.auto : "skip" in s ? undefined : s.options[0];
+        if (anyNumberSlot([specs[i]]) !== 0) return [ref];
+        const members = ref === undefined ? [] : [ref];
+        return i < slots.length - 1 ? [...members, undefined] : members;
+      });
       const abilityId = this.mintTriggerAbility(
         trigger.sourceObjectId,
         trigger.cardName,
@@ -35756,7 +35797,7 @@ export class Game {
     // An "any number of target …" group has as many slots as it went on the
     // stack with — never as many as the board would allow now.
     const declared = specs;
-    specs = concreteTargetSpecs(specs, chosen.length);
+    specs = concreteTargetSpecs(specs, chosen);
     const targets = [...now];
     const illegal: number[] = [];
     let anyChosen = false;
@@ -35870,9 +35911,10 @@ export class Game {
     });
     // A group's "total power N or less" broken now makes every one of its
     // targets illegal (Reunion of the House's ruling).
-    const group = anyNumberSlot(declared);
-    if (group >= 0 && groupPowerExceeded(declared, targets, stateTargetFacts(this.state, this.registry))) {
-      for (let i = group; i < targets.length; i += 1) drop(i);
+    const facts = stateTargetFacts(this.state, this.registry);
+    for (const { spec, start, count, members } of groupMembers(declared, targets, chosen)) {
+      if (!groupBroken(spec, members, facts)) continue;
+      for (let i = start; i < start + count; i += 1) drop(i);
     }
     const anyLegal = targets.some((t, i) => t !== undefined && chosen[i] !== undefined && !autoSlots.includes(i));
     return { fizzles: anyChosen && !anyLegal, illegal, targets };
@@ -46978,14 +47020,14 @@ controlledBy,
     // each one target of the group's spec, another than the members before it
     // (rule 601.2c) — never a group again: offered as one, a chooser took it
     // for a fresh "any number" and answered six for a copy with two.
-    const concrete = concreteTargetSpecs(specs, targets.length);
-    const group = anyNumberSlot(specs);
+    const concrete = concreteTargetSpecs(specs, targets);
+    const groups = groupMembers(specs, targets);
     targets.forEach((target, i) => {
       if (target === undefined || auto.has(i)) return;
       const spec = concrete[Math.min(i, concrete.length - 1)];
       // What a group member may be is the group's own spec; the "another
       // than the ones before it" relation is checked across the answer.
-      const inGroup = group >= 0 && i >= group;
+      const inGroup = groups.some((g) => i >= g.start && i < g.start + g.count);
       const member = inGroup && typeof spec === "object" && spec.kind === "other" ? spec.of : spec;
       // Another than a slot filled automatically, which isn't offered: never
       // that slot's target.
@@ -47062,7 +47104,7 @@ controlledBy,
     if (targets == null) return;
     const order = this.state.turnOrder;
     const slotAtSeat = new Map<number, number>();
-    concreteTargetSpecs(this.spellTargetSpecs(spell), targets.length).forEach((spec, slot) => {
+    concreteTargetSpecs(this.spellTargetSpecs(spell), targets).forEach((spec, slot) => {
       const seat = seatOfTargetSpec(spec);
       // Nobody sits at a seat past the table's size: no target, and none to come.
       if (seat !== undefined && seat < order.length) slotAtSeat.set(seat, slot);

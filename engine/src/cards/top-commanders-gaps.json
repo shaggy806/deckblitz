@@ -2455,7 +2455,9 @@
   "trigger:untap-trigger",
   "trigger:saga-final-chapter-triggers",
   "trigger:phases-out",
-  "trigger:scry-bottom-count"
+  "trigger:scry-bottom-count",
+  "decision:two-any-number-groups",
+  "target:any-number-group-before-targeting-mode"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
