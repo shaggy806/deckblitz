@@ -647,10 +647,18 @@ describe("of-player with not your-turn, a caster's turn (condition:trigger-condi
     expect(subtypes(game, bears)).toContain("Ooze");
     expect(zone(game, march)).toBe("battlefield");
     lands(game, "Mountain", 2, B);
+    // "Their" is the caster (an intervening if, rule 603.4). Bob casts in
+    // alice's main phase: not his turn, an Elephant.
     const first = toHand(game, "Shock", B);
     game.advanceUntil((s) => s.priority.holder === B && s.zones.shared.stack.length === 0 && s.turn.step === "precombat-main");
+    expect(activePlayerOf(game.state)).toBe(A);
     cast(game, first, { player: B, targets: [ref(A)] });
-    expect(tokensNamed(game, "Elephant Token", A)).toBe(0);
+    expect(tokensNamed(game, "Elephant Token", A)).toBe(1);
+    // In his own turn: none.
+    toStep(game, "precombat-main", B);
+    lands(game, "Mountain", 1, B);
+    cast(game, toHand(game, "Shock", B), { player: B, targets: [ref(A)] });
+    expect(tokensNamed(game, "Elephant Token", A)).toBe(1);
   });
 });
 
