@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, cast, counters, keywords, lands, named, pickModes, pt, settle, spawn, table, toHand, tokensNamed } from "./harness.js";
+import { A, B, cast, counters, keywords, lands, named, pickModes, pt, ref, settle, spawn, table, toHand, tokensNamed } from "./harness.js";
 
 describe("Jinnie Fay, Jetmir's Second: you may make that many Cats or Dogs instead", () => {
   const CAT = "2/2 Green Cat Token (Haste)";
@@ -104,5 +104,35 @@ describe("Master Chef: commander creatures you own have two enters-with-a-counte
     (game.state.objects[commander] as { owner: typeof B }).owner = B;
     cast(game, commander);
     expect(counters(game, commander)).toBe(0);
+  });
+});
+
+describe("Tifa's Limit Break: tiered, doubling or tripling power and toughness", () => {
+  it("Final Heaven costs {G} plus {6}{G} and triples: a 2/2 is a 6/6", () => {
+    const { game } = table();
+    const forests = lands(game, "Forest", 8);
+    const bear = spawn(game, "Grizzly Bears");
+    cast(game, toHand(game, "Tifa's Limit Break"), { modes: [2], targets: [ref(bear)] });
+    expect(forests.every((id) => game.state.objects[id].tapped)).toBe(true);
+    expect(pt(game, bear)).toEqual({ power: 6, toughness: 6 });
+  });
+
+  it("a negative power is tripled as it is (rule 701.10d): -1/3 becomes -3/9", () => {
+    const { game } = table();
+    lands(game, "Forest", 8);
+    const bear = spawn(game, "Grizzly Bears");
+    game.debugApplyEffect(A, { kind: "modify-pt", target: 0, power: -3, toughness: 1, duration: "end-of-turn" }, [ref(bear)]);
+    settle(game);
+    expect(pt(game, bear)).toEqual({ power: -1, toughness: 3 });
+    cast(game, toHand(game, "Tifa's Limit Break"), { modes: [2], targets: [ref(bear)] });
+    expect(pt(game, bear)).toEqual({ power: -3, toughness: 9 });
+  });
+
+  it("Meteor Strikes doubles for {2} more", () => {
+    const { game } = table();
+    lands(game, "Forest", 3);
+    const bear = spawn(game, "Grizzly Bears");
+    cast(game, toHand(game, "Tifa's Limit Break"), { modes: [1], targets: [ref(bear)] });
+    expect(pt(game, bear)).toEqual({ power: 4, toughness: 4 });
   });
 });

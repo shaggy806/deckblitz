@@ -28310,6 +28310,7 @@ import _poolTidusYunasGuardian from "./pool/tidus-yunas-guardian.js";
 import _poolTidyConclusion from "./pool/tidy-conclusion.js";
 import _poolTifaLockhart from "./pool/tifa-lockhart.js";
 import _poolTifaMartialArtist from "./pool/tifa-martial-artist.js";
+import _poolTifasLimitBreak from "./pool/tifas-limit-break.js";
 import _poolTigerClaws from "./pool/tiger-claws.js";
 import _poolTigerDillo from "./pool/tiger-dillo.js";
 import _poolTigerSeal from "./pool/tiger-seal.js";
@@ -61024,6 +61025,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTidyConclusion,
   _poolTifaLockhart,
   _poolTifaMartialArtist,
+  _poolTifasLimitBreak,
   _poolTigerClaws,
   _poolTigerDillo,
   _poolTigerSeal,
@@ -93751,6 +93753,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tidy-conclusion": _poolTidyConclusion,
   "pool/tifa-lockhart": _poolTifaLockhart,
   "pool/tifa-martial-artist": _poolTifaMartialArtist,
+  "pool/tifas-limit-break": _poolTifasLimitBreak,
   "pool/tiger-claws": _poolTigerClaws,
   "pool/tiger-dillo": _poolTigerDillo,
   "pool/tiger-seal": _poolTigerSeal,

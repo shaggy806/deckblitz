@@ -889,6 +889,7 @@ import _poolThranduilsCompany from "../pool/thranduils-company.js";
 import _poolThrivingGrubs from "../pool/thriving-grubs.js";
 import _poolThrowFromTheSaddle from "../pool/throw-from-the-saddle.js";
 import _poolTiamat from "../pool/tiamat.js";
+import _poolTifasLimitBreak from "../pool/tifas-limit-break.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
 import _poolTimeSpiral from "../pool/time-spiral.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
@@ -1903,6 +1904,7 @@ const shard: CardShard = {
     _poolThrivingGrubs,
     _poolThrowFromTheSaddle,
     _poolTiamat,
+    _poolTifasLimitBreak,
     _poolTillerEngine,
     _poolTimeSpiral,
     _poolTinderFarm,

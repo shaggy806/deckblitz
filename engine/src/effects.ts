@@ -15022,6 +15022,17 @@ export function ptChangeValue(
 ): number {
   if (typeof amount === "number") return amount;
   if (typeof amount === "object" && "product" in amount) {
+    // "Triple its power": +X where X is twice its power, a -2 power made -6
+    // as a doubling is (rule 701.10d): a doubling read in a product keeps
+    // its sign — `{ product: [2, { powerOf: 0, doubling: true }] }`.
+    const signedRead = (a: EffectAmount): boolean =>
+      typeof a === "object" && ("powerOf" in a || "toughnessOf" in a) && a.doubling === true;
+    if (amount.product.some(signedRead)) {
+      return amount.product.reduce<number>(
+        (n, a) => n * (typeof a === "number" ? a : signedRead(a) ? signedAmountValue(a, ctx, each) : amountValue(a, ctx, each)),
+        1,
+      );
+    }
     const printed = amount.product.filter((a): a is number => typeof a === "number");
     if (printed.some((n) => n < 0)) {
       const rest = amount.product.filter((a) => typeof a !== "number");
