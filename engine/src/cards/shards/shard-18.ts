@@ -888,6 +888,7 @@ import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
 import _poolTowerDefense from "../pool/tower-defense.js";
 import _poolToxinSliver from "../pool/toxin-sliver.js";
+import _poolTransmuteArtifact from "../pool/transmute-artifact.js";
 import _poolTraverseTheUlvenwald from "../pool/traverse-the-ulvenwald.js";
 import _poolTreasureMage from "../pool/treasure-mage.js";
 import _poolTreasureMap from "../pool/treasure-map.js";
@@ -1907,6 +1908,7 @@ const shard: CardShard = {
     _poolToughCookie,
     _poolTowerDefense,
     _poolToxinSliver,
+    _poolTransmuteArtifact,
     _poolTraverseTheUlvenwald,
     _poolTreasureMage,
     _poolTreasureMap,

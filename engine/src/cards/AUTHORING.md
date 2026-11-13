@@ -2559,6 +2559,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   "{X}"` is "you may pay **any amount of {R}**" (Leyline Tyrant): X is paid
   in that colour, each X one {R}, and the X offered goes only as high as the
   player's red mana does; a `reflexive-trigger` under it reads it as X.
+  `xIs: EffectAmount` is "you may pay {X}, **where X is** the difference"
+  (Transmute Artifact): X is that amount, read as the `may` applies, not
+  the player's to choose.
   `maxX: EffectAmount` is "X can't be greater than …" (Shanna, Purifying
   Blade's "the amount of life you gained this turn"), read as the `may`
   applies: the X offered goes no higher.
@@ -4466,6 +4469,12 @@ scaffolder reads "[sentence]. Add …" this way.
 keep the controller's own part unscoped (that is what the auto-payer counts)
 and put the others' on `also` with `who: "each-opponent"`; an ability whose
 own `add-mana` is scoped to someone else is never an auto-payer source.
+
+`add-mana`'s `playerOfChoice: true` is "**a player of your choice** adds {C}"
+(Victory Chimes): a mana ability, so the player is named as it's activated
+(rule 605.3b) — offered once per player still in the game, each offer's
+`manaFor` naming them (the client labels it). The auto-payer counts it as
+its controller's own mana.
 
 `add-mana`'s `target` (a player target slot) is "**target player** adds one
 mana of any color" (The Warring Triad: `targets: ["player"]`, `effect: { kind:

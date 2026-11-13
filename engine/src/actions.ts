@@ -727,6 +727,9 @@ export type Action =
        * this. Omitting it keeps the old fixed default (white, or the first
        * listed colour). */
       readonly manaColors?: readonly ManaType[];
+      /** The player a mana ability's "a player of your choice adds" names —
+       * the offer's `manaFor`, echoed back. Absent: its controller. */
+      readonly manaFor?: PlayerId;
       /** How the ability's divided amount is split among the targets of its
        * `divided` group (rules 602.2b, 601.2d — Skarrgan Hellkite), as for a
        * cast's `division`. Absent: as evenly as it goes. */
@@ -1706,6 +1709,11 @@ export type LegalAction =
        * client can offer them as separate menu entries; absent for an ability
        * whose output is fixed. */
       readonly manaColors?: readonly ManaType[];
+      /** "A player of your choice adds {C}" (Victory Chimes — `add-mana`'s
+       * `playerOfChoice`): the player this offer gives the mana to. The
+       * ability is offered once per player still in the game; echo it back
+       * as the action's `manaFor`. */
+      readonly manaFor?: PlayerId;
       /** Set on the one extra variant of "X mana in any combination of …"
        * offered when a live X has too many splits to list (the rest are all
        * of one type each): the player picks how many of each of `colors`,

@@ -2383,7 +2383,9 @@
   "mechanic:opening-hand-enter-choice",
   "decision:choose-two-players-on-enter",
   "effect:lose-all-player-counters",
-  "static:granted-dies-trigger-doubling"
+  "static:granted-dies-trigger-doubling",
+  "effect:mana-ability-chosen-player-adds",
+  "effect:pay-mana-value-difference"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

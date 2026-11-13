@@ -3099,6 +3099,13 @@ export type EffectSpec =
        * the auto-payer counts — and the rest rides on `also` with
        * `who: "each-opponent"`. */
       readonly who?: PlayerScope;
+      /** "**A player of your choice** adds {C}" (Victory Chimes): a mana
+       * ability, so the player is named as it's activated (rule 605.3b) —
+       * offered once per player still in the game, each offer's `manaFor`
+       * naming them. The auto-payer counts it as its controller's own mana
+       * (choosing themselves); activated with no `manaFor`, its controller
+       * adds it. */
+      readonly playerOfChoice?: true;
       /** A target slot holding the player who adds it — "**Target player**
        * adds one mana of any color" (The Warring Triad), "Choose a color.
        * Target player adds three mana of the chosen color" (Radiant Lotus).
@@ -9291,6 +9298,10 @@ export type EffectSpec =
        * may pay **any amount of {R}**" (Leyline Tyrant) is `cost: "{X}"`
        * with `xColor: "R"`, each X one {R}. */
       readonly xColor?: Color;
+      /** With an `{X}` in `cost`: "you may pay {X}, **where X is** the
+       * difference" (Transmute Artifact) — X is this amount, read as the
+       * `may` applies, not the player's to choose. 0 or less pays nothing. */
+      readonly xIs?: EffectAmount;
       /** With an `{X}` in `cost`: "X can't be greater than …" (Shanna,
        * Purifying Blade's "the amount of life you gained this turn"), read
        * as the `may` applies. */
@@ -13301,6 +13312,9 @@ export interface ResolutionContext extends EffectApi {
   /** The colour an `add-mana` of `"any-color"` is making in this mana
    * ability — what `{ devotionTo: "that-color" }` reads. */
   readonly manaColor?: ManaType;
+  /** The player a mana ability's "a player of your choice adds" names — the
+   * activation's `manaFor` (`add-mana`'s `playerOfChoice`). */
+  readonly manaFor?: PlayerId;
   /** The spell, or the source of the ability, whose cost a modifier's amount
    * is reading (the `"priced"` {@link ObjectRef}). */
   readonly priced?: ObjectId;
@@ -17072,7 +17086,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ? [targeted.player]
               : []
             : spec.who === undefined
-              ? [ctx.controller]
+              ? // "A player of your choice adds" — the one named as the mana
+                // ability was activated, its controller when nobody was.
+                [spec.playerOfChoice === true ? (ctx.manaFor ?? ctx.controller) : ctx.controller]
               : ctx.playersInScope(spec.who);
         for (const player of adders) {
           // "Any color in your commander's color identity" — nothing at all
@@ -20624,12 +20640,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ];
       const chosenEffect: EffectSpec =
         chosenSteps.length === 1 ? chosenSteps[0] : { kind: "sequence", effects: chosenSteps };
+      // "You may pay {X}, where X is …": the X is fixed, read now — paid as
+      // that much generic mana (of `xColor`, that many of it).
+      const xIs = spec.xIs === undefined ? undefined : Math.max(0, amountValue(spec.xIs, ctx));
+      const cost =
+        xIs === undefined || spec.cost === undefined
+          ? spec.cost
+          : spec.cost.replace("{X}", spec.xColor !== undefined ? `{${spec.xColor}}`.repeat(xIs) : xIs > 0 ? `{${xIs}}` : "");
       ctx.chooseModes(
         0,
         1,
         [{ text: spec.prompt, effect: chosenEffect }],
         spec.else,
-        spec.cost,
+        cost === "" ? undefined : cost,
         spec.oncePerTurn === true,
         spec.costLife === undefined && spec.costEnergy === undefined && spec.maxX === undefined &&
           spec.costEnergyX === undefined && spec.costTimes === undefined && costSacrifice === undefined

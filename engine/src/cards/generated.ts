@@ -28703,6 +28703,7 @@ import _poolTransmogrifyingLicid from "./pool/transmogrifying-licid.js";
 import _poolTransmogrifyingWand from "./pool/transmogrifying-wand.js";
 import _poolTransmutationFont from "./pool/transmutation-font.js";
 import _poolTransmutation from "./pool/transmutation.js";
+import _poolTransmuteArtifact from "./pool/transmute-artifact.js";
 import _poolTransplantTheorist from "./pool/transplant-theorist.js";
 import _poolTransporterMalfunction from "./pool/transporter-malfunction.js";
 import _poolTranspose from "./pool/transpose.js";
@@ -30018,6 +30019,7 @@ import _poolVictorManchaRunaway from "./pool/victor-mancha-runaway.js";
 import _poolVictorTimelyWilyTycoon from "./pool/victor-timely-wily-tycoon.js";
 import _poolVictorValgavothsSeneschal from "./pool/victor-valgavoths-seneschal.js";
 import _poolVictoriousDestruction from "./pool/victorious-destruction.js";
+import _poolVictoryChimes from "./pool/victory-chimes.js";
 import _poolVictory from "./pool/victory.js";
 import _poolVictorysEnvoy from "./pool/victorys-envoy.js";
 import _poolVictorysHerald from "./pool/victorys-herald.js";
@@ -61379,6 +61381,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTransmogrifyingWand,
   _poolTransmutationFont,
   _poolTransmutation,
+  _poolTransmuteArtifact,
   _poolTransplantTheorist,
   _poolTransporterMalfunction,
   _poolTranspose,
@@ -62694,6 +62697,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVictorTimelyWilyTycoon,
   _poolVictorValgavothsSeneschal,
   _poolVictoriousDestruction,
+  _poolVictoryChimes,
   _poolVictory,
   _poolVictorysEnvoy,
   _poolVictorysHerald,
@@ -94068,6 +94072,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/transmogrifying-wand": _poolTransmogrifyingWand,
   "pool/transmutation-font": _poolTransmutationFont,
   "pool/transmutation": _poolTransmutation,
+  "pool/transmute-artifact": _poolTransmuteArtifact,
   "pool/transplant-theorist": _poolTransplantTheorist,
   "pool/transporter-malfunction": _poolTransporterMalfunction,
   "pool/transpose": _poolTranspose,
@@ -95383,6 +95388,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/victor-timely-wily-tycoon": _poolVictorTimelyWilyTycoon,
   "pool/victor-valgavoths-seneschal": _poolVictorValgavothsSeneschal,
   "pool/victorious-destruction": _poolVictoriousDestruction,
+  "pool/victory-chimes": _poolVictoryChimes,
   "pool/victory": _poolVictory,
   "pool/victorys-envoy": _poolVictorysEnvoy,
   "pool/victorys-herald": _poolVictorysHerald,

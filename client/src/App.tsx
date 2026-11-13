@@ -602,6 +602,9 @@ interface Targeting {
   /** The opponent named to choose some of its targets or its modes (rules
    * 601.2c, 700.2e) — echoed back like `assist`. */
   readonly otherChooser?: PlayerId
+  /** The player a mana ability's "a player of your choice adds" names
+   * (Victory Chimes) — one offer per player, echoed back. */
+  readonly manaFor?: PlayerId
   /** New targets for a copy of a spell (Twincast, Shiko and Narset): the
    * target each slot has now, which a Keep button takes — it may not be on
    * the board to click any more. */
@@ -2738,6 +2741,7 @@ function Table({
         | 'phyrexianLifeAtLeast'
         | 'assist'
         | 'otherChooser'
+        | 'manaFor'
       >,
       targets: readonly (TargetRef | null)[],
       division?: readonly number[],
@@ -2797,6 +2801,7 @@ function Table({
                 ...(t.sacrifice !== undefined ? { sacrifice: t.sacrifice } : {}),
                 ...(t.xValue !== undefined ? { xValue: t.xValue } : {}),
                 ...(t.manaColors !== undefined ? { manaColors: t.manaColors } : {}),
+                ...(t.manaFor !== undefined ? { manaFor: t.manaFor } : {}),
                 ...(division !== undefined ? { division: [...division] } : {}),
                 ...(phyrexianLife !== undefined && phyrexianLife > 0 ? { phyrexianLife } : {}),
               }
@@ -3194,6 +3199,7 @@ function Table({
         ...(ab.modes !== undefined ? { modes: ab.modes } : {}),
         // The opponent named to choose some of its targets (rule 601.2c).
         ...(ab.otherChooser !== undefined ? { otherChooser: ab.otherChooser } : {}),
+        ...(ab.manaFor !== undefined ? { manaFor: ab.manaFor } : {}),
         ...(ab.tapCost !== undefined ? { tapCost: ab.tapCost } : {}),
         ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
         ...(ab.divide !== undefined ? { divide: ab.divide } : {}),
@@ -7950,10 +7956,11 @@ function Table({
             // So is a modal ability, once per mode.
             // And one naming each opponent who may choose its targets.
             // A split's stand-in picks are all of one colour, as that colour's own offer is.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}`,
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.manaFor ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}`,
             label:
               (ab.text || `Ability ${ab.abilityIndex + 1}`) +
-              (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : ''),
+              (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : '') +
+              (ab.manaFor !== undefined ? ` (${playerLabel(ab.manaFor, game.seats)} adds it)` : ''),
             onSelect: () => {
               setSelectedSource(null)
               clickAbility(ab)

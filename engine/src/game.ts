@@ -3077,6 +3077,13 @@ export class Game {
           }
         }
         this.phyrexianLifeChoice = action.phyrexianLife;
+        // Only a player still in the game: a client's word otherwise.
+        this.manaForChoice =
+          action.manaFor !== undefined &&
+          this.state.players[action.manaFor] !== undefined &&
+          this.state.players[action.manaFor].hasLost !== true
+            ? action.manaFor
+            : undefined;
         try {
           this.withWaterbendChoice(source, action.waterbend, () =>
             this.activateAbility(
@@ -3093,6 +3100,7 @@ export class Game {
           );
         } finally {
           this.phyrexianLifeChoice = undefined;
+          this.manaForChoice = undefined;
           this.activationModes = undefined;
         }
         break;
@@ -4161,7 +4169,19 @@ export class Game {
        * `manaColors` when that's all of it. */
       makes: readonly ManaType[] | undefined = manaColors,
       manaSplit?: ManaSplitOffer,
+      /** The player this variant's "a player of your choice adds" names. */
+      manaFor?: PlayerId,
     ): void => {
+      // "A player of your choice adds {C}" (Victory Chimes): a variant per
+      // player still in the game, the activator first (rule 605.3b — named
+      // as the mana ability is activated).
+      if (manaFor === undefined && ability.effect?.kind === "add-mana" && ability.effect.playerOfChoice === true) {
+        const players = this.state.turnOrder.filter((p) => this.state.players[p]?.hasLost !== true);
+        for (const p of [player, ...players.filter((p) => p !== player)]) {
+          pushActivateAbility(source, cardName, ability, index, manaColors, makes, manaSplit, p);
+        }
+        return;
+      }
       // "Of an opponent's choice" (rules 602.2b, 601.2c): a variant per
       // opponent who could choose, each judged with them choosing.
       const theirSlots = ability.opponentChoosesTargets ?? [];
@@ -4169,7 +4189,7 @@ export class Game {
         for (const chooser of this.otherChoosers(player)) {
           const from = out.length;
           this.withOtherChoice({ for: source, chooser }, () =>
-            pushActivateAbility(source, cardName, ability, index, manaColors, makes, manaSplit),
+            pushActivateAbility(source, cardName, ability, index, manaColors, makes, manaSplit, manaFor),
           );
           const variants = out
             .splice(from)
@@ -4323,6 +4343,7 @@ export class Game {
                 : label,
           ...(manaColors !== undefined ? { manaColors } : {}),
           ...(manaSplit !== undefined ? { manaSplit } : {}),
+          ...(manaFor !== undefined ? { manaFor } : {}),
           targetSpecs,
           targetOptions,
           ...this.phyrexianPipsOffer(player, ability.cost.mana),
@@ -20781,6 +20802,9 @@ export class Game {
   /** The `phyrexianLife` of the `cast-spell` or `activate-ability` being
    * dispatched (rule 107.4f), read as its cost is paid; unset otherwise. */
   private phyrexianLifeChoice: number | undefined = undefined;
+  /** The `manaFor` of the `activate-ability` being dispatched — who a mana
+   * ability's "a player of your choice adds" names; unset otherwise. */
+  private manaForChoice: PlayerId | undefined = undefined;
   /** The `modes` of the `activate-ability` being dispatched — a modal
    * activated ability's, chosen as it's activated (rules 602.2b, 700.2b);
    * unset otherwise, and while `legalActions` asks whether it could be. */
@@ -25287,7 +25311,7 @@ export class Game {
         this.afterPlayerAction(player);
         return;
       }
-      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake);
+      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice);
       return;
     }
 
@@ -25570,6 +25594,8 @@ export class Game {
     paidSets: ObjectSets | undefined,
     /** What the land its cost sacrificed could have produced (`sacrificedCouldProduce`). */
     sacrificedCouldMake?: readonly ManaType[],
+    /** Who "a player of your choice adds" names (the action's `manaFor`). */
+    manaFor?: PlayerId,
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
@@ -25622,6 +25648,7 @@ export class Game {
       ...base,
       manaAbility: true,
       ...(manaColor !== undefined ? { manaColor } : {}),
+      ...(manaFor !== undefined ? { manaFor } : {}),
       addMana: (p, mana, amount, spec): void => {
         if (ability.cost.tap && source !== undefined && p === player) {
           instead = this.landManaInsteadFor(player, source, amount);
@@ -25692,7 +25719,12 @@ export class Game {
         picked += units;
       },
     };
-    const pool = this.state.players[player].manaPool;
+    // Whose pool the ability's mana goes to: "a player of your choice"
+    // (Victory Chimes) may name another. Mana Reflection's doubling and a
+    // triggered mana ability's "any type that permanent produced" read what
+    // the permanent produced, wherever it went.
+    const recipient = manaFor ?? player;
+    const pool = this.state.players[recipient].manaPool;
     const poolBefore = pool.length;
     if (effect !== null) applyEffectSpec(effect, context);
     if (ability.cost.tap) {
@@ -25709,7 +25741,7 @@ export class Game {
         }
         for (const type of MANA_TYPES) {
           const n = made.filter((u) => u.type === type).length * (multiplier - 1);
-          if (n > 0) this.emit({ type: "mana-added", player, mana: type, amount: n });
+          if (n > 0) this.emit({ type: "mana-added", player: recipient, mana: type, amount: n });
         }
       }
       // Tapped for mana: triggered mana abilities (rule 605.1b) add theirs
