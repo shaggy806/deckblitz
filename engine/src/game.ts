@@ -16315,7 +16315,8 @@ export class Game {
         chapter.at.filter((n) => n > before && n <= after && (!exactOnly || n === after)).map((n) => ({ index, n })),
       )
       .sort((a, b) => b.n - a.n);
-    for (const { index } of reached) {
+    const last = Math.max(0, ...chapters.flatMap((chapter) => chapter.at));
+    for (const { index, n } of reached) {
       this.state.pendingTriggers.push({
         sourceObjectId: sagaId,
         cardName: printedCardName(object),
@@ -16326,6 +16327,9 @@ export class Game {
         // one linked to this stint, though the Saga leaves before it resolves.
         lastKnownRefs: { source: object.zoneChangeCount ?? 0 },
       });
+      // It triggered (rule 714.2b): "whenever the final chapter ability of a
+      // Saga you control triggers" (Historian's Boon) waits with it.
+      this.emit({ type: "chapter-triggered", saga: sagaId, final: n === last });
     }
   }
 

@@ -174,6 +174,11 @@ export const TRIGGER_EVENTS = {
   /** "Whenever this Vehicle becomes crewed" (rule 702.122c): as its crew
    * ability resolves. The value is how many creatures crewed it. */
   "becomes-crewed": row({ type: "became-crewed", object: (e) => e.object, amount: (e) => e.crew.length, journaled: "crewed" }),
+  /** "Whenever the final chapter ability of a Saga you control triggers"
+   * (Historian's Boon — rule 714.2e): as it triggers, so both wait for the
+   * same placement (603.3b). The Saga is the subject. Not as it resolves
+   * (`chapter-resolves`' `finalOnly`). */
+  "final-chapter-triggers": row({ type: "chapter-triggered", when: (e) => e.final, object: (e) => e.saga }),
   /** "Whenever a mana ability of this creature resolves" (rule 605.3b —
    * Tyvar the Bellicose's grant): the permanent whose ability it was; the
    * value is how much mana the ability made. */

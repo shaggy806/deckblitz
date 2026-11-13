@@ -2652,6 +2652,10 @@ export function parseTrigger(clause) {
   if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
   // Rule 119.4: any payment of life (Font of Agonies).
   if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
+  // Rule 714.2e, as it triggers (Historian's Boon).
+  if (/^Whenever the final chapter ability of a Saga you control triggers$/.test(c)) {
+    return [{ on: "event", event: "final-chapter-triggers", who: "you-control" }];
+  }
   // Rule 502.3: your untap step untapping it (The Ninth Doctor).
   if (/^Whenever (?:~|this (?:creature|artifact|land|permanent)) becomes untapped during your untap step$/.test(c)) {
     return [{ on: "event", event: "untaps-during-untap-step", who: "self", by: "you" }];

@@ -2452,7 +2452,8 @@
   "trigger:pays-life-trigger",
   "trigger:investigate-trigger",
   "trigger:mana-ability-resolves-amount-produced",
-  "trigger:untap-trigger"
+  "trigger:untap-trigger",
+  "trigger:saga-final-chapter-triggers"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -212,6 +212,44 @@ describe("untaps during your untap step (The Ninth Doctor)", () => {
   });
 });
 
+describe("a Saga's final chapter ability triggers (Historian's Boon)", () => {
+  const lore = (game: ReturnType<typeof table>["game"], saga: string, before: number): void => {
+    const id = spawn(game, saga);
+    game.state.objects[id].counters.lore = before;
+    game.debugApplyEffect(A, { kind: "add-counter", target: "source", counter: "lore", amount: 1 }, [], { source: id });
+    settle(game);
+  };
+
+  it("makes a 4/4 Angel as the final chapter triggers", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Historian's Boon");
+    lore(game, "History of Benalia", 2);
+    expect(tokensNamed(game, "4/4 Vigilant Angel Token", A)).toBe(1);
+  });
+
+  it("not for an earlier chapter, nor an opponent's Saga", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Historian's Boon");
+    lore(game, "History of Benalia", 1);
+    expect(tokensNamed(game, "4/4 Vigilant Angel Token", A)).toBe(0);
+    const theirs = spawn(game, "History of Benalia", B);
+    game.state.objects[theirs].counters.lore = 2;
+    game.debugApplyEffect(B, { kind: "add-counter", target: "source", counter: "lore", amount: 1 }, [], { source: theirs });
+    settle(game);
+    expect(tokensNamed(game, "4/4 Vigilant Angel Token", A)).toBe(0);
+  });
+
+  it("makes a Soldier as it or another nontoken enchantment of yours enters", () => {
+    const { game } = table({ players: 2 });
+    enter(game, "Historian's Boon");
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(1);
+    enter(game, "Phyrexian Arena");
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
+    enter(game, "Phyrexian Arena", B);
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
+  });
+});
+
 describe("pays life (Font of Agonies)", () => {
   it("counts an ability's life cost", () => {
     const { game } = table({ players: 2 });

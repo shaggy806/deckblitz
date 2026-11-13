@@ -167,6 +167,15 @@ export type GameEvent =
       readonly object: ObjectId;
     })
   | (Base & {
+      /** A Saga's chapter ability triggered (rule 714.2b), once per chapter
+       * number reached; `final` when it's the final chapter number (rule
+       * 714.2d-e). "Whenever the final chapter ability of a Saga you control
+       * triggers" (Historian's Boon). */
+      readonly type: "chapter-triggered";
+      readonly saga: ObjectId;
+      readonly final: boolean;
+    })
+  | (Base & {
       /** A Saga's chapter ability resolved (it wasn't removed for illegal
        * targets); `final` when it is the final chapter ability (rule 714.2d
        * — one whose chapter numbers include the Saga's highest). */

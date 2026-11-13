@@ -18925,6 +18925,12 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you pay life")).toEqual([{ on: "event", event: "pays-life", who: "you" }]);
   });
 
+  it("reads a final chapter ability triggering (Historian's Boon)", () => {
+    expect(parseTrigger("Whenever the final chapter ability of a Saga you control triggers")).toEqual([
+      { on: "event", event: "final-chapter-triggers", who: "you-control" },
+    ]);
+  });
+
   it("reads becoming untapped during your untap step (The Ninth Doctor)", () => {
     expect(parseTrigger("Whenever ~ becomes untapped during your untap step")).toEqual([
       { on: "event", event: "untaps-during-untap-step", who: "self", by: "you" },

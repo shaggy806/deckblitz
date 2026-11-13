@@ -79,6 +79,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   // The chapter ability's own resolution — for "whenever the final chapter
   // ability of a Saga you control resolves".
   'chapter-resolved',
+  // The chapter ability's triggering — its own line comes as it resolves.
+  'chapter-triggered',
   'flashback-grant-expired',
   'time-counter-removed',
   // One per targeted object on every targeted spell — bookkeeping for

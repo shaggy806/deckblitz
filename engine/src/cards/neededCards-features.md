@@ -521,6 +521,9 @@ vocabulary, `test/trigger-new-events.test.ts`.
   that player. The Ninth Doctor. Its "additional upkeep step after this step"
   works from an upkeep only (`additional-upkeep-step`), where its trigger
   resolves unless something skips the upkeep.
+- `trigger:saga-final-chapter-triggers` — `chapter-triggered` (`final`),
+  announced by `triggerChapters` as each chapter ability is queued, and the
+  `final-chapter-triggers` row. Historian's Boon.
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 
