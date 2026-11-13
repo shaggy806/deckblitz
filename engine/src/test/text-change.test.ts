@@ -267,8 +267,10 @@ describe("the pool's text holds no colour word the change can't reach", () => {
   // option or value, or a printed characteristic — none of them a word.
   // Mana symbols, not words (rule 612.2): "produces {B}" (Infernal Darkness,
   // Deep Water) included, an attack tax's {W/P} (Norn's Annex's `phyrexian`),
-  // and a mana-spent clause's `type` ({U}{B}, the Mythoi).
-  const NOT_WORDS = new Set(["mana", "oneOf", "thenOneOf", "elseOneOf", "all", "xColor", "chooseOnEnter", "value", "produces", "manaProduction", "payLifeForPips", "phyrexian", "type"]);
+  // and a mana-spent clause's `type` ({U}{B}, the Mythoi). A choice's colours
+  // (`onlyColorItsControllerChose` — Selective Obliteration's options) are
+  // values, as `chooseOnEnter`'s are.
+  const NOT_WORDS = new Set(["mana", "oneOf", "thenOneOf", "elseOneOf", "all", "xColor", "chooseOnEnter", "value", "produces", "manaProduction", "payLifeForPips", "phyrexian", "type", "onlyColorItsControllerChose"]);
 
   it("every field holding a colour is a colour-word field or a known non-word one", () => {
     const unknown = new Map<string, string>();
