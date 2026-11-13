@@ -166,6 +166,7 @@ import {
   hasExileIfLeavesAbility,
   hasLayerFourPart,
   abilitiesLostAt,
+  wardLostAt,
   grantOutlastsLoss,
   modifierGrantApplies,
   KEYWORD_COUNTERS,
@@ -23251,8 +23252,19 @@ export class Game {
     }
     const lostAt = abilitiesLostAt(this.state, this.registry,target);
     const lostKeywords = target.modifiers.length === 0 ? [] : target.modifiers.flatMap((m) => m.loseKeywordAbilities ?? []);
+    // A loss of ward (`loseKeywords: ["ward"]` — Shay Cormac) takes each ward
+    // ability it had before the loss: a printed one (`-Infinity`), one
+    // granted earlier (rule 613.7). Asked only when a ward ability is listed.
+    let wardLoss: number | null | undefined;
+    const wardLost = (ability: TriggeredAbility, grantedAt: number | undefined): boolean => {
+      if (ability.effect?.kind !== "ward") return false;
+      wardLoss ??= wardLostAt(this.state, this.registry, target) ?? -Infinity;
+      return wardLoss > (grantedAt ?? Infinity);
+    };
     const printed: readonly TriggeredEntry[] = printedAbilities.map((ability) =>
-      lostAt === null && (ability.keywordOf === undefined || !lostKeywords.includes(ability.keywordOf))
+      lostAt === null &&
+      (ability.keywordOf === undefined || !lostKeywords.includes(ability.keywordOf)) &&
+      !wardLost(ability, -Infinity)
         ? { ability }
         : { ability, lost: true },
     );
@@ -23263,6 +23275,7 @@ export class Game {
     for (const modifier of target.modifiers) {
       if (!modifierGrantApplies(modifier, lostAt)) continue;
       for (const ability of modifier.grantsTriggered ?? []) {
+        if (wardLost(ability, modifier.timestamp)) continue;
         granted.push({ ability, ref: { kind: "modifier", ability } });
       }
     }
@@ -23294,7 +23307,7 @@ export class Game {
                   granter: source.id,
                   granterStint: source.zoneChangeCount ?? 0,
                 }),
-          })),
+          })).filter((entry) => !wardLost(entry.ability, source.timestamp)),
         });
       }
       grants.sort((a, b) => a.ts - b.ts);
@@ -58310,6 +58323,18 @@ controlledBy,
       return this.state.players[this.activePlayer]?.hasLost === true
         ? []
         : [this.activePlayer];
+    }
+    // "Players being attacked" (Norn's Decree): who the active player
+    // declared attackers at this combat (rule 508.1b), as the declaration
+    // left it — melee's record, so none outside that combat.
+    if (who === "players-being-attacked") {
+      const record = this.state.players[this.activePlayer]?.attackedThisCombat;
+      const turn = this.state.turn;
+      if (record === undefined || PHASE_OF_STEP[turn.step] !== "combat") return [];
+      if (record.combat.turn !== turn.number || record.combat.phase !== (turn.combatPhases ?? 1)) return [];
+      const from = this.state.turnOrder.indexOf(this.activePlayer);
+      const order = [...this.state.turnOrder.slice(from), ...this.state.turnOrder.slice(0, from)];
+      return order.filter((p) => record.players.includes(p) && this.state.players[p]?.hasLost === false);
     }
     const active = this.state.turnOrder.indexOf(this.activePlayer);
     const rotated = [

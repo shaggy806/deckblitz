@@ -2105,6 +2105,16 @@ export type PlayerScope =
   /** "**You and** those players": the effect's controller with them, in turn
    * order from the active player. */
   | "you-and-attacked-players"
+  /** "**Players being attacked**" (Norn's Decree's "if one or more players
+   * being attacked are poisoned"): the players the active player declared
+   * attackers at this combat (rule 508.1b; `PlayerState.attackedThisCombat`,
+   * melee's record), in turn order from the active player — the player, not
+   * one whose planeswalker or battle is attacked, and whatever has become of
+   * the attackers since. Read from the state rather than a trigger's
+   * attackers, so it answers in an intervening `condition` as the ability
+   * triggers as well as when it resolves, where `"attacked-players"` can't.
+   * Nobody outside the combat the attack was declared in. */
+  | "players-being-attacked"
   /** "**Each of that player's opponents**" / "each other player", of the
    * `"trigger-controller"`: the opponents of the player who cast the spell
    * (Standstill, Heartwood Storyteller; every other player is an opponent,

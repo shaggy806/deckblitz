@@ -483,6 +483,18 @@ export type Keyword =
    */
   | "changeling";
 
+/**
+ * What a `loseKeywords` can name: a keyword, or one of the two keyword
+ * abilities that aren't in the {@link Keyword} union because each instance
+ * carries more than its name — **protection** (rule 702.16, gathered as
+ * `Characteristics.protectionFrom`) and **ward** (rule 702.21, a triggered
+ * ability made by the `ward` helper). Losing either takes every instance the
+ * permanent had before the loss, printed or granted earlier, and a later
+ * grant gives one back (rule 613.7) — Shay Cormac's "lose hexproof,
+ * indestructible, protection, shroud, and ward".
+ */
+export type LosableKeyword = Keyword | "protection" | "ward";
+
 /** Which objects a static ability applies its continuous effect to. */
 export type AffectSpec =
   | { readonly scope: "self" }
@@ -2587,8 +2599,10 @@ export interface StaticAbility extends TypePatch, ColorPatch {
   /** Keywords it takes away in layer 6 — "equipped creature … **loses
    * flying**" (Starforged Sword). A loss applies at the static's timestamp
    * (rule 613.7): it removes the keyword from what had it before — printed,
-   * or granted earlier — and a grant after it gives the keyword back. */
-  readonly loseKeywords?: readonly Keyword[];
+   * or granted earlier — and a grant after it gives the keyword back.
+   * `"protection"` and `"ward"` take every instance of those
+   * ({@link LosableKeyword}). */
+  readonly loseKeywords?: readonly LosableKeyword[];
   /**
    * Keywords the affected objects **can't have** — "creatures your opponents
    * control lose flying and can't have or gain flying" (the Archetypes). No

@@ -18588,6 +18588,7 @@ import _poolNorinTheWary from "./pool/norin-the-wary.js";
 import _poolNormanOsborn from "./pool/norman-osborn.js";
 import _poolNornsAnnex from "./pool/norns-annex.js";
 import _poolNornsChoirmaster from "./pool/norns-choirmaster.js";
+import _poolNornsDecree from "./pool/norns-decree.js";
 import _poolNornsInquisitor from "./pool/norns-inquisitor.js";
 import _poolNornsWellspring from "./pool/norns-wellspring.js";
 import _poolNorritt from "./pool/norritt.js";
@@ -24004,6 +24005,7 @@ import _poolShaukuEndbringer from "./pool/shauku-endbringer.js";
 import _poolShaukusMinion from "./pool/shaukus-minion.js";
 import _poolShaunFatherOfSynths from "./pool/shaun-father-of-synths.js";
 import _poolShaunRebeccaAgents from "./pool/shaun-rebecca-agents.js";
+import _poolShayCormac from "./pool/shay-cormac.js";
 import _poolSheHulkAttorneyAtLaw from "./pool/she-hulk-attorney-at-law.js";
 import _poolSheHulkJadeDefender from "./pool/she-hulk-jade-defender.js";
 import _poolSheHulkJenniferWalters from "./pool/she-hulk-jennifer-walters.js";
@@ -51288,6 +51290,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNormanOsborn,
   _poolNornsAnnex,
   _poolNornsChoirmaster,
+  _poolNornsDecree,
   _poolNornsInquisitor,
   _poolNornsWellspring,
   _poolNorritt,
@@ -56704,6 +56707,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShaukusMinion,
   _poolShaunFatherOfSynths,
   _poolShaunRebeccaAgents,
+  _poolShayCormac,
   _poolSheHulkAttorneyAtLaw,
   _poolSheHulkJadeDefender,
   _poolSheHulkJenniferWalters,
@@ -84001,6 +84005,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/norman-osborn": _poolNormanOsborn,
   "pool/norns-annex": _poolNornsAnnex,
   "pool/norns-choirmaster": _poolNornsChoirmaster,
+  "pool/norns-decree": _poolNornsDecree,
   "pool/norns-inquisitor": _poolNornsInquisitor,
   "pool/norns-wellspring": _poolNornsWellspring,
   "pool/norritt": _poolNorritt,
@@ -89417,6 +89422,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shaukus-minion": _poolShaukusMinion,
   "pool/shaun-father-of-synths": _poolShaunFatherOfSynths,
   "pool/shaun-rebecca-agents": _poolShaunRebeccaAgents,
+  "pool/shay-cormac": _poolShayCormac,
   "pool/she-hulk-attorney-at-law": _poolSheHulkAttorneyAtLaw,
   "pool/she-hulk-jade-defender": _poolSheHulkJadeDefender,
   "pool/she-hulk-jennifer-walters": _poolSheHulkJenniferWalters,

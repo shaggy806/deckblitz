@@ -759,6 +759,7 @@ import _poolShamblingGhast from "../pool/shambling-ghast.js";
 import _poolSharedTriumph from "../pool/shared-triumph.js";
 import _poolShatteredCrypt from "../pool/shattered-crypt.js";
 import _poolShatterstorm from "../pool/shatterstorm.js";
+import _poolShayCormac from "../pool/shay-cormac.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
 import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
 import _poolShimatsuTheBloodcloaked from "../pool/shimatsu-the-bloodcloaked.js";
@@ -1792,6 +1793,7 @@ const shard: CardShard = {
     _poolSharedTriumph,
     _poolShatteredCrypt,
     _poolShatterstorm,
+    _poolShayCormac,
     _poolShelteringLandscape,
     _poolShilgengarSireOfFamine,
     _poolShimatsuTheBloodcloaked,

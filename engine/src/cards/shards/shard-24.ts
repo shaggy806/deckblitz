@@ -564,6 +564,7 @@ import _poolNightsoilKami from "../pool/nightsoil-kami.js";
 import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
 import _poolNissasRevelation from "../pool/nissas-revelation.js";
 import _poolNobleElephant from "../pool/noble-elephant.js";
+import _poolNornsDecree from "../pool/norns-decree.js";
 import _poolNovaFlame from "../pool/nova-flame.js";
 import _poolNurturingPresence from "../pool/nurturing-presence.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
@@ -1586,6 +1587,7 @@ const shard: CardShard = {
     _poolNinjaOfTheHand,
     _poolNissasRevelation,
     _poolNobleElephant,
+    _poolNornsDecree,
     _poolNovaFlame,
     _poolNurturingPresence,
     _poolOakhameAdversary,

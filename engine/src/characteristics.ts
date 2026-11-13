@@ -41,6 +41,7 @@ import type {
   StaticPlayerAggregate,
   CountersPutSpec,
   Keyword,
+  LosableKeyword,
   LifeFromStarting,
   StaticAbility,
   StaticCondition,
@@ -3002,8 +3003,33 @@ export function grantOutlastsLoss(lostAt: number | null, timestamp: number | und
 
 /** One keyword taken away in layer 6 ("loses flying"), at its timestamp. */
 interface KeywordLoss {
-  readonly keyword: Keyword;
+  readonly keyword: LosableKeyword;
   readonly timestamp: number;
+}
+
+/**
+ * When `object` last lost ward (`loseKeywords: ["ward"]` — Shay Cormac), or
+ * `null` when nothing took it: a ward ability it had before then, printed or
+ * granted earlier, is gone, and one granted since stays (rule 613.7). Ward
+ * is a triggered ability rather than a keyword in the fold, so
+ * `Game.effectiveTriggeredEntries` asks this for each ward ability it lists.
+ * Cheap where nothing on the board takes ward: the object's modifiers, and
+ * the statics only when one of them names it.
+ */
+export function wardLostAt(state: GameState, registry: CardRegistry, object: GameObject): number | null {
+  let at: number | null = null;
+  for (const modifier of object.modifiers) {
+    if (modifier.loseKeywords?.includes("ward") === true) at = Math.max(at ?? -Infinity, modifier.timestamp ?? Infinity);
+  }
+  if (
+    object.zone === "battlefield" &&
+    contributingStaticSources(state, registry).some(({ ability }) => ability.loseKeywords?.includes("ward") === true)
+  ) {
+    for (const effect of collectStaticEffects(state, registry, object)) {
+      if (effect.loseKeywords.includes("ward")) at = Math.max(at ?? -Infinity, effect.timestamp);
+    }
+  }
+  return at;
 }
 
 /** Every keyword loss reaching `object`: from the statics that reach it
@@ -3048,7 +3074,7 @@ export function grantableKeywords(
 
 /** Whether a keyword given at `timestamp` (printed: `-Infinity`) is taken
  * away by a loss after it (rule 613.7 — timestamp order within layer 6). */
-function lostAfter(losses: readonly KeywordLoss[], keyword: Keyword, timestamp: number | undefined): boolean {
+function lostAfter(losses: readonly KeywordLoss[], keyword: LosableKeyword, timestamp: number | undefined): boolean {
   const at = timestamp ?? Infinity;
   return losses.some((loss) => loss.keyword === keyword && loss.timestamp > at);
 }
@@ -5304,7 +5330,7 @@ interface AppliedEffect {
   readonly toughness: number;
   readonly keywords: readonly Keyword[];
   /** Keywords it takes away (`loseKeywords`). */
-  readonly loseKeywords: readonly Keyword[];
+  readonly loseKeywords: readonly LosableKeyword[];
   /** Keywords it forbids (`cantHaveKeywords`). */
   readonly cantHaveKeywords: readonly Keyword[];
   /** When what it gives was given, against a loss of hexproof (a `hexproofFrom`
@@ -5853,7 +5879,7 @@ function collectStaticEffects(
         const lostAt = target.zone === "battlefield" ? abilitiesLostAt(state, registry, target) : null;
         // The same timestamp order as the main fold's (rule 613.7).
         const losses = keywordLosses(out, target);
-        for (const loss of losses) keywords.delete(loss.keyword);
+        for (const loss of losses) keywords.delete(loss.keyword as Keyword);
         for (const effect of out) {
           if (!grantOutlastsLoss(lostAt, effect.timestamp)) continue;
           for (const k of effect.keywords) if (!lostAfter(losses, k, effect.timestamp)) keywords.add(k);
@@ -6094,7 +6120,9 @@ function computeCharacteristicsUncached(
   // it — printed, or granted earlier — and a later grant gives it back (rule
   // 613.7).
   const losses = keywordLosses(staticEffects, object);
-  for (const loss of losses) keywords.delete(loss.keyword);
+  // (`"protection"` and `"ward"` are never in the set: protection is gated
+  // below, ward in `Game.effectiveTriggeredEntries`.)
+  for (const loss of losses) keywords.delete(loss.keyword as Keyword);
   for (const effect of staticEffects) {
     const granted = grantOutlastsLoss(lostAt, effect.timestamp);
     if (granted) {
@@ -6115,7 +6143,9 @@ function computeCharacteristicsUncached(
     if (effect.assignAsThoughUnblocked) assignAsThoughUnblocked ??= "may";
     if (effect.cantBeSacrificed) cantBeSacrificed = true;
     if (granted && effect.blockAdditional !== 0) addBlocks(effect.blockAdditional);
-    if (effect.protection && granted) {
+    // Protection goes with a later loss of it (rule 613.7 — Shay Cormac), a
+    // permanent's own printed instance with any.
+    if (effect.protection && granted && !lostAfter(losses, "protection", effect.ownAt)) {
       if (effect.protection.sparesAura !== undefined) {
         protSparing.push({ aura: effect.protection.sparesAura, colors: effect.protection.colors ?? [], types: effect.protection.types ?? [] });
       } else {
@@ -6181,7 +6211,7 @@ function computeCharacteristicsUncached(
     if (granted && modifier.cantBeSacrificed === true) cantBeSacrificed = true;
     if (granted && modifier.blockAdditional !== undefined) addBlocks(modifier.blockAdditional);
     // Granted protection (the `grant-protection` effect) is an ability too.
-    if (granted && modifier.protection !== undefined) {
+    if (granted && modifier.protection !== undefined && !lostAfter(losses, "protection", modifier.timestamp)) {
       for (const c of modifier.protection.colors ?? []) {
         protColors.add(c);
         protOtherColors.add(c);

@@ -9,7 +9,7 @@
  */
 
 import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
-import type { CardType, Keyword, StaticAbility, Supertype } from "./cards/define.js";
+import type { CardType, Keyword, LosableKeyword, StaticAbility, Supertype } from "./cards/define.js";
 import type { AffectSpec } from "./cards/define.js";
 import type { Color } from "./mana.js";
 import type { PtModifier } from "./state.js";
@@ -72,8 +72,9 @@ export interface CharacteristicsPatch<Pt> extends TypePatch, ColorPatch {
   /** Keywords it has (layer 6). */
   readonly keywords?: readonly Keyword[];
   /** Keywords it loses (layer 6), at this effect's timestamp: a later grant
-   * gives one back. */
-  readonly loseKeywords?: readonly Keyword[];
+   * gives one back. `"protection"` and `"ward"` take every instance of
+   * those (`LosableKeyword` — Shay Cormac). */
+  readonly loseKeywords?: readonly LosableKeyword[];
   /** Keywords it can't have while this lasts, whatever would give them
    * (Arcane Lighthouse). */
   readonly cantHaveKeywords?: readonly Keyword[];

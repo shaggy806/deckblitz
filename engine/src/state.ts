@@ -15,6 +15,7 @@ import type {
   CombatPermanentTax,
   CombatRule,
   Keyword,
+  LosableKeyword,
   StaticAbility,
   StaticCondition,
   Supertype,
@@ -1755,8 +1756,9 @@ export interface PtModifier {
   keywords: Keyword[];
   /** Keywords it takes away, in layer 6 at its timestamp — "target creature
    * loses flying until end of turn" (rule 613.7): from what had them before,
-   * printed or granted earlier; a later grant gives one back. */
-  loseKeywords?: Keyword[];
+   * printed or granted earlier; a later grant gives one back. `"protection"`
+   * and `"ward"` take every instance of those (`LosableKeyword`). */
+  loseKeywords?: LosableKeyword[];
   /** Keywords it can't have while this lasts — Arcane Lighthouse's "lose
    * hexproof and shroud and can't have hexproof or shroud" — whatever would
    * give them and whatever the timestamps (`StaticAbility.cantHaveKeywords`). */
