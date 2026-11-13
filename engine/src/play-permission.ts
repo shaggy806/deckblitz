@@ -61,6 +61,10 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  * - `tax`: "costs {N} more" for a spell cast this way, an increase (601.2f);
  *   `opponentsOnly`, not for the player whose effect gave it (Soul Partition).
  * - `reduce`: "spells you cast this way cost {N} less" (generic only).
+ * - `affinity`: "if you do, it has affinity for [those]" (Chiss-Goria, Forge
+ *   Tyrant's "for artifacts", `{ type: "artifact" }`): a spell cast under this
+ *   permission on a card costs {1} less for each permanent matching it the
+ *   caster controls (rule 702.41a), beside any affinity it prints (702.41b).
  * - `undaunted`: "that spell has undaunted" (702.125).
  * - `spendAs`: how mana may pay for a spell cast this way, and no other
  *   (118.14, 609.4b).
@@ -130,6 +134,7 @@ export interface PlayTerms {
   readonly costIncreasePerOther?: CardFilter;
   readonly tax?: { readonly generic: number; readonly opponentsOnly?: true };
   readonly reduce?: number;
+  readonly affinity?: CardFilter;
   readonly undaunted?: true;
   readonly spendAs?: SpendAs;
 
@@ -320,6 +325,7 @@ const PLAY_GRANT_KEYS = [
   "costIncreasePerOther",
   "tax",
   "reduce",
+  "affinity",
   "undaunted",
   "spendAs",
   "oncePerTurn",

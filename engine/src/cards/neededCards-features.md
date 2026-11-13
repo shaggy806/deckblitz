@@ -477,6 +477,16 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### A permission that gives the spell affinity — built 2026-11-13
+
+The key `zone:impulse-one-cast-grants-affinity`. `PlayTerms.affinity` (a
+`CardFilter`): a spell cast under a permission on the card costs {1} less for
+each matching permanent its caster controls (rule 702.41a), beside any
+affinity it prints (702.41b). The one-cast limit was already `upTo: 1`; a
+card permission's `spell` filter is now read where the play is offered (it
+wasn't, so a non-artifact among the five was offered). Chiss-Goria, Forge
+Tyrant. `test/impulse-grants-affinity.test.ts`.
+
 ### A pool of exiled cards every player may play from — built 2026-11-13
 
 The key `zone:shared-impulse-pool-each-player`. A static `mayPlay`'s

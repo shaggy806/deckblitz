@@ -16861,6 +16861,13 @@ export class Game {
     if (ownPermission?.terms.undaunted === true) {
       reduction += this.costAmount({ countPlayers: "each-opponent" }, player, cardId);
     }
+    // "If you do, it has affinity for artifacts" (Chiss-Goria, Forge Tyrant —
+    // rule 702.41a): {1} less for each such permanent its caster controls,
+    // beside any affinity printed on it (702.41b).
+    const affinity = ownPermission?.terms.affinity;
+    if (affinity !== undefined) {
+      reduction += this.costAmount({ countOf: { ...affinity, controlledBy: "you" } }, player, cardId);
+    }
     // "Spells you cast this way cost {2} less to cast" (Urianger Augurelt):
     // generic only, its ruling, so an ordinary reduction.
     const linkedGrant = ownPermission === undefined ? exiledOptions.find((o) => o.terms.reduce !== undefined) : undefined;
