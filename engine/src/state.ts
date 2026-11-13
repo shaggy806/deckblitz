@@ -5763,7 +5763,10 @@ export interface GameState {
    * turn (rule 111.7), keyed by its old id: the object is deleted, but an
    * ability on the stack may still read it by last-known information —
    * Clement, the Worrywort's "lesser mana value" after a token copy that
-   * entered was killed in response, a Saproling's dies trigger. Each is
+   * entered was killed in response, a Saproling's dies trigger. A copy of a
+   * spell that left the stack (rule 707.10a) is kept here too, as it was on
+   * the stack, while something names it (`Game.ceaseSpellCopy`): Deekah's
+   * "that spell's mana value" for a copy countered in response. Each is
    * forgotten as the next turn begins unless a delayed ability still names it
    * ("the next end step" may be a later turn's — Esoteric Duplicator); absent
    * when no such token is remembered.

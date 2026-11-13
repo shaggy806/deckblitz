@@ -477,6 +477,18 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### A spell copy read as it last was on the stack — built 2026-11-13
+
+The key `bug:mana-value-of-countered-copy`. A copy of a spell leaving the
+stack ceases to exist (rule 707.10a), and was deleted with nothing kept but on
+the counter path. Every way a copy leaves (countered, exiled, fizzled, put on
+a library, bounced, resolved) now goes through `Game.ceaseSpellCopy`, which
+keeps its last-known information in `GameState.ceasedTokens` while a trigger
+or a stack object still names it, its mana value as it was on the stack ({X}
+included); `lastKnownOfTarget` reads that for any object that has ceased to
+exist (608.2h). Deekah, Fractal Theorist's "that spell's mana value" for a copy
+countered or exiled in response. `test/countered-copy-mana-value.test.ts`.
+
 ### Token copies of a cost's permanents, of graveyard cards, and attached — built 2026-11-13
 
 The keys `effect:token-copy-of-sacrificed`, `effect:token-copy-of-graveyard-cards`

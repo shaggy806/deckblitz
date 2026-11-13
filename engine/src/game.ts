@@ -30020,9 +30020,7 @@ export class Game {
       // A copy that fizzles ceases to exist (707.10a); a real spell goes to the
       // graveyard.
       if (object.isCopy) {
-        const idx = stack.indexOf(id);
-        if (idx >= 0) stack.splice(idx, 1);
-        delete this.state.objects[id];
+        this.ceaseSpellCopy(id);
       } else {
         this.moveObject(id, "graveyard");
       }
@@ -30260,10 +30258,7 @@ export class Game {
     // owner still shuffles their library (the ruling).
     if (object.isCopy) {
       if (omen) this.shuffleLibraryOf(object.owner);
-      const stack = this.state.zones.shared.stack;
-      const stackIndex = stack.indexOf(id);
-      if (stackIndex >= 0) stack.splice(stackIndex, 1);
-      delete this.state.objects[id];
+      this.ceaseSpellCopy(id);
       return;
     }
     const def = this.registry.get(printedCardName(object));
@@ -31319,6 +31314,34 @@ export class Game {
       return;
     }
     this.removeAbilityFromStack(id);
+  }
+
+  /**
+   * A copy of a spell leaving the stack ceases to exist (rule 707.10a): off
+   * the stack and out of the game. Whatever still names it reads its
+   * last-known information (608.2h), kept in `GameState.ceasedTokens` — a
+   * cast trigger's "that spell's mana value" for a copy countered, exiled or
+   * fizzled in response (Deekah, Fractal Theorist), the rest of a
+   * counterspell's "its controller" (Quash's ruling). `always` keeps it
+   * whatever waits on it; otherwise only a trigger or a stack object naming
+   * it does (storm copies resolving one after another keep nothing).
+   */
+  private ceaseSpellCopy(id: ObjectId, always = false): void {
+    const object = this.state.objects[id];
+    if (object === undefined) return;
+    const stack = this.state.zones.shared.stack;
+    const named =
+      always ||
+      this.state.pendingTriggers.some((t) => t.triggerObject === id) ||
+      stack.some((other) => {
+        if (other === id) return false;
+        const o = this.state.objects[other];
+        return o !== undefined && (o.triggerObject === id || (o.targets ?? []).some((t) => t?.kind === "object" && t.object === id));
+      });
+    if (named) (this.state.ceasedTokens ??= {})[id] = this.takeLastKnown(id);
+    const index = stack.indexOf(id);
+    if (index >= 0) stack.splice(index, 1);
+    delete this.state.objects[id];
   }
 
   private removeAbilityFromStack(id: ObjectId): void {
@@ -32967,9 +32990,13 @@ export class Game {
     id: ObjectId,
     expectedZone: ZoneType | null,
   ): LastKnownInfo | undefined {
-    if (expectedZone !== "battlefield") return undefined;
     const object = this.state.objects[id];
+    // Ceased to exist, wherever it was: a token, or a copy of a spell that
+    // left the stack (rule 707.10a) — Deekah's "that spell's mana value" for
+    // a copy countered in response — has nothing left but its last-known
+    // information (608.2h).
     if (object === undefined) return this.state.ceasedTokens?.[id];
+    if (expectedZone !== "battlefield") return undefined;
     return object.zone === "battlefield" ? undefined : object.lastKnown;
   }
 
@@ -52257,9 +52284,7 @@ controlledBy,
         return;
       }
       if (object.isCopy) {
-        const index = stack.indexOf(id);
-        if (index >= 0) stack.splice(index, 1);
-        delete this.state.objects[id];
+        this.ceaseSpellCopy(id);
         return;
       }
       // It will never resolve now, so it has nothing left to aim at — the
@@ -53045,10 +53070,7 @@ controlledBy,
     if (object === undefined || object.zone !== "stack" || object.kind !== "card") return;
     this.emit({ type: "spell-exiled", object: id });
     if (object.isCopy) {
-      const stack = this.state.zones.shared.stack;
-      const index = stack.indexOf(id);
-      if (index >= 0) stack.splice(index, 1);
-      delete this.state.objects[id];
+      this.ceaseSpellCopy(id);
       return;
     }
     // It will never resolve now, so it has nothing left to aim at.
@@ -54331,9 +54353,7 @@ controlledBy,
     if (object.isCopy === true && object.zone === "stack") {
       const stack = this.state.zones.shared.stack;
       if (stack[stack.length - 1] === id) return;
-      const index = stack.indexOf(id);
-      if (index >= 0) stack.splice(index, 1);
-      delete this.state.objects[id];
+      this.ceaseSpellCopy(id);
       return;
     }
     // A commander's owner may put it into the command zone instead (rule
@@ -55658,12 +55678,8 @@ controlledBy,
       // It ceases to exist (rules 707.10a, 704.5e), but the rest of the counterspell may
       // read it as it last existed (608.2h) — Quash's ruling: "its controller's
       // graveyard, hand, and library" for "the same name as that spell".
-      (this.state.ceasedTokens ??= {})[id] = this.takeLastKnown(id);
-      const stack = this.state.zones.shared.stack;
-      const index = stack.indexOf(id);
-      if (index >= 0) stack.splice(index, 1);
       const controller = object.controller;
-      delete this.state.objects[id];
+      this.ceaseSpellCopy(id, true);
       this.emit({ type: "spell-countered", object: id, controller, by });
       return true;
     }
@@ -62191,8 +62207,13 @@ controlledBy,
       hasAbilities: hasAnyAbility(this.state, this.registry, object),
       counters: { ...object.counters },
       // Read before the move ends a copy effect (rule 707.2): a Clone that
-      // entered as a Craw Wurm and died was a mana value 6 creature.
-      manaValue: manaValue(parseManaCost(printedManaCost(this.registry, object))),
+      // entered as a Craw Wurm and died was a mana value 6 creature. A spell
+      // copy ceasing to exist is read as it was on the stack, its {X}
+      // included (rule 202.3e).
+      manaValue:
+        object.zone === "stack"
+          ? this.manaValueOnStack(object)
+          : manaValue(parseManaCost(printedManaCost(this.registry, object))),
       manaCost: printedManaCost(this.registry, object),
       ...(object.manaSpent !== undefined ? { manaSpent: object.manaSpent } : {}),
       isToken: isTokenNow(object),
