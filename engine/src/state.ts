@@ -863,6 +863,12 @@ export interface GameObject {
      * which the copy takes too (rule 707.9b), then this copy effect's own
      * (`CopyOnEnter.except`). */
     readonly copyModifiers?: readonly PtModifier[];
+    /** It's a copy by another permanent's or a resolved effect's "enter as
+     * a copy of" (`OthersEnterReplacement.asCopyOf` — `Game.enterAsCopyAsked`),
+     * not its own: checked once (`false` when none applied). `shields` are
+     * the "next time" ones that applied (their `source` and `madeIn`),
+     * spent by the event it enters in. */
+    readonly copyBy?: false | { readonly shields: readonly { readonly source: ObjectId; readonly madeIn?: number }[] };
     /** What copying adds to how it enters, beyond what it copies (rule
      * 707.9e — `CopyOnEnter.tapped` / `counters`): tapped, and counters,
      * each `ifType` judged once it's the copy. */

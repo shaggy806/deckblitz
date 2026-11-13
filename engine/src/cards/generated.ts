@@ -8537,6 +8537,7 @@ import _poolEssenceHarvest from "./pool/essence-harvest.js";
 import _poolEssenceInfusion from "./pool/essence-infusion.js";
 import _poolEssenceOfAntiquity from "./pool/essence-of-antiquity.js";
 import _poolEssenceOfOrthodoxy from "./pool/essence-of-orthodoxy.js";
+import _poolEssenceOfTheWild from "./pool/essence-of-the-wild.js";
 import _poolEssencePulse from "./pool/essence-pulse.js";
 import _poolEssenceReliquary from "./pool/essence-reliquary.js";
 import _poolEssenceScatter from "./pool/essence-scatter.js";
@@ -17984,6 +17985,7 @@ import _poolMysticOfTheHiddenWay from "./pool/mystic-of-the-hidden-way.js";
 import _poolMysticPeak from "./pool/mystic-peak.js";
 import _poolMysticPenitent from "./pool/mystic-penitent.js";
 import _poolMysticRedaction from "./pool/mystic-redaction.js";
+import _poolMysticReflection from "./pool/mystic-reflection.js";
 import _poolMysticRemora from "./pool/mystic-remora.js";
 import _poolMysticRepeal from "./pool/mystic-repeal.js";
 import _poolMysticRestraints from "./pool/mystic-restraints.js";
@@ -41222,6 +41224,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEssenceInfusion,
   _poolEssenceOfAntiquity,
   _poolEssenceOfOrthodoxy,
+  _poolEssenceOfTheWild,
   _poolEssencePulse,
   _poolEssenceReliquary,
   _poolEssenceScatter,
@@ -50669,6 +50672,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMysticPeak,
   _poolMysticPenitent,
   _poolMysticRedaction,
+  _poolMysticReflection,
   _poolMysticRemora,
   _poolMysticRepeal,
   _poolMysticRestraints,
@@ -73920,6 +73924,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/essence-infusion": _poolEssenceInfusion,
   "pool/essence-of-antiquity": _poolEssenceOfAntiquity,
   "pool/essence-of-orthodoxy": _poolEssenceOfOrthodoxy,
+  "pool/essence-of-the-wild": _poolEssenceOfTheWild,
   "pool/essence-pulse": _poolEssencePulse,
   "pool/essence-reliquary": _poolEssenceReliquary,
   "pool/essence-scatter": _poolEssenceScatter,
@@ -83367,6 +83372,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mystic-peak": _poolMysticPeak,
   "pool/mystic-penitent": _poolMysticPenitent,
   "pool/mystic-redaction": _poolMysticRedaction,
+  "pool/mystic-reflection": _poolMysticReflection,
   "pool/mystic-remora": _poolMysticRemora,
   "pool/mystic-repeal": _poolMysticRepeal,
   "pool/mystic-restraints": _poolMysticRestraints,

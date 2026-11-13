@@ -278,6 +278,7 @@ import _poolEowynFearlessKnight from "../pool/eowyn-fearless-knight.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
 import _poolEssenceBottle from "../pool/essence-bottle.js";
+import _poolEssenceOfTheWild from "../pool/essence-of-the-wild.js";
 import _poolEther from "../pool/ether.js";
 import _poolEunuchsIntrigues from "../pool/eunuchs-intrigues.js";
 import _poolEverglades from "../pool/everglades.js";
@@ -1308,6 +1309,7 @@ const shard: CardShard = {
     _poolEpicureOfBlood,
     _poolEpistolaryLibrarian,
     _poolEssenceBottle,
+    _poolEssenceOfTheWild,
     _poolEther,
     _poolEunuchsIntrigues,
     _poolEverglades,

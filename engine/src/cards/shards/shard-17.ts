@@ -565,6 +565,7 @@ import _poolMossbridgeTroll from "../pool/mossbridge-troll.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolMressCrewCoordinator from "../pool/mress-crew-coordinator.js";
 import _poolMysterioMasterOfIllusion from "../pool/mysterio-master-of-illusion.js";
+import _poolMysticReflection from "../pool/mystic-reflection.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
 import _poolNathOfTheGiltLeaf from "../pool/nath-of-the-gilt-leaf.js";
 import _poolNayaPanorama from "../pool/naya-panorama.js";
@@ -1573,6 +1574,7 @@ const shard: CardShard = {
     _poolMountainValley,
     _poolMressCrewCoordinator,
     _poolMysterioMasterOfIllusion,
+    _poolMysticReflection,
     _poolNardoleResourcefulCyborg,
     _poolNathOfTheGiltLeaf,
     _poolNayaPanorama,

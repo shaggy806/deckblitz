@@ -1462,6 +1462,17 @@ function cipherTrigger(card: ObjectId, zoneChangeCount: number, name: string): T
  * rather than applied after the move, so a replacement can still override
  * it (The Wandering Minstrel's "lands you control enter untapped" beats a
  * "put it onto the battlefield tapped"). */
+/** An "enter as a copy of" effect reaching an entering permanent
+ * (`Game.enterCopiersFor`): what it'd make it a copy of, and the "next time"
+ * shield it spends. */
+interface EnterCopier {
+  readonly key: string;
+  readonly name: string;
+  readonly object?: ObjectId;
+  readonly values: CopyValues & { readonly copyOf: string };
+  readonly shield?: { readonly source: ObjectId; readonly madeIn?: number };
+}
+
 /**
  * Token copies an effect is about to create, the would-create-token
  * replacements already applied (`Game.createTokenCopy`): how many of the copy
@@ -15200,6 +15211,8 @@ export class Game {
     if (transformed && object.enterChoice?.transformed !== true) {
       object.enterChoice = { ...object.enterChoice, transformed: true };
     }
+    // Control, then copy, then the rest (the Mystic Reflection ruling).
+    if (this.enterAsCopyAsked(id, chooser)) return true;
     for (let next = this.nextEnterChoice(id, chooser); next !== null; next = this.nextEnterChoice(id, chooser)) {
       if (next.kind === "choose") {
         const looked = next.look === true ? this.lookAtOpponentHandOnEnter(id, chooser) : undefined;
@@ -32558,6 +32571,8 @@ export class Game {
       this.enterBatch = null;
       this.enterAnnouncements = null;
     }
+    // "The next time one or more … enter": that event is over.
+    this.spendEnterShields();
     // Announced once every one of them is on the battlefield, so each sees
     // the others enter (rule 603.6a): "whenever another creature enters"
     // among them triggers for all the rest, whichever the engine moved
@@ -45534,6 +45549,13 @@ controlledBy,
     withCounters?: { readonly kind: string; readonly amount: number },
   ): readonly ObjectId[] {
     if (total <= 0) return [];
+    // "The next time one or more creatures enter" (Mystic Reflection) is
+    // spent by the whole event: all of this, the representative token too.
+    if (this.enterBatch === null && this.enterAsCopyAround()) {
+      return this.withEnterBatch(() =>
+        this.mintTokenBatch(controller, cardName, copyOf, total, modifiers, exileAtEndStep, copied, tapped, sacrificeAtEndStep, goadedForGameBy, separate, attachTo, withCounters),
+      );
+    }
     this.noteTokensCreated(controller);
     const printedName = copyOf ?? cardName;
     const made: ObjectId[] = [];
@@ -45700,6 +45722,30 @@ controlledBy,
         ? { faces: tokenFaces(this.registry, cardName) as readonly string[], face: 0 }
         : {}),
     };
+    // "Enter as a copy of …" (Mystic Reflection, Essence of the Wild — rule
+    // 707.9): a token minted straight onto the battlefield is the copy before
+    // its other replacements look at it, in place of what it was made as
+    // (707.3) — what the effect did to it beside (haste, "attacks this
+    // combat") stays. Several such effects take their unasked order here
+    // (`enterCopiersFor`). One that waits to enter is asked instead
+    // (`askEnterChoice`).
+    let becameCopyOf: string | undefined;
+    if (!this.mintingToEnter && this.enterAsCopyAround()) {
+      const copiers = this.enterCopiersFor(id, controller);
+      const last = copiers.at(-1);
+      if (last !== undefined) {
+        const token = this.state.objects[id];
+        token.copyOf = last.values.copyOf;
+        token.modifiers = [
+          ...token.modifiers.filter((m) => m.copiable !== true),
+          ...last.values.modifiers.map((m) => ({ ...m, timestamp: -2, untilEndOfTurn: false })),
+        ];
+        delete token.faces;
+        delete token.face;
+        becameCopyOf = last.values.copyOf;
+        this.noteEnterShieldsSpent(copiers.flatMap((c) => (c.shield !== undefined ? [c.shield] : [])));
+      }
+    }
     // Either source of "enters tapped" is enough — the token's own replacement
     // (a Treasure-like) or the effect that created it ("create thirteen
     // **tapped** Zombie tokens") — short of a replacement that has it enter
@@ -45724,6 +45770,7 @@ controlledBy,
       this.state.objects[id].timestamp = this.state.timestampSeq;
       this.state.objects[id].controlSinceSeq = this.state.timestampSeq;
       this.state.zones.shared.battlefield.push(id);
+      if (becameCopyOf !== undefined) this.emit({ type: "permanent-copied", object: id, copyOf: becameCopyOf });
       // Entering with counters is putting them on it (rule 122.6).
       for (const c of entering.counters) {
         this.emit({
@@ -60203,6 +60250,159 @@ controlledBy,
    * without entering it. */
   private probingEnter = false;
 
+  /**
+   * "Enter as a copy of …" from outside the entering permanent
+   * (`OthersEnterReplacement.asCopyOf` — Mystic Reflection, Essence of the
+   * Wild, Infinite Reflection): a copy effect applied as it enters (rules
+   * 614.1c, 707.9), before its own replacements and "as this enters"
+   * choices, which are then the copied card's — so a Clone entering this way
+   * asks nothing (the Mystic Reflection rulings). Judged as it would exist on
+   * the battlefield, under `chooser` (614.12). Where several would make it
+   * copies of different things, `chooser` orders them (616.1), one question
+   * at a time, and the last applied is what it is. Records the copy on its
+   * `enterChoice`, once; says whether it asked.
+   */
+  private enterAsCopyAsked(id: ObjectId, chooser: PlayerId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.enterChoice?.copyBy !== undefined || object.enterChoice?.copyOf !== undefined) return false;
+    const copiers = this.enterCopiersFor(id, chooser);
+    if (copiers.length === 0) {
+      object.enterChoice = { ...object.enterChoice, copyBy: false };
+      return false;
+    }
+    const sameCopy = (a: EnterCopier, b: EnterCopier): boolean =>
+      a.values.copyOf === b.values.copyOf && JSON.stringify(a.values.modifiers) === JSON.stringify(b.values.modifiers);
+    // Applied first, one at a time (rule 616.1f): what's left last wins.
+    const answers = `enter-copy:${id}`;
+    const firsts = this.state.replacementAnswers?.[answers] ?? [];
+    const left = copiers.filter((c) => !firsts.includes(c.key));
+    const last = left.at(-1) ?? copiers[copiers.length - 1];
+    if (left.length > 1 && left.some((c) => !sameCopy(c, last))) {
+      if (this.state.awaiting !== null) return false;
+      this.state.awaiting = {
+        kind: "replacement-order",
+        player: chooser,
+        event: `${object.cardName} would enter the battlefield`,
+        options: left.map((c) => ({
+          key: c.key,
+          name: c.name,
+          text: `enters as a copy of ${c.values.copyOf}`,
+          ...(c.object !== undefined ? { object: c.object } : {}),
+        })),
+        best: 0,
+        answers,
+        resume: { site: "effect" },
+      };
+      return true;
+    }
+    object.enterChoice = {
+      ...object.enterChoice,
+      copyOf: last.values.copyOf,
+      copyModifiers: last.values.modifiers,
+      // Every "next time" shield that applied is spent by it, whichever
+      // copy it ends up (`noteEnterShieldsSpent`).
+      copyBy: { shields: copiers.flatMap((c) => (c.shield !== undefined ? [c.shield] : [])) },
+    };
+    return false;
+  }
+
+  /** Whether anything at all has permanents "enter as a copy of" something
+   * (`OthersEnterReplacement.asCopyOf`): the quick check before a token is
+   * minted. */
+  private enterAsCopyAround(): boolean {
+    if (this.state.activeReplacements.some((s) => s.replacement.event === "others-enter-battlefield" && s.replacement.asCopyOf !== undefined)) {
+      return true;
+    }
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.replacement?.event === "others-enter-battlefield" && ability.replacement.asCopyOf !== undefined) return true;
+      }
+    }
+    return false;
+  }
+
+  /** The "enter as a copy of" effects that reach `id` entering under
+   * `chooser`, in the order they'd apply unasked: statics, then resolved
+   * ones, oldest first — the last is what it is. */
+  private enterCopiersFor(id: ObjectId, chooser: PlayerId): EnterCopier[] {
+    const copiers: EnterCopier[] = [];
+    // "Creatures you control" from the side of whoever makes the effect: the
+    // player it enters under, before it's anyone's.
+    const reaches = (filter: CardFilter, you: PlayerId, source: ObjectId): boolean => {
+      const { controlledBy, ...rest } = filter;
+      if (controlledBy === "you" && chooser !== you) return false;
+      if (controlledBy === "opponent" && chooser === you) return false;
+      const unread = controlledBy !== undefined && controlledBy !== "you" && controlledBy !== "opponent";
+      return matchesFilter(this.state, this.registry, id, unread ? filter : rest, { you, source });
+    };
+    for (const sourceId of this.state.zones.shared.battlefield) {
+      if (sourceId === id || this.enterBatch?.has(sourceId) === true) continue;
+      const source = this.state.objects[sourceId];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      if (this.state.players[source.controller]?.hasLost === true) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const r = ability.replacement;
+        if (r?.event !== "others-enter-battlefield" || r.asCopyOf === undefined || typeof r.asCopyOf === "object") continue;
+        if (!this.staticActive(source, ability) || !reaches(r.filter, source.controller, sourceId)) continue;
+        const of = r.asCopyOf === "source" ? sourceId : source.attachedTo;
+        if (of === undefined || of === null || this.state.objects[of]?.zone !== "battlefield") continue;
+        const values = this.copiableValuesOf(of, false, undefined);
+        if (values === undefined) continue;
+        copiers.push({ key: `static:${sourceId}`, name: nameOf(source), object: sourceId, values });
+      }
+    }
+    for (const shield of this.state.activeReplacements) {
+      const r = shield.replacement;
+      if (r.event !== "others-enter-battlefield" || typeof r.asCopyOf !== "object") continue;
+      if (this.state.players[shield.owner]?.hasLost === true || !this.activeReplacementStands(shield)) continue;
+      if (!reaches(r.filter, shield.owner, shield.source)) continue;
+      const target = shield.targets?.[r.asCopyOf.target];
+      if (target?.kind !== "object") continue;
+      const stint = shield.targetStints?.[r.asCopyOf.target];
+      // As it is, or as it last existed on the battlefield (the ruling).
+      const departed = stint === null || stint === undefined ? undefined : this.lastKnownOfStint(target.object, stint);
+      if (departed === undefined && this.state.objects[target.object]?.zone !== "battlefield") continue;
+      const values = this.copiableValuesOf(target.object, false, departed);
+      if (values === undefined) continue;
+      copiers.push({
+        key: `shield:${copiers.length}`,
+        name: this.state.objects[shield.source]?.cardName ?? "An effect",
+        values,
+        ...(shield.next === true ? { shield: { source: shield.source, ...(shield.madeIn !== undefined ? { madeIn: shield.madeIn } : {}) } } : {}),
+      });
+    }
+    return copiers;
+  }
+
+  /** The "next time … enter" shields an entering permanent used
+   * (`enterAsCopyAsked`), spent once the whole event is over: everything
+   * entering at the same time is a copy too (`withEnterBatch`). */
+  private enterShieldsSpent: ActiveReplacement[] = [];
+
+  private noteEnterShieldsSpent(shields: readonly { readonly source: ObjectId; readonly madeIn?: number }[]): void {
+    for (const ref of shields) {
+      const shield = this.state.activeReplacements.find(
+        (s) =>
+          s.next === true &&
+          s.source === ref.source &&
+          s.madeIn === ref.madeIn &&
+          s.replacement.event === "others-enter-battlefield" &&
+          s.replacement.asCopyOf !== undefined,
+      );
+      if (shield !== undefined && !this.enterShieldsSpent.includes(shield)) this.enterShieldsSpent.push(shield);
+    }
+    if (this.enterBatch === null) this.spendEnterShields();
+  }
+
+  private spendEnterShields(): void {
+    if (this.enterShieldsSpent.length === 0) return;
+    const spent = this.enterShieldsSpent;
+    this.enterShieldsSpent = [];
+    this.state.activeReplacements = this.state.activeReplacements.filter((s) => !spent.includes(s));
+  }
+
   private enterTapOrderAsked(id: ObjectId, chooser: PlayerId): boolean {
     const answers = `enter:${id}`;
     if (this.state.awaiting !== null || this.state.replacementAnswers?.[answers] !== undefined) return false;
@@ -62155,6 +62355,7 @@ controlledBy,
     const enterChoice = object.enterChoice;
     object.enterChoice = undefined;
     if (to === "battlefield" && enterChoice !== undefined) {
+      if (typeof enterChoice.copyBy === "object") this.noteEnterShieldsSpent(enterChoice.copyBy.shields);
       if (enterChoice.copyOf !== undefined && enterChoice.copyOf !== null) {
         // A copy "until end of turn" (Cursed Mirror): it and its exceptions
         // end in the cleanup step (rule 514.2), and it's itself again.

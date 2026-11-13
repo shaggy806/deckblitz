@@ -6704,6 +6704,21 @@ clause (section 9):
   controlledBy: "you" } }`; a fixed "an additional +1/+1 counter" is `1`.
   `enterAs` is a types patch it enters with, lasting: Master Biomancer's "and as a
   Mutant in addition to its other types" is `{ addSubtypes: ["Mutant"] }`.
+  `asCopyOf` is "enter **as a copy** of" (rule 707.9): `"source"` this
+  permanent (Essence of the Wild's "Creatures you control enter as a copy of
+  this creature"), `"enchanted"` what this Aura is on, and `{ target: n }` a
+  resolved one's target — Mystic Reflection's "the next time one or more
+  creatures or planeswalkers enter this turn, they enter as copies of the
+  chosen creature" is a `replacement-effect` with `next: true` (spent by the
+  one event, on everything entering in it), `duration: "end-of-turn"` and
+  `{ event: "others-enter-battlefield", filter: { typesAnyOf: ["creature",
+  "planeswalker"] }, asCopyOf: { target: 0 } }`. Applied before the entering
+  permanent's own replacements and choices (control, then copy, then the
+  rest), so those are the copied card's and a Clone asks nothing; the target
+  is read as it is then, or as it last existed. Tokens too. Several that
+  differ are ordered by the player it enters under (a `replacement-order`),
+  except for a token minted straight onto the battlefield, which takes them
+  unasked (§15, "Replacement ordering").
   Leave "other" out of the filter: rule 614.12 already keeps a permanent's
   replacement off itself, and off anything entering at the same time as it
   (a token batch, a mass reanimation, a flicker's return, a tutor's finds are
@@ -7520,7 +7535,11 @@ Delete an entry in the same commit as the feature that retires it.
   opponent ends up drawing; the engine takes the one first in turn order
   after them. (Against one opponent, however many Thieves they have, there's
   nothing to choose.) The same for Crafty Cutpurse effects of two different
-  opponents on one token (`Game.tokenCreatorAfterRedirects`).
+  opponents on one token (`Game.tokenCreatorAfterRedirects`). And for a
+  token minted straight onto the battlefield under two "enter as a copy of"
+  effects that differ (Essence of the Wild beside a Mystic Reflection): the
+  resolved one is applied last, unasked — a card, or a token copy that has
+  something to settle as it enters, is asked (`Game.enterAsCopyAsked`).
 - **Snow mana of a spell's colours** — Boreal Outrider's "if {S} of any of
   that spell's colors was spent": a clause can't yet read the spell's colours
   for its `type`. Snow mana itself

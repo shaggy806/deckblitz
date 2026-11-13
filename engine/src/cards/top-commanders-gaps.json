@@ -2392,7 +2392,9 @@
   "trigger:trigger-entering-creature-ability-triggers",
   "effect:put-commanders-onto-battlefield",
   "effect:add-mana-combination-of-card-colors",
-  "effect:reveal-from-hand-in-mana-ability"
+  "effect:reveal-from-hand-in-mana-ability",
+  "replacement:next-enter-as-copy",
+  "replacement:others-enter-as-copy"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

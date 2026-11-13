@@ -506,6 +506,26 @@ export interface OthersEnterReplacement {
    * as it enters (614.12), so a trigger that sees it arrive sees a Mutant. It
    * doesn't end when this permanent leaves. */
   readonly enterAs?: ResolvedPatch;
+  /**
+   * It enters **as a copy** of this (rule 707.9 — a copy effect applied as it
+   * enters, 614.1c): `"source"` is this permanent (Essence of the Wild's
+   * "Creatures you control enter as a copy of Essence of the Wild"),
+   * `"enchanted"` what this Aura enchants (Infinite Reflection), and
+   * `{ target: n }` a resolved replacement's target slot `n` (Mystic
+   * Reflection's "the next time one or more creatures or planeswalkers enter
+   * this turn, they enter as copies of the chosen creature" — a
+   * `replacement-effect` with `next: true`, spent on everything entering in
+   * that one event). It copies the copiable values as they are as it
+   * enters, or as the copied permanent last existed on the battlefield if
+   * it has left (the Mystic Reflection rulings). Applied before the entering
+   * permanent's own replacements and "as this enters" choices, which are
+   * then the copied card's (control, then copy, then the rest — its
+   * ruling): a Clone entering this way asks nothing. Where several would
+   * make it a copy of different things, the player it enters under orders
+   * them (rule 616.1, a `replacement-order`) and the last applied wins.
+   * Read by `Game.enterAsCopyAsked`.
+   */
+  readonly asCopyOf?: "source" | "enchanted" | { readonly target: number };
 }
 
 /** "If one or more tokens would be created under your control, twice that many
