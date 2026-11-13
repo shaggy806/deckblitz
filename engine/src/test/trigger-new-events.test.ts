@@ -133,6 +133,15 @@ describe("investigates (Erdwal Illuminator)", () => {
     settle(game);
     expect(clues(game)).toBe(2);
   });
+
+  it("sees Lonis, Cryptozoologist's investigation", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Erdwal Illuminator");
+    spawn(game, "Lonis, Cryptozoologist");
+    enter(game, "Grizzly Bears");
+    settle(game);
+    expect(clues(game)).toBe(2);
+  });
 });
 
 describe("a mana ability resolves (Tyvar the Bellicose)", () => {
