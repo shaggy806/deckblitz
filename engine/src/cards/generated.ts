@@ -10133,6 +10133,7 @@ import _poolFrontierGuide from "./pool/frontier-guide.js";
 import _poolFrontierMastodon from "./pool/frontier-mastodon.js";
 import _poolFrontierSeeker from "./pool/frontier-seeker.js";
 import _poolFrontierSiege from "./pool/frontier-siege.js";
+import _poolFrontierWarmonger from "./pool/frontier-warmonger.js";
 import _poolFrontlineDevastator from "./pool/frontline-devastator.js";
 import _poolFrontlineMedic from "./pool/frontline-medic.js";
 import _poolFrontlineRebel from "./pool/frontline-rebel.js";
@@ -42779,6 +42780,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFrontierMastodon,
   _poolFrontierSeeker,
   _poolFrontierSiege,
+  _poolFrontierWarmonger,
   _poolFrontlineDevastator,
   _poolFrontlineMedic,
   _poolFrontlineRebel,
@@ -75438,6 +75440,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/frontier-mastodon": _poolFrontierMastodon,
   "pool/frontier-seeker": _poolFrontierSeeker,
   "pool/frontier-siege": _poolFrontierSiege,
+  "pool/frontier-warmonger": _poolFrontierWarmonger,
   "pool/frontline-devastator": _poolFrontlineDevastator,
   "pool/frontline-medic": _poolFrontlineMedic,
   "pool/frontline-rebel": _poolFrontlineRebel,

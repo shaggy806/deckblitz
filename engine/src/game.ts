@@ -13220,11 +13220,28 @@ export class Game {
       });
       // Each player attacked (rule 508.3d), in turn order — "whenever a
       // player attacks one of your opponents". Creatures attacking a
-      // planeswalker attack it, not its controller.
+      // planeswalker attack it, not its controller: they're that
+      // controller's `planeswalkerAttackers` (rule 506.2).
       for (const defender of this.state.turnOrder) {
         const attackers = declaredNow.filter((d) => d.defender === defender).map((d) => d.id);
-        if (attackers.length > 0) {
-          this.emit({ type: "player-attacked", player: this.activePlayer, defender, attackers });
+        const planeswalkerAttackers = declaredNow
+          .filter((d) => {
+            const walker = this.state.objects[d.defender as ObjectId];
+            return (
+              walker?.zone === "battlefield" &&
+              walker.controller === defender &&
+              effectiveTypes(this.state, this.registry, walker).includes("planeswalker")
+            );
+          })
+          .map((d) => d.id);
+        if (attackers.length > 0 || planeswalkerAttackers.length > 0) {
+          this.emit({
+            type: "player-attacked",
+            player: this.activePlayer,
+            defender,
+            attackers,
+            ...(planeswalkerAttackers.length > 0 ? { planeswalkerAttackers } : {}),
+          });
         }
       }
     }
@@ -17458,7 +17475,8 @@ export class Game {
    * attacking (the events `doubleTriggers`' `"attacks"` cause reads). */
   private attackNamed(event: GameEvent, id: ObjectId): boolean {
     if (event.type === "attacker-declared" || event.type === "attacked-alone") return event.attacker === id;
-    if (event.type === "attackers-declared" || event.type === "player-attacked") return event.attackers.includes(id);
+    if (event.type === "attackers-declared") return event.attackers.includes(id);
+    if (event.type === "player-attacked") return event.attackers.includes(id) || event.planeswalkerAttackers?.includes(id) === true;
     return false;
   }
 
@@ -17481,7 +17499,8 @@ export class Game {
         case "attacks":
           if (event.type === "attacker-declared" || event.type === "attacked-alone") return [event.attacker];
           // A whole declaration: any attacker of the filter's kind caused it.
-          return event.type === "attackers-declared" || event.type === "player-attacked" ? event.attackers : undefined;
+          if (event.type === "player-attacked") return [...event.attackers, ...(event.planeswalkerAttackers ?? [])];
+          return event.type === "attackers-declared" ? event.attackers : undefined;
         case "combat-damage-to-player":
           return event.type === "damage-dealt" && event.combat && event.target.kind === "player"
             ? [event.source]
@@ -30678,7 +30697,7 @@ export class Game {
             : // How many creatures attack that player.
               trigger.on === "attacks-player" &&
                 (event.type === "player-attacked" || event.type === "player-attacked-unblocked")
-            ? this.creatureCount(this.batchedAttackers(trigger, event.attackers, object))
+            ? this.creatureCount(this.batchedAttackers(trigger, this.playerAttackers(trigger, event), object))
             : // How many cards left the graveyard, for "that many".
               trigger.on === "leaves-graveyard" && event.type === "cards-left-graveyard"
               ? this.graveyardLeavers(trigger, event.objects, object).length
@@ -32394,7 +32413,7 @@ export class Game {
           ? this.attackWithCounted(spec, event.attackers, self)
           : spec.on === "attacks-player" &&
               (event.type === "player-attacked" || event.type === "player-attacked-unblocked")
-            ? this.batchedAttackers(spec, event.attackers, self)
+            ? this.batchedAttackers(spec, this.playerAttackers(spec, event), self)
             : undefined;
     if (counted === undefined) return refs;
     return {
@@ -32434,6 +32453,19 @@ export class Game {
     // first time each turn" is the timing wrapper's: `timingCount`).
     const combat = this.state.turn.combatPhases ?? 1;
     return powerAttackedWith(this.state, player, combat) >= spec.totalPower.atLeast;
+  }
+
+  /** The creatures a `player-attacked` event counts for an `attacks-player`
+   * trigger: those attacking the player, and with `orTheirPlaneswalkers`
+   * those attacking a planeswalker they control too (Frontier Warmonger). */
+  private playerAttackers(
+    spec: TriggerSpec,
+    event: Extract<GameEvent, { type: "player-attacked" | "player-attacked-unblocked" }>,
+  ): readonly ObjectId[] {
+    if (spec.on !== "attacks-player" || spec.orTheirPlaneswalkers !== true || event.type !== "player-attacked") {
+      return event.attackers;
+    }
+    return [...event.attackers, ...(event.planeswalkerAttackers ?? [])];
   }
 
   private batchedAttackers(
@@ -33060,7 +33092,7 @@ export class Game {
           (event.type === "player-attacked" || event.type === "player-attacked-unblocked") &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           this.matchesWhoPlayer(spec.defender, event.defender, self) &&
-          this.creatureCount(this.batchedAttackers(spec, event.attackers, self)) >= (spec.atLeast ?? 1) &&
+          this.creatureCount(this.batchedAttackers(spec, this.playerAttackers(spec, event), self)) >= (spec.atLeast ?? 1) &&
           (spec.defenderHasInitiative !== true || this.state.initiative === event.defender) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))

@@ -1613,6 +1613,11 @@ export type TriggerKind =
        * whatever became of the others. `{ triggerValue: true }` and "those
        * creatures" are the unblocked ones. */
       readonly unblocked?: true;
+      /** "… attack one of your opponents **or a planeswalker they
+       * control**" (Frontier Warmonger): still once per player, the
+       * creatures attacking their planeswalkers counted with those
+       * attacking them (and "those creatures" both). Not with `unblocked`. */
+      readonly orTheirPlaneswalkers?: true;
       /** Narrow which attackers count: "whenever one or more Merfolk you
        * control attack a player" (Attuma, Atlantean Warlord), still once per
        * player attacked by at least one of them, and `{ triggerValue: true }`

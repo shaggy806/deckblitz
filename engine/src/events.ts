@@ -1052,12 +1052,17 @@ export type GameEvent =
        * `attackers-declared`, for "whenever a player attacks one of your
        * opponents" (Breena, the Demagogue). A creature attacking a
        * planeswalker attacks that planeswalker, not its controller, so it's
-       * in nobody's `attackers` here. */
+       * in nobody's `attackers` here: it's in `planeswalkerAttackers` of the
+       * planeswalker's controller, for "attack one of your opponents **or a
+       * planeswalker they control**" (Frontier Warmonger). The event is
+       * emitted for a player when either list has a creature, so
+       * `attackers` may be empty. */
       readonly type: "player-attacked";
       /** The attacking (active) player. */
       readonly player: PlayerId;
       readonly defender: PlayerId;
       readonly attackers: readonly ObjectId[];
+      readonly planeswalkerAttackers?: readonly ObjectId[];
     })
   | (Base & {
       /** Exactly one creature was declared as an attacker this combat (rule
