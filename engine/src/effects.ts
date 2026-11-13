@@ -2548,7 +2548,15 @@ export type EffectSpec =
        * slots from 0: one instruction over the set, not one for each — Expose
        * the Culprit's "exile any number of face-up creatures … in a face-down
        * pile, shuffle that pile, then cloak them". A token named more than once
-       * from a stack holds one slot each. */
+       * from a stack holds one slot each. It applies with none chosen, or none
+       * to choose, too — Fortune, Loyal Steed's "exile it and up to one
+       * creature that saddled it this turn" is a `flicker` of `["source", 0]`.
+       * The set is also what this resolution "chose this way" (`thisWay:
+       * "chosen"`), for `then` and the steps after it to read as one set: Spry
+       * and Mighty's "the chosen creatures get +X/+X" is a `modify-pt-all`
+       * over `{ thisWay: "chosen" }`, its X read once for them all, and
+       * Nahiri's Resolve's "exile any number of … Return those cards" a
+       * `flicker` of `{ from: 0 }` with one delayed return. */
       readonly thenTogether?: true;
       /** The one chosen is kept on the effect's source as "**the chosen
        * creature**" (`GameObject.chosenPermanent`, replacing any earlier
@@ -4372,13 +4380,20 @@ export type EffectSpec =
        * from }` is every slot from that one on: an "any number of target …"
        * group's members, all at once (Eerie Interlude). `{ all }` is every
        * permanent matching, untargeted (Ghostway's "exile each creature you
-       * control").
+       * control"). A list may name `"source"` beside its slots, exiled and
+       * returned with them: Fortune, Loyal Steed's "exile it and up to one
+       * creature that saddled it this turn" is `["source", 0]` under a
+       * `choose-permanents`' `thenTogether` (an empty slot is nothing).
        *
        * `"source"` names the permanent the ability came from *as it was when
        * the ability was put on the stack*: one that has since left and come
        * back is a new object (rule 400.7), and is left alone.
        */
-      readonly target: ObjectRef | readonly number[] | { readonly from: number } | { readonly all: CardFilter };
+      readonly target:
+        | ObjectRef
+        | readonly (number | "source")[]
+        | { readonly from: number }
+        | { readonly all: CardFilter };
       /** See {@link FlickerCounters} — Essence Flux's Spirit clause. */
       readonly thenCounters?: FlickerCounters;
       /** "Exile this creature, then return it to the battlefield **face down**
@@ -17184,6 +17199,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         applyEffectSpec(spec.then, ctx.withFoundAt(0, picked.object));
         return;
       }
+      const pendingBefore = ctx.decisionPending();
       ctx.choosePermanents(
         spec.filter,
         Math.max(0, Math.floor(amountValue(spec.min ?? 0, ctx))),
@@ -17199,6 +17215,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.keepTargets === true ? ctx.targets : undefined,
         spec.thenTogether,
       );
+      // Nothing to choose from: one instruction over an empty set still
+      // happens (Fortune, Loyal Steed's "exile it and up to one creature").
+      if (spec.thenTogether === true && !pendingBefore && !ctx.decisionPending()) {
+        applyEffectSpec(spec.then, ctx.withTargets([]));
+      }
       return;
     }
     case "blight": {
@@ -18178,7 +18199,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           typeof target === "object" && "from" in target
             ? Array.from({ length: Math.max(0, ctx.targets.length - target.from) }, (_unused, i) => target.from + i)
             : Array.isArray(target)
-              ? [...(target as readonly number[])]
+              ? [...(target as readonly (number | "source")[])]
               : [target as ObjectRef];
         for (const ref of refs) {
           const one = objectRefAct(ref, ctx);
@@ -18200,7 +18221,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.transformed === true ? { transformed: true } : {}),
         ...(spec.tapped === true ? { tapped: true } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
-        ...(spec.target === "source" ? { fromSource: true } : {}),
+        ...(spec.target === "source" || (Array.isArray(spec.target) && spec.target.includes("source")) ? { fromSource: true } : {}),
       });
       if (returning !== null) ctx.resumeAfterDecisions(returning, parked);
       return;

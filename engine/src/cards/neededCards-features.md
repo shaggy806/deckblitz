@@ -322,6 +322,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### An untargeted chosen set acted on together — built 2026-11-13
+
+The group `effect:flicker-chosen-group` + `effect:flicker-source-and-chosen` +
+`effect:choose-permanents-this-way`. A `choose-permanents` with `thenTogether`
+now runs its `then` once over the set even when it's empty (none chosen, or
+none to choose), and records the set as `thisWay: "chosen"` for `then` and the
+steps after; `flicker`'s slot list may name `"source"`. Proving: Nahiri's
+Resolve (`flicker { from: 0 }` with one delayed return), Fortune, Loyal Steed
+(`["source", 0]`), Spry and Mighty (`modify-pt-all` over the chosen set, X read
+once). Test: `chosen-set-together.test.ts`.
+
 ### "As this enters" acting on other permanents — built 2026-11-13
 
 `effect:as-enters-remove-counters-from-any-number` +

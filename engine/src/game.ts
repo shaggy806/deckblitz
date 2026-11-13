@@ -51066,24 +51066,27 @@ controlledBy,
     }
     // "Exile any number of … in a face-down pile" (Expose the Culprit): one
     // instruction over the set, all of them in its target slots.
+    // The set is what this resolution chose this way (`thisWay: "chosen"`),
+    // and the instruction happens over it however few were chosen.
     if (awaiting.thenTogether === true) {
       if (chosen.length > 0) {
-        applyEffectSpec(
-          then,
-          this.makeResolutionContext(
-            source,
-            player,
-            chosen.map((object) => ({ kind: "object", object })),
-            x,
-            resumed?.triggerValue ?? 0,
-            resumed?.triggerObject,
-            1,
-            0,
-            [],
-            resumed?.lastKnownRefs,
-          ),
-        );
+        this.emit({ type: "cards-chosen-from-zone", player, objects: [...new Set(chosen)], chosenOnly: true });
       }
+      applyEffectSpec(
+        then,
+        this.makeResolutionContext(
+          source,
+          player,
+          chosen.map((object) => ({ kind: "object", object })),
+          x,
+          resumed?.triggerValue ?? 0,
+          resumed?.triggerObject,
+          1,
+          0,
+          [],
+          resumed?.lastKnownRefs,
+        ),
+      );
       if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
       return;
     }

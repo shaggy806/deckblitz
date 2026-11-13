@@ -2465,7 +2465,10 @@
   "target:any-number-group-before-targeting-mode",
   "effect:as-enters-remove-counters-from-any-number",
   "replacement:as-enters-turn-others-face-down",
-  "replacement:enter-exile-if-not-cast"
+  "replacement:enter-exile-if-not-cast",
+  "effect:flicker-chosen-group",
+  "effect:flicker-source-and-chosen",
+  "effect:choose-permanents-this-way"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
