@@ -148,6 +148,7 @@ import _poolComplicate from "../pool/complicate.js";
 import _poolCongregate from "../pool/congregate.js";
 import _poolConquerorsFoothold from "../pool/conquerors-foothold.js";
 import _poolConquerorsPledge from "../pool/conquerors-pledge.js";
+import _poolContainmentPriest from "../pool/containment-priest.js";
 import _poolCopperlineGorge from "../pool/copperline-gorge.js";
 import _poolCorpseLunge from "../pool/corpse-lunge.js";
 import _poolCorrupt from "../pool/corrupt.js";
@@ -1169,6 +1170,7 @@ const shard: CardShard = {
     _poolCongregate,
     _poolConquerorsFoothold,
     _poolConquerorsPledge,
+    _poolContainmentPriest,
     _poolCopperlineGorge,
     _poolCorpseLunge,
     _poolCorrupt,

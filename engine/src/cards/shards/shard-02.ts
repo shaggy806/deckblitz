@@ -781,6 +781,7 @@ import _poolSilumgarMonument from "../pool/silumgar-monument.js";
 import _poolSilverflameSquire from "../pool/silverflame-squire.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
 import _poolSinCollector from "../pool/sin-collector.js";
+import _poolSinUnendingCataclysm from "../pool/sin-unending-cataclysm.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
 import _poolSirenOfTheSilentSong from "../pool/siren-of-the-silent-song.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
@@ -1807,6 +1808,7 @@ const shard: CardShard = {
     _poolSilverflameSquire,
     _poolSimianSimulacrum,
     _poolSinCollector,
+    _poolSinUnendingCataclysm,
     _poolSinisterStarfish,
     _poolSirenOfTheSilentSong,
     _poolSkeletalSnake,

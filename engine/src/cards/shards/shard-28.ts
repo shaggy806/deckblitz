@@ -426,6 +426,7 @@ import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
 import _poolIrradiate from "../pool/irradiate.js";
 import _poolIsperiasSkywatch from "../pool/isperias-skywatch.js";
 import _poolIvyElemental from "../pool/ivy-elemental.js";
+import _poolIxidron from "../pool/ixidron.js";
 import _poolJabarisBanner from "../pool/jabaris-banner.js";
 import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
 import _poolJayaBallard from "../pool/jaya-ballard.js";
@@ -1467,6 +1468,7 @@ const shard: CardShard = {
     _poolIrradiate,
     _poolIsperiasSkywatch,
     _poolIvyElemental,
+    _poolIxidron,
     _poolJabarisBanner,
     _poolJadelightSpelunker,
     _poolJayaBallard,

@@ -594,6 +594,7 @@ import _poolMysticCompass from "../pool/mystic-compass.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
 import _poolMysticRemora from "../pool/mystic-remora.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
+import _poolNahirisResolve from "../pool/nahiris-resolve.js";
 import _poolNantukoTracer from "../pool/nantuko-tracer.js";
 import _poolNarfiBetrayerKing from "../pool/narfi-betrayer-king.js";
 import _poolNarwhal from "../pool/narwhal.js";
@@ -853,6 +854,7 @@ import _poolSplinter from "../pool/splinter.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
 import _poolSpontaneousGeneration from "../pool/spontaneous-generation.js";
 import _poolSpringjackKnight from "../pool/springjack-knight.js";
+import _poolSpryAndMighty from "../pool/spry-and-mighty.js";
 import _poolSpurGrappler from "../pool/spur-grappler.js";
 import _poolSquash from "../pool/squash.js";
 import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
@@ -1670,6 +1672,7 @@ const shard: CardShard = {
     _poolMysticMeditation,
     _poolMysticRemora,
     _poolMysticSnake,
+    _poolNahirisResolve,
     _poolNantukoTracer,
     _poolNarfiBetrayerKing,
     _poolNarwhal,
@@ -1929,6 +1932,7 @@ const shard: CardShard = {
     _poolSplintersTechnique,
     _poolSpontaneousGeneration,
     _poolSpringjackKnight,
+    _poolSpryAndMighty,
     _poolSpurGrappler,
     _poolSquash,
     _poolSquirrelSanctuary,

@@ -287,6 +287,7 @@ import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
 import _poolForgottenHarvest from "../pool/forgotten-harvest.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
 import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
+import _poolFortuneLoyalSteed from "../pool/fortune-loyal-steed.js";
 import _poolFortunesFavor from "../pool/fortunes-favor.js";
 import _poolFoulTongueInvocation from "../pool/foul-tongue-invocation.js";
 import _poolFractalize from "../pool/fractalize.js";
@@ -1292,6 +1293,7 @@ const shard: CardShard = {
     _poolForgottenHarvest,
     _poolForsakeTheWorldly,
     _poolForsakenSanctuary,
+    _poolFortuneLoyalSteed,
     _poolFortunesFavor,
     _poolFoulTongueInvocation,
     _poolFractalize,

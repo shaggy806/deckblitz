@@ -5231,6 +5231,7 @@ import _poolContagiousVorrac from "./pool/contagious-vorrac.js";
 import _poolContainmentBreach from "./pool/containment-breach.js";
 import _poolContainmentConstruct from "./pool/containment-construct.js";
 import _poolContainmentMembrane from "./pool/containment-membrane.js";
+import _poolContainmentPriest from "./pool/containment-priest.js";
 import _poolContainmentProtocol from "./pool/containment-protocol.js";
 import _poolContaminantGrafter from "./pool/contaminant-grafter.js";
 import _poolContaminatedAquifer from "./pool/contaminated-aquifer.js";
@@ -10012,6 +10013,7 @@ import _poolFortressCyclops from "./pool/fortress-cyclops.js";
 import _poolFortressKinGuard from "./pool/fortress-kin-guard.js";
 import _poolFortuitousFind from "./pool/fortuitous-find.js";
 import _poolFortunateFew from "./pool/fortunate-few.js";
+import _poolFortuneLoyalSteed from "./pool/fortune-loyal-steed.js";
 import _poolFortuneTellersTalent from "./pool/fortune-tellers-talent.js";
 import _poolFortuneThief from "./pool/fortune-thief.js";
 import _poolFortunesFavor from "./pool/fortunes-favor.js";
@@ -13982,6 +13984,7 @@ import _poolIxallisLorekeeper from "./pool/ixallis-lorekeeper.js";
 import _poolIxhelScionOfAtraxa from "./pool/ixhel-scion-of-atraxa.js";
 import _poolIxidorRealitySculptor from "./pool/ixidor-reality-sculptor.js";
 import _poolIxidorsWill from "./pool/ixidors-will.js";
+import _poolIxidron from "./pool/ixidron.js";
 import _poolIymrithDesertDoom from "./pool/iymrith-desert-doom.js";
 import _poolIzoniCenterOfTheWeb from "./pool/izoni-center-of-the-web.js";
 import _poolIzoniThousandEyed from "./pool/izoni-thousand-eyed.js";
@@ -18077,6 +18080,7 @@ import _poolNahiriTheLithomancer from "./pool/nahiri-the-lithomancer.js";
 import _poolNahirisBinding from "./pool/nahiris-binding.js";
 import _poolNahirisLithoforming from "./pool/nahiris-lithoforming.js";
 import _poolNahirisMachinations from "./pool/nahiris-machinations.js";
+import _poolNahirisResolve from "./pool/nahiris-resolve.js";
 import _poolNahirisStoneblades from "./pool/nahiris-stoneblades.js";
 import _poolNahirisWarcrafting from "./pool/nahiris-warcrafting.js";
 import _poolNaiadOfHiddenCoves from "./pool/naiad-of-hidden-coves.js";
@@ -24527,6 +24531,7 @@ import _poolSimulacrum from "./pool/simulacrum.js";
 import _poolSinCollector from "./pool/sin-collector.js";
 import _poolSinProdder from "./pool/sin-prodder.js";
 import _poolSinSpirasPunishment from "./pool/sin-spiras-punishment.js";
+import _poolSinUnendingCataclysm from "./pool/sin-unending-cataclysm.js";
 import _poolSinewDancer from "./pool/sinew-dancer.js";
 import _poolSinewSliver from "./pool/sinew-sliver.js";
 import _poolSingeMindOgre from "./pool/singe-mind-ogre.js";
@@ -25828,6 +25833,7 @@ import _poolSproutingPhytohydra from "./pool/sprouting-phytohydra.js";
 import _poolSproutingRenewal from "./pool/sprouting-renewal.js";
 import _poolSproutingThrinax from "./pool/sprouting-thrinax.js";
 import _poolSproutingVines from "./pool/sprouting-vines.js";
+import _poolSpryAndMighty from "./pool/spry-and-mighty.js";
 import _poolSpurGrappler from "./pool/spur-grappler.js";
 import _poolSpurnmageAdvocate from "./pool/spurnmage-advocate.js";
 import _poolSpurredWolverine from "./pool/spurred-wolverine.js";
@@ -37995,6 +38001,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolContainmentBreach,
   _poolContainmentConstruct,
   _poolContainmentMembrane,
+  _poolContainmentPriest,
   _poolContainmentProtocol,
   _poolContaminantGrafter,
   _poolContaminatedAquifer,
@@ -42776,6 +42783,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFortressKinGuard,
   _poolFortuitousFind,
   _poolFortunateFew,
+  _poolFortuneLoyalSteed,
   _poolFortuneTellersTalent,
   _poolFortuneThief,
   _poolFortunesFavor,
@@ -46746,6 +46754,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIxhelScionOfAtraxa,
   _poolIxidorRealitySculptor,
   _poolIxidorsWill,
+  _poolIxidron,
   _poolIymrithDesertDoom,
   _poolIzoniCenterOfTheWeb,
   _poolIzoniThousandEyed,
@@ -50841,6 +50850,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNahirisBinding,
   _poolNahirisLithoforming,
   _poolNahirisMachinations,
+  _poolNahirisResolve,
   _poolNahirisStoneblades,
   _poolNahirisWarcrafting,
   _poolNaiadOfHiddenCoves,
@@ -57291,6 +57301,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSinCollector,
   _poolSinProdder,
   _poolSinSpirasPunishment,
+  _poolSinUnendingCataclysm,
   _poolSinewDancer,
   _poolSinewSliver,
   _poolSingeMindOgre,
@@ -58592,6 +58603,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSproutingRenewal,
   _poolSproutingThrinax,
   _poolSproutingVines,
+  _poolSpryAndMighty,
   _poolSpurGrappler,
   _poolSpurnmageAdvocate,
   _poolSpurredWolverine,
@@ -70772,6 +70784,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/containment-breach": _poolContainmentBreach,
   "pool/containment-construct": _poolContainmentConstruct,
   "pool/containment-membrane": _poolContainmentMembrane,
+  "pool/containment-priest": _poolContainmentPriest,
   "pool/containment-protocol": _poolContainmentProtocol,
   "pool/contaminant-grafter": _poolContaminantGrafter,
   "pool/contaminated-aquifer": _poolContaminatedAquifer,
@@ -75553,6 +75566,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fortress-kin-guard": _poolFortressKinGuard,
   "pool/fortuitous-find": _poolFortuitousFind,
   "pool/fortunate-few": _poolFortunateFew,
+  "pool/fortune-loyal-steed": _poolFortuneLoyalSteed,
   "pool/fortune-tellers-talent": _poolFortuneTellersTalent,
   "pool/fortune-thief": _poolFortuneThief,
   "pool/fortunes-favor": _poolFortunesFavor,
@@ -79523,6 +79537,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ixhel-scion-of-atraxa": _poolIxhelScionOfAtraxa,
   "pool/ixidor-reality-sculptor": _poolIxidorRealitySculptor,
   "pool/ixidors-will": _poolIxidorsWill,
+  "pool/ixidron": _poolIxidron,
   "pool/iymrith-desert-doom": _poolIymrithDesertDoom,
   "pool/izoni-center-of-the-web": _poolIzoniCenterOfTheWeb,
   "pool/izoni-thousand-eyed": _poolIzoniThousandEyed,
@@ -83618,6 +83633,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nahiris-binding": _poolNahirisBinding,
   "pool/nahiris-lithoforming": _poolNahirisLithoforming,
   "pool/nahiris-machinations": _poolNahirisMachinations,
+  "pool/nahiris-resolve": _poolNahirisResolve,
   "pool/nahiris-stoneblades": _poolNahirisStoneblades,
   "pool/nahiris-warcrafting": _poolNahirisWarcrafting,
   "pool/naiad-of-hidden-coves": _poolNaiadOfHiddenCoves,
@@ -90068,6 +90084,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sin-collector": _poolSinCollector,
   "pool/sin-prodder": _poolSinProdder,
   "pool/sin-spiras-punishment": _poolSinSpirasPunishment,
+  "pool/sin-unending-cataclysm": _poolSinUnendingCataclysm,
   "pool/sinew-dancer": _poolSinewDancer,
   "pool/sinew-sliver": _poolSinewSliver,
   "pool/singe-mind-ogre": _poolSingeMindOgre,
@@ -91369,6 +91386,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sprouting-renewal": _poolSproutingRenewal,
   "pool/sprouting-thrinax": _poolSproutingThrinax,
   "pool/sprouting-vines": _poolSproutingVines,
+  "pool/spry-and-mighty": _poolSpryAndMighty,
   "pool/spur-grappler": _poolSpurGrappler,
   "pool/spurnmage-advocate": _poolSpurnmageAdvocate,
   "pool/spurred-wolverine": _poolSpurredWolverine,
