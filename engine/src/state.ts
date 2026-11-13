@@ -2612,6 +2612,12 @@ export interface PendingTrigger {
    * which stint on the stack "that spell" is — is read as the rider is
    * placed, by when the spell is there. */
   readonly triggerSpellOnPlacement?: true;
+  /** A mana-spend rider fired by mana paying an activated ability's cost
+   * (Sunken Palace): the mana is paid before the ability is put on the
+   * stack here, so its `triggerObject` — "that ability" — is filled in once
+   * it is (`Game.bindManaRidersToAbility`), and this flag dropped. Never
+   * left set past the activation. */
+  readonly awaitsActivation?: true;
   /** A reflexive triggered ability — see {@link ReflexiveTrigger}. Placed
    * like a card's own triggered ability, choosing its targets as it goes on
    * the stack, from this record's specs rather than a card's list. */

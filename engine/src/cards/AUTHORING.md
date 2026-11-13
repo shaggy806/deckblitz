@@ -7492,7 +7492,13 @@ Delete an entry in the same commit as the feature that retires it.
     …" (Path of Ancestry). `spell: "shares-type-with-commander"` resolves
     against the controller's commanders at activation time. It fires as a
     real triggered ability, so it resolves *above* the spell it paid for.
-    Only a *cast* fires it — mana spent on an ability never does — and it
+    Only a *cast* fires it — mana spent on an ability doesn't, unless
+    `orAbility: true` ("When you spend this mana to cast a spell **or
+    activate an ability**, copy that spell or ability" — Sunken Palace: a
+    `sequence` of `copy-spell` `"trigger-spell"` and `copy-ability`
+    `"trigger-ability"`, each a no-op for the other kind; the activated
+    ability is its trigger object, bound once it's on the stack, and a mana
+    ability it pays for leaves it nothing to copy) — and it
     still fires if the permanent that made the mana has left since. A
     `manaValue` clause in `spell` reads the spell on the stack, so its chosen
     `{X}` counts (Gilanra, Caller of Wirewood: `{ manaValue: { op: "gte", n: 6 } }`).

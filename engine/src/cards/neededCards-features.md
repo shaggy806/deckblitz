@@ -366,6 +366,16 @@ object in only by a type it has (rule 205.3m), and `each` a type in common
 with every one. The new `"convokers"` object set is the creatures that convoked
 the source's spell (702.51a), each as it last existed. Proving: Everything
 Comes to Dust, Cryptic Gateway. Test: `shares-type-with-set.test.ts`.
+### Mana whose rider copies the ability it paid for — built 2026-11-13
+
+By EDHREC rank: Sunken Palace (4621), the only card. `add-mana`'s
+`whenSpent.orAbility`: the rider fires when the mana pays an activated
+ability's cost as well as a spell's, and "that ability" is its trigger
+object. The mana is paid before this engine puts the ability on the stack, so
+the queued rider waits (`PendingTrigger.awaitsActivation`) and
+`bindManaRidersToAbility` gives it the ability once minted; a mana ability it
+pays for (605.3b) leaves it nothing to copy. The line recurs nowhere, so no
+scaffolder template. Key: effect:when-spent-on-ability.
 
 ### A token copy that enters with counters — built 2026-11-11
 

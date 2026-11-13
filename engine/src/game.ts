@@ -25580,6 +25580,9 @@ export class Game {
     // cast: no commander tax, no cast trigger.
 
     if (isManaAbility(ability)) {
+      // Never on the stack (rule 605.3b): a mana rider its mana fired has no
+      // ability to copy.
+      this.bindManaRidersToAbility(undefined);
       // "Sacrifice X Goats" (Springjack Pasture): which ones is the player's
       // choice, and nothing can resolve until it's made. The mana comes as
       // the last one is chosen (`finishCostSacrifice`), and nobody gets
@@ -25713,6 +25716,8 @@ export class Game {
       chosen,
     );
     if (chosenX > 0) this.state.objects[abilityId].xValue = chosenX;
+    // "Copy that ability" (Sunken Palace's mana): this one.
+    this.bindManaRidersToAbility(abilityId);
     // A loyalty ability stays one on the stack (rule 606.2).
     if (ability.loyaltyCost !== undefined) this.state.objects[abilityId].loyaltyAbility = true;
     // A crew ability remembers its crew, for "whenever this Vehicle becomes
@@ -28902,6 +28907,7 @@ export class Game {
         source: object.id,
         sourceName: printedCardName(object),
         ...(spell !== undefined ? { spell } : {}),
+        ...(whenSpent.orAbility === true ? { orAbility: true as const } : {}),
         effect: whenSpent.effect,
         text: whenSpent.text,
       };
@@ -29096,7 +29102,12 @@ export class Game {
    */
   private fireManaSpendRider(player: PlayerId, unit: ManaUnit, purpose: ManaPurpose): void {
     const rider = unit.onSpend;
-    if (rider === undefined || purpose === null || purpose.kind !== "cast") return;
+    if (rider === undefined || purpose === null) return;
+    // "Or activate an ability" (Sunken Palace): the ability isn't on the
+    // stack yet as its mana is paid, so "that ability" waits for it
+    // (`bindManaRidersToAbility`).
+    const forAbility = purpose.kind === "ability" && rider.orAbility === true;
+    if (purpose.kind !== "cast" && !forAbility) return;
     // The permanent that made the mana may be gone by now — tapped for mana,
     // then sacrificed or bounced with the mana still floating — and the
     // rider triggers all the same: it belongs to the mana, not to anything on
@@ -29104,6 +29115,7 @@ export class Game {
     // it, and that is who controlled the ability that made it.
     const controller = player;
     if (
+      purpose.kind === "cast" &&
       rider.spell !== undefined &&
       !matchesFilter(this.state, this.registry, purpose.card, rider.spell, { you: controller })
     ) {
@@ -29118,8 +29130,9 @@ export class Game {
       // `"trigger-spell"`, which reads it as it last was on the stack once
       // it has gone (its ruling: it's copied even if countered first). Which
       // stint on the stack is read as the rider is placed, by when it's there.
-      triggerObject: purpose.card,
-      triggerSpellOnPlacement: true,
+      ...(purpose.kind === "cast"
+        ? { triggerObject: purpose.card, triggerSpellOnPlacement: true as const }
+        : { awaitsActivation: true as const }),
       delayed: {
         id: `mana-rider-${this.state.nextObjectSeq}`,
         controller,
@@ -29135,11 +29148,27 @@ export class Game {
         // `target: 0` (Arena of Glory's "that creature gains haste"). It is
         // on the stack by the time this resolves, which is why the rider
         // can't be placed until then.
-        targets: [{ kind: "object", object: purpose.card }],
+        targets: purpose.kind === "cast" ? [{ kind: "object", object: purpose.card }] : [],
         effect: rider.effect,
         text: rider.text,
       },
     });
+  }
+
+  /**
+   * Give the mana riders an activation's mana fired (`awaitsActivation`) the
+   * ability it put on the stack — `abilityId`, their "that ability" — or,
+   * for a mana ability, which never goes on the stack (rule 605.3b),
+   * nothing: they still trigger, with nothing there to copy.
+   */
+  private bindManaRidersToAbility(abilityId: ObjectId | undefined): void {
+    const pending = this.state.pendingTriggers;
+    for (let i = 0; i < pending.length; i += 1) {
+      const trigger = pending[i];
+      if (trigger.awaitsActivation !== true) continue;
+      const { awaitsActivation: _bound, ...rest } = trigger;
+      pending[i] = abilityId === undefined ? rest : { ...rest, triggerObject: abilityId };
+    }
   }
 
   // --- priority -------------------------------------------------

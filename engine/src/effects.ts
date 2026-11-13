@@ -3091,6 +3091,15 @@ export type EffectSpec =
        * scry. Rides on each unit produced and fires as it is spent. */
       readonly whenSpent?: {
         readonly spell?: CardFilter | "shares-type-with-commander";
+        /** "When you spend this mana to cast a spell **or activate an
+         * ability**" (Sunken Palace): it fires as well when the mana pays an
+         * activated ability's cost, and "that ability" is the one activated —
+         * the `copy-ability` effect's `"trigger-ability"` (beside a
+         * `copy-spell` of `"trigger-spell"`, each doing nothing for the other
+         * kind). A mana ability it pays for still triggers it, but isn't on
+         * the stack to copy (rules 605.3b, 707.10: a copy is put on the
+         * stack). `spell` still narrows only a spell. */
+        readonly orAbility?: true;
         readonly effect: EffectSpec;
         readonly text: string;
       };

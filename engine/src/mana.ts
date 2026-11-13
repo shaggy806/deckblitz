@@ -365,6 +365,9 @@ export interface ManaSpendRider {
   readonly sourceName: string;
   /** Only fires if the spell paid for matches. Absent means any spell. */
   readonly spell?: CardFilter;
+  /** It fires for an activated ability the mana pays for too (Sunken
+   * Palace) — `whenSpent.orAbility`. */
+  readonly orAbility?: true;
   readonly effect: EffectSpec;
   readonly text: string;
 }
