@@ -6785,8 +6785,13 @@ clause (section 9):
   (Ulamog's Despoiler); `discard: { filter, keywordCounters? }` is "discard any
   number of creature cards" from hand (Indominus Rex, Alpha), and
   `keywordCounters` gives it one counter of each listed keyword some discarded
-  card has. Pair it with `counters: { amount: "done-as-enters" }` to count how
-  many were done. `as-enters-actions.test.ts`, `as-enters-discard.test.ts`.
+  card has. `removeCounters: { filter }` is "remove all counters from any
+  number of [filter]" (Sin, Unending Cataclysm: anyone's, chosen, counted by
+  counters removed); `turnFaceDown: CardFilter` is "turn all other [filter]
+  face down" (Ixidron: anyone's, nothing chosen). Pair it with `counters: {
+  amount: "done-as-enters", eachDone? }` to count how many were done.
+  `as-enters-actions.test.ts`, `as-enters-discard.test.ts`,
+  `as-enters-others.test.ts`.
   `mayPayLife: N` is a shock land (a `pay-life-for-untapped` decision, via the
   `shockLand` helper); `painIfUntapped: N` deals damage if it *did* end up
   entering untapped (Rockfall Vale). `mayEnterTapped: { then? }` is "you may
@@ -6831,6 +6836,14 @@ clause (section 9):
   differ are ordered by the player it enters under (a `replacement-order`),
   except for a token minted straight onto the battlefield, which takes them
   unasked (§15, "Replacement ordering").
+  `exileInstead: true` is "exile it instead": it never enters (rule 614.6).
+  Containment Priest's "if a nontoken creature would enter and it wasn't
+  cast, exile it instead" is `filter: { type: "creature", token: false, cast:
+  false }` — the filter judged as it would exist there (a God short of
+  devotion isn't a creature, a March of the Machines artifact is), `cast`
+  true only for a cast spell resolving. Where the entering permanent has "as
+  this enters" actions (Sin's counters, a devour), its controller orders the
+  two (a `replacement-order`). `enter-exile-instead.test.ts`.
   Leave "other" out of the filter: rule 614.12 already keeps a permanent's
   replacement off itself, and off anything entering at the same time as it
   (a token batch, a mass reanimation, a flicker's return, a tutor's finds are

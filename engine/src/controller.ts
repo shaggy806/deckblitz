@@ -916,6 +916,9 @@ export class AutomaticController implements PlayerController {
     }
     const awaiting = view.state.awaiting;
     if (awaiting?.kind === "choose-permanents" && awaiting.devour === true) return devourPicks(view, eligible, max);
+    if (awaiting?.kind === "choose-permanents" && awaiting.asEntersRemoveCounters === true) {
+      return counterRemovalPicks(view, eligible, max);
+    }
     if (awaiting?.kind === "choose-permanents" && awaiting.then.kind === "cast-vote" && awaiting.then.keep !== true && max === 1) {
       return votePermanent(view, eligible, min);
     }
@@ -983,6 +986,25 @@ function ownPermanentsFirst(
 function devourPicks(view: ControllerView, eligible: readonly ObjectId[], max: number): readonly ObjectId[] {
   return eligible
     .filter((id) => view.state.objects[id]?.isToken === true)
+    .flatMap((id) => Array<ObjectId>(view.state.objects[id]?.stackCount ?? 1).fill(id))
+    .slice(0, max);
+}
+
+/**
+ * "Remove all counters from any number of …, it enters with two +1/+1
+ * counters for each" (Sin): every opponent's permanent, and of one's own only
+ * those whose counters are all +1/+1 or -1/-1 — a +1/+1 counter comes back
+ * twice over, a -1/-1 counter is a gain — never a planeswalker's loyalty or
+ * an artifact's charge counters.
+ */
+function counterRemovalPicks(view: ControllerView, eligible: readonly ObjectId[], max: number): readonly ObjectId[] {
+  return eligible
+    .filter((id) => {
+      const object = view.state.objects[id];
+      if (object === undefined) return false;
+      if (object.controller !== view.player) return true;
+      return Object.keys(object.counters).every((kind) => kind === "+1/+1" || kind === "-1/-1");
+    })
     .flatMap((id) => Array<ObjectId>(view.state.objects[id]?.stackCount ?? 1).fill(id))
     .slice(0, max);
 }

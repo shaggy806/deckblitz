@@ -940,6 +940,11 @@ export interface GameObject {
     /** With `insteadDone: false`: exile it, not the graveyard (`EnterInstead`'s
      * `exileUnless`). */
     readonly insteadExile?: true;
+    /** Another permanent's `exileInstead` (Containment Priest) applies to it
+     * entering: `true` once it's applied before its own "as this enters"
+     * actions (rule 616.1e), so none is asked and `moveObject` exiles it;
+     * `false` once its own come first, or there's nothing to order. */
+    readonly exileInsteadFirst?: boolean;
     /** How many cards its `AsEntersAction` exiled or returned as it was about to
      * enter, once that's settled: what its `"done-as-enters"` counters count. */
     readonly asEntersDone?: number;
@@ -4424,6 +4429,11 @@ export type AwaitingDecision =
        * returns to its owner's hand: `source` is the permanent about to enter.
        * `then` is unused. */
       readonly asEntersReturn?: true;
+      /** Set when the choice is which permanents an entering permanent's
+       * `AsEntersAction.removeCounters` takes every counter off: `source` is
+       * the permanent about to enter, and how many counters came off is its
+       * `enterChoice.asEntersDone`. `then` is unused. */
+      readonly asEntersRemoveCounters?: true;
       /** Set when the choice pays an activated ability's `returnToHand`
        * cost: that ability on the stack, which records what the returned
        * creature was attacking (`LastKnownRefs.returnedAttacking`). */

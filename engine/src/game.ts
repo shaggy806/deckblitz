@@ -15120,6 +15120,68 @@ export class Game {
       };
       return true;
     }
+    // "Remove all counters from any number of …" (Sin, Unending Cataclysm):
+    // anyone's, already there, with a counter to remove.
+    if (spec.removeCounters !== undefined) {
+      const filter = spec.removeCounters.filter;
+      const eligible = this.state.zones.shared.battlefield.filter((other) => {
+        const o = this.state.objects[other];
+        return (
+          other !== id &&
+          this.enterBatch?.has(other) !== true &&
+          o !== undefined &&
+          this.inGame(o) &&
+          Object.values(o.counters).some((n) => n > 0) &&
+          matchesFilter(this.state, this.registry, other, filter, { you: chooser, source: id })
+        );
+      });
+      const available = eligible.reduce((n, other) => n + (this.state.objects[other]?.stackCount ?? 1), 0);
+      if (available === 0) {
+        object.enterChoice = { ...answered, asEntersDone: 0 };
+        return false;
+      }
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player: chooser,
+        eligible,
+        min: 0,
+        max: available,
+        prompt: `Remove all counters from any number of permanents as ${nameOf(object)} enters`,
+        then: { kind: "sequence", effects: [] },
+        source: id,
+        x: 0,
+        asEntersRemoveCounters: true,
+      };
+      return true;
+    }
+    if (spec.turnFaceDown !== undefined) {
+      const filter = spec.turnFaceDown;
+      const turning = this.state.zones.shared.battlefield.filter((other) => {
+        const o = this.state.objects[other];
+        return (
+          other !== id &&
+          this.enterBatch?.has(other) !== true &&
+          o !== undefined &&
+          this.inGame(o) &&
+          matchesFilter(this.state, this.registry, other, filter, { you: o.controller, source: id })
+        );
+      });
+      // A token stack turns token by token: each split-off one turns, the
+      // rest of the stack stays the same id.
+      let turned = 0;
+      for (const other of turning) {
+        const members = this.state.objects[other]?.stackCount ?? 1;
+        for (let i = 0; i < members; i++) {
+          const before = this.state.zones.shared.battlefield.filter((p) => this.state.objects[p]?.faceDown !== undefined).length;
+          this.turnFaceDown(other);
+          const after = this.state.zones.shared.battlefield.filter((p) => this.state.objects[p]?.faceDown !== undefined).length;
+          if (after === before) break;
+          turned += after - before;
+        }
+      }
+      object.enterChoice = { ...answered, asEntersDone: turned };
+      return false;
+    }
     if (spec.putFromExile !== undefined) {
       const count = spec.putFromExile;
       const { eligible, faceDownGroups } = this.exileChoiceCandidates(chooser, { ownedBy: "opponent" }, undefined, id);
@@ -15381,6 +15443,10 @@ export class Game {
     // Control, then copy, then the rest (the Mystic Reflection ruling).
     if (this.enterAsCopyAsked(id, chooser)) return true;
     for (let next = this.nextEnterChoice(id, chooser); next !== null; next = this.nextEnterChoice(id, chooser)) {
+      // Exiled instead (Containment Priest), once what it copies is chosen
+      // (rule 616.1c): ordered against its own actions, or first.
+      if (next.kind !== "copy" && this.exileInsteadOrderAsked(id, chooser)) return true;
+      if (object.enterChoice?.exileInsteadFirst === true) return false;
       if (next.kind === "choose") {
         const looked = next.look === true ? this.lookAtOpponentHandOnEnter(id, chooser) : undefined;
         if (looked === "asked") return true;
@@ -50920,6 +50986,21 @@ controlledBy,
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // "As this enters, remove all counters from any number of …" (Sin): now,
+    // as it's about to enter (rule 614.1c), each chosen token of a stack
+    // singled out; how many came off is what it enters with.
+    if (awaiting.asEntersRemoveCounters === true) {
+      const entering = this.state.objects[awaiting.source];
+      let removed = 0;
+      for (const picked of chosen) {
+        if (this.state.objects[picked]?.zone !== "battlefield") continue;
+        removed += this.removeCountersFrom(picked, "any", "all", true);
+      }
+      entering.enterChoice = { ...entering.enterChoice, asEntersDone: removed };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // An `EnterInstead`'s sacrifice: now, as it's about to enter, one event;
     // its entry carries on once priority is next looked at.
     if (awaiting.insteadOfEntering === true) {
@@ -61212,6 +61293,156 @@ controlledBy,
     return false;
   }
 
+  /**
+   * The permanents whose `exileInstead` (Containment Priest's "if a nontoken
+   * creature would enter and it wasn't cast, exile it instead") applies to
+   * `id` about to enter under `under`. Judged as it would exist on the
+   * battlefield (rule 614.12): for the length of the look it's there under
+   * that player — face down if it enters so, the copy it chose to enter as,
+   * what the effect putting it there says it is, its mana cost not counted
+   * toward a devotion — with the entry its move would record (`cast` only for
+   * a spell that was cast resolving). Nothing is changed by the look.
+   */
+  private enterExilers(id: ObjectId, under: PlayerId, enter: EnterOptions = {}): ObjectId[] {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone === "battlefield") return [];
+    const candidates: { readonly source: ObjectId; readonly filter: CardFilter }[] = [];
+    for (const sourceId of this.state.zones.shared.battlefield) {
+      if (sourceId === id || this.enterBatch?.has(sourceId) === true) continue;
+      const source = this.state.objects[sourceId];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      if (this.state.players[source.controller]?.hasLost === true) continue;
+      for (const ability of this.staticsOfSource(source)) {
+        const r = ability.replacement;
+        if (r?.event !== "others-enter-battlefield" || r.exileInstead !== true || !this.staticActive(source, ability)) continue;
+        candidates.push({ source: sourceId, filter: r.filter });
+      }
+    }
+    if (candidates.length === 0) return [];
+    const resolving = object.zone === "stack" && enter.notResolving !== true;
+    const entry: EntryRecord = {
+      from: object.zone,
+      ...(resolving && object.kind === "card" && object.castFrom !== undefined
+        ? {
+            cast: {
+              by: spellCaster(object),
+              from: object.castFrom,
+              ...(object.castVia != null ? { via: object.castVia } : {}),
+            },
+          }
+        : {}),
+    };
+    const saved = {
+      zone: object.zone,
+      controller: object.controller,
+      faceDown: object.faceDown,
+      face: object.face,
+      copyOf: object.copyOf,
+      modifiers: object.modifiers,
+      entry: object.entry,
+    };
+    // On the battlefield's list too, so its own statics apply to it (a God's
+    // "isn't a creature" — rule 614.12's "continuous effects from the
+    // permanent's own static abilities").
+    const battlefield = this.state.zones.shared.battlefield;
+    try {
+      battlefield.push(id);
+      object.zone = "battlefield";
+      object.controller = under;
+      object.entry = entry;
+      if (enter.faceDown !== undefined) {
+        object.faceDown = { kind: enter.faceDown, ...(enter.faceDownAs !== undefined ? { as: enter.faceDownAs } : {}) };
+      }
+      const transformed = enter.transformed === true || object.enterChoice?.transformed === true;
+      if (object.faceDown === undefined && this.isTransformingDfc(id) && this.entersTransformed(id, transformed)) object.face = 1;
+      const copyOf = object.enterChoice?.copyOf;
+      if (copyOf !== undefined && copyOf !== null) object.copyOf = copyOf;
+      if (enter.asEntered !== undefined) {
+        object.modifiers = [
+          ...object.modifiers,
+          { timestamp: object.timestamp, ...patchModifier(enter.asEntered), untilEndOfTurn: false },
+        ];
+      }
+      invalidateComputedCache();
+      return withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
+        candidates
+          .filter((c) =>
+            matchesFilter(this.state, this.registry, id, c.filter, {
+              you: this.state.objects[c.source].controller,
+              source: c.source,
+            }),
+          )
+          .map((c) => c.source),
+      );
+    } finally {
+      const at = battlefield.lastIndexOf(id);
+      if (at >= 0) battlefield.splice(at, 1);
+      object.zone = saved.zone;
+      object.controller = saved.controller;
+      object.faceDown = saved.faceDown;
+      object.face = saved.face;
+      object.copyOf = saved.copyOf;
+      object.modifiers = saved.modifiers;
+      object.entry = saved.entry;
+      invalidateComputedCache();
+    }
+  }
+
+  /**
+   * Rule 616.1e for a permanent about to enter that another permanent's
+   * `exileInstead` reaches (Containment Priest) while it has "as this enters"
+   * actions of its own that do something to the game (Sin's counters, a
+   * devour's sacrifice, an `EnterInstead`'s): its controller chooses which
+   * applies first. The exile first, and none of its own happen
+   * (`enterChoice.exileInsteadFirst`); its own first, and they happen, then
+   * it's exiled all the same (`moveObject`). With nothing of its own to
+   * order, the exile is simply first: nothing it would choose matters. Says
+   * whether it asked.
+   */
+  private exileInsteadOrderAsked(id: ObjectId, chooser: PlayerId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.enterChoice?.exileInsteadFirst !== undefined) return false;
+    const exilers = this.enterExilers(id, chooser);
+    if (exilers.length === 0) return false;
+    const next = this.nextEnterChoice(id, chooser);
+    const ownActs = next !== null && (next.kind === "as-enters" || next.kind === "devour" || next.kind === "instead");
+    const answers = `enter-exile:${id}`;
+    const firsts = this.state.replacementAnswers?.[answers];
+    if (!ownActs || firsts !== undefined) {
+      object.enterChoice = { ...object.enterChoice, exileInsteadFirst: !ownActs || firsts?.[0] === "exile" };
+      return false;
+    }
+    if (this.state.awaiting !== null) return false;
+    const exiler = this.state.objects[exilers[0]];
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player: chooser,
+      event: `${object.cardName} would enter the battlefield`,
+      options: [
+        {
+          key: "exile",
+          name: exiler.cardName,
+          text: "exiles it instead",
+          result: `${object.cardName} is exiled and does nothing as it enters`,
+          object: exiler.id,
+        },
+        {
+          key: "own",
+          name: object.cardName,
+          text: "does what it does as it enters",
+          result: `that happens, then ${object.cardName} is exiled`,
+        },
+      ],
+      // Its own first gives a choice that can only add (Sin's counters off an
+      // opponent's permanents); a sacrifice or a discard for a permanent that
+      // won't stay is a loss.
+      best: next.kind === "as-enters" && next.spec.discard === undefined ? 1 : 0,
+      answers,
+      resume: { site: "effect" },
+    };
+    return true;
+  }
+
   /** Whether anything at all has permanents "enter as a copy of" something
    * (`OthersEnterReplacement.asCopyOf`): the quick check before a token is
    * minted. */
@@ -62748,6 +62979,17 @@ controlledBy,
       const instead = object.enterChoice.insteadExile === true ? "exile" : "graveyard";
       object.enterChoice = undefined;
       if (object.zone !== instead) this.moveObjectUncached(id, instead, {});
+      return false;
+    }
+    // Another permanent's "exile it instead" (Containment Priest — rule
+    // 614.6): it never enters. Already in exile, it stays there.
+    if (
+      to === "battlefield" &&
+      object.zone !== "battlefield" &&
+      this.enterExilers(id, enter.under ?? object.controller, enter).length > 0
+    ) {
+      object.enterChoice = undefined;
+      if (object.zone !== "exile") this.moveObjectUncached(id, "exile", {});
       return false;
     }
     const leavingBattlefield = object.zone === "battlefield" && to !== "battlefield";

@@ -315,6 +315,33 @@ export interface AsEntersAction {
    * (one each however many have it — its 2025 ruling; rule 122.1b).
    */
   readonly discard?: { readonly filter: CardFilter; readonly keywordCounters?: readonly Keyword[] };
+  /**
+   * "As Sin enters, remove all counters from **any number of** artifacts,
+   * creatures, and enchantments" (Sin, Unending Cataclysm): its controller
+   * chooses, as it's about to enter (rule 614.12), any number of the
+   * permanents already on the battlefield matching `filter` (anyone's — read
+   * from their side; never itself, nor one entering with it) that have a
+   * counter, and every counter of every kind comes off each one chosen, then
+   * and there (rule 614.1c: part of the replacement, so nothing can respond).
+   * A token stack's tokens are chosen one at a time. How many counters came
+   * off is `"done-as-enters"` ("X is twice the number of counters removed
+   * this way" is its `eachDone: 2`). Thief of Blood's "from all permanents",
+   * with nothing to choose, is `removeAllCountersFrom`.
+   */
+  readonly removeCounters?: { readonly filter: CardFilter };
+  /**
+   * "As this creature enters, turn all other nontoken creatures face down"
+   * (Ixidron): as it's about to enter (rule 614.12), every permanent already
+   * on the battlefield matching `filter` — anyone's, read from its
+   * controller's side; never itself, nor one entering with it (the ruling) —
+   * is turned face down (rule 708.2a: a 2/2 with no name, text, subtypes or
+   * mana cost, its counters and the effects on it staying). Nothing is
+   * chosen, and there is never a moment it's on the battlefield with them
+   * face up, so a "whenever another creature enters" ability sees a face-down
+   * 2/2 arrive (the ruling). One already face down stays as it is (708.2b).
+   * How many were turned is `"done-as-enters"`.
+   */
+  readonly turnFaceDown?: CardFilter;
 }
 
 /** As the source permanent enters the battlefield (rule 614.1c). A self-
@@ -394,9 +421,10 @@ export interface EntersBattlefieldReplacement {
    * wasn't cast using web-slinging. `"removed-as-enters"` is the number of
    * counters its `removeAllCountersFrom` took off as it entered (Thief of
    * Blood's "a +1/+1 counter on it for each counter removed this way").
-   * `"done-as-enters"` is how many cards its `asEnters` exiled or returned, times
-   * `eachDone`: Mimeoplasm's "three +1/+1 counters on it for each creature card
-   * exiled this way". `"rolled-as-enters"` is the total its `rollAsEnters`
+   * `"done-as-enters"` is how many cards its `asEnters` exiled or returned
+   * (counters it removed, for `removeCounters`), times `eachDone`:
+   * Mimeoplasm's "three +1/+1 counters on it for each creature card exiled
+   * this way", Sin's "twice the number of counters removed this way". `"rolled-as-enters"` is the total its `rollAsEnters`
    * rolled (Neverwinter Hydra's "equal to the total of those results"). */
   readonly counters?: {
     readonly kind: string;
@@ -537,6 +565,23 @@ export interface OthersEnterReplacement {
    * Read by `Game.enterAsCopyAsked`.
    */
   readonly asCopyOf?: "source" | "enchanted" | { readonly target: number };
+  /**
+   * It doesn't enter: it's exiled instead (rule 614.6 — the event never
+   * happens). Containment Priest's "if a nontoken creature would enter and it
+   * wasn't cast, exile it instead" is `filter: { type: "creature", token:
+   * false, cast: false }`. The filter is judged as the permanent would exist
+   * on the battlefield (rule 614.12): the player it enters under, face down if
+   * it enters so (a manifested card is exiled), a copy it enters as, and its
+   * entry — `cast` is whether it's a spell that was cast resolving onto the
+   * battlefield, so a card put there from the stack by an effect wasn't cast,
+   * and a noncreature card an effect makes a creature there is exiled while a
+   * God entering as a noncreature isn't (the rulings). One already in exile
+   * stays where it is. Where the entering permanent has "as this enters"
+   * actions of its own (Sin's counters, a devour's sacrifice), its controller
+   * orders the two (rule 616.1e, `Game.exileInsteadOrderAsked`): this one
+   * first, and none of them happen.
+   */
+  readonly exileInstead?: true;
 }
 
 /** "If one or more tokens would be created under your control, twice that many

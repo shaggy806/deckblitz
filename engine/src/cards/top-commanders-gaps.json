@@ -2462,7 +2462,10 @@
   "trigger:phases-out",
   "trigger:scry-bottom-count",
   "decision:two-any-number-groups",
-  "target:any-number-group-before-targeting-mode"
+  "target:any-number-group-before-targeting-mode",
+  "effect:as-enters-remove-counters-from-any-number",
+  "replacement:as-enters-turn-others-face-down",
+  "replacement:enter-exile-if-not-cast"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

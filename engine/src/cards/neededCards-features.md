@@ -322,6 +322,25 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "As this enters" acting on other permanents — built 2026-11-13
+
+`effect:as-enters-remove-counters-from-any-number` +
+`replacement:as-enters-turn-others-face-down`. `AsEntersAction` gains
+`removeCounters: { filter }` (a `choose-permanents` of anyone's permanents with
+a counter, each chosen losing them all as it's about to enter, the count its
+`"done-as-enters"`) and `turnFaceDown: CardFilter` (every match turned face
+down, nothing chosen). Proving: Sin, Unending Cataclysm; Ixidron. Test:
+`as-enters-others.test.ts`.
+
+### "Exile it instead" of another permanent entering — built 2026-11-13
+
+`replacement:enter-exile-if-not-cast`. `OthersEnterReplacement.exileInstead`:
+the entering permanent is exiled in `moveObject`, the filter judged as it would
+exist on the battlefield (`Game.enterExilers`, rule 614.12) — `cast: false`
+true of anything but a cast spell resolving — and ordered against its own "as
+this enters" actions (`exileInsteadOrderAsked`, a `replacement-order`, 616.1e).
+Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
+
 ### A reflexive ability's target read against its source now — fixed 2026-11-13
 
 `bug:reflexive-target-compare-bound-at-creation`. `bindDynamicCompares` left
