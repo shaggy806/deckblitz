@@ -394,6 +394,24 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### Token copies of a cost's permanents, of graveyard cards, and attached — built 2026-11-13
+
+The keys `effect:token-copy-of-sacrificed`, `effect:token-copy-of-graveyard-cards`
+and `effect:token-copy-enters-attached`, one widening of `create-token-copy`.
+`{ paid: "sacrificed" | "tapped" | "unattached" }` are now permanent sets
+(`isCardSet`): copied as they last existed on the battlefield (rule 608.2h),
+a sacrificed Clone's or token's copiable values (707.2) — Cleaver Skaab (rank
+4661). `of: { eachInGraveyard: filter }` copies each matching graveyard card
+as the card it is, fixed before the first copy — Grist, the Plague Swarm's
+−6 (Grist, Voracious Larva, rank 4750). `attachedTo` creates each copy
+attached to a permanent through the entering path (`readyToEnterAttached`,
+`attachEntered`): an Aura copy that can't enchant it isn't created, an
+Equipment copy that can't equip it enters unattached (303.4i, 301.5e) —
+Arna Kennerüd, Skycaptain (rank 7641). `test/token-copy-of-sets.test.ts`.
+Daretti, Ingenious Iconoclast's record names the graveyard key too, but its
+−6 is one target that's an artifact card in a graveyard **or** an artifact on
+the battlefield: a cross-zone target, not this.
+
 ### A prevention's follow-up names the damaged player — built 2026-11-13
 
 The key `replacement:prevention-then-names-damaged-player`. A `prevent: true`

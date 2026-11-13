@@ -45554,6 +45554,8 @@ controlledBy,
       createdWith?: TokenLink;
       /** An embalm ability made them (`PtModifier.embalmed`). */
       embalmed?: boolean;
+      /** Each is created attached to this (`EnteringTokenCopies.attachTo`). */
+      attachTo?: EnterAttachHost;
     },
     /** `ofId` as it last existed where the effect refers to it, when it has
      * left there since: its copiable values are read off this (rule
@@ -45667,6 +45669,7 @@ controlledBy,
       ...(opts.createdWith !== undefined ? { createdWith: opts.createdWith } : {}),
       ...(opts.thenCounters !== undefined ? { thenCounters: opts.thenCounters } : {}),
       ...(opts.withCounters !== undefined && opts.withCounters.amount > 0 ? { withCounters: opts.withCounters } : {}),
+      ...(opts.attachTo !== undefined ? { attachTo: opts.attachTo } : {}),
     };
     if (this.heldTokenCopies !== null) this.heldTokenCopies.push(planned);
     else this.carryOutTokenCopies([planned]);
@@ -45682,13 +45685,24 @@ controlledBy,
    * first, then each chooses for itself (the Bard, King of Dale ruling).
    */
   private carryOutTokenCopies(plans: readonly PlannedTokenCopies[]): void {
-    if (!plans.some((p) => this.tokenCopySettlesAsItEnters(p))) {
+    // One created attached to something enters as a card put there attached
+    // does (`readyToEnterAttached`), so it takes the entering path.
+    if (!plans.some((p) => (p.attachTo !== undefined && p.total > 0) || this.tokenCopySettlesAsItEnters(p))) {
       for (const p of plans) this.mintTokenCopies(p);
       return;
     }
     const groups = plans.map((p): EnteringTokenCopies => {
       const tokens: ObjectId[] = [];
-      for (let i = 0; i < Math.min(p.total, Game.MAX_EFFECT_INSTANCES); i += 1) tokens.push(this.mintEnteringToken(p));
+      for (let i = 0; i < Math.min(p.total, Game.MAX_EFFECT_INSTANCES); i += 1) {
+        const token = this.mintEnteringToken(p);
+        // An Aura copy that can't enchant its host isn't created (rule
+        // 303.4i; Arna Kennerüd's ruling).
+        if (p.attachTo !== undefined && !this.readyToEnterAttached(token, p.attachTo, p.controller)) {
+          delete this.state.objects[token];
+          continue;
+        }
+        tokens.push(token);
+      }
       const { copyName: _name, total: _total, modifiers: _modifiers, ...rest } = p;
       return { ...rest, tokens };
     });
@@ -45782,6 +45796,8 @@ controlledBy,
             continue;
           }
           if (group.goadedForGameBy !== undefined) this.state.objects[id].goadedForGameBy = [group.goadedForGameBy];
+          // An Equipment created attached to something (301.5e).
+          if (group.attachTo !== undefined) this.attachEntered(id, group.attachTo);
           // What the effect has it enter with, before its entry is announced.
           this.enterWithCounters(id, group.withCounters, group.controller);
           this.noteTokensCreated(group.controller);

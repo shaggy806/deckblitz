@@ -8528,7 +8528,16 @@ export type EffectSpec =
        * not the card in the graveyard — under its last controller unless
        * `who` says otherwise.
        * `{ eachExiled }` is each face-up card in exile matching the filter,
-       * from this effect's controller's side — Altaïr Ibn-La'Ahad. */
+       * from this effect's controller's side — Altaïr Ibn-La'Ahad.
+       * `{ eachInGraveyard }` is each card in a graveyard matching the filter
+       * (`ownedBy: "you"` for "your graveyard"), fixed before the first copy
+       * is made — Grist, the Plague Swarm's "for each creature card in your
+       * graveyard, create a token that's a copy of it".
+       * `{ paid: "sacrificed" | "tapped" | "unattached" }` are permanents a
+       * cost took, copied as they last existed on the battlefield (rule
+       * 608.2h; a copy's or a token's copiable values, 707.2) under their
+       * last controller unless `who` says otherwise — Cleaver Skaab's "two
+       * tokens that are copies of the sacrificed creature". */
       readonly of:
         | "source"
         | "trigger-object"
@@ -8537,7 +8546,16 @@ export type EffectSpec =
         | ObjectSetRef
         | number
         | { readonly each: CardFilter }
-        | { readonly eachExiled: CardFilter };
+        | { readonly eachExiled: CardFilter }
+        | { readonly eachInGraveyard: CardFilter };
+      /** The copies are created **attached to** what this names (rules
+       * 303.4i, 301.5e, 303.4h) — Arna Kennerüd, Skycaptain's "create a token
+       * that's a copy of that permanent attached to that creature": an Aura
+       * copy that can't legally enchant it, or with nothing there (the
+       * permanent having left, rule 400.7), isn't created (the ruling); an
+       * Equipment copy that can't equip it, and anything else, enters
+       * unattached. See {@link AttachHostRef}. */
+      readonly attachedTo?: AttachHostRef;
       /** How many, read as this applies: Rionya, Fire Dancer's "create X
        * tokens that are copies of …, where X is one plus the number of
        * instant and sorcery spells you've cast this turn". */
@@ -11221,7 +11239,8 @@ export interface EffectApi {
    * object for every token in it. */
   permanentsMatching(filter: CardFilter): readonly { readonly object: ObjectId; readonly count: number }[];
   /** The cards in every graveyard matching `filter`, read as the effect's
-   * controller — `ShareReference`'s `{ graveyard }`. */
+   * controller — `ShareReference`'s `{ graveyard }`, `create-token-copy`'s
+   * `{ eachInGraveyard }`. */
   graveyardCardsMatching(filter: CardFilter): readonly ObjectId[];
   /** See the `{ cardTypesInGraveyard }` {@link EffectAmount}. */
   cardTypesInGraveyard(filter: CardFilter): number;
@@ -12963,6 +12982,8 @@ export interface EffectApi {
       atYourNextEndStep?: boolean;
       /** The tokens remember this effect's source (`GameObject.createdWith`). */
       linkedToSource?: boolean;
+      /** Each is created attached to this — the effect's `attachedTo`, read. */
+      attachTo?: EnterAttachHost;
     },
   ): void;
   /** True if `condition` holds from the effect source's controller's
@@ -20177,13 +20198,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // group) is copied as permanents; every other set is of cards.
       const ofSet = isObjectSetRef(spec.of) ? spec.of : undefined;
       const permanentSet = ofSet !== undefined && !isCardSet(ofSet);
-      const ofCards = (ofSet !== undefined && !permanentSet) || (typeof spec.of === "object" && "eachExiled" in spec.of);
+      const ofCards =
+        (ofSet !== undefined && !permanentSet) || (typeof spec.of === "object" && ("eachExiled" in spec.of || "eachInGraveyard" in spec.of));
       const handedTo = spec.who === undefined || spec.who === "you" ? undefined : spec.who;
       const named = handedTo === undefined ? undefined : resolvePlayerRef(handedTo, ctx);
       if (handedTo !== undefined && named === undefined) return;
+      // Where they're created attached, read once as this resolves.
+      const attachTo = spec.attachedTo === undefined ? undefined : attachHost(spec.attachedTo, ctx);
       const copy = (of: ObjectId, count: number, was?: LastKnownInfo): void =>
         ctx.createTokenCopy(of, count, {
           ...(was !== undefined ? { was } : {}),
+          ...(attachTo !== undefined ? { attachTo } : {}),
           ...(spec.goadedForGame === true ? { goadedForGameBy: ctx.controller } : {}),
           gainsHaste: spec.gainsHaste ?? false,
           sacrificeAtEndStep: spec.sacrificeAtEndStep ?? false,
@@ -20223,10 +20248,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (typeof spec.of === "object" && ofSet === undefined) {
         // Which ones, fixed before the first copy enters (rule 608.2h): a
         // copy made here doesn't count itself.
-        const of = spec.of as { readonly each: CardFilter } | { readonly eachExiled: CardFilter };
+        const of = spec.of as { readonly each: CardFilter } | { readonly eachExiled: CardFilter } | { readonly eachInGraveyard: CardFilter };
         ctx.oneTokenEvent(() => {
           if ("eachExiled" in of) {
             for (const card of ctx.exiledCardsMatching(of.eachExiled)) copy(card, specCount);
+          } else if ("eachInGraveyard" in of) {
+            for (const card of ctx.graveyardCardsMatching(of.eachInGraveyard)) copy(card, specCount);
           } else {
             for (const { object, count } of ctx.permanentsMatching(of.each)) copy(object, specCount * count);
           }

@@ -119,15 +119,18 @@ export function isObjectSetRef(value: unknown): value is ObjectSetRef {
 }
 
 /** Whether a set's members are cards rather than permanents: everything but
- * a trigger's batch, what's attached to the source, a target group and the
+ * a trigger's batch, what's attached to the source, a target group, the
  * permanents this resolution destroyed or had sacrificed ("each artifact
- * destroyed this way") — what a `create-token-copy` copies as the card it
- * is. A permanent set's member that has left is copied as it last existed
- * (rule 608.2h). */
+ * destroyed this way") and the permanents a cost sacrificed, tapped or
+ * unattached (Cleaver Skaab's "copies of the sacrificed creature") — what a
+ * `create-token-copy` copies as the card it is. A permanent set's member
+ * that has left is copied as it last existed (rule 608.2h): a sacrificed
+ * clone's copiable values, a token's (rule 707.2). */
 export function isCardSet(ref: ObjectSetRef): boolean {
   if (ref === "trigger-batch") return false;
   if (typeof ref !== "object") return true;
   if ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref) return false;
+  if ("paid" in ref && (ref.paid === "sacrificed" || ref.paid === "tapped" || ref.paid === "unattached")) return false;
   return !("thisWay" in ref && (ref.thisWay === "destroyed" || ref.thisWay === "died" || ref.thisWay === "sacrificed"));
 }
 

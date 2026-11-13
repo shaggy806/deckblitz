@@ -473,7 +473,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
         effect.of !== "source" &&
         // A copy of a card enters under the effect's controller.
         !(isObjectSetRef(effect.of) && isCardSet(effect.of)) &&
-        !(typeof effect.of === "object" && "eachExiled" in effect.of)
+        !(typeof effect.of === "object" && ("eachExiled" in effect.of || "eachInGraveyard" in effect.of))
       ) {
         return 0;
       }

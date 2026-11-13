@@ -5280,6 +5280,10 @@ export interface EnteringTokenCopies {
   readonly thenCounters?: { readonly kind: string; readonly amount: number };
   /** Counters each enters with (`create-token-copy`'s `withCounters`). */
   readonly withCounters?: { readonly kind: string; readonly amount: number };
+  /** What each is created attached to (`create-token-copy`'s `attachedTo`):
+   * an Aura that can't enchant it was never created, an Equipment that can't
+   * equip it enters unattached (`Game.readyToEnterAttached`). */
+  readonly attachTo?: EnterAttachHost;
 }
 
 /**
