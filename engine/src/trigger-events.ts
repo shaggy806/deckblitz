@@ -165,6 +165,10 @@ export const TRIGGER_EVENTS = {
   /** "Whenever this Vehicle becomes crewed" (rule 702.122c): as its crew
    * ability resolves. The value is how many creatures crewed it. */
   "becomes-crewed": row({ type: "became-crewed", object: (e) => e.object, amount: (e) => e.crew.length, journaled: "crewed" }),
+  /** "Whenever a mana ability of this creature resolves" (rule 605.3b —
+   * Tyvar the Bellicose's grant): the permanent whose ability it was; the
+   * value is how much mana the ability made. */
+  "mana-ability-resolves": row({ type: "mana-ability-resolved", object: (e) => e.object, player: (e) => e.player, amount: (e) => e.amount }),
   /** "Whenever you investigate" (rule 701.16a — Erdwal Illuminator): once
    * per investigation, journaled for "for the first time each turn". */
   investigates: row({ type: "investigated", player: (e) => e.player, journaled: "investigated" }),

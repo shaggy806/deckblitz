@@ -2450,7 +2450,8 @@
   "static:mana-abilities-cost-life",
   "trigger:mills-per-card",
   "trigger:pays-life-trigger",
-  "trigger:investigate-trigger"
+  "trigger:investigate-trigger",
+  "trigger:mana-ability-resolves-amount-produced"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

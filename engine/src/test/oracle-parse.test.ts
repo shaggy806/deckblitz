@@ -18925,6 +18925,12 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you pay life")).toEqual([{ on: "event", event: "pays-life", who: "you" }]);
   });
 
+  it("reads a mana ability of this creature resolving (Tyvar the Bellicose)", () => {
+    expect(parseTrigger("Whenever a mana ability of this creature resolves")).toEqual([
+      { on: "event", event: "mana-ability-resolves", who: "self" },
+    ]);
+  });
+
   it("reads an investigation, the first each turn (Erdwal Illuminator)", () => {
     expect(parseTrigger("Whenever you investigate for the first time each turn")).toEqual([
       { on: "event", event: "investigates", who: "you", firstTimeEachTurn: true },

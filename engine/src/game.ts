@@ -26159,6 +26159,9 @@ export class Game {
     const pool = this.state.players[recipient].manaPool;
     const poolBefore = pool.length;
     if (effect !== null) applyEffectSpec(effect, context);
+    // How much mana the ability itself made, a tap doubler's included —
+    // not what triggered mana abilities added (Tyvar the Bellicose).
+    let made = 0;
     if (ability.cost.tap) {
       // "If you tap a permanent for mana, it produces twice as much of that
       // mana instead" (Mana Reflection): its own mana, each unit with all
@@ -26181,6 +26184,7 @@ export class Game {
       // just made — a choice among several the player's, with the rest of
       // the picks.
       const produced = pool.slice(poolBefore).map((unit) => unit.type);
+      made = produced.length;
       for (const out of this.extraManaOutputs(source, produced, player)) {
         const origin = this.manaOriginOf(out.holder);
         if ("units" in out) {
@@ -26206,6 +26210,7 @@ export class Game {
       // No {T}: not tapped for mana, but "a land's ability causes you to add"
       // (Caged Sun, on a storage land's "{1}, Remove X storage counters").
       const produced = pool.slice(poolBefore).map((unit) => unit.type);
+      made = produced.length;
       for (const out of this.extraManaOutputs(source, produced, player, true)) {
         const origin = this.manaOriginOf(out.holder);
         if ("units" in out) {
@@ -26213,6 +26218,8 @@ export class Game {
         } else this.addMana(player, out.choices[0], out.amount, out.tag, origin);
       }
     }
+    // The mana ability resolved (rule 605.3b), however much it made.
+    if (source !== undefined) this.emit({ type: "mana-ability-resolved", object: sourceId, player, amount: made });
     this.emit({
       type: "ability-activated",
       source: sourceId,
@@ -28046,6 +28053,8 @@ export class Game {
     if (step.untapped === undefined && own > 0) {
       this.emit({ type: "permanent-tapped-for-mana", object: step.source, player, produced: step.mana.slice(0, own) });
     }
+    // The mana ability resolved (rule 605.3b), making `own` of the mana.
+    this.emit({ type: "mana-ability-resolved", object: step.source, player, amount: own });
     // A mana ability activated to pay a cost (rule 605.3a), for "whenever
     // you activate an ability of a creature" (Elrond, Moon-Reader) — only
     // when something on the battlefield asks: this is every land tapped.

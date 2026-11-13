@@ -1430,6 +1430,17 @@ export type GameEvent =
       readonly byEffectOf?: PlayerId;
     })
   | (Base & {
+      /** An activated mana ability of `object` resolved (rule 605.3b —
+       * activated by hand or while paying), `player` its activator, making
+       * `amount` mana: its own, a "twice as much" tap doubler's included,
+       * never what a triggered mana ability added. "Whenever a mana ability
+       * of this creature resolves" (Tyvar the Bellicose). */
+      readonly type: "mana-ability-resolved";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+      readonly amount: number;
+    })
+  | (Base & {
       /** `player` investigated (rule 701.16a): once per investigation —
        * "investigate twice" is two — after its Clue was created, or
        * whatever a replacement made of it. "Whenever you investigate"

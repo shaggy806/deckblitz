@@ -12,6 +12,7 @@ import {
   counters,
   enter,
   hand,
+  keywords,
   lands,
   life,
   pickModes,
@@ -22,6 +23,7 @@ import {
   toGraveyard,
   toHand,
   toLibrary,
+  toStep,
   tokensNamed,
   zone,
 } from "./harness.js";
@@ -124,6 +126,61 @@ describe("investigates (Erdwal Illuminator)", () => {
     enter(game, "Thraben Inspector");
     settle(game);
     expect(clues(game)).toBe(2);
+  });
+});
+
+describe("a mana ability resolves (Tyvar the Bellicose)", () => {
+  it("puts a counter on a creature whose mana ability made one mana, once each turn", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Tyvar the Bellicose");
+    const elves = spawn(game, "Llanowar Elves");
+    activate(game, elves);
+    settle(game);
+    expect(counters(game, elves)).toBe(1);
+    game.state.objects[elves].tapped = false;
+    activate(game, elves);
+    settle(game);
+    expect(counters(game, elves)).toBe(1);
+  });
+
+  it("the amount is what the ability made (Elvish Archdruid with two Elves)", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Tyvar the Bellicose");
+    const druid = spawn(game, "Elvish Archdruid");
+    activate(game, druid);
+    settle(game);
+    expect(counters(game, druid)).toBe(2);
+  });
+
+  it("sees a mana ability activated while paying a cost", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Tyvar the Bellicose");
+    const elves = spawn(game, "Llanowar Elves");
+    lands(game, "Forest", 1);
+    cast(game, toHand(game, "Grizzly Bears"));
+    expect(counters(game, elves)).toBe(1);
+  });
+
+  it("not a land's, and not an opponent's creature", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Tyvar the Bellicose");
+    const theirs = spawn(game, "Llanowar Elves", B);
+    const [forest] = lands(game, "Forest", 1);
+    activate(game, forest);
+    settle(game);
+    expect(counters(game, forest)).toBe(0);
+    expect(counters(game, theirs)).toBe(0);
+  });
+
+  it("Elves you control that attack gain deathtouch", () => {
+    const { game, a } = table({ players: 2 });
+    spawn(game, "Tyvar the Bellicose");
+    const elves = spawn(game, "Llanowar Elves");
+    const bears = spawn(game, "Grizzly Bears");
+    a.declareAttackersFn = () => [elves, bears].map((attacker) => ({ attacker, defender: B }));
+    toStep(game, "declare-blockers");
+    expect(keywords(game, elves).has("deathtouch")).toBe(true);
+    expect(keywords(game, bears).has("deathtouch")).toBe(false);
   });
 });
 

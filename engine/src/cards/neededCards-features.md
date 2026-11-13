@@ -512,6 +512,10 @@ vocabulary, `test/trigger-new-events.test.ts`.
   announces each investigation (`investigated`, journaled), and the
   `investigates` row reads it, `firstTimeEachTurn` included. Erdwal
   Illuminator.
+- `trigger:mana-ability-resolves-amount-produced` — `mana-ability-resolved`
+  (both the by-hand activation and a payment's `useManaSource`) with the
+  mana the ability made, and the `mana-ability-resolves` row. Tyvar the
+  Bellicose.
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 

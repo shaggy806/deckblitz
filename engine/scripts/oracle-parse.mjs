@@ -2652,6 +2652,10 @@ export function parseTrigger(clause) {
   if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
   // Rule 119.4: any payment of life (Font of Agonies).
   if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
+  // Rule 605.3b (Tyvar the Bellicose's grant).
+  if (/^Whenever a mana ability of (?:~|this (?:creature|artifact|land|permanent)) resolves$/.test(c)) {
+    return [{ on: "event", event: "mana-ability-resolves", who: "self" }];
+  }
   // Rule 701.16a, each investigation (Erdwal Illuminator).
   if ((m = /^Whenever you investigate( for the first time each turn)?$/.exec(c))) {
     return [{ on: "event", event: "investigates", who: "you", ...(m[1] ? { firstTimeEachTurn: true } : {}) }];

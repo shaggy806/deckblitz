@@ -102,6 +102,10 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'tokens-folded',
   // Bookkeeping for "whenever you pay life" — the life change has its own line.
   'life-paid',
+  // Bookkeeping for "whenever a mana ability of this creature resolves" — the mana's own line says it.
+  'mana-ability-resolved',
+  // Bookkeeping for "whenever you investigate" — the Clue has its own line.
+  'investigated',
 ])
 
 /** Whether `event` only shows up in the history's detailed mode. */
