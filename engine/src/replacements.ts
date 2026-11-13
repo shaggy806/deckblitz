@@ -32,6 +32,7 @@
 
 import type { StaticCondition } from "./cards/define.js";
 import type { BeholdSpec, EffectAmount, EffectSpec } from "./effects.js";
+import type { ResolvedPatch } from "./characteristics-patch.js";
 import type { CardFilter } from "./filter.js";
 import type { CardType } from "./cards.js";
 import type { ObjectId } from "./primitives.js";
@@ -499,6 +500,12 @@ export interface OthersEnterReplacement {
    * does to any enters-with-counters.
    */
   readonly counters?: { readonly kind: string; readonly amount: EffectAmount };
+  /** It enters **as** this too — Master Biomancer's "and as a Mutant in
+   * addition to its other types" (`{ addSubtypes: ["Mutant"] }`): a lasting
+   * effect on the permanent it becomes (rule 611.2c), in its layer, in place
+   * as it enters (614.12), so a trigger that sees it arrive sees a Mutant. It
+   * doesn't end when this permanent leaves. */
+  readonly enterAs?: ResolvedPatch;
 }
 
 /** "If one or more tokens would be created under your control, twice that many

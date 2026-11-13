@@ -6643,7 +6643,7 @@ clause (section 9):
   this", the first thing in the next turn to occur (rule 614.10b); a static's `condition` is "while this
   is tapped" (Time Vault). "You skip your next turn" is the `skip-turn` effect (Chronatog, Magosi).
 - `{ event: "others-enter-battlefield", filter, tapped?, untapped?,
-  counters?: { kind, amount } }` — how **other** permanents enter. `filter`
+  counters?: { kind, amount }, enterAs? }` — how **other** permanents enter. `filter`
   picks which, read from this permanent's controller's side against each one
   as it will exist on the battlefield, including the player it's entering
   under: Thalia, Heretic Cathar's "creatures and nonbasic lands your
@@ -6657,6 +6657,8 @@ clause (section 9):
   anything entering beside it: Giada's "an additional +1/+1 counter on it for
   each Angel you **already** control" is `{ countOf: { subtype: "Angel",
   controlledBy: "you" } }`; a fixed "an additional +1/+1 counter" is `1`.
+  `enterAs` is a types patch it enters with, lasting: Master Biomancer's "and as a
+  Mutant in addition to its other types" is `{ addSubtypes: ["Mutant"] }`.
   Leave "other" out of the filter: rule 614.12 already keeps a permanent's
   replacement off itself, and off anything entering at the same time as it
   (a token batch, a mass reanimation, a flicker's return, a tutor's finds are

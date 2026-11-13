@@ -592,6 +592,7 @@ import _poolMarkovPurifier from "../pool/markov-purifier.js";
 import _poolMartyrOfSpores from "../pool/martyr-of-spores.js";
 import _poolMaskedBandits from "../pool/masked-bandits.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
+import _poolMasterBiomancer from "../pool/master-biomancer.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
 import _poolMayorOfAvabruck from "../pool/mayor-of-avabruck.js";
@@ -1663,6 +1664,7 @@ const shard: CardShard = {
     _poolMartyrOfSpores,
     _poolMaskedBandits,
     _poolMaskedMeower,
+    _poolMasterBiomancer,
     _poolMasterOfDarkRites,
     _poolMayaelsAria,
     _poolMayorOfAvabruck,

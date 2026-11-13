@@ -60168,6 +60168,11 @@ controlledBy,
           const each = this.enteringCounterAmount(sourceId, source.controller, id, r.counters.amount);
           addCounters(r.counters.kind, each * (source.stackCount ?? 1));
         }
+        // "… and as a Mutant in addition to its other types" (Master
+        // Biomancer): in place as it enters (rule 614.12), lasting (611.2c).
+        if (r.enterAs !== undefined) {
+          object.modifiers.push({ timestamp: object.timestamp, ...patchModifier(r.enterAs), untilEndOfTurn: false });
+        }
       }
     }
     // A resolved "lands you control enter tapped this turn" (Nahiri's
