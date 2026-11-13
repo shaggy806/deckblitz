@@ -807,6 +807,7 @@ import _poolSliverQueen from "../pool/sliver-queen.js";
 import _poolSmittenSwordmaster from "../pool/smitten-swordmaster.js";
 import _poolSmugglersCopter from "../pool/smugglers-copter.js";
 import _poolSnareThopter from "../pool/snare-thopter.js";
+import _poolSokenzanSmelter from "../pool/sokenzan-smelter.js";
 import _poolSolTalisman from "../pool/sol-talisman.js";
 import _poolSoldeviSteamBeast from "../pool/soldevi-steam-beast.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
@@ -1846,6 +1847,7 @@ const shard: CardShard = {
     _poolSmittenSwordmaster,
     _poolSmugglersCopter,
     _poolSnareThopter,
+    _poolSokenzanSmelter,
     _poolSolTalisman,
     _poolSoldeviSteamBeast,
     _poolSolitaryCamel,

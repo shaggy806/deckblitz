@@ -7,6 +7,7 @@ import _pool70000LightYearsFromHome from "../pool/70-000-light-years-from-home.j
 import _poolAbandonReason from "../pool/abandon-reason.js";
 import _poolAbjure from "../pool/abjure.js";
 import _poolAbstruseAppropriation from "../pool/abstruse-appropriation.js";
+import _poolAbuelosAwakening from "../pool/abuelos-awakening.js";
 import _poolAbzanSkycaptain from "../pool/abzan-skycaptain.js";
 import _poolAcademicDispute from "../pool/academic-dispute.js";
 import _poolAcidRain from "../pool/acid-rain.js";
@@ -1023,6 +1024,7 @@ const shard: CardShard = {
     _poolAbandonReason,
     _poolAbjure,
     _poolAbstruseAppropriation,
+    _poolAbuelosAwakening,
     _poolAbzanSkycaptain,
     _poolAcademicDispute,
     _poolAcidRain,

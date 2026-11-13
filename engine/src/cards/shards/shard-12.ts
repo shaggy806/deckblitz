@@ -952,6 +952,7 @@ import _poolVineTrellis from "../pool/vine-trellis.js";
 import _poolVitoThornOfTheDuskRose from "../pool/vito-thorn-of-the-dusk-rose.js";
 import _poolViviensArkbow from "../pool/viviens-arkbow.js";
 import _poolVizzerdrix from "../pool/vizzerdrix.js";
+import _poolVoidMaw from "../pool/void-maw.js";
 import _poolVoltaicConstruct from "../pool/voltaic-construct.js";
 import _poolVorstclaw from "../pool/vorstclaw.js";
 import _poolVowOfDuty from "../pool/vow-of-duty.js";
@@ -1976,6 +1977,7 @@ const shard: CardShard = {
     _poolVitoThornOfTheDuskRose,
     _poolViviensArkbow,
     _poolVizzerdrix,
+    _poolVoidMaw,
     _poolVoltaicConstruct,
     _poolVorstclaw,
     _poolVowOfDuty,

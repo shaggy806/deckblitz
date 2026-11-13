@@ -646,6 +646,7 @@ import _poolPrismaticStrands from "../pool/prismatic-strands.js";
 import _poolPrisonersDilemma from "../pool/prisoners-dilemma.js";
 import _poolPropagatorDrone from "../pool/propagator-drone.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
+import _poolPsychicPossession from "../pool/psychic-possession.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
 import _poolPyrophobia from "../pool/pyrophobia.js";
 import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
@@ -1000,6 +1001,7 @@ import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
 import _tokensBirdTokenWhiteBlue from "../tokens/bird-token-white-blue.js";
 import _tokensBlueThopterToken from "../tokens/blue-thopter-token.js";
+import _tokensConstructToken31Haste from "../tokens/construct-token-3-1-haste.js";
 import _tokensCordycepsInfectedToken from "../tokens/cordyceps-infected-token.js";
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
@@ -1662,6 +1664,7 @@ const shard: CardShard = {
     _poolPrisonersDilemma,
     _poolPropagatorDrone,
     _poolProwlersHelm,
+    _poolPsychicPossession,
     _poolPunkFrogs,
     _poolPyrophobia,
     _poolQuantumMisalignment,
@@ -2018,6 +2021,7 @@ const shard: CardShard = {
     _tokensBeastTokenGarrukVeiledButcher,
     _tokensBirdTokenWhiteBlue,
     _tokensBlueThopterToken,
+    _tokensConstructToken31Haste,
     _tokensCordycepsInfectedToken,
     _tokensDinosaurToken33,
     _tokensDragonToken66,

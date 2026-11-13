@@ -307,6 +307,7 @@ import _poolFireMagic from "../pool/fire-magic.js";
 import _poolFirefly from "../pool/firefly.js";
 import _poolFirespout from "../pool/firespout.js";
 import _poolFitOfRage from "../pool/fit-of-rage.js";
+import _poolFlashOfInsight from "../pool/flash-of-insight.js";
 import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
 import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFleshmadSteed from "../pool/fleshmad-steed.js";
@@ -1348,6 +1349,7 @@ const shard: CardShard = {
     _poolFirefly,
     _poolFirespout,
     _poolFitOfRage,
+    _poolFlashOfInsight,
     _poolFleetFootedMonk,
     _poolFleetingReflection,
     _poolFleshmadSteed,

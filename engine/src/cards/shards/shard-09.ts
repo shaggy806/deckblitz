@@ -348,6 +348,7 @@ import _poolGlenElendraGuardian from "../pool/glen-elendra-guardian.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
+import _poolGlyphKeeper from "../pool/glyph-keeper.js";
 import _poolGnarledScarhide from "../pool/gnarled-scarhide.js";
 import _poolGoatnap from "../pool/goatnap.js";
 import _poolGoblinGloryChaser from "../pool/goblin-glory-chaser.js";
@@ -423,6 +424,7 @@ import _poolIcatianLieutenant from "../pool/icatian-lieutenant.js";
 import _poolIceStorm from "../pool/ice-storm.js";
 import _poolIcefall from "../pool/icefall.js";
 import _poolIcequake from "../pool/icequake.js";
+import _poolIchorElixir from "../pool/ichor-elixir.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolImmerwolf from "../pool/immerwolf.js";
@@ -1391,6 +1393,7 @@ const shard: CardShard = {
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,
+    _poolGlyphKeeper,
     _poolGnarledScarhide,
     _poolGoatnap,
     _poolGoblinGloryChaser,
@@ -1466,6 +1469,7 @@ const shard: CardShard = {
     _poolIceStorm,
     _poolIcefall,
     _poolIcequake,
+    _poolIchorElixir,
     _poolIcyReception,
     _poolIllegitimateBusiness,
     _poolImmerwolf,

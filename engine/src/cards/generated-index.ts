@@ -193,6 +193,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Clown Robot Token",
   "Clue Token",
   "Construct Token",
+  "Construct Token (3/1 Haste)",
   "Construct Token (Ancient Stone Idol)",
   "Construct Token (Defender)",
   "Construct Token (Jan Jansen, Chaos Crafter)",

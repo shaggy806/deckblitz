@@ -845,6 +845,7 @@ import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheAstonishingAntMan from "../pool/the-astonishing-ant-man.js";
 import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
+import _poolTheFirstDoctor from "../pool/the-first-doctor.js";
 import _poolTheHuntsmansRedemption from "../pool/the-huntsmans-redemption.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
 import _poolTheSkullsporeNexus from "../pool/the-skullspore-nexus.js";
@@ -1850,6 +1851,7 @@ const shard: CardShard = {
     _poolThaumaturgesFamiliar,
     _poolTheAstonishingAntMan,
     _poolTheFalconAirshipRestored,
+    _poolTheFirstDoctor,
     _poolTheHuntsmansRedemption,
     _poolThePrismaticBridge,
     _poolTheSkullsporeNexus,

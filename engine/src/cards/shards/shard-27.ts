@@ -491,6 +491,7 @@ import _poolMazeAbomination from "../pool/maze-abomination.js";
 import _poolMegaFlare from "../pool/mega-flare.js";
 import _poolMegatog from "../pool/megatog.js";
 import _poolMeklethBerserker from "../pool/mekleth-berserker.js";
+import _poolMelee from "../pool/melee.js";
 import _poolMemoryErosion from "../pool/memory-erosion.js";
 import _poolMephiticDraught from "../pool/mephitic-draught.js";
 import _poolMercurialChemister from "../pool/mercurial-chemister.js";
@@ -1484,6 +1485,7 @@ const shard: CardShard = {
     _poolMegaFlare,
     _poolMegatog,
     _poolMeklethBerserker,
+    _poolMelee,
     _poolMemoryErosion,
     _poolMephiticDraught,
     _poolMercurialChemister,

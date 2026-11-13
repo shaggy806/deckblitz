@@ -434,6 +434,7 @@ import _poolJaggedScarArchers from "../pool/jagged-scar-archers.js";
 import _poolJeeringInstigator from "../pool/jeering-instigator.js";
 import _poolJeskaiCharm from "../pool/jeskai-charm.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
+import _poolJettingGlasskite from "../pool/jetting-glasskite.js";
 import _poolJoragaAuxiliary from "../pool/joraga-auxiliary.js";
 import _poolJoragaInvocation from "../pool/joraga-invocation.js";
 import _poolJubilantMascot from "../pool/jubilant-mascot.js";
@@ -697,6 +698,7 @@ import _poolRefurbish from "../pool/refurbish.js";
 import _poolRegalCaracal from "../pool/regal-caracal.js";
 import _poolRegenerationsRestored from "../pool/regenerations-restored.js";
 import _poolRelicOfLegends from "../pool/relic-of-legends.js";
+import _poolRenegadeKrasis from "../pool/renegade-krasis.js";
 import _poolRepositorySkaab from "../pool/repository-skaab.js";
 import _poolResearchDevelopment from "../pool/research-development.js";
 import _poolRestoreWithEmpathy from "../pool/restore-with-empathy.js";
@@ -1476,6 +1478,7 @@ const shard: CardShard = {
     _poolJeeringInstigator,
     _poolJeskaiCharm,
     _poolJetmirsGarden,
+    _poolJettingGlasskite,
     _poolJoragaAuxiliary,
     _poolJoragaInvocation,
     _poolJubilantMascot,
@@ -1739,6 +1742,7 @@ const shard: CardShard = {
     _poolRegalCaracal,
     _poolRegenerationsRestored,
     _poolRelicOfLegends,
+    _poolRenegadeKrasis,
     _poolRepositorySkaab,
     _poolResearchDevelopment,
     _poolRestoreWithEmpathy,
