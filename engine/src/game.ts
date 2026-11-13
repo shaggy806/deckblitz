@@ -44079,7 +44079,16 @@ controlledBy,
     const out: PlayOption[] = [];
     // On the card itself.
     const own = card.playPermission;
-    if (own !== undefined && own.player === player && this.cardPermissionOpen(own, card, cardId, isLand, player, def.types)) {
+    if (
+      own !== undefined &&
+      own.player === player &&
+      this.cardPermissionOpen(own, card, cardId, isLand, player, def.types) &&
+      // "An artifact spell from among them": as the face cast (601.3e).
+      // Lands aren't spells.
+      (isLand ||
+        own.spell === undefined ||
+        this.withFace(cardId, face, () => matchesFilter(this.state, this.registry, cardId, own.spell!, { you: player, castX: x })))
+    ) {
       out.push({ terms: own, carrier: { kind: "card", permission: own } });
     }
     // Its own text, for its owner (rule 113.6f), face up.
