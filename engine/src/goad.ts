@@ -82,8 +82,12 @@ function goadingStatics(state: GameState, registry: CardRegistry): readonly Goad
  * power, toughness or mana value, read as they are now — Baeloth's "power
  * less than Baeloth Barrityl's power" is `{ amount: { powerOf: "source" } }`.
  * A static's block filter reads its source the same way (Champion of
- * Lambholt — `combat/eligibility.ts`), and a plain `{ countOf }` of
- * permanents from its controller's side (Kraken of the Straits).
+ * Lambholt — `combat/eligibility.ts`), a plain `{ countOf }` of
+ * permanents from its controller's side (Kraken of the Straits), and its
+ * controller's hand size, `{ cardsInHand: "you" }` — a static combat
+ * record's scope reads it too (Ensnaring Bridge's "creatures with power
+ * greater than the number of cards in your hand", `combat/rules.ts`'s
+ * `recordsOn`).
  * Nothing else can be answered in a static, and `NaN` makes any comparison
  * with it false (fails closed, as a static's `{ amount }` does everywhere).
  */
@@ -103,6 +107,11 @@ export function sourceAmount(
     }
     if ("manaValueOf" in amount && amount.manaValueOf === "source") {
       return manaValue(parseManaCost(printedManaCost(registry, source)));
+    }
+    // "The number of cards in your hand" (Ensnaring Bridge): its
+    // controller's hand as it is now.
+    if ("cardsInHand" in amount && amount.cardsInHand === "you" && Object.keys(amount).length === 1) {
+      return state.zones.perPlayer[source.controller]?.hand.length ?? 0;
     }
     // "The number of Islands you control" (Kraken of the Straits): a plain
     // count of permanents, from the source's controller's side.

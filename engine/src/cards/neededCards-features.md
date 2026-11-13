@@ -322,6 +322,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A static combat record's scope against your hand size — built 2026-11-13
+
+`static:attack-restriction-power-vs-hand-size`. `recordsOn` now reads a
+static's scope with `sourceAmount`, which gains `{ cardsInHand: "you" }`: a
+`{ kind: "cant-attack" }` record over `power: { op: "gt", n: { amount: {
+cardsInHand: "you" } } }`, read as attackers are declared. Proving: Ensnaring
+Bridge. Test: `attack-restriction-hand-size.test.ts`.
+
 ### Sharing a creature type with a set's members, by types, any or each — built 2026-11-13
 
 The group `filter:shares-creature-type-with-convokers` +
