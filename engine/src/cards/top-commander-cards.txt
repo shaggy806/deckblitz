@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4929 already implemented / 71 missing (marks refreshed 2026-11-13)
+4937 already implemented / 63 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3440,7 +3440,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3447  Ardyn, the Usurper                       {5}{B}{B}{B}     Legendary Creature — Elder Human Noble
 [x]  3448  Neyali, Suns' Vanguard                   {2}{R}{W}        Legendary Creature — Human Rebel
 [x]  3449  Rule of Law                              {2}{W}           Enchantment
-[ ]  3450  Thryx, the Sudden Storm                  {3}{U}{U}        Legendary Creature — Elemental Giant
+[x]  3450  Thryx, the Sudden Storm                  {3}{U}{U}        Legendary Creature — Elemental Giant
 [x]  3451  Prowler's Helm                           {2}              Artifact — Equipment
 [x]  3452  Gods Willing                             {W}              Instant
 [x]  3453  Dalkovan Encampment                      {0}              Land
@@ -3466,7 +3466,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3473  Leyline of the Void                      {2}{B}{B}        Enchantment
 [x]  3474  Didn't Say Please                        {1}{U}{U}        Instant
 [x]  3475  Blasting Station                         {3}              Artifact
-[ ]  3476  Burning Inquiry                          {R}              Sorcery
+[x]  3476  Burning Inquiry                          {R}              Sorcery
 [x]  3477  Master of Cruelties                      {3}{B}{R}        Creature — Demon
 [x]  3478  Coalition Relic                          {3}              Artifact
 [x]  3479  Kaalia of the Vast                       {1}{R}{W}{B}     Legendary Creature — Human Cleric
@@ -3509,7 +3509,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3516  Nim Deathmantle                          {2}              Artifact — Equipment
 [x]  3517  Agent Frank Horrigan                     {5}{B}{G}        Legendary Creature — Mutant Warrior
 [x]  3518  Karumonix, the Rat King                  {1}{B}{B}        Legendary Creature — Phyrexian Rat
-[ ]  3519  Leyline of Transformation                {2}{U}{U}        Enchantment
+[x]  3519  Leyline of Transformation                {2}{U}{U}        Enchantment
 [x]  3520  God-Eternal Bontu                        {3}{B}{B}        Legendary Creature — Zombie God
 [x]  3521  Blitzball                                {3}              Artifact
 [x]  3522  Amphin Mutineer                          {3}{U}           Creature — Salamander Pirate
@@ -3539,7 +3539,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3546  Aetherworks Marvel                       {4}              Legendary Artifact
 [x]  3547  Copper Myr                               {2}              Artifact Creature — Myr
 [x]  3548  Rakdos Joins Up                          {3}{B}{R}        Legendary Enchantment
-[ ]  3549  Jeweled Amulet                           {0}              Artifact
+[x]  3549  Jeweled Amulet                           {0}              Artifact
 [x]  3550  Selective Obliteration                   {3}{C}{C}        Sorcery
 [x]  3551  Florian, Voldaren Scion                  {1}{B}{R}        Legendary Creature — Vampire Noble
 [x]  3552  Come Back Wrong                          {2}{B}           Sorcery
@@ -3583,7 +3583,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3590  Hexplate Wallbreaker                     {3}{R}{R}        Artifact — Equipment
 [x]  3591  Bloodgift Demon                          {3}{B}{B}        Creature — Demon
 [x]  3592  Guild Artisan                            {1}{R}           Legendary Enchantment — Background
-[ ]  3593  Sower of Discord                         {4}{B}{B}        Creature — Demon
+[x]  3593  Sower of Discord                         {4}{B}{B}        Creature — Demon
 [x]  3594  Sifter of Skulls                         {3}{B}           Creature — Eldrazi
 [x]  3595  Wall of Roots                            {1}{G}           Creature — Plant Wall
 [x]  3596  Prisoner's Dilemma                       {3}{R}{R}        Sorcery
@@ -3597,7 +3597,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3604  All-Out Assault                          {2}{R}{W}{B}     Enchantment
 [x]  3605  Wildsear, Scouring Maw                   {3}{R}{G}        Legendary Creature — Elemental Wolf
 [x]  3606  Rapacious Dragon                         {4}{R}           Creature — Dragon
-[ ]  3607  Spider-Punk                              {1}{R}           Legendary Creature — Spider Human Hero
+[x]  3607  Spider-Punk                              {1}{R}           Legendary Creature — Spider Human Hero
 [x]  3608  Bramble Familiar // Fetch Quest          {1}{G} // {5}{G}{G} Creature — Elemental Raccoon // Sorcery — Adventure
 [x]  3609  Parapet Thrasher                         {2}{R}{R}        Creature — Dragon
 [x]  3610  Reveillark                               {4}{W}           Creature — Elemental
@@ -3658,7 +3658,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3665  Hidden Nursery                           {0}              Land — Cave
 [x]  3666  Polluted Bonds                           {3}{B}{B}        Enchantment
 [x]  3667  Oltec Matterweaver                       {2}{W}           Creature — Human Artificer
-[ ]  3668  Riptide Gearhulk                         {1}{W}{W}{U}{U}  Artifact Creature — Construct
+[x]  3668  Riptide Gearhulk                         {1}{W}{W}{U}{U}  Artifact Creature — Construct
 [x]  3669  Eclipsed Steppe                          {0}              Land — Plains Swamp
 [x]  3670  Shadow of the Second Sun                 {4}{U}{U}        Enchantment — Aura
 [x]  3671  Skullwinder                              {2}{G}           Creature — Snake
@@ -3728,7 +3728,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3735  Memory Erosion                           {1}{U}{U}        Enchantment
 [x]  3736  Wheel of Fate                            {0}              Sorcery
 [x]  3737  Desert of the Mindful                    {0}              Land — Desert
-[ ]  3738  Final Act                                {4}{B}{B}        Sorcery
+[x]  3738  Final Act                                {4}{B}{B}        Sorcery
 [x]  3739  Astarion, the Decadent                   {4}{W}{B}        Legendary Creature — Vampire Elf Rogue
 [x]  3740  Wildwood Scourge                         {X}{G}           Creature — Hydra
 [x]  3741  Tablet of Discovery                      {2}{R}           Artifact

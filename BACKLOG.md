@@ -71,12 +71,14 @@ section keeps only what to do next.
   approved the additional beginning phase), **B311** the next ten (ranks 2441–2796, Lim-Dûl's
   Vault to The Unagi of Kyoshi Island), **B312** the next ten (ranks 2902–3108, Duplicant to
   Rottenmouth Viper, and Drach'Nyen and Phantom Carriage on the way), **B313** the next ten (ranks
-  3173–3469, Autumn's Veil to Selective Obliteration; all small, no majors). **Next:** Spider-Punk
-  (rank 3479 — `static:spells-and-abilities-cant-be-countered`), then Jeweled Amulet, Thryx, the
-  Sudden Storm, Riptide Gearhulk, Burning Inquiry, Leyline of Transformation (likely major — ask),
-  The Masamune, Sower of Discord, Nicol Bolas, Dragon-God, Final Act (`npm run -s cards:goal -w
-  engine` in rank order; each keeps its B294 record, unsized: size it against today's engine
-  first — Strong Back's turned out to need nothing). The tail past rank 10,000 waits. **After that:**
+  3173–3469, Autumn's Veil to Selective Obliteration; all small, no majors), **B315** eight of the
+  next ten (ranks 3479–3698, Spider-Punk to Final Act; Nicol Bolas, Dragon-God's +1 left major by
+  the user). **Next:** The Masamune (rank 3596, small, not reached — `B315.json` has the research:
+  granted statics and emblems in the trigger doublers), then Victory Chimes, Transmute Artifact,
+  Fear of Sleep Paralysis, The Master, Multiplied, Jegantha, Metalworker, Aboleth Spawn, Tevesh
+  Szat, Mystic Reflection (`npm run -s cards:goal -w engine` in rank order; each keeps its B294
+  record, unsized: size it against today's engine first — Strong Back's turned out to need
+  nothing). The tail past rank 10,000 waits. **After that:**
   B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
   `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
   Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,

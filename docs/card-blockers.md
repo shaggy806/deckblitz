@@ -666,6 +666,17 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 315 (2026-11-12, `author-top-cards` on the top 5000's last cards, ranks 3479–3698)** —
+  8 authored, each on a small feature built for it: Spider-Punk (abilities can't be countered),
+  Jeweled Amulet (noting the type of mana spent), Thryx, the Sudden Storm (a cost reduction's mana
+  value counts X), Riptide Gearhulk (third from the top, one owner ordering several), Burning
+  Inquiry (every player's random discards at once), Leyline of Transformation (an opening-hand
+  Leyline makes its "as this enters" choice), Sower of Discord (two chosen players), Final Act
+  (loses all counters, energy too). Blocked (`B315.json`): The Masamune, small and not reached
+  (granted statics and emblems in the trigger doublers — the research is in its record); Nicol
+  Bolas, Dragon-God, major, left by the user (the +1's held choice of a hand card or a permanent;
+  his first static was built 2026-10-31). The other ~56 keep their B294 records, The Masamune
+  first.
 - **Batch 294 (2026-11-09, the re-attempt, `docs/plans/after-the-themes.md` step 2: every card still missing from the top 5,000 and the top 500 commanders, 245)** — 120 authored by four card-author agents of 61-62 (Minsc & Boo, Protean Hulk, Mr. House, Noctis, Hazel, Orvar, Elesh Norn, Kozilek, Elspeth Conquers Death, Winding Constrictor, Thief of Sanity and the rest; `B294.json`). 125 blocked on 124 narrow keys, 10 new (`effect:additional-beginning-phase` alone serves two), so about half the records were out of date. A fresh reader over all 137 files found 3; each checked against the code: Brainstealer Dragon's any-color and Satoru's token copy fixed, Rise of the Witch-king blocked (`filter:not-this-way-by-you`). Firion blocked on a filter-binding bug (`bug:copy-exception-static-self-reference`). Desert authored: its old `bug:attackers-through-end-of-combat` record no longer held.
 - **Batch 295 (2026-11-10, asked for by name: the ten cards the bots' strong decks play stand-ins for)** — all ten authored, plus Instrument of the Bards and Revival of the Ancestors, which shared their keys (`B295.json`). Seven of the ten records were out of date and needed no engine code; three keys were built (`static:prohibit-by-player-turn-history`, `effect:saga-chapter-divided`, `effect:no-max-hand-size-while-you-control-source`). Freed and not yet read against their text: Enduring Angel (`effect:double-life-total`), Summon: Brynhildr (`effect:trigger-spell-gains-keyword`; its "when you next cast" is a delayed trigger, so try it first).
 - **Batch 291 (2026-11-09, need-keys Phase 2: `author-freed overnight`, the last of the queue, 145 cards)** — 109 authored, among them Atarka's Command, Fires of Invention, Dack Fayden, Elder Brain, Restore Balance and Balancing Act. 36 blocked on 32 narrow keys (`B291.json`). Shared: a can't-gain-life bound to one named player (Screaming Nemesis, Stigma Lasher, Flames of the Blood Hand), scavenge's power as it last existed in the graveyard (Dodgy Jalopy, Young Deathclaws), becomes crewed for the first time each turn (Mighty Servant of Leuk-o, Mindlink Mech), directly above in a graveyard (Death Spark, Krovikan Horror). 51 of the 109 have no test of their own; a fresh reader read all of them against Oracle.

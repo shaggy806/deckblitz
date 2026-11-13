@@ -1,0 +1,29 @@
+{
+ "batch": "B315",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 3479–3698 (2026-11-12): the next ten of the cards still missing from top-commander-cards.txt (B294 records), built best rank first, no agents. Features: `grantsToSpells.andAbilities` (abilities can't be countered — Spider-Punk), a cost modification's mana value counting the announced X (`castX` — Thryx), `note`'s `manaTypeSpent` (Jeweled Amulet), `put-on-libraries`' `{ fromTop }` with the owner ordering several (Riptide Gearhulk), random discards of every player held and discarded at once (Burning Inquiry), opening-hand entries making their \"as this enters\" choices (Leyline of Transformation), `chooseTwoPlayersOnEnter` with the `chosen-players` damage recipient and the `other-chosen-player` scope (Sower of Discord), `remove-player-counters`' `every-kind` (Final Act; contract counters now removable too). Nicol Bolas, Dragon-God left for later by the user (major); The Masamune not reached (small).",
+ "authored": [
+  { "name": "Spider-Punk", "files": ["engine/src/cards/pool/spider-punk.ts"], "tested": true },
+  { "name": "Jeweled Amulet", "files": ["engine/src/cards/pool/jeweled-amulet.ts"], "tested": true },
+  { "name": "Thryx, the Sudden Storm", "files": ["engine/src/cards/pool/thryx-the-sudden-storm.ts"], "tested": true },
+  { "name": "Riptide Gearhulk", "files": ["engine/src/cards/pool/riptide-gearhulk.ts"], "tested": true },
+  { "name": "Burning Inquiry", "files": ["engine/src/cards/pool/burning-inquiry.ts"], "tested": true },
+  { "name": "Leyline of Transformation", "files": ["engine/src/cards/pool/leyline-of-transformation.ts"], "tested": true },
+  { "name": "Sower of Discord", "files": ["engine/src/cards/pool/sower-of-discord.ts"], "tested": true },
+  { "name": "Final Act", "files": ["engine/src/cards/pool/final-act.ts"], "tested": true }
+ ],
+ "blocked": [
+  {
+   "name": "The Masamune",
+   "needs": ["static:granted-dies-trigger-doubling"],
+   "size": "small",
+   "why": "Not reached. Researched: `Game.causeTriggerDoublers` reads `registry.get(...).static` only, so a static granted to the equipped creature (`grantsStatic`) isn't seen — `staticsOfSource` would; its look-back loop (a creature dying with the equipped one, itself included) reads the departed creature's printed statics and needs the granted ones as it last existed (the Equipment stays attached until the state-based check, as Wizard's Staff's `host` relies on); an emblem's triggers never reach the doublers (`permanentSource` is false for them), and the doubler needs a source clause \"this creature or an emblem you own\". The first strike and must-be-blocked while attacking are a conditional static on the Equipment."
+  },
+  {
+   "name": "Nicol Bolas, Dragon-God",
+   "needs": ["effect:each-opponent-exiles-card-from-hand-or-permanent"],
+   "size": "major",
+   "why": "Left for later by the user (2026-11-12). The +1: each opponent in turn order chooses a card in their hand (unrevealed) or a permanent they control, knowing the choices before theirs, then all are exiled at once — a held choice across two zones. His first static is built (`static:gain-other-planeswalkers-loyalty-abilities`, 2026-10-31)."
+  }
+ ]
+}
