@@ -7218,6 +7218,7 @@ import _poolDrJosephMbenga from "./pool/dr-joseph-mbenga.js";
 import _poolDrLeonardBonesMccoy from "./pool/dr-leonard-bones-mccoy.js";
 import _poolDrMadisonLi from "./pool/dr-madison-li.js";
 import _poolDrPulaskiCynicalClinician from "./pool/dr-pulaski-cynical-clinician.js";
+import _poolDrachnyen from "./pool/drachnyen.js";
 import _poolDracogenesis from "./pool/dracogenesis.js";
 import _poolDraconauticsEngineer from "./pool/draconautics-engineer.js";
 import _poolDraconianCylix from "./pool/draconian-cylix.js";
@@ -19760,6 +19761,7 @@ import _poolPhantasmalTerrain from "./pool/phantasmal-terrain.js";
 import _poolPhantatog from "./pool/phantatog.js";
 import _poolPhantomBeast from "./pool/phantom-beast.js";
 import _poolPhantomBlade from "./pool/phantom-blade.js";
+import _poolPhantomCarriage from "./pool/phantom-carriage.js";
 import _poolPhantomFlock from "./pool/phantom-flock.js";
 import _poolPhantomGeneral from "./pool/phantom-general.js";
 import _poolPhantomInterference from "./pool/phantom-interference.js";
@@ -39859,6 +39861,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrLeonardBonesMccoy,
   _poolDrMadisonLi,
   _poolDrPulaskiCynicalClinician,
+  _poolDrachnyen,
   _poolDracogenesis,
   _poolDraconauticsEngineer,
   _poolDraconianCylix,
@@ -52401,6 +52404,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhantatog,
   _poolPhantomBeast,
   _poolPhantomBlade,
+  _poolPhantomCarriage,
   _poolPhantomFlock,
   _poolPhantomGeneral,
   _poolPhantomInterference,
@@ -72513,6 +72517,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dr-leonard-bones-mccoy": _poolDrLeonardBonesMccoy,
   "pool/dr-madison-li": _poolDrMadisonLi,
   "pool/dr-pulaski-cynical-clinician": _poolDrPulaskiCynicalClinician,
+  "pool/drachnyen": _poolDrachnyen,
   "pool/dracogenesis": _poolDracogenesis,
   "pool/draconautics-engineer": _poolDraconauticsEngineer,
   "pool/draconian-cylix": _poolDraconianCylix,
@@ -85055,6 +85060,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phantatog": _poolPhantatog,
   "pool/phantom-beast": _poolPhantomBeast,
   "pool/phantom-blade": _poolPhantomBlade,
+  "pool/phantom-carriage": _poolPhantomCarriage,
   "pool/phantom-flock": _poolPhantomFlock,
   "pool/phantom-general": _poolPhantomGeneral,
   "pool/phantom-interference": _poolPhantomInterference,

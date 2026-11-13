@@ -197,6 +197,7 @@ import _poolDormantGomazoa from "../pool/dormant-gomazoa.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDoubleJump from "../pool/double-jump.js";
+import _poolDrachnyen from "../pool/drachnyen.js";
 import _poolDragonThroneOfTarkir from "../pool/dragon-throne-of-tarkir.js";
 import _poolDragonWhelp from "../pool/dragon-whelp.js";
 import _poolDrainpipeVermin from "../pool/drainpipe-vermin.js";
@@ -1199,6 +1200,7 @@ const shard: CardShard = {
     _poolDoseOfDawnglow,
     _poolDoubleDown,
     _poolDoubleJump,
+    _poolDrachnyen,
     _poolDragonThroneOfTarkir,
     _poolDragonWhelp,
     _poolDrainpipeVermin,
