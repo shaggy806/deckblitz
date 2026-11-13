@@ -9,7 +9,7 @@
  */
 
 import type { ThisWayKind } from "./effects.js";
-import type { GameEvent } from "./events.js";
+import type { GameEvent, Vote } from "./events.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameState } from "./state.js";
 import type { TargetRef } from "./target.js";
@@ -42,6 +42,19 @@ export function eventsSince(state: GameState, seq: number): readonly GameEvent[]
   let i = log.length;
   while (i > 0 && log[i - 1].seq >= seq) i -= 1;
   return log.slice(i);
+}
+
+/**
+ * The votes (or "each player chooses" answers) of the last `vote` the
+ * resolution under way has held, in the order cast — none before it has
+ * held one. What a filter reads of "the color **its controller** chose"
+ * (Selective Obliteration).
+ */
+export function votesThisWay(state: GameState, since: number | undefined = state.resolutionSince): readonly Vote[] {
+  if (since === undefined) return [];
+  let held: readonly Vote[] = [];
+  for (const event of eventsSince(state, since)) if (event.type === "votes-finished") held = event.votes;
+  return held;
 }
 
 /**

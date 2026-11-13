@@ -23597,6 +23597,7 @@ import _poolSekkuarDeathkeeper from "./pool/sekkuar-deathkeeper.js";
 import _poolSelaTalShiarParadox from "./pool/sela-tal-shiar-paradox.js";
 import _poolSelectForInspection from "./pool/select-for-inspection.js";
 import _poolSelectiveMemory from "./pool/selective-memory.js";
+import _poolSelectiveObliteration from "./pool/selective-obliteration.js";
 import _poolSeleniaDarkAngel from "./pool/selenia-dark-angel.js";
 import _poolSeleniaTheCursedHeart from "./pool/selenia-the-cursed-heart.js";
 import _poolSelesnyaCharm from "./pool/selesnya-charm.js";
@@ -56249,6 +56250,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSelaTalShiarParadox,
   _poolSelectForInspection,
   _poolSelectiveMemory,
+  _poolSelectiveObliteration,
   _poolSeleniaDarkAngel,
   _poolSeleniaTheCursedHeart,
   _poolSelesnyaCharm,
@@ -88914,6 +88916,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sela-tal-shiar-paradox": _poolSelaTalShiarParadox,
   "pool/select-for-inspection": _poolSelectForInspection,
   "pool/selective-memory": _poolSelectiveMemory,
+  "pool/selective-obliteration": _poolSelectiveObliteration,
   "pool/selenia-dark-angel": _poolSeleniaDarkAngel,
   "pool/selenia-the-cursed-heart": _poolSeleniaTheCursedHeart,
   "pool/selesnya-charm": _poolSelesnyaCharm,

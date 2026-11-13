@@ -45,7 +45,7 @@ import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
 import type { TargetRef } from "./target.js";
-import { thisWayEntries } from "./this-way.js";
+import { thisWayEntries, votesThisWay } from "./this-way.js";
 import { isObjectSetRef, staticSetMembers, type ObjectSetRef } from "./object-sets.js";
 import type { ObjectRef, PlayerRef } from "./refs.js";
 
@@ -849,6 +849,15 @@ export interface CardFilter {
    * matches — a colourless object never does (rule 105.2c).
    */
   readonly ofChosenColor?: true;
+  /**
+   * It's **only the color its controller chose** in this resolution's
+   * `vote` (with `choose`) — Selective Obliteration's "exile each permanent
+   * unless it's colorless or it's only the color its controller chose": one
+   * colour, and the one whose option its controller picked, option `i`
+   * being colour `i` of this list. A multicoloured or colourless object, or
+   * one whose controller chose nothing, doesn't match.
+   */
+  readonly onlyColorItsControllerChose?: readonly Color[];
   /**
    * Has this name (rule 201.2) — one of its names, so either half of a split
    * card (709.4a). What a chosen name becomes in a resolving effect: `{
@@ -2353,7 +2362,8 @@ export function matchesFilter(
     filter.colorless !== undefined ||
     filter.multicolored !== undefined ||
     filter.colorCount !== undefined ||
-    filter.ofChosenColor !== undefined
+    filter.ofChosenColor !== undefined ||
+    filter.onlyColorItsControllerChose !== undefined
   ) {
     const colors: ReadonlySet<Color> =
       live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
@@ -2374,6 +2384,13 @@ export function matchesFilter(
       return false;
     }
     if (filter.colorCount !== undefined && colors.size !== filter.colorCount) return false;
+    if (filter.onlyColorItsControllerChose !== undefined) {
+      const controller = live !== undefined ? live.controller : lki!.controller;
+      const vote = votesThisWay(state).find((v) => v.voter === controller && "option" in v.choice);
+      const chosen =
+        vote !== undefined && "option" in vote.choice ? filter.onlyColorItsControllerChose[vote.choice.option] : undefined;
+      if (chosen === undefined || colors.size !== 1 || !colors.has(chosen)) return false;
+    }
   }
 
   if (filter.blocking !== undefined) {

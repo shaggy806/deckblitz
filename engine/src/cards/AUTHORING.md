@@ -3425,7 +3425,11 @@ five, its `chosenOnEnter`) — Pentarch Paladin's "target permanent of the
 chosen color", Curse of Wizardry's "a spell of the chosen color" — and in a
 `prevent-damage-from-chosen-source`'s filter ("a source of your choice of the
 chosen color", Story Circle), the shield keeping the colour chosen as it
-resolved. Prefer it to one conditional copy per colour. Numeric fields take
+resolved. Prefer it to one conditional copy per colour.
+`onlyColorItsControllerChose: Color[]` reads a `vote` (`choose: true`) this
+resolution held instead, per permanent: one colour, the one its controller
+picked, option `i` being colour `i` (Selective Obliteration's "unless it's
+only the color its controller chose", one `exile-all`). Numeric fields take
 `{ op: "eq"|"ne"|"lt"|"lte"|"gt"|"gte", n }`.
 
 Clauses about the card's own properties:
