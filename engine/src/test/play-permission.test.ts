@@ -88,7 +88,9 @@ const TERMS = [
   "gainsTriggered",
   "becomes",
 ];
-const GRANT_EXTRAS = ["duration", "byOwner", "whileSource", "fromNextTurn"];
+// `affinity` is read only off a permission kept on the card (the cost reads
+// the cast's own card permission), which is what these grants make.
+const GRANT_EXTRAS = ["duration", "byOwner", "whileSource", "fromNextTurn", "affinity"];
 
 describe("the pool holds only the one vocabulary", () => {
   const all = [...POOL_CARDS, ...TOKEN_CARDS];
@@ -125,12 +127,12 @@ describe("the pool holds only the one vocabulary", () => {
       const permission = object["mayPlay"] as Record<string, unknown> | undefined;
       if (permission !== undefined && typeof permission === "object") {
         const allowed = "from" in permission
-          ? [...TERMS, "from", "whose", "linked", "exiledByYou", "anyGraveyard", "landAndSpell"]
+          ? [...TERMS, "from", "whose", "linked", "exiledByYou", "anyGraveyard", "landAndSpell", "eachPlayer"]
           : [...TERMS, ...GRANT_EXTRAS];
         check(permission, name, allowed, "mayPlay");
       }
       if (object["kind"] === "impulse-exile") {
-        check(object, name, [...TERMS, ...GRANT_EXTRAS, "kind", "amount", "whose", "whoseIf", "choose", "faceDown", "linked"], "impulse-exile");
+        check(object, name, [...TERMS, ...GRANT_EXTRAS, "kind", "amount", "whose", "whoseIf", "choose", "faceDown", "linked", "grantIf"], "impulse-exile");
       }
       if (object["kind"] === "grant-play") {
         check(object, name, [...TERMS, ...GRANT_EXTRAS, "kind", "cards", "to"], "grant-play");
