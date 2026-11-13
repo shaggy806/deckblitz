@@ -278,3 +278,48 @@ describe("Neyith of the Dire Hunt: one card when one or more of your creatures f
     }
   });
 });
+
+describe("Teferi, Mage of Zhalfir: creature cards you own that aren't on the battlefield have flash", () => {
+  it("your creature card casts at instant speed, on an opponent's turn; a sorcery and an opponent's creature don't", () => {
+    const { game } = table();
+    spawn(game, "Teferi, Mage of Zhalfir");
+    lands(game, "Forest", 6);
+    lands(game, "Forest", 6, B);
+    const bears = toHand(game, "Grizzly Bears");
+    const sorcery = toHand(game, "Divination");
+    const theirs = toHand(game, "Grizzly Bears", B);
+    expect(keywords(game, bears).has("flash")).toBe(true);
+    expect(keywords(game, sorcery).has("flash")).toBe(false);
+    expect(keywords(game, theirs).has("flash")).toBe(false);
+    // Bob's upkeep: alice has priority after he passes.
+    toStep(game, "upkeep", B);
+    game.dispatch({ type: "pass-priority", player: B });
+    expect(game.state.priority.holder).toBe(A);
+    expect(() => cast(game, sorcery)).toThrow();
+    cast(game, bears);
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+
+  it("without Teferi the same cast is refused (the control), and a Teferi with no abilities grants nothing", () => {
+    const { game } = table();
+    lands(game, "Forest", 6);
+    const bears = toHand(game, "Grizzly Bears");
+    toStep(game, "upkeep", B);
+    game.dispatch({ type: "pass-priority", player: B });
+    expect(() => cast(game, bears)).toThrow();
+    const teferi = spawn(game, "Teferi, Mage of Zhalfir");
+    expect(keywords(game, bears).has("flash")).toBe(true);
+    game.debugApplyEffect(B, { kind: "become", target: 0, loseAbilities: true, duration: "end-of-turn" }, [ref(teferi)]);
+    settle(game);
+    expect(keywords(game, bears).has("flash")).toBe(false);
+  });
+
+  it("an opponent casts only at sorcery timing", () => {
+    const { game } = table();
+    spawn(game, "Teferi, Mage of Zhalfir");
+    lands(game, "Mountain", 2, B);
+    const bolt = toHand(game, "Lightning Bolt", B);
+    game.dispatch({ type: "pass-priority", player: A });
+    expect(() => cast(game, bolt, { player: B, targets: [ref(A)] })).toThrow();
+  });
+});

@@ -157,6 +157,7 @@ import {
   exemptFromLegendRule,
   hasAnyAbility,
   hasLostAbilities,
+  hasKeywordOffBattlefield,
   emblemStatics,
   staticAffects,
   grantedStatics,
@@ -47805,6 +47806,10 @@ controlledBy,
    *   Wind), or "the next sorcery spell you cast this turn …" (Quicken),
    *   which `spendNextSpellFlash` ends once that spell is cast. */
   private castsAsThoughFlash(player: PlayerId, cardId: ObjectId): boolean {
+    // A keyword the card has where it is (rule 113.6): "creature cards you
+    // own that aren't on the battlefield have flash" (Teferi, Mage of
+    // Zhalfir), read as the face being cast.
+    if (hasKeywordOffBattlefield(this.state, this.registry, cardId, "flash")) return true;
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, source)) continue;

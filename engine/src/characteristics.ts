@@ -3512,6 +3512,20 @@ function outsideTypeSources(state: GameState, registry: CardRegistry): readonly 
 }
 const OUTSIDE_TYPE_SOURCES = "outside-type-sources";
 
+/** Whether card or spell `id`, off the battlefield, has `keyword` from an
+ * `outsideBattlefield` static ("creature cards you own that aren't on the
+ * battlefield have flash" — Teferi, Mage of Zhalfir). What a cast's timing
+ * asks beside the card's printed keywords; folds the card only when some
+ * static on the battlefield grants that keyword. */
+export function hasKeywordOffBattlefield(state: GameState, registry: CardRegistry, id: ObjectId, keyword: Keyword): boolean {
+  const object = state.objects[id];
+  if (object === undefined || object.kind !== "card" || object.zone === "battlefield") return false;
+  if (!outsideTypeSources(state, registry).some(({ ability }) => ability.outsideBattlefield!.keywords?.includes(keyword) === true)) {
+    return false;
+  }
+  return computeCharacteristics(state, registry, id).keywords.has(keyword);
+}
+
 /** What this card's own text makes of it off the battlefield (see
  * `StaticAbility.selfOutsideBattlefield`), if it says anything. */
 function selfOutsideBattlefield(
@@ -6197,6 +6211,17 @@ function computeCharacteristicsUncached(
   // A spell's keywords from what grants them to spells (`grantsToSpells`).
   if (object.zone === "stack" && object.kind === "card") {
     for (const keyword of spellGrantedKeywords(state, registry, object)) keywords.add(keyword);
+  }
+  // Off the battlefield, a static reaching there (rule 604.1): "creature
+  // cards you own that aren't on the battlefield have flash" (Teferi, Mage
+  // of Zhalfir) — an ability the source has, so not while it has lost them.
+  if (!onBattlefield && object.kind === "card") {
+    for (const { source, ability } of outsideTypeSources(state, registry)) {
+      const granted = ability.outsideBattlefield?.keywords;
+      if (granted === undefined || hasLostAbilities(state, registry, source)) continue;
+      if (!outsideReaches(state, registry, source, ability, object, types)) continue;
+      for (const keyword of granted) keywords.add(keyword);
+    }
   }
   for (const modifier of object.modifiers) {
     const granted = modifierGrantApplies(modifier, lostAt);

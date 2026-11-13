@@ -5474,7 +5474,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   its `grantPt` and `grantKeywords` on one static), "all nonland permanents are
   legendary" (Leyline of Singularity), "permanents with ice counters on them are
   snow" (Rimefeather Owl). `outsideBattlefield` takes it too (Rootpath
-  Purifier's "land cards in your library are basic").
+  Purifier's "land cards in your library are basic"). `outsideBattlefield`'s
+  own `keywords` is layer 6 there: "creature cards you own that aren't on the
+  battlefield **have flash**" (Teferi, Mage of Zhalfir —
+  `outsideBattlefield: { ofType: ["creature"], keywords: ["flash"] }`), a
+  keyword the cards have, which cast and suspend timing read; not
+  `castAsThoughFlash`, a permission of the controller's.
 - `setSubtypes: string[]` — layer 4: the affected permanents' subtypes of the
   same kind are **replaced** by these (rule 205.1a), the rest staying —
   Goddric, Cloaked Reveler's "is a Dragon … (He loses all other creature

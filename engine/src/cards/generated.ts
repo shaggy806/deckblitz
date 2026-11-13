@@ -27252,6 +27252,7 @@ import _poolTeeterpeakAmbusher from "./pool/teeterpeak-ambusher.js";
 import _poolTeethingWurmlet from "./pool/teething-wurmlet.js";
 import _poolTeferiAkosaOfZhalfir from "./pool/teferi-akosa-of-zhalfir.js";
 import _poolTeferiHeroOfDominaria from "./pool/teferi-hero-of-dominaria.js";
+import _poolTeferiMageOfZhalfir from "./pool/teferi-mage-of-zhalfir.js";
 import _poolTeferiMasterOfTime from "./pool/teferi-master-of-time.js";
 import _poolTeferiTemporalArchmage from "./pool/teferi-temporal-archmage.js";
 import _poolTeferiTemporalPilgrim from "./pool/teferi-temporal-pilgrim.js";
@@ -59957,6 +59958,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTeethingWurmlet,
   _poolTeferiAkosaOfZhalfir,
   _poolTeferiHeroOfDominaria,
+  _poolTeferiMageOfZhalfir,
   _poolTeferiMasterOfTime,
   _poolTeferiTemporalArchmage,
   _poolTeferiTemporalPilgrim,
@@ -92675,6 +92677,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/teething-wurmlet": _poolTeethingWurmlet,
   "pool/teferi-akosa-of-zhalfir": _poolTeferiAkosaOfZhalfir,
   "pool/teferi-hero-of-dominaria": _poolTeferiHeroOfDominaria,
+  "pool/teferi-mage-of-zhalfir": _poolTeferiMageOfZhalfir,
   "pool/teferi-master-of-time": _poolTeferiMasterOfTime,
   "pool/teferi-temporal-archmage": _poolTeferiTemporalArchmage,
   "pool/teferi-temporal-pilgrim": _poolTeferiTemporalPilgrim,

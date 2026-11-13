@@ -877,6 +877,7 @@ import _poolTalonsOfFalkenrath from "../pool/talons-of-falkenrath.js";
 import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
+import _poolTeferiMageOfZhalfir from "../pool/teferi-mage-of-zhalfir.js";
 import _poolTelJiladStylus from "../pool/tel-jilad-stylus.js";
 import _poolTempleOfAclazotz from "../pool/temple-of-aclazotz.js";
 import _poolTemptWithReflections from "../pool/tempt-with-reflections.js";
@@ -1925,6 +1926,7 @@ const shard: CardShard = {
     _poolTangletrap,
     _poolTanukiTransplanter,
     _poolTaxiDriver,
+    _poolTeferiMageOfZhalfir,
     _poolTelJiladStylus,
     _poolTempleOfAclazotz,
     _poolTemptWithReflections,

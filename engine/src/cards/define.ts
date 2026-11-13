@@ -2853,6 +2853,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * stack get +3/+3" (The Muckslinger Gang) — what a P/T-reading filter, a
      * "power 2 or less" tutor or reanimation, then sees. */
     readonly grantPt?: readonly [number, number];
+    /** Layer 6 off the battlefield: "creature cards you own that aren't on
+     * the battlefield **have flash**" (Teferi, Mage of Zhalfir) — a keyword
+     * the cards themselves have (rule 113.6), so every timing check and every
+     * `hasKeyword` filter sees it wherever the card may be cast from, where
+     * `castAsThoughFlash` is only a permission of its controller's. Gone
+     * while the source has lost its abilities. */
+    readonly keywords?: readonly Keyword[];
   };
   /**
    * An alternative cost (rule 118.9) for the spells this permanent's
