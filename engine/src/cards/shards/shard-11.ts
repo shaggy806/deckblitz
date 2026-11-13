@@ -593,6 +593,7 @@ import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNestedGhoul from "../pool/nested-ghoul.js";
 import _poolNeurokStealthsuit from "../pool/neurok-stealthsuit.js";
 import _poolNewFrontiers from "../pool/new-frontiers.js";
+import _poolNeyithOfTheDireHunt from "../pool/neyith-of-the-dire-hunt.js";
 import _poolNickFuryAgentOfSHIELD from "../pool/nick-fury-agent-of-s-h-i-e-l-d.js";
 import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
 import _poolNightfallPredator from "../pool/nightfall-predator.js";
@@ -1625,6 +1626,7 @@ const shard: CardShard = {
     _poolNestedGhoul,
     _poolNeurokStealthsuit,
     _poolNewFrontiers,
+    _poolNeyithOfTheDireHunt,
     _poolNickFuryAgentOfSHIELD,
     _poolNightdrinkerMoroii,
     _poolNightfallPredator,

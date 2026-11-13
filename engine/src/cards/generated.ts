@@ -18339,6 +18339,7 @@ import _poolNexusOfFate from "./pool/nexus-of-fate.js";
 import _poolNexusWardens from "./pool/nexus-wardens.js";
 import _poolNeyaliSunsVanguard from "./pool/neyali-suns-vanguard.js";
 import _poolNeyamShaiMurad from "./pool/neyam-shai-murad.js";
+import _poolNeyithOfTheDireHunt from "./pool/neyith-of-the-dire-hunt.js";
 import _poolNezahalPrimalTide from "./pool/nezahal-primal-tide.js";
 import _poolNezumiBladeblesser from "./pool/nezumi-bladeblesser.js";
 import _poolNezumiBoneReader from "./pool/nezumi-bone-reader.js";
@@ -51043,6 +51044,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNexusWardens,
   _poolNeyaliSunsVanguard,
   _poolNeyamShaiMurad,
+  _poolNeyithOfTheDireHunt,
   _poolNezahalPrimalTide,
   _poolNezumiBladeblesser,
   _poolNezumiBoneReader,
@@ -83760,6 +83762,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nexus-wardens": _poolNexusWardens,
   "pool/neyali-suns-vanguard": _poolNeyaliSunsVanguard,
   "pool/neyam-shai-murad": _poolNeyamShaiMurad,
+  "pool/neyith-of-the-dire-hunt": _poolNeyithOfTheDireHunt,
   "pool/nezahal-primal-tide": _poolNezahalPrimalTide,
   "pool/nezumi-bladeblesser": _poolNezumiBladeblesser,
   "pool/nezumi-bone-reader": _poolNezumiBoneReader,

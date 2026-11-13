@@ -122,6 +122,11 @@ export const TRIGGER_EVENTS = {
   /** "Whenever a creature you control fights" (rule 701.14): one occurrence
    * per fighter, each its own event. */
   fights: row({ type: "creature-fought", object: (e) => e.object }),
+  /** "Whenever **one or more** creatures you control fight" (Neyith of the
+   * Dire Hunt), with `batched`: the fight as one event — both creatures, or
+   * all those of several fights an effect has happen at once — so two of
+   * yours fighting each other is one trigger. */
+  "creatures-fight": row({ type: "creatures-fought", objects: (e) => e.objects }),
   /** "Whenever you win a coin flip" (rule 705). */
   "wins-coin-flip": row({ type: "coin-flipped", when: (e) => e.won === true, player: (e) => e.player }),
   /** "Whenever you lose a coin flip" (rule 705). */

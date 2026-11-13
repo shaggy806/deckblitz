@@ -55363,6 +55363,7 @@ controlledBy,
     if (!oneSided && aLive && bLive) {
       this.emit({ type: "creature-fought", object: a.object, opponent: b.object });
       if (b.object !== a.object) this.emit({ type: "creature-fought", object: b.object, opponent: a.object });
+      this.emit({ type: "creatures-fought", objects: b.object !== a.object ? [a.object, b.object] : [a.object] });
     }
   }
 
@@ -55463,6 +55464,8 @@ controlledBy,
       this.emit({ type: "creature-fought", object: a, opponent: b });
       this.emit({ type: "creature-fought", object: b, opponent: a });
     }
+    // The fights happened at once: one event for all who fought.
+    if (fights.length > 0) this.emit({ type: "creatures-fought", objects: [...new Set(fights.flatMap(({ a, b }) => [a, b]))] });
   }
 
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: the

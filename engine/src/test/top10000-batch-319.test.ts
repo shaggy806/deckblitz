@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pt, ref, settle, spawn, subtypes, table, toHand, toStep, types, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toHand, toStep, types, zone } from "./harness.js";
 import { computeCharacteristics } from "../characteristics.js";
 import { printedCardName } from "../state.js";
 import type { ObjectId } from "../primitives.js";
@@ -218,5 +218,63 @@ describe("The Millennium Calendar: a time counter for each permanent your untap 
     expect(life(game, A)).toBe(20);
     expect(life(game, B)).toBe(20 - 1000);
     expect(life(game, C)).toBe(20 - 1000);
+  });
+});
+
+describe("Neyith of the Dire Hunt: one card when one or more of your creatures fight or become blocked", () => {
+  it("two of your creatures fighting each other draw one card", () => {
+    const { game } = table();
+    spawn(game, "Neyith of the Dire Hunt");
+    const x = spawn(game, "Hill Giant");
+    const y = spawn(game, "Hill Giant");
+    const before = hand(game, A).length;
+    game.debugApplyEffect(A, { kind: "fight", a: 0, b: 1 }, [ref(x), ref(y)]);
+    settle(game);
+    expect(hand(game, A).length).toBe(before + 1);
+  });
+
+  it("an opponent's creatures fighting each other draw nothing", () => {
+    const { game } = table();
+    spawn(game, "Neyith of the Dire Hunt");
+    const x = spawn(game, "Hill Giant", B);
+    const y = spawn(game, "Hill Giant", B);
+    const before = hand(game, A).length;
+    game.debugApplyEffect(B, { kind: "fight", a: 0, b: 1 }, [ref(x), ref(y)]);
+    settle(game);
+    expect(hand(game, A).length).toBe(before);
+  });
+
+  it("two of your creatures becoming blocked draw one card", () => {
+    const { game, a, b } = table();
+    spawn(game, "Neyith of the Dire Hunt");
+    const x = spawn(game, "Hill Giant");
+    const y = spawn(game, "Hill Giant");
+    const p = spawn(game, "Hill Giant", B);
+    const q = spawn(game, "Hill Giant", B);
+    // No target for the combat ability's doubling matters here: decline it.
+    pickModes(a);
+    const before = hand(game, A).length;
+    b.declareBlockersFn = () => [{ blocker: p, attacker: x }, { blocker: q, attacker: y }];
+    attack(game, a, [x, y]);
+    expect(hand(game, A).length).toBe(before + 1);
+  });
+
+  it("paying doubles the target's power; it must be blocked this combat either way", () => {
+    for (const pay of [true, false]) {
+      const { game, a } = table();
+      spawn(game, "Neyith of the Dire Hunt");
+      lands(game, "Forest", 3);
+      const giant = spawn(game, "Hill Giant");
+      pickTargets(a, giant);
+      if (pay) pickModes(a, 0);
+      else pickModes(a);
+      toStep(game, "declare-attackers");
+      expect(pt(game, giant).power).toBe(pay ? 6 : 3);
+      const rules = computeCharacteristics(game.state, game.registry, giant).restrictions;
+      expect(rules.has("must-be-blocked-if-able")).toBe(true);
+      toStep(game, "postcombat-main");
+      expect(computeCharacteristics(game.state, game.registry, giant).restrictions.has("must-be-blocked-if-able")).toBe(false);
+      expect(pt(game, giant).power).toBe(pay ? 6 : 3);
+    }
   });
 });

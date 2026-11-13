@@ -1250,6 +1250,14 @@ export type GameEvent =
       readonly opponent: ObjectId;
     })
   | (Base & {
+      /** One fight, or the several an effect has happen at once: every
+       * creature that fought in it, each once, after their own
+       * `creature-fought` events. What "whenever **one or more** creatures you
+       * control fight" triggers on, once (Neyith of the Dire Hunt). */
+      readonly type: "creatures-fought";
+      readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
       /** Two permanents exchanged text boxes (rule 612.5 — Deadpool, Trading
        * Card): `object` now has `withObject`'s rules text, and the other way
        * round. */
