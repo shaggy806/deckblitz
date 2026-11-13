@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4981 already implemented / 19 missing (marks refreshed 2026-11-13)
+4986 already implemented / 14 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4538,7 +4538,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4545  Banquet Guests                           {X}{G}{W}        Creature — Halfling Citizen
 [x]  4546  Burning-Rune Demon                       {4}{B}{B}        Creature — Demon Berserker
 [x]  4547  Restart Sequence                         {3}{B}           Sorcery
-[ ]  4548  Sokrates, Athenian Teacher               {1}{W}{U}        Legendary Creature — Human Advisor
+[x]  4548  Sokrates, Athenian Teacher               {1}{W}{U}        Legendary Creature — Human Advisor
 [x]  4549  Dreadbore                                {B}{R}           Sorcery
 [x]  4550  Voidslime                                {G}{U}{U}        Instant
 [x]  4551  Skemfar Shadowsage                       {3}{B}           Creature — Elf Cleric
@@ -4556,7 +4556,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4563  Defiler of Dreams                        {3}{U}{U}        Creature — Phyrexian Sphinx
 [x]  4564  Retrofitter Foundry                      {1}              Artifact
 [x]  4565  Syr Vondam, Sunstar Exemplar             {W}{B}           Legendary Creature — Human Knight
-[ ]  4566  Everything Comes to Dust                 {7}{W}{W}{W}     Sorcery
+[x]  4566  Everything Comes to Dust                 {7}{W}{W}{W}     Sorcery
 [x]  4567  Earthbending Lesson                      {3}{G}           Sorcery — Lesson
 [x]  4568  Nightshade Harvester                     {3}{B}           Creature — Elf Shaman
 [x]  4569  Necrotic Ooze                            {2}{B}{B}        Creature — Ooze
@@ -4617,9 +4617,9 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4624  Remand                                   {1}{U}           Instant
 [x]  4625  Rite of Harmony                          {G}{W}           Instant
 [x]  4626  Growing Ranks                            {2}{G/W}{G/W}    Enchantment
-[ ]  4627  Cleaver Skaab                            {3}{U}           Creature — Zombie Horror
+[x]  4627  Cleaver Skaab                            {3}{U}           Creature — Zombie Horror
 [x]  4628  Mirrormind Crown                         {4}              Artifact — Equipment
-[ ]  4629  Grist, Voracious Larva // Grist, the Plague Swarm {1}              Legendary Creature — Insect // Legendary Planeswalker — Grist
+[x]  4629  Grist, Voracious Larva // Grist, the Plague Swarm {1}              Legendary Creature — Insect // Legendary Planeswalker — Grist
 [x]  4630  Serpent of Yawning Depths                {4}{U}{U}        Enchantment Creature — Serpent
 [x]  4631  The Odd Acorn Gang                       {3}{B}{G}        Legendary Creature — Squirrel Warrior
 [x]  4632  Keep Watch                               {2}{U}           Instant
@@ -4951,7 +4951,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4958  Brought Back                             {W}{W}           Instant
 [x]  4959  Tempt with Mayhem                        {1}{R}{R}        Instant
 [x]  4960  Mistcutter Hydra                         {X}{G}           Creature — Hydra
-[ ]  4961  Ensnaring Bridge                         {3}              Artifact
+[x]  4961  Ensnaring Bridge                         {3}              Artifact
 [x]  4962  Magma Opus                               {6}{U}{R}        Instant
 [x]  4963  Terminus                                 {4}{W}{W}        Sorcery
 [x]  4964  Lush Oasis                               {0}              Land — Desert
