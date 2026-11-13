@@ -2475,7 +2475,8 @@
   "effect:choose-permanents-this-way",
   "condition:this-way-counts-commander-redirect",
   "condition:this-way-counts-commander-redirect",
-  "trigger:damage-batch-over-opponents"
+  "trigger:damage-batch-over-opponents",
+  "stat:excess-damage-to-departed-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

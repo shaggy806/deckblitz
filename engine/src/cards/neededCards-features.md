@@ -361,6 +361,16 @@ the reflexive ability's own targeting, read as targets are chosen and rechecked
 (608.2b). Proving: Auron, Venerated Guardian. Test:
 `reflexive-target-live-compare.test.ts`.
 
+### Excess damage this turn, to a permanent that has died since — built 2026-11-13
+
+`stat:excess-damage-to-departed-this-turn`. The journal's `damage` entry keeps
+the excess (`excess`, rule 120.4a) and, when there was some, the permanent as
+it was dealt it (`targetWas`). The `"excess-damaged"` word reads them, filed
+under the permanent's controller then (a `JournalView` with `whose:
+"recipient"`, the filter matched on the recipient). The `excessDamageThisTurn`
+filter clause still reads only permanents still there. Proving: Rith,
+Liberated Primeval. Test: `excess-damaged-journal.test.ts`.
+
 ### "Each of those opponents" of one damage trigger — built 2026-11-13
 
 `trigger:damage-batch-over-opponents`. A `deals-damage-batch` trigger with

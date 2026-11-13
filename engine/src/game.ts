@@ -54483,14 +54483,21 @@ controlledBy,
         const hit = event.target.kind === "object" ? this.state.objects[event.target.object] : undefined;
         // A source with nothing left to say who controlled it still dealt the
         // damage: its recipient's reads count it, the dealer's side can't.
+        // A permanent dealt excess damage is kept as it was dealt it — whose
+        // it was and what — for "an opponent's creature was dealt excess
+        // damage this turn", though it dies (Rith, Liberated Primeval).
+        const hitWas =
+          hit !== undefined && (event.excess ?? 0) > 0 ? suspendComputedCache(() => this.takeLastKnown(hit.id)) : undefined;
         add({
           kind: "damage",
           ...(dealer !== undefined ? { player: dealer } : {}),
           object: event.source,
           ...(was !== undefined ? { stint: was.zoneChangeCount, was } : {}),
           amount: event.amount,
+          ...(event.excess !== undefined && event.excess > 0 ? { excess: event.excess } : {}),
           target: event.target,
           ...(hit !== undefined ? { targetStint: hit.zoneChangeCount ?? 0 } : {}),
+          ...(hitWas !== undefined ? { targetWas: hitWas } : {}),
           ...(event.combat ? { combat: this.state.turn.combatPhases ?? 1 } : {}),
         });
         // "Dealt combat damage this game by a creature named …": the whole

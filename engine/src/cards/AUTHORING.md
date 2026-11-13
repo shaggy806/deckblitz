@@ -6507,7 +6507,12 @@ clause (section 9):
   "any-player"`, `filter: { subtype: "Zombie" }`), Blitzball's "an opponent …
   by a legendary creature" (`who: "opponent"`), and `selfOnly` for this permanent
   alone, in the stint it's in or left: Wave of Rats' "if it dealt combat damage
-  to a player this turn". Per player under `of-player` `"that-player"` in a
+  to a player this turn". `what: "excess-damaged"` is the permanents `who`
+  controlled that were dealt excess damage (rule 120.4a), each read as it was
+  dealt it, though it has died or changed hands since: Rith, Liberated
+  Primeval's "if a creature or planeswalker an opponent controlled was dealt
+  excess damage this turn" (`who: "opponent"`, `filter: { typesAnyOf:
+  ["creature", "planeswalker"] }`). Per player under `of-player` `"that-player"` in a
   `countPlayers`' `where` (Estinien Varlineau). Ichor Shade's "if an artifact or creature was put into a
   graveyard from the battlefield this turn" `{ what: "to-graveyard", who:
   "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",

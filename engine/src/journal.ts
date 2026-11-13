@@ -162,6 +162,9 @@ export interface JournalEntry {
   readonly count?: number;
   /** A quantity: damage, life, counters, mana, energy. */
   readonly amount?: number;
+  /** Of `amount`, the excess damage (rule 120.4a) — `damage` to a permanent
+   * beyond lethal or its loyalty. */
+  readonly excess?: number;
   /** The zone a move came from (`to-graveyard`), or a land was played from
    * (`land-played`). */
   readonly from?: ZoneType;
@@ -285,6 +288,12 @@ export type JournalWhat =
   /** A source dealt combat damage to this player, one entry a source a combat
    * damage step: the list is the damaged player's. */
   | "combat-damaged-by"
+  /** A permanent was dealt excess damage (rule 120.4a), one entry a source
+   * an event: the list is the permanent's controller's as it was dealt it,
+   * and a filter reads the permanent as it was then, though it has died
+   * since — Rith, Liberated Primeval's "if a creature or planeswalker an
+   * opponent controlled was dealt excess damage this turn". */
+  | "excess-damaged"
   /** Each creature declared as an attacker, once in each stint, however many
    * combats it attacked in. */
   | "attackers"
@@ -329,7 +338,10 @@ export interface JournalOrigin {
  * "three or more Pirates" (Admiral Beckett Brass's ruling). */
 export interface JournalView {
   readonly kind: JournalKind;
-  readonly whose?: "target";
+  /** `"recipient"`: the entry is about what it was done to — a permanent
+   * dealt damage — kept in the list of who controlled it then (`targetWas`),
+   * and a filter reads it rather than the entry's `object`. */
+  readonly whose?: "target" | "recipient";
   readonly match?: (entry: JournalEntry, read: JournalReader) => boolean;
   readonly distinct?: true;
   readonly oncePerList?: true;
@@ -357,6 +369,11 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     whose: "target",
     match: (e) => e.combat !== undefined && e.target?.kind === "player",
     oncePerList: true,
+  },
+  "excess-damaged": {
+    kind: "damage",
+    whose: "recipient",
+    match: (e) => (e.excess ?? 0) > 0 && e.target?.kind === "object",
   },
   attackers: { kind: "attacked", distinct: true },
   "turned-face-up": { kind: "turned-face-up" },
@@ -480,7 +497,14 @@ export function journalEntries(
   const out: JournalEntry[] = [];
   for (const entry of state.journal?.entries ?? []) {
     if (entry.kind !== view.kind) continue;
-    const whose = view.whose === "target" ? (entry.target?.kind === "player" ? entry.target.player : undefined) : entry.player;
+    const whose =
+      view.whose === "target"
+        ? entry.target?.kind === "player"
+          ? entry.target.player
+          : undefined
+        : view.whose === "recipient"
+          ? entry.targetWas?.controller
+          : entry.player;
     if (whose === undefined || !players.includes(whose)) continue;
     if (!inJournalWindow(state, window, entry.turn, you, whose)) continue;
     if (view.match !== undefined && !view.match(entry, read)) continue;

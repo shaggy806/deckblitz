@@ -2072,21 +2072,26 @@ export function journalCount(
   const entries = journalEntries(journalReader(state, registry), view, players, options?.window ?? "this-turn", you);
   // `oncePerList`: the objects already counted, each per stint and list.
   const counted = view.oncePerList === true ? new Set<string>() : undefined;
+  // A view about what the entry's act was done to reads that instead.
+  const aboutRecipient = view.whose === "recipient";
   for (const entry of entries) {
     if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
     if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
-    const at = entry.stint ?? entry.was?.zoneChangeCount;
-    if (except !== undefined && entry.object === except.id && (at === undefined || at === except.stint)) continue;
-    if (only !== undefined && (entry.object !== only.id || at !== only.stint)) continue;
-    if (filter !== undefined && entry.object !== undefined) {
+    const object = aboutRecipient ? (entry.target?.kind === "object" ? entry.target.object : undefined) : entry.object;
+    const stint = aboutRecipient ? entry.targetStint : entry.stint;
+    const was = aboutRecipient ? entry.targetWas : entry.was;
+    const at = stint ?? was?.zoneChangeCount;
+    if (except !== undefined && object === except.id && (at === undefined || at === except.stint)) continue;
+    if (only !== undefined && (object !== only.id || at !== only.stint)) continue;
+    if (filter !== undefined && object !== undefined) {
       const asNow = what === "descended" || what === "discarded" || (what === "to-graveyard" && entry.from !== "battlefield");
       const snapshot = asNow
         ? undefined
-        : (entry.was ?? (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint)));
+        : (was ?? (stint === undefined ? undefined : snapshotOfStint(state, object, stint)));
       const matched = matchesFilter(
         state,
         registry,
-        entry.object,
+        object,
         filter,
         snapshot !== undefined ? { you, snapshot } : { you, ...(asNow ? {} : { lastKnown: true }) },
       );
