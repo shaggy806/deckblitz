@@ -1,18 +1,22 @@
 {
  "batch": 322,
  "status": "triage",
- "ranks": "Re-triage for the rank goal (2026-11-13, one read-only agent, no cards authored): the 55 cards whose records had no size and the 50 sized major, read against today's engine. 6 run now as they are (size \"runs-now\", no open need: author them), 94 small, 5 still major (Nicol Bolas, Dragon-God; New Blood; _____ Goblin; Karn Liberated; Zilortha, Strength Incarnate). Each small key has a lane in data/lanes.json for build-family overnight lanes. Verdicts come from reading the source and briefs, not tests: a runs-now card still needs its test to settle the point its why names.",
+ "ranks": "Re-triage for the rank goal (2026-11-13, one read-only agent, no cards authored): the 55 cards whose records had no size and the 50 sized major, read against today's engine. 7 run now as they are (size \"runs-now\", no open need: author them), 93 small, 5 still major (Nicol Bolas, Dragon-God; New Blood; _____ Goblin; Karn Liberated; Zilortha, Strength Incarnate). Each small key has a lane in data/lanes.json for build-family overnight lanes. Verdicts come from reading the source and briefs, not tests: a runs-now card still needs its test to settle the point its why names.",
  "authored": [],
  "blocked": [
   {
    "name": "Nicol Bolas, Dragon-God",
-   "needs": [],
+   "needs": [
+    "effect:each-opponent-exiles-card-from-hand-or-permanent"
+   ],
    "size": "major",
    "why": "Still major (the user deferred it 2026-11-12): each opponent chooses a card in hand or a permanent in one pick (a new mixed-zone decision with hidden information), plus a static giving it all loyalty abilities of other planeswalkers. Building it: A choose-from-zones decision spanning hand and battlefield (shared with Lich's Mastery), and a layer-6 static copying other permanents' loyalty abilities (close to Havengul Lich's gain-activated-abilities)."
   },
   {
    "name": "New Blood",
-   "needs": [],
+   "needs": [
+    "effect:text-change-creature-type-words"
+   ],
    "size": "major",
    "why": "Text-changing a creature-type word (rule 612.2a) across the type line, filters, 'non-X' words and token names is a new subsystem. Building it: A text-change layer (layer 3) that rewrites every creature-type word in a permanent's abilities and type line; change-text today knows colour and basic land type words only."
   },
@@ -245,8 +249,8 @@
    "needs": [
     "effect:exchange-control-permanent-and-spell"
    ],
-   "size": "small",
-   "why": "gain-control-spell and exchange-control both exist; exchanging control of a permanent and a spell (with new targets) is a combination of the two, not a new decision."
+   "size": "runs-now",
+   "why": "gain-control-spell and exchange-control both exist; exchanging control of a permanent and a spell (with new targets) is a combination of the two, not a new decision. Its key, effect:exchange-control-permanent-and-spell, is already in the built array: author it on that, checking the new-targets choice in a test."
   },
   {
    "name": "Chef's Kiss",
@@ -371,7 +375,9 @@
   },
   {
    "name": "_____ Goblin",
-   "needs": [],
+   "needs": [
+    "mechanic:stickers"
+   ],
    "size": "major",
    "why": "Stickers (rule 123) are a subsystem: sticker sheets per player, putting a name sticker on a permanent, and counting its vowels. Building it: Model sticker sheets dealt at game start, a 'put a sticker' decision, name stickers changing the name; 1 card in the goal list."
   },
@@ -425,7 +431,9 @@
   },
   {
    "name": "Karn Liberated",
-   "needs": [],
+   "needs": [
+    "mechanic:restart-the-game"
+   ],
    "size": "major",
    "why": "Restarting the game (rule 727) resets the whole game state — a core-rule change. Building it: A game restart: new libraries from all owned cards, starting life, mulligans, command zone, keeping Karn's linked exiled cards out and then putting them onto the battlefield; 1 card."
   },
@@ -673,7 +681,9 @@
   },
   {
    "name": "Zilortha, Strength Incarnate",
-   "needs": [],
+   "needs": [
+    "static:lethal-damage-by-power"
+   ],
    "size": "major",
    "why": "Redefines lethal damage (rule 120.6, 704.5g) for SBAs, combat damage assignment, trample and deathtouch interplay — a core-rule change spread across the engine. Building it: Route every lethal-damage reading (SBA, combat assignment in combat/, trample excess, 'excess damage', the bots' estimates) through one helper that a static can switch to power; 1 card."
   },

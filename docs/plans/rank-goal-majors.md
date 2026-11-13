@@ -7,8 +7,8 @@ lanes run; New Blood was approved earlier the same day.
 
 The rank goal (every Commander card to EDHREC rank 10,000) was left, after batch 321, with 192
 cards. The B322 re-triage (one read-only agent, `engine/data/sweep-3/B322.json`) read the 55
-unsized records and the 50 majors against the engine as it now is: 6 cards run as they are, 94
-are small, 5 are still major. Several "majors" had gone stale as features landed (Vaevictis
+unsized records and the 50 majors against the engine as it now is: 7 cards run as they are (one,
+Perplexing Chimera, on a key already built), 93 are small, 5 are still major. Several "majors" had gone stale as features landed (Vaevictis
 Asmadi's per-player targets, built for Guff Rewrites History in B321).
 
 The small keys are built by `build-family`'s **overnight lanes** mode (its skill has the
@@ -45,8 +45,8 @@ Each runs as an agent of its own, alone in its slot, with the design below as it
 
 ## Order
 
-1. Author the six runs-now cards (`npm run cards:goal -w engine -- --size runs-now`): Displaced
-   Dinosaurs, Gilraen, Faramir, Olivia, Arlinn, Vaevictis Asmadi. Each `why` in B322 names the
+1. Author the seven runs-now cards (`npm run cards:goal -w engine -- --size runs-now`): Displaced
+   Dinosaurs, Gilraen, Faramir, Olivia, Perplexing Chimera, Arlinn, Vaevictis Asmadi. Each `why` in B322 names the
    point its test must settle.
 2. `/build-family overnight lanes`, the majors among the agents as slots allow, Nicol Bolas and
    Zilortha first (best ranked; Zilortha is the closest to small).
