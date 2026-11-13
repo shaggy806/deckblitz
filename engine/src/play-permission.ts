@@ -20,6 +20,7 @@
 
 import type { TriggeredAbility } from "./abilities.js";
 import type { CardType, StaticCondition } from "./cards/define.js";
+import type { TypePatch } from "./characteristics-patch.js";
 import type { Expiry, PermissionDuration } from "./duration.js";
 import type { EffectSpec, PlayerScope } from "./effects.js";
 import type { CardFilter } from "./filter.js";
@@ -98,6 +99,10 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  *   spell cast this way, and the permanent it becomes (rule 400.7 — a
  *   `castRider`), or the land played this way as it enters, has these for as
  *   long as it's that object.
+ * - `becomes`: "if you do, it … is a Vampire in addition to its other types"
+ *   (The Tomb of Aclazotz): the spell cast this way, on the stack and as the
+ *   permanent it becomes (rule 400.7 — a `castRider`), for as long as it's
+ *   that object. Spells only.
  */
 export interface PlayTerms {
   readonly play?: boolean;
@@ -136,6 +141,7 @@ export interface PlayTerms {
   readonly landsEnterTapped?: true;
   readonly entersWith?: { readonly kind: string; readonly amount: number };
   readonly gainsTriggered?: readonly TriggeredAbility[];
+  readonly becomes?: TypePatch;
 }
 
 /**
@@ -305,6 +311,7 @@ const PLAY_GRANT_KEYS = [
   "landsEnterTapped",
   "entersWith",
   "gainsTriggered",
+  "becomes",
   "duration",
   "byOwner",
   "whileSource",

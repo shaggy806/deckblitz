@@ -815,6 +815,7 @@ import _poolTalarianHookSpider from "../pool/talarian-hook-spider.js";
 import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTalruumPiper from "../pool/talruum-piper.js";
+import _poolTarriansJournal from "../pool/tarrians-journal.js";
 import _poolTarriansSoulcleaver from "../pool/tarrians-soulcleaver.js";
 import _poolTauntFromTheRampart from "../pool/taunt-from-the-rampart.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
@@ -1810,6 +1811,7 @@ const shard: CardShard = {
     _poolTalionTheKindlyLord,
     _poolTalismanOfIndulgence,
     _poolTalruumPiper,
+    _poolTarriansJournal,
     _poolTarriansSoulcleaver,
     _poolTauntFromTheRampart,
     _poolTawnossWand,

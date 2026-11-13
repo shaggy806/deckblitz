@@ -6026,9 +6026,14 @@ function computeCharacteristicsUncached(
   let toxic = lostAbilities ? 0 : text.toxic;
   // Layers 3 + 4 — text substitution, then every type-changing effect in
   // timestamp order: the object's own modifiers (a man-land's animation adds
-  // `creature`) and type-granting statics.
+  // `creature`) and type-granting statics. A spell's own count too, as
+  // `effectiveTypes` already has them: The Tomb of Aclazotz's creature spell
+  // "is a Vampire" on the stack (its ruling).
   const layer4 =
-    onBattlefield || outsideTypeSources(state, registry).length > 0 || selfOutsideBattlefield(registry, object) !== undefined
+    onBattlefield ||
+    (object.zone === "stack" && object.modifiers.length > 0) ||
+    outsideTypeSources(state, registry).length > 0 ||
+    selfOutsideBattlefield(registry, object) !== undefined
       ? layerFour(state, registry, object)
       : null;
   const types: readonly CardType[] = layer4?.types ?? def.types;

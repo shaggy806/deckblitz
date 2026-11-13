@@ -21840,6 +21840,17 @@ export class Game {
       });
       invalidateComputedCache();
     }
+    // The Tomb of Aclazotz's "it … is a Vampire in addition to its other
+    // types": the spell, and the permanent it becomes (a `castRider`).
+    if (permissionTerms?.becomes !== undefined) {
+      object.modifiers.push({
+        timestamp: this.freshTimestamp(),
+        ...patchModifier(permissionTerms.becomes),
+        untilEndOfTurn: false,
+        castRider: true,
+      });
+      invalidateComputedCache();
+    }
     // Kess's "if a spell cast this way would be put into your graveyard,
     // exile it instead" — set after the move to the stack, which clears it.
     if (permissionTerms?.exileAfter === true) object.exileIfWouldGoToGraveyard = true;

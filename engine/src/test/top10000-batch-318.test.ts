@@ -3,7 +3,8 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, cast, loyalty, nextTurn, pt, ref, destroy, hand, lands, life, settle, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, activate, cast, counters, destroy, hand, lands, life, loyalty, nextTurn, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, zone } from "./harness.js";
+import { printedCardName } from "../state.js";
 
 describe("Hushbringer: creatures entering or dying don't cause abilities to trigger", () => {
   it("a creature dying causes no dies trigger, its own or another's", () => {
@@ -130,5 +131,39 @@ describe("Tezzeret, Betrayer of Flesh: the first activated ability of an artifac
     const two = spawn(game, "Hedron Archive");
     activate(game, one, 1);
     expect(() => activate(game, two, 1)).toThrow();
+  });
+});
+
+describe("Tarrian's Journal // The Tomb of Aclazotz", () => {
+  const tomb = () => {
+    const { game } = table();
+    const journal = spawn(game, "Tarrian's Journal");
+    lands(game, "Swamp", 2);
+    toHand(game, "Opt");
+    activate(game, journal, 1);
+    expect(hand(game, A)).toHaveLength(0);
+    expect(printedCardName(game.state.objects[journal])).toBe("The Tomb of Aclazotz");
+    nextTurn(game);
+    nextTurn(game);
+    return { game, journal };
+  };
+
+  it("the Tomb lets one creature spell be cast from the graveyard: a Vampire, with a finality counter", () => {
+    const { game, journal } = tomb();
+    const bear = toGraveyard(game, "Grizzly Bears");
+    const other = toGraveyard(game, "Grizzly Bears");
+    lands(game, "Forest", 4);
+    activate(game, journal, 1);
+    cast(game, bear, { via: "graveyard-permission", settle: false });
+    expect(subtypes(game, bear)).toContain("Vampire");
+    settle(game);
+    expect(zone(game, bear)).toBe("battlefield");
+    expect(subtypes(game, bear)).toEqual(expect.arrayContaining(["Bear", "Vampire"]));
+    expect(counters(game, bear, "finality")).toBe(1);
+    // One cast per activation.
+    expect(() => cast(game, other, { via: "graveyard-permission" })).toThrow();
+    // The finality counter: it's exiled, not put into the graveyard.
+    destroy(game, bear);
+    expect(zone(game, bear)).toBe("exile");
   });
 });

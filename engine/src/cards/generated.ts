@@ -27156,6 +27156,7 @@ import _poolTarnationVista from "./pool/tarnation-vista.js";
 import _poolTarnishedCitadel from "./pool/tarnished-citadel.js";
 import _poolTaroxBladewing from "./pool/tarox-bladewing.js";
 import _poolTarpan from "./pool/tarpan.js";
+import _poolTarriansJournal from "./pool/tarrians-journal.js";
 import _poolTarriansSoulcleaver from "./pool/tarrians-soulcleaver.js";
 import _poolTashaYarOutOfTime from "./pool/tasha-yar-out-of-time.js";
 import _poolTashasHideousLaughter from "./pool/tashas-hideous-laughter.js";
@@ -27866,6 +27867,7 @@ import _poolTheThingBenGrimm from "./pool/the-thing-ben-grimm.js";
 import _poolTheThing from "./pool/the-thing.js";
 import _poolTheThirdDoctor from "./pool/the-third-doctor.js";
 import _poolTheThirteenthDoctor from "./pool/the-thirteenth-doctor.js";
+import _poolTheTombOfAclazotz from "./pool/the-tomb-of-aclazotz.js";
 import _poolTheTormentOfGollum from "./pool/the-torment-of-gollum.js";
 import _poolTheTraveler from "./pool/the-traveler.js";
 import _poolTheTricksterGodsHeist from "./pool/the-trickster-gods-heist.js";
@@ -59852,6 +59854,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTarnishedCitadel,
   _poolTaroxBladewing,
   _poolTarpan,
+  _poolTarriansJournal,
   _poolTarriansSoulcleaver,
   _poolTashaYarOutOfTime,
   _poolTashasHideousLaughter,
@@ -60562,6 +60565,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheThing,
   _poolTheThirdDoctor,
   _poolTheThirteenthDoctor,
+  _poolTheTombOfAclazotz,
   _poolTheTormentOfGollum,
   _poolTheTraveler,
   _poolTheTricksterGodsHeist,
@@ -92561,6 +92565,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tarnished-citadel": _poolTarnishedCitadel,
   "pool/tarox-bladewing": _poolTaroxBladewing,
   "pool/tarpan": _poolTarpan,
+  "pool/tarrians-journal": _poolTarriansJournal,
   "pool/tarrians-soulcleaver": _poolTarriansSoulcleaver,
   "pool/tasha-yar-out-of-time": _poolTashaYarOutOfTime,
   "pool/tashas-hideous-laughter": _poolTashasHideousLaughter,
@@ -93271,6 +93276,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-thing": _poolTheThing,
   "pool/the-third-doctor": _poolTheThirdDoctor,
   "pool/the-thirteenth-doctor": _poolTheThirteenthDoctor,
+  "pool/the-tomb-of-aclazotz": _poolTheTombOfAclazotz,
   "pool/the-torment-of-gollum": _poolTheTormentOfGollum,
   "pool/the-traveler": _poolTheTraveler,
   "pool/the-trickster-gods-heist": _poolTheTricksterGodsHeist,

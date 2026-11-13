@@ -86,6 +86,7 @@ const TERMS = [
   "landsEnterTapped",
   "entersWith",
   "gainsTriggered",
+  "becomes",
 ];
 const GRANT_EXTRAS = ["duration", "byOwner", "whileSource", "fromNextTurn"];
 

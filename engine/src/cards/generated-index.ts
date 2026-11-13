@@ -1308,6 +1308,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "The Myriad Pools": "https://cards.scryfall.io/art_crop/back/b/f/bf573fb7-fa6c-4df7-8e5e-1e071585361e.jpg",
   "The Prismatic Bridge": "https://cards.scryfall.io/art_crop/back/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg",
   "The Sensational She-Hulk": "https://cards.scryfall.io/art_crop/back/6/1/61237530-ad49-469c-a952-67c92315708e.jpg",
+  "The Tomb of Aclazotz": "https://cards.scryfall.io/art_crop/back/9/9/99255a66-b868-45fc-a2a9-0c89bd851b69.jpg",
   "The True Scriptures": "https://cards.scryfall.io/art_crop/back/b/f/bf2249e6-af74-4b88-8eb7-144ce8fa7f6b.jpg",
   "Thraben Militia": "https://cards.scryfall.io/art_crop/back/5/8/58ae9cbc-d88d-42df-ab76-63ab5d05c023.jpg",
   "Throne of Death": "https://cards.scryfall.io/art_crop/back/9/d/9dfdb73d-b001-4a59-b79e-8c8c1baea116.jpg",
