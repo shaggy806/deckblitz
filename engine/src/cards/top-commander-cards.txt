@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4973 already implemented / 27 missing (marks refreshed 2026-11-13)
+4978 already implemented / 22 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4458,7 +4458,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4465  Phyrexian Censor                         {2}{W}           Creature — Phyrexian Wizard
 [x]  4466  Tivit, Seller of Secrets                 {3}{W}{U}{B}     Legendary Creature — Sphinx Rogue
 [x]  4467  Waterbending Lesson                      {3}{U}           Sorcery — Lesson
-[ ]  4468  Guff Rewrites History                    {2}{R}           Instant
+[x]  4468  Guff Rewrites History                    {2}{R}           Instant
 [x]  4469  Knollspine Dragon                        {5}{R}{R}        Creature — Dragon
 [x]  4470  Last Chance                              {R}{R}           Sorcery
 [x]  4471  Swashbuckler Extraordinaire              {2}{R}           Creature — Dragon Rogue Warrior
@@ -4477,7 +4477,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4484  Katilda, Dawnhart Prime                  {G}{W}           Legendary Creature — Human Warlock
 [x]  4485  Bone-Cairn Butcher                       {1}{R}{W}{B}     Creature — Demon
 [x]  4486  Vizkopa Guildmage                        {W}{B}           Creature — Human Wizard
-[ ]  4487  Tasha, the Witch Queen                   {3}{U}{B}        Legendary Planeswalker — Tasha
+[x]  4487  Tasha, the Witch Queen                   {3}{U}{B}        Legendary Planeswalker — Tasha
 [x]  4488  Helix Pinnacle                           {G}              Enchantment
 [x]  4489  Agonasaur Rex                            {3}{G}{G}        Creature — Dinosaur
 [x]  4490  Baron, Airship Kingdom                   {0}              Land — Town
@@ -4512,7 +4512,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4519  Boon Reflection                          {4}{W}           Enchantment
 [x]  4520  Fractured Identity                       {3}{W}{U}        Sorcery
 [x]  4521  Distinguished Conjurer                   {1}{W}           Creature — Human Wizard
-[ ]  4522  Mechtitan Core                           {2}              Artifact — Vehicle
+[x]  4522  Mechtitan Core                           {2}              Artifact — Vehicle
 [x]  4523  Nyx-Fleece Ram                           {1}{W}           Enchantment Creature — Sheep
 [x]  4524  Dragonlord Atarka                        {5}{R}{G}        Legendary Creature — Elder Dragon
 [x]  4525  Shaman of the Pack                       {1}{B}{G}        Creature — Elf Shaman
@@ -4583,7 +4583,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4590  Strixhaven Stadium                       {3}              Artifact
 [x]  4591  RMS Titanic                              {3}{R}           Legendary Artifact — Vehicle
 [x]  4592  Electrickery                             {R}              Instant
-[ ]  4593  Thran Portal                             {0}              Land — Gate
+[x]  4593  Thran Portal                             {0}              Land — Gate
 [x]  4594  Katara, Water Tribe's Hope               {2}{W}{U}{U}     Legendary Creature — Human Warrior Ally
 [x]  4595  Grim Affliction                          {2}{B}           Instant
 [x]  4596  Endless Evil                             {2}{U}           Enchantment — Aura
@@ -4667,7 +4667,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4674  Jolene, the Plunder Queen                {2}{R}{G}        Legendary Creature — Human Warrior
 [x]  4675  Song of Freyalise                        {1}{G}           Enchantment — Saga
 [x]  4676  Snapping Voidcraw                        {1}{G}{U}        Creature — Eldrazi Turtle
-[ ]  4677  Blatant Thievery                         {4}{U}{U}{U}     Sorcery
+[x]  4677  Blatant Thievery                         {4}{U}{U}{U}     Sorcery
 [x]  4678  Maraleaf Pixie                           {G}{U}           Creature — Faerie
 [x]  4679  Divine Resilience                        {W}              Instant
 [ ]  4680  Breeches, Brazen Plunderer               {3}{R}           Legendary Creature — Goblin Pirate

@@ -8144,3 +8144,21 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Jinnie Fay, Jetmir's Second: make Dogs instead of the Soldiers
 - **Do:** Cast Raise the Alarm. When asked, choose "Create that many 3/1 green Dogs with vigilance instead".
 - **Expect:** The question offers three choices: "Create the tokens", the Cats and the Dogs. You get two 3/1 green Dogs with vigilance and no Soldiers.
+
+## The top 5000's last cards, batch 321 (2026-11-13)
+
+### Blatant Thievery: one permanent from each opponent, none skipped
+- **Do:** Cast Blatant Thievery. Try to confirm with only Bob's Grizzly Bears chosen, then choose Carol's Hill Giant and Dave's Serra Angel too.
+- **Expect:** It can't be confirmed until each opponent has one permanent chosen, and only one each. You gain control of all three.
+
+### Guff Rewrites History: you decide after seeing Bob's card
+- **Do:** Cast Guff Rewrites History, choosing your Ornithopter and Bob's Grizzly Bears.
+- **Expect:** Both go into their owners' libraries. Bob's exiled card is shown before you're asked whether to cast yours for free.
+
+### Mechtitan Core: choose the four to exile
+- **Do:** Activate Mechtitan Core's {5} ability. Choose the four Ornithoppers.
+- **Expect:** Grizzly Bears and Sol Ring can't be chosen. The Core and the four are exiled and you get Mechtitan, a 10/10.
+
+### Thran Portal: its mana costs a life
+- **Do:** Cast Opt, paying with Thran Portal (chosen as an Island).
+- **Expect:** You go to 19 life and Opt resolves.

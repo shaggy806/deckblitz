@@ -1,0 +1,13 @@
+{
+  "batch": 321,
+  "status": "done",
+  "ranks": "Top-5000 gap, EDHREC ranks 4533–4680 (2026-11-13): Guff Rewrites History, Tasha, the Witch Queen, Mechtitan Core, Thran Portal and Blatant Thievery, the cards still missing from top-commander-cards.txt (B320/B294 records), built best rank first, no agents. Features: a spell's `{ seat }` target slots required, as a trigger's — an empty seat needs none, a player still in the game with nothing to target leaves it uncastable (rule 601.2c, Vaevictis Asmadi's ruling; Guff, Blatant Thievery); cast-now `from: { exiledWithCounter }`, exiled cards with a counter whoever owns them (Tasha's −3); craft materials `permanentsOnly`, linked to the stint the ability came from, and a fired delayed ability's linked exiles read through the stint of the ability that made it (Mechtitan Core); `abilityCostModification`'s `abilityKind: \"mana\"` and `increaseLife`, priced by the payment planner, and `addsChosenLandType` (Thran Portal). Sylvan Primordial (B52) is freed by the required seat slots, but its ruling 'if an opponent has any legal permanents to target, you must target one of them' reads as though an opponent with none were skipped, against Vaevictis Asmadi's: settle that before authoring it.",
+  "authored": [
+    { "name": "Guff Rewrites History", "files": ["engine/src/cards/pool/guff-rewrites-history.ts"], "tested": true },
+    { "name": "Tasha, the Witch Queen", "files": ["engine/src/cards/pool/tasha-the-witch-queen.ts", "engine/src/cards/tokens/demon-token-3-3.ts"], "tested": true },
+    { "name": "Mechtitan Core", "files": ["engine/src/cards/pool/mechtitan-core.ts", "engine/src/cards/tokens/mechtitan-token.ts"], "tested": true },
+    { "name": "Thran Portal", "files": ["engine/src/cards/pool/thran-portal.ts"], "tested": true },
+    { "name": "Blatant Thievery", "files": ["engine/src/cards/pool/blatant-thievery.ts"], "tested": true }
+  ],
+  "blocked": []
+}

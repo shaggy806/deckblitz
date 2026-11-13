@@ -666,6 +666,16 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 321 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4533–4680)** —
+  5 authored, each on a small feature built for it: Guff Rewrites History and Blatant Thievery (a
+  spell's `{ seat }` target slots required, as a trigger's — an empty seat needs none, a player
+  still in the game with nothing to target leaves it uncastable, Vaevictis Asmadi's ruling),
+  Tasha, the Witch Queen (casting from exiled cards with a counter, whoever owns them), Mechtitan
+  Core (craft's cost on the battlefield alone, and a delayed "when that token leaves" reaching the
+  cards linked to the Core), Thran Portal (a life surcharge on mana abilities, through the payment
+  planner; "the chosen basic land type in addition"). None blocked. Freed: Sylvan Primordial
+  (B52), whose ruling reads as though an opponent with nothing to target were skipped — settle
+  that against Vaevictis Asmadi's before authoring it.
 - **Batch 320 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4407–4511)** —
   6 authored, each on a small feature built for it: Jinnie Fay, Jetmir's Second ("you may instead
   create that many" of a chosen token, the effect still making them; Flitwing moved onto it),

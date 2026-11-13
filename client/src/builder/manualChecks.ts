@@ -12228,4 +12228,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ["Jinnie Fay, Jetmir's Second", 'Plains*2'], hand: ['Raise the Alarm'] },
     }),
   ),
+  preset(
+    'Blatant Thievery: one permanent from each opponent, none skipped',
+    board({
+      you: { bf: ['Island*7'], hand: ['Blatant Thievery'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Serra Angel'] }],
+    }),
+  ),
+  preset(
+    "Guff Rewrites History: you decide after seeing Bob's card",
+    board({
+      you: { bf: ['Ornithopter', 'Mountain*3'], hand: ['Guff Rewrites History'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Mechtitan Core: choose the four to exile',
+    board({
+      you: { bf: ['Mechtitan Core', 'Ornithopter*4', 'Grizzly Bears', 'Sol Ring', 'Wastes*5'] },
+    }),
+  ),
+  preset(
+    'Thran Portal: its mana costs a life',
+    board({
+      you: { bf: ['Thran Portal'], hand: ['Opt'] },
+    }),
+  ),
 ]
