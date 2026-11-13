@@ -9116,6 +9116,39 @@ export function parseEffect(text, outer) {
     };
   }
 
+  // "Look at the top card of your library. You may reveal that card if it has
+  // three or more colored mana symbols in its mana cost. If you do, add three
+  // mana in any combination of its colors and put it into your hand. If you
+  // don't reveal it, put it into your hand." (Omnath, Locus of All): the card
+  // to hand either way, the mana the revealed card's colours (`colorsOfTarget`
+  // reads the look's chosen card, slot 0 of its `then`).
+  const revealForMana =
+    /^Look at the top card of your library\. You may reveal that card if it has (\w+) or more colored mana symbols in its mana cost\. If you do, add (\w+) mana in any combination of its colors and put it into your hand\. If you don't reveal it, put it into your hand\.$/.exec(
+      text,
+    );
+  if (revealForMana !== null) {
+    const symbols = numberOf(revealForMana[1]);
+    const mana = numberOf(revealForMana[2]);
+    if (typeof symbols === "number" && typeof mana === "number") {
+      return {
+        effect: {
+          kind: "look-and-choose",
+          zone: "library",
+          count: 1,
+          reveal: "chosen",
+          min: 0,
+          max: 1,
+          filter: { coloredManaSymbols: { op: "gte", n: symbols } },
+          destination: "hand",
+          leftover: "hand",
+          then: { kind: "add-mana", mana: { colorsOfTarget: 0 }, amount: mana },
+        },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
+
   // "You may pay {3} and sacrifice it. If you do, choose a land you control.
   // Then search your library for up to two basic land cards which have the same
   // name as the chosen land, put them onto the battlefield tapped, then

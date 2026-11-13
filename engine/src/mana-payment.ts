@@ -14,7 +14,7 @@
  */
 
 import type { ActivatedAbility } from "./abilities.js";
-import type { BoardManaList, EffectSpec } from "./effects.js";
+import type { EffectSpec, ManaListSpec } from "./effects.js";
 import { COLORS, differentManaSplits, manaValue, poolCounts, poolTotal } from "./mana.js";
 import type { Color, HybridOption, HybridPip, ManaCost, ManaType, ManaUnit, SpendUnitAs, WideSpendAs } from "./mana.js";
 import type { ObjectId } from "./primitives.js";
@@ -510,7 +510,7 @@ export function standaloneManaChoices(
   ability: ActivatedAbility,
   /** The concrete colours a `oneOf` or a list read off the board names right
    * now — resolved by the caller, which has the board; see `Game.manaOneOf`. */
-  oneOf: (mana: { readonly oneOf: readonly ManaType[] } | BoardManaList) => readonly ManaType[],
+  oneOf: (mana: ManaListSpec) => readonly ManaType[],
   /** How much a *live* amount (Vivi Ornitier's power) comes to right now —
    * `null` when the caller can't size it, which offers the ability once
    * with the engine's default colour, as before live amounts existed. */
@@ -601,7 +601,7 @@ export function multipliedManaOption(option: ManaOption, times: number): ManaOpt
  */
 export function standaloneManaSplit(
   ability: ActivatedAbility,
-  oneOf: (mana: { readonly oneOf: readonly ManaType[] } | BoardManaList) => readonly ManaType[],
+  oneOf: (mana: ManaListSpec) => readonly ManaType[],
   liveAmount: () => number | null,
 ): { readonly colors: readonly ManaType[]; readonly amount: number } | null {
   const effect = ability.effect;

@@ -297,6 +297,7 @@ import {
 import type {
   BeholdSpec,
   BoardManaList,
+  ManaListSpec,
   CascadeFinish,
   CascadeFound,
   DiscoverFound,
@@ -27765,7 +27766,7 @@ export class Game {
       // for the activation, the colour is one pick that names all of it.
       own = COLORS.map((c) => ({ picks: [c], makes: [c] }));
     } else {
-      const oneOf = (m: { readonly oneOf: readonly ManaType[] } | BoardManaList) => this.manaOneOf(m, player, sourceId);
+      const oneOf = (m: ManaListSpec) => this.manaOneOf(m, player, sourceId);
       const live = () =>
         effect.kind === "add-mana" && typeof effect.amount !== "number"
           ? this.liveManaAmount(sourceId, player, effect.amount, undefined, effect.first)
@@ -30093,7 +30094,7 @@ export class Game {
    * linked cards or mustn't count itself.
    */
   private manaOneOf(
-    mana: { readonly oneOf: readonly ManaType[] } | BoardManaList,
+    mana: ManaListSpec,
     player: PlayerId,
     source?: ObjectId,
     /** The lands already being asked what they could produce, further up a
@@ -30101,6 +30102,9 @@ export class Game {
     visiting: ReadonlySet<ObjectId> = new Set(),
   ): readonly ManaType[] {
     if ("oneOf" in mana) return mana.oneOf;
+    // "Its colors" names a resolving effect's target (Omnath, Locus of All),
+    // which a mana ability — all this reads for — never has: nothing.
+    if ("colorsOfTarget" in mana) return [];
     // Read off the whole board, and asked for every offer and payment plan:
     // once per cache region for a list asked from the top.
     if (visiting.size === 0) {

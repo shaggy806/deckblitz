@@ -18953,6 +18953,7 @@ import _poolOminousRoost from "./pool/ominous-roost.js";
 import _poolOminousSeas from "./pool/ominous-seas.js";
 import _poolOminousSphinx from "./pool/ominous-sphinx.js";
 import _poolOmitVariables from "./pool/omit-variables.js";
+import _poolOmnathLocusOfAll from "./pool/omnath-locus-of-all.js";
 import _poolOmnathLocusOfCreation from "./pool/omnath-locus-of-creation.js";
 import _poolOmnathLocusOfMana from "./pool/omnath-locus-of-mana.js";
 import _poolOmnathLocusOfRage from "./pool/omnath-locus-of-rage.js";
@@ -51636,6 +51637,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOminousSeas,
   _poolOminousSphinx,
   _poolOmitVariables,
+  _poolOmnathLocusOfAll,
   _poolOmnathLocusOfCreation,
   _poolOmnathLocusOfMana,
   _poolOmnathLocusOfRage,
@@ -84332,6 +84334,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ominous-seas": _poolOminousSeas,
   "pool/ominous-sphinx": _poolOminousSphinx,
   "pool/omit-variables": _poolOmitVariables,
+  "pool/omnath-locus-of-all": _poolOmnathLocusOfAll,
   "pool/omnath-locus-of-creation": _poolOmnathLocusOfCreation,
   "pool/omnath-locus-of-mana": _poolOmnathLocusOfMana,
   "pool/omnath-locus-of-rage": _poolOmnathLocusOfRage,

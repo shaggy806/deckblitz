@@ -6384,6 +6384,28 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
     });
   });
 
+  it("reads a revealed card's colours as the mana's (Omnath, Locus of All)", () => {
+    const omnath = face(
+      "Omnath, Locus of All",
+      "Legendary Creature — Phyrexian Elemental",
+      "If you would lose unspent mana, that mana becomes black instead.\nAt the beginning of your first main phase, look at the top card of your library. You may reveal that card if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of its colors and put it into your hand. If you don't reveal it, put it into your hand.",
+    );
+    expect(omnath.static[0]).toMatchObject({ unspentManaBecomes: "B" });
+    expect(omnath.triggered[0].trigger).toEqual({ on: "step-begins", step: "precombat-main", who: "you" });
+    expect(omnath.triggered[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "library",
+      count: 1,
+      reveal: "chosen",
+      min: 0,
+      max: 1,
+      filter: { coloredManaSymbols: { op: "gte", n: 3 } },
+      destination: "hand",
+      leftover: "hand",
+      then: { kind: "add-mana", mana: { colorsOfTarget: 0 }, amount: 3 },
+    });
+  });
+
   it("reads 'you may have this land enter tapped. If you do, …' (Mariposa Military Base)", () => {
     const base = face(
       "Mariposa Military Base",

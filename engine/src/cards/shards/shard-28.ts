@@ -587,6 +587,7 @@ import _poolObNixilisTheHateTwisted from "../pool/ob-nixilis-the-hate-twisted.js
 import _poolOblivionCrown from "../pool/oblivion-crown.js";
 import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
+import _poolOmnathLocusOfAll from "../pool/omnath-locus-of-all.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
 import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
 import _poolOonasGrace from "../pool/oonas-grace.js";
@@ -1627,6 +1628,7 @@ const shard: CardShard = {
     _poolOblivionCrown,
     _poolOctomancer,
     _poolOctopusForm,
+    _poolOmnathLocusOfAll,
     _poolOmnathLocusOfCreation,
     _poolOonasBlackguard,
     _poolOonasGrace,

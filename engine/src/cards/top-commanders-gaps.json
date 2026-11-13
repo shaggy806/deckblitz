@@ -2390,7 +2390,8 @@
   "static:token-protection-from-own-triggers",
   "effect:mana-cant-pay-generic",
   "trigger:trigger-entering-creature-ability-triggers",
-  "effect:put-commanders-onto-battlefield"
+  "effect:put-commanders-onto-battlefield",
+  "effect:add-mana-combination-of-card-colors"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

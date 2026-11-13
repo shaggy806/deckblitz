@@ -2375,6 +2375,14 @@ export type BoardManaList =
       readonly elseOneOf: readonly ManaType[];
     };
 
+/** An `add-mana`'s mana that names a list to resolve: a `oneOf`, a list read
+ * off the board, or a target's colours (`colorsOfTarget` — none in a mana
+ * ability, which has no target). */
+export type ManaListSpec =
+  | { readonly oneOf: readonly ManaType[] }
+  | { readonly colorsOfTarget: number }
+  | BoardManaList;
+
 /** How far a `created-tokens-fight` has paired its tokens, while its controller
  * is asked: `answering` says what the answer holds, the tokens that fight or
  * the creature `tokens[0]` fights. Plain ids: this rides on a decision's `then`. */
@@ -2976,6 +2984,14 @@ export type EffectSpec =
          * permanent tapped for mana made (Roxanne, Starfall Savant; Mana
          * Flare). Anywhere else it makes nothing. */
         | "produced"
+        /** "Add three mana in any combination of **its** colors" (Omnath,
+         * Locus of All, of the card it revealed): a `oneOf` over the colours
+         * of what target slot `colorsOfTarget` points at, read as the mana is
+         * added — a `look-and-choose`'s `then` names its chosen card as slot
+         * 0. Colourless is no colour (rule 105.2c), so a colourless card
+         * makes no mana; a one-coloured card makes that colour alone. Not for
+         * a mana ability: the payment planner doesn't read it. */
+        | { readonly colorsOfTarget: number }
         | {
             readonly oneOf: readonly ManaType[];
             readonly same?: true;
@@ -16437,6 +16453,13 @@ export interface ManaSplitAsk {
  * (a spend restriction, a rider, `persists`) rides on every mode; the rest of
  * the instruction — damage to its controller, `also` — follows once.
  */
+/** The colours of what target slot `slot` points at — an `add-mana`'s
+ * `{ colorsOfTarget }` — none when the slot is empty or names a player. */
+function colorsOfTargetSlot(slot: number, ctx: ResolutionContext): readonly ManaType[] {
+  const target = ctx.targets[slot];
+  return target === undefined ? [] : ctx.colorsOf(target);
+}
+
 function addManaChoice(spec: Extract<EffectSpec, { kind: "add-mana" }>, ctx: ResolutionContext): EffectSpec | null {
   const mana = spec.mana === "chosen" ? ctx.chosenColorOfSource() : spec.mana;
   if (mana === undefined) return null; // None chosen: no mana, and nothing to ask.
@@ -16450,6 +16473,9 @@ function addManaChoice(spec: Extract<EffectSpec, { kind: "add-mana" }>, ctx: Res
     same = false;
   } else if (typeof mana !== "object" || "all" in mana || "eachColorAmong" in mana) {
     return null;
+  } else if ("colorsOfTarget" in mana) {
+    colors = colorsOfTargetSlot(mana.colorsOfTarget, ctx);
+    same = false;
   } else if ("oneOf" in mana) {
     colors = mana.oneOf;
     same = mana.same === true;
@@ -17113,6 +17139,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             // One of each colour among them, `amount` times over.
             const times = amountValue(spec.amount, ctx);
             for (const type of ctx.manaTypesOf(mana)) ctx.addMana(player, type, times, spec);
+          } else if (typeof mana === "object" && "colorsOfTarget" in mana) {
+            // "Any combination of its colors" with one colour or none to
+            // choose from (a split had more): that colour, or no mana.
+            const colors = colorsOfTargetSlot(mana.colorsOfTarget, ctx);
+            if (colors.length > 0) ctx.addMana(player, { oneOf: colors }, amountValue(spec.amount, ctx), spec);
           } else if (mana === "chosen") {
             // "The chosen color", read off the source permanent. With none
             // chosen it adds no mana (Shimmerwilds Growth's and Gauntlet of

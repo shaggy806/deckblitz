@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-490 already implemented / 10 missing
+491 already implemented / 9 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -152,7 +152,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  146  Eshki, Temur's Roar                            14510 decks  {G}{U}{R}        Legendary Creature — Human Warrior
 [x]  147  Inalla, Archmage Ritualist                     14464 decks  {2}{U}{B}{R}     Legendary Creature — Human Wizard
 [x]  148  Prosper, Tome-Bound                            14312 decks  {2}{B}{R}        Legendary Creature — Tiefling Warlock
-[ ]  149  Omnath, Locus of All                           14309 decks  {W}{U}{B/P}{R}{G} Legendary Creature — Phyrexian Elemental
+[x]  149  Omnath, Locus of All                           14309 decks  {W}{U}{B/P}{R}{G} Legendary Creature — Phyrexian Elemental
 [x]  150  Marrow-Gnawer                                  14305 decks  {3}{B}{B}        Legendary Creature — Rat Rogue
 [x]  151  Kykar, Wind's Fury                             14302 decks  {1}{U}{R}{W}     Legendary Creature — Bird Wizard
 [x]  152  The Scarab God                                 14251 decks  {3}{U}{B}        Legendary Creature — God

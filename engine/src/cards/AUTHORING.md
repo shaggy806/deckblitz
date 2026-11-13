@@ -4404,6 +4404,12 @@ ability can still be activated, for nothing):
   — "Add {C}. If this has a luck counter on it, instead add one mana of any
   color" (Gemstone Caverns): a `oneOf` over the list the condition picks, read
   off the source as the mana is made.
+- `{ colorsOfTarget: number }` (not one of the board lists: a resolving
+  effect's only, never a mana ability's) — "add three mana in any combination
+  of **its** colors" (Omnath, Locus of All, of the card it revealed): a
+  `oneOf` over the colours of what that target slot names, so a
+  `look-and-choose`'s `then` reads its chosen card as slot 0. A one-coloured
+  card makes that colour with nothing asked; a colourless one, none.
 
 **"Choose a color. Add an amount of mana of that color equal to your devotion
 to that color"** (Nykthos, Shrine to Nyx; Nyx Lotus) is `mana: "any-color"`

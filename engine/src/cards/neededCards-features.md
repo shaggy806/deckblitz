@@ -394,6 +394,19 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### Mana in any combination of a card's colours — built 2026-11-12
+
+The commander gap's `effect:add-mana-combination-of-card-colors`. `add-mana`'s
+`mana: { colorsOfTarget: n }`: a `oneOf` over the colours of what target slot
+`n` names, read as the mana is added — split as any other "N mana in any
+combination of …" (rule 608.2d), one colour added with nothing asked, a
+colourless card none (105.2c). A `look-and-choose`'s `then` names its chosen
+card as slot 0. Not a board list: a mana ability has no target, so the payment
+planner reads it as nothing. Omnath, Locus of All (commander 149) is the only
+card in the Oracle snapshot with the wording; its reveal condition was already
+the `coloredManaSymbols` filter clause, and its black mana Kruphix's
+`unspentManaBecomes`.
+
 ### "Is destroyed" — built 2026-11-10
 
 The commander gap's `trigger:destroyed`. A **`destroyed`** trigger (`who`,
