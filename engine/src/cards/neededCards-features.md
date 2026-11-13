@@ -477,6 +477,17 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### An impulse permission for only some of the cards exiled — built 2026-11-13
+
+The key `zone:impulse-free-lesser-mana-value-than-own`. `impulse-exile`'s
+`grantIf` (a `CardFilter`) gives the permission only to the exiled cards that
+match once they're all exiled, read from the controller's side with this
+resolution's `{ thisWay: "exiled" }` set (left unbound by
+`bindDynamicCompares`; the resolution context's `cardMatches` now answers an
+`{ amount }`). Triple Triad: its owner's card, and each other with a lesser
+mana value than it (an aggregate over the cards exiled this way), free.
+`test/impulse-grant-if.test.ts`.
+
 ### A spell copy read as it last was on the stack — built 2026-11-13
 
 The key `bug:mana-value-of-countered-copy`. A copy of a spell leaving the

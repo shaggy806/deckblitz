@@ -10221,6 +10221,16 @@ export type EffectSpec =
        * card … you may cast a spell from among cards exiled with this
        * enchantment". */
       readonly linked?: true;
+      /** Only the exiled cards this matches get the permission, judged once
+       * everything is exiled, from the controller's side, with this
+       * resolution's `{ thisWay: "exiled" }` set to compare against — Triple
+       * Triad's "you may play the card you own exiled this way and each other
+       * card exiled this way with lesser mana value than it": `{ anyOf: [{
+       * ownedBy: "you" }, { manaValue: { op: "lt", n: { amount: { aggregate:
+       * "sum", of: "mana-value", filter: { ownedBy: "you" }, in: { thisWay:
+       * "exiled" } } } } }] }`.
+       * The rest stay exiled with none. */
+      readonly grantIf?: CardFilter;
     } & PlayGrant)
   | {
       /** Scry `amount` (rule 701.18) — look at the top N, put any number on
@@ -12458,6 +12468,8 @@ export interface EffectApi {
       readonly faceDown?: boolean;
       /** See the effect's `linked`. */
       readonly linked?: boolean;
+      /** See the effect's `grantIf`: asked of each exiled card once all are. */
+      readonly grantIf?: (id: ObjectId) => boolean;
     },
   ): void;
   /** See the `"ward"` {@link EffectSpec}. */
@@ -16253,6 +16265,9 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     // read as the card is cast (Maralen's "the number of Elves and Faeries
     // you control"), so it stays unbound — `Game.playOptions` counts it.
     const liveFilter = record["kind"] === "impulse-exile" && record["whileSource"] === true;
+    // An impulse exile's `grantIf` compares against what it exiles, so it's
+    // read once the cards are gone (Triple Triad), not bound before.
+    const afterExile = record["kind"] === "impulse-exile";
     const walked = Object.fromEntries(
       Object.entries(record).map(([key, v]) => [
         key,
@@ -16260,7 +16275,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         // "This Equipment's equip abilities cost {2} less" — Firion): its
         // "this" is whatever has the static, read as each cost is priced
         // (`Game.abilityCostModificationReaches`).
-        NESTED_EFFECT_KEYS.has(key) || (liveFilter && key === "filter") || key === "abilityCostModification" ? v : walk(v),
+        NESTED_EFFECT_KEYS.has(key) ||
+        (liveFilter && key === "filter") ||
+        (afterExile && key === "grantIf") ||
+        key === "abilityCostModification"
+          ? v
+          : walk(v),
       ]),
     );
     return bindShares(walked);
@@ -21328,6 +21348,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.choose !== undefined ? { choose: spec.choose } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
         ...(spec.linked === true ? { linked: true } : {}),
+        ...(spec.grantIf !== undefined ? { grantIf: (id: ObjectId) => ctx.cardMatches(id, spec.grantIf!) } : {}),
       });
       return;
     }

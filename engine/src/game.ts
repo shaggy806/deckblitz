@@ -37208,9 +37208,15 @@ export class Game {
       attackRandomOpponent: (target, notAttackedLastCombat) =>
         this.attackRandomOpponent(controller, target, notAttackedLastCombat),
       pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
+      // An `{ amount }` in it is read in this resolution (Triple Triad's
+      // "lesser mana value than" the card exiled this way).
       cardMatches: (id, filter) =>
         this.state.objects[id] !== undefined &&
-        matchesFilter(this.state, this.registry, id, filter, { you: controller, source }),
+        matchesFilter(this.state, this.registry, id, filter, {
+          you: controller,
+          source,
+          amount: (amount, each) => amountValue(amount, context, each),
+        }),
       showCardFromHand: (owner, card, how) => {
         if (this.state.objects[card]?.zone !== "hand") return;
         if (how === "reveal") {
@@ -43657,6 +43663,8 @@ controlledBy,
       readonly faceDown?: boolean;
       /** Linked to this stint of the source (rule 607.2a). */
       readonly linkStint?: number;
+      /** Only the exiled cards this holds for get the permission. */
+      readonly grantIf?: (id: ObjectId) => boolean;
     } = {},
   ): void {
     if (amount <= 0) return;
@@ -43686,7 +43694,12 @@ controlledBy,
     }
 
     this.endUntilNextExile(grant.duration, source, taken);
-    // "One of those cards": one play shared among them all (or one per type).
+    // "And each other card exiled this way with lesser mana value than it"
+    // (Triple Triad): judged once every card is exiled; the rest stay exiled
+    // with no permission.
+    const grantIf = opts.grantIf;
+    const granted =
+      grantIf === undefined ? taken : taken.filter((id) => this.state.objects[id]?.zone === "exile").filter((id) => grantIf(id));    // "One of those cards": one play shared among them all (or one per type).
     const group = this.permissionGroupFor(grant);
     // "Until your next turn, players may play cards they exiled this way"
     // (Memory Vessel): "your" is the effect's, whoever may play the card.
@@ -43695,21 +43708,21 @@ controlledBy,
 
     // "Choose one of them" — the rest stay exiled with no permission.
     const choose = opts.choose;
-    if (choose !== undefined && choose < taken.length) {
+    if (choose !== undefined && choose < granted.length) {
       this.state.awaiting = {
         kind: "choose-from-zone",
         player: controller,
-        ids: taken,
-        eligible: taken,
-        min: Math.min(choose, taken.length),
-        max: Math.min(choose, taken.length),
+        ids: granted,
+        eligible: granted,
+        min: Math.min(choose, granted.length),
+        max: Math.min(choose, granted.length),
         destination: "exile-playable",
         leftover: "stay",
         playGrant: permissionFor(controller),
       };
       return;
     }
-    for (const id of taken) {
+    for (const id of granted) {
       const object = this.state.objects[id];
       if (object !== undefined) object.playPermission = permissionFor(object.owner);
     }
