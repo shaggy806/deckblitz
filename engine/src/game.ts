@@ -211,6 +211,7 @@ import {
   playerCantWinGame,
   playerGainLifeProhibited,
   playerLosesNoLifeToDamage,
+  ownTriggerSpares,
   prohibitionsOnPlayer,
   reachesObject,
   whoBinds,
@@ -28804,6 +28805,11 @@ export class Game {
       delete this.state.resolvingSource;
     }
     if (top !== undefined) this.state.resolvingController = top.controller;
+    if (top?.kind === "ability" && (top.abilityKind === "triggered" || top.abilityKind === "chapter")) {
+      this.state.resolvingTriggered = true;
+    } else {
+      delete this.state.resolvingTriggered;
+    }
     this.resolveTopObject();
     this.holdResolutionOpen(parked);
     this.endResolutionIfDone();
@@ -28886,6 +28892,7 @@ export class Game {
       delete this.state.repeatSince;
       delete this.state.resolvingSource;
       delete this.state.resolvingController;
+      delete this.state.resolvingTriggered;
     }
   }
 
@@ -50726,7 +50733,9 @@ controlledBy,
     if (spared !== undefined && until !== undefined && until.source === except) until = { ...until, source: spared };
     if (spared !== undefined && linkedTo !== undefined && linkedTo.source === except) linkedTo = { ...linkedTo, source: spared };
     this.withLeaveBatch(() => {
-      const victims = this.battlefieldMatching(you, filter).filter((id) => id !== spared);
+      const victims = this.battlefieldMatching(you, filter).filter(
+        (id) => id !== spared && !ownTriggerSpares(this.state, this.registry, "exile", id),
+      );
       this.snapshotLeaving(victims);
       for (const id of victims) {
         const before = this.state.objects[id]?.zoneChangeCount;
@@ -52142,6 +52151,10 @@ controlledBy,
 
   private exileByEffect(target: TargetRef, exiledBy?: ObjectId, split = true): void {
     if (target.kind !== "object") return;
+    // "Triggered abilities you control can't cause you to … exile creature
+    // tokens you control" (The Master, Multiplied): myriad's end-of-combat
+    // exile among them.
+    if (ownTriggerSpares(this.state, this.registry, "exile", target.object)) return;
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
     // Graveyard as well as battlefield: "Exile target card from a graveyard"
@@ -54499,7 +54512,13 @@ controlledBy,
   /** Rule 701.21a: whether `id`'s controller could sacrifice it — not if it
    * can't be sacrificed (`cantBeSacrificed` in `characteristics.ts`). */
   private canBeSacrificed(id: ObjectId): boolean {
-    return !cantBeSacrificed(this.state, this.registry, id) && !sacrificeProhibitedByController(this.state, id);
+    return (
+      !cantBeSacrificed(this.state, this.registry, id) &&
+      !sacrificeProhibitedByController(this.state, id) &&
+      // "Triggered abilities you control can't cause you to sacrifice …"
+      // (The Master, Multiplied).
+      !ownTriggerSpares(this.state, this.registry, "sacrifice", id)
+    );
   }
 
   /** See the `"cant-be-sacrificed"` {@link EffectSpec}'s `by`: `player` can't

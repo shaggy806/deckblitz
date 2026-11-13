@@ -24,6 +24,7 @@ import {
   table,
   toHand,
   toLibrary,
+  tokensNamed,
   zone,
 } from "./harness.js";
 
@@ -162,5 +163,39 @@ describe("Fear of Sleep Paralysis: an opponent's stun counters stay", () => {
     nextTurn(game);
     nextTurn(game);
     expect(counters(game, bears, "stun")).toBe(0);
+  });
+});
+
+describe("The Master, Multiplied: your triggers spare your creature tokens", () => {
+  it("Kiki-Jiki's copy isn't sacrificed at the end step", () => {
+    const { game } = table();
+    spawn(game, "The Master, Multiplied");
+    const kiki = spawn(game, "Kiki-Jiki, Mirror Breaker");
+    const bears = spawn(game, "Grizzly Bears");
+    activate(game, kiki, 0, { targets: [ref(bears)] });
+    expect(tokensNamed(game, "Grizzly Bears", A)).toBe(1);
+    nextTurn(game);
+    expect(tokensNamed(game, "Grizzly Bears", A)).toBe(1);
+  });
+
+  it("Twinflame's copy isn't exiled", () => {
+    const { game } = table();
+    spawn(game, "The Master, Multiplied");
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Mountain", 2);
+    cast(game, toHand(game, "Twinflame"), { targets: [ref(bears)] });
+    expect(tokensNamed(game, "Grizzly Bears", A)).toBe(1);
+    nextTurn(game);
+    expect(tokensNamed(game, "Grizzly Bears", A)).toBe(1);
+  });
+
+  it("two legendary creature tokens of one name both stay", () => {
+    const { game } = table();
+    const master = spawn(game, "The Master, Multiplied");
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 2 }, [ref(master)]);
+    // Through a priority pass, so the state-based actions are checked.
+    nextTurn(game);
+    expect(tokensNamed(game, "The Master, Multiplied", A)).toBe(2);
+    expect(zone(game, master)).toBe("battlefield");
   });
 });

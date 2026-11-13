@@ -202,7 +202,15 @@ export type Prohibition<W = ProhibitedPlayer> =
        * of the player protected. */
       readonly act: "be-caused";
       readonly who: W;
-      readonly what: "discard" | "sacrifice";
+      readonly what: "discard" | "sacrifice" | "exile";
+      /** `"own-triggered"`: "**triggered abilities you control** can't cause
+       * you to sacrifice or exile creature tokens you control" (The Master,
+       * Multiplied) — the cause is a triggered ability (a chapter ability
+       * too) of the player protected, resolving; its `object` narrows what
+       * it spares (a permanent they control). See {@link ownTriggerSpares}.
+       * Without it, the cause is an opponent's spell or ability. */
+      readonly by?: "own-triggered";
+      readonly object?: CardFilter;
     }
   | ({
       readonly act: "untap" | "transform" | "phase-in" | "phase-out" | "enter" | "become-suspected";
@@ -448,7 +456,28 @@ export function causeProhibited(
 ): boolean {
   if (causedBy === undefined || causedBy === player) return false;
   return prohibitionsOnPlayer(state, registry, "be-caused", player).some(
-    ({ source, prohibition }) => prohibition.what === what && causedBy !== source.controller,
+    ({ source, prohibition }) => prohibition.by === undefined && prohibition.what === what && causedBy !== source.controller,
+  );
+}
+
+/** Whether the triggered ability resolving now can't make its controller
+ * sacrifice or exile `id`, a permanent they control (The Master,
+ * Multiplied — a `be-caused` of `by: "own-triggered"`). */
+export function ownTriggerSpares(
+  state: GameState,
+  registry: CardRegistry,
+  what: "sacrifice" | "exile",
+  id: ObjectId,
+): boolean {
+  if (state.resolvingTriggered !== true) return false;
+  const object = state.objects[id];
+  if (object === undefined || object.zone !== "battlefield" || state.resolvingController !== object.controller) return false;
+  return prohibitionsOnPlayer(state, registry, "be-caused", object.controller).some(
+    ({ source, prohibition }) =>
+      prohibition.by === "own-triggered" &&
+      prohibition.what === what &&
+      (prohibition.object === undefined ||
+        matchesFilter(state, registry, id, prohibition.object, { you: source.controller, source: source.id })),
   );
 }
 

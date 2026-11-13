@@ -6283,6 +6283,10 @@ export interface GameState {
    * `resolutionSince`): who controls it — not whoever part of it is being done
    * by, a "that player may search" running in that player's name. */
   resolvingController?: PlayerId;
+  /** While a triggered ability resolves (a chapter ability included, rule
+   * 714.2b), with `resolvingController`: what The Master, Multiplied's
+   * "triggered abilities you control can't cause you to …" reads. */
+  resolvingTriggered?: true;
   /**
    * An effect has ended the turn or the combat phase (rule 724): every trigger
    * waiting has ceased to exist and the stack has been exiled, and what's left

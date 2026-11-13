@@ -27747,6 +27747,7 @@ import _poolTheMasamune from "./pool/the-masamune.js";
 import _poolTheMasterFormedAnew from "./pool/the-master-formed-anew.js";
 import _poolTheMasterGallifreysEnd from "./pool/the-master-gallifreys-end.js";
 import _poolTheMasterMesmerist from "./pool/the-master-mesmerist.js";
+import _poolTheMasterMultiplied from "./pool/the-master-multiplied.js";
 import _poolTheMasterOfKeys from "./pool/the-master-of-keys.js";
 import _poolTheMasterOfLakeTown from "./pool/the-master-of-lake-town.js";
 import _poolTheMasterTranscendent from "./pool/the-master-transcendent.js";
@@ -60426,6 +60427,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheMasterFormedAnew,
   _poolTheMasterGallifreysEnd,
   _poolTheMasterMesmerist,
+  _poolTheMasterMultiplied,
   _poolTheMasterOfKeys,
   _poolTheMasterOfLakeTown,
   _poolTheMasterTranscendent,
@@ -93118,6 +93120,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-master-formed-anew": _poolTheMasterFormedAnew,
   "pool/the-master-gallifreys-end": _poolTheMasterGallifreysEnd,
   "pool/the-master-mesmerist": _poolTheMasterMesmerist,
+  "pool/the-master-multiplied": _poolTheMasterMultiplied,
   "pool/the-master-of-keys": _poolTheMasterOfKeys,
   "pool/the-master-of-lake-town": _poolTheMasterOfLakeTown,
   "pool/the-master-transcendent": _poolTheMasterTranscendent,
