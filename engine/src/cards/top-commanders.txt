@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-489 already implemented / 11 missing
+490 already implemented / 10 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -487,7 +487,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  481  Anhelo, the Painter                             6362 decks  {U}{B}{R}        Legendary Creature — Vampire Assassin
 [x]  482  Selvala, Heart of the Wilds                     6362 decks  {1}{G}{G}        Legendary Creature — Elf Scout
 [x]  483  Wilson, Refined Grizzly                         6353 decks  {1}{G}           Legendary Creature — Bear Warrior
-[ ]  484  Tevesh Szat, Doom of Fools                      6317 decks  {4}{B}           Legendary Planeswalker — Szat
+[x]  484  Tevesh Szat, Doom of Fools                      6317 decks  {4}{B}           Legendary Planeswalker — Szat
 [x]  485  Aeve, Progenitor Ooze                           6278 decks  {2}{G}{G}{G}     Legendary Creature — Ooze
 [x]  486  Narset, Enlightened Master                      6266 decks  {3}{U}{R}{W}     Legendary Creature — Human Monk
 [x]  487  Ratadrabik of Urborg                            6248 decks  {2}{W}{B}        Legendary Creature — Zombie Wizard

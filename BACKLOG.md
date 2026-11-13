@@ -16,7 +16,7 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**489 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
+**490 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
 `npm run cmdrs:mark -w engine`). An imported decklist usually has its commander substituted, and
 that one card is the reason the deck exists. Live numbers for everything below come from
 `npm run cmdrs:gaps -w engine`.
