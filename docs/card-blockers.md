@@ -666,6 +666,18 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 317 (2026-11-12, `author-top-cards` on the top 5000's last cards, ranks 3865–4068)** —
+  7 authored, each on a small feature built for it: Metalworker (a mana ability that reveals from
+  the hand first, asked as it's activated), Mystic Reflection and Essence of the Wild (enter as a
+  copy of something else, tokens too; the entering player orders two that differ), Vesuvan
+  Duplimancy (a cast trigger keeps what its spell targeted: the original target, even once the
+  spell is retargeted or countered), Firion, Wild Rose Warrior (a static a copy is given reaches
+  ability costs, its "this" the copy), Karmic Justice (whose spell or ability destroyed it), Chaos
+  Dragon (each player rolls; the opponents who rolled highest, and their planeswalkers, can't be
+  attacked). Blocked (`B317.json`), small and not reached, the research in its record: Hushbringer
+  (creatures dying cause no triggers either). Infinite Reflection's static half now runs; its
+  enters trigger ("becomes a copy of that creature", the host as the Aura entered) is a new narrow
+  key. The other ~43 keep their B294 records, Hushbringer first.
 - **Batch 316 (2026-11-12, `author-top-cards` on the top 5000's last cards, ranks 3596–3964)** —
   8 authored, each on a small feature built for it: The Masamune (granted trigger doublers, and
   emblems' triggers in them), Victory Chimes (a player of your choice adds the mana, one menu entry

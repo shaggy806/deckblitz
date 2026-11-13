@@ -1,0 +1,28 @@
+{
+ "batch": "B317",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 3865–4068 (2026-11-12): Metalworker and the next of the cards still missing from top-commander-cards.txt (B294/B316 records), built best rank first, no agents. Features: `add-mana`'s `first` as a reveal from the hand, asked as the mana ability is activated (Metalworker); `others-enter-battlefield`'s `asCopyOf` — enter as a copy of something else, for statics and resolved \"next time\" shields, tokens included (Mystic Reflection, and Essence of the Wild, rank 25121, on the same piece); a cast trigger keeps what its spell targeted (`{ targetsOf: \"trigger-object\" }` — Vesuvan Duplimancy); a static a copy exception gives reaches ability costs, its \"this\" the copy (Firion, Wild Rose Warrior); `permanent-destroyed`'s `by` and the `destroyed` trigger's `byOpponent` (Karmic Justice); the `\"opponents-who-rolled-highest\"` scope and the `{ playerAndPlaneswalkers }` attack aim (Chaos Dragon). No majors.",
+ "authored": [
+  { "name": "Metalworker", "files": ["engine/src/cards/pool/metalworker.ts"], "tested": true },
+  { "name": "Mystic Reflection", "files": ["engine/src/cards/pool/mystic-reflection.ts"], "tested": true },
+  { "name": "Essence of the Wild", "files": ["engine/src/cards/pool/essence-of-the-wild.ts"], "tested": true },
+  { "name": "Vesuvan Duplimancy", "files": ["engine/src/cards/pool/vesuvan-duplimancy.ts"], "tested": true },
+  { "name": "Firion, Wild Rose Warrior", "files": ["engine/src/cards/pool/firion-wild-rose-warrior.ts"], "tested": true },
+  { "name": "Karmic Justice", "files": ["engine/src/cards/pool/karmic-justice.ts"], "tested": true },
+  { "name": "Chaos Dragon", "files": ["engine/src/cards/pool/chaos-dragon.ts"], "tested": true }
+ ],
+ "blocked": [
+  {
+   "name": "Hushbringer",
+   "needs": ["static:suppress-enter-and-dies-triggers"],
+   "size": "small",
+   "why": "Not reached. Researched: `suppressEntryTriggers` (Torpor Orb: `{ who: \"everyone\", entering: { type: \"creature\" } }`) is checked in trigger detection for the `permanent-entered-battlefield` event only (`Game.entryTriggersSuppressed`). Dying needs the same check for a creature's death, read as it last existed: `dies` triggers, `leaves-battlefield` triggers when it left by dying, and \"put into a graveyard from the battlefield\" triggers (the rulings) — but not `sacrifice` or `destroyed` triggers (an event that causes the death still triggers), and a graveyard-from-anywhere trigger only while Hushbringer is still on the battlefield afterwards and the ability isn't the dying card's own. A Hushbringer dying at the same time still suppresses (look back, as `triggerDoublers` reads a departed source), batched \"one or more die\" triggers leave the suppressed creatures out."
+  },
+  {
+   "name": "Infinite Reflection",
+   "needs": ["trigger:enters-attached-becomes-copy-of-host"],
+   "size": "small",
+   "why": "Its static half now runs (`asCopyOf: \"enchanted\"`, built for Mystic Reflection). Left: \"When this Aura enters attached to a creature, each other nontoken creature you control becomes a copy of that creature\" — a `become-copy` over a filter with `of` the host as the Aura entered (the first creature, even if it has moved since — its ruling), which `become-copy`'s `of` can't name yet."
+  }
+ ]
+}

@@ -101,7 +101,10 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   `dealDamage`/`addCounter`, which are synchronous at every call site. Only Feather's exile
   beside another exiling replacement asks today. One-shot redirection shields exist
   (`prevent-damage`'s `redirectTo`, rule 614.9), but a redirection's order is chosen the same
-  way — a plain prevention shield first, never asked.
+  way — a plain prevention shield first, never asked. Two "enter as a copy of" effects that
+  differ (Essence of the Wild beside a Mystic Reflection) are asked for a card or a token copy
+  that waits to enter (`Game.enterAsCopyAsked`), but a token minted straight onto the battlefield
+  (`Game.mintFreshTokenObject`) takes the resolved one last, unasked.
 - **The rest of leaving the game** (rule 800.4). 800.4a, 800.4c (a control effect ending with the
   default controller gone exiles the permanent — `recomputeControl`) and 800.4m are modeled, and
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an

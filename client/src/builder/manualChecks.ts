@@ -12160,4 +12160,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- Batch 317 (2026-11-12) ---------------------------------------------------------
+  preset(
+    'Metalworker: reveal artifact cards for mana',
+    board({
+      you: { bf: ['Metalworker'], hand: ['Sol Ring', 'Mind Stone', 'Grizzly Bears', 'Steel Hellkite'] },
+    }),
+  ),
+  preset(
+    'Mystic Reflection: the next creature enters as a copy',
+    board({
+      you: { bf: ['Island*2', 'Forest'], hand: ['Mystic Reflection', 'Llanowar Elves'] },
+      opp: [{ bf: ['Serra Angel'] }],
+    }),
+  ),
+  preset(
+    'Essence of the Wild: order two enter-as-a-copy effects',
+    board({
+      you: { bf: ['Essence of the Wild', 'Island*2', 'Forest'], hand: ['Mystic Reflection', 'Llanowar Elves'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Chaos Dragon: it cannot attack whoever rolled highest',
+    board({
+      you: { bf: ['Chaos Dragon'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

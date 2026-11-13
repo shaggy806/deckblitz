@@ -11782,6 +11782,10 @@
    "family": "replacement:copy-on-enter-options",
    "example": "Infinite Reflection: nontoken creatures you control enter as a copy of the enchanted creature."
   },
+  "trigger:enters-attached-becomes-copy-of-host": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Infinite Reflection: when this Aura enters attached to a creature, each other nontoken creature you control becomes a copy of that creature."
+  },
   "filter:linked-exile-grant-card-type": {
    "family": "effect:linked-exiled-card",
    "example": "Dark Impostor: only the exiled creature cards' activated abilities."

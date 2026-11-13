@@ -8100,3 +8100,21 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Click Victory Chimes, and choose the entry that says Bob adds it.
 - **Expect:** The menu has one entry per player, each ending "(… adds it)". Victory Chimes taps; the History log, with Detailed ticked, reads "Bob adds 1{C}", and Victory Chimes untaps in Bob's untap step.
 - **Not a bug:** With nothing else to do, your turn passes at once, so Bob's {C} empties before you can see it.
+
+### Metalworker: reveal artifact cards for mana
+- **Do:** Click Metalworker, then its ability in the menu. Pick Sol Ring, Mind Stone and Steel Hellkite, and press "Confirm (3)".
+- **Expect:** "Choose any number of cards to reveal from your hand" shows your hand with Grizzly Bears dimmed, and offers "Reveal none" until you pick one. Metalworker taps and your mana reads 6; the three cards stay in your hand and nothing goes on the stack.
+- **Not a bug:** Casting a spell never taps Metalworker for you: click it yourself first, then cast with the mana.
+
+### Mystic Reflection: the next creature enters as a copy
+- **Do:** Cast Mystic Reflection on Bob's Serra Angel, then cast Llanowar Elves.
+- **Expect:** Llanowar Elves enters as a Serra Angel: a 4/4 with flying and vigilance, shown as Serra Angel.
+- **Not a bug:** Only the next creature or planeswalker to enter this turn is a copy; a land entering first doesn't use it up.
+
+### Essence of the Wild: order two enter-as-a-copy effects
+- **Do:** Cast Mystic Reflection on Bob's Grizzly Bears and pass so it resolves, then cast Llanowar Elves and pass. When asked, choose "Essence of the Wild: enters as a copy of Essence of the Wild".
+- **Expect:** The question reads "Llanowar Elves would enter the battlefield. Which applies first?" with one entry per effect. With Essence of the Wild first, the Elves enter as Grizzly Bears, a 2/2: the last one applied wins.
+
+### Chaos Dragon: it cannot attack whoever rolled highest
+- **Do:** Move to combat and try to attack each opponent with Chaos Dragon.
+- **Expect:** At the beginning of combat the History log shows a d20 roll for each of the four players. The Dragon can't be aimed at any opponent whose result was the highest (ties included); if yours alone was highest it can attack anyone, and it must attack if it can.
