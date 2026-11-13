@@ -6059,7 +6059,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   player drawing a card"). `filter` narrows the permanent, spell, copy or
   card the event is about: Traveling Chocobo's "a land or Bird you control
   entering" is `{ anyOf: [{ type: "land" }, { subtype: "Bird" }], controlledBy:
-  "you" }`.
+  "you" }`. `selfOrEmblems: true` is "a triggered ability of **this creature
+  or an emblem you own**" (The Masamune's grant): only the static's own
+  permanent's abilities and its controller's emblems' — without it an
+  emblem's ability is never doubled. A doubler can be granted
+  (`grantsStatic`): it's read off the creature it's granted to, and a death
+  at the same time looks back at it as that creature last had it.
 - `doubleTriggersOf: { filter?, selfAndEquipment?, others?, spells?, host? }` — the same, keyed on
   **whose** ability it is: "if a triggered ability of an Ally you control
   triggers" (Katara, the Fearless: `filter: { subtype: "Ally", controlledBy:

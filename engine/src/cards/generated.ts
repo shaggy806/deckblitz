@@ -27742,6 +27742,7 @@ import _poolTheLunarWhale from "./pool/the-lunar-whale.js";
 import _poolTheMadcapJester from "./pool/the-madcap-jester.js";
 import _poolTheMagicMirror from "./pool/the-magic-mirror.js";
 import _poolTheManaRig from "./pool/the-mana-rig.js";
+import _poolTheMasamune from "./pool/the-masamune.js";
 import _poolTheMasterFormedAnew from "./pool/the-master-formed-anew.js";
 import _poolTheMasterGallifreysEnd from "./pool/the-master-gallifreys-end.js";
 import _poolTheMasterMesmerist from "./pool/the-master-mesmerist.js";
@@ -60417,6 +60418,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheMadcapJester,
   _poolTheMagicMirror,
   _poolTheManaRig,
+  _poolTheMasamune,
   _poolTheMasterFormedAnew,
   _poolTheMasterGallifreysEnd,
   _poolTheMasterMesmerist,
@@ -93105,6 +93107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-madcap-jester": _poolTheMadcapJester,
   "pool/the-magic-mirror": _poolTheMagicMirror,
   "pool/the-mana-rig": _poolTheManaRig,
+  "pool/the-masamune": _poolTheMasamune,
   "pool/the-master-formed-anew": _poolTheMasterFormedAnew,
   "pool/the-master-gallifreys-end": _poolTheMasterGallifreysEnd,
   "pool/the-master-mesmerist": _poolTheMasterMesmerist,

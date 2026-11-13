@@ -17611,7 +17611,11 @@ export class Game {
         }
       }
     };
-    const doubles = (d: Doubler): boolean => {
+    // An emblem's ability: only a doubler that names emblems reaches it.
+    const fromEmblem = this.state.objects[sourceId]?.kind === "emblem";
+    const doubles = (d: Doubler, holder: ObjectId): boolean => {
+      if (d.selfOrEmblems === true ? !fromEmblem && sourceId !== holder : fromEmblem) return false;
+      if (fromEmblem && this.state.objects[sourceId]?.owner !== controller) return false;
       if (d.source !== undefined && !matchesFilter(this.state, this.registry, sourceId, d.source, { you: controller, lastKnown: true })) {
         return false;
       }
@@ -17630,10 +17634,11 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source.controller !== controller || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      // Its printed statics and those granted it (The Masamune's).
+      for (const ability of this.staticsOfSource(source)) {
         const d = ability.doubleTriggers;
         if (d === undefined || !this.staticActive(source, ability)) continue;
-        if (doubles(d)) count += 1;
+        if (doubles(d, id)) count += 1;
       }
     }
     // A creature dying at the same time as the doubler, the doubler itself
@@ -17649,9 +17654,9 @@ export class Game {
         const last = was?.lastKnown;
         if (was === undefined || was.zone === "battlefield" || last === undefined) continue;
         if (last.controller !== controller || last.lostAbilities) continue;
-        for (const ability of this.registry.get(last.textName ?? last.name).static) {
+        for (const ability of [...this.registry.get(last.textName ?? last.name).static, ...(last.grantedDoublers ?? [])]) {
           const d = ability.doubleTriggers;
-          if (d !== undefined && ability.condition === undefined && doubles(d)) count += 1;
+          if (d !== undefined && ability.condition === undefined && doubles(d, id)) count += 1;
         }
       }
     }
@@ -31604,7 +31609,17 @@ export class Game {
           const entryDoublers = !permanentSource
             ? live.zone === "stack"
               ? this.sourceTriggerDoublers(object.controller, id, false)
-              : 0
+              : // An emblem's: only a doubler that names emblems (The
+                // Masamune's "or an emblem you own").
+                live.kind === "emblem"
+                ? this.causeTriggerDoublers(
+                    object.controller,
+                    ability.trigger.on === "dies" && event.type === "permanents-died"
+                      ? { ...event, died: this.diedBatchMatching(ability.trigger, event, object) }
+                      : event,
+                    id,
+                  )
+                : 0
             : (ability.trigger.on === "enters-battlefield" &&
               event.type === "permanent-entered-battlefield"
                 ? this.entryTriggerDoublers(object.controller, event.object)
@@ -60960,6 +60975,11 @@ controlledBy,
     // has left too, or its own modifiers have been cleared by the move. Only
     // those granted after any loss of all its abilities (rule 613.7).
     const granted = this.effectiveTriggeredEntries(id).flatMap((e) => (e.ref === undefined ? [] : [e.ref]));
+    // The trigger doublers it had been granted (The Masamune's equipped
+    // creature): a death at the same time looks back at them, as it does at
+    // a printed one (`causeTriggerDoublers`).
+    const grantedDoublers =
+      object.zone === "battlefield" ? grantedStatics(this.state, this.registry, object, (s) => s.doubleTriggers !== undefined) : [];
     // Whoever had goaded it, however — a static goad included, read while
     // its source is still here (a simultaneous event snapshots every victim
     // before the first moves).
@@ -61055,6 +61075,7 @@ controlledBy,
         ? { copiable: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })) }
         : {}),
       ...(granted.length > 0 ? { grantedTriggers: granted } : {}),
+      ...(grantedDoublers.length > 0 ? { grantedDoublers: grantedDoublers.map((s) => ({ ...s })) } : {}),
     };
   }
 

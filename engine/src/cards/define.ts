@@ -3901,6 +3901,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     /** Whose ability, matched from this static's controller's side, beside
      * the cause: "… of an Equipment you control". */
     readonly source?: CardFilter;
+    /** "A triggered ability of this creature or an emblem you own" (The
+     * Masamune's grant): only this static's own permanent's abilities and
+     * those of emblems its controller owns (rule 114.4) — not another
+     * permanent's. Without it, an emblem's ability is never doubled: the
+     * others say "of a permanent". */
+    readonly selfOrEmblems?: true;
   };
   /**
    * "If a triggered ability of [a permanent] triggers, that ability triggers

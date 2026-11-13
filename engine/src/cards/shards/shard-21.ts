@@ -832,6 +832,7 @@ import _poolTheForetoldSoldier from "../pool/the-foretold-soldier.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
 import _poolTheHowlingCommandos from "../pool/the-howling-commandos.js";
 import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
+import _poolTheMasamune from "../pool/the-masamune.js";
 import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
@@ -1807,6 +1808,7 @@ const shard: CardShard = {
     _poolTheFrightfulFour,
     _poolTheHowlingCommandos,
     _poolTheInvincibleIronMan,
+    _poolTheMasamune,
     _poolTheMasterMesmerist,
     _poolTheRegalia,
     _poolTheSibsigCeremony,

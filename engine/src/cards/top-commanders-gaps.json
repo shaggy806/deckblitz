@@ -2382,7 +2382,8 @@
   "bug:simultaneous-discards",
   "mechanic:opening-hand-enter-choice",
   "decision:choose-two-players-on-enter",
-  "effect:lose-all-player-counters"
+  "effect:lose-all-player-counters",
+  "static:granted-dies-trigger-doubling"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
