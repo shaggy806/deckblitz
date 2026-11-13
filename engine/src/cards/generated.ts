@@ -30245,6 +30245,7 @@ import _poolVivisectionEvangelist from "./pool/vivisection-evangelist.js";
 import _poolVivisection from "./pool/vivisection.js";
 import _poolVivisurgeonsInsight from "./pool/vivisurgeons-insight.js";
 import _poolVizierOfDeferment from "./pool/vizier-of-deferment.js";
+import _poolVizierOfManyFaces from "./pool/vizier-of-many-faces.js";
 import _poolVizierOfRemedies from "./pool/vizier-of-remedies.js";
 import _poolVizierOfTheMenagerie from "./pool/vizier-of-the-menagerie.js";
 import _poolVizierOfTheScorpion from "./pool/vizier-of-the-scorpion.js";
@@ -62951,6 +62952,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVivisection,
   _poolVivisurgeonsInsight,
   _poolVizierOfDeferment,
+  _poolVizierOfManyFaces,
   _poolVizierOfRemedies,
   _poolVizierOfTheMenagerie,
   _poolVizierOfTheScorpion,
@@ -95670,6 +95672,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vivisection": _poolVivisection,
   "pool/vivisurgeons-insight": _poolVivisurgeonsInsight,
   "pool/vizier-of-deferment": _poolVizierOfDeferment,
+  "pool/vizier-of-many-faces": _poolVizierOfManyFaces,
   "pool/vizier-of-remedies": _poolVizierOfRemedies,
   "pool/vizier-of-the-menagerie": _poolVizierOfTheMenagerie,
   "pool/vizier-of-the-scorpion": _poolVizierOfTheScorpion,

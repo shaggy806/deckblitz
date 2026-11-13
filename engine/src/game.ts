@@ -7838,10 +7838,14 @@ export class Game {
     const ownDef = this.registry.get(printedCardName(clone));
     const ownPrototype = clone.modifiers.findLast((m) => m.copiable === true && m.setPt !== undefined)?.setPt;
     const ownPt = ownPrototype ?? ([ownDef.power ?? 0, ownDef.toughness ?? 0] as const);
-    const except =
+    // "…except if this creature was embalmed, …" (Vizier of Many Faces): the
+    // entering token carries embalm's mark; its exceptions join the rest.
+    const embalmedExcept = clone.modifiers.some((m) => m.embalmed === true) ? spec?.exceptIfEmbalmed : undefined;
+    const baseExcept =
       spec?.ownPt === true
         ? { ...spec.except, power: ownPt[0], toughness: ownPt[1] }
         : spec?.except;
+    const except = embalmedExcept === undefined ? baseExcept : { ...baseExcept, ...embalmedExcept };
     // "…if you control that creature" (Undercover Operative), as it's chosen.
     const copiedIsYours = copied !== undefined && copied.controller === chooser;
     clone.enterChoice = {
@@ -45361,6 +45365,8 @@ controlledBy,
       effectController?: PlayerId;
       /** What they're created with — see `GameObject.createdWith`. */
       createdWith?: TokenLink;
+      /** An embalm ability made them (`PtModifier.embalmed`). */
+      embalmed?: boolean;
     },
     /** `ofId` as it last existed where the effect refers to it, when it has
      * left there since: its copiable values are read off this (rule
@@ -45411,6 +45417,9 @@ controlledBy,
         : []),
       ...(opts.exceptions !== undefined ? copyExceptionModifiers(opts.exceptions, this.registry, copiableTypesOf(this.registry, copyName, inherited), copiableKeywordAbilities(this.registry, copyName, inherited)) : []),
       ...untilEndOfTurnKeywords(opts.gainUntilEndOfTurn ?? []),
+      // "This creature was embalmed": a mark that rides on the token, not a
+      // copiable value (Vizier of Many Faces asks it as the token enters).
+      ...(opts.embalmed === true ? [{ power: 0, toughness: 0, keywords: [], untilEndOfTurn: false, embalmed: true as const }] : []),
       ...(opts.gainKeywords !== undefined && opts.gainKeywords.length > 0
         ? [{ power: 0, toughness: 0, keywords: [...opts.gainKeywords], untilEndOfTurn: false }]
         : []),

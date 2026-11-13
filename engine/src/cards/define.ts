@@ -162,6 +162,12 @@ export interface CopyOnEnter {
   /** The copy effect's exceptions (rule 707.9a–b) — part of its copiable
    * values, so anything that copies it later copies them too. */
   readonly except?: CopyExceptions;
+  /** "…except **if this creature was embalmed**, the token has no mana cost,
+   * it's white, and it's a Zombie in addition to its other types" (Vizier of
+   * Many Faces): more exceptions, only for a token an embalm ability made
+   * (rule 702.128a) — the embalm copy's own are replaced by what it copies,
+   * so the card restates them. Joined to `except`. */
+  readonly exceptIfEmbalmed?: CopyExceptions;
   /**
    * "…and its power and toughness are equal to **this creature's** power and
    * toughness" (Hulking Metamorph): the exception's base P/T is the entering

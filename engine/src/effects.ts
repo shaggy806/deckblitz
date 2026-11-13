@@ -8619,6 +8619,10 @@ export type EffectSpec =
        * says of its tokens still applies); one a replacement makes beside
        * them doesn't (Chatterfang's Squirrels). */
       readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
+      /** The embalm helper's alone (rule 702.128a): the tokens are marked as
+       * made by an embalm ability, so "if this creature was embalmed" can
+       * ask (Vizier of Many Faces). Not a copiable value. */
+      readonly embalmed?: true;
     }
   | {
       /** Attach an Aura, Equipment or Fortification (rule 701.3a). `attachment`
@@ -12923,6 +12927,8 @@ export interface EffectApi {
       thenCounters?: { readonly kind: string; readonly amount: number };
       /** Counters each enters with — the effect's `withCounters`, read. */
       withCounters?: { readonly kind: string; readonly amount: number };
+      /** An embalm ability made them — the effect's `embalmed`. */
+      embalmed?: boolean;
       /** Keywords and triggered abilities they gain with no end (not
        * copiable — see the effect's `gains`). */
       gainKeywords?: readonly Keyword[];
@@ -20156,6 +20162,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.gains?.triggered !== undefined ? { gainTriggered: spec.gains.triggered } : {}),
           ...(spec.exceptions ? { exceptions: readCopyExceptions(spec.exceptions, ctx) } : {}),
           ...(spec.asCard === true || ofCards ? { asCard: true } : {}),
+          ...(spec.embalmed === true ? { embalmed: true } : {}),
           ...(spec.tapped === true ? { tapped: true } : {}),
           ...(spec.attacking !== undefined ? { attacking: resolveEnterAttacking(spec.attacking, ctx) } : {}),
           ...(spec.exileAtEndOfCombat === true ? { exileAtEndOfCombat: true } : {}),

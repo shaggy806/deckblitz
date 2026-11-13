@@ -2088,6 +2088,7 @@ export const embalmAbility = (cost: string, text: string): ActivatedAbility => (
     who: "you",
     asCard: true,
     exceptions: { setColors: ["W"], addSubtypes: ["Zombie"], noManaCost: true },
+    embalmed: true,
   },
   resolve: null,
   text,

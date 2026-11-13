@@ -3,8 +3,9 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toHand, toStep, types, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toStep, types, zone } from "./harness.js";
 import { computeCharacteristics } from "../characteristics.js";
+import { manaValueOfObject } from "../filter.js";
 import { printedCardName } from "../state.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -321,5 +322,54 @@ describe("Teferi, Mage of Zhalfir: creature cards you own that aren't on the bat
     const bolt = toHand(game, "Lightning Bolt", B);
     game.dispatch({ type: "pass-priority", player: A });
     expect(() => cast(game, bolt, { player: B, targets: [ref(A)] })).toThrow();
+  });
+});
+
+describe("Vizier of Many Faces: a Clone whose embalmed token keeps embalm's exceptions on what it copies", () => {
+  const colorsOf = (game: ReturnType<typeof table>["game"], id: ObjectId): string[] =>
+    [...computeCharacteristics(game.state, game.registry, id).colors].sort();
+
+  it("embalmed, the token copies a creature as a white Zombie with no mana cost", () => {
+    const { game, a } = table();
+    lands(game, "Island", 5);
+    const angel = spawn(game, "Serra Angel", B);
+    const card = toGraveyard(game, "Vizier of Many Faces");
+    a.chooseCopyFn = () => angel;
+    activate(game, card, 0);
+    expect(zone(game, card)).toBe("exile");
+    const made = Object.values(game.state.objects).filter((o) => o.isToken && o.zone === "battlefield");
+    expect(made.length).toBe(1);
+    const token = made[0];
+    expect(printedCardName(token)).toBe("Serra Angel");
+    expect(pt(game, token.id)).toEqual({ power: 4, toughness: 4 });
+    expect(colorsOf(game, token.id)).toEqual(["W"]);
+    expect(subtypes(game, token.id)).toEqual(["Angel", "Zombie"]);
+    expect(manaValueOfObject(game.registry, token)).toBe(0);
+  });
+
+  it("embalmed and copying a red creature, it's white only", () => {
+    const { game, a } = table();
+    lands(game, "Island", 5);
+    const giant = spawn(game, "Hill Giant", B);
+    const card = toGraveyard(game, "Vizier of Many Faces");
+    a.chooseCopyFn = () => giant;
+    activate(game, card, 0);
+    const token = Object.values(game.state.objects).find((o) => o.isToken && o.zone === "battlefield")!;
+    expect(printedCardName(token)).toBe("Hill Giant");
+    expect(colorsOf(game, token.id)).toEqual(["W"]);
+    expect(subtypes(game, token.id)).toEqual(["Giant", "Zombie"]);
+  });
+
+  it("cast from hand it's a plain copy: the creature's own color, types and mana cost", () => {
+    const { game, a } = table();
+    lands(game, "Island", 4);
+    const giant = spawn(game, "Hill Giant", B);
+    const vizier = toHand(game, "Vizier of Many Faces");
+    a.chooseCopyFn = () => giant;
+    cast(game, vizier);
+    expect(printedCardName(game.state.objects[vizier])).toBe("Hill Giant");
+    expect(colorsOf(game, vizier)).toEqual(["R"]);
+    expect(subtypes(game, vizier)).toEqual(["Giant"]);
+    expect(manaValueOfObject(game.registry, game.state.objects[vizier])).toBe(4);
   });
 });

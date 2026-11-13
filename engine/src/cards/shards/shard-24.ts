@@ -941,6 +941,7 @@ import _poolVisionSpectralSynthezoid from "../pool/vision-spectral-synthezoid.js
 import _poolVituGhaziGuildmage from "../pool/vitu-ghazi-guildmage.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
 import _poolVividRevival from "../pool/vivid-revival.js";
+import _poolVizierOfManyFaces from "../pool/vizier-of-many-faces.js";
 import _poolVogarNecropolisTyrant from "../pool/vogar-necropolis-tyrant.js";
 import _poolVoldarenThrillseeker from "../pool/voldaren-thrillseeker.js";
 import _poolVraskasFall from "../pool/vraskas-fall.js";
@@ -1964,6 +1965,7 @@ const shard: CardShard = {
     _poolVituGhaziGuildmage,
     _poolVividMeadow,
     _poolVividRevival,
+    _poolVizierOfManyFaces,
     _poolVogarNecropolisTyrant,
     _poolVoldarenThrillseeker,
     _poolVraskasFall,

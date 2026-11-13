@@ -1947,6 +1947,11 @@ export interface PtModifier {
    * A rule about it and that player, not an ability: it holds through a loss
    * of abilities, and nobody else is bound. See `Game.canBeSacrificed`. */
   cantBeSacrificedBy?: PlayerId;
+  /** A mark, not an effect, and not copiable: this token was created by an
+   * embalm ability (rule 702.128a — `create-token-copy`'s `embalmed`). What
+   * "if this creature was embalmed" asks as it enters (Vizier of Many Faces'
+   * `CopyOnEnter.exceptIfEmbalmed`); a later copy of the token wasn't. */
+  embalmed?: true;
   /** Its loyalty abilities may be activated this many times a turn while this
    * lasts (the `loyalty-activations` effect — Kaito, Dancing Shadow's "twice
    * this turn rather than only once", rule 606.3). A rule about it, not an
