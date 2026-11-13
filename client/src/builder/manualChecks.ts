@@ -12222,4 +12222,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Hill Giant'] }],
     }),
   ),
+  preset(
+    "Jinnie Fay, Jetmir's Second: make Dogs instead of the Soldiers",
+    board({
+      you: { bf: ["Jinnie Fay, Jetmir's Second", 'Plains*2'], hand: ['Raise the Alarm'] },
+    }),
+  ),
 ]

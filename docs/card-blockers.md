@@ -666,6 +666,17 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 320 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4407–4511)** —
+  6 authored, each on a small feature built for it: Jinnie Fay, Jetmir's Second ("you may instead
+  create that many" of a chosen token, the effect still making them; Flitwing moved onto it),
+  Master Chef (a granted enters-with-counters replacement, its own read ahead as the commander
+  enters), Tifa's Limit Break (a signed triple), Shadowgrange Archfiend (madness with a life
+  payment), Elturel Survivors (a count for the defending player), Senu, Keen-Eyed Protector (a
+  trigger from exile). Blocked (`B320.json`): small and not reached — Guff Rewrites History (a
+  required per-player target slot; optional `{ seat }` slots exist), Tasha, the Witch Queen (page
+  counters, casting exiled cards you don't own), Mechtitan Core (exiling five as a cost, a linked
+  return), Thran Portal (a life cost on its mana abilities, through payment planning); major —
+  New Blood (creature-type words for change-text; the user approved it for a later session).
 - **Batch 319 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4159–4411)** —
   10 authored, nine on a small feature built for each: Shay Cormac (losing protection and ward in
   layer 6, a later grant kept), Norn's Decree (the players being attacked, readable in a trigger's

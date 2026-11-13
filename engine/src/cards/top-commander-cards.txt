@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4967 already implemented / 33 missing (marks refreshed 2026-11-13)
+4973 already implemented / 27 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4301,7 +4301,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4308  Squirrel Sovereign                       {1}{G}           Creature — Squirrel Noble
 [x]  4309  Chaos Wand                               {3}              Artifact
 [x]  4310  Suplex                                   {1}{R}           Sorcery
-[ ]  4311  Master Chef                              {2}{G}           Legendary Enchantment — Background
+[x]  4311  Master Chef                              {2}{G}           Legendary Enchantment — Background
 [x]  4312  Unburial Rites                           {4}{B}           Sorcery
 [x]  4313  Mirage Mesa                              {0}              Land — Desert
 [x]  4314  Teferi, Mage of Zhalfir                  {2}{U}{U}{U}     Legendary Creature — Human Wizard
@@ -4345,7 +4345,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4352  Minn, Wily Illusionist                   {1}{U}{U}        Legendary Creature — Gnome Wizard
 [x]  4353  Crush Contraband                         {3}{W}           Instant
 [x]  4354  Ancestors' Aid                           {1}{R}           Instant
-[ ]  4355  Jinnie Fay, Jetmir's Second              {R/G}{G}{G/W}    Legendary Creature — Elf Druid
+[x]  4355  Jinnie Fay, Jetmir's Second              {R/G}{G}{G/W}    Legendary Creature — Elf Druid
 [x]  4356  Helga, Skittish Seer                     {G}{W}{U}        Legendary Creature — Frog Druid
 [x]  4357  Cauldron of Souls                        {5}              Artifact
 [x]  4358  Quandrix Command                         {1}{G}{U}        Instant
@@ -4401,7 +4401,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4408  Joraga Warcaller                         {G}              Creature — Elf Warrior
 [x]  4409  Crypt Incursion                          {2}{B}           Instant
 [x]  4410  Wild Wasteland                           {2}{R}           Enchantment
-[ ]  4411  Shadowgrange Archfiend                   {6}{B}           Creature — Demon
+[x]  4411  Shadowgrange Archfiend                   {6}{B}           Creature — Demon
 [x]  4412  Thoughtseize                             {B}              Sorcery
 [x]  4413  Moogles' Valor                           {3}{W}{W}        Instant
 [x]  4414  Urabrask, Heretic Praetor                {3}{R}{R}        Legendary Creature — Phyrexian Praetor
@@ -4411,7 +4411,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4418  Thieving Varmint                         {1}{B}           Creature — Varmint
 [x]  4419  Gyruda, Doom of Depths                   {4}{U/B}{U/B}    Legendary Creature — Demon Kraken
 [x]  4420  Liliana's Triumph                        {1}{B}           Instant
-[ ]  4421  Elturel Survivors                        {3}{R}           Creature — Tiefling Peasant
+[x]  4421  Elturel Survivors                        {3}{R}           Creature — Tiefling Peasant
 [x]  4422  Seer's Sundial                           {4}              Artifact
 [x]  4423  Zuko's Exile                             {5}              Instant — Lesson
 [x]  4424  Depthshaker Titan                        {5}{R}{R}        Artifact Creature — Robot
@@ -4497,7 +4497,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4504  Gimli's Reckless Might                   {3}{R}           Enchantment
 [x]  4505  Securitron Squadron                      {1}{W}           Artifact Creature — Robot
 [x]  4506  Beacon of Unrest                         {3}{B}{B}        Sorcery
-[ ]  4507  Senu, Keen-Eyed Protector                {1}{W}           Legendary Creature — Bird Scout
+[x]  4507  Senu, Keen-Eyed Protector                {1}{W}           Legendary Creature — Bird Scout
 [x]  4508  Liliana, Heretical Healer // Liliana, Defiant Necromancer {3}              Legendary Creature — Human Cleric // Legendary Planeswalker — Liliana
 [x]  4509  Archetype of Courage                     {1}{W}{W}        Enchantment Creature — Human Soldier
 [x]  4510  Zodiark, Umbral God                      {B}{B}{B}{B}{B}  Legendary Creature — God
@@ -4590,7 +4590,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4597  Ghostfire Slice                          {2}{R}           Instant
 [x]  4598  Cryptic Caves                            {0}              Land
 [x]  4599  Reluctant Role Model                     {1}{W}           Creature — Human Survivor
-[ ]  4600  Tifa's Limit Break                       {G}              Instant
+[x]  4600  Tifa's Limit Break                       {G}              Instant
 [x]  4601  Moonmist                                 {1}{G}           Instant
 [x]  4602  Hunted Horror                            {B}{B}           Creature — Horror
 [x]  4603  Grim Reaper's Sprint                     {4}{R}           Enchantment — Aura

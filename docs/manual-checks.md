@@ -8140,3 +8140,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Activate Vizier of Many Faces' embalm from your graveyard. When the token would enter, choose Bob's Hill Giant.
 - **Expect:** The Vizier card is exiled and you get a token named Hill Giant: a 3/3 that is white, a Giant Zombie, with no mana cost.
 - **Not a bug:** Cast from your hand instead, a Vizier copying Hill Giant is red, a Giant only, and costs {3}{R}.
+
+### Jinnie Fay, Jetmir's Second: make Dogs instead of the Soldiers
+- **Do:** Cast Raise the Alarm. When asked, choose "Create that many 3/1 green Dogs with vigilance instead".
+- **Expect:** The question offers three choices: "Create the tokens", the Cats and the Dogs. You get two 3/1 green Dogs with vigilance and no Soldiers.
