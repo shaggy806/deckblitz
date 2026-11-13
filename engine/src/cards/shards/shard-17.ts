@@ -51,6 +51,7 @@ import _poolArcticTreeline from "../pool/arctic-treeline.js";
 import _poolArcumsWhistle from "../pool/arcums-whistle.js";
 import _poolArdentElectromancer from "../pool/ardent-electromancer.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
+import _poolArlinnTheMoonsFury from "../pool/arlinn-the-moons-fury.js";
 import _poolArthurMarigoldKnight from "../pool/arthur-marigold-knight.js";
 import _poolArzakon from "../pool/arzakon.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
@@ -1060,6 +1061,7 @@ const shard: CardShard = {
     _poolArcumsWhistle,
     _poolArdentElectromancer,
     _poolArdentRecruit,
+    _poolArlinnTheMoonsFury,
     _poolArthurMarigoldKnight,
     _poolArzakon,
     _poolAscendantAcolyte,

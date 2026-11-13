@@ -1288,6 +1288,8 @@ import _poolArkOfBlight from "./pool/ark-of-blight.js";
 import _poolArkOfHunger from "./pool/ark-of-hunger.js";
 import _poolArlinnEmbracedByTheMoon from "./pool/arlinn-embraced-by-the-moon.js";
 import _poolArlinnKord from "./pool/arlinn-kord.js";
+import _poolArlinnTheMoonsFury from "./pool/arlinn-the-moons-fury.js";
+import _poolArlinnThePacksHope from "./pool/arlinn-the-packs-hope.js";
 import _poolArlinnVoiceOfThePack from "./pool/arlinn-voice-of-the-pack.js";
 import _poolArlinnsWolf from "./pool/arlinns-wolf.js";
 import _poolArmMountedAnchor from "./pool/arm-mounted-anchor.js";
@@ -6978,6 +6980,7 @@ import _poolDispersal from "./pool/dispersal.js";
 import _poolDisperse from "./pool/disperse.js";
 import _poolDispersingOrb from "./pool/dispersing-orb.js";
 import _poolDisplace from "./pool/displace.js";
+import _poolDisplacedDinosaurs from "./pool/displaced-dinosaurs.js";
 import _poolDisplacementWave from "./pool/displacement-wave.js";
 import _poolDisplacerBeast from "./pool/displacer-beast.js";
 import _poolDisplacerKitten from "./pool/displacer-kitten.js";
@@ -9057,6 +9060,7 @@ import _poolFarTraveler from "./pool/far-traveler.js";
 import _poolFarWanderings from "./pool/far-wanderings.js";
 import _poolFar from "./pool/far.js";
 import _poolFaramirFieldCommander from "./pool/faramir-field-commander.js";
+import _poolFaramirPrinceOfIthilien from "./pool/faramir-prince-of-ithilien.js";
 import _poolFaramirStewardOfGondor from "./pool/faramir-steward-of-gondor.js";
 import _poolFarbogBoneflinger from "./pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "./pool/farbog-explorer.js";
@@ -10839,6 +10843,7 @@ import _poolGildedScuttler from "./pool/gilded-scuttler.js";
 import _poolGildedSentinel from "./pool/gilded-sentinel.js";
 import _poolGilderBairn from "./pool/gilder-bairn.js";
 import _poolGilgameshMasterAtArms from "./pool/gilgamesh-master-at-arms.js";
+import _poolGilraenDunedainProtector from "./pool/gilraen-dunedain-protector.js";
 import _poolGiltBladeProwler from "./pool/gilt-blade-prowler.js";
 import _poolGiltLeafAmbush from "./pool/gilt-leaf-ambush.js";
 import _poolGiltLeafArchdruid from "./pool/gilt-leaf-archdruid.js";
@@ -18937,6 +18942,7 @@ import _poolOldStickfingers from "./pool/old-stickfingers.js";
 import _poolOldThrush from "./pool/old-thrush.js";
 import _poolOlindaTheOblivious from "./pool/olinda-the-oblivious.js";
 import _poolOliphaunt from "./pool/oliphaunt.js";
+import _poolOliviaCrimsonBride from "./pool/olivia-crimson-bride.js";
 import _poolOliviaMobilizedForWar from "./pool/olivia-mobilized-for-war.js";
 import _poolOliviaOpulentOutlaw from "./pool/olivia-opulent-outlaw.js";
 import _poolOliviaVoldaren from "./pool/olivia-voldaren.js";
@@ -19731,6 +19737,7 @@ import _poolPermissionDenied from "./pool/permission-denied.js";
 import _poolPerniciousDeed from "./pool/pernicious-deed.js";
 import _poolPerpetualTimepiece from "./pool/perpetual-timepiece.js";
 import _poolPerplex from "./pool/perplex.js";
+import _poolPerplexingChimera from "./pool/perplexing-chimera.js";
 import _poolPerplexingTest from "./pool/perplexing-test.js";
 import _poolPersecute from "./pool/persecute.js";
 import _poolPersist from "./pool/persist.js";
@@ -29637,6 +29644,7 @@ import _poolVacuumelt from "./pool/vacuumelt.js";
 import _poolVadmirNewBlood from "./pool/vadmir-new-blood.js";
 import _poolVadrikAstralArchmage from "./pool/vadrik-astral-archmage.js";
 import _poolVadrokApexOfThunder from "./pool/vadrok-apex-of-thunder.js";
+import _poolVaevictisAsmadiTheDire from "./pool/vaevictis-asmadi-the-dire.js";
 import _poolVaevictisAsmadi from "./pool/vaevictis-asmadi.js";
 import _poolVagrantPlowbeasts from "./pool/vagrant-plowbeasts.js";
 import _poolValakutAwakening from "./pool/valakut-awakening.js";
@@ -34013,6 +34021,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArkOfHunger,
   _poolArlinnEmbracedByTheMoon,
   _poolArlinnKord,
+  _poolArlinnTheMoonsFury,
+  _poolArlinnThePacksHope,
   _poolArlinnVoiceOfThePack,
   _poolArlinnsWolf,
   _poolArmMountedAnchor,
@@ -39703,6 +39713,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDisperse,
   _poolDispersingOrb,
   _poolDisplace,
+  _poolDisplacedDinosaurs,
   _poolDisplacementWave,
   _poolDisplacerBeast,
   _poolDisplacerKitten,
@@ -41782,6 +41793,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFarWanderings,
   _poolFar,
   _poolFaramirFieldCommander,
+  _poolFaramirPrinceOfIthilien,
   _poolFaramirStewardOfGondor,
   _poolFarbogBoneflinger,
   _poolFarbogExplorer,
@@ -43564,6 +43576,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGildedSentinel,
   _poolGilderBairn,
   _poolGilgameshMasterAtArms,
+  _poolGilraenDunedainProtector,
   _poolGiltBladeProwler,
   _poolGiltLeafAmbush,
   _poolGiltLeafArchdruid,
@@ -51662,6 +51675,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOldThrush,
   _poolOlindaTheOblivious,
   _poolOliphaunt,
+  _poolOliviaCrimsonBride,
   _poolOliviaMobilizedForWar,
   _poolOliviaOpulentOutlaw,
   _poolOliviaVoldaren,
@@ -52456,6 +52470,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPerniciousDeed,
   _poolPerpetualTimepiece,
   _poolPerplex,
+  _poolPerplexingChimera,
   _poolPerplexingTest,
   _poolPersecute,
   _poolPersist,
@@ -62362,6 +62377,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVadmirNewBlood,
   _poolVadrikAstralArchmage,
   _poolVadrokApexOfThunder,
+  _poolVaevictisAsmadiTheDire,
   _poolVaevictisAsmadi,
   _poolVagrantPlowbeasts,
   _poolValakutAwakening,
@@ -66751,6 +66767,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ark-of-hunger": _poolArkOfHunger,
   "pool/arlinn-embraced-by-the-moon": _poolArlinnEmbracedByTheMoon,
   "pool/arlinn-kord": _poolArlinnKord,
+  "pool/arlinn-the-moons-fury": _poolArlinnTheMoonsFury,
+  "pool/arlinn-the-packs-hope": _poolArlinnThePacksHope,
   "pool/arlinn-voice-of-the-pack": _poolArlinnVoiceOfThePack,
   "pool/arlinns-wolf": _poolArlinnsWolf,
   "pool/arm-mounted-anchor": _poolArmMountedAnchor,
@@ -72441,6 +72459,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/disperse": _poolDisperse,
   "pool/dispersing-orb": _poolDispersingOrb,
   "pool/displace": _poolDisplace,
+  "pool/displaced-dinosaurs": _poolDisplacedDinosaurs,
   "pool/displacement-wave": _poolDisplacementWave,
   "pool/displacer-beast": _poolDisplacerBeast,
   "pool/displacer-kitten": _poolDisplacerKitten,
@@ -74520,6 +74539,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/far-wanderings": _poolFarWanderings,
   "pool/far": _poolFar,
   "pool/faramir-field-commander": _poolFaramirFieldCommander,
+  "pool/faramir-prince-of-ithilien": _poolFaramirPrinceOfIthilien,
   "pool/faramir-steward-of-gondor": _poolFaramirStewardOfGondor,
   "pool/farbog-boneflinger": _poolFarbogBoneflinger,
   "pool/farbog-explorer": _poolFarbogExplorer,
@@ -76302,6 +76322,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gilded-sentinel": _poolGildedSentinel,
   "pool/gilder-bairn": _poolGilderBairn,
   "pool/gilgamesh-master-at-arms": _poolGilgameshMasterAtArms,
+  "pool/gilraen-dunedain-protector": _poolGilraenDunedainProtector,
   "pool/gilt-blade-prowler": _poolGiltBladeProwler,
   "pool/gilt-leaf-ambush": _poolGiltLeafAmbush,
   "pool/gilt-leaf-archdruid": _poolGiltLeafArchdruid,
@@ -84400,6 +84421,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/old-thrush": _poolOldThrush,
   "pool/olinda-the-oblivious": _poolOlindaTheOblivious,
   "pool/oliphaunt": _poolOliphaunt,
+  "pool/olivia-crimson-bride": _poolOliviaCrimsonBride,
   "pool/olivia-mobilized-for-war": _poolOliviaMobilizedForWar,
   "pool/olivia-opulent-outlaw": _poolOliviaOpulentOutlaw,
   "pool/olivia-voldaren": _poolOliviaVoldaren,
@@ -85194,6 +85216,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pernicious-deed": _poolPerniciousDeed,
   "pool/perpetual-timepiece": _poolPerpetualTimepiece,
   "pool/perplex": _poolPerplex,
+  "pool/perplexing-chimera": _poolPerplexingChimera,
   "pool/perplexing-test": _poolPerplexingTest,
   "pool/persecute": _poolPersecute,
   "pool/persist": _poolPersist,
@@ -95100,6 +95123,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vadmir-new-blood": _poolVadmirNewBlood,
   "pool/vadrik-astral-archmage": _poolVadrikAstralArchmage,
   "pool/vadrok-apex-of-thunder": _poolVadrokApexOfThunder,
+  "pool/vaevictis-asmadi-the-dire": _poolVaevictisAsmadiTheDire,
   "pool/vaevictis-asmadi": _poolVaevictisAsmadi,
   "pool/vagrant-plowbeasts": _poolVagrantPlowbeasts,
   "pool/valakut-awakening": _poolValakutAwakening,

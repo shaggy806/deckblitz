@@ -1,0 +1,19 @@
+{
+  "batch": 323,
+  "status": "done",
+  "ranks": "The rank goal's seven runs-now cards from B322's re-triage, EDHREC ranks 4670–9404 (2026-11-13): Displaced Dinosaurs, Gilraen, Dúnedain Protector, Faramir, Prince of Ithilien, Olivia, Crimson Bride, Perplexing Chimera, Arlinn, the Pack's Hope, Vaevictis Asmadi, the Dire. Four were not quite runs-now, each settled by the point its B322 record named: `reflicker`'s `exileAgain: false`, returning a delayed-return flicker's cards now so the delayed return finds nothing (Gilraen's 'you may return that card … if you don't'); state triggers granted by an effect are looked for, not only printed ones (Olivia's returned creature); a lasting resolved others-enter replacement's `counters` and `enterAs` apply to each permanent entering, from its controller's side and after its source is gone (Arlinn's +1); `change-targets` takes `\"trigger-object\"`, the spell whose casting fired the trigger (Perplexing Chimera); and a held look-and-choose onto the battlefield may leave the rest where it is (`leftover: \"stay\"`), so Vaevictis Asmadi's revealed permanents enter together (rule 101.4).",
+  "authored": [
+    { "name": "Displaced Dinosaurs", "files": ["engine/src/cards/pool/displaced-dinosaurs.ts"], "tested": true },
+    { "name": "Gilraen, Dúnedain Protector", "files": ["engine/src/cards/pool/gilraen-dunedain-protector.ts"], "tested": true },
+    { "name": "Faramir, Prince of Ithilien", "files": ["engine/src/cards/pool/faramir-prince-of-ithilien.ts"], "tested": true },
+    { "name": "Olivia, Crimson Bride", "files": ["engine/src/cards/pool/olivia-crimson-bride.ts"], "tested": true },
+    { "name": "Perplexing Chimera", "files": ["engine/src/cards/pool/perplexing-chimera.ts"], "tested": true },
+    {
+      "name": "Arlinn, the Pack's Hope",
+      "files": ["engine/src/cards/pool/arlinn-the-packs-hope.ts", "engine/src/cards/pool/arlinn-the-moons-fury.ts"],
+      "tested": true
+    },
+    { "name": "Vaevictis Asmadi, the Dire", "files": ["engine/src/cards/pool/vaevictis-asmadi-the-dire.ts"], "tested": true }
+  ],
+  "blocked": []
+}

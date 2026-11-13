@@ -810,6 +810,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Archive Haunt": "https://cards.scryfall.io/art_crop/back/8/3/832288fd-8031-4c2b-ad3e-b1ec9f94d379.jpg",
   "Ardenvale Fealty": "https://cards.scryfall.io/art_crop/back/e/a/ea7e7daf-7c06-4c74-8bcf-e42c1f611861.jpg",
   "Arlinn, Embraced by the Moon": "https://cards.scryfall.io/art_crop/back/e/7/e72d7c11-2165-4c72-80f3-3c1a7b4b5572.jpg",
+  "Arlinn, the Moon's Fury": "https://cards.scryfall.io/art_crop/back/5/0/50d4b0df-a1d8-494f-a019-70ce34161320.jpg",
   "Ashen Reaper": "https://cards.scryfall.io/art_crop/back/a/e/ae2e1244-f05b-45f9-8afc-59f190524798.jpg",
   "Ashling, Rimebound": "https://cards.scryfall.io/art_crop/back/7/d/7d7faefe-9c0d-45b6-8ea4-5fa666762a2c.jpg",
   "Ashmouth Blade": "https://cards.scryfall.io/art_crop/back/7/8/7813cd70-bb60-4953-a35d-9876f5230c42.jpg",

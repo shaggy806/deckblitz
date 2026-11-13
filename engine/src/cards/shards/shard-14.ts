@@ -632,6 +632,7 @@ import _poolPeerlessSamurai from "../pool/peerless-samurai.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
 import _poolPenumbraSpider from "../pool/penumbra-spider.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
+import _poolPerplexingChimera from "../pool/perplexing-chimera.js";
 import _poolPetrify from "../pool/petrify.js";
 import _poolPhantasmalForm from "../pool/phantasmal-form.js";
 import _poolPhantomGeneral from "../pool/phantom-general.js";
@@ -1651,6 +1652,7 @@ const shard: CardShard = {
     _poolPegasusGuardian,
     _poolPenumbraSpider,
     _poolPerilousShadow,
+    _poolPerplexingChimera,
     _poolPetrify,
     _poolPhantasmalForm,
     _poolPhantomGeneral,

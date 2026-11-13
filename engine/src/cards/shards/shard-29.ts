@@ -926,6 +926,7 @@ import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolUrzasEngine from "../pool/urzas-engine.js";
 import _poolVATS from "../pool/v-a-t-s.js";
 import _poolVacuumelt from "../pool/vacuumelt.js";
+import _poolVaevictisAsmadiTheDire from "../pool/vaevictis-asmadi-the-dire.js";
 import _poolVampiricDragon from "../pool/vampiric-dragon.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
 import _poolVault12TheNecropolis from "../pool/vault-12-the-necropolis.js";
@@ -1944,6 +1945,7 @@ const shard: CardShard = {
     _poolUrzasEngine,
     _poolVATS,
     _poolVacuumelt,
+    _poolVaevictisAsmadiTheDire,
     _poolVampiricDragon,
     _poolVampiricTouch,
     _poolVault12TheNecropolis,

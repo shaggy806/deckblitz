@@ -8162,3 +8162,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Thran Portal: its mana costs a life
 - **Do:** Cast Opt, paying with Thran Portal (chosen as an Island).
 - **Expect:** You go to 19 life and Opt resolves.
+
+## The rank goal's runs-now cards, batch 323 (2026-11-13)
+
+### Perplexing Chimera: swap it for Bob's spell, then aim the spell at Bob
+- **Do:** Switch to Bob and cast Lightning Bolt at Alice. Back as Alice, answer Yes to "Exchange control of Perplexing Chimera and that spell?", then choose Bob as the Bolt's new target.
+- **Expect:** You're asked for the Bolt's new target after the swap, not before. Bob takes 3 and you take none; Bob now controls Perplexing Chimera.
+
+### Gilraen, Dúnedain Protector: bring it back now or at the end step
+- **Do:** Activate Gilraen's ability on Grizzly Bears and answer No to "Return the exiled card to the battlefield now?". Pass to your end step.
+- **Expect:** The Bears stay in exile until your end step, then come back with a vigilance counter and a lifelink counter.
+- **Not a bug:** Answering Yes brings the Bears back at once with no counters, and nothing more happens at the end step.

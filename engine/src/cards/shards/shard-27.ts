@@ -274,6 +274,7 @@ import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
 import _poolFalkenrathGorger from "../pool/falkenrath-gorger.js";
 import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
+import _poolFaramirPrinceOfIthilien from "../pool/faramir-prince-of-ithilien.js";
 import _poolFatalBlow from "../pool/fatal-blow.js";
 import _poolFatalGrudge from "../pool/fatal-grudge.js";
 import _poolFeedingFrenzy from "../pool/feeding-frenzy.js";
@@ -1271,6 +1272,7 @@ const shard: CardShard = {
     _poolFalkenrathGorger,
     _poolFalkenrathPerforator,
     _poolFalseDefeat,
+    _poolFaramirPrinceOfIthilien,
     _poolFatalBlow,
     _poolFatalGrudge,
     _poolFeedingFrenzy,

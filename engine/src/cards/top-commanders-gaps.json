@@ -2,6 +2,13 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "effect:flicker-optional-immediate-or-delayed",
+    "effect:grant-state-trigger-to-returned-card",
+    "effect:enters-with-counter-until-your-next-turn",
+    "effect:per-player-targets-sacrifice-reveal-put",
+    "static:others-enter-as-type-and-pt",
+    "effect:flicker-return-with-two-counter-kinds",
+    "condition:player-attacked-you-this-turn",
     "trigger:trigger-from-exile",
     "static:pt-per-defending-player-count",
     "cost:madness-nonmana-cost",

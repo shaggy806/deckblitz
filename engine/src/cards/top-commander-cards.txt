@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4978 already implemented / 22 missing (marks refreshed 2026-11-13)
+4981 already implemented / 19 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4635,7 +4635,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4642  Vivid Grove                              {0}              Land
 [x]  4643  Jwar Isle Refuge                         {0}              Land
 [x]  4644  Bitter Work                              {1}{R}{G}        Enchantment
-[ ]  4645  Gilraen, Dúnedain Protector              {2}{W}           Legendary Creature — Human Noble
+[x]  4645  Gilraen, Dúnedain Protector              {2}{W}           Legendary Creature — Human Noble
 [x]  4646  Phyrexian Scriptures                     {2}{B}{B}        Enchantment — Saga
 [x]  4647  Wizard's Retort                          {1}{U}{U}        Instant
 [x]  4648  Kiora Bests the Sea God                  {5}{U}{U}        Enchantment — Saga
@@ -4726,7 +4726,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4733  Paladin Class                            {W}              Enchantment — Class
 [x]  4734  Plague Stinger                           {1}{B}           Creature — Phyrexian Insect Horror
 [x]  4735  World Breaker                            {6}{G}           Creature — Eldrazi
-[ ]  4736  Displaced Dinosaurs                      {5}{G}{G}        Creature — Dinosaur
+[x]  4736  Displaced Dinosaurs                      {5}{G}{G}        Creature — Dinosaur
 [x]  4737  Olórin's Searing Light                   {2}{R}{W}        Instant
 [x]  4738  Nogi, Draco-Zealot                       {1}{R}{R}        Legendary Creature — Kobold Shaman
 [x]  4739  Ichorclaw Myr                            {2}              Artifact Creature — Phyrexian Myr
@@ -4766,7 +4766,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4773  Grave Betrayal                           {5}{B}{B}        Enchantment
 [x]  4774  Twinblade Blessing                       {1}{W}{W}        Enchantment — Aura
 [x]  4775  Sylvan Offering                          {X}{G}           Sorcery
-[ ]  4776  Faramir, Prince of Ithilien              {2}{W}{U}        Legendary Creature — Human Noble
+[x]  4776  Faramir, Prince of Ithilien              {2}{W}{U}        Legendary Creature — Human Noble
 [x]  4777  Path of Annihilation                     {3}{G}           Enchantment
 [x]  4778  Bringer of the Last Gift                 {6}{B}{B}        Creature — Vampire Demon
 [x]  4779  Towering Titan                           {4}{G}{G}        Creature — Giant

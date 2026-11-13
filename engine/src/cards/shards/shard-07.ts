@@ -39,6 +39,7 @@ import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArenaOfTheAncients from "../pool/arena-of-the-ancients.js";
 import _poolArkOfHunger from "../pool/ark-of-hunger.js";
+import _poolArlinnThePacksHope from "../pool/arlinn-the-packs-hope.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
 import _poolArmedAndArmored from "../pool/armed-and-armored.js";
 import _poolArtifactWard from "../pool/artifact-ward.js";
@@ -1085,6 +1086,7 @@ const shard: CardShard = {
     _poolArdozCobblerOfWar,
     _poolArenaOfTheAncients,
     _poolArkOfHunger,
+    _poolArlinnThePacksHope,
     _poolArmasaurGuide,
     _poolArmedAndArmored,
     _poolArtifactWard,

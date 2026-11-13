@@ -12254,4 +12254,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Thran Portal'], hand: ['Opt'] },
     }),
   ),
+  preset(
+    'Perplexing Chimera: swap it for Bob\'s spell, then aim the spell at Bob',
+    board({
+      you: { bf: ['Perplexing Chimera'] },
+      opp: { human: true, bf: ['Mountain'], hand: ['Lightning Bolt'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    'Gilraen, Dúnedain Protector: bring it back now or at the end step',
+    board({
+      you: { bf: ['Gilraen, Dúnedain Protector', 'Grizzly Bears', 'Plains*2'] },
+    }),
+  ),
 ]

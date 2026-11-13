@@ -666,6 +666,15 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 323 (2026-11-13, `author-top-cards` on the rank goal's runs-now cards, ranks
+  4670–9404)** — all 7 of B322's runs-now cards authored. Three ran as they were: Displaced
+  Dinosaurs (an others-enter `enterAs` with a 7/7 base), Faramir, Prince of Ithilien (a delayed
+  trigger at the chosen opponent's end step, `attacked-you-last-turn` by them), Vaevictis Asmadi
+  (per-seat trigger slots) — though its revealed permanents needed a held look-and-choose that
+  leaves the rest in place, to enter together. Four needed a small piece: Gilraen (`reflicker`'s
+  `exileAgain: false`), Olivia, Crimson Bride (state triggers an effect granted are looked for),
+  Arlinn, the Pack's Hope (a lasting resolved others-enter replacement's counters), Perplexing
+  Chimera (`change-targets` of the trigger's spell). None blocked.
 - **Batch 321 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4533–4680)** —
   5 authored, each on a small feature built for it: Guff Rewrites History and Blatant Thievery (a
   spell's `{ seat }` target slots required, as a trigger's — an empty seat needs none, a player

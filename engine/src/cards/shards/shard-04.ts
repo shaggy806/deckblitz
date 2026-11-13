@@ -313,6 +313,7 @@ import _poolGiantCrab from "../pool/giant-crab.js";
 import _poolGibberingDescent from "../pool/gibbering-descent.js";
 import _poolGideonsDefeat from "../pool/gideons-defeat.js";
 import _poolGigastormTitan from "../pool/gigastorm-titan.js";
+import _poolGilraenDunedainProtector from "../pool/gilraen-dunedain-protector.js";
 import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
 import _poolGlacialCrasher from "../pool/glacial-crasher.js";
 import _poolGlassOfTheGuildpact from "../pool/glass-of-the-guildpact.js";
@@ -1317,6 +1318,7 @@ const shard: CardShard = {
     _poolGibberingDescent,
     _poolGideonsDefeat,
     _poolGigastormTitan,
+    _poolGilraenDunedainProtector,
     _poolGingerbreadCabin,
     _poolGlacialCrasher,
     _poolGlassOfTheGuildpact,
