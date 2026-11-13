@@ -329,6 +329,23 @@ static's scope with `sourceAmount`, which gains `{ cardsInHand: "you" }`: a
 `{ kind: "cant-attack" }` record over `power: { op: "gt", n: { amount: {
 cardsInHand: "you" } } }`, read as attackers are declared. Proving: Ensnaring
 Bridge. Test: `attack-restriction-hand-size.test.ts`.
+### A reflexive ability's target read against its source now — fixed 2026-11-13
+
+`bug:reflexive-target-compare-bound-at-creation`. `bindDynamicCompares` left
+a compare with the source's power, toughness or mana value in a reflexive
+ability's targets bound as the creating ability resolved; it's now left for
+the reflexive ability's own targeting, read as targets are chosen and rechecked
+(608.2b). Proving: Auron, Venerated Guardian. Test:
+`reflexive-target-live-compare.test.ts`.
+
+### A static combat restriction's scope against your hand size — built 2026-11-13
+
+`static:attack-restriction-power-vs-hand-size`. `restrictionsOf` (the P/T-scoped
+words) and `recordsOn` (the records) now read a static's scope with
+`sourceAmount`, which gains `{ cardsInHand: "you" }`: the `"cant-attack"` word
+over `power: { op: "gt", n: { amount: { cardsInHand: "you" } } }`, read as
+attackers are declared. Proving: Ensnaring Bridge. Test:
+`attack-restriction-hand-size.test.ts`.
 
 ### Sharing a creature type with a set's members, by types, any or each — built 2026-11-13
 

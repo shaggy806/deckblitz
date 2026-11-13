@@ -22,11 +22,11 @@ import {
   grantedStatics,
   hasLostAbilities,
   playerEffectCovers,
+  sourceAmount,
   staticConditionMet,
   staticReaches,
 } from "../characteristics.js";
 import { matchesFilter, weightedMatches } from "../filter.js";
-import { sourceAmount } from "../goad.js";
 import { rulesTextName } from "../state.js";
 import type { CardFilter } from "../filter.js";
 import type { CardRegistry } from "../cards.js";
@@ -404,8 +404,7 @@ export function recordsOn(state: GameState, registry: CardRegistry, id: ObjectId
   let out: RuleInForce[] | null = null;
   for (const { source, ability, records } of recordSources(state, registry)) {
     // A scope comparing with an amount reads it from the source's side, as
-    // it is now: Ensnaring Bridge's "power greater than the number of cards
-    // in your hand", checked only as attackers are declared (its ruling).
+    // it is now, as the P/T-scoped words' does (`restrictionsOf`).
     if (!staticReaches(state, registry, source, ability, object, { amount: sourceAmount(state, registry, source) })) continue;
     if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
     for (const rule of records) (out ??= []).push({ rule, you: source.controller, source });

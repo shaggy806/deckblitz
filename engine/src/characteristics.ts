@@ -6672,6 +6672,53 @@ export function playerEffectCovers(
 }
 
 /**
+ * What a static's scope may compare against, read outside the layer fold:
+ * its own source's power, toughness or mana value as they are now —
+ * Baeloth's static goad's "power less than Baeloth Barrityl's power" is
+ * `{ amount: { powerOf: "source" } }`, and a static's block filter reads its
+ * source the same way (Champion of Lambholt — `combat/eligibility.ts`) — a
+ * plain `{ countOf }` of permanents from its controller's side (Kraken of the
+ * Straits), and its controller's hand size, `{ cardsInHand: "you" }`, which
+ * a P/T-scoped combat word's scope reads ({@link restrictionsOf}: Ensnaring
+ * Bridge's "creatures with power greater than the number of cards in your
+ * hand can't attack"), as does a combat record's (`recordsOn`). Nothing else
+ * can be answered in a static, and `NaN` makes any comparison with it false
+ * (fails closed, as a static's `{ amount }` does everywhere).
+ */
+export function sourceAmount(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+): (amount: EffectAmount) => number {
+  return (amount) => {
+    if (typeof amount === "number") return amount;
+    if (typeof amount !== "object") return Number.NaN;
+    if ("powerOf" in amount && amount.powerOf === "source" && amount.doubling === undefined) {
+      return computeCharacteristics(state, registry, source.id).power;
+    }
+    if ("toughnessOf" in amount && amount.toughnessOf === "source" && amount.doubling === undefined) {
+      return computeCharacteristics(state, registry, source.id).toughness;
+    }
+    if ("manaValueOf" in amount && amount.manaValueOf === "source") {
+      return manaValue(parseManaCost(printedManaCost(registry, source)));
+    }
+    // "The number of cards in your hand" (Ensnaring Bridge): its
+    // controller's hand as it is now.
+    if ("cardsInHand" in amount && amount.cardsInHand === "you" && Object.keys(amount).length === 1) {
+      return state.zones.perPlayer[source.controller]?.hand.length ?? 0;
+    }
+    // "The number of Islands you control" (Kraken of the Straits): a plain
+    // count of permanents, from the source's controller's side.
+    if ("countOf" in amount && Object.keys(amount).length === 1) {
+      return weightedMatches(state, state.zones.shared.battlefield, (id) =>
+        matchesFilter(state, registry, id, amount.countOf, { you: source.controller, source: source.id }),
+      ).reduce((sum, match) => sum + match.weight, 0);
+    }
+    return Number.NaN;
+  };
+}
+
+/**
  * The combat words on `id`: from static abilities (Pacifism, Juggernaut) and
  * modifiers — the characteristics' own — plus any rule over the game it
  * matches (`PlayerEffect.combat`). Every legality check reads the words
@@ -6689,7 +6736,15 @@ export function restrictionsOf(
   let out: Set<CombatWord> | null = null;
   const target = state.objects[id];
   for (const { source, ability } of ptScopedRestrictionSources(state, registry)) {
-    if (target === undefined || !staticAffects(state, registry, ability.affects, source, target)) continue;
+    // Its scope compares with an amount from the source's side, as it is now:
+    // Ensnaring Bridge's "power greater than the number of cards in your
+    // hand", read as attackers are declared (its ruling).
+    if (
+      target === undefined ||
+      !staticAffects(state, registry, ability.affects, source, target, { amount: sourceAmount(state, registry, source) })
+    ) {
+      continue;
+    }
     if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
     out ??= new Set(own);
     for (const r of ability.restrictions ?? []) if (typeof r === "string") out.add(r);

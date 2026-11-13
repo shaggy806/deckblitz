@@ -10362,11 +10362,11 @@ describe("a cost on a creature to attack or block", () => {
       condition: { kind: "monarch", who: "you" },
       restrictions: [{ kind: "cant-attack", at: "you" }],
     });
-    // Ensnaring Bridge: a record, its power read against your hand as
-    // attackers are declared.
+    // Ensnaring Bridge: power read against your hand as attackers are
+    // declared.
     expect(read("Artifact", "Creatures with power greater than the number of cards in your hand can't attack.")).toEqual({
       affects: { scope: "filter", filter: { type: "creature", power: { op: "gt", n: { amount: { cardsInHand: "you" } } } } },
-      restrictions: [{ kind: "cant-attack" }],
+      restrictions: ["cant-attack"],
       text: "Creatures with power greater than the number of cards in your hand can't attack.",
     });
   });

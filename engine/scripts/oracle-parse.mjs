@@ -21408,12 +21408,12 @@ function parseStatic(line, text) {
     }
   }
   // "Creatures with power greater than the number of cards in your hand can't
-  // attack" (Ensnaring Bridge): a record, its scope read as attackers are
-  // declared against the source's controller's hand (`recordsOn`).
+  // attack" (Ensnaring Bridge): its scope read as attackers are declared,
+  // against the source's controller's hand (`restrictionsOf`).
   if (/^creatures with power greater than the number of cards in your hand can't attack\.$/i.test(line)) {
     return {
       affects: { scope: "filter", filter: { type: "creature", power: { op: "gt", n: { amount: { cardsInHand: "you" } } } } },
-      restrictions: [{ kind: "cant-attack" }],
+      restrictions: ["cant-attack"],
       text,
     };
   }

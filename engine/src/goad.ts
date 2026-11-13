@@ -26,17 +26,14 @@
 
 import type { CardRegistry, StaticAbility } from "./cards.js";
 import {
-  computeCharacteristics,
   computedCacheMemo,
   grantedStatics,
   hasLostAbilities,
+  sourceAmount,
   staticConditionMet,
   staticReaches,
 } from "./characteristics.js";
 import type { TargetView } from "./characteristics.js";
-import type { EffectAmount } from "./effects.js";
-import { matchesFilter, printedManaCost, weightedMatches } from "./filter.js";
-import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { rulesTextName } from "./state.js";
 import type { GameObject, GameState } from "./state.js";
@@ -77,52 +74,10 @@ function goadingStatics(state: GameState, registry: CardRegistry): readonly Goad
   });
 }
 
-/**
- * What a static goad's `filter` scope may compare against: its own source's
- * power, toughness or mana value, read as they are now — Baeloth's "power
- * less than Baeloth Barrityl's power" is `{ amount: { powerOf: "source" } }`.
- * A static's block filter reads its source the same way (Champion of
- * Lambholt — `combat/eligibility.ts`), a plain `{ countOf }` of
- * permanents from its controller's side (Kraken of the Straits), and its
- * controller's hand size, `{ cardsInHand: "you" }` — a static combat
- * record's scope reads it too (Ensnaring Bridge's "creatures with power
- * greater than the number of cards in your hand", `combat/rules.ts`'s
- * `recordsOn`).
- * Nothing else can be answered in a static, and `NaN` makes any comparison
- * with it false (fails closed, as a static's `{ amount }` does everywhere).
- */
-export function sourceAmount(
-  state: GameState,
-  registry: CardRegistry,
-  source: GameObject,
-): (amount: EffectAmount) => number {
-  return (amount) => {
-    if (typeof amount === "number") return amount;
-    if (typeof amount !== "object") return Number.NaN;
-    if ("powerOf" in amount && amount.powerOf === "source" && amount.doubling === undefined) {
-      return computeCharacteristics(state, registry, source.id).power;
-    }
-    if ("toughnessOf" in amount && amount.toughnessOf === "source" && amount.doubling === undefined) {
-      return computeCharacteristics(state, registry, source.id).toughness;
-    }
-    if ("manaValueOf" in amount && amount.manaValueOf === "source") {
-      return manaValue(parseManaCost(printedManaCost(registry, source)));
-    }
-    // "The number of cards in your hand" (Ensnaring Bridge): its
-    // controller's hand as it is now.
-    if ("cardsInHand" in amount && amount.cardsInHand === "you" && Object.keys(amount).length === 1) {
-      return state.zones.perPlayer[source.controller]?.hand.length ?? 0;
-    }
-    // "The number of Islands you control" (Kraken of the Straits): a plain
-    // count of permanents, from the source's controller's side.
-    if ("countOf" in amount && Object.keys(amount).length === 1) {
-      return weightedMatches(state, state.zones.shared.battlefield, (id) =>
-        matchesFilter(state, registry, id, amount.countOf, { you: source.controller, source: source.id }),
-      ).reduce((sum, match) => sum + match.weight, 0);
-    }
-    return Number.NaN;
-  };
-}
+/** What a static's scope may compare against — `characteristics.ts`'s
+ * `sourceAmount`, where the P/T-scoped combat words read it too; kept here
+ * under its old name for its importers. */
+export { sourceAmount };
 
 /** Objects whose static goads are being worked out right now: a static goad
  * whose scope asks about goad itself reads this object's designations only,
