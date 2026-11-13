@@ -32236,6 +32236,7 @@ export class Game {
     let afterLeaving: number | undefined;
     let triggerSpell: number | undefined;
     let triggerSpellController: PlayerId | undefined;
+    let triggerSpellTargets: SetMember[] | undefined;
     if (triggerObject !== undefined) {
       const t = this.state.objects[triggerObject];
       if (t?.zone === "battlefield") {
@@ -32245,6 +32246,17 @@ export class Game {
         // the stack "that spell" means, and who cast it ("that player").
         triggerSpell = t.zoneChangeCount ?? 0;
         triggerSpellController = t.controller;
+        // What it targets as this triggers: "that creature" of "a spell that
+        // targets only a single creature" stays the original target if the
+        // spell's target is changed, or the spell is countered, before this
+        // resolves (the Vesuvan Duplimancy rulings).
+        const aimedAt = (t.targets ?? []).flatMap((target, slot): SetMember[] => {
+          const held = target?.kind === "object" ? this.state.objects[target.object] : undefined;
+          return target?.kind !== "object" || held === undefined
+            ? []
+            : [{ object: target.object, stint: t.targetStints?.[slot] ?? held.zoneChangeCount ?? 0 }];
+        });
+        if (aimedAt.length > 0) triggerSpellTargets = aimedAt;
       } else if (
         t?.lastKnown !== undefined &&
         isLeaveEvent(event) &&
@@ -32379,6 +32391,7 @@ export class Game {
       ...(triggerStint !== undefined ? { triggerObject: triggerStint } : {}),
       ...(triggerSpell !== undefined ? { triggerSpell } : {}),
       ...(triggerSpellController !== undefined ? { triggerSpellController } : {}),
+      ...(triggerSpellTargets !== undefined ? { triggerSpellTargets } : {}),
       ...(afterLeaving !== undefined ? { triggerObjectAfterLeaving: afterLeaving } : {}),
       ...(recipient !== undefined ? { recipient } : {}),
       ...(player !== undefined ? { player } : {}),
@@ -35744,6 +35757,14 @@ export class Game {
         return cards.map((id) => ({ object: id, stint: this.state.objects[id]?.zoneChangeCount ?? 0 }));
       }
       if (typeof ref === "object" && "targetsOf" in ref) {
+        // The spell a cast trigger fired on: what it targeted then, each as
+        // it is in that stint or as it last existed in it (608.2h).
+        if (ref.targetsOf === "trigger-object" && refs.triggerSpellTargets !== undefined) {
+          return refs.triggerSpellTargets.map((member): SetMember => {
+            const was = this.lastKnownOfStint(member.object, member.stint);
+            return was === undefined ? member : { ...member, was };
+          });
+        }
         const of = objectRefRead(ref.targetsOf, context);
         const object = of?.kind === "object" ? this.state.objects[of.object] : undefined;
         return (object?.targets ?? []).flatMap((target): SetMember[] => {

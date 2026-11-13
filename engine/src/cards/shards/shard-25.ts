@@ -918,6 +918,7 @@ import _poolVenomDeadlyDevourer from "../pool/venom-deadly-devourer.js";
 import _poolVensersSliver from "../pool/vensers-sliver.js";
 import _poolVerdantAutomaton from "../pool/verdant-automaton.js";
 import _poolVesuva from "../pool/vesuva.js";
+import _poolVesuvanDuplimancy from "../pool/vesuvan-duplimancy.js";
 import _poolVeyranVoiceOfDuality from "../pool/veyran-voice-of-duality.js";
 import _poolVisionaryAugmenter from "../pool/visionary-augmenter.js";
 import _poolVizierOfTheMenagerie from "../pool/vizier-of-the-menagerie.js";
@@ -1908,6 +1909,7 @@ const shard: CardShard = {
     _poolVensersSliver,
     _poolVerdantAutomaton,
     _poolVesuva,
+    _poolVesuvanDuplimancy,
     _poolVeyranVoiceOfDuality,
     _poolVisionaryAugmenter,
     _poolVizierOfTheMenagerie,

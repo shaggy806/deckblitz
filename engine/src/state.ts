@@ -2403,6 +2403,12 @@ export interface LastKnownRefs {
    * — Forced Fruition, Spellshock), still them once the spell is countered
    * and its card is in its owner's graveyard. */
   readonly triggerSpellController?: PlayerId;
+  /** With `triggerSpell`: the objects that spell targeted as the ability
+   * triggered, each in its stint then — what `{ targetsOf: "trigger-object" }`
+   * reads, so "that creature" of "a spell that targets only a single
+   * creature" is the original target whatever the spell's becomes, and
+   * still it once the spell is countered (the Vesuvan Duplimancy rulings). */
+  readonly triggerSpellTargets?: readonly SetMember[];
   /**
    * The sets of objects this spell or ability refers to (`object-sets.ts`):
    * - `paid`: what its cost took, each kind as it was paid — "the sacrificed

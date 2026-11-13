@@ -29933,6 +29933,7 @@ import _poolVesselOfVolatility from "./pool/vessel-of-volatility.js";
 import _poolVestigeOfEmrakul from "./pool/vestige-of-emrakul.js";
 import _poolVesuva from "./pool/vesuva.js";
 import _poolVesuvanDrifter from "./pool/vesuvan-drifter.js";
+import _poolVesuvanDuplimancy from "./pool/vesuvan-duplimancy.js";
 import _poolVeteranAdventurer from "./pool/veteran-adventurer.js";
 import _poolVeteranArmorer from "./pool/veteran-armorer.js";
 import _poolVeteranArmorsmith from "./pool/veteran-armorsmith.js";
@@ -62620,6 +62621,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVestigeOfEmrakul,
   _poolVesuva,
   _poolVesuvanDrifter,
+  _poolVesuvanDuplimancy,
   _poolVeteranAdventurer,
   _poolVeteranArmorer,
   _poolVeteranArmorsmith,
@@ -95320,6 +95322,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vestige-of-emrakul": _poolVestigeOfEmrakul,
   "pool/vesuva": _poolVesuva,
   "pool/vesuvan-drifter": _poolVesuvanDrifter,
+  "pool/vesuvan-duplimancy": _poolVesuvanDuplimancy,
   "pool/veteran-adventurer": _poolVeteranAdventurer,
   "pool/veteran-armorer": _poolVeteranArmorer,
   "pool/veteran-armorsmith": _poolVeteranArmorsmith,

@@ -2394,7 +2394,8 @@
   "effect:add-mana-combination-of-card-colors",
   "effect:reveal-from-hand-in-mana-ability",
   "replacement:next-enter-as-copy",
-  "replacement:others-enter-as-copy"
+  "replacement:others-enter-as-copy",
+  "effect:token-copy-of-spell-target"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

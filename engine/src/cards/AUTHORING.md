@@ -710,7 +710,10 @@ in the public zone it was expected in, and otherwise as it last existed (rules 6
   ("you and target opponent each …" as one scoped effect, in turn order from the active player — Keen
   Duelist; a pair of plain effects is still fine where nothing happens at once). Every `who` takes all of it.
 - **Sets**: `{ attachmentsOf: ObjectRef }` ("all Auras attached to that creature"), `{ targetsOf: ObjectRef }`
-  (Storm, Windrider's "those creatures"), beside the `ObjectSetRef`s of theme 1.
+  (Storm, Windrider's "those creatures"), beside the `ObjectSetRef`s of theme 1. `{ targetsOf: "trigger-object" }` on a
+  cast trigger is what the spell targeted **as it triggered**, each as it last existed if it has left: Vesuvan
+  Duplimancy's "create a token that's a copy of that artifact or creature" is `create-token-copy` with that `of`, and
+  copies the original target even if the spell is retargeted or countered first.
 - **Attaching to a player**: `attach`'s `target` also takes `{ player: PlayerRef }` (Archnemesis).
 
 **Relational `CardFilter` clauses take refs too** (`filter.ts`): `sameNameWith` (a slot or

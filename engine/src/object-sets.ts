@@ -73,7 +73,12 @@ export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "
  *   Mark of Eviction's "all Auras attached to that creature".
  * - `{ targetsOf }` — the objects that object targets, a spell's: Storm,
  *   Windrider's "those creatures" of "a spell that targets one or more
- *   creatures". Its player targets aren't objects, and aren't in it.
+ *   creatures". Its player targets aren't objects, and aren't in it. Of
+ *   `"trigger-object"` on a cast trigger: what the spell targeted as the
+ *   ability triggered (`LastKnownRefs.triggerSpellTargets`), each as it last
+ *   existed in that stint if it has left — Vesuvan Duplimancy's "that
+ *   artifact or creature", the original target even once the spell is
+ *   retargeted or countered.
  * - `{ targets }` — the objects in these target slots (an empty or illegal
  *   slot names nothing).
  * - `{ remembered }` — a set a delayed or reflexive trigger captured as it
