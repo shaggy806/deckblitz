@@ -46,6 +46,7 @@ import _poolArtificersDragon from "../pool/artificers-dragon.js";
 import _poolAscendingAven from "../pool/ascending-aven.js";
 import _poolAshnodsCylix from "../pool/ashnods-cylix.js";
 import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
+import _poolAuronVeneratedGuardian from "../pool/auron-venerated-guardian.js";
 import _poolAutonomousAssembler from "../pool/autonomous-assembler.js";
 import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
 import _poolAvalancheRiders from "../pool/avalanche-riders.js";
@@ -989,6 +990,7 @@ const shard: CardShard = {
     _poolAscendingAven,
     _poolAshnodsCylix,
     _poolAtarkaWorldRender,
+    _poolAuronVeneratedGuardian,
     _poolAutonomousAssembler,
     _poolAvacynAngelOfHope,
     _poolAvalancheRiders,

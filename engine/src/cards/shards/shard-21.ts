@@ -181,6 +181,7 @@ import _poolCravenGiant from "../pool/craven-giant.js";
 import _poolCrime from "../pool/crime.js";
 import _poolCromat from "../pool/cromat.js";
 import _poolCrovaxAscendantHero from "../pool/crovax-ascendant-hero.js";
+import _poolCrypticGateway from "../pool/cryptic-gateway.js";
 import _poolCrystalShard from "../pool/crystal-shard.js";
 import _poolCrystallization from "../pool/crystallization.js";
 import _poolCullingDrone from "../pool/culling-drone.js";
@@ -1157,6 +1158,7 @@ const shard: CardShard = {
     _poolCrime,
     _poolCromat,
     _poolCrovaxAscendantHero,
+    _poolCrypticGateway,
     _poolCrystalShard,
     _poolCrystallization,
     _poolCullingDrone,

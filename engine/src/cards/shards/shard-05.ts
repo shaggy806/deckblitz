@@ -296,6 +296,7 @@ import _poolEmpyrialStorm from "../pool/empyrial-storm.js";
 import _poolEmrakulThePromisedEnd from "../pool/emrakul-the-promised-end.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
+import _poolEnsnaringBridge from "../pool/ensnaring-bridge.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
 import _poolEscapeArtist from "../pool/escape-artist.js";
 import _poolEssenceFlare from "../pool/essence-flare.js";
@@ -1312,6 +1313,7 @@ const shard: CardShard = {
     _poolEmrakulThePromisedEnd,
     _poolEndbringer,
     _poolEnormousBaloth,
+    _poolEnsnaringBridge,
     _poolEpicDownfall,
     _poolEscapeArtist,
     _poolEssenceFlare,

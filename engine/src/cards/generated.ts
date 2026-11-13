@@ -1641,6 +1641,7 @@ import _poolAuriokTransfixer from "./pool/auriok-transfixer.js";
 import _poolAuriokWindwalker from "./pool/auriok-windwalker.js";
 import _poolAurochsHerd from "./pool/aurochs-herd.js";
 import _poolAurochs from "./pool/aurochs.js";
+import _poolAuronVeneratedGuardian from "./pool/auron-venerated-guardian.js";
 import _poolAuronsInspiration from "./pool/aurons-inspiration.js";
 import _poolAuroraChampion from "./pool/aurora-champion.js";
 import _poolAuroraEidolon from "./pool/aurora-eidolon.js";
@@ -5717,6 +5718,7 @@ import _poolCrypticCaves from "./pool/cryptic-caves.js";
 import _poolCrypticCoat from "./pool/cryptic-coat.js";
 import _poolCrypticCommand from "./pool/cryptic-command.js";
 import _poolCrypticCruiser from "./pool/cryptic-cruiser.js";
+import _poolCrypticGateway from "./pool/cryptic-gateway.js";
 import _poolCrypticSerpent from "./pool/cryptic-serpent.js";
 import _poolCrypticTrilobite from "./pool/cryptic-trilobite.js";
 import _poolCryptidInspector from "./pool/cryptid-inspector.js";
@@ -8377,6 +8379,7 @@ import _poolEnslavedHorror from "./pool/enslaved-horror.js";
 import _poolEnslavedScout from "./pool/enslaved-scout.js";
 import _poolEnsnare from "./pool/ensnare.js";
 import _poolEnsnaredByTheMara from "./pool/ensnared-by-the-mara.js";
+import _poolEnsnaringBridge from "./pool/ensnaring-bridge.js";
 import _poolEnsoulArtifact from "./pool/ensoul-artifact.js";
 import _poolEnsouledScimitar from "./pool/ensouled-scimitar.js";
 import _poolEntDraughtBasin from "./pool/ent-draught-basin.js";
@@ -8657,6 +8660,7 @@ import _poolEverquillPhoenix from "./pool/everquill-phoenix.js";
 import _poolEvershrike from "./pool/evershrike.js";
 import _poolEvershrikesGift from "./pool/evershrikes-gift.js";
 import _poolEverybodyLives from "./pool/everybody-lives.js";
+import _poolEverythingComesToDust from "./pool/everything-comes-to-dust.js";
 import _poolEverythingPizza from "./pool/everything-pizza.js";
 import _poolEvidenceExaminer from "./pool/evidence-examiner.js";
 import _poolEvieFrye from "./pool/evie-frye.js";
@@ -34379,6 +34383,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAuriokWindwalker,
   _poolAurochsHerd,
   _poolAurochs,
+  _poolAuronVeneratedGuardian,
   _poolAuronsInspiration,
   _poolAuroraChampion,
   _poolAuroraEidolon,
@@ -38455,6 +38460,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrypticCoat,
   _poolCrypticCommand,
   _poolCrypticCruiser,
+  _poolCrypticGateway,
   _poolCrypticSerpent,
   _poolCrypticTrilobite,
   _poolCryptidInspector,
@@ -41115,6 +41121,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnslavedScout,
   _poolEnsnare,
   _poolEnsnaredByTheMara,
+  _poolEnsnaringBridge,
   _poolEnsoulArtifact,
   _poolEnsouledScimitar,
   _poolEntDraughtBasin,
@@ -41395,6 +41402,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEvershrike,
   _poolEvershrikesGift,
   _poolEverybodyLives,
+  _poolEverythingComesToDust,
   _poolEverythingPizza,
   _poolEvidenceExaminer,
   _poolEvieFrye,
@@ -67130,6 +67138,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/auriok-windwalker": _poolAuriokWindwalker,
   "pool/aurochs-herd": _poolAurochsHerd,
   "pool/aurochs": _poolAurochs,
+  "pool/auron-venerated-guardian": _poolAuronVeneratedGuardian,
   "pool/aurons-inspiration": _poolAuronsInspiration,
   "pool/aurora-champion": _poolAuroraChampion,
   "pool/aurora-eidolon": _poolAuroraEidolon,
@@ -71206,6 +71215,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cryptic-coat": _poolCrypticCoat,
   "pool/cryptic-command": _poolCrypticCommand,
   "pool/cryptic-cruiser": _poolCrypticCruiser,
+  "pool/cryptic-gateway": _poolCrypticGateway,
   "pool/cryptic-serpent": _poolCrypticSerpent,
   "pool/cryptic-trilobite": _poolCrypticTrilobite,
   "pool/cryptid-inspector": _poolCryptidInspector,
@@ -73866,6 +73876,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/enslaved-scout": _poolEnslavedScout,
   "pool/ensnare": _poolEnsnare,
   "pool/ensnared-by-the-mara": _poolEnsnaredByTheMara,
+  "pool/ensnaring-bridge": _poolEnsnaringBridge,
   "pool/ensoul-artifact": _poolEnsoulArtifact,
   "pool/ensouled-scimitar": _poolEnsouledScimitar,
   "pool/ent-draught-basin": _poolEntDraughtBasin,
@@ -74146,6 +74157,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/evershrike": _poolEvershrike,
   "pool/evershrikes-gift": _poolEvershrikesGift,
   "pool/everybody-lives": _poolEverybodyLives,
+  "pool/everything-comes-to-dust": _poolEverythingComesToDust,
   "pool/everything-pizza": _poolEverythingPizza,
   "pool/evidence-examiner": _poolEvidenceExaminer,
   "pool/evie-frye": _poolEvieFrye,
