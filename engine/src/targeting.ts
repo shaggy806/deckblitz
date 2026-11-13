@@ -51,6 +51,10 @@ export interface TargetSource {
    * attacking to know who the defending player is, and an `other` slot
    * (`than: "source"`) leaves it out. */
   readonly object?: ObjectId;
+  /** The battlefield stint of `object` the ability refers to
+   * (`LastKnownRefs.source`), once it may have left — "dealt combat damage
+   * by Hope of Ghirapur this turn" after it was sacrificed. */
+  readonly sourceStint?: number;
   /** A card being cast as a face or half it isn't showing (rule 709.3): runs
    * a read of `object` with it as that face. Filter-based protection asks the
    * object what `colors` and `types` already answer for the half. */
@@ -109,7 +113,14 @@ export function targetSpecReadsX(spec: TargetSpec): boolean {
     return targetSpecReadsX(spec.of);
   }
   if (spec.kind === "one-of") return spec.of.some(targetSpecReadsX);
-  if (spec.kind === "ability" || spec.kind === "stack" || spec.kind === "opponent-compared") return false;
+  if (
+    spec.kind === "ability" ||
+    spec.kind === "stack" ||
+    spec.kind === "opponent-compared" ||
+    spec.kind === "player-dealt-combat-damage-by-source"
+  ) {
+    return false;
+  }
   return spec.filter !== undefined && filterReadsX(spec.filter);
 }
 
@@ -792,6 +803,25 @@ function isLegalTargetUncached(
     return (
       spec.filter === undefined ||
       matchesFilter(state, registry, ref.object, spec.filter, targetFilterContext(forPlayer, source))
+    );
+  }
+  // "Target player who was dealt combat damage by [this] this turn" (Hope
+  // of Ghirapur): by the source in the stint it's in, or was in as it left
+  // (rule 400.7) — a sacrificed source still knows.
+  if (typeof spec === "object" && spec.kind === "player-dealt-combat-damage-by-source") {
+    if (ref.kind !== "player" || !isLivingPlayer(state, ref) || source?.object === undefined) return false;
+    const live = state.objects[source.object];
+    const stint =
+      source.sourceStint ??
+      (live?.zone === "battlefield" ? (live.zoneChangeCount ?? 0) : source.lastKnown?.zoneChangeCount);
+    if (stint === undefined) return false;
+    return entriesThisTurn(state, "damage").some(
+      (entry) =>
+        entry.combat !== undefined &&
+        entry.object === source.object &&
+        entry.stint === stint &&
+        entry.target?.kind === "player" &&
+        entry.target.player === ref.player,
     );
   }
   // The structured graveyard spec.

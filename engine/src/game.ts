@@ -34892,8 +34892,10 @@ export class Game {
         ? permanentSource(this.state, this.registry, trigger.sourceObjectId)
         : { colors: [], types: [] };
     const triggerPlayer = trigger.lastKnownRefs?.player;
+    const sourceStint = trigger.lastKnownRefs?.source;
     return {
       ...base,
+      ...(sourceStint !== undefined ? { sourceStint } : {}),
       ...(trigger.triggerObject !== undefined ? { triggerObject: trigger.triggerObject } : {}),
       ...(triggerPlayer !== undefined ? { triggerPlayer } : {}),
       ...(trigger.x !== undefined ? { x: trigger.x } : {}),

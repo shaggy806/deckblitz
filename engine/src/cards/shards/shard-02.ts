@@ -417,6 +417,7 @@ import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowOne from "../pool/hollow-one.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
+import _poolHopeOfGhirapur from "../pool/hope-of-ghirapur.js";
 import _poolHornswoggle from "../pool/hornswoggle.js";
 import _poolHorobisWhisper from "../pool/horobis-whisper.js";
 import _poolHotPursuit from "../pool/hot-pursuit.js";
@@ -1439,6 +1440,7 @@ const shard: CardShard = {
     _poolHollowOne,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
+    _poolHopeOfGhirapur,
     _poolHornswoggle,
     _poolHorobisWhisper,
     _poolHotPursuit,

@@ -180,6 +180,14 @@ export type TargetSpec =
    * resolves, any opponent still in the game is a legal target
    * ({@link resolvingTargetSpec}).
    */
+  /**
+   * "Target player **who was dealt combat damage by [this] this turn**"
+   * (Hope of Ghirapur): any player the source dealt combat damage to this
+   * turn, in the stint it's in or was in as it left (rule 400.7) — so a
+   * sacrificed source still knows. Read from the journal's `damage` entries;
+   * checked again as it resolves (608.2b).
+   */
+  | { readonly kind: "player-dealt-combat-damage-by-source" }
   | {
       readonly kind: "opponent-compared";
       readonly stat: PlayerStat;
@@ -1545,6 +1553,7 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
       ? `${either} that was dealt damage this turn`
       : either;
   }
+  if (spec.kind === "player-dealt-combat-damage-by-source") return "player dealt combat damage by this this turn";
   if (spec.kind === "card-in-exile") {
     const what = spec.filter?.type === undefined ? "card" : `${spec.filter.type} card`;
     const up = spec.faceUp === true ? "face-up " : "";

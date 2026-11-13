@@ -12812,6 +12812,7 @@ import _poolHopeAndGlory from "./pool/hope-and-glory.js";
 import _poolHopeCharm from "./pool/hope-charm.js";
 import _poolHopeEnderCoatl from "./pool/hope-ender-coatl.js";
 import _poolHopeEstheim from "./pool/hope-estheim.js";
+import _poolHopeOfGhirapur from "./pool/hope-of-ghirapur.js";
 import _poolHopeTender from "./pool/hope-tender.js";
 import _poolHopefulEidolon from "./pool/hopeful-eidolon.js";
 import _poolHopefulInitiate from "./pool/hopeful-initiate.js";
@@ -45463,6 +45464,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHopeCharm,
   _poolHopeEnderCoatl,
   _poolHopeEstheim,
+  _poolHopeOfGhirapur,
   _poolHopeTender,
   _poolHopefulEidolon,
   _poolHopefulInitiate,
@@ -78127,6 +78129,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hope-charm": _poolHopeCharm,
   "pool/hope-ender-coatl": _poolHopeEnderCoatl,
   "pool/hope-estheim": _poolHopeEstheim,
+  "pool/hope-of-ghirapur": _poolHopeOfGhirapur,
   "pool/hope-tender": _poolHopeTender,
   "pool/hopeful-eidolon": _poolHopefulEidolon,
   "pool/hopeful-initiate": _poolHopefulInitiate,

@@ -3586,6 +3586,9 @@ than you do **as you activate this ability**" — the Keepers: `stat` is
 `"creature-cards-in-graveyard"`, and the opponent's must be at least `by` more
 — `2` for "at least two more", negative for "fewer"; judged only as the target
 is chosen, so as it resolves any opponent will do),
+`{ kind: "player-dealt-combat-damage-by-source" }` ("target player who was dealt
+combat damage by Hope of Ghirapur this turn": by the source in its stint, read
+from the journal, a sacrificed source included),
 `"creature-or-player"`, `"opponent-or-planeswalker"`,
 `"permanent"`, `"nonland-permanent"`, `"nonland-permanent-an-opponent-controls"`,
 `"land"`, `"artifact"`, `"artifact-an-opponent-controls"`, `"artifact-or-enchantment"`,
