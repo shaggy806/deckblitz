@@ -750,6 +750,7 @@ import _poolSelfcraftMechan from "../pool/selfcraft-mechan.js";
 import _poolSemblanceAnvil from "../pool/semblance-anvil.js";
 import _poolSenatorPeacock from "../pool/senator-peacock.js";
 import _poolSentryOak from "../pool/sentry-oak.js";
+import _poolSenuKeenEyedProtector from "../pool/senu-keen-eyed-protector.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
@@ -1784,6 +1785,7 @@ const shard: CardShard = {
     _poolSemblanceAnvil,
     _poolSenatorPeacock,
     _poolSentryOak,
+    _poolSenuKeenEyedProtector,
     _poolServoExhibition,
     _poolSetessanTraining,
     _poolShadeOfTrokair,

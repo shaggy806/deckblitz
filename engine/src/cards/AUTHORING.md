@@ -4887,6 +4887,12 @@ and `"source"` finds the card only if it's the same object when the ability
 resolves (rule 400.7), a "you may" included. Never filter a return on the
 card's own name: that reaches another copy of it.
 
+**`fromExile: true`** is the same for a card in exile (face up): Senu,
+Keen-Eyed Protector's "when a legendary creature you control attacks and isn't
+blocked, if this card is exiled, put it onto the battlefield attacking"
+(`put-onto-battlefield` of `"source"`, `attacking: "choose"`) — the "if this
+card is exiled" needs nothing more.
+
 **`whileSuspended: true`** is a triggered ability that works while its card is
 suspended (rule 702.62b — in exile, with suspend and a time counter), and only
 then: Deep-Sea Kraken's "whenever an opponent casts a spell, if this card is

@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, cast, counters, keywords, lands, life, named, pickModes, pt, ref, settle, spawn, table, toHand, toStep, tokensNamed, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, keywords, lands, life, named, pickModes, pt, ref, settle, spawn, table, toHand, toStep, tokensNamed, zone } from "./harness.js";
 
 describe("Jinnie Fay, Jetmir's Second: you may make that many Cats or Dogs instead", () => {
   const CAT = "2/2 Green Cat Token (Haste)";
@@ -213,5 +213,37 @@ describe("Elturel Survivors: +X/+0 while attacking, X the lands defending player
     a.chooseModesFn = () => [];
     toStep(game, "declare-blockers", A);
     expect(pt(game, survivors)).toEqual({ power: 4, toughness: 4 });
+  });
+});
+
+describe("Senu, Keen-Eyed Protector: from exile, back attacking beside an unblocked legend", () => {
+  it("exiled for its ability; a legendary attacker unblocked puts it onto the battlefield attacking", () => {
+    const { game, a } = table();
+    const senu = spawn(game, "Senu, Keen-Eyed Protector");
+    const isamaru = spawn(game, "Isamaru, Hound of Konda");
+    const before = life(game, A);
+    activate(game, senu, 0);
+    expect(zone(game, senu)).toBe("exile");
+    expect(life(game, A)).toBe(before + 2);
+    const lifeB = life(game, B);
+    attack(game, a, [isamaru]);
+    const back = named(game, "Senu, Keen-Eyed Protector", A);
+    expect(back).toHaveLength(1);
+    // Isamaru's 2 and Senu's 2.
+    expect(life(game, B)).toBe(lifeB - 4);
+  });
+
+  it("a nonlegendary attacker doesn't bring it back, and on the battlefield it doesn't trigger", () => {
+    const { game, a } = table();
+    const senu = spawn(game, "Senu, Keen-Eyed Protector");
+    const bear = spawn(game, "Grizzly Bears");
+    activate(game, senu, 0);
+    attack(game, a, [bear]);
+    expect(zone(game, senu)).toBe("exile");
+    const { game: g2, a: a2 } = table();
+    spawn(g2, "Senu, Keen-Eyed Protector");
+    const isamaru = spawn(g2, "Isamaru, Hound of Konda");
+    attack(g2, a2, [isamaru]);
+    expect(named(g2, "Senu, Keen-Eyed Protector", A)).toHaveLength(1);
   });
 });

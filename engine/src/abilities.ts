@@ -2720,6 +2720,17 @@ export interface TriggeredAbility {
    */
   readonly fromGraveyard?: boolean;
   /**
+   * This ability works while its card is **in exile**, and only there (rule
+   * 113.6k, as `fromGraveyard`): Senu, Keen-Eyed Protector's "when a
+   * legendary creature you control attacks and isn't blocked, if this card is
+   * exiled, put it onto the battlefield attacking". The trigger scan adds
+   * every exiled card with such an ability (face up — a face-down card has
+   * no abilities, rule 708.2), contributing those abilities alone; its
+   * controller is the card's owner. One exiled in the very event being
+   * scanned wasn't there to see it.
+   */
+  readonly fromExile?: boolean;
+  /**
    * This ability works while its card is **suspended** — in exile with suspend
    * and a time counter (rule 702.62b) — and only then (rule 113.6b: it says
    * the zone it functions in): Deep-Sea Kraken's "whenever an opponent casts

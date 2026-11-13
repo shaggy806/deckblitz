@@ -23714,6 +23714,7 @@ import _poolSentinelsOfGlenElendra from "./pool/sentinels-of-glen-elendra.js";
 import _poolSentryBot from "./pool/sentry-bot.js";
 import _poolSentryOak from "./pool/sentry-oak.js";
 import _poolSentryOfTheUnderworld from "./pool/sentry-of-the-underworld.js";
+import _poolSenuKeenEyedProtector from "./pool/senu-keen-eyed-protector.js";
 import _poolSeparatistVoidmage from "./pool/separatist-voidmage.js";
 import _poolSepharaSkysBlade from "./pool/sephara-skys-blade.js";
 import _poolSephirothFabledSoldier from "./pool/sephiroth-fabled-soldier.js";
@@ -56431,6 +56432,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSentryBot,
   _poolSentryOak,
   _poolSentryOfTheUnderworld,
+  _poolSenuKeenEyedProtector,
   _poolSeparatistVoidmage,
   _poolSepharaSkysBlade,
   _poolSephirothFabledSoldier,
@@ -89161,6 +89163,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sentry-bot": _poolSentryBot,
   "pool/sentry-oak": _poolSentryOak,
   "pool/sentry-of-the-underworld": _poolSentryOfTheUnderworld,
+  "pool/senu-keen-eyed-protector": _poolSenuKeenEyedProtector,
   "pool/separatist-voidmage": _poolSeparatistVoidmage,
   "pool/sephara-skys-blade": _poolSepharaSkysBlade,
   "pool/sephiroth-fabled-soldier": _poolSephirothFabledSoldier,

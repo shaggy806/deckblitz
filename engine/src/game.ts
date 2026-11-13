@@ -2620,6 +2620,8 @@ export class Game {
    * cards are asked about — the trigger scan asks of every graveyard card on
    * every event. Not game state: it only caches the registry. */
   private readonly graveyardTriggerNames = new Map<string, boolean>();
+  /** The same for a triggered ability that works in exile (`fromExile`). */
+  private readonly exileTriggerNames = new Map<string, boolean>();
 
   private constructor(
     state: GameState,
@@ -23241,6 +23243,20 @@ export class Game {
     return has;
   }
 
+  /** Whether `id` is a face-up card with a triggered ability that works in
+   * exile (`TriggeredAbility.fromExile`). */
+  private hasExileTrigger(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.kind !== "card" || object.faceDown !== undefined) return false;
+    const name = printedCardName(object);
+    let has = this.exileTriggerNames.get(name);
+    if (has === undefined) {
+      has = this.registry.get(name).triggered.some((ability) => ability.fromExile === true);
+      this.exileTriggerNames.set(name, has);
+    }
+    return has;
+  }
+
   /** Whether `id` is a card with a triggered ability that works while it's
    * suspended (`TriggeredAbility.whileSuspended`). */
   private hasSuspendedTrigger(id: ObjectId): boolean {
@@ -31708,6 +31724,14 @@ export class Game {
         graveyardOnly.add(id);
       }
     }
+    // An exiled card's abilities that work only there (`fromExile` — Senu,
+    // Keen-Eyed Protector), the same way.
+    const exileOnly = new Set<ObjectId>();
+    for (const id of this.state.zones.shared.exile) {
+      if (id === subject || lookBack.has(id) || !this.hasExileTrigger(id)) continue;
+      candidates.add(id);
+      exileOnly.add(id);
+    }
     // Haunt (rule 702.55c): a card exiled haunting a creature watches for
     // that creature's death from exile, with that ability alone.
     const hauntOnly = new Set<ObjectId>();
@@ -31804,6 +31828,7 @@ export class Game {
         if (this.state.players[object.controller]?.hasLost === true) return;
         if (onlyEminence && ability.fromCommandZone !== true) return;
         if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
+        if ((ability.fromExile === true) !== exileOnly.has(id)) return;
         if (hauntOnly.has(id) !== (ability.trigger.on === "haunted-dies")) return;
         if ((ability.whileSuspended === true) !== suspendedOnly.has(id)) return;
         // Any other trigger needs it still suspended, a time counter on it
