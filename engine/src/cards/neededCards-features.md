@@ -477,6 +477,16 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### Playing from the top of another player's library — built 2026-11-13
+
+The key `zone:play-from-opponent-library-top`. A `player-effect`'s `mayPlay`
+from `"library-top"` with `whose` reaches the top of those players' libraries
+(`Game.playZoneOf`, `libraryTopsFor`, offered beside the holder's own top; a
+static's still reaches only its holder's own), and the `player-effect`'s
+`looksAtLibraryTopOf` shows the top of theirs in the holder's view alone (rule
+401.5). Xanathar, Guild Kingpin, with a `prohibit` for "that player can't cast
+spells". `test/play-from-opponent-library-top.test.ts`.
+
 ### A permission that gives the spell affinity — built 2026-11-13
 
 The key `zone:impulse-one-cast-grants-affinity`. `PlayTerms.affinity` (a

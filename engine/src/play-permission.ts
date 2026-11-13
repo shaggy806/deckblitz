@@ -28,7 +28,9 @@ import type { SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 
 /** The zones a permission reaches. `"library-top"` is the top card of the
- * permission holder's library; `"hand"` another player's hand. */
+ * permission holder's library — or, on a resolved rule whose `whose` names
+ * them, another player's (Xanathar, Guild Kingpin); `"hand"` another player's
+ * hand. */
 export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
 
 /**

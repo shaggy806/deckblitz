@@ -5585,6 +5585,10 @@ export interface PlayerEffect {
    * `Game.tokenCreatorAfterRedirects`. */
   readonly tokensComeToOwner?: true;
   readonly looksAtOwnLibraryTop?: true;
+  /** `owner` may look at the top card of these players' libraries any time
+   * while this lasts (Xanathar, Guild Kingpin — rule 401.5), in their own
+   * view. */
+  readonly looksAtLibraryTopOf?: readonly PlayerId[];
   /** One more loyalty activation of each permanent `owner` controls (The
    * Chain Veil): see the `player-effect` spec's. */
   readonly extraLoyaltyActivation?: true;

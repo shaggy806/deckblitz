@@ -1222,8 +1222,14 @@ function viewForUncached(
       });
     // "You may look at the top card of your library any time" (Glarb,
     // Calamity's Augur — rule 401.5): shown in its owner's own view only.
+    // "You may look at the top card of their library any time" (Xanathar,
+    // Guild Kingpin): another player's, in the looker's view alone.
+    const looksAtTheirs =
+      player !== viewer &&
+      (state.playerEffects ?? []).some((e) => e.owner === viewer && e.looksAtLibraryTopOf?.includes(player) === true);
     const looksAtTop =
-      player === viewer &&
+      looksAtTheirs ||
+      (player === viewer &&
       (sight.ownLibraryTop ||
         // For a while, from a resolved effect (The Belligerent).
         (state.playerEffects ?? []).some((e) => e.owner === player && e.looksAtOwnLibraryTop === true) ||
@@ -1234,7 +1240,7 @@ function viewForUncached(
             !hasLostAbilities(state, registry, object) &&
             registry.get(rulesTextName(object)).looksAtOwnLibraryTop
           );
-        }));
+        })));
     const topCard = revealsTop || looksAtTop ? (zones.library[0] ?? null) : null;
     revealedLibraryTop[player] = topCard;
     if (topCard !== null) visibleIds.push(topCard);

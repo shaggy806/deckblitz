@@ -6688,6 +6688,11 @@ export type EffectSpec =
        * player's is tapped but not attacking. */
       readonly tokensComeToOwner?: true;
       readonly looksAtOwnLibraryTop?: true;
+      /** "You may look at the top card of **their** library any time"
+       * (Xanathar, Guild Kingpin — rule 401.5): the controller sees the top
+       * card of each of these players' libraries while this lasts, in their
+       * own view alone. Fixed as it resolves. */
+      readonly looksAtLibraryTopOf?: PlayerScope;
       /** "For each planeswalker you control, you may activate one of its
        * loyalty abilities once this turn as though none of its loyalty
        * abilities have been activated this turn" (The Chain Veil — rule
@@ -19471,6 +19476,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           : {}),
         ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
         ...(spec.looksAtOwnLibraryTop === true ? { looksAtOwnLibraryTop: true as const } : {}),
+        ...(spec.looksAtLibraryTopOf !== undefined
+          ? { looksAtLibraryTopOf: ctx.playersInScope(spec.looksAtLibraryTopOf) }
+          : {}),
         ...(spec.extraLoyaltyActivation === true ? { extraLoyaltyActivation: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.manaProduction !== undefined ? { manaProduction: spec.manaProduction } : {}),

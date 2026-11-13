@@ -4097,9 +4097,10 @@ export class Game {
     // A static permission to play the top card of your library if it's a
     // land (Oracle of Mul Daya), a modal double-faced card's land face
     // included. Still consumes the land drop / sorcery timing.
-    const libraryTop = this.state.zones.perPlayer[player].library[0];
-    if (libraryTop !== undefined) {
-      const castsFromTop = this.reachesZone(player, "library-top");
+    // Another player's too, where a resolved rule reaches it (Xanathar,
+    // Guild Kingpin).
+    const castsFromTop = this.reachesZone(player, "library-top");
+    for (const libraryTop of castsFromTop ? this.libraryTopsFor(player) : this.state.zones.perPlayer[player].library.slice(0, 1)) {
       for (const face of this.modalFaces(libraryTop)) {
         const def = this.faceDef(libraryTop, face ?? 0);
         if (def.types.includes("land")) {
@@ -14432,7 +14433,8 @@ export class Game {
     x = 0,
     which?: "paid" | "pay-life",
   ): PlayOption[] {
-    if (this.state.zones.perPlayer[player]?.library[0] !== cardId) return [];
+    const card = this.state.objects[cardId];
+    if (card === undefined || this.playZoneOf(card, player) !== "library-top") return [];
     const options = this.playOptions(player, cardId, face, x);
     return which === undefined ? options : options.filter((o) => (o.terms.byPayingLife === true) === (which === "pay-life"));
   }
@@ -14622,7 +14624,9 @@ export class Game {
       (this.state.objects[cardId]?.zone === "graveyard" &&
         (this.mayPlayFromGraveyard(player, cardId, face) ||
           this.graveyardGrantsFor(player, cardId, face).length > 0)) ||
-      (zones.library[0] === cardId && this.playOptions(player, cardId, face).length > 0) ||
+      (this.state.objects[cardId]?.zone === "library" &&
+        this.playZoneOf(this.state.objects[cardId], player) === "library-top" &&
+        this.playOptions(player, cardId, face).length > 0) ||
       // "Impulse draw" that says *play* rather than *cast* includes lands
       // (Tectonic Giant, Theater of Horrors), as does a `playFromExile`
       // static that plays lands (Grolnok, the Omnivore).
@@ -44120,7 +44124,9 @@ controlledBy,
       const play = effect.mayPlay;
       if (play === undefined || effect.owner !== player || play.from !== from) return;
       if (play.left !== undefined && play.left <= 0) return;
-      if ((from === "graveyard" || from === "hand") && !(play.owners ?? [player]).includes(card.owner)) return;
+      if ((from === "graveyard" || from === "hand" || from === "library-top") && !(play.owners ?? [player]).includes(card.owner)) {
+        return;
+      }
       if (play.linked === true && !this.linkedToStint(card, play.source, play.stint)) return;
       if (!this.playTermsReach(play, cardId, face, player, isLand, play.source, x)) return;
       out.push({ terms: play, carrier: { kind: "effect", index, play } });
@@ -44129,7 +44135,7 @@ controlledBy,
     // but for exile, which is everyone's, where the filter says whose, and
     // a graveyard permission that says "graveyards" (Coram, the Undertaker).
     if (from !== "hand") {
-      const owned = from === "exile" || from === "library-top" || card.owner === player;
+      const owned = from === "exile" || card.owner === player;
       for (const { source, play } of this.playStaticsOf(player)) {
         if (play.from !== from) continue;
         if (!owned && !(from === "graveyard" && play.anyGraveyard === true)) continue;
@@ -44149,9 +44155,38 @@ controlledBy,
    * none can (a library card that isn't on top, a card in their own hand). */
   private playZoneOf(card: GameObject, player: PlayerId): PlayFrom | null {
     if (card.zone === "exile" || card.zone === "graveyard") return card.zone;
-    if (card.zone === "library" && this.state.zones.perPlayer[player]?.library[0] === card.id) return "library-top";
+    // The top of a library: the player's own, or another's a resolved rule
+    // reaches (Xanathar, Guild Kingpin's "the top card of their library").
+    if (
+      card.zone === "library" &&
+      this.state.zones.perPlayer[card.owner]?.library[0] === card.id &&
+      (card.owner === player || this.reachesLibraryTopOf(player, card.owner))
+    ) {
+      return "library-top";
+    }
     if (card.zone === "hand" && card.owner !== player) return "hand";
     return null;
+  }
+
+  /** Whether a resolved rule lets `player` play from the top of `owner`'s
+   * library (a `mayPlay` from `"library-top"` whose `owners` name them). */
+  private reachesLibraryTopOf(player: PlayerId, owner: PlayerId): boolean {
+    return (this.state.playerEffects ?? []).some(
+      (effect) => effect.owner === player && effect.mayPlay?.from === "library-top" && effect.mayPlay.owners?.includes(owner) === true,
+    );
+  }
+
+  /** The top cards of the libraries `player` might play from: their own, and
+   * each other a resolved rule reaches. */
+  private libraryTopsFor(player: PlayerId): ObjectId[] {
+    const out: ObjectId[] = [];
+    for (const owner of this.state.turnOrder) {
+      if (owner !== player && !this.reachesLibraryTopOf(player, owner)) continue;
+      if (this.state.players[owner]?.hasLost === true) continue;
+      const top = this.state.zones.perPlayer[owner]?.library[0];
+      if (top !== undefined) out.push(top);
+    }
+    return out;
   }
 
   /** Whether `card` is one exiled with `source` in this stint (rule 607.2a). */
