@@ -22,7 +22,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "untap", target: 0 },
-          { kind: "create-token", token: "Clue Token", count: 1 },
+          { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
         ],
       },
       resolve: null,

@@ -11,7 +11,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "put-on-library", target: 0, position: "top" },
-      { kind: "create-token", token: "Clue Token", count: 1 },
+      { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
     ],
   },
 });

@@ -21,6 +21,7 @@ export default defineCard({
       effect: {
         kind: "create-token",
         token: "Clue Token",
+        investigate: true,
         count: {
           countPlayers: "each-opponent",
           where: { kind: "player-compare", stat: "hand", compare: "fewer", than: "that-player" },

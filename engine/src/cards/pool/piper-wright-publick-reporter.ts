@@ -24,7 +24,7 @@ export default defineCard({
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: { triggerValue: true } },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: { triggerValue: true } },
       resolve: null,
       text: "Whenever Piper Wright deals combat damage to a player, investigate that many times.",
     },

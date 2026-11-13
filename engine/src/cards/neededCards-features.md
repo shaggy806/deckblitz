@@ -507,6 +507,11 @@ vocabulary, `test/trigger-new-events.test.ts`.
   row: every payment of life (rule 119.4) goes through `Game.payLife`, an
   "unless … pays N life" option's loss through `lose-life`'s engine-set
   `paid`. Font of Agonies.
+- `trigger:investigate-trigger` — `create-token`'s `investigate` (set by
+  `investigate()` and on the 84 pool cards that wrote the Clue by hand)
+  announces each investigation (`investigated`, journaled), and the
+  `investigates` row reads it, `firstTimeEachTurn` included. Erdwal
+  Illuminator.
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 

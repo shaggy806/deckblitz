@@ -1430,6 +1430,14 @@ export type GameEvent =
       readonly byEffectOf?: PlayerId;
     })
   | (Base & {
+      /** `player` investigated (rule 701.16a): once per investigation —
+       * "investigate twice" is two — after its Clue was created, or
+       * whatever a replacement made of it. "Whenever you investigate"
+       * (Erdwal Illuminator). Creating a Clue without the word isn't one. */
+      readonly type: "investigated";
+      readonly player: PlayerId;
+    })
+  | (Base & {
       /** `player` paid `amount` life (rule 119.4), after its `life-changed`:
        * a cost's, Phyrexian mana's, a shock land's, an "unless … pays N
        * life" or a "you may pay N life". What "whenever you pay life"

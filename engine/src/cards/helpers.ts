@@ -1575,11 +1575,14 @@ export const extort = (): TriggeredAbility => ({
  * it is rather than a new effect kind: every token multiplier, stack rule
  * and count-scaling check already reads that. The Clue is an ordinary token
  * with an activated ability, so it's never folded into a token stack.
+ * `investigate: true` announces each investigation, for "whenever you
+ * investigate" (Erdwal Illuminator); a bare "create a Clue token" isn't one.
  */
 export const investigate = (times: EffectAmount = 1): EffectSpec => ({
   kind: "create-token",
   token: "Clue Token",
   count: times,
+  investigate: true,
 });
 
 /**

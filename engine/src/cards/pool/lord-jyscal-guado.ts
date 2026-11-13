@@ -19,7 +19,7 @@ export default defineCard({
       trigger: { on: "step-begins", step: "end", who: "any" },
       condition: { kind: "counters-put-this-turn", onType: "creature" },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: TEXT,
     },

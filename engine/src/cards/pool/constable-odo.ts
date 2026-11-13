@@ -37,7 +37,7 @@ export default defineCard({
               ],
             },
           },
-          { text: CLUE_TEXT, effect: { kind: "create-token", token: "Clue Token", count: 2 } },
+          { text: CLUE_TEXT, effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 2 } },
         ],
       },
       resolve: null,

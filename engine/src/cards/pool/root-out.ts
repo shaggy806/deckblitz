@@ -9,6 +9,6 @@ export default defineCard({
   targets: ["artifact-or-enchantment"],
   effect: {
     kind: "sequence",
-    effects: [{ kind: "destroy", target: 0 }, { kind: "create-token", token: "Clue Token", count: 1 }],
+    effects: [{ kind: "destroy", target: 0 }, { kind: "create-token", token: "Clue Token", investigate: true, count: 1 }],
   },
 });

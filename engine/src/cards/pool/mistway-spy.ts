@@ -28,7 +28,7 @@ export default defineCard({
         at: {
           whenever: { on: "deals-combat-damage-to-player", who: "you-control", filter: { type: "creature" } },
         },
-        effect: { kind: "create-token", token: "Clue Token", count: 1 },
+        effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
         text: "Whenever a creature you control deals combat damage to a player, investigate.",
       },
       resolve: null,

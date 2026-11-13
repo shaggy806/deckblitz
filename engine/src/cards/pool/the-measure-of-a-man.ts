@@ -30,7 +30,7 @@ export default defineCard({
     {
       at: [2],
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: II_TEXT,
     },

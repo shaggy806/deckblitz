@@ -12,7 +12,7 @@ export default defineCard({
   subtypes: ["Adventure"],
   text: "Investigate X times. (Then exile this card. You may cast the creature later from exile.)",
   targets: [],
-  effect: { kind: "create-token", token: "Clue Token", count: "x" },
+  effect: { kind: "create-token", token: "Clue Token", investigate: true, count: "x" },
   faces: ["James, Wandering Dad", "Follow Him"],
   adventure: true,
 });

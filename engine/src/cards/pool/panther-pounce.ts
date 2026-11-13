@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "create-token", token: "Clue Token", count: 1, who: "target-controller" },
+      { kind: "create-token", token: "Clue Token", investigate: true, count: 1, who: "target-controller" },
       { kind: "modify-pt", target: 1, power: 1, toughness: 0, duration: "end-of-turn" },
       { kind: "grant-keyword", target: 1, keyword: "flying", duration: "end-of-turn" },
       { kind: "untap", target: 1 },

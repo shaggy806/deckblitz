@@ -10,6 +10,7 @@ import {
   activate,
   cast,
   counters,
+  enter,
   hand,
   lands,
   life,
@@ -21,8 +22,10 @@ import {
   toGraveyard,
   toHand,
   toLibrary,
+  tokensNamed,
   zone,
 } from "./harness.js";
+import { investigate } from "../cards/helpers.js";
 
 describe("mills, per card (Glowing One, Infesting Radroach)", () => {
   it("Glowing One gains 1 life for each nonland card milled, whoever milled", () => {
@@ -78,6 +81,49 @@ describe("mills, per card (Glowing One, Infesting Radroach)", () => {
     game.debugApplyEffect(B, { kind: "mill", target: "each-player", amount: 1 });
     settle(game);
     expect(zone(game, roach)).toBe("hand");
+  });
+});
+
+describe("investigates (Erdwal Illuminator)", () => {
+  const clues = (game: ReturnType<typeof table>["game"]): number => tokensNamed(game, "Clue Token", A);
+
+  it("investigates an additional time the first time each turn, and only then", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Erdwal Illuminator");
+    game.debugApplyEffect(A, investigate());
+    settle(game);
+    expect(clues(game)).toBe(2);
+    game.debugApplyEffect(A, investigate());
+    settle(game);
+    expect(clues(game)).toBe(3);
+  });
+
+  it("counts an investigation made before it arrived this turn", () => {
+    const { game } = table({ players: 2 });
+    game.debugApplyEffect(A, investigate());
+    settle(game);
+    spawn(game, "Erdwal Illuminator");
+    game.debugApplyEffect(A, investigate());
+    settle(game);
+    expect(clues(game)).toBe(2);
+  });
+
+  it("isn't a Clue made without the word, nor an opponent's investigation", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Erdwal Illuminator");
+    game.debugApplyEffect(A, { kind: "create-token", token: "Clue Token", count: 1 });
+    game.debugApplyEffect(B, investigate());
+    settle(game);
+    expect(clues(game)).toBe(1);
+    expect(tokensNamed(game, "Clue Token", B)).toBe(1);
+  });
+
+  it("sees a pool card's investigation (Thraben Inspector)", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "Erdwal Illuminator");
+    enter(game, "Thraben Inspector");
+    settle(game);
+    expect(clues(game)).toBe(2);
   });
 });
 

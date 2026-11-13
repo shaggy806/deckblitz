@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "create-token", token: "Clue Token", count: 1 },
+      { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       { kind: "additional-land-drop", amount: 1 },
     ],
   },

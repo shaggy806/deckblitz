@@ -11904,6 +11904,7 @@ describe("a number of yours against another player's (player-compare)", () => {
     expect(wojek.triggered[0].effect).toEqual({
       kind: "create-token",
       token: "Clue Token",
+      investigate: true,
       count: { countPlayers: "each-opponent", where: { kind: "player-compare", stat: "hand", compare: "fewer", than: "that-player" } },
     });
     expect(face(SPELL, "If a player has more life than you, draw a card.").complete).toBe(false);
@@ -18922,5 +18923,17 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
 
   it("reads a payment of life (Font of Agonies)", () => {
     expect(parseTrigger("Whenever you pay life")).toEqual([{ on: "event", event: "pays-life", who: "you" }]);
+  });
+
+  it("reads an investigation, the first each turn (Erdwal Illuminator)", () => {
+    expect(parseTrigger("Whenever you investigate for the first time each turn")).toEqual([
+      { on: "event", event: "investigates", who: "you", firstTimeEachTurn: true },
+    ]);
+    expect(parseEffect("Investigate an additional time.", ctx()).effect).toEqual({
+      kind: "create-token",
+      token: "Clue Token",
+      investigate: true,
+      count: 1,
+    });
   });
 });

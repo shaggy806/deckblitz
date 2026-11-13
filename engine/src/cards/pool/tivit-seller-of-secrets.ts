@@ -14,7 +14,7 @@ const VOTE = {
   kind: "sequence",
   effects: [
     { kind: "vote", for: { options: ["evidence", "bribery"] } },
-    { kind: "for-each-vote", option: 0, effect: { kind: "create-token", token: "Clue Token", count: 1 } },
+    { kind: "for-each-vote", option: 0, effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 } },
     { kind: "for-each-vote", option: 1, effect: { kind: "create-token", token: "Treasure Token", count: 1 } },
   ],
 } as const;

@@ -21,6 +21,7 @@ export default defineCard({
       effect: {
         kind: "create-token",
         token: "Clue Token",
+        investigate: true,
         count: { countOf: { type: "creature", attacking: true, token: false } },
       },
       resolve: null,

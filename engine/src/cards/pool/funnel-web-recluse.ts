@@ -14,7 +14,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: "Morbid — When this creature enters, if a creature died this turn, investigate.",
       condition: { kind: "creature-died-this-turn" },

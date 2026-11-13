@@ -9,7 +9,7 @@ const shuffle: EffectSpec = {
   kind: "sequence",
   effects: [
     { kind: "shuffle-into-library", target: 0 },
-    { kind: "as-player", who: { ownerOf: 0 }, effect: { kind: "create-token", token: "Clue Token", count: 1 } },
+    { kind: "as-player", who: { ownerOf: 0 }, effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 } },
   ],
 };
 const token: EffectSpec = { kind: "create-token", token: "Alien Angel Token", count: 1 };

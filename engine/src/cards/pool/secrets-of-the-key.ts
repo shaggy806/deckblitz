@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "conditional",
     condition: { kind: "source", filter: { castFrom: "graveyard" } },
-    then: { kind: "create-token", token: "Clue Token", count: 2 },
-    else: { kind: "create-token", token: "Clue Token", count: 1 },
+    then: { kind: "create-token", token: "Clue Token", investigate: true, count: 2 },
+    else: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
   },
 });

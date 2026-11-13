@@ -20,7 +20,7 @@ export default defineCard({
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: "Whenever this creature deals combat damage to a player, investigate.",
     },

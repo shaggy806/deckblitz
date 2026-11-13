@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 2 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 2 },
       resolve: null,
       text: ENTERS_TEXT,
     },

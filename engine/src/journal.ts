@@ -118,6 +118,8 @@ export type JournalKind =
   | "scried"
   /** `player` searched their own library (701.23). */
   | "library-searched"
+  /** `player` investigated (701.16a), an entry per investigation. */
+  | "investigated"
   /** `player` spent `amount` mana to cast a spell (700.14, expend). */
   | "mana-spent"
   /** `player` paid or lost `amount` energy counters. */

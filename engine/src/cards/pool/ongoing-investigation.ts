@@ -15,7 +15,7 @@ export default defineCard({
     {
       trigger: { on: "deals-damage-batch", who: "you-control", filter: { type: "creature" }, combat: true },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: DAMAGE_TEXT,
     },
@@ -27,7 +27,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "create-token", token: "Clue Token", count: 1 },
+          { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
           { kind: "gain-life", amount: 2 },
         ],
       },

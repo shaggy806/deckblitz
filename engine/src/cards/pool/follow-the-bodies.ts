@@ -11,6 +11,6 @@ export default defineCard({
   types: ["sorcery"],
   text: `${GRAVESTORM}\nInvestigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")`,
   targets: [],
-  effect: { kind: "create-token", token: "Clue Token", count: 1 },
+  effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
   triggered: [{ ...gravestorm(), text: GRAVESTORM }],
 });

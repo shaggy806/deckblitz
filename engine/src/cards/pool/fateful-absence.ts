@@ -16,7 +16,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "destroy", target: 0 },
-      { kind: "create-token", token: "Clue Token", count: 1, who: "target-controller" },
+      { kind: "create-token", token: "Clue Token", investigate: true, count: 1, who: "target-controller" },
     ],
   },
 });

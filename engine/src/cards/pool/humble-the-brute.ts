@@ -9,6 +9,6 @@ export default defineCard({
   targets: [{ kind: "permanent", filter: { type: "creature", power: { op: "gte", n: 4 } } }],
   effect: {
     kind: "sequence",
-    effects: [{ kind: "destroy", target: 0 }, { kind: "create-token", token: "Clue Token", count: 1 }],
+    effects: [{ kind: "destroy", target: 0 }, { kind: "create-token", token: "Clue Token", investigate: true, count: 1 }],
   },
 });

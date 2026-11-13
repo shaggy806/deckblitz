@@ -26,7 +26,7 @@ export default defineCard({
           {
             kind: "conditional",
             condition: { kind: "resolved-this-turn", n: 2 },
-            then: { kind: "create-token", token: "Clue Token", count: 1 },
+            then: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
           },
         ],
       },

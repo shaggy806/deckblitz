@@ -25,6 +25,7 @@ export default defineCard({
       {
         kind: "create-token",
         token: "Clue Token",
+        investigate: true,
         who: "target-controller",
         count: { thisWay: "exiled", filter: { token: false } },
       },

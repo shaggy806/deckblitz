@@ -17,7 +17,7 @@ export default defineCard({
     effects: [
       { kind: "tap", target: 0 },
       { kind: "tap", target: 1 },
-      { kind: "create-token", token: "Clue Token", count: 1 },
+      { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
     ],
   },
 });

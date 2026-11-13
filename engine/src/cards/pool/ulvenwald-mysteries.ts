@@ -10,7 +10,7 @@ export default defineCard({
     {
       trigger: { on: "dies", who: "you-control", filter: { token: false, type: "creature" } },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: "Whenever a nontoken creature you control dies, investigate.",
     },

@@ -2652,6 +2652,10 @@ export function parseTrigger(clause) {
   if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
   // Rule 119.4: any payment of life (Font of Agonies).
   if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
+  // Rule 701.16a, each investigation (Erdwal Illuminator).
+  if ((m = /^Whenever you investigate( for the first time each turn)?$/.exec(c))) {
+    return [{ on: "event", event: "investigates", who: "you", ...(m[1] ? { firstTimeEachTurn: true } : {}) }];
+  }
   // Mirelurk Queen, The Wise Mothman: rule 701.17, any player's mill.
   {
     const m = /^Whenever one or more (nonland )?cards are milled$/.exec(c);
@@ -3436,7 +3440,7 @@ export function parseSentence(sentence, ctx) {
   // (Wojek Investigator): a count of the players it holds for.
   if ((m = /^investigate once for each opponent who has more (cards in hand|life) than you\.$/i.exec(s))) {
     const where = { kind: "player-compare", stat: COMPARED_STATS[m[1].toLowerCase()], compare: "fewer", than: "that-player" };
-    return { kind: "create-token", token: "Clue Token", count: { countPlayers: "each-opponent", where } };
+    return { kind: "create-token", token: "Clue Token", investigate: true, count: { countPlayers: "each-opponent", where } };
   }
   const tallied = turnTallyEffect(s, ctx);
   if (tallied !== null) return tallied;
@@ -4714,7 +4718,8 @@ export function parseSentence(sentence, ctx) {
       ...except,
     };
   }
-  if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
+  // Investigate (rule 701.16a): announced as one (`investigate`).
+  if (re("investigate(?: an additional time)?").test(s)) return { kind: "create-token", token: "Clue Token", investigate: true, count: 1 };
   // Learn (rule 701.48a): the rummage, or else a Lesson from the sideboard
   // (`learn()` in helpers.ts).
   if (re("learn").test(s)) {
@@ -9489,7 +9494,7 @@ export function parseEffect(text, outer) {
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "create-token", token: "Clue Token", count: { countOf: { ...yours, goaded: true } } },
+          { kind: "create-token", token: "Clue Token", investigate: true, count: { countOf: { ...yours, goaded: true } } },
           { kind: "ungoad", filter: yours },
         ],
       },

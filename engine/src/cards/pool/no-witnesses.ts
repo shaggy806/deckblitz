@@ -23,7 +23,7 @@ export default defineCard({
             than: "each-opponent",
           },
         },
-        effect: { kind: "create-token", token: "Clue Token", count: 1, who: "that-player" },
+        effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1, who: "that-player" },
       },
       { kind: "destroy-all", filter: { type: "creature" } },
     ],

@@ -8,6 +8,6 @@ export default defineCard({
   text: "Draw a card. Investigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")",
   effect: {
     kind: "sequence",
-    effects: [{ kind: "draw", amount: 1 }, { kind: "create-token", token: "Clue Token", count: 1 }],
+    effects: [{ kind: "draw", amount: 1 }, { kind: "create-token", token: "Clue Token", investigate: true, count: 1 }],
   },
 });

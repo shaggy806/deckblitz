@@ -16,7 +16,7 @@ export default defineCard({
     {
       trigger: { on: "dealt-damage", who: "self", atLeast: 3 },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: TEXT,
     },

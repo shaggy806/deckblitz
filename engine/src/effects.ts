@@ -8176,6 +8176,11 @@ export type EffectSpec =
        * {@link PlayerScope} has each of those players create `count` tokens
        * ("each opponent creates a Treasure token"). */
       readonly who?: "target-controller" | PlayerScope;
+      /** It's an investigation (rule 701.16a — `helpers.ts`'s
+       * `investigate`): each creator investigates `count` times, announced
+       * (`investigated`) once the Clues are made, for "whenever you
+       * investigate" (Erdwal Illuminator). Not "create a Clue token". */
+      readonly investigate?: true;
       /** The tokens enter **tapped** (Army of the Damned, Necrotic Hex,
        * Overseer of the Damned). These are never folded into a token stack —
        * see `mintTokenBatch`. */
@@ -11426,6 +11431,8 @@ export interface EffectApi {
   loseLife(player: PlayerId, amount: number): void;
   /** Announce the loss just made as a payment of life (`lose-life`'s `paid`). */
   lifePaid(player: PlayerId, amount: number): void;
+  /** Announce `times` investigations by `player` (`create-token`'s `investigate`). */
+  investigated(player: PlayerId, times: number): void;
   /** Change life for a whole scope (`gain-life` / `lose-life` with `who`). */
   changeLifeScoped(who: PlayerScope, delta: number): void;
   /** The concrete types a {@link BoardManaList} names right now, read from
@@ -20058,6 +20065,24 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "create-token":
+      // Investigating (rule 701.16a): the Clues, then each investigation
+      // announced — whatever a replacement made of the tokens.
+      if (spec.investigate === true) {
+        const { investigate: _investigate, ...clues } = spec;
+        const investigators =
+          spec.who === undefined
+            ? [ctx.controller]
+            : spec.who === "target-controller"
+              ? ((ref) => {
+                  const p = ref === undefined || ref === null ? undefined : ctx.controllerOf(ref);
+                  return p === undefined ? [] : [p];
+                })(ctx.targets[0])
+              : ctx.playersInScope(spec.who);
+        const times = investigators.map((p) => amountValue(spec.count, ctx, p) * ctx.stackMultiplier);
+        applyEffectSpec(clues, ctx);
+        investigators.forEach((p, i) => ctx.investigated(p, times[i]));
+        return;
+      }
       if (spec.replacementAsked !== true && spec.who === undefined && ctx.tokenEventReplaced(spec, amountValue(spec.count, ctx) * ctx.stackMultiplier)) return;
       // A per-player count ("its controller creates a token for each
       // creature destroyed this way") — or per-player counters on it

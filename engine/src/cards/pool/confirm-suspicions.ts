@@ -13,7 +13,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "counter", target: 0 },
-      { kind: "create-token", token: "Clue Token", count: 3 },
+      { kind: "create-token", token: "Clue Token", investigate: true, count: 3 },
     ],
   },
 });

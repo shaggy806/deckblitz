@@ -22,7 +22,7 @@ export default defineCard({
       trigger: { on: "leaves-battlefield", who: "you-control", filter: { type: "creature" }, otherOnly: true },
       oncePerTurn: true,
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: LEAVE_TEXT,
     },

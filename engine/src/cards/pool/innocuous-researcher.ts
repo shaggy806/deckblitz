@@ -27,6 +27,7 @@ export default defineCard({
             {
               kind: "create-token",
               token: "Clue Token",
+              investigate: true,
               count: { thisWay: "revealed", filter: { notTypes: ["land"] } },
             },
             { kind: "draw", amount: 1, who: "each-player" },

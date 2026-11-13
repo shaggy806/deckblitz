@@ -24,7 +24,7 @@ export default defineCard({
         filter: { counters: { compare: { op: "gte", n: 1 } } },
       },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: "Whenever another permanent you control leaves the battlefield, if it had counters on it, investigate.",
     },

@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: { on: "attacks-alone", who: "you-control" },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: ALONE_TEXT,
     },

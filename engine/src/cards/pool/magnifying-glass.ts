@@ -17,7 +17,7 @@ export default defineCard({
     {
       cost: { mana: "{4}", tap: true },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: "{4}, {T}: Investigate.",
     },

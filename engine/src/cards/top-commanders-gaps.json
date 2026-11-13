@@ -2449,7 +2449,8 @@
   "cost:exile-many-cost-linked-return",
   "static:mana-abilities-cost-life",
   "trigger:mills-per-card",
-  "trigger:pays-life-trigger"
+  "trigger:pays-life-trigger",
+  "trigger:investigate-trigger"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

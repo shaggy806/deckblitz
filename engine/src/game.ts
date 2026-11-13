@@ -37348,6 +37348,9 @@ export class Game {
           controller,
         ),
       lifePaid: (player, amount) => this.lifePaid(player, amount),
+      investigated: (player, times) => {
+        for (let i = 0; i < times && i < Game.MAX_EFFECT_INSTANCES; i += 1) this.emit({ type: "investigated", player });
+      },
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
       addMana: (player, mana, amount, spec) => {
         this.addMana(
@@ -54082,6 +54085,9 @@ controlledBy,
         return;
       case "scried":
         add({ kind: "scried", player: event.player, how: event.mode });
+        return;
+      case "investigated":
+        add({ kind: "investigated", player: event.player });
         return;
       case "coin-flipped":
         add({

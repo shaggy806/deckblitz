@@ -13,7 +13,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "you-control", filter: { type: "land" } },
       targets: [],
-      effect: { kind: "create-token", token: "Clue Token", count: 1 },
+      effect: { kind: "create-token", token: "Clue Token", investigate: true, count: 1 },
       resolve: null,
       text: "Landfall — Whenever a land you control enters, investigate.",
     },
