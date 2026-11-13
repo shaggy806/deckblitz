@@ -65,6 +65,7 @@ import _poolBellowingSaddlebrute from "../pool/bellowing-saddlebrute.js";
 import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
+import _poolBenthicAnomaly from "../pool/benthic-anomaly.js";
 import _poolBerserkMurlodont from "../pool/berserk-murlodont.js";
 import _poolBindSpirit from "../pool/bind-spirit.js";
 import _poolBindTheMonster from "../pool/bind-the-monster.js";
@@ -1004,6 +1005,7 @@ const shard: CardShard = {
     _poolBelovedPrincess,
     _poolBenalishCavalry,
     _poolBenevolentHydra,
+    _poolBenthicAnomaly,
     _poolBerserkMurlodont,
     _poolBindSpirit,
     _poolBindTheMonster,

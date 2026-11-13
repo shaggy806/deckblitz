@@ -3,7 +3,10 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, activate, attack, cast, counters, destroy, hand, lands, life, ref, settle, spawn, table, toHand, toStep, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, pt, ref, settle, spawn, subtypes, table, toHand, toStep, types, zone } from "./harness.js";
+import { computeCharacteristics } from "../characteristics.js";
+import { printedCardName } from "../state.js";
+import type { ObjectId } from "../state.js";
 
 describe("Shay Cormac: opponents' permanents lose hexproof, indestructible, protection, shroud and ward", () => {
   // The opponent's ward triggers waiting on the stack (Shay Cormac's own
@@ -119,6 +122,17 @@ describe("Norn's Decree: poison for combat damage to you, a card for attacking a
     expect(hand(game, A).length).toBe(before + 1);
   });
 
+  it("no card when the attack is at a planeswalker of a poisoned player", () => {
+    const { game, a } = table();
+    spawn(game, "Norn's Decree", B);
+    poisonOpponents(game, A);
+    const walker = spawn(game, "Jace Beleren", B);
+    const x = spawn(game, "Grizzly Bears");
+    const before = hand(game, A).length;
+    attack(game, a, [x], walker);
+    expect(hand(game, A).length).toBe(before);
+  });
+
   it("no card when nobody attacked is poisoned", () => {
     const { game, a } = table({ players: 3 });
     spawn(game, "Norn's Decree", C);
@@ -130,5 +144,51 @@ describe("Norn's Decree: poison for combat damage to you, a card for attacking a
     attack(game, a, [x], B);
     expect(poison(game, A)).toBe(1);
     expect(hand(game, A).length).toBe(before);
+  });
+});
+
+describe("Benthic Anomaly: a token copy of one of the creatures chosen, one per opponent, with their total power and toughness", () => {
+  const token = (game: ReturnType<typeof table>["game"]): ObjectId => {
+    const made = Object.values(game.state.objects).filter((o) => o.isToken && o.zone === "battlefield" && o.controller === A);
+    expect(made.length).toBe(1);
+    return made[0].id;
+  };
+
+  it("copies the one you pick, as a colorless Eldrazi creature with the totals", () => {
+    const { game, a } = table({ players: 3 });
+    lands(game, "Island", 7);
+    spawn(game, "Grizzly Bears", B);
+    const angel = spawn(game, "Serra Angel", C);
+    // One question per opponent (a creature of theirs), then which to copy.
+    const asked: number[] = [];
+    a.choosePermanentsFn = (_view, eligible) => {
+      asked.push(eligible.length);
+      return eligible.length === 1 ? eligible : [angel];
+    };
+    cast(game, toHand(game, "Benthic Anomaly"));
+    expect(asked.at(-1)).toBe(2);
+    const made = token(game);
+    expect(printedCardName(game.state.objects[made])).toBe("Serra Angel");
+    expect(pt(game, made)).toEqual({ power: 6, toughness: 6 });
+    expect(types(game, made)).toEqual(["creature"]);
+    expect(subtypes(game, made)).toEqual(["Eldrazi"]);
+    expect(computeCharacteristics(game.state, game.registry, made).colors.size).toBe(0);
+    expect(keywords(game, made).has("flying")).toBe(true);
+    // The Anomaly itself resolved after its trigger.
+    expect(named(game, "Benthic Anomaly", A).length).toBe(1);
+  });
+
+  it("an opponent with no creature has none chosen; with none at all there's no token", () => {
+    const { game } = table({ players: 3 });
+    lands(game, "Island", 14);
+    cast(game, toHand(game, "Benthic Anomaly"));
+    expect(Object.values(game.state.objects).filter((o) => o.isToken).length).toBe(0);
+    const bear = spawn(game, "Grizzly Bears", C);
+    void bear;
+    cast(game, toHand(game, "Benthic Anomaly"));
+    const made = token(game);
+    expect(printedCardName(game.state.objects[made])).toBe("Grizzly Bears");
+    expect(pt(game, made)).toEqual({ power: 2, toughness: 2 });
+    expect(subtypes(game, made)).toEqual(["Eldrazi"]);
   });
 });

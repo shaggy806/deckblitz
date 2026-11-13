@@ -2384,6 +2384,7 @@ import _poolBenevolentRiverSpirit from "./pool/benevolent-river-spirit.js";
 import _poolBenevolentUnicorn from "./pool/benevolent-unicorn.js";
 import _poolBenjaminSiskoBesieged from "./pool/benjamin-sisko-besieged.js";
 import _poolBennieBracksZoologist from "./pool/bennie-bracks-zoologist.js";
+import _poolBenthicAnomaly from "./pool/benthic-anomaly.js";
 import _poolBenthicBehemoth from "./pool/benthic-behemoth.js";
 import _poolBenthicBiomancer from "./pool/benthic-biomancer.js";
 import _poolBenthicCriminologists from "./pool/benthic-criminologists.js";
@@ -35086,6 +35087,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBenevolentUnicorn,
   _poolBenjaminSiskoBesieged,
   _poolBennieBracksZoologist,
+  _poolBenthicAnomaly,
   _poolBenthicBehemoth,
   _poolBenthicBiomancer,
   _poolBenthicCriminologists,
@@ -67801,6 +67803,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/benevolent-unicorn": _poolBenevolentUnicorn,
   "pool/benjamin-sisko-besieged": _poolBenjaminSiskoBesieged,
   "pool/bennie-bracks-zoologist": _poolBennieBracksZoologist,
+  "pool/benthic-anomaly": _poolBenthicAnomaly,
   "pool/benthic-behemoth": _poolBenthicBehemoth,
   "pool/benthic-biomancer": _poolBenthicBiomancer,
   "pool/benthic-criminologists": _poolBenthicCriminologists,
