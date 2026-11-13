@@ -5177,6 +5177,7 @@ import _poolConsignToMemory from "./pool/consign-to-memory.js";
 import _poolConsignToThePit from "./pool/consign-to-the-pit.js";
 import _poolConsign from "./pool/consign.js";
 import _poolConspicuousSnoop from "./pool/conspicuous-snoop.js";
+import _poolConspiracyTheorist from "./pool/conspiracy-theorist.js";
 import _poolConspiracy from "./pool/conspiracy.js";
 import _poolConstableOdo from "./pool/constable-odo.js";
 import _poolConstableOfTheRealm from "./pool/constable-of-the-realm.js";
@@ -37884,6 +37885,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolConsignToThePit,
   _poolConsign,
   _poolConspicuousSnoop,
+  _poolConspiracyTheorist,
   _poolConspiracy,
   _poolConstableOdo,
   _poolConstableOfTheRealm,
@@ -70604,6 +70606,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/consign-to-the-pit": _poolConsignToThePit,
   "pool/consign": _poolConsign,
   "pool/conspicuous-snoop": _poolConspicuousSnoop,
+  "pool/conspiracy-theorist": _poolConspiracyTheorist,
   "pool/conspiracy": _poolConspiracy,
   "pool/constable-odo": _poolConstableOdo,
   "pool/constable-of-the-realm": _poolConstableOfTheRealm,

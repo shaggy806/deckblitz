@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toStep, types, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pickFromZone, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toStep, types, zone } from "./harness.js";
 import { computeCharacteristics } from "../characteristics.js";
 import { manaValueOfObject } from "../filter.js";
 import { printedCardName } from "../state.js";
@@ -371,5 +371,58 @@ describe("Vizier of Many Faces: a Clone whose embalmed token keeps embalm's exce
     expect(colorsOf(game, vizier)).toEqual(["R"]);
     expect(subtypes(game, vizier)).toEqual(["Giant"]);
     expect(manaValueOfObject(game.registry, game.state.objects[vizier])).toBe(4);
+  });
+});
+
+describe("Conspiracy Theorist: exile one of the nonland cards you discarded, and cast it this turn", () => {
+  it("offers only the nonland cards of that discard, exiles the one picked, and it can be cast this turn", () => {
+    const { game, a } = table();
+    spawn(game, "Conspiracy Theorist");
+    lands(game, "Mountain", 4);
+    // An older card in the graveyard isn't one of them.
+    const old = toGraveyard(game, "Shock");
+    const bolt = toHand(game, "Lightning Bolt");
+    const giant = toHand(game, "Hill Giant");
+    const land = toHand(game, "Mountain");
+    const picked = pickFromZone(a, bolt);
+    game.debugApplyEffect(A, { kind: "discard-hand", who: "you" }, []);
+    settle(game);
+    expect([...picked.offered].sort()).toEqual([bolt, giant].sort());
+    expect(zone(game, bolt)).toBe("exile");
+    expect(zone(game, giant)).toBe("graveyard");
+    expect(zone(game, land)).toBe("graveyard");
+    expect(zone(game, old)).toBe("graveyard");
+    cast(game, bolt, { targets: [ref(B)], via: "impulse" });
+    expect(life(game, B)).toBe(17);
+  });
+
+  it("the permission ends with the turn", () => {
+    const { game, a } = table();
+    spawn(game, "Conspiracy Theorist");
+    lands(game, "Mountain", 4);
+    const giant = toHand(game, "Hill Giant");
+    pickFromZone(a, giant);
+    game.debugApplyEffect(A, { kind: "discard-hand", who: "you" }, []);
+    settle(game);
+    expect(zone(game, giant)).toBe("exile");
+    nextTurn(game);
+    nextTurn(game);
+    expect(() => cast(game, giant, { via: "impulse" })).toThrow();
+  });
+
+  it("discarding only lands triggers nothing; declining leaves the card in the graveyard", () => {
+    const { game, a } = table();
+    spawn(game, "Conspiracy Theorist");
+    const land = toHand(game, "Mountain");
+    const seen = pickFromZone(a);
+    game.debugApplyEffect(A, { kind: "discard-hand", who: "you" }, []);
+    settle(game);
+    expect(seen.offered.length).toBe(0);
+    expect(zone(game, land)).toBe("graveyard");
+    const bolt = toHand(game, "Lightning Bolt");
+    game.debugApplyEffect(A, { kind: "discard-hand", who: "you" }, []);
+    settle(game);
+    expect(seen.offered).toEqual([bolt]);
+    expect(zone(game, bolt)).toBe("graveyard");
   });
 });

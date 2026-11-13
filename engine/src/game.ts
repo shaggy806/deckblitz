@@ -31936,6 +31936,21 @@ export class Game {
                         })),
                       ),
                     }
+                : // "Exile one of them from your graveyard" (Conspiracy
+                  // Theorist): the cards discarded at once that matched,
+                  // each as the object it is in the graveyard.
+                  ability.trigger.on === "discards" && ability.trigger.perCard !== true && event.type === "cards-discarded"
+                  ? {
+                      ...(atTrigger ?? {}),
+                      sets: addToSet(
+                        atTrigger?.sets,
+                        "batch",
+                        this.discardedMatching(ability.trigger, event.objects, object, event.unrevealed).map((card) => ({
+                          object: card,
+                          stint: this.state.objects[card]?.zoneChangeCount ?? 0,
+                        })),
+                      ),
+                    }
                 : // "Return one of them": the cards among what died. A token
                   // is no card to return (rule 111.1).
                   ability.trigger.on === "dies" && event.type === "permanents-died"

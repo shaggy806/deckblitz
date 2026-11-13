@@ -1171,7 +1171,10 @@ is one unit of a sentence it reads.
 is one of the objects the resolving trigger fired on: the attackers that counted
 for an `attacks-batch`, `attack-with` or `attacks-player` trigger (of
 `attacks-player`, those attacking that player), the permanents of a batched
-entry, the cards of a batched arrival in a graveyard. Each is the object it was
+entry, the cards of a batched arrival in a graveyard, the cards of a `discards`
+trigger's discard that matched its `filter` (Conspiracy Theorist's "exile **one
+of them** from your graveyard": a `look-and-choose` over the graveyard with
+`filter: { inSet: "trigger-batch" }`, `destination: "exile"` and `mayPlay`). Each is the object it was
 then (rule 400.7), whatever it has become: one removed from combat is still one
 of them. Any effect with a filter takes it: Sabotage Strategist's `modify-pt-all`,
 Lightmine Field's `damage-all`, `add-counter-all`, `for-each-permanent` for "that
