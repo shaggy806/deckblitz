@@ -74,6 +74,7 @@ import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
 import _poolBalduvianHydra from "../pool/balduvian-hydra.js";
 import _poolBalefulBeholder from "../pool/baleful-beholder.js";
+import _poolBanefire from "../pool/banefire.js";
 import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
 import _poolBarrierBreach from "../pool/barrier-breach.js";
 import _poolBarrowBlade from "../pool/barrow-blade.js";
@@ -1071,6 +1072,7 @@ const shard: CardShard = {
     _poolBagOfHolding,
     _poolBalduvianHydra,
     _poolBalefulBeholder,
+    _poolBanefire,
     _poolBardHeirOfGirion,
     _poolBarrierBreach,
     _poolBarrowBlade,

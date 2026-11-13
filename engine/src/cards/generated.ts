@@ -1975,6 +1975,7 @@ import _poolBaneOfBalaGed from "./pool/bane-of-bala-ged.js";
 import _poolBaneOfHanweir from "./pool/bane-of-hanweir.js";
 import _poolBaneOfProgress from "./pool/bane-of-progress.js";
 import _poolBaneOfTheLiving from "./pool/bane-of-the-living.js";
+import _poolBanefire from "./pool/banefire.js";
 import _poolBanefulOmen from "./pool/baneful-omen.js";
 import _poolBanehound from "./pool/banehound.js";
 import _poolBanesContingency from "./pool/banes-contingency.js";
@@ -34673,6 +34674,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBaneOfHanweir,
   _poolBaneOfProgress,
   _poolBaneOfTheLiving,
+  _poolBanefire,
   _poolBanefulOmen,
   _poolBanehound,
   _poolBanesContingency,
@@ -67384,6 +67386,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bane-of-hanweir": _poolBaneOfHanweir,
   "pool/bane-of-progress": _poolBaneOfProgress,
   "pool/bane-of-the-living": _poolBaneOfTheLiving,
+  "pool/banefire": _poolBanefire,
   "pool/baneful-omen": _poolBanefulOmen,
   "pool/banehound": _poolBanehound,
   "pool/banes-contingency": _poolBanesContingency,

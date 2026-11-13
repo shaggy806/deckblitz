@@ -369,6 +369,12 @@ export interface CardFilter {
   /** Exactly this many colours ("exactly three colors", Threefold Signal). */
   readonly colorCount?: number;
   readonly manaValue?: NumCompare;
+  /** The value chosen for its `{X}` (rule 107.3): a spell or ability on the
+   * stack's, 0 anywhere else — Banefire's "if X is 5 or more, this spell
+   * can't be countered" (`cantBeCountered: { kind: "source", filter: {
+   * xValue: { op: "gte", n: 5 } } }`), the number chosen, not the mana
+   * spent (its ruling). */
+  readonly xValue?: NumCompare;
   /** Has an odd or even mana value (zero is even): Void Winnower's "spells with
    * even mana values", Extinction Event's "each creature with mana value of the
    * chosen quality" (see {@link ParityClause}). */
@@ -2614,6 +2620,10 @@ export function matchesFilter(
   }
   if (filter.manaValue !== undefined) {
     if (!compareNum(manaValueNow(), filter.manaValue, ctx.x, dynamic)) return false;
+  }
+  if (filter.xValue !== undefined) {
+    const chosen = live !== undefined && live.zone === "stack" ? (live.xValue ?? 0) : 0;
+    if (!compareNum(chosen, filter.xValue, ctx.x, dynamic)) return false;
   }
   if (filter.manaValueParity !== undefined && !hasParity(state, manaValueNow(), filter.manaValueParity, ctx.source)) {
     return false;

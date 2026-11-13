@@ -3094,6 +3094,12 @@ Riddle Master), and "without mana value of the chosen quality" a `not` of it
 (Ashling's Prerogative). No new decision: both ask through
 `choose-creature-type`'s short menu.
 
+**A spell's X** is the clause `xValue: NumCompare`: the value chosen for its
+`{X}` while it's on the stack, 0 elsewhere — Banefire's "if X is 5 or more,
+this spell can't be countered" is `cantBeCountered: { kind: "source", filter:
+{ xValue: { op: "gte", n: 5 } } }`, its damage half a `conditional` on `{
+kind: "x" }` with `cantBePrevented`.
+
 `CardFilter` (used by the mass / tutor effects) is a predicate over an object's
 *computed* characteristics — `{ type, types, notTypes, typesAnyOf, subtype,
 subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,

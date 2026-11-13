@@ -167,3 +167,36 @@ describe("Tarrian's Journal // The Tomb of Aclazotz", () => {
     expect(zone(game, bear)).toBe("exile");
   });
 });
+
+describe("Banefire: if X is 5 or more, it can't be countered and its damage can't be prevented", () => {
+  const fire = (x: number) => {
+    const { game } = table();
+    lands(game, "Mountain", x + 1);
+    const banefire = toHand(game, "Banefire");
+    cast(game, banefire, { targets: [{ kind: "player", player: B }], x, settle: false });
+    // Bob's counterspell and a shield on himself, in response.
+    game.debugApplyEffect(B, { kind: "counter", target: 0 }, [ref(banefire)]);
+    game.debugApplyEffect(B, { kind: "prevent-damage", target: 0, amount: 3 }, [{ kind: "player", player: B }]);
+    settle(game);
+    return { game, banefire };
+  };
+
+  it("at X = 5 the counter does nothing and none of the damage is prevented", () => {
+    const { game, banefire } = fire(5);
+    expect(zone(game, banefire)).toBe("graveyard");
+    expect(life(game, B)).toBe(15);
+  });
+
+  it("at X = 4 it can be countered", () => {
+    const { game } = fire(4);
+    expect(life(game, B)).toBe(20);
+  });
+
+  it("at X = 4, uncountered, the shield takes 3", () => {
+    const { game } = table();
+    lands(game, "Mountain", 5);
+    game.debugApplyEffect(B, { kind: "prevent-damage", target: 0, amount: 3 }, [{ kind: "player", player: B }]);
+    cast(game, toHand(game, "Banefire"), { targets: [{ kind: "player", player: B }], x: 4 });
+    expect(life(game, B)).toBe(19);
+  });
+});
