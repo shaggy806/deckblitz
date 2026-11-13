@@ -35227,6 +35227,13 @@ export class Game {
       }
       return held ?? refs.votes ?? [];
     };
+    // "You and target opponent each …": in turn order from the active
+    // player (rule 101.4).
+    const youAnd = (other: PlayerId | undefined): PlayerId[] => {
+      const from = this.state.turnOrder.indexOf(this.activePlayer);
+      const order = [...this.state.turnOrder.slice(from), ...this.state.turnOrder.slice(0, from)];
+      return order.filter((p) => (p === controller || p === other) && this.state.players[p]?.hasLost === false);
+    };
     const scoped = (who: PlayerScope): PlayerId[] => {
       if (typeof who === "object") return context.playersInScope(who) as PlayerId[];
       if (who === "chosen-player") {
@@ -35453,7 +35460,13 @@ export class Game {
       }
       if ("thisWay" in ref) {
         const players =
-          ref.who === undefined ? undefined : ref.who === "each" ? [each ?? controller] : scoped(ref.who);
+          ref.who === undefined
+            ? undefined
+            : ref.who === "each"
+              ? [each ?? controller]
+              : ref.who === "each-other"
+                ? scoped("each-player").filter((p) => p !== (each ?? controller))
+                : scoped(ref.who);
         const whose = players === undefined ? undefined : new Set(players);
         return thisWayDone(ref.thisWay, ref.byOwner === true ? undefined : players, undefined).flatMap((entry): SetMember[] => {
           if (ref.byOwner === true && whose !== undefined) {
@@ -36003,6 +36016,7 @@ export class Game {
           const other = resolvePlayerRef(who.otherThan, this);
           return scoped("each-player").filter((p) => p !== other);
         }
+        if ("youAnd" in who) return youAnd(resolvePlayerRef(who.youAnd, this));
         const player = resolvePlayerRef(who, this);
         return player === undefined ? [] : [player];
       },

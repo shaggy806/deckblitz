@@ -706,7 +706,9 @@ in the public zone it was expected in, and otherwise as it last existed (rules 6
   `{ ownerOf: ObjectRef }` and `{ defendingPlayerOf: ObjectRef }` (508.5: as it was before it was
   removed from combat, from the journal). A player who has left names nobody.
 - **`PlayerScope`** is any `PlayerRef` or a plural word (`"each-player"`, `"each-opponent"`, the vote
-  scopes), or `{ otherThan: PlayerRef }` ("each other player", Oft-Nabbed Goat). Every `who` takes all of it.
+  scopes), or `{ otherThan: PlayerRef }` ("each other player", Oft-Nabbed Goat), or `{ youAnd: PlayerRef }`
+  ("you and target opponent each …" as one scoped effect, in turn order from the active player — Keen
+  Duelist; a pair of plain effects is still fine where nothing happens at once). Every `who` takes all of it.
 - **Sets**: `{ attachmentsOf: ObjectRef }` ("all Auras attached to that creature"), `{ targetsOf: ObjectRef }`
   (Storm, Windrider's "those creatures"), beside the `ObjectSetRef`s of theme 1.
 - **Attaching to a player**: `attach`'s `target` also takes `{ player: PlayerRef }` (Archnemesis).
@@ -1273,7 +1275,11 @@ battlefield's controller there. `who: "each"` is the player a scoped effect is
 applied to, read once for each — "destroy all creatures; for each creature
 destroyed this way, its controller creates a 3/3 Beast" is `{ kind:
 "create-token", token: "3/3 Beast Token", who: "each-player", count: {
-thisWay: "destroyed", who: "each" } }`. `filter` narrows them — a permanent
+thisWay: "destroyed", who: "each" } }`; `who: "each-other"` is everyone's but
+that player's (Keen Duelist's "you each lose life equal to the mana value of
+the card revealed by the other player": a `lose-life` to `{ youAnd: { target:
+0 } }` of `{ aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay:
+"revealed", who: "each-other" } }`, one simultaneous loss). `filter` narrows them — a permanent
 that left doing it as it last existed, a card as it is now (in the graveyard a
 discard put it in); `cardTypes: true` counts the card types among them
 instead (Kefka, Court Mage); `sharingManaValue: true` counts only those sharing

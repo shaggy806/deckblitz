@@ -14534,6 +14534,7 @@ import _poolKederektLeviathan from "./pool/kederekt-leviathan.js";
 import _poolKederektParasite from "./pool/kederekt-parasite.js";
 import _poolKedissEmberclawFamiliar from "./pool/kediss-emberclaw-familiar.js";
 import _poolKeenBuccaneer from "./pool/keen-buccaneer.js";
+import _poolKeenDuelist from "./pool/keen-duelist.js";
 import _poolKeenEyedArchers from "./pool/keen-eyed-archers.js";
 import _poolKeenEyedCurator from "./pool/keen-eyed-curator.js";
 import _poolKeenEyedRaven from "./pool/keen-eyed-raven.js";
@@ -47178,6 +47179,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKederektParasite,
   _poolKedissEmberclawFamiliar,
   _poolKeenBuccaneer,
+  _poolKeenDuelist,
   _poolKeenEyedArchers,
   _poolKeenEyedCurator,
   _poolKeenEyedRaven,
@@ -79835,6 +79837,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kederekt-parasite": _poolKederektParasite,
   "pool/kediss-emberclaw-familiar": _poolKedissEmberclawFamiliar,
   "pool/keen-buccaneer": _poolKeenBuccaneer,
+  "pool/keen-duelist": _poolKeenDuelist,
   "pool/keen-eyed-archers": _poolKeenEyedArchers,
   "pool/keen-eyed-curator": _poolKeenEyedCurator,
   "pool/keen-eyed-raven": _poolKeenEyedRaven,

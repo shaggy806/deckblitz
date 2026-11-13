@@ -134,6 +134,10 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       const other = playersIn(scope.otherThan, ctx);
       return other === null ? null : opponentsOf(state, other[0] ?? controller).concat(other[0] === undefined || other[0] === controller ? [] : [controller]);
     }
+    if ("youAnd" in scope) {
+      const other = playersIn(scope.youAnd, ctx);
+      return other === null ? null : [controller, ...other.filter((p) => p !== controller)];
+    }
     if ("target" in scope) {
       const slot = ctx.targets[scope.target];
       return slot?.kind === "player" ? [slot.player] : null;

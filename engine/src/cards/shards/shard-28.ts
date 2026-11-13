@@ -442,6 +442,7 @@ import _poolKaheeraTheOrphanguard from "../pool/kaheera-the-orphanguard.js";
 import _poolKalonianTusker from "../pool/kalonian-tusker.js";
 import _poolKamiOfAncientLaw from "../pool/kami-of-ancient-law.js";
 import _poolKamiOfOldStone from "../pool/kami-of-old-stone.js";
+import _poolKeenDuelist from "../pool/keen-duelist.js";
 import _poolKeepOut from "../pool/keep-out.js";
 import _poolKessigProwler from "../pool/kessig-prowler.js";
 import _poolKhenraCharioteer from "../pool/khenra-charioteer.js";
@@ -1480,6 +1481,7 @@ const shard: CardShard = {
     _poolKalonianTusker,
     _poolKamiOfAncientLaw,
     _poolKamiOfOldStone,
+    _poolKeenDuelist,
     _poolKeepOut,
     _poolKessigProwler,
     _poolKhenraCharioteer,

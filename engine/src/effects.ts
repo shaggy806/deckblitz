@@ -1210,8 +1210,11 @@ export type EffectAmount =
       /** Whose (see `ThisWayEntry.player`): a scope, or `"each"` — the
        * player a scoped effect is applied to, read once for each ("its
        * controller creates a token for each creature destroyed this way" is a
-       * `create-token` with `who: "each-player"` and this). */
-      readonly who?: PlayerScope | "each";
+       * `create-token` with `who: "each-player"` and this). `"each-other"`
+       * is every player's but that one's — Keen Duelist's "you each lose
+       * life equal to the mana value of the card revealed by **the other
+       * player**". */
+      readonly who?: PlayerScope | "each" | "each-other";
       /** Whose by the objects' **owners** instead, for `who` and `perPlayer`
        * — Kefka, Dancing Mad's "each player who **owns** a spell you cast this
        * way loses life equal to its mana value": a `lose-life` to
@@ -2047,6 +2050,10 @@ export type PlayerScope =
   | "each-player"
   | "each-opponent"
   | { readonly otherThan: PlayerRef }
+  /** "**You and** target opponent **each** …" (Keen Duelist): the effect's
+   * controller and that player, in turn order from the active player (rule
+   * 101.4); only the controller when the player is gone or is them. */
+  | { readonly youAnd: PlayerRef }
   /** Each opponent of the effect's controller **other than** the
    * `"trigger-player"` — Kediss, Emberclaw Familiar's "it deals that much
    * damage to each other opponent". Every opponent when the trigger names
@@ -15006,7 +15013,7 @@ export function signedAmountValue(
   }
   if ("cardsInHand" in amount) {
     if (amount.cardsInHand === "each") return ctx.handSizeOf(each ?? ctx.controller);
-    if (typeof amount.cardsInHand === "object" && "otherThan" in amount.cardsInHand) return 0;
+    if (typeof amount.cardsInHand === "object" && ("otherThan" in amount.cardsInHand || "youAnd" in amount.cardsInHand)) return 0;
     if (typeof amount.cardsInHand === "object") {
       const player = resolvePlayerRef(amount.cardsInHand, ctx);
       return player === undefined ? 0 : ctx.handSizeOf(player);
@@ -15087,7 +15094,9 @@ export function signedAmountValue(
         ? undefined
         : amount.who === "each"
           ? [each ?? ctx.controller]
-          : ctx.playersInScope(amount.who);
+          : amount.who === "each-other"
+            ? ctx.playersInScope("each-player").filter((p) => p !== (each ?? ctx.controller))
+            : ctx.playersInScope(amount.who);
     // By owner: every entry, then those whose object `players` own, each
     // counted as its owner's.
     const done =
@@ -16191,12 +16200,14 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("attackingPlayer" in amount) return true;
   if ("countOf" in amount) return amount.forEachPlayer === true;
   if ("countInGraveyard" in amount) return amount.forEachPlayer === true;
-  if ("thisWay" in amount) return amount.who === "each";
+  if ("thisWay" in amount) return amount.who === "each" || amount.who === "each-other";
   // "The total power of the creatures **that player** sacrificed this way":
   // a set of `who: "each"` read per player.
   if ("aggregate" in amount) {
     const ins = [amount.in, ...(amount.plus ?? []).map((p) => p.in)].flatMap((i) => (Array.isArray(i) ? i : [i]));
-    return ins.some((i) => typeof i === "object" && i !== null && "thisWay" in i && i.who === "each");
+    return ins.some(
+      (i) => typeof i === "object" && i !== null && "thisWay" in i && (i.who === "each" || i.who === "each-other"),
+    );
   }
   if ("half" in amount) return readsEachPlayer(amount.half);
   if ("powerOfTwo" in amount) return readsEachPlayer(amount.powerOfTwo);
@@ -17099,7 +17110,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (who !== undefined) ctx.gainLife(who, gained);
         return;
       }
-      if (typeof spec.who === "object" && !("otherThan" in spec.who)) {
+      if (typeof spec.who === "object" && !("otherThan" in spec.who) && !("youAnd" in spec.who)) {
         const who = resolvePlayerRef(spec.who, ctx);
         if (who !== undefined) ctx.gainLife(who, amountValue(spec.amount, ctx, who));
         return;
@@ -17117,7 +17128,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (ref?.kind === "player") ctx.loseUnspentMana(ref.player);
         return;
       }
-      if (typeof spec.who === "object" && !("otherThan" in spec.who)) {
+      if (typeof spec.who === "object" && !("otherThan" in spec.who) && !("youAnd" in spec.who)) {
         const who = resolvePlayerRef(spec.who, ctx);
         if (who !== undefined) ctx.loseUnspentMana(who);
         return;
@@ -17140,7 +17151,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (who !== undefined) ctx.loseLife(who, life);
         return;
       }
-      if (typeof spec.who === "object" && !("otherThan" in spec.who)) {
+      if (typeof spec.who === "object" && !("otherThan" in spec.who) && !("youAnd" in spec.who)) {
         const who = resolvePlayerRef(spec.who, ctx);
         if (who !== undefined) ctx.loseLife(who, amountValue(spec.amount, ctx, who));
         return;

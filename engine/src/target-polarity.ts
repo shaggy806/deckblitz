@@ -1081,6 +1081,7 @@ function slotsOf(ref: unknown): readonly number[] {
  * harm to whoever holds the slot, so a target for it is an opponent's. */
 function slotOfPlayer(who: PlayerScope): number | undefined {
   if (typeof who !== "object" || "otherThan" in who) return undefined;
+  if ("youAnd" in who) return slotOfPlayer(who.youAnd);
   if ("target" in who) return who.target;
   // Who helped pay isn't the slot's holder.
   if ("assistantOf" in who) return undefined;

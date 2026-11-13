@@ -80,7 +80,7 @@ export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "
  *   was made (`remember`).
  */
 export type ObjectSetRef =
-  | { readonly thisWay: ThisWayKind; readonly who?: PlayerScope | "each"; readonly byOwner?: true }
+  | { readonly thisWay: ThisWayKind; readonly who?: PlayerScope | "each" | "each-other"; readonly byOwner?: true }
   | { readonly paid: PaidKind }
   | "exiled-with-source"
   | "trigger-batch"
