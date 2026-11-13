@@ -407,6 +407,7 @@ import _poolGrotagNightRunner from "../pool/grotag-night-runner.js";
 import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
+import _poolGuffRewritesHistory from "../pool/guff-rewrites-history.js";
 import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolGutturalResponse from "../pool/guttural-response.js";
 import _poolGuulDrazAssassin from "../pool/guul-draz-assassin.js";
@@ -1427,6 +1428,7 @@ const shard: CardShard = {
     _poolGroundbreaker,
     _poolGuacMarshmallowPizza,
     _poolGuardDuty,
+    _poolGuffRewritesHistory,
     _poolGuidelightOptimizer,
     _poolGutturalResponse,
     _poolGuulDrazAssassin,

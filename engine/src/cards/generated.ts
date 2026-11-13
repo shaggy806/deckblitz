@@ -2634,6 +2634,7 @@ import _poolBlastfireBolt from "./pool/blastfire-bolt.js";
 import _poolBlastingStation from "./pool/blasting-station.js";
 import _poolBlastoderm from "./pool/blastoderm.js";
 import _poolBlastoneuron from "./pool/blastoneuron.js";
+import _poolBlatantThievery from "./pool/blatant-thievery.js";
 import _poolBlazeCommando from "./pool/blaze-commando.js";
 import _poolBlaze from "./pool/blaze.js";
 import _poolBlazemireVerge from "./pool/blazemire-verge.js";
@@ -11890,6 +11891,7 @@ import _poolGuardiansPledge from "./pool/guardians-pledge.js";
 import _poolGudulLurker from "./pool/gudul-lurker.js";
 import _poolGuerrillaGorilla from "./pool/guerrilla-gorilla.js";
 import _poolGuerrillaTactics from "./pool/guerrilla-tactics.js";
+import _poolGuffRewritesHistory from "./pool/guff-rewrites-history.js";
 import _poolGuidanceFailure from "./pool/guidance-failure.js";
 import _poolGuideOfSouls from "./pool/guide-of-souls.js";
 import _poolGuidedPassage from "./pool/guided-passage.js";
@@ -16819,6 +16821,7 @@ import _poolMechanizedNinjaCavalry from "./pool/mechanized-ninja-cavalry.js";
 import _poolMechanizedProduction from "./pool/mechanized-production.js";
 import _poolMechanizedWarfare from "./pool/mechanized-warfare.js";
 import _poolMechanozoa from "./pool/mechanozoa.js";
+import _poolMechtitanCore from "./pool/mechtitan-core.js";
 import _poolMeddlingMage from "./pool/meddling-mage.js";
 import _poolMeddlingYouths from "./pool/meddling-youths.js";
 import _poolMedicineBag from "./pool/medicine-bag.js";
@@ -27171,6 +27174,7 @@ import _poolTaroxBladewing from "./pool/tarox-bladewing.js";
 import _poolTarpan from "./pool/tarpan.js";
 import _poolTarriansJournal from "./pool/tarrians-journal.js";
 import _poolTarriansSoulcleaver from "./pool/tarrians-soulcleaver.js";
+import _poolTashaTheWitchQueen from "./pool/tasha-the-witch-queen.js";
 import _poolTashaYarOutOfTime from "./pool/tasha-yar-out-of-time.js";
 import _poolTashasHideousLaughter from "./pool/tashas-hideous-laughter.js";
 import _poolTasigurTheGoldenFang from "./pool/tasigur-the-golden-fang.js";
@@ -28104,6 +28108,7 @@ import _poolThranForge from "./pool/thran-forge.js";
 import _poolThranFoundry from "./pool/thran-foundry.js";
 import _poolThranGolem from "./pool/thran-golem.js";
 import _poolThranLens from "./pool/thran-lens.js";
+import _poolThranPortal from "./pool/thran-portal.js";
 import _poolThranPowerSuit from "./pool/thran-power-suit.js";
 import _poolThranQuarry from "./pool/thran-quarry.js";
 import _poolThranSpider from "./pool/thran-spider.js";
@@ -32095,6 +32100,7 @@ import _tokensDarkstar from "./tokens/darkstar.js";
 import _tokensDeathtouchRatToken from "./tokens/deathtouch-rat-token.js";
 import _tokensDeathtouchSnakeToken from "./tokens/deathtouch-snake-token.js";
 import _tokensDemonBerserkerToken from "./tokens/demon-berserker-token.js";
+import _tokensDemonToken33 from "./tokens/demon-token-3-3.js";
 import _tokensDemonToken55 from "./tokens/demon-token-5-5.js";
 import _tokensDemonToken66FlyingTrampleUpkeepSacrifice from "./tokens/demon-token-6-6-flying-trample-upkeep-sacrifice.js";
 import _tokensDemonToken from "./tokens/demon-token.js";
@@ -32361,6 +32367,7 @@ import _tokensMapToken from "./tokens/map-token.js";
 import _tokensMaritLageToken from "./tokens/marit-lage-token.js";
 import _tokensMarkOfTheRaniToken from "./tokens/mark-of-the-rani-token.js";
 import _tokensMaskToken from "./tokens/mask-token.js";
+import _tokensMechtitanToken from "./tokens/mechtitan-token.js";
 import _tokensMercenaryToken from "./tokens/mercenary-token.js";
 import _tokensMerfolkTokenDeeprootWaters from "./tokens/merfolk-token-deeproot-waters.js";
 import _tokensMerfolkTokenSilvergillMentor from "./tokens/merfolk-token-silvergill-mentor.js";
@@ -35352,6 +35359,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlastingStation,
   _poolBlastoderm,
   _poolBlastoneuron,
+  _poolBlatantThievery,
   _poolBlazeCommando,
   _poolBlaze,
   _poolBlazemireVerge,
@@ -44608,6 +44616,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGudulLurker,
   _poolGuerrillaGorilla,
   _poolGuerrillaTactics,
+  _poolGuffRewritesHistory,
   _poolGuidanceFailure,
   _poolGuideOfSouls,
   _poolGuidedPassage,
@@ -49537,6 +49546,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMechanizedProduction,
   _poolMechanizedWarfare,
   _poolMechanozoa,
+  _poolMechtitanCore,
   _poolMeddlingMage,
   _poolMeddlingYouths,
   _poolMedicineBag,
@@ -59889,6 +59899,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTarpan,
   _poolTarriansJournal,
   _poolTarriansSoulcleaver,
+  _poolTashaTheWitchQueen,
   _poolTashaYarOutOfTime,
   _poolTashasHideousLaughter,
   _poolTasigurTheGoldenFang,
@@ -60822,6 +60833,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThranFoundry,
   _poolThranGolem,
   _poolThranLens,
+  _poolThranPortal,
   _poolThranPowerSuit,
   _poolThranQuarry,
   _poolThranSpider,
@@ -64819,6 +64831,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensDeathtouchRatToken,
   _tokensDeathtouchSnakeToken,
   _tokensDemonBerserkerToken,
+  _tokensDemonToken33,
   _tokensDemonToken55,
   _tokensDemonToken66FlyingTrampleUpkeepSacrifice,
   _tokensDemonToken,
@@ -65085,6 +65098,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensMaritLageToken,
   _tokensMarkOfTheRaniToken,
   _tokensMaskToken,
+  _tokensMechtitanToken,
   _tokensMercenaryToken,
   _tokensMerfolkTokenDeeprootWaters,
   _tokensMerfolkTokenSilvergillMentor,
@@ -68083,6 +68097,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blasting-station": _poolBlastingStation,
   "pool/blastoderm": _poolBlastoderm,
   "pool/blastoneuron": _poolBlastoneuron,
+  "pool/blatant-thievery": _poolBlatantThievery,
   "pool/blaze-commando": _poolBlazeCommando,
   "pool/blaze": _poolBlaze,
   "pool/blazemire-verge": _poolBlazemireVerge,
@@ -77339,6 +77354,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gudul-lurker": _poolGudulLurker,
   "pool/guerrilla-gorilla": _poolGuerrillaGorilla,
   "pool/guerrilla-tactics": _poolGuerrillaTactics,
+  "pool/guff-rewrites-history": _poolGuffRewritesHistory,
   "pool/guidance-failure": _poolGuidanceFailure,
   "pool/guide-of-souls": _poolGuideOfSouls,
   "pool/guided-passage": _poolGuidedPassage,
@@ -82268,6 +82284,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mechanized-production": _poolMechanizedProduction,
   "pool/mechanized-warfare": _poolMechanizedWarfare,
   "pool/mechanozoa": _poolMechanozoa,
+  "pool/mechtitan-core": _poolMechtitanCore,
   "pool/meddling-mage": _poolMeddlingMage,
   "pool/meddling-youths": _poolMeddlingYouths,
   "pool/medicine-bag": _poolMedicineBag,
@@ -92620,6 +92637,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tarpan": _poolTarpan,
   "pool/tarrians-journal": _poolTarriansJournal,
   "pool/tarrians-soulcleaver": _poolTarriansSoulcleaver,
+  "pool/tasha-the-witch-queen": _poolTashaTheWitchQueen,
   "pool/tasha-yar-out-of-time": _poolTashaYarOutOfTime,
   "pool/tashas-hideous-laughter": _poolTashasHideousLaughter,
   "pool/tasigur-the-golden-fang": _poolTasigurTheGoldenFang,
@@ -93553,6 +93571,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thran-foundry": _poolThranFoundry,
   "pool/thran-golem": _poolThranGolem,
   "pool/thran-lens": _poolThranLens,
+  "pool/thran-portal": _poolThranPortal,
   "pool/thran-power-suit": _poolThranPowerSuit,
   "pool/thran-quarry": _poolThranQuarry,
   "pool/thran-spider": _poolThranSpider,
@@ -97544,6 +97563,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/deathtouch-rat-token": _tokensDeathtouchRatToken,
   "tokens/deathtouch-snake-token": _tokensDeathtouchSnakeToken,
   "tokens/demon-berserker-token": _tokensDemonBerserkerToken,
+  "tokens/demon-token-3-3": _tokensDemonToken33,
   "tokens/demon-token-5-5": _tokensDemonToken55,
   "tokens/demon-token-6-6-flying-trample-upkeep-sacrifice": _tokensDemonToken66FlyingTrampleUpkeepSacrifice,
   "tokens/demon-token": _tokensDemonToken,
@@ -97810,6 +97830,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/marit-lage-token": _tokensMaritLageToken,
   "tokens/mark-of-the-rani-token": _tokensMarkOfTheRaniToken,
   "tokens/mask-token": _tokensMaskToken,
+  "tokens/mechtitan-token": _tokensMechtitanToken,
   "tokens/mercenary-token": _tokensMercenaryToken,
   "tokens/merfolk-token-deeproot-waters": _tokensMerfolkTokenDeeprootWaters,
   "tokens/merfolk-token-silvergill-mentor": _tokensMerfolkTokenSilvergillMentor,

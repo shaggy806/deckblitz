@@ -2157,6 +2157,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly setsChosenLandType?: true;
   /**
+   * Layer 4 — the basic land type this static's own permanent chose as it
+   * entered (`BASIC_LAND_TYPE_CHOICES`), **in addition** to the other types
+   * of what it reaches: Thran Portal's "this land is the chosen type in
+   * addition to its other types". Keeps their rules text (rule 305.7 is a
+   * setting effect's), and gains the type's mana ability (305.6). Nothing
+   * while none is chosen.
+   */
+  readonly addsChosenLandType?: true;
+  /**
    * Layer 7b — sets the affected permanents' base power and/or toughness
    * (Kudo: "have base power and toughness 2/2"; a lone `toughness` is "have
    * base toughness 1"). After characteristic-defining abilities, in
@@ -3876,6 +3885,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * [+1] costs [+2], a [−4] costs [−3], a [−X] removes X−1; 606.6's "at
      * least that many loyalty counters" reads the combined cost. */
     readonly increaseLoyalty?: number;
+    /** "Mana abilities of this land **cost an additional 1 life** to
+     * activate" (Thran Portal, with `abilityKind: "mana"` and `applies: {
+     * isSource: true }`): life added to the ability's own (rule 118.3 — none
+     * paid with less than that much), its intrinsic land-type ones included
+     * (rule 305.6). Paid by hand and priced by the payment planner, as a
+     * horizon land's `payLife` is. */
+    readonly increaseLife?: number;
   };
   /** Layer 7b: set base power and toughness to a dynamic count (+ the given
    * offsets). Only meaningful with `affects.scope === "self"` (a CDA). */

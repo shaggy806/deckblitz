@@ -3774,6 +3774,11 @@ function foldLayerFourOnce(
       if (typeof chosen !== "string" || !isBasicLandType(chosen)) return;
       subtypes = [...subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s)), chosen];
     }
+    if (ability.addsChosenLandType === true) {
+      // Thran Portal's "is the chosen type in addition to its other types".
+      const chosen = source.chosenOnEnter;
+      if (typeof chosen === "string" && isBasicLandType(chosen)) subtypes = union(subtypes, [chosen]);
+    }
     if (ability.addSubtypes !== undefined) subtypes = union(subtypes, ability.addSubtypes);
     supertypes = patchedSupertypes(ability, supertypes);
     if (ability.addsChosenCreatureType === true) {
@@ -3888,6 +3893,7 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.addsChosenCreatureType === true ||
     ability.setsChosenCreatureType === true ||
     ability.setsChosenLandType === true ||
+    ability.addsChosenLandType === true ||
     ability.takesLastExiledCard !== undefined
   );
 }

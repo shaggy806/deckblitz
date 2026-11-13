@@ -565,6 +565,7 @@ import _poolMastersGuidance from "../pool/masters-guidance.js";
 import _poolMatoyaArchonElder from "../pool/matoya-archon-elder.js";
 import _poolMaulOfTheSkyclaves from "../pool/maul-of-the-skyclaves.js";
 import _poolMaverickThopterist from "../pool/maverick-thopterist.js";
+import _poolMechtitanCore from "../pool/mechtitan-core.js";
 import _poolMeishinTheMindCage from "../pool/meishin-the-mind-cage.js";
 import _poolMendingHands from "../pool/mending-hands.js";
 import _poolMerchantOfManyHats from "../pool/merchant-of-many-hats.js";
@@ -1580,6 +1581,7 @@ const shard: CardShard = {
     _poolMatoyaArchonElder,
     _poolMaulOfTheSkyclaves,
     _poolMaverickThopterist,
+    _poolMechtitanCore,
     _poolMeishinTheMindCage,
     _poolMendingHands,
     _poolMerchantOfManyHats,

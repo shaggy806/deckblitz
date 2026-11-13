@@ -846,6 +846,7 @@ import _poolTalesEnd from "../pool/tales-end.js";
 import _poolTalrand from "../pool/talrand.js";
 import _poolTanaTheBloodsower from "../pool/tana-the-bloodsower.js";
 import _poolTangleGolem from "../pool/tangle-golem.js";
+import _poolTashaTheWitchQueen from "../pool/tasha-the-witch-queen.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
 import _poolTatteredRatter from "../pool/tattered-ratter.js";
 import _poolTattooWard from "../pool/tattoo-ward.js";
@@ -1864,6 +1865,7 @@ const shard: CardShard = {
     _poolTalrand,
     _poolTanaTheBloodsower,
     _poolTangleGolem,
+    _poolTashaTheWitchQueen,
     _poolTasigurTheGoldenFang,
     _poolTatteredRatter,
     _poolTattooWard,

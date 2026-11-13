@@ -1003,6 +1003,7 @@ import _tokensBirdTokenWhiteBlue from "../tokens/bird-token-white-blue.js";
 import _tokensBlueThopterToken from "../tokens/blue-thopter-token.js";
 import _tokensConstructToken31Haste from "../tokens/construct-token-3-1-haste.js";
 import _tokensCordycepsInfectedToken from "../tokens/cordyceps-infected-token.js";
+import _tokensDemonToken33 from "../tokens/demon-token-3-3.js";
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
@@ -2023,6 +2024,7 @@ const shard: CardShard = {
     _tokensBlueThopterToken,
     _tokensConstructToken31Haste,
     _tokensCordycepsInfectedToken,
+    _tokensDemonToken33,
     _tokensDinosaurToken33,
     _tokensDragonToken66,
     _tokensEverywhereToken,

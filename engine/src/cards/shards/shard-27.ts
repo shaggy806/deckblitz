@@ -79,6 +79,7 @@ import _poolBlackPantherMostDangerous from "../pool/black-panther-most-dangerous
 import _poolBlackmail from "../pool/blackmail.js";
 import _poolBladedPinions from "../pool/bladed-pinions.js";
 import _poolBladewingDeathlessTyrant from "../pool/bladewing-deathless-tyrant.js";
+import _poolBlatantThievery from "../pool/blatant-thievery.js";
 import _poolBlazingBladeAskari from "../pool/blazing-blade-askari.js";
 import _poolBlightMamba from "../pool/blight-mamba.js";
 import _poolBlightwidow from "../pool/blightwidow.js";
@@ -1075,6 +1076,7 @@ const shard: CardShard = {
     _poolBlackmail,
     _poolBladedPinions,
     _poolBladewingDeathlessTyrant,
+    _poolBlatantThievery,
     _poolBlazingBladeAskari,
     _poolBlightMamba,
     _poolBlightwidow,

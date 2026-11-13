@@ -5083,7 +5083,13 @@ export type EffectSpec =
          * kind of counter on them, as this applies: "copy each exiled card you
          * own **with a kick counter on it**" (Zethi, Arcane Blademaster, with
          * `copies`). */
-        | { readonly exiledOwnedWithCounter: string };
+        | { readonly exiledOwnedWithCounter: string }
+        /** The face-up cards in exile with this kind of counter on them,
+         * **whoever owns them**, as this applies: Tasha, the Witch Queen's
+         * "cast a spell from among cards in exile with page counters on
+         * them" — a spell cast from among another player's is the caster's
+         * to control and its owner's still (rule 108.3). */
+        | { readonly exiledWithCounter: string };
       /**
        * "You may play lands and cast spells **from among** cards exiled this
        * way" — any number of them, one after another while this resolves
@@ -11718,8 +11724,9 @@ export interface EffectApi {
    * effect's `from`. */
   faceUpExileOpponentsOwn(): readonly ObjectId[];
   /** The face-up cards `owner` owns in exile with a `counter` counter on them
-   * — a `cast-now`'s `exiledOwnedWithCounter`. */
-  exiledOwnedWithCounter(owner: PlayerId, counter: string): readonly ObjectId[];
+   * — a `cast-now`'s `exiledOwnedWithCounter`; whoever owns them with no
+   * `owner` (`exiledWithCounter`). */
+  exiledOwnedWithCounter(owner: PlayerId | undefined, counter: string): readonly ObjectId[];
   /** The cards `owner` owns in exile that they can see: every face-up one,
    * and a face-down one they may look at (rule 406.3b) — a `cast-now`'s
    * `zones`' `"exile"`. */
@@ -14831,6 +14838,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = from.zones.flatMap((z) => (z === "exile" ? ctx.exiledOwnedSeen(ctx.controller) : ctx.cardsIn(ctx.controller, z)));
     } else if (typeof from === "object" && "exiledOwnedWithCounter" in from) {
       cards = ctx.exiledOwnedWithCounter(ctx.controller, from.exiledOwnedWithCounter);
+    } else if (typeof from === "object" && "exiledWithCounter" in from) {
+      cards = ctx.exiledOwnedWithCounter(undefined, from.exiledWithCounter);
     } else {
       cards = typeof from === "object" ? looked : ctx.cardsIn(ctx.controller, from);
     }

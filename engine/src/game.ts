@@ -18559,7 +18559,15 @@ export class Game {
       const splice = this.activeSplice;
       return splice !== null && splice.spellName === def.name ? [...specs, ...splice.specs] : specs;
     }
-    return this.spellSpecsWithAmounts(this.declaredTargetSpecs(def, modes, kicked), def, kicked, caster);
+    // "For each opponent, gain control of target permanent that player
+    // controls" (Blatant Thievery): a required slot a seat, as for a trigger
+    // (`emptySeatOptional`) — a live player there with nothing to target
+    // leaves the spell uncastable (rule 601.2c; Vaevictis Asmadi's ruling,
+    // and Mass Mutiny's errata to "up to one" to be castable), an empty
+    // seat needs none.
+    return this.spellSpecsWithAmounts(this.declaredTargetSpecs(def, modes, kicked), def, kicked, caster).map((spec) =>
+      this.emptySeatOptional(spec, caster),
+    );
   }
 
   /** A spell's "any number of target …" group's amounts read for this cast:
@@ -24334,6 +24342,22 @@ export class Game {
    * bar the `ninjutsu` and `abilityKind: "cycling"` ones, which name
    * abilities of cards in a hand. A loyalty cost's own change is
    * `loyaltyCostIncrease`'s. */
+  /** The life `player` pays to activate `ability` of `sourceId` now: its own
+   * `payLife` (`abilityLifeCost`, with the X announced) plus every
+   * `increaseLife` that reaches it — Thran Portal's "mana abilities of this
+   * land cost an additional 1 life to activate". `null` when its own can't
+   * be paid at all (a commander-identity cost with no commander). */
+  private activatedAbilityLifeCost(player: PlayerId, sourceId: ObjectId, ability: ActivatedAbility, x?: number): number | null {
+    const own = abilityLifeCost(this.state, player, ability.cost, x, sourceId);
+    if (own === null) return null;
+    let extra = 0;
+    for (const { controller, source, mod } of this.abilityCostModifiers()) {
+      if (mod.increaseLife === undefined) continue;
+      if (this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod)) extra += mod.increaseLife;
+    }
+    return own + extra;
+  }
+
   private abilityCostModificationFor(
     sourceId: ObjectId,
     ability: ActivatedAbility,
@@ -24508,6 +24532,9 @@ export class Game {
         break;
       case "power-up":
         if (ability.powerUp !== true) return false;
+        break;
+      case "mana":
+        if (!isManaAbility(ability)) return false;
         break;
       case undefined:
         break;
@@ -24893,11 +24920,12 @@ export class Game {
     ) {
       return `${player} has nothing to unattach for ${def.name}'s ability`;
     }
-    if (ability.cost.payLife !== undefined) {
-      // War Room: no commander, no way to pay (its ruling).
-      const life = abilityLifeCost(this.state, player, ability.cost, x, sourceId);
+    {
+      // War Room: no commander, no way to pay (its ruling). Thran Portal's
+      // "cost an additional 1 life" is life to pay too.
+      const life = this.activatedAbilityLifeCost(player, sourceId, ability, x);
       if (life === null) return `${player} has no commander to pay ${def.name}'s life cost by`;
-      if (!this.canPayLife(player, life)) {
+      if ((ability.cost.payLife !== undefined || life > 0) && !this.canPayLife(player, life)) {
         return `${player} does not have ${life} life to pay`;
       }
     }
@@ -25403,7 +25431,7 @@ export class Game {
     }
     if (tapped.length > 0) paidSets = addToSet(paidSets, { paid: "tapped" }, this.paidMembers("tapped", tapped));
     const manaSpentOnThis = this.executePayment(player, payment);
-    const lifeCost = abilityLifeCost(this.state, player, ability.cost, chosenX, sourceId) ?? 0;
+    const lifeCost = this.activatedAbilityLifeCost(player, sourceId, ability, chosenX) ?? 0;
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
@@ -25869,7 +25897,12 @@ export class Game {
     // Craft's materials (rule 702.167a): which, chosen now too — the card
     // itself is already in exile (`exileSelf`), and they're linked to it.
     const craft = ability.cost.craft;
-    if (craft !== undefined) this.withDecisionSource(sourceId, () => this.beginCraft(player, sourceId, craft));
+    // A cost of craft's shape on the battlefield alone (Mechtitan Core) links
+    // them to the permanent the ability came from, not the card in exile.
+    if (craft !== undefined) {
+      const linkStint = craft.permanentsOnly === true ? sourceStint : undefined;
+      this.withDecisionSource(sourceId, () => this.beginCraft(player, sourceId, craft, linkStint));
+    }
     // "Collect evidence N" (rule 701.59a): which cards, chosen now too.
     if (ability.cost.collectEvidence !== undefined) {
       const evidence = evidenceCostOf(ability.cost.collectEvidence, sourceId);
@@ -27141,7 +27174,8 @@ export class Game {
         // Mana for someone else isn't the payer's to spend.
         if (ability.effect.who !== undefined && ability.effect.who !== "you") return;
         const pain = ability.effect.painToController ?? 0;
-        const lifeCost = abilityLifeCost(this.state, player, ability.cost);
+        // Its own life and any "costs an additional 1 life" (Thran Portal).
+        const lifeCost = this.activatedAbilityLifeCost(player, id, ability);
         if (lifeCost === null || (lifeCost > 0 && this.lifeCostProhibited(player, true))) return;
         // "Add one mana of the chosen color" resolves to whatever this
         // permanent's controller named as it entered; before that choice is
@@ -35323,7 +35357,8 @@ export class Game {
    * with nothing to target is another matter: no legal choice, so the ability
    * is removed (rule 603.3d). */
   private emptySeatOptional(spec: TargetSpec, controller: PlayerId): TargetSpec {
-    if (typeof spec !== "object" || spec.kind !== "permanent" || typeof spec.whose !== "object") return spec;
+    if (typeof spec !== "object" || (spec.kind !== "permanent" && spec.kind !== "card-in-graveyard") || typeof spec.whose !== "object")
+      return spec;
     const seated = playerAtSeat(this.state.turnOrder, controller, spec.whose.seat);
     return seated !== undefined && this.state.players[seated]?.hasLost === false ? spec : { kind: "optional", of: spec };
   }
@@ -35848,6 +35883,16 @@ export class Game {
       const object = this.state.objects[source];
       const stint = refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
       return stint === undefined ? null : { source, zoneChangeCount: stint };
+    };
+    // The stint whose linked exiles "cards exiled with it" are (rule 607.2a):
+    // the one the resolving spell or ability came from, though the source
+    // may have left since — for a fired delayed ability, the stint of the
+    // ability that made it (Mechtitan Core's "when that token leaves the
+    // battlefield, return all cards exiled with this Vehicle", the Core
+    // exiled by then).
+    const linkedExileStint = (): number | undefined => {
+      const object = this.state.objects[source];
+      return refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined) ?? refs.sourceWas;
     };
     const departedSource = (): LastKnownInfo | undefined => {
       const stint = refs.source ?? refs.sourceWas;
@@ -38057,9 +38102,7 @@ export class Game {
         // (rule 614.12), asked one at a time before any moves. `linked`: the
         // cards exiled *with* the stint the ability refers to (rule 607.2a),
         // though the source has just left (Colfenor's Urn, sacrificed).
-        const sourceObject = this.state.objects[source];
-        const stint =
-          refs.source ?? (sourceObject?.zone === "battlefield" ? (sourceObject.zoneChangeCount ?? 0) : undefined);
+        const stint = linkedExileStint();
         // "All other … cards exiled with" it: not the ones this resolution
         // has just exiled (Mirror of Life Trapping).
         const justExiled =
@@ -40178,7 +40221,7 @@ controlledBy,
           const object = this.state.objects[id];
           return (
             object !== undefined &&
-            object.owner === owner &&
+            (owner === undefined || object.owner === owner) &&
             object.exiledFaceDown === undefined &&
             object.foretold !== true &&
             (object.counters?.[counter] ?? 0) > 0
@@ -40299,11 +40342,8 @@ controlledBy,
         // the card that made it has exiled (Hofri Ghostforge's ruling).
         const toToken = this.exiledLinkedToToken(source);
         if (toToken !== undefined) return toToken;
-        // The stint the resolving spell or ability refers to (rule 607.2a):
-        // the one it came from, though the source may have left since.
-        const object = this.state.objects[source];
-        const stint =
-          refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
+        // The stint the resolving spell or ability refers to (rule 607.2a).
+        const stint = linkedExileStint();
         if (stint === undefined) return [];
         return this.state.zones.shared.exile.filter((id) => {
           const card = this.state.objects[id];
@@ -49739,6 +49779,7 @@ controlledBy,
       craft.cardsOnly === true
         ? []
         : this.state.zones.shared.battlefield.filter((id) => this.state.objects[id]?.controller === player && fits(id));
+    if (craft.permanentsOnly === true) return permanents;
     return [...permanents, ...this.state.zones.perPlayer[player].graveyard.filter(fits)];
   }
 
@@ -49795,7 +49836,7 @@ controlledBy,
    * `craft-return` effect carries the link on to the permanent it becomes.
    * Tokens of one stack are offered one by one, as a behold's are.
    */
-  private beginCraft(player: PlayerId, source: ObjectId, craft: CraftMaterials): void {
+  private beginCraft(player: PlayerId, source: ObjectId, craft: CraftMaterials, linkStint?: number): void {
     const card = this.state.objects[source];
     if (card === undefined || !this.canCraft(player, source, craft)) return;
     const most = craft.orMore === true ? Game.MAX_EFFECT_INSTANCES : craft.count;
@@ -49820,7 +49861,7 @@ controlledBy,
       destination: "exile",
       leftover: "stay",
       ...(together !== undefined ? { together } : {}),
-      exileLink: { source, zoneChangeCount: card.zoneChangeCount ?? 0 },
+      exileLink: { source, zoneChangeCount: linkStint ?? card.zoneChangeCount ?? 0 },
       priorityTo: player,
     };
   }

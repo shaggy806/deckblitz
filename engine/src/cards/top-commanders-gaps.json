@@ -2422,7 +2422,12 @@
   "effect:token-copy-of-spell-target",
   "bug:copy-exception-static-self-reference",
   "trigger:destroyed-by-opponent-trigger",
-  "effect:each-player-rolls"
+  "effect:each-player-rolls",
+  "effect:target-per-opponent-mandatory",
+  "effect:per-player-targets-shuffle-reveal-cast",
+  "zone:cast-from-exile-with-counter-kind",
+  "cost:exile-many-cost-linked-return",
+  "static:mana-abilities-cost-life"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

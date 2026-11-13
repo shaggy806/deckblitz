@@ -1030,6 +1030,7 @@ import _tokensInsectTokenBlackFlying from "../tokens/insect-token-black-flying.j
 import _tokensInsectTokenNestOfScarabs from "../tokens/insect-token-nest-of-scarabs.js";
 import _tokensKaroxBladewingToken from "../tokens/karox-bladewing-token.js";
 import _tokensLeviathanTokenKioraOfSaltAndSand from "../tokens/leviathan-token-kiora-of-salt-and-sand.js";
+import _tokensMechtitanToken from "../tokens/mechtitan-token.js";
 import _tokensOxTokenOxDrover from "../tokens/ox-token-ox-drover.js";
 import _tokensPestTokenColorlessArtifact01 from "../tokens/pest-token-colorless-artifact-0-1.js";
 import _tokensPlantTokenDefender from "../tokens/plant-token-defender.js";
@@ -2077,6 +2078,7 @@ const shard: CardShard = {
     _tokensInsectTokenNestOfScarabs,
     _tokensKaroxBladewingToken,
     _tokensLeviathanTokenKioraOfSaltAndSand,
+    _tokensMechtitanToken,
     _tokensOxTokenOxDrover,
     _tokensPestTokenColorlessArtifact01,
     _tokensPlantTokenDefender,

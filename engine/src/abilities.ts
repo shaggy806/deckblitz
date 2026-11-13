@@ -316,12 +316,19 @@ export function abilityLifeCostText(life: AbilityLifeCost): string {
  * they share a card type ("two that share a card type"); `oneEach`: one per
  * filter ("a Dinosaur, a Merfolk, a Pirate, and a Vampire"), `count` being
  * how many filters there are.
+ *
+ * `permanentsOnly` is the same cost on the battlefield alone, and no craft:
+ * Mechtitan Core's "{5}, Exile this Vehicle and four other artifact creatures
+ * and/or Vehicles you control" (its self-exile the cost's `do`), the four
+ * linked to it (rule 607.2a) for its token's "return all cards exiled with
+ * this Vehicle".
  */
 export interface CraftMaterials {
   readonly count: number;
   readonly orMore?: boolean;
   readonly filter?: CardFilter;
   readonly cardsOnly?: boolean;
+  readonly permanentsOnly?: boolean;
   readonly share?: "card-type";
   readonly oneEach?: readonly CardFilter[];
   /** "two that share a card type" — what the choice tells the player. */
@@ -701,8 +708,9 @@ export interface AbilityCost {
 }
 
 /** The kinds of activated ability a cost modifier can single out by name (rule
- * 602.2b): `isEquipAbility`, or the ability's own flag. */
-export type AbilityKindName = "equip" | "exhaust" | "cycling" | "loyalty" | "power-up";
+ * 602.2b): `isEquipAbility`, `isManaAbility` (`"mana"`, rule 605.1a), or the
+ * ability's own flag. */
+export type AbilityKindName = "equip" | "exhaust" | "cycling" | "loyalty" | "power-up" | "mana";
 
 export interface ActivatedAbility {
   readonly cost: AbilityCost;
