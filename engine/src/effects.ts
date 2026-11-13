@@ -3064,6 +3064,12 @@ export type EffectSpec =
       /** "You don't lose this mana as steps and phases end" (Savage
        * Ventmaw). Still emptied at cleanup. */
       readonly persists?: boolean;
+      /** "This mana can't be spent to pay generic mana costs" (Jegantha,
+       * the Wellspring): its units pay only pips of their own type (a
+       * hybrid pip's coloured half too), never generic mana or {X}. The
+       * auto-payer doesn't tap such a source: the player activates it
+       * first, and the floating mana pays what it can. */
+      readonly notGeneric?: true;
       /** "May add" on a `tapped-for-mana` triggered mana ability, of a fixed
        * type (Snowfall): tapped by hand it's an offer with and one without
        * (`Game.standaloneManaVariants`), and paying a cost it's taken if this

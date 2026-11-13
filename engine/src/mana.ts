@@ -227,6 +227,10 @@ export type SpendAs = WideSpendAs | SpendUnitAs;
 export interface ManaUnit {
   readonly type: ManaType;
   readonly restriction?: ManaRestriction;
+  /** "This mana can't be spent to pay generic mana costs" (Jegantha, the
+   * Wellspring): it pays only pips of its own type, a hybrid pip's
+   * coloured half included (its ruling), never generic mana or {X}. */
+  readonly notGeneric?: true;
   /** "You don't lose this mana as steps and phases end" (Savage Ventmaw).
    * Still emptied at cleanup — the permission is for the turn, not forever. */
   readonly persists?: boolean;

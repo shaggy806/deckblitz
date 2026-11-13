@@ -1226,9 +1226,14 @@ function planManaPaymentOrdered(
   // The floating units the coloured and `{C}` pips don't take: they pay the
   // generic, and what the generic leaves can fund a converter
   // (`coverGenericFrom`).
+  // Mana that can't pay generic (Jegantha, the Wellspring) pays its own
+  // type's pips first (`spendFromPool`), and none of it is spare.
+  const forGeneric = poolCounts(view.pool.filter((unit) => view.canPay(unit) && unit.notGeneric !== true));
   const spare: Record<ManaType, number> = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 };
-  for (const color of COLORS) spare[color] = pool[color] - Math.min(cost.colored[color], pool[color]);
-  spare.C = pool.C - Math.min(cost.colorless, pool.C);
+  for (const color of COLORS) {
+    spare[color] = Math.min(forGeneric[color], pool[color] - Math.min(cost.colored[color], pool[color]));
+  }
+  spare.C = Math.min(forGeneric.C, pool.C - Math.min(cost.colorless, pool.C));
   // Of those, the units a converter's own cost may take: a converter pays
   // for an ability, not the spell, so mana kept for a kind of spell ("only
   // to cast a creature spell") can't fund it — only an unrestricted unit or
@@ -1236,7 +1241,10 @@ function planManaPaymentOrdered(
   // Skycloud Expanse with the creature-only {W} beside a plain {C}.
   const fundable = poolCounts(
     view.pool.filter(
-      (unit) => view.canPay(unit) && (unit.restriction === undefined || unit.restriction.notSpell !== undefined),
+      (unit) =>
+        view.canPay(unit) &&
+        unit.notGeneric !== true &&
+        (unit.restriction === undefined || unit.restriction.notSpell !== undefined),
     ),
   );
   const MANA_TYPES_ORDER = ["W", "U", "B", "R", "G", "C"] as const;

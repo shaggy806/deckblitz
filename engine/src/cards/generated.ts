@@ -14092,6 +14092,7 @@ import _poolJeditsDragoons from "./pool/jedits-dragoons.js";
 import _poolJeeringHomunculus from "./pool/jeering-homunculus.js";
 import _poolJeeringInstigator from "./pool/jeering-instigator.js";
 import _poolJefferiesTube from "./pool/jefferies-tube.js";
+import _poolJeganthaTheWellspring from "./pool/jegantha-the-wellspring.js";
 import _poolJelennSphinx from "./pool/jelenn-sphinx.js";
 import _poolJelevaNephaliasScourge from "./pool/jeleva-nephalias-scourge.js";
 import _poolJemLightfooteSkyExplorer from "./pool/jem-lightfoote-sky-explorer.js";
@@ -46772,6 +46773,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJeeringHomunculus,
   _poolJeeringInstigator,
   _poolJefferiesTube,
+  _poolJeganthaTheWellspring,
   _poolJelennSphinx,
   _poolJelevaNephaliasScourge,
   _poolJemLightfooteSkyExplorer,
@@ -79465,6 +79467,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jeering-homunculus": _poolJeeringHomunculus,
   "pool/jeering-instigator": _poolJeeringInstigator,
   "pool/jefferies-tube": _poolJefferiesTube,
+  "pool/jegantha-the-wellspring": _poolJeganthaTheWellspring,
   "pool/jelenn-sphinx": _poolJelennSphinx,
   "pool/jeleva-nephalias-scourge": _poolJelevaNephaliasScourge,
   "pool/jem-lightfoote-sky-explorer": _poolJemLightfooteSkyExplorer,

@@ -2387,7 +2387,8 @@
   "effect:mana-ability-chosen-player-adds",
   "effect:pay-mana-value-difference",
   "static:stun-counters-cant-be-removed",
-  "static:token-protection-from-own-triggers"
+  "static:token-protection-from-own-triggers",
+  "effect:mana-cant-pay-generic"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

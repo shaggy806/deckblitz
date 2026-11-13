@@ -199,3 +199,29 @@ describe("The Master, Multiplied: your triggers spare your creature tokens", () 
     expect(zone(game, master)).toBe("battlefield");
   });
 });
+
+describe("Jegantha, the Wellspring: its mana can't pay generic costs", () => {
+  const tapped = () => {
+    const { game } = table();
+    const elk = spawn(game, "Jegantha, the Wellspring");
+    activate(game, elk, 0);
+    return game;
+  };
+
+  it("pays coloured pips, and a {1}{G} needs another source for the {1}", () => {
+    const game = tapped();
+    const bolt = toHand(game, "Lightning Bolt");
+    cast(game, bolt, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(17);
+    const bears = toHand(game, "Grizzly Bears");
+    expect(() => cast(game, bears)).toThrow(/refused/);
+    lands(game, "Wastes", 1);
+    cast(game, bears);
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+
+  it("can't pay a generic-only cost at all", () => {
+    const game = tapped();
+    expect(() => cast(game, toHand(game, "Mind Stone"))).toThrow(/refused/);
+  });
+});

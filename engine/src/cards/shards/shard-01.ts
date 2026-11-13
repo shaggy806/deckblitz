@@ -416,6 +416,7 @@ import _poolIvoryCharm from "../pool/ivory-charm.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
 import _poolJadeAvenger from "../pool/jade-avenger.js";
 import _poolJanjeetSentry from "../pool/janjeet-sentry.js";
+import _poolJeganthaTheWellspring from "../pool/jegantha-the-wellspring.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJetfireIngeniousScientist from "../pool/jetfire-ingenious-scientist.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
@@ -1423,6 +1424,7 @@ const shard: CardShard = {
     _poolJaddiOffshoot,
     _poolJadeAvenger,
     _poolJanjeetSentry,
+    _poolJeganthaTheWellspring,
     _poolJenaraAsuraOfWar,
     _poolJetfireIngeniousScientist,
     _poolJhessianLookout,

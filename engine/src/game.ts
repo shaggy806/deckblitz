@@ -26831,6 +26831,9 @@ export class Game {
         // source for value, never to swap one mana for another (Golden Egg,
         // Kaleidostone, Coal Golem stay by hand).
         if (ability.cost.sacrifice === "self" && genericCost + hybridCost.length >= units) return;
+        // Mana that can't pay generic costs (Jegantha, the Wellspring) is
+        // the player's to make by hand: floating, it pays what it can.
+        if (ability.effect.notGeneric === true) return;
         const tagOf = this.manaTagFor(object, ability.effect);
         const tag = {
           ...(tagOf === undefined ? {} : { tag: tagOf }),
@@ -28245,13 +28248,18 @@ export class Game {
     /** Spent before plain mana: restricted mana, which may have no other use,
      * and mana that's about to add counters to this spell, which the player
      * floated for exactly that. */
-    const spentFirst = (unit: ManaUnit): boolean => unit.restriction !== undefined || entersWithReaches(unit);
+    const spentFirst = (unit: ManaUnit): boolean =>
+      unit.restriction !== undefined || unit.notGeneric === true || entersWithReaches(unit);
+    /** Mana that "can't be spent to pay generic mana costs" (Jegantha, the
+     * Wellspring) pays only its own type's pips. */
+    const forGeneric = (unit: ManaUnit): boolean => unit.notGeneric !== true;
 
     /** Whether a unit of `type` to spend first may pay for `purpose` right now. */
     const hasUsableRestricted = (type: ManaType): boolean =>
       pool.some(
         (unit) =>
           unit.type === type &&
+          forGeneric(unit) &&
           spentFirst(unit) &&
           this.manaUnitCanPay(player, unit, purpose),
       );
@@ -28276,15 +28284,15 @@ export class Game {
           this.manaUnitCanPay(player, unit, purpose),
       );
     };
-    const indexOf = (type: ManaType): number => indexOfAmong(type, () => true);
 
     // With `{S}` pips to pay (rule 107.4h), a typed pip takes a non-snow unit
     // where there is one, leaving the snow mana for them: a unit's type and
     // whether it's snow are the only two things that matter, so taking the
     // non-snow one first never strands a payment another order would make.
-    const take = (type: ManaType, what: string): void => {
-      const nonSnow = cost.snow > 0 ? indexOfAmong(type, (unit) => !isSnowMana(unit)) : -1;
-      const index = nonSnow >= 0 ? nonSnow : indexOf(type);
+    const take = (type: ManaType, what: string, generic = false): void => {
+      const ok = (unit: ManaUnit): boolean => !generic || forGeneric(unit);
+      const nonSnow = cost.snow > 0 ? indexOfAmong(type, (unit) => !isSnowMana(unit) && ok(unit)) : -1;
+      const index = nonSnow >= 0 ? nonSnow : indexOfAmong(type, ok);
       if (index < 0) throw new Error(`mana pool underflow paying ${what}`);
       spent.push(pool[index]);
       pool.splice(index, 1);
@@ -28295,9 +28303,10 @@ export class Game {
       for (let i = 0; i < cost.colored[color]; i += 1) take(color, "a colored cost");
     }
     for (let i = 0; i < cost.snow; i += 1) {
-      const type = GENERIC_SPEND_ORDER.find((t) => indexOfAmong(t, isSnowMana) >= 0);
+      const snowGeneric = (unit: ManaUnit): boolean => isSnowMana(unit) && forGeneric(unit);
+      const type = GENERIC_SPEND_ORDER.find((t) => indexOfAmong(t, snowGeneric) >= 0);
       if (type === undefined) throw new Error("mana pool underflow paying a {S} cost");
-      const index = indexOfAmong(type, isSnowMana);
+      const index = indexOfAmong(type, snowGeneric);
       spent.push(pool[index]);
       pool.splice(index, 1);
     }
@@ -28313,9 +28322,9 @@ export class Game {
       // board with a hand-activated Unclaimed Territory floating.
       const type =
         GENERIC_SPEND_ORDER.find(hasUsableRestricted) ??
-        GENERIC_SPEND_ORDER.find((t) => indexOf(t) >= 0);
+        GENERIC_SPEND_ORDER.find((t) => indexOfAmong(t, forGeneric) >= 0);
       if (type === undefined) throw new Error("mana pool underflow paying a generic cost");
-      take(type, "a generic cost");
+      take(type, "a generic cost", true);
     }
 
     // "…and that spell can't be countered" (Cavern of Souls) — a property the
@@ -28389,8 +28398,9 @@ export class Game {
     object: GameObject,
     effect: Extract<EffectSpec, { kind: "add-mana" }>,
   ): Omit<ManaUnit, "type"> | undefined {
-    const { spendOnly, whenSpent, persists, untilEndOfCombat, spellGains, spellEntersWith } = effect;
+    const { spendOnly, whenSpent, persists, untilEndOfCombat, spellGains, spellEntersWith, notGeneric } = effect;
     if (
+      notGeneric !== true &&
       spendOnly === undefined &&
       whenSpent === undefined &&
       spellGains === undefined &&
@@ -28409,6 +28419,7 @@ export class Game {
       persists?: boolean;
       untilEndOfCombat?: boolean;
       uncounterable?: boolean;
+      notGeneric?: true;
     } = {};
 
     if (spendOnly !== undefined) {
@@ -28464,6 +28475,7 @@ export class Game {
     if (spellEntersWith !== undefined) tag.spellEntersWith = spellEntersWith;
     if (persists === true) tag.persists = true;
     if (untilEndOfCombat === true) tag.untilEndOfCombat = true;
+    if (notGeneric === true) tag.notGeneric = true;
     return tag;
   }
 

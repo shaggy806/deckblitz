@@ -4476,6 +4476,11 @@ own `add-mana` is scoped to someone else is never an auto-payer source.
 `manaFor` naming them (the client labels it). The auto-payer counts it as
 its controller's own mana.
 
+`add-mana`'s `notGeneric: true` is "this mana **can't be spent to pay generic mana costs**"
+(Jegantha, the Wellspring): each unit pays only a pip of its own type (a hybrid pip's coloured
+half too), never generic mana or {X}. The auto-payer doesn't tap such a source; the player
+activates it by hand, and the floating mana pays what it can.
+
 `add-mana`'s `target` (a player target slot) is "**target player** adds one
 mana of any color" (The Warring Triad: `targets: ["player"]`, `effect: { kind:
 "add-mana", mana: "any-color", amount: 1, target: 0 }`). A target makes it no
