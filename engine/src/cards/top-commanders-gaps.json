@@ -2,6 +2,8 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "zone:play-permission-grants-triggered-ability",
+    "cost:ability-cost-reduction-when-targeting",
     "replacement:others-enter-as-subtype",
     "effect:cast-commander-from-command-zone",
     "trigger:attack-batch-per-defender-or-their-planeswalkers",
