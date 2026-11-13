@@ -4405,7 +4405,22 @@ function chosenNumberOf(object: GameObject): number {
   return Number.isInteger(n) ? n : 0;
 }
 
-function countSide(state: GameState, object: GameObject, forChosenPlayer: true | undefined): PlayerId | undefined {
+function countSide(
+  state: GameState,
+  object: GameObject,
+  forChosenPlayer: true | undefined,
+  forDefendingPlayer?: true,
+): PlayerId | undefined {
+  // Elturel Survivors' "the number of lands defending player controls": the
+  // player it's attacking, or the one defending the planeswalker or battle
+  // it attacks (rules 506.2, 310.9d); nobody while it isn't attacking.
+  if (forDefendingPlayer === true) {
+    const at = object.zone === "battlefield" ? object.attacking : null;
+    if (at === null) return undefined;
+    const attacked = state.objects[at as ObjectId];
+    const defender = attacked === undefined ? (at as PlayerId) : (attacked.protector ?? attacked.controller);
+    return state.players[defender]?.hasLost !== true ? defender : undefined;
+  }
   if (forChosenPlayer !== true) return object.controller;
   const chosen = object.chosenPlayer;
   return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
@@ -5677,8 +5692,10 @@ function collectStaticEffects(
     const side =
       ability.grantPtPerCount?.fromAffectedController === true
         ? target.controller
-        : (countSide(state, source, ability.grantPtPerCount?.forChosenPlayer) ?? source.controller);
-    const nobody = ability.grantPtPerCount?.forChosenPlayer === true && countSide(state, source, true) === undefined;
+        : (countSide(state, source, ability.grantPtPerCount?.forChosenPlayer, ability.grantPtPerCount?.forDefendingPlayer) ?? source.controller);
+    const nobody =
+      (ability.grantPtPerCount?.forChosenPlayer === true || ability.grantPtPerCount?.forDefendingPlayer === true) &&
+      countSide(state, source, ability.grantPtPerCount.forChosenPlayer, ability.grantPtPerCount.forDefendingPlayer) === undefined;
     // Cards in exile, which is one shared zone: "cards your opponents own
     // in exile" is `ownedBy`, read from the source's controller's side.
     const exiledMatching = (exiledFilter: CardFilter): number =>

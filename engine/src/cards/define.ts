@@ -2266,6 +2266,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * controller's (`GameObject.chosenPlayer`): every "you" in the count is
      * them. No bonus with nobody chosen or once they've left the game. */
     readonly forChosenPlayer?: true;
+    /** Count from **the defending player**'s side — the player this
+     * permanent is attacking, or the one defending the planeswalker or battle
+     * it attacks: Elturel Survivors' "as long as this creature is attacking,
+     * it gets +X/+0, where X is the number of lands defending player
+     * controls" is `{ filter: { type: "land", controlledBy: "you" },
+     * forDefendingPlayer: true, pt: [1, 0] }`. 0 while it isn't attacking. */
+    readonly forDefendingPlayer?: true;
     /**
      * `filter` asked of **each affected permanent** rather than of this one,
      * each by its own count: `attachedTo: { isSource: true }` is then "attached

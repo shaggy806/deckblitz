@@ -228,6 +228,7 @@ import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolElephantResurgence from "../pool/elephant-resurgence.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElfhameSanctuary from "../pool/elfhame-sanctuary.js";
+import _poolElturelSurvivors from "../pool/elturel-survivors.js";
 import _poolElvenBow from "../pool/elven-bow.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
 import _poolElvenRite from "../pool/elven-rite.js";
@@ -1245,6 +1246,7 @@ const shard: CardShard = {
     _poolElephantResurgence,
     _poolEleshNornMotherOfMachines,
     _poolElfhameSanctuary,
+    _poolElturelSurvivors,
     _poolElvenBow,
     _poolElvenFortress,
     _poolElvenRite,

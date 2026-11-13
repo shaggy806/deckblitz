@@ -3022,7 +3022,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     `{ cardsInHand: true, forChosenPlayer: true, pt: [-1, -1] }`): every
     "you" in the count is that player, and nobody chosen (off the
     battlefield) or one who has left the game counts 0. Two chosen players
-    (Bitter Feud, Sower of Discord) aren't built.
+    (Bitter Feud, Sower of Discord) aren't built. `grantPtPerCount`'s
+    `forDefendingPlayer: true` counts for the player the permanent is
+    attacking (or defending what it attacks) the same way, 0 while it isn't
+    attacking (Elturel Survivors' lands defending player controls).
   The scaffolder reads "As ~ enters, choose a player / an opponent.", "At the
   beginning of the chosen player's upkeep" and "The chosen player's maximum
   hand size is N."

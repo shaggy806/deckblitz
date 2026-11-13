@@ -8069,6 +8069,7 @@ import _poolElspethUndauntedHero from "./pool/elspeth-undaunted-hero.js";
 import _poolElspethsDevotee from "./pool/elspeths-devotee.js";
 import _poolElspethsNightmare from "./pool/elspeths-nightmare.js";
 import _poolElspethsSmite from "./pool/elspeths-smite.js";
+import _poolElturelSurvivors from "./pool/elturel-survivors.js";
 import _poolElturgardRanger from "./pool/elturgard-ranger.js";
 import _poolElugeTheShorelessSea from "./pool/eluge-the-shoreless-sea.js";
 import _poolElusiveKrasis from "./pool/elusive-krasis.js";
@@ -40785,6 +40786,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElspethsDevotee,
   _poolElspethsNightmare,
   _poolElspethsSmite,
+  _poolElturelSurvivors,
   _poolElturgardRanger,
   _poolElugeTheShorelessSea,
   _poolElusiveKrasis,
@@ -73514,6 +73516,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elspeths-devotee": _poolElspethsDevotee,
   "pool/elspeths-nightmare": _poolElspethsNightmare,
   "pool/elspeths-smite": _poolElspethsSmite,
+  "pool/elturel-survivors": _poolElturelSurvivors,
   "pool/elturgard-ranger": _poolElturgardRanger,
   "pool/eluge-the-shoreless-sea": _poolElugeTheShorelessSea,
   "pool/elusive-krasis": _poolElusiveKrasis,

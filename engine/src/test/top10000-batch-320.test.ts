@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, cast, counters, keywords, lands, life, named, pickModes, pt, ref, settle, spawn, table, toHand, tokensNamed, zone } from "./harness.js";
+import { A, B, C, cast, counters, keywords, lands, life, named, pickModes, pt, ref, settle, spawn, table, toHand, toStep, tokensNamed, zone } from "./harness.js";
 
 describe("Jinnie Fay, Jetmir's Second: you may make that many Cats or Dogs instead", () => {
   const CAT = "2/2 Green Cat Token (Haste)";
@@ -185,5 +185,33 @@ describe("Shadowgrange Archfiend: madness paid with {2}{B} and 8 life; the great
     cast(game, toHand(game, "Shadowgrange Archfiend"));
     expect(zone(game, dreadmaw)).toBe("graveyard");
     expect(life(game, A)).toBe(before + 6);
+  });
+});
+
+describe("Elturel Survivors: +X/+0 while attacking, X the lands defending player controls", () => {
+  it("0/4 at rest; attacking a player with three lands, 3/4, and deals 3", () => {
+    const { game, a } = table();
+    const survivors = spawn(game, "Elturel Survivors");
+    lands(game, "Mountain", 5);
+    lands(game, "Forest", 3, B);
+    expect(pt(game, survivors)).toEqual({ power: 0, toughness: 4 });
+    a.declareAttackersFn = () => [{ attacker: survivors, defender: B }];
+    toStep(game, "declare-blockers", A);
+    expect(pt(game, survivors)).toEqual({ power: 3, toughness: 4 });
+    const before = life(game, B);
+    toStep(game, "postcombat-main", A);
+    expect(life(game, B)).toBe(before - 3);
+    expect(pt(game, survivors)).toEqual({ power: 0, toughness: 4 });
+  });
+
+  it("the defending player's lands, not another opponent's (3 players)", () => {
+    const { game, a } = table({ players: 3 });
+    const survivors = spawn(game, "Elturel Survivors");
+    lands(game, "Forest", 1, B);
+    lands(game, "Forest", 4, C);
+    a.declareAttackersFn = () => [{ attacker: survivors, defender: C }];
+    a.chooseModesFn = () => [];
+    toStep(game, "declare-blockers", A);
+    expect(pt(game, survivors)).toEqual({ power: 4, toughness: 4 });
   });
 });
