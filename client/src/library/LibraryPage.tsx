@@ -24,7 +24,7 @@ import { resolveArtUrl } from '../ui/art.ts'
 import { fetchAsap, setAsap } from './buildAsap.ts'
 import { fetchMissingCards, namesOfMissing } from './missingCards.ts'
 import type { MissingCard } from './missingCards.ts'
-import { matchesTerms, searchTerms } from './search.ts'
+import { matchesTerms, searchHaystack, searchTerms } from './search.ts'
 import { fetchSetCards, fetchSets } from './setFilter.ts'
 import type { SetCards, SetInfo, SetPrinting } from './setFilter.ts'
 import './library.css'
@@ -170,7 +170,7 @@ function buildMissingEntry(card: MissingCard): MissingEntry {
     name: card.name,
     names: namesOfMissing(card.name),
     types,
-    haystack: `${card.name} \n ${card.typeLine}`.toLowerCase(),
+    haystack: searchHaystack([card.name, card.typeLine, card.text]),
     mv: card.manaValue,
     edhrec: card.edhrecRank ?? Infinity,
     released: releaseDateOf(card.name) ?? '',
@@ -290,7 +290,7 @@ function buildEntry(def: CardDefinition): Entry {
     flippable: other !== null && !def.adventure && !def.omen && def.prepareSpell === null,
     isToken: isTokenCard(def),
     // The names it's printed under too ("Princess Sarah" finds Azusa).
-    haystack: [
+    haystack: searchHaystack([
       def.name,
       ...flavorNamesOf(def.name),
       typeLineOf(def),
@@ -298,10 +298,7 @@ function buildEntry(def: CardDefinition): Entry {
       other?.name,
       other?.text,
       ...halves.map((h) => h.name),
-    ]
-      .filter(Boolean)
-      .join(' \n ')
-      .toLowerCase(),
+    ]),
     mv: manaValue(parseManaCost(def.manaCost)),
     edhrec: edhrecRankOf(def.name) ?? Infinity,
     released: releaseDateOf(def.name) ?? '',
@@ -653,7 +650,7 @@ export function LibraryPage() {
             type="search"
             placeholder={
               showMissing
-                ? `Search ${missingRows?.length ?? ''} cards not in the pool by name or type…`
+                ? `Search ${missingRows?.length ?? ''} cards not in the pool by name, type or rules text…`
                 : `Search ${cardCount} cards by name, type or rules text…`
             }
             value={query}

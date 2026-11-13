@@ -23,7 +23,7 @@ import type { HoverTarget } from '../ui/CardHoverPreview.tsx'
 import { CardContextMenu } from './CardContextMenu.tsx'
 import { StableLabel } from '../ui/StableLabel.tsx'
 import type { MenuAnchor, MenuItem } from './CardContextMenu.tsx'
-import { matchesTerms, searchTerms } from '../library/search.ts'
+import { matchesTerms, searchHaystack, searchTerms } from '../library/search.ts'
 import { PrintingPicker } from './PrintingPicker.tsx'
 import { ReplacementPicker } from './ReplacementPicker.tsx'
 import type { SavedDeck } from './decks.ts'
@@ -71,7 +71,7 @@ const searchTexts = new WeakMap<CardDefinition, string>()
 function searchTextOf(def: CardDefinition): string {
   let text = searchTexts.get(def)
   if (text === undefined) {
-    text = [def.name, ...flavorNamesOf(def.name), def.subtypes.join(' '), def.text].join(' \n ').toLowerCase()
+    text = searchHaystack([def.name, ...flavorNamesOf(def.name), def.subtypes.join(' '), def.text])
     searchTexts.set(def, text)
   }
   return text

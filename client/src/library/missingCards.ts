@@ -3,13 +3,15 @@
  * Commander-legal card the engine doesn't implement, from the static
  * `/missing-cards.json` that `npm run gen:missing-cards -w engine` writes out of
  * the Oracle snapshot (and `npm run verify` keeps current). Fetched only when
- * the filter is turned on: it is ~120 KB gzipped, which the gallery otherwise
- * never needs.
+ * the filter is turned on: with each card's rules text (for the search, the
+ * user, 2026-11-12) it is ~180 KB gzipped (~75 KB without), which the gallery
+ * otherwise never needs.
  */
 
 /** One row as the file stores it: `[name, printing, typeLine, colors,
- * edhrecRank | null, manaValue]`. `printing` is a Scryfall card id. */
-type MissingRow = readonly [string, string, string, string, number | null, number]
+ * edhrecRank | null, manaValue, text]`. `printing` is a Scryfall card id;
+ * `text` is missing from a file written before it was added. */
+type MissingRow = readonly [string, string, string, string, number | null, number, string?]
 
 export interface MissingCard {
   readonly name: string
@@ -21,6 +23,9 @@ export interface MissingCard {
   readonly colors: string
   readonly edhrecRank: number | null
   readonly manaValue: number
+  /** Its Oracle rules text, every face's, a newline between them; searched,
+   * not shown. */
+  readonly text: string
 }
 
 /** The names a card answers to: its own, and each face's ("Fire // Ice" is
@@ -40,9 +45,9 @@ export function parseMissingCards(json: unknown, inPool: (name: string) => boole
   if (!Array.isArray(rows)) throw new Error('missing-cards.json has no cards list')
   const out: MissingCard[] = []
   for (const row of rows as MissingRow[]) {
-    const [name, printing, typeLine, colors, edhrecRank, manaValue] = row
+    const [name, printing, typeLine, colors, edhrecRank, manaValue, text = ''] = row
     if (namesOfMissing(name).some(inPool)) continue
-    out.push({ name, printing, typeLine, colors, edhrecRank, manaValue })
+    out.push({ name, printing, typeLine, colors, edhrecRank, manaValue, text })
   }
   return out
 }

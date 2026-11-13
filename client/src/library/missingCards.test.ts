@@ -7,25 +7,31 @@ const file = {
     ['Accursed Witch // Infectious Curse', 'id-1', 'Creature — Human Shaman // Enchantment — Aura Curse', 'B', 10841, 4],
     ['Fire // Ice', 'id-2', 'Instant // Instant', 'RU', 900, 4],
     ['Grizzly Bears', 'id-3', 'Creature — Bear', 'G', null, 2],
+    ['Spawnbroker', 'id-4', 'Creature — Human Wizard', 'U', 12000, 3, 'When this creature enters, you may exchange control of …'],
   ],
 }
 
 describe('parseMissingCards', () => {
   it('reads each row into a card', () => {
     const cards = parseMissingCards(file, () => false)
-    expect(cards).toHaveLength(3)
-    expect(cards[2]).toEqual({
-      name: 'Grizzly Bears',
-      printing: 'id-3',
-      typeLine: 'Creature — Bear',
-      colors: 'G',
-      edhrecRank: null,
-      manaValue: 2,
+    expect(cards).toHaveLength(4)
+    expect(cards[3]).toEqual({
+      name: 'Spawnbroker',
+      printing: 'id-4',
+      typeLine: 'Creature — Human Wizard',
+      colors: 'U',
+      edhrecRank: 12000,
+      manaValue: 3,
+      text: 'When this creature enters, you may exchange control of …',
     })
   })
 
+  it('reads a row written before rules text was stored as having none', () => {
+    expect(parseMissingCards(file, () => false)[2].text).toBe('')
+  })
+
   it('drops a card the pool has since gained, by its name or a face of it', () => {
-    const pool = new Set(['Grizzly Bears', 'Accursed Witch', 'Ice'])
+    const pool = new Set(['Grizzly Bears', 'Accursed Witch', 'Ice', 'Spawnbroker'])
     expect(parseMissingCards(file, (n) => pool.has(n))).toEqual([])
   })
 

@@ -11,14 +11,16 @@
 //
 // From the checked-in Oracle snapshot (`data/oracle/cards.jsonl`), so no
 // network. It's a static file the library fetches only when the filter is
-// turned on — the snapshot itself (~39 MB) is far too big to ship, and this is
-// ~120 KB gzipped. One row per card, a tuple to keep it small:
+// turned on — the snapshot itself (~39 MB) is far too big to ship. One row per
+// card, a tuple to keep it small:
 //
-//   [name, printing, typeLine, colors, edhrecRank | null, manaValue]
+//   [name, printing, typeLine, colors, edhrecRank | null, manaValue, text]
 //
 // `printing` is a Scryfall card id, which `resolveArtUrl` turns into the card's
-// image on Scryfall's CDN. Rules text is left out (it would triple the size);
-// the library links each card to Scryfall instead.
+// image on Scryfall's CDN. `text` is the Oracle rules text, every face's, a
+// newline between faces, so the search finds a missing card by its rules
+// text as it does a pool card (the user, 2026-11-12: ~180 KB gzipped with it
+// against ~75 KB without, fetched only when the filter is turned on).
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -49,6 +51,7 @@ for (const line of readFileSync(SNAPSHOT_PATH, "utf8").split("\n")) {
     (card.colors ?? front.colors ?? []).join(""),
     typeof card.edhrec_rank === "number" ? card.edhrec_rank : null,
     card.cmc ?? 0,
+    card.oracle_text ?? faces.map((f) => f.oracle_text ?? "").filter(Boolean).join("\n"),
   ]);
 }
 rows.sort((a, b) => a[0].localeCompare(b[0]));

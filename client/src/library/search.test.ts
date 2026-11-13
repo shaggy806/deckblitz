@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { matchesTerms, searchTerms } from './search.ts'
+import { matchesTerms, searchHaystack, searchTerms } from './search.ts'
 
 const atraxa = "atraxa, praetors' voice \n legendary creature — phyrexian angel horror \n flying, vigilance, deathtouch, lifelink"
 const dragon = 'shivan dragon \n creature — dragon \n flying\n{r}: this creature gets +1/+0 until end of turn.'
@@ -34,5 +34,20 @@ describe('matchesTerms', () => {
 
   it('matches everything on an empty query', () => {
     expect(finds(dragon, '')).toBe(true)
+  })
+})
+
+describe('searchHaystack', () => {
+  const finds = (haystack: string, query: string) => matchesTerms(haystack, searchTerms(query))
+  const ice = searchHaystack(['Fire // Ice', 'Instant // Instant', 'Tap target permanent.\nDraw a card.', null, ''])
+
+  it('lowercases and finds a quoted phrase across a line break in one field', () => {
+    expect(finds(ice, '"tap target permanent. draw a card"')).toBe(true)
+  })
+
+  it("never runs a phrase from one field into the next", () => {
+    expect(finds(ice, '"instant tap"')).toBe(false)
+    expect(finds(ice, '"ice instant"')).toBe(false)
+    expect(finds(ice, 'ice instant')).toBe(true)
   })
 })
