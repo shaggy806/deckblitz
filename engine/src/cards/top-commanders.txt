@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-493 already implemented / 7 missing
+494 already implemented / 6 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -304,7 +304,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  298  Noctis, Prince of Lucis                         9100 decks  {1}{W}{U}{B}     Legendary Creature — Human Noble
 [x]  299  Syr Gwyn, Hero of Ashvale                       9089 decks  {3}{R}{W}{B}     Legendary Creature — Human Knight
 [x]  300  Athreos, God of Passage                         9079 decks  {1}{W}{B}        Legendary Enchantment Creature — God
-[ ]  301  Coram, the Undertaker                           9077 decks  {1}{B}{R}{G}     Legendary Creature — Human Warrior
+[x]  301  Coram, the Undertaker                           9077 decks  {1}{B}{R}{G}     Legendary Creature — Human Warrior
 [ ]  302  Marvo, Deep Operative                           9069 decks  {3}{U}{B}        Legendary Creature — Octopus Rogue
 [x]  303  Norin the Wary                                  9063 decks  {R}              Legendary Creature — Human Warrior
 [x]  304  Finneas, Ace Archer                             9061 decks  {G}{W}           Legendary Creature — Rabbit Archer

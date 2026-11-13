@@ -21258,6 +21258,21 @@ function parseStatic(line, text) {
   if (line === "If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.") {
     return { affects: { scope: "self" }, replacement: { event: "would-discard", causedBy: "opponent", reveal: true }, text };
   }
+  // Coram, the Undertaker: every graveyard, one land and one spell a turn.
+  if (line === "During each of your turns, you may play a land and cast a spell from among cards in graveyards that were put there from libraries this turn.") {
+    return {
+      affects: { scope: "self" },
+      mayPlay: {
+        from: "graveyard",
+        anyGraveyard: true,
+        play: true,
+        landAndSpell: true,
+        yourTurnOnly: true,
+        filter: { putIntoGraveyardFromLibraryThisTurn: true },
+      },
+      text,
+    };
+  }
   // Abandoned Sarcophagus's two lines.
   if (line === "You may cast spells that have a cycling ability from your graveyard.") {
     return { affects: { scope: "self" }, mayPlay: { from: "graveyard", filter: { hasKeyword: "cycling" } }, text };

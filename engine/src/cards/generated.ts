@@ -5301,6 +5301,7 @@ import _poolCoralTrickster from "./pool/coral-trickster.js";
 import _poolCoralhelmChronicler from "./pool/coralhelm-chronicler.js";
 import _poolCoralhelmCommander from "./pool/coralhelm-commander.js";
 import _poolCoralhelmGuide from "./pool/coralhelm-guide.js";
+import _poolCoramTheUndertaker from "./pool/coram-the-undertaker.js";
 import _poolCordialVampire from "./pool/cordial-vampire.js";
 import _poolCoreProwler from "./pool/core-prowler.js";
 import _poolCoretapper from "./pool/coretapper.js";
@@ -37994,6 +37995,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCoralhelmChronicler,
   _poolCoralhelmCommander,
   _poolCoralhelmGuide,
+  _poolCoramTheUndertaker,
   _poolCordialVampire,
   _poolCoreProwler,
   _poolCoretapper,
@@ -70700,6 +70702,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/coralhelm-chronicler": _poolCoralhelmChronicler,
   "pool/coralhelm-commander": _poolCoralhelmCommander,
   "pool/coralhelm-guide": _poolCoralhelmGuide,
+  "pool/coram-the-undertaker": _poolCoramTheUndertaker,
   "pool/cordial-vampire": _poolCordialVampire,
   "pool/core-prowler": _poolCoreProwler,
   "pool/coretapper": _poolCoretapper,

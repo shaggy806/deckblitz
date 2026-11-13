@@ -15256,6 +15256,18 @@ describe("what would go to a graveyard going elsewhere", () => {
       statics("If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.").replacement,
     ).toEqual({ event: "would-discard", causedBy: "opponent", reveal: true });
   });
+  it("reads Coram's land and spell from among milled cards in every graveyard", () => {
+    expect(
+      statics("During each of your turns, you may play a land and cast a spell from among cards in graveyards that were put there from libraries this turn.").mayPlay,
+    ).toEqual({
+      from: "graveyard",
+      anyGraveyard: true,
+      play: true,
+      landAndSpell: true,
+      yourTurnOnly: true,
+      filter: { putIntoGraveyardFromLibraryThisTurn: true },
+    });
+  });
   it("reads a card that wasn't cycled exiled, and cycling spells cast from a graveyard", () => {
     expect(statics("You may cast spells that have a cycling ability from your graveyard.").mayPlay).toEqual({ from: "graveyard", filter: { hasKeyword: "cycling" } });
     expect(

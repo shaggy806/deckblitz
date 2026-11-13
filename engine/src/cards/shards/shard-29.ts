@@ -144,6 +144,7 @@ import _poolConsumingBlob from "../pool/consuming-blob.js";
 import _poolContainmentProtocol from "../pool/containment-protocol.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
+import _poolCoramTheUndertaker from "../pool/coram-the-undertaker.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
 import _poolCourtOfEmbereth from "../pool/court-of-embereth.js";
 import _poolCravenKnight from "../pool/craven-knight.js";
@@ -1160,6 +1161,7 @@ const shard: CardShard = {
     _poolContainmentProtocol,
     _poolContractHero,
     _poolCoralBarrier,
+    _poolCoramTheUndertaker,
     _poolCoriMountainMonastery,
     _poolCourtOfEmbereth,
     _poolCravenKnight,

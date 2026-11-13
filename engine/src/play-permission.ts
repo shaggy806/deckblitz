@@ -163,11 +163,20 @@ export interface PlayGrant extends PlayTerms {
  * - `exiledByYou`: "cards you exiled" (Haldan), an effect of this player's.
  * - `linked`: "from among cards exiled with this creature" (607.2a), its
  *   present stint only, so a thief who gains control may use it.
+ * - `anyGraveyard`: with `from: "graveyard"`, "from among cards in
+ *   graveyards" — every player's, not only the holder's (Coram, the
+ *   Undertaker). The card goes to its owner's graveyard or wherever as usual.
+ * - `landAndSpell`: "you may play a land **and** cast a spell" (Coram): two
+ *   allowances a turn, one land played and one spell cast, each spent apart
+ *   (`GameObject.playUses`'s `land` and `spell`). With `play`. Another
+ *   permission's plays don't spend them (Coram's rulings).
  */
 export interface StaticPlay extends PlayTerms {
   readonly from: Exclude<PlayFrom, "hand">;
   readonly exiledByYou?: boolean;
   readonly linked?: boolean;
+  readonly anyGraveyard?: true;
+  readonly landAndSpell?: true;
 }
 
 /**

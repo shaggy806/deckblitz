@@ -394,6 +394,19 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### "A land and a spell from among cards in graveyards" — built 2026-11-13
+
+The commander gap's `static:cast-from-any-graveyard-put-from-library-this-turn`.
+Two `StaticPlay` terms: `anyGraveyard` reaches every player's graveyard ("from
+among cards in graveyards", rule 601.3; the land comes under its player's
+control, the spell resolves under theirs), and `landAndSpell` is two
+allowances a turn, one land played (still a land drop, rule 305.2) and one
+spell cast, spent apart on `GameObject.playUses`; another permission's plays
+don't spend them (the card's rulings). Coram, the Undertaker (commander 301)
+is the only card that needs it, with `putIntoGraveyardFromLibraryThisTurn`
+and `yourTurnOnly`; the scaffolder reads the line.
+`test/commanders-any-graveyard-land-and-spell.test.ts`.
+
 ### "As this enters, discard any number of creature cards" — built 2026-11-13
 
 The commander gap's `replacement:as-enters-discard-any-number`.

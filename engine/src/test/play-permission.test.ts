@@ -124,7 +124,7 @@ describe("the pool holds only the one vocabulary", () => {
       const permission = object["mayPlay"] as Record<string, unknown> | undefined;
       if (permission !== undefined && typeof permission === "object") {
         const allowed = "from" in permission
-          ? [...TERMS, "from", "whose", "linked", "exiledByYou"]
+          ? [...TERMS, "from", "whose", "linked", "exiledByYou", "anyGraveyard", "landAndSpell"]
           : [...TERMS, ...GRANT_EXTRAS];
         check(permission, name, allowed, "mayPlay");
       }

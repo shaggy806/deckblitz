@@ -2,6 +2,7 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "static:cast-from-any-graveyard-put-from-library-this-turn",
     "replacement:as-enters-discard-any-number",
     "trigger:opponents-lose-exactly-n-life",
     "effect:each-player-chooses-color-for-own-permanents",

@@ -295,10 +295,17 @@ export interface GameObject {
    */
   flickerLink?: string;
   /** What this permanent's play permissions have spent this turn, for
-   * `PlayTerms.oncePerTurn` and `perType`: a stale `turn` is nothing spent,
+   * `PlayTerms.oncePerTurn` and `perType`, and `StaticPlay.landAndSpell`'s
+   * `land` and `spell`: a stale `turn` is nothing spent,
    * and `moveObject` clears it, a new object having a fresh set (rule 400.7).
    * Rule state, not history: it says what's left. */
-  playUses?: { readonly turn: number; readonly once?: true; readonly types?: readonly CardType[] };
+  playUses?: {
+    readonly turn: number;
+    readonly once?: true;
+    readonly types?: readonly CardType[];
+    readonly land?: true;
+    readonly spell?: true;
+  };
   /** A permission to play this one card from where it is (exile or a
    * graveyard): it belongs to the card, not to whatever gave it, so it outlives
    * its source, and it ends with any move (rule 400.7). See `play-permission.ts`. */

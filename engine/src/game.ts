@@ -3893,9 +3893,10 @@ export class Game {
     // double-faced card is its own option, as it is from the hand. Another
     // player's graveyard only when something reaches it: a resolved
     // permission over it (The Great Work), or a one-shot grant on the card.
-    const reachesOthers = (this.state.playerEffects ?? []).some(
-      (e) => e.owner === player && e.mayPlay?.from === "graveyard" && e.mayPlay.owners?.some((p) => p !== player) === true,
-    );
+    const reachesOthers =
+      (this.state.playerEffects ?? []).some(
+        (e) => e.owner === player && e.mayPlay?.from === "graveyard" && e.mayPlay.owners?.some((p) => p !== player) === true,
+      ) || this.playStaticsOf(player).some((e) => e.play.from === "graveyard" && e.play.anyGraveyard === true);
     const graveyardCards = [
       ...this.state.zones.perPlayer[player].graveyard,
       ...this.state.turnOrder.flatMap((other) =>
@@ -14525,7 +14526,9 @@ export class Game {
     }
     const playable =
       zones.hand.includes(cardId) ||
-      (zones.graveyard.includes(cardId) &&
+      // Any graveyard: a permission says whose it reaches (Coram, the
+      // Undertaker's reaches every one).
+      (this.state.objects[cardId]?.zone === "graveyard" &&
         (this.mayPlayFromGraveyard(player, cardId, face) ||
           this.graveyardGrantsFor(player, cardId, face).length > 0)) ||
       (zones.library[0] === cardId && this.playOptions(player, cardId, face).length > 0) ||
@@ -14598,7 +14601,7 @@ export class Game {
     }
     if (underPermission !== undefined) {
       tapped = underPermission.terms.landsEnterTapped === true;
-      this.spendPlay(underPermission);
+      this.spendPlay(underPermission, undefined, this.faceDef(cardId, face).types);
     }
     this.state.objects[cardId].face = face;
     this.journal({ kind: "land-played", player, object: cardId, from });
@@ -43402,12 +43405,14 @@ controlledBy,
 
   /** A use of a permission on `source` this turn: `oncePerTurn`'s or
    * `perType`'s. */
-  private stampPlayUse(source: GameObject, once: boolean, asType?: CardType): void {
+  private stampPlayUse(source: GameObject, once: boolean, asType?: CardType, slot?: "land" | "spell"): void {
     const turn = this.state.turn.number;
     const before = source.playUses?.turn === turn ? source.playUses : undefined;
     source.playUses = {
       turn,
       ...(once || before?.once === true ? { once: true as const } : {}),
+      ...(slot === "land" || before?.land === true ? { land: true as const } : {}),
+      ...(slot === "spell" || before?.spell === true ? { spell: true as const } : {}),
       ...(asType !== undefined || before?.types !== undefined
         ? { types: [...(before?.types ?? []), ...(asType !== undefined ? [asType] : [])] }
         : {}),
@@ -43425,11 +43430,19 @@ controlledBy,
     return source?.playUses?.turn === this.state.turn.number && source.playUses.once === true;
   }
 
+  /** Whether `source`'s `landAndSpell` allowance for a land (or, `isLand`
+   * false, a spell) has been used this turn (Coram, the Undertaker). */
+  private playSlotUsed(source: GameObject, isLand: boolean): boolean {
+    const uses = source.playUses;
+    return uses?.turn === this.state.turn.number && (isLand ? uses.land === true : uses.spell === true);
+  }
+
   /** Whether playing under this permission uses something up. */
   private playOptionSpends(option: PlayOption): boolean {
     const { carrier, terms } = option;
     if (carrier.kind === "card") return carrier.permission.group !== undefined || playSpendsSomething(terms);
     if (carrier.kind === "effect") return carrier.play.left !== undefined || playSpendsSomething(terms);
+    if (carrier.kind === "static" && carrier.play.landAndSpell === true) return true;
     return playSpendsSomething(terms);
   }
 
@@ -43452,6 +43465,8 @@ controlledBy,
         };
         invalidateComputedCache();
       }
+    } else if (carrier.kind === "static" && carrier.play.landAndSpell === true) {
+      this.stampPlayUse(carrier.source, terms.oncePerTurn === true, asType, faceTypes.includes("land") ? "land" : "spell");
     } else if (carrier.kind === "static" && (terms.oncePerTurn === true || asType !== undefined)) {
       this.stampPlayUse(carrier.source, terms.oncePerTurn === true, asType);
     }
@@ -43513,13 +43528,17 @@ controlledBy,
       out.push({ terms: play, carrier: { kind: "effect", index, play } });
     });
     // "Your graveyard" and the like: statics reach only what `player` owns,
-    // but for exile, which is everyone's, where the filter says whose.
-    if (from !== "hand" && (from === "exile" || from === "library-top" || card.owner === player)) {
+    // but for exile, which is everyone's, where the filter says whose, and
+    // a graveyard permission that says "graveyards" (Coram, the Undertaker).
+    if (from !== "hand") {
+      const owned = from === "exile" || from === "library-top" || card.owner === player;
       for (const { source, play } of this.playStaticsOf(player)) {
         if (play.from !== from) continue;
+        if (!owned && !(from === "graveyard" && play.anyGraveyard === true)) continue;
         if (play.exiledByYou === true && card.exiledByPlayer !== player) continue;
         if (play.linked === true && !this.linkedToStint(card, source.id, source.zoneChangeCount ?? 0)) continue;
         if (play.oncePerTurn === true && this.playOnceUsed(source)) continue;
+        if (play.landAndSpell === true && this.playSlotUsed(source, isLand)) continue;
         if (!this.playTermsReach(play, cardId, face, player, isLand, source.id, x)) continue;
         if (!this.playCostsPayable(player, cardId, def, play)) continue;
         out.push({ terms: play, carrier: { kind: "static", source, play } });
