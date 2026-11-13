@@ -2473,7 +2473,9 @@
   "effect:flicker-chosen-group",
   "effect:flicker-source-and-chosen",
   "effect:choose-permanents-this-way",
-  "condition:this-way-counts-commander-redirect"
+  "condition:this-way-counts-commander-redirect",
+  "condition:this-way-counts-commander-redirect",
+  "trigger:damage-batch-over-opponents"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

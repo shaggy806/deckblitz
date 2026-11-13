@@ -1403,7 +1403,13 @@ more Devils you control attack one or more players" (Zurzoth, Chaos Rider — an
 `attacks-batch` trigger whose `filter` has `attackingPlayer: true`): each
 player one of the counted attackers was declared attacking, not one whose
 planeswalker or battle was attacked, whatever became of the attackers since;
-nobody outside an attack trigger. `"players-being-attacked"` is the same
+nobody outside an attack trigger. `"damaged-players"` is "**those
+opponents**" of a `deals-damage-batch` trigger with `once: "per-event"` —
+every player its sources dealt damage to in the event that fired it, once for
+them all: Breeches, Brazen Plunderer's "whenever one or more Pirates you
+control deal damage to your opponents, exile the top card of each of those
+opponents' libraries" is an `impulse-exile` with `whose: "damaged-players"`;
+nobody outside such a trigger. `"players-being-attacked"` is the same
 players read from the state — whoever the active player declared attackers at
 this combat — so it also answers in a trigger's intervening `condition`, which
 is asked before the trigger has its attackers ("whenever a player attacks,

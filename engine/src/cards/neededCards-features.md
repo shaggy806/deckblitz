@@ -361,6 +361,17 @@ the reflexive ability's own targeting, read as targets are chosen and rechecked
 (608.2b). Proving: Auron, Venerated Guardian. Test:
 `reflexive-target-live-compare.test.ts`.
 
+### "Each of those opponents" of one damage trigger — built 2026-11-13
+
+`trigger:damage-batch-over-opponents`. A `deals-damage-batch` trigger with
+`once: "per-event"` now carries every player its sources dealt damage to in
+the event (`LastKnownRefs.damagedPlayers`), read by the `"damaged-players"`
+`PlayerScope`. The scaffolder reads "whenever one or more [type] you control
+deal damage to your opponents" and "exile the top card of each of those
+opponents' libraries. You may play those cards this turn, and you may spend
+mana as though…". Proving: Breeches, Brazen Plunderer. Test:
+`damaged-players-scope.test.ts`.
+
 ### "Returned this way" counts a commander sent to the command zone — built 2026-11-13
 
 `condition:this-way-counts-commander-redirect`. A commander whose return to

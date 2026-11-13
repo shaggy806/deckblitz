@@ -2101,6 +2101,13 @@ export type PlayerScope =
    * the damage was aimed, in turn order. Prevented damage was never dealt
    * (rule 615.1), so nobody for that. */
   | "players-dealt-damage-this-way"
+  /** "Whenever one or more Pirates you control deal damage to your
+   * opponents, exile the top card of **each of those opponents'** libraries"
+   * (Breeches, Brazen Plunderer): each player the sources of a `once:
+   * "per-event"` `deals-damage-batch` trigger dealt damage to in the event
+   * that fired it, in turn order (`LastKnownRefs.damagedPlayers`). Nobody
+   * outside such a trigger. */
+  | "damaged-players"
   /** "Whenever one or more Devils you control attack one or more players,
    * … **those players** …" (Zurzoth, Chaos Rider): each player one of the
    * attackers that counted for the trigger (its `batch`) was declared

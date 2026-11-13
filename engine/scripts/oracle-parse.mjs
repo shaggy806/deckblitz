@@ -2491,6 +2491,14 @@ export function parseTrigger(clause) {
     if (filter === null) return null;
     return [{ on: "deals-damage-batch", who: "you-control", filter, combat: true }];
   }
+  // "…deal damage to your opponents" (Breeches, Brazen Plunderer; Malcolm,
+  // Keen-Eyed Navigator): once for the whole damage event, however many
+  // opponents it hit.
+  if ((m = /^Whenever one or more (.+?) you control deal damage to your opponents$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    return [{ on: "deals-damage-batch", who: "you-control", filter, to: "opponent", once: "per-event" }];
+  }
 
   // Casting.
   // "A spell with the same name as a card in your / their graveyard" (rule
@@ -7867,6 +7875,11 @@ function impulseWindowOf(sentence) {
   const it = "(?:it|that card|them|those cards|(one of) those cards)";
   const words = [
     [`you may ${verb} ${it} this turn`, { duration: "end-of-turn" }],
+    // Breeches, Brazen Plunderer; Mezzio Mugger.
+    [
+      `you may ${verb} ${it} this turn, and you may spend mana as though it were mana of any color to cast those spells`,
+      { duration: "end-of-turn", spendAs: "any-color" },
+    ],
     [`until end of turn, you may ${verb} ${it}`, { duration: "end-of-turn" }],
     [`until your next turn, you may ${verb} ${it}`, { duration: "until-your-next-turn" }],
     [`until the beginning of your next upkeep, you may ${verb} ${it}`, { duration: "until-your-next-upkeep" }],
@@ -7941,6 +7954,16 @@ function impulseWindowAt(sentences, i, ctx) {
   const { play, ...when } = window;
   if (/^exile the top card of your library\.$/i.test(sentences[i]) && when.upTo === undefined) {
     return { kind: "impulse-exile", amount: 1, ...when, ...(play ? { play: true } : {}) };
+  }
+  // "Exile the top card of each of those opponents' libraries" of a damage
+  // trigger fired once for every opponent its sources hit (Breeches, Brazen
+  // Plunderer): the `"damaged-players"` scope.
+  if (
+    ctx?.damageBatch === true &&
+    /^exile the top card of each of those opponents' libraries\.$/i.test(sentences[i]) &&
+    when.upTo === undefined
+  ) {
+    return { kind: "impulse-exile", amount: 1, whose: "damaged-players", ...when, ...(play ? { play: true } : {}) };
   }
   // "Exile the top two cards of your library. Until your next end step, you
   // may play one of those cards." (Unlucky Witness).

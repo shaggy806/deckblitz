@@ -18988,3 +18988,34 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     });
   });
 });
+
+describe("one trigger over every opponent a batch of sources damaged (Breeches, Brazen Plunderer)", () => {
+  it("each of those opponents' libraries, playable this turn with mana of any color", () => {
+    const breeches = parseFace(
+      {
+        name: "Test Plunderer",
+        type_line: "Legendary Creature — Goblin Pirate",
+        mana_cost: "{3}{R}",
+        oracle_text:
+          "Whenever one or more Pirates you control deal damage to your opponents, exile the top card of each of those opponents' libraries. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(breeches.complete).toBe(true);
+    expect(breeches.triggered[0].trigger).toEqual({
+      on: "deals-damage-batch",
+      who: "you-control",
+      filter: { subtype: "Pirate" },
+      to: "opponent",
+      once: "per-event",
+    });
+    expect(breeches.triggered[0].effect).toEqual({
+      kind: "impulse-exile",
+      amount: 1,
+      whose: "damaged-players",
+      duration: "end-of-turn",
+      spendAs: "any-color",
+      play: true,
+    });
+  });
+});

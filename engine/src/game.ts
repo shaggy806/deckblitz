@@ -32679,7 +32679,10 @@ export class Game {
             // One firing for several players names none of them.
             const trigger: PendingTrigger = perEvent ? withoutTriggerPlayer(base) : base;
             if (damageBatch === null) {
-              this.queueTrigger(ability, { ...trigger, triggerValue: perEvent ? 1 : event.amount }, multiplier);
+              const alone: PendingTrigger = perEvent
+                ? { ...trigger, lastKnownRefs: { ...(trigger.lastKnownRefs ?? {}), damagedPlayers: [player] } }
+                : trigger;
+              this.queueTrigger(ability, { ...alone, triggerValue: perEvent ? 1 : event.amount }, multiplier);
               return;
             }
             this.oweDamageToTrigger(damageBatch, `${id}#${index}`, ability, trigger, multiplier, perEvent, event, player);
@@ -36291,6 +36294,10 @@ export class Game {
           if (event.type === "damage-dealt" && event.target.kind === "player") dealt.add(event.target.player);
         }
         return this.state.turnOrder.filter((p) => dealt.has(p) && this.state.players[p]?.hasLost === false);
+      }
+      if (who === "damaged-players") {
+        const dealt = refs.damagedPlayers ?? [];
+        return this.state.turnOrder.filter((p) => dealt.includes(p) && this.state.players[p]?.hasLost === false);
       }
       if (who === "attacked-players" || who === "you-and-attacked-players") {
         // The players the trigger's counted attackers were declared
@@ -58678,6 +58685,9 @@ controlledBy,
         // "Tap those creatures" (Tamiyo, Upriser Crowned): the sources.
         lastKnownRefs: {
           ...(owed.trigger.lastKnownRefs ?? {}),
+          // "Those opponents": every player dealt damage, for a trigger that
+          // fired once for them all.
+          ...(owed.perEvent ? { damagedPlayers: this.state.turnOrder.filter((p) => owed.players.has(p)) } : {}),
           sets: addToSet(
             owed.trigger.lastKnownRefs?.sets,
             "batch",
@@ -58938,6 +58948,7 @@ controlledBy,
       who === "each-friend" ||
       who === "each-foe" ||
       who === "players-dealt-damage-this-way" ||
+      who === "damaged-players" ||
       who === "attacked-players" ||
       who === "you-and-attacked-players" ||
       who === "chosen-player" ||

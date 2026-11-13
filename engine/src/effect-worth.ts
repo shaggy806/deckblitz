@@ -169,6 +169,7 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "each-friend":
     case "each-foe":
     case "players-dealt-damage-this-way":
+    case "damaged-players":
     case "attacked-players":
     case "players-being-attacked":
       // Not known until the votes are in, the dice rolled, the damage dealt,

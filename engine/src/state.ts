@@ -2460,6 +2460,11 @@ export interface LastKnownRefs {
     readonly zoneChangeCount: number;
     readonly at: PlayerId | ObjectId | null;
   }[];
+  /** For a `deals-damage-batch` trigger fired once for the whole damage
+   * event (`once: "per-event"`): every player its sources dealt damage to in
+   * it, in turn order — "those opponents" (Breeches, Brazen Plunderer), the
+   * `"damaged-players"` scope. */
+  readonly damagedPlayers?: readonly PlayerId[];
   /** For a "whenever players finish voting" trigger: the votes of the vote
    * that fired it (Erestor of the Council). */
   readonly votes?: readonly Vote[];
