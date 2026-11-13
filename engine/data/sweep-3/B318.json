@@ -1,0 +1,20 @@
+{
+ "batch": "B318",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 4075–4207 (2026-11-13): Hushbringer and the next of the cards still missing from top-commander-cards.txt (B294/B317 records), built best rank first, no agents. Features: `suppressEntryTriggers`' `dying` filter — a barred death taken out of the event for every trigger, batches included, looking back for a Hushbringer that dies with it (Hushbringer); `abilityCostModification`'s `firstEachTurn` without `targeting`, on a journal entry for every activation of a permanent's ability, mana abilities and payment taps included (Tezzeret, Betrayer of Flesh); PlayTerms' `becomes` type rider, and a spell's own type modifiers counted on the stack by computeCharacteristics (Tarrian's Journal // The Tomb of Aclazotz); CardFilter's `xValue` (Banefire); `reveal-until-count`'s `put: \"graveyard\"` (Old Stickfingers). No majors. Wrapped up at the user's call after Old Stickfingers.",
+ "authored": [
+  { "name": "Hushbringer", "files": ["engine/src/cards/pool/hushbringer.ts"], "tested": true },
+  { "name": "Tezzeret, Betrayer of Flesh", "files": ["engine/src/cards/pool/tezzeret-betrayer-of-flesh.ts"], "tested": true },
+  { "name": "Tarrian's Journal // The Tomb of Aclazotz", "files": ["engine/src/cards/pool/tarrians-journal.ts", "engine/src/cards/pool/the-tomb-of-aclazotz.ts"], "tested": true },
+  { "name": "Banefire", "files": ["engine/src/cards/pool/banefire.ts"], "tested": true },
+  { "name": "Old Stickfingers", "files": ["engine/src/cards/pool/old-stickfingers.ts"], "tested": true }
+ ],
+ "blocked": [
+  {
+   "name": "Shay Cormac",
+   "needs": ["effect:lose-protection-and-ward"],
+   "size": "small",
+   "why": "Not reached. Researched: `become`'s `loseKeywords` takes Keyword strings (Shadowspear's hexproof and indestructible). Protection is gathered apart, as `Characteristics.protectionFrom` (characteristics.ts), and ward is a triggered ability (the `ward` effect), so neither can be lost. Needs a layer-6 loss at the effect's timestamp: protection gathered from earlier effects and printed text cleared, a later grant giving it back, and ward abilities marked lost the way `loseKeywordAbilities` marks vanishing. The other two lines are Willbreaker's `becomes-target` with `byControllerOnly` and Explorer's Cache's `dies` filter on a bounty counter."
+  }
+ ]
+}

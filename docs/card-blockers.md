@@ -666,6 +666,15 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 318 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4075–4207)** —
+  5 authored, each on a small feature built for it: Hushbringer (creatures dying cause no
+  triggers, batches included, a Hushbringer dying with them still barring), Tezzeret, Betrayer of
+  Flesh (the first ability of an artifact activated each turn, mana abilities included), Tarrian's
+  Journal // The Tomb of Aclazotz (a creature spell cast from the graveyard is a Vampire too, on
+  the stack as well), Banefire (a spell's chosen X as a filter clause), Old Stickfingers (reveal
+  until X creature cards, those into the graveyard). Blocked (`B318.json`), small and not reached,
+  researched: Shay Cormac (losing protection and ward, layer 6). Next by rank: Norn's Decree,
+  Benthic Anomaly, The Millennium Calendar, Neyith of the Dire Hunt (B294 records, unsized).
 - **Batch 317 (2026-11-12, `author-top-cards` on the top 5000's last cards, ranks 3865–4068)** —
   7 authored, each on a small feature built for it: Metalworker (a mana ability that reveals from
   the hand first, asked as it's activated), Mystic Reflection and Essence of the Wild (enter as a

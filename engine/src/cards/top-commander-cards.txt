@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4952 already implemented / 48 missing (marks refreshed 2026-11-13)
+4957 already implemented / 43 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3963,7 +3963,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3970  Ob Nixilis, Unshackled                   {4}{B}{B}        Legendary Creature — Demon
 [x]  3971  Vesuvan Duplimancy                       {3}{U}           Enchantment
 [x]  3972  Elementalist's Palette                   {3}              Artifact
-[ ]  3973  Hushbringer                              {1}{W}           Creature — Faerie
+[x]  3973  Hushbringer                              {1}{W}           Creature — Faerie
 [x]  3974  Wizards of Thay                          {3}{U}           Creature — Human Wizard
 [x]  3975  Zur, Eternal Schemer                     {W}{U}{B}        Legendary Creature — Human Wizard
 [x]  3976  Relm's Sketching                         {2}{U}{U}        Sorcery
@@ -3999,7 +3999,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4006  Heartwood Storyteller                    {1}{G}{G}        Creature — Treefolk
 [x]  4007  Merrow Reejerey                          {2}{U}           Creature — Merfolk Soldier
 [x]  4008  Cryogen Relic                            {1}{U}           Artifact
-[ ]  4009  Tezzeret, Betrayer of Flesh              {2}{U}{U}        Legendary Planeswalker — Tezzeret
+[x]  4009  Tezzeret, Betrayer of Flesh              {2}{U}{U}        Legendary Planeswalker — Tezzeret
 [x]  4010  Grim Servant                             {3}{B}           Creature — Zombie Warlock
 [x]  4011  King of the Pride                        {2}{W}           Creature — Cat
 [x]  4012  Flame Rift                               {1}{R}           Sorcery
@@ -4016,7 +4016,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4023  Akki Battle Squad                        {5}{R}           Creature — Goblin Samurai
 [x]  4024  Open the Vaults                          {4}{W}{W}        Sorcery
 [x]  4025  Selvala's Stampede                       {4}{G}{G}        Sorcery
-[ ]  4026  Tarrian's Journal // The Tomb of Aclazotz {2}              Legendary Artifact — Book // Legendary Land — Cave
+[x]  4026  Tarrian's Journal // The Tomb of Aclazotz {2}              Legendary Artifact — Book // Legendary Land — Cave
 [x]  4027  Contaminant Grafter                      {4}{G}           Creature — Phyrexian Druid
 [x]  4028  Hydra Omnivore                           {4}{G}{G}        Creature — Hydra
 [x]  4029  Unfinished Business                      {3}{W}{W}        Sorcery
@@ -4039,7 +4039,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4046  Innocent Blood                           {B}              Sorcery
 [x]  4047  Alania, Divergent Storm                  {3}{U}{R}        Legendary Creature — Otter Wizard
 [x]  4048  Metallurgic Summonings                   {3}{U}{U}        Enchantment
-[ ]  4049  Old Stickfingers                         {X}{B}{G}        Legendary Creature — Horror
+[x]  4049  Old Stickfingers                         {X}{B}{G}        Legendary Creature — Horror
 [x]  4050  Armageddon                               {3}{W}           Sorcery
 [x]  4051  Obelisk of Urd                           {6}              Artifact
 [x]  4052  Scheming Silvertongue // Sign in Blood   {1}{B} // {B}{B} Creature — Vampire Warlock // Sorcery
@@ -4080,7 +4080,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4087  Birthday Escape                          {U}              Sorcery
 [x]  4088  Karn's Temporal Sundering                {4}{U}{U}        Legendary Sorcery
 [x]  4089  Spawning Kraken                          {5}{U}           Creature — Kraken
-[ ]  4090  Banefire                                 {X}{R}           Sorcery
+[x]  4090  Banefire                                 {X}{R}           Sorcery
 [x]  4091  Eumidian Hatchery                        {0}              Land
 [x]  4092  Champions of the Perfect                 {3}{G}           Creature — Elf Warrior
 [x]  4093  Lux Cannon                               {4}              Artifact
