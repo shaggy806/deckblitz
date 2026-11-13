@@ -4,6 +4,8 @@
 import { describe, expect, it } from "vitest";
 
 import type { EffectSpec } from "../effects.js";
+import type { Game } from "../game.js";
+import type { ObjectId, PlayerId } from "../primitives.js";
 import {
   A,
   B,
@@ -15,9 +17,11 @@ import {
   hand,
   life,
   lands,
+  loyalty,
   nextTurn,
   pickFromZone,
   pickModes,
+  pickPermanents,
   pickTargets,
   ref,
   settle,
@@ -250,5 +254,41 @@ describe("Aboleth Spawn: copies an entering opponent's creature's own trigger", 
     const before = hand(game).length;
     enter(game, "Elvish Visionary");
     expect(hand(game).length).toBe(before + 1);
+  });
+});
+
+describe("Tevesh Szat, Doom of Fools", () => {
+  const commander = (game: Game, name: string, player: PlayerId, where: "command" | "battlefield"): ObjectId => {
+    const id = game.debugSpawn(name, player, where);
+    game.state.objects[id].isCommander = true;
+    return id;
+  };
+
+  it("−10: takes the commanders on the battlefield and puts those in the command zone onto it", () => {
+    const { game, a, b } = table();
+    a.commanderReplacementFn = () => false;
+    b.commanderReplacementFn = () => false;
+    const theirs = commander(game, "Serra Angel", B, "battlefield");
+    const waiting = commander(game, "Craw Wurm", B, "command");
+    const mine = commander(game, "Hill Giant", A, "command");
+    const szat = spawn(game, "Tevesh Szat, Doom of Fools");
+    loyalty(game, szat, -10, { atLeast: 10 });
+    for (const id of [theirs, waiting, mine]) {
+      expect(zone(game, id)).toBe("battlefield");
+      expect(game.state.objects[id].controller).toBe(A);
+    }
+  });
+
+  it("+1: sacrificing a commander draws three", () => {
+    const { game, a } = table();
+    for (let i = 0; i < 3; i += 1) toLibrary(game, "Island");
+    const wurm = commander(game, "Craw Wurm", A, "battlefield");
+    const szat = spawn(game, "Tevesh Szat, Doom of Fools");
+    pickModes(a, 0);
+    pickPermanents(a, wurm);
+    const before = hand(game).length;
+    loyalty(game, szat, 1);
+    expect(zone(game, wurm)).not.toBe("battlefield");
+    expect(hand(game).length).toBe(before + 3);
   });
 });

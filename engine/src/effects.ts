@@ -4804,8 +4804,12 @@ export type EffectSpec =
        * "put all commanders you own from the command zone and from your
        * graveyard into your hand" (`filter: { isCommander: true }`, `count:
        * "all"`), all at once. A commander put into a hand may go to the
-       * command zone instead (rule 903.9b), its owner's choice. */
-      readonly from?: "all-graveyards" | "hand-or-graveyard" | "each-graveyard" | "command-zone-and-graveyard";
+       * command zone instead (rule 903.9b), its owner's choice.
+       * `"command-zone"`: every player's commanders in the command zone, put
+       * under the controller's control — Tevesh Szat, Doom of Fools's "put
+       * all commanders from the command zone onto the battlefield under your
+       * control" (`filter: { isCommander: true }`, `count: "all"`). */
+      readonly from?: "all-graveyards" | "hand-or-graveyard" | "each-graveyard" | "command-zone-and-graveyard" | "command-zone";
       /** …with these types and colours in addition to their own, in place
        * as they enter (rule 614.12) — Grimoire of the Dead's "They're black
        * Zombies in addition to their other colors and types". */
@@ -18480,6 +18484,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.from === "each-graveyard" ? { underOwners: true } : {}),
           ...(spec.from === "hand-or-graveyard" ? { handToo: true } : {}),
           ...(spec.from === "command-zone-and-graveyard" ? { commandToo: true } : {}),
+          ...(spec.from === "command-zone" ? { commandOnly: true } : {}),
           ...(spec.enterAs !== undefined ? { enterAs: spec.enterAs } : {}),
           ...(spec.attachedTo !== undefined ? { attachTo: attachHost(spec.attachedTo, ctx) } : {}),
           ...(spec.upTo === true ? { upTo: true } : {}),

@@ -55145,6 +55145,9 @@ controlledBy,
       readonly handToo?: boolean;
       /** The commanders they own in the command zone too. */
       readonly commandToo?: boolean;
+      /** Every player's commanders in the command zone, and nothing else
+       * (Tevesh Szat). */
+      readonly commandOnly?: boolean;
       readonly enterAs?: EnterTypes;
       readonly attachTo?: EnterAttachHost;
       readonly upTo?: boolean;
@@ -55154,7 +55157,9 @@ controlledBy,
     } = {},
   ): boolean {
     const graveyards =
-      opts.allGraveyards === true
+      opts.commandOnly === true
+        ? this.state.zones.shared.command.filter((id) => this.state.objects[id]?.isCommander === true)
+        : opts.allGraveyards === true
         ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p].graveyard)
         : opts.handToo === true
           ? [...this.state.zones.perPlayer[player].graveyard, ...this.state.zones.perPlayer[player].hand]

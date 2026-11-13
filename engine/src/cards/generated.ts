@@ -27497,6 +27497,7 @@ import _poolTetzinGnomeChampion from "./pool/tetzin-gnome-champion.js";
 import _poolTevalArbiterOfVirtue from "./pool/teval-arbiter-of-virtue.js";
 import _poolTevalTheBalancedScale from "./pool/teval-the-balanced-scale.js";
 import _poolTevalsJudgment from "./pool/tevals-judgment.js";
+import _poolTeveshSzatDoomOfFools from "./pool/tevesh-szat-doom-of-fools.js";
 import _poolTextbookTabulator from "./pool/textbook-tabulator.js";
 import _poolTeyoDiamondbladeMage from "./pool/teyo-diamondblade-mage.js";
 import _poolTeyoGeometricTactician from "./pool/teyo-geometric-tactician.js";
@@ -60179,6 +60180,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTevalArbiterOfVirtue,
   _poolTevalTheBalancedScale,
   _poolTevalsJudgment,
+  _poolTeveshSzatDoomOfFools,
   _poolTextbookTabulator,
   _poolTeyoDiamondbladeMage,
   _poolTeyoGeometricTactician,
@@ -92874,6 +92876,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/teval-arbiter-of-virtue": _poolTevalArbiterOfVirtue,
   "pool/teval-the-balanced-scale": _poolTevalTheBalancedScale,
   "pool/tevals-judgment": _poolTevalsJudgment,
+  "pool/tevesh-szat-doom-of-fools": _poolTeveshSzatDoomOfFools,
   "pool/textbook-tabulator": _poolTextbookTabulator,
   "pool/teyo-diamondblade-mage": _poolTeyoDiamondbladeMage,
   "pool/teyo-geometric-tactician": _poolTeyoGeometricTactician,

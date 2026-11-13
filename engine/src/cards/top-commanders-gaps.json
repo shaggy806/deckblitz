@@ -2389,7 +2389,8 @@
   "static:stun-counters-cant-be-removed",
   "static:token-protection-from-own-triggers",
   "effect:mana-cant-pay-generic",
-  "trigger:trigger-entering-creature-ability-triggers"
+  "trigger:trigger-entering-creature-ability-triggers",
+  "effect:put-commanders-onto-battlefield"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
