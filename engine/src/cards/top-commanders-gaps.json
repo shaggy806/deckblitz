@@ -2447,7 +2447,8 @@
   "effect:per-player-targets-shuffle-reveal-cast",
   "zone:cast-from-exile-with-counter-kind",
   "cost:exile-many-cost-linked-return",
-  "static:mana-abilities-cost-life"
+  "static:mana-abilities-cost-life",
+  "trigger:mills-per-card"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -18909,3 +18909,14 @@ describe("a mass grant of a quoted triggered ability", () => {
     });
   });
 });
+
+describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
+  it("reads a mill once per card (Glowing One, Infesting Radroach)", () => {
+    expect(parseTrigger("Whenever a player mills a nonland card")).toEqual([
+      { on: "mills", who: "any", filter: { notTypes: ["land"] }, perCard: true },
+    ]);
+    expect(parseTrigger("Whenever an opponent mills a nonland card")).toEqual([
+      { on: "mills", who: "opponent", filter: { notTypes: ["land"] }, perCard: true },
+    ]);
+  });
+});

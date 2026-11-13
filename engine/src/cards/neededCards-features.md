@@ -494,6 +494,15 @@ and the once-per-recipient (`perEvent`) follow-up. Sokrates, Athenian Teacher
 controller" is its "you", and losing all abilities takes it, 613.7), with
 `thenCountsUnprevented` for its ruling (615.12).
 `test/prevention-names-damaged-player.test.ts`.
+### New trigger events — built 2026-11-13
+
+The triggers-journal lane's share of B322: small additions to the trigger
+vocabulary, `test/trigger-new-events.test.ts`.
+
+- `trigger:mills-per-card` — `mills`' `perCard`: once per matching card
+  milled (rule 603.2c), each its trigger object. An "each player mills" is
+  announced once every player has milled (`withMillBatch`), so a card milled
+  alongside an opponent's sees theirs. Glowing One, Infesting Radroach.
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 

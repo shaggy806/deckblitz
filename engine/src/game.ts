@@ -2414,6 +2414,9 @@ export class Game {
    * (`withMillBatch`), per watcher ability. Not game state, like
    * `counterBatch`. */
   private millBatch: Map<string, { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }> | null = null;
+  /** Each player's mill in the simultaneous mill under way, announced
+   * together once all of them are done (`withMillBatch`). */
+  private millAnnouncements: { player: PlayerId; objects: ObjectId[] }[] | null = null;
 
   /** Batched `loses-life` triggers owed for the simultaneous life loss under
    * way (`withLifeLossBatch`), per watcher ability. Not game state, like
@@ -32387,6 +32390,15 @@ export class Game {
             entry.lostBy.set(event.player, (entry.lostBy.get(event.player) ?? 0) - event.delta);
             return;
           }
+          // "Whenever a player mills a nonland card": once per card, each its
+          // own trigger object (rule 603.2c; Glowing One's ruling).
+          if (ability.trigger.on === "mills" && ability.trigger.perCard === true && event.type === "cards-milled") {
+            for (const card of this.milledMatching(ability.trigger, event.objects, object)) {
+              const { triggerValue: _count, ...single } = base;
+              this.queueTrigger(ability, { ...single, triggerObject: card, triggerValue: 1 }, multiplier);
+            }
+            return;
+          }
           // "Whenever one or more nonland cards are milled": once for a
           // simultaneous mill, whoever milled, "that many" the total (rule
           // 603.2c; The Wise Mothman's ruling).
@@ -55820,7 +55832,8 @@ controlledBy,
       }
     });
     if (milled.length > 0) {
-      this.emit({ type: "cards-milled", player, objects: milled });
+      if (this.millAnnouncements !== null) this.millAnnouncements.push({ player, objects: milled });
+      else this.emit({ type: "cards-milled", player, objects: milled });
     }
   }
 
@@ -58220,10 +58233,18 @@ controlledBy,
     if (this.millBatch !== null) return fn();
     const batch: NonNullable<Game["millBatch"]> = new Map();
     this.millBatch = batch;
+    const announced: { player: PlayerId; objects: ObjectId[] }[] = [];
+    this.millAnnouncements = announced;
     let result: T;
     try {
       result = fn();
+      // Each player's mill is announced once every one of them has milled:
+      // a card milled at the same time as an opponent's is already in its
+      // graveyard to see theirs (Infesting Radroach's ruling).
+      this.millAnnouncements = null;
+      for (const { player, objects } of announced) this.emit({ type: "cards-milled", player, objects });
     } finally {
+      this.millAnnouncements = null;
       this.millBatch = null;
     }
     for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);

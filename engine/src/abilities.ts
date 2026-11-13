@@ -2078,10 +2078,16 @@ export type TriggerKind =
        * once for a mill several players do at once, for the total (rule
        * 603.2c, `withMillBatch`). A milled card a
        * replacement sent elsewhere (Rest in Peace) was still milled and is
-       * read where it went (701.17c). A surveil or a discard isn't a mill. */
+       * read where it went (701.17c). A surveil or a discard isn't a mill.
+       *
+       * `perCard` is "whenever a player mills **a** nonland card" (Glowing
+       * One): once per matching card milled, each its own trigger object
+       * (rule 603.2c — the card's ruling: four nonland cards milled at once
+       * trigger it four times), whoever milled with `who: "any"`. */
       readonly on: "mills";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
+      readonly perCard?: true;
     }
   | {
       /** A player faced a dilemma — Elim Garak, Simple Tailor's "whenever

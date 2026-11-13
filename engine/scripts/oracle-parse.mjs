@@ -2655,6 +2655,14 @@ export function parseTrigger(clause) {
     const m = /^Whenever one or more (nonland )?cards are milled$/.exec(c);
     if (m) return [{ on: "mills", who: "any", ...(m[1] ? { filter: { notTypes: ["land"] } } : {}) }];
   }
+  // Glowing One, Infesting Radroach: once per card milled (rule 603.2c).
+  {
+    const m = /^Whenever (a player|an opponent|you) mills? an? (nonland )?card$/.exec(c);
+    if (m) {
+      const who = m[1] === "a player" ? "any" : m[1] === "an opponent" ? "opponent" : "you";
+      return [{ on: "mills", who, ...(m[2] ? { filter: { notTypes: ["land"] } } : {}), perCard: true }];
+    }
+  }
   if (/^Whenever you face a dilemma$/.test(c)) return [{ on: "faces-dilemma", who: "you" }];
   if (/^Whenever an opponent searches their library$/.test(c)) return [{ on: "event", event: "searches-library", who: "opponent" }];
 
