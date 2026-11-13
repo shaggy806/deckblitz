@@ -596,6 +596,7 @@ import _poolNimLasher from "../pool/nim-lasher.js";
 import _poolNissasDefeat from "../pool/nissas-defeat.js";
 import _poolNiveousWisps from "../pool/niveous-wisps.js";
 import _poolNoblesPurse from "../pool/nobles-purse.js";
+import _poolObNixilisCaptiveKingpin from "../pool/ob-nixilis-captive-kingpin.js";
 import _poolObeliskOfAlara from "../pool/obelisk-of-alara.js";
 import _poolObeliskOfBant from "../pool/obelisk-of-bant.js";
 import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
@@ -1615,6 +1616,7 @@ const shard: CardShard = {
     _poolNissasDefeat,
     _poolNiveousWisps,
     _poolNoblesPurse,
+    _poolObNixilisCaptiveKingpin,
     _poolObeliskOfAlara,
     _poolObeliskOfBant,
     _poolObsessiveStitcher,

@@ -2780,6 +2780,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         "Whenever you expend 4, this creature gains indestructible until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)",
       ).triggered[0].trigger,
     ).toEqual({ on: "expend", who: "you", amount: 4 });
+    // "One or more opponents (each) lose (exactly N) life": batched (603.2c).
+    expect(
+      face(
+        "Whenever one or more opponents each lose exactly 1 life, put a +1/+1 counter on Ob Nixilis. Exile the top card of your library. Until your next end step, you may play that card.",
+      ).triggered[0].trigger,
+    ).toEqual({ on: "loses-life", who: "opponent", batched: true, exactly: 1 });
+    expect(face("Whenever one or more opponents lose life, draw a card.").triggered[0].trigger).toEqual({
+      on: "loses-life",
+      who: "opponent",
+      batched: true,
+    });
     expect(face("Whenever you forage, put a +1/+1 counter on this creature.").triggered[0].trigger).toEqual({
       on: "event", event: "forages",
       who: "you",

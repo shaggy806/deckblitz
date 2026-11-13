@@ -1236,7 +1236,9 @@ export type TriggerKind =
        * permanent: Sahir, Visitor in Darkness's "whenever a spell or ability
        * **you control** causes you to lose exactly 1 life" is `"you"`. */
       readonly byEffectOf?: "you";
-      /** Only exactly this much lost at once ("exactly 1 life"). */
+      /** Only exactly this much lost at once ("exactly 1 life"). With
+       * `batched`, each player's whole loss in the batch (Ob Nixilis, Captive
+       * Kingpin: "one or more opponents each lose exactly 1 life"). */
       readonly exactly?: number;
       /** "…loses life … **during each of their turns**" (Valgavoth,
        * Harrower of Souls, with `firstTimeEachTurn`): only while that player

@@ -394,6 +394,18 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### "One or more opponents each lose exactly 1 life" — built 2026-11-12
+
+The commander gap's `trigger:opponents-lose-exactly-n-life`. `loses-life`'s
+`batched` with `exactly`: the batch (`withLifeLossBatch` — one combat damage
+step, one "each opponent loses N", one `simultaneously`) sums each watched
+player's loss, and the trigger is queued once if some one of them lost exactly
+N in all (rule 603.2c). Three 1/1s connecting with one player are 3 life and
+no trigger (the card's ruling); 1 to one opponent and 2 to another at once is
+one trigger. A lone loss outside a batch is its own event, as before. Ob
+Nixilis, Captive Kingpin (commander 235) is the only card that needs it; the
+scaffolder reads "one or more opponents (each) lose (exactly N) life".
+
 ### Mana in any combination of a card's colours — built 2026-11-12
 
 The commander gap's `effect:add-mana-combination-of-card-colors`. `add-mana`'s

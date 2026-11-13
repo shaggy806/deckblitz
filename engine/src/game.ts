@@ -2407,8 +2407,16 @@ export class Game {
   /** Batched `loses-life` triggers owed for the simultaneous life loss under
    * way (`withLifeLossBatch`), per watcher ability. Not game state, like
    * `counterBatch`. */
-  private lifeLossBatch: Map<string, { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }> | null =
-    null;
+  private lifeLossBatch: Map<
+    string,
+    {
+      ability: TriggeredAbility;
+      trigger: PendingTrigger;
+      multiplier: number;
+      /** Each watched player's total loss in the batch, for `exactly`. */
+      lostBy: Map<PlayerId, number>;
+    }
+  > | null = null;
 
   /** The permanents that have left the battlefield so far in the one
    * simultaneous event being carried out — a wrath, a sweep of state-based
@@ -31944,11 +31952,17 @@ export class Game {
             const key = `${id}#${index}`;
             const owed = this.lifeLossBatch.get(key);
             const trigger = withoutTriggerPlayer(base);
-            if (owed === undefined) {
-              this.lifeLossBatch.set(key, { ability, trigger, multiplier });
+            let entry = owed;
+            if (entry === undefined) {
+              entry = { ability, trigger, multiplier, lostBy: new Map<PlayerId, number>() };
+              this.lifeLossBatch.set(key, entry);
             } else {
-              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + (trigger.triggerValue ?? 0) };
+              entry.trigger = { ...entry.trigger, triggerValue: (entry.trigger.triggerValue ?? 0) + (trigger.triggerValue ?? 0) };
             }
+            // "Each lose exactly 1 life" (Ob Nixilis, Captive Kingpin): each
+            // player's loss summed over the batch — three 1/1s' combat damage
+            // is 3 life, not 1 three times (its ruling).
+            entry.lostBy.set(event.player, (entry.lostBy.get(event.player) ?? 0) - event.delta);
             return;
           }
           // "Whenever one or more nonland cards are milled": once for a
@@ -33145,7 +33159,11 @@ export class Game {
           event.delta < 0 &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           (spec.duringTheirTurn !== true || event.player === this.activePlayer) &&
-          (spec.exactly === undefined || -event.delta === spec.exactly) &&
+          // A batched "each lose exactly N" is asked of each player's whole
+          // loss in the batch, when it settles (`withLifeLossBatch`).
+          (spec.exactly === undefined ||
+            (spec.batched === true && this.lifeLossBatch !== null) ||
+            -event.delta === spec.exactly) &&
           (spec.byEffectOf === undefined || event.byEffectOf === self.controller)
         );
       case "counters-put":
@@ -57641,7 +57659,13 @@ controlledBy,
     } finally {
       this.lifeLossBatch = null;
     }
-    for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);
+    for (const { ability, trigger, multiplier, lostBy } of batch.values()) {
+      // "One or more opponents each lose exactly N": some one of them lost
+      // exactly N in all.
+      const exactly = ability.trigger.on === "loses-life" ? ability.trigger.exactly : undefined;
+      if (exactly !== undefined && ![...lostBy.values()].some((lost) => lost === exactly)) continue;
+      this.queueTrigger(ability, trigger, multiplier);
+    }
     return result;
   }
 

@@ -2599,6 +2599,12 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever (you lose|an opponent loses) life$/.exec(c))) {
     return [{ on: "loses-life", who: m[1] === "you lose" ? "you" : "opponent" }];
   }
+  // "Whenever one or more opponents lose life" (Emet-Selch), and "… each lose
+  // exactly N life" (Ob Nixilis, Captive Kingpin): once per simultaneous
+  // loss (rule 603.2c), each opponent's loss in it summed.
+  if ((m = /^Whenever one or more opponents (?:each )?lose (?:exactly (\d+) )?life$/.exec(c))) {
+    return [{ on: "loses-life", who: "opponent", batched: true, ...(m[1] !== undefined ? { exactly: Number(m[1]) } : {}) }];
+  }
   // The Theros Ordeals: however it's sacrificed (their ruling).
   if (/^When you sacrifice (?:~|this (?:Aura|enchantment|artifact|creature|permanent))$/.test(c)) {
     return [{ on: "sacrifice", who: "you", selfOnly: true }];

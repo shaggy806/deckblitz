@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4951 already implemented / 49 missing (marks refreshed 2026-11-13)
+4952 already implemented / 48 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4465,7 +4465,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4472  Fireball                                 {X}{R}           Sorcery
 [x]  4473  Abzan Charm                              {W}{B}{G}        Instant
 [x]  4474  Nanogene Conversion                      {3}{U}           Sorcery
-[ ]  4475  Ob Nixilis, Captive Kingpin              {2}{B}{R}        Legendary Creature — Demon
+[x]  4475  Ob Nixilis, Captive Kingpin              {2}{B}{R}        Legendary Creature — Demon
 [x]  4476  Alpine Meadow                            {0}              Snow Land — Mountain Plains
 [x]  4477  Indomitable Ancients                     {2}{W}{W}        Creature — Treefolk Warrior
 [x]  4478  Purphoros, Bronze-Blooded                {4}{R}           Legendary Enchantment Creature — God
