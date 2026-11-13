@@ -7666,6 +7666,8 @@ export class Game {
       object: commander,
       toCommandZone,
       from: intendedZone,
+      // A move with no `from` was leaving the battlefield.
+      leaving: deferred.from ?? "battlefield",
     });
     this.prepareForPriority(this.activePlayer);
   }

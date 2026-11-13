@@ -361,6 +361,16 @@ the reflexive ability's own targeting, read as targets are chosen and rechecked
 (608.2b). Proving: Auron, Venerated Guardian. Test:
 `reflexive-target-live-compare.test.ts`.
 
+### "Returned this way" counts a commander sent to the command zone — built 2026-11-13
+
+`condition:this-way-counts-commander-redirect`. A commander whose return to
+hand waits for its owner's 903.9b answer is now `"returned-to-hand"` this way
+whichever way they answer: `commander-zone-decision` carries `leaving` (the
+zone the move was leaving), and `this-way.ts` reads one leaving the battlefield
+by its controller as it left. Before, it counted neither way (no
+`permanent-returned-to-hand` is emitted for a deferred move). Proving: Flood
+of Tears. Test: `this-way-commander-redirect.test.ts`.
+
 ### A static combat record's scope against your hand size — built 2026-11-13
 
 `static:attack-restriction-power-vs-hand-size`. `recordsOn` now reads a

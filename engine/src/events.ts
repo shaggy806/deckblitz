@@ -1844,6 +1844,10 @@ export type GameEvent =
       readonly object: ObjectId;
       readonly toCommandZone: boolean;
       readonly from: "graveyard" | "exile" | "hand" | "library";
+      /** For a 903.9b move to a hand or library, the zone it was moving out
+       * of: "returned this way" counts a commander its owner sent to the
+       * command zone instead (Flood of Tears' ruling). */
+      readonly leaving?: "battlefield" | "stack" | "graveyard" | "exile" | "hand" | "command";
     });
 
 export type GameEventType = GameEvent["type"];

@@ -266,6 +266,21 @@ export function thisWayEntries(
           const fromBattlefield = event.from === undefined;
           add(event.object, fromBattlefield ? leftBy(event.object) : event.owner, fromBattlefield);
         }
+        // A commander headed for its owner's hand waits for the 903.9b choice,
+        // and its move is carried out once answered — to the hand or to the
+        // command zone instead. Either way it was returned this way: "if a
+        // permanent would be returned to your hand but ends up in another
+        // zone", it counts (Flood of Tears' ruling).
+        if (
+          event.type === "commander-zone-decision" &&
+          event.from === "hand" &&
+          event.leaving !== undefined &&
+          event.leaving !== "command" &&
+          event.leaving !== "hand"
+        ) {
+          const fromBattlefield = event.leaving === "battlefield";
+          add(event.object, fromBattlefield ? leftBy(event.object) : ownerOf(event.object), fromBattlefield);
+        }
         break;
       case "chosen":
         // Whoever chose them, wherever they went (a replacement may have

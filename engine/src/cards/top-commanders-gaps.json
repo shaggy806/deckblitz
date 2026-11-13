@@ -2472,7 +2472,8 @@
   "replacement:enter-exile-if-not-cast",
   "effect:flicker-chosen-group",
   "effect:flicker-source-and-chosen",
-  "effect:choose-permanents-this-way"
+  "effect:choose-permanents-this-way",
+  "condition:this-way-counts-commander-redirect"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

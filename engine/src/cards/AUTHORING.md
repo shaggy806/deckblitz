@@ -1238,7 +1238,11 @@ all say no to),
 `"exiled"` (permanents and cards from any zone), `"returned-to-hand"`
 (Temur Sabertooth's "you may return another creature you control to its
 owner's hand. If you do, …": a `choose-permanents` with `min: 0` whose `then`
-is `return-to-hand`, then a `conditional` on it — `may-return-if-you-do.test.ts`),
+is `return-to-hand`, then a `conditional` on it — `may-return-if-you-do.test.ts`;
+a commander its owner sent to the command zone instead still counts, by who
+controlled it as it left — Flood of Tears' "if you return four or more
+nontoken permanents you control this way" is `who: "you"`, `filter: { token:
+false }`, `atLeast: 4`),
 `"put-into-hand"` (cards put into a hand from any other zone, never by a
 draw, and still there — a search's find, a look's pick, a milled card taken
 back, a return: Adventure Awaits' "if you didn't put a card into your hand
