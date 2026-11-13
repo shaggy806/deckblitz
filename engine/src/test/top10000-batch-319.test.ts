@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pickFromZone, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toStep, types, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, loyalty, named, nextTurn, pickFromZone, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toStep, types, zone } from "./harness.js";
 import { computeCharacteristics } from "../characteristics.js";
 import { manaValueOfObject } from "../filter.js";
 import { printedCardName } from "../state.js";
@@ -424,5 +424,37 @@ describe("Conspiracy Theorist: exile one of the nonland cards you discarded, and
     settle(game);
     expect(seen.offered).toEqual([bolt]);
     expect(zone(game, bolt)).toBe("graveyard");
+  });
+});
+
+describe("Teferi, Who Slows the Sunset: untap yours, tap theirs; an emblem that untaps and draws in opponents' steps", () => {
+  it("+1 untaps the chosen permanents you control and taps the ones you don't, and you gain 2 life", () => {
+    const { game } = table();
+    const teferi = spawn(game, "Teferi, Who Slows the Sunset");
+    const mine = spawn(game, "Grizzly Bears", A, { tapped: true });
+    const theirLand = spawn(game, "Forest", B);
+    loyalty(game, teferi, 1, { targets: [null, ref(mine), ref(theirLand)] });
+    expect(game.state.objects[mine].tapped).toBe(false);
+    expect(game.state.objects[theirLand].tapped).toBe(true);
+    expect(life(game, A)).toBe(22);
+  });
+
+  it("the emblem untaps your permanents in an opponent's untap step and draws you a card in their draw step", () => {
+    const { game } = table();
+    const teferi = spawn(game, "Teferi, Who Slows the Sunset");
+    loyalty(game, teferi, -7, { atLeast: 7 });
+    const bear = spawn(game, "Grizzly Bears", A, { tapped: true });
+    const before = hand(game, A).length;
+    const theirs = hand(game, B).length;
+    // Bob's turn: his upkeep comes before his draw step.
+    toStep(game, "upkeep", B);
+    expect(game.state.objects[bear].tapped).toBe(false);
+    expect(hand(game, A).length).toBe(before);
+    toStep(game, "precombat-main", B);
+    expect(hand(game, B).length).toBe(theirs + 1);
+    expect(hand(game, A).length).toBe(before + 1);
+    // Not in your own draw step: one card, your own.
+    nextTurn(game);
+    expect(hand(game, A).length).toBe(before + 2);
   });
 });

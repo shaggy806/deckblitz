@@ -376,6 +376,9 @@ describe("what is read off an emblem", () => {
     "costModification",
     "untapLimit",
     "loyaltyAtInstantSpeed",
+    // The untap and draw steps (Teferi, Who Slows the Sunset).
+    "untapsDuringOthersUntap",
+    "drawsInOpponentsDrawStep",
     "replacement",
     // The legend rule (`exemptFromLegendRule`) - Hall of Echoes' timed static.
     "legendRuleOff",

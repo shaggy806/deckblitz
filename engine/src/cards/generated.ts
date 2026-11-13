@@ -27259,6 +27259,7 @@ import _poolTeferiTemporalArchmage from "./pool/teferi-temporal-archmage.js";
 import _poolTeferiTemporalPilgrim from "./pool/teferi-temporal-pilgrim.js";
 import _poolTeferiTimeRaveler from "./pool/teferi-time-raveler.js";
 import _poolTeferiTimebender from "./pool/teferi-timebender.js";
+import _poolTeferiWhoSlowsTheSunset from "./pool/teferi-who-slows-the-sunset.js";
 import _poolTeferisAgelessInsight from "./pool/teferis-ageless-insight.js";
 import _poolTeferisCare from "./pool/teferis-care.js";
 import _poolTeferisCurse from "./pool/teferis-curse.js";
@@ -59967,6 +59968,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTeferiTemporalPilgrim,
   _poolTeferiTimeRaveler,
   _poolTeferiTimebender,
+  _poolTeferiWhoSlowsTheSunset,
   _poolTeferisAgelessInsight,
   _poolTeferisCare,
   _poolTeferisCurse,
@@ -92688,6 +92690,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/teferi-temporal-pilgrim": _poolTeferiTemporalPilgrim,
   "pool/teferi-time-raveler": _poolTeferiTimeRaveler,
   "pool/teferi-timebender": _poolTeferiTimebender,
+  "pool/teferi-who-slows-the-sunset": _poolTeferiWhoSlowsTheSunset,
   "pool/teferis-ageless-insight": _poolTeferisAgelessInsight,
   "pool/teferis-care": _poolTeferisCare,
   "pool/teferis-curse": _poolTeferisCurse,

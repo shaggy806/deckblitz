@@ -3495,9 +3495,19 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * `"self"` is Bender's Waterskin ("untap this artifact"), a `CardFilter` is
    * every permanent you control matching it — Seedborn Muse's `{}` ("all
    * permanents you control"), Unwinding Clock's `{ type: "artifact" }`. The
-   * filter's "you" is this permanent's controller. `affects` is ignored.
+   * filter's "you" is this permanent's controller. `affects` is ignored. An
+   * emblem's filter form is read too (Teferi, Who Slows the Sunset's "untap
+   * all permanents you control during each opponent's untap step").
    */
   readonly untapsDuringOthersUntap?: "self" | CardFilter;
+  /**
+   * "You draw a card during each opponent's draw step" (Teferi, Who Slows the
+   * Sunset's emblem): no trigger and no stack — as an opponent's draw step
+   * begins, after that player's own draw (rule 504.1), this permanent's or
+   * emblem's controller draws a card, before any player has priority (the
+   * card's ruling). One draw for each such ability. `affects` is ignored.
+   */
+  readonly drawsInOpponentsDrawStep?: true;
   /** Combat restrictions imposed on the affected objects (Pacifism, Juggernaut). */
   readonly restrictions?: readonly CombatRule[];
   /**

@@ -10908,6 +10908,17 @@ export class Game {
    * on any permanent its controller controls whose filter it matches. */
   private untapsDuringOthersUntap(object: GameObject): boolean {
     if (this.hasOwnStatic(object, (a) => a.untapsDuringOthersUntap === "self")) return true;
+    // An emblem of its controller's (Teferi, Who Slows the Sunset).
+    const byEmblem = emblemStatics(this.state, object.controller).some(({ source, ability }) => {
+      const filter = ability.untapsDuringOthersUntap;
+      return (
+        filter !== undefined &&
+        filter !== "self" &&
+        this.staticActive(source, ability) &&
+        matchesFilter(this.state, this.registry, object.id, filter, { you: source.controller })
+      );
+    });
+    if (byEmblem) return true;
     return this.state.zones.shared.battlefield.some((id) => {
       const granter = this.state.objects[id];
       if (granter === undefined || granter.controller !== object.controller) return false;
@@ -10977,8 +10988,27 @@ export class Game {
     if (this.activeHasLeft()) return;
     const firstTurnForStarter =
       this.state.turn.number === 1 && active === this.state.startingPlayer;
-    if (this.state.rules.skipFirstDraw && firstTurnForStarter) return;
-    this.drawCard(active);
+    if (!(this.state.rules.skipFirstDraw && firstTurnForStarter)) this.drawCard(active);
+    // "You draw a card during each opponent's draw step" (Teferi, Who Slows
+    // the Sunset's emblem): after the active player's draw and before anyone
+    // has priority (the ruling), each such player in turn order, once for
+    // each ability saying so — a permanent's or an emblem's.
+    const from = this.state.turnOrder.indexOf(active);
+    const others = [...this.state.turnOrder.slice(from + 1), ...this.state.turnOrder.slice(0, from)];
+    for (const player of others) {
+      if (this.state.players[player]?.hasLost !== false) continue;
+      let draws = emblemStatics(this.state, player).filter(
+        ({ source, ability }) => ability.drawsInOpponentsDrawStep === true && this.staticActive(source, ability),
+      ).length;
+      for (const id of this.state.zones.shared.battlefield) {
+        const source = this.state.objects[id];
+        if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+        for (const ability of this.registry.get(rulesTextName(source)).static) {
+          if (ability.drawsInOpponentsDrawStep === true && this.staticActive(source, ability)) draws += 1;
+        }
+      }
+      for (let i = 0; i < draws; i += 1) this.drawCard(player);
+    }
   }
 
   /**

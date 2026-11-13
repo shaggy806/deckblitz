@@ -5226,7 +5226,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
 - `untapsDuringOthersUntap: "self" | CardFilter` — untap during each **other**
   player's untap step too: `"self"` is Bender's Waterskin, a filter is every
   permanent you control matching it (Seedborn Muse `{}`, Unwinding Clock
-  `{ type: "artifact" }`).
+  `{ type: "artifact" }`). The filter form is read off an emblem too.
+- `drawsInOpponentsDrawStep: true` — "you draw a card during each opponent's
+  draw step" (Teferi, Who Slows the Sunset's emblem, beside its
+  `untapsDuringOthersUntap: {}`): no trigger, no stack; in an opponent's draw
+  step, after that player's own draw and before anyone has priority, the
+  permanent's or emblem's controller draws, once for each such ability.
 - `mayPlay: { from: "graveyard", … }` — see **`mayPlay` / `grant-play` / `impulse-exile`** in §6. Each permission that applies is offered as its own `via: "graveyard-permission"` variant carrying a `graveyardGrant: { source, asType? }` the driver echoes back, so which one is spent is the player's choice (601.3). A land face is only offered under a permission that spends something (Muldrotha's `perType` with `"land"`); one that doesn't has nothing to name (Ramunap Excavator).
 
 - `grantsToGraveyard: { filter, flashback?: { cost }, escape?: { cost,
