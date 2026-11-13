@@ -184,6 +184,34 @@ describe("a mana ability resolves (Tyvar the Bellicose)", () => {
   });
 });
 
+describe("untaps during your untap step (The Ninth Doctor)", () => {
+  it("gives you an additional upkeep after the upkeep its trigger resolves in", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "The Ninth Doctor", A, { tapped: true });
+    spawn(game, "Phyrexian Arena");
+    toStep(game, "draw", A);
+    // Two upkeeps, two Arena triggers.
+    expect(life(game, A)).toBe(18);
+  });
+
+  it("not when it was already untapped", () => {
+    const { game } = table({ players: 2 });
+    spawn(game, "The Ninth Doctor");
+    spawn(game, "Phyrexian Arena");
+    toStep(game, "draw", A);
+    expect(life(game, A)).toBe(19);
+  });
+
+  it("not untapping in another player's untap step (Seedborn Muse)", () => {
+    const { game } = table({ players: 2 });
+    const doctor = spawn(game, "The Ninth Doctor", A, { tapped: true });
+    spawn(game, "Seedborn Muse");
+    toStep(game, "draw", B);
+    expect(game.state.objects[doctor].tapped).toBe(false);
+    expect(game.state.turn.upkeepSteps ?? 1).toBe(1);
+  });
+});
+
 describe("pays life (Font of Agonies)", () => {
   it("counts an ability's life cost", () => {
     const { game } = table({ players: 2 });

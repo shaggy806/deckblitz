@@ -2652,6 +2652,10 @@ export function parseTrigger(clause) {
   if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
   // Rule 119.4: any payment of life (Font of Agonies).
   if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
+  // Rule 502.3: your untap step untapping it (The Ninth Doctor).
+  if (/^Whenever (?:~|this (?:creature|artifact|land|permanent)) becomes untapped during your untap step$/.test(c)) {
+    return [{ on: "event", event: "untaps-during-untap-step", who: "self", by: "you" }];
+  }
   // Rule 605.3b (Tyvar the Bellicose's grant).
   if (/^Whenever a mana ability of (?:~|this (?:creature|artifact|land|permanent)) resolves$/.test(c)) {
     return [{ on: "event", event: "mana-ability-resolves", who: "self" }];
@@ -4722,6 +4726,8 @@ export function parseSentence(sentence, ctx) {
       ...except,
     };
   }
+  // Rule 500.10 (The Ninth Doctor): only from your own upkeep.
+  if (re("you get an additional upkeep step after this step").test(s)) return { kind: "additional-upkeep-step", who: "you" };
   // Investigate (rule 701.16a): announced as one (`investigate`).
   if (re("investigate(?: an additional time)?").test(s)) return { kind: "create-token", token: "Clue Token", investigate: true, count: 1 };
   // Learn (rule 701.48a): the rummage, or else a Lesson from the sideboard

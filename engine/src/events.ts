@@ -452,6 +452,11 @@ export type GameEvent =
        * turned upright only now that it's there — no untapping for a
        * "becomes untapped" trigger to see. */
       readonly asItEntered?: true;
+      /** Untapped by this player's untap step (rule 502.3) — its own
+       * permanents, or another player's that untap then too (Seedborn Muse).
+       * "Whenever ~ becomes untapped during your untap step" (The Ninth
+       * Doctor). */
+      readonly untapStepOf?: PlayerId;
     })
   | (Base & {
       /** A permanent was exerted (rule 701.43a — the `exert` effect): it

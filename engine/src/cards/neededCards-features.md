@@ -516,6 +516,11 @@ vocabulary, `test/trigger-new-events.test.ts`.
   (both the by-hand activation and a payment's `useManaSource`) with the
   mana the ability made, and the `mana-ability-resolves` row. Tyvar the
   Bellicose.
+- `trigger:untap-trigger` — `permanent-untapped`'s `untapStepOf` (whose untap
+  step untapped it, rule 502.3) and the `untaps-during-untap-step` row, `by`
+  that player. The Ninth Doctor. Its "additional upkeep step after this step"
+  works from an upkeep only (`additional-upkeep-step`), where its trigger
+  resolves unless something skips the upkeep.
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 

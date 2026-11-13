@@ -10773,7 +10773,7 @@ export class Game {
     for (const id of untapping) {
       if (kept.includes(id)) continue;
       const count = this.state.objects[id]?.stackCount ?? 1;
-      if (this.untapUnlessStunned(id)) untapped += count;
+      if (this.untapUnlessStunned(id, active)) untapped += count;
     }
     if (untapped > 0) this.emit({ type: "untap-step-untapped", player: active, count: untapped });
     // Seedborn Muse, Unwinding Clock, Bender's Waterskin: other players'
@@ -10783,7 +10783,7 @@ export class Game {
       if (object === undefined || object.controller === active || !object.tapped) continue;
       if (this.state.players[object.controller]?.hasLost === true) continue;
       if (object.exertedBy !== active && !heldThroughUntapStepOf(object, active) && this.untapsDuringOthersUntap(object)) {
-        this.untapUnlessStunned(id);
+        this.untapUnlessStunned(id, active);
       }
     }
     // That was their next untap step: whatever they exerted has served its
@@ -10842,7 +10842,11 @@ export class Game {
    * token stack untaps, or loses a counter, as a whole. Returns whether it
    * untapped.
    */
-  private untapUnlessStunned(id: ObjectId): boolean {
+  private untapUnlessStunned(
+    id: ObjectId,
+    /** The player whose untap step untaps it (rule 502.3), if one does. */
+    untapStepOf?: PlayerId,
+  ): boolean {
     const object = this.state.objects[id];
     if (object === undefined || !object.tapped) return false;
     // "Can't become untapped" (Frozen in Ice): it never would, so no stun
@@ -10859,7 +10863,7 @@ export class Game {
       return false;
     }
     object.tapped = false;
-    this.emit({ type: "permanent-untapped", object: id });
+    this.emit({ type: "permanent-untapped", object: id, ...(untapStepOf !== undefined ? { untapStepOf } : {}) });
     this.endWhileTappedEffects(id);
     return true;
   }

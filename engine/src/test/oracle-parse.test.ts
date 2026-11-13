@@ -18925,6 +18925,16 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you pay life")).toEqual([{ on: "event", event: "pays-life", who: "you" }]);
   });
 
+  it("reads becoming untapped during your untap step (The Ninth Doctor)", () => {
+    expect(parseTrigger("Whenever ~ becomes untapped during your untap step")).toEqual([
+      { on: "event", event: "untaps-during-untap-step", who: "self", by: "you" },
+    ]);
+    expect(parseEffect("You get an additional upkeep step after this step.", ctx()).effect).toEqual({
+      kind: "additional-upkeep-step",
+      who: "you",
+    });
+  });
+
   it("reads a mana ability of this creature resolving (Tyvar the Bellicose)", () => {
     expect(parseTrigger("Whenever a mana ability of this creature resolves")).toEqual([
       { on: "event", event: "mana-ability-resolves", who: "self" },

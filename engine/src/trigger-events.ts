@@ -134,6 +134,15 @@ export const TRIGGER_EVENTS = {
   /** "Whenever a permanent becomes untapped" — not one entering untapped
    * (603.2e). */
   "becomes-untapped": row({ type: "permanent-untapped", when: (e) => e.asItEntered !== true, object: (e) => e.object }),
+  /** "Whenever ~ becomes untapped during your untap step" (The Ninth Doctor):
+   * a permanent an untap step untapped (rule 502.3), `by` the player whose
+   * step it was — `by: "you"` is "your untap step". */
+  "untaps-during-untap-step": row({
+    type: "permanent-untapped",
+    when: (e) => e.untapStepOf !== undefined,
+    object: (e) => e.object,
+    by: (e) => e.untapStepOf,
+  }),
   /** "Whenever you untap one or more permanents during your untap step" (The
    * Millennium Calendar): once a step in which the active player's untap
    * step untapped any permanent they control (rule 502.3); the value is how
