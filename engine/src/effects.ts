@@ -2073,6 +2073,12 @@ export type PlayerScope =
    * resolution held, or the one that fired a "whenever players finish
    * voting" trigger. Nobody, with no vote. */
   | "opponents-who-voted-with-you"
+  /** "Each player rolls a d20. If one or more **opponents had the highest
+   * result** …" (Chaos Dragon): each opponent of the effect's controller
+   * whose roll, among every roll this resolution has made, had the highest
+   * result (rule 706.2: after modifiers), ties included — nobody when the
+   * controller alone rolled highest, or nobody rolled. In turn order. */
+  | "opponents-who-rolled-highest"
   /** "**You and** each opponent who voted for a choice you voted for" (Model
    * of Unity): the effect's controller with those opponents, in turn order
    * from the active player. */

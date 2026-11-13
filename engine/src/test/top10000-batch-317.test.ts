@@ -7,7 +7,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { printedCardName } from "../state.js";
-import { A, B, activate, cast, destroy, lands, nextTurn, pickModes, pickTargets, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, activate, cast, destroy, lands, nextTurn, pickModes, pickTargets, ref, settle, spawn, table, toHand, toStep, zone } from "./harness.js";
 
 const named = (game: Game, id: ObjectId): string => printedCardName(game.state.objects[id]);
 const tokensOf = (game: Game, name: string): ObjectId[] =>
@@ -153,5 +153,43 @@ describe("Karmic Justice: an opponent's spell or ability destroys your noncreatu
     destroy(game, ring, A);
     expect(zone(game, ring)).toBe("graveyard");
     expect(zone(game, theirs)).toBe("battlefield");
+  });
+});
+
+describe("Chaos Dragon: each player rolls a d20, and it can't attack the opponents who rolled highest", () => {
+  it("leaves out exactly the opponents with the highest result, and their planeswalkers", () => {
+    const seen = { restricted: 0, free: 0 };
+    for (const seed of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]) {
+      const { game } = table({ players: 4, seed });
+      const dragon = spawn(game, "Chaos Dragon");
+      const opponents = game.state.turnOrder.filter((p) => p !== A);
+      const walkers = new Map(opponents.map((p) => [p, spawn(game, "Jace Beleren", p)] as const));
+      toStep(game, "declare-attackers", A);
+      const rolls = game.state.eventLog.flatMap((e) => (e.type === "dice-rolled" ? [e] : []));
+      // One d20 each, in turn order from the active player.
+      expect(rolls.map((r) => r.player)).toEqual(game.state.turnOrder);
+      expect(rolls.every((r) => r.sides === 20 && r.results.length === 1)).toBe(true);
+      const total = new Map(rolls.map((r) => [r.player, r.results[0] + (r.modifier ?? 0)] as const));
+      const highest = Math.max(...total.values());
+      const offer = game.legalActions(A).find((a) => a.kind === "declare-attackers");
+      const may = offer?.kind === "declare-attackers" ? (offer.defendersFor[dragon] ?? []) : [];
+      for (const p of opponents) {
+        const barred = total.get(p) === highest;
+        expect(may.includes(p)).toBe(!barred);
+        expect(may.includes(walkers.get(p)!)).toBe(!barred);
+        if (barred) seen.restricted += 1;
+        else seen.free += 1;
+      }
+    }
+    // The seeds show both outcomes.
+    expect(seen.restricted).toBeGreaterThan(0);
+    expect(seen.free).toBeGreaterThan(0);
+  });
+
+  it("the restriction ends with the combat", () => {
+    const { game } = table({ players: 4, seed: 3 });
+    const dragon = spawn(game, "Chaos Dragon");
+    toStep(game, "postcombat-main", A);
+    expect(game.state.objects[dragon].modifiers.some((m) => (m.restrictions?.length ?? 0) > 0)).toBe(false);
   });
 });

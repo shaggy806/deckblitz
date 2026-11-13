@@ -136,6 +136,16 @@ export function lastRollEntry(state: GameState, player?: PlayerId): JournalEntry
   return undefined;
 }
 
+/** Every roll made since event `since`, oldest first: what one instruction's
+ * players each rolled ("each player rolls a d20" — Chaos Dragon). */
+export function rollsSince(state: GameState, since: number): RollRecord[] {
+  const out: RollRecord[] = [];
+  for (const entry of entriesOf(state)) {
+    if (entry.kind === "rolled" && entry.roll !== undefined && (entry.seq ?? -1) >= since) out.push(entry.roll);
+  }
+  return out;
+}
+
 /** A word `thisWay` and the `this-way` condition take for a coin's landing. */
 export type FlipThisWay = "flips-won" | "flips-lost" | "coins-heads" | "coins-tails";
 

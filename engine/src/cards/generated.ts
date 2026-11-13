@@ -4389,6 +4389,7 @@ import _poolChantOfVituGhazi from "./pool/chant-of-vitu-ghazi.js";
 import _poolChaosChanneler from "./pool/chaos-channeler.js";
 import _poolChaosCharm from "./pool/chaos-charm.js";
 import _poolChaosDefiler from "./pool/chaos-defiler.js";
+import _poolChaosDragon from "./pool/chaos-dragon.js";
 import _poolChaosHarlequin from "./pool/chaos-harlequin.js";
 import _poolChaosImps from "./pool/chaos-imps.js";
 import _poolChaosMaw from "./pool/chaos-maw.js";
@@ -37079,6 +37080,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChaosChanneler,
   _poolChaosCharm,
   _poolChaosDefiler,
+  _poolChaosDragon,
   _poolChaosHarlequin,
   _poolChaosImps,
   _poolChaosMaw,
@@ -69782,6 +69784,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chaos-channeler": _poolChaosChanneler,
   "pool/chaos-charm": _poolChaosCharm,
   "pool/chaos-defiler": _poolChaosDefiler,
+  "pool/chaos-dragon": _poolChaosDragon,
   "pool/chaos-harlequin": _poolChaosHarlequin,
   "pool/chaos-imps": _poolChaosImps,
   "pool/chaos-maw": _poolChaosMaw,

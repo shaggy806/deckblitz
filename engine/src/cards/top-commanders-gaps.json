@@ -2397,7 +2397,8 @@
   "replacement:others-enter-as-copy",
   "effect:token-copy-of-spell-target",
   "bug:copy-exception-static-self-reference",
-  "trigger:destroyed-by-opponent-trigger"
+  "trigger:destroyed-by-opponent-trigger",
+  "effect:each-player-rolls"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

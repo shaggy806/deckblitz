@@ -414,6 +414,7 @@ import {
   lastRollIn,
   matchingDice,
   rollOfEvent,
+  rollsSince,
   type CoinSide,
   type FlipLanding,
 } from "./random-results.js";
@@ -35627,6 +35628,17 @@ export class Game {
         }
         return this.state.turnOrder.filter((p) => chosen.has(p) && this.state.players[p]?.hasLost === false);
       }
+      if (who === "opponents-who-rolled-highest") {
+        // Every roll this resolution made, a player's last if they rolled
+        // more than once; the result is after modifiers (rule 706.2).
+        const totals = new Map<PlayerId, number>();
+        for (const roll of rollsSince(this.state, since)) totals.set(roll.player, roll.total);
+        if (totals.size === 0) return [];
+        const highest = Math.max(...totals.values());
+        return this.scopedPlayers(controller, "each-opponent", triggerObject, triggerLastKnown(), refs.player).filter(
+          (p) => totals.get(p) === highest,
+        );
+      }
       if (who !== "opponents-who-voted-with-you" && who !== "you-and-opponents-who-voted-with-you") {
         return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, false, refs.triggerSpellController);
       }
@@ -57967,6 +57979,7 @@ controlledBy,
     if (
       typeof who === "object" ||
       who === "opponents-who-voted-with-you" ||
+      who === "opponents-who-rolled-highest" ||
       who === "you-and-opponents-who-voted-with-you" ||
       who === "each-friend" ||
       who === "each-foe" ||

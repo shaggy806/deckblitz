@@ -164,12 +164,14 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "each-other-opponent":
       return opponentsOf(state, controller).filter((p) => p !== ctx.triggerPlayer);
     case "opponents-who-voted-with-you":
+    case "opponents-who-rolled-highest":
     case "you-and-opponents-who-voted-with-you":
     case "each-friend":
     case "each-foe":
     case "players-dealt-damage-this-way":
     case "attacked-players":
-      // Not known until the votes are in, the damage dealt, the attack made.
+      // Not known until the votes are in, the dice rolled, the damage dealt,
+      // the attack made.
       return null;
     case "you-and-attacked-players":
       // The controller's share is the part that's ours for sure.

@@ -103,6 +103,9 @@ export type CombatWord =
  * - `"source"`: the permanent the rule comes from (Gideon Jura).
  * - any other {@link PlayerRef}, read as an effect resolves, or as a static is
  *   read: `{ controllerOf: "attached" }` (Public Enemy).
+ * - `{ playerAndPlaneswalkers }`: that player and the planeswalkers they
+ *   control ("can't attack those players or planeswalkers they control" —
+ *   Chaos Dragon), read as an effect resolves.
  * - `{ defender }`: every player that passes the test ("an opponent with the
  *   most life among your opponents"). Planeswalkers are never in it.
  * - `{ planeswalkers }`: planeswalkers matching this from `you`'s side.
@@ -117,9 +120,10 @@ export type AttackAim =
   | "attacked-this-turn"
   | "source"
   | PlayerRef
+  | { readonly playerAndPlaneswalkers: PlayerRef }
   | { readonly defender: PlayerTest }
   | { readonly planeswalkers: CardFilter }
-  | { readonly player: PlayerId }
+  | { readonly player: PlayerId; readonly andPlaneswalkers?: true }
   | { readonly object: ObjectId; readonly stint: number };
 
 /** The one attacker a rule names — a reference as authored, the object it was
@@ -309,6 +313,10 @@ function bindAim(aim: AttackAim, refs: CombatRuleRefs): AttackAim | undefined {
     }
   }
   if ("defender" in aim || "planeswalkers" in aim || "player" in aim || "object" in aim) return aim;
+  if ("playerAndPlaneswalkers" in aim) {
+    const player = refs.player(aim.playerAndPlaneswalkers);
+    return player === undefined ? undefined : { player, andPlaneswalkers: true };
+  }
   if ("target" in aim) {
     const held = refs.object(aim.target);
     return held?.kind === "player" ? { player: held.player } : boundObject(held, refs);
@@ -457,7 +465,14 @@ export function aimNames(
         return false;
     }
   }
-  if ("player" in aim) return defender === aim.player;
+  if ("player" in aim) {
+    return (
+      defender === aim.player ||
+      (aim.andPlaneswalkers === true && asObject !== undefined && asObject.controller === aim.player && isPlaneswalkerObject(state, registry, asObject))
+    );
+  }
+  // Only ever read bound (`bindAim`).
+  if ("playerAndPlaneswalkers" in aim) return false;
   if ("object" in aim) return defender === aim.object && (asObject?.zoneChangeCount ?? 0) === aim.stint;
   if ("defender" in aim) return isPlayer && playerTestHolds(state, registry, aim.defender, defender as PlayerId, source);
   if ("planeswalkers" in aim) {
