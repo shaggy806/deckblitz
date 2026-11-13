@@ -10,6 +10,7 @@
     "static:attack-restriction-power-vs-hand-size",
     "filter:shares-creature-type-with-convokers",
     "filter:shares-creature-type-with-each-of-set",
+    "cost:sacrifice-x-of-token-stack",
     "effect:when-spent-on-ability",
     "effect:flicker-optional-immediate-or-delayed",
     "effect:grant-state-trigger-to-returned-card",
