@@ -50,7 +50,7 @@ same defect.
 When the card you want is blocked, the options are, in order:
 
 1. **Author a different card.** The backlog is over 1,500 deep; something else
-   `asEnters` is something done as it's about to enter (rule 614.1c), on any is unblocked right now.
+   is unblocked right now.
 2. **Build the missing primitive, then the card.** This is how most of the
    pool got here. `neededCards-features.md` ranks features by how many real
    cards each unblocks — add yours to that ranking rather than working around
@@ -6678,6 +6678,16 @@ clause (section 9):
   to its owner's graveyard (it stays, if it was there) and no enters trigger sees
   it. A copy does this as what it's becoming; a token copy too, and one that
   doesn't enter was never created (§15).
+  `asEnters: AsEntersAction` is something done as it's about to enter (rule
+  614.1c), on any entry, chosen before it moves (614.12): `exile: { filter,
+  count, upTo?, anyGraveyard?, orToGraveyard?, counterForEach? }` from a
+  graveyard, linked to it (Living Lore, Sutured Ghoul, Mimeoplasm, Frankenstein's
+  Monster); `returnPermanent: { filter }` (Rescuer Sphinx); `putFromExile: N`
+  (Ulamog's Despoiler); `discard: { filter, keywordCounters? }` is "discard any
+  number of creature cards" from hand (Indominus Rex, Alpha), and
+  `keywordCounters` gives it one counter of each listed keyword some discarded
+  card has. Pair it with `counters: { amount: "done-as-enters" }` to count how
+  many were done. `as-enters-actions.test.ts`, `as-enters-discard.test.ts`.
   `mayPayLife: N` is a shock land (a `pay-life-for-untapped` decision, via the
   `shockLand` helper); `painIfUntapped: N` deals damage if it *did* end up
   entering untapped (Rockfall Vale). `mayEnterTapped: { then? }` is "you may

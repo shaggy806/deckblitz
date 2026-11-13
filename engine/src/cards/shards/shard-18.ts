@@ -395,6 +395,7 @@ import _poolImperialSubduer from "../pool/imperial-subduer.js";
 import _poolIncriminate from "../pool/incriminate.js";
 import _poolIncursionSpecialist from "../pool/incursion-specialist.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
+import _poolIndominusRexAlpha from "../pool/indominus-rex-alpha.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
 import _poolInnerStruggle from "../pool/inner-struggle.js";
@@ -1415,6 +1416,7 @@ const shard: CardShard = {
     _poolIncriminate,
     _poolIncursionSpecialist,
     _poolIndependentTroops,
+    _poolIndominusRexAlpha,
     _poolInfernoFist,
     _poolInkEyesServantOfOni,
     _poolInnerStruggle,

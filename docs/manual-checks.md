@@ -8118,3 +8118,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Chaos Dragon: it cannot attack whoever rolled highest
 - **Do:** Move to combat and try to attack each opponent with Chaos Dragon.
 - **Expect:** At the beginning of combat the History log shows a d20 roll for each of the four players. The Dragon can't be aimed at any opponent whose result was the highest (ties included); if yours alone was highest it can attack anyone, and it must attack if it can.
+
+### Indominus Rex, Alpha: discard creature cards as it enters for keyword counters
+- **Do:** Cast Indominus Rex, Alpha. When asked, discard Serra Angel and Vampire Nighthawk.
+- **Expect:** Sol Ring isn't offered. Rex enters with one flying, vigilance, deathtouch and lifelink counter each (four counters, flying only once), then its trigger draws four cards. Grizzly Bears stays in hand.

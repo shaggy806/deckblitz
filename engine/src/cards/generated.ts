@@ -13438,6 +13438,7 @@ import _poolIndestructibleAura from "./pool/indestructible-aura.js";
 import _poolIndex from "./pool/index.js";
 import _poolIndigoFaerie from "./pool/indigo-faerie.js";
 import _poolIndoctrinationAttendant from "./pool/indoctrination-attendant.js";
+import _poolIndominusRexAlpha from "./pool/indominus-rex-alpha.js";
 import _poolIndomitableAncients from "./pool/indomitable-ancients.js";
 import _poolIndomitableArchangel from "./pool/indomitable-archangel.js";
 import _poolIndomitableMight from "./pool/indomitable-might.js";
@@ -46130,6 +46131,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIndex,
   _poolIndigoFaerie,
   _poolIndoctrinationAttendant,
+  _poolIndominusRexAlpha,
   _poolIndomitableAncients,
   _poolIndomitableArchangel,
   _poolIndomitableMight,
@@ -78835,6 +78837,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/index": _poolIndex,
   "pool/indigo-faerie": _poolIndigoFaerie,
   "pool/indoctrination-attendant": _poolIndoctrinationAttendant,
+  "pool/indominus-rex-alpha": _poolIndominusRexAlpha,
   "pool/indomitable-ancients": _poolIndomitableAncients,
   "pool/indomitable-archangel": _poolIndomitableArchangel,
   "pool/indomitable-might": _poolIndomitableMight,

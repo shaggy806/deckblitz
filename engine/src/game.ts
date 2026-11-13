@@ -11245,6 +11245,7 @@ export class Game {
     if (awaiting.asEntersOf !== undefined) {
       this.state.awaiting = null;
       if (awaiting.destination === "graveyard") this.putFromExileAsEntering(awaiting.asEntersOf, chosen, awaiting.max);
+      else if (awaiting.destination === "discard") this.discardAsEntering(awaiting.asEntersOf, player, chosen);
       else this.exileAsEntering(awaiting.asEntersOf, chosen);
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
@@ -15034,11 +15035,37 @@ export class Game {
       };
       return true;
     }
+    if (spec.discard !== undefined) {
+      const filter = spec.discard.filter;
+      const eligible = this.state.zones.perPlayer[chooser].hand.filter(
+        (card) =>
+          card !== id &&
+          this.enterBatch?.has(card) !== true &&
+          matchesFilter(this.state, this.registry, card, filter, { you: chooser, source: id }),
+      );
+      if (eligible.length === 0) {
+        object.enterChoice = { ...answered, asEntersDone: 0 };
+        return false;
+      }
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player: chooser,
+        ids: eligible,
+        eligible,
+        min: 0,
+        max: eligible.length,
+        destination: "discard",
+        leftover: "stay",
+        prompt: `Discard any number of cards as ${nameOf(object)} enters`,
+        asEntersOf: id,
+      };
+      return true;
+    }
     if (exile === undefined) {
       object.enterChoice = { ...answered, asEntersDone: 0 };
       return false;
     }
-    const graveyards = exile.anyGraveyard === true ? this.state.turnOrder : [chooser];
+    const graveyards =exile.anyGraveyard === true ? this.state.turnOrder : [chooser];
     const eligible = graveyards.flatMap((player) =>
       this.state.zones.perPlayer[player].graveyard.filter(
         (card) =>
@@ -15085,6 +15112,28 @@ export class Game {
     }
     const entering = this.state.objects[id];
     entering.enterChoice = { ...entering.enterChoice, asEntersDone: done ? count : 0 };
+  }
+
+  /** An {@link AsEntersAction}'s `discard`: the chosen cards' listed keywords
+   * read as they are in hand, then discarded as one event. */
+  private discardAsEntering(id: ObjectId, player: PlayerId, cards: readonly ObjectId[]): void {
+    const entering = this.state.objects[id];
+    let listed: readonly Keyword[] = [];
+    for (const r of this.registry.get(rulesTextName(entering)).static) {
+      const kinds = r.replacement?.event === "enters-battlefield" ? r.replacement.asEnters?.discard?.keywordCounters : undefined;
+      if (kinds !== undefined) listed = kinds;
+    }
+    const earned = new Set<Keyword>();
+    for (const card of cards) {
+      const has = computeCharacteristics(this.state, this.registry, card).keywords;
+      for (const keyword of listed) if (has.has(keyword)) earned.add(keyword);
+    }
+    this.discardCards(player, cards);
+    entering.enterChoice = {
+      ...entering.enterChoice,
+      asEntersDone: cards.length,
+      ...(listed.length > 0 ? { asEntersCounters: listed.filter((k) => earned.has(k)) } : {}),
+    };
   }
 
   /** An {@link AsEntersAction}'s exile, one move: linked to `id` as it enters. */
@@ -60684,7 +60733,7 @@ controlledBy,
         noted = signedAmountValue(r.notes, this.makeResolutionContext(id, object.controller, [], object.xValue ?? 0, 0, id));
       }
       // A counter of the kind picked for each card it exiled.
-      if (r.asEnters?.exile?.counterForEach !== undefined) {
+      if (r.asEnters?.exile?.counterForEach !== undefined || r.asEnters?.discard?.keywordCounters !== undefined) {
         for (const kind of asEntersCounters ?? []) addCounters(kind, 1);
       }
       // Sunburst (rule 702.44a): +1/+1 counters if it's entering as a

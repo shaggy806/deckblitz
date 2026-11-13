@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-492 already implemented / 8 missing
+493 already implemented / 7 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -297,7 +297,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  291  Brenard, Ginger Sculptor                        9226 decks  {1}{G}{W}{U}     Legendary Creature — Human Artificer
 [x]  292  Reaper King                                     9223 decks  {2/W}{2/U}{2/B}{2/R}{2/G} Legendary Artifact Creature — Scarecrow
 [x]  293  Phenax, God of Deception                        9215 decks  {3}{U}{B}        Legendary Enchantment Creature — God
-[ ]  294  Indominus Rex, Alpha                            9195 decks  {1}{U/B}{U/B}{G}{G} Legendary Creature — Dinosaur Mutant
+[x]  294  Indominus Rex, Alpha                            9195 decks  {1}{U/B}{U/B}{G}{G} Legendary Creature — Dinosaur Mutant
 [x]  295  Tannuk, Memorial Ensign                         9181 decks  {1}{R}{G}        Legendary Creature — Kavu Pilot
 [x]  296  Elsha, Threefold Master                         9167 decks  {U}{R}{W}        Legendary Creature — Djinn Monk
 [x]  297  Gargos, Vicious Watcher                         9116 decks  {3}{G}{G}{G}     Legendary Creature — Hydra

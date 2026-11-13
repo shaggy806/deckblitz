@@ -941,7 +941,8 @@ export interface GameObject {
     /** A commander its `AsEntersAction` is returning, waiting on its owner's
      * choice of the command zone instead (rule 903.9b). */
     readonly asEntersReturning?: ObjectId;
-    /** The counter kind picked for each card exiled (`counterForEach`). */
+    /** The counter kind picked for each card exiled (`counterForEach`), or
+     * the keyword counters its `discard` earned (`keywordCounters`). */
     readonly asEntersCounters?: readonly string[];
     /** How many cards its controller revealed for its amplify as it was
      * about to enter (rule 702.38a — `CardDefinition.amplify`), counted for
@@ -3840,7 +3841,9 @@ export type AwaitingDecision =
        * (`enterChoice.insteadDone`). */
       readonly insteadOfEnteringOf?: ObjectId;
       /** The permanent about to enter whose `AsEntersAction` exiles cards from
-       * a graveyard: what's chosen is exiled now, and linked to it as it enters. */
+       * a graveyard: what's chosen is exiled now, and linked to it as it enters.
+       * With `destination: "discard"`, its `discard`: what's chosen is
+       * discarded now. */
       readonly asEntersOf?: ObjectId;
       /** A `discard-chosen`'s `reveals` — "target player reveals three cards
        * from their hand and you choose one of them" (Blackmail): `player`

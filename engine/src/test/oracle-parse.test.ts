@@ -8731,6 +8731,33 @@ describe("counters put or removed this way", () => {
       asEnters: { exile: { filter: { type: "creature" }, count: "x", upTo: true } },
       counters: { kind: "+1/+1", amount: "done-as-enters", eachDone: 3 },
     });
+    expect(
+      replacementOf(
+        "Indominus Rex, Alpha",
+        "As Indominus Rex enters, discard any number of creature cards. It enters with a flying counter on it if a card discarded this way has flying. The same is true for first strike, double strike, deathtouch, hexproof, haste, indestructible, lifelink, menace, reach, trample, and vigilance.",
+      ),
+    ).toEqual({
+      event: "enters-battlefield",
+      asEnters: {
+        discard: {
+          filter: { type: "creature" },
+          keywordCounters: [
+            "flying",
+            "first-strike",
+            "double-strike",
+            "deathtouch",
+            "hexproof",
+            "haste",
+            "indestructible",
+            "lifelink",
+            "menace",
+            "reach",
+            "trample",
+            "vigilance",
+          ],
+        },
+      },
+    });
   });
 });
 

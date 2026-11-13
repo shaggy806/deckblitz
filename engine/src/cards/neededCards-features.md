@@ -394,6 +394,17 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### "As this enters, discard any number of creature cards" — built 2026-11-13
+
+The commander gap's `replacement:as-enters-discard-any-number`.
+`AsEntersAction.discard: { filter, keywordCounters? }`: a `choose-from-zone`
+over the matching cards in hand, none to all, asked before it moves on any
+entry (rule 614.12) and discarded then as one ordinary discard; it enters with
+`"done-as-enters"` for how many, and with `keywordCounters` one counter of each
+listed keyword some discarded card had (rule 122.1b; one each however many had
+it, its ruling). Indominus Rex, Alpha (commander 294) is the only card that
+needs it; the scaffolder reads the line. `test/as-enters-discard.test.ts`.
+
 ### "One or more opponents each lose exactly 1 life" — built 2026-11-12
 
 The commander gap's `trigger:opponents-lose-exactly-n-life`. `loses-life`'s

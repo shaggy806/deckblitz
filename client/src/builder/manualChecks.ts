@@ -12188,4 +12188,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Indominus Rex, Alpha: discard creature cards as it enters for keyword counters',
+    board({
+      you: { bf: ['Forest*3', 'Island*2'], hand: ['Indominus Rex, Alpha', 'Serra Angel', 'Vampire Nighthawk', 'Grizzly Bears', 'Sol Ring'] },
+    }),
+  ),
 ]

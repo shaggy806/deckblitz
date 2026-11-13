@@ -21104,6 +21104,25 @@ function parseStatic(line, text) {
         text,
       };
     }
+    // "As ~ enters, discard any number of creature cards. It enters with a
+    // flying counter on it if a card discarded this way has flying. The same
+    // is true for first strike, …" (Indominus Rex, Alpha): `asEnters.discard`.
+    const toss =
+      /^As ~ enters, discard any number of ([a-z ]+?) cards\.(?: It enters with an? ([a-z ]+) counter on it if a card discarded this way has \2\. The same is true for ((?:[a-z ]+, )+and [a-z ]+)\.)?$/.exec(line);
+    const tossFilter = toss === null ? null : parseTypePhrase(toss[1], { cards: true });
+    if (toss !== null && tossFilter !== null) {
+      const slug = (k) => k.trim().replace(/ /g, "-");
+      const keywords =
+        toss[2] === undefined ? undefined : [toss[2], ...toss[3].replace(/,? and /, ", ").split(", ")].map(slug);
+      return {
+        affects: { scope: "self" },
+        replacement: {
+          event: "enters-battlefield",
+          asEnters: { discard: { filter: tossFilter, ...(keywords !== undefined ? { keywordCounters: keywords } : {}) } },
+        },
+        text,
+      };
+    }
   }
   // "~ enters with two oil counters on it" (rule 614.1c), any named kind —
   // "on him" / "on her" for a character (Captain America's shield counter).

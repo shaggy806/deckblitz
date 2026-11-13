@@ -30,7 +30,7 @@
  * "enter tapped", The Wandering Minstrel's "enter untapped").
  */
 
-import type { StaticCondition } from "./cards/define.js";
+import type { Keyword, StaticCondition } from "./cards/define.js";
 import type { BeholdSpec, EffectAmount, EffectSpec } from "./effects.js";
 import type { ResolvedPatch } from "./characteristics-patch.js";
 import type { CardFilter } from "./filter.js";
@@ -304,6 +304,17 @@ export interface AsEntersAction {
    * with the `choose-from-zone` popup a `putFromExile` cost uses. It counts as
    * done even when a replacement keeps a card in exile (its 2015-08-25 ruling). */
   readonly putFromExile?: number;
+  /**
+   * "As this enters, discard any number of creature cards" (Indominus Rex,
+   * Alpha): cards matching `filter` from its controller's hand, none to all,
+   * chosen and discarded as it's about to enter (rule 614.12) — a discard like
+   * any other (madness, "whenever you discard"). What it enters with is how
+   * many (`"done-as-enters"`), and with `keywordCounters`, "It enters with a
+   * flying counter on it if a card discarded this way has flying. The same is
+   * true for …": one counter of each listed keyword some discarded card has
+   * (one each however many have it — its 2025 ruling; rule 122.1b).
+   */
+  readonly discard?: { readonly filter: CardFilter; readonly keywordCounters?: readonly Keyword[] };
 }
 
 /** As the source permanent enters the battlefield (rule 614.1c). A self-
