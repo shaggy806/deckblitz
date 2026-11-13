@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4986 already implemented / 14 missing (marks refreshed 2026-11-13)
+4988 already implemented / 12 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4532,7 +4532,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4539  Octomancer                               {3}{G}{U}        Creature — Frog Druid
 [x]  4540  Malleable Impostor                       {3}{U}           Creature — Faerie Shapeshifter
 [x]  4541  Nerd Rage                                {2}{U}           Enchantment — Aura
-[ ]  4542  Sunken Palace                            {0}              Land — Cave
+[x]  4542  Sunken Palace                            {0}              Land — Cave
 [x]  4543  Goblin Rabblemaster                      {2}{R}           Creature — Goblin Warrior
 [x]  4544  Desert                                   {0}              Land — Desert
 [x]  4545  Banquet Guests                           {X}{G}{W}        Creature — Halfling Citizen
@@ -4571,7 +4571,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4578  V.A.T.S.                                 {2}{B}{B}        Instant
 [x]  4579  Nemesis of Reason                        {3}{U}{B}        Creature — Leviathan Horror
 [x]  4580  Flow State                               {1}{U}           Sorcery
-[ ]  4581  Glowing One                              {2}{G}           Creature — Zombie Mutant
+[x]  4581  Glowing One                              {2}{G}           Creature — Zombie Mutant
 [x]  4582  Master of the Feast                      {1}{B}{B}        Enchantment Creature — Demon
 [x]  4583  Boon of the Spirit Realm                 {3}{W}{W}        Enchantment
 [x]  4584  Mind Flayer                              {3}{U}{U}        Creature — Horror

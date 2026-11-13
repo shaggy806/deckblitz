@@ -125,6 +125,7 @@
   "cost:pay-any-amount-of-life-as-enters": "replacements-copies",
   "cost:sacrifice-mana-value-x": "costs-mana",
   "cost:sacrifice-up-to-n": "costs-mana",
+  "cost:spell-sacrifice-mana-value-x": "costs-mana",
   "cost:sacrifice-x-of-token-stack": "costs-mana",
   "cost:spell-additional-cost-remove-counters": "costs-mana",
   "cost:spend-mana-as-any-color": "costs-mana",
