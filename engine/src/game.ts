@@ -24302,7 +24302,9 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (source === undefined || hasLostAbilities(this.state, this.registry,source)) continue;
-        for (const ability of this.registry.get(rulesTextName(source)).static) {
+        // Its text's, and those it was given (a copy exception's — Firion's
+        // token's "This Equipment's equip abilities cost {2} less").
+        for (const ability of this.staticsOfSource(source)) {
           const mod = ability.abilityCostModification;
           if (mod !== undefined && this.staticActive(source, ability)) {
             out.push({ controller: source.controller, source: id, mod });

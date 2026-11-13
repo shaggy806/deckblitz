@@ -7,7 +7,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { printedCardName } from "../state.js";
-import { B, cast, destroy, lands, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import { B, activate, cast, destroy, lands, nextTurn, ref, settle, spawn, table, toHand, zone } from "./harness.js";
 
 const named = (game: Game, id: ObjectId): string => printedCardName(game.state.objects[id]);
 const tokensOf = (game: Game, name: string): ObjectId[] =>
@@ -70,5 +70,44 @@ describe("Vesuvan Duplimancy: a token copy of the spell's one target", () => {
     const theirs = spawn(game, "Grizzly Bears", B);
     cast(game, toHand(game, "Giant Growth"), { targets: [ref(theirs)] });
     expect(tokensOf(game, "Grizzly Bears")).toHaveLength(0);
+  });
+});
+
+describe("Firion, Wild Rose Warrior: a token copy of an entering Equipment that equips for {2} less", () => {
+  const setup = () => {
+    const { game } = table();
+    const firion = spawn(game, "Firion, Wild Rose Warrior");
+    lands(game, "Mountain", 1);
+    const splitter = toHand(game, "Bonesplitter");
+    cast(game, splitter);
+    const [token] = tokensOf(game, "Bonesplitter");
+    return { game, firion, splitter, token };
+  };
+
+  it("makes a token copy whose equip costs {2} less; the original's costs what it did", () => {
+    const { game, firion, splitter, token } = setup();
+    expect(token).toBeDefined();
+    // No mana left: the token's equip {1} is free, the original's isn't.
+    expect(() => activate(game, splitter, 0, { targets: [ref(firion)] })).toThrow(/cannot pay/);
+    activate(game, token, 0, { targets: [ref(firion)] });
+    expect(game.state.objects[token].attachedTo).toBe(firion);
+    expect(game.characteristics(firion).power).toBe(5);
+    // "Equipped creatures you control have haste."
+    expect(game.characteristics(firion).keywords).toContain("haste");
+  });
+
+  it("the token is sacrificed at the beginning of the next upkeep, whoever's", () => {
+    const { game, token } = setup();
+    nextTurn(game, "upkeep");
+    settle(game);
+    expect(game.state.objects[token]?.zone).not.toBe("battlefield");
+    expect(tokensOf(game, "Bonesplitter")).toHaveLength(0);
+  });
+
+  it("an unequipped creature has no haste, and a token Equipment entering makes no copy", () => {
+    const { game, firion, token } = setup();
+    expect(game.characteristics(firion).keywords).not.toContain("haste");
+    expect(game.state.objects[token].isToken).toBe(true);
+    expect(tokensOf(game, "Bonesplitter")).toHaveLength(1);
   });
 });

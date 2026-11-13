@@ -9529,6 +9529,7 @@ import _poolFirestorm from "./pool/firestorm.js";
 import _poolFirewakeSliver from "./pool/firewake-sliver.js";
 import _poolFirewildBorderpost from "./pool/firewild-borderpost.js";
 import _poolFirewingPhoenix from "./pool/firewing-phoenix.js";
+import _poolFirionWildRoseWarrior from "./pool/firion-wild-rose-warrior.js";
 import _poolFirjaJudgeOfValor from "./pool/firja-judge-of-valor.js";
 import _poolFirjasRetribution from "./pool/firjas-retribution.js";
 import _poolFirmamentSage from "./pool/firmament-sage.js";
@@ -42217,6 +42218,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFirewakeSliver,
   _poolFirewildBorderpost,
   _poolFirewingPhoenix,
+  _poolFirionWildRoseWarrior,
   _poolFirjaJudgeOfValor,
   _poolFirjasRetribution,
   _poolFirmamentSage,
@@ -74918,6 +74920,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/firewake-sliver": _poolFirewakeSliver,
   "pool/firewild-borderpost": _poolFirewildBorderpost,
   "pool/firewing-phoenix": _poolFirewingPhoenix,
+  "pool/firion-wild-rose-warrior": _poolFirionWildRoseWarrior,
   "pool/firja-judge-of-valor": _poolFirjaJudgeOfValor,
   "pool/firjas-retribution": _poolFirjasRetribution,
   "pool/firmament-sage": _poolFirmamentSage,

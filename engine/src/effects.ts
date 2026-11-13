@@ -16098,7 +16098,11 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     const walked = Object.fromEntries(
       Object.entries(record).map(([key, v]) => [
         key,
-        NESTED_EFFECT_KEYS.has(key) || (liveFilter && key === "filter") ? v : walk(v),
+        // A static's cost modification an effect gives (a copy exception's
+        // "This Equipment's equip abilities cost {2} less" — Firion): its
+        // "this" is whatever has the static, read as each cost is priced
+        // (`Game.abilityCostModificationReaches`).
+        NESTED_EFFECT_KEYS.has(key) || (liveFilter && key === "filter") || key === "abilityCostModification" ? v : walk(v),
       ]),
     );
     return bindShares(walked);
