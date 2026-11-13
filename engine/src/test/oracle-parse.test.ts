@@ -18919,4 +18919,8 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
       { on: "mills", who: "opponent", filter: { notTypes: ["land"] }, perCard: true },
     ]);
   });
+
+  it("reads a payment of life (Font of Agonies)", () => {
+    expect(parseTrigger("Whenever you pay life")).toEqual([{ on: "event", event: "pays-life", who: "you" }]);
+  });
 });

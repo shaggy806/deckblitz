@@ -3269,6 +3269,10 @@ export type EffectSpec =
        * "**its controller** loses 3 life", where the target is the countered
        * spell. Same shape as `damage`/`gain-life`'s field of the same name. */
       readonly toControllerOfTarget?: number;
+      /** Engine-set, never authored: the loss is a payment of life (rule
+       * 119.4) — an "unless … pays N life" option's — announced as one for
+       * "whenever you pay life" (Font of Agonies). With `who: "you"`. */
+      readonly paid?: true;
     }
   | {
       /** Tap `target` — a slot, or `"source"` for the effect's own
@@ -11420,6 +11424,8 @@ export interface EffectApi {
   revealHand(player: PlayerId): void;
   gainLife(player: PlayerId, amount: number): void;
   loseLife(player: PlayerId, amount: number): void;
+  /** Announce the loss just made as a payment of life (`lose-life`'s `paid`). */
+  lifePaid(player: PlayerId, amount: number): void;
   /** Change life for a whole scope (`gain-life` / `lose-life` with `who`). */
   changeLifeScoped(who: PlayerScope, delta: number): void;
   /** The concrete types a {@link BoardManaList} names right now, read from
@@ -17400,8 +17406,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (who !== undefined) ctx.loseLife(who, amountValue(spec.amount, ctx, who));
         return;
       }
-      if (spec.who === undefined || spec.who === "you") ctx.loseLife(ctx.controller, life);
-      else if (!readsEachPlayer(spec.amount)) ctx.changeLifeScoped(spec.who, -life);
+      if (spec.who === undefined || spec.who === "you") {
+        ctx.loseLife(ctx.controller, life);
+        if (spec.paid === true) ctx.lifePaid(ctx.controller, life);
+      } else if (!readsEachPlayer(spec.amount)) ctx.changeLifeScoped(spec.who, -life);
       else {
         // "Each opponent loses half their life": each one's own amount,
         // read as their turn in APNAP order comes.

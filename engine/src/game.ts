@@ -7787,7 +7787,7 @@ export class Game {
     if (pay && object !== undefined && object.zone === "battlefield" && this.canPayLife(player, life, "not-a-cost")) {
       object.tapped = false;
       this.emit({ type: "permanent-untapped", object: source, asItEntered: true });
-      this.changeLife(player, -life);
+      this.payLife(player, life);
     }
     this.prepareForPriority(this.activePlayer);
   }
@@ -8725,7 +8725,7 @@ export class Game {
       }
     }
     if (chosen.length > 0) {
-      if (costLife > 0) this.changeLife(player, -costLife);
+      if (costLife > 0) this.payLife(player, costLife);
       if (costEnergy > 0) this.changeEnergy(player, -costEnergy);
       if (energyX !== undefined && chosenX > 0) this.changeEnergy(player, -chosenX);
     }
@@ -12911,7 +12911,7 @@ export class Game {
       if (payment === null) throw new Error(`${player} can't pay the ${cost.mana} it costs to attack`);
       this.executePayment(player, payment);
     }
-    if (cost.life > 0) this.changeLife(player, -cost.life);
+    if (cost.life > 0) this.payLife(player, cost.life);
     // What's paid in permanents (Exalted Dragon), after the mana so a land can
     // tap for that first (508.1i) and be sacrificed for this.
     if (cost.parts.length > 0) {
@@ -13511,7 +13511,7 @@ export class Game {
       if (payment === null) throw new Error(`${player} can't pay the {${blockTax.generic}} it costs to block`);
       this.executePayment(player, payment);
     }
-    if (blockTax !== null && blockTax.life > 0) this.changeLife(player, -blockTax.life);
+    if (blockTax !== null && blockTax.life > 0) this.payLife(player, blockTax.life);
     for (const { blocker, attacker, alsoBlocked } of blockedNow) {
       this.emit({ type: "blocker-declared", blocker, attacker, ...(alsoBlocked === true ? { alsoBlocked } : {}) });
     }
@@ -22033,7 +22033,7 @@ export class Game {
     }
     // The commander tax, paid in life rather than mana (Liesa). Part of the
     // total cost, so paid alongside the mana; it isn't mana spent.
-    if (taxLife > 0) this.changeLife(player, -taxLife);
+    if (taxLife > 0) this.payLife(player, taxLife);
     // Sephara's "tap four untapped creatures you control with flying" — the
     // other half of its alternative cost, paid as the spell is cast. One
     // permanent tapped is remembered: "the creature tapped to pay this spell's
@@ -22071,13 +22071,13 @@ export class Game {
     // "Flashback—{cost}, Pay N life" (Deep Analysis) — part of the cost, paid
     // as the spell is cast. Only its own flashback's: one Past in Flames gave
     // it costs just the mana.
-    if (flashback?.payLife !== undefined) this.changeLife(player, -flashback.payLife);
+    if (flashback?.payLife !== undefined) this.payLife(player, flashback.payLife);
     // "Warp—{B}, Pay 2 life" (Timeline Culler): the same, of a warp cost.
-    if (ownWarp?.payLife !== undefined) this.changeLife(player, -ownWarp.payLife);
+    if (ownWarp?.payLife !== undefined) this.payLife(player, ownWarp.payLife);
     // A graveyard permission's own extra cost ("by paying 3 life in addition
     // to paying their other costs").
     if (permissionTerms?.payLife !== undefined) {
-      this.changeLife(player, -permissionTerms.payLife);
+      this.payLife(player, permissionTerms.payLife);
     }
     // Its other extra cost, "by exiling three other cards from your graveyard"
     // (Kotis, Sibsig Champion): the ones the caster chose, or for a driver
@@ -22173,25 +22173,25 @@ export class Game {
     // discards Y" and the spell is already on the stack rather than in the
     // hand it is discarding from.
     if (def.additionalCost?.payLife !== undefined) {
-      this.changeLife(player, -def.additionalCost.payLife);
+      this.payLife(player, def.additionalCost.payLife);
     }
     // "You may pay 2 life" for each Defiler whose cost it pays (rule 601.2b).
-    if (typeof optionalLifeOwed === "number" && optionalLifeOwed > 0) this.changeLife(player, -optionalLifeOwed);
+    if (typeof optionalLifeOwed === "number" && optionalLifeOwed > 0) this.payLife(player, optionalLifeOwed);
     // "This spell costs 3 life more to cast for each target" (Phyrexian
     // Purge — rule 601.2f), counted over the targets just locked in.
     if (def.additionalCost?.payLifePerTarget !== undefined) {
       const chosen = this.state.objects[cardId]?.targets ?? [];
       const count = distinctTargetCount(chosen, this.targetCopies(chosen));
-      if (count > 0) this.changeLife(player, -def.additionalCost.payLifePerTarget * count);
+      if (count > 0) this.payLife(player, def.additionalCost.payLifePerTarget * count);
     }
     // A pitch spell's "pay 1 life" (Force of Will), part of its alternative
     // cost, paid the same way.
     if (altCost && this.ownAltCost(def)?.payLife !== undefined) {
-      this.changeLife(player, -this.ownAltCost(def)!.payLife!);
+      this.payLife(player, this.ownAltCost(def)!.payLife!);
     }
     // "Pay life equal to its mana value rather than" (rule 119.4; 0 is always
     // payable, 119.4b).
-    if (alternativeLife > 0) this.changeLife(player, -alternativeLife);
+    if (alternativeLife > 0) this.payLife(player, alternativeLife);
     // "Have an opponent gain 3 life": the gain is the cost, and whatever
     // replaces it applies (rule 614.1; Invigorate's rulings).
     for (const gainer of alternativeCost?.gainLife?.players ?? []) {
@@ -22199,9 +22199,9 @@ export class Game {
     }
     // "Pay eight {E} rather than pay the mana cost" (rule 107.14).
     if (alternativeEnergy > 0) this.changeEnergy(player, -alternativeEnergy);
-    if (targetingLife > 0) this.changeLife(player, -targetingLife);
+    if (targetingLife > 0) this.payLife(player, targetingLife);
     if (def.additionalCost?.payLifeX === true && chosenX > 0) {
-      this.changeLife(player, -chosenX);
+      this.payLife(player, chosenX);
     }
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": which
     // ones is chosen now, as the cost is paid (rule 601.2h), the spell on the
@@ -22217,7 +22217,7 @@ export class Game {
     const chosenOption =
       costOption === undefined ? undefined : def.additionalCost?.options?.[costOption];
     if (chosenOption?.payLife !== undefined) {
-      this.changeLife(player, -chosenOption.payLife);
+      this.payLife(player, chosenOption.payLife);
     }
     // A branch's sacrifice was paid above with the fixed one: it's the same
     // cost paid the same way, one member peeled off a token stack rather than
@@ -25459,7 +25459,7 @@ export class Game {
     if (tapped.length > 0) paidSets = addToSet(paidSets, { paid: "tapped" }, this.paidMembers("tapped", tapped));
     const manaSpentOnThis = this.executePayment(player, payment);
     const lifeCost = this.activatedAbilityLifeCost(player, sourceId, ability, chosenX) ?? 0;
-    if (lifeCost > 0) this.changeLife(player, -lifeCost);
+    if (lifeCost > 0) this.payLife(player, lifeCost);
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
       const asked = ability.cost.removeCounter.count;
@@ -27939,7 +27939,7 @@ export class Game {
   private executePayment(player: PlayerId, payment: ManaPayment): readonly SpentMana[] {
     for (const step of payment.steps) this.useManaSource(step);
     const spent = this.spendFromPool(player, payment.resolved, payment.purpose);
-    if (payment.life > 0) this.changeLife(player, -payment.life);
+    if (payment.life > 0) this.payLife(player, payment.life);
     return spent;
   }
 
@@ -28030,7 +28030,7 @@ export class Game {
       object.tapped = true;
       this.emit({ type: "permanent-tapped", object: step.source, by: player });
     }
-    if (step.lifeCost > 0) this.changeLife(player, -step.lifeCost);
+    if (step.lifeCost > 0) this.payLife(player, step.lifeCost);
     if (step.pain > 0) {
       this.dealDamage(step.source, { kind: "player", player }, step.pain);
     }
@@ -37347,6 +37347,7 @@ export class Game {
             : undefined,
           controller,
         ),
+      lifePaid: (player, amount) => this.lifePaid(player, amount),
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
       addMana: (player, mana, amount, spec) => {
         this.addMana(
@@ -43184,7 +43185,7 @@ controlledBy,
             : "takeDamage" in option
             ? { kind: "damage", amount: option.takeDamage, who: "you" }
             : "payLife" in option
-            ? { kind: "lose-life", amount: option.payLife, who: "you" }
+            ? { kind: "lose-life", amount: option.payLife, who: "you", paid: true }
             : "payEnergy" in option
             ? { kind: "pay-energy", amount: option.payEnergy }
             : "sacrificeThat" in option
@@ -43238,7 +43239,7 @@ controlledBy,
                       kind: "sequence",
                       effects: [
                         ...((option.andLife ?? 0) > 0
-                          ? [{ kind: "lose-life", amount: option.andLife ?? 0, who: "you" } as const]
+                          ? [{ kind: "lose-life", amount: option.andLife ?? 0, who: "you", paid: true } as const]
                           : []),
                         ...(option.ifPaid !== undefined ? [option.ifPaid] : []),
                       ],
@@ -44674,7 +44675,7 @@ controlledBy,
    * life is paid at once. What's sacrificed or tapped was paid with the rest. */
   private queueAlsoCosts(player: PlayerId, spell: ObjectId, costs: readonly KickerAlsoCost[], priorityTo: PlayerId): void {
     for (const also of costs) {
-      if (also.payLife !== undefined) this.changeLife(player, -also.payLife);
+      if (also.payLife !== undefined) this.payLife(player, also.payLife);
       const queue = (this.state.pendingAlsoCosts ??= []);
       if (also.discard !== undefined) {
         queue.push({ spell, player, priorityTo, discard: { count: also.discard, atRandom: also.discardAtRandom === true } });
@@ -52776,7 +52777,7 @@ controlledBy,
     // subtypes and so never pays for itself. The choice is answered before
     // anyone gets priority (116.3c).
     const also = morph ? card.morph?.also : undefined;
-    if (also?.payLife !== undefined) this.changeLife(player, -also.payLife);
+    if (also?.payLife !== undefined) this.payLife(player, also.payLife);
     if (also?.sacrifice !== undefined) {
       this.beginCostSacrifice(player, id, [{ filter: also.sacrifice.filter, count: also.sacrifice.count }], id, player);
     }
@@ -58375,6 +58376,23 @@ controlledBy,
     if (paying !== "not-a-cost" && this.lifeCostProhibited(player, paying === "mana-ability")) return false;
     const state = this.state.players[player];
     return state !== undefined && state.life >= amount && !playerCantLoseLife(this.state, this.registry, player);
+  }
+
+  /** `player` pays `amount` life (rule 119.4: the payment is subtracted from
+   * their life total — they lose that much life), announced as a payment
+   * for "whenever you pay life" (Font of Agonies). Whether they can is the
+   * caller's question (`canPayLife`). */
+  private payLife(player: PlayerId, amount: number): void {
+    if (amount <= 0) return;
+    this.changeLife(player, -amount);
+    this.lifePaid(player, amount);
+  }
+
+  /** The announcement half of {@link payLife}, for a payment made as an
+   * effect's life loss (an "unless … pays N life" option). */
+  private lifePaid(player: PlayerId, amount: number): void {
+    if (amount <= 0 || this.dryRunningEvents) return;
+    this.emit({ type: "life-paid", player, amount });
   }
 
   /** `amount` life `player` would lose, changed: "…they lose twice that much

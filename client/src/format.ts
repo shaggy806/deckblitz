@@ -100,6 +100,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'cards-put-into-exile',
   // Bookkeeping: identical tokens drawn as one stack again.
   'tokens-folded',
+  // Bookkeeping for "whenever you pay life" — the life change has its own line.
+  'life-paid',
 ])
 
 /** Whether `event` only shows up in the history's detailed mode. */

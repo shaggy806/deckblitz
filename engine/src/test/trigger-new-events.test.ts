@@ -3,7 +3,26 @@
  * (2026-11-13): a mill once per card, each one its own trigger.
  */
 import { describe, expect, it } from "vitest";
-import { A, B, C, hand, life, pickModes, settle, spawn, table, toGraveyard, toLibrary, zone } from "./harness.js";
+import {
+  A,
+  B,
+  C,
+  activate,
+  cast,
+  counters,
+  hand,
+  lands,
+  life,
+  pickModes,
+  ref,
+  settle,
+  spawn,
+  table,
+  toGraveyard,
+  toHand,
+  toLibrary,
+  zone,
+} from "./harness.js";
 
 describe("mills, per card (Glowing One, Infesting Radroach)", () => {
   it("Glowing One gains 1 life for each nonland card milled, whoever milled", () => {
@@ -59,5 +78,52 @@ describe("mills, per card (Glowing One, Infesting Radroach)", () => {
     game.debugApplyEffect(B, { kind: "mill", target: "each-player", amount: 1 });
     settle(game);
     expect(zone(game, roach)).toBe("hand");
+  });
+});
+
+describe("pays life (Font of Agonies)", () => {
+  it("counts an ability's life cost", () => {
+    const { game } = table({ players: 2 });
+    const font = spawn(game, "Font of Agonies");
+    lands(game, "Swamp", 1);
+    const greed = spawn(game, "Greed");
+    activate(game, greed);
+    expect(counters(game, font, "blood")).toBe(2);
+  });
+
+  it("counts an additional cost's X life, that many", () => {
+    const { game } = table({ players: 2 });
+    const font = spawn(game, "Font of Agonies");
+    lands(game, "Swamp", 3);
+    cast(game, toHand(game, "Toxic Deluge"), { x: 3 });
+    expect(counters(game, font, "blood")).toBe(3);
+  });
+
+  it("counts an \"unless you pay N life\" paid, and not a loss of life", () => {
+    const { game, a } = table({ players: 2 });
+    const font = spawn(game, "Font of Agonies");
+    game.debugApplyEffect(A, { kind: "lose-life", amount: 3, who: "you" });
+    settle(game);
+    expect(counters(game, font, "blood")).toBe(0);
+    pickModes(a, 0);
+    game.debugApplyEffect(A, {
+      kind: "unless",
+      chooser: "you",
+      options: [{ payLife: 2, text: "Pay 2 life" }],
+      otherwise: { kind: "draw", amount: 1 },
+    });
+    settle(game);
+    expect(counters(game, font, "blood")).toBe(2);
+  });
+
+  it("removes four blood counters to destroy a creature", () => {
+    const { game } = table({ players: 2 });
+    const font = spawn(game, "Font of Agonies");
+    game.debugApplyEffect(A, { kind: "add-counter", target: "source", counter: "blood", amount: 4 }, [], { source: font });
+    lands(game, "Swamp", 2);
+    const bear = spawn(game, "Grizzly Bears", B);
+    activate(game, font, 0, { targets: [ref(bear)] });
+    expect(zone(game, bear)).toBe("graveyard");
+    expect(counters(game, font, "blood")).toBe(0);
   });
 });

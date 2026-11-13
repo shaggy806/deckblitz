@@ -165,6 +165,9 @@ export const TRIGGER_EVENTS = {
   /** "Whenever this Vehicle becomes crewed" (rule 702.122c): as its crew
    * ability resolves. The value is how many creatures crewed it. */
   "becomes-crewed": row({ type: "became-crewed", object: (e) => e.object, amount: (e) => e.crew.length, journaled: "crewed" }),
+  /** "Whenever you pay life" (rule 119.4 — Font of Agonies): any payment
+   * of more than 0, a cost's or an effect's; the value is how much. */
+  "pays-life": row({ type: "life-paid", player: (e) => e.player, amount: (e) => e.amount }),
   /** "Whenever damage that would be dealt to you is prevented" (Selfless
    * Squire): any prevention, protection's included (rule 615, 702.16e), one
    * occurrence per prevention applied. The value is how much it prevented. */

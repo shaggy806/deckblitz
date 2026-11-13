@@ -1430,6 +1430,16 @@ export type GameEvent =
       readonly byEffectOf?: PlayerId;
     })
   | (Base & {
+      /** `player` paid `amount` life (rule 119.4), after its `life-changed`:
+       * a cost's, Phyrexian mana's, a shock land's, an "unless … pays N
+       * life" or a "you may pay N life". What "whenever you pay life"
+       * watches (Font of Agonies). Paying 0 (119.4b) isn't one, nor is
+       * losing life without the word "pay" (the card's ruling). */
+      readonly type: "life-paid";
+      readonly player: PlayerId;
+      readonly amount: number;
+    })
+  | (Base & {
       readonly type: "permanent-destroyed";
       readonly object: ObjectId;
       readonly reason: string;

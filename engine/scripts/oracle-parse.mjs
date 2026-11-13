@@ -2650,6 +2650,8 @@ export function parseTrigger(clause) {
     return [{ on: "discards", who: "you", byOpponent: true, perCard: true }];
   }
   if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
+  // Rule 119.4: any payment of life (Font of Agonies).
+  if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
   // Mirelurk Queen, The Wise Mothman: rule 701.17, any player's mill.
   {
     const m = /^Whenever one or more (nonland )?cards are milled$/.exec(c);

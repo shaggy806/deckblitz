@@ -2448,7 +2448,8 @@
   "zone:cast-from-exile-with-counter-kind",
   "cost:exile-many-cost-linked-return",
   "static:mana-abilities-cost-life",
-  "trigger:mills-per-card"
+  "trigger:mills-per-card",
+  "trigger:pays-life-trigger"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

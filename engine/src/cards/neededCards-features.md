@@ -503,6 +503,10 @@ vocabulary, `test/trigger-new-events.test.ts`.
   milled (rule 603.2c), each its trigger object. An "each player mills" is
   announced once every player has milled (`withMillBatch`), so a card milled
   alongside an opponent's sees theirs. Glowing One, Infesting Radroach.
+- `trigger:pays-life-trigger` — the `life-paid` event and the `pays-life`
+  row: every payment of life (rule 119.4) goes through `Game.payLife`, an
+  "unless … pays N life" option's loss through `lose-life`'s engine-set
+  `paid`. Font of Agonies.
 
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 
