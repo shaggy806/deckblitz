@@ -284,6 +284,7 @@ import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
 import _poolEpochrasite from "../pool/epochrasite.js";
+import _poolErdwalIlluminator from "../pool/erdwal-illuminator.js";
 import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolErrantry from "../pool/errantry.js";
@@ -891,6 +892,7 @@ import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
 import _poolTheMillenniumCalendar from "../pool/the-millennium-calendar.js";
 import _poolTheMycosynthGardens from "../pool/the-mycosynth-gardens.js";
 import _poolTheNeedsOfTheMany from "../pool/the-needs-of-the-many.js";
+import _poolTheNinthDoctor from "../pool/the-ninth-doctor.js";
 import _poolTheRoyalScions from "../pool/the-royal-scions.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
 import _poolThiefOfBlood from "../pool/thief-of-blood.js";
@@ -1311,6 +1313,7 @@ const shard: CardShard = {
     _poolEntomb,
     _poolEowynShieldmaiden,
     _poolEpochrasite,
+    _poolErdwalIlluminator,
     _poolErebossEmissary,
     _poolErestorOfTheCouncil,
     _poolErrantry,
@@ -1918,6 +1921,7 @@ const shard: CardShard = {
     _poolTheMillenniumCalendar,
     _poolTheMycosynthGardens,
     _poolTheNeedsOfTheMany,
+    _poolTheNinthDoctor,
     _poolTheRoyalScions,
     _poolTheScarabGod,
     _poolThiefOfBlood,

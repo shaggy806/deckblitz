@@ -920,6 +920,7 @@ import _poolTumble from "../pool/tumble.js";
 import _poolTwinBlades from "../pool/twin-blades.js";
 import _poolTwinBolt from "../pool/twin-bolt.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
+import _poolTyvarTheBellicose from "../pool/tyvar-the-bellicose.js";
 import _poolUSSDefiantToughLittleShip from "../pool/u-s-s-defiant-tough-little-ship.js";
 import _poolUktabiDrake from "../pool/uktabi-drake.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
@@ -1944,6 +1945,7 @@ const shard: CardShard = {
     _poolTwinBlades,
     _poolTwinBolt,
     _poolTyLeeArtfulAcrobat,
+    _poolTyvarTheBellicose,
     _poolUSSDefiantToughLittleShip,
     _poolUktabiDrake,
     _poolUmbralCollarZealot,

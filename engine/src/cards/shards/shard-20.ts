@@ -460,6 +460,7 @@ import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
 import _poolInfernalGenesis from "../pool/infernal-genesis.js";
+import _poolInfestingRadroach from "../pool/infesting-radroach.js";
 import _poolIngeniousProdigy from "../pool/ingenious-prodigy.js";
 import _poolIngeniousThief from "../pool/ingenious-thief.js";
 import _poolInnerFlameAcolyte from "../pool/inner-flame-acolyte.js";
@@ -1535,6 +1536,7 @@ const shard: CardShard = {
     _poolImpulse,
     _poolIncorrigibleYouths,
     _poolInfernalGenesis,
+    _poolInfestingRadroach,
     _poolIngeniousProdigy,
     _poolIngeniousThief,
     _poolInnerFlameAcolyte,

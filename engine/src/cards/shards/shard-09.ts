@@ -309,6 +309,7 @@ import _poolFlightSpellbomb from "../pool/flight-spellbomb.js";
 import _poolFling from "../pool/fling.js";
 import _poolFlourish from "../pool/flourish.js";
 import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
+import _poolFontOfAgonies from "../pool/font-of-agonies.js";
 import _poolForbiddingWatchtower from "../pool/forbidding-watchtower.js";
 import _poolForebearsBlade from "../pool/forebears-blade.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
@@ -1358,6 +1359,7 @@ const shard: CardShard = {
     _poolFling,
     _poolFlourish,
     _poolFoggyNelsonOnRetainer,
+    _poolFontOfAgonies,
     _poolForbiddingWatchtower,
     _poolForebearsBlade,
     _poolForebodingLandscape,

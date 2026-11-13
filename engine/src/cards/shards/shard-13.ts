@@ -261,6 +261,7 @@ import _poolEndlessHorizons from "../pool/endless-horizons.js";
 import _poolEnslavedScout from "../pool/enslaved-scout.js";
 import _poolEntropicSpecter from "../pool/entropic-specter.js";
 import _poolEpharasDispersal from "../pool/epharas-dispersal.js";
+import _poolErtaisFamiliar from "../pool/ertais-familiar.js";
 import _poolEtchedFamiliar from "../pool/etched-familiar.js";
 import _poolExhaustion from "../pool/exhaustion.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
@@ -1261,6 +1262,7 @@ const shard: CardShard = {
     _poolEnslavedScout,
     _poolEntropicSpecter,
     _poolEpharasDispersal,
+    _poolErtaisFamiliar,
     _poolEtchedFamiliar,
     _poolExhaustion,
     _poolExperimentalAviator,

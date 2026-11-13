@@ -410,6 +410,7 @@ import _poolHiddenHerbalists from "../pool/hidden-herbalists.js";
 import _poolHighFlyingAce from "../pool/high-flying-ace.js";
 import _poolHighGround from "../pool/high-ground.js";
 import _poolHightideHermit from "../pool/hightide-hermit.js";
+import _poolHistoriansBoon from "../pool/historians-boon.js";
 import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
 import _poolHomicidalSeclusion from "../pool/homicidal-seclusion.js";
@@ -1434,6 +1435,7 @@ const shard: CardShard = {
     _poolHighFlyingAce,
     _poolHighGround,
     _poolHightideHermit,
+    _poolHistoriansBoon,
     _poolHiveStirrings,
     _poolHollowmurkSiege,
     _poolHomicidalSeclusion,

@@ -848,6 +848,7 @@ import _poolTaskMageAssembly from "../pool/task-mage-assembly.js";
 import _poolTatoFarmer from "../pool/tato-farmer.js";
 import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
+import _poolTeferisImp from "../pool/teferis-imp.js";
 import _poolTeferisTalent from "../pool/teferis-talent.js";
 import _poolTelimtor from "../pool/telimtor.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
@@ -1869,6 +1870,7 @@ const shard: CardShard = {
     _poolTatoFarmer,
     _poolTeachingsOfTheKirin,
     _poolTeeterpeakAmbusher,
+    _poolTeferisImp,
     _poolTeferisTalent,
     _poolTelimtor,
     _poolTelimtorsDarts,
