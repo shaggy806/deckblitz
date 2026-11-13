@@ -35,6 +35,7 @@ import {
   settle,
   spawn,
   table,
+  toGraveyard,
   toHand,
   types,
   watchTargets,
@@ -149,6 +150,21 @@ describe("Filigree Vector", () => {
     const why = invalidTargetReason(game.state, game.registry, TWO, [ref(bears)], A, "Filigree Vector");
     expect(why).toMatch(/isn't ended/);
     expect(invalidTargetReason(game.state, game.registry, TWO, [ref(bears), undefined], A, "Filigree Vector")).toBeNull();
+  });
+});
+
+describe("a spliced card's targets after the spell's own group (rule 702.47d)", () => {
+  it("the group ends at an empty slot, and the spliced card gets its own target", () => {
+    const { game } = table();
+    lands(game, "Island", 2);
+    lands(game, "Mountain", 2);
+    const stream = toHand(game, "Stream of Consciousness");
+    const ray = toHand(game, "Glacial Ray");
+    const cards = [toGraveyard(game, "Hill Giant", B), toGraveyard(game, "Serra Angel", B)];
+    const bears = spawn(game, "Grizzly Bears", B);
+    cast(game, stream, { targets: [ref(B), ref(cards[0]), ref(cards[1]), null, ref(bears)], splice: [ray] });
+    expect(cards.map((id) => zone(game, id))).toEqual(["library", "library"]);
+    expect(zone(game, bears)).toBe("graveyard");
   });
 });
 

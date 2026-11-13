@@ -30174,7 +30174,10 @@ export class Game {
         // of target …" group is a flat target per member, and one that isn't
         // the list's last slot ends at an empty slot of its own (Kamahl's
         // Will's lands before its second mode's creature — `targetSpans`).
-        const shape = targetSpans(castSpecs, object.targets ?? []);
+        // Spliced cards' parts are counted as declared: the spell's own part
+        // there carries its `count` and no `targets`, so declared slots can't
+        // be followed through it.
+        const shape = spliced === null ? targetSpans(castSpecs, object.targets ?? []) : null;
         let declaredEnd = 0;
         for (const [k, mode] of parts.entries()) {
           declaredEnd += mode?.targets?.length ?? 0;
@@ -30183,7 +30186,7 @@ export class Game {
             mode?.count ??
             (k === parts.length - 1
               ? targets.length - offset
-              : (shape[declaredEnd]?.start ?? offset + (mode?.targets?.length ?? 0)) - offset);
+              : (shape?.[declaredEnd]?.start ?? offset + (mode?.targets?.length ?? 0)) - offset);
           const slice = targets.slice(offset, offset + count);
           const zoneSlice = (object.targetZones ?? []).slice(offset, offset + count);
           const illegal = legality.illegal.filter((i) => i >= offset && i < offset + count).map((i) => i - offset);
