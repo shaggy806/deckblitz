@@ -1010,6 +1010,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Green Goblin": "https://cards.scryfall.io/art_crop/back/d/5/d5c53af9-7150-4e78-8771-2de7980aa307.jpg",
   "Grimclimb Pathway": "https://cards.scryfall.io/art_crop/back/d/2/d24c3d51-795d-4c01-a34a-3280fccd2d78.jpg",
   "Grisly Anglerfish": "https://cards.scryfall.io/art_crop/back/1/6/16c0bb08-36b3-41e2-a5a9-2fcd6bb49beb.jpg",
+  "Grist, the Plague Swarm": "https://cards.scryfall.io/art_crop/back/6/8/68239b41-b7db-4044-b672-6808c2c342ec.jpg",
   "Grove's Bounty": "https://cards.scryfall.io/art_crop/back/b/d/bdb79d68-c3af-4091-b7db-005247191da8.jpg",
   "Grub, Notorious Auntie": "https://cards.scryfall.io/art_crop/back/1/f/1f51adf8-8234-4dae-aedf-7633310d5111.jpg",
   "Guard Change": "https://cards.scryfall.io/art_crop/back/a/c/ac1907e8-0713-47dd-ac42-bf1323c5bec0.jpg",

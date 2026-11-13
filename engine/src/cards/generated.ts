@@ -1351,6 +1351,7 @@ import _poolArmusSkinOfEvil from "./pool/armus-skin-of-evil.js";
 import _poolArmyAnts from "./pool/army-ants.js";
 import _poolArmyOfAllah from "./pool/army-of-allah.js";
 import _poolArmyOfTheDamned from "./pool/army-of-the-damned.js";
+import _poolArnaKennerudSkycaptain from "./pool/arna-kennerud-skycaptain.js";
 import _poolArniHumbleScribe from "./pool/arni-humble-scribe.js";
 import _poolArniRenownedChampion from "./pool/arni-renowned-champion.js";
 import _poolArniSlaysTheTroll from "./pool/arni-slays-the-troll.js";
@@ -4747,6 +4748,7 @@ import _poolClearwaterGoblet from "./pool/clearwater-goblet.js";
 import _poolClearwaterPathway from "./pool/clearwater-pathway.js";
 import _poolCleaveShadows from "./pool/cleave-shadows.js";
 import _poolCleaverRiot from "./pool/cleaver-riot.js";
+import _poolCleaverSkaab from "./pool/cleaver-skaab.js";
 import _poolCleavingReaper from "./pool/cleaving-reaper.js";
 import _poolCleavingSkyrider from "./pool/cleaving-skyrider.js";
 import _poolCleavingSliver from "./pool/cleaving-sliver.js";
@@ -11758,6 +11760,8 @@ import _poolGrislySurvivor from "./pool/grisly-survivor.js";
 import _poolGrislyTransformation from "./pool/grisly-transformation.js";
 import _poolGrismoldTheDreadsower from "./pool/grismold-the-dreadsower.js";
 import _poolGristTheHungerTide from "./pool/grist-the-hunger-tide.js";
+import _poolGristThePlagueSwarm from "./pool/grist-the-plague-swarm.js";
+import _poolGristVoraciousLarva from "./pool/grist-voracious-larva.js";
 import _poolGristleGlutton from "./pool/gristle-glutton.js";
 import _poolGristleGrinner from "./pool/gristle-grinner.js";
 import _poolGristleback from "./pool/gristleback.js";
@@ -25083,6 +25087,7 @@ import _poolSokkaWolfCovesProtector from "./pool/sokka-wolf-coves-protector.js";
 import _poolSokkasCharge from "./pool/sokkas-charge.js";
 import _poolSokkasHaiku from "./pool/sokkas-haiku.js";
 import _poolSokkasSwordTraining from "./pool/sokkas-sword-training.js";
+import _poolSokratesAthenianTeacher from "./pool/sokrates-athenian-teacher.js";
 import _poolSolGrail from "./pool/sol-grail.js";
 import _poolSolKanarTheTainted from "./pool/sol-kanar-the-tainted.js";
 import _poolSolRing from "./pool/sol-ring.js";
@@ -34084,6 +34089,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArmyAnts,
   _poolArmyOfAllah,
   _poolArmyOfTheDamned,
+  _poolArnaKennerudSkycaptain,
   _poolArniHumbleScribe,
   _poolArniRenownedChampion,
   _poolArniSlaysTheTroll,
@@ -37480,6 +37486,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClearwaterPathway,
   _poolCleaveShadows,
   _poolCleaverRiot,
+  _poolCleaverSkaab,
   _poolCleavingReaper,
   _poolCleavingSkyrider,
   _poolCleavingSliver,
@@ -44491,6 +44498,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrislyTransformation,
   _poolGrismoldTheDreadsower,
   _poolGristTheHungerTide,
+  _poolGristThePlagueSwarm,
+  _poolGristVoraciousLarva,
   _poolGristleGlutton,
   _poolGristleGrinner,
   _poolGristleback,
@@ -57816,6 +57825,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSokkasCharge,
   _poolSokkasHaiku,
   _poolSokkasSwordTraining,
+  _poolSokratesAthenianTeacher,
   _poolSolGrail,
   _poolSolKanarTheTainted,
   _poolSolRing,
@@ -66830,6 +66840,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/army-ants": _poolArmyAnts,
   "pool/army-of-allah": _poolArmyOfAllah,
   "pool/army-of-the-damned": _poolArmyOfTheDamned,
+  "pool/arna-kennerud-skycaptain": _poolArnaKennerudSkycaptain,
   "pool/arni-humble-scribe": _poolArniHumbleScribe,
   "pool/arni-renowned-champion": _poolArniRenownedChampion,
   "pool/arni-slays-the-troll": _poolArniSlaysTheTroll,
@@ -70226,6 +70237,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/clearwater-pathway": _poolClearwaterPathway,
   "pool/cleave-shadows": _poolCleaveShadows,
   "pool/cleaver-riot": _poolCleaverRiot,
+  "pool/cleaver-skaab": _poolCleaverSkaab,
   "pool/cleaving-reaper": _poolCleavingReaper,
   "pool/cleaving-skyrider": _poolCleavingSkyrider,
   "pool/cleaving-sliver": _poolCleavingSliver,
@@ -77237,6 +77249,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grisly-transformation": _poolGrislyTransformation,
   "pool/grismold-the-dreadsower": _poolGrismoldTheDreadsower,
   "pool/grist-the-hunger-tide": _poolGristTheHungerTide,
+  "pool/grist-the-plague-swarm": _poolGristThePlagueSwarm,
+  "pool/grist-voracious-larva": _poolGristVoraciousLarva,
   "pool/gristle-glutton": _poolGristleGlutton,
   "pool/gristle-grinner": _poolGristleGrinner,
   "pool/gristleback": _poolGristleback,
@@ -90562,6 +90576,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sokkas-charge": _poolSokkasCharge,
   "pool/sokkas-haiku": _poolSokkasHaiku,
   "pool/sokkas-sword-training": _poolSokkasSwordTraining,
+  "pool/sokrates-athenian-teacher": _poolSokratesAthenianTeacher,
   "pool/sol-grail": _poolSolGrail,
   "pool/sol-kanar-the-tainted": _poolSolKanarTheTainted,
   "pool/sol-ring": _poolSolRing,

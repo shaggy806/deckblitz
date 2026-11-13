@@ -52,6 +52,7 @@ import _poolArchonOfTheWildRose from "../pool/archon-of-the-wild-rose.js";
 import _poolArdennIntrepidArchaeologist from "../pool/ardenn-intrepid-archaeologist.js";
 import _poolArmaggonFutureShark from "../pool/armaggon-future-shark.js";
 import _poolArmguardFamiliar from "../pool/armguard-familiar.js";
+import _poolArnaKennerudSkycaptain from "../pool/arna-kennerud-skycaptain.js";
 import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsariCaptain from "../pool/asari-captain.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
@@ -758,6 +759,7 @@ import _poolSlingbowTrap from "../pool/slingbow-trap.js";
 import _poolSlitherwisp from "../pool/slitherwisp.js";
 import _poolSnaremasterSprite from "../pool/snaremaster-sprite.js";
 import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
+import _poolSokratesAthenianTeacher from "../pool/sokrates-athenian-teacher.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
@@ -1050,6 +1052,7 @@ const shard: CardShard = {
     _poolArdennIntrepidArchaeologist,
     _poolArmaggonFutureShark,
     _poolArmguardFamiliar,
+    _poolArnaKennerudSkycaptain,
     _poolArrowsOfJustice,
     _poolAsariCaptain,
     _poolAsphyxiate,
@@ -1756,6 +1759,7 @@ const shard: CardShard = {
     _poolSlitherwisp,
     _poolSnaremasterSprite,
     _poolSnowslopeHunter,
+    _poolSokratesAthenianTeacher,
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
