@@ -1,10 +1,24 @@
 /**
  * Sacrifice costs of a chosen count: "Sacrifice X Clues" with the Clues in
- * one token stack or apart (Lonis, Cryptozoologist).
+ * one token stack or apart (Lonis, Cryptozoologist); "Sacrifice an artifact with mana value X" (Scrap Welder).
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, named, pickFromZone, quiet, spawn, table, toLibrary, zone } from "./harness.js";
+import {
+  A,
+  B,
+  activate,
+  keywords,
+  named,
+  pickFromZone,
+  quiet,
+  ref,
+  spawn,
+  table,
+  toGraveyard,
+  toLibrary,
+  zone,
+} from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -77,5 +91,29 @@ describe("Lonis, Cryptozoologist", () => {
     // The other two go to the bottom of Bob's library.
     expect(zone(game, forest)).toBe("library");
     expect(zone(game, bears)).toBe("library");
+  });
+});
+
+describe("Scrap Welder", () => {
+  it("sacrifices an artifact with mana value X and returns one with mana value less than X, with haste", () => {
+    const { game } = table();
+    const welder = spawn(game, "Scrap Welder");
+    const stone = spawn(game, "Mind Stone");
+    const thopter = toGraveyard(game, "Ornithopter");
+    activate(game, welder, 0, { x: 2, sacrifice: stone, targets: [ref(thopter)] });
+    expect(zone(game, stone)).toBe("graveyard");
+    expect(zone(game, thopter)).toBe("battlefield");
+    expect(keywords(game, thopter).has("haste")).toBe(true);
+  });
+
+  it("can't return a card whose mana value is X, nor pay with an artifact of another mana value", () => {
+    const { game } = table();
+    const welder = spawn(game, "Scrap Welder");
+    const stone = spawn(game, "Mind Stone");
+    const otherStone = toGraveyard(game, "Mind Stone");
+    const thopter = toGraveyard(game, "Ornithopter");
+    expect(() => activate(game, welder, 0, { x: 2, sacrifice: stone, targets: [ref(otherStone)] })).toThrow(/target/i);
+    expect(() => activate(game, welder, 0, { x: 3, sacrifice: stone, targets: [ref(thopter)] })).toThrow(/sacrific/i);
+    expect(zone(game, stone)).toBe("battlefield");
   });
 });
