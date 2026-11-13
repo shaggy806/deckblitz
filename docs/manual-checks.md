@@ -8183,3 +8183,33 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Kamahl's Will: both modes, the lands then Carol's Serra Angel
 - **Do:** Cast Kamahl's Will choosing both modes. Choose two untapped Forests, click Done, then choose Carol's Serra Angel.
 - **Expect:** The two Forests become 1/1 creatures with vigilance, indestructible and haste, and Serra Angel dies (3 from Krenko and 1 from each Forest).
+## The replacements lane: entering, and chosen sets (2026-11-13)
+
+### Sin, Unending Cataclysm: choose whose counters come off as it enters
+- **Do:** Cast Sin. Choose Bob's Grizzly Bears and Dave's Serra Angel.
+- **Expect:** Carol's Hill Giant isn't offered (it has no counters). The Bears are 2/2 and the Angel 4/4 again, and Sin enters with six +1/+1 counters, an 11/11.
+
+### Ixidron: every other nontoken creature turns face down
+- **Do:** Cast Ixidron.
+- **Expect:** Your Grizzly Bears and Bob's Serra Angel turn face down, each a 2/2. Ixidron is a 2/2.
+
+### Containment Priest: a reanimated creature is exiled instead
+- **Do:** Cast Exhume and choose Grizzly Bears.
+- **Expect:** The Bears go to exile, not the battlefield.
+
+### Containment Priest: Sin does what it does as it enters, then is exiled
+- **Do:** Cast Exhume and choose Sin. Asked which applies first, choose Sin, Unending Cataclysm. Then choose Bob's Grizzly Bears.
+- **Expect:** The Bears lose their counters and Sin goes to exile.
+- **Not a bug:** Choosing Containment Priest first sends Sin to exile without asking anything more, and the Bears keep their counters.
+
+### Nahiri's Resolve: exile at your end step, back at your next upkeep
+- **Do:** Pass to your end step. Choose Grizzly Bears and Sol Ring.
+- **Expect:** Both are exiled, stay there through Bob's turn, and come back at the start of your next upkeep.
+
+### Fortune, Loyal Steed: it and the creature that saddled it blink at end of combat
+- **Do:** Saddle Fortune with Grizzly Bears, attack Bob with Fortune, and at end of combat choose the Bears.
+- **Expect:** Fortune and the Bears leave and come back together, both untapped; Fortune's scry 2 is asked again.
+
+### Spry and Mighty: the chosen two get the difference in power
+- **Do:** Cast Spry and Mighty, choosing Hill Giant and Grizzly Bears.
+- **Expect:** You draw one card. The Giant is a 4/4 and the Bears a 3/3, both with trample; Llanowar Elves is unchanged.

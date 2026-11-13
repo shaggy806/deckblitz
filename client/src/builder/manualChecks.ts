@@ -12282,4 +12282,55 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Serra Angel'] }, { bf: ['Hill Giant'] }],
     }),
   ),
+  preset(
+    'Sin, Unending Cataclysm: choose whose counters come off as it enters',
+    board({
+      you: { bf: ['Forest*5', 'Island*2'], hand: ['Sin, Unending Cataclysm'] },
+      opp: [
+        { bf: [{ name: 'Grizzly Bears', counters: { '+1/+1': 2 } }] },
+        { bf: ['Hill Giant'] },
+        { bf: [{ name: 'Serra Angel', counters: { '+1/+1': 1 } }] },
+      ],
+    }),
+  ),
+  preset(
+    'Ixidron: every other nontoken creature turns face down',
+    board({
+      you: { bf: ['Island*5', 'Grizzly Bears'], hand: ['Ixidron'] },
+      opp: [{ bf: ['Serra Angel'] }],
+    }),
+  ),
+  // The Priest last: anything put onto the battlefield after it wasn't cast.
+  preset(
+    'Containment Priest: a reanimated creature is exiled instead',
+    board({
+      you: { bf: ['Swamp*2'], hand: ['Exhume'], gy: ['Grizzly Bears'] },
+      opp: [{ bf: ['Containment Priest'] }],
+    }),
+  ),
+  preset(
+    'Containment Priest: Sin does what it does as it enters, then is exiled',
+    board({
+      you: { bf: ['Swamp*2'], hand: ['Exhume'], gy: ['Sin, Unending Cataclysm'] },
+      opp: [{ bf: [{ name: 'Grizzly Bears', counters: { '+1/+1': 2 } }, 'Containment Priest'] }],
+    }),
+  ),
+  preset(
+    "Nahiri's Resolve: exile at your end step, back at your next upkeep",
+    board({
+      you: { bf: ["Nahiri's Resolve", 'Grizzly Bears', 'Sol Ring'] },
+    }),
+  ),
+  preset(
+    'Fortune, Loyal Steed: it and the creature that saddled it blink at end of combat',
+    board({
+      you: { bf: ['Fortune, Loyal Steed', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Spry and Mighty: the chosen two get the difference in power',
+    board({
+      you: { bf: ['Forest*5', 'Hill Giant', 'Grizzly Bears', 'Llanowar Elves'], hand: ['Spry and Mighty'] },
+    }),
+  ),
 ]
