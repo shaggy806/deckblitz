@@ -2302,8 +2302,15 @@ export function spellHasSplitSecond(state: GameState, registry: CardRegistry, sp
  * ("this spell can't be countered"), or given by a `grantsToSpells` static
  * on the battlefield ("creature spells you control can't be countered").
  * How it was paid for (Cavern of Souls) is `GameObject.uncounterable`, read
- * alongside this. */
-export function spellCantBeCountered(state: GameState, registry: CardRegistry, spell: GameObject): boolean {
+ * alongside this. `by` is what would counter it, where that matters: a turn
+ * grant's `cantBeCounteredBy` (Autumn's Veil's "by blue or black spells")
+ * stops only a matching spell, judged as it resolves. */
+export function spellCantBeCountered(
+  state: GameState,
+  registry: CardRegistry,
+  spell: GameObject,
+  by?: GameObject,
+): boolean {
   if (spell.kind !== "card") return false;
   const printed = registry.get(rulesTextName(spell)).cantBeCountered;
   if (printed === true) return true;
@@ -2325,7 +2332,14 @@ export function spellCantBeCountered(state: GameState, registry: CardRegistry, s
   // "The next instant or sorcery spell you cast this turn can't be
   // countered" (Overmaster — `grant-spells-this-turn`).
   return (state.spellGrantsThisTurn ?? []).some(
-    (grant) => grant.cantBeCountered === true && turnSpellGrantReaches(state, registry, grant, spell),
+    (grant) =>
+      (grant.cantBeCountered === true ||
+        (grant.cantBeCounteredBy !== undefined &&
+          by !== undefined &&
+          by.kind === "card" &&
+          by.zone === "stack" &&
+          matchesFilter(state, registry, by.id, grant.cantBeCounteredBy, { you: grant.player }))) &&
+      turnSpellGrantReaches(state, registry, grant, spell),
   );
 }
 

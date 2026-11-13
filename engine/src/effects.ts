@@ -6126,6 +6126,13 @@ export type EffectSpec =
       /** The spell **can't be countered** (rule 701.5f) — read as
        * `grantsToSpells.cantBeCountered` is. */
       readonly cantBeCountered?: true;
+      /** The spell **can't be countered by spells** matching this filter
+       * (Autumn's Veil's "can't be countered by blue or black spells this
+       * turn"): judged as the countering spell resolves (its rulings — a
+       * spell that turned blue on the stack is blue then). An ability, or a
+       * spell outside the filter, still counters it. Not with
+       * `cantBeCountered`, which already covers everything. */
+      readonly cantBeCounteredBy?: CardFilter;
       /** The spell has **convoke** (rule 702.51). */
       readonly convoke?: true;
       /** The spell has **improvise** (rule 702.126 — Archway of
@@ -18565,6 +18572,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.next === true ? { next: true } : {}),
         triggered: spec.triggered ?? [],
         ...(spec.cantBeCountered === true ? { cantBeCountered: true } : {}),
+        ...(spec.cantBeCounteredBy !== undefined ? { cantBeCounteredBy: spec.cantBeCounteredBy } : {}),
         ...(spec.convoke === true ? { convoke: true } : {}),
         ...(spec.improvise === true ? { improvise: true } : {}),
         ...(spec.intoHandAsItResolves === true ? { intoHandAsItResolves: true as const } : {}),

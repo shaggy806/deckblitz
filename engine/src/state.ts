@@ -2285,6 +2285,9 @@ export interface SpellGrantThisTurn {
   readonly next?: true;
   readonly triggered: readonly TriggeredAbility[];
   readonly cantBeCountered?: true;
+  /** Can't be countered by spells matching this — see
+   * `grant-spells-this-turn`'s `cantBeCounteredBy`. */
+  readonly cantBeCounteredBy?: CardFilter;
   readonly convoke?: true;
   readonly improvise?: true;
   /** Into its owner's hand instead of their graveyard as it resolves — see

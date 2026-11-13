@@ -37792,7 +37792,7 @@ export class Game {
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
       couldEnterBattlefield: (card) => this.couldEnterBattlefield(card),
       counterSpell: (target, into, lockSource, timeCounters) =>
-        this.counterSpellByEffect(target, into, lockSource === true, controller, timeCounters),
+        this.counterSpellByEffect(target, into, lockSource === true, controller, timeCounters, source),
       spellCantBeCountered: (spell) => {
         const object = this.state.objects[spell];
         if (object !== undefined && object.zone === "stack" && object.kind !== "ability") object.uncounterable = true;
@@ -54435,6 +54435,9 @@ controlledBy,
     lockSource: boolean,
     controller: PlayerId,
     timeCounters?: number,
+    /** The spell or ability doing the countering (its source, for an
+     * ability), for a "can't be countered by blue or black spells". */
+    counterer?: ObjectId,
   ): {
     readonly countered: boolean;
     readonly sourcePermanent?: ObjectId;
@@ -54450,7 +54453,7 @@ controlledBy,
     if (
       ability?.kind === "card" &&
       ability.zone === "stack" &&
-      !this.cantBeCountered(ability) &&
+      !this.cantBeCountered(ability, counterer) &&
       this.exilesWhatItWouldCounter(controller)
     ) {
       this.exileSpell(target.object);
@@ -54466,7 +54469,7 @@ controlledBy,
       ability?.kind === "card" &&
       ability.zone === "stack" &&
       ability.isCopy !== true &&
-      !this.cantBeCountered(ability) &&
+      !this.cantBeCountered(ability, counterer) &&
       this.state.players[controller]?.hasLost === false &&
       this.askEnterChoice(target.object, controller)
     ) {
@@ -54474,7 +54477,7 @@ controlledBy,
     }
     const sourceId = ability?.kind === "ability" ? ability.sourceObjectId : null;
     const stint = ability?.lastKnownRefs?.source;
-    const countered = this.counterObject(target.object, controller, into ?? "graveyard");
+    const countered = this.counterObject(target.object, controller, into ?? "graveyard", counterer);
     if (countered && timeCounters !== undefined) this.suspendExiledCard(target.object, timeCounters);
     if (sourceId === null || sourceId === undefined || stint === undefined) return { countered };
     const source = this.state.objects[sourceId];
@@ -54503,10 +54506,11 @@ controlledBy,
     id: ObjectId,
     by: PlayerId,
     into: "graveyard" | "hand" | "exile" | "library-top" | "library-bottom" | "battlefield" = "graveyard",
+    counterer?: ObjectId,
   ): boolean {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return false;
-    if (this.cantBeCountered(object)) {
+    if (this.cantBeCountered(object, counterer)) {
       this.emit({ type: "counter-failed", object: id });
       return false;
     }
@@ -54562,8 +54566,9 @@ controlledBy,
 
   /** "Can't be countered" (rule 701.5f): printed, granted by a permanent, or
    * from how it was paid for. */
-  private cantBeCountered(object: GameObject): boolean {
-    return object.uncounterable === true || spellCantBeCountered(this.state, this.registry, object);
+  private cantBeCountered(object: GameObject, counterer?: ObjectId): boolean {
+    const by = counterer === undefined ? undefined : this.state.objects[counterer];
+    return object.uncounterable === true || spellCantBeCountered(this.state, this.registry, object, by);
   }
 
   /** Whether a static of a permanent `player` controls says "if a spell or

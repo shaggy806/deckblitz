@@ -1660,6 +1660,7 @@ import _poolAutonomousAssembler from "./pool/autonomous-assembler.js";
 import _poolAutumnTailKitsuneSage from "./pool/autumn-tail-kitsune-sage.js";
 import _poolAutumnWillowHarmony from "./pool/autumn-willow-harmony.js";
 import _poolAutumnalGloom from "./pool/autumnal-gloom.js";
+import _poolAutumnsVeil from "./pool/autumns-veil.js";
 import _poolAuxiliaryBoosters from "./pool/auxiliary-boosters.js";
 import _poolAvabruckCaretaker from "./pool/avabruck-caretaker.js";
 import _poolAvacynAngelOfHope from "./pool/avacyn-angel-of-hope.js";
@@ -34303,6 +34304,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAutumnTailKitsuneSage,
   _poolAutumnWillowHarmony,
   _poolAutumnalGloom,
+  _poolAutumnsVeil,
   _poolAuxiliaryBoosters,
   _poolAvabruckCaretaker,
   _poolAvacynAngelOfHope,
@@ -66959,6 +66961,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/autumn-tail-kitsune-sage": _poolAutumnTailKitsuneSage,
   "pool/autumn-willow-harmony": _poolAutumnWillowHarmony,
   "pool/autumnal-gloom": _poolAutumnalGloom,
+  "pool/autumns-veil": _poolAutumnsVeil,
   "pool/auxiliary-boosters": _poolAuxiliaryBoosters,
   "pool/avabruck-caretaker": _poolAvabruckCaretaker,
   "pool/avacyn-angel-of-hope": _poolAvacynAngelOfHope,

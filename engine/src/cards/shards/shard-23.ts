@@ -53,6 +53,7 @@ import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
 import _poolAttuneWithAether from "../pool/attune-with-aether.js";
 import _poolAuraShards from "../pool/aura-shards.js";
+import _poolAutumnsVeil from "../pool/autumns-veil.js";
 import _poolAvenWarcraft from "../pool/aven-warcraft.js";
 import _poolAwokenDemon from "../pool/awoken-demon.js";
 import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
@@ -1081,6 +1082,7 @@ const shard: CardShard = {
     _poolAttercop,
     _poolAttuneWithAether,
     _poolAuraShards,
+    _poolAutumnsVeil,
     _poolAvenWarcraft,
     _poolAwokenDemon,
     _poolAzizaMageTowerCaptain,
