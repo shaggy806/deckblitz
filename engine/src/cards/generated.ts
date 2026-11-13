@@ -15331,6 +15331,7 @@ import _poolLavaleaper from "./pool/lavaleaper.js";
 import _poolLavamancersSkill from "./pool/lavamancers-skill.js";
 import _poolLavaspurBoots from "./pool/lavaspur-boots.js";
 import _poolLavastepRaider from "./pool/lavastep-raider.js";
+import _poolLaviniaAzoriusRenegade from "./pool/lavinia-azorius-renegade.js";
 import _poolLaviniaFoilToConspiracy from "./pool/lavinia-foil-to-conspiracy.js";
 import _poolLawRuneEnforcer from "./pool/law-rune-enforcer.js";
 import _poolLawbringer from "./pool/lawbringer.js";
@@ -47976,6 +47977,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLavamancersSkill,
   _poolLavaspurBoots,
   _poolLavastepRaider,
+  _poolLaviniaAzoriusRenegade,
   _poolLaviniaFoilToConspiracy,
   _poolLawRuneEnforcer,
   _poolLawbringer,
@@ -80634,6 +80636,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lavamancers-skill": _poolLavamancersSkill,
   "pool/lavaspur-boots": _poolLavaspurBoots,
   "pool/lavastep-raider": _poolLavastepRaider,
+  "pool/lavinia-azorius-renegade": _poolLaviniaAzoriusRenegade,
   "pool/lavinia-foil-to-conspiracy": _poolLaviniaFoilToConspiracy,
   "pool/law-rune-enforcer": _poolLawRuneEnforcer,
   "pool/lawbringer": _poolLawbringer,

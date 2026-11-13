@@ -459,6 +459,7 @@ import _poolKumenasAwakening from "../pool/kumenas-awakening.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
+import _poolLaviniaAzoriusRenegade from "../pool/lavinia-azorius-renegade.js";
 import _poolLeadPipe from "../pool/lead-pipe.js";
 import _poolLeafdrakeRoost from "../pool/leafdrake-roost.js";
 import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
@@ -1465,6 +1466,7 @@ const shard: CardShard = {
     _poolLapisOrbOfDragonkind,
     _poolLavaFlow,
     _poolLavaSpike,
+    _poolLaviniaAzoriusRenegade,
     _poolLeadPipe,
     _poolLeafdrakeRoost,
     _poolLeonardosTechnique,

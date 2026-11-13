@@ -46868,8 +46868,16 @@ controlledBy,
       if (unless === "sorcery-timing" && this.whyNotSorcerySpeed(player, `cast ${def.name}`) === null) continue;
       if (unless === "own-turn" && this.activePlayer === player) continue;
       if (!this.prohibitionReachesZone(prohibition, cardId)) continue;
-      // A spell's X counts in its mana value once chosen (rule 202.3e).
-      const context = { you: source.controller, source: source.id, ...(xValue !== undefined ? { castX: xValue } : {}) };
+      // A spell's X counts in its mana value once chosen (rule 202.3e). An
+      // amount is the prohibition's source's, its "each" the spell's
+      // controller — Lavinia's "the number of lands **that player** controls"
+      // (`forItsController`).
+      const context = {
+        you: source.controller,
+        source: source.id,
+        ...(xValue !== undefined ? { castX: xValue } : {}),
+        amount: this.filterAmounts({ source: source.id, controller: source.controller }),
+      };
       if (filter !== undefined && !matchesFilter(this.state, this.registry, cardId, filter, context)) continue;
       // "Can't cast more than one spell each turn" (Rule of Law): only once
       // they've cast that many, each read as it was cast.
