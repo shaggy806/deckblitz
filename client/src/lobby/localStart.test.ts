@@ -50,6 +50,24 @@ describe('localStart', () => {
     expect(verdict.local.bots.map((d) => d.name)).toEqual([bob.name])
   })
 
+  it('keeps your name and the bots\' names (a bug report, 2026-11-12: the board said "Alice")', () => {
+    const named = (s: SeatStatus, displayName: string | null): SeatStatus => ({ ...s, displayName })
+    const verdict = localStart(
+      lobby({
+        seats: [
+          named(seatOf('alice', bob.name, true), 'Grumble'),
+          named(seatOf('bob', 'My Deck', false), 'Toby'),
+          named(seatOf('carol', carol.name, true), null),
+        ],
+        seat: 'bob' as PlayerId,
+        sent: new Map([['bob' as PlayerId, mine]]),
+      }),
+    )
+    if (!('local' in verdict)) throw new Error(verdict.server)
+    expect(verdict.local.name).toBe('Toby')
+    expect(verdict.local.botNames).toEqual(['Grumble', null])
+  })
+
   it('uses the list it sent for a bot over a starter of the same name', () => {
     const custom: WireDeck = { name: bob.name, cards: ['Island'], commanders: [] }
     const verdict = localStart(lobby({ sent: new Map([['alice' as PlayerId, mine], ['bob' as PlayerId, custom]]) }))

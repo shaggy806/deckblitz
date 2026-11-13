@@ -233,6 +233,15 @@ describe("PendingRoom", () => {
     expect(room.botSeats()).toEqual([{ player: BOB, displayName: bobStatus?.displayName }]);
   });
 
+  it("addBot keeps a name it's given (a lobby's game moved into a tab), trimmed and capped", () => {
+    const room = pendingRoom();
+    room.addBot(BOB, undefined, "  Grumble  ");
+    expect(room.seatStatuses().find((s) => s.player === BOB)?.displayName).toBe("Grumble");
+    const other = pendingRoom();
+    other.addBot(BOB, undefined, "   ");
+    expect(other.seatStatuses().find((s) => s.player === BOB)?.displayName).toBeTruthy();
+  });
+
   it("addBot with a chosen deck uses it instead of the positional default", () => {
     const room = pendingRoom();
     room.addBot(BOB, { cards: ["Forest", "Forest"], commanders: ["Ureni of the Unwritten"], name: "My Deck" });

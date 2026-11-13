@@ -129,6 +129,10 @@ describe('withNames', () => {
     expect(withNames('p1 cannot attack', seats, nameOf)).toBe('Toby cannot attack')
   })
 
+  it("names the opponent a clash offers (a bug report, 2026-11-12: it said \"Bob\")", () => {
+    expect(withNames('Clash with p1', seats, nameOf)).toBe('Clash with Toby')
+  })
+
   it('leaves a seat id inside another word alone', () => {
     expect(withNames('p10 and xp1', seats, nameOf)).toBe('p10 and xp1')
   })

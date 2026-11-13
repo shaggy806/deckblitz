@@ -443,8 +443,9 @@ export class PendingRoom {
   /** Fills `player`'s seat with a bot — same guards as `Room.addBot`. `deck`,
    * when given, becomes the bot's deck (validated the same way a human
    * claim's deck is); omitted falls back to that seat's positional starter
-   * deck. */
-  addBot(player: PlayerId, deck?: PendingDeck): void {
+   * deck. `displayName`, when given, is its name (a waiting room's game
+   * moved into a tab keeps its bots' names); otherwise one fitting its deck. */
+  addBot(player: PlayerId, deck?: PendingDeck, displayName?: string): void {
     const seat = this.seatFor(player);
     if (seat.clientToken !== null) throw new Error(`seat ${player} is already claimed`);
     if (seat.isBot) throw new Error(`seat ${player} already has a bot`);
@@ -452,7 +453,8 @@ export class PendingRoom {
     this.assertDeckAllowed(deck ?? this.fallbackDeck(player));
     seat.isBot = true;
     seat.deck = deck ?? this.fallbackDeck(player);
-    seat.displayName = this.botName(player, seat.deck);
+    const named = displayName?.trim();
+    seat.displayName = named ? named.slice(0, MAX_DISPLAY_NAME_LENGTH) : this.botName(player, seat.deck);
     this.lastActivityAt = Date.now();
   }
 

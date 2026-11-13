@@ -81,15 +81,21 @@ describe("clash (rule 701.30)", () => {
     toLibrary(game, "Wastes", B);
     const carols = toLibrary(game, "Hill Giant", C);
     let asked: readonly string[] = [];
+    let players: readonly (string | null)[] | undefined;
     a.chooseModesFn = (_view, _min, _max, texts) => {
       if (texts.some((t) => t.startsWith("Clash with"))) {
         asked = texts;
-        return [texts.findIndex((t) => t === "Clash with Carol")];
+        const offer = game.legalActions(A).find((l) => l.kind === "choose-modes");
+        players = offer?.kind === "choose-modes" ? offer.modePlayers : undefined;
+        return [texts.findIndex((t) => t === "Clash with carol")];
       }
       return [0];
     };
     const rascal = enter(game, "Paperfin Rascal");
-    expect(asked).toEqual(["Clash with Bob", "Clash with Carol"]);
+    // Each names its seat, and the offer says whose it is, so a client shows
+    // the player's own name (a bug report, 2026-11-12: it showed "Bob").
+    expect(asked).toEqual(["Clash with bob", "Clash with carol"]);
+    expect(players).toEqual([B, C]);
     // A tie with Carol's Hill Giant isn't a win.
     expect(counters(game, rascal)).toBe(0);
     expect(library(game, C)[0]).toBe(carols);

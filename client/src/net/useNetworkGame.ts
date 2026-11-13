@@ -458,6 +458,9 @@ export function useNetworkGame(): NetworkGame {
     bots: readonly WireDeck[]
     sent: boolean
     seatIndex?: number
+    /** A lobby's game moved here: your name and the bots', kept. */
+    name?: string | null
+    botNames?: readonly (string | null)[]
     settings?: RoomSettings | null
     botSpeed?: BotSpeed
   } | null>(null)
@@ -651,12 +654,18 @@ export function useNetworkGame(): NetworkGame {
           // A seat-board refresh the server sent before it saw my
           // `leave-room` — I've already left, so it mustn't pull me back in.
           if (message.roomId !== roomIdRef.current) return
+          // A blitz's room, or a lobby's game moving into this tab, on its
+          // way to its first frame: the seat board on screen (a lobby's, its
+          // Start Game saying "Starting…") stays as it is until then, rather
+          // than the new room's empty seats and a Start Game button flashing
+          // past as if the click had failed (a bug report, 2026-11-12).
+          const blitzBound = pendingBlitzRef.current !== null && message.pending === true
           // The seat board as the server now has it: whatever it was asked.
-          endLobbyRequest()
+          if (!blitzBound) endLobbyRequest()
           joiningRef.current = false
           roomIdRef.current = message.roomId
           setRoomId(message.roomId)
-          setSeats(message.seats)
+          if (!blitzBound) setSeats(message.seats)
           setIsHost(message.isHost)
           setBotSpeedState(message.botSpeed)
           setRoomSettingsState(message.settings ?? null)
@@ -686,8 +695,12 @@ export function useNetworkGame(): NetworkGame {
               if (blitz.settings) send({ type: 'set-room-settings', roomId: message.roomId, settings: blitz.settings })
               const clientToken = newClientToken()
               pendingClaimRef.current = { seat: mine.player, clientToken }
-              send({ type: 'claim-seat', roomId: message.roomId, seat: mine.player, clientToken, deck: blitz.deck, ready: true })
-              others.forEach((s, i) => send({ type: 'add-bot', roomId: message.roomId, seat: s.player, deck: blitz.bots[i] }))
+              const displayName = blitz.name ?? undefined
+              send({ type: 'claim-seat', roomId: message.roomId, seat: mine.player, clientToken, deck: blitz.deck, ready: true, ...(displayName ? { displayName } : {}) })
+              others.forEach((s, i) => {
+                const botName = blitz.botNames?.[i] ?? undefined
+                send({ type: 'add-bot', roomId: message.roomId, seat: s.player, deck: blitz.bots[i], ...(botName ? { displayName: botName } : {}) })
+              })
               if (blitz.botSpeed !== undefined) send({ type: 'set-bot-speed', roomId: message.roomId, speed: blitz.botSpeed })
               send({ type: 'start-game', roomId: message.roomId })
             }
@@ -908,6 +921,7 @@ export function useNetworkGame(): NetworkGame {
       isPlayingRef.current = false
       pendingBlitzRef.current = null
       setBlitzing(false)
+      endLobbyRequest()
       pendingTutorialRef.current = null
       setTutorialStarting(false)
       setStatus('disconnected')
@@ -920,7 +934,7 @@ export function useNetworkGame(): NetworkGame {
       setError('Could not reach the room server.')
       setErrorSeq((n) => n + 1)
     }
-  }, [send, noteSentDeck])
+  }, [send, noteSentDeck, endLobbyRequest])
 
   useEffect(() => {
     openSocketRef.current = openSocket
@@ -1258,6 +1272,10 @@ export function useNetworkGame(): NetworkGame {
       return
     }
     const plan = verdict.local
+    // "Starting…" until the game's first frame here (or an error), however
+    // long a slow machine takes to build it: not the lobby's usual backstop.
+    if (lobbyTimerRef.current !== null) window.clearTimeout(lobbyTimerRef.current)
+    lobbyTimerRef.current = null
     send({ type: 'leave-room', roomId: id })
     clearStoredSeat(id)
     pendingClaimRef.current = null
@@ -1270,6 +1288,8 @@ export function useNetworkGame(): NetworkGame {
       seatIndex: plan.seatIndex,
       settings: plan.settings,
       botSpeed: plan.botSpeed,
+      name: plan.name,
+      botNames: plan.botNames,
     }
     setBlitzing(true)
     setBlitzReport(null)
