@@ -6,6 +6,7 @@
     "effect:token-copy-of-graveyard-cards",
     "effect:token-copy-enters-attached",
     "replacement:prevention-then-names-damaged-player",
+    "bug:reflexive-target-compare-bound-at-creation",
     "static:attack-restriction-power-vs-hand-size",
     "filter:shares-creature-type-with-convokers",
     "filter:shares-creature-type-with-each-of-set",

@@ -15981,6 +15981,17 @@ function isAmountCompare(value: Record<string, unknown>): boolean {
   return "op" in value && typeof n === "object" && n !== null && "amount" in n;
 }
 
+/** Does `amount` read only the source's own power, toughness or mana value
+ * as it is — what a reflexive ability, which has the creating one's source,
+ * reads for itself as its targets are chosen and rechecked? */
+function readsSourceItself(amount: EffectAmount): boolean {
+  if (typeof amount !== "object") return false;
+  if ("powerOf" in amount) return amount.powerOf === "source" && amount.doubling === undefined;
+  if ("toughnessOf" in amount) return amount.toughnessOf === "source" && amount.doubling === undefined;
+  if ("manaValueOf" in amount) return amount.manaValueOf === "source";
+  return false;
+}
+
 /** Is this a `NumCompare` written `n: "x"`? Bound like an `{ amount: "x" }`:
  * a filter is applied by dozens of paths, and most have no X at hand. */
 function isBareXCompare(value: Record<string, unknown>): boolean {
@@ -16129,12 +16140,16 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     source: ctx.source,
     stint: ctx.sourceStintNow() ?? -1,
   });
+  // Inside a reflexive ability's targets: a compare with its source's own
+  // power, toughness or mana value stays unbound — see below.
+  let inReflexiveTargets = false;
   const walk = (value: unknown): unknown => {
     if (value === null || typeof value !== "object") return value;
     if (Array.isArray(value)) return value.map(walk);
     const record = value as Record<string, unknown>;
     if (isAmountCompare(record)) {
       const operand = record["n"] as { readonly amount: EffectAmount };
+      if (inReflexiveTargets && readsSourceItself(operand.amount)) return record;
       return { ...record, n: amountValue(operand.amount, ctx) };
     }
     if (isBareXCompare(record)) return { ...record, n: ctx.x };
@@ -16169,6 +16184,25 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         readonly targets: unknown;
       };
       return { ...record, targets };
+    }
+    // Its targets are chosen as it's put on the stack and rechecked as it
+    // resolves (rules 603.12, 608.2b), each time against its source as it is
+    // then: Auron, Venerated Guardian's "power less than Auron's power" is
+    // Auron with the counter the creating ability has just put, and less if
+    // Auron shrinks before it resolves. The reflexive ability has the
+    // creating one's source, so its own targeting reads those compares;
+    // everything else in the targets only the creating resolution knows.
+    if (record["kind"] === "reflexive-trigger" && record["targets"] !== undefined) {
+      const { targets: unbound, ...rest } = record;
+      const was = inReflexiveTargets;
+      inReflexiveTargets = true;
+      let targets: unknown;
+      try {
+        targets = walk(unbound);
+      } finally {
+        inReflexiveTargets = was;
+      }
+      return { ...(walk(rest) as Record<string, unknown>), targets };
     }
     // A `whileSource` permission's filter is its source's static ability,
     // read as the card is cast (Maralen's "the number of Elves and Faeries

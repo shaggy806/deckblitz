@@ -322,6 +322,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A reflexive ability's target read against its source now — fixed 2026-11-13
+
+`bug:reflexive-target-compare-bound-at-creation`. `bindDynamicCompares` left
+a compare with the source's power, toughness or mana value in a reflexive
+ability's targets bound as the creating ability resolved; it's now left for
+the reflexive ability's own targeting, read as targets are chosen and rechecked
+(608.2b). Proving: Auron, Venerated Guardian. Test:
+`reflexive-target-live-compare.test.ts`.
+
 ### A static combat record's scope against your hand size — built 2026-11-13
 
 `static:attack-restriction-power-vs-hand-size`. `recordsOn` now reads a
