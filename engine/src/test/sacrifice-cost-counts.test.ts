@@ -1,14 +1,22 @@
 /**
  * Sacrifice costs of a chosen count: "Sacrifice X Clues" with the Clues in
- * one token stack or apart (Lonis, Cryptozoologist); "Sacrifice an artifact with mana value X" (Scrap Welder).
+ * one token stack or apart (Lonis, Cryptozoologist); "Sacrifice an
+ * artifact with mana value X" (Scrap Welder); "Sacrifice up to three
+ * permanents", the card types among them read off the paid set (Baba
+ * Lysaga, Night Witch — `maxX`, `{ cardTypesAmong }`).
  */
 import { describe, expect, it } from "vitest";
 
+import type { LegalAction } from "../actions.js";
+import type { ScriptedController } from "../controller.js";
 import {
   A,
   B,
+  C,
   activate,
+  hand,
   keywords,
+  life,
   named,
   pickFromZone,
   quiet,
@@ -115,5 +123,71 @@ describe("Scrap Welder", () => {
     expect(() => activate(game, welder, 0, { x: 2, sacrifice: stone, targets: [ref(otherStone)] })).toThrow(/target/i);
     expect(() => activate(game, welder, 0, { x: 3, sacrifice: stone, targets: [ref(thopter)] })).toThrow(/sacrific/i);
     expect(zone(game, stone)).toBe("battlefield");
+  });
+});
+
+describe("Baba Lysaga, Night Witch", () => {
+  type Offer = Extract<LegalAction, { kind: "activate-ability" }>;
+  const offer = (game: Game, source: ObjectId): Offer | undefined =>
+    game.legalActions(A).find((a): a is Offer => a.kind === "activate-ability" && a.source === source);
+
+  /** Activate at `x`, sacrificing `victims`; settled. */
+  function sacrificeFor(game: Game, a: ScriptedController, baba: ObjectId, victims: readonly ObjectId[]): void {
+    a.chooseSacrificesFn = () => [...victims];
+    activate(game, baba, 0, { x: victims.length });
+  }
+
+  it("sacrifices up to three — never more, however many it could", () => {
+    const { game } = table();
+    const baba = spawn(game, "Baba Lysaga, Night Witch");
+    for (let i = 0; i < 5; i += 1) spawn(game, "Forest");
+    expect(offer(game, baba)?.xCost?.maxX).toBe(3);
+    expect(() => activate(game, baba, 0, { x: 4 })).toThrow(/more than 3/);
+    expect(zone(game, baba)).toBe("battlefield");
+  });
+
+  it("with three card types among them, drains each opponent for 3, gains 3 and draws three", () => {
+    const { game, a } = table({ players: 3 });
+    const baba = spawn(game, "Baba Lysaga, Night Witch");
+    const ring = spawn(game, "Sol Ring");
+    const forest = spawn(game, "Forest");
+    const anthem = spawn(game, "Glorious Anthem");
+    spawn(game, "Grizzly Bears");
+    const cards = hand(game).length;
+    sacrificeFor(game, a, baba, [ring, forest, anthem]);
+    for (const id of [ring, forest, anthem]) expect(zone(game, id)).toBe("graveyard");
+    expect(life(game, B)).toBe(17);
+    expect(life(game, C)).toBe(17);
+    expect(life(game, A)).toBe(23);
+    expect(hand(game).length).toBe(cards + 3);
+  });
+
+  it("counts an artifact creature as two types, read as it last was — and may sacrifice herself", () => {
+    const { game, a } = table();
+    const baba = spawn(game, "Baba Lysaga, Night Witch");
+    const thopter = spawn(game, "Ornithopter");
+    const forest = spawn(game, "Forest");
+    sacrificeFor(game, a, baba, [thopter, forest]);
+    expect(life(game, B)).toBe(17);
+    const { game: other, a: seat } = table();
+    const witch = spawn(other, "Baba Lysaga, Night Witch");
+    const swamp = spawn(other, "Swamp");
+    const ring = spawn(other, "Sol Ring");
+    sacrificeFor(other, seat, witch, [witch, swamp, ring]);
+    expect(zone(other, witch)).toBe("graveyard");
+    expect(life(other, B)).toBe(17);
+  });
+
+  it("with fewer than three card types, does nothing", () => {
+    const { game, a } = table();
+    const baba = spawn(game, "Baba Lysaga, Night Witch");
+    const bears = spawn(game, "Grizzly Bears");
+    const elves = spawn(game, "Llanowar Elves");
+    const forest = spawn(game, "Forest");
+    const cards = hand(game).length;
+    sacrificeFor(game, a, baba, [bears, elves, forest]);
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(life(game, B)).toBe(20);
+    expect(hand(game).length).toBe(cards);
   });
 });

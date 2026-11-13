@@ -1108,7 +1108,10 @@ token's own key (Karox Bladewing) — what it copies, or its subtypes plus
 token's key must say "Token", and no card's may),
 `{ cardTypesInGraveyard: CardFilter }` (card types among cards in graveyards,
 each type once and a two-typed card giving both — Tarmogoyf is `{}`, delirium's
-"in your graveyard" `{ ownedBy: "you" }`), and the arithmetic that composes
+"in your graveyard" `{ ownedBy: "you" }`), `{ cardTypesAmong: ObjectSetRef }`
+(card types among a set's members, each once, a member that left read as it
+last existed — Baba Lysaga's "among the sacrificed permanents" is `{ paid:
+"sacrificed" }`), and the arithmetic that composes
 the rest without every shape growing a modifier: `{ product: [...] }` (Gray
 Merchant's "life equal to the life lost this way" is devotion × opponents, and
 neither factor is static), `{ sum: [...] }` ("N plus an amount" — "mana value 1
@@ -4162,7 +4165,12 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   everything else first, and a Treasure the mana has to come from doesn't
   count towards the sacrifice (601.2g); `otherOnly` keeps the source out
   ("two **other** creatures"). "Any number of" is `count: "x"` too, "one or
-  more" with `minX: 1`. On a mana ability it's activated by hand only, the
+  more" with `minX: 1`, "up to three" with `maxX: 3` on the ability (Baba
+  Lysaga, Night Witch's "Sacrifice up to three permanents" — `filter: {}`;
+  the offer's `xCost.maxX` never above it). "The card types among the
+  sacrificed permanents" is the `{ cardTypesAmong: { paid: "sacrificed" } }`
+  amount, each as it last existed. A Clue stack under Lonis, Cryptozoologist
+  ("Sacrifice X Clues") needs nothing more. On a mana ability it's activated by hand only, the
   mana added as the last one is chosen and never on the stack (Springjack
   Pasture's "Sacrifice X Goats: Add X mana of any one color. You gain X life",
   `add-mana` with `also`). `{ parts: [{ filter, count }, …] }` is several kinds

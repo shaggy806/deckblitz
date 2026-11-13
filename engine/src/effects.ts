@@ -1113,6 +1113,12 @@ export type EffectAmount =
    * is `{}`; delirium's "in your graveyard" is `{ ownedBy: "you" }`). A
    * multi-face card has its front face's types there (rule 712.8a). */
   | { readonly cardTypesInGraveyard: CardFilter }
+  /** How many card types there are among a set's members, each type once —
+   * Baba Lysaga, Night Witch's "if there were three or more card types
+   * among **the sacrificed permanents**" (`{ paid: "sacrificed" }`). A
+   * member that has left the stint the set found it in is read as it last
+   * existed there (rule 608.2h), a token that has ceased as it was. */
+  | { readonly cardTypesAmong: ObjectSetRef }
   /**
    * How many card types the spell whose cost is being worked out (`"priced"`)
    * shares with the cards exiled with this source (rule 607.2a, linked
@@ -15220,6 +15226,14 @@ export function signedAmountValue(
     return opponentsVoting(ctx.votes(), ctx.controller, ctx.playersInScope("each-opponent"), false).length;
   }
   if ("cardTypesInGraveyard" in amount) return ctx.cardTypesInGraveyard(amount.cardTypesInGraveyard);
+  if ("cardTypesAmong" in amount) {
+    return ctx.cardTypesAmong(
+      ctx.objectSet(amount.cardTypesAmong).map((member) => ({
+        object: member.object,
+        departed: ctx.stintNow(member.object) !== member.stint,
+      })),
+    );
+  }
   if ("cardTypesSharedWith" in amount) {
     if (ctx.priced === undefined) return 0;
     const exiled = new Set(

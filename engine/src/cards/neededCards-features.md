@@ -366,6 +366,19 @@ object in only by a type it has (rule 205.3m), and `each` a type in common
 with every one. The new `"convokers"` object set is the creatures that convoked
 the source's spell (702.51a), each as it last existed. Proving: Everything
 Comes to Dust, Cryptic Gateway. Test: `shares-type-with-set.test.ts`.
+### Sacrifice costs of a chosen count — built 2026-11-13
+
+By EDHREC rank: Lonis, Cryptozoologist (5342), Baba Lysaga, Night Witch
+(9676), Scrap Welder (9878). Two needed no engine code: Lonis's "Sacrifice X
+Clues" (B296's one-Clue-left was Lonis's own investigate, off the creature it
+put onto the battlefield) and Scrap Welder's "an artifact with mana value X"
+(Sidisi's filter reading X). "Up to three" is `ActivatedAbility.maxX` on a
+`count: "x"` sacrifice; "card types among the sacrificed permanents" the
+`{ cardTypesAmong: ObjectSetRef }` amount. Each line is the only one of its
+kind, so no scaffolder templates. A spell's additional cost reading X
+(Nahiri's Sacrifice) is still missing. Keys: cost:sacrifice-x-of-token-stack,
+cost:sacrifice-mana-value-x (activated abilities), cost:sacrifice-up-to-n.
+
 ### Mana whose rider copies the ability it paid for — built 2026-11-13
 
 By EDHREC rank: Sunken Palace (4621), the only card. `add-mana`'s

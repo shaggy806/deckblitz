@@ -4321,7 +4321,8 @@ export class Game {
           : undefined;
       // A `do` cost's own X (Pay X {E}): what the act could pay.
       const doX = ability.cost.do === undefined ? undefined : costActMaxX(ability.cost.do, this.makeResolutionContext(source, player, []));
-      const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX, lifeX, doX].filter(
+      // "Up to three" (`maxX`): never more, whatever there is.
+      const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX, lifeX, doX, ability.maxX].filter(
         (n): n is number => n !== undefined,
       );
       const payableX = caps.length === 0 ? undefined : Math.min(...caps);
@@ -24890,6 +24891,9 @@ export class Game {
     const sacrificeParts = sacrificeCostParts(ability.cost.sacrifice, x ?? ability.minX ?? 0);
     if (x !== undefined && x < (ability.minX ?? 0)) {
       return `${def.name}'s ability can't be activated with X less than ${ability.minX ?? 0}`;
+    }
+    if (x !== undefined && ability.maxX !== undefined && x > ability.maxX) {
+      return `${def.name}'s ability can't be activated with X more than ${ability.maxX}`;
     }
     // An X the ability's own text defines (rule 107.3c) isn't chosen: only
     // that X, and none while it's undefined.

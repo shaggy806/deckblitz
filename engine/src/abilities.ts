@@ -935,6 +935,13 @@ export interface ActivatedAbility {
    * "Sacrifice X artifacts: … X can't be 0." Absent: 0. The offer's
    * `xCost.minX` says it, and an activation below it is refused. */
   readonly minX?: number;
+  /** The most X may be — "Sacrifice **up to three** permanents" (Baba
+   * Lysaga, Night Witch) is a sacrifice of `count: "x"` with `maxX: 3`: how
+   * many, 0 to 3, announced as it's activated and that many chosen as the
+   * cost is paid (601.2h). The offer's `xCost.maxX` is never above it, and an
+   * activation above it is refused. Not an {X} in the cost: nothing that
+   * asks for one (Magus Lucea Kane) sees it. */
+  readonly maxX?: number;
   /** The cost's X is **defined by the ability's own text**, not chosen (rule
    * 107.3c): Prototype Portal's "{X}, {T}: Create a token that's a copy of
    * the exiled card. X is the mana value of that card." is `xIs: {

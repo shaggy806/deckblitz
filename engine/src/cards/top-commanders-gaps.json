@@ -10,6 +10,7 @@
     "static:attack-restriction-power-vs-hand-size",
     "filter:shares-creature-type-with-convokers",
     "filter:shares-creature-type-with-each-of-set",
+    "cost:sacrifice-up-to-n",
     "cost:sacrifice-mana-value-x",
     "cost:sacrifice-x-of-token-stack",
     "effect:when-spent-on-ability",
