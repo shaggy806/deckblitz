@@ -14504,12 +14504,14 @@ export class Game {
     // From a graveyard under a limited permission (Muldrotha), spend it while
     // the card is still there. An unnamed one prefers an unlimited permission
     // (Ramunap Excavator), which spends nothing.
+    let graveyardTerms: PlayTerms | undefined;
     if (
       this.state.objects[cardId].zone === "graveyard" &&
       (graveyardGrant !== undefined || !this.mayPlayFromGraveyard(player, cardId, face))
     ) {
       const found = this.findGraveyardGrant(player, cardId, face, graveyardGrant);
       if (found !== null) this.spendGraveyardGrant(found, this.faceDef(cardId, face).types);
+      graveyardTerms = found?.option.terms;
     }
 
     const from = this.state.objects[cardId].zone;
@@ -14529,7 +14531,15 @@ export class Game {
     }
     this.state.objects[cardId].face = face;
     this.journal({ kind: "land-played", player, object: cardId, from });
-    this.finishLandPlay({ kind: "land", object: cardId, player, from, ...(tapped ? { tapped: true as const } : {}) });
+    const gainsTriggered = (graveyardTerms ?? underPermission?.terms)?.gainsTriggered;
+    this.finishLandPlay({
+      kind: "land",
+      object: cardId,
+      player,
+      from,
+      ...(tapped ? { tapped: true as const } : {}),
+      ...(gainsTriggered !== undefined ? { gainsTriggered } : {}),
+    });
     this.afterPlayerAction(player);
   }
 
@@ -14556,6 +14566,19 @@ export class Game {
     });
     if (under !== undefined && this.state.objects[cardId]?.zone === "battlefield" && this.state.objects[cardId].controller !== under) {
       this.gainControlByEffect(under, { kind: "object", object: cardId }, false, true, { split: false });
+    }
+    // "If you do, it gains '…'" (Serra Paragon): the land, from the moment
+    // it's on the battlefield, for as long as it's that object (rule 400.7).
+    if (entered && entry.gainsTriggered !== undefined && this.state.objects[cardId]?.zone === "battlefield") {
+      this.state.objects[cardId].modifiers.push({
+        timestamp: this.freshTimestamp(),
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        grantsTriggered: [...entry.gainsTriggered],
+        untilEndOfTurn: false,
+      });
+      invalidateComputedCache();
     }
     this.emit({ type: "land-played", player, object: cardId, from });
     // Lake of the Dead that wasn't paid for never entered (`EnterInstead`).
@@ -21526,6 +21549,20 @@ export class Game {
         toughness: 0,
         keywords: ["haste"],
         untilEndOfTurn: true,
+        castRider: true,
+      });
+      invalidateComputedCache();
+    }
+    // Serra Paragon's "if you do, it gains '…'": the spell, and the
+    // permanent it becomes (a `castRider`, rule 400.7).
+    if (permissionTerms?.gainsTriggered !== undefined) {
+      object.modifiers.push({
+        timestamp: this.freshTimestamp(),
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        grantsTriggered: [...permissionTerms.gainsTriggered],
+        untilEndOfTurn: false,
         castRider: true,
       });
       invalidateComputedCache();

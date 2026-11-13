@@ -803,6 +803,7 @@ import _poolStrangeAugmentation from "../pool/strange-augmentation.js";
 import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStromkirkBloodthief from "../pool/stromkirk-bloodthief.js";
+import _poolStrongBack from "../pool/strong-back.js";
 import _poolStrongholdConfessor from "../pool/stronghold-confessor.js";
 import _poolStrongholdRats from "../pool/stronghold-rats.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
@@ -1797,6 +1798,7 @@ const shard: CardShard = {
     _poolStranglingSoot,
     _poolStrefanMaurerProgenitor,
     _poolStromkirkBloodthief,
+    _poolStrongBack,
     _poolStrongholdConfessor,
     _poolStrongholdRats,
     _poolStubbornBurrowfiend,

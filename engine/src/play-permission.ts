@@ -18,6 +18,7 @@
  * cast's own.
  */
 
+import type { TriggeredAbility } from "./abilities.js";
 import type { CardType, StaticCondition } from "./cards/define.js";
 import type { Expiry, PermissionDuration } from "./duration.js";
 import type { EffectSpec, PlayerScope } from "./effects.js";
@@ -93,6 +94,10 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  * - `landsEnterTapped`: "each land played this way enters tapped".
  * - `entersWith`: a permanent spell or land played this way enters with these
  *   counters (Cemetery Prowler's finality counters).
+ * - `gainsTriggered`: "if you do, it gains '[trigger]'" (Serra Paragon): the
+ *   spell cast this way, and the permanent it becomes (rule 400.7 — a
+ *   `castRider`), or the land played this way as it enters, has these for as
+ *   long as it's that object.
  */
 export interface PlayTerms {
   readonly play?: boolean;
@@ -130,6 +135,7 @@ export interface PlayTerms {
   readonly gainsHaste?: boolean;
   readonly landsEnterTapped?: true;
   readonly entersWith?: { readonly kind: string; readonly amount: number };
+  readonly gainsTriggered?: readonly TriggeredAbility[];
 }
 
 /**
@@ -289,6 +295,7 @@ const PLAY_GRANT_KEYS = [
   "gainsHaste",
   "landsEnterTapped",
   "entersWith",
+  "gainsTriggered",
   "duration",
   "byOwner",
   "whileSource",

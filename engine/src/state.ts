@@ -5109,6 +5109,9 @@ export type PendingEntry =
       /** "Each land played this way enters tapped" — the permission it's
        * played under (`GameObject.playPermission`), read before anything moved. */
       readonly tapped?: true;
+      /** "If you do, it gains '[trigger]'" — the permission's
+       * `gainsTriggered`, the land's from the moment it enters. */
+      readonly gainsTriggered?: readonly TriggeredAbility[];
     }
   | {
       /** The answer to a `choose-from-zone` decision, not yet carried out

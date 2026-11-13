@@ -722,6 +722,7 @@ import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSelvalaHeartOfTheWilds from "../pool/selvala-heart-of-the-wilds.js";
 import _poolSensationalSpiderMan from "../pool/sensational-spider-man.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
+import _poolSerraParagon from "../pool/serra-paragon.js";
 import _poolSerrasHymn from "../pool/serras-hymn.js";
 import _poolSevenDwarves from "../pool/seven-dwarves.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
@@ -1740,6 +1741,7 @@ const shard: CardShard = {
     _poolSelvalaHeartOfTheWilds,
     _poolSensationalSpiderMan,
     _poolSentinelSpider,
+    _poolSerraParagon,
     _poolSerrasHymn,
     _poolSevenDwarves,
     _poolSeveredStrands,

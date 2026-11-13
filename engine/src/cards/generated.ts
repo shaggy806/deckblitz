@@ -23737,6 +23737,7 @@ import _poolSerraDisciple from "./pool/serra-disciple.js";
 import _poolSerraFaithkeeper from "./pool/serra-faithkeeper.js";
 import _poolSerraInquisitors from "./pool/serra-inquisitors.js";
 import _poolSerraPaladin from "./pool/serra-paladin.js";
+import _poolSerraParagon from "./pool/serra-paragon.js";
 import _poolSerraRedeemer from "./pool/serra-redeemer.js";
 import _poolSerraSphinx from "./pool/serra-sphinx.js";
 import _poolSerraTheBenevolent from "./pool/serra-the-benevolent.js";
@@ -26341,6 +26342,7 @@ import _poolStromkirkMentor from "./pool/stromkirk-mentor.js";
 import _poolStromkirkNoble from "./pool/stromkirk-noble.js";
 import _poolStromkirkOccultist from "./pool/stromkirk-occultist.js";
 import _poolStromkirkPatrol from "./pool/stromkirk-patrol.js";
+import _poolStrongBack from "./pool/strong-back.js";
 import _poolStrongTheBrutishThespian from "./pool/strong-the-brutish-thespian.js";
 import _poolStrongarmMonk from "./pool/strongarm-monk.js";
 import _poolStrongarmTactics from "./pool/strongarm-tactics.js";
@@ -56386,6 +56388,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSerraFaithkeeper,
   _poolSerraInquisitors,
   _poolSerraPaladin,
+  _poolSerraParagon,
   _poolSerraRedeemer,
   _poolSerraSphinx,
   _poolSerraTheBenevolent,
@@ -58990,6 +58993,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStromkirkNoble,
   _poolStromkirkOccultist,
   _poolStromkirkPatrol,
+  _poolStrongBack,
   _poolStrongTheBrutishThespian,
   _poolStrongarmMonk,
   _poolStrongarmTactics,
@@ -89048,6 +89052,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/serra-faithkeeper": _poolSerraFaithkeeper,
   "pool/serra-inquisitors": _poolSerraInquisitors,
   "pool/serra-paladin": _poolSerraPaladin,
+  "pool/serra-paragon": _poolSerraParagon,
   "pool/serra-redeemer": _poolSerraRedeemer,
   "pool/serra-sphinx": _poolSerraSphinx,
   "pool/serra-the-benevolent": _poolSerraTheBenevolent,
@@ -91652,6 +91657,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stromkirk-noble": _poolStromkirkNoble,
   "pool/stromkirk-occultist": _poolStromkirkOccultist,
   "pool/stromkirk-patrol": _poolStromkirkPatrol,
+  "pool/strong-back": _poolStrongBack,
   "pool/strong-the-brutish-thespian": _poolStrongTheBrutishThespian,
   "pool/strongarm-monk": _poolStrongarmMonk,
   "pool/strongarm-tactics": _poolStrongarmTactics,
