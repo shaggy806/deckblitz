@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4919 already implemented / 81 missing (marks refreshed 2026-11-13)
+4929 already implemented / 71 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3106,7 +3106,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3113  Reshape                                  {X}{U}{U}        Sorcery
 [x]  3114  Bothersome Quasit                        {2}{R}           Creature — Demon
 [x]  3115  Master of Ceremonies                     {3}{W}           Creature — Rhino Druid
-[ ]  3116  Autumn's Veil                            {G}              Instant
+[x]  3116  Autumn's Veil                            {G}              Instant
 [x]  3117  Temporal Manipulation                    {3}{U}{U}        Sorcery
 [x]  3118  Vedalken Archmage                        {2}{U}{U}        Creature — Vedalken Wizard
 [x]  3119  Burnt Offering                           {B}              Instant
@@ -3171,15 +3171,15 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3178  Flaming Tyrannosaurus                    {5}{R}{R}        Creature — Dinosaur
 [x]  3179  Merciless Eviction                       {4}{W}{B}        Sorcery
 [x]  3180  Damnable Pact                            {X}{B}{B}        Sorcery
-[ ]  3181  Frontier Warmonger                       {3}{R}           Creature — Human Warrior
+[x]  3181  Frontier Warmonger                       {3}{R}           Creature — Human Warrior
 [x]  3182  Khalni Garden                            {0}              Land
-[ ]  3183  Lavinia, Azorius Renegade                {W}{U}           Legendary Creature — Human Soldier
+[x]  3183  Lavinia, Azorius Renegade                {W}{U}           Legendary Creature — Human Soldier
 [x]  3184  Trostani, Selesnya's Voice               {G}{G}{W}{W}     Legendary Creature — Dryad
 [x]  3185  Surly Badgersaur                         {3}{R}           Creature — Badger Dinosaur
 [x]  3186  Athreos, Shroud-Veiled                   {4}{W}{B}        Legendary Enchantment Creature — God
 [x]  3187  Ms. Bumbleflower                         {1}{G}{W}{U}     Legendary Creature — Rabbit Citizen
-[ ]  3188  Master Biomancer                         {2}{G}{U}        Creature — Elf Wizard
-[ ]  3189  Keen Duelist                             {1}{B}           Creature — Human Wizard
+[x]  3188  Master Biomancer                         {2}{G}{U}        Creature — Elf Wizard
+[x]  3189  Keen Duelist                             {1}{B}           Creature — Human Wizard
 [x]  3190  Windgrace's Judgment                     {3}{B}{G}        Instant
 [x]  3191  Mjölnir, Storm Hammer                    {4}              Legendary Artifact — Equipment
 [x]  3192  Honored Dreyleader                       {2}{G}           Creature — Squirrel Warrior
@@ -3191,7 +3191,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3198  Goro-Goro, Disciple of Ryusei            {1}{R}           Legendary Creature — Goblin Samurai
 [x]  3199  Oppression                               {1}{B}{B}        Enchantment
 [x]  3200  Betor, Kin to All                        {2}{W}{B}{G}     Legendary Creature — Spirit Dragon
-[ ]  3201  Geode Golem                              {5}              Artifact Creature — Golem
+[x]  3201  Geode Golem                              {5}              Artifact Creature — Golem
 [x]  3202  Collective Effort                        {1}{W}{W}        Sorcery
 [x]  3203  Forth Eorlingas!                         {X}{R}{W}        Sorcery
 [x]  3204  Flayer of Loyalties                      {8}{C}{C}        Creature — Eldrazi
@@ -3214,7 +3214,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3221  Shambling Ghast                          {B}              Creature — Zombie
 [x]  3222  Octopus Form                             {U}              Instant — Lesson
 [x]  3223  Éowyn, Fearless Knight                   {2}{R}{W}        Legendary Creature — Human Knight
-[ ]  3224  Strong Back                              {2}{G}           Enchantment — Aura
+[x]  3224  Strong Back                              {2}{G}           Enchantment — Aura
 [x]  3225  Emeritus of Woe // Demonic Tutor         {3}{B} // {1}{B} Creature — Vampire Warlock // Sorcery
 [x]  3226  Parhelion II                             {6}{W}{W}        Legendary Artifact — Vehicle
 [x]  3227  Ingenious Prodigy                        {X}{U}           Creature — Human Wizard
@@ -3289,7 +3289,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3296  Gisa, the Hellraiser                     {3}{B}{B}        Legendary Creature — Human Warlock
 [x]  3297  Shelter                                  {1}{W}           Instant
 [x]  3298  Chocobo Racetrack                        {3}{G}{G}        Artifact
-[ ]  3299  Hope of Ghirapur                         {1}              Legendary Artifact Creature — Thopter
+[x]  3299  Hope of Ghirapur                         {1}              Legendary Artifact Creature — Thopter
 [x]  3300  Court of Ire                             {3}{R}{R}        Enchantment
 [x]  3301  Ghost Vacuum                             {1}              Artifact
 [x]  3302  Commit // Memory                         {3}{U} // {4}{U}{U} Instant // Sorcery
@@ -3422,7 +3422,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3429  Aether Hub                               {0}              Land
 [x]  3430  Ertai Resurrected                        {2}{U}{B}        Legendary Creature — Phyrexian Human Wizard
 [x]  3431  Reckless Endeavor                        {5}{R}{R}        Sorcery
-[ ]  3432  Serra Paragon                            {2}{W}{W}        Creature — Angel
+[x]  3432  Serra Paragon                            {2}{W}{W}        Creature — Angel
 [x]  3433  General's Enforcer                       {W}{B}           Creature — Human Soldier
 [x]  3434  See Double                               {2}{U}{U}        Instant
 [x]  3435  Trailtracker Scout                       {1}{G}           Creature — Raccoon Scout
@@ -3540,7 +3540,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3547  Copper Myr                               {2}              Artifact Creature — Myr
 [x]  3548  Rakdos Joins Up                          {3}{B}{R}        Legendary Enchantment
 [ ]  3549  Jeweled Amulet                           {0}              Artifact
-[ ]  3550  Selective Obliteration                   {3}{C}{C}        Sorcery
+[x]  3550  Selective Obliteration                   {3}{C}{C}        Sorcery
 [x]  3551  Florian, Voldaren Scion                  {1}{B}{R}        Legendary Creature — Vampire Noble
 [x]  3552  Come Back Wrong                          {2}{B}           Sorcery
 [x]  3553  Fiendish Duo                             {4}{R}{R}        Creature — Devil

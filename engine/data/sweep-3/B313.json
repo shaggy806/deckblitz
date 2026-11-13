@@ -1,0 +1,78 @@
+{
+ "batch": "B313",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 3173–3469 (2026-11-12): the next ten of the cards still missing from top-commander-cards.txt, each blocked on one small feature (B294) — built best rank first, no agents, no majors asked. Features: `grant-spells-this-turn`'s `cantBeCounteredBy` (Autumn's Veil), the `{ youAnd }` player scope and a `thisWay` set's `who: \"each-other\"` (Keen Duelist), amounts in a cast prohibition's filter, read for the caster (Lavinia, Azorius Renegade), `player-attacked`'s `planeswalkerAttackers` and `attacks-player`'s `orTheirPlaneswalkers` (Frontier Warmonger), `cast-now`'s `from: \"command-zone\"` (Geode Golem), `others-enter-battlefield`'s `enterAs` (Master Biomancer), `PlayTerms.gainsTriggered` (Serra Paragon), the `player-dealt-combat-damage-by-source` target and `TargetSource.sourceStint` (Hope of Ghirapur), the `onlyColorItsControllerChose` filter clause with `votesThisWay` (Selective Obliteration). Strong Back needed nothing new (Kopala's target-keyed reductions with `hostOfSource`). Next, still on their B294 records: Spider-Punk, Jeweled Amulet, Thryx, the Sudden Storm, Riptide Gearhulk, Burning Inquiry, Leyline of Transformation (likely major), The Masamune, Sower of Discord, Nicol Bolas, Dragon-God, Final Act and the rest of the list.",
+ "authored": [
+  {
+   "name": "Autumn's Veil",
+   "files": [
+    "engine/src/cards/pool/autumns-veil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keen Duelist",
+   "files": [
+    "engine/src/cards/pool/keen-duelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lavinia, Azorius Renegade",
+   "files": [
+    "engine/src/cards/pool/lavinia-azorius-renegade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frontier Warmonger",
+   "files": [
+    "engine/src/cards/pool/frontier-warmonger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geode Golem",
+   "files": [
+    "engine/src/cards/pool/geode-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master Biomancer",
+   "files": [
+    "engine/src/cards/pool/master-biomancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strong Back",
+   "files": [
+    "engine/src/cards/pool/strong-back.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serra Paragon",
+   "files": [
+    "engine/src/cards/pool/serra-paragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hope of Ghirapur",
+   "files": [
+    "engine/src/cards/pool/hope-of-ghirapur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selective Obliteration",
+   "files": [
+    "engine/src/cards/pool/selective-obliteration.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

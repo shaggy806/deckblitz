@@ -71,12 +71,13 @@ section keeps only what to do next.
   New Blood). **B310** built the first ten (ranks 2002–2870, 12 cards with Cyclonus; the user
   approved the additional beginning phase), **B311** the next ten (ranks 2441–2796, Lim-Dûl's
   Vault to The Unagi of Kyoshi Island), **B312** the next ten (ranks 2902–3108, Duplicant to
-  Rottenmouth Viper, and Drach'Nyen and Phantom Carriage on the way). **Next:** Autumn's Veil
-  (rank 3173 — `static:color-scoped-spell-protection`), then Keen Duelist, Lavinia, Azorius
-  Renegade, Frontier Warmonger, Geode Golem, Master Biomancer, Strong Back, Serra Paragon, Hope of
-  Ghirapur, Selective Obliteration (`npm run -s cards:goal -w engine` in rank order; each keeps its
-  B294 record, unsized: size it against today's engine first; Geode Golem's cast-the-commander and
-  Selective Obliteration's per-player colour choice may be majors — ask). The tail past rank 10,000 waits. **After that:**
+  Rottenmouth Viper, and Drach'Nyen and Phantom Carriage on the way), **B313** the next ten (ranks
+  3173–3469, Autumn's Veil to Selective Obliteration; all small, no majors). **Next:** Spider-Punk
+  (rank 3479 — `static:spells-and-abilities-cant-be-countered`), then Jeweled Amulet, Thryx, the
+  Sudden Storm, Riptide Gearhulk, Burning Inquiry, Leyline of Transformation (likely major — ask),
+  The Masamune, Sower of Discord, Nicol Bolas, Dragon-God, Final Act (`npm run -s cards:goal -w
+  engine` in rank order; each keeps its B294 record, unsized: size it against today's engine
+  first — Strong Back's turned out to need nothing). The tail past rank 10,000 waits. **After that:**
   B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
   `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
   Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,
