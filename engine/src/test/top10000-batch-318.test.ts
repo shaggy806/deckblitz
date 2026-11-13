@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, cast, counters, destroy, hand, lands, life, loyalty, nextTurn, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, zone } from "./harness.js";
+import { A, B, activate, cast, counters, destroy, hand, lands, life, loyalty, nextTurn, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toLibrary, graveyard, zone } from "./harness.js";
 import { printedCardName } from "../state.js";
 
 describe("Hushbringer: creatures entering or dying don't cause abilities to trigger", () => {
@@ -198,5 +198,20 @@ describe("Banefire: if X is 5 or more, it can't be countered and its damage can'
     game.debugApplyEffect(B, { kind: "prevent-damage", target: 0, amount: 3 }, [{ kind: "player", player: B }]);
     cast(game, toHand(game, "Banefire"), { targets: [{ kind: "player", player: B }], x: 4 });
     expect(life(game, B)).toBe(19);
+  });
+});
+
+describe("Old Stickfingers: reveal until X creature cards, those into the graveyard", () => {
+  it("mills the X creature cards and bottoms the rest, then counts them", () => {
+    const { game } = table();
+    for (const name of ["Grizzly Bears", "Grizzly Bears", "Island", "Grizzly Bears", "Forest"]) toLibrary(game, name);
+    lands(game, "Forest", 2);
+    lands(game, "Swamp", 2);
+    const sticks = toHand(game, "Old Stickfingers");
+    cast(game, sticks, { x: 2 });
+    // Only the creature cards go to the graveyard: two of the three Bears.
+    expect(graveyard(game, A).map((id) => printedCardName(game.state.objects[id]))).toEqual(["Grizzly Bears", "Grizzly Bears"]);
+    expect(zone(game, sticks)).toBe("battlefield");
+    expect(pt(game, sticks)).toEqual({ power: 2, toughness: 2 });
   });
 });

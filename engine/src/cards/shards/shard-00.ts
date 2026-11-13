@@ -568,6 +568,7 @@ import _poolNyxbornRollicker from "../pool/nyxborn-rollicker.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
 import _poolOkosHospitality from "../pool/okos-hospitality.js";
 import _poolOlagAndMiauNewFriends from "../pool/olag-and-miau-new-friends.js";
+import _poolOldStickfingers from "../pool/old-stickfingers.js";
 import _poolOmarthisGhostfireInitiate from "../pool/omarthis-ghostfire-initiate.js";
 import _poolOmegaHeartlessEvolution from "../pool/omega-heartless-evolution.js";
 import _poolOminousParcel from "../pool/ominous-parcel.js";
@@ -1591,6 +1592,7 @@ const shard: CardShard = {
     _poolOinTheBrave,
     _poolOkosHospitality,
     _poolOlagAndMiauNewFriends,
+    _poolOldStickfingers,
     _poolOmarthisGhostfireInitiate,
     _poolOmegaHeartlessEvolution,
     _poolOminousParcel,

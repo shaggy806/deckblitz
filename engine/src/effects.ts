@@ -4231,7 +4231,9 @@ export type EffectSpec =
        * (Auspicious Starrix). `put`: `"battlefield"` (absent;
        * together, under their owner's control, each card's "as this enters"
        * choices asked first, rule 614.12 — `tapped` enters them tapped),
-       * `"hand"` (Fathom Trawl), or `"with-rest"`, going where the rest goes
+       * `"hand"` (Fathom Trawl), `"graveyard"` (Old Stickfingers' "put all
+       * creature cards revealed this way into your graveyard"), or
+       * `"with-rest"`, going where the rest goes
        * in one event (Mind Funeral). `rest` is `reveal-until`'s.
        *
        * `measure: "mana-value"`: until the matching cards revealed have
@@ -4246,7 +4248,7 @@ export type EffectSpec =
       readonly rest: RevealedCardsGo;
       readonly whose?: number | PlayerRef;
       readonly exile?: boolean;
-      readonly put?: "battlefield" | "hand" | "with-rest";
+      readonly put?: "battlefield" | "hand" | "graveyard" | "with-rest";
       readonly tapped?: boolean;
       /** With `put: "battlefield"`: done, once the rest have gone, to each of
        * those that entered, as target 0 — "they're goaded for the rest of the
@@ -17908,8 +17910,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ctx.resumeAfterDecisions({ ...spec, progress }, parked);
           return;
         }
-      } else if (put === "hand") {
-        ctx.placeRevealed(progress.owner, progress.found, "hand", exiled);
+      } else if (put === "hand" || put === "graveyard") {
+        ctx.placeRevealed(progress.owner, progress.found, put, exiled);
       }
       if (put === "with-rest") {
         ctx.placeRevealed(progress.owner, progress.revealed, spec.rest, exiled);

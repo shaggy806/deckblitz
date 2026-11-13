@@ -18922,6 +18922,7 @@ import _poolOldHobAlleycatBlues from "./pool/old-hob-alleycat-blues.js";
 import _poolOldManWillow from "./pool/old-man-willow.js";
 import _poolOldOneEye from "./pool/old-one-eye.js";
 import _poolOldRutstein from "./pool/old-rutstein.js";
+import _poolOldStickfingers from "./pool/old-stickfingers.js";
 import _poolOldThrush from "./pool/old-thrush.js";
 import _poolOlindaTheOblivious from "./pool/olinda-the-oblivious.js";
 import _poolOliphaunt from "./pool/oliphaunt.js";
@@ -51621,6 +51622,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOldManWillow,
   _poolOldOneEye,
   _poolOldRutstein,
+  _poolOldStickfingers,
   _poolOldThrush,
   _poolOlindaTheOblivious,
   _poolOliphaunt,
@@ -84333,6 +84335,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/old-man-willow": _poolOldManWillow,
   "pool/old-one-eye": _poolOldOneEye,
   "pool/old-rutstein": _poolOldRutstein,
+  "pool/old-stickfingers": _poolOldStickfingers,
   "pool/old-thrush": _poolOldThrush,
   "pool/olinda-the-oblivious": _poolOlindaTheOblivious,
   "pool/oliphaunt": _poolOliphaunt,
