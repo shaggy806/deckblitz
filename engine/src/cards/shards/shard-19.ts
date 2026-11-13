@@ -510,6 +510,7 @@ import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJundHackblade from "../pool/jund-hackblade.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
 import _poolJunkGolem from "../pool/junk-golem.js";
+import _poolKamahlsWill from "../pool/kamahls-will.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
 import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
 import _poolKarnArgentDefender from "../pool/karn-argent-defender.js";
@@ -1583,6 +1584,7 @@ const shard: CardShard = {
     _poolJundHackblade,
     _poolJungleTroll,
     _poolJunkGolem,
+    _poolKamahlsWill,
     _poolKamiOfFalseHope,
     _poolKardurDoomscourge,
     _poolKarnArgentDefender,

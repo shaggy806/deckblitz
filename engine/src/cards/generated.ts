@@ -4533,6 +4533,7 @@ import _poolChimneyRabble from "./pool/chimney-rabble.js";
 import _poolChiraAllIn from "./pool/chira-all-in.js";
 import _poolChiseiHeartOfOceans from "./pool/chisei-heart-of-oceans.js";
 import _poolChishiroTheShatteredBlade from "./pool/chishiro-the-shattered-blade.js";
+import _poolChissGoriaForgeTyrant from "./pool/chiss-goria-forge-tyrant.js";
 import _poolChitinGravestalker from "./pool/chitin-gravestalker.js";
 import _poolChitinousCloak from "./pool/chitinous-cloak.js";
 import _poolChitinousGraspling from "./pool/chitinous-graspling.js";
@@ -6413,6 +6414,7 @@ import _poolDecreeOfSilence from "./pool/decree-of-silence.js";
 import _poolDedicatedCommons from "./pool/dedicated-commons.js";
 import _poolDedicatedMartyr from "./pool/dedicated-martyr.js";
 import _poolDeduce from "./pool/deduce.js";
+import _poolDeekahFractalTheorist from "./pool/deekah-fractal-theorist.js";
 import _poolDeemWorthy from "./pool/deem-worthy.js";
 import _poolDeepAnalysis from "./pool/deep-analysis.js";
 import _poolDeepCavernBat from "./pool/deep-cavern-bat.js";
@@ -9417,6 +9419,7 @@ import _poolFiligreeCrawler from "./pool/filigree-crawler.js";
 import _poolFiligreeFamiliar from "./pool/filigree-familiar.js";
 import _poolFiligreeFracture from "./pool/filigree-fracture.js";
 import _poolFiligreeSages from "./pool/filigree-sages.js";
+import _poolFiligreeVector from "./pool/filigree-vector.js";
 import _poolFillWithFright from "./pool/fill-with-fright.js";
 import _poolFilterOut from "./pool/filter-out.js";
 import _poolFilth from "./pool/filth.js";
@@ -14410,6 +14413,7 @@ import _poolKamahlsDesire from "./pool/kamahls-desire.js";
 import _poolKamahlsDruidicVow from "./pool/kamahls-druidic-vow.js";
 import _poolKamahlsSledge from "./pool/kamahls-sledge.js";
 import _poolKamahlsSummons from "./pool/kamahls-summons.js";
+import _poolKamahlsWill from "./pool/kamahls-will.js";
 import _poolKambalConsulOfAllocation from "./pool/kambal-consul-of-allocation.js";
 import _poolKambalProfiteeringMayor from "./pool/kambal-profiteering-mayor.js";
 import _poolKamberThePlunderer from "./pool/kamber-the-plunderer.js";
@@ -23995,6 +23999,7 @@ import _poolShardingSphinx from "./pool/sharding-sphinx.js";
 import _poolShardlessAgent from "./pool/shardless-agent.js";
 import _poolShardlessOutlander from "./pool/shardless-outlander.js";
 import _poolShardmagesRescue from "./pool/shardmages-rescue.js";
+import _poolShareTheSpoils from "./pool/share-the-spoils.js";
 import _poolSharedAnimosity from "./pool/shared-animosity.js";
 import _poolSharedDiscovery from "./pool/shared-discovery.js";
 import _poolSharedRoots from "./pool/shared-roots.js";
@@ -28934,6 +28939,7 @@ import _poolTrinketMage from "./pool/trinket-mage.js";
 import _poolTripNoose from "./pool/trip-noose.js";
 import _poolTripUp from "./pool/trip-up.js";
 import _poolTripWire from "./pool/trip-wire.js";
+import _poolTripleTriad from "./pool/triple-triad.js";
 import _poolTriplicateSpirits from "./pool/triplicate-spirits.js";
 import _poolTriplicateTitan from "./pool/triplicate-titan.js";
 import _poolTriskaidekaphile from "./pool/triskaidekaphile.js";
@@ -31641,6 +31647,7 @@ import _poolWyllsReversal from "./pool/wylls-reversal.js";
 import _poolWyluliWolf from "./pool/wyluli-wolf.js";
 import _poolWyrmsCrossingPatrol from "./pool/wyrms-crossing-patrol.js";
 import _poolX23DeadlyWeapon from "./pool/x-23-deadly-weapon.js";
+import _poolXanatharGuildKingpin from "./pool/xanathar-guild-kingpin.js";
 import _poolXandeDarkMage from "./pool/xande-dark-mage.js";
 import _poolXandersLounge from "./pool/xanders-lounge.js";
 import _poolXandersPact from "./pool/xanders-pact.js";
@@ -37290,6 +37297,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChiraAllIn,
   _poolChiseiHeartOfOceans,
   _poolChishiroTheShatteredBlade,
+  _poolChissGoriaForgeTyrant,
   _poolChitinGravestalker,
   _poolChitinousCloak,
   _poolChitinousGraspling,
@@ -39170,6 +39178,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDedicatedCommons,
   _poolDedicatedMartyr,
   _poolDeduce,
+  _poolDeekahFractalTheorist,
   _poolDeemWorthy,
   _poolDeepAnalysis,
   _poolDeepCavernBat,
@@ -42174,6 +42183,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFiligreeFamiliar,
   _poolFiligreeFracture,
   _poolFiligreeSages,
+  _poolFiligreeVector,
   _poolFillWithFright,
   _poolFilterOut,
   _poolFilth,
@@ -47167,6 +47177,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKamahlsDruidicVow,
   _poolKamahlsSledge,
   _poolKamahlsSummons,
+  _poolKamahlsWill,
   _poolKambalConsulOfAllocation,
   _poolKambalProfiteeringMayor,
   _poolKamberThePlunderer,
@@ -56752,6 +56763,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShardlessAgent,
   _poolShardlessOutlander,
   _poolShardmagesRescue,
+  _poolShareTheSpoils,
   _poolSharedAnimosity,
   _poolSharedDiscovery,
   _poolSharedRoots,
@@ -61691,6 +61703,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTripNoose,
   _poolTripUp,
   _poolTripWire,
+  _poolTripleTriad,
   _poolTriplicateSpirits,
   _poolTriplicateTitan,
   _poolTriskaidekaphile,
@@ -64398,6 +64411,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWyluliWolf,
   _poolWyrmsCrossingPatrol,
   _poolX23DeadlyWeapon,
+  _poolXanatharGuildKingpin,
   _poolXandeDarkMage,
   _poolXandersLounge,
   _poolXandersPact,
@@ -70060,6 +70074,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chira-all-in": _poolChiraAllIn,
   "pool/chisei-heart-of-oceans": _poolChiseiHeartOfOceans,
   "pool/chishiro-the-shattered-blade": _poolChishiroTheShatteredBlade,
+  "pool/chiss-goria-forge-tyrant": _poolChissGoriaForgeTyrant,
   "pool/chitin-gravestalker": _poolChitinGravestalker,
   "pool/chitinous-cloak": _poolChitinousCloak,
   "pool/chitinous-graspling": _poolChitinousGraspling,
@@ -71940,6 +71955,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dedicated-commons": _poolDedicatedCommons,
   "pool/dedicated-martyr": _poolDedicatedMartyr,
   "pool/deduce": _poolDeduce,
+  "pool/deekah-fractal-theorist": _poolDeekahFractalTheorist,
   "pool/deem-worthy": _poolDeemWorthy,
   "pool/deep-analysis": _poolDeepAnalysis,
   "pool/deep-cavern-bat": _poolDeepCavernBat,
@@ -74944,6 +74960,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/filigree-familiar": _poolFiligreeFamiliar,
   "pool/filigree-fracture": _poolFiligreeFracture,
   "pool/filigree-sages": _poolFiligreeSages,
+  "pool/filigree-vector": _poolFiligreeVector,
   "pool/fill-with-fright": _poolFillWithFright,
   "pool/filter-out": _poolFilterOut,
   "pool/filth": _poolFilth,
@@ -79937,6 +79954,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kamahls-druidic-vow": _poolKamahlsDruidicVow,
   "pool/kamahls-sledge": _poolKamahlsSledge,
   "pool/kamahls-summons": _poolKamahlsSummons,
+  "pool/kamahls-will": _poolKamahlsWill,
   "pool/kambal-consul-of-allocation": _poolKambalConsulOfAllocation,
   "pool/kambal-profiteering-mayor": _poolKambalProfiteeringMayor,
   "pool/kamber-the-plunderer": _poolKamberThePlunderer,
@@ -89522,6 +89540,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shardless-agent": _poolShardlessAgent,
   "pool/shardless-outlander": _poolShardlessOutlander,
   "pool/shardmages-rescue": _poolShardmagesRescue,
+  "pool/share-the-spoils": _poolShareTheSpoils,
   "pool/shared-animosity": _poolSharedAnimosity,
   "pool/shared-discovery": _poolSharedDiscovery,
   "pool/shared-roots": _poolSharedRoots,
@@ -94461,6 +94480,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trip-noose": _poolTripNoose,
   "pool/trip-up": _poolTripUp,
   "pool/trip-wire": _poolTripWire,
+  "pool/triple-triad": _poolTripleTriad,
   "pool/triplicate-spirits": _poolTriplicateSpirits,
   "pool/triplicate-titan": _poolTriplicateTitan,
   "pool/triskaidekaphile": _poolTriskaidekaphile,
@@ -97168,6 +97188,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wyluli-wolf": _poolWyluliWolf,
   "pool/wyrms-crossing-patrol": _poolWyrmsCrossingPatrol,
   "pool/x-23-deadly-weapon": _poolX23DeadlyWeapon,
+  "pool/xanathar-guild-kingpin": _poolXanatharGuildKingpin,
   "pool/xande-dark-mage": _poolXandeDarkMage,
   "pool/xanders-lounge": _poolXandersLounge,
   "pool/xanders-pact": _poolXandersPact,

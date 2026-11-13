@@ -286,6 +286,7 @@ import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFieryTemper from "../pool/fiery-temper.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
+import _poolFiligreeVector from "../pool/filigree-vector.js";
 import _poolFinalAct from "../pool/final-act.js";
 import _poolFireJuggler from "../pool/fire-juggler.js";
 import _poolFirefistStriker from "../pool/firefist-striker.js";
@@ -709,6 +710,7 @@ import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShadowAlleyDenizen from "../pool/shadow-alley-denizen.js";
 import _poolShadowSlice from "../pool/shadow-slice.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
+import _poolShareTheSpoils from "../pool/share-the-spoils.js";
 import _poolSharpenedPitchfork from "../pool/sharpened-pitchfork.js";
 import _poolShieldhideDragon from "../pool/shieldhide-dragon.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
@@ -1284,6 +1286,7 @@ const shard: CardShard = {
     _poolFieryJustice,
     _poolFieryTemper,
     _poolFiliThePathfinder,
+    _poolFiligreeVector,
     _poolFinalAct,
     _poolFireJuggler,
     _poolFirefistStriker,
@@ -1707,6 +1710,7 @@ const shard: CardShard = {
     _poolShadowAlleyDenizen,
     _poolShadowSlice,
     _poolShamblingRemains,
+    _poolShareTheSpoils,
     _poolSharpenedPitchfork,
     _poolShieldhideDragon,
     _poolShivanDevastator,

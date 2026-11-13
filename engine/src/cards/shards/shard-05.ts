@@ -165,6 +165,7 @@ import _poolCharismaticVanguard from "../pool/charismatic-vanguard.js";
 import _poolChiefOfTheFoundry from "../pool/chief-of-the-foundry.js";
 import _poolChildhoodHorror from "../pool/childhood-horror.js";
 import _poolChill from "../pool/chill.js";
+import _poolChissGoriaForgeTyrant from "../pool/chiss-goria-forge-tyrant.js";
 import _poolChitteringWitch from "../pool/chittering-witch.js";
 import _poolChorusOfWoe from "../pool/chorus-of-woe.js";
 import _poolChronicleOfVictory from "../pool/chronicle-of-victory.js";
@@ -1183,6 +1184,7 @@ const shard: CardShard = {
     _poolChiefOfTheFoundry,
     _poolChildhoodHorror,
     _poolChill,
+    _poolChissGoriaForgeTyrant,
     _poolChitteringWitch,
     _poolChorusOfWoe,
     _poolChronicleOfVictory,

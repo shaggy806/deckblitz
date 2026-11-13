@@ -1011,6 +1011,7 @@ import _poolWorldWarHulk from "../pool/world-war-hulk.js";
 import _poolWreckHunter from "../pool/wreck-hunter.js";
 import _poolWrigglingGrub from "../pool/wriggling-grub.js";
 import _poolWriteIntoBeing from "../pool/write-into-being.js";
+import _poolXanatharGuildKingpin from "../pool/xanathar-guild-kingpin.js";
 import _poolXiahouDunTheOneEyed from "../pool/xiahou-dun-the-one-eyed.js";
 import _poolYarusRoarOfTheOldGods from "../pool/yarus-roar-of-the-old-gods.js";
 import _poolYavimayaCradleOfGrowth from "../pool/yavimaya-cradle-of-growth.js";
@@ -2061,6 +2062,7 @@ const shard: CardShard = {
     _poolWreckHunter,
     _poolWrigglingGrub,
     _poolWriteIntoBeing,
+    _poolXanatharGuildKingpin,
     _poolXiahouDunTheOneEyed,
     _poolYarusRoarOfTheOldGods,
     _poolYavimayaCradleOfGrowth,

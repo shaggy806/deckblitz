@@ -201,6 +201,7 @@ import _poolDeathforgeShaman from "../pool/deathforge-shaman.js";
 import _poolDeathleaperTerrorWeapon from "../pool/deathleaper-terror-weapon.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
 import _poolDecreeOfSavagery from "../pool/decree-of-savagery.js";
+import _poolDeekahFractalTheorist from "../pool/deekah-fractal-theorist.js";
 import _poolDeepwoodDrummer from "../pool/deepwood-drummer.js";
 import _poolDeepwoodLegate from "../pool/deepwood-legate.js";
 import _poolDeerDog from "../pool/deer-dog.js";
@@ -1226,6 +1227,7 @@ const shard: CardShard = {
     _poolDeathleaperTerrorWeapon,
     _poolDebilitatingInjury,
     _poolDecreeOfSavagery,
+    _poolDeekahFractalTheorist,
     _poolDeepwoodDrummer,
     _poolDeepwoodLegate,
     _poolDeerDog,

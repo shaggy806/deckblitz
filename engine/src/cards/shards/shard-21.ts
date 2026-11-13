@@ -866,6 +866,7 @@ import _poolTrailblazingHistorian from "../pool/trailblazing-historian.js";
 import _poolTransmograntAltar from "../pool/transmogrant-altar.js";
 import _poolTrapmakersSnare from "../pool/trapmakers-snare.js";
 import _poolTravelPreparations from "../pool/travel-preparations.js";
+import _poolTripleTriad from "../pool/triple-triad.js";
 import _poolTritonCavalry from "../pool/triton-cavalry.js";
 import _poolTrueLovesKiss from "../pool/true-loves-kiss.js";
 import _poolTruePolymorph from "../pool/true-polymorph.js";
@@ -1843,6 +1844,7 @@ const shard: CardShard = {
     _poolTransmograntAltar,
     _poolTrapmakersSnare,
     _poolTravelPreparations,
+    _poolTripleTriad,
     _poolTritonCavalry,
     _poolTrueLovesKiss,
     _poolTruePolymorph,
