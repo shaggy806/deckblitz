@@ -39473,6 +39473,8 @@ controlledBy,
           return true;
         }),
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
+      commandersInCommandZone: (player) =>
+        this.state.zones.shared.command.filter((id) => this.isCastableCommander(player, id)),
       cantSearchLibrary: (player, owner) => this.cantSearchLibrary(player, owner),
       beginSearchControl: (player) => this.beginSearchControl(player),
       castableWhileSearching: (player) => {

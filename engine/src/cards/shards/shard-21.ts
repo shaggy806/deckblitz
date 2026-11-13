@@ -314,6 +314,7 @@ import _poolGalaGreeters from "../pool/gala-greeters.js";
 import _poolGalliaTragicHost from "../pool/gallia-tragic-host.js";
 import _poolGandalfWhiteRider from "../pool/gandalf-white-rider.js";
 import _poolGarrukTheVeilCursed from "../pool/garruk-the-veil-cursed.js";
+import _poolGeodeGolem from "../pool/geode-golem.js";
 import _poolGeordiLaForgeInnovator from "../pool/geordi-la-forge-innovator.js";
 import _poolGetawayGlamer from "../pool/getaway-glamer.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
@@ -1288,6 +1289,7 @@ const shard: CardShard = {
     _poolGalliaTragicHost,
     _poolGandalfWhiteRider,
     _poolGarrukTheVeilCursed,
+    _poolGeodeGolem,
     _poolGeordiLaForgeInnovator,
     _poolGetawayGlamer,
     _poolGevScaledScorch,

@@ -10568,6 +10568,7 @@ import _poolGenjuOfTheFields from "./pool/genju-of-the-fields.js";
 import _poolGenjuOfTheRealm from "./pool/genju-of-the-realm.js";
 import _poolGenjuOfTheSpires from "./pool/genju-of-the-spires.js";
 import _poolGenkuFutureShaper from "./pool/genku-future-shaper.js";
+import _poolGeodeGolem from "./pool/geode-golem.js";
 import _poolGeodeGrotto from "./pool/geode-grotto.js";
 import _poolGeodeRager from "./pool/geode-rager.js";
 import _poolGeologicalAppraiser from "./pool/geological-appraiser.js";
@@ -43215,6 +43216,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGenjuOfTheRealm,
   _poolGenjuOfTheSpires,
   _poolGenkuFutureShaper,
+  _poolGeodeGolem,
   _poolGeodeGrotto,
   _poolGeodeRager,
   _poolGeologicalAppraiser,
@@ -75875,6 +75877,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/genju-of-the-realm": _poolGenjuOfTheRealm,
   "pool/genju-of-the-spires": _poolGenjuOfTheSpires,
   "pool/genku-future-shaper": _poolGenkuFutureShaper,
+  "pool/geode-golem": _poolGeodeGolem,
   "pool/geode-grotto": _poolGeodeGrotto,
   "pool/geode-rager": _poolGeodeRager,
   "pool/geological-appraiser": _poolGeologicalAppraiser,

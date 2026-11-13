@@ -4986,6 +4986,12 @@ export type EffectSpec =
         /** Ashiok, Nightmare Muse's "from among **face-up cards your
          * opponents own from exile**": every such card as this applies. */
         | "face-up-exile-opponents-own"
+        /** "You may cast **your commander from the command zone**" (Geode
+         * Golem): each commander the caster owns that is in the command zone
+         * now (rule 903.8). The commander tax is still paid, as an additional
+         * cost (601.2f), with `withoutPaying` too — the card's reminder text,
+         * its rulings — and the cast counts toward the next one's tax. */
+        | "command-zone"
         /** The engine's own, before a search of the caster's library goes on
          * (`castWhileSearchingLibrary` — Panglacial Wurm): the cards that may
          * be cast from there, the library looked at. Not for card
@@ -11643,6 +11649,9 @@ export interface EffectApi {
    * and a face-down one they may look at (rule 406.3b) — a `cast-now`'s
    * `zones`' `"exile"`. */
   exiledOwnedSeen(owner: PlayerId): readonly ObjectId[];
+  /** `player`'s commanders in the command zone, which they may cast from
+   * there (rule 903.8) — a `cast-now`'s `"command-zone"`. */
+  commandersInCommandZone(player: PlayerId): readonly ObjectId[];
   /** The cards in `player`'s hand or graveyard. */
   cardsIn(player: PlayerId, zone: "hand" | "graveyard" | "library"): readonly ObjectId[];
   /** The cards in `player`'s library they may cast while searching it
@@ -14714,6 +14723,9 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.sourceExiledThisWay();
     } else if (from === "face-up-exile-opponents-own") {
       cards = ctx.faceUpExileOpponentsOwn();
+    } else if (from === "command-zone") {
+      const caster = spec.by === undefined ? ctx.controller : resolvePlayerRef(spec.by, ctx);
+      cards = caster === undefined ? [] : ctx.commandersInCommandZone(caster);
     } else if (from === "any-graveyard") {
       cards = ctx.playersInScope("each-player").flatMap((p) => ctx.cardsIn(p, "graveyard"));
     } else if (from === "opponents-graveyards") {
