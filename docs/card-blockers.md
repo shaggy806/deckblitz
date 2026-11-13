@@ -666,6 +666,20 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 319 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4159–4411)** —
+  10 authored, nine on a small feature built for each: Shay Cormac (losing protection and ward in
+  layer 6, a later grant kept), Norn's Decree (the players being attacked, readable in a trigger's
+  intervening if), The Millennium Calendar (what your untap step untapped, as one event), Neyith of
+  the Dire Hunt (a fight as one event; its "must be blocked" holds whether or not you pay), Teferi,
+  Mage of Zhalfir (flash as a keyword creature cards have off the battlefield), Vizier of Many
+  Faces (a Clone's exceptions only for an embalmed token), Conspiracy Theorist (the cards of a
+  discard as the trigger's batch), Teferi, Who Slows the Sunset (a draw in each opponent's draw
+  step with no stack; the untap static off an emblem), Animation Module (a kind of counter chosen
+  on a player). Benthic Anomaly needed no engine code. Blocked (`B319.json`), small: Jinnie Fay,
+  Jetmir's Second (an optional token replacement with a choice of token that keeps the effect's
+  riders; researched, not reached) and Cephalid Snitch (re-keyed: it loses protection from one
+  color only, `effect:lose-protection-from-quality`). Next by rank: Master Chef, Tifa's Limit
+  Break, Shadowgrange Archfiend, Elturel Survivors (B294 records, unsized).
 - **Batch 318 (2026-11-13, `author-top-cards` on the top 5000's last cards, ranks 4075–4207)** —
   5 authored, each on a small feature built for it: Hushbringer (creatures dying cause no
   triggers, batches included, a Hushbringer dying with them still barring), Tezzeret, Betrayer of

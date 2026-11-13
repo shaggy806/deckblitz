@@ -12194,4 +12194,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Forest*3', 'Island*2'], hand: ['Indominus Rex, Alpha', 'Serra Angel', 'Vampire Nighthawk', 'Grizzly Bears', 'Sol Ring'] },
     }),
   ),
+  preset(
+    'Benthic Anomaly: a creature for each opponent, then which one to copy',
+    board({
+      you: { bf: ['Island*7'], hand: ['Benthic Anomaly'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Serra Angel'] }],
+    }),
+  ),
+  preset(
+    "Shay Cormac: an opponent's creature loses ward",
+    board({
+      you: { bf: ['Shay Cormac', 'Swamp*4'], hand: ['Murder'] },
+      opp: [{ bf: ['Aboleth Spawn'] }],
+    }),
+  ),
+  preset(
+    "Neyith of the Dire Hunt: the creature must be blocked even if you don't pay",
+    board({
+      you: { bf: ['Neyith of the Dire Hunt', 'Hill Giant', 'Forest*3'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Vizier of Many Faces: embalmed, its copy is a white Zombie',
+    board({
+      you: { bf: ['Island*5'], gy: ['Vizier of Many Faces'] },
+      opp: [{ bf: ['Hill Giant'] }],
+    }),
+  ),
 ]

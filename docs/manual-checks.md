@@ -8122,3 +8122,21 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Indominus Rex, Alpha: discard creature cards as it enters for keyword counters
 - **Do:** Cast Indominus Rex, Alpha. When asked, discard Serra Angel and Vampire Nighthawk.
 - **Expect:** Sol Ring isn't offered. Rex enters with one flying, vigilance, deathtouch and lifelink counter each (four counters, flying only once), then its trigger draws four cards. Grizzly Bears stays in hand.
+
+### Benthic Anomaly: a creature for each opponent, then which one to copy
+- **Do:** Cast Benthic Anomaly. Choose Bob's Grizzly Bears and Carol's Serra Angel when asked, then choose Serra Angel as the one to copy.
+- **Expect:** One question per opponent, then "Choose which of those creatures the token copies". Before the Anomaly itself resolves you get a token named Serra Angel that is a colorless 6/6 Eldrazi with flying and vigilance.
+- **Not a bug:** Nothing is targeted, so a creature with hexproof can be chosen.
+
+### Shay Cormac: an opponent's creature loses ward
+- **Do:** Activate Shay Cormac's {1} ability and let it resolve, then cast Murder on Bob's Aboleth Spawn.
+- **Expect:** No ward payment is asked for. The Spawn gets a bounty counter, is destroyed, and Shay Cormac gets two +1/+1 counters.
+
+### Neyith of the Dire Hunt: the creature must be blocked even if you don't pay
+- **Do:** Move to combat. Target Hill Giant with Neyith's ability and answer no to "Pay {2}{R/G} to double the target creature's power until end of turn?". Attack Bob with Hill Giant alone.
+- **Expect:** Hill Giant stays a 3/3. Bob has to block it with Grizzly Bears, and when it becomes blocked you draw a card.
+
+### Vizier of Many Faces: embalmed, its copy is a white Zombie
+- **Do:** Activate Vizier of Many Faces' embalm from your graveyard. When the token would enter, choose Bob's Hill Giant.
+- **Expect:** The Vizier card is exiled and you get a token named Hill Giant: a 3/3 that is white, a Giant Zombie, with no mana cost.
+- **Not a bug:** Cast from your hand instead, a Vizier copying Hill Giant is red, a Giant only, and costs {3}{R}.

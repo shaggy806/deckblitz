@@ -8457,6 +8457,10 @@
    "family": "effect:lose-keyword-until-eot",
    "example": "Shay Cormac: 'lose hexproof, indestructible, protection, shroud, and ward': lose-keywords takes Keyword strings; protection and ward aren't keywords in that union, so they can't be taken away."
   },
+  "effect:lose-protection-from-quality": {
+   "family": "effect:lose-keyword-until-eot",
+   "example": "Cephalid Snitch: 'target creature loses protection from black until end of turn': loseKeywords' \"protection\" takes every instance (Shay Cormac); losing protection from one quality alone, the rest kept, has no form."
+  },
   "effect:saga-chapter-divided": {
    "family": "effect:distribute-counters",
    "example": "Revival of the Ancestors: Chapter II 'distribute three +1/+1 counters among one, two, or three target creatures you control': SagaChapter has no `divided` field (only spells and activated/triggered abilities do), so the division can't be announced for a chapter."

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4957 already implemented / 43 missing (marks refreshed 2026-11-13)
+4967 already implemented / 33 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4057,7 +4057,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4064  Quicksilver Amulet                       {4}              Artifact
 [x]  4065  Wild Ricochet                            {2}{R}{R}        Instant
 [x]  4066  Season of the Burrow                     {3}{W}{W}        Sorcery
-[ ]  4067  Shay Cormac                              {W}{B}           Legendary Creature — Human Knight Rogue
+[x]  4067  Shay Cormac                              {W}{B}           Legendary Creature — Human Knight Rogue
 [x]  4068  Shield Sphere                            {0}              Artifact Creature — Wall
 [x]  4069  Bronzebeak Foragers                      {3}{W}           Creature — Dinosaur
 [x]  4070  Hide on the Ceiling                      {X}{U}           Instant
@@ -4144,11 +4144,11 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4151  Amalia Benavides Aguirre                 {W}{B}           Legendary Creature — Vampire Scout
 [x]  4152  Queen Allenal of Ruadach                 {G}{W}{W}        Legendary Creature — Elf Noble
 [x]  4153  Azami, Lady of Scrolls                   {2}{U}{U}{U}     Legendary Creature — Human Wizard
-[ ]  4154  Norn's Decree                            {2}{W}           Enchantment
+[x]  4154  Norn's Decree                            {2}{W}           Enchantment
 [x]  4155  Search for Glory                         {2}{W}           Snow Sorcery
 [x]  4156  Lumbering Worldwagon                     {2}{G}           Artifact — Vehicle
 [x]  4157  Elesh Norn // The Argent Etchings        {4}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
-[ ]  4158  Benthic Anomaly                          {6}{U}           Creature — Eldrazi Serpent
+[x]  4158  Benthic Anomaly                          {6}{U}           Creature — Eldrazi Serpent
 [x]  4159  The Legend of Roku // Avatar Roku        {4}              Enchantment — Saga // Legendary Creature — Avatar
 [x]  4160  Realms Uncharted                         {2}{G}           Instant
 [x]  4161  Retraction Helix                         {U}              Instant
@@ -4186,7 +4186,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4193  Crested Sunmare                          {3}{W}{W}        Creature — Horse
 [x]  4194  Drogskol Reaver                          {5}{W}{U}        Creature — Spirit
 [x]  4195  Tail Swipe                               {G}              Instant
-[ ]  4196  The Millennium Calendar                  {1}              Legendary Artifact
+[x]  4196  The Millennium Calendar                  {1}              Legendary Artifact
 [x]  4197  Tender Wildguide                         {1}{G}           Creature — Possum Druid
 [x]  4198  Stormsplitter                            {3}{R}           Creature — Otter Wizard
 [x]  4199  Spiked Corridor // Torture Pit           {3}{R} // {3}{R} Enchantment — Room // Enchantment — Room
@@ -4235,7 +4235,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4242  Revitalize                               {1}{W}           Instant
 [x]  4243  Mechanized Warfare                       {1}{R}{R}        Enchantment
 [x]  4244  Screeching Scorchbeast                   {4}{B}{B}        Creature — Bat Mutant
-[ ]  4245  Neyith of the Dire Hunt                  {2}{G}{G}        Legendary Creature — Human Warrior
+[x]  4245  Neyith of the Dire Hunt                  {2}{G}{G}        Legendary Creature — Human Warrior
 [x]  4246  Herd Baloth                              {3}{G}{G}        Creature — Beast
 [x]  4247  Manakin                                  {2}              Artifact Creature — Construct
 [x]  4248  Airbender's Reversal                     {1}{W}           Instant — Lesson
@@ -4304,7 +4304,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4311  Master Chef                              {2}{G}           Legendary Enchantment — Background
 [x]  4312  Unburial Rites                           {4}{B}           Sorcery
 [x]  4313  Mirage Mesa                              {0}              Land — Desert
-[ ]  4314  Teferi, Mage of Zhalfir                  {2}{U}{U}{U}     Legendary Creature — Human Wizard
+[x]  4314  Teferi, Mage of Zhalfir                  {2}{U}{U}{U}     Legendary Creature — Human Wizard
 [x]  4315  Kaya's Wrath                             {W}{W}{B}{B}     Sorcery
 [x]  4316  Horn of the Mark                         {2}              Legendary Artifact
 [x]  4317  Crystalline Sliver                       {W}{U}           Creature — Sliver
@@ -4318,7 +4318,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4325  Ossification                             {1}{W}           Enchantment — Aura
 [x]  4326  Canopy Cover                             {1}{G}           Enchantment — Aura
 [x]  4327  Ao, the Dawn Sky                         {3}{W}{W}        Legendary Creature — Dragon Spirit
-[ ]  4328  Vizier of Many Faces                     {2}{U}{U}        Creature — Shapeshifter Cleric
+[x]  4328  Vizier of Many Faces                     {2}{U}{U}        Creature — Shapeshifter Cleric
 [x]  4329  Children of Korlis                       {W}              Creature — Human Rebel Cleric
 [x]  4330  Reki, the History of Kamigawa            {2}{G}           Legendary Creature — Human Shaman
 [x]  4331  Avatar Kyoshi, Earthbender               {5}{G}{G}{G}     Legendary Creature — Human Avatar
@@ -4363,7 +4363,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4370  Cayth, Famed Mechanist                   {1}{U}{R}{W}     Legendary Creature — Dwarf Artificer
 [x]  4371  The Legend of Yangchen // Avatar Yangchen {5}              Enchantment — Saga // Legendary Creature — Avatar
 [x]  4372  Rammas Echor, Ancient Shield             {3}{W}           Legendary Artifact
-[ ]  4373  Conspiracy Theorist                      {1}{R}           Creature — Human Shaman
+[x]  4373  Conspiracy Theorist                      {1}{R}           Creature — Human Shaman
 [x]  4374  Pridemalkin                              {2}{G}           Creature — Cat
 [x]  4375  Mage Slayer                              {1}{R}{G}        Artifact — Equipment
 [x]  4376  Wall of Reverence                        {3}{W}           Creature — Spirit Wall
@@ -4386,7 +4386,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4393  Keiga, the Tide Star                     {5}{U}           Legendary Creature — Dragon Spirit
 [x]  4394  The Underworld Cookbook                  {1}              Artifact — Book
 [x]  4395  Baron Bertram Graywater                  {2}{W}{B}        Legendary Creature — Vampire Noble
-[ ]  4396  Animation Module                         {1}              Artifact
+[x]  4396  Animation Module                         {1}              Artifact
 [x]  4397  Balor                                    {3}{R}{R}        Creature — Demon
 [x]  4398  Desecrated Tomb                          {3}              Artifact
 [x]  4399  Grumgully, the Generous                  {1}{R}{G}        Legendary Creature — Goblin Shaman
@@ -4490,7 +4490,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4497  Raise the Alarm                          {1}{W}           Instant
 [x]  4498  Price of Fame                            {3}{B}           Instant
 [x]  4499  Seismic Sense                            {G}              Sorcery — Lesson
-[ ]  4500  Teferi, Who Slows the Sunset             {2}{W}{U}        Legendary Planeswalker — Teferi
+[x]  4500  Teferi, Who Slows the Sunset             {2}{W}{U}        Legendary Planeswalker — Teferi
 [x]  4501  Ajani, Nacatl Pariah // Ajani, Nacatl Avenger {2}              Legendary Creature — Cat Warrior // Legendary Planeswalker — Ajani
 [x]  4502  Yorion, Sky Nomad                        {3}{W/U}{W/U}    Legendary Creature — Bird Serpent
 [x]  4503  Darien, King of Kjeldor                  {4}{W}{W}        Legendary Creature — Human Soldier

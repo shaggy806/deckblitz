@@ -1,0 +1,31 @@
+{
+ "batch": "B319",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 4159–4411 (2026-11-13): Shay Cormac and the next nine of the cards still missing from top-commander-cards.txt (B294/B318 records), built best rank first, no agents. Features: `loseKeywords` takes \"protection\" and \"ward\" (LosableKeyword) — in layer 6 at the loss's timestamp, every earlier instance of protection and each earlier ward ability, a later grant kept (Shay Cormac); PlayerScope \"players-being-attacked\", read from the combat's declaration record so a trigger's intervening if can ask it (Norn's Decree); the `untap-step-untapped` event and the `untaps-in-untap-step` trigger row (The Millennium Calendar); the `creatures-fought` event and the batched `creatures-fight` row (Neyith of the Dire Hunt); `outsideBattlefield.keywords`, a keyword granted to cards off the battlefield, read by cast and suspend timing (Teferi, Mage of Zhalfir); the embalm mark on its tokens and `CopyOnEnter.exceptIfEmbalmed` (Vizier of Many Faces); a `discards` trigger's cards as its batch (Conspiracy Theorist); `drawsInOpponentsDrawStep` and `untapsDuringOthersUntap` off an emblem (Teferi, Who Slows the Sunset); `choose-value`'s counter-kind on a player, and `add-counter` at a player (Animation Module). Benthic Anomaly needed no engine code (vote's `about`, a choose-permanents over `thisWay: \"chosen\"`, an aggregate over it). No majors: Teferi, Who Slows the Sunset's emblem, guessed major, was a draw-step hook.",
+ "authored": [
+  { "name": "Shay Cormac", "files": ["engine/src/cards/pool/shay-cormac.ts"], "tested": true },
+  { "name": "Norn's Decree", "files": ["engine/src/cards/pool/norns-decree.ts"], "tested": true },
+  { "name": "Benthic Anomaly", "files": ["engine/src/cards/pool/benthic-anomaly.ts"], "tested": true },
+  { "name": "The Millennium Calendar", "files": ["engine/src/cards/pool/the-millennium-calendar.ts"], "tested": true },
+  { "name": "Neyith of the Dire Hunt", "files": ["engine/src/cards/pool/neyith-of-the-dire-hunt.ts"], "tested": true },
+  { "name": "Teferi, Mage of Zhalfir", "files": ["engine/src/cards/pool/teferi-mage-of-zhalfir.ts"], "tested": true },
+  { "name": "Vizier of Many Faces", "files": ["engine/src/cards/pool/vizier-of-many-faces.ts"], "tested": true },
+  { "name": "Conspiracy Theorist", "files": ["engine/src/cards/pool/conspiracy-theorist.ts"], "tested": true },
+  { "name": "Teferi, Who Slows the Sunset", "files": ["engine/src/cards/pool/teferi-who-slows-the-sunset.ts"], "tested": true },
+  { "name": "Animation Module", "files": ["engine/src/cards/pool/animation-module.ts"], "tested": true }
+ ],
+ "blocked": [
+  {
+   "name": "Jinnie Fay, Jetmir's Second",
+   "needs": ["replacement:token-creation-optional-substitute-choice"],
+   "size": "small",
+   "why": "Not reached. Researched: Flitwing's `may` + `becomes` replaces the whole event, so the effect's riders are lost (tapped, attacking, \"it gains haste\", exiled at end of combat — the ruling keeps them); `tokensInstead` keeps them but is one fixed token every replacement must apply (`token-replacements.ts`'s search takes no optional ones). Needs an optional `tokensInstead` with a choice of token: ask the creating player as-is / Cats / Dogs where `ctx.tokenEventReplaced` asks a `may` today (a choose-modes), then carry the chosen name into that one event's plan as a `tokensInstead` over every token of it."
+  },
+  {
+   "name": "Cephalid Snitch",
+   "needs": ["effect:lose-protection-from-quality"],
+   "size": "small",
+   "why": "'Target creature loses protection from black until end of turn': `loseKeywords`' \"protection\" (built here for Shay Cormac) takes every instance; one quality alone, the others kept, has no form. Was keyed effect:lose-protection-and-ward (B220)."
+  }
+ ]
+}
