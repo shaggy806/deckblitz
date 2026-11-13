@@ -1068,7 +1068,9 @@ export interface LifeLossReplacement {
  * applied as this permanent's controller's effect with `"x"` the damage
  * prevented, `"trigger-object"` the damage's source and `"trigger-recipient"`
  * the one it would have been dealt to (Vigor's "put a +1/+1 counter on that
- * creature").
+ * creature") — a player there is `"trigger-player"` too, "that player"
+ * (Sokrates, Athenian Teacher's granted "…that player each draw half that
+ * many cards").
  */
 export interface DamageMultiplierReplacement {
   readonly event: "would-deal-damage";

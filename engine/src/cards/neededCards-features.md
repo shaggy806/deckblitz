@@ -394,6 +394,18 @@ question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
 her controller's experience counters; {0} is still asked) and Raubahn, Bull of
 Ala Mhigo (6925: pay life equal to his power).
 
+### A prevention's follow-up names the damaged player — built 2026-11-13
+
+The key `replacement:prevention-then-names-damaged-player`. A `prevent: true`
+damage replacement's `then` (rule 615.5) already had the damage's source as
+`"trigger-object"` and the recipient as `"trigger-recipient"`; a player
+recipient is now `"trigger-player"` too, "that player", in both the immediate
+and the once-per-recipient (`perEvent`) follow-up. Sokrates, Athenian Teacher
+(rank 4617): a `grant-static` of the replacement (so "this creature's
+controller" is its "you", and losing all abilities takes it, 613.7), with
+`thenCountsUnprevented` for its ruling (615.12).
+`test/prevention-names-damaged-player.test.ts`.
+
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 
 The commander gap's `static:cast-from-any-graveyard-put-from-library-this-turn`.

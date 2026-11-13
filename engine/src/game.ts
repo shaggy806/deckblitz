@@ -13869,7 +13869,10 @@ export class Game {
       this.preventedThisEvent = null;
     }
     for (const { by, controller, then, amount, recipient } of owed) {
-      const ctx = this.makeResolutionContext(by, controller, [], amount, 0, undefined, 1, 0, [], { recipient });
+      const ctx = this.makeResolutionContext(by, controller, [], amount, 0, undefined, 1, 0, [], {
+        recipient,
+        ...(recipient.target.kind === "player" ? { player: recipient.target.player } : {}),
+      });
       // One already asking (Khârn the Betrayer's opponent of your choice):
       // the next waits for its answer.
       if (this.decisionOutstanding()) ctx.resumeAfterDecisions(then);
@@ -57792,8 +57795,13 @@ controlledBy,
           if (same !== undefined) same.amount += thatMany;
           else owed.push({ by: step.by, controller: step.controller, then: step.then, to, recipient, amount: thatMany });
         } else if (step.then !== undefined) {
-          // The damage's source is "that source" (Swans of Bryn Argoll).
-          const ctx = this.makeResolutionContext(step.by, step.controller, [], thatMany, 0, source, 1, 0, [], { recipient });
+          // The damage's source is "that source" (Swans of Bryn Argoll); a
+          // player it would have been dealt to is also `"trigger-player"`,
+          // "that player" (Sokrates, Athenian Teacher).
+          const ctx = this.makeResolutionContext(step.by, step.controller, [], thatMany, 0, source, 1, 0, [], {
+            recipient,
+            ...(target.kind === "player" ? { player: target.player } : {}),
+          });
           // A sweep's earlier one still asking (Khârn the Betrayer): after it.
           if (this.decisionOutstanding()) ctx.resumeAfterDecisions(step.then);
           else applyEffectSpec(step.then, ctx);
