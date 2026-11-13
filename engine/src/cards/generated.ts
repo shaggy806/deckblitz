@@ -27779,6 +27779,7 @@ import _poolTheMechanistAerialArtisan from "./pool/the-mechanist-aerial-artisan.
 import _poolTheMendingOfDominaria from "./pool/the-mending-of-dominaria.js";
 import _poolTheMightstoneAndWeakstone from "./pool/the-mightstone-and-weakstone.js";
 import _poolTheMightyThorJaneFoster from "./pool/the-mighty-thor-jane-foster.js";
+import _poolTheMillenniumCalendar from "./pool/the-millennium-calendar.js";
 import _poolTheMindStone from "./pool/the-mind-stone.js";
 import _poolTheMindskinner from "./pool/the-mindskinner.js";
 import _poolTheMirariConjecture from "./pool/the-mirari-conjecture.js";
@@ -60482,6 +60483,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheMendingOfDominaria,
   _poolTheMightstoneAndWeakstone,
   _poolTheMightyThorJaneFoster,
+  _poolTheMillenniumCalendar,
   _poolTheMindStone,
   _poolTheMindskinner,
   _poolTheMirariConjecture,
@@ -93198,6 +93200,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-mending-of-dominaria": _poolTheMendingOfDominaria,
   "pool/the-mightstone-and-weakstone": _poolTheMightstoneAndWeakstone,
   "pool/the-mighty-thor-jane-foster": _poolTheMightyThorJaneFoster,
+  "pool/the-millennium-calendar": _poolTheMillenniumCalendar,
   "pool/the-mind-stone": _poolTheMindStone,
   "pool/the-mindskinner": _poolTheMindskinner,
   "pool/the-mirari-conjecture": _poolTheMirariConjecture,

@@ -3,10 +3,10 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, pt, ref, settle, spawn, subtypes, table, toHand, toStep, types, zone } from "./harness.js";
+import { A, B, C, activate, attack, cast, counters, destroy, hand, keywords, lands, life, named, nextTurn, pt, ref, settle, spawn, subtypes, table, toHand, toStep, types, zone } from "./harness.js";
 import { computeCharacteristics } from "../characteristics.js";
 import { printedCardName } from "../state.js";
-import type { ObjectId } from "../state.js";
+import type { ObjectId } from "../primitives.js";
 
 describe("Shay Cormac: opponents' permanents lose hexproof, indestructible, protection, shroud and ward", () => {
   // The opponent's ward triggers waiting on the stack (Shay Cormac's own
@@ -190,5 +190,33 @@ describe("Benthic Anomaly: a token copy of one of the creatures chosen, one per 
     expect(printedCardName(game.state.objects[made])).toBe("Grizzly Bears");
     expect(pt(game, made)).toEqual({ power: 2, toughness: 2 });
     expect(subtypes(game, made)).toEqual(["Eldrazi"]);
+  });
+});
+
+describe("The Millennium Calendar: a time counter for each permanent your untap step untaps", () => {
+  it("counts what your untap step untapped, the Calendar included, once for the step", () => {
+    const { game } = table();
+    const calendar = spawn(game, "The Millennium Calendar", A, { tapped: true });
+    spawn(game, "Grizzly Bears", A, { tapped: true });
+    spawn(game, "Grizzly Bears", A, { tapped: true });
+    spawn(game, "Grizzly Bears", A);
+    // Bob's untap step is not yours: nothing.
+    spawn(game, "Grizzly Bears", B, { tapped: true });
+    nextTurn(game);
+    expect(counters(game, calendar, "time")).toBe(0);
+    nextTurn(game);
+    expect(counters(game, calendar, "time")).toBe(3);
+  });
+
+  it("doubles its counters, and at 1,000 is sacrificed and each opponent loses 1,000 life", () => {
+    const { game } = table({ players: 3 });
+    const calendar = spawn(game, "The Millennium Calendar");
+    lands(game, "Wastes", 2);
+    game.state.objects[calendar].counters.time = 500;
+    activate(game, calendar, 0);
+    expect(zone(game, calendar)).toBe("graveyard");
+    expect(life(game, A)).toBe(20);
+    expect(life(game, B)).toBe(20 - 1000);
+    expect(life(game, C)).toBe(20 - 1000);
   });
 });

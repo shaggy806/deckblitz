@@ -10742,9 +10742,15 @@ export class Game {
    * which of `untapping` to leave tapped (`kept`). */
   private finishUntapStep(untapping: readonly ObjectId[], kept: readonly ObjectId[]): void {
     const active = this.activePlayer;
+    // How many of the active player's permanents the step untapped (rule
+    // 502.3), a token stack as every token in it.
+    let untapped = 0;
     for (const id of untapping) {
-      if (!kept.includes(id)) this.untapUnlessStunned(id);
+      if (kept.includes(id)) continue;
+      const count = this.state.objects[id]?.stackCount ?? 1;
+      if (this.untapUnlessStunned(id)) untapped += count;
     }
+    if (untapped > 0) this.emit({ type: "untap-step-untapped", player: active, count: untapped });
     // Seedborn Muse, Unwinding Clock, Bender's Waterskin: other players'
     // permanents that untap during this player's untap step too.
     for (const id of this.state.zones.shared.battlefield) {

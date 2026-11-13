@@ -887,6 +887,7 @@ import _poolTheFiveDoctors from "../pool/the-five-doctors.js";
 import _poolTheFlameOfKeld from "../pool/the-flame-of-keld.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
 import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
+import _poolTheMillenniumCalendar from "../pool/the-millennium-calendar.js";
 import _poolTheMycosynthGardens from "../pool/the-mycosynth-gardens.js";
 import _poolTheNeedsOfTheMany from "../pool/the-needs-of-the-many.js";
 import _poolTheRoyalScions from "../pool/the-royal-scions.js";
@@ -1912,6 +1913,7 @@ const shard: CardShard = {
     _poolTheFlameOfKeld,
     _poolTheGreyHavens,
     _poolTheLordOfPain,
+    _poolTheMillenniumCalendar,
     _poolTheMycosynthGardens,
     _poolTheNeedsOfTheMany,
     _poolTheRoyalScions,

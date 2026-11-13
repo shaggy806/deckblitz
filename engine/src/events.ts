@@ -100,6 +100,17 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** `player`'s untap step untapped one or more permanents they control
+       * (rule 502.3), all at once: `count` of them, a token stack once per
+       * token. Once a step, after each one's `permanent-untapped`; not what
+       * another player's permanents did in that step (Seedborn Muse), and
+       * not one that only lost a stun counter. "Whenever you untap one or
+       * more permanents during your untap step" (The Millennium Calendar). */
+      readonly type: "untap-step-untapped";
+      readonly player: PlayerId;
+      readonly count: number;
+    })
+  | (Base & {
       /** `player`'s upkeep or draw step was skipped (rules 500.11, 614.10 —
        * a static's `skipsSteps`, the `skip-step` effect): the turn went past
        * it as though it didn't exist, with no `step-began` for it. */

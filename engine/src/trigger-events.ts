@@ -129,6 +129,12 @@ export const TRIGGER_EVENTS = {
   /** "Whenever a permanent becomes untapped" — not one entering untapped
    * (603.2e). */
   "becomes-untapped": row({ type: "permanent-untapped", when: (e) => e.asItEntered !== true, object: (e) => e.object }),
+  /** "Whenever you untap one or more permanents during your untap step" (The
+   * Millennium Calendar): once a step in which the active player's untap
+   * step untapped any permanent they control (rule 502.3); the value is how
+   * many. It triggers with no player having priority, so it waits for the
+   * upkeep (rule 603.3b, the card's ruling). */
+  "untaps-in-untap-step": row({ type: "untap-step-untapped", player: (e) => e.player, amount: (e) => e.count }),
   /** "Whenever players finish voting" (Erestor of the Council) — not an
    * "each player chooses", which isn't a vote (701.38 vs 101.4). The player
    * is whoever controlled the vote's spell or ability. */
