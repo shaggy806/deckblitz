@@ -1,0 +1,92 @@
+{
+ "batch": "B312",
+ "status": "done",
+ "ranks": "Top-5000 gap, EDHREC ranks 2902–3108 (2026-11-12): the next ten of the cards still missing from top-commander-cards.txt, each blocked on one small feature (B294) — built best rank first, no agents. Features: `takesLastExiledCard` (Duplicant), `suppressWardTriggers` (Nowhere to Run), the `additional-upkeep-step` effect and an upkeep `step-begins` trigger's `firstTimeEachTurn` (Paradox Haze), the `loses-life` trigger's `batched` with `withLifeLossBatch` (Emet-Selch of the Third Seat), the stack target's `withTargets` (Wyll's Reversal), `add-counter-all`'s `\"own-power-over-base-power\"` (Sovereign Okinec Ahau), the `reflicker` effect (Lae'zel's Acrobatics), `hasActivatedAbility.tapCost` (Magewright's Stone), the `adapt` effect — the 24 adapt cards moved onto it — and `adapt-as-though-no-counters` (Biomancer's Familiar), `each-player-may`'s `rounds` (Rottenmouth Viper). Two older records freed on the way, both on existing vocabulary: Drach'Nyen (a static's aggregate over `exiled-with-source`) and Phantom Carriage (`hasKeyword` flashback / disturb). Next, still on their B294 records: Autumn's Veil, Keen Duelist, Lavinia, Azorius Renegade, Frontier Warmonger, Geode Golem, Master Biomancer, Strong Back, Serra Paragon, Hope of Ghirapur, Selective Obliteration and the rest of the list.",
+ "authored": [
+  {
+   "name": "Duplicant",
+   "files": [
+    "engine/src/cards/pool/duplicant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nowhere to Run",
+   "files": [
+    "engine/src/cards/pool/nowhere-to-run.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paradox Haze",
+   "files": [
+    "engine/src/cards/pool/paradox-haze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emet-Selch of the Third Seat",
+   "files": [
+    "engine/src/cards/pool/emet-selch-of-the-third-seat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wyll's Reversal",
+   "files": [
+    "engine/src/cards/pool/wylls-reversal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sovereign Okinec Ahau",
+   "files": [
+    "engine/src/cards/pool/sovereign-okinec-ahau.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lae'zel's Acrobatics",
+   "files": [
+    "engine/src/cards/pool/laezels-acrobatics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magewright's Stone",
+   "files": [
+    "engine/src/cards/pool/magewrights-stone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Biomancer's Familiar",
+   "files": [
+    "engine/src/cards/pool/biomancers-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rottenmouth Viper",
+   "files": [
+    "engine/src/cards/pool/rottenmouth-viper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drach'Nyen",
+   "files": [
+    "engine/src/cards/pool/drachnyen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom Carriage",
+   "files": [
+    "engine/src/cards/pool/phantom-carriage.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

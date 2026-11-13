@@ -70,11 +70,13 @@ section keeps only what to do next.
   majors (likely Odric, Master Tactician; Leyline of Transformation; Teferi, Who Slows the Sunset;
   New Blood). **B310** built the first ten (ranks 2002–2870, 12 cards with Cyclonus; the user
   approved the additional beginning phase), **B311** the next ten (ranks 2441–2796, Lim-Dûl's
-  Vault to The Unagi of Kyoshi Island). **Next:** Duplicant (rank 2902 —
-  `static:imprint-exiled-card-pt-and-types`), then Nowhere to Run, Paradox Haze, Emet-Selch of the
-  Third Seat, Wyll's Reversal, Sovereign Okinec Ahau, Lae'zel's Acrobatics, Magewright's Stone,
-  Biomancer's Familiar, Rottenmouth Viper (`npm run -s cards:goal -w engine` in rank order; each
-  keeps its B294 record, unsized: size it against today's engine first). The tail past rank 10,000 waits. **After that:**
+  Vault to The Unagi of Kyoshi Island), **B312** the next ten (ranks 2902–3108, Duplicant to
+  Rottenmouth Viper, and Drach'Nyen and Phantom Carriage on the way). **Next:** Autumn's Veil
+  (rank 3173 — `static:color-scoped-spell-protection`), then Keen Duelist, Lavinia, Azorius
+  Renegade, Frontier Warmonger, Geode Golem, Master Biomancer, Strong Back, Serra Paragon, Hope of
+  Ghirapur, Selective Obliteration (`npm run -s cards:goal -w engine` in rank order; each keeps its
+  B294 record, unsized: size it against today's engine first; Geode Golem's cast-the-commander and
+  Selective Obliteration's per-player colour choice may be majors — ask). The tail past rank 10,000 waits. **After that:**
   B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
   `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
   Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,

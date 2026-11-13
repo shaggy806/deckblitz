@@ -12119,6 +12119,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant', 'Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Rottenmouth Viper: every choice first, then all at once',
+    board({
+      you: { bf: [{ name: 'Rottenmouth Viper', counters: { blight: 1 } }] },
+      opp: { bf: ['Ornithopter'], hand: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Paradox Haze: one more upkeep, where "your upkeep" triggers again',
+    board({ you: { bf: ['Phyrexian Arena', 'Island*3'], hand: ['Paradox Haze'] } }),
+  ),
+  preset(
+    "Nowhere to Run: an opponent's ward doesn't trigger",
+    board({
+      you: { bf: ['Nowhere to Run', 'Mountain'], hand: ['Shock'] },
+      opp: { bf: ['Adrix and Nev, Twincasters'] },
+    }),
+  ),
   preset('Game menu: leaving a game being played asks first', board({ you: { bf: ['Forest'] } })),
   preset('A turn that ends on its own says so', board({ you: { hand: ['Forest'] } })),
 ]

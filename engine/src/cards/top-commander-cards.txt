@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4909 already implemented / 91 missing (marks refreshed 2026-11-12)
+4919 already implemented / 81 missing (marks refreshed 2026-11-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2823,7 +2823,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2830  Kozilek's Unsealing                      {2}{U}           Enchantment
 [x]  2831  Price of Progress                        {1}{R}           Instant
 [x]  2832  Urza's Bauble                            {0}              Artifact
-[ ]  2833  Lae'zel's Acrobatics                     {3}{W}           Instant
+[x]  2833  Lae'zel's Acrobatics                     {3}{W}           Instant
 [x]  2834  Resonating Lute                          {2}{U}{R}        Artifact
 [x]  2835  Vorpal Sword                             {B}              Artifact — Equipment
 [x]  2836  Ulvenwald Hydra                          {4}{G}{G}        Creature — Hydra
@@ -2839,7 +2839,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2846  Mirrex                                   {0}              Land — Sphere
 [x]  2847  Overgrown Battlement                     {1}{G}           Creature — Wall
 [x]  2848  Transcendent Envoy                       {1}{W}           Enchantment Creature — Griffin
-[ ]  2849  Sovereign Okinec Ahau                    {2}{G}{W}        Legendary Creature — Cat Noble
+[x]  2849  Sovereign Okinec Ahau                    {2}{G}{W}        Legendary Creature — Cat Noble
 [x]  2850  Metamorphosis Fanatic                    {4}{B}{B}        Creature — Human Cleric
 [x]  2851  Scythecat Cub                            {1}{G}           Creature — Cat
 [x]  2852  Keen Sense                               {G}              Enchantment — Aura
@@ -2848,7 +2848,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2855  Archetype of Aggression                  {1}{R}{R}        Enchantment Creature — Human Warrior
 [x]  2856  Headless Rider                           {2}{B}           Creature — Zombie
 [x]  2857  Ratadrabik of Urborg                     {2}{W}{B}        Legendary Creature — Zombie Wizard
-[ ]  2858  Wyll's Reversal                          {2}{R}           Instant
+[x]  2858  Wyll's Reversal                          {2}{R}           Instant
 [x]  2859  Sunspine Lynx                            {2}{R}{R}        Creature — Elemental Cat
 [x]  2860  Hell to Pay                              {X}{R}           Sorcery
 [x]  2861  Ichormoon Gauntlet                       {2}{U}           Artifact
@@ -2864,7 +2864,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2871  Tooth and Nail                           {5}{G}{G}        Sorcery
 [x]  2872  Pain for All                             {2}{R}           Enchantment — Aura
 [x]  2873  Elvish Harbinger                         {2}{G}           Creature — Elf Druid
-[ ]  2874  Nowhere to Run                           {1}{B}           Enchantment
+[x]  2874  Nowhere to Run                           {1}{B}           Enchantment
 [x]  2875  Mocking Sprite                           {2}{U}           Creature — Faerie Rogue
 [x]  2876  Finale of Glory                          {X}{W}{W}        Sorcery
 [x]  2877  Winter Moon                              {2}              Artifact
@@ -2881,7 +2881,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2888  Renata, Called to the Hunt               {2}{G}{G}        Legendary Enchantment Creature — Demigod
 [x]  2889  Outcaster Trailblazer                    {2}{G}           Creature — Human Druid
 [x]  2890  Chief of the Foundry                     {3}              Artifact Creature — Construct
-[ ]  2891  Paradox Haze                             {2}{U}           Enchantment — Aura
+[x]  2891  Paradox Haze                             {2}{U}           Enchantment — Aura
 [x]  2892  Fraying Sanity                           {2}{U}           Enchantment — Aura Curse
 [x]  2893  Shadow Rift                              {U}              Instant
 [x]  2894  Wrecking Ball Arm                        {2}              Legendary Artifact — Equipment
@@ -2892,7 +2892,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2899  Wash Away                                {U}              Instant
 [x]  2900  Arbor Adherent                           {3}{G}           Creature — Dog Druid
 [x]  2901  Kefka, Court Mage // Kefka, Ruler of Ruin {5}              Legendary Creature — Human Wizard // Legendary Creature — Avatar Wizard
-[ ]  2902  Magewright's Stone                       {2}              Artifact
+[x]  2902  Magewright's Stone                       {2}              Artifact
 [x]  2903  Undead Warchief                          {2}{B}{B}        Creature — Zombie
 [x]  2904  Hinterland Sanctifier                    {W}              Creature — Rabbit Cleric
 [x]  2905  Overlord of the Floodpits                {3}{U}{U}        Enchantment Creature — Avatar Horror
@@ -2923,7 +2923,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2930  Legion Loyalty                           {6}{W}{W}        Enchantment
 [x]  2931  Skirge Familiar                          {4}{B}           Creature — Phyrexian Imp
 [x]  2932  Mudflat Village                          {0}              Land
-[ ]  2933  Duplicant                                {6}              Artifact Creature — Shapeshifter
+[x]  2933  Duplicant                                {6}              Artifact Creature — Shapeshifter
 [x]  2934  Savage Beating                           {3}{R}{R}        Instant
 [x]  2935  Brokers Ascendancy                       {G}{W}{U}        Enchantment
 [x]  2936  Foundation Breaker                       {3}{G}           Creature — Elemental
@@ -2973,7 +2973,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2980  Galvanic Iteration                       {U}{R}           Instant
 [x]  2981  Ancestral Vision                         {0}              Sorcery
 [x]  2982  Rivaz of the Claw                        {1}{B}{R}        Legendary Creature — Lizard Warlock
-[ ]  2983  Rottenmouth Viper                        {5}{B}           Creature — Elemental Snake
+[x]  2983  Rottenmouth Viper                        {5}{B}           Creature — Elemental Snake
 [x]  2984  Biophagus                                {1}{G}           Creature — Human Tyranid Wizard
 [x]  2985  Abraded Bluffs                           {0}              Land — Desert
 [x]  2986  Athreos, God of Passage                  {1}{W}{B}        Legendary Enchantment Creature — God
@@ -2996,7 +2996,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3003  Malevolent Rumble                        {1}{G}           Sorcery
 [x]  3004  Arcanis the Omnipotent                   {3}{U}{U}{U}     Legendary Creature — Wizard
 [x]  3005  Black Waltz No. 3                        {2}{B}{R}        Legendary Creature — Wizard
-[ ]  3006  Emet-Selch of the Third Seat             {2}{U}{B}        Legendary Creature — Elder Wizard
+[x]  3006  Emet-Selch of the Third Seat             {2}{U}{B}        Legendary Creature — Elder Wizard
 [x]  3007  Walking Atlas                            {2}              Artifact Creature — Construct
 [x]  3008  Daze                                     {1}{U}           Instant
 [x]  3009  Erebos, God of the Dead                  {3}{B}           Legendary Enchantment Creature — God
@@ -3085,7 +3085,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3092  Crawling Sensation                       {2}{G}           Enchantment
 [x]  3093  Spirit Link                              {W}              Enchantment — Aura
 [x]  3094  Mirrorworks                              {5}              Artifact
-[ ]  3095  Biomancer's Familiar                     {G}{U}           Creature — Mutant
+[x]  3095  Biomancer's Familiar                     {G}{U}           Creature — Mutant
 [x]  3096  Double Major                             {G}{U}           Instant
 [x]  3097  Gluntch, the Bestower                    {1}{G}{W}        Legendary Creature — Jellyfish
 [x]  3098  Blighted Agent                           {1}{U}           Creature — Phyrexian Human Rogue

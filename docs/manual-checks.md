@@ -8070,3 +8070,19 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Odric, Master Tactician: you declare the blocks, this combat only
 - **Do:** Attack with Odric and the three Grizzly Bears.
 - **Expect:** Once Odric's trigger resolves, you declare the opponent's blocks (or none) in the declare blockers step.
+
+## The top 5000's last cards, batch 312 (2026-11-12)
+
+### Rottenmouth Viper: every choice first, then all at once
+- **Do:** Attack with Rottenmouth Viper (it gets a second blight counter).
+- **Expect:** The opponent answers twice — sacrifice the Ornithopter, discard the Grizzly Bears, or neither — never the same one twice; nothing happens until both answers are in, then the sacrifice, the discard and 4 life for each "neither" all at once.
+- **Not a bug:** The second question offers only what's left (or nothing, which is a "neither").
+
+### Paradox Haze: one more upkeep, where "your upkeep" triggers again
+- **Do:** Cast Paradox Haze on yourself, then pass to your next turn.
+- **Expect:** Two upkeep steps before your draw step: Phyrexian Arena draws a card and costs 1 life in each.
+- **Not a bug:** Only the first upkeep adds one — the added upkeep doesn't add another.
+
+### Nowhere to Run: an opponent's ward doesn't trigger
+- **Do:** Cast Shock on the opponent's Adrix and Nev.
+- **Expect:** No ward question: Shock resolves and Adrix and Nev dies.
