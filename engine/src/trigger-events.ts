@@ -67,6 +67,15 @@ export const TRIGGER_EVENTS = {
     when: (e) => e.byOwnAttack === true,
     object: (e) => e.object,
   }),
+  /** "Whenever a creature entering under an opponent's control causes a
+   * triggered ability of that creature to trigger" (Aboleth Spawn): as
+   * `attack-triggers-own-ability`, for its source, a creature, entering —
+   * `who` reads the ability's controller, the entering creature's. */
+  "entry-triggers-own-ability": row({
+    type: "ability-triggered",
+    when: (e) => e.byOwnEntry === true,
+    object: (e) => e.object,
+  }),
   /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
   forages: row({ type: "foraged", player: (e) => e.player }),
   /** "Whenever you roll one or more dice" (rule 706); the value is the

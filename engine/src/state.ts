@@ -2483,6 +2483,11 @@ export interface LastKnownRefs {
    * ability of that creature to trigger" (Firebender Ascension). Carried
    * onto its `ability-triggered` event. */
   readonly byOwnAttack?: true;
+  /** Likewise, because its own source, a creature, entered the battlefield
+   * just now:
+   * "a creature entering under an opponent's control causes a triggered
+   * ability of that creature to trigger" (Aboleth Spawn). */
+  readonly byOwnEntry?: true;
 }
 
 /**

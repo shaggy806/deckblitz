@@ -57,6 +57,7 @@ import _poolAbigaleEloquentFirstYear from "./pool/abigale-eloquent-first-year.js
 import _poolAbigalePoetLaureate from "./pool/abigale-poet-laureate.js";
 import _poolAbjure from "./pool/abjure.js";
 import _poolAbnormalEndurance from "./pool/abnormal-endurance.js";
+import _poolAbolethSpawn from "./pool/aboleth-spawn.js";
 import _poolAbolish from "./pool/abolish.js";
 import _poolAbolisherOfBloodlines from "./pool/abolisher-of-bloodlines.js";
 import _poolAbominableTreefolk from "./pool/abominable-treefolk.js";
@@ -32738,6 +32739,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAbigalePoetLaureate,
   _poolAbjure,
   _poolAbnormalEndurance,
+  _poolAbolethSpawn,
   _poolAbolish,
   _poolAbolisherOfBloodlines,
   _poolAbominableTreefolk,
@@ -65432,6 +65434,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/abigale-poet-laureate": _poolAbigalePoetLaureate,
   "pool/abjure": _poolAbjure,
   "pool/abnormal-endurance": _poolAbnormalEndurance,
+  "pool/aboleth-spawn": _poolAbolethSpawn,
   "pool/abolish": _poolAbolish,
   "pool/abolisher-of-bloodlines": _poolAbolisherOfBloodlines,
   "pool/abominable-treefolk": _poolAbominableTreefolk,

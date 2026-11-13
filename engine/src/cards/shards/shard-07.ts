@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbandonedCampground from "../pool/abandoned-campground.js";
+import _poolAbolethSpawn from "../pool/aboleth-spawn.js";
 import _poolAcademyJourneymage from "../pool/academy-journeymage.js";
 import _poolAcidicSoil from "../pool/acidic-soil.js";
 import _poolActionNewsCrew from "../pool/action-news-crew.js";
@@ -1048,6 +1049,7 @@ import _tokensZombieGiantToken from "../tokens/zombie-giant-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbandonedCampground,
+    _poolAbolethSpawn,
     _poolAcademyJourneymage,
     _poolAcidicSoil,
     _poolActionNewsCrew,

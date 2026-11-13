@@ -12,6 +12,7 @@ import {
   counters,
   destroy,
   enter,
+  hand,
   life,
   lands,
   nextTurn,
@@ -223,5 +224,31 @@ describe("Jegantha, the Wellspring: its mana can't pay generic costs", () => {
   it("can't pay a generic-only cost at all", () => {
     const game = tapped();
     expect(() => cast(game, toHand(game, "Mind Stone"))).toThrow(/refused/);
+  });
+});
+
+describe("Aboleth Spawn: copies an entering opponent's creature's own trigger", () => {
+  it("Bob's Elvish Visionary draws Bob a card, and the copy draws Alice one", () => {
+    const { game, a } = table();
+    spawn(game, "Aboleth Spawn");
+    toLibrary(game, "Island");
+    toLibrary(game, "Island", B);
+    pickModes(a, 0);
+    const before = hand(game).length;
+    const theirs = hand(game, B).length;
+    enter(game, "Elvish Visionary", B);
+    expect(hand(game, B).length).toBe(theirs + 1);
+    expect(hand(game).length).toBe(before + 1);
+  });
+
+  it("doesn't copy its own controller's creature's trigger", () => {
+    const { game, a } = table();
+    spawn(game, "Aboleth Spawn");
+    toLibrary(game, "Island");
+    toLibrary(game, "Island");
+    pickModes(a, 0);
+    const before = hand(game).length;
+    enter(game, "Elvish Visionary");
+    expect(hand(game).length).toBe(before + 1);
   });
 });

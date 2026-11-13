@@ -31528,7 +31528,15 @@ export class Game {
           // creature" if either has left by the time it resolves (608.2h).
           const refsNow = this.refsAtTrigger(live, lastSeen, event, triggerObject);
           // Its own source attacking caused it (Firebender Ascension).
-          const atTrigger = this.attackNamed(event, id) ? { ...(refsNow ?? {}), byOwnAttack: true as const } : refsNow;
+          // Or its own source, a creature, entering (Aboleth Spawn).
+          const atTrigger = this.attackNamed(event, id)
+            ? { ...(refsNow ?? {}), byOwnAttack: true as const }
+            : event.type === "permanent-entered-battlefield" &&
+                event.object === id &&
+                live.zone === "battlefield" &&
+                effectiveTypes(this.state, this.registry, live).includes("creature")
+              ? { ...(refsNow ?? {}), byOwnEntry: true as const }
+              : refsNow;
           // "For each of them": which permanents the batched entry brought.
           const lastKnownRefs =
             ability.trigger.on === "enters-battlefield" &&
@@ -35100,6 +35108,7 @@ export class Game {
       controller,
       object: abilityId,
       ...(refs?.byOwnAttack === true ? { byOwnAttack: true as const } : {}),
+      ...(refs?.byOwnEntry === true ? { byOwnEntry: true as const } : {}),
     });
     // Its targets are locked in as it goes on the stack (rule 603.3d), which
     // is when anything it targets "becomes the target of" an ability.
