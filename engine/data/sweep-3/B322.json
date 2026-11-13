@@ -1,0 +1,832 @@
+{
+ "batch": 322,
+ "status": "triage",
+ "ranks": "Re-triage for the rank goal (2026-11-13, one read-only agent, no cards authored): the 55 cards whose records had no size and the 50 sized major, read against today's engine. 6 run now as they are (size \"runs-now\", no open need: author them), 94 small, 5 still major (Nicol Bolas, Dragon-God; New Blood; _____ Goblin; Karn Liberated; Zilortha, Strength Incarnate). Each small key has a lane in data/lanes.json for build-family overnight lanes. Verdicts come from reading the source and briefs, not tests: a runs-now card still needs its test to settle the point its why names.",
+ "authored": [],
+ "blocked": [
+  {
+   "name": "Nicol Bolas, Dragon-God",
+   "needs": [],
+   "size": "major",
+   "why": "Still major (the user deferred it 2026-11-12): each opponent chooses a card in hand or a permanent in one pick (a new mixed-zone decision with hidden information), plus a static giving it all loyalty abilities of other planeswalkers. Building it: A choose-from-zones decision spanning hand and battlefield (shared with Lich's Mastery), and a layer-6 static copying other permanents' loyalty abilities (close to Havengul Lich's gain-activated-abilities)."
+  },
+  {
+   "name": "New Blood",
+   "needs": [],
+   "size": "major",
+   "why": "Text-changing a creature-type word (rule 612.2a) across the type line, filters, 'non-X' words and token names is a new subsystem. Building it: A text-change layer (layer 3) that rewrites every creature-type word in a permanent's abilities and type line; change-text today knows colour and basic land type words only."
+  },
+  {
+   "name": "Sokrates, Athenian Teacher",
+   "needs": [
+    "replacement:prevention-then-names-damaged-player"
+   ],
+   "size": "small",
+   "why": "A granted until-end-of-turn prevention exists (replacement-effect fromObject), but its follow-up can't name the player the damage would have gone to, so 'that player draws half' has no subject."
+  },
+  {
+   "name": "Sunken Palace",
+   "needs": [
+    "effect:when-spent-on-ability"
+   ],
+   "size": "small",
+   "why": "add-mana's whenSpent rider fires only on a spell cast; copy-ability exists, so the gap is the rider seeing an activation it paid for."
+  },
+  {
+   "name": "Glowing One",
+   "needs": [
+    "trigger:mills-per-card"
+   ],
+   "size": "small",
+   "why": "on: 'mills' fires once per mill for the total (abilities.ts); the ruling needs one trigger per nonland card milled — a perCard flag on the same row."
+  },
+  {
+   "name": "Everything Comes to Dust",
+   "needs": [
+    "filter:shares-creature-type-with-convokers"
+   ],
+   "size": "small",
+   "why": "Convoke is tracked (for-each-convoker, {convokers}), but sharesCreatureTypeWith has no 'the creatures that convoked this spell' set."
+  },
+  {
+   "name": "Cleaver Skaab",
+   "needs": [
+    "effect:token-copy-of-sacrificed"
+   ],
+   "size": "small",
+   "why": "create-token-copy of {paid:'sacrificed'} copies the card as printed; the ruling needs the sacrificed permanent's copiable values (LKI, including a copy effect it had)."
+  },
+  {
+   "name": "Displaced Dinosaurs",
+   "needs": [],
+   "size": "runs-now",
+   "why": "others-enter-battlefield now takes enterAs (a ResolvedPatch, Master Biomancer 2026-11-12): filter {controlledBy:'you', anyOf:[{type:'artifact'},{supertype:'legendary'},{subtype:'Saga'}]}, enterAs {addTypes:['creature'], addSubtypes:['Dinosaur'], power:7, toughness:7}. Test that the patch's power/toughness lands in layer 7b as it enters."
+  },
+  {
+   "name": "Gilraen, Dúnedain Protector",
+   "needs": [],
+   "size": "runs-now",
+   "why": "FlickerCounters gained `and` (a second kind) and `entering` on 2026-11-12 (Semester's End), which was B294's only gap: flicker target 0 returnAt end step with thenCounters {kind:'vigilance', amount:1, entering:true, and:{kind:'lifelink', amount:1}}, then a may of return-flickered (Lae'zel's Acrobatics) for the immediate return. Unsure: confirm return-flickered now leaves the delayed return finding nothing."
+  },
+  {
+   "name": "Flood of Tears",
+   "needs": [
+    "condition:this-way-counts-commander-redirect"
+   ],
+   "size": "small",
+   "why": "The this-way count of returned nontoken permanents you controlled must include a commander the owner sent to the command zone instead (ruling); returned-to-hand's this-way record for that redirect is unbuilt/unverified."
+  },
+  {
+   "name": "Deekah, Fractal Theorist",
+   "needs": [
+    "bug:mana-value-of-countered-copy"
+   ],
+   "size": "small",
+   "why": "lastStackManaValue is kept only for kind === 'card'; a spell copy countered in response reads 0."
+  },
+  {
+   "name": "Grist, Voracious Larva // Grist, the Plague Swarm",
+   "needs": [
+    "effect:token-copy-of-graveyard-cards"
+   ],
+   "size": "small",
+   "why": "The −6 needs create-token-copy over every creature card in your graveyard (untargeted, with the 1/1 Insect exceptions); `of` takes one object. The +1's milled-black check is this-way milled."
+  },
+  {
+   "name": "Faramir, Prince of Ithilien",
+   "needs": [],
+   "size": "runs-now",
+   "why": "The chosen opponent's next end step is built (effect:delayed-trigger-chosen-players-next-end-step), and condition {kind:'attacked-you-last-turn', by:'that-player'} reads attackedByOnTurn against their lastTurnTaken, which is the turn under way at their end step and is recorded at declaration (so an attacker that left still counts; a planeswalker attacked doesn't, per the ruling). Unsure: prove 'that-player' resolves to the chosen opponent inside the delayed trigger's conditional."
+  },
+  {
+   "name": "Breeches, Brazen Plunderer",
+   "needs": [
+    "trigger:damage-batch-over-opponents"
+   ],
+   "size": "small",
+   "why": "deals-damage-batch fires once per damaged player; this needs one trigger over all opponents the Pirates damaged, with 'those opponents' as a player set for impulse-exile's whose."
+  },
+  {
+   "name": "Triple Triad",
+   "needs": [
+    "zone:impulse-free-lesser-mana-value-than-own"
+   ],
+   "size": "small",
+   "why": "impulse-exile has no permission whose filter compares each exiled card's mana value with the card you own exiled this way; grant-play over a thisWay exiled filter gave nothing (B294 test)."
+  },
+  {
+   "name": "Filigree Vector",
+   "needs": [
+    "decision:two-any-number-groups"
+   ],
+   "size": "small",
+   "why": "A target list may hold one any-number group and only as its last slot; two groups (creatures, then artifacts) can't be written. Same work as Kamahl's Will's key."
+  },
+  {
+   "name": "Sin, Unending Cataclysm",
+   "needs": [
+    "effect:as-enters-remove-counters-from-any-number"
+   ],
+   "size": "small",
+   "why": "The as-enters removeAllCountersFrom takes a filter (Thief of Blood's all permanents); 'any number of' needs a choose-permanents step as it enters. The dies trigger is Dockworker Drone's put-counters-of plus shuffle-into-library."
+  },
+  {
+   "name": "Containment Priest",
+   "needs": [
+    "replacement:enter-exile-if-not-cast"
+   ],
+   "size": "small",
+   "why": "others-enter-battlefield has tapped/untapped/counters/enterAs/asCopyOf but no 'exile it instead' and no wasn't-cast test; exileUnless lives on the self form only."
+  },
+  {
+   "name": "Possibility Storm",
+   "needs": [
+    "effect:possibility-storm-exile-spell-on-cast"
+   ],
+   "size": "small",
+   "why": "No effect moves a spell from the stack to exile (same gap as exile-target-spell / Neera / Knowledge Pool); the reveal-until sharing a card type and the linked bottom-random are otherwise there."
+  },
+  {
+   "name": "Ensnaring Bridge",
+   "needs": [
+    "static:attack-restriction-power-vs-hand-size"
+   ],
+   "size": "small",
+   "why": "A static's affects.filter comparing power with {cardsInHand:'you'} isn't re-read at attack declaration (tested B294); needs the live amount in the cant-attack check."
+  },
+  {
+   "name": "Arvinox, the Mind Flail",
+   "needs": [
+    "zone:exile-library-bottom-face-down-cast-permanents"
+   ],
+   "size": "small",
+   "why": "impulse-exile takes the top of the library only; the bottom card, face down, lookable, castable as permanent spells with any-color spending while it stays exiled. The 'isn't a creature unless' is Phoenix Fleet Airship's condition shape inverted."
+  },
+  {
+   "name": "Auron, Venerated Guardian",
+   "needs": [
+    "bug:reflexive-target-compare-bound-at-creation"
+   ],
+   "size": "small",
+   "why": "A reflexive trigger's target filter comparing with the source's power is bound as a number when created; B296 saw no legal target. A bug, not a feature."
+  },
+  {
+   "name": "Rith, Liberated Primeval",
+   "needs": [
+    "stat:excess-damage-to-departed-this-turn"
+   ],
+   "size": "small",
+   "why": "excessDamageThisTurn reads permanents still on the battlefield; the ruling counts an opponent's creature or planeswalker that took excess damage and then died — needs a journal entry."
+  },
+  {
+   "name": "Olivia, Crimson Bride",
+   "needs": [],
+   "size": "runs-now",
+   "why": "put-onto-battlefield target 0 enterTapped attacking (Yore-Tiller Nephilim), then grant-triggered target 0 duration permanent with a trigger {on:'state'} on not controlling a legendary Vampire, effect exile source. State triggers were built 2026-10-21. Unsure: B243 called a granted state trigger unproven, so the authoring test must show it firing."
+  },
+  {
+   "name": "Infesting Radroach",
+   "needs": [
+    "trigger:mills-per-card"
+   ],
+   "size": "small",
+   "why": "Same per-card mill trigger as Glowing One, from the graveyard (fromGraveyard + source-zone condition), seeing a mill that puts the Radroach there alongside."
+  },
+  {
+   "name": "Nahiri's Resolve",
+   "needs": [
+    "effect:flicker-chosen-group"
+   ],
+   "size": "small",
+   "why": "flicker's target is a slot, slots, {from}, or {all}; 'exile any number of nontoken artifacts and/or creatures you control' is an untargeted chosen group returned together at your next upkeep. The B238 record's key is marked built, but no flicker form takes a chosen set."
+  },
+  {
+   "name": "Gideon's Sacrifice",
+   "needs": [
+    "decision:damage-redirect-order"
+   ],
+   "size": "small",
+   "why": "Redirection replacements exist (replacements.ts redirect: self/attached/recipient-controller; effects' redirectTo, Turn the Tables) and so does the replacement-order decision; missing is a redirect to a permanent chosen (not targeted) as it resolves, for the turn, ordered with others by 616.1."
+  },
+  {
+   "name": "Fblthp, Lost on the Range",
+   "needs": [
+    "zone:plot-from-library-top"
+   ],
+   "size": "small",
+   "why": "Plot exists from hand, and a keyword granted to cards off the battlefield was built 2026-11-13 (Teferi, Mage of Zhalfir); plotting the top card of the library and 'look at the top card any time' are permission extensions, not a new subsystem."
+  },
+  {
+   "name": "Lonis, Cryptozoologist",
+   "needs": [
+    "cost:sacrifice-x-of-token-stack"
+   ],
+   "size": "small",
+   "why": "Sacrifice X Clues sacrificed one of a two-token stack (B296); the reveal and put onto the battlefield worked. A cost-payment bug."
+  },
+  {
+   "name": "Share the Spoils",
+   "needs": [
+    "zone:shared-impulse-pool-each-player"
+   ],
+   "size": "small",
+   "why": "A linked exile pool every player may play one card from during their own turn (any-color spending), with a 'when they do' refill: a permission scope for each player over a linked set, and a trigger on its use."
+  },
+  {
+   "name": "Cosima, God of the Voyage",
+   "needs": [
+    "effect:exiled-card-gains-trigger"
+   ],
+   "size": "small",
+   "why": "Triggered abilities that work from exile were built 2026-11-13 (Senu) and keywords granted off the battlefield (Teferi, Mage of Zhalfir); missing is grant-triggered onto the card it just exiled, with voyage counters on that card."
+  },
+  {
+   "name": "Perplexing Chimera",
+   "needs": [
+    "effect:exchange-control-permanent-and-spell"
+   ],
+   "size": "small",
+   "why": "gain-control-spell and exchange-control both exist; exchanging control of a permanent and a spell (with new targets) is a combination of the two, not a new decision."
+  },
+  {
+   "name": "Chef's Kiss",
+   "needs": [
+    "effect:copy-spell-random-retarget"
+   ],
+   "size": "small",
+   "why": "gain-control-spell and copy-spell exist, and random choices exist (acts-at-random); reselecting the targets at random among legal ones excluding you and yours is a narrow retarget mode."
+  },
+  {
+   "name": "Karn, Living Legacy",
+   "needs": [
+    "effect:emblem-own-activated-ability"
+   ],
+   "size": "small",
+   "why": "Same key as Ob Nixilis of the Black Oath (small): an emblem with an activated ability of its own. The −1's 'pay any amount of mana' exists as an effect step (effects.ts 'pay any amount of mana')."
+  },
+  {
+   "name": "Font of Agonies",
+   "needs": [
+    "trigger:pays-life-trigger"
+   ],
+   "size": "small",
+   "why": "No life-paid event or trigger row; payLife costs and pay-life effects would emit it with the amount."
+  },
+  {
+   "name": "Erdwal Illuminator",
+   "needs": [
+    "trigger:investigate-trigger"
+   ],
+   "size": "small",
+   "why": "Investigate is written as create-token Clue, so there's no 'you investigate' event (701.16) for a firstTimeEachTurn trigger; needs an investigate effect kind (or flag) that emits one."
+  },
+  {
+   "name": "Ramses, Assassin Lord",
+   "needs": [
+    "condition:attacked-player-this-turn-by-filter"
+   ],
+   "size": "small",
+   "why": "loses-game trigger is built; 'if they were attacked this turn by an Assassin you controlled' needs a journal read of the attackers' characteristics at declaration (attackedByOnTurn records the player only)."
+  },
+  {
+   "name": "Havengul Lich",
+   "needs": [
+    "static:gain-activated-abilities-of-card"
+   ],
+   "size": "small",
+   "why": "Quicksilver Elemental's 'gains all activated abilities of' exists one-shot; this needs a delayed 'when you cast it this turn' and the gain read from that spell/card. Field-level, no new decision."
+  },
+  {
+   "name": "Tyvar the Bellicose",
+   "needs": [
+    "trigger:mana-ability-resolves-amount-produced"
+   ],
+   "size": "small",
+   "why": "A granted 'whenever a mana ability of this creature resolves' trigger with the amount produced (once each turn) — a new event row; 'they gain deathtouch' over the attacking Elves is the attack batch's objects."
+  },
+  {
+   "name": "Firkraag, Cunning Instigator",
+   "needs": [
+    "stat:had-to-attack-condition"
+   ],
+   "size": "small",
+   "why": "Goad and attack requirements exist; recording at declaration whether each attacker was under a requirement is a journal field the combat-damage condition reads."
+  },
+  {
+   "name": "Valki, God of Lies",
+   "needs": [
+    "effect:exile-from-revealed-hand-per-opponent-until-leaves"
+   ],
+   "size": "small",
+   "why": "Per-opponent choice from a revealed hand, exiled until Valki leaves, then become-copy of one with mana value X, and Tibalt's emblem playing cards linked to Tibalt: each a field on existing pieces (look-and-choose on an opponent's hand, untilSourceLeaves, become-copy, mayPlay linked). Unsure: the emblem's link to the Tibalt object."
+  },
+  {
+   "name": "Disorienting Choice",
+   "needs": [
+    "amount:chosen-targets-remaining"
+   ],
+   "size": "small",
+   "why": "Required/optional per-seat target slots were built 2026-11-13; each controller's may-exile is each-player-may; missing is the amount 'chosen permanents still on the battlefield'."
+  },
+  {
+   "name": "Whirlwind Denial",
+   "needs": [
+    "effect:counter-each-unless-pays"
+   ],
+   "size": "small",
+   "why": "counter-unless-pays exists for one object; for each spell and ability your opponents control, ask in turn order then counter together — sequencing existing decisions."
+  },
+  {
+   "name": "Comet, Stellar Pup",
+   "needs": [
+    "effect:extra-loyalty-activations-this-turn",
+    "decision:choose-creature-or-player-on-resolution"
+   ],
+   "size": "small",
+   "why": "Extra loyalty activations exist (The Chain Veil's extraLoyaltyActivation, Oath of Teferi's loyaltyActivationsEachTurn) — 'two more times, Comet only' is an amount on it; an untargeted 'a creature or player' chosen on resolution needs a choice spanning both."
+  },
+  {
+   "name": "Psychic Paper",
+   "needs": [
+    "decision:choose-name-and-type-on-attach"
+   ],
+   "size": "small",
+   "why": "choose-card-name and choose-creature-type decisions exist and the patch has name/setSubtypes; missing is an 'as this becomes attached' choice hook and a static reading the last chosen name and type."
+  },
+  {
+   "name": "Jhoira of the Ghitu",
+   "needs": [
+    "cost:exiled-card-effect-target"
+   ],
+   "size": "small",
+   "why": "give-suspend with target {paid:'exiled'} didn't put the time counters on (B291); amounts reading {paid:'exiled'} work, so this is the effect's target resolution."
+  },
+  {
+   "name": "Knowledge Pool",
+   "needs": [
+    "effect:exile-cast-spell-then-cast-linked-exiled"
+   ],
+   "size": "small",
+   "why": "Moving the cast spell from the stack to exile is the possibility-storm / exile-target-spell gap; the free cast from 'other cards exiled with this artifact' is cast-now from a linked set."
+  },
+  {
+   "name": "_____ Goblin",
+   "needs": [],
+   "size": "major",
+   "why": "Stickers (rule 123) are a subsystem: sticker sheets per player, putting a name sticker on a permanent, and counting its vowels. Building it: Model sticker sheets dealt at game start, a 'put a sticker' decision, name stickers changing the name; 1 card in the goal list."
+  },
+  {
+   "name": "Sawhorn Nemesis",
+   "needs": [
+    "replacement:damage-double-to-chosen-player-side"
+   ],
+   "size": "small",
+   "why": "As-enters choose a player is built; would-deal-damage's `to` has opponent / opponent-side but no 'the chosen player or a permanent they control'."
+  },
+  {
+   "name": "Historian's Boon",
+   "needs": [
+    "trigger:saga-final-chapter-triggers"
+   ],
+   "size": "small",
+   "why": "There's an ability-triggered event (Firebender Ascension, Aboleth Spawn rows); needs a row for a Saga's final chapter ability triggering, not chapter-resolves."
+  },
+  {
+   "name": "Xanathar, Guild Kingpin",
+   "needs": [
+    "zone:play-from-opponent-library-top"
+   ],
+   "size": "small",
+   "why": "Playing the top of your own library and looking at it any time exist; a target opponent's library top for the turn (with any-color spending and their can't-cast) is a whose on the same permission."
+  },
+  {
+   "name": "Grothama, All-Devouring",
+   "needs": [
+    "stat:damage-to-object-by-controller"
+   ],
+   "size": "small",
+   "why": "The granted attack trigger needs to name the granting static's source to fight it, and the leaves trigger needs damage dealt to Grothama this turn split by the sources' controllers (a journal read)."
+  },
+  {
+   "name": "Warp World",
+   "needs": [
+    "effect:shuffle-permanents-reveal-that-many"
+   ],
+   "size": "small",
+   "why": "Shuffle each player's permanents into their library, reveal that many, put artifacts/creatures/lands then enchantments onto the battlefield, rest on the bottom: a multi-step effect of zone moves with per-player counts, no new decision or rule."
+  },
+  {
+   "name": "Averna, the Chaos Bloom",
+   "needs": [
+    "static:cascade-put-land"
+   ],
+   "size": "small",
+   "why": "A static hook in cascade's procedure (after the last card is exiled, before the cast choice) to put one exiled land onto the battlefield tapped."
+  },
+  {
+   "name": "Karn Liberated",
+   "needs": [],
+   "size": "major",
+   "why": "Restarting the game (rule 727) resets the whole game state — a core-rule change. Building it: A game restart: new libraries from all owned cards, starting life, mulligans, command zone, keeping Karn's linked exiled cards out and then putting them onto the battlefield; 1 card."
+  },
+  {
+   "name": "The Ninth Doctor",
+   "needs": [
+    "trigger:untap-trigger"
+   ],
+   "size": "small",
+   "why": "becomes-untapped exists; it needs a during-your-untap-step qualifier (the event carries none). additional-upkeep-step exists (Paradox Haze)."
+  },
+  {
+   "name": "Dragon's Fire",
+   "needs": [
+    "amount:beheld-object-power"
+   ],
+   "size": "small",
+   "why": "Behold (reveal or choose a Dragon) exists as a kicker-like cost; no amount reads the beheld card's or creature's power (the chosen creature's as it resolves, the card's LKI if gone)."
+  },
+  {
+   "name": "Marvo, Deep Operative",
+   "needs": [
+    "effect:clash-with-named-opponent"
+   ],
+   "size": "small",
+   "why": "Clash is built but its opponent is engine-chosen; this needs 'clash with defending player'. The win-a-clash trigger and free cast from hand (Buster Sword shape) exist."
+  },
+  {
+   "name": "Game of Chaos",
+   "needs": [
+    "mechanic:coin-flip-doubling-stakes-loser-decides"
+   ],
+   "size": "small",
+   "why": "Repeated flips and a flip-again choice exist, but the stakes doubling per pass and the flip's loser (the opponent) deciding whether to go on don't."
+  },
+  {
+   "name": "Jace, Architect of Thought",
+   "needs": [
+    "decision:search-each-library-before-choosing",
+    "effect:pile-fate-library-bottom-any-order"
+   ],
+   "size": "small",
+   "why": "The separate-piles decision exists (an opponent separating, you choosing); the −2 needs the piles' fates to be hand and library bottom in any order. The −8 needs one nonland card from each library chosen together, which zone-choice-together's one-each rule may already shape."
+  },
+  {
+   "name": "The Mimeoplasm",
+   "needs": [
+    "replacement:copy-on-enter-exile-two-counters-from-other"
+   ],
+   "size": "small",
+   "why": "Copy-on-enter exists; exiling two graveyard creature cards as it enters, copying one and taking +1/+1 counters equal to the other's power, is a two-card as-enters choice the copy form lacks."
+  },
+  {
+   "name": "Vesuvan Shapeshifter",
+   "needs": [
+    "effect:become-copy-until-turned-face-down"
+   ],
+   "size": "small",
+   "why": "Morph and become-copy with exceptions exist; missing are a CopyDuration 'until turned face down' and the as-turned-face-up choice (an existing choose-permanents step at a turn-face-up hook)."
+  },
+  {
+   "name": "Arna Kennerüd, Skycaptain",
+   "needs": [
+    "effect:token-copy-enters-attached"
+   ],
+   "size": "small",
+   "why": "double-counters and the attached-to-trigger-object filter are built; create-token-copy has no 'attached to that creature' (and an Aura copy that can't attach isn't created)."
+  },
+  {
+   "name": "Kamahl's Will",
+   "needs": [
+    "target:any-number-group-before-targeting-mode"
+   ],
+   "size": "small",
+   "why": "Already re-read as small: an any-number group that isn't its list's last slot. Same work as Filigree Vector's two-any-number-groups."
+  },
+  {
+   "name": "Zoetic Cavern",
+   "needs": [
+    "mechanic:morph-land"
+   ],
+   "size": "small",
+   "why": "Morph exists; playOptions offers a land card only as a land play — rule 702.37c's face-down cast of a land with morph is one more play option."
+  },
+  {
+   "name": "Soulfire Eruption",
+   "needs": [
+    "effect:for-each-target-turn-order-chosen-at-resolution"
+   ],
+   "size": "small",
+   "why": "Per-target exile-top and damage by its mana value exist; the ruling's processing order chosen as it resolves is an ordering choice (order decisions exist), not a new subsystem."
+  },
+  {
+   "name": "Spectral Searchlight",
+   "needs": [
+    "effect:other-player-adds-mana-choice"
+   ],
+   "size": "small",
+   "why": "playerOfChoice ('a player of your choice adds', Victory Chimes) was built 2026-11-12; the colour 'they choose' is still its controller's choice (add-mana's doc: 'a choice is its controller's to make'). Unsure whether the coordinator's built key already moved the colour choice."
+  },
+  {
+   "name": "Craig Boone, Novac Guard",
+   "needs": [
+    "effect:reflexive-per-counters-placed"
+   ],
+   "size": "small",
+   "why": "The reflexive 'when you do' must fire once per two quest counters actually placed (twice under Doubling Season, never with fewer than two); reflexive-trigger fires once."
+  },
+  {
+   "name": "Moldgraf Monstrosity",
+   "needs": [
+    "effect:return-random-cards-from-graveyard"
+   ],
+   "size": "small",
+   "why": "choose-random-card picks one; two sequential returns would enter one at a time (observable to enters triggers), where the card returns both at once."
+  },
+  {
+   "name": "Lich's Mastery",
+   "needs": [
+    "effect:exile-per-life-lost-mixed-zones"
+   ],
+   "size": "small",
+   "why": "For each 1 life lost, exile a permanent you control or a card from hand or graveyard: a repeat of one choice spanning the battlefield, hand and graveyard (shared with Nicol Bolas's +1). 'You can't lose the game' and the draw trigger exist. Borderline: if the mixed-zone pick needs its own client UI it's major."
+  },
+  {
+   "name": "The War Doctor",
+   "needs": [
+    "trigger:phases-out"
+   ],
+   "size": "small",
+   "why": "A permanents-phased-out event exists (events.ts) but no TRIGGER_EVENTS row for it (phases-in has one); put-into-exile from anywhere is Laelia's trigger."
+  },
+  {
+   "name": "Mordenkainen",
+   "needs": [
+    "effect:exchange-hand-and-library"
+   ],
+   "size": "small",
+   "why": "No effect exchanges hand and library (not draws); the no-max-hand-size emblem and the Dog Illusion are expressible."
+  },
+  {
+   "name": "Illusion of Choice",
+   "needs": [
+    "effect:choose-how-players-vote"
+   ],
+   "size": "small",
+   "why": "Voting is built (secret council included); 'you choose how each player votes this turn' moves each vote's chooser to you for the turn."
+  },
+  {
+   "name": "Midnight Crusader Shuttle",
+   "needs": [
+    "effect:put-into-combat-attacking"
+   ],
+   "size": "small",
+   "why": "Villainous choice and gain-control exist; putting a creature already on the battlefield into combat attacking that player (rule 506.3) is a narrow combat-state effect."
+  },
+  {
+   "name": "Neera, Wild Mage",
+   "needs": [
+    "effect:put-cast-spell-on-library-if-did"
+   ],
+   "size": "small",
+   "why": "Moving the cast spell from the stack to its owner's library bottom is the same stack-to-zone move as Possibility Storm; reveal-until and free cast exist."
+  },
+  {
+   "name": "Ob Nixilis, the Adversary",
+   "needs": [
+    "keyword:casualty-x"
+   ],
+   "size": "small",
+   "why": "Casualty N, the nonlegendary copy and starting loyalty are built; casualty X (choose X as cast, sacrifice power X or greater, copy's loyalty X) isn't."
+  },
+  {
+   "name": "God-Eternal Kefnet",
+   "needs": [
+    "decision:may-reveal-first-draw"
+   ],
+   "size": "small",
+   "why": "A miracle-reveal decision exists (reveal a card as it's drawn); reusing it for the first draw each turn, then copying the card and casting the copy for {2} less, needs no new decision kind."
+  },
+  {
+   "name": "Cryptic Gateway",
+   "needs": [
+    "filter:shares-creature-type-with-each-of-set"
+   ],
+   "size": "small",
+   "why": "sharesCreatureTypeWith {paid:'tapped'} reads 'any of the set'; the card needs 'each of'."
+  },
+  {
+   "name": "Sanctum Lurker",
+   "needs": [
+    "static:planeswalker-zero-loyalty-survives"
+   ],
+   "size": "small",
+   "why": "Empower Jace is built; an exemption flag on the 704.5i SBA and a granted loyalty ability (grantsActivated with loyaltyCost) are fields, not a rules overhaul."
+  },
+  {
+   "name": "Detective's Phoenix",
+   "needs": [
+    "keyword:bestow-extensions"
+   ],
+   "size": "small",
+   "why": "Bestow is built; a bestow cost with collect evidence 6 and casting from the graveyard using bestow aren't."
+  },
+  {
+   "name": "Mila, Crafty Companion // Lukka, Wayward Bonder",
+   "needs": [
+    "trigger:opponent-attacks-your-planeswalkers"
+   ],
+   "size": "small",
+   "why": "An attack-batch trigger narrowed to an opponent attacking one or more planeswalkers you control, once per combat. The rest of both faces has analogs."
+  },
+  {
+   "name": "Extract Brain",
+   "needs": [
+    "effect:opponent-picks-n-from-own-hand-you-may-cast"
+   ],
+   "size": "small",
+   "why": "opponent-chooses-from-found was built 2026-11-01; the target opponent picking X cards from their hand for you to look at, then cast-now free from among them, is that chooser on the hand."
+  },
+  {
+   "name": "Master of the Wild Hunt",
+   "needs": [
+    "decision:controller-of-target-divides-damage"
+   ],
+   "size": "small",
+   "why": "Each Wolf tapped this way dealing its power is buildable; the target's controller dividing its damage among those (untargeted) Wolves at resolution has no decision."
+  },
+  {
+   "name": "Night Shift of the Living Dead",
+   "needs": [
+    "replacement:modify-die-result-after-roll"
+   ],
+   "size": "small",
+   "why": "Die results and modifiers exist; an optional pay-1-life +1/−1 to a roll, once each turn, is a may plus a two-way choice at roll time."
+  },
+  {
+   "name": "The Temporal Anchor",
+   "needs": [
+    "trigger:scry-bottom-count",
+    "zone:exile-from-library-bottom"
+   ],
+   "size": "small",
+   "why": "The scried event carries movedAway but no row triggers on it with that count; and nothing exiles cards from the bottom of a library (impulse-exile takes the top). The linked play during your turn is mayPlay linked yourTurnOnly."
+  },
+  {
+   "name": "Zilortha, Strength Incarnate",
+   "needs": [],
+   "size": "major",
+   "why": "Redefines lethal damage (rule 120.6, 704.5g) for SBAs, combat damage assignment, trample and deathtouch interplay — a core-rule change spread across the engine. Building it: Route every lethal-damage reading (SBA, combat assignment in combat/, trample excess, 'excess damage', the bots' estimates) through one helper that a static can switch to power; 1 card."
+  },
+  {
+   "name": "Arlinn, the Pack's Hope",
+   "needs": [],
+   "size": "runs-now",
+   "why": "+1: player-effect duration until-your-next-turn castAsThoughFlash {type:'creature'} (Teferi, Time Raveler), plus a replacement-effect (or timed-static) duration until-your-next-turn with replacement {event:'others-enter-battlefield', filter:{type:'creature', controlledBy:'you'}, counters:{kind:'+1/+1', amount:1}} (Mystic Reflection uses replacement-effect with others-enter). Daybound and the back face exist. Unsure: prove the others-enter form applies from a resolved effect after Arlinn has left."
+  },
+  {
+   "name": "Harold and Bob, First Numens",
+   "needs": [
+    "effect:return-as-aura-with-granted-ability"
+   ],
+   "size": "small",
+   "why": "put-onto-battlefield enterAs is a ResolvedPatch (setTypes, setSubtypes, static, loseAbilities) and bestow already makes Auras of creatures; enchant Forest you control on an Aura made by an effect, attached as it returns, is the missing field."
+  },
+  {
+   "name": "Curie, Emergent Intelligence",
+   "needs": [
+    "effect:base-power-amount"
+   ],
+   "size": "small",
+   "why": "No EffectAmount reads base power (only a filter operand); the exile cost is built, and become-copy of {paid:'exiled'} with an added-trigger exception needs proving on the same agent's pass."
+  },
+  {
+   "name": "Deification",
+   "needs": [
+    "static:planeswalker-zero-loyalty-survives",
+    "effect:choose-planeswalker-type"
+   ],
+   "size": "small",
+   "why": "Choose-a-type-on-enter exists for creature types; planeswalker types are another list. The 'all loyalty would be removed by damage → all but one' replacement is a damage-to-counters replacement, narrow."
+  },
+  {
+   "name": "Curse of Misfortunes",
+   "needs": [
+    "filter:attached-to-enchanted-player"
+   ],
+   "size": "small",
+   "why": "Search for a Curse and attach to a player are built; the not-same-name-as-a-Curse-attached-to-enchanted-player filter isn't."
+  },
+  {
+   "name": "Myth Unbound",
+   "needs": [
+    "cost:cost-reduction-commander-casts",
+    "trigger:commander-put-into-command-zone"
+   ],
+   "size": "small",
+   "why": "reduceGeneric has {commanderCasts:'you'} (all your commanders) but not the cast commander's own count; and no trigger on a commander being put into the command zone from anywhere."
+  },
+  {
+   "name": "Gollum, Scheming Guide",
+   "needs": [
+    "decision:opponent-guesses-card-kind"
+   ],
+   "size": "small",
+   "why": "remove-from-combat exists; an opponent's guess is a two-option choice by another player (each-player-may choices) compared with the revealed card — shared with Master of Predicaments."
+  },
+  {
+   "name": "Vaevictis Asmadi, the Dire",
+   "needs": [],
+   "size": "runs-now",
+   "why": "Per-seat target slots on triggers were built 2026-11-13 (Guff Rewrites History's ofSeat(0..3)); sacrifice-target per slot, then for-each-player controllerOf slot revealing the top card and putting it onto the battlefield if a permanent card (reveal-top then put-onto-battlefield ifPermanentCard). Unsure: 'each player who sacrificed' must skip a slot whose target went illegal — prove in the test."
+  },
+  {
+   "name": "Master of Predicaments",
+   "needs": [
+    "decision:opponent-guesses-mana-value"
+   ],
+   "size": "small",
+   "why": "Same opponent-guess choice as Gollum, over a card chosen secretly from your hand, then cast-now free if wrong."
+  },
+  {
+   "name": "Optimus Prime, Hero // Optimus Prime, Autobot Leader",
+   "needs": [
+    "effect:delayed-trigger-watching-bolstered"
+   ],
+   "size": "small",
+   "why": "Bolster and convert exist; bolster's chosen creature needs a this-way ref so the grant and the delayed 'when that creature deals combat damage' can watch it."
+  },
+  {
+   "name": "Scrambleverse",
+   "needs": [
+    "effect:random-player-per-permanent"
+   ],
+   "size": "small",
+   "why": "Random choices exist (acts-at-random); a random player per nonland permanent, then gain-control and untap, is an effect over existing control changes."
+  },
+  {
+   "name": "Memories Returning",
+   "needs": [
+    "effect:alternating-picks-from-revealed"
+   ],
+   "size": "small",
+   "why": "Picks by you and a chosen opponent alternating over one revealed pile (hand, bottom, hand, bottom, last to hand): look-and-choose has a secondPick and opponent-chooses-from-found, but no alternation."
+  },
+  {
+   "name": "Elrond of the White Council",
+   "needs": [
+    "effect:voter-chooses-permanent"
+   ],
+   "size": "small",
+   "why": "Secret council is built; each fellowship voter choosing a creature they control is choose-permanents by that player after the vote, then gain control and a granted can't-attack-owner."
+  },
+  {
+   "name": "Thrasta, Tempest's Roar",
+   "needs": [
+    "mechanic:trample-over-planeswalkers"
+   ],
+   "size": "small",
+   "why": "Trample assignment exists; 'trample over planeswalkers' (702.19e) lets excess over a planeswalker's loyalty go to its controller — a branch in the same assignment code."
+  },
+  {
+   "name": "Enduring Angel",
+   "needs": [
+    "replacement:life-to-zero-transform-instead"
+   ],
+   "size": "small",
+   "why": "P/T equal to life and doubling life are built; a replacement on your life total being reduced to 0 or less (transform instead, life becomes 3, else lose) is a narrow life-change replacement."
+  },
+  {
+   "name": "Thieves' Auction",
+   "needs": [
+    "decision:each-player-chooses-exiled-card",
+    "effect:repeat-until-no-player-acts"
+   ],
+   "size": "small",
+   "why": "Players taking turns choosing from one exiled pile until it's empty: choose-from-zone with another player choosing (built 2026-11-01) inside a repeat in turn order."
+  },
+  {
+   "name": "Winter, Cynical Opportunist",
+   "needs": [
+    "decision:zone-choice-card-types-among"
+   ],
+   "size": "small",
+   "why": "zone-choice-together.ts has the 'variety' rule, but no definition field reaches it; same wiring as Nethergoyf's escape cost and Seasons Past's different mana values."
+  },
+  {
+   "name": "Sanctum Prelate",
+   "needs": [
+    "static:choose-any-number-on-enter"
+   ],
+   "size": "small",
+   "why": "The prohibition by chosen number is built and a choose-number decision exists with {min, max}; an as-enters number with no upper bound (and the chosen number reaching the static) isn't."
+  },
+  {
+   "name": "Hunted by The Family",
+   "needs": [
+    "effect:per-target-villainous-choice-turn-order"
+   ],
+   "size": "small",
+   "why": "Villainous choice is built; for-each-target needs to go in its controllers' turn order rather than target order."
+  }
+ ]
+}

@@ -19,6 +19,13 @@ A new player decision, or a change to what an offer says, means the client too, 
 manual checks and their boards, each played **through to the end** with `client/e2e/run-check.mjs` on your own ports (a 4-player one too; a
 `card:` step right after a popup opens can lose its click, so `wait` first). Never run `test:e2e`: the coordinator runs it.
 
+**If your prompt names a lane**, your keys all live in one part of the engine (`engine/data/lanes.json` has its files and `game.ts`
+landmarks), and another agent works in each other lane at the same time. Read the lane's notes file first (your prompt gives its path; it
+may not exist yet), keep your changes in the lane's files and `game.ts` regions where the feature allows (a change elsewhere is fine when
+it's the right place — say so in your report), build keys that share a shape as one general implementation, and before your report append
+a note of at most 150 words to that notes file: what you built and where, any trap you hit, and what the lane's next keys will want. A card
+you find needs a different key than recorded: give the key, its family and its lane in your report.
+
 ## Setup
 
 You work in your own git worktree, beside other agents in theirs. `git merge --ff-only main`, then link the main checkout's node_modules

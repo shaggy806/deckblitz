@@ -1,0 +1,461 @@
+{
+ "note": "Lanes for parallel feature agents (build-family overnight lanes): each open need key under the rank goal, small or unsized, in the part of the engine it is built in. One agent a lane at a time; decisions is solo (one agent at most, client work). Majors are not laned: the user approves each, and it runs alone. `cards:goal -- --lane <name>` lists a lane; `groups` are keys that look like one general implementation (the B322 triage): a group goes to one agent whole. A key missing here prints as \"?\".",
+ "lanes": {
+  "triggers-journal": {
+   "title": "Triggers, the journal, this-turn conditions and amounts",
+   "files": [
+    "src/trigger-events.ts",
+    "src/journal.ts",
+    "src/this-way.ts",
+    "src/cards/define.ts (StaticCondition)",
+    "src/effects.ts (EffectAmount)"
+   ],
+   "gameTs": [
+    "recordJournal",
+    "the trigger scan in emit",
+    "timingCount"
+   ]
+  },
+  "costs-mana": {
+   "title": "Activation and casting costs, mana and its spending",
+   "files": [
+    "src/abilities.ts (AbilityCost)",
+    "src/mana.ts",
+    "src/mana-payment.ts",
+    "src/keyword-values.ts"
+   ],
+   "gameTs": [
+    "activateAbility",
+    "activatedAbilityManaCost",
+    "abilityCostModificationFor",
+    "whyCannotActivateAbility",
+    "castSpell (its cost steps)"
+   ]
+  },
+  "casting-zones": {
+   "title": "Casting from other zones, the stack, moving cards between zones",
+   "files": [
+    "src/play-permission.ts",
+    "src/effects.ts (cast-now, offerCastNow)",
+    "src/cards/define.ts (CardDefinition zone fields)"
+   ],
+   "gameTs": [
+    "playOptions",
+    "castSpell",
+    "resolveTopOfStack",
+    "moveObject"
+   ]
+  },
+  "replacements-copies": {
+   "title": "Replacements, entering the battlefield, tokens and copies, characteristics",
+   "files": [
+    "src/replacements.ts",
+    "src/characteristics-patch.ts",
+    "src/characteristics.ts",
+    "src/effects.ts (create-token, flicker)"
+   ],
+   "gameTs": [
+    "putOntoBattlefieldByEffect",
+    "createTokens",
+    "createTokenCopy",
+    "applyReplacementOrder",
+    "moveObject"
+   ]
+  },
+  "combat-targeting": {
+   "title": "Combat rules, targeting and card filters",
+   "files": [
+    "src/combat/",
+    "src/target.ts",
+    "src/targeting.ts",
+    "src/filter.ts",
+    "src/prohibitions.ts"
+   ],
+   "gameTs": [
+    "the declare-attackers/blockers steps",
+    "effectiveTargetSpecs",
+    "emptySeatOptional"
+   ]
+  },
+  "decisions": {
+   "title": "New player decisions (a decisions/ module, client UI, a live check)",
+   "solo": true,
+   "files": [
+    "src/decisions/",
+    "docs/plans/decision-registry.md",
+    "client/src/ (the decision banner)"
+   ],
+   "gameTs": [
+    "the decision registry tables"
+   ]
+  }
+ },
+ "keys": {
+  "amount:beheld-object-power": "costs-mana",
+  "amount:chosen-targets-remaining": "triggers-journal",
+  "amount:counters-moved-this-way": "triggers-journal",
+  "amount:creatures-crewed-it-this-turn": "triggers-journal",
+  "amount:entering-card-counts-itself-in-hand": "replacements-copies",
+  "amount:greatest-among-cards-left-graveyard": "triggers-journal",
+  "bug:granted-flashback-split-card-cost": "costs-mana",
+  "bug:mana-value-of-countered-copy": "casting-zones",
+  "bug:reflexive-target-compare-bound-at-creation": "combat-targeting",
+  "bug:trigger-value-lost-in-unless-otherwise": "triggers-journal",
+  "condition:attacked-player-this-turn-by-filter": "triggers-journal",
+  "condition:attacking-player-left-an-opponent-unattacked": "combat-targeting",
+  "condition:converted-this-way": "triggers-journal",
+  "condition:crewed-by-filter-as-tapped": "costs-mana",
+  "condition:cycled-named-card-this-game": "triggers-journal",
+  "condition:filter-fought-this-turn": "triggers-journal",
+  "condition:first-spell-cast-this-game": "triggers-journal",
+  "condition:milled-share-all-card-types": "triggers-journal",
+  "condition:per-opponent-target-slot-condition": "combat-targeting",
+  "condition:permanent-put-into-hand-from-battlefield-this-turn": "triggers-journal",
+  "condition:played-card-from-exile-this-turn": "triggers-journal",
+  "condition:player-attacked-you-this-turn": "triggers-journal",
+  "condition:this-way-counts-commander-redirect": "triggers-journal",
+  "condition:top-card-of-library-matches": "triggers-journal",
+  "cost:choose-creature-type-as-cast": "costs-mana",
+  "cost:cost-reduction-commander-casts": "costs-mana",
+  "cost:cumulative-upkeep-opponent-gains-life": "costs-mana",
+  "cost:exile-from-graveyard-card-types": "costs-mana",
+  "cost:exiled-card-effect-target": "costs-mana",
+  "cost:graveyard-cast-sacrifice-count": "costs-mana",
+  "cost:may-exile-self-and-named-from-graveyard": "costs-mana",
+  "cost:pay-any-amount-of-life-as-enters": "replacements-copies",
+  "cost:sacrifice-mana-value-x": "costs-mana",
+  "cost:sacrifice-up-to-n": "costs-mana",
+  "cost:sacrifice-x-of-token-stack": "costs-mana",
+  "cost:spell-additional-cost-remove-counters": "costs-mana",
+  "cost:spend-mana-as-any-color": "costs-mana",
+  "decision:choose-creature-or-player-on-resolution": "decisions",
+  "decision:choose-name-and-type-on-attach": "replacements-copies",
+  "decision:choose-one-exiled-with-source-to-copy": "casting-zones",
+  "decision:choose-two-colors-on-enter": "decisions",
+  "decision:controller-of-target-divides-damage": "decisions",
+  "decision:damage-redirect-order": "replacements-copies",
+  "decision:each-player-chooses-exiled-card": "decisions",
+  "decision:may-reveal-first-draw": "decisions",
+  "decision:opponent-guesses-card-kind": "decisions",
+  "decision:opponent-guesses-mana-value": "decisions",
+  "decision:search-each-library-before-choosing": "decisions",
+  "decision:trigger-player-names-after-hidden-search": "decisions",
+  "decision:two-any-number-groups": "decisions",
+  "decision:ward-pay-life-dynamic": "costs-mana",
+  "decision:zone-choice-card-types-among": "costs-mana",
+  "effect:alternating-picks-from-revealed": "decisions",
+  "effect:amount-total-power-died-this-turn": "triggers-journal",
+  "effect:as-enters-remove-counters-from-any-number": "replacements-copies",
+  "effect:base-power-amount": "replacements-copies",
+  "effect:become-copy-until-turned-face-down": "replacements-copies",
+  "effect:cast-modal-x-modes": "casting-zones",
+  "effect:cast-now-bottom-of-library-after": "casting-zones",
+  "effect:cast-now-grants-abilities": "casting-zones",
+  "effect:choose-how-players-vote": "decisions",
+  "effect:choose-party-sacrifice-rest": "decisions",
+  "effect:choose-per-player-destroy-rest": "decisions",
+  "effect:choose-permanents-this-way": "triggers-journal",
+  "effect:choose-planeswalker-type": "decisions",
+  "effect:clash-with-named-opponent": "combat-targeting",
+  "effect:copy-exception-subtype-if-creature": "replacements-copies",
+  "effect:copy-spell-random-retarget": "casting-zones",
+  "effect:copy-spell-retarget-created-token": "casting-zones",
+  "effect:counter-each-unless-pays": "casting-zones",
+  "effect:create-token-enters-with-counters": "replacements-copies",
+  "effect:delayed-return-from-graveyard-your-next-upkeep": "triggers-journal",
+  "effect:delayed-trigger-dealt-damage-this-way-dies": "triggers-journal",
+  "effect:delayed-trigger-targets": "triggers-journal",
+  "effect:delayed-trigger-watching-bolstered": "triggers-journal",
+  "effect:emblem-own-activated-ability": "costs-mana",
+  "effect:enters-with-counter-until-your-next-turn": "replacements-copies",
+  "effect:exchange-control-permanent-and-spell": "casting-zones",
+  "effect:exchange-hand-and-library": "casting-zones",
+  "effect:exile-cast-spell-then-cast-linked-exiled": "casting-zones",
+  "effect:exile-from-revealed-hand-per-opponent-until-leaves": "casting-zones",
+  "effect:exile-per-life-lost-mixed-zones": "decisions",
+  "effect:exile-spell-as-it-resolves-linked": "casting-zones",
+  "effect:exile-spell-as-it-resolves-with-counter": "casting-zones",
+  "effect:exile-target-spell": "casting-zones",
+  "effect:exiled-card-gains-trigger": "triggers-journal",
+  "effect:extra-combat-after-this-main-only-chosen-attack": "combat-targeting",
+  "effect:extra-loyalty-activations-this-turn": "costs-mana",
+  "effect:flash-if-x-at-most": "costs-mana",
+  "effect:flicker-chosen-group": "replacements-copies",
+  "effect:flicker-return-with-two-counter-kinds": "replacements-copies",
+  "effect:flicker-source-and-chosen": "replacements-copies",
+  "effect:for-each-target-turn-order-chosen-at-resolution": "decisions",
+  "effect:grant-state-trigger-to-returned-card": "replacements-copies",
+  "effect:opponent-picks-n-from-own-hand-you-may-cast": "decisions",
+  "effect:other-player-adds-mana-choice": "costs-mana",
+  "effect:per-target-villainous-choice-turn-order": "combat-targeting",
+  "effect:pile-fate-library-bottom-any-order": "decisions",
+  "effect:player-cant-attack-you-this-turn": "combat-targeting",
+  "effect:player-shuffles-chosen-permanent-into-library": "casting-zones",
+  "effect:possibility-storm-exile-spell-on-cast": "casting-zones",
+  "effect:put-cast-spell-on-library-if-did": "casting-zones",
+  "effect:put-into-combat-attacking": "combat-targeting",
+  "effect:random-player-per-permanent": "replacements-copies",
+  "effect:reflexive-per-counters-placed": "triggers-journal",
+  "effect:remove-all-counters-from-player": "replacements-copies",
+  "effect:repeat-until-no-player-acts": "decisions",
+  "effect:return-as-aura-with-granted-ability": "replacements-copies",
+  "effect:return-random-cards-from-graveyard": "casting-zones",
+  "effect:reveal-until-count-put-any-number": "casting-zones",
+  "effect:shuffle-permanents-reveal-that-many": "casting-zones",
+  "effect:spell-on-stack-gains-keyword": "casting-zones",
+  "effect:target-per-graveyard-with-match": "combat-targeting",
+  "effect:targets-different-mana-values": "costs-mana",
+  "effect:token-attacks-player-this-turn": "combat-targeting",
+  "effect:token-copy-enters-attached": "replacements-copies",
+  "effect:token-copy-of-graveyard-cards": "replacements-copies",
+  "effect:token-copy-of-sacrificed": "replacements-copies",
+  "effect:turn-face-up-or-exile-and-cast": "casting-zones",
+  "effect:voter-chooses-permanent": "decisions",
+  "effect:when-spent-on-ability": "costs-mana",
+  "filter:attached-to-enchanted-player": "combat-targeting",
+  "filter:player-other-than-owner": "combat-targeting",
+  "filter:shares-creature-type-with-convokers": "combat-targeting",
+  "filter:shares-creature-type-with-each-of-set": "combat-targeting",
+  "filter:target-stat-relative-to-other-target": "combat-targeting",
+  "keyword:bestow-extensions": "casting-zones",
+  "keyword:casualty-x": "costs-mana",
+  "keyword:cumulative-upkeep-flip-coin": "costs-mana",
+  "mechanic:coin-flip-doubling-stakes-loser-decides": "decisions",
+  "mechanic:hone-counters": "replacements-copies",
+  "mechanic:morph-land": "casting-zones",
+  "mechanic:mutate-from-graveyard": "casting-zones",
+  "mechanic:trample-over-planeswalkers": "combat-targeting",
+  "replacement:as-enters-turn-others-face-down": "replacements-copies",
+  "replacement:copy-on-enter-exile-two-counters-from-other": "replacements-copies",
+  "replacement:damage-double-to-chosen-player-side": "replacements-copies",
+  "replacement:draw-replacement-search": "replacements-copies",
+  "replacement:enter-exile-if-not-cast": "replacements-copies",
+  "replacement:enters-tapped-if-x": "replacements-copies",
+  "replacement:graveyard-to-library-top-optional": "replacements-copies",
+  "replacement:life-to-zero-transform-instead": "replacements-copies",
+  "replacement:modify-die-result-after-roll": "decisions",
+  "replacement:plus-tokens-per-named-token": "replacements-copies",
+  "replacement:prevention-then-names-damaged-player": "replacements-copies",
+  "replacement:villainous-choice-additional-time": "replacements-copies",
+  "stat:damage-to-object-by-controller": "triggers-journal",
+  "stat:excess-damage-to-departed-this-turn": "triggers-journal",
+  "stat:had-to-attack-condition": "combat-targeting",
+  "stat:spells-cast-before-trigger-spell": "triggers-journal",
+  "static:attack-restriction-power-vs-hand-size": "combat-targeting",
+  "static:attacked-you-cant-cast-spells": "combat-targeting",
+  "static:cascade-put-land": "casting-zones",
+  "static:choose-any-number-on-enter": "replacements-copies",
+  "static:gain-activated-abilities-of-card": "replacements-copies",
+  "static:grants-replacement-effect": "replacements-copies",
+  "static:keywords-of-linked-exile": "replacements-copies",
+  "static:others-enter-as-type-and-pt": "replacements-copies",
+  "static:planeswalker-zero-loyalty-survives": "replacements-copies",
+  "target:any-number-group-before-targeting-mode": "decisions",
+  "target:triggered-opponents-choice": "combat-targeting",
+  "trigger:activates-ability-from-graveyard": "triggers-journal",
+  "trigger:activates-ability-targeting": "triggers-journal",
+  "trigger:batch-damage-player-or-battle": "triggers-journal",
+  "trigger:becomes-target-by-spell-type": "triggers-journal",
+  "trigger:cast-this-way-from-lasting-permission": "casting-zones",
+  "trigger:combat-damage-to-enchanted-player": "triggers-journal",
+  "trigger:commander-put-into-command-zone": "triggers-journal",
+  "trigger:damage-batch-over-opponents": "triggers-journal",
+  "trigger:damage-equal-to-toughness": "triggers-journal",
+  "trigger:enchanted-player-casts": "triggers-journal",
+  "trigger:exiled-while-crafting": "triggers-journal",
+  "trigger:investigate-trigger": "triggers-journal",
+  "trigger:leaves-put-onto-battlefield-by-source": "triggers-journal",
+  "trigger:loses-coin-flip": "triggers-journal",
+  "trigger:mana-ability-resolves-amount-produced": "triggers-journal",
+  "trigger:mills-per-card": "triggers-journal",
+  "trigger:nth-spell-of-turn-any-player": "triggers-journal",
+  "trigger:opponent-attacks-your-planeswalkers": "triggers-journal",
+  "trigger:pays-life-trigger": "triggers-journal",
+  "trigger:phases-out": "triggers-journal",
+  "trigger:saga-final-chapter-triggers": "triggers-journal",
+  "trigger:scry-bottom-count": "triggers-journal",
+  "trigger:untap-trigger": "triggers-journal",
+  "zone:exile-from-library-bottom": "casting-zones",
+  "zone:exile-library-bottom-face-down-cast-permanents": "casting-zones",
+  "zone:graveyard-cast-as-adventure": "casting-zones",
+  "zone:graveyard-cast-enters-tapped": "casting-zones",
+  "zone:impulse-free-lesser-mana-value-than-own": "casting-zones",
+  "zone:impulse-one-cast-grants-affinity": "casting-zones",
+  "zone:play-from-opponent-library-top": "casting-zones",
+  "zone:plot-from-library-top": "casting-zones",
+  "zone:shared-impulse-pool-each-player": "casting-zones"
+ },
+ "groups": [
+  {
+   "keys": [
+    "effect:possibility-storm-exile-spell-on-cast",
+    "effect:exile-target-spell",
+    "effect:exile-spell-as-it-resolves-linked",
+    "effect:exile-spell-as-it-resolves-with-counter",
+    "effect:put-cast-spell-on-library-if-did",
+    "effect:exile-cast-spell-then-cast-linked-exiled"
+   ],
+   "why": "All move a spell off the stack to exile or a library (Possibility Storm, Gale's Redirection, Forger's Foundry, Goliath Daydreamer, Neera, Knowledge Pool): one stack-to-zone move with its link/counter/as-it-resolves options. casting-zones."
+  },
+  {
+   "keys": [
+    "effect:flicker-chosen-group",
+    "effect:flicker-source-and-chosen",
+    "effect:choose-permanents-this-way"
+   ],
+   "why": "An untargeted chosen set acted on together: flicker over a choose-permanents set (Nahiri's Resolve, Fortune), and the same set read by later steps (Spry and Mighty's thisWay chosen). One 'chosen this way' set ref."
+  },
+  {
+   "keys": [
+    "effect:token-copy-of-sacrificed",
+    "effect:token-copy-of-graveyard-cards",
+    "effect:token-copy-enters-attached"
+   ],
+   "why": "create-token-copy's `of` widened: a paid/sacrificed object's copiable values (LKI), every card matching a filter in a zone, and an attached-to form."
+  },
+  {
+   "keys": [
+    "filter:shares-creature-type-with-convokers",
+    "filter:shares-creature-type-with-each-of-set"
+   ],
+   "why": "sharesCreatureTypeWith over a set: the convoking creatures, and 'each of' the tapped set rather than 'any of' (Everything Comes to Dust, Cryptic Gateway)."
+  },
+  {
+   "keys": [
+    "decision:zone-choice-card-types-among",
+    "cost:exile-from-graveyard-card-types",
+    "effect:targets-different-mana-values"
+   ],
+   "why": "zone-choice-together.ts already has 'variety' and 'distinct' rules; each card needs a definition field that reaches them (Winter, Nethergoyf's escape cost, Seasons Past). One wiring pass."
+  },
+  {
+   "keys": [
+    "decision:two-any-number-groups",
+    "target:any-number-group-before-targeting-mode"
+   ],
+   "why": "An any-number target group that isn't the last slot of its list (Filigree Vector, Kamahl's Will)."
+  },
+  {
+   "keys": [
+    "decision:opponent-guesses-card-kind",
+    "decision:opponent-guesses-mana-value"
+   ],
+   "why": "An opponent's binary guess about a hidden card, compared on reveal (Gollum, Master of Predicaments)."
+  },
+  {
+   "keys": [
+    "effect:each-opponent-exiles-card-from-hand-or-permanent",
+    "effect:exile-per-life-lost-mixed-zones"
+   ],
+   "why": "One pick spanning permanents and cards in hand/graveyard (Nicol Bolas, Dragon-God; Lich's Mastery)."
+  },
+  {
+   "keys": [
+    "effect:emblem-own-activated-ability",
+    "effect:emblem-activated-abilities"
+   ],
+   "why": "create-emblem with an activated ability of its own (Ob Nixilis of the Black Oath, Karn, Living Legacy)."
+  },
+  {
+   "keys": [
+    "effect:delayed-trigger-targets",
+    "effect:delayed-trigger-dealt-damage-this-way-dies",
+    "effect:delayed-return-from-graveyard-your-next-upkeep",
+    "effect:delayed-trigger-watching-bolstered"
+   ],
+   "why": "delayed-trigger extensions: targets chosen as it fires, a watched this-way set, a from-graveyard return at your next upkeep, and a bolstered creature as the watched object."
+  },
+  {
+   "keys": [
+    "cost:sacrifice-up-to-n",
+    "cost:sacrifice-x-of-token-stack",
+    "cost:sacrifice-mana-value-x",
+    "cost:graveyard-cast-sacrifice-count"
+   ],
+   "why": "The sacrifice cost's count and filter: up to N, X of them (and a token stack), mana value X, and two for a graveyard cast."
+  },
+  {
+   "keys": [
+    "condition:player-attacked-you-this-turn",
+    "condition:attacked-player-this-turn-by-filter",
+    "condition:attacking-player-left-an-opponent-unattacked",
+    "stat:had-to-attack-condition"
+   ],
+   "why": "Reads of what was declared at attack declaration, kept in the journal (who attacked whom, with which creatures, under which requirements). Faramir's may already be covered by attacked-you-last-turn."
+  },
+  {
+   "keys": [
+    "effect:choose-party-sacrifice-rest",
+    "effect:choose-per-player-destroy-rest"
+   ],
+   "why": "Each player chooses a set they keep and loses the rest (Stick Together, Unstable Glyphbridge)."
+  },
+  {
+   "keys": [
+    "zone:exile-library-bottom-face-down-cast-permanents",
+    "zone:exile-from-library-bottom"
+   ],
+   "why": "Exiling from the bottom of a library (Arvinox, The Temporal Anchor): impulse-exile/exile-from-library taking the bottom."
+  },
+  {
+   "keys": [
+    "zone:impulse-free-lesser-mana-value-than-own",
+    "zone:impulse-one-cast-grants-affinity",
+    "zone:play-from-opponent-library-top",
+    "zone:shared-impulse-pool-each-player"
+   ],
+   "why": "Variants on the impulse/play permission: a filter comparing exiled cards, a rider on the spell cast, another player's library top, and a pool every player may use."
+  },
+  {
+   "keys": [
+    "effect:cast-now-bottom-of-library-after",
+    "effect:cast-now-grants-abilities",
+    "decision:choose-one-exiled-with-source-to-copy"
+   ],
+   "why": "cast-now options: where the card goes after, what the spell gains, and choosing one card of a linked set to copy."
+  },
+  {
+   "keys": [
+    "zone:graveyard-cast-as-adventure",
+    "zone:graveyard-cast-enters-tapped",
+    "mechanic:mutate-from-graveyard",
+    "keyword:bestow-extensions"
+   ],
+   "why": "Casting from the graveyard with a named alternative (Adventure, mutate, bestow) or a rider on the permanent (enters tapped)."
+  },
+  {
+   "keys": [
+    "replacement:enter-exile-if-not-cast",
+    "replacement:as-enters-turn-others-face-down"
+   ],
+   "why": "others-enter-battlefield options: exile instead if not cast, and entering face down (beside the enterAs/asCopyOf it already has)."
+  },
+  {
+   "keys": [
+    "trigger:investigate-trigger",
+    "trigger:pays-life-trigger",
+    "trigger:scry-bottom-count",
+    "trigger:phases-out",
+    "trigger:untap-trigger",
+    "trigger:saga-final-chapter-triggers",
+    "trigger:mills-per-card",
+    "trigger:mana-ability-resolves-amount-produced"
+   ],
+   "why": "Each is a TRIGGER_EVENTS row (plus, for investigate and pays-life, the event): phased-out and scried already carry what's needed; one agent can add the rows together."
+  },
+  {
+   "keys": [
+    "mechanic:coin-flip-doubling-stakes-loser-decides",
+    "keyword:cumulative-upkeep-flip-coin"
+   ],
+   "why": "Coin-flip effect options: pass-indexed amounts and who decides to go on."
+  },
+  {
+   "keys": [
+    "static:planeswalker-zero-loyalty-survives",
+    "effect:choose-planeswalker-type"
+   ],
+   "why": "Sanctum Lurker and Deification: planeswalker loyalty survival and a planeswalker-type choice."
+  }
+ ]
+}

@@ -9,6 +9,10 @@
 //   --keys   group by need key instead: each open key with its cards, the
 //            keys serving the best-ranked cards first (one build unit a key)
 //   --json   the list as JSON (name, rank, keys, size, why, batch)
+//   --lane <name>  only the keys of one lane (`data/lanes.json`: the part of
+//            the engine a key is built in, for parallel feature agents —
+//            build-family's overnight lanes), and the cards waiting on them;
+//            with --keys, each key's lane is shown ("?" for one not laned)
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,6 +28,13 @@ const option = (name) => {
 };
 const ceiling = Number(option("--rank") ?? 10000);
 const wantSize = option("--size");
+const wantLane = option("--lane");
+const lanes = JSON.parse(readFileSync(path.join(here, "..", "data", "lanes.json"), "utf8"));
+if (wantLane !== undefined && lanes.lanes[wantLane] === undefined) {
+  console.error(`No lane "${wantLane}": ${Object.keys(lanes.lanes).join(", ")}`);
+  process.exit(1);
+}
+const laneOf = (key) => lanes.keys[key] ?? "?";
 
 const vocab = loadVocabulary();
 const pool = poolNames();
@@ -61,16 +72,30 @@ for (const card of loadSnapshot().entries) {
   cards.push({ name: card.name, rank, keys: [], size: "untriaged", why: "", batch: "" });
 }
 cards.sort((a, b) => a.rank - b.rank);
-const shown = wantSize === undefined ? cards : cards.filter((c) => c.size === wantSize);
+const shown = cards.filter(
+  (c) => (wantSize === undefined || c.size === wantSize) && (wantLane === undefined || c.keys.some((k) => laneOf(k) === wantLane)),
+);
 
 if (args.includes("--json")) {
   console.log(JSON.stringify(shown, null, 1));
 } else if (args.includes("--keys")) {
   const byKey = new Map();
-  for (const c of shown) for (const k of c.keys.length > 0 ? c.keys : ["(no open key: recheck)"]) byKey.set(k, [...(byKey.get(k) ?? []), c]);
+  for (const c of shown) {
+    for (const k of c.keys.length > 0 ? c.keys : ["(no open key: recheck)"]) {
+      if (wantLane !== undefined && laneOf(k) !== wantLane) continue;
+      byKey.set(k, [...(byKey.get(k) ?? []), c]);
+    }
+  }
   const units = [...byKey].sort((a, b) => a[1][0].rank - b[1][0].rank);
-  console.log(`${units.length} keys over ${shown.length} cards to rank ${ceiling}${wantSize ? `, size ${wantSize}` : ""}:`);
-  for (const [key, list] of units) console.log(`${key}  ← ${list.map((c) => `${c.name} (${c.rank}${c.keys.length > 1 ? `, +${c.keys.length - 1} more key` : ""})`).join("; ")}`);
+  console.log(
+    `${units.length} keys over ${shown.length} cards to rank ${ceiling}${wantSize ? `, size ${wantSize}` : ""}${wantLane ? `, lane ${wantLane}` : ""}:`,
+  );
+  for (const [key, list] of units) {
+    // A major isn't laned: the user approves each one, and it runs alone.
+    const laned = laneOf(key) === "?" && list.every((c) => c.size === "major") ? "major" : laneOf(key);
+    const lane = wantLane === undefined ? `  [${laned}]` : "";
+    console.log(`${key}${lane}  ← ${list.map((c) => `${c.name} (${c.rank}${c.keys.length > 1 ? `, +${c.keys.length - 1} more key` : ""})`).join("; ")}`);
+  }
 } else {
   const tally = {};
   for (const c of cards) tally[c.size] = (tally[c.size] ?? 0) + 1;

@@ -14376,6 +14376,11 @@
    "description": "Exile the bottom card of each opponent's library face down with a lookable, cast-permanent-spells-while-exiled, any-color permission (Arvinox).",
    "example": "Arvinox, the Mind Flail: bottom card of each opponent's library exiled face down, castable permanent spells with any-color mana; and 'isn't a creature unless you control three or more permanents you don't own'."
   },
+  "zone:exile-from-library-bottom": {
+   "family": "zone:cast-cards-you-dont-own",
+   "description": "Exile cards from the bottom of your library, linked to the source, to play later (impulse-exile takes the top).",
+   "example": "The Temporal Anchor: whenever you scry, exile that many cards from the bottom of your library; during your turn you may play cards exiled with it."
+  },
   "zone:exile-maycast-exile-instead": {
    "family": "zone:cast-cards-you-dont-own",
    "description": "An exile with a cast-this-turn permission whose spell is exiled instead of going to a graveyard (exile's mayCast has no exile-instead rider).",

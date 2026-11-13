@@ -1,6 +1,6 @@
 ---
 name: build-family
-description: Build the missing engine features the most-played blocked cards need (Phase 2 of docs/plans/need-keys-after-the-walk.md), in order of the best EDHREC-ranked card each key unlocks — take the first cards `cards:needs -- --by-rank` lists, build what they need as general implementations, prove each with its own tests and the real cards that exercise it, mark the keys built, teach the scaffolder, verify, ship, and hand off. Features only: the other cards they free are authored later by the `author-freed` skill. Run as `/build-family overnight` (optionally `overnight until 8am`), it coordinates instead — four fresh agents at once in their own worktrees, reviewed, picked, verified and pushed every few cards — so it can run unattended for hours. Use when the user says to build by rank, build the next keys or family, work down the need keys, do Phase 2, run families overnight or with agents, or runs this skill with no other instructions.
+description: Build the missing engine features the most-played blocked cards need (Phase 2 of docs/plans/need-keys-after-the-walk.md), in order of the best EDHREC-ranked card each key unlocks — take the first cards `cards:needs -- --by-rank` lists, build what they need as general implementations, prove each with its own tests and the real cards that exercise it, mark the keys built, teach the scaffolder, verify, ship, and hand off. Features only: the other cards they free are authored later by the `author-freed` skill. Run as `/build-family overnight` (optionally `overnight until 8am`), it coordinates instead — four fresh agents at once in their own worktrees, reviewed, picked, verified and pushed every few cards — so it can run unattended for hours; `overnight lanes` hands keys out by the part of the engine they're built in (`engine/data/lanes.json`), one agent a lane. Use when the user says to build by rank, build the next keys or family, work down the need keys, do Phase 2, run families overnight or with agents, or runs this skill with no other instructions.
 ---
 
 # Build the next feature families
@@ -253,7 +253,8 @@ Whenever a slot is free:
    card unfinished by then comes back reverted, as a patch. Save a far-along patch somewhere that lasts (`engine/.cache/`, not the scratchpad),
    and name it on BACKLOG's Next line.
 3. **Pick.** `node scripts/needs-vocabulary.mjs --by-rank --top 40 | cut -c1-130` from `engine/`. Take the next cards in order that aren't on
-   the skip list or already with an agent. A card whose keys need only one implementation with another's can ride along with it.
+   the skip list or already with an agent. A card whose keys need only one implementation with another's can ride along with it. In
+   **lanes** mode, pick by lane instead (*Lanes* below).
 4. **Dispatch** one `general-purpose` agent with `isolation: "worktree"` and this prompt; don't do its work meanwhile and don't poll:
 
    > Read your brief first: `.claude/skills/build-family/agent-brief.md`, and follow it. The main checkout is at `<path>`. End each commit
@@ -275,6 +276,32 @@ Whenever a slot is free:
    report. Don't pick while a verify or Playwright runs: they read the working tree.
 
 Three cards blocked in a row also stops the run: something is wrong with the order or the brief, which a person should look at.
+
+### Lanes (`/build-family overnight lanes`)
+
+The user's call, 2026-11-13, for the rank goal's last ~140 small keys (`cards:goal`, to rank 10,000): hand work out by the part of the engine
+it's built in rather than strictly by rank, so an agent's orientation serves all its keys, related keys get one general implementation, and
+agents running at once edit different regions of `game.ts`. Everything else in this section's loop holds (four at once, review, pick,
+verify alongside, budget, skip list).
+
+- **The lanes** are `engine/data/lanes.json`: six, each with its files and `game.ts` landmarks, and every open small or unsized key's lane.
+  `node scripts/rank-goal.mjs --lane <lane> --keys` (from `engine/`) is a lane's queue, best-ranked card first; `--keys` alone shows every
+  key's lane, `?` for one not laned yet (lane it before handing it out, by its card text and the lane definitions). Majors aren't laned:
+  each needs the user's yes first (`docs/plans/rank-goal-majors.md`), and an approved one runs as an agent of its own, alone in its slot.
+- **One agent a lane at a time**, so a lane never conflicts with itself. When a slot frees, start the lane not running whose next key serves
+  the best-ranked card. `decisions` (a new player decision: client work and a live check, and the decision registry's total tables) is
+  the one lane whose keys conflict with each other's wiring; it has a single agent like the rest, never two.
+- **An agent's share**: the lane's next 3-4 keys in rank order, plus any key `lanes.json` or the triage put in the same implementation
+  group as one of them (a group goes to one agent whole). Skip a key whose card is on the skip list.
+- **Lane notes.** Each lane keeps a hand-off file, `engine/.cache/lanes/<lane>.md` in the main checkout (gitignored, lasting): the agent
+  reads it first and appends a short note (what it built and where, the trap it hit, what the next key in the lane will want). The prompt
+  names the lane and the file:
+
+  > Your lane: **<lane>** — read its entry in `engine/data/lanes.json` and its notes, `<main checkout>\engine\.cache\lanes\<lane>.md`
+  > (none yet if it's missing), before you start, and append yours at the end.
+
+- **A re-keyed card** (an agent finds a card needs a different key than recorded): it reports the new key with a lane; add it to
+  `lanes.json` with the next docs commit, so the lane's queue shows it.
 
 ### Picking
 
