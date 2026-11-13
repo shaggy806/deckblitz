@@ -458,6 +458,7 @@ import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
 import _poolLoAndLiTwinTutors from "../pool/lo-and-li-twin-tutors.js";
 import _poolLockedInTheCemetery from "../pool/locked-in-the-cemetery.js";
 import _poolLokhustHeavyDestroyer from "../pool/lokhust-heavy-destroyer.js";
+import _poolLonisCryptozoologist from "../pool/lonis-cryptozoologist.js";
 import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
 import _poolLoyalDrake from "../pool/loyal-drake.js";
 import _poolLuBuMasterAtArms from "../pool/lu-bu-master-at-arms.js";
@@ -1402,6 +1403,7 @@ const shard: CardShard = {
     _poolLoAndLiTwinTutors,
     _poolLockedInTheCemetery,
     _poolLokhustHeavyDestroyer,
+    _poolLonisCryptozoologist,
     _poolLoxodonMystic,
     _poolLoyalDrake,
     _poolLuBuMasterAtArms,

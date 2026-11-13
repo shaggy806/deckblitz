@@ -716,6 +716,7 @@ import _poolSarulfsPackmate from "../pool/sarulfs-packmate.js";
 import _poolSatyrHedonist from "../pool/satyr-hedonist.js";
 import _poolScaldingDevil from "../pool/scalding-devil.js";
 import _poolSceptreOfEternalGlory from "../pool/sceptre-of-eternal-glory.js";
+import _poolScourgeOfNelToth from "../pool/scourge-of-nel-toth.js";
 import _poolScoutingHawk from "../pool/scouting-hawk.js";
 import _poolScrapheap from "../pool/scrapheap.js";
 import _poolScreechingBuzzard from "../pool/screeching-buzzard.js";
@@ -1741,6 +1742,7 @@ const shard: CardShard = {
     _poolSatyrHedonist,
     _poolScaldingDevil,
     _poolSceptreOfEternalGlory,
+    _poolScourgeOfNelToth,
     _poolScoutingHawk,
     _poolScrapheap,
     _poolScreechingBuzzard,

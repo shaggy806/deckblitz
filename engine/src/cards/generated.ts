@@ -1859,6 +1859,7 @@ import _poolAzureMage from "./pool/azure-mage.js";
 import _poolAzusaLostButSeeking from "./pool/azusa-lost-but-seeking.js";
 import _poolAzusasManyJourneys from "./pool/azusas-many-journeys.js";
 import _poolBaSingSe from "./pool/ba-sing-se.js";
+import _poolBabaLysagaNightWitch from "./pool/baba-lysaga-night-witch.js";
 import _poolBackForMore from "./pool/back-for-more.js";
 import _poolBackForSeconds from "./pool/back-for-seconds.js";
 import _poolBackInTown from "./pool/back-in-town.js";
@@ -15932,6 +15933,7 @@ import _poolLongshotRebelBowman from "./pool/longshot-rebel-bowman.js";
 import _poolLongshotSquad from "./pool/longshot-squad.js";
 import _poolLongstalkBrawl from "./pool/longstalk-brawl.js";
 import _poolLongtuskCub from "./pool/longtusk-cub.js";
+import _poolLonisCryptozoologist from "./pool/lonis-cryptozoologist.js";
 import _poolLonisGeneticsExpert from "./pool/lonis-genetics-expert.js";
 import _poolLookoutsDispersal from "./pool/lookouts-dispersal.js";
 import _poolLoomingAltisaur from "./pool/looming-altisaur.js";
@@ -23314,6 +23316,7 @@ import _poolScourgeDevil from "./pool/scourge-devil.js";
 import _poolScourgeOfFleets from "./pool/scourge-of-fleets.js";
 import _poolScourgeOfGeierReach from "./pool/scourge-of-geier-reach.js";
 import _poolScourgeOfKherRidges from "./pool/scourge-of-kher-ridges.js";
+import _poolScourgeOfNelToth from "./pool/scourge-of-nel-toth.js";
 import _poolScourgeOfNumai from "./pool/scourge-of-numai.js";
 import _poolScourgeOfSkolaVale from "./pool/scourge-of-skola-vale.js";
 import _poolScourgeOfTheNobilis from "./pool/scourge-of-the-nobilis.js";
@@ -23339,6 +23342,7 @@ import _poolScragnoth from "./pool/scragnoth.js";
 import _poolScrapCompactor from "./pool/scrap-compactor.js";
 import _poolScrapMastery from "./pool/scrap-mastery.js";
 import _poolScrapTrawler from "./pool/scrap-trawler.js";
+import _poolScrapWelder from "./pool/scrap-welder.js";
 import _poolScrap from "./pool/scrap.js";
 import _poolScrapbasket from "./pool/scrapbasket.js";
 import _poolScrapdiverSerpent from "./pool/scrapdiver-serpent.js";
@@ -26641,6 +26645,7 @@ import _poolSunkenCity from "./pool/sunken-city.js";
 import _poolSunkenField from "./pool/sunken-field.js";
 import _poolSunkenHollow from "./pool/sunken-hollow.js";
 import _poolSunkenHope from "./pool/sunken-hope.js";
+import _poolSunkenPalace from "./pool/sunken-palace.js";
 import _poolSunkenRuins from "./pool/sunken-ruins.js";
 import _poolSunlance from "./pool/sunlance.js";
 import _poolSunlitHoplite from "./pool/sunlit-hoplite.js";
@@ -34601,6 +34606,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAzusaLostButSeeking,
   _poolAzusasManyJourneys,
   _poolBaSingSe,
+  _poolBabaLysagaNightWitch,
   _poolBackForMore,
   _poolBackForSeconds,
   _poolBackInTown,
@@ -48674,6 +48680,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLongshotSquad,
   _poolLongstalkBrawl,
   _poolLongtuskCub,
+  _poolLonisCryptozoologist,
   _poolLonisGeneticsExpert,
   _poolLookoutsDispersal,
   _poolLoomingAltisaur,
@@ -56056,6 +56063,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScourgeOfFleets,
   _poolScourgeOfGeierReach,
   _poolScourgeOfKherRidges,
+  _poolScourgeOfNelToth,
   _poolScourgeOfNumai,
   _poolScourgeOfSkolaVale,
   _poolScourgeOfTheNobilis,
@@ -56081,6 +56089,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScrapCompactor,
   _poolScrapMastery,
   _poolScrapTrawler,
+  _poolScrapWelder,
   _poolScrap,
   _poolScrapbasket,
   _poolScrapdiverSerpent,
@@ -59383,6 +59392,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSunkenField,
   _poolSunkenHollow,
   _poolSunkenHope,
+  _poolSunkenPalace,
   _poolSunkenRuins,
   _poolSunlance,
   _poolSunlitHoplite,
@@ -67356,6 +67366,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/azusa-lost-but-seeking": _poolAzusaLostButSeeking,
   "pool/azusas-many-journeys": _poolAzusasManyJourneys,
   "pool/ba-sing-se": _poolBaSingSe,
+  "pool/baba-lysaga-night-witch": _poolBabaLysagaNightWitch,
   "pool/back-for-more": _poolBackForMore,
   "pool/back-for-seconds": _poolBackForSeconds,
   "pool/back-in-town": _poolBackInTown,
@@ -81429,6 +81440,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/longshot-squad": _poolLongshotSquad,
   "pool/longstalk-brawl": _poolLongstalkBrawl,
   "pool/longtusk-cub": _poolLongtuskCub,
+  "pool/lonis-cryptozoologist": _poolLonisCryptozoologist,
   "pool/lonis-genetics-expert": _poolLonisGeneticsExpert,
   "pool/lookouts-dispersal": _poolLookoutsDispersal,
   "pool/looming-altisaur": _poolLoomingAltisaur,
@@ -88811,6 +88823,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scourge-of-fleets": _poolScourgeOfFleets,
   "pool/scourge-of-geier-reach": _poolScourgeOfGeierReach,
   "pool/scourge-of-kher-ridges": _poolScourgeOfKherRidges,
+  "pool/scourge-of-nel-toth": _poolScourgeOfNelToth,
   "pool/scourge-of-numai": _poolScourgeOfNumai,
   "pool/scourge-of-skola-vale": _poolScourgeOfSkolaVale,
   "pool/scourge-of-the-nobilis": _poolScourgeOfTheNobilis,
@@ -88836,6 +88849,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scrap-compactor": _poolScrapCompactor,
   "pool/scrap-mastery": _poolScrapMastery,
   "pool/scrap-trawler": _poolScrapTrawler,
+  "pool/scrap-welder": _poolScrapWelder,
   "pool/scrap": _poolScrap,
   "pool/scrapbasket": _poolScrapbasket,
   "pool/scrapdiver-serpent": _poolScrapdiverSerpent,
@@ -92138,6 +92152,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sunken-field": _poolSunkenField,
   "pool/sunken-hollow": _poolSunkenHollow,
   "pool/sunken-hope": _poolSunkenHope,
+  "pool/sunken-palace": _poolSunkenPalace,
   "pool/sunken-ruins": _poolSunkenRuins,
   "pool/sunlance": _poolSunlance,
   "pool/sunlit-hoplite": _poolSunlitHoplite,

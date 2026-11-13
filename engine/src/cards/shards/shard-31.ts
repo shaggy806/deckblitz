@@ -884,6 +884,7 @@ import _poolSuddenSpinnerets from "../pool/sudden-spinnerets.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
 import _poolSummonUndead from "../pool/summon-undead.js";
 import _poolSunBlessedMount from "../pool/sun-blessed-mount.js";
+import _poolSunkenPalace from "../pool/sunken-palace.js";
 import _poolSunseedNurturer from "../pool/sunseed-nurturer.js";
 import _poolSunspringExpedition from "../pool/sunspring-expedition.js";
 import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
@@ -1966,6 +1967,7 @@ const shard: CardShard = {
     _poolSummerBloom,
     _poolSummonUndead,
     _poolSunBlessedMount,
+    _poolSunkenPalace,
     _poolSunseedNurturer,
     _poolSunspringExpedition,
     _poolSuperAdaptoid,

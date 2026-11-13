@@ -714,6 +714,7 @@ import _poolScavengingGhoul from "../pool/scavenging-ghoul.js";
 import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolScoutTheBorders from "../pool/scout-the-borders.js";
+import _poolScrapWelder from "../pool/scrap-welder.js";
 import _poolScreechingScorchbeast from "../pool/screeching-scorchbeast.js";
 import _poolScytheOfTheWretched from "../pool/scythe-of-the-wretched.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
@@ -1734,6 +1735,7 @@ const shard: CardShard = {
     _poolSchoolDaze,
     _poolScorpionSeethingStriker,
     _poolScoutTheBorders,
+    _poolScrapWelder,
     _poolScreechingScorchbeast,
     _poolScytheOfTheWretched,
     _poolSeaSpirit,
