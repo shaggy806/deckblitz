@@ -3816,7 +3816,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * this turn with such a target, each earlier target read as it was then
      * (the journal's `activated` entries; rules 602.2b and 601.2c fix the
      * targets before 601.2f totals the cost). Earlier activations are judged by their activator
-     * and targets alone, not by `applies` or `abilityKind`. */
+     * and targets alone, not by `applies` or `abilityKind`.
+     *
+     * Without `targeting`, the first ability of a permanent matching
+     * `applies` its activator activates each turn: "the first activated
+     * ability of an artifact you activate each turn costs {2} less"
+     * (Tezzeret, Betrayer of Flesh, with `byYou`) — mana abilities included,
+     * paid by hand or while paying a cost, each permanent read as it was
+     * then (the journal's `activated` entries, `how: "ability"`), and
+     * whether or not this static was there yet. */
     readonly firstEachTurn?: true;
     /** A loyalty cost change with `abilityKind: "loyalty"`: "cost an
      * additional [+1] to activate" (Carth the Lion) is `increaseLoyalty: 1`.

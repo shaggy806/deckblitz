@@ -27521,6 +27521,7 @@ import _poolTeysaOpulentOligarch from "./pool/teysa-opulent-oligarch.js";
 import _poolTeysaOrzhovScion from "./pool/teysa-orzhov-scion.js";
 import _poolTezzeretAgentOfBolas from "./pool/tezzeret-agent-of-bolas.js";
 import _poolTezzeretArtificeMaster from "./pool/tezzeret-artifice-master.js";
+import _poolTezzeretBetrayerOfFlesh from "./pool/tezzeret-betrayer-of-flesh.js";
 import _poolTezzeretCruelCaptain from "./pool/tezzeret-cruel-captain.js";
 import _poolTezzeretCruelMachinist from "./pool/tezzeret-cruel-machinist.js";
 import _poolTezzeretMasterOfMetal from "./pool/tezzeret-master-of-metal.js";
@@ -60216,6 +60217,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTeysaOrzhovScion,
   _poolTezzeretAgentOfBolas,
   _poolTezzeretArtificeMaster,
+  _poolTezzeretBetrayerOfFlesh,
   _poolTezzeretCruelCaptain,
   _poolTezzeretCruelMachinist,
   _poolTezzeretMasterOfMetal,
@@ -92924,6 +92926,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/teysa-orzhov-scion": _poolTeysaOrzhovScion,
   "pool/tezzeret-agent-of-bolas": _poolTezzeretAgentOfBolas,
   "pool/tezzeret-artifice-master": _poolTezzeretArtificeMaster,
+  "pool/tezzeret-betrayer-of-flesh": _poolTezzeretBetrayerOfFlesh,
   "pool/tezzeret-cruel-captain": _poolTezzeretCruelCaptain,
   "pool/tezzeret-cruel-machinist": _poolTezzeretCruelMachinist,
   "pool/tezzeret-master-of-metal": _poolTezzeretMasterOfMetal,

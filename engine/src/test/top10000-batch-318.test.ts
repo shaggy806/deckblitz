@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, destroy, hand, life, settle, spawn, table, zone } from "./harness.js";
+import { A, B, activate, cast, loyalty, nextTurn, pt, ref, destroy, hand, lands, life, settle, spawn, table, toHand, zone } from "./harness.js";
 
 describe("Hushbringer: creatures entering or dying don't cause abilities to trigger", () => {
   it("a creature dying causes no dies trigger, its own or another's", () => {
@@ -66,5 +66,69 @@ describe("Hushbringer: creatures entering or dying don't cause abilities to trig
     const bear = spawn(game, "Grizzly Bears", B);
     destroy(game, bear);
     expect(life(game, A)).toBe(20);
+  });
+});
+
+describe("Tezzeret, Betrayer of Flesh: the first activated ability of an artifact each turn costs {2} less", () => {
+  it("the first one costs {2} less", () => {
+    const { game } = table();
+    spawn(game, "Tezzeret, Betrayer of Flesh");
+    const archive = spawn(game, "Hedron Archive");
+    const before = hand(game, A).length;
+    activate(game, archive, 1);
+    expect(hand(game, A).length).toBe(before + 2);
+  });
+
+  it("a mana ability of an artifact activated first takes the discount's turn", () => {
+    const { game } = table();
+    spawn(game, "Tezzeret, Betrayer of Flesh");
+    const stone = spawn(game, "Mind Stone");
+    const archive = spawn(game, "Hedron Archive");
+    activate(game, stone, 0);
+    // {C} floating; the draw costs its full {2}.
+    expect(() => activate(game, archive, 1)).toThrow();
+  });
+
+  it("so does one tapped while paying for a spell", () => {
+    const { game } = table();
+    spawn(game, "Tezzeret, Betrayer of Flesh");
+    spawn(game, "Mind Stone");
+    const archive = spawn(game, "Hedron Archive");
+    cast(game, toHand(game, "Bonesplitter"));
+    expect(() => activate(game, archive, 1)).toThrow();
+  });
+
+  it("a land's mana ability doesn't use it up", () => {
+    const { game } = table();
+    spawn(game, "Tezzeret, Betrayer of Flesh");
+    const forest = lands(game, "Forest", 1)[0];
+    activate(game, forest, 0);
+    const archive = spawn(game, "Hedron Archive");
+    const before = hand(game, A).length;
+    activate(game, archive, 1);
+    expect(hand(game, A).length).toBe(before + 2);
+  });
+
+  it("−2 makes an artifact a 4/4, a Vehicle its printed size", () => {
+    const { game } = table();
+    const tez = spawn(game, "Tezzeret, Betrayer of Flesh");
+    const stone = spawn(game, "Mind Stone");
+    loyalty(game, tez, -2, { targets: [ref(stone)] });
+    expect(game.characteristics(stone).types).toContain("creature");
+    expect(pt(game, stone)).toEqual({ power: 4, toughness: 4 });
+    nextTurn(game);
+    nextTurn(game);
+    const cart = spawn(game, "Smuggler's Copter");
+    loyalty(game, tez, -2, { targets: [ref(cart)] });
+    expect(pt(game, cart)).toEqual({ power: 3, toughness: 3 });
+  });
+
+  it("the second is full price", () => {
+    const { game } = table();
+    spawn(game, "Tezzeret, Betrayer of Flesh");
+    const one = spawn(game, "Hedron Archive");
+    const two = spawn(game, "Hedron Archive");
+    activate(game, one, 1);
+    expect(() => activate(game, two, 1)).toThrow();
   });
 });

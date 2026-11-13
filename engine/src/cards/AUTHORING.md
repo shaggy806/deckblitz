@@ -5976,6 +5976,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   generic mana — the Spectral Procession ruling. Reaper King under Foundry
   Inspector is `{W}{U}{B}{R}` plus one mana without a Forest.
 - `abilityCostModification: { applies: CardFilter, reduceGeneric?, increaseGeneric?, leavesOneMana?, exceptManaAbilities?, ninjutsu?, byOpponents?, targeting? }` — `byOpponents` and `targeting: CardFilter` with `increaseGeneric` are "abilities your opponents activate that target a Merfolk you control cost {2} more to activate" (Kopala, with `anyZone`): once per activation, the filter read from this static's controller's side, a target too dear left out of the offers. `targeting` with `reduceGeneric` is the reduction ("…that targets a creature you control costs {2} less"), an activation only it pays for offered with just the targets that earn it; `firstEachTurn: true` with it is "**the first** activated ability you activate during your turn that targets a creature you control" (Professor Hojo: `byYou`, `anyZone`, the static's `condition: { kind: "your-turn" }`) — used up by any earlier activation of that player's this turn with such a target, read from the journal as the target was then.
+  (`firstEachTurn: true` without `targeting`: only the first ability of a
+  permanent matching `applies` its activator activates each turn, mana
+  abilities included, each read as it was — Tezzeret, Betrayer of Flesh's
+  "the first activated ability of an artifact you activate each turn costs
+  {2} less", `{ applies: { type: "artifact" }, byYou: true, reduceGeneric: 2,
+  firstEachTurn: true }`)
   (`ninjutsu: true`: only ninjutsu abilities its controller activates, the
   card in a hand or the command zone — Silver-Fur Master, `applies: {}`)
   — the same for *activation* costs (rule 602.2b): "Activated abilities of

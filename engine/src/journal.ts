@@ -66,8 +66,10 @@ export type JournalKind =
   /** `player` activated an ability of `object`; `how` says which kind
    * (`"loyalty"`: 606.3, `"equip"`: 702.6), `ability` which one where a limit
    * or a reader counts it ("activate only once each turn", 602.5b; "if this
-   * ability has been activated four or more times this turn"). Kept only for
-   * those: a mana ability nothing limits isn't journaled. `how: "targeting"`
+   * ability has been activated four or more times this turn"). `how:
+   * "ability"` is every activation of a permanent's ability, mana abilities
+   * included, the permanent as it was then (`was`): "the first activated
+   * ability of an artifact you activate each turn". `how: "targeting"`
    * is one permanent it was activated targeting (`target`, in `targetStint`,
    * `targetWas` as it was then), an entry per permanent: "the first activated
    * ability you activate that targets a creature you control". */

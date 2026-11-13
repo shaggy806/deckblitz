@@ -24263,6 +24263,11 @@ export class Game {
       value === undefined ? 0 : this.costAmount(value, this.state.objects[by]?.controller ?? player, by, sourceId);
     for (const { controller, source, mod } of this.abilityCostModifiers()) {
       if (!this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod)) continue;
+      // "The first activated ability of an artifact you activate each turn"
+      // (Tezzeret, Betrayer of Flesh): an earlier one this turn was it.
+      if (mod.firstEachTurn === true && mod.targeting === undefined && this.activatedOfThisTurn(player, mod.applies, controller, source)) {
+        continue;
+      }
       // "…that target a Merfolk you control" (Kopala): fixed once the targets
       // are (rule 601.2c), and until then the offer leaves out what's too
       // dear (`abilityTargetReductionOptions`).
@@ -24340,6 +24345,20 @@ export class Game {
   /** Whether `player` has already activated an ability this turn with a
    * target matching `filter` (as it was then, from `controller`'s side) —
    * what uses up a `firstEachTurn` modification. The journal's. */
+  /** Whether `player` has activated an ability of a permanent matching
+   * `filter`, read as it was then, this turn (the journal's `how: "ability"`
+   * entries, mana abilities included). */
+  private activatedOfThisTurn(player: PlayerId, filter: CardFilter, controller: PlayerId, source: ObjectId): boolean {
+    return entriesThisTurn(this.state, "activated").some(
+      (e) =>
+        e.how === "ability" &&
+        e.player === player &&
+        e.object !== undefined &&
+        e.was !== undefined &&
+        matchesFilter(this.state, this.registry, e.object, filter, { you: controller, source, snapshot: e.was }),
+    );
+  }
+
   private activatedTargetingThisTurn(player: PlayerId, filter: CardFilter, controller: PlayerId, source: ObjectId): boolean {
     return entriesThisTurn(this.state, "activated").some(
       (e) =>
@@ -25231,6 +25250,21 @@ export class Game {
       sacrificeVictim, sacrificeParts, tapPicked, payment, shares, waterbent, modeOffer,
       unattachVictim, unattachChosen,
     } = planned;
+    // "The first activated ability of an artifact you activate each turn"
+    // (Tezzeret, Betrayer of Flesh — `abilityCostModification`'s
+    // `firstEachTurn` without `targeting`): every activation of a permanent's
+    // ability, mana abilities included (its ruling), the permanent as it was.
+    // After the mana was worked out and paid, so it never counts itself.
+    if (source.zone === "battlefield") {
+      this.journal({
+        kind: "activated",
+        how: "ability",
+        player,
+        object: sourceId,
+        stint: sourceStint,
+        was: this.takeLastKnown(sourceId),
+      });
+    }
     // The X announced — or, for a "remove all" cost, the counters it removed
     // (set as the cost is paid, below).
     let chosenX = planned.chosenX;
@@ -27773,6 +27807,19 @@ export class Game {
   private useManaSource(step: ManaPlanStep): void {
     const object = this.state.objects[step.source];
     const player = object.controller;
+    // A mana ability activated while paying, as `activateAbility` journals
+    // one (Tezzeret, Betrayer of Flesh's "first activated ability of an
+    // artifact"), the permanent as it was.
+    if (object.zone === "battlefield") {
+      this.journal({
+        kind: "activated",
+        how: "ability",
+        player,
+        object: step.source,
+        stint: object.zoneChangeCount ?? 0,
+        was: this.takeLastKnown(step.source),
+      });
+    }
     // A converter's own cost comes out of the pool before its output goes in
     // — the plan orders its funding sources ahead of it, and names the exact
     // units they contributed.
