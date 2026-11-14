@@ -41973,7 +41973,7 @@ controlledBy,
         const kept = lastingHere(duration);
         return typeof kept === "object" && "whileSource" in kept ? kept.whileSource : null;
       },
-      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges) => {
+      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges, withCounters) => {
         const link = linkedToSource === true ? tokenLinkToSource() : null;
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
@@ -41996,6 +41996,7 @@ controlledBy,
             gainKeywords,
             attachTo,
             textChanges,
+            withCounters,
           ));
           // "Sacrifice / exile them at the beginning of the next end step":
           // a delayed triggered ability over these tokens (rule 603.7).
@@ -46313,7 +46314,11 @@ controlledBy,
     attachTo?: ObjectId | { readonly player: PlayerId } | null,
     /** The colour words changed in the text making them (`tokenTextChanges`). */
     textChanges?: readonly TextChange[],
+    /** Counters each enters with (rule 122.6) — the effect's `withCounters`,
+     * read. Each is then its own object. */
+    withCounters?: { readonly kind: string; readonly amount: number },
   ): readonly ObjectId[] {
+    if (withCounters !== undefined && withCounters.amount <= 0) withCounters = undefined;
     const def = this.registry.get(tokenName); // validate the token is a known definition
     controller = this.tokenCreatorAfterRedirects(controller);
     if (attachTo !== undefined) {
@@ -46419,6 +46424,7 @@ controlledBy,
           sacrificeAtEndOfCombat: false,
           ...(goadedForGameBy !== undefined ? { goadedForGameBy } : {}),
           ...(this.mintingLink !== null ? { createdWith: this.mintingLink } : {}),
+          ...(withCounters !== undefined ? { withCounters } : {}),
         },
       ]);
       return [];
@@ -46437,6 +46443,7 @@ controlledBy,
         goadedForGameBy,
         separate,
         attachTo ?? undefined,
+        withCounters,
       ),
       ...plan.flatMap((t) =>
         t.name === null
@@ -46453,6 +46460,10 @@ controlledBy,
               sacrificeAtEndStep,
               goadedForGameBy,
               separate,
+              undefined,
+              // What it enters with still applies to what's made instead,
+              // as a token copy's does (Divine Visitation's ruling).
+              withCounters,
             ),
       ),
     ]);

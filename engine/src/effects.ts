@@ -8455,6 +8455,14 @@ export type EffectSpec =
        * look at a 0/0 until the effect is done. Such tokens are always made
        * as separate objects, never folded into a token stack as they're made. */
       readonly thenCounters?: { readonly kind: string; readonly amount: EffectAmount };
+      /** "Create a 0/0 green Ooze creature token with trample. **The token
+       * enters with X +1/+1 counters on it**" (Printlifter Ooze): counters
+       * each token enters with (rule 122.6), read as the effect resolves —
+       * so whatever sees it enter sees them, unlike `thenCounters` (they're
+       * still put on it, rule 122.6: Hardened Scales applies). What a token
+       * replacement makes instead enters with them too, as with a token
+       * copy's. Such tokens are each their own object. */
+      readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
       /** "Create an **X/X** … token": its base power and toughness, set as
        * it's made — part of what the token is, so every other P/T effect
        * applies over them (Rootha, Mastering the Moment's Elemental, the
@@ -13307,6 +13315,8 @@ export interface EffectApi {
     linkedToSource?: boolean,
     /** The colour words changed in the creating text (`tokenTextChanges`). */
     textChanges?: readonly TextChange[],
+    /** Counters each new token enters with — the effect's `withCounters`, read. */
+    withCounters?: { readonly kind: string; readonly amount: number },
   ): void;
   /** Which stint on the battlefield the resolving ability means by its source
    * (rule 607.2a): the one it came from, though the source may have left since;
@@ -14272,9 +14282,9 @@ export function tokenRiders(spec: EffectSpec): TokenRiders {
     ...(spec.goadedForGame !== undefined ? { goadedForGame: spec.goadedForGame } : {}),
     ...(spec.linkedToSource !== undefined ? { linkedToSource: spec.linkedToSource } : {}),
     ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
+    ...(spec.withCounters !== undefined ? { withCounters: spec.withCounters } : {}),
     ...(spec.kind === "create-token-copy"
       ? {
-          ...(spec.withCounters !== undefined ? { withCounters: spec.withCounters } : {}),
           ...(spec.gainsHaste !== undefined ? { gainsHaste: spec.gainsHaste } : {}),
           ...(spec.exileAtEndOfCombat !== undefined ? { exileAtEndOfCombat: spec.exileAtEndOfCombat } : {}),
           ...(spec.sacrificeAtEndOfCombat !== undefined ? { sacrificeAtEndOfCombat: spec.sacrificeAtEndOfCombat } : {}),
@@ -20641,7 +20651,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (
         spec.who !== undefined &&
         spec.who !== "target-controller" &&
-        (readsEachPlayer(spec.count) || (spec.thenCounters !== undefined && readsEachPlayer(spec.thenCounters.amount)))
+        (readsEachPlayer(spec.count) ||
+          (spec.thenCounters !== undefined && readsEachPlayer(spec.thenCounters.amount)) ||
+          (spec.withCounters !== undefined && readsEachPlayer(spec.withCounters.amount)))
       ) {
         for (const player of ctx.playersInScope(spec.who)) {
           ctx
@@ -20668,6 +20680,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               undefined,
               spec.linkedToSource === true,
               spec.tokenTextChanges,
+              spec.withCounters === undefined
+                ? undefined
+                : { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx, player) },
             );
         }
         return;
@@ -20703,6 +20718,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ),
         spec.linkedToSource === true,
         spec.tokenTextChanges,
+        spec.withCounters === undefined
+          ? undefined
+          : { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx) },
       );
       return;
     case "vote":
