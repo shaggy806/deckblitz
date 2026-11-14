@@ -6470,6 +6470,9 @@ export type EffectSpec =
        *   library, the stack) with them — "exile that card with three time
        *   counters on it. If it doesn't have suspend, it gains suspend"
        *   (Sibylline Soothsayer's card found; Rory Williams' own spell).
+       *   One already in exile gets them where it is: "put four time
+       *   counters on the exiled card", the card a cost exiled from hand
+       *   (Jhoira of the Ghitu: `target: { paid: "exiled" }`).
        *
        * `"mana-value"` is each card's own mana value. A card given no time
        * counter (a mana value of 0) isn't suspended — 702.62b wants one —

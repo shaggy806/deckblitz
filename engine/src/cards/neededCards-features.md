@@ -396,6 +396,14 @@ object in only by a type it has (rule 205.3m), and `each` a type in common
 with every one. The new `"convokers"` object set is the creatures that convoked
 the source's spell (702.51a), each as it last existed. Proving: Everything
 Comes to Dust, Cryptic Gateway. Test: `shares-type-with-set.test.ts`.
+### Time counters on the card a cost exiled — fixed 2026-11-13
+
+By EDHREC rank: Jhoira of the Ghitu (6600), the only card. `give-suspend`
+with a `target` already in exile (`{ paid: "exiled" }`, the card the
+`exileFromHand` cost took) now puts the counters on it where it is; it had
+returned at once for anything but a library or stack card. No scaffolder
+template (one card). Key: cost:exiled-card-effect-target.
+
 ### An emblem with an activated ability of its own — built 2026-11-13
 
 By EDHREC rank: Karn, Living Legacy (5535), Ob Nixilis of the Black Oath

@@ -50100,12 +50100,15 @@ controlledBy,
       const object = this.state.objects[id];
       // A card found in a library (Sibylline Soothsayer) or the spell itself
       // (Rory Williams). A spell countered in response is in the graveyard,
-      // a new object (rule 400.7), and isn't exiled.
-      if (object === undefined || (object.zone !== "library" && object.zone !== "stack")) return;
+      // a new object (rule 400.7), and isn't exiled. A card already in exile
+      // — "put four time counters on **the exiled card**", the one a cost
+      // exiled from hand (Jhoira of the Ghitu) — stays there; the ref has
+      // checked it's still the card the cost exiled.
+      if (object === undefined || (object.zone !== "library" && object.zone !== "stack" && object.zone !== "exile")) return;
       // A spell leaves the stack as "exile target spell" takes it — a copy
       // ceases to exist, and its targets are forgotten.
       if (object.zone === "stack") this.exileSpell(id);
-      else this.moveObject(id, "exile");
+      else if (object.zone === "library") this.moveObject(id, "exile");
       if (this.state.objects[id]?.zone !== "exile") return;
       cards = [id];
     } else {

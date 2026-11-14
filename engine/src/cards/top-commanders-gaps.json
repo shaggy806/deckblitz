@@ -9,6 +9,7 @@
     "bug:mana-value-of-countered-copy",
     "effect:emblem-own-activated-ability",
     "effect:emblem-activated-abilities",
+    "cost:exiled-card-effect-target",
     "effect:token-copy-of-sacrificed",
     "effect:token-copy-of-graveyard-cards",
     "effect:token-copy-enters-attached",
