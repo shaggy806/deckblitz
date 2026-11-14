@@ -490,6 +490,7 @@ import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMantleOfTheAncients from "../pool/mantle-of-the-ancients.js";
 import _poolMaraxusOfKeld from "../pool/maraxus-of-keld.js";
 import _poolMarduShadowspear from "../pool/mardu-shadowspear.js";
+import _poolMarketGnome from "../pool/market-gnome.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMartyrOfFrost from "../pool/martyr-of-frost.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
@@ -920,6 +921,7 @@ import _poolVictory from "../pool/victory.js";
 import _poolVileRebirth from "../pool/vile-rebirth.js";
 import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
+import _poolVisionsOfPhyrexia from "../pool/visions-of-phyrexia.js";
 import _poolVoharVodalianDesecrator from "../pool/vohar-vodalian-desecrator.js";
 import _poolVoicesFromTheVoid from "../pool/voices-from-the-void.js";
 import _poolVoidpouncer from "../pool/voidpouncer.js";
@@ -1476,6 +1478,7 @@ const shard: CardShard = {
     _poolMantleOfTheAncients,
     _poolMaraxusOfKeld,
     _poolMarduShadowspear,
+    _poolMarketGnome,
     _poolMarkovBaron,
     _poolMartyrOfFrost,
     _poolMarwynTheNurturer,
@@ -1906,6 +1909,7 @@ const shard: CardShard = {
     _poolVileRebirth,
     _poolViridescentBog,
     _poolVirtueOfKnowledge,
+    _poolVisionsOfPhyrexia,
     _poolVoharVodalianDesecrator,
     _poolVoicesFromTheVoid,
     _poolVoidpouncer,

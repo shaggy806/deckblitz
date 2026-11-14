@@ -958,6 +958,7 @@ import _poolValkiGodOfLies from "../pool/valki-god-of-lies.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
 import _poolVampireEnvoy from "../pool/vampire-envoy.js";
 import _poolVampireGourmand from "../pool/vampire-gourmand.js";
+import _poolVampireNocturnus from "../pool/vampire-nocturnus.js";
 import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
 import _poolVassalSoul from "../pool/vassal-soul.js";
 import _poolVelukanDragon from "../pool/velukan-dragon.js";
@@ -1993,6 +1994,7 @@ const shard: CardShard = {
     _poolValorousStance,
     _poolVampireEnvoy,
     _poolVampireGourmand,
+    _poolVampireNocturnus,
     _poolVanguardOfTheRestless,
     _poolVassalSoul,
     _poolVelukanDragon,

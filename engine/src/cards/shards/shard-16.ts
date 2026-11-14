@@ -257,6 +257,7 @@ import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolEpicConfrontation from "../pool/epic-confrontation.js";
 import _poolEpitaphGolem from "../pool/epitaph-golem.js";
+import _poolErayoSoratamiAscendant from "../pool/erayo-soratami-ascendant.js";
 import _poolEricaOrtegasPluckyPilot from "../pool/erica-ortegas-plucky-pilot.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolErrantAndGiada from "../pool/errant-and-giada.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolEnlightenedTutor,
     _poolEpicConfrontation,
     _poolEpitaphGolem,
+    _poolErayoSoratamiAscendant,
     _poolEricaOrtegasPluckyPilot,
     _poolErodedCanyon,
     _poolErrantAndGiada,

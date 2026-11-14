@@ -256,6 +256,7 @@ import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolEpharaGodOfThePolis from "../pool/ephara-god-of-the-polis.js";
 import _poolEpharasRadiance from "../pool/epharas-radiance.js";
 import _poolEpiphanyAtTheDrownyard from "../pool/epiphany-at-the-drownyard.js";
+import _poolErayosEssence from "../pool/erayos-essence.js";
 import _poolEronTheRelentless from "../pool/eron-the-relentless.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolErsatzGnomes from "../pool/ersatz-gnomes.js";
@@ -1312,6 +1313,7 @@ const shard: CardShard = {
     _poolEpharaGodOfThePolis,
     _poolEpharasRadiance,
     _poolEpiphanyAtTheDrownyard,
+    _poolErayosEssence,
     _poolEronTheRelentless,
     _poolErrantStreetArtist,
     _poolErsatzGnomes,

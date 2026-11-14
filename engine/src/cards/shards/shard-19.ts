@@ -630,6 +630,7 @@ import _poolMsMarvelKamalaKhan from "../pool/ms-marvel-kamala-khan.js";
 import _poolMuYanlingSkyDancer from "../pool/mu-yanling-sky-dancer.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
+import _poolMulDayaChannelers from "../pool/mul-daya-channelers.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
 import _poolMushroomWatchdogs from "../pool/mushroom-watchdogs.js";
 import _poolMycoidShepherd from "../pool/mycoid-shepherd.js";
@@ -1708,6 +1709,7 @@ const shard: CardShard = {
     _poolMuYanlingSkyDancer,
     _poolMuckRats,
     _poolMuddleTheMixture,
+    _poolMulDayaChannelers,
     _poolMuragandaRaceway,
     _poolMushroomWatchdogs,
     _poolMycoidShepherd,

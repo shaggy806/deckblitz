@@ -5881,6 +5881,7 @@ import _poolCurseOfOblivion from "./pool/curse-of-oblivion.js";
 import _poolCurseOfObsession from "./pool/curse-of-obsession.js";
 import _poolCurseOfOpulence from "./pool/curse-of-opulence.js";
 import _poolCurseOfPredation from "./pool/curse-of-predation.js";
+import _poolCurseOfShakenFaith from "./pool/curse-of-shaken-faith.js";
 import _poolCurseOfShallowGraves from "./pool/curse-of-shallow-graves.js";
 import _poolCurseOfSilence from "./pool/curse-of-silence.js";
 import _poolCurseOfStalkedPrey from "./pool/curse-of-stalked-prey.js";
@@ -8521,6 +8522,8 @@ import _poolEraOfInnovation from "./pool/era-of-innovation.js";
 import _poolEradicate from "./pool/eradicate.js";
 import _poolEradicatorValkyrie from "./pool/eradicator-valkyrie.js";
 import _poolErase from "./pool/erase.js";
+import _poolErayoSoratamiAscendant from "./pool/erayo-soratami-ascendant.js";
+import _poolErayosEssence from "./pool/erayos-essence.js";
 import _poolErdwalIlluminator from "./pool/erdwal-illuminator.js";
 import _poolErdwalRipper from "./pool/erdwal-ripper.js";
 import _poolEreborFlamesmith from "./pool/erebor-flamesmith.js";
@@ -16728,6 +16731,7 @@ import _poolMarkOfTheVampire from "./pool/mark-of-the-vampire.js";
 import _poolMarkedByHonor from "./pool/marked-by-honor.js";
 import _poolMarkerBeetles from "./pool/marker-beetles.js";
 import _poolMarketFestival from "./pool/market-festival.js";
+import _poolMarketGnome from "./pool/market-gnome.js";
 import _poolMarket from "./pool/market.js";
 import _poolMarketbackWalker from "./pool/marketback-walker.js";
 import _poolMarketwatchPhantom from "./pool/marketwatch-phantom.js";
@@ -17987,6 +17991,7 @@ import _poolMugato from "./pool/mugato.js";
 import _poolMugging from "./pool/mugging.js";
 import _poolMukotaiAmbusher from "./pool/mukotai-ambusher.js";
 import _poolMukotaiSoulripper from "./pool/mukotai-soulripper.js";
+import _poolMulDayaChannelers from "./pool/mul-daya-channelers.js";
 import _poolMulch from "./pool/mulch.js";
 import _poolMuldrothaTheGravetide from "./pool/muldrotha-the-gravetide.js";
 import _poolMulldrifter from "./pool/mulldrifter.js";
@@ -29940,6 +29945,7 @@ import _poolVampireLacerator from "./pool/vampire-lacerator.js";
 import _poolVampireNeonate from "./pool/vampire-neonate.js";
 import _poolVampireNighthawk from "./pool/vampire-nighthawk.js";
 import _poolVampireNoble from "./pool/vampire-noble.js";
+import _poolVampireNocturnus from "./pool/vampire-nocturnus.js";
 import _poolVampireOfTheDireMoon from "./pool/vampire-of-the-dire-moon.js";
 import _poolVampireOpportunist from "./pool/vampire-opportunist.js";
 import _poolVampireOutcasts from "./pool/vampire-outcasts.js";
@@ -30454,6 +30460,7 @@ import _poolVisionsOfDominance from "./pool/visions-of-dominance.js";
 import _poolVisionsOfDread from "./pool/visions-of-dread.js";
 import _poolVisionsOfDuplicity from "./pool/visions-of-duplicity.js";
 import _poolVisionsOfGlory from "./pool/visions-of-glory.js";
+import _poolVisionsOfPhyrexia from "./pool/visions-of-phyrexia.js";
 import _poolVisionsOfRuin from "./pool/visions-of-ruin.js";
 import _poolVisionsOfVillainy from "./pool/visions-of-villainy.js";
 import _poolVisions from "./pool/visions.js";
@@ -38864,6 +38871,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfObsession,
   _poolCurseOfOpulence,
   _poolCurseOfPredation,
+  _poolCurseOfShakenFaith,
   _poolCurseOfShallowGraves,
   _poolCurseOfSilence,
   _poolCurseOfStalkedPrey,
@@ -41504,6 +41512,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEradicate,
   _poolEradicatorValkyrie,
   _poolErase,
+  _poolErayoSoratamiAscendant,
+  _poolErayosEssence,
   _poolErdwalIlluminator,
   _poolErdwalRipper,
   _poolEreborFlamesmith,
@@ -49711,6 +49721,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarkedByHonor,
   _poolMarkerBeetles,
   _poolMarketFestival,
+  _poolMarketGnome,
   _poolMarket,
   _poolMarketbackWalker,
   _poolMarketwatchPhantom,
@@ -50970,6 +50981,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMugging,
   _poolMukotaiAmbusher,
   _poolMukotaiSoulripper,
+  _poolMulDayaChannelers,
   _poolMulch,
   _poolMuldrothaTheGravetide,
   _poolMulldrifter,
@@ -62923,6 +62935,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVampireNeonate,
   _poolVampireNighthawk,
   _poolVampireNoble,
+  _poolVampireNocturnus,
   _poolVampireOfTheDireMoon,
   _poolVampireOpportunist,
   _poolVampireOutcasts,
@@ -63437,6 +63450,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVisionsOfDread,
   _poolVisionsOfDuplicity,
   _poolVisionsOfGlory,
+  _poolVisionsOfPhyrexia,
   _poolVisionsOfRuin,
   _poolVisionsOfVillainy,
   _poolVisions,
@@ -71860,6 +71874,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-obsession": _poolCurseOfObsession,
   "pool/curse-of-opulence": _poolCurseOfOpulence,
   "pool/curse-of-predation": _poolCurseOfPredation,
+  "pool/curse-of-shaken-faith": _poolCurseOfShakenFaith,
   "pool/curse-of-shallow-graves": _poolCurseOfShallowGraves,
   "pool/curse-of-silence": _poolCurseOfSilence,
   "pool/curse-of-stalked-prey": _poolCurseOfStalkedPrey,
@@ -74500,6 +74515,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/eradicate": _poolEradicate,
   "pool/eradicator-valkyrie": _poolEradicatorValkyrie,
   "pool/erase": _poolErase,
+  "pool/erayo-soratami-ascendant": _poolErayoSoratamiAscendant,
+  "pool/erayos-essence": _poolErayosEssence,
   "pool/erdwal-illuminator": _poolErdwalIlluminator,
   "pool/erdwal-ripper": _poolErdwalRipper,
   "pool/erebor-flamesmith": _poolEreborFlamesmith,
@@ -82707,6 +82724,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/marked-by-honor": _poolMarkedByHonor,
   "pool/marker-beetles": _poolMarkerBeetles,
   "pool/market-festival": _poolMarketFestival,
+  "pool/market-gnome": _poolMarketGnome,
   "pool/market": _poolMarket,
   "pool/marketback-walker": _poolMarketbackWalker,
   "pool/marketwatch-phantom": _poolMarketwatchPhantom,
@@ -83966,6 +83984,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mugging": _poolMugging,
   "pool/mukotai-ambusher": _poolMukotaiAmbusher,
   "pool/mukotai-soulripper": _poolMukotaiSoulripper,
+  "pool/mul-daya-channelers": _poolMulDayaChannelers,
   "pool/mulch": _poolMulch,
   "pool/muldrotha-the-gravetide": _poolMuldrothaTheGravetide,
   "pool/mulldrifter": _poolMulldrifter,
@@ -95919,6 +95938,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vampire-neonate": _poolVampireNeonate,
   "pool/vampire-nighthawk": _poolVampireNighthawk,
   "pool/vampire-noble": _poolVampireNoble,
+  "pool/vampire-nocturnus": _poolVampireNocturnus,
   "pool/vampire-of-the-dire-moon": _poolVampireOfTheDireMoon,
   "pool/vampire-opportunist": _poolVampireOpportunist,
   "pool/vampire-outcasts": _poolVampireOutcasts,
@@ -96433,6 +96453,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/visions-of-dread": _poolVisionsOfDread,
   "pool/visions-of-duplicity": _poolVisionsOfDuplicity,
   "pool/visions-of-glory": _poolVisionsOfGlory,
+  "pool/visions-of-phyrexia": _poolVisionsOfPhyrexia,
   "pool/visions-of-ruin": _poolVisionsOfRuin,
   "pool/visions-of-villainy": _poolVisionsOfVillainy,
   "pool/visions": _poolVisions,
