@@ -927,6 +927,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-09: `author-freed overnight`, batch 291: the queue is empty.** The last 145 freed cards: 109 authored, 36 blocked on 32 narrow keys (`B291.json`). A blind read of all 131 files found one card that could never pay its cost (Osgir) and two that broke a ruling (scavenge reading power from exile), all blocked; the situation fuzzer found the journal reading a stale cache.
 - **2026-11-09: `author-freed`, batch 293.** The 20 cards theme 15 and the last engine gaps freed: 19 authored, one blocked. The queue is empty again.
 - **2026-11-12: `author-freed`, batch 314.** The 28 cards the rank goal's small keys freed: 13 authored, 15 blocked on narrow keys (`B314.json`). The queue is empty a third time.
+- **2026-11-13: `author-freed`, batch 324.** The 7 cards the lanes run freed: all 7 authored, two on a small piece built in the batch (a spell's sacrifice reading X, counters off a card in exile). The queue is empty a fourth time.
 
 ## Rough size
 

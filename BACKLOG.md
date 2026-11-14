@@ -54,7 +54,8 @@ section keeps only what to do next.
   authoring agents' estimates from reading, and held well on the small list: of 95 units tried,
   three were really major (Kamahl's Will, Soulfire Eruption, Spectral Searchlight) and about one in five needed no engine
   code. **The lanes run (2026-11-13, `build-family overnight lanes`, `COMPLETED.md`)** built 46 keys and 48 cards, leaving
-  147 keys over 139 cards (`cards:goal`); 7 freed cards wait for `author-freed` (`--stale`). Each lane's next share is
+  147 keys over 139 cards (`cards:goal`); the 7 cards it freed went through `author-freed` as **B324** (all 7 authored,
+  `--stale` empty again). Each lane's next share is
   `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. Ratchet's key is next in
   triggers-journal. The 28
   triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13

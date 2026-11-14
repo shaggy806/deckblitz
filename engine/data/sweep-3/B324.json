@@ -1,0 +1,58 @@
+{
+ "batch": "B324",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by mana-ability-chosen-player-adds, reveal-from-hand-in-mana-ability, target-per-opponent-mandatory, sacrifice-mana-value-x, token-copy-of-graveyard-cards, card-in-graveyard-or-permanent, tokens-created-with-source, as-enters-remove-counters-from-any-number and trigger-from-exile (7, the queue)",
+ "authored": [
+  {
+   "name": "Valleymaker",
+   "files": [
+    "engine/src/cards/pool/valleymaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sacellum Godspeaker",
+   "files": [
+    "engine/src/cards/pool/sacellum-godspeaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tetravus",
+   "files": [
+    "engine/src/cards/pool/tetravus.ts",
+    "engine/src/cards/tokens/tetravite-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Primordial",
+   "files": [
+    "engine/src/cards/pool/sylvan-primordial.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nahiri's Sacrifice",
+   "files": [
+    "engine/src/cards/pool/nahiris-sacrifice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daretti, Ingenious Iconoclast",
+   "files": [
+    "engine/src/cards/pool/daretti-ingenious-iconoclast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "All Hallow's Eve",
+   "files": [
+    "engine/src/cards/pool/all-hallows-eve.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

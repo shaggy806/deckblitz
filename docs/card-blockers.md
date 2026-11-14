@@ -666,6 +666,14 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 324 (2026-11-13, `author-freed`: the 7 cards on the freed queue)** — all 7 authored,
+  none blocked. Four ran on their built keys as they were: Valleymaker (Victory Chimes'
+  `playerOfChoice`), Sacellum Godspeaker (Metalworker's reveal-first mana ability), Sylvan
+  Primordial (required `{ seat }` trigger slots), Daretti, Ingenious Iconoclast (a `one-of` slot
+  over a graveyard and the battlefield). Tetravus needed only `create-token`'s `linkedToSource`
+  for "tokens created with this creature". Two needed a small piece, built here: Nahiri's
+  Sacrifice (a spell's additional sacrifice reading X, offered once per mana value) and All
+  Hallow's Eve (counters removed from a card in exile). The queue is empty.
 - **Batch 323 (2026-11-13, `author-top-cards` on the rank goal's runs-now cards, ranks
   4670–9404)** — all 7 of B322's runs-now cards authored. Three ran as they were: Displaced
   Dinosaurs (an others-enter `enterAs` with a 7/7 base), Faramir, Prince of Ithilien (a delayed
