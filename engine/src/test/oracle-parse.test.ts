@@ -20107,3 +20107,26 @@ describe("another player's impulse, its window theirs or yours (PlayGrant.durati
     });
   });
 });
+
+describe("'For each kind of counter on ~, each other Dinosaur you control enters with a counter of that kind' (Blue, Loyal Raptor)", () => {
+  it("`others-enter-battlefield`'s `counterKindsOfSource`", () => {
+    const blue = parseFace(
+      {
+        name: "Test Raptor",
+        type_line: "Legendary Creature — Dinosaur",
+        mana_cost: "{2}{G}{U}",
+        oracle_text:
+          "For each kind of counter on Test Raptor, each other Dinosaur you control enters with a counter of that kind on it.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(blue.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: { subtype: "Dinosaur", controlledBy: "you" },
+        counterKindsOfSource: true,
+      },
+    });
+  });
+});

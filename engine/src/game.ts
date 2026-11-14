@@ -64513,6 +64513,13 @@ controlledBy,
           const each = this.enteringCounterAmount(sourceId, source.controller, id, r.counters.amount);
           addCounters(r.counters.kind, each * (source.stackCount ?? 1));
         }
+        // "For each kind of counter on [this], … enters with a counter of
+        // that kind on it" (Blue, Loyal Raptor): the kinds it has now.
+        if (r.counterKindsOfSource === true) {
+          for (const [kind, n] of Object.entries(source.counters)) {
+            if (n > 0) addCounters(kind, source.stackCount ?? 1);
+          }
+        }
         // "… and as a Mutant in addition to its other types" (Master
         // Biomancer): in place as it enters (rule 614.12), lasting (611.2c).
         if (r.enterAs !== undefined) {

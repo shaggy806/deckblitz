@@ -23186,6 +23186,20 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "For each kind of counter on ~, each other Dinosaur you control enters
+  // with a counter of that kind on it" (Blue, Loyal Raptor): the kinds on
+  // the source as each enters (`counterKindsOfSource`).
+  if ((m = /^For each kind of counter on ~, each other ([A-Z][a-z]+) you control enters with a counter of that kind on it\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: { subtype: m[1], controlledBy: "you" },
+        counterKindsOfSource: true,
+      },
+      text,
+    };
+  }
   // "If [something happening] causes a triggered ability of a permanent you
   // control to trigger, that ability triggers an additional time."
   if (line === "If a permanent entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.") {

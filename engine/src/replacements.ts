@@ -579,6 +579,16 @@ export interface OthersEnterReplacement {
    * does to any enters-with-counters.
    */
   readonly counters?: { readonly kind: string; readonly amount: EffectAmount };
+  /**
+   * It enters with one counter of **each kind on this permanent** as it
+   * enters — Blue, Loyal Raptor's "for each kind of counter on Blue, Loyal
+   * Raptor, each other Dinosaur you control enters with a counter of that kind
+   * on it". Read then, so nothing when this permanent has none, and nothing
+   * for a permanent entering alongside it (the ruling; this one isn't on the
+   * battlefield yet). On a static only. A `would-add-counter` multiplier
+   * applies as to any enters-with-counters.
+   */
+  readonly counterKindsOfSource?: true;
   /** It enters **as** this too — Master Biomancer's "and as a Mutant in
    * addition to its other types" (`{ addSubtypes: ["Mutant"] }`): a lasting
    * effect on the permanent it becomes (rule 611.2c), in its layer, in place
