@@ -587,6 +587,8 @@ import {
   differentControllerOf,
   sameControllerOf,
   sharesOf,
+  comparesOf,
+  comparesHold,
   attachedToThanOf,
   divisionOf as spellDivision,
   groupBounds,
@@ -36976,6 +36978,23 @@ export class Game {
           drop(i);
           drop(slot);
         }
+      }
+    });
+    // "…with equal or lesser mana value", "…power less than or equal to that
+    // creature's power" (rule 608.2b): it's the comparing slot's own
+    // requirement, so that slot is illegal once its target no longer keeps it
+    // with the other, still legal one (Puca's Mischief, Spawnbroker — whose
+    // exchanges need both). One already illegal is compared with nothing.
+    const compareFacts = stateTargetFacts(this.state, this.registry);
+    specs.forEach((spec, i) => {
+      const compare = comparesOf(spec);
+      const mine = targets[i];
+      if (compare === undefined || mine === undefined) return;
+      const than = otherThan(spec);
+      for (const slot of than === undefined ? [] : otherThanSlots(than)) {
+        const theirs = targets[slot];
+        if (theirs === undefined) continue;
+        if (comparesHold(mine, theirs, compare, compareFacts) === false) drop(i);
       }
     });
     // "…target Equipment attached to that creature" (rule 608.2b — Fiery

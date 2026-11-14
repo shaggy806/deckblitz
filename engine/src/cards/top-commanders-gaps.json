@@ -7,6 +7,7 @@
     "bug:trigger-value-lost-in-unless-otherwise",
     "trigger:dealt-damage-by-opponent-source",
     "trigger:batch-damage-player-or-battle",
+    "filter:target-stat-relative-to-other-target",
     "condition:per-opponent-target-slot-condition",
     "condition:played-card-from-exile-this-turn",
     "condition:top-card-of-library-matches",

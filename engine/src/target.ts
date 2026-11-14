@@ -440,6 +440,17 @@ export type TargetSpec =
        * already illegal is read as it last existed (Secret Tunnel's and
        * Unbury's rulings). Needs {@link TargetFacts}' `shareTypes`. */
       readonly shares?: TargetShare;
+      /** "…target nonland permanent an opponent controls **with equal or
+       * lesser mana value**" (Puca's Mischief), "…target creature **with
+       * power less than or equal to that creature's power**" (Spawnbroker):
+       * this slot's stat against every slot `than` names (see
+       * {@link TargetCompare}). Only with a slot relation. Checked as targets
+       * are chosen (rule 601.2c — the pair as a set, so a first target with
+       * no second to match isn't offered) and again as the spell or ability
+       * resolves (608.2b): this slot is illegal once it no longer keeps it
+       * with a still-legal other. Needs {@link TargetFacts}' `powerOf`, `toughnessOf` or
+       * `manaValueOf`. */
+      readonly compares?: TargetCompare;
       /** "…target Equipment **attached to that creature**" (Fiery
        * Annihilation): the slot is attached to the permanent of every slot
        * `than` names. Only with a slot relation. As it resolves, the slot is
@@ -637,6 +648,56 @@ export function sharesOf(spec: TargetSpec): TargetShare | undefined {
   if (spec.kind === "other") return spec.shares;
   if (spec.kind === "optional") return sharesOf(spec.of);
   return undefined;
+}
+
+/**
+ * A comparison of one stat between two targets — `other`'s `compares`: the
+ * slot's `stat` stands `op` to that of the slot `than` names ("lte": "with
+ * equal or lesser mana value", Puca's Mischief).
+ */
+export interface TargetCompare {
+  readonly stat: "mana-value" | "power" | "toughness";
+  readonly op: "lt" | "lte" | "eq" | "gte" | "gt";
+}
+
+/** Slot `spec`'s stat comparison with the slots its relation names, if it
+ * has one — through an `optional` wrapper. */
+export function comparesOf(spec: TargetSpec): TargetCompare | undefined {
+  if (typeof spec !== "object") return undefined;
+  if (spec.kind === "other") return spec.compares;
+  if (spec.kind === "optional") return comparesOf(spec.of);
+  return undefined;
+}
+
+/** Whether two stat values keep a {@link TargetCompare}'s `op`, `mine`
+ * the comparing slot's. */
+export function compareStats(mine: number, theirs: number, op: TargetCompare["op"]): boolean {
+  switch (op) {
+    case "lt":
+      return mine < theirs;
+    case "lte":
+      return mine <= theirs;
+    case "eq":
+      return mine === theirs;
+    case "gte":
+      return mine >= theirs;
+    case "gt":
+      return mine > theirs;
+  }
+}
+
+/** Does target `a` keep a `compares` relation with target `b` — `undefined`
+ * when the facts can't tell (a chooser without that stat's read). */
+export function comparesHold(
+  a: TargetRef,
+  b: TargetRef,
+  compare: TargetCompare,
+  facts: TargetFacts,
+): boolean | undefined {
+  const read =
+    compare.stat === "power" ? facts.powerOf : compare.stat === "toughness" ? facts.toughnessOf : facts.manaValueOf;
+  if (read === undefined) return undefined;
+  return compareStats(read(a), read(b), compare.op);
 }
 
 /** Do targets `a` and `b` keep a `shares` relation — `undefined` when the
@@ -1446,6 +1507,12 @@ export function slotOptions(
   if (share !== undefined) {
     distinct = distinct.filter((ref) => earlier.every((e) => sharesHold(ref, e, share, facts) !== false));
   }
+  // "…with equal or lesser mana value": only those keeping it with every
+  // earlier one.
+  const compare = comparesOf(specs[i]);
+  if (compare !== undefined) {
+    distinct = distinct.filter((ref) => earlier.every((e) => comparesHold(ref, e, compare, facts) !== false));
+  }
   // "…attached to that creature": only what's attached to it.
   if (attachedToThanOf(specs[i])) {
     distinct = distinct.filter((ref) => earlier.every((e) => attachedHolds(ref, e, facts) !== false));
@@ -1558,6 +1625,7 @@ export function otherSlotConflict(
     const byController = facts !== undefined && differentControllerOf(specs[i]);
     const sharing = facts !== undefined && sameControllerOf(specs[i]);
     const share = sharesOf(specs[i]);
+    const compare = comparesOf(specs[i]);
     for (const slot of otherThanSlots(than)) {
       const theirs = chosen[slot];
       if (theirs === null || theirs === undefined) continue;
@@ -1567,6 +1635,10 @@ export function otherSlotConflict(
       }
       // "…that share a card type" (Shifting Loyalties, Rivals' Duel).
       if (share !== undefined && facts !== undefined && sharesHold(mine, theirs, share, facts) === false) {
+        return { slot: i, than: slot };
+      }
+      // "…with equal or lesser mana value" (Puca's Mischief, Spawnbroker).
+      if (compare !== undefined && facts !== undefined && comparesHold(mine, theirs, compare, facts) === false) {
         return { slot: i, than: slot };
       }
       // "…attached to that creature" (Fiery Annihilation).

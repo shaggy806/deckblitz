@@ -3923,6 +3923,17 @@ than: { slot: 0 }, attachedToThan: true } }]`. As it resolves, the slot is
 illegal if it's no longer attached to it or if that slot is illegal (its
 rulings); the creature stays legal either way.
 
+**"…with equal or lesser mana value"** (than the slot before it) is
+`compares: { stat, op }` on an `other` slot with a slot relation: this slot's
+`"mana-value"`, `"power"` or `"toughness"` stands `op` (`lt`, `lte`, `eq`,
+`gte`, `gt`) to that slot's. Puca's Mischief's second target is `{ kind:
+"other", of: { kind: "permanent", whose: "opponent", filter: { notTypes:
+["land"] } }, than: { slot: 0 }, compares: { stat: "mana-value", op: "lte" }
+}`; Spawnbroker's "target creature with power less than or equal to that
+creature's power" is `{ stat: "power", op: "lte" }`. The pair is chosen as a
+set (601.2c: a first target with no second to match isn't offered); as it
+resolves, the comparing slot is illegal if it no longer keeps it (608.2b).
+
 **"…controlled by different players"** is `differentController: true` on an
 `other` slot with a slot relation: Run Away Together is `["creature", { kind:
 "other", of: "creature", than: { slot: 0 }, differentController: true }]`,
