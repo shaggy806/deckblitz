@@ -30633,6 +30633,10 @@ export class Game {
     // "Imprint" (River Song's Diary): exiled with the permanent whose
     // ability set this up (rule 607.2a).
     if (mark.link !== undefined) this.linkExiledToSource([id], mark.link.source, mark.link.zoneChangeCount);
+    // "…with a dream counter on it" (Goliath Daydreamer).
+    if (mark.counters !== undefined) {
+      object.counters[mark.counters.kind] = (object.counters[mark.counters.kind] ?? 0) + mark.counters.amount;
+    }
     // "If you do, it becomes plotted" (Lilah, Undefeated Slickshot).
     if (mark.plotted === true) this.makePlotted(mark.player, id, before);
     // "…with three time counters on it. Then if the exiled card doesn't have
@@ -41198,6 +41202,7 @@ controlledBy,
           ...(returnAtNextEndStep ? { returnAtNextEndStep: true as const } : {}),
           ...(plotted ? { plotted: true as const } : {}),
           ...(timeCounters !== undefined ? { timeCounters } : {}),
+          ...(how?.withCounters !== undefined && how.withCounters.amount > 0 ? { counters: how.withCounters } : {}),
           ...(how?.linked === true && stint !== undefined ? { link: { source, zoneChangeCount: stint } } : {}),
         };
       },

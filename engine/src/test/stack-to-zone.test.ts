@@ -9,7 +9,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { ScriptedController } from "../controller.js";
-import { A, B, cast, enter, lands, life, named, nextTurn, pickModes, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, attack, cast, enter, lands, life, named, nextTurn, pickModes, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import { lastRollIn } from "../random-results.js";
 import type { ObjectId } from "../primitives.js";
@@ -239,5 +239,37 @@ describe("Gale's Redirection", () => {
     nextTurn(game);
     cast(game, blaze, { x: 0, targets: [ref(B)], via: "impulse", free: true });
     expect(zone(game, blaze)).toBe("graveyard");
+  });
+});
+
+describe("Goliath Daydreamer", () => {
+  it("exiles an instant cast from hand with a dream counter as it resolves, cast free when it attacks", () => {
+    const { game, a } = table();
+    const giant = spawn(game, "Goliath Daydreamer");
+    lands(game, "Mountain", 2);
+    const shock = toHand(game, "Shock");
+    cast(game, shock, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(18);
+    expect(zone(game, shock)).toBe("exile");
+    expect(game.state.objects[shock].counters.dream).toBe(1);
+
+    castFree(a);
+    attack(game, a, [giant]);
+    // Shock again (cast from exile, so not exiled again), and 4 combat damage.
+    expect(life(game, B)).toBe(12);
+    expect(zone(game, shock)).toBe("graveyard");
+  });
+
+  it("leaves a countered spell, and one cast from elsewhere, alone", () => {
+    const { game } = table();
+    spawn(game, "Goliath Daydreamer");
+    lands(game, "Mountain", 1);
+    lands(game, "Island", 2);
+    const shock = toHand(game, "Shock");
+    cast(game, shock, { targets: [ref(B)], settle: false });
+    cast(game, toHand(game, "Counterspell"), { targets: [ref(shock)] });
+    expect(zone(game, shock)).toBe("graveyard");
+    // Counterspell itself, cast from hand and resolved, was exiled.
+    expect(game.state.zones.shared.exile.map((id) => game.state.objects[id].cardName)).toEqual(["Counterspell"]);
   });
 });

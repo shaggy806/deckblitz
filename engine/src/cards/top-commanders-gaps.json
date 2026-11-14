@@ -2495,7 +2495,8 @@
   "effect:possibility-storm-exile-spell-on-cast",
   "effect:exile-cast-spell-then-cast-linked-exiled",
   "effect:put-cast-spell-on-library-if-did",
-  "effect:exile-target-spell"
+  "effect:exile-target-spell",
+  "effect:exile-spell-as-it-resolves-with-counter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

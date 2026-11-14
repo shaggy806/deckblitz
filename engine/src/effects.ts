@@ -7793,6 +7793,10 @@ export type EffectSpec =
        * card doesn't have suspend, it gains suspend" (rule 702.62b — Gandalf
        * of the Secret Fire). */
       readonly timeCounters?: number;
+      /** "Exile that card **with a dream counter on it**" (Goliath Daydreamer):
+       * counters the card gets as it's exiled, there — read later by a
+       * `cast-now` of `{ exiledOwnedWithCounter }`. */
+      readonly withCounters?: { readonly kind: string; readonly amount: number };
       /** "Exile it instead of putting it into **a** graveyard" (River Song's
        * Diary, on "whenever **a player** casts …"): whoever owns the spell,
        * not only this effect's controller — still only a card its owner
@@ -12946,7 +12950,11 @@ export interface EffectApi {
     returnAtNextEndStep: boolean,
     plotted: boolean,
     timeCounters?: number,
-    how?: { readonly anyOwner?: boolean; readonly linked?: boolean },
+    how?: {
+      readonly anyOwner?: boolean;
+      readonly linked?: boolean;
+      readonly withCounters?: { readonly kind: string; readonly amount: number };
+    },
   ): void;
   /** The controller may collect evidence `amount` — see the
    * `collect-evidence` effect. */
@@ -20013,6 +20021,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true, spec.timeCounters, {
           anyOwner: spec.anyOwner === true,
           linked: spec.linked === true,
+          ...(spec.withCounters !== undefined ? { withCounters: spec.withCounters } : {}),
         });
       }
       return;

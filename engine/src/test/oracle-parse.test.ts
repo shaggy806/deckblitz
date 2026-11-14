@@ -16313,6 +16313,11 @@ describe("time counters that reach a suspended card", () => {
       "Exile that card with three time counters on it instead of putting it into your graveyard as it resolves. Then if the exiled card doesn't have suspend, it gains suspend.",
     );
     expect(gandalf.effect).toEqual({ kind: "exile-spell-as-it-resolves", timeCounters: 3 });
+    const goliath = read(
+      "Instant",
+      "Exile that card with a dream counter on it instead of putting it into your graveyard as it resolves.",
+    );
+    expect(goliath.effect).toEqual({ kind: "exile-spell-as-it-resolves", withCounters: { kind: "dream", amount: 1 } });
   });
   it("reads River Song's Diary whole: every player's hand spells exiled with it, one cast at random", () => {
     const diary = parseFace(

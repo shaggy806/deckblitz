@@ -14924,6 +14924,16 @@ function pilesAt(sentences, i, ctx) {
     const timeCounters = numberOf(asItResolves[1]);
     return typeof timeCounters === "number" ? { effect: { kind: "exile-spell-as-it-resolves", timeCounters }, used: 2 } : null;
   }
+  // Goliath Daydreamer's "exile that card with a dream counter on it instead of
+  // putting it into your graveyard as it resolves" — a counter of any kind but
+  // time, which goes with suspend above.
+  const withCounter = new RegExp(`^exile that card with ${N} ([a-z]+) counters? on it instead of putting it into your graveyard as it resolves\\.$`, "i").exec(s(0));
+  if (withCounter !== null && withCounter[2].toLowerCase() !== "time") {
+    const amount = numberOf(withCounter[1]);
+    return typeof amount === "number"
+      ? { effect: { kind: "exile-spell-as-it-resolves", withCounters: { kind: withCounter[2].toLowerCase(), amount } }, used: 1 }
+      : null;
+  }
   // Piles made in exile (`exile-into-piles`): "Exile the top N … in a face-down
   // pile, then exile the top M … in another face-down pile. Look at the cards in
   // each pile, then turn a pile of your choice face up. An opponent chooses one
