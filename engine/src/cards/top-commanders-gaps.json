@@ -7,6 +7,7 @@
     "condition:cycled-named-card-this-game",
     "trigger:activates-ability-from-graveyard",
     "amount:greatest-among-cards-left-graveyard",
+    "replacement:draw-replacement-search",
     "replacement:copy-on-enter-exile-two-counters-from-other",
     "amount:chosen-targets-remaining",
     "stat:damage-to-object-by-controller",
