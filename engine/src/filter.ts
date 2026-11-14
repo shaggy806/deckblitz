@@ -3600,6 +3600,12 @@ export type AggregateSpec =
 interface AggregateBase {
   readonly filter: CardFilter;
   readonly excludeSelf?: boolean;
+  /** Leave out the permanent whose static granted the ability reading this
+   * (an effect's amount only; `ResolutionContext.granter`), live or as it
+   * last existed, and nothing else of its name — Animal Friend's granted
+   * "for each Aura and Equipment attached to this creature **other than
+   * Animal Friend**". On an ability nothing granted, nothing is left out. */
+  readonly excludeGranter?: boolean;
   readonly in?: AggregateIn | readonly AggregateIn[];
   readonly plus?: readonly AggregateSource[];
   readonly forTarget?: number;

@@ -947,6 +947,11 @@ Goblins, as they last were) and the condition `{ kind: "self-devoured" }` (Hellk
 Hatchling).
 `aggregate: "count"` counts them (Crackling Drake's "instant and sorcery cards
 you own in exile and in your graveyard" — `in: ["graveyards", "exile"]`);
+`excludeGranter: true` (an effect's amount, in a granted ability) leaves out
+the permanent whose static granted it, by identity — another of its name still
+counts, live or as last known (Animal Friend's granted "each Aura and Equipment
+attached to this creature **other than Animal Friend**", `in: { attachmentsOf:
+"source" }`);
 `of: "counters"` sums every counter of every kind (Maester Seymour); an
 effect amount's `forTarget: slot` reads it from a target player's side
 (Ferrafor's "creatures target player controls"). A static's

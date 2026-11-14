@@ -6859,3 +6859,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **The monarch's end step (2026-11-14).** `trigger:monarch-end-step`: `TriggerWho`'s `"monarch"` on a `step-begins` (rule 725), the step of whoever is the monarch as it begins; "that player" is `"active-player"`. Archivist of Gondor. `test/monarch-end-step.test.ts`.
 
 **One or more of your opponents are attacked (2026-11-14).** `trigger:opponents-attacked-batch`: no engine code — Jolene, the Plunder Queen's `attack-with { who: "any", atLeast: 1, filter: { attackingOpponent: true } }` (rule 508.3b), once a declaration; the scaffolder reads both wordings. Party Dude. `test/opponents-attacked-batch.test.ts`.
+
+**A count other than the granter (2026-11-14).** `amount:count-excluding-granter`: an aggregate's `excludeGranter`, the granting permanent left out by identity (`isSource` against `appliedBy`), live or as last known. Animal Friend. `test/count-excluding-granter.test.ts`.

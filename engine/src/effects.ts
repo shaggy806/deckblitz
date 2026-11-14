@@ -16539,12 +16539,13 @@ export function signedAmountValue(
     // calculation, and one setting a power keeps its sign (rule 107.1b —
     // Arni Brokenbrow's "1 plus the greatest power", which can be -2).
     const except = amount.excludeSelf === true ? [ctx.source] : [];
+    const spec = amount.excludeGranter === true ? withoutGranter(amount, ctx.granter) : amount;
     if (amount.forTarget !== undefined) {
       const ref = ctx.targets[amount.forTarget];
       if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
-      return ctx.aggregate(amount, except, ref.player, each);
+      return ctx.aggregate(spec, except, ref.player, each);
     }
-    return ctx.aggregate(amount, except, undefined, each);
+    return ctx.aggregate(spec, except, undefined, each);
   }
   const except: ObjectId[] = [];
   if (amount.excludeSelf === true) except.push(ctx.source);
@@ -17348,6 +17349,24 @@ function bindBlockPartners<T>(value: T, ctx: ResolutionContext): T {
     return [key, bindBlockPartners(v, ctx)];
   });
   return entries.some(([key, v]) => v !== record[key]) ? (Object.fromEntries(entries) as T) : value;
+}
+
+/** An aggregate's `excludeGranter`: every filter of it also refuses the
+ * granter, by identity — `isSource` read against `appliedBy`, which compares
+ * the object alone, so it holds for a member read live or as it last existed
+ * (608.2h), and another permanent of the same name still counts. */
+function withoutGranter(spec: AggregateSpec, granter: ObjectId | undefined): AggregateSpec {
+  if (granter === undefined) return spec;
+  const it: CardFilter = { isSource: true, appliedBy: granter };
+  const refuse = (filter: CardFilter): CardFilter => ({
+    ...filter,
+    not: filter.not === undefined ? it : { anyOf: [filter.not, it] },
+  });
+  return {
+    ...spec,
+    filter: refuse(spec.filter),
+    ...(spec.plus !== undefined ? { plus: spec.plus.map((more) => ({ ...more, filter: refuse(more.filter) })) } : {}),
+  };
 }
 
 export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): EffectSpec {
