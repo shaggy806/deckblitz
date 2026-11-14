@@ -768,6 +768,10 @@ export type EffectAmount =
    * which a number isn't exact any more: every use draws or counts far more
    * than a game holds by then (a draw stops at an empty library). */
   | { readonly powerOfTwo: EffectAmount }
+  /** Which pass of the `repeat` under way this is — 1 for the first, 0
+   * outside a repeat. Game of Chaos's "double the life stakes with each flip"
+   * is `{ powerOfTwo: { sum: [{ repeatPass: true }, -1] } }`: 1, 2, 4, … */
+  | { readonly repeatPass: true }
   /** How many cards in **graveyards** match a filter — Undergrowth's "for
    * each creature card in your graveyard" (Lotleth Giant). Distinct from
    * `countOf`, which only ever counts battlefield permanents. The filter's
@@ -6915,7 +6919,24 @@ export type EffectSpec =
        * {G}. If you do, repeat" (Forgotten Lore); `costLife` is life paid
        * for each pass the same way — Lim-Dûl's Vault's "as many times as you
        * choose, you may pay 1 life, …" (the `may`'s own `costLife`). */
-      readonly mayAgain?: true | { readonly cost?: string; readonly costLife?: EffectAmount };
+      readonly mayAgain?:
+        | true
+        | {
+            readonly cost?: string;
+            readonly costLife?: EffectAmount;
+            /** Who decides, when it isn't the effect's controller: the first
+             * case whose `if` holds over the pass just done (no `if` always
+             * does) — Game of Chaos's "if you win the flip, … you decide
+             * whether to flip again. If you lose the flip, … that player
+             * decides" is `[{ if: { kind: "this-way", what: "flips-won" },
+             * who: "you" }, { who: { target: 0 } }]`. Another player is
+             * asked about the controller's process (`askPlayerAboutEffect`):
+             * the passes stay the controller's. Nobody named (a player who
+             * has left): the process stops. */
+            readonly asks?: readonly { readonly if?: StaticCondition; readonly who: PlayerRef }[];
+            /** The question, when it isn't "Repeat this process?" — "Flip again?". */
+            readonly prompt?: string;
+          };
       /** Engine-built, never authored: passes done, the resolution's own
        * "this way" start (restored once the last pass is done, so what
        * follows reads every pass — Demonlord Belzenlok's "for each card put
@@ -6926,6 +6947,8 @@ export type EffectSpec =
         readonly round: number;
         readonly outer: number;
         readonly outerRepeat?: number;
+        /** The `GameState.repeatPass` to restore once it's done. */
+        readonly outerPass?: number;
         readonly total?: number;
         readonly stop?: true;
         readonly judged?: true;
@@ -12766,6 +12789,11 @@ export interface EffectApi {
   /** `GameState.repeatSince`, which a `repeat` sets as it begins, and restores
    * once its last pass is done; this returns what it was. */
   scopeRepeat(at: number | undefined): number | undefined;
+  /** `GameState.repeatPass`, which a `repeat` sets as each pass begins and
+   * restores once its last is done; this returns what it was. */
+  scopeRepeatPass(pass: number | undefined): number | undefined;
+  /** The `{ repeatPass }` amount: the pass of the repeat under way, 0 outside one. */
+  repeatPass(): number;
   /** See the `"populate"` {@link EffectSpec}. */
   populate(): void;
   /** See the `"amass"` {@link EffectSpec}. `onto`: the Army already
@@ -14562,9 +14590,10 @@ function applyFlipCoin(spec: Extract<EffectSpec, { kind: "flip-coin" }>, ctx: Re
 
 function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
-  const finish = (done: { readonly outer: number; readonly outerRepeat?: number }): void => {
+  const finish = (done: { readonly outer: number; readonly outerRepeat?: number; readonly outerPass?: number }): void => {
     ctx.scopeThisWay(done.outer);
     ctx.scopeRepeat(done.outerRepeat);
+    ctx.scopeRepeatPass(done.outerPass);
   };
   if (progress?.stop === true) {
     finish(progress);
@@ -14574,10 +14603,12 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
     const total = spec.times === undefined ? undefined : Math.max(0, amountValue(spec.times, ctx));
     if (total === 0) return;
     const outerRepeat = ctx.scopeRepeat(ctx.nextEventSeq());
+    const outerPass = ctx.scopeRepeatPass(0);
     progress = {
       round: 0,
       outer: ctx.thisWaySince(),
       ...(outerRepeat !== undefined ? { outerRepeat } : {}),
+      ...(outerPass !== undefined ? { outerPass } : {}),
       ...(total !== undefined ? { total } : {}),
     };
   }
@@ -14601,10 +14632,26 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
         // "You may repeat this process": asked, the next pass its yes.
         const next: EffectSpec = { ...spec, progress: { ...progress, judged: true } };
         const declined: EffectSpec = { ...spec, progress: { ...progress, stop: true } };
+        const prompt = (typeof spec.mayAgain === "object" ? spec.mayAgain.prompt : undefined) ?? "Repeat this process?";
+        const asks = typeof spec.mayAgain === "object" ? spec.mayAgain.asks : undefined;
+        if (asks !== undefined) {
+          // "…and that player decides whether to flip again" (Game of
+          // Chaos): the first case holding over this pass names who.
+          const named = asks.find((c) => c.if === undefined || judge.conditionMet(c.if));
+          const asked = named === undefined ? undefined : resolvePlayerRef(named.who, judge);
+          if (asked === undefined || !ctx.playersInScope("each-player").includes(asked)) {
+            finish(progress);
+            return;
+          }
+          if (asked !== ctx.controller) {
+            ctx.askPlayerAboutEffect(asked, prompt, next, declined);
+            return;
+          }
+        }
         applyEffectSpec(
           {
             kind: "may",
-            prompt: "Repeat this process?",
+            prompt,
             effect: next,
             else: declined,
             ...(typeof spec.mayAgain === "object" && spec.mayAgain.cost !== undefined ? { cost: spec.mayAgain.cost } : {}),
@@ -14620,6 +14667,7 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
     // A new pass, its own "this way".
     pass = ctx.scopeThisWay(ctx.nextEventSeq());
     const round: number = progress.round + 1;
+    ctx.scopeRepeatPass(round);
     const parked = pass.parkedCount();
     const pendingBefore = pass.decisionPending();
     applyEffectSpec(spec.effect, pass);
@@ -14627,6 +14675,7 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
       round,
       outer: progress.outer,
       ...(progress.outerRepeat !== undefined ? { outerRepeat: progress.outerRepeat } : {}),
+      ...(progress.outerPass !== undefined ? { outerPass: progress.outerPass } : {}),
       ...(progress.total !== undefined ? { total: progress.total } : {}),
     };
     if (!pendingBefore && pass.decisionPending()) {
@@ -15323,6 +15372,7 @@ export function signedAmountValue(
     return 2 ** Math.min(52, Math.max(0, Math.floor(signedAmountValue(amount.powerOfTwo, ctx, each))));
   }
   if ("lifePaymentsOf" in amount) return ctx.lifePaymentsOf(amount.lifePaymentsOf);
+  if ("repeatPass" in amount) return ctx.repeatPass();
   if ("half" in amount) {
     // Signed, like the rest of this function: `amountValue` clamps the
     // result, and a value setting power keeps its sign (rule 107.1b).

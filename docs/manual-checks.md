@@ -8242,12 +8242,21 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Nahiri's Sacrifice, choosing X = 3 and sacrificing Gray Ogre. Target both of Bob's creatures, 2 damage to Grizzly Bears and 1 to Hill Giant.
 - **Expect:** Only Gray Ogre is offered at X = 3 (Sol Ring only at X = 1). The Bears die and the Giant has 1 damage.
 
-## A creature or player chosen as it resolves, decisions lane (2026-11-13)
+## Decisions lane: a creature or player chosen as it resolves, and who flips again (2026-11-13)
 
 ### Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not
 - **Do:** Use Comet's 0 ability. When asked, click Bob's Gladecover Scout.
 - **Expect:** The banner reads "Comet deals damage equal to his loyalty to a creature or player — click a highlighted permanent or player"; both players and every creature are highlighted, the Scout too. It dies, and Comet goes down to 3 loyalty.
 - **Not a bug:** The die is the board's own: this board always rolls a 4.
+
+### Game of Chaos: whoever wins the flip decides whether to flip again
+- **Do:** Cast Game of Chaos, targeting Bob. Answer "Flip again?" Yes, Yes, then No — you're moved to Bob's seat whenever he's the one asked.
+- **Expect:** You lose the first flip (you 39, Bob 41), so Bob is asked. You win the second for 2 (41 / 39) and you're asked; you lose the third for 4 (37 / 43), Bob is asked, and his No ends it.
+- **Not a bug:** The coins are the board's own: this board always flips lose, win, lose.
+
+### Game of Chaos: at four players, only the target opponent plays
+- **Do:** Cast Game of Chaos, targeting Carol. Answer "Flip again?" Yes as Carol, then No as yourself.
+- **Expect:** You lose the first flip (you 39, Carol 41) and Carol is asked; you win the second for 2 (41 / 39) and you're asked. Bob and Dave stay at 40 throughout.
 
 ### Comet, Stellar Pup: at four players, any player can be chosen
 - **Do:** Use Comet's 0 ability. When asked, click Carol.

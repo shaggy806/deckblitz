@@ -29633,6 +29633,7 @@ export class Game {
     if (this.state.suspendedResolutions.length === 0) {
       delete this.state.resolutionSince;
       delete this.state.repeatSince;
+      delete this.state.repeatPass;
       delete this.state.resolvingSource;
       delete this.state.resolvingController;
       delete this.state.resolvingTriggered;
@@ -40067,6 +40068,13 @@ controlledBy,
         else this.state.repeatSince = at;
         return was;
       },
+      scopeRepeatPass: (pass) => {
+        const was = this.state.repeatPass;
+        if (pass === undefined) delete this.state.repeatPass;
+        else this.state.repeatPass = pass;
+        return was;
+      },
+      repeatPass: () => this.state.repeatPass ?? 0,
       scopeThisWay: (at) => {
         this.state.resolutionSince = at;
         return this.makeResolutionContext(

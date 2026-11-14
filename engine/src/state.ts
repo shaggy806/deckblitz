@@ -6402,6 +6402,10 @@ export interface GameState {
    * `acrossPasses` reads. Absent outside a `repeat`.
    */
   repeatSince?: number;
+  /** Which pass of that `repeat` is under way (1 for the first): the
+   * `{ repeatPass }` amount — Game of Chaos's stakes, doubled each flip.
+   * Absent outside a `repeat`. */
+  repeatPass?: number;
   /** While an ability resolves (across the decisions it waits on, like
    * `resolutionSince`): its source and that source's timestamp then — what
    * a permanent it puts onto the battlefield records as `entry.by`. Absent

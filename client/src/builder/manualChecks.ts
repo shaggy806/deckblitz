@@ -12389,6 +12389,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Game of Chaos: whoever wins the flip decides whether to flip again',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Game of Chaos'] },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Game of Chaos: at four players, only the target opponent plays',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Game of Chaos'] },
+      opp: [{}, { human: true }, {}],
+    }),
+  ),
+  preset(
     'Comet, Stellar Pup: at four players, any player can be chosen',
     board({
       you: { bf: ['Comet, Stellar Pup'] },
