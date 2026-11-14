@@ -359,6 +359,14 @@ choice); `counters-removed` reads `perCounter` and a new `byYou` off it. Watcher
 exiled" fired once for Dust of Moments' two (rule 603.2c) — Aeon Chronicler, Benalish
 Commander, Detritivore, Dinosaurs on a Spaceship and Fungal Behemoth now say `perCounter`.
 `test/time-counter-removed.test.ts`.
+### A paid cast of a copy of a card by name — built 2026-11-14
+
+The key `effect:cast-copy-of-named-card`: `cast-now`'s `copyOfCardNamed`, paradigm's
+engine-only field, is now a card's, paid unless `free`; `copyOutsideTheGame` makes the copy
+outside the game (rule 707.13) rather than in exile, and `removeStrayCardCopies` drops one not
+cast from there too. Garth One-Eye (rank 10228), its names a `modal` with `notChosenBefore`
+chosen as it resolves. `test/cast-copy-of-named-card.test.ts`.
+
 ### A cast-this-turn exile whose spell is exiled instead — found built 2026-11-14
 
 The key `zone:impulse-exile-instead` needed no engine code: `exile`'s `mayPlay` with

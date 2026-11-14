@@ -5451,8 +5451,13 @@ export type EffectSpec =
       readonly copiesIn?: "hand";
       /** A copy of the card with this name, created in exile (paradigm, rule
        * 702.192a) and offered, with no card behind it: nothing else here is
-       * asked for. Only built by the engine, on paradigm's emblem. */
+       * asked for. Paradigm's emblem casts it free; Garth One-Eye's "create a
+       * copy of the card with the chosen name. You may cast the copy" pays
+       * its costs (the ruling), as any `cast-now` without `free` does. */
       readonly copyOfCardNamed?: string;
+      /** With `copyOfCardNamed`: the copy is created outside the game rather
+       * than in exile (rule 707.13 — Garth One-Eye), and cast from there. */
+      readonly copyOutsideTheGame?: true;
       /** The encoded card (rule 702.99a — cipher), in the exile stint it was
        * encoded in: the card offered, while it's still that card in exile.
        * Set by the engine on the trigger an encoded card gives its creature
@@ -12588,9 +12593,10 @@ export interface EffectApi {
    * zone and owned by the controller, for casting; the new objects' ids.
    * `into: "hand"`: in the controller's hand instead, of a card anywhere. */
   copyCards(cards: readonly ObjectId[], times: number, into?: "hand"): readonly ObjectId[];
-  /** A copy of the card named `name`, created in exile, owned by the effect's
-   * controller — see the `cast-now`'s `copyOfCardNamed`. */
-  copyCardNamed(name: string): readonly ObjectId[];
+  /** A copy of the card named `name`, created in exile (or, `outside`,
+   * outside the game — rule 707.13), owned by the effect's controller — see
+   * the `cast-now`'s `copyOfCardNamed`. */
+  copyCardNamed(name: string, outside: boolean): readonly ObjectId[];
   /** See the `"choose-creature-type"` {@link EffectSpec}. */
   chooseCreatureType(
     then: EffectSpec,
@@ -15931,7 +15937,11 @@ function resolveEffectPlay(spec: EffectPlaySpec, ctx: ResolutionContext): Effect
 function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
   if (progress === undefined && spec.copyOfCardNamed !== undefined) {
-    offerCastNow(spec, { since: ctx.nextEventSeq(), cards: ctx.copyCardNamed(spec.copyOfCardNamed), looked: [] }, ctx);
+    offerCastNow(
+      spec,
+      { since: ctx.nextEventSeq(), cards: ctx.copyCardNamed(spec.copyOfCardNamed, spec.copyOutsideTheGame === true), looked: [] },
+      ctx,
+    );
     return;
   }
   if (progress === undefined) {

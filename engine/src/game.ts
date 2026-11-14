@@ -42386,10 +42386,11 @@ controlledBy,
         }
         return made;
       },
-      copyCardNamed: (name) => {
-        const copy = this.makeCardObject(name, controller, { zone: "exile" });
+      copyCardNamed: (name, outside) => {
+        const zone = outside ? "outside" : "exile";
+        const copy = this.makeCardObject(name, controller, { zone });
         this.state.objects[copy].isCopy = true;
-        this.zoneList("exile", controller).push(copy);
+        this.zoneList(zone, controller).push(copy);
         return [copy];
       },
       libraryTop: (player, count, reveal) => {
@@ -67366,6 +67367,10 @@ controlledBy,
     }
     sweep(this.state.zones.shared.exile);
     sweep(this.state.zones.shared.command);
+    // One made outside the game to be cast (rule 707.13 — Garth One-Eye) and
+    // not cast: nothing can bring it in afterwards, so it's dropped with the
+    // rest, never left in its owner's sideboard.
+    for (const list of Object.values(this.state.outside ?? {})) sweep(list);
     if (removed) invalidateComputedCache();
     return removed;
   }
