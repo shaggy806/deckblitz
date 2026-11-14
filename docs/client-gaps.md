@@ -99,18 +99,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 
-**Attractions in the client (phase 2)**
-
-The engine half landed in B327 (2026-11-14; `docs/plans/attractions.md`, section on phase 2).
-Left: a decklist's Attractions section (a name, or `{ name, collector }` such as "200a") into
-`DeckList.attractions`, checked by the engine's `attractionDeckProblems` beside the Commander
-deck check and kept out of the 99; an Attractions section in the deck builder; the room server
-passing it through. On the board: `players[p].attractionDeckSize` as a face-down pile with a
-count (its cards never reach `objects`), `players[p].junkyard` as face-up cards beside the
-graveyard, and `VisibleObject.lights` as the 1–6 column with the lit numbers highlighted. The
-log: `rolled-to-visit`, `attraction-visited`, `attraction-opened`, `prize-claimed`. Bots' decks
-get none. Check live in a 2- and a 4-player room, and add manual checks.
-
 **Another player's target popup says "your graveyard"**
 
 When an opponent chooses a trigger's target for its controller (Mausoleum Turnkey's

@@ -1,6 +1,7 @@
 # Attractions
 
-Status: phase 1 done — engine and cards (2026-11-14, batch 327); phase 2 the client.
+Status: done — phase 1 the engine and cards (2026-11-14, batch 327), phase 2 the server and the
+client (2026-11-14).
 
 Unfinity's Attractions (rules 717, 701.51, 701.52, 702.159): a second deck of artifact cards in the
 command zone, opened onto the battlefield by other cards and visited by a d6 rolled at the start of
@@ -89,6 +90,32 @@ then an optional exile-and-return of the pair or a fight), Myra the Magnificent 
 Monitor Monitor (rerolls).
 
 ## Phase 2: the server and the client
+
+Done 2026-11-14. What it did, and why:
+
+- **A decklist's `Attractions` section** (or `Attraction deck`) is read line by line, not merged by
+  name like the deck: two lines of one name can name two printings, each lighting other numbers. A
+  printing suffix's collector number ("Balloon Stand (UNF) 200b") picks the printing when the card
+  has it, else the first. No stand-in is looked for: only an Attraction can take an Attraction's
+  place, and the replacer knows nothing of lit numbers, so an Attraction the pool lacks is dropped
+  and reported. The import's format check adds `attractionDeckProblems`; the 99's count never sees
+  them.
+- **The room server** checks each entry as it arrives (`assertAttractionsAreBuildable`), since
+  `Game.create` throws on an entry it can't make and would take the room down at promotion; the
+  Commander-legal setting adds 717.2a's rules. A bot's seat gets no Attraction deck even when the
+  host hands it a deck with one.
+- **The deck builder** routes an Attraction's add to the Attraction deck (an Attraction in the 99 is
+  a violation), with a printing select per row; the deck and the blitz carry it to the table.
+- **The board** puts the Attraction deck and the junkyard side by side, half a card each, between
+  the command zone and the library — only for a player who has either, so no other game's rail
+  changes. The junkyard opens a zone viewer, anyone's. The lit numbers are a 1–6 column on the board
+  tile, the hover card and the deck builder's rows.
+- **The scenario builder** has the two piles as zones and a card's `collector`, so a manual check can
+  open, visit and junk Attractions with known numbers.
+- **Not done:** no animation for the roll to visit beyond the die's own; the log's lines are the
+  four events.
+
+The brief it was built from:
 
 - **Fill `DeckList.attractions`.** A decklist's Attraction section (Moxfield and Archidekt export
   Attractions in their own section; MTGA-style text has no convention) becomes the field: a name per
