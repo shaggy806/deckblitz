@@ -152,6 +152,9 @@ const NO_TOKEN_PRINTING = new Set([
   // Selenia, the Cursed Heart's Selenia's Curse Aura: the card lists no token in the
   // Oracle snapshot's `all_parts` (checked 2026-11-12).
   "Selenia's Curse Token",
+  // Tetravus's 1/1 Tetravite: the card lists no token in the Oracle snapshot's `all_parts`,
+  // and the snapshot holds none of that name (checked 2026-11-13).
+  "Tetravite Token",
 ]);
 
 describe("token art", () => {
