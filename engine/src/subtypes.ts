@@ -83,6 +83,27 @@ export const BASIC_LAND_TYPE_COLORS: readonly (readonly [string, Color])[] = [
  * `choose-creature-type`'s `options` (Tideshaper Mystic). */
 export const BASIC_LAND_TYPE_CHOICES: readonly string[] = BASIC_LAND_TYPE_COLORS.map(([type]) => type);
 
+/** Every planeswalker type, as rule 205.3j lists them (Comprehensive Rules
+ * of 2026-09-25): the options of "choose a planeswalker type" — a card's
+ * `chooseOnEnter` (Deification). */
+export const PLANESWALKER_TYPES: readonly string[] = [
+  "Ajani", "Aminatou", "Angrath", "Arlinn", "Ashiok", "Bahamut", "Basri", "Bolas", "Calix", "Chandra", "Comet",
+  "Dack", "Dakkon", "Daretti", "Davriel", "Dellian", "Dihada", "Domri", "Dovin", "Ellywick", "Elminster",
+  "Elspeth", "Estrid", "Freyalise", "Garruk", "Gideon", "Grist", "Guff", "Huatli", "Jace", "Jared", "Jaya",
+  "Jeska", "Kaito", "Karn", "Kasmina", "Kaya", "Kiora", "Koth", "Liliana", "Lolth", "Lukka", "Minsc",
+  "Mordenkainen", "Nahiri", "Narset", "Niko", "Nissa", "Nixilis", "Oko", "Quintorius", "Ral", "Rowan",
+  "Saheeli", "Samut", "Sarkhan", "Serra", "Sivitri", "Sorin", "Szat", "Tamiyo", "Tasha", "Teferi", "Teyo",
+  "Tezzeret", "Tibalt", "Tyvar", "Ugin", "Urza", "Venser", "Vivien", "Vraska", "Vronos", "Will", "Windgrace",
+  "Wrenn", "Xenagos", "Yanggu", "Yanling", "Zariel",
+];
+
+const PLANESWALKER_TYPE_SET: ReadonlySet<string> = new Set(PLANESWALKER_TYPES);
+
+/** Whether `subtype` is one of rule 205.3j's planeswalker types. */
+export function isPlaneswalkerType(subtype: string): boolean {
+  return PLANESWALKER_TYPE_SET.has(subtype);
+}
+
 const CREATURE_TYPE_SET: ReadonlySet<string> = new Set(CREATURE_TYPES);
 const LAND_TYPE_SET: ReadonlySet<string> = new Set(LAND_TYPES);
 

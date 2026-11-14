@@ -6070,6 +6070,15 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   (`survivesZeroLoyalty` in `characteristics.ts`), so the rule applies again
   the moment the source leaves. A loyalty cost they can't pay is still
   refused (rule 606.6). The scaffolder reads it.
+- `damageLeavesOneLoyalty: true` — "if damage dealt to a planeswalker you
+  control of the chosen type would result in all loyalty counters on it being
+  removed, instead all but one of those counters are removed" (Deification,
+  with `condition` for "as long as you control a creature"): a replacement of
+  the loyalty the damage removes (rules 120.3c, 614.1a), never of the damage.
+  Read live as the damage is dealt (`damageLeavesOneLoyalty` in
+  `characteristics.ts`). "Choose a planeswalker type" is `chooseOnEnter:
+  PLANESWALKER_TYPES` (rule 205.3j's list, from `helpers.ts`), read back by
+  `ofChosenType`; the menu suggests the chooser's own planeswalkers' types.
 - `notLegendaryIfToken: true` — "[this] isn't legendary if it's a token"
   (Aeve, Progenitor Ooze): no legendary supertype while it's a token on the
   battlefield — for the legend rule and for every "legendary" filter

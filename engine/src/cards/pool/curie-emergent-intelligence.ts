@@ -1,7 +1,7 @@
 import type { TriggeredAbility } from "../../abilities.js";
 import { defineCard } from "../define.js";
 
-// EDHREC rank 4473.
+// EDHREC rank 9137.
 const DRAW_TEXT = "Whenever Curie deals combat damage to a player, draw cards equal to its base power.";
 const GAINED_TEXT = "Whenever this creature deals combat damage to a player, draw cards equal to its base power.";
 const COPY_TEXT = `{1}{U}, Exile another nontoken artifact creature you control: Curie becomes a copy of the exiled creature, except it has "${GAINED_TEXT}"`;

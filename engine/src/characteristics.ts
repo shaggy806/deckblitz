@@ -6799,10 +6799,29 @@ export function exemptFromLegendRule(state: GameState, registry: CardRegistry, i
  * again the moment the last such static stops.
  */
 export function survivesZeroLoyalty(state: GameState, registry: CardRegistry, id: ObjectId): boolean {
+  return loyaltyStaticReaches(state, registry, id, (ability) => ability.zeroLoyaltySurvives === true);
+}
+
+/**
+ * Whether a `damageLeavesOneLoyalty` static on the battlefield or an emblem
+ * reaches the planeswalker `id` now (Deification): damage that would remove
+ * every loyalty counter on it removes all but one instead (rule 614.1a).
+ * Read live, as the damage is dealt.
+ */
+export function damageLeavesOneLoyalty(state: GameState, registry: CardRegistry, id: ObjectId): boolean {
+  return loyaltyStaticReaches(state, registry, id, (ability) => ability.damageLeavesOneLoyalty === true);
+}
+
+function loyaltyStaticReaches(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+  has: (ability: StaticAbility) => boolean,
+): boolean {
   const target = state.objects[id];
   if (target === undefined || target.zone !== "battlefield") return false;
   const reaches = (source: GameObject, ability: StaticAbility): boolean =>
-    ability.zeroLoyaltySurvives === true &&
+    has(ability) &&
     (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition)) &&
     staticAffects(state, registry, ability.affects, source, target);
   for (const sourceId of state.zones.shared.battlefield) {

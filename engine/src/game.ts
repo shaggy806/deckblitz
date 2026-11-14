@@ -161,6 +161,7 @@ import {
   entersWithoutAbilities,
   exemptFromLegendRule,
   survivesZeroLoyalty,
+  damageLeavesOneLoyalty,
   hasAnyAbility,
   hasLostAbilities,
   hasKeywordOffBattlefield,
@@ -578,7 +579,7 @@ import type {
   OtherChoiceAsk,
   MeldedInfo,
 } from "./state.js";
-import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
+import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType, isPlaneswalkerType } from "./subtypes.js";
 import {
   anyNumberSlot,
   concatModeSpecs,
@@ -15212,6 +15213,10 @@ export class Game {
           options: becoming.chooseOnEnter,
           ...(count > 1 ? { prompt: chooseSeveralPrompt(count, 0) } : {}),
           ...(becoming.chooseOnEnterLook !== null ? { look: true as const } : {}),
+          // "Choose a planeswalker type" (Deification): a long menu, named.
+          ...(becoming.chooseOnEnter.length > 0 && becoming.chooseOnEnter.every(isPlaneswalkerType)
+            ? { prompt: "choose a planeswalker type" }
+            : {}),
         };
       }
       // Read ahead it will have on the battlefield (rules 614.12, 702.155b):
@@ -60163,28 +60168,30 @@ controlledBy,
     }
     if (recipientTypes.includes("planeswalker") && !recipientTypes.includes("creature")) {
       const had = object.counters.loyalty ?? 0;
-      object.counters.loyalty = had - amount;
+      const removing = this.loyaltyRemovedByDamage(target.object, had, amount);
+      object.counters.loyalty = had - removing;
       this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
       this.emit({
         type: "loyalty-changed",
         object: target.object,
-        delta: -amount,
+        delta: -removing,
         loyalty: object.counters.loyalty,
       });
-      this.emitLoyaltyRemovedByDamage(target.object, had, amount);
+      this.emitLoyaltyRemovedByDamage(target.object, had, removing);
       this.applyLifelink(source, amount, sourceLastKnown);
       return amount;
     }
     if (recipientTypes.includes("planeswalker")) {
       const had = object.counters.loyalty ?? 0;
-      object.counters.loyalty = had - amount;
+      const removing = this.loyaltyRemovedByDamage(target.object, had, amount);
+      object.counters.loyalty = had - removing;
       this.emit({
         type: "loyalty-changed",
         object: target.object,
-        delta: -amount,
+        delta: -removing,
         loyalty: object.counters.loyalty,
       });
-      this.emitLoyaltyRemovedByDamage(target.object, had, amount);
+      this.emitLoyaltyRemovedByDamage(target.object, had, removing);
     }
     // From a source with wither or infect, damage to a creature isn't marked:
     // the source's controller puts that many -1/-1 counters on it instead
@@ -60303,6 +60310,15 @@ controlledBy,
    * 306.8) — as many as it had, at most — so a `counters-removed` trigger
    * sees them go (Chandra, Fire Artisan), once per simultaneous damage
    * event (`withDamageBatch`). */
+  /** How many loyalty counters `amount` damage to the planeswalker `object`,
+   * with `had` of them, removes (rule 120.3c): that many — or, where it would
+   * remove every one and a `damageLeavesOneLoyalty` static reaches it
+   * (Deification), all but one instead (614.1a). */
+  private loyaltyRemovedByDamage(object: ObjectId, had: number, amount: number): number {
+    if (had > 0 && amount >= had && damageLeavesOneLoyalty(this.state, this.registry, object)) return had - 1;
+    return amount;
+  }
+
   private emitLoyaltyRemovedByDamage(object: ObjectId, had: number, amount: number): void {
     const removed = Math.min(amount, Math.max(0, had));
     if (removed <= 0) return;

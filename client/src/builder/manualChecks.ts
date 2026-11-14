@@ -12670,4 +12670,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true },
     }),
   ),
+  // --- A planeswalker type chosen (2026-11-14) ------------------------------------
+  preset(
+    'Deification: choosing a planeswalker type',
+    board({
+      you: { bf: ['Plains*2', 'Jace Beleren', 'Grizzly Bears'], hand: ['Deification'] },
+      // A full table: the menu beside four quadrants.
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

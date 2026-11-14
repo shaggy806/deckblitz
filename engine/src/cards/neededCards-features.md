@@ -322,6 +322,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Damage that leaves one loyalty counter, and a planeswalker type chosen — built 2026-11-14
+
+The keys `replacement:damage-leaves-one-loyalty-counter` and `effect:choose-planeswalker-type`.
+`StaticAbility.damageLeavesOneLoyalty` (read by `damageLeavesOneLoyalty`, beside Sanctum Lurker's
+`survivesZeroLoyalty`, through one `loyaltyStaticReaches`): `Game.loyaltyRemovedByDamage` removes
+all but one counter where damage would remove every one (rules 120.3c, 614.1a); the damage is all
+dealt. The choice is the existing `chooseOnEnter` menu over `PLANESWALKER_TYPES` (rule 205.3j, in
+`subtypes.ts`), prompted "choose a planeswalker type", its offer suggesting the chooser's own
+planeswalkers' types (`suggestedPlaneswalkerTypes`) — what a bot names. No new decision.
+Deification (rank 9180). `test/damage-leaves-one-loyalty.test.ts`.
+
 ### Base power as an amount, and an exiled permanent as a cost — built 2026-11-14
 
 The keys `effect:base-power-amount` and `cost:exile-another-permanent-you-control`. The amount

@@ -8411,3 +8411,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Memories Returning: you and an opponent take turns picking from the five revealed
 - **Do:** Cast Memories Returning. Take Shivan Dragon. As Bob, put Lightning Bolt on the bottom. Back as Alice, take Craw Wurm. As Bob, put Grizzly Bears on the bottom.
 - **Expect:** Bob's popups read "Put one of them on the bottom of its owner's library" over the four cards you left, then the two left after your second pick. The History reads "Bob puts Lightning Bolt on the bottom of a library" (not "takes"). Your hand ends with Shivan Dragon, Craw Wurm and Hill Giant.
+
+## A planeswalker type chosen (2026-11-14)
+
+### Deification: choosing a planeswalker type
+- **Do:** Cast Deification and click Jace.
+- **Expect:** The banner reads "Deification — choose a planeswalker type" with a button for every planeswalker type, Ajani to Zariel, all fitting on screen. After Jace, Jace Beleren has hexproof.

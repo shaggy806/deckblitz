@@ -2702,6 +2702,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly zeroLoyaltySurvives?: true;
   /**
+   * "If damage dealt to a planeswalker you control of the chosen type would
+   * result in all loyalty counters on it being removed, instead all but one
+   * of those counters are removed" (Deification; `affects` the planeswalkers
+   * it reaches, `condition` its "as long as you control a creature"): a
+   * replacement (rule 614.1a) of what the damage does (120.3c), not of the
+   * damage — all of it is still dealt, lifelink and "whenever … deals
+   * damage" included (the ruling). Read by `damageLeavesOneLoyalty`.
+   */
+  readonly damageLeavesOneLoyalty?: true;
+  /**
    * "[This] isn't legendary if it's a token" (Aeve, Progenitor Ooze): a
    * type-changing effect on itself (layer 4), so while this permanent is a
    * token on the battlefield it has no legendary supertype — not for the

@@ -15,6 +15,7 @@ import { computeCharacteristics } from "../characteristics.js";
 import { CREATURE_TYPES } from "../creature-types.js";
 import type { PlayerId } from "../primitives.js";
 import { printedCardName } from "../state.js";
+import { isPlaneswalkerType } from "../subtypes.js";
 import type { GameState } from "../state.js";
 import { defineDecision } from "./define.js";
 import { subsetOf } from "./shared/picks.js";
@@ -69,6 +70,47 @@ export function suggestedCreatureTypes(
     .map(([t]) => t);
 }
 
+/**
+ * The planeswalker types (rule 205.3j) of `player`'s own planeswalkers — on
+ * the battlefield under their control first, then their cards in hand,
+ * library, graveyard and the command zone — most common first (ties
+ * alphabetical). What a "choose a planeswalker type" menu suggests, and a
+ * bot names. Computed into the offer, as {@link suggestedCreatureTypes} is,
+ * since it reads the chooser's library.
+ */
+export function suggestedPlaneswalkerTypes(
+  state: Readonly<GameState>,
+  registry: CardRegistry,
+  player: PlayerId,
+): string[] {
+  const counts = new Map<string, number>();
+  const tally = (types: readonly string[], weight: number): void => {
+    for (const t of types) if (isPlaneswalkerType(t)) counts.set(t, (counts.get(t) ?? 0) + weight);
+  };
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object.controller !== player) continue;
+    const c = computeCharacteristics(state, registry, id);
+    // One already in play counts for more than one still in the library.
+    if (c.types.includes("planeswalker")) tally(c.subtypes, 100);
+  }
+  const own = state.zones.perPlayer[player];
+  const cards = [
+    ...own.hand,
+    ...own.library,
+    ...own.graveyard,
+    ...state.zones.shared.command.filter((id) => state.objects[id].owner === player),
+  ];
+  for (const id of cards) {
+    const def = registry.get(printedCardName(state.objects[id]));
+    if (def.types.includes("planeswalker")) tally(def.subtypes, 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, SUGGESTED_CREATURE_TYPES)
+    .map(([t]) => t);
+}
+
 export const chooseCreatureType = defineDecision({
   kind: "choose-creature-type",
 
@@ -86,9 +128,13 @@ export const chooseCreatureType = defineDecision({
       // Only a catalog choice needs suggestions; a short fixed list is
       // already its own menu. Never one it leaves out ("other than Wall" —
       // Imagecrafter): a bot answers with a suggestion.
+      // A menu of planeswalker types (Deification) is a long one too: the
+      // chooser's own planeswalkers' types lead it.
       suggested: awaiting.catalog
         ? suggestedCreatureTypes(ctx.state, ctx.registry, player).filter((t) => awaiting.options.includes(t))
-        : [],
+        : awaiting.options.length > 0 && awaiting.options.every(isPlaneswalkerType)
+          ? suggestedPlaneswalkerTypes(ctx.state, ctx.registry, player)
+          : [],
     },
   ],
 

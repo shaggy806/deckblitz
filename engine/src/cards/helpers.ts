@@ -17,7 +17,7 @@ import { defineCard, type CardDefinition, type Keyword, type StaticAbility, type
 export { CHOSEN_CREATURE_TYPE, FIRST_CHOSEN_TYPE } from "../effects.js";
 /** "Choose a basic land type": the five, for a `chooseOnEnter` or a
  * `choose-creature-type`'s `options`. */
-export { BASIC_LAND_TYPE_CHOICES, LAND_TYPES } from "../subtypes.js";
+export { BASIC_LAND_TYPE_CHOICES, LAND_TYPES, PLANESWALKER_TYPES } from "../subtypes.js";
 /** "Choose odd or even": the two words a filter's `manaValueParity` or
  * `powerParity` reads, for a `chooseOnEnter` or a `choose-creature-type`'s
  * `options`. */
