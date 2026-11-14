@@ -2742,8 +2742,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   modifier, `abilitiesCantBeActivated`, ended as that turn begins). "Detain up
   to two target creatures your opponents control" is two optional slots, the
   second `other` than the first, and a `sequence` of two `detain`s (Azorius
-  Justiciar). Not yet: "detain each …" with no target (Lavinia of the Tenth).
-  `unleash-detain.test.ts`.
+  Justiciar). "Detain each …" with no target is a `for-each-permanent` with
+  `simultaneous` around `{ kind: "detain", target: 0 }` (Lavinia of the
+  Tenth). `unleash-detain.test.ts`, `detain-all.test.ts`.
 - **`goad { target | who | filter, forGame? }`** — goad (rule 701.15): until
   the effect's controller's next turn, each creature goaded attacks each
   combat if able and attacks a player other than them if able. `target` is a
