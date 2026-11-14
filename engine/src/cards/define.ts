@@ -2666,6 +2666,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly legendRuleOff?: true;
   /**
+   * "Planeswalkers you control aren't put into their owners' graveyards for
+   * having 0 loyalty" (Sanctum Lurker; `affects` the planeswalkers it
+   * reaches): the state-based action of rule 704.5i passes over them, as
+   * `legendRuleOff` does 704.5j's. Nothing else changes: damage still
+   * removes their loyalty counters, and a loyalty ability that costs more
+   * loyalty than they have still can't be activated (rule 606.6). Read by
+   * `survivesZeroLoyalty`.
+   */
+  readonly zeroLoyaltySurvives?: true;
+  /**
    * "[This] isn't legendary if it's a token" (Aeve, Progenitor Ooze): a
    * type-changing effect on itself (layer 4), so while this permanent is a
    * token on the battlefield it has no legendary supertype — not for the

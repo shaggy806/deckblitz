@@ -5985,6 +5985,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   rule applies again at once. The copy-exception form, a copy that *has* the
   ability (Sakashima's "it has Sakashima's other abilities"), is
   `CopyExceptions.legendRuleOff` with the same `affects`.
+- `zeroLoyaltySurvives: true` — "planeswalkers you control aren't put into
+  their owners' graveyards for having 0 loyalty" (Sanctum Lurker; `affects:
+  { scope: "filter", filter: { type: "planeswalker", controlledBy: "you" }
+  }`): rule 704.5i passes over the permanents it reaches. Read live
+  (`survivesZeroLoyalty` in `characteristics.ts`), so the rule applies again
+  the moment the source leaves. A loyalty cost they can't pay is still
+  refused (rule 606.6). The scaffolder reads it.
 - `notLegendaryIfToken: true` — "[this] isn't legendary if it's a token"
   (Aeve, Progenitor Ooze): no legendary supertype while it's a token on the
   battlefield — for the legend rule and for every "legendary" filter

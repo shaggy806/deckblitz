@@ -6707,6 +6707,35 @@ export function exemptFromLegendRule(state: GameState, registry: CardRegistry, i
 }
 
 /**
+ * Whether rule 704.5i (a planeswalker with 0 loyalty goes to its owner's
+ * graveyard) passes over the permanent `id`: a `zeroLoyaltySurvives` static
+ * on the battlefield or an emblem reaches it — "planeswalkers you control
+ * aren't put into their owners' graveyards for having 0 loyalty" (Sanctum
+ * Lurker). Read live, as {@link exemptFromLegendRule} is: the rule applies
+ * again the moment the last such static stops.
+ */
+export function survivesZeroLoyalty(state: GameState, registry: CardRegistry, id: ObjectId): boolean {
+  const target = state.objects[id];
+  if (target === undefined || target.zone !== "battlefield") return false;
+  const reaches = (source: GameObject, ability: StaticAbility): boolean =>
+    ability.zeroLoyaltySurvives === true &&
+    (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition)) &&
+    staticAffects(state, registry, ability.affects, source, target);
+  for (const sourceId of state.zones.shared.battlefield) {
+    const source = state.objects[sourceId];
+    if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+    if (abilitiesLostAt(state, registry, source) !== null) continue;
+    for (const ability of registry.get(rulesTextName(source)).static) {
+      if (reaches(source, ability)) return true;
+    }
+  }
+  for (const { source, ability } of emblemStatics(state)) {
+    if (reaches(source, ability)) return true;
+  }
+  return false;
+}
+
+/**
  * How much combat damage a creature with these characteristics assigns (rule
  * 510.1a): its power, or its toughness under a `combatDamageByToughness`
  * static (Doran, the Siege Tower). **Every** place that sizes combat damage

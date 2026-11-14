@@ -159,6 +159,7 @@ import {
   enteringKeywordInstances,
   entersWithoutAbilities,
   exemptFromLegendRule,
+  survivesZeroLoyalty,
   hasAnyAbility,
   hasLostAbilities,
   hasKeywordOffBattlefield,
@@ -61445,12 +61446,13 @@ controlledBy,
     }
 
     // A planeswalker with 0 loyalty is put into its owner's graveyard
-    // (rule 704.5i).
+    // (rule 704.5i) — unless a static says it isn't (Sanctum Lurker).
     for (const id of battlefield) {
       if (!computeCharacteristics(this.state, this.registry, id).types.includes("planeswalker")) {
         continue;
       }
       if ((this.state.objects[id].counters.loyalty ?? 0) > 0) continue;
+      if (survivesZeroLoyalty(this.state, this.registry, id)) continue;
       add(id, { type: "permanent-destroyed", object: id, reason: "0 loyalty" });
     }
 

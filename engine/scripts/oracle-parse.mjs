@@ -21270,6 +21270,10 @@ function parseStatic(line, text) {
   if (line === 'The "legend rule" doesn\'t apply to permanents you control.') {
     return { affects: { scope: "filter", filter: { controlledBy: "you" } }, legendRuleOff: true, text };
   }
+  // Sanctum Lurker (rule 704.5i).
+  if (line === "Planeswalkers you control aren't put into their owners' graveyards for having 0 loyalty.") {
+    return { affects: { scope: "filter", filter: { type: "planeswalker", controlledBy: "you" } }, zeroLoyaltySurvives: true, text };
+  }
   if (line === "Each legendary creature you control gets +1/+1.") {
     return { affects: { scope: "filter", filter: { type: "creature", supertype: "legendary", controlledBy: "you" } }, grantPt: [1, 1], text };
   }

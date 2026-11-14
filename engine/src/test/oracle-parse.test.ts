@@ -16561,6 +16561,18 @@ describe("mana that adds counters to what it casts", () => {
     expect(attendant.activated[0].effect.spellEntersWith).toEqual({ spell: { type: "creature", notSubtypes: ["Human"] }, counter: "+1/+1", amount: 1 });
   });
 
+  it("Sanctum Lurker's 0-loyalty exemption", () => {
+    const face = read(
+      "Creature — Horror",
+      "Planeswalkers you control aren't put into their owners' graveyards for having 0 loyalty.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "planeswalker", controlledBy: "you" } },
+      zeroLoyaltySurvives: true,
+    });
+  });
+
   it("The Valeyard", () => {
     const face = read(
       "Legendary Creature — Time Lord Noble",
