@@ -37883,6 +37883,24 @@ export class Game {
           leftover: "stay",
         };
       },
+      lookAtCards: (owner, cards) => {
+        // Extract Brain's "look at those cards": those of the hand alone, a
+        // look as `look-at-hand`'s is (rule 400.2: hidden from everyone else).
+        const held = cards.filter((id) => this.state.objects[id]?.zone === "hand" && this.state.objects[id]?.owner === owner);
+        if (held.length === 0) return;
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player: controller,
+          ...(controller !== owner ? { forPlayer: owner } : {}),
+          prompt: `Looking at the ${held.length === 1 ? "card" : `${held.length} cards`} chosen from ${controller === owner ? "your" : "that player's"} hand`,
+          ids: held,
+          eligible: [],
+          min: 0,
+          max: 0,
+          destination: "discard",
+          leftover: "stay",
+        };
+      },
       lookAtLibraryTop: (owner, count) => {
         const top = (this.state.zones.perPlayer[owner]?.library ?? []).slice(0, count);
         if (top.length === 0 || this.state.players[owner]?.hasLost !== false) return;
@@ -42995,6 +43013,9 @@ controlledBy,
     // Choosing cards in your own hand for `then` to act on, and none can be
     // (Sylvan Library with no card drawn this turn — its ruling).
     if (destination === "stay" && zone === "hand" && eligible.length === 0) return;
+    // Nor when none may be: "chooses X cards from their hand" with X 0
+    // (Extract Brain) chooses nothing, unasked.
+    if (destination === "stay" && zone === "hand" && most <= 0) return;
     // A graveyard is public and nothing in it may be chosen: nothing to see and
     // nothing to do (Breach the Multiverse's "for each player", a graveyard with
     // no creature card; Cemetery Desecrator's "another", its own the only card).

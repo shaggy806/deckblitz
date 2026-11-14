@@ -12530,6 +12530,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Extract Brain: Bob chooses two cards, you look at them and cast one free',
+    board({
+      you: { bf: ['Island*3', 'Swamp'], hand: ['Extract Brain'] },
+      opp: { human: true, hand: ['Lightning Bolt', 'Island', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Extract Brain: at four players, only the target opponent chooses',
+    board({
+      you: { bf: ['Island*2', 'Swamp'], hand: ['Extract Brain'] },
+      opp: [{ hand: ['Grizzly Bears'] }, { hand: ['Lightning Bolt'] }, { hand: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
     'God-Eternal Kefnet: at four players, the copy is cast as it resolves',
     board({
       you: {

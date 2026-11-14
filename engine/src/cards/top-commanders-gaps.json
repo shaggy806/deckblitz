@@ -12,6 +12,7 @@
     "filter:player-other-than-owner",
     "filter:attached-to-enchanted-player",
     "effect:target-per-graveyard-with-match",
+    "effect:opponent-picks-n-from-own-hand-you-may-cast",
     "effect:choose-per-player-destroy-rest",
     "effect:choose-party-sacrifice-rest",
     "effect:player-cant-attack-you-this-turn",

@@ -8337,6 +8337,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Stick Together. Click Anointer Priest and Confirm.
 - **Expect:** Your Grizzly Bears is sacrificed. Bob keeps his Ash Zealot and loses his Hill Giant, Carol keeps one Ana Disciple and loses the other, and Dave, with no party creature, loses his Grizzly Bears.
 
+### Extract Brain: Bob chooses two cards, you look at them and cast one free
+- **Do:** Cast Extract Brain with X 2, targeting Bob. As Bob, choose Lightning Bolt and Island. As yourself, close the look, then cast Lightning Bolt at Bob.
+- **Expect:** Bob's popup offers his whole hand. Yours is titled "Looking at the 2 cards chosen from that player's hand" and shows only Lightning Bolt and Island, with a Done button; then "Cast Lightning Bolt without paying its mana cost?". Bob goes to 37, and the log says only "Bob chooses a card, a card".
+
+### Extract Brain: at four players, only the target opponent chooses
+- **Do:** Cast Extract Brain with X 1, targeting Carol, and close the look; then cast Lightning Bolt at Carol.
+- **Expect:** Only Carol chooses ("Carol chooses a card"); you look at her Lightning Bolt and cast it free. Carol goes to 37; Bob's and Dave's hands are never asked about.
+
 ### God-Eternal Kefnet: at four players, the copy is cast as it resolves
 - **Do:** Cast Divination. Reveal the Divination you drew, then cast the copy.
 - **Expect:** As at two players: the copy is offered as Kefnet's trigger resolves, cast for one Island, and you end with 4 cards in hand. Bob, Carol and Dave are never asked anything.

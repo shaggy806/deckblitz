@@ -5135,6 +5135,12 @@ export type EffectSpec =
          * still in their hand — the Mad Wizard's Lair's "draw three cards
          * and reveal them. You may cast one of them". */
         | "drawn-this-way"
+        /** The cards chosen so far in this resolution, still in a hand —
+         * Extract Brain's "target opponent chooses X cards from their hand.
+         * Look at those cards. You may cast a spell **from among them**" (a
+         * `look-and-choose` of theirs with `destination: "stay"`).
+         * Controlled by the caster, owned as before (rule 108.3). */
+        | "chosen-this-way"
         /** The cards this resolution had a player discard, still where the
          * discard put them if that's a public zone — their graveyard, or the
          * exile madness put one in instead (rule 702.35a), since an effect
@@ -5761,6 +5767,11 @@ export type EffectSpec =
       /** A slot, or any {@link PlayerRef}: Walker of Secret Ways' "look at that
        * player's hand" is `"trigger-player"`. */
       readonly target: number | PlayerRef;
+      /** Only the cards of that hand chosen this way so far: Extract Brain's
+       * "target opponent chooses X cards from their hand. **Look at those
+       * cards**" (a `look-and-choose` of theirs with `destination: "stay"`
+       * first). None chosen, nothing to look at. */
+      readonly only?: "chosen-this-way";
     }
   | {
       /** "**Look at the top card of target player's library**" (Mishra's
@@ -11959,6 +11970,9 @@ export interface EffectApi {
   /** The effect's controller looks at the top `count` cards of `owner`'s
    * library (as many as there are) — a look they close, as `look-at-hand`'s is. */
   lookAtLibraryTop(owner: PlayerId, count: number): void;
+  /** The effect's controller looks at `cards`, in `owner`'s hand — a look
+   * they close, as `look-at-hand`'s is (`only: "chosen-this-way"`). */
+  lookAtCards(owner: PlayerId, cards: readonly ObjectId[]): void;
   /** The cards in `owner`'s graveyard matching `filter`, read from the
    * effect's controller's side, in graveyard order. */
   graveyardMatching(owner: PlayerId, filter: CardFilter): readonly ObjectId[];
@@ -15260,6 +15274,16 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.thisWay("milled", undefined, undefined).map((entry) => entry.object);
     } else if (from === "drawn-this-way") {
       cards = ctx.cardsDrawnThisWay();
+    } else if (from === "chosen-this-way") {
+      // Still the same cards in that hand (rule 400.7).
+      cards = [
+        ...new Set(
+          ctx
+            .thisWay("chosen")
+            .filter((entry) => ctx.cardsIn(entry.player, "hand").includes(entry.object))
+            .map((entry) => entry.object),
+        ),
+      ];
     } else if (from === "discarded-this-way") {
       cards = ctx.cardsDiscardedThisWay();
     } else if (from === "source-exiled-this-way") {
@@ -19212,6 +19236,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       } else {
         const player = resolvePlayerRef(spec.target, ctx);
         target = player === undefined ? undefined : { kind: "player", player };
+      }
+      if (target?.kind === "player" && spec.only === "chosen-this-way") {
+        const chosen = new Set(ctx.thisWay("chosen").map((entry) => entry.object));
+        const cards = ctx.cardsIn(target.player, "hand").filter((id) => chosen.has(id));
+        if (cards.length > 0) ctx.lookAtCards(target.player, cards);
+        return;
       }
       if (target !== undefined) ctx.discardChosen(target, undefined, true, true, 0);
       return;
