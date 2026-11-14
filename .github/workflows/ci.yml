@@ -9,13 +9,14 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# Build once, then the checks side by side, then the deploy bundle. One job
+# doing all of it in a row took about 13 minutes (2026-11-14: build 87 s,
+# typecheck 82 s, the three suites 355 s, the fuzzers 228 s); a runner has
+# four cores and the checks don't share anything but the build.
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-    # `contents: write` only for publishing the deploy bundle (last step).
-    permissions:
-      contents: write
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -23,10 +24,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run lint
       # In workspace order: server and client resolve engine and protocol
-      # through their built dist/, so everything below needs this first.
+      # through their built dist/, so everything after needs this first.
       # The production server's address goes into the client here, so this
-      # build is the one the live site runs (the deploy bundle, last step).
+      # build is the one the live site runs (the deploy bundle, last job).
       - run: npm run build
         env:
           VITE_SERVER_URL: wss://ws.deckblitz.net
@@ -38,29 +40,81 @@ jobs:
           git diff --exit-code
           untracked=$(git ls-files --others --exclude-standard)
           if [ -n "$untracked" ]; then echo "Uncommitted new files:"; echo "$untracked"; exit 1; fi
-      - run: npm run typecheck
-      - run: npm run lint
-      - run: npm test
-      # The fuzzer: random play until legalActions offers something dispatch
-      # refuses, or a game runs away. Exits non-zero naming the seed. The seeds
-      # are fixed (1..N), so a red run replays with --seed; 60 two-player games
-      # put about seven in eight of the pool's deckable cards in some deck,
-      # where 30 reached about three quarters (`--coverage` says how many).
-      - name: Fuzz, 2 players
-        run: node engine/scripts/random-demo.mjs --games 60
-      # A long game stops at the fuzzer's turn cap and passes; its time limit is
-      # there to catch a hang.
-      - name: Fuzz, 4 players
-        run: node engine/scripts/random-demo.mjs --games 8 --players 4
-      # The deploy bundle: what this green build of main made, for the live
-      # box to install without compiling anything (the engine's type-check
-      # needs more memory than the 2 GB box has — DEPLOYMENT.md). The four
-      # dist folders, JavaScript only (no declarations, source maps, build
-      # info or the engine's raw shard emit: nothing compiles there), as `deploy-<sha>.tar.gz` with its checksum on the
-      # rolling `deploy` pre-release, the newest ten kept. Only after every
-      # check above has passed, and only for a push to main.
+      # One file, so the upload isn't tens of thousands of small ones.
+      - run: tar -cf dist.tar engine/dist protocol/dist server/dist client/dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist.tar
+          retention-days: 1
+          compression-level: 1
+
+  check:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: typecheck
+            run: npm run typecheck
+          # The engine suite is the long pole (~5 minutes in one job), split
+          # by file across two.
+          - name: engine tests 1/2
+            run: npm run gen:cards -w engine && npm test -w engine -- --shard=1/2
+          - name: engine tests 2/2
+            run: npm run gen:cards -w engine && npm test -w engine -- --shard=2/2
+          - name: server and client tests
+            run: npm test -w server && npm test -w client
+          # The fuzzer: random play until legalActions offers something dispatch
+          # refuses, or a game runs away. Exits non-zero naming the seed. The seeds
+          # are fixed (1..N), so a red run replays with --seed; 60 two-player games
+          # put about seven in eight of the pool's deckable cards in some deck,
+          # where 30 reached about three quarters (`--coverage` says how many).
+          - name: fuzz, 2 players
+            run: node engine/scripts/random-demo.mjs --games 60
+          # A long game stops at the fuzzer's turn cap and passes; its time limit
+          # is there to catch a hang.
+          - name: fuzz, 4 players
+            run: node engine/scripts/random-demo.mjs --games 8 --players 4
+    name: ${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+      - run: tar -xf dist.tar && rm dist.tar
+      - run: ${{ matrix.run }}
+
+  # The deploy bundle: what this green build of main made, for the live
+  # box to install without compiling anything (the engine's type-check
+  # needs more memory than the 2 GB box has — DEPLOYMENT.md). The four
+  # dist folders, JavaScript only (no declarations, source maps, build
+  # info or the engine's raw shard emit: nothing compiles there), as
+  # `deploy-<sha>.tar.gz` with its checksum on the rolling `deploy`
+  # pre-release, the newest ten kept. Only after every check has passed, and
+  # only for a push to main.
+  publish:
+    needs: [build, check]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # `contents: write` only for publishing the deploy bundle.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+      - run: tar -xf dist.tar && rm dist.tar
       - name: Publish the deploy bundle
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

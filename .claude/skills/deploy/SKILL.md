@@ -26,23 +26,21 @@ DEPLOYMENT.md, "Updating the deployed code"). Check it's there for `origin/main`
 ```bash
 sha=$(git rev-parse origin/main)
 curl -s -o /dev/null -w "bundle: %{http_code}\n" -L "https://github.com/shaggy806/deckblitz/releases/download/deploy/deploy-$sha.tar.gz.sha256"
-curl -s "https://api.github.com/repos/shaggy806/deckblitz/actions/runs?head_sha=$sha" | node -e 'const r=JSON.parse(require("fs").readFileSync(0,"utf8")).workflow_runs?.[0]; console.log(r ? `CI: ${r.status} ${r.conclusion ?? ""}` : "CI: no run")'
+curl -s "https://api.github.com/repos/shaggy806/deckblitz/actions/runs?head_sha=$sha" | node -e 'const runs=JSON.parse(require("fs").readFileSync(0,"utf8")).workflow_runs ?? []; for (const w of ["CI","E2E"]) { const r=runs.find((x)=>x.name===w && x.event==="push"); console.log(r ? `${w}: ${r.status} ${r.conclusion ?? ""}` : `${w}: no run`) }'
 ```
 
 `bundle: 200` is ready. Otherwise: CI `in_progress`/`queued` — wait for it (a background loop
 re-checking every minute, up to 25 minutes) and say so; CI `completed failure` — there is no
 bundle, so say what failed (the run's page, github.com/shaggy806/deckblitz/actions) and stop.
 
-**And the whole Playwright suite should have passed.** A push runs only the quick set; the tutorials
-and the larger screens run in `test:e2e:full`, daily on GitHub. See the last scheduled run:
-
-```bash
-gh run list --workflow=e2e.yml --event schedule --limit 1 --json conclusion,headSha,createdAt
-```
-
-If `client/` changed since that run's commit, or it didn't pass, run `npm run test:e2e:full -w client`
-before deploying (about 18 minutes; build `engine`, `protocol` and `server` first). A failure stops
-the deploy unless it's a load timeout that passes when re-run alone.
+**And the whole Playwright suite should have passed.** Since 2026-11-14 a push to `main` runs
+all of it on GitHub (`test:e2e:full`, the tutorials and the larger screens included), in the E2E
+workflow beside CI, about 17 minutes, twice (dev-rooms on the main thread and on a worker). E2E
+`completed success` is that. `in_progress`/`queued`: wait for it as for CI. `completed failure`:
+open the run (github.com/shaggy806/deckblitz/actions) and see what failed; a failure stops the
+deploy unless it's a load timeout that passes when re-run alone (`gh run rerun <id> --failed`).
+Only with no E2E run for the commit at all, run `npm run test:e2e:full -w client` here first
+(about 18 minutes; build `engine`, `protocol` and `server` first).
 
 ## 2. Reach the box, and see who's playing
 

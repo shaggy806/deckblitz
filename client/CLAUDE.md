@@ -56,4 +56,4 @@ The full text of each rule, with the bug that prompted it, is in `docs/architect
 
 (From the repo root with `-w client`.) `dev` (needs a room server on `ws://<host>:4000`: use the
 `dev-up` skill), `build`, `lint` (oxlint), `test` (vitest unit tests, `src/**/*.test.ts`), `test:e2e` (the quick set, about 11 minutes: no tutorials or site tour, 1366x768 only; build `engine`, `protocol` and `server`
-first), `test:e2e:full` (everything, about 18 minutes; GitHub runs it daily).
+first), `test:e2e:full` (everything, about 18 minutes; GitHub runs it on every push to `main` and daily, the quick set on a pull request).
