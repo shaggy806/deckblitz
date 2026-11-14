@@ -496,6 +496,10 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   `"transformed"` record (B308) is "if you do" / "when you do" after a
   convert, empty when rule 701.28e stops one. Ratchet, Field Medic // Ratchet,
   Rescue Racer. `test/converted-this-way.test.ts`.
+- `stat:spells-cast-before-trigger-spell` — the `castThisTurn` amount's `before:
+  "trigger-spell"`, over `CastSpellRecord.seq` (each cast's place in the game's
+  event order, across players), so a spell cast in response doesn't change it.
+  Sentinel Tower. `test/cast-before-trigger-spell.test.ts`.
 - `condition:filter-fought-this-turn` — the journal kind and word `fought` (each
   fighter once a fight, recorded from `creature-fought`; rule 701.14a), read by a
   `journaled` clause; the `fights` trigger row is now `journaled`, so it takes

@@ -2422,6 +2422,9 @@ export interface CastSpellRecord {
    * live spell: "if a spell was warped this turn" (void, rule 702.185c) is
    * `{ castVia: "warp" }` over every player's records. */
   readonly spell: LastKnownInfo;
+  /** The game's event count as it was cast: which of two players' spells came
+   * first (Sentinel Tower's "spells cast **before that spell** this turn"). */
+  readonly seq?: number;
 }
 
 /** A `choose-permanents` effect's resolution, for its `then`, which runs once

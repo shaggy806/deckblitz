@@ -1004,13 +1004,16 @@ countPlayers: "each-player", where: { kind: "player-compare", stat: {
 controls: { type: "land" } }, compare: "fewer", than: "that-player" } }`,
 "each graveyard with seven or more cards" an `of-player` over
 `cards-in-graveyard`),
-`{ castThisTurn: CardFilter, who?, greatest?: "mana-value", total?: "mana-value", other? }` (the spells `who`
+`{ castThisTurn: CardFilter, who?, greatest?: "mana-value", total?: "mana-value", other?, before?: "trigger-spell" }` (the spells `who`
 — you by default — cast this turn that match, as they were cast: how many, or
 the greatest mana value among them, {X} counted — Rootha, Mastering the
 Moment's "the greatest mana value among instant and sorcery spells you've cast
 this turn" — or the sum; `other` leaves out the spell reading it: Call Forth the
 Tempest's "the total mana value of other spells you've cast this turn" is `{
-castThisTurn: {}, total: "mana-value", other: true }`),
+castThisTurn: {}, total: "mana-value", other: true }`; `before: "trigger-spell"` keeps
+the spells cast ahead of the one whose casting fired the ability, in the order
+they were cast by anyone — Sentinel Tower's "1 plus the number of instant and
+sorcery spells cast before that spell this turn" with `who: "each-player"`),
 `{ countersPutThisTurn: { by?, counter?, onType?, onYours? } }` (counters
 put on permanents this turn, each read as it went on, gone or not. `by` is who put
 them: `"you"` by default, the controller of the effect or the permanent's own

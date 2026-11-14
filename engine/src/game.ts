@@ -38395,9 +38395,24 @@ export class Game {
         // card cast twice is two spells, rule 400.7). A copy has no record, so
         // the spell it copies is one of its "other spells".
         const own = read?.other === true ? records.findLastIndex(({ id }) => id === source) : -1;
+        // "Cast before that spell this turn" (Sentinel Tower): by anyone,
+        // ahead of the spell whose casting fired this — its own record, in
+        // the stint it was cast in.
+        let before: number | undefined;
+        if (read?.before === "trigger-spell" && triggerObject !== undefined) {
+          for (const p of this.state.turnOrder) {
+            for (const r of this.state.players[p]?.spellsCastThisTurnAs ?? []) {
+              if (r.id === triggerObject && (refs.triggerSpell === undefined || r.spell.zoneChangeCount === refs.triggerSpell)) {
+                before = r.seq;
+              }
+            }
+          }
+        }
         const cast = records.filter(
-          ({ id, spell }, index) =>
-            index !== own && matchesFilter(this.state, this.registry, id, filter, { you: controller, snapshot: spell }),
+          ({ id, spell, seq }, index) =>
+            index !== own &&
+            (before === undefined || (seq !== undefined && seq < before)) &&
+            matchesFilter(this.state, this.registry, id, filter, { you: controller, snapshot: spell }),
         );
         if (read?.total === "mana-value") return cast.reduce((n, { spell }) => n + spell.manaValue, 0);
         return read?.greatest === undefined ? cast.length : cast.reduce((n, { spell }) => Math.max(n, spell.manaValue), 0);
@@ -59148,6 +59163,7 @@ controlledBy,
         manaValue: this.manaValueOnStack(this.state.objects[id]),
         entry: { from: castFrom, cast: { by: caster, from: castFrom, ...(via !== undefined ? { via } : {}) } },
       },
+      seq: this.state.eventSeq,
     };
   }
 

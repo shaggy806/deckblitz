@@ -991,13 +991,18 @@ export type EffectAmount =
    * `total: "mana-value"` the sum of them. `other` leaves out the spell this is
    * reading from: Call Forth the Tempest's "the total mana value of other spells
    * you've cast this turn" is `{ castThisTurn: {}, total: "mana-value", other:
-   * true }`. 0 with none. */
+   * true }`. `before: "trigger-spell"` keeps only the spells cast ahead of
+   * the one whose casting fired this ability (`CastSpellRecord.seq`): Sentinel
+   * Tower's "1 plus the number of instant and sorcery spells cast before that
+   * spell this turn" (`who: "each-player"`), fixed however many are cast in
+   * response. 0 with none. */
   | {
       readonly castThisTurn: CardFilter;
       readonly who?: PlayerScope;
       readonly greatest?: "mana-value";
       readonly total?: "mana-value";
       readonly other?: true;
+      readonly before?: "trigger-spell";
     }
   /** How many counters were put on permanents this turn, as
    * {@link CountersPutSpec} narrows them, whoever or wherever they are now —
@@ -11784,7 +11789,12 @@ export interface EffectApi {
   castThisTurnOf(
     player: PlayerId,
     filter: CardFilter,
-    read?: { readonly greatest?: "mana-value"; readonly total?: "mana-value"; readonly other?: true },
+    read?: {
+      readonly greatest?: "mana-value";
+      readonly total?: "mana-value";
+      readonly other?: true;
+      readonly before?: "trigger-spell";
+    },
   ): number;
   /** See the `{ countersPutThisTurn }` {@link EffectAmount}. */
   countersPutThisTurn(spec: CountersPutSpec): number;
