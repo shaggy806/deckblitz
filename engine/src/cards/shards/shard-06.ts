@@ -851,6 +851,7 @@ import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTaigamSidisisHand from "../pool/taigam-sidisis-hand.js";
 import _poolTakeHeart from "../pool/take-heart.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
+import _poolTalentOfTheTelepath from "../pool/talent-of-the-telepath.js";
 import _poolTalesOfTheAncestors from "../pool/tales-of-the-ancestors.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTaskMageAssembly from "../pool/task-mage-assembly.js";
@@ -1884,6 +1885,7 @@ const shard: CardShard = {
     _poolTaigamSidisisHand,
     _poolTakeHeart,
     _poolTakenumaAbandonedMire,
+    _poolTalentOfTheTelepath,
     _poolTalesOfTheAncestors,
     _poolTanufelRimespeaker,
     _poolTaskMageAssembly,

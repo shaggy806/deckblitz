@@ -674,6 +674,7 @@ import _poolRakavolver from "../pool/rakavolver.js";
 import _poolRampagingGrowth from "../pool/rampaging-growth.js";
 import _poolRanAndShaw from "../pool/ran-and-shaw.js";
 import _poolRavenousRats from "../pool/ravenous-rats.js";
+import _poolRavenousSlime from "../pool/ravenous-slime.js";
 import _poolRealmwalker from "../pool/realmwalker.js";
 import _poolReapWhatIsSown from "../pool/reap-what-is-sown.js";
 import _poolReconCraftTheta from "../pool/recon-craft-theta.js";
@@ -1712,6 +1713,7 @@ const shard: CardShard = {
     _poolRampagingGrowth,
     _poolRanAndShaw,
     _poolRavenousRats,
+    _poolRavenousSlime,
     _poolRealmwalker,
     _poolReapWhatIsSown,
     _poolReconCraftTheta,

@@ -9273,6 +9273,7 @@ import _poolFblthpImpossiblyLost from "./pool/fblthp-impossibly-lost.js";
 import _poolFblthpKnowsTheWay from "./pool/fblthp-knows-the-way.js";
 import _poolFblthpLostOnTheRange from "./pool/fblthp-lost-on-the-range.js";
 import _poolFblthpTheLost from "./pool/fblthp-the-lost.js";
+import _poolFealtyToTheRealm from "./pool/fealty-to-the-realm.js";
 import _poolFearFireFoes from "./pool/fear-fire-foes.js";
 import _poolFearOfBeingHunted from "./pool/fear-of-being-hunted.js";
 import _poolFearOfBurningAlive from "./pool/fear-of-burning-alive.js";
@@ -21636,6 +21637,7 @@ import _poolRavenousRobots from "./pool/ravenous-robots.js";
 import _poolRavenousRotbelly from "./pool/ravenous-rotbelly.js";
 import _poolRavenousSailback from "./pool/ravenous-sailback.js";
 import _poolRavenousSkirge from "./pool/ravenous-skirge.js";
+import _poolRavenousSlime from "./pool/ravenous-slime.js";
 import _poolRavenousSquirrel from "./pool/ravenous-squirrel.js";
 import _poolRavenousTrap from "./pool/ravenous-trap.js";
 import _poolRavenousTyrannosaurus from "./pool/ravenous-tyrannosaurus.js";
@@ -24212,6 +24214,7 @@ import _poolShadowLance from "./pool/shadow-lance.js";
 import _poolShadowMysteriousAssassin from "./pool/shadow-mysterious-assassin.js";
 import _poolShadowOfDoubt from "./pool/shadow-of-doubt.js";
 import _poolShadowOfMortality from "./pool/shadow-of-mortality.js";
+import _poolShadowOfTheEnemy from "./pool/shadow-of-the-enemy.js";
 import _poolShadowOfTheGoblin from "./pool/shadow-of-the-goblin.js";
 import _poolShadowOfTheGrave from "./pool/shadow-of-the-grave.js";
 import _poolShadowOfTheSecondSun from "./pool/shadow-of-the-second-sun.js";
@@ -27437,6 +27440,7 @@ import _poolTalasWarrior from "./pool/talas-warrior.js";
 import _poolTaleOfKataraAndToph from "./pool/tale-of-katara-and-toph.js";
 import _poolTaleOfMomo from "./pool/tale-of-momo.js";
 import _poolTaleOfTinuviel from "./pool/tale-of-tinuviel.js";
+import _poolTalentOfTheTelepath from "./pool/talent-of-the-telepath.js";
 import _poolTalesEnd from "./pool/tales-end.js";
 import _poolTalesOfMasterSeshiro from "./pool/tales-of-master-seshiro.js";
 import _poolTalesOfTheAncestors from "./pool/tales-of-the-ancestors.js";
@@ -42438,6 +42442,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFblthpKnowsTheWay,
   _poolFblthpLostOnTheRange,
   _poolFblthpTheLost,
+  _poolFealtyToTheRealm,
   _poolFearFireFoes,
   _poolFearOfBeingHunted,
   _poolFearOfBurningAlive,
@@ -54801,6 +54806,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRavenousRotbelly,
   _poolRavenousSailback,
   _poolRavenousSkirge,
+  _poolRavenousSlime,
   _poolRavenousSquirrel,
   _poolRavenousTrap,
   _poolRavenousTyrannosaurus,
@@ -57377,6 +57383,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShadowMysteriousAssassin,
   _poolShadowOfDoubt,
   _poolShadowOfMortality,
+  _poolShadowOfTheEnemy,
   _poolShadowOfTheGoblin,
   _poolShadowOfTheGrave,
   _poolShadowOfTheSecondSun,
@@ -60602,6 +60609,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTaleOfKataraAndToph,
   _poolTaleOfMomo,
   _poolTaleOfTinuviel,
+  _poolTalentOfTheTelepath,
   _poolTalesEnd,
   _poolTalesOfMasterSeshiro,
   _poolTalesOfTheAncestors,
@@ -75616,6 +75624,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fblthp-knows-the-way": _poolFblthpKnowsTheWay,
   "pool/fblthp-lost-on-the-range": _poolFblthpLostOnTheRange,
   "pool/fblthp-the-lost": _poolFblthpTheLost,
+  "pool/fealty-to-the-realm": _poolFealtyToTheRealm,
   "pool/fear-fire-foes": _poolFearFireFoes,
   "pool/fear-of-being-hunted": _poolFearOfBeingHunted,
   "pool/fear-of-burning-alive": _poolFearOfBurningAlive,
@@ -87979,6 +87988,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ravenous-rotbelly": _poolRavenousRotbelly,
   "pool/ravenous-sailback": _poolRavenousSailback,
   "pool/ravenous-skirge": _poolRavenousSkirge,
+  "pool/ravenous-slime": _poolRavenousSlime,
   "pool/ravenous-squirrel": _poolRavenousSquirrel,
   "pool/ravenous-trap": _poolRavenousTrap,
   "pool/ravenous-tyrannosaurus": _poolRavenousTyrannosaurus,
@@ -90555,6 +90565,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shadow-mysterious-assassin": _poolShadowMysteriousAssassin,
   "pool/shadow-of-doubt": _poolShadowOfDoubt,
   "pool/shadow-of-mortality": _poolShadowOfMortality,
+  "pool/shadow-of-the-enemy": _poolShadowOfTheEnemy,
   "pool/shadow-of-the-goblin": _poolShadowOfTheGoblin,
   "pool/shadow-of-the-grave": _poolShadowOfTheGrave,
   "pool/shadow-of-the-second-sun": _poolShadowOfTheSecondSun,
@@ -93780,6 +93791,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tale-of-katara-and-toph": _poolTaleOfKataraAndToph,
   "pool/tale-of-momo": _poolTaleOfMomo,
   "pool/tale-of-tinuviel": _poolTaleOfTinuviel,
+  "pool/talent-of-the-telepath": _poolTalentOfTheTelepath,
   "pool/tales-end": _poolTalesEnd,
   "pool/tales-of-master-seshiro": _poolTalesOfMasterSeshiro,
   "pool/tales-of-the-ancestors": _poolTalesOfTheAncestors,
