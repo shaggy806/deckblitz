@@ -8213,3 +8213,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Spry and Mighty: the chosen two get the difference in power
 - **Do:** Cast Spry and Mighty, choosing Hill Giant and Grizzly Bears.
 - **Expect:** You draw one card. The Giant is a 4/4 and the Bears a 3/3, both with trample; Llanowar Elves is unchanged.
+## Emblems with an ability of their own (2026-11-13)
+
+### Karn, Living Legacy: activate the emblem's ability from the emblems viewer
+- **Do:** Use Karn's −7. Click "emblems 1" on your panel, "Activate" under the emblem, then its ability, and target Grizzly Bears.
+- **Expect:** Sol Ring taps and the Bears take 1 damage. With Sol Ring tapped, the emblem shows no "Activate".

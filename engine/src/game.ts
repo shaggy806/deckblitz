@@ -4636,6 +4636,18 @@ export class Game {
         if (ability.zone === "command") pushActivateAbility(card, def.name, ability, index);
       });
     }
+    // An emblem's activated abilities (rule 114.4): its object is in the
+    // command zone but in no zone list, so read from `emblems`.
+    for (const emblem of this.state.emblems) {
+      const card = emblem.object;
+      if (card === undefined || emblem.owner !== player || emblem.expires !== undefined) continue;
+      if (onlySource !== undefined && card !== onlySource) continue;
+      const object = this.state.objects[card];
+      if (object === undefined || object.kind !== "emblem" || !object.modifiers.some((m) => (m.grantsActivated?.length ?? 0) > 0)) continue;
+      this.effectiveActivated(card).forEach((ability, index) => {
+        if (ability.zone === "command") pushActivateAbility(card, emblem.sourceName ?? "Emblem", ability, index);
+      });
+    }
     // Exile is shared too: the suspended cards `player` owns, for an ability
     // that works only while its card is suspended (Greater Gargadon).
     for (const card of this.state.zones.shared.exile) {
@@ -23893,6 +23905,12 @@ export class Game {
     const target = this.state.objects[objectId];
     if (target?.zone === "hand") return this.handGrantedActivated(target);
     if (target?.zone === "graveyard") return this.graveyardGrantedActivated(target);
+    // An emblem's own activated abilities (rule 114.4), on its one modifier.
+    if (target?.kind === "emblem") {
+      return target.modifiers.flatMap((m) =>
+        (m.grantsActivated ?? []).map((ability) => ({ ability, ref: { kind: "modifier-activated" as const, ability } })),
+      );
+    }
     if (target === undefined || target.zone !== "battlefield") return [];
     return this.withAlternativeAbilityCosts(target, this.grantedOnPermanent(target, grantors));
   }
@@ -41587,7 +41605,7 @@ controlledBy,
           }
         }
       },
-      createEmblem: (text, staticAbility, triggered, owner, moreStatics) => {
+      createEmblem: (text, staticAbility, triggered, owner, moreStatics, activated) => {
         const from = this.state.objects[source];
         this.createEmblem(
           owner ?? controller,
@@ -41597,6 +41615,8 @@ controlledBy,
           triggered ?? [],
           controller,
           moreStatics ?? [],
+          undefined,
+          activated ?? [],
         );
       },
       addTimedStatic: (text, statics, expires) => {
@@ -59272,7 +59292,9 @@ controlledBy,
    * modifier the way a granted trigger rides one — so `detectTriggers` scans
    * it with the battlefield, and they trigger and resolve as any permanent's
    * do (rule 114.4). Its statics are read off the emblem, with this object
-   * their source (`emblemStatics`).
+   * their source (`emblemStatics`). Its activated abilities ride the same
+   * modifier, each marked `zone: "command"`: its owner activates them there
+   * (rule 114.4 — `pushActivations`, `grantedActivatedEntries`).
    */
   private createEmblem(
     owner: PlayerId,
@@ -59285,20 +59307,22 @@ controlledBy,
     /** A timed static's end (`EmblemState.expires`): no emblem at the
      * table, so nothing says one was made. */
     expires?: Expiry,
+    activated: readonly ActivatedAbility[] = [],
   ): void {
     let object: ObjectId | undefined;
-    if (triggered.length > 0 || staticAbility !== null || moreStatics.length > 0) {
+    if (triggered.length > 0 || activated.length > 0 || staticAbility !== null || moreStatics.length > 0) {
       object = this.makeCardObject(EMBLEM_CARD, owner, { zone: "command" });
       const emblem = this.state.objects[object];
       emblem.kind = "emblem";
       emblem.timestamp = this.freshTimestamp();
-      if (triggered.length > 0) {
+      if (triggered.length > 0 || activated.length > 0) {
         emblem.modifiers.push({
           timestamp: emblem.timestamp,
           power: 0,
           toughness: 0,
           keywords: [],
-          grantsTriggered: [...triggered],
+          ...(triggered.length > 0 ? { grantsTriggered: [...triggered] } : {}),
+          ...(activated.length > 0 ? { grantsActivated: activated.map((a) => ({ ...a, zone: "command" as const })) } : {}),
           untilEndOfTurn: false,
         });
       }

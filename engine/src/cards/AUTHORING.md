@@ -2286,7 +2286,7 @@ text)` from `helpers.ts`; its "Solved — [ability]" is the ability gated on `{ 
 a static's or activated ability's `condition`, a triggered ability's `whileCondition` — Case of
 the Crimson Pulse; solved lasts until the Case leaves the battlefield),
 `timed-static { static, duration, text }` — **a timed static**: a resolved spell's or ability's rule change for a while, written as the static ability that says it forever, with a `PlayerDuration` (`engine/src/duration.ts`) — "players can't gain life this turn" (Skullcrack: a `would-gain-life` `prevent` replacement, `who: "any-player"`), "the 'legend rule' doesn't apply to permanents you control this turn" (Hall of Echoes: `legendRuleOff`), "until end of turn, you may activate loyalty abilities of Jace planeswalkers you control … any time you could cast an instant" (Jace's Machinations: `loyaltyAtInstantSpeed`, its `affects` a filter). It rides an emblem the table never sees, so only what an emblem's readers take works (below; `test/emblem-statics.test.ts` checks timed statics too), and it changes rules, not characteristics (rule 611.2c). Prefer it to a new `player-effect` field.
-`create-emblem { text, static?, moreStatics?, triggered?, to? }` (`static`: its static
+`create-emblem { text, static?, moreStatics?, triggered?, activated?, to? }` (`static`: its static
 ability, written as a permanent's and read off the emblem with "you" its owner, rules 113.6p,
 114.4 — an anthem of any scope (Elspeth, Knight-Errant), `noMaxHandSize`/`maxHandSize` (Tamiyo,
 the Moon Sage), `prohibits`, `costModification`, a `would-deal-damage` `replacement` (Ajani
@@ -2298,7 +2298,12 @@ Master. Any other field isn't read: `test/emblem-statics.test.ts` fails on it un
 it; `triggered`: the emblem's triggered
 abilities, rule 114.4 — an emblem object in the command zone whose abilities trigger and
 resolve as a permanent's, "you" its owner and "this emblem deals 4 damage" damage from a
-colorless source with no types: Koth, Fire of Resistance, Teferi, Hero of Dominaria; `to`: a
+colorless source with no types: Koth, Fire of Resistance, Teferi, Hero of Dominaria; `activated`:
+the emblem's own activated abilities, written as a permanent's (the engine marks each `zone:
+"command"`), activated by its owner from the command zone (rule 114.4) and offered in the client's
+emblems viewer — Karn, Living Legacy's "Tap an untapped artifact you control: This emblem deals 1
+damage to any target", Ob Nixilis of the Black Oath's "{1}{B}, Sacrifice a creature: …"
+(`emblem-activated.test.ts`); `to`: a
 target slot holding the player who gets it, "target opponent gets an emblem" — Ob Nixilis
 Reignited), `prevent-all-combat-damage` (Fog; `by: CardFilter` is only what
 sources matching it would deal — Arachnogenesis's "by non-Spider creatures", matched as

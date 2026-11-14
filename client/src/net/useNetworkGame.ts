@@ -1425,7 +1425,11 @@ export function useNetworkGame(): NetworkGame {
       // shown — a dungeon in the command zone, whose room ability is asking
       // (Tomb of Annihilation's Veils of Fear): the view names it.
       const source = view?.decisionSource
-      return source && source.object === id ? source.cardName : id
+      if (source && source.object === id) return source.cardName
+      // An emblem's object, whose activated abilities its owner is offered.
+      const emblem = view?.emblems.find((e) => e.object === id)
+      if (emblem) return emblem.source === null ? 'Emblem' : `Emblem — ${emblem.source}`
+      return id
     },
     [view],
   )

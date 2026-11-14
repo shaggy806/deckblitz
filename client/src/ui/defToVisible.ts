@@ -74,15 +74,16 @@ export function defToVisible(def: CardDefinition, art?: string | null): VisibleO
  * objects, so the view lists them by owner and text; this dresses one up the
  * way a printed emblem looks: titled "Emblem — <source>", with the source
  * card's art (looked up by its name) and the emblem's text. `index` only has
- * to be unique among the emblems shown.
+ * to be unique among the emblems shown. One with activated abilities (Karn,
+ * Living Legacy's) keeps its object's id, so the zone viewer offers them.
  */
 export function emblemToVisible(
-  emblem: { readonly owner: PlayerId; readonly text: string; readonly source: string | null },
+  emblem: { readonly owner: PlayerId; readonly text: string; readonly source: string | null; readonly object?: ObjectId },
   index: number,
 ): VisibleObject {
   const face = emblem.source ?? 'Emblem'
   return {
-    id: `emblem-${index}` as ObjectId,
+    id: emblem.object ?? (`emblem-${index}` as ObjectId),
     cardName: face,
     copyOf: null,
     // The source card's name, so the art lookup finds its illustration.

@@ -9078,6 +9078,13 @@ export type EffectSpec =
        * permanent's do — "you" is its controller, and "this emblem deals 5
        * damage" is damage from it (a colorless source with no types).
        *
+       * `activated` are its activated abilities (Karn, Living Legacy's "Tap
+       * an untapped artifact you control: This emblem deals 1 damage to any
+       * target"): its owner activates them from the command zone, where an
+       * emblem's abilities function (rule 114.4), as any permanent's are
+       * activated (rule 602) — written as a permanent's, the engine marks
+       * each `zone: "command"`.
+       *
        * `to` is a target slot holding the player who gets it — "target
        * opponent gets an emblem with …" (Ob Nixilis Reignited's −8);
        * the effect's controller when absent. */
@@ -9086,6 +9093,7 @@ export type EffectSpec =
       readonly static?: StaticAbility;
       readonly moreStatics?: readonly StaticAbility[];
       readonly triggered?: readonly TriggeredAbility[];
+      readonly activated?: readonly ActivatedAbility[];
       readonly to?: number;
     }
   | {
@@ -13158,6 +13166,7 @@ export interface EffectApi {
     triggered?: readonly TriggeredAbility[],
     owner?: PlayerId,
     moreStatics?: readonly StaticAbility[],
+    activated?: readonly ActivatedAbility[],
   ): void;
   /** The effect's controller's timed static — see the `timed-static`
    * {@link EffectSpec}. */
@@ -20686,12 +20695,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "create-emblem": {
       if (spec.to === undefined) {
-        ctx.createEmblem(spec.text, spec.static, spec.triggered, undefined, spec.moreStatics);
+        ctx.createEmblem(spec.text, spec.static, spec.triggered, undefined, spec.moreStatics, spec.activated);
         return;
       }
       // "Target opponent gets an emblem": nobody, once that target is gone.
       const to = ctx.targets[spec.to];
-      if (to?.kind === "player") ctx.createEmblem(spec.text, spec.static, spec.triggered, to.player, spec.moreStatics);
+      if (to?.kind === "player") {
+        ctx.createEmblem(spec.text, spec.static, spec.triggered, to.player, spec.moreStatics, spec.activated);
+      }
       return;
     }
     case "timed-static": {

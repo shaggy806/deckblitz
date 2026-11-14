@@ -12333,4 +12333,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Forest*5', 'Hill Giant', 'Grizzly Bears', 'Llanowar Elves'], hand: ['Spry and Mighty'] },
     }),
   ),
+  preset(
+    "Karn, Living Legacy: activate the emblem's ability from the emblems viewer",
+    board({
+      you: { bf: [{ name: 'Karn, Living Legacy', counters: { loyalty: 7 } }, 'Sol Ring'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

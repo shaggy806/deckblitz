@@ -440,8 +440,16 @@ export interface PlayerView {
   /** The player who has the initiative (rule 726), or `null`. */
   readonly initiative: PlayerId | null;
   /** Emblems in the game (rule 114 — ROADMAP Phase 10), owner + text only. */
-  /** `source` is the name of the card that created the emblem, or `null`. */
-  readonly emblems: readonly { readonly owner: PlayerId; readonly text: string; readonly source: string | null }[];
+  /** `source` is the name of the card that created the emblem, or `null`.
+   * `object` is the emblem's object when it has activated abilities — the
+   * `source` its owner's `activate-ability` offers name (Karn, Living
+   * Legacy's emblem). */
+  readonly emblems: readonly {
+    readonly owner: PlayerId;
+    readonly text: string;
+    readonly source: string | null;
+    readonly object?: ObjectId;
+  }[];
   readonly events: readonly GameEvent[];
   /** When each object was public knowledge, and as what (`PublicStint`): how
    * the history names an object in a line from a time it was known, after it
@@ -621,7 +629,10 @@ function visible(
     object.kind === "ability" &&
     object.sourceObjectId !== null &&
     state.objects[object.sourceObjectId]?.kind === "emblem";
-  if (fromEmblem && object.grantedAbility?.kind === "modifier") text = object.grantedAbility.ability.text;
+  // Its own activated ability (Karn, Living Legacy's) reads the same way.
+  if (fromEmblem && (object.grantedAbility?.kind === "modifier" || object.grantedAbility?.kind === "modifier-activated")) {
+    text = object.grantedAbility.ability.text;
+  }
   // The same for the inherent abilities that ride an emblem-kind object of
   // their own (the monarch's, the initiative's, speed's, rad counters') and a
   // dungeon's room abilities: the one ability's text — a room's record, or
@@ -1389,7 +1400,16 @@ function viewForUncached(
     dayNight: state.dayNight,
     monarch: state.monarch,
     initiative: state.initiative ?? null,
-    emblems: state.emblems.filter((e) => e.expires === undefined).map((e) => ({ owner: e.owner, text: e.text, source: e.sourceName ?? null })),
+    emblems: state.emblems
+      .filter((e) => e.expires === undefined)
+      .map((e) => ({
+        owner: e.owner,
+        text: e.text,
+        source: e.sourceName ?? null,
+        ...(e.object !== undefined && state.objects[e.object]?.modifiers.some((m) => (m.grantsActivated?.length ?? 0) > 0) === true
+          ? { object: e.object }
+          : {}),
+      })),
     events: state.eventLog,
     publicStints: state.publicStints ?? {},
   };

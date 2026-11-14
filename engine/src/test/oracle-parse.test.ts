@@ -1190,6 +1190,21 @@ describe("an emblem's grants", () => {
       static: { grantsToSpells: { filter: { typesAnyOf: ["instant", "sorcery"] } } },
     });
   });
+  it("reads an activated ability of the emblem's own, 'this emblem' its source (Karn, Living Legacy)", () => {
+    const effect = ult(`You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."`);
+    expect(effect).toMatchObject({
+      kind: "create-emblem",
+      activated: [
+        {
+          cost: { tap: false, tapOthers: { count: 1, filter: { type: "artifact" } } },
+          targets: ["any-target"],
+          effect: { kind: "damage", amount: 1, target: 0 },
+          text: "Tap an untapped artifact you control: This emblem deals 1 damage to any target.",
+        },
+      ],
+    });
+    expect(effect).not.toHaveProperty("static");
+  });
 });
 
 describe("an emblem's static abilities", () => {

@@ -396,6 +396,18 @@ object in only by a type it has (rule 205.3m), and `each` a type in common
 with every one. The new `"convokers"` object set is the creatures that convoked
 the source's spell (702.51a), each as it last existed. Proving: Everything
 Comes to Dust, Cryptic Gateway. Test: `shares-type-with-set.test.ts`.
+### An emblem with an activated ability of its own — built 2026-11-13
+
+By EDHREC rank: Karn, Living Legacy (5535), Ob Nixilis of the Black Oath
+(9732). `create-emblem`'s `activated`: the abilities ride the emblem object's
+modifier beside its triggers, marked `zone: "command"` (rule 114.4), offered
+to its owner by `pushActivations` from `GameState.emblems` (the object is in
+no zone list) and read by `grantedActivatedEntries`. The view names the
+emblem's object (`PlayerView.emblems[].object`), so the client's emblems
+viewer offers "Activate". The scaffolder reads a quoted "cost: effect" in
+"You get an emblem with …" as one (`emblemActivatedOf`). Keys:
+effect:emblem-own-activated-ability, effect:emblem-activated-abilities.
+
 ### Sacrifice costs of a chosen count — built 2026-11-13
 
 By EDHREC rank: Lonis, Cryptozoologist (5342), Scourge of Nel Toth (9256),

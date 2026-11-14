@@ -3084,19 +3084,46 @@ function emblemStaticOf(quoted) {
   return null;
 }
 
-/** `You get an emblem with "…" [and "…"]`: every quoted ability a static. */
+/**
+ * A quoted activated ability on an emblem (rule 114.4 — Karn, Living
+ * Legacy's "Tap an untapped artifact you control: This emblem deals 1 damage
+ * to any target."): the line read as a permanent's, "this emblem" its source.
+ * `null` for anything else.
+ */
+function emblemActivatedOf(quoted) {
+  if (!/^[^"]+?: /.test(quoted)) return null;
+  const oracle = quoted.replace(/\bthis emblem\b/gi, "Card");
+  const ability = parseFace({ name: "Card", type_line: "Artifact", oracle_text: oracle }).activated?.[0];
+  if (ability === undefined || ability.complete === false || ability.effect === null || ability.effect === undefined) return null;
+  const { complete: _complete, ...rest } = ability;
+  return { ...rest, text: quoted };
+}
+
+/** `You get an emblem with "…" [and "…"]`: every quoted ability a static or
+ * an activated ability of the emblem's own. */
 function emblemOf(s) {
   const whole = /^You get an emblem with "(.+?)\.?"(?: and "(.+?)\.?")?\.?$/.exec(s);
   if (whole === null) return null;
   const quoted = [whole[1], whole[2]].filter((q) => q !== undefined).map((q) => `${q}.`);
-  const statics = quoted.map(emblemStaticOf);
-  if (statics.some((a) => a === null)) return null;
+  const statics = [];
+  const activated = [];
+  for (const q of quoted) {
+    const read = emblemStaticOf(q);
+    if (read !== null) {
+      statics.push(read);
+      continue;
+    }
+    const ability = emblemActivatedOf(q);
+    if (ability === null) return null;
+    activated.push(ability);
+  }
   const [first, ...more] = statics;
   return {
     kind: "create-emblem",
     text: quoted.join(" "),
-    static: first,
+    ...(first !== undefined ? { static: first } : {}),
     ...(more.length > 0 ? { moreStatics: more } : {}),
+    ...(activated.length > 0 ? { activated } : {}),
   };
 }
 

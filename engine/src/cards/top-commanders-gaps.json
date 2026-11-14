@@ -7,6 +7,8 @@
     "zone:shared-impulse-pool-each-player",
     "zone:impulse-free-lesser-mana-value-than-own",
     "bug:mana-value-of-countered-copy",
+    "effect:emblem-own-activated-ability",
+    "effect:emblem-activated-abilities",
     "effect:token-copy-of-sacrificed",
     "effect:token-copy-of-graveyard-cards",
     "effect:token-copy-enters-attached",
