@@ -282,6 +282,7 @@ import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
 import _poolElrondMasterOfHealing from "../pool/elrond-master-of-healing.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
 import _poolEmberstrikeDuo from "../pool/emberstrike-duo.js";
+import _poolEmeraldDragon from "../pool/emerald-dragon.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmptyCityRuse from "../pool/empty-city-ruse.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
@@ -1314,6 +1315,7 @@ const shard: CardShard = {
     _poolElrondMasterOfHealing,
     _poolElvishEulogist,
     _poolEmberstrikeDuo,
+    _poolEmeraldDragon,
     _poolEmeriaTheSkyRuin,
     _poolEmptyCityRuse,
     _poolEmpyreanEagle,

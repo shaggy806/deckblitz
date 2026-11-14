@@ -542,6 +542,7 @@ import _poolMissy from "../pool/missy.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
 import _poolMobilization from "../pool/mobilization.js";
+import _poolMoggAssassin from "../pool/mogg-assassin.js";
 import _poolMoltenRavager from "../pool/molten-ravager.js";
 import _poolMoltenTailMasticore from "../pool/molten-tail-masticore.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
@@ -1585,6 +1586,7 @@ const shard: CardShard = {
     _poolMjolnirsMight,
     _poolMoatPiranhas,
     _poolMobilization,
+    _poolMoggAssassin,
     _poolMoltenRavager,
     _poolMoltenTailMasticore,
     _poolMongooseLizard,

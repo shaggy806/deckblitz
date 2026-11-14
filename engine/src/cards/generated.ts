@@ -7095,6 +7095,7 @@ import _poolDissentersDeliverance from "./pool/dissenters-deliverance.js";
 import _poolDissipate from "./pool/dissipate.js";
 import _poolDissipationField from "./pool/dissipation-field.js";
 import _poolDissolve from "./pool/dissolve.js";
+import _poolDissonantWave from "./pool/dissonant-wave.js";
 import _poolDistantMelody from "./pool/distant-melody.js";
 import _poolDistantMemories from "./pool/distant-memories.js";
 import _poolDistemperOfTheBlood from "./pool/distemper-of-the-blood.js";
@@ -8291,6 +8292,7 @@ import _poolEmbraceTheParadox from "./pool/embrace-the-paradox.js";
 import _poolEmbraceTheUnknown from "./pool/embrace-the-unknown.js";
 import _poolEmeraldCharm from "./pool/emerald-charm.js";
 import _poolEmeraldCollector from "./pool/emerald-collector.js";
+import _poolEmeraldDragon from "./pool/emerald-dragon.js";
 import _poolEmeraldDragonfly from "./pool/emerald-dragonfly.js";
 import _poolEmeraldMedallion from "./pool/emerald-medallion.js";
 import _poolEmeraldOryx from "./pool/emerald-oryx.js";
@@ -14103,6 +14105,7 @@ import _poolIslebackSpawn from "./pool/isleback-spawn.js";
 import _poolIsochronScepter from "./pool/isochron-scepter.js";
 import _poolIsolate from "./pool/isolate.js";
 import _poolIsolatedChapel from "./pool/isolated-chapel.js";
+import _poolIsolatedWatchtower from "./pool/isolated-watchtower.js";
 import _poolIsolationAtOrthanc from "./pool/isolation-at-orthanc.js";
 import _poolIsolationCell from "./pool/isolation-cell.js";
 import _poolIsolationZone from "./pool/isolation-zone.js";
@@ -15570,6 +15573,7 @@ import _poolLavaspurBoots from "./pool/lavaspur-boots.js";
 import _poolLavastepRaider from "./pool/lavastep-raider.js";
 import _poolLaviniaAzoriusRenegade from "./pool/lavinia-azorius-renegade.js";
 import _poolLaviniaFoilToConspiracy from "./pool/lavinia-foil-to-conspiracy.js";
+import _poolLaviniaOfTheTenth from "./pool/lavinia-of-the-tenth.js";
 import _poolLawRuneEnforcer from "./pool/law-rune-enforcer.js";
 import _poolLawbringer from "./pool/lawbringer.js";
 import _poolLawlessBroker from "./pool/lawless-broker.js";
@@ -17721,6 +17725,7 @@ import _poolModeration from "./pool/moderation.js";
 import _poolModifyMemory from "./pool/modify-memory.js";
 import _poolMogMoogleWarrior from "./pool/mog-moogle-warrior.js";
 import _poolMoggAlarm from "./pool/mogg-alarm.js";
+import _poolMoggAssassin from "./pool/mogg-assassin.js";
 import _poolMoggBombers from "./pool/mogg-bombers.js";
 import _poolMoggCannon from "./pool/mogg-cannon.js";
 import _poolMoggConscripts from "./pool/mogg-conscripts.js";
@@ -40238,6 +40243,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDissipate,
   _poolDissipationField,
   _poolDissolve,
+  _poolDissonantWave,
   _poolDistantMelody,
   _poolDistantMemories,
   _poolDistemperOfTheBlood,
@@ -41434,6 +41440,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmbraceTheUnknown,
   _poolEmeraldCharm,
   _poolEmeraldCollector,
+  _poolEmeraldDragon,
   _poolEmeraldDragonfly,
   _poolEmeraldMedallion,
   _poolEmeraldOryx,
@@ -47246,6 +47253,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIsochronScepter,
   _poolIsolate,
   _poolIsolatedChapel,
+  _poolIsolatedWatchtower,
   _poolIsolationAtOrthanc,
   _poolIsolationCell,
   _poolIsolationZone,
@@ -48713,6 +48721,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLavastepRaider,
   _poolLaviniaAzoriusRenegade,
   _poolLaviniaFoilToConspiracy,
+  _poolLaviniaOfTheTenth,
   _poolLawRuneEnforcer,
   _poolLawbringer,
   _poolLawlessBroker,
@@ -50864,6 +50873,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolModifyMemory,
   _poolMogMoogleWarrior,
   _poolMoggAlarm,
+  _poolMoggAssassin,
   _poolMoggBombers,
   _poolMoggCannon,
   _poolMoggConscripts,
@@ -73394,6 +73404,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dissipate": _poolDissipate,
   "pool/dissipation-field": _poolDissipationField,
   "pool/dissolve": _poolDissolve,
+  "pool/dissonant-wave": _poolDissonantWave,
   "pool/distant-melody": _poolDistantMelody,
   "pool/distant-memories": _poolDistantMemories,
   "pool/distemper-of-the-blood": _poolDistemperOfTheBlood,
@@ -74590,6 +74601,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/embrace-the-unknown": _poolEmbraceTheUnknown,
   "pool/emerald-charm": _poolEmeraldCharm,
   "pool/emerald-collector": _poolEmeraldCollector,
+  "pool/emerald-dragon": _poolEmeraldDragon,
   "pool/emerald-dragonfly": _poolEmeraldDragonfly,
   "pool/emerald-medallion": _poolEmeraldMedallion,
   "pool/emerald-oryx": _poolEmeraldOryx,
@@ -80402,6 +80414,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/isochron-scepter": _poolIsochronScepter,
   "pool/isolate": _poolIsolate,
   "pool/isolated-chapel": _poolIsolatedChapel,
+  "pool/isolated-watchtower": _poolIsolatedWatchtower,
   "pool/isolation-at-orthanc": _poolIsolationAtOrthanc,
   "pool/isolation-cell": _poolIsolationCell,
   "pool/isolation-zone": _poolIsolationZone,
@@ -81869,6 +81882,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lavastep-raider": _poolLavastepRaider,
   "pool/lavinia-azorius-renegade": _poolLaviniaAzoriusRenegade,
   "pool/lavinia-foil-to-conspiracy": _poolLaviniaFoilToConspiracy,
+  "pool/lavinia-of-the-tenth": _poolLaviniaOfTheTenth,
   "pool/law-rune-enforcer": _poolLawRuneEnforcer,
   "pool/lawbringer": _poolLawbringer,
   "pool/lawless-broker": _poolLawlessBroker,
@@ -84020,6 +84034,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/modify-memory": _poolModifyMemory,
   "pool/mog-moogle-warrior": _poolMogMoogleWarrior,
   "pool/mogg-alarm": _poolMoggAlarm,
+  "pool/mogg-assassin": _poolMoggAssassin,
   "pool/mogg-bombers": _poolMoggBombers,
   "pool/mogg-cannon": _poolMoggCannon,
   "pool/mogg-conscripts": _poolMoggConscripts,

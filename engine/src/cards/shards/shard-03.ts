@@ -196,6 +196,7 @@ import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
 import _poolDirtyWererat from "../pool/dirty-wererat.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDisplacementWave from "../pool/displacement-wave.js";
+import _poolDissonantWave from "../pool/dissonant-wave.js";
 import _poolDistrictGuide from "../pool/district-guide.js";
 import _poolDivebomberGriffin from "../pool/divebomber-griffin.js";
 import _poolDoOrDie from "../pool/do-or-die.js";
@@ -1155,6 +1156,7 @@ const shard: CardShard = {
     _poolDirtyWererat,
     _poolDiscipleOfTheOldWays,
     _poolDisplacementWave,
+    _poolDissonantWave,
     _poolDistrictGuide,
     _poolDivebomberGriffin,
     _poolDoOrDie,
