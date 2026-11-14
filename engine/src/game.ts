@@ -64810,6 +64810,7 @@ controlledBy,
             ...(this.state.resolvingSource !== undefined ? { by: this.state.resolvingSource } : {}),
             ...(enter.played === true ? { played: true as const } : {}),
           };
+    const fromZone = object.zone;
     const from = this.zoneList(object.zone, object.owner);
     const index = from.indexOf(id);
     if (index >= 0) from.splice(index, 1);
@@ -64833,6 +64834,11 @@ controlledBy,
         ...this.state.commanderArrivals.filter((a) => a.commander !== id),
         { commander: id, stint: object.zoneChangeCount },
       ];
+    }
+    // "Whenever your commander is put into the command zone from anywhere"
+    // (rules 903.9a, 903.9b): every way there is this one move.
+    if (object.isCommander && to === "command" && fromZone !== "command") {
+      this.emit({ type: "commander-put-into-command-zone", object: id, owner: object.owner, from: fromZone });
     }
 
     // A change of zone resets everything that only applies in one zone —

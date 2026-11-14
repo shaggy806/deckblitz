@@ -825,7 +825,14 @@ spell becomes;
 from the command zone this game, by its owner (rule 903.8's count, the one
 the tax reads) — Study Hall's `whenSpent` "scry X, where X is the number of
 times it's been cast from the command zone" is `{ commanderCastsOf: 0 }`
-(slot 0 is the spell), which counts the cast it rides on;
+(slot 0 is the spell), which counts the cast it rides on; Myth Unbound's
+"your commander costs {1} less to cast for each time it's been cast from the
+command zone this game" is a `costModification` of `applies: { isCommander:
+true, ownedBy: "you" }`, `reduceGeneric: { commanderCastsOf: "priced" }` (the
+spell being priced, each commander its own count), and its "whenever your
+commander is put into the command zone from anywhere" the trigger event
+`{ on: "event", event: "commander-to-command-zone", who: "you" }` (rules
+903.9a, 903.9b; `commander-casts-reduction.test.ts`);
 `{ commanderCasts: "you" }` — every cast of the effect's controller's own
 commanders from the command zone this game, added up (Thunderclap Drake's
 "for each time you've cast your commander from the command zone this game",

@@ -136,6 +136,10 @@ export const TRIGGER_EVENTS = {
    * all those of several fights an effect has happen at once — so two of
    * yours fighting each other is one trigger. */
   "creatures-fight": row({ type: "creatures-fought", objects: (e) => e.objects }),
+  /** "Whenever your commander is put into the command zone from anywhere"
+   * (Myth Unbound — rules 903.9a, 903.9b): its owner is the subject, so
+   * `who: "you"` is "your commander". */
+  "commander-to-command-zone": row({ type: "commander-put-into-command-zone", player: (e) => e.owner }),
   /** "Whenever you win a coin flip" (rule 705). */
   "wins-coin-flip": row({ type: "coin-flipped", when: (e) => e.won === true, player: (e) => e.player }),
   /** "Whenever you lose a coin flip" (rule 705). */

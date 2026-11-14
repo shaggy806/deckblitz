@@ -1858,6 +1858,15 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
     })
   | (Base & {
+      /** A commander was put into the command zone from another zone (rules
+       * 903.9a, 903.9b) — "whenever your commander is put into the command
+       * zone from anywhere" (Myth Unbound). */
+      readonly type: "commander-put-into-command-zone";
+      readonly object: ObjectId;
+      readonly owner: PlayerId;
+      readonly from: ZoneType;
+    })
+  | (Base & {
       /** A commander's owner chose whether to put it into the command zone
        * (rule 903.9). `from` is the graveyard or exile it was in (903.9a), or
        * the hand or library it was headed for (903.9b). */
