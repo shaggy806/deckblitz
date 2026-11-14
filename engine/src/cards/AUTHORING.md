@@ -4086,7 +4086,7 @@ illegal it fizzles (608.2b — Singularity Rupture's ruling). Effects reach the
 members two ways:
 
 - "Each opponent discards a card. **Each opponent who can't** loses 3 life" is a `for-each-player` with `whoIf` (who can't, found first) and `before` (the discard or sacrifice, done next), then `effect` for each found: Cruel Grimnarch, Plaguecrafter (a player who gives up their last one could).
-- `{ kind: "for-each-player", who: PlayerScope | ChosenPlayerRef, effect }` (a `ChosenPlayerRef` — `{ target }`, `{ controllerOf }`, `{ ownerOf }` — is one player: Skullcap Snail's "**target opponent** exiles a card from their hand" is a `look-and-choose` with `player: "that-player"` inside, so the choice is theirs) — `effect` once for
+- `{ kind: "for-each-player", who: PlayerScope | ChosenPlayerRef, effect }` (a `ChosenPlayerRef` — `{ target }`, `{ controllerOf }`, `{ ownerOf }` — is one player: Skullcap Snail's "**target opponent** exiles a card from their hand" is a `look-and-choose` with `player: "that-player"` inside, so the choice is theirs; Isildur's Fateful Strike's "destroy target creature. If **its controller** has more than four cards in hand, they exile cards from their hand equal to the difference" is `who: { controllerOf: 0 }` — the creature as it last existed — with a `whoIf` of `"that-player"`'s `hand-size` `atLeast: 5` and `min`/`max` of `{ difference: [{ cardsInHand: "that-player" }, 4] }`) — `effect` once for
   each player in `who`, in turn order, as this effect's controller, with
   `"that-player"` naming that player: Adeline's "for each opponent, create a
   … token that's tapped and attacking that player". A player's step that

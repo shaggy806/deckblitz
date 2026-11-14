@@ -322,6 +322,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Its controller exiles cards from their hand equal to the difference" — built 2026-11-14
+
+The key `effect:exile-cards-from-hand-chosen` needed no engine code: a `for-each-player` of `{
+controllerOf: 0 }` (the destroyed creature's, rule 608.2h) with a `hand-size` `whoIf` and a
+`look-and-choose` of theirs, `min`/`max` a `difference`. Isildur's Fateful Strike (rank 10103).
+`test/exile-cards-from-hand-chosen.test.ts`.
+
 ### "Whenever you remove a time counter from this card while it's exiled" — built 2026-11-14
 
 The key `trigger:time-counter-removed-in-exile-by-you-per-counter`: the `time-counter-removed`
