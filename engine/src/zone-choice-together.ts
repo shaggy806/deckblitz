@@ -236,6 +236,10 @@ export function completeTogether(
       left.splice(at, 1);
       kept.push(id);
     }
+    // Every card together falls short (three card types in a graveyard, for
+    // "four or more among them"): where none is an answer, it's the one there
+    // is — never a set the rule refuses.
+    if (!fitsTogether(together, kept) && together.orNone === true) return [];
     return kept;
   }
   const want = Math.min(max, Math.max(min, preferred.length));

@@ -13,7 +13,7 @@ import { describe, expect, it } from "vitest";
 import type { LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { fitsTogether, type ZoneChoiceTogether } from "../zone-choice-together.js";
+import { completeTogether, fitsTogether, type ZoneChoiceTogether } from "../zone-choice-together.js";
 import { A, B, cast, counters, lands, pt, settle, spawn, table, toGraveyard, toStep, zone } from "./harness.js";
 
 type Cast = Extract<LegalAction, { kind: "cast-spell" }>;
@@ -138,5 +138,59 @@ describe("Winter, Cynical Opportunist", () => {
     settle(game);
     expect(calls).toBe(1);
     for (const id of cards) expect(zone(game, id)).toBe("graveyard");
+  });
+
+  it("a set short of four card types is refused before it's dispatched", () => {
+    const { game } = table();
+    spawn(game, "Winter, Cynical Opportunist");
+    const [bears, bolt, divination, ring] = ["Grizzly Bears", "Lightning Bolt", "Divination", "Sol Ring"].map((name) =>
+      toGraveyard(game, name),
+    );
+    toStep(game, "end");
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-from-zone" || s.zones.shared.stack.length === 0);
+    expect(game.state.awaiting?.kind).toBe("choose-from-zone");
+    expect(game.canDispatch({ type: "choose-from-zone", player: A, chosen: [bears, bolt, divination] })).toMatch(
+      /four or more card types/,
+    );
+    expect(game.canDispatch({ type: "choose-from-zone", player: A, chosen: [] })).toBeNull();
+    expect(game.canDispatch({ type: "choose-from-zone", player: A, chosen: [bears, bolt, divination, ring] })).toBeNull();
+  });
+
+  it("with fewer than four card types in the graveyard, nothing is asked", () => {
+    const { game, a } = table();
+    spawn(game, "Winter, Cynical Opportunist");
+    const cards = ["Grizzly Bears", "Lightning Bolt", "Divination"].map((name) => toGraveyard(game, name));
+    let calls = 0;
+    a.chooseFromZoneFn = (_view, eligible) => {
+      calls += 1;
+      return [...eligible];
+    };
+    toStep(game, "end");
+    settle(game);
+    expect(calls).toBe(0);
+    for (const id of cards) expect(zone(game, id)).toBe("graveyard");
+  });
+});
+
+describe("completing a pick under the variety rule", () => {
+  const short: ZoneChoiceTogether = {
+    rule: "variety",
+    tags: { a: ["creature"], b: ["instant"], c: ["sorcery"] },
+    atLeast: 4,
+    text: "with four or more card types among them",
+  };
+  const ids = ["a", "b", "c"] as unknown as ObjectId[];
+
+  it("where none is an answer and every card together falls short, it's none", () => {
+    // A random pick of one card ("any number"), completed: never all three,
+    // which the rule refuses.
+    expect(completeTogether({ ...short, orNone: true }, [ids[0]], ids, 0, 99)).toEqual([]);
+  });
+
+  it("enough types among the eligible cards: the pick grows until it fits", () => {
+    const four: ZoneChoiceTogether = { ...short, tags: { ...short.tags, d: ["land"] }, orNone: true };
+    const all = [...ids, "d" as unknown as ObjectId];
+    const done = completeTogether(four, [all[1]], all, 0, 99);
+    expect(fitsTogether(four, done)).toBe(true);
   });
 });

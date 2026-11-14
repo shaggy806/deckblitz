@@ -35,33 +35,40 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "end", who: "you" },
       targets: [],
+      // With fewer than four card types in the graveyard no set of its cards
+      // can be exiled, so there's nothing to ask (the `delirium` condition
+      // reads exactly that; it is no "if" of the trigger's).
       effect: {
-        kind: "sequence",
-        effects: [
-          {
-            kind: "look-and-choose",
-            zone: "graveyard",
-            min: 0,
-            max: 99,
-            together: { cardTypesAmongAtLeast: 4 },
-            destination: "exile",
-            leftover: "stay",
-          },
-          {
-            kind: "conditional",
-            condition: { kind: "this-way", what: "exiled", atLeast: 1 },
-            then: {
+        kind: "conditional",
+        condition: { kind: "delirium" },
+        then: {
+          kind: "sequence",
+          effects: [
+            {
               kind: "look-and-choose",
-              zone: "exiled-this-way",
-              min: 1,
-              max: 1,
-              filter: { typesAnyOf: [...PERMANENT_TYPES] },
-              destination: "battlefield",
-              withCounters: { kind: "finality", amount: 1 },
+              zone: "graveyard",
+              min: 0,
+              max: 99,
+              together: { cardTypesAmongAtLeast: 4 },
+              destination: "exile",
               leftover: "stay",
             },
-          },
-        ],
+            {
+              kind: "conditional",
+              condition: { kind: "this-way", what: "exiled", atLeast: 1 },
+              then: {
+                kind: "look-and-choose",
+                zone: "exiled-this-way",
+                min: 1,
+                max: 1,
+                filter: { typesAnyOf: [...PERMANENT_TYPES] },
+                destination: "battlefield",
+                withCounters: { kind: "finality", amount: 1 },
+                leftover: "stay",
+              },
+            },
+          ],
+        },
       },
       resolve: null,
       text: END_TEXT,
