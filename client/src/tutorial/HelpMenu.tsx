@@ -25,18 +25,28 @@ import './coach.css'
 export function HelpMenu({
   intro = false,
   onLesson = (lesson) => window.location.assign(lessonUrl(lesson)),
+  starting,
 }: {
   readonly intro?: boolean
   readonly onLesson?: (lesson: string) => void
+  /** Whether the lesson `onLesson` asked for is still on its way (the
+   * landing's `tutorialStarting`). Given, the menu stays open on that lesson,
+   * saying "Starting…", until its room's first frame takes the page — as the
+   * lobby's Start Game does — rather than closing on a page that then sits
+   * there looking as though the click did nothing (the user, 2026-11-14). */
+  readonly starting?: boolean
 }) {
   const progress = useTutorialProgress()
   const coach = useCoach()
   const [open, setOpen] = useState(false)
+  const [startingLesson, setStartingLesson] = useState<string | null>(null)
+  const pendingLesson = starting === true ? startingLesson : null
   const boxRef = useRef<HTMLDivElement>(null)
 
   // Closes on a click anywhere else, or Escape — as the Settings panel does.
+  // Not while a lesson is starting: the menu is what says so.
   useEffect(() => {
-    if (!open) return
+    if (!open || pendingLesson !== null) return
     const onDown = (e: PointerEvent) => {
       if (!boxRef.current?.contains(e.target as Node)) setOpen(false)
     }
@@ -49,7 +59,7 @@ export function HelpMenu({
       document.removeEventListener('pointerdown', onDown)
       document.removeEventListener('keydown', onKey)
     }
-  }, [open])
+  }, [open, pendingLesson])
 
   const tourRunning = coach.tour !== null
   const showCallout = intro && !progress.seenIntro && !tourRunning && !open
@@ -66,10 +76,28 @@ export function HelpMenu({
   const rulesDone = progress.lessons[COMMANDER_RULES_LESSON] === 'done'
 
   const openLesson = (lesson: string) => {
-    setOpen(false)
+    if (pendingLesson !== null) return
+    // The callout's "Learn to play" opens the menu, to show it starting.
+    setOpen(starting !== undefined)
+    setStartingLesson(lesson)
     markIntroSeen()
     onLesson(lesson)
   }
+  /** A lesson's menu item: "Starting…" with the lobby's spinner while it's
+   * on its way, and none of the menu clickable meanwhile. */
+  const lessonItem = (lesson: string, label: string, note: string, done: boolean) => (
+    <button
+      type="button"
+      role="menuitem"
+      className={`help-item${pendingLesson === lesson ? ' pending' : ''}`}
+      disabled={pendingLesson !== null}
+      aria-busy={pendingLesson === lesson}
+      onClick={() => openLesson(lesson)}
+    >
+      <span>{pendingLesson === lesson ? 'Starting…' : label}</span>
+      <span className={`help-item-note${done ? ' help-item-done' : ''}`}>{note}</span>
+    </button>
+  )
   const learn = () => openLesson(LEARN_COMMANDER_LESSON)
 
   /** From where it stands (on this page, or by the way to its page), or —
@@ -146,24 +174,24 @@ export function HelpMenu({
               Start it over
             </button>
           ) : null}
-          <button type="button" role="menuitem" className="help-item" onClick={() => openLesson(BOARD_TOUR_LESSON)}>
-            <span>{boardDone ? 'Tour the board again' : 'Tour the board'}</span>
-            <span className={`help-item-note${boardDone ? ' help-item-done' : ''}`}>
-              {boardDone ? 'Done ✓' : 'A practice table'}
-            </span>
-          </button>
-          <button type="button" role="menuitem" className="help-item" onClick={learn}>
-            <span>{lessonDone ? 'Learn Commander again' : 'Learn Commander'}</span>
-            <span className={`help-item-note${lessonDone ? ' help-item-done' : ''}`}>
-              {lessonDone ? 'Done ✓' : 'A guided game'}
-            </span>
-          </button>
-          <button type="button" role="menuitem" className="help-item" onClick={() => openLesson(COMMANDER_RULES_LESSON)}>
-            <span>{rulesDone ? "Commander's rules again" : "Commander's rules"}</span>
-            <span className={`help-item-note${rulesDone ? ' help-item-done' : ''}`}>
-              {rulesDone ? 'Done ✓' : 'A second game'}
-            </span>
-          </button>
+          {lessonItem(
+            BOARD_TOUR_LESSON,
+            boardDone ? 'Tour the board again' : 'Tour the board',
+            boardDone ? 'Done ✓' : 'A practice table',
+            boardDone,
+          )}
+          {lessonItem(
+            LEARN_COMMANDER_LESSON,
+            lessonDone ? 'Learn Commander again' : 'Learn Commander',
+            lessonDone ? 'Done ✓' : 'A guided game',
+            lessonDone,
+          )}
+          {lessonItem(
+            COMMANDER_RULES_LESSON,
+            rulesDone ? "Commander's rules again" : "Commander's rules",
+            rulesDone ? 'Done ✓' : 'A second game',
+            rulesDone,
+          )}
         </div>
       ) : null}
     </div>

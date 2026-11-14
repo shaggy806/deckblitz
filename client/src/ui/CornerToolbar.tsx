@@ -18,10 +18,20 @@ import { HelpMenu } from '../tutorial/HelpMenu.tsx'
 export function CornerToolbar({
   intro = false,
   onLesson,
-}: { readonly intro?: boolean; readonly onLesson?: (lesson: string) => void } = {}) {
+  lessonStarting,
+}: {
+  readonly intro?: boolean
+  readonly onLesson?: (lesson: string) => void
+  /** With `onLesson`: whether its lesson is still on its way (`HelpMenu`'s `starting`). */
+  readonly lessonStarting?: boolean
+} = {}) {
   return (
     <div className="corner-toolbar" role="toolbar" aria-label="Site">
-      <HelpMenu intro={intro} {...(onLesson !== undefined ? { onLesson } : {})} />
+      <HelpMenu
+        intro={intro}
+        {...(onLesson !== undefined ? { onLesson } : {})}
+        {...(lessonStarting !== undefined ? { starting: lessonStarting } : {})}
+      />
       <MotionControl place="corner" />
     </div>
   )

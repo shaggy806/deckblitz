@@ -252,6 +252,55 @@ button.coach-next:hover:not(:disabled) {
 .help-item-done {
   color: var(--good);
 }
+/* A lesson on its way to its first frame (`HelpMenu`'s `starting`): the
+   lobby's waiting look (lobby.css's `.seat-board .pending`), an outline and
+   a spinner at the corner, both held back 150 ms so a quick start never
+   flickers them. Not dimmed with the rest of the menu. */
+.help-item.pending {
+  position: relative;
+  opacity: 1;
+  color: var(--text);
+  animation: help-pending-outline 0s linear 150ms both;
+}
+.help-item.pending::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent);
+  border-right-color: transparent;
+  border-radius: 50%;
+  background: var(--panel);
+  animation:
+    help-pending-show 0s linear 150ms both,
+    help-spin 0.7s linear infinite;
+}
+@keyframes help-pending-outline {
+  from {
+    outline: 0 solid transparent;
+  }
+  to {
+    outline: 2px solid var(--accent);
+  }
+}
+@keyframes help-pending-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes help-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+:root[data-reduce-motion] .help-item.pending::after {
+  animation: help-pending-show 0s linear 150ms both;
+}
 .help-restart {
   align-self: flex-start;
   font-size: var(--text-xs);

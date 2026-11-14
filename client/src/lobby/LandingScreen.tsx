@@ -266,7 +266,11 @@ export function LandingScreen({
       </SiteNotice>
 
       {/* The tutorials' first-visit callout shows on this page only. */}
-      <CornerToolbar intro onLesson={(lesson) => game.createTutorial(lesson)} />
+      <CornerToolbar
+        intro
+        onLesson={(lesson) => game.createTutorial(lesson)}
+        lessonStarting={game.tutorialStarting}
+      />
 
       {/* A dev build only: dev-rooms' preloaded boards, fixed down the right
           side beside the column. */}
