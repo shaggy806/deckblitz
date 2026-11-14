@@ -1221,7 +1221,9 @@ function damageOutcomeKey(outcome: ReturnType<typeof runDamageSteps>): string {
           (s.prevented > 0 || (s.thenAmount ?? 0) > 0) &&
           (s.shield.redirect !== undefined || s.shield.redirectToSource !== undefined || s.shield.gainLife !== undefined || s.shield.then !== undefined),
       )
-      .map((s) => [s.shield.source, s.thenAmount ?? s.prevented]),
+      // Where a redirection sends it, too: one card's two redirections (cast
+      // twice) differ by nothing else.
+      .map((s) => [s.shield.source, s.thenAmount ?? s.prevented, s.shield.redirect?.to ?? null]),
     outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent,
     outcome.preventedAll?.step.then === undefined ? null : [outcome.preventedAll.step.made.key, outcome.preventedAll.thenAmount ?? outcome.preventedAll.amount],
     outcome.replaced === undefined ? null : [outcome.replaced.step.key, outcome.replaced.amount],
@@ -57658,19 +57660,30 @@ controlledBy,
     const applicable = rest.filter(
       (s) => (s.ifAtMost === undefined || each <= s.ifAtMost) && (s.ifAtLeast === undefined || each >= s.ifAtLeast),
     );
-    const named = applicable.filter(
-      (s, i) => applicable.findIndex((o) => this.damageStepName(o) === this.damageStepName(s) && this.damageStepText(o) === this.damageStepText(s)) === i,
-    );
+    // Two effects alike are one option — but not two redirections to
+    // different permanents of one name (two Gideon's Sacrifices).
+    const alike = (o: DamageStep, s: DamageStep): boolean => {
+      const [to, other] = [this.damageStepTo(o), this.damageStepTo(s)];
+      return (
+        this.damageStepName(o) === this.damageStepName(s) &&
+        this.damageStepText(o) === this.damageStepText(s) &&
+        (to === undefined ? other === undefined : other !== undefined && sameTargetRef(to, other))
+      );
+    };
+    const named = applicable.filter((s, i) => applicable.findIndex((o) => alike(o, s)) === i);
     if (named.length < 2) return false;
     const best = this.bestDamageOrder(amount, sources, rest, unpreventable, first)[first.length];
     const options = named.map((step) => {
       const after = this.bestDamageOrder(amount, sources, rest.filter((s) => s !== step), unpreventable, [...first, step]);
-      const outcome = run(after);
       return {
         key: step.made.key,
         name: this.damageStepName(step),
         text: this.damageStepText(step),
-        result: outcome.dealt > 0 ? `${outcome.dealt} damage is dealt` : outcome.redirected !== undefined ? "it's redirected" : "no damage is dealt",
+        result: this.damageLandingWords(
+          this.damageLandings(source, target, amount, sources, after, combat, sourceLastKnown, unpreventable, NO_DAMAGE_APPLIED),
+          target,
+          player,
+        ),
         ...(this.state.objects[step.made.by]?.zone === "battlefield" ? { object: step.made.by } : {}),
       };
     });
@@ -57694,11 +57707,82 @@ controlledBy,
     return chosen.flatMap((key) => steps.filter((s) => s.made.key === key));
   }
 
+  /** Where a damage step redirects the damage, if it's a redirection to a
+   * fixed recipient. */
+  private damageStepTo(step: DamageStep): TargetRef | undefined {
+    return step.kind === "redirect" ? step.to : step.kind === "shield" ? step.shield.redirect?.to : undefined;
+  }
+
+  /**
+   * Where `amount` damage from `source` to `target` ends up with the effects
+   * applied in `order`: what's dealt to `target`, and each redirection
+   * followed to its new recipient (rule 614.9), where the effects not yet
+   * applied to this event apply in turn (614.5, 616.1f) — in the best order
+   * for that recipient's player, whom no question asks there. For a
+   * `replacement-order` option's result: with two Gideon's Sacrifices, the
+   * one applied first sends the damage to its permanent, and the other then
+   * on to its own, so the option says where it lands, not only where it goes
+   * first. A few redirections deep at most.
+   */
+  private damageLandings(
+    source: ObjectId,
+    target: TargetRef,
+    amount: number,
+    sources: number,
+    order: readonly DamageStep[],
+    combat: boolean,
+    sourceLastKnown: LastKnownInfo | undefined,
+    unpreventable: boolean,
+    applied: DamageApplied,
+    depth = 0,
+  ): { readonly to: TargetRef; readonly amount: number }[] {
+    const outcome = runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
+    const landings: { readonly to: TargetRef; readonly amount: number }[] = [];
+    if (outcome.dealt > 0) landings.push({ to: target, amount: outcome.dealt });
+    const follow = (to: TargetRef, moved: number, after: DamageApplied): void => {
+      if (moved <= 0) return;
+      if (depth >= 4) {
+        landings.push({ to, amount: moved });
+        return;
+      }
+      const steps = this.damageSteps(source, to, combat, sourceLastKnown, after);
+      const next = this.bestDamageOrder(moved, 1, steps, unpreventable);
+      landings.push(...this.damageLandings(source, to, moved, 1, next, combat, sourceLastKnown, unpreventable, after, depth + 1));
+    };
+    for (const { shield, prevented } of outcome.shields) {
+      const to = this.shieldRedirect(shield, source, sourceLastKnown);
+      if (to !== undefined) follow(to, prevented, { ...applied, shields: [...applied.shields, shield] });
+    }
+    if (outcome.redirected !== undefined) {
+      const { step, amount: moved } = outcome.redirected;
+      follow(step.to, moved, { ...applied, statics: [...applied.statics, step.key] });
+    }
+    return landings;
+  }
+
+  /** `damageLandings` in words, for `asked` — the player the question is
+   * for — about damage first aimed at `target`. */
+  private damageLandingWords(
+    landings: readonly { readonly to: TargetRef; readonly amount: number }[],
+    target: TargetRef,
+    asked: PlayerId,
+  ): string {
+    if (landings.length === 0) return "no damage is dealt";
+    const whom = (to: TargetRef): string =>
+      to.kind === "player"
+        ? to.player === asked
+          ? "you"
+          : "another player"
+        : (this.state.objects[to.object]?.cardName ?? "another permanent");
+    return landings
+      .map(({ to, amount }) => (sameTargetRef(to, target) ? `${amount} damage is dealt` : `${amount} damage is dealt to ${whom(to)}`))
+      .join(", ");
+  }
+
   /** A damage step's effect in a few words; a redirection says where to, as
    * two copies of one card can differ by nothing else. */
   private damageStepText(step: DamageStep): string {
-    const to =
-      step.kind === "redirect" ? step.to : step.kind === "shield" ? step.shield.redirect?.to : undefined;
+    const to = this.damageStepTo(step);
     if (to === undefined) return damageStepText(step);
     return `redirects it to ${to.kind === "player" ? "you" : (this.state.objects[to.object]?.cardName ?? "another permanent")}`;
   }

@@ -11870,6 +11870,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Two Gideon's Sacrifices: each choice says where the damage lands",
+    board({
+      you: {
+        bf: ['Colossal Dreadmaw', 'Wall of Stone', 'Plains*2', 'Mountain'],
+        hand: ["Gideon's Sacrifice", "Gideon's Sacrifice", 'Lightning Bolt'],
+      },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    "Two Gideon's Sacrifices at four players: damage to one of your creatures",
+    board({
+      you: {
+        bf: ['Colossal Dreadmaw', 'Wall of Stone', 'Grizzly Bears', 'Plains*2', 'Mountain'],
+        hand: ["Gideon's Sacrifice", "Gideon's Sacrifice", 'Lightning Bolt'],
+      },
+      opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
+    }),
+  ),
+  preset(
     'Herigast: any creature spell can emerge',
     board({
       you: { bf: ['Herigast, Erupting Nullkite', 'Hill Giant', 'Forest'], hand: ['Grizzly Bears'] },

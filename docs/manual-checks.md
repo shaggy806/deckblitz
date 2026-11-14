@@ -133,6 +133,15 @@ engine terms. A second thing to check is a second test.
 - **Expect:** Each of the two cards asks "You would draw a card. Which applies first?", with a Notion Thief button for each of Bob and Carol saying "the card goes to" that player. Whoever the button you pick names gets that card; you draw neither.
 - **Not a bug:** the Thief you pick isn't the one whose owner gets the card: the other Thief then takes the draw.
 
+### Two Gideon's Sacrifices: each choice says where the damage lands
+- **Do:** Cast Gideon's Sacrifice choosing Colossal Dreadmaw, then the other choosing Wall of Stone. Cast Lightning Bolt on yourself.
+- **Expect:** "Lightning Bolt would deal 3 damage to you. Which applies first?", two Gideon's Sacrifice buttons: "redirects it to Colossal Dreadmaw (3 damage is dealt to Wall of Stone)" and the other way round. The one you pick puts 3 damage on the permanent its brackets name; your life doesn't change.
+- **Not a bug:** the button naming the Dreadmaw sends the damage to the Wall: the other Sacrifice then moves it on.
+
+### Two Gideon's Sacrifices at four players: damage to one of your creatures
+- **Do:** Cast Gideon's Sacrifice choosing Colossal Dreadmaw, then the other choosing Wall of Stone. Cast Lightning Bolt on your Grizzly Bears.
+- **Expect:** "Lightning Bolt would deal 3 damage to Grizzly Bears. Which applies first?", with the two Gideon's Sacrifice buttons as above. The Bears take nothing; the permanent the picked button's brackets name takes 3.
+
 ## "Instead": replacements and shields (2026-11-08)
 
 ### Moonlit Meditation: you choose the first token event of the turn

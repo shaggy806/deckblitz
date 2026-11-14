@@ -322,6 +322,23 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Redirections to chosen permanents, ordered by the affected player — built 2026-11-13
+
+The key `decision:damage-redirect-order`. The `replacement-order` question
+(rule 616.1) already came up for two redirections; three things kept it from
+being a real choice. An option's result now follows each redirection to its
+new recipient, where the effects not yet applied apply in turn (614.5,
+616.1f — `Game.damageLandings`), so it says where the damage lands: with two
+Gideon's Sacrifices the one applied first sends the damage to its permanent
+and the other on to its own. Two redirections from one card (a Saga's
+chapters I and II proliferated into one turn) differ in the outcome by where
+they send it, and two to permanents of one name are no longer merged as one
+option. Gideon's Sacrifice (rank 5220), Ascent of the Worthy (rank 17955),
+both a `choose-permanents` around a `damage-rule`'s `redirectTo: 0`.
+`test/damage-redirect-order.test.ts`. Left: a redirected hit asks nothing at
+its new recipient (`dealDamage` asks only for an event's first hit); the
+best order there is taken.
+
 ### Damage doubled to the chosen player's side — built 2026-11-13
 
 The key `replacement:damage-double-to-chosen-player-side`. A `would-deal-damage`
