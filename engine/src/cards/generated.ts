@@ -1413,6 +1413,7 @@ import _poolAscendantPackleader from "./pool/ascendant-packleader.js";
 import _poolAscendantSpirit from "./pool/ascendant-spirit.js";
 import _poolAscendedLawmage from "./pool/ascended-lawmage.js";
 import _poolAscendingAven from "./pool/ascending-aven.js";
+import _poolAscentOfTheWorthy from "./pool/ascent-of-the-worthy.js";
 import _poolAsceticism from "./pool/asceticism.js";
 import _poolAsgardianCitadel from "./pool/asgardian-citadel.js";
 import _poolAsgardianInspiration from "./pool/asgardian-inspiration.js";
@@ -10822,6 +10823,7 @@ import _poolGideonsMemorial from "./pool/gideons-memorial.js";
 import _poolGideonsPhalanx from "./pool/gideons-phalanx.js";
 import _poolGideonsReproach from "./pool/gideons-reproach.js";
 import _poolGideonsResolve from "./pool/gideons-resolve.js";
+import _poolGideonsSacrifice from "./pool/gideons-sacrifice.js";
 import _poolGideonsTriumph from "./pool/gideons-triumph.js";
 import _poolGiftOfCompleation from "./pool/gift-of-compleation.js";
 import _poolGiftOfDoom from "./pool/gift-of-doom.js";
@@ -12275,6 +12277,7 @@ import _poolHaveABite from "./pool/have-a-bite.js";
 import _poolHaveForDinner from "./pool/have-for-dinner.js";
 import _poolHavenOfTheHarvest from "./pool/haven-of-the-harvest.js";
 import _poolHavenOfTheSpiritDragon from "./pool/haven-of-the-spirit-dragon.js";
+import _poolHavengulLich from "./pool/havengul-lich.js";
 import _poolHavengulRunebinder from "./pool/havengul-runebinder.js";
 import _poolHavengulSkaab from "./pool/havengul-skaab.js";
 import _poolHavengulVampire from "./pool/havengul-vampire.js";
@@ -20688,6 +20691,7 @@ import _poolPsychicIntrusion from "./pool/psychic-intrusion.js";
 import _poolPsychicMembrane from "./pool/psychic-membrane.js";
 import _poolPsychicMiasma from "./pool/psychic-miasma.js";
 import _poolPsychicOverload from "./pool/psychic-overload.js";
+import _poolPsychicPaper from "./pool/psychic-paper.js";
 import _poolPsychicPickpocket from "./pool/psychic-pickpocket.js";
 import _poolPsychicPossession from "./pool/psychic-possession.js";
 import _poolPsychicPuppetry from "./pool/psychic-puppetry.js";
@@ -23184,6 +23188,7 @@ import _poolSawbackManticore from "./pool/sawback-manticore.js";
 import _poolSawbladeScamp from "./pool/sawblade-scamp.js";
 import _poolSawbladeSkinripper from "./pool/sawblade-skinripper.js";
 import _poolSawbladeSlinger from "./pool/sawblade-slinger.js";
+import _poolSawhornNemesis from "./pool/sawhorn-nemesis.js";
 import _poolSawtoothLoon from "./pool/sawtooth-loon.js";
 import _poolSawtoothOgre from "./pool/sawtooth-ogre.js";
 import _poolSawtoothThresher from "./pool/sawtooth-thresher.js";
@@ -34211,6 +34216,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAscendantSpirit,
   _poolAscendedLawmage,
   _poolAscendingAven,
+  _poolAscentOfTheWorthy,
   _poolAsceticism,
   _poolAsgardianCitadel,
   _poolAsgardianInspiration,
@@ -43620,6 +43626,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGideonsPhalanx,
   _poolGideonsReproach,
   _poolGideonsResolve,
+  _poolGideonsSacrifice,
   _poolGideonsTriumph,
   _poolGiftOfCompleation,
   _poolGiftOfDoom,
@@ -45073,6 +45080,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHaveForDinner,
   _poolHavenOfTheHarvest,
   _poolHavenOfTheSpiritDragon,
+  _poolHavengulLich,
   _poolHavengulRunebinder,
   _poolHavengulSkaab,
   _poolHavengulVampire,
@@ -53486,6 +53494,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPsychicMembrane,
   _poolPsychicMiasma,
   _poolPsychicOverload,
+  _poolPsychicPaper,
   _poolPsychicPickpocket,
   _poolPsychicPossession,
   _poolPsychicPuppetry,
@@ -55982,6 +55991,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSawbladeScamp,
   _poolSawbladeSkinripper,
   _poolSawbladeSlinger,
+  _poolSawhornNemesis,
   _poolSawtoothLoon,
   _poolSawtoothOgre,
   _poolSawtoothThresher,
@@ -67022,6 +67032,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ascendant-spirit": _poolAscendantSpirit,
   "pool/ascended-lawmage": _poolAscendedLawmage,
   "pool/ascending-aven": _poolAscendingAven,
+  "pool/ascent-of-the-worthy": _poolAscentOfTheWorthy,
   "pool/asceticism": _poolAsceticism,
   "pool/asgardian-citadel": _poolAsgardianCitadel,
   "pool/asgardian-inspiration": _poolAsgardianInspiration,
@@ -76431,6 +76442,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gideons-phalanx": _poolGideonsPhalanx,
   "pool/gideons-reproach": _poolGideonsReproach,
   "pool/gideons-resolve": _poolGideonsResolve,
+  "pool/gideons-sacrifice": _poolGideonsSacrifice,
   "pool/gideons-triumph": _poolGideonsTriumph,
   "pool/gift-of-compleation": _poolGiftOfCompleation,
   "pool/gift-of-doom": _poolGiftOfDoom,
@@ -77884,6 +77896,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/have-for-dinner": _poolHaveForDinner,
   "pool/haven-of-the-harvest": _poolHavenOfTheHarvest,
   "pool/haven-of-the-spirit-dragon": _poolHavenOfTheSpiritDragon,
+  "pool/havengul-lich": _poolHavengulLich,
   "pool/havengul-runebinder": _poolHavengulRunebinder,
   "pool/havengul-skaab": _poolHavengulSkaab,
   "pool/havengul-vampire": _poolHavengulVampire,
@@ -86297,6 +86310,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/psychic-membrane": _poolPsychicMembrane,
   "pool/psychic-miasma": _poolPsychicMiasma,
   "pool/psychic-overload": _poolPsychicOverload,
+  "pool/psychic-paper": _poolPsychicPaper,
   "pool/psychic-pickpocket": _poolPsychicPickpocket,
   "pool/psychic-possession": _poolPsychicPossession,
   "pool/psychic-puppetry": _poolPsychicPuppetry,
@@ -88793,6 +88807,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sawblade-scamp": _poolSawbladeScamp,
   "pool/sawblade-skinripper": _poolSawbladeSkinripper,
   "pool/sawblade-slinger": _poolSawbladeSlinger,
+  "pool/sawhorn-nemesis": _poolSawhornNemesis,
   "pool/sawtooth-loon": _poolSawtoothLoon,
   "pool/sawtooth-ogre": _poolSawtoothOgre,
   "pool/sawtooth-thresher": _poolSawtoothThresher,

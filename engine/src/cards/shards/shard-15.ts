@@ -367,6 +367,7 @@ import _poolHardenedBerserker from "../pool/hardened-berserker.js";
 import _poolHaruHiddenTalent from "../pool/haru-hidden-talent.js";
 import _poolHaunterOfNightveil from "../pool/haunter-of-nightveil.js";
 import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
+import _poolHavengulLich from "../pool/havengul-lich.js";
 import _poolHavengulVampire from "../pool/havengul-vampire.js";
 import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
 import _poolHazelsBrewmaster from "../pool/hazels-brewmaster.js";
@@ -1336,6 +1337,7 @@ const shard: CardShard = {
     _poolHaruHiddenTalent,
     _poolHaunterOfNightveil,
     _poolHavenOfTheSpiritDragon,
+    _poolHavengulLich,
     _poolHavengulVampire,
     _poolHawkeyesBow,
     _poolHazelsBrewmaster,

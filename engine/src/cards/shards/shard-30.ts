@@ -45,6 +45,7 @@ import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArmedDangerous from "../pool/armed-dangerous.js";
 import _poolArmoryGuard from "../pool/armory-guard.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
+import _poolAscentOfTheWorthy from "../pool/ascent-of-the-worthy.js";
 import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
 import _poolAssaultDrone from "../pool/assault-drone.js";
@@ -685,6 +686,7 @@ import _poolPriceOfProgress from "../pool/price-of-progress.js";
 import _poolPrimalSurge from "../pool/primal-surge.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolProtectorOfTheCrown from "../pool/protector-of-the-crown.js";
+import _poolPsychicPaper from "../pool/psychic-paper.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPull from "../pool/pull.js";
@@ -1088,6 +1090,7 @@ const shard: CardShard = {
     _poolArmedDangerous,
     _poolArmoryGuard,
     _poolArtfulDodge,
+    _poolAscentOfTheWorthy,
     _poolAshioksForerunner,
     _poolAspectOfGorgon,
     _poolAssaultDrone,
@@ -1728,6 +1731,7 @@ const shard: CardShard = {
     _poolPrimalSurge,
     _poolPropellerPioneer,
     _poolProtectorOfTheCrown,
+    _poolPsychicPaper,
     _poolPterafractyl,
     _poolPugnaciousPugilist,
     _poolPull,

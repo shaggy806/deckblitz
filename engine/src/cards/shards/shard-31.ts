@@ -775,6 +775,7 @@ import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
 import _poolSanguinaryPriest from "../pool/sanguinary-priest.js";
 import _poolSanityGrinding from "../pool/sanity-grinding.js";
 import _poolSapseepForest from "../pool/sapseep-forest.js";
+import _poolSawhornNemesis from "../pool/sawhorn-nemesis.js";
 import _poolSawtoothOgre from "../pool/sawtooth-ogre.js";
 import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
@@ -1858,6 +1859,7 @@ const shard: CardShard = {
     _poolSanguinaryPriest,
     _poolSanityGrinding,
     _poolSapseepForest,
+    _poolSawhornNemesis,
     _poolSawtoothOgre,
     _poolSazhKatzroy,
     _poolScaledBehemoth,
