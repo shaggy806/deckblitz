@@ -2555,7 +2555,8 @@
   "cost:cumulative-upkeep-opponent-gains-life",
   "cost:cumulative-upkeep-opponent-gains-life",
   "cost:cost-reduction-commander-casts",
-  "trigger:commander-put-into-command-zone"
+  "trigger:commander-put-into-command-zone",
+  "cost:may-exile-self-and-named-from-graveyard"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
