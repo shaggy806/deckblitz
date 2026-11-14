@@ -323,7 +323,9 @@ export type JournalWhat =
    * (a `"recipient"` view): the list is its controller's as it was crewed, a
    * filter reads it as it was then, and `selfOnly` is "each creature that
    * crewed **it** this turn" (Luxurious Locomotive) — those that have left
-   * since included (its ruling). */
+   * since included (its ruling). `turn-history`'s `doneBy` reads the
+   * creature instead, as it was tapped: "if **an Assassin** crewed it this
+   * turn" (Adrestia). */
   | "crewers"
   /** Each creature declared as an attacker, once in each stint, however many
    * combats it attacked in. */

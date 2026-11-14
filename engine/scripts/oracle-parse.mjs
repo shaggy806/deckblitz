@@ -13919,10 +13919,20 @@ function counterAbilityAt(sentences, i, ctx) {
  * Ultimatum), and "Choose any number of creatures with different powers. Those
  * creatures gain double strike until end of turn." (Sigarda's Vanguard). */
 function distinctSetAt(sentences, i) {
-  const rule = (word) => (/powers/i.test(word) ? { distinctPowers: true } : { distinctNames: true });
-  const back = /^return any number of (.+?) cards with different (names|powers) from your graveyard to the battlefield\.$/i.exec(sentences[i]);
+  const rule = (word) =>
+    /powers/i.test(word)
+      ? { distinctPowers: true }
+      : /mana values/i.test(word)
+        ? { distinctManaValues: true }
+        : { distinctNames: true };
+  // "Return any number of cards with different mana values from your
+  // graveyard to your hand." (Seasons Past) too.
+  const back =
+    /^return any number of (?:(.+?) )?cards with different (names|powers|mana values) from your graveyard to (the battlefield|your hand)\.$/i.exec(
+      sentences[i],
+    );
   if (back !== null) {
-    const filter = parseTypePhrase(back[1], { cards: true });
+    const filter = back[1] === undefined ? {} : parseTypePhrase(back[1], { cards: true });
     if (filter === null) return null;
     return {
       effect: {
@@ -13930,9 +13940,9 @@ function distinctSetAt(sentences, i) {
         zone: "graveyard",
         min: 0,
         max: 99,
-        filter,
+        ...(Object.keys(filter).length > 0 ? { filter } : {}),
         together: rule(back[2]),
-        destination: "battlefield",
+        destination: /hand/i.test(back[3]) ? "hand" : "battlefield",
         leftover: "stay",
       },
       used: 1,
@@ -16284,6 +16294,21 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.additionalCost = { exileFromHandReduces: { filter: { colors: [COLOR_WORD[m[1]]] }, each: Number(m[2]) } };
       continue;
     }
+    // Hierophant Bio-Titan: counters removed as it's cast, how many announced
+    // as X, each taking this off. A permanent spell's too.
+    if (
+      (m =/^As an additional cost to cast ~, you may remove any number of (\+1\/\+1|[a-z]+) counters from among (creatures|artifacts|permanents) you control\. ~ costs \{(\d+)\} less to cast for each counter removed this way\.$/.exec(line))
+    ) {
+      const type = { creatures: "creature", artifacts: "artifact" }[m[2]];
+      out.additionalCost = {
+        also: {
+          text: `Remove any number of ${m[1]} counters from among ${m[2]} you control`,
+          do: { kind: "remove-counters", ...(type !== undefined ? { from: { type } } : { from: {} }), counter: m[1], count: "x", among: true },
+        },
+        reducesPerX: Number(m[3]),
+      };
+      continue;
+    }
     // Plumb the Forbidden: a sacrifice of X (none included) and one reflexive
     // trigger making X copies.
     if (
@@ -17672,6 +17697,11 @@ function parseFaceAsWritten(face, ctx = {}) {
         text = exiles[1];
         out.exileOnResolve = true;
       }
+      // "…. Put Seasons Past on the bottom of its owner's library." closing
+      // the spell: its last instruction, the spell moving itself.
+      const bottom = /^(.+\.) Put ~ on the bottom of its owner's library\.$/.exec(text);
+      const toBottom = bottom !== null;
+      if (bottom !== null) text = bottom[1];
       // "…. X can't be 0." closing a spell with {X} in its mana cost (Mind
       // Grind): the least X its caster may announce (`minX`).
       const noZero = /^(.+\.) X can't be 0\.$/.exec(text);
@@ -17739,6 +17769,10 @@ function parseFaceAsWritten(face, ctx = {}) {
       const division = r.effect === null ? undefined : ctx2.divided.value;
       const misplaced = division !== undefined && division.slot !== ownTargets.length - 1;
       out.effect = misplaced ? null : r.effect;
+      if (toBottom && out.effect !== null) {
+        const steps = out.effect.kind === "sequence" ? out.effect.effects : [out.effect];
+        out.effect = { kind: "sequence", effects: [...steps, { kind: "put-on-library", target: "source", position: "bottom" }] };
+      }
       if (paradigm && out.effect !== null) {
         const steps = out.effect.kind === "sequence" ? out.effect.effects : [out.effect];
         out.effect = { kind: "sequence", effects: [...steps, { kind: "paradigm" }] };

@@ -116,11 +116,12 @@ function xValueOf(
   legal: CastSpellLegal,
   targets: readonly (TargetRef | null)[],
 ): { xValue?: number; delve?: ObjectId[] } {
-  // A sacrifice count (Dargo): the fewest that pay.
+  // A sacrifice count (Dargo), counters to remove (Hierophant Bio-Titan):
+  // the fewest that pay.
   let xValue =
     legal.xCost === undefined
       ? undefined
-      : legal.xCost.sacrifice === true
+      : legal.xCost.sacrifice === true || legal.xCost.removesCounters === true
         ? (legal.xCost.minX ?? 0)
         : maxXForTargets(legal.xCost, legal.targetCount, targets);
   // A March's cards from hand are worth more than X: the largest X mana alone

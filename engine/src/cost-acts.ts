@@ -56,7 +56,10 @@ export const COST_ACTS = {
   untap: {},
   "discard-hand": {},
   discard: { maxX: (spec, ctx) => ctx.handSizeOf(ctx.controller, spec.filter) },
-  "remove-counters": { payable: (spec, ctx) => ctx.removableCounters(spec) >= (spec.count === "any" ? 0 : amountValue(spec.count, ctx)) },
+  "remove-counters": {
+    payable: (spec, ctx) => ctx.removableCounters(spec) >= (spec.count === "any" ? 0 : amountValue(spec.count, ctx)),
+    maxX: (spec, ctx) => ctx.removableCounters(spec),
+  },
   sacrifice: {
     payable: (spec, ctx) => ctx.sacrificeCandidateCount(spec.filter) >= amountValue(spec.count, ctx),
     maxX: (spec, ctx) => ctx.sacrificeCandidateCount(spec.filter),

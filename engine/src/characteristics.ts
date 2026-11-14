@@ -2073,8 +2073,15 @@ export function damageDealtThisTurn(
 
 /** How a {@link journalCount} reads beyond its list: the zones a
  * `to-graveyard` arrival came from, the window (default this turn), and
- * `toPlayer`, only the entries done to that player (an entry's `target`). */
-export type JournalReadOptions = JournalOrigin & { readonly window?: JournalWindow; readonly toPlayer?: PlayerId };
+ * `toPlayer`, only the entries done to that player (an entry's `target`);
+ * `doneBy`, for a `"recipient"` view, only the entries whose own object —
+ * the one that did it — matched this as it was then (Adrestia's "if **an
+ * Assassin** crewed it": a `crews` entry's creature as it was tapped). */
+export type JournalReadOptions = JournalOrigin & {
+  readonly window?: JournalWindow;
+  readonly toPlayer?: PlayerId;
+  readonly doneBy?: CardFilter;
+};
 
 /**
  * How many things of one journal word (`JournalWhat`, `journal.ts`'s
@@ -2110,6 +2117,16 @@ export function journalCount(
     if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
     if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
     if (options?.toPlayer !== undefined && (entry.target?.kind !== "player" || entry.target.player !== options.toPlayer)) continue;
+    // The one that did it, as it was then (rule 603.10a), beside a filter
+    // on what it was done to: a crewer as it was tapped (702.122c).
+    const doneBy = options?.doneBy;
+    if (
+      doneBy !== undefined &&
+      (entry.object === undefined ||
+        !matchesFilter(state, registry, entry.object, doneBy, entry.was !== undefined ? { you, snapshot: entry.was } : { you, lastKnown: true }))
+    ) {
+      continue;
+    }
     const object = aboutRecipient ? (entry.target?.kind === "object" ? entry.target.object : undefined) : entry.object;
     const stint = aboutRecipient ? entry.targetStint : entry.stint;
     const was = aboutRecipient ? entry.targetWas : entry.was;

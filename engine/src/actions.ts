@@ -1393,6 +1393,12 @@ export type LegalAction =
         readonly minX?: number;
         /** See `XCostOffer.sacrifice`. */
         readonly sacrifice?: true;
+        /** See `XCostOffer.removesCounters`. */
+        readonly removesCounters?: true;
+        /** X is "Casualty X"'s (`CasualtySpec` — Ob Nixilis, the Adversary),
+         * nothing paid for it: the creature sacrificed, if any, is asked once
+         * the spell is on the stack, of power X or greater. */
+        readonly casualty?: true;
         /** X is a number chosen as an additional cost, nothing paid for it
          * (`CardDefinition.additionalCost.chooseNumber` — Liquid Fire). */
         readonly chosenNumber?: true;

@@ -6,7 +6,7 @@
  * instance and is the only thing that writes to it; everything else reads.
  */
 
-import type { KeywordAbilityName } from "./characteristics-patch.js";
+import type { CopyExceptions, KeywordAbilityName } from "./characteristics-patch.js";
 import type { Action, CastSpellOffer, CastVia, PlayLandOffer } from "./actions.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
@@ -1910,6 +1910,11 @@ export interface PtModifier {
    * (Brenard, Ginger Sculptor). Seen by `legalActions`, activation and the
    * mana payer like any granted activated ability. */
   grantsActivated?: ActivatedAbility[];
+  /** How `player` may spend mana to activate this modifier's
+   * `grantsActivated` (rule 609.4b) — a `grant-activated-of`'s `spendAs`:
+   * Grell Philosopher's "you may spend blue mana as though it were mana of
+   * any color to activate those abilities". Read by `Game.spendAsFor`. */
+  grantsActivatedSpendAs?: { readonly player: PlayerId; readonly as: SpendAs };
   /** "Until your next turn": it ends as this player's next turn begins, or
    * as it would have begun once they've left the game (rule 800.4m). */
   untilTurnOf?: PlayerId;
@@ -3155,6 +3160,11 @@ export interface CasualtyAsk {
   /** The N of each instance still to ask about, in order; the first is the
    * one a raised decision is asking about. */
   readonly amounts: readonly number[];
+  /** Beside `amounts`, each instance's copy exceptions (`CasualtySpec`'s
+   * `copyExcept` — Ob Nixilis, the Adversary's "the copy isn't legendary and
+   * has starting loyalty X"), `null` for a plain copy; left out when none
+   * has any. */
+  readonly excepts?: readonly (CopyExceptions | null)[];
   readonly priorityTo: PlayerId;
 }
 

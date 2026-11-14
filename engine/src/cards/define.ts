@@ -282,6 +282,27 @@ export interface SpellCastClause {
   readonly firstEachTurn?: boolean;
 }
 
+/**
+ * Casualty with more than a number — see `CardDefinition.casualty`.
+ *
+ * `n: "x"` is "Casualty X" (Ob Nixilis, the Adversary — rule 702.153a): X is
+ * announced as the spell is cast (601.2b; its ruling: "you choose whether to
+ * pay its casualty cost and what the value of X will be"), offered as the
+ * cast's `xCost` with `casualty` up to the greatest power among the creatures
+ * the caster could sacrifice, and the creature, of power X or greater, asked
+ * as any casualty's is. Not an {X} in the mana cost: the mana value doesn't
+ * count it. A copy copies it (rule 707.10).
+ *
+ * `copyExcept` is "The copy isn't legendary" (rule 707.9b): the copy the
+ * casualty trigger makes, made with these exceptions; `copyLoyaltyX` is
+ * "…and has starting loyalty X" — that exception's `loyalty` the X announced.
+ */
+export interface CasualtySpec {
+  readonly n: number | "x";
+  readonly copyExcept?: CopyExceptions;
+  readonly copyLoyaltyX?: true;
+}
+
 /** A kicker's non-mana cost — see `CardDefinition.kicker.also`. */
 export interface KickerAlsoCost {
   readonly text: string;
@@ -1464,6 +1485,13 @@ export type StaticCondition =
        * "if **it** dealt combat damage to a player this turn" (`what:
        * "combat-damaged-by"`, `who: "any-player"`). */
       readonly selfOnly?: boolean;
+      /** For a view about what was done to something (`"crewers"`, whose
+       * `filter` reads the Vehicle): only the entries whose doer matched this
+       * as it was then — Adrestia's "if **an Assassin** crewed it this turn"
+       * (`{ what: "crewers", who: "any-player", selfOnly: true, doneBy: {
+       * subtype: "Assassin" } }`), each crewer as it was tapped (702.122c),
+       * though it has left or changed since. */
+      readonly doneBy?: CardFilter;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
       /** Only what was done to this player — an attack at them (the player,
@@ -4411,6 +4439,20 @@ export interface CardDefinition {
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
     /**
+     * With an `also.do` act that reads X: "you **may remove any number of
+     * +1/+1 counters from among creatures you control. This spell costs {2}
+     * less to cast for each counter removed this way**" (Hierophant
+     * Bio-Titan — `also.do: { kind: "remove-counters", count: "x", among }`)
+     * — `sacrificeReduces`' shape for an act as the cost: how many is
+     * announced as X as it's cast (rule 601.2b), each one taking this much
+     * generic off the total cost (601.2f, never its colored part — the
+     * ruling), and the act done as the cost is paid (601.2h). X is only that
+     * count, and any number may be chosen, even past what lowers the cost
+     * further (the ruling). Offered as `xCost.removesCounters` when the act
+     * removes counters.
+     */
+    readonly reducesPerX?: number;
+    /**
      * With `sacrificeCount: "x"`: "you may sacrifice one or more creatures.
      * **When you do, copy this spell for each creature sacrificed this way**"
      * (Plumb the Forbidden) — a reflexive trigger (rule 603.12) of the
@@ -5060,8 +5102,9 @@ export interface CardDefinition {
    * cost is paid with the rest of the costs, rule 601.2h); paying it queues
    * the copy, which resolves first. A static grants more with
    * `grantsToSpells.casualty` (Silverquill, the Disputant). `null` for none.
+   * A {@link CasualtySpec} for casualty X, or a copy made with exceptions.
    */
-  readonly casualty: number | null;
+  readonly casualty: number | CasualtySpec | null;
   /**
    * Conspire (rule 702.78a — Gleeful Sabotage): "As an additional cost to
    * cast this spell, you may tap two untapped creatures you control that
@@ -6091,6 +6134,12 @@ const PRINTED_ABILITY_TESTS: readonly ((def: CardDefinition) => boolean)[] = Obj
   PRINTED_ABILITY,
 ).filter((test): test is (def: CardDefinition) => boolean => test !== false);
 
+/** Whether the spell has "Casualty X", its X announced as it's cast — see
+ * {@link CasualtySpec}. */
+export function casualtyReadsX(def: CardDefinition): boolean {
+  return typeof def.casualty === "object" && def.casualty !== null && def.casualty.n === "x";
+}
+
 /** Whether a card has any ability of its own, as printed — see
  * {@link PRINTED_ABILITY}. What it has been granted, or lost, is
  * `characteristics.ts`'s `hasAnyAbility`. */
@@ -6206,6 +6255,7 @@ interface CardDraft {
     readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
+    readonly reducesPerX?: number;
     readonly copyForEachSacrificed?: true;
     readonly exileFromHandReduces?: { readonly filter: CardFilter; readonly each: number };
     readonly discard?: number | "x";
@@ -6298,7 +6348,7 @@ interface CardDraft {
   /** See {@link CardDefinition.targetCostIncrease}. */
   targetCostIncrease?: { readonly filter: CardFilter; readonly increaseGeneric: number };
   /** See {@link CardDefinition.casualty}. */
-  casualty?: number;
+  casualty?: number | CasualtySpec;
   /** See {@link CardDefinition.conspire}. */
   conspire?: boolean;
   effect?: EffectSpec;

@@ -13341,6 +13341,29 @@ describe("any number of … with different names or powers", () => {
     });
   });
 
+  it("reads Seasons Past's any number with different mana values, to the hand", () => {
+    const parsed = face(
+      "Seasons Past",
+      "Sorcery",
+      "Return any number of cards with different mana values from your graveyard to your hand. Put Seasons Past on the bottom of its owner's library.",
+    );
+    expect(parsed.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "look-and-choose",
+          zone: "graveyard",
+          min: 0,
+          max: 99,
+          together: { distinctManaValues: true },
+          destination: "hand",
+          leftover: "stay",
+        },
+        { kind: "put-on-library", target: "source", position: "bottom" },
+      ],
+    });
+  });
+
   it("reads the choosing of creatures as a choose-permanents under the rule", () => {
     const parsed = face(
       "Sigarda's Vanguard",
@@ -16878,6 +16901,28 @@ describe("cards from hand taking {2} off", () => {
         "As an additional cost to cast this spell, you may exile any number of black cards from your hand. This spell costs {2} less to cast for each card exiled this way.\nMarch of Wretched Sorrow deals X damage to target creature or planeswalker and you gain X life.",
     });
     expect(face.additionalCost).toEqual({ exileFromHandReduces: { filter: { colors: ["B"] }, each: 2 } });
+  });
+});
+
+describe("counters removed as a spell's cost, each taking {2} off", () => {
+  it("reads Hierophant Bio-Titan's Frenzied Metabolism", () => {
+    const face = parseFace({
+      name: "Hierophant Bio-Titan",
+      type_line: "Creature — Tyranid",
+      mana_cost: "{10}{G}{G}",
+      colors: ["G"],
+      power: "12",
+      toughness: "12",
+      oracle_text:
+        "Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nReach, vigilance, ward {2}\nTitanic — This creature can't be blocked by creatures with power 2 or less.",
+    });
+    expect(face.additionalCost).toEqual({
+      also: {
+        text: "Remove any number of +1/+1 counters from among creatures you control",
+        do: { kind: "remove-counters", from: { type: "creature" }, counter: "+1/+1", count: "x", among: true },
+      },
+      reducesPerX: 2,
+    });
   });
 });
 

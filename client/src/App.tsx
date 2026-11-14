@@ -6442,7 +6442,11 @@ function Table({
           {pxVerb} {pendingX.action.cardName} —{' '}
           {pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.sacrifice === true
             ? 'how many to sacrifice'
-            : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.chosenNumber === true
+            : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.removesCounters === true
+              ? 'how many counters to remove'
+              : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.casualty === true
+                ? 'choose X for casualty'
+              : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.chosenNumber === true
               ? 'choose a number'
               : 'choose X'}
         </span>

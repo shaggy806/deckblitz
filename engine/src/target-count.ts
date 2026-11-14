@@ -213,6 +213,10 @@ export interface XCostOffer {
    * off (`additionalCost.sacrificeReduces` — Dargo): a driver asks "how
    * many", and the least that pays is the cheapest in permanents. */
   readonly sacrifice?: true;
+  /** X is how many counters to remove, each taking some of the cost off
+   * (`additionalCost.reducesPerX` — Hierophant Bio-Titan): a driver asks
+   * "how many counters", and the least that pays keeps the most counters. */
+  readonly removesCounters?: true;
   readonly maxXByTargetCount?: readonly number[];
   readonly minXByTargetCount?: readonly number[];
   /** A spell that costs less if it targets something (`targetCostReduction`

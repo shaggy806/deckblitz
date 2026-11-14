@@ -97,6 +97,7 @@ import { embalmAbility, encoreAbility, ninjutsu, scavenge, unearth } from "./car
 import {
   becameAuraDefinition,
   bestowedDefinition,
+  casualtyReadsX,
   enchantsGraveyardCard,
   licidDefinition,
   readsGraveyardOrder,
@@ -5443,6 +5444,12 @@ export class Game {
         def.additionalCost?.sacrificeReduces !== undefined && def.additionalCost.sacrificeCount === "x"
           ? def.additionalCost.sacrifice
           : undefined;
+      // An act as the cost whose X takes some of the cost off (Hierophant
+      // Bio-Titan's counters): offered the same way.
+      const reducingAct =
+        sacrificeReducesFilter === undefined && def.additionalCost?.reducesPerX !== undefined
+          ? this.additionalCostActX(def)
+          : undefined;
       let sacrificeRange: { readonly least: number; readonly most: number } | null = null;
       // "Exile a red card with mana value X from your hand rather than pay"
       // (the Shoals): X is announced as it's cast (rules 107.3a, 601.2b), so
@@ -5517,13 +5524,22 @@ export class Game {
         if (xs.length === 0) continue;
         perX = xs;
         manaAffordable = true;
-      } else if (sacrificeReducesFilter !== undefined) {
+      } else if (sacrificeReducesFilter !== undefined || reducingAct !== undefined) {
         // "Sacrifice any number …; {2} less for each" (Dargo): castable if
         // some number sacrificed pays the rest — the fewest, and the most,
         // that do (each one more is cheaper in mana, and one fewer to tap).
+        // "Remove any number of +1/+1 counters …; {2} less for each"
+        // (Hierophant Bio-Titan) likewise, up to the counters there are.
         let n = 0;
-        for (const id of this.costSacrificeCandidates(player, [{ filter: sacrificeReducesFilter }], undefined)) {
-          n += this.state.objects[id]?.stackCount ?? 1;
+        if (sacrificeReducesFilter !== undefined) {
+          for (const id of this.costSacrificeCandidates(player, [{ filter: sacrificeReducesFilter }], undefined)) {
+            n += this.state.objects[id]?.stackCount ?? 1;
+          }
+        } else {
+          n = Math.min(
+            costActMaxX(reducingAct!, this.makeResolutionContext(card, player, [])) ?? 0,
+            def.maxX !== undefined ? this.costAmount(def.maxX, player, card, card) : Game.MAX_EFFECT_INSTANCES,
+          );
         }
         let least = 0;
         while (least <= n && !castableAt(0, least).castable) least += 1;
@@ -6150,6 +6166,11 @@ export class Game {
                     chosenNumber: true as const,
                   },
                 }
+            : casualtyReadsX(def)
+              ? // "Casualty X" (Ob Nixilis, the Adversary): up to the greatest
+                // power among the creatures there are to sacrifice — past it,
+                // nothing could pay (rule 702.153a).
+                { xCost: { maxX: this.casualtyXCeiling(player), casualty: true as const } }
             : sacrificeX !== undefined
               ? {
                   xCost:
@@ -6163,7 +6184,11 @@ export class Game {
                         ? {
                             maxX: sacrificeX,
                             ...(sacrificeRange.least > 0 ? { minX: sacrificeRange.least } : {}),
-                            sacrifice: true,
+                            ...(reducingAct === undefined
+                              ? { sacrifice: true as const }
+                              : reducingAct.kind === "remove-counters"
+                                ? { removesCounters: true as const }
+                                : {}),
                           }
                         : { maxX: sacrificeX },
                 }
@@ -17179,6 +17204,12 @@ export class Game {
     if (perSacrificed !== undefined && def.additionalCost?.sacrificeCount === "x") {
       reduction += perSacrificed * Math.max(0, Math.floor(xValue));
     }
+    // "{2} less for each counter removed this way" (Hierophant Bio-Titan): X
+    // is how many the act as the cost takes, announced as it's cast (601.2b).
+    const perActX = def.additionalCost?.reducesPerX;
+    if (perActX !== undefined && this.additionalCostActX(def) !== undefined) {
+      reduction += perActX * Math.max(0, Math.floor(xValue));
+    }
     const total = reduceManaCost(
       {
         ...base,
@@ -21938,8 +21969,9 @@ export class Game {
       parseManaCost(costString).x > 0 ||
       def.additionalCost?.payLifeX === true ||
       def.additionalCost?.chooseNumber !== undefined ||
+      casualtyReadsX(def) ||
       def.additionalCost?.sacrificeCount === "x" ||
-      (via === "flashback"&& this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
+      (via === "flashback"&&this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
       (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.discard === "x") ||
       (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.exileFromGraveyard?.count === "x") ||
       def.additionalCost?.discard === "x" ||
@@ -22786,8 +22818,18 @@ export class Game {
     const spell = this.state.objects[spellId];
     if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card") return;
     const amounts: number[] = [];
+    const excepts: (CopyExceptions | null)[] = [];
     const printed = this.registry.get(rulesTextName(spell)).casualty;
-    if (printed !== null) amounts.push(printed);
+    if (typeof printed === "number") amounts.push(printed);
+    else if (printed !== null) {
+      // "Casualty X" (Ob Nixilis, the Adversary): X as announced (rule
+      // 601.2b), and the copy's exceptions — "starting loyalty X" that X.
+      const x = Math.max(0, Math.floor(spell.xValue ?? 0));
+      amounts.push(printed.n === "x" ? x : printed.n);
+      const except =
+        printed.copyLoyaltyX === true ? { ...(printed.copyExcept ?? {}), loyalty: x } : (printed.copyExcept ?? null);
+      excepts.push(except);
+    }
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
@@ -22801,7 +22843,14 @@ export class Game {
       if (n !== undefined && spellGrantReaches(this.state, this.registry, source, ability, spell)) amounts.push(n);
     }
     if (amounts.length === 0) return;
-    (this.state.pendingCasualty ??= []).push({ spell: spellId, player, amounts, priorityTo });
+    while (excepts.length > 0 && excepts.length < amounts.length) excepts.push(null);
+    (this.state.pendingCasualty ??= []).push({
+      spell: spellId,
+      player,
+      amounts,
+      ...(excepts.some((e) => e !== null) ? { excepts } : {}),
+      priorityTo,
+    });
   }
 
   /** The opponents `player` could promise a gift to (rule 702.174a), still
@@ -22895,6 +22944,16 @@ export class Game {
     }).filter((id) => this.canBeSacrificed(id) && !this.sacrificeCostProhibited(player, id));
   }
 
+  /** The most "Casualty X" may be announced as (rule 601.2b): the greatest
+   * power among the creatures `player` could sacrifice, 0 with none. */
+  private casualtyXCeiling(player: PlayerId): number {
+    let most = 0;
+    for (const id of this.casualtyCandidates(player, 0)) {
+      most = Math.max(most, computeCharacteristics(this.state, this.registry, id).power ?? 0);
+    }
+    return most;
+  }
+
   /** Ask the next casualty cost owed (see `queueCasualty`) as a
    * `choose-permanents` of up to one creature. An instance its caster has
    * nothing to pay with is skipped, as is a spell that has left the stack. */
@@ -22919,7 +22978,11 @@ export class Game {
         then: { kind: "sequence", effects: [] },
         source: ask.spell,
         x: 0,
-        casualty: { ...ask, amounts: ask.amounts.slice(i) },
+        casualty: {
+          ...ask,
+          amounts: ask.amounts.slice(i),
+          ...(ask.excepts !== undefined ? { excepts: ask.excepts.slice(i) } : {}),
+        },
       };
       return;
     }
@@ -22934,6 +22997,7 @@ export class Game {
   private applyCasualty(player: PlayerId, chosen: readonly ObjectId[], ask: CasualtyAsk): void {
     this.state.awaiting = null;
     const [amount, ...rest] = ask.amounts;
+    const [except, ...restExcepts] = ask.excepts ?? [];
     const spell = this.state.objects[ask.spell];
     const victim = chosen[0];
     if (
@@ -22949,9 +23013,23 @@ export class Game {
       this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
       this.dropCastTriggersOf(victim, stackSize, ask.spell);
       const text = `Casualty ${amount} — copy ${nameOf(spell)}. You may choose new targets for the copy.`;
-      this.queuePaidCostCopy(spell, player, text, `casualty-${this.state.nextObjectSeq}-${rest.length}`);
+      this.queuePaidCostCopy(
+        spell,
+        player,
+        text,
+        `casualty-${this.state.nextObjectSeq}-${rest.length}`,
+        1,
+        true,
+        except ?? undefined,
+      );
     }
-    if (rest.length > 0) (this.state.pendingCasualty ??= []).unshift({ ...ask, amounts: rest });
+    if (rest.length > 0) {
+      (this.state.pendingCasualty ??= []).unshift({
+        ...ask,
+        amounts: rest,
+        ...(ask.excepts !== undefined ? { excepts: restExcepts } : {}),
+      });
+    }
     this.prepareForPriority(ask.priorityTo);
   }
 
@@ -22961,7 +23039,15 @@ export class Game {
    * is paid. It's of no card's ability list, so it carries its own record,
    * as a mana-spend rider does. `newTargets: false` for a text that doesn't
    * let the copies' targets change (rule 707.10c — Plumb the Forbidden). */
-  private queuePaidCostCopy(spell: GameObject, player: PlayerId, text: string, id: string, count = 1, newTargets = true): void {
+  private queuePaidCostCopy(
+    spell: GameObject,
+    player: PlayerId,
+    text: string,
+    id: string,
+    count = 1,
+    newTargets = true,
+    except?: CopyExceptions,
+  ): void {
     this.state.pendingTriggers.push({
       sourceObjectId: spell.id,
       cardName: printedCardName(spell),
@@ -22985,6 +23071,7 @@ export class Game {
           target: "trigger-spell",
           ...(newTargets ? { newTargets: true } : {}),
           ...(count !== 1 ? { count } : {}),
+          ...(except !== undefined ? { except } : {}),
         },
         text,
       },
@@ -28259,6 +28346,17 @@ export class Game {
         }
       }
       allow(rule.as);
+    }
+    // "You may spend blue mana as though it were mana of any color to
+    // activate those abilities" (Grell Philosopher): a grant's own, to its
+    // controller, for the abilities it gave alone.
+    if (purpose?.kind === "ability" && purpose.ability !== undefined) {
+      for (const modifier of this.state.objects[purpose.source]?.modifiers ?? []) {
+        const spend = modifier.grantsActivatedSpendAs;
+        if (spend !== undefined && spend.player === player && modifier.grantsActivated?.includes(purpose.ability) === true) {
+          allow(spend.as);
+        }
+      }
     }
     if (spellCard !== undefined) {
       const card = this.state.objects[spellCard];
@@ -40665,25 +40763,32 @@ controlledBy,
           ...durationFields(kept),
         });
       },
-      grantActivatedOf: (target, of, duration) => {
-        if (target.kind !== "object" || of.kind !== "object") return;
-        const id = this.splitOneFromStack(target.object);
-        const object = this.state.objects[id];
-        const from = this.state.objects[of.object];
-        const kept = lastingHere(duration);
-        if (object === undefined || object.zone !== "battlefield" || from === undefined || !durationBegins(object, kept)) return;
+      grantActivatedOf: (target, of, duration, spendAs) => {
+        if (of.kind !== "object" || this.state.objects[of.object] === undefined) return;
+        if ("kind" in target && target.kind !== "object") return;
         // As `of` has them as this resolves, the ones that work from the
         // battlefield.
         const abilities = this.effectiveActivated(of.object).filter((a) => a.zone === undefined);
         if (abilities.length === 0) return;
-        object.modifiers.push({
-          timestamp: this.freshTimestamp(),
-          power: 0,
-          toughness: 0,
-          keywords: [],
-          grantsActivated: [...abilities],
-          ...durationFields(kept),
-        });
+        const kept = lastingHere(duration);
+        // One effect, one timestamp (rule 613.7b), however many it reaches;
+        // a filter's set fixed as it resolves (611.2c).
+        const timestamp = this.freshTimestamp();
+        const ids =
+          "kind" in target ? [this.splitOneFromStack(target.object)] : this.battlefieldMatching(controller, target);
+        for (const id of ids) {
+          const object = this.state.objects[id];
+          if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, kept)) continue;
+          object.modifiers.push({
+            timestamp,
+            power: 0,
+            toughness: 0,
+            keywords: [],
+            grantsActivated: [...abilities],
+            ...(spendAs !== undefined ? { grantsActivatedSpendAs: { player: controller, as: spendAs } } : {}),
+            ...durationFields(kept),
+          });
+        }
         invalidateComputedCache();
       },
       grantActivatedAll: (filter, ability, duration) => {
@@ -43315,6 +43420,11 @@ controlledBy,
     if ("distinctPowers" in together) {
       for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
       return { rule: "distinct", tags, text: "with different powers" };
+    }
+    if ("distinctManaValues" in together) {
+      // {X} is 0 off the stack (rule 202.3e), no mana cost is 0 (202.3a).
+      for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
+      return { rule: "distinct", tags, text: "with different mana values" };
     }
     for (const id of eligible) {
       tags[id] = together.oneEach.flatMap((slot, index) =>
