@@ -2584,7 +2584,8 @@
   "trigger:damage-equal-to-toughness",
   "effect:player-shuffles-chosen-permanent-into-library",
   "effect:cast-now-bottom-of-library-after",
-  "effect:copy-spell-retarget-created-token"
+  "effect:copy-spell-retarget-created-token",
+  "effect:turn-face-up-or-exile-and-cast"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
