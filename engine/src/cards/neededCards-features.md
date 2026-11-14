@@ -496,6 +496,10 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   `"transformed"` record (B308) is "if you do" / "when you do" after a
   convert, empty when rule 701.28e stops one. Ratchet, Field Medic // Ratchet,
   Rescue Racer. `test/converted-this-way.test.ts`.
+- `condition:filter-fought-this-turn` — the journal kind and word `fought` (each
+  fighter once a fight, recorded from `creature-fought`; rule 701.14a), read by a
+  `journaled` clause; the `fights` trigger row is now `journaled`, so it takes
+  the timing wrapper. Boxing Ring. `test/fought-this-turn.test.ts`.
 - `effect:delayed-trigger-targets`, `effect:delayed-step-chooses-targets` — a step
   `DelayedAt`'s `targets`: chosen as the step begins and it's put on the stack
   (rule 603.3d), queued with the step's other triggers (`fireDelayedTriggers`

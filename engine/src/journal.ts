@@ -103,6 +103,9 @@ export type JournalKind =
    * cost) under `player`, in `stint`; `was`: the creature as it was tapped;
    * `target`, `targetStint`, `targetWas`: the Vehicle. */
   | "crews"
+  /** The creature `object` fought (rule 701.14a) under `player`, in `stint`,
+   * once a fight it was in; `was`: as it fought. */
+  | "fought"
   /** `player` bent (`how`: water, earth, fire or air — rules 701.65b,
    * 701.66b, 701.67c, 702.189b). */
   | "bent"
@@ -339,6 +342,10 @@ export type JournalWhat =
   /** Each creature declared as an attacker, once in each stint, however many
    * combats it attacked in. */
   | "attackers"
+  /** A creature fought (rule 701.14a), an entry a fight: Boxing Ring's
+   * "activate only if you control a creature that fought this turn" (a
+   * `journaled` clause). The list is its controller's as it fought. */
+  | "fought"
   /** Each creature declared as an attacker while under a requirement to
    * attack (rule 508.1d — a requirement on the creature itself: goad,
    * "attacks each combat if able", encore's), an entry a combat it attacked
@@ -434,6 +441,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   },
   crewers: { kind: "crews", whose: "recipient", match: (e) => e.target?.kind === "object", oncePerList: true },
   attackers: { kind: "attacked", distinct: true },
+  fought: { kind: "fought" },
   "had-to-attack": { kind: "attacked", match: (e) => e.how === "required" },
   "turned-face-up": { kind: "turned-face-up" },
   regenerated: { kind: "regenerated" },

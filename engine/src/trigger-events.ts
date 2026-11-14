@@ -145,7 +145,7 @@ export const TRIGGER_EVENTS = {
   "becomes-monstrous": row({ type: "became-monstrous", object: (e) => e.object, amount: (e) => e.amount }),
   /** "Whenever a creature you control fights" (rule 701.14): one occurrence
    * per fighter, each its own event. */
-  fights: row({ type: "creature-fought", object: (e) => e.object }),
+  fights: row({ type: "creature-fought", object: (e) => e.object, journaled: "fought" }),
   /** "Whenever **one or more** creatures you control fight" (Neyith of the
    * Dire Hunt), with `batched`: the fight as one event — both creatures, or
    * all those of several fights an effect has happen at once — so two of

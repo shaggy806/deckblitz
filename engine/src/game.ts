@@ -56427,6 +56427,19 @@ controlledBy,
         });
         return;
       }
+      case "creature-fought": {
+        // Each fighter once a fight (rule 701.14a), as it fought.
+        const fighter = this.state.objects[event.object];
+        if (fighter === undefined) return;
+        add({
+          kind: "fought",
+          player: fighter.controller,
+          object: event.object,
+          stint: stintOf(event.object),
+          was: this.takeLastKnown(event.object),
+        });
+        return;
+      }
       case "bent":
         add({ kind: "bent", player: event.player, how: event.how });
         return;

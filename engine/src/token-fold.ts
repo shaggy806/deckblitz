@@ -59,6 +59,7 @@ const PER_OBJECT_KINDS: ReadonlySet<JournalKind> = new Set<JournalKind>([
   "saddled",
   "activated",
   "triggered",
+  "fought",
 ]);
 
 /** What this turn's journal says of `o` itself, in its stint, by the
