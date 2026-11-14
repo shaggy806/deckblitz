@@ -63,7 +63,7 @@ section keeps only what to do next.
   through `author-freed` as **B326** (2026-11-14): all 9 authored, three on small pieces built there (`CardFilter.isCopy`,
   `payLife: { atMost }`, a counter-removed event off an exiled card); `--stale` is empty. **B327** (2026-11-14,
   ranks 15527–18514, `author-top-cards`) authored 77 with Attractions built (the next untriaged rank is past
-  18514, `cards:needs -- --next`); its small blocked keys went to the lanes. **Next: the lanes again**
+  18514, `cards:needs -- --next`); its small blocked keys went to the lanes. **The third lanes run (2026-11-14/15)** is under way (`COMPLETED.md`); skipped: Night Shift of the Living Dead (major, a choice inside a die roll). **Next: the lanes again**
   (`build-family overnight lanes`, or `author-top-cards`). Each lane's next share is
   `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. The 28
   triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13

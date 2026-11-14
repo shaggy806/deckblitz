@@ -648,6 +648,14 @@
    ],
    "size": "small",
    "why": "A delayed 'whenever you visit it' bound to an Attraction chosen on resolution, lasting after Myra leaves."
+  },
+  {
+   "name": "Night Shift of the Living Dead",
+   "needs": [
+    "replacement:modify-die-result-after-roll"
+   ],
+   "size": "major",
+   "why": "Re-sized in the third lanes run (2026-11-14): paying life to change a die result after seeing it is a choice inside every roll, as Vedalken Squirrel-Whacker's."
   }
  ]
 }
