@@ -12659,4 +12659,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Master of Predicaments'], hand: ['Shivan Dragon', 'Island'] },
     }),
   ),
+  preset(
+    'Memories Returning: you and an opponent take turns picking from the five revealed',
+    board({
+      you: {
+        bf: ['Island*4'],
+        hand: ['Memories Returning'],
+        lib: ['Lightning Bolt', 'Grizzly Bears', 'Shivan Dragon', 'Hill Giant', 'Craw Wurm'],
+      },
+      opp: { human: true },
+    }),
+  ),
 ]

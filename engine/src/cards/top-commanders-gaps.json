@@ -7,6 +7,7 @@
     "trigger:enchanted-player-casts",
     "trigger:nth-spell-of-turn-any-player",
     "trigger:exiled-while-crafting",
+    "effect:alternating-picks-from-revealed",
     "decision:opponent-guesses-card-kind",
     "decision:opponent-guesses-mana-value",
     "decision:choose-two-colors-on-enter",

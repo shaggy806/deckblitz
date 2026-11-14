@@ -8397,7 +8397,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Use Master of the Wild Hunt's ability targeting Carol's Hill Giant.
 - **Expect:** Your two Wolves tap, deal 4 to the Hill Giant and it dies. Carol (a bot) chooses which Wolves are dealt its 3 damage; you're never asked.
 
-## An opponent guesses about your card (2026-11-14)
+## An opponent guesses about your cards, or picks among them (2026-11-14)
 
 ### Gollum, Scheming Guide: an opponent guesses whether the top card is the kind you chose
 - **Do:** Attack Bob with Gollum. Put Swamp back on top, then Lightning Bolt, and choose "Choose land". As Bob, choose "Guess it isn't a land".
@@ -8407,3 +8407,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Attack Bob with Master of Predicaments. When it deals damage, choose Shivan Dragon from your hand.
 - **Expect:** The History reads "Alice chooses Shivan Dragon" (Bob sees "a card"). Bob (a bot) guesses 4 or less, so the banner asks "Cast Shivan Dragon without paying its mana cost?"; casting it puts the Dragon onto the battlefield.
 - **Not a bug:** Nothing says whether Bob guessed right unless you cast the card.
+
+### Memories Returning: you and an opponent take turns picking from the five revealed
+- **Do:** Cast Memories Returning. Take Shivan Dragon. As Bob, put Lightning Bolt on the bottom. Back as Alice, take Craw Wurm. As Bob, put Grizzly Bears on the bottom.
+- **Expect:** Bob's popups read "Put one of them on the bottom of its owner's library" over the four cards you left, then the two left after your second pick. The History reads "Bob puts Lightning Bolt on the bottom of a library" (not "takes"). Your hand ends with Shivan Dragon, Craw Wurm and Hill Giant.
