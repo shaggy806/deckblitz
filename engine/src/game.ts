@@ -4333,7 +4333,9 @@ export class Game {
           const variants = out
             .splice(from)
             .flatMap((offer) =>
-              offer.kind === "activate-ability" ? this.otherChoiceVariant(offer, theirSlots, false, chooser) : [],
+              offer.kind === "activate-ability"
+                ? this.otherChoiceVariant(offer, theirSlots, false, chooser, ability.otherChooserControls)
+                : [],
             );
           out.push(...variants);
         }
@@ -21275,6 +21277,17 @@ export class Game {
     }
     const offer = this.otherChoiceOffer(action, chooser);
     if (typeof offer === "string") return offer;
+    // "…and **that opponent** chooses" (Mogg Assassin): the one named controls
+    // the activator's target in the tying slot.
+    if (action.type === "activate-ability") {
+      const tied = this.effectiveActivated(action.source)[action.abilityIndex]?.otherChooserControls;
+      if (tied !== undefined) {
+        const mine = action.targets?.[tied - offer.slots.filter((i) => i < tied).length];
+        if (mine?.kind !== "object" || this.state.objects[mine.object]?.controller !== chooser) {
+          return `${chooser} doesn't control the target that names who chooses`;
+        }
+      }
+    }
     const missing = offer.specs.findIndex((spec, i) => !isOptionalSpec(spec) && offer.options[i].length === 0);
     if (missing >= 0) return `${chooser} has no legal target to choose for ${offer.cardName}`;
     const key = action.type === "cast-spell" ? action.card : action.source;
@@ -21384,13 +21397,16 @@ export class Game {
    * variant naming them (`otherChooser`): their target slots (`slots`) left
    * out of its `targetSpecs` / `targetOptions` — none at all if one of them
    * has no legal target — and a spell whose modes they choose offered
-   * without `castModal`.
+   * without `castModal`. With `chooserControls` (an ability's
+   * `otherChooserControls`), that slot of the caster's offers only what
+   * `chooser` controls.
    */
   private otherChoiceVariant<O extends Extract<LegalAction, { kind: "cast-spell" | "activate-ability" }>>(
     offer: O,
     slots: readonly number[],
     modes: boolean,
     chooser: PlayerId,
+    chooserControls?: number,
   ): O[] {
     if (modes) {
       const { castModal: _modes, ...rest } = offer as Extract<LegalAction, { kind: "cast-spell" }>;
@@ -21401,13 +21417,20 @@ export class Game {
       if (spec === undefined) return [];
       if (!isOptionalSpec(spec) && (offer.targetOptions[i]?.length ?? 0) === 0) return [];
     }
+    const theirs = (options: readonly TargetRef[]): readonly TargetRef[] =>
+      options.filter((t) => t.kind === "object" && this.state.objects[t.object]?.controller === chooser);
+    const options =
+      chooserControls === undefined
+        ? offer.targetOptions
+        : offer.targetOptions.map((o, i) => (i === chooserControls ? theirs(o) : o));
+    if (chooserControls !== undefined && (options[chooserControls]?.length ?? 0) === 0) return [];
     const keep = (_x: unknown, i: number): boolean => !slots.includes(i);
     const divide = offer.divide;
     return [
       {
         ...offer,
         targetSpecs: offer.targetSpecs.filter(keep),
-        targetOptions: offer.targetOptions.filter(keep),
+        targetOptions: options.filter(keep),
         ...(divide !== undefined ? { divide: { ...divide, slot: divide.slot - slots.filter((i) => i < divide.slot).length } } : {}),
         otherChooser: chooser,
       },

@@ -5,6 +5,7 @@
     "amount:count-excluding-granter",
     "trigger:opponents-attacked-batch",
     "trigger:monarch-end-step",
+    "decision:target-chooser-is-controller-of-earlier-target",
     "condition:opponent-controls-n-more",
     "filter:has-doctors-companion",
     "condition:rolled-number-this-turn",

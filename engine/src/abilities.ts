@@ -734,6 +734,16 @@ export interface ActivatedAbility {
    * activated (rules 602.2b, 601.2c).
    */
   readonly opponentChoosesTargets?: readonly number[];
+  /**
+   * The opponent who chooses the `opponentChoosesTargets` slots is the
+   * controller of the activator's target in this slot: Mogg Assassin's "You
+   * choose target creature an opponent controls, and **that opponent**
+   * chooses target creature" is `0`. The activator chooses that target
+   * first (the ruling), so a variant naming an opponent offers only targets
+   * they control in this slot. Only the choosing is tied to them: the
+   * target's own requirement is checked as printed on resolution.
+   */
+  readonly otherChooserControls?: number;
   /** "This creature deals 2 damage to any target **chosen at random**" (Goblin
    * Test Pilot). See `TriggeredAbility.targetsAtRandom`. Nothing is offered to
    * choose: the action names no targets, and they're picked as it's activated. */
