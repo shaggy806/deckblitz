@@ -2338,6 +2338,11 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
   if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
+  // "An ability that targets a creature or player" (Ertha Jo): one such
+  // target among the ability's is enough.
+  if (c === "Whenever you activate an ability that targets a creature or player") {
+    return [{ on: "activates-ability", who: "you", targets: { permanent: { type: "creature" }, player: "any" } }];
+  }
   // "Whenever this Equipment becomes attached to a creature" (Blade of Shared
   // Souls): "that creature" the trigger object.
   if (c === "Whenever ~ becomes attached to a creature") {
@@ -13867,6 +13872,14 @@ function copyNextLoyaltyAt(sentences, i) {
  * (Abstruse Archaic), "… from another legendary source that's not a
  * commander" (The Peregrine Dynamo). */
 function copyAbilityAt(sentences, i, ctx) {
+  // "Copy that ability." — the ability a trigger saw activated (Ertha Jo).
+  if (/^copy that ability\.$/i.test(sentences[i])) {
+    const again = /^you may choose new targets for the copy\.$/i.test(sentences[i + 1] ?? "");
+    return {
+      effect: { kind: "copy-ability", target: "trigger-ability", ...(again ? { newTargets: true } : {}) },
+      used: again ? 2 : 1,
+    };
+  }
   const m =
     /^copy target (activated or triggered|activated|triggered) ability you control(?: from (?:an? |(another ))([a-z]+) source( that's not a commander)?)?\.$/i.exec(
       sentences[i],

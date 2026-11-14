@@ -14995,6 +14995,19 @@ describe("how one player's state compares with another's", () => {
     });
   });
 
+  it("activates-ability narrowed to what it targets, and that ability copied (Ertha Jo)", () => {
+    const ertha = read(
+      "Creature",
+      "Whenever you activate an ability that targets a creature or player, copy that ability. You may choose new targets for the copy.",
+    ).triggered[0];
+    expect(ertha.trigger).toEqual({
+      on: "activates-ability",
+      who: "you",
+      targets: { permanent: { type: "creature" }, player: "any" },
+    });
+    expect(ertha.effect).toEqual({ kind: "copy-ability", target: "trigger-ability", newTargets: true });
+  });
+
   it("counters-put firing: per counter, and once for a placement", () => {
     const trigger = (line: string) => read("Creature", line).triggered[0].trigger;
     expect(trigger("Whenever a +1/+1 counter is put on ~, draw a card.")).toEqual({

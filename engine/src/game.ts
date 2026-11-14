@@ -364,6 +364,7 @@ import {
   matchesFilter,
   ownerOnly,
   printedManaCost,
+  stackObjectTargetsMatch,
   weightedMatches,
 } from "./filter.js";
 import type { AggregateReads, AggregateSpec, CardFilter, WeightedMatch } from "./filter.js";
@@ -34822,7 +34823,8 @@ export class Game {
             spec.removedAtLeast === undefined &&
             spec.exhaust !== true &&
             spec.powerUp !== true &&
-            spec.xInCost !== true
+            spec.xInCost !== true &&
+            spec.targets === undefined
           ) {
             return true;
           }
@@ -34845,7 +34847,15 @@ export class Game {
                   : 0) >= spec.removedAtLeast) &&
             // "{X} in its activation cost": the mana symbol (as
             // `fireActivationWatchers` reads it).
-            (spec.xInCost !== true || (ability.cost !== undefined && parseManaCost(ability.cost.mana).x > 0))
+            (spec.xInCost !== true || (ability.cost !== undefined && parseManaCost(ability.cost.mana).x > 0)) &&
+            // "An ability that targets a creature or player" (Ertha Jo):
+            // its targets as they were chosen (rule 602.2b), read off the
+            // ability on the stack once it's activated (602.2i).
+            (spec.targets === undefined ||
+              stackObjectTargetsMatch(this.state, this.registry, activated, spec.targets, {
+                you: self.controller,
+                source: self.id,
+              }))
           );
         }
         const host = this.state.objects[event.source];

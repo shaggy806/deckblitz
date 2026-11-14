@@ -17,7 +17,7 @@ import type { GameState, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { ObjectRef } from "./refs.js";
 import type { SetMember } from "./object-sets.js";
-import type { CardFilter } from "./filter.js";
+import type { CardFilter, SpellTargetsFilter } from "./filter.js";
 import { filterReadsX } from "./filter.js";
 import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
@@ -2567,6 +2567,12 @@ export type TriggerKind =
        * its cost moved it (the event's `fromZone`). */
       readonly sourceZone?: "graveyard";
       readonly sacrificedToActivate?: true;
+      /** "An ability that **targets a creature or player**" (Ertha Jo,
+       * Frontier Mentor): what the ability on the stack targets, as its
+       * targets were chosen (rule 602.2b) — the same clause a spell's
+       * `CardFilter.targets` takes, so one such target is enough. Never a
+       * mana ability (it has no targets on the stack). */
+      readonly targets?: SpellTargetsFilter;
     }
   | {
       /** *This* spell (the one carrying the ability) was cast — a triggered
