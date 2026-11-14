@@ -647,22 +647,35 @@ export const renown = (n: number): TriggeredAbility => {
  * if this permanent is on the battlefield, put an age counter on this
  * permanent. Then you may pay [cost] for each age counter on it. If you
  * don't, sacrifice it." `cost` is a mana cost (`"{U}"`), life (`{ life: 1 }`)
- * or a sacrifice (`{ sacrifice: { type: "land" }, text: "Sacrifice a land" }`),
+ * a sacrifice (`{ sacrifice: { type: "land" }, text: "Sacrifice a land" }`)
+ * or an act (`{ doing: { kind: "flip-coin" }, text: "Flip a coin" }`, done
+ * that many times over as a `repeat`),
  * paid once per age counter as it resolves — all of it or none (no partial
  * payments). Each instance triggers on its own and counts every age counter
  * (702.24b). Put the keyword line in `text` as well.
  */
 export const cumulativeUpkeep = (
-  cost: string | { readonly life: number } | { readonly sacrifice: CardFilter; readonly text: string },
+  cost:
+    | string
+    | { readonly life: number }
+    | { readonly sacrifice: CardFilter; readonly text: string }
+    | { readonly doing: EffectSpec; readonly text: string },
 ): TriggeredAbility => {
   const ages = { countersOn: "source", counter: "age" } as const;
   const label = typeof cost === "string" ? cost : "life" in cost ? `—Pay ${cost.life} life` : `—${cost.text}`;
+  // A cost that is an act — "Cumulative upkeep—An opponent gains 1 life"
+  // (Wall of Shards), "—Flip a coin" (Karplusan Minotaur): the act done once
+  // per age counter, each time with its own choices (rule 702.24a — "each
+  // choice is made separately for each age counter"), as the `doing` option
+  // of the `unless`. Every pass can always be done, so all or none holds.
   const option: UnlessOption =
     typeof cost === "string"
       ? { pay: cost, times: ages, text: `Pay ${cost} for each age counter` }
       : "life" in cost
         ? { payLife: cost.life, times: ages, text: `Pay ${cost.life} life for each age counter` }
-        : { sacrifice: cost.sacrifice, times: ages, text: cost.text };
+        : "doing" in cost
+          ? { doing: { kind: "repeat", times: ages, effect: cost.doing }, text: `${cost.text} for each age counter` }
+          : { sacrifice: cost.sacrifice, times: ages, text: cost.text };
   return {
     trigger: { on: "step-begins", step: "upkeep", who: "you" },
     targets: [],

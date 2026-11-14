@@ -2551,7 +2551,8 @@
   "static:cascade-put-land",
   "mechanic:morph-land",
   "effect:return-random-cards-from-graveyard",
-  "effect:exchange-hand-and-library"
+  "effect:exchange-hand-and-library",
+  "cost:cumulative-upkeep-opponent-gains-life"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

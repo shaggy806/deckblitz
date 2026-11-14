@@ -4645,6 +4645,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(wall.complete).toBe(true);
     expect(face(`Cumulative upkeep—Pay 2 life. ${reminder}`, "Enchantment").complete).toBe(true);
     expect(face(`Cumulative upkeep—Sacrifice a land. ${reminder}`, "Creature — Kraken").complete).toBe(true);
+    const shards = face(`Cumulative upkeep—An opponent gains 1 life. ${reminder}`, "Snow Creature — Wall");
+    expect(shards.triggered[0].effect).toMatchObject({
+      then: {
+        effects: [
+          {},
+          { options: [{ doing: { kind: "repeat", times: { countersOn: "source" }, effect: { kind: "choose-opponent", then: { kind: "gain-life", who: "that-player" } } } }] },
+        ],
+      },
+    });
+    expect(shards.complete).toBe(true);
   });
 
   it("echo (rule 702.30a): a mana cost, a discard or two lands, once after it comes under your control", () => {

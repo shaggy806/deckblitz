@@ -250,6 +250,15 @@ function keywordPart(part, faceName, typeLine = "") {
   if (/^cumulative upkeep—sacrifice a land\.?$/i.test(p)) {
     return { triggered: [cumulativeUpkeep({ sacrifice: { type: "land" }, text: "Sacrifice a land" })] };
   }
+  // An act once per age counter, each with its own choices (Wall of Shards,
+  // Karplusan Minotaur).
+  if ((m = /^cumulative upkeep—an opponent gains (\d+) life\.?$/i.exec(p))) {
+    const gain = { kind: "gain-life", amount: Number(m[1]), who: "that-player" };
+    return { triggered: [cumulativeUpkeep({ doing: { kind: "choose-opponent", then: gain }, text: `An opponent gains ${m[1]} life` })] };
+  }
+  if (/^cumulative upkeep—flip a coin\.?$/i.test(p)) {
+    return { triggered: [cumulativeUpkeep({ doing: { kind: "flip-coin" }, text: "Flip a coin" })] };
+  }
   // Echo [cost] (rule 702.30a): its upkeep trigger, "if this came under your
   // control since the beginning of your last upkeep".
   if ((m = new RegExp(`^echo ${COST}$`, "i").exec(p))) return { triggered: [echo(m[1])] };
