@@ -666,6 +666,7 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batches 328 and 329 (2026-11-14/15, `author-top-cards`, EDHREC ranks 18569–30935, overnight beside the lanes)** — 72 authored by two card-author agents (Vikya, Scorching Stalwart; Immard, the Stormcleaver; Henry Wu, InGen Geneticist; the TMNT duos; Dee Kay, Ride Guide and Motion Sickness on the night's Attractions; Bison Whistle; Turtle Tracks; Down for Repairs; …), the 13 a fresh reviewer read in full all right. Blocked 48: 41 Unfinity sticker and ticket cards (`mechanic:stickers`, major — 33 of B329's 60), and seven small keys handed to agents the same night: the dice read per die this turn (Resolute Veggiesaur, The Space Family Goblinson, Eelectrocute), Rose Noble (`filter:has-doctors-companion`), Blue, Loyal Raptor, Sewers of Estark, and Casey & Raph, Hotheads, whose impulse permission expired at the caster's end step (`bug:permission-duration-read-from-granter`).
 - **Batch 327 (2026-11-14, `author-top-cards`, EDHREC ranks 15527–18514, and the Attractions)** —
   77 authored. The 60 by rank: 41 by one card-author agent (Abby, Merciless Soldier; Ultra
   Magnus; Chief of the Wilds; Aisha of Sparks and Smoke; Jurin, Leading the Charge; …), Centaur
