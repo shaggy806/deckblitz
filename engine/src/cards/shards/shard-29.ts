@@ -196,6 +196,7 @@ import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
 import _poolDesperateSentry from "../pool/desperate-sentry.js";
 import _poolDestructorDragon from "../pool/destructor-dragon.js";
+import _poolDetectivesPhoenix from "../pool/detectives-phoenix.js";
 import _poolDireFleetRavager from "../pool/dire-fleet-ravager.js";
 import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDissensionInTheRanks from "../pool/dissension-in-the-ranks.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolDesolationTwin,
     _poolDesperateSentry,
     _poolDestructorDragon,
+    _poolDetectivesPhoenix,
     _poolDireFleetRavager,
     _poolDispellingExhale,
     _poolDissensionInTheRanks,

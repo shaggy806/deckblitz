@@ -573,6 +573,7 @@ import _poolMoonstoneHarbinger from "../pool/moonstone-harbinger.js";
 import _poolMordantDragon from "../pool/mordant-dragon.js";
 import _poolMossbeardAncient from "../pool/mossbeard-ancient.js";
 import _poolMosstodon from "../pool/mosstodon.js";
+import _poolMosswoodDreadknight from "../pool/mosswood-dreadknight.js";
 import _poolMtendaGriffin from "../pool/mtenda-griffin.js";
 import _poolMuYanlingCelestialWind from "../pool/mu-yanling-celestial-wind.js";
 import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
@@ -1622,6 +1623,7 @@ const shard: CardShard = {
     _poolMordantDragon,
     _poolMossbeardAncient,
     _poolMosstodon,
+    _poolMosswoodDreadknight,
     _poolMtendaGriffin,
     _poolMuYanlingCelestialWind,
     _poolMudbuttonCursetosser,

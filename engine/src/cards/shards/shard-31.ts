@@ -591,6 +591,7 @@ import _poolMesaPegasus from "../pool/mesa-pegasus.js";
 import _poolMetamorphose from "../pool/metamorphose.js";
 import _poolMichelangelosTechnique from "../pool/michelangelos-technique.js";
 import _poolMidnightCovenant from "../pool/midnight-covenant.js";
+import _poolMilesOBrienTransporterOps from "../pool/miles-o-brien-transporter-ops.js";
 import _poolMindBurst from "../pool/mind-burst.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMinorMisstep from "../pool/minor-misstep.js";
@@ -1681,6 +1682,7 @@ const shard: CardShard = {
     _poolMetamorphose,
     _poolMichelangelosTechnique,
     _poolMidnightCovenant,
+    _poolMilesOBrienTransporterOps,
     _poolMindBurst,
     _poolMindstatic,
     _poolMinorMisstep,

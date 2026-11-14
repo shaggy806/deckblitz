@@ -67,6 +67,7 @@ import _poolBakersbaneDuo from "../pool/bakersbane-duo.js";
 import _poolBallistaWatcher from "../pool/ballista-watcher.js";
 import _poolBallistaWielder from "../pool/ballista-wielder.js";
 import _poolBarbtoothWurm from "../pool/barbtooth-wurm.js";
+import _poolBarrinTolarianArchmage from "../pool/barrin-tolarian-archmage.js";
 import _poolBattleHurda from "../pool/battle-hurda.js";
 import _poolBattlefieldImprovisation from "../pool/battlefield-improvisation.js";
 import _poolBeamingDefiance from "../pool/beaming-defiance.js";
@@ -1073,6 +1074,7 @@ const shard: CardShard = {
     _poolBallistaWatcher,
     _poolBallistaWielder,
     _poolBarbtoothWurm,
+    _poolBarrinTolarianArchmage,
     _poolBattleHurda,
     _poolBattlefieldImprovisation,
     _poolBeamingDefiance,

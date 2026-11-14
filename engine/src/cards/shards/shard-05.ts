@@ -327,6 +327,7 @@ import _poolFiligreeSages from "../pool/filigree-sages.js";
 import _poolFinneasAceArcher from "../pool/finneas-ace-archer.js";
 import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
 import _poolFireWhip from "../pool/fire-whip.js";
+import _poolFirstContact from "../pool/first-contact.js";
 import _poolFlameElemental from "../pool/flame-elemental.js";
 import _poolFlamespeakerAdept from "../pool/flamespeaker-adept.js";
 import _poolFlametongueYearling from "../pool/flametongue-yearling.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolFinneasAceArcher,
     _poolFireNavyTrebuchet,
     _poolFireWhip,
+    _poolFirstContact,
     _poolFlameElemental,
     _poolFlamespeakerAdept,
     _poolFlametongueYearling,

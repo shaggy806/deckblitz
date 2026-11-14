@@ -886,6 +886,7 @@ import _poolThaliaHereticCathar from "../pool/thalia-heretic-cathar.js";
 import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
 import _poolTheBeamtownBullies from "../pool/the-beamtown-bullies.js";
 import _poolTheNeutrinos from "../pool/the-neutrinos.js";
+import _poolTheRuinousPowers from "../pool/the-ruinous-powers.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolTheTombOfAclazotz from "../pool/the-tomb-of-aclazotz.js";
 import _poolTheloniteDruid from "../pool/thelonite-druid.js";
@@ -1921,6 +1922,7 @@ const shard: CardShard = {
     _poolThatsRoughBuddy,
     _poolTheBeamtownBullies,
     _poolTheNeutrinos,
+    _poolTheRuinousPowers,
     _poolTheThingBenGrimm,
     _poolTheTombOfAclazotz,
     _poolTheloniteDruid,

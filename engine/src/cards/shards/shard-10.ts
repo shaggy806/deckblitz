@@ -526,6 +526,7 @@ import _poolMarjhan from "../pool/marjhan.js";
 import _poolMartialImpetus from "../pool/martial-impetus.js";
 import _poolMarut from "../pool/marut.js";
 import _poolMascotInterception from "../pool/mascot-interception.js";
+import _poolMasterOfTheWildHunt from "../pool/master-of-the-wild-hunt.js";
 import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMaximizeVelocity from "../pool/maximize-velocity.js";
@@ -1553,6 +1554,7 @@ const shard: CardShard = {
     _poolMartialImpetus,
     _poolMarut,
     _poolMascotInterception,
+    _poolMasterOfTheWildHunt,
     _poolMathemagics,
     _poolMauhurUrukHaiCaptain,
     _poolMaximizeVelocity,

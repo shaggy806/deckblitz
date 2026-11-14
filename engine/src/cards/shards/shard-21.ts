@@ -704,6 +704,7 @@ import _poolScreamingShield from "../pool/screaming-shield.js";
 import _poolScrubland from "../pool/scrubland.js";
 import _poolSculptingSteel from "../pool/sculpting-steel.js";
 import _poolSeaDasherOctopus from "../pool/sea-dasher-octopus.js";
+import _poolSealOfTheGuildpact from "../pool/seal-of-the-guildpact.js";
 import _poolSealockMonster from "../pool/sealock-monster.js";
 import _poolSeethingSong from "../pool/seething-song.js";
 import _poolSeismicElemental from "../pool/seismic-elemental.js";
@@ -1689,6 +1690,7 @@ const shard: CardShard = {
     _poolScrubland,
     _poolSculptingSteel,
     _poolSeaDasherOctopus,
+    _poolSealOfTheGuildpact,
     _poolSealockMonster,
     _poolSeethingSong,
     _poolSeismicElemental,

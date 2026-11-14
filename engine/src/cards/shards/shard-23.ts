@@ -330,6 +330,7 @@ import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGarzasAssassin from "../pool/garzas-assassin.js";
 import _poolGempalmPolluter from "../pool/gempalm-polluter.js";
 import _poolGenjuOfTheFields from "../pool/genju-of-the-fields.js";
+import _poolGentlemansRise from "../pool/gentlemans-rise.js";
 import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhastbarkTwins from "../pool/ghastbark-twins.js";
@@ -390,6 +391,7 @@ import _poolHiddenStockpile from "../pool/hidden-stockpile.js";
 import _poolHiddenStrings from "../pool/hidden-strings.js";
 import _poolHideousEnd from "../pool/hideous-end.js";
 import _poolHighbornGhoul from "../pool/highborn-ghoul.js";
+import _poolHildibrandManderville from "../pool/hildibrand-manderville.js";
 import _poolHiredBlade from "../pool/hired-blade.js";
 import _poolHobble from "../pool/hobble.js";
 import _poolHobgoblinDragoon from "../pool/hobgoblin-dragoon.js";
@@ -864,6 +866,7 @@ import _poolSusanForeman from "../pool/susan-foreman.js";
 import _poolSwoopingProtector from "../pool/swooping-protector.js";
 import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
 import _poolSystemsOverride from "../pool/systems-override.js";
+import _poolTabletOfTheGuilds from "../pool/tablet-of-the-guilds.js";
 import _poolTadeasJuniperAscendant from "../pool/tadeas-juniper-ascendant.js";
 import _poolTaigamMasterOpportunist from "../pool/taigam-master-opportunist.js";
 import _poolTakeIntoCustody from "../pool/take-into-custody.js";
@@ -1371,6 +1374,7 @@ const shard: CardShard = {
     _poolGarzasAssassin,
     _poolGempalmPolluter,
     _poolGenjuOfTheFields,
+    _poolGentlemansRise,
     _poolGeologyEnthusiast,
     _poolGerminatingWurm,
     _poolGhastbarkTwins,
@@ -1431,6 +1435,7 @@ const shard: CardShard = {
     _poolHiddenStrings,
     _poolHideousEnd,
     _poolHighbornGhoul,
+    _poolHildibrandManderville,
     _poolHiredBlade,
     _poolHobble,
     _poolHobgoblinDragoon,
@@ -1905,6 +1910,7 @@ const shard: CardShard = {
     _poolSwoopingProtector,
     _poolSyrAlinTheLionsClaw,
     _poolSystemsOverride,
+    _poolTabletOfTheGuilds,
     _poolTadeasJuniperAscendant,
     _poolTaigamMasterOpportunist,
     _poolTakeIntoCustody,

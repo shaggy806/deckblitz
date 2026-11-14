@@ -115,6 +115,7 @@ import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
 import _poolBrighthearthBanneret from "../pool/brighthearth-banneret.js";
 import _poolBringToTrial from "../pool/bring-to-trial.js";
 import _poolBroadsideBarrage from "../pool/broadside-barrage.js";
+import _poolBrokkosApexOfForever from "../pool/brokkos-apex-of-forever.js";
 import _poolBronzeHorse from "../pool/bronze-horse.js";
 import _poolBrotherhoodOutcast from "../pool/brotherhood-outcast.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
@@ -592,6 +593,7 @@ import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
 import _poolOmnathLocusOfAll from "../pool/omnath-locus-of-all.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
+import _poolOnceUponATime from "../pool/once-upon-a-time.js";
 import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
 import _poolOonasGrace from "../pool/oonas-grace.js";
 import _poolOozePatrol from "../pool/ooze-patrol.js";
@@ -866,6 +868,7 @@ import _poolSycoraxCommander from "../pool/sycorax-commander.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
 import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
+import _poolTaiiWakeenPerfectShot from "../pool/taii-wakeen-perfect-shot.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
 import _poolTamMindfulFirstYear from "../pool/tam-mindful-first-year.js";
 import _poolTangledColony from "../pool/tangled-colony.js";
@@ -1162,6 +1165,7 @@ const shard: CardShard = {
     _poolBrighthearthBanneret,
     _poolBringToTrial,
     _poolBroadsideBarrage,
+    _poolBrokkosApexOfForever,
     _poolBronzeHorse,
     _poolBrotherhoodOutcast,
     _poolBrushstrider,
@@ -1639,6 +1643,7 @@ const shard: CardShard = {
     _poolOctopusForm,
     _poolOmnathLocusOfAll,
     _poolOmnathLocusOfCreation,
+    _poolOnceUponATime,
     _poolOonasBlackguard,
     _poolOonasGrace,
     _poolOozePatrol,
@@ -1913,6 +1918,7 @@ const shard: CardShard = {
     _poolSyndicateGuildmage,
     _poolSynthesizerLabship,
     _poolSyrVondamTheLucent,
+    _poolTaiiWakeenPerfectShot,
     _poolTajuruPathwarden,
     _poolTamMindfulFirstYear,
     _poolTangledColony,
