@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-496 already implemented / 4 missing
+497 already implemented / 3 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -421,7 +421,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  415  Chishiro, the Shattered Blade                   7060 decks  {2}{R}{G}        Legendary Creature — Snake Samurai
 [x]  416  Jenova, Ancient Calamity                        7056 decks  {2}{B}{G}        Legendary Creature — Alien
 [x]  417  Raised by Giants                                7033 decks  {5}{G}           Legendary Enchantment — Background
-[ ]  418  The Mimeoplasm                                  7024 decks  {2}{B}{G}{U}     Legendary Creature — Ooze
+[x]  418  The Mimeoplasm                                  7024 decks  {2}{B}{G}{U}     Legendary Creature — Ooze
 [x]  419  Ral, Monsoon Mage                               7014 decks  {1}{R}           Legendary Creature — Human Wizard // Legendary Planeswalker — Ral
 [x]  420  Duskana, the Rage Mother                        7001 decks  {2}{R}{G}{W}     Legendary Creature — Bear
 [x]  421  Hinata, Dawn-Crowned                            6990 decks  {1}{U}{R}{W}     Legendary Creature — Kirin Spirit
