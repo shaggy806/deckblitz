@@ -213,6 +213,7 @@ import _poolDrySpell from "../pool/dry-spell.js";
 import _poolDryadsCaress from "../pool/dryads-caress.js";
 import _poolDungeonShade from "../pool/dungeon-shade.js";
 import _poolDustElemental from "../pool/dust-elemental.js";
+import _poolDwalinWeaponmaster from "../pool/dwalin-weaponmaster.js";
 import _poolDystopia from "../pool/dystopia.js";
 import _poolEarthRumble from "../pool/earth-rumble.js";
 import _poolEasternPaladin from "../pool/eastern-paladin.js";
@@ -1219,6 +1220,7 @@ const shard: CardShard = {
     _poolDryadsCaress,
     _poolDungeonShade,
     _poolDustElemental,
+    _poolDwalinWeaponmaster,
     _poolDystopia,
     _poolEarthRumble,
     _poolEasternPaladin,

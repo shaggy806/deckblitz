@@ -235,6 +235,7 @@ import _poolDeepWater from "../pool/deep-water.js";
 import _poolDefiantStand from "../pool/defiant-stand.js";
 import _poolDelay from "../pool/delay.js";
 import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
+import _poolDemonicCovenant from "../pool/demonic-covenant.js";
 import _poolDennickPiousApprentice from "../pool/dennick-pious-apprentice.js";
 import _poolDesdemonaFreedomsEdge from "../pool/desdemona-freedoms-edge.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
@@ -1262,6 +1263,7 @@ const shard: CardShard = {
     _poolDefiantStand,
     _poolDelay,
     _poolDemonOfCatastrophes,
+    _poolDemonicCovenant,
     _poolDennickPiousApprentice,
     _poolDesdemonaFreedomsEdge,
     _poolDesertOfTheFervent,

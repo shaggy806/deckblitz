@@ -123,6 +123,7 @@ import _poolBranchingBolt from "../pool/branching-bolt.js";
 import _poolBrassGnat from "../pool/brass-gnat.js";
 import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
+import _poolBreathkeeperSeraph from "../pool/breathkeeper-seraph.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
 import _poolBrokenAmbitions from "../pool/broken-ambitions.js";
@@ -270,6 +271,7 @@ import _poolEntropicBattlecruiser from "../pool/entropic-battlecruiser.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
 import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
+import _poolErthaJoFrontierMentor from "../pool/ertha-jo-frontier-mentor.js";
 import _poolEsquireOfTheKing from "../pool/esquire-of-the-king.js";
 import _poolEstridTheMasked from "../pool/estrid-the-masked.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
@@ -1167,6 +1169,7 @@ const shard: CardShard = {
     _poolBrassGnat,
     _poolBrassTalonChimera,
     _poolBreakneckBerserker,
+    _poolBreathkeeperSeraph,
     _poolBriarbridgeTracker,
     _poolBristlebudFarmer,
     _poolBrokenAmbitions,
@@ -1314,6 +1317,7 @@ const shard: CardShard = {
     _poolEnvironmentalSciences,
     _poolEpfPointSquad,
     _poolErrandRiderOfGondor,
+    _poolErthaJoFrontierMentor,
     _poolEsquireOfTheKing,
     _poolEstridTheMasked,
     _poolEverWatchingThreshold,

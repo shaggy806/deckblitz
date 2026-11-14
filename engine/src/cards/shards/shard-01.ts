@@ -628,6 +628,7 @@ import _poolPrideOfLions from "../pool/pride-of-lions.js";
 import _poolPriestOfYawgmoth from "../pool/priest-of-yawgmoth.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
+import _poolPrintlifterOoze from "../pool/printlifter-ooze.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
 import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
@@ -804,6 +805,7 @@ import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
 import _poolStealStrength from "../pool/steal-strength.js";
 import _poolStensiaInnkeeper from "../pool/stensia-innkeeper.js";
+import _poolStingBilbosSword from "../pool/sting-bilbos-sword.js";
 import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
@@ -1640,6 +1642,7 @@ const shard: CardShard = {
     _poolPriestOfYawgmoth,
     _poolPrimevalTitan,
     _poolPrincessLucrezia,
+    _poolPrintlifterOoze,
     _poolPrismaticLens,
     _poolPrivateEye,
     _poolPrizefighterConstruct,
@@ -1816,6 +1819,7 @@ const shard: CardShard = {
     _poolStartingColumn,
     _poolStealStrength,
     _poolStensiaInnkeeper,
+    _poolStingBilbosSword,
     _poolStingbladeAssassin,
     _poolStirUpTrouble,
     _poolStormChargedSlasher,

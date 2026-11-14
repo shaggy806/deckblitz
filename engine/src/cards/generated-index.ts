@@ -1106,6 +1106,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Lord of the Ulvenwald": "https://cards.scryfall.io/art_crop/back/8/a/8ab5f2e6-0e0a-4f7d-a959-3d07948ff317.jpg",
   "Lost Vale": "https://cards.scryfall.io/art_crop/back/5/1/514d53be-6ade-4f73-a844-e9ae2dafd6ce.jpg",
   "Ludevic's Abomination": "https://cards.scryfall.io/art_crop/back/e/b/ebf5e16f-a8bd-419f-b5ca-8c7fce09c4f1.jpg",
+  "Lukka, Wayward Bonder": "https://cards.scryfall.io/art_crop/back/8/e/8e4e0f81-f92b-4a3a-bb29-adcc3de211b4.jpg",
   "Luminous Phantom": "https://cards.scryfall.io/art_crop/back/4/3/438e3302-daf9-436b-8b08-24b3f33295f6.jpg",
   "Lunarch Inquisitors": "https://cards.scryfall.io/art_crop/back/1/0/1001e708-e4f9-456a-8b9d-3421a2a3833d.jpg",
   "Lupari Shield": "https://cards.scryfall.io/art_crop/back/c/a/ca1cedd8-98d3-408f-8de8-fa682ab0227c.jpg",

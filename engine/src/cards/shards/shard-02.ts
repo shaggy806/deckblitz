@@ -528,6 +528,7 @@ import _poolLostInALabyrinth from "../pool/lost-in-a-labyrinth.js";
 import _poolLostInTheMist from "../pool/lost-in-the-mist.js";
 import _poolLoxodonRestorer from "../pool/loxodon-restorer.js";
 import _poolLoyalPegasus from "../pool/loyal-pegasus.js";
+import _poolLukkaWaywardBonder from "../pool/lukka-wayward-bonder.js";
 import _poolLumberingWorldwagon from "../pool/lumbering-worldwagon.js";
 import _poolLurker from "../pool/lurker.js";
 import _poolLyraTolarianArchangel from "../pool/lyra-tolarian-archangel.js";
@@ -1559,6 +1560,7 @@ const shard: CardShard = {
     _poolLostInTheMist,
     _poolLoxodonRestorer,
     _poolLoyalPegasus,
+    _poolLukkaWaywardBonder,
     _poolLumberingWorldwagon,
     _poolLurker,
     _poolLyraTolarianArchangel,

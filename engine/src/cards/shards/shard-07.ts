@@ -740,6 +740,7 @@ import _poolSacredWolf from "../pool/sacred-wolf.js";
 import _poolSafewrightCavalry from "../pool/safewright-cavalry.js";
 import _poolSafewrightQuest from "../pool/safewright-quest.js";
 import _poolSageOfMysteries from "../pool/sage-of-mysteries.js";
+import _poolSanctumLurker from "../pool/sanctum-lurker.js";
 import _poolSanctumOfStoneFangs from "../pool/sanctum-of-stone-fangs.js";
 import _poolSanctumSeeker from "../pool/sanctum-seeker.js";
 import _poolSanguineEvangelist from "../pool/sanguine-evangelist.js";
@@ -1788,6 +1789,7 @@ const shard: CardShard = {
     _poolSafewrightCavalry,
     _poolSafewrightQuest,
     _poolSageOfMysteries,
+    _poolSanctumLurker,
     _poolSanctumOfStoneFangs,
     _poolSanctumSeeker,
     _poolSanguineEvangelist,

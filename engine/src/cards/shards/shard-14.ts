@@ -872,6 +872,7 @@ import _poolTheFallOfKroog from "../pool/the-fall-of-kroog.js";
 import _poolTheFirstEruption from "../pool/the-first-eruption.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
 import _poolTheTriumphOfAnax from "../pool/the-triumph-of-anax.js";
+import _poolTheValeyard from "../pool/the-valeyard.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThirstForKnowledge from "../pool/thirst-for-knowledge.js";
 import _poolThorAsgardsAvenger from "../pool/thor-asgards-avenger.js";
@@ -1894,6 +1895,7 @@ const shard: CardShard = {
     _poolTheFirstEruption,
     _poolTheGitrogMonster,
     _poolTheTriumphOfAnax,
+    _poolTheValeyard,
     _poolThickestInTheThicket,
     _poolThirstForKnowledge,
     _poolThorAsgardsAvenger,

@@ -504,6 +504,7 @@ import _poolMerfolkSpy from "../pool/merfolk-spy.js";
 import _poolMerrowLevitator from "../pool/merrow-levitator.js";
 import _poolMesmericGlare from "../pool/mesmeric-glare.js";
 import _poolMidnightHaunting from "../pool/midnight-haunting.js";
+import _poolMilaCraftyCompanion from "../pool/mila-crafty-companion.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
 import _poolMinamoSightbender from "../pool/minamo-sightbender.js";
 import _poolMindleechGhoul from "../pool/mindleech-ghoul.js";
@@ -1506,6 +1507,7 @@ const shard: CardShard = {
     _poolMerrowLevitator,
     _poolMesmericGlare,
     _poolMidnightHaunting,
+    _poolMilaCraftyCompanion,
     _poolMilitiaBugler,
     _poolMinamoSightbender,
     _poolMindleechGhoul,
