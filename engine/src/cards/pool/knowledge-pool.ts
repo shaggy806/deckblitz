@@ -19,8 +19,10 @@ import { defineCard } from "../define.js";
 //
 // Imprint links the abilities (rule 607.2a): both exile with this artifact, and
 // the cast comes from among the cards exiled with it — the spell just exiled
-// left out ("other"). "That player" casts it (cast-now's `by`); `cast-now` offers
-// only spells, so a land exiled here is never cast.
+// left out ("other"). Each player exiles their own three, and "that player"
+// exiles the spell and casts (`as-player`), so each is who exiled those cards
+// ("cards you exiled"); `cast-now` offers only spells, so a land exiled here is
+// never cast.
 
 const IMPRINT = "Imprint — When this artifact enters, each player exiles the top three cards of their library.";
 const POOL =
@@ -36,7 +38,15 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "exile-from-library", whose: "each-player", amount: 3, linked: true },
+      effect: {
+        kind: "for-each-player",
+        who: "each-player",
+        effect: {
+          kind: "as-player",
+          who: "that-player",
+          effect: { kind: "exile-from-library", amount: 3, linked: true },
+        },
+      },
       resolve: null,
       text: IMPRINT,
     },
@@ -44,15 +54,19 @@ export default defineCard({
       trigger: { on: "cast-spell", who: "any", from: "hand" },
       targets: [],
       effect: {
-        kind: "sequence",
-        effects: [
-          { kind: "exile", target: "trigger-object", linked: true },
-          {
-            kind: "conditional",
-            condition: { kind: "this-way", what: "exiled" },
-            then: { kind: "cast-now", from: "exiled-with-source", others: true, by: "trigger-player", free: true },
-          },
-        ],
+        kind: "as-player",
+        who: "trigger-player",
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "exile", target: "trigger-object", linked: true },
+            {
+              kind: "conditional",
+              condition: { kind: "this-way", what: "exiled" },
+              then: { kind: "cast-now", from: "exiled-with-source", others: true, free: true },
+            },
+          ],
+        },
       },
       resolve: null,
       text: POOL,

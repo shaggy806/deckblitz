@@ -363,6 +363,10 @@ export interface ManaSpendRider {
   /** The permanent that made the mana — `ctx.source` when the rider fires. */
   readonly source: ObjectId;
   readonly sourceName: string;
+  /** `source`'s battlefield stint as it made the mana: the object the rider's
+   * "this artifact" means (rule 607.2a, 400.7 — Forger's Foundry), the
+   * delayed ability's `sourceStint`. */
+  readonly sourceStint?: number;
   /** Only fires if the spell paid for matches. Absent means any spell. */
   readonly spell?: CardFilter;
   /** It fires for an activated ability the mana pays for too (Sunken

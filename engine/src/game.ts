@@ -29154,6 +29154,10 @@ export class Game {
       tag.onSpend = {
         source: object.id,
         sourceName: printedCardName(object),
+        // The permanent that made it, in this stint: "this artifact" of the
+        // rider (rule 607.2a — Forger's Foundry's "exiled with this
+        // artifact"), not a new object it has become since (400.7).
+        ...(object.zone === "battlefield" ? { sourceStint: object.zoneChangeCount ?? 0 } : {}),
         ...(spell !== undefined ? { spell } : {}),
         ...(whenSpent.orAbility === true ? { orAbility: true as const } : {}),
         effect: whenSpent.effect,
@@ -29381,6 +29385,9 @@ export class Game {
       ...(purpose.kind === "cast"
         ? { triggerObject: purpose.card, triggerSpellOnPlacement: true as const }
         : { awaitsActivation: true as const }),
+      // "This artifact": the permanent that made the mana, in that stint
+      // (rule 607.2a) — what a linked exile of the rider reads.
+      ...(rider.sourceStint !== undefined ? { lastKnownRefs: { source: rider.sourceStint } } : {}),
       delayed: {
         id: `mana-rider-${this.state.nextObjectSeq}`,
         controller,
@@ -29392,6 +29399,7 @@ export class Game {
         createdDuringEndStep: false,
         source: rider.source,
         sourceName: rider.sourceName,
+        ...(rider.sourceStint !== undefined ? { sourceStint: rider.sourceStint } : {}),
         // The spell the mana paid for, so an effect can refer to it as
         // `target: 0` (Arena of Glory's "that creature gains haste"). It is
         // on the stack by the time this resolves, which is why the rider
@@ -40868,10 +40876,14 @@ controlledBy,
         // "Exiled with this" (rule 607.2a): each card it exiled, in the stint
         // the resolving ability refers to.
         const stint = spec.linked === true && spec.exile === true ? linkedExileStint() : undefined;
-        if (stint !== undefined) {
-          const cards = found.revealed.filter((id) => this.state.objects[id]?.zone === "exile");
-          if (cards.length > 0) this.linkExiledToSource(cards, source, stint);
-        }
+        const exiled = spec.exile === true ? found.revealed.filter((id) => this.state.objects[id]?.zone === "exile") : [];
+        if (stint !== undefined && exiled.length > 0) this.linkExiledToSource(exiled, source, stint);
+        // "Cards you exiled" (Haldan): "exile cards from the top of **your**
+        // library until …" is this effect's controller exiling them — inside
+        // an `as-player`, the player doing it ("that player exiles …",
+        // Possibility Storm). Another player's library names nobody: the
+        // wording, not the library, says who exiles.
+        if (spec.whose === undefined) for (const id of exiled) this.state.objects[id].exiledByPlayer = controller;
         return found;
       },
       placeFound: (hit, put, tapped, attacking, underYourControl) =>

@@ -11,6 +11,8 @@ import { defineCard } from "../define.js";
 //     library until you exile a card that shares a card type with it and have the opportunity to
 //     cast that spell.
 //
+// "That player" does it all (`as-player`): they exile the spell and the cards,
+// so they are the ones who exiled them ("cards you exiled"), and they cast.
 // "It" is the spell, acted on only while it's still that spell on the stack
 // (`movedRefAct`); every card the ability exiles is exiled with this
 // enchantment (rule 607.2a), so "all cards exiled with this enchantment" is the
@@ -30,20 +32,23 @@ export default defineCard({
       trigger: { on: "cast-spell", who: "any", from: "hand" },
       targets: [],
       effect: {
-        kind: "sequence",
-        effects: [
-          { kind: "exile", target: "trigger-object", linked: true },
-          {
-            kind: "reveal-until",
-            whose: "trigger-player",
-            filter: { sharesCardTypeWith: { typesOf: "trigger-object" } },
-            exile: true,
-            linked: true,
-            then: { kind: "cast-now", target: 0, by: "trigger-player", free: true },
-            rest: "stay",
-          },
-          { kind: "return-exiled-by-source", linked: "bottom-random" },
-        ],
+        kind: "as-player",
+        who: "trigger-player",
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "exile", target: "trigger-object", linked: true },
+            {
+              kind: "reveal-until",
+              filter: { sharesCardTypeWith: { typesOf: "trigger-object" } },
+              exile: true,
+              linked: true,
+              then: { kind: "cast-now", target: 0, free: true },
+              rest: "stay",
+            },
+            { kind: "return-exiled-by-source", linked: "bottom-random" },
+          ],
+        },
       },
       resolve: null,
       text: TEXT,

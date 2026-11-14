@@ -63,8 +63,17 @@ describe("Possibility Storm", () => {
     const theirBears = toLibrary(game, "Grizzly Bears", B);
     const theirBolt = toLibrary(game, "Lightning Bolt", B);
     const cub = toHand(game, "Grizzly Bears", B);
-    castFree(b, []);
+    // Who exiled them, as that player is offered the cast (they're buried after).
+    const exiledBy: Record<string, string | undefined> = {};
+    b.chooseCastNowFn = (_v, offer) => {
+      exiledBy.spell = game.state.objects[cub].exiledByPlayer;
+      exiledBy.passed = game.state.objects[theirBolt].exiledByPlayer;
+      const way = offer.casts[0];
+      return way === undefined ? null : { type: "cast-spell", player: B, card: way.card, targets: [], via: way.via, free: true };
+    };
     cast(game, cub, { player: B });
+    // That player exiled the spell and the cards — not the Storm's controller.
+    expect(exiledBy).toEqual({ spell: B, passed: B });
     // An instant isn't a creature: exiled and passed over, the Bears found and cast.
     expect(zone(game, theirBears)).toBe("battlefield");
     expect(new Set(library(game, B).slice(-2))).toEqual(new Set([cub, theirBolt]));
@@ -111,6 +120,8 @@ describe("Knowledge Pool", () => {
     const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].exiledWith?.source === pool);
     expect(exiled).toHaveLength(6);
     expect(zone(game, theirBolt)).toBe("exile");
+    // Each player exiled their own three ("cards you exiled").
+    expect(exiled.every((id) => game.state.objects[id].exiledByPlayer === game.state.objects[id].owner)).toBe(true);
 
     lands(game, "Mountain", 1);
     const shock = toHand(game, "Shock");
@@ -134,6 +145,9 @@ describe("Knowledge Pool", () => {
     cast(game, bears, { player: B });
     expect(life(game, A)).toBe(18);
     expect(zone(game, bears)).toBe("exile");
+    // That player exiled it, not the Pool's controller.
+    expect(game.state.objects[bears].exiledByPlayer).toBe(B);
+    expect(game.state.objects[bears].exiledWith?.source).toBe(pool);
   });
 
   it("still exiles the spell with nothing to cast", () => {
@@ -332,5 +346,21 @@ describe("Forger's Foundry", () => {
     // Cast from exile, not with its mana: into the graveyard this time.
     expect([zone(game, first), zone(game, second)]).toEqual(["graveyard", "graveyard"]);
     expect(game.state.zones.perPlayer[A].hand.length).toBe(handBefore + 3);
+  });
+
+  it("links the card to the Foundry that made the mana, not one it has become since (rule 607.2a)", () => {
+    const { game, a } = table();
+    const foundry = spawn(game, "Forger's Foundry");
+    const madeBy = game.state.objects[foundry].zoneChangeCount ?? 0;
+    activate(game, foundry, 0);
+    // Gone and back with the {U} still in the pool: a new object (rule 400.7).
+    game.debugMove(foundry, "exile");
+    game.debugMove(foundry, "battlefield");
+    expect(game.state.objects[foundry].zoneChangeCount).not.toBe(madeBy);
+    const opt = toHand(game, "Opt");
+    pickModes(a, 0);
+    cast(game, opt);
+    expect(zone(game, opt)).toBe("exile");
+    expect(game.state.objects[opt].exiledWith).toEqual({ source: foundry, zoneChangeCount: madeBy });
   });
 });
