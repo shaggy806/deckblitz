@@ -3632,21 +3632,24 @@ export class Game {
               }
             }
           }
-          // Morph, megamorph and disguise (rules 702.37c, 702.168a) — face
-          // down for {3}, worked out as the face-down 2/2 spell it would be.
-          const downKind = face === undefined || face === 0 ? this.faceDownKindOf(card) : null;
-          if (downKind !== null) {
-            const downDef = this.registry.get(FACE_DOWN_CARDS[downKind]);
-            out.push(
-              ...this.withFaceDown(card, downKind, () =>
-                this.castSpellActions(player, card, cardName, downDef, {
-                  ...faceProp,
-                  via: "face-down",
-                  costString: "{3}",
-                }),
-              ),
-            );
-          }
+        }
+        // Morph, megamorph and disguise (rules 702.37c, 702.168a) — face
+        // down for {3}, worked out as the face-down 2/2 spell it would be. A
+        // land card with morph too (Zoetic Cavern): turned face down before
+        // it's cast (702.37c, 708.4), it's a creature card with no other type,
+        // so rule 305.9's "played only as a land" doesn't reach it.
+        const downKind = face === undefined || face === 0 ? this.faceDownKindOf(card) : null;
+        if (downKind !== null) {
+          const downDef = this.registry.get(FACE_DOWN_CARDS[downKind]);
+          out.push(
+            ...this.withFaceDown(card, downKind, () =>
+              this.castSpellActions(player, card, cardName, downDef, {
+                ...faceProp,
+                via: "face-down",
+                costString: "{3}",
+              }),
+            ),
+          );
         }
       }
       const cardName = ownName;

@@ -2548,7 +2548,8 @@
   "effect:exile-from-revealed-hand-per-opponent-until-leaves",
   "effect:counter-each-unless-pays",
   "effect:shuffle-permanents-reveal-that-many",
-  "static:cascade-put-land"
+  "static:cascade-put-land",
+  "mechanic:morph-land"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
