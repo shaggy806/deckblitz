@@ -12,6 +12,7 @@ import { ArtCredit } from './ArtCredit.tsx'
 import { TaxBadge } from './TaxBadge.tsx'
 import { counterSummary } from './counterSummary.ts'
 import { useCardArt } from './useCardArt.ts'
+import { AttractionLights } from './AttractionLights.tsx'
 
 const TAP_ICON_URL = manaSymbolUrl('T')
 
@@ -377,6 +378,8 @@ export function CardTile({
     // The loyalty shield stands taller than a P/T box: more room under the text.
     obj.loyalty !== null ? 'has-loyalty' : '',
     obj.supertypes?.includes('legendary') ? 'legendary' : '',
+    // An Attraction's 1-6 column down the right: the text keeps clear of it.
+    obj.lights !== undefined && faceDown === null ? 'has-lights' : '',
     obj.tapped ? 'tapped' : '',
     highlight ? 'highlight' : '',
     selected ? 'selected' : '',
@@ -510,6 +513,7 @@ export function CardTile({
       {stackCount !== null && stackCount > 1 ? (
         <span className="card-stack">×{stackCount}</span>
       ) : null}
+      {obj.lights !== undefined && faceDown === null ? <AttractionLights lights={obj.lights} /> : null}
       {notesAside ? null : (
         <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} chosenPlayer={chosenPlayer} compact={false} />
       )}

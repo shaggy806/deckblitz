@@ -1,0 +1,88 @@
+/* A player's Attraction deck and junkyard (AttractionPiles.tsx): two squat
+   half-card boxes in a row, one card wide, so the command rail grows by half
+   a card's height at most. Every size is the rail's --card-w. */
+.attraction-piles {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(var(--card-w) * 0.04);
+  width: var(--card-w);
+}
+/* Beats `.quadrant-body .side-zone .card-back`, which stretches the library's
+   pile to the rail's leftover height. */
+.quadrant-body .side-zone .attraction-piles .card-back,
+.attraction-piles .card-back {
+  width: auto;
+  min-height: 0;
+  height: calc(var(--card-w) * 0.5);
+  max-height: none;
+}
+/* Every Attraction opened: the pile's place kept, outlined, as an empty
+   junkyard is. */
+.quadrant-body .side-zone .attraction-piles .card-back.empty,
+.attraction-piles .card-back.empty {
+  background: transparent;
+  border-style: dashed;
+}
+.attraction-piles .card-back.empty .card-back-count {
+  border-color: transparent;
+  color: var(--muted);
+}
+.attraction-piles .card-back-count {
+  width: calc(var(--card-w) * 0.24);
+  height: calc(var(--card-w) * 0.24);
+  font-size: calc(var(--card-w) * 0.11);
+  border-width: 1px;
+}
+.junkyard-pile {
+  position: relative;
+  height: calc(var(--card-w) * 0.5);
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-well, #1a1714);
+  cursor: pointer;
+}
+.junkyard-pile:disabled {
+  cursor: default;
+  opacity: 1;
+  background: transparent;
+  border-style: dashed;
+}
+.junkyard-pile > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.junkyard-pile .junkyard-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1px 0;
+  text-align: center;
+  font-size: calc(var(--card-w) * 0.075);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: var(--scrim, rgba(0, 0, 0, 0.6));
+}
+.junkyard-pile .junkyard-count {
+  position: relative;
+  min-width: calc(var(--card-w) * 0.2);
+  padding: 0 0.2em;
+  text-align: center;
+  font-size: calc(var(--card-w) * 0.11);
+  font-weight: 800;
+  color: var(--text);
+  background: var(--scrim, rgba(0, 0, 0, 0.6));
+  border-radius: 4px;
+}
+.junkyard-pile.empty .junkyard-count {
+  color: var(--muted);
+  background: none;
+}

@@ -1,0 +1,69 @@
+/* An Attraction's 1-6 column (AttractionLights.tsx, rule 717.1): every
+   number in a dim square, the lit ones gold, as the printed card has them
+   down the right of its text box. Sized from the card it's on. */
+.attraction-lights {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  line-height: 1;
+}
+.attraction-lights > span {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(16, 13, 11, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+}
+.attraction-lights > span.lit {
+  color: #1a1408;
+  background: var(--gold);
+  border-color: color-mix(in srgb, var(--gold) 60%, #000);
+}
+
+/* A full card (CardTile — the hover card, a zone viewer): down the right of
+   the text box, which keeps clear of it. */
+.card-tile > .attraction-lights {
+  position: absolute;
+  right: calc(var(--card-w) * 0.025);
+  bottom: calc(var(--card-w) * 0.03);
+  width: calc(var(--card-w) * 0.075);
+  font-size: calc(var(--card-w) * 0.05);
+}
+.card-tile > .attraction-lights > span {
+  width: 100%;
+}
+.card-tile.has-lights .ct-text {
+  padding-right: calc(var(--card-w) * 0.11);
+}
+
+/* A board tile (MiniTile): down the art's right edge, its six squares
+   sharing the art's height, so it fits the smallest tile a crowded board
+   draws. */
+.mt-body > .attraction-lights {
+  position: absolute;
+  top: 4%;
+  bottom: 4%;
+  right: 2%;
+  font-size: calc(var(--mini-w) * 0.075);
+}
+.mt-body > .attraction-lights > span {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+/* Beside a name (the deck builder's Attraction deck): a row. */
+.attraction-lights.inline {
+  flex-direction: row;
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 0.5em;
+  font-size: 0.72em;
+}
+.attraction-lights.inline > span {
+  width: 1.5em;
+}

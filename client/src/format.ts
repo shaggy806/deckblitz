@@ -594,6 +594,15 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${event.arrivals.map((a) => name(a.object)).join(', ')} put into a graveyard`
     case 'dice-rolled':
       return `${who(event.player)} rolls ${event.results.length === 1 ? `a d${event.sides}` : `${event.results.length}d${event.sides}`}: ${event.results.join(', ')}${event.results.length > 1 ? ` (total ${event.results.reduce((n, r) => n + r, 0)})` : ''}`
+    // Attractions (rules 701.51, 701.52, 702.159).
+    case 'attraction-opened':
+      return `${who(event.player)} opens an Attraction: ${name(event.object)}`
+    case 'rolled-to-visit':
+      return `${who(event.player)} rolls to visit their Attractions: ${event.result}`
+    case 'attraction-visited':
+      return `${name(event.object)} is visited`
+    case 'prize-claimed':
+      return `${who(event.player)} claims the prize of ${name(event.object)}`
     case 'coin-flipped':
       return event.won === undefined
         ? `${who(event.player)} flips a coin: ${event.came}`

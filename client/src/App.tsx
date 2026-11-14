@@ -146,6 +146,7 @@ import { handPlacesBefore, slideHand } from './ui/handMotion.ts'
 import { watchHandSweep } from './ui/handSweep.ts'
 import { motionPrefs } from './game/motionPrefs.ts'
 import { LibraryTopCard } from './ui/LibraryTopCard.tsx'
+import { AttractionPiles } from './ui/AttractionPiles.tsx'
 import { SeatBoard } from './lobby/SeatBoard.tsx'
 import { LandingScreen } from './lobby/LandingScreen.tsx'
 import { MenuBackdrop } from './lobby/MenuBackdrop.tsx'
@@ -374,7 +375,7 @@ function sacrificeNoun(
  * zone and whose, not the cards in it — `Table` reads those off each frame's
  * view, so the popup stays open and current as cards come and go. */
 interface OpenZone {
-  readonly zone: 'graveyard' | 'exile' | 'sideboard' | 'companion' | 'hand' | 'emblems'
+  readonly zone: 'graveyard' | 'exile' | 'sideboard' | 'companion' | 'hand' | 'emblems' | 'junkyard'
   readonly player: PlayerId
 }
 type LandAction = Extract<LegalAction, { kind: 'play-land' }>
@@ -4651,6 +4652,11 @@ function Table({
     const topId = view.revealedLibraryTop[pid] ?? null
     const topObj = topId !== null ? view.objects[topId] : undefined
     const librarySize = view.players[pid].librarySize
+    // Unfinity's Attractions (rule 717): only a player who brought an
+    // Attraction deck, or has had an Attraction go to the junkyard.
+    const attractionDeckSize = view.players[pid].attractionDeckSize
+    const junkyard = view.players[pid].junkyard.flatMap((id) => view.objects[id] ?? [])
+    const hasAttractions = attractionDeckSize > 0 || junkyard.length > 0
 
     return (
       <div className={`side-zone ${seatClassOf(view.turnOrder, pid)}`}>
@@ -4673,6 +4679,17 @@ function Table({
             )}
           </div>
         </div>
+        {hasAttractions ? (
+          <div className="side-zone-section">
+            <div className="side-zone-label">Attractions</div>
+            <AttractionPiles
+              player={pid}
+              deckSize={attractionDeckSize}
+              junkyard={junkyard}
+              onOpenJunkyard={() => openZone('junkyard', pid)}
+            />
+          </div>
+        ) : null}
         <div className="side-zone-section">
           <div className="side-zone-label">Library ({librarySize})</div>
           {/* `data-library-of` is what the draw animation flies a cardback
@@ -4962,6 +4979,9 @@ function Table({
       }
       case 'hand':
         return { title: `${whose} hand`, ids: view.zones.hands[pid] ?? [] }
+      // Face up in the command zone, everyone's to look at (rule 717.6a).
+      case 'junkyard':
+        return { title: `${whose} junkyard`, ids: view.players[pid]?.junkyard ?? [] }
       case 'emblems': {
         const cards = view.emblems.flatMap((e, i) => (e.owner === pid ? [emblemToVisible(e, i)] : []))
         const byId = new Map(cards.map((c) => [c.id, c]))

@@ -21,6 +21,9 @@ export interface HoverTarget {
   readonly y: number
   /** The printing this deck brings for the card, if it isn't the default. */
   readonly art?: string | null
+  /** An Attraction's lit numbers in the printing this deck brings (rule
+   * 717.1), if it isn't the first. */
+  readonly lights?: readonly number[] | null
   /** A line (viewport y) the preview stays below while it fits on screen:
    * the top of the list it hangs off, so a row near the top doesn't put it
    * over the search box and filters above the list. */
@@ -42,7 +45,7 @@ export interface HoverTarget {
  * face that's up is always the one beside the pointer.
  */
 export function CardHoverPreview({ target }: { readonly target: HoverTarget | null }) {
-  const card = target === null ? null : defToVisible(target.def, target.art)
+  const card = target === null ? null : defToVisible(target.def, target.art, target.lights)
   const other = useOtherFace(card)
   if (target === null || card === null) return null
 

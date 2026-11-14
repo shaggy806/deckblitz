@@ -26,6 +26,14 @@ describe('describeEvent', () => {
     expect(isDetailOnlyEvent(acted)).toBe(true)
   })
 
+  it('says an Attraction opened, a roll to visit, a visit and a claimed prize in words', () => {
+    const say = (fields: Record<string, unknown>) => describeEvent(event(fields), nameOf, seats)
+    expect(say({ type: 'attraction-opened', player: p1, object: 'o1' })).toBe('Toby opens an Attraction: card:o1')
+    expect(say({ type: 'rolled-to-visit', player: p2, result: 4 })).toBe('P2 rolls to visit their Attractions: 4')
+    expect(say({ type: 'attraction-visited', player: p1, object: 'o1' })).toBe('card:o1 is visited')
+    expect(say({ type: 'prize-claimed', player: p1, object: 'o1' })).toBe('Toby claims the prize of card:o1')
+  })
+
   it('says who a creature-or-player choice went to', () => {
     const chose = (chosen: unknown) =>
       describeEvent(event({ type: 'permanent-or-player-chosen', player: p1, source: 'o1', chosen }), nameOf, seats)

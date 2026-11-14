@@ -11,11 +11,20 @@ import type { CardDefinition, ObjectId, PlayerId, VisibleObject } from 'engine/c
  * chosen a printing (`SavedDeck.printings`) — the same substitution
  * `viewFor` makes in a real game, so a card previewed in the deck builder
  * looks like the one that will hit the table.
+ *
+ * An Attraction shows the numbers its first printing lights (rule 717.1), or
+ * `lights` — the printing a deck brings.
  */
-export function defToVisible(def: CardDefinition, art?: string | null): VisibleObject {
+export function defToVisible(
+  def: CardDefinition,
+  art?: string | null,
+  lights?: readonly number[] | null,
+): VisibleObject {
   const owner = 'you' as PlayerId
   const isCreature = def.power !== null && def.toughness !== null
+  const lit = lights ?? def.attractionLights?.[0]?.lights
   return {
+    ...(lit !== undefined ? { lights: lit } : {}),
     id: `def-${def.name}` as ObjectId,
     cardName: def.name,
     copyOf: null,

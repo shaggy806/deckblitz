@@ -19,6 +19,7 @@ import type { Goader } from './CardFlags.tsx'
 import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
 import { roomLabel } from './rooms.ts'
 import { useCardArt } from './useCardArt.ts'
+import { AttractionLights } from './AttractionLights.tsx'
 
 const TAP_ICON_URL = manaSymbolUrl('T')
 
@@ -218,6 +219,7 @@ export function MiniTile({
             </span>
           ) : null}
           {obj.loyalty !== null ? <LoyaltyCounter value={obj.loyalty} /> : null}
+          {obj.lights !== undefined && faceDown === null ? <AttractionLights lights={obj.lights} /> : null}
           <CounterChips obj={obj} />
 
           {(stackCount !== null && stackCount > 1) || blockedCount > 0 ? (
