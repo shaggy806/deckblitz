@@ -96,6 +96,7 @@ import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, scavenge, unearth } from "./cards/helpers.js";
 import {
   becameAuraDefinition,
+  enteringAuraDefinition,
   bestowedDefinition,
   casualtyReadsX,
   enchantsGraveyardCard,
@@ -1594,7 +1595,7 @@ function faceDownEntry(types: EnterTypes | undefined): Pick<EnterOptions, "faceD
  * {@link faceDownEntry}). Nothing for none. */
 function enterTypesEntry(types: EnterTypes | undefined): Pick<EnterOptions, "asEntered" | "ifCreature"> {
   if (types === undefined) return {};
-  const { faceDown: _faceDown, ifCreature, ...asEntered } = types;
+  const { faceDown: _faceDown, ifCreature, enchant: _enchant, ...asEntered } = types;
   return {
     ...(Object.keys(asEntered).length > 0 ? { asEntered } : {}),
     ...(ifCreature === true ? { ifCreature: true as const } : {}),
@@ -15153,6 +15154,13 @@ export class Game {
     // Entering under a static loss of all abilities (rule 614.12 — Humility,
     // Dress Down), it has none of its own "as this enters" abilities: only
     // what the rules ask of it (an Aura's object, a battle's protector).
+    // "It's an Aura enchantment with enchant …" (`EnterTypes.enchant`): it
+    // enters an Aura with that enchant ability, so what it enchants is
+    // chosen as it enters (rule 303.4f), whatever else it loses.
+    const enterAura = answered?.enterAura;
+    if (enterAura !== undefined && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
+      return { kind: "enchant", as: enteringAuraDefinition(def, enterAura) };
+    }
     if (entersWithoutAbilities(this.state, this.registry, object)) {
       if (def.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
         return { kind: "enchant", as: def };
@@ -54130,9 +54138,15 @@ controlledBy,
    * "as this enters" choices are asked, so it makes none of its own (rule
    * 614.12: judged as it would exist on the battlefield). */
   private markEnteringWithoutAbilities(id: ObjectId, types: EnterTypes | undefined): void {
-    if (types?.loseAbilities !== true) return;
     const object = this.state.objects[id];
-    if (object === undefined || object.enterChoice?.withoutAbilities === true) return;
+    if (object === undefined) return;
+    // "It's an Aura enchantment with enchant …" (`EnterTypes.enchant`): what
+    // it enchants is one of its choices as it enters (rule 303.4f).
+    if (types?.enchant !== undefined && object.enterChoice?.enterAura === undefined) {
+      object.enterChoice = { ...object.enterChoice, enterAura: types.enchant };
+    }
+    if (types?.loseAbilities !== true) return;
+    if (object.enterChoice?.withoutAbilities === true) return;
     object.enterChoice = { ...object.enterChoice, withoutAbilities: true };
   }
 
@@ -65868,6 +65882,14 @@ controlledBy,
           ...patchModifier(enter.asEntered),
           untilEndOfTurn: false,
         });
+      }
+      // "It's an Aura enchantment with enchant …" (`EnterTypes.enchant`): an
+      // Aura (layer 4) with that enchant ability for as long as it stays,
+      // both from the moment it enters, at its own timestamp — after the
+      // effect's types, so the Aura subtype lands on its enchantment type.
+      // It was attached to what was chosen for it above (rule 303.4f).
+      if (enterChoice?.enterAura !== undefined) {
+        object.enchantSwap = { at: object.timestamp, spec: enterChoice.enterAura, becameAura: true };
       }
       // Replacement effects that apply as it enters (rule 614.1c) — tapped /
       // enters-with-counters, its own and other permanents'. `object.counters`

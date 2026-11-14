@@ -6655,6 +6655,18 @@ export function becameAuraDefinition(def: CardDefinition): CardDefinition {
 }
 
 /**
+ * A card an effect puts onto the battlefield as "an Aura enchantment with
+ * enchant" `enchant` (`EnterTypes.enchant` — Harold and Bob, First Numens):
+ * its own definition as an Aura enchantment with that enchant ability, what
+ * the question of what it may enchant as it enters (rule 303.4f,
+ * `Game.canEnchant`) is asked of. Once it's there, `GameObject.enchantSwap`
+ * holds the enchant ability and the layer fold the types.
+ */
+export function enteringAuraDefinition(def: CardDefinition, enchant: TargetSpec): CardDefinition {
+  return { ...def, types: ["enchantment"], subtypes: ["Aura"], targets: [enchant] };
+}
+
+/**
  * Whether an Aura's enchant ability — the slot its spell targets (rule
  * 303.4a) — is a card in a graveyard, not a permanent or a player: Animate
  * Dead's "Enchant creature card in a graveyard". Such an Aura enters

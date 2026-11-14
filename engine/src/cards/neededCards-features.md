@@ -322,6 +322,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Returning as an Aura with a granted ability — built 2026-11-14
+
+The key `effect:return-as-aura-with-granted-ability`. `EnterTypes.enchant: TargetSpec`
+(a `put-onto-battlefield`'s `enterAs`): "It's an Aura enchantment with enchant Forest you
+control and '…'". Marked on `enterChoice.enterAura` before the entry's choices, so
+`nextEnterChoice` asks what it enchants (rule 303.4f) of `enteringAuraDefinition`; none
+leaves it in the graveyard (303.4g). Entering, it gets `enchantSwap { spec, becameAura }` at
+its own timestamp, which the Aura state-based check (704.5m) reads. The card types are
+`setTypes`, the grant and "loses all other abilities" the patch's. Harold and Bob, First
+Numens (rank 9062), Old-Growth Troll, Bronzehide Lion. `test/return-as-aura.test.ts`.
+
 ### "As this Equipment becomes attached", and the last chosen name — built 2026-11-13
 
 The key `decision:choose-name-and-type-on-attach`. `CardDefinition.asBecomesAttached:

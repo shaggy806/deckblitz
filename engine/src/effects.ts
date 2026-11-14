@@ -11392,6 +11392,16 @@ export interface EnterTypes extends ResolvedPatch {
    * the battlefield"), its face down or transformed face included. Not with
    * `faceDown`. */
   readonly ifCreature?: true;
+  /** "It's an **Aura enchantment with enchant** Forest you control"
+   * (Harold and Bob, First Numens; Bronzehide Lion's "enchant creature you
+   * control"): it enters an Aura with this enchant ability, read as an Aura
+   * spell's target slot is but without targeting, for as long as it stays
+   * (`GameObject.enchantSwap`, `becameAura`). Its controller chooses what it
+   * enchants as it enters (rule 303.4f); with nothing it could enchant it
+   * stays where it is (303.4g — the rulings). Its card types come from
+   * `setTypes` (`["enchantment"]`); the subtype Aura from this. Read by
+   * `put-onto-battlefield`. */
+  readonly enchant?: TargetSpec;
   /** It enters **face down** (rule 708.3 — turned face down before it
    * enters, so it has no "as this enters" choices and its enters abilities
    * neither trigger nor apply): `true` as a 2/2 with no name, text,

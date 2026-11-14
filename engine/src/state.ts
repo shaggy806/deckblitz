@@ -886,6 +886,11 @@ export interface GameObject {
      * battlefield, so it makes none of its own "as this enters" choices
      * (rule 614.12, the ruling). Set before they're asked. */
     readonly withoutAbilities?: true;
+    /** The effect putting it there says it's "an Aura enchantment with
+     * enchant" this (`EnterTypes.enchant` — Harold and Bob, Bronzehide
+     * Lion): it enters as an Aura, so what it enchants is chosen as it
+     * enters (rule 303.4f), from what this allows. Set before it's asked. */
+    readonly enterAura?: TargetSpec;
     /** The effect putting it there puts it there transformed: its back face
      * is up as it enters (rule 712.14a), so its choices are that face's. Set
      * before they're asked. */
