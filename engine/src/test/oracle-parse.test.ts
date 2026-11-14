@@ -15226,6 +15226,12 @@ describe("how one player's state compares with another's", () => {
     ).toEqual({ on: "activates-ability", who: "opponent", source: { typesAnyOf: ["creature", "land"] } });
   });
 
+  it("can't be blocked by creatures with toughness N or greater (Ghost of Ramirez DePietro)", () => {
+    expect(read("Creature", "Card can't be blocked by creatures with toughness 3 or greater.").static[0].restrictions).toEqual([
+      { kind: "cant-be-blocked", by: { toughness: { op: "gte", n: 3 } } },
+    ]);
+  });
+
   it("activates-ability narrowed to what it targets, and that ability copied (Ertha Jo)", () => {
     const ertha = read(
       "Creature",

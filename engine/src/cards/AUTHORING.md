@@ -3539,7 +3539,9 @@ discarded this turn that hasn't moved since — a madness card its owner didn't
 cast still is, in the graveyard it went on to (Shadow of the Grave's "all
 cards in your graveyard that you cycled or discarded this turn" is
 `return-from-graveyard` with `filter: { discardedThisTurn: true }`; cycling is
-discarding, rule 702.29a). `drawnThisTurn` is a card drawn this turn that hasn't
+discarding, rule 702.29a). Ghost of Ramirez DePietro's "a card in a graveyard that was
+discarded or put there from a library this turn" is `anyOf` it and
+`putIntoGraveyardFromLibraryThisTurn`. `drawnThisTurn` is a card drawn this turn that hasn't
 moved since — only a real draw, so not a tutor's card nor a dredged one (Sylvan
 Library's "cards in your hand drawn this turn"). **"Shares a type with it"** is one clause per
 kind of type — `sharesCardTypeWith`, `sharesPermanentTypeWith` (rule 110.4,

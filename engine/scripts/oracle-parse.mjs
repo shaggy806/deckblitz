@@ -22716,8 +22716,9 @@ function parseStatic(line, text) {
   if (/^(?:Enchanted|Equipped) creature's controller may have it assign its combat damage as though it weren't blocked\.$/.test(line)) {
     return { affects: { scope: "attached" }, assignAsThoughUnblocked: true, text };
   }
-  if ((m = /^~ can't be blocked by creatures with power (\d+) or (less|greater)\.$/.exec(line))) {
-    return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } } }], text };
+  // "… with toughness 3 or greater" (Ghost of Ramirez DePietro) too.
+  if ((m = /^~ can't be blocked by creatures with (power|toughness) (\d+) or (less|greater)\.$/.exec(line))) {
+    return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { [m[1]]: { op: m[3] === "less" ? "lte" : "gte", n: Number(m[2]) } } }], text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
   // "You may look at an additional two cards each time you surveil."
