@@ -10100,6 +10100,41 @@ export type EffectSpec =
     }
   | {
       /**
+       * "**An opponent guesses** whether the top card of your library is the
+       * chosen kind" (Gollum, Scheming Guide), "that player **guesses**
+       * whether the card's mana value is greater than 4" (Master of
+       * Predicaments): `who` answers a yes or no about one card of the
+       * effect's controller's — the top card of their library (`about:
+       * "library-top"`) or the card chosen earlier in this resolution, still in
+       * their hand (`"chosen-this-way"`: a `look-and-choose` of their hand
+       * with `destination: "stay"`, which shows nobody the card). The guess is
+       * whether the card matches `whether`'s one proposition — or, with two
+       * ("choose land or nonland"), the one the effect's controller chooses
+       * first, out loud, before the guess. It's a choice by another player as
+       * the effect resolves (rule 608.2d), asked as a `choose-modes` of two
+       * answers whose awaiting carries `guess`, so a bot answers from what it
+       * can see rather than the card (`controller.ts`).
+       *
+       * `reveal`: "Reveal that card" — shown whatever the guess (Gollum's
+       * ruling). Then `ifRight` or `ifWrong` follows, the controller's, with
+       * the `"that-player"` scope naming the guesser. With no card to guess
+       * about (an empty library), no guess is right (Gollum's ruling).
+       */
+      readonly kind: "guess";
+      readonly who: PlayerRef;
+      readonly about: "library-top" | "chosen-this-way";
+      readonly whether: readonly GuessProposition[];
+      readonly reveal?: true;
+      readonly ifRight?: EffectSpec;
+      readonly ifWrong?: EffectSpec;
+      /** Set only by the engine on the copy each answer resumes. `chosen`:
+       * the proposition the controller chose (an index in `whether`);
+       * `guesser`: `who`, read as the effect began; `guessed`: their answer,
+       * yes or no. */
+      readonly progress?: { readonly chosen: number; readonly guesser?: PlayerId; readonly guessed?: boolean };
+    }
+  | {
+      /**
        * "Each player may …", "each opponent may …", "its controller may …",
        * "the player whose turn it is may …" — a choice that belongs to
        * players other than the effect's controller, or to several of them.
@@ -11503,6 +11538,33 @@ export type ResolvedPileObjects =
   | { readonly cards: readonly ObjectId[] };
 
 /** See the `look-and-choose` effect's `leftoverIf`. */
+export interface GuessProposition {
+  /** What the card is if the proposition holds — read from the effect's
+   * controller's side, the card where it is (rule 202.3e: an {X} in a mana
+   * cost is 0 off the stack). */
+  readonly filter: CardFilter;
+  /** With two propositions, the controller's choice of this one: "Land". */
+  readonly choose?: string;
+  /** The guesser's two answers: "Guess the top card of its controller's
+   * library is a land", "Guess it isn't a land". */
+  readonly yes: string;
+  readonly no: string;
+}
+
+/** A `choose-modes` question that is a guess (the `"guess"` effect): mode 0
+ * says the card of `owner`'s it's `about` matches the proposition, mode 1
+ * that it doesn't. What a guesser could estimate from, counted as the
+ * question is asked (the proposition read in full, a `{ amount }` operand
+ * included): of the `unseen` cards in `owner`'s hand and library together,
+ * `matching` match. A bot guesses from that, never the card
+ * (`controller.ts`). */
+export interface ModesGuess {
+  readonly owner: PlayerId;
+  readonly about: "library-top" | "chosen-this-way";
+  readonly unseen: number;
+  readonly matching: number;
+}
+
 export interface LookAndChooseLeftoverIf {
   readonly condition: StaticCondition;
   readonly leftover: "bottom-random" | "hand" | "graveyard";
@@ -12121,6 +12183,16 @@ export interface EffectApi {
    * `cost` (an `{X}`), saying yes pays it, the X paid arriving as `yes`'s
    * `"x"`: 0 if none. See `"players-pay-any-amount"`, `"bid-life"`. */
   askPlayerAboutEffect(player: PlayerId, prompt: string, yes: EffectSpec, no: EffectSpec, cost?: string): void;
+  /** Ask `player` to choose one of `options` as this resolves — the chosen
+   * one's effect is then this effect's own (its controller stays this
+   * context's), as `askPlayerAboutEffect`'s is. `guess`: the question is a
+   * guess about a card of `owner`'s (the `"guess"` {@link EffectSpec}),
+   * option 0 its yes — see the `choose-modes` decision's `guess`. */
+  askPlayerToChoose(
+    player: PlayerId,
+    options: readonly { readonly text: string; readonly effect: EffectSpec }[],
+    guess?: ModesGuess,
+  ): void;
   /** The most of `resource` that `player` could pay right now (rule 119.4:
    * no more life than they have, and none if they can't lose life). */
   mostPayable(player: PlayerId, resource: "mana" | "life"): number;
@@ -14884,6 +14956,77 @@ function applyBidLife(spec: Extract<EffectSpec, { kind: "bid-life" }>, ctx: Reso
   const won = ctx.aboutPlayer(highBidder).withX(high);
   if (spec.then !== undefined) applyEffectSpec(spec.then, won);
   if (spec.ifYouWin !== undefined && highBidder === ctx.controller) applyEffectSpec(spec.ifYouWin, won);
+}
+
+/** The card a `guess` is about, as it is now: the top card of the effect's
+ * controller's library, or the last card chosen this way still in their
+ * hand (rule 400.7). */
+function guessCard(about: Extract<EffectSpec, { kind: "guess" }>["about"], ctx: ResolutionContext): ObjectId | undefined {
+  if (about === "library-top") return ctx.cardsIn(ctx.controller, "library")[0];
+  const hand = ctx.cardsIn(ctx.controller, "hand");
+  return ctx
+    .thisWay("chosen")
+    .map((entry) => entry.object)
+    .filter((id) => hand.includes(id))
+    .at(-1);
+}
+
+/**
+ * A `guess`, one step at a time, each answer resuming a copy with its
+ * `progress`: the controller's choice of proposition (with two), then the
+ * guesser's yes or no (rule 608.2d — a choice made as the effect resolves),
+ * then the reveal, if any, and `ifRight` or `ifWrong`. Nobody is told which
+ * it was unless the card is revealed (Master of Predicaments' ruling: "your
+ * opponent won't know the reason you didn't cast the card").
+ */
+function applyGuess(spec: Extract<EffectSpec, { kind: "guess" }>, ctx: ResolutionContext): void {
+  const progress = spec.progress;
+  if (progress === undefined) {
+    // Who guesses is read now: a resumed copy's `"that-player"` is whoever
+    // answered last.
+    const guesser = resolvePlayerRef(spec.who, ctx);
+    if (guesser === undefined) return;
+    if (spec.whether.length > 1) {
+      ctx.askPlayerToChoose(
+        ctx.controller,
+        spec.whether.map((proposition, chosen) => ({
+          text: proposition.choose ?? proposition.yes,
+          effect: { ...spec, progress: { chosen, guesser } },
+        })),
+      );
+      return;
+    }
+    applyGuess({ ...spec, progress: { chosen: 0, guesser } }, ctx);
+    return;
+  }
+  const proposition = spec.whether[progress.chosen];
+  if (proposition === undefined) return;
+  if (progress.guessed === undefined) {
+    const guesser = progress.guesser;
+    if (guesser === undefined) return;
+    const unseen = [...ctx.cardsIn(ctx.controller, "hand"), ...ctx.cardsIn(ctx.controller, "library")];
+    const matching = unseen.filter((id) => ctx.cardMatches(id, proposition.filter)).length;
+    ctx.askPlayerToChoose(
+      guesser,
+      [
+        { text: proposition.yes, effect: { ...spec, progress: { ...progress, guessed: true } } },
+        { text: proposition.no, effect: { ...spec, progress: { ...progress, guessed: false } } },
+      ],
+      { owner: ctx.controller, about: spec.about, unseen: unseen.length, matching },
+    );
+    return;
+  }
+  const guesser = progress.guesser;
+  const card = guessCard(spec.about, ctx);
+  // "Reveal that card" — whatever the guess (Gollum's ruling), rule 701.20a.
+  if (spec.reveal === true && card !== undefined) {
+    if (spec.about === "library-top") ctx.revealLibraryTop(ctx.controller, 1);
+    else ctx.showCardFromHand(ctx.controller, card, "reveal");
+  }
+  // No card, no right guess (Gollum's ruling on an empty library).
+  const right = card !== undefined && ctx.cardMatches(card, proposition.filter) === progress.guessed;
+  const follow = right ? spec.ifRight : spec.ifWrong;
+  if (follow !== undefined) applyEffectSpec(follow, guesser === undefined ? ctx : ctx.aboutPlayer(guesser));
 }
 
 /** How many passes a `repeat` makes at most — a guard, like `MAX_CLASHES` —
@@ -18837,6 +18980,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "bid-life":
       applyBidLife(spec, ctx);
+      return;
+    case "guess":
+      applyGuess(spec, ctx);
       return;
     case "choose-value": {
       const chooser = spec.who === undefined ? undefined : resolvePlayerRef(spec.who, ctx);

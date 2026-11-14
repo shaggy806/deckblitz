@@ -208,6 +208,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.then);
     v.child(n.ifYouWin);
   },
+  // A guess targets nothing of its own: either outcome says who it helps.
+  guess: (n, v) => {
+    v.child(n.ifRight);
+    v.child(n.ifWrong);
+  },
   "for-each-vote": (n, v) => v.child(n.effect),
   "with-choices": (n, v) => v.child(n.effect),
   repeat: (n, v) => v.child(n.effect),

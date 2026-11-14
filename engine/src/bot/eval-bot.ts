@@ -539,6 +539,9 @@ function bestDecision(
 ): Action {
   const me = view.player;
   if (inherited.player !== me || budget.left <= 1 || spent(budget)) return inherited;
+  // A guess about a card we can't see: playing both answers out would read
+  // the card itself. v1's answer is made from what we could know.
+  if (view.state.awaiting?.kind === "choose-modes" && view.state.awaiting.guess !== undefined) return inherited;
   const legal = view.legalActions().find((l) => l.kind !== "pass-priority");
   const candidates =
     legal === undefined

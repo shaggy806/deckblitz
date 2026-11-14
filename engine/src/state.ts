@@ -33,6 +33,7 @@ import type {
   ZoneChoiceSplitCase,
   ZoneSecondPick,
   GraveyardKeyword,
+  ModesGuess,
 } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
@@ -4735,6 +4736,11 @@ export type AwaitingDecision =
        * is kept out of the event log, so no other player learns it before
        * the votes are revealed together. */
       readonly secret?: boolean;
+      /** A guess about a card the chooser can't see (the `"guess"` effect):
+       * mode 0 is yes, mode 1 no. Never searched by playing both out — a bot
+       * answers from what it could know (`controller.ts`). Never answered
+       * along with identical triggers' either: each guesses its own card. */
+      readonly guess?: ModesGuess;
       /** The enclosing ability's own already-chosen targets, forwarded to the
        * modes (and to `onDecline`) — a `may`/`modal` effect doesn't choose
        * new targets itself, so a mode referencing `target: 0` means "the

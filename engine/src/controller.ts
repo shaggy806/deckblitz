@@ -4386,6 +4386,14 @@ export class HeuristicBotController extends AutomaticController {
       const life = state.players[view.player].life;
       return lifePaidBy(awaiting.modes[0]?.effect) >= life ? [] : [0];
     }
+    // A guess about a card we can't see (Gollum, Scheming Guide; Master of
+    // Predicaments): by what we could know — how much of its owner's hand
+    // and library together, none of it seen, is the kind asked about (the
+    // engine counted it as it asked) — never the card itself. Yes only when
+    // most of it is.
+    if (awaiting.guess !== undefined) {
+      return [awaiting.guess.matching * 2 > awaiting.guess.unseen ? 0 : 1];
+    }
     const context = {
       state,
       me: this.playerId,

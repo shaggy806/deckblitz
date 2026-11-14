@@ -12646,4 +12646,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, { bf: ['Hill Giant'] }, {}],
     }),
   ),
+  preset(
+    'Gollum, Scheming Guide: an opponent guesses whether the top card is the kind you chose',
+    board({
+      you: { bf: ['Gollum, Scheming Guide'], lib: ['Lightning Bolt', 'Swamp'] },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Master of Predicaments: the player guesses a hidden card\'s mana value',
+    board({
+      you: { bf: ['Master of Predicaments'], hand: ['Shivan Dragon', 'Island'] },
+    }),
+  ),
 ]

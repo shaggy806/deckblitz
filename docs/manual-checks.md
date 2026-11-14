@@ -8396,3 +8396,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Master of the Wild Hunt: in a 4-player game, the target's controller divides
 - **Do:** Use Master of the Wild Hunt's ability targeting Carol's Hill Giant.
 - **Expect:** Your two Wolves tap, deal 4 to the Hill Giant and it dies. Carol (a bot) chooses which Wolves are dealt its 3 damage; you're never asked.
+
+## An opponent guesses about your card (2026-11-14)
+
+### Gollum, Scheming Guide: an opponent guesses whether the top card is the kind you chose
+- **Do:** Attack Bob with Gollum. Put Swamp back on top, then Lightning Bolt, and choose "Choose land". As Bob, choose "Guess it isn't a land".
+- **Expect:** Bob is asked between "Guess the top card of its controller's library is a land" and "Guess it isn't a land". The Swamp is revealed and Bob guessed wrong: you draw the Swamp, Gollum can't be blocked, and Bob takes 2.
+
+### Master of Predicaments: the player guesses a hidden card's mana value
+- **Do:** Attack Bob with Master of Predicaments. When it deals damage, choose Shivan Dragon from your hand.
+- **Expect:** The History reads "Alice chooses Shivan Dragon" (Bob sees "a card"). Bob (a bot) guesses 4 or less, so the banner asks "Cast Shivan Dragon without paying its mana cost?"; casting it puts the Dragon onto the battlefield.
+- **Not a bug:** Nothing says whether Bob guessed right unless you cast the card.

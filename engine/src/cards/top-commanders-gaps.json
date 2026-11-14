@@ -7,6 +7,8 @@
     "trigger:enchanted-player-casts",
     "trigger:nth-spell-of-turn-any-player",
     "trigger:exiled-while-crafting",
+    "decision:opponent-guesses-card-kind",
+    "decision:opponent-guesses-mana-value",
     "decision:choose-two-colors-on-enter",
     "mechanic:choose-two-colors-on-enter",
     "decision:controller-of-target-divides-damage",

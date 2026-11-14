@@ -3038,6 +3038,22 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   has the high bidder as `"that-player"` and the bid as `"x"`, so "loses life
   equal to the high bid" is written out in it (Illicit Auction's `lose-life` and
   `gain-control { who: "that-player" }`); `ifYouWin` follows if that's you.
+- **`guess { who, about, whether, reveal?, ifRight?, ifWrong? }`** — "an
+  opponent / that player **guesses** whether …" (rule 608.2d): `who` (a
+  `PlayerRef`, read as the effect begins — inside a `choose-opponent` for "an
+  opponent") answers yes or no about one card of yours: `about:
+  "library-top"`, or `"chosen-this-way"` — the card a `look-and-choose { zone:
+  "hand", min: 1, max: 1, destination: "stay", leftover: "stay" }` before it
+  chose, which shows it to nobody. `whether` is one `{ filter, yes, no }` (the
+  answers' button texts) — Master of Predicaments' `manaValue: { op: "gt", n: 4
+  }`, The Seventh Doctor's against `{ amount: { countOf: … } }` — or two with
+  `choose` texts, which you choose between first ("choose land or nonland":
+  Gollum, Scheming Guide). `reveal: true` shows the card whatever the guess;
+  without it nobody learns whether they were right. With no card no guess is
+  right. `ifRight` / `ifWrong` are yours, with the guesser as `"that-player"`
+  (a `cast-now { from: "chosen-this-way", free: true, else }` for "you may cast
+  it … if you don't"). A bot guesses from how much of your unseen hand and
+  library matches, never the card.
 - **Choosing a card name** (rule 201.4 — `card-names.ts`; the
   `choose-card-name` decision, a search popup over every card name the
   registry holds, tokens and split cards' wholes aside, the suggestions picked

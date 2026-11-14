@@ -326,6 +326,7 @@ import type {
   CopyExceptions,
   SpellCopyChange,
   ZoneSecondPick,
+  ModesGuess,
   BoundUnlessOption,
   CopyForEach,
   WardCost,
@@ -8548,6 +8549,8 @@ export class Game {
        * identical triggers', and with `secret`, see the `choose-modes`
        * decision's `secret`. */
       readonly vote?: { readonly secret: boolean };
+      /** See the `choose-modes` decision's `guess`. */
+      readonly guess?: ModesGuess;
     } = {},
   ): void {
     const key = ability.key;
@@ -8660,7 +8663,7 @@ export class Game {
     const resolving = this.resolvingTrigger;
     const yesOrNo = minModes === 0 && maxModes === 1 && offered.length === 1;
     const trigger =
-      resolving !== null && ability.vote === undefined && energyX === undefined &&
+      resolving !== null && ability.vote === undefined && ability.guess === undefined && energyX === undefined &&
         (yesOrNo || (ability.about === undefined && ability.aboutObject === undefined && ability.aboutCard === undefined))
         ? { ...resolving, ...this.identicalTriggers(resolving.signature, resolving.object) }
         : undefined;
@@ -8708,6 +8711,7 @@ export class Game {
       ...(ability.sourceLost === true ? { sourceLost: true } : {}),
       ...(trigger !== undefined ? { trigger } : {}),
       ...(ability.vote?.secret === true ? { secret: true } : {}),
+      ...(ability.guess !== undefined ? { guess: ability.guess } : {}),
     };
   }
 
@@ -38608,6 +38612,24 @@ export class Game {
           refs,
           targetZones,
           { modesController: controller },
+        ),
+      askPlayerToChoose: (player, options, guess) =>
+        this.beginModesChoice(
+          source,
+          player,
+          0,
+          1,
+          1,
+          options,
+          undefined,
+          targets,
+          undefined,
+          triggerValue,
+          triggerObject,
+          controller,
+          refs,
+          targetZones,
+          { modesController: controller, ...(guess !== undefined ? { guess } : {}) },
         ),
       mostPayable: (player, resource) => {
         if (resource === "mana") return this.maxAffordableAbilityX(player, (n) => concreteX(parseManaCost("{X}"), n, undefined));
