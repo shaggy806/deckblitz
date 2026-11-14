@@ -36090,7 +36090,13 @@ export class Game {
     if (typeof spec !== "object" || (spec.kind !== "permanent" && spec.kind !== "card-in-graveyard") || typeof spec.whose !== "object")
       return spec;
     const seated = playerAtSeat(this.state.turnOrder, controller, spec.whose.seat);
-    return seated !== undefined && this.state.players[seated]?.hasLost === false ? spec : { kind: "optional", of: spec };
+    if (seated === undefined || this.state.players[seated]?.hasLost !== false) return { kind: "optional", of: spec };
+    // "For each graveyard with [a match] in it": none there, no target
+    // defined for it (`TargetSeat.ifAny`) — the optional slot offers nothing.
+    if (spec.whose.ifAny === true && legalTargets(this.state, this.registry, spec, controller).length === 0) {
+      return { kind: "optional", of: spec };
+    }
+    return spec;
   }
 
   /** Who answers a triggered ability's target choice when its

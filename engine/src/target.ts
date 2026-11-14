@@ -1002,6 +1002,14 @@ export function concreteTargetSpecs(
  * {@link playerAtSeat}. */
 export interface TargetSeat {
   readonly seat: number;
+  /** "For each graveyard **with** an instant or sorcery card in it, exile
+   * target instant or sorcery card from that graveyard" (Mysterious
+   * Stranger): the text defines a target only for a seat whose player has
+   * something there to target (rule 601.2c) — one with nothing needs none,
+   * where a plain seat slot's live player with nothing to target leaves the
+   * spell uncastable or the ability removed (603.3d). Read as the targets are
+   * chosen; a slot it defines is required. */
+  readonly ifAny?: true;
 }
 
 /**

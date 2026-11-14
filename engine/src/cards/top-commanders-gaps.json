@@ -11,6 +11,7 @@
     "effect:extra-combat-after-this-main-only-chosen-attack",
     "filter:player-other-than-owner",
     "filter:attached-to-enchanted-player",
+    "effect:target-per-graveyard-with-match",
     "amount:creatures-crewed-it-this-turn",
     "effect:amount-total-power-died-this-turn",
     "condition:cycled-named-card-this-game",

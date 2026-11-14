@@ -2861,10 +2861,13 @@ export type EffectSpec =
        * random that was exiled with Skyship Weatherlight", Cosmium
        * Catalyst's "an exiled card used to craft this artifact" (702.167c).
        * A face-down one is picked like any other; the event names it to
-       * those who may look at it.
+       * those who may look at it. `zone: "exiled-this-way"` picks from the
+       * cards this resolution has exiled from a graveyard, still in exile,
+       * `whose` unread: Mysterious Stranger's "if two or more cards are
+       * exiled this way, choose one of them at random and copy it".
        */
       readonly kind: "choose-random-card";
-      readonly zone: "graveyard" | "hand" | "exiled-with-source";
+      readonly zone: "graveyard" | "hand" | "exiled-with-source" | "exiled-this-way";
       /** Whose graveyard or hand: the effect's controller's (the default),
        * `"that-player"`, a target slot holding a player, or a player named
        * through a target ("target creature's controller reveals a card at
@@ -17483,6 +17486,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         cards = ctx
           .cardsExiledWithSource()
           .filter((id) => filter === undefined || ctx.cardMatches(id, filter));
+      } else if (spec.zone === "exiled-this-way") {
+        const filter = spec.filter;
+        cards = ctx.cardsExiledThisWay().filter((id) => filter === undefined || ctx.cardMatches(id, filter));
       } else {
         const whose = spec.whose ?? "you";
         if (whose === "you") owner = ctx.controller;
