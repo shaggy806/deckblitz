@@ -12712,4 +12712,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  // --- Life to 0 replaced, and a number chosen as it enters (2026-11-14) -----------
+  preset(
+    'Enduring Angel: a loss that would leave you at 0 transforms it instead',
+    board({
+      you: { bf: ['Enduring Angel', 'Swamp*2'], hand: ["Night's Whisper"], lib: ['Island*3'], life: 2 },
+    }),
+  ),
+  preset(
+    'Sanctum Prelate: choose any number as it enters',
+    board({
+      you: { bf: ['Plains*3', 'Mountain', 'Forest'], hand: ['Sanctum Prelate', 'Lightning Bolt', 'Llanowar Elves'] },
+    }),
+  ),
 ]

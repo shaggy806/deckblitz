@@ -6,7 +6,9 @@
  * `max` when the card bounds it.
  *
  * Raised by `Game`'s `chooseValue`; the answer resumes the resolution with
- * the effect's `then`, which reads it as `"x"`.
+ * the effect's `then`, which reads it as `"x"`. Also asked as a permanent is
+ * about to enter: life paid (Phyrexian Processor) and an unbounded "choose a
+ * number" (Sanctum Prelate's `chooseNumberOnEnter`).
  */
 
 import type { Action, LegalAction } from "../actions.js";

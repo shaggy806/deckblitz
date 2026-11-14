@@ -4257,6 +4257,7 @@ export type AwaitingDecision =
           readonly assist?: undefined;
           readonly placeCopy?: undefined;
           readonly payLifeAsEntering?: undefined;
+          readonly numberAsEntering?: undefined;
           /** Keep the answer on `source` too, while it's still the permanent
            * of this stint (`GameObject.chosenOnEnter`) — Shapeshifter. */
           readonly remember?: { readonly stint: number };
@@ -4267,12 +4268,14 @@ export type AwaitingDecision =
           readonly resume?: undefined;
           readonly placeCopy?: undefined;
           readonly payLifeAsEntering?: undefined;
+          readonly numberAsEntering?: undefined;
           readonly remember?: undefined;
         }
       | {
           /** The other copies, still on the stack as this is asked. */
           readonly placeCopy: { readonly among: readonly ObjectId[] };
           readonly payLifeAsEntering?: undefined;
+          readonly numberAsEntering?: undefined;
           readonly assist?: undefined;
           readonly then?: undefined;
           readonly resume?: undefined;
@@ -4284,6 +4287,19 @@ export type AwaitingDecision =
            * answered, recorded on it (`enterChoice.asEntersDone`), and its
            * entry carries on. */
           readonly payLifeAsEntering: true;
+          readonly numberAsEntering?: undefined;
+          readonly placeCopy?: undefined;
+          readonly assist?: undefined;
+          readonly then?: undefined;
+          readonly resume?: undefined;
+          readonly remember?: undefined;
+        }
+      | {
+          /** "As this creature enters, choose a number" (Sanctum Prelate —
+           * `CardDefinition.chooseNumberOnEnter`): the answer waits on
+           * `source` as `enterChoice.chosen`, and its entry carries on. */
+          readonly numberAsEntering: true;
+          readonly payLifeAsEntering?: undefined;
           readonly placeCopy?: undefined;
           readonly assist?: undefined;
           readonly then?: undefined;

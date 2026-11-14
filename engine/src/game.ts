@@ -8476,6 +8476,16 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // "As this creature enters, choose a number" (Sanctum Prelate): the
+    // answer waits on it as any other "as this enters" choice does, and
+    // becomes its `chosenOnEnter`; its entry carries on.
+    if (awaiting.numberAsEntering !== undefined) {
+      const entering = this.state.objects[awaiting.source];
+      if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, chosen: String(number) };
+      this.emit({ type: "number-chosen", player, object: awaiting.source, number });
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Shapeshifter's "the last chosen number", on the permanent of that stint
     // alone (rule 400.7).
     if (awaiting.remember !== undefined) {
@@ -15310,6 +15320,7 @@ export class Game {
   ):
     | { readonly kind: "copy" }
     | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string; readonly look?: true }
+    | { readonly kind: "number" }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
     | { readonly kind: "instead"; readonly spec: EnterInstead }
     | { readonly kind: "as-enters"; readonly spec: AsEntersAction }
@@ -15403,6 +15414,9 @@ export class Game {
             : {}),
         };
       }
+      // "Choose a number" with nothing bounding it (Sanctum Prelate): any
+      // number, 0 or more (rule 107.1c), asked as a number.
+      if (becoming.chooseNumberOnEnter === true) return { kind: "number" };
       // Read ahead it will have on the battlefield (rules 614.12, 702.155b):
       // "Sagas you control have read ahead" (Barbara Wright). The same
       // choice a printed read ahead makes, one to its final chapter number
@@ -16037,6 +16051,18 @@ export class Game {
             ...(looked !== undefined ? { looked } : {}),
           };
         }
+        return true;
+      }
+      if (next.kind === "number") {
+        this.state.awaiting = {
+          kind: "choose-number",
+          player: chooser,
+          source: id,
+          min: 0,
+          // The client puts the source's name before it.
+          prompt: "Choose a number as it enters",
+          numberAsEntering: true,
+        };
         return true;
       }
       if (next.kind === "instead") {

@@ -5374,6 +5374,15 @@ export interface CardDefinition {
    */
   readonly chooseOnEnterLook: "opponent-hand" | null;
   /**
+   * "As this creature enters, **choose a number**" with nothing bounding it
+   * (Sanctum Prelate): any number, 0 or more (rules 107.1b-c), asked as a
+   * `choose-number` decision rather than a menu, and kept as
+   * `GameObject.chosenOnEnter` the way `chooseOnEnter`'s answer is — read back
+   * by the `{ chosenNumber: true }` amount. A bounded choice ("between 1 and
+   * 10", Talion) is a `chooseOnEnter` menu.
+   */
+  readonly chooseNumberOnEnter?: true;
+  /**
    * "As this permanent enters, choose a player" (rule 614.1c — Saskia the
    * Unyielding, Stuffy Doll) or "choose an opponent" (Black Vise, Cursed
    * Rack): asked of its controller among the players still in the game —
@@ -6195,6 +6204,7 @@ const PRINTED_ABILITY: {
   chooseCardNameOnEnter: (def) => def.chooseCardNameOnEnter !== null,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   chooseOnEnterLook: (def) => def.chooseOnEnterLook !== null,
+  chooseNumberOnEnter: (def) => def.chooseNumberOnEnter === true,
   choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
   secretChoiceOnEnter: false,
   chooseTwoPlayersOnEnter: false,
@@ -6520,6 +6530,8 @@ interface CardDraft {
   chooseCardNameOnEnter?: CardNameOnEnter;
   chooseOnEnter?: readonly string[];
   chooseOnEnterLook?: "opponent-hand";
+  /** See {@link CardDefinition.chooseNumberOnEnter}. */
+  chooseNumberOnEnter?: true;
   choosePlayerOnEnter?: "player" | "opponent";
   secretChoiceOnEnter?: true;
   chooseTwoPlayersOnEnter?: true;
@@ -6928,6 +6940,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
     ...(draft.minX !== undefined ? { minX: draft.minX } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
+    ...(draft.chooseNumberOnEnter === true ? { chooseNumberOnEnter: true as const } : {}),
     ...(draft.chooseTwoPlayersOnEnter === true ? { chooseTwoPlayersOnEnter: true as const } : {}),
     ...(draft.chooseOnEnterCount !== undefined && draft.chooseOnEnterCount > 1 ? { chooseOnEnterCount: draft.chooseOnEnterCount } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),

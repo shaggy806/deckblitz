@@ -3046,7 +3046,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   choose" (Arachne, Psionic Weaver: the opponent asked first among two or more,
   the hand shown to the chooser alone beside the options; what the word does is
   one static per word with `condition: { kind: "chosen-on-enter", value }`,
-  Archon of Valor's Reach's shape). A colour or number
+  Archon of Valor's Reach's shape). "Choose a number" as it enters with
+  nothing bounding it is `chooseNumberOnEnter: true` (Sanctum Prelate: a
+  `choose-number` from 0, no top — rule 107.1c — kept as `chosenOnEnter` and
+  read by `{ chosenNumber: true }`); a bounded one ("between 1 and 10",
+  Talion) is a `chooseOnEnter` menu of the numbers' words. A colour or number
   that does the same thing per value with no state is still fine as a
   resolution-time `modal` (Addle, By Invitation Only). The scaffolder reads
   Persecute's, Sudden Demise's, Blood Oath's and Ichormoon Gauntlet's lines.

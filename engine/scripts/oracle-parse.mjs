@@ -17383,6 +17383,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.chooseOnEnter = Array.from({ length: Number(m[2]) - low + 1 }, (_, i) => String(low + i));
       continue;
     }
+    // "As ~ enters, choose a number." with nothing bounding it (Sanctum
+    // Prelate): any number, 0 or more (rule 107.1c), asked as a number.
+    if (line === "As ~ enters, choose a number.") {
+      out.chooseNumberOnEnter = true;
+      continue;
+    }
     if (line === "As ~ enters, choose a color and an opponent.") {
       out.chooseOnEnter = ["W", "U", "B", "R", "G"];
       out.choosePlayerOnEnter = "opponent";
@@ -22701,6 +22707,21 @@ function parseStatic(line, text) {
   }
   if ((m = /^Your opponents can't cast spells with (odd|even) mana values\.$/.exec(line))) {
     return { affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", filter: { manaValueParity: m[1] } }], text };
+  }
+  // "Noncreature spells with mana value equal to the chosen number can't be
+  // cast." (Sanctum Prelate): the number chosen as it entered.
+  if (line === "Noncreature spells with mana value equal to the chosen number can't be cast.") {
+    return {
+      affects: { scope: "self" },
+      prohibits: [
+        {
+          act: "cast",
+          who: "each-player",
+          filter: { notTypes: ["creature"], manaValue: { op: "eq", n: { amount: { chosenNumber: true } } } },
+        },
+      ],
+      text,
+    };
   }
   if ((m = /^Your opponents can't block with creatures with (odd|even) mana values\.$/.exec(line))) {
     return {

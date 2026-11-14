@@ -8440,3 +8440,12 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Open your graveyard and click Nethergoyf. In the popup, pick Grizzly Bears, Hill Giant, Lightning Bolt and Divination; then add Sol Ring and Confirm.
 - **Expect:** Nothing is asked before the cast: Nethergoyf goes on the stack and the popup reads "Choose up to 6 cards with four or more card types among them to exile". With the first four picked (three types) "Confirm (4)" stays grey; adding Sol Ring lights it. After Confirm those five are exiled, Glorious Anthem stays in the graveyard, and Nethergoyf enters as a 1/2.
 - **Not a bug:** Hill Giant adds no new type but may be picked too: "any number" of cards.
+## Life to 0 replaced, and a number chosen as it enters (2026-11-14)
+
+### Enduring Angel: a loss that would leave you at 0 transforms it instead
+- **Do:** Cast Night's Whisper.
+- **Expect:** You draw two cards and stay in the game at 3 life; Enduring Angel turns over into Angelic Enforcer, a 3/3 flier without double strike.
+
+### Sanctum Prelate: choose any number as it enters
+- **Do:** Cast Sanctum Prelate, type 1 and choose it. Then try to cast Lightning Bolt.
+- **Expect:** The banner reads "Sanctum Prelate — choose a number as it enters" with no upper limit shown. Afterwards Lightning Bolt can't be cast (Sanctum Prelate's prohibition), while Llanowar Elves still can.

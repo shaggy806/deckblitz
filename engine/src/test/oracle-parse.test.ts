@@ -4149,6 +4149,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("You have shroud.", "Enchantment").static?.[0]).toMatchObject({ playerKeywords: ["shroud"] });
   });
 
+  it("reads 'choose a number' with no bound as it enters, and the prohibition by it (Sanctum Prelate)", () => {
+    const prelate = face(
+      "As this creature enters, choose a number.\nNoncreature spells with mana value equal to the chosen number can't be cast.",
+      "Creature — Human Cleric",
+    );
+    expect(prelate.chooseNumberOnEnter).toBe(true);
+    expect(prelate.chooseOnEnter).toBeUndefined();
+    expect(prelate.static?.[0]?.prohibits).toEqual([
+      { act: "cast", who: "each-player", filter: { notTypes: ["creature"], manaValue: { op: "eq", n: { amount: { chosenNumber: true } } } } },
+    ]);
+    expect(prelate.complete).toBe(true);
+    // Bounded, it's still a menu (Talion).
+    expect(face("As this creature enters, choose a number between 1 and 3.", "Creature").chooseOnEnter).toEqual(["1", "2", "3"]);
+  });
+
   it("a graveyard replacement for the turn, and an exile that does something besides (rule 614.1a)", () => {
     const made = (exile: object): object => ({
       kind: "replacement-effect",
