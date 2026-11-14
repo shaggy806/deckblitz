@@ -69,6 +69,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'mana-expended',
   // Bookkeeping for "the amassed Army" — the token and its counters have lines of their own.
   'amassed',
+  // Bookkeeping for "whenever your untap step untaps …" — the permanents' own untaps say it.
+  'untap-step-untapped',
   'permanent-tapped',
   'permanent-untapped',
   'damage-cleared',
