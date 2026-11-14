@@ -2366,6 +2366,9 @@ evidence 0 with nothing exiled still counts (that card's ruling). As an activate
 `cost.collectEvidence: N` — Forensic Researcher (the record `{ totalManaValue: N, filter }` is the
 same payment over the matching cards only, and no collecting of evidence: The Capitoline Triad's
 "Exile any number of historic cards from your graveyard with total mana value 30 or greater");
+`cost.collectEvidenceLinked: true` exiles them **with** the permanent (rule 607.2a), for another
+of its abilities' "cards exiled with it" — Kylox's Voltstrider's "Collect evidence 6: …" and its
+attack trigger's `cast-now` `from: "exiled-with-source"`;
 as a spell's "you may collect evidence N"
 additional cost, `kicker: { cost: "", keyword: "collect-evidence", collectEvidence: N }`, with
 "if evidence was collected" the spell being kicked — Crimestopper Sprite),

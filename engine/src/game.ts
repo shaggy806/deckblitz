@@ -26710,6 +26710,10 @@ export class Game {
             priorityTo: player,
             thenManaAbility: manaAfter,
             among: evidenceCostOf(evidence, sourceId).among,
+            exileLink:
+              ability.cost.collectEvidenceLinked === true
+                ? { source: sourceId, zoneChangeCount: this.state.objects[sourceId]?.zoneChangeCount ?? 0 }
+                : undefined,
           }),
         );
       }
@@ -26997,11 +27001,18 @@ export class Game {
     // "Collect evidence N" (rule 701.59a): which cards, chosen now too.
     if (ability.cost.collectEvidence !== undefined) {
       const evidence = evidenceCostOf(ability.cost.collectEvidence, sourceId);
+      // "… from among cards exiled with it" (Kylox's Voltstrider): linked to
+      // the permanent in the stint it's in as the cost is paid (607.2a).
+      const exileLink =
+        ability.cost.collectEvidenceLinked === true
+          ? { source: sourceId, zoneChangeCount: this.state.objects[sourceId]?.zoneChangeCount ?? 0 }
+          : undefined;
       this.withDecisionSource(sourceId, () =>
         this.beginCollectEvidence(player, sourceId, evidence.amount, {
           x: chosenX,
           priorityTo: player,
           among: evidence.among,
+          exileLink,
         }),
       );
     }
@@ -52205,6 +52216,9 @@ controlledBy,
       readonly thenManaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"];
       /** Only these cards, and no evidence collected. */
       readonly among?: { readonly filter: CardFilter; readonly except: ObjectId } | undefined;
+      /** The cards exiled are exiled with this source, in this stint (rule
+       * 607.2a — `AbilityCost.collectEvidenceLinked`). */
+      readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined;
     } = {},
   ): void {
     const among = opts.among;
@@ -52246,6 +52260,7 @@ controlledBy,
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
       ...(opts.thenManaAbility !== undefined ? { thenManaAbility: opts.thenManaAbility } : {}),
+      ...(opts.exileLink !== undefined ? { exileLink: opts.exileLink } : {}),
     };
   }
 

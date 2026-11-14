@@ -684,6 +684,16 @@ export interface AbilityCost {
    */
   readonly collectEvidence?: number | { readonly totalManaValue: number; readonly filter: CardFilter };
   /**
+   * The cards `collectEvidence` exiles are exiled **with this permanent**
+   * (rule 607.2a — `GameObject.exiledWith`, in the stint it's in as the cost
+   * is paid), for another of its abilities that reads "cards exiled with
+   * it": Kylox's Voltstrider's "Collect evidence 6: …" and "you may cast an
+   * instant or sorcery spell from among cards exiled with it". Only where
+   * such an ability is printed: an unlinked cost's cards are exiled with
+   * nothing.
+   */
+  readonly collectEvidenceLinked?: true;
+  /**
    * Craft's materials (rule 702.167a — "Craft with [materials] [cost]"): the
    * other half of the cost beside `exileSelf`, exiled from among permanents
    * you control and/or cards in your graveyard, chosen as the cost is paid

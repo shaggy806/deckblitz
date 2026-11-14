@@ -2615,6 +2615,7 @@
   "effect:cast-now-bottom-of-library-after",
   "zone:graveyard-cast-enters-tapped",
   "decision:choose-one-exiled-with-source-to-copy",
+  "cost:collect-evidence-linked-exile",
   "effect:copy-spell-retarget-created-token",
   "effect:turn-face-up-or-exile-and-cast",
   "static:grants-replacement-effect",
