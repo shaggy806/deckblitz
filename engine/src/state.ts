@@ -322,6 +322,11 @@ export interface GameObject {
    * .bottomAfter` — Quintorius, Loremaster). As `exileIfWouldGoToGraveyard`:
    * only while it's on the stack, cleared by any move after that. */
   bottomIfWouldGoToGraveyard?: true;
+  /** This spell was cast under a permission whose permanent enters tapped
+   * (`PlayTerms.entersTapped` — Edgar, Master Machinist's "that artifact
+   * enters tapped"): read as it resolves onto the battlefield, cleared by any
+   * move (rule 400.7). */
+  entersTappedAsCast?: true;
   /** "Return ~ to its owner's hand" in this spell's own text, as it
    * resolves (Release the Ants): it goes to its owner's hand instead of
    * their graveyard as the final part of its resolution (rule 608.2n), as

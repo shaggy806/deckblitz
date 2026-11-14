@@ -85,6 +85,7 @@ const TERMS = [
   "bottomAfter",
   "gainsHaste",
   "landsEnterTapped",
+  "entersTapped",
   "entersWith",
   "gainsTriggered",
   "becomes",

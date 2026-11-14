@@ -119,6 +119,11 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  *   as it's cast (rule 400.7h) — a creature card cast as its noncreature
  *   face gains nothing. `gainsHaste` asks for a creature spell anyway.
  * - `landsEnterTapped`: "each land played this way enters tapped".
+ * - `entersTapped`: "if you cast a spell this way, that artifact enters
+ *   tapped" (Edgar, Master Machinist): the permanent a spell cast this way
+ *   resolves into enters tapped — a replacement effect on its entry (rule
+ *   614.1d), kept on the spell (`GameObject.entersTappedAsCast`) for as long
+ *   as it's that spell (400.7). Spells only: a land is `landsEnterTapped`'s.
  * - `entersWith`: a permanent spell or land played this way enters with these
  *   counters (Cemetery Prowler's finality counters).
  * - `gainsTriggered`: "if you do, it gains '[trigger]'" (Serra Paragon): the
@@ -185,6 +190,7 @@ export interface PlayTerms {
   readonly gainsHaste?: boolean | "indefinitely";
   readonly gainsIf?: CardFilter;
   readonly landsEnterTapped?: true;
+  readonly entersTapped?: true;
   readonly entersWith?: { readonly kind: string; readonly amount: number };
   readonly gainsTriggered?: readonly TriggeredAbility[];
   readonly becomes?: TypePatch;
@@ -388,6 +394,7 @@ const PLAY_GRANT_KEYS = [
   "gainsHaste",
   "gainsIf",
   "landsEnterTapped",
+  "entersTapped",
   "entersWith",
   "gainsTriggered",
   "becomes",

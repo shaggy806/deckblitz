@@ -23111,6 +23111,27 @@ function parseStatic(line, text) {
       };
     }
   }
+  // "Once during each of your turns, you may cast a creature spell from your
+  // graveyard." (Karador, Ghost Chieftain); "… If you cast a spell this way,
+  // that artifact creature enters with a finality counter on it." (Overflow
+  // Submatrix), "… that artifact enters tapped." (Edgar, Master Machinist).
+  if ((m = /^Once during each of your turns, you may cast an? (.+?) spell from your graveyard\.(?: If you cast a spell this way, that \1 enters (tapped|with an? (\w+) counter on it)\.)?$/.exec(line))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        affects: { scope: "self" },
+        mayPlay: {
+          from: "graveyard",
+          filter,
+          oncePerTurn: true,
+          yourTurnOnly: true,
+          ...(m[2] === "tapped" ? { entersTapped: true } : {}),
+          ...(m[3] !== undefined ? { entersWith: { kind: m[3], amount: 1 } } : {}),
+        },
+        text,
+      };
+    }
+  }
   // "Once each turn, you may cast a creature spell with power 2 or less from
   // the top of your library." (Assemble the Players).
   if ((m = /^Once each turn, you may cast an? (.+?) spell from the top of your library\.$/.exec(line))) {

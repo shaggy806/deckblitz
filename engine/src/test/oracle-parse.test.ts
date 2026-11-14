@@ -3947,6 +3947,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       oncePerTurn: true,
       filter: { manaValue: { op: "lte", n: { amount: { countersOn: "source", counter: "time" } } } },
     });
+    const fromGraveyard = (line: string) => face(line, "Legendary Creature — Human").static[0]?.mayPlay;
+    expect(fromGraveyard("Once during each of your turns, you may cast a creature spell from your graveyard.")).toEqual({
+      from: "graveyard",
+      filter: { type: "creature" },
+      oncePerTurn: true,
+      yourTurnOnly: true,
+    });
+    expect(fromGraveyard("Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that artifact enters tapped.")).toEqual({
+      from: "graveyard",
+      filter: { type: "artifact" },
+      oncePerTurn: true,
+      yourTurnOnly: true,
+      entersTapped: true,
+    });
+    expect(fromGraveyard("Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that creature enters tapped.")).toBeUndefined();
     const maze = face("Once during each of your turns, you may cast a spell from your hand by paying life equal to its mana value rather than paying its mana cost.", "Enchantment — Room");
     expect(maze.static[0].alternativeCostForSpells.when?.castFrom).toBe("hand");
     const bloodcaster = face("{1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.", "Creature — Vampire Warlock");

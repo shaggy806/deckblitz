@@ -22905,6 +22905,9 @@ export class Game {
     if (permissionTerms?.entersWith !== undefined) {
       object.entersWithCounters = [...(object.entersWithCounters ?? []), { ...permissionTerms.entersWith }];
     }
+    // Edgar, Master Machinist's "if you cast a spell this way, that artifact
+    // enters tapped" (rule 614.1d), read as it resolves.
+    if (permissionTerms?.entersTapped === true) object.entersTappedAsCast = true;
     if (escapeLinked !== undefined) object.escapeExiled = escapeLinked;
     // Chandra, Acolyte of Flame's "if that spell would be put into your
     // graveyard, exile it instead", for the cast her −2 asked for.
@@ -30705,10 +30708,13 @@ export class Game {
     // Its sneak cost paid: it enters tapped and attacking what the returned
     // creature was attacking (rule 702.190b).
     const sneakAt = object.castVia === "sneak" ? object.sneakAttacking : undefined;
+    // Cast under a permission whose permanent enters tapped (Edgar, Master
+    // Machinist — `PlayTerms.entersTapped`). Read before the move, which ends it.
+    const castTapped = object.entersTappedAsCast === true;
     const entered = this.moveObject(id, "battlefield", {
       ...(under !== undefined ? { under } : {}),
       ...(down !== undefined ? { faceDown: down } : {}),
-      ...(sneakAt !== undefined ? { tapped: true } : {}),
+      ...(sneakAt !== undefined || castTapped ? { tapped: true } : {}),
     });
     object.targets = null;
     if (!entered) return;
@@ -66362,6 +66368,7 @@ controlledBy,
     object.playUses = undefined;
     object.exileIfWouldGoToGraveyard = undefined;
     object.bottomIfWouldGoToGraveyard = undefined;
+    object.entersTappedAsCast = undefined;
     object.exileAsItResolves = undefined;
     object.intoHandAsItResolves = undefined;
     object.returnToHandAsItResolves = undefined;
