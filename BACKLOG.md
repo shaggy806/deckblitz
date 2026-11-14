@@ -53,7 +53,10 @@ section keeps only what to do next.
   recorded: size each as it is picked up). Every one needs engine work; the sizes are the
   authoring agents' estimates from reading, and held well on the small list: of 95 units tried,
   three were really major (Kamahl's Will, Soulfire Eruption, Spectral Searchlight) and about one in five needed no engine
-  code. The next small units are Chiss-Goria's key, then Ratchet's and Curse of Hospitality's (read, not started). The 28
+  code. **The lanes run (2026-11-13, `build-family overnight lanes`, `COMPLETED.md`)** built 46 keys and 48 cards, leaving
+  147 keys over 139 cards (`cards:goal`); 7 freed cards wait for `author-freed` (`--stale`). Each lane's next share is
+  `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. Ratchet's key is next in
+  triggers-journal. The 28
   triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13
   authored, 15 given narrow keys (`B314.json`), and `cards:needs -- --stale` is empty. Past rank 10,000 the order is still EDHREC
   rank (`author-top-cards`, which since 2026-11-12 builds the small features its cards need
