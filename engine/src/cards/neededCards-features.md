@@ -361,6 +361,12 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   does for everyone at once after the last answer (the ruling, rule 101.4),
   and isn't offered to a player who controls none of the set (`mayBeDone`).
   Disorienting Choice. `test/chosen-targets-remaining.test.ts`.
+- `stat:damage-to-object-by-controller` — the `damageDealtThisTurn` amount's
+  `who: "each"`: the player a scoped effect acts on, read once for each, over
+  the journal's damage entries (each source's controller as it dealt it).
+  With `to: "source"`, damage to the source in the stint that left (rule
+  400.7). Grothama, All-Devouring (its granted fight names it through
+  `"granter"`, rule 201.5a). `test/damage-to-object-by-controller.test.ts`.
 
 ### Who attacked whom, and whether it had to — built 2026-11-13
 

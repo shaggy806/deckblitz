@@ -1198,10 +1198,15 @@ export type EffectAmount =
    * this. Read as it resolves; a token stack counts as every token in it. */
   | { readonly attackingPlayer: "each" }
   /** How much damage sources the scope's players controlled dealt this turn
-   * — see the `damage-dealt-this-turn` condition. */
+   * — see the `damage-dealt-this-turn` condition. `who: "each"` is the
+   * player a scoped effect acts on, read once for each: Grothama,
+   * All-Devouring's "each player draws cards equal to the amount of damage
+   * dealt to Grothama this turn by **sources they controlled**" (a `draw` of
+   * `"each-player"`, `to: "source"`) — each source's controller as it dealt
+   * the damage (the journal's damage entry). */
   | {
       readonly damageDealtThisTurn: true;
-      readonly who?: PlayerScope;
+      readonly who?: PlayerScope | "each";
       readonly combat?: boolean;
       readonly colors?: readonly Color[];
       /** Only what was dealt to the effect's controller ("to you so far this
@@ -15349,7 +15354,8 @@ export function signedAmountValue(
   }
   if ("attackingPlayer" in amount) return ctx.creaturesAttacking(each ?? ctx.controller);
   if ("damageDealtThisTurn" in amount) {
-    return ctx.damageDealtThisTurn(ctx.playersInScope(amount.who ?? "you"), amount.combat, amount.colors, {
+    const players = amount.who === "each" ? [each ?? ctx.controller] : ctx.playersInScope(amount.who ?? "you");
+    return ctx.damageDealtThisTurn(players, amount.combat, amount.colors, {
       ...(amount.to !== undefined ? { to: amount.to } : {}),
       ...(amount.by !== undefined ? { by: amount.by } : {}),
     });
@@ -16534,6 +16540,7 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("graveyardSize" in amount) return amount.graveyardSize === "each";
   if ("cardsInHand" in amount) return amount.cardsInHand === "each";
   if ("turnStat" in amount) return amount.who === "each";
+  if ("damageDealtThisTurn" in amount) return amount.who === "each";
   if ("attackingPlayer" in amount) return true;
   if ("countOf" in amount) return amount.forEachPlayer === true;
   if ("countInGraveyard" in amount) return amount.forEachPlayer === true;
