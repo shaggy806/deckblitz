@@ -36919,6 +36919,9 @@ export class Game {
             (this.state.objects[triggerObject]?.zoneChangeCount ?? 0) !== refs.triggerObject))
         ? { triggerObjectLost: true }
         : {}),
+      // The spell whose casting fired this: which stint of it on the stack
+      // "it" is, for an effect that moves it (`movedRefAct`).
+      ...(triggerObject !== undefined && refs.triggerSpell !== undefined ? { triggerSpellStint: refs.triggerSpell } : {}),
       ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
       ...(opts.announcedModes !== undefined ? { announcedModes: opts.announcedModes } : {}),
       // The granter is acted on only while it's the same permanent (400.7).
@@ -40839,7 +40842,17 @@ controlledBy,
         if (reveal === true) this.revealCards(player, top, "library");
         return top;
       },
-      revealUntil: (owner, spec) => this.revealUntil(owner, controller, spec),
+      revealUntil: (owner, spec) => {
+        const found = this.revealUntil(owner, controller, spec);
+        // "Exiled with this" (rule 607.2a): each card it exiled, in the stint
+        // the resolving ability refers to.
+        const stint = spec.linked === true && spec.exile === true ? linkedExileStint() : undefined;
+        if (stint !== undefined) {
+          const cards = found.revealed.filter((id) => this.state.objects[id]?.zone === "exile");
+          if (cards.length > 0) this.linkExiledToSource(cards, source, stint);
+        }
+        return found;
+      },
       placeFound: (hit, put, tapped, attacking, underYourControl) =>
         this.placeFound(hit, put, tapped, attacking, underYourControl === true ? controller : undefined),
       placeRevealed: (owner, revealed, rest, exiled) => this.placeRevealed(owner, revealed, rest, exiled),

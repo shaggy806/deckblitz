@@ -4093,8 +4093,12 @@ export type EffectSpec =
        * together, those it exiled "until it leaves" included — Valakut
        * Exploration's "put them into their owner's graveyard", counted after by
        * `thisWay: "put-into-graveyard"`; with `others`, Mimic Vat's "return each
-       * other card exiled with this artifact to its owner's graveyard". */
-      readonly linked?: "hand" | "battlefield" | "graveyard";
+       * other card exiled with this artifact to its owner's graveyard".
+       * `"bottom-random"`: on the bottom of their owners' libraries in a
+       * random order — Possibility Storm's "then they put all cards exiled
+       * with this enchantment on the bottom of their library in a random
+       * order", what its `exile` and `reveal-until` of `linked` put there. */
+      readonly linked?: "hand" | "battlefield" | "graveyard" | "bottom-random";
       /** With `linked: "battlefield"`: "**put** all cards exiled with it
        * onto the battlefield" (Underworld Sentinel) — under the control of
        * the player putting them there, the effect's controller (rule
@@ -7496,6 +7500,12 @@ export type EffectSpec =
       readonly filter: CardFilter;
       /** Exile each card, face up, as it goes, rather than reveal it. */
       readonly exile?: boolean;
+      /** With `exile`: each card is exiled **with this source** (rule 607.2a
+       * — `GameObject.exiledWith`), as `exile`'s `linked`, in the stint the
+       * resolving ability refers to: Possibility Storm's "then they put all
+       * cards exiled with this enchantment on the bottom", a
+       * `return-exiled-by-source` of `linked: "bottom-random"`. */
+      readonly linked?: true;
       /** Where the card found goes. Omitted, it stays with the rest — unless
        * `then` moves it. */
       readonly put?: "battlefield" | "hand" | "graveyard";
@@ -13500,6 +13510,14 @@ export interface ResolutionContext extends EffectApi {
    * last-known information and still works. See `LastKnownRefs
    * .triggerObjectAfterLeaving`. */
   readonly triggerObjectLost?: boolean;
+  /** With a `triggerObject` that is the spell whose casting fired this (a
+   * cast trigger, a mana rider): the stint of it on the stack "that spell"
+   * means (`LastKnownRefs.triggerSpell`). An effect that moves
+   * `"trigger-object"` somewhere — "that player exiles it" (Possibility
+   * Storm), "put it on the bottom of its owner's library" (Neera, Wild Mage)
+   * — finds nothing once it has left the stack, countered or resolved since
+   * (rule 400.7); reading it still works. See `movedRefAct`. */
+  readonly triggerSpellStint?: number;
   /** The members of a set this resolution refers to (`object-sets.ts`):
    * what its cost took, its trigger's batch, what it did this way, what a
    * delayed or reflexive ability remembered, the cards exiled with its
@@ -15969,6 +15987,23 @@ export function objectRefAct(
   return ctx.slotStillMeant(ctx.targets[ref]);
 }
 
+/** {@link objectRefAct} for an effect that moves the object to another zone:
+ * a cast trigger's `"trigger-object"` only while it's still that spell on the
+ * stack — not the card in a graveyard once it's countered, nor the permanent
+ * it became (rule 400.7; Knowledge Pool's ruling: "if the original spell
+ * isn't exiled … the rest of the ability does nothing"). */
+function movedRefAct(ref: ObjectRef, ctx: ResolutionContext): TargetRef | undefined {
+  if (
+    ref === "trigger-object" &&
+    ctx.triggerSpellStint !== undefined &&
+    ctx.triggerObject !== undefined &&
+    ctx.stintNow(ctx.triggerObject) !== ctx.triggerSpellStint
+  ) {
+    return undefined;
+  }
+  return objectRefAct(ref, ctx);
+}
+
 /** Where a redirection's `redirectTo` sends the damage (rule 614.9), or
  * `undefined` when it names nothing still legal. */
 function redirectRef(ref: ObjectRef | PlayerRef, ctx: ResolutionContext): TargetRef | undefined {
@@ -17987,7 +18022,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "exile": {
-      const target = objectRefAct(spec.target, ctx);
+      const target = movedRefAct(spec.target, ctx);
       if (spec.fromHand === true) {
         if (target?.kind === "object") ctx.exileFromHand(target.object);
         return;
@@ -18046,6 +18081,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         // "Exiled with it" reaches what it exiled until it leaves too (rule
         // 610.3 — Pinnacle Starcage). Put there together, one event.
         ctx.putExiledIntoGraveyard(ctx.cardsExiledWithSource(true).filter((card) => !justExiled.includes(card)));
+        return;
+      }
+      if (spec.linked === "bottom-random") {
+        // Each on the bottom of its owner's library (rule 400.3), all in one
+        // random order — a cascade's misses' move.
+        const justExiled = spec.others === true ? ctx.cardsExiledThisWay() : [];
+        const cards = ctx.cardsExiledWithSource().filter((card) => !justExiled.includes(card));
+        if (cards.length > 0) ctx.placeRevealed(ctx.controller, cards, "bottom-random", true);
         return;
       }
       // Each case below that puts something onto the battlefield may stop
@@ -18731,7 +18774,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         );
         return;
       }
-      const target = objectRefAct(spec.target, ctx);
+      const target = movedRefAct(spec.target, ctx);
       if (target === undefined) return;
       ctx.putOnLibrary(
         target,
