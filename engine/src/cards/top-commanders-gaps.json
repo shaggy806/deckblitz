@@ -2571,7 +2571,8 @@
   "trigger:cast-this-way-from-lasting-permission",
   "condition:permanent-put-into-hand-from-battlefield-this-turn",
   "condition:permanent-put-into-hand-from-battlefield-this-turn",
-  "trigger:becomes-target-by-spell-type"
+  "trigger:becomes-target-by-spell-type",
+  "condition:first-spell-cast-this-game"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

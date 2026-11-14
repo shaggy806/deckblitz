@@ -6642,6 +6642,28 @@ describe("the turn history's graveyard tallies (discarded, to-graveyard)", () =>
     expect(miles.triggered[0].condition).toEqual({ kind: "turn-history", what: "put-into-hand" });
   });
 
+  it("reads 'if this spell is the first spell you've cast this game' as a free cast and a spell's condition", () => {
+    const once = parseFace(
+      {
+        name: "Once Upon a Time",
+        type_line: "Instant",
+        mana_cost: "{1}{G}",
+        oracle_text:
+          "If this spell is the first spell you've cast this game, you may cast it without paying its mana cost.\nLook at the top five cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(once.complete).toBe(true);
+    expect(once.freeCastIf).toEqual({ condition: { kind: "first-spell-this-game" } });
+    // First Contact's closing sentence, after an instruction the scaffolder reads.
+    const contact = face("First Contact", "Instant", "Draw a card. If this spell is the first spell you've cast this game, you gain 2 life.");
+    expect(contact.effect.effects[1]).toEqual({
+      kind: "conditional",
+      condition: { kind: "first-spell-this-game" },
+      then: { kind: "gain-life", amount: 2 },
+    });
+  });
+
   it("reads 'all cards in your graveyard that you cycled or discarded this turn'", () => {
     const shadow = face("Shadow of the Grave", "Instant", "Return to your hand all cards in your graveyard that you cycled or discarded this turn.");
     expect(shadow.effect).toEqual({ kind: "return-from-graveyard", filter: { discardedThisTurn: true }, destination: "hand", count: "all" });

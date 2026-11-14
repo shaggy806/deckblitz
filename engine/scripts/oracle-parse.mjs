@@ -16058,6 +16058,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.evoke = { cost: "", exileFromHand: pitchExile(m[1]) };
       continue;
     }
+    // "If this spell is the first spell you've cast this game, you may cast it
+    // without paying its mana cost" (Once Upon a Time): a free cast, asked as
+    // it's cast (`freeCastIf`).
+    if (/^If (?:~|this spell) is the first spell you've cast this game, you may cast it without paying its mana cost\.$/.test(line)) {
+      out.freeCastIf = { condition: { kind: "first-spell-this-game" } };
+      continue;
+    }
     // The pitch spells (rule 118.9): "[If it's not your turn, ]you may [pay 1
     // life and ]exile a blue card from your hand rather than pay this spell's
     // mana cost" — Force of Will, the MH1 Forces, Fury of the Horde.
@@ -18557,6 +18564,8 @@ const TURN_TALLY_IFS = {
   // Miles O'Brien, Transporter Ops).
   "if a permanent was put into your hand from the battlefield this turn,": PUT_INTO_HAND_THIS_TURN,
   "if a permanent was returned to your hand from the battlefield this turn,": PUT_INTO_HAND_THIS_TURN,
+  // Asked of the spell as it resolves (First Contact).
+  "if ~ is the first spell you've cast this game,": { kind: "first-spell-this-game" },
 };
 
 /** A meld card's whole instruction (rule 701.42): the counterpart's card

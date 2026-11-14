@@ -1619,6 +1619,14 @@ export type StaticCondition =
    */
   | { readonly kind: "spells-cast-this-game"; readonly named: string; readonly atLeast: number }
   /**
+   * "If this spell is the first spell you've cast this game": as a
+   * `freeCastIf` (Once Upon a Time), asked as it's cast, you've cast none
+   * yet; on resolution (First Contact's "you gain 2 life"), this spell was
+   * cast — a copy never was — and no spell of yours was cast before it, so
+   * one cast in response doesn't change the answer.
+   */
+  | { readonly kind: "first-spell-this-game" }
+  /**
    * You've been dealt combat damage this game by a creature with this name,
    * as it was named then, whoever controlled it (the journal's
    * `combatDamagedBy`, kept all game). Gollum, Obsessed Stalker's "each

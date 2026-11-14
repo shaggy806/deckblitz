@@ -635,6 +635,24 @@ export function staticConditionMet(
 }
 
 /**
+ * A `first-spell-this-game` condition (see its doc in `define.ts`): off the
+ * stack — asked as it's cast (rule 601.2b), before the cast counts (601.2i)
+ * — `you` have cast no spell this game; on the stack, `source` is the latest
+ * cast of that object and the first of `you`'s casts this game: your first
+ * this turn, with none in earlier turns. A copy was never cast (707.10).
+ */
+function isFirstSpellThisGame(state: GameState, source: GameObject, you: PlayerId): boolean {
+  const player = state.players[you];
+  let game = 0;
+  for (const n of Object.values(player?.spellNamesCastThisGame ?? {})) game += n;
+  if (source.zone !== "stack") return game === 0;
+  const thisTurn = player?.spellsCastThisTurnAs ?? [];
+  let latest = -1;
+  for (let i = 0; i < thisTurn.length; i += 1) if (thisTurn[i].id === source.id) latest = i;
+  return latest === 0 && game === thisTurn.length;
+}
+
+/**
  * A `most-common-color` condition (see its doc in `define.ts`). Colors are
  * read at layer 5 (`effectiveColors`), so a static in layer 7 asks without
  * folding anyone's power and toughness; the source counts itself.
@@ -891,6 +909,8 @@ function evalStaticCondition(
     }
     case "spells-cast-this-game":
       return (state.players[you]?.spellNamesCastThisGame?.[condition.named] ?? 0) >= condition.atLeast;
+    case "first-spell-this-game":
+      return isFirstSpellThisGame(state, source, you);
     case "combat-damaged-this-game":
       return combatDamagedByNamed(state, you, condition.byCreatureNamed);
     case "cycled-this-game":

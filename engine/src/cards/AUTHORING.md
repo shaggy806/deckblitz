@@ -6498,6 +6498,12 @@ clause (section 9):
   "you've cast another spell named ~ this game", asked as it resolves beside
   `{ kind: "source", filter: { castFrom: "hand" } }`, is `atLeast: 2` — the
   resolving spell is one of them.
+- `{ kind: "first-spell-this-game" }` — "if this spell is the first spell
+  you've cast this game". As a `freeCastIf` (Once Upon a Time) it's asked as
+  the spell is cast: you've cast none yet. On resolution, in a `conditional`
+  (First Contact's "you gain 2 life"), the resolving spell was cast before
+  any other of yours — one cast in response doesn't change it, and a copy
+  was never cast. Another player's spells don't count.
 - `{ kind: "cycled-this-game", named, atLeast }` — you've cycled a card named
   `named` at least `atLeast` times this game, any card of that name each time
   (the journal's `cycledNames`). Yidaro, Wandering Monster's "if you've
