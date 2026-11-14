@@ -556,6 +556,7 @@ import _poolMultaniMaroSorcerer from "../pool/multani-maro-sorcerer.js";
 import _poolMultipleChoice from "../pool/multiple-choice.js";
 import _poolMurasaPyromancer from "../pool/murasa-pyromancer.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
+import _poolNamelessRace from "../pool/nameless-race.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
 import _poolNearDeathExperience from "../pool/near-death-experience.js";
 import _poolNectarFaerie from "../pool/nectar-faerie.js";
@@ -1586,6 +1587,7 @@ const shard: CardShard = {
     _poolMultipleChoice,
     _poolMurasaPyromancer,
     _poolNaliaDearnise,
+    _poolNamelessRace,
     _poolNaturesLore,
     _poolNearDeathExperience,
     _poolNectarFaerie,

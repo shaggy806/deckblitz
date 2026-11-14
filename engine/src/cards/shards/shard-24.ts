@@ -480,6 +480,7 @@ import _poolKuldothaForgemaster from "../pool/kuldotha-forgemaster.js";
 import _poolKwendePrideOfFemeref from "../pool/kwende-pride-of-femeref.js";
 import _poolKyoshiVillage from "../pool/kyoshi-village.js";
 import _poolLaboratoryBrute from "../pool/laboratory-brute.js";
+import _poolLadyLokiAgentOfChaos from "../pool/lady-loki-agent-of-chaos.js";
 import _poolLaraCroftTombRaider from "../pool/lara-croft-tomb-raider.js";
 import _poolLeadenMyr from "../pool/leaden-myr.js";
 import _poolLeafDancer from "../pool/leaf-dancer.js";
@@ -1508,6 +1509,7 @@ const shard: CardShard = {
     _poolKwendePrideOfFemeref,
     _poolKyoshiVillage,
     _poolLaboratoryBrute,
+    _poolLadyLokiAgentOfChaos,
     _poolLaraCroftTombRaider,
     _poolLeadenMyr,
     _poolLeafDancer,

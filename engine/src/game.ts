@@ -15439,7 +15439,10 @@ export class Game {
     if (spec.payLife !== undefined) {
       // Any amount from 0 to their life total, only 0 if they can't pay life
       // (rules 119.4, 119.4b): with nothing above 0 payable, 0 unasked.
-      const life = this.state.players[chooser].life;
+      // Nameless Race's `atMost` caps it besides, read as it's about to enter.
+      const cap =
+        spec.payLife === "any" ? Infinity : this.enteringCounterAmount(id, chooser, id, spec.payLife.atMost);
+      const life = Math.min(this.state.players[chooser].life, Math.max(0, cap));
       const max = life > 0 && this.canPayLife(chooser, life, "not-a-cost") ? life : 0;
       if (max === 0) {
         object.enterChoice = { ...answered, asEntersDone: 0 };
@@ -34334,6 +34337,8 @@ export class Game {
           (spec.counter === undefined || event.counter === spec.counter) &&
           // Vanishing's "when the last time counter is removed" (702.63a).
           (spec.last !== true || event.after === 0) &&
+          // Off a card in exile, only that card's own ability hears it (Uvilda).
+          (this.state.objects[event.object]?.zone !== "exile" || (spec.who === "self" && event.object === self.id)) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
@@ -51026,8 +51031,11 @@ controlledBy,
     if (kinds.length === 0) return 0;
     // A card in exile keeps counters there (rule 122.2 clears them only as it
     // moves): All Hallow's Eve's "remove a scream counter from it". It isn't a
-    // permanent, so no `counter-removed` — as a suspended card's time counter
-    // (`removeTimeCounter`), which the time-counter path above handles.
+    // permanent, so its `counter-removed` is heard only by its own abilities
+    // that work in exile (`counters-removed` with `who: "self"`): Uvilda,
+    // Dean of Perfection's "when the last refine counter is removed from this
+    // card". A suspended card's time counter is `removeTimeCounter`'s, which
+    // the time-counter path above handles.
     if (before.zone === "exile") {
       let fromCard = 0;
       for (const kind of kinds) {
@@ -51036,6 +51044,7 @@ controlledBy,
         if (have - n <= 0) delete before.counters[kind];
         else before.counters[kind] = have - n;
         fromCard += n;
+        if (n > 0) this.emit({ type: "counter-removed", object: id, counter: kind, amount: n, after: before.counters[kind] ?? 0 });
       }
       invalidateComputedCache();
       return fromCard;

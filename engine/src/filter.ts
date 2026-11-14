@@ -1045,6 +1045,12 @@ export interface CardFilter {
    * one that was cast, and an ability aren't spells (the Emrakul, the Aeons
    * Torn ruling), nor is an Aura put onto the battlefield. */
   readonly isSpell?: boolean;
+  /** Is (or isn't) a copy of a spell or of a card (`GameObject.isCopy`, rules
+   * 707.10, 707.12). `false` is "a … **card**" where a cast copy would
+   * otherwise count: Eye of the Storm's "whenever a player casts an instant or
+   * sorcery card" never fires on a copy cast (its ruling). A permanent's or a
+   * token's copy effect (rule 707.2) isn't this. */
+  readonly isCopy?: boolean;
   /** A spell on the stack that was kicked (rule 702.33d — its kicker cost was
    * paid as it was cast; a copy of it is kicked too, 707.10): "whenever you
    * cast a kicked spell" (Roost of Drakes). Nothing off the stack is a kicked
@@ -2188,6 +2194,7 @@ export function matchesFilter(
   ) {
     return false;
   }
+  if (filter.isCopy !== undefined && ((live ?? state.objects[id])?.isCopy === true) !== filter.isCopy) return false;
   if (filter.inZone !== undefined && state.objects[id]?.zone !== filter.inZone) return false;
   const byScope = (e: { readonly player: PlayerId }): boolean => filter.thisWayBy !== "you" || e.player === ctx.you;
   if (filter.thisWay !== undefined && !thisWayEntries(state, filter.thisWay).some((e) => e.object === id && byScope(e))) {

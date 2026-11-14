@@ -274,6 +274,7 @@ import _poolEternityVessel from "../pool/eternity-vessel.js";
 import _poolEtherWell from "../pool/ether-well.js";
 import _poolExoticCurse from "../pool/exotic-curse.js";
 import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
+import _poolEyeOfTheStorm from "../pool/eye-of-the-storm.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFableOfTheMirrorBreaker from "../pool/fable-of-the-mirror-breaker.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
@@ -545,6 +546,7 @@ import _poolNacatlWarPride from "../pool/nacatl-war-pride.js";
 import _poolNagaEternal from "../pool/naga-eternal.js";
 import _poolNarcolepsy from "../pool/narcolepsy.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
+import _poolNassariDeanOfExpression from "../pool/nassari-dean-of-expression.js";
 import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNecrosquito from "../pool/necrosquito.js";
 import _poolNephaliaSmuggler from "../pool/nephalia-smuggler.js";
@@ -1256,6 +1258,7 @@ const shard: CardShard = {
     _poolEtherWell,
     _poolExoticCurse,
     _poolExperimentalSynthesizer,
+    _poolEyeOfTheStorm,
     _poolEzioAuditoreDaFirenze,
     _poolFableOfTheMirrorBreaker,
     _poolFalseSummoning,
@@ -1527,6 +1530,7 @@ const shard: CardShard = {
     _poolNagaEternal,
     _poolNarcolepsy,
     _poolNashiSearcherInTheDark,
+    _poolNassariDeanOfExpression,
     _poolNebulaDragon,
     _poolNecrosquito,
     _poolNephaliaSmuggler,

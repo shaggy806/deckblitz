@@ -1001,6 +1001,7 @@ import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
 import _poolZoyowasJustice from "../pool/zoyowas-justice.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensBirdSoldierToken from "../tokens/bird-soldier-token.js";
+import _tokensCherubaelToken from "../tokens/cherubael-token.js";
 import _tokensElementalToken44WhiteFlying from "../tokens/elemental-token-4-4-white-flying.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensEtheriumCellToken from "../tokens/etherium-cell-token.js";
@@ -2026,6 +2027,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAngelWarriorToken,
     _tokensBirdSoldierToken,
+    _tokensCherubaelToken,
     _tokensElementalToken44WhiteFlying,
     _tokensElementalToken53,
     _tokensEtheriumCellToken,

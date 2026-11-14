@@ -976,6 +976,7 @@ import _poolWaveOfVitriol from "../pool/wave-of-vitriol.js";
 import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
 import _poolWaywardGuideBeast from "../pool/wayward-guide-beast.js";
 import _poolWeaponRack from "../pool/weapon-rack.js";
+import _poolWebOfInertia from "../pool/web-of-inertia.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
 import _poolWhiplashVengefulEngineer from "../pool/whiplash-vengeful-engineer.js";
@@ -2007,6 +2008,7 @@ const shard: CardShard = {
     _poolWayOfThePyromancer,
     _poolWaywardGuideBeast,
     _poolWeaponRack,
+    _poolWebOfInertia,
     _poolWelderAutomaton,
     _poolWhipSpineDrake,
     _poolWhiplashVengefulEngineer,

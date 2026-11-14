@@ -367,8 +367,13 @@ export interface AsEntersAction {
    * the number it chose (`GameObject.chosenOnEnter`, read as `{ chosenNumber:
    * true }`: "the life paid as this artifact entered"). Entering some way that
    * never asks (a token copy), it paid 0.
+   *
+   * `{ atMost }` caps it besides (Nameless Race: "the amount you pay can't be
+   * more than the total number of white nontoken permanents your opponents
+   * control plus …"), the amount read as it's about to enter, as an "enters
+   * with" count is (`enteringCounterAmount`).
    */
-  readonly payLife?: "any";
+  readonly payLife?: "any" | { readonly atMost: EffectAmount };
 }
 
 /** As the source permanent enters the battlefield (rule 614.1c). A self-

@@ -425,6 +425,7 @@ import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
 import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
 import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolInnerFire from "../pool/inner-fire.js";
+import _poolInquisitorEisenhorn from "../pool/inquisitor-eisenhorn.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
 import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
 import _poolInvokeCalamity from "../pool/invoke-calamity.js";
@@ -1421,6 +1422,7 @@ const shard: CardShard = {
     _poolInkwellLeviathan,
     _poolInnerDemonsGangsters,
     _poolInnerFire,
+    _poolInquisitorEisenhorn,
     _poolInspiringPaladin,
     _poolInspiringRefrain,
     _poolInvokeCalamity,
