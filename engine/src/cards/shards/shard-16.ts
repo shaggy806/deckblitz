@@ -394,6 +394,7 @@ import _poolHammerfistGiant from "../pool/hammerfist-giant.js";
 import _poolHarborSerpent from "../pool/harbor-serpent.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHauntedDead from "../pool/haunted-dead.js";
+import _poolHavengulMystery from "../pool/havengul-mystery.js";
 import _poolHeadstone from "../pool/headstone.js";
 import _poolHeartflameDuelist from "../pool/heartflame-duelist.js";
 import _poolHearthElemental from "../pool/hearth-elemental.js";
@@ -1484,6 +1485,7 @@ const shard: CardShard = {
     _poolHarborSerpent,
     _poolHarmlessOffering,
     _poolHauntedDead,
+    _poolHavengulMystery,
     _poolHeadstone,
     _poolHeartflameDuelist,
     _poolHearthElemental,

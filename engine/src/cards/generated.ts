@@ -1190,6 +1190,7 @@ import _poolArchfiendOfDepravity from "./pool/archfiend-of-depravity.js";
 import _poolArchfiendOfDespair from "./pool/archfiend-of-despair.js";
 import _poolArchfiendOfIfnir from "./pool/archfiend-of-ifnir.js";
 import _poolArchfiendOfSorrows from "./pool/archfiend-of-sorrows.js";
+import _poolArchfiendOfSpite from "./pool/archfiend-of-spite.js";
 import _poolArchfiendOfTheDross from "./pool/archfiend-of-the-dross.js";
 import _poolArchfiendsVessel from "./pool/archfiends-vessel.js";
 import _poolArchghoulOfThraben from "./pool/archghoul-of-thraben.js";
@@ -12357,7 +12358,9 @@ import _poolHaveABite from "./pool/have-a-bite.js";
 import _poolHaveForDinner from "./pool/have-for-dinner.js";
 import _poolHavenOfTheHarvest from "./pool/haven-of-the-harvest.js";
 import _poolHavenOfTheSpiritDragon from "./pool/haven-of-the-spirit-dragon.js";
+import _poolHavengulLaboratory from "./pool/havengul-laboratory.js";
 import _poolHavengulLich from "./pool/havengul-lich.js";
+import _poolHavengulMystery from "./pool/havengul-mystery.js";
 import _poolHavengulRunebinder from "./pool/havengul-runebinder.js";
 import _poolHavengulSkaab from "./pool/havengul-skaab.js";
 import _poolHavengulVampire from "./pool/havengul-vampire.js";
@@ -19260,6 +19263,8 @@ import _poolOppressiveWill from "./pool/oppressive-will.js";
 import _poolOpt from "./pool/opt.js";
 import _poolOptimisticScavenger from "./pool/optimistic-scavenger.js";
 import _poolOptimizationAnnex from "./pool/optimization-annex.js";
+import _poolOptimusPrimeAutobotLeader from "./pool/optimus-prime-autobot-leader.js";
+import _poolOptimusPrimeHero from "./pool/optimus-prime-hero.js";
 import _poolOpulentPalace from "./pool/opulent-palace.js";
 import _poolOracleOfBones from "./pool/oracle-of-bones.js";
 import _poolOracleOfDust from "./pool/oracle-of-dust.js";
@@ -32218,6 +32223,7 @@ import _poolZurTheEnchanter from "./pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "./pool/zuran-enchanter.js";
 import _poolZuranOrb from "./pool/zuran-orb.js";
 import _poolZuranSpellcaster from "./pool/zuran-spellcaster.js";
+import _poolZurgoAndOjutai from "./pool/zurgo-and-ojutai.js";
 import _poolZurgoBellstriker from "./pool/zurgo-bellstriker.js";
 import _poolZurgoHelmsmasher from "./pool/zurgo-helmsmasher.js";
 import _poolZurgoStormrender from "./pool/zurgo-stormrender.js";
@@ -34195,6 +34201,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchfiendOfDespair,
   _poolArchfiendOfIfnir,
   _poolArchfiendOfSorrows,
+  _poolArchfiendOfSpite,
   _poolArchfiendOfTheDross,
   _poolArchfiendsVessel,
   _poolArchghoulOfThraben,
@@ -45362,7 +45369,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHaveForDinner,
   _poolHavenOfTheHarvest,
   _poolHavenOfTheSpiritDragon,
+  _poolHavengulLaboratory,
   _poolHavengulLich,
+  _poolHavengulMystery,
   _poolHavengulRunebinder,
   _poolHavengulSkaab,
   _poolHavengulVampire,
@@ -52265,6 +52274,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOpt,
   _poolOptimisticScavenger,
   _poolOptimizationAnnex,
+  _poolOptimusPrimeAutobotLeader,
+  _poolOptimusPrimeHero,
   _poolOpulentPalace,
   _poolOracleOfBones,
   _poolOracleOfDust,
@@ -65223,6 +65234,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZuranEnchanter,
   _poolZuranOrb,
   _poolZuranSpellcaster,
+  _poolZurgoAndOjutai,
   _poolZurgoBellstriker,
   _poolZurgoHelmsmasher,
   _poolZurgoStormrender,
@@ -67213,6 +67225,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archfiend-of-despair": _poolArchfiendOfDespair,
   "pool/archfiend-of-ifnir": _poolArchfiendOfIfnir,
   "pool/archfiend-of-sorrows": _poolArchfiendOfSorrows,
+  "pool/archfiend-of-spite": _poolArchfiendOfSpite,
   "pool/archfiend-of-the-dross": _poolArchfiendOfTheDross,
   "pool/archfiends-vessel": _poolArchfiendsVessel,
   "pool/archghoul-of-thraben": _poolArchghoulOfThraben,
@@ -78380,7 +78393,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/have-for-dinner": _poolHaveForDinner,
   "pool/haven-of-the-harvest": _poolHavenOfTheHarvest,
   "pool/haven-of-the-spirit-dragon": _poolHavenOfTheSpiritDragon,
+  "pool/havengul-laboratory": _poolHavengulLaboratory,
   "pool/havengul-lich": _poolHavengulLich,
+  "pool/havengul-mystery": _poolHavengulMystery,
   "pool/havengul-runebinder": _poolHavengulRunebinder,
   "pool/havengul-skaab": _poolHavengulSkaab,
   "pool/havengul-vampire": _poolHavengulVampire,
@@ -85283,6 +85298,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/opt": _poolOpt,
   "pool/optimistic-scavenger": _poolOptimisticScavenger,
   "pool/optimization-annex": _poolOptimizationAnnex,
+  "pool/optimus-prime-autobot-leader": _poolOptimusPrimeAutobotLeader,
+  "pool/optimus-prime-hero": _poolOptimusPrimeHero,
   "pool/opulent-palace": _poolOpulentPalace,
   "pool/oracle-of-bones": _poolOracleOfBones,
   "pool/oracle-of-dust": _poolOracleOfDust,
@@ -98241,6 +98258,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zuran-enchanter": _poolZuranEnchanter,
   "pool/zuran-orb": _poolZuranOrb,
   "pool/zuran-spellcaster": _poolZuranSpellcaster,
+  "pool/zurgo-and-ojutai": _poolZurgoAndOjutai,
   "pool/zurgo-bellstriker": _poolZurgoBellstriker,
   "pool/zurgo-helmsmasher": _poolZurgoHelmsmasher,
   "pool/zurgo-stormrender": _poolZurgoStormrender,

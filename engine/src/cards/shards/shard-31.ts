@@ -656,6 +656,7 @@ import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
 import _poolOpenTheOmenpaths from "../pool/open-the-omenpaths.js";
 import _poolOpenTheVaults from "../pool/open-the-vaults.js";
+import _poolOptimusPrimeHero from "../pool/optimus-prime-hero.js";
 import _poolOracleOfBones from "../pool/oracle-of-bones.js";
 import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
@@ -1747,6 +1748,7 @@ const shard: CardShard = {
     _poolOnduGreathorn,
     _poolOpenTheOmenpaths,
     _poolOpenTheVaults,
+    _poolOptimusPrimeHero,
     _poolOracleOfBones,
     _poolOranRiefOoze,
     _poolOrcishVandal,

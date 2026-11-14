@@ -393,6 +393,7 @@ import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
 import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
 import _poolHarvestguardAlseids from "../pool/harvestguard-alseids.js";
 import _poolHarvestriteHost from "../pool/harvestrite-host.js";
+import _poolHavengulLaboratory from "../pool/havengul-laboratory.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
 import _poolHazduhrTheAbbot from "../pool/hazduhr-the-abbot.js";
 import _poolHealTheScars from "../pool/heal-the-scars.js";
@@ -605,6 +606,7 @@ import _poolOneLastJob from "../pool/one-last-job.js";
 import _poolOnward from "../pool/onward.js";
 import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
+import _poolOptimusPrimeAutobotLeader from "../pool/optimus-prime-autobot-leader.js";
 import _poolOrcSureshot from "../pool/orc-sureshot.js";
 import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
 import _poolOrderOfTheStars from "../pool/order-of-the-stars.js";
@@ -1445,6 +1447,7 @@ const shard: CardShard = {
     _poolHarmonizedTrio,
     _poolHarvestguardAlseids,
     _poolHarvestriteHost,
+    _poolHavengulLaboratory,
     _poolHavocSower,
     _poolHazduhrTheAbbot,
     _poolHealTheScars,
@@ -1657,6 +1660,7 @@ const shard: CardShard = {
     _poolOnward,
     _poolOpportunity,
     _poolOpt,
+    _poolOptimusPrimeAutobotLeader,
     _poolOrcSureshot,
     _poolOrderOfTheSacredBell,
     _poolOrderOfTheStars,

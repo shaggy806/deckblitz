@@ -970,6 +970,7 @@ import _poolZanikevLocust from "../pool/zanikev-locust.js";
 import _poolZephyrSentinel from "../pool/zephyr-sentinel.js";
 import _poolZhaoZilongTigerGeneral from "../pool/zhao-zilong-tiger-general.js";
 import _poolZoeticGlyph from "../pool/zoetic-glyph.js";
+import _poolZurgoAndOjutai from "../pool/zurgo-and-ojutai.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensClericToken01Black from "../tokens/cleric-token-0-1-black.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
@@ -1970,6 +1971,7 @@ const shard: CardShard = {
     _poolZephyrSentinel,
     _poolZhaoZilongTigerGeneral,
     _poolZoeticGlyph,
+    _poolZurgoAndOjutai,
   ],
   tokens: [
     _tokensApeVillainToken,
