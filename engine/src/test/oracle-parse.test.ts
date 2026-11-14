@@ -19668,3 +19668,29 @@ describe("the top card of your library (Mul Daya Channelers, Vampire Nocturnus)"
     expect(face.static[2].condition).toEqual({ kind: "library-top", filter: { colors: ["B"] } });
   });
 });
+
+describe("a card played from exile this turn (Visions of Phyrexia)", () => {
+  it("reads the end step's intervening if: no land played and no spell cast from exile", () => {
+    const visions = parseFace(
+      {
+        name: "Test Visions",
+        type_line: "Enchantment",
+        mana_cost: "{2}{R}{R}",
+        oracle_text:
+          "At the beginning of your end step, if you didn't play a card from exile this turn, create a tapped Powerstone token.",
+      },
+      { tokenFor: () => "Powerstone Token" },
+    );
+    expect(visions.complete).toBe(true);
+    expect(visions.triggered[0].condition).toEqual({
+      kind: "not",
+      of: {
+        kind: "any",
+        of: [
+          { kind: "turn-history", what: "lands-played", who: "you", from: ["exile"] },
+          { kind: "cast-this-turn", who: "you", filter: { castFrom: "exile" } },
+        ],
+      },
+    });
+  });
+});

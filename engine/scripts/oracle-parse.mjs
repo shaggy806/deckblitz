@@ -18477,6 +18477,15 @@ const VOID_CONDITION = {
 /** Revolt (Aether Revolt), disappear (TMNT): a permanent you controlled as
  * it left left the battlefield this turn. */
 const REVOLT_CONDITION = { kind: "turn-history", what: "left" };
+/** "You played a card from exile this turn": a land played from exile (the
+ * journal's `land-played` keeps the zone) or a spell cast from exile. */
+const PLAYED_FROM_EXILE_CONDITION = {
+  kind: "any",
+  of: [
+    { kind: "turn-history", what: "lands-played", who: "you", from: ["exile"] },
+    { kind: "cast-this-turn", who: "you", filter: { castFrom: "exile" } },
+  ],
+};
 /** Celebration (Wilds of Eldraine): two or more nonland permanents entered
  * under your control this turn, read as they entered, though they've left or
  * changed control since. */
@@ -18705,6 +18714,10 @@ const INTERVENING_IFS = {
       { kind: "cast-this-turn", who: "you", filter: { castFrom: { not: "hand" } } },
     ],
   },
+  // "Play a card from exile" (Visions of Phyrexia): a land played or a spell
+  // cast from exile.
+  "if you played a card from exile this turn,": PLAYED_FROM_EXILE_CONDITION,
+  "if you didn't play a card from exile this turn,": { kind: "not", of: PLAYED_FROM_EXILE_CONDITION },
   // Rule 700.13 (Outlaws of Thunder Junction).
   "if you've committed a crime this turn,": { kind: "committed-crime-this-turn" },
   // Rule 701.59c: the spell's collect-evidence additional cost was paid.
