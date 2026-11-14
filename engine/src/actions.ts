@@ -462,10 +462,15 @@ export type Action =
       /** Plot a card from hand (rule 702.170a): a special action (116.2k)
        * any time you have priority in your main phase with the stack empty —
        * pay its plot cost and exile it; it becomes plotted, to be cast free
-       * on a later turn. */
+       * on a later turn. Or from the top of the library, where a permanent
+       * allows it (Fblthp, Lost on the Range). */
       readonly type: "plot";
       readonly player: PlayerId;
       readonly card: ObjectId;
+      /** Which of the card's plot costs (an offer's `cost`), where it has
+       * more than one — its own and one a static gives it (Fblthp's ruling).
+       * The first payable one when absent. */
+      readonly cost?: string;
       /** See `phyrexianLife` on `cast-spell`. */
       readonly phyrexianLife?: number;
     }
@@ -1181,7 +1186,8 @@ export type LegalAction =
       readonly cardName: string;
     }
   | {
-      /** A card in hand can be plotted (rule 702.170a) for `cost`. */
+      /** A card in hand, or on top of the library, can be plotted (rule
+       * 702.170a) for `cost`: one offer per cost it has. */
       readonly kind: "plot";
       readonly card: ObjectId;
       readonly cardName: string;

@@ -3018,7 +3018,7 @@ export class Game {
         this.foretellCard(action.player, action.card);
         break;
       case "plot":
-        this.withLifeChoice(action.phyrexianLife, () => this.plotCard(action.player, action.card));
+        this.withLifeChoice(action.phyrexianLife, () => this.plotCard(action.player, action.card, action.cost));
         break;
       case "take-companion":
         this.takeCompanion(action.player);
@@ -3293,7 +3293,7 @@ export class Game {
       case "foretell":
         return this.whyCannotForetell(action.player, action.card);
       case "plot":
-        return this.whyCannotPlot(action.player, action.card);
+        return this.whyCannotPlot(action.player, action.card, action.cost);
       case "take-companion":
         return this.whyCannotTakeCompanion(action.player);
       case "turn-face-up":
@@ -3671,15 +3671,25 @@ export class Game {
       if (this.whyCannotForetell(player, card) === null) {
         out.push({ kind: "foretell", card, cardName });
       }
-      // Plot (rule 702.170a) — a special action (116.2k).
-      if (def.plot !== null && this.whyCannotPlot(player, card) === null) {
-        const plotCost = this.plotCostNow(player, def.plot.cost);
+      // Plot (rule 702.170a) — a special action (116.2k), one offer a cost.
+      for (const plotCost of this.plotCostsOf(player, card)) {
+        if (this.whyCannotPlot(player, card, plotCost) !== null) continue;
         out.push({ kind: "plot", card, cardName, cost: plotCost, ...this.phyrexianPipsOffer(player, plotCost) });
       }
       // Cycling (rule 702.29) — a special action, any time you could cast an instant.
       // One whose cost asks for more is an `activate-ability` offer.
       if (def.cycling !== null && cyclesByName(def) && this.whyCannotCycle(player, card) === null) {
         out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost, ...this.phyrexianPipsOffer(player, def.cycling.cost) });
+      }
+    }
+
+    // Plot from the top of the library (Fblthp, Lost on the Range).
+    const libraryTop = this.state.zones.perPlayer[player].library[0];
+    if (libraryTop !== undefined) {
+      for (const plotCost of this.plotCostsOf(player, libraryTop)) {
+        if (this.whyCannotPlot(player, libraryTop, plotCost) !== null) continue;
+        const cardName = this.state.objects[libraryTop].cardName;
+        out.push({ kind: "plot", card: libraryTop, cardName, cost: plotCost, ...this.phyrexianPipsOffer(player, plotCost) });
       }
     }
 
@@ -16973,29 +16983,86 @@ export class Game {
     this.afterPlayerAction(player);
   }
 
-  /** Why `player` cannot plot `cardId` from hand right now: rule 702.170a's
-   * "any time you have priority during your main phase while the stack is
-   * empty" (116.2k), and its plot cost paid. */
-  private whyCannotPlot(player: PlayerId, cardId: ObjectId): string | null {
+  /** Why `player` cannot plot `cardId` right now — from hand, or from the top
+   * of their library where a permanent allows it: rule 702.170a's "any time
+   * you have priority during your main phase while the stack is empty"
+   * (116.2k), and a plot cost paid (`cost`, one of {@link plotCostsOf}; any
+   * of them when absent). */
+  private whyCannotPlot(player: PlayerId, cardId: ObjectId, cost?: string): string | null {
     const blocked = this.whyCannotAct(player);
     if (blocked !== null) return blocked;
-    if (!this.state.zones.perPlayer[player].hand.includes(cardId)) {
+    const inHand = this.state.zones.perPlayer[player].hand.includes(cardId);
+    if (!inHand && !this.plotsFromLibraryTop(player, cardId)) {
       return `${player} does not have that card in hand`;
     }
     const def = this.registry.get(this.state.objects[cardId].cardName);
-    if (def.plot === null) return `${def.name} does not have plot`;
+    const costs = this.plotCostsOf(player, cardId);
+    if (costs.length === 0) return `${def.name} does not have plot`;
+    if (cost !== undefined && !costs.includes(cost)) return `${cost} is not a plot cost of ${def.name}`;
     const timing = this.whyNotSorcerySpeed(player, "plot a card");
     if (timing !== null) return timing;
-    if (this.payMana(player, parseManaCost(this.plotCostNow(player, def.plot.cost))) === null) {
+    if (this.payablePlotCost(player, cardId, cost) === undefined) {
       return `${player} cannot pay the plot cost of ${def.name}`;
     }
     return null;
   }
 
-  private plotCard(player: PlayerId, cardId: ObjectId): void {
-    const why = this.whyCannotPlot(player, cardId);
+  /** `cost`, or the first of `cardId`'s plot costs `player` can pay now. */
+  private payablePlotCost(player: PlayerId, cardId: ObjectId, cost?: string): string | undefined {
+    return (cost !== undefined ? [cost] : this.plotCostsOf(player, cardId)).find(
+      (c) => this.payMana(player, parseManaCost(c)) !== null,
+    );
+  }
+
+  /**
+   * The plot costs `cardId` has for `player` to pay now (rule 702.170a), one
+   * each: in their hand, its printed one and any a `grantsToHand` static
+   * gives it, less a `plotCostReduction`; on top of their library, where a
+   * `plotsFromLibraryTop` static of theirs reaches it, its printed one and any
+   * a `grantsToLibraryTop` gives it — "you may plot that card using its own
+   * plot cost or the plot cost given to it by Fblthp" (the card's ruling).
+   */
+  private plotCostsOf(player: PlayerId, cardId: ObjectId): readonly string[] {
+    const object = this.state.objects[cardId];
+    if (object === undefined) return [];
+    const def = this.registry.get(object.cardName);
+    const out: string[] = [];
+    const add = (cost: string | null): void => {
+      if (cost !== null && !out.includes(cost)) out.push(cost);
+    };
+    if (this.state.zones.perPlayer[player].hand.includes(cardId)) {
+      if (def.plot !== null) add(this.plotCostNow(player, def.plot.cost));
+      for (const value of this.handKeywordValues(object, "plot")) {
+        const cost = keywordCostString(value.cost, def);
+        add(cost === null ? null : this.plotCostNow(player, cost));
+      }
+      return out;
+    }
+    if (!this.plotsFromLibraryTop(player, cardId)) return out;
+    if (def.plot !== null) add(def.plot.cost);
+    for (const { ability } of this.activeStaticsOf(player, (a) => a.grantsToLibraryTop !== undefined)) {
+      const grant = ability.grantsToLibraryTop!;
+      if (!matchesFilter(this.state, this.registry, cardId, grant.filter, { you: player })) continue;
+      for (const value of grant.keywordValues) {
+        if (value.keyword === "plot") add(keywordCostString(value.cost, def));
+      }
+    }
+    return out;
+  }
+
+  /** Whether `cardId` is the top card of `player`'s library and a
+   * `plotsFromLibraryTop` static of theirs lets them plot it from there. */
+  private plotsFromLibraryTop(player: PlayerId, cardId: ObjectId): boolean {
+    if (this.state.zones.perPlayer[player]?.library[0] !== cardId) return false;
+    return this.activeStaticsOf(player, (a) => a.plotsFromLibraryTop !== undefined).some(({ ability }) =>
+      matchesFilter(this.state, this.registry, cardId, ability.plotsFromLibraryTop!.filter, { you: player }),
+    );
+  }
+
+  private plotCard(player: PlayerId, cardId: ObjectId, chosen?: string): void {
+    const why = this.whyCannotPlot(player, cardId, chosen);
     if (why !== null) throw new Error(why);
-    const cost = this.plotCostNow(player, this.registry.get(this.state.objects[cardId].cardName).plot!.cost);
+    const cost = this.payablePlotCost(player, cardId, chosen)!;
     const payment = this.payMana(player, parseManaCost(cost));
     if (payment === null) throw new Error(`${player} cannot pay the plot cost`);
     const before = this.state.objects[cardId].zoneChangeCount ?? 0;

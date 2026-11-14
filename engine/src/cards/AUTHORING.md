@@ -5451,7 +5451,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `"warp"`, `"ninjutsu"`, `"cycling"` (with `search` for typecycling), `"foretell"`, `"miracle"`,
   `"madness"` (read in the hand, so "each card you own that isn't on the battlefield has madness" says this,
   Falkenrath Gorger). `eachPlayer` reaches every hand (Homing Sliver). A foretold card keeps the cost it
-  was given once the grant is gone.
+  was given once the grant is gone. `"plot"` too: a hand's plot costs are its own and each grant's.
+- `grantsToLibraryTop: { filter, keywordValues }` — the top card of your library has a keyword with a cost
+  (only `"plot"` is read there): Fblthp, Lost on the Range's "the top card of your library has plot. The
+  plot cost is equal to its mana cost" (`cost: "mana-cost"`). `plotsFromLibraryTop: { filter }` — "you may
+  plot nonland cards from the top of your library" (`{ notTypes: ["land"] }`): plot's special action on
+  that card, offered once per plot cost it has (its own and the grant's — the ruling), the `plot` action's
+  `cost` naming which; a hand's `plotCostReduction` doesn't apply.
 - `equipAtInstantSpeed: true` — "you may activate equip abilities any time you could
   cast an instant" (Leonin Shikari; a `your-turn` `condition` for Forge Anew's "during
   your turn"). `alternativeAbilityCost: { kind: "equip", mana, firstEachTurn? }` (or `kind: "cycling"`, `"power-up"`) — "you may pay {0}

@@ -2213,11 +2213,33 @@ function Table({
     for (const a of actions) if (a.kind === 'foretell') m.set(a.card, a)
     return m
   }, [actions])
+  // One offer per plot cost: a card's own and one a static gives it
+  // (Fblthp, Lost on the Range's top card) are each a button.
   const plotByCard = useMemo(() => {
-    const m = new Map<ObjectId, PlotAction>()
-    for (const a of actions) if (a.kind === 'plot') m.set(a.card, a)
+    const m = new Map<ObjectId, PlotAction[]>()
+    for (const a of actions) if (a.kind === 'plot') m.set(a.card, [...(m.get(a.card) ?? []), a])
     return m
   }, [actions])
+  const plotButtons = (id: ObjectId, plots: readonly PlotAction[]) =>
+    plots.map((plot) => (
+      <button
+        key={plot.cost}
+        type="button"
+        onClick={() =>
+          askLifeThen(plot, (life) =>
+            game.dispatch({
+              type: 'plot',
+              player: seat,
+              card: id,
+              ...(plots.length > 1 ? { cost: plot.cost } : {}),
+              ...life,
+            }),
+          )
+        }
+      >
+        Plot <Symbols text={plot.cost} />
+      </button>
+    ))
   // A revealed companion that can go into the hand (rule 702.139a): the offer
   // sits on your own panel, there being no card on the table to hang it on.
   const takeCompanion = useMemo(() => {
@@ -4594,6 +4616,8 @@ function Table({
    * hand. */
   const libraryTopTile = (obj: VisibleObject, pid: PlayerId) => {
     const faceOpts = mode === 'priority' ? (playFacesByCard.get(obj.id) ?? []) : []
+    // Plotted from the top of the library (Fblthp, Lost on the Range).
+    const plots = mode === 'priority' ? (plotByCard.get(obj.id) ?? []) : []
     // Turned face up as it's revealed: a card the board before didn't show
     // on top (Oracle of Mul Daya arriving, a draw, a shuffle).
     const flipIn = previousView !== null && (previousView.revealedLibraryTop[pid] ?? null) !== obj.id
@@ -4602,10 +4626,11 @@ function Table({
         <LibraryTopCard
           key={obj.id}
           obj={obj}
-          highlight={faceOpts.length > 0}
+          highlight={faceOpts.length > 0 || plots.length > 0}
           onClick={() => clickHandCard(obj.id)}
           flipIn={flipIn}
         />
+        {plots.length > 0 ? <div className="library-top-actions">{plotButtons(obj.id, plots)}</div> : null}
         {faceOpts.length > 1 || faceOpts.some(needsOwnButton)
           ? faceOpts.map((a, i) => (
               <button key={i} type="button" onClick={() => playFace(a)}>
@@ -7798,16 +7823,7 @@ function Table({
                   Foretell
                 </button>
               ) : null}
-              {plot ? (
-                <button
-                  type="button"
-                  onClick={() =>
-                    askLifeThen(plot,(life) => game.dispatch({ type: 'plot', player: seat, card: id, ...life }))
-                  }
-                >
-                  Plot <Symbols text={plot.cost} />
-                </button>
-              ) : null}
+              {plot ? plotButtons(id, plot) : null}
               {cycle ? (
                 <button
                   type="button"

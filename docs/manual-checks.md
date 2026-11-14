@@ -8289,3 +8289,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Phyrexian Processor: pay any amount of life as it enters
 - **Do:** Cast Phyrexian Processor and choose 5. Then use its ability.
 - **Expect:** The banner reads "Phyrexian Processor — pay any amount of life as it enters (0–20)", and you go to 15 life. The token is a 5/5 black Phyrexian Minion.
+## Plot from the top of the library (2026-11-13)
+
+### Fblthp, Lost on the Range: plot the top card of your library
+- **Do:** Click **Plot {1}{G}** under the Grizzly Bears on top of your library.
+- **Expect:** The Bears go to exile, badged **Plotted**, two Forests tap, and Hill Giant is now the top card, with a **Plot {3}{R}** button.
+
+### Fblthp, Lost on the Range: a card with plot of its own offers both costs
+- **Do:** Click **Plot {2}{R}** under Longhorn Sharpshooter on top of your library, and point its 2 damage at Bob.
+- **Expect:** It also offers **Plot {3}{R}**. Three Mountains tap, Bob goes to 18, and the Sharpshooter sits on your board, badged **Plotted**.
+
+### Fblthp, Lost on the Range: plot from the top in a 4-player game
+- **Do:** Click **Plot {1}{G}** under the Grizzly Bears on top of your library.
+- **Expect:** The Bears go to exile, badged **Plotted**, and every opponent's library is untouched.

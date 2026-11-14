@@ -19016,6 +19016,23 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ).toEqual([{ on: "event", event: "scry-bottoms", who: "you" }]);
   });
 
+  it("reads plot given to and taken from the top of your library (Fblthp, Lost on the Range)", () => {
+    const fblthp = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature",
+      oracle_text:
+        "The top card of your library has plot. The plot cost is equal to its mana cost.\nYou may plot nonland cards from the top of your library.",
+    });
+    expect(fblthp.static.map((s: { text?: string }) => ({ ...s, text: undefined }))).toEqual([
+      {
+        affects: { scope: "self" },
+        grantsToLibraryTop: { filter: {}, keywordValues: [{ keyword: "plot", cost: "mana-cost" }] },
+        text: undefined,
+      },
+      { affects: { scope: "self" }, plotsFromLibraryTop: { filter: { notTypes: ["land"] } }, text: undefined },
+    ]);
+  });
+
   it("reads an exile from the bottom of a library (The Temporal Anchor, Arvinox)", () => {
     const anchor = parseFace({
       name: "Test Card",

@@ -1892,6 +1892,19 @@
   flex-wrap: wrap;
   gap: 6px;
 }
+/* The top card's special actions (Fblthp, Lost on the Range's plot, a
+   button per cost): one column beside the card, each button its share of
+   the height, so two costs don't squeeze each other's symbols out. */
+.library-top-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  min-width: 0;
+}
+.library-top-actions > button {
+  flex: 1;
+  white-space: nowrap;
+}
 /* Two Partner commanders in one card-wide slot: a tile each, with a gap
    between them so they read as two cards rather than one tile drawn wrong.
    Each gets a shorter art box (.commander-tile.paired) so both fit above the

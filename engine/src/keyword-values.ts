@@ -35,7 +35,8 @@ export type KeywordValue =
         | "emerge"
         | "freerunning"
         | "web-slinging"
-        | "prowl";
+        | "prowl"
+        | "plot";
       readonly cost: KeywordCost;
     }
   /** Cycling, or typecycling with `search` (702.29e). */

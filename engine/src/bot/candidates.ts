@@ -340,7 +340,7 @@ export function candidateActions(
     case "foretell":
       return [{ type: "foretell", player, card: legal.card }];
     case "plot":
-      return [{ type: "plot", player, card: legal.card }];
+      return [{ type: "plot", player, card: legal.card, cost: legal.cost }];
     // A companion into the hand: the search weighs {3} for the card against
     // spending the mana on something else.
     case "take-companion":

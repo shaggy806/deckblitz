@@ -2519,7 +2519,8 @@
   "effect:exile-spell-as-it-resolves-with-counter",
   "effect:exile-spell-as-it-resolves-linked",
   "zone:exile-library-bottom-face-down-cast-permanents",
-  "zone:exile-from-library-bottom"
+  "zone:exile-from-library-bottom",
+  "zone:plot-from-library-top"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

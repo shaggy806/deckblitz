@@ -3876,6 +3876,22 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * card from hand (rule 702.170a, a special action, 116.2k), never coloured
    * mana (rule 118.7a). `affects` is ignored. */
   readonly plotCostReduction?: number;
+  /** "You may plot nonland cards from the top of your library" (Fblthp, Lost
+   * on the Range): its controller may take plot's special action (rule
+   * 702.170a, 116.2k) on the top card of their library matching `filter`, as
+   * from a hand, if that card has plot — printed, or given by a
+   * `grantsToLibraryTop`. A hand's `plotCostReduction` doesn't apply.
+   * `affects` is ignored. */
+  readonly plotsFromLibraryTop?: { readonly filter: CardFilter };
+  /** Keywords with costs this permanent gives the **top card of its
+   * controller's library** (rule 604.1): "the top card of your library has
+   * plot. The plot cost is equal to its mana cost" (Fblthp, Lost on the
+   * Range). Only `plot` is read there. A card with the keyword printed has
+   * both (the card's ruling). `affects` is ignored. */
+  readonly grantsToLibraryTop?: {
+    readonly filter: CardFilter;
+    readonly keywordValues: readonly KeywordValue[];
+  };
   /**
    * Changes what activated abilities cost to activate (rule 602.2b, which
    * applies rule 601.2f's cost modifications to activation costs):

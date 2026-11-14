@@ -12449,4 +12449,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Wastes*8'], hand: ['Phyrexian Processor'], life: 20 },
     }),
   ),
+  preset(
+    'Fblthp, Lost on the Range: plot the top card of your library',
+    board({
+      you: { bf: ['Fblthp, Lost on the Range', 'Forest*2', 'Mountain*4'], lib: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Fblthp, Lost on the Range: a card with plot of its own offers both costs',
+    board({
+      you: { bf: ['Fblthp, Lost on the Range', 'Mountain*4'], lib: ['Longhorn Sharpshooter'] },
+      opp: { life: 20 },
+    }),
+  ),
+  preset(
+    'Fblthp, Lost on the Range: plot from the top in a 4-player game',
+    board({
+      you: { bf: ['Fblthp, Lost on the Range', 'Forest*2'], lib: ['Grizzly Bears'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

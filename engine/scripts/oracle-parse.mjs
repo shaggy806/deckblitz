@@ -16847,6 +16847,20 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, plotCostReduction: Number(m[1]), text: printed(raw) });
       continue;
     }
+    // Fblthp, Lost on the Range: plot given to the top card of your library,
+    // and the special action taken from there (rule 702.170a).
+    if (line === "The top card of your library has plot. The plot cost is equal to its mana cost.") {
+      out.static.push({
+        affects: { scope: "self" },
+        grantsToLibraryTop: { filter: {}, keywordValues: [{ keyword: "plot", cost: "mana-cost" }] },
+        text: printed(raw),
+      });
+      continue;
+    }
+    if (line === "You may plot nonland cards from the top of your library.") {
+      out.static.push({ affects: { scope: "self" }, plotsFromLibraryTop: { filter: { notTypes: ["land"] } }, text: printed(raw) });
+      continue;
+    }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name cost \{(\d+)\} more to activate( unless they're mana abilities)?\.$/.exec(line))) {
       out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
       out.static.push({
