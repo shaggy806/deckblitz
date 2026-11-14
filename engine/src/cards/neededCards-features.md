@@ -377,6 +377,12 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   as many as went on). Craig Boone, Novac Guard's ruling: once for every two
   quest counters, twice under Doubling Season.
   `test/reflexive-per-counters-placed.test.ts`.
+- `trigger:combat-damage-to-enchanted-player` — `deals-combat-damage-to-player`'s
+  `toEnchantedPlayer` (the player the Curse enchants as the damage is dealt,
+  once per creature), and the filter clause `attackingEnchantedPlayer`
+  (attacking that player, rule 506.3). Curse of Hospitality, Curse of Stalked
+  Prey; the scaffolder reads both lines.
+  `test/combat-damage-to-enchanted-player.test.ts`.
 
 ### Who attacked whom, and whether it had to — built 2026-11-13
 

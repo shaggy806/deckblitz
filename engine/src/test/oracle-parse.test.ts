@@ -13673,6 +13673,15 @@ describe("offering", () => {
       grantKeywords: ["double-strike"],
     });
   });
+  it("reads a Curse's creatures attacking, and dealing combat damage to, enchanted player", () => {
+    expect(read("Creatures attacking enchanted player have trample.").static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", attackingEnchantedPlayer: true } },
+      grantKeywords: ["trample"],
+    });
+    expect(parseTrigger("Whenever a creature deals combat damage to enchanted player")).toEqual([
+      { on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toEnchantedPlayer: true },
+    ]);
+  });
 });
 
 describe("spells countered all at once, and spells back to a hand", () => {

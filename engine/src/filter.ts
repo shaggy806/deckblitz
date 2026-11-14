@@ -467,6 +467,11 @@ export interface CardFilter {
    * Triarch Stalker's "creatures attacking **the last chosen player** have
    * menace". With no source, or nobody chosen, nothing matches. */
   readonly attackingChosenPlayer?: true;
+  /** Attacking the player the filtering source, a Curse, enchants — the
+   * player, not a planeswalker or battle of theirs (rule 506.3): Curse of
+   * Hospitality's "creatures **attacking enchanted player** have trample".
+   * With no source, or one attached to no player, nothing matches. */
+  readonly attackingEnchantedPlayer?: true;
   /** Currently blocking — the mirror of `attacking` (Kangee, Sky Warden's
    * "blocking creatures with flying get +0/+2"). */
   readonly blocking?: boolean;
@@ -2496,6 +2501,11 @@ export function matchesFilter(
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
     const chosen = from?.zone === "battlefield" ? from.chosenPlayer : undefined;
     if (chosen === undefined || live?.zone !== "battlefield" || live.attacking !== chosen) return false;
+  }
+  if (filter.attackingEnchantedPlayer === true) {
+    const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const enchanted = aura?.zone === "battlefield" ? aura.attachedToPlayer : undefined;
+    if (enchanted === undefined || live?.zone !== "battlefield" || live.attacking !== enchanted) return false;
   }
   if (filter.unblocked !== undefined) {
     const step = state.turn.step;

@@ -1873,6 +1873,11 @@ export type TriggerKind =
        * Praetor, with `who: "any"`): the player dealt damage is an opponent
        * of this permanent's controller, whoever's creature dealt it. */
       readonly toOpponent?: boolean;
+      /** "Whenever a creature deals combat damage to **enchanted player**"
+       * (Curse of Hospitality, Curse of Stalked Prey, with `who: "any"`): the
+       * player dealt damage is the one this Curse enchants as the damage is
+       * dealt — once for each creature that dealt it (the ruling). */
+      readonly toEnchantedPlayer?: true;
       /** "…deals combat damage to a player **or battle**" (Furnace Reins,
        * Beamtown Beatstick): combat damage to a battle triggers it too. A
        * battle has no "that player" — use it only where the ability doesn't

@@ -2092,6 +2092,11 @@ export function parseTrigger(clause) {
   if (c === "Whenever a creature deals combat damage to one of your opponents") {
     return [{ on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toOpponent: true }];
   }
+  // A Curse's (Curse of Hospitality, Curse of Stalked Prey): the player it
+  // enchants, once per creature.
+  if (c === "Whenever a creature deals combat damage to enchanted player") {
+    return [{ on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toEnchantedPlayer: true }];
+  }
   // "…to a player or planeswalker" (Psychic Frog, Jaya's Phoenix): an
   // attacker deals its combat damage to the one it attacks, so one trigger
   // for each recipient never fires twice for one damage event.
@@ -20370,6 +20375,14 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "filter", filter: { type: "creature", token: true, controlledBy: "you" } },
       grantKeywords: ["haste"],
+      text,
+    };
+  }
+  // Curse of Hospitality: the player the Curse enchants (rule 506.3).
+  if ((m = /^Creatures attacking enchanted player have (trample|haste|first strike|double strike)\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", attackingEnchantedPlayer: true } },
+      grantKeywords: [m[1].replace(" ", "-")],
       text,
     };
   }

@@ -34216,6 +34216,8 @@ export class Game {
           !(spec.otherOnly === true && event.source === self.id) &&
           this.triggerFilterOk(spec.filter, event.source, self) &&
           (spec.toOpponent !== true || (event.target.kind === "player" && event.target.player !== self.controller)) &&
+          (spec.toEnchantedPlayer !== true ||
+            (event.target.kind === "player" && self.attachedToPlayer !== undefined && event.target.player === self.attachedToPlayer)) &&
           (spec.toPlayerIf === undefined ||
             (event.target.kind === "player" &&
               staticConditionMet(this.state, this.registry, self, spec.toPlayerIf, { thatPlayer: event.target.player }))) &&

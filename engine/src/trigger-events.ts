@@ -303,7 +303,12 @@ export function timingCountable(spec: TriggerSpec): boolean {
     case "deals-combat-damage-to-player":
       // A narrowing asked as the damage is dealt can't be asked again of
       // earlier damage: only the plain and `toOpponent` shapes count.
-      return spec.toPlayerIf === undefined && spec.toPlayerControlsMore === undefined && spec.orBattle !== true;
+      return (
+        spec.toPlayerIf === undefined &&
+        spec.toPlayerControlsMore === undefined &&
+        spec.toEnchantedPlayer !== true &&
+        spec.orBattle !== true
+      );
     case "becomes-tapped":
     case "counters-put":
       return spec.batched !== true;
