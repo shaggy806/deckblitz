@@ -311,6 +311,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Server-side deck save and share** (decks live in `localStorage`).
 - **The library and the deck builder load every card definition** (~6.3 MB at 12,089 definitions); the user's first-visit stall was two of the 32 shard requests never answering (the bar at 94%, 2026-10-14); such a shard is now asked for again, but why a request hangs is not known.
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
+- **Learn Commander pays its mana itself, so it never teaches mana** (the user, 2026-11-14): turn the mana auto-payer off for the lesson's first chapters to explain tapping something for mana to cast a spell, show the mana pool, and, while there, explain that mana empties between steps and phases (`server/src/tutorials/learn-commander.ts`).
 
 ## Tooling / docs
 
