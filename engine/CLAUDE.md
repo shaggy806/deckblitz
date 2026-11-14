@@ -163,6 +163,9 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `bot:bench`, `bot:scenarios`, `bot:benchmarks`, `bot:behaviour`, `bot:crackback`, `bot:ab`, `bot:diff`,
   `bot:replay`, `bot:anatomy` (where a decision's time goes, on `data/bot-positions/`), `bot:timings`
   (decision cost in bench games at the live budget): bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
+- `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000]`: one whole game of v2 seats at the
+  live clock, written out to read: each turn's board and hands, and every decision with how it was reached. For looking
+  over the bots' play by eye; deck names match the strong decks first, then the starter decks.
 - `bot:bench:last`: whether this engine code already has a bench figure on this machine, so a "before" needn't be
   played again (`data/bench-log.jsonl`, keyed by a hash of the non-card source; a plain `bot:bench` appends to it, and
   the file is committed with the work it measured).

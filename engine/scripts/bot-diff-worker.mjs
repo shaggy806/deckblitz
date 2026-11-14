@@ -29,7 +29,20 @@ function play(seed) {
       const action = act(view);
       let theirs;
       try {
-        theirs = old.act(view);
+        // The baseline reads the working game's state through its own
+        // module's caches, which that game's mutations never reach: without
+        // this it answered from stale statics (a 7/7 read as 5/5), and a
+        // build diffed against itself disagreed on attacks and blocks
+        // (2026-11-14).
+        B.invalidateComputedCache?.();
+        // v1 counts an activation as it's handed to the engine (`act`), and
+        // the baseline's never is: asked through `act`, it spent its four a
+        // turn on proposals and stopped proposing. So it is asked what it
+        // would do (`propose`), and told below what was played.
+        theirs = bot === "v1" && typeof old.propose === "function" ? old.propose(view) : old.act(view);
+        if (bot === "v1" && action.type === "activate-ability") {
+          old.noteActivation?.(view.state.turn.number, action.source, action.abilityIndex);
+        }
       } catch (error) {
         theirs = { type: `baseline threw: ${String(error?.message ?? error)}` };
       }
