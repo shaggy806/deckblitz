@@ -1658,6 +1658,7 @@ import _poolAurochsHerd from "./pool/aurochs-herd.js";
 import _poolAurochs from "./pool/aurochs.js";
 import _poolAuronVeneratedGuardian from "./pool/auron-venerated-guardian.js";
 import _poolAuronsInspiration from "./pool/aurons-inspiration.js";
+import _poolAuroraAwakener from "./pool/aurora-awakener.js";
 import _poolAuroraChampion from "./pool/aurora-champion.js";
 import _poolAuroraEidolon from "./pool/aurora-eidolon.js";
 import _poolAuroraGriffin from "./pool/aurora-griffin.js";
@@ -7228,6 +7229,7 @@ import _poolDoomfall from "./pool/doomfall.js";
 import _poolDoomgape from "./pool/doomgape.js";
 import _poolDoomsServoGuards from "./pool/dooms-servo-guards.js";
 import _poolDoomsTimePlatform from "./pool/dooms-time-platform.js";
+import _poolDoomsdayConfluence from "./pool/doomsday-confluence.js";
 import _poolDoomsdayExcruciator from "./pool/doomsday-excruciator.js";
 import _poolDoomsday from "./pool/doomsday.js";
 import _poolDoomskarOracle from "./pool/doomskar-oracle.js";
@@ -25837,6 +25839,7 @@ import _poolSpinedWurm from "./pool/spined-wurm.js";
 import _poolSpinehornMinotaur from "./pool/spinehorn-minotaur.js";
 import _poolSpinelessThug from "./pool/spineless-thug.js";
 import _poolSpinerockKnoll from "./pool/spinerock-knoll.js";
+import _poolSpinerockTyrant from "./pool/spinerock-tyrant.js";
 import _poolSpineseekerCentipede from "./pool/spineseeker-centipede.js";
 import _poolSpinewoodsArmadillo from "./pool/spinewoods-armadillo.js";
 import _poolSpinewoodsPaladin from "./pool/spinewoods-paladin.js";
@@ -26545,6 +26548,7 @@ import _poolStorySeeker from "./pool/story-seeker.js";
 import _poolStorybookRide from "./pool/storybook-ride.js";
 import _poolStorytellerPixie from "./pool/storyteller-pixie.js";
 import _poolStrafe from "./pool/strafe.js";
+import _poolStragoAndRelm from "./pool/strago-and-relm.js";
 import _poolStrandsOfNight from "./pool/strands-of-night.js";
 import _poolStrandsOfUndeath from "./pool/strands-of-undeath.js";
 import _poolStrandwalker from "./pool/strandwalker.js";
@@ -34679,6 +34683,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAurochs,
   _poolAuronVeneratedGuardian,
   _poolAuronsInspiration,
+  _poolAuroraAwakener,
   _poolAuroraChampion,
   _poolAuroraEidolon,
   _poolAuroraGriffin,
@@ -40249,6 +40254,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDoomgape,
   _poolDoomsServoGuards,
   _poolDoomsTimePlatform,
+  _poolDoomsdayConfluence,
   _poolDoomsdayExcruciator,
   _poolDoomsday,
   _poolDoomskarOracle,
@@ -58858,6 +58864,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpinehornMinotaur,
   _poolSpinelessThug,
   _poolSpinerockKnoll,
+  _poolSpinerockTyrant,
   _poolSpineseekerCentipede,
   _poolSpinewoodsArmadillo,
   _poolSpinewoodsPaladin,
@@ -59566,6 +59573,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStorybookRide,
   _poolStorytellerPixie,
   _poolStrafe,
+  _poolStragoAndRelm,
   _poolStrandsOfNight,
   _poolStrandsOfUndeath,
   _poolStrandwalker,
@@ -67713,6 +67721,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aurochs": _poolAurochs,
   "pool/auron-venerated-guardian": _poolAuronVeneratedGuardian,
   "pool/aurons-inspiration": _poolAuronsInspiration,
+  "pool/aurora-awakener": _poolAuroraAwakener,
   "pool/aurora-champion": _poolAuroraChampion,
   "pool/aurora-eidolon": _poolAuroraEidolon,
   "pool/aurora-griffin": _poolAuroraGriffin,
@@ -73283,6 +73292,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/doomgape": _poolDoomgape,
   "pool/dooms-servo-guards": _poolDoomsServoGuards,
   "pool/dooms-time-platform": _poolDoomsTimePlatform,
+  "pool/doomsday-confluence": _poolDoomsdayConfluence,
   "pool/doomsday-excruciator": _poolDoomsdayExcruciator,
   "pool/doomsday": _poolDoomsday,
   "pool/doomskar-oracle": _poolDoomskarOracle,
@@ -91892,6 +91902,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spinehorn-minotaur": _poolSpinehornMinotaur,
   "pool/spineless-thug": _poolSpinelessThug,
   "pool/spinerock-knoll": _poolSpinerockKnoll,
+  "pool/spinerock-tyrant": _poolSpinerockTyrant,
   "pool/spineseeker-centipede": _poolSpineseekerCentipede,
   "pool/spinewoods-armadillo": _poolSpinewoodsArmadillo,
   "pool/spinewoods-paladin": _poolSpinewoodsPaladin,
@@ -92600,6 +92611,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/storybook-ride": _poolStorybookRide,
   "pool/storyteller-pixie": _poolStorytellerPixie,
   "pool/strafe": _poolStrafe,
+  "pool/strago-and-relm": _poolStragoAndRelm,
   "pool/strands-of-night": _poolStrandsOfNight,
   "pool/strands-of-undeath": _poolStrandsOfUndeath,
   "pool/strandwalker": _poolStrandwalker,

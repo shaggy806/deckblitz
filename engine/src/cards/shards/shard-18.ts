@@ -812,6 +812,7 @@ import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStingmoggie from "../pool/stingmoggie.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
 import _poolStormcragElemental from "../pool/stormcrag-elemental.js";
+import _poolStragoAndRelm from "../pool/strago-and-relm.js";
 import _poolStranglehold from "../pool/stranglehold.js";
 import _poolStrengthBobblehead from "../pool/strength-bobblehead.js";
 import _poolStruggle from "../pool/struggle.js";
@@ -1840,6 +1841,7 @@ const shard: CardShard = {
     _poolStingmoggie,
     _poolStirringBard,
     _poolStormcragElemental,
+    _poolStragoAndRelm,
     _poolStranglehold,
     _poolStrengthBobblehead,
     _poolStruggle,

@@ -823,6 +823,7 @@ import _poolSphereOfDuty from "../pool/sphere-of-duty.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSpikeRogue from "../pool/spike-rogue.js";
 import _poolSpikeSoldier from "../pool/spike-soldier.js";
+import _poolSpinerockTyrant from "../pool/spinerock-tyrant.js";
 import _poolSpiritShackle from "../pool/spirit-shackle.js";
 import _poolSplitDecision from "../pool/split-decision.js";
 import _poolSplittingSlime from "../pool/splitting-slime.js";
@@ -1867,6 +1868,7 @@ const shard: CardShard = {
     _poolSpiderwigBoggart,
     _poolSpikeRogue,
     _poolSpikeSoldier,
+    _poolSpinerockTyrant,
     _poolSpiritShackle,
     _poolSplitDecision,
     _poolSplittingSlime,
