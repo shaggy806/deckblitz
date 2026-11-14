@@ -548,6 +548,7 @@ import _poolNipGwyllion from "../pool/nip-gwyllion.js";
 import _poolNomadsEnKor from "../pool/nomads-en-kor.js";
 import _poolNoxiousDragon from "../pool/noxious-dragon.js";
 import _poolNullBrooch from "../pool/null-brooch.js";
+import _poolObNixilisOfTheBlackOath from "../pool/ob-nixilis-of-the-black-oath.js";
 import _poolObsidianObelisk from "../pool/obsidian-obelisk.js";
 import _poolObsidianOrderOperative from "../pool/obsidian-order-operative.js";
 import _poolOjerAxonilDeepestMight from "../pool/ojer-axonil-deepest-might.js";
@@ -1570,6 +1571,7 @@ const shard: CardShard = {
     _poolNomadsEnKor,
     _poolNoxiousDragon,
     _poolNullBrooch,
+    _poolObNixilisOfTheBlackOath,
     _poolObsidianObelisk,
     _poolObsidianOrderOperative,
     _poolOjerAxonilDeepestMight,

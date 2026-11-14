@@ -228,6 +228,7 @@ import _poolDormantVolcano from "../pool/dormant-volcano.js";
 import _poolDovinHandOfControl from "../pool/dovin-hand-of-control.js";
 import _poolDowndraft from "../pool/downdraft.js";
 import _poolDragonbornChampion from "../pool/dragonborn-champion.js";
+import _poolDragonsFire from "../pool/dragons-fire.js";
 import _poolDragonscaleGeneral from "../pool/dragonscale-general.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
@@ -1270,6 +1271,7 @@ const shard: CardShard = {
     _poolDovinHandOfControl,
     _poolDowndraft,
     _poolDragonbornChampion,
+    _poolDragonsFire,
     _poolDragonscaleGeneral,
     _poolDragoonsWyvern,
     _poolDreamPillager,

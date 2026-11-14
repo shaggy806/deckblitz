@@ -408,6 +408,7 @@ import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
 import _poolKarazikarTheEyeTyrant from "../pool/karazikar-the-eye-tyrant.js";
 import _poolKarnGildedGuardian from "../pool/karn-gilded-guardian.js";
+import _poolKarnLivingLegacy from "../pool/karn-living-legacy.js";
 import _poolKashiTribeWarriors from "../pool/kashi-tribe-warriors.js";
 import _poolKataraWaterbendingMaster from "../pool/katara-waterbending-master.js";
 import _poolKavaronTurbodrone from "../pool/kavaron-turbodrone.js";
@@ -1353,6 +1354,7 @@ const shard: CardShard = {
     _poolKamiOfTwistedReflection,
     _poolKarazikarTheEyeTyrant,
     _poolKarnGildedGuardian,
+    _poolKarnLivingLegacy,
     _poolKashiTribeWarriors,
     _poolKataraWaterbendingMaster,
     _poolKavaronTurbodrone,

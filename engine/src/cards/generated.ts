@@ -7319,6 +7319,7 @@ import _poolDragonsClaw from "./pool/dragons-claw.js";
 import _poolDragonsDesire from "./pool/dragons-desire.js";
 import _poolDragonsEyeSavants from "./pool/dragons-eye-savants.js";
 import _poolDragonsEyeSentry from "./pool/dragons-eye-sentry.js";
+import _poolDragonsFire from "./pool/dragons-fire.js";
 import _poolDragonsHerald from "./pool/dragons-herald.js";
 import _poolDragonsHoard from "./pool/dragons-hoard.js";
 import _poolDragonsPresence from "./pool/dragons-presence.js";
@@ -14192,6 +14193,7 @@ import _poolJhessianLookout from "./pool/jhessian-lookout.js";
 import _poolJhessianThief from "./pool/jhessian-thief.js";
 import _poolJhessianZombies from "./pool/jhessian-zombies.js";
 import _poolJhoiraAgelessInnovator from "./pool/jhoira-ageless-innovator.js";
+import _poolJhoiraOfTheGhitu from "./pool/jhoira-of-the-ghitu.js";
 import _poolJhoiraWeatherlightCaptain from "./pool/jhoira-weatherlight-captain.js";
 import _poolJhoiraWeatherlightCorsair from "./pool/jhoira-weatherlight-corsair.js";
 import _poolJhoirasFamiliar from "./pool/jhoiras-familiar.js";
@@ -14485,6 +14487,7 @@ import _poolKarmicJustice from "./pool/karmic-justice.js";
 import _poolKarnArgentDefender from "./pool/karn-argent-defender.js";
 import _poolKarnGildedGuardian from "./pool/karn-gilded-guardian.js";
 import _poolKarnLegacyReforged from "./pool/karn-legacy-reforged.js";
+import _poolKarnLivingLegacy from "./pool/karn-living-legacy.js";
 import _poolKarnScionOfUrza from "./pool/karn-scion-of-urza.js";
 import _poolKarnSilverGolem from "./pool/karn-silver-golem.js";
 import _poolKarnTheGreatCreator from "./pool/karn-the-great-creator.js";
@@ -18791,6 +18794,7 @@ import _poolOathswornGiant from "./pool/oathsworn-giant.js";
 import _poolOathswornKnight from "./pool/oathsworn-knight.js";
 import _poolOathswornVampire from "./pool/oathsworn-vampire.js";
 import _poolObNixilisCaptiveKingpin from "./pool/ob-nixilis-captive-kingpin.js";
+import _poolObNixilisOfTheBlackOath from "./pool/ob-nixilis-of-the-black-oath.js";
 import _poolObNixilisReignited from "./pool/ob-nixilis-reignited.js";
 import _poolObNixilisTheAscended from "./pool/ob-nixilis-the-ascended.js";
 import _poolObNixilisTheFallen from "./pool/ob-nixilis-the-fallen.js";
@@ -40089,6 +40093,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDragonsDesire,
   _poolDragonsEyeSavants,
   _poolDragonsEyeSentry,
+  _poolDragonsFire,
   _poolDragonsHerald,
   _poolDragonsHoard,
   _poolDragonsPresence,
@@ -46962,6 +46967,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJhessianThief,
   _poolJhessianZombies,
   _poolJhoiraAgelessInnovator,
+  _poolJhoiraOfTheGhitu,
   _poolJhoiraWeatherlightCaptain,
   _poolJhoiraWeatherlightCorsair,
   _poolJhoirasFamiliar,
@@ -47255,6 +47261,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKarnArgentDefender,
   _poolKarnGildedGuardian,
   _poolKarnLegacyReforged,
+  _poolKarnLivingLegacy,
   _poolKarnScionOfUrza,
   _poolKarnSilverGolem,
   _poolKarnTheGreatCreator,
@@ -51561,6 +51568,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOathswornKnight,
   _poolOathswornVampire,
   _poolObNixilisCaptiveKingpin,
+  _poolObNixilisOfTheBlackOath,
   _poolObNixilisReignited,
   _poolObNixilisTheAscended,
   _poolObNixilisTheFallen,
@@ -72872,6 +72880,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dragons-desire": _poolDragonsDesire,
   "pool/dragons-eye-savants": _poolDragonsEyeSavants,
   "pool/dragons-eye-sentry": _poolDragonsEyeSentry,
+  "pool/dragons-fire": _poolDragonsFire,
   "pool/dragons-herald": _poolDragonsHerald,
   "pool/dragons-hoard": _poolDragonsHoard,
   "pool/dragons-presence": _poolDragonsPresence,
@@ -79745,6 +79754,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jhessian-thief": _poolJhessianThief,
   "pool/jhessian-zombies": _poolJhessianZombies,
   "pool/jhoira-ageless-innovator": _poolJhoiraAgelessInnovator,
+  "pool/jhoira-of-the-ghitu": _poolJhoiraOfTheGhitu,
   "pool/jhoira-weatherlight-captain": _poolJhoiraWeatherlightCaptain,
   "pool/jhoira-weatherlight-corsair": _poolJhoiraWeatherlightCorsair,
   "pool/jhoiras-familiar": _poolJhoirasFamiliar,
@@ -80038,6 +80048,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/karn-argent-defender": _poolKarnArgentDefender,
   "pool/karn-gilded-guardian": _poolKarnGildedGuardian,
   "pool/karn-legacy-reforged": _poolKarnLegacyReforged,
+  "pool/karn-living-legacy": _poolKarnLivingLegacy,
   "pool/karn-scion-of-urza": _poolKarnScionOfUrza,
   "pool/karn-silver-golem": _poolKarnSilverGolem,
   "pool/karn-the-great-creator": _poolKarnTheGreatCreator,
@@ -84344,6 +84355,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oathsworn-knight": _poolOathswornKnight,
   "pool/oathsworn-vampire": _poolOathswornVampire,
   "pool/ob-nixilis-captive-kingpin": _poolObNixilisCaptiveKingpin,
+  "pool/ob-nixilis-of-the-black-oath": _poolObNixilisOfTheBlackOath,
   "pool/ob-nixilis-reignited": _poolObNixilisReignited,
   "pool/ob-nixilis-the-ascended": _poolObNixilisTheAscended,
   "pool/ob-nixilis-the-fallen": _poolObNixilisTheFallen,

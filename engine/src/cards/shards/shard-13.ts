@@ -421,6 +421,7 @@ import _poolJadeMonolith from "../pool/jade-monolith.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
 import _poolJayaFieryNegotiator from "../pool/jaya-fiery-negotiator.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
+import _poolJhoiraOfTheGhitu from "../pool/jhoira-of-the-ghitu.js";
 import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.js";
 import _poolJoinTheDance from "../pool/join-the-dance.js";
 import _poolJoinTheRanks from "../pool/join-the-ranks.js";
@@ -1422,6 +1423,7 @@ const shard: CardShard = {
     _poolJadecraftArtisan,
     _poolJayaFieryNegotiator,
     _poolJewelEyedCobra,
+    _poolJhoiraOfTheGhitu,
     _poolJhoiraWeatherlightCorsair,
     _poolJoinTheDance,
     _poolJoinTheRanks,
