@@ -2263,6 +2263,9 @@ export function parseTrigger(clause) {
   // "Whenever a player loses the game" (Blood Tyrant, Ramses, Assassin Lord):
   // the `loses-game` row, "they" the player who lost.
   if (c === "Whenever a player loses the game") return [{ on: "event", event: "loses-game", who: "any" }];
+  // "Whenever you win a clash" (Marvo, Deep Operative), "whenever you clash".
+  if (c === "Whenever you win a clash") return [{ on: "clashes", who: "you", won: true }];
+  if (c === "Whenever you clash") return [{ on: "clashes", who: "you" }];
   if (c === "Whenever one or more creatures attack one of your opponents") {
     return [{ on: "attacks-player", who: "any", defender: "opponent" }];
   }
@@ -3213,6 +3216,25 @@ export function parseSentence(sentence, ctx) {
       combat: true,
       ...(shield[1].toLowerCase() === "combat" ? { duration: "until-end-of-combat" } : {}),
     };
+  }
+  // "You may cast a spell from your hand [with mana value N or less] without
+  // paying its mana cost" (Maelstrom Archangel, Marvo, Deep Operative), and
+  // the bound before "from your hand" (Yahenni's Expertise).
+  const freeFromHand =
+    /^(?:then )?you may cast a spell from your hand(?: with mana value (\d+) or less)? without paying its mana cost\.$/i.exec(s) ??
+    /^(?:then )?you may cast a spell with mana value (\d+) or less from your hand without paying its mana cost\.$/i.exec(s);
+  if (freeFromHand !== null) {
+    return {
+      kind: "cast-now",
+      from: "hand",
+      free: true,
+      ...(freeFromHand[1] !== undefined ? { spell: { manaValue: { op: "lte", n: Number(freeFromHand[1]) } } } : {}),
+    };
+  }
+  // "Clash with defending player" (Marvo, Deep Operative): the opponent the
+  // attacking source names (rule 701.30b, 508.5), not one chosen.
+  if (/^clash with defending player\.$/i.test(s) && ctx?.it === "source") {
+    return { kind: "clash", with: { defendingPlayerOf: "source" } };
   }
   // "Exile that card [and create a 2/2 black Zombie creature token]": the card
   // a put-into-a-graveyard trigger is about, found in that graveyard and

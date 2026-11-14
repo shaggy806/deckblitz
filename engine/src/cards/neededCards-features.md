@@ -374,6 +374,10 @@ The combat-targeting lane's group of attack-history reads (B322's group).
   don't count, the ruling), and `damage-rule`'s `"until-end-of-combat"`
   duration (511.2). Suppressor Skyguard.
   `test/unattacked-opponent-condition.test.ts`.
+- `effect:clash-with-named-opponent` — `clash`'s `with`, a `PlayerRef`: the
+  opponent named instead of chosen (rule 701.30b), nobody asked. Marvo, Deep
+  Operative's "clash with defending player" (`{ defendingPlayerOf: "source"
+  }`). `test/clash-with-player.test.ts`.
 
 ### A reflexive ability's target read against its source now — fixed 2026-11-13
 

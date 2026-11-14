@@ -6913,6 +6913,11 @@ export type EffectSpec =
       readonly won?: EffectSpec;
       readonly lost?: EffectSpec;
       readonly repeat?: EffectSpec;
+      /** The opponent named instead of chosen: Marvo, Deep Operative's
+       * "clash with defending player" (`{ defendingPlayerOf: "source" }`).
+       * Nobody to clash with — they've left the game, or aren't an opponent —
+       * and there's no clash. */
+      readonly with?: PlayerRef;
       /** Engine-built, never authored: the opponent chosen, and — once the
        * cards are revealed — whether you won and who is still to choose
        * where their card goes. */
@@ -14553,8 +14558,14 @@ const MAX_CLASHES = 200;
  */
 function applyClash(spec: Extract<EffectSpec, { kind: "clash" }>, ctx: ResolutionContext): void {
   if (spec.opponent === undefined) {
-    // "Choose an opponent" (701.30b): not a target; asked only among several.
     const opponents = ctx.playersInScope("each-opponent");
+    // "Clash with defending player": that one opponent, if they still are one.
+    if (spec.with !== undefined) {
+      const named = resolvePlayerRef(spec.with, ctx);
+      if (named !== undefined && opponents.includes(named)) applyClash({ ...spec, opponent: named }, ctx);
+      return;
+    }
+    // "Choose an opponent" (701.30b): not a target; asked only among several.
     if (opponents.length === 0) return;
     if (opponents.length === 1) {
       applyClash({ ...spec, opponent: opponents[0] }, ctx);

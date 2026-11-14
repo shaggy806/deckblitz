@@ -11,6 +11,7 @@
     "effect:emblem-activated-abilities",
     "cost:exiled-card-effect-target",
     "amount:beheld-object-power",
+    "effect:clash-with-named-opponent",
     "condition:attacking-player-left-an-opponent-unattacked",
     "condition:attacked-player-this-turn-by-filter",
     "stat:had-to-attack-condition",

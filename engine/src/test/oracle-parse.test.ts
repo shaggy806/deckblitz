@@ -19025,6 +19025,30 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     });
   });
 
+  it("reads a clash with defending player, a clash won and a free cast from hand (Marvo, Deep Operative)", () => {
+    const face = parseFace({
+      name: "Marvo, Deep Operative",
+      type_line: "Legendary Creature — Octopus Rogue",
+      oracle_text:
+        "Whenever Marvo attacks, clash with defending player. (Each clashing player reveals the top card of their library, then puts that card on their choice of the top or bottom. A player wins if their card had a greater mana value.)\nWhenever you win a clash, draw a card. Then you may cast a spell from your hand with mana value 8 or less without paying its mana cost.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "attacks", who: "self" },
+      effect: { kind: "clash", with: { defendingPlayerOf: "source" } },
+    });
+    expect(face.triggered[1]).toMatchObject({
+      trigger: { on: "clashes", who: "you", won: true },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "draw", amount: 1 },
+          { kind: "cast-now", from: "hand", free: true, spell: { manaValue: { op: "lte", n: 8 } } },
+        ],
+      },
+    });
+  });
+
   it("reads an investigation, the first each turn (Erdwal Illuminator)", () => {
     expect(parseTrigger("Whenever you investigate for the first time each turn")).toEqual([
       { on: "event", event: "investigates", who: "you", firstTimeEachTurn: true },
