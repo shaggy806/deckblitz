@@ -14,7 +14,7 @@
  */
 
 import { STARTER_DECKS, commandersOf, nameForFlavorName } from 'engine/client'
-import type { SeatCommander } from 'protocol'
+import type { SeatCommander, WireDeck } from 'protocol'
 
 export interface SavedDeck {
   readonly id: string;
@@ -45,7 +45,24 @@ export interface SavedDeck {
    * sideboards existed.
    */
   readonly sideboard?: readonly string[];
+  /**
+   * The deck's Attraction deck (rule 717.2), apart from `cards`: each a name,
+   * or a name and the collector number of the printing whose lit numbers it
+   * brings (717.1). Absent on every deck saved before Attractions existed,
+   * and on most decks since.
+   */
+  readonly attractions?: readonly AttractionEntry[];
 }
+
+/** One card of an Attraction deck, as the wire carries it. */
+export type AttractionEntry = NonNullable<WireDeck['attractions']>[number]
+
+/** An Attraction deck entry's card name. */
+export const attractionName = (entry: AttractionEntry): string => (typeof entry === 'string' ? entry : entry.name)
+
+/** The collector number an entry names, or `null` for the card's first printing. */
+export const attractionCollector = (entry: AttractionEntry): string | null =>
+  typeof entry === 'string' ? null : (entry.collector ?? null)
 
 /** "In constructed play, a sideboard may contain no more than fifteen cards"
  * (rule 100.4a) — the server's cap too. */
@@ -201,6 +218,7 @@ export function createDeckFromImport(
   commanders: readonly string[] = [],
   printings?: Readonly<Record<string, string>>,
   sideboard: readonly string[] = [],
+  attractions: readonly AttractionEntry[] = [],
 ): SavedDeck {
   const deck: SavedDeck = {
     id: newId(),
@@ -209,6 +227,7 @@ export function createDeckFromImport(
     cards,
     commanders,
     ...(sideboard.length > 0 ? { sideboard } : {}),
+    ...(attractions.length > 0 ? { attractions } : {}),
     // Omitted entirely when the pasted list carried no printing suffixes, so
     // an imported deck looks like any other hand-built one.
     ...(printings && Object.keys(printings).length > 0 ? { printings } : {}),
@@ -283,6 +302,7 @@ export interface DeckContents {
   readonly cards: readonly string[]
   readonly printings?: Readonly<Record<string, string>>
   readonly sideboard?: readonly string[]
+  readonly attractions?: readonly AttractionEntry[]
 }
 
 /** A deck's commanders with the printing it brings for each — what the
@@ -330,6 +350,7 @@ export function listPickableDecks(): readonly PickableDeck[] {
       cards: d.cards,
       printings: d.printings,
       ...(d.sideboard !== undefined ? { sideboard: d.sideboard } : {}),
+      ...(d.attractions !== undefined ? { attractions: d.attractions } : {}),
     })),
     ...STARTER_DECKS.map((d, i) => ({
       key: `starter:${i}`,

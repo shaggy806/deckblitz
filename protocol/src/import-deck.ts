@@ -63,6 +63,21 @@ export interface ImportedCardReport {
   readonly printingId: string | null;
 }
 
+/** One line of a list's Attractions section (rule 717.2): no stand-in is
+ * looked for, since only an Attraction can take an Attraction's place. */
+export interface ImportedAttractionReport {
+  readonly name: string;
+  readonly count: number;
+  /** The pool has it, as an Attraction. A name the pool has that isn't one
+   * is reported here too, not implemented: it can't be in the Attraction
+   * deck. */
+  readonly implemented: boolean;
+  /** The collector number of the printing the line named ("200b"), when the
+   * card has one by that number — whose lit numbers it brings (717.1).
+   * `null` for the card's first printing. */
+  readonly collector: string | null;
+}
+
 /** `engine`'s `DeckValidationResult` plus the commanders the import settled
  * on — one, or two for a Partner pair; named in a `Commander` section, read
  * off Moxfield's trailing block, or guessed — the `format` field of the
@@ -87,5 +102,8 @@ export type ImportDeckLine =
       /** The list's sideboard (rule 100.4), row by row like `cards`:
        * a `Sideboard` section's cards, or `SB:` lines. Absent when it had none. */
       readonly sideboard?: readonly ImportedCardReport[];
+      /** The list's Attraction deck (rule 717.2): an `Attractions` section's
+       * lines, one row each. Absent when it had none. */
+      readonly attractions?: readonly ImportedAttractionReport[];
     }
   | { readonly type: "error"; readonly error: string };

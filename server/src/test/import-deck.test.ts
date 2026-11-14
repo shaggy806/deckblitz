@@ -170,6 +170,20 @@ describe("parseDecklistText", () => {
     ]);
   });
 
+  it("keeps an Attractions section apart, line by line with each printing's collector number", () => {
+    const parsed = parseDecklistText(
+      list("1 Forest", "", "Attractions", "1 Balloon Stand (UNF) 200b", "1 Balloon Stand", "", "1 Azusa, Lost but Seeking"),
+    );
+    expect(parsed.attractions).toEqual([
+      { name: "Balloon Stand", count: 1, collector: "200b" },
+      { name: "Balloon Stand", count: 1 },
+    ]);
+    expect(parsed.entries.map((e) => e.name)).toEqual(["Forest", "Azusa, Lost but Seeking"]);
+    // The section's lines are no block: the trailing commander is still read.
+    expect(parsed.commanders).toEqual(["Azusa, Lost but Seeking"]);
+    expect(parseDecklistText(list("Attraction deck", "1 Trash Bin")).attractions).toEqual([{ name: "Trash Bin", count: 1 }]);
+  });
+
   it("a blank line ends the Commander section even without a following header", () => {
     const text = ["Commander", "1 Alice", "", "1 Bob"].join("\n");
     expect(parseDecklistText(text).commanders).toEqual(["Alice"]);
@@ -810,6 +824,43 @@ describe("runImportJob", () => {
     const last = out.lines.at(-1) as { type: string; cards: { name: string }[]; sideboard?: { name: string }[] };
     expect(last.cards.map((c) => c.name)).toEqual(["Sol Ring", "Forest"]);
     expect(last.sideboard?.map((c) => c.name)).toEqual(["Burning Wish"]);
+  });
+
+  it("reports an Attractions section's rows apart, with each named printing and the Attraction deck's rules", async () => {
+    const { out, sink } = recorder();
+    await runImportJob(
+      [
+        "1 Sol Ring",
+        "1 Forest",
+        "",
+        "Attractions",
+        "1 Balloon Stand (UNF) 200C",
+        "1 Bumper Cars (UNF) 999",
+        "1 Costume Shop",
+        "1 Sol Ring",
+      ].join("\n"),
+      { registry, tags: () => null, cardData: () => null },
+      sink,
+    );
+    // Only the 99 count toward the progress and the deck's own rows.
+    expect(out.lines[0]).toEqual({ type: "progress", done: 0, total: 2, name: null });
+    const last = out.lines.at(-1) as {
+      cards: { name: string }[];
+      attractions?: { name: string; implemented: boolean; collector: string | null }[];
+      format: { legal: boolean; violations: string[] };
+    };
+    expect(last.cards.map((c) => c.name)).toEqual(["Sol Ring", "Forest"]);
+    expect(last.attractions).toEqual([
+      // The printing named, as the card spells it; one the card hasn't is its first.
+      { name: "Balloon Stand", count: 1, implemented: true, collector: "200c" },
+      { name: "Bumper Cars", count: 1, implemented: true, collector: null },
+      // Not in the pool, and not an Attraction: neither goes in the deck.
+      { name: "Costume Shop", count: 1, implemented: false, collector: null },
+      { name: "Sol Ring", count: 1, implemented: false, collector: null },
+    ]);
+    // Two Attractions are short of rule 717.2a's ten.
+    expect(last.format.legal).toBe(false);
+    expect(last.format.violations.some((v) => /at least 10 cards/.test(v))).toBe(true);
   });
 
   it("refuses a list it can't read before any line, and reports a later failure in-band", async () => {

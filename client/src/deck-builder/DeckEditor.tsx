@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import type { DragEvent, MouseEvent, ReactNode } from 'react'
 import type { CardDefinition, Color } from 'engine/client'
 import {
+  attractionDeckProblems,
   canCommandAlone,
   canPairCommanders,
   colorIdentityOf,
@@ -26,8 +27,9 @@ import type { MenuAnchor, MenuItem } from './CardContextMenu.tsx'
 import { matchesTerms, searchHaystack, searchTerms } from '../library/search.ts'
 import { PrintingPicker } from './PrintingPicker.tsx'
 import { ReplacementPicker } from './ReplacementPicker.tsx'
-import type { SavedDeck } from './decks.ts'
-import { MAX_SIDEBOARD, replaceCard } from './decks.ts'
+import type { AttractionEntry, SavedDeck } from './decks.ts'
+import { MAX_SIDEBOARD, attractionCollector, attractionName, replaceCard } from './decks.ts'
+import { AttractionLights } from '../ui/AttractionLights.tsx'
 
 const TYPE_FILTERS = [
   'creature',
@@ -81,6 +83,9 @@ function searchTextOf(def: CardDefinition): string {
  * saved before that filter existed can still name one, and such a row has to
  * render (and be removable) rather than showing up as an unknown card. */
 const cardNamed = (name: string): CardDefinition | undefined => cardPool().byName.get(name)
+
+/** An Attraction card (rule 717.1): it goes in the Attraction deck, never the 99. */
+const isAttraction = (def: CardDefinition | undefined): boolean => (def?.attractionLights?.length ?? 0) > 0
 
 /** Each card's colour identity (rule 903.4, every face's), worked out once:
  * the pool's colour filter reads thousands of them per keystroke. */
@@ -276,13 +281,46 @@ export function DeckEditor({
 
   const totalCount = deck.cards.length + deck.commanders.length
 
-  const legality = useMemo(
-    () =>
-      validateCommanderDeck({ commanders: deck.commanders, cards: deck.cards, size: DECK_SIZE }, cardPool().registry),
-    [deck.commanders, deck.cards],
-  )
+  const attractions = useMemo(() => deck.attractions ?? [], [deck.attractions])
 
-  const addCard = (cardName: string) => change({ ...deck, cards: [...deck.cards, cardName] })
+  const legality = useMemo(() => {
+    const result = validateCommanderDeck(
+      { commanders: deck.commanders, cards: deck.cards, size: DECK_SIZE },
+      cardPool().registry,
+    )
+    // The Attraction deck's own rules (717.2a) beside the 99's.
+    const attractionIssues = attractionDeckProblems(attractions.map(attractionName), cardPool().registry)
+    return attractionIssues.length === 0
+      ? result
+      : { ...result, legal: false, violations: [...result.violations, ...attractionIssues] }
+  }, [deck.commanders, deck.cards, attractions])
+
+  // The Attraction deck (rule 717.2): only Attractions, which never go in the
+  // 99, so an Attraction card's "add" puts it here.
+  const withAttractions = (next: readonly AttractionEntry[]): SavedDeck => ({
+    ...deck,
+    attractions: next.length === 0 ? undefined : next,
+  })
+  const addAttraction = (cardName: string) => change(withAttractions([...attractions, cardName]))
+  const removeAttraction = (index: number) => change(withAttractions(attractions.filter((_, i) => i !== index)))
+  const setAttractionPrinting = (index: number, collector: string | null) =>
+    change(
+      withAttractions(
+        attractions.map((entry, i) => {
+          if (i !== index) return entry
+          const name = attractionName(entry)
+          return collector === null ? name : { name, collector }
+        }),
+      ),
+    )
+  const attractionCounts = useMemo(() => {
+    const n = new Map<string, number>()
+    for (const entry of attractions) n.set(attractionName(entry), (n.get(attractionName(entry)) ?? 0) + 1)
+    return n
+  }, [attractions])
+
+  const addCard = (cardName: string) =>
+    isAttraction(cardNamed(cardName)) ? addAttraction(cardName) : change({ ...deck, cards: [...deck.cards, cardName] })
   const removeCard = (cardName: string) => {
     const i = deck.cards.indexOf(cardName)
     if (i === -1) return
@@ -380,7 +418,7 @@ export function DeckEditor({
    * handle and the click target, so that's the area a preview should follow
    * — catching the pointer only over the text made it feel broken anywhere
    * else along the row. */
-  const hoverProps = (def: CardDefinition | undefined) => {
+  const hoverProps = (def: CardDefinition | undefined, lights?: readonly number[] | null) => {
     if (def === undefined) return {}
     // The preview shows the printing this deck brings, not the pool's own
     // art — otherwise picking one gave no feedback anywhere in the builder.
@@ -393,6 +431,7 @@ export function DeckEditor({
         x: e.clientX,
         y: e.clientY,
         art: deck.printings?.[def.name] ?? null,
+        ...(lights !== undefined ? { lights } : {}),
         ...(list !== null ? { clearAbove: list.getBoundingClientRect().top } : {}),
       }
     }
@@ -630,7 +669,10 @@ export function DeckEditor({
 
           <ul className="db-card-list">
             {poolRows.map((c) => {
-              const n = counts.get(c.name) ?? 0
+              // An Attraction's add and count are the Attraction deck's.
+              const attraction = isAttraction(c)
+              const n = attraction ? (attractionCounts.get(c.name) ?? 0) : (counts.get(c.name) ?? 0)
+              const addLabel = attraction ? 'Add to Attraction deck' : 'Add to deck'
               const isThisCommander = deck.commanders.includes(c.name)
               return (
                 <li
@@ -646,7 +688,7 @@ export function DeckEditor({
                   {...hoverProps(c)}
                   {...menuProps(c, [
                     {
-                      label: 'Add to deck',
+                      label: addLabel,
                       onSelect: () => addCard(c.name),
                       disabled: isThisCommander,
                     },
@@ -659,9 +701,17 @@ export function DeckEditor({
                         ]
                       : []),
                     ...(n > 0
-                      ? [{ label: 'Remove one', onSelect: () => removeCard(c.name) }]
+                      ? [
+                          {
+                            label: 'Remove one',
+                            onSelect: () =>
+                              attraction
+                                ? removeAttraction(attractions.map(attractionName).lastIndexOf(c.name))
+                                : removeCard(c.name),
+                          },
+                        ]
                       : []),
-                    ...(belongsInSideboard(c)
+                    ...(!attraction && belongsInSideboard(c)
                       ? [{ label: 'Add to sideboard', onSelect: () => addToSideboard(c.name), disabled: !sideboardOpen }]
                       : []),
                   ])}
@@ -685,7 +735,7 @@ export function DeckEditor({
                     </button>
                   ) : null}
                   {n > 0 ? <span className="db-count mono">×{n}</span> : null}
-                  <button type="button" title="Add to deck" onClick={() => addCard(c.name)} disabled={isThisCommander}>
+                  <button type="button" title={addLabel} onClick={() => addCard(c.name)} disabled={isThisCommander}>
                     +
                   </button>
                 </li>
@@ -927,6 +977,64 @@ export function DeckEditor({
                             −
                           </button>
                         </>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
+
+          {/* The Attraction deck (rule 717.2): drawn once it has a card — an
+              Attraction's + in the pool puts one here. Each row picks its
+              printing, which decides the numbers it lights (717.1). */}
+          {attractions.length === 0 ? null : (
+            <div className="db-sideboard db-attractions" data-testid="db-attractions">
+              <div className="db-deck-group-head muted">Attraction deck · {attractions.length}</div>
+              <p className="db-commander-hint muted">
+                Attractions start in their own deck, ten or more with different names, and are opened onto the
+                battlefield by other cards.
+              </p>
+              <ul>
+                {attractions.map((entry, index) => {
+                  const name = attractionName(entry)
+                  const def = cardNamed(name)
+                  const printings = def?.attractionLights ?? []
+                  const collector = attractionCollector(entry)
+                  const printing = printings.find((p) => p.collector === collector) ?? printings[0]
+                  return (
+                    <li
+                      key={`${name}-${index}`}
+                      className={def === undefined || printings.length === 0 ? 'db-unknown-row' : undefined}
+                      {...hoverProps(def, printing?.lights ?? null)}
+                      {...menuProps(def, [{ label: 'Remove', onSelect: () => removeAttraction(index) }])}
+                    >
+                      <span className="db-card-name">{name}</span>
+                      <span className="db-card-row-spacer" />
+                      {printing !== undefined ? <AttractionLights lights={printing.lights} inline /> : null}
+                      {printings.length > 1 && !readOnly ? (
+                        <select
+                          className="db-attraction-printing"
+                          title="Which printing: each lights different numbers"
+                          value={printing?.collector ?? ''}
+                          onChange={(e) =>
+                            setAttractionPrinting(
+                              index,
+                              e.target.value === printings[0].collector ? null : e.target.value,
+                            )
+                          }
+                        >
+                          {printings.map((p) => (
+                            <option key={p.collector} value={p.collector}>
+                              #{p.collector}
+                            </option>
+                          ))}
+                        </select>
+                      ) : null}
+                      {readOnly ? null : (
+                        <button type="button" title="Remove" onClick={() => removeAttraction(index)}>
+                          −
+                        </button>
                       )}
                     </li>
                   )

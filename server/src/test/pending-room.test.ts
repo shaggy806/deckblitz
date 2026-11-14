@@ -96,6 +96,51 @@ describe("PendingRoom", () => {
     expect(claim({ cards: ["Forest"], sideboard: "Forest" as never })).toThrow("list of card names");
   });
 
+  it("carries an Attraction deck through to its DeckList, a bot's seat excepted, and refuses a card it can't make", () => {
+    const attractions = [{ name: "Balloon Stand", collector: "200b" }, "Bumper Cars", "Trash Bin"];
+    const room = pendingRoom();
+    room.claimSeat(ALICE, "alice-token", { send: () => {} }, undefined, { cards: ["Forest"], attractions });
+    room.addBot(BOB, { cards: ["Forest"], attractions: ["Bumper Cars"] });
+    const decks = room.toGameConfig().decks;
+    expect(decks.find((d) => d.player === ALICE)?.attractions).toEqual(attractions);
+    // Rule 717.2's deck is the player's: a bot plays without one.
+    expect(decks.find((d) => d.player === BOB)?.attractions).toBeUndefined();
+
+    const other = pendingRoom();
+    const claim = (deck: Parameters<PendingRoom["claimSeat"]>[4]) => () =>
+      other.claimSeat(ALICE, "alice-token", { send: () => {} }, undefined, deck);
+    expect(claim({ cards: ["Forest"], attractions: ["Sol Ring"] })).toThrow("isn't an Attraction card");
+    expect(claim({ cards: ["Forest"], attractions: ["Not A Real Card"] })).toThrow("doesn't know");
+    expect(claim({ cards: ["Forest"], attractions: [{ name: "Balloon Stand", collector: "999" }] })).toThrow(
+      "no printing 999",
+    );
+    expect(claim({ cards: ["Forest"], attractions: "Bumper Cars" as never })).toThrow("list of cards");
+    expect(claim({ cards: ["Forest"], attractions: [7] as never })).toThrow("a name, or a name and a collector number");
+  });
+
+  it("on, refuses an Attraction deck under ten cards or with a name twice (rule 717.2a)", () => {
+    const ten = [
+      "Balloon Stand",
+      "Bounce Chamber",
+      "Bumper Cars",
+      "Clown Extruder",
+      "Concession Stand",
+      "Foam Weapons Kiosk",
+      "Fortune Teller",
+      "Hall of Mirrors",
+      "Haunted House",
+      "Information Booth",
+    ];
+    const starter = { cards: SEATS[0].cards, commanders: SEATS[0].commanders };
+    const room = pendingRoom();
+    room.setSettings({ commanderLegalOnly: true });
+    const claim = (attractions: readonly string[]) => () =>
+      room.claimSeat(ALICE, "alice-token", { send: () => {} }, undefined, { ...starter, attractions }, true);
+    expect(claim(ten.slice(0, 9))).toThrow(/at least 10 cards/);
+    expect(claim([...ten.slice(0, 9), "Balloon Stand"])).toThrow(/different name/);
+    expect(claim(ten)).not.toThrow();
+  });
+
   it("carries a deck's chosen printings through to its DeckList and seat status", () => {
     const id = "3d3f4e6a-1c5d-4f8b-9a2e-7b1c0d5e6f70";
     const room = pendingRoom();

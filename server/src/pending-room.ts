@@ -16,7 +16,7 @@
  * null-checks through `Room`'s entire API for no benefit.
  */
 
-import { colorIdentityOf, commandersOf, validateCommanderDeck } from "engine/local";
+import { attractionDeckProblems, colorIdentityOf, commandersOf, validateCommanderDeck } from "engine/local";
 import { cardRegistry } from "./card-registry.js";
 import type { CardRegistry, Color, DeckList, GameConfig, PlayerId } from "engine/local";
 import { botNameFits, botNameFor } from "./bot-names.js";
@@ -91,11 +91,54 @@ function deckProblemOf(deck: PendingDeck | null): string | null {
   const result = validateCommanderDeck({ commanders: commandersOf(deck), cards: deck.cards, size: 100 }, registry());
   if (!result.legal) return result.violations[0] ?? "not a Commander-legal deck";
   const [banned] = result.banned;
-  return banned === undefined ? null : `"${banned}" is banned in Commander`;
+  if (banned !== undefined) return `"${banned}" is banned in Commander`;
+  // The Attraction deck's own rules (717.2a: ten or more, each a different
+  // name), beside the 99's.
+  const [attractionProblem] = attractionDeckProblems(attractionNames(deck), registry());
+  return attractionProblem ?? null;
+}
+
+/** The names in `deck`'s Attraction deck, a card each. */
+function attractionNames(deck: PendingDeck): readonly string[] {
+  return (deck.attractions ?? []).map((entry) => (typeof entry === "string" ? entry : entry.name));
+}
+
+/** The most cards an Attraction deck may bring: no rule caps it (717.2a sets
+ * only a floor), but every card is an object in the game, and the pool has
+ * fewer than thirty Attractions to tell apart. */
+const MAX_ATTRACTIONS = 60;
+
+/** `Game.create` makes each entry of a deck's Attraction deck from its
+ * definition's printings and throws on one it can't (`makeAttractionCard`),
+ * which would take the room down at promotion: so each is checked here, as
+ * it arrives — a list of names or `{ name, collector }`, each an Attraction
+ * the pool has, each named printing one the card has. */
+function assertAttractionsAreBuildable(deck: PendingDeck): void {
+  const entries: unknown = deck.attractions ?? [];
+  if (!Array.isArray(entries)) throw new Error("an Attraction deck is a list of cards");
+  if (entries.length > MAX_ATTRACTIONS) {
+    throw new Error(`an Attraction deck holds at most ${MAX_ATTRACTIONS} cards here, this one has ${entries.length}`);
+  }
+  for (const entry of entries as readonly unknown[]) {
+    const name = typeof entry === "string" ? entry : (entry as { name?: unknown } | null)?.name;
+    const collector = typeof entry === "string" ? undefined : (entry as { collector?: unknown } | null)?.collector;
+    if (typeof name !== "string" || (collector !== undefined && typeof collector !== "string")) {
+      throw new Error("an Attraction deck's card is a name, or a name and a collector number");
+    }
+    if (!registry().has(name)) throw new Error(`the Attraction deck has a card this server doesn't know: ${name}`);
+    const printings = registry().get(name).attractionLights;
+    if (printings === undefined || printings.length === 0) {
+      throw new Error(`"${name}" isn't an Attraction card, so it can't be in an Attraction deck (rule 717.2)`);
+    }
+    if (collector !== undefined && !printings.some((p) => p.collector === collector)) {
+      throw new Error(`${name} has no printing ${collector}`);
+    }
+  }
 }
 
 function assertDeckIsBuildable(deck: PendingDeck): void {
   assertPrintingsAreSafe(deck);
+  assertAttractionsAreBuildable(deck);
   const commanders = commandersOf(deck);
   // A game has room for one commander, or two (rule 903.3c); more would reach
   // `Game.create` and fail there, at promotion, for the whole table.
@@ -542,6 +585,11 @@ export class PendingRoom {
         commanders: commandersOf(s.deck),
         printings: s.deck.printings,
         ...(s.deck.sideboard !== undefined && s.deck.sideboard.length > 0 ? { sideboard: s.deck.sideboard } : {}),
+        // A bot plays without an Attraction deck (docs/plans/attractions.md),
+        // whatever deck the host handed it.
+        ...(!s.isBot && s.deck.attractions !== undefined && s.deck.attractions.length > 0
+          ? { attractions: s.deck.attractions }
+          : {}),
       };
     });
     const { startingLife, firstPlayer } = this.settings;

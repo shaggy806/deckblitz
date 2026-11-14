@@ -25,6 +25,7 @@ const toWire = (d: DeckContents): WireDeck => {
     name: d.name,
     printings: d.printings,
     ...(sideboard !== undefined ? { sideboard } : {}),
+    ...(d.attractions !== undefined && d.attractions.length > 0 ? { attractions: d.attractions } : {}),
   }
 }
 

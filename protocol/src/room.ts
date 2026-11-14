@@ -10,7 +10,7 @@
  * with, and both workspaces already depend on `engine`.
  */
 
-import type { Action, ArtManifestEntry, LegalAction, PlayerId, PlayerView, Step } from "engine";
+import type { Action, ArtManifestEntry, AttractionDeckEntry, LegalAction, PlayerId, PlayerView, Step } from "engine";
 import type { BuilderInfo, ScenarioSpec } from "./scenario.js";
 import type { TutorialInfo } from "./tutorial.js";
 
@@ -70,6 +70,14 @@ export interface WireDeck {
    * past. With `commanders` only companions count (903.5e: Commander games use
    * no sideboards; 702.139d): the game leaves out the rest. Absent means none. */
   readonly sideboard?: readonly string[];
+  /** The deck's Attraction deck (rule 717.2), apart from `cards`:
+   * `DeckList.attractions`, each a card name or a name and the collector
+   * number of the printing whose lit numbers it brings (717.1: two printings
+   * of one Attraction light different numbers). The server refuses an entry
+   * that isn't an Attraction it knows, or a printing the card hasn't; the
+   * deck's size and singleton rules (717.2a) are the Commander-legal check's.
+   * A bot's seat plays without one. Absent means none. */
+  readonly attractions?: readonly AttractionDeckEntry[];
 }
 
 /** A commander as the seat board shows it. */

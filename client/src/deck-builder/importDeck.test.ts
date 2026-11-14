@@ -99,3 +99,18 @@ describe('resolveImport — a sideboard', () => {
     expect(resolved.report.dropped).toEqual(['Nothing Like It'])
   })
 })
+
+describe('resolveImport — an Attraction deck', () => {
+  it('keeps each Attraction with the printing it named, out of the 99, and drops what the pool lacks', () => {
+    const resolved = resolveImport([card('Forest', { count: 3 })], null, [], [
+      { name: 'Balloon Stand', count: 1, implemented: true, collector: '200b' },
+      { name: 'Bumper Cars', count: 2, implemented: true, collector: null },
+      { name: 'Costume Shop', count: 1, implemented: false, collector: null },
+    ])
+    expect(resolved.cards).toEqual(['Forest', 'Forest', 'Forest'])
+    expect(resolved.attractions).toEqual([{ name: 'Balloon Stand', collector: '200b' }, 'Bumper Cars', 'Bumper Cars'])
+    expect(resolved.report.total).toBe(7)
+    expect(resolved.report.dropped).toEqual(['Costume Shop'])
+    expect(resolved.report.droppedCards).toBe(1)
+  })
+})

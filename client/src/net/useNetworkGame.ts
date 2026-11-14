@@ -546,7 +546,14 @@ export function useNetworkGame(): NetworkGame {
   const [blitzDeckSaved, setBlitzDeckSaved] = useState(false)
   const saveBlitzDeck = useCallback(() => {
     if (blitzDeck === null || blitzDeckSaved) return
-    createDeckFromImport(blitzDeck.name ?? 'Blitzed deck', blitzDeck.cards, blitzDeck.commanders ?? [], blitzDeck.printings)
+    createDeckFromImport(
+      blitzDeck.name ?? 'Blitzed deck',
+      blitzDeck.cards,
+      blitzDeck.commanders ?? [],
+      blitzDeck.printings,
+      [],
+      blitzDeck.attractions ?? [],
+    )
     setBlitzDeckSaved(true)
   }, [blitzDeck, blitzDeckSaved])
   const [blitzRoomId, setBlitzRoomId] = useState<string | null>(null)

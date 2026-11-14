@@ -42,8 +42,8 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
     setError(null)
     setPhase({ kind: 'importing', progress: null })
     importDecklist(text, (progress) => setPhase({ kind: 'importing', progress }))
-      .then(({ cards, format }) => {
-        const resolved = resolveImport(cards, format)
+      .then(({ cards, format, attractions }) => {
+        const resolved = resolveImport(cards, format, [], attractions)
         if (resolved.commanders.length === 0) {
           throw new Error(
             'No commander found in that list. Put it under a "Commander" heading, or on its own at the end.',
@@ -58,6 +58,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
             commanders: resolved.commanders,
             name: resolved.name,
             ...(Object.keys(resolved.printings).length > 0 ? { printings: resolved.printings } : {}),
+            ...(resolved.attractions.length > 0 ? { attractions: resolved.attractions } : {}),
           },
           {
             deckName: resolved.name,

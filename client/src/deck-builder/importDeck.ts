@@ -1,4 +1,11 @@
-import type { DeckFormatReport, ImportDeckLine, ImportedCardReport, ReplacementOption } from 'protocol'
+import type {
+  DeckFormatReport,
+  ImportDeckLine,
+  ImportedAttractionReport,
+  ImportedCardReport,
+  ReplacementOption,
+} from 'protocol'
+import type { AttractionEntry } from './decks.ts'
 
 // Same host/port convention as useNetworkGame's SERVER_URL, but http(s) for
 // this one-off request/response endpoint rather than the room's WebSocket.
@@ -74,6 +81,10 @@ export interface ResolvedImport {
   readonly printings: Readonly<Record<string, string>>
   /** The list's sideboard (rule 100.4), resolved the same way as the deck. */
   readonly sideboard: readonly string[]
+  /** The list's Attraction deck (rule 717.2), a card an entry: an Attraction
+   * the pool has is kept, with the printing the list named; anything else is
+   * dropped, since nothing but an Attraction can stand in for one. */
+  readonly attractions: readonly AttractionEntry[]
   readonly report: ImportReport
 }
 
@@ -103,6 +114,7 @@ export async function importDecklist(
   readonly cards: readonly ImportedCardReport[]
   readonly format: DeckFormatReport | null
   readonly sideboard: readonly ImportedCardReport[]
+  readonly attractions: readonly ImportedAttractionReport[]
 }> {
   const res = await fetch(importDeckUrl(), {
     method: 'POST',
@@ -122,6 +134,7 @@ export async function importDecklist(
     cards: readonly ImportedCardReport[]
     format: DeckFormatReport | null
     sideboard: readonly ImportedCardReport[]
+    attractions: readonly ImportedAttractionReport[]
   } | null = null
   let finished = false
   while (!finished) {
@@ -136,7 +149,14 @@ export async function importDecklist(
       if (part.trim() === '') continue
       const line = JSON.parse(part) as ImportDeckLine
       if (line.type === 'progress') onProgress(line)
-      else if (line.type === 'result') outcome = { cards: line.cards, format: line.format, sideboard: line.sideboard ?? [] }
+      else if (line.type === 'result') {
+        outcome = {
+          cards: line.cards,
+          format: line.format,
+          sideboard: line.sideboard ?? [],
+          attractions: line.attractions ?? [],
+        }
+      }
       else throw new Error(line.error)
     }
   }
@@ -154,6 +174,7 @@ export function resolveImport(
   cardReports: readonly ImportedCardReport[],
   format: DeckFormatReport | null,
   sideboardReports: readonly ImportedCardReport[] = [],
+  attractionReports: readonly ImportedAttractionReport[] = [],
 ): ResolvedImport {
   const commanderNames = format?.commanders ?? []
 
@@ -210,7 +231,19 @@ export function resolveImport(
     }
     for (let i = 0; i < c.count; i += 1) sideboard.push(resolvedName)
   }
-  const total = [...cardReports, ...sideboardReports].reduce((sum, c) => sum + c.count, 0)
+  // The Attraction deck, a card a copy, each with the printing it named.
+  const attractions: AttractionEntry[] = []
+  for (const a of attractionReports) {
+    if (!a.implemented) {
+      dropped.push(a.name)
+      droppedCards += a.count
+      continue
+    }
+    for (let i = 0; i < a.count; i += 1) {
+      attractions.push(a.collector === null ? a.name : { name: a.name, collector: a.collector })
+    }
+  }
+  const total = [...cardReports, ...sideboardReports, ...attractionReports].reduce((sum, c) => sum + c.count, 0)
 
   return {
     name: commanders.length > 0 ? `Imported: ${commanders.join(' & ')}` : 'Imported deck',
@@ -218,6 +251,7 @@ export function resolveImport(
     commanders,
     printings,
     sideboard,
+    attractions,
     report: {
       total,
       asIs: total - substitutedCards - droppedCards,

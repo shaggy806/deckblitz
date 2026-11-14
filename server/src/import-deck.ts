@@ -19,6 +19,7 @@
 
 import {
   assignReplacements,
+  attractionDeckProblems,
   canCommandAlone,
   canPairCommanders,
   colorIdentityOf,
@@ -36,6 +37,7 @@ import type {
 } from "engine";
 import type {
   DeckFormatReport,
+  ImportedAttractionReport,
   ImportedCardReport,
   PrintingRef,
   ReplacementOption,
@@ -58,12 +60,25 @@ export interface DecklistEntry {
   readonly printing?: PrintingRef;
 }
 
+/** One line of an `Attractions` section: "1 Balloon Stand (UNF) 200b". The
+ * printing suffix's collector number picks the printing whose lit numbers
+ * the card brings. */
+export interface AttractionLine {
+  readonly name: string;
+  readonly count: number;
+  readonly collector?: string;
+}
+
 export interface ParsedDecklist {
   readonly entries: readonly DecklistEntry[];
   /** The list's sideboard (rule 100.4) — a `Sideboard` section, or lines
    * written `SB: 1 Name` (MTGO) — kept apart from `entries`: cards outside
    * the game, which only a wish brings in. */
   readonly sideboard: readonly DecklistEntry[];
+  /** The list's Attraction deck (rule 717.2): an `Attractions` section, line
+   * by line rather than merged by name, since two lines of one name may
+   * name different printings (each lights different numbers, 717.1). */
+  readonly attractions: readonly AttractionLine[];
   /**
    * Card name(s) the list identifies as its commander(s), still included among
    * `entries` too so the commander gets an ordinary feasibility row.
@@ -158,6 +173,10 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
   const sideCounts = new Map<string, number>();
   const sidePrintings = new Map<string, PrintingRef>();
   let inSideboard = false;
+  // The Attraction deck, apart from both: a section of its own, ended the
+  // same way.
+  const attractions: AttractionLine[] = [];
+  let inAttractions = false;
   // Blank-line-separated runs of card lines. Moxfield writes the commander as
   // the last of these, alone and unlabelled, so the structure is the only clue
   // there is.
@@ -173,6 +192,7 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
     if (line === "") {
       inCommanderSection = false;
       inSideboard = false;
+      inAttractions = false;
       endBlock();
       continue;
     }
@@ -185,6 +205,9 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
       // An Arena or Moxfield list's "Companion" section is its card from outside
       // the game: the deck's sideboard, where the game offers it (rule 103.2b).
       inSideboard = /^(?:sideboard|companion):?$/i.test(line);
+      // Moxfield's and Archidekt's own section for the Attraction deck (rule
+      // 717.2): "Attractions", or "Attraction deck".
+      inAttractions = /^attractions?(?:\s+deck)?:?$/i.test(line);
       // A header starts a new block as surely as a blank line does.
       endBlock();
       continue;
@@ -195,6 +218,14 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
     // one — the pool, Scryfall, oracle tags, the format check — sees its
     // Oracle name. The printing it named is still that card's.
     const name = poolNameOf(nameForFlavorName(written) ?? written, registry);
+    if (inAttractions && sbLine === null) {
+      attractions.push({
+        name,
+        count: Number(match[1]),
+        ...(printing !== undefined ? { collector: printing.collectorNumber } : {}),
+      });
+      continue;
+    }
     if (inSideboard || sbLine !== null) {
       sideCounts.set(name, (sideCounts.get(name) ?? 0) + Number(match[1]));
       if (printing !== undefined && !sidePrintings.has(name)) sidePrintings.set(name, printing);
@@ -237,6 +268,7 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
       count,
       ...(sidePrintings.has(name) ? { printing: sidePrintings.get(name)! } : {}),
     })),
+    attractions,
     commanders,
   };
 }
@@ -834,6 +866,22 @@ export function formatCheck(
   return { ...result, commanders };
 }
 
+/** An `Attractions` section's lines as report rows: whether the pool has each
+ * as an Attraction (rule 717.1), and the printing its collector number names,
+ * when the card has that one — else its first, whose lights it then brings. */
+export function attractionReports(
+  lines: readonly AttractionLine[],
+  registry: CardRegistry,
+): readonly ImportedAttractionReport[] {
+  return lines.map((line) => {
+    const printings = registry.has(line.name) ? registry.get(line.name).attractionLights : undefined;
+    const implemented = printings !== undefined && printings.length > 0;
+    const named = line.collector?.toLowerCase();
+    const printing = named === undefined ? undefined : printings?.find((p) => p.collector.toLowerCase() === named);
+    return { name: line.name, count: line.count, implemented, collector: printing?.collector ?? null };
+  });
+}
+
 /** What an import job reads besides the list: the pool, and the two
  * read-once files a stand-in is chosen with. */
 export interface ImportDeps {
@@ -929,7 +977,7 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
   }
   let streaming = false;
   try {
-    const { entries, sideboard, commanders, commanderSource } = parseDecklistText(text, deps.registry);
+    const { entries, sideboard, attractions, commanders, commanderSource } = parseDecklistText(text, deps.registry);
     streaming = true;
     const total = entries.length + sideboard.length;
     sink.line({ type: "progress", done: 0, total, name: null });
@@ -951,8 +999,28 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
             (p) => sink.line({ type: "progress", ...p, done: entries.length + p.done, total }),
             evaluate,
           );
-    const format = formatCheck(entries, deps.registry, commanders, commanderSource);
-    sink.line({ type: "result", cards, format, ...(side.length > 0 ? { sideboard: side } : {}) });
+    const checked = formatCheck(entries, deps.registry, commanders, commanderSource);
+    const attractionRows = attractionReports(attractions, deps.registry);
+    // The Attraction deck's own rules (717.2a) beside the 99's, over the
+    // cards it will hold: only an Attraction the pool has is kept.
+    const attractionProblems =
+      attractions.length === 0
+        ? []
+        : attractionDeckProblems(
+            attractionRows.flatMap((r) => (r.implemented ? Array.from({ length: r.count }, () => r.name) : [])),
+            deps.registry,
+          );
+    const format: DeckFormatReport =
+      attractionProblems.length === 0
+        ? checked
+        : { ...checked, legal: false, violations: [...checked.violations, ...attractionProblems] };
+    sink.line({
+      type: "result",
+      cards,
+      format,
+      ...(side.length > 0 ? { sideboard: side } : {}),
+      ...(attractionRows.length > 0 ? { attractions: attractionRows } : {}),
+    });
     sink.end();
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);

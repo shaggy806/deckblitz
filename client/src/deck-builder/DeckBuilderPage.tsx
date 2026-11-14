@@ -317,14 +317,15 @@ function ImportPanel({
     setProgress(null)
     setError(null)
     importDecklist(text, setProgress)
-      .then(({ cards: cardReports, format, sideboard }) => {
-        const resolved = resolveImport(cardReports, format, sideboard)
+      .then(({ cards: cardReports, format, sideboard, attractions }) => {
+        const resolved = resolveImport(cardReports, format, sideboard, attractions)
         const deck = createDeckFromImport(
           resolved.name,
           resolved.cards,
           resolved.commanders,
           resolved.printings,
           resolved.sideboard,
+          resolved.attractions,
         )
         onImported(deck, resolved.report)
       })

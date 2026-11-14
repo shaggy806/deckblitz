@@ -37,6 +37,7 @@ export type { TutorialAllows, TutorialAnchor, TutorialCoachStep, TutorialGoal, T
 export type {
   DeckFormatReport,
   ImportDeckLine,
+  ImportedAttractionReport,
   ImportedCardReport,
   PrintingRef,
   ReplacementOption,
