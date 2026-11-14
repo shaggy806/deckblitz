@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4997 already implemented / 3 missing (marks refreshed 2026-11-14)
+4998 already implemented / 2 missing (marks refreshed 2026-11-14)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4865,7 +4865,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4872  Summon: Good King Mog XII                {4}{W}           Enchantment Creature — Saga Moogle
 [x]  4873  Hammerhead Tyrant                        {4}{U}{U}        Creature — Dragon
 [x]  4874  Faerie Artisans                          {3}{U}           Creature — Faerie Artificer
-[ ]  4875  Arvinox, the Mind Flail                  {4}{B}{B}{B}     Legendary Enchantment Creature — Horror
+[x]  4875  Arvinox, the Mind Flail                  {4}{B}{B}{B}     Legendary Enchantment Creature — Horror
 [x]  4876  Balefire Liege                           {2}{R/W}{R/W}{R/W} Creature — Spirit Horror
 [x]  4877  Treasure Chest                           {3}              Artifact
 [x]  4878  Zara, Renegade Recruiter                 {3}{U}{R}        Legendary Creature — Human Pirate
