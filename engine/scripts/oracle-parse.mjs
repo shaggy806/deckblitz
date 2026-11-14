@@ -3226,11 +3226,21 @@ function laterPointSentence(s, ctx) {
   return effect;
 }
 
+const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.$/i;
+
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
+  // "Create a 5/5 black Demon creature token with flying, then mill two
+  // cards." (Demonic Covenant): the two in order.
+  const createThenMill = CREATE_THEN_MILL.exec(s);
+  if (createThenMill !== null) {
+    const first = parseSentence(`${createThenMill[1]}.`, ctx);
+    const second = parseSentence(`${createThenMill[2][0].toUpperCase()}${createThenMill[2].slice(1)}.`, ctx);
+    return first === null || second === null ? null : { kind: "sequence", effects: [first, second] };
+  }
   // "For each player, search that player's library for a nonland card and
   // exile it, then that player shuffles" (Jace, Architect of Thought): one
   // search of every library, a find from each.
@@ -11732,6 +11742,25 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: made });
       continue;
     }
+    // "If two cards that share all their card types were milled this way,
+    // sacrifice this enchantment." (Demonic Covenant): the largest group
+    // sharing one — a colour, a card type, or the whole combination of them.
+    const sharedM = parsed.some((effect) => effect?.kind === "mill")
+      ? /^if two cards that share (a color|a card type|all their card types) were milled this way, (.+)$/i.exec(sentence)
+      : null;
+    const sharedThen =
+      sharedM === null ? null : parseSentence(`${sharedM[2][0].toUpperCase()}${sharedM[2].slice(1)}`, ctx);
+    if (sharedM !== null && sharedThen !== null && !containsUndefined(sharedThen)) {
+      const sharing = { "a color": "color", "a card type": "card-type", "all their card types": "all-card-types" }[sharedM[1].toLowerCase()];
+      const made = {
+        kind: "conditional",
+        condition: { kind: "this-way", what: "milled", sharing, atLeast: 2 },
+        then: sharedThen,
+      };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
     // "Each player mills a card. … Until end of turn, you may cast a spell
     // from among those cards." (Locke, Treasure Hunter): one cast shared among
     // the milled cards, wherever each went (rule 701.17c).
@@ -11972,7 +12001,10 @@ export function parseEffect(text, outer) {
       ctx.targets.length = before;
       todo.push(sentence);
     } else {
-      parsed.push(effect);
+      // "Create …, then mill two cards." is two steps of the ability's one
+      // sequence, so a later "milled this way" sentence reads the mill.
+      if (effect.kind === "sequence" && CREATE_THEN_MILL.test(sentence)) parsed.push(...effect.effects);
+      else parsed.push(effect);
       hints.push({ sentence, effect });
     }
   }

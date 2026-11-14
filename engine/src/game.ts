@@ -37287,7 +37287,12 @@ export class Game {
                 ? [...chars.colors]
                 : condition.sharing === "card-type"
                   ? [...chars.types]
-                  : [printedCardName(object)];
+                  : condition.sharing === "all-card-types"
+                    ? // The same combination exactly (the Demonic Covenant
+                      // ruling): an artifact creature shares none with a
+                      // creature here.
+                      [[...chars.types].sort().join(" ")]
+                    : [printedCardName(object)];
             for (const key of keys) groups.set(key, (groups.get(key) ?? 0) + entry.count);
           }
           done = Math.max(0, ...groups.values());

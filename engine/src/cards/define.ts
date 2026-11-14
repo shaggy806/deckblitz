@@ -1869,8 +1869,12 @@ export type StaticCondition =
        * (Grindstone), "…that share a card type" (The Tale of Tamiyo), "if
        * two or more of those cards have **the same name**" (Scalpelexis):
        * `atLeast` and `atMost` count the largest group of them that share
-       * one — a colour, a card type, or a name — rather than all of them. */
-      readonly sharing?: "color" | "card-type" | "name";
+       * one — a colour, a card type, or a name — rather than all of them.
+       * `"all-card-types"`: "two cards that **share all their card types**"
+       * (Demonic Covenant) — the same combination of card types exactly
+       * (rule 205.2a's; supertypes and subtypes aside, the ruling), so an
+       * artifact creature and a creature don't. */
+      readonly sharing?: "color" | "card-type" | "all-card-types" | "name";
     }
   /**
    * "If ~ is still on the battlefield" (Shirei, Shizo's Caretaker's delayed

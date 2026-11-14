@@ -15008,6 +15008,31 @@ describe("how one player's state compares with another's", () => {
     expect(ertha.effect).toEqual({ kind: "copy-ability", target: "trigger-ability", newTargets: true });
   });
 
+  it("create then mill, and two milled cards sharing all their card types (Demonic Covenant)", () => {
+    const covenant = parseFace(
+      {
+        name: "Test Covenant",
+        type_line: "Kindred Enchantment — Demon",
+        mana_cost: "{4}{B}{B}",
+        oracle_text:
+          "At the beginning of your end step, create a 5/5 black Demon creature token with flying, then mill two cards. If two cards that share all their card types were milled this way, sacrifice this enchantment.",
+      },
+      { tokenFor: () => "5/5 Demon Token" },
+    );
+    expect(covenant.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "create-token", token: "5/5 Demon Token", count: 1 },
+        { kind: "mill", target: "you", amount: 2 },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "milled", sharing: "all-card-types", atLeast: 2 },
+          then: { kind: "sacrifice-source" },
+        },
+      ],
+    });
+  });
+
   it("counters-put firing: per counter, and once for a placement", () => {
     const trigger = (line: string) => read("Creature", line).triggered[0].trigger;
     expect(trigger("Whenever a +1/+1 counter is put on ~, draw a card.")).toEqual({

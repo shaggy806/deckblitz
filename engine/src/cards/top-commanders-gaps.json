@@ -9,6 +9,7 @@
     "static:planeswalker-zero-loyalty-survives",
     "replacement:villainous-choice-additional-time",
     "trigger:activates-ability-targeting",
+    "condition:milled-share-all-card-types",
     "condition:crewed-by-filter-as-tapped",
     "cost:spend-mana-as-any-color",
     "effect:targets-different-mana-values",
