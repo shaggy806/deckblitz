@@ -736,6 +736,7 @@ import _poolShriekgeist from "../pool/shriekgeist.js";
 import _poolShuEliteCompanions from "../pool/shu-elite-companions.js";
 import _poolSilentAttendant from "../pool/silent-attendant.js";
 import _poolSilkwingScout from "../pool/silkwing-scout.js";
+import _poolSilverScrutiny from "../pool/silver-scrutiny.js";
 import _poolSimianSling from "../pool/simian-sling.js";
 import _poolSisterOfSilence from "../pool/sister-of-silence.js";
 import _poolSizzlingBarrage from "../pool/sizzling-barrage.js";
@@ -1725,6 +1726,7 @@ const shard: CardShard = {
     _poolShuEliteCompanions,
     _poolSilentAttendant,
     _poolSilkwingScout,
+    _poolSilverScrutiny,
     _poolSimianSling,
     _poolSisterOfSilence,
     _poolSizzlingBarrage,

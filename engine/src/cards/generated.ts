@@ -18480,6 +18480,7 @@ import _poolNetherVoid from "./pool/nether-void.js";
 import _poolNetherbornAltar from "./pool/netherborn-altar.js";
 import _poolNetherbornPhalanx from "./pool/netherborn-phalanx.js";
 import _poolNetheresePuzzleWard from "./pool/netherese-puzzle-ward.js";
+import _poolNethergoyf from "./pool/nethergoyf.js";
 import _poolNethroiApexOfDeath from "./pool/nethroi-apex-of-death.js";
 import _poolNetterEnDal from "./pool/netter-en-dal.js";
 import _poolNettleDrone from "./pool/nettle-drone.js";
@@ -22129,6 +22130,7 @@ import _poolReturnOfTheMoleMan from "./pool/return-of-the-mole-man.js";
 import _poolReturnOfTheNightstalkers from "./pool/return-of-the-nightstalkers.js";
 import _poolReturnOfTheWildspeaker from "./pool/return-of-the-wildspeaker.js";
 import _poolReturnTheFavor from "./pool/return-the-favor.js";
+import _poolReturnThePast from "./pool/return-the-past.js";
 import _poolReturnToAction from "./pool/return-to-action.js";
 import _poolReturnToBattle from "./pool/return-to-battle.js";
 import _poolReturnToDust from "./pool/return-to-dust.js";
@@ -24660,6 +24662,7 @@ import _poolSilverKnight from "./pool/silver-knight.js";
 import _poolSilverMyr from "./pool/silver-myr.js";
 import _poolSilverRaven from "./pool/silver-raven.js";
 import _poolSilverSableMercenaryLeader from "./pool/silver-sable-mercenary-leader.js";
+import _poolSilverScrutiny from "./pool/silver-scrutiny.js";
 import _poolSilverSeraph from "./pool/silver-seraph.js";
 import _poolSilverShroudCostume from "./pool/silver-shroud-costume.js";
 import _poolSilverSurferGalactussHerald from "./pool/silver-surfer-galactuss-herald.js";
@@ -31582,6 +31585,7 @@ import _poolWinnowing from "./pool/winnowing.js";
 import _poolWinotaJoinerOfForces from "./pool/winota-joiner-of-forces.js";
 import _poolWinterBlast from "./pool/winter-blast.js";
 import _poolWinterCursedRider from "./pool/winter-cursed-rider.js";
+import _poolWinterCynicalOpportunist from "./pool/winter-cynical-opportunist.js";
 import _poolWinterEladrin from "./pool/winter-eladrin.js";
 import _poolWinterMisanthropicGuide from "./pool/winter-misanthropic-guide.js";
 import _poolWinterMoon from "./pool/winter-moon.js";
@@ -51512,6 +51516,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNetherbornAltar,
   _poolNetherbornPhalanx,
   _poolNetheresePuzzleWard,
+  _poolNethergoyf,
   _poolNethroiApexOfDeath,
   _poolNetterEnDal,
   _poolNettleDrone,
@@ -55161,6 +55166,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReturnOfTheNightstalkers,
   _poolReturnOfTheWildspeaker,
   _poolReturnTheFavor,
+  _poolReturnThePast,
   _poolReturnToAction,
   _poolReturnToBattle,
   _poolReturnToDust,
@@ -57692,6 +57698,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilverMyr,
   _poolSilverRaven,
   _poolSilverSableMercenaryLeader,
+  _poolSilverScrutiny,
   _poolSilverSeraph,
   _poolSilverShroudCostume,
   _poolSilverSurferGalactussHerald,
@@ -64614,6 +64621,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWinotaJoinerOfForces,
   _poolWinterBlast,
   _poolWinterCursedRider,
+  _poolWinterCynicalOpportunist,
   _poolWinterEladrin,
   _poolWinterMisanthropicGuide,
   _poolWinterMoon,
@@ -84557,6 +84565,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/netherborn-altar": _poolNetherbornAltar,
   "pool/netherborn-phalanx": _poolNetherbornPhalanx,
   "pool/netherese-puzzle-ward": _poolNetheresePuzzleWard,
+  "pool/nethergoyf": _poolNethergoyf,
   "pool/nethroi-apex-of-death": _poolNethroiApexOfDeath,
   "pool/netter-en-dal": _poolNetterEnDal,
   "pool/nettle-drone": _poolNettleDrone,
@@ -88206,6 +88215,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/return-of-the-nightstalkers": _poolReturnOfTheNightstalkers,
   "pool/return-of-the-wildspeaker": _poolReturnOfTheWildspeaker,
   "pool/return-the-favor": _poolReturnTheFavor,
+  "pool/return-the-past": _poolReturnThePast,
   "pool/return-to-action": _poolReturnToAction,
   "pool/return-to-battle": _poolReturnToBattle,
   "pool/return-to-dust": _poolReturnToDust,
@@ -90737,6 +90747,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silver-myr": _poolSilverMyr,
   "pool/silver-raven": _poolSilverRaven,
   "pool/silver-sable-mercenary-leader": _poolSilverSableMercenaryLeader,
+  "pool/silver-scrutiny": _poolSilverScrutiny,
   "pool/silver-seraph": _poolSilverSeraph,
   "pool/silver-shroud-costume": _poolSilverShroudCostume,
   "pool/silver-surfer-galactuss-herald": _poolSilverSurferGalactussHerald,
@@ -97659,6 +97670,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/winota-joiner-of-forces": _poolWinotaJoinerOfForces,
   "pool/winter-blast": _poolWinterBlast,
   "pool/winter-cursed-rider": _poolWinterCursedRider,
+  "pool/winter-cynical-opportunist": _poolWinterCynicalOpportunist,
   "pool/winter-eladrin": _poolWinterEladrin,
   "pool/winter-misanthropic-guide": _poolWinterMisanthropicGuide,
   "pool/winter-moon": _poolWinterMoon,

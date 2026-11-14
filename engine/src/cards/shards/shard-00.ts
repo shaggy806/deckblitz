@@ -678,6 +678,7 @@ import _poolReplicator from "../pool/replicator.js";
 import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
 import _poolReturnOfTheNightstalkers from "../pool/return-of-the-nightstalkers.js";
+import _poolReturnThePast from "../pool/return-the-past.js";
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
 import _poolRhizomeLurcher from "../pool/rhizome-lurcher.js";
 import _poolRhox from "../pool/rhox.js";
@@ -1715,6 +1716,7 @@ const shard: CardShard = {
     _poolReset,
     _poolRestlessFortress,
     _poolReturnOfTheNightstalkers,
+    _poolReturnThePast,
     _poolRevelInRiches,
     _poolRhizomeLurcher,
     _poolRhox,

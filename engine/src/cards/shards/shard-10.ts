@@ -989,6 +989,7 @@ import _poolWillowElf from "../pool/willow-elf.js";
 import _poolWiltLeafLiege from "../pool/wilt-leaf-liege.js";
 import _poolWindDancer from "../pool/wind-dancer.js";
 import _poolWinterCursedRider from "../pool/winter-cursed-rider.js";
+import _poolWinterCynicalOpportunist from "../pool/winter-cynical-opportunist.js";
 import _poolWinterTeamPlayer from "../pool/winter-team-player.js";
 import _poolWishingWell from "../pool/wishing-well.js";
 import _poolWishmonger from "../pool/wishmonger.js";
@@ -2018,6 +2019,7 @@ const shard: CardShard = {
     _poolWiltLeafLiege,
     _poolWindDancer,
     _poolWinterCursedRider,
+    _poolWinterCynicalOpportunist,
     _poolWinterTeamPlayer,
     _poolWishingWell,
     _poolWishmonger,

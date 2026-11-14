@@ -611,6 +611,7 @@ import _poolNecklaceOfGirion from "../pool/necklace-of-girion.js";
 import _poolNecratog from "../pool/necratog.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNestingWurm from "../pool/nesting-wurm.js";
+import _poolNethergoyf from "../pool/nethergoyf.js";
 import _poolNexos from "../pool/nexos.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNightMarketGuard from "../pool/night-market-guard.js";
@@ -1662,6 +1663,7 @@ const shard: CardShard = {
     _poolNecratog,
     _poolNessianBoar,
     _poolNestingWurm,
+    _poolNethergoyf,
     _poolNexos,
     _poolNickValentinePrivateEye,
     _poolNightMarketGuard,
