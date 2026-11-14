@@ -456,6 +456,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "either", MINOR);
     v.child(n.else);
   },
+  // Put into the attack (Midnight Crusader Shuttle's stolen creature): one
+  // more attacker for its controller.
+  "is-attacking": (n, v) => v.touch(n.target, "help", MINOR),
   // A commander a delayed trigger takes home (Hellkite Courser): the
   // controller's own, sent back as the card says, never a choice to weigh.
   "put-in-command-zone": (n, v) => v.touch(n.target, "either", MINOR),

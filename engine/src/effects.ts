@@ -7174,6 +7174,26 @@ export type EffectSpec =
       readonly else?: EffectSpec;
     }
   | {
+      /**
+       * "**It's attacking** that player" of a creature already on the
+       * battlefield (rule 508.4: "if an effect states that a creature is
+       * attacking") — Midnight Crusader Shuttle's "gain control of a creature
+       * of your choice that player controls until end of turn. If you gain
+       * control of a creature this way, tap it, and it's attacking that
+       * player". `at` is what it attacks, as a creature put onto the
+       * battlefield attacking has it (`EnterAttacking`): `"choose"` lets its
+       * controller pick among the defending players and their planeswalkers.
+       * It was never declared, so no "attacks" trigger sees it (508.3a) and
+       * no attack requirement or restriction applies (508.4c). Only a
+       * creature its controller controls as the attacking player, during
+       * combat, attacks at all (506.3b), and only a player still in the game
+       * (508.4b): otherwise nothing happens.
+       */
+      readonly kind: "is-attacking";
+      readonly target: ObjectRef;
+      readonly at: EnterAttacking;
+    }
+  | {
       /** `target` assigns combat damage equal to its toughness rather than
        * its power until end of turn (rule 510.1a — Walking Bulwark). Its
        * power is unchanged for everything else. The static form is
@@ -13336,6 +13356,9 @@ export interface EffectApi {
    * — see the `"attack-random-opponent"` {@link EffectSpec}. `false` when
    * there was nobody to pick; `true` otherwise, `target` gone included. */
   attackRandomOpponent(target: ObjectId, notAttackedLastCombat: boolean): boolean;
+  /** Creature `target` is attacking as `how` says — see the `"is-attacking"`
+   * {@link EffectSpec}. */
+  putIntoAttack(target: ObjectId, how: ResolvedEnterAttacking): void;
   /** The game becomes day or night (rule 726). */
   setDayNight(value: "day" | "night"): void;
   /** The source permanent notes `value` (a number, or a mana type) — see the
@@ -20055,6 +20078,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (target?.kind !== "object") return;
       const chosen = ctx.attackRandomOpponent(target.object, spec.notAttackedLastCombat === true);
       if (!chosen && spec.else !== undefined) applyEffectSpec(spec.else, ctx);
+      return;
+    }
+    case "is-attacking": {
+      const target = objectRefAct(spec.target, ctx);
+      const how = resolveEnterAttacking(spec.at, ctx);
+      if (target?.kind === "object" && how !== undefined) ctx.putIntoAttack(target.object, how);
       return;
     }
     case "put-in-command-zone": {

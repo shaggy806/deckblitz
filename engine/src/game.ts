@@ -37780,6 +37780,12 @@ export class Game {
       },
       attackRandomOpponent: (target, notAttackedLastCombat) =>
         this.attackRandomOpponent(controller, target, notAttackedLastCombat),
+      // "It's attacking that player" (rule 508.4): its controller's, as the
+      // attacking player, or nothing (506.3b).
+      putIntoAttack: (target, how) => {
+        const object = this.state.objects[target];
+        if (object?.zone === "battlefield") this.putIntoAttack([target], object.controller, how);
+      },
       pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
       // An `{ amount }` in it is read in this resolution (Triple Triad's
       // "lesser mana value than" the card exiled this way).

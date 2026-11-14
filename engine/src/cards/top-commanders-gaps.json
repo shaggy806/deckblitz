@@ -7,6 +7,7 @@
     "effect:targets-different-mana-values",
     "keyword:casualty-x",
     "cost:spell-additional-cost-remove-counters",
+    "effect:put-into-combat-attacking",
     "amount:creatures-crewed-it-this-turn",
     "effect:amount-total-power-died-this-turn",
     "condition:cycled-named-card-this-game",
