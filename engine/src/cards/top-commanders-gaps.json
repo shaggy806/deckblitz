@@ -7,6 +7,8 @@
     "effect:delayed-trigger-targets",
     "effect:delayed-step-chooses-targets",
     "effect:delayed-trigger-dealt-damage-this-way-dies",
+    "decision:each-player-chooses-exiled-card",
+    "effect:repeat-until-no-player-acts",
     "effect:voter-chooses-permanent",
     "effect:delayed-trigger-watching-bolstered",
     "trigger:leaves-put-onto-battlefield-by-source",

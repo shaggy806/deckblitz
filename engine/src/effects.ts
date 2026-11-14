@@ -7084,6 +7084,38 @@ export type EffectSpec =
     }
   | {
       /**
+       * Players take turns choosing from one pile until it's gone: "starting
+       * with you, each player chooses one of the exiled cards and puts it
+       * onto the battlefield tapped under their control. Repeat this process
+       * until all cards exiled this way have been chosen" (Thieves' Auction).
+       * The pile is the cards this resolution has exiled so far
+       * (`"exiled-this-way"`), fixed as this begins, each one only while it's
+       * still in exile as that object (rule 400.7) and not yet chosen. From
+       * the effect's controller, in turn order, each player in the game
+       * chooses one card — a `choose-from-zone` among those that could enter
+       * under their control — and it enters the battlefield under their
+       * control (rule 110.2a), tapped with `enterTapped`; an Aura's player
+       * chooses what it enchants as it enters (303.4f). A player with no card
+       * they could put there chooses none and the turn passes (Thieves'
+       * Auction's ruling: "you can't pick a card that can't legally be
+       * returned"); it ends when no player could choose any, so an Aura with
+       * nothing to enchant stays in exile (303.4g). Triggers wait for the
+       * whole process, as for any resolution.
+       */
+      readonly kind: "take-turns-choosing";
+      readonly pile: "exiled-this-way";
+      readonly destination: "battlefield";
+      readonly enterTapped?: true;
+      /** Engine-built, never authored: the pile as it began (each card with
+       * its zone-change count then), the order of turns, and whose is next. */
+      readonly progress?: {
+        readonly pile: readonly { readonly card: ObjectId; readonly stint: number }[];
+        readonly order: readonly PlayerId[];
+        readonly next: number;
+      };
+    }
+  | {
+      /**
        * "Clash with an opponent. If you win, [won]" (rule 701.30, Lorwyn
        * block): the effect's controller chooses an opponent (701.30b — not a
        * target; with one opponent nobody is asked), then both reveal the top
@@ -12388,9 +12420,10 @@ export interface EffectApi {
   putOnLibrary(target: TargetRef, position: LibraryPosition): void;
   /** Set up a delayed triggered ability — see the `"delayed-trigger"`
    * {@link EffectSpec}. `controller` is who will control it when it fires. */
-  /** Whether this card, returned under its owner's control, could stay on the
-   * battlefield: an Aura needs something to enchant (rule 303.4g). */
-  couldEnterBattlefield(card: ObjectId): boolean;
+  /** Whether this card, put onto the battlefield under its owner's control
+   * (or `under` this player's), could stay there: an Aura needs something to
+   * enchant (rule 303.4g). */
+  couldEnterBattlefield(card: ObjectId, under?: PlayerId): boolean;
   delayTrigger(
     at:
       | DelayedStepWatch
@@ -15411,6 +15444,61 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
     };
     if (!pendingBefore && pass.decisionPending()) {
       pass.resumeAfterDecisions({ ...spec, progress }, parked);
+      return;
+    }
+  }
+}
+
+/**
+ * A `take-turns-choosing`: the pile fixed as it begins, then one player's
+ * turn after another from the effect's controller, each a one-card
+ * `look-and-choose` among the pile's cards that could enter under them —
+ * parked while it's asked, resumed with whose turn is next. It ends when no
+ * player in the game could choose any card left.
+ */
+function applyTakeTurnsChoosing(spec: Extract<EffectSpec, { kind: "take-turns-choosing" }>, ctx: ResolutionContext): void {
+  const progress = spec.progress ?? {
+    pile: ctx.cardsExiledThisWay(true).map((card) => ({ card, stint: ctx.zoneChangeCountOf(card) ?? 0 })),
+    // "Starting with you", then in turn order (rule 101.4).
+    order: eachPlayerMayAsks("each-player", ctx, true),
+    next: 0,
+  };
+  // Each turn chooses a card or passes; a card chosen that didn't leave is
+  // chosen all the same ("until all cards … have been chosen").
+  for (let next = progress.next; next < progress.order.length * (progress.pile.length + 1); next += 1) {
+    const chosen = new Set(ctx.exiledCardsMatching({ thisWay: "chosen" }));
+    // Still in exile as the object exiled (rule 400.7), and not chosen yet.
+    const left = progress.pile
+      .filter(({ card, stint }) => ctx.stillExiled(card, stint).length > 0 && !chosen.has(card))
+      .map(({ card }) => card);
+    const inGame = ctx.playersInScope("each-player");
+    const players = progress.order.filter((p) => inGame.includes(p));
+    const could = (player: PlayerId): ObjectId[] => left.filter((card) => ctx.couldEnterBattlefield(card, player));
+    // Nobody could choose any: what's left stays in exile (rule 303.4g).
+    if (!players.some((p) => could(p).length > 0)) return;
+    const player = progress.order[next % progress.order.length];
+    if (!players.includes(player)) continue;
+    const eligible = could(player);
+    // One who can't choose any passes the turn (the card's ruling).
+    if (eligible.length === 0) continue;
+    const parked = ctx.parkedCount();
+    const pendingBefore = ctx.decisionPending();
+    applyEffectSpec(
+      {
+        kind: "look-and-choose",
+        zone: "targets",
+        exiledThatCanEnter: true,
+        player: "that-player",
+        min: 1,
+        max: 1,
+        destination: spec.destination,
+        leftover: "stay",
+        ...(spec.enterTapped === true ? { enterTapped: true } : {}),
+      },
+      ctx.aboutPlayer(player).withTargets(eligible.map((card): TargetRef => ({ kind: "object", object: card }))),
+    );
+    if (!pendingBefore && ctx.decisionPending()) {
+      ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, next: next + 1 } }, parked);
       return;
     }
   }
@@ -20723,6 +20811,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "repeat":
       applyRepeat(spec, ctx);
       return;
+    case "take-turns-choosing":
+      applyTakeTurnsChoosing(spec, ctx);
+      return;
     case "prohibit": {
       const lasts = resolvePlayerDuration(spec.duration ?? "end-of-turn", ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
       if (lasts === undefined) return;
@@ -22875,8 +22966,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.zone === "targets"
           ? spec.exiledThatCanEnter === true
             ? {
+                // Under whoever it would enter under: an Aura's "enchant
+                // creature you control" reads them (rule 303.4g).
                 exiled: ctx.targets.flatMap((t, slot) =>
-                  t?.kind === "object" && !illegalSlot(slot, ctx) && ctx.couldEnterBattlefield(t.object) ? [t.object] : [],
+                  t?.kind === "object" &&
+                  !illegalSlot(slot, ctx) &&
+                  ctx.couldEnterBattlefield(
+                    t.object,
+                    spec.under === "owners" ? undefined : spec.under === "you" ? ctx.controller : (picker ?? chooser ?? ctx.controller),
+                  )
+                    ? [t.object]
+                    : [],
                 ),
               }
             : { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }

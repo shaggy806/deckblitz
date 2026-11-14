@@ -216,6 +216,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "for-each-vote": (n, v) => v.child(n.effect),
   "with-choices": (n, v) => v.child(n.effect),
   repeat: (n, v) => v.child(n.effect),
+  // Every player takes from one pile: it helps whoever chooses, no target.
+  "take-turns-choosing": none,
   "for-each-voted": none,
   "for-target": (n, v) => v.child(n.effect),
   // Its slot `as` is each permanent in turn, not the spell's target, so a

@@ -16489,14 +16489,15 @@ export class Game {
    * `canEnchantPlayer`'s question.
    */
   /** See `ResolutionContext.couldEnterBattlefield`. */
-  private couldEnterBattlefield(card: ObjectId): boolean {
+  private couldEnterBattlefield(card: ObjectId, under?: PlayerId): boolean {
     const object = this.state.objects[card];
     if (object === undefined) return false;
     const def = this.registry.get(printedCardName(object));
     if (!def.subtypes.includes("Aura")) return true;
+    const controller = under ?? object.owner;
     return (
-      this.enchantableObjects(def).some((host) => this.canEnchant(card, host, object.owner, def)) ||
-      this.state.turnOrder.some((player) => this.canEnchantPlayer(card, player, object.owner, def))
+      this.enchantableObjects(def).some((host) => this.canEnchant(card, host, controller, def)) ||
+      this.state.turnOrder.some((player) => this.canEnchantPlayer(card, player, controller, def))
     );
   }
 
@@ -40142,7 +40143,7 @@ export class Game {
         };
       },
       fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
-      couldEnterBattlefield: (card) => this.couldEnterBattlefield(card),
+      couldEnterBattlefield: (card, under) => this.couldEnterBattlefield(card, under),
       counterSpell: (target, into, lockSource, timeCounters) =>
         this.counterSpellByEffect(target, into, lockSource === true, controller, timeCounters, source),
       spellCantBeCountered: (spell) => {
