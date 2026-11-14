@@ -312,6 +312,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
+- **`exile-from-library.spec.ts` times out under load** — its 4-player peel tests (lines 181, 245) failed three times on 2026-11-14 while four agents ran, and passed each time alone; a load flake in the Playwright quick set.
 - **`bot:ab` runs out of worker memory** (2026-11-11): 39 of the first 40 games ended "JS heap
   out of memory" at 18 workers, with no change to the state's shape between the two builds
   (`e62e9ba2c` against the commit after it). Each worker holds two builds, so two card pools of
