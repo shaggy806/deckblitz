@@ -322,6 +322,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A granted draw replacement — built 2026-11-14
+
+The key `static:grants-replacement-effect` needed no engine code: a `grantsStatic` whose static is a
+`would-draw` `{ effect }` replacement is read through `staticsOfSource` in
+`drawEffectReplacementsFor`, from the commander that has it (rule 113.10). The triage's "never
+applied" was the harness: `table()` starts after alice's draw step, so a `firstEachTurn` replacement
+has nothing left to replace that turn. Scion of Halaster (rank 9496).
+`test/grants-replacement-effect.test.ts`.
+
 ### An enters-with count of hands that counts the card itself — built 2026-11-14
 
 The key `amount:entering-card-counts-itself-in-hand`. `Game.enteringCounterAmount` reads

@@ -5883,7 +5883,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   timestamps; a later loss of all abilities takes it away (613.7). Read
   through `grantedStatics`, so it reaches the layer fold (P/T, keywords,
   restrictions), "can't lose the game", untap restrictions and block rules,
-  and an `others-enter-battlefield` replacement; an `enters-battlefield` one
+  an `others-enter-battlefield` replacement, and a `would-draw` `{ effect }`
+  one (Scion of Halaster's commander: "you" its controller; a `firstEachTurn`
+  one needs a test on a later turn, since `table()` starts after alice's
+  draw); an `enters-battlefield` one
   ("this creature enters with an additional +1/+1 counter") applies as the
   object enters when it'll have the grant there (rule 614.12,
   `enteringGrantedStatics` — Master Chef) — but not a cost modification
