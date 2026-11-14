@@ -92,7 +92,9 @@ export function playerCountersRemovedSince(
   const whose = players === undefined ? undefined : new Set(players);
   let removed = 0;
   for (const event of eventsSince(state, since)) {
-    if (event.type !== "player-counters-changed" || event.delta >= 0) continue;
+    // Energy is a player's counter too (rule 122.1), kept and announced
+    // apart (`PlayerState.energy`): Mutated Cultist's ruling counts it.
+    if ((event.type !== "player-counters-changed" && event.type !== "energy-changed") || event.delta >= 0) continue;
     if (whose === undefined || whose.has(event.player)) removed -= event.delta;
   }
   return removed;
