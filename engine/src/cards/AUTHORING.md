@@ -3122,7 +3122,12 @@ read it the same way (Stolen by the Fae: "return target creature with mana value
 X"): X is announced before targets (rule 601.2b–c), so the spell is offered once
 per X that is payable and has a legal set of targets, its `targetOptions` at
 that X, and the target is checked at that X as it's cast and as it resolves.
-Mana alone pays such an offer (no convoke or delve). `destroy-all` also takes
+Mana alone pays such an offer (no convoke or delve). A **spell's
+`additionalCost.sacrifice`** may read it too (Nahiri's Sacrifice: "sacrifice an
+artifact or creature with mana value X", `manaValue: { op: "eq", n: "x" }`): X is
+announced though the mana cost has none, so the spell is offered once per mana
+value a permanent that pays has, each offer's `sacrifice.choices` only the
+permanents at that X, and the sacrifice named is checked at the X cast. `destroy-all` also takes
 `onlyControllersDamagedBySource`, narrowing to permanents whose *controller*
 this effect's source dealt combat damage to this turn — a fact about the
 source, so it isn't a `CardFilter` clause.

@@ -14,6 +14,7 @@ import _poolAetherStorm from "../pool/aether-storm.js";
 import _poolAethertideWhale from "../pool/aethertide-whale.js";
 import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
+import _poolAllHallowsEve from "../pool/all-hallows-eve.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolAlseidOfLifesBounty from "../pool/alseid-of-lifes-bounty.js";
 import _poolAmyRose from "../pool/amy-rose.js";
@@ -992,6 +993,7 @@ const shard: CardShard = {
     _poolAethertideWhale,
     _poolAlchemistsRetrieval,
     _poolAllAboard,
+    _poolAllHallowsEve,
     _poolAlpineWatchdog,
     _poolAlseidOfLifesBounty,
     _poolAmyRose,

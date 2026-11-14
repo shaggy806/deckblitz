@@ -1076,6 +1076,7 @@ import _tokensRabbitToken from "../tokens/rabbit-token.js";
 import _tokensReliquaryDragon from "../tokens/reliquary-dragon.js";
 import _tokensSamuraiToken from "../tokens/samurai-token.js";
 import _tokensTarmogoyfToken from "../tokens/tarmogoyf-token.js";
+import _tokensTetraviteToken from "../tokens/tetravite-token.js";
 import _tokensWallTokenInvisibleWoman from "../tokens/wall-token-invisible-woman.js";
 import _tokensZombieTokenJadarGhoulcallerOfNephalia from "../tokens/zombie-token-jadar-ghoulcaller-of-nephalia.js";
 
@@ -2156,6 +2157,7 @@ const shard: CardShard = {
     _tokensReliquaryDragon,
     _tokensSamuraiToken,
     _tokensTarmogoyfToken,
+    _tokensTetraviteToken,
     _tokensWallTokenInvisibleWoman,
     _tokensZombieTokenJadarGhoulcallerOfNephalia,
   ],

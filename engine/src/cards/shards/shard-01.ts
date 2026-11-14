@@ -554,6 +554,7 @@ import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMutualDestruction from "../pool/mutual-destruction.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolMysticalTeachings from "../pool/mystical-teachings.js";
+import _poolNahirisSacrifice from "../pool/nahiris-sacrifice.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
 import _poolNantukoCalmer from "../pool/nantuko-calmer.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
@@ -1563,6 +1564,7 @@ const shard: CardShard = {
     _poolMutualDestruction,
     _poolMysticOfTheHiddenWay,
     _poolMysticalTeachings,
+    _poolNahirisSacrifice,
     _poolNamazuTrader,
     _poolNantukoCalmer,
     _poolNarnamRenegade,

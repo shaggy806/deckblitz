@@ -12340,4 +12340,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    "Nahiri's Sacrifice: X is the mana value of what you sacrifice",
+    board({
+      you: { bf: ['Mountain*2', 'Sol Ring', 'Gray Ogre'], hand: ["Nahiri's Sacrifice"] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
 ]

@@ -949,6 +949,7 @@ import _poolUniversityCampus from "../pool/university-campus.js";
 import _poolUnnaturalEndurance from "../pool/unnatural-endurance.js";
 import _poolValiantEndeavor from "../pool/valiant-endeavor.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
+import _poolValleymaker from "../pool/valleymaker.js";
 import _poolVampireLacerator from "../pool/vampire-lacerator.js";
 import _poolVampiricFury from "../pool/vampiric-fury.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
@@ -1991,6 +1992,7 @@ const shard: CardShard = {
     _poolUnnaturalEndurance,
     _poolValiantEndeavor,
     _poolValleyFlamecaller,
+    _poolValleymaker,
     _poolVampireLacerator,
     _poolVampiricFury,
     _poolVaporSnag,

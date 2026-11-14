@@ -5443,10 +5443,28 @@ export class Game {
       // the variant is offered once per mana value a matching card in hand
       // has — the card itself never one.
       const pitchX = ownAltPaid && def.alternativeCost?.exileFromHand?.manaValueX === true;
+      const sacrificeAtX =
+        def.additionalCost?.sacrifice !== undefined &&
+        def.additionalCost.sacrificeCount === undefined &&
+        filterReadsX(def.additionalCost.sacrifice);
       if (pitchX) {
         const pitch = def.alternativeCost!.exileFromHand!;
         const values = new Set<number>();
         for (const id of this.discardCandidates(player, pitch.filter, card)) {
+          values.add(manaValueOfObject(this.registry, this.state.objects[id]));
+        }
+        const xs = [...values].sort((a, b) => a - b).filter((x) => castsWith(0, undefined, x));
+        if (xs.length === 0) continue;
+        perX = xs;
+        manaAffordable = true;
+      } else if (sacrificeAtX) {
+        // "As an additional cost, sacrifice an artifact or creature with mana
+        // value X" (Nahiri's Sacrifice): X is announced as it's cast (rule
+        // 601.2b) with no {X} to pay, so the spell is offered once per mana
+        // value a permanent that pays has, as the Shoals' pitch is — each
+        // offer with that X fixed and only that X's sacrifices.
+        const values = new Set<number>();
+        for (const id of this.additionalCostSacrifices(player, def, costOption)) {
           values.add(manaValueOfObject(this.registry, this.state.objects[id]));
         }
         const xs = [...values].sort((a, b) => a - b).filter((x) => castsWith(0, undefined, x));
@@ -6189,10 +6207,15 @@ export class Game {
             castable,
           );
           if (!targetsFillable(specs, xOptions, [], 0, facts)) continue;
+          // "A creature with mana value X": only the permanents that pay at this X.
+          const xSacrifices = sacrificeAtX ? this.additionalCostSacrifices(player, def, costOption, undefined, x) : null;
           out.push({
             ...offer,
             targetOptions: xOptions,
             xCost: { maxX: x, minX: x },
+            ...(xSacrifices !== null && offer.sacrifice !== undefined
+              ? { sacrifice: { ...offer.sacrifice, choices: xSacrifices } }
+              : {}),
             ...(this.spellPricedByTargets(def, player, card)
               ? { reducingTargets: this.reducingTargetsNeeded(def, player, card, xOptions, castable) }
               : {}),
@@ -18793,6 +18816,10 @@ export class Game {
      * see `graveyardPermissionSacrifice`. Never beside the card's own:
      * `graveyardGrantsFor` doesn't offer that pair. */
     permissionSacrifice?: CardFilter,
+    /** The X announced, for "sacrifice an artifact or creature with mana
+     * value X" (Nahiri's Sacrifice — a filter reading X). With none, each
+     * permanent is judged at its own mana value: whatever pays at some X. */
+    x?: number,
   ): ObjectId[] {
     // A sacrifice of several ("sacrifice X creatures") isn't named on the
     // action — see `spellSacrificeParts`.
@@ -18806,7 +18833,7 @@ export class Game {
     if (def.additionalCost?.exilesSacrifice === true) {
       return this.battlefieldMatching(player, { ...filter, controlledBy: "you" });
     }
-    return this.eligibleSacrifices(player, filter);
+    return this.eligibleSacrifices(player, filter, undefined, filterReadsX(filter) ? (x ?? "own") : undefined);
   }
 
   /** What a cast's route sacrifices beside its other costs: under a graveyard
@@ -19768,7 +19795,8 @@ export class Game {
         (def.additionalCost.sacrifice !== undefined && def.additionalCost.sacrificeCount === undefined) ||
         (costOption !== undefined && def.additionalCost.options?.[costOption]?.sacrifice !== undefined);
       if (sacrificesInCost) {
-        const candidates = this.additionalCostSacrifices(player, def, costOption);
+        // "With mana value X" is judged at the X announced (rule 601.2b).
+        const candidates = this.additionalCostSacrifices(player, def, costOption, undefined, Math.floor(xValue));
         if (candidates.length === 0) {
           return `${player} has nothing to sacrifice to cast ${def.name}`;
         }
@@ -21766,6 +21794,9 @@ export class Game {
       def.additionalCost?.discard === "x" ||
       def.additionalCost?.exileFromGraveyard?.count === "x" ||
       def.additionalCost?.returnToHandX !== undefined ||
+      // "Sacrifice an artifact or creature with mana value X" (Nahiri's
+      // Sacrifice): X announced though the mana cost has none (rule 601.2b).
+      (def.additionalCost?.sacrifice !== undefined && filterReadsX(def.additionalCost.sacrifice)) ||
       this.additionalCostActX(def) !== undefined ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
       (altCost && this.ownAltCost(def)?.exileFromHand?.manaValueX === true);
@@ -21790,6 +21821,7 @@ export class Game {
       def,
       costOption,
       this.castRouteSacrifice(player, cardId, face, via, graveyardGrant),
+      chosenX,
     );
     const sacrificeVictim =
       sacrificeCandidates.length === 0 ? undefined : (sacrifice ?? sacrificeCandidates[0]);
@@ -50031,11 +50063,27 @@ controlledBy,
     if (amount !== "all" && amount <= 0) return 0;
     if (counter === "any" && amount !== "all") return 0;
     const before = this.state.objects[id];
-    if (before === undefined || before.zone !== "battlefield") return 0;
+    if (before === undefined || (before.zone !== "battlefield" && before.zone !== "exile")) return 0;
     const kinds = (counter === "any" ? Object.keys(before.counters) : [counter]).filter(
       (k) => (before.counters[k] ?? 0) > 0 && !this.countersLocked(id, k),
     );
     if (kinds.length === 0) return 0;
+    // A card in exile keeps counters there (rule 122.2 clears them only as it
+    // moves): All Hallow's Eve's "remove a scream counter from it". It isn't a
+    // permanent, so no `counter-removed` — as a suspended card's time counter
+    // (`removeTimeCounter`), which the time-counter path above handles.
+    if (before.zone === "exile") {
+      let fromCard = 0;
+      for (const kind of kinds) {
+        const have = before.counters[kind] ?? 0;
+        const n = amount === "all" ? have : Math.min(amount, have);
+        if (have - n <= 0) delete before.counters[kind];
+        else before.counters[kind] = have - n;
+        fromCard += n;
+      }
+      invalidateComputedCache();
+      return fromCard;
+    }
     let removed = 0;
     const at = split ? this.splitOneFromStack(id) : id;
     const object = this.state.objects[at];
@@ -52213,12 +52261,20 @@ controlledBy,
     player: PlayerId,
     filter: CardFilter,
     exceptId?: ObjectId,
+    /** The X a filter reading it is judged at — `"own"`, each permanent's
+     * own mana value (`additionalCostSacrifices`). */
+    atX?: number | "own",
   ): ObjectId[] {
     return this.state.zones.shared.battlefield.filter(
       (id) =>
         id !== exceptId &&
         this.state.objects[id].controller === player &&
-        matchesFilter(this.state, this.registry, id, filter, { you: player }) &&
+        matchesFilter(this.state, this.registry, id, filter, {
+          you: player,
+          ...(atX === undefined
+            ? {}
+            : { x: atX === "own" ? manaValueOfObject(this.registry, this.state.objects[id]) : atX }),
+        }) &&
         this.canBeSacrificed(id),
     );
   }

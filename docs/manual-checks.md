@@ -8218,3 +8218,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Karn, Living Legacy: activate the emblem's ability from the emblems viewer
 - **Do:** Use Karn's −7. Click "emblems 1" on your panel, "Activate" under the emblem, then its ability, and target Grizzly Bears.
 - **Expect:** Sol Ring taps and the Bears take 1 damage. With Sol Ring tapped, the emblem shows no "Activate".
+
+## A sacrifice that sets X (2026-11-13)
+
+### Nahiri's Sacrifice: X is the mana value of what you sacrifice
+- **Do:** Cast Nahiri's Sacrifice, choosing X = 3 and sacrificing Gray Ogre. Target both of Bob's creatures, 2 damage to Grizzly Bears and 1 to Hill Giant.
+- **Expect:** Only Gray Ogre is offered at X = 3 (Sol Ring only at X = 1). The Bears die and the Giant has 1 damage.

@@ -720,6 +720,7 @@ import _poolRuneOfProtectionGreen from "../pool/rune-of-protection-green.js";
 import _poolRuneOfProtectionRed from "../pool/rune-of-protection-red.js";
 import _poolRushOfVitality from "../pool/rush-of-vitality.js";
 import _poolSabertoothNishoba from "../pool/sabertooth-nishoba.js";
+import _poolSacellumGodspeaker from "../pool/sacellum-godspeaker.js";
 import _poolSaidDone from "../pool/said-done.js";
 import _poolSaltcrustedSteppe from "../pool/saltcrusted-steppe.js";
 import _poolSalvageScuttler from "../pool/salvage-scuttler.js";
@@ -1742,6 +1743,7 @@ const shard: CardShard = {
     _poolRuneOfProtectionRed,
     _poolRushOfVitality,
     _poolSabertoothNishoba,
+    _poolSacellumGodspeaker,
     _poolSaidDone,
     _poolSaltcrustedSteppe,
     _poolSalvageScuttler,

@@ -201,6 +201,7 @@ import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanceOfMany from "../pool/dance-of-many.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
+import _poolDarettiIngeniousIconoclast from "../pool/daretti-ingenious-iconoclast.js";
 import _poolDarigaazsCaldera from "../pool/darigaazs-caldera.js";
 import _poolDarkDabbling from "../pool/dark-dabbling.js";
 import _poolDarkMaze from "../pool/dark-maze.js";
@@ -1265,6 +1266,7 @@ const shard: CardShard = {
     _poolDainsCompany,
     _poolDanceOfMany,
     _poolDanithaSpearOfAgony,
+    _poolDarettiIngeniousIconoclast,
     _poolDarigaazsCaldera,
     _poolDarkDabbling,
     _poolDarkMaze,

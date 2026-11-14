@@ -609,6 +609,7 @@ import _poolAlive from "./pool/alive.js";
 import _poolAllAboard from "./pool/all-aboard.js";
 import _poolAllFatesScroll from "./pool/all-fates-scroll.js";
 import _poolAllFatesStalker from "./pool/all-fates-stalker.js";
+import _poolAllHallowsEve from "./pool/all-hallows-eve.js";
 import _poolAllIsDust from "./pool/all-is-dust.js";
 import _poolAllOfHistoryAllAtOnce from "./pool/all-of-history-all-at-once.js";
 import _poolAllOutAssault from "./pool/all-out-assault.js";
@@ -6017,6 +6018,7 @@ import _poolDaredevilDragster from "./pool/daredevil-dragster.js";
 import _poolDaredevilFearlessFighter from "./pool/daredevil-fearless-fighter.js";
 import _poolDaredevilManWithoutFear from "./pool/daredevil-man-without-fear.js";
 import _poolDaredevilsBillyClub from "./pool/daredevils-billy-club.js";
+import _poolDarettiIngeniousIconoclast from "./pool/daretti-ingenious-iconoclast.js";
 import _poolDarettiRocketeerEngineer from "./pool/daretti-rocketeer-engineer.js";
 import _poolDarettiScrapSavant from "./pool/daretti-scrap-savant.js";
 import _poolDargoTheShipwrecker from "./pool/dargo-the-shipwrecker.js";
@@ -18089,6 +18091,7 @@ import _poolNahirisBinding from "./pool/nahiris-binding.js";
 import _poolNahirisLithoforming from "./pool/nahiris-lithoforming.js";
 import _poolNahirisMachinations from "./pool/nahiris-machinations.js";
 import _poolNahirisResolve from "./pool/nahiris-resolve.js";
+import _poolNahirisSacrifice from "./pool/nahiris-sacrifice.js";
 import _poolNahirisStoneblades from "./pool/nahiris-stoneblades.js";
 import _poolNahirisWarcrafting from "./pool/nahiris-warcrafting.js";
 import _poolNaiadOfHiddenCoves from "./pool/naiad-of-hidden-coves.js";
@@ -22786,6 +22789,7 @@ import _poolSabotageStrategist from "./pool/sabotage-strategist.js";
 import _poolSabotender from "./pool/sabotender.js";
 import _poolSabretoothTiger from "./pool/sabretooth-tiger.js";
 import _poolSacellumArchers from "./pool/sacellum-archers.js";
+import _poolSacellumGodspeaker from "./pool/sacellum-godspeaker.js";
 import _poolSachiDaughterOfSeshiro from "./pool/sachi-daughter-of-seshiro.js";
 import _poolSacredArmory from "./pool/sacred-armory.js";
 import _poolSacredBoon from "./pool/sacred-boon.js";
@@ -26961,6 +26965,7 @@ import _poolSylvanMessenger from "./pool/sylvan-messenger.js";
 import _poolSylvanMight from "./pool/sylvan-might.js";
 import _poolSylvanOffering from "./pool/sylvan-offering.js";
 import _poolSylvanParadise from "./pool/sylvan-paradise.js";
+import _poolSylvanPrimordial from "./pool/sylvan-primordial.js";
 import _poolSylvanRanger from "./pool/sylvan-ranger.js";
 import _poolSylvanReclamation from "./pool/sylvan-reclamation.js";
 import _poolSylvanSafekeeper from "./pool/sylvan-safekeeper.js";
@@ -27571,6 +27576,7 @@ import _poolTetheredGriffin from "./pool/tethered-griffin.js";
 import _poolTetheredSkirge from "./pool/tethered-skirge.js";
 import _poolTethermagesAdvantage from "./pool/tethermages-advantage.js";
 import _poolTethmosHighPriest from "./pool/tethmos-high-priest.js";
+import _poolTetravus from "./pool/tetravus.js";
 import _poolTetsukoUmezawaFugitive from "./pool/tetsuko-umezawa-fugitive.js";
 import _poolTetsukoUmezawaPursuer from "./pool/tetsuko-umezawa-pursuer.js";
 import _poolTetsuoUmezawa from "./pool/tetsuo-umezawa.js";
@@ -29733,6 +29739,7 @@ import _poolValleyQuestcaller from "./pool/valley-questcaller.js";
 import _poolValleyRally from "./pool/valley-rally.js";
 import _poolValleyRannet from "./pool/valley-rannet.js";
 import _poolValleyRotcaller from "./pool/valley-rotcaller.js";
+import _poolValleymaker from "./pool/valleymaker.js";
 import _poolValorInAkros from "./pool/valor-in-akros.js";
 import _poolValorMadeReal from "./pool/valor-made-real.js";
 import _poolValorOfTheWorthy from "./pool/valor-of-the-worthy.js";
@@ -32665,6 +32672,7 @@ import _tokensSwordToken from "./tokens/sword-token.js";
 import _tokensTamiyosNotebookToken from "./tokens/tamiyos-notebook-token.js";
 import _tokensTarmogoyfToken from "./tokens/tarmogoyf-token.js";
 import _tokensTentacleToken from "./tokens/tentacle-token.js";
+import _tokensTetraviteToken from "./tokens/tetravite-token.js";
 import _tokensTheAtropal from "./tokens/the-atropal.js";
 import _tokensTheBlackjack from "./tokens/the-blackjack.js";
 import _tokensTheHollowSentinelToken from "./tokens/the-hollow-sentinel-token.js";
@@ -33392,6 +33400,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAllAboard,
   _poolAllFatesScroll,
   _poolAllFatesStalker,
+  _poolAllHallowsEve,
   _poolAllIsDust,
   _poolAllOfHistoryAllAtOnce,
   _poolAllOutAssault,
@@ -38800,6 +38809,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDaredevilFearlessFighter,
   _poolDaredevilManWithoutFear,
   _poolDaredevilsBillyClub,
+  _poolDarettiIngeniousIconoclast,
   _poolDarettiRocketeerEngineer,
   _poolDarettiScrapSavant,
   _poolDargoTheShipwrecker,
@@ -50872,6 +50882,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNahirisLithoforming,
   _poolNahirisMachinations,
   _poolNahirisResolve,
+  _poolNahirisSacrifice,
   _poolNahirisStoneblades,
   _poolNahirisWarcrafting,
   _poolNaiadOfHiddenCoves,
@@ -55569,6 +55580,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSabotender,
   _poolSabretoothTiger,
   _poolSacellumArchers,
+  _poolSacellumGodspeaker,
   _poolSachiDaughterOfSeshiro,
   _poolSacredArmory,
   _poolSacredBoon,
@@ -59744,6 +59756,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSylvanMight,
   _poolSylvanOffering,
   _poolSylvanParadise,
+  _poolSylvanPrimordial,
   _poolSylvanRanger,
   _poolSylvanReclamation,
   _poolSylvanSafekeeper,
@@ -60354,6 +60367,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTetheredSkirge,
   _poolTethermagesAdvantage,
   _poolTethmosHighPriest,
+  _poolTetravus,
   _poolTetsukoUmezawaFugitive,
   _poolTetsukoUmezawaPursuer,
   _poolTetsuoUmezawa,
@@ -62516,6 +62530,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolValleyRally,
   _poolValleyRannet,
   _poolValleyRotcaller,
+  _poolValleymaker,
   _poolValorInAkros,
   _poolValorMadeReal,
   _poolValorOfTheWorthy,
@@ -65454,6 +65469,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensTamiyosNotebookToken,
   _tokensTarmogoyfToken,
   _tokensTentacleToken,
+  _tokensTetraviteToken,
   _tokensTheAtropal,
   _tokensTheBlackjack,
   _tokensTheHollowSentinelToken,
@@ -66188,6 +66204,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/all-aboard": _poolAllAboard,
   "pool/all-fates-scroll": _poolAllFatesScroll,
   "pool/all-fates-stalker": _poolAllFatesStalker,
+  "pool/all-hallows-eve": _poolAllHallowsEve,
   "pool/all-is-dust": _poolAllIsDust,
   "pool/all-of-history-all-at-once": _poolAllOfHistoryAllAtOnce,
   "pool/all-out-assault": _poolAllOutAssault,
@@ -71596,6 +71613,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/daredevil-fearless-fighter": _poolDaredevilFearlessFighter,
   "pool/daredevil-man-without-fear": _poolDaredevilManWithoutFear,
   "pool/daredevils-billy-club": _poolDaredevilsBillyClub,
+  "pool/daretti-ingenious-iconoclast": _poolDarettiIngeniousIconoclast,
   "pool/daretti-rocketeer-engineer": _poolDarettiRocketeerEngineer,
   "pool/daretti-scrap-savant": _poolDarettiScrapSavant,
   "pool/dargo-the-shipwrecker": _poolDargoTheShipwrecker,
@@ -83668,6 +83686,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nahiris-lithoforming": _poolNahirisLithoforming,
   "pool/nahiris-machinations": _poolNahirisMachinations,
   "pool/nahiris-resolve": _poolNahirisResolve,
+  "pool/nahiris-sacrifice": _poolNahirisSacrifice,
   "pool/nahiris-stoneblades": _poolNahirisStoneblades,
   "pool/nahiris-warcrafting": _poolNahirisWarcrafting,
   "pool/naiad-of-hidden-coves": _poolNaiadOfHiddenCoves,
@@ -88365,6 +88384,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sabotender": _poolSabotender,
   "pool/sabretooth-tiger": _poolSabretoothTiger,
   "pool/sacellum-archers": _poolSacellumArchers,
+  "pool/sacellum-godspeaker": _poolSacellumGodspeaker,
   "pool/sachi-daughter-of-seshiro": _poolSachiDaughterOfSeshiro,
   "pool/sacred-armory": _poolSacredArmory,
   "pool/sacred-boon": _poolSacredBoon,
@@ -92540,6 +92560,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sylvan-might": _poolSylvanMight,
   "pool/sylvan-offering": _poolSylvanOffering,
   "pool/sylvan-paradise": _poolSylvanParadise,
+  "pool/sylvan-primordial": _poolSylvanPrimordial,
   "pool/sylvan-ranger": _poolSylvanRanger,
   "pool/sylvan-reclamation": _poolSylvanReclamation,
   "pool/sylvan-safekeeper": _poolSylvanSafekeeper,
@@ -93150,6 +93171,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tethered-skirge": _poolTetheredSkirge,
   "pool/tethermages-advantage": _poolTethermagesAdvantage,
   "pool/tethmos-high-priest": _poolTethmosHighPriest,
+  "pool/tetravus": _poolTetravus,
   "pool/tetsuko-umezawa-fugitive": _poolTetsukoUmezawaFugitive,
   "pool/tetsuko-umezawa-pursuer": _poolTetsukoUmezawaPursuer,
   "pool/tetsuo-umezawa": _poolTetsuoUmezawa,
@@ -95312,6 +95334,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/valley-rally": _poolValleyRally,
   "pool/valley-rannet": _poolValleyRannet,
   "pool/valley-rotcaller": _poolValleyRotcaller,
+  "pool/valleymaker": _poolValleymaker,
   "pool/valor-in-akros": _poolValorInAkros,
   "pool/valor-made-real": _poolValorMadeReal,
   "pool/valor-of-the-worthy": _poolValorOfTheWorthy,
@@ -98244,6 +98267,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/tamiyos-notebook-token": _tokensTamiyosNotebookToken,
   "tokens/tarmogoyf-token": _tokensTarmogoyfToken,
   "tokens/tentacle-token": _tokensTentacleToken,
+  "tokens/tetravite-token": _tokensTetraviteToken,
   "tokens/the-atropal": _tokensTheAtropal,
   "tokens/the-blackjack": _tokensTheBlackjack,
   "tokens/the-hollow-sentinel-token": _tokensTheHollowSentinelToken,
