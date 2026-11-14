@@ -478,6 +478,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   mill: (n, v) => v.touch(n.target, "harm", MINOR),
   // A refill for a self-mill deck, an answer to a graveyard deck: either way.
   "shuffle-graveyard-into-library": (n, v) => v.touch(n.target, "either", MINOR),
+  // A whole library in hand: a refill, but nothing left to draw.
+  "exchange-hand-and-library": (n, v) => v.touch(n.who, "either", MINOR),
   "skip-next-untap": (n, v) => v.touch(n.who, "harm", MINOR),
   "skip-untap-step": (n, v) => v.touch(n.who, "harm", MINOR),
   "skip-step": (n, v) => v.touch(n.who, "harm", MINOR),

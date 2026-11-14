@@ -40333,6 +40333,16 @@ controlledBy,
         const cards = step.cards.filter((id) => library.includes(id));
         return this.beginLibraryOrder(step.player, cards, step.position);
       },
+      exchangeHandAndLibrary: (player) => {
+        // Rule 701.12d: one exchange — both lists read before anything
+        // moves, then each card to the other zone.
+        const zones = this.state.zones.perPlayer[player];
+        if (zones === undefined || this.state.players[player]?.hasLost !== false) return;
+        const fromHand = [...zones.hand];
+        const fromLibrary = [...zones.library];
+        for (const id of fromHand) this.moveObject(id, "library");
+        for (const id of fromLibrary) this.moveObject(id, "hand");
+      },
       revealLibraryTop: (player, n) => {
         // A token shuffled in this way is still there until state-based
         // actions (rule 704.5d), but it isn't a card: it's skipped (Glimpse

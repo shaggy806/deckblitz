@@ -8138,6 +8138,18 @@ export type EffectSpec =
       readonly combatOnly?: boolean;
     }
   | {
+      /** "**Exchange your hand and library**" (Mordenkainen's −10; "then
+       * shuffle" is a `shuffle-library` after it): every card in the
+       * player's hand goes into their library and every card that was in
+       * their library into their hand, at once (rule 701.12d — all owned by
+       * that player, a hand and a library holding only their owner's cards,
+       * rule 400.3) — exchanged even when one of them is empty (701.12f).
+       * Not a draw (its ruling). `who` is whose, the effect's controller's
+       * by default. */
+      readonly kind: "exchange-hand-and-library";
+      readonly who?: PlayerScope;
+    }
+  | {
       /** "Shuffle your library" on its own (Ponder's "You may shuffle", inside
        * a `may`): the effect's controller shuffles (rule 701.24). */
       readonly kind: "shuffle-library";
@@ -12784,6 +12796,8 @@ export interface EffectApi {
   /** Ask `step.player` the order of `step.cards` on that end of their
    * library — those still there. `false` when there was nothing to ask. */
   askLibraryOrder(step: LibraryOrderStep): boolean;
+  /** See the `"exchange-hand-and-library"` {@link EffectSpec}. */
+  exchangeHandAndLibrary(player: PlayerId): void;
   /** `player` reveals the top `n` cards of their library (rule 701.20a) —
    * fewer with fewer there — which stay where they are. Returns them, top
    * first. */
@@ -20706,6 +20720,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "additional-land-drop":
       ctx.additionalLandDrops(amountValue(spec.amount, ctx));
       return;
+    case "exchange-hand-and-library": {
+      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
+        if (target.kind === "player") ctx.exchangeHandAndLibrary(target.player);
+      }
+      return;
+    }
     case "shuffle-library": {
       if (spec.searchers === true) {
         ctx.shuffleSearchers();

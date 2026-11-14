@@ -2550,7 +2550,8 @@
   "effect:shuffle-permanents-reveal-that-many",
   "static:cascade-put-land",
   "mechanic:morph-land",
-  "effect:return-random-cards-from-graveyard"
+  "effect:return-random-cards-from-graveyard",
+  "effect:exchange-hand-and-library"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

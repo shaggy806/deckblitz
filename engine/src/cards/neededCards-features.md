@@ -6612,3 +6612,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A land with morph (2026-11-13).** `mechanic:morph-land`: `Game.legalActions` offers a hand card's face-down cast whatever its types, so a land card with morph is a land play or a face-down 2/2 for {3} (rule 702.37c; 305.9 reads the face-down card, a creature). Zoetic Cavern.
 
 **Several cards at random from a graveyard (2026-11-13).** `effect:return-random-cards-from-graveyard`: `choose-random-card`'s `count` — that many different cards, each picked among those left, handed to `then` as targets 0, 1, … (a `simultaneous` `for-each-target` moves them together); scaffolder template for "return N [type] cards at random from your graveyard to your hand / the battlefield". Moldgraf Monstrosity, Reap the Past; Make a Wish moved onto it.
+
+**Exchange a hand and a library (2026-11-13).** `effect:exchange-hand-and-library`: the `exchange-hand-and-library` effect (`ResolutionContext.exchangeHandAndLibrary`): both lists read first, then each card to the other zone (rule 701.12d; not a draw). Mordenkainen, with its Dog Illusion token (twice the hand, a `{ sum }` count).
