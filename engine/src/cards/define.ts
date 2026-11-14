@@ -330,8 +330,12 @@ export interface KickerAlsoCost {
   /** "Tap **any number of** untapped creatures you control" (Burn at the
    * Stake): as `tapUntapped`, any number of them, none too. X is how many, as
    * `ctx.x` reads it ("three times the number of creatures tapped this way"),
-   * without an `{X}` in its mana cost, so its mana value doesn't count it. */
-  readonly tapAnyNumber?: { readonly filter: CardFilter };
+   * without an `{X}` in its mana cost, so its mana value doesn't count it.
+   * `reducesGeneric`: "This spell costs {1} less to cast for each creature
+   * tapped this way" (Explosive Singularity) — that much generic mana off
+   * its total cost for each one tapped (rule 601.2f), never below its
+   * coloured part, though any number may still be tapped (the ruling). */
+  readonly tapAnyNumber?: { readonly filter: CardFilter; readonly reducesGeneric?: number };
   /** "Squad—Exile four cards from your graveyard" (Ruthless Radrat), "Splice
    * onto Arcane—Exile four cards from your graveyard" (Horobi's Whisper):
    * `count` cards matching `filter` from the caster's graveyard, never the

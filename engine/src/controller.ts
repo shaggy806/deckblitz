@@ -1571,7 +1571,9 @@ function randomTapPicks(offer: TapCostOffer, pickIndex: (n: number) => number): 
   }
   const picked: ObjectId[] = [];
   // "Any number": how many at random, drawn only for such an offer.
-  const count = offer.anyNumber === true ? pickIndex(pool.length + 1) : offer.count;
+  // At least `count` (a per-tap reduction's fewest — Explosive Singularity);
+  // the same draw as ever where that's 0.
+  const count = offer.anyNumber === true ? offer.count + pickIndex(Math.max(0, pool.length - offer.count) + 1) : offer.count;
   // Crew: random creatures until their power is enough.
   const more = (): boolean =>
     offer.totalPower !== undefined ? tapPicksPower(offer, picked) < offer.totalPower : picked.length < count;

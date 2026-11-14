@@ -20667,11 +20667,14 @@ export class Game {
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant, modes);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
+      // With the picks named, a per-tap reduction (Explosive Singularity) is
+      // theirs: the cost they leave, checked as a plain "any number".
+      const reduced = tap === undefined ? undefined : this.tapReducedCost(alternativeTaps, cost, tap);
       const offer = this.tapCostOffer(
         player,
         cardId,
-        { ...alternativeTaps, includeSelf: false },
-        cost,
+        { ...(reduced === undefined ? alternativeTaps : reduced.spec), includeSelf: false },
+        reduced === undefined ? cost : reduced.cost,
         undefined,
         undefined,
         purpose,
@@ -22641,15 +22644,20 @@ export class Game {
       tapPicked = [...tap];
       manaArrangement = { ...(manaArrangement ?? {}), withheld: new Set([...(manaArrangement?.withheld ?? []), ...tap]) };
     }
+    // What the mana pays: less, for a reduction per creature tapped
+    // (Explosive Singularity), once they're picked.
+    let manaToPay = cost;
     if (alternativeTaps !== undefined) {
-      const spec = { ...alternativeTaps, includeSelf: false };
-      const offer = this.tapCostOffer(player, cardId, spec, cost, undefined, undefined, {
+      const named = tap === undefined ? undefined : this.tapReducedCost(alternativeTaps, cost, tap);
+      const spec = { ...(named === undefined ? alternativeTaps : named.spec), includeSelf: false };
+      const offer = this.tapCostOffer(player, cardId, spec, named === undefined ? cost : named.cost, undefined, undefined, {
         kind: "cast",
         card: cardId,
         ...castPaying(via, costString, kicked),
       });
       if (offer === null) throw new Error(`${player} cannot pay the cost of ${def.name}`);
       tapPicked = this.tapCostPicks(def.name, offer, tap);
+      manaToPay = this.tapReducedCost(alternativeTaps, cost, tapPicked)?.cost ?? cost;
       manaArrangement = {
         last: new Set(this.tapOthersCandidates(player, cardId, spec)),
         withheld: new Set(tapPicked),
@@ -22692,7 +22700,7 @@ export class Game {
     manaArrangement = withWaterbent(new Set(waterbent));
     const payment = this.payMana(
       player,
-      { ...cost, generic: cost.generic - waterbent.length },
+      { ...manaToPay, generic: manaToPay.generic - waterbent.length },
       undefined,
       undefined,
       { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) },
@@ -46563,6 +46571,21 @@ controlledBy,
     return n;
   }
 
+  /** A spell's "costs {1} less for each creature tapped this way" (Explosive
+   * Singularity — `tapAnyNumber.reducesGeneric`) once `picked` are named:
+   * the cost they leave, generic mana only and never below 0 (rule 601.2f),
+   * and the tap spec without the reduction, as a plain "any number". Undefined
+   * for a tap cost with no reduction. */
+  private tapReducedCost<S extends { readonly reducesGeneric?: number }>(
+    spec: S,
+    cost: ManaCost,
+    picked: readonly ObjectId[],
+  ): { readonly cost: ManaCost; readonly spec: Omit<S, "reducesGeneric"> } | undefined {
+    if (spec.reducesGeneric === undefined) return undefined;
+    const { reducesGeneric, ...plain } = spec;
+    return { cost: { ...cost, generic: Math.max(0, cost.generic - picked.length * reducesGeneric) }, spec: plain };
+  }
+
   /** The creatures casting `cardId` taps as part of its cost: an
    * alternative cost's (Sephara — `altCost`), or a kicked spell's teamwork
    * (rule 702.194a: any number of creatures you control with total power N
@@ -46585,6 +46608,9 @@ controlledBy,
         readonly count: number;
         readonly totalPower?: number;
         readonly anyNumber?: true;
+        /** With `anyNumber`: generic mana off the total cost for each one
+         * tapped (Explosive Singularity — `tapAnyNumber.reducesGeneric`). */
+        readonly reducesGeneric?: number;
         readonly filter: CardFilter;
         readonly perExtraMode?: true;
       }
@@ -46608,7 +46634,14 @@ controlledBy,
     const costs = this.castAlsoCosts(cardId, def, kicked, altCost, costOption, undefined, undefined,
       modes === "offer" ? undefined : modes);
     const any = costs.find((also) => also.tapAnyNumber !== undefined)?.tapAnyNumber;
-    if (any !== undefined) return { count: 0, anyNumber: true, filter: any.filter };
+    if (any !== undefined) {
+      return {
+        count: 0,
+        anyNumber: true,
+        filter: any.filter,
+        ...(any.reducesGeneric !== undefined ? { reducesGeneric: any.reducesGeneric } : {}),
+      };
+    }
     const parts = costs.flatMap((also) => also.tapUntapped ?? []);
     // Escalate's tap, offered before the modes are chosen (rule 702.120a):
     // its count for each mode beyond the first. Alone: no card has escalate
@@ -46860,6 +46893,7 @@ controlledBy,
       readonly count: number;
       readonly totalPower?: number;
       readonly anyNumber?: true;
+      readonly reducesGeneric?: number;
       readonly filter: CardFilter;
       readonly includeSelf?: boolean;
       readonly shareCreatureType?: true;
@@ -46871,6 +46905,30 @@ controlledBy,
     purpose: ManaPurpose,
     keyword?: "crew" | "saddle",
   ): TapCostOffer | null {
+    // "This spell costs {1} less to cast for each creature tapped this way"
+    // (Explosive Singularity): the fewest picks whose reduction leaves the
+    // rest payable, `count` the least the driver taps — any more of `choices`
+    // only lowers the cost, so they're payable too. Tried from none up, past
+    // which nothing more comes off.
+    if (spec.reducesGeneric !== undefined && spec.anyNumber === true) {
+      const { reducesGeneric, ...plain } = spec;
+      const candidates = this.tapCapacity(this.tapOthersCandidates(player, sourceId, plain));
+      const most = Math.min(candidates, Math.ceil(manaCost.generic / reducesGeneric));
+      for (let k = 0; k <= most; k += 1) {
+        const offer = this.tapCostOffer(
+          player,
+          sourceId,
+          plain,
+          { ...manaCost, generic: Math.max(0, manaCost.generic - k * reducesGeneric) },
+          avoid,
+          exclude,
+          purpose,
+          keyword,
+        );
+        if (offer !== null && this.tapCapacity(offer.choices) >= k) return { ...offer, count: k, enough: most };
+      }
+      return null;
+    }
     // "Can't crew Vehicles" (rule 702.122d): never tapped for a crew cost.
     const candidates = this.tapOthersCandidates(player, sourceId, spec).filter(
       (id) => keyword !== "crew" || !computeCharacteristics(this.state, this.registry, id).restrictions.has("cant-crew"),

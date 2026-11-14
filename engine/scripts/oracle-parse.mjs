@@ -16802,6 +16802,23 @@ function parseFaceAsWritten(face, ctx = {}) {
       };
       continue;
     }
+    // Explosive Singularity: any number tapped as it's cast, each taking
+    // this off the total cost.
+    if (
+      isSpell &&
+      (m = /^As an additional cost to cast ~, you may tap any number of untapped (.+?) you control\. ~ costs \{(\d+)\} less to cast for each (?:.+?) tapped this way\.$/.exec(line))
+    ) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter !== null && Object.keys(filter).length > 0) {
+        out.additionalCost = {
+          also: {
+            text: `Tap any number of untapped ${m[1]} you control`,
+            tapAnyNumber: { filter, reducesGeneric: Number(m[2]) },
+          },
+        };
+        continue;
+      }
+    }
     // Plumb the Forbidden: a sacrifice of X (none included) and one reflexive
     // trigger making X copies.
     if (

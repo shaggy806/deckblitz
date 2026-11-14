@@ -12725,4 +12725,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Plains*3', 'Mountain', 'Forest'], hand: ['Sanctum Prelate', 'Lightning Bolt', 'Llanowar Elves'] },
     }),
   ),
+  // --- A spell that costs {1} less for each creature tapped (2026-11-14) -----------
+  preset(
+    'Explosive Singularity: tap at least five, and more if you like',
+    board({
+      you: {
+        bf: ['Mountain*5', 'Grizzly Bears', 'Elite Vanguard', 'Hill Giant', 'Ornithopter', 'Savannah Lions', 'Raging Goblin'],
+        hand: ['Explosive Singularity'],
+      },
+    }),
+  ),
+  preset(
+    'Explosive Singularity: tapping creatures for it in a 4-player game',
+    board({
+      you: {
+        bf: ['Mountain*5', 'Grizzly Bears', 'Hill Giant', 'Ornithopter', 'Savannah Lions', 'Raging Goblin'],
+        hand: ['Explosive Singularity'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

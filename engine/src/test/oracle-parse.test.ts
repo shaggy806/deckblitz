@@ -15226,6 +15226,19 @@ describe("how one player's state compares with another's", () => {
     ).toEqual({ on: "activates-ability", who: "opponent", source: { typesAnyOf: ["creature", "land"] } });
   });
 
+  it("costs {1} less for each creature tapped as an additional cost (Explosive Singularity)", () => {
+    const card = read(
+      "Sorcery",
+      "As an additional cost to cast this spell, you may tap any number of untapped creatures you control. This spell costs {1} less to cast for each creature tapped this way.\nCard deals 10 damage to any target.",
+    );
+    expect(card.additionalCost).toEqual({
+      also: {
+        text: "Tap any number of untapped creatures you control",
+        tapAnyNumber: { filter: { type: "creature" }, reducesGeneric: 1 },
+      },
+    });
+  });
+
   it("can't be blocked by creatures with toughness N or greater (Ghost of Ramirez DePietro)", () => {
     expect(read("Creature", "Card can't be blocked by creatures with toughness 3 or greater.").static[0].restrictions).toEqual([
       { kind: "cant-be-blocked", by: { toughness: { op: "gte", n: 3 } } },

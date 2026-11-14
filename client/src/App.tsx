@@ -5487,7 +5487,9 @@ function Table({
       <div className="controls">
         <span>
           {offer.anyNumber === true
-            ? `${what}: tap any number — ${picks.length} chosen`
+            ? offer.count > 0
+              ? `${what}: tap at least ${offer.count} — ${picks.length} chosen`
+              : `${what}: tap any number — ${picks.length} chosen`
             : offer.totalPower !== undefined
               ? `${what}: tap creatures with total power ${offer.totalPower} — power ${power}/${offer.totalPower}`
               : `${what}: tap ${offer.count} — ${picks.length}/${offer.count} chosen`}
@@ -5497,7 +5499,8 @@ function Table({
           type="button"
           disabled={
             offer.anyNumber === true
-              ? false
+              ? // A per-tap reduction's fewest (Explosive Singularity).
+                picks.length < offer.count
               : offer.totalPower !== undefined
                 ? power < offer.totalPower
                 : picks.length !== offer.count || shareNoType

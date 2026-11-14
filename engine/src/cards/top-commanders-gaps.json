@@ -6,6 +6,7 @@
     "condition:rolled-number-this-turn",
     "condition:dice-rolled-this-turn-count",
     "trigger:nth-die-roll-each-turn",
+    "cost:cost-reduction-per-tapped-for-cost",
     "filter:discarded-this-turn",
     "effect:copy-spell-for-other-player",
     "trigger:activates-ability-source-controlled-by-activator",

@@ -8449,3 +8449,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Sanctum Prelate: choose any number as it enters
 - **Do:** Cast Sanctum Prelate, type 1 and choose it. Then try to cast Lightning Bolt.
 - **Expect:** The banner reads "Sanctum Prelate — choose a number as it enters" with no upper limit shown. Afterwards Lightning Bolt can't be cast (Sanctum Prelate's prohibition), while Llanowar Elves still can.
+
+## A spell that costs {1} less for each creature tapped (2026-11-14)
+
+### Explosive Singularity: tap at least five, and more if you like
+- **Do:** Cast Explosive Singularity at Bob. Pick four creatures, then a fifth and a sixth, and Confirm.
+- **Expect:** The banner reads "Explosive Singularity: tap at least 5 — 0 chosen", and Confirm stays grey until five are picked. All six tap, your five Mountains pay what's left, one stays untapped, and Bob loses 10 life.
+- **Not a bug:** The sixth creature may be tapped though it takes nothing more off what the five Mountains pay.
+
+### Explosive Singularity: tapping creatures for it in a 4-player game
+- **Do:** In this 4-player game, cast Explosive Singularity at Carol. Pick five creatures and Confirm.
+- **Expect:** The prompt fits the banner, the five tap with all five Mountains, and Carol loses 10 life. Nobody else does.

@@ -273,8 +273,14 @@ export interface TapCostOffer {
   readonly totalPower?: number;
   readonly power?: Readonly<Record<ObjectId, number>>;
   /** "Tap any number of untapped creatures you control" (Burn at the Stake):
-   * instead of exactly `count` (then 0), any number of `choices`, none too. */
+   * instead of exactly `count`, any number of `choices`, none too — or, for
+   * a spell that costs {1} less for each one tapped (Explosive Singularity),
+   * at least `count`, the fewest whose reduction leaves the mana payable. */
   readonly anyNumber?: true;
+  /** With `anyNumber`, a per-tap reduction's: past this many picks nothing
+   * more comes off the cost (though more may still be tapped — Explosive
+   * Singularity's ruling), so a driver that doesn't choose taps no more. */
+  readonly enough?: number;
   /** "That share a creature type" (Weight of Conscience): each choice's
    * subtypes, marker and all (`subtypes.ts`). The picks must have one creature
    * type in common; `choices` holds only those with enough others to do it. */
@@ -358,10 +364,11 @@ export function defaultTapPicks(offer: TapCostOffer, preferFirst: (id: ObjectId)
   const from = tapShareChoices(offer);
   const order = [...from.filter(preferFirst), ...from.filter((id) => !preferFirst(id))];
   const picked: ObjectId[] = [];
-  // "Any number" has no enough: a driver that doesn't choose taps them all.
+  // "Any number" has no enough: a driver that doesn't choose taps them all —
+  // up to the last a per-tap reduction takes anything off (`enough`).
   const enough = (): boolean =>
     offer.anyNumber === true
-      ? false
+      ? offer.enough !== undefined && picked.length >= offer.enough
       : offer.totalPower !== undefined ? tapPicksPower(offer, picked) >= offer.totalPower : picked.length >= offer.count;
   for (const id of order) {
     for (let i = 0; i < (offer.copies?.[id] ?? 1) && !enough(); i += 1) {
