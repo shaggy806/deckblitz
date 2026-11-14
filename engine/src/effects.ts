@@ -7797,6 +7797,13 @@ export type EffectSpec =
        * counters the card gets as it's exiled, there — read later by a
        * `cast-now` of `{ exiledOwnedWithCounter }`. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
+      /** "**You may** exile that spell instead …" (Forger's Foundry's mana
+       * rider): an optional replacement, so the choice is made as the spell
+       * would go to the graveyard, as it resolves — by this effect's
+       * controller, a `choose-modes` question. With another replacement that
+       * would exile it too, the rule 616.1 choice stands in for it (choosing
+       * the other is declining this one). */
+      readonly optional?: true;
       /** "Exile it instead of putting it into **a** graveyard" (River Song's
        * Diary, on "whenever **a player** casts …"): whoever owns the spell,
        * not only this effect's controller — still only a card its owner
@@ -12954,6 +12961,7 @@ export interface EffectApi {
       readonly anyOwner?: boolean;
       readonly linked?: boolean;
       readonly withCounters?: { readonly kind: string; readonly amount: number };
+      readonly optional?: boolean;
     },
   ): void;
   /** The controller may collect evidence `amount` — see the
@@ -20022,6 +20030,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           anyOwner: spec.anyOwner === true,
           linked: spec.linked === true,
           ...(spec.withCounters !== undefined ? { withCounters: spec.withCounters } : {}),
+          ...(spec.optional === true ? { optional: true } : {}),
         });
       }
       return;

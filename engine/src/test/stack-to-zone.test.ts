@@ -9,7 +9,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { ScriptedController } from "../controller.js";
-import { A, B, attack, cast, enter, lands, life, named, nextTurn, pickModes, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, activate, attack, cast, enter, lands, life, named, nextTurn, pickModes, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import { lastRollIn } from "../random-results.js";
 import type { ObjectId } from "../primitives.js";
@@ -260,7 +260,7 @@ describe("Goliath Daydreamer", () => {
     expect(zone(game, shock)).toBe("graveyard");
   });
 
-  it("leaves a countered spell, and one cast from elsewhere, alone", () => {
+  it("leaves a countered spell alone", () => {
     const { game } = table();
     spawn(game, "Goliath Daydreamer");
     lands(game, "Mountain", 1);
@@ -271,5 +271,66 @@ describe("Goliath Daydreamer", () => {
     expect(zone(game, shock)).toBe("graveyard");
     // Counterspell itself, cast from hand and resolved, was exiled.
     expect(game.state.zones.shared.exile.map((id) => game.state.objects[id].cardName)).toEqual(["Counterspell"]);
+  });
+});
+
+describe("Forger's Foundry", () => {
+  it("may exile an instant or sorcery its mana paid for as it resolves, with it — declined, the graveyard", () => {
+    const { game, a } = table();
+    const foundry = spawn(game, "Forger's Foundry");
+    const opt = toHand(game, "Opt");
+    pickModes(a, 0);
+    cast(game, opt);
+    expect(zone(game, opt)).toBe("exile");
+    expect(game.state.objects[opt].exiledWith?.source).toBe(foundry);
+
+    nextTurn(game);
+    nextTurn(game);
+    const second = toHand(game, "Opt");
+    pickModes(a, 1);
+    cast(game, second);
+    expect(zone(game, second)).toBe("graveyard");
+  });
+
+  it("asks nothing for a spell with mana value 4", () => {
+    const { game, a } = table();
+    spawn(game, "Forger's Foundry");
+    lands(game, "Island", 1);
+    lands(game, "Wastes", 2);
+    const concentrate = toHand(game, "Concentrate");
+    pickModes(a, 0);
+    cast(game, concentrate);
+    expect(zone(game, concentrate)).toBe("graveyard");
+  });
+
+  it("casts any number of the cards exiled with it, free, as a sorcery", () => {
+    const { game, a } = table();
+    const foundry = spawn(game, "Forger's Foundry");
+    const first = toHand(game, "Opt");
+    pickModes(a, 0);
+    cast(game, first);
+    nextTurn(game);
+    nextTurn(game);
+    const second = toHand(game, "Divination");
+    lands(game, "Island", 2);
+    cast(game, second);
+    expect([zone(game, first), zone(game, second)]).toEqual(["exile", "exile"]);
+
+    nextTurn(game);
+    nextTurn(game);
+    lands(game, "Island", 3);
+    const castCards: ObjectId[] = [];
+    a.chooseCastNowFn = (_v, offer) => {
+      const way = offer.casts[0];
+      if (way === undefined) return null;
+      castCards.push(way.card);
+      return { type: "cast-spell", player: A, card: way.card, targets: [], via: way.via, free: true };
+    };
+    const handBefore = game.state.zones.perPlayer[A].hand.length;
+    activate(game, foundry, 1);
+    expect(new Set(castCards)).toEqual(new Set([first, second]));
+    // Cast from exile, not with its mana: into the graveyard this time.
+    expect([zone(game, first), zone(game, second)]).toEqual(["graveyard", "graveyard"]);
+    expect(game.state.zones.perPlayer[A].hand.length).toBe(handBefore + 3);
   });
 });

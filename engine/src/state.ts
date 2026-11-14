@@ -339,6 +339,9 @@ export interface GameObject {
     /** It's exiled with these counters on it (Goliath Daydreamer's dream
      * counter). */
     readonly counters?: { readonly kind: string; readonly amount: number };
+    /** "You may exile that spell instead" (Forger's Foundry): this player is
+     * asked, as it resolves, whether to. */
+    readonly mayDecline?: PlayerId;
     /** It's exiled with `source`, in this stint of it (rule 607.2a — River
      * Song's Diary). */
     readonly link?: { readonly source: ObjectId; readonly zoneChangeCount: number };

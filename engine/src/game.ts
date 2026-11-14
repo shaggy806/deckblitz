@@ -30537,6 +30537,23 @@ export class Game {
         this.exilesItselfInstead(object) ||
         object.exileIfWouldGoToGraveyard === true ||
         this.graveyardIsReplacedWithExile(id, false);
+      if (!competing && mark.mayDecline !== undefined) {
+        // "You may exile that spell instead" (Forger's Foundry): an optional
+        // replacement, chosen as the event would happen — the spell waiting on
+        // the stack for the answer. Declined, it goes to the graveyard.
+        const by = this.state.objects[mark.source];
+        this.beginModesChoice(id, mark.mayDecline, 0, 1, 1, [
+          {
+            text: `Exile it${by !== undefined ? ` with ${printedCardName(by)}` : ""} instead of putting it into the graveyard`,
+            effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: true } },
+          },
+          {
+            text: "Put it into the graveyard",
+            effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: false } },
+          },
+        ]);
+        return;
+      }
       if (!competing) {
         object.exileAsItResolves = undefined;
         this.exileAsItResolved(id, mark);
@@ -41203,6 +41220,7 @@ controlledBy,
           ...(plotted ? { plotted: true as const } : {}),
           ...(timeCounters !== undefined ? { timeCounters } : {}),
           ...(how?.withCounters !== undefined && how.withCounters.amount > 0 ? { counters: how.withCounters } : {}),
+          ...(how?.optional === true ? { mayDecline: controller } : {}),
           ...(how?.linked === true && stint !== undefined ? { link: { source, zoneChangeCount: stint } } : {}),
         };
       },

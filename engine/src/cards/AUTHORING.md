@@ -2058,7 +2058,10 @@ Diary): whoever owns the spell, who also makes the rule 616.1 choice; `linked: t
 card **with** the effect's source (rule 607.2a, Imprint), for `exiled-with-source` reads.
 `withCounters: { kind, amount }` is "exile that card **with a dream counter on it** instead …"
 (Goliath Daydreamer): the card gets them in exile, for a `cast-now` of
-`{ exiledOwnedWithCounter: "dream" }`.
+`{ exiledOwnedWithCounter: "dream" }`. `optional: true` is "**you may** exile that spell instead …"
+(Forger's Foundry's mana rider, a `whenSpent` effect — its spell is the trigger's): asked of the
+effect's controller as the spell resolves, a `choose-modes` question; with `anyOwner` and `linked`,
+"into its owner's graveyard" and "cards exiled with this artifact".
 
 `become-plotted { target }` is "if you do, it becomes plotted" after an instruction that
 exiled a card (rule 702.170c) — the `then` of an exiling `look-and-choose`, whose chosen card is

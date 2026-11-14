@@ -2496,7 +2496,8 @@
   "effect:exile-cast-spell-then-cast-linked-exiled",
   "effect:put-cast-spell-on-library-if-did",
   "effect:exile-target-spell",
-  "effect:exile-spell-as-it-resolves-with-counter"
+  "effect:exile-spell-as-it-resolves-with-counter",
+  "effect:exile-spell-as-it-resolves-linked"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
