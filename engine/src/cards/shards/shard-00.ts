@@ -340,6 +340,7 @@ import _poolGlacialRay from "../pool/glacial-ray.js";
 import _poolGlarewielder from "../pool/glarewielder.js";
 import _poolGleamingSplendor from "../pool/gleaming-splendor.js";
 import _poolGlimmerLens from "../pool/glimmer-lens.js";
+import _poolGlimpseOfTomorrow from "../pool/glimpse-of-tomorrow.js";
 import _poolGlintSleeveArtisan from "../pool/glint-sleeve-artisan.js";
 import _poolGloomSurgeon from "../pool/gloom-surgeon.js";
 import _poolGloweringRogon from "../pool/glowering-rogon.js";
@@ -1369,6 +1370,7 @@ const shard: CardShard = {
     _poolGlarewielder,
     _poolGleamingSplendor,
     _poolGlimmerLens,
+    _poolGlimpseOfTomorrow,
     _poolGlintSleeveArtisan,
     _poolGloomSurgeon,
     _poolGloweringRogon,

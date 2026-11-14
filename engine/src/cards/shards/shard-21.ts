@@ -966,6 +966,7 @@ import _tokensBeastTokenRedGreen from "../tokens/beast-token-red-green.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensBoarTokenRuralRecruit from "../tokens/boar-token-rural-recruit.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
+import _tokensDogIllusionToken from "../tokens/dog-illusion-token.js";
 import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
 import _tokensFungusBeastToken from "../tokens/fungus-beast-token.js";
 import _tokensHumanRogueToken from "../tokens/human-rogue-token.js";
@@ -1949,6 +1950,7 @@ const shard: CardShard = {
     _tokensBirdTokenGwaihirGreatestOfTheEagles,
     _tokensBoarTokenRuralRecruit,
     _tokensConstructTokenJanJansenChaosCrafter,
+    _tokensDogIllusionToken,
     _tokensElementalTokenPrismariPianist,
     _tokensFungusBeastToken,
     _tokensHumanRogueToken,

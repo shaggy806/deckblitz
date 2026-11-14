@@ -537,6 +537,7 @@ import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
 import _poolModelOfUnity from "../pool/model-of-unity.js";
 import _poolModifyMemory from "../pool/modify-memory.js";
 import _poolMoggManiac from "../pool/mogg-maniac.js";
+import _poolMoldgrafMonstrosity from "../pool/moldgraf-monstrosity.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
@@ -1559,6 +1560,7 @@ const shard: CardShard = {
     _poolModelOfUnity,
     _poolModifyMemory,
     _poolMoggManiac,
+    _poolMoldgrafMonstrosity,
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMoltenRebuke,

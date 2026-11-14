@@ -677,6 +677,7 @@ import _poolRayOfFrost from "../pool/ray-of-frost.js";
 import _poolRayOfRuin from "../pool/ray-of-ruin.js";
 import _poolRealityScramble from "../pool/reality-scramble.js";
 import _poolRealmbreakerTheInvasionTree from "../pool/realmbreaker-the-invasion-tree.js";
+import _poolReapThePast from "../pool/reap-the-past.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
 import _poolReckonerShakedown from "../pool/reckoner-shakedown.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
@@ -1723,6 +1724,7 @@ const shard: CardShard = {
     _poolRayOfRuin,
     _poolRealityScramble,
     _poolRealmbreakerTheInvasionTree,
+    _poolReapThePast,
     _poolReassemblingSkeleton,
     _poolReckonerShakedown,
     _poolReclamationSage,

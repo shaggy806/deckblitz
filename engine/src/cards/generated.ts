@@ -1769,6 +1769,7 @@ import _poolAvengingArrow from "./pool/avenging-arrow.js";
 import _poolAvengingDruid from "./pool/avenging-druid.js";
 import _poolAvengingHuntbonder from "./pool/avenging-huntbonder.js";
 import _poolAvengingHunter from "./pool/avenging-hunter.js";
+import _poolAvernaTheChaosBloom from "./pool/averna-the-chaos-bloom.js";
 import _poolAvianChangeling from "./pool/avian-changeling.js";
 import _poolAvianOddity from "./pool/avian-oddity.js";
 import _poolAviaryMechanic from "./pool/aviary-mechanic.js";
@@ -11029,6 +11030,7 @@ import _poolGlimmerpost from "./pool/glimmerpost.js";
 import _poolGlimmervoid from "./pool/glimmervoid.js";
 import _poolGlimpseOfFreedom from "./pool/glimpse-of-freedom.js";
 import _poolGlimpseOfNature from "./pool/glimpse-of-nature.js";
+import _poolGlimpseOfTomorrow from "./pool/glimpse-of-tomorrow.js";
 import _poolGlimpseTheCore from "./pool/glimpse-the-core.js";
 import _poolGlimpseTheFuture from "./pool/glimpse-the-future.js";
 import _poolGlimpseTheImpossible from "./pool/glimpse-the-impossible.js";
@@ -17606,6 +17608,7 @@ import _poolMolderingKarok from "./pool/moldering-karok.js";
 import _poolMoldervineCloak from "./pool/moldervine-cloak.js";
 import _poolMoldervineReclamation from "./pool/moldervine-reclamation.js";
 import _poolMoldgrafMillipede from "./pool/moldgraf-millipede.js";
+import _poolMoldgrafMonstrosity from "./pool/moldgraf-monstrosity.js";
 import _poolMoldgrafScavenger from "./pool/moldgraf-scavenger.js";
 import _poolMoleManMoloidMaster from "./pool/mole-man-moloid-master.js";
 import _poolMoleModule from "./pool/mole-module.js";
@@ -17778,6 +17781,7 @@ import _poolMorbiusTheLivingVampire from "./pool/morbius-the-living-vampire.js";
 import _poolMorcantsEyes from "./pool/morcants-eyes.js";
 import _poolMorcantsLoyalist from "./pool/morcants-loyalist.js";
 import _poolMordantDragon from "./pool/mordant-dragon.js";
+import _poolMordenkainen from "./pool/mordenkainen.js";
 import _poolMordenkainensPolymorph from "./pool/mordenkainens-polymorph.js";
 import _poolMordorMuster from "./pool/mordor-muster.js";
 import _poolMordorOnTheMarch from "./pool/mordor-on-the-march.js";
@@ -21520,6 +21524,7 @@ import _poolRealmwright from "./pool/realmwright.js";
 import _poolReanimate from "./pool/reanimate.js";
 import _poolReapAndSow from "./pool/reap-and-sow.js";
 import _poolReapIntellect from "./pool/reap-intellect.js";
+import _poolReapThePast from "./pool/reap-the-past.js";
 import _poolReapTheSeagraf from "./pool/reap-the-seagraf.js";
 import _poolReapWhatIsSown from "./pool/reap-what-is-sown.js";
 import _poolReaperFromTheAbyss from "./pool/reaper-from-the-abyss.js";
@@ -30843,6 +30848,7 @@ import _poolWarning from "./pool/warning.js";
 import _poolWarpArtifact from "./pool/warp-artifact.js";
 import _poolWarpCore from "./pool/warp-core.js";
 import _poolWarpSpeed from "./pool/warp-speed.js";
+import _poolWarpWorld from "./pool/warp-world.js";
 import _poolWarpathGhoul from "./pool/warpath-ghoul.js";
 import _poolWarpath from "./pool/warpath.js";
 import _poolWarpedDevotion from "./pool/warped-devotion.js";
@@ -32029,6 +32035,7 @@ import _poolZodiacRooster from "./pool/zodiac-rooster.js";
 import _poolZodiacSnake from "./pool/zodiac-snake.js";
 import _poolZodiacTiger from "./pool/zodiac-tiger.js";
 import _poolZodiarkUmbralGod from "./pool/zodiark-umbral-god.js";
+import _poolZoeticCavern from "./pool/zoetic-cavern.js";
 import _poolZoeticGlyph from "./pool/zoetic-glyph.js";
 import _poolZofBloodbog from "./pool/zof-bloodbog.js";
 import _poolZofConsumption from "./pool/zof-consumption.js";
@@ -32252,6 +32259,7 @@ import _tokensDinosaurToken31 from "./tokens/dinosaur-token-3-1.js";
 import _tokensDinosaurToken33 from "./tokens/dinosaur-token-3-3.js";
 import _tokensDinosaurToken from "./tokens/dinosaur-token.js";
 import _tokensDjinnMonkToken from "./tokens/djinn-monk-token.js";
+import _tokensDogIllusionToken from "./tokens/dog-illusion-token.js";
 import _tokensDoombot from "./tokens/doombot.js";
 import _tokensDragonEggToken from "./tokens/dragon-egg-token.js";
 import _tokensDragonElementalToken from "./tokens/dragon-elemental-token.js";
@@ -34630,6 +34638,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvengingDruid,
   _poolAvengingHuntbonder,
   _poolAvengingHunter,
+  _poolAvernaTheChaosBloom,
   _poolAvianChangeling,
   _poolAvianOddity,
   _poolAviaryMechanic,
@@ -43890,6 +43899,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlimmervoid,
   _poolGlimpseOfFreedom,
   _poolGlimpseOfNature,
+  _poolGlimpseOfTomorrow,
   _poolGlimpseTheCore,
   _poolGlimpseTheFuture,
   _poolGlimpseTheImpossible,
@@ -50467,6 +50477,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoldervineCloak,
   _poolMoldervineReclamation,
   _poolMoldgrafMillipede,
+  _poolMoldgrafMonstrosity,
   _poolMoldgrafScavenger,
   _poolMoleManMoloidMaster,
   _poolMoleModule,
@@ -50639,6 +50650,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMorcantsEyes,
   _poolMorcantsLoyalist,
   _poolMordantDragon,
+  _poolMordenkainen,
   _poolMordenkainensPolymorph,
   _poolMordorMuster,
   _poolMordorOnTheMarch,
@@ -54381,6 +54393,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReanimate,
   _poolReapAndSow,
   _poolReapIntellect,
+  _poolReapThePast,
   _poolReapTheSeagraf,
   _poolReapWhatIsSown,
   _poolReaperFromTheAbyss,
@@ -63704,6 +63717,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWarpArtifact,
   _poolWarpCore,
   _poolWarpSpeed,
+  _poolWarpWorld,
   _poolWarpathGhoul,
   _poolWarpath,
   _poolWarpedDevotion,
@@ -64890,6 +64904,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZodiacSnake,
   _poolZodiacTiger,
   _poolZodiarkUmbralGod,
+  _poolZoeticCavern,
   _poolZoeticGlyph,
   _poolZofBloodbog,
   _poolZofConsumption,
@@ -65119,6 +65134,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensDinosaurToken33,
   _tokensDinosaurToken,
   _tokensDjinnMonkToken,
+  _tokensDogIllusionToken,
   _tokensDoombot,
   _tokensDragonEggToken,
   _tokensDragonElementalToken,
@@ -67504,6 +67520,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/avenging-druid": _poolAvengingDruid,
   "pool/avenging-huntbonder": _poolAvengingHuntbonder,
   "pool/avenging-hunter": _poolAvengingHunter,
+  "pool/averna-the-chaos-bloom": _poolAvernaTheChaosBloom,
   "pool/avian-changeling": _poolAvianChangeling,
   "pool/avian-oddity": _poolAvianOddity,
   "pool/aviary-mechanic": _poolAviaryMechanic,
@@ -76764,6 +76781,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glimmervoid": _poolGlimmervoid,
   "pool/glimpse-of-freedom": _poolGlimpseOfFreedom,
   "pool/glimpse-of-nature": _poolGlimpseOfNature,
+  "pool/glimpse-of-tomorrow": _poolGlimpseOfTomorrow,
   "pool/glimpse-the-core": _poolGlimpseTheCore,
   "pool/glimpse-the-future": _poolGlimpseTheFuture,
   "pool/glimpse-the-impossible": _poolGlimpseTheImpossible,
@@ -83341,6 +83359,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/moldervine-cloak": _poolMoldervineCloak,
   "pool/moldervine-reclamation": _poolMoldervineReclamation,
   "pool/moldgraf-millipede": _poolMoldgrafMillipede,
+  "pool/moldgraf-monstrosity": _poolMoldgrafMonstrosity,
   "pool/moldgraf-scavenger": _poolMoldgrafScavenger,
   "pool/mole-man-moloid-master": _poolMoleManMoloidMaster,
   "pool/mole-module": _poolMoleModule,
@@ -83513,6 +83532,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/morcants-eyes": _poolMorcantsEyes,
   "pool/morcants-loyalist": _poolMorcantsLoyalist,
   "pool/mordant-dragon": _poolMordantDragon,
+  "pool/mordenkainen": _poolMordenkainen,
   "pool/mordenkainens-polymorph": _poolMordenkainensPolymorph,
   "pool/mordor-muster": _poolMordorMuster,
   "pool/mordor-on-the-march": _poolMordorOnTheMarch,
@@ -87255,6 +87275,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reanimate": _poolReanimate,
   "pool/reap-and-sow": _poolReapAndSow,
   "pool/reap-intellect": _poolReapIntellect,
+  "pool/reap-the-past": _poolReapThePast,
   "pool/reap-the-seagraf": _poolReapTheSeagraf,
   "pool/reap-what-is-sown": _poolReapWhatIsSown,
   "pool/reaper-from-the-abyss": _poolReaperFromTheAbyss,
@@ -96578,6 +96599,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/warp-artifact": _poolWarpArtifact,
   "pool/warp-core": _poolWarpCore,
   "pool/warp-speed": _poolWarpSpeed,
+  "pool/warp-world": _poolWarpWorld,
   "pool/warpath-ghoul": _poolWarpathGhoul,
   "pool/warpath": _poolWarpath,
   "pool/warped-devotion": _poolWarpedDevotion,
@@ -97764,6 +97786,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zodiac-snake": _poolZodiacSnake,
   "pool/zodiac-tiger": _poolZodiacTiger,
   "pool/zodiark-umbral-god": _poolZodiarkUmbralGod,
+  "pool/zoetic-cavern": _poolZoeticCavern,
   "pool/zoetic-glyph": _poolZoeticGlyph,
   "pool/zof-bloodbog": _poolZofBloodbog,
   "pool/zof-consumption": _poolZofConsumption,
@@ -97987,6 +98010,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/dinosaur-token-3-3": _tokensDinosaurToken33,
   "tokens/dinosaur-token": _tokensDinosaurToken,
   "tokens/djinn-monk-token": _tokensDjinnMonkToken,
+  "tokens/dog-illusion-token": _tokensDogIllusionToken,
   "tokens/doombot": _tokensDoombot,
   "tokens/dragon-egg-token": _tokensDragonEggToken,
   "tokens/dragon-elemental-token": _tokensDragonElementalToken,

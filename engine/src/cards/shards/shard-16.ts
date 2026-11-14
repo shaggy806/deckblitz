@@ -58,6 +58,7 @@ import _poolAvenArcher from "../pool/aven-archer.js";
 import _poolAvenRedeemer from "../pool/aven-redeemer.js";
 import _poolAvenRiftwatcher from "../pool/aven-riftwatcher.js";
 import _poolAvengerEnDal from "../pool/avenger-en-dal.js";
+import _poolAvernaTheChaosBloom from "../pool/averna-the-chaos-bloom.js";
 import _poolAweForTheGuilds from "../pool/awe-for-the-guilds.js";
 import _poolAwokenHorror from "../pool/awoken-horror.js";
 import _poolAxgardArmory from "../pool/axgard-armory.js";
@@ -1145,6 +1146,7 @@ const shard: CardShard = {
     _poolAvenRedeemer,
     _poolAvenRiftwatcher,
     _poolAvengerEnDal,
+    _poolAvernaTheChaosBloom,
     _poolAweForTheGuilds,
     _poolAwokenHorror,
     _poolAxgardArmory,

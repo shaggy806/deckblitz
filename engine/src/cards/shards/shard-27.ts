@@ -941,6 +941,7 @@ import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWandOfWonder from "../pool/wand-of-wonder.js";
 import _poolWanderingFumarole from "../pool/wandering-fumarole.js";
+import _poolWarpWorld from "../pool/warp-world.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWastescapeBattlemage from "../pool/wastescape-battlemage.js";
 import _poolWatcherInTheWeb from "../pool/watcher-in-the-web.js";
@@ -1944,6 +1945,7 @@ const shard: CardShard = {
     _poolWallOfStone,
     _poolWandOfWonder,
     _poolWanderingFumarole,
+    _poolWarpWorld,
     _poolWarriorsHonor,
     _poolWastescapeBattlemage,
     _poolWatcherInTheWeb,

@@ -225,6 +225,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Dinosaur Soldier Token",
   "Dinosaur Token",
   "Djinn Monk Token",
+  "Dog Illusion Token",
   "Doombot",
   "Dragon Egg Token",
   "Dragon Elemental Token",

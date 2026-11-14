@@ -556,6 +556,7 @@ import _poolMoggToady from "../pool/mogg-toady.js";
 import _poolMogisGodOfSlaughter from "../pool/mogis-god-of-slaughter.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
 import _poolMomoFriendlyFlier from "../pool/momo-friendly-flier.js";
+import _poolMordenkainen from "../pool/mordenkainen.js";
 import _poolMotherBear from "../pool/mother-bear.js";
 import _poolMudbrawlerRaiders from "../pool/mudbrawler-raiders.js";
 import _poolMultiplyByZero from "../pool/multiply-by-zero.js";
@@ -1586,6 +1587,7 @@ const shard: CardShard = {
     _poolMogisGodOfSlaughter,
     _poolMoltenBlast,
     _poolMomoFriendlyFlier,
+    _poolMordenkainen,
     _poolMotherBear,
     _poolMudbrawlerRaiders,
     _poolMultiplyByZero,

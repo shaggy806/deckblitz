@@ -977,6 +977,7 @@ import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZealotIlVec from "../pool/zealot-il-vec.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZilorthaApexOfIkoria from "../pool/zilortha-apex-of-ikoria.js";
+import _poolZoeticCavern from "../pool/zoetic-cavern.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
 import _poolZygonInfiltrator from "../pool/zygon-infiltrator.js";
@@ -1984,6 +1985,7 @@ const shard: CardShard = {
     _poolZealotIlVec,
     _poolZephyrFalcon,
     _poolZilorthaApexOfIkoria,
+    _poolZoeticCavern,
     _poolZofBloodbog,
     _poolZulaportEnforcer,
     _poolZygonInfiltrator,
