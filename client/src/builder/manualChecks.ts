@@ -12693,4 +12693,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, { bf: [{ name: 'Jace Beleren', counters: { loyalty: 7 } }] }, {}],
     }),
   ),
+  // --- "Choose X" modes (2026-11-14) ------------------------------------------------
+  preset(
+    'Doomsday Confluence: the modes you choose are its X',
+    board({
+      you: { bf: ['Swamp*6'], hand: ['Doomsday Confluence'] },
+      // A full table: the banner beside four quadrants.
+      opp: [{ bf: ['Grizzly Bears'] }, {}, {}],
+    }),
+  ),
 ]

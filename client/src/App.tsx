@@ -3142,6 +3142,12 @@ function Table({
     const { cast, picked, ...picks } = pendingModes
     const modes = [...picked].sort((a, b) => a - b)
     setPendingModes(null)
+    // "Choose X" (Doomsday Confluence): X is the number of modes chosen
+    // (rule 601.2b), so there's no X of its own to ask.
+    if (cast.castModal?.modesX === true) {
+      castAtX(cast, modes.length, { ...picks, modes })
+      return
+    }
     // A modal spell with {X} (Clan Defiance) announces X after its modes
     // (rule 601.2b), then its targets at that X.
     const fixedX =
@@ -3164,7 +3170,7 @@ function Table({
       ...castExtras(cast),
       ...picks,
     })
-  }, [beginTargeting, pendingModes])
+  }, [beginTargeting, castAtX, pendingModes])
 
   /** Dispatch / begin one playable face of a hand card. */
   const playFace = useCallback(
@@ -5410,6 +5416,12 @@ function Table({
           {budget !== undefined ? (
             <>
               up to {budget} <Symbols text="{P}" /> worth of modes ({spent}/{budget})
+            </>
+          ) : cm.modesX === true ? (
+            // "Choose X": as many modes as the X it pays for, up to what it can.
+            <>
+              X modes (X = {picked.length}, at most {cm.maxModes}
+              {cm.repeatModes === true && '; a mode may repeat'})
             </>
           ) : (
             <>

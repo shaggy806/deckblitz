@@ -4249,6 +4249,16 @@ export interface CastModalSpec {
    * its own target slots, which may name the same target or different ones. */
   readonly repeatModes?: true;
   /**
+   * "**Choose X.** You may choose the same mode more than once" (Doomsday
+   * Confluence, `{X}{X}{B}`): exactly X modes, X the spell's own — both
+   * announced as it's cast (rule 601.2b). `minModes` and `maxModes` are
+   * written 0 and not read: a cast takes 0 to as many modes as the X it can
+   * pay for (the offer's `maxModes`, with `modesX`), and its X is the number
+   * of modes it chose — a cast naming another X is read at that one. A free
+   * cast's X is 0 (rule 107.3b), so no modes.
+   */
+  readonly modesX?: true;
+  /**
    * "Choose up to five {P} worth of modes" (rule 700.2i): any number of modes,
    * none included (the Seasons' ruling), whose `ModeOption.pawprints` add up to
    * at most this. Goes with `minModes: 0` and `maxModes` this budget; a Season

@@ -2607,7 +2607,8 @@
   "replacement:enters-tapped-if-x",
   "effect:cast-now-grants-abilities",
   "effect:cast-now-grants-abilities",
-  "effect:reveal-until-count-put-any-number"
+  "effect:reveal-until-count-put-any-number",
+  "effect:cast-modal-x-modes"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

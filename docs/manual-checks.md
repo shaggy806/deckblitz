@@ -8427,3 +8427,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Thrasta, Tempest's Roar: in a 4-player game, another attacker's damage counts toward the loyalty
 - **Do:** Attack Carol's Jace Beleren with Thrasta and Grizzly Bears. Confirm the damage panel as it stands.
 - **Expect:** The panel reads "→ Jace Beleren: 5" and "→ Carol up to 2" holding 2 (the Bears' 2 make up the rest of Jace's 7 loyalty). Jace dies and Carol goes to 38.
+
+## "Choose X" modes (2026-11-14)
+
+### Doomsday Confluence: the modes you choose are its X
+- **Do:** Cast Doomsday Confluence. Click "Create a 3/3 black Dalek artifact creature token with menace." twice, then Confirm.
+- **Expect:** The banner reads "Doomsday Confluence — choose X modes (X = 2, at most 2; a mode may repeat)", X going up with each click. No X is asked after Confirm: you get two 3/3 Dalek tokens, five of your six Swamps tapped.

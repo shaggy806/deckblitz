@@ -3094,6 +3094,11 @@ export class Game {
         this.withLifeChoice(action.phyrexianLife, () => this.cycleCard(action.player, action.card));
         break;
       case "cast-spell":
+        // "Choose X": X is the number of modes chosen (`atModesX`).
+        if (this.atModesX(action) !== action) {
+          this.dispatchOne(this.atModesX(action));
+          break;
+        }
         // Which alternative cost it pays (rule 601.2b), for all that follows.
         if (action.altCostIndex !== undefined && this.altCostPick !== action.altCostIndex) {
           this.withAltCostPick(action.altCostIndex, () => this.dispatchOne(action));
@@ -3367,6 +3372,7 @@ export class Game {
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
+        if (this.atModesX(action) !== action) return this.canDispatch(this.atModesX(action));
         if (action.altCostIndex !== undefined && this.altCostPick !== action.altCostIndex) {
           return this.withAltCostPick(action.altCostIndex, () => this.canDispatch(action));
         }
@@ -4943,9 +4949,13 @@ export class Game {
     kicked = false,
     /** The targets too dear to offer (`targetTaxOffer`). */
     targetTax?: { readonly within: (ref: TargetRef) => boolean } | null,
+    /** The most X this variant can pay for: "Choose X" (`modesX`) chooses
+     * no more modes than that. */
+    payableX?: number,
   ): Pick<Extract<LegalAction, { kind: "cast-spell" }>, "castModal"> {
     if (def.castModal === null) return {};
-    const range = this.castModalRange(def.castModal, card, kicked);
+    const modesX = def.castModal.modesX === true;
+    const range = modesX ? { minModes: 0, maxModes: payableX ?? 0 } : this.castModalRange(def.castModal, card, kicked);
     const modes = def.castModal.modes.map((m) => ({
       text: m.text,
       targetSpecs: [...(m.targets ?? [])],
@@ -4979,6 +4989,7 @@ export class Game {
         ...(sets !== undefined ? { modeSets: sets.map((set) => [...set]) } : {}),
         ...(budget !== undefined ? { pawprintBudget: budget } : {}),
         ...(def.castModal.repeatModes === true ? { repeatModes: true as const } : {}),
+        ...(modesX ? { modesX: true as const } : {}),
       },
     };
   }
@@ -5879,7 +5890,7 @@ export class Game {
         ...(via !== undefined ? { via } : {}),
         ...(graveyardGrant !== undefined ? { graveyardGrant } : {}),
         ...(face !== undefined ? { face } : {}),
-        ...this.castModalDescriptor(def, player, card, escalatedMaxModes(), spreeSets ?? undefined, kicked === true, targetTax),
+        ...this.castModalDescriptor(def, player, card, escalatedMaxModes(), spreeSets ?? undefined, kicked === true, targetTax, payableX),
         ...(targetTax !== null ? { targetTaxes: { taxes: targetTax.taxes, afford: targetTax.afford } } : {}),
         ...(sacrifices.length > 0
           ? {
@@ -19615,6 +19626,9 @@ export class Game {
    * that condition holds as it's cast (rule 601.2b — Will of the Sultai's
    * "if you control a commander"), else `maxModes`. */
   private castModalMaxModes(castModal: CastModalSpec, card: ObjectId): number {
+    // "Choose X" (`modesX`): as many as an X may be — the offer caps it at
+    // what can be paid.
+    if (castModal.modesX === true) return Game.MAX_EFFECT_INSTANCES;
     const raised = castModal.maxModesIf;
     const object = this.state.objects[card];
     return raised !== undefined &&
@@ -19636,7 +19650,16 @@ export class Game {
       const range = castModal.kickedModes;
       return typeof range === "number" ? { minModes: range, maxModes: range } : { minModes: range.min, maxModes: range.max };
     }
-    return { minModes: castModal.minModes, maxModes: this.castModalMaxModes(castModal, card) };
+    return { minModes: castModal.modesX === true ? 0 : castModal.minModes, maxModes: this.castModalMaxModes(castModal, card) };
+  }
+
+  /** "Choose X" (`CastModalSpec.modesX`, rule 601.2b): the cast's X is the
+   * number of modes it chose, so a cast naming another X is read at that
+   * one — both are announced together, and either says the other. */
+  private atModesX<A extends Extract<Action, { type: "cast-spell" }>>(action: A): A {
+    if (action.modes === undefined || this.state.objects[action.card] === undefined) return action;
+    if (this.faceDef(action.card, action.face ?? 0).castModal?.modesX !== true) return action;
+    return action.xValue === action.modes.length ? action : { ...action, xValue: action.modes.length };
   }
 
   /** Why the chosen `modes` are illegal for a `castModal` card (or `null`). */
@@ -19645,7 +19668,10 @@ export class Game {
     card: ObjectId,
     modes: readonly number[],
     kicked = false,
+    xValue = 0,
   ): string | null {
+    // "Choose X" (rule 601.2b): as many modes as its X.
+    if (castModal.modesX === true && modes.length !== xValue) return `choose X modes (X is ${xValue})`;
     // Rule 700.2d: a mode once, unless the spell says it may repeat.
     if (castModal.repeatModes === undefined && new Set(modes).size !== modes.length) {
       return "the same mode was chosen twice";
@@ -20267,7 +20293,7 @@ export class Game {
       if (timing !== null) return timing;
     }
     if (def.castModal !== null && modes !== undefined) {
-      const bad = this.whyCannotChooseCastModes(def.castModal, cardId, modes, kicked !== false && kicked !== 0);
+      const bad = this.whyCannotChooseCastModes(def.castModal, cardId, modes, kicked !== false && kicked !== 0, xValue);
       if (bad !== null) return `${def.name}: ${bad}`;
     }
     // A choice of additional costs: the driver must name a branch, and the

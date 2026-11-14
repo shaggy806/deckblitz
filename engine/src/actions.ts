@@ -1368,6 +1368,10 @@ export type LegalAction =
          * `modes` a cast sends may repeat an index, each copy taking its own
          * target slots (`CastModalSpec.repeatModes`). */
         readonly repeatModes?: true;
+        /** "Choose X" (`CastModalSpec.modesX`, rule 601.2b): the cast's X is
+         * the number of modes it sends — 0 to `maxModes`, the most X it can
+         * pay for — so a driver asks no X of its own. */
+        readonly modesX?: true;
       };
       /** Set when the spell's cost contains `{X}`. `maxX` is the largest value
        * of X this player could currently pay for (0 when only X=0 is

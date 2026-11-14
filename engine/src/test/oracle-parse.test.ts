@@ -19877,3 +19877,20 @@ describe("'reveal … until you reveal X permanent cards … Put any number of t
     });
   });
 });
+
+describe("'Choose X. You may choose the same mode more than once.' (Doomsday Confluence)", () => {
+  it("`castModal.modesX`, a mode repeatable", () => {
+    const confluence = parseFace(
+      {
+        name: "Test Confluence",
+        type_line: "Sorcery",
+        mana_cost: "{X}{X}{B}",
+        oracle_text:
+          "Choose X. You may choose the same mode more than once.\n• Each player sacrifices a nonartifact creature of their choice.\n• Create a 3/3 black Dalek artifact creature token with menace.\n• Each opponent discards a card.",
+      },
+      { tokenFor: () => "Dalek Token" },
+    );
+    expect(confluence.castModal).toMatchObject({ minModes: 0, maxModes: 0, modesX: true, repeatModes: true });
+    expect(confluence.castModal?.modes).toHaveLength(3);
+  });
+});

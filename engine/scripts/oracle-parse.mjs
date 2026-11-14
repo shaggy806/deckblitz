@@ -19786,7 +19786,9 @@ function parseModalSpell(spellLines, ctx) {
   }
   // "Choose three. You may choose the same mode more than once." (rule
   // 700.2d — the Confluences): exactly that many, a mode repeatable.
-  const repeated = /^Choose (two|three|four|five)\. You may choose the same mode more than once\.$/.exec(spellLines[0].line);
+  // "Choose X. …" (Doomsday Confluence): X of them, X the spell's own
+  // (`modesX`, rule 601.2b).
+  const repeated = /^Choose (two|three|four|five|X)\. You may choose the same mode more than once\.$/.exec(spellLines[0].line);
   // "An opponent chooses one —" (rule 700.2e): its modes an opponent's to
   // choose (`castModal.chosenBy`), when they need no targets.
   const theirs = repeated === null ? /^An opponent chooses (one|two|one or both|one or more) —$/.exec(spellLines[0].line) : null;
@@ -19802,6 +19804,9 @@ function parseModalSpell(spellLines, ctx) {
     modes.push({ text: stripReminder(l.raw).replace(/^•\s*/, ""), ...(targets.length ? { targets } : {}), effect: r.effect });
   }
   if (repeated) {
+    if (repeated[1] === "X") {
+      return { castModal: { minModes: 0, maxModes: 0, modesX: true, repeatModes: true, modes }, effect: null, targets: [] };
+    }
     const n = { two: 2, three: 3, four: 4, five: 5 }[repeated[1]];
     return { castModal: { minModes: n, maxModes: n, repeatModes: true, modes }, effect: null, targets: [] };
   }
