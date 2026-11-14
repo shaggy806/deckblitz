@@ -253,6 +253,10 @@ export type SearchTogether =
   /** "…with different powers" (Rip, Spawn Hunter; Threats Undetected): no two
    * share a power, read as the choice is raised. */
   | { readonly distinctPowers: true }
+  /** "…with **different mana values**" (Seasons Past, Long Rest): no two
+   * share a mana value, an {X} in a card's cost counting 0 off the stack
+   * (rule 202.3e) and a card with no mana cost 0 (202.3a). */
+  | { readonly distinctManaValues: true }
   | {
       readonly oneEach: readonly {
         /** How the client names the slot: "a Forest card". */

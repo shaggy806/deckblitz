@@ -43131,6 +43131,11 @@ controlledBy,
       for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
       return { rule: "distinct", tags, text: "with different powers" };
     }
+    if ("distinctManaValues" in together) {
+      // {X} is 0 off the stack (rule 202.3e), no mana cost is 0 (202.3a).
+      for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
+      return { rule: "distinct", tags, text: "with different mana values" };
+    }
     for (const id of eligible) {
       tags[id] = together.oneEach.flatMap((slot, index) =>
         matchesFilter(this.state, this.registry, id, slot.filter, { you: player, x }) ? [String(index)] : [],

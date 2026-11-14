@@ -13341,6 +13341,29 @@ describe("any number of … with different names or powers", () => {
     });
   });
 
+  it("reads Seasons Past's any number with different mana values, to the hand", () => {
+    const parsed = face(
+      "Seasons Past",
+      "Sorcery",
+      "Return any number of cards with different mana values from your graveyard to your hand. Put Seasons Past on the bottom of its owner's library.",
+    );
+    expect(parsed.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "look-and-choose",
+          zone: "graveyard",
+          min: 0,
+          max: 99,
+          together: { distinctManaValues: true },
+          destination: "hand",
+          leftover: "stay",
+        },
+        { kind: "put-on-library", target: "source", position: "bottom" },
+      ],
+    });
+  });
+
   it("reads the choosing of creatures as a choose-permanents under the rule", () => {
     const parsed = face(
       "Sigarda's Vanguard",
