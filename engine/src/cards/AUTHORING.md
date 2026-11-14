@@ -6534,7 +6534,12 @@ clause (section 9):
   protects is neither. "Creatures attacking enchanted player" (Curse of
   Hospitality) is `attackingEnchantedPlayer: true`, the player the Curse
   enchants.
-- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, from?, notFrom?, against? }` —
+- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, ofSelf?, from?, notFrom?, against? }` —
+  (`ofSelf` keeps only what was done to this permanent, in its stint: `what:
+  "crewers"` is each creature tapped to pay a Vehicle's crew cost, as it was
+  tapped (rule 702.122c) — Adrestia's "if an Assassin crewed it this turn" is
+  `{ what: "crewers", who: "any-player", filter: { subtype: "Assassin" },
+  ofSelf: true }`, the crewer counting though it has died or changed since.)
   (`against`, a `ConditionPlayer`, keeps only what was done to that player —
   an attack at them, not their planeswalker; damage dealt to them — even once
   they've left the game: Ramses, Assassin Lord's "if they were attacked this

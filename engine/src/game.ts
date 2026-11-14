@@ -49073,12 +49073,24 @@ controlledBy,
   }
 
   /** The creatures tapped to pay `vehicle`'s crew cost crew it (rule
-   * 702.122b): each remembers it, in the stint it's in, for the turn. */
+   * 702.122b): each remembers it, in the stint it's in, for the turn, and
+   * the journal keeps each as it was tapped (`crewed-by` — 702.122c: the
+   * Vehicle was crewed by it, though it leaves or changes since). */
   private recordCrewers(vehicle: ObjectId, creatures: readonly ObjectId[]): void {
     const stint = this.state.objects[vehicle]?.zoneChangeCount ?? 0;
     for (const id of creatures) {
       const creature = this.state.objects[id];
       if (creature === undefined) continue;
+      this.journal({
+        kind: "crewed-by",
+        player: creature.controller,
+        object: id,
+        stint: creature.zoneChangeCount ?? 0,
+        was: this.takeLastKnown(id),
+        target: { kind: "object", object: vehicle },
+        targetStint: stint,
+        ...((creature.stackCount ?? 1) !== 1 ? { count: creature.stackCount } : {}),
+      });
       const had = creature.crewedThisTurn ?? [];
       if (had.some((r) => r.vehicle === vehicle && r.stint === stint)) continue;
       creature.crewedThisTurn = [...had, { vehicle, stint }];

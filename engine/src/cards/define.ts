@@ -1452,6 +1452,12 @@ export type StaticCondition =
        * "if **it** dealt combat damage to a player this turn" (`what:
        * "combat-damaged-by"`, `who: "any-player"`). */
       readonly selfOnly?: boolean;
+      /** Only what was done to this permanent, in the stint it's in or last
+       * had — the entries whose `target` it is: Adrestia's "if **an Assassin
+       * crewed it** this turn" (`{ what: "crewers", filter: { subtype:
+       * "Assassin" }, ofSelf: true, who: "any-player" }`), each crewer
+       * matched as it was tapped (702.122c), though it has left since. */
+      readonly ofSelf?: true;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
       /** Only what was done to this player — an attack at them (the player,

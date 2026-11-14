@@ -99,6 +99,11 @@ export type JournalKind =
   | "saddled"
   /** The Vehicle `object` became crewed (702.122c) under `player`, in `stint`. */
   | "crewed"
+  /** A creature `player` controlled crewed the Vehicle `target`, in
+   * `targetStint` — it was tapped to pay its crew cost (702.122b-c), whether
+   * or not the ability then resolved; `was`: the creature as it was tapped
+   * (Adrestia's ruling: "an Assassin when it was tapped"). */
+  | "crewed-by"
   /** `player` bent (`how`: water, earth, fire or air — rules 701.65b,
    * 701.66b, 701.67c, 702.189b). */
   | "bent"
@@ -315,6 +320,10 @@ export type JournalWhat =
   | "equip-activated"
   /** A player lost life: "if you lost life last turn" (First Response). */
   | "life-lost"
+  /** Each creature tapped to pay a Vehicle's crew cost (`crewed-by`), as it
+   * was tapped: with `turn-history`'s `ofSelf`, "if an Assassin crewed it
+   * this turn" (Adrestia). */
+  | "crewers"
   /** A player gained life. */
   | "life-gained"
   /** A player played a land. */
@@ -392,6 +401,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   "loyalty-activated": { kind: "activated", match: (e) => e.how === "loyalty" },
   "equip-activated": { kind: "activated", match: (e) => e.how === "equip" },
   "life-lost": { kind: "life-lost" },
+  crewers: { kind: "crewed-by" },
   "life-gained": { kind: "life-gained" },
   "lands-played": { kind: "land-played" },
   waterbent: { kind: "bent", match: (e) => e.how === "water" },

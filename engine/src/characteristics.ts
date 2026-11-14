@@ -1410,7 +1410,15 @@ function evalStaticCondition(
         condition.filter,
         you,
         condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
-        toPlayer !== undefined ? { ...condition, toPlayer } : condition,
+        {
+          ...condition,
+          ...(toPlayer !== undefined ? { toPlayer } : {}),
+          // "If an Assassin crewed it this turn": what was done to this
+          // permanent, in its stint, as it last existed once gone.
+          ...(condition.ofSelf === true
+            ? { toObject: { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 } }
+            : {}),
+        },
         // "If it dealt …": this object, in its stint, as it last existed once gone.
         condition.selfOnly === true
           ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
@@ -2069,8 +2077,14 @@ export function damageDealtThisTurn(
 
 /** How a {@link journalCount} reads beyond its list: the zones a
  * `to-graveyard` arrival came from, the window (default this turn), and
- * `toPlayer`, only the entries done to that player (an entry's `target`). */
-export type JournalReadOptions = JournalOrigin & { readonly window?: JournalWindow; readonly toPlayer?: PlayerId };
+ * `toPlayer`, only the entries done to that player (an entry's `target`);
+ * `toObject`, only those done to that permanent in that stint (a `crewed-by`
+ * entry's Vehicle — Adrestia's "if an Assassin crewed it"). */
+export type JournalReadOptions = JournalOrigin & {
+  readonly window?: JournalWindow;
+  readonly toPlayer?: PlayerId;
+  readonly toObject?: { readonly id: ObjectId; readonly stint: number };
+};
 
 /**
  * How many things of one journal word (`JournalWhat`, `journal.ts`'s
@@ -2106,6 +2120,13 @@ export function journalCount(
     if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
     if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
     if (options?.toPlayer !== undefined && (entry.target?.kind !== "player" || entry.target.player !== options.toPlayer)) continue;
+    const toObject = options?.toObject;
+    if (
+      toObject !== undefined &&
+      (entry.target?.kind !== "object" || entry.target.object !== toObject.id || entry.targetStint !== toObject.stint)
+    ) {
+      continue;
+    }
     const object = aboutRecipient ? (entry.target?.kind === "object" ? entry.target.object : undefined) : entry.object;
     const stint = aboutRecipient ? entry.targetStint : entry.stint;
     const was = aboutRecipient ? entry.targetWas : entry.was;
