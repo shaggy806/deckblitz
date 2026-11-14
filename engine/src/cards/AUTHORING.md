@@ -7390,7 +7390,13 @@ The `prevent-damage` family makes the same record.
   what it does beside the exile, its controller's, once per token of a stack:
   "instead exile that card and create a 2/2 black Zombie" (Kalitas, Traitor of
   Ghet — an instruction of the replacement), or a `reflexive-trigger` for "exile
-  it instead. When you do, create …" (Head of the Hunt). `linked: true` exiles
+  it instead. When you do, create …" (Head of the Hunt). In `then`,
+  `"trigger-object"` is the exiled permanent as it last was on the battlefield
+  (rule 608.2h) and `"source"` this permanent: Ravenous Slime's "instead exile
+  it and put a number of +1/+1 counters equal to that creature's power on this
+  creature" is `then: { kind: "add-counter", target: "source", counter:
+  "+1/+1", amount: { powerOf: "trigger-object" } }`
+  (`exile-instead-counters-on-source.test.ts`). `linked: true` exiles
   the card **with** this permanent (rule 607.2b, `GameObject.exiledWith`), so its
   "exiled with ~" abilities find it: The Darkness Crystal (`then: { kind:
   "gain-life", amount: 2 }`, and a `card-in-exile { linked: true }` target for

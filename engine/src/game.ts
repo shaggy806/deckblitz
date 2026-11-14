@@ -2571,10 +2571,20 @@ export class Game {
    * the span of its `moveObject` — see `returnAtNextEndStep`. */
   private readonly exiledToReturn = new Map<ObjectId, { readonly source: ObjectId; readonly controller: PlayerId }>();
   /** A permanent on its way to exile by a replacement that does something
-   * else too, for the span of its `moveObject` — `GraveyardExileReplacement.then`. */
+   * else too, for the span of its `moveObject` — `GraveyardExileReplacement.then`.
+   * `stint` is the permanent's battlefield stint, read as "that creature" (its
+   * last-known information, rule 608.2h); `sourceStint` the replacement
+   * source's, so "this creature" gone meanwhile is gone. */
   private readonly exiledThen = new Map<
     ObjectId,
-    { readonly effect: EffectSpec; readonly source: ObjectId; readonly controller: PlayerId; readonly times: number }
+    {
+      readonly effect: EffectSpec;
+      readonly source: ObjectId;
+      readonly controller: PlayerId;
+      readonly times: number;
+      readonly stint: number;
+      readonly sourceStint: number | undefined;
+    }
   >();
   /** A card on its way to exile by a replacement that exiles it **with** its
    * permanent, for the span of its `moveObject` — `GraveyardExileReplacement.linked`. */
@@ -65620,13 +65630,24 @@ controlledBy,
       }
     }
     // "…and create a 2/2 black Zombie" (Kalitas), "When you do, …" (Head of the
-    // Hunt): once it's in exile, one for each token of a stack.
+    // Hunt): once it's in exile, one for each token of a stack. "That
+    // creature" is the exiled permanent as it last existed on the battlefield
+    // (`"trigger-object"`, its stint — Ravenous Slime's "counters equal to
+    // that creature's power", its ruling), "this creature" the source in the
+    // stint it replaced from.
     const andThen = this.exiledThen.get(id);
     if (andThen !== undefined) {
       this.exiledThen.delete(id);
       if (moved) {
+        const refs: LastKnownRefs = {
+          triggerObject: andThen.stint,
+          ...(andThen.sourceStint !== undefined ? { source: andThen.sourceStint } : {}),
+        };
         for (let i = 0; i < andThen.times; i += 1) {
-          applyEffectSpec(andThen.effect, this.makeResolutionContext(andThen.source, andThen.controller, []));
+          applyEffectSpec(
+            andThen.effect,
+            this.makeResolutionContext(andThen.source, andThen.controller, [], 0, 0, id, 1, 0, [], refs),
+          );
         }
       }
     }
@@ -66064,6 +66085,11 @@ controlledBy,
             source: chosen.source,
             controller: chosen.controller,
             times: Math.min(object.stackCount ?? 1, Game.MAX_EFFECT_INSTANCES),
+            stint: object.zoneChangeCount ?? 0,
+            sourceStint:
+              this.state.objects[chosen.source]?.zone === "battlefield"
+                ? (this.state.objects[chosen.source].zoneChangeCount ?? 0)
+                : undefined,
           });
         }
         // "Return it … at the beginning of the next end step" (Cosmic

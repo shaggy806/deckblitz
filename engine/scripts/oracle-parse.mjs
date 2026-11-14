@@ -20859,19 +20859,24 @@ function selfCreatureWhileOf(line, text) {
  * "If a creature an opponent controls would die, exile it instead. When you do,
  * create …" (Head of the Hunt), "If a nontoken creature an opponent controls
  * would die, instead exile that card and create …" (Kalitas), "… instead exile
- * it and you gain 2 life" (The Darkness Crystal): the exile, and
- * what it does beside it (`GraveyardExileReplacement.then`). `null` for any
- * other line, or one whose token isn't read.
+ * it and you gain 2 life" (The Darkness Crystal), "… instead exile it and put
+ * a number of +1/+1 counters equal to that creature's power on this creature"
+ * (Ravenous Slime — "that creature" the permanent as it last was, its
+ * `"trigger-object"`): the exile, and what it does beside it
+ * (`GraveyardExileReplacement.then`). `null` for any other line, or one whose
+ * token isn't read.
  */
 function exileReplacementOf(line, text, tokenFor) {
-  const m = /^If a (nontoken )?creature an opponent controls would die, (?:exile it instead|instead exile (?:that card|it) and (create .+?|you gain \d+ life))\.(?: When you do, (create .+\.))?$/.exec(line);
+  const m = /^If a (nontoken )?creature an opponent controls would die, (?:exile it instead|instead exile (?:that card|it) and (create .+?|you gain \d+ life|put a number of \+1\/\+1 counters equal to that creature's power on ~))\.(?: When you do, (create .+\.))?$/.exec(line);
   if (m === null) return null;
-  const clause = m[2] === undefined ? m[3] : `${m[2]}.`;
+  const growsSource = m[2]?.startsWith("put a number of") === true;
+  const clause = m[2] === undefined ? m[3] : growsSource ? undefined : `${m[2]}.`;
   const read =
     clause === undefined ? null : parseEffect(`${clause[0].toUpperCase()}${clause.slice(1)}`, { targets: [], tokenFor });
   if (clause !== undefined && (read?.effect == null || read.todo.length > 0)) return null;
-  const then =
-    clause === undefined
+  const then = growsSource
+    ? { kind: "add-counter", target: "source", counter: "+1/+1", amount: { powerOf: "trigger-object" } }
+    : clause === undefined
       ? undefined
       : m[3] === undefined
         ? read.effect

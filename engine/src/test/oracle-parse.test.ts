@@ -20199,3 +20199,22 @@ describe("'Exile all creature cards from target player's graveyard. You may cast
     });
   });
 });
+
+describe("'… instead exile it and put a number of +1/+1 counters equal to that creature's power on this creature' (Ravenous Slime)", () => {
+  it("the replacement's `then` reads the exiled creature as it last was (`trigger-object`)", () => {
+    const slime = parseFace({
+      name: "Test Slime",
+      type_line: "Creature — Ooze",
+      mana_cost: "{2}{G}",
+      oracle_text:
+        "If a creature an opponent controls would die, instead exile it and put a number of +1/+1 counters equal to that creature's power on this creature.",
+    });
+    expect(slime.static[0].replacement).toEqual({
+      event: "would-be-put-into-graveyard",
+      instead: "exile",
+      from: "battlefield",
+      filter: { type: "creature", controlledBy: "opponent" },
+      then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: { powerOf: "trigger-object" } },
+    });
+  });
+});
