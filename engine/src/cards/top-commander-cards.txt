@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4988 already implemented / 12 missing (marks refreshed 2026-11-13)
+4993 already implemented / 7 missing (marks refreshed 2026-11-14)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4748,7 +4748,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4755  Quandrix Campus                          {0}              Land
 [x]  4756  Danitha, Benalia's Hope                  {4}{W}           Legendary Creature — Human Knight
 [x]  4757  Saruman's Trickery                       {1}{U}{U}        Instant
-[ ]  4758  Deekah, Fractal Theorist                 {4}{U}           Legendary Creature — Human Wizard
+[x]  4758  Deekah, Fractal Theorist                 {4}{U}           Legendary Creature — Human Wizard
 [x]  4759  Component Pouch                          {3}              Artifact
 [x]  4760  Triskelion                               {6}              Artifact Creature — Construct
 [x]  4761  Frodo, Adventurous Hobbit                {W}{B}           Legendary Creature — Halfling Scout
@@ -4795,7 +4795,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4802  Into the North                           {1}{G}           Sorcery
 [x]  4803  Jori En, Ruin Diver                      {1}{U}{R}        Legendary Creature — Merfolk Wizard
 [x]  4804  Kaito, Bane of Nightmares                {2}{U}{B}        Legendary Planeswalker — Kaito
-[ ]  4805  Containment Priest                       {1}{W}           Creature — Human Cleric
+[x]  4805  Containment Priest                       {1}{W}           Creature — Human Cleric
 [x]  4806  Aminatou, the Fateshifter                {W}{U}{B}        Legendary Planeswalker — Aminatou
 [x]  4807  Lilysplash Mentor                        {2}{G}{U}        Creature — Frog Druid
 [x]  4808  Gyome, Master Chef                       {2}{B}{G}        Legendary Creature — Troll Warlock
@@ -4805,7 +4805,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4812  Nemata, Primeval Warden                  {2}{B}{G}        Legendary Creature — Treefolk
 [x]  4813  Audacity                                 {G}              Enchantment — Aura
 [x]  4814  Wondrous Crucible                        {7}              Artifact
-[ ]  4815  Filigree Vector                          {3}{W}           Artifact Creature — Phyrexian Construct
+[x]  4815  Filigree Vector                          {3}{W}           Artifact Creature — Phyrexian Construct
 [x]  4816  Stormscale Scion                         {4}{R}{R}        Creature — Dragon
 [x]  4817  Moonlit Meditation                       {2}{U}           Enchantment — Aura
 [x]  4818  Liliana Vess                             {3}{B}{B}        Legendary Planeswalker — Liliana
@@ -4936,7 +4936,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4943  Kroxa, Titan of Death's Hunger           {B}{R}           Legendary Creature — Elder Giant
 [x]  4944  Sarinth Steelseeker                      {1}{G}           Creature — Human Artificer Scout
 [x]  4945  Ancient Animus                           {1}{G}           Instant
-[ ]  4946  Triple Triad                             {3}{R}{R}{R}     Enchantment
+[x]  4946  Triple Triad                             {3}{R}{R}{R}     Enchantment
 [x]  4947  Faerie Conclave                          {0}              Land
 [x]  4948  Sharlayan, Nation of Scholars            {0}              Land — Town
 [x]  4949  Goldberry, River-Daughter                {1}{U}           Legendary Creature — Nymph
@@ -4989,7 +4989,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4996  Sokka, Tenacious Tactician               {1}{U}{R}{W}     Legendary Creature — Human Warrior Ally
 [x]  4997  Reclaim                                  {G}              Instant
 [x]  4998  Ruin Grinder                             {5}{R}           Artifact Creature — Construct
-[ ]  4999  Sin, Unending Cataclysm                  {5}{G}{U}        Legendary Creature — Leviathan Avatar
+[x]  4999  Sin, Unending Cataclysm                  {5}{G}{U}        Legendary Creature — Leviathan Avatar
 [x]  5000  Omen Hawker                              {U}              Creature — Octopus Advisor
 [x]  5001  Hammers of Moradin                       {2}{W}           Creature — Dwarf Cleric
 [x]  5002  Sothera, the Supervoid                   {2}{B}{B}        Legendary Enchantment
