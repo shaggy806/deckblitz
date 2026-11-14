@@ -2633,8 +2633,9 @@ export type EffectSpec =
       /** `then` applies **once**, with every permanent chosen in the target
        * slots from 0: one instruction over the set, not one for each — Expose
        * the Culprit's "exile any number of face-up creatures … in a face-down
-       * pile, shuffle that pile, then cloak them". A token named more than once
-       * from a stack holds one slot each. It applies with none chosen, or none
+       * pile, shuffle that pile, then cloak them". A token chosen from a stack
+       * is split off it first, one for each time it was named, each holding a
+       * slot of its own. It applies with none chosen, or none
        * to choose, too — Fortune, Loyal Steed's "exile it and up to one
        * creature that saddled it this turn" is a `flicker` of `["source", 0]`.
        * The set is also what this resolution "chose this way" (`thisWay:
@@ -2642,7 +2643,14 @@ export type EffectSpec =
        * and Mighty's "the chosen creatures get +X/+X" is a `modify-pt-all`
        * over `{ thisWay: "chosen" }`, its X read once for them all, and
        * Nahiri's Resolve's "exile any number of … Return those cards" a
-       * `flicker` of `{ from: 0 }` with one delayed return. */
+       * `flicker` of `{ from: 0 }` with one delayed return. With `then` an
+       * empty `sequence`, a permanent is only chosen, for a later step over
+       * everything chosen this way: Elrond of the White Council's "for each
+       * fellowship vote, the voter chooses a creature they control. You gain
+       * control of each creature chosen this way" is this inside a
+       * `for-each-vote` (`chooser: "that-player"`), then a `gain-control-all`
+       * over `{ thisWay: "chosen" }` — so a voter with two votes may choose
+       * the same creature twice. */
       readonly thenTogether?: true;
       /** The one chosen is kept on the effect's source as "**the chosen
        * creature**" (`GameObject.chosenPermanent`, replacing any earlier

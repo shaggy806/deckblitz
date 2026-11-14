@@ -2920,7 +2920,13 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     any vote at all (Vault 11's "if no creature got votes" under a `not`);
   - `for-each-vote { option?, effect }` — "for each evidence vote,
     investigate" (Tivit), once per vote, voters in turn order from the
-    active player, `"that-player"` the voter;
+    active player, `"that-player"` the voter. "For each fellowship vote,
+    **the voter chooses** a creature they control. You gain control of each
+    creature chosen this way" (Elrond of the White Council) is a
+    `choose-permanents` with `chooser: "that-player"`, `thenTogether` and
+    an empty `sequence` for `then`, then a `gain-control-all` over
+    `{ thisWay: "chosen" }` — chosen first, so two votes may choose the
+    same creature, and a token is split off its stack as it's chosen;
   - `for-each-voted { which: "most" | "voted" | "unvoted", effect,
     simultaneous? }` — "exile each permanent with the most votes or tied"
     (Council's Judgment — target slot 0 is the permanent), "for each creature

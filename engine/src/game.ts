@@ -53009,15 +53009,20 @@ controlledBy,
     // The set is what this resolution chose this way (`thisWay: "chosen"`),
     // and the instruction happens over it however few were chosen.
     if (awaiting.thenTogether === true) {
-      if (chosen.length > 0) {
-        this.emit({ type: "cards-chosen-from-zone", player, objects: [...new Set(chosen)], chosenOnly: true });
+      // A token chosen out of a stack is singled out first, one for each
+      // time it was named, so the set is those tokens and not the whole
+      // stack (a stack is a representation: it may not change a result) —
+      // Elrond of the White Council's voter gives away the one creature.
+      const picked = chosen.map((id) => (this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id));
+      if (picked.length > 0) {
+        this.emit({ type: "cards-chosen-from-zone", player, objects: [...new Set(picked)], chosenOnly: true });
       }
       applyEffectSpec(
         then,
         this.makeResolutionContext(
           source,
           player,
-          chosen.map((object) => ({ kind: "object", object })),
+          picked.map((object) => ({ kind: "object", object })),
           x,
           resumed?.triggerValue ?? 0,
           resumed?.triggerObject,

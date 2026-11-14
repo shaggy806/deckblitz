@@ -7,6 +7,7 @@
     "effect:delayed-trigger-targets",
     "effect:delayed-step-chooses-targets",
     "effect:delayed-trigger-dealt-damage-this-way-dies",
+    "effect:voter-chooses-permanent",
     "effect:delayed-trigger-watching-bolstered",
     "trigger:leaves-put-onto-battlefield-by-source",
     "bug:trigger-value-lost-in-unless-otherwise",
