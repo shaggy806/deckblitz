@@ -851,6 +851,55 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "keeps a menace commander out of a board with two blockers that kill it",
+    kind: "training",
+    rule: "Menace needs two blockers, not none: a 2/3 into an untapped 7/7 and 5/5 is a dead commander, so it attacks elsewhere or stays home.",
+    run(weights, registry, makeBot) {
+      // Reported from a live game (2026-11-14, room K6DYC, round 5, no
+      // capture): Meren's bot swung its commander, Lathril, Blade of the
+      // Elves (2/3 menace), at Jodah's untapped Old Gnawbone, Two-Headed
+      // Hellkite, Scion of the Ur-Dragon, Wood Elves and Walking Bulwark.
+      // Gnawbone and the Hellkite blocked and Lathril died "for no reason".
+      // v2's attack search predicts every defender with v1's blocks
+      // (`simulateCombat`), and v1 never double-blocks a menace attacker that
+      // one of its creatures kills alone: Gnawbone takes it as a favorable
+      // single block, the gang-block step skips any attacker a lone blocker
+      // already kills, and the menace filter then drops the lone block. So
+      // the search saw Lathril unblocked: 2 damage and two Elf tokens.
+      const game = table(registry, [A, B, C, D], A);
+      game.state.turn.number = 17;
+      game.state.players[A].life = 39;
+      game.state.players[B].life = 19;
+      game.state.players[C].life = 33;
+      game.state.players[D].life = 35;
+      const lathril = onBoard(game, "Lathril, Blade of the Elves", A);
+      game.state.objects[lathril].isCommander = true;
+      game.state.players[A].commanderIdentity = ["B", "G"];
+      lands(game, "Forest", A, 2);
+      lands(game, "Swamp", A, 2);
+      // Atraxa: two small blockers that can't kill a 2/3 together.
+      onBoard(game, "Orcish Bowmasters", B);
+      onBoard(game, "Rona, Herald of Invasion", B);
+      // Jodah: the board Lathril went into, The Ur-Dragon tapped from its attack.
+      for (const name of ["Old Gnawbone", "Two-Headed Hellkite", "Scion of the Ur-Dragon", "Wood Elves", "Walking Bulwark"]) {
+        onBoard(game, name, C);
+      }
+      onBoard(game, "The Ur-Dragon", C, true);
+      // The human: Felothar's walls, Axebane Guardian tapped.
+      onBoard(game, "Felothar the Steadfast", D);
+      onBoard(game, "Axebane Guardian", D, true);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      if (game.state.awaiting?.kind !== "attackers") {
+        return { passed: false, detail: "alice was never asked to attack" };
+      }
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      return {
+        passed: !attackers.some((d) => d.attacker === lathril && d.defender === C),
+        detail: `attacked ${attackers.map((d) => String(d.defender)).join(", ") || "no one"}`,
+      };
+    },
+  },
+  {
     name: "chump-blocks only against lethal",
     rule: "Throwing a creature under an attacker is right facing death and wrong otherwise.",
     run(weights, registry, makeBot) {

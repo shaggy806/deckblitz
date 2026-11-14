@@ -4,6 +4,34 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-14 — Lathril (menace) swung into a 7/7 and a 5/5 and died
+
+Status: open.
+
+- **Seen:** room K6DYC, round five, four players, no capture. Meren's bot had its commander,
+  Lathril, Blade of the Elves (2/3 menace), and only lands besides. It attacked Jodah, who had
+  Old Gnawbone (7/7), Two-Headed Hellkite (5/5), Scion of the Ur-Dragon, Wood Elves and Walking
+  Bulwark untapped. Gnawbone and the Hellkite blocked together and Lathril died.
+- **Right:** keep Lathril home, or send it at Atraxa, whose Orcish Bowmasters and Rona (1/1 and
+  1/3) can't kill a 2/3 together. The user: it killed its commander "for no reason".
+- **Why:** v2's attack search predicts every defender's blocks with v1's `declareBlockers`
+  (`simulateCombat`). v1 never double-blocks a menace attacker that one of its creatures kills
+  alone (`controller.ts`):
+  - Gnawbone takes Lathril as a "favorable" single block (it kills it and survives).
+  - The gang-block step skips any attacker a lone blocker already kills.
+  - The final menace filter drops Gnawbone's lone block (rule 702.111b needs two or more).
+  - So v1 answers **no blocks at all**, checked directly on this board. The search saw Lathril
+    unblocked, 2 damage and two Elf tokens, while the real defender (a v2 seat) blocked with two.
+- **Scenario:** "keeps a menace commander out of a board with two blockers that kill it"
+  (training). It reads "attacked carol" (Jodah's seat) on 2026-11-14.
+- **Likely fix:** in v1's blocks, treat a menace attacker as a gang block from the start: keep it
+  out of the single-block steps, and in the gang-block step don't skip it when one blocker kills
+  it alone. Take the pair that kills it for the least `gangLoss`, still only when the attacker is
+  worth more than that loss. That is the defender's real best block, so the attack search sees it.
+  - Might break: rollout defenders then gang-block menace attackers they used to let through, so
+    v2 attacks with menace creatures less often. That is the point, but check the gate and
+    `bot:diff` for swings that were right because nobody could block them profitably.
+
 ## 2026-10-14 — Terror of the Peaks' 7 at a creature of a player on 4
 
 Status: fixed 2026-10-14 (its scenario now gates).
