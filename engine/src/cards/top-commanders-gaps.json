@@ -2486,7 +2486,8 @@
   "condition:this-way-counts-commander-redirect",
   "trigger:damage-batch-over-opponents",
   "stat:excess-damage-to-departed-this-turn",
-  "effect:exiled-card-gains-trigger"
+  "effect:exiled-card-gains-trigger",
+  "replacement:damage-double-to-chosen-player-side"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

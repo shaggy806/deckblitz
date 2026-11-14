@@ -5204,6 +5204,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       },
     ]);
     expect(face("As this creature enters, choose a player.", "Creature — Construct").choosePlayerOnEnter).toBe("player");
+    // Sawhorn Nemesis: the chosen player's side, doubled.
+    const nemesis = face(
+      "As this creature enters, choose a player.\nIf a source would deal damage to the chosen player or a permanent they control, it deals double that damage instead.",
+      "Creature — Dinosaur",
+    );
+    expect(nemesis.choosePlayerOnEnter).toBe("player");
+    expect(nemesis.static[0].replacement).toEqual({
+      event: "would-deal-damage",
+      to: "chosen-player-side",
+      instead: { modify: { times: 2 } },
+    });
     expect(parseTrigger("At the beginning of the chosen player's upkeep")).toEqual([
       { on: "step-begins", step: "upkeep", who: "chosen-player" },
     ]);

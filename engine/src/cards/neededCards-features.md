@@ -322,6 +322,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Damage doubled to the chosen player's side — built 2026-11-13
+
+The key `replacement:damage-double-to-chosen-player-side`. A `would-deal-damage`
+replacement's `to: "chosen-player-side"`: the player chosen as the permanent
+entered (`choosePlayerOnEnter`, rule 614.1c, its `chosenPlayer`) or a
+permanent that player controls, nothing with nobody chosen. Sawhorn Nemesis
+(rank 6810). `test/damage-double-chosen-player.test.ts`.
+
 ### An untargeted chosen set acted on together — built 2026-11-13
 
 The group `effect:flicker-chosen-group` + `effect:flicker-source-and-chosen` +

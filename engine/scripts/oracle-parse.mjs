@@ -20612,6 +20612,11 @@ function parseStatic(line, text) {
   if (line === "If a source would deal damage to enchanted player, it deals double that damage to that player instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, to: "enchanted-player" }, text };
   }
+  // Sawhorn Nemesis: the player chosen as it entered (`choosePlayerOnEnter`)
+  // and what they control.
+  if (line === "If a source would deal damage to the chosen player or a permanent they control, it deals double that damage instead.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", to: "chosen-player-side", instead: { modify: { times: 2 } } }, text };
+  }
   const creaturesEnchanted = { affects: { scope: "filter", filter: { type: "creature", controlledBy: "enchanted-player" } } };
   if ((m = /^Creatures enchanted player controls get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
     return { ...creaturesEnchanted, grantPt: [Number(m[1]), Number(m[2])], text };

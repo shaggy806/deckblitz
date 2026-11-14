@@ -1145,8 +1145,21 @@ export interface DamageMultiplierReplacement {
    * just the permanents — Hyperion, Supreme Hero's "you or a Hero you
    * control"); `"attached"`: the permanent this Aura or Equipment is
    * attached to (Inviolability, Shield of the Realm); `"enchanted-player"`:
-   * the player this Aura is attached to (Curse of Bloodletting). */
-  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "player-or-battle" | "self" | "your-side" | "attached" | "enchanted-player";
+   * the player this Aura is attached to (Curse of Bloodletting);
+   * `"chosen-player-side"`: the player chosen for this permanent
+   * (`GameObject.chosenPlayer` — `choosePlayerOnEnter`) or a permanent that
+   * player controls (Sawhorn Nemesis), nothing with nobody chosen. */
+  readonly to?:
+    | "opponent"
+    | "opponent-side"
+    | "you"
+    | "player"
+    | "player-or-battle"
+    | "self"
+    | "your-side"
+    | "attached"
+    | "enchanted-player"
+    | "chosen-player-side";
   /** Not this permanent itself — "**other** permanents you control"
    * (Palisade Giant), "another creature you control" (Vigor). */
   readonly toOther?: true;

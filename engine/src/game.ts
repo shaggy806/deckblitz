@@ -868,7 +868,7 @@ function lifeStepText(step: LifeGainStep): string {
 
 /** Who's replacing a damage event: a permanent, or a resolved effect's
  * source and controller. */
-type DamageReplacer = Pick<GameObject, "id" | "controller" | "attachedTo" | "attachedToPlayer">;
+type DamageReplacer = Pick<GameObject, "id" | "controller" | "attachedTo" | "attachedToPlayer" | "chosenPlayer">;
 
 /** A static barring deaths from causing triggers (Hushbringer), as
  * `Game.deathSuppressors` found it. */
@@ -57832,6 +57832,12 @@ controlledBy,
         break;
       case "enchanted-player":
         if (target.kind !== "player" || target.player !== by.attachedToPlayer) return false;
+        break;
+      case "chosen-player-side":
+        // The chosen player, or a permanent they control (Sawhorn Nemesis);
+        // with nobody chosen, nothing.
+        if (by.chosenPlayer === undefined || recipientController !== by.chosenPlayer) return false;
+        if (target.kind === "object" && this.state.objects[target.object]?.zone !== "battlefield") return false;
         break;
       case "your-side":
         // You, or a permanent you control (narrowed by `toFilter`, below).
