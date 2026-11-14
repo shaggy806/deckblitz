@@ -359,6 +359,13 @@ choice); `counters-removed` reads `perCounter` and a new `byYou` off it. Watcher
 exiled" fired once for Dust of Moments' two (rule 603.2c) — Aeon Chronicler, Benalish
 Commander, Detritivore, Dinosaurs on a Spaceship and Fungal Behemoth now say `perCounter`.
 `test/time-counter-removed.test.ts`.
+### A cast-this-turn exile whose spell is exiled instead — found built 2026-11-14
+
+The key `zone:impulse-exile-instead` needed no engine code: `exile`'s `mayPlay` with
+`exileAfter` (Dire Fleet Daredevil) already says it. Radiant Scrollwielder (rank 10200, through
+`choose-random-card`) and Nita, Forum Conciliator (`spendAs: "any-type"`).
+`test/impulse-exile-instead.test.ts`.
+
 ### A creature flickered with its Auras, which return attached — built 2026-11-14
 
 The key `effect:flicker-host-and-auras-return-attached`: `flicker`'s `withAuras` (with
