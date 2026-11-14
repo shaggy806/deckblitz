@@ -666,6 +666,17 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 326 (2026-11-14, `author-freed`: the 9 cards on the freed queue)** — all 9 authored
+  by the lead, none blocked. Six ran on their built keys as they were: Rod of Absorption (River
+  Song's Diary's linked exile, Primeval Spawn's total mana value), Spell Queller (a linked spell
+  exile, Severance Priest's owners), Lady Loki (Possibility Storm's shape with a mana value
+  difference), Minion of the Wastes (Phyrexian Processor's life, Shapeshifter's chosen number),
+  Inquisitor Eisenhorn (Kefnet's `revealsDrawn`) and Web of Inertia (Champions of Minas Tirith's
+  `unless` with a graveyard exile). Three needed a small piece, built here: Eye of the Storm
+  (`CardFilter.isCopy` — "casts an instant or sorcery **card**", so its own cast copies don't
+  trigger it), Nameless Race (`payLife: { atMost }`) and Uvilda // Nassari (a counter removed from
+  a card in exile is an event its own abilities hear: "when the last refine counter is
+  removed"). The queue is empty a fifth time.
 - **Batch 324 (2026-11-13, `author-freed`: the 7 cards on the freed queue)** — all 7 authored,
   none blocked. Four ran on their built keys as they were: Valleymaker (Victory Chimes'
   `playerOfChoice`), Sacellum Godspeaker (Metalworker's reveal-first mana ability), Sylvan

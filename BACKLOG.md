@@ -59,9 +59,10 @@ section keeps only what to do next.
   built 16 agents' shares, 79 cards (83 card files), leaving 72 keys over 68 cards; **B325** re-keyed the six cards
   its keys didn't cover (North Star, False Dawn, Oath of Kaya, Tahngarth, Deification, Curie) and recorded Pulmonic
   Sliver major (an asked optional graveyard replacement). Skipped: Spectral Searchlight and Soulfire Eruption (major),
-  Lich's Mastery (one implementation group with Nicol Bolas's deferred major). **Next: `author-freed`** on the 9 cards
-  `--stale` now lists (Eye of the Storm, Spell Queller, Lady Loki, Inquisitor Eisenhorn, Minion of the Wastes, Nameless
-  Race, Rod of Absorption, Uvilda, Web of Inertia), then the lanes again. Each lane's next share is
+  Lich's Mastery (one implementation group with Nicol Bolas's deferred major). The 9 cards its keys freed went
+  through `author-freed` as **B326** (2026-11-14): all 9 authored, three on small pieces built there (`CardFilter.isCopy`,
+  `payLife: { atMost }`, a counter-removed event off an exiled card); `--stale` is empty. **Next: the lanes again**
+  (`build-family overnight lanes`, or `author-top-cards`). Each lane's next share is
   `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. The 28
   triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13
   authored, 15 given narrow keys (`B314.json`), and `cards:needs -- --stale` is empty. Past rank 10,000 the order is still EDHREC

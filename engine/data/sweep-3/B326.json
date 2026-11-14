@@ -1,0 +1,17 @@
+{
+ "batch": "B326",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by exile-cast-spell-then-cast-linked-exiled, exile-spell-as-it-resolves-linked, exile-target-spell, possibility-storm-exile-spell-on-cast, pay-any-amount-of-life-as-enters, may-reveal-first-draw, player-cant-attack-you-this-turn and exiled-card-gains-trigger (9, the queue)",
+ "authored": [
+  { "name": "Eye of the Storm", "files": ["engine/src/cards/pool/eye-of-the-storm.ts"], "tested": true, "note": "needed CardFilter.isCopy (built here): its copies are cast and mustn't trigger it again" },
+  { "name": "Rod of Absorption", "files": ["engine/src/cards/pool/rod-of-absorption.ts"], "tested": true },
+  { "name": "Spell Queller", "files": ["engine/src/cards/pool/spell-queller.ts"], "tested": true },
+  { "name": "Lady Loki, Agent of Chaos", "files": ["engine/src/cards/pool/lady-loki-agent-of-chaos.ts"], "tested": true },
+  { "name": "Minion of the Wastes", "files": ["engine/src/cards/pool/minion-of-the-wastes.ts"], "tested": true },
+  { "name": "Nameless Race", "files": ["engine/src/cards/pool/nameless-race.ts"], "tested": true, "note": "needed asEnters payLife { atMost } (built here)" },
+  { "name": "Inquisitor Eisenhorn", "files": ["engine/src/cards/pool/inquisitor-eisenhorn.ts", "engine/src/cards/tokens/cherubael-token.ts"], "tested": true },
+  { "name": "Web of Inertia", "files": ["engine/src/cards/pool/web-of-inertia.ts"], "tested": true },
+  { "name": "Uvilda, Dean of Perfection // Nassari, Dean of Expression", "files": ["engine/src/cards/pool/uvilda-dean-of-perfection.ts", "engine/src/cards/pool/nassari-dean-of-expression.ts"], "tested": true, "note": "needed a counter-removed event for a card in exile, heard by its own abilities (built here); its mechanic:hone-counters key was a misread of the rulings' old wording" }
+ ],
+ "blocked": []
+}
