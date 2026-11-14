@@ -19148,3 +19148,34 @@ describe("one trigger over every opponent a batch of sources damaged (Breeches, 
     ).toEqual({ kind: "search-library", eachLibrary: "each-player", filter: { notTypes: ["land"] }, destination: "exile", min: 0, max: 1 });
   });
 });
+
+describe("cards leaving a graveyard (Teval, Along the Crooked Way, Hologram Stalker)", () => {
+  it("one or more cards: the batched trigger, a filter read as a card type", () => {
+    expect(parseTrigger("Whenever one or more cards leave your graveyard")).toEqual([{ on: "leaves-graveyard", who: "you" }]);
+    expect(parseTrigger("Whenever one or more artifact and/or creature cards leave your graveyard")).toEqual([
+      { on: "leaves-graveyard", who: "you", filter: { typesAnyOf: ["artifact", "creature"] } },
+    ]);
+  });
+
+  it("a card: once per card, unless it triggers only once each turn", () => {
+    expect(parseTrigger("Whenever a creature card leaves an opponent's graveyard")).toEqual([
+      { on: "leaves-graveyard", who: "opponent", perCard: true, filter: { type: "creature" } },
+    ]);
+    const stalker = parseFace(
+      {
+        name: "Test Stalker",
+        type_line: "Artifact Creature — Illusion",
+        mana_cost: "{3}{U}",
+        oracle_text:
+          "Whenever a card leaves your graveyard, create a 3/3 colorless Illusion artifact creature token. This ability triggers only once each turn.",
+      },
+      { tokenFor: () => "Illusion Token" },
+    );
+    expect(stalker.triggered[0].trigger).toEqual({ on: "leaves-graveyard", who: "you" });
+    expect(stalker.triggered[0].oncePerTurn).toBe(true);
+  });
+
+  it("leaves a phrase it can't read as a type to a person", () => {
+    expect(parseTrigger("Whenever one or more cards leave your graveyard during your turn")).toBeNull();
+  });
+});

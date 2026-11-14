@@ -31651,7 +31651,12 @@ export class Game {
             ? this.creatureCount(this.batchedAttackers(trigger, this.playerAttackers(trigger, event), object))
             : // How many cards left the graveyard, for "that many".
               trigger.on === "leaves-graveyard" && event.type === "cards-left-graveyard"
-              ? this.graveyardLeavers(trigger, event.objects, object).length
+              ? trigger.batchValue === "greatest-mana-value"
+                ? this.graveyardLeavers(trigger, event.objects, object).reduce(
+                    (most, id) => Math.max(most, this.graveyardDepartures?.get(id)?.manaValue ?? 0),
+                    0,
+                  )
+                : this.graveyardLeavers(trigger, event.objects, object).length
               : // How many cards were put into the graveyard.
                 trigger.on === "put-into-graveyard" && event.type === "cards-put-into-graveyard"
               ? this.graveyardArrivals(trigger, event.arrivals, object).length

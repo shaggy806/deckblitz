@@ -2471,6 +2471,21 @@ export function parseTrigger(clause) {
       batched: true,
     }];
   }
+  // "Whenever one or more [creature] cards leave your graveyard": once per
+  // simultaneous move (Teval, the Balanced Scale; Amzu, Swarm's Hunger), and
+  // "whenever a creature card leaves your graveyard" once per card (Along the
+  // Crooked Way: `perCard`). A filter is matched as the card was there.
+  if ((m = /^Whenever (one or more|an?) (?:(.+?) )?cards? leaves? (your|an opponent's|a) graveyard$/.exec(c))) {
+    const filter = m[2] === undefined ? {} : parseTypePhrase(m[2], { cards: true });
+    if (filter === null) return null;
+    const who = { your: "you", "an opponent's": "opponent", a: "any" }[m[3]];
+    return [{
+      on: "leaves-graveyard",
+      who,
+      ...(m[1] !== "one or more" ? { perCard: true } : {}),
+      ...(Object.keys(filter).length > 0 ? { filter } : {}),
+    }];
+  }
   // "Whenever one or more [other] creatures [you control] die": once per
   // simultaneous event. (With "this ability triggers only once each turn" it's
   // a plain `dies`, which `parseFace` makes of it.)
@@ -17514,6 +17529,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       // leaving likewise (Sally Sparrow).
       let triggers = oncePerTurn
         ? parsedTriggers.map((t) => {
+            // "Whenever a card leaves your graveyard … only once each turn"
+            // (Hologram Stalker): the first move triggers it, however many
+            // cards, so the batched form.
+            if (t.on === "leaves-graveyard" && t.perCard === true) {
+              const { perCard: _perCard, ...batched } = t;
+              return batched;
+            }
             if (t.on !== "dies" && t.on !== "leaves-battlefield") return t;
             const { batched: _batched, ...plain } = t;
             return plain;

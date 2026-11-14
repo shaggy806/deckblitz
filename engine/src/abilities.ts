@@ -2048,6 +2048,13 @@ export type TriggerKind =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly perCard?: boolean;
+      /** The batched form's `{ triggerValue: true }`, in place of how many:
+       * `"greatest-mana-value"` is the greatest mana value among the cards
+       * that counted, each as it was in the graveyard (rule 603.10a; Amzu,
+       * Swarm's Hunger's "the greatest mana value among those cards"), 0 if
+       * none has one. Fixed as it triggers, so it reads a card that's since
+       * gone to a hand or a library. */
+      readonly batchValue?: "greatest-mana-value";
     }
   | {
       /**
