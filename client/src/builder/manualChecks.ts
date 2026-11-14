@@ -12564,4 +12564,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  preset(
+    "Mausoleum Turnkey: an opponent picks which creature card comes back",
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Mausoleum Turnkey'], gy: ['Grizzly Bears', 'Hill Giant'] },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    "Mausoleum Turnkey: name the opponent who picks, in a 4-player game",
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Mausoleum Turnkey'], gy: ['Grizzly Bears', 'Hill Giant'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

@@ -8157,6 +8157,16 @@ export class Game {
         invalidateComputedCache();
       }
     }
+    if (awaiting.targetChooserFor === true) {
+      // The opponent who chooses a parked trigger's targets: place it again.
+      const trigger = this.state.pendingChooserTrigger;
+      delete this.state.pendingChooserTrigger;
+      if (trigger !== undefined && this.placeTriggerOnStack({ ...trigger, targetChooser: creatureType as PlayerId }) === "paused") {
+        return;
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     if (awaiting.forCost !== undefined) {
       const spell = this.state.objects[awaiting.source];
       if (spell?.zone === "stack" && (spell.zoneChangeCount ?? 0) === awaiting.forCost.stint) {
@@ -35819,6 +35829,8 @@ export class Game {
     readonly modes?: readonly number[];
     /** See `PendingTrigger.miracle`. */
     readonly miracle?: PendingTrigger["miracle"];
+    /** See `PendingTrigger.targetChooser`. */
+    readonly targetChooser?: PlayerId;
   }): "done" | "paused" {
     // A self-contained ability record (a mana-spend rider) has no card
     // ability to look up — mint it carrying its own record, exactly as
@@ -36103,6 +36115,26 @@ export class Game {
       return "done";
     }
 
+    // "Any target of an opponent's choice": its controller names the
+    // opponent first, among two or more (rules 603.3d, 800.4 — Cuombajj
+    // Witches' ruling for its activated twin), then that opponent chooses.
+    if ((ability as TriggeredAbility).targetsChosenBy === "an-opponent" && trigger.targetChooser === undefined) {
+      const opponents = this.otherChoosers(trigger.controller);
+      if (opponents.length > 1) {
+        this.state.pendingChooserTrigger = { ...(trigger as PendingTrigger) };
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player: trigger.controller,
+          source: trigger.sourceObjectId,
+          options: opponents,
+          catalog: false,
+          prompt: `Choose the opponent who chooses the target of ${trigger.cardName}'s ability`,
+          targetChooserFor: true,
+        };
+        return "paused";
+      }
+    }
+
     this.state.pendingTargetedTrigger = {
       sourceObjectId: trigger.sourceObjectId,
       cardName: trigger.cardName,
@@ -36205,13 +36237,17 @@ export class Game {
     trigger: {
       readonly triggerObject?: ObjectId;
       readonly lastKnownRefs?: LastKnownRefs;
+      readonly targetChooser?: PlayerId;
+      readonly controller: PlayerId;
     },
   ): PlayerId | undefined {
     const by = ability.targetsChosenBy;
     if (by === undefined) return undefined;
     const object = trigger.triggerObject === undefined ? undefined : this.state.objects[trigger.triggerObject];
     const player =
-      by === "active-player"
+      by === "an-opponent"
+        ? (trigger.targetChooser ?? this.otherChoosers(trigger.controller)[0])
+        : by === "active-player"
         ? this.activePlayer
         : by === "trigger-player"
           ? trigger.lastKnownRefs?.player

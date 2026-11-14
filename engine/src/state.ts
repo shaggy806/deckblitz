@@ -2666,6 +2666,10 @@ export interface PendingTrigger {
    * `choose-modes` it paused for, in printed order. See the `modal`
    * effect's `announced`. */
   readonly modes?: readonly number[];
+  /** "Any target **of an opponent's choice**" (`targetsChosenBy:
+   * "an-opponent"`): the opponent its controller named to choose, set once
+   * they've answered the question it paused for. */
+  readonly targetChooser?: PlayerId;
 }
 
 /**
@@ -4144,6 +4148,10 @@ export type AwaitingDecision =
        * answer is `source`'s `chosenCreatureType` while it's still that spell
        * on the stack, and `priorityTo` gets priority after (rule 117.3c). */
       readonly forCost?: { readonly stint: number; readonly priorityTo: PlayerId };
+      /** `options` are opponents: the one who chooses the targets of the
+       * trigger parked as `GameState.pendingChooserTrigger` ("any target of
+       * an opponent's choice"). */
+      readonly targetChooserFor?: true;
       /** What the choice is, in words, for a menu that needs saying. */
       readonly prompt?: string;
       readonly then?: EffectSpec;
@@ -6021,6 +6029,13 @@ export interface GameState {
    * has any. Absent when none is.
    */
   pendingModalTrigger?: PendingTrigger;
+  /**
+   * A fired trigger whose targets are "of an opponent's choice", parked while
+   * its controller names which opponent chooses (a `choose-creature-type`
+   * menu of the opponents, marked `targetChooserFor`): answering places it
+   * again with that `targetChooser`. Absent when none is.
+   */
+  pendingChooserTrigger?: PendingTrigger;
   /**
    * A copy of a spell on the stack whose controller is choosing new targets
    * for it (rule 707.10c — "you may choose new targets for the copy"): the

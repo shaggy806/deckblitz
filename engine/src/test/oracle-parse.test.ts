@@ -5980,6 +5980,16 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     // "That player" on an attack names nobody: not read.
     const wrong = face("Creature — Beast", "Whenever this creature attacks, put a +1/+1 counter on target creature of that player's choice.");
     expect(wrong.triggered?.[0]?.targetsChosenBy).toBeUndefined();
+    // "Of an opponent's choice": its controller names which opponent.
+    const turnkey = face(
+      "Creature — Ogre Rogue",
+      "When this creature enters, return target creature card of an opponent's choice from your graveyard to your hand.",
+    );
+    expect(turnkey.triggered[0]).toMatchObject({
+      targetsChosenBy: "an-opponent",
+      targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }],
+      effect: { kind: "return-to-hand", target: 0 },
+    });
   });
 
   it("reads a sweep that leaves out its source: other, other than, except for", () => {

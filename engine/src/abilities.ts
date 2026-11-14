@@ -2719,12 +2719,16 @@ export interface TriggeredAbility {
    * their choice**" (Ley Line's `"active-player"` in "each player's
    * upkeep"), "of **defending player's** choice" (Erithizon's
    * `"trigger-player"`), "**its controller** chooses target permanent"
-   * (Confusion in the Ranks's `"trigger-object-controller"`). They choose as
+   * (Confusion in the Ranks's `"trigger-object-controller"`), "any target **of
+   * an opponent's choice**" (Karplusan Minotaur's `"an-opponent"`: its
+   * controller names the opponent as it's put on the stack, asked only among
+   * two or more — the opponent then chooses, as Cuombajj Witches' activated
+   * `opponentChoosesTargets` has it). They choose as
    * it's put on the stack, as its controller otherwise would (rules 603.3d,
    * 700.2e); the targets stay its controller's, legal or not as that player
    * would choose them. Nobody to ask (they've left the game): its controller.
    */
-  readonly targetsChosenBy?: "trigger-player" | "active-player" | "trigger-object-controller";
+  readonly targetsChosenBy?: "trigger-player" | "active-player" | "trigger-object-controller" | "an-opponent";
   /**
    * "Target opponent **chosen at random**" (Witch Hunt, Knight Rampager, Scab-Clan
    * Giant): the game picks each slot's target as the ability is put on the stack

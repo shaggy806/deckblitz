@@ -8353,3 +8353,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Celestial Reunion: behold two creatures that share a type, then name it
 - **Do:** Cast Celestial Reunion with X=1, taking the beholding cast. Behold Llanowar Elves and Elvish Mystic, choose **Druid**, and find Fyndhorn Elves.
 - **Expect:** Grizzly Bears can't be picked to behold. You're asked between Elf and Druid, and Fyndhorn Elves goes onto the battlefield, not into your hand.
+
+## A trigger's target of an opponent's choice (2026-11-13)
+
+### Mausoleum Turnkey: an opponent picks which creature card comes back
+- **Do:** Cast Mausoleum Turnkey. Sit at Bob's seat and pick Hill Giant in your graveyard.
+- **Expect:** Bob's banner asks him to choose the target of your Turnkey's ability. Hill Giant goes to your hand; Grizzly Bears stays.
+
+### Mausoleum Turnkey: name the opponent who picks, in a 4-player game
+- **Do:** Cast Mausoleum Turnkey, and name Carol.
+- **Expect:** The banner offers Bob, Carol and Dave by name. Carol chooses, and one of the two creature cards goes back to your hand.

@@ -17866,6 +17866,13 @@ function parseFaceAsWritten(face, ctx = {}) {
         rest = rest.replace(choiceOf[0], "");
         base.targetsChosenBy = "trigger-player";
       }
+      // "Any target of an opponent's choice" (Karplusan Minotaur, Mausoleum
+      // Turnkey): its controller names the opponent who chooses.
+      const opponentsChoice = / of an opponent's choice\b/.exec(rest);
+      if (opponentsChoice !== null && /\btarget\b/.test(rest)) {
+        rest = rest.replace(opponentsChoice[0], "");
+        base.targetsChosenBy = "an-opponent";
+      }
       const first = { trigger: triggers[0], ...base };
       const next = fillEffect(
         first,
