@@ -21112,6 +21112,24 @@ function parseStatic(line, text) {
       condition === undefined ? null : (parseStatic(m[2], text) ?? parseStatic(m[2].charAt(0).toUpperCase() + m[2].slice(1), text));
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }
+  // "Play with the top card of your library revealed" (Courser of Kruphix,
+  // Vampire Nocturnus): a zone-visibility effect.
+  if (/^Play with the top card of your library revealed\.$/.test(line)) {
+    return { affects: { scope: "self" }, visibility: { libraryTopRevealed: "you" }, text };
+  }
+  // "As long as the top card of your library is black" (Vampire Nocturnus),
+  // "is a creature card" (Mul Daya Channelers): the `library-top` condition.
+  if ((m = /^As long as the top card of your library is (?:an? )?(.+?), (.+)$/.exec(line))) {
+    const what = m[1].replace(/ card$/, "");
+    const filter =
+      COLOR_WORD[what] !== undefined ? { colors: [COLOR_WORD[what]] } : m[1].endsWith(" card") ? parseTypePhrase(what, { cards: true }) : null;
+    const rest = m[2].replace(/^it /, "~ ");
+    const inner =
+      filter === null || Object.keys(filter).length === 0
+        ? null
+        : parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
+    if (inner !== null && inner.condition === undefined) return { ...inner, condition: { kind: "library-top", filter } };
+  }
   for (const [prefix, condition] of STATIC_CONDITION_PREFIXES) {
     if (!line.startsWith(prefix)) continue;
     const rest = line.slice(prefix.length).replace(/^it /, "~ ");

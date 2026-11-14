@@ -924,6 +924,11 @@ function evalStaticCondition(
         condition.who === "you" ? [you] : state.turnOrder.filter((p) => state.players[p]?.hasLost !== true);
       return seats.some((p) => inBounds(state.zones.perPlayer[p]?.library.length ?? 0));
     }
+    case "library-top": {
+      // The top card is the library's first (`Game`'s "library-top" reads).
+      const top = state.zones.perPlayer[you]?.library[0];
+      return top !== undefined && matchesFilter(state, registry, top, condition.filter, { you, source: source.id });
+    }
     case "threshold":
       return state.zones.perPlayer[you].graveyard.length >= 7;
     case "day-night":

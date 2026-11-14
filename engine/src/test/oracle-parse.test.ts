@@ -19652,3 +19652,19 @@ describe("counting spells for a cast trigger", () => {
     });
   });
 });
+
+describe("the top card of your library (Mul Daya Channelers, Vampire Nocturnus)", () => {
+  it("reads the reveal and an as-long-as on the top card's type or colour", () => {
+    const face = parseFace({
+      name: "Test Channelers",
+      type_line: "Creature — Elf",
+      mana_cost: "{1}{G}{G}",
+      oracle_text:
+        "Play with the top card of your library revealed.\nAs long as the top card of your library is a creature card, this creature gets +3/+3.\nAs long as the top card of your library is black, this creature gets +2/+1.",
+    });
+    expect(face.static[0].visibility).toEqual({ libraryTopRevealed: "you" });
+    expect(face.static[1].grantPt).toEqual([3, 3]);
+    expect(face.static[1].condition).toEqual({ kind: "library-top", filter: { type: "creature" } });
+    expect(face.static[2].condition).toEqual({ kind: "library-top", filter: { colors: ["B"] } });
+  });
+});

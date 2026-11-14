@@ -6492,6 +6492,12 @@ clause (section 9):
   `conditional` applies: Thassa's Oracle's "if X is greater than or equal to
   the number of cards in your library" is `{ op: "lte", n: { amount: {
   devotionTo: "U" } } }` (it fails closed anywhere nothing binds it).
+- `{ kind: "library-top", filter }` — the top card of your library matches
+  `filter`, read live, false with an empty library: Vampire Nocturnus's "as
+  long as the top card of your library is black" (`{ colors: ["B"] }`), Mul
+  Daya Channelers' "is a creature card" (`{ type: "creature" }`). "Play with
+  the top card of your library revealed" beside it is a static's `visibility:
+  { libraryTopRevealed: "you" }`; the scaffolder reads both.
 - `{ kind: "spells-cast-this-game", named, atLeast }` — you've cast at least
   `atLeast` spells named `named` this game (`PlayerState
   .spellNamesCastThisGame`; a copy isn't cast). Approach of the Second Sun's

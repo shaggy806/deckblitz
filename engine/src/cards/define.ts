@@ -1253,6 +1253,17 @@ export type StaticCondition =
       readonly compare?: NumCompare;
     }
   /**
+   * "As long as **the top card of your library** is black" (Vampire
+   * Nocturnus), "is a creature card" (Mul Daya Channelers): your library's
+   * top card matches `filter`, read live — false with an empty library. It
+   * asks whether or not anyone can see the card (the cards that print it
+   * also say "play with the top card of your library revealed").
+   */
+  | {
+      readonly kind: "library-top";
+      readonly filter: CardFilter;
+    }
+  /**
    * A life total, inclusive bounds: Bilbo, Birthday Celebrant's "activate
    * only if you have 111 or more life" is `atLeast: 111`; "if you have at
    * most half your starting life total" is `atMost: "half-starting"`
