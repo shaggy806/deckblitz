@@ -2255,6 +2255,9 @@ export function parseTrigger(clause) {
   // "Whenever one or more creatures attack you / one of your opponents": once
   // per player attacked; `inSet: "trigger-batch"` is those attacking that player.
   if (c === "Whenever one or more creatures attack you") return [{ on: "attacks-player", who: "any", defender: "you" }];
+  // "Whenever a player loses the game" (Blood Tyrant, Ramses, Assassin Lord):
+  // the `loses-game` row, "they" the player who lost.
+  if (c === "Whenever a player loses the game") return [{ on: "event", event: "loses-game", who: "any" }];
   if (c === "Whenever one or more creatures attack one of your opponents") {
     return [{ on: "attacks-player", who: "any", defender: "opponent" }];
   }
@@ -3194,6 +3197,7 @@ export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
+  if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
   // "Exile that card [and create a 2/2 black Zombie creature token]": the card
   // a put-into-a-graveyard trigger is about, found in that graveyard and
   // nowhere else (rule 400.7 — Undead Alchemist). The token is made whether
@@ -18474,6 +18478,13 @@ function playerStateIf(clause, triggers) {
   // O-Kagachi, Vengeful Kami.
   if (c === "if that player attacked you during their last turn," && triggers.every((t) => t.on === "deals-combat-damage-to-player")) {
     return { kind: "attacked-you-last-turn", by: "that-player" };
+  }
+  // Ramses, Assassin Lord: the journal's attacks at the player who lost, each
+  // attacker as it was declared and controlled then.
+  m = /^if they were attacked this turn by an? (.+?) you controlled,$/.exec(c);
+  if (m !== null && triggers.every((t) => t.on === "event" && t.event === "loses-game")) {
+    const filter = parseTypePhrase(clause.slice(clause.indexOf(" by ") + 4).replace(/^an? /, "").replace(/ you controlled,$/, ""));
+    if (filter !== null) return { kind: "turn-history", what: "attackers", who: "you", filter, against: "that-player" };
   }
   // Archaeomancer's Map: the player the land entered under, or the player attacked.
   m = /^if that player controls more (lands|creatures|artifacts|enchantments) than you,$/.exec(c);

@@ -11,6 +11,7 @@
     "effect:emblem-activated-abilities",
     "cost:exiled-card-effect-target",
     "amount:beheld-object-power",
+    "condition:attacked-player-this-turn-by-filter",
     "stat:had-to-attack-condition",
     "effect:token-copy-of-sacrificed",
     "effect:token-copy-of-graveyard-cards",

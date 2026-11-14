@@ -497,12 +497,15 @@ export function lifeWithinBounds(
 
 /** The one player a `ConditionPlayer` names as `opts` see it, or
  * `undefined` for nobody — no "that player" known, an empty or non-player
- * target slot, or a player who has left the game. */
+ * target slot, or a player who has left the game (unless `evenIfGone`: a
+ * read of what happened to them — Ramses, Assassin Lord's "if they were
+ * attacked this turn", asked as they lose the game). */
 export function conditionPlayerOf(
   state: GameState,
   who: ConditionPlayer,
   opts: Pick<ConditionOptions, "thatPlayer" | "targets">,
   source?: GameObject,
+  evenIfGone = false,
 ): PlayerId | undefined {
   let player: PlayerId | undefined;
   if (who === "that-player") player = opts.thatPlayer;
@@ -528,7 +531,8 @@ export function conditionPlayerOf(
     player =
       ref?.kind === "player" ? ref.player : ref?.kind === "object" ? state.objects[ref.object]?.controller : undefined;
   }
-  return player !== undefined && state.players[player]?.hasLost === false ? player : undefined;
+  const seat = player === undefined ? undefined : state.players[player];
+  return seat !== undefined && (evenIfGone || seat.hasLost === false) ? player : undefined;
 }
 
 /**
@@ -1394,6 +1398,10 @@ function evalStaticCondition(
           : condition.who === "opponent"
             ? state.turnOrder.filter((p) => p !== you)
             : state.turnOrder;
+      // "… if they were attacked by …": only what was done to that player,
+      // who may have left the game since (Ramses, Assassin Lord).
+      const toPlayer = condition.against === undefined ? undefined : conditionPlayerOf(state, condition.against, opts, source, true);
+      if (condition.against !== undefined && toPlayer === undefined) return false;
       const n = journalCount(
         state,
         registry,
@@ -1402,7 +1410,7 @@ function evalStaticCondition(
         condition.filter,
         you,
         condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
-        condition,
+        toPlayer !== undefined ? { ...condition, toPlayer } : condition,
         // "If it dealt …": this object, in its stint, as it last existed once gone.
         condition.selfOnly === true
           ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
@@ -2041,8 +2049,9 @@ export function damageDealtThisTurn(
 }
 
 /** How a {@link journalCount} reads beyond its list: the zones a
- * `to-graveyard` arrival came from, and the window (default this turn). */
-export type JournalReadOptions = JournalOrigin & { readonly window?: JournalWindow };
+ * `to-graveyard` arrival came from, the window (default this turn), and
+ * `toPlayer`, only the entries done to that player (an entry's `target`). */
+export type JournalReadOptions = JournalOrigin & { readonly window?: JournalWindow; readonly toPlayer?: PlayerId };
 
 /**
  * How many things of one journal word (`JournalWhat`, `journal.ts`'s
@@ -2077,6 +2086,7 @@ export function journalCount(
   for (const entry of entries) {
     if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
     if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
+    if (options?.toPlayer !== undefined && (entry.target?.kind !== "player" || entry.target.player !== options.toPlayer)) continue;
     const object = aboutRecipient ? (entry.target?.kind === "object" ? entry.target.object : undefined) : entry.object;
     const stint = aboutRecipient ? entry.targetStint : entry.stint;
     const was = aboutRecipient ? entry.targetWas : entry.was;

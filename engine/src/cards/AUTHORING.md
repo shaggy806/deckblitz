@@ -6501,7 +6501,13 @@ clause (section 9):
   your opponents **and/or planeswalkers they control**" (Roar of Resistance)
   `attackingOpponent: "or-their-planeswalkers"` — a battle an opponent
   protects is neither.
-- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, from?, notFrom? }` —
+- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, from?, notFrom?, against? }` —
+  (`against`, a `ConditionPlayer`, keeps only what was done to that player —
+  an attack at them, not their planeswalker; damage dealt to them — even once
+  they've left the game: Ramses, Assassin Lord's "if they were attacked this
+  turn by an Assassin you controlled" is `{ what: "attackers", who: "you",
+  filter: { subtype: "Assassin" }, against: "that-player" }` on the
+  `loses-game` trigger, each attacker matched as it was declared.)
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
   this turn: "if you've discarded a card this turn" is `{ what: "discarded"
   }` (Gilt-Blade Prowler's activation restriction, Recalibrate's

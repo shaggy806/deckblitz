@@ -1433,6 +1433,13 @@ export type StaticCondition =
       readonly selfOnly?: boolean;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
+      /** Only what was done to this player — an attack at them (the player,
+       * not a planeswalker or battle of theirs), damage dealt to them: Ramses,
+       * Assassin Lord's "if they were attacked this turn by an Assassin you
+       * controlled" (`{ what: "attackers", filter: { subtype: "Assassin" },
+       * against: "that-player" }`, the attacker matched as it was declared,
+       * its controller then `who`). Nobody to name, it doesn't hold. */
+      readonly against?: ConditionPlayer;
     }
   /**
    * A player declared a creature attacking you during their last turn — the

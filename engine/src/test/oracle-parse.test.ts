@@ -18995,6 +18995,21 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     });
   });
 
+  it("reads a player losing, if an Assassin of yours attacked them this turn (Ramses, Assassin Lord)", () => {
+    const face = parseFace({
+      name: "Ramses, Assassin Lord",
+      type_line: "Legendary Creature — Human Assassin",
+      oracle_text:
+        "Whenever a player loses the game, if they were attacked this turn by an Assassin you controlled, you win the game.",
+    });
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "event", event: "loses-game", who: "any" },
+      condition: { kind: "turn-history", what: "attackers", who: "you", filter: { subtype: "Assassin" }, against: "that-player" },
+      effect: { kind: "win-game" },
+    });
+    expect(face.complete).toBe(true);
+  });
+
   it("reads an investigation, the first each turn (Erdwal Illuminator)", () => {
     expect(parseTrigger("Whenever you investigate for the first time each turn")).toEqual([
       { on: "event", event: "investigates", who: "you", firstTimeEachTurn: true },

@@ -362,6 +362,12 @@ The combat-targeting lane's group of attack-history reads (B322's group).
   `"had-to-attack"` journal word reads them, and the `journaled` clause's
   `thisCombat` keeps the entries of the combat under way. Firkraag, Cunning
   Instigator. `test/had-to-attack.test.ts`.
+- `condition:attacked-player-this-turn-by-filter` — the `turn-history`
+  condition's `against`: only the journal entries done to one player (an
+  attack's defender, damage's recipient), named even after they've left the
+  game (`conditionPlayerOf`'s `evenIfGone`). Ramses, Assassin Lord's
+  "whenever a player loses the game, if they were attacked this turn by an
+  Assassin you controlled". `test/attacked-by-condition.test.ts`.
 
 ### A reflexive ability's target read against its source now — fixed 2026-11-13
 
