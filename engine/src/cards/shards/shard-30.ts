@@ -211,6 +211,7 @@ import _poolDeepfireElemental from "../pool/deepfire-elemental.js";
 import _poolDefeat from "../pool/defeat.js";
 import _poolDefendTheRider from "../pool/defend-the-rider.js";
 import _poolDeftDuelist from "../pool/deft-duelist.js";
+import _poolDeification from "../pool/deification.js";
 import _poolDeliberate from "../pool/deliberate.js";
 import _poolDelirium from "../pool/delirium.js";
 import _poolDemand from "../pool/demand.js";
@@ -1261,6 +1262,7 @@ const shard: CardShard = {
     _poolDefeat,
     _poolDefendTheRider,
     _poolDeftDuelist,
+    _poolDeification,
     _poolDeliberate,
     _poolDelirium,
     _poolDemand,

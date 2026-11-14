@@ -584,6 +584,7 @@ import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
 import _poolOdricBloodCursed from "../pool/odric-blood-cursed.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
+import _poolOldGrowthTroll from "../pool/old-growth-troll.js";
 import _poolOlindaTheOblivious from "../pool/olinda-the-oblivious.js";
 import _poolOliviaMobilizedForWar from "../pool/olivia-mobilized-for-war.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
@@ -1583,6 +1584,7 @@ const shard: CardShard = {
     _poolObscuraAscendancy,
     _poolOdricBloodCursed,
     _poolOldGrowthGrove,
+    _poolOldGrowthTroll,
     _poolOlindaTheOblivious,
     _poolOliviaMobilizedForWar,
     _poolOmashuCity,

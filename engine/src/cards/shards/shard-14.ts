@@ -281,6 +281,7 @@ import _poolEntityTracker from "../pool/entity-tracker.js";
 import _poolEomerOfTheRiddermark from "../pool/eomer-of-the-riddermark.js";
 import _poolEpicenter from "../pool/epicenter.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
+import _poolEtrataDeadlyFugitive from "../pool/etrata-deadly-fugitive.js";
 import _poolEvasiveAction from "../pool/evasive-action.js";
 import _poolEvendoBrushrazer from "../pool/evendo-brushrazer.js";
 import _poolEvincarsJustice from "../pool/evincars-justice.js";
@@ -1308,6 +1309,7 @@ const shard: CardShard = {
     _poolEomerOfTheRiddermark,
     _poolEpicenter,
     _poolErrantEphemeron,
+    _poolEtrataDeadlyFugitive,
     _poolEvasiveAction,
     _poolEvendoBrushrazer,
     _poolEvincarsJustice,

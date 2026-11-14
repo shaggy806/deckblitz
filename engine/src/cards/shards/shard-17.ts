@@ -386,6 +386,7 @@ import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHandOfHonor from "../pool/hand-of-honor.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
 import _poolHapatrasMark from "../pool/hapatras-mark.js";
+import _poolHaroldAndBobFirstNumens from "../pool/harold-and-bob-first-numens.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHasranOgress from "../pool/hasran-ogress.js";
 import _poolHatred from "../pool/hatred.js";
@@ -1407,6 +1408,7 @@ const shard: CardShard = {
     _poolHandOfHonor,
     _poolHangedExecutioner,
     _poolHapatrasMark,
+    _poolHaroldAndBobFirstNumens,
     _poolHashepOasis,
     _poolHasranOgress,
     _poolHatred,

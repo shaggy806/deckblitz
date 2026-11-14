@@ -36,6 +36,7 @@ import _poolArclightPhoenix from "../pool/arclight-phoenix.js";
 import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
 import _poolArdynTheUsurper from "../pool/ardyn-the-usurper.js";
 import _poolArgothianTreefolk from "../pool/argothian-treefolk.js";
+import _poolArniBrokenbrow from "../pool/arni-brokenbrow.js";
 import _poolArrowVolleyTrap from "../pool/arrow-volley-trap.js";
 import _poolArterialAlchemy from "../pool/arterial-alchemy.js";
 import _poolAstrolabe from "../pool/astrolabe.js";
@@ -1063,6 +1064,7 @@ const shard: CardShard = {
     _poolArdentDustspeaker,
     _poolArdynTheUsurper,
     _poolArgothianTreefolk,
+    _poolArniBrokenbrow,
     _poolArrowVolleyTrap,
     _poolArterialAlchemy,
     _poolAstrolabe,

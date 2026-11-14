@@ -117,6 +117,7 @@ import _poolBrawn from "../pool/brawn.js";
 import _poolBreathstealer from "../pool/breathstealer.js";
 import _poolBredForTheHunt from "../pool/bred-for-the-hunt.js";
 import _poolBrightling from "../pool/brightling.js";
+import _poolBronzehideLion from "../pool/bronzehide-lion.js";
 import _poolBroodrageMycoid from "../pool/broodrage-mycoid.js";
 import _poolBurnerRocket from "../pool/burner-rocket.js";
 import _poolBurningCuriosity from "../pool/burning-curiosity.js";
@@ -1121,6 +1122,7 @@ const shard: CardShard = {
     _poolBreathstealer,
     _poolBredForTheHunt,
     _poolBrightling,
+    _poolBronzehideLion,
     _poolBroodrageMycoid,
     _poolBurnerRocket,
     _poolBurningCuriosity,

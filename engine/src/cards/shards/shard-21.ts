@@ -308,6 +308,7 @@ import _poolFlowerfootSwordmaster from "../pool/flowerfoot-swordmaster.js";
 import _poolForumFamiliar from "../pool/forum-familiar.js";
 import _poolFragmentize from "../pool/fragmentize.js";
 import _poolFrontierBivouac from "../pool/frontier-bivouac.js";
+import _poolFrontlineHeroism from "../pool/frontline-heroism.js";
 import _poolFrostBite from "../pool/frost-bite.js";
 import _poolFrostwindInvoker from "../pool/frostwind-invoker.js";
 import _poolFrozenInIce from "../pool/frozen-in-ice.js";
@@ -1296,6 +1297,7 @@ const shard: CardShard = {
     _poolForumFamiliar,
     _poolFragmentize,
     _poolFrontierBivouac,
+    _poolFrontlineHeroism,
     _poolFrostBite,
     _poolFrostwindInvoker,
     _poolFrozenInIce,

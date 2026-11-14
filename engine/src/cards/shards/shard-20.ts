@@ -724,6 +724,7 @@ import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
 import _poolReady from "../pool/ready.js";
 import _poolRealityAcid from "../pool/reality-acid.js";
 import _poolRealityStrobe from "../pool/reality-strobe.js";
+import _poolRealmSeekers from "../pool/realm-seekers.js";
 import _poolRebelSalvo from "../pool/rebel-salvo.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRecklessRage from "../pool/reckless-rage.js";
@@ -1814,6 +1815,7 @@ const shard: CardShard = {
     _poolReady,
     _poolRealityAcid,
     _poolRealityStrobe,
+    _poolRealmSeekers,
     _poolRebelSalvo,
     _poolRecklessAssault,
     _poolRecklessRage,
