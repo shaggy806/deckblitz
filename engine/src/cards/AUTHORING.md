@@ -2897,8 +2897,12 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   **controller's** effect about them ("you draw a card"; "that player
   discards a card" is `who: "that-player"`), each player's choice is done
   before the next player faces theirs (701.55d), and The Valeyard's
-  `would-face-villainous-choice` can make them face it again (701.55c). A
-  vote is its own effect, `vote` (below), not a `choices`.
+  `would-face-villainous-choice` can make them face it again (701.55c).
+  One per target — "for each of them, that creature's controller faces a
+  villainous choice" (Hunted by The Family) — is a `for-each-target` of it
+  with `who: { controllerOf: <from> }`: those controllers face theirs in
+  APNAP order, not target order (701.55d), one player's several in target
+  order. A vote is its own effect, `vote` (below), not a `choices`.
 - **`vote { for, secret? }`** — (a `choose`'s `who` may be a target slot's player, `{ target: 0 }`: Imperial Edict's "**target opponent** chooses a creature they control. Destroy that creature", then a `for-each-voted`; `target-player-chooser.test.ts`) a vote (rule 701.38): each player still in
   the game votes, in turn order from the effect's controller ("will of the
   council", "council's dilemma" — "starting with you, each player votes …"),

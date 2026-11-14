@@ -14720,6 +14720,14 @@ function asksReplacementOrder(spec: EffectSpec, ctx: ResolutionContext): boolean
   return true;
 }
 
+/** A `for-each-target`'s `effect` is a villainous choice faced by the
+ * controller of the member bound at slot `from` (rule 701.55d orders those). */
+function facesVillainousByController(effect: EffectSpec, from: number): boolean {
+  if (effect.kind !== "each-player-may" || effect.villainous !== true) return false;
+  const who = effect.who;
+  return typeof who === "object" && "controllerOf" in who && who.controllerOf === from;
+}
+
 function asksNothing(effect: EffectSpec): boolean {
   if (effect.kind === "sequence") return effect.effects.every(asksNothing);
   return ASKS_NOTHING.has(effect.kind);
@@ -18081,6 +18089,20 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const rank = (index: number): number => {
           const target = ctx.targets[index];
           const at = target?.kind === "player" ? order.indexOf(target.player) : -1;
+          return at < 0 ? order.length : at;
+        };
+        members.sort((a, b) => rank(a) - rank(b));
+      } else if (facesVillainousByController(spec.effect, spec.from)) {
+        // Each member's controller faces a villainous choice: those players
+        // face theirs one at a time in APNAP order, whatever order the
+        // targets were chosen in (rule 701.55d) — Hunted by The Family's "for
+        // each of them, that creature's controller faces a villainous
+        // choice". One player's several go in target order (a stable sort).
+        const order = ctx.playersInScope("each-player");
+        const rank = (index: number): number => {
+          const target = ctx.targets[index];
+          const player = target === undefined ? undefined : ctx.controllerOf(target);
+          const at = player === undefined ? -1 : order.indexOf(player);
           return at < 0 ? order.length : at;
         };
         members.sort((a, b) => rank(a) - rank(b));
