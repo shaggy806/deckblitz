@@ -1487,7 +1487,10 @@ an untapped artifact or creature, rule 701.67a), `{ payGeneric }`, `{ payLife }`
 `{ payLifeAmount, text: "Pay {X} life" }` ("life equal to its toughness" — Essence
 Vortex), `{ payManaCostOf, ifPaid?, text: "Pay {X}" }` (an object's mana cost, "that
 spell's mana cost" — Ice Cave, Tariff: X as chosen for a spell on the stack and 0
-otherwise, rule 107.3h; none, and it isn't offered, 118.6), `{ doing, text }` (**any
+otherwise, rule 107.3h; none, and it isn't offered, 118.6; `reducedBy` takes that much
+generic off — Flash's "its mana cost reduced by {2}", rule 118.7a), `{ payReduced: "{10}",
+reducedBy, text: "Pay {X}" }` (a printed cost less an amount read as it applies — Draco's "This
+cost is reduced by {2} for each basic land type"; not an {X} cost), `{ doing, text }` (**any
 effect, done by the chooser**, "you" in it being them: Grip of Amnesia's "exiles all
 cards from their graveyard", Perplex's "discards their hand", Tainted Specter's "puts a
 card from their hand on top of their library"; offered as a `may` of it would be, so

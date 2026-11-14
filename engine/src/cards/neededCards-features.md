@@ -391,6 +391,14 @@ return brings the target back, then — "if you do", through `return-flickered`'
 second `return-flickered` step brings its Auras back attached to it (`attachTo`, through
 `readyToEnterAttached`: 303.4i keeps one that can't enchant it in exile, 303.4h returns a bestow
 card unattached). Flickerform (rank 10194). `test/flicker-with-auras.test.ts`.
+### An `unless` cost reduced — built 2026-11-14
+
+The key `effect:sacrifice-unless-pay-reduced-mana-cost`: two `UnlessOption` forms, each with
+`reducedBy` generic mana off as the effect applies (rules 118.7, 118.7a — coloured symbols stay,
+the cost never below {0}): `{ payReduced: "{10}", reducedBy }` (Draco's "unless you pay {10}. This
+cost is reduced by {2} for each basic land type", not an {X} cost) and `payManaCostOf`'s
+`reducedBy` (Flash's "its mana cost reduced by {2}"). Draco (rank 10313), Flash.
+`test/unless-reduced-cost.test.ts`.
 
 ### Graveyard cards chosen by the card types among them — built 2026-11-14
 

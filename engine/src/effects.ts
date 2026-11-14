@@ -25,7 +25,7 @@ import type {
 import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes, TypeShareReference } from "./filter.js";
 import { typeShareParts } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
-import { differentManaSplits, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
+import { differentManaSplits, reduceGenericInCost, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { noteStateMutation } from "./characteristics.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
@@ -1509,8 +1509,19 @@ export type UnlessOption =
    * read as the effect applies, a mana option like `pay`. An {X} in it is the
    * value chosen for a spell on the stack and 0 for anything else (rule
    * 107.3h). No mana cost is an unpayable cost (rules 118.6, 202.1b), and
-   * isn't offered. `{X}` in `text` shows the cost. */
-  | { readonly payManaCostOf: ObjectRef; readonly text: string; readonly ifPaid?: EffectSpec }
+   * isn't offered. `{X}` in `text` shows the cost.
+   *
+   * `reducedBy`: "…unless you pay its mana cost **reduced by {2}**" (Flash):
+   * that much generic mana off it, never below none (rules 118.7, 118.7a —
+   * the coloured symbols stay). */
+  | { readonly payManaCostOf: ObjectRef; readonly reducedBy?: EffectAmount; readonly text: string; readonly ifPaid?: EffectSpec }
+  /** "…unless you pay {10}. **This cost is reduced by {2} for each** basic
+   * land type among lands you control" (Draco): the printed cost with
+   * `reducedBy` generic mana off it as the effect applies (rules 118.7,
+   * 118.7a). `{X}` in `text` shows the cost paid — not an {X} cost: mana
+   * spendable only on costs with {X} doesn't pay it. A mana option like
+   * `pay`. */
+  | { readonly payReduced: string; readonly reducedBy: EffectAmount; readonly text: string }
   /** Any effect, done by the chooser — "you" in it is them: "…unless its
    * controller **exiles all cards from their graveyard**" (Grip of Amnesia),
    * "**discards their hand**" (Perplex), "**discards a land card**" (Cursed
@@ -1615,6 +1626,7 @@ export type BoundUnlessOption = Exclude<
  * choose which of theirs go on the bottom, and what those before them chose;
  * and, once everything has moved, the orders still to ask. */
 export interface PutOnLibrariesProgress {
+  | { readonly payReduced: string }
   readonly cards: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   readonly toAsk: readonly PlayerId[];
   readonly bottom: readonly ObjectId[];
@@ -22831,7 +22843,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         }
         if ("payManaCostOf" in option) {
           const object = objectRefAct(option.payManaCostOf, ctx);
-          const cost = object === undefined ? null : ctx.manaCostToPay(object);
+          const printed = object === undefined ? null : ctx.manaCostToPay(object);
+          const cost =
+            printed === null || option.reducedBy === undefined
+              ? printed
+              : reduceGenericInCost(printed, amountValue(option.reducedBy, ctx));
           return cost === null
             ? []
             : [
@@ -22869,6 +22885,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ) {
         ctx.unless(chooser, options, spec.otherwise, about);
         return;
+        if ("payReduced" in option) {
+          const cost = reduceGenericInCost(option.payReduced, amountValue(option.reducedBy, ctx));
+          return [{ pay: cost, text: option.text.split("{X}").join(cost) }];
+        }
       }
       // One player named as this applies. Nobody: `otherwise` happens.
       const named = chooserPlayer(chooser, ctx);
