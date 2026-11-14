@@ -2030,6 +2030,13 @@ export type ThisWayKind =
    * control that had a counter put on them this way", after a proliferate.
    * A player isn't one. */
   | "counters-put"
+  /** Counters it put on permanents, counted one by one, as many as actually
+   * went on (Doubling Season's doubling included; each token of a stack its
+   * own) — Craig Boone, Novac Guard's "put two quest counters on Craig
+   * Boone. When you do, …", whose ruling has the reflexive ability trigger
+   * once for every two placed this way (a `reflexive-trigger`'s `times`).
+   * Counted by the permanent's controller. */
+  | "counters-placed"
   /** Cards it revealed from a library or a hand — parley's "for each nonland card
    * revealed this way" (an ability word, rule 207.2c), a `reveal-top` with
    * `who` and this
@@ -5468,6 +5475,13 @@ export type EffectSpec =
        * `remember` (rule 603.12: it follows the rules for delayed triggered
        * abilities) — read as `{ remembered: name }`. */
       readonly remember?: { readonly [name: string]: RememberSpec };
+      /** It triggers this many times, read as it would trigger, each its own
+       * ability with its own targets — none at 0. Craig Boone, Novac Guard's
+       * ruling: "the reflexive triggered ability will trigger once for every
+       * two quest counters placed on Craig Boone this way" (`{ half: {
+       * thisWay: "counters-placed" }, round: "down" }`), twice under
+       * Doubling Season, never if fewer than two went on. */
+      readonly times?: EffectAmount;
     }
   | {
       /**
@@ -14370,7 +14384,8 @@ function applyBidLife(spec: Extract<EffectSpec, { kind: "bid-life" }>, ctx: Reso
   if (spec.ifYouWin !== undefined && highBidder === ctx.controller) applyEffectSpec(spec.ifYouWin, won);
 }
 
-/** How many passes a `repeat` makes at most — a guard, like `MAX_CLASHES`. */
+/** How many passes a `repeat` makes at most — a guard, like `MAX_CLASHES` —
+ * and how many times a `reflexive-trigger`'s `times` triggers it. */
 const MAX_REPEATS = 200;
 
 /**
@@ -21545,15 +21560,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // it's 0 (rule 107.2).
       const noArmy = spec.about === "amassed" && about?.kind !== "object";
       if (spec.about !== undefined && about?.kind !== "object" && !noArmy) return;
-      ctx.reflexiveTrigger(
-        spec.targets,
-        spec.effect,
-        spec.text,
-        spec.value === undefined ? undefined : amountValue(spec.value, ctx),
-        spec.divided,
-        about?.kind === "object" ? about.object : noArmy ? null : undefined,
-        spec.remember === undefined ? undefined : rememberSets(spec.remember, ctx),
-      );
+      const times =
+        spec.times === undefined ? 1 : Math.min(Math.max(0, Math.floor(amountValue(spec.times, ctx))), MAX_REPEATS);
+      for (let i = 0; i < times; i++) {
+        ctx.reflexiveTrigger(
+          spec.targets,
+          spec.effect,
+          spec.text,
+          spec.value === undefined ? undefined : amountValue(spec.value, ctx),
+          spec.divided,
+          about?.kind === "object" ? about.object : noArmy ? null : undefined,
+          spec.remember === undefined ? undefined : rememberSets(spec.remember, ctx),
+        );
+      }
       return;
     }
     case "ward":

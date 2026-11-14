@@ -396,6 +396,17 @@ export function thisWayEntries(
           }
         }
         break;
+      case "counters-placed":
+        // Each counter that went on a permanent, one by one: an event per
+        // placement, its `amount` on each token of a stack that got them.
+        if (event.type === "counter-added" && event.amount > 0) {
+          const object = state.objects[event.object];
+          if (object !== undefined) {
+            const tokens = event.count ?? object.stackCount ?? 1;
+            out.push({ object: event.object, player: object.controller, departed: false, count: event.amount * tokens });
+          }
+        }
+        break;
       case "revealed":
         // From a library (parley's "each player reveals the top card of
         // their library") or a hand (the Scents' "reveal any number of green

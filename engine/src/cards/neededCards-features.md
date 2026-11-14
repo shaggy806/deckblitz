@@ -371,6 +371,12 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   `"transformed"` record (B308) is "if you do" / "when you do" after a
   convert, empty when rule 701.28e stops one. Ratchet, Field Medic // Ratchet,
   Rescue Racer. `test/converted-this-way.test.ts`.
+- `effect:reflexive-per-counters-placed` — `reflexive-trigger`'s `times` (it
+  triggers that many times, each its own ability and targets) and the
+  `this-way` kind `"counters-placed"` (counters put on permanents, one by one,
+  as many as went on). Craig Boone, Novac Guard's ruling: once for every two
+  quest counters, twice under Doubling Season.
+  `test/reflexive-per-counters-placed.test.ts`.
 
 ### Who attacked whom, and whether it had to — built 2026-11-13
 
