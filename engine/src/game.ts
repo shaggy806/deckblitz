@@ -35514,8 +35514,12 @@ export class Game {
             const source = this.state.objects[event.source];
             if (source === undefined) return false;
             const departed = source.zone !== "battlefield";
+            // "An artifact they control" (`sourceControlledByActivator`):
+            // the activating player's, bound as the engine binds a player set.
+            const sourceFilter =
+              spec.sourceControlledByActivator === true ? { ...spec.source, controllerIn: [event.player] } : spec.source;
             if (
-              !matchesFilter(this.state, this.registry, source.id, spec.source, {
+              !matchesFilter(this.state, this.registry, source.id, sourceFilter, {
                 you: self.controller,
                 source: self.id,
                 ...(departed ? { lastKnown: true } : {}),

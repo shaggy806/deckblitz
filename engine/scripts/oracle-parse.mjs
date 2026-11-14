@@ -2370,6 +2370,26 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
   if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
+  // "Whenever an opponent activates an ability of an artifact they control"
+  // (Avalanche of Sector 7), "… of a creature" (Elrond, Moon-Reader): a
+  // permanent's ability, a mana ability too unless "that isn't a mana
+  // ability" (rule 605); "they control" the activator's own permanent.
+  if ((m = /^Whenever (you activate|an opponent activates) an ability of an? (.+?)( they control)?( that isn't a mana ability)?$/.exec(c))) {
+    const source = parseTypePhrase(m[2]);
+    if (source !== null && Object.keys(source).length > 0) {
+      return [
+        {
+          on: "activates-ability",
+          who: m[1] === "you activate" ? "you" : "opponent",
+          source,
+          ...(m[3] !== undefined ? { sourceControlledByActivator: true } : {}),
+          // A planeswalker's are loyalty abilities (Sarkhan's Whelp), never
+          // a mana ability printed on one.
+          ...(m[4] === undefined && source.type !== "planeswalker" ? { orMana: true } : {}),
+        },
+      ];
+    }
+  }
   // "Whenever an opponent attacks one or more planeswalkers you control"
   // (Mila, Crafty Companion): once a declaration.
   if (c === "Whenever an opponent attacks one or more planeswalkers you control") {
@@ -19247,6 +19267,8 @@ function thatPlayerOf(triggers) {
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): who activated the mana ability.
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
+  // Who activated it (Avalanche of Sector 7, Immolation Shaman).
+  if (triggers.every((t) => t.on === "activates-ability" && t.who === "opponent")) return "trigger-player";
   // Who searched (Ob Nixilis, Unshackled).
   if (triggers.every((t) => t.on === "event" && t.event === "searches-library")) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "player")) return "trigger-player";

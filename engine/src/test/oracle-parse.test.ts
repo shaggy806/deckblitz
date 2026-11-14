@@ -15207,6 +15207,25 @@ describe("how one player's state compares with another's", () => {
     });
   });
 
+  it("activates-ability of a permanent: a mana ability too, and one the activator controls (Avalanche of Sector 7)", () => {
+    const avalanche = read(
+      "Creature",
+      "Whenever an opponent activates an ability of an artifact they control, Card deals 1 damage to that player.",
+    ).triggered[0];
+    expect(avalanche.trigger).toEqual({
+      on: "activates-ability",
+      who: "opponent",
+      source: { type: "artifact" },
+      sourceControlledByActivator: true,
+      orMana: true,
+    });
+    expect(avalanche.effect).toEqual({ kind: "damage", amount: 1, who: "trigger-player" });
+    const trigger = (line: string) => read("Creature", line).triggered[0].trigger;
+    expect(
+      trigger("Whenever an opponent activates an ability of a creature or land that isn't a mana ability, you may draw a card."),
+    ).toEqual({ on: "activates-ability", who: "opponent", source: { typesAnyOf: ["creature", "land"] } });
+  });
+
   it("activates-ability narrowed to what it targets, and that ability copied (Ertha Jo)", () => {
     const ertha = read(
       "Creature",

@@ -2603,6 +2603,13 @@ export type TriggerKind =
        * elsewhere (the rulings). */
       readonly xInCost?: true;
       readonly source?: CardFilter;
+      /** With `source`: "an ability of an artifact **they control**"
+       * (Avalanche of Sector 7) — the permanent is controlled by the player
+       * who activated the ability, read as `source` is (as it last existed
+       * on the battlefield if its cost sacrificed it). An opponent activating
+       * another player's permanent's ability ("any player may activate this
+       * ability") doesn't count. */
+      readonly sourceControlledByActivator?: true;
       /** "An ability of **a card in your graveyard**" (Neerdiv, Devious
        * Diver): one activated from the graveyard (`ActivatedAbility.zone` —
        * an unearth, an embalm, a scavenge), the card owned by this

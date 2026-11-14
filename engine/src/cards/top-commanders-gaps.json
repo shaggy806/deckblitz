@@ -6,6 +6,7 @@
     "condition:rolled-number-this-turn",
     "condition:dice-rolled-this-turn-count",
     "trigger:nth-die-roll-each-turn",
+    "trigger:activates-ability-source-controlled-by-activator",
     "decision:ward-pay-life-dynamic",
     "effect:per-target-villainous-choice-turn-order",
     "decision:trigger-player-names-after-hidden-search",
