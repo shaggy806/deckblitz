@@ -564,6 +564,7 @@ import _poolMtendaLion from "../pool/mtenda-lion.js";
 import _poolMulch from "../pool/mulch.js";
 import _poolMutagenManLivingOoze from "../pool/mutagen-man-living-ooze.js";
 import _poolMysticConfluence from "../pool/mystic-confluence.js";
+import _poolMythUnbound from "../pool/myth-unbound.js";
 import _poolNagaVitalist from "../pool/naga-vitalist.js";
 import _poolNamelessInversion from "../pool/nameless-inversion.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
@@ -1588,6 +1589,7 @@ const shard: CardShard = {
     _poolMulch,
     _poolMutagenManLivingOoze,
     _poolMysticConfluence,
+    _poolMythUnbound,
     _poolNagaVitalist,
     _poolNamelessInversion,
     _poolNantukoShade,

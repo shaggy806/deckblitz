@@ -938,6 +938,7 @@ import _poolVoraciousReader from "../pool/voracious-reader.js";
 import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
+import _poolWallOfShards from "../pool/wall-of-shards.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWandOfWonder from "../pool/wand-of-wonder.js";
 import _poolWanderingFumarole from "../pool/wandering-fumarole.js";
@@ -1942,6 +1943,7 @@ const shard: CardShard = {
     _poolVoyagerGlidecar,
     _poolVraskaSchemingGorgon,
     _poolWalkTheAeons,
+    _poolWallOfShards,
     _poolWallOfStone,
     _poolWandOfWonder,
     _poolWanderingFumarole,

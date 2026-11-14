@@ -431,6 +431,7 @@ import _poolJubilantSkybonder from "../pool/jubilant-skybonder.js";
 import _poolJungleHollow from "../pool/jungle-hollow.js";
 import _poolJungleWayfinder from "../pool/jungle-wayfinder.js";
 import _poolKaraisTechnique from "../pool/karais-technique.js";
+import _poolKarplusanMinotaur from "../pool/karplusan-minotaur.js";
 import _poolKaslemsStrider from "../pool/kaslems-strider.js";
 import _poolKeeperOfFables from "../pool/keeper-of-fables.js";
 import _poolKetramoseTheNewDawn from "../pool/ketramose-the-new-dawn.js";
@@ -516,6 +517,7 @@ import _poolMarvelousMelee from "../pool/marvelous-melee.js";
 import _poolMascotExhibition from "../pool/mascot-exhibition.js";
 import _poolMasterPiandao from "../pool/master-piandao.js";
 import _poolMatsuTribeSniper from "../pool/matsu-tribe-sniper.js";
+import _poolMausoleumTurnkey from "../pool/mausoleum-turnkey.js";
 import _poolMaximizeAltitude from "../pool/maximize-altitude.js";
 import _poolMazeGlider from "../pool/maze-glider.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
@@ -1403,6 +1405,7 @@ const shard: CardShard = {
     _poolJungleHollow,
     _poolJungleWayfinder,
     _poolKaraisTechnique,
+    _poolKarplusanMinotaur,
     _poolKaslemsStrider,
     _poolKeeperOfFables,
     _poolKetramoseTheNewDawn,
@@ -1488,6 +1491,7 @@ const shard: CardShard = {
     _poolMascotExhibition,
     _poolMasterPiandao,
     _poolMatsuTribeSniper,
+    _poolMausoleumTurnkey,
     _poolMaximizeAltitude,
     _poolMazeGlider,
     _poolMeagerMeal,

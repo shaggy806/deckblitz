@@ -126,6 +126,7 @@ import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCauldronsGift from "../pool/cauldrons-gift.js";
 import _poolCecilRedeemedPaladin from "../pool/cecil-redeemed-paladin.js";
 import _poolCelebr8000 from "../pool/celebr-8000.js";
+import _poolCelestialReunion from "../pool/celestial-reunion.js";
 import _poolCephalidRetainer from "../pool/cephalid-retainer.js";
 import _poolCeremonialGuard from "../pool/ceremonial-guard.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolCauldronsGift,
     _poolCecilRedeemedPaladin,
     _poolCelebr8000,
+    _poolCelestialReunion,
     _poolCephalidRetainer,
     _poolCeremonialGuard,
     _poolCetaDisciple,

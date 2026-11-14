@@ -262,6 +262,7 @@ import _poolDoublingCube from "../pool/doubling-cube.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDraconicDestiny from "../pool/draconic-destiny.js";
 import _poolDragonManReformedRobot from "../pool/dragon-man-reformed-robot.js";
+import _poolDragonsApproach from "../pool/dragons-approach.js";
 import _poolDragoonsLance from "../pool/dragoons-lance.js";
 import _poolDramatistsPuppet from "../pool/dramatists-puppet.js";
 import _poolDreadhordeArcanist from "../pool/dreadhorde-arcanist.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolDoublingSeason,
     _poolDraconicDestiny,
     _poolDragonManReformedRobot,
+    _poolDragonsApproach,
     _poolDragoonsLance,
     _poolDramatistsPuppet,
     _poolDreadhordeArcanist,

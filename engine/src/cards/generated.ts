@@ -4207,6 +4207,7 @@ import _poolCelestialMessenger from "./pool/celestial-messenger.js";
 import _poolCelestialPrism from "./pool/celestial-prism.js";
 import _poolCelestialPurge from "./pool/celestial-purge.js";
 import _poolCelestialRegulator from "./pool/celestial-regulator.js";
+import _poolCelestialReunion from "./pool/celestial-reunion.js";
 import _poolCelestialSword from "./pool/celestial-sword.js";
 import _poolCelestialUnicorn from "./pool/celestial-unicorn.js";
 import _poolCelestineTheLivingSaint from "./pool/celestine-the-living-saint.js";
@@ -7338,6 +7339,7 @@ import _poolDragonlordsServant from "./pool/dragonlords-servant.js";
 import _poolDragonmasterOutcast from "./pool/dragonmaster-outcast.js";
 import _poolDragonologist from "./pool/dragonologist.js";
 import _poolDragonrage from "./pool/dragonrage.js";
+import _poolDragonsApproach from "./pool/dragons-approach.js";
 import _poolDragonsClaw from "./pool/dragons-claw.js";
 import _poolDragonsDesire from "./pool/dragons-desire.js";
 import _poolDragonsEyeSavants from "./pool/dragons-eye-savants.js";
@@ -14547,6 +14549,7 @@ import _poolKaroo from "./pool/karoo.js";
 import _poolKarplusanForest from "./pool/karplusan-forest.js";
 import _poolKarplusanGiant from "./pool/karplusan-giant.js";
 import _poolKarplusanHound from "./pool/karplusan-hound.js";
+import _poolKarplusanMinotaur from "./pool/karplusan-minotaur.js";
 import _poolKarplusanStrider from "./pool/karplusan-strider.js";
 import _poolKarplusanWolverine from "./pool/karplusan-wolverine.js";
 import _poolKarplusanYeti from "./pool/karplusan-yeti.js";
@@ -16850,6 +16853,7 @@ import _poolMaulfistSquad from "./pool/maulfist-squad.js";
 import _poolMausoleumGuard from "./pool/mausoleum-guard.js";
 import _poolMausoleumHarpy from "./pool/mausoleum-harpy.js";
 import _poolMausoleumSecrets from "./pool/mausoleum-secrets.js";
+import _poolMausoleumTurnkey from "./pool/mausoleum-turnkey.js";
 import _poolMausoleumWanderer from "./pool/mausoleum-wanderer.js";
 import _poolMaverickThopterist from "./pool/maverick-thopterist.js";
 import _poolMavrenFeinDuskApostle from "./pool/mavren-fein-dusk-apostle.js";
@@ -18107,6 +18111,7 @@ import _poolMysticalTether from "./pool/mystical-tether.js";
 import _poolMysticalTutor from "./pool/mystical-tutor.js";
 import _poolMystifyingMaze from "./pool/mystifying-maze.js";
 import _poolMythRealized from "./pool/myth-realized.js";
+import _poolMythUnbound from "./pool/myth-unbound.js";
 import _poolMythicProportions from "./pool/mythic-proportions.js";
 import _poolMythosOfBrokkos from "./pool/mythos-of-brokkos.js";
 import _poolMythosOfIlluna from "./pool/mythos-of-illuna.js";
@@ -25627,6 +25632,7 @@ import _poolSphinxOfTheSteelWind from "./pool/sphinx-of-the-steel-wind.js";
 import _poolSphinxOfUthuun from "./pool/sphinx-of-uthuun.js";
 import _poolSphinxSovereign from "./pool/sphinx-sovereign.js";
 import _poolSphinxSummoner from "./pool/sphinx-summoner.js";
+import _poolSphinxsApproach from "./pool/sphinxs-approach.js";
 import _poolSphinxsDecree from "./pool/sphinxs-decree.js";
 import _poolSphinxsDisciple from "./pool/sphinxs-disciple.js";
 import _poolSphinxsHerald from "./pool/sphinxs-herald.js";
@@ -30701,6 +30707,7 @@ import _poolWallOfResurgence from "./pool/wall-of-resurgence.js";
 import _poolWallOfReverence from "./pool/wall-of-reverence.js";
 import _poolWallOfRoots from "./pool/wall-of-roots.js";
 import _poolWallOfRunes from "./pool/wall-of-runes.js";
+import _poolWallOfShards from "./pool/wall-of-shards.js";
 import _poolWallOfShields from "./pool/wall-of-shields.js";
 import _poolWallOfSouls from "./pool/wall-of-souls.js";
 import _poolWallOfSpears from "./pool/wall-of-spears.js";
@@ -37076,6 +37083,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCelestialPrism,
   _poolCelestialPurge,
   _poolCelestialRegulator,
+  _poolCelestialReunion,
   _poolCelestialSword,
   _poolCelestialUnicorn,
   _poolCelestineTheLivingSaint,
@@ -40207,6 +40215,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDragonmasterOutcast,
   _poolDragonologist,
   _poolDragonrage,
+  _poolDragonsApproach,
   _poolDragonsClaw,
   _poolDragonsDesire,
   _poolDragonsEyeSavants,
@@ -47416,6 +47425,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKarplusanForest,
   _poolKarplusanGiant,
   _poolKarplusanHound,
+  _poolKarplusanMinotaur,
   _poolKarplusanStrider,
   _poolKarplusanWolverine,
   _poolKarplusanYeti,
@@ -49719,6 +49729,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMausoleumGuard,
   _poolMausoleumHarpy,
   _poolMausoleumSecrets,
+  _poolMausoleumTurnkey,
   _poolMausoleumWanderer,
   _poolMaverickThopterist,
   _poolMavrenFeinDuskApostle,
@@ -50976,6 +50987,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMysticalTutor,
   _poolMystifyingMaze,
   _poolMythRealized,
+  _poolMythUnbound,
   _poolMythicProportions,
   _poolMythosOfBrokkos,
   _poolMythosOfIlluna,
@@ -58496,6 +58508,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSphinxOfUthuun,
   _poolSphinxSovereign,
   _poolSphinxSummoner,
+  _poolSphinxsApproach,
   _poolSphinxsDecree,
   _poolSphinxsDisciple,
   _poolSphinxsHerald,
@@ -63570,6 +63583,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWallOfReverence,
   _poolWallOfRoots,
   _poolWallOfRunes,
+  _poolWallOfShards,
   _poolWallOfShields,
   _poolWallOfSouls,
   _poolWallOfSpears,
@@ -69958,6 +69972,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/celestial-prism": _poolCelestialPrism,
   "pool/celestial-purge": _poolCelestialPurge,
   "pool/celestial-regulator": _poolCelestialRegulator,
+  "pool/celestial-reunion": _poolCelestialReunion,
   "pool/celestial-sword": _poolCelestialSword,
   "pool/celestial-unicorn": _poolCelestialUnicorn,
   "pool/celestine-the-living-saint": _poolCelestineTheLivingSaint,
@@ -73089,6 +73104,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dragonmaster-outcast": _poolDragonmasterOutcast,
   "pool/dragonologist": _poolDragonologist,
   "pool/dragonrage": _poolDragonrage,
+  "pool/dragons-approach": _poolDragonsApproach,
   "pool/dragons-claw": _poolDragonsClaw,
   "pool/dragons-desire": _poolDragonsDesire,
   "pool/dragons-eye-savants": _poolDragonsEyeSavants,
@@ -80298,6 +80314,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/karplusan-forest": _poolKarplusanForest,
   "pool/karplusan-giant": _poolKarplusanGiant,
   "pool/karplusan-hound": _poolKarplusanHound,
+  "pool/karplusan-minotaur": _poolKarplusanMinotaur,
   "pool/karplusan-strider": _poolKarplusanStrider,
   "pool/karplusan-wolverine": _poolKarplusanWolverine,
   "pool/karplusan-yeti": _poolKarplusanYeti,
@@ -82601,6 +82618,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mausoleum-guard": _poolMausoleumGuard,
   "pool/mausoleum-harpy": _poolMausoleumHarpy,
   "pool/mausoleum-secrets": _poolMausoleumSecrets,
+  "pool/mausoleum-turnkey": _poolMausoleumTurnkey,
   "pool/mausoleum-wanderer": _poolMausoleumWanderer,
   "pool/maverick-thopterist": _poolMaverickThopterist,
   "pool/mavren-fein-dusk-apostle": _poolMavrenFeinDuskApostle,
@@ -83858,6 +83876,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mystical-tutor": _poolMysticalTutor,
   "pool/mystifying-maze": _poolMystifyingMaze,
   "pool/myth-realized": _poolMythRealized,
+  "pool/myth-unbound": _poolMythUnbound,
   "pool/mythic-proportions": _poolMythicProportions,
   "pool/mythos-of-brokkos": _poolMythosOfBrokkos,
   "pool/mythos-of-illuna": _poolMythosOfIlluna,
@@ -91378,6 +91397,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sphinx-of-uthuun": _poolSphinxOfUthuun,
   "pool/sphinx-sovereign": _poolSphinxSovereign,
   "pool/sphinx-summoner": _poolSphinxSummoner,
+  "pool/sphinxs-approach": _poolSphinxsApproach,
   "pool/sphinxs-decree": _poolSphinxsDecree,
   "pool/sphinxs-disciple": _poolSphinxsDisciple,
   "pool/sphinxs-herald": _poolSphinxsHerald,
@@ -96452,6 +96472,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wall-of-reverence": _poolWallOfReverence,
   "pool/wall-of-roots": _poolWallOfRoots,
   "pool/wall-of-runes": _poolWallOfRunes,
+  "pool/wall-of-shards": _poolWallOfShards,
   "pool/wall-of-shields": _poolWallOfShields,
   "pool/wall-of-souls": _poolWallOfSouls,
   "pool/wall-of-spears": _poolWallOfSpears,
