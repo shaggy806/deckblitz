@@ -4983,12 +4983,20 @@ export interface CardDefinition {
    *   satisfy it (601.3b), and is illegal if the targets chosen don't
    *   (601.6) — so where only this permission allows the cast now, the one
    *   target slot that can hold such a target is offered only those.
+   * - `xAtMost`: the X announced is this or less — Silver Scrutiny's "if X
+   *   is 3 or less". The cast may begin, since X could be chosen so
+   *   (601.3b), and announcing more is illegal (601.2b) — so where only this
+   *   permission allows the cast now, the offer's X stops here.
    *
    * Like every "as though it had flash" it changes only timing, and only for
    * a cast that timing would otherwise stop. Functions wherever the card can
    * be cast from (a flashback cast included).
    */
-  readonly flashIf?: { readonly condition?: StaticCondition; readonly targets?: CardFilter };
+  readonly flashIf?: {
+    readonly condition?: StaticCondition;
+    readonly targets?: CardFilter;
+    readonly xAtMost?: number;
+  };
   /**
    * An alternative cost that replaces the mana cost and also taps permanents
    * (rule 601.2b) — Sephara, Sky's Blade's "You may pay {W} and tap four

@@ -18966,6 +18966,12 @@ function flashIfOf(clause) {
   }
   // Graveyard Shift.
   if (clause === "there are five or more mana values among cards in your graveyard") return { condition: FIVE_MANA_VALUES };
+  // Silver Scrutiny: "if X is 3 or less", judged on the X announced.
+  m = new RegExp(`^X is ${N} or less$`).exec(clause);
+  if (m !== null) {
+    const n = numberOf(m[1]);
+    return typeof n === "number" ? { xAtMost: n } : null;
+  }
   m = new RegExp(`^there are ${N} or more (.+) cards in your graveyard$`).exec(clause);
   if (m !== null) {
     const n = numberOf(m[1]);

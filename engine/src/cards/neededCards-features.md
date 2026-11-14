@@ -2789,8 +2789,8 @@ choice could (601.3b), illegal if the chosen ones don't (601.6), and where
 only it lets the spell be cast now the one fitting slot is offered only those.
 Keys: self-flash-if-condition, conditional-flash-by-target,
 flash-if-targets-commander. Proving cards: Hungering Yeti, Crashing Tide,
-Swift Reckoning, Flash Photography, Timely Ward. Still open: an X cap ("if X
-is 3 or less", Silver Scrutiny).
+Swift Reckoning, Flash Photography, Timely Ward. The X cap ("if X is 3 or
+less", `xAtMost`) built 2026-11-14: key flash-if-x-at-most, Silver Scrutiny.
 
 ### Energy paid in a chosen, fixed or computed amount — built 2026-10-31
 

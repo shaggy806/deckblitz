@@ -5,7 +5,8 @@
  * begins (rule 601.3d) — and "…if it targets a permanent you control" / "…if
  * it targets a commander", judged on the targets chosen (rules 601.3b,
  * 601.6). Hungering Yeti, Crashing Tide, Swift Reckoning, Flash Photography,
- * Timely Ward.
+ * Timely Ward. And "…if X is 3 or less", judged on the X announced (601.2b):
+ * Silver Scrutiny.
  */
 
 import { describe, expect, it } from "vitest";
@@ -180,5 +181,33 @@ describe("flashIf with targets (rules 601.3b, 601.6)", () => {
     const bear = spawn(game, "Grizzly Bears", A);
     cast(game, ward, { targets: [ref(bear)] });
     expect(keywords(game, bear).has("indestructible")).toBe(true);
+  });
+});
+
+describe("flashIf with an X ceiling (rules 601.2b, 601.3b)", () => {
+  it("Silver Scrutiny at instant speed: offered up to X = 3, a higher X refused", () => {
+    const { game } = atInstantSpeed();
+    lands(game, "Island", 8);
+    const scrutiny = toHand(game, "Silver Scrutiny");
+    const offers = castOffers(game, scrutiny);
+    expect(offers).toHaveLength(1);
+    expect(offers[0].xCost?.maxX).toBe(3);
+    expect(
+      game.canDispatch({ type: "cast-spell", player: A, card: scrutiny, targets: [], xValue: 4 }),
+    ).toMatch(/sorcery|main phase|stack/i);
+    const before = hand(game).length;
+    cast(game, scrutiny, { x: 3 });
+    // Silver Scrutiny left the hand, three cards were drawn.
+    expect(hand(game).length).toBe(before + 2);
+  });
+
+  it("Silver Scrutiny at sorcery timing: any X mana pays for", () => {
+    const { game } = table();
+    lands(game, "Island", 8);
+    const scrutiny = toHand(game, "Silver Scrutiny");
+    expect(castOffers(game, scrutiny)[0].xCost?.maxX).toBe(6);
+    const before = hand(game).length;
+    cast(game, scrutiny, { x: 6 });
+    expect(hand(game).length).toBe(before + 5);
   });
 });

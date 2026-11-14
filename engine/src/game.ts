@@ -18899,9 +18899,32 @@ export class Game {
   ): { maxX: number; convoke: PaidConvoke[] } {
     const plan = this.xPlanUncapped(player, cardId, def, costString, face, targetCount);
     // "X can't be greater than …" (Open the Way), as the caster announces it
-    // (rule 601.2b).
-    if (def.maxX === undefined) return plan;
-    return { ...plan, maxX: Math.min(plan.maxX, this.costAmount(def.maxX, player, cardId, cardId)) };
+    // (rule 601.2b); and "as though it had flash if X is 3 or less" (Silver
+    // Scrutiny) where only that lets it be cast now.
+    const flashCap = this.flashIfXCeiling(player, cardId, def, face);
+    if (def.maxX === undefined && flashCap === undefined) return plan;
+    return {
+      ...plan,
+      maxX: Math.min(
+        plan.maxX,
+        def.maxX !== undefined ? this.costAmount(def.maxX, player, cardId, cardId) : plan.maxX,
+        flashCap ?? plan.maxX,
+      ),
+    };
+  }
+
+  /** "You may cast this spell as though it had flash if X is N or less"
+   * (`flashIf.xAtMost` — Silver Scrutiny): N, when that permission is what
+   * lets `player` begin casting it now — a sorcery couldn't be cast now, and
+   * neither the spell's own timing nor another "as though it had flash"
+   * allows it — so X may be announced no higher (rules 601.2b, 601.3b).
+   * `undefined` otherwise. */
+  private flashIfXCeiling(player: PlayerId, cardId: ObjectId, def: CardDefinition, face: number): number | undefined {
+    const cap = def.flashIf?.xAtMost;
+    if (cap === undefined || def.types.includes("instant") || def.keywords.includes("flash")) return undefined;
+    if (this.whyNotSorcerySpeed(player, "cast it") === null) return undefined;
+    if (this.withFace(cardId, face, () => this.castsAsThoughFlash(player, cardId))) return undefined;
+    return cap;
   }
 
   /** `xPlanFor` before a card's own ceiling on X. */
@@ -20288,7 +20311,7 @@ export class Game {
       !this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId)) &&
       // "You may cast this spell as though it had flash if you control a
       // Human" / "…if it targets a commander" (rules 601.3b, 601.3d).
-      !this.castsByConditionalFlash(player, cardId, def, modes, kicked, overload, targets)
+      !this.castsByConditionalFlash(player, cardId, def, modes, kicked, overload, targets, xValue)
     ) {
       const timing = this.whyNotSorcerySpeed(player, `cast ${def.name}`);
       if (timing !== null) return timing;
@@ -49998,7 +50021,8 @@ controlledBy,
    * begins, from the caster's side (rule 601.3d). Its `targets` are judged
    * against the targets chosen once they are (601.6); before that — an offer
    * being listed — whether some legal choice of them could satisfy it
-   * (601.3b). */
+   * (601.3b). Its `xAtMost` is judged against `xValue`, the X announced
+   * (601.2b) — an offer is listed at its least X, which could be chosen so. */
   private castsByConditionalFlash(
     player: PlayerId,
     cardId: ObjectId,
@@ -50007,6 +50031,7 @@ controlledBy,
     kicked: boolean | number,
     overload: boolean,
     targets: readonly (TargetRef | null | undefined)[] | undefined,
+    xValue: number,
   ): boolean {
     const flash = def.flashIf;
     if (flash === undefined) return false;
@@ -50018,6 +50043,7 @@ controlledBy,
     ) {
       return false;
     }
+    if (flash.xAtMost !== undefined && Math.floor(xValue) > flash.xAtMost) return false;
     const filter = flash.targets;
     if (filter === undefined) return true;
     if (this.flashIfTargetsOff) return false;

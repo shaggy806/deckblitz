@@ -10,6 +10,7 @@
     "decision:each-player-chooses-exiled-card",
     "effect:repeat-until-no-player-acts",
     "effect:voter-chooses-permanent",
+    "effect:flash-if-x-at-most",
     "bug:granted-flashback-split-card-cost",
     "effect:delayed-trigger-watching-bolstered",
     "trigger:leaves-put-onto-battlefield-by-source",

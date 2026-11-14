@@ -7039,6 +7039,12 @@ describe("a spell's own conditional flash (flashIf)", () => {
     ).toEqual({ targets: { isCommander: true } });
   });
 
+  it("reads a ceiling on X", () => {
+    const scrutiny = face("Silver Scrutiny", "Sorcery", "You may cast this spell as though it had flash if X is 3 or less.\nDraw X cards.");
+    expect(scrutiny.flashIf).toEqual({ xAtMost: 3 });
+    expect(scrutiny.effect).toEqual({ kind: "draw", amount: "x" });
+  });
+
   it("leaves a permanent's own 'has flash as long as' to a person: that's its keyword on the battlefield too", () => {
     const wurm = face("Colossal Rattlewurm", "Creature — Wurm", "Colossal Rattlewurm has flash as long as you control a Desert.");
     expect(wurm.flashIf).toBeUndefined();
