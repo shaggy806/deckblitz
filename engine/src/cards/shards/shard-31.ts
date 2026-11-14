@@ -1030,6 +1030,7 @@ import _poolWandOfIth from "../pool/wand-of-ith.js";
 import _poolWarmakerGunship from "../pool/warmaker-gunship.js";
 import _poolWarmongersChariot from "../pool/warmongers-chariot.js";
 import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
+import _poolWatcherOfHours from "../pool/watcher-of-hours.js";
 import _poolWaterfrontDistrict from "../pool/waterfront-district.js";
 import _poolWaveGoodbye from "../pool/wave-goodbye.js";
 import _poolWayOfTheDeathbringer from "../pool/way-of-the-deathbringer.js";
@@ -2126,6 +2127,7 @@ const shard: CardShard = {
     _poolWarmakerGunship,
     _poolWarmongersChariot,
     _poolWaspOfTheBitterEnd,
+    _poolWatcherOfHours,
     _poolWaterfrontDistrict,
     _poolWaveGoodbye,
     _poolWayOfTheDeathbringer,

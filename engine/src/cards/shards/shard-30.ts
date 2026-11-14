@@ -99,6 +99,7 @@ import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
 import _poolBloodshotCyclops from "../pool/bloodshot-cyclops.js";
+import _poolBlueLoyalRaptor from "../pool/blue-loyal-raptor.js";
 import _poolBogElemental from "../pool/bog-elemental.js";
 import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
 import _poolBolgsCompany from "../pool/bolgs-company.js";
@@ -464,6 +465,7 @@ import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
 import _poolIronFistPulverizer from "../pool/iron-fist-pulverizer.js";
 import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
 import _poolIronhoofOx from "../pool/ironhoof-ox.js";
+import _poolIsildursFatefulStrike from "../pool/isildurs-fateful-strike.js";
 import _poolIsiluCarrierOfTwilight from "../pool/isilu-carrier-of-twilight.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolItOfTheHorridSwarm from "../pool/it-of-the-horrid-swarm.js";
@@ -1154,6 +1156,7 @@ const shard: CardShard = {
     _poolBloodPet,
     _poolBloodbraidElf,
     _poolBloodshotCyclops,
+    _poolBlueLoyalRaptor,
     _poolBogElemental,
     _poolBogwaterLumaret,
     _poolBolgsCompany,
@@ -1519,6 +1522,7 @@ const shard: CardShard = {
     _poolIronFistPulverizer,
     _poolIronManTonyStark,
     _poolIronhoofOx,
+    _poolIsildursFatefulStrike,
     _poolIsiluCarrierOfTwilight,
     _poolIsochronScepter,
     _poolItOfTheHorridSwarm,

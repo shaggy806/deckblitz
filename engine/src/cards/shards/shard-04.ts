@@ -112,6 +112,7 @@ import _poolCetavolver from "../pool/cetavolver.js";
 import _poolChainOfAcid from "../pool/chain-of-acid.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
+import _poolChancellorOfTheAnnex from "../pool/chancellor-of-the-annex.js";
 import _poolChandraChillOfCompliance from "../pool/chandra-chill-of-compliance.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
 import _poolChaoticStrike from "../pool/chaotic-strike.js";
@@ -1127,6 +1128,7 @@ const shard: CardShard = {
     _poolChainOfAcid,
     _poolChainersEdict,
     _poolChakramRetriever,
+    _poolChancellorOfTheAnnex,
     _poolChandraChillOfCompliance,
     _poolChangelingBerserker,
     _poolChaoticStrike,

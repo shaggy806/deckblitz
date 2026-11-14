@@ -683,6 +683,7 @@ import _poolRayFilletManRay from "../pool/ray-fillet-man-ray.js";
 import _poolRazakethTheFoulblooded from "../pool/razaketh-the-foulblooded.js";
 import _poolRazorfinAbolisher from "../pool/razorfin-abolisher.js";
 import _poolReachThroughMists from "../pool/reach-through-mists.js";
+import _poolRebbecArchitectOfAscension from "../pool/rebbec-architect-of-ascension.js";
 import _poolRecklessAirStrike from "../pool/reckless-air-strike.js";
 import _poolReckonerBankbuster from "../pool/reckoner-bankbuster.js";
 import _poolRecoil from "../pool/recoil.js";
@@ -1730,6 +1731,7 @@ const shard: CardShard = {
     _poolRazakethTheFoulblooded,
     _poolRazorfinAbolisher,
     _poolReachThroughMists,
+    _poolRebbecArchitectOfAscension,
     _poolRecklessAirStrike,
     _poolReckonerBankbuster,
     _poolRecoil,

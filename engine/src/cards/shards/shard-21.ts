@@ -724,6 +724,7 @@ import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
 import _poolSerpentSkin from "../pool/serpent-skin.js";
 import _poolSerumVisionary from "../pool/serum-visionary.js";
 import _poolSetzerWanderingGambler from "../pool/setzer-wandering-gambler.js";
+import _poolSewersOfEstark from "../pool/sewers-of-estark.js";
 import _poolShadowOfTheSecondSun from "../pool/shadow-of-the-second-sun.js";
 import _poolShadowbane from "../pool/shadowbane.js";
 import _poolShamblingVent from "../pool/shambling-vent.js";
@@ -1717,6 +1718,7 @@ const shard: CardShard = {
     _poolSerpentSkin,
     _poolSerumVisionary,
     _poolSetzerWanderingGambler,
+    _poolSewersOfEstark,
     _poolShadowOfTheSecondSun,
     _poolShadowbane,
     _poolShamblingVent,

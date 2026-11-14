@@ -106,6 +106,7 @@ import _poolCaretakersTalent from "../pool/caretakers-talent.js";
 import _poolCartographersSurvey from "../pool/cartographers-survey.js";
 import _poolCartoucheOfStrength from "../pool/cartouche-of-strength.js";
 import _poolCaseOfTheCrimsonPulse from "../pool/case-of-the-crimson-pulse.js";
+import _poolCaseyRaphHotheads from "../pool/casey-raph-hotheads.js";
 import _poolCateranEnforcer from "../pool/cateran-enforcer.js";
 import _poolCausticHound from "../pool/caustic-hound.js";
 import _poolCauterySliver from "../pool/cautery-sliver.js";
@@ -1135,6 +1136,7 @@ const shard: CardShard = {
     _poolCartographersSurvey,
     _poolCartoucheOfStrength,
     _poolCaseOfTheCrimsonPulse,
+    _poolCaseyRaphHotheads,
     _poolCateranEnforcer,
     _poolCausticHound,
     _poolCauterySliver,

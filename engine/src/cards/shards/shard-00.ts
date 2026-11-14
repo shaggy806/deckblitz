@@ -481,6 +481,7 @@ import _poolLatchSeeker from "../pool/latch-seeker.js";
 import _poolLatchkeyFaerie from "../pool/latchkey-faerie.js";
 import _poolLavaSerpent from "../pool/lava-serpent.js";
 import _poolLavaTubes from "../pool/lava-tubes.js";
+import _poolLavabrinkVenturer from "../pool/lavabrink-venturer.js";
 import _poolLavalanche from "../pool/lavalanche.js";
 import _poolLavastepRaider from "../pool/lavastep-raider.js";
 import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
@@ -1521,6 +1522,7 @@ const shard: CardShard = {
     _poolLatchkeyFaerie,
     _poolLavaSerpent,
     _poolLavaTubes,
+    _poolLavabrinkVenturer,
     _poolLavalanche,
     _poolLavastepRaider,
     _poolLazotepBehemoth,

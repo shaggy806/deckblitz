@@ -380,6 +380,7 @@ import _poolGrimFlayer from "../pool/grim-flayer.js";
 import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
 import _poolGuildmagesForum from "../pool/guildmages-forum.js";
 import _poolHaazdaExonerator from "../pool/haazda-exonerator.js";
+import _poolHaktosTheUnscarred from "../pool/haktos-the-unscarred.js";
 import _poolHallOfGemstone from "../pool/hall-of-gemstone.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
@@ -1383,6 +1384,7 @@ const shard: CardShard = {
     _poolGuardiansOfOboro,
     _poolGuildmagesForum,
     _poolHaazdaExonerator,
+    _poolHaktosTheUnscarred,
     _poolHallOfGemstone,
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,
