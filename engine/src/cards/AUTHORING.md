@@ -3107,7 +3107,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     is Alhammarret's "each opponent reveals their hand. You choose the name of
     a nonland card revealed this way" (only those; none, and no name). `aim`:
     `"opponent-spells"` (default), `"opponent-permanents"` (ability locks and
-    taxes), `"own-hand"`, `"own-library"`, `"opponent-library"`.
+    taxes), `"own-hand"`, `"own-library"`, `"opponent-library"`,
+    `"own-library-creatures"` (guessing an opponent's hidden find in the
+    chooser's library: Sphinx Ambassador).
   - **Its statics and triggers** read the name through the `CardFilter` clause
     **`chosenName: true`** (any name chosen for the permanent applying it):
     `prohibits` `cast` with `filter: { chosenName: true }`; `activate` with `of: {
@@ -3124,7 +3126,13 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     `CHOSEN_CARD_NAME` (from `effects.ts`) inside `then` becomes the name —
     **`{ hasName: CHOSEN_CARD_NAME }`** is "a card with the chosen name" (either
     half of a split card, rule 709.4a). Put everything after the choice in
-    `then`. `chooser: <slot>` is "target player chooses a card name";
+    `then`. `chooser: <slot>` is "target player chooses a card name", and a
+    `PlayerRef` names anyone else — inside a search's `then`, `"that-player"`
+    is the searched player ("search that player's library for a card, then
+    that player chooses a card name": Sphinx Ambassador, a `destination:
+    "stay"` search with `shufflesLater` and a closing `shuffle-library` of
+    `searchers`, so the shuffle comes last); the resolution stays its
+    controller's, so a `may` in `then` is still theirs;
     `remember: true` keeps the name on the source permanent for its
     `chosenName` statics (Petrified Hamlet's enters trigger, Day of the
     Moon's chapters). "Until your next turn, your opponents can't cast spells

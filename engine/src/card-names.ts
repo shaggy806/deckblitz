@@ -66,13 +66,17 @@ export interface CardNameFilter {
  *   Desperate Research): the name it holds most.
  * - `"opponent-library"` — to guess an opponent's top card (Foreshadow): the
  *   names their shown cards repeat most, their basics included.
+ * - `"own-library-creatures"` — to guess which creature card an opponent
+ *   found in the chooser's library and would take (Sphinx Ambassador): the
+ *   creature cards there, dearest first.
  */
 export type CardNameAim =
   | "opponent-spells"
   | "opponent-permanents"
   | "own-hand"
   | "own-library"
-  | "opponent-library";
+  | "opponent-library"
+  | "own-library-creatures";
 
 /** "Choose a card name", as a card says it — as it enters or as it resolves. */
 export interface CardNameChoice {
@@ -252,6 +256,14 @@ export function suggestedCardNames(
     case "opponent-library":
       for (const n of mostCommon([...battlefield, ...shown])) add(n);
       break;
+    case "own-library-creatures": {
+      const creature = (o: GameObject): boolean => {
+        const name = printedCardName(o);
+        return registry.has(name) && registry.get(name).types.includes("creature");
+      };
+      visit(byValue(objects(state.zones.perPlayer[player].library).filter(creature)));
+      break;
+    }
   }
   return out.slice(0, SUGGESTED_CARD_NAMES);
 }
