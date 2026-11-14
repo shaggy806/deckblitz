@@ -1870,6 +1870,8 @@ const WHO_STEP = {
   "enchanted player's": "attached",
   // Black Vise's "the chosen player's upkeep" (`choosePlayerOnEnter`).
   "the chosen player's": "chosen-player",
+  // Archivist of Gondor's "the monarch's end step" (rule 725).
+  "the monarch's": "monarch",
 };
 
 /**
@@ -2842,7 +2844,7 @@ export function parseTrigger(clause) {
   // Every combat's end of combat step (rule 511): Kjeldoran Frostbeast.
   if (/^At end of combat$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "any" }];
   if (/^At end of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "end-combat", who: "you" }];
-  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's|the chosen player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
+  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's|enchanted player's|the chosen player's|the monarch's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
     return [{ on: "step-begins", step: STEPS[m[2]], who: WHO_STEP[m[1]] }];
   }
   return null;
@@ -19324,6 +19326,9 @@ function thatPlayerOf(triggers) {
   // library" (Orochi Soul-Reaver).
   if (triggers.every((t) => t.on === "step-begins" && t.who === "opponent")) return "active-player";
   if (triggers.every((t) => t.on === "step-begins" && t.who === "attached")) return "active-player";
+  // "At the beginning of the monarch's end step, that player draws": whose
+  // step it is, even once someone else is the monarch (the ruling).
+  if (triggers.every((t) => t.on === "step-begins" && t.who === "monarch")) return "active-player";
   if (triggers.every((t) => t.on === "deals-damage-batch" && t.combat === true && t.orBattle !== true)) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-combat-damage-to-player")) return "trigger-player";
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"

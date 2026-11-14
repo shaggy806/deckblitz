@@ -35634,7 +35634,9 @@ export class Game {
               self.attachedTo !== undefined &&
               this.state.objects[self.attachedTo]?.controller === this.activePlayer) ||
             // "The chosen player's upkeep" (Black Vise).
-            (spec.who === "chosen-player" && this.matchesWhoPlayer("chosen-player", this.activePlayer, self)))
+            (spec.who === "chosen-player" && this.matchesWhoPlayer("chosen-player", this.activePlayer, self)) ||
+            // "The monarch's end step" (Archivist of Gondor, rule 725).
+            (spec.who === "monarch" && this.matchesWhoPlayer("monarch", this.activePlayer, self)))
         );
       case "cast-spell": {
         if (spec.copyOnly === true && event.type !== "spell-copied") return false;
@@ -36121,6 +36123,9 @@ export class Game {
       const chosen = self.zone === "battlefield" ? self.chosenPlayer : (self.lastKnown?.chosenPlayer ?? self.chosenPlayer);
       return chosen !== undefined && chosen === player;
     }
+    // "The monarch" (rule 725): whoever is the monarch now; nobody when
+    // there's no monarch.
+    if (who === "monarch") return this.state.monarch === player;
     return self.controller === player;
   }
 

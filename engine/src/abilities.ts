@@ -1050,7 +1050,14 @@ export type TriggerWho =
   | "chosen"
   /** This ability's controller's **Ring-bearer** (rule 701.54a) — the Ring
    * emblem's "whenever your Ring-bearer attacks". */
-  | "ring-bearer";
+  | "ring-bearer"
+  /** "**The monarch**" (rule 725) — a `step-begins` trigger's "at the
+   * beginning of the monarch's end step" (Archivist of Gondor): the step
+   * belongs to whoever is the monarch as it begins, and that player is then
+   * the `"active-player"` (the ruling: they still draw if someone else
+   * becomes the monarch before it resolves). With no monarch, nothing
+   * matches. Where the subject is an object, nothing matches. */
+  | "monarch";
 
 /** The trigger event of a {@link TriggerSpec}, one member per kind. */
 export type TriggerKind =

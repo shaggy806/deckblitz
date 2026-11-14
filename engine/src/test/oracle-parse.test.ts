@@ -20069,6 +20069,22 @@ describe("the dice rolled this turn, die by die (rule 706)", () => {
       },
     ]);
   });
+
+  it("'at the beginning of the monarch's end step, that player draws a card' (Archivist of Gondor)", () => {
+    const archivist = parseFace(
+      {
+        name: "Test Archivist",
+        type_line: "Creature — Human Advisor",
+        mana_cost: "{2}{U}",
+        oracle_text: "At the beginning of the monarch's end step, that player draws a card.",
+        power: "2",
+        toughness: "3",
+      },
+      { tokenFor: () => null },
+    );
+    expect(archivist.triggered[0]?.trigger).toEqual({ on: "step-begins", step: "end", who: "monarch" });
+    expect(archivist.triggered[0]?.effect).toEqual({ kind: "draw", amount: 1, who: "active-player" });
+  });
 });
 
 describe("another player's impulse, its window theirs or yours (PlayGrant.durationOf)", () => {
