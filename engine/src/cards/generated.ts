@@ -9850,6 +9850,7 @@ import _poolFlexibleWaterbender from "./pool/flexible-waterbender.js";
 import _poolFlickACoin from "./pool/flick-a-coin.js";
 import _poolFlickerOfFate from "./pool/flicker-of-fate.js";
 import _poolFlicker from "./pool/flicker.js";
+import _poolFlickerform from "./pool/flickerform.js";
 import _poolFlickeringHound from "./pool/flickering-hound.js";
 import _poolFlickeringSpirit from "./pool/flickering-spirit.js";
 import _poolFlickeringWard from "./pool/flickering-ward.js";
@@ -10591,6 +10592,7 @@ import _poolGarruksPackleader from "./pool/garruks-packleader.js";
 import _poolGarruksUprising from "./pool/garruks-uprising.js";
 import _poolGarruksWarsteed from "./pool/garruks-warsteed.js";
 import _poolGarrulousSycophant from "./pool/garrulous-sycophant.js";
+import _poolGarthOneEye from "./pool/garth-one-eye.js";
 import _poolGaryClone from "./pool/gary-clone.js";
 import _poolGarzaZolPlagueQueen from "./pool/garza-zol-plague-queen.js";
 import _poolGarzasAssassin from "./pool/garzas-assassin.js";
@@ -18786,6 +18788,7 @@ import _poolNissasRenewal from "./pool/nissas-renewal.js";
 import _poolNissasRevelation from "./pool/nissas-revelation.js";
 import _poolNissasTriumph from "./pool/nissas-triumph.js";
 import _poolNissasZendikon from "./pool/nissas-zendikon.js";
+import _poolNitaForumConciliator from "./pool/nita-forum-conciliator.js";
 import _poolNivMizzetDracogenius from "./pool/niv-mizzet-dracogenius.js";
 import _poolNivMizzetGhostCounsel from "./pool/niv-mizzet-ghost-counsel.js";
 import _poolNivMizzetGuildpact from "./pool/niv-mizzet-guildpact.js";
@@ -21274,6 +21277,7 @@ import _poolRadiantKavu from "./pool/radiant-kavu.js";
 import _poolRadiantLotus from "./pool/radiant-lotus.js";
 import _poolRadiantPurge from "./pool/radiant-purge.js";
 import _poolRadiantRestraints from "./pool/radiant-restraints.js";
+import _poolRadiantScrollwielder from "./pool/radiant-scrollwielder.js";
 import _poolRadiantSerraArchangel from "./pool/radiant-serra-archangel.js";
 import _poolRadiantSolar from "./pool/radiant-solar.js";
 import _poolRadiantStrike from "./pool/radiant-strike.js";
@@ -31393,6 +31397,7 @@ import _poolWheelAndDeal from "./pool/wheel-and-deal.js";
 import _poolWheelOfFate from "./pool/wheel-of-fate.js";
 import _poolWheelOfFortune from "./pool/wheel-of-fortune.js";
 import _poolWheelOfMisfortune from "./pool/wheel-of-misfortune.js";
+import _poolWheelOfPotential from "./pool/wheel-of-potential.js";
 import _poolWheelOfTorture from "./pool/wheel-of-torture.js";
 import _poolWhelmingWave from "./pool/whelming-wave.js";
 import _poolWhenWeWereYoung from "./pool/when-we-were-young.js";
@@ -42998,6 +43003,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlickACoin,
   _poolFlickerOfFate,
   _poolFlicker,
+  _poolFlickerform,
   _poolFlickeringHound,
   _poolFlickeringSpirit,
   _poolFlickeringWard,
@@ -43739,6 +43745,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGarruksUprising,
   _poolGarruksWarsteed,
   _poolGarrulousSycophant,
+  _poolGarthOneEye,
   _poolGaryClone,
   _poolGarzaZolPlagueQueen,
   _poolGarzasAssassin,
@@ -51934,6 +51941,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNissasRevelation,
   _poolNissasTriumph,
   _poolNissasZendikon,
+  _poolNitaForumConciliator,
   _poolNivMizzetDracogenius,
   _poolNivMizzetGhostCounsel,
   _poolNivMizzetGuildpact,
@@ -54422,6 +54430,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRadiantLotus,
   _poolRadiantPurge,
   _poolRadiantRestraints,
+  _poolRadiantScrollwielder,
   _poolRadiantSerraArchangel,
   _poolRadiantSolar,
   _poolRadiantStrike,
@@ -64541,6 +64550,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWheelOfFate,
   _poolWheelOfFortune,
   _poolWheelOfMisfortune,
+  _poolWheelOfPotential,
   _poolWheelOfTorture,
   _poolWhelmingWave,
   _poolWhenWeWereYoung,
@@ -76159,6 +76169,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flick-a-coin": _poolFlickACoin,
   "pool/flicker-of-fate": _poolFlickerOfFate,
   "pool/flicker": _poolFlicker,
+  "pool/flickerform": _poolFlickerform,
   "pool/flickering-hound": _poolFlickeringHound,
   "pool/flickering-spirit": _poolFlickeringSpirit,
   "pool/flickering-ward": _poolFlickeringWard,
@@ -76900,6 +76911,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/garruks-uprising": _poolGarruksUprising,
   "pool/garruks-warsteed": _poolGarruksWarsteed,
   "pool/garrulous-sycophant": _poolGarrulousSycophant,
+  "pool/garth-one-eye": _poolGarthOneEye,
   "pool/gary-clone": _poolGaryClone,
   "pool/garza-zol-plague-queen": _poolGarzaZolPlagueQueen,
   "pool/garzas-assassin": _poolGarzasAssassin,
@@ -85095,6 +85107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nissas-revelation": _poolNissasRevelation,
   "pool/nissas-triumph": _poolNissasTriumph,
   "pool/nissas-zendikon": _poolNissasZendikon,
+  "pool/nita-forum-conciliator": _poolNitaForumConciliator,
   "pool/niv-mizzet-dracogenius": _poolNivMizzetDracogenius,
   "pool/niv-mizzet-ghost-counsel": _poolNivMizzetGhostCounsel,
   "pool/niv-mizzet-guildpact": _poolNivMizzetGuildpact,
@@ -87583,6 +87596,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/radiant-lotus": _poolRadiantLotus,
   "pool/radiant-purge": _poolRadiantPurge,
   "pool/radiant-restraints": _poolRadiantRestraints,
+  "pool/radiant-scrollwielder": _poolRadiantScrollwielder,
   "pool/radiant-serra-archangel": _poolRadiantSerraArchangel,
   "pool/radiant-solar": _poolRadiantSolar,
   "pool/radiant-strike": _poolRadiantStrike,
@@ -97702,6 +97716,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wheel-of-fate": _poolWheelOfFate,
   "pool/wheel-of-fortune": _poolWheelOfFortune,
   "pool/wheel-of-misfortune": _poolWheelOfMisfortune,
+  "pool/wheel-of-potential": _poolWheelOfPotential,
   "pool/wheel-of-torture": _poolWheelOfTorture,
   "pool/whelming-wave": _poolWhelmingWave,
   "pool/when-we-were-young": _poolWhenWeWereYoung,

@@ -655,6 +655,7 @@ import _poolQuicken from "../pool/quicken.js";
 import _poolQuicksilverFountain from "../pool/quicksilver-fountain.js";
 import _poolQuilledGreatwurm from "../pool/quilled-greatwurm.js";
 import _poolQuistisTrepe from "../pool/quistis-trepe.js";
+import _poolRadiantScrollwielder from "../pool/radiant-scrollwielder.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
 import _poolRakdosAugermage from "../pool/rakdos-augermage.js";
 import _poolRakdosTrumpeter from "../pool/rakdos-trumpeter.js";
@@ -1633,6 +1634,7 @@ const shard: CardShard = {
     _poolQuicksilverFountain,
     _poolQuilledGreatwurm,
     _poolQuistisTrepe,
+    _poolRadiantScrollwielder,
     _poolRagingGoblinoids,
     _poolRakdosAugermage,
     _poolRakdosTrumpeter,

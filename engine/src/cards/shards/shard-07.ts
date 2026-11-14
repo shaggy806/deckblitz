@@ -604,6 +604,7 @@ import _poolNightscapeBattlemage from "../pool/nightscape-battlemage.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
 import _poolNissaOfShadowedBoughs from "../pool/nissa-of-shadowed-boughs.js";
+import _poolNitaForumConciliator from "../pool/nita-forum-conciliator.js";
 import _poolNocturnalRaid from "../pool/nocturnal-raid.js";
 import _poolNoggleBandit from "../pool/noggle-bandit.js";
 import _poolNorthWindAvatar from "../pool/north-wind-avatar.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolNikoLightOfHope,
     _poolNimbleclawAdept,
     _poolNissaOfShadowedBoughs,
+    _poolNitaForumConciliator,
     _poolNocturnalRaid,
     _poolNoggleBandit,
     _poolNorthWindAvatar,

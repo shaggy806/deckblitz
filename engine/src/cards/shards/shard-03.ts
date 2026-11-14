@@ -901,6 +901,7 @@ import _poolWeatherMaker from "../pool/weather-maker.js";
 import _poolWeatherlightCompleated from "../pool/weatherlight-compleated.js";
 import _poolWeatherseedTotem from "../pool/weatherseed-totem.js";
 import _poolWebShot from "../pool/web-shot.js";
+import _poolWheelOfPotential from "../pool/wheel-of-potential.js";
 import _poolWhirlpoolWarrior from "../pool/whirlpool-warrior.js";
 import _poolWhisperSquad from "../pool/whisper-squad.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
@@ -1861,6 +1862,7 @@ const shard: CardShard = {
     _poolWeatherlightCompleated,
     _poolWeatherseedTotem,
     _poolWebShot,
+    _poolWheelOfPotential,
     _poolWhirlpoolWarrior,
     _poolWhisperSquad,
     _poolWhiteKnight,

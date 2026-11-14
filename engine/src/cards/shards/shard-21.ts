@@ -304,6 +304,7 @@ import _poolFlameshape from "../pool/flameshape.js";
 import _poolFlamethrowerSonata from "../pool/flamethrower-sonata.js";
 import _poolFlamewright from "../pool/flamewright.js";
 import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
+import _poolFlickerform from "../pool/flickerform.js";
 import _poolFlowerfootSwordmaster from "../pool/flowerfoot-swordmaster.js";
 import _poolForumFamiliar from "../pool/forum-familiar.js";
 import _poolFragmentize from "../pool/fragmentize.js";
@@ -1299,6 +1300,7 @@ const shard: CardShard = {
     _poolFlamethrowerSonata,
     _poolFlamewright,
     _poolFleetingEffigy,
+    _poolFlickerform,
     _poolFlowerfootSwordmaster,
     _poolForumFamiliar,
     _poolFragmentize,

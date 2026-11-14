@@ -328,6 +328,7 @@ import _poolFruition from "../pool/fruition.js";
 import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGarenbrigPaladin from "../pool/garenbrig-paladin.js";
+import _poolGarthOneEye from "../pool/garth-one-eye.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGeistcatchersRig from "../pool/geistcatchers-rig.js";
 import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
@@ -1351,6 +1352,7 @@ const shard: CardShard = {
     _poolGaladrielsDismissal,
     _poolGallowsWarden,
     _poolGarenbrigPaladin,
+    _poolGarthOneEye,
     _poolGavonyTrapper,
     _poolGeistcatchersRig,
     _poolGemOfBecoming,
