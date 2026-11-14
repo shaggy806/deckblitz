@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Duskmourn Commander (DSC). The leaves-graveyard trigger is the batched
+// Ravnica: Clue Edition (CLU). The leaves-graveyard trigger is the batched
 // one: cards leaving together trigger it once (the card's ruling). Its value
 // is the greatest mana value among the cards that left, each as it was in
 // the graveyard, fixed as it triggers (`batchValue`), so a card returned to
