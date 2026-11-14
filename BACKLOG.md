@@ -55,9 +55,14 @@ section keeps only what to do next.
   three were really major (Kamahl's Will, Soulfire Eruption, Spectral Searchlight) and about one in five needed no engine
   code. **The lanes run (2026-11-13, `build-family overnight lanes`, `COMPLETED.md`)** built 46 keys and 48 cards, leaving
   147 keys over 139 cards (`cards:goal`); the 7 cards it freed went through `author-freed` as **B324** (all 7 authored,
-  `--stale` empty again). Each lane's next share is
-  `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. Ratchet's key is next in
-  triggers-journal. The 28
+  `--stale` empty again). **The second lanes run (2026-11-13/14, `author-top-cards overnight lanes`, `COMPLETED.md`)**
+  built 16 agents' shares, 79 cards (83 card files), leaving 72 keys over 68 cards; **B325** re-keyed the six cards
+  its keys didn't cover (North Star, False Dawn, Oath of Kaya, Tahngarth, Deification, Curie) and recorded Pulmonic
+  Sliver major (an asked optional graveyard replacement). Skipped: Spectral Searchlight and Soulfire Eruption (major),
+  Lich's Mastery (one implementation group with Nicol Bolas's deferred major). **Next: `author-freed`** on the 9 cards
+  `--stale` now lists (Eye of the Storm, Spell Queller, Lady Loki, Inquisitor Eisenhorn, Minion of the Wastes, Nameless
+  Race, Rod of Absorption, Uvilda, Web of Inertia), then the lanes again. Each lane's next share is
+  `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. The 28
   triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13
   authored, 15 given narrow keys (`B314.json`), and `cards:needs -- --stale` is empty. Past rank 10,000 the order is still EDHREC
   rank (`author-top-cards`, which since 2026-11-12 builds the small features its cards need
@@ -115,6 +120,8 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
+- **Opposition Agent and a search of every library** — Jace, Architect of Thought's −8 (`eachLibrary`) begins the Agent's search control, but the Agent's "may play those cards" isn't granted for a find from the searcher's own library (`docs/engine-gaps.md`).
+- **A token copy skips "exile first" and "pay any amount of life" as it enters** — The Mimeoplasm's `exileFirst` and Phyrexian Processor's `payLife` are asked only of a card entering, the same gap as Vizier of Many Faces (`docs/engine-gaps.md`).
 - **`triggerValue` reads 0 inside an `unless`'s `otherwise`** — B298: Archfiend of Spite's "loses that much life" lost none once the opponent declined; pool cards reading `triggerValue` there may be wrong (`docs/engine-gaps.md`).
 - **Definition traps that fail silently** — B298: "opponent" on a `targetsChosenBy` trigger is read from the ability's controller, not the chooser; a spell's any-number bound other than a literal `"x"` becomes 0; `exile` of a card in hand without `fromHand` does nothing; `look-and-choose` over `exiled-this-way` with `max: 0` skips `leftover` (`docs/engine-gaps.md`).
 - **`thenCounters` reaches tokens a replacement adds** — a token copy's `thenCounters` also lands on tokens made in addition (Chatterfang's Squirrels); `withCounters` tells them apart since 2026-11-11 (`docs/engine-gaps.md`).
@@ -283,6 +290,8 @@ Shiko or the other spell, and haste enablers in the crackback).
 One line each; the detail is in **`docs/client-gaps.md`**, under the same bold title, and the
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
+
+- **Another player's target popup says "your graveyard"** — Mausoleum Turnkey's opponent picks a card in its controller's graveyard under a title written from the controller's side (`docs/client-gaps.md`).
 
 
 

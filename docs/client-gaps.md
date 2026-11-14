@@ -99,6 +99,13 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 
+**Another player's target popup says "your graveyard"**
+
+When an opponent chooses a trigger's target for its controller (Mausoleum Turnkey's
+`targetsChosenBy: "an-opponent"`, 2026-11-14), the popup title reads "target creature card in
+your graveyard" from the chooser's seat, though it's the controller's graveyard. The wording was
+already there for every other-player target choice; it should name whose graveyard it is.
+
 **A cast copy logs as "a card"**
 
 The game log prints "a card resolves" for a cast copy and "commits a crime with a card", from
