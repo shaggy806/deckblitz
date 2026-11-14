@@ -63889,6 +63889,12 @@ controlledBy,
       const object = this.state.objects[id];
       return object?.zone === "battlefield" && object.entry?.from === "exile" && !object.isToken;
     });
+    // And a hand still has what is entering from it, put there without being
+    // cast (Realm Seekers' ruling: "it counts itself").
+    const fromHand = notYet.filter((id) => {
+      const object = this.state.objects[id];
+      return object?.zone === "battlefield" && object.entry?.from === "hand" && !object.isToken;
+    });
     // An `ifCondition` in the amount ("if you control five or more untapped
     // lands, it enters with …" — Dust Animus) asks about what's already
     // there too, as `tappedUnless` does: not this permanent or anything
@@ -63915,6 +63921,13 @@ controlledBy,
         ctx.countInGraveyard(filter, you) +
         fromGraveyard.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you }))
           .length,
+      handSizeOf: (player, filter) =>
+        ctx.handSizeOf(player, filter) +
+        fromHand.filter(
+          (id) =>
+            this.state.objects[id].owner === player &&
+            (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: player })),
+        ).length,
       countMatching: (filter, except = [], you) => ctx.countMatching(filter, [...except, ...notYet], you),
       // A graveyard's half still has what is entering from it (rule 614.12,
       // as `countInGraveyard` above), and exile's too (Ulamog, the Defiler's

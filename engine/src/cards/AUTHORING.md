@@ -790,7 +790,10 @@ counter on it", a `sum` with a `countOf`);
 counter for each …" replacement it still counts a card entering **from** a
 graveyard, itself or one entering with it, since the replacement applies
 before it moves (rule 614.12 — Diregraf Colossus's and Unbreathing Horde's
-rulings);
+rulings) — and a `cardsInHand` count likewise counts one put onto the
+battlefield straight from a hand (Realm Seekers' "the total number of cards in
+all players' hands" is `{ cardsInHand: "each-player" }`; cast, it's on the
+stack and isn't counted);
 `{ lifeTotal: "you" }` — the controller's life total (Ajani's ultimate);
 `{ lifeTotal: "each" }` — the life of **each player a scoped effect is
 applied to**, read once per player ("each opponent loses half **their**

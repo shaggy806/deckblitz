@@ -322,6 +322,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### An enters-with count of hands that counts the card itself — built 2026-11-14
+
+The key `amount:entering-card-counts-itself-in-hand`. `Game.enteringCounterAmount` reads
+`handSizeOf` with the entering cards that came from a hand without being cast (`entry.from:
+"hand"`) still in their owners' hands, as it already did for a graveyard (rule 614.12). Realm
+Seekers (rank 9487). `test/entering-from-hand-counts-itself.test.ts`.
+
 ### Damage that leaves one loyalty counter, and a planeswalker type chosen — built 2026-11-14
 
 The keys `replacement:damage-leaves-one-loyalty-counter` and `effect:choose-planeswalker-type`.
