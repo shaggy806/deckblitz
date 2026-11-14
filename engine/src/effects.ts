@@ -5329,6 +5329,13 @@ export type EffectSpec =
             /** "**Reveal** the top X cards" (Sunbird's Invocation): every
              * player sees them (rule 701.16), not only their owner. */
             readonly reveal?: true;
+            /** Whose library, when it isn't the effect's controller's:
+             * "**target opponent** reveals the top seven cards of their
+             * library. You may cast an instant or sorcery spell from among
+             * them" (Talent of the Telepath: `{ target: 0 }`, with `reveal`).
+             * The caster controls the spell and its owner still owns it (rule
+             * 108.3); a `rest` goes to that player's library or graveyard. */
+            readonly of?: PlayerRef;
           }
         /** Another player's hand, a hidden zone the caster gets to see whole:
          * "look at that player's hand. You may cast a spell from among those
@@ -5520,8 +5527,11 @@ export type EffectSpec =
        * choice. Without it they stay where they are. `"hand"` goes with
        * `from: "targets"`, cards in exile: "you may cast a spell from among
        * them without paying its mana cost. Put the rest into your hand"
-       * (Abstract Performance) — the player looks at them all first. */
-      readonly rest?: "bottom-random" | "bottom-any-order" | "hand";
+       * (Abstract Performance) — the player looks at them all first.
+       * `"graveyard"`: "then that player puts the rest into their
+       * graveyard" (Talent of the Telepath), each card to its owner's, in
+       * one move. */
+      readonly rest?: "bottom-random" | "bottom-any-order" | "hand" | "graveyard";
       /** Set only on the copy parked across the decision. */
       readonly progress?: CastNowProgress;
     } & CastNowTerms)
@@ -15998,9 +16008,17 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
     const handOwner =
       typeof from === "object" && "handOf" in from ? resolvePlayerRef(from.handOf, ctx) : undefined;
     const searcher = from === "while-searching" ? (spec.by === undefined ? ctx.controller : resolvePlayerRef(spec.by, ctx)) : undefined;
+    const libraryOwner =
+      typeof from === "object" && "libraryTop" in from
+        ? from.of === undefined
+          ? ctx.controller
+          : resolvePlayerRef(from.of, ctx)
+        : undefined;
     const looked =
       typeof from === "object" && "libraryTop" in from
-        ? ctx.libraryTop(ctx.controller, Math.max(0, Math.floor(amountValue(from.libraryTop, ctx))), from.reveal === true)
+        ? libraryOwner === undefined
+          ? []
+          : ctx.libraryTop(libraryOwner, Math.max(0, Math.floor(amountValue(from.libraryTop, ctx))), from.reveal === true)
         : handOwner !== undefined
           ? ctx.cardsIn(handOwner, "hand")
           : searcher !== undefined
@@ -16157,14 +16175,17 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
 }
 
 /** A `cast-now`'s `rest`: the cards it looked at and didn't cast, still in
- * the library, to its bottom — or, still in exile, to the hand. */
+ * the library, to its bottom or its owner's graveyard — or, still in exile,
+ * to the hand. The library is the looked-at cards' owner's (`libraryTop`'s
+ * `of`). */
 function placeCastNowRest(
   spec: Extract<EffectSpec, { kind: "cast-now" }>,
   progress: CastNowProgress,
   ctx: ResolutionContext,
 ): void {
   if (spec.rest !== undefined && progress.looked.length > 0) {
-    ctx.placeRevealed(ctx.controller, progress.looked, spec.rest, spec.rest === "hand");
+    const owner = ctx.ownerOf({ kind: "object", object: progress.looked[0] }) ?? ctx.controller;
+    ctx.placeRevealed(owner, progress.looked, spec.rest, spec.rest === "hand");
   }
 }
 
