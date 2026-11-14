@@ -2458,10 +2458,13 @@ export type TriggerKind =
       /**
        * Also fire when the player **copies** a spell (rule 707.10 — a copy
        * isn't cast): Magecraft's "whenever you cast **or copy** an instant or
-       * sorcery spell" (Archmage Emeritus). `who` is who controls the copy,
+       * sorcery spell" (Archmage Emeritus). `who` is who controls the copy
+       * (`"attached"`: the enchanted player — Curse of Shaken Faith),
        * `filter` asks about the copy, and the copy is the trigger object. The
-       * cast-only narrowings (`from`, `notFrom`, the timing wrapper) never
-       * match a copy.
+       * cast-only narrowings (`from`, `notFrom`) never match a copy; the
+       * timing wrapper narrows the casts alone — "casts a spell other than
+       * the first spell they cast each turn **or copies a spell**" (Curse of
+       * Shaken Faith), every copy firing it.
        */
       readonly orCopy?: boolean;
       /** Fire **only** when the player copies a spell — Kalamax, the
@@ -2717,10 +2720,15 @@ export type TriggerKind =
  * counters, "your first enchantment spell"). Answered from the journal
  * (`Game.timingCount`); a kind it can't answer for is refused by
  * `test/trigger-timing.test.ts`. `firstTimeEachTurn` is `nthEachTurn: 1`.
+ *
+ * `orLater` — the Nth time **or any later one**: "a spell **other than the
+ * first** spell they cast each turn" (Curse of Shaken Faith) is
+ * `nthEachTurn: 2, orLater: true`.
  */
 export interface TriggerTiming {
   readonly firstTimeEachTurn?: boolean;
   readonly nthEachTurn?: number;
+  readonly orLater?: true;
 }
 
 /** A triggered ability's trigger: its event ({@link TriggerKind}) and its

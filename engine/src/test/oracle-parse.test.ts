@@ -19617,3 +19617,38 @@ describe("cast from your graveyard using its keyword ability (Brokkos, Apex of F
     expect(phoenix.complete).toBe(true);
   });
 });
+
+describe("counting spells for a cast trigger", () => {
+  it("a spell other than the first they cast each turn, or a copy (Curse of Shaken Faith)", () => {
+    expect(
+      parseTrigger(
+        "Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell",
+      ),
+    ).toEqual([{ on: "cast-spell", who: "attached", orCopy: true, nthEachTurn: 2, orLater: true }]);
+  });
+
+  it("the Nth spell of a turn, every player's counted (Erayo, Nullstone Gargoyle)", () => {
+    const erayo = parseFace({
+      name: "Test Erayo",
+      type_line: "Legendary Creature — Moonfolk Monk",
+      mana_cost: "{1}{U}",
+      oracle_text: "Flying\nWhenever the fourth spell of a turn is cast, flip Test Erayo.",
+    });
+    expect(erayo.triggered[0].trigger).toEqual({ on: "cast-spell", who: "any" });
+    expect(erayo.triggered[0].whileCondition).toEqual({ kind: "cast-this-turn", who: "any", atLeast: 4, atMost: 4 });
+    const gargoyle = parseFace({
+      name: "Test Gargoyle",
+      type_line: "Artifact Creature — Gargoyle",
+      mana_cost: "{9}",
+      oracle_text: "Flying\nWhenever the first noncreature spell of a turn is cast, counter that spell.",
+    });
+    expect(gargoyle.triggered[0].trigger).toEqual({ on: "cast-spell", who: "any", filter: { notTypes: ["creature"] } });
+    expect(gargoyle.triggered[0].whileCondition).toEqual({
+      kind: "cast-this-turn",
+      who: "any",
+      filter: { notTypes: ["creature"] },
+      atLeast: 1,
+      atMost: 1,
+    });
+  });
+});

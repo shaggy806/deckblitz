@@ -34203,9 +34203,12 @@ export class Game {
   private timingOk(spec: TriggerSpec, event: GameEvent, self: GameObject): boolean {
     const nth = spec.nthEachTurn ?? (spec.firstTimeEachTurn === true ? 1 : undefined);
     if (nth === undefined) return true;
+    // "…or copies a spell": the wrapper narrows the casts alone (a copy is
+    // never cast, rule 707.10).
+    if (spec.on === "cast-spell" && event.type === "spell-copied") return true;
     if (!timingCountable(spec)) return false;
     const before = this.timingCount(spec, event, self);
-    return before !== undefined && before === nth - 1;
+    return before !== undefined && (spec.orLater === true ? before >= nth - 1 : before === nth - 1);
   }
 
   /**
@@ -35132,13 +35135,14 @@ export class Game {
           const copierMatches =
             spec.who === "any" ||
             (spec.who === "you" && event.controller === self.controller) ||
-            (spec.who === "opponent" && event.controller !== self.controller);
+            (spec.who === "opponent" && event.controller !== self.controller) ||
+            // "…or copies a spell" of the player a Curse enchants.
+            (spec.who === "attached" && this.matchesWhoPlayer("attached", event.controller, self));
+          // The timing wrapper narrows the casts alone (`timingOk`).
           return (
             copierMatches &&
             spec.from === undefined &&
             spec.notFrom === undefined &&
-            spec.firstTimeEachTurn !== true &&
-            spec.nthEachTurn === undefined &&
             spec.noncreatureOnly !== true &&
             this.triggerFilterOk(spec.filter, event.copy, self)
           );

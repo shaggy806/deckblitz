@@ -2652,6 +2652,18 @@ export function parseTrigger(clause) {
   if (/^Whenever you cast or copy an instant or sorcery spell$/.test(c)) {
     return [{ on: "cast-spell", who: "you", orCopy: true, filter: { typesAnyOf: ["instant", "sorcery"] } }];
   }
+  // "Casts a spell other than the first spell they cast each turn" (Curse of
+  // Shaken Faith): the timing wrapper's `orLater` from the second; "or
+  // copies a spell" fires for every copy (the wrapper narrows casts alone).
+  if (
+    (m =
+      /^Whenever (you|an opponent|a player|enchanted player) casts? a spell other than the first spell (?:you|they) cast each turn( or cop(?:y|ies) a spell)?$/.exec(
+        c,
+      ))
+  ) {
+    const who = { you: "you", "an opponent": "opponent", "a player": "any", "enchanted player": "attached" }[m[1]];
+    return [{ on: "cast-spell", who, ...(m[2] ? { orCopy: true } : {}), nthEachTurn: 2, orLater: true }];
+  }
 
   // Players.
   if ((m = /^Whenever (you|an opponent|a player) draws? a card$/.exec(c))) {
@@ -17776,6 +17788,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       // Signpost): part of the trigger condition, asked as it enters (603.1).
       const duringAttackers = /^When ~ enters during the declare attackers step$/.test(clause);
       if (duringAttackers) clause = "When ~ enters";
+      // "Whenever the fourth spell of a turn is cast" (Erayo), "the first
+      // noncreature spell of a turn" (Nullstone Gargoyle): the turn's Nth,
+      // whoever cast each — a trigger condition (603.1) counting every
+      // player's spells, the one just cast included.
+      const nthOfTurn = /^Whenever the (first|second|third|fourth|fifth) (?:(noncreature) )?spell of a turn is cast$/.exec(clause);
+      const nthOfTurnFilter = nthOfTurn?.[2] === "noncreature" ? { filter: { notTypes: ["creature"] } } : {};
       // "Whenever you tap a land for mana while you're the monarch" (Regal
       // Behemoth): a triggered mana ability, its condition read as it's made.
       const whileMonarch = /^Whenever .+ for mana while you're the monarch$/.test(clause);
@@ -17793,7 +17811,9 @@ function parseFaceAsWritten(face, ctx = {}) {
         ? [{ on: "counters-removed", who: "self", counter: "time", ...(timeCounterOff[1] === "When the last" ? { last: true } : {}) }]
         : blockedKeyword !== undefined
           ? [{ on: "blocks", who: "self", object: "blocked" }]
-          : parseTrigger(clause);
+          : nthOfTurn
+            ? [{ on: "cast-spell", who: "any", ...nthOfTurnFilter }]
+            : parseTrigger(clause);
       if (
         parsedTriggers === null ||
         (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self")) ||
@@ -17833,6 +17853,12 @@ function parseFaceAsWritten(face, ctx = {}) {
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
         ...(blockedKeyword !== undefined ? { whileCondition: { kind: "trigger-object", filter: { keyword: blockedKeyword } } } : {}),
         ...(duringAttackers ? { whileCondition: { kind: "turn-structure", steps: ["declare-attackers"] } } : {}),
+        ...(nthOfTurn
+          ? (() => {
+              const n = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }[nthOfTurn[1]];
+              return { whileCondition: { kind: "cast-this-turn", who: "any", ...nthOfTurnFilter, atLeast: n, atMost: n } };
+            })()
+          : {}),
         ...(whileMonarch ? { condition: { kind: "monarch", who: "you" } } : {}),
         ...(duringMain
           ? {
