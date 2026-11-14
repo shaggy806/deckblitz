@@ -4742,6 +4742,39 @@ export function countValue(
   }
 }
 
+/** The hone counters on the Equipment attached to each permanent (rule
+ * 122.1j), by host; `null` with none on the battlefield. Kept per mutation
+ * epoch as the board scans are ({@link boardScan}), since every P/T read asks. */
+let honeMemo: {
+  readonly state: GameState;
+  readonly registry: CardRegistry;
+  readonly epoch: number;
+  readonly value: ReadonlyMap<ObjectId, number> | null;
+} | null = null;
+
+function scanHoneCounters(state: GameState, registry: CardRegistry): ReadonlyMap<ObjectId, number> | null {
+  let out: Map<ObjectId, number> | null = null;
+  for (const id of state.zones.shared.battlefield) {
+    const equipment = state.objects[id];
+    const hone = equipment?.counters.hone ?? 0;
+    if (hone <= 0 || equipment.attachedTo === null || equipment.attachedTo === undefined) continue;
+    if (!effectiveSubtypes(state, registry, equipment).includes("Equipment")) continue;
+    out ??= new Map();
+    out.set(equipment.attachedTo, (out.get(equipment.attachedTo) ?? 0) + hone);
+  }
+  return out;
+}
+
+/** The +1/+0 a hone counter on an Equipment attached to `id` gives it, for
+ * each one (rule 122.1j — Dwalin, Weaponmaster). */
+function honeBonus(state: GameState, registry: CardRegistry, id: ObjectId): number {
+  if (guardActive()) return scanHoneCounters(state, registry)?.get(id) ?? 0;
+  if (honeMemo === null || honeMemo.state !== state || honeMemo.registry !== registry || honeMemo.epoch !== mutationEpoch) {
+    honeMemo = { state, registry, epoch: mutationEpoch, value: scanHoneCounters(state, registry) };
+  }
+  return honeMemo.value?.get(id) ?? 0;
+}
+
 /** What one counter named `counter` adds to power and toughness: a +X/+Y or
  * -X/-Y counter (rule 122.1a) — "+1/+1", "-1/-1", Wall of Roots' "-0/-1",
  * "+1/+0" — and nothing for any other kind. */
@@ -6539,6 +6572,10 @@ function computeCharacteristicsUncached(
     power += bonus.power * count;
     toughness += bonus.toughness * count;
   }
+  // A hone counter on an Equipment gives the creature it's attached to
+  // +1/+0 (rule 122.1j): the counter's own effect, so an Equipment that has
+  // lost its abilities still gives it.
+  if (onBattlefield && types.includes("creature")) power += honeBonus(state, registry, id);
 
   // P/T modifications (additive; order does not affect the result).
   for (const effect of staticEffects) {
