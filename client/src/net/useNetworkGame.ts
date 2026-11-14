@@ -163,6 +163,21 @@ function clearRoomFromUrl(): void {
  * builder and play that manual check (`builder/ManualChecksSection.tsx`). */
 export const CHECK_PARAM = 'check'
 
+/** Whether this page load ends on the landing page once the socket opens:
+ * no room to join and nothing for `onopen` to start. Such a load draws the
+ * landing while the first connection is still opening, rather than a
+ * "Connecting…" box (the user, 2026-11-14); anything clicked on it before
+ * then waits in `useNetworkGame`'s pre-open queue. */
+export function opensOnLanding(): boolean {
+  const params = new URL(window.location.href).searchParams
+  return (
+    !params.has('room') &&
+    !params.has(LESSON_PARAM) &&
+    !params.has(FIRST_GAME_PARAM) &&
+    !(import.meta.env.DEV && params.has(CHECK_PARAM))
+  )
+}
+
 /** A `?tutorial=` the page loaded with (`lessonUrl`), taken off the URL as
  * it's read so a reload doesn't open a second room. */
 function takeLessonFromUrl(): string | null {
@@ -567,8 +582,15 @@ export function useNetworkGame(): NetworkGame {
   const view = frame?.view ?? null
   const actions = frame?.actions ?? EMPTY_ACTIONS
 
+  /** What the landing page sent before the first connection opened (it's
+   * drawn while that connection opens: `opensOnLanding`), each with whether
+   * it was a solo room's (`sendSolo`); null once it has opened. `onopen`
+   * sends them on. A real WebSocket throws on a send while it's connecting. */
+  const preOpenRef = useRef<{ readonly data: string; readonly solo: boolean }[] | null>([])
   const send = useCallback((message: ClientMessage) => {
-    wsRef.current?.send(JSON.stringify(message))
+    const data = JSON.stringify(message)
+    if (preOpenRef.current !== null) preOpenRef.current.push({ data, solo: false })
+    else wsRef.current?.send(data)
   }, [])
   /** A room only this tab will play in — a blitz, a lesson — created in the
    * tab's own room worker in local mode, on the server otherwise. */
@@ -581,8 +603,10 @@ export function useNetworkGame(): NetworkGame {
 
   const sendSolo = useCallback((message: ClientMessage) => {
     const ws = wsRef.current
-    if (ws instanceof HybridSocket) ws.sendLocal(JSON.stringify(message))
-    else ws?.send(JSON.stringify(message))
+    const data = JSON.stringify(message)
+    if (preOpenRef.current !== null) preOpenRef.current.push({ data, solo: true })
+    else if (ws instanceof HybridSocket) ws.sendLocal(data)
+    else ws?.send(data)
   }, [])
 
   const openSocket = useCallback(() => {
@@ -609,6 +633,8 @@ export function useNetworkGame(): NetworkGame {
 
     ws.onopen = () => {
       if (!isCurrent()) return
+      const preOpen = preOpenRef.current ?? []
+      preOpenRef.current = null
       // A new connection is sent the whole log on its first frame; until
       // then there's nothing to add to. And from here on, frames need carry
       // only the events this socket hasn't had.
@@ -621,10 +647,16 @@ export function useNetworkGame(): NetworkGame {
       const fromUrl = url.searchParams.get('room')
       const lesson = fromUrl ? null : takeLessonFromUrl()
       const firstGame = !fromUrl && takeFirstGameFromUrl()
+      // A join clicked on the landing before now put its room in the URL, so
+      // the join here is that one: what it queued is dropped, not sent twice.
       if (fromUrl) {
         joinRoomId(fromUrl)
       } else {
         setStatus('no-room')
+        for (const { data, solo } of preOpen) {
+          if (solo && ws instanceof HybridSocket) ws.sendLocal(data)
+          else ws.send(data)
+        }
         // "Play again", or Learn Commander from a lobby: a room of its own.
         if (lesson !== null) startTutorialRef.current(lesson)
         // The way on from Learn Commander.

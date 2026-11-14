@@ -53,7 +53,7 @@ import {
   waterbendAt,
 } from 'engine/client'
 import type { SeatStatus, TutorialInfo } from 'protocol'
-import { useNetworkGame } from './net/useNetworkGame.ts'
+import { opensOnLanding, useNetworkGame } from './net/useNetworkGame.ts'
 import type { BlitzReport, NetworkGame } from './net/useNetworkGame.ts'
 import { rematchOffer } from './net/rematch.ts'
 import type { RematchOffer } from './net/rematch.ts'
@@ -1039,7 +1039,16 @@ function AppScreen({ game }: { readonly game: NetworkGame }) {
   // Remembered as it renders (React's "storing information from previous
   // renders"), so the first dimmed frame already has it.
   if (connected && lastShown !== game.status) setLastShown(game.status as ShownStatus)
-  const held = connected ? null : lastShown
+  // A first visit bound for the landing page draws it while the socket
+  // opens, rather than a "Connecting…" box (the user, 2026-11-14) — through
+  // the same tree as the connected landing, so it isn't remounted when the
+  // socket opens. Anything clicked on it before then waits for the socket.
+  // Only the first try: once that fails, the retries keep the "Waiting for
+  // the server…" box up rather than flicking back to the landing each time.
+  const [landingFirst, setLandingFirst] = useState(opensOnLanding)
+  if (landingFirst && game.status === 'disconnected') setLandingFirst(false)
+  const opening = game.status === 'connecting' && lastShown === null && landingFirst
+  const held = connected ? null : opening ? 'no-room' : lastShown
 
   if (!connected && held === null) {
     if (game.status === 'connecting') return <CenteredScreen title="Connecting…" />
@@ -1062,7 +1071,7 @@ function AppScreen({ game }: { readonly game: NetworkGame }) {
   return (
     <>
       <StatusScreen game={game} status={connected ? (game.status as ShownStatus) : (held as ShownStatus)} />
-      {connected ? null : (
+      {connected || opening ? null : (
         <div className="overlay reconnect-overlay" role="alertdialog" aria-label="Reconnecting">
           <div className="overlay-box">
             <h2>Reconnecting…</h2>
