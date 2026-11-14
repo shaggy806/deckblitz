@@ -63638,16 +63638,15 @@ controlledBy,
         tappedBy = id;
       }
       // What it counts is what's already there: a land entering alongside it
-      // isn't yet (rule 614.12 — the check-land rulings).
+      // isn't yet (rule 614.12 — the check-land rulings). An `x` condition
+      // reads the X it was cast with, 0 if it wasn't (rule 107.3m — Slumbering
+      // Trudge's "if X is 2 or less, it enters tapped").
       const failsCondition =
         r.tappedUnless !== undefined &&
-        !staticConditionMet(
-          this.state,
-          this.registry,
-          object,
-          r.tappedUnless,
-          this.enterBatch !== null ? { notYetHere: this.enterBatch } : {},
-        );
+        !staticConditionMet(this.state, this.registry, object, r.tappedUnless, {
+          ...(this.enterBatch !== null ? { notYetHere: this.enterBatch } : {}),
+          x: object.xValue ?? 0,
+        });
       // A reveal land: what its controller revealed as it was about to enter
       // (`askEnterChoice`), or — entering some way that never asked, a token
       // copy — whether they could have.

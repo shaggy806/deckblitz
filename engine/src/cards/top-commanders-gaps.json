@@ -2599,7 +2599,8 @@
   "effect:turn-face-up-or-exile-and-cast",
   "static:grants-replacement-effect",
   "static:keywords-of-linked-exile",
-  "effect:random-player-per-permanent"
+  "effect:random-player-per-permanent",
+  "replacement:enters-tapped-if-x"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

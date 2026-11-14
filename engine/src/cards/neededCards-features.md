@@ -322,6 +322,12 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "If X is 2 or less, it enters tapped" — built 2026-11-14
+
+The key `replacement:enters-tapped-if-x`: the `enters-battlefield` replacement's `tappedUnless` is
+now asked with the entering permanent's `xValue` (0 uncast), so an `x` condition reads it (rule
+107.3m). Slumbering Trudge (rank 9750). `test/enters-tapped-if-x.test.ts`.
+
 ### A random player for each permanent — built 2026-11-14
 
 The key `effect:random-player-per-permanent`: `gain-control-all`'s `who: "random"`

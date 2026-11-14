@@ -7001,7 +7001,10 @@ clause (section 9):
   cycle (Rootbound Crag: `{ kind: "controls", filter: { subtypes: [...] },
   atLeast: 1 }`, via the `checkLandStatic`/`enterTappedUnlessLands` helpers),
   asked of what's already on the battlefield — never a land entering beside
-  it (a tutor's finds, Scapeshift: rule 614.12, the check-land rulings);
+  it (a tutor's finds, Scapeshift: rule 614.12, the check-land rulings); an
+  `x` condition reads the X it was cast with, 0 if it wasn't (rule 107.3m —
+  Slumbering Trudge's "if X is 2 or less, it enters tapped" is `tappedUnless:
+  { kind: "x", compare: { op: "gte", n: 3 } }`);
   `tappedUnlessRevealFromHand: [type, type]` is the reveal-land cycle (Port
   Town, via the `revealLand` helper) — the one enters-tapped check that reads
   your **hand** rather than the battlefield, which is why it isn't a
