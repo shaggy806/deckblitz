@@ -2,11 +2,10 @@
 // keyword abilities with a name a copy can read, and `doubleTriggers` by any
 // cause. See docs/plans/need-key-themes.md, theme 16's design note.
 
-import { readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { defineCard } from "../cards/define.js";
+import { POOL_CARDS, TOKEN_CARDS } from "../cards/generated.js";
 import { createDefaultRegistry } from "../cards/registry.js";
 import {
   A,
@@ -394,11 +393,25 @@ describe("a doubler keyed on a theme-2 event row", () => {
 });
 
 describe("the old grant fields are gone", () => {
+  // The removed `grants*InHand` / `grants*ToSpells` fields are no longer in
+  // the definition types, so typecheck refuses them. What it can't refuse are
+  // two old value shapes on fields that still exist: a miracle grant as an
+  // object, and replicate as a keyword record with `multi`. Walked over the
+  // loaded definitions rather than read from ~29,000 files (that took 23 s).
   it("no pool card uses a removed spelling", () => {
-    const dir = join(__dirname, "..", "cards", "pool");
-    const removed =
-      /grants(Warp|Ninjutsu|Cycling|Foretell|Blitz)InHand|grants(Offspring|Evoke)ToSpells|grantsToHand:[^\n]*miracle: \{|keyword: "replicate", multi/;
-    const hits = readdirSync(dir).filter((f) => f.endsWith(".ts") && removed.test(readFileSync(join(dir, f), "utf8")));
+    const hits: string[] = [];
+    const walk = (value: unknown, name: string, inGrantsToHand: boolean): void => {
+      if (value === null || typeof value !== "object") return;
+      if (Array.isArray(value)) {
+        for (const item of value) walk(item, name, inGrantsToHand);
+        return;
+      }
+      const record = value as Record<string, unknown>;
+      if (inGrantsToHand && typeof record.miracle === "object" && record.miracle !== null) hits.push(`${name}: miracle {}`);
+      if (record.keyword === "replicate" && "multi" in record) hits.push(`${name}: replicate multi`);
+      for (const [k, v] of Object.entries(record)) walk(v, name, k === "grantsToHand" || (inGrantsToHand && k !== "static"));
+    };
+    for (const def of [...POOL_CARDS, ...TOKEN_CARDS]) walk(def, def.name, false);
     expect(hits).toEqual([]);
-  }, 60_000);
+  });
 });

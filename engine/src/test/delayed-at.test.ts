@@ -2,10 +2,6 @@
  * Theme 15 (rule 603.7): one step timing (`DelayedAt`), one duration on a
  * "whenever" watch, and an intervening "if" on any delayed ability (603.4).
  */
-import { readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
-import { fileURLToPath } from "node:url";
-
 import { describe, expect, it } from "vitest";
 
 import { delayedStep, delayedStepFires, readDelayedAt } from "../delayed-at.js";
@@ -80,19 +76,10 @@ describe("delayedStepFires", () => {
   });
 });
 
-describe("the old spellings are gone", () => {
-  it(
-    "no card or test names a step timing as a string, or the fields it replaced",
-    () => {
-      const old =
-        /\b(?:at|returnAt):\s*"(?:next-end-step|next-upkeep|your-next-upkeep|your-next-end-step|your-next-main-phase|your-next-turn-end-step|end-of-combat|end-of-combat-this-turn|this-turn-end-step|next-cleanup)"|whileAnyExiled|\bturnOf: \{ target/;
-      const pool = fileURLToPath(new URL("../cards/pool", import.meta.url));
-      const offenders = readdirSync(pool).filter((file) => old.test(readFileSync(join(pool, file), "utf8")));
-      expect(offenders).toEqual([]);
-    },
-    60_000,
-  );
-});
+// The old spellings (a step timing as a string, `whileAnyExiled`, `turnOf:
+// { target }`) are out of the definition types, so typecheck refuses them in a
+// card: a pool-wide scan for them here (23 s reading ~29,000 files) was dropped
+// on 2026-11-14 after a planted `at: "next-end-step"` failed typecheck.
 
 describe("an intervening if on a delayed ability (603.4): Fight for the Throne", () => {
   function fight(commanderHere: boolean) {

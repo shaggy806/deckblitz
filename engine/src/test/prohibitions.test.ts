@@ -3,9 +3,6 @@
  * `prohibit` effect. See `prohibitions.ts` and `docs/plans/need-key-themes.md`,
  * theme 3c.
  */
-import { readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
-
 import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
@@ -352,13 +349,9 @@ describe("what an effect makes", () => {
     expect(graveyard(game)).toHaveLength(0);
   });
 
-  it("the removed spellings are gone from every card", { timeout: 60_000 }, () => {
-    const dir = join(__dirname, "..", "cards", "pool");
-    const refused =
-      /\b(castLimit|drawsPerTurn|abilitiesOf|castOnlyAsSorcery|cantLoseGame|cantWinGame|opponentsCantWinGame|opponentsCantLoseGame|cantSearchLibraries|preventsCounters|graveyardCardsUntargetable|cantBecomeSuspected|playerHexproof|castOnlyFromHand|castsLeft|lifeCantChange|cantLoseLife|cantCast)\s*:/;
-    const offenders = readdirSync(dir)
-      .filter((file) => file.endsWith(".ts") && refused.test(readFileSync(join(dir, file), "utf8")))
-      .slice(0, 10);
-    expect(offenders).toEqual([]);
-  });
+  // The removed spellings (`castLimit`, `drawsPerTurn`, `cantSearchLibraries`
+  // and the rest of the old `cant*` fields) are out of the definition types,
+  // so typecheck refuses them in a card: a pool-wide scan for them here (23 s
+  // reading ~29,000 files) was dropped on 2026-11-14 after a planted
+  // `castLimit` on a static failed typecheck.
 });
