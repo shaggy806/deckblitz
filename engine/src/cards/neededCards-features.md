@@ -367,6 +367,10 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   With `to: "source"`, damage to the source in the stint that left (rule
   400.7). Grothama, All-Devouring (its granted fight names it through
   `"granter"`, rule 201.5a). `test/damage-to-object-by-controller.test.ts`.
+- `condition:converted-this-way` — no engine code: the `this-way`
+  `"transformed"` record (B308) is "if you do" / "when you do" after a
+  convert, empty when rule 701.28e stops one. Ratchet, Field Medic // Ratchet,
+  Rescue Racer. `test/converted-this-way.test.ts`.
 
 ### Who attacked whom, and whether it had to — built 2026-11-13
 

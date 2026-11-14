@@ -1262,7 +1262,9 @@ do, this creature gets +X/+0": a `choose-permanents` that taps them, then `{
 thisWay: "tapped" }`; one already tapped isn't counted), `"transformed"`
 (permanents it transformed or converted — Megatron, Tyrant's "you may convert
 Megatron. **If you do**, add {C} …" is a `conditional` on `{ kind: "this-way",
-what: "transformed" }`), `"counters-put"`
+what: "transformed" }`; "**When you do**, …" is the same `conditional` around a
+`reflexive-trigger` — Ratchet, Field Medic, whose second of two life-gain
+triggers converts nothing, rule 701.28e), `"counters-put"`
 (permanents it put a counter on — Ripples of Potential's "permanents you
 control that had a counter put on them this way", after its proliferate, as a
 `choose-permanents` filter's `thisWay`; Fangs of Kalonia's "then double the
