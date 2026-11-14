@@ -774,6 +774,7 @@ import _poolSuperIntelligence from "../pool/super-intelligence.js";
 import _poolSuperSoldierSerum from "../pool/super-soldier-serum.js";
 import _poolSupplyDemand from "../pool/supply-demand.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
+import _poolSuppressorSkyguard from "../pool/suppressor-skyguard.js";
 import _poolSuqataFirewalker from "../pool/suqata-firewalker.js";
 import _poolSurgingDementia from "../pool/surging-dementia.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
@@ -1720,6 +1721,7 @@ const shard: CardShard = {
     _poolSuperSoldierSerum,
     _poolSupplyDemand,
     _poolSupplyLineCranes,
+    _poolSuppressorSkyguard,
     _poolSuqataFirewalker,
     _poolSurgingDementia,
     _poolSurveillanceRoom,

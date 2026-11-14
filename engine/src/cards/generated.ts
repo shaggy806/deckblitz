@@ -9560,6 +9560,7 @@ import _poolFirewingPhoenix from "./pool/firewing-phoenix.js";
 import _poolFirionWildRoseWarrior from "./pool/firion-wild-rose-warrior.js";
 import _poolFirjaJudgeOfValor from "./pool/firja-judge-of-valor.js";
 import _poolFirjasRetribution from "./pool/firjas-retribution.js";
+import _poolFirkraagCunningInstigator from "./pool/firkraag-cunning-instigator.js";
 import _poolFirmamentSage from "./pool/firmament-sage.js";
 import _poolFirstDayOfClass from "./pool/first-day-of-class.js";
 import _poolFirstResponder from "./pool/first-responder.js";
@@ -16694,6 +16695,7 @@ import _poolMarut from "./pool/marut.js";
 import _poolMarvelBoyNohVarr from "./pool/marvel-boy-noh-varr.js";
 import _poolMarvelousMelee from "./pool/marvelous-melee.js";
 import _poolMarvinMurderousMimic from "./pool/marvin-murderous-mimic.js";
+import _poolMarvoDeepOperative from "./pool/marvo-deep-operative.js";
 import _poolMarwynTheClearcutter from "./pool/marwyn-the-clearcutter.js";
 import _poolMarwynTheNurturer from "./pool/marwyn-the-nurturer.js";
 import _poolMarwynThePreserver from "./pool/marwyn-the-preserver.js";
@@ -21234,6 +21236,7 @@ import _poolRampartCrawler from "./pool/rampart-crawler.js";
 import _poolRampartHunter from "./pool/rampart-hunter.js";
 import _poolRampartSmasher from "./pool/rampart-smasher.js";
 import _poolRamroller from "./pool/ramroller.js";
+import _poolRamsesAssassinLord from "./pool/ramses-assassin-lord.js";
 import _poolRamsesOverdark from "./pool/ramses-overdark.js";
 import _poolRamunapExcavator from "./pool/ramunap-excavator.js";
 import _poolRamunapHydra from "./pool/ramunap-hydra.js";
@@ -26743,6 +26746,7 @@ import _poolSuppress from "./pool/suppress.js";
 import _poolSuppressionBonds from "./pool/suppression-bonds.js";
 import _poolSuppressionField from "./pool/suppression-field.js";
 import _poolSuppressionRay from "./pool/suppression-ray.js";
+import _poolSuppressorSkyguard from "./pool/suppressor-skyguard.js";
 import _poolSupremeExemplar from "./pool/supreme-exemplar.js";
 import _poolSupremeInquisitor from "./pool/supreme-inquisitor.js";
 import _poolSupremePhantom from "./pool/supreme-phantom.js";
@@ -42339,6 +42343,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFirionWildRoseWarrior,
   _poolFirjaJudgeOfValor,
   _poolFirjasRetribution,
+  _poolFirkraagCunningInstigator,
   _poolFirmamentSage,
   _poolFirstDayOfClass,
   _poolFirstResponder,
@@ -49473,6 +49478,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarvelBoyNohVarr,
   _poolMarvelousMelee,
   _poolMarvinMurderousMimic,
+  _poolMarvoDeepOperative,
   _poolMarwynTheClearcutter,
   _poolMarwynTheNurturer,
   _poolMarwynThePreserver,
@@ -54013,6 +54019,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRampartHunter,
   _poolRampartSmasher,
   _poolRamroller,
+  _poolRamsesAssassinLord,
   _poolRamsesOverdark,
   _poolRamunapExcavator,
   _poolRamunapHydra,
@@ -59522,6 +59529,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSuppressionBonds,
   _poolSuppressionField,
   _poolSuppressionRay,
+  _poolSuppressorSkyguard,
   _poolSupremeExemplar,
   _poolSupremeInquisitor,
   _poolSupremePhantom,
@@ -75131,6 +75139,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/firion-wild-rose-warrior": _poolFirionWildRoseWarrior,
   "pool/firja-judge-of-valor": _poolFirjaJudgeOfValor,
   "pool/firjas-retribution": _poolFirjasRetribution,
+  "pool/firkraag-cunning-instigator": _poolFirkraagCunningInstigator,
   "pool/firmament-sage": _poolFirmamentSage,
   "pool/first-day-of-class": _poolFirstDayOfClass,
   "pool/first-responder": _poolFirstResponder,
@@ -82265,6 +82274,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/marvel-boy-noh-varr": _poolMarvelBoyNohVarr,
   "pool/marvelous-melee": _poolMarvelousMelee,
   "pool/marvin-murderous-mimic": _poolMarvinMurderousMimic,
+  "pool/marvo-deep-operative": _poolMarvoDeepOperative,
   "pool/marwyn-the-clearcutter": _poolMarwynTheClearcutter,
   "pool/marwyn-the-nurturer": _poolMarwynTheNurturer,
   "pool/marwyn-the-preserver": _poolMarwynThePreserver,
@@ -86805,6 +86815,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rampart-hunter": _poolRampartHunter,
   "pool/rampart-smasher": _poolRampartSmasher,
   "pool/ramroller": _poolRamroller,
+  "pool/ramses-assassin-lord": _poolRamsesAssassinLord,
   "pool/ramses-overdark": _poolRamsesOverdark,
   "pool/ramunap-excavator": _poolRamunapExcavator,
   "pool/ramunap-hydra": _poolRamunapHydra,
@@ -92314,6 +92325,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/suppression-bonds": _poolSuppressionBonds,
   "pool/suppression-field": _poolSuppressionField,
   "pool/suppression-ray": _poolSuppressionRay,
+  "pool/suppressor-skyguard": _poolSuppressorSkyguard,
   "pool/supreme-exemplar": _poolSupremeExemplar,
   "pool/supreme-inquisitor": _poolSupremeInquisitor,
   "pool/supreme-phantom": _poolSupremePhantom,

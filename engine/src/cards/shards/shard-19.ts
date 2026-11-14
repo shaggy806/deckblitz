@@ -592,6 +592,7 @@ import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
 import _poolMarkOfMutiny from "../pool/mark-of-mutiny.js";
 import _poolMarkovPurifier from "../pool/markov-purifier.js";
 import _poolMartyrOfSpores from "../pool/martyr-of-spores.js";
+import _poolMarvoDeepOperative from "../pool/marvo-deep-operative.js";
 import _poolMaskedBandits from "../pool/masked-bandits.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterBiomancer from "../pool/master-biomancer.js";
@@ -1666,6 +1667,7 @@ const shard: CardShard = {
     _poolMarkOfMutiny,
     _poolMarkovPurifier,
     _poolMartyrOfSpores,
+    _poolMarvoDeepOperative,
     _poolMaskedBandits,
     _poolMaskedMeower,
     _poolMasterBiomancer,

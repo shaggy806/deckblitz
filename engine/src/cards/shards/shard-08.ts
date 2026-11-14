@@ -704,6 +704,7 @@ import _poolRagingSwordtooth from "../pool/raging-swordtooth.js";
 import _poolRakalite from "../pool/rakalite.js";
 import _poolRakishCrew from "../pool/rakish-crew.js";
 import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
+import _poolRamsesAssassinLord from "../pool/ramses-assassin-lord.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaphaelTheMuscle from "../pool/raphael-the-muscle.js";
 import _poolRathiAssassin from "../pool/rathi-assassin.js";
@@ -1767,6 +1768,7 @@ const shard: CardShard = {
     _poolRakalite,
     _poolRakishCrew,
     _poolRampageOfTheValkyries,
+    _poolRamsesAssassinLord,
     _poolRangingRaptors,
     _poolRaphaelTheMuscle,
     _poolRathiAssassin,

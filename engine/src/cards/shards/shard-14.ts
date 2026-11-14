@@ -308,6 +308,7 @@ import _poolFinalFortune from "../pool/final-fortune.js";
 import _poolFireIce from "../pool/fire-ice.js";
 import _poolFireOmenCrane from "../pool/fire-omen-crane.js";
 import _poolFireShrineKeeper from "../pool/fire-shrine-keeper.js";
+import _poolFirkraagCunningInstigator from "../pool/firkraag-cunning-instigator.js";
 import _poolFlamebladeAdept from "../pool/flameblade-adept.js";
 import _poolFlamekinGildweaver from "../pool/flamekin-gildweaver.js";
 import _poolFledglingDjinn from "../pool/fledgling-djinn.js";
@@ -1328,6 +1329,7 @@ const shard: CardShard = {
     _poolFireIce,
     _poolFireOmenCrane,
     _poolFireShrineKeeper,
+    _poolFirkraagCunningInstigator,
     _poolFlamebladeAdept,
     _poolFlamekinGildweaver,
     _poolFledglingDjinn,
