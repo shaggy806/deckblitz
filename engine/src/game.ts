@@ -44743,13 +44743,13 @@ controlledBy,
         // `hasSubtype`, so a card that is every land type has each of them.
         tags[id] = LAND_TYPES.filter((type) => hasSubtype(subtypes, type));
       }
+      return { rule: "share", tags, text: "that share a land type" };
+    }
     if ("totalManaValue" in together) {
       // Exactly that much: no more, no less.
       const sum = together.totalManaValue === "x" ? x : together.totalManaValue;
       for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
       return { rule: "total", tags, atLeast: sum, atMost: sum, text: `with total mana value ${sum}` };
-    }
-      return { rule: "share", tags, text: "that share a land type" };
     }
     if ("distinctNames" in together) {
       // Every name it has (rule 201.2a — a split card's two), none face down.

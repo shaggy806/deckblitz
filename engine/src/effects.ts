@@ -1620,6 +1620,7 @@ export type BoundUnlessOption = Exclude<
   | { readonly payGeneric: EffectAmount }
   | { readonly payLifeAmount: EffectAmount }
   | { readonly payManaCostOf: ObjectRef }
+  | { readonly payReduced: string }
 >;
 
 /**
@@ -1631,7 +1632,6 @@ export type BoundUnlessOption = Exclude<
  * choose which of theirs go on the bottom, and what those before them chose;
  * and, once everything has moved, the orders still to ask. */
 export interface PutOnLibrariesProgress {
-  | { readonly payReduced: string }
   readonly cards: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   readonly toAsk: readonly PlayerId[];
   readonly bottom: readonly ObjectId[];
@@ -22863,6 +22863,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                 },
               ];
         }
+        if ("payReduced" in option) {
+          const cost = reduceGenericInCost(option.payReduced, amountValue(option.reducedBy, ctx));
+          return [{ pay: cost, text: option.text.split("{X}").join(cost) }];
+        }
         return [bindUnlessTimes(option, ctx)];
       };
       const options = spec.options.flatMap(bind);
@@ -22890,10 +22894,6 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ) {
         ctx.unless(chooser, options, spec.otherwise, about);
         return;
-        if ("payReduced" in option) {
-          const cost = reduceGenericInCost(option.payReduced, amountValue(option.reducedBy, ctx));
-          return [{ pay: cost, text: option.text.split("{X}").join(cost) }];
-        }
       }
       // One player named as this applies. Nobody: `otherwise` happens.
       const named = chooserPlayer(chooser, ctx);
