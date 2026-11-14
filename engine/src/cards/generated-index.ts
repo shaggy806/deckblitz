@@ -808,6 +808,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Ancestor's Embrace": "https://cards.scryfall.io/art_crop/back/2/5/25193485-7f41-4b05-9a69-4c112679f97c.jpg",
   "Ancestral Recall": "2398892d-28e9-4009-81ec-0d544af79d2b",
   "Ancient of the Equinox": "https://cards.scryfall.io/art_crop/back/d/4/d41b07c8-f0c8-4654-bcc2-00c785c8c628.jpg",
+  "Angelic Enforcer": "https://cards.scryfall.io/art_crop/back/a/2/a204c2a3-a899-4b70-8825-7e085b655ed0.jpg",
   "Animus of Night's Reach": "https://cards.scryfall.io/art_crop/back/4/e/4ec18bf7-bd80-408d-acc4-ffaaf7ef6b5b.jpg",
   "Aquatic Ingress": "https://cards.scryfall.io/art_crop/back/d/0/d0f31357-3fd2-4355-acad-05d253a04b4a.jpg",
   "Archdemon of Greed": "https://cards.scryfall.io/art_crop/back/6/a/6aef77b3-4b38-4902-9f7a-dc18b5bb9da9.jpg",

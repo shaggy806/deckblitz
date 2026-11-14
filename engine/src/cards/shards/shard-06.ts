@@ -287,6 +287,7 @@ import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
 import _poolEnclaveElite from "../pool/enclave-elite.js";
 import _poolEncroachingMycosynth from "../pool/encroaching-mycosynth.js";
 import _poolEndurance from "../pool/endurance.js";
+import _poolEnduringAngel from "../pool/enduring-angel.js";
 import _poolEnergybending from "../pool/energybending.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
 import _poolEomerMarshalOfRohan from "../pool/eomer-marshal-of-rohan.js";
@@ -499,6 +500,7 @@ import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKrugeGenesisSeeker from "../pool/kruge-genesis-seeker.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolKurgadon from "../pool/kurgadon.js";
+import _poolKyloxsVoltstrider from "../pool/kyloxs-voltstrider.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLaidToRest from "../pool/laid-to-rest.js";
 import _poolLastLightOfDurinsDay from "../pool/last-light-of-durins-day.js";
@@ -1314,6 +1316,7 @@ const shard: CardShard = {
     _poolEnclaveElite,
     _poolEncroachingMycosynth,
     _poolEndurance,
+    _poolEnduringAngel,
     _poolEnergybending,
     _poolEntrustTheSpark,
     _poolEomerMarshalOfRohan,
@@ -1526,6 +1529,7 @@ const shard: CardShard = {
     _poolKrugeGenesisSeeker,
     _poolKujaGenomeSorcerer,
     _poolKurgadon,
+    _poolKyloxsVoltstrider,
     _poolLagoonBreach,
     _poolLaidToRest,
     _poolLastLightOfDurinsDay,

@@ -653,6 +653,7 @@ import _poolOvergrownArmasaur from "../pool/overgrown-armasaur.js";
 import _poolOversimplify from "../pool/oversimplify.js";
 import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
 import _poolPanic from "../pool/panic.js";
+import _poolPanopticMirror from "../pool/panoptic-mirror.js";
 import _poolParadoxHaze from "../pool/paradox-haze.js";
 import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
@@ -1745,6 +1746,7 @@ const shard: CardShard = {
     _poolOversimplify,
     _poolOverwhelmingInstinct,
     _poolPanic,
+    _poolPanopticMirror,
     _poolParadoxHaze,
     _poolPatronWizard,
     _poolPeacewalkerColossus,

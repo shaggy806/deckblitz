@@ -885,6 +885,7 @@ import _poolAngelicCub from "./pool/angelic-cub.js";
 import _poolAngelicCurator from "./pool/angelic-curator.js";
 import _poolAngelicDestiny from "./pool/angelic-destiny.js";
 import _poolAngelicEdict from "./pool/angelic-edict.js";
+import _poolAngelicEnforcer from "./pool/angelic-enforcer.js";
 import _poolAngelicExaltation from "./pool/angelic-exaltation.js";
 import _poolAngelicFavor from "./pool/angelic-favor.js";
 import _poolAngelicFieldMarshal from "./pool/angelic-field-marshal.js";
@@ -7944,6 +7945,7 @@ import _poolEdgarCharmedGroom from "./pool/edgar-charmed-groom.js";
 import _poolEdgarKingOfFigaro from "./pool/edgar-king-of-figaro.js";
 import _poolEdgarMarkov from "./pool/edgar-markov.js";
 import _poolEdgarMarkovsCoffin from "./pool/edgar-markovs-coffin.js";
+import _poolEdgarMasterMachinist from "./pool/edgar-master-machinist.js";
 import _poolEdgarMoonlitSovereign from "./pool/edgar-moonlit-sovereign.js";
 import _poolEdgarsAwakening from "./pool/edgars-awakening.js";
 import _poolEdgeOfAutumn from "./pool/edge-of-autumn.js";
@@ -8383,6 +8385,7 @@ import _poolEnds from "./pool/ends.js";
 import _poolEnduranceBobblehead from "./pool/endurance-bobblehead.js";
 import _poolEndurance from "./pool/endurance.js";
 import _poolEndure from "./pool/endure.js";
+import _poolEnduringAngel from "./pool/enduring-angel.js";
 import _poolEnduringBondwarden from "./pool/enduring-bondwarden.js";
 import _poolEnduringCourage from "./pool/enduring-courage.js";
 import _poolEnduringCuriosity from "./pool/enduring-curiosity.js";
@@ -15323,6 +15326,7 @@ import _poolKykarWindsFury from "./pool/kykar-winds-fury.js";
 import _poolKykarZephyrAwakener from "./pool/kykar-zephyr-awakener.js";
 import _poolKylerSigardianEmissary from "./pool/kyler-sigardian-emissary.js";
 import _poolKyloxVisionaryInventor from "./pool/kylox-visionary-inventor.js";
+import _poolKyloxsVoltstrider from "./pool/kyloxs-voltstrider.js";
 import _poolKynaiosAndTiroOfMeletis from "./pool/kynaios-and-tiro-of-meletis.js";
 import _poolKyodaiSoulOfKamigawa from "./pool/kyodai-soul-of-kamigawa.js";
 import _poolKyokiSanitysEclipse from "./pool/kyoki-sanitys-eclipse.js";
@@ -19671,6 +19675,7 @@ import _poolPanicSpellbomb from "./pool/panic-spellbomb.js";
 import _poolPanic from "./pool/panic.js";
 import _poolPanickedAltisaur from "./pool/panicked-altisaur.js";
 import _poolPanickedBystander from "./pool/panicked-bystander.js";
+import _poolPanopticMirror from "./pool/panoptic-mirror.js";
 import _poolPanopticProjektor from "./pool/panoptic-projektor.js";
 import _poolPantherHabit from "./pool/panther-habit.js";
 import _poolPantherPounce from "./pool/panther-pounce.js";
@@ -23145,6 +23150,7 @@ import _poolSanctumOfTheSun from "./pool/sanctum-of-the-sun.js";
 import _poolSanctumOfTranquilLight from "./pool/sanctum-of-tranquil-light.js";
 import _poolSanctumOfUgin from "./pool/sanctum-of-ugin.js";
 import _poolSanctumPlowbeast from "./pool/sanctum-plowbeast.js";
+import _poolSanctumPrelate from "./pool/sanctum-prelate.js";
 import _poolSanctumSeeker from "./pool/sanctum-seeker.js";
 import _poolSanctumSpirit from "./pool/sanctum-spirit.js";
 import _poolSanctumWeaver from "./pool/sanctum-weaver.js";
@@ -33921,6 +33927,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAngelicCurator,
   _poolAngelicDestiny,
   _poolAngelicEdict,
+  _poolAngelicEnforcer,
   _poolAngelicExaltation,
   _poolAngelicFavor,
   _poolAngelicFieldMarshal,
@@ -40980,6 +40987,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEdgarKingOfFigaro,
   _poolEdgarMarkov,
   _poolEdgarMarkovsCoffin,
+  _poolEdgarMasterMachinist,
   _poolEdgarMoonlitSovereign,
   _poolEdgarsAwakening,
   _poolEdgeOfAutumn,
@@ -41419,6 +41427,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnduranceBobblehead,
   _poolEndurance,
   _poolEndure,
+  _poolEnduringAngel,
   _poolEnduringBondwarden,
   _poolEnduringCourage,
   _poolEnduringCuriosity,
@@ -48359,6 +48368,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKykarZephyrAwakener,
   _poolKylerSigardianEmissary,
   _poolKyloxVisionaryInventor,
+  _poolKyloxsVoltstrider,
   _poolKynaiosAndTiroOfMeletis,
   _poolKyodaiSoulOfKamigawa,
   _poolKyokiSanitysEclipse,
@@ -52707,6 +52717,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPanic,
   _poolPanickedAltisaur,
   _poolPanickedBystander,
+  _poolPanopticMirror,
   _poolPanopticProjektor,
   _poolPantherHabit,
   _poolPantherPounce,
@@ -56181,6 +56192,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSanctumOfTranquilLight,
   _poolSanctumOfUgin,
   _poolSanctumPlowbeast,
+  _poolSanctumPrelate,
   _poolSanctumSeeker,
   _poolSanctumSpirit,
   _poolSanctumWeaver,
@@ -66970,6 +66982,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/angelic-curator": _poolAngelicCurator,
   "pool/angelic-destiny": _poolAngelicDestiny,
   "pool/angelic-edict": _poolAngelicEdict,
+  "pool/angelic-enforcer": _poolAngelicEnforcer,
   "pool/angelic-exaltation": _poolAngelicExaltation,
   "pool/angelic-favor": _poolAngelicFavor,
   "pool/angelic-field-marshal": _poolAngelicFieldMarshal,
@@ -74029,6 +74042,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/edgar-king-of-figaro": _poolEdgarKingOfFigaro,
   "pool/edgar-markov": _poolEdgarMarkov,
   "pool/edgar-markovs-coffin": _poolEdgarMarkovsCoffin,
+  "pool/edgar-master-machinist": _poolEdgarMasterMachinist,
   "pool/edgar-moonlit-sovereign": _poolEdgarMoonlitSovereign,
   "pool/edgars-awakening": _poolEdgarsAwakening,
   "pool/edge-of-autumn": _poolEdgeOfAutumn,
@@ -74468,6 +74482,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/endurance-bobblehead": _poolEnduranceBobblehead,
   "pool/endurance": _poolEndurance,
   "pool/endure": _poolEndure,
+  "pool/enduring-angel": _poolEnduringAngel,
   "pool/enduring-bondwarden": _poolEnduringBondwarden,
   "pool/enduring-courage": _poolEnduringCourage,
   "pool/enduring-curiosity": _poolEnduringCuriosity,
@@ -81408,6 +81423,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kykar-zephyr-awakener": _poolKykarZephyrAwakener,
   "pool/kyler-sigardian-emissary": _poolKylerSigardianEmissary,
   "pool/kylox-visionary-inventor": _poolKyloxVisionaryInventor,
+  "pool/kyloxs-voltstrider": _poolKyloxsVoltstrider,
   "pool/kynaios-and-tiro-of-meletis": _poolKynaiosAndTiroOfMeletis,
   "pool/kyodai-soul-of-kamigawa": _poolKyodaiSoulOfKamigawa,
   "pool/kyoki-sanitys-eclipse": _poolKyokiSanitysEclipse,
@@ -85756,6 +85772,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/panic": _poolPanic,
   "pool/panicked-altisaur": _poolPanickedAltisaur,
   "pool/panicked-bystander": _poolPanickedBystander,
+  "pool/panoptic-mirror": _poolPanopticMirror,
   "pool/panoptic-projektor": _poolPanopticProjektor,
   "pool/panther-habit": _poolPantherHabit,
   "pool/panther-pounce": _poolPantherPounce,
@@ -89230,6 +89247,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sanctum-of-tranquil-light": _poolSanctumOfTranquilLight,
   "pool/sanctum-of-ugin": _poolSanctumOfUgin,
   "pool/sanctum-plowbeast": _poolSanctumPlowbeast,
+  "pool/sanctum-prelate": _poolSanctumPrelate,
   "pool/sanctum-seeker": _poolSanctumSeeker,
   "pool/sanctum-spirit": _poolSanctumSpirit,
   "pool/sanctum-weaver": _poolSanctumWeaver,

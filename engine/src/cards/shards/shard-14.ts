@@ -25,6 +25,7 @@ import _poolAlliedTeamwork from "../pool/allied-teamwork.js";
 import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
 import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
+import _poolAngelicEnforcer from "../pool/angelic-enforcer.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolAppaAangsCompanion from "../pool/appa-aangs-companion.js";
 import _poolAppaTheVigilant from "../pool/appa-the-vigilant.js";
@@ -258,6 +259,7 @@ import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEbonbladeReaper from "../pool/ebonblade-reaper.js";
 import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
+import _poolEdgarMasterMachinist from "../pool/edgar-master-machinist.js";
 import _poolEidolonOfTheGreatRevel from "../pool/eidolon-of-the-great-revel.js";
 import _poolEightAndAHalfTails from "../pool/eight-and-a-half-tails.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
@@ -1053,6 +1055,7 @@ const shard: CardShard = {
     _poolAlpineHoundmaster,
     _poolAncientOfTheEquinox,
     _poolAndTheyShallKnowNoFear,
+    _poolAngelicEnforcer,
     _poolAntManScottLang,
     _poolAppaAangsCompanion,
     _poolAppaTheVigilant,
@@ -1286,6 +1289,7 @@ const shard: CardShard = {
     _poolEbonbladeReaper,
     _poolEchoOfDeathsWail,
     _poolEdgarMarkov,
+    _poolEdgarMasterMachinist,
     _poolEidolonOfTheGreatRevel,
     _poolEightAndAHalfTails,
     _poolEivorBattleReady,

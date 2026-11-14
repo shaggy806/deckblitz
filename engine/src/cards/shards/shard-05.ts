@@ -738,6 +738,7 @@ import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
 import _poolSailorsBane from "../pool/sailors-bane.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
+import _poolSanctumPrelate from "../pool/sanctum-prelate.js";
 import _poolSandSquid from "../pool/sand-squid.js";
 import _poolSandstormSalvager from "../pool/sandstorm-salvager.js";
 import _poolSaprazzanBreaker from "../pool/saprazzan-breaker.js";
@@ -1764,6 +1765,7 @@ const shard: CardShard = {
     _poolSailorsBane,
     _poolSaltFlats,
     _poolSamutsSprint,
+    _poolSanctumPrelate,
     _poolSandSquid,
     _poolSandstormSalvager,
     _poolSaprazzanBreaker,
