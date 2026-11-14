@@ -2149,10 +2149,13 @@ export type LegalAction =
     }
   | {
       /** A card with miracle was just drawn as its owner's first this turn —
-       * reveal it to cast it for `cost`? (rule 702.94a) */
+       * reveal it to cast it for `cost`? (rule 702.94a) With `by`, the
+       * first card drawn this turn, revealed for that permanent's ability
+       * (God-Eternal Kefnet), and no `cost`. */
       readonly kind: "miracle-reveal";
       readonly source: ObjectId;
-      readonly cost: string;
+      readonly cost?: string;
+      readonly by?: ObjectId;
     }
   | {
       /** A reveal land is about to enter — reveal one of `options` from hand

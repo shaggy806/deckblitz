@@ -12489,4 +12489,31 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Hill Giant'] }, { bf: ['Grizzly Bears'] }, { bf: ['Serra Angel'] }],
     }),
   ),
+  preset(
+    'God-Eternal Kefnet: reveal the first card you draw, and cast its copy for {2} less',
+    board({
+      you: {
+        bf: ['God-Eternal Kefnet', 'Island*4'],
+        hand: ['Divination'],
+        lib: ['Divination', 'Island', 'Island', 'Island', 'Island', 'Island'],
+      },
+    }),
+  ),
+  preset(
+    'God-Eternal Kefnet: a land drawn first can be kept hidden',
+    board({
+      you: { bf: ['God-Eternal Kefnet', 'Island*3'], hand: ['Divination'], lib: ['Island', 'Divination', 'Island'] },
+    }),
+  ),
+  preset(
+    'God-Eternal Kefnet: at four players, the copy is cast as it resolves',
+    board({
+      you: {
+        bf: ['God-Eternal Kefnet', 'Island*4'],
+        hand: ['Divination'],
+        lib: ['Divination', 'Island', 'Island', 'Island', 'Island', 'Island'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

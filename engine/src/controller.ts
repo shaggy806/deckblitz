@@ -280,9 +280,10 @@ export interface PlayerController {
    * `card`, a card with miracle, was just drawn as this player's first card
    * this turn — return `true` to reveal it, putting its miracle trigger on
    * the stack (which offers the cast for `cost` as it resolves), `false` to
-   * keep it hidden (rule 702.94a).
+   * keep it hidden (rule 702.94a). No `cost`: the first card drawn this
+   * turn, revealed for a permanent's ability (God-Eternal Kefnet).
    */
-  revealMiracle(view: ControllerView, card: ObjectId, cost: string): boolean;
+  revealMiracle(view: ControllerView, card: ObjectId, cost: string | undefined): boolean;
   /**
    * A reveal land (`source`) is about to enter — return which of `options`,
    * the qualifying cards in hand, to reveal so it enters untapped, or `null`
@@ -777,7 +778,7 @@ export class AutomaticController implements PlayerController {
     );
   }
 
-  revealMiracle(_view: ControllerView, _card: ObjectId, _cost: string): boolean {
+  revealMiracle(_view: ControllerView, _card: ObjectId, _cost: string | undefined): boolean {
     // Revealing only offers the cast, which is asked again as the trigger
     // resolves.
     return true;
@@ -1235,7 +1236,7 @@ export class ScriptedController implements PlayerController {
     view.state.objects[commander]?.zone !== "command";
   payLifeForUntappedFn: (view: ControllerView, source: ObjectId, life: number) => boolean =
     () => false;
-  revealMiracleFn: (view: ControllerView, card: ObjectId, cost: string) => boolean = () => true;
+  revealMiracleFn: (view: ControllerView, card: ObjectId, cost: string | undefined) => boolean = () => true;
   revealForUntappedFn: CopyChooser = (_view, _source, options) => options[0] ?? null;
   chooseCopyFn: CopyChooser =(_view, _source, options) => options[0] ?? null;
   chooseEnchantFn: (
@@ -1397,7 +1398,7 @@ export class ScriptedController implements PlayerController {
     return this.payLifeForUntappedFn(view, source, life);
   }
 
-  revealMiracle(view: ControllerView, card: ObjectId, cost: string): boolean {
+  revealMiracle(view: ControllerView, card: ObjectId, cost: string | undefined): boolean {
     return this.revealMiracleFn(view, card, cost);
   }
 

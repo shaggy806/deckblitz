@@ -8316,3 +8316,15 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Illusion of Choice: at four players, you pick every vote
 - **Do:** Cast Illusion of Choice, then Council's Judgment. Click Carol's Grizzly Bears for every player's vote.
 - **Expect:** You're asked four times, "You choose for …" naming Bob, Carol and Dave in turn. Only Carol's Bears are exiled.
+
+### God-Eternal Kefnet: reveal the first card you draw, and cast its copy for {2} less
+- **Do:** Cast Divination. When asked about the Divination you drew, choose Reveal, then cast the copy.
+- **Expect:** The banner reads "God-Eternal Kefnet — reveal Divination, the first card you drew this turn?" with Reveal and Keep hidden. Revealed, Kefnet's trigger goes on the stack and offers "Cast Divination now?"; the copy is cast with your one untapped Island and draws two more (hand 4). The Divination you drew stays in your hand.
+
+### God-Eternal Kefnet: a land drawn first can be kept hidden
+- **Do:** Cast Divination. When asked about the Island you drew, choose Keep hidden.
+- **Expect:** You're asked about the Island too ("reveal Island, the first card you drew this turn?"), so the question tells nobody what you drew. Kept hidden, nothing goes on the stack, and the Divination drawn second isn't asked about.
+
+### God-Eternal Kefnet: at four players, the copy is cast as it resolves
+- **Do:** Cast Divination. Reveal the Divination you drew, then cast the copy.
+- **Expect:** As at two players: the copy is offered as Kefnet's trigger resolves, cast for one Island, and you end with 4 cards in hand. Bob, Carol and Dave are never asked anything.

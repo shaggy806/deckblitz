@@ -12,6 +12,12 @@
  * isn't asked about at all (its trigger couldn't cast it). Yes reveals it to
  * every player and the trigger goes on the stack; no drops the trigger. The
  * cast itself is the trigger's, offered as it resolves (`cast-now`).
+ *
+ * The same question, with `by` and no cost, is God-Eternal Kefnet's "you may
+ * reveal the first card you draw each turn as you draw it" (a `revealsDrawn`
+ * trigger, `PendingTrigger.miracle.card`): asked of a card that has left the
+ * hand since too, for the reveal was as it was drawn, and the trigger copies
+ * it by last-known information (the ruling).
  */
 
 import type { Action, LegalAction } from "../actions.js";
@@ -26,7 +32,12 @@ export const miracleReveal = defineDecision({
   hasSource: false,
 
   legal: (_ctx, awaiting): LegalAction[] => [
-    { kind: "miracle-reveal", source: awaiting.source, cost: awaiting.cost },
+    {
+      kind: "miracle-reveal",
+      source: awaiting.source,
+      ...(awaiting.cost !== undefined ? { cost: awaiting.cost } : {}),
+      ...(awaiting.by !== undefined ? { by: awaiting.by } : {}),
+    },
   ],
 
   whyCannot: (ctx, action, player): string | null => {

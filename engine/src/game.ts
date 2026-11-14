@@ -17232,6 +17232,9 @@ export class Game {
     // generic only, its ruling, so an ordinary reduction.
     const linkedGrant = ownPermission === undefined ? exiledOptions.find((o) => o.terms.reduce !== undefined) : undefined;
     if (linkedGrant !== undefined) reduction += linkedGrant.terms.reduce ?? 0;
+    // A resolving effect's "that copy costs {2} less to cast" (God-Eternal
+    // Kefnet — `cast-now`'s `reduce`), generic mana only (rule 601.2f).
+    reduction += this.castNowOffer(player, cardId)?.reduce ?? 0;
     // "A spell cast this way costs {2} more to cast" (Elite Spellbinder), of
     // the permission it's cast under: an increase, before any reduction (rule
     // 601.2f). Not the granter's own under `opponentsOnly` (Soul Partition).
@@ -21606,6 +21609,7 @@ export class Game {
       ...(options.byPayingLife === true ? { byPayingLife: true as const } : {}),
       ...(options.byPaying !== undefined ? { byPaying: options.byPaying } : {}),
       ...(options.alsoPaying !== undefined ? { alsoPaying: options.alsoPaying } : {}),
+      ...(options.reduce !== undefined ? { reduce: options.reduce } : {}),
       ...(options.spendAs !== undefined ? { spendAs: options.spendAs } : {}),
       ...(madness !== undefined ? { madness } : {}),
       ...(miracle !== undefined ? { miracle } : {}),
@@ -35633,10 +35637,33 @@ export class Game {
    * dropped.
    */
   private askMiracleReveal(): boolean {
+    // "You may reveal the first card you draw each turn as you draw it"
+    // (God-Eternal Kefnet): its trigger waits on the same question, about
+    // its drawn card.
+    // Only a card drawn this turn can be one (wherever it is now), which keeps
+    // the ability lookup off every other trigger.
+    let drawn: Set<ObjectId> | undefined;
+    const drawnThisTurn = (id: ObjectId): boolean =>
+      (drawn ??= new Set(entriesThisTurn(this.state, "card-drawn").flatMap((e) => (e.object === undefined ? [] : [e.object])))).has(id);
+    this.state.pendingTriggers = this.state.pendingTriggers.map((t) =>
+      t.miracle === undefined &&
+      t.triggerObject !== undefined &&
+      drawnThisTurn(t.triggerObject) &&
+      this.revealsDrawnTrigger(t) !== undefined
+        ? { ...t, miracle: { stint: this.state.objects[t.triggerObject]?.zoneChangeCount ?? 0, revealed: false, card: t.triggerObject } }
+        : t,
+    );
     for (;;) {
       const index = this.state.pendingTriggers.findIndex((t) => t.miracle?.revealed === false);
       if (index < 0) return false;
       const trigger = this.state.pendingTriggers[index];
+      const drawn = trigger.miracle?.card;
+      if (drawn !== undefined) {
+        // Asked even of a card that has left the hand since: it was revealed
+        // as it was drawn, and the trigger copies it as it last existed.
+        this.state.awaiting = { kind: "miracle-reveal", player: trigger.controller, source: drawn, by: trigger.sourceObjectId };
+        return true;
+      }
       const card = this.state.objects[trigger.sourceObjectId];
       const cost =
         card?.zone === "hand" && (card.zoneChangeCount ?? 0) === trigger.miracle?.stint
@@ -35651,6 +35678,18 @@ export class Game {
     }
   }
 
+  /** Whether waiting trigger `t` is a `revealsDrawn` one (God-Eternal
+   * Kefnet): placed only once its drawn card is revealed. */
+  private revealsDrawnTrigger(t: PendingTrigger): TriggeredAbility["revealsDrawn"] {
+    if (t.reflexive !== undefined || t.grantedAbility !== undefined || t.chapter === true || t.delayed !== undefined) {
+      return undefined;
+    }
+    const ability =
+      this.triggeredOfSource(t.sourceObjectId, t.lastKnownRefs?.source)?.[t.abilityIndex] ??
+      (this.registry.has(t.cardName) ? this.registry.get(t.cardName).triggered[t.abilityIndex] : undefined);
+    return ability?.revealsDrawn;
+  }
+
   /** Answers a pending `miracle-reveal` decision: revealed, the card is shown
    * to every player (rule 701.20a) and its trigger placed with the rest;
    * kept hidden, its trigger is dropped. */
@@ -35662,13 +35701,23 @@ export class Game {
     const card = awaiting.source;
     this.state.awaiting = null;
     const index = this.state.pendingTriggers.findIndex(
-      (t) => t.sourceObjectId === card && t.miracle?.revealed === false,
+      (t) =>
+        (t.miracle?.card ?? t.sourceObjectId) === card &&
+        t.miracle?.revealed === false &&
+        (awaiting.by === undefined || t.sourceObjectId === awaiting.by),
     );
     if (index >= 0) {
       const trigger = this.state.pendingTriggers[index];
+      // "Whenever you reveal an instant or sorcery card this way": a revealed
+      // card of any other kind triggers nothing.
+      const filter = trigger.miracle?.card !== undefined ? this.revealsDrawnTrigger(trigger)?.filter : undefined;
+      const matches =
+        filter === undefined ||
+        matchesFilter(this.state, this.registry, card, filter, { you: trigger.controller, source: trigger.sourceObjectId });
       if (reveal && trigger.miracle !== undefined) {
-        this.state.pendingTriggers[index] = { ...trigger, miracle: { ...trigger.miracle, revealed: true } };
-        this.revealCards(player, [card], "hand");
+        if (this.state.objects[card]?.zone === "hand") this.revealCards(player, [card], "hand");
+        if (matches) this.state.pendingTriggers[index] = { ...trigger, miracle: { ...trigger.miracle, revealed: true } };
+        else this.state.pendingTriggers.splice(index, 1);
       } else {
         this.state.pendingTriggers.splice(index, 1);
       }
@@ -35722,7 +35771,7 @@ export class Game {
     /** See `PendingTrigger.modes`. */
     readonly modes?: readonly number[];
     /** See `PendingTrigger.miracle`. */
-    readonly miracle?: { readonly stint: number; readonly revealed: boolean };
+    readonly miracle?: PendingTrigger["miracle"];
   }): "done" | "paused" {
     // A self-contained ability record (a mana-spend rider) has no card
     // ability to look up — mint it carrying its own record, exactly as
@@ -35994,7 +36043,9 @@ export class Game {
       if ((trigger.copies ?? 1) > 1) this.state.objects[abilityId].stackCount = trigger.copies;
       if (trigger.modes !== undefined) this.state.objects[abilityId].chosenModes = [...trigger.modes];
       // Miracle's trigger casts only the card as it was drawn (rule 400.7).
-      if (trigger.miracle !== undefined) this.state.objects[abilityId].sourceZoneChangeCount = trigger.miracle.stint;
+      if (trigger.miracle !== undefined && trigger.miracle.card === undefined) {
+        this.state.objects[abilityId].sourceZoneChangeCount = trigger.miracle.stint;
+      }
       // A divided amount with nothing to choose (rule 603.3d): all of it on
       // the one target, or nothing among none.
       const dividedNow = this.triggerDivided(ability as TriggeredAbility, trigger);
@@ -41275,18 +41326,22 @@ controlledBy,
           at !== undefined ? { defender: at } : undefined,
         );
       },
-      copyCards: (cards, times) => {
+      copyCards: (cards, times, into) => {
         // Rule 707.12: each copy is made in the zone its card is in, to be
         // cast from there; owned by the player who'll cast it. A copy not cast
-        // ceases to exist with the next state-based check (704.5e).
+        // ceases to exist with the next state-based check (704.5e). `into`
+        // "hand": in the caster's hand, of the card as it last existed
+        // wherever it is (God-Eternal Kefnet's rulings).
         const made: ObjectId[] = [];
         for (const id of cards) {
           const card = this.state.objects[id];
-          if (card === undefined || card.zone === "stack" || card.zone === "battlefield") continue;
+          if (card === undefined) continue;
+          if (into === undefined && (card.zone === "stack" || card.zone === "battlefield")) continue;
+          const zone = into ?? card.zone;
           for (let i = 0; i < times; i += 1) {
-            const copy = this.makeCardObject(card.cardName, controller, { zone: card.zone });
+            const copy = this.makeCardObject(card.cardName, controller, { zone });
             this.state.objects[copy].isCopy = true;
-            this.zoneList(card.zone, controller).push(copy);
+            this.zoneList(zone, controller).push(copy);
             made.push(copy);
           }
         }

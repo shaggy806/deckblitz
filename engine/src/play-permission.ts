@@ -292,6 +292,7 @@ export type CastNowTerms = Pick<
   | "byPaying"
   | "byPayingLife"
   | "alsoPaying"
+  | "reduce"
   | "spendAs"
   | "gainsHaste"
   | "exileAfter"

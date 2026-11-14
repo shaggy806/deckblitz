@@ -12,6 +12,7 @@
     "filter:player-other-than-owner",
     "filter:attached-to-enchanted-player",
     "effect:target-per-graveyard-with-match",
+    "decision:may-reveal-first-draw",
     "effect:choose-how-players-vote",
     "amount:creatures-crewed-it-this-turn",
     "effect:amount-total-power-died-this-turn",

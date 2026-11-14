@@ -897,7 +897,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   mulligan: 'decide on a mulligan',
   'commander-replacement': 'decide where their commander goes',
   'pay-life-for-untapped': 'decide on a shock land',
-  'miracle-reveal': 'decide on a miracle',
+  'miracle-reveal': 'decide whether to reveal a card they drew',
   'reveal-for-untapped': 'decide on a reveal land',
   'choose-copy': 'choose what to copy',
   'choose-enchant': 'choose what an Aura enchants',
@@ -6235,10 +6235,19 @@ function Table({
     // offers the cast as it resolves.
     controls = (
       <div className="controls">
-        <span>
-          Miracle — reveal {game.nameOf(miracleChoiceAction.source)} to cast it for{' '}
-          <Symbols text={miracleChoiceAction.cost} />?
-        </span>
+        {miracleChoiceAction.by !== undefined || miracleChoiceAction.cost === undefined ? (
+          // God-Eternal Kefnet's "you may reveal the first card you draw each
+          // turn as you draw it": no miracle, no cost.
+          <span>
+            {miracleChoiceAction.by !== undefined ? `${game.nameOf(miracleChoiceAction.by)} — r` : 'R'}eveal{' '}
+            {game.nameOf(miracleChoiceAction.source)}, the first card you drew this turn?
+          </span>
+        ) : (
+          <span>
+            Miracle — reveal {game.nameOf(miracleChoiceAction.source)} to cast it for{' '}
+            <Symbols text={miracleChoiceAction.cost} />?
+          </span>
+        )}
         <button
           type="button"
           onClick={() => game.dispatch({ type: 'miracle-reveal', player: seat, reveal: true })}

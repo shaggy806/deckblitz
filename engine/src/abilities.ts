@@ -2832,6 +2832,19 @@ export interface TriggeredAbility {
    */
   readonly whileCondition?: StaticCondition;
   /**
+   * "You may reveal the first card you draw each turn as you draw it.
+   * Whenever you reveal an instant or sorcery card this way, …" (God-Eternal
+   * Kefnet): a `draws` trigger whose drawn card (its trigger object) its
+   * controller may reveal, asked through the `miracle-reveal` decision before
+   * the trigger is placed, as miracle's is; kept hidden, the trigger is
+   * dropped. Each such trigger asks on its own (the ruling: two Kefnets, two
+   * reveals). `filter` is "whenever you reveal **an instant or sorcery card**
+   * this way": the trigger fires on any first draw, so a question about a
+   * land tells no one what was drawn, and is kept only for a revealed card
+   * that matches.
+   */
+  readonly revealsDrawn?: { readonly filter?: CardFilter };
+  /**
    * "This ability triggers only once each turn" (rule 603.2 — Morbid
    * Opportunist, Welcoming Vampire). Once it has triggered this turn, further
    * events don't trigger it, whoever's turn it is. That also makes "whenever

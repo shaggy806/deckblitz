@@ -2626,8 +2626,11 @@ export interface PendingTrigger {
    * as it was drawn: the ability can cast only that object (400.7 —
    * `sourceLost` once it has left the hand). `revealed` is false until its
    * owner has chosen to reveal it (the `miracle-reveal` decision, asked as
-   * it would be placed); declined, the trigger is dropped. */
-  readonly miracle?: { readonly stint: number; readonly revealed: boolean };
+   * it would be placed); declined, the trigger is dropped. `card`: the card
+   * revealed when it isn't the trigger's source — a `revealsDrawn` trigger's
+   * drawn card (God-Eternal Kefnet), its `stint` that card's, not the
+   * source's. */
+  readonly miracle?: { readonly stint: number; readonly revealed: boolean; readonly card?: ObjectId };
   /**
    * A whole ability record rather than an index into a card's `triggered`
    * list — a mana-spend rider (Path of Ancestry), which is an ability of no
@@ -3976,11 +3979,15 @@ export type AwaitingDecision =
       /** Miracle (rule 702.94a): `player` drew `source`, a card with
        * miracle, as the first card they drew this turn — reveal it, so its
        * trigger goes on the stack and may cast it for `cost`? Asked as the
-       * trigger would be placed (`decisions/miracle-reveal.ts`). */
+       * trigger would be placed (`decisions/miracle-reveal.ts`). With
+       * `by`, no miracle: that permanent's "you may reveal the first card you
+       * draw each turn as you draw it" (God-Eternal Kefnet, a `revealsDrawn`
+       * trigger), and no `cost`. */
       readonly kind: "miracle-reveal";
       readonly player: PlayerId;
       readonly source: ObjectId;
-      readonly cost: string;
+      readonly cost?: string;
+      readonly by?: ObjectId;
     }
   | {
       /** A "reveal land" (Port Town: "As this land enters, you may reveal a

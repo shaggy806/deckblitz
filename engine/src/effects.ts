@@ -2296,6 +2296,9 @@ export interface CastNowOptions {
   /** "By paying {R}{R} in addition to its other costs" — see the `cast-now`
    * effect's `alsoPaying`. */
   readonly alsoPaying?: string;
+  /** "That copy costs {2} less to cast" (God-Eternal Kefnet) — see the
+   * `cast-now` effect's `reduce`. */
+  readonly reduce?: number;
   /** "And mana of any type can be spent to cast that spell" — see the
    * `cast-now` effect's `spendAs`. */
   readonly spendAs?: SpendAs;
@@ -5314,6 +5317,12 @@ export type EffectSpec =
        * the stack, and becomes a token as a permanent spell resolves, 608.3f).
        */
       readonly copies?: EffectAmount;
+      /** With `copies`: made in the caster's hand rather than the card's
+       * zone, as the card last existed wherever it is now — God-Eternal
+       * Kefnet's "copy that card and you may cast the copy" of a drawn card
+       * (its rulings: "the copy is created in and cast from your hand", by
+       * last-known information if the card has left it). */
+      readonly copiesIn?: "hand";
       /** A copy of the card with this name, created in exile (paradigm, rule
        * 702.192a) and offered, with no card behind it: nothing else here is
        * asked for. Only built by the engine, on paradigm's emblem. */
@@ -12144,8 +12153,9 @@ export interface EffectApi {
   /** The top `count` cards of `player`'s library, top first. */
   libraryTop(player: PlayerId, count: number, reveal?: boolean): readonly ObjectId[];
   /** `times` copies of each of `cards` (rule 707.12), made in the card's
-   * zone and owned by the controller, for casting; the new objects' ids. */
-  copyCards(cards: readonly ObjectId[], times: number): readonly ObjectId[];
+   * zone and owned by the controller, for casting; the new objects' ids.
+   * `into: "hand"`: in the controller's hand instead, of a card anywhere. */
+  copyCards(cards: readonly ObjectId[], times: number, into?: "hand"): readonly ObjectId[];
   /** A copy of the card named `name`, created in exile, owned by the effect's
    * controller — see the `cast-now`'s `copyOfCardNamed`. */
   copyCardNamed(name: string): readonly ObjectId[];
@@ -15162,6 +15172,7 @@ function offerCastNow(
       ...(spec.byPayingLife === true ? { byPayingLife: true } : {}),
       ...(spec.byPaying !== undefined ? { byPaying: spec.byPaying } : {}),
       ...(spec.alsoPaying !== undefined ? { alsoPaying: spec.alsoPaying } : {}),
+      ...(spec.reduce !== undefined ? { reduce: spec.reduce } : {}),
       ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
       ...(spec.mustCast === true ? { mustCast: true } : {}),
       ...(spec.madness === true ? { madness: true } : {}),
@@ -15287,7 +15298,7 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = cards.filter((id) => !justExiled.has(id));
     }
     if (spec.copies !== undefined) {
-      cards = ctx.copyCards(cards, Math.max(0, Math.floor(amountValue(spec.copies, ctx))));
+      cards = ctx.copyCards(cards, Math.max(0, Math.floor(amountValue(spec.copies, ctx))), spec.copiesIn);
       // Several copies are each their own "may" (rule 707.12a).
       if (cards.length > 1 && spec.repeat !== true) {
         offerCastNow({ ...spec, copies: undefined, repeat: true }, { since: ctx.nextEventSeq(), cards, looked }, ctx);
