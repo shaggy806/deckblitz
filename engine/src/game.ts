@@ -426,7 +426,7 @@ import {
   type CoinSide,
   type FlipLanding,
 } from "./random-results.js";
-import type { CoinFlipReplacement, DiceRollReplacement, ReplacementSpec } from "./replacements.js";
+import type { CoinFlipReplacement, DiceRollReplacement, ReplacementSpec, VillainousChoiceReplacement } from "./replacements.js";
 import {
   COLORS,
   MANA_TYPES,
@@ -13390,7 +13390,7 @@ export class Game {
   }
 
   /** The static abilities on the table replacing `event` for `player`. */
-  private staticReplacementsFor<E extends "would-flip-coin" | "would-roll-dice">(
+  private staticReplacementsFor<E extends "would-flip-coin" | "would-roll-dice" | "would-face-villainous-choice">(
     player: PlayerId,
     event: E,
   ): readonly { readonly by: GameObject; readonly replacement: Extract<ReplacementSpec, { event: E }> }[] {
@@ -13401,7 +13401,7 @@ export class Game {
       for (const ability of this.staticsOfSource(by)) {
         const r = ability.replacement;
         if (r?.event !== event) continue;
-        const who = (r as CoinFlipReplacement | DiceRollReplacement).who;
+        const who = (r as CoinFlipReplacement | DiceRollReplacement | VillainousChoiceReplacement).who;
         if (who !== "any-player" && (who === "you") !== (player === by.controller)) continue;
         if (this.staticActive(by, ability)) out.push({ by, replacement: r as Extract<ReplacementSpec, { event: E }> });
       }
@@ -37998,6 +37998,7 @@ export class Game {
         return { player, revealed: top, land, revealedName: printedCardName(this.state.objects[top]) };
       },
       exploreTimes: (explorer) => this.exploreTimes(explorer),
+      villainousChoiceTimes: (player) => this.villainousChoiceTimes(player),
       exploreToGraveyard: (card) => {
         const object = this.state.objects[card];
         if (object !== undefined && this.state.zones.perPlayer[object.owner]?.library[0] === card) {
@@ -50489,6 +50490,18 @@ controlledBy,
       }
     }
     return times;
+  }
+
+  /** How many times `player` faces a villainous choice when they would once:
+   * each `would-face-villainous-choice` static that applies to them adds its
+   * own (rules 701.55c, 614.5; The Valeyard). */
+  private villainousChoiceTimes(player: PlayerId): number {
+    let times = 1;
+    for (const { by, replacement } of this.staticReplacementsFor(player, "would-face-villainous-choice")) {
+      const plus = replacement.instead.modify.plus;
+      if (plus !== undefined) times += this.replacementAmount(plus, by);
+    }
+    return Math.min(times, Game.MAX_EFFECT_INSTANCES);
   }
 
   /** How many times `explorer` explores when it would once: each

@@ -43,6 +43,7 @@ export default defineCard({
       targets: ["opponent"],
       effect: {
         kind: "each-player-may",
+        villainous: true,
         who: { controllerOf: 0 },
         choices: [
           {

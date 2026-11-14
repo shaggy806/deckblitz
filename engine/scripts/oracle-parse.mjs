@@ -21232,6 +21232,20 @@ function parseStatic(line, text) {
   if (line === "If you would proliferate, proliferate twice instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-proliferate", instead: { modify: { times: 2 } } }, text };
   }
+  // The Valeyard (rule 701.55c).
+  const villain = /^If (an opponent|a player|you) would face a villainous choice, (?:they|you) face that choice an additional time\.$/.exec(line);
+  if (villain !== null) {
+    const who = { "an opponent": "opponent", "a player": "any-player", you: "you" }[villain[1]];
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-face-villainous-choice", who, instead: { modify: { plus: 1 } } },
+      text,
+    };
+  }
+  // Ballot Broker, Tivit, The Valeyard (rule 701.38d).
+  if (line === "While voting, you may vote an additional time.") {
+    return { affects: { scope: "self" }, votesAdditionalTime: true, text };
+  }
   // Topography Tracker (rules 701.44, 614.5).
   if (line === "If a creature you control would explore, instead it explores, then it explores again.") {
     return {

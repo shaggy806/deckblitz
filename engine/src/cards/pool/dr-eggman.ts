@@ -32,6 +32,7 @@ export default defineCard({
           { kind: "draw", amount: 1 },
           {
             kind: "each-player-may",
+            villainous: true,
             who: "each-opponent",
             choices: [
               {

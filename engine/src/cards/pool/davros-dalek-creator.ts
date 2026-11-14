@@ -42,6 +42,7 @@ export default defineCard({
             },
             effect: {
               kind: "each-player-may",
+              villainous: true,
               who: "that-player",
               choices: [
                 { text: "You draw a card.", effect: { kind: "draw", amount: 1 } },

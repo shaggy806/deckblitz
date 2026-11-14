@@ -2821,12 +2821,16 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   player does, they may copy this spell" is a sacrifice option whose `ifDid`
   is a `"that-player"` `each-player-may` of a `copy-spell` of `"source"` —
   their effect, so the copy is theirs.
-  `choices` (two or more `{ text, effect }`) is a
-  **villainous choice** (rule 701.56 — "each opponent faces a villainous
-  choice — …, or …"): each of them must pick one, and the one picked is the
+  `choices` (two or more `{ text, effect }`) is a choice each of them
+  must make ("that player chooses artifact, creature, land, or non-Aura
+  enchantment"); with **`villainous: true`** it's a **villainous choice**
+  (rule 701.55 — "each opponent faces a villainous choice — …, or …"; mark
+  every one): each of them must pick one, the one picked is the
   **controller's** effect about them ("you draw a card"; "that player
-  discards a card" is `who: "that-player"`). A vote is its own effect,
-  `vote` (below), not a `choices`.
+  discards a card" is `who: "that-player"`), each player's choice is done
+  before the next player faces theirs (701.55d), and The Valeyard's
+  `would-face-villainous-choice` can make them face it again (701.55c). A
+  vote is its own effect, `vote` (below), not a `choices`.
 - **`vote { for, secret? }`** — (a `choose`'s `who` may be a target slot's player, `{ target: 0 }`: Imperial Edict's "**target opponent** chooses a creature they control. Destroy that creature", then a `for-each-voted`; `target-player-chooser.test.ts`) a vote (rule 701.38): each player still in
   the game votes, in turn order from the effect's controller ("will of the
   council", "council's dilemma" — "starting with you, each player votes …"),
@@ -6203,6 +6207,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   proliferate, proliferate twice instead" (Tekuthal, Inquiry Dominus): this
   permanent's controller, each time its own question (rule 701.34a); several
   multiply (rule 614.5).
+- `replacement: { event: "would-face-villainous-choice", who, instead: { modify: { plus: 1 } } }` — "If an
+  opponent would face a villainous choice, they face that choice an additional time" (The Valeyard; `who:
+  "opponent"`, the chooser from this permanent's controller's side): an `each-player-may` marked `villainous`
+  asks that player `plus` more times, each choice done before the next is faced (rule 701.55c); several add
+  theirs (614.5). The scaffolder reads it.
 - `replacement: { event: "would-explore", filter, instead: { modify: { times: 2 } } }` — "If a creature you
   control would explore, instead it explores, then it explores again" (Topography Tracker; `filter: { type:
   "creature", controlledBy: "you" }`, the explorer as it last was if it has left): each instruction to explore

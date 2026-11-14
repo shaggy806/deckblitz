@@ -16561,6 +16561,20 @@ describe("mana that adds counters to what it casts", () => {
     expect(attendant.activated[0].effect.spellEntersWith).toEqual({ spell: { type: "creature", notSubtypes: ["Human"] }, counter: "+1/+1", amount: 1 });
   });
 
+  it("The Valeyard", () => {
+    const face = read(
+      "Legendary Creature — Time Lord Noble",
+      "If an opponent would face a villainous choice, they face that choice an additional time. (They can make the same or different choices.)\nWhile voting, you may vote an additional time.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.static[0].replacement).toEqual({
+      event: "would-face-villainous-choice",
+      who: "opponent",
+      instead: { modify: { plus: 1 } },
+    });
+    expect(face.static[1].votesAdditionalTime).toBe(true);
+  });
+
   it("Tekuthal, Inquiry Dominus", () => {
     const face = read(
       "Legendary Creature — Phyrexian Horror",

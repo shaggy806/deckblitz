@@ -10026,6 +10026,15 @@ export type EffectSpec =
        * apply — everyone chooses.
        */
       readonly choices?: readonly ModeOption[];
+      /**
+       * These `choices` are a **villainous choice** (rule 701.55), not just
+       * a choice each player makes: each player's whole process — choose,
+       * then do what they chose — is done before the next player's (701.55d,
+       * an exception to 608.2e), rather than held and done at once, and a
+       * `would-face-villainous-choice` replacement can make them face it
+       * more times, each one after the last is done (701.55c — The Valeyard).
+       */
+      readonly villainous?: true;
       /** Ask them in turn order **starting with the effect's controller**
        * rather than the active player. (A vote — "starting with you, each
        * player votes …" — is the `vote` effect.) */
@@ -11607,6 +11616,10 @@ export interface EffectApi {
   /** How many times `explorer` explores when it would once: 1, times each
    * `would-explore` replacement that applies to it (rule 614.5). */
   exploreTimes(explorer: ObjectId): number;
+  /** How many times `player` faces a villainous choice when they would once:
+   * 1, plus what each `would-face-villainous-choice` replacement that
+   * applies to them adds (rule 701.55c). */
+  villainousChoiceTimes(player: PlayerId): number;
   /** The explore's "may put it into your graveyard": `card`, if it's still
    * on top of its owner's library. */
   exploreToGraveyard(card: ObjectId): void;
@@ -14294,6 +14307,13 @@ function applyEachPlayerMay(
     spec.progress?.toAsk ??
     (() => {
       const players = eachPlayerMayAsks(spec.who, ctx, spec.startingWithYou === true);
+      // A villainous choice faced more times over: each of a player's
+      // faced one after another, before the next player's (rule 701.55c).
+      if (spec.villainous === true && spec.choices !== undefined) {
+        return players.flatMap((player) =>
+          Array<PlayerId>(Math.min(ctx.villainousChoiceTimes(player), MAX_ROUNDS)).fill(player),
+        );
+      }
       if (spec.rounds === undefined) return players;
       // All of one player's questions before the next player's.
       const n = Math.min(Math.max(0, Math.floor(amountValue(spec.rounds, ctx))), MAX_ROUNDS);
@@ -14316,7 +14336,9 @@ function applyEachPlayerMay(
   // then what they chose happens at once (rule 101.4): a discard or a
   // sacrifice a player chooses waits, the discarded cards hidden in hand
   // (101.4a), until the last player has chosen.
-  if (toAsk.length > 0) ctx.holdChoices();
+  // A villainous choice isn't held: each player's choice is done before the
+  // next is asked (rule 701.55d, an exception to 608.2e).
+  if (toAsk.length > 0 && spec.villainous !== true) ctx.holdChoices();
   while (toAsk.length > 0) {
     const player = toAsk[0];
     asked = [...asked, player];

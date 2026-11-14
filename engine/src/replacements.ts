@@ -117,7 +117,23 @@ export type ReplacementSpec =
   | LoseGameReplacement
   | ScryReplacement
   | CoinFlipReplacement
-  | DiceRollReplacement;
+  | DiceRollReplacement
+  | VillainousChoiceReplacement;
+
+/**
+ * "If an opponent would face a villainous choice, they face that choice an
+ * additional time" (The Valeyard): one instruction to face a villainous
+ * choice (an `each-player-may` marked `villainous`) becomes that many more,
+ * the whole choose-then-perform process done again for that player, one at a
+ * time (rule 701.55c). `instead.modify.plus` is how many more; several
+ * sources each add theirs (614.5). `who` is the chooser, from this
+ * permanent's controller's side. Read by `Game.villainousChoiceTimes`.
+ */
+export interface VillainousChoiceReplacement {
+  readonly event: "would-face-villainous-choice";
+  readonly who: "you" | "opponent" | "any-player";
+  readonly instead: ModifiedEvent;
+}
 
 /**
  * "If you would flip a coin, instead flip two coins and ignore one" (Krark's

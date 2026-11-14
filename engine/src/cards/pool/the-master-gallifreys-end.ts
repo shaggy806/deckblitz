@@ -41,6 +41,7 @@ export default defineCard({
                 mostLife: true,
                 then: {
                   kind: "each-player-may",
+                  villainous: true,
                   who: "that-player",
                   choices: [
                     { text: "They lose 4 life.", effect: { kind: "lose-life", amount: 4, who: "that-player" } },
