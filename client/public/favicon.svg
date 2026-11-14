@@ -57,10 +57,15 @@
        is only about 1.7:1. A dark plate with the gold mark on top reads on
        either one, and in a bookmarks bar.
 
-       A circle rather than a rounded square: at 16px a corner radius has
-       only two or three pixels to describe itself, so it resolves as four
-       ragged corners rather than as a shape. A circle degrades cleanly,
-       and it suits an ouroboros.
+       A full square plate, opaque to every edge (2026-11-14; it was a
+       circle). Google's results show a site's icon on a round badge of its
+       own and crop an opaque icon to it, but an icon with transparent
+       corners it shrinks and sets on a light disc instead, so the circle
+       read as a small dot with a pale ring. Square, the crop takes exactly
+       the old circle back out of it. Not a rounded square: at 16px a corner
+       radius has only two or three pixels to describe itself and resolves
+       as four ragged corners, and its transparent corners would bring the
+       shrinking back.
 
        Centred so the mark sits evenly in it, which is neither the centre of
        the artwork's bounding box nor the centre of the ring's hole. The box
@@ -73,9 +78,9 @@
 
        (1299, 1330) is instead the centre that minimises the furthest
        distance to any ink, so no side of the mark crowds the rim before
-       another. The radius clears that furthest ink by 10%, and the viewBox
-       is exactly this circle's bounds, so the plate is full bleed rather
-       than clipped square by the canvas.
+       another. A circle of radius 1405 about it clears that furthest ink by
+       10%, and the viewBox is exactly that circle's bounds, so a round crop
+       of the square (Google's) keeps every part of the mark.
 
        Vertically the mark is even by geometry, 23.1px of clearance above
        against 22.9px below at a 256px radius, but not by mass: 54% of the
@@ -84,11 +89,12 @@
        framing, and it is left uncorrected on the grounds that two
        concentric circles is the stronger visual cue here. If the artwork is
        ever redrawn, re-derive cx/cy/r rather than nudging them by eye. -->
-  <circle
+  <rect
      id="favicon-plate"
-     cx="1299"
-     cy="1330"
-     r="1405"
+     x="-106"
+     y="-75"
+     width="2810"
+     height="2810"
      style="fill:#141a1f" />
   <path
      style="fill:#cda653"

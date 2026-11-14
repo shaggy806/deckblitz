@@ -7,10 +7,25 @@
          page URL, which survives a reload and even Ctrl+Shift+R — so
          replacing favicon.svg on disk leaves every browser that has already
          visited showing the previous icon indefinitely. Changing the URL is
-         what actually retires it. Bump this whenever favicon.svg changes. -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+         what actually retires it. Bump this whenever favicon.svg changes, and
+         rebuild favicon.ico from it (its 16, 32 and 48px renders). -->
+    <link rel="icon" href="/favicon.ico?v=4" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deck Blitz · Magic: The Gathering Commander deck tester</title>
+    <!-- What search results show: the description is the snippet under the
+         title, and the WebSite data gives the result its name ("Deck Blitz"
+         rather than the bare domain). The page itself draws all its text in
+         script, so without these Google has nothing to quote. -->
+    <meta name="description" content="Free Commander deck tester for Magic: The Gathering. Paste a decklist and play it against three bots in your browser, or open a room for 2–4 friends." />
+    <meta property="og:site_name" content="Deck Blitz" />
+    <meta property="og:title" content="Deck Blitz · Magic: The Gathering Commander deck tester" />
+    <meta property="og:description" content="Free Commander deck tester for Magic: The Gathering. Paste a decklist and play it against three bots in your browser, or open a room for 2–4 friends." />
+    <meta property="og:url" content="https://deckblitz.net/" />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json">
+      {"@context": "https://schema.org", "@type": "WebSite", "name": "Deck Blitz", "url": "https://deckblitz.net/"}
+    </script>
   </head>
   <body>
     <div id="root"></div>
