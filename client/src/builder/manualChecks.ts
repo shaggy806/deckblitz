@@ -12679,4 +12679,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Thrasta, Tempest\'s Roar: damage past a planeswalker\'s loyalty goes on to its controller',
+    board({
+      you: { bf: ['Thrasta, Tempest\'s Roar'] },
+      opp: { bf: [{ name: 'Jace Beleren', counters: { loyalty: 3 } }] },
+    }),
+  ),
+  preset(
+    'Thrasta, Tempest\'s Roar: in a 4-player game, another attacker\'s damage counts toward the loyalty',
+    board({
+      you: { bf: ['Thrasta, Tempest\'s Roar', 'Grizzly Bears'] },
+      opp: [{}, { bf: [{ name: 'Jace Beleren', counters: { loyalty: 7 } }] }, {}],
+    }),
+  ),
 ]

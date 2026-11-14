@@ -16,6 +16,7 @@
  * the engine's `damageAssignmentViolations`.
  */
 
+import { loyaltyStillOwed } from 'engine/client'
 import type { LegalAction, ObjectId, PlayerView, VisibleObject } from 'engine/client'
 
 export type AssignDamageOffer = Extract<LegalAction, { kind: 'assign-combat-damage' }>
@@ -119,9 +120,37 @@ export function groupBlockers(offer: AssignDamageOffer, view: PlayerView): Block
 }
 
 /** Damage on no blocker yet: what tramples over, or what still has to go
- * somewhere. */
+ * somewhere. With trample over planeswalkers, what the planeswalker gets:
+ * the amount sent on to its controller is in `picks` too, last. */
 export function unassigned(offer: AssignDamageOffer, picks: readonly number[]): number {
   return offer.power - sum(picks)
+}
+
+/** Trample over planeswalkers (rule 702.19c): what goes on to the
+ * planeswalker's controller — the amount after the blockers' — or 0. */
+export function toPlayerOf(offer: AssignDamageOffer, picks: readonly number[]): number {
+  return offer.overPlaneswalker === undefined ? 0 : (picks[offer.blockers.length] ?? 0)
+}
+
+/** The most that may go on to the planeswalker's controller with the
+ * blockers' amounts as they are: none until every blocker has lethal, then
+ * whatever is past the planeswalker's loyalty left to fill. */
+export function mostToPlayer(offer: AssignDamageOffer, picks: readonly number[]): number {
+  const over = offer.overPlaneswalker
+  if (over === undefined) return 0
+  const blockers = picks.slice(0, offer.blockers.length)
+  if (blockers.some((n, i) => n < offer.lethal[i])) return 0
+  return Math.max(0, offer.power - sum(blockers) - loyaltyStillOwed(over, blockers))
+}
+
+/** `picks` with what goes on to the planeswalker's controller set to `n`,
+ * held within what's allowed ({@link mostToPlayer}). */
+export function setToPlayer(offer: AssignDamageOffer, picks: readonly number[], n: number): number[] {
+  if (offer.overPlaneswalker === undefined) return [...picks]
+  const out = [...picks]
+  while (out.length <= offer.blockers.length) out.push(0)
+  out[offer.blockers.length] = Math.min(Math.max(0, Math.floor(n)), mostToPlayer(offer, out))
+  return out
 }
 
 export function totalOf(members: readonly number[], picks: readonly number[]): number {

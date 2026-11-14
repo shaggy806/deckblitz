@@ -17,7 +17,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 import type { TargetCountRange, TargetTaxShare } from "./target-count.js";
-import type { ReplacementOrderOption, TriggerOrderEntry } from "./state.js";
+import type { OverPlaneswalker, ReplacementOrderOption, TriggerOrderEntry } from "./state.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
 /** One creature tapped to help pay a convoke cost (rule 702.51a): it pays
@@ -2001,6 +2001,12 @@ export type LegalAction =
       /** What the attacker is attacking — a player, or a planeswalker or
        * battle's id — with `mayUnblocked`. */
       readonly defender?: PlayerId | ObjectId;
+      /** Trample over planeswalkers (rule 702.19c): the attacker — blocked or
+       * not, so `blockers` may be empty — attacks this planeswalker, and
+       * the answer has one amount more, last: what goes to its controller,
+       * only past lethal on every blocker and `loyaltyLeft` on it. `power`
+       * less all the amounts goes to the planeswalker. */
+      readonly overPlaneswalker?: OverPlaneswalker;
     }
   | {
       readonly kind: "discard";

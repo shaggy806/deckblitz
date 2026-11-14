@@ -65,9 +65,13 @@ import {
   blockerNeedsDamageAssignmentChoice,
   damageAssignmentViolations,
   damageQuestionFor,
+  hasTrample,
+  lethalFor,
   liveBlockersOf,
+  loyaltyStillOwed,
   needsDamageAssignmentChoice,
 } from "./combat/damage.js";
+import type { DamageQuestion } from "./combat/damage.js";
 import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
 import { blockTaxTotal } from "./combat/blocking.js";
 import {
@@ -531,6 +535,7 @@ import type {
   FaceDownKind,
   GiftAsk,
   CombatDamageState,
+  OverPlaneswalker,
   CommanderLibraryPlacement,
   CommanderMoveOrigin,
   CommanderReplacementZone,
@@ -13960,19 +13965,119 @@ export class Game {
     const attackers = this.currentAttackers();
     // A blocked attacker that may assign as though unblocked is always a
     // choice; one that must has none.
-    const pending = attackers.filter(
+    const asked = attackers.filter(
       (id) =>
         this.state.objects[id].blocked &&
         this.dealsInPass(id, kind) &&
         (this.mayAssignAsThoughUnblocked(id) ||
           (unblockedAssignmentOf(this.state, this.registry, id) !== "must" && this.needsDamageAssignmentChoice(id))),
     );
+    // Trample over planeswalkers (rule 702.19c), blocked or not: asked last
+    // of the attackers, once what the others assign the planeswalker is
+    // known, and only if some could still go on to its controller then
+    // (`promptNextDamageAssignment` drops one that can't).
+    const overPlaneswalkers = attackers.filter(
+      (id) => this.dealsInPass(id, kind) && this.overPlaneswalkerChoiceOwed(id, this.overPlaneswalkerFor(id, true)),
+    );
+    const pending = [...asked.filter((id) => !overPlaneswalkers.includes(id)), ...overPlaneswalkers];
     const blockers = new Set(attackers.flatMap((id) => this.liveBlockersOf(id)));
     for (const id of blockers) {
       if (this.dealsInPass(id, kind) && blockerNeedsDamageAssignmentChoice(this.state, this.registry, id)) pending.push(id);
     }
     this.state.combatDamage = { ...cd, pendingAssignments: pending };
     this.promptNextDamageAssignment();
+  }
+
+  /**
+   * Trample over planeswalkers (rule 702.19c): what `attackerId` may trample
+   * on to — the planeswalker it attacks, still one on the battlefield, its
+   * controller, and its loyalty less the combat damage the other creatures
+   * dealing damage this sub-pass assign it (their answers where given, else
+   * their standard split) — or `undefined`. `most`: the others counted at
+   * the most they could assign it (one that may assign as though unblocked
+   * doing so), for whether a choice could be owed at all.
+   */
+  private overPlaneswalkerFor(attackerId: ObjectId, most = false): OverPlaneswalker | undefined {
+    const attacker = this.state.objects[attackerId];
+    const pwId = attacker?.attacking;
+    if (attacker?.zone !== "battlefield" || pwId == null || attacker.attackingNothing === true) return undefined;
+    if (!this.objHasKeyword(attackerId, "trample-over-planeswalkers") || !this.isPlaneswalkerTarget(pwId)) return undefined;
+    const pw = this.state.objects[pwId as ObjectId];
+    if (pw?.zone !== "battlefield" || !effectiveTypes(this.state, this.registry, pw).includes("planeswalker")) return undefined;
+    const cd = this.state.combatDamage;
+    const kind = cd === null ? "all" : this.subPassKind(cd.pass);
+    let others = 0;
+    for (const id of this.currentAttackers()) {
+      const other = this.state.objects[id];
+      if (id === attackerId || other.attacking !== pwId || other.attackingNothing === true || !this.dealsInPass(id, kind)) {
+        continue;
+      }
+      const power = assignedCombatDamage(this.state, this.registry, id);
+      if (power <= 0) continue;
+      const answered = cd?.assigned[id];
+      const asUnblocked =
+        !other.blocked ||
+        (cd?.asThoughUnblocked ?? []).includes(id) ||
+        unblockedAssignmentOf(this.state, this.registry, id) === "must" ||
+        (most && this.mayAssignAsThoughUnblocked(id));
+      const blockers = this.liveBlockersOf(id);
+      if (asUnblocked) {
+        // Unblocked: all of it, less what it sends on to the controller.
+        const toPlayer = answered !== undefined && answered.length === 1 && blockers.length === 0 ? answered[0] : 0;
+        others += power * (other.stackCount ?? 1) - toPlayer;
+        continue;
+      }
+      if (!hasTrample(this.state, this.registry, id)) continue;
+      const split = answered ?? this.autoAssignFor(id);
+      const toBlockers = split.slice(0, blockers.length).reduce((sum, n) => sum + n, 0);
+      const toPlayer = split.length > blockers.length ? (split[blockers.length] ?? 0) : 0;
+      others += Math.max(0, power - toBlockers - toPlayer);
+    }
+    const loyalty = pw.counters.loyalty ?? 0;
+    const blockerIndex = attacker.blocked ? this.liveBlockersOf(attackerId).indexOf(pwId as ObjectId) : -1;
+    return {
+      planeswalker: pwId as ObjectId,
+      player: pw.controller,
+      loyaltyLeft: Math.max(0, loyalty - others),
+      ...(blockerIndex >= 0 ? { blockerIndex } : {}),
+    };
+  }
+
+  /** Whether `attackerId`'s controller has a choice of what goes on to the
+   * planeswalker's controller (`over`): damage past lethal to its blockers
+   * (none, unblocked or with none left — rule 702.19d) and `loyaltyLeft`. */
+  private overPlaneswalkerChoiceOwed(attackerId: ObjectId, over: OverPlaneswalker | undefined): boolean {
+    if (over === undefined) return false;
+    const attacker = this.state.objects[attackerId];
+    if (attacker.blocked && unblockedAssignmentOf(this.state, this.registry, attackerId) === "must") return false;
+    const blockers = attacker.blocked ? this.liveBlockersOf(attackerId) : [];
+    const lethal = blockers.map((b) => lethalFor(this.state, this.registry, attackerId, b));
+    const toBlockers = lethal.reduce((sum, n) => sum + n, 0);
+    return assignedCombatDamage(this.state, this.registry, attackerId) - toBlockers > loyaltyStillOwed(over, lethal);
+  }
+
+  /** {@link damageQuestionFor} with trample over planeswalkers' further
+   * recipient, which reads the other answers this sub-pass. */
+  private damageQuestion(dealerId: ObjectId): DamageQuestion {
+    return damageQuestionFor(this.state, this.registry, dealerId, this.overPlaneswalkerFor(dealerId));
+  }
+
+  /** Trample over planeswalkers (rule 702.19e): the planeswalker `attackerId`
+   * attacked has been removed from combat — it left the battlefield, or
+   * stopped being a planeswalker — so its combat damage goes to the
+   * defending player, that planeswalker's controller as it last was. That
+   * player, while still in the game; `undefined` for any other attacker. */
+  private overPlaneswalkerRedirect(attackerId: ObjectId): PlayerId | undefined {
+    const attacker = this.state.objects[attackerId];
+    const pwId = attacker?.attacking;
+    if (pwId == null || !this.isPlaneswalkerTarget(pwId)) return undefined;
+    if (!this.objHasKeyword(attackerId, "trample-over-planeswalkers")) return undefined;
+    const pw = this.state.objects[pwId as ObjectId];
+    if (pw === undefined || pw.protector !== undefined) return undefined;
+    const onBattlefield = pw.zone === "battlefield";
+    if (onBattlefield && attacker.attackingNothing !== true) return undefined;
+    const player = onBattlefield ? pw.controller : (pw.lastKnown?.controller ?? pw.controller);
+    return this.state.players[player]?.hasLost === false ? player : undefined;
   }
 
   /** The blockers of `attackerId` still on the battlefield, in declaration order. */
@@ -14010,11 +14115,26 @@ export class Game {
   }
 
   private promptNextDamageAssignment(): void {
-    const cd = this.state.combatDamage;
+    let cd = this.state.combatDamage;
     if (cd === null) return;
+    // Trample over planeswalkers asked for alone, where the others' answers
+    // have since left nothing to send on to the planeswalker's controller:
+    // no choice, so no question (its split is the standard one).
+    while (cd.pendingAssignments.length > 0) {
+      const next = cd.pendingAssignments[0];
+      const attacker = this.state.objects[next];
+      const divides =
+        attacker?.attacking == null ||
+        (attacker.blocked &&
+          (this.mayAssignAsThoughUnblocked(next) ||
+            (unblockedAssignmentOf(this.state, this.registry, next) !== "must" && this.needsDamageAssignmentChoice(next))));
+      if (divides || this.overPlaneswalkerChoiceOwed(next, this.overPlaneswalkerFor(next))) break;
+      cd = { ...cd, pendingAssignments: cd.pendingAssignments.slice(1) };
+      this.state.combatDamage = cd;
+    }
     if (cd.pendingAssignments.length > 0) {
       const dealerId = cd.pendingAssignments[0];
-      const q = damageQuestionFor(this.state, this.registry, dealerId);
+      const q = this.damageQuestion(dealerId);
       const situation = this.damageSituation(dealerId);
       const alike = cd.pendingAssignments.slice(1).filter((id) => this.damageSituation(id) === situation).length;
       // "As though it weren't blocked" is its controller's choice; where the
@@ -14036,6 +14156,7 @@ export class Game {
         ...(q.forOpponent && !unblockedOnly ? { forOpponent: true as const } : {}),
         ...(mayUnblocked ? { mayUnblocked: true as const } : {}),
         ...(unblockedOnly ? { unblockedOnly: true as const } : {}),
+        ...(q.overPlaneswalker !== undefined && !unblockedOnly ? { overPlaneswalker: q.overPlaneswalker } : {}),
       };
       return;
     }
@@ -14054,8 +14175,9 @@ export class Game {
    */
   private damageSituation(dealerId: ObjectId): string {
     const dealer = this.state.objects[dealerId];
-    const q = damageQuestionFor(this.state, this.registry, dealerId);
+    const q = this.damageQuestion(dealerId);
     return JSON.stringify([
+      q.overPlaneswalker ?? null,
       q.player,
       dealer?.controller,
       dealer?.cardName,
@@ -14116,7 +14238,7 @@ export class Game {
       assigned[awaiting.attacker] = [...assignment];
       // Each of the others is checked as the decision would check it.
       for (const id of same) {
-        const q = damageQuestionFor(this.state, this.registry, id);
+        const q = this.damageQuestion(id);
         const wrong = damageAssignmentViolations({ ...q, blockers: q.recipients }, assignment);
         if (wrong !== null) throw new Error(wrong);
         assigned[id] = [...assignment];
@@ -14296,27 +14418,53 @@ export class Game {
             attacker.blocked &&
             (chosenUnblocked.includes(attackerId) ||
               unblockedAssignmentOf(this.state, this.registry, attackerId) === "must");
+          // Trample over planeswalkers (rule 702.19e): the planeswalker
+          // removed from combat, its damage goes to the defending player.
+          const redirect = this.overPlaneswalkerRedirect(attackerId);
+          const attackedRef: TargetRef | null =
+            redirect !== undefined
+              ? { kind: "player", player: redirect }
+              : attacker.attacking !== null && attacker.attackingNothing !== true
+                ? this.attackTargetRef(attacker.attacking)
+                : null;
+          const override = assigned[attackerId];
+          // What the answer sent on to the planeswalker's controller (702.19c):
+          // the amount after the blockers' (none, unblocked).
+          const onTo = (blockers: number): number =>
+            redirect === undefined && override !== undefined && override.length === blockers + 1 && attacker.attacking !== null
+              ? (override[blockers] ?? 0)
+              : 0;
+          const pushOnTo = (amount: number): void => {
+            const pw = attacker.attacking === null ? undefined : this.state.objects[attacker.attacking as ObjectId];
+            if (amount > 0 && pw !== undefined) {
+              assignments.push({ source: attackerId, target: { kind: "player", player: pw.controller }, amount });
+            }
+          };
           if (!attacker.blocked || asUnblocked) {
-            if (attacker.attacking !== null && attacker.attackingNothing !== true) {
+            if (attackedRef !== null) {
               // A counted attacking stack (`attackingStackPart`) is that
               // many unblocked attackers, each dealing its power.
               const tokens = attacker.stackCount ?? 1;
-              assignments.push({
-                source: attackerId,
-                target: this.attackTargetRef(attacker.attacking),
-                amount: power,
-                ...(tokens > 1 ? { sources: tokens } : {}),
-              });
+              const toPlayer = tokens === 1 ? Math.min(power, onTo(0)) : 0;
+              if (power - toPlayer > 0) {
+                assignments.push({
+                  source: attackerId,
+                  target: attackedRef,
+                  amount: power - toPlayer,
+                  ...(tokens > 1 ? { sources: tokens } : {}),
+                });
+              }
+              pushOnTo(toPlayer);
             }
           } else {
-            const trample = this.objHasKeyword(attackerId, "trample");
+            const trample = hasTrample(this.state, this.registry, attackerId);
             // A player-chosen distribution (rule 510.1c — ROADMAP Phase 11
             // EG-4a) overrides the standard split; otherwise auto-assign
             // (deathtouch already folded into `autoAssignForAttacker`).
-            const override = assigned[attackerId];
             const perBlocker =
-              override !== undefined && override.length === liveBlockers.length
-                ? override
+              override !== undefined &&
+              (override.length === liveBlockers.length || override.length === liveBlockers.length + 1)
+                ? override.slice(0, liveBlockers.length)
                 : this.autoAssignFor(attackerId);
             let assignedTotal = 0;
             liveBlockers.forEach((blockerId, index) => {
@@ -14330,14 +14478,16 @@ export class Game {
                 });
               }
             });
-            const over = power - assignedTotal;
-            if (trample && over > 0 && attacker.attacking !== null && attacker.attackingNothing !== true) {
+            const toPlayer = onTo(liveBlockers.length);
+            const over = power - assignedTotal - toPlayer;
+            if (trample && over > 0 && attackedRef !== null) {
               assignments.push({
                 source: attackerId,
-                target: this.attackTargetRef(attacker.attacking),
+                target: attackedRef,
                 amount: over,
               });
             }
+            if (trample) pushOnTo(toPlayer);
           }
         }
       }

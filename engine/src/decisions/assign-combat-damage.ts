@@ -52,6 +52,7 @@ export const assignCombatDamage = defineDecision({
       ...(awaiting.mayUnblocked === true ? { mayUnblocked: true as const } : {}),
       ...(awaiting.unblockedOnly === true ? { unblockedOnly: true as const } : {}),
       ...(awaiting.mayUnblocked === true && defender != null ? { defender } : {}),
+      ...(awaiting.overPlaneswalker !== undefined ? { overPlaneswalker: awaiting.overPlaneswalker } : {}),
     },
   ];
   },
@@ -95,6 +96,7 @@ export const assignCombatDamage = defineDecision({
       ...(awaiting.blocking === true ? { blocking: true } : {}),
       ...(awaiting.mayUnblocked === true ? { mayUnblocked: true } : {}),
       ...(awaiting.unblockedOnly === true ? { unblockedOnly: true } : {}),
+      ...(awaiting.overPlaneswalker !== undefined ? { overPlaneswalker: awaiting.overPlaneswalker } : {}),
     });
     if (answer === "unblocked" && awaiting.mayUnblocked === true) {
       return { type: "assign-combat-damage", player, assignment: [], asThoughUnblocked: true };
@@ -119,6 +121,9 @@ export const assignCombatDamage = defineDecision({
       return { type: "assign-combat-damage", player, assignment: [], asThoughUnblocked: true };
     }
     if (legal.unblockedOnly === true) return { type: "assign-combat-damage", player, assignment: [] };
+    // Trample over planeswalkers: nothing on to the planeswalker's controller
+    // in the splits below (always legal), unless the default sends some.
+    const onTo = legal.overPlaneswalker !== undefined ? [0] : [];
     // Any division among the blockers is legal (510.1c), so half the time deal
     // the power out a point at a time to random blockers; it always sums to
     // the power, so nothing tramples over.
@@ -127,12 +132,17 @@ export const assignCombatDamage = defineDecision({
       for (let i = 0; i < legal.power; i += 1) {
         assignment[rng.pickIndex(assignment.length)] += 1;
       }
-      return { type: "assign-combat-damage", player, assignment };
+      return { type: "assign-combat-damage", player, assignment: [...assignment, ...onTo] };
     }
     // Otherwise start from the default split (the other side's, under
     // banding), then sometimes pile extra onto a blocker instead of trampling
-    // it over — still legal.
+    // it over — still legal — or, trampling over a planeswalker, keep it all
+    // on the planeswalker.
     const assignment = defaultAssignment(legal);
+    if (legal.overPlaneswalker !== undefined) {
+      if (rng.random() < 0.5) assignment[legal.blockers.length] = 0;
+      return { type: "assign-combat-damage", player, assignment };
+    }
     const spare = legal.power - assignment.reduce((sum, n) => sum + n, 0);
     if (spare > 0 && assignment.length > 0 && rng.random() < 0.5) {
       assignment[rng.pickIndex(assignment.length)] += spare;

@@ -24,6 +24,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     name: 'Trample',
     text: "Can deal excess combat damage to the player or planeswalker it's attacking.",
   },
+  'trample-over-planeswalkers': {
+    name: 'Trample over planeswalkers',
+    text: "Can deal excess combat damage to the controller of the planeswalker it's attacking.",
+  },
   deathtouch: {
     name: 'Deathtouch',
     text: 'Any amount of damage it deals to a creature is enough to destroy it.',

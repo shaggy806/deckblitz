@@ -71,7 +71,7 @@ export type ReplacementOrderOffer = Extract<LegalAction, { kind: "replacement-or
 export type ChooseNumberOffer = Extract<LegalAction, { kind: "choose-number" }>;
 /** A `choose-permanent-or-player` offer — see `PlayerController.choosePermanentOrPlayer`. */
 export type ChoosePermanentOrPlayerOffer = Extract<LegalAction, { kind: "choose-permanent-or-player" }>;
-import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } from "./state.js";
+import type { EnterAttackingChoice, GameObject, GameState, OverPlaneswalker, TriggerOrderEntry } from "./state.js";
 import { activePlayerOf, printedCardName, rulesTextName } from "./state.js";
 import { anyNumberSlot, concatModeSpecs, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
 import type { TargetFacts, TargetRef, TargetSpec } from "./target.js";
@@ -610,6 +610,9 @@ export interface DamageAssignmentAsk {
   /** …and the only question: the division, if declined, is the other
    * side's (banding). */
   readonly unblockedOnly?: boolean;
+  /** Trample over planeswalkers (rule 702.19c): the answer has one amount
+   * more, last, for the planeswalker's controller. */
+  readonly overPlaneswalker?: OverPlaneswalker;
 }
 
 /**

@@ -104,9 +104,12 @@ import {
   deathCount,
   groupBlockers,
   lethalCount,
+  mostToPlayer,
   setGroupTotal,
+  setToPlayer,
   spareOne,
   survivorsOf,
+  toPlayerOf,
   totalOf,
   unassigned,
 } from './game/damageAssignment.ts'
@@ -2508,13 +2511,16 @@ function Table({
   // badge on each blocker), so it's worked out up here: the engine's
   // standard split until the player changes it. None when the question is
   // only "as though it weren't blocked?" (the division is the other side's).
-  const damageAnswer = useMemo(
-    () =>
-      assignDamageAction && assignDamageAction.unblockedOnly !== true
-        ? (damagePicks ?? defaultAssignment(assignDamageAction))
-        : null,
-    [assignDamageAction, damagePicks],
-  )
+  // Trample over planeswalkers: what goes on to the planeswalker's
+  // controller is held within what the blockers' amounts allow, so sparing a
+  // blocker takes it back rather than leaving a split the engine refuses.
+  const damageAnswer = useMemo(() => {
+    if (!assignDamageAction || assignDamageAction.unblockedOnly === true) return null
+    const picks = damagePicks ?? defaultAssignment(assignDamageAction)
+    return assignDamageAction.overPlaneswalker === undefined
+      ? picks
+      : setToPlayer(assignDamageAction, picks, toPlayerOf(assignDamageAction, picks))
+  }, [assignDamageAction, damagePicks])
   const damageGroups = useMemo(
     () => (assignDamageAction ? groupBlockers(assignDamageAction, view) : []),
     [assignDamageAction, view],
@@ -7018,8 +7024,15 @@ function Table({
     const valid = damageAssignmentViolations(offer, picks) === null
     const attacked = view.objects[offer.attacker]?.attacking ?? null
     const overTo = attacked === null ? 'the defender' : attackTargetLabel(attacked)
+    // Trample over planeswalkers (rule 702.19c): past lethal on the blockers
+    // and the planeswalker's loyalty, on to its controller.
+    const overPw = offer.overPlaneswalker
+    const toPlayer = toPlayerOf(offer, picks)
+    const mostOn = mostToPlayer(offer, picks)
     const status =
-      offer.blockers.length === 0
+      overPw !== undefined
+        ? `→ ${overTo}: ${free}${free < overPw.loyaltyLeft ? ` of ${overPw.loyaltyLeft} loyalty left` : ''}`
+        : offer.blockers.length === 0
         ? 'no blocker left: no damage'
         : free > 0
         ? offer.trample
@@ -7038,11 +7051,13 @@ function Table({
               and a blocker's among the band it blocks. */}
           {offer.forOpponent === true ? 'Banding: you divide ' : 'Assign '}
           {game.nameOf(offer.attacker)}&rsquo;s {offer.power} damage
-          {offer.trample ? ' (trample)' : ''}
-          <span className="muted">
-            {' '}
-            · click {offer.blocking === true ? 'an attacker' : 'a blocker'} to kill or spare it
-          </span>
+          {overPw !== undefined ? ' (trample over planeswalkers)' : offer.trample ? ' (trample)' : ''}
+          {offer.blockers.length > 0 ? (
+            <span className="muted">
+              {' '}
+              · click {offer.blocking === true ? 'an attacker' : 'a blocker'} to kill or spare it
+            </span>
+          ) : null}
         </span>
         <div className="damage-rows">
           {damageGroups.map((g) => {
@@ -7096,9 +7111,45 @@ function Table({
         {status !== null ? (
           <span className={valid ? '' : 'damage-short'}>{status}</span>
         ) : null}
-        <span className="muted">
-          ☠ {dead}/{offer.blockers.length}
-        </span>
+        {overPw !== undefined ? (
+          <div className="damage-row">
+            <span className="damage-name" title="Trample over planeswalkers: past its blockers and the planeswalker's loyalty">
+              → {playerLabel(overPw.player, game.seats)}{' '}
+              <span className="muted">up to {mostOn}</span>
+            </span>
+            <button
+              type="button"
+              className="damage-step"
+              aria-label="Less damage to the planeswalker's controller"
+              disabled={toPlayer <= 0}
+              onClick={() => setDamagePicks(setToPlayer(offer, picks, toPlayer - 1))}
+            >
+              −
+            </button>
+            <input
+              type="number"
+              min={0}
+              max={mostOn}
+              value={toPlayer}
+              aria-label="Damage to the planeswalker's controller"
+              onChange={(e) => setDamagePicks(setToPlayer(offer, picks, Number(e.target.value) || 0))}
+            />
+            <button
+              type="button"
+              className="damage-step"
+              aria-label="More damage to the planeswalker's controller"
+              disabled={toPlayer >= mostOn}
+              onClick={() => setDamagePicks(setToPlayer(offer, picks, toPlayer + 1))}
+            >
+              +
+            </button>
+          </div>
+        ) : null}
+        {offer.blockers.length > 0 || overPw === undefined ? (
+          <span className="muted">
+            ☠ {dead}/{offer.blockers.length}
+          </span>
+        ) : null}
         <button type="button" disabled={damagePicks === null} onClick={() => setDamagePicks(null)}>
           Reset
         </button>

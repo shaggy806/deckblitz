@@ -375,6 +375,12 @@ export type Keyword =
   | "first-strike"
   | "double-strike"
   | "trample"
+  /** Trample over planeswalkers (rule 702.19c — Thrasta, Tempest's Roar):
+   * trample's assignment (702.19b), and attacking a planeswalker, damage past
+   * lethal to its blockers and its loyalty may go on to its controller
+   * (`combat/damage.ts`'s `OverPlaneswalker`); a planeswalker removed from
+   * combat leaves its damage to the defending player (702.19e). */
+  | "trample-over-planeswalkers"
   | "deathtouch"
   | "lifelink"
   | "menace"

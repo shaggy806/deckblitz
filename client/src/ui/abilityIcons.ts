@@ -41,6 +41,8 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   'first-strike': '', // ms-ability-first-strike
   'double-strike': '', // ms-ability-double-strike
   trample: '', // ms-ability-trample
+  // No icon of its own anywhere in the font; it's a kind of trample.
+  'trample-over-planeswalkers': '', // ms-ability-trample
   deathtouch: '', // ms-ability-deathtouch
   lifelink: '', // ms-ability-lifelink
   menace: '', // ms-ability-menace
@@ -122,4 +124,4 @@ export const LOYALTY_GLYPH = {
 } as const
 
 /** How a keyword reads in words, for the icon's accessible name. */
-export const keywordLabel = (keyword: Keyword): string => keyword.replace('-', ' ')
+export const keywordLabel = (keyword: Keyword): string => keyword.replaceAll('-', ' ')

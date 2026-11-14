@@ -8417,3 +8417,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Deification: choosing a planeswalker type
 - **Do:** Cast Deification and click Jace.
 - **Expect:** The banner reads "Deification — choose a planeswalker type" with a button for every planeswalker type, Ajani to Zariel, all fitting on screen. After Jace, Jace Beleren has hexproof.
+## Trample over planeswalkers (2026-11-14)
+
+### Thrasta, Tempest's Roar: damage past a planeswalker's loyalty goes on to its controller
+- **Do:** Attack Jace Beleren with Thrasta. In the damage panel, press − on the "→ Bob" row once, then + once, and Confirm.
+- **Expect:** The panel reads "→ Jace Beleren: 3" and a row "→ Bob up to 4" holding 4; pressing − makes it "→ Jace Beleren: 4" with 3 for Bob, + puts it back. Jace dies and Bob goes to 36.
+- **Not a bug:** You're asked even though nothing blocked: how much goes on to Bob is your choice.
+
+### Thrasta, Tempest's Roar: in a 4-player game, another attacker's damage counts toward the loyalty
+- **Do:** Attack Carol's Jace Beleren with Thrasta and Grizzly Bears. Confirm the damage panel as it stands.
+- **Expect:** The panel reads "→ Jace Beleren: 5" and "→ Carol up to 2" holding 2 (the Bears' 2 make up the rest of Jace's 7 loyalty). Jace dies and Carol goes to 38.

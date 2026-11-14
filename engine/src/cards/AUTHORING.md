@@ -512,6 +512,15 @@ reads 0 too.
 `lifelink`, `menace`, `indestructible` (SBAs skip it — but 0 toughness still
 kills), `unblockable` (evasion — Invisible Stalker).
 
+**Trample over planeswalkers** (rule 702.19c): `trample-over-planeswalkers` —
+assigns as trample does, and attacking a planeswalker, damage past lethal to
+its blockers and the planeswalker's loyalty (counting what the other attackers
+assign it that step) may go on to the planeswalker's controller: the
+`assign-combat-damage` offer's `overPlaneswalker`, asked even of an unblocked
+attacker, one amount more on the answer. A planeswalker removed from combat
+leaves its damage to the defending player (702.19e). Thrasta, Tempest's Roar
+prints `trample` beside it.
+
 **Casting:** `flash` (cast at instant speed).
 
 **Targeting:** `hexproof` (can't be targeted by opponents).

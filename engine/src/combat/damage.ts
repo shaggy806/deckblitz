@@ -25,7 +25,7 @@
 import type { CardRegistry } from "../cards.js";
 import { assignedCombatDamage, computeCharacteristics, objHasKeyword } from "../characteristics.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import type { GameState } from "../state.js";
+import type { GameState, OverPlaneswalker } from "../state.js";
 import { blockedAttackersOf, damageAssigner, opposedAssignment } from "./banding.js";
 
 /** The blockers of `attackerId` that are still on the battlefield and still
@@ -73,7 +73,7 @@ export function needsDamageAssignmentChoice(
   const power = assignedCombatDamage(state, registry, attackerId);
   if (power <= 0) return false;
   if (live.length >= 2) return true;
-  if (!objHasKeyword(state, registry, attackerId, "trample")) return false;
+  if (!hasTrample(state, registry, attackerId)) return false;
   return power > lethalFor(state, registry, attackerId, live[0]);
 }
 
@@ -91,6 +91,33 @@ export interface DamageAssignmentOffer {
    * still needs lethal on them first (702.19b); they just don't die of it.
    * Absent means none of them. */
   readonly indestructible?: readonly boolean[];
+  /** Trample over planeswalkers (rule 702.19c): the attacker attacks this
+   * planeswalker, and damage past lethal to every blocker and past
+   * `loyaltyLeft` on it may go on to `player`, its controller. With it the
+   * answer has one amount more than there are blockers, last: what goes to
+   * `player`; `power` less all of them goes to the planeswalker. */
+  readonly overPlaneswalker?: OverPlaneswalker;
+}
+
+export type { OverPlaneswalker };
+
+/** What the planeswalker must still be assigned, past what its blockers'
+ * part gives it (when it's blocking this attacker itself —
+ * `OverPlaneswalker.blockerIndex`), before any goes to its controller. */
+export function loyaltyStillOwed(over: OverPlaneswalker, perBlocker: readonly number[]): number {
+  const asBlocker = over.blockerIndex === undefined ? 0 : (perBlocker[over.blockerIndex] ?? 0);
+  return Math.max(0, over.loyaltyLeft - asBlocker);
+}
+
+/** Of an answer to an offer with `overPlaneswalker`: the per-blocker part and
+ * what goes to the planeswalker's controller; without it, all of it is the
+ * per-blocker part. */
+export function splitOverPlaneswalker(
+  offer: Pick<DamageAssignmentOffer, "overPlaneswalker" | "lethal">,
+  assignment: readonly number[],
+): { readonly blockers: readonly number[]; readonly toPlayer: number } {
+  if (offer.overPlaneswalker === undefined) return { blockers: assignment, toPlayer: 0 };
+  return { blockers: assignment.slice(0, offer.lethal.length), toPlayer: assignment[offer.lethal.length] ?? 0 };
 }
 
 /**
@@ -107,6 +134,15 @@ export interface DamageAssignmentOffer {
  * answer when somebody is, and the client starts its damage bar from it.
  */
 export function standardAssignment(offer: DamageAssignmentOffer): number[] {
+  // Trample over planeswalkers: the blockers as with trample, then the
+  // planeswalker its loyalty, then the rest to its controller (702.19c).
+  const over = offer.overPlaneswalker;
+  if (over !== undefined) {
+    const amounts = standardAssignment({ ...offer, trample: true, overPlaneswalker: undefined });
+    const allLethal = amounts.every((n, i) => n >= offer.lethal[i]);
+    const left = offer.power - amounts.reduce((sum, n) => sum + n, 0);
+    return [...amounts, allLethal ? Math.max(0, left - loyaltyStillOwed(over, amounts)) : 0];
+  }
   const { power, lethal, trample } = offer;
   const survives = (index: number): number => (offer.indestructible?.[index] ? 1 : 0);
   const amounts = lethal.map(() => 0);
@@ -133,7 +169,10 @@ export function standardAssignment(offer: DamageAssignmentOffer): number[] {
  * theirs, killing as little as it can (`opposedAssignment`). Every
  * controller's default and the decision's random answer start from it. */
 export function defaultAssignment(offer: DamageAssignmentOffer & { readonly forOpponent?: boolean }): number[] {
-  return offer.forOpponent === true ? opposedAssignment(offer) : standardAssignment(offer);
+  if (offer.forOpponent !== true) return standardAssignment(offer);
+  // The other side tramples nothing on to its own player.
+  const theirs = opposedAssignment(offer);
+  return offer.overPlaneswalker === undefined ? theirs : [...theirs, 0];
 }
 
 /** {@link standardAssignment} with the offer read off the board — what the
@@ -172,7 +211,14 @@ export interface DamageQuestion extends DamageAssignmentOffer {
   readonly forOpponent: boolean;
 }
 
-export function damageQuestionFor(state: GameState, registry: CardRegistry, dealerId: ObjectId): DamageQuestion {
+export function damageQuestionFor(
+  state: GameState,
+  registry: CardRegistry,
+  dealerId: ObjectId,
+  /** Trample over planeswalkers' further recipient, which only `Game` can
+   * read (the other assignments this step). */
+  overPlaneswalker?: OverPlaneswalker,
+): DamageQuestion {
   const recipients = damageRecipientsOf(state, dealerId);
   const blocking = state.objects[dealerId].attacking === null;
   const player = damageAssigner(state, registry, dealerId, recipients);
@@ -181,16 +227,28 @@ export function damageQuestionFor(state: GameState, registry: CardRegistry, deal
     recipients,
     power: assignedCombatDamage(state, registry, dealerId),
     lethal: recipients.map((r) => lethalFor(state, registry, dealerId, r)),
-    // Trample is an attacker's only (rule 702.19a).
-    trample: !blocking && objHasKeyword(state, registry, dealerId, "trample"),
+    // Trample is an attacker's only (rule 702.19a); trample over
+    // planeswalkers assigns as trample does (702.19c).
+    trample: !blocking && hasTrample(state, registry, dealerId),
     indestructible: recipients.map((r) => objHasKeyword(state, registry, r, "indestructible")),
     blocking,
     forOpponent: player !== state.objects[dealerId].controller,
+    ...(overPlaneswalker !== undefined && !blocking ? { overPlaneswalker } : {}),
   };
 }
 
+/** Trample, or its variant trample over planeswalkers, which assigns damage
+ * the same way (rule 702.19c). */
+export function hasTrample(state: GameState, registry: CardRegistry, id: ObjectId): boolean {
+  return (
+    objHasKeyword(state, registry, id, "trample") || objHasKeyword(state, registry, id, "trample-over-planeswalkers")
+  );
+}
+
 /** The division made without asking: the standard one, or — when the other
- * side divides it (banding) — theirs ({@link opposedAssignment}). */
+ * side divides it (banding) — theirs ({@link opposedAssignment}). One amount
+ * per blocker: what isn't asked about tramples nothing on to a planeswalker's
+ * controller. */
 export function autoAssignFor(state: GameState, registry: CardRegistry, dealerId: ObjectId): number[] {
   const question = damageQuestionFor(state, registry, dealerId);
   return question.forOpponent ? opposedAssignment(question) : standardAssignment(question);
@@ -222,16 +280,48 @@ export function damageAssignmentViolations(
   offer: DamageAssignmentOffer & { readonly blockers: readonly ObjectId[] },
   assignment: readonly number[],
 ): string | null {
-  const { blockers, power, lethal, trample } = offer;
-  if (assignment.length !== blockers.length) {
-    return `expected an amount for each of ${blockers.length} blocker(s), got ${assignment.length}`;
+  const { blockers, power, lethal } = offer;
+  const over = offer.overPlaneswalker;
+  const expected = blockers.length + (over !== undefined ? 1 : 0);
+  if (assignment.length !== expected) {
+    return over !== undefined
+      ? `expected an amount for each of ${blockers.length} blocker(s) and one for the planeswalker's controller, got ${assignment.length}`
+      : `expected an amount for each of ${blockers.length} blocker(s), got ${assignment.length}`;
   }
   if (assignment.some((n) => !Number.isInteger(n) || n < 0)) {
     return "combat damage assignments must be non-negative whole numbers";
   }
   const total = assignment.reduce((sum, n) => sum + n, 0);
+  if (power - total < 0) return "assigned more than the attacker's power";
+  // Trample over planeswalkers (rule 702.19c): to the planeswalker's
+  // controller only past lethal on every blocker and its loyalty on it.
+  if (over !== undefined) {
+    const { blockers: perBlocker, toPlayer } = splitOverPlaneswalker(offer, assignment);
+    if (toPlayer > 0) {
+      if (perBlocker.some((n, j) => n < lethal[j])) {
+        return "every blocker must be assigned lethal damage before trampling over";
+      }
+      if (power - total < loyaltyStillOwed(over, perBlocker)) {
+        return "the planeswalker must be assigned damage equal to its loyalty before any goes to its controller";
+      }
+    }
+    // The rest as trample divides it, the planeswalker standing for the
+    // player or planeswalker it's attacking.
+    return blockersOnlyViolation({ ...offer, trample: true }, perBlocker, power - toPlayer);
+  }
+  return blockersOnlyViolation(offer, assignment, power);
+}
+
+/** {@link damageAssignmentViolations} over the blockers alone, with `power`
+ * what's left to divide among them and what they're attacking. */
+function blockersOnlyViolation(
+  offer: DamageAssignmentOffer & { readonly blockers: readonly ObjectId[] },
+  assignment: readonly number[],
+  power: number,
+): string | null {
+  const { blockers, lethal, trample } = offer;
+  const total = assignment.reduce((sum, n) => sum + n, 0);
   const over = power - total;
-  if (over < 0) return "assigned more than the attacker's power";
   // With no blocker left, a blocked creature without trample assigns no
   // combat damage at all (510.1c) — so nothing is the answer.
   if (over > 0 && !trample && blockers.length > 0) {

@@ -39,7 +39,7 @@ export { CardRegistry } from "./cards/card-registry.js";
 export { COMMANDER_BANNED, PINNED_ART, TOKEN_NAMES } from "./cards/generated-index.js";
 export { attackCompanyViolations, attackingViolations } from "./combat/attacking.js";
 export { blockCompanyViolations, blockTaxTotal, blockingViolations } from "./combat/blocking.js";
-export { damageAssignmentViolations, defaultAssignment, standardAssignment } from "./combat/damage.js";
+export { damageAssignmentViolations, defaultAssignment, loyaltyStillOwed, standardAssignment } from "./combat/damage.js";
 export { fitsSoFar, fitsTogether, slotsLeft } from "./zone-choice-together.js";
 export { stackCopyKey } from "./stack-copies.js";
 export type { KeywordCostsPaid } from "./keyword-values.js";

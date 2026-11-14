@@ -4963,6 +4963,10 @@ export type AwaitingDecision =
       /** With `mayUnblocked`: that's the whole question — the division, if
        * declined, is the other side's (banding) and asked of them next. */
       readonly unblockedOnly?: true;
+      /** Trample over planeswalkers (rule 702.19c): the attacker — blocked
+       * or not — attacks this planeswalker, and the answer has one amount
+       * more, last, for its controller (`combat/damage.ts`). */
+      readonly overPlaneswalker?: OverPlaneswalker;
     };
 
 /** See `GameState.extraTurnRiders`. */
@@ -5697,6 +5701,25 @@ export interface ActiveReplacement {
  * is true only during `"first"`, and drives `endStep` to start the regular
  * sub-pass (with a priority window between — 510.4) rather than leaving combat.
  */
+/** What an attacker with trample over planeswalkers attacking a planeswalker
+ * may trample on to (rule 702.19c) — see `combat/damage.ts`'s
+ * `DamageAssignmentOffer.overPlaneswalker`. */
+export interface OverPlaneswalker {
+  readonly planeswalker: ObjectId;
+  /** The planeswalker's controller. */
+  readonly player: PlayerId;
+  /** Its loyalty less the combat damage the other creatures dealing damage
+   * this step assign it ("take into account damage from other creatures
+   * that's being assigned during the same combat damage step") — what this
+   * attacker must assign it before any goes to `player`. Never below 0. */
+  readonly loyaltyLeft: number;
+  /** The planeswalker is a creature blocking this very attacker, at this
+   * index of its blockers: what's assigned to it as a blocker counts toward
+   * its loyalty too, so it needs lethal or its loyalty, whichever is greater
+   * (Thrasta, Tempest's Roar's ruling). */
+  readonly blockerIndex?: number;
+}
+
 export interface CombatDamageState {
   readonly pass: "single" | "first" | "regular";
   readonly regularOwed: boolean;
@@ -5706,7 +5729,9 @@ export interface CombatDamageState {
   readonly pendingAssignments: readonly ObjectId[];
   /** Damage-assignment choices already made this sub-pass: attacker id → the
    * amount dealt to each of its blockers, in `blockedBy` order (leftover, if
-   * trample, goes to the defender). */
+   * trample, goes to the defender) — and, from an attacker with trample over
+   * planeswalkers attacking a planeswalker, one amount more, last: what goes
+   * to the planeswalker's controller (rule 702.19c). */
   readonly assigned: Readonly<Record<string, readonly number[]>>;
   /** Blocked attackers whose controller chose this sub-pass to have them
    * assign their combat damage as though they weren't blocked — all of it
