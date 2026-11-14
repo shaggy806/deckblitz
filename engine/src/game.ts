@@ -21833,6 +21833,7 @@ export class Game {
       ...(miracle !== undefined ? { miracle } : {}),
       ...(options.suspendCost === true ? { suspendCost: true as const } : {}),
       exileAfter: options.exileAfter,
+      ...(options.bottomAfter === true ? { bottomAfter: true as const } : {}),
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
       ...(options.gainsHaste === true ? { gainsHaste: true as const } : {}),
@@ -22622,6 +22623,12 @@ export class Game {
         effectiveTypes(this.state, this.registry, object).some((t) => t === "instant" || t === "sorcery"))
     ) {
       object.exileIfWouldGoToGraveyard = true;
+    }
+    // Quintorius, Loremaster's "if that spell would be put into a graveyard,
+    // put it on the bottom of its owner's library instead", from the
+    // permission it was cast under or the cast-now that offered it.
+    if (permissionTerms?.bottomAfter === true || (via === "effect" && this.castNowProbe?.bottomAfter === true)) {
+      object.bottomIfWouldGoToGraveyard = true;
     }
     object.stormCount = stormCount;
     if (sortedModes !== undefined) object.chosenModes = sortedModes;
@@ -31024,6 +31031,15 @@ export class Game {
     // the card with a "you may cast the creature later" permission, instead
     // of going to the graveyard.
     const adventure = this.frontFaceDef(id).adventure && (object.face ?? 0) === 1;
+    // The other replacement, in the words of a rule 616.1 choice below: a
+    // `bottomAfter` cast's library bottom comes ahead of an exile
+    // (`moveObjectUncached`), unless flashback's or aftermath's exile catches
+    // the card on its way to the library too.
+    const otherFirst = adventure
+      ? "Exile it on an adventure instead"
+      : object.bottomIfWouldGoToGraveyard === true && object.castVia !== "flashback" && !this.aftermathExiles(object)
+        ? "Apply the other replacement first: put it on the bottom of its owner's library"
+        : "Apply the other replacement first: exile it";
     // Soulfire Grand Master's "put that card into your hand instead of into
     // your graveyard as it resolves" (rule 614.1a): as Feather's below, only
     // for a card its owner would put into their own graveyard, and any other
@@ -31046,6 +31062,7 @@ export class Game {
         this.rebounds(object) ||
         this.exilesItselfInstead(object) ||
         object.exileIfWouldGoToGraveyard === true ||
+        object.bottomIfWouldGoToGraveyard === true ||
         this.graveyardIsReplacedWithExile(id, false);
       if (!competing) {
         object.intoHandAsItResolves = undefined;
@@ -31061,7 +31078,7 @@ export class Game {
           effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: true, intoHand: true } },
         },
         {
-          text: adventure ? "Exile it on an adventure instead" : "Apply the other replacement first: exile it",
+          text: otherFirst,
           effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: false, intoHand: true } },
         },
       ]);
@@ -31089,6 +31106,7 @@ export class Game {
         this.rebounds(object) ||
         this.exilesItselfInstead(object) ||
         object.exileIfWouldGoToGraveyard === true ||
+        object.bottomIfWouldGoToGraveyard === true ||
         this.graveyardIsReplacedWithExile(id, false);
       if (!competing && mark.mayDecline !== undefined) {
         // "You may exile that spell instead" (Forger's Foundry): an optional
@@ -31121,7 +31139,7 @@ export class Game {
           effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: true } },
         },
         {
-          text: adventure ? "Exile it on an adventure instead" : "Apply the other replacement first: exile it",
+          text: otherFirst,
           effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: false } },
         },
       ]);
@@ -64911,6 +64929,20 @@ controlledBy,
       return moved;
     }
     if (owed === "hand") return this.moveObjectUncached(id, "hand", enter);
+    // "If that spell would be put into a graveyard, put it on the bottom of
+    // its owner's library instead" (Quintorius, Loremaster — `PlayTerms
+    // .bottomAfter`): only while it's a spell, from the stack — resolved,
+    // countered or with no legal targets left. Ahead of an exile that would
+    // replace the same move (Rest in Peace, Leyline of the Void, Dauthi
+    // Voidwalker's void counter), as Blightsteel's shuffle above is: of the
+    // two, its controller would pick the library (rule 616.1), where the card
+    // is still theirs to find again. Flashback's "exile it instead of putting
+    // it anywhere else" (702.34a) still catches it on its way to the library.
+    if (to === "graveyard" && object.zone === "stack" && object.bottomIfWouldGoToGraveyard === true) {
+      const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: "bottom" });
+      if (moved) this.placeInLibrary(id, "bottom");
+      return moved;
+    }
 
     // Rest in Peace (rule 614): whatever would be put into a graveyard is
     // exiled instead. Whether that includes tokens is the card's wording, so
@@ -65639,6 +65671,7 @@ controlledBy,
     object.escapeExiled = undefined;
     object.playUses = undefined;
     object.exileIfWouldGoToGraveyard = undefined;
+    object.bottomIfWouldGoToGraveyard = undefined;
     object.exileAsItResolves = undefined;
     object.intoHandAsItResolves = undefined;
     object.returnToHandAsItResolves = undefined;

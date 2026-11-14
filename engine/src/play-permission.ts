@@ -104,6 +104,11 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  * Afterwards:
  * - `exileAfter`: "if it would be put into a graveyard, exile it instead";
  *   `"instants-and-sorceries"` only for those (Scholar of the Lost Trove).
+ * - `bottomAfter`: "if that spell would be put into a graveyard, put it on the
+ *   bottom of its owner's library instead" (Quintorius, Loremaster; Kylox's
+ *   Voltstrider): only while it's a spell (a permanent it became isn't), and
+ *   ahead of an exile that would replace the same move (rule 616.1, its
+ *   controller's pick — see `Game.moveObjectUncached`).
  * - `gainsHaste`: "if you cast a creature spell this way, it gains haste".
  * - `landsEnterTapped`: "each land played this way enters tapped".
  * - `entersWith`: a permanent spell or land played this way enters with these
@@ -168,6 +173,7 @@ export interface PlayTerms {
   readonly flash?: true;
 
   readonly exileAfter?: boolean | "instants-and-sorceries";
+  readonly bottomAfter?: true;
   readonly gainsHaste?: boolean;
   readonly landsEnterTapped?: true;
   readonly entersWith?: { readonly kind: string; readonly amount: number };
@@ -306,6 +312,7 @@ export type CastNowTerms = Pick<
   | "spendAs"
   | "gainsHaste"
   | "exileAfter"
+  | "bottomAfter"
 >;
 
 /**
@@ -366,6 +373,7 @@ const PLAY_GRANT_KEYS = [
   "sourceDid",
   "flash",
   "exileAfter",
+  "bottomAfter",
   "gainsHaste",
   "landsEnterTapped",
   "entersWith",

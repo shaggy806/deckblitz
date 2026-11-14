@@ -82,6 +82,7 @@ const TERMS = [
   "sourceDid",
   "flash",
   "exileAfter",
+  "bottomAfter",
   "gainsHaste",
   "landsEnterTapped",
   "entersWith",

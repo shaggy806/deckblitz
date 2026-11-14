@@ -317,6 +317,11 @@ export interface GameObject {
    * .exileAfterwards`). Consulted by `moveObject` for the move off the
    * stack, and cleared by any move after that. */
   exileIfWouldGoToGraveyard?: boolean;
+  /** This spell was cast under a permission that puts it on the bottom of
+   * its owner's library instead of letting it reach a graveyard (`PlayTerms
+   * .bottomAfter` — Quintorius, Loremaster). As `exileIfWouldGoToGraveyard`:
+   * only while it's on the stack, cleared by any move after that. */
+  bottomIfWouldGoToGraveyard?: true;
   /** "Return ~ to its owner's hand" in this spell's own text, as it
    * resolves (Release the Ants): it goes to its owner's hand instead of
    * their graveyard as the final part of its resolution (rule 608.2n), as

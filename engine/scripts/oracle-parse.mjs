@@ -13166,6 +13166,30 @@ function exiledCardPickAt(sentences, i, ctx) {
   if (/^choose a card exiled with ~\.$/i.test(first) && /^you may play that card this turn\.$/i.test(next)) {
     return { effect: { kind: "choose-exiled-to-play", linked: true }, used: 2 };
   }
+  // "Choose target card exiled with ~. You may cast that card this turn without
+  // paying its mana cost. If that spell would be put into a graveyard, put it on
+  // the bottom of its owner's library instead." (Quintorius, Loremaster): a
+  // `grant-play` over the linked card, `bottomAfter` the replacement.
+  const chosen = /^choose (target (?:[a-z]+ )?card exiled with ~)\.$/i.exec(first);
+  const castIt = /^you may cast that card this turn( without paying its mana cost)?\.$/i.exec(next);
+  if (chosen !== null && castIt !== null) {
+    const slot = exileTargetOf(chosen[1]);
+    if (slot === undefined) return null;
+    const after = sentences[i + 2] ?? "";
+    const bottom = /^if that spell would be put into a graveyard, put it on the bottom of its owner's library instead\.$/i.test(after);
+    const exiled = /^if that spell would be put into (?:a|your) graveyard, exile it instead\.$/i.test(after);
+    return {
+      effect: {
+        kind: "grant-play",
+        cards: ctx.target(slot),
+        duration: "end-of-turn",
+        ...(castIt[1] !== undefined ? { free: true } : {}),
+        ...(bottom ? { bottomAfter: true } : {}),
+        ...(exiled ? { exileAfter: true } : {}),
+      },
+      used: bottom || exiled ? 3 : 2,
+    };
+  }
   const roll = /^roll a d(\d+)\.$/i.exec(first);
   if (roll !== null && /^return up to x cards from among cards exiled with ~ to their owners' hands, where x is the result\.$/i.test(next)) {
     return {
@@ -14414,6 +14438,12 @@ function castNowTermsAt(sentences, i, ctx) {
     let out = spec;
     if (/^if that spell would be put into (?:a|your) graveyard, exile it instead\.$/i.test(sentences[i + used] ?? "")) {
       out = { ...out, exileAfter: true };
+      used += 1;
+    } else if (
+      /^if that spell would be put into a graveyard, put it on the bottom of its owner's library instead\.$/i.test(sentences[i + used] ?? "")
+    ) {
+      // Kylox's Voltstrider.
+      out = { ...out, bottomAfter: true };
       used += 1;
     }
     if (

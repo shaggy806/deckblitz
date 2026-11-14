@@ -2344,6 +2344,9 @@ export interface CastNowOptions {
    * `cast-now` effect's `suspendCost`. */
   readonly suspendCost?: boolean;
   readonly exileAfter: boolean | "instants-and-sorceries";
+  /** "If that spell would be put into a graveyard, put it on the bottom of
+   * its owner's library instead" — see {@link PlayTerms}' `bottomAfter`. */
+  readonly bottomAfter?: true;
   readonly spell?: CardFilter;
   /** The library cards the player looks at to choose among, shown to them
    * castable or not. */
@@ -15654,6 +15657,7 @@ function offerCastNow(
       ...(spec.miracle === true ? { miracle: true } : {}),
       ...(spec.suspendCost === true ? { suspendCost: true } : {}),
       exileAfter: spec.exileAfter ?? false,
+      ...(spec.bottomAfter === true ? { bottomAfter: true } : {}),
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
       ...(spec.gainsHaste === true ? { gainsHaste: true as const } : {}),

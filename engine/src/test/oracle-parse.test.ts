@@ -19694,3 +19694,30 @@ describe("a card played from exile this turn (Visions of Phyrexia)", () => {
     });
   });
 });
+
+describe("'if that spell would be put into a graveyard, put it on the bottom of its owner's library instead' (Quintorius, Loremaster)", () => {
+  it("a free cast this turn of a card exiled with it, `bottomAfter`", () => {
+    const quintorius = parseFace({
+      name: "Test Quintorius",
+      type_line: "Legendary Creature — Elephant Cleric",
+      mana_cost: "{3}{R}{W}",
+      oracle_text:
+        "{1}{R}{W}, {T}, Sacrifice a Spirit: Choose target card exiled with Test Quintorius. You may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.",
+    });
+    expect(quintorius.activated[0]).toMatchObject({
+      targets: [{ kind: "card-in-exile", linked: true }],
+      effect: { kind: "grant-play", cards: 0, duration: "end-of-turn", free: true, bottomAfter: true },
+    });
+  });
+
+  it("a cast-now's rider, as Kylox's Voltstrider's", () => {
+    const ogre = parseFace({
+      name: "Test Battlecaster",
+      type_line: "Creature — Ogre Shaman",
+      mana_cost: "{4}{R}",
+      oracle_text:
+        "When this creature enters, you may cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.",
+    });
+    expect(ogre.triggered[0]?.effect).toMatchObject({ kind: "cast-now", alsoPaying: "{R}{R}", bottomAfter: true });
+  });
+});
