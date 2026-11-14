@@ -6,7 +6,7 @@
  * instance and is the only thing that writes to it; everything else reads.
  */
 
-import type { KeywordAbilityName } from "./characteristics-patch.js";
+import type { CopyExceptions, KeywordAbilityName } from "./characteristics-patch.js";
 import type { Action, CastSpellOffer, CastVia, PlayLandOffer } from "./actions.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
@@ -3140,6 +3140,11 @@ export interface CasualtyAsk {
   /** The N of each instance still to ask about, in order; the first is the
    * one a raised decision is asking about. */
   readonly amounts: readonly number[];
+  /** Beside `amounts`, each instance's copy exceptions (`CasualtySpec`'s
+   * `copyExcept` — Ob Nixilis, the Adversary's "the copy isn't legendary and
+   * has starting loyalty X"), `null` for a plain copy; left out when none
+   * has any. */
+  readonly excepts?: readonly (CopyExceptions | null)[];
   readonly priorityTo: PlayerId;
 }
 

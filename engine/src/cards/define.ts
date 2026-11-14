@@ -249,6 +249,27 @@ export interface SpellCastClause {
   readonly firstEachTurn?: boolean;
 }
 
+/**
+ * Casualty with more than a number — see `CardDefinition.casualty`.
+ *
+ * `n: "x"` is "Casualty X" (Ob Nixilis, the Adversary — rule 702.153a): X is
+ * announced as the spell is cast (601.2b; its ruling: "you choose whether to
+ * pay its casualty cost and what the value of X will be"), offered as the
+ * cast's `xCost` with `casualty` up to the greatest power among the creatures
+ * the caster could sacrifice, and the creature, of power X or greater, asked
+ * as any casualty's is. Not an {X} in the mana cost: the mana value doesn't
+ * count it. A copy copies it (rule 707.10).
+ *
+ * `copyExcept` is "The copy isn't legendary" (rule 707.9b): the copy the
+ * casualty trigger makes, made with these exceptions; `copyLoyaltyX` is
+ * "…and has starting loyalty X" — that exception's `loyalty` the X announced.
+ */
+export interface CasualtySpec {
+  readonly n: number | "x";
+  readonly copyExcept?: CopyExceptions;
+  readonly copyLoyaltyX?: true;
+}
+
 /** A kicker's non-mana cost — see `CardDefinition.kicker.also`. */
 export interface KickerAlsoCost {
   readonly text: string;
@@ -5033,8 +5054,9 @@ export interface CardDefinition {
    * cost is paid with the rest of the costs, rule 601.2h); paying it queues
    * the copy, which resolves first. A static grants more with
    * `grantsToSpells.casualty` (Silverquill, the Disputant). `null` for none.
+   * A {@link CasualtySpec} for casualty X, or a copy made with exceptions.
    */
-  readonly casualty: number | null;
+  readonly casualty: number | CasualtySpec | null;
   /**
    * Conspire (rule 702.78a — Gleeful Sabotage): "As an additional cost to
    * cast this spell, you may tap two untapped creatures you control that
@@ -6064,6 +6086,12 @@ const PRINTED_ABILITY_TESTS: readonly ((def: CardDefinition) => boolean)[] = Obj
   PRINTED_ABILITY,
 ).filter((test): test is (def: CardDefinition) => boolean => test !== false);
 
+/** Whether the spell has "Casualty X", its X announced as it's cast — see
+ * {@link CasualtySpec}. */
+export function casualtyReadsX(def: CardDefinition): boolean {
+  return typeof def.casualty === "object" && def.casualty !== null && def.casualty.n === "x";
+}
+
 /** Whether a card has any ability of its own, as printed — see
  * {@link PRINTED_ABILITY}. What it has been granted, or lost, is
  * `characteristics.ts`'s `hasAnyAbility`. */
@@ -6272,7 +6300,7 @@ interface CardDraft {
   /** See {@link CardDefinition.targetCostIncrease}. */
   targetCostIncrease?: { readonly filter: CardFilter; readonly increaseGeneric: number };
   /** See {@link CardDefinition.casualty}. */
-  casualty?: number;
+  casualty?: number | CasualtySpec;
   /** See {@link CardDefinition.conspire}. */
   conspire?: boolean;
   effect?: EffectSpec;

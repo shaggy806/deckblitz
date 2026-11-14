@@ -97,6 +97,7 @@ import { embalmAbility, encoreAbility, ninjutsu, scavenge, unearth } from "./car
 import {
   becameAuraDefinition,
   bestowedDefinition,
+  casualtyReadsX,
   enchantsGraveyardCard,
   licidDefinition,
   readsGraveyardOrder,
@@ -6161,6 +6162,11 @@ export class Game {
                     chosenNumber: true as const,
                   },
                 }
+            : casualtyReadsX(def)
+              ? // "Casualty X" (Ob Nixilis, the Adversary): up to the greatest
+                // power among the creatures there are to sacrifice — past it,
+                // nothing could pay (rule 702.153a).
+                { xCost: { maxX: this.casualtyXCeiling(player), casualty: true as const } }
             : sacrificeX !== undefined
               ? {
                   xCost:
@@ -21822,8 +21828,9 @@ export class Game {
       parseManaCost(costString).x > 0 ||
       def.additionalCost?.payLifeX === true ||
       def.additionalCost?.chooseNumber !== undefined ||
+      casualtyReadsX(def) ||
       def.additionalCost?.sacrificeCount === "x" ||
-      (via === "flashback"&& this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
+      (via === "flashback"&&this.flashbackOf(cardId, graveyardGrant)?.sacrifice?.count === "x") ||
       (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.discard === "x") ||
       (via === "flashback" && this.flashbackOf(cardId, graveyardGrant)?.exileFromGraveyard?.count === "x") ||
       def.additionalCost?.discard === "x" ||
@@ -22670,8 +22677,18 @@ export class Game {
     const spell = this.state.objects[spellId];
     if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card") return;
     const amounts: number[] = [];
+    const excepts: (CopyExceptions | null)[] = [];
     const printed = this.registry.get(rulesTextName(spell)).casualty;
-    if (printed !== null) amounts.push(printed);
+    if (typeof printed === "number") amounts.push(printed);
+    else if (printed !== null) {
+      // "Casualty X" (Ob Nixilis, the Adversary): X as announced (rule
+      // 601.2b), and the copy's exceptions — "starting loyalty X" that X.
+      const x = Math.max(0, Math.floor(spell.xValue ?? 0));
+      amounts.push(printed.n === "x" ? x : printed.n);
+      const except =
+        printed.copyLoyaltyX === true ? { ...(printed.copyExcept ?? {}), loyalty: x } : (printed.copyExcept ?? null);
+      excepts.push(except);
+    }
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
@@ -22685,7 +22702,14 @@ export class Game {
       if (n !== undefined && spellGrantReaches(this.state, this.registry, source, ability, spell)) amounts.push(n);
     }
     if (amounts.length === 0) return;
-    (this.state.pendingCasualty ??= []).push({ spell: spellId, player, amounts, priorityTo });
+    while (excepts.length > 0 && excepts.length < amounts.length) excepts.push(null);
+    (this.state.pendingCasualty ??= []).push({
+      spell: spellId,
+      player,
+      amounts,
+      ...(excepts.some((e) => e !== null) ? { excepts } : {}),
+      priorityTo,
+    });
   }
 
   /** The opponents `player` could promise a gift to (rule 702.174a), still
@@ -22779,6 +22803,16 @@ export class Game {
     }).filter((id) => this.canBeSacrificed(id) && !this.sacrificeCostProhibited(player, id));
   }
 
+  /** The most "Casualty X" may be announced as (rule 601.2b): the greatest
+   * power among the creatures `player` could sacrifice, 0 with none. */
+  private casualtyXCeiling(player: PlayerId): number {
+    let most = 0;
+    for (const id of this.casualtyCandidates(player, 0)) {
+      most = Math.max(most, computeCharacteristics(this.state, this.registry, id).power ?? 0);
+    }
+    return most;
+  }
+
   /** Ask the next casualty cost owed (see `queueCasualty`) as a
    * `choose-permanents` of up to one creature. An instance its caster has
    * nothing to pay with is skipped, as is a spell that has left the stack. */
@@ -22803,7 +22837,11 @@ export class Game {
         then: { kind: "sequence", effects: [] },
         source: ask.spell,
         x: 0,
-        casualty: { ...ask, amounts: ask.amounts.slice(i) },
+        casualty: {
+          ...ask,
+          amounts: ask.amounts.slice(i),
+          ...(ask.excepts !== undefined ? { excepts: ask.excepts.slice(i) } : {}),
+        },
       };
       return;
     }
@@ -22818,6 +22856,7 @@ export class Game {
   private applyCasualty(player: PlayerId, chosen: readonly ObjectId[], ask: CasualtyAsk): void {
     this.state.awaiting = null;
     const [amount, ...rest] = ask.amounts;
+    const [except, ...restExcepts] = ask.excepts ?? [];
     const spell = this.state.objects[ask.spell];
     const victim = chosen[0];
     if (
@@ -22833,9 +22872,23 @@ export class Game {
       this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
       this.dropCastTriggersOf(victim, stackSize, ask.spell);
       const text = `Casualty ${amount} — copy ${nameOf(spell)}. You may choose new targets for the copy.`;
-      this.queuePaidCostCopy(spell, player, text, `casualty-${this.state.nextObjectSeq}-${rest.length}`);
+      this.queuePaidCostCopy(
+        spell,
+        player,
+        text,
+        `casualty-${this.state.nextObjectSeq}-${rest.length}`,
+        1,
+        true,
+        except ?? undefined,
+      );
     }
-    if (rest.length > 0) (this.state.pendingCasualty ??= []).unshift({ ...ask, amounts: rest });
+    if (rest.length > 0) {
+      (this.state.pendingCasualty ??= []).unshift({
+        ...ask,
+        amounts: rest,
+        ...(ask.excepts !== undefined ? { excepts: restExcepts } : {}),
+      });
+    }
     this.prepareForPriority(ask.priorityTo);
   }
 
@@ -22845,7 +22898,15 @@ export class Game {
    * is paid. It's of no card's ability list, so it carries its own record,
    * as a mana-spend rider does. `newTargets: false` for a text that doesn't
    * let the copies' targets change (rule 707.10c — Plumb the Forbidden). */
-  private queuePaidCostCopy(spell: GameObject, player: PlayerId, text: string, id: string, count = 1, newTargets = true): void {
+  private queuePaidCostCopy(
+    spell: GameObject,
+    player: PlayerId,
+    text: string,
+    id: string,
+    count = 1,
+    newTargets = true,
+    except?: CopyExceptions,
+  ): void {
     this.state.pendingTriggers.push({
       sourceObjectId: spell.id,
       cardName: printedCardName(spell),
@@ -22869,6 +22930,7 @@ export class Game {
           target: "trigger-spell",
           ...(newTargets ? { newTargets: true } : {}),
           ...(count !== 1 ? { count } : {}),
+          ...(except !== undefined ? { except } : {}),
         },
         text,
       },

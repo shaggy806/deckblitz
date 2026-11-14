@@ -6390,6 +6390,8 @@ function Table({
             ? 'how many to sacrifice'
             : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.removesCounters === true
               ? 'how many counters to remove'
+              : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.casualty === true
+                ? 'choose X for casualty'
               : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.chosenNumber === true
               ? 'choose a number'
               : 'choose X'}
