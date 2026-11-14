@@ -25,12 +25,16 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
 describe("counter target ability from a source", () => {
-  it("reads a card type, and leaves a negative one to a person (Emerald Dragon)", () => {
+  it("reads a card type, and a negative one as the source's filter (Emerald Dragon)", () => {
     const line = (text: string) => parseFace({ name: "Test Card", type_line: "Instant", oracle_text: text });
     expect(line("Counter target activated ability from an artifact source.").targets).toEqual([
       { kind: "ability", abilityKind: "activated", sourceTypes: ["artifact"] },
     ]);
-    expect(line("Counter target activated or triggered ability from a noncreature source.").complete).toBe(false);
+    const wave = line("Counter target activated or triggered ability from a noncreature source.");
+    expect(wave.targets).toEqual([{ kind: "ability", sourceFilter: { notTypes: ["creature"] } }]);
+    expect(wave.complete).toBe(true);
+    // A word that isn't a card type after "non" is still left to a person.
+    expect(line("Counter target activated or triggered ability from a nonblue source.").complete).toBe(false);
   });
 });
 

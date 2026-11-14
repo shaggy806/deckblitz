@@ -14328,8 +14328,10 @@ function counterAbilityAt(sentences, i, ctx) {
   const noun = m[1].toLowerCase();
   const sourceTypes = [m[3], m[4]].filter((t) => t !== undefined).map((t) => t.toLowerCase());
   if (noun.startsWith("spell") && (m[2] !== undefined || sourceTypes.length > 0)) return null;
-  // `sourceTypes` lists card types: "from a noncreature source" (Emerald Dragon) isn't one.
-  if (sourceTypes.some((t) => t.startsWith("non"))) return null;
+  // "From a noncreature source" (Emerald Dragon's Dissonant Wave): a
+  // `sourceFilter` of `notTypes`, alone — `sourceTypes` lists card types.
+  const nonTypes = sourceTypes.filter((t) => t.startsWith("non")).map((t) => t.slice(3));
+  if (nonTypes.length > 0 && (nonTypes.length !== sourceTypes.length || nonTypes.some((t) => !CARD_TYPES.includes(t)))) return null;
   const spec = noun.startsWith("spell")
     ? { kind: "stack", spells: "any", abilities: true }
     : noun === "activated or triggered ability" && m[2] === undefined && sourceTypes.length === 0
@@ -14338,7 +14340,7 @@ function counterAbilityAt(sentences, i, ctx) {
         kind: "ability",
         ...(m[2] !== undefined ? { whose: "opponent" } : {}),
         ...(noun === "activated ability" ? { abilityKind: "activated" } : noun === "triggered ability" ? { abilityKind: "triggered" } : {}),
-        ...(sourceTypes.length > 0 ? { sourceTypes } : {}),
+        ...(nonTypes.length > 0 ? { sourceFilter: { notTypes: nonTypes } } : sourceTypes.length > 0 ? { sourceTypes } : {}),
       };
   const thenThisWay = /^if a permanent's ability is countered this way, destroy that permanent\.$/i.test(sentences[i + 1] ?? "");
   const destroy = { kind: "destroy", target: 0 };

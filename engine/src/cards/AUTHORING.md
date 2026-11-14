@@ -4205,7 +4205,9 @@ stopped covering:
   `sourceTypes: ["enchantment"]`), the source as it is while it's still the
   object it was as the ability went on the stack, else as it last existed on
   the battlefield (rule 113.7a); an enchantment card's channel ability counts
-  (Weaver's ruling). `loyalty: true` is only a loyalty ability, one
+  (Weaver's ruling). `sourceFilter` (a `CardFilter`, read the same way) for
+  anything else: "from a **noncreature** source" (Emerald Dragon's Dissonant
+  Wave) is `sourceFilter: { notTypes: ["creature"] }`. `loyalty: true` is only a loyalty ability, one
   activated for a loyalty cost (rule 606.2): "target loyalty ability of a
   planeswalker" (Verdant Command) is `{ kind: "ability", loyalty: true,
   sourceTypes: ["planeswalker"] }`. `copy-ability` copies one (§6).
