@@ -577,6 +577,8 @@ export interface FlickerOptions {
   readonly returnThen?: EffectSpec;
   /** The effect named its own source (`target: "source"`). */
   readonly fromSource?: boolean;
+  /** See `flicker`'s `withAuras`. */
+  readonly withAuras?: boolean;
 }
 /** `add-counter-all`'s per-permanent amounts, each read off the permanent
  * that gets the counters — see its `amount`. */
@@ -4579,6 +4581,20 @@ export type EffectSpec =
        * no delayed ability to do it. (An immediate return needs none: a
        * `sequence` after the flicker reads it the same way, Hallowed Respite.) */
       readonly returnThen?: EffectSpec;
+      /** With `returnAt` only: Flickerform's "exile enchanted creature **and
+       * all Auras attached to it**. At the beginning of the next end step,
+       * return that card to the battlefield under its owner's control. **If
+       * you do, return the other cards exiled this way to the battlefield
+       * under their owners' control attached to that creature.**" Each Aura
+       * attached to a target (one a bestow card or a Licid is, rule 303.4h) is
+       * exiled with it, all one event (603.2c). The delayed ability returns
+       * the target first; then, only if it returned, each of those cards still
+       * in exile as the same object (rule 400.7) returns attached to it — an
+       * Aura that can't legally enchant it stays in exile (303.4i), and a card
+       * that isn't an Aura card (bestow, a Licid) returns unattached (the
+       * Flickerform rulings). A token target never returns (111.7), so its
+       * Auras stay exiled. */
+      readonly withAuras?: true;
     }
   | {
       /**
@@ -4619,6 +4635,15 @@ export type EffectSpec =
       readonly underPlayer?: PlayerId;
       readonly transformed?: boolean;
       readonly tapped?: boolean;
+      /** Each card returns attached to this permanent (a `flicker`'s
+       * `withAuras`, its second step): an Aura that can't legally enchant it
+       * stays in exile (rule 303.4i), anything else enters unattached. */
+      readonly attachTo?: ObjectId;
+      /** "If you do" (a `flicker`'s `withAuras`, its first step): for each
+       * `host` that returned now, the cards in exile linked `from` are
+       * relinked `to`, for the step that returns them attached to it; for one
+       * that didn't, `from` is spent and they stay in exile. */
+      readonly arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[];
     }
   | {
       /**
@@ -12742,6 +12767,8 @@ export interface EffectApi {
     transformed: boolean,
     tapped: boolean,
     under?: PlayerId,
+    attachTo?: ObjectId,
+    arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[],
   ): boolean;
   /** See the `"meld"` {@link EffectSpec}: `partner` is the counterpart
    * already chosen (`null`: chosen, and gone since), else it's found (and
@@ -19480,6 +19507,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.transformed === true ? { transformed: true } : {}),
         ...(spec.tapped === true ? { tapped: true } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
+        ...(spec.withAuras === true ? { withAuras: true } : {}),
         ...(spec.target === "source" || (Array.isArray(spec.target) && spec.target.includes("source")) ? { fromSource: true } : {}),
       });
       if (returning !== null) ctx.resumeAfterDecisions(returning, parked);
@@ -19494,6 +19522,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.transformed === true,
         spec.tapped === true,
         spec.underPlayer,
+        spec.attachTo,
+        spec.arms,
       );
       if (asked) ctx.resumeAfterDecisions(spec, parked);
       return;

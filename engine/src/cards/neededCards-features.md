@@ -359,6 +359,14 @@ choice); `counters-removed` reads `perCounter` and a new `byYou` off it. Watcher
 exiled" fired once for Dust of Moments' two (rule 603.2c) — Aeon Chronicler, Benalish
 Commander, Detritivore, Dinosaurs on a Spaceship and Fungal Behemoth now say `perCounter`.
 `test/time-counter-removed.test.ts`.
+### A creature flickered with its Auras, which return attached — built 2026-11-14
+
+The key `effect:flicker-host-and-auras-return-attached`: `flicker`'s `withAuras` (with
+`returnAt`) exiles each target and every Aura attached to it as one event (603.2c); the delayed
+return brings the target back, then — "if you do", through `return-flickered`'s `arms` — a
+second `return-flickered` step brings its Auras back attached to it (`attachTo`, through
+`readyToEnterAttached`: 303.4i keeps one that can't enchant it in exile, 303.4h returns a bestow
+card unattached). Flickerform (rank 10194). `test/flicker-with-auras.test.ts`.
 
 ### Graveyard cards chosen by the card types among them — built 2026-11-14
 

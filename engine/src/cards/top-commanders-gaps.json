@@ -9,6 +9,7 @@
     "filter:ability-source-not-types",
     "decision:target-chooser-is-controller-of-earlier-target",
     "condition:opponent-controls-n-more",
+    "effect:flicker-host-and-auras-return-attached",
     "filter:has-doctors-companion",
     "condition:rolled-number-this-turn",
     "condition:dice-rolled-this-turn-count",

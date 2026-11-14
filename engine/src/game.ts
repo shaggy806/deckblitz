@@ -40141,13 +40141,15 @@ export class Game {
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
       meld: (self, partnerFilter, into, partner, entry) =>
         this.meldByEffect(controller, x, self, partnerFilter, into, partner, entry),
-      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under) =>
+      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under, attachTo, arms) =>
         this.returnFlickeredByEffect(
           link,
           thenCounters,
           under ?? (underYourControl ? controller : undefined),
           transformed,
           tapped,
+          attachTo,
+          arms,
         ),
       grantFlashback: (target, cost) => this.grantFlashbackByEffect(target, source, cost),
       grantFlashbackAll: (filter) => {
@@ -55768,11 +55770,54 @@ controlledBy,
     };
     const exiled: ObjectId[] = [];
     const seen = new Set<ObjectId>();
+    // "…and all Auras attached to it" (`withAuras`, Flickerform): each
+    // target's Auras as the effect begins — a bestow card or a Licid
+    // attached as an Aura among them (rule 303.4h) — exiled with it.
+    const withAuras = options.withAuras === true && delayed !== undefined && !perOwner;
+    const aurasOf = new Map<ObjectId, readonly ObjectId[]>();
+    if (withAuras) {
+      for (const target of targets) {
+        if (target.kind !== "object" || aurasOf.has(target.object)) continue;
+        if (this.state.objects[target.object]?.zone !== "battlefield") continue;
+        aurasOf.set(
+          target.object,
+          this.state.zones.shared.battlefield.filter(
+            (id) => id !== target.object && this.state.objects[id]?.attachedTo === target.object && this.attachmentKind(id) === "aura",
+          ),
+        );
+      }
+    }
+    // "If you do, return the other cards exiled this way … attached to that
+    // creature": per target that has any, the link its Auras wait under, and
+    // the one the target's return arms them with.
+    const auraReturns: { readonly host: ObjectId; readonly from: string; readonly to: string }[] = [];
     // Exiling them all is one event (rule 603.2c — Brago, Eerie Interlude):
     // each one's leaves trigger sees the rest go, read as the board stood
     // before any moved.
     this.withLeaveBatch(() => {
-      this.snapshotLeaving(targets.flatMap((t) => (t.kind === "object" ? [t.object] : [])));
+      this.snapshotLeaving([
+        ...targets.flatMap((t) => (t.kind === "object" ? [t.object] : [])),
+        ...[...aurasOf.values()].flat(),
+      ]);
+      // The Auras go with their creature, whether or not it could be exiled
+      // or will return; they're linked to come back only when it's linked to.
+      const exileAuras = (target: ObjectId, host: ObjectId, hostLinked: boolean): void => {
+        const auras = aurasOf.get(target) ?? [];
+        let from: string | undefined;
+        for (const aura of auras) {
+          const id = this.splitOneFromStack(aura);
+          const object = this.state.objects[id];
+          if (object === undefined || object.zone !== "battlefield") continue;
+          const isToken = object.isToken;
+          if (!this.moveObject(id, "exile")) continue;
+          if (this.state.objects[id]?.zone !== "exile") continue;
+          this.emit({ type: "permanent-exiled", object: id });
+          if (isToken || !hostLinked) continue;
+          from ??= `flicker-${this.state.nextObjectSeq++}`;
+          this.state.objects[id].flickerLink = from;
+        }
+        if (from !== undefined) auraReturns.push({ host, from, to: `flicker-${this.state.nextObjectSeq++}` });
+      };
       for (const target of targets) {
         if (target.kind !== "object" || seen.has(target.object)) continue;
         seen.add(target.object);
@@ -55787,25 +55832,29 @@ controlledBy,
           continue;
         }
         const id = this.splitOneFromStack(target.object);
-        const object = this.state.objects[id];
-        if (object === undefined || object.zone !== "battlefield") continue;
-        const isToken = object.isToken;
-        if (!this.moveObject(id, "exile")) continue;
-        if (this.state.objects[id]?.zone !== "exile") continue;
-        this.emit({ type: "permanent-exiled", object: id });
-        if (isToken) continue;
-        // After the move: `moveObject` clears the link on the way.
-        // A merged or melded permanent became several cards, and the return
-        // finds every one of them (730.3c; the meld ruling: "if an effect
-        // moves a melded permanent to a new zone and then affects 'that
-        // card,' it affects both cards") — each back as a permanent of its
-        // own, front face up.
-        for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
-          if (this.state.objects[card]?.zone !== "exile") continue;
-          const exileLink = linkNow(this.state.objects[card].owner);
-          if (exileLink !== undefined) this.state.objects[card].flickerLink = exileLink;
-          exiled.push(card);
-        }
+        const linked = ((): boolean => {
+          const object = this.state.objects[id];
+          if (object === undefined || object.zone !== "battlefield") return false;
+          const isToken = object.isToken;
+          if (!this.moveObject(id, "exile")) return false;
+          if (this.state.objects[id]?.zone !== "exile") return false;
+          this.emit({ type: "permanent-exiled", object: id });
+          if (isToken) return false;
+          // After the move: `moveObject` clears the link on the way.
+          // A merged or melded permanent became several cards, and the return
+          // finds every one of them (730.3c; the meld ruling: "if an effect
+          // moves a melded permanent to a new zone and then affects 'that
+          // card,' it affects both cards") — each back as a permanent of its
+          // own, front face up.
+          for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
+            if (this.state.objects[card]?.zone !== "exile") continue;
+            const exileLink = linkNow(this.state.objects[card].owner);
+            if (exileLink !== undefined) this.state.objects[card].flickerLink = exileLink;
+            exiled.push(card);
+          }
+          return true;
+        })();
+        if (withAuras) exileAuras(target.object, id, linked);
       }
     });
     if (delayed === undefined) {
@@ -55857,13 +55906,20 @@ controlledBy,
         ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
         ...(options.transformed === true ? { transformed: true } : {}),
         ...(options.tapped === true ? { tapped: true } : {}),
+        ...(auraReturns.length > 0 ? { arms: auraReturns } : {}),
       };
+      // Then, for each target that came back, its Auras attached to it.
+      const steps: EffectSpec[] = [
+        returns,
+        ...auraReturns.map((each): EffectSpec => ({ kind: "return-flickered", link: each.to, attachTo: each.host })),
+        ...(options.returnThen === undefined ? [] : [options.returnThen]),
+      ];
       this.createDelayedTrigger(
         source,
         controller,
         // The owner's turn, the ability still the controller's (rule 603.7e).
         each.owner !== undefined ? { ...delayed, whose: each.owner } : delayed,
-        options.returnThen === undefined ? returns : { kind: "sequence", effects: [returns, options.returnThen] },
+        steps.length === 1 ? returns : { kind: "sequence", effects: steps },
         options.returnText ?? "Return the exiled card to the battlefield.",
         [],
       );
@@ -55899,13 +55955,22 @@ controlledBy,
     returnUnder: PlayerId | undefined,
     transformed = false,
     tapped = false,
+    attachTo?: ObjectId,
+    arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[],
   ): boolean {
     const linked = this.state.zones.shared.exile.filter(
       (id) => this.state.objects[id]?.flickerLink === link,
     );
+    // "…attached to that creature" (`attachTo`): an Aura that can't legally
+    // enchant it stays in exile (rule 303.4i); anything else enters
+    // unattached (303.4h).
+    const returning = linked.filter(
+      (id) =>
+        !this.state.objects[id].isToken &&
+        (attachTo === undefined || this.readyToEnterAttached(id, attachTo, returnUnder ?? this.state.objects[id].owner, transformed)),
+    );
     // "As this enters" choices first (rule 614.12), with the link still
     // standing: this runs again with the answer.
-    const returning = linked.filter((id) => !this.state.objects[id].isToken);
     if (
       returning.some(
         (id) =>
@@ -55917,6 +55982,15 @@ controlledBy,
     }
     for (const id of linked) this.state.objects[id].flickerLink = undefined;
     this.completeFlickerReturn(returning, counters, returnUnder, transformed, tapped);
+    // "If you do" (`arms`): a host that came back now arms its Auras' return;
+    // one that didn't leaves them in exile, their link spent.
+    for (const arm of arms ?? []) {
+      const back = returning.includes(arm.host) && this.state.objects[arm.host]?.zone === "battlefield";
+      for (const id of this.state.zones.shared.exile) {
+        const object = this.state.objects[id];
+        if (object?.flickerLink === arm.from) object.flickerLink = back ? arm.to : undefined;
+      }
+    }
     return false;
   }
 
