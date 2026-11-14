@@ -9,7 +9,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { ScriptedController } from "../controller.js";
-import { A, B, cast, enter, lands, life, nextTurn, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, cast, enter, lands, life, nextTurn, pickModes, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -143,5 +143,56 @@ describe("Knowledge Pool", () => {
     cast(game, shock, { targets: [ref(B)] });
     expect(life(game, B)).toBe(20);
     expect(zone(game, shock)).toBe("exile");
+  });
+});
+
+describe("Neera, Wild Mage", () => {
+  it("puts the spell on the bottom, reveals until a nonland card, casts it free and buries the rest", () => {
+    const { game, a } = table();
+    spawn(game, "Neera, Wild Mage");
+    lands(game, "Mountain", 4);
+    const bolt = toLibrary(game, "Lightning Bolt");
+    const mountain = toLibrary(game, "Mountain");
+    const shock = toHand(game, "Shock");
+    pickModes(a, 0);
+    castFree(a);
+    cast(game, shock, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(17);
+    expect(zone(game, bolt)).toBe("graveyard");
+    // Shock first, then the revealed Mountain under it.
+    expect(library(game).slice(-2)).toEqual([shock, mountain]);
+
+    // Only once each turn.
+    const second = toHand(game, "Shock");
+    cast(game, second, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(15);
+    expect(zone(game, second)).toBe("graveyard");
+  });
+
+  it("declined, or with the spell countered in response, does nothing", () => {
+    const { game, a } = table();
+    spawn(game, "Neera, Wild Mage");
+    lands(game, "Island", 2);
+    lands(game, "Mountain", 2);
+    const bolt = toLibrary(game, "Lightning Bolt");
+    const shock = toHand(game, "Shock");
+    pickModes(a, 0);
+    castFree(a);
+    cast(game, shock, { targets: [ref(B)], settle: false });
+    // Countered before Neera's ability resolves: it's in the graveyard, a new
+    // object (rule 400.7), and isn't put on the bottom — so nothing is revealed.
+    cast(game, toHand(game, "Counterspell"), { targets: [ref(shock)] });
+    expect(zone(game, shock)).toBe("graveyard");
+    expect(zone(game, bolt)).toBe("library");
+    expect(library(game)[0]).toBe(bolt);
+    expect(life(game, B)).toBe(20);
+
+    nextTurn(game);
+    nextTurn(game);
+    const third = toHand(game, "Shock");
+    pickModes(a);
+    cast(game, third, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(18);
+    expect(zone(game, third)).toBe("graveyard");
   });
 });

@@ -330,7 +330,8 @@ export function thisWayEntries(
         break;
       case "put-on-bottom":
         // From a hand, by a choice the resolution asked (`cards-put-on-bottom`
-        // — the mulligan's bottoming never happens during a resolution).
+        // — the mulligan's bottoming never happens during a resolution), or a
+        // spell off the stack (Neera, Wild Mage's "if you do").
         if (event.type === "cards-put-on-bottom") for (const id of event.objects) add(id, event.player, false);
         break;
       case "gained-control":

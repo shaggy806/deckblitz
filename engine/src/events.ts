@@ -1811,6 +1811,10 @@ export type GameEvent =
       readonly mulligans: number;
     })
   | (Base & {
+      /** Cards `player` put on the bottom of their library: from their hand
+       * (a mulligan, a resolution's choice), or a spell of theirs put there
+       * off the stack (Neera, Wild Mage) — what "put on the bottom this way"
+       * counts. */
       readonly type: "cards-put-on-bottom";
       readonly player: PlayerId;
       readonly objects: readonly ObjectId[];

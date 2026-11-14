@@ -2493,7 +2493,8 @@
   "decision:choose-name-and-type-on-attach",
   "effect:possibility-storm-exile-spell-on-cast",
   "effect:possibility-storm-exile-spell-on-cast",
-  "effect:exile-cast-spell-then-cast-linked-exiled"
+  "effect:exile-cast-spell-then-cast-linked-exiled",
+  "effect:put-cast-spell-on-library-if-did"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

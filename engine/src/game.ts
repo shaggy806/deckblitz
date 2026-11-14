@@ -54761,11 +54761,20 @@ controlledBy,
       this.ceaseSpellCopy(id);
       return;
     }
+    // A spell other than the one resolving, put there off the stack (Neera,
+    // Wild Mage's "put it on the bottom of its owner's library"): it will
+    // never resolve now, so it has nothing left to aim at — as `exileSpell`.
+    const stack = this.state.zones.shared.stack;
+    const offTheStack = object.zone === "stack" && object.kind === "card" && stack[stack.length - 1] !== id;
+    if (offTheStack) this.forgetSpellTargets(object);
     // A commander's owner may put it into the command zone instead (rule
     // 903.9b); the move waits for the answer, and goes to `position` then.
     if (object.zone !== "library") this.moveObject(id, "library", { libraryPlacement: position });
     if (this.state.objects[id]?.zone !== "library") return; // a replacement took it, or it waits
     this.placeInLibrary(id, position);
+    // "If you do" reads it as put on the bottom this way (`thisWay:
+    // "put-on-bottom"`), and the log says so.
+    if (offTheStack && position === "bottom") this.emit({ type: "cards-put-on-bottom", player: object.owner, objects: [id] });
   }
 
   /** Move `id`, already in its owner's library, to `position` in it — or,
