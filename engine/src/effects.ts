@@ -6225,7 +6225,10 @@ export type EffectSpec =
       readonly counter?: string;
       readonly amount?: 1 | "all" | "each-kind-missing" | "any" | "one-or-more";
       /** "If you do, draw a card" (Goldberry): after the moves, if any
-       * counter moved. Not with a chosen end. */
+       * counter moved — with any `amount` (Black Panther, Wakandan King's
+       * "move all … If one or more +1/+1 counters are moved this way", whose
+       * "that much" is `{ thisWay: "counters-removed" }`, the counters that
+       * left the first permanent). Not with a chosen end. */
       readonly ifMoved?: EffectSpec;
       /** Set by the engine as an `"any"` move goes on across its decisions.
        * Never authored. */
@@ -14049,22 +14052,27 @@ function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void
     if (from === undefined || to === undefined) return;
     if (amount === "all" || amount === "each-kind-missing") {
       const onTo = ctx.countersHere(to) ?? {};
+      let movedAll = 0;
       // One instruction: every kind goes on as one event (rule 603.2c).
       ctx.simultaneously(() => {
         for (const kind of kindsHere(ctx, from, spec.counter)) {
           if (amount === "each-kind-missing" && (onTo[kind] ?? 0) > 0) continue;
           const n = amount === "all" ? (ctx.countersHere(from)?.[kind] ?? 0) : 1;
-          ctx.moveCounters(from, to, kind, n);
+          movedAll += ctx.moveCounters(from, to, kind, n);
         }
       });
+      // "If one or more +1/+1 counters are moved this way" (Black Panther,
+      // Wakandan King): after the move, if any did.
+      if (spec.ifMoved !== undefined && movedAll > 0) applyEffectSpec(spec.ifMoved, ctx);
       return;
     }
     // "A counter": of the named kind, or of one its controller chooses among
     // those there now (the Nesting Grounds ruling) — asked only with two or
     // more to choose between.
     const kinds = kindsHere(ctx, from, spec.counter);
-    if (kinds.length === 1) ctx.moveCounters(from, to, kinds[0], 1);
-    else if (kinds.length > 1) {
+    if (kinds.length === 1) {
+      if (ctx.moveCounters(from, to, kinds[0], 1) > 0 && spec.ifMoved !== undefined) applyEffectSpec(spec.ifMoved, ctx);
+    } else if (kinds.length > 1) {
       ctx.chooseModes(
         1,
         1,

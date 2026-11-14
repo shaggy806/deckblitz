@@ -12,6 +12,7 @@
     "condition:milled-share-all-card-types",
     "effect:delayed-return-from-graveyard-your-next-upkeep",
     "trigger:opponent-attacks-your-planeswalkers",
+    "amount:counters-moved-this-way",
     "condition:crewed-by-filter-as-tapped",
     "cost:spend-mana-as-any-color",
     "effect:targets-different-mana-values",

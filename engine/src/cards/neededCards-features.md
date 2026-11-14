@@ -438,6 +438,31 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   Prey; the scaffolder reads both lines.
   `test/combat-damage-to-enchanted-player.test.ts`.
 
+### The triggers-journal lane's third round — built 2026-11-13
+
+- `trigger:activates-ability-targeting` — `activates-ability`'s `targets`, the
+  `SpellTargetsFilter` a spell's `CardFilter.targets` takes, read off the
+  ability on the stack once activated (rules 602.2b, 602.2i). Ertha Jo,
+  Frontier Mentor; the scaffolder reads the line and "Copy that ability."
+  `test/activates-ability-targeting.test.ts`.
+- `condition:milled-share-all-card-types` — the `this-way` condition's
+  `sharing: "all-card-types"`: the same combination of card types exactly (rule
+  205.2a). Demonic Covenant; the scaffolder reads "create …, then mill N cards"
+  and "if two cards that share … were milled this way".
+  `test/milled-share-all-card-types.test.ts`.
+- `effect:delayed-return-from-graveyard-your-next-upkeep` — no engine code: a
+  `delayed-trigger` at `{ step: "upkeep", whose: "you" }` carrying the dies
+  trigger's object. Breathkeeper Seraph. `test/delayed-return-next-upkeep.test.ts`.
+- `trigger:opponent-attacks-your-planeswalkers` — `attack-with`'s
+  `attackingYourPlaneswalkers` (rule 508.1b), once a declaration. Mila, Crafty
+  Companion // Lukka, Wayward Bonder. Oath of Kaya, recorded with the same key,
+  triggers once per planeswalker attacked: it needs a per-planeswalker shape.
+  `test/opponent-attacks-your-planeswalkers.test.ts`.
+- `amount:counters-moved-this-way` — no new amount: `move-counters`' `ifMoved`
+  now runs after an `"all"` or single move too (it ran only after `"any"`), and
+  "that much" is `{ thisWay: "counters-removed" }`. Black Panther, Wakandan
+  King. `test/counters-moved-this-way.test.ts`.
+
 ### Who attacked whom, and whether it had to — built 2026-11-13
 
 The combat-targeting lane's group of attack-history reads (B322's group).

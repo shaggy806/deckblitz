@@ -5082,6 +5082,15 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`move all counters from ~ onto (${TARGET})`).exec(s))) {
     return { kind: "move-counters", from: "source", to: slot(m[1]), amount: "all" };
   }
+  // "Move all +1/+1 counters from target land you control onto target
+  // creature" (Black Panther, Wakandan King).
+  if ((m = re(`move all ([+-]\\d+/[+-]\\d+|[a-z]+) counters from (${TARGET}) onto (${TARGET})`).exec(s))) {
+    const from = slot(m[2]);
+    const to = slot(m[3]);
+    return from === undefined || to === undefined
+      ? null
+      : { kind: "move-counters", from, to, counter: m[1].toLowerCase(), amount: "all" };
+  }
   if ((m = re(`move (a counter|any number of counters) from (${TARGET}) onto (?:a second )?(${TARGET})`).exec(s))) {
     const from = slot(m[2]);
     return {
@@ -11746,6 +11755,33 @@ export function parseEffect(text, outer) {
       parsed.push(made);
       hints.push({ sentence, effect: made });
       continue;
+    }
+    // "Move all +1/+1 counters from … onto …. If one or more +1/+1 counters
+    // are moved this way, you gain that much life and draw a card." (Black
+    // Panther, Wakandan King): the move's `ifMoved`, "that much" the counters
+    // that left the first permanent.
+    const movedM =
+      parsed[parsed.length - 1]?.kind === "move-counters" && parsed[parsed.length - 1].ifMoved === undefined
+        ? /^if one or more ([+-]\d+\/[+-]\d+|[a-z]+) counters (?:are|were) moved this way, (.+)$/i.exec(sentence)
+        : null;
+    if (movedM !== null && movedM[1].toLowerCase() === parsed[parsed.length - 1].counter) {
+      const SENTINEL = 987654;
+      const said = movedM[2].replace(/\bthat much\b/gi, String(SENTINEL));
+      const raw = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}`, ctx);
+      const thatMuch = (e) =>
+        e === SENTINEL
+          ? { thisWay: "counters-removed" }
+          : Array.isArray(e)
+            ? e.map(thatMuch)
+            : e !== null && typeof e === "object"
+              ? Object.fromEntries(Object.entries(e).map(([k, v]) => [k, thatMuch(v)]))
+              : e;
+      const then = raw === null || containsUndefined(raw) ? null : thatMuch(raw);
+      if (then !== null) {
+        parsed[parsed.length - 1] = { ...parsed[parsed.length - 1], ifMoved: then };
+        hints.push({ sentence, effect: then });
+        continue;
+      }
     }
     // "If two cards that share all their card types were milled this way,
     // sacrifice this enchantment." (Demonic Covenant): the largest group

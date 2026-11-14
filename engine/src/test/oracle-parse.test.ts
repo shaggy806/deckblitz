@@ -15008,6 +15008,28 @@ describe("how one player's state compares with another's", () => {
     expect(ertha.effect).toEqual({ kind: "copy-ability", target: "trigger-ability", newTargets: true });
   });
 
+  it("move all of a kind of counter, and if any moved, that much (Black Panther, Wakandan King)", () => {
+    const panther = read(
+      "Creature",
+      "{3}: Move all +1/+1 counters from target land you control onto target creature. If one or more +1/+1 counters are moved this way, you gain that much life and draw a card.",
+    ).activated[0];
+    expect(panther.targets).toEqual(["land-you-control", "creature"]);
+    expect(panther.effect).toEqual({
+      kind: "move-counters",
+      from: 0,
+      to: 1,
+      counter: "+1/+1",
+      amount: "all",
+      ifMoved: {
+        kind: "sequence",
+        effects: [
+          { kind: "gain-life", amount: { thisWay: "counters-removed" } },
+          { kind: "draw", amount: 1 },
+        ],
+      },
+    });
+  });
+
   it("an opponent attacking one or more of your planeswalkers (Mila, Crafty Companion)", () => {
     expect(parseTrigger("Whenever an opponent attacks one or more planeswalkers you control")).toEqual([
       { on: "attack-with", who: "opponent", attackingYourPlaneswalkers: true },
