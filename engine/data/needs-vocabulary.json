@@ -16543,6 +16543,18 @@
    "family": "mechanic:dice-rolling",
    "example": "Xenosquirrels: after a roll, the player may pay to raise or lower the result by 1."
   },
+  "trigger:rolls-at-most": {
+   "family": "mechanic:dice-rolling",
+   "example": "Atomwheel Acrobats: \"whenever you roll a 1 or 2, put that many +1/+1 counters on this creature\" \u2014 the rolls-die test has atLeast and natural, no at-most."
+  },
+  "mechanic:devour-x": {
+   "family": "keyword:devour",
+   "example": "Thromok the Insatiable: \"Devour X, where X is the number of creatures devoured this way\" \u2014 devour takes only a fixed multiplier; this is n squared counters."
+  },
+  "amount:pile-or-guess-effects-this-turn": {
+   "family": "mechanic:piles",
+   "example": "The Celestial Toymaker: \"each opponent loses 2 life for each spell or ability that caused one or more players to guess or to group cards or permanents into a pile this turn\" \u2014 nothing in the journal counts them."
+  },
   "effect:store-die-results": {
    "family": "mechanic:dice-rolling",
    "example": "Centaur of Attention: \"roll five six-sided dice and store those results on it\", reroll any number of them, +X/+X for the most that match."
