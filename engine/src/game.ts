@@ -34613,6 +34613,12 @@ export class Game {
           // "… becomes the target of a spell" — not an ability, or the
           // other way round (Loki).
           (spec.spellOnly !== true || event.bySpell) &&
+          // "… of an instant or sorcery spell" (Silverfur Partisan): the
+          // spell as it is on the stack.
+          (spec.spellFilter === undefined ||
+            (event.bySpell &&
+              this.state.objects[event.stackObject] !== undefined &&
+              matchesFilter(this.state, this.registry, event.stackObject, spec.spellFilter, { you: self.controller }))) &&
           (spec.abilityOnly === undefined || !event.bySpell) &&
           // "… of an activated ability" (Professor Hojo): never a triggered one.
           (spec.abilityOnly !== "activated" || this.state.objects[event.stackObject]?.abilityKind === "activated");

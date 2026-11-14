@@ -1431,6 +1431,11 @@ export type TriggerKind =
        * "becomes the target of a spell" (Gargos, Vicious Watcher; Tectonic
        * Giant). */
       readonly spellOnly?: boolean;
+      /** Only a spell matching this, as it is on the stack — "becomes the
+       * target of **an instant or sorcery spell**" (Silverfur Partisan, Wild
+       * Defiance: `{ typesAnyOf: ["instant", "sorcery"] }`). Never an
+       * ability, whatever the filter. */
+      readonly spellFilter?: CardFilter;
       /** The ability's targets are all its controller's choice: the
        * targeting player never fills its first slot — Venerated Rotpriest's
        * "target opponent gets a poison counter" may name any opponent, not

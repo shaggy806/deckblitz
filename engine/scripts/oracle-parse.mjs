@@ -2200,6 +2200,17 @@ export function parseTrigger(clause) {
     if (filter === null || filter.type === undefined) return null;
     return [{ on: "becomes-target", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // "… becomes the target of an instant or sorcery spell" (Wild Defiance,
+  // Silverfur Partisan's "a Wolf or Werewolf"): `spellFilter` reads the spell.
+  if ((m = /^Whenever (another|a) (.+?) you control becomes the target of an? (.+?) spell$/.exec(c))) {
+    const pair = /^([A-Z][a-z]+) or ([A-Z][a-z]+)$/.exec(m[2]);
+    const filter = pair !== null ? { subtypes: [pair[1], pair[2]] } : parseTypePhrase(m[2]);
+    const spellFilter = parseTypePhrase(m[3]);
+    if (filter === null || Object.keys(filter).length === 0 || spellFilter === null || Object.keys(spellFilter).length === 0) return null;
+    return [
+      { on: "becomes-target", who: "you-control", filter, spellFilter, ...(m[1] === "another" ? { otherOnly: true } : {}) },
+    ];
+  }
   // "Whenever one or more creatures you control become the target of an
   // activated ability" (Professor Hojo): never a triggered one.
   if ((m = /^Whenever one or more (\w+?)s you control become the target of an activated ability$/.exec(c))) {

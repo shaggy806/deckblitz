@@ -2569,7 +2569,9 @@
   "mechanic:mutate-from-graveyard",
   "keyword:bestow-extensions",
   "trigger:cast-this-way-from-lasting-permission",
-  "condition:permanent-put-into-hand-from-battlefield-this-turn"
+  "condition:permanent-put-into-hand-from-battlefield-this-turn",
+  "condition:permanent-put-into-hand-from-battlefield-this-turn",
+  "trigger:becomes-target-by-spell-type"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -316,7 +316,9 @@ export function timingCountable(spec: TriggerSpec): boolean {
     case "discards":
       return true;
     case "becomes-target":
-      return spec.playerOnly !== true;
+      // The journal's `targeted` entry doesn't keep the spell, so a
+      // `spellFilter` can't be asked of earlier ones.
+      return spec.playerOnly !== true && spec.spellFilter === undefined;
     case "step-begins":
       return spec.step === "upkeep";
     case "deals-combat-damage-to-player":

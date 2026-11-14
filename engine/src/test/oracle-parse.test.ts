@@ -9970,6 +9970,31 @@ describe("costs keyed to a spell's target", () => {
     expect(hojo.triggered[0].oncePerTurn).toBe(true);
   });
 
+  it("reads 'becomes the target of an instant or sorcery spell'", () => {
+    const partisan = face(
+      "Silverfur Partisan",
+      "Creature — Wolf Warrior",
+      "Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, create a 2/2 green Wolf creature token.",
+    );
+    expect(partisan.triggered[0].trigger).toEqual({
+      on: "becomes-target",
+      who: "you-control",
+      filter: { subtypes: ["Wolf", "Werewolf"] },
+      spellFilter: { typesAnyOf: ["instant", "sorcery"] },
+    });
+    const defiance = face(
+      "Wild Defiance",
+      "Enchantment",
+      "Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.",
+    );
+    expect(defiance.triggered[0].trigger).toEqual({
+      on: "becomes-target",
+      who: "you-control",
+      filter: { type: "creature" },
+      spellFilter: { typesAnyOf: ["instant", "sorcery"] },
+    });
+  });
+
   it("reads the same line quoted, granted to what it names", () => {
     const skybonder = face(
       "Jubilant Skybonder",
