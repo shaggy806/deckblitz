@@ -2661,7 +2661,8 @@
   "bug:permission-duration-read-from-granter",
   "replacement:enters-with-counter-kinds-of-source",
   "effect:prevent-combat-damage-by-blocker-and-blocked",
-  "amount:curses-attached-to-player"
+  "amount:curses-attached-to-player",
+  "filter:controlled-by-monarch"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

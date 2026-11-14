@@ -2492,7 +2492,7 @@ each damage would be dealt, rule 615.1),
 
 `blocksDespiteLandwalk: true` (a `StaticAbility`, rule 702.14 — Street Savvy) is the blocker's side: what its `affects` picks out "can block creatures with landwalk abilities as though they didn't have those abilities", every kind of landwalk, named or a filter, and no other blocker. `enchanted-permanent-statics.test.ts`.
 
-`controlledBy: "monarch"` (a filter clause, rule 725) is controlled by the monarch, nobody's while there is none. Through `attachedTo` it's about an Aura's host's controller: Fall from Favor's "unless that player is the monarch" is a `not` of `{ kind: "source", filter: { attachedTo: { controlledBy: "monarch" } } }`.
+`controlledBy: "monarch"` (a filter clause, rule 725) is controlled by the monarch, nobody's while there is none — Azure Fleet Admiral's "can't be blocked by creatures the monarch controls" is a `cant-be-blocked` restriction `by: { type: "creature", controlledBy: "monarch" }`, read as blockers are declared. Through `attachedTo` it's about an Aura's host's controller: Fall from Favor's "unless that player is the monarch" is a `not` of `{ kind: "source", filter: { attachedTo: { controlledBy: "monarch" } } }`.
 
 **"Whenever one or more creatures an opponent controls attack you and aren't blocked"** is `{ on: "attacks-player", who: "opponent", defender: "you", unblocked: true }` (Coveted Jewel): once per player attacked directly, as blockers are declared; the attacker is the `"active-player"` scope. **"… attack one of your opponents or a planeswalker they control"** adds `orTheirPlaneswalkers: true` (Frontier Warmonger): still once per player, the creatures attacking their planeswalkers counted (and in the `"trigger-batch"`) with those attacking them.
 

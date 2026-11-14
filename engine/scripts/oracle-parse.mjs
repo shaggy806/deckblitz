@@ -22821,6 +22821,10 @@ function parseStatic(line, text) {
   if ((m = /^~ can't be blocked by creatures with (power|toughness) (\d+) or (less|greater)\.$/.exec(line))) {
     return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { [m[1]]: { op: m[3] === "less" ? "lte" : "gte", n: Number(m[2]) } } }], text };
   }
+  // "… by creatures the monarch controls" (Azure Fleet Admiral, rule 725).
+  if (line === "~ can't be blocked by creatures the monarch controls.") {
+    return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", controlledBy: "monarch" } }], text };
+  }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
   // "You may look at an additional two cards each time you surveil."
   // (Enhanced Surveillance, rule 701.25b).

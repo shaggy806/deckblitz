@@ -15276,6 +15276,12 @@ describe("how one player's state compares with another's", () => {
     ]);
   });
 
+  it("can't be blocked by creatures the monarch controls (Azure Fleet Admiral)", () => {
+    expect(read("Creature", "Card can't be blocked by creatures the monarch controls.").static[0].restrictions).toEqual([
+      { kind: "cant-be-blocked", by: { type: "creature", controlledBy: "monarch" } },
+    ]);
+  });
+
   it("activates-ability narrowed to what it targets, and that ability copied (Ertha Jo)", () => {
     const ertha = read(
       "Creature",
