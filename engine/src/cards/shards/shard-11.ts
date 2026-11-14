@@ -266,6 +266,7 @@ import _poolEbonyOwlNetsuke from "../pool/ebony-owl-netsuke.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
 import _poolElectricRevelation from "../pool/electric-revelation.js";
 import _poolEliminate from "../pool/eliminate.js";
+import _poolElrondOfTheWhiteCouncil from "../pool/elrond-of-the-white-council.js";
 import _poolElvishRegrower from "../pool/elvish-regrower.js";
 import _poolEmberwildeAugur from "../pool/emberwilde-augur.js";
 import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
@@ -1303,6 +1304,7 @@ const shard: CardShard = {
     _poolEidolonOfPhilosophy,
     _poolElectricRevelation,
     _poolEliminate,
+    _poolElrondOfTheWhiteCouncil,
     _poolElvishRegrower,
     _poolEmberwildeAugur,
     _poolEmeritusOfWoe,

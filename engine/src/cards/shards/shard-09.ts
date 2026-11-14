@@ -909,6 +909,7 @@ import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolTheMindStone from "../pool/the-mind-stone.js";
 import _poolTheStoneBrain from "../pool/the-stone-brain.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
+import _poolThievesAuction from "../pool/thieves-auction.js";
 import _poolThirst from "../pool/thirst.js";
 import _poolThopterMechanic from "../pool/thopter-mechanic.js";
 import _poolThoroughInvestigation from "../pool/thorough-investigation.js";
@@ -1967,6 +1968,7 @@ const shard: CardShard = {
     _poolTheMindStone,
     _poolTheStoneBrain,
     _poolThermalNavigator,
+    _poolThievesAuction,
     _poolThirst,
     _poolThopterMechanic,
     _poolThoroughInvestigation,

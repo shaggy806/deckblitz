@@ -8135,6 +8135,7 @@ import _poolEloiseNephaliaSleuth from "./pool/eloise-nephalia-sleuth.js";
 import _poolElrondLordOfRivendell from "./pool/elrond-lord-of-rivendell.js";
 import _poolElrondMasterOfHealing from "./pool/elrond-master-of-healing.js";
 import _poolElrondMoonReader from "./pool/elrond-moon-reader.js";
+import _poolElrondOfTheWhiteCouncil from "./pool/elrond-of-the-white-council.js";
 import _poolElsewhereFlask from "./pool/elsewhere-flask.js";
 import _poolElshaOfTheInfinite from "./pool/elsha-of-the-infinite.js";
 import _poolElsha from "./pool/elsha.js";
@@ -28234,6 +28235,7 @@ import _poolThiefOfExistence from "./pool/thief-of-existence.js";
 import _poolThiefOfHope from "./pool/thief-of-hope.js";
 import _poolThiefOfSanity from "./pool/thief-of-sanity.js";
 import _poolThiefsKnife from "./pool/thiefs-knife.js";
+import _poolThievesAuction from "./pool/thieves-auction.js";
 import _poolThievesFortune from "./pool/thieves-fortune.js";
 import _poolThievesGuildEnforcer from "./pool/thieves-guild-enforcer.js";
 import _poolThievesTools from "./pool/thieves-tools.js";
@@ -41165,6 +41167,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElrondLordOfRivendell,
   _poolElrondMasterOfHealing,
   _poolElrondMoonReader,
+  _poolElrondOfTheWhiteCouncil,
   _poolElsewhereFlask,
   _poolElshaOfTheInfinite,
   _poolElsha,
@@ -61264,6 +61267,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThiefOfHope,
   _poolThiefOfSanity,
   _poolThiefsKnife,
+  _poolThievesAuction,
   _poolThievesFortune,
   _poolThievesGuildEnforcer,
   _poolThievesTools,
@@ -74208,6 +74212,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elrond-lord-of-rivendell": _poolElrondLordOfRivendell,
   "pool/elrond-master-of-healing": _poolElrondMasterOfHealing,
   "pool/elrond-moon-reader": _poolElrondMoonReader,
+  "pool/elrond-of-the-white-council": _poolElrondOfTheWhiteCouncil,
   "pool/elsewhere-flask": _poolElsewhereFlask,
   "pool/elsha-of-the-infinite": _poolElshaOfTheInfinite,
   "pool/elsha": _poolElsha,
@@ -94307,6 +94312,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thief-of-hope": _poolThiefOfHope,
   "pool/thief-of-sanity": _poolThiefOfSanity,
   "pool/thiefs-knife": _poolThiefsKnife,
+  "pool/thieves-auction": _poolThievesAuction,
   "pool/thieves-fortune": _poolThievesFortune,
   "pool/thieves-guild-enforcer": _poolThievesGuildEnforcer,
   "pool/thieves-tools": _poolThievesTools,
