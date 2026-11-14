@@ -133,7 +133,7 @@ describe("the pool holds only the one vocabulary", () => {
         check(permission, name, allowed, "mayPlay");
       }
       if (object["kind"] === "impulse-exile") {
-        check(object, name, [...TERMS, ...GRANT_EXTRAS, "kind", "amount", "whose", "whoseIf", "choose", "faceDown", "linked", "grantIf"], "impulse-exile");
+        check(object, name, [...TERMS, ...GRANT_EXTRAS, "kind", "amount", "whose", "whoseIf", "choose", "faceDown", "fromBottom", "linked", "grantIf"], "impulse-exile");
       }
       if (object["kind"] === "grant-play") {
         check(object, name, [...TERMS, ...GRANT_EXTRAS, "kind", "cards", "to"], "grant-play");
