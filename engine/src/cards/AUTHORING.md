@@ -1997,6 +1997,11 @@ storm always asks, one copy at a time. `ifTargets: "permanent-or-player"` copies
 that targets one, and `otherwise` is "if you don't copy a spell this way, …". `controller`
 (an `PlayerRef`) puts the copy under another player, who chooses its new targets —
 demonstrate's "that player copies the spell" (`"that-player"` under a `choose-opponent`).
+"**Another player may** copy that spell" is the copy inside an `each-player-may`, whose effect
+is the asked player's own, so the copy and its new targets are theirs: Curse of Echoes' "each
+other player may copy that spell" (`who: { otherThan: "trigger-controller" }`, asked from the
+active player, each copy on the stack in that order), Parnesse, the Subtle Brush's "up to one
+target opponent may also copy that spell" (`who: { target: 0 }` over an optional opponent).
 `except` (a `CopyExceptions`, as `create-token-copy`'s) is "copy it, **except** …" — rule
 707.9, the copy's copiable values (707.9b), kept by the token a permanent spell's copy becomes
 (707.10f) and copied by anything that copies it: Iron Man's "except the copy isn't legendary"
