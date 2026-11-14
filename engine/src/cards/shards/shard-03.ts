@@ -149,6 +149,7 @@ import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
 import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
 import _poolCunningLethemancer from "../pool/cunning-lethemancer.js";
 import _poolCurseOfDeathSHold from "../pool/curse-of-death-s-hold.js";
+import _poolCurseOfMisfortunes from "../pool/curse-of-misfortunes.js";
 import _poolCut from "../pool/cut.js";
 import _poolCycloneSire from "../pool/cyclone-sire.js";
 import _poolCystbearer from "../pool/cystbearer.js";
@@ -444,6 +445,7 @@ import _poolKurkeshOnakkeAncient from "../pool/kurkesh-onakke-ancient.js";
 import _poolKytheonsIrregulars from "../pool/kytheons-irregulars.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
+import _poolLastNightTogether from "../pool/last-night-together.js";
 import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
 import _poolLeaderSuperGenius from "../pool/leader-super-genius.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
@@ -512,6 +514,7 @@ import _poolMoxPearl from "../pool/mox-pearl.js";
 import _poolMurasaSproutling from "../pool/murasa-sproutling.js";
 import _poolMurderousCut from "../pool/murderous-cut.js";
 import _poolMycosynthLattice from "../pool/mycosynth-lattice.js";
+import _poolMysteriousStranger from "../pool/mysterious-stranger.js";
 import _poolMythosOfVadrok from "../pool/mythos-of-vadrok.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
@@ -1096,6 +1099,7 @@ const shard: CardShard = {
     _poolCruelSomnophage,
     _poolCunningLethemancer,
     _poolCurseOfDeathSHold,
+    _poolCurseOfMisfortunes,
     _poolCut,
     _poolCycloneSire,
     _poolCystbearer,
@@ -1391,6 +1395,7 @@ const shard: CardShard = {
     _poolKytheonsIrregulars,
     _poolLaboratoryDrudge,
     _poolLambholtRaconteur,
+    _poolLastNightTogether,
     _poolLazotepChancellor,
     _poolLeaderSuperGenius,
     _poolLiberatedDwarf,
@@ -1459,6 +1464,7 @@ const shard: CardShard = {
     _poolMurasaSproutling,
     _poolMurderousCut,
     _poolMycosynthLattice,
+    _poolMysteriousStranger,
     _poolMythosOfVadrok,
     _poolNadirKraken,
     _poolNajalTheStormRunner,

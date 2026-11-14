@@ -577,6 +577,7 @@ import _poolMerchantRaiders from "../pool/merchant-raiders.js";
 import _poolMerfolkObserver from "../pool/merfolk-observer.js";
 import _poolMerfolkOfThePearlTrident from "../pool/merfolk-of-the-pearl-trident.js";
 import _poolMerryEsquireOfRohan from "../pool/merry-esquire-of-rohan.js";
+import _poolMidnightCrusaderShuttle from "../pool/midnight-crusader-shuttle.js";
 import _poolMightOfOaks from "../pool/might-of-oaks.js";
 import _poolMightOfTheOldWays from "../pool/might-of-the-old-ways.js";
 import _poolMindMaggots from "../pool/mind-maggots.js";
@@ -1598,6 +1599,7 @@ const shard: CardShard = {
     _poolMerfolkObserver,
     _poolMerfolkOfThePearlTrident,
     _poolMerryEsquireOfRohan,
+    _poolMidnightCrusaderShuttle,
     _poolMightOfOaks,
     _poolMightOfTheOldWays,
     _poolMindMaggots,

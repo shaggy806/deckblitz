@@ -5645,6 +5645,7 @@ import _poolCrowdsFavor from "./pool/crowds-favor.js";
 import _poolCrownHunterHireling from "./pool/crown-hunter-hireling.js";
 import _poolCrownOfAscension from "./pool/crown-of-ascension.js";
 import _poolCrownOfAwe from "./pool/crown-of-awe.js";
+import _poolCrownOfDoom from "./pool/crown-of-doom.js";
 import _poolCrownOfEmpires from "./pool/crown-of-empires.js";
 import _poolCrownOfFlames from "./pool/crown-of-flames.js";
 import _poolCrownOfFury from "./pool/crown-of-fury.js";
@@ -5848,6 +5849,7 @@ import _poolCurseOfFoolsWisdom from "./pool/curse-of-fools-wisdom.js";
 import _poolCurseOfHospitality from "./pool/curse-of-hospitality.js";
 import _poolCurseOfInertia from "./pool/curse-of-inertia.js";
 import _poolCurseOfMaritLage from "./pool/curse-of-marit-lage.js";
+import _poolCurseOfMisfortunes from "./pool/curse-of-misfortunes.js";
 import _poolCurseOfOblivion from "./pool/curse-of-oblivion.js";
 import _poolCurseOfObsession from "./pool/curse-of-obsession.js";
 import _poolCurseOfOpulence from "./pool/curse-of-opulence.js";
@@ -15367,6 +15369,7 @@ import _poolLastKiss from "./pool/last-kiss.js";
 import _poolLastLaugh from "./pool/last-laugh.js";
 import _poolLastLightOfDurinsDay from "./pool/last-light-of-durins-day.js";
 import _poolLastMarchOfTheEnts from "./pool/last-march-of-the-ents.js";
+import _poolLastNightTogether from "./pool/last-night-together.js";
 import _poolLastOneStanding from "./pool/last-one-standing.js";
 import _poolLastRites from "./pool/last-rites.js";
 import _poolLastStand from "./pool/last-stand.js";
@@ -17133,6 +17136,7 @@ import _poolMidnightBanshee from "./pool/midnight-banshee.js";
 import _poolMidnightCharm from "./pool/midnight-charm.js";
 import _poolMidnightClock from "./pool/midnight-clock.js";
 import _poolMidnightCovenant from "./pool/midnight-covenant.js";
+import _poolMidnightCrusaderShuttle from "./pool/midnight-crusader-shuttle.js";
 import _poolMidnightDuelist from "./pool/midnight-duelist.js";
 import _poolMidnightEntourage from "./pool/midnight-entourage.js";
 import _poolMidnightGuard from "./pool/midnight-guard.js";
@@ -18044,6 +18048,7 @@ import _poolMysteriosPhantasm from "./pool/mysterios-phantasm.js";
 import _poolMysteriousEgg from "./pool/mysterious-egg.js";
 import _poolMysteriousLimousine from "./pool/mysterious-limousine.js";
 import _poolMysteriousPathlighter from "./pool/mysterious-pathlighter.js";
+import _poolMysteriousStranger from "./pool/mysterious-stranger.js";
 import _poolMysteriousTome from "./pool/mysterious-tome.js";
 import _poolMysteryKey from "./pool/mystery-key.js";
 import _poolMysticArchaeologist from "./pool/mystic-archaeologist.js";
@@ -38482,6 +38487,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrownHunterHireling,
   _poolCrownOfAscension,
   _poolCrownOfAwe,
+  _poolCrownOfDoom,
   _poolCrownOfEmpires,
   _poolCrownOfFlames,
   _poolCrownOfFury,
@@ -38685,6 +38691,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfHospitality,
   _poolCurseOfInertia,
   _poolCurseOfMaritLage,
+  _poolCurseOfMisfortunes,
   _poolCurseOfOblivion,
   _poolCurseOfObsession,
   _poolCurseOfOpulence,
@@ -48204,6 +48211,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLastLaugh,
   _poolLastLightOfDurinsDay,
   _poolLastMarchOfTheEnts,
+  _poolLastNightTogether,
   _poolLastOneStanding,
   _poolLastRites,
   _poolLastStand,
@@ -49970,6 +49978,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMidnightCharm,
   _poolMidnightClock,
   _poolMidnightCovenant,
+  _poolMidnightCrusaderShuttle,
   _poolMidnightDuelist,
   _poolMidnightEntourage,
   _poolMidnightGuard,
@@ -50881,6 +50890,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMysteriousEgg,
   _poolMysteriousLimousine,
   _poolMysteriousPathlighter,
+  _poolMysteriousStranger,
   _poolMysteriousTome,
   _poolMysteryKey,
   _poolMysticArchaeologist,
@@ -71332,6 +71342,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crown-hunter-hireling": _poolCrownHunterHireling,
   "pool/crown-of-ascension": _poolCrownOfAscension,
   "pool/crown-of-awe": _poolCrownOfAwe,
+  "pool/crown-of-doom": _poolCrownOfDoom,
   "pool/crown-of-empires": _poolCrownOfEmpires,
   "pool/crown-of-flames": _poolCrownOfFlames,
   "pool/crown-of-fury": _poolCrownOfFury,
@@ -71535,6 +71546,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-hospitality": _poolCurseOfHospitality,
   "pool/curse-of-inertia": _poolCurseOfInertia,
   "pool/curse-of-marit-lage": _poolCurseOfMaritLage,
+  "pool/curse-of-misfortunes": _poolCurseOfMisfortunes,
   "pool/curse-of-oblivion": _poolCurseOfOblivion,
   "pool/curse-of-obsession": _poolCurseOfObsession,
   "pool/curse-of-opulence": _poolCurseOfOpulence,
@@ -81054,6 +81066,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/last-laugh": _poolLastLaugh,
   "pool/last-light-of-durins-day": _poolLastLightOfDurinsDay,
   "pool/last-march-of-the-ents": _poolLastMarchOfTheEnts,
+  "pool/last-night-together": _poolLastNightTogether,
   "pool/last-one-standing": _poolLastOneStanding,
   "pool/last-rites": _poolLastRites,
   "pool/last-stand": _poolLastStand,
@@ -82820,6 +82833,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/midnight-charm": _poolMidnightCharm,
   "pool/midnight-clock": _poolMidnightClock,
   "pool/midnight-covenant": _poolMidnightCovenant,
+  "pool/midnight-crusader-shuttle": _poolMidnightCrusaderShuttle,
   "pool/midnight-duelist": _poolMidnightDuelist,
   "pool/midnight-entourage": _poolMidnightEntourage,
   "pool/midnight-guard": _poolMidnightGuard,
@@ -83731,6 +83745,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mysterious-egg": _poolMysteriousEgg,
   "pool/mysterious-limousine": _poolMysteriousLimousine,
   "pool/mysterious-pathlighter": _poolMysteriousPathlighter,
+  "pool/mysterious-stranger": _poolMysteriousStranger,
   "pool/mysterious-tome": _poolMysteriousTome,
   "pool/mystery-key": _poolMysteryKey,
   "pool/mystic-archaeologist": _poolMysticArchaeologist,
