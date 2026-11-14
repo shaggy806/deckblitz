@@ -852,7 +852,6 @@ const SCENARIOS: readonly BotScenario[] = [
   },
   {
     name: "keeps a menace commander out of a board with two blockers that kill it",
-    kind: "training",
     rule: "Menace needs two blockers, not none: a 2/3 into an untapped 7/7 and 5/5 is a dead commander, so it attacks elsewhere or stays home.",
     run(weights, registry, makeBot) {
       // Reported from a live game (2026-11-14, room K6DYC, round 5, no
@@ -861,11 +860,13 @@ const SCENARIOS: readonly BotScenario[] = [
       // Hellkite, Scion of the Ur-Dragon, Wood Elves and Walking Bulwark.
       // Gnawbone and the Hellkite blocked and Lathril died "for no reason".
       // v2's attack search predicts every defender with v1's blocks
-      // (`simulateCombat`), and v1 never double-blocks a menace attacker that
-      // one of its creatures kills alone: Gnawbone takes it as a favorable
-      // single block, the gang-block step skips any attacker a lone blocker
-      // already kills, and the menace filter then drops the lone block. So
-      // the search saw Lathril unblocked: 2 damage and two Elf tokens.
+      // (`simulateCombat`), and v1 never double-blocked a menace attacker that
+      // one of its creatures kills alone: Gnawbone took it as a favorable
+      // single block, the gang-block step skipped any attacker a lone blocker
+      // already kills, and the menace filter then dropped the lone block. So
+      // the search saw Lathril unblocked: 2 damage and two Elf tokens. v1's
+      // blocks pair a menace attacker up now; before, this read "attacked
+      // carol".
       const game = table(registry, [A, B, C, D], A);
       game.state.turn.number = 17;
       game.state.players[A].life = 39;
@@ -2550,7 +2551,6 @@ const SCENARIOS: readonly BotScenario[] = [
   },
   {
     name: "does not cast Crux of Fate at its own Dragons when the clock runs out",
-    kind: "training",
     rule: "With no creature of an opponent's to destroy, neither of Crux of Fate's modes is worth casting, scored or not.",
     run(weights, registry) {
       // Reported from a live game (2026-11-14, room K6DYC, turn 24): Jodah's
@@ -2559,12 +2559,12 @@ const SCENARIOS: readonly BotScenario[] = [
       // its own, The Ur-Dragon among them. Its board (30-odd permanents, a
       // 30-card hand) made one rollout outlast the second, so the search was
       // cut before it scored anything and played v1's cast (`unscoredCast`).
-      // v1 casts what it can; a modal spell's modes are chosen by their
-      // targets alone (`aimableModes`), so with no targets both pass and the
-      // first is taken; and its wipe checks read no modal spell
-      // (`offerEffect` returns nothing for one). Searched in full, v2
-      // passes here. The clock jumps past the deadline in the first rollout,
-      // as in the scenario above.
+      // v1 cast what it could; a modal spell's modes were chosen by their
+      // targets alone, so with no targets both passed and the first was
+      // taken. v1 now prices a sweep (`effectWorth`'s `sweepWorth`) and
+      // leaves out a mode that only harms it (`modeHarmsUs`). The clock
+      // jumps past the deadline in the first rollout, as in the scenario
+      // above; before the fix this read `modes: [0]`.
       const game = table(registry, [A, B], A);
       game.state.players[A].life = 28;
       game.state.players[B].life = 31;
@@ -2577,10 +2577,6 @@ const SCENARIOS: readonly BotScenario[] = [
       lands(game, "Forest", B, 2);
       lands(game, "Swamp", B, 2);
       const crux = game.debugSpawn("Crux of Fate", A, "hand");
-      const v1 = new HeuristicBotController(A, registry).act(viewOf(game, A));
-      if (v1.type !== "cast-spell" || v1.card !== crux) {
-        return { passed: false, detail: `v1 chose ${describeAction(v1)}, so there is no Crux to fall back to` };
-      }
       let reads = 0;
       const bot = new EvalBotController(A, registry, {
         weights,
@@ -2596,7 +2592,6 @@ const SCENARIOS: readonly BotScenario[] = [
   },
   {
     name: "activates Scion of the Ur-Dragon once, not a batch of twenty",
-    kind: "training",
     rule: "Scion's copy lasts only from the last activation to resolve: one activation is the whole effect, and each one more spends {2} to put a Dragon in the graveyard for nothing.",
     run(weights, registry, makeBot) {
       // Reported from a live game (2026-11-14, room K6DYC, turn 22): Jodah's
@@ -2608,8 +2603,12 @@ const SCENARIOS: readonly BotScenario[] = [
       // search's batches (`simulateRepeated`) try an ability as many times
       // in a row as the mana allows (up to `MAX_BATCH`, 20), as one
       // candidate, for pumps whose activations add up; this one doesn't, and
-      // the batch of twenty scored above a single activation. Every
-      // activation after the first is "batch replay", unsearched.
+      // the batch of twenty scored the same as a single activation (spare
+      // Treasures count for nothing), so an accident of the rollout chose
+      // it. Every activation after the first was "batch replay", unsearched.
+      // An ability that makes a copy is batched no longer, and each
+      // activation past a batch's first costs it a little; before, this
+      // read "activated Scion 20 time(s) in a row".
       const game = table(registry, [A, B], A);
       const scion = onBoard(game, "Scion of the Ur-Dragon", A);
       for (const name of ["Old Gnawbone", "Two-Headed Hellkite", "Sol Ring", "Fellwar Stone"]) onBoard(game, name, A);

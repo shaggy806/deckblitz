@@ -6,7 +6,7 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-14 — Crux of Fate at its own Dragons, with no opposing creature
 
-Status: open.
+Status: fixed 2026-11-14 (its scenario now gates).
 
 - **Seen:** room K6DYC, turn 24, the game's log in hand. Player 1 and Atraxa were out; Meren had
   lands only. Jodah's bot cast Crux of Fate choosing "destroy all Dragon creatures" and destroyed
@@ -20,16 +20,21 @@ Status: open.
     (`aimableModes`), so with no targets both of Crux's modes pass and the first is taken, and v1's
     wipe checks read no modal spell (`offerEffect` returns nothing for one).
   - Searched in full, v2 passes on the same board.
-- **Scenario:** "does not cast Crux of Fate at its own Dragons when the clock runs out" (training),
-  with a clock that runs out in the first rollout. It reads `modes: [0]`.
-- **Likely fix:** in v1, price an untargeted modal spell's modes with `effectWorth` and cast it
-  only on a mode worth more than nothing; `offerEffect` could return the chosen mode's effect so
-  the wipe checks see it too. Might break: modal spells v1 cast for a reason `effectWorth` misses.
-  v1 is what a cut-short search plays, so the gate and `bot:diff` should show it.
+- **Scenario:** "does not cast Crux of Fate at its own Dragons when the clock runs out" (gate),
+  with a clock that runs out in the first rollout. Before the fix it read `modes: [0]`.
+- **Fix (built):** `effectWorth` prices a sweep (`sweepWorth`): what it takes from the opponents,
+  shared across them, less what it takes from us. v1 leaves out an untargeted modal mode worth less
+  than nothing (`modeHarmsUs`) and doesn't cast an untargeted instant or sorcery that is
+  (`harmsOnlyUs`: Wrath of God with only its own creatures). With an opponent's creatures to take,
+  it casts the mode that takes them. `test/v1-self-harm.test.ts`.
+  - The same game's turn 26, from the log: Teferi's Protection cast in its own upkeep with Meren on
+    2 life, phasing out every attacker. v1 now holds "all permanents you control phase out" for an
+    opponent's spell or attack to answer (`holdsOwnPhaseOut`), and keeps its mana in its upkeep and
+    draw step while only its own abilities are on the stack (`holdsManaForMain`).
 
 ## 2026-11-14 — Scion of the Ur-Dragon activated 19 times at once
 
-Status: open.
+Status: fixed 2026-11-14 (its scenario now gates).
 
 - **Seen:** room K6DYC, turn 22, Jodah's upkeep. With ~45 Treasures from Old Gnawbone, the bot
   activated Scion 19 times in response to Mana Vault's trigger, all on the stack together: 16
@@ -39,19 +44,23 @@ Status: open.
 - **Why:** the priority search's batches (`simulateRepeated`, `eval-bot.ts`) try an ability as
   many times in a row as the mana allows (up to `MAX_BATCH`, 20), as one candidate. They're meant
   for pumps whose activations add up ("Lathliss on a pile of Treasures"). Scion's don't, but
-  only the batch of 20 is compared with the single activation, and it scored higher; every
-  activation after the first is then "batch replay", unsearched. Why the 20 score higher (the
-  Treasures' worth against the Dragons in the graveyard) isn't traced yet.
-- **Scenario:** "activates Scion of the Ur-Dragon once, not a batch of twenty" (training). It reads
-  "activated Scion 20 time(s) in a row".
-- **Likely fix:** score a batch at more than one count (2, half, all) and keep it only where the
-  count that scores best is above one; or keep abilities whose effect replaces itself (a copy or
-  set until end of turn) out of batches. Trace the score difference first. Might break: a
-  pump batch that wins only at its full count, if the counts are scored under a clock.
+  only the batch of 20 is compared with the single activation; every activation after the first
+  is then "batch replay", unsearched.
+  - Measured on the scenario's board: 1, 2, 5 and 20 activations all score 64.30. The evaluation
+    counts the 31 Treasures spent for nothing (`extraTokens` and `untappedMana` each fall by 31,
+    the score doesn't move), so the batch ties with one activation and whichever Dragon the
+    rollout happens to leave copied decides it.
+- **Scenario:** "activates Scion of the Ur-Dragon once, not a batch of twenty" (gate). Before the
+  fix it read "activated Scion 20 time(s) in a row".
+- **Fix (built):** an ability whose effect makes a copy isn't batched (`replacesItself`), and each
+  activation past a batch's first costs its score a tenth of a card (`BATCH_STEP_COST`), so a
+  batch that only ties with one activation loses to it. The upkeep hold above also keeps mana
+  out of an answer to the bot's own upkeep trigger, which is where this batch was played.
+  - Still open (`BACKLOG.md`): spare Treasures and untapped mana scoring nothing.
 
 ## 2026-11-14 — Lathril (menace) swung into a 7/7 and a 5/5 and died
 
-Status: open.
+Status: fixed 2026-11-14 (its scenario now gates).
 
 - **Seen:** room K6DYC, round five, four players, no capture. Meren's bot had its commander,
   Lathril, Blade of the Elves (2/3 menace), and only lands besides. It attacked Jodah, who had
@@ -68,14 +77,12 @@ Status: open.
   - So v1 answers **no blocks at all**, checked directly on this board. The search saw Lathril
     unblocked, 2 damage and two Elf tokens, while the real defender (a v2 seat) blocked with two.
 - **Scenario:** "keeps a menace commander out of a board with two blockers that kill it"
-  (training). It reads "attacked carol" (Jodah's seat) on 2026-11-14.
-- **Likely fix:** in v1's blocks, treat a menace attacker as a gang block from the start: keep it
-  out of the single-block steps, and in the gang-block step don't skip it when one blocker kills
-  it alone. Take the pair that kills it for the least `gangLoss`, still only when the attacker is
-  worth more than that loss. That is the defender's real best block, so the attack search sees it.
-  - Might break: rollout defenders then gang-block menace attackers they used to let through, so
-    v2 attacks with menace creatures less often. That is the point, but check the gate and
-    `bot:diff` for swings that were right because nobody could block them profitably.
+  (gate). Before the fix it read "attacked carol" (Jodah's seat); it now attacks bob (Atraxa's).
+- **Fix (built):** v1's blocks keep a menace attacker out of the lone favorable block, and the
+  gang-block step pairs it up even when one blocker kills it alone: the pair that kills it for the
+  least `gangLoss`, still only when the attacker is worth more than that loss. A blocker that a
+  menace attacker used to waste (a lone block, dropped as illegal) now blocks another attacker.
+  `test/v1-blocks.test.ts`.
 
 ## 2026-10-14 — Terror of the Peaks' 7 at a creature of a player on 4
 

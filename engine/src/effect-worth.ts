@@ -36,7 +36,7 @@ import type { CardDefinition } from "./cards/define.js";
 import { computeCharacteristics } from "./characteristics.js";
 import { polarityBias } from "./deck-bias.js";
 import type { EffectAmount, EffectSpec, ObjectRef, PlayerScope, ProtectionQualities } from "./effects.js";
-import { manaValueOfObject } from "./filter.js";
+import { manaValueOfObject, matchesFilter } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameObject, GameState } from "./state.js";
@@ -243,6 +243,48 @@ function lifeLossTo(players: readonly PlayerId[] | null, amount: number, ctx: Wo
   return total;
 }
 
+type Sweep = Extract<
+  EffectSpec,
+  { readonly kind: "destroy-all" | "damage-all" | "exile-all" | "return-to-hand-all" }
+>;
+
+/**
+ * Mass removal, as the board stands: what it takes from the opponents, shared
+ * across them, less what it takes from `me` — a permanent the removal's 4, a
+ * token 1. Crux of Fate's "destroy all Dragon creatures" with Dragons on our
+ * side only is nine permanents of ours for nothing, and a bot that read every
+ * sweep as 0 cast it (reported from a live game, 2026-11-14). Only what the
+ * text decides alone: a sweep narrowed by a target, by who its source damaged
+ * or to one player's side, or dealing an amount read off the game, is 0 —
+ * unknown, as the module comment has it. An indestructible permanent survives
+ * a destroy (rule 702.12b), a creature damage short of its toughness.
+ */
+function sweepWorth(effect: Sweep, ctx: WorthContext): number {
+  const cards = ctx.cards;
+  if (cards === undefined || effect.controlledByTarget !== undefined) return 0;
+  if (effect.kind === "destroy-all" && effect.onlyControllersDamagedBySource === true) return 0;
+  if (effect.kind === "damage-all" && (effect.whose !== undefined || effect.from !== undefined)) return 0;
+  const damage = effect.kind === "damage-all" ? effect.amount : 0;
+  if (typeof damage !== "number") return 0;
+  const { state, me } = ctx;
+  const opponents = Math.max(1, opponentsOf(state, me).length);
+  const sparesSource = (effect.kind === "destroy-all" || effect.kind === "damage-all") && effect.exceptSource === true;
+  let worth = 0;
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || (sparesSource && id === ctx.source)) continue;
+    if (!matchesFilter(state, cards, id, effect.filter, { you: ctx.controller })) continue;
+    const c = computeCharacteristics(state, cards, id);
+    if (effect.kind === "destroy-all" && c.keywords.has("indestructible")) continue;
+    if (effect.kind === "damage-all") {
+      if (!c.types.includes("creature") || damage < c.toughness - (object.damageMarked ?? 0)) continue;
+    }
+    const value = object.isToken === true ? (object.stackCount ?? 1) : SLOT_WORTH[2];
+    worth += object.controller === me ? -value : value / opponents;
+  }
+  return worth;
+}
+
 /** The permanent a `"source"`/`"trigger-object"`/`"attached"`/`"chosen"`
  * reference names — `"attached"` as the source is attached now, `"chosen"`
  * the source's chosen permanent. */
@@ -384,6 +426,11 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       );
     case "grant-protection":
       return "choose" in effect.from ? 0 : protectionWorth(effect.target, effect.from, ctx, effect.asHexproof === true);
+    case "destroy-all":
+    case "damage-all":
+    case "exile-all":
+    case "return-to-hand-all":
+      return sweepWorth(effect, ctx);
     case "draw": {
       // A player named through a target ("its controller draws") is the
       // target's to judge.

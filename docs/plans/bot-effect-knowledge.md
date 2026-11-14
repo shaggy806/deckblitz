@@ -816,6 +816,32 @@ Blind to synergy: Parallel Lives is priced the same in a deck with no tokens. Th
 bots play carry such cards for a reason, and a rate for each class can replace the floor for
 that class when one is written.
 
+### What v1 won't do to itself (2026-11-14)
+
+One live game (room K6DYC, its log in hand) lost by a bot that had won it twice. Its board grew
+past what one rollout fits in the 1 s clock, so the audit's step 2 applied for turns on end: v2
+played v1's casts unscored and v1's answers. v1 casts what it can, and it cast Crux of Fate at
+its own nine Dragons with no creature of an opponent's on the board, then Teferi's Protection
+in its own upkeep with the last opponent on 2 life. So the floor a search out of time falls to
+was raised, in v1:
+
+- `effectWorth` prices a sweep by the board (`sweepWorth`), and v1 leaves out an untargeted
+  modal mode or instant/sorcery worth less than nothing (`modeHarmsUs`, `harmsOnlyUs`).
+- "All permanents you control phase out" waits for an opponent's spell or attack
+  (`holdsOwnPhaseOut`).
+- `holdsManaForMain` covers the upkeep and draw step with only our own abilities on the stack
+  (v2's candidates obey it too).
+- v1's blocks pair up a menace attacker one blocker kills alone; v2's attack search, which
+  predicts defenders with them, had sent a 2/3 menace commander at a 7/7 and a 5/5.
+
+And one in v2's own search: a batch of repeated activations (`simulateRepeated`) tied with a
+single one, because spare Treasures and untapped mana score nothing, and Scion of the
+Ur-Dragon was activated 19 times at once. An ability that makes a copy isn't batched, and each
+activation past a batch's first costs `BATCH_STEP_COST`.
+
+Three gate scenarios, `test/v1-self-harm.test.ts` and `test/v1-blocks.test.ts`. Not done: the
+same bot then drew its whole library (`BACKLOG.md`).
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

@@ -269,6 +269,21 @@ const outOfTime = (budget: SearchBudget): boolean => {
   return now + budget.longest >= budget.until;
 };
 
+/** What each activation past the first costs a batch's score: a tenth of a
+ * card. Small beside what a batch is for — six firebreathing activations for
+ * six damage are worth three — and enough that one which only ties a single
+ * activation loses to it. */
+const BATCH_STEP_COST = 0.1;
+
+/** Whether `effect` makes something a copy of something else, anywhere in
+ * its tree ("becomes a copy of that card until end of turn"). */
+function makesACopy(effect: unknown): boolean {
+  if (effect === null || typeof effect !== "object") return false;
+  if (Array.isArray(effect)) return effect.some(makesACopy);
+  if ((effect as { readonly kind?: unknown }).kind === "become-copy") return true;
+  return Object.values(effect).some((value) => value !== null && typeof value === "object" && makesACopy(value));
+}
+
 /**
  * Whether every target a planned step chose is still among `offer`'s options.
  * A plan is made in rollouts, and a rollout's choices aren't the real game's:
@@ -954,6 +969,16 @@ export class EvalBotController extends HeuristicBotController {
     return action;
   }
 
+  /** Whether activating `action` again replaces what the last activation
+   * did instead of adding to it: its effect makes something a copy
+   * (`makesACopy`), and only the last copy to resolve stands. */
+  private replacesItself(state: GameState, action: Action): boolean {
+    if (action.type !== "activate-ability") return false;
+    const name = state.objects[action.source]?.cardName;
+    if (name === undefined || !this.cards.has(name)) return false;
+    return makesACopy(this.cards.get(name).activated?.[action.abilityIndex]?.effect);
+  }
+
   /** Whether `activationCap` still allows this ability this turn. */
   private mayActivate(state: GameState, source: ObjectId, abilityIndex: number): boolean {
     const name = state.objects[source]?.cardName;
@@ -1363,12 +1388,21 @@ export class EvalBotController extends HeuristicBotController {
     // (Scavenging Ooze eating a graveyard), for the simulation to choose
     // between.
     let batch: { readonly times: number; readonly spread: boolean } | null = null;
+    // Not an ability that makes something a copy (`replacesItself`): the
+    // last copy to resolve is the only one that stands. And each activation
+    // past the first costs the batch `BATCH_STEP_COST`: the evaluation counts
+    // spare Treasures and untapped mana for nothing, so twenty activations
+    // scored the same as one and whichever came out ahead by an accident of
+    // the rollout was played. Jodah's bot activated Scion of the Ur-Dragon
+    // 19 times at once, for 16 Dragons in its graveyard and one copy
+    // (reported from a live game, 2026-11-14).
     const batched = new Set<string>();
     for (const action of candidates) {
       if (action.type !== "activate-ability" || mustKill.has(action)) continue;
       const key = `${action.source}:${action.abilityIndex}`;
       if (batched.has(key)) continue;
       batched.add(key);
+      if (this.replacesItself(view.state, action)) continue;
       const targeted = (action.targets ?? []).some((t) => t !== null);
       for (const spread of targeted ? [false, true] : [false]) {
         if (spent(budget)) break;
@@ -1397,7 +1431,10 @@ export class EvalBotController extends HeuristicBotController {
         );
         if (result === null || result.times < 2) continue;
         const score = evaluateState(result.state, this.cards, this.playerId, this.weights);
-        if (score <= bestScore) continue;
+        // The cost decides whether the batch is taken, and isn't kept in the
+        // score: the turn plan's lines are compared with it after this, and
+        // one a step cost had lowered lost to "activate once, then again".
+        if (score - BATCH_STEP_COST * (result.times - 1) <= bestScore) continue;
         bestScore = score;
         best = action;
         batch = { times: result.times, spread };

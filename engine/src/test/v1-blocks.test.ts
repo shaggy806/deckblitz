@@ -65,6 +65,29 @@ describe("v1 blocks", () => {
     expect(blocks).toEqual([]);
   });
 
+  it("double-blocks a menace attacker one of its creatures kills alone", () => {
+    // Lathril, Blade of the Elves, a 2/3 with menace, into a 6/4 and a 3/3:
+    // the Wurm kills it alone, but can't block it alone (rule 702.111b).
+    // This used to be no block at all, and v2's attack search, predicting
+    // defenders with these blocks, sent Lathril at a 7/7 and a 5/5 (reported
+    // from a live game, 2026-11-14).
+    const { blocks, ids } = blocksAgainst(["Craw Wurm", "Centaur Courser"], ["Lathril, Blade of the Elves"]);
+    expect(blocks.map((b) => b.blocker).sort()).toEqual([...ids.mine].sort());
+    expect(blocks.every((b) => b.attacker === ids.theirs[0])).toBe(true);
+  });
+
+  it("leaves a menace attacker alone with one creature to block it", () => {
+    const { blocks } = blocksAgainst(["Craw Wurm"], ["Lathril, Blade of the Elves"]);
+    expect(blocks).toEqual([]);
+  });
+
+  it("blocks another attacker with a creature a menace attacker would have wasted", () => {
+    // The Wurm can't block Lathril alone, so it takes the Bears instead of
+    // being spent on an illegal block and dropped.
+    const { blocks, ids } = blocksAgainst(["Craw Wurm"], ["Lathril, Blade of the Elves", "Grizzly Bears"]);
+    expect(blocks).toEqual([{ blocker: ids.mine[0], attacker: ids.theirs[1] }]);
+  });
+
   it("doesn't block a deathtouch attacker with a creature that would survive anything else", () => {
     const { blocks } = blocksAgainst(["Craw Wurm"], ["Typhoid Rats"]);
     expect(blocks).toEqual([]);

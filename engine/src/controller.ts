@@ -3708,16 +3708,21 @@ export class HeuristicBotController extends AutomaticController {
    * beginning of your precombat main phase": the main phase's sorcery-speed
    * plays come once they resolve, and spent now on an instant, the mana
    * isn't there for them (the Sultai autopsy: 57 times in 34 games, Teval
-   * waiting a turn behind a Reassembling Skeleton).
+   * waiting a turn behind a Reassembling Skeleton). And in our upkeep or draw
+   * step while only our own abilities are there — Mana Vault's upkeep
+   * trigger: a bot answered it with nineteen Scion of the Ur-Dragon
+   * activations one turn and Teferi's Protection another (reported from a
+   * live game, 2026-11-14).
    */
   protected holdsManaForMain(state: GameState, offer: LegalAction): boolean {
     if (offer.kind !== "cast-spell" && offer.kind !== "activate-ability" && offer.kind !== "cycle") return false;
     if (activePlayerOf(state) !== this.playerId) return false;
     const stack = state.zones.shared.stack;
+    const beginning = state.turn.step === "upkeep" || state.turn.step === "draw";
     const window =
       stack.length === 0
-        ? state.turn.step === "upkeep" || state.turn.step === "draw"
-        : (state.turn.step === "precombat-main" || state.turn.step === "postcombat-main") &&
+        ? beginning
+        : (beginning || state.turn.step === "precombat-main" || state.turn.step === "postcombat-main") &&
           stack.every((id) => {
             const object = state.objects[id];
             return object !== undefined && object.kind === "ability" && object.controller === this.playerId;
@@ -4007,6 +4012,7 @@ export class HeuristicBotController extends AutomaticController {
     return cm.modes
       .map((_mode, i) => i)
       .filter((i) => cm.modes[i].targetOptions.every((options) => options.length > 0))
+      .filter((i) => !this.modeHarmsUs(state, legal, i))
       .filter(
         (i) =>
           !cm.modes[i].targetOptions.some(
@@ -4023,15 +4029,90 @@ export class HeuristicBotController extends AutomaticController {
       );
   }
 
+  /**
+   * Whether mode `i` of a modal spell has no target and is worth less than
+   * nothing to us as the board stands (`effectWorth`): Crux of Fate's
+   * "destroy all Dragon creatures" with Dragons on our side alone. Such a
+   * mode is never chosen, and a spell left without enough modes isn't cast.
+   * Modes were picked by their targets only, so with none every mode passed
+   * and the first was taken — and a search cut short by its clock plays this
+   * bot's cast unscored (reported from a live game, 2026-11-14: nine of the
+   * bot's own Dragons, no creature of an opponent's on the board). A mode
+   * with a target is `aimableModes`' to judge; another face's isn't read.
+   */
+  private modeHarmsUs(state: GameState, legal: CastSpellLegal, i: number): boolean {
+    const cm = legal.castModal;
+    if (cm === undefined || legal.face !== undefined || !this.registry.has(legal.cardName)) return false;
+    if (cm.modes[i].targetOptions.length > 0) return false;
+    const effect = this.registry.get(legal.cardName).castModal?.modes[i]?.effect;
+    return this.untargetedWorth(state, effect) < 0;
+  }
+
+  /** What an effect with no targets is worth to us, cast now (`effectWorth`). */
+  private untargetedWorth(state: GameState, effect: EffectSpec | null | undefined): number {
+    return effectWorth(effect, {
+      state,
+      me: this.playerId,
+      controller: this.playerId,
+      targets: [],
+      cards: this.registry,
+    });
+  }
+
+  /**
+   * Whether `offer` casts an instant or sorcery with no target that is worth
+   * less than nothing to us as the board stands: a board wipe with only our
+   * own creatures to take, a draw our library can't pay. This bot casts what
+   * it can, and what it casts is what a search out of time plays
+   * (`EvalBotController.unscoredCast`). Unknown effects are worth 0, so only
+   * a harm `effectWorth` can name holds a spell back. A modal spell is
+   * judged mode by mode (`modeHarmsUs`).
+   */
+  private harmsOnlyUs(state: GameState, offer: CastSpellLegal): boolean {
+    if (offer.castModal !== undefined || offer.face !== undefined) return false;
+    if (offer.targetOptions.length > 0 || !this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    if (!def.types.includes("instant") && !def.types.includes("sorcery")) return false;
+    return this.untargetedWorth(state, def.effect) < 0;
+  }
+
+  /**
+   * Whether `offer` casts a spell that phases out every permanent we control
+   * (Teferi's Protection) with nothing to save them from: no spell or
+   * ability of an opponent's on the stack, and no opponent's attack under
+   * way. Phased out, they don't exist until our next untap step (rule
+   * 702.26b), so cast on our own turn it gives up the turn's attack and our
+   * blockers for a round — the bot cast it in its own upkeep with an
+   * opponent on 2 life, and attacked with nothing (reported from a live
+   * game, 2026-11-14).
+   */
+  private holdsOwnPhaseOut(state: GameState, offer: CastSpellLegal): boolean {
+    if (offer.castModal !== undefined || offer.face !== undefined || !this.registry.has(offer.cardName)) return false;
+    if (!phasesOutOurs(this.registry.get(offer.cardName).effect)) return false;
+    const answering = state.zones.shared.stack.some((id) => {
+      const object = state.objects[id];
+      return object !== undefined && object.controller !== this.playerId;
+    });
+    if (answering) return false;
+    const attacked =
+      activePlayerOf(state) !== this.playerId &&
+      (state.turn.step === "declare-attackers" || state.turn.step === "declare-blockers");
+    return !attacked;
+  }
+
   /** Which modes of a targeted modal spell to choose: as many as allowed, in
    * order, of the aimable ones — or of every mode with a legal target, when
-   * the aimable ones don't make the minimum. `null` when nothing does. */
+   * the aimable ones don't make the minimum. Never a mode that only harms us
+   * (`modeHarmsUs`). `null` when nothing does. */
   private usableModes(state: GameState, legal: CastSpellLegal): number[] | null {
     const cm = legal.castModal;
     if (cm === undefined) return null;
     const aimable = this.aimableModes(state, legal);
     const fillable = () =>
-      cm.modes.map((_mode, i) => i).filter((i) => cm.modes[i].targetOptions.every((options) => options.length > 0));
+      cm.modes
+        .map((_mode, i) => i)
+        .filter((i) => cm.modes[i].targetOptions.every((options) => options.length > 0))
+        .filter((i) => !this.modeHarmsUs(state, legal, i));
     // Spree (rule 702.172a): the most of them it can pay for together.
     if (cm.modeSets !== undefined) return fitModeSet(cm.modeSets, aimable) ?? fitModeSet(cm.modeSets, fillable());
     const repeat = cm.repeatModes === true;
@@ -4615,6 +4696,8 @@ export class HeuristicBotController extends AutomaticController {
       o.assist === undefined &&
       !this.taxWouldKill(state, o) &&
       !this.aimsOnlyAtWrongSide(state, o) &&
+      !this.harmsOnlyUs(state, o) &&
+      !this.holdsOwnPhaseOut(state, o) &&
       !this.wastedNow(state, o) &&
       !this.holdsForASpell(state, o) &&
       !this.holdsWipeForCombat(state, o) &&
@@ -4981,6 +5064,10 @@ export class HeuristicBotController extends AutomaticController {
       const favorable = entry.canBlock.find(
         (a) =>
           !taken.has(a) &&
+          // Not a menace attacker: one blocker alone is illegal (rule
+          // 702.111b), and taken here it was dropped at the end, the blocker
+          // spent on nothing. The gang blocks below pair it up.
+          !legal.menaceAttackers.includes(a) &&
           power(entry.blocker) >= toughness(a) &&
           toughness(entry.blocker) > power(a) &&
           (firstStrike || !computeCharacteristics(state, this.registry, a).keywords.has("deathtouch")),
@@ -5022,17 +5109,24 @@ export class HeuristicBotController extends AutomaticController {
     }
     // Two blockers that kill together what neither kills alone, when the
     // attacker is worth more than what its damage can take back (it kills
-    // the most it can — the defender's worst case).
+    // the most it can — the defender's worst case). A menace attacker is
+    // paired up even when one of them kills it alone, since alone it can't
+    // block: without that, a 7/7 was this bot's only block for a 2/3 with
+    // menace, dropped as illegal, and v2's attack search — which predicts
+    // every defender with these blocks — sent its commander at an untapped
+    // 7/7 and 5/5 as though nothing would block (reported from a live game,
+    // 2026-11-14: Lathril, Blade of the Elves).
     for (const attacker of [...new Set(legal.eligible.flatMap((e) => e.canBlock))]) {
       if (blocked().has(attacker)) continue;
+      const menace = legal.menaceAttackers.includes(attacker);
       const able = legal.eligible.filter((e) => !used.has(e.blocker) && e.canBlock.includes(attacker));
-      if (able.some((e) => kills(e.blocker, attacker))) continue;
+      if (!menace && able.some((e) => kills(e.blocker, attacker))) continue;
       let best: { pair: readonly [ObjectId, ObjectId]; loss: number } | null = null;
       for (let i = 0; i < able.length; i += 1) {
         for (let j = i + 1; j < able.length; j += 1) {
           const x = able[i].blocker;
           const y = able[j].blocker;
-          if (power(x) + power(y) < toughness(attacker)) continue;
+          if (power(x) + power(y) < toughness(attacker) && !kills(x, attacker) && !kills(y, attacker)) continue;
           const loss = gangLoss(state, this.registry, power(attacker), deathtouch(attacker), x, y);
           if (worth(attacker) > loss + 1 && (best === null || loss < best.loss)) best = { pair: [x, y], loss };
         }
@@ -5138,6 +5232,20 @@ type Sweep = Extract<
   EffectSpec,
   { readonly kind: "destroy-all" | "damage-all" | "exile-all" | "return-to-hand-all" }
 >;
+
+/** Whether `effect` phases out the permanents its controller controls, all
+ * of them ("All permanents you control phase out" — Teferi's Protection),
+ * through sequences. */
+function phasesOutOurs(effect: EffectSpec | null | undefined): boolean {
+  if (effect === null || effect === undefined) return false;
+  if (effect.kind === "sequence") return effect.effects.some(phasesOutOurs);
+  return (
+    effect.kind === "phase-out" &&
+    effect.target === undefined &&
+    effect.controlledByTarget === undefined &&
+    effect.filter?.controlledBy === "you"
+  );
+}
 
 /** The mass removal in `effect` — destroy, damage, exile or bounce "all"
  * — through sequences and "may"s. */
