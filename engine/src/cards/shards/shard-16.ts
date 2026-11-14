@@ -174,6 +174,7 @@ import _poolCruxOfFate from "../pool/crux-of-fate.js";
 import _poolCunningSparkmage from "../pool/cunning-sparkmage.js";
 import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
 import _poolCurseOfChains from "../pool/curse-of-chains.js";
+import _poolCurseOfHospitality from "../pool/curse-of-hospitality.js";
 import _poolCustodiSoulbinders from "../pool/custodi-soulbinders.js";
 import _poolCyanVengefulSamurai from "../pool/cyan-vengeful-samurai.js";
 import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
@@ -695,6 +696,7 @@ import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRanklesPrank from "../pool/rankles-prank.js";
 import _poolRansackTheLab from "../pool/ransack-the-lab.js";
 import _poolRansack from "../pool/ransack.js";
+import _poolRatchetFieldMedic from "../pool/ratchet-field-medic.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
 import _poolRaziaBorosArchangel from "../pool/razia-boros-archangel.js";
 import _poolRazorRings from "../pool/razor-rings.js";
@@ -1257,6 +1259,7 @@ const shard: CardShard = {
     _poolCunningSparkmage,
     _poolCurseMarredDemon,
     _poolCurseOfChains,
+    _poolCurseOfHospitality,
     _poolCustodiSoulbinders,
     _poolCyanVengefulSamurai,
     _poolCybermanPatrol,
@@ -1778,6 +1781,7 @@ const shard: CardShard = {
     _poolRanklesPrank,
     _poolRansackTheLab,
     _poolRansack,
+    _poolRatchetFieldMedic,
     _poolRazeToTheGround,
     _poolRaziaBorosArchangel,
     _poolRazorRings,

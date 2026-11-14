@@ -214,6 +214,7 @@ import _poolDireWolves from "../pool/dire-wolves.js";
 import _poolDirectCurrent from "../pool/direct-current.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDiscontinuity from "../pool/discontinuity.js";
+import _poolDisorientingChoice from "../pool/disorienting-choice.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDispossess from "../pool/dispossess.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
@@ -1224,6 +1225,7 @@ const shard: CardShard = {
     _poolDirectCurrent,
     _poolDiregrafCaptain,
     _poolDiscontinuity,
+    _poolDisorientingChoice,
     _poolDisposalMummy,
     _poolDispossess,
     _poolDistractingGeist,

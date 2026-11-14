@@ -5499,6 +5499,7 @@ import _poolCragSaurian from "./pool/crag-saurian.js";
 import _poolCragcrownPathway from "./pool/cragcrown-pathway.js";
 import _poolCragplateBaloth from "./pool/cragplate-baloth.js";
 import _poolCragsmasherYeti from "./pool/cragsmasher-yeti.js";
+import _poolCraigBooneNovacGuard from "./pool/craig-boone-novac-guard.js";
 import _poolCramSession from "./pool/cram-session.js";
 import _poolCrampedVentsAccessMaze from "./pool/cramped-vents-access-maze.js";
 import _poolCrampedVents from "./pool/cramped-vents.js";
@@ -5836,6 +5837,7 @@ import _poolCurseOfDeathSHold from "./pool/curse-of-death-s-hold.js";
 import _poolCurseOfDisturbance from "./pool/curse-of-disturbance.js";
 import _poolCurseOfExhaustion from "./pool/curse-of-exhaustion.js";
 import _poolCurseOfFoolsWisdom from "./pool/curse-of-fools-wisdom.js";
+import _poolCurseOfHospitality from "./pool/curse-of-hospitality.js";
 import _poolCurseOfInertia from "./pool/curse-of-inertia.js";
 import _poolCurseOfMaritLage from "./pool/curse-of-marit-lage.js";
 import _poolCurseOfOblivion from "./pool/curse-of-oblivion.js";
@@ -5844,6 +5846,7 @@ import _poolCurseOfOpulence from "./pool/curse-of-opulence.js";
 import _poolCurseOfPredation from "./pool/curse-of-predation.js";
 import _poolCurseOfShallowGraves from "./pool/curse-of-shallow-graves.js";
 import _poolCurseOfSilence from "./pool/curse-of-silence.js";
+import _poolCurseOfStalkedPrey from "./pool/curse-of-stalked-prey.js";
 import _poolCurseOfTheBloodyTome from "./pool/curse-of-the-bloody-tome.js";
 import _poolCurseOfTheCabal from "./pool/curse-of-the-cabal.js";
 import _poolCurseOfTheForsaken from "./pool/curse-of-the-forsaken.js";
@@ -6980,6 +6983,7 @@ import _poolDismissivePyromancer from "./pool/dismissive-pyromancer.js";
 import _poolDisorderInTheCourt from "./pool/disorder-in-the-court.js";
 import _poolDisorder from "./pool/disorder.js";
 import _poolDisorient from "./pool/disorient.js";
+import _poolDisorientingChoice from "./pool/disorienting-choice.js";
 import _poolDisownedAncestor from "./pool/disowned-ancestor.js";
 import _poolDispatch from "./pool/dispatch.js";
 import _poolDispel from "./pool/dispel.js";
@@ -11814,6 +11818,7 @@ import _poolGrotagThrasher from "./pool/grotag-thrasher.js";
 import _poolGrotesqueDemise from "./pool/grotesque-demise.js";
 import _poolGrotesqueHybrid from "./pool/grotesque-hybrid.js";
 import _poolGrotesqueMutation from "./pool/grotesque-mutation.js";
+import _poolGrothamaAllDevouring from "./pool/grothama-all-devouring.js";
 import _poolGroundAssault from "./pool/ground-assault.js";
 import _poolGroundRift from "./pool/ground-rift.js";
 import _poolGroundSeal from "./pool/ground-seal.js";
@@ -21309,6 +21314,8 @@ import _poolRatadrabikOfUrborg from "./pool/ratadrabik-of-urborg.js";
 import _poolRatcatcherTrainee from "./pool/ratcatcher-trainee.js";
 import _poolRatcatcher from "./pool/ratcatcher.js";
 import _poolRatchetBomb from "./pool/ratchet-bomb.js";
+import _poolRatchetFieldMedic from "./pool/ratchet-field-medic.js";
+import _poolRatchetRescueRacer from "./pool/ratchet-rescue-racer.js";
 import _poolRathiAssassin from "./pool/rathi-assassin.js";
 import _poolRathiDragon from "./pool/rathi-dragon.js";
 import _poolRathiFiend from "./pool/rathi-fiend.js";
@@ -38290,6 +38297,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCragcrownPathway,
   _poolCragplateBaloth,
   _poolCragsmasherYeti,
+  _poolCraigBooneNovacGuard,
   _poolCramSession,
   _poolCrampedVentsAccessMaze,
   _poolCrampedVents,
@@ -38627,6 +38635,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfDisturbance,
   _poolCurseOfExhaustion,
   _poolCurseOfFoolsWisdom,
+  _poolCurseOfHospitality,
   _poolCurseOfInertia,
   _poolCurseOfMaritLage,
   _poolCurseOfOblivion,
@@ -38635,6 +38644,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfPredation,
   _poolCurseOfShallowGraves,
   _poolCurseOfSilence,
+  _poolCurseOfStalkedPrey,
   _poolCurseOfTheBloodyTome,
   _poolCurseOfTheCabal,
   _poolCurseOfTheForsaken,
@@ -39771,6 +39781,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDisorderInTheCourt,
   _poolDisorder,
   _poolDisorient,
+  _poolDisorientingChoice,
   _poolDisownedAncestor,
   _poolDispatch,
   _poolDispel,
@@ -44605,6 +44616,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrotesqueDemise,
   _poolGrotesqueHybrid,
   _poolGrotesqueMutation,
+  _poolGrothamaAllDevouring,
   _poolGroundAssault,
   _poolGroundRift,
   _poolGroundSeal,
@@ -54100,6 +54112,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRatcatcherTrainee,
   _poolRatcatcher,
   _poolRatchetBomb,
+  _poolRatchetFieldMedic,
+  _poolRatchetRescueRacer,
   _poolRathiAssassin,
   _poolRathiDragon,
   _poolRathiFiend,
@@ -71094,6 +71108,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cragcrown-pathway": _poolCragcrownPathway,
   "pool/cragplate-baloth": _poolCragplateBaloth,
   "pool/cragsmasher-yeti": _poolCragsmasherYeti,
+  "pool/craig-boone-novac-guard": _poolCraigBooneNovacGuard,
   "pool/cram-session": _poolCramSession,
   "pool/cramped-vents-access-maze": _poolCrampedVentsAccessMaze,
   "pool/cramped-vents": _poolCrampedVents,
@@ -71431,6 +71446,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-disturbance": _poolCurseOfDisturbance,
   "pool/curse-of-exhaustion": _poolCurseOfExhaustion,
   "pool/curse-of-fools-wisdom": _poolCurseOfFoolsWisdom,
+  "pool/curse-of-hospitality": _poolCurseOfHospitality,
   "pool/curse-of-inertia": _poolCurseOfInertia,
   "pool/curse-of-marit-lage": _poolCurseOfMaritLage,
   "pool/curse-of-oblivion": _poolCurseOfOblivion,
@@ -71439,6 +71455,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-predation": _poolCurseOfPredation,
   "pool/curse-of-shallow-graves": _poolCurseOfShallowGraves,
   "pool/curse-of-silence": _poolCurseOfSilence,
+  "pool/curse-of-stalked-prey": _poolCurseOfStalkedPrey,
   "pool/curse-of-the-bloody-tome": _poolCurseOfTheBloodyTome,
   "pool/curse-of-the-cabal": _poolCurseOfTheCabal,
   "pool/curse-of-the-forsaken": _poolCurseOfTheForsaken,
@@ -72575,6 +72592,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/disorder-in-the-court": _poolDisorderInTheCourt,
   "pool/disorder": _poolDisorder,
   "pool/disorient": _poolDisorient,
+  "pool/disorienting-choice": _poolDisorientingChoice,
   "pool/disowned-ancestor": _poolDisownedAncestor,
   "pool/dispatch": _poolDispatch,
   "pool/dispel": _poolDispel,
@@ -77409,6 +77427,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grotesque-demise": _poolGrotesqueDemise,
   "pool/grotesque-hybrid": _poolGrotesqueHybrid,
   "pool/grotesque-mutation": _poolGrotesqueMutation,
+  "pool/grothama-all-devouring": _poolGrothamaAllDevouring,
   "pool/ground-assault": _poolGroundAssault,
   "pool/ground-rift": _poolGroundRift,
   "pool/ground-seal": _poolGroundSeal,
@@ -86904,6 +86923,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ratcatcher-trainee": _poolRatcatcherTrainee,
   "pool/ratcatcher": _poolRatcatcher,
   "pool/ratchet-bomb": _poolRatchetBomb,
+  "pool/ratchet-field-medic": _poolRatchetFieldMedic,
+  "pool/ratchet-rescue-racer": _poolRatchetRescueRacer,
   "pool/rathi-assassin": _poolRathiAssassin,
   "pool/rathi-dragon": _poolRathiDragon,
   "pool/rathi-fiend": _poolRathiFiend,

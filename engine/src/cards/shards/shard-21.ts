@@ -368,6 +368,7 @@ import _poolGreatbowDoyen from "../pool/greatbow-doyen.js";
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
 import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
 import _poolGrind from "../pool/grind.js";
+import _poolGrothamaAllDevouring from "../pool/grothama-all-devouring.js";
 import _poolGroundAssault from "../pool/ground-assault.js";
 import _poolGrowingRanks from "../pool/growing-ranks.js";
 import _poolGrowthCurve from "../pool/growth-curve.js";
@@ -1347,6 +1348,7 @@ const shard: CardShard = {
     _poolGreaterTanuki,
     _poolGreenhousePropagator,
     _poolGrind,
+    _poolGrothamaAllDevouring,
     _poolGroundAssault,
     _poolGrowingRanks,
     _poolGrowthCurve,

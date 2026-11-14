@@ -1186,6 +1186,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Ral, Leyline Prodigy": "https://cards.scryfall.io/art_crop/back/4/3/438d8a26-ddc9-4829-8aff-22d6af6575cf.jpg",
   "Rampaging Werewolf": "https://cards.scryfall.io/art_crop/back/6/1/6151cae7-92a4-4891-a952-21def412d3e4.jpg",
   "Rampant Growth": "b7c47024-5e08-4b17-b41a-7647f8b814b9",
+  "Ratchet, Rescue Racer": "https://cards.scryfall.io/art_crop/back/c/2/c23a2d6b-43c2-4756-94c7-207cc344f0a7.jpg",
   "Ravager of the Fells": "https://cards.scryfall.io/art_crop/back/b/3/b3819a11-2f3e-4304-a1b0-6abf893c89c5.jpg",
   "Razorgrass Field": "https://cards.scryfall.io/art_crop/back/5/7/57065dca-f90e-4184-bbc4-95d726a4160b.jpg",
   "Reactor Raid": "https://cards.scryfall.io/art_crop/front/8/a/8a837256-6bb4-4a60-962d-d2793548d26c.jpg",
