@@ -518,6 +518,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Phyrexian Hydra Token (Lifelink)",
   "Phyrexian Hydra Token (Reach)",
   "Phyrexian Insect Token",
+  "Phyrexian Minion Token (Black 0/0)",
   "Phyrexian Mite Token",
   "Phyrexian Myr Token",
   "Phyrexian Myr Token (Myr Sire)",
