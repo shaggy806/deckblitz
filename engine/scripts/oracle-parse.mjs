@@ -16154,6 +16154,11 @@ function parseFaceAsWritten(face, ctx = {}) {
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
     // Bestow [cost] (rule 702.103a): the card's `bestow`.
     if ((m = /^Bestow ((?:\{[^}]+\})+)$/.exec(line))) { out.bestow = m[1]; continue; }
+    // "Bestow—{R}, Collect evidence 6." (Detective's Phoenix — rule 701.59a).
+    if ((m = /^Bestow—((?:\{[^}]+\})+), collect evidence (\d+)\.?$/i.exec(line))) {
+      out.bestow = { cost: m[1], collectEvidence: Number(m[2]) };
+      continue;
+    }
     // A spell's own cost changes (rule 601.2f) that the general read below
     // takes: a number, colored mana, per unit, under conditions, by target.
     if (!/\bLand\b/.test(face.type_line ?? "")) {
@@ -18243,6 +18248,10 @@ function selfGraveyardCast(line) {
   if (rest === "if you pay {1} more to cast it for each other creature card in your graveyard") {
     return { ...out, costIncreasePerOther: { type: "creature" } };
   }
+  // "… using its mutate ability" (Brokkos, Apex of Forever), "… its bestow
+  // ability" (Detective's Phoenix): only for that keyword's cost.
+  const using = /^using its (mutate|bestow) ability$/.exec(rest);
+  if (using !== null) return { ...out, using: using[1] };
   let costs;
   let alt;
   if ((alt = /^by paying ((?:\{[^}]+\})+)(?: and (.+))? rather than paying its mana cost$/.exec(rest))) {

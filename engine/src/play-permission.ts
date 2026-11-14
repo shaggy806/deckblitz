@@ -70,6 +70,13 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  * - `undaunted`: "that spell has undaunted" (702.125).
  * - `spendAs`: how mana may pay for a spell cast this way, and no other
  *   (118.14, 609.4b).
+ * - `using`: "you may cast this card from your graveyard **using its mutate
+ *   ability**" (Brokkos, Apex of Forever), "… its bestow ability"
+ *   (Detective's Phoenix): a cast under this permission pays the card's own
+ *   keyword cost of that name (`CardDefinition.overload`'s `keyword`) and no
+ *   other — not its mana cost, not another alternative cost (the rulings;
+ *   rule 118.9a). Another permission reaching the card keeps its own costs
+ *   (601.3).
  *
  * How often:
  * - `oncePerTurn`: one play a turn among everything this source gives it.
@@ -147,6 +154,7 @@ export interface PlayTerms {
   readonly affinity?: CardFilter;
   readonly undaunted?: true;
   readonly spendAs?: SpendAs;
+  readonly using?: "mutate" | "bestow" | "cleave" | "awaken";
 
   readonly oncePerTurn?: boolean;
   readonly perType?: readonly CardType[];
@@ -347,6 +355,7 @@ const PLAY_GRANT_KEYS = [
   "affinity",
   "undaunted",
   "spendAs",
+  "using",
   "oncePerTurn",
   "perType",
   "upTo",

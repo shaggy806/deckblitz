@@ -5270,6 +5270,14 @@ export class Game {
       }
       variants.push(...variants.flatMap((v) => sets.map((optionalLife) => ({ ...v, optionalLife }))));
     }
+    // "Using its mutate ability" (Brokkos — `PlayTerms.using`): under that
+    // permission, only the casts that pay that keyword's cost.
+    const using = isPermissionCast(via) ? this.castOnlyUsing(player, card, via, face ?? 0, graveyardGrant) : undefined;
+    if (using !== undefined) {
+      const kept = variants.filter((v) => v.overload && def.overload?.keyword === using);
+      variants.length = 0;
+      variants.push(...kept);
+    }
     const pickBefore = this.altCostPick;
     const lifePickBefore = this.optionalLifePick;
     const keywordPickBefore = this.keywordCostsPick;
@@ -5889,7 +5897,10 @@ export class Game {
         ...(overload && def.overload !== null
           ? {
               overload: true,
-              overloadCost: def.overload.cost,
+              overloadCost:
+                def.overload.collectEvidence !== undefined
+                  ? `${def.overload.cost}, collect evidence ${def.overload.collectEvidence}`
+                  : def.overload.cost,
               ...(def.overload.keyword !== undefined ? { overloadKeyword: def.overload.keyword } : {}),
             }
           : {}),
@@ -20166,6 +20177,19 @@ export class Game {
       }
     }
     if (overload && def.overload === null) return `${def.name} has no overload cost`;
+    if (isPermissionCast(via)) {
+      const using = this.castOnlyUsing(player, cardId, via, face, graveyardGrant);
+      if (using !== undefined && (!overload || def.overload?.keyword !== using)) {
+        return `${def.name} may be cast this way only using its ${using} ability`;
+      }
+    }
+    // A keyword cost that also collects evidence (Detective's Phoenix's
+    // bestow — rule 701.59a): only with that much in the graveyard besides
+    // the card, which is on the stack by the time it's paid (601.2a, 601.2h).
+    const overloadEvidence = overload ? def.overload?.collectEvidence : undefined;
+    if (overloadEvidence !== undefined && !this.canCollectEvidence(player, overloadEvidence, { filter: {}, except: cardId })) {
+      return `${player}'s graveyard can't collect evidence ${overloadEvidence} for ${def.name}`;
+    }
     const impulseFree = via === "impulse" || via === "library-top" ? this.playFreeMode(cardId, player, face) : null;
     if (impulseFree === "only" && !free) {
       return `${def.name} may be cast from exile only without paying its mana cost`;
@@ -22937,6 +22961,11 @@ export class Game {
     // now, as the cost is paid (601.2h).
     if (kicked && def.kicker?.keyword === "collect-evidence" && def.kicker.collectEvidence !== undefined) {
       this.beginCollectEvidence(player, cardId, def.kicker.collectEvidence, { x: chosenX, priorityTo });
+    }
+    // A keyword cost's own "collect evidence N" (Detective's Phoenix's
+    // "Bestow—{R}, Collect evidence 6").
+    if (overload && def.overload?.collectEvidence !== undefined) {
+      this.beginCollectEvidence(player, cardId, def.overload.collectEvidence, { x: chosenX, priorityTo });
     }
     // "Behold an Elf or pay {2}" with the behold chosen, "you may behold a
     // Dragon" taken, "behold an Elemental and exile it", or a flashback
@@ -45646,6 +45675,26 @@ controlledBy,
     }
     if (ownShared !== undefined) out.push(ownShared);
     return out;
+  }
+
+  /**
+   * The keyword cost a cast under a permission must pay (`PlayTerms.using` —
+   * Brokkos's "using its mutate ability"), or `undefined` when any will do. A
+   * graveyard cast names its permission (`grant`); one from exile, a library's
+   * top or another hand is under whichever reaches the card, so it's held to
+   * the keyword only when every permission that does says so (601.3).
+   */
+  private castOnlyUsing(
+    player: PlayerId,
+    card: ObjectId,
+    via: "graveyard-permission" | "impulse" | "library-top" | "other-hand",
+    face: number,
+    grant: GraveyardGrant | undefined,
+  ): PlayTerms["using"] {
+    if (via === "graveyard-permission") return this.findGraveyardGrant(player, card, face, grant)?.permission.using;
+    const options = this.playOptions(player, card, face);
+    const using = options[0]?.terms.using;
+    return using !== undefined && options.every((option) => option.terms.using === using) ? using : undefined;
   }
 
   /** The permission `grant` names among `graveyardGrantsFor`, or — for a

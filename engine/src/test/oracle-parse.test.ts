@@ -19507,3 +19507,25 @@ describe("cast it from your graveyard as an Adventure (Mosswood Dreadknight, Hil
     });
   });
 });
+
+describe("cast from your graveyard using its keyword ability (Brokkos, Apex of Forever, Detective's Phoenix)", () => {
+  it("the card's own permission, held to its mutate or bestow cost; a bestow cost that collects evidence", () => {
+    const brokkos = parseFace({
+      name: "Test Brokkos",
+      type_line: "Legendary Creature — Nightmare Beast Elemental",
+      mana_cost: "{2}{B}{G}{U}",
+      oracle_text: "Mutate {2}{U/B}{G}{G}\nTrample\nYou may cast this card from your graveyard using its mutate ability.",
+    });
+    expect(brokkos.mutate).toBe("{2}{U/B}{G}{G}");
+    expect(brokkos.mayPlaySelf).toEqual({ from: ["graveyard"], using: "mutate" });
+    const phoenix = parseFace({
+      name: "Test Phoenix",
+      type_line: "Enchantment Creature — Phoenix",
+      mana_cost: "{2}{R}",
+      oracle_text: "Bestow—{R}, Collect evidence 6.\nFlying, haste\nYou may cast this card from your graveyard using its bestow ability.",
+    });
+    expect(phoenix.bestow).toEqual({ cost: "{R}", collectEvidence: 6 });
+    expect(phoenix.mayPlaySelf).toEqual({ from: ["graveyard"], using: "bestow" });
+    expect(phoenix.complete).toBe(true);
+  });
+});

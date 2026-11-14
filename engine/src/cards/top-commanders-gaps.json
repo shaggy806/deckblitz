@@ -2565,7 +2565,9 @@
   "keyword:cumulative-upkeep-flip-coin",
   "target:triggered-opponents-choice",
   "trigger:loses-coin-flip",
-  "zone:graveyard-cast-as-adventure"
+  "zone:graveyard-cast-as-adventure",
+  "mechanic:mutate-from-graveyard",
+  "keyword:bestow-extensions"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

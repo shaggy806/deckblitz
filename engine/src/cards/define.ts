@@ -4896,6 +4896,11 @@ export interface CardDefinition {
     readonly effect: EffectSpec;
     readonly targets?: readonly TargetSpec[];
     readonly keyword?: "cleave" | "mutate" | "awaken" | "bestow";
+    /** The cost also asks "collect evidence N" (rule 701.59a) — Detective's
+     * Phoenix's "Bestow—{R}, Collect evidence 6": the cards chosen as it's
+     * paid, the spell on the stack (601.2h), so never the card itself; not
+     * offered without that much in the graveyard besides it. */
+    readonly collectEvidence?: number;
   } | null;
   /**
    * A conditional free-cast permission printed on the spell itself (the CMM
@@ -6393,8 +6398,9 @@ interface CardDraft {
    * creature (702.103b — `GameObject.bestowed`, {@link bestowedDefinition}),
    * and the Aura it becomes is a creature again once it's unattached
    * (702.103e-f). Its "enchanted creature gets …" is an ordinary static with
-   * `affects: { scope: "attached" }`. */
-  bestow?: string;
+   * `affects: { scope: "attached" }`. A cost that also collects evidence
+   * ("Bestow—{R}, Collect evidence 6") is `{ cost, collectEvidence }`. */
+  bestow?: string | { readonly cost: string; readonly collectEvidence: number };
   freeCastIf?: { readonly condition: StaticCondition };
   /** See {@link CardDefinition.flashIf}. */
   flashIf?: NonNullable<CardDefinition["flashIf"]>;
@@ -6722,7 +6728,12 @@ export function defineCard(draft: CardDraft): CardDefinition {
         : draft.mutate !== undefined
           ? { cost: draft.mutate, keyword: "mutate", targets: [MUTATE_TARGET], effect: { kind: "sequence", effects: [] } }
           : draft.bestow !== undefined
-            ? { cost: draft.bestow, keyword: "bestow", targets: [BESTOW_TARGET], effect: { kind: "sequence", effects: [] } }
+            ? {
+                ...(typeof draft.bestow === "string" ? { cost: draft.bestow } : draft.bestow),
+                keyword: "bestow",
+                targets: [BESTOW_TARGET],
+                effect: { kind: "sequence", effects: [] },
+              }
             : null),
     freeCastIf: draft.freeCastIf ?? null,
     alternativeCost: draft.alternativeCost ?? null,
