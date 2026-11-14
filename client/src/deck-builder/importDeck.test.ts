@@ -29,6 +29,10 @@ describe('looksLikeDecklist', () => {
     expect(looksLikeDecklist('https://example.com/some/link')).toBe(false)
     expect(looksLikeDecklist('')).toBe(false)
   })
+
+  it("takes Archidekt's \"1x Card Name\" lines", () => {
+    expect(looksLikeDecklist('1x Thrasios, Triton Hero (c16) 46 [Commander{top}]')).toBe(true)
+  })
 })
 
 describe('resolveImport', () => {

@@ -106,7 +106,59 @@ export interface ParsedDecklist {
  * command zone. */
 const MAX_TRAILING_COMMANDERS = 2;
 
-const LINE_PATTERN = /^(\d+)\s+(.+)$/;
+// "1 Sol Ring", or Archidekt's "1x Sol Ring".
+const LINE_PATTERN = /^(\d+)x?\s+(.+)$/i;
+
+/**
+ * A section header as the exports write it, reduced to its name: Moxfield's
+ * and Archidekt's categories carry a count ("Commander (2)"), Forge's and
+ * XMage's are bracketed ("[Commander]"), some lists comment them out
+ * ("// Commander"), and most end in a colon.
+ */
+function headerName(line: string): string {
+  return line
+    .replace(/^\/\/\s*/, "")
+    .replace(/^\[(.*)\]$/, "$1")
+    .replace(/\s*\(\d+\)$/, "")
+    .replace(/:$/, "")
+    .trim()
+    .toLowerCase();
+}
+
+const COMMANDER_HEADER = /^commanders?$/;
+const SIDEBOARD_HEADER = /^(?:sideboard|companion)$/;
+const ATTRACTIONS_HEADER = /^attractions?(?:\s+deck)?$/;
+// Cards being considered, not played: kept out of the deck.
+const MAYBEBOARD_HEADER = /^(?:maybeboard|considering)$/;
+// Headers a commented-out line may be: anything else after `//` is a comment.
+const COMMENT_HEADER = /^(?:commanders?|sideboard|companion|attractions?(?:\s+deck)?|maybeboard|considering|deck|main(?:board)?)$/;
+
+/**
+ * Archidekt's export writes each card's categories after it, in brackets,
+ * with flags in braces — `1x Thrasios, Triton Hero (c16) 46 [Commander{top}]`,
+ * `1x Lotus Petal [Maybeboard{noDeck}{noPrice},Ramp]` — and may add a
+ * `^Have,#37d67a^` label. Split off, the category names the card's place: its
+ * `Commander` category is the commander, `Sideboard` the sideboard, and any
+ * other `{noDeck}` one (the maybeboard) keeps it out of the deck.
+ */
+function splitCategories(rest: string): { rest: string; place: "commander" | "sideboard" | "none" | null } {
+  let text = rest.replace(/\s*\^[^^]*\^$/, "");
+  const match = /^(.*?)\s*\[([^\]]*)\]$/.exec(text);
+  if (match === null) return { rest: text, place: null };
+  text = match[1];
+  const categories = match[2].split(",").map((c) => ({
+    name: c.replace(/\{[^}]*\}/g, "").trim().toLowerCase(),
+    noDeck: /\{noDeck\}/i.test(c),
+  }));
+  const place = categories.some((c) => c.name === "commander")
+    ? "commander"
+    : categories.some((c) => c.name === "sideboard")
+      ? "sideboard"
+      : categories.some((c) => c.noDeck)
+        ? "none"
+        : null;
+  return { rest: text, place };
+}
 // Splits a trailing "(SET) collector-number [*F*|*E*|...]" printing suffix,
 // if present, off the remainder of a decklist line. Collector numbers vary
 // in shape ("160", "CMM-997", "105p") so it's matched as one non-whitespace
@@ -156,10 +208,12 @@ export function poolNameOf(written: string, registry?: CardRegistry): string {
 /** Parses decklist lines, merging duplicate names (e.g. a commander also
  * listed among the support cards). Blank lines and `//` comments are
  * skipped; any other non-matching line is treated as a section header (some
- * export variants have one, e.g. "Commander"/"Companion"/"Deck") — silently
- * ignored except for "Commander" itself, whose cards are also collected
- * into `commanders`. A section ends at the next header line or a blank
- * line, whichever comes first. With the `registry`, each name is read as
+ * export variants have one, e.g. "Commander"/"Companion"/"Deck", written
+ * however the export writes it — {@link headerName}) — silently ignored
+ * except for "Commander" itself, whose cards are also collected into
+ * `commanders`, and a "Maybeboard", whose cards are left out. A section ends
+ * at the next header line or a blank line, whichever comes first. Archidekt's
+ * per-card categories place a card the same way ({@link splitCategories}). With the `registry`, each name is read as
  * the pool names it ({@link poolNameOf}). */
 export function parseDecklistText(text: string, registry?: CardRegistry): ParsedDecklist {
   const counts = new Map<string, number>();
@@ -177,6 +231,8 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
   // same way.
   const attractions: AttractionLine[] = [];
   let inAttractions = false;
+  // A "Maybeboard" section's cards aren't in the deck at all.
+  let inMaybeboard = false;
   // Blank-line-separated runs of card lines. Moxfield writes the commander as
   // the last of these, alone and unlabelled, so the structure is the only clue
   // there is.
@@ -193,26 +249,33 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
       inCommanderSection = false;
       inSideboard = false;
       inAttractions = false;
+      inMaybeboard = false;
       endBlock();
       continue;
     }
-    if (line.startsWith("//")) continue;
+    // A comment, unless it's a header written as one ("// Commander").
+    if (line.startsWith("//") && !COMMENT_HEADER.test(headerName(line))) continue;
     // MTGO's "SB: 1 Name" is a sideboard line wherever it stands.
     const sbLine = /^SB:\s*/i.exec(line);
-    const match = LINE_PATTERN.exec(sbLine === null ? line : line.slice(sbLine[0].length));
+    const match = line.startsWith("//") ? null : LINE_PATTERN.exec(sbLine === null ? line : line.slice(sbLine[0].length));
     if (match === null) {
-      inCommanderSection = /^commanders?:?$/i.test(line);
+      const header = headerName(line);
+      inCommanderSection = COMMANDER_HEADER.test(header);
       // An Arena or Moxfield list's "Companion" section is its card from outside
       // the game: the deck's sideboard, where the game offers it (rule 103.2b).
-      inSideboard = /^(?:sideboard|companion):?$/i.test(line);
+      inSideboard = SIDEBOARD_HEADER.test(header);
       // Moxfield's and Archidekt's own section for the Attraction deck (rule
       // 717.2): "Attractions", or "Attraction deck".
-      inAttractions = /^attractions?(?:\s+deck)?:?$/i.test(line);
+      inAttractions = ATTRACTIONS_HEADER.test(header);
+      inMaybeboard = MAYBEBOARD_HEADER.test(header);
       // A header starts a new block as surely as a blank line does.
       endBlock();
       continue;
     }
-    const { name: written, printing } = splitPrintingSuffix(match[2].trim());
+    if (inMaybeboard) continue;
+    const { rest, place } = splitCategories(match[2].trim());
+    if (place === "none") continue;
+    const { name: written, printing } = splitPrintingSuffix(rest);
     // A card printed under another name ("Princess Sarah") is read as the
     // card it is (Azusa, Lost but Seeking), here, so every lookup after this
     // one — the pool, Scryfall, oracle tags, the format check — sees its
@@ -226,14 +289,14 @@ export function parseDecklistText(text: string, registry?: CardRegistry): Parsed
       });
       continue;
     }
-    if (inSideboard || sbLine !== null) {
+    if (inSideboard || sbLine !== null || place === "sideboard") {
       sideCounts.set(name, (sideCounts.get(name) ?? 0) + Number(match[1]));
       if (printing !== undefined && !sidePrintings.has(name)) sidePrintings.set(name, printing);
       continue;
     }
     counts.set(name, (counts.get(name) ?? 0) + Number(match[1]));
     if (printing !== undefined && !printings.has(name)) printings.set(name, printing);
-    if (inCommanderSection) commanders.push(name);
+    if ((inCommanderSection || place === "commander") && !commanders.includes(name)) commanders.push(name);
     block.push({ name, count: Number(match[1]) });
   }
   endBlock();
@@ -690,11 +753,36 @@ function commandersOf(
   explicit: readonly string[],
 ): readonly string[] {
   if (explicit.length > 0) return explicit;
-  const guess = entries.find((e) => {
-    if (!registry.has(e.name)) return false;
-    return canCommandAlone(registry.get(e.name));
-  });
-  return guess === undefined ? [] : [guess.name];
+  return guessCommanders(
+    entries.map((e) => e.name),
+    registry,
+  );
+}
+
+/**
+ * The commander(s) of a list that doesn't say which: the first implemented
+ * card that can command alone, and with it a second card it can be paired
+ * with (Partner, Friends forever, Choose a Background, ...) when the list
+ * shows that card commands too. A flat list — EDHREC's, Archidekt's plain
+ * one — writes a partner pair as its first two lines, and a pair's card is
+ * also read as one when it's outside the first commander's colour identity,
+ * where the 99 couldn't hold it (rule 903.5c). Anything else that could pair
+ * is left in the 99, as it can be. `names` in list order.
+ */
+export function guessCommanders(names: readonly string[], registry: CardRegistry): string[] {
+  const first = names.find((n) => registry.has(n) && canCommandAlone(registry.get(n)));
+  if (first === undefined) return [];
+  const identity = colorIdentityOf(registry.get(first), registry);
+  const topTwo = names.slice(0, 2);
+  const second = names.find(
+    (n) =>
+      n !== first &&
+      registry.has(n) &&
+      canPairCommanders(registry, first, n) &&
+      ((topTwo.includes(first) && topTwo.includes(n)) ||
+        [...colorIdentityOf(registry.get(n), registry)].some((c) => !identity.has(c))),
+  );
+  return second === undefined ? [first] : [first, second];
 }
 
 /**
@@ -846,15 +934,15 @@ export function formatCheck(
       !registry.has(trusted[0]) ||
       !registry.has(trusted[1]) ||
       canPairCommanders(registry, trusted[0], trusted[1]));
-  const guessed = flat.find(canCommand);
   const commanders: string[] = pair
     ? trusted.slice(0, 2)
     : trusted.length > 0
       ? // Unpaired, a Background can't command, so the other card leads.
         [trusted.find((n) => !registry.has(n) || !isBackground(registry.get(n))) ?? trusted[0]]
-      : guessed !== undefined
-        ? [guessed]
-        : [];
+      : guessCommanders(
+          entries.map((e) => e.name),
+          registry,
+        );
 
   // One copy of each commander leaves the 99.
   const rest = [...flat];

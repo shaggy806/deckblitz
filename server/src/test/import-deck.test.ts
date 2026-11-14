@@ -706,6 +706,60 @@ describe("formatCheck (over a pasted list's implemented cards)", () => {
     expect(r.commanders).toEqual(["Atraxa, Praetors' Voice", "Some Made Up Partner"]);
   });
 
+  // A partner pair as the other exports write it.
+  describe("a partner pair in other exports", () => {
+    const check = (...lines: string[]) => {
+      const { entries, sideboard, commanders, commanderSource } = parseDecklistText(lines.join("\n"), registry);
+      return { ...formatCheck(entries, registry, commanders, commanderSource), entries, sideboard };
+    };
+    const pair = ["Thrasios, Triton Hero", "Tymna the Weaver"];
+
+    it("reads a flat list's first two lines as the pair (EDHREC, Archidekt's plain export)", () => {
+      const r = check("1 Thrasios, Triton Hero", "1 Tymna the Weaver", "1 Sol Ring", "1 Forest");
+      expect(r.commanders).toEqual(pair);
+      expect(r.identity).toBe("WUBG");
+    });
+
+    it("reads a partner outside the first commander's identity as the second, wherever it is", () => {
+      expect(check("1 Sol Ring", "1 Thrasios, Triton Hero", "1 Forest", "1 Tymna the Weaver").commanders).toEqual(pair);
+    });
+
+    it("leaves a partner the 99 can hold in the 99", () => {
+      const r = check("1 Sol Ring", "1 Thrasios, Triton Hero", "1 Forest", "1 Kodama of the East Tree");
+      expect(r.commanders).toEqual(["Thrasios, Triton Hero"]);
+    });
+
+    it.each([
+      ["Moxfield's counted category", "Commander (2)"],
+      ["a commented header", "// Commander"],
+      ["Forge's bracketed header", "[Commander]"],
+      ["a colon", "Commanders:"],
+    ])("reads %s as the Commander section", (_, header) => {
+      const r = check(header, "1 Thrasios, Triton Hero", "1 Tymna the Weaver", "", "Creatures (1)", "1 Llanowar Elves");
+      expect(r.commanders).toEqual(pair);
+    });
+
+    it("reads Archidekt's 1x lines and its Commander category", () => {
+      const r = check(
+        "1x Llanowar Elves (m19) 314 [Ramp]",
+        "1x Thrasios, Triton Hero (c16) 46 [Commander{top}]",
+        "1x Tymna the Weaver (c16) 48 *F* [Commander{top}] ^Have,#37d67a^",
+        "1x Counterspell [Sideboard{noDeck}{noPrice}]",
+        "1x Sol Ring [Maybeboard{noDeck}{noPrice},Ramp]",
+      );
+      expect(r.commanders).toEqual(pair);
+      expect(r.entries.map((e) => e.name)).toEqual(["Llanowar Elves", ...pair]);
+      expect(r.entries[1].printing).toEqual({ set: "c16", collectorNumber: "46" });
+      expect(r.sideboard.map((e) => e.name)).toEqual(["Counterspell"]);
+    });
+
+    it("leaves a Maybeboard section out of the deck", () => {
+      const r = check("1 Llanowar Elves", "", "Maybeboard", "1 Sol Ring", "", "1 Thrasios, Triton Hero", "1 Tymna the Weaver");
+      expect(r.entries.map((e) => e.name)).toEqual(["Llanowar Elves", ...pair]);
+      expect(r.commanders).toEqual(pair);
+    });
+  });
+
   // No real Background is in the pool yet, so a stand-in is registered.
   describe("a trailing Background pair", () => {
     const withBackground = createDefaultRegistry().register(

@@ -90,12 +90,12 @@ export interface ResolvedImport {
 
 /**
  * Whether `text` looks like a decklist at all: at least one "N Card Name"
- * line, the only line the server's parser reads as a card. Lets the landing
- * page's blitz tell an unrelated clipboard apart from a list before sending
- * it anywhere.
+ * (or Archidekt's "Nx Card Name") line, the only line the server's parser
+ * reads as a card. Lets the landing page's blitz tell an unrelated clipboard
+ * apart from a list before sending it anywhere.
  */
 export function looksLikeDecklist(text: string): boolean {
-  return text.split(/\r?\n/).some((line) => /^\s*\d+\s+\S/.test(line))
+  return text.split(/\r?\n/).some((line) => /^\s*\d+x?\s+\S/i.test(line))
 }
 
 /**
