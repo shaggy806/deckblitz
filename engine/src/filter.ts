@@ -607,8 +607,12 @@ export interface CardFilter {
      * sacrificed Goblin (read as it last was, rule 608.2h), Labyrinth Raptor's
      * "a creature of their choice that's blocking it". `"trigger-object"` is
      * an effect's filter alone: only a resolving ability has a trigger object
-     * to bind, so anywhere else (a target slot's filter) it matches nothing. */
-    readonly of?: "source" | "host" | "trigger-object";
+     * to bind, so anywhere else (a target slot's filter) it matches nothing.
+     * A number is what that target slot of the resolving spell or ability
+     * holds — Sewers of Estark's "each creature **it's** blocking", "it" the
+     * spell's target — an effect's filter alone too, bound as it applies
+     * (rule 608.2h). */
+    readonly of?: "source" | "host" | "trigger-object" | number;
     /** The partner, bound by `bindDynamicCompares` — never authored. */
     readonly with?: ObjectId;
   };
@@ -1725,13 +1729,14 @@ function tappedForThisTurn(
 
 /** The partner of a `blockingRelation` clause: `source` itself, or the
  * permanent it's attached to — now, or as it last was on the battlefield.
- * Nothing for `"trigger-object"`, which only `bindDynamicCompares` can bind. */
+ * Nothing for `"trigger-object"` or a target slot, which only
+ * `bindDynamicCompares` can bind. */
 export function blockingPartnerOf(
   state: GameState,
-  of: "source" | "host" | "trigger-object",
+  of: "source" | "host" | "trigger-object" | number,
   source: ObjectId | undefined,
 ): ObjectId | undefined {
-  if (of === "trigger-object") return undefined;
+  if (of === "trigger-object" || typeof of === "number") return undefined;
   if (source === undefined || of === "source") return source;
   const object = state.objects[source];
   if (object === undefined) return undefined;

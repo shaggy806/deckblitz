@@ -3473,7 +3473,13 @@ creature it's attached to, or, `of: "trigger-object"` in an effect's filter,
 with the object the trigger names (Trailblazer's Torch's and Ib Halfheart's
 "each creature blocking it", Labyrinth Raptor's "a creature of their choice
 that's blocking it"; a target slot has no trigger object to read and matches
-nothing). `blockerCount: { op, n }` is how many creatures are blocking it now —
+nothing), or, `of: <slot>` in an effect's filter, with what that target slot
+of the resolving spell holds, found as it applies (608.2h) — Sewers of
+Estark's "prevent all combat damage that would be dealt this combat by it and
+each creature it's blocking" is a `damage-rule` on the target and a
+`for-each-permanent` over `{ type: "creature", blockingRelation: { relation:
+"blocked-by", of: 0 } }` with `as: 1`, each a `damage-rule` of `duration:
+"until-end-of-combat"`. `blockerCount: { op, n }` is how many creatures are blocking it now —
 Rampaging Cyclops's "as long as two or more creatures are blocking it", Grizzled
 Wolverine's "only if at least one creature is blocking this creature", both as
 `{ kind: "source", filter }`; the amount `{ blockersOf: "source" | "trigger-object" }`

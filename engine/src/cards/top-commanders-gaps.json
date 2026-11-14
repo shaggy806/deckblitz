@@ -2644,7 +2644,8 @@
   "effect:cast-modal-x-modes",
   "effect:spell-on-stack-gains-keyword",
   "bug:permission-duration-read-from-granter",
-  "replacement:enters-with-counter-kinds-of-source"
+  "replacement:enters-with-counter-kinds-of-source",
+  "effect:prevent-combat-damage-by-blocker-and-blocked"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -17525,8 +17525,19 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     // `inBlockingRelation`'s read of it decides what it's still in.
     const relation = walked["blockingRelation"] as CardFilter["blockingRelation"];
     if (relation !== undefined && relation.with === undefined) {
+      // A target slot: what it holds (Sewers of Estark's "each creature it's
+      // blocking").
+      const slot = typeof relation.of === "number" ? ctx.targets[relation.of] : undefined;
       const partner =
-        relation.of === "host" ? ctx.attachedHost() : relation.of === "trigger-object" ? ctx.triggerObject : ctx.source;
+        typeof relation.of === "number"
+          ? slot?.kind === "object"
+            ? slot.object
+            : undefined
+          : relation.of === "host"
+            ? ctx.attachedHost()
+            : relation.of === "trigger-object"
+              ? ctx.triggerObject
+              : ctx.source;
       if (partner !== undefined) walked = { ...walked, blockingRelation: { relation: relation.relation, with: partner } };
     }
     // "That blocked or were blocked by it this turn": the objects it names.
