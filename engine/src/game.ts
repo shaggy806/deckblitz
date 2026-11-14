@@ -10170,6 +10170,14 @@ export class Game {
           this.grantPriority(asked.player);
           return;
         }
+        // And what one says happens "as this becomes attached" (Psychic
+        // Paper's choice), the same way.
+        if (this.applyNextAsBecomesAttached()) {
+          const asked = this.state.awaiting as GameState["awaiting"];
+          if (asked === null) continue;
+          this.grantPriority(asked.player);
+          return;
+        }
       }
       // Before the SBAs, so a commander still waiting on the battlefield for
       // its 903.9b choice is asked about rather than swept up by them.
@@ -53303,6 +53311,39 @@ controlledBy,
     return true;
   }
 
+  /** What the next permanent in `pendingAsBecomesAttached` says happens "as
+   * this becomes attached", done now by its controller with it as the
+   * effect's source: `true` if one was waiting. One that left since does
+   * nothing (rule 400.7); one that lost its abilities, nothing either. A
+   * choice it asks is left up, and it's done with once that's answered. */
+  private applyNextAsBecomesAttached(): boolean {
+    const [next, ...rest] = this.state.pendingAsBecomesAttached ?? [];
+    if (next === undefined) return false;
+    const done = (): true => {
+      if (rest.length > 0) this.state.pendingAsBecomesAttached = rest;
+      else delete this.state.pendingAsBecomesAttached;
+      return true;
+    };
+    const object = this.state.objects[next.object];
+    if (
+      next.asked === true ||
+      object === undefined ||
+      object.zone !== "battlefield" ||
+      (object.zoneChangeCount ?? 0) !== next.stint ||
+      hasLostAbilities(this.state, this.registry, object)
+    ) {
+      return done();
+    }
+    const as = this.registry.get(rulesTextName(object)).asBecomesAttached;
+    if (as === undefined) return done();
+    this.withDecisionSource(next.object, () =>
+      applyEffectSpec(as.effect, this.makeResolutionContext(next.object, object.controller, [], 0)),
+    );
+    if ((this.state.awaiting as GameState["awaiting"]) === null) return done();
+    this.state.pendingAsBecomesAttached = [{ ...next, asked: true }, ...rest];
+    return true;
+  }
+
   /** Turn `pendingTurnFaceUp`'s permanent face up, its cost's choice answered:
    * `true` if one was waiting. Nothing turns if it left meanwhile (400.7). */
   private finishTurningFaceUp(): boolean {
@@ -59710,11 +59751,13 @@ controlledBy,
       const object = this.state.objects[id];
       if (object.attachedTo === null) continue;
       const def = this.registry.get(rulesTextName(object));
-      const setting = def.static.findLast((ability) => ability.setName !== undefined);
-      if (setting?.setName === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
+      const setting = def.static.findLast((ability) => ability.setName !== undefined || ability.setsChosenName === true);
+      // "The last chosen name" (Psychic Paper): none chosen, none set.
+      const name = setting?.setName ?? (setting?.setsChosenName === true ? object.chosenNames?.at(-1) : undefined);
+      if (name === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
       const already = names?.get(object.attachedTo);
       if (already === undefined || object.timestamp > already.timestamp) {
-        (names ??= new Map()).set(object.attachedTo, { name: setting.setName, timestamp: object.timestamp });
+        (names ??= new Map()).set(object.attachedTo, { name, timestamp: object.timestamp });
       }
     }
     for (const id of battlefield) {
@@ -65063,6 +65106,17 @@ controlledBy,
   }
 
   private emit(event: GameEventInput): void {
+    // "As this becomes attached" (Psychic Paper): whatever attached it, done
+    // the next time priority is looked at (`applyNextAsBecomesAttached`).
+    if (event.type === "permanent-attached" && !this.dryRunningEvents) {
+      const attached = this.state.objects[event.source];
+      if (attached !== undefined && this.registry.get(rulesTextName(attached)).asBecomesAttached !== undefined) {
+        this.state.pendingAsBecomesAttached = [
+          ...(this.state.pendingAsBecomesAttached ?? []),
+          { object: attached.id, stint: attached.zoneChangeCount ?? 0 },
+        ];
+      }
+    }
     // Mayhem's "you discarded this card this turn" (rule 702.187b): each
     // discarded card is marked as its discard is announced.
     if (event.type === "cards-discarded") {

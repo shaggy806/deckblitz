@@ -6217,6 +6217,19 @@ export interface GameState {
     readonly asked?: true;
   }[];
   /**
+   * Permanents just attached whose card says something happens "as this
+   * becomes attached" (`CardDefinition.asBecomesAttached` — Psychic Paper's
+   * choice of a name and a creature type), still to be done, in the order
+   * they were attached: each the next time priority is looked at, before the
+   * state-based actions, as `pendingAsTurnedFaceUp` is. `asked`: its choice
+   * is up. Absent otherwise.
+   */
+  pendingAsBecomesAttached?: readonly {
+    readonly object: ObjectId;
+    readonly stint: number;
+    readonly asked?: true;
+  }[];
+  /**
    * The commander whose owner is being asked whether to put it into the
    * command zone (rule 903.9), or `null`. Either it's in the graveyard or
    * exile it was put into, and this is the state-based action of 903.9a; or

@@ -2670,6 +2670,10 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * this reaches, with `affects: { scope: "attached" }`, its only name for as
    * long as this applies. A copy of it isn't named that (rule 707.2). */
   readonly setName?: string;
+  /** `setName` read off this static's permanent: "its name is **the last
+   * chosen name**" (Psychic Paper) — the last of `GameObject.chosenNames`.
+   * Nothing while none is chosen. */
+  readonly setsChosenName?: true;
   /**
    * Toxic N granted in layer 6 (rule 702.164) — Karumonix, the Rat King's
    * "Other Rats you control have toxic 1". One more instance of toxic on each
@@ -5568,6 +5572,17 @@ export interface CardDefinition {
    * an `attach` to a host chosen `among`). Absent for none.
    */
   readonly asTurnedFaceUp?: { readonly counters: number } | { readonly effect: EffectSpec };
+  /**
+   * "**As this Equipment becomes attached** to a creature, choose a creature
+   * card name and a creature type" (Psychic Paper): a static ability that
+   * does `effect` as the permanent becomes attached to something, however it
+   * does — equipped, attached by an effect, entering attached — done by its
+   * controller with this permanent as the effect's source (so a `remember`
+   * keeps the answer on it), before anyone gets priority and before the
+   * state-based actions are next checked, as an "as this is turned face up"
+   * is (rule 614.1e). Absent for none.
+   */
+  readonly asBecomesAttached?: { readonly effect: EffectSpec };
   /** Escape (rule 702.139 — ROADMAP Phase 6b) — cast from your graveyard for
    * `cost` plus exiling `exileCount` other cards from your graveyard as an
    * additional cost. Unlike flashback the spell resolves normally (it can be
@@ -5988,6 +6003,7 @@ const PRINTED_ABILITY: {
   prototype: (def) => def.prototype !== null,
   morph: (def) => def.morph !== null,
   asTurnedFaceUp: (def) => def.asTurnedFaceUp !== undefined,
+  asBecomesAttached: (def) => def.asBecomesAttached !== undefined,
   escape: (def) => def.escape !== null,
   suspend: (def) => def.suspend !== null,
   cycling: (def) => def.cycling !== null,
@@ -6313,6 +6329,7 @@ interface CardDraft {
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: MorphCost;
   asTurnedFaceUp?: { readonly counters: number } | { readonly effect: EffectSpec };
+  asBecomesAttached?: { readonly effect: EffectSpec };
   suspend?: { readonly n: number | "x"; readonly cost: string };
   cycling?: CyclingAbility;
   moreCycling?: readonly CyclingAbility[];
@@ -6660,6 +6677,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),
+    ...(draft.asBecomesAttached !== undefined ? { asBecomesAttached: draft.asBecomesAttached } : {}),
     ...(draft.moreCycling !== undefined ? { moreCycling: draft.moreCycling } : {}),
     ...(draft.mayPlaySelf !== undefined ? { mayPlaySelf: draft.mayPlaySelf } : {}),
     ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),

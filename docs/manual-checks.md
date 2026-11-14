@@ -138,6 +138,14 @@ engine terms. A second thing to check is a second test.
 - **Expect:** "Lightning Bolt would deal 3 damage to you. Which applies first?", two Gideon's Sacrifice buttons: "redirects it to Colossal Dreadmaw (3 damage is dealt to Wall of Stone)" and the other way round. The one you pick puts 3 damage on the permanent its brackets name; your life doesn't change.
 - **Not a bug:** the button naming the Dreadmaw sends the damage to the Wall: the other Sacrifice then moves it on.
 
+### Psychic Paper: a name and a creature type as it's attached
+- **Do:** Equip Psychic Paper to your Grizzly Bears. Name Serra Angel, then choose the creature type Angel.
+- **Expect:** First a card name to choose (Serra Angel among the suggestions), then a creature type. Your Bears are now named Serra Angel and are an Angel, still a 2/2.
+
+### Psychic Paper at four players: equipped again, chosen again
+- **Do:** Equip Psychic Paper to your Grizzly Bears, naming Serra Angel and choosing Angel. Then equip it to your Hill Giant, naming Llanowar Elves and choosing Elf.
+- **Expect:** Each equip asks both again. The Bears are Grizzly Bears again; the Hill Giant is named Llanowar Elves and is an Elf.
+
 ### Two Gideon's Sacrifices at four players: damage to one of your creatures
 - **Do:** Cast Gideon's Sacrifice choosing Colossal Dreadmaw, then the other choosing Wall of Stone. Cast Lightning Bolt on your Grizzly Bears.
 - **Expect:** "Lightning Bolt would deal 3 damage to Grizzly Bears. Which applies first?", with the two Gideon's Sacrifice buttons as above. The Bears take nothing; the permanent the picked button's brackets name takes 3.

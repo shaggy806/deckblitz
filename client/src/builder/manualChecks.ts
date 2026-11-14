@@ -11880,6 +11880,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Psychic Paper: a name and a creature type as it's attached",
+    board({
+      you: { bf: ['Psychic Paper', 'Grizzly Bears', 'Wastes*2'] },
+      opp: { bf: ['Serra Angel'] },
+    }),
+  ),
+  preset(
+    'Psychic Paper at four players: equipped again, chosen again',
+    board({
+      you: { bf: ['Psychic Paper', 'Grizzly Bears', 'Hill Giant', 'Wastes*4'] },
+      opp: [{ bf: ['Serra Angel'] }, { bf: ['Llanowar Elves'] }, { bf: [] }],
+    }),
+  ),
+  preset(
     "Two Gideon's Sacrifices at four players: damage to one of your creatures",
     board({
       you: {

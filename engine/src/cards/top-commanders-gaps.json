@@ -2489,7 +2489,8 @@
   "effect:exiled-card-gains-trigger",
   "replacement:damage-double-to-chosen-player-side",
   "decision:damage-redirect-order",
-  "static:gain-activated-abilities-of-card"
+  "static:gain-activated-abilities-of-card",
+  "decision:choose-name-and-type-on-attach"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -322,6 +322,22 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "As this Equipment becomes attached", and the last chosen name — built 2026-11-13
+
+The key `decision:choose-name-and-type-on-attach`. `CardDefinition.asBecomesAttached:
+{ effect }`: queued at every `permanent-attached` event (equip, another card's
+`attach`, entering attached — `Game.emit`) and done at the top of
+`prepareForPriority`, before the state-based actions, as `asTurnedFaceUp` is
+(rule 614.1e's sibling), by its controller with the permanent as the effect's
+source, so `remember` keeps the answers on it; one that left or lost its
+abilities does nothing. A static's `setsChosenName` is `setName` read off its
+permanent's last chosen name (`refreshStaticNames`), beside the existing
+`setsChosenCreatureType`. Psychic Paper (rank 6528). The choice and type
+decisions are the existing `choose-card-name` and `choose-creature-type`.
+`test/as-becomes-attached.test.ts`. Sanctuary Blade's "choose a color" (its
+own key, `decision:choose-color-on-attach`) wants `choose-value`'s `remember`
+for a colour, which only numbers have.
+
 ### "When you cast it this turn" of a one-card permission — built 2026-11-13
 
 The key `static:gain-activated-abilities-of-card`. A `grant-play`'s
