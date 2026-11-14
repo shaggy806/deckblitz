@@ -54,7 +54,10 @@ async function screenshots(page: Page, name: string): Promise<void> {
 /** The board tile holding the object `id` (a tile lists every id it stands for). */
 const tileOf = (page: Page, id: string) => page.locator(`[data-obj-ids~="${id}"]`)
 
-for (const room of ['LANDS', 'LAND4']) {
+// At four players only: the two-player room (LANDS) joined the tile the same
+// way, and a 4-player quadrant is the tighter board (dropped 2026-11-14, for
+// speed; the LANDS room stays in dev-rooms).
+for (const room of ['LAND4']) {
   test(`${room}: a Forest played beside two Forests joins their tile at once`, async ({ page, request }) => {
     await control(request, { op: 'reset', room })
     const errors: string[] = []

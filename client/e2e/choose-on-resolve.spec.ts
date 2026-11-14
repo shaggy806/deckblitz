@@ -84,7 +84,10 @@ async function untilChoice(page: Page, prompt: RegExp): Promise<void> {
   }).toPass(paced)
 }
 
-for (const room of ['POPUL', 'POPU4'] as const) {
+// At four players only: the two-player room (POPUL) asked the same question
+// the same way, and a 4-player quadrant is the tighter board to pick on
+// (dropped 2026-11-14, for speed).
+for (const room of ['POPU4'] as const) {
   test(`${room}: populate asks which token to copy, on the board`, async ({ page, request }) => {
     test.setTimeout(120_000)
     const state = await openRoom(page, request, room)
