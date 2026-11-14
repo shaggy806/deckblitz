@@ -4081,7 +4081,12 @@ stopped covering:
   Vaevictis Asmadi's ruling). `{ seat, ifAny: true }` is "for each graveyard
   **with** an instant or sorcery card in it, exile target … from that
   graveyard" (Mysterious Stranger, seats 0–3): a slot defined only where that
-  player has something to target, required there. Exactly the printed card: a
+  player has something to target, required there. `{ seat, onlyIf: <condition> }`
+  is "for each opponent **who has three or more poison counters as you cast
+  this spell**, put up to one target …" (Geth's Summons, seats 1–3, the
+  condition's player `"that-player"`): read as the targets are chosen, a seat
+  whose player doesn't meet it defines no target and its slot offers nothing;
+  a target chosen there stays as the spell resolves. Exactly the printed card: a
   target that has come under anyone else's control is illegal as it
   resolves, as "that player's" would be (unlike `differentController`, which
   only asks the targets' controllers to differ). `whose` and `filter` are only

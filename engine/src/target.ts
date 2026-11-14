@@ -1,6 +1,7 @@
 /** Reference types for spell / ability targets. Pure data, no logic. */
 
 import type { CardType, TurnStat } from "./cards.js";
+import type { StaticCondition } from "./cards/define.js";
 import type { EffectAmount } from "./effects.js";
 import type { CardFilter, SpellTargetsFilter } from "./filter.js";
 import type { Color } from "./mana.js";
@@ -1010,6 +1011,15 @@ export interface TargetSeat {
    * spell uncastable or the ability removed (603.3d). Read as the targets are
    * chosen; a slot it defines is required. */
   readonly ifAny?: true;
+  /** "For each opponent **who has three or more poison counters as you cast
+   * this spell**, put up to one target creature card from that player's
+   * graveyard …" (Geth's Summons): the text defines this seat's target only
+   * while its player meets the condition — read with that player as "that
+   * player" (`who: "that-player"`), as the targets are chosen (rule 601.2c;
+   * 603.3d for a trigger). A seat whose player doesn't defines no target: the
+   * slot offers nothing. Fixed from then on: a target chosen for it stays
+   * defined as the spell resolves, whatever the condition reads by then. */
+  readonly onlyIf?: StaticCondition;
 }
 
 /**

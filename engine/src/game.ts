@@ -5496,7 +5496,7 @@ export class Game {
       const xFloor: number = leastX;
       const xFilter =
         def.castModal === null &&
-        (this.effectiveTargetSpecs(def, undefined, kicked, overload, player).some(targetSpecReadsX) ||
+        (this.effectiveTargetSpecs(def, undefined, kicked, overload, player, card).some(targetSpecReadsX) ||
           (variantCost !== null && parseManaCost(variantCost).x > 0 && this.castProhibitionReadsManaValue(player)));
       let perX: readonly number[] | null = null;
       // A sacrifice of any number that lowers the cost (Dargo): how many may
@@ -5658,7 +5658,7 @@ export class Game {
           evoke ?? null) === null,
       );
       if (spreeSets !== null && spreeSets.length === 0) continue;
-      const specs = this.effectiveTargetSpecs(def, undefined, kicked, overload, player);
+      const specs = this.effectiveTargetSpecs(def, undefined, kicked, overload, player, card);
       // "Spells your opponents cast that target this cost {2} more": the
       // targets its caster can't afford aren't offered. Once per X when what
       // may be targeted depends on X.
@@ -9348,7 +9348,7 @@ export class Game {
     const modes = def.castModal !== null ? [...(action.modes ?? [])].sort((a, b) => a - b) : undefined;
     const kicked = action.kicked === true ? (action.kickCount ?? true) : false;
     const x = Math.max(0, Math.floor(action.xValue ?? 0));
-    const specs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, action.overload === true, action.player), x);
+    const specs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, action.overload === true, action.player, action.card), x);
     return this.whyTargetsInvalid(
       specs,
       normalizeTargets(action.targets),
@@ -17027,7 +17027,7 @@ export class Game {
         if (shared.length > 0) onceOf.set(ref.object, shared);
       }
     };
-    look(this.effectiveTargetSpecs(def, undefined, kicked, overload, player));
+    look(this.effectiveTargetSpecs(def, undefined, kicked, overload, player, card));
     for (const mode of def.castModal?.modes ?? []) look(mode.targets ?? []);
     const taxes = [...taxOf].flatMap(([object, generic]) => {
       if (generic <= 0) return [];
@@ -17455,7 +17455,7 @@ export class Game {
           ? this.targetsEarnOwnReduction(def, player, cardId, targets)
           : !this.targetCostReductionOff &&
             (this.targetCostReductionAssumed ||
-              this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined, false, false, player), player, this.cardSource(def, cardId, xValue)).some((slot) =>
+              this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined, false, false, player, cardId), player, this.cardSource(def, cardId, xValue)).some((slot) =>
                 this.targetsEarnOwnReduction(def, player, cardId, slot),
               ));
       if (earned) {
@@ -17918,7 +17918,7 @@ export class Game {
     const source = this.cardSource(def, card);
     const copies: Record<string, number> = {};
     const boundsOf = (modes: readonly number[] | undefined) => {
-      const declared = this.effectiveTargetSpecs(def, modes, kicked, overload, player);
+      const declared = this.effectiveTargetSpecs(def, modes, kicked, overload, player, card);
       const offered = this.targetOptionsFor(declared, player, source);
       // An "any number of" group spans as many slots as it has candidates,
       // up to its `max`: its first `min` required (Reckless Spite's "two
@@ -18177,7 +18177,7 @@ export class Game {
           times = 0;
         } else if (
           !this.targetCostReductionAssumed &&
-          !this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined, false, false, player), player, this.cardSource(def, cardId, xValue))
+          !this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined, false, false, player, cardId), player, this.cardSource(def, cardId, xValue))
             .flat()
             .some((ref) => ref.kind === "object" && this.modificationKeyedTo(mod, source, ref.object))
         ) {
@@ -19188,6 +19188,10 @@ export class Game {
     kicked: boolean | number,
     overload: boolean,
     caster: PlayerId,
+    /** The card being cast, while its targets are chosen: a seat slot's
+     * `onlyIf` is read against it then. Left out on the stack, where a
+     * chosen target stays defined (`emptySeatOptional`). */
+    card?: ObjectId,
   ): readonly TargetSpec[] {
     // Overload (rule 702.126a): "you can't choose targets for it". Cleave
     // (702.148a) chooses the targets of its rewritten text instead. A spliced
@@ -19203,8 +19207,9 @@ export class Game {
     // leaves the spell uncastable (rule 601.2c; Vaevictis Asmadi's ruling,
     // and Mass Mutiny's errata to "up to one" to be castable), an empty
     // seat needs none.
+    const source = card === undefined ? undefined : this.state.objects[card];
     return this.spellSpecsWithAmounts(this.declaredTargetSpecs(def, modes, kicked), def, kicked, caster).map((spec) =>
-      this.emptySeatOptional(spec, caster),
+      this.emptySeatOptional(spec, caster, source),
     );
   }
 
@@ -20337,7 +20342,7 @@ export class Game {
     // A non-modal spell's target legality is checked up front; a modal spell's
     // is checked per chosen mode (only once `modes` is known — at enumeration
     // time the driver hasn't picked yet).
-    const castSpecs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, overload, player), xValue);
+    const castSpecs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, overload, player, cardId), xValue);
     const castOptions = castSpecs.map((spec) =>
       legalTargets(this.state, this.registry, spec, player, this.cardSource(def, cardId, xValue)),
     );
@@ -22302,7 +22307,7 @@ export class Game {
       def.castModal !== null ? [...(modes ?? [])].sort((a, b) => a - b) : undefined;
     // X is announced before targets are chosen (rule 601.2b–c): a group tied
     // to X, and a filter reading it, are judged at the X chosen.
-    const targetSpecs = specsAtX(this.effectiveTargetSpecs(def, sortedModes, kicked, overload, player), chosenX);
+    const targetSpecs = specsAtX(this.effectiveTargetSpecs(def, sortedModes, kicked, overload, player, cardId), chosenX);
     // An additional sacrifice cost the driver didn't name (only one candidate,
     // or a driver that doesn't care): take the first eligible permanent.
     const sacrificeCandidates = this.additionalCostSacrifices(
@@ -36329,7 +36334,7 @@ export class Game {
     // "Up to X target …, where X is …": the group's amounts are read now, as
     // its targets are chosen (rule 603.3d), and fixed from here on.
     const specs = this.triggerSpecsWithAmounts(trigger, triggerTargetSpecs(ability as TriggeredAbility, trigger.modes)).map(
-      (spec) => this.emptySeatOptional(spec, trigger.controller),
+      (spec) => this.emptySeatOptional(spec, trigger.controller, this.state.objects[trigger.sourceObjectId]),
     );
     for (let i = 0; i < specs.length; i += 1) {
       const spec = specs[i];
@@ -36545,7 +36550,32 @@ export class Game {
    * it (rule 601.2c): the ability needs none there. A player still in the game
    * with nothing to target is another matter: no legal choice, so the ability
    * is removed (rule 603.3d). */
-  private emptySeatOptional(spec: TargetSpec, controller: PlayerId): TargetSpec {
+  private emptySeatOptional(spec: TargetSpec, controller: PlayerId, source?: GameObject): TargetSpec {
+    // "For each opponent who has three or more poison counters as you cast
+    // this spell" (`TargetSeat.onlyIf`, Geth's Summons): a seat whose player
+    // doesn't meet it defines no target (rule 601.2c), up to one or not — a
+    // slot that offers nothing (an empty `one-of` accepts no target). Read
+    // only as the targets are chosen, with the spell or ability's `source`
+    // known; on the stack (no `source`) a chosen target stays defined.
+    const inner = typeof spec === "object" && spec.kind === "optional" ? spec.of : spec;
+    if (
+      source !== undefined &&
+      typeof inner === "object" &&
+      (inner.kind === "permanent" || inner.kind === "card-in-graveyard") &&
+      typeof inner.whose === "object" &&
+      inner.whose.onlyIf !== undefined
+    ) {
+      const seated = playerAtSeat(this.state.turnOrder, controller, inner.whose.seat);
+      const defined =
+        seated !== undefined &&
+        this.state.players[seated]?.hasLost === false &&
+        staticConditionMet(this.state, this.registry, { ...source, controller }, inner.whose.onlyIf, {
+          includeSelf: true,
+          outsideFold: true,
+          thatPlayer: seated,
+        });
+      if (!defined) return { kind: "optional", of: { kind: "one-of", of: [] } };
+    }
     if (typeof spec !== "object" || (spec.kind !== "permanent" && spec.kind !== "card-in-graveyard") || typeof spec.whose !== "object")
       return spec;
     const seated = playerAtSeat(this.state.turnOrder, controller, spec.whose.seat);
@@ -49745,7 +49775,7 @@ controlledBy,
       ref?.kind === "object" &&
       matchesFilter(this.state, this.registry, ref.object, filter, { you: player, source: cardId });
     if (targets !== undefined) return targets.some(fits);
-    const specs = this.effectiveTargetSpecs(def, modes, kicked, overload, player);
+    const specs = this.effectiveTargetSpecs(def, modes, kicked, overload, player, cardId);
     return this.targetOptionsFor(specs, player, this.cardSource(def, cardId)).some((slot) => slot.some(fits));
   }
 
