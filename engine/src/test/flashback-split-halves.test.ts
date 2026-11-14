@@ -2,7 +2,7 @@
  * A split card with flashback from Snapcaster Mage or Past in Flames (rule
  * 702.34a) may be cast as either half for that half's cost: only the half
  * being cast is evaluated (rule 709.3a), so "equal to its mana cost" is the
- * half's.
+ * half's. The same for a static's grant (Return the Past, Lier).
  */
 
 import { describe, expect, it } from "vitest";
@@ -10,7 +10,20 @@ import { describe, expect, it } from "vitest";
 import type { LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, cast, enter, lands, pickTargets, ref, settle, spawn, table, toGraveyard, toHand } from "./harness.js";
+import {
+  A,
+  cast,
+  enter,
+  lands,
+  nextTurn,
+  pickTargets,
+  ref,
+  settle,
+  spawn,
+  table,
+  toGraveyard,
+  toHand,
+} from "./harness.js";
 
 type Cast = Extract<LegalAction, { kind: "cast-spell" }>;
 const flashbackCastsOf = (game: Game, card: ObjectId): Cast[] =>
@@ -54,6 +67,30 @@ describe("flashback and a split card's halves", () => {
     lands(game, "Plains", 1);
     const offered = flashbackCastsOf(game, card);
     expect(offered.map((c) => c.face).sort()).toEqual([1, 2]);
+  });
+
+  it("Return the Past (a static's grant, during your turn): each half for its own cost, and not on another's turn", () => {
+    const { game } = table();
+    const card = toGraveyard(game, "Wear // Tear");
+    spawn(game, "Return the Past");
+    spawn(game, "Sol Ring");
+    lands(game, "Plains", 1);
+    // {W} pays Tear alone; neither Wear's {1}{R} nor the whole card's
+    // {1}{R}{W} is asked.
+    expect(flashbackCastsOf(game, card).map((c) => c.face)).toEqual([2]);
+    lands(game, "Mountain", 1);
+    expect(flashbackCastsOf(game, card).map((c) => c.face).sort()).toEqual([1, 2]);
+  });
+
+  it("Return the Past grants nothing during an opponent's turn", () => {
+    const { game } = table();
+    const bolt = toGraveyard(game, "Lightning Bolt");
+    spawn(game, "Return the Past");
+    lands(game, "Mountain", 1);
+    expect(flashbackCastsOf(game, bolt)).toHaveLength(1);
+    nextTurn(game, "upkeep");
+    game.advanceUntil((s) => s.priority.holder === A);
+    expect(flashbackCastsOf(game, bolt)).toHaveLength(0);
   });
 
   it("the whole card isn't offered", () => {
