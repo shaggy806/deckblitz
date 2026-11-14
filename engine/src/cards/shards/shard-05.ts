@@ -359,6 +359,7 @@ import _poolGeierReachSanitarium from "../pool/geier-reach-sanitarium.js";
 import _poolGeistOfTheLonelyVigil from "../pool/geist-of-the-lonely-vigil.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenerousPatron from "../pool/generous-patron.js";
+import _poolGenesisOfTheDaleks from "../pool/genesis-of-the-daleks.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGenjuOfTheRealm from "../pool/genju-of-the-realm.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
@@ -1379,6 +1380,7 @@ const shard: CardShard = {
     _poolGeistOfTheLonelyVigil,
     _poolGenemorphImago,
     _poolGenerousPatron,
+    _poolGenesisOfTheDaleks,
     _poolGenjiGlove,
     _poolGenjuOfTheRealm,
     _poolGhituAmplifier,

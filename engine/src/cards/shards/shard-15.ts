@@ -23,6 +23,7 @@ import _poolAltarGolem from "../pool/altar-golem.js";
 import _poolAlterReality from "../pool/alter-reality.js";
 import _poolAmbassadorKehleyr from "../pool/ambassador-kehleyr.js";
 import _poolAmrouSeekers from "../pool/amrou-seekers.js";
+import _poolAmzuSwarmsHunger from "../pool/amzu-swarms-hunger.js";
 import _poolAnaxAndCymede from "../pool/anax-and-cymede.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
@@ -993,6 +994,7 @@ const shard: CardShard = {
     _poolAlterReality,
     _poolAmbassadorKehleyr,
     _poolAmrouSeekers,
+    _poolAmzuSwarmsHunger,
     _poolAnaxAndCymede,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,

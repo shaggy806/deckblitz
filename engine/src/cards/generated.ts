@@ -357,6 +357,7 @@ import _poolAffectionateIndrik from "./pool/affectionate-indrik.js";
 import _poolAfflict from "./pool/afflict.js";
 import _poolAfflictedDeserter from "./pool/afflicted-deserter.js";
 import _poolAfiyaGrove from "./pool/afiya-grove.js";
+import _poolAfterburnerExpert from "./pool/afterburner-expert.js";
 import _poolAfterlifeFromTheLoam from "./pool/afterlife-from-the-loam.js";
 import _poolAfterlifeInsurance from "./pool/afterlife-insurance.js";
 import _poolAfterlife from "./pool/afterlife.js";
@@ -749,6 +750,7 @@ import _poolAmuletOfSafekeeping from "./pool/amulet-of-safekeeping.js";
 import _poolAmuletOfUnmaking from "./pool/amulet-of-unmaking.js";
 import _poolAmuletOfVigor from "./pool/amulet-of-vigor.js";
 import _poolAmyRose from "./pool/amy-rose.js";
+import _poolAmzuSwarmsHunger from "./pool/amzu-swarms-hunger.js";
 import _poolAnHavvaConstable from "./pool/an-havva-constable.js";
 import _poolAnHavvaInn from "./pool/an-havva-inn.js";
 import _poolAnHavvaTownship from "./pool/an-havva-township.js";
@@ -10605,6 +10607,7 @@ import _poolGenesisChamber from "./pool/genesis-chamber.js";
 import _poolGenesisDevice from "./pool/genesis-device.js";
 import _poolGenesisEffect from "./pool/genesis-effect.js";
 import _poolGenesisHydra from "./pool/genesis-hydra.js";
+import _poolGenesisOfTheDaleks from "./pool/genesis-of-the-daleks.js";
 import _poolGenesisStorm from "./pool/genesis-storm.js";
 import _poolGenesisUltimatum from "./pool/genesis-ultimatum.js";
 import _poolGenesisWave from "./pool/genesis-wave.js";
@@ -16216,6 +16219,7 @@ import _poolLuxaRiverShrine from "./pool/luxa-river-shrine.js";
 import _poolLuxiorGiadasGift from "./pool/luxior-giadas-gift.js";
 import _poolLuxknightBreacher from "./pool/luxknight-breacher.js";
 import _poolLuxuriousLibation from "./pool/luxurious-libation.js";
+import _poolLuxuriousLocomotive from "./pool/luxurious-locomotive.js";
 import _poolLuxurySuite from "./pool/luxury-suite.js";
 import _poolLychguard from "./pool/lychguard.js";
 import _poolLydiaFrye from "./pool/lydia-frye.js";
@@ -18289,6 +18293,7 @@ import _poolNeedletoothRaptor from "./pool/needletooth-raptor.js";
 import _poolNeedlevergePathway from "./pool/needleverge-pathway.js";
 import _poolNeelixMoralSupport from "./pool/neelix-moral-support.js";
 import _poolNeeraWildMage from "./pool/neera-wild-mage.js";
+import _poolNeerdivDeviousDiver from "./pool/neerdiv-devious-diver.js";
 import _poolNefCropEntangler from "./pool/nef-crop-entangler.js";
 import _poolNefariousImp from "./pool/nefarious-imp.js";
 import _poolNefaroxOverlordOfGrixis from "./pool/nefarox-overlord-of-grixis.js";
@@ -31781,6 +31786,7 @@ import _poolYewSpirit from "./pool/yew-spirit.js";
 import _poolYggdrasilRebirthEngine from "./pool/yggdrasil-rebirth-engine.js";
 import _poolYgraEaterOfAll from "./pool/ygra-eater-of-all.js";
 import _poolYiazmatUltimateMark from "./pool/yiazmat-ultimate-mark.js";
+import _poolYidaroWanderingMonster from "./pool/yidaro-wandering-monster.js";
 import _poolYidrisMaelstromWielder from "./pool/yidris-maelstrom-wielder.js";
 import _poolYipYip from "./pool/yip-yip.js";
 import _poolYisanTheWandererBard from "./pool/yisan-the-wanderer-bard.js";
@@ -33169,6 +33175,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAfflict,
   _poolAfflictedDeserter,
   _poolAfiyaGrove,
+  _poolAfterburnerExpert,
   _poolAfterlifeFromTheLoam,
   _poolAfterlifeInsurance,
   _poolAfterlife,
@@ -33561,6 +33568,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAmuletOfUnmaking,
   _poolAmuletOfVigor,
   _poolAmyRose,
+  _poolAmzuSwarmsHunger,
   _poolAnHavvaConstable,
   _poolAnHavvaInn,
   _poolAnHavvaTownship,
@@ -43417,6 +43425,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGenesisDevice,
   _poolGenesisEffect,
   _poolGenesisHydra,
+  _poolGenesisOfTheDaleks,
   _poolGenesisStorm,
   _poolGenesisUltimatum,
   _poolGenesisWave,
@@ -49028,6 +49037,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLuxiorGiadasGift,
   _poolLuxknightBreacher,
   _poolLuxuriousLibation,
+  _poolLuxuriousLocomotive,
   _poolLuxurySuite,
   _poolLychguard,
   _poolLydiaFrye,
@@ -51101,6 +51111,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNeedlevergePathway,
   _poolNeelixMoralSupport,
   _poolNeeraWildMage,
+  _poolNeerdivDeviousDiver,
   _poolNefCropEntangler,
   _poolNefariousImp,
   _poolNefaroxOverlordOfGrixis,
@@ -64593,6 +64604,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYggdrasilRebirthEngine,
   _poolYgraEaterOfAll,
   _poolYiazmatUltimateMark,
+  _poolYidaroWanderingMonster,
   _poolYidrisMaelstromWielder,
   _poolYipYip,
   _poolYisanTheWandererBard,
@@ -65994,6 +66006,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/afflict": _poolAfflict,
   "pool/afflicted-deserter": _poolAfflictedDeserter,
   "pool/afiya-grove": _poolAfiyaGrove,
+  "pool/afterburner-expert": _poolAfterburnerExpert,
   "pool/afterlife-from-the-loam": _poolAfterlifeFromTheLoam,
   "pool/afterlife-insurance": _poolAfterlifeInsurance,
   "pool/afterlife": _poolAfterlife,
@@ -66386,6 +66399,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/amulet-of-unmaking": _poolAmuletOfUnmaking,
   "pool/amulet-of-vigor": _poolAmuletOfVigor,
   "pool/amy-rose": _poolAmyRose,
+  "pool/amzu-swarms-hunger": _poolAmzuSwarmsHunger,
   "pool/an-havva-constable": _poolAnHavvaConstable,
   "pool/an-havva-inn": _poolAnHavvaInn,
   "pool/an-havva-township": _poolAnHavvaTownship,
@@ -76242,6 +76256,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/genesis-device": _poolGenesisDevice,
   "pool/genesis-effect": _poolGenesisEffect,
   "pool/genesis-hydra": _poolGenesisHydra,
+  "pool/genesis-of-the-daleks": _poolGenesisOfTheDaleks,
   "pool/genesis-storm": _poolGenesisStorm,
   "pool/genesis-ultimatum": _poolGenesisUltimatum,
   "pool/genesis-wave": _poolGenesisWave,
@@ -81853,6 +81868,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/luxior-giadas-gift": _poolLuxiorGiadasGift,
   "pool/luxknight-breacher": _poolLuxknightBreacher,
   "pool/luxurious-libation": _poolLuxuriousLibation,
+  "pool/luxurious-locomotive": _poolLuxuriousLocomotive,
   "pool/luxury-suite": _poolLuxurySuite,
   "pool/lychguard": _poolLychguard,
   "pool/lydia-frye": _poolLydiaFrye,
@@ -83926,6 +83942,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/needleverge-pathway": _poolNeedlevergePathway,
   "pool/neelix-moral-support": _poolNeelixMoralSupport,
   "pool/neera-wild-mage": _poolNeeraWildMage,
+  "pool/neerdiv-devious-diver": _poolNeerdivDeviousDiver,
   "pool/nef-crop-entangler": _poolNefCropEntangler,
   "pool/nefarious-imp": _poolNefariousImp,
   "pool/nefarox-overlord-of-grixis": _poolNefaroxOverlordOfGrixis,
@@ -97418,6 +97435,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/yggdrasil-rebirth-engine": _poolYggdrasilRebirthEngine,
   "pool/ygra-eater-of-all": _poolYgraEaterOfAll,
   "pool/yiazmat-ultimate-mark": _poolYiazmatUltimateMark,
+  "pool/yidaro-wandering-monster": _poolYidaroWanderingMonster,
   "pool/yidris-maelstrom-wielder": _poolYidrisMaelstromWielder,
   "pool/yip-yip": _poolYipYip,
   "pool/yisan-the-wanderer-bard": _poolYisanTheWandererBard,

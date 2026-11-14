@@ -1002,6 +1002,7 @@ import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
 import _poolXavierSalInfestedCaptain from "../pool/xavier-sal-infested-captain.js";
+import _poolYidaroWanderingMonster from "../pool/yidaro-wandering-monster.js";
 import _poolZealotsConviction from "../pool/zealots-conviction.js";
 import _poolZirdaTheDawnwaker from "../pool/zirda-the-dawnwaker.js";
 import _poolZombieAssassin from "../pool/zombie-assassin.js";
@@ -2031,6 +2032,7 @@ const shard: CardShard = {
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,
     _poolXavierSalInfestedCaptain,
+    _poolYidaroWanderingMonster,
     _poolZealotsConviction,
     _poolZirdaTheDawnwaker,
     _poolZombieAssassin,
