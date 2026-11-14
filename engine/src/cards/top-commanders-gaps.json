@@ -2660,7 +2660,8 @@
   "effect:spell-on-stack-gains-keyword",
   "bug:permission-duration-read-from-granter",
   "replacement:enters-with-counter-kinds-of-source",
-  "effect:prevent-combat-damage-by-blocker-and-blocked"
+  "effect:prevent-combat-damage-by-blocker-and-blocked",
+  "amount:curses-attached-to-player"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

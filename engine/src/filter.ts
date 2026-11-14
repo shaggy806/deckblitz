@@ -1109,6 +1109,14 @@ export interface CardFilter {
    * authored; `null` matches nothing. Matched on the battlefield, against
    * `GameObject.attachedTo` / `attachedToPlayer`. */
   readonly attachedToRef?: TargetRef | null;
+  /** Is an Aura attached to the one player a {@link PlayerRef} names (rule
+   * 303.4) — Curse of Thirst's and Curse of Surveillance's "the number of
+   * Curses attached to **that player**" (`"trigger-player"`: the player
+   * whose upkeep it is, enchanted as the Curse triggered — not whoever it
+   * enchants by the time it resolves). Bound to `attachedToRef` as an effect
+   * applies, as `controlledByRef` is; unbound, or naming nobody, it matches
+   * nothing. */
+  readonly attachedToPlayerRef?: PlayerRef;
   /** Controlled by the one player a {@link PlayerRef} names: "all lands **that
    * player** controls", "the number of Swamps target player controls". Bound
    * to `controllerIn` as an effect applies; unbound, it matches nothing. */
@@ -3111,6 +3119,7 @@ export function matchesFilter(
   // "Attached to it / that creature" (an effect's bound target slot) and
   // "attached to you" (rule 303.4): on the battlefield, as it is now.
   if (filter.attachedToObject !== undefined && filter.attachedToRef === undefined) return false;
+  if (filter.attachedToPlayerRef !== undefined && filter.attachedToRef === undefined) return false;
   if (filter.controlledByRef !== undefined) return false;
   if (filter.aboveSourceInGraveyard === true) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];

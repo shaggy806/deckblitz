@@ -17333,6 +17333,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "blockedThisTurn" in value ||
       "sharesColorWith" in value ||
       "attachedToObject" in value ||
+      "attachedToPlayerRef" in value ||
       "controlledByRef" in value ||
       "ownedByRef" in value ||
       "wasAttachedTo" in value ||
@@ -17688,6 +17689,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["attachedToObject"] !== undefined) {
       const { attachedToObject: ref, ...rest } = walked;
       walked = { ...rest, attachedToRef: objectRefRead(ref as ObjectRef, ctx) ?? null };
+    }
+    // "Curses attached to that player": the player the ref names as this
+    // applies; nobody, nothing.
+    if (walked["attachedToPlayerRef"] !== undefined) {
+      const { attachedToPlayerRef: ref, ...rest } = walked;
+      const player = resolvePlayerRef(ref as PlayerRef, ctx);
+      walked = { ...rest, attachedToRef: player === undefined ? null : { kind: "player", player } };
     }
     // "All lands that player controls": whoever the ref names as this applies.
     if (walked["controlledByRef"] !== undefined) {
