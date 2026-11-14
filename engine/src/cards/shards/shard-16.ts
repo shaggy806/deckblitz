@@ -335,6 +335,7 @@ import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
 import _poolGalvanicJuggernaut from "../pool/galvanic-juggernaut.js";
+import _poolGameOfChaos from "../pool/game-of-chaos.js";
 import _poolGatekeeperOfMalakir from "../pool/gatekeeper-of-malakir.js";
 import _poolGazeOfJustice from "../pool/gaze-of-justice.js";
 import _poolGearsmithGuardian from "../pool/gearsmith-guardian.js";
@@ -1420,6 +1421,7 @@ const shard: CardShard = {
     _poolFutureFlight,
     _poolGalestrike,
     _poolGalvanicJuggernaut,
+    _poolGameOfChaos,
     _poolGatekeeperOfMalakir,
     _poolGazeOfJustice,
     _poolGearsmithGuardian,

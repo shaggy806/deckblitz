@@ -5025,6 +5025,7 @@ import _poolCombustionMan from "./pool/combustion-man.js";
 import _poolCombustionTechnique from "./pool/combustion-technique.js";
 import _poolComeBackWrong from "./pool/come-back-wrong.js";
 import _poolCometCrawler from "./pool/comet-crawler.js";
+import _poolCometStellarPup from "./pool/comet-stellar-pup.js";
 import _poolCometStorm from "./pool/comet-storm.js";
 import _poolComeuppance from "./pool/comeuppance.js";
 import _poolComfortingCounsel from "./pool/comforting-counsel.js";
@@ -10409,6 +10410,7 @@ import _poolGalvanizingSawship from "./pool/galvanizing-sawship.js";
 import _poolGalvanizingTenor from "./pool/galvanizing-tenor.js";
 import _poolGalvanoth from "./pool/galvanoth.js";
 import _poolGamble from "./pool/gamble.js";
+import _poolGameOfChaos from "./pool/game-of-chaos.js";
 import _poolGameOver from "./pool/game-over.js";
 import _poolGamePlan from "./pool/game-plan.js";
 import _poolGameTrailChangeling from "./pool/game-trail-changeling.js";
@@ -14023,6 +14025,7 @@ import _poolJabarisBanner from "./pool/jabaris-banner.js";
 import _poolJabarisInfluence from "./pool/jabaris-influence.js";
 import _poolJabsMistressOfMockery from "./pool/jabs-mistress-of-mockery.js";
 import _poolJaceArcaneStrategist from "./pool/jace-arcane-strategist.js";
+import _poolJaceArchitectOfThought from "./pool/jace-architect-of-thought.js";
 import _poolJaceBeleren from "./pool/jace-beleren.js";
 import _poolJaceCunningCastaway from "./pool/jace-cunning-castaway.js";
 import _poolJaceIngeniousMindMage from "./pool/jace-ingenious-mind-mage.js";
@@ -37834,6 +37837,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCombustionTechnique,
   _poolComeBackWrong,
   _poolCometCrawler,
+  _poolCometStellarPup,
   _poolCometStorm,
   _poolComeuppance,
   _poolComfortingCounsel,
@@ -43218,6 +43222,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGalvanizingTenor,
   _poolGalvanoth,
   _poolGamble,
+  _poolGameOfChaos,
   _poolGameOver,
   _poolGamePlan,
   _poolGameTrailChangeling,
@@ -46832,6 +46837,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJabarisInfluence,
   _poolJabsMistressOfMockery,
   _poolJaceArcaneStrategist,
+  _poolJaceArchitectOfThought,
   _poolJaceBeleren,
   _poolJaceCunningCastaway,
   _poolJaceIngeniousMindMage,
@@ -70656,6 +70662,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/combustion-technique": _poolCombustionTechnique,
   "pool/come-back-wrong": _poolComeBackWrong,
   "pool/comet-crawler": _poolCometCrawler,
+  "pool/comet-stellar-pup": _poolCometStellarPup,
   "pool/comet-storm": _poolCometStorm,
   "pool/comeuppance": _poolComeuppance,
   "pool/comforting-counsel": _poolComfortingCounsel,
@@ -76040,6 +76047,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/galvanizing-tenor": _poolGalvanizingTenor,
   "pool/galvanoth": _poolGalvanoth,
   "pool/gamble": _poolGamble,
+  "pool/game-of-chaos": _poolGameOfChaos,
   "pool/game-over": _poolGameOver,
   "pool/game-plan": _poolGamePlan,
   "pool/game-trail-changeling": _poolGameTrailChangeling,
@@ -79654,6 +79662,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jabaris-influence": _poolJabarisInfluence,
   "pool/jabs-mistress-of-mockery": _poolJabsMistressOfMockery,
   "pool/jace-arcane-strategist": _poolJaceArcaneStrategist,
+  "pool/jace-architect-of-thought": _poolJaceArchitectOfThought,
   "pool/jace-beleren": _poolJaceBeleren,
   "pool/jace-cunning-castaway": _poolJaceCunningCastaway,
   "pool/jace-ingenious-mind-mage": _poolJaceIngeniousMindMage,
