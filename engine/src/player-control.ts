@@ -1,5 +1,6 @@
 /**
- * Who answers for whom (rule 723, and "you choose which creatures attack").
+ * Who answers for whom (rule 723, "you choose which creatures attack", and
+ * "you choose how each player votes").
  *
  * `Game` asks a *player* for every decision, and the action that answers it
  * names that player, whoever's hand pressed the button: the spell they cast is
@@ -73,6 +74,30 @@ export function blockChooser(state: GameState, player: PlayerId): PlayerId | nul
   return last === undefined || last.chooser === player ? null : last.chooser;
 }
 
+/** Who chooses how `player` votes this turn, if that's been given away
+ * (Illusion of Choice): the last such effect to resolve, its chooser still in
+ * the game (the card's ruling). */
+export function voteChooser(state: GameState, player: PlayerId): PlayerId | null {
+  const last = lastCombatChoice(state, (choice) => choice.votes === true);
+  return last === undefined || last.chooser === player ? null : last.chooser;
+}
+
+/** Whether the decision raised now is one vote's result (rule 701.38) — not an
+ * "each player chooses" (rule 101.4), which is held the same way. */
+export function isVoteQuestion(state: GameState): boolean {
+  const awaiting = state.awaiting;
+  if (awaiting === null) return false;
+  const castsVote =
+    awaiting.kind === "choose-modes"
+      ? awaiting.modes.length > 0 && awaiting.modes.every((mode) => mode.effect.kind === "cast-vote")
+      : awaiting.kind === "choose-permanents"
+        ? awaiting.then?.kind === "cast-vote"
+        : false;
+  if (!castsVote || !("source" in awaiting) || awaiting.source === undefined) return false;
+  const held = state.voting?.[awaiting.source];
+  return held !== undefined && held.choice !== true;
+}
+
 /** Whether "creatures your opponents control block this turn if able" holds of
  * `player`'s creatures. */
 export function mustBlockByChoice(state: GameState, player: PlayerId): boolean {
@@ -116,7 +141,9 @@ export function answeringPlayer(state: GameState, asked: PlayerId): PlayerId {
         ? attackChooser(state, asked)
         : awaiting.kind === "blockers"
           ? blockChooser(state, asked)
-          : null;
+          : state.combatChoices !== undefined && isVoteQuestion(state)
+            ? voteChooser(state, asked)
+            : null;
     if (chooser !== null) return decidingPlayer(state, chooser);
   }
   return decidingPlayer(state, asked);

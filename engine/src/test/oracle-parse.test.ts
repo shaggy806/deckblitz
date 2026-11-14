@@ -1275,6 +1275,7 @@ describe("effect templates", () => {
     ["You control target opponent during their next turn.", { kind: "control-player", target: 0 }],
     ["You control target opponent during their next combat phase.", { kind: "control-player", target: 0, during: "next-combat" }],
     ["You choose which creatures attack this turn.", { kind: "choose-combat", attackers: true }],
+    ["You choose how each player votes this turn.", { kind: "choose-combat", votes: true }],
     ["You choose which creatures block this turn and how those creatures block.", { kind: "choose-combat", blocks: "all" }],
     [
       "Creatures your opponents control block this turn if able, and you choose how those creatures block.",

@@ -377,7 +377,7 @@ import {
   type SetMember,
 } from "./object-sets.js";
 import { goadersOf } from "./goad.js";
-import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
+import { answeringPlayer, attackChooser, decidingPlayer, voteChooser } from "./player-control.js";
 import type { AddedPhase, ChoosePermanentsResolution, LeftBattlefield, PlayerControl, ReplacementOrderOption, ReplacementOrderResume } from "./state.js";
 import { blockersRequiredBy, defendersForAttacker, mustBeBlockedByExactlyOne } from "./combat/eligibility.js";
 import { combatRuleWord } from "./combat/rules.js";
@@ -41329,6 +41329,30 @@ controlledBy,
         };
       },
       askVote: (player, spec, extra, about) => this.askVote(source, controller, player, spec, extra, x, about),
+      askAdditionalVote: (player, take, decline) => {
+        if (voteChooser(this.state, player) === null) return false;
+        this.beginModesChoice(
+          source,
+          player,
+          x,
+          1,
+          1,
+          [
+            { text: "Vote an additional time", effect: take },
+            { text: "Don't vote an additional time", effect: decline },
+          ],
+          undefined,
+          [],
+          undefined,
+          0,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          { modesController: controller, vote: { secret: false } },
+        );
+        return true;
+      },
       castVote: (voter, choice) => {
         const held = this.state.voting?.[source];
         if (held === undefined) return;
@@ -44247,7 +44271,9 @@ controlledBy,
     controller: PlayerId,
     player: PlayerId,
     spec: Extract<EffectSpec, { kind: "vote" }>,
-    extra: boolean,
+    /** `"taken"`: an additional vote its voter has said they'll cast, its
+     * result picked by another player (Illusion of Choice) — not optional. */
+    extra: boolean | "taken",
     x: number,
     /** "For each player, choose …": the player this question is about. */
     about?: PlayerId,
@@ -44291,8 +44317,8 @@ controlledBy,
       const keep = what.keep === true;
       const units = (id: ObjectId): number => this.state.objects[id]?.stackCount ?? 1;
       const available = eligible.reduce((n, id) => n + units(id), 0);
-      const most = extra ? 1 : Math.min(what.upTo ?? what.count ?? 1, available);
-      const mayChooseFewer = extra || what.upTo !== undefined;
+      const most = extra !== false ? 1 : Math.min(what.upTo ?? what.count ?? 1, available);
+      const mayChooseFewer = extra === true || what.upTo !== undefined;
       if (keep && !mayChooseFewer && most === available) {
         // "Chooses three" with three or fewer: nothing to choose.
         const votes = this.makeResolutionContext(source, controller, [], x);
@@ -44306,8 +44332,8 @@ controlledBy,
       const noun = count === 1 ? "a permanent" : `${count} permanents`;
       const asked = what.prompt !== undefined
         ? what.prompt
-        : extra
-        ? "Vote an additional time (or choose none)"
+        : extra !== false
+        ? extra === true ? "Vote an additional time (or choose none)" : "Vote an additional time"
         : `${verb} ${what.upTo !== undefined ? "up to " : ""}${what.upTo === 1 ? "one permanent" : noun}${keep ? " to keep" : ""}`;
       this.state.awaiting = {
         kind: "choose-permanents",
@@ -44344,7 +44370,7 @@ controlledBy,
               effect: { kind: "cast-vote", voter: player, choice: { player: p } },
             }));
     if (modes.length === 0) return;
-    this.beginModesChoice(source, player, x, extra ? 0 : 1, 1, modes, undefined, [], undefined, 0, undefined, undefined, undefined, undefined, {
+    this.beginModesChoice(source, player, x, extra === true ? 0 : 1, 1, modes, undefined, [], undefined, 0, undefined, undefined, undefined, undefined, {
       vote: { secret },
     });
   }

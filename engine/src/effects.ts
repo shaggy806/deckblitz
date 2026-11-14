@@ -7494,12 +7494,16 @@ export type EffectSpec =
        * over this combat only, ending with it — Odric, Master Tactician's
        * "you choose which creatures block this combat and how those
        * creatures block".
+       * `votes`: "you choose how each player votes this turn" (Illusion of
+       * Choice) — each vote's result is yours to pick; the last such effect
+       * to resolve works (its ruling).
        */
       readonly kind: "choose-combat";
       readonly attackers?: true;
       readonly blocks?: "all" | "opponents";
       readonly blockIfAble?: true;
       readonly thisCombat?: true;
+      readonly votes?: true;
     }
   | {
       /**
@@ -8638,8 +8642,9 @@ export type EffectSpec =
       readonly startingWith?: "you" | "active-player" | "next-opponent" | "you-then-active-player";
       /** Set by the engine on the copy it parks between one vote and the
        * next: the votes still to ask for, each with whether it's an
-       * additional, optional one. */
-      readonly toAsk?: readonly { readonly player: PlayerId; readonly extra: boolean; readonly about?: PlayerId }[];
+       * additional, optional one — `"taken"`, one its voter has said they'll
+       * cast while someone else picks its result (Illusion of Choice). */
+      readonly toAsk?: readonly { readonly player: PlayerId; readonly extra: boolean | "taken"; readonly about?: PlayerId }[];
     }
   | {
       /** One vote being cast — the effect of the option a voter picks. Built
@@ -11497,7 +11502,12 @@ export interface EffectApi {
   /** Ask `player` for one vote in `spec` — `extra` an additional, optional
    * one (rule 701.38d). Nothing, for a player out of the game or with
    * nothing to vote for. */
-  askVote(player: PlayerId, spec: Extract<EffectSpec, { kind: "vote" }>, extra: boolean, about?: PlayerId): void;
+  askVote(player: PlayerId, spec: Extract<EffectSpec, { kind: "vote" }>, extra: boolean | "taken", about?: PlayerId): void;
+  /** When someone else chooses how `player` votes this turn (Illusion of
+   * Choice), ask `player` whether they'll cast an additional vote, the
+   * vote going on as `take` or `decline` (the Ballot Broker ruling); `false`,
+   * asking nothing, when they choose their own. */
+  askAdditionalVote(player: PlayerId, take: EffectSpec, decline: EffectSpec): boolean;
   /** Record `voter`'s vote — a `permanent` being one on the battlefield. */
   castVote(voter: PlayerId, choice: VoteChoice | { readonly permanent: ObjectId }): void;
   /** Every vote is in: reveal them (a secret vote's) and fire "whenever
@@ -14463,6 +14473,14 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
   while (toAsk.length > 0) {
     const ask = toAsk[0];
     toAsk = toAsk.slice(1);
+    // Whether to cast an additional vote stays the voter's when another
+    // player picks its result: asked first, the answer carrying the vote on.
+    if (
+      ask.extra === true &&
+      ctx.askAdditionalVote(ask.player, { ...spec, toAsk: [{ ...ask, extra: "taken" }, ...toAsk] }, { ...spec, toAsk })
+    ) {
+      return;
+    }
     const parked = ctx.parkedCount();
     const pendingBefore = ctx.decisionPending();
     ctx.askVote(ask.player, spec, ask.extra, ask.about);
@@ -20169,6 +20187,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.blocks !== undefined ? { blocks: spec.blocks } : {}),
         ...(spec.blockIfAble === true ? { blockIfAble: true } : {}),
         ...(spec.thisCombat === true ? { thisCombat: true } : {}),
+        ...(spec.votes === true ? { votes: true } : {}),
       });
       return;
     }

@@ -12469,4 +12469,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    "Illusion of Choice: you pick Bob's vote",
+    board({
+      you: { bf: ['Island*5'], hand: ['Illusion of Choice', 'Plea for Power'] },
+    }),
+  ),
+  preset(
+    "Illusion of Choice: Bob says whether to take Ballot Broker's additional vote, you pick it",
+    board({
+      you: { bf: ['Island*5'], hand: ['Illusion of Choice', 'Plea for Power'] },
+      opp: { human: true, bf: ['Ballot Broker'] },
+    }),
+  ),
+  preset(
+    'Illusion of Choice: at four players, you pick every vote',
+    board({
+      you: { bf: ['Island*2', 'Plains*2'], hand: ['Illusion of Choice', "Council's Judgment"] },
+      opp: [{ bf: ['Hill Giant'] }, { bf: ['Grizzly Bears'] }, { bf: ['Serra Angel'] }],
+    }),
+  ),
 ]

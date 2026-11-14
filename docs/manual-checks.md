@@ -8302,3 +8302,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Fblthp, Lost on the Range: plot from the top in a 4-player game
 - **Do:** Click **Plot {1}{G}** under the Grizzly Bears on top of your library.
 - **Expect:** The Bears go to exile, badged **Plotted**, and every opponent's library is untouched.
+
+## Decisions lane: votes chosen for others, choices for each player, a revealed first draw (2026-11-13)
+
+### Illusion of Choice: you pick Bob's vote
+- **Do:** Cast Illusion of Choice, then Plea for Power. Vote "time", then "time" again for Bob.
+- **Expect:** You're asked twice; the second time the top strip reads "You choose for Bob" and the table is seen from Bob's side. The log shows "Bob votes for time", then "voting done: Alice → time, Bob → time", and you take an extra turn after this one.
+
+### Illusion of Choice: Bob says whether to take Ballot Broker's additional vote, you pick it
+- **Do:** Cast Illusion of Choice, then Plea for Power. Vote "time" for yourself and for Bob; as Bob, click "Vote an additional time"; then vote "knowledge" for him.
+- **Expect:** Only the "Vote an additional time" / "Don't vote an additional time" question is Bob's; every vote is yours, the additional one with no way to decline. The log ends "voting done: Alice → time, Bob → time, Bob → knowledge".
+
+### Illusion of Choice: at four players, you pick every vote
+- **Do:** Cast Illusion of Choice, then Council's Judgment. Click Carol's Grizzly Bears for every player's vote.
+- **Expect:** You're asked four times, "You choose for …" naming Bob, Carol and Dave in turn. Only Carol's Bears are exiled.

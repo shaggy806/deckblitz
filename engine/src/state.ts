@@ -3416,6 +3416,11 @@ export interface CombatChoice {
    * this combat" (Odric, Master Tactician) — gone as that combat ends (rule
    * 511.3), not with the turn. */
   readonly thisCombat?: true;
+  /** "You choose how each player votes this turn" (Illusion of Choice): every
+   * vote's result (rule 701.38) is the chooser's to pick — the voter still
+   * casts it, and still decides whether to cast an additional one (the
+   * Ballot Broker ruling). */
+  readonly votes?: true;
 }
 
 /** One effect a player can apply first (rule 616.1): named by the card that
@@ -6513,8 +6518,8 @@ export interface GameState {
    * next turn" (`control-player`), waiting for that turn and then working
    * through it. Read through `player-control.ts`. */
   playerControl?: PlayerControl[];
-  /** "You choose which creatures attack / block this turn" (`choose-combat`),
-   * oldest first; the last that covers a player works. Turn-scoped, and a rule
+  /** "You choose which creatures attack / block this turn" and "how each
+   * player votes this turn" (`choose-combat`), oldest first; the last that covers a player works. Turn-scoped, and a rule
    * over the turn rather than over any creature, so one arriving later counts
    * too (Brutal Hordechief's ruling). Read through `player-control.ts`. */
   combatChoices?: readonly CombatChoice[];

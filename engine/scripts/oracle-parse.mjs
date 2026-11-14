@@ -4141,6 +4141,7 @@ export function parseSentence(sentence, ctx) {
   }
   // Who chooses the attackers and the blocks, for the rest of the turn.
   if (re(`you choose which creatures attack this turn`).test(s)) return { kind: "choose-combat", attackers: true };
+  if (re(`you choose how each player votes this turn`).test(s)) return { kind: "choose-combat", votes: true };
   if (re(`you choose which creatures block this turn and how those creatures block`).test(s)) {
     return { kind: "choose-combat", blocks: "all" };
   }
