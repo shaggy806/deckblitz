@@ -7402,6 +7402,12 @@ vocabulary before adding one back.
   mana cost's — Frolicking Familiar is blue, Blow Off Steam red — though
   Scryfall gives the card only the creature's (`card:verify` and the scaffold
   read the spell half's off its cost). An Omen face (`omen`) likewise.
+  "You may cast it from your graveyard **as an Adventure** until the end of
+  your next turn" (Mosswood Dreadknight, Hildibrand Manderville) is a dies
+  trigger's `grant-play` over `"trigger-object"` with `spell: { subtype:
+  "Adventure" }`: a permission's `spell` filter is read as the face cast
+  (601.3e), so only the Adventure is offered, and it goes on an adventure as
+  it resolves wherever it was cast from (715.3d).
 - **Split card** (rule 709) — three files, each with `split: true` and
   `faces: ["Left // Right", "Left", "Right"]`. The whole card ("Left //
   Right") is what it is in every zone but the stack: both halves' text, the

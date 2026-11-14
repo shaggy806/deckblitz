@@ -6402,6 +6402,22 @@ export function parseSentence(sentence, ctx) {
   // "With the same name as" another named object (rule 201.2a). Remembrance's
   // and Verdant Succession's "that creature" is the one the trigger names, as
   // it last existed.
+  // "When this creature dies, you may cast it from your graveyard as an
+  // Adventure until the end of your next turn" (Mosswood Dreadknight,
+  // Hildibrand Manderville): a permission over the card that died, its
+  // `spell` filter read as the face cast (601.3e) — only the Adventure.
+  if (
+    ctx.departed !== undefined &&
+    ctx.targets.length === 0 &&
+    (m = re("you may cast it from your graveyard( as an adventure)? until the end of your next turn").exec(s))
+  ) {
+    return {
+      kind: "grant-play",
+      cards: "trigger-object",
+      duration: "until-end-of-your-next-turn",
+      ...(m[1] ? { spell: { subtype: "Adventure" } } : {}),
+    };
+  }
   if (ctx.it === "trigger-object" && ctx.targets.length === 0) {
     if (re("search your library for a card with the same name as that creature, reveal it, put it into your hand, then shuffle").test(s)) {
       return { kind: "search-library", filter: { sameNameWith: "trigger-object" }, destination: "hand", min: 0, max: 1, reveal: true };

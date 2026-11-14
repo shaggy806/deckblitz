@@ -2564,7 +2564,8 @@
   "cost:may-exile-self-and-named-from-graveyard",
   "keyword:cumulative-upkeep-flip-coin",
   "target:triggered-opponents-choice",
-  "trigger:loses-coin-flip"
+  "trigger:loses-coin-flip",
+  "zone:graveyard-cast-as-adventure"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

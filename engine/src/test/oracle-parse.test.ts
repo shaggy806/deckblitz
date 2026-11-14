@@ -19491,3 +19491,19 @@ describe("cards leaving a graveyard (Teval, Along the Crooked Way, Hologram Stal
     expect(parseTrigger("Whenever one or more cards leave your graveyard during your turn")).toBeNull();
   });
 });
+
+describe("cast it from your graveyard as an Adventure (Mosswood Dreadknight, Hildibrand Manderville)", () => {
+  it("a dies trigger's permission over the card that died, reaching only the Adventure face", () => {
+    const knight = parseFace({
+      name: "Test Knight",
+      type_line: "Creature — Human Knight",
+      mana_cost: "{1}{G}",
+      oracle_text: "When this creature dies, you may cast it from your graveyard as an Adventure until the end of your next turn.",
+    });
+    expect(knight.triggered[0]).toMatchObject({
+      trigger: { on: "dies", who: "self" },
+      targets: [],
+      effect: { kind: "grant-play", cards: "trigger-object", duration: "until-end-of-your-next-turn", spell: { subtype: "Adventure" } },
+    });
+  });
+});
