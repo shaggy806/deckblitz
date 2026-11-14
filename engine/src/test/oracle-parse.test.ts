@@ -14648,7 +14648,24 @@ describe("oracle-parse: Suspend X and a suspend cost paid to cast", () => {
         "Benalish Commander's power and toughness are each equal to the number of Soldiers you control.\nSuspend X—{X}{W}{W}. X can't be 0.\nWhenever a time counter is removed from this card while it's exiled, create a 1/1 white Soldier creature token.",
     });
     expect(card.suspend).toEqual({ n: "x", cost: "{X}{W}{W}" });
-    expect(card.triggered[0]).toMatchObject({ trigger: { on: "counters-removed", counter: "time" }, whileSuspended: true });
+    expect(card.triggered[0]).toMatchObject({ trigger: { on: "counters-removed", counter: "time", perCounter: true }, whileSuspended: true });
+  });
+
+  it("whenever you remove a time counter from it while it's exiled", () => {
+    const card = parseFace({
+      name: "Watcher of Hours",
+      mana_cost: "{5}{U}",
+      type_line: "Creature — Sphinx",
+      power: "6",
+      toughness: "6",
+      oracle_text:
+        "Flying, ward {3}\nWhenever you remove a time counter from this card while it's exiled, surveil 1.\nSuspend 6—{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)",
+    });
+    expect(card.todo).toEqual([]);
+    expect(card.triggered.find((t: { whileSuspended?: boolean }) => t.whileSuspended === true)).toMatchObject({
+      trigger: { on: "counters-removed", who: "self", counter: "time", perCounter: true, byYou: true },
+      effect: { kind: "surveil", amount: 1 },
+    });
   });
 
   it("casting a spell with suspend for its suspend cost", () => {

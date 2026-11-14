@@ -22,7 +22,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "counters-removed", who: "self", counter: "time" },
+      trigger: { on: "counters-removed", who: "self", counter: "time", perCounter: true },
       whileSuspended: true,
       targets: [],
       effect: { kind: "draw", amount: 1 },

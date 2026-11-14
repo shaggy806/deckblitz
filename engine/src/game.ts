@@ -32669,7 +32669,7 @@ export class Game {
                   : event.amount
               : trigger.on === "counters-put" && (event.type === "player-counters-changed" || event.type === "energy-changed")
               ? event.delta
-              : trigger.on === "counters-removed" && event.type === "counter-removed"
+              : trigger.on === "counters-removed" && (event.type === "counter-removed" || event.type === "time-counter-removed")
               ? trigger.perCounter === true
                 ? 1
                 : event.amount
@@ -32755,7 +32755,9 @@ export class Game {
     // "Whenever a counter is put": once per counter besides.
     const eachCounter =
       (trigger.on === "counters-put" && trigger.perCounter === true && event.type === "counter-added") ||
-      (trigger.on === "counters-removed" && trigger.perCounter === true && event.type === "counter-removed")
+      (trigger.on === "counters-removed" &&
+        trigger.perCounter === true &&
+        (event.type === "counter-removed" || event.type === "time-counter-removed"))
         ? event.amount
         : 1;
     const countered =
@@ -34977,10 +34979,13 @@ export class Game {
             spec.who === "self" &&
             event.object === self.id &&
             (spec.counter === undefined || spec.counter === "time") &&
-            (spec.last !== true || event.remaining === 0)
+            (spec.last !== true || event.remaining === 0) &&
+            // "Whenever **you** remove" (Watcher of Hours).
+            (spec.byYou !== true || event.by === self.controller)
           );
         }
         return (
+          spec.byYou !== true &&
           event.type === "counter-removed" &&
           event.amount > 0 &&
           (spec.counter === undefined || event.counter === spec.counter) &&
@@ -40154,7 +40159,7 @@ export class Game {
           (before.suspended === true || before.timeCast === true) &&
           (counter === "time" || (counter === "any" && amount === "all"))
         ) {
-          this.removeTimeCounter(target.object, amount === "all" ? (before.counters.time ?? 0) : amount);
+          this.removeTimeCounter(target.object, amount === "all" ? (before.counters.time ?? 0) : amount, controller);
           return;
         }
         this.removeCountersFrom(target.object, counter, amount, true);
@@ -41645,7 +41650,7 @@ controlledBy,
           amount,
           exceptExiledThisWay ? thisWayEntries(this.state, "exiled").map((entry) => entry.object) : [],
         ),
-      timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount),
+      timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount, controller),
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
         this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether, {
           triggerValue,
@@ -51840,7 +51845,7 @@ controlledBy,
     const only = legal.eligible.length === 1 ? legal.eligible[0] : undefined;
     const kinds = only === undefined ? [] : Object.keys(only.counters);
     if (only !== undefined && kinds.length === 1 && offer.min === offer.max) {
-      this.removeChosenCounters([{ object: only.object, kind: kinds[0], count: offer.max }]);
+      this.removeChosenCounters([{ object: only.object, kind: kinds[0], count: offer.max }], player);
       return;
     }
     this.state.awaiting = awaiting;
@@ -51852,6 +51857,7 @@ controlledBy,
    * its last one triggering the cast. */
   private removeChosenCounters(
     removals: readonly { readonly object: ObjectId; readonly kind: string; readonly count: number }[],
+    by: PlayerId,
   ): void {
     for (const { object, kind, count } of removals) {
       let left = count;
@@ -51859,7 +51865,7 @@ controlledBy,
         const now = this.state.objects[object];
         if (now === undefined) break;
         if (now.zone === "exile" && now.suspended === true && kind === "time") {
-          this.removeTimeCounter(object, left);
+          this.removeTimeCounter(object, left, by);
           break;
         }
         // A card in exile keeps counters too (rule 122.1; `inExile`).
@@ -51898,7 +51904,7 @@ controlledBy,
     const awaiting = this.state.awaiting;
     if (awaiting?.kind !== "remove-counters") return;
     this.state.awaiting = null;
-    this.removeChosenCounters(removals);
+    this.removeChosenCounters(removals, player);
     if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
   }
 
@@ -51930,7 +51936,7 @@ controlledBy,
         this.addTimeCounterInExile(id, 1);
       }
     }
-    for (const id of remove) this.removeTimeCounter(id, 1);
+    for (const id of remove) this.removeTimeCounter(id, 1, player);
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
@@ -52015,7 +52021,7 @@ controlledBy,
    * one comes off triggers suspend's cast (rule 702.62a — "it doesn't
    * matter why the last time counter was removed", the rulings).
    */
-  private removeTimeCounter(id: ObjectId, amount: number): void {
+  private removeTimeCounter(id: ObjectId, amount: number, by: PlayerId): void {
     const object = this.state.objects[id];
     if (object === undefined || amount <= 0) return;
     const have = object.counters.time ?? 0;
@@ -52027,7 +52033,7 @@ controlledBy,
     if (object.zone === "battlefield") {
       this.emit({ type: "counter-removed", object: id, counter: "time", amount: n, after });
     } else if (object.zone === "exile" && (object.suspended === true || object.timeCast === true)) {
-      this.emit({ type: "time-counter-removed", object: id, remaining: after });
+      this.emit({ type: "time-counter-removed", object: id, remaining: after, amount: n, by });
       if (after === 0 && object.suspended === true) this.suspendTrigger(id, "cast");
       if (after === 0 && object.timeCast === true) this.timeCastTrigger(id);
     }
@@ -52139,17 +52145,17 @@ controlledBy,
   private removeTimeCountersInExile(owner: PlayerId, amount: number, except: readonly ObjectId[]): void {
     for (const id of [...this.state.zones.shared.exile]) {
       const object = this.state.objects[id];
-      if (object?.owner === owner && !except.includes(id)) this.removeTimeCounter(id, amount);
+      if (object?.owner === owner && !except.includes(id)) this.removeTimeCounter(id, amount, owner);
     }
   }
 
   /** `amount` time counters on (or, negative, off) each suspended card in exile
    * — Dust of Moments' "and each suspended card". */
-  private timeCountersOnSuspended(amount: number): void {
+  private timeCountersOnSuspended(amount: number, by: PlayerId): void {
     for (const id of [...this.state.zones.shared.exile]) {
       if (!this.isSuspended(id)) continue;
       if (amount > 0) this.addTimeCounterInExile(id, amount);
-      else this.removeTimeCounter(id, -amount);
+      else this.removeTimeCounter(id, -amount, by);
     }
   }
 

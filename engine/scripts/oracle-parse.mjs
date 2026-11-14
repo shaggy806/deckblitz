@@ -18029,10 +18029,25 @@ function parseFaceAsWritten(face, ctx = {}) {
       if (duringMain) clause = clause.replace(/ during your main phase$/, "");
       // "Whenever a time counter is removed from this card while it's exiled"
       // (Benalish Commander), or "when the last" one (Riftmarked Knight):
-      // these work while it's suspended.
-      const timeCounterOff = /^(Whenever a|When the last) time counter is removed from (?:this card|~) while it's exiled$/.exec(clause);
-      const parsedTriggers = timeCounterOff
-        ? [{ on: "counters-removed", who: "self", counter: "time", ...(timeCounterOff[1] === "When the last" ? { last: true } : {}) }]
+      // these work while it's suspended. "A" one fires once a counter
+      // (`perCounter`); "whenever you remove a time counter from this card
+      // while it's exiled" (Watcher of Hours), only for its owner's removals.
+      const timeCounterOff =
+        /^(Whenever a|When the last|Whenever you remove a) time counter (?:is removed )?from (?:this card|~) while it's exiled$/.exec(
+          clause,
+        );
+      const timeCounterOk =
+        timeCounterOff !== null && (timeCounterOff[1] === "Whenever you remove a") === !/ is removed from/.test(clause);
+      const parsedTriggers = timeCounterOk
+        ? [
+            {
+              on: "counters-removed",
+              who: "self",
+              counter: "time",
+              ...(timeCounterOff[1] === "When the last" ? { last: true } : { perCounter: true }),
+              ...(timeCounterOff[1] === "Whenever you remove a" ? { byYou: true } : {}),
+            },
+          ]
         : blockedKeyword !== undefined
           ? [{ on: "blocks", who: "self", object: "blocked" }]
           : nthOfTurn
@@ -18073,7 +18088,7 @@ function parseFaceAsWritten(face, ctx = {}) {
         resolve: null,
         text: printed(raw),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
-        ...(timeCounterOff ? { whileSuspended: true } : {}),
+        ...(timeCounterOk ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
         ...(blockedKeyword !== undefined ? { whileCondition: { kind: "trigger-object", filter: { keyword: blockedKeyword } } } : {}),
         ...(duringAttackers ? { whileCondition: { kind: "turn-structure", steps: ["declare-attackers"] } } : {}),

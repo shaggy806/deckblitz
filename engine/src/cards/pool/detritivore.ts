@@ -26,7 +26,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "counters-removed", who: "self", counter: "time" },
+      trigger: { on: "counters-removed", who: "self", counter: "time", perCounter: true },
       whileSuspended: true,
       targets: [{ kind: "permanent", filter: { type: "land", notSupertype: "basic" } }],
       effect: { kind: "destroy", target: 0 },

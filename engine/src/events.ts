@@ -751,6 +751,14 @@ export type GameEvent =
       readonly type: "time-counter-removed";
       readonly object: ObjectId;
       readonly remaining: number;
+      /** How many came off together (Dust of Moments' two): "whenever **a**
+       * time counter is removed" fires once each (`perCounter`). */
+      readonly amount: number;
+      /** Who removed them (Watcher of Hours' "whenever **you** remove"): the
+       * controller of the ability or spell that did — suspend's own upkeep
+       * trigger is the owner's — or the player who paid a cost or answered a
+       * choice of counters to remove. */
+      readonly by: PlayerId;
     })
   | (Base & {
       /** Time travel put a time counter on a suspended card (rule 701.56a);

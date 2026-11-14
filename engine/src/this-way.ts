@@ -392,7 +392,7 @@ export function thisWayEntries(
           }
         } else if (event.type === "time-counter-removed") {
           const object = state.objects[event.object];
-          if (object !== undefined) out.push({ object: event.object, player: object.owner, departed: false, count: 1 });
+          if (object !== undefined) out.push({ object: event.object, player: object.owner, departed: false, count: event.amount });
         }
         break;
       case "counters-put":

@@ -1385,8 +1385,18 @@ export type TriggerKind =
       /** "Whenever **a** +1/+1 counter is removed from this creature"
        * (Protean Hydra): once per counter, each its own trigger (rule 603.2c
        * and its ruling), `{ triggerValue: true }` being 1 — like
-       * `counters-put`'s `perCounter`. */
+       * `counters-put`'s `perCounter`. A suspended card's too: "whenever a
+       * time counter is removed from this card while it's exiled" (Aeon
+       * Chronicler) fires twice for Dust of Moments' two. */
       readonly perCounter?: true;
+      /** "Whenever **you** remove a time counter from this card while it's
+       * exiled" (Watcher of Hours): only a removal by the ability's
+       * controller — suspend's own upkeep trigger, a spell or ability they
+       * control, a cost they paid. Read off a card's time counters in exile
+       * (the `time-counter-removed` event, which records who removed them),
+       * and only there: a permanent's removal doesn't record it, so a
+       * `byYou` trigger never hears one. */
+      readonly byYou?: true;
     }
   | {
       /**

@@ -25,7 +25,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "counters-removed", who: "self", counter: "time" },
+      trigger: { on: "counters-removed", who: "self", counter: "time", perCounter: true },
       whileSuspended: true,
       targets: [],
       effect: { kind: "create-token", token: "2/2 Red and White Dinosaur Token (Flying, Haste)", count: 1 },

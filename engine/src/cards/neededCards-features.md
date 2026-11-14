@@ -322,6 +322,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Whenever you remove a time counter from this card while it's exiled" — built 2026-11-14
+
+The key `trigger:time-counter-removed-in-exile-by-you-per-counter`: the `time-counter-removed`
+event records how many came off (`amount`) and who removed them (`by`: the controller of the
+spell or ability, the owner for suspend's upkeep trigger, the player answering a counter
+choice); `counters-removed` reads `perCounter` and a new `byYou` off it. Watcher of Hours (rank
+10097). A fix beside it: "whenever **a** time counter is removed from this card while it's
+exiled" fired once for Dust of Moments' two (rule 603.2c) — Aeon Chronicler, Benalish
+Commander, Detritivore, Dinosaurs on a Spaceship and Fungal Behemoth now say `perCounter`.
+`test/time-counter-removed.test.ts`.
+
 ### Graveyard cards chosen by the card types among them — built 2026-11-14
 
 The keys `cost:exile-from-graveyard-card-types` and

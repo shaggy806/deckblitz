@@ -10,6 +10,7 @@
     "filter:discarded-this-turn",
     "effect:copy-spell-for-other-player",
     "trigger:activates-ability-source-controlled-by-activator",
+    "trigger:time-counter-removed-in-exile-by-you-per-counter",
     "decision:ward-pay-life-dynamic",
     "effect:per-target-villainous-choice-turn-order",
     "decision:trigger-player-names-after-hidden-search",
