@@ -386,6 +386,7 @@ import _poolGraveStrength from "../pool/grave-strength.js";
 import _poolGravenDominator from "../pool/graven-dominator.js";
 import _poolGravetillerWurm from "../pool/gravetiller-wurm.js";
 import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
+import _poolGreatGoblinFoulHearted from "../pool/great-goblin-foul-hearted.js";
 import _poolGreenDragon from "../pool/green-dragon.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGremlinInfestation from "../pool/gremlin-infestation.js";
@@ -1473,6 +1474,7 @@ const shard: CardShard = {
     _poolGravenDominator,
     _poolGravetillerWurm,
     _poolGreatGildedBoat,
+    _poolGreatGoblinFoulHearted,
     _poolGreenDragon,
     _poolGreenwheelLiberator,
     _poolGremlinInfestation,

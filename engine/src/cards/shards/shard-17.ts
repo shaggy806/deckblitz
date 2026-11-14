@@ -660,6 +660,7 @@ import _poolPsychicVenom from "../pool/psychic-venom.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
 import _poolPulsemageAdvocate from "../pool/pulsemage-advocate.js";
 import _poolPurestrainGenestealer from "../pool/purestrain-genestealer.js";
+import _poolPurplePentapus from "../pool/purple-pentapus.js";
 import _poolPurrajOfUrborg from "../pool/purraj-of-urborg.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
 import _poolPyreticHunter from "../pool/pyretic-hunter.js";
@@ -725,6 +726,7 @@ import _poolSamuraiOfThePaleCurtain from "../pool/samurai-of-the-pale-curtain.js
 import _poolSanctifierEnVec from "../pool/sanctifier-en-vec.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
 import _poolSawbackManticore from "../pool/sawback-manticore.js";
+import _poolScarringMemories from "../pool/scarring-memories.js";
 import _poolScarwoodTreefolk from "../pool/scarwood-treefolk.js";
 import _poolSchoolOfPiranha from "../pool/school-of-piranha.js";
 import _poolScouredBarrens from "../pool/scoured-barrens.js";
@@ -1674,6 +1676,7 @@ const shard: CardShard = {
     _poolPullFromTomorrow,
     _poolPulsemageAdvocate,
     _poolPurestrainGenestealer,
+    _poolPurplePentapus,
     _poolPurrajOfUrborg,
     _poolPyreCharger,
     _poolPyreticHunter,
@@ -1739,6 +1742,7 @@ const shard: CardShard = {
     _poolSanctifierEnVec,
     _poolSarkhanDragonAscendant,
     _poolSawbackManticore,
+    _poolScarringMemories,
     _poolScarwoodTreefolk,
     _poolSchoolOfPiranha,
     _poolScouredBarrens,

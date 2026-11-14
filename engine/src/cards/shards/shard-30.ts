@@ -932,6 +932,7 @@ import _poolTrustyCompanion from "../pool/trusty-companion.js";
 import _poolTunnelTipster from "../pool/tunnel-tipster.js";
 import _poolTuvokChiefTacticalOfficer from "../pool/tuvok-chief-tactical-officer.js";
 import _poolTwinflameTravelers from "../pool/twinflame-travelers.js";
+import _poolTwistedSpiderClone from "../pool/twisted-spider-clone.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolTyrantsChoice from "../pool/tyrants-choice.js";
 import _poolUSSEnterpriseAFreeSpirit from "../pool/u-s-s-enterprise-a-free-spirit.js";
@@ -1978,6 +1979,7 @@ const shard: CardShard = {
     _poolTunnelTipster,
     _poolTuvokChiefTacticalOfficer,
     _poolTwinflameTravelers,
+    _poolTwistedSpiderClone,
     _poolTyrantOfKherRidges,
     _poolTyrantsChoice,
     _poolUSSEnterpriseAFreeSpirit,

@@ -151,6 +151,7 @@ import _poolChaoticGoo from "../pool/chaotic-goo.js";
 import _poolChargingTroll from "../pool/charging-troll.js";
 import _poolCharredFoyer from "../pool/charred-foyer.js";
 import _poolChiefOfTheEdge from "../pool/chief-of-the-edge.js";
+import _poolChiefOfTheWilds from "../pool/chief-of-the-wilds.js";
 import _poolCinderGlade from "../pool/cinder-glade.js";
 import _poolCindervines from "../pool/cindervines.js";
 import _poolClaimTheFirstborn from "../pool/claim-the-firstborn.js";
@@ -1148,6 +1149,7 @@ const shard: CardShard = {
     _poolChargingTroll,
     _poolCharredFoyer,
     _poolChiefOfTheEdge,
+    _poolChiefOfTheWilds,
     _poolCinderGlade,
     _poolCindervines,
     _poolClaimTheFirstborn,

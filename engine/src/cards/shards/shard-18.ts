@@ -542,6 +542,7 @@ import _poolMoldgrafMonstrosity from "../pool/moldgraf-monstrosity.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
+import _poolMomosHeist from "../pool/momos-heist.js";
 import _poolMoonlightBargain from "../pool/moonlight-bargain.js";
 import _poolMoonlitScavengers from "../pool/moonlit-scavengers.js";
 import _poolMorbidPlunder from "../pool/morbid-plunder.js";
@@ -700,6 +701,7 @@ import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSadisticGlee from "../pool/sadistic-glee.js";
 import _poolSadisticObsession from "../pool/sadistic-obsession.js";
 import _poolSaheelisLattice from "../pool/saheelis-lattice.js";
+import _poolSaiOfTheShinobi from "../pool/sai-of-the-shinobi.js";
 import _poolSakikoMotherOfSummer from "../pool/sakiko-mother-of-summer.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
@@ -911,6 +913,7 @@ import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
 import _poolUlamogsReclaimer from "../pool/ulamogs-reclaimer.js";
 import _poolUlcerate from "../pool/ulcerate.js";
 import _poolUlrichUncontestedAlpha from "../pool/ulrich-uncontested-alpha.js";
+import _poolUltraMagnusArmoredCarrier from "../pool/ultra-magnus-armored-carrier.js";
 import _poolUndeadLeotau from "../pool/undead-leotau.js";
 import _poolUndeadSlayer from "../pool/undead-slayer.js";
 import _poolUndercoverButler from "../pool/undercover-butler.js";
@@ -1566,6 +1569,7 @@ const shard: CardShard = {
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMoltenRebuke,
+    _poolMomosHeist,
     _poolMoonlightBargain,
     _poolMoonlitScavengers,
     _poolMorbidPlunder,
@@ -1724,6 +1728,7 @@ const shard: CardShard = {
     _poolSadisticGlee,
     _poolSadisticObsession,
     _poolSaheelisLattice,
+    _poolSaiOfTheShinobi,
     _poolSakikoMotherOfSummer,
     _poolSalivatingGremlins,
     _poolSaltMarsh,
@@ -1935,6 +1940,7 @@ const shard: CardShard = {
     _poolUlamogsReclaimer,
     _poolUlcerate,
     _poolUlrichUncontestedAlpha,
+    _poolUltraMagnusArmoredCarrier,
     _poolUndeadLeotau,
     _poolUndeadSlayer,
     _poolUndercoverButler,

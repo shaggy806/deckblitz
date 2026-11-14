@@ -8,6 +8,7 @@ import _poolAcidWebSpider from "../pool/acid-web-spider.js";
 import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
 import _poolAerieWorshippers from "../pool/aerie-worshippers.js";
 import _poolAgathaOfTheVileCauldron from "../pool/agatha-of-the-vile-cauldron.js";
+import _poolAggressiveInstinct from "../pool/aggressive-instinct.js";
 import _poolAggressiveMining from "../pool/aggressive-mining.js";
 import _poolAkkiLavarunner from "../pool/akki-lavarunner.js";
 import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
@@ -102,6 +103,7 @@ import _poolCalamityGallopingInferno from "../pool/calamity-galloping-inferno.js
 import _poolCandlekeepSage from "../pool/candlekeep-sage.js";
 import _poolCanopyGargantuan from "../pool/canopy-gargantuan.js";
 import _poolCaptainOfUmbar from "../pool/captain-of-umbar.js";
+import _poolCaptainRexNebula from "../pool/captain-rex-nebula.js";
 import _poolCaptivatingVampire from "../pool/captivating-vampire.js";
 import _poolCaribouRange from "../pool/caribou-range.js";
 import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
@@ -511,6 +513,7 @@ import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
 import _poolMossViper from "../pool/moss-viper.js";
 import _poolMoxPearl from "../pool/mox-pearl.js";
+import _poolMuYanling from "../pool/mu-yanling.js";
 import _poolMurasaSproutling from "../pool/murasa-sproutling.js";
 import _poolMurderousCut from "../pool/murderous-cut.js";
 import _poolMycosynthLattice from "../pool/mycosynth-lattice.js";
@@ -960,6 +963,7 @@ const shard: CardShard = {
     _poolAdricMathematicalGenius,
     _poolAerieWorshippers,
     _poolAgathaOfTheVileCauldron,
+    _poolAggressiveInstinct,
     _poolAggressiveMining,
     _poolAkkiLavarunner,
     _poolAkkiWarPaint,
@@ -1054,6 +1058,7 @@ const shard: CardShard = {
     _poolCandlekeepSage,
     _poolCanopyGargantuan,
     _poolCaptainOfUmbar,
+    _poolCaptainRexNebula,
     _poolCaptivatingVampire,
     _poolCaribouRange,
     _poolCarvenCaryatid,
@@ -1463,6 +1468,7 @@ const shard: CardShard = {
     _poolMossKami,
     _poolMossViper,
     _poolMoxPearl,
+    _poolMuYanling,
     _poolMurasaSproutling,
     _poolMurderousCut,
     _poolMycosynthLattice,

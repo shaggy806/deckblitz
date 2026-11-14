@@ -962,6 +962,7 @@ import _poolUSSDiscoveryAtBlackAlert from "../pool/u-s-s-discovery-at-black-aler
 import _poolUSSPrometheusPrototype from "../pool/u-s-s-prometheus-prototype.js";
 import _poolUlvenwaldMysteries from "../pool/ulvenwald-mysteries.js";
 import _poolUnbenderTine from "../pool/unbender-tine.js";
+import _poolUnclesMusings from "../pool/uncles-musings.js";
 import _poolUndermountainAdventurer from "../pool/undermountain-adventurer.js";
 import _poolUndyingMalice from "../pool/undying-malice.js";
 import _poolUnlivingLegionnaire from "../pool/unliving-legionnaire.js";
@@ -2050,6 +2051,7 @@ const shard: CardShard = {
     _poolUSSPrometheusPrototype,
     _poolUlvenwaldMysteries,
     _poolUnbenderTine,
+    _poolUnclesMusings,
     _poolUndermountainAdventurer,
     _poolUndyingMalice,
     _poolUnlivingLegionnaire,

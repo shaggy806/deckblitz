@@ -451,6 +451,7 @@ import _poolJestersCap from "../pool/jesters-cap.js";
 import _poolJoinTheCollective from "../pool/join-the-collective.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolJunglePatrol from "../pool/jungle-patrol.js";
+import _poolJurinLeadingTheCharge from "../pool/jurin-leading-the-charge.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
 import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKatakiWarsWage from "../pool/kataki-wars-wage.js";
@@ -1005,6 +1006,7 @@ import _poolWebspinnerCuff from "../pool/webspinner-cuff.js";
 import _poolWeftwalking from "../pool/weftwalking.js";
 import _poolWelcomeHome from "../pool/welcome-home.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
+import _poolWhiplashTrap from "../pool/whiplash-trap.js";
 import _poolWhispergearSneak from "../pool/whispergear-sneak.js";
 import _poolWhispersteelDagger from "../pool/whispersteel-dagger.js";
 import _poolWildRoads from "../pool/wild-roads.js";
@@ -1498,6 +1500,7 @@ const shard: CardShard = {
     _poolJoinTheCollective,
     _poolJosuVessLichKnight,
     _poolJunglePatrol,
+    _poolJurinLeadingTheCharge,
     _poolKangeeSkyWarden,
     _poolKardursViciousReturn,
     _poolKatakiWarsWage,
@@ -2052,6 +2055,7 @@ const shard: CardShard = {
     _poolWeftwalking,
     _poolWelcomeHome,
     _poolWeldingJar,
+    _poolWhiplashTrap,
     _poolWhispergearSneak,
     _poolWhispersteelDagger,
     _poolWildRoads,

@@ -813,6 +813,7 @@ import _poolSpireSerpent from "../pool/spire-serpent.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
 import _poolSpiritMirror from "../pool/spirit-mirror.js";
 import _poolSplashySpellcaster from "../pool/splashy-spellcaster.js";
+import _poolSplinterAgingChampion from "../pool/splinter-aging-champion.js";
 import _poolSplitskinDoll from "../pool/splitskin-doll.js";
 import _poolSpoilsOfTheVault from "../pool/spoils-of-the-vault.js";
 import _poolSporecrownThallid from "../pool/sporecrown-thallid.js";
@@ -1846,6 +1847,7 @@ const shard: CardShard = {
     _poolSpiritMantle,
     _poolSpiritMirror,
     _poolSplashySpellcaster,
+    _poolSplinterAgingChampion,
     _poolSplitskinDoll,
     _poolSpoilsOfTheVault,
     _poolSporecrownThallid,

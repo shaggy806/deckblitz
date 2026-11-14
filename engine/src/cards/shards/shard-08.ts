@@ -909,6 +909,7 @@ import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolTheCloningOfShredder from "../pool/the-cloning-of-shredder.js";
 import _poolTheDukeRebelSentry from "../pool/the-duke-rebel-sentry.js";
+import _poolTheFifteenthDoctor from "../pool/the-fifteenth-doctor.js";
 import _poolTheHauntOfHightower from "../pool/the-haunt-of-hightower.js";
 import _poolTheInfamousCruelclaw from "../pool/the-infamous-cruelclaw.js";
 import _poolTheMasterFormedAnew from "../pool/the-master-formed-anew.js";
@@ -1975,6 +1976,7 @@ const shard: CardShard = {
     _poolTheChiefWarg,
     _poolTheCloningOfShredder,
     _poolTheDukeRebelSentry,
+    _poolTheFifteenthDoctor,
     _poolTheHauntOfHightower,
     _poolTheInfamousCruelclaw,
     _poolTheMasterFormedAnew,

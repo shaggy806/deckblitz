@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _pool2Mace from "../pool/2-mace.js";
+import _poolAbbyMercilessSoldier from "../pool/abby-merciless-soldier.js";
 import _poolAbsolverThrull from "../pool/absolver-thrull.js";
 import _poolAbsorbIdentity from "../pool/absorb-identity.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
@@ -1029,6 +1030,7 @@ import _tokensZombieTokenBlueBlackMenace from "../tokens/zombie-token-blue-black
 const shard: CardShard = {
   pool: [
     _pool2Mace,
+    _poolAbbyMercilessSoldier,
     _poolAbsolverThrull,
     _poolAbsorbIdentity,
     _poolAbstergoEntertainment,

@@ -483,6 +483,7 @@ import _poolKulrathKnight from "../pool/kulrath-knight.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
+import _poolKyoshiWarriorExemplars from "../pool/kyoshi-warrior-exemplars.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
 import _poolLavaRunner from "../pool/lava-runner.js";
@@ -609,6 +610,7 @@ import _poolOrderOfTheGoldenCricket from "../pool/order-of-the-golden-cricket.js
 import _poolOrder from "../pool/order.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
 import _poolOrneryGoblin from "../pool/ornery-goblin.js";
+import _poolOthelmSigardianOutcast from "../pool/othelm-sigardian-outcast.js";
 import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
@@ -1522,6 +1524,7 @@ const shard: CardShard = {
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
+    _poolKyoshiWarriorExemplars,
     _poolLarvalScoutlander,
     _poolLavaAxe,
     _poolLavaRunner,
@@ -1648,6 +1651,7 @@ const shard: CardShard = {
     _poolOrder,
     _poolOrdruunMentor,
     _poolOrneryGoblin,
+    _poolOthelmSigardianOutcast,
     _poolOutCold,
     _poolOvergrownFarmland,
     _poolOxidize,

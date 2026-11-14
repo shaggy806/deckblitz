@@ -420,6 +420,7 @@ import _poolHailstormValkyrie from "../pool/hailstorm-valkyrie.js";
 import _poolHalamDjinn from "../pool/halam-djinn.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
+import _poolHargildeKindlyRunechanter from "../pool/hargilde-kindly-runechanter.js";
 import _poolHarvesttideSentry from "../pool/harvesttide-sentry.js";
 import _poolHauntedMire from "../pool/haunted-mire.js";
 import _poolHauntedPlateMail from "../pool/haunted-plate-mail.js";
@@ -716,6 +717,7 @@ import _poolRiversRebuke from "../pool/rivers-rebuke.js";
 import _poolRiverwiseAugur from "../pool/riverwise-augur.js";
 import _poolRobTheHoard from "../pool/rob-the-hoard.js";
 import _poolRodeoPyromancers from "../pool/rodeo-pyromancers.js";
+import _poolRokusMastery from "../pool/rokus-mastery.js";
 import _poolRooftopPercher from "../pool/rooftop-percher.js";
 import _poolRoothaMasteringTheMoment from "../pool/rootha-mastering-the-moment.js";
 import _poolRosnakhtHeirOfRohgahh from "../pool/rosnakht-heir-of-rohgahh.js";
@@ -1442,6 +1444,7 @@ const shard: CardShard = {
     _poolHalamDjinn,
     _poolHallwayHeckler,
     _poolHangarbackWalker,
+    _poolHargildeKindlyRunechanter,
     _poolHarvesttideSentry,
     _poolHauntedMire,
     _poolHauntedPlateMail,
@@ -1738,6 +1741,7 @@ const shard: CardShard = {
     _poolRiverwiseAugur,
     _poolRobTheHoard,
     _poolRodeoPyromancers,
+    _poolRokusMastery,
     _poolRooftopPercher,
     _poolRoothaMasteringTheMoment,
     _poolRosnakhtHeirOfRohgahh,

@@ -186,6 +186,7 @@ import _poolCragcrownPathway from "../pool/cragcrown-pathway.js";
 import _poolCrawWurm from "../pool/craw-wurm.js";
 import _poolCrazedGoblin from "../pool/crazed-goblin.js";
 import _poolCreamOfTheCrop from "../pool/cream-of-the-crop.js";
+import _poolCreepingCrystalCoating from "../pool/creeping-crystal-coating.js";
 import _poolCrocanura from "../pool/crocanura.js";
 import _poolCrossroadsCandleguide from "../pool/crossroads-candleguide.js";
 import _poolCrowdOfCinders from "../pool/crowd-of-cinders.js";
@@ -411,6 +412,7 @@ import _poolIntoTheWilds from "../pool/into-the-wilds.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
 import _poolInvent from "../pool/invent.js";
 import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
+import _poolIrohFirebendingInstructor from "../pool/iroh-firebending-instructor.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
 import _poolIzzetGeneratorium from "../pool/izzet-generatorium.js";
@@ -1188,6 +1190,7 @@ const shard: CardShard = {
     _poolCrawWurm,
     _poolCrazedGoblin,
     _poolCreamOfTheCrop,
+    _poolCreepingCrystalCoating,
     _poolCrocanura,
     _poolCrossroadsCandleguide,
     _poolCrowdOfCinders,
@@ -1413,6 +1416,7 @@ const shard: CardShard = {
     _poolInvasionSubmersible,
     _poolInvent,
     _poolInvokeTheWinds,
+    _poolIrohFirebendingInstructor,
     _poolIsolatedChapel,
     _poolIzoniCenterOfTheWeb,
     _poolIzzetGeneratorium,

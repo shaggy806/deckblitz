@@ -922,6 +922,7 @@ import _poolTetsukoUmezawaPursuer from "../pool/tetsuko-umezawa-pursuer.js";
 import _poolTezzeretTheSchemer from "../pool/tezzeret-the-schemer.js";
 import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
+import _poolTheArtOfTea from "../pool/the-art-of-tea.js";
 import _poolTheCapitolineTriad from "../pool/the-capitoline-triad.js";
 import _poolTheEleventhDoctor from "../pool/the-eleventh-doctor.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
@@ -999,8 +1000,10 @@ import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
 import _poolVancesBlastingCannons from "../pool/vances-blasting-cannons.js";
 import _poolVault112SadisticSimulation from "../pool/vault-112-sadistic-simulation.js";
+import _poolVegetationAbomination from "../pool/vegetation-abomination.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
 import _poolVengefulFirebrand from "../pool/vengeful-firebrand.js";
+import _poolVenomBlast from "../pool/venom-blast.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVesselOfNascency from "../pool/vessel-of-nascency.js";
@@ -1059,6 +1062,7 @@ import _poolYellowScarvesGeneral from "../pool/yellow-scarves-general.js";
 import _poolYennaRedtoothRegent from "../pool/yenna-redtooth-regent.js";
 import _poolYoungNecromancer from "../pool/young-necromancer.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
+import _poolZamrielSeraphOfSteel from "../pool/zamriel-seraph-of-steel.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
 import _poolZephyrNet from "../pool/zephyr-net.js";
 import _poolZeriamGoldenWind from "../pool/zeriam-golden-wind.js";
@@ -2005,6 +2009,7 @@ const shard: CardShard = {
     _poolTezzeretTheSchemer,
     _poolTezzeretsGambit,
     _poolThaliaGuardianOfThraben,
+    _poolTheArtOfTea,
     _poolTheCapitolineTriad,
     _poolTheEleventhDoctor,
     _poolTheEmperorOfPalamecia,
@@ -2082,8 +2087,10 @@ const shard: CardShard = {
     _poolValentinaAllegraDeFontaine,
     _poolVancesBlastingCannons,
     _poolVault112SadisticSimulation,
+    _poolVegetationAbomination,
     _poolVeloheartBike,
     _poolVengefulFirebrand,
+    _poolVenomBlast,
     _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,
     _poolVesselOfNascency,
@@ -2142,6 +2149,7 @@ const shard: CardShard = {
     _poolYennaRedtoothRegent,
     _poolYoungNecromancer,
     _poolZagothCrystal,
+    _poolZamrielSeraphOfSteel,
     _poolZellDincht,
     _poolZephyrNet,
     _poolZeriamGoldenWind,

@@ -273,6 +273,7 @@ import _poolEiganjoExemplar from "../pool/eiganjo-exemplar.js";
 import _poolElectrostaticBolt from "../pool/electrostatic-bolt.js";
 import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
+import _poolEllieVengefulHunter from "../pool/ellie-vengeful-hunter.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolEmilVastlandsRoamer from "../pool/emil-vastlands-roamer.js";
@@ -544,6 +545,7 @@ import _poolMireInMisery from "../pool/mire-in-misery.js";
 import _poolMirriWeatherlightDuelist from "../pool/mirri-weatherlight-duelist.js";
 import _poolMirrodinsCore from "../pool/mirrodins-core.js";
 import _poolMirrorGallery from "../pool/mirror-gallery.js";
+import _poolMjRisingStar from "../pool/mj-rising-star.js";
 import _poolMoat from "../pool/moat.js";
 import _poolMobLookout from "../pool/mob-lookout.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
@@ -1302,6 +1304,7 @@ const shard: CardShard = {
     _poolElectrostaticBolt,
     _poolElementalSpectacle,
     _poolEleshNornGrandCenobite,
+    _poolEllieVengefulHunter,
     _poolElvishHunter,
     _poolElvishVisionary,
     _poolEmilVastlandsRoamer,
@@ -1573,6 +1576,7 @@ const shard: CardShard = {
     _poolMirriWeatherlightDuelist,
     _poolMirrodinsCore,
     _poolMirrorGallery,
+    _poolMjRisingStar,
     _poolMoat,
     _poolMobLookout,
     _poolMonumentToEndurance,

@@ -26,6 +26,7 @@ import _poolAlpineHoundmaster from "../pool/alpine-houndmaster.js";
 import _poolAncientOfTheEquinox from "../pool/ancient-of-the-equinox.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
+import _poolAppaAangsCompanion from "../pool/appa-aangs-companion.js";
 import _poolAppaTheVigilant from "../pool/appa-the-vigilant.js";
 import _poolArachnusWeb from "../pool/arachnus-web.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
@@ -1049,6 +1050,7 @@ const shard: CardShard = {
     _poolAncientOfTheEquinox,
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
+    _poolAppaAangsCompanion,
     _poolAppaTheVigilant,
     _poolArachnusWeb,
     _poolArbiterOfWoe,

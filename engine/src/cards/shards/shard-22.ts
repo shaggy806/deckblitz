@@ -10,6 +10,7 @@ import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAetherspouts from "../pool/aetherspouts.js";
 import _poolAettirAndPriwen from "../pool/aettir-and-priwen.js";
 import _poolAgathasSoulCauldron from "../pool/agathas-soul-cauldron.js";
+import _poolAishaOfSparksAndSmoke from "../pool/aisha-of-sparks-and-smoke.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAjaniInspiringLeader from "../pool/ajani-inspiring-leader.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
@@ -1059,6 +1060,7 @@ const shard: CardShard = {
     _poolAetherspouts,
     _poolAettirAndPriwen,
     _poolAgathasSoulCauldron,
+    _poolAishaOfSparksAndSmoke,
     _poolAjaniFellsTheGodsire,
     _poolAjaniInspiringLeader,
     _poolAkoumWarrior,

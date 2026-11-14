@@ -26,6 +26,7 @@ import _poolAjaniStrengthOfThePride from "../pool/ajani-strength-of-the-pride.js
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
+import _poolAlchemaxSlayerBots from "../pool/alchemax-slayer-bots.js";
 import _poolAlertHeedbonder from "../pool/alert-heedbonder.js";
 import _poolAlmsCollector from "../pool/alms-collector.js";
 import _poolAlphaBrawl from "../pool/alpha-brawl.js";
@@ -1031,6 +1032,7 @@ const shard: CardShard = {
     _poolAjanisAnguish,
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
+    _poolAlchemaxSlayerBots,
     _poolAlertHeedbonder,
     _poolAlmsCollector,
     _poolAlphaBrawl,

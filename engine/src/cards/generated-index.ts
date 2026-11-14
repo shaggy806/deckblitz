@@ -1353,6 +1353,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Ulrich, Uncontested Alpha": "https://cards.scryfall.io/art_crop/back/3/e/3e2011f0-a640-4579-bd67-1dfbc09b8c09.jpg",
   "Ultimate Spider-Man": "https://cards.scryfall.io/art_crop/back/9/f/9f8b4d9b-208a-4673-a617-5e3edd069c33.jpg",
   "Ultimecia, Omnipotent": "https://cards.scryfall.io/art_crop/back/2/d/2d6a2b68-5407-464e-a335-7866fd969c30.jpg",
+  "Ultra Magnus, Armored Carrier": "https://cards.scryfall.io/art_crop/back/6/8/687695ad-d212-4da4-a326-ce9876afdda2.jpg",
   "Ulvenwald Abomination": "https://cards.scryfall.io/art_crop/back/0/d/0dbaef61-fa39-4ea7-bc21-445401c373e7.jpg",
   "Ulvenwald Behemoth": "https://cards.scryfall.io/art_crop/back/5/f/5fdf5fc4-69c8-4a59-9095-c2feefb64371.jpg",
   "Ulvenwald Primordials": "https://cards.scryfall.io/art_crop/back/8/3/8325c570-4d74-4e65-891c-3e153abf4bf9.jpg",

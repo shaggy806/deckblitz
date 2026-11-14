@@ -255,6 +255,7 @@ import _poolEkthiContaminatorPriest from "../pool/ekthi-contaminator-priest.js";
 import _poolEldaConjurerOfSpectacle from "../pool/elda-conjurer-of-spectacle.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
+import _poolElectricSeaweed from "../pool/electric-seaweed.js";
 import _poolElmarUlvenwaldInformant from "../pool/elmar-ulvenwald-informant.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPioneer from "../pool/elvish-pioneer.js";
@@ -1300,6 +1301,7 @@ const shard: CardShard = {
     _poolEldaConjurerOfSpectacle,
     _poolEldritchPact,
     _poolElectricEel,
+    _poolElectricSeaweed,
     _poolElmarUlvenwaldInformant,
     _poolElminstersSimulacrum,
     _poolElvishPioneer,

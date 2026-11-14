@@ -48,6 +48,7 @@ import _poolAshiokNightmareWeaver from "../pool/ashiok-nightmare-weaver.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAutumnTailKitsuneSage from "../pool/autumn-tail-kitsune-sage.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
+import _poolBaboonSpirit from "../pool/baboon-spirit.js";
 import _poolBajor from "../pool/bajor.js";
 import _poolBalaGedThief from "../pool/bala-ged-thief.js";
 import _poolBalthorTheStout from "../pool/balthor-the-stout.js";
@@ -1022,6 +1023,7 @@ const shard: CardShard = {
     _poolAtsushiTheBlazingSky,
     _poolAutumnTailKitsuneSage,
     _poolAzimaetDrake,
+    _poolBaboonSpirit,
     _poolBajor,
     _poolBalaGedThief,
     _poolBalthorTheStout,

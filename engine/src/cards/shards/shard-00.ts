@@ -292,6 +292,7 @@ import _poolFeedTheCycle from "../pool/feed-the-cycle.js";
 import _poolFieldOfReality from "../pool/field-of-reality.js";
 import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
+import _poolFireNationArchers from "../pool/fire-nation-archers.js";
 import _poolFirefiendElemental from "../pool/firefiend-elemental.js";
 import _poolFiremaneCommando from "../pool/firemane-commando.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
@@ -834,6 +835,7 @@ import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
 import _poolSunriseSovereign from "../pool/sunrise-sovereign.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
 import _poolSunstrikeLegionnaire from "../pool/sunstrike-legionnaire.js";
+import _poolSwampbenders from "../pool/swampbenders.js";
 import _poolSwarmOfRats from "../pool/swarm-of-rats.js";
 import _poolSwathcutterGiant from "../pool/swathcutter-giant.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
@@ -927,6 +929,7 @@ import _poolTyLeeChiBlocker from "../pool/ty-lee-chi-blocker.js";
 import _poolUchbenbakTheGreatMistake from "../pool/uchbenbak-the-great-mistake.js";
 import _poolUglukOfTheWhiteHand from "../pool/ugluk-of-the-white-hand.js";
 import _poolUktabiWildcats from "../pool/uktabi-wildcats.js";
+import _poolUltraMagnusTactician from "../pool/ultra-magnus-tactician.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUmaroRagingYeti from "../pool/umaro-raging-yeti.js";
 import _poolUndeadAlchemist from "../pool/undead-alchemist.js";
@@ -1323,6 +1326,7 @@ const shard: CardShard = {
     _poolFieldOfReality,
     _poolFieryInscription,
     _poolFillWithFright,
+    _poolFireNationArchers,
     _poolFirefiendElemental,
     _poolFiremaneCommando,
     _poolFireshrieker,
@@ -1865,6 +1869,7 @@ const shard: CardShard = {
     _poolSunriseSovereign,
     _poolSunscorchRegent,
     _poolSunstrikeLegionnaire,
+    _poolSwampbenders,
     _poolSwarmOfRats,
     _poolSwathcutterGiant,
     _poolSwordsmanSharpScoundrel,
@@ -1958,6 +1963,7 @@ const shard: CardShard = {
     _poolUchbenbakTheGreatMistake,
     _poolUglukOfTheWhiteHand,
     _poolUktabiWildcats,
+    _poolUltraMagnusTactician,
     _poolUltramarinesHonourGuard,
     _poolUmaroRagingYeti,
     _poolUndeadAlchemist,
