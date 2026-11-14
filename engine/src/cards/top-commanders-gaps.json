@@ -2642,7 +2642,8 @@
   "effect:cast-now-grants-abilities",
   "effect:reveal-until-count-put-any-number",
   "effect:cast-modal-x-modes",
-  "effect:spell-on-stack-gains-keyword"
+  "effect:spell-on-stack-gains-keyword",
+  "bug:permission-duration-read-from-granter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -45633,10 +45633,12 @@ controlledBy,
     const granted =
       grantIf === undefined ? taken : taken.filter((id) => this.state.objects[id]?.zone === "exile").filter((id) => grantIf(id));    // "One of those cards": one play shared among them all (or one per type).
     const group = this.permissionGroupFor(grant);
-    // "Until your next turn, players may play cards they exiled this way"
-    // (Memory Vessel): "your" is the effect's, whoever may play the card.
+    // Its duration is read from the side of whoever may play the card
+    // (Casey & Raph's "until that player's next end step"), or the
+    // effect's with `durationOf: "granter"` (Memory Vessel's "until your
+    // next turn, players may play cards they exiled this way").
     const permissionFor = (owner: PlayerId): CardPlayPermission =>
-      this.cardPermissionFrom(grant, controller, source, owner, group, undefined, controller);
+      this.cardPermissionFrom(grant, controller, source, owner, group);
 
     // "Choose one of them" — the rest stay exiled with no permission.
     const choose = opts.choose;
@@ -45662,7 +45664,9 @@ controlledBy,
 
   /** The permission `grant` puts on one card `owner` owns, by `controller`'s
    * effect from `source`: theirs, its owner's with `byOwner`, or `to`'s, read
-   * from that player's side ("until the end of **their** next turn"). */
+   * from that player's side ("until the end of **their** next turn") — or
+   * from `controller`'s with `durationOf: "granter"` ("until **your** next
+   * turn, players may play …"). */
   private cardPermissionFrom(
     grant: PlayGrant,
     controller: PlayerId,
@@ -45670,16 +45674,24 @@ controlledBy,
     owner: PlayerId,
     group?: number,
     to?: PlayerId,
-    windowOf?: PlayerId,
   ): CardPlayPermission {
     const player = to ?? (grant.byOwner === true ? owner : controller);
-    const { duration, byOwner: _byOwner, whileSource, fromNextTurn, upTo: _upTo, ...terms } = playGrantOf(grant);
+    const {
+      duration,
+      durationOf,
+      byOwner: _byOwner,
+      whileSource,
+      fromNextTurn,
+      upTo: _upTo,
+      ...terms
+    } = playGrantOf(grant);
+    const windowOf = durationOf === "granter" ? controller : player;
     const sourceObject = this.state.objects[source];
     const linked =
       (whileSource === true || terms.oncePerTurn === true || terms.sourceDid !== undefined) && sourceObject !== undefined
         ? { id: source, zoneChangeCount: sourceObject.zoneChangeCount ?? 0 }
         : undefined;
-    const window = this.permissionWindow(duration, windowOf ?? player, source);
+    const window = this.permissionWindow(duration, windowOf, source);
     // "When you cast it": the permanent whose effect gave it, as it is now,
     // and that effect's controller.
     const whenCast =

@@ -25,6 +25,7 @@ export default defineCard({
             kind: "impulse-exile",
             amount: 7,
             duration: "until-your-next-turn",
+            durationOf: "granter",
             whose: "each-player",
             byOwner: true,
             play: true,

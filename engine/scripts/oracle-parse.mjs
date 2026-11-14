@@ -8216,6 +8216,36 @@ function ownerPermissionAt(sentences, i, ctx) {
   };
 }
 
+/** Another player exiles their own top card and may play it, the window read
+ * from their side or the effect's (`PlayGrant.durationOf`): Casey & Raph,
+ * Hotheads' "Target player exiles the top card of their library. Until that
+ * player's next end step, they may play that card without paying its mana
+ * cost.", Rocco, Street Chef's "Each player exiles the top card of their
+ * library. Until your next end step, each player may play the card they
+ * exiled this way." — or `null`. */
+function playerImpulseAt(sentences, i, ctx) {
+  const exiles = /^(target player|target opponent|each player|each opponent) exiles the top card of their library\.$/i.exec(
+    sentences[i],
+  );
+  if (exiles === null) return null;
+  const next = sentences[i + 1] ?? "";
+  const theirs = /^until that player's next end step, they may play that card( without paying its mana cost)?\.$/i.exec(next);
+  const yours = /^until your next end step, each player may play the card they exiled this way\.$/i.test(next);
+  const who = exiles[1].toLowerCase();
+  const targeted = who.startsWith("target");
+  if (theirs !== null ? !targeted : !yours || targeted) return null;
+  return {
+    kind: "impulse-exile",
+    amount: 1,
+    whose: targeted ? ctx.target(who === "target opponent" ? "opponent" : "player") : who.replace(" ", "-"),
+    duration: "until-your-next-end-step",
+    ...(yours ? { durationOf: "granter" } : {}),
+    byOwner: true,
+    play: true,
+    ...(theirs?.[1] !== undefined ? { free: true } : {}),
+  };
+}
+
 /** The impulse sentence pair at `i`, or `null`: the top card exiled with its
  * permission (`impulse-exile`), or a targeted card exiled from your graveyard
  * with one (`exile`'s `mayPlay`; `sourceDid` isn't something that says). */
@@ -10596,7 +10626,7 @@ export function parseEffect(text, outer) {
     // "Exile the top card of your library. You may play that card until you
     // exile another card with ~." and the other windows, and "exile target
     // card from your graveyard" with a permission for a duration.
-    const impulse = impulseWindowAt(sentences, i, ctx);
+    const impulse = impulseWindowAt(sentences, i, ctx) ?? playerImpulseAt(sentences, i, ctx);
     if (impulse !== null) {
       parsed.push(impulse);
       hints.push({ sentence, effect: impulse });

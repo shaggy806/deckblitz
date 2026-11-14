@@ -20070,3 +20070,40 @@ describe("the dice rolled this turn, die by die (rule 706)", () => {
     ]);
   });
 });
+
+describe("another player's impulse, its window theirs or yours (PlayGrant.durationOf)", () => {
+  it("'Until that player's next end step, they may play that card' (Casey & Raph): theirs", () => {
+    const c = ctx();
+    const parsed = parseEffect(
+      "Target player exiles the top card of their library. Until that player's next end step, they may play that card without paying its mana cost.",
+      c,
+    );
+    expect(parsed.effect).toEqual({
+      kind: "impulse-exile",
+      amount: 1,
+      whose: 0,
+      duration: "until-your-next-end-step",
+      byOwner: true,
+      play: true,
+      free: true,
+    });
+    expect(c.targets).toEqual(["player"]);
+  });
+
+  it("'Until your next end step, each player may play the card they exiled' (Rocco): the granter's", () => {
+    expect(
+      parseEffect(
+        "Each player exiles the top card of their library. Until your next end step, each player may play the card they exiled this way.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "impulse-exile",
+      amount: 1,
+      whose: "each-player",
+      duration: "until-your-next-end-step",
+      durationOf: "granter",
+      byOwner: true,
+      play: true,
+    });
+  });
+});

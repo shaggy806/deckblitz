@@ -1048,8 +1048,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Saddled only switches on its own Mount's "while saddled" abilities.
   "become-saddled": (n, v) => v.touch(n.target, "help", MINOR),
   // Exiling the top of a targeted player's library (Rashmi and Ragavan) is
-  // taken from them.
-  "impulse-exile": (n, v) => v.touch(n.whose, "harm", MINOR),
+  // taken from them; one its owner may then play (Casey & Raph, Hotheads'
+  // "they may play that card without paying its mana cost") is a gift.
+  "impulse-exile": (n, v) => v.touch(n.whose, n.byOwner === true ? "help" : "harm", MINOR),
   scry: (n, v) => v.child(n.then),
   "reveal-top": none,
   "reveal-drawn": none,

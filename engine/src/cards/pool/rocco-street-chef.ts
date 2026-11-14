@@ -32,6 +32,7 @@ export default defineCard({
         kind: "impulse-exile",
         amount: 1,
         duration: "until-your-next-end-step",
+        durationOf: "granter",
         whose: "each-player",
         byOwner: true,
         play: true,

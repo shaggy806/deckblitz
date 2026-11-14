@@ -185,7 +185,9 @@ export type CopyDuration = Extract<
 
 /** What a permission over an exiled card can last (`ImpulseGrant`,
  * `GameObject.impulse`'s `expiry`), read from the side of the player it's
- * given to ("until the end of **their** next turn"). */
+ * given to ("until the end of **their** next turn") unless the grant says
+ * `durationOf: "granter"` (Memory Vessel's "until **your** next turn,
+ * players may play …"). */
 export type PermissionDuration = Extract<
   Duration,
   | "end-of-turn"

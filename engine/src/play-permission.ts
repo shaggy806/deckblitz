@@ -208,7 +208,13 @@ export interface PlayTerms {
  * What an effect gives over a card or cards: the terms and how long.
  *
  * - `duration`: read from the side of the player it's given to ("until the end
- *   of **their** next turn").
+ *   of **their** next turn", Suspend Aggression; "until **that player's** next
+ *   end step", Casey & Raph, Hotheads).
+ * - `durationOf: "granter"`: the duration's "your" is the effect's controller,
+ *   whoever is given it — Memory Vessel's "until **your** next turn, players
+ *   may play cards they exiled this way", Rocco, Street Chef's "until your
+ *   next end step, each player may play the card they exiled". Only matters
+ *   when it's given to someone else (`byOwner`, or a player it's handed to).
  * - `byOwner`: "its owner may play it" rather than the effect's controller.
  * - `whileSource`: "from among cards exiled with [this]" as an ability of it:
  *   usable only while the source is on the battlefield as the same object
@@ -217,6 +223,7 @@ export interface PlayTerms {
  */
 export interface PlayGrant extends PlayTerms {
   readonly duration: PermissionDuration;
+  readonly durationOf?: "granter";
   readonly byOwner?: boolean;
   readonly whileSource?: boolean;
   readonly fromNextTurn?: true;
@@ -400,6 +407,7 @@ const PLAY_GRANT_KEYS = [
   "becomes",
   "whenCast",
   "duration",
+  "durationOf",
   "byOwner",
   "whileSource",
   "fromNextTurn",
