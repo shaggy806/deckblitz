@@ -40301,12 +40301,12 @@ controlledBy,
             .map((id) => facts(id, true));
         }
         if ("stack" in of) {
-          // One question per object: an ability object standing for several
-          // identical ones is asked about once (`onTheStack` lists it per
-          // instance).
-          const stack = this.state.zones.shared.stack;
+          // One question per spell or ability: an object standing for several
+          // identical abilities (`stackCount`) is that many abilities (rule
+          // 113.7), each split off into its own object to be paid for, or
+          // countered, alone.
           const resolving = this.state.objects[source]?.zone === "stack" ? source : undefined;
-          return stack
+          return [...this.state.zones.shared.stack]
             .filter((id) => {
               const object = this.state.objects[id];
               if (object === undefined || id === resolving) return false;
@@ -40314,6 +40314,15 @@ controlledBy,
               if (of.stack.whose === "you") return object.controller === controller;
               if (of.stack.whose === "opponent") return object.controller !== controller;
               return true;
+            })
+            .flatMap((id) => {
+              const parts = [id];
+              for (let left = (this.state.objects[id].stackCount ?? 1) - 1; left > 0; left -= 1) {
+                const part = this.splitOneFromStack(id);
+                if (part === id) break;
+                parts.push(part);
+              }
+              return parts;
             })
             .map((id) => facts(id, false));
         }
@@ -48090,7 +48099,10 @@ controlledBy,
     const answer = found.current.map((now, i) => {
       const pool = [...found.others[i], ...(found.currentLegal[i] ? [now] : [])].filter((t) => !exceptYou || !yours(t));
       if (pool.length === 0) return now;
-      return this.randomTargets(you, effectSource, [pool])[0] ?? now;
+      const picked = this.randomTargets(you, effectSource, [pool])[0] ?? now;
+      // A token of a stack is targeted on its own (`lockInTargets`'s rule):
+      // one peeled off for it.
+      return sameTargetRef(picked, now) ? now : this.splitTargetRef(picked);
     });
     this.retargetStackObject(id, found.slots, answer);
   }

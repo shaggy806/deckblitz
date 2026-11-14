@@ -6,9 +6,10 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { invalidateComputedCache } from "../characteristics.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, lands, life, ref, settle, table, toHand, zone } from "./harness.js";
+import { A, B, activate, cast, lands, life, ref, settle, spawn, table, toHand, zone } from "./harness.js";
 
 const question = (game: Game) => {
   game.advanceUntil((s) => s.awaiting !== null);
@@ -68,5 +69,33 @@ describe("Whirlwind Denial", () => {
     expect(zone(game, bobShock)).toBe("graveyard");
     // Only the Shock he paid for hit.
     expect(life(game, A)).toBe(18);
+  });
+
+  it("an object standing for two identical abilities is two: paid for one, the other countered", () => {
+    const { game } = table();
+    lands(game, "Island", 3);
+    // Enough for both, so each is asked about.
+    lands(game, "Mountain", 8, B);
+    const sorcerer = spawn(game, "Prodigal Sorcerer", B);
+    // Alice holds priority on a spell of her own, so Bob can respond.
+    const shock = toHand(game, "Shock");
+    lands(game, "Mountain", 1);
+    cast(game, shock, { settle: false, targets: [ref(B)] });
+    game.dispatch({ type: "pass-priority", player: A });
+    activate(game, sorcerer, 0, { player: B, targets: [ref(A)], settle: false });
+    const ping = game.state.zones.shared.stack.at(-1)!;
+    // Two identical abilities on the stack as one object (`PendingTrigger.copies`).
+    game.state.objects[ping].stackCount = 2;
+    invalidateComputedCache();
+    game.dispatch({ type: "pass-priority", player: B });
+    cast(game, toHand(game, "Whirlwind Denial"), { settle: false });
+    question(game);
+    answer(game, true);
+    question(game);
+    answer(game, false);
+    settle(game);
+    // One ping resolved, the other countered.
+    expect(life(game, A)).toBe(19);
+    expect(life(game, B)).toBe(18);
   });
 });

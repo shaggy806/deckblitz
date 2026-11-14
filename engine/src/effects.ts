@@ -9771,7 +9771,9 @@ export type EffectSpec =
         | { readonly libraryTop: number }
         /** The spells and/or abilities on the stack, `whose` controls them —
          * Whirlwind Denial's "for each spell and ability your opponents
-         * control" (this one resolving never among them). */
+         * control" (this one resolving never among them). An object standing
+         * for several identical abilities (`stackCount`) is that many, each
+         * split off and asked about, and countered, on its own. */
         | {
             readonly stack: {
               readonly spells?: true;

@@ -66,6 +66,32 @@ describe("Chef's Kiss", () => {
     expect(seen).toEqual(new Set([A, "Hill Giant"]));
   });
 
+  it("a token of a stack drawn as the new target is peeled off and targeted alone", () => {
+    let tokenPicked = false;
+    for (let seed = 1; seed <= 12 && !tokenPicked; seed += 1) {
+      const { game } = table({ seed });
+      game.debugApplyEffect(A, { kind: "create-token", token: "Goblin Token", count: 3 });
+      const shock = aliceCasts(game, "Shock", "Mountain", 1, B);
+      kiss(game, shock, { settle: false });
+      game.dispatch({ type: "pass-priority", player: B });
+      game.dispatch({ type: "pass-priority", player: A });
+      for (const id of game.state.zones.shared.stack) {
+        const t = game.state.objects[id].targets?.[0];
+        if (t?.kind !== "object") continue;
+        tokenPicked = true;
+        // One token, not the stack of them.
+        expect(game.state.objects[t.object].stackCount ?? 1).toBe(1);
+      }
+      settle(game);
+      const goblins = game.state.zones.shared.battlefield
+        .filter((id) => game.state.objects[id].cardName === "Goblin Token")
+        .reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0);
+      // Each Shock kills at most the one Goblin it aimed at.
+      expect(goblins).toBeGreaterThanOrEqual(1);
+    }
+    expect(tokenPicked).toBe(true);
+  });
+
   it("with nothing it may pick, the targets stay as they were (the hexproof ruling)", () => {
     const { game } = table();
     spawn(game, "Leyline of Sanctity", A);
