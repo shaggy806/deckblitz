@@ -2549,7 +2549,8 @@
   "effect:counter-each-unless-pays",
   "effect:shuffle-permanents-reveal-that-many",
   "static:cascade-put-land",
-  "mechanic:morph-land"
+  "mechanic:morph-land",
+  "effect:return-random-cards-from-graveyard"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

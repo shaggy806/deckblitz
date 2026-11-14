@@ -4858,6 +4858,24 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("'return two creature cards at random from your graveyard' (Moldgraf Monstrosity): a counted random pick, together", () => {
+    const wish = face("Return two cards at random from your graveyard to your hand.", "Sorcery");
+    expect(wish.effect).toEqual({
+      kind: "choose-random-card",
+      zone: "graveyard",
+      count: 2,
+      then: { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "return-to-hand", target: 0, from: "graveyard" } },
+    });
+    const moldgraf = face("Return two creature cards at random from your graveyard to the battlefield.", "Sorcery");
+    expect(moldgraf.effect).toEqual({
+      kind: "choose-random-card",
+      zone: "graveyard",
+      filter: { type: "creature" },
+      count: 2,
+      then: { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "put-onto-battlefield", target: 0 } },
+    });
+  });
+
   it("buyback (rule 702.27): a kicker whose cast returns to its owner's hand", () => {
     const spell = face(
       "Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nDraw a card.",

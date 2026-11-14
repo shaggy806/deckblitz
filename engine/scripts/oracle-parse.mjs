@@ -4608,6 +4608,25 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // "Return two cards at random from your graveyard to your hand" (Make a
+  // Wish), "… X cards …" (Reap the Past), "… two creature cards … to the
+  // battlefield" (Moldgraf Monstrosity): that many different cards, together.
+  if ((m = re(`return (two|three|four|five|x|\\d+) (?:(.+?) )?cards at random from your graveyard to (your hand|the battlefield)`).exec(s))) {
+    const filter = m[2] === undefined ? undefined : parseTypePhrase(m[2], { cards: true });
+    if (filter === undefined || (filter !== null && Object.keys(filter).length > 0)) {
+      const effect =
+        m[3].toLowerCase() === "your hand"
+          ? { kind: "return-to-hand", target: 0, from: "graveyard" }
+          : { kind: "put-onto-battlefield", target: 0 };
+      return {
+        kind: "choose-random-card",
+        zone: "graveyard",
+        ...(filter !== undefined ? { filter } : {}),
+        count: amount(m[1]),
+        then: { kind: "for-each-target", from: 0, simultaneous: true, effect },
+      };
+    }
+  }
   if ((m = re(`return a card at random from your graveyard to your hand, then reorder your graveyard as you choose`).exec(s))) {
     return {
       kind: "sequence",

@@ -2902,6 +2902,15 @@ export type EffectSpec =
        * (`slot: 1`, the damage still at target 0), Singe-Mind Ogre's "target
        * player … then loses life equal to that card's mana value". */
       readonly slot?: number;
+      /** **How many** different cards are picked — "return **two** creature
+       * cards at random from your graveyard to the battlefield" (Moldgraf
+       * Monstrosity), "return **X** cards at random" (Reap the Past): each
+       * picked in turn from the ones not yet picked, every one with an equal
+       * chance, all of them when there are no more than this; `then` gets
+       * them as targets 0, 1, … (a `for-each-target` from 0, `simultaneous`,
+       * moves them together). Read as it resolves. Not with `slot` or
+       * `show`. */
+      readonly count?: EffectAmount;
       /** What's done with the picked card; nothing for a bare reveal or
        * look. */
       readonly then?: EffectSpec;
@@ -17714,6 +17723,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         }
       }
       if (cards.length === 0) return;
+      if (spec.count !== undefined) {
+        // Several different cards: each picked from those not yet picked.
+        let left = [...cards];
+        const picked: TargetRef[] = [];
+        for (let n = Math.max(0, Math.floor(amountValue(spec.count, ctx))); n > 0 && left.length > 0; n -= 1) {
+          const among = left;
+          const at = ctx.pickAtRandom(among.length, (i) => ({ kind: "card", object: among[i] }));
+          picked.push({ kind: "object", object: among[at] });
+          left = among.filter((_, i) => i !== at);
+        }
+        if (spec.then !== undefined && picked.length > 0) applyEffectSpec(spec.then, ctx.withTargets(picked));
+        return;
+      }
       const chosen = cards[ctx.pickAtRandom(cards.length, (i) => ({ kind: "card", object: cards[i] }))];
       if (spec.zone === "hand" && spec.show !== undefined && owner !== undefined) {
         if (spec.show === "look" && spec.then !== undefined) {
