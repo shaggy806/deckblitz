@@ -10,6 +10,8 @@
     "decision:each-player-chooses-exiled-card",
     "effect:repeat-until-no-player-acts",
     "effect:voter-chooses-permanent",
+    "cost:exile-from-graveyard-card-types",
+    "decision:zone-choice-card-types-among",
     "effect:flash-if-x-at-most",
     "bug:granted-flashback-split-card-cost",
     "effect:delayed-trigger-watching-bolstered",

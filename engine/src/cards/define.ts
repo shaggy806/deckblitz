@@ -5811,6 +5811,13 @@ export interface CardDefinition {
   readonly escape: {
     readonly cost: string;
     readonly exileCount: number;
+    /** "Exile any number of other cards from your graveyard **with four or
+     * more card types among them**" (Nethergoyf): in place of a count
+     * (`exileCount: 0`), as many cards as the caster likes whose card types,
+     * each counted once (rule 205.2a), number this many or more. Castable
+     * only while the other cards in the graveyard have that many; which,
+     * chosen once the spell is on the stack, as the cost is paid (601.2h). */
+    readonly exileTypesAmong?: number;
     readonly counters?: { readonly kind: string; readonly amount: number };
     /** "This creature escapes with **your choice of** a +1/+1 counter or a
      * flying counter on it" (Tizerus Charger; rule 702.138c): one of these,
@@ -6566,6 +6573,7 @@ interface CardDraft {
   escape?: {
     readonly cost: string;
     readonly exileCount: number;
+    readonly exileTypesAmong?: number;
     readonly counters?: { readonly kind: string; readonly amount: number };
     readonly counterChoice?: readonly string[];
     readonly exileLinked?: true;

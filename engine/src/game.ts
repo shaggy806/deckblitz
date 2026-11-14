@@ -2259,6 +2259,9 @@ type FlashbackOption = {
 type EscapeOption = {
   readonly cost: string;
   readonly exileCount: number;
+  /** The printed escape's "with N or more card types among them" (Nethergoyf)
+   * — see `CardDefinition.escape`. */
+  readonly exileTypesAmong?: number;
   /** The permanent whose static grants it; absent for the card's own. */
   readonly grantor?: ObjectId;
 };
@@ -6073,7 +6076,9 @@ export class Game {
         ...(via === "escape"
           ? (() => {
               const escape = this.escapeOf(card, face ?? 0, graveyardGrant);
-              return escape === null
+              // Nethergoyf's "with four or more card types among them" is
+              // asked once the spell is on the stack, not with the cast.
+              return escape === null || escape.exileTypesAmong !== undefined
                 ? {}
                 : {
                     escapeExile: {
@@ -19972,7 +19977,16 @@ export class Game {
       if (others.length < escape.exileCount) {
         return `${def.name}'s escape needs ${escape.exileCount} other cards in the graveyard`;
       }
-      if (escapeExile !== undefined) {
+      // "…with four or more card types among them" (Nethergoyf): which, chosen
+      // once the spell is on the stack (601.2h); here, only whether they can be.
+      if (escape.exileTypesAmong !== undefined) {
+        if (this.cardTypesAmongCount(others) < escape.exileTypesAmong) {
+          return `${def.name}'s escape needs ${escape.exileTypesAmong} card types among the other cards in the graveyard`;
+        }
+        if (escapeExile !== undefined && escapeExile.length > 0) {
+          return `${def.name}'s escape cards are chosen as its cost is paid, not with the cast`;
+        }
+      } else if (escapeExile !== undefined) {
         const wrong = this.whyEscapeExileIsWrong(player, cardId, def.name, escape.exileCount, escapeExile);
         if (wrong !== null) return wrong;
       }
@@ -22687,7 +22701,9 @@ export class Game {
     // of the cost — the ones the caster chose (validated above), or for a
     // driver that doesn't choose, the front (oldest) of the graveyard.
     let escapeLinked: readonly ObjectId[] | undefined;
-    if (escape !== null) {
+    // Nethergoyf's "with four or more card types among them": once the spell
+    // is on the stack, below.
+    if (escape !== null && escape.exileTypesAmong === undefined) {
       const others = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== cardId);
       const exiled = escapeExile !== undefined ? [...escapeExile] : others.slice(0, escape.exileCount);
       // One cost, paid at once — and a separate move from the card's own to
@@ -23319,6 +23335,16 @@ export class Game {
           priorityTo,
           cardId,
         ),
+      );
+    }
+    // Escape's "exile any number of other cards from your graveyard with four
+    // or more card types among them" (Nethergoyf — rule 702.138a): which,
+    // chosen now as the cost is paid (601.2h). The spell has left the
+    // graveyard, so every card there is another.
+    if (escape !== null && escape.exileTypesAmong !== undefined) {
+      const typesAmong = escape.exileTypesAmong;
+      this.withDecisionSource(cardId, () =>
+        this.payGraveyardExileCost(player, cardId, { count: 0, typesAmong }, priorityTo, cardId),
       );
     }
     // "Put a card an opponent owns from exile into that player's graveyard"
@@ -27407,7 +27433,10 @@ export class Game {
    * ("you may exile") always asks, and none is an answer; `exileLink` links
    * what's exiled to the permanent the spell becomes (rule 607.2a). A mana
    * ability's (`manaAbility`) adds its mana once a choice is answered, and
-   * nothing is on the stack (rule 605.3b).
+   * nothing is on the stack (rule 605.3b). With `typesAmong`, in place of a
+   * count: any number of them with that many card types among them (rule
+   * 205.2a — Nethergoyf's escape), always asked, the set checked whole by
+   * the choice's `"variety"` rule.
    */
   private payGraveyardExileCost(
     player: PlayerId,
@@ -27419,6 +27448,7 @@ export class Game {
       readonly singleGraveyard?: true;
       readonly optional?: true;
       readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+      readonly typesAmong?: number;
     },
     priorityTo: PlayerId = player,
     /** The spell or ability on the stack this pays for, which remembers the
@@ -27426,6 +27456,26 @@ export class Game {
     forStackObject?: ObjectId,
     manaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"],
   ): void {
+    if (cost.typesAmong !== undefined) {
+      const eligible = this.graveyardCostCandidates(player, cost.filter, source);
+      // Checked before the cast; nothing to pay with should it be gone since.
+      if (this.cardTypesAmongCount(eligible) < cost.typesAmong) return;
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player,
+        ids: this.state.zones.perPlayer[player].graveyard.filter((id) => id !== source),
+        eligible,
+        min: 1,
+        max: eligible.length,
+        destination: "exile",
+        leftover: "stay",
+        priorityTo,
+        together: this.cardTypesTogether(eligible, cost.typesAmong, false),
+        ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
+        ...(manaAbility !== undefined ? { thenManaAbility: manaAbility } : {}),
+      };
+      return;
+    }
     if (cost.count <= 0) return;
     // "From a single graveyard" (Night Soil): any player's that has enough, all
     // from one — a `share` rule, a card's one tag its owner.
@@ -44461,6 +44511,36 @@ controlledBy,
     return at === undefined ? {} : { exileLink: { source, zoneChangeCount: at } };
   }
 
+  /** "With N or more card types among them": the `"variety"` rule over
+   * `eligible`, each card's tags its card types now (rule 205.2a) — Winter,
+   * Cynical Opportunist's choice, Nethergoyf's escape cost. `orNone` where
+   * choosing nothing is an answer ("you may exile any number …"). */
+  private cardTypesTogether(eligible: readonly ObjectId[], atLeast: number, orNone: boolean): ZoneChoiceTogether {
+    const tags: Record<string, readonly string[]> = {};
+    for (const id of eligible) {
+      const object = this.state.objects[id];
+      tags[id] = object === undefined ? [] : [...effectiveTypes(this.state, this.registry, object)];
+    }
+    const word = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"][atLeast] ?? String(atLeast);
+    return {
+      rule: "variety",
+      tags,
+      atLeast,
+      ...(orNone ? { orNone: true } : {}),
+      text: `${word} or more card types among them`,
+    };
+  }
+
+  /** How many card types there are among `cards`, each once (rule 205.2a). */
+  private cardTypesAmongCount(cards: readonly ObjectId[]): number {
+    const types = new Set<string>();
+    for (const id of cards) {
+      const object = this.state.objects[id];
+      if (object !== undefined) for (const type of effectiveTypes(this.state, this.registry, object)) types.add(type);
+    }
+    return types.size;
+  }
+
   /** A search's `together` as the decision carries it: each eligible card's
    * tags worked out now — its land types (rule 205.3i), or the slots whose
    * filter it matches — so checking a chosen set needs no registry. */
@@ -44485,6 +44565,9 @@ controlledBy,
       const sum = together.totalPowerAtLeast;
       for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
       return { rule: "total", tags, atLeast: sum, text: `with total power ${sum} or greater` };
+    }
+    if ("cardTypesAmongAtLeast" in together) {
+      return this.cardTypesTogether(eligible, together.cardTypesAmongAtLeast, true);
     }
     if ("oneEachTypeAmong" in together) {
       // Each type among them once (rule 205.2a), each spell as it was cast.
@@ -56824,7 +56907,13 @@ controlledBy,
     if (card === undefined) return [];
     const out: EscapeOption[] = [];
     const printed = this.registry.get(card.cardName).escape;
-    if (printed !== null && face === 0) out.push({ cost: printed.cost, exileCount: printed.exileCount });
+    if (printed !== null && face === 0) {
+      out.push({
+        cost: printed.cost,
+        exileCount: printed.exileCount,
+        ...(printed.exileTypesAmong !== undefined ? { exileTypesAmong: printed.exileTypesAmong } : {}),
+      });
+    }
     if (card.zone !== "graveyard") return out;
     // A one-shot grant until end of turn (`grant-graveyard-keyword` — Desdemona,
     // Freedom's Edge), whatever has become of what gave it.
@@ -56832,7 +56921,7 @@ controlledBy,
       if (granted.keyword !== "escape") continue;
       const cost = granted.manaCost === true ? this.faceDef(cardId, face).manaCost : granted.cost;
       const exileCount = granted.exileCount ?? 0;
-      if (cost === null || out.some((e) => e.cost === cost && e.exileCount === exileCount)) continue;
+      if (cost === null || out.some((e) => e.cost === cost && e.exileCount === exileCount && e.exileTypesAmong === undefined)) continue;
       out.push({ cost, exileCount, grantor: granted.by });
     }
     for (const { source, ability } of this.activeStaticsOf(
@@ -56845,7 +56934,7 @@ controlledBy,
       const cost = spec.cost === "mana-cost" ? this.faceDef(cardId, face).manaCost : spec.cost;
       if (cost === null) continue;
       const exileCount = spec.exileCount ?? 0;
-      if (out.some((e) => e.cost === cost && e.exileCount === exileCount)) continue;
+      if (out.some((e) => e.cost === cost && e.exileCount === exileCount && e.exileTypesAmong === undefined)) continue;
       out.push({ cost, exileCount, grantor: source.id });
     }
     return out;

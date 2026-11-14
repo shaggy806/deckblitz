@@ -322,6 +322,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Graveyard cards chosen by the card types among them — built 2026-11-14
+
+The keys `cost:exile-from-graveyard-card-types` and
+`decision:zone-choice-card-types-among`, one shape: the zone choice's `"variety"` rule
+reached from a definition. Escape's `exileTypesAmong` (Nethergoyf's "exile any number of
+other cards from your graveyard with four or more card types among them" — castable while the
+others hold that many types, the cards asked once it's on the stack, 601.2h, through
+`payGraveyardExileCost`'s `typesAmong`); `SearchTogether`'s `cardTypesAmongAtLeast` on a
+`look-and-choose` (Winter, Cynical Opportunist's end-step exile, none an answer). Rule 205.2a:
+each type once. `test/card-types-among-choice.test.ts`.
+
 ### "If X is 2 or less, it enters tapped" — built 2026-11-14
 
 The key `replacement:enters-tapped-if-x`: the `enters-battlefield` replacement's `tappedUnless` is

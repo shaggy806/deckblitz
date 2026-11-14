@@ -283,7 +283,13 @@ export type SearchTogether =
   | { readonly totalManaValueAtMost: EffectAmount }
   /** The same over the cards' powers — Moorland Rescuer's "any number of other
    * creature cards with total power X or less", X read as it resolves. */
-  | { readonly totalPowerAtMost: EffectAmount };
+  | { readonly totalPowerAtMost: EffectAmount }
+  /** This many card types or more among the chosen cards, each type once
+   * however many have it (rule 205.2a), choosing none also allowed — Winter,
+   * Cynical Opportunist's "you may exile any number of cards from your
+   * graveyard with four or more card types among them" (the zone choice's
+   * `"variety"` rule). */
+  | { readonly cardTypesAmongAtLeast: number };
 
 /** A {@link SearchTogether} as `Game` raises it: its amount read. */
 export type ResolvedSearchTogether =
