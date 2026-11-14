@@ -304,7 +304,12 @@ export type ResolvedSearchTogether =
 export type ChoosePermanentsTogether =
   | { readonly distinctNames: true }
   | { readonly distinctPowers: true }
-  | { readonly totalPowerAtLeast: number };
+  | { readonly totalPowerAtLeast: number }
+  /** "…other artifacts you control **with total mana value X**" (Fabrication
+   * Foundry's cost, through `AbilityCost.do`): their mana values add up to
+   * exactly this — `"x"` the X announced as it's activated (rules 107.3,
+   * 601.2b), a token stack's each counted. */
+  | { readonly totalManaValue: number | "x" };
 
 /**
  * Where each chosen card of a `look-and-choose` goes when that depends on the

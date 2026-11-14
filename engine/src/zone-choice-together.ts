@@ -94,6 +94,53 @@ export function largestOneEach(together: ZoneChoiceTogether, eligible: readonly 
   return matched;
 }
 
+/**
+ * The indices of some `min` to `max` of `values` (none negative — mana
+ * values) that add up to from `atLeast` to `atMost`, or `null` when no such
+ * set exists: what "with total mana value X" (Fabrication Foundry's cost) can
+ * be paid with. Sets using the earlier values are found first, so `values`
+ * in a chooser's order of preference gives their likeliest pick. A subset
+ * sum over (sum, count) pairs, each kept once — small for any real board.
+ */
+export function pickInBand(values: readonly number[], atLeast: number, atMost: number, min: number, max: number): number[] | null {
+  const states = new Map<string, { sum: number; picked: number[] }>([["0:0", { sum: 0, picked: [] }]]);
+  for (let i = 0; i < values.length; i += 1) {
+    for (const { sum, picked } of [...states.values()]) {
+      const next = sum + values[i];
+      if (picked.length >= max || next > atMost) continue;
+      const key = `${next}:${picked.length + 1}`;
+      if (!states.has(key)) states.set(key, { sum: next, picked: [...picked, i] });
+    }
+  }
+  for (const { sum, picked } of states.values()) {
+    if (sum >= atLeast && sum <= atMost && picked.length >= min && picked.length <= max) return picked;
+  }
+  return null;
+}
+
+/** `"total"` with both bounds: {@link pickInBand} over `order`'s cards, each
+ * entry of `eligible` used once (a token stack is named once per token), at
+ * least one card. */
+function totalInBand(
+  together: ZoneChoiceTogether,
+  order: readonly ObjectId[],
+  eligible: readonly ObjectId[],
+  min: number,
+  max: number,
+): ObjectId[] | null {
+  const left = [...eligible];
+  const units: ObjectId[] = [];
+  for (const id of order) {
+    const at = left.indexOf(id);
+    if (at < 0) continue;
+    left.splice(at, 1);
+    units.push(id);
+  }
+  const values = units.map((id) => Math.max(0, Number(together.tags[id]?.[0] ?? 0)));
+  const picked = pickInBand(values, together.atLeast ?? 0, together.atMost ?? Number.MAX_SAFE_INTEGER, Math.max(1, min), max);
+  return picked === null ? null : picked.map((i) => units[i]);
+}
+
 /** `"total"`: the chosen cards' tags, as numbers, summed. */
 const totalOf = (together: ZoneChoiceTogether, chosen: readonly ObjectId[]): number =>
   chosen.reduce((n, id) => n + Number(together.tags[id]?.[0] ?? 0), 0);
@@ -212,6 +259,12 @@ export function completeTogether(
   // it is reached — nothing at all for a "you may" the chooser declined.
   // A cap to stay under: the preferred cards that still fit, in order, then
   // the rest, up to as many as were preferred.
+  // Both, a band to land in ("with total mana value X" — Fabrication
+  // Foundry): a set whose sum is in it, found over the cards in that order.
+  if (together.rule === "total" && together.atLeast !== undefined && together.atMost !== undefined) {
+    if (preferred.length === 0 && together.orNone === true) return [];
+    return totalInBand(together, [...preferred, ...eligible], eligible, min, max) ?? [];
+  }
   if (together.rule === "total" && together.atMost !== undefined) {
     const want = Math.min(max, Math.max(min, preferred.length));
     const kept: ObjectId[] = [];

@@ -13,6 +13,7 @@
 
 import type { EffectAmount, EffectSpec, ResolutionContext } from "./effects.js";
 import { amountValue, mayBeDone } from "./effects.js";
+import { pickInBand } from "./zone-choice-together.js";
 
 /** One kind of effect usable as a cost. */
 interface CostActRow<K extends EffectSpec["kind"]> {
@@ -83,7 +84,38 @@ export const COST_ACTS = {
   },
   "roll-dice": { random: true },
   foraged: {},
+  /** "Exile one or more other artifacts you control with total mana value X"
+   * (Fabrication Foundry): `then` exiles each chosen. With a `totalManaValue`
+   * rule, payable only when some set of them adds up to it (118.3), and X
+   * goes no higher than they all do. */
+  "choose-permanents": {
+    payable: (spec, ctx) => {
+      const exact = exactManaValue(spec, ctx);
+      if (exact === undefined) return mayBeDone(spec, ctx);
+      const values = choosableManaValues(spec, ctx);
+      const min = Math.max(1, Math.floor(amountValue(spec.min ?? 0, ctx)));
+      return pickInBand(values, exact, exact, min, Math.floor(amountValue(spec.upTo, ctx))) !== null;
+    },
+    maxX: (spec, ctx) => choosableManaValues(spec, ctx).reduce((n, v) => n + v, 0),
+  },
 } satisfies { readonly [K in EffectSpec["kind"]]?: CostActRow<K> };
+
+type ChoosePermanents = Extract<EffectSpec, { kind: "choose-permanents" }>;
+
+/** A `choose-permanents`' "with total mana value N" as a number, X read. */
+function exactManaValue(spec: ChoosePermanents, ctx: ResolutionContext): number | undefined {
+  const together = spec.together;
+  if (together === undefined || !("totalManaValue" in together)) return undefined;
+  return together.totalManaValue === "x" ? ctx.x : together.totalManaValue;
+}
+
+/** The mana values of what a `choose-permanents` may choose, a token stack's
+ * each token once. */
+function choosableManaValues(spec: ChoosePermanents, ctx: ResolutionContext): number[] {
+  return ctx
+    .eachPermanentMatching(spec.filter, spec.exceptSource === true, [], undefined)
+    .map(({ object }) => ctx.manaValueOf({ kind: "object", object }));
+}
 
 export type CostActKind = keyof typeof COST_ACTS;
 
@@ -133,7 +165,8 @@ export function costActMaxX(act: EffectSpec, ctx: ResolutionContext): number | u
 function stepReadsX(step: EffectSpec): boolean {
   return (
     ("amount" in step && isX(step.amount as EffectAmount | undefined)) ||
-    ("count" in step && isX(step.count as EffectAmount | undefined))
+    ("count" in step && isX(step.count as EffectAmount | undefined)) ||
+    (step.kind === "choose-permanents" && step.together !== undefined && "totalManaValue" in step.together && step.together.totalManaValue === "x")
   );
 }
 
@@ -165,6 +198,7 @@ const ASKS: ReadonlySet<string> = new Set([
   "blight",
   "remove-counters",
   "modal",
+  "choose-permanents",
 ]);
 export function costActMayAsk(act: EffectSpec): boolean {
   return stepsOf(act).some((step) => ASKS.has(step.kind));

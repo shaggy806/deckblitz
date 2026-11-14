@@ -391,6 +391,15 @@ return brings the target back, then — "if you do", through `return-flickered`'
 second `return-flickered` step brings its Auras back attached to it (`attachTo`, through
 `readyToEnterAttached`: 303.4i keeps one that can't enchant it in exile, 303.4h returns a bestow
 card unattached). Flickerform (rank 10194). `test/flicker-with-auras.test.ts`.
+### Exiling permanents with total mana value X as a cost — built 2026-11-14
+
+The key `cost:exile-permanents-total-mana-value-x`: `choose-permanents` is a `COST_ACTS` row
+(`AbilityCost.do`), and its `together` takes `{ totalManaValue: n | "x" }` — exactly that sum, a
+`"total"` band (`atLeast` = `atMost`) the zone choice already reads. Its `"x"` makes X announced
+as it's activated (rule 601.2b), offered only at an X some set of the permanents adds up to
+(`pickInBand`, a subset sum), the permanents chosen and exiled as the cost is paid (601.2h) in
+one event. Fabrication Foundry (rank 10321). `test/exile-permanents-total-mana-value.test.ts`.
+
 ### An `unless` cost reduced — built 2026-11-14
 
 The key `effect:sacrifice-unless-pay-reduced-mana-cost`: two `UnlessOption` forms, each with

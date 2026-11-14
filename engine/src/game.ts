@@ -4582,6 +4582,8 @@ export class Game {
       const discardAtX = ability.cost.discard?.manaValueX === true ? ability.cost.discard : undefined;
       const graveyardExile = ability.cost.exileFromGraveyard;
       const exileAtX = graveyardExile?.filter !== undefined && filterReadsX(graveyardExile.filter) ? graveyardExile : undefined;
+      // "Exile … with total mana value X": only an X some set adds up to.
+      const doAtX = ability.cost.do !== undefined && costActReadsX(ability.cost.do) ? ability.cost.do : undefined;
       if (
         maxX !== undefined &&
         (taxed ||
@@ -4589,6 +4591,7 @@ export class Game {
           sacrificeAtX ||
           discardAtX !== undefined ||
           exileAtX !== undefined ||
+          doAtX !== undefined ||
           ability.targets.some(targetSpecReadsX) ||
           groupReadsX(ability.targets))
       ) {
@@ -4612,6 +4615,7 @@ export class Game {
           }
           // "Sacrifice a creature with mana value X": only an X with one.
           if (sacrificeAtX && this.sacrificeCandidates(player, source, ability, undefined, x).length === 0) continue;
+          if (doAtX !== undefined && !costActPayable(doAtX, this.makeResolutionContext(source, player, [], x))) continue;
           if (exileAtX !== undefined) {
             const { count, filter } = this.graveyardExileCostAt(player, exileAtX, x);
             if (this.graveyardCostCandidates(player, filter, source).length < count) continue;
@@ -26274,8 +26278,20 @@ export class Game {
         return `${player} lacks the materials to craft with ${ability.cost.craft.text}`;
       }
     }
-    if (ability.cost.do !== undefined && !costActPayable(ability.cost.do, this.makeResolutionContext(sourceId, player, [], x ?? ability.minX ?? 0))) {
-      return `${player} can't pay ${def.name}'s cost`;
+    if (ability.cost.do !== undefined) {
+      const act = ability.cost.do;
+      const payableAt = (at: number): boolean => costActPayable(act, this.makeResolutionContext(sourceId, player, [], at));
+      // No X announced yet, for an act whose X is a sum it must reach exactly
+      // ("with total mana value X"): whatever X would pay, as far as it goes.
+      const anyX =
+        x === undefined && costActReadsX(act)
+          ? (() => {
+              const most = Math.min(costActMaxX(act, this.makeResolutionContext(sourceId, player, [])) ?? 0, ability.maxX ?? Number.MAX_SAFE_INTEGER);
+              for (let at = ability.minX ?? 0; at <= most; at += 1) if (payableAt(at)) return true;
+              return false;
+            })()
+          : payableAt(x ?? ability.minX ?? 0);
+      if (!anyX) return `${player} can't pay ${def.name}'s cost`;
     }
     if (ability.cost.putFromExile !== undefined) {
       // Chosen once the ability is on the stack, as a graveyard exile is —
@@ -44727,6 +44743,12 @@ controlledBy,
         // `hasSubtype`, so a card that is every land type has each of them.
         tags[id] = LAND_TYPES.filter((type) => hasSubtype(subtypes, type));
       }
+    if ("totalManaValue" in together) {
+      // Exactly that much: no more, no less.
+      const sum = together.totalManaValue === "x" ? x : together.totalManaValue;
+      for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
+      return { rule: "total", tags, atLeast: sum, atMost: sum, text: `with total mana value ${sum}` };
+    }
       return { rule: "share", tags, text: "that share a land type" };
     }
     if ("distinctNames" in together) {
