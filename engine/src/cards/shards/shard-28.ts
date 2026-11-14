@@ -373,6 +373,7 @@ import _poolHarmonize from "../pool/harmonize.js";
 import _poolHauntwoodsShrieker from "../pool/hauntwoods-shrieker.js";
 import _poolHeadstrongBrute from "../pool/headstrong-brute.js";
 import _poolHeartPiercerManticore from "../pool/heart-piercer-manticore.js";
+import _poolHeavenlyQilin from "../pool/heavenly-qilin.js";
 import _poolHeirOfFalkenrath from "../pool/heir-of-falkenrath.js";
 import _poolHellMongrel from "../pool/hell-mongrel.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
@@ -1007,6 +1008,7 @@ import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWirecat from "../pool/wirecat.js";
 import _poolWolverineClawsOut from "../pool/wolverine-claws-out.js";
+import _poolWoodenCane from "../pool/wooden-cane.js";
 import _poolWordOfUndoing from "../pool/word-of-undoing.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
 import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
@@ -1423,6 +1425,7 @@ const shard: CardShard = {
     _poolHauntwoodsShrieker,
     _poolHeadstrongBrute,
     _poolHeartPiercerManticore,
+    _poolHeavenlyQilin,
     _poolHeirOfFalkenrath,
     _poolHellMongrel,
     _poolHeraldOfFaith,
@@ -2057,6 +2060,7 @@ const shard: CardShard = {
     _poolWingsOfAesthir,
     _poolWirecat,
     _poolWolverineClawsOut,
+    _poolWoodenCane,
     _poolWordOfUndoing,
     _poolWorldChampionCelestialWeapon,
     _poolWreathOfGeists,

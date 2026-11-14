@@ -133,6 +133,7 @@ import _poolCaptainAmericaLivingLegend from "../pool/captain-america-living-lege
 import _poolCaptainMichaelBurnham from "../pool/captain-michael-burnham.js";
 import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
+import _poolCaseyJonesAsphaltHooligan from "../pool/casey-jones-asphalt-hooligan.js";
 import _poolCastOff from "../pool/cast-off.js";
 import _poolCateranBrute from "../pool/cateran-brute.js";
 import _poolCateranSummons from "../pool/cateran-summons.js";
@@ -252,6 +253,7 @@ import _poolDwarvenMine from "../pool/dwarven-mine.js";
 import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
 import _poolEchoesOfEternity from "../pool/echoes-of-eternity.js";
+import _poolEelHounds from "../pool/eel-hounds.js";
 import _poolEldraziObligator from "../pool/eldrazi-obligator.js";
 import _poolElectrickery from "../pool/electrickery.js";
 import _poolElementalistsPalette from "../pool/elementalists-palette.js";
@@ -412,6 +414,7 @@ import _poolHydromorphGull from "../pool/hydromorph-gull.js";
 import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
+import _poolImmardTheStormcleaver from "../pool/immard-the-stormcleaver.js";
 import _poolImmersturmPredator from "../pool/immersturm-predator.js";
 import _poolInTheDarknessBindThem from "../pool/in-the-darkness-bind-them.js";
 import _poolInameLifeAspect from "../pool/iname-life-aspect.js";
@@ -883,6 +886,7 @@ import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
 import _poolTheGrimCaptainsLocker from "../pool/the-grim-captains-locker.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
+import _poolTheMeep from "../pool/the-meep.js";
 import _poolTheRedTerror from "../pool/the-red-terror.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolTheWeaverKing from "../pool/the-weaver-king.js";
@@ -994,6 +998,7 @@ import _poolWoodcloaker from "../pool/woodcloaker.js";
 import _poolWoodfallPrimus from "../pool/woodfall-primus.js";
 import _poolWoodlandStream from "../pool/woodland-stream.js";
 import _poolWoodlotCrawler from "../pool/woodlot-crawler.js";
+import _poolWorfChiefTacticalOfficer from "../pool/worf-chief-tactical-officer.js";
 import _poolWorkshopWarchief from "../pool/workshop-warchief.js";
 import _poolWorthyCost from "../pool/worthy-cost.js";
 import _poolWretchedGryff from "../pool/wretched-gryff.js";
@@ -1184,6 +1189,7 @@ const shard: CardShard = {
     _poolCaptainMichaelBurnham,
     _poolCarrionRats,
     _poolCaseOfTheShatteredPact,
+    _poolCaseyJonesAsphaltHooligan,
     _poolCastOff,
     _poolCateranBrute,
     _poolCateranSummons,
@@ -1303,6 +1309,7 @@ const shard: CardShard = {
     _poolDwarvenRuins,
     _poolDwarvenWarriors,
     _poolEchoesOfEternity,
+    _poolEelHounds,
     _poolEldraziObligator,
     _poolElectrickery,
     _poolElementalistsPalette,
@@ -1463,6 +1470,7 @@ const shard: CardShard = {
     _poolHystericalBlindness,
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
+    _poolImmardTheStormcleaver,
     _poolImmersturmPredator,
     _poolInTheDarknessBindThem,
     _poolInameLifeAspect,
@@ -1934,6 +1942,7 @@ const shard: CardShard = {
     _poolTheGitrogRavenousRide,
     _poolTheGrimCaptainsLocker,
     _poolTheLegendOfKyoshi,
+    _poolTheMeep,
     _poolTheRedTerror,
     _poolTheShire,
     _poolTheWeaverKing,
@@ -2045,6 +2054,7 @@ const shard: CardShard = {
     _poolWoodfallPrimus,
     _poolWoodlandStream,
     _poolWoodlotCrawler,
+    _poolWorfChiefTacticalOfficer,
     _poolWorkshopWarchief,
     _poolWorthyCost,
     _poolWretchedGryff,

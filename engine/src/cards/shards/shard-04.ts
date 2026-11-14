@@ -27,6 +27,7 @@ import _poolAnkleBiter from "../pool/ankle-biter.js";
 import _poolAnoint from "../pool/anoint.js";
 import _poolAphettoExterminator from "../pool/aphetto-exterminator.js";
 import _poolApostlesBlessing from "../pool/apostles-blessing.js";
+import _poolArdenAngel from "../pool/arden-angel.js";
 import _poolArmWithAether from "../pool/arm-with-aether.js";
 import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshesOfTheAbhorrent from "../pool/ashes-of-the-abhorrent.js";
@@ -192,6 +193,7 @@ import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
 import _poolDiscoveryDispersal from "../pool/discovery-dispersal.js";
 import _poolDistemperOfTheBlood from "../pool/distemper-of-the-blood.js";
 import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
+import _poolDonatelloRadScientist from "../pool/donatello-rad-scientist.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDormantGomazoa from "../pool/dormant-gomazoa.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
@@ -924,6 +926,7 @@ import _poolVillainousOgre from "../pool/villainous-ogre.js";
 import _poolVineshaperProdigy from "../pool/vineshaper-prodigy.js";
 import _poolVislorTurlough from "../pool/vislor-turlough.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
+import _poolVividFlyingFish from "../pool/vivid-flying-fish.js";
 import _poolVivienOfTheArkbow from "../pool/vivien-of-the-arkbow.js";
 import _poolVivify from "../pool/vivify.js";
 import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
@@ -985,6 +988,7 @@ import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
 import _poolZygonInfiltrator from "../pool/zygon-infiltrator.js";
 import _tokens11ThrullToken from "../tokens/1-1-thrull-token.js";
+import _tokens33GreenBoarToken from "../tokens/3-3-green-boar-token.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensAvacynToken from "../tokens/avacyn-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
@@ -1038,6 +1042,7 @@ const shard: CardShard = {
     _poolAnoint,
     _poolAphettoExterminator,
     _poolApostlesBlessing,
+    _poolArdenAngel,
     _poolArmWithAether,
     _poolArmoryVeteran,
     _poolAshesOfTheAbhorrent,
@@ -1203,6 +1208,7 @@ const shard: CardShard = {
     _poolDiscoveryDispersal,
     _poolDistemperOfTheBlood,
     _poolDistortedCuriosity,
+    _poolDonatelloRadScientist,
     _poolDoomsServoGuards,
     _poolDormantGomazoa,
     _poolDoseOfDawnglow,
@@ -1935,6 +1941,7 @@ const shard: CardShard = {
     _poolVineshaperProdigy,
     _poolVislorTurlough,
     _poolVitalizingWind,
+    _poolVividFlyingFish,
     _poolVivienOfTheArkbow,
     _poolVivify,
     _poolVoiceOfTheProvinces,
@@ -1998,6 +2005,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens11ThrullToken,
+    _tokens33GreenBoarToken,
     _tokens55ElephantToken,
     _tokensAvacynToken,
     _tokensBallisticBoulderToken,

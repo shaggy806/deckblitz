@@ -422,6 +422,7 @@ import _poolHomicidalSeclusion from "../pool/homicidal-seclusion.js";
 import _poolHomingSliver from "../pool/homing-sliver.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
 import _poolHoodwink from "../pool/hoodwink.js";
+import _poolHookSwords from "../pool/hook-swords.js";
 import _poolHordeOfNotions from "../pool/horde-of-notions.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
@@ -555,6 +556,7 @@ import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.
 import _poolMorgueToad from "../pool/morgue-toad.js";
 import _poolMortuary from "../pool/mortuary.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
+import _poolMotionSickness from "../pool/motion-sickness.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
 import _poolMycoloth from "../pool/mycoloth.js";
 import _poolMyrAdapter from "../pool/myr-adapter.js";
@@ -626,6 +628,7 @@ import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
 import _poolPrimalOrder from "../pool/primal-order.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProtectiveBubble from "../pool/protective-bubble.js";
+import _poolProwlerMisguidedMentor from "../pool/prowler-misguided-mentor.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPsychicAllergy from "../pool/psychic-allergy.js";
 import _poolPucasMischief from "../pool/pucas-mischief.js";
@@ -1457,6 +1460,7 @@ const shard: CardShard = {
     _poolHomingSliver,
     _poolHondenOfLifesWeb,
     _poolHoodwink,
+    _poolHookSwords,
     _poolHordeOfNotions,
     _poolHotDogCart,
     _poolHotfootGnome,
@@ -1590,6 +1594,7 @@ const shard: CardShard = {
     _poolMorgueToad,
     _poolMortuary,
     _poolMostDecrepitOldBird,
+    _poolMotionSickness,
     _poolMurkfiendLiege,
     _poolMycoloth,
     _poolMyrAdapter,
@@ -1661,6 +1666,7 @@ const shard: CardShard = {
     _poolPrimalOrder,
     _poolPrologueToPhyresis,
     _poolProtectiveBubble,
+    _poolProwlerMisguidedMentor,
     _poolProwlingFelidar,
     _poolPsychicAllergy,
     _poolPucasMischief,

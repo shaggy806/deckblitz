@@ -520,6 +520,7 @@ import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarathWillOfTheWild from "../pool/marath-will-of-the-wild.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
+import _poolMarduOutrider from "../pool/mardu-outrider.js";
 import _poolMariTheKillingQuill from "../pool/mari-the-killing-quill.js";
 import _poolMaro from "../pool/maro.js";
 import _poolMarshdrinkerGiant from "../pool/marshdrinker-giant.js";
@@ -1556,6 +1557,7 @@ const shard: CardShard = {
     _poolManifestDread,
     _poolMarathWillOfTheWild,
     _poolMarbleDiamond,
+    _poolMarduOutrider,
     _poolMariTheKillingQuill,
     _poolMaro,
     _poolMarshdrinkerGiant,

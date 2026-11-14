@@ -564,6 +564,7 @@ import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
 import _poolMightyEmergence from "../pool/mighty-emergence.js";
 import _poolMightyMutanimals from "../pool/mighty-mutanimals.js";
+import _poolMikeyMonaMutantSitters from "../pool/mikey-mona-mutant-sitters.js";
 import _poolMindSpring from "../pool/mind-spring.js";
 import _poolMindTwist from "../pool/mind-twist.js";
 import _poolMindslaver from "../pool/mindslaver.js";
@@ -1602,6 +1603,7 @@ const shard: CardShard = {
     _poolMidnightCharm,
     _poolMightyEmergence,
     _poolMightyMutanimals,
+    _poolMikeyMonaMutantSitters,
     _poolMindSpring,
     _poolMindTwist,
     _poolMindslaver,

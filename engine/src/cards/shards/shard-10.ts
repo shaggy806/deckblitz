@@ -80,6 +80,7 @@ import _poolBenalishVeteran from "../pool/benalish-veteran.js";
 import _poolBespokeBattlewagon from "../pool/bespoke-battlewagon.js";
 import _poolBidentOfThassa from "../pool/bident-of-thassa.js";
 import _poolBigWheel from "../pool/big-wheel.js";
+import _poolBilboUnexpectedAdventurer from "../pool/bilbo-unexpected-adventurer.js";
 import _poolBiotechSpecialist from "../pool/biotech-specialist.js";
 import _poolBirdAdmirer from "../pool/bird-admirer.js";
 import _poolBirthrightBoon from "../pool/birthright-boon.js";
@@ -213,6 +214,7 @@ import _poolDeathlessBehemoth from "../pool/deathless-behemoth.js";
 import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDecompose from "../pool/decompose.js";
+import _poolDeeKayFinderOfTheLost from "../pool/dee-kay-finder-of-the-lost.js";
 import _poolDeepFreeze from "../pool/deep-freeze.js";
 import _poolDeepSpace9 from "../pool/deep-space-9.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
@@ -488,6 +490,7 @@ import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
 import _poolLeadByExample from "../pool/lead-by-example.js";
 import _poolLeaveChance from "../pool/leave-chance.js";
 import _poolLegionLoyalist from "../pool/legion-loyalist.js";
+import _poolLeonardoWorldlyWarrior from "../pool/leonardo-worldly-warrior.js";
 import _poolLeoninScimitar from "../pool/leonin-scimitar.js";
 import _poolLethalSting from "../pool/lethal-sting.js";
 import _poolLifeforce from "../pool/lifeforce.js";
@@ -495,6 +498,7 @@ import _poolLightningTalons from "../pool/lightning-talons.js";
 import _poolLikenessLooter from "../pool/likeness-looter.js";
 import _poolLilahUndefeatedSlickshot from "../pool/lilah-undefeated-slickshot.js";
 import _poolLionUmbra from "../pool/lion-umbra.js";
+import _poolLionVulture from "../pool/lion-vulture.js";
 import _poolLionheartGlimmer from "../pool/lionheart-glimmer.js";
 import _poolLiquify from "../pool/liquify.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
@@ -603,6 +607,7 @@ import _poolOmnibian from "../pool/omnibian.js";
 import _poolOmnispellAdept from "../pool/omnispell-adept.js";
 import _poolOnduChampion from "../pool/ondu-champion.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
+import _poolOneClownBand from "../pool/one-clown-band.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
@@ -826,6 +831,7 @@ import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
 import _poolSpiritOfResistance from "../pool/spirit-of-resistance.js";
 import _poolSplatterThug from "../pool/splatter-thug.js";
+import _poolSplinterLeoFatherSon from "../pool/splinter-leo-father-son.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
 import _poolSproutingPhytohydra from "../pool/sprouting-phytohydra.js";
@@ -1110,6 +1116,7 @@ const shard: CardShard = {
     _poolBespokeBattlewagon,
     _poolBidentOfThassa,
     _poolBigWheel,
+    _poolBilboUnexpectedAdventurer,
     _poolBiotechSpecialist,
     _poolBirdAdmirer,
     _poolBirthrightBoon,
@@ -1243,6 +1250,7 @@ const shard: CardShard = {
     _poolDeathsCaress,
     _poolDecodeTransmissions,
     _poolDecompose,
+    _poolDeeKayFinderOfTheLost,
     _poolDeepFreeze,
     _poolDeepSpace9,
     _poolDefendTheCelestus,
@@ -1518,6 +1526,7 @@ const shard: CardShard = {
     _poolLeadByExample,
     _poolLeaveChance,
     _poolLegionLoyalist,
+    _poolLeonardoWorldlyWarrior,
     _poolLeoninScimitar,
     _poolLethalSting,
     _poolLifeforce,
@@ -1525,6 +1534,7 @@ const shard: CardShard = {
     _poolLikenessLooter,
     _poolLilahUndefeatedSlickshot,
     _poolLionUmbra,
+    _poolLionVulture,
     _poolLionheartGlimmer,
     _poolLiquify,
     _poolLiveOrDie,
@@ -1633,6 +1643,7 @@ const shard: CardShard = {
     _poolOmnispellAdept,
     _poolOnduChampion,
     _poolOnduGiant,
+    _poolOneClownBand,
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
@@ -1856,6 +1867,7 @@ const shard: CardShard = {
     _poolSpiritEnKor,
     _poolSpiritOfResistance,
     _poolSplatterThug,
+    _poolSplinterLeoFatherSon,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
     _poolSproutingPhytohydra,

@@ -530,6 +530,7 @@ import _poolMithrilCoat from "../pool/mithril-coat.js";
 import _poolMjolnirHammerOfThor from "../pool/mjolnir-hammer-of-thor.js";
 import _poolModeration from "../pool/moderation.js";
 import _poolMoggSquad from "../pool/mogg-squad.js";
+import _poolMokuMeanderingDrummer from "../pool/moku-meandering-drummer.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMonstrousStep from "../pool/monstrous-step.js";
@@ -1536,6 +1537,7 @@ const shard: CardShard = {
     _poolMjolnirHammerOfThor,
     _poolModeration,
     _poolMoggSquad,
+    _poolMokuMeanderingDrummer,
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
     _poolMonstrousStep,

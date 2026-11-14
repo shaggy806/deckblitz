@@ -289,6 +289,7 @@ import _poolForgersFoundry from "../pool/forgers-foundry.js";
 import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolFork from "../pool/fork.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
+import _poolFoundingOfOmashu from "../pool/founding-of-omashu.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolFrillscareMentor from "../pool/frillscare-mentor.js";
@@ -1305,6 +1306,7 @@ const shard: CardShard = {
     _poolForgingTheAnchor,
     _poolFork,
     _poolForumOfAmity,
+    _poolFoundingOfOmashu,
     _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
     _poolFrillscareMentor,

@@ -75,6 +75,7 @@ import _poolBarkhideMauler from "../pool/barkhide-mauler.js";
 import _poolBaruWurmspeaker from "../pool/baru-wurmspeaker.js";
 import _poolBatheInDragonfire from "../pool/bathe-in-dragonfire.js";
 import _poolBearCub from "../pool/bear-cub.js";
+import _poolBeastHunt from "../pool/beast-hunt.js";
 import _poolBeastbreakerOfBalaGed from "../pool/beastbreaker-of-bala-ged.js";
 import _poolBecomeBrutes from "../pool/become-brutes.js";
 import _poolBedeck from "../pool/bedeck.js";
@@ -223,6 +224,7 @@ import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDocOckEvilInventor from "../pool/doc-ock-evil-inventor.js";
 import _poolDominariasJudgment from "../pool/dominarias-judgment.js";
+import _poolDonnieAprilAdorkableDuo from "../pool/donnie-april-adorkable-duo.js";
 import _poolDoomCannon from "../pool/doom-cannon.js";
 import _poolDoomReignsSupreme from "../pool/doom-reigns-supreme.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
@@ -505,6 +507,7 @@ import _poolLashOut from "../pool/lash-out.js";
 import _poolLaurineTheDiversion from "../pool/laurine-the-diversion.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
+import _poolLeosGuidance from "../pool/leos-guidance.js";
 import _poolLeviathan from "../pool/leviathan.js";
 import _poolLeylineOfAnticipation from "../pool/leyline-of-anticipation.js";
 import _poolLeylineOfPunishment from "../pool/leyline-of-punishment.js";
@@ -577,6 +580,7 @@ import _poolMysticalDispute from "../pool/mystical-dispute.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNahirisBinding from "../pool/nahiris-binding.js";
+import _poolNalathniDragon from "../pool/nalathni-dragon.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNayaCharm from "../pool/naya-charm.js";
 import _poolNecromancersMagemark from "../pool/necromancers-magemark.js";
@@ -693,6 +697,7 @@ import _poolRakkaMar from "../pool/rakka-mar.js";
 import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
 import _poolRalZarek from "../pool/ral-zarek.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
+import _poolRaphsBravado from "../pool/raphs-bravado.js";
 import _poolRathiIntimidator from "../pool/rathi-intimidator.js";
 import _poolRavenousCosmozoan from "../pool/ravenous-cosmozoan.js";
 import _poolRavenousDemon from "../pool/ravenous-demon.js";
@@ -1134,6 +1139,7 @@ const shard: CardShard = {
     _poolBaruWurmspeaker,
     _poolBatheInDragonfire,
     _poolBearCub,
+    _poolBeastHunt,
     _poolBeastbreakerOfBalaGed,
     _poolBecomeBrutes,
     _poolBedeck,
@@ -1282,6 +1288,7 @@ const shard: CardShard = {
     _poolDivideByZero,
     _poolDocOckEvilInventor,
     _poolDominariasJudgment,
+    _poolDonnieAprilAdorkableDuo,
     _poolDoomCannon,
     _poolDoomReignsSupreme,
     _poolDoomWhisperer,
@@ -1564,6 +1571,7 @@ const shard: CardShard = {
     _poolLaurineTheDiversion,
     _poolLazotepPlating,
     _poolLedgerShredder,
+    _poolLeosGuidance,
     _poolLeviathan,
     _poolLeylineOfAnticipation,
     _poolLeylineOfPunishment,
@@ -1636,6 +1644,7 @@ const shard: CardShard = {
     _poolMysticalTutor,
     _poolMystifyingMaze,
     _poolNahirisBinding,
+    _poolNalathniDragon,
     _poolNamoraTheSeaQueen,
     _poolNayaCharm,
     _poolNecromancersMagemark,
@@ -1752,6 +1761,7 @@ const shard: CardShard = {
     _poolRakshasasBargain,
     _poolRalZarek,
     _poolRallyThePeasants,
+    _poolRaphsBravado,
     _poolRathiIntimidator,
     _poolRavenousCosmozoan,
     _poolRavenousDemon,

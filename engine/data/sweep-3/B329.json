@@ -1,0 +1,465 @@
+{
+ "batch": "B329",
+ "status": "done",
+ "ranks": "EDHREC ranks 23455-30935 (60): 33 Unfinity sticker cards recorded major, 27 to one card-author agent.",
+ "authored": [
+  {
+   "name": "Air Nomad Student",
+   "files": [
+    "engine/src/cards/pool/air-nomad-student.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beast Hunt",
+   "files": [
+    "engine/src/cards/pool/beast-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bison Whistle",
+   "files": [
+    "engine/src/cards/pool/bison-whistle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Donatello's Science Lesson",
+   "files": [
+    "engine/src/cards/pool/donatellos-science-lesson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Down for Repairs",
+   "files": [
+    "engine/src/cards/pool/down-for-repairs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elderwood Scion",
+   "files": [
+    "engine/src/cards/pool/elderwood-scion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foe-liage",
+   "files": [
+    "engine/src/cards/pool/foe-liage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heavenly Qilin",
+   "files": [
+    "engine/src/cards/pool/heavenly-qilin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Journey for the Elixir",
+   "files": [
+    "engine/src/cards/pool/journey-for-the-elixir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leo's Guidance",
+   "files": [
+    "engine/src/cards/pool/leos-guidance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mardu Outrider",
+   "files": [
+    "engine/src/cards/pool/mardu-outrider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nalathni Dragon",
+   "files": [
+    "engine/src/cards/pool/nalathni-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "One-Clown Band",
+   "files": [
+    "engine/src/cards/pool/one-clown-band.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pipsqueak, Rebel Strongarm",
+   "files": [
+    "engine/src/cards/pool/pipsqueak-rebel-strongarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prehistoric Turtlesaurus",
+   "files": [
+    "engine/src/cards/pool/prehistoric-turtlesaurus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rampaging Classmate",
+   "files": [
+    "engine/src/cards/pool/rampaging-classmate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raph's Bravado",
+   "files": [
+    "engine/src/cards/pool/raphs-bravado.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mu Yanling",
+   "files": [
+    "engine/src/cards/pool/rhythmic-water-vortex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stand United",
+   "files": [
+    "engine/src/cards/pool/stand-united.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Triceraton Regenta",
+   "files": [
+    "engine/src/cards/pool/triceraton-regenta.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Turtle Tracks",
+   "files": [
+    "engine/src/cards/pool/turtle-tracks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeant Vampire",
+   "files": [
+    "engine/src/cards/pool/vengeant-vampire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vivid Flying Fish",
+   "files": [
+    "engine/src/cards/pool/vivid-flying-fish.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wooden Cane",
+   "files": [
+    "engine/src/cards/pool/wooden-cane.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worf, Chief Tactical Officer",
+   "files": [
+    "engine/src/cards/pool/worf-chief-tactical-officer.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "A Good Day to Pie",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Aerialephant",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Ambassador Blorpityblorpboop",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Baaallerina",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Bioluminary",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Carnival Carnivore",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Croakid Amphibonaut",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Fight the _____ Fight",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Glitterflitter",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Goblin Airbrusher",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Grabby Tabby",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Last Voyage of the _____",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Lineprancers",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Make a _____ Splash",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Minotaur de Force",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Park Bleater",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Pin Collection",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Prize Wall",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Proficient Pyrodancer",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Robo-Piñata",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Roxi, Publicist to the Stars",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Scampire",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Stiltstrider",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Sword-Swallowing Seraph",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Tusk and Whiskers",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Unlawful Entry",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Wee Champion",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Wizards of the _____",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Wolf in _____ Clothing",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "_____ Balls of Fire",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "_____ _____ Rocketship",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "_____ _____ _____ Trespasser",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "_____-o-saurus",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Eelectrocute",
+   "needs": [
+    "condition:rolled-number-this-turn"
+   ],
+   "size": "small",
+   "why": "'As long as you've rolled a 6 this turn' — no turn-history view reads a roll's value."
+  },
+  {
+   "name": "Sewers of Estark",
+   "needs": [
+    "effect:prevent-combat-damage-by-blocker-and-blocked",
+    "effect:duration-this-combat"
+   ],
+   "size": "small",
+   "why": "Prevention for this combat only, by it and each creature it's blocking, fixed on resolution."
+  }
+ ]
+}

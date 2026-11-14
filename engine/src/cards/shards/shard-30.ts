@@ -709,6 +709,7 @@ import _poolRadiantEssence from "../pool/radiant-essence.js";
 import _poolRakdosKeyrune from "../pool/rakdos-keyrune.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRamosianSergeant from "../pool/ramosian-sergeant.js";
+import _poolRampagingClassmate from "../pool/rampaging-classmate.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
@@ -1761,6 +1762,7 @@ const shard: CardShard = {
     _poolRakdosKeyrune,
     _poolRakdosPatronOfChaos,
     _poolRamosianSergeant,
+    _poolRampagingClassmate,
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,
     _poolReadyToRumble,

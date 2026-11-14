@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangALotToLearn from "../pool/aang-a-lot-to-learn.js";
 import _poolAbandonedSarcophagus from "../pool/abandoned-sarcophagus.js";
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
@@ -17,6 +18,7 @@ import _poolAethericAmplifier from "../pool/aetheric-amplifier.js";
 import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAfterlife from "../pool/afterlife.js";
+import _poolAirNomadStudent from "../pool/air-nomad-student.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAkoumFirebird from "../pool/akoum-firebird.js";
 import _poolAlAbarasCarpet from "../pool/al-abaras-carpet.js";
@@ -401,6 +403,7 @@ import _poolHeatedDebate from "../pool/heated-debate.js";
 import _poolHedronScrabbler from "../pool/hedron-scrabbler.js";
 import _poolHelmOfAwakening from "../pool/helm-of-awakening.js";
 import _poolHenrikaDomnathi from "../pool/henrika-domnathi.js";
+import _poolHenryWuIngenGeneticist from "../pool/henry-wu-ingen-geneticist.js";
 import _poolHeraldOfSlaanesh from "../pool/herald-of-slaanesh.js";
 import _poolHeraldicBanner from "../pool/heraldic-banner.js";
 import _poolHeroOfThePride from "../pool/hero-of-the-pride.js";
@@ -654,6 +657,7 @@ import _poolPiannaNomadCaptain from "../pool/pianna-nomad-captain.js";
 import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
 import _poolPilgrimOfJustice from "../pool/pilgrim-of-justice.js";
 import _poolPincerSpider from "../pool/pincer-spider.js";
+import _poolPipsqueakRebelStrongarm from "../pool/pipsqueak-rebel-strongarm.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
 import _poolPoliticalTrickery from "../pool/political-trickery.js";
@@ -1041,6 +1045,7 @@ import _tokensXXBlueRedWeirdToken from "../tokens/x-x-blue-red-weird-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAangALotToLearn,
     _poolAbandonedSarcophagus,
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
@@ -1055,6 +1060,7 @@ const shard: CardShard = {
     _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
     _poolAfterlife,
+    _poolAirNomadStudent,
     _poolAkkiRockspeaker,
     _poolAkoumFirebird,
     _poolAlAbarasCarpet,
@@ -1439,6 +1445,7 @@ const shard: CardShard = {
     _poolHedronScrabbler,
     _poolHelmOfAwakening,
     _poolHenrikaDomnathi,
+    _poolHenryWuIngenGeneticist,
     _poolHeraldOfSlaanesh,
     _poolHeraldicBanner,
     _poolHeroOfThePride,
@@ -1692,6 +1699,7 @@ const shard: CardShard = {
     _poolPigmentWrangler,
     _poolPilgrimOfJustice,
     _poolPincerSpider,
+    _poolPipsqueakRebelStrongarm,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,
     _poolPoliticalTrickery,

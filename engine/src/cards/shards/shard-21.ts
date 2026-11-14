@@ -411,6 +411,7 @@ import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
 import _poolImpracticalJoke from "../pool/impractical-joke.js";
 import _poolInSearchOfGreatness from "../pool/in-search-of-greatness.js";
+import _poolIndrikUmbra from "../pool/indrik-umbra.js";
 import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
 import _poolInquisitorExarch from "../pool/inquisitor-exarch.js";
 import _poolIntercessorsArrest from "../pool/intercessors-arrest.js";
@@ -429,6 +430,7 @@ import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
 import _poolJetmirNexusOfRevels from "../pool/jetmir-nexus-of-revels.js";
 import _poolJeweledTorque from "../pool/jeweled-torque.js";
+import _poolJiangYanggu from "../pool/jiang-yanggu.js";
 import _poolJinGitaxias from "../pool/jin-gitaxias.js";
 import _poolJumboCactuar from "../pool/jumbo-cactuar.js";
 import _poolJumpScare from "../pool/jump-scare.js";
@@ -885,6 +887,7 @@ import _poolTrueheartDuelist from "../pool/trueheart-duelist.js";
 import _poolTundra from "../pool/tundra.js";
 import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
+import _poolTurtleTracks from "../pool/turtle-tracks.js";
 import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
 import _poolTymaretCallsTheDead from "../pool/tymaret-calls-the-dead.js";
 import _poolTyvarJubilantBrawler from "../pool/tyvar-jubilant-brawler.js";
@@ -1401,6 +1404,7 @@ const shard: CardShard = {
     _poolImperialRecruiter,
     _poolImpracticalJoke,
     _poolInSearchOfGreatness,
+    _poolIndrikUmbra,
     _poolIngeniousLeonin,
     _poolInquisitorExarch,
     _poolIntercessorsArrest,
@@ -1419,6 +1423,7 @@ const shard: CardShard = {
     _poolJeskaiShrinekeeper,
     _poolJetmirNexusOfRevels,
     _poolJeweledTorque,
+    _poolJiangYanggu,
     _poolJinGitaxias,
     _poolJumboCactuar,
     _poolJumpScare,
@@ -1875,6 +1880,7 @@ const shard: CardShard = {
     _poolTundra,
     _poolTurbulentFen,
     _poolTurbulentSteppe,
+    _poolTurtleTracks,
     _poolTuyaBearclaw,
     _poolTymaretCallsTheDead,
     _poolTyvarJubilantBrawler,

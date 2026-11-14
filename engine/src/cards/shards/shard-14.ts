@@ -330,6 +330,7 @@ import _poolForestBear from "../pool/forest-bear.js";
 import _poolFortifiedRampart from "../pool/fortified-rampart.js";
 import _poolFortifyingProvisions from "../pool/fortifying-provisions.js";
 import _poolFortuneTeller from "../pool/fortune-teller.js";
+import _poolFreedomFighterRecruit from "../pool/freedom-fighter-recruit.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
 import _poolFrenzySliver from "../pool/frenzy-sliver.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
@@ -906,6 +907,7 @@ import _poolTreefolkUmbra from "../pool/treefolk-umbra.js";
 import _poolTresserhornSkyknight from "../pool/tresserhorn-skyknight.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
+import _poolTriceratonRegenta from "../pool/triceraton-regenta.js";
 import _poolTriskelavus from "../pool/triskelavus.js";
 import _poolTroveWarden from "../pool/trove-warden.js";
 import _poolTrumpetingGnarr from "../pool/trumpeting-gnarr.js";
@@ -1360,6 +1362,7 @@ const shard: CardShard = {
     _poolFortifiedRampart,
     _poolFortifyingProvisions,
     _poolFortuneTeller,
+    _poolFreedomFighterRecruit,
     _poolFrenziedArynx,
     _poolFrenzySliver,
     _poolFreshVolunteers,
@@ -1936,6 +1939,7 @@ const shard: CardShard = {
     _poolTresserhornSkyknight,
     _poolTributaryVaulter,
     _poolTributeMage,
+    _poolTriceratonRegenta,
     _poolTriskelavus,
     _poolTroveWarden,
     _poolTrumpetingGnarr,

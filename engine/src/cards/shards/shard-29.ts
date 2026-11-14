@@ -403,6 +403,7 @@ import _poolIchTekikSalvageSplicer from "../pool/ich-tekik-salvage-splicer.js";
 import _poolIchorExplosion from "../pool/ichor-explosion.js";
 import _poolIdolized from "../pool/idolized.js";
 import _poolIllicitMasquerade from "../pool/illicit-masquerade.js";
+import _poolIllusoryAngel from "../pool/illusory-angel.js";
 import _poolImmobilizerEldrazi from "../pool/immobilizer-eldrazi.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
@@ -1431,6 +1432,7 @@ const shard: CardShard = {
     _poolIchorExplosion,
     _poolIdolized,
     _poolIllicitMasquerade,
+    _poolIllusoryAngel,
     _poolImmobilizerEldrazi,
     _poolImotekhTheStormlord,
     _poolImotiCelebrantOfBounty,

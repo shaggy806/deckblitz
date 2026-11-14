@@ -153,6 +153,7 @@ import _poolCharmbreakerDevils from "../pool/charmbreaker-devils.js";
 import _poolChefsKiss from "../pool/chefs-kiss.js";
 import _poolChimericIdol from "../pool/chimeric-idol.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
+import _poolChongAndLilyNomads from "../pool/chong-and-lily-nomads.js";
 import _poolChorusOfMight from "../pool/chorus-of-might.js";
 import _poolChromaticStar from "../pool/chromatic-star.js";
 import _poolCipherboundSpirit from "../pool/cipherbound-spirit.js";
@@ -456,6 +457,7 @@ import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImaginaryThreats from "../pool/imaginary-threats.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
+import _poolImmortalPhoenix from "../pool/immortal-phoenix.js";
 import _poolImpalerShrike from "../pool/impaler-shrike.js";
 import _poolInactionInjunction from "../pool/inaction-injunction.js";
 import _poolInfernoHellion from "../pool/inferno-hellion.js";
@@ -1006,6 +1008,7 @@ import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
 import _poolViashinoWeaponsmith from "../pool/viashino-weaponsmith.js";
+import _poolVikyaScorchingStalwart from "../pool/vikya-scorching-stalwart.js";
 import _poolViolentUrge from "../pool/violent-urge.js";
 import _poolVirulentSilencer from "../pool/virulent-silencer.js";
 import _poolVishgrazTheDoomhive from "../pool/vishgraz-the-doomhive.js";
@@ -1245,6 +1248,7 @@ const shard: CardShard = {
     _poolChefsKiss,
     _poolChimericIdol,
     _poolChitteringDispatcher,
+    _poolChongAndLilyNomads,
     _poolChorusOfMight,
     _poolChromaticStar,
     _poolCipherboundSpirit,
@@ -1548,6 +1552,7 @@ const shard: CardShard = {
     _poolIllvoiOperative,
     _poolImaginaryThreats,
     _poolImmersturmRaider,
+    _poolImmortalPhoenix,
     _poolImpalerShrike,
     _poolInactionInjunction,
     _poolInfernoHellion,
@@ -2098,6 +2103,7 @@ const shard: CardShard = {
     _poolViashinoShanktail,
     _poolViashinoSpearhunter,
     _poolViashinoWeaponsmith,
+    _poolVikyaScorchingStalwart,
     _poolViolentUrge,
     _poolVirulentSilencer,
     _poolVishgrazTheDoomhive,

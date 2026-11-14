@@ -253,6 +253,7 @@ import _poolDiregrafRebirth from "../pool/diregraf-rebirth.js";
 import _poolDisharmony from "../pool/disharmony.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
+import _poolDissatisfiedCustomer from "../pool/dissatisfied-customer.js";
 import _poolDissectionPractice from "../pool/dissection-practice.js";
 import _poolDivergentTransformations from "../pool/divergent-transformations.js";
 import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
@@ -537,6 +538,7 @@ import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
 import _poolKnightsOfThorn from "../pool/knights-of-thorn.js";
 import _poolKnowledgeVault from "../pool/knowledge-vault.js";
 import _poolKothophedSoulHoarder from "../pool/kothophed-soul-hoarder.js";
+import _poolKrondTheDawnClad from "../pool/krond-the-dawn-clad.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
 import _poolKykarWindsFury from "../pool/kykar-winds-fury.js";
 import _poolLaboratoryManiac from "../pool/laboratory-maniac.js";
@@ -598,6 +600,7 @@ import _poolMaskedBandits from "../pool/masked-bandits.js";
 import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterBiomancer from "../pool/master-biomancer.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
+import _poolMaximusKnightApparent from "../pool/maximus-knight-apparent.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
 import _poolMayorOfAvabruck from "../pool/mayor-of-avabruck.js";
 import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
@@ -1332,6 +1335,7 @@ const shard: CardShard = {
     _poolDisharmony,
     _poolDismiss,
     _poolDisruptivePitmage,
+    _poolDissatisfiedCustomer,
     _poolDissectionPractice,
     _poolDivergentTransformations,
     _poolDiversionSpecialist,
@@ -1616,6 +1620,7 @@ const shard: CardShard = {
     _poolKnightsOfThorn,
     _poolKnowledgeVault,
     _poolKothophedSoulHoarder,
+    _poolKrondTheDawnClad,
     _poolKrovikanFetish,
     _poolKykarWindsFury,
     _poolLaboratoryManiac,
@@ -1677,6 +1682,7 @@ const shard: CardShard = {
     _poolMaskedMeower,
     _poolMasterBiomancer,
     _poolMasterOfDarkRites,
+    _poolMaximusKnightApparent,
     _poolMayaelsAria,
     _poolMayorOfAvabruck,
     _poolMazeSkullbomb,

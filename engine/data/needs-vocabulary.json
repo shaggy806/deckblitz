@@ -16582,6 +16582,28 @@
    "family": "effect:delayed-trigger-dealt-damage-this-way-dies",
    "example": "Reckless Blaze: \"whenever a creature you control dealt damage this way dies\" \u2014 Game.watchedSubject treats every watched object as the delayed ability's controller's."
   },
+  "trigger:nth-die-roll-each-turn": {
+   "family": "mechanic:dice-rolling",
+   "example": "Resolute Veggiesaur: 'whenever you roll your third die each turn' — rolls-die has no journaled timing, and the journal's rolled entry is per roll, not per die."
+  },
+  "condition:dice-rolled-this-turn-count": {
+   "family": "mechanic:dice-rolling",
+   "example": "The Space Family Goblinson: 'as long as you've rolled three or more dice this turn' — no read counts dice rather than rolls."
+  },
+  "condition:rolled-number-this-turn": {
+   "family": "mechanic:dice-rolling",
+   "example": "Eelectrocute: 'as long as you've rolled a 6 this turn' — no turn-history view reads a roll's value."
+  },
+  "replacement:enters-with-counter-kinds-of-source": {
+   "example": "Blue, Loyal Raptor: 'for each kind of counter on Blue, each other Dinosaur you control enters with a counter of that kind' — others-enter-battlefield takes one fixed kind."
+  },
+  "bug:permission-duration-read-from-granter": {
+   "example": "Casey & Raph, Hotheads: an impulse permission given to a target player, 'until that player's next end step', expires at the granter's end step: Game.permissionWindow is handed the granter, against the PermissionDuration doc."
+  },
+  "effect:prevent-combat-damage-by-blocker-and-blocked": {
+   "family": "effect:prevent-combat-damage-by-target",
+   "example": "Sewers of Estark: 'prevent all combat damage that would be dealt this combat by it and each creature it's blocking' — a set fixed on resolution, for this combat."
+  },
   "effect:store-die-results": {
    "family": "mechanic:dice-rolling",
    "example": "Centaur of Attention: \"roll five six-sided dice and store those results on it\", reroll any number of them, +X/+X for the most that match."

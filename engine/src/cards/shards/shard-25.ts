@@ -226,6 +226,7 @@ import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
 import _poolDonaldBlakeGuiseOfThor from "../pool/donald-blake-guise-of-thor.js";
 import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
+import _poolDonatellosScienceLesson from "../pool/donatellos-science-lesson.js";
 import _poolDovescape from "../pool/dovescape.js";
 import _poolDovinBaan from "../pool/dovin-baan.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
@@ -923,6 +924,7 @@ import _poolVampireNeonate from "../pool/vampire-neonate.js";
 import _poolVampiricRites from "../pool/vampiric-rites.js";
 import _poolVastwoodAnimist from "../pool/vastwood-animist.js";
 import _poolVedalkenArchmage from "../pool/vedalken-archmage.js";
+import _poolVengeantVampire from "../pool/vengeant-vampire.js";
 import _poolVenomDeadlyDevourer from "../pool/venom-deadly-devourer.js";
 import _poolVensersSliver from "../pool/vensers-sliver.js";
 import _poolVerdantAutomaton from "../pool/verdant-automaton.js";
@@ -1227,6 +1229,7 @@ const shard: CardShard = {
     _poolDonAndresTheRenegade,
     _poolDonaldBlakeGuiseOfThor,
     _poolDonatelloTurtleTechie,
+    _poolDonatellosScienceLesson,
     _poolDovescape,
     _poolDovinBaan,
     _poolDovinsVeto,
@@ -1924,6 +1927,7 @@ const shard: CardShard = {
     _poolVampiricRites,
     _poolVastwoodAnimist,
     _poolVedalkenArchmage,
+    _poolVengeantVampire,
     _poolVenomDeadlyDevourer,
     _poolVensersSliver,
     _poolVerdantAutomaton,

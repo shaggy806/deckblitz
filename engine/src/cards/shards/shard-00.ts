@@ -72,6 +72,7 @@ import _poolBeamsawProspector from "../pool/beamsaw-prospector.js";
 import _poolBeastAttack from "../pool/beast-attack.js";
 import _poolBellowingFiend from "../pool/bellowing-fiend.js";
 import _poolBigfinBouncer from "../pool/bigfin-bouncer.js";
+import _poolBilbosBurglaring from "../pool/bilbos-burglaring.js";
 import _poolBiomathematician from "../pool/biomathematician.js";
 import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
 import _poolBirthingBoughs from "../pool/birthing-boughs.js";
@@ -118,6 +119,7 @@ import _poolBrigidClachansHeart from "../pool/brigid-clachans-heart.js";
 import _poolBrigidDounsMind from "../pool/brigid-douns-mind.js";
 import _poolBrilliantRestoration from "../pool/brilliant-restoration.js";
 import _poolBrilliantWings from "../pool/brilliant-wings.js";
+import _poolBrindleShoat from "../pool/brindle-shoat.js";
 import _poolBringerOfTheLastGift from "../pool/bringer-of-the-last-gift.js";
 import _poolBristlyBillSpineSower from "../pool/bristly-bill-spine-sower.js";
 import _poolBroadsideBombardiers from "../pool/broadside-bombardiers.js";
@@ -1110,6 +1112,7 @@ const shard: CardShard = {
     _poolBeastAttack,
     _poolBellowingFiend,
     _poolBigfinBouncer,
+    _poolBilbosBurglaring,
     _poolBiomathematician,
     _poolBiomechanEngineer,
     _poolBirthingBoughs,
@@ -1156,6 +1159,7 @@ const shard: CardShard = {
     _poolBrigidDounsMind,
     _poolBrilliantRestoration,
     _poolBrilliantWings,
+    _poolBrindleShoat,
     _poolBringerOfTheLastGift,
     _poolBristlyBillSpineSower,
     _poolBroadsideBombardiers,

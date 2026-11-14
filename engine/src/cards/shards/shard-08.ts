@@ -540,6 +540,7 @@ import _poolLightningCrafter from "../pool/lightning-crafter.js";
 import _poolLikenessOfTheSeeker from "../pool/likeness-of-the-seeker.js";
 import _poolLilianaVess from "../pool/liliana-vess.js";
 import _poolLlanowarEnvoy from "../pool/llanowar-envoy.js";
+import _poolLoAndLiRoyalAdvisors from "../pool/lo-and-li-royal-advisors.js";
 import _poolLoamingShaman from "../pool/loaming-shaman.js";
 import _poolLockerRoom from "../pool/locker-room.js";
 import _poolLoftyDenial from "../pool/lofty-denial.js";
@@ -686,6 +687,7 @@ import _poolPracticedScrollsmith from "../pool/practiced-scrollsmith.js";
 import _poolPrecursorGolem from "../pool/precursor-golem.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPressForAnswers from "../pool/press-for-answers.js";
+import _poolPreyseizerDragon from "../pool/preyseizer-dragon.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
 import _poolPrisonTerm from "../pool/prison-term.js";
 import _poolProfanePrayers from "../pool/profane-prayers.js";
@@ -1609,6 +1611,7 @@ const shard: CardShard = {
     _poolLikenessOfTheSeeker,
     _poolLilianaVess,
     _poolLlanowarEnvoy,
+    _poolLoAndLiRoyalAdvisors,
     _poolLoamingShaman,
     _poolLockerRoom,
     _poolLoftyDenial,
@@ -1755,6 +1758,7 @@ const shard: CardShard = {
     _poolPrecursorGolem,
     _poolPreemptiveStrike,
     _poolPressForAnswers,
+    _poolPreyseizerDragon,
     _poolPrimalDruid,
     _poolPrisonTerm,
     _poolProfanePrayers,

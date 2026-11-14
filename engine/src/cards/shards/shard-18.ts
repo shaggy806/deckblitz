@@ -66,6 +66,7 @@ import _poolBifurcate from "../pool/bifurcate.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBindingAgony from "../pool/binding-agony.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
+import _poolBisonWhistle from "../pool/bison-whistle.js";
 import _poolBitterheartWitch from "../pool/bitterheart-witch.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlazingSpecter from "../pool/blazing-specter.js";
@@ -182,6 +183,7 @@ import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeepSlumberTitan from "../pool/deep-slumber-titan.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
 import _poolDefenderEnVec from "../pool/defender-en-vec.js";
+import _poolDefinitelyNotATurtle from "../pool/definitely-not-a-turtle.js";
 import _poolDeposeDeploy from "../pool/depose-deploy.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDestructiveRevelry from "../pool/destructive-revelry.js";
@@ -796,6 +798,7 @@ import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
 import _poolSquanderedResources from "../pool/squandered-resources.js";
 import _poolSqueesRevenge from "../pool/squees-revenge.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
+import _poolStandUnited from "../pool/stand-united.js";
 import _poolStandingTroops from "../pool/standing-troops.js";
 import _poolStarAthlete from "../pool/star-athlete.js";
 import _poolStarfallInvocation from "../pool/starfall-invocation.js";
@@ -1095,6 +1098,7 @@ const shard: CardShard = {
     _poolBighornerRancher,
     _poolBindingAgony,
     _poolBirdMaiden,
+    _poolBisonWhistle,
     _poolBitterheartWitch,
     _poolBlackWidowDoubleAgent,
     _poolBlazingSpecter,
@@ -1211,6 +1215,7 @@ const shard: CardShard = {
     _poolDeepSlumberTitan,
     _poolDeeprootChampion,
     _poolDefenderEnVec,
+    _poolDefinitelyNotATurtle,
     _poolDeposeDeploy,
     _poolDesperateCharge,
     _poolDestructiveRevelry,
@@ -1825,6 +1830,7 @@ const shard: CardShard = {
     _poolSquanderedResources,
     _poolSqueesRevenge,
     _poolStalkingVengeance,
+    _poolStandUnited,
     _poolStandingTroops,
     _poolStarAthlete,
     _poolStarfallInvocation,

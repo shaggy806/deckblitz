@@ -71,6 +71,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "3/3 Centaur Token",
   "3/3 Demon Token",
   "3/3 Dinosaur Token",
+  "3/3 Green Boar Token",
   "3/3 Green Enchantment Centaur Token",
   "3/3 Ooze Token",
   "3/3 Red Elemental Token",

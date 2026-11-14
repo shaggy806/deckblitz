@@ -277,6 +277,7 @@ import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEaterOfDays from "../pool/eater-of-days.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEchoingRuin from "../pool/echoing-ruin.js";
+import _poolElderwoodScion from "../pool/elderwood-scion.js";
 import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
 import _poolElrondMasterOfHealing from "../pool/elrond-master-of-healing.js";
 import _poolElvishEulogist from "../pool/elvish-eulogist.js";
@@ -700,6 +701,7 @@ import _poolRescueRetriever from "../pool/rescue-retriever.js";
 import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
 import _poolRetributionOfTheMeek from "../pool/retribution-of-the-meek.js";
 import _poolRevealingWind from "../pool/revealing-wind.js";
+import _poolRhythmicWaterVortex from "../pool/rhythmic-water-vortex.js";
 import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
@@ -916,6 +918,7 @@ import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUginsConjurant from "../pool/ugins-conjurant.js";
 import _poolUldarosTheorix from "../pool/uldaros-theorix.js";
 import _poolUnaChinRileyNumberOne from "../pool/una-chin-riley-number-one.js";
+import _poolUnagisSpray from "../pool/unagis-spray.js";
 import _poolUnboundFlourishing from "../pool/unbound-flourishing.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
 import _poolUncoveredClues from "../pool/uncovered-clues.js";
@@ -1306,6 +1309,7 @@ const shard: CardShard = {
     _poolEaterOfDays,
     _poolEbonDragon,
     _poolEchoingRuin,
+    _poolElderwoodScion,
     _poolElrondLordOfRivendell,
     _poolElrondMasterOfHealing,
     _poolElvishEulogist,
@@ -1729,6 +1733,7 @@ const shard: CardShard = {
     _poolRestlessAnchorage,
     _poolRetributionOfTheMeek,
     _poolRevealingWind,
+    _poolRhythmicWaterVortex,
     _poolRiddleGateGargoyle,
     _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,
@@ -1945,6 +1950,7 @@ const shard: CardShard = {
     _poolUginsConjurant,
     _poolUldarosTheorix,
     _poolUnaChinRileyNumberOne,
+    _poolUnagisSpray,
     _poolUnboundFlourishing,
     _poolUnbreathingHorde,
     _poolUncoveredClues,

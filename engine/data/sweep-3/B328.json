@@ -1,0 +1,442 @@
+{
+ "batch": "B328",
+ "status": "done",
+ "ranks": "EDHREC ranks 18569-23398 (60): one card-author agent, on the night's engine (Attractions built, B327).",
+ "authored": [
+  {
+   "name": "Aang, A Lot to Learn",
+   "files": [
+    "engine/src/cards/pool/aang-a-lot-to-learn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arden Angel",
+   "files": [
+    "engine/src/cards/pool/arden-angel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bilbo, Unexpected Adventurer",
+   "files": [
+    "engine/src/cards/pool/bilbo-unexpected-adventurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bilbo's Burglaring",
+   "files": [
+    "engine/src/cards/pool/bilbos-burglaring.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bolg, Erebor's Reckoning",
+   "files": [
+    "engine/src/cards/pool/bolg-erebors-reckoning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brindle Shoat",
+   "files": [
+    "engine/src/cards/pool/brindle-shoat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Casey Jones, Asphalt Hooligan",
+   "files": [
+    "engine/src/cards/pool/casey-jones-asphalt-hooligan.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chong and Lily, Nomads",
+   "files": [
+    "engine/src/cards/pool/chong-and-lily-nomads.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dee Kay, Finder of the Lost",
+   "files": [
+    "engine/src/cards/pool/dee-kay-finder-of-the-lost.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Definitely Not a Turtle",
+   "files": [
+    "engine/src/cards/pool/definitely-not-a-turtle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dissatisfied Customer",
+   "files": [
+    "engine/src/cards/pool/dissatisfied-customer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Donatello, Rad Scientist",
+   "files": [
+    "engine/src/cards/pool/donatello-rad-scientist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Donnie & April, Adorkable Duo",
+   "files": [
+    "engine/src/cards/pool/donnie-april-adorkable-duo.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dreampod Druid",
+   "files": [
+    "engine/src/cards/pool/dreampod-druid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eel-Hounds",
+   "files": [
+    "engine/src/cards/pool/eel-hounds.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Enkira, Hostile Scavenger",
+   "files": [
+    "engine/src/cards/pool/enkira-hostile-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Nation's Conquest",
+   "files": [
+    "engine/src/cards/pool/fire-nations-conquest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Founding of Omashu",
+   "files": [
+    "engine/src/cards/pool/founding-of-omashu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freedom Fighter Recruit",
+   "files": [
+    "engine/src/cards/pool/freedom-fighter-recruit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Henry Wu, InGen Geneticist",
+   "files": [
+    "engine/src/cards/pool/henry-wu-ingen-geneticist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hog-Monkey Rampage",
+   "files": [
+    "engine/src/cards/pool/hog-monkey-rampage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hook Swords",
+   "files": [
+    "engine/src/cards/pool/hook-swords.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Illusory Angel",
+   "files": [
+    "engine/src/cards/pool/illusory-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Immard, the Stormcleaver",
+   "files": [
+    "engine/src/cards/pool/immard-the-stormcleaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Immortal Phoenix",
+   "files": [
+    "engine/src/cards/pool/immortal-phoenix.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Indrik Umbra",
+   "files": [
+    "engine/src/cards/pool/indrik-umbra.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jiang Yanggu",
+   "files": [
+    "engine/src/cards/pool/jiang-yanggu.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Krond the Dawn-Clad",
+   "files": [
+    "engine/src/cards/pool/krond-the-dawn-clad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leonardo, Worldly Warrior",
+   "files": [
+    "engine/src/cards/pool/leonardo-worldly-warrior.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lion Vulture",
+   "files": [
+    "engine/src/cards/pool/lion-vulture.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lo and Li, Royal Advisors",
+   "files": [
+    "engine/src/cards/pool/lo-and-li-royal-advisors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lost in the Spirit World",
+   "files": [
+    "engine/src/cards/pool/lost-in-the-spirit-world.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Maximus, Knight Apparent",
+   "files": [
+    "engine/src/cards/pool/maximus-knight-apparent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mikey & Mona, Mutant Sitters",
+   "files": [
+    "engine/src/cards/pool/mikey-mona-mutant-sitters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moku, Meandering Drummer",
+   "files": [
+    "engine/src/cards/pool/moku-meandering-drummer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Motion Sickness",
+   "files": [
+    "engine/src/cards/pool/motion-sickness.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nightmares and Daydreams",
+   "files": [
+    "engine/src/cards/pool/nightmares-and-daydreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Non-Human Cannonball",
+   "files": [
+    "engine/src/cards/pool/non-human-cannonball.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nyla, Shirshu Sleuth",
+   "files": [
+    "engine/src/cards/pool/nyla-shirshu-sleuth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Preyseizer Dragon",
+   "files": [
+    "engine/src/cards/pool/preyseizer-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Prowler, Misguided Mentor",
+   "files": [
+    "engine/src/cards/pool/prowler-misguided-mentor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ride Guide",
+   "files": [
+    "engine/src/cards/pool/ride-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Splinter & Leo, Father & Son",
+   "files": [
+    "engine/src/cards/pool/splinter-leo-father-son.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Mary Janes",
+   "files": [
+    "engine/src/cards/pool/the-mary-janes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Meep",
+   "files": [
+    "engine/src/cards/pool/the-meep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unagi's Spray",
+   "files": [
+    "engine/src/cards/pool/unagis-spray.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vikya, Scorching Stalwart",
+   "files": [
+    "engine/src/cards/pool/vikya-scorching-stalwart.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Wicker Picker",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Ticketomaton",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Finishing Move",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Clandestine Chameleon",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Chicken Troupe",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Done for the Day",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Ticket Turbotubes",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Blorbian Buddy",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Resolute Veggiesaur",
+   "needs": [
+    "trigger:nth-die-roll-each-turn"
+   ],
+   "size": "small",
+   "why": "'Your third die each turn': rolls-die has no journaled timing, and the journal's rolled entry is one per roll, not per die."
+  },
+  {
+   "name": "The Space Family Goblinson",
+   "needs": [
+    "condition:dice-rolled-this-turn-count"
+   ],
+   "size": "small",
+   "why": "No read of how many dice a player rolled this turn (three dice at once count as three, its ruling)."
+  },
+  {
+   "name": "Rose Noble",
+   "needs": [
+    "filter:has-doctors-companion"
+   ],
+   "size": "small",
+   "why": "'A creature spell with doctor's companion' needs a CARD_KEYWORD_READS row for the pairing."
+  },
+  {
+   "name": "Blue, Loyal Raptor",
+   "needs": [
+    "replacement:enters-with-counter-kinds-of-source"
+   ],
+   "size": "small",
+   "why": "Each other Dinosaur enters with a counter of each kind on Blue; others-enter-battlefield takes one fixed kind."
+  },
+  {
+   "name": "Casey & Raph, Hotheads",
+   "needs": [
+    "bug:permission-duration-read-from-granter"
+   ],
+   "size": "small",
+   "why": "The impulse permission given to the target player expires at the caster's end step, not that player's (Game.permissionWindow is handed the granter)."
+  }
+ ]
+}

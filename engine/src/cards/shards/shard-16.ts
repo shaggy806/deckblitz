@@ -215,6 +215,7 @@ import _poolDollhouseOfHorrors from "../pool/dollhouse-of-horrors.js";
 import _poolDomriRade from "../pool/domri-rade.js";
 import _poolDoomWeaver from "../pool/doom-weaver.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
+import _poolDownForRepairs from "../pool/down-for-repairs.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
 import _poolDragonfireBlade from "../pool/dragonfire-blade.js";
@@ -296,6 +297,7 @@ import _poolFieldOfSouls from "../pool/field-of-souls.js";
 import _poolFinalFrontier from "../pool/final-frontier.js";
 import _poolFindFinality from "../pool/find-finality.js";
 import _poolFireBellyChangeling from "../pool/fire-belly-changeling.js";
+import _poolFireNationsConquest from "../pool/fire-nations-conquest.js";
 import _poolFireSages from "../pool/fire-sages.js";
 import _poolFiremaneAvenger from "../pool/firemane-avenger.js";
 import _poolFiremantleMage from "../pool/firemantle-mage.js";
@@ -598,6 +600,7 @@ import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNightDealings from "../pool/night-dealings.js";
 import _poolNightSoil from "../pool/night-soil.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
+import _poolNightmaresAndDaydreams from "../pool/nightmares-and-daydreams.js";
 import _poolNimGrotesque from "../pool/nim-grotesque.js";
 import _poolNix from "../pool/nix.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
@@ -668,6 +671,7 @@ import _poolPlumecreedMentor from "../pool/plumecreed-mentor.js";
 import _poolPolisCrusher from "../pool/polis-crusher.js";
 import _poolPowderGanger from "../pool/powder-ganger.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
+import _poolPrehistoricTurtlesaurus from "../pool/prehistoric-turtlesaurus.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
 import _poolPriestOfTheBlessedGraf from "../pool/priest-of-the-blessed-graf.js";
 import _poolPrimalPrayers from "../pool/primal-prayers.js";
@@ -1306,6 +1310,7 @@ const shard: CardShard = {
     _poolDomriRade,
     _poolDoomWeaver,
     _poolDoorOfDestinies,
+    _poolDownForRepairs,
     _poolDragonTempest,
     _poolDragonTurtle,
     _poolDragonfireBlade,
@@ -1387,6 +1392,7 @@ const shard: CardShard = {
     _poolFinalFrontier,
     _poolFindFinality,
     _poolFireBellyChangeling,
+    _poolFireNationsConquest,
     _poolFireSages,
     _poolFiremaneAvenger,
     _poolFiremantleMage,
@@ -1689,6 +1695,7 @@ const shard: CardShard = {
     _poolNightDealings,
     _poolNightSoil,
     _poolNighthawkScavenger,
+    _poolNightmaresAndDaydreams,
     _poolNimGrotesque,
     _poolNix,
     _poolNocturnalFeeder,
@@ -1759,6 +1766,7 @@ const shard: CardShard = {
     _poolPolisCrusher,
     _poolPowderGanger,
     _poolPredatorySliver,
+    _poolPrehistoricTurtlesaurus,
     _poolPridefulParent,
     _poolPriestOfTheBlessedGraf,
     _poolPrimalPrayers,

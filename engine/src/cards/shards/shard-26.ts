@@ -112,6 +112,7 @@ import _poolBloodletterQuill from "../pool/bloodletter-quill.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
+import _poolBolgEreborsReckoning from "../pool/bolg-erebors-reckoning.js";
 import _poolBondOfRevival from "../pool/bond-of-revival.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
 import _poolBonnyPallClearcutter from "../pool/bonny-pall-clearcutter.js";
@@ -408,6 +409,7 @@ import _poolHemlockVial from "../pool/hemlock-vial.js";
 import _poolHeraldOfAmity from "../pool/herald-of-amity.js";
 import _poolHerbalPoultice from "../pool/herbal-poultice.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
+import _poolHogMonkeyRampage from "../pool/hog-monkey-rampage.js";
 import _poolHollowhengeOverlord from "../pool/hollowhenge-overlord.js";
 import _poolHollowhengeSpirit from "../pool/hollowhenge-spirit.js";
 import _poolHomerTheHermit from "../pool/homer-the-hermit.js";
@@ -453,6 +455,7 @@ import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
 import _poolJestersCap from "../pool/jesters-cap.js";
 import _poolJoinTheCollective from "../pool/join-the-collective.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
+import _poolJourneyForTheElixir from "../pool/journey-for-the-elixir.js";
 import _poolJunglePatrol from "../pool/jungle-patrol.js";
 import _poolJurinLeadingTheCharge from "../pool/jurin-leading-the-charge.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
@@ -498,6 +501,7 @@ import _poolLivingLands from "../pool/living-lands.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
 import _poolLivingPlane from "../pool/living-plane.js";
 import _poolLoss from "../pool/loss.js";
+import _poolLostInTheSpiritWorld from "../pool/lost-in-the-spirit-world.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLouisoixsSacrifice from "../pool/louisoixs-sacrifice.js";
@@ -1166,6 +1170,7 @@ const shard: CardShard = {
     _poolBogSmugglers,
     _poolBogardanDragonheart,
     _poolBoldImpaler,
+    _poolBolgEreborsReckoning,
     _poolBondOfRevival,
     _poolBoneyardLurker,
     _poolBonnyPallClearcutter,
@@ -1462,6 +1467,7 @@ const shard: CardShard = {
     _poolHeraldOfAmity,
     _poolHerbalPoultice,
     _poolHitTheMotherLode,
+    _poolHogMonkeyRampage,
     _poolHollowhengeOverlord,
     _poolHollowhengeSpirit,
     _poolHomerTheHermit,
@@ -1507,6 +1513,7 @@ const shard: CardShard = {
     _poolJestersCap,
     _poolJoinTheCollective,
     _poolJosuVessLichKnight,
+    _poolJourneyForTheElixir,
     _poolJunglePatrol,
     _poolJurinLeadingTheCharge,
     _poolKangeeSkyWarden,
@@ -1552,6 +1559,7 @@ const shard: CardShard = {
     _poolLivingLightning,
     _poolLivingPlane,
     _poolLoss,
+    _poolLostInTheSpiritWorld,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
     _poolLouisoixsSacrifice,

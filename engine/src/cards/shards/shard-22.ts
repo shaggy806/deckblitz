@@ -300,6 +300,7 @@ import _poolFlatman from "../pool/flatman.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFloatingDreamZubera from "../pool/floating-dream-zubera.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
+import _poolFoeLiage from "../pool/foe-liage.js";
 import _poolFontOfMagic from "../pool/font-of-magic.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
 import _poolFootChopper from "../pool/foot-chopper.js";
@@ -881,6 +882,7 @@ import _poolTheBiblioplex from "../pool/the-biblioplex.js";
 import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
 import _poolTheGreatWork from "../pool/the-great-work.js";
+import _poolTheMaryJanes from "../pool/the-mary-janes.js";
 import _poolTheMirariConjecture from "../pool/the-mirari-conjecture.js";
 import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
 import _poolTheTaleOfTamiyo from "../pool/the-tale-of-tamiyo.js";
@@ -1353,6 +1355,7 @@ const shard: CardShard = {
     _poolFlickerOfFate,
     _poolFloatingDreamZubera,
     _poolFlowstoneShambler,
+    _poolFoeLiage,
     _poolFontOfMagic,
     _poolFontOfVigor,
     _poolFootChopper,
@@ -1934,6 +1937,7 @@ const shard: CardShard = {
     _poolTheFleshIsWeak,
     _poolTheFugitiveDoctor,
     _poolTheGreatWork,
+    _poolTheMaryJanes,
     _poolTheMirariConjecture,
     _poolTheSackvilleBagginses,
     _poolTheTaleOfTamiyo,
