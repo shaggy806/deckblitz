@@ -3577,7 +3577,13 @@ from exile" — a spell comes from the stack, so a creature cast from exile
 doesn't), and whether an ability of the permanent applying the filter put it
 there — Kodama of the East Tree's "if it wasn't put onto the battlefield
 with this ability" is `putThereBySource: false` on its enters trigger, which
-is what keeps it from triggering off its own lands. A permanent that has left
+is what keeps it from triggering off its own lands. `putThereBySource: {
+triggered: n }` (or `{ activated: n }`) names the one ability, by its index in
+that list on the face the permanent shows — the second of a linked pair (rule
+607.2c): Havengul Mystery's "When the creature put onto the battlefield with
+Havengul Mystery leaves the battlefield" is a `leaves-battlefield` trigger
+`who: "any"` with `filter: { putThereBySource: { triggered: 0 } }`, so a Clue
+its Laboratory face made doesn't count. A permanent that has left
 is asked as it last was. `thisWay` (a `ThisWayKind` — see "This way" above) matches only what the
 spell or ability now resolving has done that to — choosing among the cards
 just moved: "mill three cards; you may put a creature card milled this way into

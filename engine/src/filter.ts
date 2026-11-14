@@ -1350,8 +1350,12 @@ export interface CardFilter {
   /** It was (or wasn't) put onto the battlefield by an ability of the
    * permanent applying the filter, this stint of it — Kodama of the East
    * Tree's "if it wasn't put onto the battlefield with this ability". Needs
-   * `FilterContext.source`; without one, nothing was. */
-  readonly putThereBySource?: boolean;
+   * `FilterContext.source`; without one, nothing was. `{ triggered: n }` /
+   * `{ activated: n }`: by that one ability of the face the permanent shows
+   * now — the first of a linked pair (rule 607.2c), Havengul Mystery's
+   * "the creature put onto the battlefield with Havengul Mystery" by its
+   * transform trigger (`{ triggered: 0 }`), not a Clue its other face made. */
+  readonly putThereBySource?: boolean | { readonly triggered: number } | { readonly activated: number };
   /**
    * What a **spell** targets — see {@link SpellTargetsFilter}: Feather, the
    * Redeemed's "an instant or sorcery spell that targets a creature you
@@ -2856,7 +2860,14 @@ export function matchesFilter(
       const by = entry?.by;
       const asker = ctx.source === undefined ? undefined : state.objects[ctx.source];
       const byIt = by !== undefined && asker !== undefined && by.source === asker.id && by.timestamp === asker.timestamp;
-      if (byIt !== filter.putThereBySource) return false;
+      const want = filter.putThereBySource;
+      if (typeof want === "boolean") {
+        if (byIt !== want) return false;
+      } else {
+        const [kind, index] = "triggered" in want ? (["triggered", want.triggered] as const) : (["activated", want.activated] as const);
+        const ability = by?.ability;
+        if (!byIt || ability?.kind !== kind || ability.index !== index || ability.face !== (asker!.face ?? 0)) return false;
+      }
     }
   }
   // A spell's targets, as it is on the stack: a snapshot is of a permanent,

@@ -30097,7 +30097,17 @@ export class Game {
     delete this.state.namedOffSlot;
     const top = this.state.objects[this.state.zones.shared.stack[this.state.zones.shared.stack.length - 1]];
     if (top?.kind === "ability" && top.sourceObjectId !== undefined && top.sourceObjectId !== null) {
-      this.state.resolvingSource = { source: top.sourceObjectId, timestamp: top.sourceTimestamp ?? 0 };
+      // Which ability of it, for a linked "put onto the battlefield with"
+      // (rule 607.2c): its index into the list of the face it's on.
+      const ability =
+        top.abilityKind !== null && top.abilityIndex !== null
+          ? { kind: top.abilityKind, index: top.abilityIndex, face: this.state.objects[top.sourceObjectId]?.face ?? 0 }
+          : undefined;
+      this.state.resolvingSource = {
+        source: top.sourceObjectId,
+        timestamp: top.sourceTimestamp ?? 0,
+        ...(ability !== undefined ? { ability } : {}),
+      };
     } else {
       delete this.state.resolvingSource;
     }

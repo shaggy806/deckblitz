@@ -5311,6 +5311,21 @@ export interface DealtDamageRecord {
 }
 
 /**
+ * The ability resolving that puts a permanent onto the battlefield: its
+ * source, the source's timestamp then, and which of the source's abilities
+ * it is — `kind` and `index` into that list of the face `face` (rule 607.1b:
+ * both faces' abilities are the object's). What `putThereBySource` reads,
+ * the ability for a linked pair (rule 607.2c — Havengul Mystery's "the
+ * creature put onto the battlefield with Havengul Mystery", by its transform
+ * trigger, not the Clues its other face made).
+ */
+export interface EntrySource {
+  readonly source: ObjectId;
+  readonly timestamp: number;
+  readonly ability?: { readonly kind: "activated" | "triggered" | "chapter"; readonly index: number; readonly face: number };
+}
+
+/**
  * How a permanent came onto the battlefield, this stint — read by the filter
  * clauses `enteredFrom`, `cast`, `castBy`, `castFrom` and
  * `putThereBySource`.
@@ -5332,7 +5347,7 @@ export interface EntryRecord {
   /** The source of the ability that put it here, with that source's
    * timestamp then — Kodama of the East Tree's "if it wasn't put onto the
    * battlefield with this ability". */
-  readonly by?: { readonly source: ObjectId; readonly timestamp: number };
+  readonly by?: EntrySource;
   /** It's a land that was played (rule 305.1) — Deep Gnome Terramancer's
    * "enter … without being played" is the filter's `played: false`. */
   readonly played?: true;
@@ -6570,7 +6585,7 @@ export interface GameState {
    * `resolutionSince`): its source and that source's timestamp then — what
    * a permanent it puts onto the battlefield records as `entry.by`. Absent
    * while a spell resolves, and between resolutions. */
-  resolvingSource?: { readonly source: ObjectId; readonly timestamp: number };
+  resolvingSource?: EntrySource;
   /** While a spell or ability resolves (across the decisions it waits on, like
    * `resolutionSince`): who controls it — not whoever part of it is being done
    * by, a "that player may search" running in that player's name. */
