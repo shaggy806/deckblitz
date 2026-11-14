@@ -4394,6 +4394,13 @@ export type EffectSpec =
       readonly exile?: boolean;
       readonly put?: "battlefield" | "hand" | "graveyard" | "with-rest";
       readonly tapped?: boolean;
+      /** With `put: "battlefield"`: "put **any number of** those permanent
+       * cards onto the battlefield, then put the rest of the revealed cards
+       * on the bottom of your library" (Aurora Awakener): the effect's
+       * controller chooses which of the found cards enter (none to all, a
+       * `choose-from-zone` of them as they sit revealed), and the ones not
+       * chosen go with the rest, in the same move. */
+      readonly anyNumber?: true;
       /** With `put: "battlefield"`: done, once the rest have gone, to each of
        * those that entered, as target 0 — "they're goaded for the rest of the
        * game" (Dack Fayden, Helping Hand). Shouldn't itself stop to ask. */
@@ -4408,6 +4415,10 @@ export type EffectSpec =
         readonly owner: PlayerId;
         readonly revealed: readonly ObjectId[];
         readonly found: readonly ObjectId[];
+        /** With `anyNumber`: the found cards chosen to enter; absent until
+         * the choice is answered, `asked` while it's up. */
+        readonly chosen?: readonly ObjectId[];
+        readonly asked?: true;
       };
     }
   | {
@@ -12994,8 +13005,9 @@ export interface EffectApi {
   /** See the `"choose-among-targets"` {@link EffectSpec}: ask `chooser` to
    * pick exactly `count` of `objects` (more than `count` of them, all
    * targets still legal), the answer waiting for `takeKept`. `false` when
-   * they've left the game, and nothing was asked. */
-  askChooseAmong(chooser: PlayerId, objects: readonly ObjectId[], count: number, prompt: string): boolean;
+   * they've left the game, and nothing was asked. `min` below `count` is
+   * "up to" — `reveal-until-count`'s `anyNumber` asks 0 to all of them. */
+  askChooseAmong(chooser: PlayerId, objects: readonly ObjectId[], count: number, prompt: string, min?: number): boolean;
   /** `put-on-libraries`' `"owner-chooses"`: ask `owner` which of the
    * permanents among `objects` they own (tokens aside, which cease to exist
    * in a library — rule 111.8) go on the bottom of their library, the rest
@@ -19176,9 +19188,27 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       const put = spec.put ?? "battlefield";
       const exiled = spec.exile === true;
+      // "Put any number of those cards onto the battlefield": the controller
+      // picks which of the found cards enter; the rest go with the rest.
+      if (put === "battlefield" && spec.anyNumber === true && progress.chosen === undefined) {
+        if (progress.asked === true) {
+          progress = { ...progress, chosen: ctx.takeKept() };
+        } else if (progress.found.length > 0) {
+          const parked = ctx.parkedCount();
+          const prompt = "Choose any number of them to put onto the battlefield";
+          if (ctx.askChooseAmong(ctx.controller, progress.found, progress.found.length, prompt, 0)) {
+            ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, asked: true } }, parked);
+            return;
+          }
+          progress = { ...progress, chosen: [] };
+        } else {
+          progress = { ...progress, chosen: [] };
+        }
+      }
+      const entering = progress.chosen ?? progress.found;
       if (put === "battlefield") {
         const parked = ctx.parkedCount();
-        if (ctx.putOntoBattlefieldTogether(progress.found, spec.tapped === true)) {
+        if (ctx.putOntoBattlefieldTogether(entering, spec.tapped === true)) {
           ctx.resumeAfterDecisions({ ...spec, progress }, parked);
           return;
         }
@@ -19189,7 +19219,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ctx.placeRevealed(progress.owner, progress.revealed, spec.rest, exiled);
         return;
       }
-      const found = new Set(progress.found);
+      const found = new Set(put === "battlefield" ? entering : progress.found);
       ctx.placeRevealed(
         progress.owner,
         progress.revealed.filter((id) => !found.has(id)),
@@ -19197,7 +19227,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         exiled,
       );
       if (put !== "battlefield") return;
-      const entered = progress.found.filter((id) => ctx.onBattlefield(id));
+      const entered = entering.filter((id) => ctx.onBattlefield(id));
       if (spec.thenEach !== undefined) {
         for (const id of entered) applyEffectSpec(spec.thenEach, ctx.withFoundAt(0, id));
       }

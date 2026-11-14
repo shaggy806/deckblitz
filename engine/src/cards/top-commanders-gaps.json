@@ -2605,7 +2605,9 @@
   "static:keywords-of-linked-exile",
   "effect:random-player-per-permanent",
   "replacement:enters-tapped-if-x",
-  "effect:cast-now-grants-abilities"
+  "effect:cast-now-grants-abilities",
+  "effect:cast-now-grants-abilities",
+  "effect:reveal-until-count-put-any-number"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

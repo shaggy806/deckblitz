@@ -40842,16 +40842,17 @@ controlledBy,
         };
         return true;
       },
-      askChooseAmong: (chooser, objects, count, prompt) => {
+      askChooseAmong: (chooser, objects, count, prompt, min = count) => {
         if (this.state.players[chooser]?.hasLost !== false) return false;
         // Permanents are pointed at on the battlefield; cards elsewhere (a
-        // graveyard's — all public) are shown in a list.
+        // graveyard's — all public — or revealed from a library) are shown
+        // in a list.
         if (objects.every((id) => this.state.objects[id]?.zone === "battlefield")) {
           this.state.awaiting = {
             kind: "choose-permanents",
             player: chooser,
             eligible: [...objects],
-            min: count,
+            min,
             max: count,
             prompt,
             then: { kind: "sequence", effects: [] },
@@ -40868,7 +40869,7 @@ controlledBy,
           ...(owner !== undefined && owner !== chooser ? { forPlayer: owner } : {}),
           ids: [...objects],
           eligible: [...objects],
-          min: count,
+          min,
           max: count,
           destination: "stay",
           leftover: "stay",

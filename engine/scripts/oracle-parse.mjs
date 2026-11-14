@@ -15023,6 +15023,28 @@ function revealUntilAt(sentences, i, ctx) {
       used: 1,
     };
   }
+  // Aurora Awakener: X read off the board, "any number of" those onto the
+  // battlefield (`anyNumber`), the rest with the rest.
+  const counted = sentenceRe(`${FROM_TOP} x ([\\w-]+) cards, where x is the number of (colors among permanents you control)`).exec(sentences[i]);
+  if (counted !== null) {
+    const filter = parseTypePhrase(counted[1], { cards: true });
+    const count = costEachAmount(counted[2].replace(/^colors/i, "color"));
+    const entered = sentenceRe(
+      `put (any number of )?those [\\w-]+ cards onto the battlefield, then put the rest of the revealed cards ${REST}`,
+    ).exec(sentences[i + 1] ?? "");
+    if (filter === null || count === null || count === undefined || entered === null) return null;
+    return {
+      effect: {
+        kind: "reveal-until-count",
+        filter,
+        count,
+        put: "battlefield",
+        ...(entered[1] !== undefined ? { anyNumber: true } : {}),
+        rest: restOf(entered[2]),
+      },
+      used: 2,
+    };
+  }
   const own = /^choose (any target|target creature)\.$/i.exec(sentences[i]);
   let j = own === null ? i : i + 1;
   const reveal = sentenceRe(`${FROM_TOP} ${N} ([\\w-]+) cards?`).exec(sentences[j] ?? "");

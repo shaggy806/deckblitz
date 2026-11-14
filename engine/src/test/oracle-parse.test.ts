@@ -19855,3 +19855,25 @@ describe("'target opponent exiles cards … until they exile …. You may cast t
     });
   });
 });
+
+describe("'reveal … until you reveal X permanent cards … Put any number of those permanent cards onto the battlefield' (Aurora Awakener)", () => {
+  it("`reveal-until-count`'s `anyNumber`, X the colors among your permanents", () => {
+    const aurora = parseFace({
+      name: "Test Aurora",
+      type_line: "Creature — Giant Druid",
+      mana_cost: "{6}{G}",
+      power: "7",
+      toughness: "7",
+      oracle_text:
+        "Trample\nVivid — When this creature enters, reveal cards from the top of your library until you reveal X permanent cards, where X is the number of colors among permanents you control. Put any number of those permanent cards onto the battlefield, then put the rest of the revealed cards on the bottom of your library in a random order.",
+    });
+    expect(aurora.triggered[0]?.effect).toEqual({
+      kind: "reveal-until-count",
+      filter: { notTypes: ["instant", "sorcery"] },
+      count: { colorsAmong: { controlledBy: "you" } },
+      put: "battlefield",
+      anyNumber: true,
+      rest: "bottom-random",
+    });
+  });
+});
