@@ -790,6 +790,7 @@ import _poolScrounge from "../pool/scrounge.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
 import _poolSeaSerpent from "../pool/sea-serpent.js";
 import _poolSealOfFire from "../pool/seal-of-fire.js";
+import _poolSeasonsPast from "../pool/seasons-past.js";
 import _poolSecretArcade from "../pool/secret-arcade.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
@@ -1875,6 +1876,7 @@ const shard: CardShard = {
     _poolSeaGateLoremaster,
     _poolSeaSerpent,
     _poolSealOfFire,
+    _poolSeasonsPast,
     _poolSecretArcade,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,

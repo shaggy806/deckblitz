@@ -223,6 +223,7 @@ import _poolAdmonitionAngel from "./pool/admonition-angel.js";
 import _poolAdornedCrocodile from "./pool/adorned-crocodile.js";
 import _poolAdornedPouncer from "./pool/adorned-pouncer.js";
 import _poolAdrenalineJockey from "./pool/adrenaline-jockey.js";
+import _poolAdrestia from "./pool/adrestia.js";
 import _poolAdrianaCaptainOfTheGuard from "./pool/adriana-captain-of-the-guard.js";
 import _poolAdricMathematicalGenius from "./pool/adric-mathematical-genius.js";
 import _poolAdrixAndNev from "./pool/adrix-and-nev.js";
@@ -11706,6 +11707,7 @@ import _poolGreenweaverDruid from "./pool/greenweaver-druid.js";
 import _poolGreenwheelLiberator from "./pool/greenwheel-liberator.js";
 import _poolGreenwoodSentinel from "./pool/greenwood-sentinel.js";
 import _poolGregorShrewdMagistrate from "./pool/gregor-shrewd-magistrate.js";
+import _poolGrellPhilosopher from "./pool/grell-philosopher.js";
 import _poolGremlinInfestation from "./pool/gremlin-infestation.js";
 import _poolGremlinMine from "./pool/gremlin-mine.js";
 import _poolGremlinTamer from "./pool/gremlin-tamer.js";
@@ -12674,6 +12676,7 @@ import _poolHidetsuguDevouringChaos from "./pool/hidetsugu-devouring-chaos.js";
 import _poolHidetsugusSecondRite from "./pool/hidetsugus-second-rite.js";
 import _poolHieroglyphicIllumination from "./pool/hieroglyphic-illumination.js";
 import _poolHieromancersCage from "./pool/hieromancers-cage.js";
+import _poolHierophantBioTitan from "./pool/hierophant-bio-titan.js";
 import _poolHierophantsChalice from "./pool/hierophants-chalice.js";
 import _poolHighAlert from "./pool/high-alert.js";
 import _poolHighFaeNegotiator from "./pool/high-fae-negotiator.js";
@@ -15963,6 +15966,7 @@ import _poolLongGoodbye from "./pool/long-goodbye.js";
 import _poolLongLakeNuisance from "./pool/long-lake-nuisance.js";
 import _poolLongLostLances from "./pool/long-lost-lances.js";
 import _poolLongRangeSensor from "./pool/long-range-sensor.js";
+import _poolLongRest from "./pool/long-rest.js";
 import _poolLongRiverLurker from "./pool/long-river-lurker.js";
 import _poolLongRiversPull from "./pool/long-rivers-pull.js";
 import _poolLongRoadHome from "./pool/long-road-home.js";
@@ -18826,6 +18830,7 @@ import _poolOathswornVampire from "./pool/oathsworn-vampire.js";
 import _poolObNixilisCaptiveKingpin from "./pool/ob-nixilis-captive-kingpin.js";
 import _poolObNixilisOfTheBlackOath from "./pool/ob-nixilis-of-the-black-oath.js";
 import _poolObNixilisReignited from "./pool/ob-nixilis-reignited.js";
+import _poolObNixilisTheAdversary from "./pool/ob-nixilis-the-adversary.js";
 import _poolObNixilisTheAscended from "./pool/ob-nixilis-the-ascended.js";
 import _poolObNixilisTheFallen from "./pool/ob-nixilis-the-fallen.js";
 import _poolObNixilisTheHateTwisted from "./pool/ob-nixilis-the-hate-twisted.js";
@@ -23588,6 +23593,7 @@ import _poolSeasonedMarshal from "./pool/seasoned-marshal.js";
 import _poolSeasonedPyromancer from "./pool/seasoned-pyromancer.js";
 import _poolSeasonedTactician from "./pool/seasoned-tactician.js";
 import _poolSeasonedWarrenguard from "./pool/seasoned-warrenguard.js";
+import _poolSeasonsPast from "./pool/seasons-past.js";
 import _poolSeatOfTheSynod from "./pool/seat-of-the-synod.js";
 import _poolSecludedCourtyard from "./pool/secluded-courtyard.js";
 import _poolSecludedGlen from "./pool/secluded-glen.js";
@@ -33047,6 +33053,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAdornedCrocodile,
   _poolAdornedPouncer,
   _poolAdrenalineJockey,
+  _poolAdrestia,
   _poolAdrianaCaptainOfTheGuard,
   _poolAdricMathematicalGenius,
   _poolAdrixAndNev,
@@ -44530,6 +44537,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGreenwheelLiberator,
   _poolGreenwoodSentinel,
   _poolGregorShrewdMagistrate,
+  _poolGrellPhilosopher,
   _poolGremlinInfestation,
   _poolGremlinMine,
   _poolGremlinTamer,
@@ -45498,6 +45506,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHidetsugusSecondRite,
   _poolHieroglyphicIllumination,
   _poolHieromancersCage,
+  _poolHierophantBioTitan,
   _poolHierophantsChalice,
   _poolHighAlert,
   _poolHighFaeNegotiator,
@@ -48787,6 +48796,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLongLakeNuisance,
   _poolLongLostLances,
   _poolLongRangeSensor,
+  _poolLongRest,
   _poolLongRiverLurker,
   _poolLongRiversPull,
   _poolLongRoadHome,
@@ -51650,6 +51660,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolObNixilisCaptiveKingpin,
   _poolObNixilisOfTheBlackOath,
   _poolObNixilisReignited,
+  _poolObNixilisTheAdversary,
   _poolObNixilisTheAscended,
   _poolObNixilisTheFallen,
   _poolObNixilisTheHateTwisted,
@@ -56412,6 +56423,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSeasonedPyromancer,
   _poolSeasonedTactician,
   _poolSeasonedWarrenguard,
+  _poolSeasonsPast,
   _poolSeatOfTheSynod,
   _poolSecludedCourtyard,
   _poolSecludedGlen,
@@ -65884,6 +65896,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/adorned-crocodile": _poolAdornedCrocodile,
   "pool/adorned-pouncer": _poolAdornedPouncer,
   "pool/adrenaline-jockey": _poolAdrenalineJockey,
+  "pool/adrestia": _poolAdrestia,
   "pool/adriana-captain-of-the-guard": _poolAdrianaCaptainOfTheGuard,
   "pool/adric-mathematical-genius": _poolAdricMathematicalGenius,
   "pool/adrix-and-nev": _poolAdrixAndNev,
@@ -77367,6 +77380,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/greenwheel-liberator": _poolGreenwheelLiberator,
   "pool/greenwood-sentinel": _poolGreenwoodSentinel,
   "pool/gregor-shrewd-magistrate": _poolGregorShrewdMagistrate,
+  "pool/grell-philosopher": _poolGrellPhilosopher,
   "pool/gremlin-infestation": _poolGremlinInfestation,
   "pool/gremlin-mine": _poolGremlinMine,
   "pool/gremlin-tamer": _poolGremlinTamer,
@@ -78335,6 +78349,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hidetsugus-second-rite": _poolHidetsugusSecondRite,
   "pool/hieroglyphic-illumination": _poolHieroglyphicIllumination,
   "pool/hieromancers-cage": _poolHieromancersCage,
+  "pool/hierophant-bio-titan": _poolHierophantBioTitan,
   "pool/hierophants-chalice": _poolHierophantsChalice,
   "pool/high-alert": _poolHighAlert,
   "pool/high-fae-negotiator": _poolHighFaeNegotiator,
@@ -81624,6 +81639,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/long-lake-nuisance": _poolLongLakeNuisance,
   "pool/long-lost-lances": _poolLongLostLances,
   "pool/long-range-sensor": _poolLongRangeSensor,
+  "pool/long-rest": _poolLongRest,
   "pool/long-river-lurker": _poolLongRiverLurker,
   "pool/long-rivers-pull": _poolLongRiversPull,
   "pool/long-road-home": _poolLongRoadHome,
@@ -84487,6 +84503,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ob-nixilis-captive-kingpin": _poolObNixilisCaptiveKingpin,
   "pool/ob-nixilis-of-the-black-oath": _poolObNixilisOfTheBlackOath,
   "pool/ob-nixilis-reignited": _poolObNixilisReignited,
+  "pool/ob-nixilis-the-adversary": _poolObNixilisTheAdversary,
   "pool/ob-nixilis-the-ascended": _poolObNixilisTheAscended,
   "pool/ob-nixilis-the-fallen": _poolObNixilisTheFallen,
   "pool/ob-nixilis-the-hate-twisted": _poolObNixilisTheHateTwisted,
@@ -89249,6 +89266,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/seasoned-pyromancer": _poolSeasonedPyromancer,
   "pool/seasoned-tactician": _poolSeasonedTactician,
   "pool/seasoned-warrenguard": _poolSeasonedWarrenguard,
+  "pool/seasons-past": _poolSeasonsPast,
   "pool/seat-of-the-synod": _poolSeatOfTheSynod,
   "pool/secluded-courtyard": _poolSecludedCourtyard,
   "pool/secluded-glen": _poolSecludedGlen,

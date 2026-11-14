@@ -463,6 +463,7 @@ import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLoamcrafterFaun from "../pool/loamcrafter-faun.js";
 import _poolLodestoneNeedle from "../pool/lodestone-needle.js";
 import _poolLongRangeSensor from "../pool/long-range-sensor.js";
+import _poolLongRest from "../pool/long-rest.js";
 import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
 import _poolLordOfTheUnreal from "../pool/lord-of-the-unreal.js";
 import _poolLoseCalm from "../pool/lose-calm.js";
@@ -1464,6 +1465,7 @@ const shard: CardShard = {
     _poolLoamcrafterFaun,
     _poolLodestoneNeedle,
     _poolLongRangeSensor,
+    _poolLongRest,
     _poolLordOfTheForsaken,
     _poolLordOfTheUnreal,
     _poolLoseCalm,

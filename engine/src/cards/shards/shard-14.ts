@@ -419,6 +419,7 @@ import _poolHeroesInAHalfShell from "../pool/heroes-in-a-half-shell.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHiddenCataract from "../pool/hidden-cataract.js";
 import _poolHieromancersCage from "../pool/hieromancers-cage.js";
+import _poolHierophantBioTitan from "../pool/hierophant-bio-titan.js";
 import _poolHighlyIllogical from "../pool/highly-illogical.js";
 import _poolHikariTwilightGuardian from "../pool/hikari-twilight-guardian.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
@@ -1440,6 +1441,7 @@ const shard: CardShard = {
     _poolHexplateWallbreaker,
     _poolHiddenCataract,
     _poolHieromancersCage,
+    _poolHierophantBioTitan,
     _poolHighlyIllogical,
     _poolHikariTwilightGuardian,
     _poolHistoryOfBenalia,

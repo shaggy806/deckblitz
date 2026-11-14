@@ -608,6 +608,7 @@ import _poolNoviceInspector from "../pool/novice-inspector.js";
 import _poolNurturingPeatland from "../pool/nurturing-peatland.js";
 import _poolNyxHerald from "../pool/nyx-herald.js";
 import _poolOathswornVampire from "../pool/oathsworn-vampire.js";
+import _poolObNixilisTheAdversary from "../pool/ob-nixilis-the-adversary.js";
 import _poolObeliskOfJund from "../pool/obelisk-of-jund.js";
 import _poolObliterate from "../pool/obliterate.js";
 import _poolObsessiveSkinner from "../pool/obsessive-skinner.js";
@@ -1636,6 +1637,7 @@ const shard: CardShard = {
     _poolNurturingPeatland,
     _poolNyxHerald,
     _poolOathswornVampire,
+    _poolObNixilisTheAdversary,
     _poolObeliskOfJund,
     _poolObliterate,
     _poolObsessiveSkinner,
