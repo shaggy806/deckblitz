@@ -14936,6 +14936,55 @@ function revealUntilAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "Target opponent exiles cards from the top of their library until they
+  // exile an instant or sorcery card. You may cast that card without paying
+  // its mana cost." (Chaos Wand, Strago and Relm), then Chaos Wand's "put the
+  // exiled cards that weren't cast this way on the bottom of that library in a
+  // random order", or Strago and Relm's "If you cast a creature spell this way,
+  // it gains haste and "At the beginning of the end step, sacrifice this
+  // creature."" (`gainsIf`, `gainsHaste`, `gainsTriggered`).
+  const opponentExiles = /^target opponent exiles cards from the top of their library until they exile an? (.+?) card\.$/i.exec(sentences[i]);
+  if (opponentExiles !== null) {
+    const words = opponentExiles[1].split(/,? or |, /i);
+    const types = words.map((w) => parseTypePhrase(w)?.type);
+    const filter =
+      types.length === 1 ? parseTypePhrase(opponentExiles[1], { cards: true }) : types.every((t) => t !== undefined) ? { typesAnyOf: types } : null;
+    const found = new RegExp(`^you may cast that card${CAST_NOW_TERMS}\\.$`, "i").exec(sentences[i + 1] ?? "");
+    if (filter === null || found === null) return null;
+    let cast = { kind: "cast-now", target: 0, ...castNowTerms(found[1]) };
+    let rest = "stay";
+    let used = 2;
+    const gains = /^if you cast a creature spell this way, it gains haste( until end of turn)?(?: and "(at the beginning of the end step, sacrifice (?:this creature|~)\.)")?\.?$/i.exec(
+      sentences[i + used] ?? "",
+    );
+    if (gains !== null) {
+      cast = {
+        ...cast,
+        ...(gains[2] !== undefined ? { gainsIf: { type: "creature" } } : {}),
+        gainsHaste: gains[1] !== undefined ? true : "indefinitely",
+        ...(gains[2] !== undefined
+          ? {
+              gainsTriggered: [
+                {
+                  trigger: { on: "step-begins", step: "end", who: "any" },
+                  targets: [],
+                  effect: { kind: "sacrifice-source" },
+                  resolve: null,
+                  text: "At the beginning of the end step, sacrifice this creature.",
+                },
+              ],
+            }
+          : {}),
+      };
+      used += 1;
+    }
+    if (/^then put the exiled cards that weren't cast this way on the bottom of that library in a random order\.$/i.test(sentences[i + used] ?? "")) {
+      rest = "bottom-random";
+      used += 1;
+    }
+    const slot = ctx.target("opponent");
+    return { effect: { kind: "reveal-until", whose: slot, filter, exile: true, then: cast, rest }, used };
+  }
   const whole = sentenceRe(`${FROM_TOP} an? ([\\w-]+) card, then put all cards revealed this way into your hand`).exec(sentences[i]);
   if (whole !== null) {
     const filter = parseTypePhrase(whole[1]);

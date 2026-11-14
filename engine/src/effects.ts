@@ -2367,8 +2367,11 @@ export interface CastNowOptions {
    * suspend's creature spell gains haste (`hastyUntilItLeaves`). A suspended
    * card not cast stays exiled, no longer suspended. */
   readonly freeCastOf?: "cascade" | "suspend";
-  /** The `cast-now` effect's `gainsHaste`. */
-  readonly gainsHaste?: true;
+  /** The `cast-now` effect's `gainsHaste`, `gainsIf` and `gainsTriggered`
+   * (see {@link PlayTerms}). */
+  readonly gainsHaste?: true | "indefinitely";
+  readonly gainsIf?: CardFilter;
+  readonly gainsTriggered?: readonly TriggeredAbility[];
   /** Cast it **transformed** — a transforming double-faced card with its back
    * face up on the stack (rule 712.11a); see the `cast-now` effect's
    * `transformed`. */
@@ -15713,7 +15716,9 @@ function offerCastNow(
       ...(spec.bottomAfter === true ? { bottomAfter: true } : {}),
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
-      ...(spec.gainsHaste === true ? { gainsHaste: true as const } : {}),
+      ...(spec.gainsHaste === true || spec.gainsHaste === "indefinitely" ? { gainsHaste: spec.gainsHaste } : {}),
+      ...(spec.gainsIf !== undefined ? { gainsIf: spec.gainsIf } : {}),
+      ...(spec.gainsTriggered !== undefined ? { gainsTriggered: spec.gainsTriggered } : {}),
       ...(spell !== undefined ? { spell } : {}),
       ...(castsLeft !== undefined ? { castsLeft } : {}),
       ...(manaValueLeft !== undefined ? { manaValueLeft } : {}),

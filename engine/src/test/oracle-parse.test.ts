@@ -19808,3 +19808,50 @@ describe("a source dealing damage to this creature, and that source's controller
     });
   });
 });
+
+describe("'target opponent exiles cards … until they exile …. You may cast that card …' (Strago and Relm, Chaos Wand)", () => {
+  it("a creature spell cast this way gains haste and an end-step sacrifice: `gainsIf`, `gainsHaste`, `gainsTriggered`", () => {
+    const strago = parseFace({
+      name: "Test Strago",
+      type_line: "Legendary Creature — Human Wizard",
+      mana_cost: "{2}{R}",
+      oracle_text:
+        'Sketch and Lore — {2}{R}, {T}: Target opponent exiles cards from the top of their library until they exile an instant, sorcery, or creature card. You may cast that card without paying its mana cost. If you cast a creature spell this way, it gains haste and "At the beginning of the end step, sacrifice this creature." Activate only as a sorcery.',
+    });
+    expect(strago.activated[0]).toMatchObject({
+      targets: ["opponent"],
+      effect: {
+        kind: "reveal-until",
+        whose: 0,
+        filter: { typesAnyOf: ["instant", "sorcery", "creature"] },
+        exile: true,
+        rest: "stay",
+        then: {
+          kind: "cast-now",
+          target: 0,
+          free: true,
+          gainsIf: { type: "creature" },
+          gainsHaste: "indefinitely",
+          gainsTriggered: [{ trigger: { on: "step-begins", step: "end", who: "any" }, effect: { kind: "sacrifice-source" } }],
+        },
+      },
+    });
+  });
+
+  it("the rest on the bottom in a random order (Chaos Wand)", () => {
+    const wand = parseFace({
+      name: "Test Wand",
+      type_line: "Artifact",
+      mana_cost: "{3}",
+      oracle_text:
+        "{4}, {T}: Target opponent exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of that library in a random order.",
+    });
+    expect(wand.activated[0]?.effect).toMatchObject({
+      kind: "reveal-until",
+      whose: 0,
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      then: { kind: "cast-now", target: 0, free: true },
+      rest: "bottom-random",
+    });
+  });
+});

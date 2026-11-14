@@ -15215,7 +15215,10 @@ export class Game {
     }
     this.state.objects[cardId].face = face;
     this.journal({ kind: "land-played", player, object: cardId, from });
-    const gainsTriggered = (graveyardTerms ?? underPermission?.terms)?.gainsTriggered;
+    // A land isn't cast, so "if you cast a … spell this way, it gains"
+    // (`gainsIf`) never reaches it.
+    const landTerms = graveyardTerms ?? underPermission?.terms;
+    const gainsTriggered = landTerms?.gainsIf === undefined ? landTerms?.gainsTriggered : undefined;
     this.finishLandPlay({
       kind: "land",
       object: cardId,
@@ -22019,7 +22022,9 @@ export class Game {
       ...(options.bottomAfter === true ? { bottomAfter: true as const } : {}),
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
-      ...(options.gainsHaste === true ? { gainsHaste: true as const } : {}),
+      ...(options.gainsHaste !== undefined ? { gainsHaste: options.gainsHaste } : {}),
+      ...(options.gainsIf !== undefined ? { gainsIf: options.gainsIf } : {}),
+      ...(options.gainsTriggered !== undefined ? { gainsTriggered: options.gainsTriggered } : {}),
     };
     this.castNowProbe = ask;
     const offers: CastSpellOffer[] = [];
@@ -22735,27 +22740,39 @@ export class Game {
     // (rule 400.7h), and so the permanent it becomes, for as long as the
     // effect says even once Thundermane is gone (400.7b, 611.3d; the modifier
     // is a `castRider`, which `moveObject` carries onto the battlefield).
-    const hasteFromEffect = via === "effect" && this.castNowProbe?.gainsHaste === true;
-    if ((permissionTerms?.gainsHaste === true || hasteFromEffect) && effectiveTypes(this.state, this.registry, object).includes("creature")) {
+    // A `cast-now`'s riders (Strago and Relm's "it gains haste and '…'")
+    // are its offer's; a permission's are its terms.
+    const riders = via === "effect" ? this.castNowProbe : permissionTerms;
+    // "If you cast a creature spell this way, it gains …" (`gainsIf`): read
+    // off the spell as it was cast (rule 400.7h).
+    const gainsApply =
+      riders?.gainsIf === undefined || matchesFilter(this.state, this.registry, cardId, riders.gainsIf, { you: player });
+    const gainsHaste = gainsApply ? riders?.gainsHaste : undefined;
+    if (
+      (gainsHaste === true || gainsHaste === "indefinitely") &&
+      effectiveTypes(this.state, this.registry, object).includes("creature")
+    ) {
       object.modifiers.push({
         timestamp: this.freshTimestamp(),
         power: 0,
         toughness: 0,
         keywords: ["haste"],
-        untilEndOfTurn: true,
+        // "It gains haste" with no duration lasts as long as it's that
+        // object (rules 611.2a, 400.7).
+        untilEndOfTurn: gainsHaste === true,
         castRider: true,
       });
       invalidateComputedCache();
     }
     // Serra Paragon's "if you do, it gains '…'": the spell, and the
     // permanent it becomes (a `castRider`, rule 400.7).
-    if (permissionTerms?.gainsTriggered !== undefined) {
+    if (gainsApply && riders?.gainsTriggered !== undefined) {
       object.modifiers.push({
         timestamp: this.freshTimestamp(),
         power: 0,
         toughness: 0,
         keywords: [],
-        grantsTriggered: [...permissionTerms.gainsTriggered],
+        grantsTriggered: [...riders.gainsTriggered],
         untilEndOfTurn: false,
         castRider: true,
       });

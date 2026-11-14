@@ -110,7 +110,14 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  *   a self-replacement effect (rule 614.15): against an exile replacing the
  *   same move, the spell's controller chooses which applies first (616.1 —
  *   `Game.askBottomAfterOrder`).
- * - `gainsHaste`: "if you cast a creature spell this way, it gains haste".
+ * - `gainsHaste`: "if you cast a creature spell this way, it gains haste
+ *   **until end of turn**" (Thundermane Dragon); `"indefinitely"` is "… it
+ *   gains haste" with no duration stated (Strago and Relm), which lasts for
+ *   as long as it's that object (rules 611.2a, 400.7).
+ * - `gainsIf`: "if you cast **a creature spell** this way, it gains …"
+ *   (Strago and Relm): `gainsTriggered` reaches only a spell matching this
+ *   as it's cast (rule 400.7h) — a creature card cast as its noncreature
+ *   face gains nothing. `gainsHaste` asks for a creature spell anyway.
  * - `landsEnterTapped`: "each land played this way enters tapped".
  * - `entersWith`: a permanent spell or land played this way enters with these
  *   counters (Cemetery Prowler's finality counters).
@@ -175,7 +182,8 @@ export interface PlayTerms {
 
   readonly exileAfter?: boolean | "instants-and-sorceries";
   readonly bottomAfter?: true;
-  readonly gainsHaste?: boolean;
+  readonly gainsHaste?: boolean | "indefinitely";
+  readonly gainsIf?: CardFilter;
   readonly landsEnterTapped?: true;
   readonly entersWith?: { readonly kind: string; readonly amount: number };
   readonly gainsTriggered?: readonly TriggeredAbility[];
@@ -312,6 +320,8 @@ export type CastNowTerms = Pick<
   | "reduce"
   | "spendAs"
   | "gainsHaste"
+  | "gainsIf"
+  | "gainsTriggered"
   | "exileAfter"
   | "bottomAfter"
 >;
@@ -376,6 +386,7 @@ const PLAY_GRANT_KEYS = [
   "exileAfter",
   "bottomAfter",
   "gainsHaste",
+  "gainsIf",
   "landsEnterTapped",
   "entersWith",
   "gainsTriggered",
