@@ -51917,6 +51917,9 @@ controlledBy,
     const then: EffectSpec = { kind: "add-counter", target: 0, counter: "+1/+1", amount };
     if (eligible.length === 1) {
       const one = this.splitOneFromStack(eligible[0]);
+      // Chosen, if only one could be (rule 701.39a): "the chosen creature"
+      // (Optimus Prime, Autobot Leader) is `thisWay: "chosen"`.
+      this.emit({ type: "cards-chosen-from-zone", player, objects: [one], chosenOnly: true });
       applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x));
       return;
     }
@@ -52713,6 +52716,9 @@ controlledBy,
       const id = chosen[0];
       if (id !== undefined && this.state.objects[id]?.zone === "battlefield") {
         const one = this.splitOneFromStack(id);
+        // "The chosen creature" (rule 701.39a — Optimus Prime, Autobot
+        // Leader): `thisWay: "chosen"` reads the bolstered one.
+        if (bolster !== undefined) this.emit({ type: "cards-chosen-from-zone", player, objects: [one], chosenOnly: true });
         applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x, 0, undefined, 1, 0, ["battlefield"]));
       }
       if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
