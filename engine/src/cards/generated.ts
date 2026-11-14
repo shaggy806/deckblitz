@@ -1880,6 +1880,7 @@ import _poolAzulaOnTheHunt from "./pool/azula-on-the-hunt.js";
 import _poolAzulaRuthlessFirebender from "./pool/azula-ruthless-firebender.js";
 import _poolAzureBeastbinder from "./pool/azure-beastbinder.js";
 import _poolAzureDrake from "./pool/azure-drake.js";
+import _poolAzureFleetAdmiral from "./pool/azure-fleet-admiral.js";
 import _poolAzureMage from "./pool/azure-mage.js";
 import _poolAzusaLostButSeeking from "./pool/azusa-lost-but-seeking.js";
 import _poolAzusasManyJourneys from "./pool/azusas-many-journeys.js";
@@ -5912,6 +5913,7 @@ import _poolCurseOfShakenFaith from "./pool/curse-of-shaken-faith.js";
 import _poolCurseOfShallowGraves from "./pool/curse-of-shallow-graves.js";
 import _poolCurseOfSilence from "./pool/curse-of-silence.js";
 import _poolCurseOfStalkedPrey from "./pool/curse-of-stalked-prey.js";
+import _poolCurseOfSurveillance from "./pool/curse-of-surveillance.js";
 import _poolCurseOfTheBloodyTome from "./pool/curse-of-the-bloody-tome.js";
 import _poolCurseOfTheCabal from "./pool/curse-of-the-cabal.js";
 import _poolCurseOfTheForsaken from "./pool/curse-of-the-forsaken.js";
@@ -5919,6 +5921,7 @@ import _poolCurseOfTheNightlyHunt from "./pool/curse-of-the-nightly-hunt.js";
 import _poolCurseOfTheRestlessDead from "./pool/curse-of-the-restless-dead.js";
 import _poolCurseOfTheSwine from "./pool/curse-of-the-swine.js";
 import _poolCurseOfTheWerefox from "./pool/curse-of-the-werefox.js";
+import _poolCurseOfThirst from "./pool/curse-of-thirst.js";
 import _poolCurseOfUnbinding from "./pool/curse-of-unbinding.js";
 import _poolCurseOfVengeance from "./pool/curse-of-vengeance.js";
 import _poolCurseOfVerbosity from "./pool/curse-of-verbosity.js";
@@ -12586,6 +12589,7 @@ import _poolHeirOfTheWilds from "./pool/heir-of-the-wilds.js";
 import _poolHeirToTheNight from "./pool/heir-to-the-night.js";
 import _poolHeirloomAuntie from "./pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "./pool/heirloom-blade.js";
+import _poolHeirloomEpic from "./pool/heirloom-epic.js";
 import _poolHeirloomMirror from "./pool/heirloom-mirror.js";
 import _poolHeirsOfStromkirk from "./pool/heirs-of-stromkirk.js";
 import _poolHekmaSentinels from "./pool/hekma-sentinels.js";
@@ -35041,6 +35045,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAzulaRuthlessFirebender,
   _poolAzureBeastbinder,
   _poolAzureDrake,
+  _poolAzureFleetAdmiral,
   _poolAzureMage,
   _poolAzusaLostButSeeking,
   _poolAzusasManyJourneys,
@@ -39073,6 +39078,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfShallowGraves,
   _poolCurseOfSilence,
   _poolCurseOfStalkedPrey,
+  _poolCurseOfSurveillance,
   _poolCurseOfTheBloodyTome,
   _poolCurseOfTheCabal,
   _poolCurseOfTheForsaken,
@@ -39080,6 +39086,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfTheRestlessDead,
   _poolCurseOfTheSwine,
   _poolCurseOfTheWerefox,
+  _poolCurseOfThirst,
   _poolCurseOfUnbinding,
   _poolCurseOfVengeance,
   _poolCurseOfVerbosity,
@@ -45747,6 +45754,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeirToTheNight,
   _poolHeirloomAuntie,
   _poolHeirloomBlade,
+  _poolHeirloomEpic,
   _poolHeirloomMirror,
   _poolHeirsOfStromkirk,
   _poolHekmaSentinels,
@@ -68215,6 +68223,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/azula-ruthless-firebender": _poolAzulaRuthlessFirebender,
   "pool/azure-beastbinder": _poolAzureBeastbinder,
   "pool/azure-drake": _poolAzureDrake,
+  "pool/azure-fleet-admiral": _poolAzureFleetAdmiral,
   "pool/azure-mage": _poolAzureMage,
   "pool/azusa-lost-but-seeking": _poolAzusaLostButSeeking,
   "pool/azusas-many-journeys": _poolAzusasManyJourneys,
@@ -72247,6 +72256,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-shallow-graves": _poolCurseOfShallowGraves,
   "pool/curse-of-silence": _poolCurseOfSilence,
   "pool/curse-of-stalked-prey": _poolCurseOfStalkedPrey,
+  "pool/curse-of-surveillance": _poolCurseOfSurveillance,
   "pool/curse-of-the-bloody-tome": _poolCurseOfTheBloodyTome,
   "pool/curse-of-the-cabal": _poolCurseOfTheCabal,
   "pool/curse-of-the-forsaken": _poolCurseOfTheForsaken,
@@ -72254,6 +72264,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-the-restless-dead": _poolCurseOfTheRestlessDead,
   "pool/curse-of-the-swine": _poolCurseOfTheSwine,
   "pool/curse-of-the-werefox": _poolCurseOfTheWerefox,
+  "pool/curse-of-thirst": _poolCurseOfThirst,
   "pool/curse-of-unbinding": _poolCurseOfUnbinding,
   "pool/curse-of-vengeance": _poolCurseOfVengeance,
   "pool/curse-of-verbosity": _poolCurseOfVerbosity,
@@ -78921,6 +78932,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heir-to-the-night": _poolHeirToTheNight,
   "pool/heirloom-auntie": _poolHeirloomAuntie,
   "pool/heirloom-blade": _poolHeirloomBlade,
+  "pool/heirloom-epic": _poolHeirloomEpic,
   "pool/heirloom-mirror": _poolHeirloomMirror,
   "pool/heirs-of-stromkirk": _poolHeirsOfStromkirk,
   "pool/hekma-sentinels": _poolHekmaSentinels,

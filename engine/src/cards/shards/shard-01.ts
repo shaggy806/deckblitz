@@ -363,6 +363,7 @@ import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeidarRimewindMaster from "../pool/heidar-rimewind-master.js";
 import _poolHeirOfTheAncientFang from "../pool/heir-of-the-ancient-fang.js";
+import _poolHeirloomEpic from "../pool/heirloom-epic.js";
 import _poolHellBentRaider from "../pool/hell-bent-raider.js";
 import _poolHeraldOfAnguish from "../pool/herald-of-anguish.js";
 import _poolHeroesOfTheRevel from "../pool/heroes-of-the-revel.js";
@@ -1380,6 +1381,7 @@ const shard: CardShard = {
     _poolHedronDetonator,
     _poolHeidarRimewindMaster,
     _poolHeirOfTheAncientFang,
+    _poolHeirloomEpic,
     _poolHellBentRaider,
     _poolHeraldOfAnguish,
     _poolHeroesOfTheRevel,

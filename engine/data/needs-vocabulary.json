@@ -16604,6 +16604,10 @@
    "family": "effect:prevent-combat-damage-by-target",
    "example": "Sewers of Estark: 'prevent all combat damage that would be dealt this combat by it and each creature it's blocking' — a set fixed on resolution, for this combat."
   },
+  "zone:choose-play-permission-any-zone": {
+   "family": "zone:cast-from-library-top-once-each-turn",
+   "example": "The Fourth Doctor: which permission a play from the library top (or any zone but a graveyard) is made under is the engine's pick (chosenPlayOption), so beside Courser of Kruphix, Crystal Skull or Vizier the Doctor's once-a-turn permission and its Food rider are never used."
+  },
   "effect:store-die-results": {
    "family": "mechanic:dice-rolling",
    "example": "Centaur of Attention: \"roll five six-sided dice and store those results on it\", reroll any number of them, +X/+X for the most that match."

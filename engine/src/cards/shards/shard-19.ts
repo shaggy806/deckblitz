@@ -211,6 +211,7 @@ import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolCunning from "../pool/cunning.js";
 import _poolCurseOfFoolsWisdom from "../pool/curse-of-fools-wisdom.js";
+import _poolCurseOfSurveillance from "../pool/curse-of-surveillance.js";
 import _poolCursedRonin from "../pool/cursed-ronin.js";
 import _poolCylianSunsinger from "../pool/cylian-sunsinger.js";
 import _poolCytoplastRootKin from "../pool/cytoplast-root-kin.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolCunningSurvivor,
     _poolCunning,
     _poolCurseOfFoolsWisdom,
+    _poolCurseOfSurveillance,
     _poolCursedRonin,
     _poolCylianSunsinger,
     _poolCytoplastRootKin,

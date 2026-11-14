@@ -58,6 +58,7 @@ import _poolAvengersDisassembled from "../pool/avengers-disassembled.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAyeshaTanakaArmorer from "../pool/ayesha-tanaka-armorer.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
+import _poolAzureFleetAdmiral from "../pool/azure-fleet-admiral.js";
 import _poolBacklash from "../pool/backlash.js";
 import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
@@ -1095,6 +1096,7 @@ const shard: CardShard = {
     _poolAvengersQuinjet,
     _poolAyeshaTanakaArmorer,
     _poolAysenAbbey,
+    _poolAzureFleetAdmiral,
     _poolBacklash,
     _poolBadlands,
     _poolBalduvianBears,

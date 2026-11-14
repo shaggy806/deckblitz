@@ -57,6 +57,14 @@
    ],
    "size": "major",
    "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "The Fourth Doctor",
+   "needs": [
+    "zone:choose-play-permission-any-zone"
+   ],
+   "size": "small",
+   "why": "Re-keyed overnight 2026-11-14: its rider is expressible (a plays-card trigger with underThis), but the engine picks which permission a library-top play uses, and prefers one that spends nothing — beside Courser of Kruphix or Crystal Skull the Doctor's permission and its Food never come. The card and its test are saved at engine/.cache/patches/fourth-doctor.patch."
   }
  ]
 }
