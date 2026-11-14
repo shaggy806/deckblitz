@@ -122,8 +122,10 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  *   triggers as the spell is cast, its controller the one who was given it
  *   and casts it, its trigger object the spell, and its `"source"` the
  *   permanent whose effect gave the permission, in the stint it had then
- *   (`by`, bound by the engine as the permission is given). One card's
- *   permission only (`grant-play`), spells only.
+ *   (`by`, bound by the engine as the permission is given). A permission
+ *   kept on the card only (`grant-play`, `impulse-exile`, an `exile`'s
+ *   `mayPlay`), spells only: The Ruinous Powers' "when you cast a spell this
+ *   way, its owner loses life equal to its mana value" is an `impulse-exile`'s.
  */
 export interface PlayTerms {
   readonly play?: boolean;

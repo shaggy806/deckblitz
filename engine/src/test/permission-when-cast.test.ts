@@ -11,7 +11,26 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, activate, cast, lands, life, named, nextTurn, ref, settle, spawn, table, toGraveyard, zone } from "./harness.js";
+import {
+  A,
+  B,
+  C,
+  D,
+  activate,
+  cast,
+  lands,
+  life,
+  named,
+  nextTurn,
+  ref,
+  settle,
+  spawn,
+  table,
+  toGraveyard,
+  toLibrary,
+  toStep,
+  zone,
+} from "./harness.js";
 
 const granted = (game: Game, id: ObjectId) => game.state.objects[id].modifiers.flatMap((m) => m.grantsActivated ?? []);
 
@@ -80,5 +99,87 @@ describe("Havengul Lich", () => {
     cast(game, sorcerer, { via: "graveyard-permission" });
     expect(zone(game, sorcerer)).toBe("battlefield");
     expect(granted(game, lich)).toHaveLength(0);
+  });
+});
+
+/**
+ * The Ruinous Powers: the same `whenCast` on an impulse permission over an
+ * opponent's library top, lasting until end of turn — "when you cast a spell
+ * this way, its owner loses life equal to its mana value", read on the stack.
+ */
+describe("The Ruinous Powers", () => {
+  /** To alice's next upkeep, with `top` (bob's) on top of bob's library and
+   * the upkeep trigger resolved. */
+  function upkeepWith(game: Game, top: string): ObjectId {
+    nextTurn(game); // bob's turn: he has drawn already
+    const card = toLibrary(game, top, B);
+    toStep(game, "upkeep");
+    settle(game);
+    return card;
+  }
+
+  it("exiles bob's top card; cast this way, with any colour of mana, bob loses life equal to its mana value", () => {
+    const { game } = table();
+    spawn(game, "The Ruinous Powers");
+    lands(game, "Swamp", 1);
+    const bolt = upkeepWith(game, "Lightning Bolt");
+    expect(zone(game, bolt)).toBe("exile");
+    // Black mana for a red spell (spend as though any colour).
+    cast(game, bolt, { via: "impulse", targets: [ref(B)], settle: false });
+    expect(game.state.zones.shared.stack).toHaveLength(2);
+    settle(game);
+    expect(life(game, B)).toBe(20 - 3 - 1);
+    expect(life(game, A)).toBe(20);
+  });
+
+  it("an X spell's mana value counts its X, read on the stack", () => {
+    const { game } = table();
+    spawn(game, "The Ruinous Powers");
+    lands(game, "Swamp", 4);
+    const blaze = upkeepWith(game, "Blaze");
+    toStep(game, "precombat-main");
+    cast(game, blaze,{ via: "impulse", x: 3, targets: [ref(B)] });
+    expect(life(game, B)).toBe(20 - 3 - 4);
+  });
+
+  it("a land played this way isn't cast: nobody loses life", () => {
+    const { game } = table();
+    spawn(game, "The Ruinous Powers");
+    const land = upkeepWith(game, "Mountain");
+    toStep(game, "precombat-main");
+    game.dispatch({ type: "play-land", player: A, card: land });
+    settle(game);
+    expect(zone(game, land)).toBe("battlefield");
+    expect(life(game, B)).toBe(20);
+  });
+
+  it("the permission ends with the turn", () => {
+    const { game } = table();
+    spawn(game, "The Ruinous Powers");
+    lands(game, "Swamp", 1);
+    const bolt = upkeepWith(game, "Lightning Bolt");
+    const castable = () => game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === bolt);
+    expect(castable()).toBe(true);
+    nextTurn(game);
+    game.advanceUntil((s) => s.priority.holder === A);
+    expect(zone(game, bolt)).toBe("exile");
+    expect(castable()).toBe(false);
+  });
+
+  it("at more players, the card comes from one of the opponents, and that owner loses the life", () => {
+    const { game } = table({ players: 4 });
+    spawn(game, "The Ruinous Powers");
+    lands(game, "Swamp", 2);
+    nextTurn(game);
+    nextTurn(game);
+    nextTurn(game); // dave's turn: everyone has drawn
+    const tops = [B, C, D].map((p) => toLibrary(game, "Shock", p));
+    toStep(game, "upkeep");
+    settle(game);
+    const exiled = tops.filter((id) => zone(game, id) === "exile");
+    expect(exiled).toHaveLength(1);
+    const owner = game.state.objects[exiled[0]].owner;
+    cast(game, exiled[0], { via: "impulse", targets: [ref(owner)] });
+    expect(life(game, owner)).toBe(20 - 2 - 1);
   });
 });

@@ -2567,7 +2567,8 @@
   "trigger:loses-coin-flip",
   "zone:graveyard-cast-as-adventure",
   "mechanic:mutate-from-graveyard",
-  "keyword:bestow-extensions"
+  "keyword:bestow-extensions",
+  "trigger:cast-this-way-from-lasting-permission"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
