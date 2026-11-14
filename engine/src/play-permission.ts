@@ -106,9 +106,10 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  *   `"instants-and-sorceries"` only for those (Scholar of the Lost Trove).
  * - `bottomAfter`: "if that spell would be put into a graveyard, put it on the
  *   bottom of its owner's library instead" (Quintorius, Loremaster; Kylox's
- *   Voltstrider): only while it's a spell (a permanent it became isn't), and
- *   ahead of an exile that would replace the same move (rule 616.1, its
- *   controller's pick — see `Game.moveObjectUncached`).
+ *   Voltstrider): only while it's a spell (a permanent it became isn't). Not
+ *   a self-replacement effect (rule 614.15): against an exile replacing the
+ *   same move, the spell's controller chooses which applies first (616.1 —
+ *   `Game.askBottomAfterOrder`).
  * - `gainsHaste`: "if you cast a creature spell this way, it gains haste".
  * - `landsEnterTapped`: "each land played this way enters tapped".
  * - `entersWith`: a permanent spell or land played this way enters with these

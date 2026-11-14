@@ -30761,7 +30761,7 @@ export class Game {
       // graveyard.
       if (object.isCopy) {
         this.ceaseSpellCopy(id);
-      } else {
+      } else if (!this.askBottomAfterOrder(id)) {
         this.moveObject(id, "graveyard");
       }
       return;
@@ -31032,14 +31032,16 @@ export class Game {
     // of going to the graveyard.
     const adventure = this.frontFaceDef(id).adventure && (object.face ?? 0) === 1;
     // The other replacement, in the words of a rule 616.1 choice below: a
-    // `bottomAfter` cast's library bottom comes ahead of an exile
-    // (`moveObjectUncached`), unless flashback's or aftermath's exile catches
-    // the card on its way to the library too.
+    // `bottomAfter` cast's library bottom, an exile, or — both of them still
+    // to apply — either, asked next (`askBottomAfterOrder`, 616.1f).
+    const bottomToo = object.bottomIfWouldGoToGraveyard === true;
     const otherFirst = adventure
       ? "Exile it on an adventure instead"
-      : object.bottomIfWouldGoToGraveyard === true && object.castVia !== "flashback" && !this.aftermathExiles(object)
-        ? "Apply the other replacement first: put it on the bottom of its owner's library"
-        : "Apply the other replacement first: exile it";
+      : bottomToo && this.exileReplacesSpellGraveyardMove(object)
+        ? "Apply another replacement first: the bottom of its owner's library or exile"
+        : bottomToo
+          ? "Apply the other replacement first: put it on the bottom of its owner's library"
+          : "Apply the other replacement first: exile it";
     // Soulfire Grand Master's "put that card into your hand instead of into
     // your graveyard as it resolves" (rule 614.1a): as Feather's below, only
     // for a card its owner would put into their own graveyard, and any other
@@ -31172,6 +31174,7 @@ export class Game {
         else this.moveObject(id, "hand");
       } else {
         const controller = object.controller;
+        if (!def.exileOnResolve && this.askBottomAfterOrder(id)) return;
         this.moveObject(id, def.exileOnResolve ? "exile" : "graveyard");
         if (this.state.objects[id]?.zone === "graveyard") this.queueHauntSpell(id, controller);
       }
@@ -31355,9 +31358,70 @@ export class Game {
   /** The answer to the rule 616.1 choice `leaveStackAfterResolving` raised:
    * Feather's replacement first (`feather`), or the other — after which
    * Feather's no longer applies, as the card isn't going to the graveyard. */
-  private finishExiledAsItResolves(id: ObjectId, feather: boolean, intoHand = false): void {
+  /** Whether something would exile the spell `object` instead of letting it
+   * be put into a graveyard from the stack: a Rest in Peace, the spell's own
+   * flashback, harmonize, aftermath or disturb exile, a Kess-style
+   * permission's. */
+  private exileReplacesSpellGraveyardMove(object: GameObject): boolean {
+    return (
+      object.castVia === "flashback" ||
+      object.castVia === "harmonize" ||
+      this.aftermathExiles(object) ||
+      this.exilesItselfInstead(object) ||
+      object.exileIfWouldGoToGraveyard === true ||
+      this.graveyardIsReplacedWithExile(object.id, false)
+    );
+  }
+
+  /**
+   * A spell cast under a `bottomAfter` permission (Quintorius, Loremaster)
+   * that would be put into a graveyard from the stack — resolved, or with no
+   * legal targets left — while an exile would replace the same move: neither
+   * is a self-replacement effect (rule 614.15: the library bottom is an effect
+   * of the ability that gave the permission, not of the spell's own
+   * instructions), so the spell's controller chooses which applies first (rule
+   * 616.1, 616.1e), and the other then no longer does (616.1f). Asked as a
+   * `choose-modes`, the spell waiting on the stack for the answer
+   * (`finishExiledAsItResolves`). Returns whether it asked. A spell countered
+   * by another's resolution isn't asked: `moveObjectUncached` puts it on the
+   * bottom (docs/engine-gaps.md).
+   */
+  private askBottomAfterOrder(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object?.zone !== "stack" || object.bottomIfWouldGoToGraveyard !== true) return false;
+    if (!this.exileReplacesSpellGraveyardMove(object)) return false;
+    this.beginModesChoice(id, object.controller, 0, 1, 1, [
+      {
+        text: "Put it on the bottom of its owner's library",
+        effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: true, bottom: true } },
+      },
+      {
+        text: "Apply the other replacement first: exile it",
+        effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: false, bottom: true } },
+      },
+    ]);
+    return true;
+  }
+
+  private finishExiledAsItResolves(id: ObjectId, feather: boolean, intoHand = false, bottom = false): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return;
+    // The same choice over a `bottomAfter` cast's library bottom and an exile
+    // (`askBottomAfterOrder`): `feather` is "the library first". Either way
+    // the other no longer applies once the card isn't going to a graveyard
+    // (rule 616.1f) — flashback's "anywhere else" aside, which `moveObject`
+    // still applies to the library move.
+    if (bottom) {
+      if (feather) {
+        this.moveObject(id, "library", { libraryPlacement: "bottom" });
+        this.placeInLibrary(id, "bottom");
+      } else {
+        object.bottomIfWouldGoToGraveyard = undefined;
+        this.moveObject(id, "graveyard");
+      }
+      object.targets = null;
+      return;
+    }
     // The same choice over Soulfire Grand Master's replacement: `feather` is
     // "this one first".
     if (intoHand) {
@@ -42220,8 +42284,8 @@ controlledBy,
           ...(how?.linked === true && stint !== undefined ? { link: { source, zoneChangeCount: stint } } : {}),
         };
       },
-      finishExiledAsItResolves: (spell, feather, intoHand) =>
-        this.finishExiledAsItResolves(spell, feather, intoHand === true),
+      finishExiledAsItResolves: (spell, feather, intoHand, bottom) =>
+        this.finishExiledAsItResolves(spell, feather, intoHand === true, bottom === true),
       additionalCombat: (afterThisPhase, how) => {
         // "After the second main phase this turn": nothing once it's over.
         if (how?.afterSecondMain === true) {
@@ -64932,12 +64996,14 @@ controlledBy,
     // "If that spell would be put into a graveyard, put it on the bottom of
     // its owner's library instead" (Quintorius, Loremaster — `PlayTerms
     // .bottomAfter`): only while it's a spell, from the stack — resolved,
-    // countered or with no legal targets left. Ahead of an exile that would
-    // replace the same move (Rest in Peace, Leyline of the Void, Dauthi
-    // Voidwalker's void counter), as Blightsteel's shuffle above is: of the
-    // two, its controller would pick the library (rule 616.1), where the card
-    // is still theirs to find again. Flashback's "exile it instead of putting
-    // it anywhere else" (702.34a) still catches it on its way to the library.
+    // countered or with no legal targets left. Where an exile would replace
+    // the same move too (Rest in Peace, Leyline of the Void), its controller
+    // chooses which applies first (rule 616.1): asked before the move as it
+    // resolves or loses its targets (`askBottomAfterOrder`), so a spell that
+    // gets here with one competing was countered by another's resolution,
+    // where nothing can be asked — it goes to the library unasked
+    // (docs/engine-gaps.md). Flashback's "exile it instead of putting it
+    // anywhere else" (702.34a) still catches it on its way to the library.
     if (to === "graveyard" && object.zone === "stack" && object.bottomIfWouldGoToGraveyard === true) {
       const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: "bottom" });
       if (moved) this.placeInLibrary(id, "bottom");

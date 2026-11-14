@@ -155,13 +155,61 @@ describe("Quintorius, Loremaster", () => {
     expect(onBottom(game, exiled)).toBe(true);
   });
 
-  it("goes to the library ahead of Rest in Peace's exile", () => {
-    const { game, quintorius, exiled } = exiledWithQuintorius("Lightning Bolt");
+  it("with Rest in Peace out, its controller chooses which applies first (rules 614.15, 616.1)", () => {
+    for (const [answer, where] of [
+      [0, "library"],
+      [1, "exile"],
+    ] as const) {
+      const { game, quintorius, exiled, a } = exiledWithQuintorius("Lightning Bolt");
+      lands(game, "Plateau", 3);
+      spawn(game, "Rest in Peace", B);
+      const spirit = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].isToken === true)!;
+      activate(game, quintorius, 0, { targets: [ref(exiled)], sacrifice: spirit });
+      let asked: readonly string[] = [];
+      a.chooseModesFn = (_view, _min, _max, texts) => {
+        asked = texts;
+        return [answer];
+      };
+      castFromExile(game, exiled, [ref(B)]);
+      expect(life(game, B)).toBe(17);
+      expect(asked).toHaveLength(2);
+      expect(asked[0]).toMatch(/bottom of its owner's library/);
+      expect(zone(game, exiled)).toBe(where);
+      if (where === "library") expect(onBottom(game, exiled)).toBe(true);
+    }
+  });
+
+  it("losing its target with Rest in Peace out asks the same", () => {
+    const { game, quintorius, exiled, a } = exiledWithQuintorius("Lightning Bolt");
     lands(game, "Plateau", 3);
     spawn(game, "Rest in Peace", B);
+    const bears = spawn(game, "Grizzly Bears", B);
     const spirit = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].isToken === true)!;
     activate(game, quintorius, 0, { targets: [ref(exiled)], sacrifice: spirit });
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return [1];
+    };
+    castFromExile(game, exiled, [ref(bears)], false);
+    game.debugMove(bears, "graveyard");
+    settle(game);
+    expect(asked).toBe(1);
+    expect(zone(game, exiled)).toBe("exile");
+  });
+
+  it("nothing is asked with no exile competing", () => {
+    const { game, quintorius, exiled, a } = exiledWithQuintorius("Lightning Bolt");
+    lands(game, "Plateau", 3);
+    const spirit = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].isToken === true)!;
+    activate(game, quintorius, 0, { targets: [ref(exiled)], sacrifice: spirit });
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return [0];
+    };
     castFromExile(game, exiled, [ref(B)]);
+    expect(asked).toBe(0);
     expect(zone(game, exiled)).toBe("library");
   });
 

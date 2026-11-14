@@ -8002,8 +8002,16 @@ export type EffectSpec =
       readonly linked?: true;
       /** Only the engine sets this: the answer to that rule 616.1 choice,
        * applied to the spell `spell` that has just resolved — `true` to
-       * apply this replacement first, `false` to let the other. */
-      readonly applyFirst?: { readonly spell: ObjectId; readonly feather: boolean; readonly intoHand?: true };
+       * apply this replacement first, `false` to let the other. `intoHand`:
+       * the choice was over Soulfire Grand Master's instead; `bottom`: over
+       * a `bottomAfter` cast's library bottom against an exile (the spell
+       * resolved or lost its targets) — `true` the library. */
+      readonly applyFirst?: {
+        readonly spell: ObjectId;
+        readonly feather: boolean;
+        readonly intoHand?: true;
+        readonly bottom?: true;
+      };
     }
   | {
       /** After this (post-combat) main phase there is an additional combat
@@ -13479,7 +13487,7 @@ export interface EffectApi {
    * 0 if it wasn't cast. */
   sourceAsCast(fact: number): number;
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
-  finishExiledAsItResolves(spell: ObjectId, feather: boolean, intoHand?: true): void;
+  finishExiledAsItResolves(spell: ObjectId, feather: boolean, intoHand?: true, bottom?: true): void;
   /** Shuffle the controller's library — or `player`'s — see the
    * `shuffle-library` {@link EffectSpec}; `exceptTop` cards stay on top. */
   shuffleLibrary(player?: PlayerId, exceptTop?: number): void;
@@ -20886,7 +20894,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "exile-spell-as-it-resolves":
       if (spec.applyFirst !== undefined) {
-        ctx.finishExiledAsItResolves(spec.applyFirst.spell, spec.applyFirst.feather, spec.applyFirst.intoHand);
+        ctx.finishExiledAsItResolves(
+          spec.applyFirst.spell,
+          spec.applyFirst.feather,
+          spec.applyFirst.intoHand,
+          spec.applyFirst.bottom,
+        );
       }
       else {
         ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true, spec.timeCounters, {
