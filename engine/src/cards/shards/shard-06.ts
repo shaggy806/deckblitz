@@ -879,6 +879,7 @@ import _poolThunderSpirit from "../pool/thunder-spirit.js";
 import _poolThunderingRaiju from "../pool/thundering-raiju.js";
 import _poolThundermare from "../pool/thundermare.js";
 import _poolThwip from "../pool/thwip.js";
+import _poolTibaltCosmicImpostor from "../pool/tibalt-cosmic-impostor.js";
 import _poolTidechannelPathway from "../pool/tidechannel-pathway.js";
 import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
@@ -1902,6 +1903,7 @@ const shard: CardShard = {
     _poolThunderingRaiju,
     _poolThundermare,
     _poolThwip,
+    _poolTibaltCosmicImpostor,
     _poolTidechannelPathway,
     _poolTidusYunasGuardian,
     _poolTimeSieve,

@@ -53,6 +53,7 @@ import _poolArdentElectromancer from "../pool/ardent-electromancer.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
 import _poolArlinnTheMoonsFury from "../pool/arlinn-the-moons-fury.js";
 import _poolArthurMarigoldKnight from "../pool/arthur-marigold-knight.js";
+import _poolArvinoxTheMindFlail from "../pool/arvinox-the-mind-flail.js";
 import _poolArzakon from "../pool/arzakon.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
 import _poolAshayaSoulOfTheWild from "../pool/ashaya-soul-of-the-wild.js";
@@ -1065,6 +1066,7 @@ const shard: CardShard = {
     _poolArdentRecruit,
     _poolArlinnTheMoonsFury,
     _poolArthurMarigoldKnight,
+    _poolArvinoxTheMindFlail,
     _poolArzakon,
     _poolAscendantAcolyte,
     _poolAshayaSoulOfTheWild,

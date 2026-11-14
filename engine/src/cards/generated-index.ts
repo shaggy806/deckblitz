@@ -1322,6 +1322,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Thraben Militia": "https://cards.scryfall.io/art_crop/back/5/8/58ae9cbc-d88d-42df-ab76-63ab5d05c023.jpg",
   "Throne of Death": "https://cards.scryfall.io/art_crop/back/9/d/9dfdb73d-b001-4a59-b79e-8c8c1baea116.jpg",
   "Throw a Line": "https://cards.scryfall.io/art_crop/back/2/7/27912e61-97ef-406b-bb88-4fe89a54726e.jpg",
+  "Tibalt, Cosmic Impostor": "https://cards.scryfall.io/art_crop/back/e/a/ea7e4c65-b4c4-4795-9475-3cba71c50ea5.jpg",
   "Tidechannel Pathway": "https://cards.scryfall.io/art_crop/back/b/6/b6de14ae-0132-4261-af00-630bf15918cd.jpg",
   "Till and Tend": "https://cards.scryfall.io/art_crop/back/8/0/804589b7-3ef9-473d-97cc-c61a2d41f70d.jpg",
   "Timber Shredder": "https://cards.scryfall.io/art_crop/back/3/4/34898af1-ebe6-4ede-81be-23fd62844480.jpg",

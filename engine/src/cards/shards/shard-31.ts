@@ -150,6 +150,7 @@ import _poolChaos from "../pool/chaos.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolCharmbreakerDevils from "../pool/charmbreaker-devils.js";
+import _poolChefsKiss from "../pool/chefs-kiss.js";
 import _poolChimericIdol from "../pool/chimeric-idol.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
 import _poolChorusOfMight from "../pool/chorus-of-might.js";
@@ -1236,6 +1237,7 @@ const shard: CardShard = {
     _poolChargeOfTheMites,
     _poolCharityExtractor,
     _poolCharmbreakerDevils,
+    _poolChefsKiss,
     _poolChimericIdol,
     _poolChitteringDispatcher,
     _poolChorusOfMight,

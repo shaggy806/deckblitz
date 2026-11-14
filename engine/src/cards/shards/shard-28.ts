@@ -985,6 +985,7 @@ import _poolWeightRoom from "../pool/weight-room.js";
 import _poolWellOfDiscovery from "../pool/well-of-discovery.js";
 import _poolWestgateRegent from "../pool/westgate-regent.js";
 import _poolWhirlermaker from "../pool/whirlermaker.js";
+import _poolWhirlwindDenial from "../pool/whirlwind-denial.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
@@ -2028,6 +2029,7 @@ const shard: CardShard = {
     _poolWellOfDiscovery,
     _poolWestgateRegent,
     _poolWhirlermaker,
+    _poolWhirlwindDenial,
     _poolWhisperAgent,
     _poolWhiteOrchidPhantom,
     _poolWildHunger,

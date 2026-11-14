@@ -287,6 +287,7 @@ import _poolFanFavorite from "../pool/fan-favorite.js";
 import _poolFarAway from "../pool/far-away.js";
 import _poolFateTransfer from "../pool/fate-transfer.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
+import _poolFblthpLostOnTheRange from "../pool/fblthp-lost-on-the-range.js";
 import _poolFblthpTheLost from "../pool/fblthp-the-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
 import _poolFearlessLiberator from "../pool/fearless-liberator.js";
@@ -1330,6 +1331,7 @@ const shard: CardShard = {
     _poolFarAway,
     _poolFateTransfer,
     _poolFblthpImpossiblyLost,
+    _poolFblthpLostOnTheRange,
     _poolFblthpTheLost,
     _poolFearOfDeath,
     _poolFearlessLiberator,

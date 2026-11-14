@@ -949,6 +949,7 @@ import _poolUrzasRage from "../pool/urzas-rage.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolUtilityKnife from "../pool/utility-knife.js";
 import _poolValentinDeanOfTheVein from "../pool/valentin-dean-of-the-vein.js";
+import _poolValkiGodOfLies from "../pool/valki-god-of-lies.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
 import _poolVampireEnvoy from "../pool/vampire-envoy.js";
 import _poolVampireGourmand from "../pool/vampire-gourmand.js";
@@ -1978,6 +1979,7 @@ const shard: CardShard = {
     _poolUrzasWorkshop,
     _poolUtilityKnife,
     _poolValentinDeanOfTheVein,
+    _poolValkiGodOfLies,
     _poolValorousStance,
     _poolVampireEnvoy,
     _poolVampireGourmand,

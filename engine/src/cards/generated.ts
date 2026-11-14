@@ -1401,6 +1401,7 @@ import _poolArtisticProcess from "./pool/artistic-process.js";
 import _poolArtisticRefusal from "./pool/artistic-refusal.js";
 import _poolArtistsTalent from "./pool/artists-talent.js";
 import _poolArvadTheCursed from "./pool/arvad-the-cursed.js";
+import _poolArvinoxTheMindFlail from "./pool/arvinox-the-mind-flail.js";
 import _poolArwenMortalQueen from "./pool/arwen-mortal-queen.js";
 import _poolArwenUndomiel from "./pool/arwen-undomiel.js";
 import _poolArwenWeaverOfHope from "./pool/arwen-weaver-of-hope.js";
@@ -4492,6 +4493,7 @@ import _poolCheekyHouseMouse from "./pool/cheeky-house-mouse.js";
 import _poolCheerfulOsteomancer from "./pool/cheerful-osteomancer.js";
 import _poolCheeringCrowd from "./pool/cheering-crowd.js";
 import _poolCheeringFanatic from "./pool/cheering-fanatic.js";
+import _poolChefsKiss from "./pool/chefs-kiss.js";
 import _poolChekovAndMccoy from "./pool/chekov-and-mccoy.js";
 import _poolChelonianTackle from "./pool/chelonian-tackle.js";
 import _poolChemistersInsight from "./pool/chemisters-insight.js";
@@ -9168,6 +9170,7 @@ import _poolFavoredHoplite from "./pool/favored-hoplite.js";
 import _poolFavoredOfIroas from "./pool/favored-of-iroas.js";
 import _poolFblthpImpossiblyLost from "./pool/fblthp-impossibly-lost.js";
 import _poolFblthpKnowsTheWay from "./pool/fblthp-knows-the-way.js";
+import _poolFblthpLostOnTheRange from "./pool/fblthp-lost-on-the-range.js";
 import _poolFblthpTheLost from "./pool/fblthp-the-lost.js";
 import _poolFearFireFoes from "./pool/fear-fire-foes.js";
 import _poolFearOfBeingHunted from "./pool/fear-of-being-hunted.js";
@@ -27973,6 +27976,7 @@ import _poolTheSwordOfKahless from "./pool/the-sword-of-kahless.js";
 import _poolTheTabernacleAtPendrellVale from "./pool/the-tabernacle-at-pendrell-vale.js";
 import _poolTheTaleOfTamiyo from "./pool/the-tale-of-tamiyo.js";
 import _poolTheTarrasque from "./pool/the-tarrasque.js";
+import _poolTheTemporalAnchor from "./pool/the-temporal-anchor.js";
 import _poolTheTenRings from "./pool/the-ten-rings.js";
 import _poolTheTenthDoctor from "./pool/the-tenth-doctor.js";
 import _poolTheTerrorOfSerpentsPass from "./pool/the-terror-of-serpents-pass.js";
@@ -28373,6 +28377,7 @@ import _poolThwip from "./pool/thwip.js";
 import _poolTiamat from "./pool/tiamat.js";
 import _poolTiamatsFanatics from "./pool/tiamats-fanatics.js";
 import _poolTianaShipsCaretaker from "./pool/tiana-ships-caretaker.js";
+import _poolTibaltCosmicImpostor from "./pool/tibalt-cosmic-impostor.js";
 import _poolTibaltRakishInstigator from "./pool/tibalt-rakish-instigator.js";
 import _poolTibaltTheFiendBlooded from "./pool/tibalt-the-fiend-blooded.js";
 import _poolTibaltsRager from "./pool/tibalts-rager.js";
@@ -29760,6 +29765,7 @@ import _poolValiantEndeavor from "./pool/valiant-endeavor.js";
 import _poolValiantGuard from "./pool/valiant-guard.js";
 import _poolValiantKnight from "./pool/valiant-knight.js";
 import _poolValiantVeteran from "./pool/valiant-veteran.js";
+import _poolValkiGodOfLies from "./pool/valki-god-of-lies.js";
 import _poolValkmiraProtectorsShield from "./pool/valkmira-protectors-shield.js";
 import _poolValkoIndorian from "./pool/valko-indorian.js";
 import _poolValkyrieAerialUnit from "./pool/valkyrie-aerial-unit.js";
@@ -31120,6 +31126,7 @@ import _poolWhirlpoolRider from "./pool/whirlpool-rider.js";
 import _poolWhirlpoolWarrior from "./pool/whirlpool-warrior.js";
 import _poolWhirlpoolWhelm from "./pool/whirlpool-whelm.js";
 import _poolWhirlwindAdept from "./pool/whirlwind-adept.js";
+import _poolWhirlwindDenial from "./pool/whirlwind-denial.js";
 import _poolWhirlwindKillerCyclone from "./pool/whirlwind-killer-cyclone.js";
 import _poolWhirlwindOfThought from "./pool/whirlwind-of-thought.js";
 import _poolWhirlwindTechnique from "./pool/whirlwind-technique.js";
@@ -34231,6 +34238,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArtisticRefusal,
   _poolArtistsTalent,
   _poolArvadTheCursed,
+  _poolArvinoxTheMindFlail,
   _poolArwenMortalQueen,
   _poolArwenUndomiel,
   _poolArwenWeaverOfHope,
@@ -37322,6 +37330,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCheerfulOsteomancer,
   _poolCheeringCrowd,
   _poolCheeringFanatic,
+  _poolChefsKiss,
   _poolChekovAndMccoy,
   _poolChelonianTackle,
   _poolChemistersInsight,
@@ -41998,6 +42007,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFavoredOfIroas,
   _poolFblthpImpossiblyLost,
   _poolFblthpKnowsTheWay,
+  _poolFblthpLostOnTheRange,
   _poolFblthpTheLost,
   _poolFearFireFoes,
   _poolFearOfBeingHunted,
@@ -60803,6 +60813,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheTabernacleAtPendrellVale,
   _poolTheTaleOfTamiyo,
   _poolTheTarrasque,
+  _poolTheTemporalAnchor,
   _poolTheTenRings,
   _poolTheTenthDoctor,
   _poolTheTerrorOfSerpentsPass,
@@ -61203,6 +61214,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTiamat,
   _poolTiamatsFanatics,
   _poolTianaShipsCaretaker,
+  _poolTibaltCosmicImpostor,
   _poolTibaltRakishInstigator,
   _poolTibaltTheFiendBlooded,
   _poolTibaltsRager,
@@ -62590,6 +62602,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolValiantGuard,
   _poolValiantKnight,
   _poolValiantVeteran,
+  _poolValkiGodOfLies,
   _poolValkmiraProtectorsShield,
   _poolValkoIndorian,
   _poolValkyrieAerialUnit,
@@ -63950,6 +63963,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhirlpoolWarrior,
   _poolWhirlpoolWhelm,
   _poolWhirlwindAdept,
+  _poolWhirlwindDenial,
   _poolWhirlwindKillerCyclone,
   _poolWhirlwindOfThought,
   _poolWhirlwindTechnique,
@@ -67074,6 +67088,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/artistic-refusal": _poolArtisticRefusal,
   "pool/artists-talent": _poolArtistsTalent,
   "pool/arvad-the-cursed": _poolArvadTheCursed,
+  "pool/arvinox-the-mind-flail": _poolArvinoxTheMindFlail,
   "pool/arwen-mortal-queen": _poolArwenMortalQueen,
   "pool/arwen-undomiel": _poolArwenUndomiel,
   "pool/arwen-weaver-of-hope": _poolArwenWeaverOfHope,
@@ -70165,6 +70180,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cheerful-osteomancer": _poolCheerfulOsteomancer,
   "pool/cheering-crowd": _poolCheeringCrowd,
   "pool/cheering-fanatic": _poolCheeringFanatic,
+  "pool/chefs-kiss": _poolChefsKiss,
   "pool/chekov-and-mccoy": _poolChekovAndMccoy,
   "pool/chelonian-tackle": _poolChelonianTackle,
   "pool/chemisters-insight": _poolChemistersInsight,
@@ -74841,6 +74857,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/favored-of-iroas": _poolFavoredOfIroas,
   "pool/fblthp-impossibly-lost": _poolFblthpImpossiblyLost,
   "pool/fblthp-knows-the-way": _poolFblthpKnowsTheWay,
+  "pool/fblthp-lost-on-the-range": _poolFblthpLostOnTheRange,
   "pool/fblthp-the-lost": _poolFblthpTheLost,
   "pool/fear-fire-foes": _poolFearFireFoes,
   "pool/fear-of-being-hunted": _poolFearOfBeingHunted,
@@ -93646,6 +93663,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-tabernacle-at-pendrell-vale": _poolTheTabernacleAtPendrellVale,
   "pool/the-tale-of-tamiyo": _poolTheTaleOfTamiyo,
   "pool/the-tarrasque": _poolTheTarrasque,
+  "pool/the-temporal-anchor": _poolTheTemporalAnchor,
   "pool/the-ten-rings": _poolTheTenRings,
   "pool/the-tenth-doctor": _poolTheTenthDoctor,
   "pool/the-terror-of-serpents-pass": _poolTheTerrorOfSerpentsPass,
@@ -94046,6 +94064,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tiamat": _poolTiamat,
   "pool/tiamats-fanatics": _poolTiamatsFanatics,
   "pool/tiana-ships-caretaker": _poolTianaShipsCaretaker,
+  "pool/tibalt-cosmic-impostor": _poolTibaltCosmicImpostor,
   "pool/tibalt-rakish-instigator": _poolTibaltRakishInstigator,
   "pool/tibalt-the-fiend-blooded": _poolTibaltTheFiendBlooded,
   "pool/tibalts-rager": _poolTibaltsRager,
@@ -95433,6 +95452,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/valiant-guard": _poolValiantGuard,
   "pool/valiant-knight": _poolValiantKnight,
   "pool/valiant-veteran": _poolValiantVeteran,
+  "pool/valki-god-of-lies": _poolValkiGodOfLies,
   "pool/valkmira-protectors-shield": _poolValkmiraProtectorsShield,
   "pool/valko-indorian": _poolValkoIndorian,
   "pool/valkyrie-aerial-unit": _poolValkyrieAerialUnit,
@@ -96793,6 +96813,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/whirlpool-warrior": _poolWhirlpoolWarrior,
   "pool/whirlpool-whelm": _poolWhirlpoolWhelm,
   "pool/whirlwind-adept": _poolWhirlwindAdept,
+  "pool/whirlwind-denial": _poolWhirlwindDenial,
   "pool/whirlwind-killer-cyclone": _poolWhirlwindKillerCyclone,
   "pool/whirlwind-of-thought": _poolWhirlwindOfThought,
   "pool/whirlwind-technique": _poolWhirlwindTechnique,
