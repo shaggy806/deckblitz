@@ -8433,3 +8433,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Doomsday Confluence: the modes you choose are its X
 - **Do:** Cast Doomsday Confluence. Click "Create a 3/3 black Dalek artifact creature token with menace." twice, then Confirm.
 - **Expect:** The banner reads "Doomsday Confluence — choose X modes (X = 2, at most 2; a mode may repeat)", X going up with each click. No X is asked after Confirm: you get two 3/3 Dalek tokens, five of your six Swamps tapped.
+
+## Graveyard cards chosen by their card types (2026-11-14)
+
+### Nethergoyf: escape exiles cards with four card types among them
+- **Do:** Open your graveyard and click Nethergoyf. In the popup, pick Grizzly Bears, Hill Giant, Lightning Bolt and Divination; then add Sol Ring and Confirm.
+- **Expect:** Nothing is asked before the cast: Nethergoyf goes on the stack and the popup reads "Choose up to 6 cards with four or more card types among them to exile". With the first four picked (three types) "Confirm (4)" stays grey; adding Sol Ring lights it. After Confirm those five are exiled, Glorious Anthem stays in the graveyard, and Nethergoyf enters as a 1/2.
+- **Not a bug:** Hill Giant adds no new type but may be picked too: "any number" of cards.

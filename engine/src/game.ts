@@ -44527,7 +44527,8 @@ controlledBy,
       tags,
       atLeast,
       ...(orNone ? { orNone: true } : {}),
-      text: `${word} or more card types among them`,
+      // Read after "cards": "Choose … cards with four or more card types among them".
+      text: `with ${word} or more card types among them`,
     };
   }
 

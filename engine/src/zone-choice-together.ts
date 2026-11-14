@@ -106,7 +106,8 @@ export function togetherViolation(
 ): string | null {
   if (fitsTogether(together, chosen)) return null;
   if (together.rule === "one-of-each") return `the choice must be one for each of: ${oneOfEachSlots(together).join(", ")}`;
-  if (together.rule === "total" || together.rule === "variety") return `the chosen cards must have ${together.text}`;
+  // Their text reads after "cards" ("with total mana value 6 or greater").
+  if (together.rule === "total" || together.rule === "variety") return `the chosen cards must have ${together.text.replace(/^with /, "")}`;
   return `the chosen cards must be ${together.rule === "share" || together.rule === "distinct" ? "cards " : ""}${together.text}`;
 }
 

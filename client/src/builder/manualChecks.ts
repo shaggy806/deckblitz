@@ -12702,4 +12702,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, {}, {}],
     }),
   ),
+  // --- Graveyard cards chosen by their card types (2026-11-14) ---------------------
+  preset(
+    'Nethergoyf: escape exiles cards with four card types among them',
+    board({
+      you: {
+        bf: ['Swamp*3'],
+        gy: ['Nethergoyf', 'Grizzly Bears', 'Hill Giant', 'Lightning Bolt', 'Divination', 'Sol Ring', 'Glorious Anthem'],
+      },
+    }),
+  ),
 ]
