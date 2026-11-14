@@ -5623,6 +5623,30 @@
    "family": "cost:mana-spending-rules",
    "example": "Rogue Class: 'you may spend mana as though it were mana of any color to cast those spells' (rule 609.4b)."
   },
+  "cost:spend-any-type-one-spell": {
+   "family": "cost:mana-spending-rules",
+   "example": "North Star: 'for one spell this turn, you may spend mana as though it were mana of any type' — a player-scoped, one-spell spendAs (2026-11-14 lanes run re-key)."
+  },
+  "cost:spend-color-as-any-color-this-turn": {
+   "family": "cost:mana-spending-rules",
+   "example": "False Dawn: 'until end of turn, you may spend white mana as though it were mana of any color' — a player-scoped, timed spendAs for one colour (2026-11-14 lanes run re-key)."
+  },
+  "trigger:opponent-attacks-each-of-your-planeswalkers": {
+   "family": "trigger:attacks-player-filter",
+   "example": "Oath of Kaya: triggers once for each planeswalker you control an opponent attacks (its ruling), not once per declaration like Mila's `attackingYourPlaneswalkers` (2026-11-14 re-key)."
+  },
+  "effect:put-into-combat-attacking-among-defenders": {
+   "family": "effect:enter-attacking",
+   "example": "Tahngarth, First Mate: you may have the attacking opponent gain control of it until end of combat; if you do, you choose a player or planeswalker that opponent is attacking, and it's attacking that (2026-11-14 re-key)."
+  },
+  "replacement:damage-leaves-one-loyalty-counter": {
+   "family": "replacement:new-event-replacements",
+   "example": "Deification: damage that would remove a planeswalker's last loyalty counters removes all but one instead (2026-11-14 re-key)."
+  },
+  "cost:exile-another-permanent-you-control": {
+   "family": "cost:reveal-card-as-additional-cost",
+   "example": "Curie, Emergent Intelligence: an activated cost 'exile another nontoken artifact creature you control', the exiled card read back as what Curie becomes a copy of (2026-11-14 re-key)."
+  },
   "static:look-at-top-card-any-time": {
    "example": "Fortune Teller's Talent: 'You may look at the top card of your library any time' — a private reveal to one player."
   },

@@ -1,0 +1,50 @@
+{
+ "batch": "B325",
+ "status": "triage",
+ "ranks": "Re-keys from the second lanes run (2026-11-13/14, author-top-cards overnight lanes): cards whose recorded key was built tonight for another card but which need a different shape, so `cards:needs -- --stale` doesn't offer them as freed; plus the one card an agent found major.",
+ "authored": [],
+ "blocked": [
+  {
+   "name": "North Star",
+   "needs": ["cost:spend-any-type-one-spell"],
+   "size": "small",
+   "why": "cost:spend-mana-as-any-color was built for Grell Philosopher as a grant-tied spendAs (`grant-activated-of` `spendAs`); North Star's is player-scoped, for one spell this turn, and any type rather than any colour."
+  },
+  {
+   "name": "False Dawn",
+   "needs": ["replacement:mana-production-replacement", "cost:spend-color-as-any-color-this-turn"],
+   "size": "small",
+   "why": "Its spend clause is player-scoped and timed (white mana as any colour until end of turn), not the grant-tied spendAs Grell Philosopher built; the colored-to-white production replacement is still open."
+  },
+  {
+   "name": "Oath of Kaya",
+   "needs": ["trigger:opponent-attacks-each-of-your-planeswalkers"],
+   "size": "small",
+   "why": "trigger:opponent-attacks-your-planeswalkers was built for Mila once per declaration (`attackingYourPlaneswalkers`); Oath of Kaya triggers once for each planeswalker attacked (its ruling)."
+  },
+  {
+   "name": "Tahngarth, First Mate",
+   "needs": ["effect:control-change-extensions", "effect:put-into-combat-attacking-among-defenders"],
+   "size": "small",
+   "why": "`is-attacking` (Midnight Crusader Shuttle) puts a creature into combat attacking a named player; Tahngarth also needs control given to the attacking opponent until end of combat and the defender chosen by you among those that opponent is attacking."
+  },
+  {
+   "name": "Deification",
+   "needs": ["replacement:damage-leaves-one-loyalty-counter", "effect:choose-planeswalker-type"],
+   "size": "small",
+   "why": "static:planeswalker-zero-loyalty-survives (Sanctum Lurker) doesn't cover it: Deification's is a damage replacement that removes all but one loyalty counter."
+  },
+  {
+   "name": "Curie, Emergent Intelligence",
+   "needs": ["effect:base-power-amount", "cost:exile-another-permanent-you-control"],
+   "size": "small",
+   "why": "The replacements-copies agent (2026-11-13) found no cost for 'exile another nontoken artifact creature you control' read back as the copy's source; B322 thought it built — check first."
+  },
+  {
+   "name": "Pulmonic Sliver",
+   "needs": ["replacement:graveyard-to-library-top-optional"],
+   "size": "major",
+   "why": "An optional replacement for going to the graveyard ('you may put it on top of its owner's library instead') must be asked before every battlefield-to-graveyard move (SBAs, destroy, sacrifice), with ordering when several go at once (its ruling): a new kind of decision, like 903.9b's commander deferral."
+  }
+ ]
+}
