@@ -33,7 +33,7 @@ import { ScriptedController } from "../controller.js";
 import type { Action, LegalAction } from "../actions.js";
 import type { Keyword } from "../cards/define.js";
 import { supertypesOf } from "../filter.js";
-import { Game } from "../game.js";
+import { Game, type AttractionDeckEntry } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { activePlayerOf } from "../state.js";
@@ -97,6 +97,9 @@ export function table(
     step?: GameState["turn"]["step"];
     /** Alice's sideboard: her cards outside the game (rule 400.11a). */
     sideboard?: readonly string[];
+    /** Each player's Attraction deck (rule 717.2), top card first (the table
+     * doesn't shuffle) — alice's if given as a list. */
+    attractions?: readonly AttractionDeckEntry[] | Readonly<Partial<Record<PlayerId, readonly AttractionDeckEntry[]>>>;
     /** Cards each player opens with (the rules' default otherwise). */
     openingHandSize?: number;
     /** The cards the game plays with, for a test that defines its own. */
@@ -125,6 +128,7 @@ export function table(
       player,
       cards: Array<string>(40).fill(opts.deck ?? "Wastes"),
       ...(player === A && opts.sideboard !== undefined ? { sideboard: opts.sideboard } : {}),
+      ...attractionsOf(opts.attractions, player),
     })),
   });
   const step = opts.step ?? "precombat-main";
@@ -132,6 +136,22 @@ export function table(
   // Unused seats get a controller that's never asked, so `c`/`d` are always there.
   const spare = (p: PlayerId): ScriptedController => new ScriptedController(p);
   return { game, a: seats[0], b: seats[1], c: seats[2] ?? spare(C), d: seats[3] ?? spare(D), players };
+}
+
+/** A table's `attractions` option, as `player`'s deck's field. */
+function attractionsOf(
+  given: readonly AttractionDeckEntry[] | Readonly<Partial<Record<PlayerId, readonly AttractionDeckEntry[]>>> | undefined,
+  player: PlayerId,
+): { attractions?: readonly AttractionDeckEntry[] } {
+  if (given === undefined) return {};
+  const list = Array.isArray(given) ? (player === A ? given : undefined) : (given as Partial<Record<PlayerId, readonly AttractionDeckEntry[]>>)[player];
+  return list === undefined ? {} : { attractions: list };
+}
+
+/** Light up `lights` on the Attraction card `id` (rule 717.1) — `[1, 2, 3, 4,
+ * 5, 6]` to be sure the next roll to visit visits it, `[]` that it doesn't. */
+export function lightUp(game: Game, id: ObjectId, lights: readonly number[]): void {
+  game.state.objects[id].lights = lights;
 }
 
 // ------------------------------------------------------------------ board

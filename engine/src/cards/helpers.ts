@@ -1245,6 +1245,22 @@ export function annihilator(n: EffectAmount, text = `Annihilator ${String(n)}`):
 }
 
 /**
+ * Visit — [effect] (rule 702.159a), an Attraction's visit ability: "Whenever
+ * you roll to visit your Attractions, if the result is equal to a number that
+ * is lit up on this Attraction, [effect]" — the `visited` trigger event on
+ * this Attraction (rule 701.52a), which the roll announces for each one lit
+ * up. `text` is the line after the long dash; `targets` its targets.
+ * "Claim the prize!" is the `claim-the-prize` effect inside it (702.159b).
+ */
+export const visit = (effect: EffectSpec, text: string, targets: readonly TargetSpec[] = []): TriggeredAbility => ({
+  trigger: { on: "event", event: "visited", who: "self" },
+  targets,
+  effect,
+  resolve: null,
+  text: `Visit — ${text}`,
+});
+
+/**
  * Level up [cost] (rule 702.87a): "[Cost]: Put a level counter on this
  * permanent. Activate only as a sorcery." A leveler has it at all times
  * (711.4). Its level symbols are {@link levelBand} conditions on the

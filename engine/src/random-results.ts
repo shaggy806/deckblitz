@@ -57,6 +57,9 @@ export function rollOfEvent(event: {
 export interface DieTest {
   /** The die's result, its modifier included (706.2), is at least this. */
   readonly atLeast?: number;
+  /** Its result, its modifier included, is at most this: "whenever you roll
+   * a 1" (Complaints Clerk) is `{ atMost: 1 }`. */
+  readonly atMost?: number;
   /** Its natural result is this; `"highest"` is the die's top face. */
   readonly natural?: number | "highest";
 }
@@ -67,6 +70,7 @@ export function matchingDice(roll: RollRecord, test: DieTest | undefined): reado
   for (const natural of roll.results) {
     const result = natural + roll.modifier;
     if (test?.atLeast !== undefined && result < test.atLeast) continue;
+    if (test?.atMost !== undefined && result > test.atMost) continue;
     if (test?.natural !== undefined && natural !== (test.natural === "highest" ? roll.sides : test.natural)) continue;
     out.push(result);
   }

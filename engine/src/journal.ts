@@ -142,7 +142,10 @@ export type JournalKind =
   | "flipped"
   /** `player` rolled one or more dice as one roll (rule 706): `roll` what
    * came up, `seq` the event's. */
-  | "rolled";
+  | "rolled"
+  /** `player` visited the Attraction `object` (rule 701.52a), in `stint`;
+   * `was`: as it was visited. An entry per visit. */
+  | "visited";
 
 /** One event the journal keeps. Each field means one thing for every kind;
  * a kind leaves out what it doesn't have. */
@@ -355,7 +358,13 @@ export type JournalWhat =
   | "waterbent"
   | "earthbent"
   | "firebent"
-  | "airbent";
+  | "airbent"
+  /** The Attractions a player visited (rule 701.52a), each once per stint
+   * however many times it was visited: "the number of Attractions you've
+   * visited this turn" (Storybook Ride, Black Hole), "if you've visited an
+   * Attraction this turn" (Soul Swindler). They needn't still be on the
+   * battlefield (Black Hole's ruling). */
+  | "visited";
 
 /** The zones a `to-graveyard` read takes its arrivals from (`from`: only
  * these) or leaves out (`notFrom`): "put into graveyards from the
@@ -430,6 +439,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   earthbent: { kind: "bent", match: (e) => e.how === "earth" },
   firebent: { kind: "bent", match: (e) => e.how === "fire" },
   airbent: { kind: "bent", match: (e) => e.how === "air" },
+  visited: { kind: "visited", distinct: true },
 };
 
 const PERMANENT_CARD_TYPES: ReadonlySet<string> = new Set([

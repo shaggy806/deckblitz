@@ -894,6 +894,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "take-initiative": none,
   "mutate-merge": none,
   venture: none,
+  "open-attraction": none,
+  "roll-to-visit": none,
+  "claim-the-prize": (n, v) => v.child(n.prize),
   // Its controller's own speed: no slot.
   "increase-speed": none,
   "the-ring-tempts-you": none,

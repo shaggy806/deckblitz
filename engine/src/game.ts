@@ -674,7 +674,22 @@ export interface DeckList {
    * deck's condition fulfilled: see `Game.beginCompanionReveals`.
    */
   readonly sideboard?: readonly string[];
+  /**
+   * The player's Attraction deck (rule 717.2): Attraction cards, which begin
+   * the game face down in the command zone, shuffled (unless the game's
+   * `shuffle` is off), apart from the library and the deck's size. Each is a
+   * name — its first printing's lit numbers (`CardDefinition.attractionLights`)
+   * — or a name and the `collector` number of the printing brought, which
+   * says which numbers are lit up on it (717.1). Absent, the player plays
+   * without one and opens nothing (701.51a). Its construction rules (717.2a)
+   * are `deck-validation.ts`'s `attractionDeckProblems`.
+   */
+  readonly attractions?: readonly AttractionDeckEntry[];
 }
+
+/** One card of a {@link DeckList.attractions}: its name, or its name and
+ * which printing (by collector number, "200a") it is. */
+export type AttractionDeckEntry = string | { readonly name: string; readonly collector?: string };
 
 export interface GameConfig {
   /** Two to four decks, one per seat. Seating order follows array order. */
@@ -7208,7 +7223,7 @@ export class Game {
     mulligans: boolean,
     skipCompanionReveals: boolean,
   ): void {
-    for (const { player, cards, commanders, printings, sideboard } of decks) {
+    for (const { player, cards, commanders, printings, sideboard, attractions } of decks) {
       const commanderNames = commanders ?? [];
       this.state.players[player] = createPlayerState(player, this.state.rules);
       // Copied, not aliased: `GameState` has to stay a self-contained,
@@ -7254,6 +7269,14 @@ export class Game {
         (this.state.outside ??= {})[player] = outside.map((name) =>
           this.makeCardObject(name, player, { zone: "outside" }),
         );
+      }
+
+      // Its Attraction deck, face down in the command zone and shuffled
+      // (rules 717.2, 103.3a) — after the library, so a game without one
+      // draws from the random stream exactly as before.
+      if (attractions !== undefined && attractions.length > 0) {
+        const deck = attractions.map((entry) => this.makeAttractionCard(entry, player));
+        this.state.players[player].attractionDeck = shuffleLibrary ? shuffle(deck, this.rng) : deck;
       }
     }
     this.state.rngState = this.rng.seed;
@@ -9365,8 +9388,59 @@ export class Game {
       xValue: null,
       controlEndsAtCleanup: false,
       copyOf: null,
+      // An Attraction card's lit numbers (rule 717.1): its first printing's,
+      // unless its deck said which it is (`makeAttractionCard`).
+      ...(def.attractionLights !== undefined && def.attractionLights.length > 0
+        ? { lights: def.attractionLights[0].lights }
+        : {}),
     };
     return id;
+  }
+
+  /** One card of `player`'s Attraction deck (rule 717.2), face down in the
+   * command zone, in no zone list (the caller keeps it in `attractionDeck`),
+   * lit up as the printing `entry` names (717.1). Only an Attraction card —
+   * one with an Astrotorium back — may be in that deck. */
+  private makeAttractionCard(entry: AttractionDeckEntry, player: PlayerId): ObjectId {
+    const name = typeof entry === "string" ? entry : entry.name;
+    const collector = typeof entry === "string" ? undefined : entry.collector;
+    const printings = this.registry.get(name).attractionLights;
+    if (printings === undefined || printings.length === 0) {
+      throw new Error(`${name} is not an Attraction card, so it can't be in an Attraction deck (rule 717.2)`);
+    }
+    const printing = collector === undefined ? printings[0] : printings.find((p) => p.collector === collector);
+    if (printing === undefined) throw new Error(`${name} has no printing ${String(collector)}`);
+    const id = this.makeCardObject(name, player, { zone: "command" });
+    this.state.objects[id].lights = printing.lights;
+    return id;
+  }
+
+  /** Whether `object` is an Attraction *card* — one with an Astrotorium card
+   * back (rule 717.1), which goes to its owner's junkyard rather than most
+   * zones (717.6): a card (not a token, not a copy of a spell) whose own
+   * definition is an Attraction's, whatever it is a copy of now. A copy of
+   * an Attraction isn't one (Draconian Gate-Bot's ruling). */
+  private isAttractionCard(object: GameObject): boolean {
+    return (
+      object.kind === "card" &&
+      !object.isToken &&
+      object.isCopy !== true &&
+      this.registry.has(object.cardName) &&
+      this.registry.get(object.cardName).attractionLights !== undefined
+    );
+  }
+
+  /** Take `id` out of its owner's Attraction deck or junkyard, if it's in
+   * either — neither is a zone list `zoneList` knows (rule 717.6a: "the pile
+   * is not its own zone"). */
+  private leaveAttractionPiles(id: ObjectId, owner: PlayerId): void {
+    const ps = this.state.players[owner];
+    if (ps === undefined) return;
+    for (const pile of [ps.attractionDeck, ps.junkyard]) {
+      if (pile === undefined) continue;
+      const at = pile.indexOf(id);
+      if (at >= 0) pile.splice(at, 1);
+    }
   }
 
   /**
@@ -10721,6 +10795,7 @@ export class Game {
       this.drawStep();
     } else if (step === "precombat-main") {
       this.sagaChapterStep();
+      this.attractionVisitStep();
     } else if (step === "declare-attackers") {
       this.declareAttackersStep();
     } else if (step === "declare-blockers") {
@@ -42413,6 +42488,15 @@ controlledBy,
         if (t?.kind === "object") this.mergeMutatingSpell(source, t.object, onTop);
       },
       venture: (undercity) => this.ventureInto(controller, undercity, source),
+      openAttractions: (count) => {
+        for (let i = 0; i < Math.min(count, Game.MAX_EFFECT_INSTANCES); i += 1) this.openAttraction(controller);
+      },
+      rollToVisit: () => this.rollToVisit(controller, source),
+      prizeClaimed: () => {
+        if (this.state.players[controller]?.hasLost === false) {
+          this.emit({ type: "prize-claimed", player: controller, object: source });
+        }
+      },
       increaseSpeed: (player, amount) => this.setSpeed(player, speedOf(this.state, player) + amount),
       speedOf: (player) => speedOf(this.state, player),
       ringTemptBegin: () => {
@@ -60640,6 +60724,71 @@ controlledBy,
     };
   }
 
+  /**
+   * `player` opens an Attraction (rule 701.51b): the top card of their
+   * Attraction deck goes onto the battlefield under their control, face up.
+   * With no Attraction deck, or an empty one, nothing happens (701.51a).
+   * Only one that this put onto the battlefield is an `attraction-opened`
+   * ("whenever you open an Attraction", 701.51c): not one whose entry was
+   * prevented or replaced.
+   */
+  private openAttraction(player: PlayerId): void {
+    const ps = this.state.players[player];
+    if (ps === undefined || ps.hasLost) return;
+    const top = ps.attractionDeck?.[0];
+    if (top === undefined) return;
+    this.putOntoBattlefieldByEffect({ kind: "object", object: top }, player, true, false);
+    const opened = this.state.objects[top];
+    if (opened?.zone === "battlefield") this.emit({ type: "attraction-opened", player, object: top });
+  }
+
+  /**
+   * `player` rolls to visit their Attractions (rule 701.52a): a six-sided die,
+   * rolled through `rollDice` so its replacements and "whenever you roll"
+   * triggers apply; then each Attraction they control with that number lit up
+   * has been visited — journaled (`visited`) and announced
+   * (`attraction-visited`), on which its visit ability triggers (702.159a).
+   * `source` is what told them to (Line Cutter), `null` for the turn-based
+   * action (717.4), which has none.
+   */
+  private rollToVisit(player: PlayerId, source: ObjectId | null): void {
+    const ps = this.state.players[player];
+    if (ps === undefined || ps.hasLost) return;
+    const result = this.rollDice(player, source ?? asObjectId("roll-to-visit"), 6, 1, 0);
+    this.emit({ type: "rolled-to-visit", player, result });
+    for (const id of [...this.state.zones.shared.battlefield]) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.controller !== player || object.lights?.includes(result) !== true) continue;
+      if (!hasSubtype(effectiveSubtypes(this.state, this.registry, object), "Attraction")) continue;
+      this.journal({
+        kind: "visited",
+        player,
+        object: id,
+        stint: object.zoneChangeCount ?? 0,
+        was: this.takeLastKnown(id),
+      });
+      this.emit({ type: "attraction-visited", player, object: id });
+    }
+  }
+
+  /** The turn-based action as the active player's precombat main phase
+   * begins (rules 505.5, 703.4g, 717.4): if they control an Attraction, they
+   * roll to visit their Attractions — no stack for the roll; the visit
+   * abilities it triggers go on the stack as the player would get priority. */
+  private attractionVisitStep(): void {
+    const active = this.activePlayer;
+    if (this.state.players[active]?.hasLost !== false) return;
+    const controls = this.state.zones.shared.battlefield.some((id) => {
+      const object = this.state.objects[id];
+      return (
+        object !== undefined &&
+        object.controller === active &&
+        hasSubtype(effectiveSubtypes(this.state, this.registry, object), "Attraction")
+      );
+    });
+    if (controls) this.rollToVisit(active, null);
+  }
+
   /** Rule 701.49a: put a dungeon into the command zone, the marker on its
    * topmost room. "Venture into Undercity" enters Undercity; a plain venture
    * chooses among the others (Undercity's own line: "You can't enter this
@@ -64564,6 +64713,17 @@ controlledBy,
       }
     }
 
+    // An Attraction card that would be put into a zone other than the
+    // battlefield, exile or the command zone, from anywhere, is put into its
+    // owner's command zone instead — their junkyard (rules 717.6, 717.6a).
+    // The card's own replacement, so ahead of the rest as Blightsteel's below
+    // is (its owner's pick, rule 616.1); once it's headed for the command
+    // zone nothing else applies, which is all "may apply more than once"
+    // (an exception to 614.5) asks. A copy of an Attraction, or a token one,
+    // goes where it was going (Draconian Gate-Bot's ruling).
+    if ((to === "graveyard" || to === "hand" || to === "library") && this.isAttractionCard(object)) {
+      to = "command";
+    }
     // "If this would be put into a graveyard from anywhere, reveal it and
     // shuffle it into its owner's library instead" (Blightsteel Colossus):
     // the card's own replacement, ahead of Rest in Peace's exile — the order
@@ -64914,9 +65074,18 @@ controlledBy,
     const from = this.zoneList(object.zone, object.owner);
     const index = from.indexOf(id);
     if (index >= 0) from.splice(index, 1);
+    // Off the top of its Attraction deck (rule 701.51b), or out of its
+    // junkyard: piles in the command zone that aren't its list.
+    if (fromZone === "command") this.leaveAttractionPiles(id, object.owner);
 
     object.zone = to;
-    this.zoneList(to, object.owner).push(id);
+    // An Attraction card arriving in the command zone joins its owner's
+    // junkyard (rule 717.6a), not the command zone's list.
+    if (to === "command" && this.isAttractionCard(object)) {
+      (this.state.players[object.owner].junkyard ??= []).push(id);
+    } else {
+      this.zoneList(to, object.owner).push(id);
+    }
     object.zoneChangeCount = (object.zoneChangeCount ?? 0) + 1;
     // The board changed: move the epoch now, not only as `moveObject` returns.
     // The cache is suspended here, but the epoch-kept memos

@@ -4347,6 +4347,13 @@ export interface CyclingAbility {
   readonly name?: string;
 }
 
+/** One printing of an Attraction card (rule 717.1): its collector number
+ * ("200a") and the numbers lit up on it, ascending. */
+export interface AttractionPrinting {
+  readonly collector: string;
+  readonly lights: readonly number[];
+}
+
 export interface CardDefinition {
   readonly name: string;
   /**
@@ -5570,6 +5577,14 @@ export interface CardDefinition {
    * `colorIdentityOf` leaves them out — an exception the card itself makes to
    * rule 903.4, so only its mana symbols count. */
   readonly colorsOutsideIdentity?: true;
+  /** An Attraction card's printings (rule 717.1): each lights a different set
+   * of the numbers 1-6 ("Note that multiple Attraction cards with the same
+   * English name may have different numbers lit up"), by collector number.
+   * A deck's entry picks one (`DeckList.attractions`), the first by default;
+   * the card object keeps its own (`GameObject.lights`). Set exactly on the
+   * cards with an Astrotorium back, which is what makes one go to its owner's
+   * junkyard (717.6). */
+  readonly attractionLights?: readonly AttractionPrinting[];
   /** Foretell (rule 702.143 — ROADMAP Phase 6b) — during your turn you may pay
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
@@ -6140,6 +6155,7 @@ const PRINTED_ABILITY: {
   moreThanMeetsTheEye: (def) => def.moreThanMeetsTheEye !== undefined,
   cantBeCopied: (def) => def.cantBeCopied !== undefined,
   colorsOutsideIdentity: (def) => def.colorsOutsideIdentity === true,
+  attractionLights: (def) => def.attractionLights !== undefined,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
   faces: false,
@@ -6447,6 +6463,8 @@ interface CardDraft {
   cantBeCopied?: true;
   /** See {@link CardDefinition.colorsOutsideIdentity}. */
   colorsOutsideIdentity?: true;
+  /** See {@link CardDefinition.attractionLights}. */
+  attractionLights?: readonly AttractionPrinting[];
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: NonNullable<CardDefinition["madness"]>;
@@ -6818,5 +6836,6 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.moreThanMeetsTheEye !== undefined ? { moreThanMeetsTheEye: draft.moreThanMeetsTheEye } : {}),
     ...(draft.cantBeCopied !== undefined ? { cantBeCopied: draft.cantBeCopied } : {}),
     ...(draft.colorsOutsideIdentity === true ? { colorsOutsideIdentity: true as const } : {}),
+    ...(draft.attractionLights !== undefined ? { attractionLights: draft.attractionLights } : {}),
   };
 }

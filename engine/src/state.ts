@@ -1637,6 +1637,12 @@ export interface GameObject {
    * `copies`), which ceases to exist if it's still outside the stack and
    * the battlefield at the next state-based check (704.5e). */
   isCopy?: boolean;
+  /** The numbers lit up on this Attraction card (rule 717.1), from 1 to 6 —
+   * the printing its owner brought (`DeckList.attractions`), else its
+   * definition's first (`CardDefinition.attractionLights`). A property of the
+   * card itself, kept through every zone; a copy of an Attraction has none
+   * (see docs/plans/attractions.md). Absent on anything but an Attraction card. */
+  lights?: readonly number[];
   /** A copy made by epic, "except for its epic ability" (rule 702.50a): its
    * `epic` effect does nothing, and so does a copy of it. */
   withoutEpic?: true;
@@ -2806,6 +2812,19 @@ export interface PlayerState {
    * name once per completion. What "if you've completed a dungeon" reads.
    * Absent until the first. */
   completedDungeons?: string[];
+  /** This player's Attraction deck (rule 717.2), top card first: Attraction
+   * cards they own, face down in the command zone (`zone: "command"`) but in
+   * no zone list — not the library, not the command zone's list, so nothing
+   * that reads either sees them. Its order is hidden from everyone, its size
+   * public (`viewFor`'s `attractionDeckSize`). Opening an Attraction takes
+   * the top card (701.51b). Absent for a player who plays without one —
+   * who can't open an Attraction (701.51a). See docs/plans/attractions.md. */
+  attractionDeck?: ObjectId[];
+  /** This player's "junkyard" (rule 717.6a): the Attraction cards they own
+   * that would have gone to a zone other than the battlefield, exile or the
+   * command zone and went to the command zone instead (717.6), oldest first —
+   * face up, public, in no zone list either. Absent until the first. */
+  junkyard?: ObjectId[];
   /** Mana floating in this player's pool, as individual units rather than a
    * count per colour — a unit may be restricted in what it pays for, may
    * survive the end of a step, or may carry a rider that fires when it's

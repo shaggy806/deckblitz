@@ -121,6 +121,14 @@ export interface PublicPlayerInfo {
   readonly dungeon: { readonly name: string; readonly room: number; readonly map: DungeonMap } | null;
   /** The dungeons they've completed (rule 309.7), oldest first. */
   readonly completedDungeons: readonly string[];
+  /** How many cards are in their Attraction deck (rule 717.2), face down in
+   * the command zone: its size is public, its cards and order hidden from
+   * everyone, its owner too. `0` for a player who has none. */
+  readonly attractionDeckSize: number;
+  /** Their junkyard (rule 717.6a): the Attraction cards that went to the
+   * command zone instead of a graveyard, hand or library, oldest first —
+   * face up and public, each in `objects` for every seat (with its `lights`). */
+  readonly junkyard: readonly ObjectId[];
 }
 
 /** Combat damage one commander has dealt one player. */
@@ -247,6 +255,9 @@ export interface VisibleObject {
    * (rule 701.19) — public, like the damage they'd answer. */
   readonly regenerationShields: number;
   readonly counters: Readonly<Record<string, number>>;
+  /** An Attraction card's lit-up numbers (rule 717.1), ascending — the
+   * printing its owner brought. Absent on anything else. */
+  readonly lights?: readonly number[];
   readonly summoningSick: boolean;
   /** A player, or an opponent's planeswalker (an `ObjectId`), or `null`. */
   readonly attacking: PlayerId | ObjectId | null;
@@ -840,6 +851,7 @@ function visible(
     ...(pairedPartner(state, object) !== undefined ? { pairedWith: pairedPartner(state, object)!.id } : {}),
     ...(zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),
     ...(object.zone === "exile" && object.preparedFor !== undefined ? { preparedBy: object.preparedFor.permanent } : {}),
+    ...(object.lights !== undefined && faceDown === undefined ? { lights: [...object.lights] } : {}),
   };
 }
 
@@ -1227,9 +1239,13 @@ function viewForUncached(
         return current === undefined || map === undefined ? null : { name: current.name, room: current.room, map };
       })(),
       completedDungeons: [...(playerState.completedDungeons ?? [])],
+      attractionDeckSize: playerState.attractionDeck?.length ?? 0,
+      junkyard: [...(playerState.junkyard ?? [])],
     };
     graveyards[player] = [...zones.graveyard];
     visibleIds.push(...zones.graveyard);
+    // A junkyard is face up in the command zone (rule 717.6a): everyone's.
+    visibleIds.push(...(playerState.junkyard ?? []));
 
     const revealsTop =
       sight.libraryTops.has(player) ||

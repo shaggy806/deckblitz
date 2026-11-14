@@ -63,5 +63,10 @@ from `mtg.tobyens.com` to deckblitz.net: Cloudflare and the tunnel stay, why the
 2 GB, what burstable CPU does to the bots' time budget, players' saved decks not following the
 domain, the cutover order, and how deploying changes.
 
+`attractions` (**phase 1 done** — the engine and cards, 2026-11-14; phase 2 the client) records why
+the Attraction deck and junkyard are lists beside the zones rather than zones, why lit numbers belong
+to the card object, how a roll to visit goes through the one dice roll, and what the client and
+server need to fill the deck from a decklist and draw it.
+
 `verify-speed-audit` (**partly built**) times `npm run verify` step by step and ranks
 what would make it faster without changing what it catches, with the coverage holes found on the way.

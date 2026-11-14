@@ -223,7 +223,50 @@ function notACardReason(name: string, def: CardDefinition): string | null {
   if (!isCardFront(def)) {
     return `"${name}" is the back face of ${def.faces?.[0] ?? def.meldOf?.join(" and ") ?? "another card"} — list the front face instead`;
   }
+  // Rule 717.2: Attraction cards don't begin the game in a player's deck.
+  if (def.attractionLights !== undefined) return `"${name}" is an Attraction — it goes in the Attraction deck (rule 717.2)`;
   return null;
+}
+
+/** The smallest constructed Attraction deck (rule 717.2a). */
+export const MIN_ATTRACTION_DECK = 10;
+
+/**
+ * What's wrong with an Attraction deck (rule 717.2), as human-readable
+ * violations, none for a legal one: only Attraction cards, at least ten in
+ * constructed play, each a different English name (717.2a). Limited play
+ * (717.2b — three or more, repeats allowed) is `limited`. An empty deck is
+ * no Attraction deck, and legal. Names the pool doesn't have are left to the
+ * deck's feasibility audit, as {@link validateCommanderDeck} leaves them.
+ */
+export function attractionDeckProblems(
+  names: readonly string[],
+  registry: CardRegistry,
+  options: { readonly limited?: boolean } = {},
+): readonly string[] {
+  if (names.length === 0) return [];
+  const problems: string[] = [];
+  for (const name of new Set(names)) {
+    if (registry.has(name) && registry.get(name).attractionLights === undefined) {
+      problems.push(`"${name}" isn't an Attraction card, so it can't be in an Attraction deck (rule 717.2)`);
+    }
+  }
+  const min = options.limited === true ? 3 : MIN_ATTRACTION_DECK;
+  if (names.length < min) {
+    problems.push(`an Attraction deck has at least ${min} cards (rule ${options.limited === true ? "717.2b" : "717.2a"}), this has ${names.length}`);
+  }
+  if (options.limited !== true) {
+    const seen = new Set<string>();
+    const repeated = new Set<string>();
+    for (const name of names) {
+      if (seen.has(name)) repeated.add(name);
+      seen.add(name);
+    }
+    for (const name of repeated) {
+      problems.push(`each card in an Attraction deck has a different name (rule 717.2a): "${name}" is there more than once`);
+    }
+  }
+  return problems;
 }
 
 /** The Rulebreaker abilities of a deck's commanders (the implemented ones). */

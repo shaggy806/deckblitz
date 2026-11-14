@@ -320,6 +320,38 @@ export type GameEvent =
       readonly dungeon: string;
     })
   | (Base & {
+      /** A player opened an Attraction (rule 701.51b): `object`, the top card
+       * of their Attraction deck, was put onto the battlefield under their
+       * control by that instruction. Not emitted when its entry was prevented
+       * or replaced (701.51c). */
+      readonly type: "attraction-opened";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
+      /** A player rolled to visit their Attractions (rule 701.52a): the
+       * six-sided die's `result`, after its own `dice-rolled`. */
+      readonly type: "rolled-to-visit";
+      readonly player: PlayerId;
+      readonly result: number;
+    })
+  | (Base & {
+      /** The Attraction `object`, controlled by `player`, has a number lit up
+       * equal to the result of their roll to visit: it has been visited, and
+       * its visit ability triggers (rules 701.52a, 702.159a). One event per
+       * Attraction visited, after the `rolled-to-visit`. */
+      readonly type: "attraction-visited";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
+      /** `player` claimed the prize of the Attraction `object` (rule
+       * 702.159b): its prize's actions have just been performed. */
+      readonly type: "prize-claimed";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** A player's energy count changed (rule 122 / {E} — ROADMAP Phase 10). */
       readonly type: "energy-changed";
       readonly player: PlayerId;

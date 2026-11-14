@@ -1051,7 +1051,7 @@ countered spells too),
 scope have a nonzero total — "for each opponent who lost life this turn";
 Tymna the Weaver's "the number of opponents that were dealt combat damage this
 turn" is `"combat-damage-taken"`),
-`{ turnHistory: "entered" | "left" | "died" | "sacrificed" | "exiled" | "descended" | "discarded" | "to-graveyard", who?, target?, filter?, from?, notFrom? }`
+`{ turnHistory: "entered" | "left" | "died" | "sacrificed" | "exiled" | "descended" | "discarded" | "to-graveyard" | "visited", who?, target?, filter?, from?, notFrom? }`
 (`"discarded"`: the cards the scope's players discarded this turn, a madness
 card discarded into exile too — Change of Fortune's "draw a card for each card
 you've discarded this turn" is `{ turnHistory: "discarded" }`; `"to-graveyard"`:
@@ -2290,6 +2290,28 @@ Caretaker, Sarevok's Tome's mana) and `{ kind: "completed-dungeon" }` ("if you'v
 dungeon" — Undermountain Adventurer's six {G}, Rilsa Rael). `attacks-player`'s
 `defenderHasInitiative` is Loot Dispute's "whenever you attack the player who has the initiative".
 Not yet: "a player you're attacking has the initiative" as an intervening if (Undercellar Sweep).
+
+**Attractions** (rules 717, 701.51, 701.52, 702.159 — Unfinity; `docs/plans/attractions.md`): an
+Attraction card is `types: ["artifact"], subtypes: ["Attraction"]` with no mana cost, its printings'
+lit numbers in `attractionLights: [{ collector: "200a", lights: [2, 6] }, …]` (the first is the
+default; a deck's `DeckList.attractions` entry picks one), and its visit ability is
+`visit(effect, text, targets?)` from `helpers.ts` (`text` the line after "Visit — "). It begins in
+its owner's Attraction deck and goes to their junkyard instead of a graveyard, hand or library — the
+engine's, from the definition. Effects: `open-attraction { count? }` ("open an Attraction", "open two
+Attractions" — nothing without an Attraction deck), `roll-to-visit` ("roll to visit your
+Attractions" — Line Cutter; also the turn-based action every precombat main phase), `claim-the-prize
+{ prize }` ("claim the prize!", the "Prize —" paragraph as `prize` — Pick-a-Beeble). Triggers (the
+generic `{ on: "event" }`): `opens-attraction` (The Most Dangerous Gamer's "whenever you open an
+Attraction", `who: "you"`), `rolls-to-visit` (its value the result: "if you roll a 6" is `condition:
+{ kind: "amounts", left: { triggerValue: true }, op: "eq", right: 6 }` — "Lifetime" Pass Holder),
+`visited` (an Attraction visited; `who: "self"` is a visit ability, what `visit()` writes),
+`claims-prize` ("whenever you claim the prize of an Attraction"). The roll to visit is a d6 roll, so
+"whenever you roll a 1" (`rolls-die` with `die: { atMost: 1 }`, Complaints Clerk) sees it. Reads:
+"the number of Attractions you've visited this turn" is `{ turnHistory: "visited" }`, "if you've
+visited an Attraction this turn" `{ kind: "turn-history", what: "visited" }` (each Attraction once
+however often visited; gone ones count — Black Hole's ruling); "you control three or more
+Attractions" is `{ kind: "controls", filter: { subtype: "Attraction" }, atLeast: 3 }`. Not yet:
+stickers and tickets (Costume Shop, Command Performance), rerolls (Monitor Monitor).
 
 `become-monarch { who? }` (`who` a scope, or a target slot holding a player — Jared Carthalion's "target opponent becomes the monarch"), `get-energy { amount, who? }` (`amount` an amount: Aetherflux Conduit's
 "equal to the amount of mana spent to cast that spell" is `{ manaSpentOf: "trigger-object" }`),

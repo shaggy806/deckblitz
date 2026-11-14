@@ -9237,6 +9237,34 @@ export type EffectSpec =
       readonly into?: "undercity";
     }
   | {
+      /** The effect's controller opens an Attraction (rule 701.51b): the top
+       * card of their Attraction deck goes onto the battlefield under their
+       * control, face up — `count` times ("open two Attractions"), default
+       * one. Nothing without an Attraction deck or with an empty one
+       * (701.51a). Each one put onto the battlefield by it is an
+       * `attraction-opened` (701.51c — `opens-attraction`). See
+       * docs/plans/attractions.md. */
+      readonly kind: "open-attraction";
+      readonly count?: EffectAmount;
+    }
+  | {
+      /** The effect's controller rolls to visit their Attractions (rule
+       * 701.52a): a six-sided die through the one dice roll (`would-roll-dice`
+       * replacements and "whenever you roll" triggers see it), then each
+       * Attraction they control with that number lit up is visited and its
+       * visit ability triggers (702.159a). Also the turn-based action at the
+       * start of each precombat main phase (717.4) — Game's, not this. */
+      readonly kind: "roll-to-visit";
+    }
+  | {
+      /** "Claim the prize!" (rule 702.159b), inside an Attraction's visit
+       * ability: perform `prize` (the second paragraph, "Prize — …"), then the
+       * effect's controller has claimed the prize of the ability's source
+       * (`prize-claimed`, "whenever you claim the prize of an Attraction"). */
+      readonly kind: "claim-the-prize";
+      readonly prize: EffectSpec;
+    }
+  | {
       /** The effect's controller's speed increases by `amount` (rule
        * 702.179): with no speed, it becomes `amount` (702.179c). What the
        * inherent triggered ability of a player with speed does (702.179d —
@@ -13552,6 +13580,15 @@ export interface EffectApi {
   /** See the `"venture"` {@link EffectSpec}: the effect's controller
    * ventures. */
   venture(undercity: boolean): void;
+  /** See the `"open-attraction"` {@link EffectSpec}: the effect's controller
+   * opens `count` Attractions, one at a time. */
+  openAttractions(count: number): void;
+  /** See the `"roll-to-visit"` {@link EffectSpec}: the effect's controller
+   * rolls to visit their Attractions. */
+  rollToVisit(): void;
+  /** See the `"claim-the-prize"` {@link EffectSpec}: the effect's controller
+   * has just claimed the prize of the effect's source. */
+  prizeClaimed(): void;
   /** `player`'s speed increases by `amount` — see the `"increase-speed"`
    * {@link EffectSpec}. */
   increaseSpeed(player: PlayerId, amount: number): void;
@@ -21318,6 +21355,16 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "venture":
       ctx.venture(spec.into === "undercity");
+      return;
+    case "open-attraction":
+      ctx.openAttractions(spec.count === undefined ? 1 : Math.max(0, amountValue(spec.count, ctx)));
+      return;
+    case "roll-to-visit":
+      ctx.rollToVisit();
+      return;
+    case "claim-the-prize":
+      applyEffectSpec(spec.prize, ctx);
+      ctx.prizeClaimed();
       return;
     case "increase-speed":
       ctx.increaseSpeed(ctx.controller, spec.amount);
