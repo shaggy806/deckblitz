@@ -1991,11 +1991,13 @@ it goes on applying to the permanent it becomes (rule 400.7a) and a copy of that
 `copy-spell-changes.test.ts`. Neither with `forEachItCouldTarget`. With
 `"trigger-spell"`, two more aim the copy themselves:
 
-- `retargetTo: "source" | slot` — "the copy targets Ivy" (rule 707.10e — Ivy, Gleeful
+- `retargetTo: "source" | "created" | slot` — "the copy targets Ivy" (rule 707.10e — Ivy, Gleeful
   Spellthief): every target of the copy is that one instead, and if it isn't a legal target
   for each of them (as the copy's controller would choose it), no copy is made and `otherwise`
   applies. A slot the spell's own rules filled isn't a target and keeps what it had. Wrap it in
-  a `may` for "you may copy that spell".
+  a `may` for "you may copy that spell". `"created"` is the token an earlier step of the same
+  resolution made: Frontline Heroism's "create a 1/1 red Soldier creature token with haste, then
+  copy that spell. The copy targets that token" (a `sequence` of the `create-token` and this).
 - `forEachItCouldTarget: { filter, other? }` — "copy that spell for each other creature you
   control that the spell could target. Each copy targets a different one of those creatures"
   (rule 707.10d — Zada, Hedron Grinder: `{ filter: { type: "creature", controlledBy: "you" },

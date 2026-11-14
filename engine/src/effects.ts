@@ -7778,13 +7778,16 @@ export type EffectSpec =
       /**
        * "The copy targets Ivy" (rule 707.10e — Ivy, Gleeful Spellthief): each
        * of the copy's targets is this one instead of the original's —
-       * `"source"`, the effect's own permanent, or the object in this target
-       * slot of the effect. A slot the spell's own rules filled isn't a
+       * `"source"`, the effect's own permanent, the object in this target
+       * slot of the effect, or `"created"`: the token an earlier step of this
+       * resolution made — Frontline Heroism's "create a 1/1 red Soldier
+       * creature token with haste, then copy that spell. The copy targets
+       * that token". A slot the spell's own rules filled isn't a
        * target, and keeps what it had. If that one isn't a legal target for
        * each of them, as the copy's controller would choose it, the copy
        * isn't created (and `otherwise` applies). With `"trigger-spell"` only.
        */
-      readonly retargetTo?: "source" | number;
+      readonly retargetTo?: "source" | "created" | number;
       /**
        * "Copy that spell for each other creature you control that the spell
        * could target. Each copy targets a different one of those creatures"
@@ -17740,7 +17743,8 @@ const READS_CREATED_TOKENS = new WeakMap<object, boolean>();
 /**
  * Whether an effect reads "the tokens made this way" off the object they're on:
  * a filter's `thisWay` or `notThisWay: "created"`, `put-counters-of` onto
- * `"created"`, or a delayed trigger `about: "created"`. A new token folded into
+ * `"created"`, a delayed trigger `about: "created"`, or a spell copy aimed at
+ * it (`copy-spell`'s `retargetTo: "created"`). A new token folded into
  * a stack of older identical ones is that stack's object, so the read would take
  * the older ones too, or count one target for two tokens, and a stack is only a
  * representation, so it may not change a result. So a token made under such an
@@ -17759,6 +17763,7 @@ export function readsCreatedTokens(value: unknown): boolean {
     node.notThisWay === "created" ||
     (node.kind === "put-counters-of" && node.target === "created") ||
     (node.kind === "delayed-trigger" && node.about === "created") ||
+    (node.kind === "copy-spell" && node.retargetTo === "created") ||
     Object.values(node).some(readsCreatedTokens);
   READS_CREATED_TOKENS.set(value, reads);
   return reads;
