@@ -4370,6 +4370,20 @@ export interface CardDefinition {
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
     /**
+     * With an `also.do` act that reads X: "you **may remove any number of
+     * +1/+1 counters from among creatures you control. This spell costs {2}
+     * less to cast for each counter removed this way**" (Hierophant
+     * Bio-Titan — `also.do: { kind: "remove-counters", count: "x", among }`)
+     * — `sacrificeReduces`' shape for an act as the cost: how many is
+     * announced as X as it's cast (rule 601.2b), each one taking this much
+     * generic off the total cost (601.2f, never its colored part — the
+     * ruling), and the act done as the cost is paid (601.2h). X is only that
+     * count, and any number may be chosen, even past what lowers the cost
+     * further (the ruling). Offered as `xCost.removesCounters` when the act
+     * removes counters.
+     */
+    readonly reducesPerX?: number;
+    /**
      * With `sacrificeCount: "x"`: "you may sacrifice one or more creatures.
      * **When you do, copy this spell for each creature sacrificed this way**"
      * (Plumb the Forbidden) — a reflexive trigger (rule 603.12) of the
@@ -6165,6 +6179,7 @@ interface CardDraft {
     readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
+    readonly reducesPerX?: number;
     readonly copyForEachSacrificed?: true;
     readonly exileFromHandReduces?: { readonly filter: CardFilter; readonly each: number };
     readonly discard?: number | "x";

@@ -5439,6 +5439,12 @@ export class Game {
         def.additionalCost?.sacrificeReduces !== undefined && def.additionalCost.sacrificeCount === "x"
           ? def.additionalCost.sacrifice
           : undefined;
+      // An act as the cost whose X takes some of the cost off (Hierophant
+      // Bio-Titan's counters): offered the same way.
+      const reducingAct =
+        sacrificeReducesFilter === undefined && def.additionalCost?.reducesPerX !== undefined
+          ? this.additionalCostActX(def)
+          : undefined;
       let sacrificeRange: { readonly least: number; readonly most: number } | null = null;
       // "Exile a red card with mana value X from your hand rather than pay"
       // (the Shoals): X is announced as it's cast (rules 107.3a, 601.2b), so
@@ -5513,13 +5519,22 @@ export class Game {
         if (xs.length === 0) continue;
         perX = xs;
         manaAffordable = true;
-      } else if (sacrificeReducesFilter !== undefined) {
+      } else if (sacrificeReducesFilter !== undefined || reducingAct !== undefined) {
         // "Sacrifice any number …; {2} less for each" (Dargo): castable if
         // some number sacrificed pays the rest — the fewest, and the most,
         // that do (each one more is cheaper in mana, and one fewer to tap).
+        // "Remove any number of +1/+1 counters …; {2} less for each"
+        // (Hierophant Bio-Titan) likewise, up to the counters there are.
         let n = 0;
-        for (const id of this.costSacrificeCandidates(player, [{ filter: sacrificeReducesFilter }], undefined)) {
-          n += this.state.objects[id]?.stackCount ?? 1;
+        if (sacrificeReducesFilter !== undefined) {
+          for (const id of this.costSacrificeCandidates(player, [{ filter: sacrificeReducesFilter }], undefined)) {
+            n += this.state.objects[id]?.stackCount ?? 1;
+          }
+        } else {
+          n = Math.min(
+            costActMaxX(reducingAct!, this.makeResolutionContext(card, player, [])) ?? 0,
+            def.maxX !== undefined ? this.costAmount(def.maxX, player, card, card) : Game.MAX_EFFECT_INSTANCES,
+          );
         }
         let least = 0;
         while (least <= n && !castableAt(0, least).castable) least += 1;
@@ -6159,7 +6174,11 @@ export class Game {
                         ? {
                             maxX: sacrificeX,
                             ...(sacrificeRange.least > 0 ? { minX: sacrificeRange.least } : {}),
-                            sacrifice: true,
+                            ...(reducingAct === undefined
+                              ? { sacrifice: true as const }
+                              : reducingAct.kind === "remove-counters"
+                                ? { removesCounters: true as const }
+                                : {}),
                           }
                         : { maxX: sacrificeX },
                 }
@@ -17037,6 +17056,12 @@ export class Game {
     const perSacrificed = def.additionalCost?.sacrificeReduces;
     if (perSacrificed !== undefined && def.additionalCost?.sacrificeCount === "x") {
       reduction += perSacrificed * Math.max(0, Math.floor(xValue));
+    }
+    // "{2} less for each counter removed this way" (Hierophant Bio-Titan): X
+    // is how many the act as the cost takes, announced as it's cast (601.2b).
+    const perActX = def.additionalCost?.reducesPerX;
+    if (perActX !== undefined && this.additionalCostActX(def) !== undefined) {
+      reduction += perActX * Math.max(0, Math.floor(xValue));
     }
     const total = reduceManaCost(
       {

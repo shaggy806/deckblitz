@@ -16881,6 +16881,28 @@ describe("cards from hand taking {2} off", () => {
   });
 });
 
+describe("counters removed as a spell's cost, each taking {2} off", () => {
+  it("reads Hierophant Bio-Titan's Frenzied Metabolism", () => {
+    const face = parseFace({
+      name: "Hierophant Bio-Titan",
+      type_line: "Creature — Tyranid",
+      mana_cost: "{10}{G}{G}",
+      colors: ["G"],
+      power: "12",
+      toughness: "12",
+      oracle_text:
+        "Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nReach, vigilance, ward {2}\nTitanic — This creature can't be blocked by creatures with power 2 or less.",
+    });
+    expect(face.additionalCost).toEqual({
+      also: {
+        text: "Remove any number of +1/+1 counters from among creatures you control",
+        do: { kind: "remove-counters", from: { type: "creature" }, counter: "+1/+1", count: "x", among: true },
+      },
+      reducesPerX: 2,
+    });
+  });
+});
+
 describe("the greatest number of cards a player discarded", () => {
   it("reads Jace's Archivist's activation", () => {
     const face = parseFace({

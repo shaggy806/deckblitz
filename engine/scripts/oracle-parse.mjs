@@ -16251,6 +16251,21 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.additionalCost = { exileFromHandReduces: { filter: { colors: [COLOR_WORD[m[1]]] }, each: Number(m[2]) } };
       continue;
     }
+    // Hierophant Bio-Titan: counters removed as it's cast, how many announced
+    // as X, each taking this off. A permanent spell's too.
+    if (
+      (m =/^As an additional cost to cast ~, you may remove any number of (\+1\/\+1|[a-z]+) counters from among (creatures|artifacts|permanents) you control\. ~ costs \{(\d+)\} less to cast for each counter removed this way\.$/.exec(line))
+    ) {
+      const type = { creatures: "creature", artifacts: "artifact" }[m[2]];
+      out.additionalCost = {
+        also: {
+          text: `Remove any number of ${m[1]} counters from among ${m[2]} you control`,
+          do: { kind: "remove-counters", ...(type !== undefined ? { from: { type } } : { from: {} }), counter: m[1], count: "x", among: true },
+        },
+        reducesPerX: Number(m[3]),
+      };
+      continue;
+    }
     // Plumb the Forbidden: a sacrifice of X (none included) and one reflexive
     // trigger making X copies.
     if (
