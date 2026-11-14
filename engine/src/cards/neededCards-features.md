@@ -400,6 +400,13 @@ as it's activated (rule 601.2b), offered only at an X some set of the permanents
 (`pickInBand`, a subset sum), the permanents chosen and exiled as the cost is paid (601.2h) in
 one event. Fabrication Foundry (rank 10321). `test/exile-permanents-total-mana-value.test.ts`.
 
+### "This turn, each creature you control enters with a counter" — built 2026-11-14
+
+The key `effect:creatures-enter-with-counter-this-turn` needed no engine code: Arlinn's
+`replacement-effect` of `others-enter-battlefield`, `duration: "end-of-turn"` (rule 611.2c). The
+scaffolder reads the line. Zameck Guildmage, Combine Guildmage.
+`test/creatures-enter-with-counter-this-turn.test.ts`.
+
 ### An `unless` cost reduced — built 2026-11-14
 
 The key `effect:sacrifice-unless-pay-reduced-mana-cost`: two `UnlessOption` forms, each with

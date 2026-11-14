@@ -992,6 +992,7 @@ import _poolWuLongbowman from "../pool/wu-longbowman.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
 import _poolYouthfulScholar from "../pool/youthful-scholar.js";
 import _poolZagrasThiefOfHeartbeats from "../pool/zagras-thief-of-heartbeats.js";
+import _poolZameckGuildmage from "../pool/zameck-guildmage.js";
 import _poolZethiArcaneBlademaster from "../pool/zethi-arcane-blademaster.js";
 import _poolZodiacRooster from "../pool/zodiac-rooster.js";
 import _poolZodiacSnake from "../pool/zodiac-snake.js";
@@ -2020,6 +2021,7 @@ const shard: CardShard = {
     _poolYoshimaru,
     _poolYouthfulScholar,
     _poolZagrasThiefOfHeartbeats,
+    _poolZameckGuildmage,
     _poolZethiArcaneBlademaster,
     _poolZodiacRooster,
     _poolZodiacSnake,

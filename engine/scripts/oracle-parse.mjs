@@ -6970,6 +6970,16 @@ export function parseSentence(sentence, ctx) {
       },
     };
   }
+  // "This turn, each creature you control enters with an additional +1/+1
+  // counter on it" (Zameck Guildmage, Combine Guildmage): Arlinn's
+  // `others-enter-battlefield` for the turn (rule 611.2c).
+  if (/^this turn, each creature you control enters with an additional \+1\/\+1 counter on it\.$/i.test(s)) {
+    return {
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: { event: "others-enter-battlefield", filter: { type: "creature", controlledBy: "you" }, counters: { kind: "+1/+1", amount: 1 } },
+    };
+  }
 
   // Mana.
   if ((m = /^add ((?:\{[WUBRGC]\})+)\.$/i.exec(s))) {

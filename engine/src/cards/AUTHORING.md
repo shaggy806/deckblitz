@@ -7238,7 +7238,7 @@ cards", "two or more", `"x"` the number) and `whileHandAtMost`; `would-create-to
 (`state.activeReplacements`): the same words as a static's, with a `PlayerDuration`. `next: true` is "the next time" (spent
 when it applies, 615.8), an amount "the next N" damage (615.7); `players`, `object` and `fromObject` are what its references
 name, fixed as it resolves. Amounts in a `modify` are fixed as it resolves too; filters are read at each event, so what arrives later counts.
-An `others-enter-battlefield` one that lasts (not `next`) gives each permanent entering its `counters` and `enterAs`, its filter read from the effect's controller's side, its source gone or not — Arlinn, the Pack's Hope's "until your next turn, … each creature you control enters with an additional +1/+1 counter on it".
+An `others-enter-battlefield` one that lasts (not `next`) gives each permanent entering its `counters` and `enterAs`, its filter read from the effect's controller's side, its source gone or not — Arlinn, the Pack's Hope's "until your next turn, … each creature you control enters with an additional +1/+1 counter on it"; Zameck Guildmage's "**this turn**, each creature you control enters with …" is the same with `duration: "end-of-turn"`.
 The `prevent-damage` family makes the same record.
 
 - `{ event: "would-create-token", instead: { modify: { times } } }` — Doubling Season. `{ event:

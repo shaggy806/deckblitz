@@ -15,6 +15,7 @@
     "effect:play-cards-exiled-this-way-until-next-turn",
     "effect:sacrifice-unless-pay-reduced-mana-cost",
     "cost:exile-permanents-total-mana-value-x",
+    "effect:creatures-enter-with-counter-this-turn",
     "filter:has-doctors-companion",
     "condition:rolled-number-this-turn",
     "condition:dice-rolled-this-turn-count",

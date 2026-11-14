@@ -247,6 +247,7 @@ import _poolDoubleVision from "../pool/double-vision.js";
 import _poolDovinGrandArbiter from "../pool/dovin-grand-arbiter.js";
 import _poolDovinsAcuity from "../pool/dovins-acuity.js";
 import _poolDowsingDagger from "../pool/dowsing-dagger.js";
+import _poolDraco from "../pool/draco.js";
 import _poolDragonEngine from "../pool/dragon-engine.js";
 import _poolDreadfulAsTheStorm from "../pool/dreadful-as-the-storm.js";
 import _poolDreadhordeTwins from "../pool/dreadhorde-twins.js";
@@ -1291,6 +1292,7 @@ const shard: CardShard = {
     _poolDovinGrandArbiter,
     _poolDovinsAcuity,
     _poolDowsingDagger,
+    _poolDraco,
     _poolDragonEngine,
     _poolDreadfulAsTheStorm,
     _poolDreadhordeTwins,

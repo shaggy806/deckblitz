@@ -1426,6 +1426,7 @@ export const COMMANDER_BANNED: readonly string[] = [
   "Dockside Extortionist",
   "Emrakul, the Aeons Torn",
   "Erayo, Soratami Ascendant",
+  "Flash",
   "Golos, Tireless Pilgrim",
   "Griselbrand",
   "Hullbreacher",

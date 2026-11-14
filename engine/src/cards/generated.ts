@@ -5071,6 +5071,7 @@ import _poolCombatResearch from "./pool/combat-research.js";
 import _poolCombatThresher from "./pool/combat-thresher.js";
 import _poolCombatTutorial from "./pool/combat-tutorial.js";
 import _poolCombineChrysalis from "./pool/combine-chrysalis.js";
+import _poolCombineGuildmage from "./pool/combine-guildmage.js";
 import _poolComboAttack from "./pool/combo-attack.js";
 import _poolCombust from "./pool/combust.js";
 import _poolCombustibleGearhulk from "./pool/combustible-gearhulk.js";
@@ -7330,6 +7331,7 @@ import _poolDrLeonardBonesMccoy from "./pool/dr-leonard-bones-mccoy.js";
 import _poolDrMadisonLi from "./pool/dr-madison-li.js";
 import _poolDrPulaskiCynicalClinician from "./pool/dr-pulaski-cynical-clinician.js";
 import _poolDrachnyen from "./pool/drachnyen.js";
+import _poolDraco from "./pool/draco.js";
 import _poolDracogenesis from "./pool/dracogenesis.js";
 import _poolDraconauticsEngineer from "./pool/draconautics-engineer.js";
 import _poolDraconianCylix from "./pool/draconian-cylix.js";
@@ -9007,6 +9009,7 @@ import _poolFableOfWolfAndOwl from "./pool/fable-of-wolf-and-owl.js";
 import _poolFabledHero from "./pool/fabled-hero.js";
 import _poolFabledPassage from "./pool/fabled-passage.js";
 import _poolFabricate from "./pool/fabricate.js";
+import _poolFabricationFoundry from "./pool/fabrication-foundry.js";
 import _poolFabricationModule from "./pool/fabrication-module.js";
 import _poolFaceOfDivinity from "./pool/face-of-divinity.js";
 import _poolFaceOfFear from "./pool/face-of-fear.js";
@@ -9787,6 +9790,7 @@ import _poolFlashOfDefiance from "./pool/flash-of-defiance.js";
 import _poolFlashOfInsight from "./pool/flash-of-insight.js";
 import _poolFlashPhotography from "./pool/flash-photography.js";
 import _poolFlashThompsonSpiderFan from "./pool/flash-thompson-spider-fan.js";
+import _poolFlash from "./pool/flash.js";
 import _poolFlashback from "./pool/flashback.js";
 import _poolFlashfires from "./pool/flashfires.js";
 import _poolFlashfreeze from "./pool/flashfreeze.js";
@@ -32200,6 +32204,7 @@ import _poolZagrasThiefOfHeartbeats from "./pool/zagras-thief-of-heartbeats.js";
 import _poolZahidDjinnOfTheLamp from "./pool/zahid-djinn-of-the-lamp.js";
 import _poolZahurGlorysPast from "./pool/zahur-glorys-past.js";
 import _poolZaltoFireGiantDuke from "./pool/zalto-fire-giant-duke.js";
+import _poolZameckGuildmage from "./pool/zameck-guildmage.js";
 import _poolZamrielSeraphOfSteel from "./pool/zamriel-seraph-of-steel.js";
 import _poolZanamDjinn from "./pool/zanam-djinn.js";
 import _poolZanarkandAncientMetropolis from "./pool/zanarkand-ancient-metropolis.js";
@@ -38224,6 +38229,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCombatThresher,
   _poolCombatTutorial,
   _poolCombineChrysalis,
+  _poolCombineGuildmage,
   _poolComboAttack,
   _poolCombust,
   _poolCombustibleGearhulk,
@@ -40483,6 +40489,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrMadisonLi,
   _poolDrPulaskiCynicalClinician,
   _poolDrachnyen,
+  _poolDraco,
   _poolDracogenesis,
   _poolDraconauticsEngineer,
   _poolDraconianCylix,
@@ -42160,6 +42167,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFabledHero,
   _poolFabledPassage,
   _poolFabricate,
+  _poolFabricationFoundry,
   _poolFabricationModule,
   _poolFaceOfDivinity,
   _poolFaceOfFear,
@@ -42940,6 +42948,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlashOfInsight,
   _poolFlashPhotography,
   _poolFlashThompsonSpiderFan,
+  _poolFlash,
   _poolFlashback,
   _poolFlashfires,
   _poolFlashfreeze,
@@ -65353,6 +65362,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZahidDjinnOfTheLamp,
   _poolZahurGlorysPast,
   _poolZaltoFireGiantDuke,
+  _poolZameckGuildmage,
   _poolZamrielSeraphOfSteel,
   _poolZanamDjinn,
   _poolZanarkandAncientMetropolis,
@@ -71390,6 +71400,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/combat-thresher": _poolCombatThresher,
   "pool/combat-tutorial": _poolCombatTutorial,
   "pool/combine-chrysalis": _poolCombineChrysalis,
+  "pool/combine-guildmage": _poolCombineGuildmage,
   "pool/combo-attack": _poolComboAttack,
   "pool/combust": _poolCombust,
   "pool/combustible-gearhulk": _poolCombustibleGearhulk,
@@ -73649,6 +73660,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dr-madison-li": _poolDrMadisonLi,
   "pool/dr-pulaski-cynical-clinician": _poolDrPulaskiCynicalClinician,
   "pool/drachnyen": _poolDrachnyen,
+  "pool/draco": _poolDraco,
   "pool/dracogenesis": _poolDracogenesis,
   "pool/draconautics-engineer": _poolDraconauticsEngineer,
   "pool/draconian-cylix": _poolDraconianCylix,
@@ -75326,6 +75338,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fabled-hero": _poolFabledHero,
   "pool/fabled-passage": _poolFabledPassage,
   "pool/fabricate": _poolFabricate,
+  "pool/fabrication-foundry": _poolFabricationFoundry,
   "pool/fabrication-module": _poolFabricationModule,
   "pool/face-of-divinity": _poolFaceOfDivinity,
   "pool/face-of-fear": _poolFaceOfFear,
@@ -76106,6 +76119,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flash-of-insight": _poolFlashOfInsight,
   "pool/flash-photography": _poolFlashPhotography,
   "pool/flash-thompson-spider-fan": _poolFlashThompsonSpiderFan,
+  "pool/flash": _poolFlash,
   "pool/flashback": _poolFlashback,
   "pool/flashfires": _poolFlashfires,
   "pool/flashfreeze": _poolFlashfreeze,
@@ -98519,6 +98533,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zahid-djinn-of-the-lamp": _poolZahidDjinnOfTheLamp,
   "pool/zahur-glorys-past": _poolZahurGlorysPast,
   "pool/zalto-fire-giant-duke": _poolZaltoFireGiantDuke,
+  "pool/zameck-guildmage": _poolZameckGuildmage,
   "pool/zamriel-seraph-of-steel": _poolZamrielSeraphOfSteel,
   "pool/zanam-djinn": _poolZanamDjinn,
   "pool/zanarkand-ancient-metropolis": _poolZanarkandAncientMetropolis,

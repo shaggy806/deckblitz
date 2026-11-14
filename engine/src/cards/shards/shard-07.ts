@@ -166,6 +166,7 @@ import _poolCollectiveOverride from "../pool/collective-override.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolComaVeil from "../pool/coma-veil.js";
+import _poolCombineGuildmage from "../pool/combine-guildmage.js";
 import _poolComeuppance from "../pool/comeuppance.js";
 import _poolCommonGoal from "../pool/common-goal.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
@@ -1223,6 +1224,7 @@ const shard: CardShard = {
     _poolCollectorOuphe,
     _poolColossapede,
     _poolComaVeil,
+    _poolCombineGuildmage,
     _poolComeuppance,
     _poolCommonGoal,
     _poolConclaveCavalier,

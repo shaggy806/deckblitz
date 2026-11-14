@@ -20164,4 +20164,12 @@ describe("'For each kind of counter on ~, each other Dinosaur you control enters
       },
     });
   });
+
+  it("'this turn, each creature you control enters with an additional +1/+1 counter' (Zameck Guildmage)", () => {
+    expect(parseEffect("This turn, each creature you control enters with an additional +1/+1 counter on it.", ctx()).effect).toEqual({
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: { event: "others-enter-battlefield", filter: { type: "creature", controlledBy: "you" }, counters: { kind: "+1/+1", amount: 1 } },
+    });
+  });
 });
