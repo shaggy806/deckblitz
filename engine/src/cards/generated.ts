@@ -8849,6 +8849,7 @@ import _poolExtirpate from "./pool/extirpate.js";
 import _poolExtortion from "./pool/extortion.js";
 import _poolExtraArms from "./pool/extra-arms.js";
 import _poolExtractAConfession from "./pool/extract-a-confession.js";
+import _poolExtractBrain from "./pool/extract-brain.js";
 import _poolExtractFromDarkness from "./pool/extract-from-darkness.js";
 import _poolExtractPower from "./pool/extract-power.js";
 import _poolExtractTheTruth from "./pool/extract-the-truth.js";
@@ -11331,6 +11332,7 @@ import _poolGoblinWizardry from "./pool/goblin-wizardry.js";
 import _poolGoblinsOfTheFlarg from "./pool/goblins-of-the-flarg.js";
 import _poolGoblinslide from "./pool/goblinslide.js";
 import _poolGodEternalBontu from "./pool/god-eternal-bontu.js";
+import _poolGodEternalKefnet from "./pool/god-eternal-kefnet.js";
 import _poolGodEternalOketra from "./pool/god-eternal-oketra.js";
 import _poolGodEternalRhonas from "./pool/god-eternal-rhonas.js";
 import _poolGodFavoredGeneral from "./pool/god-favored-general.js";
@@ -13314,6 +13316,7 @@ import _poolIllumination from "./pool/illumination.js";
 import _poolIlluminatorVirtuoso from "./pool/illuminator-virtuoso.js";
 import _poolIlluminorSzeras from "./pool/illuminor-szeras.js";
 import _poolIllunaApexOfWishes from "./pool/illuna-apex-of-wishes.js";
+import _poolIllusionOfChoice from "./pool/illusion-of-choice.js";
 import _poolIllusionReality from "./pool/illusion-reality.js";
 import _poolIllusionSpinners from "./pool/illusion-spinners.js";
 import _poolIllusion from "./pool/illusion.js";
@@ -23054,6 +23057,7 @@ import _poolSandstormEidolon from "./pool/sandstorm-eidolon.js";
 import _poolSandstormSalvager from "./pool/sandstorm-salvager.js";
 import _poolSandstormVerge from "./pool/sandstorm-verge.js";
 import _poolSandstorm from "./pool/sandstorm.js";
+import _poolSandswirlWanderglyph from "./pool/sandswirl-wanderglyph.js";
 import _poolSandworm from "./pool/sandworm.js";
 import _poolSandwurmConvergence from "./pool/sandwurm-convergence.js";
 import _poolSangriteBacklash from "./pool/sangrite-backlash.js";
@@ -26182,6 +26186,7 @@ import _poolStewardOfSolidarity from "./pool/steward-of-solidarity.js";
 import _poolStewardOfTheHarvest from "./pool/steward-of-the-harvest.js";
 import _poolStewardOfValeron from "./pool/steward-of-valeron.js";
 import _poolStickFearlessMentor from "./pool/stick-fearless-mentor.js";
+import _poolStickTogether from "./pool/stick-together.js";
 import _poolStickyFingers from "./pool/sticky-fingers.js";
 import _poolStickytongueSentinel from "./pool/stickytongue-sentinel.js";
 import _poolStifle from "./pool/stifle.js";
@@ -29602,6 +29607,7 @@ import _poolUnstableAmulet from "./pool/unstable-amulet.js";
 import _poolUnstableExperiment from "./pool/unstable-experiment.js";
 import _poolUnstableFooting from "./pool/unstable-footing.js";
 import _poolUnstableFrontier from "./pool/unstable-frontier.js";
+import _poolUnstableGlyphbridge from "./pool/unstable-glyphbridge.js";
 import _poolUnstableHulk from "./pool/unstable-hulk.js";
 import _poolUnstableMoleculeSuit from "./pool/unstable-molecule-suit.js";
 import _poolUnstableMutation from "./pool/unstable-mutation.js";
@@ -41691,6 +41697,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExtortion,
   _poolExtraArms,
   _poolExtractAConfession,
+  _poolExtractBrain,
   _poolExtractFromDarkness,
   _poolExtractPower,
   _poolExtractTheTruth,
@@ -44173,6 +44180,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinsOfTheFlarg,
   _poolGoblinslide,
   _poolGodEternalBontu,
+  _poolGodEternalKefnet,
   _poolGodEternalOketra,
   _poolGodEternalRhonas,
   _poolGodFavoredGeneral,
@@ -46156,6 +46164,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIlluminatorVirtuoso,
   _poolIlluminorSzeras,
   _poolIllunaApexOfWishes,
+  _poolIllusionOfChoice,
   _poolIllusionReality,
   _poolIllusionSpinners,
   _poolIllusion,
@@ -55896,6 +55905,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSandstormSalvager,
   _poolSandstormVerge,
   _poolSandstorm,
+  _poolSandswirlWanderglyph,
   _poolSandworm,
   _poolSandwurmConvergence,
   _poolSangriteBacklash,
@@ -59024,6 +59034,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStewardOfTheHarvest,
   _poolStewardOfValeron,
   _poolStickFearlessMentor,
+  _poolStickTogether,
   _poolStickyFingers,
   _poolStickytongueSentinel,
   _poolStifle,
@@ -62444,6 +62455,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnstableExperiment,
   _poolUnstableFooting,
   _poolUnstableFrontier,
+  _poolUnstableGlyphbridge,
   _poolUnstableHulk,
   _poolUnstableMoleculeSuit,
   _poolUnstableMutation,
@@ -74546,6 +74558,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/extortion": _poolExtortion,
   "pool/extra-arms": _poolExtraArms,
   "pool/extract-a-confession": _poolExtractAConfession,
+  "pool/extract-brain": _poolExtractBrain,
   "pool/extract-from-darkness": _poolExtractFromDarkness,
   "pool/extract-power": _poolExtractPower,
   "pool/extract-the-truth": _poolExtractTheTruth,
@@ -77028,6 +77041,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goblins-of-the-flarg": _poolGoblinsOfTheFlarg,
   "pool/goblinslide": _poolGoblinslide,
   "pool/god-eternal-bontu": _poolGodEternalBontu,
+  "pool/god-eternal-kefnet": _poolGodEternalKefnet,
   "pool/god-eternal-oketra": _poolGodEternalOketra,
   "pool/god-eternal-rhonas": _poolGodEternalRhonas,
   "pool/god-favored-general": _poolGodFavoredGeneral,
@@ -79011,6 +79025,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/illuminator-virtuoso": _poolIlluminatorVirtuoso,
   "pool/illuminor-szeras": _poolIlluminorSzeras,
   "pool/illuna-apex-of-wishes": _poolIllunaApexOfWishes,
+  "pool/illusion-of-choice": _poolIllusionOfChoice,
   "pool/illusion-reality": _poolIllusionReality,
   "pool/illusion-spinners": _poolIllusionSpinners,
   "pool/illusion": _poolIllusion,
@@ -88751,6 +88766,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sandstorm-salvager": _poolSandstormSalvager,
   "pool/sandstorm-verge": _poolSandstormVerge,
   "pool/sandstorm": _poolSandstorm,
+  "pool/sandswirl-wanderglyph": _poolSandswirlWanderglyph,
   "pool/sandworm": _poolSandworm,
   "pool/sandwurm-convergence": _poolSandwurmConvergence,
   "pool/sangrite-backlash": _poolSangriteBacklash,
@@ -91879,6 +91895,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/steward-of-the-harvest": _poolStewardOfTheHarvest,
   "pool/steward-of-valeron": _poolStewardOfValeron,
   "pool/stick-fearless-mentor": _poolStickFearlessMentor,
+  "pool/stick-together": _poolStickTogether,
   "pool/sticky-fingers": _poolStickyFingers,
   "pool/stickytongue-sentinel": _poolStickytongueSentinel,
   "pool/stifle": _poolStifle,
@@ -95299,6 +95316,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/unstable-experiment": _poolUnstableExperiment,
   "pool/unstable-footing": _poolUnstableFooting,
   "pool/unstable-frontier": _poolUnstableFrontier,
+  "pool/unstable-glyphbridge": _poolUnstableGlyphbridge,
   "pool/unstable-hulk": _poolUnstableHulk,
   "pool/unstable-molecule-suit": _poolUnstableMoleculeSuit,
   "pool/unstable-mutation": _poolUnstableMutation,

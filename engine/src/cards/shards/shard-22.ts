@@ -268,6 +268,7 @@ import _poolExperimentalAugury from "../pool/experimental-augury.js";
 import _poolExploratoryMission from "../pool/exploratory-mission.js";
 import _poolExplosiveCrystal from "../pool/explosive-crystal.js";
 import _poolExquisiteBlood from "../pool/exquisite-blood.js";
+import _poolExtractBrain from "../pool/extract-brain.js";
 import _poolEyeOfMalcator from "../pool/eye-of-malcator.js";
 import _poolFaerieDreamthief from "../pool/faerie-dreamthief.js";
 import _poolFaerieImpostor from "../pool/faerie-impostor.js";
@@ -332,6 +333,7 @@ import _poolGoblinKites from "../pool/goblin-kites.js";
 import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
 import _poolGoblinSkyRaider from "../pool/goblin-sky-raider.js";
 import _poolGoblinStriker from "../pool/goblin-striker.js";
+import _poolGodEternalKefnet from "../pool/god-eternal-kefnet.js";
 import _poolGodPharaohsFaithful from "../pool/god-pharaohs-faithful.js";
 import _poolGoldveinPick from "../pool/goldvein-pick.js";
 import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
@@ -938,6 +940,7 @@ import _poolUnhallowedPact from "../pool/unhallowed-pact.js";
 import _poolUnification from "../pool/unification.js";
 import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
+import _poolUnstableGlyphbridge from "../pool/unstable-glyphbridge.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
 import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
 import _poolUrzasBauble from "../pool/urzas-bauble.js";
@@ -1314,6 +1317,7 @@ const shard: CardShard = {
     _poolExploratoryMission,
     _poolExplosiveCrystal,
     _poolExquisiteBlood,
+    _poolExtractBrain,
     _poolEyeOfMalcator,
     _poolFaerieDreamthief,
     _poolFaerieImpostor,
@@ -1378,6 +1382,7 @@ const shard: CardShard = {
     _poolGoblinRabblemaster,
     _poolGoblinSkyRaider,
     _poolGoblinStriker,
+    _poolGodEternalKefnet,
     _poolGodPharaohsFaithful,
     _poolGoldveinPick,
     _poolGollumTheAbandoned,
@@ -1984,6 +1989,7 @@ const shard: CardShard = {
     _poolUnification,
     _poolUnnervingAssault,
     _poolUnravelTheAether,
+    _poolUnstableGlyphbridge,
     _poolUnwindingClock,
     _poolUrabrasksAnointer,
     _poolUrzasBauble,

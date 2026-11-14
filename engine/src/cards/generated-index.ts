@@ -1213,6 +1213,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Rune-Tail's Essence": "https://cards.scryfall.io/art_crop/front/4/2/42ba0e13-d20f-47f9-9c86-2b0b13c39ada.jpg",
   "Sanctum of the Sun": "https://cards.scryfall.io/art_crop/back/3/0/303d51ab-b9c4-4647-950f-291daabe7b81.jpg",
   "Sand Augury": "https://cards.scryfall.io/art_crop/back/5/6/56b0f66b-dca9-4a01-9394-20a513c2b225.jpg",
+  "Sandswirl Wanderglyph": "https://cards.scryfall.io/art_crop/back/d/7/d70f48e7-582c-4dd2-a64e-6fd03fa6b77e.jpg",
   "Sanguine Morass": "https://cards.scryfall.io/art_crop/back/0/a/0a08e0d2-1e60-47f5-9228-4c11a127089d.jpg",
   "Savage Packmate": "https://cards.scryfall.io/art_crop/back/c/b/cb168e3c-2c78-4e70-a39b-06aa6a47998c.jpg",
   "Scale Deflection": "https://cards.scryfall.io/art_crop/back/1/7/174ee9e7-8040-4b53-8d0d-177ce924521c.jpg",

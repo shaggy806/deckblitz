@@ -643,6 +643,7 @@ import _poolSakashimasWill from "../pool/sakashimas-will.js";
 import _poolSakuraTribeScout from "../pool/sakura-tribe-scout.js";
 import _poolSalvagedManaworker from "../pool/salvaged-manaworker.js";
 import _poolSamwiseTheStouthearted from "../pool/samwise-the-stouthearted.js";
+import _poolSandswirlWanderglyph from "../pool/sandswirl-wanderglyph.js";
 import _poolSanitariumSkeleton from "../pool/sanitarium-skeleton.js";
 import _poolSaprazzanLegate from "../pool/saprazzan-legate.js";
 import _poolSatyrHoplite from "../pool/satyr-hoplite.js";
@@ -1593,6 +1594,7 @@ const shard: CardShard = {
     _poolSakuraTribeScout,
     _poolSalvagedManaworker,
     _poolSamwiseTheStouthearted,
+    _poolSandswirlWanderglyph,
     _poolSanitariumSkeleton,
     _poolSaprazzanLegate,
     _poolSatyrHoplite,

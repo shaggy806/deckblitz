@@ -431,6 +431,7 @@ import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolIcatianPhalanx from "../pool/icatian-phalanx.js";
 import _poolIceberg from "../pool/iceberg.js";
 import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
+import _poolIllusionOfChoice from "../pool/illusion-of-choice.js";
 import _poolIllusionaryInformant from "../pool/illusionary-informant.js";
 import _poolIllusionistsGambit from "../pool/illusionists-gambit.js";
 import _poolImperiousMindbreaker from "../pool/imperious-mindbreaker.js";
@@ -1461,6 +1462,7 @@ const shard: CardShard = {
     _poolIcatianPhalanx,
     _poolIceberg,
     _poolIlluminatorVirtuoso,
+    _poolIllusionOfChoice,
     _poolIllusionaryInformant,
     _poolIllusionistsGambit,
     _poolImperiousMindbreaker,

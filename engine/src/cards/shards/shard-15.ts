@@ -783,6 +783,7 @@ import _poolStarfieldOfNyx from "../pool/starfield-of-nyx.js";
 import _poolStarfleetSecurity from "../pool/starfleet-security.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStatus from "../pool/status.js";
+import _poolStickTogether from "../pool/stick-together.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
 import _poolStoneSpirit from "../pool/stone-spirit.js";
 import _poolStormchaserDrake from "../pool/stormchaser-drake.js";
@@ -1754,6 +1755,7 @@ const shard: CardShard = {
     _poolStarfleetSecurity,
     _poolStatureYoungAvenger,
     _poolStatus,
+    _poolStickTogether,
     _poolStingingVitriol,
     _poolStoneSpirit,
     _poolStormchaserDrake,
