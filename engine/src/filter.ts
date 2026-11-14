@@ -1142,8 +1142,11 @@ export interface CardFilter {
   readonly wasAttachedToAny?: readonly AttachmentRecord[];
   /** Is an Aura attached to a **player** (rule 303.4) — `"you"` the
    * filter's `you` (Witchbane Orb's "all Curses attached to you"),
-   * `"opponent"` one of their opponents. */
-  readonly attachedToPlayer?: "you" | "opponent";
+   * `"opponent"` one of their opponents, `"enchanted-player"` the player the
+   * filter's source is attached to, as it last existed if it has left (rule
+   * 608.2h) — Curse of Misfortunes' "a Curse attached to enchanted player"
+   * (itself included); nothing when its source enchants no player. */
+  readonly attachedToPlayer?: "you" | "opponent" | "enchanted-player";
   /** Has an Aura attached to it that **you** control — Eriette of the
    * Charmed Apple's "each creature that's enchanted by an Aura you
    * control". */
@@ -3082,7 +3085,11 @@ export function matchesFilter(
     if (filter.attachedToPlayer !== undefined) {
       const player = live.attachedToPlayer;
       if (player === undefined) return false;
-      if (filter.attachedToPlayer === "you" ? player !== ctx.you : player === ctx.you) return false;
+      if (filter.attachedToPlayer === "enchanted-player") {
+        const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];
+        const enchanted = aura?.zone === "battlefield" ? aura.attachedToPlayer : aura?.lastKnown?.attachedToPlayer;
+        if (enchanted === undefined || player !== enchanted) return false;
+      } else if (filter.attachedToPlayer === "you" ? player !== ctx.you : player === ctx.you) return false;
     }
   }
   if (

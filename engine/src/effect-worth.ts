@@ -193,6 +193,10 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       const chosen = ctx.source !== undefined ? state.objects[ctx.source]?.chosenPlayer : undefined;
       return chosen !== undefined ? [chosen] : null;
     }
+    case "enchanted-player": {
+      const enchanted = ctx.source !== undefined ? state.objects[ctx.source]?.attachedToPlayer : undefined;
+      return enchanted !== undefined ? [enchanted] : null;
+    }
     case "other-chosen-player": {
       const object = ctx.source !== undefined ? state.objects[ctx.source] : undefined;
       const pair = [object?.chosenPlayer, object?.otherChosenPlayer];

@@ -97,6 +97,11 @@ export type PlayerRef =
    * Discord's "the other chosen player". Nobody when that player isn't one
    * of them. */
   | "other-chosen-player"
+  /** The player the source (a Curse) is attached to, as it last existed if
+   * it has left (rule 608.2h) — Curse of Misfortunes' "put it onto the
+   * battlefield attached to **that player**" at the beginning of *your*
+   * upkeep. Nobody when it enchants no player. */
+  | "enchanted-player"
   | "player-to-your-left"
   | "player-to-your-right"
   | { readonly target: number }

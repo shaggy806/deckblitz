@@ -36713,6 +36713,13 @@ export class Game {
         const p = departed !== undefined ? departed.chosenPlayer : this.state.objects[source]?.chosenPlayer;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
       }
+      if (who === "enchanted-player") {
+        // The player the source is attached to, in the stint this refers to
+        // (608.2h).
+        const departed = departedSource();
+        const p = departed !== undefined ? departed.attachedToPlayer : this.state.objects[source]?.attachedToPlayer;
+        return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
+      }
       if (who === "other-chosen-player") {
         // The one of the two that isn't the trigger's player, read off the
         // source as it last existed if it has gone (Sower of Discord's ruling).
@@ -42514,7 +42521,10 @@ controlledBy,
       changeLifeScoped: (who, delta) =>
         this.withLifeLossBatch(() =>
           // A source's chosen player(s) only a resolution knows.
-          typeof who === "object" || who === "chosen-player" || who === "other-chosen-player"
+          typeof who === "object" ||
+          who === "chosen-player" ||
+          who === "other-chosen-player" ||
+          who === "enchanted-player"
             ? scoped(who).forEach((player) => this.changeLife(player, delta))
             : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
         ),
@@ -59978,7 +59988,8 @@ controlledBy,
       who === "attacked-players" ||
       who === "you-and-attacked-players" ||
       who === "chosen-player" ||
-      who === "other-chosen-player"
+      who === "other-chosen-player" ||
+      who === "enchanted-player"
     ) {
       return [];
     }
