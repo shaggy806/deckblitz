@@ -789,6 +789,7 @@ import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
 import _poolSowerOfDiscord from "../pool/sower-of-discord.js";
 import _poolSparkMage from "../pool/spark-mage.js";
+import _poolSphinxAmbassador from "../pool/sphinx-ambassador.js";
 import _poolSphinxOfClearSkies from "../pool/sphinx-of-clear-skies.js";
 import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpideryGrasp from "../pool/spidery-grasp.js";
@@ -1823,6 +1824,7 @@ const shard: CardShard = {
     _poolSoulTithe,
     _poolSowerOfDiscord,
     _poolSparkMage,
+    _poolSphinxAmbassador,
     _poolSphinxOfClearSkies,
     _poolSphinxOfMagosi,
     _poolSpideryGrasp,

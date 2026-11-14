@@ -13168,6 +13168,7 @@ import _poolHuntForSpecimens from "./pool/hunt-for-specimens.js";
 import _poolHuntTheHunter from "./pool/hunt-the-hunter.js";
 import _poolHuntTheWeak from "./pool/hunt-the-weak.js";
 import _poolHuntedBonebrute from "./pool/hunted-bonebrute.js";
+import _poolHuntedByTheFamily from "./pool/hunted-by-the-family.js";
 import _poolHuntedDragon from "./pool/hunted-dragon.js";
 import _poolHuntedGhoul from "./pool/hunted-ghoul.js";
 import _poolHuntedHorror from "./pool/hunted-horror.js";
@@ -20086,6 +20087,7 @@ import _poolPhyrexianDreadnought from "./pool/phyrexian-dreadnought.js";
 import _poolPhyrexianDriver from "./pool/phyrexian-driver.js";
 import _poolPhyrexianEspionage from "./pool/phyrexian-espionage.js";
 import _poolPhyrexianEtchings from "./pool/phyrexian-etchings.js";
+import _poolPhyrexianFleshgorger from "./pool/phyrexian-fleshgorger.js";
 import _poolPhyrexianFurnace from "./pool/phyrexian-furnace.js";
 import _poolPhyrexianGargantua from "./pool/phyrexian-gargantua.js";
 import _poolPhyrexianGhoul from "./pool/phyrexian-ghoul.js";
@@ -25740,6 +25742,7 @@ import _poolSphereOfResistance from "./pool/sphere-of-resistance.js";
 import _poolSphereOfSafety from "./pool/sphere-of-safety.js";
 import _poolSphereOfTheSuns from "./pool/sphere-of-the-suns.js";
 import _poolSphereOfTruth from "./pool/sphere-of-truth.js";
+import _poolSphinxAmbassador from "./pool/sphinx-ambassador.js";
 import _poolSphinxBoneWand from "./pool/sphinx-bone-wand.js";
 import _poolSphinxMindbreaker from "./pool/sphinx-mindbreaker.js";
 import _poolSphinxOfClearSkies from "./pool/sphinx-of-clear-skies.js";
@@ -46210,6 +46213,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHuntTheHunter,
   _poolHuntTheWeak,
   _poolHuntedBonebrute,
+  _poolHuntedByTheFamily,
   _poolHuntedDragon,
   _poolHuntedGhoul,
   _poolHuntedHorror,
@@ -53128,6 +53132,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianDriver,
   _poolPhyrexianEspionage,
   _poolPhyrexianEtchings,
+  _poolPhyrexianFleshgorger,
   _poolPhyrexianFurnace,
   _poolPhyrexianGargantua,
   _poolPhyrexianGhoul,
@@ -58782,6 +58787,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSphereOfSafety,
   _poolSphereOfTheSuns,
   _poolSphereOfTruth,
+  _poolSphinxAmbassador,
   _poolSphinxBoneWand,
   _poolSphinxMindbreaker,
   _poolSphinxOfClearSkies,
@@ -79265,6 +79271,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hunt-the-hunter": _poolHuntTheHunter,
   "pool/hunt-the-weak": _poolHuntTheWeak,
   "pool/hunted-bonebrute": _poolHuntedBonebrute,
+  "pool/hunted-by-the-family": _poolHuntedByTheFamily,
   "pool/hunted-dragon": _poolHuntedDragon,
   "pool/hunted-ghoul": _poolHuntedGhoul,
   "pool/hunted-horror": _poolHuntedHorror,
@@ -86183,6 +86190,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-driver": _poolPhyrexianDriver,
   "pool/phyrexian-espionage": _poolPhyrexianEspionage,
   "pool/phyrexian-etchings": _poolPhyrexianEtchings,
+  "pool/phyrexian-fleshgorger": _poolPhyrexianFleshgorger,
   "pool/phyrexian-furnace": _poolPhyrexianFurnace,
   "pool/phyrexian-gargantua": _poolPhyrexianGargantua,
   "pool/phyrexian-ghoul": _poolPhyrexianGhoul,
@@ -91837,6 +91845,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sphere-of-safety": _poolSphereOfSafety,
   "pool/sphere-of-the-suns": _poolSphereOfTheSuns,
   "pool/sphere-of-truth": _poolSphereOfTruth,
+  "pool/sphinx-ambassador": _poolSphinxAmbassador,
   "pool/sphinx-bone-wand": _poolSphinxBoneWand,
   "pool/sphinx-mindbreaker": _poolSphinxMindbreaker,
   "pool/sphinx-of-clear-skies": _poolSphinxOfClearSkies,

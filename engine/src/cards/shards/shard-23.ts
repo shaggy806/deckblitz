@@ -409,6 +409,7 @@ import _poolHowlpackOfEstwald from "../pool/howlpack-of-estwald.js";
 import _poolHulkingRaptor from "../pool/hulking-raptor.js";
 import _poolHungerOfTheHowlpack from "../pool/hunger-of-the-howlpack.js";
 import _poolHungrySpriggan from "../pool/hungry-spriggan.js";
+import _poolHuntedByTheFamily from "../pool/hunted-by-the-family.js";
 import _poolIcatianCrier from "../pool/icatian-crier.js";
 import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIchormoonGauntlet from "../pool/ichormoon-gauntlet.js";
@@ -1454,6 +1455,7 @@ const shard: CardShard = {
     _poolHulkingRaptor,
     _poolHungerOfTheHowlpack,
     _poolHungrySpriggan,
+    _poolHuntedByTheFamily,
     _poolIcatianCrier,
     _poolIcatianPriest,
     _poolIchormoonGauntlet,

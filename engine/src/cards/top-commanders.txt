@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-497 already implemented / 3 missing
+498 already implemented / 2 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -409,7 +409,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  403  Mabel, Heir to Cragflame                        7206 decks  {1}{R}{W}        Legendary Creature — Mouse Soldier
 [x]  404  Grolnok, the Omnivore                           7204 decks  {2}{G}{U}        Legendary Creature — Frog
 [x]  405  Dargo, the Shipwrecker                          7192 decks  {6}{R}           Legendary Creature — Giant Pirate
-[ ]  406  Winter, Cynical Opportunist                     7190 decks  {2}{B}{G}        Legendary Creature — Human Warlock
+[x]  406  Winter, Cynical Opportunist                     7190 decks  {2}{B}{G}        Legendary Creature — Human Warlock
 [x]  407  Jasmine Boreal of the Seven                     7179 decks  {1}{G}{W}        Legendary Creature — Human Druid
 [x]  408  Jhoira, Weatherlight Captain                    7178 decks  {2}{U}{R}        Legendary Creature — Human Artificer
 [x]  409  Yawgmoth, Thran Physician                       7176 decks  {2}{B}{B}        Legendary Creature — Human Cleric
