@@ -12,6 +12,7 @@
     "effect:flicker-host-and-auras-return-attached",
     "zone:impulse-exile-instead",
     "effect:cast-copy-of-named-card",
+    "effect:play-cards-exiled-this-way-until-next-turn",
     "filter:has-doctors-companion",
     "condition:rolled-number-this-turn",
     "condition:dice-rolled-this-turn-count",

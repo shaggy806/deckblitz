@@ -359,6 +359,15 @@ choice); `counters-removed` reads `perCounter` and a new `byYou` off it. Watcher
 exiled" fired once for Dust of Moments' two (rule 603.2c) — Aeon Chronicler, Benalish
 Commander, Detritivore, Dinosaurs on a Spaceship and Fungal Behemoth now say `perCounter`.
 `test/time-counter-removed.test.ts`.
+### Cards exiled from hands this way, playable until your next turn ends — found built 2026-11-14
+
+The key `effect:play-cards-exiled-this-way-until-next-turn` was already there: `grant-play` over
+`{ thisWay: "exiled-from-hand", who: "you" }` (the cards you own) with Hex Magic's
+`"until-end-of-your-next-turn"`, under a `conditional` on `amounts` (X paid ≥ 7). One fix it
+needed: `exile-graveyard` joined `each-player-may`'s `ASKS_NOTHING`, so "each player may exile
+their hand and draw X" is decided by everyone before anyone does it (the ruling). Wheel of
+Potential (rank 10234). `test/wheel-of-potential.test.ts`.
+
 ### A paid cast of a copy of a card by name — built 2026-11-14
 
 The key `effect:cast-copy-of-named-card`: `cast-now`'s `copyOfCardNamed`, paradigm's

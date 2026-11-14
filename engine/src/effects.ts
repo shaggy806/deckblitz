@@ -14680,6 +14680,9 @@ const ASKS_NOTHING: ReadonlySet<EffectSpec["kind"]> = new Set<EffectSpec["kind"]
   // Choice): every yes is exiled together once the last has answered (its
   // ruling).
   "exile-all",
+  // "Each player may exile their hand and draw …" (Wheel of Potential):
+  // everyone decides first, then everyone who said yes does it (its ruling).
+  "exile-graveyard",
 ]);
 
 /** What an effect says of its tokens besides what they are, as a
