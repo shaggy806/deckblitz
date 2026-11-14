@@ -1324,7 +1324,9 @@ type with the exiled card": `sharesCreatureTypeWith: { thisWay: "exiled" }`),
 an amount that reads one object (`{ powerOf: { paid: "sacrificed" } }`, "the
 sacrificed creature's power"), `create-token-copy`'s `of`. The sets: `{
 thisWay, who?, byOwner? }`; `{ paid: "sacrificed" | "discarded" | "exiled" |
-"revealed" | "tapped" | "unattached" }`, what the cost took; `"exiled-with-source"`
+"revealed" | "tapped" | "unattached" | "beheld" }`, what the cost took (`"beheld"`: what a
+behold cost revealed or chose, card or permanent — Dragon's Fire's "the power of that card or
+creature" is `{ powerOf: { paid: "beheld" } }`); `"exiled-with-source"`
 (rule 607.2a); `"trigger-batch"`; `{ attachmentsOf: "source" }` ("each Aura and
 Equipment attached to it", as it last existed once it has left); `{ targets:
 [slots] }`; `{ remembered: name }`. Each member is read as it was in the act

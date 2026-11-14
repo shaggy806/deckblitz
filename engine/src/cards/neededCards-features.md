@@ -396,6 +396,16 @@ object in only by a type it has (rule 205.3m), and `each` a type in common
 with every one. The new `"convokers"` object set is the creatures that convoked
 the source's spell (702.51a), each as it last existed. Proving: Everything
 Comes to Dust, Cryptic Gateway. Test: `shares-type-with-set.test.ts`.
+### What a behold cost took, read by its spell — built 2026-11-13
+
+By EDHREC rank: Dragon's Fire (7217), the only card. `{ paid: "beheld" }`:
+`carryOutBehold` records every object a cost's behold took on the spell or
+ability it paid for (a card from the hand kept as it was there, a permanent
+read as it is or as it last existed once it has left, the ruling), so
+`{ powerOf: { paid: "beheld" } }` is "the power of that card or creature".
+Not for a behold that exiles. The line recurs nowhere, so no scaffolder
+template. Key: amount:beheld-object-power.
+
 ### Time counters on the card a cost exiled — fixed 2026-11-13
 
 By EDHREC rank: Jhoira of the Ghitu (6600), the only card. `give-suspend`

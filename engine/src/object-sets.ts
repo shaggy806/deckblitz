@@ -49,8 +49,11 @@ export interface SetMember {
  * Equipment" cost moved (rule 701.3d — Captain America's "that Equipment's
  * mana value"). `"exiled-self"` is the card a graveyard ability's own "exile
  * this card from your graveyard" took, kept as it last was there (the card
- * you exiled, rule 702.97a; Dodgy Jalopy's ruling). */
-export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "revealed" | "tapped" | "unattached";
+ * you exiled, rule 702.97a; Dodgy Jalopy's ruling). `"beheld"` is what a
+ * behold cost took (rule 701.4a), a card revealed from the hand (kept as it
+ * was there) or a permanent chosen (read as it is, or as it last existed
+ * once it has left — Dragon's Fire's "the power of that card or creature"). */
+export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "revealed" | "tapped" | "unattached" | "beheld";
 
 /**
  * A set of objects, by where it comes from:

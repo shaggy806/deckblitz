@@ -26489,7 +26489,7 @@ export class Game {
       const was =
         left !== undefined && now.lastKnown?.zoneChangeCount === left
           ? now.lastKnown
-          : kind === "revealed" && now.zone === "hand"
+          : (kind === "revealed" || kind === "beheld") && now.zone === "hand"
             ? this.takeLastKnown(id)
             : undefined;
       return [{ object: id, stint, ...(was !== undefined ? { was } : {}) }];
@@ -50663,6 +50663,12 @@ controlledBy,
     const beheld = chosen.map((id) =>
       this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id,
     );
+    // "The power of that card or creature" (Dragon's Fire): the spell or
+    // ability the behold paid for remembers what was beheld, card or
+    // permanent (`{ paid: "beheld" }`).
+    if (behold.forCost !== undefined && !exile && this.state.objects[behold.forCost]?.zone === "stack") {
+      this.recordPaid(behold.forCost, "beheld", beheld);
+    }
     if (exile) {
       this.withLeaveBatch(() => {
         for (const id of beheld) {

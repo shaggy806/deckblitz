@@ -10,6 +10,7 @@
     "effect:emblem-own-activated-ability",
     "effect:emblem-activated-abilities",
     "cost:exiled-card-effect-target",
+    "amount:beheld-object-power",
     "effect:token-copy-of-sacrificed",
     "effect:token-copy-of-graveyard-cards",
     "effect:token-copy-enters-attached",
