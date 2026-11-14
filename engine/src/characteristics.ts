@@ -1189,7 +1189,7 @@ function evalStaticCondition(
             (id) =>
               state.objects[id].controller === p &&
               matchesFilter(state, registry, id, condition.filter, { you: p }),
-          ) > mine,
+          ) >= mine + (condition.by ?? 1),
       );
     }
     case "opponents-control-total":

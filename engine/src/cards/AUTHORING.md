@@ -6588,7 +6588,9 @@ clause (section 9):
   every matching permanent you control, the source included.
   `activePlayerOnly: true` asks only the player whose turn it is — Keeper of
   the Accord's "at the beginning of each opponent's end step, if **that
-  player** controls more creatures than you".
+  player** controls more creatures than you". `by: n` asks for at least `n`
+  more (default 1) — Isolated Watchtower's "Activate only if an opponent
+  controls at least two more lands than you" is `by: 2`.
 - `{ kind: "opponents-control-total", filter: CardFilter, atLeast: number }` —
   a combined count summed across *every* opponent (Turbulent Fen: "unless your
   opponents control eight or more lands" — plural "opponents" sums, unlike

@@ -1115,6 +1115,9 @@ export type StaticCondition =
        * of the Accord's "at the beginning of each opponent's end step, if
        * **that player** controls more creatures than you". */
       readonly activePlayerOnly?: boolean;
+      /** At least this many more (default 1) — Isolated Watchtower's "an
+       * opponent controls at least two more lands than you" is `by: 2`. */
+      readonly by?: number;
     }
   /** Your opponents control at least `atLeast` permanents matching `filter`
    * *combined* (Turbulent Fen — "unless your opponents control eight or more

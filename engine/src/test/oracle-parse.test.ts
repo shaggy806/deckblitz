@@ -12128,6 +12128,15 @@ describe("a number of yours against another player's (player-compare)", () => {
     expect(forge.complete).toBe(true);
   });
 
+  it("an activation gated on an opponent controlling at least N more (Isolated Watchtower)", () => {
+    const tower = face(
+      "Land",
+      "{2}, {T}: Scry 1, then you may reveal the top card of your library. If a basic land card is revealed this way, put it onto the battlefield tapped. Activate only if an opponent controls at least two more lands than you.",
+    );
+    expect(tower.activated[0].condition).toEqual({ kind: "opponent-controls-more", filter: { type: "land" }, by: 2 });
+    expect(tower.activated[0].cost).toEqual({ mana: "{2}", tap: true });
+  });
+
   it("the clause after the instruction, and as an intervening-if", () => {
     const beza = face("Creature — Elk", "When Thing enters, create a Treasure token if an opponent controls more lands than you. You gain 4 life if an opponent has more life than you. Draw a card if an opponent has more cards in hand than you.");
     expect(beza.triggered[0].effect.effects.map((e: { condition: unknown }) => e.condition)).toEqual([

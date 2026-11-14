@@ -5,6 +5,7 @@
     "amount:count-excluding-granter",
     "trigger:opponents-attacked-batch",
     "trigger:monarch-end-step",
+    "condition:opponent-controls-n-more",
     "filter:has-doctors-companion",
     "condition:rolled-number-this-turn",
     "condition:dice-rolled-this-turn-count",

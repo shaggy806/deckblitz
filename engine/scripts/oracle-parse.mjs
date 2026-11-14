@@ -17933,6 +17933,16 @@ function parseFaceAsWritten(face, ctx = {}) {
           rest = rest.slice(0, attacked.index);
         }
       }
+      // "Activate only if an opponent controls at least two more lands than
+      // you" (Isolated Watchtower) and the other player comparisons.
+      {
+        const compared = / Activate only if ((?:an opponent|you) [^.]+ than (?:you|an opponent))\.$/.exec(rest);
+        const condition = compared === null ? undefined : playerComparisonOf(compared[1]);
+        if (condition !== undefined) {
+          ability.condition = condition;
+          rest = rest.slice(0, compared.index);
+        }
+      }
       rest = rest.replace(/ Activate only if you control three or more creatures with different powers\.$/, () => {
         ability.condition = { kind: "coven" };
         return "";
@@ -19141,6 +19151,11 @@ function playerComparisonOf(clause, ctx) {
   }
   m = /^(?:an opponent controls more (lands|creatures|artifacts|enchantments) than you|you control fewer (lands|creatures|artifacts|enchantments) than an opponent)$/.exec(c);
   if (m !== null) return { kind: "opponent-controls-more", filter: { type: singular(m[1] ?? m[2]) } };
+  // Isolated Watchtower's "an opponent controls at least two more lands than you".
+  m = /^an opponent controls at least (\w+) more (lands|creatures|artifacts|enchantments) than you$/.exec(c);
+  if (m !== null && typeof numberOf(m[1]) === "number") {
+    return { kind: "opponent-controls-more", filter: { type: singular(m[2]) }, by: numberOf(m[1]) };
+  }
   const slot = ctx?.targets?.length === 1 ? ctx.targets[0] : undefined;
   m = /^that player has more (cards in hand|life) than you$/.exec(c);
   if (m !== null && (slot === "player" || slot === "opponent")) {
