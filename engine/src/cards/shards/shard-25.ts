@@ -362,6 +362,7 @@ import _poolGoldbugScrappyScout from "../pool/goldbug-scrappy-scout.js";
 import _poolGoldenEgg from "../pool/golden-egg.js";
 import _poolGoldnightCommander from "../pool/goldnight-commander.js";
 import _poolGolemsHeart from "../pool/golems-heart.js";
+import _poolGollumSchemingGuide from "../pool/gollum-scheming-guide.js";
 import _poolGomaFadaVanguard from "../pool/goma-fada-vanguard.js";
 import _poolGracebladeArtisan from "../pool/graceblade-artisan.js";
 import _poolGraftedExoskeleton from "../pool/grafted-exoskeleton.js";
@@ -1360,6 +1361,7 @@ const shard: CardShard = {
     _poolGoldenEgg,
     _poolGoldnightCommander,
     _poolGolemsHeart,
+    _poolGollumSchemingGuide,
     _poolGomaFadaVanguard,
     _poolGracebladeArtisan,
     _poolGraftedExoskeleton,

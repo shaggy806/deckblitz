@@ -533,6 +533,7 @@ import _poolMathiseSurgeChanneler from "../pool/mathise-surge-channeler.js";
 import _poolMatzalantliTheGreatDoor from "../pool/matzalantli-the-great-door.js";
 import _poolMaularTheNextEvolution from "../pool/maular-the-next-evolution.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
+import _poolMemoriesReturning from "../pool/memories-returning.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
@@ -897,6 +898,7 @@ import _poolTheNeedsOfTheMany from "../pool/the-needs-of-the-many.js";
 import _poolTheNinthDoctor from "../pool/the-ninth-doctor.js";
 import _poolTheRoyalScions from "../pool/the-royal-scions.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
+import _poolTheSeventhDoctor from "../pool/the-seventh-doctor.js";
 import _poolThiefOfBlood from "../pool/thief-of-blood.js";
 import _poolThievingMagpie from "../pool/thieving-magpie.js";
 import _poolThirstForDiscovery from "../pool/thirst-for-discovery.js";
@@ -1567,6 +1569,7 @@ const shard: CardShard = {
     _poolMatzalantliTheGreatDoor,
     _poolMaularTheNextEvolution,
     _poolMelokuTheCloudedMirror,
+    _poolMemoriesReturning,
     _poolMendingTouch,
     _poolMentorsGuidance,
     _poolMerrowReejerey,
@@ -1931,6 +1934,7 @@ const shard: CardShard = {
     _poolTheNinthDoctor,
     _poolTheRoyalScions,
     _poolTheScarabGod,
+    _poolTheSeventhDoctor,
     _poolThiefOfBlood,
     _poolThievingMagpie,
     _poolThirstForDiscovery,

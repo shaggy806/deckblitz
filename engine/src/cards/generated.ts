@@ -11481,6 +11481,7 @@ import _poolGoliathTruck from "./pool/goliath-truck.js";
 import _poolGollumObsessedStalker from "./pool/gollum-obsessed-stalker.js";
 import _poolGollumPatientPlotter from "./pool/gollum-patient-plotter.js";
 import _poolGollumRiddleMaster from "./pool/gollum-riddle-master.js";
+import _poolGollumSchemingGuide from "./pool/gollum-scheming-guide.js";
 import _poolGollumSilentSlinker from "./pool/gollum-silent-slinker.js";
 import _poolGollumTheAbandoned from "./pool/gollum-the-abandoned.js";
 import _poolGollumsBite from "./pool/gollums-bite.js";
@@ -16854,6 +16855,7 @@ import _poolMasterOfDeath from "./pool/master-of-death.js";
 import _poolMasterOfDiversion from "./pool/master-of-diversion.js";
 import _poolMasterOfEtherium from "./pool/master-of-etherium.js";
 import _poolMasterOfPearls from "./pool/master-of-pearls.js";
+import _poolMasterOfPredicaments from "./pool/master-of-predicaments.js";
 import _poolMasterOfTheFeast from "./pool/master-of-the-feast.js";
 import _poolMasterOfTheHunt from "./pool/master-of-the-hunt.js";
 import _poolMasterOfThePearlTrident from "./pool/master-of-the-pearl-trident.js";
@@ -17018,6 +17020,7 @@ import _poolMemorialToUnity from "./pool/memorial-to-unity.js";
 import _poolMemorialToWar from "./pool/memorial-to-war.js";
 import _poolMemorialVault from "./pool/memorial-vault.js";
 import _poolMemoricide from "./pool/memoricide.js";
+import _poolMemoriesReturning from "./pool/memories-returning.js";
 import _poolMemoryDeluge from "./pool/memory-deluge.js";
 import _poolMemoryDrain from "./pool/memory-drain.js";
 import _poolMemoryErosion from "./pool/memory-erosion.js";
@@ -28084,6 +28087,7 @@ import _poolTheSeedcore from "./pool/the-seedcore.js";
 import _poolTheSensationalSheHulk from "./pool/the-sensational-she-hulk.js";
 import _poolTheSentryGoldenGuardian from "./pool/the-sentry-golden-guardian.js";
 import _poolTheSeriema from "./pool/the-seriema.js";
+import _poolTheSeventhDoctor from "./pool/the-seventh-doctor.js";
 import _poolTheShatteredStatesEra from "./pool/the-shattered-states-era.js";
 import _poolTheShire from "./pool/the-shire.js";
 import _poolTheSibsigCeremony from "./pool/the-sibsig-ceremony.js";
@@ -44471,6 +44475,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGollumObsessedStalker,
   _poolGollumPatientPlotter,
   _poolGollumRiddleMaster,
+  _poolGollumSchemingGuide,
   _poolGollumSilentSlinker,
   _poolGollumTheAbandoned,
   _poolGollumsBite,
@@ -49844,6 +49849,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMasterOfDiversion,
   _poolMasterOfEtherium,
   _poolMasterOfPearls,
+  _poolMasterOfPredicaments,
   _poolMasterOfTheFeast,
   _poolMasterOfTheHunt,
   _poolMasterOfThePearlTrident,
@@ -50008,6 +50014,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMemorialToWar,
   _poolMemorialVault,
   _poolMemoricide,
+  _poolMemoriesReturning,
   _poolMemoryDeluge,
   _poolMemoryDrain,
   _poolMemoryErosion,
@@ -61074,6 +61081,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheSensationalSheHulk,
   _poolTheSentryGoldenGuardian,
   _poolTheSeriema,
+  _poolTheSeventhDoctor,
   _poolTheShatteredStatesEra,
   _poolTheShire,
   _poolTheSibsigCeremony,
@@ -77474,6 +77482,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gollum-obsessed-stalker": _poolGollumObsessedStalker,
   "pool/gollum-patient-plotter": _poolGollumPatientPlotter,
   "pool/gollum-riddle-master": _poolGollumRiddleMaster,
+  "pool/gollum-scheming-guide": _poolGollumSchemingGuide,
   "pool/gollum-silent-slinker": _poolGollumSilentSlinker,
   "pool/gollum-the-abandoned": _poolGollumTheAbandoned,
   "pool/gollums-bite": _poolGollumsBite,
@@ -82847,6 +82856,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/master-of-diversion": _poolMasterOfDiversion,
   "pool/master-of-etherium": _poolMasterOfEtherium,
   "pool/master-of-pearls": _poolMasterOfPearls,
+  "pool/master-of-predicaments": _poolMasterOfPredicaments,
   "pool/master-of-the-feast": _poolMasterOfTheFeast,
   "pool/master-of-the-hunt": _poolMasterOfTheHunt,
   "pool/master-of-the-pearl-trident": _poolMasterOfThePearlTrident,
@@ -83011,6 +83021,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/memorial-to-war": _poolMemorialToWar,
   "pool/memorial-vault": _poolMemorialVault,
   "pool/memoricide": _poolMemoricide,
+  "pool/memories-returning": _poolMemoriesReturning,
   "pool/memory-deluge": _poolMemoryDeluge,
   "pool/memory-drain": _poolMemoryDrain,
   "pool/memory-erosion": _poolMemoryErosion,
@@ -94077,6 +94088,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-sensational-she-hulk": _poolTheSensationalSheHulk,
   "pool/the-sentry-golden-guardian": _poolTheSentryGoldenGuardian,
   "pool/the-seriema": _poolTheSeriema,
+  "pool/the-seventh-doctor": _poolTheSeventhDoctor,
   "pool/the-shattered-states-era": _poolTheShatteredStatesEra,
   "pool/the-shire": _poolTheShire,
   "pool/the-sibsig-ceremony": _poolTheSibsigCeremony,
