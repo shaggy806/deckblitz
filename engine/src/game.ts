@@ -1952,6 +1952,19 @@ function untilEndOfTurnKeywords(keywords: readonly Keyword[]): PtModifier[] {
     : [{ power: 0, toughness: 0, keywords: [...keywords], untilEndOfTurn: true }];
 }
 
+/** The modifier that has a token being created attack this turn if able
+ * (rule 508.1d), `at` one player only — not a planeswalker they control
+ * (Furygale Flocking's rulings) — read from `you`'s side. */
+function attacksThisTurnRider(rider: { readonly at?: PlayerId }, you: PlayerId): PtModifier {
+  return {
+    power: 0,
+    toughness: 0,
+    keywords: [],
+    restrictions: [rider.at === undefined ? "must-attack" : { kind: "must-attack", at: { player: rider.at }, you }],
+    untilEndOfTurn: true,
+  };
+}
+
 /** Which keyword's total-power tap cost an activated ability's `tapOthers`
  * is — crew's (rule 702.122a) or saddle's (702.171a) — for the `crewsAs`
  * statics that change what a creature pays it with; `undefined` for any
@@ -42537,7 +42550,7 @@ controlledBy,
         const kept = lastingHere(duration);
         return typeof kept === "object" && "whileSource" in kept ? kept.whileSource : null;
       },
-      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges, withCounters) => {
+      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges, withCounters, attacksThisTurn) => {
         const link = linkedToSource === true ? tokenLinkToSource() : null;
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
@@ -42561,6 +42574,7 @@ controlledBy,
             attachTo,
             textChanges,
             withCounters,
+            attacksThisTurn,
           ));
           // "Sacrifice / exile them at the beginning of the next end step":
           // a delayed triggered ability over these tokens (rule 603.7).
@@ -46913,6 +46927,9 @@ controlledBy,
     /** Counters each enters with (rule 122.6) — the effect's `withCounters`,
      * read. Each is then its own object. */
     withCounters?: { readonly kind: string; readonly amount: number },
+    /** They attack this turn if able, `at` that player (Furygale Flocking) —
+     * until end of turn, part of making them. */
+    attacksThisTurn?: { readonly at?: PlayerId },
   ): readonly ObjectId[] {
     if (withCounters !== undefined && withCounters.amount <= 0) withCounters = undefined;
     const def = this.registry.get(tokenName); // validate the token is a known definition
@@ -46949,6 +46966,7 @@ controlledBy,
             },
           ]
         : []),
+      ...(attacksThisTurn !== undefined ? [attacksThisTurnRider(attacksThisTurn, controller)] : []),
     ];
     const changedColors = tokenColorsAfter(def.colors, textChanges);
     const modifiers: PtModifier[] = [
@@ -47338,6 +47356,8 @@ controlledBy,
       atYourNextEndStep?: boolean;
       /** They attack this combat if able — part of making them. */
       attacksThisCombat?: boolean;
+      /** They attack this turn if able, `at` that player — part of making them. */
+      attacksThisTurn?: { readonly at?: PlayerId };
       /** Counters this effect's controller puts on each once they're made. */
       thenCounters?: { readonly kind: string; readonly amount: number };
       /** Counters each enters with, beside its own (rule 122.6). */
@@ -47424,6 +47444,7 @@ controlledBy,
             },
           ]
         : []),
+      ...(opts.attacksThisTurn !== undefined ? [attacksThisTurnRider(opts.attacksThisTurn, controller)] : []),
     ];
     // Divine Visitation (rule 614.1a): a copy that would be created a
     // creature — by what it copies or a copy exception — is made as its

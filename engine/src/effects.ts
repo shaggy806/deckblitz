@@ -8625,6 +8625,14 @@ export type EffectSpec =
        * later combat phase doesn't bind them. With `gainUntilEndOfTurn:
        * ["haste"]` for the haste. */
       readonly attacksThisCombat?: boolean;
+      /** "For each opponent, create two … tokens **that attack that opponent
+       * this turn if able**" (Furygale Flocking): a requirement on the tokens
+       * made (rule 508.1d) for the rest of the turn, obeyed only by attacking
+       * `at` — that player, not a planeswalker they control (the rulings) —
+       * read as this resolves; `{}` is "attack this turn if able", anyone.
+       * Naming a player who has left, there's nothing to obey. Part of making
+       * them, like `attacksThisCombat`. */
+      readonly attacksThisTurn?: { readonly at?: PlayerRef };
     }
   | {
       /**
@@ -9032,6 +9040,8 @@ export type EffectSpec =
       /** `create-token`'s, for the copies a replacement makes in its place
        * (`tokenRiders`). */
       readonly attacksThisCombat?: boolean;
+      /** `create-token`'s, for the same reason. */
+      readonly attacksThisTurn?: { readonly at?: PlayerRef };
       /** `create-token`'s, for the same reason. */
       readonly thenCounters?: { readonly kind: string; readonly amount: EffectAmount };
       /** The copies **enter with** these counters on them, beside whatever
@@ -13616,6 +13626,9 @@ export interface EffectApi {
     textChanges?: readonly TextChange[],
     /** Counters each new token enters with — the effect's `withCounters`, read. */
     withCounters?: { readonly kind: string; readonly amount: number },
+    /** They attack this turn if able, `at` that player — the effect's
+     * `attacksThisTurn`, read ({@link boundAttacksThisTurn}). */
+    attacksThisTurn?: { readonly at?: PlayerId },
   ): void;
   /** Which stint on the battlefield the resolving ability means by its source
    * (rule 607.2a): the one it came from, though the source may have left since;
@@ -13648,6 +13661,8 @@ export interface EffectApi {
       gainUntilEndOfTurn?: readonly Keyword[];
       /** They attack this combat if able — `create-token`'s. */
       attacksThisCombat?: boolean;
+      /** They attack this turn if able, `at` that player (bound). */
+      attacksThisTurn?: { readonly at?: PlayerId };
       /** Counters this effect's controller puts on each, once they're made. */
       thenCounters?: { readonly kind: string; readonly amount: number };
       /** Counters each enters with — the effect's `withCounters`, read. */
@@ -14554,6 +14569,7 @@ export type TokenRiders = Partial<
     | "tapped"
     | "attacking"
     | "attacksThisCombat"
+    | "attacksThisTurn"
     | "sacrificeAtEndStep"
     | "exileAtEndStep"
     | "exileAtEndOfCombat"
@@ -14588,6 +14604,7 @@ export function tokenRiders(spec: EffectSpec): TokenRiders {
     ...(spec.tapped !== undefined ? { tapped: spec.tapped } : {}),
     ...(spec.attacking !== undefined ? { attacking: spec.attacking } : {}),
     ...(spec.attacksThisCombat !== undefined ? { attacksThisCombat: spec.attacksThisCombat } : {}),
+    ...(spec.attacksThisTurn !== undefined ? { attacksThisTurn: spec.attacksThisTurn } : {}),
     ...(spec.sacrificeAtEndStep !== undefined ? { sacrificeAtEndStep: spec.sacrificeAtEndStep } : {}),
     ...(spec.exileAtEndStep !== undefined ? { exileAtEndStep: spec.exileAtEndStep } : {}),
     ...(spec.gainUntilEndOfTurn !== undefined ? { gainUntilEndOfTurn: spec.gainUntilEndOfTurn } : {}),
@@ -16532,6 +16549,19 @@ function attachHost(ref: AttachHostRef | undefined, ctx: ResolutionContext): Ent
 
 /** The first token this resolution has created that is still on the
  * battlefield — living weapon's "then attach this to it". */
+/** A token effect's `attacksThisTurn` read as it resolves: the player it's
+ * aimed at bound, or `undefined` — none asked, or it names a player who has
+ * left, leaving nothing to obey (rule 608.2b). */
+function boundAttacksThisTurn(
+  rider: { readonly at?: PlayerRef } | undefined,
+  ctx: ResolutionContext,
+): { readonly at?: PlayerId } | undefined {
+  if (rider === undefined) return undefined;
+  if (rider.at === undefined) return {};
+  const at = resolvePlayerRef(rider.at, ctx);
+  return at === undefined ? undefined : { at };
+}
+
 function createdThisWay(ctx: ResolutionContext): TargetRef | undefined {
   const made = ctx.thisWay("created").find((entry) => !entry.departed);
   return made === undefined ? undefined : { kind: "object", object: made.object };
@@ -21275,6 +21305,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               spec.withCounters === undefined
                 ? undefined
                 : { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx, player) },
+              boundAttacksThisTurn(spec.attacksThisTurn, ctx.aboutPlayer(player)),
             );
         }
         return;
@@ -21313,6 +21344,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.withCounters === undefined
           ? undefined
           : { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx) },
+        boundAttacksThisTurn(spec.attacksThisTurn, ctx),
       );
       return;
     case "vote":
@@ -21489,6 +21521,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.sacrificeAtEndOfCombat === true ? { sacrificeAtEndOfCombat: true } : {}),
           ...(spec.atYourNextEndStep === true ? { atYourNextEndStep: true } : {}),
           ...(spec.attacksThisCombat === true ? { attacksThisCombat: true } : {}),
+          ...((attacksThisTurn) => (attacksThisTurn !== undefined ? { attacksThisTurn } : {}))(
+            boundAttacksThisTurn(spec.attacksThisTurn, ctx),
+          ),
           ...(spec.thenCounters !== undefined
             ? { thenCounters: { kind: spec.thenCounters.kind, amount: amountValue(spec.thenCounters.amount, ctx) } }
             : {}),
