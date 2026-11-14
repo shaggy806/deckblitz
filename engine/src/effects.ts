@@ -772,6 +772,10 @@ export type EffectAmount =
    * which a number isn't exact any more: every use draws or counts far more
    * than a game holds by then (a draw stops at an empty library). */
   | { readonly powerOfTwo: EffectAmount }
+  /** Which pass of the `repeat` under way this is — 1 for the first, 0
+   * outside a repeat. Game of Chaos's "double the life stakes with each flip"
+   * is `{ powerOfTwo: { sum: [{ repeatPass: true }, -1] } }`: 1, 2, 4, … */
+  | { readonly repeatPass: true }
   /** How many cards in **graveyards** match a filter — Undergrowth's "for
    * each creature card in your graveyard" (Lotleth Giant). Distinct from
    * `countOf`, which only ever counts battlefield permanents. The filter's
@@ -2592,6 +2596,13 @@ export type EffectSpec =
        * step's `{ not: { thisWay: "chosen" } }` spares it ("creatures other
        * than … the chosen creature"). With `upTo: 1`. */
       readonly remember?: true;
+      /** "…to **a creature or player**" (Comet, Stellar Pup — "none of Comet's
+       * abilities require a target", the ruling): exactly one, a permanent
+       * matching `filter` or one of these players, chosen as this resolves
+       * with the `choose-permanent-or-player` decision, and `then` applied to
+       * it as target 0. `upTo` and `min` are read as 1; `together`,
+       * `random`, `remember`, `keepTargets` and `thenTogether` aren't read. */
+      readonly orPlayers?: PlayerScope;
     }
   | {
       /** Set only by the engine — a `choose-permanents`' `remember`, applied
@@ -4816,10 +4827,16 @@ export type EffectSpec =
        * may activate them. A rule about that permanent, not an ability it
        * gains, so losing its abilities doesn't end it; two of them are still
        * twice (the card's ruling: "not additive"). The static forms are
-       * `StaticAbility.loyaltyActivationsEachTurn`. */
+       * `StaticAbility.loyaltyActivationsEachTurn`.
+       *
+       * `{ more: n }` is "you may activate Comet's loyalty ability **two more
+       * times** this turn" (Comet, Stellar Pup): additive — n more than it
+       * could otherwise, each such effect its own — and for its printed
+       * loyalty abilities only ("his normal ability", the ruling), not ones
+       * it has gained. */
       readonly kind: "loyalty-activations";
       readonly target: ObjectRef;
-      readonly times: 2;
+      readonly times: 2 | { readonly more: number };
       readonly duration: PermanentDuration;
     }
   | {
@@ -6906,7 +6923,24 @@ export type EffectSpec =
        * {G}. If you do, repeat" (Forgotten Lore); `costLife` is life paid
        * for each pass the same way — Lim-Dûl's Vault's "as many times as you
        * choose, you may pay 1 life, …" (the `may`'s own `costLife`). */
-      readonly mayAgain?: true | { readonly cost?: string; readonly costLife?: EffectAmount };
+      readonly mayAgain?:
+        | true
+        | {
+            readonly cost?: string;
+            readonly costLife?: EffectAmount;
+            /** Who decides, when it isn't the effect's controller: the first
+             * case whose `if` holds over the pass just done (no `if` always
+             * does) — Game of Chaos's "if you win the flip, … you decide
+             * whether to flip again. If you lose the flip, … that player
+             * decides" is `[{ if: { kind: "this-way", what: "flips-won" },
+             * who: "you" }, { who: { target: 0 } }]`. Another player is
+             * asked about the controller's process (`askPlayerAboutEffect`):
+             * the passes stay the controller's. Nobody named (a player who
+             * has left): the process stops. */
+            readonly asks?: readonly { readonly if?: StaticCondition; readonly who: PlayerRef }[];
+            /** The question, when it isn't "Repeat this process?" — "Flip again?". */
+            readonly prompt?: string;
+          };
       /** Engine-built, never authored: passes done, the resolution's own
        * "this way" start (restored once the last pass is done, so what
        * follows reads every pass — Demonlord Belzenlok's "for each card put
@@ -6917,6 +6951,8 @@ export type EffectSpec =
         readonly round: number;
         readonly outer: number;
         readonly outerRepeat?: number;
+        /** The `GameState.repeatPass` to restore once it's done. */
+        readonly outerPass?: number;
         readonly total?: number;
         readonly stop?: true;
         readonly judged?: true;
@@ -10611,6 +10647,19 @@ export type EffectSpec =
        */
       readonly whose?: PlayerRef;
       /**
+       * "**For each player, search that player's library** for a nonland card
+       * and exile it, then that player shuffles" (Jace, Architect of
+       * Thought's −8): every library of the scope searched as one search,
+       * whose choices are final only once all have been looked through (the
+       * ruling) — one `choose-from-zone` over them all, up to one card from
+       * each library (a stated quality may fail to find, rule 701.23b), the
+       * finds going to their owners' `destination` (`"exile"`, `"graveyard"`
+       * or `"hand"`), then each of those players shuffles (701.24a). A
+       * library that can't be searched still shuffles. `min`, `max`,
+       * `whose`, `zones` and the rest aren't read; `then` is.
+       */
+      readonly eachLibrary?: PlayerScope;
+      /**
        * "Search … for **all** cards with that name" (Cranial Extraction,
        * Extirpate): every match in a graveyard is found — a public zone, where
        * a card with a stated quality can't be missed — and goes with whatever
@@ -11093,13 +11142,17 @@ export type PileObjects =
  * byItsController: true } }`. `{ together }` applies its effect once, with the
  * pile's objects in the target slots from 0 — Abstract Performance's "You may
  * cast a spell from among them without paying its mana cost. Put the rest into
- * your hand" — `word` saying what that amounts to.
+ * your hand" — `word` saying what that amounts to. `"library-bottom"` is "the
+ * other on the bottom of your library **in any order**" (Jace, Architect of
+ * Thought): each owner arranges their own cards (rule 401.4), asked only when
+ * the order is a choice.
  */
 export type PileFate =
   | "hand"
   | "graveyard"
   | "exile"
   | "battlefield"
+  | "library-bottom"
   | { readonly effect: EffectSpec }
   | { readonly together: EffectSpec; readonly word: PileFateWord };
 
@@ -11118,7 +11171,16 @@ export interface ExilePileSpec {
  * up". `"cast-or-hand"`: one spell from it may be cast free, the rest go to the
  * hand (Abstract Performance).
  */
-export type PileFateWord = "hand" | "graveyard" | "exile" | "battlefield" | "lose" | "other" | "turned-face-up" | "cast-or-hand";
+export type PileFateWord =
+  | "hand"
+  | "graveyard"
+  | "exile"
+  | "battlefield"
+  | "library-bottom"
+  | "lose"
+  | "other"
+  | "turned-face-up"
+  | "cast-or-hand";
 
 /**
  * A keyword ability given to a card in a graveyard (rule 604.1 — a static's
@@ -11739,6 +11801,18 @@ export interface EffectApi {
     /** The effect's `thenTogether`: `then` runs once, over all of them. */
     thenTogether?: true,
   ): void;
+  /** See the `"choose-permanents"` {@link EffectSpec}'s `orPlayers`: raise
+   * the `choose-permanent-or-player` decision over the permanents matching
+   * `filter` (less `except`) and `players`. */
+  choosePermanentOrPlayer(
+    filter: CardFilter,
+    players: readonly PlayerId[],
+    then: EffectSpec,
+    prompt: string,
+    exceptSource: boolean,
+    except: readonly ObjectId[],
+    chooser: PlayerId,
+  ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
    * Nothing, if they control no creature (rule 701.68b). */
@@ -12274,7 +12348,7 @@ export interface EffectApi {
   /** See the `"block-additional"` {@link EffectSpec}. */
   grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PermanentDuration): void;
   /** See the `"loyalty-activations"` {@link EffectSpec}. */
-  allowLoyaltyActivations(target: TargetRef, times: 2, duration: PermanentDuration): void;
+  allowLoyaltyActivations(target: TargetRef, times: 2 | { readonly more: number }, duration: PermanentDuration): void;
   /** `target` (a player) mills `amount` cards. */
   mill(target: TargetRef, amount: number): void;
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: how
@@ -12756,6 +12830,11 @@ export interface EffectApi {
   /** `GameState.repeatSince`, which a `repeat` sets as it begins, and restores
    * once its last pass is done; this returns what it was. */
   scopeRepeat(at: number | undefined): number | undefined;
+  /** `GameState.repeatPass`, which a `repeat` sets as each pass begins and
+   * restores once its last is done; this returns what it was. */
+  scopeRepeatPass(pass: number | undefined): number | undefined;
+  /** The `{ repeatPass }` amount: the pass of the repeat under way, 0 outside one. */
+  repeatPass(): number;
   /** See the `"populate"` {@link EffectSpec}. */
   populate(): void;
   /** See the `"amass"` {@link EffectSpec}. `onto`: the Army already
@@ -13386,6 +13465,15 @@ export interface EffectApi {
     attachTo?: EnterAttachHost,
   ): boolean;
   /** See the `"search-library"` {@link EffectSpec}. */
+  /** See the `"search-library"` {@link EffectSpec}'s `eachLibrary`: one
+   * search of every library of `owners` by the effect's controller, up to one
+   * find from each, then each of them shuffles. */
+  searchEachLibrary(
+    owners: readonly PlayerId[],
+    filter: CardFilter,
+    destination: "exile" | "graveyard" | "hand",
+    then: EffectSpec | undefined,
+  ): void;
   searchLibrary(
     player: PlayerId | null,
     filter: CardFilter,
@@ -14553,9 +14641,10 @@ function applyFlipCoin(spec: Extract<EffectSpec, { kind: "flip-coin" }>, ctx: Re
 
 function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
-  const finish = (done: { readonly outer: number; readonly outerRepeat?: number }): void => {
+  const finish = (done: { readonly outer: number; readonly outerRepeat?: number; readonly outerPass?: number }): void => {
     ctx.scopeThisWay(done.outer);
     ctx.scopeRepeat(done.outerRepeat);
+    ctx.scopeRepeatPass(done.outerPass);
   };
   if (progress?.stop === true) {
     finish(progress);
@@ -14565,10 +14654,12 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
     const total = spec.times === undefined ? undefined : Math.max(0, amountValue(spec.times, ctx));
     if (total === 0) return;
     const outerRepeat = ctx.scopeRepeat(ctx.nextEventSeq());
+    const outerPass = ctx.scopeRepeatPass(0);
     progress = {
       round: 0,
       outer: ctx.thisWaySince(),
       ...(outerRepeat !== undefined ? { outerRepeat } : {}),
+      ...(outerPass !== undefined ? { outerPass } : {}),
       ...(total !== undefined ? { total } : {}),
     };
   }
@@ -14592,10 +14683,26 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
         // "You may repeat this process": asked, the next pass its yes.
         const next: EffectSpec = { ...spec, progress: { ...progress, judged: true } };
         const declined: EffectSpec = { ...spec, progress: { ...progress, stop: true } };
+        const prompt = (typeof spec.mayAgain === "object" ? spec.mayAgain.prompt : undefined) ?? "Repeat this process?";
+        const asks = typeof spec.mayAgain === "object" ? spec.mayAgain.asks : undefined;
+        if (asks !== undefined) {
+          // "…and that player decides whether to flip again" (Game of
+          // Chaos): the first case holding over this pass names who.
+          const named = asks.find((c) => c.if === undefined || judge.conditionMet(c.if));
+          const asked = named === undefined ? undefined : resolvePlayerRef(named.who, judge);
+          if (asked === undefined || !ctx.playersInScope("each-player").includes(asked)) {
+            finish(progress);
+            return;
+          }
+          if (asked !== ctx.controller) {
+            ctx.askPlayerAboutEffect(asked, prompt, next, declined);
+            return;
+          }
+        }
         applyEffectSpec(
           {
             kind: "may",
-            prompt: "Repeat this process?",
+            prompt,
             effect: next,
             else: declined,
             ...(typeof spec.mayAgain === "object" && spec.mayAgain.cost !== undefined ? { cost: spec.mayAgain.cost } : {}),
@@ -14611,6 +14718,7 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
     // A new pass, its own "this way".
     pass = ctx.scopeThisWay(ctx.nextEventSeq());
     const round: number = progress.round + 1;
+    ctx.scopeRepeatPass(round);
     const parked = pass.parkedCount();
     const pendingBefore = pass.decisionPending();
     applyEffectSpec(spec.effect, pass);
@@ -14618,6 +14726,7 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
       round,
       outer: progress.outer,
       ...(progress.outerRepeat !== undefined ? { outerRepeat: progress.outerRepeat } : {}),
+      ...(progress.outerPass !== undefined ? { outerPass: progress.outerPass } : {}),
       ...(progress.total !== undefined ? { total: progress.total } : {}),
     };
     if (!pendingBefore && pass.decisionPending()) {
@@ -15314,6 +15423,7 @@ export function signedAmountValue(
     return 2 ** Math.min(52, Math.max(0, Math.floor(signedAmountValue(amount.powerOfTwo, ctx, each))));
   }
   if ("lifePaymentsOf" in amount) return ctx.lifePaymentsOf(amount.lifePaymentsOf);
+  if ("repeatPass" in amount) return ctx.repeatPass();
   if ("half" in amount) {
     // Signed, like the rest of this function: `amountValue` clamps the
     // result, and a value setting power keeps its sign (rule 107.1b).
@@ -17356,6 +17466,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (among.length === 0) return;
         const picked = among[ctx.pickAtRandom(among.length, (i) => ({ kind: "card", object: among[i].object }))];
         applyEffectSpec(spec.then, ctx.withFoundAt(0, picked.object));
+        return;
+      }
+      if (spec.orPlayers !== undefined) {
+        // "A creature or player": one of either, chosen now (Comet).
+        ctx.choosePermanentOrPlayer(
+          spec.filter,
+          ctx.playersInScope(spec.orPlayers),
+          spec.then,
+          spec.prompt,
+          spec.exceptSource === true,
+          except,
+          chooser,
+        );
         return;
       }
       const pendingBefore = ctx.decisionPending();
@@ -21690,9 +21813,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (target !== undefined) ctx.shuffleIntoLibrary(target);
       // "When this creature dies, shuffle it into its owner's library" with
       // the card gone from the graveyard since: it stays where it is, and its
-      // owner shuffles all the same (Angel of Fury's ruling).
+      // owner shuffles all the same (rule 701.24c; Angel of Fury's ruling).
+      // The source likewise: Yidaro, Wandering Monster's "shuffle it into
+      // your library from your graveyard" with the card gone from there.
       else if (spec.target === "trigger-object" && ctx.triggerObject !== undefined) {
         ctx.shuffleIntoLibrary({ kind: "object", object: ctx.triggerObject }, true);
+      } else if (spec.target === "source") {
+        ctx.shuffleIntoLibrary({ kind: "object", object: ctx.source }, true);
       }
       return;
     }
@@ -21700,6 +21827,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.scry(amountValue(spec.amount, ctx), true, spec.then);
       return;
     case "search-library": {
+      if (spec.eachLibrary !== undefined) {
+        const destination = spec.destination;
+        if (destination !== "exile" && destination !== "graveyard" && destination !== "hand") return;
+        ctx.searchEachLibrary(ctx.playersInScope(spec.eachLibrary), spec.filter, destination, spec.then);
+        return;
+      }
       let searcher: PlayerId | null = null;
       if (spec.who !== undefined) {
         // Nobody: no search.

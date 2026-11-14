@@ -639,11 +639,13 @@ import _poolPhloxUnorthodoxDoctor from "../pool/phlox-unorthodox-doctor.js";
 import _poolPhoenixOfAsh from "../pool/phoenix-of-ash.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhyrexianFurnace from "../pool/phyrexian-furnace.js";
+import _poolPhyrexianProcessor from "../pool/phyrexian-processor.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
 import _poolPickUpThePace from "../pool/pick-up-the-pace.js";
 import _poolPietyCharm from "../pool/piety-charm.js";
 import _poolPillardropRescuer from "../pool/pillardrop-rescuer.js";
 import _poolPinecrestRidge from "../pool/pinecrest-ridge.js";
+import _poolPiratedCopy from "../pool/pirated-copy.js";
 import _poolPlagueStinger from "../pool/plague-stinger.js";
 import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
@@ -1691,11 +1693,13 @@ const shard: CardShard = {
     _poolPhoenixOfAsh,
     _poolPhyrexianDebaser,
     _poolPhyrexianFurnace,
+    _poolPhyrexianProcessor,
     _poolPhytoburst,
     _poolPickUpThePace,
     _poolPietyCharm,
     _poolPillardropRescuer,
     _poolPinecrestRidge,
+    _poolPiratedCopy,
     _poolPlagueStinger,
     _poolPlantBeans,
     _poolPlateau,

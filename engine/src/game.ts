@@ -132,6 +132,7 @@ import {
   countValue,
   damageDealtThisTurn,
   journalCount,
+  journalSetMembers,
   powerAttackedWith,
   cardTypesInGraveyards,
   basicLandTypesAmong,
@@ -253,6 +254,7 @@ import { blockers } from "./decisions/blockers.js";
 import { chooseCopy } from "./decisions/choose-copy.js";
 import { chooseEnchant } from "./decisions/choose-enchant.js";
 import { choosePermanents } from "./decisions/choose-permanents.js";
+import { choosePermanentOrPlayer } from "./decisions/choose-permanent-or-player.js";
 import { separatePiles } from "./decisions/separate-piles.js";
 import { choosePile } from "./decisions/choose-pile.js";
 import { replacementOrder } from "./decisions/replacement-order.js";
@@ -409,6 +411,7 @@ import {
   journalTotal,
   modesDoneThisTurn,
   noteCombatDamagedBy,
+  noteCycledNames,
 } from "./journal.js";
 import {
   flipsSince,
@@ -2745,6 +2748,7 @@ export class Game {
       applyMulliganHandAbility: (player, card) => this.applyMulliganHandAbility(player, card),
       applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
       applyReplacementOrder: (player, option) => this.applyReplacementOrder(player, option),
+      applyChoosePermanentOrPlayer: (player, choice) => this.applyChoosePermanentOrPlayer(player, choice),
       applyAttackerDeclarations: (p, d, life) => this.applyAttackerDeclarations(p, d, life),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
       applyChooseTargets: (p, t, d) => this.applyChooseTargets(p, t, d),
@@ -7896,6 +7900,18 @@ export class Game {
     if (awaiting === null || awaiting.kind !== "choose-copy") {
       throw new Error("unreachable: whyCannotCopyChoice should have caught this");
     }
+    // Asked as it's turned face up (Vesuvan Shapeshifter): it turns now, as
+    // the copy, if it's still that face-down permanent (rule 400.7).
+    if (awaiting.faceUp !== undefined) {
+      const { faceUp } = awaiting;
+      this.state.awaiting = null;
+      const object = this.state.objects[awaiting.source];
+      if (object !== undefined && object.zone === "battlefield" && object.faceDown !== undefined) {
+        this.becomeFaceUp(awaiting.source, faceUp.player, faceUp.megamorph, faceUp.x, faceUp.priorityTo, copy);
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(faceUp.priorityTo ?? this.activePlayer);
+      return;
+    }
 
     // Asked before the Clone moved (`askEnterChoice`), so the answer waits on
     // it, and its entry carries on once priority is next looked at. What it
@@ -7905,6 +7921,29 @@ export class Game {
     this.recordCopyChoice(awaiting.source, player, copy);
     this.state.awaiting = null;
     this.prepareForPriority(this.activePlayer);
+  }
+
+  /** The copiable modifiers a copy of `copied` takes from a copy effect with
+   * these exceptions: `copied`'s own copy exceptions, which are part of what's
+   * copied (rule 707.9b — a token copy's "isn't legendary" among them), then
+   * `except`, which win where they differ. */
+  private copyEffectModifiers(copied: GameObject, except: CopyExceptions | undefined): PtModifier[] {
+    const name = this.unflippedName(printedCardName(copied));
+    // A card in a graveyard or exile has only what's printed on it.
+    const its = copied.zone === "battlefield" ? copied.modifiers : [];
+    return [
+      // A duration isn't copiable (Cursed Mirror's ruling): what copies a
+      // copy that lasts until end of turn keeps it.
+      ...its.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false })),
+      ...(except !== undefined
+        ? copyExceptionModifiers(
+            except,
+            this.registry,
+            copiableTypesOf(this.registry, name, its),
+            copiableKeywordAbilities(this.registry, name, its),
+          )
+        : []),
+    ];
   }
 
   /** What `chooser` chose for the Clone `cloneId` to enter as a copy of — a
@@ -7932,37 +7971,41 @@ export class Game {
     clone.enterChoice = {
       ...clone.enterChoice,
       copyOf: copied === undefined ? null : this.unflippedName(printedCardName(copied)),
-      // Its copy exceptions are part of what's copied (rule 707.9b) — a token
-      // copy's "isn't legendary" among them — and then this copy effect's
-      // own, which win where they differ.
-      copyModifiers:
-        copied === undefined
-          ? []
-          : [
-              // A duration isn't copiable (Cursed Mirror's ruling): what
-              // copies a copy that lasts until end of turn keeps it.
-              // A card in a graveyard or exile has only what's printed on it.
-              ...(copied.zone === "battlefield"
-                ? copied.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false }))
-                : []),
-              ...(except !== undefined ? copyExceptionModifiers(except, this.registry, copiableTypesOf(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : []), copiableKeywordAbilities(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : [])) : []),
-            ],
+      copyModifiers: copied === undefined ? [] : this.copyEffectModifiers(copied, except),
       // What copying adds to how it enters (rule 707.9e) — only if it copies.
       ...(copied !== undefined &&
       spec !== null &&
-      (spec.tapped === true || spec.counters !== undefined || spec.untilEndOfTurn === true || spec.whenYouDo !== undefined)
+      (spec.tapped === true ||
+        spec.counters !== undefined ||
+        spec.untilEndOfTurn === true ||
+        spec.untilTurnedFaceDown === true ||
+        spec.whenYouDo !== undefined)
         ? {
             copyEnter: {
               ...(spec.tapped === true ? { tapped: true as const } : {}),
               ...(spec.untilEndOfTurn === true ? { untilEndOfTurn: true as const } : {}),
+              ...(spec.untilTurnedFaceDown === true ? { untilTurnedFaceDown: true as const } : {}),
               ...(spec.counters !== undefined
                 ? {
                     counters: spec.counters
                       .filter((c) => c.ifYouControlCopied !== true || copiedIsYours)
                       .map((c) => ({
                         kind: c.kind,
-                        // "X additional counters": the X it was cast with.
-                        amount: c.amount === "x" ? (clone.xValue ?? 0) : c.amount,
+                        // "X additional counters": the X it was cast with;
+                        // "equal to the power of the other card" (The
+                        // Mimeoplasm): the exiled cards it didn't copy, each
+                        // as it is in exile (a negative power adds none).
+                        amount:
+                          c.amount === "x"
+                            ? (clone.xValue ?? 0)
+                            : c.amount === "other-exiled-power"
+                              ? Math.max(
+                                  0,
+                                  (clone.enterChoice?.copyExiled ?? [])
+                                    .filter((card) => card !== copied.id)
+                                    .reduce((sum, card) => sum + computeCharacteristics(this.state, this.registry, card).power, 0),
+                                )
+                              : c.amount,
                         ...(c.ifType !== undefined ? { ifType: c.ifType } : {}),
                       })),
                   }
@@ -8289,6 +8332,16 @@ export class Game {
     // Where an additional copy goes among the others (Twinning Staff).
     if (awaiting.placeCopy !== undefined) {
       this.placeSpellCopy(awaiting.source, awaiting.placeCopy.among, number);
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
+    // "As this artifact enters, pay any amount of life" (Phyrexian
+    // Processor): paid now, part of the replacement (rule 614.1c), and its
+    // entry carries on once priority is next looked at.
+    if (awaiting.payLifeAsEntering !== undefined) {
+      this.payLife(player, number);
+      const entering = this.state.objects[awaiting.source];
+      if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, asEntersDone: number };
       this.prepareForPriority(this.activePlayer);
       return;
     }
@@ -11391,6 +11444,28 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // The Mimeoplasm's cards to exile (`CopyOnEnter.exileFirst`): all of
+    // them, exiled now as one event, or — fewer chosen — none, and it enters
+    // as itself. Its entry carries on, asking which one it copies.
+    if (awaiting.copyExileOf !== undefined) {
+      const entering = this.state.objects[awaiting.copyExileOf];
+      this.state.awaiting = null;
+      if (entering !== undefined) {
+        if (chosen.length === awaiting.max) {
+          const exiled: ObjectId[] = [];
+          this.withGraveyardLeaveBatch(() => {
+            for (const card of chosen) {
+              if (this.state.objects[card]?.zone === "graveyard" && this.moveObject(card, "exile")) exiled.push(card);
+            }
+          });
+          entering.enterChoice = { ...entering.enterChoice, copyExiled: exiled };
+        } else {
+          entering.enterChoice = { ...entering.enterChoice, copyOf: null };
+        }
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // A Clone copying a card in a graveyard or exile (`CopyOnEnter.from`):
     // nothing moves, and its entry carries on as a `choose-copy`'s does.
     if (awaiting.copyOnEnterOf !== undefined) {
@@ -12097,8 +12172,12 @@ export class Game {
     } else if (leftoverTo === "shuffle") {
       // A library search — shuffle the whole library afterwards (rule 701.24b):
       // its owner's, when another player's was searched ("then that player
-      // shuffles").
-      this.shuffleLibraryOf(awaiting.forPlayer ?? player);
+      // shuffles"), or each one searched (Jace, Architect of Thought's −8).
+      if (awaiting.shufflesLibraries !== undefined) {
+        for (const owner of awaiting.shufflesLibraries) this.shuffleLibraryOf(owner);
+      } else {
+        this.shuffleLibraryOf(awaiting.forPlayer ?? player);
+      }
     } else if (leftoverTo === "hand") {
       // Genesis Ultimatum: "… and the rest into your hand." needed-cards P19.
       for (const id of leftover) this.moveObject(id, "hand");
@@ -15310,6 +15389,27 @@ export class Game {
       };
       return true;
     }
+    if (spec.payLife !== undefined) {
+      // Any amount from 0 to their life total, only 0 if they can't pay life
+      // (rules 119.4, 119.4b): with nothing above 0 payable, 0 unasked.
+      const life = this.state.players[chooser].life;
+      const max = life > 0 && this.canPayLife(chooser, life, "not-a-cost") ? life : 0;
+      if (max === 0) {
+        object.enterChoice = { ...answered, asEntersDone: 0 };
+        return false;
+      }
+      this.state.awaiting = {
+        kind: "choose-number",
+        player: chooser,
+        source: id,
+        min: 0,
+        max,
+        // The client puts the source's name before it.
+        prompt: "Pay any amount of life as it enters",
+        payLifeAsEntering: true,
+      };
+      return true;
+    }
     if (exile === undefined) {
       object.enterChoice = { ...answered, asEntersDone: 0 };
       return false;
@@ -15923,11 +16023,43 @@ export class Game {
         object.enterChoice = { ...object.enterChoice, reveal: null };
         continue;
       }
+      const copySpec = this.registry.get(rulesTextName(object)).copyOnEnter;
+      const exileFirst = copySpec?.exileFirst;
+      const exiledFirst = object.enterChoice?.copyExiled;
       const options = this.copyOptions(id, chooser);
+      // "You may exile two creature cards from graveyards. If you do, …"
+      // (The Mimeoplasm): which ones first, all or none — fewer than that
+      // many being "you don't" (its ruling).
+      if (exileFirst !== undefined && exiledFirst === undefined) {
+        if (options.length >= exileFirst) {
+          this.state.awaiting = {
+            kind: "choose-from-zone",
+            player: chooser,
+            ids: options,
+            eligible: options,
+            min: 0,
+            max: exileFirst,
+            destination: "stay",
+            leftover: "stay",
+            copyExileOf: id,
+            prompt: `You may exile ${exileFirst} cards as ${nameOf(object)} enters, then have it enter as a copy of one of them (fewer than ${exileFirst} declines)`,
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, copyOf: null };
+        continue;
+      }
+      // One of those it exiled, its controller's choice: with just one, it
+      // copies that one.
+      if (exileFirst !== undefined && options.length === 1) {
+        this.recordCopyChoice(id, chooser, options[0]);
+        continue;
+      }
       if (options.length > 0) {
-        const from = this.registry.get(rulesTextName(object)).copyOnEnter?.from;
+        const from = copySpec?.from;
         // Cards aren't on the board to click: they're shown, as any choice
-        // out of a zone is, and choosing none is "copy nothing".
+        // out of a zone is, and choosing none is "copy nothing" — except
+        // after exiling them to copy one (`exileFirst`).
         this.state.awaiting =
           from !== undefined
             ? {
@@ -15935,12 +16067,15 @@ export class Game {
                 player: chooser,
                 ids: options,
                 eligible: options,
-                min: 0,
+                min: exileFirst !== undefined ? 1 : 0,
                 max: 1,
                 destination: "stay",
                 leftover: "stay",
                 copyOnEnterOf: id,
-                prompt: `You may have ${nameOf(object)} enter as a copy of a card`,
+                prompt:
+                  exileFirst !== undefined
+                    ? `Choose the card ${nameOf(object)} enters as a copy of`
+                    : `You may have ${nameOf(object)} enter as a copy of a card`,
               }
             : { kind: "choose-copy", player: chooser, source: id, options };
         return true;
@@ -16188,6 +16323,9 @@ export class Game {
     ) {
       return [];
     }
+    // Once `exileFirst` has exiled its cards: those of them still in exile.
+    const exiledFirst = clone.enterChoice?.copyExiled;
+    if (exiledFirst !== undefined) return exiledFirst.filter((id) => this.state.objects[id]?.zone === "exile");
     const ctx = this.makeResolutionContext(cloneId, chooser, [], clone.xValue ?? 0, 0);
     // Permanents, or cards in every graveyard or in exile (`CopyOnEnter.from`)
     // — a face-down exiled card only its owner may have looked at isn't one
@@ -16298,6 +16436,9 @@ export class Game {
    * count "the first card you cycle each turn" reads. */
   private noteCycled(player: PlayerId, object: ObjectId, x: number): void {
     this.journal({ kind: "cycled", player, object });
+    // "Cycled a card named … this game": by the name it had as it was cycled.
+    const cycled = this.state.objects[object];
+    if (cycled !== undefined) noteCycledNames(this.state, player, namesOf(this.registry, cycled));
     this.emit({ type: "card-cycled", player, object, ...(x > 0 ? { x } : {}) });
   }
 
@@ -16334,7 +16475,7 @@ export class Game {
     // wherever the discard put it, which a search's prompt names.
     const abilityId = this.mintAbilityObject(cardId, def.name, player, "activated", 0, []);
     this.state.objects[abilityId].grantedAbility = { kind: "cycling", cardName: def.name };
-    this.emit({ type: "ability-activated", source: cardId, player, onStack: true, ability: abilityId });
+    this.emit({ type: "ability-activated", source: cardId, player, onStack: true, ability: abilityId, fromZone: "hand" });
     this.afterPlayerAction(player);
   }
 
@@ -25101,7 +25242,10 @@ export class Game {
         ? null
         : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
       if (timing !== null) return timing;
-      if (this.loyaltyActivationsOf(source) >= this.loyaltyActivationsAllowed(player, source)) {
+      if (
+        this.loyaltyActivationsOf(source) >=
+        this.loyaltyActivationsAllowed(player, source, abilityIndex < this.registry.get(rulesTextName(source)).activated.length)
+      ) {
         return `a loyalty ability of ${def.name} has already been activated this turn`;
       }
       // A "−X" cost removes the X announced (rule 107.3a), so it needs that
@@ -26099,7 +26243,7 @@ export class Game {
       player,
       onStack: true,
       ability: abilityId,
-      ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
+      ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
       // What the cost sacrifices (rule 701.21a): the one already gone, or the
       // several chosen just below, which is the same payment (602.2b).
       ...(ability.cost.exilesSacrifice !== true &&
@@ -26531,7 +26675,7 @@ export class Game {
       source: sourceId,
       player,
       onStack: false,
-      ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
+      ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
     });
     // Activated by hand, its player holding priority (`whyCannotAct`) —
     // one activated while paying a cost is `executePayment`'s, inside the
@@ -27900,14 +28044,19 @@ export class Game {
   /** How many times `player` may activate loyalty abilities of a permanent
    * this turn: once (rule 606.3), or twice with Oath of Teferi's static for
    * every planeswalker they control, or with `source`'s own for itself alone
-   * (Urza, Planeswalker's "the loyalty abilities of Urza"). */
-  private loyaltyActivationsAllowed(player: PlayerId, source: GameObject): number {
+   * (Urza, Planeswalker's "the loyalty abilities of Urza"). `printed`: the
+   * ability asked about is one of its own printed ones, which "N more times"
+   * (Comet, Stellar Pup) reaches. */
+  private loyaltyActivationsAllowed(player: PlayerId, source: GameObject, printed: boolean): number {
     // "As though none of its loyalty abilities have been activated this turn"
     // (The Chain Veil): one more each time one resolved, on top of the rest.
     const extra = (this.state.playerEffects ?? []).filter(
       (e) => e.owner === player && e.extraLoyaltyActivation === true,
     ).length;
-    return extra + this.loyaltyActivationsBase(player, source);
+    // "You may activate Comet's loyalty ability two more times this turn":
+    // each its own, his normal ability only (the ruling).
+    const more = printed ? source.modifiers.reduce((n, m) => n + (m.loyaltyActivationsMore ?? 0), 0) : 0;
+    return extra + more + this.loyaltyActivationsBase(player, source);
   }
 
   private loyaltyActivationsBase(player: PlayerId, source: GameObject): number {
@@ -29721,6 +29870,7 @@ export class Game {
     if (this.state.suspendedResolutions.length === 0) {
       delete this.state.resolutionSince;
       delete this.state.repeatSince;
+      delete this.state.repeatPass;
       delete this.state.resolvingSource;
       delete this.state.resolvingController;
       delete this.state.resolvingTriggered;
@@ -31734,7 +31884,12 @@ export class Game {
             ? this.creatureCount(this.batchedAttackers(trigger, this.playerAttackers(trigger, event), object))
             : // How many cards left the graveyard, for "that many".
               trigger.on === "leaves-graveyard" && event.type === "cards-left-graveyard"
-              ? this.graveyardLeavers(trigger, event.objects, object).length
+              ? trigger.batchValue === "greatest-mana-value"
+                ? this.graveyardLeavers(trigger, event.objects, object).reduce(
+                    (most, id) => Math.max(most, this.graveyardDepartures?.get(id)?.manaValue ?? 0),
+                    0,
+                  )
+                : this.graveyardLeavers(trigger, event.objects, object).length
               : // How many cards were put into the graveyard.
                 trigger.on === "put-into-graveyard" && event.type === "cards-put-into-graveyard"
               ? this.graveyardArrivals(trigger, event.arrivals, object).length
@@ -34550,8 +34705,20 @@ export class Game {
         if (event.onStack ? event.ability === undefined : spec.orMana !== true) return false;
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
         if (spec.who !== "attached") {
-          if (self.zone !== "battlefield") return false;
+          // On the battlefield — or in a graveyard for an ability that works
+          // only there, the only kind the trigger scan asks of a graveyard
+          // card (rule 113.6k; Afterburner Expert's "return this card from
+          // your graveyard").
+          if (self.zone !== "battlefield" && self.zone !== "graveyard") return false;
           if ((spec.who === "you") !== (event.player === self.controller)) return false;
+          // "An ability of a card in your graveyard": activated from there,
+          // wherever its cost has since put the card.
+          if (
+            spec.sourceZone !== undefined &&
+            (event.fromZone !== spec.sourceZone || this.state.objects[event.source]?.owner !== self.controller)
+          ) {
+            return false;
+          }
           if (spec.source !== undefined) {
             // A permanent's ability, read as it is now that the costs are
             // paid: a Vehicle being crewed isn't a creature yet. One its own
@@ -36730,6 +36897,10 @@ export class Game {
         });
       }
       if (typeof ref !== "object") return [];
+      if ("turnHistory" in ref) {
+        // A journal word's objects, each as its entry kept it (603.10a).
+        return journalSetMembers(this.state, this.registry, scoped(ref.who ?? "you"), ref.turnHistory, controller, ref.window);
+      }
       if ("targets" in ref) {
         return ref.targets.flatMap((slot): SetMember[] => {
           const target = targets[slot];
@@ -39600,6 +39771,23 @@ controlledBy,
             );
             return;
           }
+          // "The other on the bottom of your library in any order" (Jace,
+          // Architect of Thought): one library's cards still in it are ordered
+          // there by their owner (rule 401.4) with no zone change; anything
+          // else goes through `put-on-libraries`, which asks each owner in turn.
+          if (fate === "library-bottom") {
+            const owners = new Set(still.map((id) => this.state.objects[id]?.owner));
+            const owner = this.state.objects[still[0]]?.owner;
+            if (owners.size === 1 && owner !== undefined && still.every((id) => this.state.objects[id]?.zone === "library")) {
+              this.beginLibraryOrder(owner, still, "bottom");
+              return;
+            }
+            applyEffectSpec(
+              { kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "bottom" },
+              this.makeResolutionContext(source, controller, still.map((object) => ({ kind: "object", object })), x),
+            );
+            return;
+          }
           // Each pile's fate is one instruction: everything in it at once.
           this.withLeaveBatch(() =>
             this.withGraveyardLeaveBatch(() =>
@@ -40155,6 +40343,13 @@ controlledBy,
         else this.state.repeatSince = at;
         return was;
       },
+      scopeRepeatPass: (pass) => {
+        const was = this.state.repeatPass;
+        if (pass === undefined) delete this.state.repeatPass;
+        else this.state.repeatPass = pass;
+        return was;
+      },
+      repeatPass: () => this.state.repeatPass ?? 0,
       scopeThisWay: (at) => {
         this.state.resolutionSince = at;
         return this.makeResolutionContext(
@@ -40332,6 +40527,13 @@ controlledBy,
       timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount),
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
         this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether, {
+          triggerValue,
+          ...(triggerObject !== undefined ? { triggerObject } : {}),
+          targetZones,
+          lastKnownRefs: refs,
+        }),
+      choosePermanentOrPlayer: (filter, players, then, prompt, exceptSource, except, chooser) =>
+        this.beginChoosePermanentOrPlayer(source, chooser, x, filter, players, then, prompt, exceptSource, except, {
           triggerValue,
           ...(triggerObject !== undefined ? { triggerObject } : {}),
           targetZones,
@@ -42182,6 +42384,8 @@ controlledBy,
             ? scoped(who).forEach((player) => this.changeLife(player, delta))
             : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
         ),
+      searchEachLibrary: (owners, filter, destination, then) =>
+        this.beginEachLibrarySearch(controller, owners, filter, destination, x, source, refs.source, then),
       searchLibrary: (
         player,
         filter,
@@ -43046,6 +43250,74 @@ controlledBy,
             thenX: x,
             ...(more.sourceStint !== undefined ? { thenSourceStint: more.sourceStint } : {}),
             thenPlayer: owner,
+          }
+        : {}),
+    };
+  }
+
+  /**
+   * "For each player, search that player's library for [a card] and exile it,
+   * then that player shuffles" (Jace, Architect of Thought's −8 — the
+   * `search-library` effect's `eachLibrary`): one search by `player` of every
+   * library of `owners` still in the game, its choices made together once
+   * they've all been looked through (the ruling), as one `choose-from-zone`
+   * whose `one-each` rule takes up to one find from each library (rule
+   * 701.23b: a stated quality may fail to find). The finds go to their owners'
+   * `destination`; then each library searched is shuffled (701.24a) — one
+   * that can't be searched too ("then that player shuffles" still happens).
+   * Aven Mindcensor's top cards apply to each library (`librarySearchTop` is
+   * the searcher's), and an Opposition Agent's control begins when the
+   * searcher's own library is among them.
+   */
+  private beginEachLibrarySearch(
+    player: PlayerId,
+    owners: readonly PlayerId[],
+    filter: CardFilter,
+    destination: "exile" | "graveyard" | "hand",
+    x: number,
+    source: ObjectId,
+    sourceStint: number | undefined,
+    then: EffectSpec | undefined,
+  ): void {
+    const searchTop = librarySearchTop(this.state, this.registry, player);
+    const eligible: ObjectId[] = [];
+    const tags: Record<string, readonly string[]> = {};
+    const shuffled: PlayerId[] = [];
+    for (const owner of owners) {
+      if (this.state.players[owner]?.hasLost !== false) continue;
+      shuffled.push(owner);
+      if (this.cantSearchLibrary(player, owner)) continue;
+      if (owner === player) {
+        this.beginSearchControl(player);
+        this.journal({ kind: "library-searched", player });
+      }
+      this.emit({ type: "library-searched", player, owner });
+      const library = this.state.zones.perPlayer[owner].library;
+      for (const id of searchTop === null ? library : library.slice(0, searchTop)) {
+        if (!matchesFilter(this.state, this.registry, id, filter, { you: player, x })) continue;
+        eligible.push(id);
+        tags[id] = [owner];
+      }
+    }
+    if (shuffled.length === 0) return;
+    const slots = new Set(eligible.map((id) => this.state.objects[id]?.owner)).size;
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: eligible,
+      eligible,
+      min: 0,
+      max: slots,
+      together: { rule: "one-each", tags, text: "one card from each library" },
+      destination,
+      leftover: "shuffle",
+      shufflesLibraries: shuffled,
+      ...(then !== undefined
+        ? {
+            then,
+            thenSource: source,
+            thenX: x,
+            ...(sourceStint !== undefined ? { thenSourceStint: sourceStint } : {}),
           }
         : {}),
     };
@@ -49073,23 +49345,23 @@ controlledBy,
   }
 
   /** The creatures tapped to pay `vehicle`'s crew cost crew it (rule
-   * 702.122b): each remembers it, in the stint it's in, for the turn, and
-   * the journal keeps each as it was tapped (`crewed-by` — 702.122c: the
-   * Vehicle was crewed by it, though it leaves or changes since). */
+   * 702.122b): each remembers it, in the stint it's in, for the turn. */
   private recordCrewers(vehicle: ObjectId, creatures: readonly ObjectId[]): void {
     const stint = this.state.objects[vehicle]?.zoneChangeCount ?? 0;
     for (const id of creatures) {
       const creature = this.state.objects[id];
       if (creature === undefined) continue;
+      // The journal's too, for "each creature that crewed it this turn" once
+      // the creature has left (`"crewers"`).
       this.journal({
-        kind: "crewed-by",
+        kind: "crews",
         player: creature.controller,
         object: id,
         stint: creature.zoneChangeCount ?? 0,
         was: this.takeLastKnown(id),
         target: { kind: "object", object: vehicle },
         targetStint: stint,
-        ...((creature.stackCount ?? 1) !== 1 ? { count: creature.stackCount } : {}),
+        targetWas: this.takeLastKnown(vehicle),
       });
       const had = creature.crewedThisTurn ?? [];
       if (had.some((r) => r.vehicle === vehicle && r.stint === stint)) continue;
@@ -51208,6 +51480,88 @@ controlledBy,
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
+  /**
+   * Raise the `choose-permanent-or-player` decision — a `choose-permanents`
+   * effect's `orPlayers` (Comet, Stellar Pup's "to a creature or player"):
+   * one of the permanents matching `filter` from `player`'s side or one of
+   * `players`, chosen as the effect resolves (rule 608.2c), not targeted.
+   * Nothing is asked when there's nothing to choose.
+   */
+  private beginChoosePermanentOrPlayer(
+    source: ObjectId,
+    player: PlayerId,
+    x: number,
+    filter: CardFilter,
+    players: readonly PlayerId[],
+    then: EffectSpec,
+    prompt: string,
+    exceptSource: boolean,
+    except: readonly ObjectId[],
+    thenResolution: ChoosePermanentsResolution,
+  ): void {
+    const sparedSource = exceptSource ? this.oneTokenSpared(source) : undefined;
+    const permanents = this.battlefieldMatching(player, filter, x, source).filter(
+      (id) => id !== sparedSource && !except.includes(id),
+    );
+    const eligible: TargetRef[] = [
+      ...permanents.map((object) => ({ kind: "object" as const, object })),
+      ...players
+        .filter((p) => this.state.players[p]?.hasLost !== true)
+        .map((p) => ({ kind: "player" as const, player: p })),
+    ];
+    if (eligible.length === 0) return;
+    this.state.awaiting = { kind: "choose-permanent-or-player", player, eligible, prompt, then, source, x, thenResolution };
+  }
+
+  /** Answers a pending `choose-permanent-or-player` decision: `then` with the
+   * one chosen as target 0 — a token of a stack singled out first; a
+   * permanent that has left since is read as it last existed (608.2h), and
+   * nothing is done to it. */
+  private applyChoosePermanentOrPlayer(player: PlayerId, choice: TargetRef): void {
+    const why = choosePermanentOrPlayer.whyCannot(
+      this.decisionCtx,
+      { type: "choose-permanent-or-player", player, choice },
+      player,
+    );
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "choose-permanent-or-player") {
+      throw new Error("unreachable: choosePermanentOrPlayer.whyCannot should have caught this");
+    }
+    this.state.awaiting = null;
+    const { then, source, x, thenResolution: resumed } = awaiting;
+    let chosen: TargetRef | undefined = choice;
+    let zone: ZoneType | null = null;
+    if (choice.kind === "object") {
+      chosen =
+        this.state.objects[choice.object]?.zone === "battlefield"
+          ? { kind: "object", object: this.splitOneFromStack(choice.object) }
+          : undefined;
+      zone = "battlefield";
+    } else if (choice.kind === "player" && this.state.players[choice.player]?.hasLost === true) {
+      chosen = undefined;
+    }
+    if (chosen !== undefined) {
+      this.emit({ type: "permanent-or-player-chosen", player, source, chosen });
+      applyEffectSpec(
+        then,
+        this.makeResolutionContext(
+          source,
+          player,
+          [chosen],
+          x,
+          resumed?.triggerValue ?? 0,
+          resumed?.triggerObject,
+          1,
+          0,
+          [zone],
+          resumed?.lastKnownRefs,
+        ),
+      );
+    }
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
   /** Answers a pending `choose-permanents` decision: `then` for each one
    * picked, in order, as target 0 — a stack named twice is two of its
    * tokens, each peeled off as the effect singles it out. */
@@ -53176,6 +53530,9 @@ controlledBy,
     const turned = this.state.objects[one];
     if (turned === undefined) return;
     turned.faceDown = { kind: "effect", ...(as !== undefined ? { as } : {}) };
+    // "Until this creature is turned face down, it becomes a copy …"
+    // (Vesuvan Shapeshifter): it's itself again under its face-down status.
+    this.endTemporaryCopies(turned, (ends) => ends === "turned-face-down");
     invalidateComputedCache();
     this.emit({ type: "permanent-turned-face-down", player: turned.controller, object: one });
   }
@@ -53538,16 +53895,66 @@ controlledBy,
    * (702.37b). `x`: the X paid in that cost, 0 by any other way.
    * `priorityTo`: the player whose special action this was, who has priority
    * again after any choice an "as this is turned face up" asks. */
-  private becomeFaceUp(id: ObjectId, player: PlayerId, megamorphCounter: boolean, x = 0, priorityTo?: PlayerId): void {
+  private becomeFaceUp(
+    id: ObjectId,
+    player: PlayerId,
+    megamorphCounter: boolean,
+    x = 0,
+    priorityTo?: PlayerId,
+    /** What `copyOnEnter.orTurnedFaceUp` chose to copy, once it's asked. */
+    copyAnswer?: ObjectId | null,
+  ): void {
     const object = this.state.objects[id];
     const card = this.registry.get(object.cardName);
+    // "As this creature enters or is turned face up, you may choose another
+    // creature on the battlefield" (Vesuvan Shapeshifter): its controller
+    // chooses first, and it turns face up as the copy (rule 708.11).
+    const copySpec = card.copyOnEnter?.orTurnedFaceUp === true ? card.copyOnEnter : null;
+    if (copySpec !== null && copyAnswer === undefined) {
+      const options = this.state.zones.shared.battlefield.filter((other) => {
+        const o = this.state.objects[other];
+        return (
+          other !== id &&
+          o !== undefined &&
+          this.inGame(o) &&
+          matchesFilter(this.state, this.registry, other, copySpec.filter, { you: object.controller, source: id })
+        );
+      });
+      if (options.length > 0) {
+        this.state.awaiting = {
+          kind: "choose-copy",
+          player: object.controller,
+          source: id,
+          options,
+          faceUp: { player, megamorph: megamorphCounter, x, ...(priorityTo !== undefined ? { priorityTo } : {}) },
+        };
+        return;
+      }
+    }
     delete object.faceDown;
     object.turnedFaceUpOnTurn = this.state.turn.number;
+    // Its copiable values revert to its own as it's turned face up (rule
+    // 708.8); then what it chose to copy, if anything.
+    const copied = copySpec !== null && copyAnswer !== undefined && copyAnswer !== null ? this.state.objects[copyAnswer] : undefined;
+    if (copySpec !== null && copied !== undefined) {
+      const copyOf = this.unflippedName(printedCardName(copied));
+      const modifiers = this.copyEffectModifiers(copied, copySpec.except).map((m) => ({ ...m, timestamp: -2 }));
+      this.setCopiableValues(
+        object,
+        { copyOf, modifiers },
+        copySpec.untilTurnedFaceDown === true ? "turned-face-down" : copySpec.untilEndOfTurn === true ? "end-of-turn" : undefined,
+      );
+    }
     invalidateComputedCache();
     this.revealFaceDown(id);
+    if (copySpec !== null && copied !== undefined) {
+      this.emit({ type: "permanent-copied", object: id, copyOf: object.copyOf ?? null, asTurnedFaceUp: true });
+    }
     const ref = { kind: "object", object: id } as const;
     if (megamorphCounter) this.addCounter(ref, "+1/+1", 1, false, player);
-    const as = card.asTurnedFaceUp;
+    // Its "as this is turned face up" — the copy's, if it's become one (rule
+    // 708.11: one it has after it's turned face up applies as it is).
+    const as = this.registry.get(rulesTextName(object)).asTurnedFaceUp;
     if (as !== undefined && "counters" in as) this.addCounter(ref, "+1/+1", as.counters, false, player);
     // Anything else it says (Gift of Doom's "you may attach it to a
     // creature") is done the next time priority is looked at, ahead of the
@@ -55937,8 +56344,9 @@ controlledBy,
   }
 
   /** See the `"loyalty-activations"` {@link EffectSpec}: `target`'s loyalty
-   * abilities may be activated `times` a turn (`PtModifier.loyaltyActivations`). */
-  private allowLoyaltyActivations(target: TargetRef, times: 2, duration: Expiry): void {
+   * abilities may be activated `times` a turn (`PtModifier.loyaltyActivations`),
+   * or `{ more }` times more (`loyaltyActivationsMore`). */
+  private allowLoyaltyActivations(target: TargetRef, times: 2 | { readonly more: number }, duration: Expiry): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
     if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
@@ -55947,7 +56355,7 @@ controlledBy,
       power: 0,
       toughness: 0,
       keywords: [],
-      loyaltyActivations: times,
+      ...(times === 2 ? { loyaltyActivations: 2 as const } : { loyaltyActivationsMore: Math.max(0, times.more) }),
       ...durationFields(duration),
     });
     invalidateComputedCache();
@@ -62233,6 +62641,8 @@ controlledBy,
       if (r.notes !== undefined) {
         noted = signedAmountValue(r.notes, this.makeResolutionContext(id, object.controller, [], object.xValue ?? 0, 0, id));
       }
+      // "The life paid as this artifact entered" (Phyrexian Processor).
+      if (r.asEnters?.payLife !== undefined) noted = asEntersDone ?? 0;
       // A counter of the kind picked for each card it exiled.
       if (r.asEnters?.exile?.counterForEach !== undefined || r.asEnters?.discard?.keywordCounters !== undefined) {
         for (const kind of asEntersCounters ?? []) addCounters(kind, 1);
@@ -64022,8 +64432,12 @@ controlledBy,
         // A copy "until end of turn" (Cursed Mirror): it and its exceptions
         // end in the cleanup step (rule 514.2), and it's itself again.
         const copied = (enterChoice.copyModifiers ?? []).map((m) => ({ ...m, timestamp: -2, untilEndOfTurn: false }));
+        // One "until this creature is turned face down" (Vesuvan
+        // Shapeshifter) ends as it's turned face down (`turnFaceDown`).
         if (enterChoice.copyEnter?.untilEndOfTurn === true) {
           this.setCopiableValues(object, { copyOf: enterChoice.copyOf, modifiers: copied }, "end-of-turn");
+        } else if (enterChoice.copyEnter?.untilTurnedFaceDown === true) {
+          this.setCopiableValues(object, { copyOf: enterChoice.copyOf, modifiers: copied }, "turned-face-down");
         } else {
           object.copyOf = enterChoice.copyOf;
           // A token already a copy (of a Clone) copies something else now,

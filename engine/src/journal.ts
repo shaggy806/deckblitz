@@ -99,11 +99,10 @@ export type JournalKind =
   | "saddled"
   /** The Vehicle `object` became crewed (702.122c) under `player`, in `stint`. */
   | "crewed"
-  /** A creature `player` controlled crewed the Vehicle `target`, in
-   * `targetStint` — it was tapped to pay its crew cost (702.122b-c), whether
-   * or not the ability then resolved; `was`: the creature as it was tapped
-   * (Adrestia's ruling: "an Assassin when it was tapped"). */
-  | "crewed-by"
+  /** The creature `object` crewed a Vehicle (702.122b: tapped to pay its crew
+   * cost) under `player`, in `stint`; `was`: the creature as it was tapped;
+   * `target`, `targetStint`, `targetWas`: the Vehicle. */
+  | "crews"
   /** `player` bent (`how`: water, earth, fire or air — rules 701.65b,
    * 701.66b, 701.67c, 702.189b). */
   | "bent"
@@ -224,6 +223,11 @@ export interface Journal {
    * controlled it ("dealt combat damage this game by a creature named
    * Gollum, Obsessed Stalker"). Kept past the round the entries last. */
   combatDamagedBy?: Partial<Record<PlayerId, string[]>>;
+  /** The whole game's count of the cards each player cycled, by name, as
+   * each was named as it was cycled ("if you've cycled a card named Yidaro,
+   * Wandering Monster four or more times this game"). Kept past the round
+   * the entries last. */
+  cycledNames?: Partial<Record<PlayerId, Record<string, number>>>;
   /** The triggered abilities that "trigger only once" and have, this game:
    * each one ability of one object in one stint (rule 400.7) — the Collectors
    * of Mystery Booster Commander. Kept past the round the entries last. */
@@ -249,6 +253,19 @@ export function noteCombatDamagedBy(state: GameState, player: PlayerId, names: r
   const journal = (state.journal ??= emptyJournal());
   const list = ((journal.combatDamagedBy ??= {})[player] ??= []);
   for (const name of names) if (!list.includes(name)) list.push(name);
+}
+
+/** Note that `player` cycled a card with these `names` (`Journal.cycledNames`). */
+export function noteCycledNames(state: GameState, player: PlayerId, names: readonly string[]): void {
+  if (names.length === 0) return;
+  const journal = (state.journal ??= emptyJournal());
+  const counts = ((journal.cycledNames ??= {})[player] ??= {});
+  for (const name of names) counts[name] = (counts[name] ?? 0) + 1;
+}
+
+/** How many times `player` has cycled a card named `name` this game. */
+export function cycledNamedCount(state: GameState, player: PlayerId, name: string): number {
+  return state.journal?.cycledNames?.[player]?.[name] ?? 0;
 }
 
 /** Whether a creature named `name` has dealt `player` combat damage this game. */
@@ -301,6 +318,15 @@ export type JournalWhat =
    * since — Rith, Liberated Primeval's "if a creature or planeswalker an
    * opponent controlled was dealt excess damage this turn". */
   | "excess-damaged"
+  /** The creatures that crewed a Vehicle (rule 702.122b), each once per
+   * stint of the creature and of the Vehicle. The entry is about the Vehicle
+   * (a `"recipient"` view): the list is its controller's as it was crewed, a
+   * filter reads it as it was then, and `selfOnly` is "each creature that
+   * crewed **it** this turn" (Luxurious Locomotive) — those that have left
+   * since included (its ruling). `turn-history`'s `doneBy` reads the
+   * creature instead, as it was tapped: "if **an Assassin** crewed it this
+   * turn" (Adrestia). */
+  | "crewers"
   /** Each creature declared as an attacker, once in each stint, however many
    * combats it attacked in. */
   | "attackers"
@@ -320,10 +346,6 @@ export type JournalWhat =
   | "equip-activated"
   /** A player lost life: "if you lost life last turn" (First Response). */
   | "life-lost"
-  /** Each creature tapped to pay a Vehicle's crew cost (`crewed-by`), as it
-   * was tapped: with `turn-history`'s `ofSelf`, "if an Assassin crewed it
-   * this turn" (Adrestia). */
-  | "crewers"
   /** A player gained life. */
   | "life-gained"
   /** A player played a land. */
@@ -392,6 +414,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     whose: "recipient",
     match: (e) => (e.excess ?? 0) > 0 && e.target?.kind === "object",
   },
+  crewers: { kind: "crews", whose: "recipient", match: (e) => e.target?.kind === "object", oncePerList: true },
   attackers: { kind: "attacked", distinct: true },
   "had-to-attack": { kind: "attacked", match: (e) => e.how === "required" },
   "turned-face-up": { kind: "turned-face-up" },
@@ -401,7 +424,6 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   "loyalty-activated": { kind: "activated", match: (e) => e.how === "loyalty" },
   "equip-activated": { kind: "activated", match: (e) => e.how === "equip" },
   "life-lost": { kind: "life-lost" },
-  crewers: { kind: "crewed-by" },
   "life-gained": { kind: "life-gained" },
   "lands-played": { kind: "land-played" },
   waterbent: { kind: "bent", match: (e) => e.how === "water" },

@@ -1,8 +1,9 @@
 /**
- * "If an Assassin crewed it this turn" (Adrestia): the journal's `crewed-by`
+ * "If an Assassin crewed it this turn" (Adrestia): the journal's `crews`
  * entries, each crewer kept as it was tapped to pay the crew cost (rule
- * 702.122b-c; the rulings), read by `turn-history`'s `ofSelf` over the
- * `crewers` view — though the crewer has left or changed since.
+ * 702.122b-c; the rulings), read through the `"crewers"` view with
+ * `selfOnly` (this Vehicle) and `doneBy` (the crewer as it was tapped) —
+ * though the crewer has left or changed since.
  */
 import { describe, expect, it } from "vitest";
 

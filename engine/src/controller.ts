@@ -69,6 +69,8 @@ export type ChoosePileOffer = Extract<LegalAction, { kind: "choose-pile" }>;
 export type ReplacementOrderOffer = Extract<LegalAction, { kind: "replacement-order" }>;
 /** A `choose-number` offer — see `PlayerController.chooseNumber`. */
 export type ChooseNumberOffer = Extract<LegalAction, { kind: "choose-number" }>;
+/** A `choose-permanent-or-player` offer — see `PlayerController.choosePermanentOrPlayer`. */
+export type ChoosePermanentOrPlayerOffer = Extract<LegalAction, { kind: "choose-permanent-or-player" }>;
 import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } from "./state.js";
 import { activePlayerOf, printedCardName, rulesTextName } from "./state.js";
 import { anyNumberSlot, concatModeSpecs, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
@@ -134,6 +136,31 @@ export interface ControllerView {
    * view it would copy the whole log; use `viewAfter` there.
    */
   continueAfter?(action: Action | readonly Action[]): ControllerView | null;
+}
+
+/**
+ * A plain controller's pick for a `choose-permanent-or-player` (Comet's
+ * damage "to a creature or player"): for harm, the opponent with the least
+ * life (damage there lasts; rule 514.2 clears it from creatures), else an
+ * opponent's permanent; for help, itself, else its own permanent; otherwise
+ * the first offered.
+ */
+export function defaultPermanentOrPlayer(view: ControllerView, offer: ChoosePermanentOrPlayerOffer): TargetRef {
+  const me = view.player;
+  const ownerOf = (ref: TargetRef): PlayerId | undefined =>
+    ref.kind === "player" ? ref.player : ref.kind === "object" ? view.state.objects[ref.object]?.controller : undefined;
+  const lifeOf = (ref: TargetRef): number =>
+    ref.kind === "player" ? (view.state.players[ref.player]?.life ?? Infinity) : Infinity;
+  if (offer.polarity === "harm") {
+    const players = offer.eligible.filter((r) => r.kind === "player" && r.player !== me);
+    if (players.length > 0) return [...players].sort((a, b) => lifeOf(a) - lifeOf(b))[0];
+    const theirs = offer.eligible.find((r) => ownerOf(r) !== me);
+    if (theirs !== undefined) return theirs;
+  } else if (offer.polarity === "help") {
+    const mine = offer.eligible.find((r) => r.kind === "player" && r.player === me) ?? offer.eligible.find((r) => ownerOf(r) === me);
+    if (mine !== undefined) return mine;
+  }
+  return offer.eligible[0];
 }
 
 /**
@@ -338,6 +365,10 @@ export interface PlayerController {
   /** Choose a number as a spell or ability resolves: a whole number from the
    * offer's `min`, up to its `max` when it has one. */
   chooseNumber(view: ControllerView, offer: ChooseNumberOffer): number;
+  /** Choose one permanent or player as an effect resolves, untargeted
+   * (Comet, Stellar Pup's "to a creature or player"): one of the offer's
+   * `eligible`. */
+  choosePermanentOrPlayer(view: ControllerView, offer: ChoosePermanentOrPlayerOffer): TargetRef;
   /**
    * A modal spell/ability is resolving (rule 700.2), or a "you may" clause
    * (rule 601.3e). Return the indices of the modes to apply — distinct, and
@@ -830,6 +861,10 @@ export class AutomaticController implements PlayerController {
     return bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
   }
 
+  choosePermanentOrPlayer(view: ControllerView, offer: ChoosePermanentOrPlayerOffer): TargetRef {
+    return defaultPermanentOrPlayer(view, offer);
+  }
+
   /** The order the engine works out as best for the player: the least damage
    * and the most shields kept. */
   chooseReplacementOrder(_view: ControllerView, offer: ReplacementOrderOffer): number {
@@ -1228,6 +1263,8 @@ export class ScriptedController implements PlayerController {
   choosePileFn: (view: ControllerView, offer: ChoosePileOffer) => number = (view, offer) =>
     bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
   chooseNumberFn: (view: ControllerView, offer: ChooseNumberOffer) => number = (_view, offer) => offer.min;
+  choosePermanentOrPlayerFn: (view: ControllerView, offer: ChoosePermanentOrPlayerOffer) => TargetRef = (view, offer) =>
+    defaultPermanentOrPlayer(view, offer);
   chooseReplacementOrderFn: (view: ControllerView, offer: ReplacementOrderOffer) => number = (_view, offer) => offer.best;
   chooseModesFn: ModesChooser = (_view, minModes) =>
     Array.from({ length: minModes }, (_unused, i) => i);
@@ -1420,6 +1457,10 @@ export class ScriptedController implements PlayerController {
 
   choosePile(view: ControllerView, offer: ChoosePileOffer): number {
     return this.choosePileFn(view, offer);
+  }
+
+  choosePermanentOrPlayer(view: ControllerView, offer: ChoosePermanentOrPlayerOffer): TargetRef {
+    return this.choosePermanentOrPlayerFn(view, offer);
   }
 
   chooseReplacementOrder(view: ControllerView, offer: ReplacementOrderOffer): number {

@@ -88,6 +88,10 @@ export interface ZoneViewerProps {
    * renders the way back (the decision strip's "Show choices"). */
   readonly collapsed?: boolean
   readonly onCollapse?: () => void
+  /** A caption under each card, where the zone's own isn't enough — whose
+   * library a card is in when several are searched at once (Jace, Architect
+   * of Thought's −8). Shown in place of the zone caption. */
+  readonly captionOf?: (id: ObjectId) => string | undefined
 }
 
 /**
@@ -109,6 +113,7 @@ export function ZoneViewer({
   castable,
   collapsed = false,
   onCollapse,
+  captionOf,
 }: ZoneViewerProps) {
   const [picked, setPicked] = useState<readonly ObjectId[]>([])
   // Double-faced cards turned over to their other face, for reading it —
@@ -295,7 +300,11 @@ export function ZoneViewer({
                         : undefined
                   }
                 />
-                {mixedZones ? <span className="zv-zone">{ZONE_CAPTION[obj.zone] ?? obj.zone}</span> : null}
+                {captionOf?.(obj.id) !== undefined ? (
+                  <span className="zv-zone">{captionOf(obj.id)}</span>
+                ) : mixedZones ? (
+                  <span className="zv-zone">{ZONE_CAPTION[obj.zone] ?? obj.zone}</span>
+                ) : null}
                 {other ? (
                   <button
                     type="button"

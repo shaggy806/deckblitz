@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4996 already implemented / 4 missing (marks refreshed 2026-11-14)
+4997 already implemented / 3 missing (marks refreshed 2026-11-14)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4861,7 +4861,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4868  Maelstrom Nexus                          {W}{U}{B}{R}{G}  Enchantment
 [x]  4869  Toralf, God of Fury // Toralf's Hammer   {4}              Legendary Creature — God // Legendary Artifact — Equipment
 [x]  4870  Urza, Chief Artificer                    {3}{W}{U}{B}     Legendary Creature — Human Artificer
-[ ]  4871  Possibility Storm                        {3}{R}{R}        Enchantment
+[x]  4871  Possibility Storm                        {3}{R}{R}        Enchantment
 [x]  4872  Summon: Good King Mog XII                {4}{W}           Enchantment Creature — Saga Moogle
 [x]  4873  Hammerhead Tyrant                        {4}{U}{U}        Creature — Dragon
 [x]  4874  Faerie Artisans                          {3}{U}           Creature — Faerie Artificer

@@ -873,6 +873,10 @@ export interface GameObject {
      * before they're asked. */
     readonly transformed?: true;
     readonly copyOf?: string | null;
+    /** The cards its `CopyOnEnter.exileFirst` exiled, once they're chosen:
+     * what it copies one of, and whose others' power its
+     * `"other-exiled-power"` counters count. */
+    readonly copyExiled?: readonly ObjectId[];
     /** The copied permanent's copy exceptions (its `copiable` modifiers),
      * which the copy takes too (rule 707.9b), then this copy effect's own
      * (`CopyOnEnter.except`). */
@@ -891,6 +895,9 @@ export interface GameObject {
       readonly counters?: readonly { readonly kind: string; readonly amount: number; readonly ifType?: CardType }[];
       /** The copy lasts until end of turn (`CopyOnEnter.untilEndOfTurn`). */
       readonly untilEndOfTurn?: true;
+      /** The copy lasts until it's turned face down
+       * (`CopyOnEnter.untilTurnedFaceDown`). */
+      readonly untilTurnedFaceDown?: true;
       /** "When you do, …" (`CopyOnEnter.whenYouDo`, rules 603.11, 707.9g): the
        * ability, with what it copied as it was chosen — its trigger object,
        * by stint (rule 400.7). */
@@ -1751,6 +1758,9 @@ export interface CopyValues {
 export type CopyEnds =
   | "end-of-turn"
   | "next-end-step"
+  /** "Until this creature is turned face down" (Vesuvan Shapeshifter): as
+   * it's turned face down, however (`Game.turnFaceDown`). */
+  | "turned-face-down"
   | { readonly turnOf: PlayerId }
   | { readonly whileSource: WhileSource };
 
@@ -1973,6 +1983,11 @@ export interface PtModifier {
    * this turn rather than only once", rule 606.3). A rule about it, not an
    * ability. See `Game.loyaltyActivationsAllowed`. */
   loyaltyActivations?: 2;
+  /** Its printed loyalty abilities may be activated this many **more**
+   * times this turn, on top of whatever else allows (the `loyalty-activations`
+   * effect's `{ more }` — Comet, Stellar Pup's "two more times", rule 606.3).
+   * Each such modifier adds its own. */
+  loyaltyActivationsMore?: number;
   /** Layer 6 — it "can block an additional creature" (or `"any"` number of
    * creatures) for the duration (the `block-additional` effect —
    * `StaticAbility.blockAdditional` is the static form). */
@@ -3543,6 +3558,10 @@ export type AwaitingDecision =
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
       readonly forPlayer?: PlayerId;
+      /** A search of several players' libraries at once (`search-library`'s
+       * `eachLibrary` — Jace, Architect of Thought's −8): with `leftover:
+       * "shuffle"`, each of these libraries is shuffled, not the chooser's. */
+      readonly shufflesLibraries?: readonly PlayerId[];
       /** A search whose finds an Opposition Agent exiles: the rest of the
        * instruction can't see them there, and goes on (`then` with nothing
        * found, `GameState.unseenFinds`). */
@@ -3881,6 +3900,11 @@ export type AwaitingDecision =
        * nothing" — is recorded on it (`enterChoice.copyOf`) as a `choose-copy`
        * would be, for a client to pick from a popup rather than the board. */
       readonly copyOnEnterOf?: ObjectId;
+      /** The permanent about to enter whose `CopyOnEnter.exileFirst` asks
+       * which cards to exile before it copies one of them (The Mimeoplasm):
+       * `max` of them are exiled now, fewer declining, and recorded on it
+       * (`enterChoice.copyExiled`). */
+      readonly copyExileOf?: ObjectId;
       /** The permanent about to enter whose `EnterInstead` asks for a discard
        * (Mox Diamond): `ids` are the cards in `player`'s hand that may be
        * discarded, and choosing none is declining, recorded on it
@@ -3972,6 +3996,17 @@ export type AwaitingDecision =
       readonly player: PlayerId;
       readonly source: ObjectId;
       readonly options: readonly ObjectId[];
+      /** Asked as the face-down `source` is turned face up, not as it enters
+       * (`CopyOnEnter.orTurnedFaceUp`, rule 708.11): it's turned once this is
+       * answered, as `Game.becomeFaceUp` was asked to turn it — `player` the
+       * one turning it, `megamorph` and `x` its cost's, `priorityTo` who has
+       * priority after. */
+      readonly faceUp?: {
+        readonly player: PlayerId;
+        readonly megamorph: boolean;
+        readonly x: number;
+        readonly priorityTo?: PlayerId;
+      };
     }
   | {
       /** An Aura is about to enter the battlefield other than by resolving
@@ -4139,6 +4174,7 @@ export type AwaitingDecision =
           readonly resume: ResolutionResume;
           readonly assist?: undefined;
           readonly placeCopy?: undefined;
+          readonly payLifeAsEntering?: undefined;
           /** Keep the answer on `source` too, while it's still the permanent
            * of this stint (`GameObject.chosenOnEnter`) — Shapeshifter. */
           readonly remember?: { readonly stint: number };
@@ -4148,11 +4184,25 @@ export type AwaitingDecision =
           readonly then?: undefined;
           readonly resume?: undefined;
           readonly placeCopy?: undefined;
+          readonly payLifeAsEntering?: undefined;
           readonly remember?: undefined;
         }
       | {
           /** The other copies, still on the stack as this is asked. */
           readonly placeCopy: { readonly among: readonly ObjectId[] };
+          readonly payLifeAsEntering?: undefined;
+          readonly assist?: undefined;
+          readonly then?: undefined;
+          readonly resume?: undefined;
+          readonly remember?: undefined;
+        }
+      | {
+          /** How much life `player` pays as `source` is about to enter
+           * (`AsEntersAction.payLife` — Phyrexian Processor): paid once it's
+           * answered, recorded on it (`enterChoice.asEntersDone`), and its
+           * entry carries on. */
+          readonly payLifeAsEntering: true;
+          readonly placeCopy?: undefined;
           readonly assist?: undefined;
           readonly then?: undefined;
           readonly resume?: undefined;
@@ -4474,6 +4524,28 @@ export type AwaitingDecision =
        * then leaves it — exiled encoded on the creature picked, or as usual
        * with none. `then` is unused. */
       readonly cipher?: true;
+    }
+  | {
+      /**
+       * One permanent **or player** chosen as an effect resolves, with no
+       * targeting — Comet, Stellar Pup's "deals damage … to a creature or
+       * player" (the ruling: "None of Comet's abilities require a target. All
+       * choices … are made as the abilities resolve"; rule 608.2c). `player`
+       * picks exactly one of `eligible` (permanents and players), and `then`
+       * is applied to it as target 0; `source`/`x`/`thenResolution` rebuild
+       * the resolution context, as `choose-permanents`' do. A choice made
+       * this way ignores hexproof, shroud and protection (they're about
+       * targets, rule 702.11b, 702.18a, 702.16b).
+       */
+      readonly kind: "choose-permanent-or-player";
+      readonly player: PlayerId;
+      readonly eligible: readonly TargetRef[];
+      /** What the choice is for — "Comet deals 5 damage to a creature or player". */
+      readonly prompt: string;
+      readonly then: EffectSpec;
+      readonly source: ObjectId;
+      readonly x: number;
+      readonly thenResolution?: ChoosePermanentsResolution;
     }
   | {
       /** A modal spell/ability is resolving (rule 700.2), or a "you may"
@@ -6385,6 +6457,10 @@ export interface GameState {
    * `acrossPasses` reads. Absent outside a `repeat`.
    */
   repeatSince?: number;
+  /** Which pass of that `repeat` is under way (1 for the first): the
+   * `{ repeatPass }` amount — Game of Chaos's stakes, doubled each flip.
+   * Absent outside a `repeat`. */
+  repeatPass?: number;
   /** While an ability resolves (across the decisions it waits on, like
    * `resolutionSince`): its source and that source's timestamp then — what
    * a permanent it puts onto the battlefield records as `entry.by`. Absent

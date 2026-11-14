@@ -12,6 +12,7 @@ import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAetherStorm from "../pool/aether-storm.js";
 import _poolAethertideWhale from "../pool/aethertide-whale.js";
+import _poolAfterburnerExpert from "../pool/afterburner-expert.js";
 import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAllHallowsEve from "../pool/all-hallows-eve.js";
@@ -992,6 +993,7 @@ const shard: CardShard = {
     _poolAeridKonstrari,
     _poolAetherStorm,
     _poolAethertideWhale,
+    _poolAfterburnerExpert,
     _poolAlchemistsRetrieval,
     _poolAllAboard,
     _poolAllHallowsEve,

@@ -145,6 +145,19 @@ export interface CopyOnEnter {
    * as a `choose-from-zone`, since a client shows those cards in a popup.
    */
   readonly from?: "graveyards" | "exile";
+  /**
+   * "As The Mimeoplasm enters, you may **exile two creature cards from
+   * graveyards. If you do**, it enters as a copy of **one of those cards**"
+   * (rule 614.1c): with `from: "graveyards"`, its controller first chooses
+   * this many of the cards `filter` matches — all of them or none, since
+   * fewer is "you don't" (its ruling: "You can't choose to exile just one") —
+   * and they're exiled, then it copies one of those it exiled, their choice
+   * (the ruling: "You choose which one The Mimeoplasm is copying"). None
+   * chosen, it enters as itself. Asked as two `choose-from-zone`s, before it
+   * moves (rule 614.12). The others' power is a `counters` amount,
+   * `"other-exiled-power"`.
+   */
+  readonly exileFirst?: number;
   /** "**Raid — If you attacked this turn**, you may have this creature enter
    * as a copy" (Protean Raider): read as it's about to enter, for the player
    * it's entering under. Unmet, it isn't asked and it enters as itself. */
@@ -181,7 +194,10 @@ export interface CopyOnEnter {
   /**
    * "…except it enters with an additional +1/+1 counter on it if it's a
    * creature" (Spark Double), "with X additional +1/+1 counters" (Altered
-   * Ego, `amount: "x"` — the X it was cast with). An additional effect of
+   * Ego, `amount: "x"` — the X it was cast with), "with a number of
+   * additional +1/+1 counters on it equal to the power of the other card"
+   * (The Mimeoplasm, `"other-exiled-power"` — the power of the cards
+   * `exileFirst` exiled that it didn't copy, as each is in exile). An additional effect of
    * copying (rule 707.9e), not a copiable value: it happens only as this
    * permanent enters as a copy, and a later copy of it doesn't get them.
    * `ifType` is judged by what it is as it enters, copy and all (rule
@@ -189,7 +205,7 @@ export interface CopyOnEnter {
    */
   readonly counters?: readonly {
     readonly kind: string;
-    readonly amount: number | "x";
+    readonly amount: number | "x" | "other-exiled-power";
     readonly ifType?: CardType;
     /** "…with a shield counter on it **if you control that creature**"
      * (Undercover Operative): only when the permanent copied is one the
@@ -202,6 +218,23 @@ export interface CopyOnEnter {
    * copiable value: something that copies it meanwhile stays a copy (its
    * ruling). */
   readonly untilEndOfTurn?: true;
+  /** "…**until this creature is turned face down**, it becomes a copy of
+   * that creature" (Vesuvan Shapeshifter): the copy effect, exceptions and
+   * all, ends as it's turned face down, however that happens, and it's
+   * itself again — face down, then, until it's turned face up. */
+  readonly untilTurnedFaceDown?: true;
+  /**
+   * "As this creature enters **or is turned face up**, you may choose another
+   * creature on the battlefield" (Vesuvan Shapeshifter): the same choice, a
+   * `choose-copy` of a permanent `filter` matches, asked as it's turned face
+   * up however that happens — and applied while it's being turned face up,
+   * not afterward (rule 708.11), so the permanent turned face up is the copy
+   * (what sees it turned face up sees that). It doesn't enter (rule 708.8),
+   * so nothing about entering applies: not `tapped`, `counters` or the
+   * copied creature's "as this enters" or enters triggers. Declining, or with
+   * nothing to copy, it's itself.
+   */
+  readonly orTurnedFaceUp?: true;
 }
 
 /**
@@ -1452,12 +1485,13 @@ export type StaticCondition =
        * "if **it** dealt combat damage to a player this turn" (`what:
        * "combat-damaged-by"`, `who: "any-player"`). */
       readonly selfOnly?: boolean;
-      /** Only what was done to this permanent, in the stint it's in or last
-       * had — the entries whose `target` it is: Adrestia's "if **an Assassin
-       * crewed it** this turn" (`{ what: "crewers", filter: { subtype:
-       * "Assassin" }, ofSelf: true, who: "any-player" }`), each crewer
-       * matched as it was tapped (702.122c), though it has left since. */
-      readonly ofSelf?: true;
+      /** For a view about what was done to something (`"crewers"`, whose
+       * `filter` reads the Vehicle): only the entries whose doer matched this
+       * as it was then — Adrestia's "if **an Assassin** crewed it this turn"
+       * (`{ what: "crewers", who: "any-player", selfOnly: true, doneBy: {
+       * subtype: "Assassin" } }`), each crewer as it was tapped (702.122c),
+       * though it has left or changed since. */
+      readonly doneBy?: CardFilter;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
       /** Only what was done to this player — an attack at them (the player,
@@ -1594,6 +1628,14 @@ export type StaticCondition =
    * `of-player` `"that-player"`.
    */
   | { readonly kind: "combat-damaged-this-game"; readonly byCreatureNamed: string }
+  /**
+   * You've cycled a card named `named` at least `atLeast` times this game,
+   * any card of that name each time (the journal's `cycledNames`, kept all
+   * game) — Yidaro, Wandering Monster's "if you've cycled a card named
+   * Yidaro, Wandering Monster four or more times this game", asked as its
+   * cycle trigger resolves, that cycle among them.
+   */
+  | { readonly kind: "cycled-this-game"; readonly named: string; readonly atLeast: number }
   /** The source's `chosenOnEnter` label equals `value` — Frontier Siege's
    * "Khans" / "Dragons" halves. Which abilities the permanent has, not an
    * "if" of the ability's: on a triggered ability it gates the triggering,

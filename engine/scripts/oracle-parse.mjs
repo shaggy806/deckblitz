@@ -2471,6 +2471,21 @@ export function parseTrigger(clause) {
       batched: true,
     }];
   }
+  // "Whenever one or more [creature] cards leave your graveyard": once per
+  // simultaneous move (Teval, the Balanced Scale; Amzu, Swarm's Hunger), and
+  // "whenever a creature card leaves your graveyard" once per card (Along the
+  // Crooked Way: `perCard`). A filter is matched as the card was there.
+  if ((m = /^Whenever (one or more|an?) (?:(.+?) )?cards? leaves? (your|an opponent's|a) graveyard$/.exec(c))) {
+    const filter = m[2] === undefined ? {} : parseTypePhrase(m[2], { cards: true });
+    if (filter === null) return null;
+    const who = { your: "you", "an opponent's": "opponent", a: "any" }[m[3]];
+    return [{
+      on: "leaves-graveyard",
+      who,
+      ...(m[1] !== "one or more" ? { perCard: true } : {}),
+      ...(Object.keys(filter).length > 0 ? { filter } : {}),
+    }];
+  }
   // "Whenever one or more [other] creatures [you control] die": once per
   // simultaneous event. (With "this ability triggers only once each turn" it's
   // a plain `dies`, which `parseFace` makes of it.)
@@ -3211,6 +3226,16 @@ export function parseSentence(sentence, ctx) {
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
+  // "For each player, search that player's library for a nonland card and
+  // exile it, then that player shuffles" (Jace, Architect of Thought): one
+  // search of every library, a find from each.
+  const eachLibrary = /^for each (player|opponent), search that player's library for an? (.+?) card and exile it, then that player shuffles\.$/i.exec(s);
+  if (eachLibrary !== null) {
+    const filter = parseTypePhrase(eachLibrary[2], { cards: true });
+    if (filter === null) return null;
+    const scope = eachLibrary[1].toLowerCase() === "player" ? "each-player" : "each-opponent";
+    return { kind: "search-library", eachLibrary: scope, filter, destination: "exile", min: 0, max: 1 };
+  }
   // "Prevent all combat damage that would be dealt to you this turn" (Druid's
   // Deliverance), "… this combat" (Suppressor Skyguard, rule 511.2).
   const shield = /^prevent all combat damage that would be dealt to you this (turn|combat)\.$/i.exec(s);
@@ -7100,6 +7125,11 @@ export function parseSentence(sentence, ctx) {
   // permanent for the turn — the `loyalty-activations` effect.
   if (re("you may activate loyalty abilities of ~ twice this turn rather than only once").test(s)) {
     return { kind: "loyalty-activations", target: "source", times: 2, duration: "end-of-turn" };
+  }
+  // "You may activate ~'s loyalty ability two more times this turn" (Comet,
+  // Stellar Pup): additive, its printed loyalty abilities only.
+  if ((m = re("you may activate ~'s loyalty abilit(?:y|ies) (one|two|three|four) more times? this turn").exec(s))) {
+    return { kind: "loyalty-activations", target: "source", times: { more: { one: 1, two: 2, three: 3, four: 4 }[m[1].toLowerCase()] }, duration: "end-of-turn" };
   }
   // "Target creature can't attack or block until your next turn" (Spara's
   // Adjudicators' enters trigger, Kaito, Dancing Shadow's +1).
@@ -15044,17 +15074,20 @@ function pilesAt(sentences, i, ctx) {
   if (
     m !== null &&
     /^an opponent separates those cards into two piles\.$/i.test(s(1)) &&
-    /^put one pile into your hand and the other into your graveyard\.$/i.test(s(2))
+    /^put one pile into your hand and the other (?:into your graveyard|on the bottom of your library in any order)\.$/i.test(s(2))
   ) {
     const n = numberOf(m[1]);
     if (typeof n !== "number") return null;
+    // "…and the other on the bottom of your library in any order" (Jace,
+    // Architect of Thought).
+    const bottom = /on the bottom of your library/i.test(s(2));
     return {
       effect: {
         kind: "separate-into-piles",
         objects: { libraryTop: n, reveal: true },
         separator: "an-opponent",
         chooser: "you",
-        ...handGraveyard,
+        ...(bottom ? { chosen: "hand", rest: "library-bottom" } : handGraveyard),
       },
       used: 3,
     };
@@ -17521,6 +17554,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       // leaving likewise (Sally Sparrow).
       let triggers = oncePerTurn
         ? parsedTriggers.map((t) => {
+            // "Whenever a card leaves your graveyard … only once each turn"
+            // (Hologram Stalker): the first move triggers it, however many
+            // cards, so the batched form.
+            if (t.on === "leaves-graveyard" && t.perCard === true) {
+              const { perCard: _perCard, ...batched } = t;
+              return batched;
+            }
             if (t.on !== "dies" && t.on !== "leaves-battlefield") return t;
             const { batched: _batched, ...plain } = t;
             return plain;

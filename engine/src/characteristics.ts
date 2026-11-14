@@ -66,6 +66,7 @@ import type { EffectAmount } from "./effects.js";
 import type { AggregateSpec, CardFilter, DamageSourceClause } from "./filter.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType, SpendAs } from "./mana.js";
+import type { SetMember } from "./object-sets.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import {
   activePlayerOf,
@@ -112,6 +113,7 @@ import {
   JOURNAL_VIEWS,
   abilityCountThisTurn,
   combatDamagedByNamed,
+  cycledNamedCount,
   entriesThisTurn,
   journalEntries,
   journalTotal,
@@ -890,6 +892,8 @@ function evalStaticCondition(
       return (state.players[you]?.spellNamesCastThisGame?.[condition.named] ?? 0) >= condition.atLeast;
     case "combat-damaged-this-game":
       return combatDamagedByNamed(state, you, condition.byCreatureNamed);
+    case "cycled-this-game":
+      return cycledNamedCount(state, you, condition.named) >= condition.atLeast;
     case "library-size": {
       const inBounds = (n: number): boolean =>
         (condition.atMost === undefined || n <= condition.atMost) &&
@@ -1410,15 +1414,7 @@ function evalStaticCondition(
         condition.filter,
         you,
         condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
-        {
-          ...condition,
-          ...(toPlayer !== undefined ? { toPlayer } : {}),
-          // "If an Assassin crewed it this turn": what was done to this
-          // permanent, in its stint, as it last existed once gone.
-          ...(condition.ofSelf === true
-            ? { toObject: { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 } }
-            : {}),
-        },
+        toPlayer !== undefined ? { ...condition, toPlayer } : condition,
         // "If it dealt …": this object, in its stint, as it last existed once gone.
         condition.selfOnly === true
           ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
@@ -2078,12 +2074,13 @@ export function damageDealtThisTurn(
 /** How a {@link journalCount} reads beyond its list: the zones a
  * `to-graveyard` arrival came from, the window (default this turn), and
  * `toPlayer`, only the entries done to that player (an entry's `target`);
- * `toObject`, only those done to that permanent in that stint (a `crewed-by`
- * entry's Vehicle — Adrestia's "if an Assassin crewed it"). */
+ * `doneBy`, for a `"recipient"` view, only the entries whose own object —
+ * the one that did it — matched this as it was then (Adrestia's "if **an
+ * Assassin** crewed it": a `crews` entry's creature as it was tapped). */
 export type JournalReadOptions = JournalOrigin & {
   readonly window?: JournalWindow;
   readonly toPlayer?: PlayerId;
-  readonly toObject?: { readonly id: ObjectId; readonly stint: number };
+  readonly doneBy?: CardFilter;
 };
 
 /**
@@ -2120,10 +2117,13 @@ export function journalCount(
     if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
     if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
     if (options?.toPlayer !== undefined && (entry.target?.kind !== "player" || entry.target.player !== options.toPlayer)) continue;
-    const toObject = options?.toObject;
+    // The one that did it, as it was then (rule 603.10a), beside a filter
+    // on what it was done to: a crewer as it was tapped (702.122c).
+    const doneBy = options?.doneBy;
     if (
-      toObject !== undefined &&
-      (entry.target?.kind !== "object" || entry.target.object !== toObject.id || entry.targetStint !== toObject.stint)
+      doneBy !== undefined &&
+      (entry.object === undefined ||
+        !matchesFilter(state, registry, entry.object, doneBy, entry.was !== undefined ? { you, snapshot: entry.was } : { you, lastKnown: true }))
     ) {
       continue;
     }
@@ -2149,13 +2149,48 @@ export function journalCount(
     }
     if (counted !== undefined && entry.object !== undefined) {
       const list = view.whose === "target" ? (entry.target?.kind === "player" ? entry.target.player : "") : (entry.player ?? "");
-      const key = `${entry.object}@${at ?? ""}@${list}`;
+      // About a recipient, the entry's own object is told apart by its stint
+      // too (a creature that left and crewed again is a new one, rule 400.7).
+      const key = `${entry.object}${aboutRecipient ? `#${entry.stint ?? ""}` : ""}@${at ?? ""}@${list}`;
       if (counted.has(key)) continue;
       counted.add(key);
     }
     n += entry.count ?? 1;
   }
   return n;
+}
+
+/**
+ * The objects of one journal word as an object set (`{ turnHistory }` —
+ * `object-sets.ts`): `players`' entries in `window`, each entry's object (a
+ * recipient view's, what its act was done to) in the stint the entry names,
+ * carrying the entry's snapshot of it (rule 603.10a), a token stack as each
+ * of its tokens. A `distinct` view's object is in it once per stint.
+ */
+export function journalSetMembers(
+  state: GameState,
+  registry: CardRegistry,
+  players: readonly PlayerId[],
+  what: JournalWhat,
+  you: PlayerId,
+  window: JournalWindow = "this-turn",
+): SetMember[] {
+  const view = JOURNAL_VIEWS[what];
+  const aboutRecipient = view.whose === "recipient";
+  const out: SetMember[] = [];
+  for (const entry of journalEntries(journalReader(state, registry), view, players, window, you)) {
+    const object = aboutRecipient ? (entry.target?.kind === "object" ? entry.target.object : undefined) : entry.object;
+    if (object === undefined) continue;
+    const was = aboutRecipient ? entry.targetWas : entry.was;
+    const stint = (aboutRecipient ? entry.targetStint : entry.stint) ?? was?.zoneChangeCount ?? state.objects[object]?.zoneChangeCount ?? 0;
+    out.push({
+      object,
+      stint,
+      ...(entry.count !== undefined && entry.count !== 1 ? { count: entry.count } : {}),
+      ...(was !== undefined ? { was } : {}),
+    });
+  }
+  return out;
 }
 
 /** The names to tell a permanent by when comparing them (rule 201.2): its own

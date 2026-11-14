@@ -28,8 +28,8 @@ export default defineCard({
         kind: "turn-history",
         what: "crewers",
         who: "any-player",
-        filter: { subtype: "Assassin" },
-        ofSelf: true,
+        selfOnly: true,
+        doneBy: { subtype: "Assassin" },
       },
       targets: [],
       effect: {

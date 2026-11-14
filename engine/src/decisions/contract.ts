@@ -118,6 +118,7 @@ export const DECISION_ACTIONS = {
   "choose-pile": ["choose-pile"],
   "choose-number": ["choose-number"],
   "replacement-order": ["replacement-order"],
+  "choose-permanent-or-player": ["choose-permanent-or-player"],
 } as const satisfies Record<DecisionKind, readonly Action["type"][]>;
 
 /**
@@ -163,6 +164,7 @@ export const DECISION_OFFERS = {
   "choose-pile": ["choose-pile"],
   "choose-number": ["choose-number"],
   "replacement-order": ["replacement-order"],
+  "choose-permanent-or-player": ["choose-permanent-or-player"],
 } as const satisfies Record<DecisionKind, readonly LegalAction["kind"][]>;
 
 /**
@@ -345,6 +347,7 @@ export interface DecisionHost {
   readonly applyChoosePile: (player: PlayerId, pile: number) => void;
   readonly applyNumberChoice: (player: PlayerId, number: number) => void;
   readonly applyReplacementOrder: (player: PlayerId, option: number) => void;
+  readonly applyChoosePermanentOrPlayer: (player: PlayerId, choice: TargetRef) => void;
 }
 
 /**

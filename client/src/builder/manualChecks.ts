@@ -12381,4 +12381,72 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
     }),
   ),
+  preset(
+    'Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not',
+    board({
+      you: { bf: ['Comet, Stellar Pup', 'Grizzly Bears'] },
+      opp: { bf: ['Gladecover Scout'] },
+    }),
+  ),
+  preset(
+    'Game of Chaos: whoever wins the flip decides whether to flip again',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Game of Chaos'] },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Game of Chaos: at four players, only the target opponent plays',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Game of Chaos'] },
+      opp: [{}, { human: true }, {}],
+    }),
+  ),
+  preset(
+    'Jace, Architect of Thought: the other pile goes to the bottom of your library in the order you pick',
+    board({
+      you: { bf: ['Jace, Architect of Thought'], lib: ['Grizzly Bears', 'Shock', 'Counterspell'] },
+    }),
+  ),
+  preset(
+    "Jace, Architect of Thought: one search of every library, a card from each, then cast them free",
+    board({
+      you: { bf: [{ name: 'Jace, Architect of Thought', counters: { loyalty: 8 } }], lib: ['Divination', 'Forest'] },
+      opp: { lib: ['Grizzly Bears', 'Hill Giant', 'Mountain'] },
+    }),
+  ),
+  preset(
+    'Jace, Architect of Thought: at four players, every library is searched at once',
+    board({
+      you: { bf: [{ name: 'Jace, Architect of Thought', counters: { loyalty: 8 } }] },
+      opp: [{ lib: ['Grizzly Bears'] }, { lib: ['Hill Giant'] }, { lib: ['Shock'] }],
+    }),
+  ),
+  preset(
+    'Comet, Stellar Pup: at four players, any player can be chosen',
+    board({
+      you: { bf: ['Comet, Stellar Pup'] },
+      opp: [{ bf: ['Grizzly Bears'] }, {}, {}],
+    }),
+  ),
+  preset(
+    "The Mimeoplasm: exile two creature cards, copy one, the other's power in counters",
+    board({
+      you: { bf: ['Swamp', 'Forest', 'Island*3'], hand: ['The Mimeoplasm'], gy: ['Serra Angel'] },
+      opp: { gy: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    "Vesuvan Shapeshifter: turned face up, it's a copy of the creature you choose",
+    board({
+      you: { bf: ['Island*5'], hand: ['Vesuvan Shapeshifter'], lib: ['Island*3'] },
+      opp: { bf: ['Fathom Seer'] },
+    }),
+  ),
+  preset(
+    'Phyrexian Processor: pay any amount of life as it enters',
+    board({
+      you: { bf: ['Wastes*8'], hand: ['Phyrexian Processor'], life: 20 },
+    }),
+  ),
 ]

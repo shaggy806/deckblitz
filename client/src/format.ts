@@ -69,6 +69,9 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'mana-expended',
   // Bookkeeping for "the amassed Army" — the token and its counters have lines of their own.
   'amassed',
+  // Bookkeeping for "whenever you … at random" (Chira, All In) — the discard,
+  // flip, roll or pick has its own line.
+  'acted-at-random',
   // Bookkeeping for "whenever your untap step untaps …" — the permanents' own untaps say it.
   'untap-step-untapped',
   'permanent-tapped',
@@ -419,7 +422,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.object)} and ${name(event.withObject)} exchange text boxes`
     case 'permanent-copied':
       return event.copyOf
-        ? `${name(event.object)} enters as a copy of ${event.copyOf}`
+        ? event.asTurnedFaceUp === true
+          ? `${name(event.object)} is turned face up as a copy of ${event.copyOf}`
+          : `${name(event.object)} enters as a copy of ${event.copyOf}`
         : `${name(event.object)} copies nothing`
     case 'creature-type-chosen':
       // A player chosen (Black Vise's opponent, a battle's protector) goes by name.
@@ -436,6 +441,18 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       }`
     case 'number-chosen':
       return `${who(event.player)} chooses ${event.number} for ${name(event.object)}`
+    case 'acted-at-random':
+      return `${who(event.player)} ${
+        { discard: 'discards', targets: 'selects targets', modes: 'chooses modes', coins: 'flips coins', dice: 'rolls dice' }[event.act]
+      } at random`
+    case 'permanent-or-player-chosen':
+      return `${who(event.player)} chooses ${
+        event.chosen.kind === 'player'
+          ? who(event.chosen.player)
+          : event.chosen.kind === 'object'
+            ? name(event.chosen.object)
+            : 'nothing'
+      } for ${name(event.source)}`
     case 'assist-requested':
       return `${who(event.caster)} asks ${who(event.player)} to assist with ${name(event.object)}`
     case 'assist-chosen':

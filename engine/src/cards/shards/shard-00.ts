@@ -863,6 +863,7 @@ import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
 import _poolTheInnerLight from "../pool/the-inner-light.js";
 import _poolTheLongReachOfNight from "../pool/the-long-reach-of-night.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
+import _poolTheMimeoplasm from "../pool/the-mimeoplasm.js";
 import _poolTheMoment from "../pool/the-moment.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheNakedTime from "../pool/the-naked-time.js";
@@ -1890,6 +1891,7 @@ const shard: CardShard = {
     _poolTheInnerLight,
     _poolTheLongReachOfNight,
     _poolTheMightstoneAndWeakstone,
+    _poolTheMimeoplasm,
     _poolTheMoment,
     _poolTheMycotyrant,
     _poolTheNakedTime,

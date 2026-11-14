@@ -51,6 +51,7 @@ import { separatePiles } from "./separate-piles.js";
 import { choosePile } from "./choose-pile.js";
 import { replacementOrder } from "./replacement-order.js";
 import { chooseNumber } from "./choose-number.js";
+import { choosePermanentOrPlayer } from "./choose-permanent-or-player.js";
 
 export { defineDecision } from "./define.js";
 
@@ -88,6 +89,7 @@ export const DECISIONS: Record<DecisionKind, AnyDecisionModule> = {
   "choose-pile": choosePile,
   "choose-number": chooseNumber,
   "replacement-order": replacementOrder,
+  "choose-permanent-or-player": choosePermanentOrPlayer,
 };
 
 /** The module for `kind`. Total, so this cannot fail. */

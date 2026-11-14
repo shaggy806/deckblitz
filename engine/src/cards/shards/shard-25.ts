@@ -430,6 +430,7 @@ import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
 import _poolInvokeCalamity from "../pool/invoke-calamity.js";
 import _poolIonaShieldOfEmeria from "../pool/iona-shield-of-emeria.js";
 import _poolIsperiaTheInscrutable from "../pool/isperia-the-inscrutable.js";
+import _poolJaceArchitectOfThought from "../pool/jace-architect-of-thought.js";
 import _poolJaceThePerfectedMind from "../pool/jace-the-perfected-mind.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
@@ -1425,6 +1426,7 @@ const shard: CardShard = {
     _poolInvokeCalamity,
     _poolIonaShieldOfEmeria,
     _poolIsperiaTheInscrutable,
+    _poolJaceArchitectOfThought,
     _poolJaceThePerfectedMind,
     _poolJacesTriumph,
     _poolJaggedLightning,

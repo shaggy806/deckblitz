@@ -19161,4 +19161,66 @@ describe("one trigger over every opponent a batch of sources damaged (Breeches, 
       play: true,
     });
   });
+
+  it("'you may activate ~'s loyalty ability two more times this turn' (Comet, Stellar Pup)", () => {
+    expect(parseEffect("You may activate ~'s loyalty ability two more times this turn.", ctx()).effect).toEqual({
+      kind: "loyalty-activations",
+      target: "source",
+      times: { more: 2 },
+      duration: "end-of-turn",
+    });
+  });
+
+  it("Jace, Architect of Thought's piles to the library's bottom, and every library searched at once", () => {
+    expect(
+      parseEffect(
+        "Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "separate-into-piles",
+      objects: { libraryTop: 3, reveal: true },
+      separator: "an-opponent",
+      chooser: "you",
+      chosen: "hand",
+      rest: "library-bottom",
+    });
+    expect(
+      parseEffect(
+        "For each player, search that player's library for a nonland card and exile it, then that player shuffles.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "search-library", eachLibrary: "each-player", filter: { notTypes: ["land"] }, destination: "exile", min: 0, max: 1 });
+  });
+});
+
+describe("cards leaving a graveyard (Teval, Along the Crooked Way, Hologram Stalker)", () => {
+  it("one or more cards: the batched trigger, a filter read as a card type", () => {
+    expect(parseTrigger("Whenever one or more cards leave your graveyard")).toEqual([{ on: "leaves-graveyard", who: "you" }]);
+    expect(parseTrigger("Whenever one or more artifact and/or creature cards leave your graveyard")).toEqual([
+      { on: "leaves-graveyard", who: "you", filter: { typesAnyOf: ["artifact", "creature"] } },
+    ]);
+  });
+
+  it("a card: once per card, unless it triggers only once each turn", () => {
+    expect(parseTrigger("Whenever a creature card leaves an opponent's graveyard")).toEqual([
+      { on: "leaves-graveyard", who: "opponent", perCard: true, filter: { type: "creature" } },
+    ]);
+    const stalker = parseFace(
+      {
+        name: "Test Stalker",
+        type_line: "Artifact Creature — Illusion",
+        mana_cost: "{3}{U}",
+        oracle_text:
+          "Whenever a card leaves your graveyard, create a 3/3 colorless Illusion artifact creature token. This ability triggers only once each turn.",
+      },
+      { tokenFor: () => "Illusion Token" },
+    );
+    expect(stalker.triggered[0].trigger).toEqual({ on: "leaves-graveyard", who: "you" });
+    expect(stalker.triggered[0].oncePerTurn).toBe(true);
+  });
+
+  it("leaves a phrase it can't read as a type to a person", () => {
+    expect(parseTrigger("Whenever one or more cards leave your graveyard during your turn")).toBeNull();
+  });
 });

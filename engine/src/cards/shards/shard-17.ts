@@ -574,6 +574,7 @@ import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNecroplasm from "../pool/necroplasm.js";
 import _poolNecropolis from "../pool/necropolis.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
+import _poolNeerdivDeviousDiver from "../pool/neerdiv-devious-diver.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNephaliaAcademy from "../pool/nephalia-academy.js";
 import _poolNessianDemolok from "../pool/nessian-demolok.js";
@@ -1585,6 +1586,7 @@ const shard: CardShard = {
     _poolNecroplasm,
     _poolNecropolis,
     _poolNecroticWound,
+    _poolNeerdivDeviousDiver,
     _poolNemaSiltlurker,
     _poolNephaliaAcademy,
     _poolNessianDemolok,

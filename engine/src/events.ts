@@ -829,6 +829,11 @@ export type GameEvent =
        * fetchland, a Clue), which a trigger then reads as it last existed
        * there. Absent for one from a hand, graveyard or the command zone. */
       readonly ofPermanent?: true;
+      /** The zone the card was in as it was activated, for one that works
+       * from outside the battlefield (`ActivatedAbility.zone`; cycling's is
+       * `"hand"`) — what "an ability of a card in your graveyard" asks
+       * (Neerdiv, Devious Diver), however its cost moved the card. */
+      readonly fromZone?: "hand" | "graveyard" | "command" | "suspended";
       /** Its own cost sacrifices one or more permanents (Ashnod the Uncaring).
        * A Treasure sacrificed for the mana that paid it is another ability's
        * cost (the ruling), and doesn't count. */
@@ -1230,6 +1235,9 @@ export type GameEvent =
       readonly type: "permanent-copied";
       readonly object: ObjectId;
       readonly copyOf: string | null;
+      /** Chosen as it was turned face up, not as it entered (Vesuvan
+       * Shapeshifter — `CopyOnEnter.orTurnedFaceUp`). */
+      readonly asTurnedFaceUp?: true;
     })
   | (Base & {
       /** `player` manifested (rule 701.40) — or cloaked (701.58) — the top
@@ -1332,6 +1340,15 @@ export type GameEvent =
       readonly source: ObjectId;
       readonly pile: number;
       readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
+      /** `player` chose `chosen` — a permanent or a player — as `source`'s
+       * effect resolved, untargeted (the `choose-permanent-or-player`
+       * decision: Comet, Stellar Pup's "a creature or player"). */
+      readonly type: "permanent-or-player-chosen";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly chosen: TargetRef;
     })
   | (Base & {
       /** `player` chose `number` as `object` resolved (a `choose-value` of

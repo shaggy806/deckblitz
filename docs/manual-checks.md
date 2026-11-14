@@ -8241,3 +8241,51 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Nahiri's Sacrifice: X is the mana value of what you sacrifice
 - **Do:** Cast Nahiri's Sacrifice, choosing X = 3 and sacrificing Gray Ogre. Target both of Bob's creatures, 2 damage to Grizzly Bears and 1 to Hill Giant.
 - **Expect:** Only Gray Ogre is offered at X = 3 (Sol Ring only at X = 1). The Bears die and the Giant has 1 damage.
+
+## Decisions lane: a creature or player chosen as it resolves, who flips again, and every library searched at once (2026-11-13)
+
+### Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not
+- **Do:** Use Comet's 0 ability. When asked, click Bob's Gladecover Scout.
+- **Expect:** The banner reads "Comet deals damage equal to his loyalty to a creature or player — click a highlighted permanent or player"; both players and every creature are highlighted, the Scout too. It dies, and Comet goes down to 3 loyalty.
+- **Not a bug:** The die is the board's own: this board always rolls a 4.
+
+### Game of Chaos: whoever wins the flip decides whether to flip again
+- **Do:** Cast Game of Chaos, targeting Bob. Answer "Flip again?" Yes, Yes, then No — you're moved to Bob's seat whenever he's the one asked.
+- **Expect:** You lose the first flip (you 39, Bob 41), so Bob is asked. You win the second for 2 (41 / 39) and you're asked; you lose the third for 4 (37 / 43), Bob is asked, and his No ends it.
+- **Not a bug:** The coins are the board's own: this board always flips lose, win, lose.
+
+### Game of Chaos: at four players, only the target opponent plays
+- **Do:** Cast Game of Chaos, targeting Carol. Answer "Flip again?" Yes as Carol, then No as yourself.
+- **Expect:** You lose the first flip (you 39, Carol 41) and Carol is asked; you win the second for 2 (41 / 39) and you're asked. Bob and Dave stay at 40 throughout.
+
+### Jace, Architect of Thought: the other pile goes to the bottom of your library in the order you pick
+- **Do:** Use Jace's −2. Bob separates the three cards; click "Choose pile" on the pile with Grizzly Bears alone, then click Counterspell and Shock and Confirm.
+- **Expect:** The pile popup ends "the other goes on the bottom of the library in any order". The Bears go to your hand; the order popup reads "Put them on the bottom in the order you pick", and next turn you draw a basic land, not either card.
+
+### Jace, Architect of Thought: one search of every library, a card from each, then cast them free
+- **Do:** Use Jace's −8. In the search, click Grizzly Bears, then Hill Giant, then Divination, and Confirm. Cast Hill Giant, then Divination.
+- **Expect:** One popup, "Choose one card from each library to exile", each card captioned "Bob's library" or "Alice's library"; clicking Hill Giant takes the Bears' pick. Both are exiled, then cast free: the Giant enters under your control and Divination draws you two.
+- **Not a bug:** Jace dies to the −8 before it resolves: he had 8 loyalty.
+
+### Jace, Architect of Thought: at four players, every library is searched at once
+- **Do:** Use Jace's −8. Pick all three cards and Confirm, then click "Don't cast".
+- **Expect:** The log says you searched all four libraries; the three cards are exiled, one from each opponent, and stay there.
+
+### Comet, Stellar Pup: at four players, any player can be chosen
+- **Do:** Use Comet's 0 ability. When asked, click Carol.
+- **Expect:** Every player is highlighted. Carol goes down to 35 life, and Comet to 3 loyalty.
+## Copies chosen as they enter or turn face up (2026-11-13)
+
+### The Mimeoplasm: exile two creature cards, copy one, the other's power in counters
+- **Do:** Cast The Mimeoplasm. Choose Serra Angel and Bob's Grizzly Bears, then Serra Angel to copy.
+- **Expect:** Both cards go to exile. The Mimeoplasm is Serra Angel with two +1/+1 counters: a 6/6 with flying.
+- **Not a bug:** Choosing just one card exiles nothing, and The Mimeoplasm dies as a 0/0.
+
+### Vesuvan Shapeshifter: turned face up, it's a copy of the creature you choose
+- **Do:** Cast Vesuvan Shapeshifter face down. Turn it face up for {1}{U}, and choose Bob's Fathom Seer.
+- **Expect:** Before it turns, the banner asks you to click the permanent to copy. It turns face up as Fathom Seer, the log saying "is turned face up as a copy of Fathom Seer", and you draw two cards.
+- **Not a bug:** The banner calls it "Face-Down Creature": it's still face down while you choose.
+
+### Phyrexian Processor: pay any amount of life as it enters
+- **Do:** Cast Phyrexian Processor and choose 5. Then use its ability.
+- **Expect:** The banner reads "Phyrexian Processor — pay any amount of life as it enters (0–20)", and you go to 15 life. The token is a 5/5 black Phyrexian Minion.
