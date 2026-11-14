@@ -9992,6 +9992,32 @@ describe("costs keyed to a spell's target", () => {
     expect(hojo.triggered[0].oncePerTurn).toBe(true);
   });
 
+  it("reads 'deals noncombat damage to a creature equal to that creature's toughness' and a for-the-turn 'plus X'", () => {
+    const taii = face(
+      "Taii Wakeen, Perfect Shot",
+      "Legendary Creature — Human Mercenary",
+      "Whenever a source you control deals noncombat damage to a creature equal to that creature's toughness, draw a card.\n{X}, {T}: If a source you control would deal noncombat damage to a permanent or player this turn, it deals that much damage plus X instead.",
+    );
+    expect(taii.complete).toBe(true);
+    expect(taii.triggered[0].trigger).toEqual({
+      on: "deals-damage",
+      who: "you-control",
+      to: "creature",
+      combat: false,
+      equalToToughness: true,
+    });
+    expect(taii.activated[0].effect).toEqual({
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: {
+        event: "would-deal-damage",
+        instead: { modify: { plus: "x" } },
+        source: { controlledBy: "you" },
+        combat: false,
+      },
+    });
+  });
+
   it("reads 'becomes the target of an instant or sorcery spell'", () => {
     const partisan = face(
       "Silverfur Partisan",

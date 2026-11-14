@@ -2387,6 +2387,11 @@ export type TriggerKind =
       /** Only exactly this much damage to that recipient (Ghyrson Starn's
        * "exactly 1 damage"). */
       readonly exactly?: number;
+      /** Only damage to a creature equal to its toughness as it's dealt —
+       * Taii Wakeen, Perfect Shot's "deals noncombat damage to a creature
+       * equal to that creature's toughness", damage already marked on it
+       * aside (its ruling). Never a player. */
+      readonly equalToToughness?: true;
       /** With no recipient named, once per damage event as ever, but only if
        * at least one permanent or player was dealt exactly this much of it —
        * Matoc, Lavamancer's "whenever a source you control deals damage, if at

@@ -2132,6 +2132,12 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever a source you control deals (\d+) or more damage to (an opponent|a player)$/.exec(c))) {
     return [{ on: "deals-damage", who: "you-control", to: m[2] === "an opponent" ? "opponent" : "player", atLeast: Number(m[1]) }];
   }
+  // "… deals [noncombat] damage to a creature equal to that creature's
+  // toughness" (Taii Wakeen): its toughness as the damage is dealt.
+  if ((m = /^Whenever a source you control deals (noncombat |combat )?damage to a creature equal to that creature's toughness$/.exec(c))) {
+    const combat = m[1] === undefined ? {} : { combat: m[1] === "combat " };
+    return [{ on: "deals-damage", who: "you-control", to: "creature", ...combat, equalToToughness: true }];
+  }
   if ((m = /^Whenever an opponent is dealt (\d+) or more damage by a single source$/.exec(c))) {
     return [{ on: "deals-damage", who: "any", to: "opponent", atLeast: Number(m[1]) }];
   }
@@ -6867,7 +6873,7 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^if any source would deal 1 or more damage to a permanent or player this turn, it deals (\d+) damage to that permanent or player instead\.$/i.exec(s))) {
     return { kind: "replacement-effect", duration: "end-of-turn", replacement: { event: "would-deal-damage", instead: { modify: { set: Number(m[1]) } } } };
   }
-  if ((m = /^if a ((?:white|blue|black|red|green) )?source( you control)? would deal (noncombat )?damage to (a permanent or player|a player or battle) this turn, it deals that much damage plus (\d+)(?: to that permanent or player)? instead\.$/i.exec(s))) {
+  if ((m = /^if a ((?:white|blue|black|red|green) )?source( you control)? would deal (noncombat )?damage to (a permanent or player|a player or battle) this turn, it deals that much damage plus (\d+|X)(?: to that permanent or player)? instead\.$/i.exec(s))) {
     const colors = m[1] === undefined ? {} : { colors: [COLOR_WORD[m[1].trim().toLowerCase()]] };
     const controlled = m[2] === undefined ? {} : { controlledBy: "you" };
     const source = { ...colors, ...controlled };
@@ -6876,7 +6882,8 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
       replacement: {
         event: "would-deal-damage",
-        instead: { modify: { plus: Number(m[5]) } },
+        // "Plus X" (Taii Wakeen's {X} ability): X fixed as it resolves.
+        instead: { modify: { plus: m[5].toUpperCase() === "X" ? "x" : Number(m[5]) } },
         ...(Object.keys(source).length > 0 ? { source } : {}),
         ...(m[3] !== undefined ? { combat: false } : {}),
         ...(m[4].toLowerCase() === "a player or battle" ? { to: "player-or-battle" } : {}),

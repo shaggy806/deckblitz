@@ -1885,6 +1885,7 @@ function dealsDamageOncePerEvent(trigger: TriggerSpec): boolean {
     trigger.to === undefined &&
     trigger.toFilter === undefined &&
     trigger.exactly === undefined &&
+    trigger.equalToToughness !== true &&
     trigger.toItsTarget !== true
   );
 }
@@ -35502,7 +35503,7 @@ export class Game {
       if (spec.to === "permanent" || spec.to === "creature" || spec.to === "planeswalker" || spec.to === "self") {
         return false;
       }
-      if (spec.toFilter !== undefined) return false;
+      if (spec.toFilter !== undefined || spec.equalToToughness === true) return false;
       if (spec.to === "opponent" && target.player === self.controller) return false;
       if (spec.to === "you" && target.player !== self.controller) return false;
       // "The player who cast [the granting spell]": none for a copy that
@@ -35527,6 +35528,19 @@ export class Game {
         if (this.state.objects[target.object] === undefined) return false;
         const types = computeCharacteristics(this.state, this.registry, target.object).types;
         if (!types.includes(spec.to)) return false;
+      }
+      // "… equal to that creature's toughness" (Taii Wakeen): its toughness as
+      // the damage is dealt, before state-based actions — as it last existed
+      // if it has left since.
+      if (spec.equalToToughness === true) {
+        const recipient = this.state.objects[target.object];
+        const toughness =
+          recipient === undefined
+            ? undefined
+            : recipient.zone === "battlefield"
+              ? computeCharacteristics(this.state, this.registry, target.object).toughness
+              : recipient.lastKnown?.toughness;
+        if (toughness === undefined || event.amount / (event.sources ?? 1) !== toughness) return false;
       }
       if (!this.triggerFilterOk(spec.toFilter, target.object, self)) return false;
     }

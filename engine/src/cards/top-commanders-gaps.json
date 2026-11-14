@@ -2572,7 +2572,8 @@
   "condition:permanent-put-into-hand-from-battlefield-this-turn",
   "condition:permanent-put-into-hand-from-battlefield-this-turn",
   "trigger:becomes-target-by-spell-type",
-  "condition:first-spell-cast-this-game"
+  "condition:first-spell-cast-this-game",
+  "trigger:damage-equal-to-toughness"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
