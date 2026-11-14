@@ -2662,7 +2662,8 @@
   "replacement:enters-with-counter-kinds-of-source",
   "effect:prevent-combat-damage-by-blocker-and-blocked",
   "amount:curses-attached-to-player",
-  "filter:controlled-by-monarch"
+  "filter:controlled-by-monarch",
+  "cost:ability-tap-creatures-for-mana"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

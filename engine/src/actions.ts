@@ -411,7 +411,16 @@ export interface WaterbendOffer {
   /** For a cost with `{X}`: `max` and `proof` at each X from 0 to the
    * offer's `xCost.maxX` ({@link waterbendAt} reads it). */
   readonly byX?: readonly { readonly max: number; readonly proof: readonly ObjectId[] }[];
+  /** Not waterbend: "for each mana in this ability's activation cost, you may
+   * tap an untapped **creature** you control rather than pay that mana"
+   * (Heirloom Epic, `AbilityCost.tapCreaturesForMana`) — `choices` are
+   * creatures alone, and `max` is the total cost's generic mana. */
+  readonly creaturesOnly?: true;
 }
+
+/** Which permanents may tap to pay an ability's mana: waterbend's artifacts
+ * and creatures (rule 701.67a), or creatures alone (Heirloom Epic). */
+export type TapToPay = "artifact-or-creature" | "creature";
 
 /** "X mana in any combination of `colors`" at a live X of `amount`, too many
  * splits to list: the player picks the split (an `activate-ability`

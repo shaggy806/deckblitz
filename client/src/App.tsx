@@ -5841,7 +5841,7 @@ function Table({
       </div>
     )
   } else if (mode === 'choose-waterbend' && pendingWaterbend) {
-    const { action, max, least, picks } = pendingWaterbend
+    const { action, max, least, picks, offer } = pendingWaterbend
     const name =
       action.type === 'cast-spell'
         ? game.nameOf(action.card)
@@ -5853,8 +5853,16 @@ function Table({
     controls = (
       <div className="controls">
         <span>
-          {name}: waterbend — tap up to {max} artifact{max === 1 ? '' : 's'} or creature
-          {max === 1 ? '' : 's'} to pay <Symbols text="{1}" /> each
+          {offer.creaturesOnly === true ? (
+            <>
+              {name}: tap up to {max} creature{max === 1 ? '' : 's'} to pay <Symbols text="{1}" /> each
+            </>
+          ) : (
+            <>
+              {name}: waterbend — tap up to {max} artifact{max === 1 ? '' : 's'} or creature
+              {max === 1 ? '' : 's'} to pay <Symbols text="{1}" /> each
+            </>
+          )}
           {least > 0 ? `, at least ${least}` : ''} ({picks.length} chosen)
         </span>
         <button
@@ -5865,7 +5873,9 @@ function Table({
             game.dispatch({ ...action, waterbend: [...picks] } as Action)
           }}
         >
-          {picks.length === 0 ? 'Pay with mana' : `Waterbend ${picks.length}`}
+          {picks.length === 0
+            ? 'Pay with mana'
+            : `${offer.creaturesOnly === true ? 'Tap' : 'Waterbend'} ${picks.length}`}
         </button>
         <button type="button" onClick={() => setPendingWaterbend(null)}>
           Cancel
@@ -7494,7 +7504,7 @@ function Table({
               }
             : mode === 'choose-waterbend' && pendingWaterbend
               ? {
-                  verb: 'Waterbend',
+                  verb: pendingWaterbend.offer.creaturesOnly === true ? 'Tap' : 'Waterbend',
                   count: pendingWaterbend.max,
                   of: pendingWaterbend.offer.copies?.[stackMenu] ?? 1,
                   picks: pendingWaterbend.picks,

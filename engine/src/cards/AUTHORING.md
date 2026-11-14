@@ -4640,6 +4640,14 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   the fewest that leave the rest payable. One tapped for it can't tap for
   mana too. "Exhaust — Waterbend {3}" is `exhaust: true` beside it. Not on a
   mana ability, nor beside `tapOthers`. `waterbend.test.ts`.
+- `tapCreaturesForMana: true` — "for each mana in this ability's activation
+  cost, you may tap an untapped **creature** you control rather than pay that
+  mana" (Heirloom Epic: `{ mana: "{4}", tap: true, tapCreaturesForMana: true
+  }`): waterbend's way of paying — the same action `waterbend` and offer,
+  marked `creaturesOnly` (the client says "tap up to N creatures") — with
+  creatures alone and no waterbending (701.67c). The cap is the total cost's
+  generic mana as it's paid, increases and reductions applied first (its
+  rulings), not 701.67b's printed part. `ability-tap-creatures-for-mana.test.ts`.
 
 **Two mana of different colors**: `add-mana`'s `mana: { oneOf: [...], different: 1 }`
 with `amount: 2` (Firemind Vessel, Interplanar Beacon); `different: 2` with

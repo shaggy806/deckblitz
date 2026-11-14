@@ -715,6 +715,17 @@ export interface AbilityCost {
    * a mana ability, nor beside `tapOthers`.
    */
   readonly waterbend?: boolean;
+  /**
+   * "For each mana in this ability's activation cost, you may tap an untapped
+   * **creature** you control rather than pay that mana" (Heirloom Epic):
+   * waterbend's way of paying (the same `waterbend` choice on the action and
+   * offer, the offer marked `creaturesOnly`) with creatures alone, and no
+   * waterbending (rule 701.67c). Unlike waterbend's 701.67b, the cap is the
+   * total cost's generic mana as it's paid — increases and reductions apply
+   * first (the rulings). Summoning-sick creatures may tap. Not on a mana
+   * ability, nor beside `tapOthers` or `waterbend`.
+   */
+  readonly tapCreaturesForMana?: true;
 }
 
 /** The kinds of activated ability a cost modifier can single out by name (rule

@@ -12745,4 +12745,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Heirloom Epic: tapping creatures rather than paying its {4}',
+    board({
+      you: { bf: ['Heirloom Epic', 'Spellbook', 'Grizzly Bears', 'Ornithopter', 'Wastes*2'] },
+      opp: { bf: ['Hill Giant', 'Plains'] },
+    }),
+  ),
+  preset(
+    'Heirloom Epic: tapping creatures for it in a 4-player game',
+    board({
+      you: { bf: ['Heirloom Epic', 'Grizzly Bears', 'Hill Giant', 'Ornithopter', 'Savannah Lions'] },
+      opp: [{ bf: ['Llanowar Elves'] }, {}, {}],
+    }),
+  ),
 ]

@@ -8460,3 +8460,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Explosive Singularity: tapping creatures for it in a 4-player game
 - **Do:** In this 4-player game, cast Explosive Singularity at Carol. Pick five creatures and Confirm.
 - **Expect:** The prompt fits the banner, the five tap with all five Mountains, and Carol loses 10 life. Nobody else does.
+
+### Heirloom Epic: tapping creatures rather than paying its {4}
+- **Do:** Activate Heirloom Epic. Grizzly Bears and Ornithopter start picked: click one off and on again, then confirm.
+- **Expect:** The banner reads "Heirloom Epic: tap up to 2 creatures to pay {1} each, at least 2" (no "waterbend"). Only your two creatures light up: not Spellbook, not your lands, nothing of Bob's. The confirm reads "Tap 2", and "Tap 1" while one is off. Both creatures, Heirloom Epic and both Wastes tap, and you draw a card.
+
+### Heirloom Epic: tapping creatures for it in a 4-player game
+- **Do:** In this 4-player game, activate Heirloom Epic. All four of your creatures start picked: confirm.
+- **Expect:** The prompt fits the banner and the confirm reads "Tap 4". All four creatures and Heirloom Epic tap with no land, and you draw a card. Bob's Llanowar Elves never lights up.
