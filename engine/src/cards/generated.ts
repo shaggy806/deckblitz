@@ -762,6 +762,7 @@ import _poolAnHavvaConstable from "./pool/an-havva-constable.js";
 import _poolAnHavvaInn from "./pool/an-havva-inn.js";
 import _poolAnHavvaTownship from "./pool/an-havva-township.js";
 import _poolAnOfferYouCantRefuse from "./pool/an-offer-you-cant-refuse.js";
+import _poolAnUnearthlyChild from "./pool/an-unearthly-child.js";
 import _poolAnUnexpectedParty from "./pool/an-unexpected-party.js";
 import _poolAnZerrinRuins from "./pool/an-zerrin-ruins.js";
 import _poolAnaBattlemage from "./pool/ana-battlemage.js";
@@ -933,6 +934,7 @@ import _poolAniktheaHandOfErebos from "./pool/anikthea-hand-of-erebos.js";
 import _poolAnimPakalThousandthMoon from "./pool/anim-pakal-thousandth-moon.js";
 import _poolAnimalAttendant from "./pool/animal-attendant.js";
 import _poolAnimalBoneyard from "./pool/animal-boneyard.js";
+import _poolAnimalFriend from "./pool/animal-friend.js";
 import _poolAnimalMagnetism from "./pool/animal-magnetism.js";
 import _poolAnimalSanctuary from "./pool/animal-sanctuary.js";
 import _poolAnimarSoulOfElements from "./pool/animar-soul-of-elements.js";
@@ -1205,6 +1207,7 @@ import _poolArchiveArbiter from "./pool/archive-arbiter.js";
 import _poolArchiveDragon from "./pool/archive-dragon.js";
 import _poolArchiveHaunt from "./pool/archive-haunt.js";
 import _poolArchiveTrap from "./pool/archive-trap.js";
+import _poolArchivistOfGondor from "./pool/archivist-of-gondor.js";
 import _poolArchivistOfOghma from "./pool/archivist-of-oghma.js";
 import _poolArchivist from "./pool/archivist.js";
 import _poolArchmageAscension from "./pool/archmage-ascension.js";
@@ -17869,6 +17872,7 @@ import _poolMooglesValor from "./pool/moogles-valor.js";
 import _poolMoonBlessedCleric from "./pool/moon-blessed-cleric.js";
 import _poolMoonBoyDinoRider from "./pool/moon-boy-dino-rider.js";
 import _poolMoonCircuitHacker from "./pool/moon-circuit-hacker.js";
+import _poolMoonEatingDog from "./pool/moon-eating-dog.js";
 import _poolMoonGirlAndDevilDinosaur from "./pool/moon-girl-and-devil-dinosaur.js";
 import _poolMoonHeron from "./pool/moon-heron.js";
 import _poolMoonSprite from "./pool/moon-sprite.js";
@@ -19814,6 +19818,7 @@ import _poolPartTheWaterveil from "./pool/part-the-waterveil.js";
 import _poolPartWater from "./pool/part-water.js";
 import _poolPartingGust from "./pool/parting-gust.js";
 import _poolPartingThoughts from "./pool/parting-thoughts.js";
+import _poolPartyDude from "./pool/party-dude.js";
 import _poolPartyThrasher from "./pool/party-thrasher.js";
 import _poolPashalikMons from "./pool/pashalik-mons.js";
 import _poolPassagewaySeer from "./pool/passageway-seer.js";
@@ -23057,6 +23062,7 @@ import _poolSacredNectar from "./pool/sacred-nectar.js";
 import _poolSacredPeaks from "./pool/sacred-peaks.js";
 import _poolSacredPrey from "./pool/sacred-prey.js";
 import _poolSacredRites from "./pool/sacred-rites.js";
+import _poolSacredWhiteDeer from "./pool/sacred-white-deer.js";
 import _poolSacredWolf from "./pool/sacred-wolf.js";
 import _poolSacrifice from "./pool/sacrifice.js";
 import _poolSaddleOfTheCavalier from "./pool/saddle-of-the-cavalier.js";
@@ -26582,6 +26588,7 @@ import _poolStormKingsThunder from "./pool/storm-kings-thunder.js";
 import _poolStormOfMemories from "./pool/storm-of-memories.js";
 import _poolStormOfSaruman from "./pool/storm-of-saruman.js";
 import _poolStormOfSouls from "./pool/storm-of-souls.js";
+import _poolStormOfSteel from "./pool/storm-of-steel.js";
 import _poolStormQueenOfWakanda from "./pool/storm-queen-of-wakanda.js";
 import _poolStormReading from "./pool/storm-reading.js";
 import _poolStormSculptor from "./pool/storm-sculptor.js";
@@ -33898,6 +33905,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnHavvaInn,
   _poolAnHavvaTownship,
   _poolAnOfferYouCantRefuse,
+  _poolAnUnearthlyChild,
   _poolAnUnexpectedParty,
   _poolAnZerrinRuins,
   _poolAnaBattlemage,
@@ -34069,6 +34077,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnimPakalThousandthMoon,
   _poolAnimalAttendant,
   _poolAnimalBoneyard,
+  _poolAnimalFriend,
   _poolAnimalMagnetism,
   _poolAnimalSanctuary,
   _poolAnimarSoulOfElements,
@@ -34341,6 +34350,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchiveDragon,
   _poolArchiveHaunt,
   _poolArchiveTrap,
+  _poolArchivistOfGondor,
   _poolArchivistOfOghma,
   _poolArchivist,
   _poolArchmageAscension,
@@ -51005,6 +51015,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoonBlessedCleric,
   _poolMoonBoyDinoRider,
   _poolMoonCircuitHacker,
+  _poolMoonEatingDog,
   _poolMoonGirlAndDevilDinosaur,
   _poolMoonHeron,
   _poolMoonSprite,
@@ -52950,6 +52961,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPartWater,
   _poolPartingGust,
   _poolPartingThoughts,
+  _poolPartyDude,
   _poolPartyThrasher,
   _poolPashalikMons,
   _poolPassagewaySeer,
@@ -56193,6 +56205,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSacredPeaks,
   _poolSacredPrey,
   _poolSacredRites,
+  _poolSacredWhiteDeer,
   _poolSacredWolf,
   _poolSacrifice,
   _poolSaddleOfTheCavalier,
@@ -59718,6 +59731,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStormOfMemories,
   _poolStormOfSaruman,
   _poolStormOfSouls,
+  _poolStormOfSteel,
   _poolStormQueenOfWakanda,
   _poolStormReading,
   _poolStormSculptor,
@@ -67047,6 +67061,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/an-havva-inn": _poolAnHavvaInn,
   "pool/an-havva-township": _poolAnHavvaTownship,
   "pool/an-offer-you-cant-refuse": _poolAnOfferYouCantRefuse,
+  "pool/an-unearthly-child": _poolAnUnearthlyChild,
   "pool/an-unexpected-party": _poolAnUnexpectedParty,
   "pool/an-zerrin-ruins": _poolAnZerrinRuins,
   "pool/ana-battlemage": _poolAnaBattlemage,
@@ -67218,6 +67233,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/anim-pakal-thousandth-moon": _poolAnimPakalThousandthMoon,
   "pool/animal-attendant": _poolAnimalAttendant,
   "pool/animal-boneyard": _poolAnimalBoneyard,
+  "pool/animal-friend": _poolAnimalFriend,
   "pool/animal-magnetism": _poolAnimalMagnetism,
   "pool/animal-sanctuary": _poolAnimalSanctuary,
   "pool/animar-soul-of-elements": _poolAnimarSoulOfElements,
@@ -67490,6 +67506,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archive-dragon": _poolArchiveDragon,
   "pool/archive-haunt": _poolArchiveHaunt,
   "pool/archive-trap": _poolArchiveTrap,
+  "pool/archivist-of-gondor": _poolArchivistOfGondor,
   "pool/archivist-of-oghma": _poolArchivistOfOghma,
   "pool/archivist": _poolArchivist,
   "pool/archmage-ascension": _poolArchmageAscension,
@@ -84154,6 +84171,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/moon-blessed-cleric": _poolMoonBlessedCleric,
   "pool/moon-boy-dino-rider": _poolMoonBoyDinoRider,
   "pool/moon-circuit-hacker": _poolMoonCircuitHacker,
+  "pool/moon-eating-dog": _poolMoonEatingDog,
   "pool/moon-girl-and-devil-dinosaur": _poolMoonGirlAndDevilDinosaur,
   "pool/moon-heron": _poolMoonHeron,
   "pool/moon-sprite": _poolMoonSprite,
@@ -86099,6 +86117,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/part-water": _poolPartWater,
   "pool/parting-gust": _poolPartingGust,
   "pool/parting-thoughts": _poolPartingThoughts,
+  "pool/party-dude": _poolPartyDude,
   "pool/party-thrasher": _poolPartyThrasher,
   "pool/pashalik-mons": _poolPashalikMons,
   "pool/passageway-seer": _poolPassagewaySeer,
@@ -89342,6 +89361,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sacred-peaks": _poolSacredPeaks,
   "pool/sacred-prey": _poolSacredPrey,
   "pool/sacred-rites": _poolSacredRites,
+  "pool/sacred-white-deer": _poolSacredWhiteDeer,
   "pool/sacred-wolf": _poolSacredWolf,
   "pool/sacrifice": _poolSacrifice,
   "pool/saddle-of-the-cavalier": _poolSaddleOfTheCavalier,
@@ -92867,6 +92887,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/storm-of-memories": _poolStormOfMemories,
   "pool/storm-of-saruman": _poolStormOfSaruman,
   "pool/storm-of-souls": _poolStormOfSouls,
+  "pool/storm-of-steel": _poolStormOfSteel,
   "pool/storm-queen-of-wakanda": _poolStormQueenOfWakanda,
   "pool/storm-reading": _poolStormReading,
   "pool/storm-sculptor": _poolStormSculptor,

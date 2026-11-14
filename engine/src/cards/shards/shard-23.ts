@@ -564,6 +564,7 @@ import _poolMoiraAndTeshar from "../pool/moira-and-teshar.js";
 import _poolMoltenSlagheap from "../pool/molten-slagheap.js";
 import _poolMomentOfTruth from "../pool/moment-of-truth.js";
 import _poolMomentaryBlink from "../pool/momentary-blink.js";
+import _poolMoonEatingDog from "../pool/moon-eating-dog.js";
 import _poolMoonlitLamenter from "../pool/moonlit-lamenter.js";
 import _poolMothdustChangeling from "../pool/mothdust-changeling.js";
 import _poolMountainYeti from "../pool/mountain-yeti.js";
@@ -1612,6 +1613,7 @@ const shard: CardShard = {
     _poolMoltenSlagheap,
     _poolMomentOfTruth,
     _poolMomentaryBlink,
+    _poolMoonEatingDog,
     _poolMoonlitLamenter,
     _poolMothdustChangeling,
     _poolMountainYeti,

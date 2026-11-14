@@ -51,6 +51,7 @@ import _poolArbalestElite from "../pool/arbalest-elite.js";
 import _poolArborbackStomper from "../pool/arborback-stomper.js";
 import _poolArchangelsLight from "../pool/archangels-light.js";
 import _poolArchetypeOfEndurance from "../pool/archetype-of-endurance.js";
+import _poolArchivistOfGondor from "../pool/archivist-of-gondor.js";
 import _poolArenaOfGlory from "../pool/arena-of-glory.js";
 import _poolArmorOfShadows from "../pool/armor-of-shadows.js";
 import _poolArmoredWarhorse from "../pool/armored-warhorse.js";
@@ -1146,6 +1147,7 @@ const shard: CardShard = {
     _poolArborbackStomper,
     _poolArchangelsLight,
     _poolArchetypeOfEndurance,
+    _poolArchivistOfGondor,
     _poolArenaOfGlory,
     _poolArmorOfShadows,
     _poolArmoredWarhorse,

@@ -598,6 +598,7 @@ import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
 import _poolPariahsShield from "../pool/pariahs-shield.js";
+import _poolPartyDude from "../pool/party-dude.js";
 import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
 import _poolPathwayArrows from "../pool/pathway-arrows.js";
 import _poolPatientNaturalist from "../pool/patient-naturalist.js";
@@ -1592,6 +1593,7 @@ const shard: CardShard = {
     _poolParallelLives,
     _poolParapetThrasher,
     _poolPariahsShield,
+    _poolPartyDude,
     _poolPathOfAngersFlame,
     _poolPathwayArrows,
     _poolPatientNaturalist,

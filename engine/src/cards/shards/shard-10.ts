@@ -28,6 +28,7 @@ import _poolAlpineGuide from "../pool/alpine-guide.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
 import _poolAnHavvaInn from "../pool/an-havva-inn.js";
+import _poolAnUnearthlyChild from "../pool/an-unearthly-child.js";
 import _poolAnafenzaUnyieldingLineage from "../pool/anafenza-unyielding-lineage.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
@@ -1064,6 +1065,7 @@ const shard: CardShard = {
     _poolAmazingSpiderGirl,
     _poolAmphinCutthroat,
     _poolAnHavvaInn,
+    _poolAnUnearthlyChild,
     _poolAnafenzaUnyieldingLineage,
     _poolAncestralCraving,
     _poolAncestralVengeance,

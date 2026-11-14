@@ -1,0 +1,62 @@
+{
+ "batch": "B330",
+ "status": "done",
+ "ranks": "EDHREC ranks 31002-31836: the last 7 untriaged Commander cards by rank; 4 Unfinity sticker cards recorded major, 3 authored by a key agent (no engine code).",
+ "authored": [
+  {
+   "name": "Moon-Eating Dog",
+   "files": [
+    "engine/src/cards/pool/moon-eating-dog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sacred White Deer",
+   "files": [
+    "engine/src/cards/pool/sacred-white-deer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm of Steel",
+   "files": [
+    "engine/src/cards/pool/storm-of-steel.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Big Winner",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Sanguine Sipper",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "Scared Stiff",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  },
+  {
+   "name": "_____ Bird Gets the Worm",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Unfinity stickers and tickets (rule 123): not built."
+  }
+ ]
+}

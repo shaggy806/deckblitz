@@ -704,6 +704,7 @@ import _poolRoilingTerrain from "../pool/roiling-terrain.js";
 import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
 import _poolRumblingSlum from "../pool/rumbling-slum.js";
 import _poolRuthlessDisposal from "../pool/ruthless-disposal.js";
+import _poolSacredWhiteDeer from "../pool/sacred-white-deer.js";
 import _poolSafeHaven from "../pool/safe-haven.js";
 import _poolSafePassage from "../pool/safe-passage.js";
 import _poolSageEyeHarrier from "../pool/sage-eye-harrier.js";
@@ -821,6 +822,7 @@ import _poolStoneforgeAcolyte from "../pool/stoneforge-acolyte.js";
 import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
 import _poolStonewiseFortifier from "../pool/stonewise-fortifier.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
+import _poolStormOfSteel from "../pool/storm-of-steel.js";
 import _poolStormWindrider from "../pool/storm-windrider.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
@@ -1745,6 +1747,7 @@ const shard: CardShard = {
     _poolRoxanneStarfallSavant,
     _poolRumblingSlum,
     _poolRuthlessDisposal,
+    _poolSacredWhiteDeer,
     _poolSafeHaven,
     _poolSafePassage,
     _poolSageEyeHarrier,
@@ -1862,6 +1865,7 @@ const shard: CardShard = {
     _poolStoneriseSpirit,
     _poolStonewiseFortifier,
     _poolStoneworkPuma,
+    _poolStormOfSteel,
     _poolStormWindrider,
     _poolStormbeaconBlade,
     _poolStormkeldVanguard,
