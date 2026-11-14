@@ -314,8 +314,16 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   loyalty: 1,
   counters: 0.5,
   library: 0.05,
-  // Zero for the same reason as `lifeDanger`: a strict no-op until swept.
-  libraryDanger: 0,
+  // **Must stay above `hand`** (with room for `handManaValue`): a draw moves
+  // a card from library to hand, so below it every draw is a gain down to the
+  // last card. At 0 a bot with The Great Henge, Temur Ascendancy and The One
+  // Ring took every "you may draw" through an 86-card library and lost to
+  // its own draw step (reported from a live game, 2026-11-14). At 3, a draw
+  // that leaves fewer than `LIBRARY_DANGER_AT` cards costs more than the
+  // card is worth, so optional draws stop there, fifteen draw steps from the
+  // end. Not swept: a library that low is rare outside a draw engine or a
+  // mill deck, where this is the point.
+  libraryDanger: 3,
   graveyard: 0.05,
   graveyardCastable: 1,
   energy: 0.3,
@@ -357,11 +365,15 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // counted was lost (the "does not pacify its own creature" scenario). The
   // same term is what makes pacifying an opponent's attacker worth its power.
   idlePower: 0.5,
-  // Zero, and it has to be: any value above it makes "pump, make eighteen
-  // Treasures" a gain forever, which is how seed 50's bot farmed Treasures
-  // off a dead player until the game timed out. A pile past a turn's spending
-  // is mana the evaluation can't see a use for — `untappedMana` is 0 too.
-  extraTokens: 0,
+  // Small, and counted for `EXTRA_TOKEN_CAP` tokens only (`features.ts`). It
+  // was zero over a pile of any size, because any value made "pump, make
+  // eighteen Treasures" a gain forever — how seed 50's bot farmed Treasures
+  // off a dead player until the game timed out. The count is bounded now,
+  // so a pile's worth stops at twelve tokens (2 for the first four, 2 more
+  // for the next eight), and spending Treasures on nothing reads as a loss:
+  // at zero, 31 of them spent on activations that did nothing scored the
+  // same as keeping them. `untappedMana` stays 0: that mana untaps.
+  extraTokens: 0.25,
   // The lever `bot:fit-scenarios` found for "kills the creature attacking
   // it, not the leader's", breaking no other scenario: a creature whose
   // controller swung at us last round counts its combat damage in full, as a

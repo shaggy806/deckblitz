@@ -194,3 +194,101 @@ describe("v1 keeps its mana in its upkeep", () => {
     expect(casts(v1(game), opt)).toBe(true);
   });
 });
+
+describe("v1 keeps the mana a spell needs from an optional payment", () => {
+  /** Alice's draw step, asked whether to pay Smothering Tithe's {2}, with
+   * `forests` untapped Forests and a Rumbling Baloth ({2}{G}{G}) in hand. */
+  function titheAsked(forests: number): Game {
+    const game = mainPhase((g) => {
+      lands(g, "Forest", forests);
+      onBoard(g, "Smothering Tithe", B);
+    });
+    game.advanceUntil(
+      (s) =>
+        s.turn.number > 1 &&
+        s.turnOrder[s.turn.activePlayerIndex] === A &&
+        s.awaiting?.kind === "choose-modes" &&
+        s.awaiting.player === A,
+    );
+    expect(game.state.turn.step).toBe("draw");
+    game.state.zones.perPlayer[A].hand = [];
+    game.debugSpawn("Rumbling Baloth", A, "hand");
+    return game;
+  }
+  const answer = (game: Game): readonly number[] => {
+    const action = v1(game);
+    return action.type === "choose-modes" ? action.modes : [-1];
+  };
+
+  it("declines Smothering Tithe's {2} when paying leaves its four-drop uncastable", () => {
+    expect(answer(titheAsked(4))).toEqual([]);
+  });
+
+  it("pays it with mana to spare", () => {
+    expect(answer(titheAsked(6))).toEqual([0]);
+  });
+
+  it("pays it with nothing in hand to cast", () => {
+    const game = titheAsked(4);
+    game.state.zones.perPlayer[A].hand = [];
+    expect(answer(game)).toEqual([0]);
+  });
+
+  it("answers each turn's ask afresh, from one bot over one game", () => {
+    // The game changes its state in place, so an answer remembered by the
+    // state object stood for every later ask: a bot that declined once
+    // declined for the rest of the game.
+    const game = titheAsked(4);
+    const bot = new HeuristicBotController(A, registry);
+    const first = bot.act(game.controllerView(A));
+    expect(first.type === "choose-modes" ? first.modes : [-1]).toEqual([]);
+    game.dispatch(first);
+    const turn = game.state.turn.number;
+    game.advanceUntil(
+      (s) => s.turn.number > turn && s.awaiting?.kind === "choose-modes" && s.awaiting.player === A,
+    );
+    game.state.zones.perPlayer[A].hand = [];
+    const second = bot.act(game.controllerView(A));
+    expect(second.type === "choose-modes" ? second.modes : [-1]).toEqual([0]);
+  });
+});
+
+describe("a draw keeps a reserve in the library", () => {
+  const draw = (n: number): EffectSpec => ({ kind: "draw", amount: n });
+  const worth = (game: Game, effect: EffectSpec): number =>
+    effectWorth(effect, { state: game.state, me: A, controller: A, targets: [], cards: registry });
+  const withLibrary = (cards: number, setup: (game: Game) => void = () => {}): Game =>
+    mainPhase((g) => {
+      g.state.zones.perPlayer[A].library = g.state.zones.perPlayer[A].library.slice(0, cards);
+      setup(g);
+    });
+
+  it("is worth a card each with a full library", () => {
+    expect(worth(mainPhase(() => {}), draw(2))).toBe(4);
+  });
+
+  it("is worth less than nothing once it would take the library below fifteen", () => {
+    expect(worth(withLibrary(15), draw(1))).toBeLessThan(0);
+    // Sixteen cards: the first of three is spare, the other two aren't.
+    expect(worth(withLibrary(16), draw(3))).toBe(-2);
+    expect(worth(withLibrary(17), draw(1))).toBe(2);
+  });
+
+  it("still reads a draw the library can't pay as losing the game (rule 104.3c)", () => {
+    expect(worth(withLibrary(2), draw(3))).toBe(-100);
+  });
+
+  it("doesn't cast Harmonize into a library of ten, and does into a full one", () => {
+    let harmonize: ObjectId = "" as ObjectId;
+    const low = withLibrary(10, (g) => {
+      lands(g, "Forest", 4);
+      harmonize = g.debugSpawn("Harmonize", A, "hand");
+    });
+    expect(casts(v1(low), harmonize)).toBe(false);
+    const full = mainPhase((g) => {
+      lands(g, "Forest", 4);
+      harmonize = g.debugSpawn("Harmonize", A, "hand");
+    });
+    expect(casts(v1(full), harmonize)).toBe(true);
+  });
+});

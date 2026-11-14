@@ -1430,6 +1430,9 @@ export class EvalBotController extends HeuristicBotController {
           ),
         );
         if (result === null || result.times < 2) continue;
+        // Not one we don't live through, even where passing reads as lost
+        // too: among lines all scored as lost, the order means nothing.
+        if (result.state.players[this.playerId]?.hasLost === true) continue;
         const score = evaluateState(result.state, this.cards, this.playerId, this.weights);
         // The cost decides whether the batch is taken, and isn't kept in the
         // score: the turn plan's lines are compared with it after this, and
@@ -1662,6 +1665,8 @@ export class EvalBotController extends HeuristicBotController {
         // Mana our own main phase could cast a spell with, spent in our upkeep
         // (`holdsManaForMain`): the rollouts never show that spell.
         if (this.holdsManaForMain(view.state, legal)) continue;
+        // A life cost that would be our last life (`lifeCostWouldKill`).
+        if (this.lifeCostWouldKill(view.state, legal)) continue;
         // A land that taps for mana and fetches (Bountiful Landscape) waits
         // for the end of the turn before ours (`holdsManaLandFetch`).
         if (this.holdsManaLandFetch(view.state, legal)) continue;
@@ -1947,6 +1952,9 @@ export class EvalBotController extends HeuristicBotController {
         l.abilityIndex === previous.abilityIndex,
     );
     if (offer === undefined) return null;
+    // Never the activation that pays our last life (`lifeCostWouldKill`): a
+    // batch of Necropotence stops while we're still alive.
+    if (this.lifeCostWouldKill(state, offer)) return null;
     const targeted = (previous.targets ?? []).some((t) => t !== null);
     if (!spread || !targeted) {
       const stillLegal = (previous.targets ?? []).every(
@@ -2016,6 +2024,14 @@ export class EvalBotController extends HeuristicBotController {
     // own seat for the rest of the turn, so they never see that spell and
     // price paying as 2 life for nothing — as with a land drop.
     if (view.state.awaiting?.kind === "pay-life-for-untapped") {
+      this.lastDecision = audit("decision", null, "v1's answer");
+      return inherited;
+    }
+    // So is declining an optional mana payment to keep a spell castable this
+    // turn (`payingCostsASpell` — Smothering Tithe's {2} at the draw step),
+    // for the same reason: the rollouts never cast that spell, so paying
+    // looks free and the search took it every time.
+    if (view.state.awaiting?.kind === "choose-modes" && this.declinedForASpell(view.state)) {
       this.lastDecision = audit("decision", null, "v1's answer");
       return inherited;
     }
@@ -2749,6 +2765,16 @@ export class EvalBotController extends HeuristicBotController {
       ),
     );
     if (after === null) {
+      this.trace?.(action, after);
+      return null;
+    }
+    // A move we don't live through never beats passing. Where the rollout
+    // has us dead whatever we do (an opponent's attack next turn), every
+    // line scores as lost and their order means nothing: a life payment came
+    // out a hair ahead of passing, three times, to 0 life (watched in a bot
+    // game, 2026-11-14: Necropotence at 3). The attack is a prediction; the
+    // life paid isn't.
+    if (action.type !== "pass-priority" && after.players[this.playerId]?.hasLost === true) {
       this.trace?.(action, after);
       return null;
     }

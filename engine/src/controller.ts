@@ -3884,6 +3884,25 @@ export class HeuristicBotController extends AutomaticController {
     return onlyScalesWithX(ability.effect);
   }
 
+  /**
+   * Whether activating `legal` pays life that leaves us at 0 or less. The
+   * payment is legal (rule 119.4 lets life be paid down to exactly 0), so
+   * `legalActions` offers it, and we lose at the next state-based check
+   * (704.5a). This bot's own worth turns it down (`activationWorth`); v2's
+   * search didn't where its rollout had an opponent's attack killing us
+   * anyway: with every line scored as lost, three Necropotence activations
+   * at 3 life came out a hair ahead of passing, and the bot killed itself
+   * a turn before an attack that was only predicted (watched in a bot game,
+   * 2026-11-14). A life cost of X is the search's to size.
+   */
+  protected lifeCostWouldKill(state: GameState, legal: LegalAction): boolean {
+    if (legal.kind !== "activate-ability" || !this.registry.has(legal.cardName)) return false;
+    const ability = this.registry.get(legal.cardName).activated?.[legal.abilityIndex];
+    if (ability === undefined || ability.cost.payLife === undefined || !legal.text.startsWith(ability.text)) return false;
+    const life = abilityLifeCost(state, this.playerId, ability.cost, undefined, legal.source);
+    return life !== null && life > 0 && life >= (state.players[this.playerId]?.life ?? 0);
+  }
+
   private activationWorth(state: GameState, legal: ActivateAbilityLegal): number | null {
     const ability = this.registry.has(legal.cardName)
       ? this.registry.get(legal.cardName).activated?.[legal.abilityIndex]
@@ -4521,10 +4540,112 @@ export class HeuristicBotController extends AutomaticController {
       // happen: paying the punisher's {1}.
       const best = scored[0];
       if (chosen.length === 0 && best !== undefined && maxModes > 0) chosen.push(best);
+      // Asked whichever way the worth below falls: v2 searches this choice
+      // over our answer, and has to be told when paying costs a spell
+      // (`declinedForASpell`) — its rollouts make the mana free.
+      const paying = chosen.map((mode) => mode.index).sort((a, b) => a - b);
+      if (paying.length > 0 && this.payingCostsASpell(view, paying)) return [];
       const taken = chosen.reduce((sum, mode) => sum + mode.worth, 0) + cost;
       if (taken <= declined) return [];
     }
     return chosen.map((mode) => mode.index).sort((a, b) => a - b);
+  }
+
+  /** Whether `payingCostsASpell` looks ahead at all. Off in a rollout's
+   * stand-ins (`CombatRolloutController`, `PlayingRolloutController`): each
+   * look is a dozen copies of the game, and a rollout crossing three
+   * opponents' draw steps under a Smothering Tithe would make three. */
+  protected readonly looksPastChoices: boolean = true;
+  /** Set while `payingCostsASpell` looks ahead, so a second choice the look
+   * meets is answered by worth alone rather than by another look. */
+  private lookingPastAChoice = false;
+  /** `payingCostsASpell`'s last answer, by the pending choice it was asked
+   * about: v2 asks again for the same decision (`EvalBotController.decide`).
+   * By the `awaiting` object and not the state, which the game changes in
+   * place — keyed on that, the first answer of a game stood for every
+   * later choice. */
+  private paidChoiceMemo: { readonly awaiting: object; readonly modes: string; readonly costs: boolean } | null = null;
+
+  /**
+   * Whether paying an optional choice's mana, on our own turn, costs us a
+   * spell we'd cast in the main phase that follows: looked ahead both ways
+   * (`mainPhaseCastsAfter`), some card is castable having declined and not
+   * having paid. Smothering Tithe's {2} at the draw step, Mana Vault's {4}
+   * at the upkeep (which untaps it for {3}, a mana down), Rhystic Study's
+   * {1} over the spell we cast before the next.
+   *
+   * Priced by worth alone, the mana was a point or two against a Treasure
+   * for an opponent, and paid every time; and v2's search agreed, since its
+   * rollouts pass our own seat and never cast what the mana was for. One
+   * game watched (2026-11-14): Giada's bot paid the Tithe's {2} on six
+   * lands with a six-mana commander and True Conviction in hand, for four
+   * turns, and cast nothing; The Ur-Dragon's paid both and never recast it.
+   */
+  protected payingCostsASpell(view: ControllerView, modes: readonly number[]): boolean {
+    const state = view.state;
+    const awaiting = state.awaiting;
+    if (awaiting?.kind !== "choose-modes" || awaiting.cost === undefined || awaiting.player !== this.playerId) return false;
+    if (!this.looksPastChoices || this.lookingPastAChoice || activePlayerOf(state) !== this.playerId) return false;
+    const step = state.turn.step;
+    if (step !== "upkeep" && step !== "draw" && step !== "precombat-main") return false;
+    const key = modes.join(",");
+    if (this.paidChoiceMemo?.awaiting === awaiting && this.paidChoiceMemo.modes === key) return this.paidChoiceMemo.costs;
+    this.lookingPastAChoice = true;
+    let costs = false;
+    try {
+      const paid = this.mainPhaseCastsAfter(view, { type: "choose-modes", player: this.playerId, modes: [...modes] });
+      const kept = paid === null ? null : this.mainPhaseCastsAfter(view, { type: "choose-modes", player: this.playerId, modes: [] });
+      costs = paid !== null && kept !== null && [...kept].some((card) => !paid.has(card));
+    } finally {
+      this.lookingPastAChoice = false;
+    }
+    this.paidChoiceMemo = { awaiting, modes: key, costs };
+    return costs;
+  }
+
+  /** Whether this bot's answer to the choice pending on `state` was to
+   * decline so as to keep the mana for a spell (`payingCostsASpell`): an
+   * answer v2 keeps, as it keeps a shock land's, because its rollouts can't
+   * see that spell. */
+  protected declinedForASpell(state: GameState): boolean {
+    return state.awaiting !== null && this.paidChoiceMemo?.awaiting === state.awaiting && this.paidChoiceMemo.costs;
+  }
+
+  /**
+   * The cards this bot would cast (`castsWeWouldMake`) once this turn's
+   * precombat main phase is reached with the stack empty, having answered
+   * the pending choice with `answer`: everyone passing, a further choice of
+   * ours answered as we would. `null` when the look can't get there — the
+   * engine refused a step, another player is asked something, the turn ends.
+   */
+  private mainPhaseCastsAfter(view: ControllerView, answer: Action): Set<ObjectId> | null {
+    const turn = view.state.turn.number;
+    let at = view.viewAfter?.(answer) ?? null;
+    for (let i = 0; at !== null && i < 16; i += 1) {
+      const state = at.state;
+      if (state.result.over || state.turn.number !== turn) return null;
+      let next: Action | readonly Action[];
+      if (state.awaiting !== null) {
+        if (state.awaiting.player !== this.playerId) return null;
+        const reply = answerAwaited(this, at);
+        if (reply === null) return null;
+        next = reply;
+      } else if (
+        state.turn.step === "precombat-main" &&
+        state.zones.shared.stack.length === 0 &&
+        state.priority.holder === this.playerId
+      ) {
+        return new Set(this.castsWeWouldMake(state, at.legalActions()).map((offer) => offer.card));
+      } else if (state.turn.step !== "upkeep" && state.turn.step !== "draw" && state.turn.step !== "precombat-main") {
+        return null;
+      } else {
+        const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
+        const from = Math.max(0, order.indexOf(state.priority.holder ?? this.playerId));
+        next = [...order.slice(from), ...order.slice(0, from)].map((p) => passFor(p));
+      }
+      at = carryOn(at, next);
+    }
+    return null;
   }
 
   /**

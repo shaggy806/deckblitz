@@ -839,8 +839,36 @@ single one, because spare Treasures and untapped mana score nothing, and Scion o
 Ur-Dragon was activated 19 times at once. An ability that makes a copy isn't batched, and each
 activation past a batch's first costs `BATCH_STEP_COST`.
 
-Three gate scenarios, `test/v1-self-harm.test.ts` and `test/v1-blocks.test.ts`. Not done: the
-same bot then drew its whole library (`BACKLOG.md`).
+Three gate scenarios, `test/v1-self-harm.test.ts` and `test/v1-blocks.test.ts`.
+
+The same bot then drew its whole library and lost to its draw step. Two weights that were zero:
+
+- `libraryDanger` is 3, above `hand`: a draw that leaves fewer than fifteen cards costs more
+  than the card is worth, so optional draws stop there. `effectWorth` keeps the same reserve
+  for v1 (`LIBRARY_RESERVE`). A mandatory draw still isn't weighed by v1 (`BACKLOG.md`).
+- `extraTokens` is 0.25 over a bounded count (eight tokens past the cap of four, then
+  nothing). It was zero over any pile because a value made Treasure-making a gain without end
+  (seed 50); bounded, it isn't, and spending a pile on nothing reads as the loss it is.
+  `untappedMana` stays 0: that mana untaps.
+
+Neither was swept. Both act where a game rarely goes: a library under fifteen, a fifth Treasure.
+
+### Two games watched on the strong decks (2026-11-14)
+
+`npm run bot:watch -w engine` plays four v2 seats at the live clock on named decks and writes
+out every decision with how it was reached. Two games, read through, found three misplays that
+are fixed and four that aren't (`BACKLOG.md`):
+
+- **Mana paid in the draw step for nothing.** Smothering Tithe's {2} was paid at every draw step
+  by every seat, Mana Vault's {4} at every upkeep. The rollouts pass our own seat, so the mana
+  is free to them. v1 now looks ahead to its main phase with and without the payment and
+  declines when paying loses a spell it would cast; v2 keeps that answer rather than search it.
+  The same shape as the shock land's life and the upkeep hold: a cost paid before the main
+  phase, for which only v1's look ahead sees what it gives up.
+- **Curiosity on an opponent's creature**: an Aura with only a trigger had no side
+  (`auraPolarity`).
+- **Suicide when the rollout says we're dead.** With every line scored as lost, their order is
+  noise, and a life payment to 0 won it. A move we don't live through never beats passing.
 
 ## Watching live games for
 

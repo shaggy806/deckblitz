@@ -385,6 +385,7 @@ export function canRepeat(game: Game, action: Action): boolean {
  */
 export class CombatRolloutController extends HeuristicBotController {
   protected override readonly tradeMargin: number = -Infinity;
+  protected override readonly looksPastChoices: boolean = false;
 
   act(view: ControllerView): Action {
     if (view.state.awaiting !== null) return super.act(view);
@@ -450,7 +451,9 @@ export class DefendingRolloutController extends CombatRolloutController {
  * is the mitigation; if it isn't enough, a better rollout policy is the fix,
  * not more samples.
  */
-export class PlayingRolloutController extends HeuristicBotController {}
+export class PlayingRolloutController extends HeuristicBotController {
+  protected override readonly looksPastChoices: boolean = false;
+}
 
 /**
  * Play `action` against a copy of `state` and run `depth.turns` player turns of

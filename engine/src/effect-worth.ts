@@ -48,6 +48,12 @@ import { isCardSet, isObjectSetRef } from "./object-sets.js";
 
 /** What one card is worth, the unit everything else is scaled to. */
 const CARD = 2;
+/** The cards a library keeps: a draw of ours that leaves fewer is declined.
+ * The evaluation's `LIBRARY_DANGER_AT` (`bot/features.ts`), repeated here
+ * because this module imports nothing from `bot/`. A bot answered every
+ * "you may draw" until its library was gone (reported from a live game,
+ * 2026-11-14). */
+const LIBRARY_RESERVE = 15;
 /** Removing a permanent (the decisive effects), a card's effect (major), a
  * tap or a small pump (minor) — `slotStrengths`' three weights. */
 const SLOT_WORTH: readonly number[] = [1, CARD, 4];
@@ -437,10 +443,15 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       if (typeof effect.target === "number" || typeof effect.who === "object") return 0;
       const n = sizeOf(effect.amount);
       const players = playersIn(effect.who ?? "you", ctx);
-      // Drawing from a library too small to draw from loses the game.
-      const decking = (players ?? []).includes(ctx.me) &&
-        ctx.state.zones.perPlayer[ctx.me].library.length < n;
-      return decking ? -100 : onPlayers(players, CARD * n, ctx);
+      if (!(players ?? []).includes(ctx.me)) return onPlayers(players, CARD * n, ctx);
+      // Drawing from a library too small to draw from loses the game (rule
+      // 104.3c), and each card that takes ours below `LIBRARY_RESERVE` is a
+      // draw step nearer that: worth a card less, not a card more.
+      const library = ctx.state.zones.perPlayer[ctx.me].library.length;
+      if (library < n) return -100;
+      const spare = Math.max(0, Math.min(n, library - LIBRARY_RESERVE));
+      const mine = CARD * (spare - (n - spare));
+      return mine + onPlayers((players ?? []).filter((p) => p !== ctx.me), CARD * n, ctx);
     }
     case "gain-life":
       if (effect.toControllerOfTarget !== undefined || typeof effect.who === "object") return 0;

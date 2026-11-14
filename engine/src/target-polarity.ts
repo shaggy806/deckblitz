@@ -1427,6 +1427,13 @@ export function auraPolarity(def: CardDefinition): Polarity {
       // Thirst's "whenever enchanted creature deals combat damage to a player,
       // you may return target creature card": an attacker's Aura.
       else if (ability.trigger.on === "deals-combat-damage-to-player") help = true;
+      // And for any damage it deals an opponent — Curiosity's and Ophidian
+      // Eye's "whenever enchanted creature deals damage to an opponent, you
+      // may draw a card". The opponent is the Aura's controller's, so on an
+      // opponent's creature it draws only when that creature hits someone
+      // else: a bot with no creature of its own put both on its opponents'
+      // (watched in a bot game, 2026-11-14).
+      else if (ability.trigger.on === "deals-damage" && "to" in ability.trigger && ability.trigger.to === "opponent") help = true;
     }
   }
   // Still nothing: what its triggers give the enchanted permanent whatever

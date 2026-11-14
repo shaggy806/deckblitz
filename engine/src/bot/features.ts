@@ -267,6 +267,16 @@ const MAX_THREAT_SCALE = 10;
  */
 export const TOKEN_CAP = 4;
 
+/**
+ * How many more of a pile count as `extraTokens`, past `TOKEN_CAP`; beyond
+ * that a token counts for nothing. Bounded so that making them is never a
+ * gain without end (seed 50, above), and not zero so that spending them
+ * isn't free: with every Treasure past the fourth worth nothing, nineteen
+ * Scion of the Ur-Dragon activations paid for with 31 of them scored the
+ * same as one (reported from a live game, 2026-11-14).
+ */
+export const EXTRA_TOKEN_CAP = 8;
+
 export const featureSign = (key: FeatureKey): number => (SUBTRACTED.has(key) ? -1 : 1);
 
 const resourceMemo = new Map<string, boolean>();
@@ -1347,7 +1357,7 @@ function playerFeaturesUncached(
   for (const { count, resource } of tokenPiles.values()) {
     if (resource) resourceTokens += Math.min(count, TOKEN_CAP);
     else otherPermanents += Math.min(count, TOKEN_CAP);
-    extraTokens += Math.max(0, count - TOKEN_CAP);
+    extraTokens += Math.min(Math.max(0, count - TOKEN_CAP), EXTRA_TOKEN_CAP);
   }
 
   return {

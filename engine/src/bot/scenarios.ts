@@ -456,6 +456,45 @@ function sarkhanAsked(
   return game.state.awaiting?.kind === "choose-modes" ? game : { passed: false, detail: "Sarkhan never asked" };
 }
 
+/** Alice, with Temur Ascendancy out, casts a Craw Wurm: paused at the
+ * Ascendancy's "you may draw a card", or a failure if it never asked. Her
+ * library is cut to `library` cards, or left whole for `null`. */
+function ascendancyAsked(registry: CardRegistry, library: number | null): Game | ScenarioResult {
+  const game = table(registry, [A, B], A);
+  lands(game, "Forest", A, 6);
+  onBoard(game, "Temur Ascendancy", A);
+  if (library !== null) {
+    game.state.zones.perPlayer[A].library = game.state.zones.perPlayer[A].library.slice(0, library);
+  }
+  const wurm = game.debugSpawn("Craw Wurm", A, "hand");
+  game.dispatch({ type: "cast-spell", player: A, card: wurm, targets: [] });
+  game.advanceUntil((s) => (s.awaiting?.kind === "choose-modes" && s.awaiting.player === A) || s.result.over);
+  return game.state.awaiting?.kind === "choose-modes" ? game : { passed: false, detail: "Temur Ascendancy never asked" };
+}
+
+/** Alice's draw step under Bob's Smothering Tithe, asked whether to pay its
+ * {2}, with `forests` untapped Forests and a Rumbling Baloth ({2}{G}{G}) her
+ * whole hand; or a failure if it never asked. */
+function titheAsked(registry: CardRegistry, forests: number): Game | ScenarioResult {
+  const game = table(registry, [A, B], A);
+  lands(game, "Forest", A, forests);
+  onBoard(game, "Smothering Tithe", B);
+  const turn = game.state.turn.number;
+  game.advanceUntil(
+    (s) =>
+      (s.turn.number > turn &&
+        s.turnOrder[s.turn.activePlayerIndex] === A &&
+        s.awaiting?.kind === "choose-modes" &&
+        s.awaiting.player === A) ||
+      s.result.over ||
+      s.turn.number > turn + 4,
+  );
+  if (game.state.awaiting?.kind !== "choose-modes") return { passed: false, detail: "Smothering Tithe never asked" };
+  game.state.zones.perPlayer[A].hand = [];
+  game.debugSpawn("Rumbling Baloth", A, "hand");
+  return game;
+}
+
 /** A scenario asked with one `act`, its `run` following from its position. */
 function asked(
   spec: Omit<BotScenario, "run" | "position"> & Required<Pick<BotScenario, "position">>,
@@ -2629,6 +2668,173 @@ const SCENARIOS: readonly BotScenario[] = [
       return { passed: activations <= 1, detail: `activated Scion ${activations} time(s) in a row` };
     },
   },
+  asked({
+    name: "declines a 'you may draw' with eight cards left in its library",
+    rule: "Drawing from an empty library loses the game (rule 104.3c): with the library nearly gone, a card in hand isn't worth a draw step.",
+    position(registry) {
+      // Reported from a live game (2026-11-14, room K6DYC): Jodah's bot, with
+      // The Great Henge, Temur Ascendancy and The One Ring out, drew every
+      // card it was offered through an 86-card library and lost in its own
+      // draw step on turn 28, two turns after putting the last opponent on 2
+      // life. A draw was worth `hand` (2) against `library` (0.05), whatever
+      // was left; `libraryDanger` now costs it more than the card below
+      // fifteen, and v1's answer keeps the same reserve (`effectWorth`).
+      const game = ascendancyAsked(registry, 8);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length === 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "declines Smothering Tithe's {2} when the mana is its turn's spell",
+    rule: "Two mana to deny an opponent a Treasure isn't worth the four-drop it would have cast.",
+    position(registry) {
+      // Watched in a bot game on the strong decks (2026-11-14): every seat
+      // paid Smothering Tithe's {2} at every draw step. Giada's, on six lands
+      // with its six-mana commander and True Conviction in hand, paid for
+      // four turns running and cast nothing; The Ur-Dragon's never recast
+      // its commander. The choice comes in the draw step, the rollouts pass
+      // our own seat for the rest of the turn, and so the mana looked free.
+      // v1 looks ahead to its main phase both ways and declines when paying
+      // costs it a cast (`payingCostsASpell`); v2 keeps that answer.
+      const game = titheAsked(registry, 4);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length === 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "pays Smothering Tithe's {2} with mana to spare",
+    rule: "With the turn's spell still castable after it, denying the Treasure is free.",
+    position(registry) {
+      const game = titheAsked(registry, 6);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  {
+    name: "does not pay its last life to Necropotence",
+    rule: "A life payment down to 0 loses the game (rule 704.5a), however lost the position looks.",
+    run(weights, registry, makeBot) {
+      // Watched in a bot game on the strong decks (2026-11-14): Edgar
+      // Markov's bot, on 3 life, activated Necropotence three times in an
+      // opponent's upkeep and was out. Its rollouts had that opponent's
+      // attack killing it whatever it did, so every line scored as lost,
+      // and the batch of three came out a hair ahead of passing (-10027.9
+      // against -10029.9). A move the bot doesn't live through no longer
+      // beats passing, a batch stops before the activation that pays its
+      // last life, and that activation isn't a candidate
+      // (`lifeCostWouldKill`). Bob's Craw Wurm is the attack that makes the
+      // position read as lost.
+      const game = table(registry, [A, B, C], A);
+      const necropotence = onBoard(game, "Necropotence", A);
+      onBoard(game, "Craw Wurm", B);
+      game.state.players[A].life = 3;
+      game.advanceUntil(
+        (s) => (s.turnOrder[s.turn.activePlayerIndex] === B && s.turn.step === "upkeep" && s.priority.holder === A) || s.result.over,
+      );
+      if (game.state.turn.step !== "upkeep") return { passed: false, detail: "never reached bob's upkeep" };
+      const bot = makeBot(A, registry, weights);
+      let paid = 0;
+      for (let i = 0; i < 6; i += 1) {
+        if (game.state.players[A].hasLost || game.state.priority.holder !== A || game.state.awaiting !== null) break;
+        const action = bot.act(viewOf(game, A));
+        if (action.type === "pass-priority") break;
+        if (action.type === "activate-ability" && action.source === necropotence) paid += 1;
+        game.dispatch(action);
+      }
+      return {
+        passed: !game.state.players[A].hasLost && game.state.players[A].life > 0,
+        detail: `paid ${paid} life from 3, ${game.state.players[A].hasLost ? "and lost" : `left on ${game.state.players[A].life}`}`,
+      };
+    },
+  },
+  asked({
+    name: "keeps Curiosity for a creature of its own",
+    rule: "'Whenever enchanted creature deals damage to an opponent, you may draw' draws for us off our own creature: on an opponent's it only draws when they hit someone else.",
+    position(registry) {
+      // Watched in a bot game on the strong decks (2026-11-14): Y'shtola's
+      // bot, with no creature of its own, cast Curiosity on one opponent's
+      // Master of Dark Rites and Ophidian Eye on another's Krenko. An Aura's
+      // side was read from its statics, and these have only a trigger, so
+      // either side would do, and a permanent out scores no less than a
+      // card in hand. `auraPolarity` now reads the trigger as an attacker's
+      // Aura.
+      const game = table(registry, [A, B, C], A);
+      lands(game, "Island", A, 2);
+      onBoard(game, "Grizzly Bears", B);
+      onBoard(game, "Hill Giant", C);
+      const curiosity = game.debugSpawn("Curiosity", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === curiosity),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "puts Curiosity on its own creature",
+    rule: "The same Aura with a creature of ours to carry it is a card a hit.",
+    position(registry) {
+      const game = table(registry, [A, B, C], A);
+      lands(game, "Island", A, 2);
+      const bears = onBoard(game, "Grizzly Bears", A);
+      onBoard(game, "Hill Giant", C);
+      const curiosity = game.debugSpawn("Curiosity", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed:
+            action.type === "cast-spell" &&
+            action.card === curiosity &&
+            action.targets?.[0]?.kind === "object" &&
+            action.targets[0].object === bears,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "takes a 'you may draw' with a full library",
+    rule: "A free card is a free card while the library can spare it.",
+    position(registry) {
+      // The scenario above with the library whole: the reserve must not
+      // turn the bot off drawing.
+      const game = ascendancyAsked(registry, null);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   {
     name: "does not station its only blocker into a lethal crackback with a land still to play",
     rule: "A move the crackback guard marked unsafe is not the first step of a turn plan either.",

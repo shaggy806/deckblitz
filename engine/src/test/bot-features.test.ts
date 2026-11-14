@@ -73,20 +73,21 @@ describe("the nonlinear life and library terms", () => {
     expect(thinCost).toBeGreaterThan(deepCost);
   });
 
-  it("changes nothing at all while its weight is zero", () => {
+  it("costs a card in hand more than the draw that took the library below fifteen", () => {
+    // `libraryDanger` shipped on 2026-11-14 (`lifeDanger` on 2026-09-26, with
+    // `life` halved beside it): a bot drew every card it was offered and lost
+    // to its own draw step. It has to outweigh `hand`, or a draw is a gain
+    // down to the last card.
+    expect(DEFAULT_WEIGHTS.libraryDanger).toBeGreaterThan(DEFAULT_WEIGHTS.hand);
     const game = newGame();
-    game.state.players[A].life = 4;
-    game.state.zones.perPlayer[A].library.length = 3;
-    // `libraryDanger` ships at 0, so a position deep in its danger zone must
-    // score exactly as it would with the term stripped out entirely.
-    // (`lifeDanger` shipped on 2026-09-26, with `life` halved beside it.)
-    const withTerm = evaluateState(game.state, game.registry, A, DEFAULT_WEIGHTS);
-    const withoutTerm = evaluateState(game.state, game.registry, A, {
-      ...DEFAULT_WEIGHTS,
-      libraryDanger: 0,
-    });
-    expect(DEFAULT_WEIGHTS.libraryDanger).toBe(0);
-    expect(withTerm).toBe(withoutTerm);
+    const scoreWith = (cards: number): number => {
+      game.state.zones.perPlayer[A].library.length = cards;
+      return evaluateState(game.state, game.registry, A, DEFAULT_WEIGHTS);
+    };
+    // A card off a library of 10 costs the term's weight and a library
+    // card's own; off a library of 30, only the latter.
+    expect(scoreWith(10) - scoreWith(9)).toBeCloseTo(DEFAULT_WEIGHTS.libraryDanger + DEFAULT_WEIGHTS.library, 6);
+    expect(scoreWith(30) - scoreWith(29)).toBeCloseTo(DEFAULT_WEIGHTS.library, 6);
   });
 
   it("prices life at a fifth of a point above 30, half to 15 and a point and a half below", () => {
