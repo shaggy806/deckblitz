@@ -5209,6 +5209,13 @@ export type EffectSpec =
        */
       readonly exceptChosen?: true;
       /**
+       * "They may cast a spell from among **other** cards exiled with this
+       * artifact" (Knowledge Pool, after "that player exiles it"): the cards
+       * this resolution has exiled so far are left out of `from`'s cards, as
+       * `return-exiled-by-source`'s `others`.
+       */
+      readonly others?: true;
+      /**
        * With `repeat`: "you may cast any number of spells **with total mana
        * value 10 or less** from among them" (Primeval Spawn): a running total
        * — only a spell whose mana value (at X = 0, rule 107.3b, as the spell
@@ -15037,6 +15044,12 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
     if (spec.exceptChosen === true) {
       const chosen = new Set(ctx.thisWay("chosen").map((entry) => entry.object));
       cards = cards.filter((id) => !chosen.has(id));
+    }
+    // "From among **other** cards exiled with this": not the ones this
+    // resolution has just exiled.
+    if (spec.others === true) {
+      const justExiled = new Set(ctx.cardsExiledThisWay());
+      cards = cards.filter((id) => !justExiled.has(id));
     }
     if (spec.copies !== undefined) {
       cards = ctx.copyCards(cards, Math.max(0, Math.floor(amountValue(spec.copies, ctx))));

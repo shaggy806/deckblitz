@@ -9,7 +9,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { ScriptedController } from "../controller.js";
-import { A, B, cast, lands, life, nextTurn, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, cast, enter, lands, life, nextTurn, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -86,5 +86,62 @@ describe("Possibility Storm", () => {
     expect(zone(game, second)).toBe("graveyard");
     expect(life(game, B)).toBe(14);
     expect(zone(game, shock)).toBe("library");
+  });
+});
+
+/** Answer the next "you may cast" with `card` (or decline), recording what was offered. */
+const castPick = (seat: ScriptedController, card: ObjectId | null, targets: readonly ReturnType<typeof ref>[] = [ref(B)]): { offered: ObjectId[] } => {
+  const seen = { offered: [] as ObjectId[] };
+  seat.chooseCastNowFn = (_v, offer) => {
+    seen.offered = offer.casts.map((c) => c.card);
+    const way = offer.casts.find((c) => c.card === card);
+    return way === undefined ? null : { type: "cast-spell", player: seat.playerId, card: way.card, targets: [...targets], via: way.via, free: true };
+  };
+  return seen;
+};
+
+describe("Knowledge Pool", () => {
+  it("exiles each player's top three with it, then trades a spell cast from hand for another card exiled with it", () => {
+    const { game, a, b } = table();
+    toLibrary(game, "Grizzly Bears", B);
+    toLibrary(game, "Wastes", B);
+    const theirBolt = toLibrary(game, "Lightning Bolt", B);
+    const pool = enter(game, "Knowledge Pool");
+    const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].exiledWith?.source === pool);
+    expect(exiled).toHaveLength(6);
+    expect(zone(game, theirBolt)).toBe("exile");
+
+    lands(game, "Mountain", 1);
+    const shock = toHand(game, "Shock");
+    const seen = castPick(a, theirBolt);
+    cast(game, shock, { targets: [ref(B)] });
+    // Shock, just exiled, isn't offered; lands never are.
+    expect(seen.offered).toContain(theirBolt);
+    expect(seen.offered).not.toContain(shock);
+    expect(seen.offered.every((id) => game.state.objects[id].cardName !== "Wastes")).toBe(true);
+    expect(life(game, B)).toBe(17);
+    expect(zone(game, theirBolt)).toBe("graveyard");
+    expect(game.state.objects[theirBolt].owner).toBe(B);
+    expect(zone(game, shock)).toBe("exile");
+    expect(game.state.objects[shock].exiledWith?.source).toBe(pool);
+
+    // The next player's spell from hand can trade for Shock.
+    nextTurn(game);
+    lands(game, "Forest", 2, B);
+    const bears = toHand(game, "Grizzly Bears", B);
+    castPick(b, shock, [ref(A)]);
+    cast(game, bears, { player: B });
+    expect(life(game, A)).toBe(18);
+    expect(zone(game, bears)).toBe("exile");
+  });
+
+  it("still exiles the spell with nothing to cast", () => {
+    const { game } = table();
+    enter(game, "Knowledge Pool");
+    lands(game, "Mountain", 1);
+    const shock = toHand(game, "Shock");
+    cast(game, shock, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(20);
+    expect(zone(game, shock)).toBe("exile");
   });
 });
