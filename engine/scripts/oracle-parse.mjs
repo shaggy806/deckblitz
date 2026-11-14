@@ -18993,6 +18993,30 @@ function gainControlSpellAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "Gain control of target spell that targets only a single permanent or
+  // player. Copy it, then reselect the targets at random for the spell and the
+  // copy. The new targets can't be you or a permanent you control." (Chef's Kiss)
+  if (
+    /^gain control of target spell that targets only a single permanent or player\.$/i.test(sentences[i]) &&
+    /^copy it, then reselect the targets at random for the spell and the copy\.$/i.test(sentences[i + 1] ?? "") &&
+    /^the new targets can't be you or a permanent you control\.$/i.test(sentences[i + 2] ?? "")
+  ) {
+    const target = ctx.target({
+      kind: "spell",
+      filter: { targets: { only: true, single: true, permanent: {}, player: "any" } },
+    });
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "gain-control-spell", target },
+          { kind: "copy-spell", target },
+          { kind: "change-targets", target, how: "random", exceptYou: true, withCopies: true },
+        ],
+      },
+      used: 3,
+    };
+  }
   if (!/^you may choose new targets for it\.$/i.test(sentences[i + 1] ?? "")) return null;
   const m = /^gain control of target (noncreature )?spell\.$/i.exec(sentences[i]);
   if (m === null) return null;

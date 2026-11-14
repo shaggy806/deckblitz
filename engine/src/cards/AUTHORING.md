@@ -2017,7 +2017,12 @@ Substitution): `how: "change"` —
 must change if it can (Bolt Bend, Redirect Lightning, Untimely Malfunction);
 `"change-one"` — "change a target" (115.7b); `"choose-new"` — "you may
 choose new targets", any of them, a kept one even if no longer legal
-(Deflecting Swat, Wild Ricochet). New targets are legal as the spell's own
+(Deflecting Swat, Wild Ricochet); `"random"` — "reselect the targets at
+random", each slot drawn afresh from every legal target (its own included),
+one with none kept, `exceptYou` for "the new targets can't be you or a
+permanent you control", `withCopies` for "for the spell and the copy" (the
+copies this resolution made — Chef's Kiss, after a `gain-control-spell` and a
+`copy-spell`). New targets are legal as the spell's own
 controller would choose them, never the spell itself (115.5); a divided
 amount keeps its division (115.7f); each new target "becomes the target"
 (ward, Phantasmal Image). `to: "source"` — "…to this creature": the only

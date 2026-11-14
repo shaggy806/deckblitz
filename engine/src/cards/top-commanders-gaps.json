@@ -2520,7 +2520,8 @@
   "effect:exile-spell-as-it-resolves-linked",
   "zone:exile-library-bottom-face-down-cast-permanents",
   "zone:exile-from-library-bottom",
-  "zone:plot-from-library-top"
+  "zone:plot-from-library-top",
+  "effect:copy-spell-random-retarget"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

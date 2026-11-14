@@ -41385,8 +41385,23 @@ controlledBy,
         ),
       copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
       stackObjectsToCopy: (what) => this.stackObjectsToCopy(controller, what),
-      changeTargets: (target, how, toSource, optional, byItsController) =>
-        this.changeStackTargets(
+      changeTargets: (target, how, toSource, optional, byItsController, random) => {
+        if (how === "random") {
+          if (target.kind !== "object") return;
+          // "For the spell and the copy": the copies of it this resolution
+          // made, as they're still on the stack.
+          const copies =
+            random?.withCopies === true
+              ? this.eventsSince(this.state.resolutionSince ?? this.state.eventSeq).flatMap((e) =>
+                  e.type === "spell-copied" && e.original === target.object ? [e.copy] : [],
+                )
+              : [];
+          for (const id of [target.object, ...copies]) {
+            this.reselectTargetsAtRandom(id, controller, source, random?.exceptYou === true);
+          }
+          return;
+        }
+        return this.changeStackTargets(
           (byItsController && target.kind === "object" ? this.state.objects[target.object]?.controller : undefined) ??
             controller,
           source,
@@ -41394,7 +41409,8 @@ controlledBy,
           how,
           toSource,
           optional,
-        ),
+        );
+      },
       gainControlOfSpell: (target) => this.gainControlOfSpell(controller, target),
       copyAbility: (target, newTargets) => this.copyAbilityByEffect(controller, target, triggerObject, newTargets),
       triggerSpell: () => {
@@ -47804,6 +47820,8 @@ controlledBy,
     readonly specs: readonly TargetSpec[];
     readonly current: readonly TargetRef[];
     readonly others: readonly (readonly TargetRef[])[];
+    /** Whether each slot's current target is still a legal one for it. */
+    readonly currentLegal: readonly boolean[];
   } | null {
     const object = this.state.objects[id];
     const targets = object.targets ?? [];
@@ -47830,6 +47848,7 @@ controlledBy,
     const slotSpecs: TargetSpec[] = [];
     const current: TargetRef[] = [];
     const others: TargetRef[][] = [];
+    const currentLegal: boolean[] = [];
     // It keeps its number of targets (rules 707.10c, 115.7), so an "any
     // number of target …" group is as many single slots as it has members —
     // each one target of the group's spec, another than the members before it
@@ -47850,21 +47869,20 @@ controlledBy,
       const fixed = (than === undefined ? [] : otherThanSlots(than))
         .filter((slot) => auto.has(slot))
         .flatMap((slot) => (targets[slot] === undefined ? [] : [targets[slot]]));
-      const legal = legalTargets(this.state, this.registry, member, object.controller, source).filter(
-        (t) =>
-          (t.kind !== "object" || t.object !== id) &&
-          !sameTargetRef(t, target) &&
-          !fixed.some((f) => sameTargetRef(t, f)),
+      const legalNow = legalTargets(this.state, this.registry, member, object.controller, source).filter(
+        (t) => (t.kind !== "object" || t.object !== id) && !fixed.some((f) => sameTargetRef(t, f)),
       );
+      const legal = legalNow.filter((t) => !sameTargetRef(t, target));
       slots.push(i);
       slotSpecs.push(spec);
       current.push(target);
       others.push(legal);
+      currentLegal.push(legal.length < legalNow.length);
     });
     // The offered slots are numbered afresh, so each "other than slot n"
     // follows its slot there (a skipped optional slot shifts the rest).
     const kept = new Map(slots.map((slot, k) => [slot, k] as const));
-    return { slots, specs: slotSpecs.map((spec) => renumberOtherSlots(spec, kept)), current, others };
+    return { slots, specs: slotSpecs.map((spec) => renumberOtherSlots(spec, kept)), current, others, currentLegal };
   }
 
   /**
@@ -48003,6 +48021,33 @@ controlledBy,
       ...(how === "change-one" && !optional ? { changeOne: true as const } : {}),
       ...(object.controller !== chooser ? { targetsFor: object.controller } : {}),
     };
+  }
+
+  /**
+   * "Reselect the targets at random" (Chef's Kiss — `change-targets`'s
+   * `"random"`): each target of the spell or ability `id` on the stack, one
+   * slot at a time, to one drawn at random from every legal target for it as
+   * its controller would choose it (rule 115.7), its current one included,
+   * each instance of the word "target" drawn for afresh (the rulings). With
+   * `exceptYou`, never `you` or a permanent `you` control; a slot with
+   * nothing left to draw from keeps its target, legal or not (the rulings).
+   * Nothing if it has left the stack.
+   */
+  private reselectTargetsAtRandom(id: ObjectId, you: PlayerId, effectSource: ObjectId, exceptYou: boolean): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "stack") return;
+    const found = this.stackTargetSlots(id);
+    if (found === null || found.slots.length === 0) return;
+    const yours = (t: TargetRef): boolean =>
+      t.kind === "player"
+        ? t.player === you
+        : this.state.objects[t.object]?.zone === "battlefield" && this.state.objects[t.object].controller === you;
+    const answer = found.current.map((now, i) => {
+      const pool = [...found.others[i], ...(found.currentLegal[i] ? [now] : [])].filter((t) => !exceptYou || !yours(t));
+      if (pool.length === 0) return now;
+      return this.randomTargets(you, effectSource, [pool])[0] ?? now;
+    });
+    this.retargetStackObject(id, found.slots, answer);
   }
 
   /** Change the spell or ability `id`'s targets in `slots` to `chosen`, one

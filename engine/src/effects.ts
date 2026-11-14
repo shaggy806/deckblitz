@@ -7790,6 +7790,13 @@ export type EffectSpec =
        * - `"change-one"` — "change a target" (115.7b): one of them.
        * - `"choose-new"` — "you may choose new targets" (115.7d): any number,
        *   each kept even if it's no longer legal (Deflecting Swat).
+       * - `"random"` — "reselect the targets at random" (Chef's Kiss): each
+       *   target, one at a time, to one drawn at random from every legal
+       *   target for it (its current one included), nobody choosing; a slot
+       *   with none to draw from keeps its target (the rulings). `exceptYou`:
+       *   "the new targets can't be you or a permanent you control" — this
+       *   effect's controller. `withCopies`: "for the spell **and the copy**"
+       *   — every copy of it this resolution has made is reselected too.
        *
        * `"trigger-object"` is the spell whose casting fired this triggered
        * ability, as long as it's still that spell on the stack (Perplexing
@@ -7797,7 +7804,12 @@ export type EffectSpec =
        */
       readonly kind: "change-targets";
       readonly target: number | "trigger-object";
-      readonly how: "change" | "change-one" | "choose-new";
+      readonly how: "change" | "change-one" | "choose-new" | "random";
+      /** With `"random"`: none of the new targets is this effect's controller
+       * or a permanent they control. */
+      readonly exceptYou?: true;
+      /** With `"random"`: the copies of the spell this resolution made too. */
+      readonly withCopies?: true;
       /** "…to this creature": the one new target there is is this effect's
        * own permanent (Spellskite, Hydroelectric Specimen). */
       readonly to?: "source";
@@ -13017,10 +13029,11 @@ export interface EffectApi {
    * {@link EffectSpec}. */
   changeTargets(
     target: TargetRef,
-    how: "change" | "change-one" | "choose-new",
+    how: "change" | "change-one" | "choose-new" | "random",
     toSource: boolean,
     optional: boolean,
     byItsController?: boolean,
+    random?: { readonly exceptYou: boolean; readonly withCopies: boolean },
   ): void;
   /** This effect's controller gains control of the spell at `TargetRef` — see
    * the `gain-control-spell` {@link EffectSpec}. */
@@ -20247,7 +20260,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "change-targets": {
       const target = typeof spec.target === "number" ? ctx.targets[spec.target] : objectRefAct(spec.target, ctx);
       if (target !== undefined) {
-        ctx.changeTargets(target, spec.how, spec.to === "source", spec.optional === true, spec.by === "its-controller");
+        ctx.changeTargets(
+          target,
+          spec.how,
+          spec.to === "source",
+          spec.optional === true,
+          spec.by === "its-controller",
+          spec.how === "random" ? { exceptYou: spec.exceptYou === true, withCopies: spec.withCopies === true } : undefined,
+        );
       }
       return;
     }

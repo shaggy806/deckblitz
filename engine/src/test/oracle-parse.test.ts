@@ -19016,6 +19016,26 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ).toEqual([{ on: "event", event: "scry-bottoms", who: "you" }]);
   });
 
+  it("reads a spell taken, copied and both retargeted at random (Chef's Kiss)", () => {
+    const kiss = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text:
+        "Gain control of target spell that targets only a single permanent or player. Copy it, then reselect the targets at random for the spell and the copy. The new targets can't be you or a permanent you control.",
+    });
+    expect(kiss.targets).toEqual([
+      { kind: "spell", filter: { targets: { only: true, single: true, permanent: {}, player: "any" } } },
+    ]);
+    expect(kiss.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "gain-control-spell", target: 0 },
+        { kind: "copy-spell", target: 0 },
+        { kind: "change-targets", target: 0, how: "random", exceptYou: true, withCopies: true },
+      ],
+    });
+  });
+
   it("reads plot given to and taken from the top of your library (Fblthp, Lost on the Range)", () => {
     const fblthp = parseFace({
       name: "Test Card",
