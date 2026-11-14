@@ -836,6 +836,7 @@ import _poolSwelter from "../pool/swelter.js";
 import _poolSwiftDemise from "../pool/swift-demise.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
+import _poolSwoopingPteranodon from "../pool/swooping-pteranodon.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
 import _poolSylvanYeti from "../pool/sylvan-yeti.js";
 import _poolSymmetrySage from "../pool/symmetry-sage.js";
@@ -1858,6 +1859,7 @@ const shard: CardShard = {
     _poolSwiftDemise,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,
+    _poolSwoopingPteranodon,
     _poolSwordOfVengeance,
     _poolSylvanYeti,
     _poolSymmetrySage,

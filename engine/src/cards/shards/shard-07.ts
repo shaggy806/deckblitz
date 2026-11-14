@@ -333,6 +333,7 @@ import _poolGeneralKreatTheBoltbringer from "../pool/general-kreat-the-boltbring
 import _poolGeralfsMessenger from "../pool/geralfs-messenger.js";
 import _poolGeyserLeaper from "../pool/geyser-leaper.js";
 import _poolGhaltaStampedeTyrant from "../pool/ghalta-stampede-tyrant.js";
+import _poolGhiredsBelligerence from "../pool/ghireds-belligerence.js";
 import _poolGhituChronicler from "../pool/ghitu-chronicler.js";
 import _poolGhorClanWrecker from "../pool/ghor-clan-wrecker.js";
 import _poolGiantKoi from "../pool/giant-koi.js";
@@ -1383,6 +1384,7 @@ const shard: CardShard = {
     _poolGeralfsMessenger,
     _poolGeyserLeaper,
     _poolGhaltaStampedeTyrant,
+    _poolGhiredsBelligerence,
     _poolGhituChronicler,
     _poolGhorClanWrecker,
     _poolGiantKoi,

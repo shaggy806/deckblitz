@@ -656,6 +656,14 @@
    ],
    "size": "major",
    "why": "Re-sized in the third lanes run (2026-11-14): paying life to change a die result after seeing it is a choice inside every roll, as Vedalken Squirrel-Whacker's."
+  },
+  {
+   "name": "Reckless Blaze",
+   "needs": [
+    "trigger:watched-object-own-controller"
+   ],
+   "size": "small",
+   "why": "Re-keyed in the third lanes run (2026-11-14): its delayed watch on what was dealt damage this way is built, but 'a creature you control' can't be read — Game.watchedSubject makes every watched object the delayed ability's controller's."
   }
  ]
 }

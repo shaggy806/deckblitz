@@ -3278,6 +3278,7 @@ import _poolBountyOfTheLuxa from "./pool/bounty-of-the-luxa.js";
 import _poolBovineIntervention from "./pool/bovine-intervention.js";
 import _poolBowOfNylea from "./pool/bow-of-nylea.js";
 import _poolBowerPassage from "./pool/bower-passage.js";
+import _poolBoxingRing from "./pool/boxing-ring.js";
 import _poolBraceForImpact from "./pool/brace-for-impact.js";
 import _poolBrackishBlunder from "./pool/brackish-blunder.js";
 import _poolBrackishTrudge from "./pool/brackish-trudge.js";
@@ -9347,6 +9348,7 @@ import _poolFeralAnimist from "./pool/feral-animist.js";
 import _poolFeralAppetite from "./pool/feral-appetite.js";
 import _poolFeralDeathgorger from "./pool/feral-deathgorger.js";
 import _poolFeralDeceiver from "./pool/feral-deceiver.js";
+import _poolFeralEncounter from "./pool/feral-encounter.js";
 import _poolFeralFerocity from "./pool/feral-ferocity.js";
 import _poolFeralGhoul from "./pool/feral-ghoul.js";
 import _poolFeralHydra from "./pool/feral-hydra.js";
@@ -10764,6 +10766,7 @@ import _poolGhirapurOrrery from "./pool/ghirapur-orrery.js";
 import _poolGhirapurOsprey from "./pool/ghirapur-osprey.js";
 import _poolGhiredConclaveExile from "./pool/ghired-conclave-exile.js";
 import _poolGhiredMirrorOfTheWilds from "./pool/ghired-mirror-of-the-wilds.js";
+import _poolGhiredsBelligerence from "./pool/ghireds-belligerence.js";
 import _poolGhituAmplifier from "./pool/ghitu-amplifier.js";
 import _poolGhituChronicler from "./pool/ghitu-chronicler.js";
 import _poolGhituEncampment from "./pool/ghitu-encampment.js";
@@ -23933,6 +23936,7 @@ import _poolSentinelSarahLyons from "./pool/sentinel-sarah-lyons.js";
 import _poolSentinelSliver from "./pool/sentinel-sliver.js";
 import _poolSentinelSpider from "./pool/sentinel-spider.js";
 import _poolSentinelTotem from "./pool/sentinel-totem.js";
+import _poolSentinelTower from "./pool/sentinel-tower.js";
 import _poolSentinel from "./pool/sentinel.js";
 import _poolSentinelsEyes from "./pool/sentinels-eyes.js";
 import _poolSentinelsMark from "./pool/sentinels-mark.js";
@@ -27106,6 +27110,7 @@ import _poolSwirlingTorrent from "./pool/swirling-torrent.js";
 import _poolSwitcheroo from "./pool/switcheroo.js";
 import _poolSwoopingLookout from "./pool/swooping-lookout.js";
 import _poolSwoopingProtector from "./pool/swooping-protector.js";
+import _poolSwoopingPteranodon from "./pool/swooping-pteranodon.js";
 import _poolSwoopingTalon from "./pool/swooping-talon.js";
 import _poolSwordCoastSailor from "./pool/sword-coast-sailor.js";
 import _poolSwordCoastSerpent from "./pool/sword-coast-serpent.js";
@@ -36303,6 +36308,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBovineIntervention,
   _poolBowOfNylea,
   _poolBowerPassage,
+  _poolBoxingRing,
   _poolBraceForImpact,
   _poolBrackishBlunder,
   _poolBrackishTrudge,
@@ -42372,6 +42378,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFeralAppetite,
   _poolFeralDeathgorger,
   _poolFeralDeceiver,
+  _poolFeralEncounter,
   _poolFeralFerocity,
   _poolFeralGhoul,
   _poolFeralHydra,
@@ -43789,6 +43796,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGhirapurOsprey,
   _poolGhiredConclaveExile,
   _poolGhiredMirrorOfTheWilds,
+  _poolGhiredsBelligerence,
   _poolGhituAmplifier,
   _poolGhituChronicler,
   _poolGhituEncampment,
@@ -56958,6 +56966,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSentinelSliver,
   _poolSentinelSpider,
   _poolSentinelTotem,
+  _poolSentinelTower,
   _poolSentinel,
   _poolSentinelsEyes,
   _poolSentinelsMark,
@@ -60131,6 +60140,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSwitcheroo,
   _poolSwoopingLookout,
   _poolSwoopingProtector,
+  _poolSwoopingPteranodon,
   _poolSwoopingTalon,
   _poolSwordCoastSailor,
   _poolSwordCoastSerpent,
@@ -69341,6 +69351,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bovine-intervention": _poolBovineIntervention,
   "pool/bow-of-nylea": _poolBowOfNylea,
   "pool/bower-passage": _poolBowerPassage,
+  "pool/boxing-ring": _poolBoxingRing,
   "pool/brace-for-impact": _poolBraceForImpact,
   "pool/brackish-blunder": _poolBrackishBlunder,
   "pool/brackish-trudge": _poolBrackishTrudge,
@@ -75410,6 +75421,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/feral-appetite": _poolFeralAppetite,
   "pool/feral-deathgorger": _poolFeralDeathgorger,
   "pool/feral-deceiver": _poolFeralDeceiver,
+  "pool/feral-encounter": _poolFeralEncounter,
   "pool/feral-ferocity": _poolFeralFerocity,
   "pool/feral-ghoul": _poolFeralGhoul,
   "pool/feral-hydra": _poolFeralHydra,
@@ -76827,6 +76839,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ghirapur-osprey": _poolGhirapurOsprey,
   "pool/ghired-conclave-exile": _poolGhiredConclaveExile,
   "pool/ghired-mirror-of-the-wilds": _poolGhiredMirrorOfTheWilds,
+  "pool/ghireds-belligerence": _poolGhiredsBelligerence,
   "pool/ghitu-amplifier": _poolGhituAmplifier,
   "pool/ghitu-chronicler": _poolGhituChronicler,
   "pool/ghitu-encampment": _poolGhituEncampment,
@@ -89996,6 +90009,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sentinel-sliver": _poolSentinelSliver,
   "pool/sentinel-spider": _poolSentinelSpider,
   "pool/sentinel-totem": _poolSentinelTotem,
+  "pool/sentinel-tower": _poolSentinelTower,
   "pool/sentinel": _poolSentinel,
   "pool/sentinels-eyes": _poolSentinelsEyes,
   "pool/sentinels-mark": _poolSentinelsMark,
@@ -93169,6 +93183,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/switcheroo": _poolSwitcheroo,
   "pool/swooping-lookout": _poolSwoopingLookout,
   "pool/swooping-protector": _poolSwoopingProtector,
+  "pool/swooping-pteranodon": _poolSwoopingPteranodon,
   "pool/swooping-talon": _poolSwoopingTalon,
   "pool/sword-coast-sailor": _poolSwordCoastSailor,
   "pool/sword-coast-serpent": _poolSwordCoastSerpent,

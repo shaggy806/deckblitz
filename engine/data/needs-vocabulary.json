@@ -16578,6 +16578,10 @@
   "mechanic:sectors": {
    "example": "Space Beleren: space sculptor divides the battlefield into alpha, beta and gamma sectors, each creature assigned (opponents first), blocking only within a sector."
   },
+  "trigger:watched-object-own-controller": {
+   "family": "effect:delayed-trigger-dealt-damage-this-way-dies",
+   "example": "Reckless Blaze: \"whenever a creature you control dealt damage this way dies\" \u2014 Game.watchedSubject treats every watched object as the delayed ability's controller's."
+  },
   "effect:store-die-results": {
    "family": "mechanic:dice-rolling",
    "example": "Centaur of Attention: \"roll five six-sided dice and store those results on it\", reroll any number of them, +X/+X for the most that match."

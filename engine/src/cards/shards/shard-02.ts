@@ -309,6 +309,7 @@ import _poolFederationOutpost from "../pool/federation-outpost.js";
 import _poolFeedback from "../pool/feedback.js";
 import _poolFelhidePetrifier from "../pool/felhide-petrifier.js";
 import _poolFelineSovereign from "../pool/feline-sovereign.js";
+import _poolFeralEncounter from "../pool/feral-encounter.js";
 import _poolFinchFormation from "../pool/finch-formation.js";
 import _poolFireNationSalvagers from "../pool/fire-nation-salvagers.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolFeedback,
     _poolFelhidePetrifier,
     _poolFelineSovereign,
+    _poolFeralEncounter,
     _poolFinchFormation,
     _poolFireNationSalvagers,
     _poolFirebendingLesson,

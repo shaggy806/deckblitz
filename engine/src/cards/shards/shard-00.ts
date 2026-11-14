@@ -104,6 +104,7 @@ import _poolBondedConstruct from "../pool/bonded-construct.js";
 import _poolBonecrusherGiant from "../pool/bonecrusher-giant.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
+import _poolBoxingRing from "../pool/boxing-ring.js";
 import _poolBrainInAJar from "../pool/brain-in-a-jar.js";
 import _poolBrainspoil from "../pool/brainspoil.js";
 import _poolBrainstone from "../pool/brainstone.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolBonecrusherGiant,
     _poolBootsOfSpeed,
     _poolBortukBonerattle,
+    _poolBoxingRing,
     _poolBrainInAJar,
     _poolBrainspoil,
     _poolBrainstone,

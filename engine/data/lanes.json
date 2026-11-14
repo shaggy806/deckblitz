@@ -171,6 +171,7 @@
   "effect:create-token-enters-with-counters": "replacements-copies",
   "effect:delayed-return-from-graveyard-your-next-upkeep": "triggers-journal",
   "effect:delayed-trigger-dealt-damage-this-way-dies": "triggers-journal",
+  "trigger:watched-object-own-controller": "triggers-journal",
   "effect:delayed-trigger-targets": "triggers-journal",
   "effect:delayed-trigger-watching-bolstered": "triggers-journal",
   "effect:emblem-own-activated-ability": "costs-mana",
