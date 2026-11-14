@@ -114,6 +114,7 @@ import _poolBowOfNylea from "../pool/bow-of-nylea.js";
 import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
+import _poolBreechesBrazenPlunderer from "../pool/breeches-brazen-plunderer.js";
 import _poolBriarPatch from "../pool/briar-patch.js";
 import _poolBringerOfTheGreenDawn from "../pool/bringer-of-the-green-dawn.js";
 import _poolBrokenFall from "../pool/broken-fall.js";
@@ -1165,6 +1166,7 @@ const shard: CardShard = {
     _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
+    _poolBreechesBrazenPlunderer,
     _poolBriarPatch,
     _poolBringerOfTheGreenDawn,
     _poolBrokenFall,

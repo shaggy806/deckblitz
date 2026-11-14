@@ -3379,6 +3379,7 @@ import _poolBreatheYourLast from "./pool/breathe-your-last.js";
 import _poolBreathlessKnight from "./pool/breathless-knight.js";
 import _poolBreathstealer from "./pool/breathstealer.js";
 import _poolBredForTheHunt from "./pool/bred-for-the-hunt.js";
+import _poolBreechesBrazenPlunderer from "./pool/breeches-brazen-plunderer.js";
 import _poolBreechesEagerPillager from "./pool/breeches-eager-pillager.js";
 import _poolBreechesTheBlastmaker from "./pool/breeches-the-blastmaker.js";
 import _poolBreedingPit from "./pool/breeding-pit.js";
@@ -5368,6 +5369,7 @@ import _poolCorruptingLicid from "./pool/corrupting-licid.js";
 import _poolCorsairCaptain from "./pool/corsair-captain.js";
 import _poolCorsairsOfUmbar from "./pool/corsairs-of-umbar.js";
 import _poolCoruscationMage from "./pool/coruscation-mage.js";
+import _poolCosimaGodOfTheVoyage from "./pool/cosima-god-of-the-voyage.js";
 import _poolCosisRavager from "./pool/cosis-ravager.js";
 import _poolCosmicCrucible from "./pool/cosmic-crucible.js";
 import _poolCosmicCube from "./pool/cosmic-cube.js";
@@ -9754,6 +9756,7 @@ import _poolFloatingShield from "./pool/floating-shield.js";
 import _poolFlockImpostor from "./pool/flock-impostor.js";
 import _poolFlockchaserPhantom from "./pool/flockchaser-phantom.js";
 import _poolFloodOfRecollection from "./pool/flood-of-recollection.js";
+import _poolFloodOfTears from "./pool/flood-of-tears.js";
 import _poolFloodPlain from "./pool/flood-plain.js";
 import _poolFloodTheEngine from "./pool/flood-the-engine.js";
 import _poolFlood from "./pool/flood.js";
@@ -22266,6 +22269,7 @@ import _poolRitesOfFlourishing from "./pool/rites-of-flourishing.js";
 import _poolRitesOfReaping from "./pool/rites-of-reaping.js";
 import _poolRitesOfRefusal from "./pool/rites-of-refusal.js";
 import _poolRitesOfSpring from "./pool/rites-of-spring.js";
+import _poolRithLiberatedPrimeval from "./pool/rith-liberated-primeval.js";
 import _poolRithTheAwakener from "./pool/rith-the-awakener.js";
 import _poolRithsAttendant from "./pool/riths-attendant.js";
 import _poolRithsCharm from "./pool/riths-charm.js";
@@ -27860,6 +27864,7 @@ import _poolTheNinthDoctor from "./pool/the-ninth-doctor.js";
 import _poolTheNiptonLottery from "./pool/the-nipton-lottery.js";
 import _poolTheNotaryHobbits from "./pool/the-notary-hobbits.js";
 import _poolTheOddAcornGang from "./pool/the-odd-acorn-gang.js";
+import _poolTheOmenkeel from "./pool/the-omenkeel.js";
 import _poolTheOneRing from "./pool/the-one-ring.js";
 import _poolTheOoze from "./pool/the-ooze.js";
 import _poolTheOzolith from "./pool/the-ozolith.js";
@@ -36153,6 +36158,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBreathlessKnight,
   _poolBreathstealer,
   _poolBredForTheHunt,
+  _poolBreechesBrazenPlunderer,
   _poolBreechesEagerPillager,
   _poolBreechesTheBlastmaker,
   _poolBreedingPit,
@@ -38142,6 +38148,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCorsairCaptain,
   _poolCorsairsOfUmbar,
   _poolCoruscationMage,
+  _poolCosimaGodOfTheVoyage,
   _poolCosisRavager,
   _poolCosmicCrucible,
   _poolCosmicCube,
@@ -42528,6 +42535,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlockImpostor,
   _poolFlockchaserPhantom,
   _poolFloodOfRecollection,
+  _poolFloodOfTears,
   _poolFloodPlain,
   _poolFloodTheEngine,
   _poolFlood,
@@ -55040,6 +55048,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRitesOfReaping,
   _poolRitesOfRefusal,
   _poolRitesOfSpring,
+  _poolRithLiberatedPrimeval,
   _poolRithTheAwakener,
   _poolRithsAttendant,
   _poolRithsCharm,
@@ -60634,6 +60643,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheNiptonLottery,
   _poolTheNotaryHobbits,
   _poolTheOddAcornGang,
+  _poolTheOmenkeel,
   _poolTheOneRing,
   _poolTheOoze,
   _poolTheOzolith,
@@ -68940,6 +68950,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/breathless-knight": _poolBreathlessKnight,
   "pool/breathstealer": _poolBreathstealer,
   "pool/bred-for-the-hunt": _poolBredForTheHunt,
+  "pool/breeches-brazen-plunderer": _poolBreechesBrazenPlunderer,
   "pool/breeches-eager-pillager": _poolBreechesEagerPillager,
   "pool/breeches-the-blastmaker": _poolBreechesTheBlastmaker,
   "pool/breeding-pit": _poolBreedingPit,
@@ -70929,6 +70940,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/corsair-captain": _poolCorsairCaptain,
   "pool/corsairs-of-umbar": _poolCorsairsOfUmbar,
   "pool/coruscation-mage": _poolCoruscationMage,
+  "pool/cosima-god-of-the-voyage": _poolCosimaGodOfTheVoyage,
   "pool/cosis-ravager": _poolCosisRavager,
   "pool/cosmic-crucible": _poolCosmicCrucible,
   "pool/cosmic-cube": _poolCosmicCube,
@@ -75315,6 +75327,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flock-impostor": _poolFlockImpostor,
   "pool/flockchaser-phantom": _poolFlockchaserPhantom,
   "pool/flood-of-recollection": _poolFloodOfRecollection,
+  "pool/flood-of-tears": _poolFloodOfTears,
   "pool/flood-plain": _poolFloodPlain,
   "pool/flood-the-engine": _poolFloodTheEngine,
   "pool/flood": _poolFlood,
@@ -87827,6 +87840,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rites-of-reaping": _poolRitesOfReaping,
   "pool/rites-of-refusal": _poolRitesOfRefusal,
   "pool/rites-of-spring": _poolRitesOfSpring,
+  "pool/rith-liberated-primeval": _poolRithLiberatedPrimeval,
   "pool/rith-the-awakener": _poolRithTheAwakener,
   "pool/riths-attendant": _poolRithsAttendant,
   "pool/riths-charm": _poolRithsCharm,
@@ -93421,6 +93435,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-nipton-lottery": _poolTheNiptonLottery,
   "pool/the-notary-hobbits": _poolTheNotaryHobbits,
   "pool/the-odd-acorn-gang": _poolTheOddAcornGang,
+  "pool/the-omenkeel": _poolTheOmenkeel,
   "pool/the-one-ring": _poolTheOneRing,
   "pool/the-ooze": _poolTheOoze,
   "pool/the-ozolith": _poolTheOzolith,

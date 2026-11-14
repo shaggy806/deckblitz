@@ -684,6 +684,7 @@ import _poolRinoaAngelWing from "../pool/rinoa-angel-wing.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiptideSurvivor from "../pool/riptide-survivor.js";
+import _poolRithLiberatedPrimeval from "../pool/rith-liberated-primeval.js";
 import _poolRiverSerpent from "../pool/river-serpent.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
@@ -875,6 +876,7 @@ import _poolTheMastersOfEvil from "../pool/the-masters-of-evil.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
 import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
 import _poolTheMotherlodeExcavator from "../pool/the-motherlode-excavator.js";
+import _poolTheOmenkeel from "../pool/the-omenkeel.js";
 import _poolTheSeriema from "../pool/the-seriema.js";
 import _poolTheWondrousWasp from "../pool/the-wondrous-wasp.js";
 import _poolTheWretched from "../pool/the-wretched.js";
@@ -1704,6 +1706,7 @@ const shard: CardShard = {
     _poolRiotSpikes,
     _poolRipjawRaptor,
     _poolRiptideSurvivor,
+    _poolRithLiberatedPrimeval,
     _poolRiverSerpent,
     _poolRiverchurnMonument,
     _poolRiverwalkTechnique,
@@ -1895,6 +1898,7 @@ const shard: CardShard = {
     _poolTheMindskinner,
     _poolTheMistyMountainsCold,
     _poolTheMotherlodeExcavator,
+    _poolTheOmenkeel,
     _poolTheSeriema,
     _poolTheWondrousWasp,
     _poolTheWretched,

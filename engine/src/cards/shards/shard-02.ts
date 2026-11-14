@@ -160,6 +160,7 @@ import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCopperLeafAngel from "../pool/copper-leaf-angel.js";
 import _poolCorpseDance from "../pool/corpse-dance.js";
+import _poolCosimaGodOfTheVoyage from "../pool/cosima-god-of-the-voyage.js";
 import _poolCourtOfAmbition from "../pool/court-of-ambition.js";
 import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
@@ -1187,6 +1188,7 @@ const shard: CardShard = {
     _poolCopperHostCrusher,
     _poolCopperLeafAngel,
     _poolCorpseDance,
+    _poolCosimaGodOfTheVoyage,
     _poolCourtOfAmbition,
     _poolCramSession,
     _poolCremate,

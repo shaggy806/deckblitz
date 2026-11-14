@@ -307,6 +307,7 @@ import _poolFleetCaptainChristopherPike from "../pool/fleet-captain-christopher-
 import _poolFleetingDistraction from "../pool/fleeting-distraction.js";
 import _poolFlickeringWard from "../pool/flickering-ward.js";
 import _poolFloodOfRecollection from "../pool/flood-of-recollection.js";
+import _poolFloodOfTears from "../pool/flood-of-tears.js";
 import _poolFlowstoneInfusion from "../pool/flowstone-infusion.js";
 import _poolFlumph from "../pool/flumph.js";
 import _poolFlushOut from "../pool/flush-out.js";
@@ -1301,6 +1302,7 @@ const shard: CardShard = {
     _poolFleetingDistraction,
     _poolFlickeringWard,
     _poolFloodOfRecollection,
+    _poolFloodOfTears,
     _poolFlowstoneInfusion,
     _poolFlumph,
     _poolFlushOut,
