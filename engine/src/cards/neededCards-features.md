@@ -407,6 +407,14 @@ The key `effect:creatures-enter-with-counter-this-turn` needed no engine code: A
 scaffolder reads the line. Zameck Guildmage, Combine Guildmage.
 `test/creatures-enter-with-counter-this-turn.test.ts`.
 
+### Noting creature types — built 2026-11-14
+
+The key `effect:note-creature-type-not-yet-noted`: `choose-creature-type`'s `note` (the types
+noted for the source left out, the answer noted for it — `GameObject.notedCreatureTypes`, kept
+with the battlefield stint it was noted in, rules 400.7 and 608.2h) and `amongTypesOf` ("one of
+its creature types", a changeling's every one), and the `{ notedCreatureTypes }` amount. Volo,
+Itinerant Scholar (with Volo's Journal), Long List of the Ents. `test/note-creature-type.test.ts`.
+
 ### An `unless` cost reduced — built 2026-11-14
 
 The key `effect:sacrifice-unless-pay-reduced-mana-cost`: two `UnlessOption` forms, each with

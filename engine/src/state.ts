@@ -464,6 +464,15 @@ export interface GameObject {
    * "most-alike-stored-results"`. The object's own, so a change of zone
    * forgets them (rule 400.7). Absent until the first. */
   storedResults?: { readonly sides: number; readonly result: number }[];
+  /** The creature types noted for this permanent, in the order noted (Volo's
+   * Journal's "note one of its creature types that hasn't been noted for this
+   * artifact", Long List of the Ents): written by `choose-creature-type`'s
+   * `note`, counted by the `{ notedCreatureTypes }` amount. The permanent's
+   * own, so they're kept with the battlefield stint (`zoneChangeCount`) they
+   * were noted in: a new object has none (rule 400.7), while an ability whose
+   * source has just left still reads what was noted for it (608.2h). Absent
+   * until the first. */
+  notedCreatureTypes?: { readonly stint: number; readonly types: readonly string[] };
   /** The turns this permanent was declared an attacker on, in this
    * battlefield stint — "attacked during their controller's last turn" (Halls
    * of Mist), which an extra combat this turn mustn't overwrite. Pruned as each
@@ -4195,8 +4204,9 @@ export type AwaitingDecision =
       readonly secret?: true;
       /** A resolving effect's answer is kept on `source` while it's still the
        * permanent that asked (`stint` — rule 400.7): as
-       * `GameObject.chosenPlayer`, or as its `chosenCreatureType`. */
-      readonly remember?: { readonly stint: number; readonly as: "player" | "creature-type" };
+       * `GameObject.chosenPlayer`, or as its `chosenCreatureType`, or added
+       * to its `notedCreatureTypes` (`"noted-creature-type"`). */
+      readonly remember?: { readonly stint: number; readonly as: "player" | "creature-type" | "noted-creature-type" };
       /** What a turn about to begin comes to (rule 614.10 — `Game.askTurnBegin`):
        * this source's "you may skip that turn" (Time Vault), the first option
        * taking the turn; or, with `owed`, whether the skip this player owes is

@@ -8205,7 +8205,7 @@ export class Game {
       prompt?: string;
       sentinel?: string;
       secret?: true;
-      remember?: { readonly stint: number; readonly as: "player" | "creature-type" };
+      remember?: { readonly stint: number; readonly as: "player" | "creature-type" | "noted-creature-type" };
     },
     /** All but a few of the catalogue ("other than Wall"): still a search. */
     catalog?: boolean,
@@ -8255,7 +8255,9 @@ export class Game {
       const keptOn = this.state.objects[awaiting.source];
       if (keptOn?.zone === "battlefield" && (keptOn.zoneChangeCount ?? 0) === awaiting.remember.stint) {
         if (awaiting.remember.as === "player") keptOn.chosenPlayer = creatureType as PlayerId;
-        else keptOn.chosenCreatureType = creatureType;
+        else if (awaiting.remember.as === "noted-creature-type") {
+          keptOn.notedCreatureTypes = { stint: awaiting.remember.stint, types: [...this.notedCreatureTypes(keptOn.id, awaiting.remember.stint), creatureType] };
+        } else keptOn.chosenCreatureType = creatureType;
         if (awaiting.secret === true) keptOn.secretChoice = { by: player };
         invalidateComputedCache();
       }
@@ -38514,6 +38516,8 @@ export class Game {
       // Clement, the Worrywort's "lesser mana value" after the entering
       // creature was killed in response. A spell that fired a cast trigger
       // was never a permanent, and is read on the stack.
+      notedCreatureTypeCount: (object) =>
+        this.notedCreatureTypes(object, this.state.objects[object]?.zoneChangeCount ?? 0).length,
       manaValueOf: (target) => {
         // The spell whose casting fired this, gone from the stack since
         // (countered in response): its mana value as it last was there, its
@@ -39595,7 +39599,18 @@ export class Game {
           }
         }
       },
-      chooseCreatureType: (then, exclude, fixed, keep) => {
+      chooseCreatureType: (then, excludeAsked, fixed, keep, among) => {
+        let exclude = excludeAsked;
+        if (keep?.remember === "noted-creature-type") {
+          // "A creature type that hasn't been noted for this permanent": what
+          // was noted for it in the stint this ability came from, read even
+          // once it has left (rule 608.2h).
+          const stint = refs.source ?? this.state.objects[source]?.zoneChangeCount ?? 0;
+          const noted = this.notedCreatureTypes(source, stint);
+          if (noted.length > 0) exclude = [...(exclude ?? []), ...noted];
+        }
+        const noneLeft = (exclude ?? []).length > 0 && fixed === undefined && among === undefined && CREATURE_TYPES.every((t) => exclude!.includes(t));
+        if (noneLeft) return;
         const kept = {
           ...(keep?.secret === true ? { secret: true as const } : {}),
           ...(keep?.remember !== undefined
@@ -39607,6 +39622,21 @@ export class Game {
               }
             : {}),
         };
+        if (among !== undefined) {
+          // "One of its creature types": that object's as it is, a
+          // changeling's every one (rule 702.73a) — still a search, where a
+          // few are buttons. Gone, or none left to choose: nothing is.
+          const types = among === null ? [] : this.creatureTypesOf(among).filter((t) => !(exclude ?? []).includes(t));
+          if (types.length === 0) return;
+          this.beginCreatureTypeChoice(
+            source,
+            controller,
+            types,
+            { then, targets, x, prompt: "Choose one of its creature types", ...kept },
+            types.length > 12,
+          );
+          return;
+        }
         if (fixed !== undefined) {
           this.beginCreatureTypeChoice(
             source,
@@ -44713,6 +44743,12 @@ controlledBy,
       for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
       return { rule: "total", tags, atMost: cap, orNone: true, text: `with total power ${cap} or less` };
     }
+    if ("totalManaValue" in together) {
+      // Exactly that much: no more, no less.
+      const sum = together.totalManaValue === "x" ? x : together.totalManaValue;
+      for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
+      return { rule: "total", tags, atLeast: sum, atMost: sum, text: `with total mana value ${sum}` };
+    }
     if ("totalPowerAtLeast" in together) {
       const sum = together.totalPowerAtLeast;
       for (const id of eligible) tags[id] = [String(computeCharacteristics(this.state, this.registry, id).power)];
@@ -44744,12 +44780,6 @@ controlledBy,
         tags[id] = LAND_TYPES.filter((type) => hasSubtype(subtypes, type));
       }
       return { rule: "share", tags, text: "that share a land type" };
-    }
-    if ("totalManaValue" in together) {
-      // Exactly that much: no more, no less.
-      const sum = together.totalManaValue === "x" ? x : together.totalManaValue;
-      for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
-      return { rule: "total", tags, atLeast: sum, atMost: sum, text: `with total mana value ${sum}` };
     }
     if ("distinctNames" in together) {
       // Every name it has (rule 201.2a — a split card's two), none face down.
@@ -52612,6 +52642,13 @@ controlledBy,
     if (object === undefined) return [];
     const subtypes = effectiveSubtypes(this.state, this.registry, object);
     return CREATURE_TYPES.filter((type) => hasSubtype(subtypes, type));
+  }
+
+  /** The creature types noted for `id` in its battlefield stint `stint`
+   * (`GameObject.notedCreatureTypes`): none for another object (rule 400.7). */
+  notedCreatureTypes(id: ObjectId, stint: number): readonly string[] {
+    const noted = this.state.objects[id]?.notedCreatureTypes;
+    return noted !== undefined && noted.stint === stint ? noted.types : [];
   }
 
   /** An object's colours as it is now, through the layer fold. */

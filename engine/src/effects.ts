@@ -672,6 +672,12 @@ export type EffectAmount =
    * player target or an object that no longer exists at all.
    */
   | { readonly manaValueOf: ObjectRef }
+  /** How many creature types have been noted for this permanent
+   * (`GameObject.notedCreatureTypes`, `choose-creature-type`'s `note`) —
+   * Volo, Itinerant Scholar's "draw a card for each creature type noted for
+   * target permanent you control named Volo's Journal". `0` for one that's
+   * a new object since (rule 400.7) or a player. */
+  | { readonly notedCreatureTypes: ObjectRef }
   /**
    * That colour's mana symbols in one object's mana cost, a hybrid or Phyrexian
    * one counting once — chroma (an ability word, rule 207.2c): Fiery
@@ -4073,6 +4079,18 @@ export type EffectSpec =
        * Each land of the first chosen type becomes the second chosen type"
        * (`FIRST_CHOSEN_TYPE` here, `CHOSEN_CREATURE_TYPE` under it). */
       readonly sentinel?: string;
+      /** "**Note** a creature type that hasn't been noted for this Saga" (Long
+       * List of the Ents): the types already noted for this effect's source
+       * can't be chosen, and the answer is noted for it
+       * (`GameObject.notedCreatureTypes`, counted by `{ notedCreatureTypes }`)
+       * while it's still the permanent it was (rule 400.7). With every type
+       * noted, nothing is chosen and `then` doesn't happen. */
+      readonly note?: true;
+      /** "Note **one of its creature types**" (Volo's Journal, of the creature
+       * spell cast): only that object's creature types as it is, a
+       * changeling's every one (rule 702.73a). It gone or with none left to
+       * choose, nothing is chosen and `then` doesn't happen. */
+      readonly amongTypesOf?: ObjectRef;
     }
   | {
       /**
@@ -11857,6 +11875,9 @@ export interface EffectApi {
    * the `{ manaValueOf }` {@link EffectAmount}. `0` for a player target or an
    * object that no longer exists. */
   manaValueOf(target: TargetRef): number;
+  /** See the `{ notedCreatureTypes }` {@link EffectAmount}: the types noted
+   * for `object` in the stint it's in now. */
+  notedCreatureTypeCount(object: ObjectId): number;
   /** The mana spent to cast `target`, read as it last was on the stack once
    * it has gone (rule 608.2h) — see the `{ manaSpentOf }` {@link EffectAmount}. */
   manaSpentOf(target: TargetRef): readonly SpentMana[];
@@ -12620,7 +12641,9 @@ export interface EffectApi {
     exclude?: readonly string[],
     options?: { readonly options: readonly string[]; readonly prompt?: string; readonly sentinel?: string },
     /** What to keep of the answer on the source, and whether it's secret. */
-    keep?: { readonly remember?: "player" | "creature-type"; readonly secret?: true },
+    keep?: { readonly remember?: "player" | "creature-type" | "noted-creature-type"; readonly secret?: true },
+    /** Only this object's creature types (`amongTypesOf`); `null`, it's gone. */
+    among?: ObjectId | null,
   ): void;
   /** See the `"choose-card-name"` {@link EffectSpec}. */
   chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>, named?: PlayerId): void;
@@ -14649,6 +14672,12 @@ function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void
  * sacrifice — all of it or none (rule 702.24a: no partial payments). Its
  * `text` names the total.
  */
+/** `choose-creature-type`'s `amongTypesOf`: the object it names, or `null`
+ * for none (a player, or gone). */
+function amongObject(ref: TargetRef | null | undefined): ObjectId | null {
+  return ref?.kind === "object" ? ref.object : null;
+}
+
 function bindUnlessTimes(option: BoundUnlessOption, ctx: ResolutionContext): BoundUnlessOption {
   if (!("times" in option) || option.times === undefined) return option;
   const n = Math.max(0, Math.floor(amountValue(option.times, ctx)));
@@ -16559,6 +16588,10 @@ export function signedAmountValue(
   if ("manaValueOf" in amount) {
     const ref = objectRefRead(amount.manaValueOf, ctx);
     return ref === undefined ? 0 : ctx.manaValueOf(ref);
+  }
+  if ("notedCreatureTypes" in amount) {
+    const ref = objectRefRead(amount.notedCreatureTypes, ctx);
+    return ref?.kind === "object" ? ctx.notedCreatureTypeCount(ref.object) : 0;
   }
   if ("manaSymbolsOf" in amount) {
     const ref = objectRefRead(amount.manaSymbolsOf, ctx);
@@ -19301,8 +19334,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             },
         {
           ...(spec.remember === true ? { remember: "creature-type" as const } : {}),
+          ...(spec.note === true ? { remember: "noted-creature-type" as const } : {}),
           ...(spec.secret === true ? { secret: true as const } : {}),
         },
+        spec.amongTypesOf === undefined ? undefined : amongObject(objectRefAct(spec.amongTypesOf, ctx)),
       );
       return;
     case "choose-card-name":
@@ -22846,6 +22881,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           const n = Math.max(0, amountValue(option.payLifeAmount, ctx));
           return [{ payLife: n, text: option.text.split("{X}").join(`${n}`) }];
         }
+        if ("payReduced" in option) {
+          const cost = reduceGenericInCost(option.payReduced, amountValue(option.reducedBy, ctx));
+          return [{ pay: cost, text: option.text.split("{X}").join(cost) }];
+        }
         if ("payManaCostOf" in option) {
           const object = objectRefAct(option.payManaCostOf, ctx);
           const printed = object === undefined ? null : ctx.manaCostToPay(object);
@@ -22862,10 +22901,6 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                   ...(option.ifPaid !== undefined ? { ifPaid: option.ifPaid } : {}),
                 },
               ];
-        }
-        if ("payReduced" in option) {
-          const cost = reduceGenericInCost(option.payReduced, amountValue(option.reducedBy, ctx));
-          return [{ pay: cost, text: option.text.split("{X}").join(cost) }];
         }
         return [bindUnlessTimes(option, ctx)];
       };

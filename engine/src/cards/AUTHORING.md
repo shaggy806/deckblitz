@@ -851,6 +851,11 @@ commanders from the command zone this game, added up (Thunderclap Drake's
 "for each time you've cast your commander from the command zone this game",
 a partner pair's both counted — its ruling), or `{ commanderCasts: 0 }`, the
 player in a target slot's (Commander's Insight);
+`{ notedCreatureTypes: ref }` — how many creature types have been noted for
+that permanent (`choose-creature-type`'s `note`): Volo, Itinerant Scholar's
+"draw a card for each creature type noted for target permanent you control
+named Volo's Journal". `0` for a new object (rule 400.7).
+
 `{ manaValueOf: ref }` — the mana value of whatever a target slot (or
 `"source"` / `"trigger-object"` / `"sacrificed"`) points at, as it last
 existed on the battlefield if it has left since (rule 608.2h, last known
@@ -3030,7 +3035,15 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   list as buttons. `sentinel: FIRST_CHOSEN_TYPE` puts the answer in that
   placeholder instead, so a second choice can nest inside `then`: Vision
   Charm's "choose a land type and a basic land type. Each land of the first
-  chosen type becomes the second chosen type".
+  chosen type becomes the second chosen type". `note: true` is "**note** a
+  creature type that hasn't been noted for this Saga" (Long List of the
+  Ents): the types noted for the source are left out and the answer is
+  noted for it (`GameObject.notedCreatureTypes`, counted by `{
+  notedCreatureTypes }`); `amongTypesOf: ref` offers only that object's
+  creature types, a changeling's every one — Volo's Journal's "note one of
+  its creature types" is `{ note: true, amongTypesOf: "trigger-object", then:
+  { kind: "sequence", effects: [] } }`. With nothing left to choose, nothing
+  is, and `then` doesn't happen.
 - **`choose-value { value, then, on?, among?, min?, max? }`** — "Choose a
   color / a card type / a number / a counter on …" as a spell or ability
   **resolves**, then do `then` with it (nobody can respond knowing it —
