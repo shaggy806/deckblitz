@@ -2227,7 +2227,15 @@ the result (the natural total plus `modifier`), `{ roll: "odd" }` /
 equals: 6 } }` how many came up 6. "Whenever you roll one or more dice" is the
 trigger `{ on: "event", event: "rolls-dice", who: "you" }`, once per roll (Brazen Dwarf), its
 `triggerValue` the natural total. Every viewer sees the dice thrown and land on
-the engine's results (the `dice-rolled` event). "Roll two d12 and choose one
+the engine's results (the `dice-rolled` event). "Roll five six-sided dice **and
+store those results on it**" (Centaur of Attention) is `storeResults: true`: each
+result kept is noted on the source permanent (`GameObject.storedResults`, shown on
+its card), only while it's still that object; `{ kind: "reroll-stored-results" }`
+is "you may reroll any number of this creature's stored results" — a
+`choose-modes` of them, the chosen ones rolled again together as one roll, each in
+its old one's place; and `grantPtPerCount: { ofAffected:
+"most-alike-stored-results" }` is "+X/+X, where X is the greatest number of
+stored results on it of the same value". "Roll two d12 and choose one
 result" is a `choose-value` of `value: "roll-result"` as the `then`, asked only
 when the dice differ: its own `then` reads the chosen one as `"x"` (a filter's
 `n: "x"` too) and "the other result" as `{ roll: "other" }` (Reckless Endeavor,
@@ -5200,7 +5208,8 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `sharesCreatureTypeWithAffected` is "that shares a creature type with it"
   (Coat of Arms); `ofAffected: "mana-value" | "colors" | "creature-types"` is what
   it has (Hedron Matrix, Civic Saber), `"times-attacked-this-turn"` how many times
-  it has been declared an attacker (Moraug, Fury of Akoum); `countersOnAffected`, below. Other amounts:
+  it has been declared an attacker (Moraug, Fury of Akoum), `"most-alike-stored-results"`
+  the most of its stored die results that match (Centaur of Attention); `countersOnAffected`, below. Other amounts:
   `countersAmong: { counter, filter }` (Gleam of Authority), `playerCounters` with
   `playerCountersOf: "opponents"` (Mycosynth Fiend), `anyCountersOnSource` (Kyler),
   `anyCountersOnAffected` (Luxior's "for each counter on it"),

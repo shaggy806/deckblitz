@@ -2394,12 +2394,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * white mana symbol in its mana cost". `"times-attacked-this-turn"`: how many
      * times it has been declared as an attacker this turn, whatever was on the
      * battlefield then, entering attacking not counting (Moraug, Fury of
-     * Akoum's rulings; `GameObject.attacksThisTurn`). */
+     * Akoum's rulings; `GameObject.attacksThisTurn`). `"most-alike-stored-results"`:
+     * the greatest number of the die results stored on it that are the same
+     * value (Centaur of Attention; `GameObject.storedResults`). */
     readonly ofAffected?:
       | "mana-value"
       | "colors"
       | "creature-types"
       | "times-attacked-this-turn"
+      | "most-alike-stored-results"
       | { readonly manaSymbols: Color };
     /** Counters of a kind among the permanents matching `filter` — Gleam of
      * Authority's "+1/+1 for each +1/+1 counter on other creatures you control"

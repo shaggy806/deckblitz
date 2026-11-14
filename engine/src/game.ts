@@ -8774,6 +8774,32 @@ export class Game {
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
+    // Centaur of Attention's reroll: the chosen stored results, rolled again
+    // together as one roll of that many dice (rule 706), each new result in
+    // its old one's place. The answer may name none.
+    if (awaiting.rerollStored !== undefined) {
+      const { object: id, stint } = awaiting.rerollStored;
+      this.state.awaiting = null;
+      const on = this.state.objects[id];
+      const stored = on?.storedResults;
+      const picked = [...new Set(modeIndices)].filter((i) => stored !== undefined && i >= 0 && i < stored.length).sort((a, b) => a - b);
+      if (on !== undefined && stored !== undefined && on.zone === "battlefield" && (on.zoneChangeCount ?? 0) === stint && picked.length > 0) {
+        // One roll a kind of die: all of Centaur's are d6s.
+        const next = [...stored];
+        for (const sides of [...new Set(picked.map((i) => stored[i].sides))]) {
+          const of = picked.filter((i) => stored[i].sides === sides);
+          this.rollDice(player, id, sides, of.length, 0);
+          const results = lastRollIn(this.state, player)?.results ?? [];
+          of.forEach((i, n) => {
+            if (results[n] !== undefined) next[i] = { sides, result: results[n] };
+          });
+        }
+        on.storedResults = next;
+        invalidateComputedCache();
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Storage Matrix's question (rule 502.3): only that type goes on untapping
     // — a permanent with several, if any is it (the rulings) — and the step
     // carries on with no priority (502.4).
@@ -41065,6 +41091,35 @@ controlledBy,
         for (const { player, won } of results) this.emit({ type: "clashed", player, won });
       },
       rollDice: (sides, count, modifier, keep) => this.rollDice(controller, source, sides, count, modifier, keep),
+      storeLastRollOnSource: (sides) => {
+        // "Store those results on it": only on the object the ability came
+        // from, still on the battlefield (rule 400.7).
+        const link = tokenLinkToSource();
+        const on = this.state.objects[source];
+        if (link === null || on?.zone !== "battlefield" || (on.zoneChangeCount ?? 0) !== link.zoneChangeCount) return;
+        const results = lastRollIn(this.state, controller)?.results ?? [];
+        if (results.length === 0) return;
+        on.storedResults = [...(on.storedResults ?? []), ...results.map((result) => ({ sides, result }))];
+        invalidateComputedCache();
+      },
+      chooseStoredResultsToReroll: () => {
+        const link = tokenLinkToSource();
+        const on = this.state.objects[source];
+        if (link === null || on?.zone !== "battlefield" || (on.zoneChangeCount ?? 0) !== link.zoneChangeCount) return;
+        const stored = on.storedResults ?? [];
+        if (stored.length === 0) return;
+        this.state.awaiting = {
+          kind: "choose-modes",
+          player: controller,
+          source,
+          minModes: 0,
+          maxModes: stored.length,
+          modes: stored.map((s, i) => ({ text: `Reroll result ${i + 1} (${s.result})`, effect: { kind: "sequence", effects: [] } })),
+          x: 0,
+          targets: [],
+          rerollStored: { object: source, stint: link.zoneChangeCount },
+        };
+      },
       lastRoll: () => {
         const last = lastRollEntry(this.state, controller);
         // One this resolution made, or the roll this ability triggered on.
@@ -64932,6 +64987,8 @@ controlledBy,
     delete object.crewedThisTurn;
     // And what it enlisted (702.154c).
     delete object.enlistedIn;
+    // And the die results stored on it (Centaur of Attention).
+    delete object.storedResults;
     // And solved (719.3b).
     delete object.solved;
     delete object.exertedBy;

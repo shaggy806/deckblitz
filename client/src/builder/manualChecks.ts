@@ -12578,4 +12578,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Centaur of Attention: five dice stored, some rerolled at the beginning of combat',
+    board({
+      you: { bf: ['Forest*5'], hand: ['Centaur of Attention'] },
+    }),
+  ),
 ]

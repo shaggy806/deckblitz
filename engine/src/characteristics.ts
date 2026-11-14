@@ -4604,16 +4604,37 @@ function creatureTypesOf(state: GameState, registry: CardRegistry, object: GameO
   return effectiveSubtypes(state, registry, object).filter((s) => subtypeKind(s) === "creature");
 }
 
+/** The greatest number of results stored on `object` that are the same
+ * value (Centaur of Attention: 1, 1, 3, 3, 4 is 2 — the card's ruling); 0
+ * with none stored. */
+export function mostAlikeStoredResults(object: GameObject): number {
+  const tally = new Map<number, number>();
+  let most = 0;
+  for (const { result } of object.storedResults ?? []) {
+    const n = (tally.get(result) ?? 0) + 1;
+    tally.set(result, n);
+    if (n > most) most = n;
+  }
+  return most;
+}
+
 /** What `grantPtPerCount.ofAffected` reads of the affected permanent: nothing
  * from layer 7, so the fold doesn't recurse. */
 function affectedCharacteristicCount(
   state: GameState,
   registry: CardRegistry,
   object: GameObject,
-  what: "mana-value" | "colors" | "creature-types" | "times-attacked-this-turn" | { readonly manaSymbols: Color },
+  what:
+    | "mana-value"
+    | "colors"
+    | "creature-types"
+    | "times-attacked-this-turn"
+    | "most-alike-stored-results"
+    | { readonly manaSymbols: Color },
 ): number {
   if (typeof what === "object") return colorSymbols(parseManaCost(printedManaCost(registry, object)), [what.manaSymbols]);
   if (what === "times-attacked-this-turn") return object.attacksThisTurn ?? 0;
+  if (what === "most-alike-stored-results") return mostAlikeStoredResults(object);
   if (what === "mana-value") return manaValueOfObject(registry, object);
   if (what === "colors") return effectiveColors(state, registry, object).size;
   const creatureTypes = creatureTypesOf(state, registry, object);

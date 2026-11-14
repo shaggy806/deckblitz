@@ -16543,6 +16543,14 @@
    "family": "mechanic:dice-rolling",
    "example": "Xenosquirrels: after a roll, the player may pay to raise or lower the result by 1."
   },
+  "effect:store-die-results": {
+   "family": "mechanic:dice-rolling",
+   "example": "Centaur of Attention: \"roll five six-sided dice and store those results on it\", reroll any number of them, +X/+X for the most that match."
+  },
+  "replacement:exchange-die-result-with-base-pt": {
+   "family": "mechanic:dice-rolling",
+   "example": "Vedalken Squirrel-Whacker: \"if you would roll one or more six-sided dice, instead roll them and you may exchange one result with this creature's base power or base toughness\" \u2014 a choice inside every d6 roll, as-enters rolls and the Attraction visit roll included."
+  },
   "replacement:extra-die-chosen-ignore": {
    "family": "mechanic:dice-rolling",
    "example": "Bamboozling Beeble: a target player's next roll this turn rolls an extra die, and the effect's controller chooses which to ignore."

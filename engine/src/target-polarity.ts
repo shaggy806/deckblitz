@@ -670,6 +670,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     for (const row of n.table ?? []) v.child(row.effect);
     if (n.then) v.child(n.then);
   },
+  // Rerolls its own stored results: no target.
+  "reroll-stored-results": none,
   "flip-coin": (n, v) => {
     v.child(n.won);
     v.child(n.lost);

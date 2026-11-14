@@ -7108,7 +7108,25 @@ export type EffectSpec =
        * highest": this many dice are kept, the lowest ignored (rule 706.6). */
       readonly keepHighest?: number;
       readonly table?: readonly DieResultRow[];
+      /** "Roll five six-sided dice and store those results on it" (Centaur
+       * of Attention): each result kept is noted on the source permanent
+       * (`GameObject.storedResults`), after any modification (the card's
+       * ruling) — only while it's still the object the ability came from
+       * (rule 400.7). A note, not a counter: see `reroll-stored-results`. */
+      readonly storeResults?: true;
       readonly then?: EffectSpec;
+    }
+  | {
+      /**
+       * "You may reroll any number of this creature's stored results"
+       * (Centaur of Attention): its controller chooses any of the results
+       * stored on the source (`roll-dice`'s `storeResults`), as a
+       * `choose-modes` of them, and those are rolled again together — one
+       * roll of that many dice of their sides (rule 706), each new result
+       * taking its old one's place. Nothing stored, or the source gone, and
+       * nothing is asked.
+       */
+      readonly kind: "reroll-stored-results";
     }
   | {
       /**
@@ -12901,6 +12919,12 @@ export interface EffectApi {
    * seeded stream, keeping the `keep` highest if given; returns the result —
    * the natural total plus `modifier` — and journals the roll. */
   rollDice(sides: number, count: number, modifier: number, keep?: number): number;
+  /** Note the controller's last roll's results on the source, while it's
+   * still the object the ability came from — `roll-dice`'s `storeResults`. */
+  storeLastRollOnSource(sides: number): void;
+  /** Ask the controller which of the source's stored results to reroll —
+   * the `reroll-stored-results` {@link EffectSpec}. */
+  chooseStoredResultsToReroll(): void;
   /** The roll a `{ roll }` amount reads: one this resolution made, else the
    * roll this ability triggered on, else the controller's last this turn. */
   lastRoll(): RollRecord | undefined;
@@ -20209,7 +20233,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // (The Deck of Many Things) can come out at 0 or less (rule 706.2).
       const modifier = spec.modifier === undefined ? 0 : signedAmountValue(spec.modifier, ctx);
       const total = ctx.rollDice(spec.sides, count, modifier, spec.keepHighest);
-      const row = spec.table?.find((r) => total >= r.min && (r.max === undefined || total <= r.max));
+      if (spec.storeResults === true) ctx.storeLastRollOnSource(spec.sides);
+      const row =spec.table?.find((r) => total >= r.min && (r.max === undefined || total <= r.max));
       // A row's "you may roll again" comes after what the row and any `then`
       // do with this roll. The number of dice stays what it was (rule 706.3c).
       const again: EffectSpec | undefined =
@@ -20220,6 +20245,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (steps.length > 0) applyEffectSpec(steps.length === 1 ? steps[0] : { kind: "sequence", effects: steps }, ctx);
       return;
     }
+    case "reroll-stored-results":
+      ctx.chooseStoredResultsToReroll();
+      return;
     case "flip-coin":
       applyFlipCoin(spec, ctx);
       return;

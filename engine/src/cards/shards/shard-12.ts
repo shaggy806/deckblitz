@@ -133,6 +133,7 @@ import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolCatch from "../pool/catch.js";
 import _poolCelebrateTheHarvest from "../pool/celebrate-the-harvest.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
+import _poolCentaurOfAttention from "../pool/centaur-of-attention.js";
 import _poolCetaSanctuary from "../pool/ceta-sanctuary.js";
 import _poolCetiEel from "../pool/ceti-eel.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
@@ -1165,6 +1166,7 @@ const shard: CardShard = {
     _poolCatch,
     _poolCelebrateTheHarvest,
     _poolCelebrateTheMountainKing,
+    _poolCentaurOfAttention,
     _poolCetaSanctuary,
     _poolCetiEel,
     _poolChampionOfDusan,

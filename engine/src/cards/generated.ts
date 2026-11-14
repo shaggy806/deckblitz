@@ -4236,6 +4236,7 @@ import _poolCentaurGarden from "./pool/centaur-garden.js";
 import _poolCentaurGlade from "./pool/centaur-glade.js";
 import _poolCentaurHealer from "./pool/centaur-healer.js";
 import _poolCentaurNurturer from "./pool/centaur-nurturer.js";
+import _poolCentaurOfAttention from "./pool/centaur-of-attention.js";
 import _poolCentaurOmenreader from "./pool/centaur-omenreader.js";
 import _poolCentaurPeacemaker from "./pool/centaur-peacemaker.js";
 import _poolCentaurRootcaster from "./pool/centaur-rootcaster.js";
@@ -37123,6 +37124,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCentaurGlade,
   _poolCentaurHealer,
   _poolCentaurNurturer,
+  _poolCentaurOfAttention,
   _poolCentaurOmenreader,
   _poolCentaurPeacemaker,
   _poolCentaurRootcaster,
@@ -70023,6 +70025,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/centaur-glade": _poolCentaurGlade,
   "pool/centaur-healer": _poolCentaurHealer,
   "pool/centaur-nurturer": _poolCentaurNurturer,
+  "pool/centaur-of-attention": _poolCentaurOfAttention,
   "pool/centaur-omenreader": _poolCentaurOmenreader,
   "pool/centaur-peacemaker": _poolCentaurPeacemaker,
   "pool/centaur-rootcaster": _poolCentaurRootcaster,

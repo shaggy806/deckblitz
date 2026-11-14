@@ -445,6 +445,14 @@ export interface GameObject {
   /** How many times it has been declared as an attacker this turn (Moraug, Fury
    * of Akoum: `grantPtPerCount.ofAffected`). Reset with `attackedThisTurn`. */
   attacksThisTurn?: number;
+  /** Die results stored on this permanent, oldest first (Centaur of
+   * Attention's "roll five six-sided dice and store those results on it"):
+   * notes of results, each with the sides of its die so a reroll throws the
+   * same kind (the card's ruling). Written by `roll-dice`'s `storeResults`,
+   * changed by `reroll-stored-results`, read by `grantPtPerCount.ofAffected:
+   * "most-alike-stored-results"`. The object's own, so a change of zone
+   * forgets them (rule 400.7). Absent until the first. */
+  storedResults?: { readonly sides: number; readonly result: number }[];
   /** The turns this permanent was declared an attacker on, in this
    * battlefield stint — "attacked during their controller's last turn" (Halls
    * of Mist), which an extra combat this turn mustn't overwrite. Pruned as each
@@ -4623,6 +4631,12 @@ export type AwaitingDecision =
         readonly effects: readonly (number | null | "draw" | { readonly printed: ObjectId })[];
         readonly event: { readonly firstInDrawStep: boolean; readonly before: { readonly all: number; readonly exceptDrawStepFirst: number } };
       };
+      /** Centaur of Attention's "reroll any number of this creature's stored
+       * results" (`reroll-stored-results`): mode i is `object`'s stored result
+       * i, while it's still the stint `stint`; the chosen ones are rolled
+       * again as one roll. Answered by the engine itself; the modes' effects
+       * are unused. */
+      readonly rerollStored?: { readonly object: ObjectId; readonly stint: number };
       /** Storage Matrix's question in the untap step (rule 502.3 —
        * `untapOnlyChosenType`): mode i keeps only `types[i]` among `untapping`,
        * the permanents about to untap, and the step carries on with `asked`

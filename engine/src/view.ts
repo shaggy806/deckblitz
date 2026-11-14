@@ -373,6 +373,9 @@ export interface VisibleObject {
    * it, whose view leaves out `chosen` and `chosenPlayer`; `"yours"` to that
    * player, who sees them. Absent once it's revealed. */
   readonly secretChoice?: "hidden" | "yours";
+  /** On a permanent: the die results stored on it, oldest first (Centaur of
+   * Attention — `GameObject.storedResults`). Public. Absent with none. */
+  readonly storedResults?: readonly number[];
 }
 
 export interface PlayerView {
@@ -798,6 +801,9 @@ function visible(
       ? { chosenPlayer: object.chosenPlayer }
       : {}),
     ...(secret !== null ? { secretChoice: secret } : {}),
+    ...(zone === "battlefield" && object.storedResults !== undefined && object.storedResults.length > 0
+      ? { storedResults: object.storedResults.map((s) => s.result) }
+      : {}),
     counters: { ...object.counters },
     summoningSick: object.summoningSick,
     attacking: object.attacking,

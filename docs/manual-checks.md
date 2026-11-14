@@ -8363,3 +8363,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Mausoleum Turnkey: name the opponent who picks, in a 4-player game
 - **Do:** Cast Mausoleum Turnkey, and name Carol.
 - **Expect:** The banner offers Bob, Carol and Dave by name. Carol chooses, and one of the two creature cards goes back to your hand.
+
+## Stored die results (2026-11-14)
+
+### Centaur of Attention: five dice stored, some rerolled at the beginning of combat
+- **Do:** Cast Centaur of Attention. Go to combat, and in the banner pick two of the stored results.
+- **Expect:** As it enters, the card shows a 🎲 chip with five results, and its power and toughness are 3 plus the most results that match. At the beginning of combat the banner lists "Reroll result 1 (…)" to "Reroll result 5 (…)"; only the two picked change, and the chip and its size follow.

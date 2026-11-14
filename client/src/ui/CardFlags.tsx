@@ -191,6 +191,17 @@ function flagsOf({ obj, goaders, enchanting = null, protectedBy = null, chosenPl
   if (chosen !== null) {
     flags.push({ key: 'chosen', className: 'chosen', compact: chosen, long: `chose ${chosen}`, name: `Chose ${chosen}`, text: `Chosen as it entered: ${chosen}.` })
   }
+  if (obj.storedResults !== undefined && obj.storedResults.length > 0) {
+    const dice = obj.storedResults.join(' ')
+    flags.push({
+      key: 'stored',
+      className: 'chosen',
+      compact: `🎲 ${dice}`,
+      long: `stored ${dice}`,
+      name: `Stored results: ${dice}`,
+      text: `Die results stored on it, oldest first: ${dice}.`,
+    })
+  }
   if (held > 0) {
     flags.push({
       key: 'holding',
