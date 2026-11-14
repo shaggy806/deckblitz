@@ -61068,12 +61068,25 @@ controlledBy,
    * life instead" (Bloodletter of Aclazotz, each one doubling it again). */
   private lifeLossReplaced(player: PlayerId, amount: number, cause?: LifeLossReplacement["from"]): number {
     let loss = amount;
-    for (const { r } of this.playerEventReplacements(player)) {
-      if (r.event === "would-lose-life" && (r.from === undefined || r.from === cause)) {
-        loss *= insteadModify(r.instead)?.times ?? 1;
-      }
-    }
+    for (const key of this.lifeLossModifiers(player, cause)) loss *= key.times;
     return loss;
+  }
+
+  /** The would-lose-life replacements that change the amount of `player`'s
+   * loss from `cause` (a doubling), each with the key that keeps it from
+   * applying again inside what the event became (rule 614.5). */
+  private lifeLossModifiers(player: PlayerId, cause?: LifeLossReplacement["from"]): { readonly key: string; readonly times: number }[] {
+    const out: { readonly key: string; readonly times: number }[] = [];
+    // Keyed by source: the list shifts as what it became changes the board
+    // (Enduring Angel's own static goes as it transforms).
+    for (const { r, by } of this.playerEventReplacements(player)) {
+      if (r.event !== "would-lose-life" || r.toZeroOrLess === true || (r.from !== undefined && r.from !== cause)) continue;
+      const times = insteadModify(r.instead)?.times;
+      if (times === undefined) continue;
+      const key = `life-loss:${by.id}`;
+      if (!this.applyingReplacements.has(key)) out.push({ key, times });
+    }
+    return out;
   }
 
   /** What `player`'s loss of life from `cause` becomes instead of happening
@@ -61085,11 +61098,33 @@ controlledBy,
     cause: LifeLossReplacement["from"],
   ): { readonly effect: EffectSpec; readonly by: { readonly id: ObjectId; readonly controller: PlayerId } } | undefined {
     for (const { r, by } of this.playerEventReplacements(player)) {
-      if (r.event !== "would-lose-life" || (r.from !== undefined && r.from !== cause)) continue;
+      if (r.event !== "would-lose-life" || r.toZeroOrLess === true || (r.from !== undefined && r.from !== cause)) continue;
       const effect = insteadEffect(r.instead)?.effect;
       if (effect !== undefined) return { effect, by };
     }
     return undefined;
+  }
+
+  /** What `player`'s loss of life becomes instead when it would reduce their
+   * life total to 0 or less (`LifeLossReplacement.toZeroOrLess` — Enduring
+   * Angel), and whose replacement it is, or `undefined`. With several, the
+   * player chooses (rule 616.1): one on a permanent that can still transform
+   * first — a token or a single-faced copy of the Angel can't, and its
+   * player loses (the card's rulings). */
+  private lifeToZeroInstead(
+    player: PlayerId,
+  ): { readonly effect: EffectSpec; readonly by: { readonly id: ObjectId; readonly controller: PlayerId } } | undefined {
+    let fallback: { readonly effect: EffectSpec; readonly by: { readonly id: ObjectId; readonly controller: PlayerId } } | undefined;
+    for (const { r, by } of this.playerEventReplacements(player)) {
+      if (r.event !== "would-lose-life" || r.toZeroOrLess !== true) continue;
+      if (this.applyingReplacements.has(`life-to-zero:${by.id}`)) continue;
+      const effect = insteadEffect(r.instead)?.effect;
+      if (effect === undefined) continue;
+      const object = this.state.objects[by.id];
+      if (object?.zone === "battlefield" && object.kind === "card" && this.isTransformingDfc(by.id)) return { effect, by };
+      fallback ??= { effect, by };
+    }
+    return fallback;
   }
 
   /** The would-gain-life replacements on `player`'s gain, for them to order
@@ -61220,6 +61255,27 @@ controlledBy,
       delta = outcome.amount;
     }
     const playerState = this.state.players[player];
+    // "If your life total would be reduced to 0 or less, instead …" (Enduring
+    // Angel): the loss as every other replacement left it — an effect's, a
+    // cost's, damage's, a set or exchanged total's — never happens (rule
+    // 614.6), and what it became does. A replacement that already changed the
+    // loss (a doubling) doesn't apply again to the life total it sets (rule
+    // 614.5); one that hadn't, a gain's, may.
+    if (delta < 0 && playerState.life + delta <= 0) {
+      const toZero = this.lifeToZeroInstead(player);
+      if (toZero !== undefined) {
+        const spent = [`life-to-zero:${toZero.by.id}`, ...this.lifeLossModifiers(player, cause).map((m) => m.key)].filter(
+          (key) => !this.applyingReplacements.has(key),
+        );
+        for (const key of spent) this.applyingReplacements.add(key);
+        try {
+          this.runReplacedBy(toZero.effect, toZero.by.id, toZero.by.controller, { x: -delta, player });
+        } finally {
+          for (const key of spent) this.applyingReplacements.delete(key);
+        }
+        return;
+      }
+    }
     playerState.life += delta;
     // The event's journal entry is the turn's tally, so every path counts —
     // damage, a drain, a cost paid — as an amount: "lost life this turn" is

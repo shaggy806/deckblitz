@@ -4125,6 +4125,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("reads a life total reduced to 0 or less, replaced by a transform (Enduring Angel), and a player's hexproof", () => {
+    const angel = face(
+      "If your life total would be reduced to 0 or less, instead transform this creature and your life total becomes 3. Then if this creature didn't transform this way, you lose the game.",
+      "Creature",
+    );
+    const becomes = { kind: "set-life-total", who: "you", amount: 3 };
+    expect(angel.static?.[0]?.replacement).toEqual({
+      event: "would-lose-life",
+      who: "you",
+      toZeroOrLess: true,
+      instead: {
+        effect: {
+          kind: "transform",
+          target: "source",
+          then: becomes,
+          otherwise: { kind: "sequence", effects: [becomes, { kind: "lose-game", who: "you" }] },
+        },
+      },
+    });
+    expect(angel.complete).toBe(true);
+    expect(face("You have hexproof.", "Creature").static?.[0]).toMatchObject({ affects: { scope: "self" }, playerKeywords: ["hexproof"] });
+    expect(face("You have shroud.", "Enchantment").static?.[0]).toMatchObject({ playerKeywords: ["shroud"] });
+  });
+
   it("a graveyard replacement for the turn, and an exile that does something besides (rule 614.1a)", () => {
     const made = (exile: object): object => ({
       kind: "replacement-effect",

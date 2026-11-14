@@ -9224,6 +9224,10 @@ export type EffectSpec =
        * only if it did transform — not one that has left, or transformed
        * since (701.28f). */
       readonly then?: EffectSpec;
+      /** "Then if this creature didn't transform this way, you lose the
+       * game" (Enduring Angel): applied only if it didn't — a token, a
+       * single-faced permanent, one that has left. */
+      readonly otherwise?: EffectSpec;
     }
   | {
       /** Flip `target` (rule 710 — "flip this creature"): it gets the flipped
@@ -21805,17 +21809,23 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "transform": {
       const target = objectRefAct(spec.target, ctx);
-      if (target === undefined) return;
+      if (target === undefined) {
+        if (spec.otherwise !== undefined) applyEffectSpec(spec.otherwise, ctx);
+        return;
+      }
+      const after = (did: boolean): void => {
+        const next = did ? spec.then : spec.otherwise;
+        if (next !== undefined) applyEffectSpec(next, ctx);
+      };
       if (spec.chosenPlayer !== undefined) {
-        if (ctx.transform(target, spec.chosenPlayer) && spec.then !== undefined) applyEffectSpec(spec.then, ctx);
+        after(ctx.transform(target, spec.chosenPlayer));
         return;
       }
       // "As this transforms into [it], choose an opponent" (rule 712.20):
       // its controller chooses as it transforms, asked only among two or more.
       const choice = ctx.transformChoice(target);
       if (choice === null || choice.among.length <= 1) {
-        const did = ctx.transform(target, choice === null ? undefined : (choice.among[0] ?? null));
-        if (did && spec.then !== undefined) applyEffectSpec(spec.then, ctx);
+        after(ctx.transform(target, choice === null ? undefined : (choice.among[0] ?? null)));
         return;
       }
       ctx.asPlayer(choice.chooser).chooseModes(
@@ -21823,7 +21833,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         1,
         choice.among.map((player) => ({
           text: `Choose ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
-          effect: { kind: "transform", target: spec.target, chosenPlayer: player, ...(spec.then !== undefined ? { then: spec.then } : {}) },
+          effect: {
+            kind: "transform",
+            target: spec.target,
+            chosenPlayer: player,
+            ...(spec.then !== undefined ? { then: spec.then } : {}),
+            ...(spec.otherwise !== undefined ? { otherwise: spec.otherwise } : {}),
+          },
         })),
       );
       return;

@@ -21208,6 +21208,39 @@ function parseStatic(line, text) {
       return { affects: { scope: "self" }, replacement: { event: "would-lose-game", who: "you", instead: { effect: parsed.effect } }, text };
     }
   }
+  // "If your life total would be reduced to 0 or less, instead transform this
+  // creature and your life total becomes 3. Then if this creature didn't
+  // transform this way, you lose the game." (Enduring Angel): every loss that
+  // would leave it at 0 or less, replaced whole (rule 614.6).
+  if (
+    (m =
+      /^If your life total would be reduced to 0 or less, instead transform ~ and your life total becomes (\w+)\. Then if ~ didn't transform this way, you lose the game\.$/.exec(
+        line,
+      ))
+  ) {
+    const becomes = { kind: "set-life-total", who: "you", amount: numberOf(m[1]) };
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-lose-life",
+        who: "you",
+        toZeroOrLess: true,
+        instead: {
+          effect: {
+            kind: "transform",
+            target: "source",
+            then: becomes,
+            otherwise: { kind: "sequence", effects: [becomes, { kind: "lose-game", who: "you" }] },
+          },
+        },
+      },
+      text,
+    };
+  }
+  // "You have hexproof." / "You have shroud." (Aegis of the Gods, Ivory Mask).
+  if ((m = /^You have (hexproof|shroud)\.$/.exec(line))) {
+    return { affects: { scope: "self" }, playerKeywords: [m[1]], text };
+  }
   if (
     (m = /^If you would draw a card, instead (.+)$/.exec(line)) ??
     (m = /^If you would draw a card, (.+?) instead\.( .+)?$/.exec(line))

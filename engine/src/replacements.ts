@@ -1134,6 +1134,13 @@ export interface LifeLossReplacement {
   /** Only life lost **from radiation**: as a result of the triggered ability
    * rad counters bring (rule 728.1a), a copy of it included. */
   readonly from?: "radiation";
+  /** "If your life total would be reduced to 0 or less, instead …" (Enduring
+   * Angel): only a loss — any of them, damage's included — that would leave
+   * the life total at 0 or less, read once every other replacement has
+   * changed the amount, and replaced whole by the `{ effect }` (rule 614.6),
+   * "that much" being `"x"`. Not read with the others above: a doubling
+   * applies first and may be what brings it to 0. */
+  readonly toZeroOrLess?: true;
 }
 
 /**
