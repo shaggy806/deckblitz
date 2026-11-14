@@ -515,6 +515,7 @@ import _poolLeylineOfVitality from "../pool/leyline-of-vitality.js";
 import _poolLightningDart from "../pool/lightning-dart.js";
 import _poolLightningShrieker from "../pool/lightning-shrieker.js";
 import _poolLilianasDefeat from "../pool/lilianas-defeat.js";
+import _poolLineCutter from "../pool/line-cutter.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
 import _poolLithophage from "../pool/lithophage.js";
 import _poolLivingAirship from "../pool/living-airship.js";
@@ -666,6 +667,7 @@ import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
 import _poolQuintoriusKand from "../pool/quintorius-kand.js";
 import _poolRackling from "../pool/rackling.js";
+import _poolRadRascal from "../pool/rad-rascal.js";
 import _poolRadiantStrike from "../pool/radiant-strike.js";
 import _poolRadjanSpirit from "../pool/radjan-spirit.js";
 import _poolRaffinesInformant from "../pool/raffines-informant.js";
@@ -1540,6 +1542,7 @@ const shard: CardShard = {
     _poolLightningDart,
     _poolLightningShrieker,
     _poolLilianasDefeat,
+    _poolLineCutter,
     _poolLingeringTormentor,
     _poolLithophage,
     _poolLivingAirship,
@@ -1691,6 +1694,7 @@ const shard: CardShard = {
     _poolQuicksilverFisher,
     _poolQuintoriusKand,
     _poolRackling,
+    _poolRadRascal,
     _poolRadiantStrike,
     _poolRadjanSpirit,
     _poolRaffinesInformant,

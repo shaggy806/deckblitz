@@ -136,6 +136,7 @@ import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
 import _poolCometCrawler from "../pool/comet-crawler.js";
+import _poolComingAttraction from "../pool/coming-attraction.js";
 import _poolCommandOfUnsummoning from "../pool/command-of-unsummoning.js";
 import _poolCommanderSpock from "../pool/commander-spock.js";
 import _poolCommandingPresence from "../pool/commanding-presence.js";
@@ -1111,6 +1112,7 @@ const shard: CardShard = {
     _poolCollectedCompany,
     _poolCollision,
     _poolCometCrawler,
+    _poolComingAttraction,
     _poolCommandOfUnsummoning,
     _poolCommanderSpock,
     _poolCommandingPresence,

@@ -93,6 +93,7 @@ import _poolBringLow from "../pool/bring-low.js";
 import _poolBroadcastRambler from "../pool/broadcast-rambler.js";
 import _poolBruseTarlBoorishHerder from "../pool/bruse-tarl-boorish-herder.js";
 import _poolBudokaPupil from "../pool/budoka-pupil.js";
+import _poolBumperCars from "../pool/bumper-cars.js";
 import _poolBurgeoning from "../pool/burgeoning.js";
 import _poolBuriedAlive from "../pool/buried-alive.js";
 import _poolBurningFields from "../pool/burning-fields.js";
@@ -1117,6 +1118,7 @@ const shard: CardShard = {
     _poolBroadcastRambler,
     _poolBruseTarlBoorishHerder,
     _poolBudokaPupil,
+    _poolBumperCars,
     _poolBurgeoning,
     _poolBuriedAlive,
     _poolBurningFields,

@@ -49,6 +49,7 @@ import _poolAscentOfTheWorthy from "../pool/ascent-of-the-worthy.js";
 import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
 import _poolAssaultDrone from "../pool/assault-drone.js";
+import _poolAtomwheelAcrobats from "../pool/atomwheel-acrobats.js";
 import _poolAtzocanSeer from "../pool/atzocan-seer.js";
 import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
 import _poolAuriokSteelshaper from "../pool/auriok-steelshaper.js";
@@ -82,6 +83,7 @@ import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
 import _poolBerserkersFrenzy from "../pool/berserkers-frenzy.js";
 import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
+import _poolBlackHole from "../pool/black-hole.js";
 import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackScarab from "../pool/black-scarab.js";
 import _poolBlackbladeReforged from "../pool/blackblade-reforged.js";
@@ -198,6 +200,7 @@ import _poolDawnsReflection from "../pool/dawns-reflection.js";
 import _poolDaxosBlessedByTheSun from "../pool/daxos-blessed-by-the-sun.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
 import _poolDazzlingBeauty from "../pool/dazzling-beauty.js";
+import _poolDeadbeatAttendant from "../pool/deadbeat-attendant.js";
 import _poolDeadbridgeGoliath from "../pool/deadbridge-goliath.js";
 import _poolDeathlace from "../pool/deathlace.js";
 import _poolDeathlessPilot from "../pool/deathless-pilot.js";
@@ -1096,6 +1099,7 @@ const shard: CardShard = {
     _poolAshioksForerunner,
     _poolAspectOfGorgon,
     _poolAssaultDrone,
+    _poolAtomwheelAcrobats,
     _poolAtzocanSeer,
     _poolAugurOfAutumn,
     _poolAuriokSteelshaper,
@@ -1129,6 +1133,7 @@ const shard: CardShard = {
     _poolBenevolentRiverSpirit,
     _poolBerserkersFrenzy,
     _poolBilboBirthdayCelebrant,
+    _poolBlackHole,
     _poolBlackPantherVanguard,
     _poolBlackScarab,
     _poolBlackbladeReforged,
@@ -1245,6 +1250,7 @@ const shard: CardShard = {
     _poolDaxosBlessedByTheSun,
     _poolDayOfJudgment,
     _poolDazzlingBeauty,
+    _poolDeadbeatAttendant,
     _poolDeadbridgeGoliath,
     _poolDeathlace,
     _poolDeathlessPilot,

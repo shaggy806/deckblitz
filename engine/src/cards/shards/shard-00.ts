@@ -783,6 +783,7 @@ import _poolSolitude from "../pool/solitude.js";
 import _poolSomberwaldSpider from "../pool/somberwald-spider.js";
 import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
 import _poolSoulStrings from "../pool/soul-strings.js";
+import _poolSoulSwindler from "../pool/soul-swindler.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSoulshriek from "../pool/soulshriek.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
@@ -1817,6 +1818,7 @@ const shard: CardShard = {
     _poolSomberwaldSpider,
     _poolSongOfStupefaction,
     _poolSoulStrings,
+    _poolSoulSwindler,
     _poolSoulherder,
     _poolSoulshriek,
     _poolSowerOfChaos,

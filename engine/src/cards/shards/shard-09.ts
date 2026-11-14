@@ -171,6 +171,7 @@ import _poolCloudCover from "../pool/cloud-cover.js";
 import _poolCoalitionVictory from "../pool/coalition-victory.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolColossalPlow from "../pool/colossal-plow.js";
+import _poolConcessionStand from "../pool/concession-stand.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
 import _poolControvert from "../pool/controvert.js";
 import _poolConvenientTarget from "../pool/convenient-target.js";
@@ -1226,6 +1227,7 @@ const shard: CardShard = {
     _poolCoalitionVictory,
     _poolColleenWingStreetSamurai,
     _poolColossalPlow,
+    _poolConcessionStand,
     _poolConsumingAberration,
     _poolControvert,
     _poolConvenientTarget,

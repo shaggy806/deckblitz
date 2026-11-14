@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { computeCharacteristics, invalidateComputedCache } from "../characteristics.js";
-import { A, enter, pickModes, table, toStep } from "./harness.js";
+import { A, activate, enter, lands, pickModes, spawn, table, toStep } from "./harness.js";
 
 // Batch 327 (EDHREC ranks 15527–18514): the lead's cards.
 
@@ -60,5 +60,21 @@ describe("Centaur of Attention — stored die results", () => {
     game.advanceUntil((s) => s.awaiting === null && s.zones.shared.stack.length === 0 && s.pendingTriggers.length === 0);
     expect((game.state.objects[id].storedResults ?? []).map((s) => s.result)).toEqual([6, 6, 6, 6, 6]);
     expect(computeCharacteristics(game.state, game.registry, id).power).toBe(8);
+  });
+});
+
+describe("Atomwheel Acrobats — whenever you roll a 1 or 2", () => {
+  it("gets as many +1/+1 counters as each 1 or 2 rolled, and none for a 3 or more", () => {
+    const { game } = table({ seed: 3 });
+    const id = spawn(game, "Atomwheel Acrobats");
+    lands(game, "Forest", 30);
+    const from = game.state.eventLog.length;
+    for (let i = 0; i < 8; i += 1) activate(game, id, 0);
+    const rolled = game.state.eventLog.slice(from).flatMap((e) => (e.type === "dice-rolled" ? e.results : []));
+    expect(rolled).toHaveLength(8);
+    const expected = rolled.filter((r) => r <= 2).reduce((n, r) => n + r, 0);
+    // The seed throws at least one 1 or 2 and at least one higher, so both halves are tried.
+    expect(rolled.some((r) => r <= 2) && rolled.some((r) => r > 2)).toBe(true);
+    expect(game.state.objects[id].counters["+1/+1"] ?? 0).toBe(expected);
   });
 });

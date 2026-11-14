@@ -620,6 +620,7 @@ import _poolPyricSalamander from "../pool/pyric-salamander.js";
 import _poolPyromancerAscension from "../pool/pyromancer-ascension.js";
 import _poolPyromancersSwath from "../pool/pyromancers-swath.js";
 import _poolQuandrixCampus from "../pool/quandrix-campus.js";
+import _poolQuickFixer from "../pool/quick-fixer.js";
 import _poolQuicksilverElemental from "../pool/quicksilver-elemental.js";
 import _poolRadhasFirebrand from "../pool/radhas-firebrand.js";
 import _poolRagingRedcap from "../pool/raging-redcap.js";
@@ -1629,6 +1630,7 @@ const shard: CardShard = {
     _poolPyromancerAscension,
     _poolPyromancersSwath,
     _poolQuandrixCampus,
+    _poolQuickFixer,
     _poolQuicksilverElemental,
     _poolRadhasFirebrand,
     _poolRagingRedcap,

@@ -326,6 +326,7 @@ import _poolForebodingFruit from "../pool/foreboding-fruit.js";
 import _poolForestBear from "../pool/forest-bear.js";
 import _poolFortifiedRampart from "../pool/fortified-rampart.js";
 import _poolFortifyingProvisions from "../pool/fortifying-provisions.js";
+import _poolFortuneTeller from "../pool/fortune-teller.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
 import _poolFrenzySliver from "../pool/frenzy-sliver.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
@@ -489,6 +490,7 @@ import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
 import _poolKederektLeviathan from "../pool/kederekt-leviathan.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
+import _poolKiddieCoaster from "../pool/kiddie-coaster.js";
 import _poolKindlyStranger from "../pool/kindly-stranger.js";
 import _poolKioraBestsTheSeaGod from "../pool/kiora-bests-the-sea-god.js";
 import _poolKitsuneDawnblade from "../pool/kitsune-dawnblade.js";
@@ -1350,6 +1352,7 @@ const shard: CardShard = {
     _poolForestBear,
     _poolFortifiedRampart,
     _poolFortifyingProvisions,
+    _poolFortuneTeller,
     _poolFrenziedArynx,
     _poolFrenzySliver,
     _poolFreshVolunteers,
@@ -1513,6 +1516,7 @@ const shard: CardShard = {
     _poolKederektLeviathan,
     _poolKeenBuccaneer,
     _poolKefnetsLastWord,
+    _poolKiddieCoaster,
     _poolKindlyStranger,
     _poolKioraBestsTheSeaGod,
     _poolKitsuneDawnblade,

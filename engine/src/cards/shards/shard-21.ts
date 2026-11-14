@@ -762,6 +762,7 @@ import _poolSpiderClimb from "../pool/spider-climb.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
 import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
 import _poolSpinedFluke from "../pool/spined-fluke.js";
+import _poolSpinneretteArachnobat from "../pool/spinnerette-arachnobat.js";
 import _poolSpringleafParade from "../pool/springleaf-parade.js";
 import _poolStabbingPain from "../pool/stabbing-pain.js";
 import _poolStalkingAssassin from "../pool/stalking-assassin.js";
@@ -1746,6 +1747,7 @@ const shard: CardShard = {
     _poolSpikedBaloth,
     _poolSpikedRipsaw,
     _poolSpinedFluke,
+    _poolSpinneretteArachnobat,
     _poolSpringleafParade,
     _poolStabbingPain,
     _poolStalkingAssassin,

@@ -390,6 +390,7 @@ import _poolHarmonicProdigy from "../pool/harmonic-prodigy.js";
 import _poolHarperRecruiter from "../pool/harper-recruiter.js";
 import _poolHarriedArtisan from "../pool/harried-artisan.js";
 import _poolHauntedCadaver from "../pool/haunted-cadaver.js";
+import _poolHauntedHouse from "../pool/haunted-house.js";
 import _poolHaveABite from "../pool/have-a-bite.js";
 import _poolHaviTheAllFather from "../pool/havi-the-all-father.js";
 import _poolHazeOfPollen from "../pool/haze-of-pollen.js";
@@ -1416,6 +1417,7 @@ const shard: CardShard = {
     _poolHarperRecruiter,
     _poolHarriedArtisan,
     _poolHauntedCadaver,
+    _poolHauntedHouse,
     _poolHaveABite,
     _poolHaviTheAllFather,
     _poolHazeOfPollen,

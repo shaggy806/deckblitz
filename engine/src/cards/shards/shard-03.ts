@@ -349,6 +349,7 @@ import _poolGustcloakCavalier from "../pool/gustcloak-cavalier.js";
 import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHadesSorcererOfEld from "../pool/hades-sorcerer-of-eld.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
+import _poolHallOfMirrors from "../pool/hall-of-mirrors.js";
 import _poolHaloForager from "../pool/halo-forager.js";
 import _poolHammerDropper from "../pool/hammer-dropper.js";
 import _poolHammerMage from "../pool/hammer-mage.js";
@@ -1304,6 +1305,7 @@ const shard: CardShard = {
     _poolGutsplitterGang,
     _poolHadesSorcererOfEld,
     _poolHalimarDepths,
+    _poolHallOfMirrors,
     _poolHaloForager,
     _poolHammerDropper,
     _poolHammerMage,

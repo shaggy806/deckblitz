@@ -136,6 +136,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Axe Token",
   "Badger Token",
   "Ballistic Boulder Token",
+  "Balloon Token",
   "Banana Token",
   "Baneslayer Angel Token",
   "Bat Token",

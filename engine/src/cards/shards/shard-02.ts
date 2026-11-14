@@ -556,6 +556,7 @@ import _poolMelesseSpirit from "../pool/melesse-spirit.js";
 import _poolMemorialToWar from "../pool/memorial-to-war.js";
 import _poolMeneldorSwiftSavior from "../pool/meneldor-swift-savior.js";
 import _poolMercurialSpelldancer from "../pool/mercurial-spelldancer.js";
+import _poolMerryGoRound from "../pool/merry-go-round.js";
 import _poolMetallurgicSummonings from "../pool/metallurgic-summonings.js";
 import _poolMetalworker from "../pool/metalworker.js";
 import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
@@ -835,6 +836,7 @@ import _poolSteadyProgress from "../pool/steady-progress.js";
 import _poolSteamClean from "../pool/steam-clean.js";
 import _poolSteamSpitter from "../pool/steam-spitter.js";
 import _poolSteelOfTheGodhead from "../pool/steel-of-the-godhead.js";
+import _poolStepRightUp from "../pool/step-right-up.js";
 import _poolStickytongueSentinel from "../pool/stickytongue-sentinel.js";
 import _poolStoneCatapult from "../pool/stone-catapult.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
@@ -1589,6 +1591,7 @@ const shard: CardShard = {
     _poolMemorialToWar,
     _poolMeneldorSwiftSavior,
     _poolMercurialSpelldancer,
+    _poolMerryGoRound,
     _poolMetallurgicSummonings,
     _poolMetalworker,
     _poolMicaReaderOfRuins,
@@ -1868,6 +1871,7 @@ const shard: CardShard = {
     _poolSteamClean,
     _poolSteamSpitter,
     _poolSteelOfTheGodhead,
+    _poolStepRightUp,
     _poolStickytongueSentinel,
     _poolStoneCatapult,
     _poolStonecoilSerpent,

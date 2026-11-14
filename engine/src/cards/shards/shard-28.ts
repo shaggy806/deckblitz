@@ -620,6 +620,7 @@ import _poolPhyrexianObliterator from "../pool/phyrexian-obliterator.js";
 import _poolPhyrexianReaper from "../pool/phyrexian-reaper.js";
 import _poolPhyrexianTyranny from "../pool/phyrexian-tyranny.js";
 import _poolPhyrexianWarhorse from "../pool/phyrexian-warhorse.js";
+import _poolPickABeeble from "../pool/pick-a-beeble.js";
 import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
 import _poolPinnacleEmissary from "../pool/pinnacle-emissary.js";
 import _poolPinnacleKillShip from "../pool/pinnacle-kill-ship.js";
@@ -1666,6 +1667,7 @@ const shard: CardShard = {
     _poolPhyrexianReaper,
     _poolPhyrexianTyranny,
     _poolPhyrexianWarhorse,
+    _poolPickABeeble,
     _poolPillarvergePathway,
     _poolPinnacleEmissary,
     _poolPinnacleKillShip,

@@ -24,7 +24,7 @@ export default defineCard({
       text: OPEN,
     },
     {
-      trigger: { on: "event", event: "rolls-die", who: "you", die: { atMost: 1 } },
+      trigger: { on: "event", event: "rolls-die", who: "you", die: { atLeast: 1, atMost: 1 } },
       targets: [],
       effect: { kind: "create-token", token: "Clown Robot Token", count: 1 },
       resolve: null,

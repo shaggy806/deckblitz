@@ -247,6 +247,7 @@ import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDiamondKaleidoscope from "../pool/diamond-kaleidoscope.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
+import _poolDiscourtesyClerk from "../pool/discourtesy-clerk.js";
 import _poolDisruptionProtocol from "../pool/disruption-protocol.js";
 import _poolDistortingLens from "../pool/distorting-lens.js";
 import _poolDivinersWand from "../pool/diviners-wand.js";
@@ -1278,6 +1279,7 @@ const shard: CardShard = {
     _poolDiamondKaleidoscope,
     _poolDimirInformant,
     _poolDireStrainBrawler,
+    _poolDiscourtesyClerk,
     _poolDisruptionProtocol,
     _poolDistortingLens,
     _poolDivinersWand,

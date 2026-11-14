@@ -752,6 +752,7 @@ import _poolRiveteersConfluence from "../pool/riveteers-confluence.js";
 import _poolRobaranMercenaries from "../pool/robaran-mercenaries.js";
 import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoilsRetribution from "../pool/roils-retribution.js";
+import _poolRollerCoaster from "../pool/roller-coaster.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolRootMaze from "../pool/root-maze.js";
 import _poolRootcoilCreeper from "../pool/rootcoil-creeper.js";
@@ -1819,6 +1820,7 @@ const shard: CardShard = {
     _poolRobaranMercenaries,
     _poolRockyRoads,
     _poolRoilsRetribution,
+    _poolRollerCoaster,
     _poolRoofstalkerWight,
     _poolRootMaze,
     _poolRootcoilCreeper,

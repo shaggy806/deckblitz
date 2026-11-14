@@ -227,6 +227,7 @@ import _poolDone from "../pool/done.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
 import _poolDoubleJumpFlyingKick from "../pool/double-jump-flying-kick.js";
 import _poolDovinsAutomaton from "../pool/dovins-automaton.js";
+import _poolDraconianGateBot from "../pool/draconian-gate-bot.js";
 import _poolDragonlordOjutai from "../pool/dragonlord-ojutai.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
 import _poolDreadCharge from "../pool/dread-charge.js";
@@ -439,6 +440,7 @@ import _poolInertiaBubble from "../pool/inertia-bubble.js";
 import _poolInexorableBlob from "../pool/inexorable-blob.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
 import _poolInflame from "../pool/inflame.js";
+import _poolInformationBooth from "../pool/information-booth.js";
 import _poolInjectorCrocodile from "../pool/injector-crocodile.js";
 import _poolInvertedIceberg from "../pool/inverted-iceberg.js";
 import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
@@ -497,6 +499,7 @@ import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
 import _poolLiberate from "../pool/liberate.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLifeblood from "../pool/lifeblood.js";
+import _poolLifetimePassHolder from "../pool/lifetime-pass-holder.js";
 import _poolLightkeeperOfEmeria from "../pool/lightkeeper-of-emeria.js";
 import _poolLithoformBlight from "../pool/lithoform-blight.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
@@ -991,6 +994,7 @@ import _poolZombify from "../pool/zombify.js";
 import _poolZoologist from "../pool/zoologist.js";
 import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensAvatarTokenAwakenTheBloodAvatar from "../tokens/avatar-token-awaken-the-blood-avatar.js";
+import _tokensBalloonToken from "../tokens/balloon-token.js";
 import _tokensBatTokenSengirNosferatu from "../tokens/bat-token-sengir-nosferatu.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
 import _tokensBlackGreenEnchantmentSnakeToken from "../tokens/black-green-enchantment-snake-token.js";
@@ -1243,6 +1247,7 @@ const shard: CardShard = {
     _poolDoomwakeGiant,
     _poolDoubleJumpFlyingKick,
     _poolDovinsAutomaton,
+    _poolDraconianGateBot,
     _poolDragonlordOjutai,
     _poolDraugrRecruiter,
     _poolDreadCharge,
@@ -1455,6 +1460,7 @@ const shard: CardShard = {
     _poolInexorableBlob,
     _poolInfernalGrasp,
     _poolInflame,
+    _poolInformationBooth,
     _poolInjectorCrocodile,
     _poolInvertedIceberg,
     _poolIronManFuturistParagon,
@@ -1513,6 +1519,7 @@ const shard: CardShard = {
     _poolLiberate,
     _poolLifeFromTheLoam,
     _poolLifeblood,
+    _poolLifetimePassHolder,
     _poolLightkeeperOfEmeria,
     _poolLithoformBlight,
     _poolLithoformEngine,
@@ -2009,6 +2016,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAngelToken33White,
     _tokensAvatarTokenAwakenTheBloodAvatar,
+    _tokensBalloonToken,
     _tokensBatTokenSengirNosferatu,
     _tokensBeastToken,
     _tokensBlackGreenEnchantmentSnakeToken,

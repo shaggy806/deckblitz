@@ -108,6 +108,7 @@ import _poolBonfireOfTheDamned from "../pool/bonfire-of-the-damned.js";
 import _poolBoomerScrapper from "../pool/boomer-scrapper.js";
 import _poolBorderlandMarauder from "../pool/borderland-marauder.js";
 import _poolBotanicalSanctum from "../pool/botanical-sanctum.js";
+import _poolBounceChamber from "../pool/bounce-chamber.js";
 import _poolBrigidsCommand from "../pool/brigids-command.js";
 import _poolBrigoneSoldierOfMeletis from "../pool/brigone-soldier-of-meletis.js";
 import _poolBrimstoneDragon from "../pool/brimstone-dragon.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolBoomerScrapper,
     _poolBorderlandMarauder,
     _poolBotanicalSanctum,
+    _poolBounceChamber,
     _poolBrigidsCommand,
     _poolBrigoneSoldierOfMeletis,
     _poolBrimstoneDragon,

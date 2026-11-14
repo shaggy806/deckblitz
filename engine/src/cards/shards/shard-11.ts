@@ -170,6 +170,7 @@ import _poolCloakedCadet from "../pool/cloaked-cadet.js";
 import _poolClockworkBeetle from "../pool/clockwork-beetle.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolClockworkVorrac from "../pool/clockwork-vorrac.js";
+import _poolClownExtruder from "../pool/clown-extruder.js";
 import _poolClutchOfTheUndercity from "../pool/clutch-of-the-undercity.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
@@ -1204,6 +1205,7 @@ const shard: CardShard = {
     _poolClockworkBeetle,
     _poolClockworkDrawbridge,
     _poolClockworkVorrac,
+    _poolClownExtruder,
     _poolClutchOfTheUndercity,
     _poolCoatWithVenom,
     _poolCodecrackerHound,

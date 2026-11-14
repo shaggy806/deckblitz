@@ -153,6 +153,7 @@ import _poolColossadactyl from "../pool/colossadactyl.js";
 import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolCommuneWithNature from "../pool/commune-with-nature.js";
+import _poolComplaintsClerk from "../pool/complaints-clerk.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
 import _poolConstructACosmicCube from "../pool/construct-a-cosmic-cube.js";
@@ -800,6 +801,7 @@ import _poolSpectralForce from "../pool/spectral-force.js";
 import _poolSpellgorgerWeird from "../pool/spellgorger-weird.js";
 import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
 import _poolSpiderManifestation from "../pool/spider-manifestation.js";
+import _poolSpinnyRide from "../pool/spinny-ride.js";
 import _poolSplinterTwin from "../pool/splinter-twin.js";
 import _poolSpockVoiceOfReason from "../pool/spock-voice-of-reason.js";
 import _poolSpoilsOfEvil from "../pool/spoils-of-evil.js";
@@ -1203,6 +1205,7 @@ const shard: CardShard = {
     _poolColossalSkyturtle,
     _poolCombatCourier,
     _poolCommuneWithNature,
+    _poolComplaintsClerk,
     _poolConclaveEvangelist,
     _poolConsign,
     _poolConstructACosmicCube,
@@ -1850,6 +1853,7 @@ const shard: CardShard = {
     _poolSpellgorgerWeird,
     _poolSphinxsRevelation,
     _poolSpiderManifestation,
+    _poolSpinnyRide,
     _poolSplinterTwin,
     _poolSpockVoiceOfReason,
     _poolSpoilsOfEvil,

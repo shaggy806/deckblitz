@@ -879,6 +879,7 @@ import _poolStoneGiant from "../pool/stone-giant.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStorageMatrix from "../pool/storage-matrix.js";
 import _poolStormTheFestival from "../pool/storm-the-festival.js";
+import _poolStorybookRide from "../pool/storybook-ride.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
 import _poolStreamOfAcid from "../pool/stream-of-acid.js";
 import _poolStrengthOfCedars from "../pool/strength-of-cedars.js";
@@ -926,6 +927,7 @@ import _poolTheDoctorEmh from "../pool/the-doctor-emh.js";
 import _poolTheEarthKing from "../pool/the-earth-king.js";
 import _poolTheEverChangingDane from "../pool/the-ever-changing-dane.js";
 import _poolTheMadcapJester from "../pool/the-madcap-jester.js";
+import _poolTheMostDangerousGamer from "../pool/the-most-dangerous-gamer.js";
 import _poolThePrincessTakesFlight from "../pool/the-princess-takes-flight.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
 import _poolTheSwarmlord from "../pool/the-swarmlord.js";
@@ -1967,6 +1969,7 @@ const shard: CardShard = {
     _poolStoneskin,
     _poolStorageMatrix,
     _poolStormTheFestival,
+    _poolStorybookRide,
     _poolStranglerootGeist,
     _poolStreamOfAcid,
     _poolStrengthOfCedars,
@@ -2014,6 +2017,7 @@ const shard: CardShard = {
     _poolTheEarthKing,
     _poolTheEverChangingDane,
     _poolTheMadcapJester,
+    _poolTheMostDangerousGamer,
     _poolThePrincessTakesFlight,
     _poolTheReaverCleaver,
     _poolTheSwarmlord,

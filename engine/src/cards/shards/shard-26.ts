@@ -319,6 +319,7 @@ import _poolFlowstoneMauler from "../pool/flowstone-mauler.js";
 import _poolFlutterfox from "../pool/flutterfox.js";
 import _poolFluxChanneler from "../pool/flux-channeler.js";
 import _poolFlyingMen from "../pool/flying-men.js";
+import _poolFoamWeaponsKiosk from "../pool/foam-weapons-kiosk.js";
 import _poolFoggySwampVisions from "../pool/foggy-swamp-visions.js";
 import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
@@ -1368,6 +1369,7 @@ const shard: CardShard = {
     _poolFlutterfox,
     _poolFluxChanneler,
     _poolFlyingMen,
+    _poolFoamWeaponsKiosk,
     _poolFoggySwampVisions,
     _poolFollowHim,
     _poolFootMystic,

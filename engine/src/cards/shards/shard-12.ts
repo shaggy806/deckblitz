@@ -918,6 +918,7 @@ import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrainingRegimen from "../pool/training-regimen.js";
 import _poolTranquilGarden from "../pool/tranquil-garden.js";
+import _poolTrashBin from "../pool/trash-bin.js";
 import _poolTravelTheOverworld from "../pool/travel-the-overworld.js";
 import _poolTravelersCloak from "../pool/travelers-cloak.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
@@ -1951,6 +1952,7 @@ const shard: CardShard = {
     _poolTrainingCompound,
     _poolTrainingRegimen,
     _poolTranquilGarden,
+    _poolTrashBin,
     _poolTravelTheOverworld,
     _poolTravelersCloak,
     _poolTrevasAttendant,

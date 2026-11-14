@@ -73,6 +73,7 @@ import _poolAxebaneBeast from "../pool/axebane-beast.js";
 import _poolAzoriusFirstWing from "../pool/azorius-first-wing.js";
 import _poolAzoriusHerald from "../pool/azorius-herald.js";
 import _poolBackForSeconds from "../pool/back-for-seconds.js";
+import _poolBalloonStand from "../pool/balloon-stand.js";
 import _poolBalothPup from "../pool/baloth-pup.js";
 import _poolBalshanCollaborator from "../pool/balshan-collaborator.js";
 import _poolBarbedBackWurm from "../pool/barbed-back-wurm.js";
@@ -661,6 +662,7 @@ import _poolPensiveProfessor from "../pool/pensive-professor.js";
 import _poolPerilousForays from "../pool/perilous-forays.js";
 import _poolPerilsOfThePast from "../pool/perils-of-the-past.js";
 import _poolPestSummoning from "../pool/pest-summoning.js";
+import _poolPettingZookeeper from "../pool/petting-zookeeper.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
 import _poolPincherBeetles from "../pool/pincher-beetles.js";
@@ -862,6 +864,7 @@ import _poolSpryAndMighty from "../pool/spry-and-mighty.js";
 import _poolSpurGrappler from "../pool/spur-grappler.js";
 import _poolSquash from "../pool/squash.js";
 import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
+import _poolSquirrelSquatters from "../pool/squirrel-squatters.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
 import _poolStaffOfTheMindMagus from "../pool/staff-of-the-mind-magus.js";
 import _poolStaffOfTheSunMagus from "../pool/staff-of-the-sun-magus.js";
@@ -1160,6 +1163,7 @@ const shard: CardShard = {
     _poolAzoriusFirstWing,
     _poolAzoriusHerald,
     _poolBackForSeconds,
+    _poolBalloonStand,
     _poolBalothPup,
     _poolBalshanCollaborator,
     _poolBarbedBackWurm,
@@ -1748,6 +1752,7 @@ const shard: CardShard = {
     _poolPerilousForays,
     _poolPerilsOfThePast,
     _poolPestSummoning,
+    _poolPettingZookeeper,
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,
     _poolPincherBeetles,
@@ -1949,6 +1954,7 @@ const shard: CardShard = {
     _poolSpurGrappler,
     _poolSquash,
     _poolSquirrelSanctuary,
+    _poolSquirrelSquatters,
     _poolSquirrelanoids,
     _poolStaffOfTheMindMagus,
     _poolStaffOfTheSunMagus,
