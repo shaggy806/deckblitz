@@ -86,6 +86,7 @@ import {
   hasSummoningSickness,
   isPlaneswalkerTarget,
   legalDefenders,
+  mustAttack,
   whyCannotAttack,
   whyCannotBlock,
 } from "./combat/eligibility.js";
@@ -12858,6 +12859,11 @@ export class Game {
     // attacking that player" sees every attacker, not just the ones declared
     // before its own.
     const declaredNow: DeclaredAttacker[] = [];
+    // Which of them were under a requirement to attack (rule 508.1d), asked
+    // of the board before any of them attacks: "if that creature had to attack
+    // this combat" (Firkraag, Cunning Instigator's ruling — a requirement on
+    // the creature itself, not one on its controller).
+    const required = new Set(declarations.filter((d) => mustAttack(this.state, this.registry, d.attacker)).map((d) => d.attacker));
     // Each band's members as they attack (rule 702.22c) — a stack's entry
     // woken into one creature per token, each a member.
     const bands = new Map<number, ObjectId[]>();
@@ -12909,7 +12915,7 @@ export class Game {
         if (object.isCommander) this.state.players[player].attackedWithCommanderOnTurn = this.state.turn.number;
         const taps = !this.objHasKeyword(id, "vigilance");
         if (taps) object.tapped = true;
-        declaredNow.push({ id, defender, taps });
+        declaredNow.push({ id, defender, taps, ...(required.has(attacker) ? { required: true as const } : {}) });
       }
     }
     // A band is labelled by its first member; a band of one is none.
@@ -13324,8 +13330,8 @@ export class Game {
   }
 
   /** `id` was declared as an attacker at `defender` (rule 508.1): its journal
-   * entry, as it was declared. */
-  private journalAttack(id: ObjectId, defender: PlayerId | ObjectId): void {
+   * entry, as it was declared — `how: "required"` if it had to attack. */
+  private journalAttack(id: ObjectId, defender: PlayerId | ObjectId, required: boolean): void {
     const attacker = this.state.objects[id];
     if (attacker === undefined) return;
     const count = attacker.stackCount ?? 1;
@@ -13343,6 +13349,7 @@ export class Game {
       ...(at !== undefined ? { targetStint: at.zoneChangeCount ?? 0 } : {}),
       combat: this.state.turn.combatPhases ?? 1,
       ...(count !== 1 ? { count } : {}),
+      ...(required ? { how: "required" } : {}),
     });
   }
 
@@ -13357,7 +13364,7 @@ export class Game {
     // The whole declaration goes into the journal before any of it is
     // announced: a trigger on the first attacker already sees the rest (pack
     // tactics' total power, rule 508.1k), each as it was declared.
-    for (const { id, defender } of declaredNow) this.journalAttack(id, defender);
+    for (const { id, defender, required } of declaredNow) this.journalAttack(id, defender, required === true);
     // They all became tapped at once (rule 508.1f), an event apiece between.
     this.tapBatchFired.clear();
     this.tapBatchHeld = true;

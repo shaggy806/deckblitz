@@ -2086,6 +2086,12 @@ export function parseTrigger(clause) {
   if (/^When(?:ever)? ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
+  // Edric, Spymaster of Trest's and Firkraag, Cunning Instigator's: once per
+  // creature, whoever controls it, the player one of the source controller's
+  // opponents.
+  if (c === "Whenever a creature deals combat damage to one of your opponents") {
+    return [{ on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toOpponent: true }];
+  }
   // "…to a player or planeswalker" (Psychic Frog, Jaya's Phoenix): an
   // attacker deals its combat damage to the one it attacks, so one trigger
   // for each recipient never fires twice for one damage event.
@@ -2266,9 +2272,10 @@ export function parseTrigger(clause) {
   }
   // "Whenever one or more Merfolk you control attack a player": once per
   // player, by the attackers that match (Attuma, Atlantean Warlord).
-  if ((m = /^Whenever one or more (.+?) you control attack a player$/.exec(c))) {
+  if ((m = /^Whenever one or more (.+?) you control attack (a player|an opponent)$/.exec(c))) {
     const filter = parseTypePhrase(m[1]);
-    if (filter !== null) return [{ on: "attacks-player", who: "you", defender: "any", filter }];
+    const defender = m[2] === "an opponent" ? "opponent" : "any";
+    if (filter !== null) return [{ on: "attacks-player", who: "you", defender, filter }];
   }
   // A Curse's "whenever a creature attacks enchanted player": once per creature.
   if (c === "Whenever a creature attacks enchanted player") {
@@ -5782,6 +5789,13 @@ export function parseSentence(sentence, ctx) {
     return { kind: "tap", target: ctx.target({ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }) };
   }
   if ((m = re(`tap (${TARGET})`).exec(s))) return { kind: "tap", target: slot(m[1]) };
+  // "Goad target creature that player controls" after an attack or a combat
+  // hit (Firkraag, Cunning Instigator; Grenzo, Havoc Raiser): the trigger's
+  // player; any other "goad target …" (rule 701.15a).
+  if (ctx.thatPlayer === "trigger-player" && re("goad target creature that player controls").test(s)) {
+    return { kind: "goad", target: ctx.target({ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }) };
+  }
+  if ((m = re(`goad (${TARGET})`).exec(s))) return { kind: "goad", target: slot(m[1]) };
   if ((m = re(`untap (${TARGET})`).exec(s))) return { kind: "untap", target: slot(m[1]) };
   // Detain (rule 701.35a).
   if ((m = re(`detain (${TARGET})`).exec(s))) return { kind: "detain", target: slot(m[1]) };
@@ -9208,6 +9222,10 @@ function temptingOfferOf(text, outer) {
 }
 
 export function parseEffect(text, outer) {
+  // "You put a +1/+1 counter on ~ and you draw a card" (Firkraag, Cunning
+  // Instigator) says what "Put … and draw …" does.
+  const youPutYouDraw = /^You (put .+?) and you (draw .+)$/.exec(text);
+  if (youPutYouDraw !== null) return parseEffect(`P${youPutYouDraw[1].slice(1)} and ${youPutYouDraw[2]}`, outer);
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
   const sentences = sentencesOf(text);
@@ -18176,6 +18194,12 @@ const INTERVENING_IFS = {
   "if ~ is an enchantment,": { kind: "source", filter: { type: "enchantment" } },
   "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
+  // Firkraag, Cunning Instigator: the attack's journal entry, under a
+  // requirement to attack (rule 508.1d), in this combat.
+  "if that creature had to attack this combat,": {
+    kind: "trigger-object",
+    filter: { journaled: { what: "had-to-attack", thisCombat: true } },
+  },
   "if one or more cards were put into exile this turn,": { kind: "turn-stat", stat: "cards-put-into-exile", who: "any-player", atLeast: 1 },
   "if that player is the monarch,": { kind: "of-player", player: "that-player", condition: { kind: "monarch", who: "you" } },
   // Pack tactics: the attackers' total power, as they were declared.
@@ -18505,6 +18529,10 @@ function thatPlayerOf(triggers) {
     return { ownerOf: "trigger-object" };
   }
   if (triggers.every((t) => t.on === "attacks")) return "trigger-player";
+  // "Whenever one or more Dragons you control attack an opponent, goad target
+  // creature that player controls" (Firkraag, Cunning Instigator): the
+  // attacked player.
+  if (triggers.every((t) => t.on === "attacks-player")) return "trigger-player";
   // "At the beginning of each opponent's upkeep, … that player's library"
   // (Thieving Amalgam); "deal combat damage to a player, … that player's
   // library" (Orochi Soul-Reaver).

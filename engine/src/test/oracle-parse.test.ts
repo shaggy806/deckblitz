@@ -18976,6 +18976,25 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ]);
   });
 
+  it("reads a Dragons' attack goading, and a creature that had to attack (Firkraag, Cunning Instigator)", () => {
+    const face = parseFace({
+      name: "Firkraag, Cunning Instigator",
+      type_line: "Legendary Creature — Dragon",
+      oracle_text:
+        "Flying, haste\nWhenever one or more Dragons you control attack an opponent, goad target creature that player controls.\nWhenever a creature deals combat damage to one of your opponents, if that creature had to attack this combat, you put a +1/+1 counter on Firkraag and you draw a card.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "attacks-player", who: "you", defender: "opponent", filter: { subtype: "Dragon" } },
+      targets: [{ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }],
+      effect: { kind: "goad", target: 0 },
+    });
+    expect(face.triggered[1]).toMatchObject({
+      trigger: { on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toOpponent: true },
+      condition: { kind: "trigger-object", filter: { journaled: { what: "had-to-attack", thisCombat: true } } },
+    });
+  });
+
   it("reads an investigation, the first each turn (Erdwal Illuminator)", () => {
     expect(parseTrigger("Whenever you investigate for the first time each turn")).toEqual([
       { on: "event", event: "investigates", who: "you", firstTimeEachTurn: true },

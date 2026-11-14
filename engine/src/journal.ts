@@ -43,7 +43,9 @@ export type JournalKind =
   | "discarded"
   /** `player` declared a creature as an attacker (508.1), at `target` (the
    * player, planeswalker or battle), in combat phase `combat`; `was`: as
-   * declared. Never one put onto the battlefield attacking (508.4). */
+   * declared. Never one put onto the battlefield attacking (508.4). `how:
+   * "required"`: it was under a requirement to attack as it was declared
+   * (508.1d — "had to attack"). */
   | "attacked"
   /** A creature `player` controlled blocked the attacker `target` (509.1),
    * once per attacker it blocked, in combat phase `combat`; `was` and
@@ -297,6 +299,12 @@ export type JournalWhat =
   /** Each creature declared as an attacker, once in each stint, however many
    * combats it attacked in. */
   | "attackers"
+  /** Each creature declared as an attacker while under a requirement to
+   * attack (rule 508.1d — a requirement on the creature itself: goad,
+   * "attacks each combat if able", encore's), an entry a combat it attacked
+   * in: Firkraag, Cunning Instigator's "if that creature had to attack this
+   * combat" (a `journaled` clause with `thisCombat`). */
+  | "had-to-attack"
   | "turned-face-up"
   | "regenerated"
   | "counters-put"
@@ -376,6 +384,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     match: (e) => (e.excess ?? 0) > 0 && e.target?.kind === "object",
   },
   attackers: { kind: "attacked", distinct: true },
+  "had-to-attack": { kind: "attacked", match: (e) => e.how === "required" },
   "turned-face-up": { kind: "turned-face-up" },
   regenerated: { kind: "regenerated" },
   "counters-put": { kind: "counters-put" },

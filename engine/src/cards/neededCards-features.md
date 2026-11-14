@@ -351,6 +351,17 @@ exist on the battlefield (`Game.enterExilers`, rule 614.12) — `cast: false`
 true of anything but a cast spell resolving — and ordered against its own "as
 this enters" actions (`exileInsteadOrderAsked`, a `replacement-order`, 616.1e).
 Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
+### Who attacked whom, and whether it had to — built 2026-11-13
+
+The combat-targeting lane's group of attack-history reads (B322's group).
+
+- `stat:had-to-attack-condition` — each attacker's `attacked` journal entry
+  carries `how: "required"` when it was under a requirement to attack as the
+  declaration began (rule 508.1d, `mustAttack`: goad, "attacks each combat if
+  able", encore — a requirement on the creature, not on its controller); the
+  `"had-to-attack"` journal word reads them, and the `journaled` clause's
+  `thisCombat` keeps the entries of the combat under way. Firkraag, Cunning
+  Instigator. `test/had-to-attack.test.ts`.
 
 ### A reflexive ability's target read against its source now — fixed 2026-11-13
 

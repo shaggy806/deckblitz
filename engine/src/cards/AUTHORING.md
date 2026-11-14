@@ -3422,6 +3422,7 @@ entered this turn", Kratos, God of War's "creatures that player controls that
 `attackedThisCombat` is this combat phase's declaration, standing though it has left combat since (rule 506.4), never one put onto the battlefield attacking: "if this creature attacked or blocked this combat" is the helper `ATTACKED_OR_BLOCKED_THIS_COMBAT`, an `anyOf` with `blockedThisTurn`'s `thisCombat`;
 `attackedYouThisTurn` is the filtering player, not a planeswalker of theirs (Jabari's Influence), and "a creature is attacking you" as a condition is `controls` with `anyController` over `attackingYou` (Heroic Return's cost, Swat Away's);
 `attackedDuringControllersLastTurn` is its present controller's last finished turn (`controllersLastTurn`; Halls of Mist, Tangle Kelp through `attachedTo`);
+"had to attack" is the attack's journal entry, a requirement on the creature itself as it was declared (rule 508.1d — goad, "attacks each combat if able", encore; not one on its controller): `journaled: { what: "had-to-attack", thisCombat: true }` (`thisCombat` keeps the entries of the combat phase under way), Firkraag, Cunning Instigator's "if that creature had to attack this combat" as a `trigger-object` condition;
 `attackedBattleThisTurn` is "attacked **a battle** this turn" (War Historian,
 rule 506.3), true from the declaration on whatever becomes of the battle. A permanent that
 changes zones is a new object that did neither; one that has left is asked as

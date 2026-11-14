@@ -1234,12 +1234,17 @@ export interface CardFilter {
    * put into a graveyard, returned and put there again counts once. `by`
    * narrows to the entries in its controller's own record ("you've put"),
    * the filter's `you`; `atLeast` (default 1) and `atMost` count entries.
+   * `thisCombat` keeps only the entries of the combat phase under way (an
+   * attack's or a block's, rule 506.1): "if that creature had to attack this
+   * combat" (Firkraag, Cunning Instigator: `{ what: "had-to-attack",
+   * thisCombat: true }`).
    */
   readonly journaled?: {
     readonly what: JournalWhat;
     readonly window?: JournalWindow;
     readonly by?: "you";
     readonly counter?: string;
+    readonly thisCombat?: true;
     readonly atLeast?: number;
     readonly atMost?: number;
   };
@@ -1769,6 +1774,7 @@ function journaledMatches(
   for (const e of journalEntries(journalReader(state, registry), JOURNAL_VIEWS[clause.what], players, clause.window ?? "this-turn", you)) {
     if (e.object !== id || (e.arrived ?? e.stint) !== stint) continue;
     if (clause.counter !== undefined && e.counter !== clause.counter) continue;
+    if (clause.thisCombat === true && (e.combat === undefined || e.combat !== (state.turn.combatPhases ?? 1))) continue;
     n += 1;
   }
   return n >= (clause.atLeast ?? 1) && (clause.atMost === undefined || n <= clause.atMost);

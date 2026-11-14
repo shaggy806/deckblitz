@@ -4820,6 +4820,10 @@ export interface DeclaredAttacker {
   readonly id: ObjectId;
   readonly defender: PlayerId | ObjectId;
   readonly taps: boolean;
+  /** It was under a requirement to attack as it was declared (rule 508.1d —
+   * `mustAttack`): "if that creature had to attack this combat" (Firkraag,
+   * Cunning Instigator), recorded on its journal entry. */
+  readonly required?: true;
 }
 
 /** What a declared attack owes besides its enlists (rules 508.1h-j): mana,
