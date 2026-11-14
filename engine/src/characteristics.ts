@@ -2136,7 +2136,9 @@ export function journalCount(
     }
     if (counted !== undefined && entry.object !== undefined) {
       const list = view.whose === "target" ? (entry.target?.kind === "player" ? entry.target.player : "") : (entry.player ?? "");
-      const key = `${entry.object}@${at ?? ""}@${list}`;
+      // About a recipient, the entry's own object is told apart by its stint
+      // too (a creature that left and crewed again is a new one, rule 400.7).
+      const key = `${entry.object}${aboutRecipient ? `#${entry.stint ?? ""}` : ""}@${at ?? ""}@${list}`;
       if (counted.has(key)) continue;
       counted.add(key);
     }

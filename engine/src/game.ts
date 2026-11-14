@@ -49106,6 +49106,18 @@ controlledBy,
     for (const id of creatures) {
       const creature = this.state.objects[id];
       if (creature === undefined) continue;
+      // The journal's too, for "each creature that crewed it this turn" once
+      // the creature has left (`"crewers"`).
+      this.journal({
+        kind: "crews",
+        player: creature.controller,
+        object: id,
+        stint: creature.zoneChangeCount ?? 0,
+        was: this.takeLastKnown(id),
+        target: { kind: "object", object: vehicle },
+        targetStint: stint,
+        targetWas: this.takeLastKnown(vehicle),
+      });
       const had = creature.crewedThisTurn ?? [];
       if (had.some((r) => r.vehicle === vehicle && r.stint === stint)) continue;
       creature.crewedThisTurn = [...had, { vehicle, stint }];

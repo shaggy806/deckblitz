@@ -1071,7 +1071,10 @@ a graveyard as it is now. See `PlayerState.turnHistory`. `sumOf: "power"`
 is their total power instead of how many, each as its entry kept it — Genesis
 of the Daleks's "the total power of Daleks that died this turn" is `{
 turnHistory: "died", who: "each-player", filter: { subtype: "Dalek" }, sumOf:
-"power" }`),
+"power" }`. `"crewers"` is the creatures that crewed a Vehicle, each once,
+those that have left since included — Luxurious Locomotive's "a Treasure
+token for each creature that crewed it this turn" is `{ turnHistory:
+"crewers", who: "each-player", selfOnly: true }`),
 `{ damageDealtThisTurn: true, who?, combat?, colors? }` (how much damage
 sources the scope's players controlled dealt this turn, to anything — only
 combat or only noncombat damage if `combat` says, only from sources that were

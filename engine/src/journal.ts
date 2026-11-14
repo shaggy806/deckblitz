@@ -99,6 +99,10 @@ export type JournalKind =
   | "saddled"
   /** The Vehicle `object` became crewed (702.122c) under `player`, in `stint`. */
   | "crewed"
+  /** The creature `object` crewed a Vehicle (702.122b: tapped to pay its crew
+   * cost) under `player`, in `stint`; `was`: the creature as it was tapped;
+   * `target`, `targetStint`, `targetWas`: the Vehicle. */
+  | "crews"
   /** `player` bent (`how`: water, earth, fire or air — rules 701.65b,
    * 701.66b, 701.67c, 702.189b). */
   | "bent"
@@ -314,6 +318,13 @@ export type JournalWhat =
    * since — Rith, Liberated Primeval's "if a creature or planeswalker an
    * opponent controlled was dealt excess damage this turn". */
   | "excess-damaged"
+  /** The creatures that crewed a Vehicle (rule 702.122b), each once per
+   * stint of the creature and of the Vehicle. The entry is about the Vehicle
+   * (a `"recipient"` view): the list is its controller's as it was crewed, a
+   * filter reads it as it was then, and `selfOnly` is "each creature that
+   * crewed **it** this turn" (Luxurious Locomotive) — those that have left
+   * since included (its ruling). */
+  | "crewers"
   /** Each creature declared as an attacker, once in each stint, however many
    * combats it attacked in. */
   | "attackers"
@@ -401,6 +412,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     whose: "recipient",
     match: (e) => (e.excess ?? 0) > 0 && e.target?.kind === "object",
   },
+  crewers: { kind: "crews", whose: "recipient", match: (e) => e.target?.kind === "object", oncePerList: true },
   attackers: { kind: "attacked", distinct: true },
   "had-to-attack": { kind: "attacked", match: (e) => e.how === "required" },
   "turned-face-up": { kind: "turned-face-up" },
