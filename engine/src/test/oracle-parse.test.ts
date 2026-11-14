@@ -19125,4 +19125,26 @@ describe("one trigger over every opponent a batch of sources damaged (Breeches, 
       duration: "end-of-turn",
     });
   });
+
+  it("Jace, Architect of Thought's piles to the library's bottom, and every library searched at once", () => {
+    expect(
+      parseEffect(
+        "Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "separate-into-piles",
+      objects: { libraryTop: 3, reveal: true },
+      separator: "an-opponent",
+      chooser: "you",
+      chosen: "hand",
+      rest: "library-bottom",
+    });
+    expect(
+      parseEffect(
+        "For each player, search that player's library for a nonland card and exile it, then that player shuffles.",
+        ctx(),
+      ).effect,
+    ).toEqual({ kind: "search-library", eachLibrary: "each-player", filter: { notTypes: ["land"] }, destination: "exile", min: 0, max: 1 });
+  });
 });

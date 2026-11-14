@@ -930,6 +930,7 @@ const PILE_FATE_TEXT: Record<SeparatePilesAction['fates']['chosen'], string> = {
   graveyard: 'goes into the graveyard',
   exile: 'is exiled',
   battlefield: 'goes onto the battlefield',
+  'library-bottom': 'goes on the bottom of the library in any order',
   lose: 'is lost',
   other: 'is affected',
   'turned-face-up': 'is turned face up',
@@ -2389,6 +2390,17 @@ function Table({
   const zoneChoiceAction = actions.find(
     (a): a is ZoneChoiceAction => a.kind === 'choose-from-zone',
   )
+  // How many players' libraries the choice's cards are in: more than one is
+  // a search of several at once (Jace, Architect of Thought's −8).
+  const zoneChoiceLibraries =
+    zoneChoiceAction === undefined
+      ? 0
+      : new Set(
+          zoneChoiceAction.ids.flatMap((id) => {
+            const card = view.objects[id]
+            return card?.zone === 'library' ? [card.owner] : []
+          }),
+        ).size
   const mulliganAction = actions.find(
     (a): a is MulliganAction => a.kind === 'mulligan',
   )
@@ -8275,7 +8287,13 @@ function Table({
             ...(zoneChoiceAction.together
               ? {
                   fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked),
-                  swaps: zoneChoiceAction.together.rule === 'distinct' || zoneChoiceAction.together.rule === 'one-of-each',
+                  // One card from each of several libraries (Jace, Architect
+                  // of Thought's −8): a second pick from one library takes
+                  // the first's place.
+                  swaps:
+                    zoneChoiceAction.together.rule === 'distinct' ||
+                    zoneChoiceAction.together.rule === 'one-of-each' ||
+                    (zoneChoiceAction.together.rule === 'one-each' && zoneChoiceLibraries > 1),
                   ...(zoneChoiceAction.together.rule === 'one-of-each'
                     ? { sits: (picked: readonly ObjectId[]) => fitsSoFar(zoneChoiceAction.together!, picked) }
                     : {}),
@@ -8288,6 +8306,15 @@ function Table({
           }}
           collapsed={decisionCollapsed}
           onCollapse={() => setDecisionCollapsed(true)}
+          // Several libraries searched at once: whose each card is.
+          {...(zoneChoiceLibraries > 1
+            ? {
+                captionOf: (id: ObjectId) => {
+                  const card = view.objects[id]
+                  return card?.zone === 'library' ? `${playerLabel(card.owner, game.seats)}'s library` : undefined
+                },
+              }
+            : {})}
         />
       ) : null}
 

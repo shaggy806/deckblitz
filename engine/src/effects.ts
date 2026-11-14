@@ -10632,6 +10632,19 @@ export type EffectSpec =
        */
       readonly whose?: PlayerRef;
       /**
+       * "**For each player, search that player's library** for a nonland card
+       * and exile it, then that player shuffles" (Jace, Architect of
+       * Thought's −8): every library of the scope searched as one search,
+       * whose choices are final only once all have been looked through (the
+       * ruling) — one `choose-from-zone` over them all, up to one card from
+       * each library (a stated quality may fail to find, rule 701.23b), the
+       * finds going to their owners' `destination` (`"exile"`, `"graveyard"`
+       * or `"hand"`), then each of those players shuffles (701.24a). A
+       * library that can't be searched still shuffles. `min`, `max`,
+       * `whose`, `zones` and the rest aren't read; `then` is.
+       */
+      readonly eachLibrary?: PlayerScope;
+      /**
        * "Search … for **all** cards with that name" (Cranial Extraction,
        * Extirpate): every match in a graveyard is found — a public zone, where
        * a card with a stated quality can't be missed — and goes with whatever
@@ -11114,13 +11127,17 @@ export type PileObjects =
  * byItsController: true } }`. `{ together }` applies its effect once, with the
  * pile's objects in the target slots from 0 — Abstract Performance's "You may
  * cast a spell from among them without paying its mana cost. Put the rest into
- * your hand" — `word` saying what that amounts to.
+ * your hand" — `word` saying what that amounts to. `"library-bottom"` is "the
+ * other on the bottom of your library **in any order**" (Jace, Architect of
+ * Thought): each owner arranges their own cards (rule 401.4), asked only when
+ * the order is a choice.
  */
 export type PileFate =
   | "hand"
   | "graveyard"
   | "exile"
   | "battlefield"
+  | "library-bottom"
   | { readonly effect: EffectSpec }
   | { readonly together: EffectSpec; readonly word: PileFateWord };
 
@@ -11139,7 +11156,16 @@ export interface ExilePileSpec {
  * up". `"cast-or-hand"`: one spell from it may be cast free, the rest go to the
  * hand (Abstract Performance).
  */
-export type PileFateWord = "hand" | "graveyard" | "exile" | "battlefield" | "lose" | "other" | "turned-face-up" | "cast-or-hand";
+export type PileFateWord =
+  | "hand"
+  | "graveyard"
+  | "exile"
+  | "battlefield"
+  | "library-bottom"
+  | "lose"
+  | "other"
+  | "turned-face-up"
+  | "cast-or-hand";
 
 /**
  * A keyword ability given to a card in a graveyard (rule 604.1 — a static's
@@ -13423,6 +13449,15 @@ export interface EffectApi {
     attachTo?: EnterAttachHost,
   ): boolean;
   /** See the `"search-library"` {@link EffectSpec}. */
+  /** See the `"search-library"` {@link EffectSpec}'s `eachLibrary`: one
+   * search of every library of `owners` by the effect's controller, up to one
+   * find from each, then each of them shuffles. */
+  searchEachLibrary(
+    owners: readonly PlayerId[],
+    filter: CardFilter,
+    destination: "exile" | "graveyard" | "hand",
+    then: EffectSpec | undefined,
+  ): void;
   searchLibrary(
     player: PlayerId | null,
     filter: CardFilter,
@@ -21772,6 +21807,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.scry(amountValue(spec.amount, ctx), true, spec.then);
       return;
     case "search-library": {
+      if (spec.eachLibrary !== undefined) {
+        const destination = spec.destination;
+        if (destination !== "exile" && destination !== "graveyard" && destination !== "hand") return;
+        ctx.searchEachLibrary(ctx.playersInScope(spec.eachLibrary), spec.filter, destination, spec.then);
+        return;
+      }
       let searcher: PlayerId | null = null;
       if (spec.who !== undefined) {
         // Nobody: no search.

@@ -7,6 +7,8 @@
     "condition:converted-this-way",
     "effect:reflexive-per-counters-placed",
     "trigger:combat-damage-to-enchanted-player",
+    "decision:search-each-library-before-choosing",
+    "effect:pile-fate-library-bottom-any-order",
     "mechanic:coin-flip-doubling-stakes-loser-decides",
     "decision:choose-creature-or-player-on-resolution",
     "effect:extra-loyalty-activations-this-turn",

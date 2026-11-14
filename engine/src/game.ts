@@ -12074,8 +12074,12 @@ export class Game {
     } else if (leftoverTo === "shuffle") {
       // A library search — shuffle the whole library afterwards (rule 701.24b):
       // its owner's, when another player's was searched ("then that player
-      // shuffles").
-      this.shuffleLibraryOf(awaiting.forPlayer ?? player);
+      // shuffles"), or each one searched (Jace, Architect of Thought's −8).
+      if (awaiting.shufflesLibraries !== undefined) {
+        for (const owner of awaiting.shufflesLibraries) this.shuffleLibraryOf(owner);
+      } else {
+        this.shuffleLibraryOf(awaiting.forPlayer ?? player);
+      }
     } else if (leftoverTo === "hand") {
       // Genesis Ultimatum: "… and the rest into your hand." needed-cards P19.
       for (const id of leftover) this.moveObject(id, "hand");
@@ -39513,6 +39517,23 @@ controlledBy,
             );
             return;
           }
+          // "The other on the bottom of your library in any order" (Jace,
+          // Architect of Thought): one library's cards still in it are ordered
+          // there by their owner (rule 401.4) with no zone change; anything
+          // else goes through `put-on-libraries`, which asks each owner in turn.
+          if (fate === "library-bottom") {
+            const owners = new Set(still.map((id) => this.state.objects[id]?.owner));
+            const owner = this.state.objects[still[0]]?.owner;
+            if (owners.size === 1 && owner !== undefined && still.every((id) => this.state.objects[id]?.zone === "library")) {
+              this.beginLibraryOrder(owner, still, "bottom");
+              return;
+            }
+            applyEffectSpec(
+              { kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "bottom" },
+              this.makeResolutionContext(source, controller, still.map((object) => ({ kind: "object", object })), x),
+            );
+            return;
+          }
           // Each pile's fate is one instruction: everything in it at once.
           this.withLeaveBatch(() =>
             this.withGraveyardLeaveBatch(() =>
@@ -42102,6 +42123,8 @@ controlledBy,
             ? scoped(who).forEach((player) => this.changeLife(player, delta))
             : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
         ),
+      searchEachLibrary: (owners, filter, destination, then) =>
+        this.beginEachLibrarySearch(controller, owners, filter, destination, x, source, refs.source, then),
       searchLibrary: (
         player,
         filter,
@@ -42966,6 +42989,74 @@ controlledBy,
             thenX: x,
             ...(more.sourceStint !== undefined ? { thenSourceStint: more.sourceStint } : {}),
             thenPlayer: owner,
+          }
+        : {}),
+    };
+  }
+
+  /**
+   * "For each player, search that player's library for [a card] and exile it,
+   * then that player shuffles" (Jace, Architect of Thought's −8 — the
+   * `search-library` effect's `eachLibrary`): one search by `player` of every
+   * library of `owners` still in the game, its choices made together once
+   * they've all been looked through (the ruling), as one `choose-from-zone`
+   * whose `one-each` rule takes up to one find from each library (rule
+   * 701.23b: a stated quality may fail to find). The finds go to their owners'
+   * `destination`; then each library searched is shuffled (701.24a) — one
+   * that can't be searched too ("then that player shuffles" still happens).
+   * Aven Mindcensor's top cards apply to each library (`librarySearchTop` is
+   * the searcher's), and an Opposition Agent's control begins when the
+   * searcher's own library is among them.
+   */
+  private beginEachLibrarySearch(
+    player: PlayerId,
+    owners: readonly PlayerId[],
+    filter: CardFilter,
+    destination: "exile" | "graveyard" | "hand",
+    x: number,
+    source: ObjectId,
+    sourceStint: number | undefined,
+    then: EffectSpec | undefined,
+  ): void {
+    const searchTop = librarySearchTop(this.state, this.registry, player);
+    const eligible: ObjectId[] = [];
+    const tags: Record<string, readonly string[]> = {};
+    const shuffled: PlayerId[] = [];
+    for (const owner of owners) {
+      if (this.state.players[owner]?.hasLost !== false) continue;
+      shuffled.push(owner);
+      if (this.cantSearchLibrary(player, owner)) continue;
+      if (owner === player) {
+        this.beginSearchControl(player);
+        this.journal({ kind: "library-searched", player });
+      }
+      this.emit({ type: "library-searched", player, owner });
+      const library = this.state.zones.perPlayer[owner].library;
+      for (const id of searchTop === null ? library : library.slice(0, searchTop)) {
+        if (!matchesFilter(this.state, this.registry, id, filter, { you: player, x })) continue;
+        eligible.push(id);
+        tags[id] = [owner];
+      }
+    }
+    if (shuffled.length === 0) return;
+    const slots = new Set(eligible.map((id) => this.state.objects[id]?.owner)).size;
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: eligible,
+      eligible,
+      min: 0,
+      max: slots,
+      together: { rule: "one-each", tags, text: "one card from each library" },
+      destination,
+      leftover: "shuffle",
+      shufflesLibraries: shuffled,
+      ...(then !== undefined
+        ? {
+            then,
+            thenSource: source,
+            thenX: x,
+            ...(sourceStint !== undefined ? { thenSourceStint: sourceStint } : {}),
           }
         : {}),
     };

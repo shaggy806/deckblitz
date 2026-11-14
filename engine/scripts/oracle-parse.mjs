@@ -3211,6 +3211,16 @@ export function parseSentence(sentence, ctx) {
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
+  // "For each player, search that player's library for a nonland card and
+  // exile it, then that player shuffles" (Jace, Architect of Thought): one
+  // search of every library, a find from each.
+  const eachLibrary = /^for each (player|opponent), search that player's library for an? (.+?) card and exile it, then that player shuffles\.$/i.exec(s);
+  if (eachLibrary !== null) {
+    const filter = parseTypePhrase(eachLibrary[2], { cards: true });
+    if (filter === null) return null;
+    const scope = eachLibrary[1].toLowerCase() === "player" ? "each-player" : "each-opponent";
+    return { kind: "search-library", eachLibrary: scope, filter, destination: "exile", min: 0, max: 1 };
+  }
   // "Prevent all combat damage that would be dealt to you this turn" (Druid's
   // Deliverance), "… this combat" (Suppressor Skyguard, rule 511.2).
   const shield = /^prevent all combat damage that would be dealt to you this (turn|combat)\.$/i.exec(s);
@@ -15039,17 +15049,20 @@ function pilesAt(sentences, i, ctx) {
   if (
     m !== null &&
     /^an opponent separates those cards into two piles\.$/i.test(s(1)) &&
-    /^put one pile into your hand and the other into your graveyard\.$/i.test(s(2))
+    /^put one pile into your hand and the other (?:into your graveyard|on the bottom of your library in any order)\.$/i.test(s(2))
   ) {
     const n = numberOf(m[1]);
     if (typeof n !== "number") return null;
+    // "…and the other on the bottom of your library in any order" (Jace,
+    // Architect of Thought).
+    const bottom = /on the bottom of your library/i.test(s(2));
     return {
       effect: {
         kind: "separate-into-piles",
         objects: { libraryTop: n, reveal: true },
         separator: "an-opponent",
         chooser: "you",
-        ...handGraveyard,
+        ...(bottom ? { chosen: "hand", rest: "library-bottom" } : handGraveyard),
       },
       used: 3,
     };

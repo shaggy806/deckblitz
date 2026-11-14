@@ -8242,7 +8242,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Nahiri's Sacrifice, choosing X = 3 and sacrificing Gray Ogre. Target both of Bob's creatures, 2 damage to Grizzly Bears and 1 to Hill Giant.
 - **Expect:** Only Gray Ogre is offered at X = 3 (Sol Ring only at X = 1). The Bears die and the Giant has 1 damage.
 
-## Decisions lane: a creature or player chosen as it resolves, and who flips again (2026-11-13)
+## Decisions lane: a creature or player chosen as it resolves, who flips again, and every library searched at once (2026-11-13)
 
 ### Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not
 - **Do:** Use Comet's 0 ability. When asked, click Bob's Gladecover Scout.
@@ -8257,6 +8257,19 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Game of Chaos: at four players, only the target opponent plays
 - **Do:** Cast Game of Chaos, targeting Carol. Answer "Flip again?" Yes as Carol, then No as yourself.
 - **Expect:** You lose the first flip (you 39, Carol 41) and Carol is asked; you win the second for 2 (41 / 39) and you're asked. Bob and Dave stay at 40 throughout.
+
+### Jace, Architect of Thought: the other pile goes to the bottom of your library in the order you pick
+- **Do:** Use Jace's −2. Bob separates the three cards; click "Choose pile" on the pile with Grizzly Bears alone, then click Counterspell and Shock and Confirm.
+- **Expect:** The pile popup ends "the other goes on the bottom of the library in any order". The Bears go to your hand; the order popup reads "Put them on the bottom in the order you pick", and next turn you draw a basic land, not either card.
+
+### Jace, Architect of Thought: one search of every library, a card from each, then cast them free
+- **Do:** Use Jace's −8. In the search, click Grizzly Bears, then Hill Giant, then Divination, and Confirm. Cast Hill Giant, then Divination.
+- **Expect:** One popup, "Choose one card from each library to exile", each card captioned "Bob's library" or "Alice's library"; clicking Hill Giant takes the Bears' pick. Both are exiled, then cast free: the Giant enters under your control and Divination draws you two.
+- **Not a bug:** Jace dies to the −8 before it resolves: he had 8 loyalty.
+
+### Jace, Architect of Thought: at four players, every library is searched at once
+- **Do:** Use Jace's −8. Pick all three cards and Confirm, then click "Don't cast".
+- **Expect:** The log says you searched all four libraries; the three cards are exiled, one from each opponent, and stay there.
 
 ### Comet, Stellar Pup: at four players, any player can be chosen
 - **Do:** Use Comet's 0 ability. When asked, click Carol.

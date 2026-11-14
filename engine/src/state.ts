@@ -3538,6 +3538,10 @@ export type AwaitingDecision =
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
       readonly forPlayer?: PlayerId;
+      /** A search of several players' libraries at once (`search-library`'s
+       * `eachLibrary` — Jace, Architect of Thought's −8): with `leftover:
+       * "shuffle"`, each of these libraries is shuffled, not the chooser's. */
+      readonly shufflesLibraries?: readonly PlayerId[];
       /** A search whose finds an Opposition Agent exiles: the rest of the
        * instruction can't see them there, and goes on (`then` with nothing
        * found, `GameState.unseenFinds`). */

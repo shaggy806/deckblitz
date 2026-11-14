@@ -12403,6 +12403,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Jace, Architect of Thought: the other pile goes to the bottom of your library in the order you pick',
+    board({
+      you: { bf: ['Jace, Architect of Thought'], lib: ['Grizzly Bears', 'Shock', 'Counterspell'] },
+    }),
+  ),
+  preset(
+    "Jace, Architect of Thought: one search of every library, a card from each, then cast them free",
+    board({
+      you: { bf: [{ name: 'Jace, Architect of Thought', counters: { loyalty: 8 } }], lib: ['Divination', 'Forest'] },
+      opp: { lib: ['Grizzly Bears', 'Hill Giant', 'Mountain'] },
+    }),
+  ),
+  preset(
+    'Jace, Architect of Thought: at four players, every library is searched at once',
+    board({
+      you: { bf: [{ name: 'Jace, Architect of Thought', counters: { loyalty: 8 } }] },
+      opp: [{ lib: ['Grizzly Bears'] }, { lib: ['Hill Giant'] }, { lib: ['Shock'] }],
+    }),
+  ),
+  preset(
     'Comet, Stellar Pup: at four players, any player can be chosen',
     board({
       you: { bf: ['Comet, Stellar Pup'] },
