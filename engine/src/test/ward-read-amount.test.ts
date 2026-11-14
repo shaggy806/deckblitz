@@ -2,7 +2,26 @@ import { describe, expect, it } from "vitest";
 
 import { invalidateComputedCache } from "../characteristics.js";
 import { bindWardCost, wardCostText } from "../effects.js";
-import { A, B, attack, cast, lands, life, named, pickModes, pickTargets, pt, ref, settle, spawn, table, toHand, toStep, zone } from "./harness.js";
+import {
+  A,
+  B,
+  attack,
+  cast,
+  lands,
+  life,
+  named,
+  nextTurn,
+  pickModes,
+  pickTargets,
+  pt,
+  ref,
+  settle,
+  spawn,
+  table,
+  toHand,
+  toStep,
+  zone,
+} from "./harness.js";
 
 // A ward cost whose size is read as the ward ability resolves (rules 702.21a,
 // 608.2h): `WardCost.payGeneric` and `payLifeAmount`.
@@ -113,6 +132,39 @@ describe("Raubahn, Bull of Ala Mhigo — ward, pay life equal to its power", () 
     pickTargets(a, sword, bear);
     attack(game, a, [raubahn, bear]);
     expect(game.state.objects[sword].attachedTo).toBe(bear);
+  });
+});
+
+describe("Phyrexian Fleshgorger — ward, pay life equal to its power, prototyped or not", () => {
+  it("cast for its prototype it's a 3/3: ward costs 3 life", () => {
+    const { game, b } = table();
+    lands(game, "Swamp", 3);
+    const gorger = toHand(game, "Phyrexian Fleshgorger");
+    cast(game, gorger, { prototype: true });
+    expect(pt(game, gorger)).toEqual({ power: 3, toughness: 3 });
+    nextTurn(game);
+    lands(game, "Mountain", 1, B);
+    pickModes(b, 0);
+    cast(game, toHand(game, "Shock", B), { player: B, targets: [ref(gorger)] });
+    expect(life(game, B)).toBe(17);
+    expect(game.state.objects[gorger].damageMarked).toBe(2);
+  });
+
+  it("cast for {7} it's a 7/5: ward costs 7 life, and a player with less can't pay", () => {
+    const { game, a } = table();
+    const gorger = spawn(game, "Phyrexian Fleshgorger", B);
+    lands(game, "Mountain", 1);
+    pickModes(a, 0);
+    cast(game, toHand(game, "Shock"), { targets: [ref(gorger)] });
+    expect(life(game, A)).toBe(13);
+
+    const poor = table({ life: 6 });
+    const other = spawn(poor.game, "Phyrexian Fleshgorger", B);
+    lands(poor.game, "Mountain", 1);
+    pickModes(poor.a, 0);
+    cast(poor.game, toHand(poor.game, "Shock"), { targets: [ref(other)] });
+    expect(life(poor.game, A)).toBe(6);
+    expect(poor.game.state.objects[other].damageMarked).toBe(0);
   });
 });
 

@@ -18243,6 +18243,16 @@ describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () 
     expect(raubahn.triggered[0].text).toBe("Ward—Pay life equal to Raubahn's power.");
   });
 
+  it("ward, pay life equal to this creature's power (Phyrexian Fleshgorger)", () => {
+    const gorger = face("Phyrexian Fleshgorger", "Ward—Pay life equal to this creature's power.");
+    expect(gorger.complete).toBe(true);
+    expect(gorger.triggered[0].effect).toEqual({
+      kind: "ward",
+      cost: { payLifeAmount: { powerOf: "source" }, text: "Pay life equal to this creature's power" },
+    });
+    expect(gorger.triggered[0].text).toBe("Ward—Pay life equal to this creature's power.");
+  });
+
   it("leaves an amount it can't read to a person", () => {
     expect(face("Test", "Ward {X}, where X is the number of times you've been tempted.").complete).toBe(false);
   });
