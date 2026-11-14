@@ -743,6 +743,7 @@ import _poolRoadkillRodney from "../pool/roadkill-rodney.js";
 import _poolRoaleskApexHybrid from "../pool/roalesk-apex-hybrid.js";
 import _poolRoarOfJukai from "../pool/roar-of-jukai.js";
 import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
+import _poolRoseNoble from "../pool/rose-noble.js";
 import _poolRoughshodDuo from "../pool/roughshod-duo.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
@@ -1796,6 +1797,7 @@ const shard: CardShard = {
     _poolRoaleskApexHybrid,
     _poolRoarOfJukai,
     _poolRootwaterHunter,
+    _poolRoseNoble,
     _poolRoughshodDuo,
     _poolRoverBlades,
     _poolRoyalTalonFighterJet,

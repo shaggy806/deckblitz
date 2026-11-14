@@ -7979,6 +7979,7 @@ import _poolEdricSpymasterOfTrest from "./pool/edric-spymaster-of-trest.js";
 import _poolEdwardKenway from "./pool/edward-kenway.js";
 import _poolEelHounds from "./pool/eel-hounds.js";
 import _poolEelUmbra from "./pool/eel-umbra.js";
+import _poolEelectrocute from "./pool/eelectrocute.js";
 import _poolEerieGravestone from "./pool/eerie-gravestone.js";
 import _poolEerieInterference from "./pool/eerie-interference.js";
 import _poolEerieInterlude from "./pool/eerie-interlude.js";
@@ -22105,6 +22106,7 @@ import _poolResoluteReinforcements from "./pool/resolute-reinforcements.js";
 import _poolResoluteRider from "./pool/resolute-rider.js";
 import _poolResoluteStrike from "./pool/resolute-strike.js";
 import _poolResoluteSurvivors from "./pool/resolute-survivors.js";
+import _poolResoluteVeggiesaur from "./pool/resolute-veggiesaur.js";
 import _poolResoluteWatchdog from "./pool/resolute-watchdog.js";
 import _poolResonanceTechnician from "./pool/resonance-technician.js";
 import _poolResonatingLute from "./pool/resonating-lute.js";
@@ -22751,6 +22753,7 @@ import _poolRorixBladewing from "./pool/rorix-bladewing.js";
 import _poolRoryWilliams from "./pool/rory-williams.js";
 import _poolRosaResoluteWhiteMage from "./pool/rosa-resolute-white-mage.js";
 import _poolRoseCutthroatRaider from "./pool/rose-cutthroat-raider.js";
+import _poolRoseNoble from "./pool/rose-noble.js";
 import _poolRoseRoomTreasurer from "./pool/rose-room-treasurer.js";
 import _poolRoseTyler from "./pool/rose-tyler.js";
 import _poolRosecotKnight from "./pool/rosecot-knight.js";
@@ -28205,6 +28208,7 @@ import _poolTheSixthDoctor from "./pool/the-sixth-doctor.js";
 import _poolTheSkullsporeNexus from "./pool/the-skullspore-nexus.js";
 import _poolTheSoulStone from "./pool/the-soul-stone.js";
 import _poolTheSoundOfDrums from "./pool/the-sound-of-drums.js";
+import _poolTheSpaceFamilyGoblinson from "./pool/the-space-family-goblinson.js";
 import _poolTheSpearOfBashenga from "./pool/the-spear-of-bashenga.js";
 import _poolTheSpearOfLeonidas from "./pool/the-spear-of-leonidas.js";
 import _poolTheSpeedDemon from "./pool/the-speed-demon.js";
@@ -41097,6 +41101,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEdwardKenway,
   _poolEelHounds,
   _poolEelUmbra,
+  _poolEelectrocute,
   _poolEerieGravestone,
   _poolEerieInterference,
   _poolEerieInterlude,
@@ -55223,6 +55228,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolResoluteRider,
   _poolResoluteStrike,
   _poolResoluteSurvivors,
+  _poolResoluteVeggiesaur,
   _poolResoluteWatchdog,
   _poolResonanceTechnician,
   _poolResonatingLute,
@@ -55869,6 +55875,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRoryWilliams,
   _poolRosaResoluteWhiteMage,
   _poolRoseCutthroatRaider,
+  _poolRoseNoble,
   _poolRoseRoomTreasurer,
   _poolRoseTyler,
   _poolRosecotKnight,
@@ -61323,6 +61330,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheSkullsporeNexus,
   _poolTheSoulStone,
   _poolTheSoundOfDrums,
+  _poolTheSpaceFamilyGoblinson,
   _poolTheSpearOfBashenga,
   _poolTheSpearOfLeonidas,
   _poolTheSpeedDemon,
@@ -74228,6 +74236,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/edward-kenway": _poolEdwardKenway,
   "pool/eel-hounds": _poolEelHounds,
   "pool/eel-umbra": _poolEelUmbra,
+  "pool/eelectrocute": _poolEelectrocute,
   "pool/eerie-gravestone": _poolEerieGravestone,
   "pool/eerie-interference": _poolEerieInterference,
   "pool/eerie-interlude": _poolEerieInterlude,
@@ -88354,6 +88363,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/resolute-rider": _poolResoluteRider,
   "pool/resolute-strike": _poolResoluteStrike,
   "pool/resolute-survivors": _poolResoluteSurvivors,
+  "pool/resolute-veggiesaur": _poolResoluteVeggiesaur,
   "pool/resolute-watchdog": _poolResoluteWatchdog,
   "pool/resonance-technician": _poolResonanceTechnician,
   "pool/resonating-lute": _poolResonatingLute,
@@ -89000,6 +89010,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rory-williams": _poolRoryWilliams,
   "pool/rosa-resolute-white-mage": _poolRosaResoluteWhiteMage,
   "pool/rose-cutthroat-raider": _poolRoseCutthroatRaider,
+  "pool/rose-noble": _poolRoseNoble,
   "pool/rose-room-treasurer": _poolRoseRoomTreasurer,
   "pool/rose-tyler": _poolRoseTyler,
   "pool/rosecot-knight": _poolRosecotKnight,
@@ -94454,6 +94465,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-skullspore-nexus": _poolTheSkullsporeNexus,
   "pool/the-soul-stone": _poolTheSoulStone,
   "pool/the-sound-of-drums": _poolTheSoundOfDrums,
+  "pool/the-space-family-goblinson": _poolTheSpaceFamilyGoblinson,
   "pool/the-spear-of-bashenga": _poolTheSpearOfBashenga,
   "pool/the-spear-of-leonidas": _poolTheSpearOfLeonidas,
   "pool/the-speed-demon": _poolTheSpeedDemon,

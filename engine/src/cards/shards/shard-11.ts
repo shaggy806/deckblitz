@@ -265,6 +265,7 @@ import _poolEarthenGoo from "../pool/earthen-goo.js";
 import _poolEarthlink from "../pool/earthlink.js";
 import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
 import _poolEbonyOwlNetsuke from "../pool/ebony-owl-netsuke.js";
+import _poolEelectrocute from "../pool/eelectrocute.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
 import _poolElectricRevelation from "../pool/electric-revelation.js";
 import _poolEliminate from "../pool/eliminate.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolEarthlink,
     _poolEarthquakeDragon,
     _poolEbonyOwlNetsuke,
+    _poolEelectrocute,
     _poolEidolonOfPhilosophy,
     _poolElectricRevelation,
     _poolEliminate,
