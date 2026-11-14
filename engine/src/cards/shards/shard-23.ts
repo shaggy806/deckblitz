@@ -349,6 +349,7 @@ import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
 import _poolGodsend from "../pool/godsend.js";
 import _poolGodtoucher from "../pool/godtoucher.js";
+import _poolGoliathDaydreamer from "../pool/goliath-daydreamer.js";
 import _poolGollumObsessedStalker from "../pool/gollum-obsessed-stalker.js";
 import _poolGoryosVengeance from "../pool/goryos-vengeance.js";
 import _poolGovernTheGuildless from "../pool/govern-the-guildless.js";
@@ -466,6 +467,7 @@ import _poolKithkeeper from "../pool/kithkeeper.js";
 import _poolKitsuneBonesetter from "../pool/kitsune-bonesetter.js";
 import _poolKitsuneMystic from "../pool/kitsune-mystic.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
+import _poolKnowledgePool from "../pool/knowledge-pool.js";
 import _poolKodamasMight from "../pool/kodamas-might.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
@@ -1385,6 +1387,7 @@ const shard: CardShard = {
     _poolGoblinTraprunner,
     _poolGodsend,
     _poolGodtoucher,
+    _poolGoliathDaydreamer,
     _poolGollumObsessedStalker,
     _poolGoryosVengeance,
     _poolGovernTheGuildless,
@@ -1502,6 +1505,7 @@ const shard: CardShard = {
     _poolKitsuneBonesetter,
     _poolKitsuneMystic,
     _poolKnightOfObligation,
+    _poolKnowledgePool,
     _poolKodamasMight,
     _poolKodamasReach,
     _poolKongmingSleepingDragon,

@@ -609,6 +609,7 @@ import _poolNavigatorsCompass from "../pool/navigators-compass.js";
 import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNecromancersStockpile from "../pool/necromancers-stockpile.js";
+import _poolNeeraWildMage from "../pool/neera-wild-mage.js";
 import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
 import _poolNemesisOfMortals from "../pool/nemesis-of-mortals.js";
 import _poolNetherSpirit from "../pool/nether-spirit.js";
@@ -1674,6 +1675,7 @@ const shard: CardShard = {
     _poolNecroduality,
     _poolNecrogenesis,
     _poolNecromancersStockpile,
+    _poolNeeraWildMage,
     _poolNeighborhoodGuardian,
     _poolNemesisOfMortals,
     _poolNetherSpirit,

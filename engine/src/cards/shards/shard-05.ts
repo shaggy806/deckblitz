@@ -655,6 +655,7 @@ import _poolPixieIllusionist from "../pool/pixie-illusionist.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPlanarDespair from "../pool/planar-despair.js";
 import _poolPlowUnder from "../pool/plow-under.js";
+import _poolPossibilityStorm from "../pool/possibility-storm.js";
 import _poolPracticalResearch from "../pool/practical-research.js";
 import _poolPracticedTactics from "../pool/practiced-tactics.js";
 import _poolPredatorOoze from "../pool/predator-ooze.js";
@@ -1674,6 +1675,7 @@ const shard: CardShard = {
     _poolPlaguemawBeast,
     _poolPlanarDespair,
     _poolPlowUnder,
+    _poolPossibilityStorm,
     _poolPracticalResearch,
     _poolPracticedTactics,
     _poolPredatorOoze,

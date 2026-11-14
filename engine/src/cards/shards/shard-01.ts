@@ -282,6 +282,7 @@ import _poolFootlightFiend from "../pool/footlight-fiend.js";
 import _poolForbiddenRitual from "../pool/forbidden-ritual.js";
 import _poolForceOfDespair from "../pool/force-of-despair.js";
 import _poolForerunnerOfTheCoalition from "../pool/forerunner-of-the-coalition.js";
+import _poolForgersFoundry from "../pool/forgers-foundry.js";
 import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolFork from "../pool/fork.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
@@ -1292,6 +1293,7 @@ const shard: CardShard = {
     _poolForbiddenRitual,
     _poolForceOfDespair,
     _poolForerunnerOfTheCoalition,
+    _poolForgersFoundry,
     _poolForgingTheAnchor,
     _poolFork,
     _poolForumOfAmity,

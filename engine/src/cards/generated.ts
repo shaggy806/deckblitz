@@ -9971,6 +9971,7 @@ import _poolForgeDevil from "./pool/forge-devil.js";
 import _poolForgeOfHeroes from "./pool/forge-of-heroes.js";
 import _poolForgebornOreads from "./pool/forgeborn-oreads.js";
 import _poolForgehammerCenturion from "./pool/forgehammer-centurion.js";
+import _poolForgersFoundry from "./pool/forgers-foundry.js";
 import _poolForgestokerDragon from "./pool/forgestoker-dragon.js";
 import _poolForget from "./pool/forget.js";
 import _poolForgingTheAnchor from "./pool/forging-the-anchor.js";
@@ -10370,6 +10371,7 @@ import _poolGalecasterColossus from "./pool/galecaster-colossus.js";
 import _poolGaledrifter from "./pool/galedrifter.js";
 import _poolGalepowderMage from "./pool/galepowder-mage.js";
 import _poolGaleriderSliver from "./pool/galerider-sliver.js";
+import _poolGalesRedirection from "./pool/gales-redirection.js";
 import _poolGalestrike from "./pool/galestrike.js";
 import _poolGalewindMoose from "./pool/galewind-moose.js";
 import _poolGalianBeast from "./pool/galian-beast.js";
@@ -11406,6 +11408,7 @@ import _poolGolgariRotwurm from "./pool/golgari-rotwurm.js";
 import _poolGolgariSignet from "./pool/golgari-signet.js";
 import _poolGolgariThug from "./pool/golgari-thug.js";
 import _poolGoliathBeetle from "./pool/goliath-beetle.js";
+import _poolGoliathDaydreamer from "./pool/goliath-daydreamer.js";
 import _poolGoliathMassManipulator from "./pool/goliath-mass-manipulator.js";
 import _poolGoliathPaladin from "./pool/goliath-paladin.js";
 import _poolGoliathSphinx from "./pool/goliath-sphinx.js";
@@ -14977,6 +14980,7 @@ import _poolKnotvinePaladin from "./pool/knotvine-paladin.js";
 import _poolKnowledgeAndPower from "./pool/knowledge-and-power.js";
 import _poolKnowledgeExploitation from "./pool/knowledge-exploitation.js";
 import _poolKnowledgeIsPower from "./pool/knowledge-is-power.js";
+import _poolKnowledgePool from "./pool/knowledge-pool.js";
 import _poolKnowledgeSeeker from "./pool/knowledge-seeker.js";
 import _poolKnowledgeVault from "./pool/knowledge-vault.js";
 import _poolKnuckleboneWitch from "./pool/knucklebone-witch.js";
@@ -18281,6 +18285,7 @@ import _poolNeedletoothPack from "./pool/needletooth-pack.js";
 import _poolNeedletoothRaptor from "./pool/needletooth-raptor.js";
 import _poolNeedlevergePathway from "./pool/needleverge-pathway.js";
 import _poolNeelixMoralSupport from "./pool/neelix-moral-support.js";
+import _poolNeeraWildMage from "./pool/neera-wild-mage.js";
 import _poolNefCropEntangler from "./pool/nef-crop-entangler.js";
 import _poolNefariousImp from "./pool/nefarious-imp.js";
 import _poolNefaroxOverlordOfGrixis from "./pool/nefarox-overlord-of-grixis.js";
@@ -20308,6 +20313,7 @@ import _poolPossessedGoat from "./pool/possessed-goat.js";
 import _poolPossessedNomad from "./pool/possessed-nomad.js";
 import _poolPossessedSkaab from "./pool/possessed-skaab.js";
 import _poolPossessionEngine from "./pool/possession-engine.js";
+import _poolPossibilityStorm from "./pool/possibility-storm.js";
 import _poolPossibilityTechnician from "./pool/possibility-technician.js";
 import _poolPostmortemLunge from "./pool/postmortem-lunge.js";
 import _poolPostmortemProfessor from "./pool/postmortem-professor.js";
@@ -42774,6 +42780,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForgeOfHeroes,
   _poolForgebornOreads,
   _poolForgehammerCenturion,
+  _poolForgersFoundry,
   _poolForgestokerDragon,
   _poolForget,
   _poolForgingTheAnchor,
@@ -43173,6 +43180,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGaledrifter,
   _poolGalepowderMage,
   _poolGaleriderSliver,
+  _poolGalesRedirection,
   _poolGalestrike,
   _poolGalewindMoose,
   _poolGalianBeast,
@@ -44209,6 +44217,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGolgariSignet,
   _poolGolgariThug,
   _poolGoliathBeetle,
+  _poolGoliathDaydreamer,
   _poolGoliathMassManipulator,
   _poolGoliathPaladin,
   _poolGoliathSphinx,
@@ -47780,6 +47789,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKnowledgeAndPower,
   _poolKnowledgeExploitation,
   _poolKnowledgeIsPower,
+  _poolKnowledgePool,
   _poolKnowledgeSeeker,
   _poolKnowledgeVault,
   _poolKnuckleboneWitch,
@@ -51084,6 +51094,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNeedletoothRaptor,
   _poolNeedlevergePathway,
   _poolNeelixMoralSupport,
+  _poolNeeraWildMage,
   _poolNefCropEntangler,
   _poolNefariousImp,
   _poolNefaroxOverlordOfGrixis,
@@ -53111,6 +53122,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPossessedNomad,
   _poolPossessedSkaab,
   _poolPossessionEngine,
+  _poolPossibilityStorm,
   _poolPossibilityTechnician,
   _poolPostmortemLunge,
   _poolPostmortemProfessor,
@@ -75590,6 +75602,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/forge-of-heroes": _poolForgeOfHeroes,
   "pool/forgeborn-oreads": _poolForgebornOreads,
   "pool/forgehammer-centurion": _poolForgehammerCenturion,
+  "pool/forgers-foundry": _poolForgersFoundry,
   "pool/forgestoker-dragon": _poolForgestokerDragon,
   "pool/forget": _poolForget,
   "pool/forging-the-anchor": _poolForgingTheAnchor,
@@ -75989,6 +76002,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/galedrifter": _poolGaledrifter,
   "pool/galepowder-mage": _poolGalepowderMage,
   "pool/galerider-sliver": _poolGaleriderSliver,
+  "pool/gales-redirection": _poolGalesRedirection,
   "pool/galestrike": _poolGalestrike,
   "pool/galewind-moose": _poolGalewindMoose,
   "pool/galian-beast": _poolGalianBeast,
@@ -77025,6 +77039,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/golgari-signet": _poolGolgariSignet,
   "pool/golgari-thug": _poolGolgariThug,
   "pool/goliath-beetle": _poolGoliathBeetle,
+  "pool/goliath-daydreamer": _poolGoliathDaydreamer,
   "pool/goliath-mass-manipulator": _poolGoliathMassManipulator,
   "pool/goliath-paladin": _poolGoliathPaladin,
   "pool/goliath-sphinx": _poolGoliathSphinx,
@@ -80596,6 +80611,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/knowledge-and-power": _poolKnowledgeAndPower,
   "pool/knowledge-exploitation": _poolKnowledgeExploitation,
   "pool/knowledge-is-power": _poolKnowledgeIsPower,
+  "pool/knowledge-pool": _poolKnowledgePool,
   "pool/knowledge-seeker": _poolKnowledgeSeeker,
   "pool/knowledge-vault": _poolKnowledgeVault,
   "pool/knucklebone-witch": _poolKnuckleboneWitch,
@@ -83900,6 +83916,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/needletooth-raptor": _poolNeedletoothRaptor,
   "pool/needleverge-pathway": _poolNeedlevergePathway,
   "pool/neelix-moral-support": _poolNeelixMoralSupport,
+  "pool/neera-wild-mage": _poolNeeraWildMage,
   "pool/nef-crop-entangler": _poolNefCropEntangler,
   "pool/nefarious-imp": _poolNefariousImp,
   "pool/nefarox-overlord-of-grixis": _poolNefaroxOverlordOfGrixis,
@@ -85927,6 +85944,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/possessed-nomad": _poolPossessedNomad,
   "pool/possessed-skaab": _poolPossessedSkaab,
   "pool/possession-engine": _poolPossessionEngine,
+  "pool/possibility-storm": _poolPossibilityStorm,
   "pool/possibility-technician": _poolPossibilityTechnician,
   "pool/postmortem-lunge": _poolPostmortemLunge,
   "pool/postmortem-professor": _poolPostmortemProfessor,

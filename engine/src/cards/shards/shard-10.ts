@@ -325,6 +325,7 @@ import _poolFurious from "../pool/furious.js";
 import _poolGaeasMight from "../pool/gaeas-might.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGaladhrimAmbush from "../pool/galadhrim-ambush.js";
+import _poolGalesRedirection from "../pool/gales-redirection.js";
 import _poolGarrukRelentless from "../pool/garruk-relentless.js";
 import _poolGarrulousSycophant from "../pool/garrulous-sycophant.js";
 import _poolGatstafRavagers from "../pool/gatstaf-ravagers.js";
@@ -1347,6 +1348,7 @@ const shard: CardShard = {
     _poolGaeasMight,
     _poolGaeasSkyfolk,
     _poolGaladhrimAmbush,
+    _poolGalesRedirection,
     _poolGarrukRelentless,
     _poolGarrulousSycophant,
     _poolGatstafRavagers,
