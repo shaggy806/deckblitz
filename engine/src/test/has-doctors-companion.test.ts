@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { B, cast, hand, lands, spawn, table, toHand, toStep } from "./harness.js";
+import { A, B, cast, enter, hand, lands, settle, spawn, table, toHand, toLibrary, toStep, zone } from "./harness.js";
 
 // Doctor's companion as a filter (rule 702.124m): `hasKeyword:
 // "doctors-companion"`, a `CARD_KEYWORD_READS` row off the definition's
@@ -19,6 +19,33 @@ describe("Rose Noble — a Doctor spell or a creature spell with doctor's compan
     expect(hand(game).length).toBe(before + 2);
     cast(game, toHand(game, "Grizzly Bears"));
     expect(hand(game).length).toBe(before + 2);
+  });
+
+  it("An Unearthly Child reveals until a card with doctor's companion, skipping other creatures", () => {
+    const { game } = table();
+    const bears = toLibrary(game, "Grizzly Bears");
+    const barbara = toLibrary(game, "Barbara Wright");
+    const island = toLibrary(game, "Island");
+    const ox = toLibrary(game, "Runeclaw Bear");
+    enter(game, "An Unearthly Child");
+    settle(game);
+    expect(zone(game, barbara)).toBe("hand");
+    expect(zone(game, bears)).toBe("library");
+    // The rest (Runeclaw Bear and the Island) go to the bottom; index 0 is the top.
+    const library = game.state.zones.perPlayer[A].library;
+    expect(library[0]).toBe(bears);
+    expect(library.slice(-2)).toEqual(expect.arrayContaining([island, ox]));
+  });
+
+  it("An Unearthly Child takes a Doctor or a Vehicle too", () => {
+    for (const name of ["The Eleventh Doctor", "Smuggler's Copter"]) {
+      const { game } = table();
+      const found = toLibrary(game, name);
+      toLibrary(game, "Grizzly Bears");
+      enter(game, "An Unearthly Child");
+      settle(game);
+      expect(zone(game, found)).toBe("hand");
+    }
   });
 
   it("an opponent's Doctor draws nothing", () => {
