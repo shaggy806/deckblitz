@@ -258,7 +258,20 @@ function StepView({
       const r = el?.getBoundingClientRect()
       const tile = el === null ? null : turnedTile(el)
       // The hole spans the card as drawn, grown on hover, so it can be clicked.
-      const shown = r === undefined ? undefined : tile === null ? rectOf(r) : unionRect(rectOf(r), rectOf(tile.getBoundingClientRect()))
+      // The whole hand's hole spans every tile as drawn too: the fan turns
+      // the outer cards past the row's own box (the user, 2026-11-14: the
+      // ring cut the end cards' corners off).
+      const shown =
+        r === undefined
+          ? undefined
+          : tile !== null
+            ? unionRect(rectOf(r), rectOf(tile.getBoundingClientRect()))
+            : el !== null && el.matches('.hand-cards')
+              ? [...el.querySelectorAll('.hand-card > .card-tile')].reduce(
+                  (acc, t) => unionRect(acc, rectOf(t.getBoundingClientRect())),
+                  rectOf(r),
+                )
+              : rectOf(r)
       const hole = shown !== undefined && shown.width > 0 && shown.height > 0 ? holeRect(shown, view) : null
       anchorEl.current = hole !== null ? el : null
 

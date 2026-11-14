@@ -4102,6 +4102,13 @@
   rotate: 0deg;
   scale: 1.65;
 }
+/* The hand card's own hover (above) is its lift: a clickable tile's 3px
+   hover lift on top of it (`.card-tile.clickable:hover`) came after the
+   grow, so the card rose ~5px more once the pointer reached the tile itself
+   than over the hit box around it (the user, 2026-11-14). */
+.hand-card .card-tile.clickable:hover {
+  transform: none;
+}
 /* The art credit (ArtCredit's one line) only on the grown card: at the fan's
    own size it would be a few pixels high, noise over the art. */
 .hand-cards .hand-card:not(:hover, .hover-carry, :focus-within) .ct-credit {
