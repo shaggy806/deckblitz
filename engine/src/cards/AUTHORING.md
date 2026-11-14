@@ -3065,7 +3065,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   nothing bounding it is `chooseNumberOnEnter: true` (Sanctum Prelate: a
   `choose-number` from 0, no top — rule 107.1c — kept as `chosenOnEnter` and
   read by `{ chosenNumber: true }`); a bounded one ("between 1 and 10",
-  Talion) is a `chooseOnEnter` menu of the numbers' words. A colour or number
+  Talion) is a `chooseOnEnter` menu of the numbers' words; "choose 2, 3, or 4
+  **at random**" adds `chooseOnEnterAtRandom: true` (Haktos the Unscarred:
+  drawn from the game's randomness before it enters, nobody asked, announced
+  as a `chosen-at-random` of kind `"option"`). A colour or number
   that does the same thing per value with no state is still fine as a
   resolution-time `modal` (Addle, By Invitation Only). The scaffolder reads
   Persecute's, Sudden Demise's, Blood Oath's and Ichormoon Gauntlet's lines.
@@ -6203,7 +6206,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   chosen color**", the colour the source named as it entered (`chooseOnEnter`
   over the five — Flickering Ward), `chosenCardType` "from the chosen card
   type" (`chooseOnEnter: [...CARD_TYPE_CHOICES]` — Serra's Emissary);
-  `colorsAmong` is "each color among permanents you control" (a filter, Pledge of Loyalty); `doesntRemoveAuras` is "This effect doesn't remove Auras", every one of them (Spectra Ward); `doesntRemoveAttached` is "This effect doesn't remove Auras and Equipment you control that are already attached to it" (rule 702.16p — Benevolent Blessing: its controller's attachments on the creature no later than the Aura itself, by timestamp, rule 613.7e; nothing of the quality can become attached afterwards); `doesntRemoveSource` is "This effect
+  `colorsAmong` is "each color among permanents you control" (a filter, Pledge of Loyalty); `manaValuesAmong` is "each mana value among artifacts you control" (a filter, from the static's controller's side, as they are now — a non-copy token and an {X} on the battlefield are 0 — matched against the source's own mana value: Rebbec, Architect of Ascension); `manaValuesExceptChosen: true` is "each mana value other than the chosen number" (the source's `chooseOnEnter` answer read as a number; none while none was chosen — Haktos the Unscarred); a fixed or parity one is a `filter` (`{ manaValue: { op: "gte", n: 3 } }`, Mistmeadow Skulk; `{ manaValueParity: "chosen" }`, Lavabrink Venturer); `doesntRemoveAuras` is "This effect doesn't remove Auras", every one of them (Spectra Ward); `doesntRemoveAttached` is "This effect doesn't remove Auras and Equipment you control that are already attached to it" (rule 702.16p — Benevolent Blessing: its controller's attachments on the creature no later than the Aura itself, by timestamp, rule 613.7e; nothing of the quality can become attached afterwards); `doesntRemoveSource` is "This effect
   doesn't remove this Aura" (rule 702.16n): that instance doesn't make its own
   Aura fall off, though it stops everything else and another instance of the
   same colour or card type removes the Aura as normal (Tattoo Ward). Granting

@@ -15323,6 +15323,7 @@ export class Game {
     | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string; readonly look?: true }
     | { readonly kind: "number" }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
+    | { readonly kind: "at-random"; readonly options: readonly string[] }
     | { readonly kind: "instead"; readonly spec: EnterInstead }
     | { readonly kind: "as-enters"; readonly spec: AsEntersAction }
     | { readonly kind: "enchant"; readonly as: CardDefinition }
@@ -15401,6 +15402,10 @@ export class Game {
       const escapeChoice = becoming.escape?.counterChoice;
       if (escapeChoice !== undefined && object.castVia === "escape") {
         return { kind: "choose", options: escapeChoice, prompt: "It escapes with your choice of counter" };
+      }
+      // "Choose 2, 3, or 4 at random" (Haktos the Unscarred): nobody asked.
+      if (becoming.chooseOnEnter !== null && becoming.chooseOnEnterAtRandom === true && becoming.chooseOnEnter.length > 0) {
+        return { kind: "at-random", options: becoming.chooseOnEnter };
       }
       if (becoming.chooseOnEnter !== null) {
         const count = becoming.chooseOnEnterCount ?? 1;
@@ -16072,6 +16077,14 @@ export class Game {
       }
       if (next.kind === "as-enters") {
         if (this.askAsEnters(id, chooser, next.spec)) return true;
+        continue;
+      }
+      if (next.kind === "at-random") {
+        // "As this creature enters, choose 2, 3, or 4 at random" (Haktos the
+        // Unscarred): drawn, not asked, before it enters (the ruling).
+        const options = next.options;
+        const index = this.pickAtRandom(chooser, id, options.length, (i) => ({ kind: "option", text: options[i] }));
+        object.enterChoice = { ...object.enterChoice, chosen: options[index] };
         continue;
       }
       if (next.kind === "flip-form") {

@@ -322,6 +322,18 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Protection from mana values, and a choice as it enters made at random — built 2026-11-14
+
+The keys `static:protection-from-mana-values` and `keyword:protection-from-mana-value`: the
+static's `protection` reads `manaValuesAmong` (Rebbec, Architect of Ascension's "each mana value
+among artifacts you control", the static's controller's as they are now) and
+`manaValuesExceptChosen` (Haktos the Unscarred's "other than the chosen number"), turned into a
+filter on the source's mana value bound to the static's source (`staticProtection`, rule
+702.16a); Lavabrink Venturer's "of the chosen quality" needed only the existing
+`manaValueParity: "chosen"` filter. Haktos's "choose 2, 3, or 4 at random" as it enters is
+`chooseOnEnterAtRandom` (drawn through `pickAtRandom`, a `chosen-at-random` of kind
+`"option"`). `test/protection-from-mana-values.test.ts`.
+
 ### "Its controller exiles cards from their hand equal to the difference" — built 2026-11-14
 
 The key `effect:exile-cards-from-hand-chosen` needed no engine code: a `for-each-player` of `{

@@ -54,7 +54,10 @@ export function sameVoteChoice(a: VoteChoice, b: VoteChoice): boolean {
 export type RandomPick =
   | { readonly kind: "player"; readonly player: PlayerId }
   | { readonly kind: "card"; readonly object: ObjectId }
-  | { readonly kind: "mode"; readonly text: string };
+  | { readonly kind: "mode"; readonly text: string }
+  /** One of a menu chosen as a permanent enters (Haktos the Unscarred's "choose
+   * 2, 3, or 4 at random"). */
+  | { readonly kind: "option"; readonly text: string };
 
 interface Base {
   /** Monotonic sequence number, assigned when the event is appended. */

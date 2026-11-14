@@ -1808,6 +1808,8 @@ function staticProtection(
     p.doesntRemoveAuras !== true &&
     p.doesntRemoveAttached !== true &&
     p.colorsAmong === undefined &&
+    p.manaValuesAmong === undefined &&
+    p.manaValuesExceptChosen !== true &&
     p.filter === undefined &&
     p.fromPlayers === undefined &&
     p.exiledCardTypes !== true &&
@@ -1826,6 +1828,28 @@ function staticProtection(
   if (p.colorsAmong !== undefined) {
     colors.push(...colorSetAmongPermanents(state, registry, source.controller, p.colorsAmong));
   }
+  // Mana values (rule 702.16a: a quality no colour or card type names), a
+  // filter on the source read with this static's source bound.
+  const manaValueFilters: CardFilter[] = [];
+  if (p.manaValuesAmong !== undefined) {
+    const values = new Set<number>();
+    const among = p.manaValuesAmong;
+    for (const { id } of weightedMatches(
+      state,
+      state.zones.shared.battlefield,
+      (id) => matchesFilter(state, registry, id, among, { you: source.controller }),
+      [],
+    )) {
+      values.add(manaValueOfObject(registry, state.objects[id]));
+    }
+    for (const n of [...values].sort((a, b) => a - b)) manaValueFilters.push({ manaValue: { op: "eq", n } });
+  }
+  if (p.manaValuesExceptChosen === true) {
+    const chosen = source.chosenOnEnter == null ? NaN : Number(source.chosenOnEnter);
+    if (Number.isInteger(chosen)) manaValueFilters.push({ manaValue: { op: "ne", n: chosen } });
+  }
+  const filters = [...(p.filter !== undefined ? [p.filter] : []), ...manaValueFilters];
+  const filter = filters.length === 0 ? undefined : filters.length === 1 ? filters[0] : { anyOf: filters };
   const exiledTypes =
     p.exiledCardTypes === true
       ? (liveReferenceObjects(state, registry, "exiled-with-source", { you: source.controller, source: source.id }) ?? []).flatMap(
@@ -1835,7 +1859,7 @@ function staticProtection(
   return {
     colors,
     ...(types !== undefined || exiledTypes.length > 0 ? { types: [...(types ?? []), ...exiledTypes] } : {}),
-    ...(p.filter !== undefined ? { filter: p.filter, filterSource: source.id } : {}),
+    ...(filter !== undefined ? { filter, filterSource: source.id } : {}),
     ...(p.fromPlayers !== undefined ? { players: protectionPlayers(state, p.fromPlayers, source) } : {}),
     ...(p.doesntRemoveSource === true ? { sparesAura: source.id } : {}),
     ...(p.doesntRemoveAuras === true ? { sparesAura: "all" as const } : {}),

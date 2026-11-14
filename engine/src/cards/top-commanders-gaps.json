@@ -10,6 +10,8 @@
     "filter:discarded-this-turn",
     "effect:copy-spell-for-other-player",
     "trigger:activates-ability-source-controlled-by-activator",
+    "static:protection-from-mana-values",
+    "keyword:protection-from-mana-value",
     "effect:exile-cards-from-hand-chosen",
     "trigger:time-counter-removed-in-exile-by-you-per-counter",
     "decision:ward-pay-life-dynamic",

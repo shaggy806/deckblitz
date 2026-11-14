@@ -3812,6 +3812,18 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * Loyalty): the colours of the permanents matching this filter, from the
      * static's controller's side, as they are now. */
     readonly colorsAmong?: CardFilter;
+    /** "Protection from **each mana value among artifacts you control**"
+     * (Rebbec, Architect of Ascension): the mana values of the permanents
+     * matching this filter, from the static's controller's side, as they are
+     * now — a token that isn't a copy is 0, and so is an {X} on the
+     * battlefield (rule 202.3e) — matched against a source's own mana value
+     * (a spell's X counted, the rulings). Nothing with none. */
+    readonly manaValuesAmong?: CardFilter;
+    /** "Protection from **each mana value other than the chosen number**"
+     * (Haktos the Unscarred): every mana value but the number chosen for the
+     * static's source as it entered (`chooseOnEnter`). Nothing while none was
+     * chosen (the ruling). */
+    readonly manaValuesExceptChosen?: true;
   };
   /** Hexproof from a quality (rule 702.11d-e) — the affected permanent can't
    * be the target of a matching spell, or an ability from a matching source,
@@ -5434,6 +5446,14 @@ export interface CardDefinition {
    */
   readonly chooseOnEnterCount?: number;
   /**
+   * "As this creature enters, choose 2, 3, or 4 **at random**" (Haktos the
+   * Unscarred), with `chooseOnEnter` over the options: nobody is asked — one
+   * is drawn from the game's seeded randomness, each equally likely, and
+   * announced as a `chosen-at-random` event — before it enters, so it is never
+   * on the battlefield without the choice (the ruling). Absent for a choice.
+   */
+  readonly chooseOnEnterAtRandom?: true;
+  /**
    * "This enters **under the control of an opponent of your choice**" (Xantcha,
    * Sleeper Agent; Captive Audience), with `choosePlayerOnEnter: "opponent"`: a
    * replacement (rule 614.1d), so no player gets to act while it's yours. Asked
@@ -6225,6 +6245,7 @@ const PRINTED_ABILITY: {
   secretChoiceOnEnter: false,
   chooseTwoPlayersOnEnter: false,
   chooseOnEnterCount: false,
+  chooseOnEnterAtRandom: false,
   entersUnderChosenPlayer: false,
   choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
   loyalty: false,
@@ -6548,6 +6569,8 @@ interface CardDraft {
   chooseOnEnterLook?: "opponent-hand";
   /** See {@link CardDefinition.chooseNumberOnEnter}. */
   chooseNumberOnEnter?: true;
+  /** See {@link CardDefinition.chooseOnEnterAtRandom}. */
+  chooseOnEnterAtRandom?: true;
   choosePlayerOnEnter?: "player" | "opponent";
   secretChoiceOnEnter?: true;
   chooseTwoPlayersOnEnter?: true;
@@ -6957,6 +6980,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.minX !== undefined ? { minX: draft.minX } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     ...(draft.chooseNumberOnEnter === true ? { chooseNumberOnEnter: true as const } : {}),
+    ...(draft.chooseOnEnterAtRandom === true ? { chooseOnEnterAtRandom: true as const } : {}),
     ...(draft.chooseTwoPlayersOnEnter === true ? { chooseTwoPlayersOnEnter: true as const } : {}),
     ...(draft.chooseOnEnterCount !== undefined && draft.chooseOnEnterCount > 1 ? { chooseOnEnterCount: draft.chooseOnEnterCount } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
