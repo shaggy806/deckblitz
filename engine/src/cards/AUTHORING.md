@@ -2921,7 +2921,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   kind: "voted-number", who: "you" | "that-player", is: "highest" | "lowest" }`.
   `for` may also be `{ creatureType: true }` (Harsh Mercy), and a
   permanent's filter `own: true` reads it from the chooser's side (Agitator
-  Ant's "a creature **they** control"). The steps after it read the choices
+  Ant's "a creature **they** control"; with `ownedBy: "you"`, "another
+  creature **they own**" whoever controls it — This Is How It Ends, its
+  `who: "that-player"` inside a villainous option). The steps after it read the choices
   as they read votes: `for-each-voted { which: "voted" }` for each permanent
   chosen (Eye of Doom's doom counters, Sadistic Shell Game's destroy —
   `simultaneous: true`), `for-each-vote { option }` for each player who
