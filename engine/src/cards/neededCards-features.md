@@ -322,6 +322,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "When each opponent casts their first spell of the game" — built 2026-11-14
+
+The key `trigger:opponent-first-spell-of-game`: an opening-hand reveal's `at` may be `{ whenever:
+TriggerSpec }`, a delayed watch for the rest of the game (rule 103.6b, `until: "permanent"`), and
+the timing wrapper takes `nthThisGame` (a `cast-spell` without a filter: the caster's casts this
+game, off `PlayerState.spellNamesCastThisGame`). Chancellor of the Annex (rank 10133).
+`test/opening-reveal-first-spell.test.ts`.
+
 ### Protection from mana values, and a choice as it enters made at random — built 2026-11-14
 
 The keys `static:protection-from-mana-values` and `keyword:protection-from-mana-value`: the

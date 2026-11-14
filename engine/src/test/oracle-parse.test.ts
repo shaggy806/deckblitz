@@ -2110,7 +2110,8 @@ describe("costs and triggers", () => {
       "You may reveal this card from your opening hand. If you do, at the beginning of your first main phase of the game, add {G}.",
     );
     expect(tangle.openingHandReveal).toMatchObject({ at: { step: "main", whose: "you" } });
-    // A moment no delayed timing covers stays a person's (Chancellor of the Annex).
+    // A watch rather than a step stays a person's (Chancellor of the Annex, the
+    // only one printed: a `{ whenever }` with `nthThisGame`).
     const annex = reveal(
       "You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.",
     );

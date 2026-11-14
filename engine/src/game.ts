@@ -7561,6 +7561,12 @@ export class Game {
       for (const id of chosen) {
         const spec = this.registry.get(this.state.objects[id].cardName).openingHandReveal;
         if (spec === null) continue;
+        // "When each opponent casts their first spell of the game" (Chancellor
+        // of the Annex): a watch for the rest of the game.
+        if ("whenever" in spec.at) {
+          this.createDelayedTrigger(id, player, { whenever: spec.at.whenever, until: "permanent" }, spec.effect, spec.text, []);
+          continue;
+        }
         const at = readDelayedAt(spec.at, player);
         if (at !== undefined) this.createDelayedTrigger(id, player, at, spec.effect, spec.text, []);
       }
@@ -34672,6 +34678,13 @@ export class Game {
    * count for never matches with it (test/trigger-timing.test.ts keeps every
    * pool card off those). */
   private timingOk(spec: TriggerSpec, event: GameEvent, self: GameObject): boolean {
+    // "Their first spell of the game" (Chancellor of the Annex): the caster's
+    // casts this game, this one included. A copy is never cast (rule 707.10).
+    if (spec.nthThisGame !== undefined) {
+      if (spec.on !== "cast-spell" || spec.filter !== undefined || event.type !== "spell-cast") return false;
+      const casts = Object.values(this.state.players[event.player]?.spellNamesCastThisGame ?? {}).reduce((n, c) => n + c, 0);
+      if (casts !== spec.nthThisGame) return false;
+    }
     const nth = spec.nthEachTurn ?? (spec.firstTimeEachTurn === true ? 1 : undefined);
     if (nth === undefined) return true;
     // "…or copies a spell": the wrapper narrows the casts alone (a copy is

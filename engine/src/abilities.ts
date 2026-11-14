@@ -2767,6 +2767,15 @@ export interface TriggerTiming {
   readonly firstTimeEachTurn?: boolean;
   readonly nthEachTurn?: number;
   readonly orLater?: true;
+  /**
+   * The Nth time **this game**, not this turn: "when each opponent casts
+   * **their first spell of the game**" (Chancellor of the Annex's reveal) is a
+   * `cast-spell` of `nthThisGame: 1` — the caster's first cast, counted off
+   * `PlayerState.spellNamesCastThisGame` (a copy is never cast, rule 707.10).
+   * Only a `cast-spell` without a `filter` counts; anything else never
+   * matches with it (`timingOk`).
+   */
+  readonly nthThisGame?: number;
 }
 
 /** A triggered ability's trigger: its event ({@link TriggerKind}) and its

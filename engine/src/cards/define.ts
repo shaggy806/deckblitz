@@ -17,7 +17,7 @@ import type { DieTest } from "../random-results.js";
 import type { TriggerEventName } from "../trigger-events.js";
 import type { ColorPatch, KeywordAbilityName, StaticPt, TypePatch } from "../characteristics-patch.js";
 import type { SelfPlay, StaticPlay } from "../play-permission.js";
-import type { AbilityCost, AbilityKindName, ActivatedAbility, TriggeredAbility } from "../abilities.js";
+import type { AbilityCost, AbilityKindName, ActivatedAbility, TriggeredAbility, TriggerSpec } from "../abilities.js";
 import type {
   BeholdSpec,
   CopyExceptions,
@@ -6146,7 +6146,13 @@ export interface BeginsOnBattlefieldWith {
 
 /** See {@link CardDefinition.openingHandReveal}. */
 export interface OpeningHandReveal {
-  readonly at: DelayedAt;
+  /** The first such step of the game, or `{ whenever }`: "**when each
+   * opponent casts their first spell of the game**, counter that spell unless
+   * that player pays {1}" (Chancellor of the Annex) is a watch for the rest of
+   * the game (`until: "permanent"`), firing each time the trigger does — a
+   * `cast-spell` of `who: "opponent"`, `nthThisGame: 1`, once per opponent
+   * (the rulings). */
+  readonly at: DelayedAt | { readonly whenever: TriggerSpec };
   readonly effect: EffectSpec;
   /** The delayed ability's text, for the log and the stack. */
   readonly text: string;
