@@ -1,0 +1,653 @@
+{
+ "batch": "B327",
+ "status": "done",
+ "ranks": "EDHREC ranks 15527-18514 (60 cards), plus the 22 Commander-legal Attractions and the earlier cards waiting on them. Features built: mechanic:attractions (a major the user approved 2026-11-14: the Attraction deck, the junkyard, open, roll to visit, Visit and claim the prize; the client and server are phase 2), effect:store-die-results (Centaur of Attention), trigger:rolls-at-most (DieTest.atMost: Atomwheel Acrobats, Complaints Clerk).",
+ "authored": [
+  {
+   "name": "\"Lifetime\" Pass Holder",
+   "files": [
+    "engine/src/cards/pool/lifetime-pass-holder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abby, Merciless Soldier",
+   "files": [
+    "engine/src/cards/pool/abby-merciless-soldier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aggressive Instinct",
+   "files": [
+    "engine/src/cards/pool/aggressive-instinct.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aisha of Sparks and Smoke",
+   "files": [
+    "engine/src/cards/pool/aisha-of-sparks-and-smoke.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alchemax Slayer-Bots",
+   "files": [
+    "engine/src/cards/pool/alchemax-slayer-bots.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Appa, Aang's Companion",
+   "files": [
+    "engine/src/cards/pool/appa-aangs-companion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Atomwheel Acrobats",
+   "files": [
+    "engine/src/cards/pool/atomwheel-acrobats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baboon Spirit",
+   "files": [
+    "engine/src/cards/pool/baboon-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Balloon Stand",
+   "files": [
+    "engine/src/cards/pool/balloon-stand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Hole",
+   "files": [
+    "engine/src/cards/pool/black-hole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bounce Chamber",
+   "files": [
+    "engine/src/cards/pool/bounce-chamber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bumper Cars",
+   "files": [
+    "engine/src/cards/pool/bumper-cars.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Rex Nebula",
+   "files": [
+    "engine/src/cards/pool/captain-rex-nebula.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Centaur of Attention",
+   "files": [
+    "engine/src/cards/pool/centaur-of-attention.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra's Outrage",
+   "files": [
+    "engine/src/cards/pool/chandras-outrage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chief of the Wilds",
+   "files": [
+    "engine/src/cards/pool/chief-of-the-wilds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clown Extruder",
+   "files": [
+    "engine/src/cards/pool/clown-extruder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coming Attraction",
+   "files": [
+    "engine/src/cards/pool/coming-attraction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Complaints Clerk",
+   "files": [
+    "engine/src/cards/pool/complaints-clerk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Concession Stand",
+   "files": [
+    "engine/src/cards/pool/concession-stand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creeping Crystal Coating",
+   "files": [
+    "engine/src/cards/pool/creeping-crystal-coating.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deadbeat Attendant",
+   "files": [
+    "engine/src/cards/pool/deadbeat-attendant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Discourtesy Clerk",
+   "files": [
+    "engine/src/cards/pool/discourtesy-clerk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doc Ock, Evil Inventor",
+   "files": [
+    "engine/src/cards/pool/doc-ock-evil-inventor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Draconian Gate-Bot",
+   "files": [
+    "engine/src/cards/pool/draconian-gate-bot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Electric Seaweed",
+   "files": [
+    "engine/src/cards/pool/electric-seaweed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ellie, Vengeful Hunter",
+   "files": [
+    "engine/src/cards/pool/ellie-vengeful-hunter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fire Nation Archers",
+   "files": [
+    "engine/src/cards/pool/fire-nation-archers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fire Nation Salvagers",
+   "files": [
+    "engine/src/cards/pool/fire-nation-salvagers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foam Weapons Kiosk",
+   "files": [
+    "engine/src/cards/pool/foam-weapons-kiosk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fortune Teller",
+   "files": [
+    "engine/src/cards/pool/fortune-teller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Great Goblin, Foul-Hearted",
+   "files": [
+    "engine/src/cards/pool/great-goblin-foul-hearted.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hall of Mirrors",
+   "files": [
+    "engine/src/cards/pool/hall-of-mirrors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hargilde, Kindly Runechanter",
+   "files": [
+    "engine/src/cards/pool/hargilde-kindly-runechanter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Haunted House",
+   "files": [
+    "engine/src/cards/pool/haunted-house.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Information Booth",
+   "files": [
+    "engine/src/cards/pool/information-booth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iroh, Firebending Instructor",
+   "files": [
+    "engine/src/cards/pool/iroh-firebending-instructor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jurin, Leading the Charge",
+   "files": [
+    "engine/src/cards/pool/jurin-leading-the-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kiddie Coaster",
+   "files": [
+    "engine/src/cards/pool/kiddie-coaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kyoshi Warrior Exemplars",
+   "files": [
+    "engine/src/cards/pool/kyoshi-warrior-exemplars.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Line Cutter",
+   "files": [
+    "engine/src/cards/pool/line-cutter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "MJ, Rising Star",
+   "files": [
+    "engine/src/cards/pool/mj-rising-star.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Merry-Go-Round",
+   "files": [
+    "engine/src/cards/pool/merry-go-round.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Momo's Heist",
+   "files": [
+    "engine/src/cards/pool/momos-heist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mu Yanling",
+   "files": [
+    "engine/src/cards/pool/mu-yanling.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Othelm, Sigardian Outcast",
+   "files": [
+    "engine/src/cards/pool/othelm-sigardian-outcast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Petting Zookeeper",
+   "files": [
+    "engine/src/cards/pool/petting-zookeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pick-a-Beeble",
+   "files": [
+    "engine/src/cards/pool/pick-a-beeble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purple Pentapus",
+   "files": [
+    "engine/src/cards/pool/purple-pentapus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quick Fixer",
+   "files": [
+    "engine/src/cards/pool/quick-fixer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rad Rascal",
+   "files": [
+    "engine/src/cards/pool/rad-rascal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roku's Mastery",
+   "files": [
+    "engine/src/cards/pool/rokus-mastery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Roller Coaster",
+   "files": [
+    "engine/src/cards/pool/roller-coaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sai of the Shinobi",
+   "files": [
+    "engine/src/cards/pool/sai-of-the-shinobi.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scarring Memories",
+   "files": [
+    "engine/src/cards/pool/scarring-memories.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seasoned Buttoneer",
+   "files": [
+    "engine/src/cards/pool/seasoned-buttoneer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorcerer's Strongbox",
+   "files": [
+    "engine/src/cards/pool/sorcerers-strongbox.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Soul Swindler",
+   "files": [
+    "engine/src/cards/pool/soul-swindler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinnerette, Arachnobat",
+   "files": [
+    "engine/src/cards/pool/spinnerette-arachnobat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinny Ride",
+   "files": [
+    "engine/src/cards/pool/spinny-ride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splinter, Aging Champion",
+   "files": [
+    "engine/src/cards/pool/splinter-aging-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Squirrel Squatters",
+   "files": [
+    "engine/src/cards/pool/squirrel-squatters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Step Right Up",
+   "files": [
+    "engine/src/cards/pool/step-right-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storybook Ride",
+   "files": [
+    "engine/src/cards/pool/storybook-ride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suki, Kyoshi Captain",
+   "files": [
+    "engine/src/cards/pool/suki-kyoshi-captain.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Swampbenders",
+   "files": [
+    "engine/src/cards/pool/swampbenders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Art of Tea",
+   "files": [
+    "engine/src/cards/pool/the-art-of-tea.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Fifteenth Doctor",
+   "files": [
+    "engine/src/cards/pool/the-fifteenth-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Most Dangerous Gamer",
+   "files": [
+    "engine/src/cards/pool/the-most-dangerous-gamer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trash Bin",
+   "files": [
+    "engine/src/cards/pool/trash-bin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twisted Spider-Clone",
+   "files": [
+    "engine/src/cards/pool/twisted-spider-clone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ultra Magnus, Tactician // Ultra Magnus, Armored Carrier",
+   "files": [
+    "engine/src/cards/pool/ultra-magnus-armored-carrier.ts",
+    "engine/src/cards/pool/ultra-magnus-tactician.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Uncle's Musings",
+   "files": [
+    "engine/src/cards/pool/uncles-musings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vegetation Abomination",
+   "files": [
+    "engine/src/cards/pool/vegetation-abomination.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Venom Blast",
+   "files": [
+    "engine/src/cards/pool/venom-blast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Whiplash Trap",
+   "files": [
+    "engine/src/cards/pool/whiplash-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zamriel, Seraph of Steel",
+   "files": [
+    "engine/src/cards/pool/zamriel-seraph-of-steel.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Thromok the Insatiable",
+   "needs": [
+    "mechanic:devour-x"
+   ],
+   "size": "small",
+   "why": "Devour X where X is the number devoured (n squared counters); devour takes only a fixed multiplier."
+  },
+  {
+   "name": "The Celestial Toymaker",
+   "needs": [
+    "amount:pile-or-guess-effects-this-turn"
+   ],
+   "size": "small",
+   "why": "The attack trigger fits separate-into-piles with faceDown; nothing counts the spells and abilities that made players guess or pile this turn."
+  },
+  {
+   "name": "Dutiful Knowledge Seeker",
+   "needs": [
+    "trigger:cards-put-into-library"
+   ],
+   "size": "small",
+   "why": "No trigger event for one or more cards put into a library from anywhere."
+  },
+  {
+   "name": "Vedalken Squirrel-Whacker",
+   "needs": [
+    "replacement:exchange-die-result-with-base-pt"
+   ],
+   "size": "major",
+   "why": "A may-exchange decision inside every d6 roll (as-enters rolls, effect rolls, the visit roll); rolls resolve synchronously, so every roll site would need to pause and resume."
+  },
+  {
+   "name": "Space Beleren",
+   "needs": [
+    "mechanic:sectors"
+   ],
+   "size": "major",
+   "why": "Sectors: a per-creature assignment decision and same-sector blocking; the user left it for later (2026-11-14)."
+  },
+  {
+   "name": "Costume Shop",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Visit puts a sticker on a permanent; stickers aren't built."
+  },
+  {
+   "name": "Command Performance",
+   "needs": [
+    "mechanic:stickers"
+   ],
+   "size": "major",
+   "why": "Stickers and tickets; its Attraction half is built (B327)."
+  },
+  {
+   "name": "Monitor Monitor",
+   "needs": [
+    "replacement:reroll-dice"
+   ],
+   "size": "small",
+   "why": "Rerolling a die result isn't built; its Attraction half is (B327)."
+  },
+  {
+   "name": "Drop Tower",
+   "needs": [
+    "duration:until-die-roll"
+   ],
+   "size": "small",
+   "why": "'Until end of turn, or until any player rolls a 1, whichever comes first' is no duration the engine has."
+  },
+  {
+   "name": "Ferris Wheel",
+   "needs": [
+    "duration:until-roll-to-visit"
+   ],
+   "size": "small",
+   "why": "Phased out until a roll to visit of 3 or less, remembering which creatures it phased out."
+  },
+  {
+   "name": "Swinging Ship",
+   "needs": [
+    "effect:additional-combat-after-first-combat"
+   ],
+   "size": "small",
+   "why": "An additional combat after the first combat phase, set up in the precombat main phase."
+  },
+  {
+   "name": "Tunnel of Love",
+   "needs": [
+    "effect:opponent-then-you-choose-pair"
+   ],
+   "size": "small",
+   "why": "An opponent then you each choose a creature; exile both until the next end step, or they fight."
+  },
+  {
+   "name": "Myra the Magnificent",
+   "needs": [
+    "trigger:delayed-whenever-chosen-permanent"
+   ],
+   "size": "small",
+   "why": "A delayed 'whenever you visit it' bound to an Attraction chosen on resolution, lasting after Myra leaves."
+  }
+ ]
+}

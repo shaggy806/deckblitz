@@ -61,7 +61,9 @@ section keeps only what to do next.
   Sliver major (an asked optional graveyard replacement). Skipped: Spectral Searchlight and Soulfire Eruption (major),
   Lich's Mastery (one implementation group with Nicol Bolas's deferred major). The 9 cards its keys freed went
   through `author-freed` as **B326** (2026-11-14): all 9 authored, three on small pieces built there (`CardFilter.isCopy`,
-  `payLife: { atMost }`, a counter-removed event off an exiled card); `--stale` is empty. **Next: the lanes again**
+  `payLife: { atMost }`, a counter-removed event off an exiled card); `--stale` is empty. **B327** (2026-11-14,
+  ranks 15527–18514, `author-top-cards`) authored 77 with Attractions built (the next untriaged rank is past
+  18514, `cards:needs -- --next`); its small blocked keys went to the lanes. **Next: the lanes again**
   (`build-family overnight lanes`, or `author-top-cards`). Each lane's next share is
   `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. The 28
   triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13
@@ -293,6 +295,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **Attractions in the client (phase 2)** — the engine plays Attractions since B327, but no decklist, deck builder or room can give a player an Attraction deck yet, and the board doesn't draw the Attraction deck, the junkyard or lit numbers (`docs/client-gaps.md`, `docs/plans/attractions.md`).
 - **Another player's target popup says "your graveyard"** — Mausoleum Turnkey's opponent picks a card in its controller's graveyard under a title written from the controller's side (`docs/client-gaps.md`).
 
 

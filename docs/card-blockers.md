@@ -666,6 +666,25 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 327 (2026-11-14, `author-top-cards`, EDHREC ranks 15527–18514, and the Attractions)** —
+  77 authored. The 60 by rank: 41 by one card-author agent (Abby, Merciless Soldier; Ultra
+  Magnus; Chief of the Wilds; Aisha of Sparks and Smoke; Jurin, Leading the Charge; …), Centaur
+  of Attention and Atomwheel Acrobats by the lead, and the 12 that open or visit Attractions.
+  **Attractions** were built (the user approved the major, 2026-11-14; an agent built the
+  engine half, `docs/plans/attractions.md`), so 17 of the 22 Commander-legal Attractions
+  (Balloon Stand, Pick-a-Beeble, Haunted House, …) and five earlier cards waiting on them
+  ("Lifetime" Pass Holder, Deadbeat Attendant, Discourtesy Clerk, Step Right Up, Quick Fixer)
+  came with them. The client and server half (a decklist's Attractions section, the Attraction
+  deck and junkyard on the board) is open in `BACKLOG.md`: until it lands no game has an
+  Attraction deck, so "open an Attraction" opens nothing (rule 701.51a). Blocked, 13
+  (`B327.json`): majors Vedalken Squirrel-Whacker (a choice inside every d6 roll), Space
+  Beleren (sectors, left by the user), Costume Shop and Command Performance (stickers); small
+  Thromok (`mechanic:devour-x`), The Celestial Toymaker (`amount:pile-or-guess-effects-this-turn`),
+  Dutiful Knowledge Seeker (`trigger:cards-put-into-library`), Monitor Monitor
+  (`replacement:reroll-dice`), and four Attractions and Myra on new narrow keys (Drop Tower,
+  Ferris Wheel, Swinging Ship, Tunnel of Love). Found on the way: a `turn-history` condition with
+  `who: "opponent"` sums over every opponent (`docs/engine-gaps.md`), and Complaints Clerk's
+  "roll a 1" fired on a modified 0 (fixed).
 - **Batch 326 (2026-11-14, `author-freed`: the 9 cards on the freed queue)** — all 9 authored
   by the lead, none blocked. Six ran on their built keys as they were: Rod of Absorption (River
   Song's Diary's linked exile, Primeval Spawn's total mana value), Spell Queller (a linked spell

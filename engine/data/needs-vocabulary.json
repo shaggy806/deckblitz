@@ -16555,6 +16555,29 @@
    "family": "mechanic:piles",
    "example": "The Celestial Toymaker: \"each opponent loses 2 life for each spell or ability that caused one or more players to guess or to group cards or permanents into a pile this turn\" \u2014 nothing in the journal counts them."
   },
+  "duration:until-die-roll": {
+   "family": "mechanic:dice-rolling",
+   "example": "Drop Tower: \"target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first\" — no duration ends on a roll."
+  },
+  "duration:until-roll-to-visit": {
+   "family": "mechanic:attractions",
+   "example": "Ferris Wheel: phased out \"until you roll to visit your Attractions and the result is 3 or less\", remembering which creatures it phased out."
+  },
+  "effect:additional-combat-after-first-combat": {
+   "family": "effect:additional-combat-after-this-phase",
+   "example": "Swinging Ship: \"after the first combat phase this turn, there's an additional combat phase\" resolving in a precombat main phase — additional-combat has only afterThisPhase and afterSecondMain."
+  },
+  "effect:opponent-then-you-choose-pair": {
+   "family": "mechanic:attractions",
+   "example": "Tunnel of Love: an opponent chooses a creature they control, then you choose one of yours; you may exile both until the next end step, or they fight."
+  },
+  "trigger:delayed-whenever-chosen-permanent": {
+   "family": "mechanic:attractions",
+   "example": "Myra the Magnificent: a delayed \"whenever you visit it\" bound to an Attraction chosen as the ability resolves, lasting after Myra leaves."
+  },
+  "mechanic:sectors": {
+   "example": "Space Beleren: space sculptor divides the battlefield into alpha, beta and gamma sectors, each creature assigned (opponents first), blocking only within a sector."
+  },
   "effect:store-die-results": {
    "family": "mechanic:dice-rolling",
    "example": "Centaur of Attention: \"roll five six-sided dice and store those results on it\", reroll any number of them, +X/+X for the most that match."
