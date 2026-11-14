@@ -295,7 +295,6 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
-- **Attractions in the client (phase 2)** — the engine plays Attractions since B327, but no decklist, deck builder or room can give a player an Attraction deck yet, and the board doesn't draw the Attraction deck, the junkyard or lit numbers (`docs/client-gaps.md`, `docs/plans/attractions.md`).
 - **Another player's target popup says "your graveyard"** — Mausoleum Turnkey's opponent picks a card in its controller's graveyard under a title written from the controller's side (`docs/client-gaps.md`).
 
 
