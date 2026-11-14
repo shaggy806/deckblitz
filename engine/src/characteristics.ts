@@ -2072,8 +2072,13 @@ export function damageDealtThisTurn(
 
 /** How a {@link journalCount} reads beyond its list: the zones a
  * `to-graveyard` arrival came from, the window (default this turn), and
- * `toPlayer`, only the entries done to that player (an entry's `target`). */
-export type JournalReadOptions = JournalOrigin & { readonly window?: JournalWindow; readonly toPlayer?: PlayerId };
+ * `toPlayer`, only the entries done to that player (an entry's `target`), and
+ * `sumOf: "power"`, their total power rather than how many. */
+export type JournalReadOptions = JournalOrigin & {
+  readonly window?: JournalWindow;
+  readonly toPlayer?: PlayerId;
+  readonly sumOf?: "power";
+};
 
 /**
  * How many things of one journal word (`JournalWhat`, `journal.ts`'s
@@ -2135,7 +2140,12 @@ export function journalCount(
       if (counted.has(key)) continue;
       counted.add(key);
     }
-    n += entry.count ?? 1;
+    // "The total power of …": each as its entry kept it (rule 603.10a).
+    const each =
+      options?.sumOf === "power"
+        ? (was ?? (object !== undefined && stint !== undefined ? snapshotOfStint(state, object, stint) : undefined))?.power ?? 0
+        : 1;
+    n += (entry.count ?? 1) * each;
   }
   return n;
 }

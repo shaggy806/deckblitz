@@ -1067,7 +1067,11 @@ into their graveyards — "you descended" — this turn; a token stack counts ev
 `filter` narrows them: a permanent that has left as it last existed (a `left`
 entry as it was in the stint it left, though it has come back and left again
 since — rule 603.10a), a card in
-a graveyard as it is now. See `PlayerState.turnHistory`),
+a graveyard as it is now. See `PlayerState.turnHistory`. `sumOf: "power"`
+is their total power instead of how many, each as its entry kept it — Genesis
+of the Daleks's "the total power of Daleks that died this turn" is `{
+turnHistory: "died", who: "each-player", filter: { subtype: "Dalek" }, sumOf:
+"power" }`),
 `{ damageDealtThisTurn: true, who?, combat?, colors? }` (how much damage
 sources the scope's players controlled dealt this turn, to anything — only
 combat or only noncombat damage if `combat` says, only from sources that were
