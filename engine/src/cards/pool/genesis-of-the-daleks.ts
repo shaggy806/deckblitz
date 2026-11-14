@@ -5,10 +5,10 @@ import { defineCard } from "../define.js";
 // rule 608.2h). Chapter IV's villainous choice (rule 701.56) is the target
 // opponent's to make, and either option is the Saga's controller's effect:
 // "each of **your** opponents" are the controller's. "The total power of
-// Daleks that died this turn" reads the journal — every Dalek creature that
-// died this turn, whoever controlled it, each with its power as it last
-// existed (rule 603.10a) — after the destroy, so the ones it just destroyed
-// count too.
+// Daleks that died this turn" is a sum over the journal's `died` set — every
+// Dalek creature that died this turn, whoever controlled it, each with its
+// power as it last existed (rule 603.10a) — read after the destroy, so the
+// ones it just destroyed count too.
 //
 // Rulings:
 //   A player facing a villainous choice can always choose either option, even if one or both of
@@ -55,10 +55,10 @@ export default defineCard({
                   kind: "lose-life",
                   who: "each-opponent",
                   amount: {
-                    turnHistory: "died",
-                    who: "each-player",
+                    aggregate: "sum",
+                    of: "power",
                     filter: { subtype: "Dalek" },
-                    sumOf: "power",
+                    in: { turnHistory: "died", who: "each-player" },
                   },
                 },
               ],

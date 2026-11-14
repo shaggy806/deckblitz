@@ -12,6 +12,7 @@
  */
 
 import type { PlayerScope, ThisWayKind } from "./effects.js";
+import type { JournalWhat, JournalWindow } from "./journal.js";
 import type { ObjectRef } from "./refs.js";
 import type { CardFilter } from "./filter.js";
 import type { ObjectId } from "./primitives.js";
@@ -90,6 +91,13 @@ export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "
  *   702.51a, `GameObject.convokedBy`, or `enteredConvokedBy` for the
  *   permanent it became), each as it was in the stint that tapped:
  *   Everything Comes to Dust's "a creature that convoked this spell".
+ * - `{ turnHistory, who?, window? }` — the objects of one journal word
+ *   (`JOURNAL_VIEWS`) in the lists of `who`'s players (default `"you"`) in
+ *   `window` (default this turn), each as its entry kept it (rule 603.10a):
+ *   Genesis of the Daleks's "the total power of Daleks that died this turn"
+ *   is a `sum` of `"power"` over `{ turnHistory: "died", who: "each-player"
+ *   }`, filtered to Daleks. A recipient view's member is what the entry's act
+ *   was done to.
  */
 export type ObjectSetRef =
   | { readonly thisWay: ThisWayKind; readonly who?: PlayerScope | "each" | "each-other"; readonly byOwner?: true }
@@ -100,7 +108,8 @@ export type ObjectSetRef =
   | { readonly attachmentsOf: ObjectRef }
   | { readonly targetsOf: ObjectRef }
   | { readonly targets: readonly number[] }
-  | { readonly remembered: string };
+  | { readonly remembered: string }
+  | { readonly turnHistory: JournalWhat; readonly who?: PlayerScope; readonly window?: JournalWindow };
 
 /** A set captured into a delayed or reflexive trigger as it's made — its
  * members, the ones matching `filter` (read as they are then) when given:
@@ -123,7 +132,15 @@ export interface ObjectSets {
 export function isObjectSetRef(value: unknown): value is ObjectSetRef {
   if (value === "exiled-with-source" || value === "trigger-batch" || value === "convokers") return true;
   if (typeof value !== "object" || value === null) return false;
-  return "thisWay" in value || "paid" in value || "targets" in value || "remembered" in value || "attachmentsOf" in value || "targetsOf" in value;
+  return (
+    "thisWay" in value ||
+    "paid" in value ||
+    "targets" in value ||
+    "remembered" in value ||
+    "attachmentsOf" in value ||
+    "targetsOf" in value ||
+    "turnHistory" in value
+  );
 }
 
 /** Whether a set's members are cards rather than permanents: everything but
@@ -138,6 +155,9 @@ export function isCardSet(ref: ObjectSetRef): boolean {
   if (ref === "trigger-batch" || ref === "convokers") return false;
   if (typeof ref !== "object") return true;
   if ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref) return false;
+  // A journal word's: cards for a discard or a card put into a graveyard,
+  // permanents for everything else that left, entered, attacked or crewed.
+  if ("turnHistory" in ref) return ref.turnHistory === "discarded" || ref.turnHistory === "descended";
   if ("paid" in ref && (ref.paid === "sacrificed" || ref.paid === "tapped" || ref.paid === "unattached")) return false;
   return !("thisWay" in ref && (ref.thisWay === "destroyed" || ref.thisWay === "died" || ref.thisWay === "sacrificed"));
 }

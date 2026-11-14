@@ -66,6 +66,7 @@ import type { EffectAmount } from "./effects.js";
 import type { AggregateSpec, CardFilter, DamageSourceClause } from "./filter.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType, SpendAs } from "./mana.js";
+import type { SetMember } from "./object-sets.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import {
   activePlayerOf,
@@ -2072,13 +2073,8 @@ export function damageDealtThisTurn(
 
 /** How a {@link journalCount} reads beyond its list: the zones a
  * `to-graveyard` arrival came from, the window (default this turn), and
- * `toPlayer`, only the entries done to that player (an entry's `target`), and
- * `sumOf: "power"`, their total power rather than how many. */
-export type JournalReadOptions = JournalOrigin & {
-  readonly window?: JournalWindow;
-  readonly toPlayer?: PlayerId;
-  readonly sumOf?: "power";
-};
+ * `toPlayer`, only the entries done to that player (an entry's `target`). */
+export type JournalReadOptions = JournalOrigin & { readonly window?: JournalWindow; readonly toPlayer?: PlayerId };
 
 /**
  * How many things of one journal word (`JournalWhat`, `journal.ts`'s
@@ -2142,14 +2138,42 @@ export function journalCount(
       if (counted.has(key)) continue;
       counted.add(key);
     }
-    // "The total power of …": each as its entry kept it (rule 603.10a).
-    const each =
-      options?.sumOf === "power"
-        ? (was ?? (object !== undefined && stint !== undefined ? snapshotOfStint(state, object, stint) : undefined))?.power ?? 0
-        : 1;
-    n += (entry.count ?? 1) * each;
+    n += entry.count ?? 1;
   }
   return n;
+}
+
+/**
+ * The objects of one journal word as an object set (`{ turnHistory }` —
+ * `object-sets.ts`): `players`' entries in `window`, each entry's object (a
+ * recipient view's, what its act was done to) in the stint the entry names,
+ * carrying the entry's snapshot of it (rule 603.10a), a token stack as each
+ * of its tokens. A `distinct` view's object is in it once per stint.
+ */
+export function journalSetMembers(
+  state: GameState,
+  registry: CardRegistry,
+  players: readonly PlayerId[],
+  what: JournalWhat,
+  you: PlayerId,
+  window: JournalWindow = "this-turn",
+): SetMember[] {
+  const view = JOURNAL_VIEWS[what];
+  const aboutRecipient = view.whose === "recipient";
+  const out: SetMember[] = [];
+  for (const entry of journalEntries(journalReader(state, registry), view, players, window, you)) {
+    const object = aboutRecipient ? (entry.target?.kind === "object" ? entry.target.object : undefined) : entry.object;
+    if (object === undefined) continue;
+    const was = aboutRecipient ? entry.targetWas : entry.was;
+    const stint = (aboutRecipient ? entry.targetStint : entry.stint) ?? was?.zoneChangeCount ?? state.objects[object]?.zoneChangeCount ?? 0;
+    out.push({
+      object,
+      stint,
+      ...(entry.count !== undefined && entry.count !== 1 ? { count: entry.count } : {}),
+      ...(was !== undefined ? { was } : {}),
+    });
+  }
+  return out;
 }
 
 /** The names to tell a permanent by when comparing them (rule 201.2): its own

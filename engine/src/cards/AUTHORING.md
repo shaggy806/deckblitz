@@ -1067,11 +1067,12 @@ into their graveyards — "you descended" — this turn; a token stack counts ev
 `filter` narrows them: a permanent that has left as it last existed (a `left`
 entry as it was in the stint it left, though it has come back and left again
 since — rule 603.10a), a card in
-a graveyard as it is now. See `PlayerState.turnHistory`. `sumOf: "power"`
-is their total power instead of how many, each as its entry kept it — Genesis
-of the Daleks's "the total power of Daleks that died this turn" is `{
-turnHistory: "died", who: "each-player", filter: { subtype: "Dalek" }, sumOf:
-"power" }`. `"crewers"` is the creatures that crewed a Vehicle, each once,
+a graveyard as it is now. See `PlayerState.turnHistory`. To sum or take
+the greatest of them instead, the same words name an object set for an
+aggregate's `in` — Genesis of the Daleks's "the total power of Daleks that
+died this turn" is `{ aggregate: "sum", of: "power", filter: { subtype:
+"Dalek" }, in: { turnHistory: "died", who: "each-player" } }`, each as its
+entry kept it. `"crewers"` is the creatures that crewed a Vehicle, each once,
 those that have left since included — Luxurious Locomotive's "a Treasure
 token for each creature that crewed it this turn" is `{ turnHistory:
 "crewers", who: "each-player", selfOnly: true }`),

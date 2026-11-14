@@ -131,6 +131,7 @@ import {
   countValue,
   damageDealtThisTurn,
   journalCount,
+  journalSetMembers,
   powerAttackedWith,
   cardTypesInGraveyards,
   basicLandTypesAmong,
@@ -36668,6 +36669,10 @@ export class Game {
         });
       }
       if (typeof ref !== "object") return [];
+      if ("turnHistory" in ref) {
+        // A journal word's objects, each as its entry kept it (603.10a).
+        return journalSetMembers(this.state, this.registry, scoped(ref.who ?? "you"), ref.turnHistory, controller, ref.window);
+      }
       if ("targets" in ref) {
         return ref.targets.flatMap((slot): SetMember[] => {
           const target = targets[slot];

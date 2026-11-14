@@ -1,8 +1,9 @@
 /**
- * The `turnHistory` amount's `sumOf: "power"` — "the total power of Daleks
- * that died this turn" (Genesis of the Daleks): the journal's `died`
- * entries, each with its power as it last existed (rule 603.10a), a token
- * stack once per token, whoever controlled them.
+ * A journal word as an object set, `{ turnHistory, who? }`, under an
+ * aggregate — "the total power of Daleks that died this turn" (Genesis of
+ * the Daleks): a `sum` of `"power"` over the journal's `died` entries, each
+ * with its power as it last existed (rule 603.10a), a token stack once per
+ * token, whoever controlled them.
  */
 
 import { describe, expect, it } from "vitest";

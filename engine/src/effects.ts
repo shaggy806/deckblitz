@@ -1179,12 +1179,6 @@ export type EffectAmount =
        * Gleeful Glutton's "for each card type among permanents you've
        * sacrificed this turn". */
       readonly cardTypes?: true;
-      /** Their total power instead of how many, each as its entry kept it
-       * (as it last existed, rule 603.10a), a token stack once per token —
-       * Genesis of the Daleks's "the total power of Daleks that died this
-       * turn" (`"died"`, `who: "each-player"`, `filter: { subtype: "Dalek"
-       * }`). */
-      readonly sumOf?: "power";
     }
   /** How many opponents the controller attacked with creatures this combat
    * — melee's "+1/+1 for each opponent you attacked with a creature this
@@ -11532,7 +11526,7 @@ export interface EffectApi {
     what: JournalWhat,
     players: readonly PlayerId[],
     filter?: CardFilter,
-    origin?: JournalOrigin & { readonly selfOnly?: boolean; readonly window?: JournalWindow; readonly sumOf?: "power" },
+    origin?: JournalOrigin & { readonly selfOnly?: boolean; readonly window?: JournalWindow },
   ): number;
   /** How many card types there are among `objects`, each once — as they
    * last existed on the battlefield if `departed` (a sacrificed or
