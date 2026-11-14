@@ -361,6 +361,17 @@ the reflexive ability's own targeting, read as targets are chosen and rechecked
 (608.2b). Proving: Auron, Venerated Guardian. Test:
 `reflexive-target-live-compare.test.ts`.
 
+### A card in exile gains a triggered ability that works there — built 2026-11-13
+
+`effect:exiled-card-gains-trigger`. `grant-triggered` of a `fromExile` ability
+now goes onto a card in exile (riding its modifiers until it leaves, rule
+400.7), and the trigger scan takes an exiled card whose modifiers grant one.
+Counters go on a card in exile (rule 122.1; not a permanent's, so no Doubling
+Season or Solemnity). New effect `with-x`: "where X is …" read once before its
+effect changes it — the voyage counters, gone once Cosima returns (rule
+122.2). Proving: Cosima, God of the Voyage // The Omenkeel. Test:
+`exiled-card-gains-trigger.test.ts`.
+
 ### Excess damage this turn, to a permanent that has died since — built 2026-11-13
 
 `stat:excess-damage-to-departed-this-turn`. The journal's `damage` entry keeps

@@ -618,6 +618,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "time-travel": none,
   "double-x": none,
   "set-x": none,
+  // X read once; the effect's targets are its own to say.
+  "with-x": (n, v) => v.child(n.effect),
   conjure: none,
   // Its card is never a target: a card found, the spell itself, or the
   // cards exiled this way.

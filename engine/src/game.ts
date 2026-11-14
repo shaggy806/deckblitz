@@ -23420,10 +23420,12 @@ export class Game {
   }
 
   /** Whether `id` is a face-up card with a triggered ability that works in
-   * exile (`TriggeredAbility.fromExile`). */
+   * exile (`TriggeredAbility.fromExile`): printed, or gained there (Cosima,
+   * God of the Voyage — `grantTriggered`). */
   private hasExileTrigger(id: ObjectId): boolean {
     const object = this.state.objects[id];
     if (object === undefined || object.kind !== "card" || object.faceDown !== undefined) return false;
+    if (object.modifiers.some((m) => m.grantsTriggered?.some((ability) => ability.fromExile === true) === true)) return true;
     const name = printedCardName(object);
     let has = this.exileTriggerNames.get(name);
     if (has === undefined) {
@@ -49055,7 +49057,11 @@ controlledBy,
     // A permanent, or a permanent spell, which the permanent it becomes goes
     // on having it for (rule 400.7a: Rivaz of the Claw's "it gains …").
     const onStack = object.zone === "stack" && object.kind === "card";
-    if ((object.zone !== "battlefield" && !onStack) || !durationBegins(object, duration)) return;
+    // A card in exile gaining an ability that works there (`fromExile`, rule
+    // 113.6k): Cosima, God of the Voyage's "exile Cosima. If you do, it gains
+    // '…'". It keeps it until it leaves exile, a new object (rule 400.7).
+    const inExile = object.zone === "exile" && object.kind === "card" && ability.fromExile === true;
+    if ((object.zone !== "battlefield" && !onStack && !inExile) || !durationBegins(object, duration)) return;
     object.modifiers.push({
       timestamp: this.freshTimestamp(),
       power: 0,
@@ -49486,6 +49492,17 @@ controlledBy,
     // of the Cabal): not a permanent, so what acts on a permanent's counters
     // doesn't apply.
     if (counter === "time" && this.addTimeCounterInExile(target.object, amount)) return;
+    // A counter on any other card in exile (rule 122.1: a marker on an
+    // object) — Cosima, God of the Voyage's voyage counters, put there by an
+    // ability it gained in exile. Not a permanent, so nothing that acts on a
+    // permanent's counters applies (Doubling Season, Solemnity), and they
+    // cease to exist as it leaves (rule 122.2).
+    const exiled = this.state.objects[target.object];
+    if (exiled?.zone === "exile" && exiled.kind === "card") {
+      exiled.counters[counter] = (exiled.counters[counter] ?? 0) + amount;
+      invalidateComputedCache();
+      return;
+    }
     // "Counters can't be put on" it (Solemnity): none are, and nothing else
     // happens for them.
     if (this.countersPrevented({ object: target.object }, counter)) return;

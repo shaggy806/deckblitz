@@ -6464,6 +6464,20 @@ export type EffectSpec =
     }
   | {
       /**
+       * "…, where X is [an amount]" read **once**, before `effect`'s first
+       * instruction changes what it counts: `effect` reads it as `"x"`.
+       * Cosima, God of the Voyage's "return Cosima to the battlefield with X
+       * +1/+1 counters on it and draw X cards, where X is the number of
+       * voyage counters on it" — the counters it had in exile, which are gone
+       * once it has returned (rule 122.2), so a draw read after the return
+       * would count none.
+       */
+      readonly kind: "with-x";
+      readonly x: EffectAmount;
+      readonly effect: EffectSpec;
+    }
+  | {
+      /**
        * Time counters on exiled cards, which then have suspend (rule
        * 702.62b — a card is suspended if it's in exile, has suspend, and has
        * a time counter on it). Two forms:
@@ -19446,6 +19460,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "set-x":
       ctx.setTriggerX(spec.target, spec.value);
+      return;
+    case "with-x":
+      applyEffectSpec(spec.effect, ctx.withX(Math.max(0, Math.floor(amountValue(spec.x, ctx)))));
       return;
     case "conjure": {
       const host = spec.attachedTo === undefined ? undefined : attachHost(spec.attachedTo, ctx);
