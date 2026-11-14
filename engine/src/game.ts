@@ -39931,6 +39931,7 @@ export class Game {
           who,
           exceptSource ? this.oneTokenSpared(source) : undefined,
 controlledBy,
+          source,
         ),
       rotateControl: (filter, direction, exceptSource) =>
         this.rotateControlByEffect(controller, filter, direction, exceptSource ? this.oneTokenSpared(source) : undefined),
@@ -57153,33 +57154,52 @@ controlledBy,
    * matches now (from `you`'s side, `except` aside) goes to `who` — or, for
    * `"owner"`, each to its own owner — as one effect with one timestamp
    * (rule 613.7b). A token stack changes hands whole.
+   *
+   * `"random"` (Scrambleverse): a player still in the game is chosen at
+   * random for each permanent, its controller among them (the ruling) — each
+   * token of a stack a permanent of its own, peeled off to be chosen for —
+   * and only once every choice is made does anything change hands (the
+   * ruling: all at the same time).
    */
   private gainControlAllByEffect(
     you: PlayerId,
     filter: CardFilter,
     untilEndOfTurn: boolean,
-    who: PlayerId | "owner",
+    who: PlayerId | "owner" | "random",
     except?: ObjectId,
     /** Only what this player controls ("all artifacts that player controls"). */
     controlledBy?: PlayerId,
+    /** The effect's source, which a random choice is announced as made by. */
+    source?: ObjectId,
   ): void {
     const matched = this.battlefieldMatching(you, filter).filter(
       (id) => id !== except && (controlledBy === undefined || this.state.objects[id]?.controller === controlledBy),
     );
     if (matched.length === 0) return;
+    const moves: { readonly object: ObjectId; readonly player: PlayerId }[] = [];
+    if (who === "random") {
+      const players = this.state.turnOrder.filter((p) => this.state.players[p]?.hasLost === false);
+      if (players.length === 0) return;
+      const draw = (): PlayerId =>
+        players[this.pickAtRandom(you, source ?? matched[0], players.length, (i) => ({ kind: "player", player: players[i] }))];
+      for (const id of matched) {
+        for (let n = (this.state.objects[id]?.stackCount ?? 1) - 1; n > 0; n -= 1) {
+          moves.push({ object: this.splitOneFromStack(id), player: draw() });
+        }
+        moves.push({ object: id, player: draw() });
+      }
+    } else {
+      for (const id of matched) {
+        const object = this.state.objects[id];
+        if (object !== undefined) moves.push({ object: id, player: who === "owner" ? object.owner : who });
+      }
+    }
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
     this.withControlBatch(() => {
-      for (const id of matched) {
-        const object = this.state.objects[id];
-        if (object === undefined) continue;
-        this.gainControlByEffect(
-          who === "owner" ? object.owner : who,
-          { kind: "object", object: id },
-          untilEndOfTurn,
-          false,
-          { split: false, timestamp },
-        );
+      for (const { object, player } of moves) {
+        if (this.state.objects[object] === undefined) continue;
+        this.gainControlByEffect(player, { kind: "object", object }, untilEndOfTurn, false, { split: false, timestamp });
       }
     });
   }

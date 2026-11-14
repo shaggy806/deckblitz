@@ -4811,7 +4811,12 @@ export type EffectSpec =
        * until end of turn" (Dihada, Binder of Wills), "gain control of all
        * commanders" (Tevesh Szat, Doom of Fools). `who` is `gain-control`'s,
        * plus `"owner"` — "each player gains control of all creatures they
-       * own" (Homeward Path). A token stack changes hands whole.
+       * own" (Homeward Path) — and `"random"`: "for each nonland permanent,
+       * choose a player at random. Then each player gains control of each
+       * permanent for which they were chosen" (Scrambleverse), a player
+       * still in the game drawn for each permanent (each token of a stack its
+       * own), its current controller among them, every draw made before
+       * anything changes hands. Otherwise a token stack changes hands whole.
        * `exceptSource` spares the effect's own source. `controlledBy:
        * "trigger-player"` keeps only the permanents the player the trigger
        * names controls — Hellkite Tyrant's "gain control of all artifacts
@@ -4821,7 +4826,7 @@ export type EffectSpec =
       readonly kind: "gain-control-all";
       readonly filter: CardFilter;
       readonly untilEndOfTurn: boolean;
-      readonly who?: PlayerRef | "owner";
+      readonly who?: PlayerRef | "owner" | "random";
       readonly exceptSource?: boolean;
       readonly controlledBy?: "trigger-player";
       /** Only what the player in this target slot controls (or the
@@ -12709,12 +12714,12 @@ export interface EffectApi {
     until?: PointDuration,
   ): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
-   * each permanent's own owner; `controlledBy` keeps only what that player
-   * controls. */
+   * each permanent's own owner, or a player at random for each; `controlledBy`
+   * keeps only what that player controls. */
   gainControlAll(
     filter: CardFilter,
     untilEndOfTurn: boolean,
-    who: PlayerId | "owner",
+    who: PlayerId | "owner" | "random",
     exceptSource: boolean,
     controlledBy?: PlayerId,
   ): void;
@@ -18783,7 +18788,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "gain-control-all": {
-      const who = spec.who === "owner" ? "owner" : resolvePlayerRef(spec.who ?? "you", ctx);
+      const who = spec.who === "owner" || spec.who === "random" ? spec.who : resolvePlayerRef(spec.who ?? "you", ctx);
       if (who === undefined) return;
       if (spec.controlledByTarget !== undefined) {
         if (illegalSlot(spec.controlledByTarget, ctx)) return;

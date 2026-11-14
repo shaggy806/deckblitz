@@ -322,6 +322,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A random player for each permanent — built 2026-11-14
+
+The key `effect:random-player-per-permanent`: `gain-control-all`'s `who: "random"`
+(`Game.gainControlAllByEffect`): a player still in the game drawn through `pickAtRandom` for each
+matching permanent, each token of a stack split off and drawn for, every draw before the one
+batched control change (rule 613.7b). Scrambleverse (rank 9641).
+`test/random-player-per-permanent.test.ts`.
+
 ### Keywords of the cards exiled with an Equipment, landwalk among them — built 2026-11-14
 
 The key `static:keywords-of-linked-exile`. `sharesKeywords` already took any `affects`, so Eater
