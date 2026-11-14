@@ -8325,6 +8325,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Divination. When asked about the Island you drew, choose Keep hidden.
 - **Expect:** You're asked about the Island too ("reveal Island, the first card you drew this turn?"), so the question tells nobody what you drew. Kept hidden, nothing goes on the stack, and the Divination drawn second isn't asked about.
 
+### Unstable Glyphbridge: you spare one small creature of each player, the rest are destroyed
+- **Do:** Cast Unstable Glyphbridge. When asked about Bob's creatures, click his Llanowar Elves and Confirm.
+- **Expect:** Your Grizzly Bears is your only creature with power 2 or less, so the log says you choose it without asking. The banner then reads "Choose a creature with power 2 or less to spare — Bob's", offering his Elves and Bears only. Your Hill Giant, his Bears and his Hill Giant are destroyed.
+
+### Stick Together: you keep a party, one creature for each type
+- **Do:** Cast Stick Together. Click Anointer Priest, an Ana Disciple and Universal Automaton, and Confirm.
+- **Expect:** The banner counts to "3/3 chosen": two Wizards can't both be kept, and the Automaton, a changeling, stands for one type. Your other Ana Disciple and Grizzly Bears are sacrificed, and so is Bob's Grizzly Bears; his Ash Zealot (a Warrior) stays.
+
+### Stick Together: at four players, each player keeps a party
+- **Do:** Cast Stick Together. Click Anointer Priest and Confirm.
+- **Expect:** Your Grizzly Bears is sacrificed. Bob keeps his Ash Zealot and loses his Hill Giant, Carol keeps one Ana Disciple and loses the other, and Dave, with no party creature, loses his Grizzly Bears.
+
 ### God-Eternal Kefnet: at four players, the copy is cast as it resolves
 - **Do:** Cast Divination. Reveal the Divination you drew, then cast the copy.
 - **Expect:** As at two players: the copy is offered as Kefnet's trigger resolves, cast for one Island, and you end with 4 cards in hand. Bob, Carol and Dave are never asked anything.

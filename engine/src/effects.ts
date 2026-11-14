@@ -10102,8 +10102,13 @@ export type EffectSpec =
       readonly kind: "choose-one-of-each";
       readonly who: PlayerScope;
       /** The categories: card types, or a word for the basic land types (in
-       * Plains, Island, Swamp, Mountain, Forest order) or the five colors. */
-      readonly slots: "basic-land-types" | "colors" | readonly CardType[];
+       * Plains, Island, Swamp, Mountain, Forest order) or the five colors.
+       * `"party"`: "chooses a party from among creatures they control" (Stick
+       * Together — rule 700.8d): for each of Cleric, Rogue, Warrior and
+       * Wizard, **up to** one creature of that type, and each chosen creature
+       * is the party member for one type only (700.8b) — so any slot may be
+       * left empty, and nothing is chosen for a player unasked. */
+      readonly slots: "basic-land-types" | "colors" | "party" | readonly CardType[];
       readonly filter: CardFilter;
       /** Chosen from the player's hand (already revealed, a `reveal-hand` going
        * before it). By default from among the permanents they control. */

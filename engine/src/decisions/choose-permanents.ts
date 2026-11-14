@@ -41,8 +41,9 @@ function stackSizes(
 ): Record<ObjectId, number> {
   const copies: Record<ObjectId, number> = {};
   // "An artifact, a creature…": a stack of artifact creature tokens can give
-  // one for each slot its tokens fill.
-  if (together?.rule === "one-of-each") {
+  // one for each slot its tokens fill — and a stack of changelings, a party
+  // member for each type (Stick Together's `"one-each"`).
+  if (together?.rule === "one-of-each" || together?.rule === "one-each") {
     for (const id of eligible) {
       const n = Math.min(ctx.state.objects[id]?.stackCount ?? 1, (together.tags[id] ?? []).length);
       if (n > 1) copies[id] = n;

@@ -20,6 +20,7 @@ import {
   turnStatOf,
 } from "./characteristics.js";
 import { defendingPlayerOf } from "./combat/eligibility.js";
+import { entriesThisTurn } from "./journal.js";
 import type { PlayerScope } from "./effects.js";
 import { matchesFilter, type CardFilter } from "./filter.js";
 import type { ObjectRef } from "./refs.js";
@@ -54,7 +55,13 @@ export interface BoundPlayers {
  */
 export interface PlayersWhoDid {
   readonly who: StaticWho;
-  readonly thisTurn: TurnDid;
+  /** `against: "you"`: only what they did to the source's controller —
+   * "each opponent who **attacked you or a planeswalker you control** this
+   * turn can't cast spells" (Sandswirl Wanderglyph): an attacker declared at
+   * that player, or at a planeswalker they controlled as it was attacked; a
+   * battle they protect isn't one (its ruling). Read from the journal's
+   * `attacked` entries. */
+  readonly thisTurn: TurnDid | { readonly stat: "attacked"; readonly against: "you" };
 }
 
 /** What's stored: a static's words, those players by what each did this
@@ -311,13 +318,29 @@ export function liveProhibitions<A extends ProhibitionAct>(
   return out;
 }
 
+/** Whether `player` declared an attacker this turn at `you` or at a
+ * planeswalker `you` controlled as it was attacked (the journal's `attacked`
+ * entries; a battle isn't one). */
+function attackedPlayerThisTurn(state: GameState, player: PlayerId, you: PlayerId): boolean {
+  return entriesThisTurn(state, "attacked").some(
+    (e) =>
+      e.player === player &&
+      (e.target?.kind === "player"
+        ? e.target.player === you
+        : e.targetWas?.controller === you && e.targetWas.types.includes("planeswalker")),
+  );
+}
+
 /** Whether `who`, as `source`'s controller reads it, names `player`. */
 export function whoBinds(state: GameState, source: GameObject, who: ProhibitedPlayer, player: PlayerId): boolean {
   if (typeof who === "object") {
     if ("players" in who) return who.players.includes(player);
+    const did = who.thisTurn;
     return (
       whoBinds(state, source, who.who, player) &&
-      turnStatOf(state, player, who.thisTurn.stat) >= (who.thisTurn.atLeast ?? 1)
+      ("against" in did
+        ? attackedPlayerThisTurn(state, player, source.controller)
+        : turnStatOf(state, player, did.stat) >= (did.atLeast ?? 1))
     );
   }
   switch (who) {

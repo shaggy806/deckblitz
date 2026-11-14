@@ -12506,6 +12506,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Unstable Glyphbridge: you spare one small creature of each player, the rest are destroyed',
+    board({
+      you: { bf: ['Grizzly Bears', 'Hill Giant', 'Plains*5'], hand: ['Unstable Glyphbridge'] },
+      opp: { bf: ['Llanowar Elves', 'Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Stick Together: you keep a party, one creature for each type',
+    board({
+      you: {
+        bf: ['Anointer Priest', 'Ana Disciple', 'Ana Disciple', 'Universal Automaton', 'Grizzly Bears', 'Plains*5'],
+        hand: ['Stick Together'],
+      },
+      opp: { bf: ['Ash Zealot', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Stick Together: at four players, each player keeps a party',
+    board({
+      you: { bf: ['Anointer Priest', 'Grizzly Bears', 'Plains*5'], hand: ['Stick Together'] },
+      opp: [{ bf: ['Ash Zealot', 'Hill Giant'] }, { bf: ['Ana Disciple', 'Ana Disciple'] }, { bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
     'God-Eternal Kefnet: at four players, the copy is cast as it resolves',
     board({
       you: {

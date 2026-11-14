@@ -13496,7 +13496,9 @@ export class Game {
         this.state.players[defender as PlayerId] !== undefined
           ? { kind: "player", player: defender as PlayerId }
           : { kind: "object", object: defender as ObjectId },
-      ...(at !== undefined ? { targetStint: at.zoneChangeCount ?? 0 } : {}),
+      // A planeswalker or battle as it was attacked: whose it was then
+      // ("attacked you or a planeswalker you control").
+      ...(at !== undefined ? { targetStint: at.zoneChangeCount ?? 0, targetWas: this.takeLastKnown(defender as ObjectId) } : {}),
       combat: this.state.turn.combatPhases ?? 1,
       ...(count !== 1 ? { count } : {}),
       ...(required ? { how: "required" } : {}),
@@ -40015,6 +40017,29 @@ controlledBy,
         }
         const eligible = candidates.filter((id) => tags[id] !== undefined);
         if (eligible.length === 0) return false;
+        // A party (rule 700.8d): up to one for each type, a creature one
+        // member only (700.8b). Keeping fewer is the player's to choose, so
+        // it's always asked.
+        if (spec.slots === "party") {
+          const party: ZoneChoiceTogether = { rule: "one-each", tags, text: spec.prompt };
+          const units = eligible.flatMap((id) =>
+            Array<ObjectId>(Math.min(this.state.objects[id]?.stackCount ?? 1, tags[id].length)).fill(id),
+          );
+          this.state.awaiting = {
+            kind: "choose-permanents",
+            player: spec.chooser === "you" ? controller : player,
+            eligible,
+            min: 0,
+            max: largestOneEach(party, units),
+            prompt: spec.prompt,
+            then: { kind: "sequence", effects: [] },
+            source,
+            x,
+            keepChoice: true,
+            together: party,
+          };
+          return true;
+        }
         const together: ZoneChoiceTogether = { rule: "one-of-each", tags, text: spec.prompt };
         // Only one answer: each slot has one candidate, and a stack can't give
         // two of itself. "If the only land of a certain type is one you
@@ -51542,9 +51567,15 @@ controlledBy,
    * to choose from, all of them are the only answer, and still asked.
    */
   /** The slots of a `choose-one-of-each` that `id` can fill, as it is now. */
-  private oneOfEachSlotsOf(id: ObjectId, slots: "basic-land-types" | "colors" | readonly CardType[]): readonly string[] {
+  private oneOfEachSlotsOf(id: ObjectId, slots: "basic-land-types" | "colors" | "party" | readonly CardType[]): readonly string[] {
     const object = this.state.objects[id];
     if (object === undefined) return [];
+    if (slots === "party") {
+      // Rule 700.8: a creature of each of these types, a changeling all four.
+      if (!effectiveTypes(this.state, this.registry, object).includes("creature")) return [];
+      const subtypes = effectiveSubtypes(this.state, this.registry, object);
+      return (["Cleric", "Rogue", "Warrior", "Wizard"] as const).filter((type) => hasSubtype(subtypes, type));
+    }
     if (slots === "basic-land-types") {
       const subtypes = effectiveSubtypes(this.state, this.registry, object);
       return (["Plains", "Island", "Swamp", "Mountain", "Forest"] as const).filter((type) => hasSubtype(subtypes, type));
