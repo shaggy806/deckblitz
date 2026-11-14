@@ -195,6 +195,7 @@ import _poolCruelAdministrator from "../pool/cruel-administrator.js";
 import _poolCrumble from "../pool/crumble.js";
 import _poolCryptek from "../pool/cryptek.js";
 import _poolCurseOfBloodletting from "../pool/curse-of-bloodletting.js";
+import _poolCurseOfEchoes from "../pool/curse-of-echoes.js";
 import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfTheWerefox from "../pool/curse-of-the-werefox.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
@@ -1290,6 +1291,7 @@ const shard: CardShard = {
     _poolCrumble,
     _poolCryptek,
     _poolCurseOfBloodletting,
+    _poolCurseOfEchoes,
     _poolCurseOfOpulence,
     _poolCurseOfTheWerefox,
     _poolCurseOfVerbosity,

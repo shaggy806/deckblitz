@@ -1700,6 +1700,7 @@ import _poolAvacynsCollar from "./pool/avacyns-collar.js";
 import _poolAvacynsMemorial from "./pool/avacyns-memorial.js";
 import _poolAvacynsPilgrim from "./pool/avacyns-pilgrim.js";
 import _poolAvalancheCaller from "./pool/avalanche-caller.js";
+import _poolAvalancheOfSector7 from "./pool/avalanche-of-sector-7.js";
 import _poolAvalancheRiders from "./pool/avalanche-riders.js";
 import _poolAvalancheTusker from "./pool/avalanche-tusker.js";
 import _poolAvalanche from "./pool/avalanche.js";
@@ -5889,6 +5890,7 @@ import _poolCurseOfClingingWebs from "./pool/curse-of-clinging-webs.js";
 import _poolCurseOfConformity from "./pool/curse-of-conformity.js";
 import _poolCurseOfDeathSHold from "./pool/curse-of-death-s-hold.js";
 import _poolCurseOfDisturbance from "./pool/curse-of-disturbance.js";
+import _poolCurseOfEchoes from "./pool/curse-of-echoes.js";
 import _poolCurseOfExhaustion from "./pool/curse-of-exhaustion.js";
 import _poolCurseOfFoolsWisdom from "./pool/curse-of-fools-wisdom.js";
 import _poolCurseOfHospitality from "./pool/curse-of-hospitality.js";
@@ -8900,6 +8902,7 @@ import _poolExplosiveImpact from "./pool/explosive-impact.js";
 import _poolExplosiveProdigy from "./pool/explosive-prodigy.js";
 import _poolExplosiveRevelation from "./pool/explosive-revelation.js";
 import _poolExplosiveShot from "./pool/explosive-shot.js";
+import _poolExplosiveSingularity from "./pool/explosive-singularity.js";
 import _poolExplosiveVegetation from "./pool/explosive-vegetation.js";
 import _poolExplosiveWelcome from "./pool/explosive-welcome.js";
 import _poolExponentialGrowth from "./pool/exponential-growth.js";
@@ -10823,6 +10826,7 @@ import _poolGhostLitRedeemer from "./pool/ghost-lit-redeemer.js";
 import _poolGhostLitStalker from "./pool/ghost-lit-stalker.js";
 import _poolGhostLitWarder from "./pool/ghost-lit-warder.js";
 import _poolGhostOfIllyria from "./pool/ghost-of-illyria.js";
+import _poolGhostOfRamirezDepietro from "./pool/ghost-of-ramirez-depietro.js";
 import _poolGhostQuarter from "./pool/ghost-quarter.js";
 import _poolGhostShip from "./pool/ghost-ship.js";
 import _poolGhostSpectralSaboteur from "./pool/ghost-spectral-saboteur.js";
@@ -19797,6 +19801,7 @@ import _poolParishBladeTrainee from "./pool/parish-blade-trainee.js";
 import _poolParkHeightsMaverick from "./pool/park-heights-maverick.js";
 import _poolParkHeightsPegasus from "./pool/park-heights-pegasus.js";
 import _poolParkerLuck from "./pool/parker-luck.js";
+import _poolParnesseTheSubtleBrush from "./pool/parnesse-the-subtle-brush.js";
 import _poolParoxysm from "./pool/paroxysm.js";
 import _poolPartTheVeil from "./pool/part-the-veil.js";
 import _poolPartTheWaterveil from "./pool/part-the-waterveil.js";
@@ -34822,6 +34827,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvacynsMemorial,
   _poolAvacynsPilgrim,
   _poolAvalancheCaller,
+  _poolAvalancheOfSector7,
   _poolAvalancheRiders,
   _poolAvalancheTusker,
   _poolAvalanche,
@@ -39011,6 +39017,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfConformity,
   _poolCurseOfDeathSHold,
   _poolCurseOfDisturbance,
+  _poolCurseOfEchoes,
   _poolCurseOfExhaustion,
   _poolCurseOfFoolsWisdom,
   _poolCurseOfHospitality,
@@ -42022,6 +42029,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExplosiveProdigy,
   _poolExplosiveRevelation,
   _poolExplosiveShot,
+  _poolExplosiveSingularity,
   _poolExplosiveVegetation,
   _poolExplosiveWelcome,
   _poolExponentialGrowth,
@@ -43945,6 +43953,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGhostLitStalker,
   _poolGhostLitWarder,
   _poolGhostOfIllyria,
+  _poolGhostOfRamirezDepietro,
   _poolGhostQuarter,
   _poolGhostShip,
   _poolGhostSpectralSaboteur,
@@ -52919,6 +52928,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolParkHeightsMaverick,
   _poolParkHeightsPegasus,
   _poolParkerLuck,
+  _poolParnesseTheSubtleBrush,
   _poolParoxysm,
   _poolPartTheVeil,
   _poolPartTheWaterveil,
@@ -67957,6 +67967,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/avacyns-memorial": _poolAvacynsMemorial,
   "pool/avacyns-pilgrim": _poolAvacynsPilgrim,
   "pool/avalanche-caller": _poolAvalancheCaller,
+  "pool/avalanche-of-sector-7": _poolAvalancheOfSector7,
   "pool/avalanche-riders": _poolAvalancheRiders,
   "pool/avalanche-tusker": _poolAvalancheTusker,
   "pool/avalanche": _poolAvalanche,
@@ -72146,6 +72157,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-conformity": _poolCurseOfConformity,
   "pool/curse-of-death-s-hold": _poolCurseOfDeathSHold,
   "pool/curse-of-disturbance": _poolCurseOfDisturbance,
+  "pool/curse-of-echoes": _poolCurseOfEchoes,
   "pool/curse-of-exhaustion": _poolCurseOfExhaustion,
   "pool/curse-of-fools-wisdom": _poolCurseOfFoolsWisdom,
   "pool/curse-of-hospitality": _poolCurseOfHospitality,
@@ -75157,6 +75169,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/explosive-prodigy": _poolExplosiveProdigy,
   "pool/explosive-revelation": _poolExplosiveRevelation,
   "pool/explosive-shot": _poolExplosiveShot,
+  "pool/explosive-singularity": _poolExplosiveSingularity,
   "pool/explosive-vegetation": _poolExplosiveVegetation,
   "pool/explosive-welcome": _poolExplosiveWelcome,
   "pool/exponential-growth": _poolExponentialGrowth,
@@ -77080,6 +77093,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ghost-lit-stalker": _poolGhostLitStalker,
   "pool/ghost-lit-warder": _poolGhostLitWarder,
   "pool/ghost-of-illyria": _poolGhostOfIllyria,
+  "pool/ghost-of-ramirez-depietro": _poolGhostOfRamirezDepietro,
   "pool/ghost-quarter": _poolGhostQuarter,
   "pool/ghost-ship": _poolGhostShip,
   "pool/ghost-spectral-saboteur": _poolGhostSpectralSaboteur,
@@ -86054,6 +86068,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/park-heights-maverick": _poolParkHeightsMaverick,
   "pool/park-heights-pegasus": _poolParkHeightsPegasus,
   "pool/parker-luck": _poolParkerLuck,
+  "pool/parnesse-the-subtle-brush": _poolParnesseTheSubtleBrush,
   "pool/paroxysm": _poolParoxysm,
   "pool/part-the-veil": _poolPartTheVeil,
   "pool/part-the-waterveil": _poolPartTheWaterveil,

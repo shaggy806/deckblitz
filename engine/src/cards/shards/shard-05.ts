@@ -365,6 +365,7 @@ import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGenjuOfTheRealm from "../pool/genju-of-the-realm.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
 import _poolGhostCouncilOfOrzhova from "../pool/ghost-council-of-orzhova.js";
+import _poolGhostOfRamirezDepietro from "../pool/ghost-of-ramirez-depietro.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
 import _poolGiantSlug from "../pool/giant-slug.js";
@@ -1392,6 +1393,7 @@ const shard: CardShard = {
     _poolGenjuOfTheRealm,
     _poolGhituAmplifier,
     _poolGhostCouncilOfOrzhova,
+    _poolGhostOfRamirezDepietro,
     _poolGhostlyChangeling,
     _poolGiantOx,
     _poolGiantSlug,

@@ -256,6 +256,7 @@ import _poolExaltedSunborn from "../pool/exalted-sunborn.js";
 import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
 import _poolExpeditionLookout from "../pool/expedition-lookout.js";
+import _poolExplosiveSingularity from "../pool/explosive-singularity.js";
 import _poolExtendedAbsence from "../pool/extended-absence.js";
 import _poolExtirpate from "../pool/extirpate.js";
 import _poolEyesOfTheWisent from "../pool/eyes-of-the-wisent.js";
@@ -1233,6 +1234,7 @@ const shard: CardShard = {
     _poolExecutionersCapsule,
     _poolExpandTheSphere,
     _poolExpeditionLookout,
+    _poolExplosiveSingularity,
     _poolExtendedAbsence,
     _poolExtirpate,
     _poolEyesOfTheWisent,
