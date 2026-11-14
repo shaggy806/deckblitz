@@ -9,8 +9,9 @@
 import { describe, expect, it } from "vitest";
 
 import type { ScriptedController } from "../controller.js";
-import { A, B, cast, enter, lands, life, nextTurn, pickModes, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, cast, enter, lands, life, named, nextTurn, pickModes, ref, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 import type { Game } from "../game.js";
+import { lastRollIn } from "../random-results.js";
 import type { ObjectId } from "../primitives.js";
 
 const castFree = (seat: ScriptedController, targets: readonly ReturnType<typeof ref>[] = [ref(B)]): void => {
@@ -194,5 +195,49 @@ describe("Neera, Wild Mage", () => {
     cast(game, third, { targets: [ref(B)] });
     expect(life(game, B)).toBe(18);
     expect(zone(game, third)).toBe("graveyard");
+  });
+});
+
+describe("Gale's Redirection", () => {
+  /** The first seed whose roll lands in [min, max], with Blaze (X = 4, mana value 5) exiled. */
+  function redirected(min: number, max: number) {
+    for (let seed = 1; seed < 200; seed += 1) {
+      const t = table({ seed });
+      lands(t.game, "Mountain", 5);
+      lands(t.game, "Island", 5);
+      const blaze = toHand(t.game, "Blaze");
+      cast(t.game, blaze, { x: 4, targets: [ref(B)], settle: false });
+      cast(t.game, toHand(t.game, "Gale's Redirection"), { targets: [ref(blaze)] });
+      const roll = lastRollIn(t.game.state)!;
+      if (roll.total >= min && roll.total <= max) return { ...t, blaze, roll };
+    }
+    throw new Error("no seed rolled it");
+  }
+
+  it("exiles the spell without countering it and adds its mana value, {X} included, to the d20", () => {
+    const { game, blaze, roll } = redirected(1, 99);
+    expect(zone(game, blaze)).toBe("exile");
+    expect(life(game, B)).toBe(20);
+    expect(roll.total - roll.results[0]).toBe(5);
+  });
+
+  it("1—14: castable while exiled, its mana spent as though any color", () => {
+    const { game, blaze } = redirected(1, 14);
+    expect(game.state.objects[blaze].playPermission?.player).toBe(A);
+    nextTurn(game);
+    nextTurn(game);
+    // Islands alone pay {X}{R}.
+    for (const id of named(game, "Mountain", A)) game.debugMove(id, "graveyard");
+    expect(named(game, "Island", A)).toHaveLength(5);
+    cast(game, blaze, { x: 1, targets: [ref(B)], via: "impulse" });
+    expect(life(game, B)).toBe(19);
+  });
+
+  it("15+: castable while exiled without paying its mana cost", () => {
+    const { game, blaze } = redirected(15, 99);
+    nextTurn(game);
+    nextTurn(game);
+    cast(game, blaze, { x: 0, targets: [ref(B)], via: "impulse", free: true });
+    expect(zone(game, blaze)).toBe("graveyard");
   });
 });
