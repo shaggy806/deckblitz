@@ -69,6 +69,9 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'mana-expended',
   // Bookkeeping for "the amassed Army" — the token and its counters have lines of their own.
   'amassed',
+  // Bookkeeping for "whenever you … at random" (Chira, All In) — the discard,
+  // flip, roll or pick has its own line.
+  'acted-at-random',
   // Bookkeeping for "whenever your untap step untaps …" — the permanents' own untaps say it.
   'untap-step-untapped',
   'permanent-tapped',
@@ -436,6 +439,10 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       }`
     case 'number-chosen':
       return `${who(event.player)} chooses ${event.number} for ${name(event.object)}`
+    case 'acted-at-random':
+      return `${who(event.player)} ${
+        { discard: 'discards', targets: 'selects targets', modes: 'chooses modes', coins: 'flips coins', dice: 'rolls dice' }[event.act]
+      } at random`
     case 'permanent-or-player-chosen':
       return `${who(event.player)} chooses ${
         event.chosen.kind === 'player'

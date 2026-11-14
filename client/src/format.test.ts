@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
-import { HIDDEN_CARD, abilitySourcesOf, describeEvent, forYou, logName, logNameAt, possessive, withNames } from './format.ts'
+import { HIDDEN_CARD, abilitySourcesOf, describeEvent, forYou, isDetailOnlyEvent, logName, logNameAt, possessive, withNames } from './format.ts'
 
 const p1 = 'p1' as PlayerId
 const p2 = 'p2' as PlayerId
@@ -18,6 +18,12 @@ describe('describeEvent', () => {
     expect(
       describeEvent(event({ type: 'spell-control-changed', object: 'o1', controller: p1, previousController: p2 }), nameOf, seats),
     ).toBe('Toby gains control of card:o1')
+  })
+
+  it("says a random act in words, in the detailed history only (not as the event's JSON)", () => {
+    const acted = event({ type: 'acted-at-random', player: p1, act: 'dice' })
+    expect(describeEvent(acted, nameOf, seats)).toBe('Toby rolls dice at random')
+    expect(isDetailOnlyEvent(acted)).toBe(true)
   })
 
   it('says who a creature-or-player choice went to', () => {
