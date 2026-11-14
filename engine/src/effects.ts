@@ -11463,6 +11463,11 @@ export interface SpellCopyGains {
   /** "If the copy is a permanent spell, it gains …" (rule 110.4b): a copy of
    * an instant or sorcery gains nothing. */
   readonly ifPermanent?: true;
+  /** "You may copy it. If you do, **those spells** gain wither" (Spinerock
+   * Tyrant): the spell copied gains the `keywords` too — a `copy-spell` of
+   * `"trigger-spell"`, once a copy was made, and only while the original is
+   * still that spell on the stack (rule 400.7), with no end. */
+  readonly alsoOriginal?: true;
 }
 
 /** How a spell's copy differs from the spell — `copy-spell`'s `except` and
@@ -21064,6 +21069,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           }
         }
       });
+      // "If you do, those spells gain wither" (Spinerock Tyrant): the spell
+      // copied as well, while it's still that spell on the stack.
+      if (copied && spec.gains?.alsoOriginal === true && spec.target === "trigger-spell" && spec.spell === undefined) {
+        const original = movedRefAct("trigger-object", ctx);
+        if (original !== undefined) {
+          for (const keyword of spec.gains.keywords ?? []) ctx.grantKeyword(original, keyword, "permanent", false);
+        }
+      }
       if (!copied && spec.otherwise !== undefined) applyEffectSpec(spec.otherwise, ctx);
       return;
     }

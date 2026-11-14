@@ -2002,6 +2002,9 @@ is "the copy **gains** haste and 'At the beginning of the end step, sacrifice th
 (Nalfeshnee, Choreographed Sparks): an effect on the copy with no end, not a copy exception, so
 it goes on applying to the permanent it becomes (rule 400.7a) and a copy of that has none of it;
 `ifPermanent` is "if the copy is a permanent spell" (110.4b), read on the copy.
+`alsoOriginal: true` is "you may copy it. If you do, **those spells** gain wither" (Spinerock
+Tyrant, a `"trigger-spell"` copy): the spell copied gains the `keywords` too, once a copy was
+made, while it's still that spell on the stack (`spell-on-stack-gains-keyword.test.ts`).
 `copy-spell-changes.test.ts`. Neither with `forEachItCouldTarget`. With
 `"trigger-spell"`, two more aim the copy themselves:
 
@@ -3313,7 +3316,10 @@ that targets a creature you control" is `{ permanent: { type: "creature", contro
 be one — Zada, Hedron Grinder's "targets only Zada" is `{ only: true, source: true }` (two
 slots on Zada still count) — and `single: true` that they're all one and the same — Ivy,
 Gleeful Spellthief's "targets only a single creature other than Ivy" is `{ only: true,
-single: true, permanent: { type: "creature" }, source: false }`. A target that has changed
+single: true, permanent: { type: "creature" }, source: false }`. `count: 1` is "a spell
+**with a single target**" (rule 115.9a — Spinerock Tyrant's cast trigger, `{ count: 1 }`
+alone): exactly that many targets chosen as it was cast, the same object twice counted twice,
+gone or not. A target that has changed
 zones since it was targeted is a new object the spell no longer targets (rule 400.7 — the
 Rebuff the Wicked ruling). It works in a cast trigger's `filter`, a `deals-damage`
 trigger's source `filter` (Imodane, the Pyrohammer: an instant or sorcery spell "that

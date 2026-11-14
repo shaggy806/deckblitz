@@ -1514,6 +1514,11 @@ export interface CardFilter {
 export interface SpellTargetsFilter {
   readonly only?: boolean;
   readonly single?: boolean;
+  /** "A spell **with a single target**" (rule 115.9a — Spinerock Tyrant's
+   * `1`): exactly this many targets chosen as it was put on the stack, each
+   * instance counted (the same object twice is two) and whether or not
+   * they're still legal. Alone, it asks nothing of what they are. */
+  readonly count?: number;
   /** A target is a permanent matching this ("a creature you control"). */
   readonly permanent?: CardFilter;
   /** A target is (`true`) or isn't (`false`) the permanent applying the
@@ -1564,6 +1569,11 @@ export function stackObjectTargetsMatch(
     t === undefined || t === null || auto.has(i) ? [] : gone(i) ? [{ kind: "gone" }] : [t],
   );
   if (targets.length === 0) return false;
+  // "With a single target" (115.9a): the targets as chosen, gone or not.
+  if (clause.count !== undefined) {
+    if (targets.length !== clause.count) return false;
+    if (clause.player === undefined && clause.permanent === undefined && clause.source === undefined) return true;
+  }
   if (clause.single === true) {
     const first = targets[0];
     const same = targets.every((t) =>
