@@ -322,6 +322,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Base power as an amount, and an exiled permanent as a cost — built 2026-11-14
+
+The keys `effect:base-power-amount` and `cost:exile-another-permanent-you-control`. The amount
+`{ basePowerOf: ObjectRef }` (`ctx.basePowerOf`, the LKI's `basePower` once it has left): layer 7b
+and before (rule 613.4b). The cost needed nothing new: `sacrifice: { filter: { …, isSource: false } },
+exilesSacrifice: true`, read back as `{ paid: "sacrificed" }` by `become-copy` (the Ever-Changing
+'Dane's shape). Curie, Emergent Intelligence (rank 9137); Arni Brokenbrow (a `become` setting only
+its base power — no engine code, but a signed `aggregate` inside a set value now keeps its sign,
+rule 107.1b, its ruling). `test/base-power-amount.test.ts`.
+
 ### Returning as an Aura with a granted ability — built 2026-11-14
 
 The key `effect:return-as-aura-with-granted-ability`. `EnterTypes.enchant: TargetSpec`

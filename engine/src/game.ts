@@ -41062,6 +41062,15 @@ controlledBy,
           ? 0
           : chars.toughness;
       },
+      basePowerOf: (target) => {
+        const lki = lastKnownOf(target);
+        if (lki !== undefined) return lki.offBattlefield === true || lki.types.includes("creature") ? lki.basePower : 0;
+        if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
+        const chars = computeCharacteristics(this.state, this.registry, target.object);
+        return this.state.objects[target.object].zone === "battlefield" && !chars.types.includes("creature")
+          ? 0
+          : chars.basePower;
+      },
       countersOf: (target, counter) => {
         const lki = lastKnownOf(target);
         const counters =

@@ -1226,7 +1226,7 @@ function slotsReadBy(amount: unknown): number[] {
   if (Array.isArray(amount)) return amount.flatMap(slotsReadBy);
   if (typeof amount !== "object" || amount === null) return [];
   return Object.entries(amount).flatMap(([key, value]) =>
-    (key === "powerOf" || key === "toughnessOf" || key === "manaValueOf") && typeof value === "number"
+    (key === "powerOf" || key === "toughnessOf" || key === "basePowerOf" || key === "manaValueOf") && typeof value === "number"
       ? [value]
       : slotsReadBy(value),
   );

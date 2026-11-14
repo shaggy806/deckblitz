@@ -942,7 +942,9 @@ Emissary Escort with the aggregate's `excludeSelf`)),
 `{ countersOn: ref, counter? }` (how many counters of one kind are on it —
 every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died
-with, Chasm Skulker), `{ countInGraveyard }`, `{ manaValueOf }`, `{ powerOf }`, `{ toughnessOf }`
+with, Chasm Skulker), `{ countInGraveyard }`, `{ manaValueOf }`, `{ powerOf }`, `{ toughnessOf }`,
+`{ basePowerOf }` (Curie, Emergent Intelligence's "draw cards equal to its base power": layer 7b and
+before, rule 613.4b)
 (Condemn; each takes a target slot, `"source"`, `"trigger-object"`,
 `"sacrificed"`, `"tapped"` — the one permanent tapped to pay the ability's
 cost, station's — or `"discarded"`, the one card discarded to pay the
@@ -4424,7 +4426,9 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   [creature] card of your graveyard" (Alms, Necratog; rule 404.2): no choice, the
   first match down from the top of the pile.
 - `sacrifice: { filter }, exilesSacrifice: true` — "Exile a creature you control" (Food Chain, City of
-  Shadows; `otherOnly` for "another"): offered and named as a sacrifice is, read back as
+  Shadows; `isSource: false` in the filter for "another" — Curie, Emergent Intelligence's "Exile another
+  nontoken artifact creature you control", whose `become-copy` of `{ paid: "sacrificed" }` copies the
+  exiled creature as it last existed): offered and named as a sacrifice is, read back as
   `"sacrificed"` (`manaValueOf`, the `sacrificed` condition), but exiled: no sacrifice event, and
   what can't be sacrificed still pays. On a spell, `additionalCost: { sacrifice, exilesSacrifice: true }`
   (Necrotic Fumes). `exile-chosen-costs.test.ts`. "Exile a **face-down permanent** you control face

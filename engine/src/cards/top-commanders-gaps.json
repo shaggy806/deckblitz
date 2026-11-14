@@ -13,6 +13,8 @@
     "decision:choose-two-colors-on-enter",
     "mechanic:choose-two-colors-on-enter",
     "decision:controller-of-target-divides-damage",
+    "effect:base-power-amount",
+    "cost:exile-another-permanent-you-control",
     "effect:return-as-aura-with-granted-ability",
     "effect:store-die-results",
     "mechanic:attractions",

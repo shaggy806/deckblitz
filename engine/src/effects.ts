@@ -628,9 +628,10 @@ export type EffectAmount =
    * cards in your graveyard", "the greatest power among them" (the
    * attackers that fired the trigger), "the number of counters among
    * creatures target player controls". A token stack counts once per token
-   * in a sum. Clamped at 0 (rule 107.1b), so a board of negative-power
-   * creatures deals no damage rather than a negative amount. See
-   * {@link AggregateSpec}. */
+   * in a sum. The calculation it's part of is clamped at 0 (rule 107.1b),
+   * so a board of negative-power creatures deals no damage rather than a
+   * negative amount — unless it sets a power or toughness, which keeps the
+   * sign (Arni Brokenbrow's ruling). See {@link AggregateSpec}. */
   | AggregateSpec
   /** A numeric quantity the triggering event supplies (ROADMAP P4b): the power
    * of the entering creature (Terror of the Peaks) or, for a "deals combat
@@ -838,6 +839,13 @@ export type EffectAmount =
    * the creature last existed on the battlefield. `doubling` as for
    * `powerOf`. */
   | { readonly toughnessOf: ObjectRef; readonly doubling?: true }
+  /** The **base** power of whatever an {@link ObjectRef} points at (Curie,
+   * Emergent Intelligence's "draw cards equal to its base power"): its power
+   * after layer 7b — printed, a copy's, a characteristic-defining ability's
+   * or one an effect set — before anything that modifies it without setting
+   * it (rule 613.4b; the rulings). Read as it last existed on the battlefield
+   * if it has left (608.2h); 0 for a noncreature permanent. */
+  | { readonly basePowerOf: ObjectRef }
   /** How many counters of one kind are on whatever an {@link ObjectRef}
    * points at — Black Market's "{B} for each charge counter on this
    * enchantment", Chasm Skulker's "X is the number of +1/+1 counters on this
@@ -11962,6 +11970,8 @@ export interface EffectApi {
    * referred to it reads as it last existed there. */
   powerOf(target: TargetRef): number;
   toughnessOf(target: TargetRef): number;
+  /** See the `{ basePowerOf }` {@link EffectAmount}. */
+  basePowerOf(target: TargetRef): number;
   /** See the `{ countersOn }` {@link EffectAmount}. */
   countersOf(target: TargetRef, counter: string | undefined): number;
   /** See the `"put-on-bottom-of-library"` {@link EffectSpec}. */
@@ -16306,6 +16316,10 @@ export function signedAmountValue(
     const ref = objectRefRead(amount.toughnessOf, ctx);
     return ref === undefined ? 0 : ctx.toughnessOf(ref);
   }
+  if ("basePowerOf" in amount) {
+    const ref = objectRefRead(amount.basePowerOf, ctx);
+    return ref === undefined ? 0 : ctx.basePowerOf(ref);
+  }
   if ("countersOn" in amount) {
     const ref = objectRefRead(amount.countersOn, ctx);
     return ref === undefined ? 0 : ctx.countersOf(ref, amount.counter);
@@ -16346,13 +16360,16 @@ export function signedAmountValue(
     return ref === undefined ? 0 : ctx.commanderCastsOf(ref);
   }
   if ("aggregate" in amount) {
+    // Signed, like the rest of this function: `amountValue` clamps the whole
+    // calculation, and one setting a power keeps its sign (rule 107.1b —
+    // Arni Brokenbrow's "1 plus the greatest power", which can be -2).
     const except = amount.excludeSelf === true ? [ctx.source] : [];
     if (amount.forTarget !== undefined) {
       const ref = ctx.targets[amount.forTarget];
       if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
-      return Math.max(0, ctx.aggregate(amount, except, ref.player, each));
+      return ctx.aggregate(amount, except, ref.player, each);
     }
-    return Math.max(0, ctx.aggregate(amount, except, undefined, each));
+    return ctx.aggregate(amount, except, undefined, each);
   }
   const except: ObjectId[] = [];
   if (amount.excludeSelf === true) except.push(ctx.source);
