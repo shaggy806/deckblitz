@@ -7296,11 +7296,22 @@ export type EffectSpec =
        * keyword's activated ability included, as if printed on `target` ("this
        * permanent" is `target` — the ruling). Each activation gathers more; a
        * card's abilities that work from another zone aren't among them.
+       *
+       * `filter` in place of `target` gives them to every permanent the
+       * effect's controller controls matching it as this resolves, one
+       * effect (rule 611.2c) — Grell Philosopher's "each Horror you control
+       * gains all activated abilities of target artifact"; `target` is then
+       * ignored. `spendAs` is "you may spend blue mana as though it were mana
+       * of any color to activate **those** abilities" (rule 609.4b,
+       * `{ unit: "U", as: "any-color" }`): for the effect's controller, paying
+       * for these grants alone, while they last.
        */
       readonly kind: "grant-activated-of";
       readonly target: ObjectRef;
+      readonly filter?: CardFilter;
       readonly of: ObjectRef;
       readonly duration: PermanentDuration;
+      readonly spendAs?: SpendAs;
     }
   | {
       /**
@@ -12841,8 +12852,9 @@ export interface EffectApi {
   grantTriggeredAll(filter: CardFilter, ability: TriggeredAbility, duration: PermanentDuration): void;
   /** See the `"grant-activated"` {@link EffectSpec}. */
   grantActivated(target: TargetRef, ability: ActivatedAbility, duration: PermanentDuration): void;
-  /** See the `"grant-activated-of"` {@link EffectSpec}. */
-  grantActivatedOf(target: TargetRef, of: TargetRef, duration: PermanentDuration): void;
+  /** See the `"grant-activated-of"` {@link EffectSpec}: to one permanent, or
+   * every one matching a filter. */
+  grantActivatedOf(target: TargetRef | CardFilter, of: TargetRef, duration: PermanentDuration, spendAs?: SpendAs): void;
   /** `target` becomes what `patch` says — see the `"become"` {@link EffectSpec}. */
   become(target: TargetRef, patch: ResolvedPatch, duration: PermanentDuration): void;
   /** Every permanent matching `filter` as this begins becomes what `patch`
@@ -19903,9 +19915,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "grant-activated-of": {
-      const target = objectRefAct(spec.target, ctx);
+      const target = spec.filter ?? objectRefAct(spec.target, ctx);
       const of = objectRefAct(spec.of, ctx);
-      if (target !== undefined && of !== undefined) ctx.grantActivatedOf(target, of, spec.duration);
+      if (target !== undefined && of !== undefined) ctx.grantActivatedOf(target, of, spec.duration, spec.spendAs);
       return;
     }
     case "grant-activated-all":

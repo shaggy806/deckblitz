@@ -1900,6 +1900,11 @@ export interface PtModifier {
    * (Brenard, Ginger Sculptor). Seen by `legalActions`, activation and the
    * mana payer like any granted activated ability. */
   grantsActivated?: ActivatedAbility[];
+  /** How `player` may spend mana to activate this modifier's
+   * `grantsActivated` (rule 609.4b) — a `grant-activated-of`'s `spendAs`:
+   * Grell Philosopher's "you may spend blue mana as though it were mana of
+   * any color to activate those abilities". Read by `Game.spendAsFor`. */
+  grantsActivatedSpendAs?: { readonly player: PlayerId; readonly as: SpendAs };
   /** "Until your next turn": it ends as this player's next turn begins, or
    * as it would have begun once they've left the game (rule 800.4m). */
   untilTurnOf?: PlayerId;

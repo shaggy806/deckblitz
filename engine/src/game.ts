@@ -28198,6 +28198,17 @@ export class Game {
       }
       allow(rule.as);
     }
+    // "You may spend blue mana as though it were mana of any color to
+    // activate those abilities" (Grell Philosopher): a grant's own, to its
+    // controller, for the abilities it gave alone.
+    if (purpose?.kind === "ability" && purpose.ability !== undefined) {
+      for (const modifier of this.state.objects[purpose.source]?.modifiers ?? []) {
+        const spend = modifier.grantsActivatedSpendAs;
+        if (spend !== undefined && spend.player === player && modifier.grantsActivated?.includes(purpose.ability) === true) {
+          allow(spend.as);
+        }
+      }
+    }
     if (spellCard !== undefined) {
       const card = this.state.objects[spellCard];
       // From a graveyard, the permission it's cast under (Whispersteel
@@ -40550,25 +40561,32 @@ controlledBy,
           ...durationFields(kept),
         });
       },
-      grantActivatedOf: (target, of, duration) => {
-        if (target.kind !== "object" || of.kind !== "object") return;
-        const id = this.splitOneFromStack(target.object);
-        const object = this.state.objects[id];
-        const from = this.state.objects[of.object];
-        const kept = lastingHere(duration);
-        if (object === undefined || object.zone !== "battlefield" || from === undefined || !durationBegins(object, kept)) return;
+      grantActivatedOf: (target, of, duration, spendAs) => {
+        if (of.kind !== "object" || this.state.objects[of.object] === undefined) return;
+        if ("kind" in target && target.kind !== "object") return;
         // As `of` has them as this resolves, the ones that work from the
         // battlefield.
         const abilities = this.effectiveActivated(of.object).filter((a) => a.zone === undefined);
         if (abilities.length === 0) return;
-        object.modifiers.push({
-          timestamp: this.freshTimestamp(),
-          power: 0,
-          toughness: 0,
-          keywords: [],
-          grantsActivated: [...abilities],
-          ...durationFields(kept),
-        });
+        const kept = lastingHere(duration);
+        // One effect, one timestamp (rule 613.7b), however many it reaches;
+        // a filter's set fixed as it resolves (611.2c).
+        const timestamp = this.freshTimestamp();
+        const ids =
+          "kind" in target ? [this.splitOneFromStack(target.object)] : this.battlefieldMatching(controller, target);
+        for (const id of ids) {
+          const object = this.state.objects[id];
+          if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, kept)) continue;
+          object.modifiers.push({
+            timestamp,
+            power: 0,
+            toughness: 0,
+            keywords: [],
+            grantsActivated: [...abilities],
+            ...(spendAs !== undefined ? { grantsActivatedSpendAs: { player: controller, as: spendAs } } : {}),
+            ...durationFields(kept),
+          });
+        }
         invalidateComputedCache();
       },
       grantActivatedAll: (filter, ability, duration) => {
