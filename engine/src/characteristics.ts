@@ -1429,6 +1429,25 @@ function evalStaticCondition(
         (p) => p !== you && state.players[p]?.hasLost !== true && attackedYouDuringTheirLastTurn(state, you, p),
       );
     }
+    case "unattacked-opponent": {
+      // "Being attacked" is now: a creature attacking that player (rule
+      // 506.3), not one of their planeswalkers or battles (Suppressor
+      // Skyguard's ruling), asked as it triggers and as it resolves (603.4).
+      const them = conditionPlayerOf(state, condition.of, opts, source);
+      if (them === undefined) return false;
+      const attacked = new Set<string>();
+      for (const id of state.zones.shared.battlefield) {
+        const at = state.objects[id]?.attacking;
+        if (at !== null && at !== undefined) attacked.add(at);
+      }
+      return state.turnOrder.some(
+        (p) =>
+          p !== them &&
+          (condition.another !== true || p !== you) &&
+          state.players[p]?.hasLost !== true &&
+          !attacked.has(p),
+      );
+    }
     case "counters-put-this-turn":
       return countersPutThisTurn(state, condition, you) >= (condition.atLeast ?? 1);
     case "unspent-mana":

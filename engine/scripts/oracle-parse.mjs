@@ -2255,6 +2255,11 @@ export function parseTrigger(clause) {
   // "Whenever one or more creatures attack you / one of your opponents": once
   // per player attacked; `inSet: "trigger-batch"` is those attacking that player.
   if (c === "Whenever one or more creatures attack you") return [{ on: "attacks-player", who: "any", defender: "you" }];
+  // "Whenever a player attacks you" (Suppressor Skyguard): the same, once per
+  // declaration with creatures attacking you.
+  if (c === "Whenever a player attacks you" || c === "Whenever an opponent attacks you") {
+    return [{ on: "attacks-player", who: "any", defender: "you" }];
+  }
   // "Whenever a player loses the game" (Blood Tyrant, Ramses, Assassin Lord):
   // the `loses-game` row, "they" the player who lost.
   if (c === "Whenever a player loses the game") return [{ on: "event", event: "loses-game", who: "any" }];
@@ -3198,6 +3203,17 @@ export function parseSentence(sentence, ctx) {
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
+  // "Prevent all combat damage that would be dealt to you this turn" (Druid's
+  // Deliverance), "… this combat" (Suppressor Skyguard, rule 511.2).
+  const shield = /^prevent all combat damage that would be dealt to you this (turn|combat)\.$/i.exec(s);
+  if (shield !== null) {
+    return {
+      kind: "damage-rule",
+      to: { players: "you" },
+      combat: true,
+      ...(shield[1].toLowerCase() === "combat" ? { duration: "until-end-of-combat" } : {}),
+    };
+  }
   // "Exile that card [and create a 2/2 black Zombie creature token]": the card
   // a put-into-a-graveyard trigger is about, found in that graveyard and
   // nowhere else (rule 400.7 — Undead Alchemist). The token is made whether
@@ -18485,6 +18501,10 @@ function playerStateIf(clause, triggers) {
   if (m !== null && triggers.every((t) => t.on === "event" && t.event === "loses-game")) {
     const filter = parseTypePhrase(clause.slice(clause.indexOf(" by ") + 4).replace(/^an? /, "").replace(/ you controlled,$/, ""));
     if (filter !== null) return { kind: "turn-history", what: "attackers", who: "you", filter, against: "that-player" };
+  }
+  // Suppressor Skyguard: the attacking player is the active one (rule 506.2).
+  if (c === "if that player has another opponent who isn't being attacked," && triggers.every((t) => t.on === "attacks-player" && t.defender === "you")) {
+    return { kind: "unattacked-opponent", of: "active-player", another: true };
   }
   // Archaeomancer's Map: the player the land entered under, or the player attacked.
   m = /^if that player controls more (lands|creatures|artifacts|enchantments) than you,$/.exec(c);

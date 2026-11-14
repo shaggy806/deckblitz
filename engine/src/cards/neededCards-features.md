@@ -368,6 +368,12 @@ The combat-targeting lane's group of attack-history reads (B322's group).
   game (`conditionPlayerOf`'s `evenIfGone`). Ramses, Assassin Lord's
   "whenever a player loses the game, if they were attacked this turn by an
   Assassin you controlled". `test/attacked-by-condition.test.ts`.
+- `condition:attacking-player-left-an-opponent-unattacked` — the
+  `unattacked-opponent` condition (`of`, `another`), read off the board as it
+  is (a creature attacking that player now, rule 506.3; their planeswalkers
+  don't count, the ruling), and `damage-rule`'s `"until-end-of-combat"`
+  duration (511.2). Suppressor Skyguard.
+  `test/unattacked-opponent-condition.test.ts`.
 
 ### A reflexive ability's target read against its source now — fixed 2026-11-13
 

@@ -1450,6 +1450,15 @@ export type StaticCondition =
    * player attacked you …" is `by: "that-player"`.
    */
   | { readonly kind: "attacked-you-last-turn"; readonly by?: ConditionPlayer }
+  /**
+   * `of` has an opponent still in the game who isn't being attacked — no
+   * creature is attacking that player now (rule 506.3: the player, not a
+   * planeswalker or battle of theirs) — other than you with `another`:
+   * Suppressor Skyguard's "whenever a player attacks you, if that player has
+   * another opponent who isn't being attacked" (`{ of: "active-player",
+   * another: true }`, the attacking player being the active one, 506.2).
+   */
+  | { readonly kind: "unattacked-opponent"; readonly of: ConditionPlayer; readonly another?: true }
   /** At least `atLeast` (default 1) counters put this turn, as
    * {@link CountersPutSpec} narrows them — "if you put a counter on a creature
    * this turn" (Lord Jyscal Guado). */

@@ -201,10 +201,10 @@ export type PermissionDuration = Extract<
   | "while-exiled"
 >;
 
-/** How long a damage rule lasts (`DamageRule`): the turn, until your next
- * turn, or for as long as its source stays on the battlefield (Old Fat
- * Spider Can't See Me). */
-export type DamageRuleDuration = Extract<Duration, "end-of-turn" | "until-your-next-turn" | "while-source">;
+/** How long a damage rule lasts (`DamageRule`): the turn, this combat
+ * (Suppressor Skyguard — rule 511.2), until your next turn, or for as long as
+ * its source stays on the battlefield (Old Fat Spider Can't See Me). */
+export type DamageRuleDuration = Extract<Duration, "end-of-turn" | "until-end-of-combat" | "until-your-next-turn" | "while-source">;
 
 /** How long a "whenever" watch lasts (`DelayedWhenever`): this turn when
  * omitted. `{ throughTurnOf }` is "until the end of **that player's** next

@@ -19010,6 +19010,21 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(face.complete).toBe(true);
   });
 
+  it("reads an attack on you leaving another opponent unattacked, and this combat's shield (Suppressor Skyguard)", () => {
+    const face = parseFace({
+      name: "Suppressor Skyguard",
+      type_line: "Creature — Human Knight",
+      oracle_text:
+        "Flying\nWhenever a player attacks you, if that player has another opponent who isn't being attacked, prevent all combat damage that would be dealt to you this combat.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "attacks-player", who: "any", defender: "you" },
+      condition: { kind: "unattacked-opponent", of: "active-player", another: true },
+      effect: { kind: "damage-rule", to: { players: "you" }, combat: true, duration: "until-end-of-combat" },
+    });
+  });
+
   it("reads an investigation, the first each turn (Erdwal Illuminator)", () => {
     expect(parseTrigger("Whenever you investigate for the first time each turn")).toEqual([
       { on: "event", event: "investigates", who: "you", firstTimeEachTurn: true },

@@ -41715,7 +41715,9 @@ controlledBy,
               ? { untilTurnOf: controller }
               : rule.duration === "while-source"
                 ? { whileSource: { id: source, zoneChangeCount: this.state.objects[source]?.zoneChangeCount ?? 0 } }
-                : "end-of-turn",
+                : rule.duration === "until-end-of-combat"
+                  ? { untilEndOfCombat: true as const }
+                  : "end-of-turn",
           ...(target !== undefined ? { target } : {}),
           ...(target?.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {}),
           // Beside a target, "this creature and/or you" (Glarecaster).
