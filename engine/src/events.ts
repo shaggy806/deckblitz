@@ -1455,6 +1455,10 @@ export type GameEvent =
        * on the battlefield (`GameObject.splitFrom`): the client draws the
        * stack going down rather than a token it never drew leaving. */
       readonly stack?: ObjectId;
+      /** The player activating a craft ability as it left (rule 602.2 —
+       * its materials, or a mana ability's cost paid for it): Market Gnome's
+       * "while you're activating a craft ability". */
+      readonly craftBy?: PlayerId;
     })
   | (Base & {
       readonly type: "permanent-attached";

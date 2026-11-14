@@ -3168,9 +3168,16 @@ export class Game {
           this.state.players[action.manaFor].hasLost !== true
             ? action.manaFor
             : undefined;
+        // A craft ability's activation (Market Gnome's "while you're
+        // activating a craft ability").
+        const crafting =
+          this.state.objects[source] !== undefined &&
+          this.effectiveActivated(source)[action.abilityIndex]?.cost.craft !== undefined
+            ? action.player
+            : undefined;
         try {
           this.withWaterbendChoice(source, action.waterbend, () =>
-            this.activateAbility(
+            this.whileCrafting(crafting, () => this.activateAbility(
               action.player,
               source,
               action.abilityIndex,
@@ -3180,7 +3187,7 @@ export class Game {
               action.manaColors,
               action.tap,
               action.division,
-            ),
+            )),
           );
         } finally {
           this.phyrexianLifeChoice = undefined;
@@ -11863,7 +11870,8 @@ export class Game {
     // The chosen cards move together, so the ones a choice takes out of a
     // graveyard leave it as one move ("return up to two cards").
     let toOrder: LibraryOrder = { cards: [], position: "bottom" };
-    this.withGraveyardLeaveBatch(() => {
+    // A craft's materials are exiled while it's still being activated.
+    this.whileCrafting(awaiting.forCraft === true ? player : undefined, () => this.withGraveyardLeaveBatch(() => {
       const move = (): void => {
         toOrder = this.moveChosenFromZone(awaiting, player, chosen, leftover, toCommandZone);
       };
@@ -11874,7 +11882,7 @@ export class Game {
           move();
         });
       }
-    });
+    }));
 
     // An order takes nothing: it only says where each card goes. A search's
     // second choice, of where its finds go, took them already.
@@ -21688,6 +21696,22 @@ export class Game {
   /** The `manaFor` of the `activate-ability` being dispatched — who a mana
    * ability's "a player of your choice adds" names; unset otherwise. */
   private manaForChoice: PlayerId | undefined = undefined;
+  /** The player activating a craft ability while its costs are paid (rule
+   * 602.2 — the `activate-ability` dispatch, mana abilities activated for it
+   * included, and the answer that exiles its materials); unset otherwise.
+   * Stamped on `permanent-left-battlefield` as `craftBy` (Market Gnome). */
+  private craftActivator: PlayerId | undefined = undefined;
+  /** Runs `act` with `craftActivator` set to `player` (when given). */
+  private whileCrafting<T>(player: PlayerId | undefined, act: () => T): T {
+    if (player === undefined) return act();
+    const before = this.craftActivator;
+    this.craftActivator = player;
+    try {
+      return act();
+    } finally {
+      this.craftActivator = before;
+    }
+  }
   /** The `modes` of the `activate-ability` being dispatched — a modal
    * activated ability's, chosen as it's activated (rules 602.2b, 700.2b);
    * unset otherwise, and while `legalActions` asks whether it could be. */
@@ -34600,6 +34624,11 @@ export class Game {
         return (
           event.type === "permanent-left-battlefield" &&
           (spec.to === undefined || spec.to.includes(event.toZone)) &&
+          // "While you're activating a craft ability": this ability's
+          // controller, as it last existed if it has left.
+          (spec.whileActivatingCraft !== true ||
+            event.craftBy ===
+              (self.zone === "battlefield" ? self.controller : (self.lastKnown?.controller ?? self.controller))) &&
           !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self, true) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
@@ -51556,6 +51585,7 @@ controlledBy,
       ...(together !== undefined ? { together } : {}),
       exileLink: { source, zoneChangeCount: linkStint ?? card.zoneChangeCount ?? 0 },
       priorityTo: player,
+      forCraft: true,
     };
   }
 
@@ -65878,6 +65908,7 @@ controlledBy,
         object: id,
         toZone: to,
         ...(fromStack !== undefined ? { stack: fromStack } : {}),
+        ...(this.craftActivator !== undefined ? { craftBy: this.craftActivator } : {}),
       });
       // "Whenever one or more … die": when the whole event is done, or now
       // for a death of its own.

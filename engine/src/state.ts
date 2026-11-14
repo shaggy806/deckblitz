@@ -3763,6 +3763,10 @@ export type AwaitingDecision =
       /** A cost's exile: the spell or ability on the stack this pays for,
        * which remembers the cards (`LastKnownRefs.sets.paid.exiled`). */
       readonly costExileFor?: ObjectId;
+      /** A craft ability's materials (rule 702.167a): answered while it's
+       * still being activated (Market Gnome's "while you're activating a
+       * craft ability"). */
+      readonly forCraft?: true;
       /** A mana ability's cost (Cadaverous Bloom's "Exile a card from your
        * hand"), which never goes on the stack (rule 605.3b): what's needed to
        * add its mana once this is answered. */

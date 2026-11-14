@@ -1218,6 +1218,12 @@ export type TriggerKind =
       /** Only for these destinations — Reyhan, Last of the Abzan's "dies or
        * is put into the command zone" is `["graveyard", "command"]`. */
       readonly to?: readonly ("graveyard" | "exile" | "hand" | "library" | "command")[];
+      /** "…is exiled from the battlefield **while you're activating a craft
+       * ability**" (Market Gnome): only a leave made while this ability's
+       * controller was activating one (rule 602.2 — paying its costs, the
+       * materials and any mana abilities activated for it alike, the
+       * rulings), off the event's `craftBy`. */
+      readonly whileActivatingCraft?: true;
       /** "Whenever **one or more** … leave the battlefield" (Dour Port-Mage,
        * Aang, Airbending Master, Nefarious Imp): once per simultaneous event,
        * however many of them match, off `permanents-left`; as `dies`'s, each
