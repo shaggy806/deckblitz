@@ -40867,6 +40867,7 @@ controlledBy,
       ward: () => {},
       unless: (chooser, options, otherwise, aboutObject) =>
         this.beginUnless(source, controller, x, targets, triggerObject, chooser, options, otherwise, {
+          triggerValue,
           lastKnownRefs: refs,
           targetZones,
           triggerController: refs.triggerSpellController ?? triggerLastKnown()?.controller,
@@ -44507,6 +44508,9 @@ controlledBy,
      * who controlled the triggering object (as it last existed, if it has
      * left the battlefield — rule 608.2h). */
     known: {
+      /** The resolving ability's trigger value, carried to `otherwise`:
+       * Archfiend of Spite's "loses **that much** life unless …". */
+      readonly triggerValue: number;
       readonly lastKnownRefs: LastKnownRefs;
       readonly targetZones: readonly (ZoneType | null)[];
       readonly triggerController: PlayerId | undefined;
@@ -44558,7 +44562,7 @@ controlledBy,
           controller,
           targets,
           x,
-          0,
+          known.triggerValue,
           triggerObject,
           1,
           0,
@@ -44591,7 +44595,7 @@ controlledBy,
       otherwise,
       targets,
       offer.cost,
-      0,
+      known.triggerValue,
       triggerObject,
       controller,
       known.lastKnownRefs,

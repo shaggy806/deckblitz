@@ -19748,3 +19748,31 @@ describe("'if that spell would be put into a graveyard, put it on the bottom of 
     expect(ogre.triggered[0]?.effect).toMatchObject({ kind: "cast-now", alsoPaying: "{R}{R}", bottomAfter: true });
   });
 });
+
+describe("a source dealing damage to this creature, and that source's controller", () => {
+  it("reads Archfiend of Spite's and Phyrexian Obliterator's triggers", () => {
+    const read = (oracle_text: string) =>
+      parseFace({ name: "Test Fiend", type_line: "Creature — Demon", power: "6", toughness: "6", oracle_text } as never) as unknown as {
+        triggered: Record<string, unknown>[];
+      };
+    expect(
+      read(
+        "Whenever a source an opponent controls deals damage to this creature, that source's controller loses that much life unless they sacrifice that many permanents of their choice.",
+      ).triggered[0],
+    ).toMatchObject({
+      trigger: { on: "deals-damage", who: "opponent", to: "self" },
+      effect: {
+        kind: "unless",
+        chooser: "trigger-controller",
+        options: [{ sacrifice: {}, times: { triggerValue: true } }],
+        otherwise: { kind: "lose-life", amount: { triggerValue: true }, who: "trigger-controller" },
+      },
+    });
+    expect(
+      read("Whenever a source deals damage to this creature, that source's controller sacrifices that many permanents of their choice.").triggered[0],
+    ).toMatchObject({
+      trigger: { on: "deals-damage", who: "any", to: "self" },
+      effect: { kind: "sacrifice", who: "trigger-controller", filter: {}, count: { triggerValue: true } },
+    });
+  });
+});

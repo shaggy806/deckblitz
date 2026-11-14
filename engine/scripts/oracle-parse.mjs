@@ -2186,6 +2186,12 @@ export function parseTrigger(clause) {
       ...(m[2] !== undefined ? { combat: true } : {}),
     }];
   }
+  // "Whenever a source (an opponent controls) deals damage to this creature"
+  // (Phyrexian Obliterator, Archfiend of Spite): the source's side, "that
+  // source's controller" the trigger controller.
+  if ((m = /^Whenever a source( an opponent controls)? deals damage to ~$/.exec(c))) {
+    return [{ on: "deals-damage", who: m[1] !== undefined ? "opponent" : "any", to: "self" }];
+  }
   if (/^Whenever ~ is dealt damage$/.test(c)) return self("dealt-damage");
   if (c === "Whenever enchanted player is dealt damage") return [{ on: "deals-damage-batch", who: "any", to: "enchanted-player" }];
   if (/^Whenever ~ becomes the target of a spell or ability an opponent controls$/.test(c)) {
@@ -6354,6 +6360,21 @@ export function parseSentence(sentence, ctx) {
   // (Invader Parasite); "… casts a … spell …, that player loses 10 life"
   // (Dragonlord Kolaghan): the trigger object's controller.
   if (ctx.thatPlayer === "trigger-controller") {
+    // "Whenever a source deals damage to this creature, that source's
+    // controller sacrifices that many permanents of their choice" (Phyrexian
+    // Obliterator), "… loses that much life unless they sacrifice that many
+    // permanents of their choice" (Archfiend of Spite).
+    if (re("that source's controller sacrifices that many permanents of their choice").test(s)) {
+      return { kind: "sacrifice", who: "trigger-controller", filter: {}, count: { triggerValue: true } };
+    }
+    if (re("that source's controller loses that much life unless they sacrifice that many permanents of their choice").test(s)) {
+      return {
+        kind: "unless",
+        chooser: "trigger-controller",
+        options: [{ sacrifice: {}, times: { triggerValue: true }, text: "Sacrifice that many permanents" }],
+        otherwise: { kind: "lose-life", amount: { triggerValue: true }, who: "trigger-controller" },
+      };
+    }
     if ((m = re(`~ deals ${N} damage to that player`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), who: "trigger-controller" };
     }
@@ -19126,6 +19147,9 @@ function thatPlayerOf(triggers) {
   // "Whenever enchanted player draws a card, they …" (Curse of Fool's
   // Wisdom): the same.
   if (triggers.every((t) => t.on === "draws" && t.who === "attached")) return "trigger-controller";
+  // "Whenever a source deals damage to this creature, that source's
+  // controller …" (Phyrexian Obliterator).
+  if (triggers.every((t) => t.on === "deals-damage" && t.to === "self" && (t.who === "any" || t.who === "opponent"))) return "trigger-controller";
   return undefined;
 }
 
