@@ -4575,6 +4575,11 @@ export type EffectSpec =
        * fired this trigger, untargeted: Vexing Bauble's "whenever a player
        * casts a spell, if no mana was spent to cast it, counter that spell". */
       readonly target: ObjectRef;
+      /** In a `for-each-unless`: countered with every other declined one at
+       * once, when the last has answered (`heldChoices.counters`) — Whirlwind
+       * Denial's ruling: "all spells and abilities that weren't paid for are
+       * countered at the same time". Countered at once with nothing held. */
+      readonly atRelease?: true;
       /**
        * `"hand"`: if the spell is countered this way, put it into its
        * owner's hand instead of into their graveyard (Remand). Still a
@@ -9763,7 +9768,17 @@ export type EffectSpec =
       readonly of:
         | { readonly permanents: CardFilter }
         | { readonly inHandOf: number; readonly filter: CardFilter }
-        | { readonly libraryTop: number };
+        | { readonly libraryTop: number }
+        /** The spells and/or abilities on the stack, `whose` controls them —
+         * Whirlwind Denial's "for each spell and ability your opponents
+         * control" (this one resolving never among them). */
+        | {
+            readonly stack: {
+              readonly spells?: true;
+              readonly abilities?: true;
+              readonly whose?: "you" | "opponent";
+            };
+          };
       /** Who answers for each: the object's `"controller"` or `"owner"`
        * (Cut the Tethers' "that player"), the player in a slot, or `{ anyOf }`:
        * each of a scope in turn order, the next only once the one before has
@@ -12806,6 +12821,8 @@ export interface EffectApi {
   exileFoundCard(card: ObjectId): void;
   /** See `return-to-hand`'s `atRelease`. */
   returnToHandAtRelease(target: TargetRef): void;
+  /** See `counter`'s `atRelease`. */
+  counterAtRelease(target: TargetRef): void;
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
@@ -18040,6 +18057,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "counter": {
       const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
+      if (spec.atRelease === true) {
+        ctx.counterAtRelease(target);
+        return;
+      }
       // "If an artifact or creature spell is countered this way": the spell
       // as it is on the stack.
       const into =

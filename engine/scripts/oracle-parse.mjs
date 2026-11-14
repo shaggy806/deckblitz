@@ -3377,6 +3377,17 @@ export function parseSentence(sentence, ctx) {
       otherwise: { kind: "return-to-hand", target: 0, atRelease: true },
     };
   }
+  // "For each spell and ability your opponents control, counter it unless its
+  // controller pays {4}" (Whirlwind Denial): the stack's, countered together.
+  if ((M = /^for each spell and ability your opponents control, counter it unless its controller pays (\{\d+\})\.$/i.exec(s))) {
+    return {
+      kind: "for-each-unless",
+      of: { stack: { spells: true, abilities: true, whose: "opponent" } },
+      asks: "controller",
+      options: [{ pay: M[1], text: `Pay ${M[1]} for {it}` }],
+      otherwise: { kind: "counter", target: 0, atRelease: true },
+    };
+  }
   // "Then you create a tapped Treasure token for each creature your opponents
   // control" (Covetous Elegy), counted as it applies.
   if ((M = /^then you create a tapped Treasure token for each creature your opponents control\.$/i.exec(s))) {

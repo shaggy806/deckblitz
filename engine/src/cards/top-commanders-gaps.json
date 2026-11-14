@@ -2522,7 +2522,8 @@
   "zone:exile-from-library-bottom",
   "zone:plot-from-library-top",
   "effect:copy-spell-random-retarget",
-  "effect:exile-from-revealed-hand-per-opponent-until-leaves"
+  "effect:exile-from-revealed-hand-per-opponent-until-leaves",
+  "effect:counter-each-unless-pays"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

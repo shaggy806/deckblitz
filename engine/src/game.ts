@@ -40300,6 +40300,23 @@ controlledBy,
             })
             .map((id) => facts(id, true));
         }
+        if ("stack" in of) {
+          // One question per object: an ability object standing for several
+          // identical ones is asked about once (`onTheStack` lists it per
+          // instance).
+          const stack = this.state.zones.shared.stack;
+          const resolving = this.state.objects[source]?.zone === "stack" ? source : undefined;
+          return stack
+            .filter((id) => {
+              const object = this.state.objects[id];
+              if (object === undefined || id === resolving) return false;
+              if (object.kind === "ability" ? of.stack.abilities !== true : of.stack.spells !== true) return false;
+              if (of.stack.whose === "you") return object.controller === controller;
+              if (of.stack.whose === "opponent") return object.controller !== controller;
+              return true;
+            })
+            .map((id) => facts(id, false));
+        }
         if ("libraryTop" in of) {
           const cards = this.state.zones.perPlayer[controller].library.slice(0, of.libraryTop);
           if (cards.length > 0) this.revealCards(controller, cards, "library");
@@ -40332,6 +40349,16 @@ controlledBy,
           return;
         }
         this.state.heldChoices = { ...held, returns: [...(held.returns ?? []), target.object] };
+      },
+      counterAtRelease: (target) => {
+        if (target.kind !== "object" || this.state.objects[target.object]?.zone !== "stack") return;
+        const held = this.state.heldChoices;
+        if (held === undefined) {
+          this.counterSpellByEffect(target, undefined, false, controller, undefined, source);
+          return;
+        }
+        const entry = { object: target.object, by: controller, source };
+        this.state.heldChoices = { ...held, counters: [...(held.counters ?? []), entry] };
       },
       manaCostToPay: (ref) => {
         const object = ref.kind === "object" ? this.state.objects[ref.object] : undefined;
@@ -57656,6 +57683,12 @@ controlledBy,
     }
     if (this.state.pendingSacrificeVictims.length > 0 && this.state.awaiting === null) {
       this.drainPendingSacrificeVictims();
+    }
+    // Whirlwind Denial: every spell and ability not paid for, countered at the
+    // same time (its ruling), each one still on the stack.
+    for (const { object, by, source } of held.counters ?? []) {
+      if (this.state.objects[object]?.zone !== "stack") continue;
+      this.counterSpellByEffect({ kind: "object", object }, undefined, false, by, undefined, source);
     }
     // Cut the Tethers: one event (rule 603.10a).
     if (held.returns !== undefined) {

@@ -19016,6 +19016,21 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ).toEqual([{ on: "event", event: "scry-bottoms", who: "you" }]);
   });
 
+  it("reads a counter of each opponent's spell and ability unless paid for (Whirlwind Denial)", () => {
+    const denial = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text: "For each spell and ability your opponents control, counter it unless its controller pays {4}.",
+    });
+    expect(denial.effect).toEqual({
+      kind: "for-each-unless",
+      of: { stack: { spells: true, abilities: true, whose: "opponent" } },
+      asks: "controller",
+      options: [{ pay: "{4}", text: "Pay {4} for {it}" }],
+      otherwise: { kind: "counter", target: 0, atRelease: true },
+    });
+  });
+
   it("reads a creature card exiled from each opponent's revealed hand until it leaves (Valki, God of Lies)", () => {
     const valki = parseFace({
       name: "Test Card",

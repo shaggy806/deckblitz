@@ -6229,6 +6229,9 @@ export interface GameState {
     /** Permanents to go back to their owners' hands — `return-to-hand`'s
      * `atRelease`. */
     readonly returns?: readonly ObjectId[];
+    /** Spells and abilities to counter together — `counter`'s `atRelease`
+     * (Whirlwind Denial): each with the player and source countering it. */
+    readonly counters?: readonly { readonly object: ObjectId; readonly by: PlayerId; readonly source: ObjectId }[];
     /** The libraries of those who searched together (an `each-player-may`'s
      * search): shuffled once what they found has entered. */
     readonly shuffles?: readonly PlayerId[];
