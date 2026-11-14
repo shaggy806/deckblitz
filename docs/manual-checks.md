@@ -8348,3 +8348,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### God-Eternal Kefnet: at four players, the copy is cast as it resolves
 - **Do:** Cast Divination. Reveal the Divination you drew, then cast the copy.
 - **Expect:** As at two players: the copy is offered as Kefnet's trigger resolves, cast for one Island, and you end with 4 cards in hand. Bob, Carol and Dave are never asked anything.
+## Behold two creatures of a chosen type (2026-11-13)
+
+### Celestial Reunion: behold two creatures that share a type, then name it
+- **Do:** Cast Celestial Reunion with X=1, taking the beholding cast. Behold Llanowar Elves and Elvish Mystic, choose **Druid**, and find Fyndhorn Elves.
+- **Expect:** Grizzly Bears can't be picked to behold. You're asked between Elf and Druid, and Fyndhorn Elves goes onto the battlefield, not into your hand.

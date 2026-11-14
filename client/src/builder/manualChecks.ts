@@ -12554,4 +12554,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Celestial Reunion: behold two creatures that share a type, then name it',
+    board({
+      you: {
+        bf: ['Llanowar Elves', 'Elvish Mystic', 'Grizzly Bears', 'Forest*2'],
+        hand: ['Celestial Reunion', 'Elvish Visionary'],
+        lib: ['Fyndhorn Elves'],
+      },
+    }),
+  ),
 ]

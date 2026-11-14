@@ -8157,6 +8157,15 @@ export class Game {
         invalidateComputedCache();
       }
     }
+    if (awaiting.forCost !== undefined) {
+      const spell = this.state.objects[awaiting.source];
+      if (spell?.zone === "stack" && (spell.zoneChangeCount ?? 0) === awaiting.forCost.stint) {
+        spell.chosenCreatureType = creatureType;
+        invalidateComputedCache();
+      }
+      this.prepareForPriority(awaiting.forCost.priorityTo);
+      return;
+    }
 
     if (awaiting.turnSkip !== undefined) {
       this.answerTurnBegin(awaiting, awaiting.turnSkip, creatureType);
@@ -11840,7 +11849,15 @@ export class Game {
     const eligible =
       filter === undefined
         ? [...finds]
-        : finds.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: player, x: instead.x }));
+        : finds.filter((id) =>
+            // "If the revealed card is the chosen type" (Celestial Reunion):
+            // read from the spell or ability searching (`ofChosenType`).
+            matchesFilter(this.state, this.registry, id, filter, {
+              you: player,
+              x: instead.x,
+              ...(awaiting.thenSource !== undefined ? { source: awaiting.thenSource } : {}),
+            }),
+          );
     const exactly = instead.pick === "one" ? 1 : typeof instead.pick === "object" ? instead.pick.exactly : undefined;
     const [min, max] =
       instead.pick === "all"
@@ -51484,7 +51501,32 @@ controlledBy,
         this.state.objects[id]?.controller === player &&
         matchesFilter(this.state, this.registry, id, spec.filter, ctx),
     );
-    return [...cards, ...permanents];
+    const all = [...cards, ...permanents];
+    // "Two creatures of that type" (Celestial Reunion): only one with a
+    // creature type enough of them have — a token stack each of its tokens.
+    if (spec.shareCreatureType === true) {
+      const need = spec.count ?? 1;
+      const typesOf = new Map(all.map((id) => [id, this.creatureTypesOf(id)] as const));
+      const held = (type: string): number =>
+        permanentCount(this.state, all.filter((id) => typesOf.get(id)?.includes(type) === true));
+      const enough = new Map<string, boolean>();
+      return all.filter((id) =>
+        (typesOf.get(id) ?? []).some((type) => {
+          if (!enough.has(type)) enough.set(type, held(type) >= need);
+          return enough.get(type) === true;
+        }),
+      );
+    }
+    return all;
+  }
+
+  /** The creature types an object has where it is (rule 205.3m), a
+   * changeling every one (702.73a). */
+  private creatureTypesOf(id: ObjectId): readonly string[] {
+    const object = this.state.objects[id];
+    if (object === undefined) return [];
+    const subtypes = effectiveSubtypes(this.state, this.registry, object);
+    return CREATURE_TYPES.filter((type) => hasSubtype(subtypes, type));
   }
 
   /** An object's colours as it is now, through the layer fold. */
@@ -51555,6 +51597,9 @@ controlledBy,
       ...(opts.enterOf !== undefined ? { enterOf: opts.enterOf } : {}),
       ...(spec.fromHand === true ? { fromHand: true as const } : {}),
       ...(opts.forCost !== undefined ? { forCost: opts.forCost } : {}),
+      ...(spec.shareCreatureType === true && opts.priorityTo !== undefined
+        ? { sharedType: { priorityTo: opts.priorityTo } }
+        : {}),
     };
     // Exactly as many as it takes: those, which share a colour too when
     // that's asked (each eligible one shares one with `count` of them).
@@ -51570,7 +51615,13 @@ controlledBy,
             tags: Object.fromEntries(eligible.map((id) => [id, [...this.cardColors(id)]])),
             text: "that share a color",
           }
-        : undefined;
+        : spec.shareCreatureType === true && count > 1
+          ? {
+              rule: "share",
+              tags: Object.fromEntries(eligible.map((id) => [id, [...this.creatureTypesOf(id)]])),
+              text: "that share a creature type",
+            }
+          : undefined;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
@@ -51635,8 +51686,18 @@ controlledBy,
       readonly then?: EffectSpec;
       readonly fromHand?: true;
       readonly forCost?: ObjectId;
+      readonly sharedType?: { readonly priorityTo: PlayerId };
     },
   ): void {
+    // "Choose a creature type and behold two creatures of that type": the
+    // types they share, read before anything moves (a changeling has all).
+    const shared =
+      behold.sharedType === undefined
+        ? undefined
+        : chosen.reduce<readonly string[]>(
+            (acc, id, i) => (i === 0 ? this.creatureTypesOf(id) : acc.filter((t) => this.creatureTypesOf(id).includes(t))),
+            [],
+          );
     const fromHand = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
     // A pitch cost's exile reveals nothing first: it's no behold. A reveal
     // from the hand (`fromHand` without exiling) is all reveal.
@@ -51676,6 +51737,26 @@ controlledBy,
         behold.then,
         this.makeResolutionContext(behold.source, player, [{ kind: "object", object: first }], behold.x),
       );
+    }
+    // The chosen creature type: the one they share, or the caster's pick
+    // among them (the spell's `chosenCreatureType` either way).
+    const spell = behold.forCost === undefined ? undefined : this.state.objects[behold.forCost];
+    if (shared !== undefined && shared.length > 0 && spell?.zone === "stack") {
+      if (shared.length === 1) {
+        spell.chosenCreatureType = shared[0];
+        this.emit({ type: "creature-type-chosen", object: spell.id, creatureType: shared[0] });
+        invalidateComputedCache();
+      } else {
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player,
+          source: spell.id,
+          options: shared,
+          catalog: shared.length > 12,
+          prompt: "Choose the creature type the beheld creatures share",
+          forCost: { stint: spell.zoneChangeCount ?? 0, priorityTo: behold.sharedType?.priorityTo ?? player },
+        };
+      }
     }
   }
 

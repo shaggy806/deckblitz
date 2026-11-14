@@ -1389,6 +1389,18 @@ export interface BeholdSpec {
    * `choose-from-zone` decision's `together` rule `"share"` over each card's
    * colours, which the client already reads. */
   readonly shareColor?: boolean;
+  /** "Choose a creature type and behold **two creatures of that type**"
+   * (Celestial Reunion): with a `count`, the creatures and creature cards
+   * beheld have a creature type in common, and that type is the chosen one
+   * — kept on the spell as its `chosenCreatureType`, which an `ofChosenType`
+   * filter in its effect reads. Which creatures is asked first (the
+   * `choose-from-zone` decision's `together` rule `"share"` over each one's
+   * creature types), then which type, only when they share more than one:
+   * the same choices as naming the type first, in an order every client
+   * already asks (the cost's choices are made as it's paid, rule 601.2h).
+   * Only a creature with a type enough of them have is offered. A cast
+   * cost's behold only (`forCost`). */
+  readonly shareCreatureType?: true;
 }
 
 /** A ward cost as printed after "Ward" — "{2}" or "—{2}, Pay 2 life." — so a

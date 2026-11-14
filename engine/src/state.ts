@@ -3678,6 +3678,10 @@ export type AwaitingDecision =
          * remembers the cards revealed from the hand
          * (`LastKnownRefs.revealed` — "the revealed card's power"). */
         readonly forCost?: ObjectId;
+        /** `BeholdSpec.shareCreatureType`: the type the beheld share is
+         * `forCost`'s chosen creature type, asked when there's more than
+         * one; `priorityTo` gets priority after. */
+        readonly sharedType?: { readonly priorityTo: PlayerId };
       };
       /** A collect evidence N (rule 701.59a — `Game.beginCollectEvidence`):
        * the chosen graveyard cards are exiled by `destination` and, if any
@@ -4136,6 +4140,10 @@ export type AwaitingDecision =
        * used on a turn this source skips anyway (rule 616.1), the first option
        * using it. `occurrence` counts the turns that would begin from now. */
       readonly turnSkip?: { readonly occurrence: number; readonly owed?: true };
+      /** A spell's cost being paid (`BeholdSpec.shareCreatureType`): the
+       * answer is `source`'s `chosenCreatureType` while it's still that spell
+       * on the stack, and `priorityTo` gets priority after (rule 117.3c). */
+      readonly forCost?: { readonly stint: number; readonly priorityTo: PlayerId };
       /** What the choice is, in words, for a menu that needs saying. */
       readonly prompt?: string;
       readonly then?: EffectSpec;
