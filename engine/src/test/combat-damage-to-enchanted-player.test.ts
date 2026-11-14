@@ -36,6 +36,9 @@ describe("Curse of Hospitality", () => {
     for (const card of exiled) {
       expect(card.playPermission?.player).toBe(A);
       expect(card.playPermission?.spendAs).toBe("any-color");
+      // "That player exiles the top card of their library": the enchanted
+      // player did it, not the creature's controller.
+      expect(card.exiledByPlayer).toBe(B);
     }
   });
 

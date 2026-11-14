@@ -6,9 +6,10 @@ import { defineCard } from "../define.js";
 // enchants, not a planeswalker or battle of theirs (rule 506.3), whoever
 // controls them. The trigger fires once for each creature that dealt combat
 // damage to that player (the ruling), and "that creature's controller" is the
-// trigger controller (Gonti, Night Minister's shape): the top card of the
-// enchanted player's library is exiled, and its permission — play it this
-// turn, mana spent as though any color — is that creature's controller's.
+// trigger controller (Gonti, Night Minister's shape). The enchanted player
+// exiles the top card of their own library (they do it: the card is one they
+// exiled), and its permission — play it this turn, mana spent as though any
+// color — is that creature's controller's.
 //
 // Rulings:
 //   [2021-11-19] Curse of Hospitality's triggered ability triggers once for each creature that
@@ -38,16 +39,27 @@ export default defineCard({
       trigger: { on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toEnchantedPlayer: true },
       targets: [],
       effect: {
-        kind: "as-player",
-        who: "trigger-controller",
-        effect: {
-          kind: "impulse-exile",
-          amount: 1,
-          whose: "trigger-player",
-          duration: "end-of-turn",
-          spendAs: "any-color",
-          play: true,
-        },
+        kind: "sequence",
+        effects: [
+          // "That player exiles": the enchanted player does it, so the card
+          // is one they exiled (`exiledByPlayer`).
+          {
+            kind: "as-player",
+            who: "trigger-player",
+            effect: { kind: "exile-from-library", whose: "you", amount: 1 },
+          },
+          {
+            kind: "as-player",
+            who: "trigger-controller",
+            effect: {
+              kind: "grant-play",
+              cards: { thisWay: "exiled" },
+              duration: "end-of-turn",
+              spendAs: "any-color",
+              play: true,
+            },
+          },
+        ],
       },
       resolve: null,
       text: DAMAGE_TEXT,
