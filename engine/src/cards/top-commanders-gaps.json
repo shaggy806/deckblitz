@@ -10,6 +10,7 @@
     "replacement:villainous-choice-additional-time",
     "trigger:activates-ability-targeting",
     "condition:milled-share-all-card-types",
+    "effect:delayed-return-from-graveyard-your-next-upkeep",
     "condition:crewed-by-filter-as-tapped",
     "cost:spend-mana-as-any-color",
     "effect:targets-different-mana-values",
