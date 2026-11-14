@@ -1926,6 +1926,14 @@ export type TriggerKind =
       readonly to?: "player" | "opponent" | "you" | "enchanted-player";
       readonly combat?: boolean;
       readonly once?: "per-player" | "per-event";
+      /** "…deal combat damage to a player **or battle**" (Zurgo and Ojutai):
+       * a battle dealt damage is a recipient too, fired for once like a
+       * player however many sources hit it (the card's ruling: three Dragons
+       * on a player and two on a battle are two triggers). It names no
+       * player, so `"trigger-player"` and `{ triggerValue }`'s per-player
+       * reading aren't for these; a `once: "per-event"` count is of players
+       * alone. */
+      readonly orBattle?: true;
     }
   | {
       /** This creature was declared as a blocker — the mirror of `attacks`

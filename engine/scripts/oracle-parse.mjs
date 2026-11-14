@@ -2560,10 +2560,11 @@ export function parseTrigger(clause) {
     if (filter === null) return null;
     return [{ on: "deals-combat-damage-to-player", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
-  if ((m = /^Whenever one or more (.+?) you control deal combat damage to a player$/.exec(c))) {
+  // "…to a player or battle" (Zurgo and Ojutai): a battle is a recipient too.
+  if ((m = /^Whenever one or more (.+?) you control deal combat damage to a player( or battle)?$/.exec(c))) {
     const filter = parseTypePhrase(m[1]);
     if (filter === null) return null;
-    return [{ on: "deals-damage-batch", who: "you-control", filter, combat: true }];
+    return [{ on: "deals-damage-batch", who: "you-control", filter, combat: true, ...(m[2] ? { orBattle: true } : {}) }];
   }
   // "…deal damage to your opponents" (Breeches, Brazen Plunderer; Malcolm,
   // Keen-Eyed Navigator): once for the whole damage event, however many
@@ -10643,8 +10644,23 @@ export function parseEffect(text, outer) {
     // activate loyalty abilities of ~ twice this turn rather than only once."
     // (Kaito, Dancing Shadow) on a batched damage trigger: one of the
     // creatures that dealt it, chosen as this resolves.
-    const mayReturnOneM = ctx.damageBatch === true && /^you may return one of them to its owner's hand\.$/i.test(sentence);
+    const mayReturnOneM = ctx.damageBatch === true && /^you may return one of (?:them|those [a-z]+) to its owner's hand\.$/i.test(sentence);
     const ifOneReturnedM = mayReturnOneM ? /^if you do, (.+)$/i.exec(sentences[i + 1] ?? "") : null;
+    // "You may return one of those Dragons to its owner's hand." alone (Zurgo
+    // and Ojutai): chosen as it resolves, not targeted (its ruling).
+    if (mayReturnOneM && ifOneReturnedM === null) {
+      const choose = {
+        kind: "choose-permanents",
+        filter: { inSet: "trigger-batch" },
+        upTo: 1,
+        min: 0,
+        prompt: sentence,
+        then: { kind: "return-to-hand", target: 0 },
+      };
+      parsed.push(choose);
+      hints.push({ sentence, effect: choose });
+      continue;
+    }
     if (ifOneReturnedM !== null) {
       const then = parseSentence(`${ifOneReturnedM[1][0].toUpperCase()}${ifOneReturnedM[1].slice(1)}`, ctx);
       if (then !== null && !containsUndefined(then)) {
@@ -10752,6 +10768,32 @@ export function parseEffect(text, outer) {
         parsed.push(look);
         hints.push({ sentence, effect: look });
         skip = 2;
+        continue;
+      }
+    }
+    // "Look at the top three cards of your library. Put one of them into your
+    // hand and the rest on the bottom of your library in any order."
+    // (Anticipate's words, in a trigger — Zurgo and Ojutai).
+    const putOfThemM =
+      lookTopM === null
+        ? null
+        : /^put (\w+) of them into your hand and the rest on the bottom of your library in (any|a random) order\.$/i.exec(sentences[i + 1] ?? "");
+    if (putOfThemM !== null) {
+      const count = numberOf(lookTopM[1]);
+      const take = numberOf(putOfThemM[1]);
+      if (typeof count === "number" && typeof take === "number" && take < count) {
+        const look = {
+          kind: "look-and-choose",
+          zone: "library",
+          count,
+          min: take,
+          max: take,
+          destination: "hand",
+          leftover: putOfThemM[2].toLowerCase() === "any" ? "bottom-any-order" : "bottom-random",
+        };
+        parsed.push(look);
+        hints.push({ sentence, effect: look });
+        skip = 1;
         continue;
       }
     }
@@ -19062,7 +19104,7 @@ function thatPlayerOf(triggers) {
   // library" (Orochi Soul-Reaver).
   if (triggers.every((t) => t.on === "step-begins" && t.who === "opponent")) return "active-player";
   if (triggers.every((t) => t.on === "step-begins" && t.who === "attached")) return "active-player";
-  if (triggers.every((t) => t.on === "deals-damage-batch" && t.combat === true)) return "trigger-player";
+  if (triggers.every((t) => t.on === "deals-damage-batch" && t.combat === true && t.orBattle !== true)) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-combat-damage-to-player")) return "trigger-player";
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): who activated the mana ability.

@@ -18985,6 +18985,33 @@ describe("loyalty abilities twice this turn", () => {
       effect: { kind: "restrict", target: 0, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
     });
   });
+
+  it("reads Zurgo and Ojutai's player-or-battle batch, look and return", () => {
+    const face = parseFace({
+      name: "Test Dragons",
+      type_line: "Legendary Creature — Orc Dragon",
+      power: "4",
+      toughness: "4",
+      oracle_text:
+        "Whenever one or more Dragons you control deal combat damage to a player or battle, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. You may return one of those Dragons to its owner's hand.",
+    } as never) as unknown as { triggered: Record<string, unknown>[] };
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "deals-damage-batch", who: "you-control", filter: { subtype: "Dragon" }, combat: true, orBattle: true },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "bottom-any-order" },
+          {
+            kind: "choose-permanents",
+            filter: { inSet: "trigger-batch" },
+            upTo: 1,
+            min: 0,
+            then: { kind: "return-to-hand", target: 0 },
+          },
+        ],
+      },
+    });
+  });
 });
 
 describe("a countered spell's card put onto the battlefield", () => {

@@ -32437,7 +32437,8 @@ export class Game {
    */
   /** Add `event`'s damage to what a `deals-damage-batch` trigger is owed for
    * the damage event under way: one entry per watcher (`watcher`) and, unless
-   * it fires once per event, per player dealt damage. */
+   * it fires once per event, per recipient — a player, or a battle for an
+   * `orBattle` trigger (`players` holds only the players). */
   private oweDamageToTrigger(
     batch: NonNullable<Game["damageBatch"]>,
     watcher: string,
@@ -32446,9 +32447,9 @@ export class Game {
     multiplier: number,
     perEvent: boolean,
     event: Extract<GameEvent, { type: "damage-dealt" }>,
-    player: PlayerId,
   ): void {
-    const key = perEvent ? watcher : `${watcher}@${player}`;
+    const to = event.target;
+    const key = perEvent ? watcher : `${watcher}@${to.kind === "player" ? to.player : `object:${to.object}`}`;
     const owed = batch.damageTo.get(key);
     const source = this.state.objects[event.source];
     const stint = source?.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source?.lastKnown?.zoneChangeCount;
@@ -32458,13 +32459,13 @@ export class Game {
         ability,
         trigger,
         multiplier,
-        players: new Set([player]),
+        players: new Set(to.kind === "player" ? [to.player] : []),
         amount: event.amount,
         perEvent,
         sources: counted,
       });
     } else {
-      owed.players.add(player);
+      if (to.kind === "player") owed.players.add(to.player);
       owed.amount += event.amount;
       for (const s of counted) if (!owed.sources.some((o) => o.object === s.object)) owed.sources.push(s);
     }
@@ -32588,13 +32589,14 @@ export class Game {
       // "Whenever one or more creatures deal combat damage to a player this
       // turn" (Jace, Cunning Castaway): once per player, or per event, for
       // the whole simultaneous event, as a printed one (rule 603.2c).
-      if (at.whenever.on === "deals-damage-batch" && event.type === "damage-dealt" && event.target.kind === "player") {
+      if (at.whenever.on === "deals-damage-batch" && event.type === "damage-dealt") {
         const perEvent = at.whenever.once === "per-event";
         const owedTrigger = perEvent ? withoutTriggerPlayer(pending) : pending;
         if (this.damageBatch === null) {
-          this.state.pendingTriggers.push({ ...owedTrigger, triggerValue: perEvent ? 1 : event.amount });
+          const players = event.target.kind === "player" ? 1 : 0;
+          this.state.pendingTriggers.push({ ...owedTrigger, triggerValue: perEvent ? players : event.amount });
         } else {
-          this.oweDamageToTrigger(this.damageBatch, `delayed:${trigger.id}`, null, owedTrigger, 1, perEvent, event, event.target.player);
+          this.oweDamageToTrigger(this.damageBatch, `delayed:${trigger.id}`, null, owedTrigger, 1, perEvent, event);
         }
         continue;
       }
@@ -33412,23 +33414,20 @@ export class Game {
           const damageBatch = this.damageBatch;
           // "Whenever one or more … deal damage to a player": once per player
           // (or per event) for the whole simultaneous event, settled with it.
-          if (
-            ability.trigger.on === "deals-damage-batch" &&
-            event.type === "damage-dealt" &&
-            event.target.kind === "player"
-          ) {
+          // A battle dealt damage (`orBattle`) is a recipient of its own.
+          if (ability.trigger.on === "deals-damage-batch" && event.type === "damage-dealt") {
             const perEvent = ability.trigger.once === "per-event";
-            const player = event.target.player;
+            const player = event.target.kind === "player" ? event.target.player : null;
             // One firing for several players names none of them.
             const trigger: PendingTrigger = perEvent ? withoutTriggerPlayer(base) : base;
             if (damageBatch === null) {
               const alone: PendingTrigger = perEvent
-                ? { ...trigger, lastKnownRefs: { ...(trigger.lastKnownRefs ?? {}), damagedPlayers: [player] } }
+                ? { ...trigger, lastKnownRefs: { ...(trigger.lastKnownRefs ?? {}), damagedPlayers: player === null ? [] : [player] } }
                 : trigger;
-              this.queueTrigger(ability, { ...alone, triggerValue: perEvent ? 1 : event.amount }, multiplier);
+              this.queueTrigger(ability, { ...alone, triggerValue: perEvent ? (player === null ? 0 : 1) : event.amount }, multiplier);
               return;
             }
-            this.oweDamageToTrigger(damageBatch, `${id}#${index}`, ability, trigger, multiplier, perEvent, event, player);
+            this.oweDamageToTrigger(damageBatch, `${id}#${index}`, ability, trigger, multiplier, perEvent, event);
             return;
           }
           // "Whenever this deals damage", with nothing said of what to: once
@@ -34972,13 +34971,19 @@ export class Game {
       case "deals-damage":
         return event.type === "damage-dealt" && this.dealsDamageMatches(spec, event, self);
       case "deals-damage-batch": {
+        if (event.type !== "damage-dealt" || (spec.combat !== undefined && event.combat !== spec.combat)) return false;
+        const to = event.target;
         if (
-          event.type !== "damage-dealt" ||
-          event.target.kind !== "player" ||
-          (spec.combat !== undefined && event.combat !== spec.combat) ||
-          (spec.to === "opponent" && event.target.player === self.controller) ||
-          (spec.to === "you" && event.target.player !== self.controller) ||
-          (spec.to === "enchanted-player" && event.target.player !== self.attachedToPlayer)
+          to.kind === "object"
+            ? // "…to a player or battle" (Zurgo and Ojutai): a battle is a
+              // recipient of its own; the player narrowings don't name one.
+              spec.orBattle !== true ||
+              (spec.to !== undefined && spec.to !== "player") ||
+              this.state.objects[to.object] === undefined ||
+              !effectiveTypes(this.state, this.registry, this.state.objects[to.object]!).includes("battle")
+            : (spec.to === "opponent" && to.player === self.controller) ||
+              (spec.to === "you" && to.player !== self.controller) ||
+              (spec.to === "enchanted-player" && to.player !== self.attachedToPlayer)
         ) {
           return false;
         }
