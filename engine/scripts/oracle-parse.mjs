@@ -18481,6 +18481,8 @@ const STATIC_CONDITION_PREFIXES = [
 
 /** "If you've discarded a card this turn" — the turn history's discards. */
 const DISCARDED_THIS_TURN = { kind: "turn-history", what: "discarded" };
+/** "If a permanent was put into your hand from the battlefield this turn". */
+const PUT_INTO_HAND_THIS_TURN = { kind: "turn-history", what: "put-into-hand" };
 /** The turn history's graveyard tallies as conditions, by their words: an
  * intervening "if" of a trigger (Ichor Shade, Mysterio's Mirage), a spell's
  * "If …, draw a card." (Recalibrate). */
@@ -18540,6 +18542,10 @@ const TURN_TALLY_IFS = {
     notFrom: ["battlefield"],
     atLeast: 3,
   },
+  // Into its owner's hand, whoever controlled it (Barrin, Tolarian Archmage;
+  // Miles O'Brien, Transporter Ops).
+  "if a permanent was put into your hand from the battlefield this turn,": PUT_INTO_HAND_THIS_TURN,
+  "if a permanent was returned to your hand from the battlefield this turn,": PUT_INTO_HAND_THIS_TURN,
 };
 
 /** A meld card's whole instruction (rule 701.42): the counterpart's card

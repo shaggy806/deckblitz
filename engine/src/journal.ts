@@ -307,6 +307,12 @@ export type JournalWhat =
   | "sacrificed"
   /** A permanent left the battlefield for exile. */
   | "exiled"
+  /** A permanent was put into its owner's hand from the battlefield (a
+   * token too: it gets there before it ceases to exist, rule 111.7); the
+   * list is the owner's, whoever controlled it — Barrin, Tolarian
+   * Archmage's "if a permanent was put into your hand from the battlefield
+   * this turn". */
+  | "put-into-hand"
   /** A permanent card was put into its owner's graveyard, from anywhere
    * (each "descends"). */
   | "descended"
@@ -388,8 +394,10 @@ export interface JournalView {
   readonly kind: JournalKind;
   /** `"recipient"`: the entry is about what it was done to — a permanent
    * dealt damage — kept in the list of who controlled it then (`targetWas`),
-   * and a filter reads it rather than the entry's `object`. */
-  readonly whose?: "target" | "recipient";
+   * and a filter reads it rather than the entry's `object`. `"owner"`: kept
+   * in the list of the object's owner (`was.owner`) — a permanent put into
+   * its owner's hand is in "your hand" whoever controlled it. */
+  readonly whose?: "target" | "recipient" | "owner";
   readonly match?: (entry: JournalEntry, read: JournalReader) => boolean;
   readonly distinct?: true;
   readonly oncePerList?: true;
@@ -409,6 +417,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   died: { kind: "left", match: (e) => e.to === "graveyard" && e.was?.types.includes("creature") === true },
   sacrificed: { kind: "sacrificed" },
   exiled: { kind: "left", match: (e) => e.to === "exile" },
+  "put-into-hand": { kind: "left", whose: "owner", match: (e) => e.to === "hand" },
   descended: { kind: "to-graveyard", match: (e, read) => isPermanentCard(e, read) },
   discarded: { kind: "discarded" },
   "to-graveyard": { kind: "to-graveyard" },
@@ -536,6 +545,20 @@ export function inJournalWindow(
   }
 }
 
+/** The player whose list `entry` is in, read through `view` (its `whose`). */
+export function journalListOf(view: JournalView, entry: JournalEntry): PlayerId | undefined {
+  switch (view.whose) {
+    case "target":
+      return entry.target?.kind === "player" ? entry.target.player : undefined;
+    case "recipient":
+      return entry.targetWas?.controller;
+    case "owner":
+      return entry.was?.owner;
+    default:
+      return entry.player;
+  }
+}
+
 /** The entries of `view` in `players`' lists within `window`, oldest first. */
 export function journalEntries(
   read: JournalReader,
@@ -548,14 +571,7 @@ export function journalEntries(
   const out: JournalEntry[] = [];
   for (const entry of state.journal?.entries ?? []) {
     if (entry.kind !== view.kind) continue;
-    const whose =
-      view.whose === "target"
-        ? entry.target?.kind === "player"
-          ? entry.target.player
-          : undefined
-        : view.whose === "recipient"
-          ? entry.targetWas?.controller
-          : entry.player;
+    const whose = journalListOf(view, entry);
     if (whose === undefined || !players.includes(whose)) continue;
     if (!inJournalWindow(state, window, entry.turn, you, whose)) continue;
     if (view.match !== undefined && !view.match(entry, read)) continue;

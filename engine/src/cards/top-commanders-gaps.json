@@ -2568,7 +2568,8 @@
   "zone:graveyard-cast-as-adventure",
   "mechanic:mutate-from-graveyard",
   "keyword:bestow-extensions",
-  "trigger:cast-this-way-from-lasting-permission"
+  "trigger:cast-this-way-from-lasting-permission",
+  "condition:permanent-put-into-hand-from-battlefield-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

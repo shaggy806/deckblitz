@@ -6683,7 +6683,11 @@ clause (section 9):
   "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",
   "creature"] } }`; Dimir Strandcatcher's "three or more cards … into your
   graveyard from anywhere other than the battlefield" `{ what: "to-graveyard",
-  notFrom: ["battlefield"], atLeast: 3 }`; `what: "lands-played"` takes the
+  notFrom: ["battlefield"], atLeast: 3 }`; `what: "put-into-hand"` is a
+  permanent put into its owner's hand from the battlefield (a token too), in
+  the owner's list whoever controlled it: Barrin, Tolarian Archmage's "if a
+  permanent was put into your hand from the battlefield this turn" `{ what:
+  "put-into-hand" }`; `what: "lands-played"` takes the
   same two for the zone a land was played from (rule 305.1), Spider-Man 2099's
   "played a land … from anywhere other than your hand" `{ what:
   "lands-played", who: "you", notFrom: ["hand"] }`, in an `any` with the

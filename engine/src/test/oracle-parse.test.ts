@@ -6627,6 +6627,21 @@ describe("the turn history's graveyard tallies (discarded, to-graveyard)", () =>
     expect(strand.triggered[0].condition).toEqual({ kind: "turn-history", what: "to-graveyard", notFrom: ["battlefield"], atLeast: 3 });
   });
 
+  it("reads 'if a permanent was put into (returned to) your hand from the battlefield this turn'", () => {
+    const barrin = face(
+      "Barrin, Tolarian Archmage",
+      "Legendary Creature — Human Wizard",
+      "At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.",
+    );
+    expect(barrin.triggered[0].condition).toEqual({ kind: "turn-history", what: "put-into-hand" });
+    const miles = face(
+      "Miles O'Brien, Transporter Ops",
+      "Legendary Creature — Human Artificer",
+      "At the beginning of each end step, if a permanent was returned to your hand from the battlefield this turn, draw a card.",
+    );
+    expect(miles.triggered[0].condition).toEqual({ kind: "turn-history", what: "put-into-hand" });
+  });
+
   it("reads 'all cards in your graveyard that you cycled or discarded this turn'", () => {
     const shadow = face("Shadow of the Grave", "Instant", "Return to your hand all cards in your graveyard that you cycled or discarded this turn.");
     expect(shadow.effect).toEqual({ kind: "return-from-graveyard", filter: { discardedThisTurn: true }, destination: "hand", count: "all" });
