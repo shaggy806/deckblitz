@@ -305,7 +305,8 @@ export function triggerEventObject(event: GameEvent): ObjectId | undefined {
 export function timingCountable(spec: TriggerSpec): boolean {
   switch (spec.on) {
     case "event":
-      return TRIGGER_EVENTS[spec.event].journaled !== undefined;
+      // "Your third die each turn": counted die by die (`diceRolledThisTurn`).
+      return spec.event === "rolls-die" || TRIGGER_EVENTS[spec.event].journaled !== undefined;
     case "gains-life":
     case "loses-life":
     case "draws":

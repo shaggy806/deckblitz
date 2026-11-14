@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "filter:has-doctors-companion",
+    "condition:rolled-number-this-turn",
+    "condition:dice-rolled-this-turn-count",
+    "trigger:nth-die-roll-each-turn",
     "decision:ward-pay-life-dynamic",
     "effect:per-target-villainous-choice-turn-order",
     "decision:trigger-player-names-after-hidden-search",

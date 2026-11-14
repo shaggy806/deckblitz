@@ -13,6 +13,7 @@
  */
 
 import type { KeywordValue } from "../keyword-values.js";
+import type { DieTest } from "../random-results.js";
 import type { TriggerEventName } from "../trigger-events.js";
 import type { ColorPatch, KeywordAbilityName, StaticPt, TypePatch } from "../characteristics-patch.js";
 import type { SelfPlay, StaticPlay } from "../play-permission.js";
@@ -1543,6 +1544,17 @@ export type StaticCondition =
   | ({ readonly kind: "counters-put-this-turn"; readonly atLeast?: number } & CountersPutSpec)
   /** The source's controller created a token this turn (Idol of Oblivion). */
   | { readonly kind: "created-token-this-turn" }
+  /**
+   * The source's controller has rolled at least `atLeast` (default 1) dice
+   * this turn that pass `die` (every die when absent), counted die by die
+   * (rule 706; `diceRolledThisTurn`): The Space Family Goblinson's "as long as
+   * you've rolled three or more dice this turn" is `{ atLeast: 3 }` — three
+   * rolled at once are three, its ruling — and Eelectrocute's "as long as
+   * you've rolled a 6 this turn" `{ die: { atLeast: 6, atMost: 6 } }`, a 6 on
+   * any kind of die (its ruling). A die's result is its modifier included
+   * (706.2); an ignored die never happened (706.6).
+   */
+  | { readonly kind: "dice-rolled-this-turn"; readonly atLeast?: number; readonly die?: DieTest }
   /** The source's controller attacked with a commander this turn — declared
    * one an attacker, any player's (Neriv, Crackling Vanguard's "during any
    * turn you attacked with a commander, you may play those cards"). */

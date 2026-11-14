@@ -68,6 +68,7 @@ import { COLORS, colorSymbols, manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType, SpendAs } from "./mana.js";
 import type { SetMember } from "./object-sets.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
+import { diceRolledThisTurn } from "./random-results.js";
 import {
   activePlayerOf,
   attackedYouDuringTheirLastTurn,
@@ -1313,6 +1314,8 @@ function evalStaticCondition(
       return journalCount(state, registry, state.turnOrder, "died", undefined, you) > 0;
     case "created-token-this-turn":
       return journalTotal(state, "token-created", you, "count") > 0;
+    case "dice-rolled-this-turn":
+      return diceRolledThisTurn(state, you, condition.die).length >= (condition.atLeast ?? 1);
     case "attacked-with-commander-this-turn":
       return state.players[you]?.attackedWithCommanderOnTurn === state.turn.number;
     case "used-graveyard-this-turn":

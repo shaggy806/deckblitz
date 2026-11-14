@@ -2640,6 +2640,16 @@ export function parseTrigger(clause) {
   if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
     return [{ on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } }];
   }
+  // Doctor's companion read off the spell (rule 702.124m — Rose Noble).
+  if (/^Whenever you cast a Doctor spell or creature spell with doctor's companion$/.test(c)) {
+    return [
+      {
+        on: "cast-spell",
+        who: "you",
+        filter: { anyOf: [{ subtype: "Doctor" }, { type: "creature", hasKeyword: "doctors-companion" }] },
+      },
+    ];
+  }
   // "A spell with cascade" (Aurora Phoenix): printed on it or granted, `spellHas`.
   if ((m = /^Whenever (you|an opponent|a player) casts? a spell (?:with|that has) cascade$/.exec(c))) {
     const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
@@ -2697,6 +2707,13 @@ export function parseTrigger(clause) {
   // Expend N (rule 700.14) and "whenever you forage" (701.61a).
   if ((m = /^Whenever you expend (\d+)$/.exec(c))) return [{ on: "expend", who: "you", amount: Number(m[1]) }];
   if (/^Whenever you forage$/.test(c)) return [{ on: "event", event: "forages", who: "you" }];
+  // Rule 706: once per die rolled; "your third die each turn" (Resolute
+  // Veggiesaur) the timing wrapper, counted die by die.
+  if (/^Whenever you roll a die$/.test(c)) return [{ on: "event", event: "rolls-die", who: "you" }];
+  if ((m = /^Whenever you roll your (first|second|third|fourth|fifth) die each turn$/.exec(c))) {
+    const nth = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }[m[1]];
+    return [{ on: "event", event: "rolls-die", who: "you", nthEachTurn: nth }];
+  }
   if ((m = /^Whenever (you lose|an opponent loses) life$/.exec(c))) {
     return [{ on: "loses-life", who: m[1] === "you lose" ? "you" : "opponent" }];
   }
@@ -18461,6 +18478,11 @@ function graveyardCastCost(part) {
  * in your graveyard]." — a card's `mayPlaySelf`, or `null`.
  */
 function selfGraveyardCast(line) {
+  // "… as long as you've rolled a 6 this turn. If you cast it this way and it
+  // would be put into your graveyard, exile it instead." (Eelectrocute).
+  const dice = /^You may cast ~ from your graveyard as long as (.+?)\.( If you cast it this way and it would be put into your graveyard, exile it instead\.)?$/.exec(line);
+  const gate = dice === null ? undefined : DICE_ROLLED_CONDITIONS.find(([words]) => words === dice[1]);
+  if (gate !== undefined) return { from: ["graveyard"], if: gate[1], ...(dice[2] ? { exileAfter: true } : {}) };
   const m = /^You may cast ~ from your graveyard( or from exile)?(?: (.+))?\.$/.exec(line);
   if (m === null) return null;
   const out = { from: m[1] ? ["graveyard", "exile"] : ["graveyard"] };
@@ -18668,6 +18690,16 @@ const FIVE_MANA_VALUES = {
   compare: { op: "gte", n: 5 },
 };
 
+/** "You've rolled three or more dice this turn", "you've rolled a 6 this
+ * turn": the `dice-rolled-this-turn` condition, die by die (rule 706). */
+const DICE_ROLLED_CONDITIONS = [
+  ...["two", "three", "four", "five"].map((word, i) => [
+    `you've rolled ${word} or more dice this turn`,
+    { kind: "dice-rolled-this-turn", atLeast: i + 2 },
+  ]),
+  ...[1, 2, 3, 4, 5, 6, 20].map((n) => [`you've rolled a ${n} this turn`, { kind: "dice-rolled-this-turn", die: { atLeast: n, atMost: n } }]),
+];
+
 /** A static's trailing "as long as …" by its words, and the `condition` it
  * becomes (`parseStatic`). */
 const STATIC_CONDITION_SUFFIXES = [
@@ -18683,6 +18715,8 @@ const STATIC_CONDITION_SUFFIXES = [
   [" as long as it attacked this turn.", { kind: "source", filter: { attackedThisTurn: true } }],
   [" as long as it attacked a battle this turn.", { kind: "source", filter: { attackedBattleThisTurn: true } }],
   [" as long as it entered this turn.", { kind: "source", filter: { enteredThisTurn: true } }],
+  // The dice rolled this turn, die by die (The Space Family Goblinson).
+  ...DICE_ROLLED_CONDITIONS.map(([words, condition]) => [` as long as ${words}.`, condition]),
 ];
 /** The same, leading: "As long as you have the city's blessing, ~ has
  * hexproof" (Slippery Scoundrel). */

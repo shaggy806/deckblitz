@@ -19964,3 +19964,53 @@ describe("'Choose X. You may choose the same mode more than once.' (Doomsday Con
     expect(confluence.castModal?.modes).toHaveLength(3);
   });
 });
+
+describe("the dice rolled this turn, die by die (rule 706)", () => {
+  it("'your third die each turn' is the timing wrapper on rolls-die (Resolute Veggiesaur)", () => {
+    expect(parseTrigger("Whenever you roll your third die each turn")).toEqual([
+      { on: "event", event: "rolls-die", who: "you", nthEachTurn: 3 },
+    ]);
+    expect(parseTrigger("Whenever you roll a die")).toEqual([{ on: "event", event: "rolls-die", who: "you" }]);
+  });
+
+  it("'as long as you've rolled three or more dice this turn' (The Space Family Goblinson)", () => {
+    const goblinson = parseFace(
+      {
+        name: "Test Goblinson",
+        type_line: "Creature — Goblin",
+        mana_cost: "{2}{R}{G}",
+        oracle_text: "Test Goblinson has trample as long as you've rolled three or more dice this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(goblinson.static[0]?.condition).toEqual({ kind: "dice-rolled-this-turn", atLeast: 3 });
+  });
+
+  it("'cast this card from your graveyard as long as you've rolled a 6 this turn' (Eelectrocute)", () => {
+    const eel = parseFace(
+      {
+        name: "Test Eel",
+        type_line: "Instant",
+        mana_cost: "{1}{R}",
+        oracle_text:
+          "Test Eel deals 2 damage to any target.\nYou may cast this card from your graveyard as long as you've rolled a 6 this turn. If you cast it this way and it would be put into your graveyard, exile it instead.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(eel.mayPlaySelf).toEqual({
+      from: ["graveyard"],
+      if: { kind: "dice-rolled-this-turn", die: { atLeast: 6, atMost: 6 } },
+      exileAfter: true,
+    });
+  });
+
+  it("'a creature spell with doctor's companion' (Rose Noble)", () => {
+    expect(parseTrigger("Whenever you cast a Doctor spell or creature spell with doctor's companion")).toEqual([
+      {
+        on: "cast-spell",
+        who: "you",
+        filter: { anyOf: [{ subtype: "Doctor" }, { type: "creature", hasKeyword: "doctors-companion" }] },
+      },
+    ]);
+  });
+});

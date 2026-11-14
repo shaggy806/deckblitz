@@ -2089,7 +2089,7 @@ function hasParity(state: GameState, value: number, clause: ParityClause, source
 export type CardKeyword =
   | "convoke" | "cycling" | "disguise" | "flashback" | "kicker" | "morph" | "mutate" | "suspend"
   | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth"
-  | "partner" | "devoid";
+  | "partner" | "devoid" | "doctors-companion";
 
 /** Whether a printed line of `def`'s text is this keyword ability: for the
  * keywords a card authors as their parts, with no field of their own. */
@@ -2123,6 +2123,9 @@ const CARD_KEYWORD_READS = {
   // friends forever, choose a Background and the rest (rule 702.124f; Akroma,
   // Vision of Ixidor's ruling).
   partner: (def) => def.pairing?.kind === "partner" || def.pairing?.kind === "partner-with",
+  // Doctor's companion (rule 702.124m), another partner ability — Rose
+  // Noble's "a creature spell with doctor's companion".
+  "doctors-companion": (def) => def.pairing?.kind === "doctors-companion",
   // Devoid (rule 702.114a) is authored as its colours alone (`colors: []`), so
   // its printed line is what tells a spell with devoid from any other
   // colorless one (Corrupted Crossroads's ruling).

@@ -150,6 +150,31 @@ export function rollsSince(state: GameState, since: number): RollRecord[] {
   return out;
 }
 
+/**
+ * Each die `player` has rolled this turn that passes `test`, as its result
+ * (706.2), oldest first — die by die, so three dice rolled at once are three
+ * (The Space Family Goblinson's ruling). Only the dice kept: an ignored die
+ * never happened (706.6), and a rerolled one is the reroll alone (the
+ * rulings). With `beforeSeq`, only the rolls made before that event: what a
+ * roll's own dice come after ("your third die each turn" — Resolute
+ * Veggiesaur). The planar die is never journaled (706.7).
+ */
+export function diceRolledThisTurn(
+  state: GameState,
+  player: PlayerId,
+  test?: DieTest,
+  beforeSeq?: number,
+): readonly number[] {
+  const turn = state.turn.number;
+  const out: number[] = [];
+  for (const entry of entriesOf(state)) {
+    if (entry.kind !== "rolled" || entry.roll === undefined || entry.turn !== turn || entry.player !== player) continue;
+    if (beforeSeq !== undefined && (entry.seq ?? -1) >= beforeSeq) continue;
+    out.push(...matchingDice(entry.roll, test));
+  }
+  return out;
+}
+
 /** A word `thisWay` and the `this-way` condition take for a coin's landing. */
 export type FlipThisWay = "flips-won" | "flips-lost" | "coins-heads" | "coins-tails";
 

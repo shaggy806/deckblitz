@@ -424,6 +424,7 @@ import {
   noteCycledNames,
 } from "./journal.js";
 import {
+  diceRolledThisTurn,
   flipsSince,
   hasFlippedThisTurn,
   isFlipThisWay,
@@ -33571,10 +33572,17 @@ export class Game {
             }
           }
           // "Whenever you roll a 4 or higher": once per die, its result the value.
+          // With the timing wrapper ("your third die each turn"), only the
+          // die that is the Nth this turn (or a later one, `orLater`).
           if (ability.trigger.on === "event" && ability.trigger.event === "rolls-die" && event.type === "dice-rolled") {
-            for (const result of matchingDice(rollOfEvent(event), ability.trigger.die)) {
+            const spec = ability.trigger;
+            const nth = spec.nthEachTurn ?? (spec.firstTimeEachTurn === true ? 1 : undefined);
+            const before = nth === undefined ? 0 : diceRolledThisTurn(this.state, event.player, spec.die, event.seq).length;
+            matchingDice(rollOfEvent(event), spec.die).forEach((result, i) => {
+              const ordinal = before + i + 1;
+              if (nth !== undefined && (spec.orLater === true ? ordinal < nth : ordinal !== nth)) return;
               this.queueTrigger(ability, { ...base, triggerValue: result }, multiplier);
-            }
+            });
             return;
           }
           // "Whenever a creature card leaves your graveyard": once per card too.
@@ -34647,6 +34655,16 @@ export class Game {
     // never cast, rule 707.10).
     if (spec.on === "cast-spell" && event.type === "spell-copied") return true;
     if (!timingCountable(spec)) return false;
+    // "Whenever you roll your third die each turn" (Resolute Veggiesaur):
+    // counted die by die, so a roll of several dice fires it when any of
+    // them is the Nth — which one needn't be said (its ruling); the queueing
+    // of a `rolls-die` trigger's dice then takes that die alone.
+    if (spec.on === "event" && spec.event === "rolls-die") {
+      if (event.type !== "dice-rolled") return false;
+      const here = matchingDice(rollOfEvent(event), spec.die).length;
+      const before = diceRolledThisTurn(this.state, event.player, spec.die, event.seq).length;
+      return spec.orLater === true ? before + here >= nth : before < nth && nth <= before + here;
+    }
     const before = this.timingCount(spec, event, self);
     return before !== undefined && (spec.orLater === true ? before >= nth - 1 : before === nth - 1);
   }

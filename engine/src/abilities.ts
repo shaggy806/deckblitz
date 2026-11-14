@@ -2717,7 +2717,10 @@ export type TriggerKind =
        * controller ("you" — "whenever **you** …"). */
       readonly by?: TriggerWho;
       readonly batched?: true;
-      /** With `rolls-die`: which dice. Absent, every one. */
+      /** With `rolls-die`: which dice. Absent, every one. The timing
+       * wrapper counts these die by die (`diceRolledThisTurn`): "your third
+       * die each turn" (Resolute Veggiesaur) fires once, on the roll that
+       * holds it. */
       readonly die?: DieTest;
     };
 

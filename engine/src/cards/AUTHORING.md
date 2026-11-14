@@ -743,7 +743,8 @@ this resolution's even after the source was sacrificed, and with nothing chosen 
 `greatestInZone` and `greatestAmongItsController` take `least: true`. `hasKeyword: CardKeyword` is one
 row per printed keyword read off the text box (morph, madness, kicker, flashback, cycling, fading, ...);
 `keyword` is still the computed evergreen list. `hasKeyword: "partner"` is partner or "partner with",
-not the other partner abilities (702.124f). `hasKeyword: "devoid"` is the printed devoid line (702.114a),
+not the other partner abilities (702.124f); `hasKeyword: "doctors-companion"` is doctor's companion (702.124m —
+Rose Noble's "a creature spell with doctor's companion"). `hasKeyword: "devoid"` is the printed devoid line (702.114a),
 which a devoid card's `colors: []` alone doesn't say — "a spell with devoid" (Corrupted Crossroads's
 `spendOnly: { spell: { hasKeyword: "devoid" } }`; the scaffolder reads the line). `keywordVariant: "hexproof" | "protection"` is the keyword in
 any variant, printed or granted — hexproof or a "hexproof from [quality]" (702.11d), any "protection from"
@@ -2333,7 +2334,9 @@ Attraction", `who: "you"`), `rolls-to-visit` (its value the result: "if you roll
 { kind: "amounts", left: { triggerValue: true }, op: "eq", right: 6 }` — "Lifetime" Pass Holder),
 `visited` (an Attraction visited; `who: "self"` is a visit ability, what `visit()` writes),
 `claims-prize` ("whenever you claim the prize of an Attraction"). The roll to visit is a d6 roll, so
-"whenever you roll a 1" (`rolls-die` with `die: { atMost: 1 }`, Complaints Clerk) sees it. Reads:
+"whenever you roll a 1" (`rolls-die` with `die: { atMost: 1 }`, Complaints Clerk) sees it. `rolls-die`
+takes the timing wrapper die by die: "whenever you roll your third die each turn" is `nthEachTurn: 3`
+(Resolute Veggiesaur), firing once on the roll that holds that die, however many it held. Reads:
 "the number of Attractions you've visited this turn" is `{ turnHistory: "visited" }`, "if you've
 visited an Attraction this turn" `{ kind: "turn-history", what: "visited" }` (each Attraction once
 however often visited; gone ones count — Black Hole's ruling); "you control three or more
@@ -6873,6 +6876,13 @@ clause (section 9):
 - `{ kind: "created-token-this-turn" }` — the source's controller made a token
   this turn (Idol of Oblivion). Set in `mintTokenBatch`, the funnel every
   token-making path goes through, so a token *copy* counts too.
+- `{ kind: "dice-rolled-this-turn", atLeast?, die? }` — the source's controller
+  has rolled `atLeast` (1) dice this turn passing `die` (a `DieTest`), die by
+  die from the journal's `rolled` entries (`diceRolledThisTurn`): "as long as
+  you've rolled three or more dice this turn" is `atLeast: 3` (The Space Family
+  Goblinson — three at once are three), "as long as you've rolled a 6 this
+  turn" `die: { atLeast: 6, atMost: 6 }` (Eelectrocute's `mayPlaySelf.if`, a
+  6 on any die). Kept dice only: an ignored die never happened (706.6).
 - `{ kind: "attacked-with-commander-this-turn" }` — the source's controller
   declared a commander (anyone's) an attacker this turn: Neriv, Crackling
   Vanguard's "during any turn you attacked with a commander, you may play
