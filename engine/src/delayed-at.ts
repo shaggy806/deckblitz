@@ -12,6 +12,7 @@
 import type { WatchExpiry } from "./duration.js";
 import type { PlayerId } from "./primitives.js";
 import type { PlayerRef } from "./refs.js";
+import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 
 /**
@@ -57,6 +58,15 @@ export interface DelayedAt {
   readonly step: DelayedStep;
   readonly whose?: PlayerRef | "any";
   readonly which?: DelayedWhich;
+  /**
+   * Targets of its own, chosen as it's put on the stack when the step begins
+   * (rule 603.3d), in place of the creating ability's: Swooping Pteranodon's
+   * "at the beginning of the next end step, **target land** deals 3 damage to
+   * that creature", Feral Encounter's two. Its effect's slots are these; what
+   * the creator acted on is reached through the effect's `remember`. With no
+   * legal choice it's removed from the stack (603.3d).
+   */
+  readonly targets?: readonly TargetSpec[];
 }
 
 /** A {@link DelayedAt} as the state keeps it, with its player read. */
@@ -64,6 +74,8 @@ export interface DelayedStepWatch {
   readonly step: DelayedStep;
   readonly whose: PlayerId | "any";
   readonly which: DelayedWhich;
+  /** See {@link DelayedAt.targets}. */
+  readonly targets?: readonly TargetSpec[];
   /** `"next-turn"`: that turn has begun, and is this one. */
   readonly turnBegan?: true;
 }
@@ -89,7 +101,9 @@ export function readDelayedAt(
 ): DelayedStepWatch | undefined {
   const whose = at.whose ?? "any";
   const player = whose === "any" ? "any" : whose === "you" ? controller : read?.(whose);
-  return player === undefined ? undefined : { step: at.step, whose: player, which: at.which ?? "next" };
+  return player === undefined
+    ? undefined
+    : { step: at.step, whose: player, which: at.which ?? "next", ...(at.targets !== undefined ? { targets: at.targets } : {}) };
 }
 
 /** Is `at` a step timing, rather than one of the event watches? The others

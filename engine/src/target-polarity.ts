@@ -508,6 +508,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (typeof at === "object" && "watching" in at && at.watching !== undefined) {
       v.touch(at.watching === "targets" ? EVERY_SLOT : at.watching, "either", MINOR);
     }
+    // One with targets of its own (Swooping Pteranodon's "target land",
+    // chosen as it triggers — rule 603.3d): its effect's slots are those, not
+    // its creator's, and are judged when it's put on the stack.
+    if (typeof at === "object" && "targets" in at && at.targets !== undefined) return;
     v.child(n.effect);
   },
   "enters-with-counters": (n, v) => v.touch(n.target, "help", MINOR),

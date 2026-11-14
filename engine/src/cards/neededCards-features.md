@@ -496,6 +496,12 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   `"transformed"` record (B308) is "if you do" / "when you do" after a
   convert, empty when rule 701.28e stops one. Ratchet, Field Medic // Ratchet,
   Rescue Racer. `test/converted-this-way.test.ts`.
+- `effect:delayed-trigger-targets`, `effect:delayed-step-chooses-targets` — a step
+  `DelayedAt`'s `targets`: chosen as the step begins and it's put on the stack
+  (rule 603.3d), queued with the step's other triggers (`fireDelayedTriggers`
+  pushes a pending trigger carrying it as a granted ability, with its creator's
+  X, "that player" and remembered sets). "That creature" is a `remember`.
+  Swooping Pteranodon, Feral Encounter. `test/delayed-step-targets.test.ts`.
 - `effect:delayed-trigger-dealt-damage-this-way-dies` — the `this-way` kind
   `"dealt-damage"` (permanents the resolution dealt damage to, none prevented,
   rule 615.1) and a `delayed-trigger` `watching` a set (every member, each for

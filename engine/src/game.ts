@@ -56020,6 +56020,37 @@ controlledBy,
       (a, b) => order.indexOf(a.controller) - order.indexOf(b.controller),
     )) {
       if (!this.delayedIfHolds(trigger)) continue;
+      // Targets of its own (`DelayedAt.targets`): it waits with the step's
+      // other triggers and chooses them as it's put on the stack (rule
+      // 603.3d), carrying its creator's X, "that player" and remembered sets.
+      if (isStepWatch(trigger.at) && trigger.at.targets !== undefined) {
+        const refs: LastKnownRefs = {
+          ...(trigger.player !== undefined ? { player: trigger.player } : {}),
+          ...(trigger.madeIn !== undefined ? { madeIn: trigger.madeIn } : {}),
+          ...(trigger.sourceWas !== undefined ? { sourceWas: trigger.sourceWas } : {}),
+          ...(trigger.remembered !== undefined ? { sets: { remembered: trigger.remembered } } : {}),
+        };
+        const step = trigger.at.step === "main" ? this.state.turn.step : trigger.at.step;
+        this.state.pendingTriggers.push({
+          sourceObjectId: trigger.source,
+          cardName: trigger.sourceName,
+          abilityIndex: 0,
+          controller: trigger.controller,
+          ...(trigger.x !== undefined ? { x: trigger.x } : {}),
+          ...(Object.keys(refs).length > 0 ? { lastKnownRefs: refs } : {}),
+          grantedAbility: {
+            kind: "modifier",
+            ability: {
+              trigger: { on: "step-begins", step, who: "any" },
+              targets: trigger.at.targets,
+              effect: trigger.effect,
+              resolve: null,
+              text: trigger.text,
+            },
+          },
+        });
+        continue;
+      }
       const id = this.mintAbilityObject(
         trigger.source,
         trigger.sourceName,
