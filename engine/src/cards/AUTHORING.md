@@ -5496,6 +5496,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   printed or granted, costs {1} less for each time you've cast a commander
   from the command zone this game (Henzie). Only the cost's generic number
   moves; an `{X}` in it doesn't.
+- `asYouCascade: <EffectSpec>` — "**As you cascade**, you may put a land card
+  from among the exiled cards onto the battlefield tapped" (Averna, the Chaos
+  Bloom): applied in each of your cascades (rule 702.85a) after the last card
+  is exiled, before the cast is offered — or, with nothing found, before the
+  rest go to the bottom. The cascade's exiled cards are `zone:
+  "exiled-this-way"`: Averna's is a `look-and-choose` of `min: 0`, `max: 1`,
+  `filter: { type: "land" }`, `destination: "battlefield"`, `enterTapped`.
 - `alternativeCostForSpells: { mana, filter?, energy?, flash?, payLifeManaValue?, oncePerTurn?, yourTurnOnly?, fromHand?, fromZones?, anyPlayer? }` — an alternative cost (rule
   118.9) for the spells you cast: Jodah, Archmage Eternal's "you may pay
   {W}{U}{B}{R}{G} rather than pay the mana cost for spells you cast" is `{

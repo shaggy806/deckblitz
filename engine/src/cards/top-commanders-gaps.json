@@ -2547,7 +2547,8 @@
   "effect:copy-spell-random-retarget",
   "effect:exile-from-revealed-hand-per-opponent-until-leaves",
   "effect:counter-each-unless-pays",
-  "effect:shuffle-permanents-reveal-that-many"
+  "effect:shuffle-permanents-reveal-that-many",
+  "static:cascade-put-land"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

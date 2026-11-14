@@ -2253,7 +2253,9 @@ export interface ExtraTurnScope {
 /** What cascade found: the card it may cast, its name, and everything it
  * exiled on the way (the card included). */
 export interface CascadeFound {
-  readonly hit: ObjectId;
+  /** `null`: the library ran out with nothing it could cast, and an "as you
+   * cascade" effect (`StaticAbility.asYouCascade`) is still to apply. */
+  readonly hit: ObjectId | null;
   readonly name: string;
   readonly exiled: readonly ObjectId[];
   /** The cascade spell's mana value: the spell cast must have less (rule
@@ -13151,8 +13153,12 @@ export interface EffectApi {
   storm(sourceId: ObjectId): void;
   /** Cascade off `sourceId` (the cascade spell) for `controller`. */
   /** Exile off the top until a card cascade may cast (rule 702.85a) — `null`,
-   * with everything already on the bottom, when there's none it could cast. */
+   * with everything already on the bottom, when there's none it could cast
+   * and no "as you cascade" effect to apply first. */
   cascade(controller: PlayerId, sourceId: ObjectId): CascadeFound | null;
+  /** The "as you cascade" effects (`StaticAbility.asYouCascade`) of the
+   * permanents `player` controls, one per static. */
+  asYouCascade(player: PlayerId): readonly EffectSpec[];
   /** Cast what cascade found, or not, and put the rest on the bottom. */
   finishCascade(finish: CascadeFinish): void;
   /** Craft's return (rule 702.167a) — see the `craft-return` effect.
@@ -20420,12 +20426,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       const found = ctx.cascade(ctx.controller, ctx.source);
       if (found === null) return;
+      // "As you cascade" (Averna): after the last card is exiled, before the
+      // cast is chosen — or, with none found, before the rest go to the
+      // bottom (its rulings).
       applyEffectSpec(
         {
           kind: "sequence",
           effects: [
-            { kind: "cascade", offer: { hit: found.hit, threshold: found.threshold } },
-            { kind: "cascade", finish: { hit: found.hit, exiled: found.exiled, cast: false } },
+            ...ctx.asYouCascade(ctx.controller),
+            ...(found.hit === null
+              ? []
+              : [{ kind: "cascade", offer: { hit: found.hit, threshold: found.threshold } } as const]),
+            { kind: "cascade", finish: { hit: found.hit ?? ctx.source, exiled: found.exiled, cast: false } },
           ],
         },
         ctx,

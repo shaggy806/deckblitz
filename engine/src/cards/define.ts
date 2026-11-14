@@ -3093,6 +3093,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * generic mana. */
   readonly blitzCostReductionPerCommanderCast?: boolean;
   /**
+   * "**As you cascade**, you may put a land card from among the exiled cards
+   * onto the battlefield tapped" (Averna, the Chaos Bloom): an effect this
+   * permanent's controller applies in each of their cascades (rule 702.85a),
+   * after the last card is exiled and before they choose whether to cast the
+   * card found — or with nothing found, before the exiled cards go to the
+   * bottom (its rulings). The cascade's exiled cards are the resolution's
+   * `"exiled-this-way"`. Each such static applies once a cascade.
+   */
+  readonly asYouCascade?: EffectSpec;
+  /**
    * Keywords and abilities the spells this permanent's controller casts have
    * while they're on the stack (rule 113.6 — a spell's abilities work there):
    * Abaddon the Despoiler's "during your turn, spells you cast from your hand

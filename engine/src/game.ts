@@ -41179,6 +41179,10 @@ controlledBy,
       gameOver: () => this.state.result.over,
       storm: (sourceId) => this.stormCopy(sourceId),
       cascade: (player, sourceId) => this.cascade(player, sourceId),
+      asYouCascade: (player) =>
+        this.activeStaticsOf(player, (a) => a.asYouCascade !== undefined).flatMap(({ ability }) =>
+          ability.asYouCascade === undefined ? [] : [ability.asYouCascade],
+        ),
       finishCascade: (finish) => this.finishCascade(finish),
       discover: (amount) => this.discover(controller, amount),
       finishDiscover: (found) => this.finishDiscover(controller, found),
@@ -48399,6 +48403,12 @@ controlledBy,
     this.emit({ type: "cascade-revealed", player: controller, exiled: [...exiledHere], cast: hit });
 
     if (hit === null) {
+      // An "as you cascade" effect still applies to what was exiled (Averna's
+      // ruling: "if you don't reveal any nonland cards with lesser mana
+      // value, you can still put a land card onto the battlefield").
+      if (this.activeStaticsOf(controller, (a) => a.asYouCascade !== undefined).length > 0) {
+        return { hit: null, name: "", exiled: exiledHere, threshold };
+      }
       this.finishCascade({ hit: sourceId, exiled: exiledHere, cast: false });
       return null;
     }
