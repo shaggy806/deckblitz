@@ -4,6 +4,51 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-14 — Crux of Fate at its own Dragons, with no opposing creature
+
+Status: open.
+
+- **Seen:** room K6DYC, turn 24, the game's log in hand. Player 1 and Atraxa were out; Meren had
+  lands only. Jodah's bot cast Crux of Fate choosing "destroy all Dragon creatures" and destroyed
+  nine of its own (The Ur-Dragon, Old Gnawbone, Two-Headed Hellkite, Scion, Morophon, and more).
+- **Right:** not to cast it. Neither mode reaches an opponent's creature.
+- **Why:** two things together.
+  - Jodah's board was 30-odd permanents and a 30-card hand, so one rollout outlasted the 1 s
+    budget. The search was cut before it scored anything, and played v1's cast unscored
+    (`unscoredCast`), as it does for the rest of such a turn (`tooSlow`).
+  - v1 casts what it can. A modal spell's modes are chosen by their targets alone
+    (`aimableModes`), so with no targets both of Crux's modes pass and the first is taken, and v1's
+    wipe checks read no modal spell (`offerEffect` returns nothing for one).
+  - Searched in full, v2 passes on the same board.
+- **Scenario:** "does not cast Crux of Fate at its own Dragons when the clock runs out" (training),
+  with a clock that runs out in the first rollout. It reads `modes: [0]`.
+- **Likely fix:** in v1, price an untargeted modal spell's modes with `effectWorth` and cast it
+  only on a mode worth more than nothing; `offerEffect` could return the chosen mode's effect so
+  the wipe checks see it too. Might break: modal spells v1 cast for a reason `effectWorth` misses.
+  v1 is what a cut-short search plays, so the gate and `bot:diff` should show it.
+
+## 2026-11-14 — Scion of the Ur-Dragon activated 19 times at once
+
+Status: open.
+
+- **Seen:** room K6DYC, turn 22, Jodah's upkeep. With ~45 Treasures from Old Gnawbone, the bot
+  activated Scion 19 times in response to Mana Vault's trigger, all on the stack together: 16
+  Dragons went to the graveyard, three activations found none, and only the last copy stood.
+- **Right:** one activation. Each copy lasts until end of turn and the last to resolve wins, so
+  every one past the first spends {2} to put a Dragon in the graveyard.
+- **Why:** the priority search's batches (`simulateRepeated`, `eval-bot.ts`) try an ability as
+  many times in a row as the mana allows (up to `MAX_BATCH`, 20), as one candidate. They're meant
+  for pumps whose activations add up ("Lathliss on a pile of Treasures"). Scion's don't, but
+  only the batch of 20 is compared with the single activation, and it scored higher; every
+  activation after the first is then "batch replay", unsearched. Why the 20 score higher (the
+  Treasures' worth against the Dragons in the graveyard) isn't traced yet.
+- **Scenario:** "activates Scion of the Ur-Dragon once, not a batch of twenty" (training). It reads
+  "activated Scion 20 time(s) in a row".
+- **Likely fix:** score a batch at more than one count (2, half, all) and keep it only where the
+  count that scores best is above one; or keep abilities whose effect replaces itself (a copy or
+  set until end of turn) out of batches. Trace the score difference first. Might break: a
+  pump batch that wins only at its full count, if the counts are scored under a clock.
+
 ## 2026-11-14 — Lathril (menace) swung into a 7/7 and a 5/5 and died
 
 Status: open.

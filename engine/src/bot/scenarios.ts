@@ -2549,6 +2549,88 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "does not cast Crux of Fate at its own Dragons when the clock runs out",
+    kind: "training",
+    rule: "With no creature of an opponent's to destroy, neither of Crux of Fate's modes is worth casting, scored or not.",
+    run(weights, registry) {
+      // Reported from a live game (2026-11-14, room K6DYC, turn 24): Jodah's
+      // bot, the last two seats out and Meren on lands alone, cast Crux of
+      // Fate choosing "destroy all Dragon creatures" and destroyed nine of
+      // its own, The Ur-Dragon among them. Its board (30-odd permanents, a
+      // 30-card hand) made one rollout outlast the second, so the search was
+      // cut before it scored anything and played v1's cast (`unscoredCast`).
+      // v1 casts what it can; a modal spell's modes are chosen by their
+      // targets alone (`aimableModes`), so with no targets both pass and the
+      // first is taken; and its wipe checks read no modal spell
+      // (`offerEffect` returns nothing for one). Searched in full, v2
+      // passes here. The clock jumps past the deadline in the first rollout,
+      // as in the scenario above.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 28;
+      game.state.players[B].life = 31;
+      const ur = onBoard(game, "The Ur-Dragon", A);
+      game.state.objects[ur].isCommander = true;
+      game.state.players[A].commanderIdentity = ["W", "U", "B", "R", "G"];
+      for (const name of ["Old Gnawbone", "Two-Headed Hellkite", "Scion of the Ur-Dragon", "Ancient Silver Dragon"]) onBoard(game, name, A);
+      for (const name of ["Selvala, Heart of the Wilds", "Birds of Paradise", "Noble Hierarch", "Eternal Witness"]) onBoard(game, name, A);
+      for (const name of ["Forest", "Swamp", "Swamp", "Island", "Sol Ring"]) onBoard(game, name, A);
+      lands(game, "Forest", B, 2);
+      lands(game, "Swamp", B, 2);
+      const crux = game.debugSpawn("Crux of Fate", A, "hand");
+      const v1 = new HeuristicBotController(A, registry).act(viewOf(game, A));
+      if (v1.type !== "cast-spell" || v1.card !== crux) {
+        return { passed: false, detail: `v1 chose ${describeAction(v1)}, so there is no Crux to fall back to` };
+      }
+      let reads = 0;
+      const bot = new EvalBotController(A, registry, {
+        weights,
+        timeBudgetMs: 1000,
+        now: () => ((reads += 1) <= 3 ? 0 : 5000),
+      });
+      const action = bot.act(viewOf(game, A));
+      return {
+        passed: !(action.type === "cast-spell" && action.card === crux),
+        detail: `chose ${describeAction(action)}`,
+      };
+    },
+  },
+  {
+    name: "activates Scion of the Ur-Dragon once, not a batch of twenty",
+    kind: "training",
+    rule: "Scion's copy lasts only from the last activation to resolve: one activation is the whole effect, and each one more spends {2} to put a Dragon in the graveyard for nothing.",
+    run(weights, registry, makeBot) {
+      // Reported from a live game (2026-11-14, room K6DYC, turn 22): Jodah's
+      // bot, on ~45 Treasures from Old Gnawbone, activated Scion of the
+      // Ur-Dragon 19 times in its upkeep, all on the stack at once. Each
+      // resolution put a Dragon in the graveyard and made Scion a copy until
+      // end of turn, so only the last copy stood; 16 Dragons went to the
+      // graveyard, and three activations found nothing. The priority
+      // search's batches (`simulateRepeated`) try an ability as many times
+      // in a row as the mana allows (up to `MAX_BATCH`, 20), as one
+      // candidate, for pumps whose activations add up; this one doesn't, and
+      // the batch of twenty scored above a single activation. Every
+      // activation after the first is "batch replay", unsearched.
+      const game = table(registry, [A, B], A);
+      const scion = onBoard(game, "Scion of the Ur-Dragon", A);
+      for (const name of ["Old Gnawbone", "Two-Headed Hellkite", "Sol Ring", "Fellwar Stone"]) onBoard(game, name, A);
+      for (const land of ["Forest", "Forest", "Island", "Mountain", "Swamp", "Plains"]) onBoard(game, land, A);
+      for (let i = 0; i < 40; i += 1) game.state.objects[onBoard(game, "Treasure Token", A)].isToken = true;
+      lands(game, "Swamp", B, 5);
+      const dragons = ["Shivan Dragon", "Terror of the Peaks", "Goldspan Dragon", "Ancient Silver Dragon", "Thundermaw Hellkite"];
+      for (let i = 0; i < 16; i += 1) game.debugSpawn(dragons[i % dragons.length], A, "library");
+      const bot = makeBot(A, registry, weights);
+      let activations = 0;
+      for (let i = 0; i < 30; i += 1) {
+        if (game.state.priority.holder !== A || game.state.awaiting !== null || game.state.result.over) break;
+        const action = bot.act(viewOf(game, A));
+        if (action.type === "pass-priority") break;
+        if (action.type === "activate-ability" && action.source === scion) activations += 1;
+        game.dispatch(action);
+      }
+      return { passed: activations <= 1, detail: `activated Scion ${activations} time(s) in a row` };
+    },
+  },
+  {
     name: "does not station its only blocker into a lethal crackback with a land still to play",
     rule: "A move the crackback guard marked unsafe is not the first step of a turn plan either.",
     run(weights, registry, makeBot) {
