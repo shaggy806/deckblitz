@@ -2245,6 +2245,12 @@ export type TriggerKind =
        * two or more creatures" — one attacking your planeswalker attacks that
        * planeswalker (rule 508.3a). */
       readonly attackingYouDirectly?: true;
+      /** Only count attackers aimed at a planeswalker *this* permanent's
+       * controller controls as they're declared (rule 508.1b) — Mila, Crafty
+       * Companion's "whenever an opponent attacks **one or more planeswalkers
+       * you control**", once per declaration however many are attacked (the
+       * ruling); one attacking you, the player, doesn't count. */
+      readonly attackingYourPlaneswalkers?: true;
       /** The declaration holds at least one attacker matching each of these,
        * the same creature allowed: Fearless Swashbuckler's "if a Pirate **and**
        * a Vehicle attacked this combat". */

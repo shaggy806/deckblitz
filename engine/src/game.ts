@@ -33751,6 +33751,13 @@ export class Game {
         if (attacker?.isCommander !== true || attacker.owner !== self.controller) return false;
       }
       if (spec.attackingYouDirectly === true && this.state.objects[id]?.attacking !== self.controller) return false;
+      // "Attacks one or more planeswalkers you control" (Mila, Crafty
+      // Companion): one aimed at a planeswalker you control (rule 508.1b).
+      if (spec.attackingYourPlaneswalkers === true) {
+        const at = this.state.objects[id]?.attacking;
+        if (at === null || at === undefined || this.defenderKind(at) !== "planeswalker") return false;
+        if (this.state.objects[at as ObjectId]?.controller !== self.controller) return false;
+      }
       if (spec.attackingYou !== true) return true;
       const at = this.state.objects[id]?.attacking;
       if (at === null || at === undefined) return false;
@@ -34126,7 +34133,14 @@ export class Game {
         // An attack "with one or more creatures" is counted by combat: the
         // earlier declarations of theirs this turn that would have fired it.
         if (event.type !== "attackers-declared") return undefined;
-        if (spec.filter !== undefined || spec.eachOf !== undefined || spec.includingThis === true) return undefined;
+        if (
+          spec.filter !== undefined ||
+          spec.eachOf !== undefined ||
+          spec.includingThis === true ||
+          spec.attackingYourPlaneswalkers === true
+        ) {
+          return undefined;
+        }
         const combat = this.state.turn.combatPhases ?? 1;
         let n = 0;
         for (let earlier = 1; earlier < combat; earlier += 1) {

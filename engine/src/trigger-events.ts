@@ -313,7 +313,12 @@ export function timingCountable(spec: TriggerSpec): boolean {
     case "counters-put":
       return spec.batched !== true;
     case "attack-with":
-      return spec.filter === undefined && spec.eachOf === undefined && spec.includingThis !== true;
+      return (
+        spec.filter === undefined &&
+        spec.eachOf === undefined &&
+        spec.includingThis !== true &&
+        spec.attackingYourPlaneswalkers !== true
+      );
     default:
       return false;
   }

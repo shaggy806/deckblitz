@@ -2338,6 +2338,11 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
   if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
+  // "Whenever an opponent attacks one or more planeswalkers you control"
+  // (Mila, Crafty Companion): once a declaration.
+  if (c === "Whenever an opponent attacks one or more planeswalkers you control") {
+    return [{ on: "attack-with", who: "opponent", attackingYourPlaneswalkers: true }];
+  }
   // "An ability that targets a creature or player" (Ertha Jo): one such
   // target among the ability's is enough.
   if (c === "Whenever you activate an ability that targets a creature or player") {

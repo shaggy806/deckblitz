@@ -15008,6 +15008,12 @@ describe("how one player's state compares with another's", () => {
     expect(ertha.effect).toEqual({ kind: "copy-ability", target: "trigger-ability", newTargets: true });
   });
 
+  it("an opponent attacking one or more of your planeswalkers (Mila, Crafty Companion)", () => {
+    expect(parseTrigger("Whenever an opponent attacks one or more planeswalkers you control")).toEqual([
+      { on: "attack-with", who: "opponent", attackingYourPlaneswalkers: true },
+    ]);
+  });
+
   it("create then mill, and two milled cards sharing all their card types (Demonic Covenant)", () => {
     const covenant = parseFace(
       {
