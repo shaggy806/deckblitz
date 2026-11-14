@@ -1073,6 +1073,10 @@ export type OtherThan =
    * token enters, you may have target player **other than its controller**
    * create a token that's a copy of it". Only for a player slot. */
   | "trigger-object-controller"
+  /** The owner of the ability's source, which never changes (rule 108.3) —
+   * Crown of Doom's "target player **other than this artifact's owner**
+   * gains control of it". Only for a player slot. */
+  | "source-owner"
   /** The permanent the source is attached to — Pain for All's "any **other**
    * target" of its enchanted creature's damage. */
   | "host"
@@ -1699,7 +1703,9 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
           ? `${inner} other than the one it's attached to`
           : than === "trigger-object-controller"
             ? `${inner} other than its controller`
-            : `${inner} other than that player`;
+            : than === "source-owner"
+              ? `${inner} other than its owner`
+              : `${inner} other than that player`;
   }
   if (spec.kind === "opponent-compared") {
     const what = {
