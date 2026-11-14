@@ -20085,6 +20085,12 @@ describe("the dice rolled this turn, die by die (rule 706)", () => {
     expect(archivist.triggered[0]?.trigger).toEqual({ on: "step-begins", step: "end", who: "monarch" });
     expect(archivist.triggered[0]?.effect).toEqual({ kind: "draw", amount: 1, who: "active-player" });
   });
+
+  it("'whenever one or more of your opponents are attacked' (Party Dude)", () => {
+    expect(parseTrigger("Whenever one or more of your opponents are attacked")).toEqual([
+      { on: "attack-with", who: "any", atLeast: 1, filter: { attackingOpponent: true } },
+    ]);
+  });
 });
 
 describe("another player's impulse, its window theirs or yours (PlayGrant.durationOf)", () => {

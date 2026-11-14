@@ -2397,6 +2397,13 @@ export function parseTrigger(clause) {
   if (c === "Whenever an opponent attacks one or more planeswalkers you control") {
     return [{ on: "attack-with", who: "opponent", attackingYourPlaneswalkers: true }];
   }
+  // "Whenever one or more of your opponents are attacked" (Party Dude, rule
+  // 508.3b) and "Whenever a player attacks one or more of your opponents"
+  // (Jolene, the Plunder Queen): once a declaration, whoever attacks, with a
+  // creature attacking an opponent of yours — the player, not a planeswalker.
+  if (c === "Whenever one or more of your opponents are attacked" || c === "Whenever a player attacks one or more of your opponents") {
+    return [{ on: "attack-with", who: "any", atLeast: 1, filter: { attackingOpponent: true } }];
+  }
   // "An ability that targets a creature or player" (Ertha Jo): one such
   // target among the ability's is enough.
   if (c === "Whenever you activate an ability that targets a creature or player") {
