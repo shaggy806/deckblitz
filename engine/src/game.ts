@@ -409,6 +409,7 @@ import {
   journalTotal,
   modesDoneThisTurn,
   noteCombatDamagedBy,
+  noteCycledNames,
 } from "./journal.js";
 import {
   flipsSince,
@@ -16279,6 +16280,9 @@ export class Game {
    * count "the first card you cycle each turn" reads. */
   private noteCycled(player: PlayerId, object: ObjectId, x: number): void {
     this.journal({ kind: "cycled", player, object });
+    // "Cycled a card named … this game": by the name it had as it was cycled.
+    const cycled = this.state.objects[object];
+    if (cycled !== undefined) noteCycledNames(this.state, player, namesOf(this.registry, cycled));
     this.emit({ type: "card-cycled", player, object, ...(x > 0 ? { x } : {}) });
   }
 

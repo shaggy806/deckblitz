@@ -6397,6 +6397,11 @@ clause (section 9):
   "you've cast another spell named ~ this game", asked as it resolves beside
   `{ kind: "source", filter: { castFrom: "hand" } }`, is `atLeast: 2` — the
   resolving spell is one of them.
+- `{ kind: "cycled-this-game", named, atLeast }` — you've cycled a card named
+  `named` at least `atLeast` times this game, any card of that name each time
+  (the journal's `cycledNames`). Yidaro, Wandering Monster's "if you've
+  cycled a card named Yidaro, Wandering Monster four or more times this game",
+  asked in its cycle trigger: `atLeast: 4`, that cycle among them.
 - `{ kind: "cards-in-graveyard", atLeast, filter?, whose?, excludeSelf? }` — `atLeast` cards
   in your graveyard matching `filter` (Oversold Cemetery: four creature cards);
   `whose: "an-opponent"` is "if an opponent has eight or more cards in their

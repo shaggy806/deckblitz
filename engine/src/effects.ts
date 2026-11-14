@@ -21797,9 +21797,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (target !== undefined) ctx.shuffleIntoLibrary(target);
       // "When this creature dies, shuffle it into its owner's library" with
       // the card gone from the graveyard since: it stays where it is, and its
-      // owner shuffles all the same (Angel of Fury's ruling).
+      // owner shuffles all the same (rule 701.24c; Angel of Fury's ruling).
+      // The source likewise: Yidaro, Wandering Monster's "shuffle it into
+      // your library from your graveyard" with the card gone from there.
       else if (spec.target === "trigger-object" && ctx.triggerObject !== undefined) {
         ctx.shuffleIntoLibrary({ kind: "object", object: ctx.triggerObject }, true);
+      } else if (spec.target === "source") {
+        ctx.shuffleIntoLibrary({ kind: "object", object: ctx.source }, true);
       }
       return;
     }

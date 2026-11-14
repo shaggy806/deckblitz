@@ -219,6 +219,11 @@ export interface Journal {
    * controlled it ("dealt combat damage this game by a creature named
    * Gollum, Obsessed Stalker"). Kept past the round the entries last. */
   combatDamagedBy?: Partial<Record<PlayerId, string[]>>;
+  /** The whole game's count of the cards each player cycled, by name, as
+   * each was named as it was cycled ("if you've cycled a card named Yidaro,
+   * Wandering Monster four or more times this game"). Kept past the round
+   * the entries last. */
+  cycledNames?: Partial<Record<PlayerId, Record<string, number>>>;
   /** The triggered abilities that "trigger only once" and have, this game:
    * each one ability of one object in one stint (rule 400.7) — the Collectors
    * of Mystery Booster Commander. Kept past the round the entries last. */
@@ -244,6 +249,19 @@ export function noteCombatDamagedBy(state: GameState, player: PlayerId, names: r
   const journal = (state.journal ??= emptyJournal());
   const list = ((journal.combatDamagedBy ??= {})[player] ??= []);
   for (const name of names) if (!list.includes(name)) list.push(name);
+}
+
+/** Note that `player` cycled a card with these `names` (`Journal.cycledNames`). */
+export function noteCycledNames(state: GameState, player: PlayerId, names: readonly string[]): void {
+  if (names.length === 0) return;
+  const journal = (state.journal ??= emptyJournal());
+  const counts = ((journal.cycledNames ??= {})[player] ??= {});
+  for (const name of names) counts[name] = (counts[name] ?? 0) + 1;
+}
+
+/** How many times `player` has cycled a card named `name` this game. */
+export function cycledNamedCount(state: GameState, player: PlayerId, name: string): number {
+  return state.journal?.cycledNames?.[player]?.[name] ?? 0;
 }
 
 /** Whether a creature named `name` has dealt `player` combat damage this game. */

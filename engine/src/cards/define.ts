@@ -1567,6 +1567,14 @@ export type StaticCondition =
    * `of-player` `"that-player"`.
    */
   | { readonly kind: "combat-damaged-this-game"; readonly byCreatureNamed: string }
+  /**
+   * You've cycled a card named `named` at least `atLeast` times this game,
+   * any card of that name each time (the journal's `cycledNames`, kept all
+   * game) — Yidaro, Wandering Monster's "if you've cycled a card named
+   * Yidaro, Wandering Monster four or more times this game", asked as its
+   * cycle trigger resolves, that cycle among them.
+   */
+  | { readonly kind: "cycled-this-game"; readonly named: string; readonly atLeast: number }
   /** The source's `chosenOnEnter` label equals `value` — Frontier Siege's
    * "Khans" / "Dragons" halves. Which abilities the permanent has, not an
    * "if" of the ability's: on a triggered ability it gates the triggering,

@@ -112,6 +112,7 @@ import {
   JOURNAL_VIEWS,
   abilityCountThisTurn,
   combatDamagedByNamed,
+  cycledNamedCount,
   entriesThisTurn,
   journalEntries,
   journalTotal,
@@ -890,6 +891,8 @@ function evalStaticCondition(
       return (state.players[you]?.spellNamesCastThisGame?.[condition.named] ?? 0) >= condition.atLeast;
     case "combat-damaged-this-game":
       return combatDamagedByNamed(state, you, condition.byCreatureNamed);
+    case "cycled-this-game":
+      return cycledNamedCount(state, you, condition.named) >= condition.atLeast;
     case "library-size": {
       const inBounds = (n: number): boolean =>
         (condition.atMost === undefined || n <= condition.atMost) &&
