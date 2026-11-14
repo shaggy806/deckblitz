@@ -472,6 +472,7 @@ import _poolLieutenantHikaruSulu from "../pool/lieutenant-hikaru-sulu.js";
 import _poolLightform from "../pool/lightform.js";
 import _poolLightningRunner from "../pool/lightning-runner.js";
 import _poolLithobraking from "../pool/lithobraking.js";
+import _poolLongListOfTheEnts from "../pool/long-list-of-the-ents.js";
 import _poolLoomingShade from "../pool/looming-shade.js";
 import _poolLordOfChange from "../pool/lord-of-change.js";
 import _poolLowlandGiant from "../pool/lowland-giant.js";
@@ -1468,6 +1469,7 @@ const shard: CardShard = {
     _poolLightform,
     _poolLightningRunner,
     _poolLithobraking,
+    _poolLongListOfTheEnts,
     _poolLoomingShade,
     _poolLordOfChange,
     _poolLowlandGiant,

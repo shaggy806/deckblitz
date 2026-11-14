@@ -1083,6 +1083,7 @@ import _tokensSnakeTokenArtifactPoison from "../tokens/snake-token-artifact-pois
 import _tokensSpiritTokenAbzanMonument from "../tokens/spirit-token-abzan-monument.js";
 import _tokensSpiritTokenDusyutEarthcarver from "../tokens/spirit-token-dusyut-earthcarver.js";
 import _tokensSpiritTokenUnwillingVessel from "../tokens/spirit-token-unwilling-vessel.js";
+import _tokensVolosJournalToken from "../tokens/volos-journal-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -2168,6 +2169,7 @@ const shard: CardShard = {
     _tokensSpiritTokenAbzanMonument,
     _tokensSpiritTokenDusyutEarthcarver,
     _tokensSpiritTokenUnwillingVessel,
+    _tokensVolosJournalToken,
   ],
 };
 

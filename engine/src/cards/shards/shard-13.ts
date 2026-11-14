@@ -934,6 +934,7 @@ import _poolVoidwielder from "../pool/voidwielder.js";
 import _poolVolcanicSpray from "../pool/volcanic-spray.js";
 import _poolVoldarenPariah from "../pool/voldaren-pariah.js";
 import _poolVolleyOfBoulders from "../pool/volley-of-boulders.js";
+import _poolVoloItinerantScholar from "../pool/volo-itinerant-scholar.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVoraciousCobra from "../pool/voracious-cobra.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
@@ -1941,6 +1942,7 @@ const shard: CardShard = {
     _poolVolcanicSpray,
     _poolVoldarenPariah,
     _poolVolleyOfBoulders,
+    _poolVoloItinerantScholar,
     _poolVoltaicWhip,
     _poolVoraciousCobra,
     _poolVowToErebor,

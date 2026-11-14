@@ -16129,6 +16129,7 @@ import _poolLongFinnedSkywhale from "./pool/long-finned-skywhale.js";
 import _poolLongForgottenGohei from "./pool/long-forgotten-gohei.js";
 import _poolLongGoodbye from "./pool/long-goodbye.js";
 import _poolLongLakeNuisance from "./pool/long-lake-nuisance.js";
+import _poolLongListOfTheEnts from "./pool/long-list-of-the-ents.js";
 import _poolLongLostLances from "./pool/long-lost-lances.js";
 import _poolLongRangeSensor from "./pool/long-range-sensor.js";
 import _poolLongRest from "./pool/long-rest.js";
@@ -30778,6 +30779,7 @@ import _poolVolitionReins from "./pool/volition-reins.js";
 import _poolVolleyOfBoulders from "./pool/volley-of-boulders.js";
 import _poolVolleyVeteran from "./pool/volley-veteran.js";
 import _poolVoloGuideToMonsters from "./pool/volo-guide-to-monsters.js";
+import _poolVoloItinerantScholar from "./pool/volo-itinerant-scholar.js";
 import _poolVolrathTheFallen from "./pool/volrath-the-fallen.js";
 import _poolVolrathTheShapestealer from "./pool/volrath-the-shapestealer.js";
 import _poolVolrathsDungeon from "./pool/volraths-dungeon.js";
@@ -33082,6 +33084,7 @@ import _tokensVillainToken from "./tokens/villain-token.js";
 import _tokensVirtuousRoleToken from "./tokens/virtuous-role-token.js";
 import _tokensVojaFriendToElves from "./tokens/voja-friend-to-elves.js";
 import _tokensVoja from "./tokens/voja.js";
+import _tokensVolosJournalToken from "./tokens/volos-journal-token.js";
 import _tokensWalkerToken from "./tokens/walker-token.js";
 import _tokensWallToken13 from "./tokens/wall-token-1-3.js";
 import _tokensWallToken55BlueDefender from "./tokens/wall-token-5-5-blue-defender.js";
@@ -49287,6 +49290,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLongForgottenGohei,
   _poolLongGoodbye,
   _poolLongLakeNuisance,
+  _poolLongListOfTheEnts,
   _poolLongLostLances,
   _poolLongRangeSensor,
   _poolLongRest,
@@ -63936,6 +63940,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVolleyOfBoulders,
   _poolVolleyVeteran,
   _poolVoloGuideToMonsters,
+  _poolVoloItinerantScholar,
   _poolVolrathTheFallen,
   _poolVolrathTheShapestealer,
   _poolVolrathsDungeon,
@@ -66246,6 +66251,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensVirtuousRoleToken,
   _tokensVojaFriendToElves,
   _tokensVoja,
+  _tokensVolosJournalToken,
   _tokensWalkerToken,
   _tokensWallToken13,
   _tokensWallToken55BlueDefender,
@@ -82458,6 +82464,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/long-forgotten-gohei": _poolLongForgottenGohei,
   "pool/long-goodbye": _poolLongGoodbye,
   "pool/long-lake-nuisance": _poolLongLakeNuisance,
+  "pool/long-list-of-the-ents": _poolLongListOfTheEnts,
   "pool/long-lost-lances": _poolLongLostLances,
   "pool/long-range-sensor": _poolLongRangeSensor,
   "pool/long-rest": _poolLongRest,
@@ -97107,6 +97114,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/volley-of-boulders": _poolVolleyOfBoulders,
   "pool/volley-veteran": _poolVolleyVeteran,
   "pool/volo-guide-to-monsters": _poolVoloGuideToMonsters,
+  "pool/volo-itinerant-scholar": _poolVoloItinerantScholar,
   "pool/volrath-the-fallen": _poolVolrathTheFallen,
   "pool/volrath-the-shapestealer": _poolVolrathTheShapestealer,
   "pool/volraths-dungeon": _poolVolrathsDungeon,
@@ -99411,6 +99419,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/virtuous-role-token": _tokensVirtuousRoleToken,
   "tokens/voja-friend-to-elves": _tokensVojaFriendToElves,
   "tokens/voja": _tokensVoja,
+  "tokens/volos-journal-token": _tokensVolosJournalToken,
   "tokens/walker-token": _tokensWalkerToken,
   "tokens/wall-token-1-3": _tokensWallToken13,
   "tokens/wall-token-5-5-blue-defender": _tokensWallToken55BlueDefender,

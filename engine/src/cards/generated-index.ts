@@ -714,6 +714,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Virtuous Role Token",
   "Voja",
   "Voja, Friend to Elves",
+  "Volo's Journal Token",
   "Walker Token",
   "Wall Token",
   "Wall Token (5/5 blue, defender)",
