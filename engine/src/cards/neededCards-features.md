@@ -496,6 +496,12 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   `"transformed"` record (B308) is "if you do" / "when you do" after a
   convert, empty when rule 701.28e stops one. Ratchet, Field Medic // Ratchet,
   Rescue Racer. `test/converted-this-way.test.ts`.
+- `effect:delayed-trigger-dealt-damage-this-way-dies` — the `this-way` kind
+  `"dealt-damage"` (permanents the resolution dealt damage to, none prevented,
+  rule 615.1) and a `delayed-trigger` `watching` a set (every member, each for
+  this stint). Ghired's Belligerence. Reckless Blaze's "a creature **you
+  control** dealt damage this way" still waits: `watchedSubject` reads a watched
+  object as its controller's. `test/delayed-watching-set.test.ts`.
 - `effect:reflexive-per-counters-placed` — `reflexive-trigger`'s `times` (it
   triggers that many times, each its own ability and targets) and the
   `this-way` kind `"counters-placed"` (counters put on permanents, one by one,

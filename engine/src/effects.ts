@@ -519,7 +519,9 @@ export interface DelayedWhenever {
    * resolves, instead of the object that set it up. Any trigger that can say
    * "self" can be watched this way. A slot, `"source"` or `"trigger-object"`,
    * or `"targets"` for every permanent among the creating ability's targets
-   * that's still legal. Each is watched for this stint on the battlefield
+   * that's still legal, or a set ({@link ObjectSetRef}) for every member of
+   * it — `{ thisWay: "dealt-damage" }` is "whenever **a creature dealt damage
+   * this way** dies this turn" (Ghired's Belligerence). Each is watched for this stint on the battlefield
    * (rule 400.7); with none on the battlefield there's nothing to watch, and
    * no trigger is made. "You" is still this ability's controller, who needn't
    * control them. A source that's left since is judged as it last existed.
@@ -1979,6 +1981,11 @@ export type ThisWayKind =
   | "destroyed"
   /** Destroyed and put into a graveyard: "if that creature dies this way". */
   | "died"
+  /** Permanents it dealt damage to (damage actually dealt, none prevented —
+   * rule 615.1) — Ghired's Belligerence's "whenever **a creature
+   * dealt damage this way** dies this turn" (a `delayed-trigger` `watching`
+   * them). Counted by the permanent's controller as it was dealt the damage. */
+  | "dealt-damage"
   /** The Army chosen by an `amass` step (rule 701.47a): "the amassed Army". */
   | "amassed"
   /** The Auras and Equipment it attached (rule 701.3a), each counted by its
@@ -19551,6 +19558,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           watched = ctx.targets.flatMap((t, slot) =>
             t?.kind === "object" && !illegalSlot(slot, ctx) ? [t.object] : [],
           );
+        } else if (isObjectSetRef(watching)) {
+          // "Whenever **a creature dealt damage this way** dies this turn"
+          // (Ghired's Belligerence): every member, each still the object it
+          // was (rule 400.7).
+          watched = ctx
+            .objectSet(watching)
+            .filter((m) => ctx.stintNow(m.object) === m.stint)
+            .map((m) => m.object);
         } else if (watching !== undefined) {
           const one = illegalSlot(watching, ctx) ? undefined : objectRefAct(watching, ctx);
           watched = one?.kind === "object" ? [one.object] : [];

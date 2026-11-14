@@ -228,6 +228,13 @@ export function thisWayEntries(
       case "sacrificed":
         if (event.type === "permanent-sacrificed") add(event.object, event.player, true);
         break;
+      case "dealt-damage":
+        // A permanent it dealt damage to; the damage was dealt as this event
+        // was, so it's still on the battlefield then.
+        if (event.type === "damage-dealt" && event.target.kind === "object" && event.amount > 0) {
+          add(event.target.object, state.objects[event.target.object]?.controller, false);
+        }
+        break;
       case "destroyed":
         // A destroy effect's, not a creature dying of damage or the legend
         // rule (both of which share the event).
