@@ -1,6 +1,8 @@
 /**
  * What a Clone-style permanent enters as a copy of (rule 707.9) — asked
- * before it moves, however it's entering (`Game.askEnterChoice`, rule 614.12).
+ * before it moves, however it's entering (`Game.askEnterChoice`, rule 614.12),
+ * or, with the awaiting's `faceUp`, before a face-down one is turned face up
+ * (Vesuvan Shapeshifter — `Game.becomeFaceUp`, rule 708.11).
  *
  * `null` is a real answer — "copy nothing" — and leaves the permanent as its
  * own printed self, which for a vanilla Clone means a 0/0 that dies to a

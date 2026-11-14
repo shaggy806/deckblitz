@@ -218,6 +218,23 @@ export interface CopyOnEnter {
    * copiable value: something that copies it meanwhile stays a copy (its
    * ruling). */
   readonly untilEndOfTurn?: true;
+  /** "…**until this creature is turned face down**, it becomes a copy of
+   * that creature" (Vesuvan Shapeshifter): the copy effect, exceptions and
+   * all, ends as it's turned face down, however that happens, and it's
+   * itself again — face down, then, until it's turned face up. */
+  readonly untilTurnedFaceDown?: true;
+  /**
+   * "As this creature enters **or is turned face up**, you may choose another
+   * creature on the battlefield" (Vesuvan Shapeshifter): the same choice, a
+   * `choose-copy` of a permanent `filter` matches, asked as it's turned face
+   * up however that happens — and applied while it's being turned face up,
+   * not afterward (rule 708.11), so the permanent turned face up is the copy
+   * (what sees it turned face up sees that). It doesn't enter (rule 708.8),
+   * so nothing about entering applies: not `tapped`, `counters` or the
+   * copied creature's "as this enters" or enters triggers. Declining, or with
+   * nothing to copy, it's itself.
+   */
+  readonly orTurnedFaceUp?: true;
 }
 
 /**

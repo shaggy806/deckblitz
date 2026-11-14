@@ -7875,6 +7875,18 @@ export class Game {
     if (awaiting === null || awaiting.kind !== "choose-copy") {
       throw new Error("unreachable: whyCannotCopyChoice should have caught this");
     }
+    // Asked as it's turned face up (Vesuvan Shapeshifter): it turns now, as
+    // the copy, if it's still that face-down permanent (rule 400.7).
+    if (awaiting.faceUp !== undefined) {
+      const { faceUp } = awaiting;
+      this.state.awaiting = null;
+      const object = this.state.objects[awaiting.source];
+      if (object !== undefined && object.zone === "battlefield" && object.faceDown !== undefined) {
+        this.becomeFaceUp(awaiting.source, faceUp.player, faceUp.megamorph, faceUp.x, faceUp.priorityTo, copy);
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(faceUp.priorityTo ?? this.activePlayer);
+      return;
+    }
 
     // Asked before the Clone moved (`askEnterChoice`), so the answer waits on
     // it, and its entry carries on once priority is next looked at. What it
@@ -7884,6 +7896,29 @@ export class Game {
     this.recordCopyChoice(awaiting.source, player, copy);
     this.state.awaiting = null;
     this.prepareForPriority(this.activePlayer);
+  }
+
+  /** The copiable modifiers a copy of `copied` takes from a copy effect with
+   * these exceptions: `copied`'s own copy exceptions, which are part of what's
+   * copied (rule 707.9b — a token copy's "isn't legendary" among them), then
+   * `except`, which win where they differ. */
+  private copyEffectModifiers(copied: GameObject, except: CopyExceptions | undefined): PtModifier[] {
+    const name = this.unflippedName(printedCardName(copied));
+    // A card in a graveyard or exile has only what's printed on it.
+    const its = copied.zone === "battlefield" ? copied.modifiers : [];
+    return [
+      // A duration isn't copiable (Cursed Mirror's ruling): what copies a
+      // copy that lasts until end of turn keeps it.
+      ...its.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false })),
+      ...(except !== undefined
+        ? copyExceptionModifiers(
+            except,
+            this.registry,
+            copiableTypesOf(this.registry, name, its),
+            copiableKeywordAbilities(this.registry, name, its),
+          )
+        : []),
+    ];
   }
 
   /** What `chooser` chose for the Clone `cloneId` to enter as a copy of — a
@@ -7911,29 +7946,20 @@ export class Game {
     clone.enterChoice = {
       ...clone.enterChoice,
       copyOf: copied === undefined ? null : this.unflippedName(printedCardName(copied)),
-      // Its copy exceptions are part of what's copied (rule 707.9b) — a token
-      // copy's "isn't legendary" among them — and then this copy effect's
-      // own, which win where they differ.
-      copyModifiers:
-        copied === undefined
-          ? []
-          : [
-              // A duration isn't copiable (Cursed Mirror's ruling): what
-              // copies a copy that lasts until end of turn keeps it.
-              // A card in a graveyard or exile has only what's printed on it.
-              ...(copied.zone === "battlefield"
-                ? copied.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false }))
-                : []),
-              ...(except !== undefined ? copyExceptionModifiers(except, this.registry, copiableTypesOf(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : []), copiableKeywordAbilities(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : [])) : []),
-            ],
+      copyModifiers: copied === undefined ? [] : this.copyEffectModifiers(copied, except),
       // What copying adds to how it enters (rule 707.9e) — only if it copies.
       ...(copied !== undefined &&
       spec !== null &&
-      (spec.tapped === true || spec.counters !== undefined || spec.untilEndOfTurn === true || spec.whenYouDo !== undefined)
+      (spec.tapped === true ||
+        spec.counters !== undefined ||
+        spec.untilEndOfTurn === true ||
+        spec.untilTurnedFaceDown === true ||
+        spec.whenYouDo !== undefined)
         ? {
             copyEnter: {
               ...(spec.tapped === true ? { tapped: true as const } : {}),
               ...(spec.untilEndOfTurn === true ? { untilEndOfTurn: true as const } : {}),
+              ...(spec.untilTurnedFaceDown === true ? { untilTurnedFaceDown: true as const } : {}),
               ...(spec.counters !== undefined
                 ? {
                     counters: spec.counters
@@ -53363,6 +53389,9 @@ controlledBy,
     const turned = this.state.objects[one];
     if (turned === undefined) return;
     turned.faceDown = { kind: "effect", ...(as !== undefined ? { as } : {}) };
+    // "Until this creature is turned face down, it becomes a copy …"
+    // (Vesuvan Shapeshifter): it's itself again under its face-down status.
+    this.endTemporaryCopies(turned, (ends) => ends === "turned-face-down");
     invalidateComputedCache();
     this.emit({ type: "permanent-turned-face-down", player: turned.controller, object: one });
   }
@@ -53725,16 +53754,66 @@ controlledBy,
    * (702.37b). `x`: the X paid in that cost, 0 by any other way.
    * `priorityTo`: the player whose special action this was, who has priority
    * again after any choice an "as this is turned face up" asks. */
-  private becomeFaceUp(id: ObjectId, player: PlayerId, megamorphCounter: boolean, x = 0, priorityTo?: PlayerId): void {
+  private becomeFaceUp(
+    id: ObjectId,
+    player: PlayerId,
+    megamorphCounter: boolean,
+    x = 0,
+    priorityTo?: PlayerId,
+    /** What `copyOnEnter.orTurnedFaceUp` chose to copy, once it's asked. */
+    copyAnswer?: ObjectId | null,
+  ): void {
     const object = this.state.objects[id];
     const card = this.registry.get(object.cardName);
+    // "As this creature enters or is turned face up, you may choose another
+    // creature on the battlefield" (Vesuvan Shapeshifter): its controller
+    // chooses first, and it turns face up as the copy (rule 708.11).
+    const copySpec = card.copyOnEnter?.orTurnedFaceUp === true ? card.copyOnEnter : null;
+    if (copySpec !== null && copyAnswer === undefined) {
+      const options = this.state.zones.shared.battlefield.filter((other) => {
+        const o = this.state.objects[other];
+        return (
+          other !== id &&
+          o !== undefined &&
+          this.inGame(o) &&
+          matchesFilter(this.state, this.registry, other, copySpec.filter, { you: object.controller, source: id })
+        );
+      });
+      if (options.length > 0) {
+        this.state.awaiting = {
+          kind: "choose-copy",
+          player: object.controller,
+          source: id,
+          options,
+          faceUp: { player, megamorph: megamorphCounter, x, ...(priorityTo !== undefined ? { priorityTo } : {}) },
+        };
+        return;
+      }
+    }
     delete object.faceDown;
     object.turnedFaceUpOnTurn = this.state.turn.number;
+    // Its copiable values revert to its own as it's turned face up (rule
+    // 708.8); then what it chose to copy, if anything.
+    const copied = copySpec !== null && copyAnswer !== undefined && copyAnswer !== null ? this.state.objects[copyAnswer] : undefined;
+    if (copySpec !== null && copied !== undefined) {
+      const copyOf = this.unflippedName(printedCardName(copied));
+      const modifiers = this.copyEffectModifiers(copied, copySpec.except).map((m) => ({ ...m, timestamp: -2 }));
+      this.setCopiableValues(
+        object,
+        { copyOf, modifiers },
+        copySpec.untilTurnedFaceDown === true ? "turned-face-down" : copySpec.untilEndOfTurn === true ? "end-of-turn" : undefined,
+      );
+    }
     invalidateComputedCache();
     this.revealFaceDown(id);
+    if (copySpec !== null && copied !== undefined) {
+      this.emit({ type: "permanent-copied", object: id, copyOf: object.copyOf ?? null });
+    }
     const ref = { kind: "object", object: id } as const;
     if (megamorphCounter) this.addCounter(ref, "+1/+1", 1, false, player);
-    const as = card.asTurnedFaceUp;
+    // Its "as this is turned face up" — the copy's, if it's become one (rule
+    // 708.11: one it has after it's turned face up applies as it is).
+    const as = this.registry.get(rulesTextName(object)).asTurnedFaceUp;
     if (as !== undefined && "counters" in as) this.addCounter(ref, "+1/+1", as.counters, false, player);
     // Anything else it says (Gift of Doom's "you may attach it to a
     // creature") is done the next time priority is looked at, ahead of the
@@ -64210,8 +64289,12 @@ controlledBy,
         // A copy "until end of turn" (Cursed Mirror): it and its exceptions
         // end in the cleanup step (rule 514.2), and it's itself again.
         const copied = (enterChoice.copyModifiers ?? []).map((m) => ({ ...m, timestamp: -2, untilEndOfTurn: false }));
+        // One "until this creature is turned face down" (Vesuvan
+        // Shapeshifter) ends as it's turned face down (`turnFaceDown`).
         if (enterChoice.copyEnter?.untilEndOfTurn === true) {
           this.setCopiableValues(object, { copyOf: enterChoice.copyOf, modifiers: copied }, "end-of-turn");
+        } else if (enterChoice.copyEnter?.untilTurnedFaceDown === true) {
+          this.setCopiableValues(object, { copyOf: enterChoice.copyOf, modifiers: copied }, "turned-face-down");
         } else {
           object.copyOf = enterChoice.copyOf;
           // A token already a copy (of a Clone) copies something else now,

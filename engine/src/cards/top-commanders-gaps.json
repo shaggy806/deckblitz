@@ -7,6 +7,7 @@
     "condition:cycled-named-card-this-game",
     "trigger:activates-ability-from-graveyard",
     "amount:greatest-among-cards-left-graveyard",
+    "effect:become-copy-until-turned-face-down",
     "effect:copy-exception-subtype-if-creature",
     "replacement:draw-replacement-search",
     "replacement:copy-on-enter-exile-two-counters-from-other",

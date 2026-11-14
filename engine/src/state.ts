@@ -895,6 +895,9 @@ export interface GameObject {
       readonly counters?: readonly { readonly kind: string; readonly amount: number; readonly ifType?: CardType }[];
       /** The copy lasts until end of turn (`CopyOnEnter.untilEndOfTurn`). */
       readonly untilEndOfTurn?: true;
+      /** The copy lasts until it's turned face down
+       * (`CopyOnEnter.untilTurnedFaceDown`). */
+      readonly untilTurnedFaceDown?: true;
       /** "When you do, …" (`CopyOnEnter.whenYouDo`, rules 603.11, 707.9g): the
        * ability, with what it copied as it was chosen — its trigger object,
        * by stint (rule 400.7). */
@@ -1755,6 +1758,9 @@ export interface CopyValues {
 export type CopyEnds =
   | "end-of-turn"
   | "next-end-step"
+  /** "Until this creature is turned face down" (Vesuvan Shapeshifter): as
+   * it's turned face down, however (`Game.turnFaceDown`). */
+  | "turned-face-down"
   | { readonly turnOf: PlayerId }
   | { readonly whileSource: WhileSource };
 
@@ -3980,6 +3986,17 @@ export type AwaitingDecision =
       readonly player: PlayerId;
       readonly source: ObjectId;
       readonly options: readonly ObjectId[];
+      /** Asked as the face-down `source` is turned face up, not as it enters
+       * (`CopyOnEnter.orTurnedFaceUp`, rule 708.11): it's turned once this is
+       * answered, as `Game.becomeFaceUp` was asked to turn it — `player` the
+       * one turning it, `megamorph` and `x` its cost's, `priorityTo` who has
+       * priority after. */
+      readonly faceUp?: {
+        readonly player: PlayerId;
+        readonly megamorph: boolean;
+        readonly x: number;
+        readonly priorityTo?: PlayerId;
+      };
     }
   | {
       /** An Aura is about to enter the battlefield other than by resolving
