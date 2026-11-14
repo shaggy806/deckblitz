@@ -598,10 +598,12 @@ export type GameEvent =
       /** A split search (Cultivate): only the first of `objects` went to
        * `to`; the others went here. */
       readonly rest?: "hand" | "battlefield";
-      /** Where the chosen cards were put, when not a hand or a library: the
-       * log says "puts onto the battlefield", "puts into a graveyard" or
-       * "exiles" rather than "takes". */
-      readonly to?: "battlefield" | "graveyard" | "exile";
+      /** Where the chosen cards were put, when not a hand: the log says
+       * "puts onto the battlefield", "puts into a graveyard", "exiles" or
+       * "puts on top of / on the bottom of a library" rather than "takes" —
+       * an opponent bottoming a card of yours (Memories Returning) took
+       * nothing. */
+      readonly to?: "battlefield" | "graveyard" | "exile" | "library-top" | "library-bottom";
     })
   | (Base & {
       /** A player shuffled their library (after a search / tutor). */

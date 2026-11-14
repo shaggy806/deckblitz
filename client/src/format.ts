@@ -341,7 +341,11 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
               ? `puts ${cards} into a graveyard`
               : to === 'exile'
                 ? `exiles ${cards}`
-                : `takes ${cards}`
+                : to === 'library-top'
+                  ? `puts ${cards} on top of a library`
+                  : to === 'library-bottom'
+                    ? `puts ${cards} on the bottom of a library`
+                    : `takes ${cards}`
         // A split search (Cultivate): the first find one way, the rest another.
         if (event.rest !== undefined && event.objects.length > 1) {
           const [first, ...others] = event.objects.map(name)

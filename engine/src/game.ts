@@ -11905,7 +11905,9 @@ export class Game {
             ? ("graveyard" as const)
             : awaiting.destination === "exile" || awaiting.destination === "exile-playable" || awaiting.destination === "exile-face-down"
               ? ("exile" as const)
-              : undefined;
+              : awaiting.destination === "library-top" || awaiting.destination === "library-bottom"
+                ? awaiting.destination
+                : undefined;
       this.emit({
         type: "cards-chosen-from-zone",
         player,
