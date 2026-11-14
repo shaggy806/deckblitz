@@ -13,6 +13,7 @@ import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import type { GameObject } from "../state.js";
 import type { TargetRef } from "../target.js";
+import { changeDefinitionText } from "../text-change.js";
 import { A, B, activate, lands, ref, spawn, table, zone } from "./harness.js";
 
 /** Choose `name` among the names offered; records what was offered. */
@@ -112,6 +113,18 @@ describe("Garth One-Eye", () => {
     expect(lotus).toHaveLength(1);
     expect(lotus[0].zone).toBe("battlefield");
     expect(lotus[0].isToken).toBe(true);
+  });
+
+  it("a text change of black leaves the names alone (rule 612.2)", () => {
+    const { game } = table();
+    const changed = changeDefinitionText(game.registry.get("Garth One-Eye"), [{ from: "black", to: "white" }]);
+    const ability = changed.activated[0];
+    expect(ability.text).toContain("Black Lotus");
+    const effect = ability.effect;
+    if (effect?.kind !== "modal") throw new Error("not modal");
+    expect(effect.modes.map((m) => m.text)).toContain("Black Lotus");
+    const lotus = effect.modes[5].effect;
+    expect(lotus.kind === "cast-now" ? lotus.copyOfCardNamed : undefined).toBe("Black Lotus");
   });
 
   it("once all six names have been chosen, the ability does nothing; a Garth that returns forgets", () => {

@@ -293,7 +293,7 @@ describe("the pool's text holds no colour word the change can't reach", () => {
     const word = /(^|[^a-z])(non)?(white|blue|black|red|green)([^a-z]|$)/i;
     // Display strings, names and a choice's options are never rules words
     // here (612.2): the walker skips them too.
-    const skip = new Set(["text", "prompt", "label", "name", "token", "cardName", "hasName", "art", "tokenName", "faces", "options", "chooseOnEnter", "value"]);
+    const skip = new Set(["text", "prompt", "label", "name", "token", "cardName", "hasName", "art", "tokenName", "faces", "options", "chooseOnEnter", "value", "copyOfCardNamed"]);
     const found = new Set<string>();
     const walk = (v: unknown): void => {
       if (Array.isArray(v)) for (const x of v) walk(x);

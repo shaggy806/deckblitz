@@ -159,6 +159,8 @@ const NAME_KEYS: ReadonlySet<string> = new Set([
   "chooseOnEnter",
   "value",
   "art",
+  // Garth One-Eye's "Black Lotus".
+  "copyOfCardNamed",
 ]);
 
 /** Fields holding words the client shows. */
@@ -289,7 +291,16 @@ export function tokenColorsAfter(
  * word or a land type.
  */
 export function changeDefinitionText(def: CardDefinition, changes: readonly TextChange[]): CardDefinition {
-  const names = [def.name, ...(def.faces ?? [])].sort((a, b) => b.length - a.length);
+  // A card its text names is a name too, kept in the display text (612.2):
+  // Garth One-Eye's "Black Lotus" stays Black Lotus after black becomes white.
+  const named = new Set<string>();
+  const collect = (v: unknown, key: string | null): void => {
+    if (Array.isArray(v)) for (const x of v) collect(x, key);
+    else if (v !== null && typeof v === "object") for (const [k, x] of Object.entries(v)) collect(x, k);
+    else if (typeof v === "string" && key === "copyOfCardNamed") named.add(v);
+  };
+  collect(def, null);
+  const names = [def.name, ...(def.faces ?? []), ...named].sort((a, b) => b.length - a.length);
   let out = def;
   for (const change of changes) {
     const next: Record<string, unknown> = {};
