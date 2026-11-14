@@ -1235,6 +1235,9 @@ export type GameEvent =
       readonly type: "permanent-copied";
       readonly object: ObjectId;
       readonly copyOf: string | null;
+      /** Chosen as it was turned face up, not as it entered (Vesuvan
+       * Shapeshifter — `CopyOnEnter.orTurnedFaceUp`). */
+      readonly asTurnedFaceUp?: true;
     })
   | (Base & {
       /** `player` manifested (rule 701.40) — or cloaked (701.58) — the top

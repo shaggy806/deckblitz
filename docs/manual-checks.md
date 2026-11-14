@@ -8274,3 +8274,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Comet, Stellar Pup: at four players, any player can be chosen
 - **Do:** Use Comet's 0 ability. When asked, click Carol.
 - **Expect:** Every player is highlighted. Carol goes down to 35 life, and Comet to 3 loyalty.
+## Copies chosen as they enter or turn face up (2026-11-13)
+
+### The Mimeoplasm: exile two creature cards, copy one, the other's power in counters
+- **Do:** Cast The Mimeoplasm. Choose Serra Angel and Bob's Grizzly Bears, then Serra Angel to copy.
+- **Expect:** Both cards go to exile. The Mimeoplasm is Serra Angel with two +1/+1 counters: a 6/6 with flying.
+- **Not a bug:** Choosing just one card exiles nothing, and The Mimeoplasm dies as a 0/0.
+
+### Vesuvan Shapeshifter: turned face up, it's a copy of the creature you choose
+- **Do:** Cast Vesuvan Shapeshifter face down. Turn it face up for {1}{U}, and choose Bob's Fathom Seer.
+- **Expect:** Before it turns, the banner asks you to click the permanent to copy. It turns face up as Fathom Seer, the log saying "is turned face up as a copy of Fathom Seer", and you draw two cards.
+- **Not a bug:** The banner calls it "Face-Down Creature": it's still face down while you choose.
+
+### Phyrexian Processor: pay any amount of life as it enters
+- **Do:** Cast Phyrexian Processor and choose 5. Then use its ability.
+- **Expect:** The banner reads "Phyrexian Processor — pay any amount of life as it enters (0–20)", and you go to 15 life. The token is a 5/5 black Phyrexian Minion.

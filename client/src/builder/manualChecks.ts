@@ -12429,4 +12429,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, {}, {}],
     }),
   ),
+  preset(
+    "The Mimeoplasm: exile two creature cards, copy one, the other's power in counters",
+    board({
+      you: { bf: ['Swamp', 'Forest', 'Island*3'], hand: ['The Mimeoplasm'], gy: ['Serra Angel'] },
+      opp: { gy: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    "Vesuvan Shapeshifter: turned face up, it's a copy of the creature you choose",
+    board({
+      you: { bf: ['Island*5'], hand: ['Vesuvan Shapeshifter'], lib: ['Island*3'] },
+      opp: { bf: ['Fathom Seer'] },
+    }),
+  ),
+  preset(
+    'Phyrexian Processor: pay any amount of life as it enters',
+    board({
+      you: { bf: ['Wastes*8'], hand: ['Phyrexian Processor'], life: 20 },
+    }),
+  ),
 ]

@@ -15379,7 +15379,8 @@ export class Game {
         source: id,
         min: 0,
         max,
-        prompt: `Pay any amount of life as ${nameOf(object)} enters`,
+        // The client puts the source's name before it.
+        prompt: "Pay any amount of life as it enters",
         payLifeAsEntering: true,
       };
       return true;
@@ -53837,7 +53838,7 @@ controlledBy,
     invalidateComputedCache();
     this.revealFaceDown(id);
     if (copySpec !== null && copied !== undefined) {
-      this.emit({ type: "permanent-copied", object: id, copyOf: object.copyOf ?? null });
+      this.emit({ type: "permanent-copied", object: id, copyOf: object.copyOf ?? null, asTurnedFaceUp: true });
     }
     const ref = { kind: "object", object: id } as const;
     if (megamorphCounter) this.addCounter(ref, "+1/+1", 1, false, player);

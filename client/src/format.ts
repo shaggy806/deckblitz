@@ -422,7 +422,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.object)} and ${name(event.withObject)} exchange text boxes`
     case 'permanent-copied':
       return event.copyOf
-        ? `${name(event.object)} enters as a copy of ${event.copyOf}`
+        ? event.asTurnedFaceUp === true
+          ? `${name(event.object)} is turned face up as a copy of ${event.copyOf}`
+          : `${name(event.object)} enters as a copy of ${event.copyOf}`
         : `${name(event.object)} copies nothing`
     case 'creature-type-chosen':
       // A player chosen (Black Vise's opponent, a battle's protector) goes by name.
