@@ -87,6 +87,7 @@ const TERMS = [
   "entersWith",
   "gainsTriggered",
   "becomes",
+  "whenCast",
 ];
 // `affinity` is read only off a permission kept on the card (the cost reads
 // the cast's own card permission), which is what these grants make.

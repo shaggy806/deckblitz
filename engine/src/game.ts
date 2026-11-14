@@ -22115,6 +22115,24 @@ export class Game {
       });
       invalidateComputedCache();
     }
+    // Havengul Lich's "when you cast it this turn, …": a delayed triggered
+    // ability of the effect that gave the permission (rule 603.7), finding
+    // the spell because it was cast this way (400.7h) — set up waiting for
+    // the next spell its controller casts, which is this one, announced just
+    // below. "This creature" is that permanent in the stint it had then.
+    const whenCast = permissionTerms?.whenCast;
+    if (whenCast?.by !== undefined && whenCast.by.controller === player) {
+      this.createDelayedTrigger(
+        whenCast.by.id,
+        player,
+        { nextSpell: {} },
+        whenCast.effect,
+        whenCast.text,
+        [],
+        [],
+        { refs: { source: whenCast.by.zoneChangeCount } },
+      );
+    }
     // Kess's "if a spell cast this way would be put into your graveyard,
     // exile it instead" — set after the move to the stack, which clears it.
     if (permissionTerms?.exileAfter === true) object.exileIfWouldGoToGraveyard = true;
@@ -43928,8 +43946,18 @@ controlledBy,
         ? { id: source, zoneChangeCount: sourceObject.zoneChangeCount ?? 0 }
         : undefined;
     const window = this.permissionWindow(duration, windowOf ?? player, source);
+    // "When you cast it": the permanent whose effect gave it, as it is now,
+    // and that effect's controller.
+    const whenCast =
+      terms.whenCast === undefined
+        ? undefined
+        : {
+            ...terms.whenCast,
+            by: { id: source, zoneChangeCount: sourceObject?.zoneChangeCount ?? 0, controller },
+          };
     return {
       ...terms,
+      ...(whenCast !== undefined ? { whenCast } : {}),
       player,
       granter: controller,
       ...window,

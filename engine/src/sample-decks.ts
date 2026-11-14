@@ -952,9 +952,7 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Withered Wretch", 1],
       ["Zombie Apocalypse", 1],
     ],
-    substitutions: [
-      sub("Havengul Lich", "Bloodgift Demon", "Five-mana value creature."),
-    ],
+    substitutions: [],
   }),
   precon({
     name: "Chaos Incarnate",

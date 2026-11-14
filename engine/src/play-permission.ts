@@ -109,6 +109,14 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  *   (The Tomb of Aclazotz): the spell cast this way, on the stack and as the
  *   permanent it becomes (rule 400.7 — a `castRider`), for as long as it's
  *   that object. Spells only.
+ * - `whenCast`: "**when you cast it** this turn, [effect]" (Havengul Lich): a
+ *   delayed triggered ability of the effect that gave the permission (rule
+ *   603.7), which finds the spell only when it's cast this way (400.7h). It
+ *   triggers as the spell is cast, its controller the one who was given it
+ *   and casts it, its trigger object the spell, and its `"source"` the
+ *   permanent whose effect gave the permission, in the stint it had then
+ *   (`by`, bound by the engine as the permission is given). One card's
+ *   permission only (`grant-play`), spells only.
  */
 export interface PlayTerms {
   readonly play?: boolean;
@@ -155,6 +163,14 @@ export interface PlayTerms {
   readonly entersWith?: { readonly kind: string; readonly amount: number };
   readonly gainsTriggered?: readonly TriggeredAbility[];
   readonly becomes?: TypePatch;
+  readonly whenCast?: {
+    readonly effect: EffectSpec;
+    readonly text: string;
+    /** Written by the engine as the permission is given, never authored:
+     * the permanent whose effect gave it, in its stint then, and that
+     * effect's controller — "you". */
+    readonly by?: { readonly id: ObjectId; readonly zoneChangeCount: number; readonly controller: PlayerId };
+  };
 }
 
 /**
@@ -343,6 +359,7 @@ const PLAY_GRANT_KEYS = [
   "entersWith",
   "gainsTriggered",
   "becomes",
+  "whenCast",
   "duration",
   "byOwner",
   "whileSource",

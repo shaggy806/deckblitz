@@ -322,6 +322,19 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "When you cast it this turn" of a one-card permission — built 2026-11-13
+
+The key `static:gain-activated-abilities-of-card`. A `grant-play`'s
+`whenCast: { effect, text }` (`PlayTerms`): a delayed triggered ability of the
+effect that gave the permission (rule 603.7), finding the spell only when it's
+cast under that permission (400.7h — set up as the spell is cast this way,
+waiting on the next spell, which is it), above it on the stack. Its trigger
+object is the spell, its `"source"` the permanent whose effect gave the
+permission in the stint it had then (`by`, bound in `cardPermissionFrom`).
+Havengul Lich (rank 6097): `grant-activated-of` the spell, its abilities as the
+card had them. Out of the Grave Danger precon's stand-ins.
+`test/permission-when-cast.test.ts`.
+
 ### Redirections to chosen permanents, ordered by the affected player — built 2026-11-13
 
 The key `decision:damage-redirect-order`. The `replacement-order` question
