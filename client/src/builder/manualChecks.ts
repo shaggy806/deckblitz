@@ -27,6 +27,8 @@ type Card =
       /** The name of a permanent on any side to attach to (the first found). */
       readonly attach?: string
       readonly commander?: boolean
+      /** An Attraction's printing, by collector number: the numbers it lights. */
+      readonly collector?: string
     }
 
 interface Side {
@@ -45,6 +47,10 @@ interface Side {
   readonly companion?: string
   /** Cards to choose a companion from, asked as the board starts. */
   readonly askCompanion?: readonly string[]
+  /** The Attraction deck, top first (rule 717.2), and the junkyard, oldest
+   * first (717.6a): Attractions only. */
+  readonly attractions?: readonly Card[]
+  readonly junkyard?: readonly Card[]
   readonly life?: number
   readonly poison?: number
   /** Played by you ("Sit" at the seat), not a bot. */
@@ -100,6 +106,7 @@ export function board(opts: BoardOpts): ScenarioSpec {
           owner,
           zone,
           ...(card.commander ? { commander: true } : {}),
+          ...(card.collector !== undefined ? { collector: card.collector } : {}),
           ...(zone === 'battlefield' && card.tapped ? { tapped: true } : {}),
           ...(zone === 'battlefield' && card.sick ? { sick: true } : {}),
           ...(zone === 'battlefield' && card.counters ? { counters: card.counters } : {}),
@@ -113,6 +120,8 @@ export function board(opts: BoardOpts): ScenarioSpec {
     put(side.exile, 'exile')
     put(side.lib, 'library')
     put(side.side, 'sideboard')
+    put(side.attractions, 'attractions')
+    put(side.junkyard, 'junkyard')
     for (const name of side.companion === undefined ? [] : [side.companion]) {
       cards.push({ key: `m${next++}`, name, owner, zone: 'sideboard', companion: 'revealed' })
     }
@@ -12582,6 +12591,38 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Centaur of Attention: five dice stored, some rerolled at the beginning of combat',
     board({
       you: { bf: ['Forest*5'], hand: ['Centaur of Attention'] },
+    }),
+  ),
+  // --- Attractions on the board (2026-11-14, phase 2) -----------------------------
+  preset(
+    'Attractions: the Attraction deck and junkyard beside the command zone',
+    board({
+      you: {
+        attractions: ['Balloon Stand', 'Bumper Cars', 'Clown Extruder', 'Concession Stand', 'Fortune Teller'],
+        junkyard: ['Trash Bin', 'Hall of Mirrors'],
+      },
+      opp: [{ attractions: ['Haunted House', 'Information Booth', 'Kiddie Coaster'] }, {}, { junkyard: ['Spinny Ride'] }],
+    }),
+  ),
+  preset(
+    'Attractions: an opened Attraction shows its lit numbers',
+    board({
+      you: {
+        bf: ['Swamp*4'],
+        hand: ['Step Right Up'],
+        attractions: ['Balloon Stand', 'Bumper Cars', 'Clown Extruder'],
+      },
+      // A full table: the quadrant's smaller tiles.
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
+    'Attractions: a roll to visit at the start of your main phase',
+    board({
+      // The board's seeded die comes up 4: Balloon Stand's 200c printing
+      // lights it, Bumper Cars' first printing doesn't.
+      you: { bf: [{ name: 'Balloon Stand', collector: '200c' }, 'Bumper Cars'] },
+      step: 'upkeep',
     }),
   ),
 ]

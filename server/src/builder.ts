@@ -24,7 +24,17 @@ import type { Connection } from "./room.js";
 /** The seats a scenario can have, in turn order. */
 export const SCENARIO_PLAYERS: readonly PlayerId[] = ["alice", "bob", "carol", "dave"].map(asPlayerId);
 const STEPS: readonly ScenarioStep[] = ["upkeep", "draw", "precombat-main", "begin-combat", "postcombat-main", "end"];
-const ZONES: readonly ScenarioZone[] = ["battlefield", "hand", "graveyard", "exile", "library", "command", "sideboard"];
+const ZONES: readonly ScenarioZone[] = [
+  "battlefield",
+  "hand",
+  "graveyard",
+  "exile",
+  "library",
+  "command",
+  "sideboard",
+  "attractions",
+  "junkyard",
+];
 /** Rule 100.4a's cap on a constructed sideboard. */
 const MAX_SIDEBOARD = 15;
 const BASICS = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
@@ -83,6 +93,23 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = ca
     if (!players.has(card.owner)) throw new Error(`${card.name}'s owner ${card.owner} isn't at the table`);
     if (!ZONES.includes(card.zone)) throw new Error(`${card.name}: no zone "${card.zone}"`);
     const def = registry.get(card.name);
+    // An Attraction card lives in its owner's Attraction deck, on the
+    // battlefield, in exile or in their junkyard — never a hand, library or
+    // graveyard, which it goes to the junkyard instead of (rule 717.6) — and
+    // only an Attraction is in either pile (717.2).
+    const attraction = def.attractionLights !== undefined && !isTokenCard(def);
+    if (card.zone === "attractions" || card.zone === "junkyard") {
+      if (!attraction) throw new Error(`${card.name} isn't an Attraction: only an Attraction is in the ${card.zone === "junkyard" ? "junkyard" : "Attraction deck"}`);
+      if (card.commander === true) throw new Error(`${card.name}: a commander isn't in an Attraction deck`);
+    } else if (attraction && card.zone !== "battlefield" && card.zone !== "exile" && card.commander !== true) {
+      throw new Error(`${card.name} is an Attraction: it goes to the junkyard instead of a ${card.zone} (rule 717.6)`);
+    }
+    if (card.collector !== undefined) {
+      if (!attraction) throw new Error(`${card.name}: only an Attraction names a printing to light its numbers`);
+      if (typeof card.collector !== "string" || !def.attractionLights?.some((p) => p.collector === card.collector)) {
+        throw new Error(`${card.name} has no printing ${String(card.collector)}`);
+      }
+    }
     if (isTokenCard(def) && card.zone !== "battlefield") {
       // Rule 111.7 / 704.5d: a token anywhere else ceases to exist.
       throw new Error(`${card.name} is a token: it can only be on the battlefield`);
@@ -213,6 +240,13 @@ function damageProblem(laid: LaidOut, card: ScenarioCard): string | null {
   return null;
 }
 
+/** The cards the game makes as `player`'s Attraction deck: the deck's, top
+ * first, then the junkyard's, oldest first, which `layOut` moves across. */
+function attractionPile(spec: ScenarioSpec, player: PlayerId): readonly ScenarioCard[] {
+  const of = (zone: ScenarioZone) => spec.cards.filter((c) => c.owner === player && c.zone === zone);
+  return [...of("attractions"), ...of("junkyard")];
+}
+
 /**
  * A board that starts before the first turn (`ScenarioSpec.openingHands`): a
  * game made the way a room makes one, its decks stacked so each player is
@@ -282,6 +316,9 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
       cards: fill,
       commanders: spec.cards.filter((c) => c.owner === player && c.commander === true).map((c) => c.name),
       sideboard: spec.cards.filter((c) => c.owner === player && c.zone === "sideboard").map((c) => c.name),
+      attractions: attractionPile(spec, player).map((c) =>
+        c.collector === undefined ? c.name : { name: c.name, collector: c.collector },
+      ),
     })),
   });
   if (turn > 1) {
@@ -324,7 +361,12 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     place(card, id);
     if (card.zone === "battlefield") {
       game.debugMove(id, "battlefield");
-    } else if (card.zone !== "command" && card.zone !== "sideboard") {
+    } else if (
+      card.zone !== "command" &&
+      card.zone !== "sideboard" &&
+      card.zone !== "attractions" &&
+      card.zone !== "junkyard"
+    ) {
       // Put there directly: a commander moved to a hand, library, graveyard
       // or exile asks its owner whether it goes to the command zone instead
       // (rule 903.9), which is a question about play, not about the board.
@@ -362,8 +404,31 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
         if (card.companion === "revealed") game.debugRevealCompanion(player, outside[i]);
       });
   }
+  // The Attraction decks the game made, top first, in the scenario's order;
+  // a junkyard's cards were made after them, and move over (rule 717.6a: the
+  // junkyard is beside the deck in the command zone, not a zone of its own).
+  for (const player of players) {
+    const state = s.players[player];
+    const made = state.attractionDeck ?? [];
+    attractionPile(spec, player).forEach((card, i) => {
+      if (made[i] !== undefined) place(card, made[i]);
+    });
+    const deckSize = spec.cards.filter((c) => c.owner === player && c.zone === "attractions").length;
+    if (made.length > deckSize) {
+      state.junkyard = [...(state.junkyard ?? []), ...made.slice(deckSize)];
+      state.attractionDeck = made.slice(0, deckSize);
+    }
+  }
   for (const card of spec.cards) {
-    if (card.commander === true || card.zone === "library" || card.zone === "sideboard") continue;
+    if (
+      card.commander === true ||
+      card.zone === "library" ||
+      card.zone === "sideboard" ||
+      card.zone === "attractions" ||
+      card.zone === "junkyard"
+    ) {
+      continue;
+    }
     const id = game.debugSpawn(card.name, card.owner, card.zone, {
       tapped: card.tapped === true,
       ...(card.sick === true ? {} : { summoningSick: false }),
@@ -373,6 +438,10 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     if (object === undefined) continue;
     if (isTokenCard(registry.get(card.name))) object.isToken = true;
     if (object.zone === "battlefield" && card.sick === true) object.summoningSick = true;
+    // A placed Attraction is made with its first printing's lights; a named
+    // printing lights its own (rule 717.1).
+    const printing = registry.get(card.name).attractionLights?.find((p) => p.collector === card.collector);
+    if (card.collector !== undefined && printing !== undefined) object.lights = printing.lights;
   }
   for (const card of spec.cards) {
     const placed = byKey.get(card.key);
@@ -435,6 +504,14 @@ function scenarioStepOf(step: Step): ScenarioStep {
  */
 export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSpec {
   const s = game.state;
+  // An Attraction's printing, by the lights it has, unless it's the first.
+  const printingOf = (object: GameObject): { collector?: string } => {
+    const lights = object.lights;
+    const printings = cardRegistry().has(object.cardName) ? cardRegistry().get(object.cardName).attractionLights : undefined;
+    if (lights === undefined || printings === undefined) return {};
+    const at = printings.findIndex((p) => p.lights.join() === lights.join());
+    return at > 0 ? { collector: printings[at].collector } : {};
+  };
   const cards: ScenarioCard[] = [];
   const keyOf = new Map<ObjectId, string>();
   let next = 1;
@@ -449,6 +526,7 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
         owner: object.owner,
         zone,
         ...(object.isCommander ? { commander: true } : {}),
+        ...printingOf(object),
         ...extra,
       });
     }
@@ -477,6 +555,8 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
     for (const id of s.outside?.[seat.player] ?? []) {
       add(s.objects[id], "sideboard", revealedCompanion(s, seat.player) === id ? { companion: "revealed" } : {});
     }
+    for (const id of s.players[seat.player]?.attractionDeck ?? []) add(s.objects[id], "attractions");
+    for (const id of s.players[seat.player]?.junkyard ?? []) add(s.objects[id], "junkyard");
   }
   for (const id of s.zones.shared.exile) {
     const o = s.objects[id];

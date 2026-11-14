@@ -190,6 +190,63 @@ describe("buildScenario", () => {
   });
 });
 
+describe("Attraction decks and junkyards (rules 717.2, 717.6)", () => {
+  it("makes each player's Attraction deck and junkyard, top first and oldest first, and reads them back", () => {
+    const original = spec([
+      card("top", "Balloon Stand", { zone: "attractions" }),
+      card("next", "Bumper Cars", { zone: "attractions" }),
+      card("old", "Trash Bin", { zone: "junkyard" }),
+      card("open", "Kiddie Coaster"),
+      card("bobs", "Spinny Ride", { owner: BOB, zone: "junkyard" }),
+    ]);
+    const { game, objects } = buildScenario(original);
+    const s = game.state;
+    expect(s.players[ALICE].attractionDeck).toEqual([idOf(objects, "top"), idOf(objects, "next")]);
+    expect(s.players[ALICE].junkyard).toEqual([idOf(objects, "old")]);
+    expect(s.players[BOB].junkyard).toEqual([idOf(objects, "bobs")]);
+    expect(s.players[BOB].attractionDeck).toEqual([]);
+    // In the command zone (717.2, 717.6a), and lit, each one.
+    for (const key of ["top", "old", "bobs"]) {
+      expect(s.objects[idOf(objects, key)].zone).toBe("command");
+      expect(s.objects[idOf(objects, key)].lights?.length).toBeGreaterThan(0);
+    }
+    expect(s.objects[idOf(objects, "open")].lights?.length).toBeGreaterThan(0);
+
+    const back = snapshotScenario(game, original);
+    const shape = (spec_: ScenarioSpec) =>
+      spec_.cards.map(({ name, owner, zone }) => `${owner} ${zone} ${name}`).sort();
+    expect(shape(back)).toEqual(shape(original));
+    expect(() => buildScenario(back)).not.toThrow();
+  });
+
+  it("refuses a card that isn't an Attraction in either pile, and an Attraction where it never goes", () => {
+    expect(() => validateScenario(spec([card("x", "Hill Giant", { zone: "attractions" })]))).toThrow(/isn't an Attraction/);
+    expect(() => validateScenario(spec([card("x", "Hill Giant", { zone: "junkyard" })]))).toThrow(/isn't an Attraction/);
+    expect(() => validateScenario(spec([card("x", "Balloon Stand", { zone: "graveyard" })]))).toThrow(/junkyard instead/);
+    expect(() => validateScenario(spec([card("x", "Balloon Stand", { zone: "exile" })]))).not.toThrow();
+  });
+
+  it("lights an Attraction as the printing it names, in either pile or on the battlefield, and reads it back", () => {
+    const original = spec([
+      card("open", "Balloon Stand", { collector: "200c" }),
+      card("deck", "Balloon Stand", { zone: "attractions", collector: "200d" }),
+      card("first", "Bumper Cars"),
+    ]);
+    const { game, objects } = buildScenario(original);
+    expect(game.state.objects[idOf(objects, "open")].lights).toEqual([4, 6]);
+    expect(game.state.objects[idOf(objects, "deck")].lights).toEqual([5, 6]);
+    expect(game.state.objects[idOf(objects, "first")].lights).toEqual([2, 3, 6]);
+    const back = snapshotScenario(game, original);
+    expect(back.cards.map((c) => `${c.zone} ${c.name} ${c.collector ?? "-"}`).sort()).toEqual([
+      "attractions Balloon Stand 200d",
+      "battlefield Balloon Stand 200c",
+      "battlefield Bumper Cars -",
+    ]);
+    expect(() => validateScenario(spec([card("x", "Balloon Stand", { collector: "999" })]))).toThrow(/no printing 999/);
+    expect(() => validateScenario(spec([card("x", "Hill Giant", { collector: "1" })]))).toThrow(/only an Attraction/);
+  });
+});
+
 describe("the turn number, a commander's tax and damage", () => {
   const handAtMain = (built: ReturnType<typeof buildScenario>, player = ALICE) => {
     const s = built.game.state;

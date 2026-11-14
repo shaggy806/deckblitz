@@ -15,8 +15,21 @@ import type { PlayerId } from "engine";
 /** The zones a card can be placed in. A library's cards are listed top first.
  * `"sideboard"` isn't a zone: it's outside the game (rule 400.11a), where a
  * wish finds it — never for a player with a commander (903.5e), who can have
- * only a companion out there (702.139d). */
-export type ScenarioZone = "battlefield" | "hand" | "graveyard" | "exile" | "library" | "command" | "sideboard";
+ * only a companion out there (702.139d). `"attractions"` and `"junkyard"`
+ * aren't zones either: a player's Attraction deck (top first) and junkyard
+ * (oldest first), both in the command zone (rules 717.2, 717.6a), where only
+ * an Attraction goes — and an Attraction goes nowhere but those, the
+ * battlefield and exile (717.6). */
+export type ScenarioZone =
+  | "battlefield"
+  | "hand"
+  | "graveyard"
+  | "exile"
+  | "library"
+  | "command"
+  | "sideboard"
+  | "attractions"
+  | "junkyard";
 
 /** The steps a scenario can start in: every step with a priority window that
  * isn't inside a combat (a combat step needs attackers declared first). */
@@ -35,6 +48,9 @@ export interface ScenarioCard {
    * asks over every such card of theirs. Beside a commander, only these may be
    * in the "sideboard" (rule 702.139d). */
   readonly companion?: "revealed" | "ask";
+  /** An Attraction only: the collector number of the printing it is, which
+   * decides the numbers it lights (rule 717.1). Absent means its first. */
+  readonly collector?: string;
   /** One of its owner's commanders (rule 903.3): put in the command zone by
    * the game itself, then moved to `zone`. At most two per player. */
   readonly commander?: boolean;

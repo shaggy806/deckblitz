@@ -8369,3 +8369,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Centaur of Attention: five dice stored, some rerolled at the beginning of combat
 - **Do:** Cast Centaur of Attention. Go to combat, and in the banner pick two of the stored results.
 - **Expect:** As it enters, the card shows a 🎲 chip with five results, and its power and toughness are 3 plus the most results that match. At the beginning of combat the banner lists "Reroll result 1 (…)" to "Reroll result 5 (…)"; only the two picked change, and the chip and its size follow.
+
+## Attractions on the board (2026-11-14)
+
+### Attractions: the Attraction deck and junkyard beside the command zone
+- **Do:** Look at each seat's rail, then click your junkyard.
+- **Expect:** Under the command zone, "Attractions": a face-down pile reading 5 and a junkyard showing Hall of Mirrors' art with a 2 (Bob's pile reads 3 with an empty junkyard, Dave's 0 with a junkyard of 1; Carol has no Attractions row). The click opens "Alice's junkyard" with Trash Bin and Hall of Mirrors, each with its 1–6 column.
+
+### Attractions: an opened Attraction shows its lit numbers
+- **Do:** Cast Step Right Up, then hover one of the two Attractions it opened.
+- **Expect:** The History reads "Alice opens an Attraction: Balloon Stand" and "… Bumper Cars", the Attractions pile drops from 3 to 1, and each tile in your quadrant has a 1–6 column down its right with its lit numbers gold (Balloon Stand 2 and 6, Bumper Cars 2, 3 and 6). The hover card has the same column down its text box.
+
+### Attractions: a roll to visit at the start of your main phase
+- **Do:** Pass priority until your precombat main phase.
+- **Expect:** As the main phase begins the History reads "Alice rolls a d6: 4", "Alice rolls to visit their Attractions: 4" and "Balloon Stand is visited" (its gold 4; Bumper Cars lights 2, 3 and 6), and Balloon Stand's visit ability asks you to choose one.

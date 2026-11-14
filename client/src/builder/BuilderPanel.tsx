@@ -52,6 +52,8 @@ const ZONE_LABEL: Record<ScenarioZone, string> = {
   library: 'Library (top first)',
   command: 'Command zone',
   sideboard: 'Sideboard (outside the game)',
+  attractions: 'Attraction deck (top first)',
+  junkyard: 'Junkyard',
 }
 
 function loadSaved(): Record<string, ScenarioSpec> {
