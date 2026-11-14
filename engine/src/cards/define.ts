@@ -145,6 +145,19 @@ export interface CopyOnEnter {
    * as a `choose-from-zone`, since a client shows those cards in a popup.
    */
   readonly from?: "graveyards" | "exile";
+  /**
+   * "As The Mimeoplasm enters, you may **exile two creature cards from
+   * graveyards. If you do**, it enters as a copy of **one of those cards**"
+   * (rule 614.1c): with `from: "graveyards"`, its controller first chooses
+   * this many of the cards `filter` matches — all of them or none, since
+   * fewer is "you don't" (its ruling: "You can't choose to exile just one") —
+   * and they're exiled, then it copies one of those it exiled, their choice
+   * (the ruling: "You choose which one The Mimeoplasm is copying"). None
+   * chosen, it enters as itself. Asked as two `choose-from-zone`s, before it
+   * moves (rule 614.12). The others' power is a `counters` amount,
+   * `"other-exiled-power"`.
+   */
+  readonly exileFirst?: number;
   /** "**Raid — If you attacked this turn**, you may have this creature enter
    * as a copy" (Protean Raider): read as it's about to enter, for the player
    * it's entering under. Unmet, it isn't asked and it enters as itself. */
@@ -181,7 +194,10 @@ export interface CopyOnEnter {
   /**
    * "…except it enters with an additional +1/+1 counter on it if it's a
    * creature" (Spark Double), "with X additional +1/+1 counters" (Altered
-   * Ego, `amount: "x"` — the X it was cast with). An additional effect of
+   * Ego, `amount: "x"` — the X it was cast with), "with a number of
+   * additional +1/+1 counters on it equal to the power of the other card"
+   * (The Mimeoplasm, `"other-exiled-power"` — the power of the cards
+   * `exileFirst` exiled that it didn't copy, as each is in exile). An additional effect of
    * copying (rule 707.9e), not a copiable value: it happens only as this
    * permanent enters as a copy, and a later copy of it doesn't get them.
    * `ifType` is judged by what it is as it enters, copy and all (rule
@@ -189,7 +205,7 @@ export interface CopyOnEnter {
    */
   readonly counters?: readonly {
     readonly kind: string;
-    readonly amount: number | "x";
+    readonly amount: number | "x" | "other-exiled-power";
     readonly ifType?: CardType;
     /** "…with a shield counter on it **if you control that creature**"
      * (Undercover Operative): only when the permanent copied is one the

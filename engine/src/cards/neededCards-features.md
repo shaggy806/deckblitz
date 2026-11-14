@@ -4404,8 +4404,8 @@ Shapeshifter). Keys: `replacement:copy-on-enter-options`,
 `enter-as-copy-of-exiled-card`, `enter-as-copy-of-graveyard-card`. Still open:
 `clone-exception-if-embalmed` (a token copy isn't asked, `docs/engine-gaps.md`),
 `others-enter-as-copy` and the one-shot `next-enter-as-copy`,
-`next-enter-with-counters`; Aquamorph Entity's "or is turned face up" and The
-Mimeoplasm's two exiled cards aren't covered by what's marked.
+`next-enter-with-counters`; Aquamorph Entity's "or is turned face up" isn't
+covered by what's marked (The Mimeoplasm's two exiled cards: `exileFirst`, 2026-11-13).
 
 ### A player's number against yours — built 2026-11-01
 
@@ -6520,3 +6520,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **The total power of what died this turn (2026-11-13).** `effect:amount-total-power-died-this-turn`: a journal word as an object set, `{ turnHistory, who?, window? }` (`journalSetMembers`), so an aggregate sums or maxes over it — each member as its entry kept it, as it last existed (rule 603.10a), a token stack once per token (`journal-total-power-died.test.ts`). Genesis of the Daleks.
 
 **The creatures that crewed it this turn (2026-11-13).** `amount:creatures-crewed-it-this-turn`: the journal kind `crews` (each creature tapped for a crew cost, rule 702.122b, recorded in `Game.recordCrewers` with the Vehicle as its target) and the `JOURNAL_VIEWS` word `"crewers"`, a recipient view counted once per creature and stint (`oncePerList`, the creature's own stint now in the key), read with `selfOnly` for "each creature that crewed it this turn" — those that have left since included (`crewers-this-turn.test.ts`). Luxurious Locomotive.
+
+**Exile two, copy one, the other's power in counters (2026-11-13).** `replacement:copy-on-enter-exile-two-counters-from-other`: `CopyOnEnter.exileFirst` (with `from: "graveyards"`) — `n` cards or none chosen (a `choose-from-zone`, `copyExileOf`; fewer declines), exiled as one event and kept as `enterChoice.copyExiled`, then which of them it copies (not optional); a `counters` amount `"other-exiled-power"` is the power of those it didn't copy, as each is in exile (rule 614.1c, asked before it moves, 614.12). The Mimeoplasm.

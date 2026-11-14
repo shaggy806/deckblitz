@@ -873,6 +873,10 @@ export interface GameObject {
      * before they're asked. */
     readonly transformed?: true;
     readonly copyOf?: string | null;
+    /** The cards its `CopyOnEnter.exileFirst` exiled, once they're chosen:
+     * what it copies one of, and whose others' power its
+     * `"other-exiled-power"` counters count. */
+    readonly copyExiled?: readonly ObjectId[];
     /** The copied permanent's copy exceptions (its `copiable` modifiers),
      * which the copy takes too (rule 707.9b), then this copy effect's own
      * (`CopyOnEnter.except`). */
@@ -3880,6 +3884,11 @@ export type AwaitingDecision =
        * nothing" — is recorded on it (`enterChoice.copyOf`) as a `choose-copy`
        * would be, for a client to pick from a popup rather than the board. */
       readonly copyOnEnterOf?: ObjectId;
+      /** The permanent about to enter whose `CopyOnEnter.exileFirst` asks
+       * which cards to exile before it copies one of them (The Mimeoplasm):
+       * `max` of them are exiled now, fewer declining, and recorded on it
+       * (`enterChoice.copyExiled`). */
+      readonly copyExileOf?: ObjectId;
       /** The permanent about to enter whose `EnterInstead` asks for a discard
        * (Mox Diamond): `ids` are the cards in `player`'s hand that may be
        * discarded, and choosing none is declining, recorded on it

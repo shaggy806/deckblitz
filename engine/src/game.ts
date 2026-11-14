@@ -7940,8 +7940,21 @@ export class Game {
                       .filter((c) => c.ifYouControlCopied !== true || copiedIsYours)
                       .map((c) => ({
                         kind: c.kind,
-                        // "X additional counters": the X it was cast with.
-                        amount: c.amount === "x" ? (clone.xValue ?? 0) : c.amount,
+                        // "X additional counters": the X it was cast with;
+                        // "equal to the power of the other card" (The
+                        // Mimeoplasm): the exiled cards it didn't copy, each
+                        // as it is in exile (a negative power adds none).
+                        amount:
+                          c.amount === "x"
+                            ? (clone.xValue ?? 0)
+                            : c.amount === "other-exiled-power"
+                              ? Math.max(
+                                  0,
+                                  (clone.enterChoice?.copyExiled ?? [])
+                                    .filter((card) => card !== copied.id)
+                                    .reduce((sum, card) => sum + computeCharacteristics(this.state, this.registry, card).power, 0),
+                                )
+                              : c.amount,
                         ...(c.ifType !== undefined ? { ifType: c.ifType } : {}),
                       })),
                   }
@@ -11368,6 +11381,28 @@ export class Game {
       if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, amplified: chosen.length };
       this.state.awaiting = null;
       this.prepareForPriority(this.activePlayer);
+      return;
+    }
+    // The Mimeoplasm's cards to exile (`CopyOnEnter.exileFirst`): all of
+    // them, exiled now as one event, or — fewer chosen — none, and it enters
+    // as itself. Its entry carries on, asking which one it copies.
+    if (awaiting.copyExileOf !== undefined) {
+      const entering = this.state.objects[awaiting.copyExileOf];
+      this.state.awaiting = null;
+      if (entering !== undefined) {
+        if (chosen.length === awaiting.max) {
+          const exiled: ObjectId[] = [];
+          this.withGraveyardLeaveBatch(() => {
+            for (const card of chosen) {
+              if (this.state.objects[card]?.zone === "graveyard" && this.moveObject(card, "exile")) exiled.push(card);
+            }
+          });
+          entering.enterChoice = { ...entering.enterChoice, copyExiled: exiled };
+        } else {
+          entering.enterChoice = { ...entering.enterChoice, copyOf: null };
+        }
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
     // A Clone copying a card in a graveyard or exile (`CopyOnEnter.from`):
@@ -15906,11 +15941,43 @@ export class Game {
         object.enterChoice = { ...object.enterChoice, reveal: null };
         continue;
       }
+      const copySpec = this.registry.get(rulesTextName(object)).copyOnEnter;
+      const exileFirst = copySpec?.exileFirst;
+      const exiledFirst = object.enterChoice?.copyExiled;
       const options = this.copyOptions(id, chooser);
+      // "You may exile two creature cards from graveyards. If you do, …"
+      // (The Mimeoplasm): which ones first, all or none — fewer than that
+      // many being "you don't" (its ruling).
+      if (exileFirst !== undefined && exiledFirst === undefined) {
+        if (options.length >= exileFirst) {
+          this.state.awaiting = {
+            kind: "choose-from-zone",
+            player: chooser,
+            ids: options,
+            eligible: options,
+            min: 0,
+            max: exileFirst,
+            destination: "stay",
+            leftover: "stay",
+            copyExileOf: id,
+            prompt: `You may exile ${exileFirst} cards as ${nameOf(object)} enters, then have it enter as a copy of one of them (fewer than ${exileFirst} declines)`,
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, copyOf: null };
+        continue;
+      }
+      // One of those it exiled, its controller's choice: with just one, it
+      // copies that one.
+      if (exileFirst !== undefined && options.length === 1) {
+        this.recordCopyChoice(id, chooser, options[0]);
+        continue;
+      }
       if (options.length > 0) {
-        const from = this.registry.get(rulesTextName(object)).copyOnEnter?.from;
+        const from = copySpec?.from;
         // Cards aren't on the board to click: they're shown, as any choice
-        // out of a zone is, and choosing none is "copy nothing".
+        // out of a zone is, and choosing none is "copy nothing" — except
+        // after exiling them to copy one (`exileFirst`).
         this.state.awaiting =
           from !== undefined
             ? {
@@ -15918,12 +15985,15 @@ export class Game {
                 player: chooser,
                 ids: options,
                 eligible: options,
-                min: 0,
+                min: exileFirst !== undefined ? 1 : 0,
                 max: 1,
                 destination: "stay",
                 leftover: "stay",
                 copyOnEnterOf: id,
-                prompt: `You may have ${nameOf(object)} enter as a copy of a card`,
+                prompt:
+                  exileFirst !== undefined
+                    ? `Choose the card ${nameOf(object)} enters as a copy of`
+                    : `You may have ${nameOf(object)} enter as a copy of a card`,
               }
             : { kind: "choose-copy", player: chooser, source: id, options };
         return true;
@@ -16171,6 +16241,9 @@ export class Game {
     ) {
       return [];
     }
+    // Once `exileFirst` has exiled its cards: those of them still in exile.
+    const exiledFirst = clone.enterChoice?.copyExiled;
+    if (exiledFirst !== undefined) return exiledFirst.filter((id) => this.state.objects[id]?.zone === "exile");
     const ctx = this.makeResolutionContext(cloneId, chooser, [], clone.xValue ?? 0, 0);
     // Permanents, or cards in every graveyard or in exile (`CopyOnEnter.from`)
     // — a face-down exiled card only its owner may have looked at isn't one
