@@ -355,6 +355,7 @@ import {
   distinctNameOf,
   attachmentsOf,
   compareNum,
+  chosenColorsOf,
   fixChosenColor,
   manaValueOfObject,
   creaturesBlocking,
@@ -1104,6 +1105,14 @@ type ManaExtraOutput = {
 /** A pick declining a "may add" of `units` — see `Game.standaloneManaVariants`. */
 function declineManaPick(units: readonly ManaType[]): ManaType {
   return MANA_TYPES.find((type) => !units.includes(type)) as ManaType;
+}
+
+/** The prompt for one of several different "as this enters" choices
+ * (`chooseOnEnterCount`): "Choose two different options: the first". */
+function chooseSeveralPrompt(count: number, taken: number): string {
+  const many = ["one", "two", "three", "four", "five"][count - 1] ?? String(count);
+  const which = ["first", "second", "third", "fourth", "fifth"][taken] ?? `number ${taken + 1}`;
+  return `Choose ${many} different options: the ${which}`;
 }
 
 /** The colour `holder`'s controller named as it entered, if one was (a
@@ -8281,7 +8290,11 @@ export class Game {
                       ...source.enterChoice,
                       asEntersCounters: [...(source.enterChoice?.asEntersCounters ?? []), creatureType],
                     }
-                  : { ...source.enterChoice, chosen: creatureType };
+                  : source.enterChoice?.chosen !== undefined
+                    ? // The second of "choose two colors" (`chooseOnEnterCount`):
+                      // the only "choose" asked once one is chosen.
+                      { ...source.enterChoice, chosenAlso: [...(source.enterChoice.chosenAlso ?? []), creatureType] }
+                    : { ...source.enterChoice, chosen: creatureType };
       }
     }
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
@@ -15159,9 +15172,11 @@ export class Game {
         return { kind: "choose", options: escapeChoice, prompt: "It escapes with your choice of counter" };
       }
       if (becoming.chooseOnEnter !== null) {
+        const count = becoming.chooseOnEnterCount ?? 1;
         return {
           kind: "choose",
           options: becoming.chooseOnEnter,
+          ...(count > 1 ? { prompt: chooseSeveralPrompt(count, 0) } : {}),
           ...(becoming.chooseOnEnterLook !== null ? { look: true as const } : {}),
         };
       }
@@ -15189,6 +15204,16 @@ export class Game {
           options: becomes.forms.map((f) => f.label),
           prompt: `${becoming.name} becomes your choice of:`,
         };
+      }
+    }
+    // "Choose **two** colors" (Tablet of the Guilds): the next, from those
+    // not chosen yet — different ones (its ruling).
+    const chooseCount = becoming.chooseOnEnterCount ?? 1;
+    if (answered?.chosen !== undefined && becoming.chooseOnEnter !== null && chooseCount > 1) {
+      const taken = [answered.chosen, ...(answered.chosenAlso ?? [])];
+      const rest = becoming.chooseOnEnter.filter((option) => !taken.includes(option));
+      if (taken.length < chooseCount && rest.length > 0) {
+        return { kind: "choose", options: rest, prompt: chooseSeveralPrompt(chooseCount, taken.length) };
       }
     }
     // "As this enters, choose a card name" (rule 201.4) — printed, or a copy's.
@@ -39985,6 +40010,13 @@ controlledBy,
         const chosen = chosenOfSource();
         return MANA_TYPES.includes(chosen as ManaType) ? (chosen as ManaType) : undefined;
       },
+      chosenColorsOfSource: () => {
+        const departed = departedSource();
+        if (departed === undefined) return chosenColorsOf(this.state, source);
+        return [departed.chosenOnEnter, ...(departed.chosenOnEnterAlso ?? [])].filter(
+          (c): c is Color => c != null && (COLORS as readonly string[]).includes(c),
+        );
+      },
       commanderColors: () => this.state.players[controller]?.commanderIdentity ?? [],
       chosenNumberOfSource: () => {
         const chosen = chosenOfSource();
@@ -64241,6 +64273,7 @@ controlledBy,
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
+      ...(object.chosenOnEnterAlso !== undefined ? { chosenOnEnterAlso: object.chosenOnEnterAlso } : {}),
       ...(object.chosenNames !== undefined ? { chosenNames: [...object.chosenNames] } : {}),
       ...(object.chosenPlayer !== undefined ? { chosenPlayer: object.chosenPlayer } : {}),
       ...(object.otherChosenPlayer !== undefined ? { otherChosenPlayer: object.otherChosenPlayer } : {}),
@@ -65222,6 +65255,7 @@ controlledBy,
     // names a colour afresh).
     object.chosenCreatureType = null;
     delete object.chosenOnEnter;
+    delete object.chosenOnEnterAlso;
     delete object.chosenNames;
     delete object.chosenPlayer;
     delete object.otherChosenPlayer;
@@ -65263,6 +65297,7 @@ controlledBy,
       if (enterChoice.chosen !== undefined) {
         object.chosenCreatureType = enterChoice.chosen;
         object.chosenOnEnter = enterChoice.chosen;
+        if (enterChoice.chosenAlso !== undefined) object.chosenOnEnterAlso = enterChoice.chosenAlso;
         // "It becomes your choice of …" (Primal Clay): what was chosen is a
         // copiable value (rule 707.2), over anything it copied just now.
         const form = this.registry

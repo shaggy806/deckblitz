@@ -2033,11 +2033,28 @@ export function liveReferenceObjects(
  * kept and, read with no source, matches nothing. */
 export function fixChosenColor(state: GameState, filter: CardFilter, source: ObjectId | undefined): CardFilter {
   if (filter.ofChosenColor !== true || source === undefined) return filter;
-  const from = state.objects[source];
-  const chosen = from?.chosenOnEnter ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenOnEnter);
-  if (chosen == null || !(COLORS as readonly string[]).includes(chosen)) return filter;
+  const chosen = chosenColorsOf(state, source);
+  if (chosen.length === 0) return filter;
   const { ofChosenColor: _read, ...rest } = filter;
-  return { ...rest, colors: [...(filter.colors ?? []), chosen as Color] };
+  if (chosen.length === 1) return { ...rest, colors: [...(filter.colors ?? []), chosen[0]] };
+  // Of two chosen, at least one of them.
+  const either: CardFilter = { anyOf: chosen.map((color) => ({ colors: [color] })) };
+  return rest.anyOf === undefined ? { ...rest, ...either } : { ...rest, anyOf: rest.anyOf.map((alt) => ({ ...alt, ...either })) };
+}
+
+/**
+ * The colours chosen for `source` as it entered (`chooseOnEnter` over the
+ * colours — its `chosenOnEnter`, then `chosenOnEnterAlso` when it chose two),
+ * as it last was if it has left the battlefield (rule 608.2h). None when
+ * nothing was chosen, or what was chosen isn't a colour.
+ */
+export function chosenColorsOf(state: GameState, source: ObjectId | undefined): readonly Color[] {
+  const from = source === undefined ? undefined : state.objects[source];
+  if (from === undefined) return [];
+  const gone = from.zone !== "battlefield";
+  const first = from.chosenOnEnter ?? (gone ? from.lastKnown?.chosenOnEnter : null);
+  const also = from.chosenOnEnterAlso ?? (gone ? from.lastKnown?.chosenOnEnterAlso : undefined) ?? [];
+  return [first, ...also].filter((c): c is Color => c != null && (COLORS as readonly string[]).includes(c));
 }
 
 /** Is `value` of the quality `clause` asks for? A negative number has a parity
@@ -2437,9 +2454,8 @@ export function matchesFilter(
       live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
     if (filter.ofChosenColor === true) {
       // As `ofChosenType`: a source that has left reads its last choice.
-      const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
-      const chosen = from?.chosenOnEnter ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenOnEnter);
-      if (chosen == null || !colors.has(chosen as Color)) return false;
+      // Of two chosen (Tablet of the Guilds), at least one of them.
+      if (!chosenColorsOf(state, ctx.source).some((color) => colors.has(color))) return false;
     }
     if (filter.colors !== undefined && !filter.colors.every((col) => colors.has(col))) {
       return false;

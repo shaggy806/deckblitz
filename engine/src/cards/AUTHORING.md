@@ -1117,7 +1117,9 @@ a per-player effect is acting on — that player, not their planeswalkers;
 Within Range's "each opponent loses life equal to the number of creatures
 attacking them"), `{ colorsOf: ref }` (how many colours one object has —
 Ramos, Dragon Engine's "for each of **that spell's** colors"; as it last
-existed if it has left, colourless 0), `{ colorsAmong: CardFilter,
+existed if it has left, colourless 0; with `chosen: true`, only the colours
+chosen for the source as it entered — Tablet of the Guilds' "1 life for each
+of the chosen colors it is"), `{ colorsAmong: CardFilter,
 excludeSelf? }` (colours among battlefield permanents, each once — Sisay's
 "each color among other legendary permanents you control"),
 `{ distinctTokenNames: CardFilter }` (how many differently named tokens among
@@ -3108,6 +3110,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     (Sower of Discord): a second, different player, kept as `otherChosenPlayer`; a
     `deals-damage` trigger's `to: "chosen-players"` is either, and the `"other-chosen-player"`
     scope the one that isn't the trigger's player.
+  - **Two colours**: `chooseOnEnterCount: 2` beside `chooseOnEnter` over the five (Tablet of
+    the Guilds, Seal of the Guildpact): a second, different option, asked from those left, kept
+    as `chosenOnEnterAlso`. `ofChosenColor` matches either; `{ colorsOf, chosen: true }` counts
+    them (`choose-two-colors.test.ts`).
   - **Secretly**: `secretChoiceOnEnter: true` beside `choosePlayerOnEnter`
     (Guardian Archon's "as this creature enters, secretly choose an
     opponent"), `choose-opponent { remember: true, secret: true }` as an
@@ -3586,7 +3592,8 @@ five, its `chosenOnEnter`) — Pentarch Paladin's "target permanent of the
 chosen color", Curse of Wizardry's "a spell of the chosen color" — and in a
 `prevent-damage-from-chosen-source`'s filter ("a source of your choice of the
 chosen color", Story Circle), the shield keeping the colour chosen as it
-resolved. Prefer it to one conditional copy per colour.
+resolved. Prefer it to one conditional copy per colour. Of **two** chosen
+colours (`chooseOnEnterCount: 2`) it matches either.
 `onlyColorItsControllerChose: Color[]` reads a `vote` (`choose: true`) this
 resolution held instead, per permanent: one colour, the one its controller
 picked, option `i` being colour `i` (Selective Obliteration's "unless it's

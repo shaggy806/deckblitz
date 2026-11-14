@@ -5334,6 +5334,16 @@ export interface CardDefinition {
    */
   readonly chooseTwoPlayersOnEnter?: true;
   /**
+   * "As this artifact enters, choose **two** colors" (Tablet of the Guilds,
+   * Seal of the Guildpact), with `chooseOnEnter` over the options: that many
+   * different options, one after another, each later one from those not yet
+   * chosen (the rulings: two different colours). The first is
+   * `GameObject.chosenOnEnter`, the rest `chosenOnEnterAlso`; `ofChosenColor`
+   * matches any of them, and `colorsOf`'s `chosen` counts them. Absent for
+   * one.
+   */
+  readonly chooseOnEnterCount?: number;
+  /**
    * "This enters **under the control of an opponent of your choice**" (Xantcha,
    * Sleeper Agent; Captive Audience), with `choosePlayerOnEnter: "opponent"`: a
    * replacement (rule 614.1d), so no player gets to act while it's yours. Asked
@@ -6116,6 +6126,7 @@ const PRINTED_ABILITY: {
   choosePlayerOnEnter: (def) => def.choosePlayerOnEnter !== null,
   secretChoiceOnEnter: false,
   chooseTwoPlayersOnEnter: false,
+  chooseOnEnterCount: false,
   entersUnderChosenPlayer: false,
   choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
   loyalty: false,
@@ -6439,6 +6450,7 @@ interface CardDraft {
   choosePlayerOnEnter?: "player" | "opponent";
   secretChoiceOnEnter?: true;
   chooseTwoPlayersOnEnter?: true;
+  chooseOnEnterCount?: number;
   entersUnderChosenPlayer?: true;
   choosePermanentOnEnter?: PermanentOnEnter;
   loyalty?: number;
@@ -6826,6 +6838,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.minX !== undefined ? { minX: draft.minX } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     ...(draft.chooseTwoPlayersOnEnter === true ? { chooseTwoPlayersOnEnter: true as const } : {}),
+    ...(draft.chooseOnEnterCount !== undefined && draft.chooseOnEnterCount > 1 ? { chooseOnEnterCount: draft.chooseOnEnterCount } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),

@@ -12625,4 +12625,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'upkeep',
     }),
   ),
+  // --- Two colours chosen, damage divided by another player (2026-11-14, build-family) ---
+  preset(
+    'Tablet of the Guilds: choose two different colors as it enters',
+    board({
+      you: { bf: ['Wastes*2', 'Forest', 'Plains'], hand: ['Tablet of the Guilds', 'Watchwolf'] },
+    }),
+  ),
+  preset(
+    'Master of the Wild Hunt: the target creature\'s controller divides its damage among the Wolves',
+    board({
+      you: { bf: ['Master of the Wild Hunt', 'Wolf Token*3'] },
+      opp: { human: true, bf: ['Craw Wurm'] },
+    }),
+  ),
+  preset(
+    'Master of the Wild Hunt: in a 4-player game, the target\'s controller divides',
+    board({
+      you: { bf: ['Master of the Wild Hunt', 'Wolf Token*2'] },
+      opp: [{}, { bf: ['Hill Giant'] }, {}],
+    }),
+  ),
 ]

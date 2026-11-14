@@ -8383,3 +8383,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Attractions: a roll to visit at the start of your main phase
 - **Do:** Pass priority until your precombat main phase.
 - **Expect:** As the main phase begins the History reads "Alice rolls a d6: 4", "Alice rolls to visit their Attractions: 4" and "Balloon Stand is visited" (its gold 4; Bumper Cars lights 2, 3 and 6), and Balloon Stand's visit ability asks you to choose one.
+## Two colours chosen, damage divided by another player (2026-11-14)
+
+### Tablet of the Guilds: choose two different colors as it enters
+- **Do:** Cast Tablet of the Guilds, choose White, then Green. Cast Watchwolf.
+- **Expect:** The banner reads "Choose two different options: the first" with White, Blue, Black, Red and Green; then "… the second" with only Blue, Black, Red and Green. Casting Watchwolf (green and white) gains you 2 life.
+
+### Master of the Wild Hunt: the target creature's controller divides its damage among the Wolves
+- **Do:** Use Master of the Wild Hunt's ability targeting Bob's Craw Wurm. Sit at Bob's seat: choose two of the Wolves, then give the first 4.
+- **Expect:** Your three Wolves tap and the Craw Wurm dies. Bob, not you, is asked which Wolves are dealt its 6 damage, then how much the first gets; the two he chose die and the third stays, tapped.
+
+### Master of the Wild Hunt: in a 4-player game, the target's controller divides
+- **Do:** Use Master of the Wild Hunt's ability targeting Carol's Hill Giant.
+- **Expect:** Your two Wolves tap, deal 4 to the Hill Giant and it dies. Carol (a bot) chooses which Wolves are dealt its 3 damage; you're never asked.

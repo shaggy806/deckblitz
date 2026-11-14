@@ -810,6 +810,10 @@ export interface GameObject {
    * interprets.
    */
   chosenOnEnter?: string | null;
+  /** The options chosen after `chosenOnEnter` as it entered, for "choose
+   * **two** colors" (`CardDefinition.chooseOnEnterCount` — Tablet of the
+   * Guilds). Cleared with it. */
+  chosenOnEnterAlso?: readonly string[];
   /**
    * The card names chosen for this permanent (rule 201.4), oldest first: one
    * chosen as it entered (Pithing Needle, Meddling Mage —
@@ -917,6 +921,9 @@ export interface GameObject {
       };
     };
     readonly chosen?: string;
+    /** The options chosen after `chosen`, in order, when it chooses more
+     * than one (`CardDefinition.chooseOnEnterCount`). */
+    readonly chosenAlso?: readonly string[];
     /** The card name chosen as it was about to enter
      * (`CardDefinition.chooseCardNameOnEnter`), or `null` when none could be
      * (Alhammarret, High Arbiter with no nonland card revealed). */
@@ -2321,6 +2328,8 @@ export interface LastKnownInfo {
    * had, for a leaves-the-battlefield trigger that looks back at it leaving
    * along with the creatures (rule 603.10a: Outpost Siege's "Dragons"). */
   readonly chosenOnEnter?: string;
+  /** `GameObject.chosenOnEnterAlso` as it left. */
+  readonly chosenOnEnterAlso?: readonly string[];
   /** `GameObject.chosenNames` as it left — "the chosen name" for an ability
    * of it that resolves after it has gone (rule 608.2h). */
   readonly chosenNames?: readonly string[];
@@ -7234,6 +7243,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.controlEffects ?? null,
     o.controlEndsAtCleanup,
     o.chosenOnEnter ?? null,
+    o.chosenOnEnterAlso ?? null,
     o.chosenCreatureType ?? null,
     o.chosenNames ?? null,
     o.chosenPlayer ?? null,

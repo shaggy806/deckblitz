@@ -1078,8 +1078,11 @@ export type EffectAmount =
   /** How many colours what an {@link ObjectRef} points at has — Ramos,
    * Dragon Engine's "a +1/+1 counter on Ramos for each of **that spell's
    * colors**" (`"trigger-object"` in a cast trigger). A permanent that has
-   * left is read as it last existed there; colourless is 0. */
-  | { readonly colorsOf: ObjectRef }
+   * left is read as it last existed there; colourless is 0. With `chosen`,
+   * only the colours chosen for the effect's source as it entered — "1 life
+   * for each of **the chosen colors** it is" (Tablet of the Guilds, which
+   * chose two). */
+  | { readonly colorsOf: ObjectRef; readonly chosen?: true }
   /** How many colours there are **among** battlefield permanents matching a
    * filter, each counted once however many permanents have it — "for each
    * color among other legendary permanents you control" (Sisay, Weatherlight
@@ -12922,6 +12925,10 @@ export interface EffectApi {
   /** The colour this effect's source named as it entered, or `undefined` —
    * see `GameObject.chosenOnEnter` and `add-mana`'s `"chosen"`. */
   chosenColorOfSource(): ManaType | undefined;
+  /** Every colour the effect's source chose as it entered — one, or two with
+   * `chooseOnEnterCount` (Tablet of the Guilds) — as it last was if it has
+   * left (rule 608.2h). See `colorsOf`'s `chosen`. */
+  chosenColorsOfSource(): readonly Color[];
   /** The number chosen as the source entered, if one was — see the
    * `chosenNumber` {@link EffectAmount}. */
   chosenNumberOfSource(): number | undefined;
@@ -15935,7 +15942,10 @@ export function signedAmountValue(
   }
   if ("colorsOf" in amount) {
     const ref = objectRefRead(amount.colorsOf, ctx);
-    return ref === undefined ? 0 : ctx.colorsOf(ref).length;
+    if (ref === undefined) return 0;
+    if (amount.chosen !== true) return ctx.colorsOf(ref).length;
+    const chosen = ctx.chosenColorsOfSource();
+    return ctx.colorsOf(ref).filter((color) => chosen.includes(color)).length;
   }
   if ("colorsAmong" in amount) {
     return ctx.colorsAmong(amount.colorsAmong, amount.excludeSelf === true ? [ctx.source] : []);
