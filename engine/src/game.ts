@@ -1588,6 +1588,9 @@ interface EnteringReplacement {
   /** Its controller chose to have it enter tapped (`mayEnterTapped`): what
    * happens as it does. */
   readonly choseTappedThen?: EffectSpec;
+  /** What its `asEntersEffect`s do as it enters (Tibalt, Cosmic Impostor's
+   * emblem), in order. */
+  readonly asEntersEffects?: readonly EffectSpec[];
   /** Riot (rule 702.136a) gives it haste: its controller didn't have it
    * enter with the +1/+1 counter. */
   readonly riotHaste: boolean;
@@ -42123,8 +42126,13 @@ controlledBy,
           }
         }
       },
-      createEmblem: (text, staticAbility, triggered, owner, moreStatics, activated) => {
+      createEmblem: (text, staticAbility, triggered, owner, moreStatics, activated, linkedToSource) => {
         const from = this.state.objects[source];
+        // "Cards exiled with Tibalt": this source in the stint it's in now.
+        const stint =
+          linkedToSource === true
+            ? (refs.source ?? (from?.zone === "battlefield" ? (from.zoneChangeCount ?? 0) : undefined))
+            : undefined;
         this.createEmblem(
           owner ?? controller,
           text,
@@ -42135,6 +42143,7 @@ controlledBy,
           moreStatics ?? [],
           undefined,
           activated ?? [],
+          stint === undefined ? undefined : { source, zoneChangeCount: stint },
         );
       },
       addTimedStatic: (text, statics, expires) => {
@@ -44839,7 +44848,16 @@ controlledBy,
         if (play.from !== from) continue;
         if (!owned && !(from === "graveyard" && play.anyGraveyard === true)) continue;
         if (play.exiledByYou === true && card.exiledByPlayer !== player) continue;
-        if (play.linked === true && !this.linkedToStint(card, source.id, source.zoneChangeCount ?? 0)) continue;
+        if (play.linked === true) {
+          // An emblem's "cards exiled with Tibalt" (`EmblemState.linkedTo`).
+          const link =
+            source.kind === "emblem" ? this.state.emblems.find((e) => e.object === source.id)?.linkedTo : undefined;
+          const linked =
+            link !== undefined
+              ? this.linkedToStint(card, link.source, link.zoneChangeCount)
+              : this.linkedToStint(card, source.id, source.zoneChangeCount ?? 0);
+          if (!linked) continue;
+        }
         if (play.oncePerTurn === true && this.playOnceUsed(source)) continue;
         if (play.landAndSpell === true && this.playSlotUsed(source, isLand)) continue;
         if (!this.playTermsReach(play, cardId, face, player, isLand, source.id, x)) continue;
@@ -60287,6 +60305,8 @@ controlledBy,
      * table, so nothing says one was made. */
     expires?: Expiry,
     activated: readonly ActivatedAbility[] = [],
+    /** The permanent, in a stint, its `linked` statics read (`EmblemState.linkedTo`). */
+    linkedTo?: { readonly source: ObjectId; readonly zoneChangeCount: number },
   ): void {
     let object: ObjectId | undefined;
     if (triggered.length > 0 || activated.length > 0 || staticAbility !== null || moreStatics.length > 0) {
@@ -60319,6 +60339,7 @@ controlledBy,
       ...(object !== undefined ? { object } : {}),
       ...(createdBy !== owner ? { createdBy } : {}),
       ...(expires !== undefined ? { expires } : {}),
+      ...(linkedTo !== undefined ? { linkedTo } : {}),
     });
     invalidateComputedCache();
     if (expires === undefined) this.emit({ type: "emblem-created", player: owner, text });
@@ -62618,6 +62639,7 @@ controlledBy,
     let painIfUntapped = 0;
     let mayPayLife = 0;
     let choseTappedThen: EffectSpec | undefined;
+    const asEntersEffects: EffectSpec[] = [];
     const counters: { kind: string; amount: number }[] = [];
     // What it enters with, by kind, as the replacements give it; changed by
     // the counter replacements once each kind is totalled (below).
@@ -62763,6 +62785,9 @@ controlledBy,
       }
       // "The life paid as this artifact entered" (Phyrexian Processor).
       if (r.asEnters?.payLife !== undefined) noted = asEntersDone ?? 0;
+      // "As Tibalt enters, you get an emblem" (rule 614.1c): done once it's
+      // there, as part of the move.
+      if (r.asEntersEffect !== undefined) asEntersEffects.push(r.asEntersEffect);
       // A counter of the kind picked for each card it exiled.
       if (r.asEnters?.exile?.counterForEach !== undefined || r.asEnters?.discard?.keywordCounters !== undefined) {
         for (const kind of asEntersCounters ?? []) addCounters(kind, 1);
@@ -62907,6 +62932,7 @@ controlledBy,
       painIfUntapped: tapped ? 0 : painIfUntapped,
       mayPayLife: tapped || untapped ? 0 : mayPayLife,
       ...(choseTappedThen !== undefined ? { choseTappedThen } : {}),
+      ...(asEntersEffects.length > 0 ? { asEntersEffects } : {}),
       riotHaste,
       tributeUnpaid,
       prepared,
@@ -64955,6 +64981,10 @@ controlledBy,
       // replacement (rule 614.1c) — nothing triggers, nobody can respond.
       if (entering.choseTappedThen !== undefined) {
         applyEffectSpec(entering.choseTappedThen, this.makeResolutionContext(id, enteringController, [], 0));
+      }
+      // "As Tibalt enters, you get an emblem with …" (rule 614.1c): the same.
+      for (const effect of entering.asEntersEffects ?? []) {
+        applyEffectSpec(effect, this.makeResolutionContext(id, enteringController, [], 0));
       }
       // A shock land (rule 614.13): "you may pay N life; if you don't, it
       // enters tapped". It enters tapped by default; if its controller can

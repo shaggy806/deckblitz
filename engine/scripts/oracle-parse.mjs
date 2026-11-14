@@ -13215,6 +13215,36 @@ function revealedHandChoiceAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "Each opponent reveals their hand. For each opponent, exile a creature card
+  // they revealed this way until ~ leaves the battlefield." (Valki, God of
+  // Lies, rule 610.3): every hand revealed, then one card from each.
+  if (/^each opponent reveals their hand\.$/i.test(sentences[i])) {
+    const each = /^for each opponent, exile an? (.+?) card they revealed this way until ~ leaves the battlefield\.$/i.exec(sentences[i + 1] ?? "");
+    const eachFilter = each === null ? null : parseTypePhrase(each[1]);
+    if (eachFilter !== null && Object.keys(eachFilter).length > 0) {
+      return {
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "reveal-hand", who: "each-opponent" },
+            {
+              kind: "for-each-player",
+              who: "each-opponent",
+              effect: {
+                kind: "discard-chosen",
+                target: "that-player",
+                lookOnly: true,
+                filter: eachFilter,
+                destination: "exile",
+                untilSourceLeaves: true,
+              },
+            },
+          ],
+        },
+        used: 2,
+      };
+    }
+  }
   // "Look at target opponent's hand. You may exile a nonland card from it
   // until ~ leaves the battlefield" (Deep-Cavern Bat, rule 610.3).
   const looked =/^look at (target opponent|target player)'s hand\.$/i.exec(sentences[i]);

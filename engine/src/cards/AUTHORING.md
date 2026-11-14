@@ -2334,7 +2334,9 @@ text)` from `helpers.ts`; its "Solved — [ability]" is the ability gated on `{ 
 a static's or activated ability's `condition`, a triggered ability's `whileCondition` — Case of
 the Crimson Pulse; solved lasts until the Case leaves the battlefield),
 `timed-static { static, duration, text }` — **a timed static**: a resolved spell's or ability's rule change for a while, written as the static ability that says it forever, with a `PlayerDuration` (`engine/src/duration.ts`) — "players can't gain life this turn" (Skullcrack: a `would-gain-life` `prevent` replacement, `who: "any-player"`), "the 'legend rule' doesn't apply to permanents you control this turn" (Hall of Echoes: `legendRuleOff`), "until end of turn, you may activate loyalty abilities of Jace planeswalkers you control … any time you could cast an instant" (Jace's Machinations: `loyaltyAtInstantSpeed`, its `affects` a filter). It rides an emblem the table never sees, so only what an emblem's readers take works (below; `test/emblem-statics.test.ts` checks timed statics too), and it changes rules, not characteristics (rule 611.2c). Prefer it to a new `player-effect` field.
-`create-emblem { text, static?, moreStatics?, triggered?, activated?, to? }` (`static`: its static
+`create-emblem { text, static?, moreStatics?, triggered?, activated?, to?, linkedToSource? }` (`linkedToSource`:
+its `linked` statics read the cards exiled with this effect's source in its stint now, for good — Tibalt,
+Cosmic Impostor's "you may play cards exiled with Tibalt", `EmblemState.linkedTo`; `static`: its static
 ability, written as a permanent's and read off the emblem with "you" its owner, rules 113.6p,
 114.4 — an anthem of any scope (Elspeth, Knight-Errant), `noMaxHandSize`/`maxHandSize` (Tamiyo,
 the Moon Sage), `prohibits`, `costModification`, a `would-deal-damage` `replacement` (Ajani
@@ -6842,6 +6844,10 @@ clause (section 9):
   total" (Sigarda's Splendor — `{ lifeTotal: "you" }`): read as it enters
   (rule 614.1c, no trigger) and kept on the permanent for the stint, read
   back as `{ chosenNumber: true }` and replaced by a later `note` effect.
+  `asEntersEffect: EffectSpec` is any other "As this enters, [do this]" with
+  nothing to choose (rule 614.1c, no trigger), done once it's on the
+  battlefield with it as `"source"`: Tibalt, Cosmic Impostor's "As Tibalt
+  enters, you get an emblem with …" is a `create-emblem` with `linkedToSource`.
   `rollAsEnters: { sides, count }` is "As this creature enters, roll X d6"
   (Neverwinter Hydra — `{ sides: 6, count: "x" }`): its controller rolls as it
   enters (rules 614.1c, 706), a roll like any other to roll triggers and

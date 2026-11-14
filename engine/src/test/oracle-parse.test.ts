@@ -19016,6 +19016,33 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ).toEqual([{ on: "event", event: "scry-bottoms", who: "you" }]);
   });
 
+  it("reads a creature card exiled from each opponent's revealed hand until it leaves (Valki, God of Lies)", () => {
+    const valki = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature",
+      oracle_text:
+        "When ~ enters, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until ~ leaves the battlefield.",
+    });
+    expect(valki.triggered[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "reveal-hand", who: "each-opponent" },
+        {
+          kind: "for-each-player",
+          who: "each-opponent",
+          effect: {
+            kind: "discard-chosen",
+            target: "that-player",
+            lookOnly: true,
+            filter: { type: "creature" },
+            destination: "exile",
+            untilSourceLeaves: true,
+          },
+        },
+      ],
+    });
+  });
+
   it("reads a spell taken, copied and both retargeted at random (Chef's Kiss)", () => {
     const kiss = parseFace({
       name: "Test Card",

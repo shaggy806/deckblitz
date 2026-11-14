@@ -9233,6 +9233,11 @@ export type EffectSpec =
        * the effect's controller when absent. */
       readonly kind: "create-emblem";
       readonly text: string;
+      /** "You may play cards **exiled with Tibalt, Cosmic Impostor**" (rule
+       * 607.2a): the emblem's `linked` statics read the cards exiled with
+       * this effect's source in the stint it's in now, not with the emblem —
+       * for good, that permanent having left or not (Tibalt's ruling). */
+      readonly linkedToSource?: true;
       readonly static?: StaticAbility;
       readonly moreStatics?: readonly StaticAbility[];
       readonly triggered?: readonly TriggeredAbility[];
@@ -13367,6 +13372,8 @@ export interface EffectApi {
     owner?: PlayerId,
     moreStatics?: readonly StaticAbility[],
     activated?: readonly ActivatedAbility[],
+    /** See the effect's `linkedToSource`. */
+    linkedToSource?: boolean,
   ): void;
   /** The effect's controller's timed static — see the `timed-static`
    * {@link EffectSpec}. */
@@ -21012,7 +21019,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "create-emblem": {
       if (spec.to === undefined) {
-        ctx.createEmblem(spec.text, spec.static, spec.triggered, undefined, spec.moreStatics, spec.activated);
+        ctx.createEmblem(spec.text, spec.static, spec.triggered, undefined, spec.moreStatics, spec.activated, spec.linkedToSource === true);
         return;
       }
       // "Target opponent gets an emblem": nobody, once that target is gone.

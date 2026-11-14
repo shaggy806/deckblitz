@@ -468,6 +468,14 @@ export interface EntersBattlefieldReplacement {
    */
   readonly notes?: EffectAmount;
   /**
+   * "**As Tibalt enters, you get an emblem with** …" (Tibalt, Cosmic
+   * Impostor): an effect its controller does as it enters, with nothing to
+   * choose — part of the replacement (rule 614.1c), so nothing can respond
+   * and it isn't a triggered ability. Done once it's on the battlefield, as
+   * the stint it's beginning: its `"source"` is this permanent.
+   */
+  readonly asEntersEffect?: EffectSpec;
+  /**
    * "As this creature enters, remove all counters from all permanents"
    * (Thief of Blood): as it enters (rule 614.1c — part of the replacement, so
    * nothing can respond between), every counter of every kind comes off each

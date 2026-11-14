@@ -5808,6 +5808,11 @@ export interface EmblemState {
    * Ob Nixilis Reignited gives an opponent a punishing emblem, which is no
    * asset of theirs. */
   readonly createdBy?: PlayerId;
+  /** "Cards exiled with Tibalt, Cosmic Impostor" (rule 607.2a): the
+   * permanent, in the stint it was in, whose linked exiles this emblem's
+   * `linked` statics read in place of its own object's — for good, whether
+   * or not that permanent is still there (create-emblem's `linkedToSource`). */
+  readonly linkedTo?: { readonly source: ObjectId; readonly zoneChangeCount: number };
   /** The Ring (rule 701.54c): one per player, its text growing with the
    * temptations — `ring.ts`. */
   readonly ring?: true;
