@@ -44297,6 +44297,8 @@ controlledBy,
       readonly players?: readonly PlayerId[];
       readonly choose?: number;
       readonly faceDown?: boolean;
+      /** Each library's bottom `amount`, not its top. */
+      readonly fromBottom?: boolean;
       /** Linked to this stint of the source (rule 607.2a). */
       readonly linkStint?: number;
       /** Only the exiled cards this holds for get the permission. */
@@ -44304,10 +44306,13 @@ controlledBy,
     } = {},
   ): void {
     if (amount <= 0) return;
-    // Each library's top `amount`, exiled at once.
+    // Each library's top `amount` (or bottom), exiled at once.
     const taken = (opts.players ?? [controller])
       .filter((player) => this.state.players[player]?.hasLost === false)
-      .flatMap((player) => this.state.zones.perPlayer[player].library.slice(0, amount));
+      .flatMap((player) => {
+        const library = this.state.zones.perPlayer[player].library;
+        return opts.fromBottom === true ? library.slice(Math.max(0, library.length - amount)) : library.slice(0, amount);
+      });
     if (taken.length === 0) return;
     const since = this.state.eventSeq;
     this.withGraveyardEnterBatch(() => {
@@ -56920,19 +56925,22 @@ controlledBy,
   }
 
   /** See the `"exile-from-library"` {@link EffectSpec}: the top cards of a
-   * player's library, into exile face up — `top` of them, or every one but
-   * the bottom `allBut`. */
+   * player's library, into exile face up — `top` of them, the `bottom` few,
+   * or every one but the bottom `allBut`. */
   private exileFromLibraryByEffect(
     target: TargetRef,
-    count: { readonly top: number } | { readonly allBut: number },
+    count: { readonly top: number } | { readonly bottom: number } | { readonly allBut: number },
     controller: PlayerId,
     withCounters?: { readonly kind: string; readonly amount: number },
   ): readonly ObjectId[] {
     if (target.kind !== "player" || this.state.players[target.player] === undefined) return [];
     const library = this.state.zones.perPlayer[target.player].library;
-    const n = "top" in count ? Math.max(0, count.top) : Math.max(0, library.length - count.allBut);
+    const taking =
+      "bottom" in count
+        ? library.slice(Math.max(0, library.length - Math.max(0, count.bottom)))
+        : library.slice(0, "top" in count ? Math.max(0, count.top) : Math.max(0, library.length - count.allBut));
     const out: ObjectId[] = [];
-    for (const id of library.slice(0, n)) {
+    for (const id of taking) {
       this.moveObject(id, "exile");
       // "…and put a fetch counter on each of them": there.
       const exiled = this.state.objects[id];

@@ -4867,6 +4867,10 @@ export type EffectSpec =
       readonly whose?: number | PlayerScope;
       readonly amount?: EffectAmount;
       readonly allBut?: number;
+      /** `amount` cards from the **bottom** of the library instead of the
+       * top — The Temporal Anchor's "exile that many cards from the bottom
+       * of your library". */
+      readonly fromBottom?: true;
       /** "…and put a fetch counter on each of them" (Pako, Arcane
        * Retriever): counters each card gets in exile. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
@@ -10371,6 +10375,10 @@ export type EffectSpec =
        * **face down**" (Edward Kenway): the cards are exiled face down
        * (rule 406.3), and only the controller may look at them. */
       readonly faceDown?: boolean;
+      /** From the **bottom** of each library, not the top — Arvinox, the
+       * Mind Flail's "exile the bottom card of each opponent's library face
+       * down". The bottom `amount` of each, exiled at once. */
+      readonly fromBottom?: true;
       /** The cards are also exiled **with this source** (rule 607.2a), for a
        * `linked` permission of its: Court of Locthwain's "You may play that
        * card … you may cast a spell from among cards exiled with this
@@ -12374,10 +12382,11 @@ export interface EffectApi {
     eachThisTurn?: boolean,
   ): void;
   /** See the `"exile-from-library"` {@link EffectSpec}: the top `top` cards
-   * of `target`'s library, or all of it but the bottom `allBut`. */
+   * of `target`'s library, its bottom `bottom`, or all of it but the bottom
+   * `allBut`. */
   exileFromLibrary(
     target: TargetRef,
-    count: { readonly top: number } | { readonly allBut: number },
+    count: { readonly top: number } | { readonly bottom: number } | { readonly allBut: number },
     withCounters?: { readonly kind: string; readonly amount: number },
     linked?: boolean,
     faceDown?: true | "looked",
@@ -12659,6 +12668,8 @@ export interface EffectApi {
       readonly choose?: number;
       /** Exiled face down, for the controller's eyes only (rule 406.3). */
       readonly faceDown?: boolean;
+      /** From the bottom of each library (the effect's `fromBottom`). */
+      readonly fromBottom?: boolean;
       /** See the effect's `linked`. */
       readonly linked?: boolean;
       /** See the effect's `grantIf`: asked of each exiled card once all are. */
@@ -18637,12 +18648,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.allBut !== undefined
             ? { allBut: spec.allBut }
             : {
-                top: amountValue(
+                [spec.fromBottom === true ? "bottom" : "top"]: amountValue(
                   spec.amount ?? 1,
                   ctx,
                   target.kind === "player" ? target.player : undefined,
                 ),
-              },
+              } as { readonly top: number } | { readonly bottom: number },
       }));
       ctx.simultaneously(() => {
         for (const { target, count } of plan) ctx.exileFromLibrary(target, count, spec.withCounters, spec.linked === true, spec.faceDown);
@@ -21673,6 +21684,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           : {}),
         ...(spec.choose !== undefined ? { choose: spec.choose } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
+        ...(spec.fromBottom === true ? { fromBottom: true } : {}),
         ...(spec.linked === true ? { linked: true } : {}),
         ...(spec.grantIf !== undefined ? { grantIf: (id: ObjectId) => ctx.cardMatches(id, spec.grantIf!) } : {}),
       });

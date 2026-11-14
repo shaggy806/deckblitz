@@ -19016,6 +19016,37 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ).toEqual([{ on: "event", event: "scry-bottoms", who: "you" }]);
   });
 
+  it("reads an exile from the bottom of a library (The Temporal Anchor, Arvinox)", () => {
+    const anchor = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Artifact",
+      oracle_text:
+        "Whenever you choose to put one or more cards on the bottom of your library while scrying, exile that many cards from the bottom of your library.\nDuring your turn, you may play cards exiled with ~.",
+    });
+    expect(anchor.triggered[0]?.effect).toEqual({
+      kind: "exile-from-library",
+      amount: { triggerValue: true },
+      fromBottom: true,
+      linked: true,
+    });
+    const arvinox = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Enchantment Creature",
+      oracle_text:
+        "At the beginning of your end step, exile the bottom card of each opponent's library face down. For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.",
+    });
+    expect(arvinox.triggered[0]?.effect).toEqual({
+      kind: "impulse-exile",
+      amount: 1,
+      whose: "each-opponent",
+      fromBottom: true,
+      faceDown: true,
+      duration: "while-exiled",
+      filter: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker", "battle"] },
+      spendAs: "any-color",
+    });
+  });
+
   it("reads phasing out and in (Teferi's Imp)", () => {
     expect(parseTrigger("Whenever this creature phases out")).toEqual([{ on: "event", event: "phases-out", who: "self" }]);
     expect(parseTrigger("Whenever this creature phases in")).toEqual([{ on: "event", event: "phases-in", who: "self" }]);

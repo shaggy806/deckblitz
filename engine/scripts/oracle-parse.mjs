@@ -4297,6 +4297,14 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if ((m = re(`exile the top ${N} cards of your library`).exec(s))) return { kind: "exile-from-library", amount: amount(m[1]) };
+  // "Exile that many cards from the bottom of your library" (The Temporal
+  // Anchor, of a trigger's count); `linkedExile` links it for "exiled with ~".
+  if (re("exile that many cards from the bottom of your library").test(s)) {
+    return { kind: "exile-from-library", amount: { triggerValue: true }, fromBottom: true };
+  }
+  if ((m = re(`exile the bottom ${N} cards of your library`).exec(s))) {
+    return { kind: "exile-from-library", amount: amount(m[1]), fromBottom: true };
+  }
   // The top card of a player the effect names; `linkedExile` below links it if
   // the card says "exiled with" it (Nightveil Specter).
   if ((m = re("(that player|each opponent|each player) exiles the top card of their library").exec(s))) {
@@ -11006,6 +11014,7 @@ export function parseEffect(text, outer) {
       distinctSetAt(sentences, i) ??
       counterIntoAt(sentences, i, ctx) ??
       exiledUntilOrWhileAt(sentences, i) ??
+      bottomFaceDownImpulseAt(sentences, i) ??
       counterAbilityAt(sentences, i, ctx) ??
       copyAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx) ??
@@ -13615,6 +13624,34 @@ function opponentDividesFindsAt(sentences, i, ctx) {
       },
     },
     used: closed ? 3 : 4,
+  };
+}
+
+/** "Exile the bottom card of each opponent's library face down." + "For as long
+ * as those cards remain exiled, you may look at them, you may cast permanent
+ * spells from among them, and you may spend mana as though it were mana of any
+ * color to cast those spells." (Arvinox, the Mind Flail): `impulse-exile` from
+ * the bottom, face down. */
+function bottomFaceDownImpulseAt(sentences, i) {
+  const exile = /^exile the bottom card of (each opponent's|your) library face down\.$/i.exec(sentences[i]);
+  if (exile === null) return null;
+  const grant =
+    /^for as long as (?:those cards remain|that card remains) exiled, you may look at (?:them|it), you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells\.$/i.exec(
+      sentences[i + 1] ?? "",
+    );
+  if (grant === null) return null;
+  return {
+    effect: {
+      kind: "impulse-exile",
+      amount: 1,
+      ...(exile[1].toLowerCase() === "your" ? {} : { whose: "each-opponent" }),
+      fromBottom: true,
+      faceDown: true,
+      duration: "while-exiled",
+      filter: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker", "battle"] },
+      spendAs: "any-color",
+    },
+    used: 2,
   };
 }
 
