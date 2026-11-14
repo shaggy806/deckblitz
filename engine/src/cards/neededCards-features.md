@@ -6555,7 +6555,7 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Only the chosen creatures attack in a combat after this main phase (2026-11-13).** `effect:extra-combat-after-this-main-only-chosen-attack`: no engine code — `additional-combat`'s `afterThisPhase` already queues the combat straight after a main phase with no main phase after it (rule 500.8), and its `onlyAttackers` takes `{ inSet: { targets: [0, 1] } }`, the targets bound as it resolves (rule 400.7). Last Night Together.
 
-**A player target other than the source's owner (2026-11-13).** `filter:player-other-than-owner`: `OtherThan`'s `"source-owner"` (`excludedAsOther`, rule 108.3). Crown of Doom.
+**A player target other than the source's owner (2026-11-13).** `filter:player-other-than-owner`: `OtherThan`'s `{ ownerOf: "source" }` (`excludedAsOther`, rule 108.3; slot relations are told apart by `isSlotRelation`). Crown of Doom.
 
 **A Curse not named like one on the enchanted player (2026-11-13).** `filter:attached-to-enchanted-player`: `CardFilter.attachedToPlayer`'s `"enchanted-player"` (the filter's source's player, as it last existed), inside `sameNameWith: { permanents }`, and the `"enchanted-player"` `PlayerRef` for "attached to that player" at your own upkeep (`attachedTo: { player }`). Curse of Misfortunes.
 

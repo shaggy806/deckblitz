@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 9201.
 //
 // "Target player other than this artifact's owner" is an `other` player slot
-// `than: "source-owner"`: its owner never changes (rule 108.3), so whoever
+// `than: { ownerOf: "source" }`: its owner never changes (rule 108.3), so whoever
 // controls it may pass it to anyone but its owner, who never gets it back this
 // way. The control effect lasts as long as it stays on the battlefield (rule
 // 613.1b). "You" in the attack trigger is its controller now.
@@ -29,7 +29,7 @@ export default defineCard({
   activated: [
     {
       cost: { mana: "{2}", tap: false },
-      targets: [{ kind: "other", of: "player", than: "source-owner" }],
+      targets: [{ kind: "other", of: "player", than: { ownerOf: "source" } }],
       effect: { kind: "gain-control", target: "source", who: { target: 0 }, untilEndOfTurn: false },
       condition: { kind: "your-turn" },
       resolve: null,

@@ -974,7 +974,7 @@ export function concreteTargetSpecs(
     // creature", Graceful Takedown): every member differs from that slot too,
     // in the one `than` a slot's relation is read from.
     const tiedTo = otherThan(spec.of);
-    const tied = typeof tiedTo === "object" ? otherThanSlots(tiedTo).map((s) => moved.get(s) ?? s) : [];
+    const tied = isSlotRelation(tiedTo) ? otherThanSlots(tiedTo).map((s) => moved.get(s) ?? s) : [];
     for (let member = 0; member < span.members; member += 1) {
       const before = Array.from({ length: member }, (_unused, i) => span.start + i);
       const than = [...anchor, ...(anchor.length + before.length > 0 ? tied : []), ...before];
@@ -1081,20 +1081,30 @@ export type OtherThan =
    * token enters, you may have target player **other than its controller**
    * create a token that's a copy of it". Only for a player slot. */
   | "trigger-object-controller"
-  /** The owner of the ability's source, which never changes (rule 108.3) —
-   * Crown of Doom's "target player **other than this artifact's owner**
-   * gains control of it". Only for a player slot. */
-  | "source-owner"
   /** The permanent the source is attached to — Pain for All's "any **other**
    * target" of its enchanted creature's damage. */
   | "host"
+  /** The owner of that object — the ability's source or the trigger's
+   * object — which never changes (rule 108.3), the `PlayerRef` accessor's
+   * shape: Crown of Doom's "target player **other than this artifact's
+   * owner** gains control of it" is `{ ownerOf: "source" }`. Only for a
+   * player slot. */
+  | { readonly ownerOf: "source" | "trigger-object" }
   | { readonly slot: number }
   | { readonly slots: readonly number[] };
+
+/** An `other` relation to earlier target slots (`{ slot }` / `{ slots }`),
+ * rather than to an object or player the source or trigger names. */
+export function isSlotRelation(
+  than: OtherThan | undefined,
+): than is { readonly slot: number } | { readonly slots: readonly number[] } {
+  return typeof than === "object" && ("slot" in than || "slots" in than);
+}
 
 /** The earlier slots an `other` relation names — none for one that is about
  * the source, the trigger object or the trigger player. */
 export function otherThanSlots(than: OtherThan): readonly number[] {
-  if (typeof than !== "object") return [];
+  if (!isSlotRelation(than)) return [];
   return "slot" in than ? [than.slot] : than.slots;
 }
 
@@ -1107,7 +1117,7 @@ export function otherThanSlots(than: OtherThan): readonly number[] {
 export function renumberOtherSlots(spec: TargetSpec, kept: ReadonlyMap<number, number>): TargetSpec {
   if (typeof spec !== "object") return spec;
   if (spec.kind === "optional") return { ...spec, of: renumberOtherSlots(spec.of, kept) };
-  if (spec.kind !== "other" || spec.than === undefined || typeof spec.than !== "object") return spec;
+  if (spec.kind !== "other" || !isSlotRelation(spec.than)) return spec;
   const slots = otherThanSlots(spec.than).flatMap((slot) => {
     const to = kept.get(slot);
     return to === undefined ? [] : [to];
@@ -1137,7 +1147,7 @@ export function offsetSlotRelations(spec: TargetSpec, by: number): TargetSpec {
   if (spec.kind !== "other") return spec;
   const of = offsetSlotRelations(spec.of, by);
   const than = spec.than;
-  if (than === undefined || typeof than !== "object") return { ...spec, of };
+  if (!isSlotRelation(than)) return { ...spec, of };
   return { ...spec, of, than: "slot" in than ? { slot: than.slot + by } : { slots: than.slots.map((s) => s + by) } };
 }
 
@@ -1355,7 +1365,7 @@ export function slotOptions(
     );
     // A group `other` than an earlier slot offers nothing that slot named
     // (rule 601.2c): its member's spec, judged as a plain slot over what's left.
-    if (typeof spec === "object" && spec.kind === "any-number" && typeof otherThan(spec.of) === "object") {
+    if (typeof spec === "object" && spec.kind === "any-number" && isSlotRelation(otherThan(spec.of))) {
       left = [...slotOptions([...specs.slice(0, group), spec.of], [...options.slice(0, group), left], group, picked, facts)];
     }
     if (facts === undefined) return left;
@@ -1512,7 +1522,7 @@ export function targetsFillable(
     }
   }
   const related = (s: TargetSpec): boolean =>
-    typeof otherThan(typeof s === "object" && s.kind === "any-number" ? s.of : s) === "object";
+    isSlotRelation(otherThan(typeof s === "object" && s.kind === "any-number" ? s.of : s));
   if (!specs.some((s, i) => i >= from && related(s))) return true;
   const chosen = [...picked.slice(0, from)];
   for (const ref of slotOptions(specs, options, from, chosen, facts)) {
@@ -1699,10 +1709,11 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
   if (spec.kind === "other") {
     const than = spec.than ?? "source";
     const inner = describeTargetSpec(spec.of);
-    if (typeof than === "object") {
+    if (isSlotRelation(than)) {
       const slots = otherThanSlots(than).map((slot) => slot + 1);
       return `${inner} other than target${slots.length > 1 ? "s" : ""} ${slots.join(" and ")}`;
     }
+    if (typeof than === "object") return `${inner} other than its owner`;
     return than === "source"
       ? `another ${inner}`
       : than === "trigger-object"
@@ -1711,9 +1722,7 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
           ? `${inner} other than the one it's attached to`
           : than === "trigger-object-controller"
             ? `${inner} other than its controller`
-            : than === "source-owner"
-              ? `${inner} other than its owner`
-              : `${inner} other than that player`;
+            : `${inner} other than that player`;
   }
   if (spec.kind === "opponent-compared") {
     const what = {

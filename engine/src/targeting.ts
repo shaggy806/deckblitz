@@ -36,6 +36,7 @@ import {
   groupPowerExceeded,
   groupRelationBroken,
   isOptionalSpec,
+  isSlotRelation,
   otherSlotConflict,
   playerAtSeat,
 } from "./target.js";
@@ -507,7 +508,14 @@ function isPermanentOfType(
  * slot n" relation isn't this ref's alone to answer — `otherSlotConflict`
  * checks the pair. */
 function excludedAsOther(state: GameState, than: OtherThan, ref: TargetRef, source: TargetSource | undefined): boolean {
-  if (typeof than === "object" || source === undefined) return false;
+  if (isSlotRelation(than) || source === undefined) return false;
+  // Its owner never changes (rule 108.3), wherever the object is now.
+  if (typeof than === "object") {
+    const id = than.ownerOf === "source" ? source.object : source.triggerObject;
+    if (ref.kind !== "player" || id === undefined) return false;
+    const owner = state.objects[id]?.owner ?? state.ceasedTokens?.[id]?.owner;
+    return owner !== undefined && ref.player === owner;
+  }
   if (than === "host") {
     const host = source.object === undefined ? undefined : state.objects[source.object]?.attachedTo;
     return ref.kind === "object" && host !== undefined && host !== null && ref.object === host;
@@ -525,12 +533,6 @@ function excludedAsOther(state: GameState, than: OtherThan, ref: TargetRef, sour
           ? object.controller
           : (object.lastKnown?.controller ?? object.controller);
     return controller !== undefined && ref.player === controller;
-  }
-  // Its owner never changes (rule 108.3), wherever the source is now.
-  if (than === "source-owner") {
-    if (ref.kind !== "player" || source.object === undefined) return false;
-    const owner = state.objects[source.object]?.owner ?? state.ceasedTokens?.[source.object]?.owner;
-    return owner !== undefined && ref.player === owner;
   }
   const id = than === "source" ? source.object : source.triggerObject;
   return ref.kind === "object" && id !== undefined && ref.object === id;

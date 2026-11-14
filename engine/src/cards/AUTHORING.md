@@ -3759,8 +3759,9 @@ than that creature" — the one whose event fired the trigger),
 the player the event names), `"trigger-object-controller"` (Lucy MacLean,
 Positively Armed's "target player **other than its controller**": the
 controller of the object whose event fired it, as it last existed if it has
-left), `"source-owner"` (Crown of Doom's "target player **other than this
-artifact's owner**", rule 108.3), `"host"` (Pain for All's "any **other** target"
+left), `{ ownerOf: "source" | "trigger-object" }` (Crown of Doom's "target
+player **other than this artifact's owner**", rule 108.3 — the `PlayerRef`
+accessor's shape, never a `"source-owner"` word), `"host"` (Pain for All's "any **other** target"
 of its enchanted creature's damage), or `{ slot: n }` ("target creature you control
 fights **another** target creature": different from what slot `n` took). The
 first five narrow the slot's own options; `{ slot }` relates two slots, so

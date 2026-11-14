@@ -1,6 +1,6 @@
 /**
  * "Target player **other than this artifact's owner**" (Crown of Doom): an
- * `other` player slot `than: "source-owner"`. Ownership never changes (rule
+ * `other` player slot `than: { ownerOf: "source" }`. Ownership never changes (rule
  * 108.3), so whoever controls it may hand it to anyone but its owner.
  */
 import { describe, expect, it } from "vitest";
