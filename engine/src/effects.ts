@@ -8156,6 +8156,41 @@ export type EffectSpec =
       };
     }
   | {
+      /**
+       * Damage divided among untargeted permanents as this resolves (rule
+       * 608.2d), the `counters-distributed` way: "that creature deals damage
+       * equal to its power divided as **its controller** chooses among any
+       * number of those Wolves" (Master of the Wild Hunt, with `from: 0`,
+       * `chooser: { controllerOf: 0 }` and a `thisWay: "tapped"` filter).
+       * `amount` is read as it begins; then `chooser` (the effect's
+       * controller when absent) chooses which of the battlefield permanents
+       * matching `filter` (read from the effect's controller's side) are
+       * dealt any — at least one, up to as many as the amount (the
+       * `choose-permanents` decision) — then how much each, at least one each
+       * and all of it among them (a `choose-number` per chosen one but the
+       * last, which takes the rest). Then `from` (the effect's source when
+       * absent) deals it all at once, one damage event. Not targeted: a
+       * hexproof one can be chosen. Nothing when the amount is 0 or less,
+       * nothing matches, `from` is gone or the chooser is nobody.
+       */
+      readonly kind: "damage-distributed";
+      readonly amount: EffectAmount;
+      readonly filter: CardFilter;
+      readonly from?: ObjectRef;
+      readonly chooser?: PlayerRef;
+      /** What it's divided among, for the prompts ("those Wolves"). */
+      readonly among?: string;
+      /** Engine-built, never authored: the amount read as it began, who
+       * chooses, the permanents chosen (a token stack once per token), and
+       * the shares chosen so far, in that order. */
+      readonly progress?: {
+        readonly total: number;
+        readonly chooser: PlayerId;
+        readonly picked?: readonly ObjectId[];
+        readonly shares?: readonly number[];
+      };
+    }
+  | {
       /** "Prevent the next N damage that would be dealt this turn to any
        * number of targets, divided as you choose" (Remedy, Embolden — rules
        * 601.2d, 615.7): each target of the group starting at slot `from`
@@ -12867,12 +12902,19 @@ export interface EffectApi {
   /** Where an object is now: its zone change count (rule 400.7), or
    * `undefined` once it has ceased to exist. */
   zoneChangeCountOf(object: ObjectId): number | undefined;
-  /** See the `"counters-distributed"` {@link EffectSpec}: ask the effect's
-   * controller to choose up to `max` of the battlefield permanents matching
-   * `filter` from `side`'s side (the controller's when absent) — a token
-   * stack up to once per token — the answer waiting for `takeKept`. `false`
-   * when nothing matches (or they've left the game), and nothing was asked. */
-  askChoosePermanentsKept(filter: CardFilter, max: number, prompt: string, side?: PlayerId): boolean;
+  /** See the `"counters-distributed"` and `"damage-distributed"`
+   * {@link EffectSpec}s: ask `chooser` (the effect's controller when absent)
+   * to choose up to `max` of the battlefield permanents matching `filter`
+   * from `side`'s side (the controller's when absent) — a token stack up to
+   * once per token, at least one with `atLeastOne` — the answer waiting for
+   * `takeKept`. `false` when nothing matches (or the chooser has left the
+   * game), and nothing was asked. */
+  askChoosePermanentsKept(
+    filter: CardFilter,
+    max: number,
+    prompt: string,
+    options?: { readonly side?: PlayerId; readonly chooser?: PlayerId; readonly atLeastOne?: true },
+  ): boolean;
   /** `players` in turn order from the active player (rule 101.4). */
   apnap(players: readonly PlayerId[]): readonly PlayerId[];
   /** See the `"encore"` {@link EffectSpec}. */
@@ -14872,13 +14914,48 @@ function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distribu
     const below = ctx.parkedCount();
     const among = spec.among ?? "permanents";
     const prompt = `Distribute ${total} ${kind}${total === 1 ? "" : "s"} among any number of ${among}: choose which get them`;
-    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, side)) {
+    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, { ...(side !== undefined ? { side } : {}) })) {
       ctx.resumeAfterDecisions({ ...spec, progress: { total } }, below);
     }
     return;
   }
-  // Resumed: from the choice of permanents (nothing picked yet), or from a
-  // share's number, which arrives as X.
+  distributeShares(
+    progress,
+    ctx,
+    (name, left) => `How many ${kind}s on ${name}? (${left} left to distribute)`,
+    (shares, picked) => ({ ...spec, progress: { ...progress, picked, shares } }),
+    (picked, shares) => {
+      // Each pick is one permanent: a token stack's member singled out per pick.
+      picked.forEach((object, i) => {
+        const amount = shares[i] ?? 0;
+        if (amount > 0) ctx.addCounter(ctx.singleOut({ kind: "object", object }), spec.counter, amount);
+      });
+    },
+  );
+}
+
+/**
+ * The shares of a distribution among untargeted permanents (rule 608.2d —
+ * `counters-distributed`, `damage-distributed`), resumed from the choice of
+ * permanents (nothing picked yet, the answer waiting for `takeKept`) or from
+ * a share's number, which arrives as X: a share asked for each chosen one but
+ * the last — a `choose-value` number whose `then` is the effect again
+ * (`again`, given the picks and the shares so far), at least one each and
+ * leaving at least one for every one still to come, the last taking what's
+ * left; then `done` with the picks and their shares.
+ */
+function distributeShares(
+  progress: {
+    readonly total: number;
+    readonly chooser?: PlayerId;
+    readonly picked?: readonly ObjectId[];
+    readonly shares?: readonly number[];
+  },
+  ctx: ResolutionContext,
+  ask: (name: string, left: number) => string,
+  again: (shares: readonly number[], picked: readonly ObjectId[]) => EffectSpec,
+  done: (picked: readonly ObjectId[], shares: readonly number[]) => void,
+): void {
   const picked = progress.picked ?? ctx.takeKept();
   if (picked.length === 0) return;
   const shares = [...(progress.shares ?? [])];
@@ -14893,22 +14970,66 @@ function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distribu
       continue;
     }
     const name = ctx.objectName(picked[shares.length]);
-    ctx.chooseValue({
-      kind: "choose-value",
-      value: "number",
-      min: 1,
-      max: most,
-      prompt: `How many ${kind}s on ${name}? (${left} left to distribute)`,
-      then: { ...spec, progress: { total: progress.total, picked, shares } },
-    });
+    ctx.chooseValue(
+      {
+        kind: "choose-value",
+        value: "number",
+        min: 1,
+        max: most,
+        prompt: ask(name, left),
+        then: again(shares, picked),
+      },
+      progress.chooser !== undefined ? { chooser: progress.chooser } : undefined,
+    );
     return;
   }
   shares.push(left);
-  // Each pick is one permanent: a token stack's member singled out per pick.
-  picked.forEach((object, i) => {
-    const amount = shares[i] ?? 0;
-    if (amount > 0) ctx.addCounter(ctx.singleOut({ kind: "object", object }), spec.counter, amount);
-  });
+  done(picked, shares);
+}
+
+/**
+ * A `damage-distributed` (rule 608.2d): the amount read and the chooser named
+ * as it begins, the permanents chosen (`askChoosePermanentsKept`, at least
+ * one), the shares (`distributeShares`), then all of it dealt at once by
+ * `from`.
+ */
+function distributeDamage(spec: Extract<EffectSpec, { kind: "damage-distributed" }>, ctx: ResolutionContext): void {
+  const progress = spec.progress;
+  if (progress === undefined) {
+    if (spec.from !== undefined && objectRefAct(spec.from, ctx) === undefined) return;
+    const total = Math.max(0, Math.floor(amountValue(spec.amount, ctx)));
+    if (total <= 0) return;
+    const chooser = spec.chooser === undefined ? ctx.controller : resolvePlayerRef(spec.chooser, ctx);
+    if (chooser === undefined) return;
+    const below = ctx.parkedCount();
+    const among = spec.among ?? "permanents";
+    const prompt = `Divide ${total} damage among any number of ${among}: choose which are dealt any`;
+    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, { chooser, atLeastOne: true })) {
+      ctx.resumeAfterDecisions({ ...spec, progress: { total, chooser } }, below);
+    }
+    return;
+  }
+  const { picked, shares } = progress;
+  if (picked !== undefined && shares !== undefined && shares.length === picked.length) {
+    // Every share chosen: the damage asks which replacement applies first
+    // (rule 616.1), then is dealt — all at once, one damage event.
+    if (asksReplacementOrder(spec, ctx)) return;
+    if (spec.from !== undefined && objectRefAct(spec.from, ctx) === undefined) return;
+    ctx.simultaneously(() => {
+      picked.forEach((object, i) => {
+        const amount = shares[i] ?? 0;
+        if (amount > 0) ctx.dealDamage(ctx.singleOut({ kind: "object", object }), amount, spec.from);
+      });
+    });
+    return;
+  }
+  distributeShares(
+    progress,
+    ctx,
+    (name, left) => `How much damage to ${name}? (${left} left to divide)`,
+    (sofar, chosen) => ({ ...spec, progress: { ...progress, picked: chosen, shares: sofar } }),
+    (chosen, all) => distributeDamage({ ...spec, progress: { ...progress, picked: chosen, shares: all } }, ctx),
+  );
 }
 
 /**
@@ -20835,6 +20956,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "counters-distributed":
       distributeCounters(spec, ctx);
+      return;
+    case "damage-distributed":
+      distributeDamage(spec, ctx);
       return;
     case "untap-all":
       if (spec.who !== undefined) {

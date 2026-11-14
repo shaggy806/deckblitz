@@ -586,6 +586,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // player controls"): that player's, as a mass placement is.
   "counters-distributed": (n, v) =>
     v.touch(n.controlledByTarget, HARMFUL_COUNTERS.has(n.counter) ? "harm" : "help", MINOR),
+  // Damage dealt by `from` among untargeted permanents (Master of the Wild
+  // Hunt's target creature dividing its damage among the Wolves): what it
+  // touches is never a target, and dealing damage neither helps nor harms
+  // the one dealing it.
+  "damage-distributed": none,
   // The reverse of `add-counter`: losing a harmful counter helps.
   // Every kind at once (`"any"` — Vampire Hexmage) reads as the loyalty and
   // +1/+1 counters it nearly always takes: a harm, like a good kind's.

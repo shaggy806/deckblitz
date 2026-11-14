@@ -40342,18 +40342,19 @@ controlledBy,
         }
         return out;
       },
-      askChoosePermanentsKept: (filter, max, prompt, side) => {
-        if (this.state.players[controller]?.hasLost !== false) return false;
+      askChoosePermanentsKept: (filter, max, prompt, options) => {
+        const chooser = options?.chooser ?? controller;
+        if (this.state.players[chooser]?.hasLost !== false) return false;
         // Untargeted (rule 608.2d): whatever matches now, a hexproof one too.
-        const eligible = this.battlefieldMatching(side ?? controller, filter, x, source);
+        const eligible = this.battlefieldMatching(options?.side ?? controller, filter, x, source);
         const available = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
         const most = Math.min(max, available);
         if (most <= 0) return false;
         this.state.awaiting = {
           kind: "choose-permanents",
-          player: controller,
+          player: chooser,
           eligible,
-          min: 0,
+          min: options?.atLeastOne === true ? 1 : 0,
           max: most,
           prompt,
           then: { kind: "sequence", effects: [] },
