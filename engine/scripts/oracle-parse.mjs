@@ -10419,6 +10419,47 @@ export function parseEffect(text, outer) {
       if (onlyLands) skip = 1;
       continue;
     }
+    // "Each player shuffles all permanents they own into their library, then
+    // reveals that many cards from the top of their library. Each player puts
+    // all artifact, creature, and land cards revealed this way onto the
+    // battlefield, then does the same for enchantment cards, then puts all
+    // cards revealed this way that weren't put onto the battlefield on the
+    // bottom of their library." (Warp World; Glimpse of Tomorrow's "you").
+    const warp = /^(Each player shuffles all permanents they own into their library|Shuffle all permanents you own into your library), then reveals? that many cards from the top of (?:their|your) library\.$/.exec(sentence);
+    const warpPut =
+      warp === null
+        ? null
+        : /^(?:Each player puts|Put) all (.+?) cards revealed this way onto the battlefield, then (?:does|do) the same for (.+?) cards, then (?:puts all cards revealed this way that weren't put onto the battlefield|put the rest) on the bottom of (?:their|your) library( in a random order)?\.$/.exec(
+            sentences[i + 1] ?? "",
+          );
+    // "artifact, creature, and land" is any of them; "non-Aura permanent" a
+    // permanent card of no such subtype.
+    const warpFilter = (phrase) => {
+      const list = phrase.split(/,\s*(?:and\s+)?|\s+and\s+/);
+      if (list.length > 1) {
+        const types = list.map((p) => parseTypePhrase(p, { cards: true })?.type);
+        return types.every((t) => typeof t === "string") ? { typesAnyOf: types } : null;
+      }
+      const non = /^non-([A-Z][a-z]+) (.+)$/.exec(phrase);
+      if (non !== null) {
+        const rest = parseTypePhrase(non[2], { cards: true });
+        return rest === null ? null : { ...rest, notSubtypes: [non[1]] };
+      }
+      return parseTypePhrase(phrase, { cards: true });
+    };
+    const warpOnto = warpPut === null ? null : [warpFilter(warpPut[1]), warpFilter(warpPut[2])];
+    if (warp !== null && warpPut !== null && warpOnto?.every((f) => f !== null && Object.keys(f).length > 0)) {
+      const effect = {
+        kind: "shuffle-graveyard-into-library",
+        target: warp[1].startsWith("Each") ? "each-player" : "you",
+        zones: ["permanents"],
+        revealThatMany: { onto: warpOnto, rest: warpPut[3] !== undefined ? "bottom-random" : "bottom" },
+      };
+      parsed.push(effect);
+      hints.push({ sentence, effect });
+      skip = 1;
+      continue;
+    }
     // "Exile the top card of your library. You may play that card until you
     // exile another card with ~." and the other windows, and "exile target
     // card from your graveyard" with a permission for a duration.

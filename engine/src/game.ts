@@ -40330,6 +40330,27 @@ controlledBy,
         const cards = step.cards.filter((id) => library.includes(id));
         return this.beginLibraryOrder(step.player, cards, step.position);
       },
+      revealLibraryTop: (player, n) => {
+        // A token shuffled in this way is still there until state-based
+        // actions (rule 704.5d), but it isn't a card: it's skipped (Glimpse
+        // of Tomorrow's ruling — tokens "won't affect … the cards you reveal").
+        const top = (this.state.zones.perPlayer[player]?.library ?? [])
+          .filter((id) => this.state.objects[id]?.isToken !== true)
+          .slice(0, Math.max(0, n));
+        this.revealCards(player, top, "library");
+        return top;
+      },
+      putOnLibraryBottomRandom: (player, ids) => {
+        const library = this.state.zones.perPlayer[player]?.library;
+        if (library === undefined) return;
+        const moving = new Set(ids.filter((id) => library.includes(id)));
+        if (moving.size === 0) return;
+        const order = shuffle([...moving], this.rng);
+        this.state.rngState = this.rng.seed;
+        const kept = library.filter((id) => !moving.has(id));
+        library.length = 0;
+        library.push(...kept, ...order);
+      },
       reorderGraveyard: (player) => {
         if (this.state.players[player]?.hasLost !== false || !this.graveyardOrderIsRead()) return;
         this.askGraveyardOrder(player, [...this.state.zones.perPlayer[player].graveyard]);
@@ -57237,11 +57258,16 @@ controlledBy,
     const player = target.player;
     let moved = 0;
     const went: ObjectId[] = [];
-    const move = (id: ObjectId): void => {
+    const move = (id: ObjectId, permanent = false): void => {
       const count = this.state.objects[id]?.stackCount ?? 1;
       if (this.moveObject(id, "library")) {
         moved += count;
         went.push(id);
+      } else if (permanent) {
+        // A commander its owner puts into the command zone instead (rule
+        // 903.9b) still left this way, and counts toward "that many" (Warp
+        // World's and Glimpse of Tomorrow's rulings).
+        moved += count;
       }
     };
     // Which cards, read before any moves.
@@ -57254,7 +57280,7 @@ controlledBy,
         for (const id of fromGraveyard) move(id);
         if (zones.includes("permanents")) {
           for (const id of [...this.state.zones.shared.battlefield]) {
-            if (this.state.objects[id]?.owner === player) move(id);
+            if (this.state.objects[id]?.owner === player) move(id, true);
           }
         }
       });

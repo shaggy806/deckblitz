@@ -1584,6 +1584,19 @@ export interface PutOnLibrariesProgress {
   readonly asked?: true;
   readonly orders?: readonly LibraryOrderStep[];
 }
+/** A `shuffle-graveyard-into-library`'s `revealThatMany` parked between its
+ * questions: how many each player reveals, once the shuffles are done (a
+ * commander's 903.9b choice may come between); then the cards each revealed,
+ * each as the object it was then (rule 400.7), the next `onto` group to put
+ * onto the battlefield, and the owners still to order the rest. Never
+ * authored. */
+export interface RevealThatManyProgress {
+  readonly counts: readonly { readonly player: PlayerId; readonly n: number }[];
+  readonly revealed?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number; readonly player: PlayerId }[];
+  readonly group?: number;
+  readonly toOrder?: readonly PlayerId[];
+}
+
 /** One owner's cards to order on one end of their library (rule 401.4). */
 export interface LibraryOrderStep {
   readonly player: PlayerId;
@@ -10595,6 +10608,30 @@ export type EffectSpec =
        * cards as they put into their library this way — a token counting
        * (The Great Aurora's ruling), each player in turn order. */
       readonly drawThatMany?: true;
+      /**
+       * "…then **reveals that many cards** from the top of their library.
+       * Each player puts all artifact, creature, and land cards revealed this
+       * way onto the battlefield, then does the same for enchantment cards,
+       * then puts all cards revealed this way that weren't put onto the
+       * battlefield on the bottom of their library" (Warp World; Glimpse of
+       * Tomorrow's "non-Aura permanent cards", then "Aura cards", the rest "in
+       * a random order"). Once every library is shuffled, each player reveals
+       * as many cards as they put into it this way — a token counting, and a
+       * commander its owner put into the command zone instead (the rulings) —
+       * then each `onto` group, in order, enters at once across every player
+       * (the rulings: "all of these cards enter at the same time"), each
+       * card's "as this enters" choices asked first (an Aura's host among what
+       * is already there, rule 303.4f; one with nothing to enchant stays, rule
+       * 303.4g). The rest go on the bottom: `"bottom"` arranged by each owner
+       * (rule 401.4), active player first; `"bottom-random"` in a random
+       * order. They count as `{ thisWay: "revealed" }`.
+       */
+      readonly revealThatMany?: {
+        readonly onto: readonly CardFilter[];
+        readonly rest: "bottom" | "bottom-random";
+      };
+      /** Set by the engine on the copy it parks between questions. */
+      readonly revealProgress?: RevealThatManyProgress;
     }
   | {
       /** Surveil `amount` (rule 701.43) — look at the top N, put any number
@@ -12736,6 +12773,12 @@ export interface EffectApi {
   /** Ask `step.player` the order of `step.cards` on that end of their
    * library — those still there. `false` when there was nothing to ask. */
   askLibraryOrder(step: LibraryOrderStep): boolean;
+  /** `player` reveals the top `n` cards of their library (rule 701.20a) —
+   * fewer with fewer there — which stay where they are. Returns them, top
+   * first. */
+  revealLibraryTop(player: PlayerId, n: number): readonly ObjectId[];
+  /** These cards of `player`'s library onto its bottom, in a random order. */
+  putOnLibraryBottomRandom(player: PlayerId, ids: readonly ObjectId[]): void;
   /** Ask `player` to arrange their whole graveyard (`reorder-graveyard`). */
   reorderGraveyard(player: PlayerId): void;
   /** Where an object is now: its zone change count (rule 400.7), or
@@ -16129,6 +16172,65 @@ export function chooserPlayer(chooser: ChooserRef, ctx: ResolutionContext): Play
  * last existed once it's no longer where it was expected. Nothing for an
  * illegal or empty slot.
  */
+/**
+ * The `revealThatMany` half of a `shuffle-graveyard-into-library` (Warp
+ * World), from wherever `progress` says it got to: each player reveals their
+ * count, then each `onto` group enters at once across every player, then the
+ * rest go on the bottom. A question on the way — an "as this enters" choice,
+ * an owner's order — parks the rest with the progress so far.
+ */
+function revealThatMany(
+  spec: Extract<EffectSpec, { kind: "shuffle-graveyard-into-library" }>,
+  progress: RevealThatManyProgress,
+  ctx: ResolutionContext,
+): void {
+  const terms = spec.revealThatMany;
+  if (terms === undefined) return;
+  const below = ctx.parkedCount();
+  const park = (next: RevealThatManyProgress): void =>
+    ctx.resumeAfterDecisions({ ...spec, revealProgress: next }, below);
+  // Each player reveals at once (the rulings' step 3), before anything moves.
+  const revealed =
+    progress.revealed ??
+    progress.counts.flatMap(({ player, n }) =>
+      ctx.revealLibraryTop(player, n).map((object) => ({ object, zoneChangeCount: ctx.zoneChangeCountOf(object) ?? 0, player })),
+    );
+  // A card still in its library as it was revealed (rule 400.7).
+  const still = (player?: PlayerId): ObjectId[] =>
+    revealed
+      .filter(
+        (c) =>
+          (player === undefined || c.player === player) &&
+          (ctx.zoneChangeCountOf(c.object) ?? 0) === c.zoneChangeCount &&
+          ctx.cardsIn(c.player, "library").includes(c.object),
+      )
+      .map((c) => c.object);
+  for (let group = progress.group ?? 0; group < terms.onto.length; group += 1) {
+    const filter = terms.onto[group];
+    const entering = still().filter((id) =>
+      ctx.memberMatches({ object: id, stint: ctx.zoneChangeCountOf(id) ?? 0, shown: true }, filter),
+    );
+    if (ctx.putOntoBattlefieldTogether(entering)) {
+      park({ counts: progress.counts, revealed, group });
+      return;
+    }
+  }
+  let toOrder = progress.toOrder ?? progress.counts.map(({ player }) => player);
+  while (toOrder.length > 0) {
+    const player = toOrder[0];
+    toOrder = toOrder.slice(1);
+    const rest = still(player);
+    if (terms.rest === "bottom-random") {
+      ctx.putOnLibraryBottomRandom(player, rest);
+      continue;
+    }
+    if (ctx.askLibraryOrder({ player, cards: rest, position: "bottom" })) {
+      park({ counts: progress.counts, revealed, group: terms.onto.length, toOrder });
+      return;
+    }
+  }
+}
+
 export function objectRefRead(ref: ObjectRef, ctx: ResolutionContext): TargetRef | undefined {
   if (ref === "created") return createdThisWay(ctx);
   if (ref === "put-this-way") return putThisWay(ctx);
@@ -18794,8 +18896,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "shuffle-graveyard-into-library": {
+      if (spec.revealProgress !== undefined) {
+        revealThatMany(spec, spec.revealProgress, ctx);
+        return;
+      }
       const players = scopedOrTargetedPlayers(spec.target, ctx);
       const moved = new Map<PlayerId, number>();
+      const below = ctx.parkedCount();
+      const pendingBefore = ctx.decisionPending();
       ctx.simultaneously(() => {
         for (const target of players) {
           const n = ctx.shuffleZonesIntoLibrary(target, spec.zones ?? ["graveyard"], spec.filter);
@@ -18804,6 +18912,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       });
       if (spec.drawThatMany === true) {
         for (const [player, n] of moved) if (n > 0) ctx.draw(player, n);
+      }
+      if (spec.revealThatMany !== undefined) {
+        const progress: RevealThatManyProgress = {
+          counts: ctx.apnap([...moved.keys()]).map((player) => ({ player, n: moved.get(player) ?? 0 })),
+        };
+        // A commander's 903.9b choice is answered before anyone reveals.
+        if (!pendingBefore && ctx.decisionPending()) {
+          ctx.resumeAfterDecisions({ ...spec, revealProgress: progress }, below);
+          return;
+        }
+        revealThatMany(spec, progress, ctx);
       }
       return;
     }

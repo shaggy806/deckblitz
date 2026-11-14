@@ -4832,6 +4832,32 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(nexus.effect).toEqual({ kind: "shuffle-graveyard-into-library", target: "each-player" });
   });
 
+  it("'shuffles all permanents they own into their library, then reveals that many' (Warp World): the groups, then the rest", () => {
+    const warp = face(
+      "Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library.",
+      "Sorcery",
+    );
+    expect(warp.effect).toEqual({
+      kind: "shuffle-graveyard-into-library",
+      target: "each-player",
+      zones: ["permanents"],
+      revealThatMany: { onto: [{ typesAnyOf: ["artifact", "creature", "land"] }, { type: "enchantment" }], rest: "bottom" },
+    });
+    const glimpse = face(
+      "Shuffle all permanents you own into your library, then reveal that many cards from the top of your library. Put all non-Aura permanent cards revealed this way onto the battlefield, then do the same for Aura cards, then put the rest on the bottom of your library in a random order.",
+      "Sorcery",
+    );
+    expect(glimpse.effect).toEqual({
+      kind: "shuffle-graveyard-into-library",
+      target: "you",
+      zones: ["permanents"],
+      revealThatMany: {
+        onto: [{ notTypes: ["instant", "sorcery"], notSubtypes: ["Aura"] }, { subtype: "Aura" }],
+        rest: "bottom-random",
+      },
+    });
+  });
+
   it("buyback (rule 702.27): a kicker whose cast returns to its owner's hand", () => {
     const spell = face(
       "Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nDraw a card.",
