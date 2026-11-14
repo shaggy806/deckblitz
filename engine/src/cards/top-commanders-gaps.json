@@ -8,6 +8,7 @@
     "keyword:casualty-x",
     "cost:spell-additional-cost-remove-counters",
     "effect:put-into-combat-attacking",
+    "effect:extra-combat-after-this-main-only-chosen-attack",
     "amount:creatures-crewed-it-this-turn",
     "effect:amount-total-power-died-this-turn",
     "condition:cycled-named-card-this-game",
