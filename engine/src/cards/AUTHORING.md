@@ -6876,7 +6876,10 @@ clause (section 9):
   card has. `removeCounters: { filter }` is "remove all counters from any
   number of [filter]" (Sin, Unending Cataclysm: anyone's, chosen, counted by
   counters removed); `turnFaceDown: CardFilter` is "turn all other [filter]
-  face down" (Ixidron: anyone's, nothing chosen). Pair it with `counters: {
+  face down" (Ixidron: anyone's, nothing chosen). `payLife: "any"` is "pay any
+  amount of life" (Phyrexian Processor: a `choose-number` from 0 to its
+  controller's life total, paid then, and noted on it as `{ chosenNumber: true }`
+  — "the life paid as this artifact entered"). Pair it with `counters: {
   amount: "done-as-enters", eachDone? }` to count how many were done.
   `as-enters-actions.test.ts`, `as-enters-discard.test.ts`,
   `as-enters-others.test.ts`.

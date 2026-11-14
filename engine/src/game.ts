@@ -8310,6 +8310,16 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    // "As this artifact enters, pay any amount of life" (Phyrexian
+    // Processor): paid now, part of the replacement (rule 614.1c), and its
+    // entry carries on once priority is next looked at.
+    if (awaiting.payLifeAsEntering !== undefined) {
+      this.payLife(player, number);
+      const entering = this.state.objects[awaiting.source];
+      if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, asEntersDone: number };
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Shapeshifter's "the last chosen number", on the permanent of that stint
     // alone (rule 400.7).
     if (awaiting.remember !== undefined) {
@@ -15351,6 +15361,26 @@ export class Game {
         leftover: "stay",
         prompt: `Discard any number of cards as ${nameOf(object)} enters`,
         asEntersOf: id,
+      };
+      return true;
+    }
+    if (spec.payLife !== undefined) {
+      // Any amount from 0 to their life total, only 0 if they can't pay life
+      // (rules 119.4, 119.4b): with nothing above 0 payable, 0 unasked.
+      const life = this.state.players[chooser].life;
+      const max = life > 0 && this.canPayLife(chooser, life, "not-a-cost") ? life : 0;
+      if (max === 0) {
+        object.enterChoice = { ...answered, asEntersDone: 0 };
+        return false;
+      }
+      this.state.awaiting = {
+        kind: "choose-number",
+        player: chooser,
+        source: id,
+        min: 0,
+        max,
+        prompt: `Pay any amount of life as ${nameOf(object)} enters`,
+        payLifeAsEntering: true,
       };
       return true;
     }
@@ -62500,6 +62530,8 @@ controlledBy,
       if (r.notes !== undefined) {
         noted = signedAmountValue(r.notes, this.makeResolutionContext(id, object.controller, [], object.xValue ?? 0, 0, id));
       }
+      // "The life paid as this artifact entered" (Phyrexian Processor).
+      if (r.asEnters?.payLife !== undefined) noted = asEntersDone ?? 0;
       // A counter of the kind picked for each card it exiled.
       if (r.asEnters?.exile?.counterForEach !== undefined || r.asEnters?.discard?.keywordCounters !== undefined) {
         for (const kind of asEntersCounters ?? []) addCounters(kind, 1);

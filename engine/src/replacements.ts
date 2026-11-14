@@ -342,6 +342,17 @@ export interface AsEntersAction {
    * How many were turned is `"done-as-enters"`.
    */
   readonly turnFaceDown?: CardFilter;
+  /**
+   * "As this artifact enters, **pay any amount of life**" (Phyrexian
+   * Processor): its controller chooses how much as it's about to enter (rule
+   * 614.12, a `choose-number` from 0) and pays it then (614.1c) — no more than
+   * their life total, and only 0 if they can't pay life (rules 119.4, 119.4b).
+   * How much is `"done-as-enters"`, and kept on the permanent for its stint as
+   * the number it chose (`GameObject.chosenOnEnter`, read as `{ chosenNumber:
+   * true }`: "the life paid as this artifact entered"). Entering some way that
+   * never asks (a token copy), it paid 0.
+   */
+  readonly payLife?: "any";
 }
 
 /** As the source permanent enters the battlefield (rule 614.1c). A self-

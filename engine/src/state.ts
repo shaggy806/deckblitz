@@ -4164,6 +4164,7 @@ export type AwaitingDecision =
           readonly resume: ResolutionResume;
           readonly assist?: undefined;
           readonly placeCopy?: undefined;
+          readonly payLifeAsEntering?: undefined;
           /** Keep the answer on `source` too, while it's still the permanent
            * of this stint (`GameObject.chosenOnEnter`) — Shapeshifter. */
           readonly remember?: { readonly stint: number };
@@ -4173,11 +4174,25 @@ export type AwaitingDecision =
           readonly then?: undefined;
           readonly resume?: undefined;
           readonly placeCopy?: undefined;
+          readonly payLifeAsEntering?: undefined;
           readonly remember?: undefined;
         }
       | {
           /** The other copies, still on the stack as this is asked. */
           readonly placeCopy: { readonly among: readonly ObjectId[] };
+          readonly payLifeAsEntering?: undefined;
+          readonly assist?: undefined;
+          readonly then?: undefined;
+          readonly resume?: undefined;
+          readonly remember?: undefined;
+        }
+      | {
+          /** How much life `player` pays as `source` is about to enter
+           * (`AsEntersAction.payLife` — Phyrexian Processor): paid once it's
+           * answered, recorded on it (`enterChoice.asEntersDone`), and its
+           * entry carries on. */
+          readonly payLifeAsEntering: true;
+          readonly placeCopy?: undefined;
           readonly assist?: undefined;
           readonly then?: undefined;
           readonly resume?: undefined;
