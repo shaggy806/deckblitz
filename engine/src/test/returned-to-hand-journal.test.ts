@@ -11,7 +11,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 
-import { journalCount } from "../characteristics.js";
+import { journalCount, staticConditionMet } from "../characteristics.js";
 import { A, B, enter, hand, named, nextTurn, pickTargets, ref, settle, spawn, table, toStep, watchTargets } from "./harness.js";
 
 const bounce = (game: Game, id: ObjectId, by: PlayerId = A): void => {
@@ -50,6 +50,43 @@ describe("the journal's put-into-hand", () => {
     expect(putIntoHand(game, A)).toBe(0);
     bounce(game, soldier);
     expect(putIntoHand(game, A)).toBe(1);
+  });
+});
+
+describe("put-into-hand and a commander (rule 903.9b)", () => {
+  /** Alice's commander on the battlefield and Barrin beside it, bounced
+   * with her answer to the 903.9b replacement; then her end step. */
+  const bounceCommander = (toCommandZone: boolean) => {
+    const t = board();
+    const { game, a } = t;
+    const barrin = spawn(game, "Barrin, Tolarian Archmage", A);
+    const general = spawn(game, "Grizzly Bears", A);
+    game.state.objects[general].isCommander = true;
+    a.commanderReplacementFn = () => toCommandZone;
+    bounce(game, general);
+    const condition = (): boolean =>
+      staticConditionMet(game.state, game.registry, game.state.objects[barrin], { kind: "turn-history", what: "put-into-hand" });
+    return { game, general, condition };
+  };
+
+  it("doesn't count a commander its owner put into the command zone instead", () => {
+    const { game, general, condition } = bounceCommander(true);
+    expect(game.state.objects[general].zone).toBe("command");
+    expect(putIntoHand(game, A)).toBe(0);
+    expect(condition()).toBe(false);
+    toStep(game, "end");
+    settle(game);
+    expect(hand(game, A).length).toBe(0);
+  });
+
+  it("counts one its owner let go to their hand", () => {
+    const { game, general, condition } = bounceCommander(false);
+    expect(hand(game, A)).toEqual([general]);
+    expect(putIntoHand(game, A)).toBe(1);
+    expect(condition()).toBe(true);
+    toStep(game, "end");
+    settle(game);
+    expect(hand(game, A).length).toBe(2);
   });
 });
 
