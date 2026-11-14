@@ -11323,6 +11323,7 @@ export function parseEffect(text, outer) {
       counterAbilityAt(sentences, i, ctx) ??
       copyAbilityAt(sentences, i, ctx) ??
       opponentChoosesInGraveyardAt(sentences, i, ctx) ??
+      graveyardExileMayCastAt(sentences, i, ctx) ??
       youChooseInEachGraveyardAt(sentences, i) ??
       youChoosePerPlayerAt(sentences, i) ??
       eachOpponentChoosesToGoadAt(sentences, i) ??
@@ -14497,6 +14498,40 @@ function exileThenSearchBothEnterAt(sentences, i, ctx) {
  * opponent chooses a creature card in their graveyard. Put those cards onto the
  * battlefield under your control." (Dredge the Mire), the choices held until the
  * last has chosen. */
+/**
+ * "Exile all creature cards from target player's graveyard. You may cast
+ * spells from among those cards for as long as they remain exiled, and mana
+ * of any type can be spent to cast them." (Shadow of the Enemy): the
+ * `exile-graveyard`, then a `grant-play` over the cards exiled this way.
+ */
+function graveyardExileMayCastAt(sentences, i, ctx) {
+  const m = /^exile all (.+?) cards from (target player|target opponent)'s graveyard\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  const may =
+    /^you may cast spells from among (?:those cards|them) for as long as they remain exiled(, and mana of any type can be spent to cast them)?\.$/i.exec(
+      sentences[i + 1] ?? "",
+    );
+  if (may === null) return null;
+  const filter = parseTypePhrase(m[1]);
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  const target = ctx.target(/opponent/i.test(m[2]) ? "opponent" : "player");
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "exile-graveyard", target, filter },
+        {
+          kind: "grant-play",
+          cards: { thisWay: "exiled" },
+          duration: "while-exiled",
+          ...(may[1] !== undefined ? { spendAs: "any-type" } : {}),
+        },
+      ],
+    },
+    used: 2,
+  };
+}
+
 function opponentChoosesInGraveyardAt(sentences, i, ctx) {
   const m = /^(target opponent|each opponent) chooses an? (.+?) card in their graveyard\.$/i.exec(sentences[i]);
   if (m === null) return null;

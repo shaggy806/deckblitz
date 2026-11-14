@@ -20179,3 +20179,23 @@ describe("'For each kind of counter on ~, each other Dinosaur you control enters
     });
   });
 });
+
+describe("'Exile all creature cards from target player's graveyard. You may cast spells from among those cards for as long as they remain exiled, …' (Shadow of the Enemy)", () => {
+  it("an `exile-graveyard` and a `grant-play` over the cards exiled this way, while they stay exiled", () => {
+    const shadow = parseFace({
+      name: "Test Shadow",
+      type_line: "Sorcery",
+      mana_cost: "{3}{B}{B}{B}",
+      oracle_text:
+        "Exile all creature cards from target player's graveyard. You may cast spells from among those cards for as long as they remain exiled, and mana of any type can be spent to cast them.",
+    });
+    expect(shadow.targets).toEqual(["player"]);
+    expect(shadow.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-graveyard", target: 0, filter: { type: "creature" } },
+        { kind: "grant-play", cards: { thisWay: "exiled" }, duration: "while-exiled", spendAs: "any-type" },
+      ],
+    });
+  });
+});
