@@ -2560,6 +2560,12 @@ export type TriggerKind =
        * elsewhere (the rulings). */
       readonly xInCost?: true;
       readonly source?: CardFilter;
+      /** "An ability of **a card in your graveyard**" (Neerdiv, Devious
+       * Diver): one activated from the graveyard (`ActivatedAbility.zone` —
+       * an unearth, an embalm, a scavenge), the card owned by this
+       * permanent's controller, read where it was as it was activated however
+       * its cost moved it (the event's `fromZone`). */
+      readonly sourceZone?: "graveyard";
       readonly sacrificedToActivate?: true;
     }
   | {

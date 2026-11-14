@@ -16315,7 +16315,7 @@ export class Game {
     // wherever the discard put it, which a search's prompt names.
     const abilityId = this.mintAbilityObject(cardId, def.name, player, "activated", 0, []);
     this.state.objects[abilityId].grantedAbility = { kind: "cycling", cardName: def.name };
-    this.emit({ type: "ability-activated", source: cardId, player, onStack: true, ability: abilityId });
+    this.emit({ type: "ability-activated", source: cardId, player, onStack: true, ability: abilityId, fromZone: "hand" });
     this.afterPlayerAction(player);
   }
 
@@ -26021,7 +26021,7 @@ export class Game {
       player,
       onStack: true,
       ability: abilityId,
-      ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
+      ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
       // What the cost sacrifices (rule 701.21a): the one already gone, or the
       // several chosen just below, which is the same payment (602.2b).
       ...(ability.cost.exilesSacrifice !== true &&
@@ -26453,7 +26453,7 @@ export class Game {
       source: sourceId,
       player,
       onStack: false,
-      ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
+      ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
     });
     // Activated by hand, its player holding priority (`whyCannotAct`) —
     // one activated while paying a cost is `executePayment`'s, inside the
@@ -34472,8 +34472,20 @@ export class Game {
         if (event.onStack ? event.ability === undefined : spec.orMana !== true) return false;
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
         if (spec.who !== "attached") {
-          if (self.zone !== "battlefield") return false;
+          // On the battlefield — or in a graveyard for an ability that works
+          // only there, the only kind the trigger scan asks of a graveyard
+          // card (rule 113.6k; Afterburner Expert's "return this card from
+          // your graveyard").
+          if (self.zone !== "battlefield" && self.zone !== "graveyard") return false;
           if ((spec.who === "you") !== (event.player === self.controller)) return false;
+          // "An ability of a card in your graveyard": activated from there,
+          // wherever its cost has since put the card.
+          if (
+            spec.sourceZone !== undefined &&
+            (event.fromZone !== spec.sourceZone || this.state.objects[event.source]?.owner !== self.controller)
+          ) {
+            return false;
+          }
           if (spec.source !== undefined) {
             // A permanent's ability, read as it is now that the costs are
             // paid: a Vehicle being crewed isn't a creature yet. One its own
