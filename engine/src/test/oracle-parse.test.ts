@@ -19116,4 +19116,13 @@ describe("one trigger over every opponent a batch of sources damaged (Breeches, 
       play: true,
     });
   });
+
+  it("'you may activate ~'s loyalty ability two more times this turn' (Comet, Stellar Pup)", () => {
+    expect(parseEffect("You may activate ~'s loyalty ability two more times this turn.", ctx()).effect).toEqual({
+      kind: "loyalty-activations",
+      target: "source",
+      times: { more: 2 },
+      duration: "end-of-turn",
+    });
+  });
 });

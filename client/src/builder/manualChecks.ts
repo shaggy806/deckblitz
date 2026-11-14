@@ -12381,4 +12381,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
     }),
   ),
+  preset(
+    'Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not',
+    board({
+      you: { bf: ['Comet, Stellar Pup', 'Grizzly Bears'] },
+      opp: { bf: ['Gladecover Scout'] },
+    }),
+  ),
+  preset(
+    'Comet, Stellar Pup: at four players, any player can be chosen',
+    board({
+      you: { bf: ['Comet, Stellar Pup'] },
+      opp: [{ bf: ['Grizzly Bears'] }, {}, {}],
+    }),
+  ),
 ]

@@ -2588,6 +2588,13 @@ export type EffectSpec =
        * step's `{ not: { thisWay: "chosen" } }` spares it ("creatures other
        * than … the chosen creature"). With `upTo: 1`. */
       readonly remember?: true;
+      /** "…to **a creature or player**" (Comet, Stellar Pup — "none of Comet's
+       * abilities require a target", the ruling): exactly one, a permanent
+       * matching `filter` or one of these players, chosen as this resolves
+       * with the `choose-permanent-or-player` decision, and `then` applied to
+       * it as target 0. `upTo` and `min` are read as 1; `together`,
+       * `random`, `remember`, `keepTargets` and `thenTogether` aren't read. */
+      readonly orPlayers?: PlayerScope;
     }
   | {
       /** Set only by the engine — a `choose-permanents`' `remember`, applied
@@ -4812,10 +4819,16 @@ export type EffectSpec =
        * may activate them. A rule about that permanent, not an ability it
        * gains, so losing its abilities doesn't end it; two of them are still
        * twice (the card's ruling: "not additive"). The static forms are
-       * `StaticAbility.loyaltyActivationsEachTurn`. */
+       * `StaticAbility.loyaltyActivationsEachTurn`.
+       *
+       * `{ more: n }` is "you may activate Comet's loyalty ability **two more
+       * times** this turn" (Comet, Stellar Pup): additive — n more than it
+       * could otherwise, each such effect its own — and for its printed
+       * loyalty abilities only ("his normal ability", the ruling), not ones
+       * it has gained. */
       readonly kind: "loyalty-activations";
       readonly target: ObjectRef;
-      readonly times: 2;
+      readonly times: 2 | { readonly more: number };
       readonly duration: PermanentDuration;
     }
   | {
@@ -11724,6 +11737,18 @@ export interface EffectApi {
     /** The effect's `thenTogether`: `then` runs once, over all of them. */
     thenTogether?: true,
   ): void;
+  /** See the `"choose-permanents"` {@link EffectSpec}'s `orPlayers`: raise
+   * the `choose-permanent-or-player` decision over the permanents matching
+   * `filter` (less `except`) and `players`. */
+  choosePermanentOrPlayer(
+    filter: CardFilter,
+    players: readonly PlayerId[],
+    then: EffectSpec,
+    prompt: string,
+    exceptSource: boolean,
+    except: readonly ObjectId[],
+    chooser: PlayerId,
+  ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
    * Nothing, if they control no creature (rule 701.68b). */
@@ -12259,7 +12284,7 @@ export interface EffectApi {
   /** See the `"block-additional"` {@link EffectSpec}. */
   grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PermanentDuration): void;
   /** See the `"loyalty-activations"` {@link EffectSpec}. */
-  allowLoyaltyActivations(target: TargetRef, times: 2, duration: PermanentDuration): void;
+  allowLoyaltyActivations(target: TargetRef, times: 2 | { readonly more: number }, duration: PermanentDuration): void;
   /** `target` (a player) mills `amount` cards. */
   mill(target: TargetRef, amount: number): void;
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: how
@@ -17340,6 +17365,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (among.length === 0) return;
         const picked = among[ctx.pickAtRandom(among.length, (i) => ({ kind: "card", object: among[i].object }))];
         applyEffectSpec(spec.then, ctx.withFoundAt(0, picked.object));
+        return;
+      }
+      if (spec.orPlayers !== undefined) {
+        // "A creature or player": one of either, chosen now (Comet).
+        ctx.choosePermanentOrPlayer(
+          spec.filter,
+          ctx.playersInScope(spec.orPlayers),
+          spec.then,
+          spec.prompt,
+          spec.exceptSource === true,
+          except,
+          chooser,
+        );
         return;
       }
       const pendingBefore = ctx.decisionPending();

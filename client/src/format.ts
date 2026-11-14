@@ -436,6 +436,14 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       }`
     case 'number-chosen':
       return `${who(event.player)} chooses ${event.number} for ${name(event.object)}`
+    case 'permanent-or-player-chosen':
+      return `${who(event.player)} chooses ${
+        event.chosen.kind === 'player'
+          ? who(event.chosen.player)
+          : event.chosen.kind === 'object'
+            ? name(event.chosen.object)
+            : 'nothing'
+      } for ${name(event.source)}`
     case 'assist-requested':
       return `${who(event.caster)} asks ${who(event.player)} to assist with ${name(event.object)}`
     case 'assist-chosen':

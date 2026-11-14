@@ -892,6 +892,13 @@ export type Action =
       readonly pile: number;
     }
   | {
+      /** Answers a pending `choose-permanent-or-player` decision: the one
+       * permanent or player chosen. */
+      readonly type: "choose-permanent-or-player";
+      readonly player: PlayerId;
+      readonly choice: TargetRef;
+    }
+  | {
       /** Answers a pending `choose-modes` decision (a modal spell/ability, or
        * a "you may" clause): the indices into the mode list to apply, distinct,
        * between the decision's `minModes` and `maxModes`. An empty array
@@ -2273,6 +2280,17 @@ export type LegalAction =
       readonly worth: Readonly<Record<ObjectId, number>>;
       /** Who controls (a permanent) or owns (a card) each object. */
       readonly whose: Readonly<Record<ObjectId, PlayerId>>;
+    }
+  | {
+      /** Choose one permanent or player as an effect resolves — see
+       * `AwaitingDecision`'s `choose-permanent-or-player`. */
+      readonly kind: "choose-permanent-or-player";
+      readonly source: ObjectId;
+      readonly eligible: readonly TargetRef[];
+      readonly prompt: string;
+      /** Whether what's done to the one chosen helps or harms it (the
+       * `then`'s slot 0, `target-polarity.ts`), for a bot's ranking. */
+      readonly polarity: "harm" | "help" | "take" | "either";
     }
   | {
       readonly kind: "choose-modes";

@@ -8241,3 +8241,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Nahiri's Sacrifice: X is the mana value of what you sacrifice
 - **Do:** Cast Nahiri's Sacrifice, choosing X = 3 and sacrificing Gray Ogre. Target both of Bob's creatures, 2 damage to Grizzly Bears and 1 to Hill Giant.
 - **Expect:** Only Gray Ogre is offered at X = 3 (Sol Ring only at X = 1). The Bears die and the Giant has 1 damage.
+
+## A creature or player chosen as it resolves, decisions lane (2026-11-13)
+
+### Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not
+- **Do:** Use Comet's 0 ability. When asked, click Bob's Gladecover Scout.
+- **Expect:** The banner reads "Comet deals damage equal to his loyalty to a creature or player — click a highlighted permanent or player"; both players and every creature are highlighted, the Scout too. It dies, and Comet goes down to 3 loyalty.
+- **Not a bug:** The die is the board's own: this board always rolls a 4.
+
+### Comet, Stellar Pup: at four players, any player can be chosen
+- **Do:** Use Comet's 0 ability. When asked, click Carol.
+- **Expect:** Every player is highlighted. Carol goes down to 35 life, and Comet to 3 loyalty.

@@ -1334,6 +1334,15 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
     })
   | (Base & {
+      /** `player` chose `chosen` — a permanent or a player — as `source`'s
+       * effect resolved, untargeted (the `choose-permanent-or-player`
+       * decision: Comet, Stellar Pup's "a creature or player"). */
+      readonly type: "permanent-or-player-chosen";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly chosen: TargetRef;
+    })
+  | (Base & {
       /** `player` chose `number` as `object` resolved (a `choose-value` of
        * `value: "number"` — Void's "choose a number"). */
       readonly type: "number-chosen";

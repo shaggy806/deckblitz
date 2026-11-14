@@ -20,6 +20,13 @@ describe('describeEvent', () => {
     ).toBe('Toby gains control of card:o1')
   })
 
+  it('says who a creature-or-player choice went to', () => {
+    const chose = (chosen: unknown) =>
+      describeEvent(event({ type: 'permanent-or-player-chosen', player: p1, source: 'o1', chosen }), nameOf, seats)
+    expect(chose({ kind: 'player', player: p2 })).toBe('Toby chooses P2 for card:o1')
+    expect(chose({ kind: 'object', object: 'o2' })).toBe('Toby chooses card:o2 for card:o1')
+  })
+
   it('says what a type change made it, "in addition" only when nothing was replaced', () => {
     const changed = (fields: Record<string, unknown>) =>
       describeEvent(event({ type: 'types-added', object: 'o1', types: [], duration: 'end-of-turn', ...fields }), nameOf, seats)

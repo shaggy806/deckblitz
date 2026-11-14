@@ -7101,6 +7101,11 @@ export function parseSentence(sentence, ctx) {
   if (re("you may activate loyalty abilities of ~ twice this turn rather than only once").test(s)) {
     return { kind: "loyalty-activations", target: "source", times: 2, duration: "end-of-turn" };
   }
+  // "You may activate ~'s loyalty ability two more times this turn" (Comet,
+  // Stellar Pup): additive, its printed loyalty abilities only.
+  if ((m = re("you may activate ~'s loyalty abilit(?:y|ies) (one|two|three|four) more times? this turn").exec(s))) {
+    return { kind: "loyalty-activations", target: "source", times: { more: { one: 1, two: 2, three: 3, four: 4 }[m[1].toLowerCase()] }, duration: "end-of-turn" };
+  }
   // "Target creature can't attack or block until your next turn" (Spara's
   // Adjudicators' enters trigger, Kaito, Dancing Shadow's +1).
   if ((m = re(`(up to one ${TARGET}|${TARGET}) can't attack or block until your next turn`).exec(s))) {

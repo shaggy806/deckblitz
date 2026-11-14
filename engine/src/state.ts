@@ -1968,6 +1968,11 @@ export interface PtModifier {
    * this turn rather than only once", rule 606.3). A rule about it, not an
    * ability. See `Game.loyaltyActivationsAllowed`. */
   loyaltyActivations?: 2;
+  /** Its printed loyalty abilities may be activated this many **more**
+   * times this turn, on top of whatever else allows (the `loyalty-activations`
+   * effect's `{ more }` — Comet, Stellar Pup's "two more times", rule 606.3).
+   * Each such modifier adds its own. */
+  loyaltyActivationsMore?: number;
   /** Layer 6 — it "can block an additional creature" (or `"any"` number of
    * creatures) for the duration (the `block-additional` effect —
    * `StaticAbility.blockAdditional` is the static form). */
@@ -4464,6 +4469,28 @@ export type AwaitingDecision =
        * then leaves it — exiled encoded on the creature picked, or as usual
        * with none. `then` is unused. */
       readonly cipher?: true;
+    }
+  | {
+      /**
+       * One permanent **or player** chosen as an effect resolves, with no
+       * targeting — Comet, Stellar Pup's "deals damage … to a creature or
+       * player" (the ruling: "None of Comet's abilities require a target. All
+       * choices … are made as the abilities resolve"; rule 608.2c). `player`
+       * picks exactly one of `eligible` (permanents and players), and `then`
+       * is applied to it as target 0; `source`/`x`/`thenResolution` rebuild
+       * the resolution context, as `choose-permanents`' do. A choice made
+       * this way ignores hexproof, shroud and protection (they're about
+       * targets, rule 702.11b, 702.18a, 702.16b).
+       */
+      readonly kind: "choose-permanent-or-player";
+      readonly player: PlayerId;
+      readonly eligible: readonly TargetRef[];
+      /** What the choice is for — "Comet deals 5 damage to a creature or player". */
+      readonly prompt: string;
+      readonly then: EffectSpec;
+      readonly source: ObjectId;
+      readonly x: number;
+      readonly thenResolution?: ChoosePermanentsResolution;
     }
   | {
       /** A modal spell/ability is resolving (rule 700.2), or a "you may"

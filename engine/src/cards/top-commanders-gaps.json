@@ -7,6 +7,8 @@
     "condition:converted-this-way",
     "effect:reflexive-per-counters-placed",
     "trigger:combat-damage-to-enchanted-player",
+    "decision:choose-creature-or-player-on-resolution",
+    "effect:extra-loyalty-activations-this-turn",
     "zone:play-from-opponent-library-top",
     "zone:impulse-one-cast-grants-affinity",
     "zone:shared-impulse-pool-each-player",

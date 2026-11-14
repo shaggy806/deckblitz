@@ -252,6 +252,7 @@ import { blockers } from "./decisions/blockers.js";
 import { chooseCopy } from "./decisions/choose-copy.js";
 import { chooseEnchant } from "./decisions/choose-enchant.js";
 import { choosePermanents } from "./decisions/choose-permanents.js";
+import { choosePermanentOrPlayer } from "./decisions/choose-permanent-or-player.js";
 import { separatePiles } from "./decisions/separate-piles.js";
 import { choosePile } from "./decisions/choose-pile.js";
 import { replacementOrder } from "./decisions/replacement-order.js";
@@ -2744,6 +2745,7 @@ export class Game {
       applyMulliganHandAbility: (player, card) => this.applyMulliganHandAbility(player, card),
       applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
       applyReplacementOrder: (player, option) => this.applyReplacementOrder(player, option),
+      applyChoosePermanentOrPlayer: (player, choice) => this.applyChoosePermanentOrPlayer(player, choice),
       applyAttackerDeclarations: (p, d, life) => this.applyAttackerDeclarations(p, d, life),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
       applyChooseTargets: (p, t, d) => this.applyChooseTargets(p, t, d),
@@ -25014,7 +25016,10 @@ export class Game {
         ? null
         : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
       if (timing !== null) return timing;
-      if (this.loyaltyActivationsOf(source) >= this.loyaltyActivationsAllowed(player, source)) {
+      if (
+        this.loyaltyActivationsOf(source) >=
+        this.loyaltyActivationsAllowed(player, source, abilityIndex < this.registry.get(rulesTextName(source)).activated.length)
+      ) {
         return `a loyalty ability of ${def.name} has already been activated this turn`;
       }
       // A "−X" cost removes the X announced (rule 107.3a), so it needs that
@@ -27813,14 +27818,19 @@ export class Game {
   /** How many times `player` may activate loyalty abilities of a permanent
    * this turn: once (rule 606.3), or twice with Oath of Teferi's static for
    * every planeswalker they control, or with `source`'s own for itself alone
-   * (Urza, Planeswalker's "the loyalty abilities of Urza"). */
-  private loyaltyActivationsAllowed(player: PlayerId, source: GameObject): number {
+   * (Urza, Planeswalker's "the loyalty abilities of Urza"). `printed`: the
+   * ability asked about is one of its own printed ones, which "N more times"
+   * (Comet, Stellar Pup) reaches. */
+  private loyaltyActivationsAllowed(player: PlayerId, source: GameObject, printed: boolean): number {
     // "As though none of its loyalty abilities have been activated this turn"
     // (The Chain Veil): one more each time one resolved, on top of the rest.
     const extra = (this.state.playerEffects ?? []).filter(
       (e) => e.owner === player && e.extraLoyaltyActivation === true,
     ).length;
-    return extra + this.loyaltyActivationsBase(player, source);
+    // "You may activate Comet's loyalty ability two more times this turn":
+    // each its own, his normal ability only (the ruling).
+    const more = printed ? source.modifiers.reduce((n, m) => n + (m.loyaltyActivationsMore ?? 0), 0) : 0;
+    return extra + more + this.loyaltyActivationsBase(player, source);
   }
 
   private loyaltyActivationsBase(player: PlayerId, source: GameObject): number {
@@ -40239,6 +40249,13 @@ controlledBy,
           targetZones,
           lastKnownRefs: refs,
         }),
+      choosePermanentOrPlayer: (filter, players, then, prompt, exceptSource, except, chooser) =>
+        this.beginChoosePermanentOrPlayer(source, chooser, x, filter, players, then, prompt, exceptSource, except, {
+          triggerValue,
+          ...(triggerObject !== undefined ? { triggerObject } : {}),
+          targetZones,
+          lastKnownRefs: refs,
+        }),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(opts.payingCost !== undefined ? { priorityTo: opts.payingCost } : {}), ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
@@ -51086,6 +51103,88 @@ controlledBy,
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
+  /**
+   * Raise the `choose-permanent-or-player` decision — a `choose-permanents`
+   * effect's `orPlayers` (Comet, Stellar Pup's "to a creature or player"):
+   * one of the permanents matching `filter` from `player`'s side or one of
+   * `players`, chosen as the effect resolves (rule 608.2c), not targeted.
+   * Nothing is asked when there's nothing to choose.
+   */
+  private beginChoosePermanentOrPlayer(
+    source: ObjectId,
+    player: PlayerId,
+    x: number,
+    filter: CardFilter,
+    players: readonly PlayerId[],
+    then: EffectSpec,
+    prompt: string,
+    exceptSource: boolean,
+    except: readonly ObjectId[],
+    thenResolution: ChoosePermanentsResolution,
+  ): void {
+    const sparedSource = exceptSource ? this.oneTokenSpared(source) : undefined;
+    const permanents = this.battlefieldMatching(player, filter, x, source).filter(
+      (id) => id !== sparedSource && !except.includes(id),
+    );
+    const eligible: TargetRef[] = [
+      ...permanents.map((object) => ({ kind: "object" as const, object })),
+      ...players
+        .filter((p) => this.state.players[p]?.hasLost !== true)
+        .map((p) => ({ kind: "player" as const, player: p })),
+    ];
+    if (eligible.length === 0) return;
+    this.state.awaiting = { kind: "choose-permanent-or-player", player, eligible, prompt, then, source, x, thenResolution };
+  }
+
+  /** Answers a pending `choose-permanent-or-player` decision: `then` with the
+   * one chosen as target 0 — a token of a stack singled out first; a
+   * permanent that has left since is read as it last existed (608.2h), and
+   * nothing is done to it. */
+  private applyChoosePermanentOrPlayer(player: PlayerId, choice: TargetRef): void {
+    const why = choosePermanentOrPlayer.whyCannot(
+      this.decisionCtx,
+      { type: "choose-permanent-or-player", player, choice },
+      player,
+    );
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "choose-permanent-or-player") {
+      throw new Error("unreachable: choosePermanentOrPlayer.whyCannot should have caught this");
+    }
+    this.state.awaiting = null;
+    const { then, source, x, thenResolution: resumed } = awaiting;
+    let chosen: TargetRef | undefined = choice;
+    let zone: ZoneType | null = null;
+    if (choice.kind === "object") {
+      chosen =
+        this.state.objects[choice.object]?.zone === "battlefield"
+          ? { kind: "object", object: this.splitOneFromStack(choice.object) }
+          : undefined;
+      zone = "battlefield";
+    } else if (choice.kind === "player" && this.state.players[choice.player]?.hasLost === true) {
+      chosen = undefined;
+    }
+    if (chosen !== undefined) {
+      this.emit({ type: "permanent-or-player-chosen", player, source, chosen });
+      applyEffectSpec(
+        then,
+        this.makeResolutionContext(
+          source,
+          player,
+          [chosen],
+          x,
+          resumed?.triggerValue ?? 0,
+          resumed?.triggerObject,
+          1,
+          0,
+          [zone],
+          resumed?.lastKnownRefs,
+        ),
+      );
+    }
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
   /** Answers a pending `choose-permanents` decision: `then` for each one
    * picked, in order, as target 0 — a stack named twice is two of its
    * tokens, each peeled off as the effect singles it out. */
@@ -55815,8 +55914,9 @@ controlledBy,
   }
 
   /** See the `"loyalty-activations"` {@link EffectSpec}: `target`'s loyalty
-   * abilities may be activated `times` a turn (`PtModifier.loyaltyActivations`). */
-  private allowLoyaltyActivations(target: TargetRef, times: 2, duration: Expiry): void {
+   * abilities may be activated `times` a turn (`PtModifier.loyaltyActivations`),
+   * or `{ more }` times more (`loyaltyActivationsMore`). */
+  private allowLoyaltyActivations(target: TargetRef, times: 2 | { readonly more: number }, duration: Expiry): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
     if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
@@ -55825,7 +55925,7 @@ controlledBy,
       power: 0,
       toughness: 0,
       keywords: [],
-      loyaltyActivations: times,
+      ...(times === 2 ? { loyaltyActivations: 2 as const } : { loyaltyActivationsMore: Math.max(0, times.more) }),
       ...durationFields(duration),
     });
     invalidateComputedCache();

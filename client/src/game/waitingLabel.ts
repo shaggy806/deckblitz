@@ -21,6 +21,7 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   'reveal-for-untapped': 'deciding on a reveal land',
   'choose-copy': 'choosing what to copy',
   'choose-enchant': 'choosing what to enchant',
+  'choose-permanent-or-player': 'choosing a permanent or player',
   'legend-rule': 'choosing a legend to keep',
   'order-triggers': 'ordering triggers',
   'choose-creature-type': 'naming a creature type',

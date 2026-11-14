@@ -397,6 +397,7 @@ type MiracleChoiceAction = Extract<LegalAction, { kind: 'miracle-reveal' }>
 type RevealChoiceAction = Extract<LegalAction, { kind: 'reveal-for-untapped' }>
 type CopyChoiceAction = Extract<LegalAction, { kind: 'choose-copy' }>
 type EnchantChoiceAction = Extract<LegalAction, { kind: 'choose-enchant' }>
+type PermanentOrPlayerAction = Extract<LegalAction, { kind: 'choose-permanent-or-player' }>
 type LegendRuleAction = Extract<LegalAction, { kind: 'legend-rule' }>
 type TriggerOrderAction = Extract<LegalAction, { kind: 'order-triggers' }>
 type CreatureTypeChoiceAction = Extract<LegalAction, { kind: 'choose-creature-type' }>
@@ -900,6 +901,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   'reveal-for-untapped': 'decide on a reveal land',
   'choose-copy': 'choose what to copy',
   'choose-enchant': 'choose what an Aura enchants',
+  'choose-permanent-or-player': 'choose a permanent or player',
   'legend-rule': 'choose which legend to keep',
   'order-triggers': 'order their triggers',
   'choose-creature-type': 'choose a creature type',
@@ -2415,6 +2417,9 @@ function Table({
   const enchantAction = actions.find(
     (a): a is EnchantChoiceAction => a.kind === 'choose-enchant',
   )
+  const permanentOrPlayerAction = actions.find(
+    (a): a is PermanentOrPlayerAction => a.kind === 'choose-permanent-or-player',
+  )
   const legendAction = actions.find((a): a is LegendRuleAction => a.kind === 'legend-rule')
   const triggerOrderAction = actions.find((a): a is TriggerOrderAction => a.kind === 'order-triggers')
   const cardNameChoiceAction = actions.find(
@@ -2554,6 +2559,7 @@ function Table({
     | 'reveal-for-untapped'
     | 'choose-copy'
     | 'choose-enchant'
+    | 'choose-permanent-or-player'
     | 'legend-rule'
     | 'order-triggers'
     | 'choose-creature-type'
@@ -2598,6 +2604,8 @@ function Table({
         ? 'choose-copy'
         : enchantAction
           ? 'choose-enchant'
+        : permanentOrPlayerAction
+          ? 'choose-permanent-or-player'
         : legendAction
           ? 'legend-rule'
         : triggerOrderAction
@@ -3426,6 +3434,10 @@ function Table({
         const found = ids.find((i) => copyChoiceAction.options.includes(i))
         if (found) return found
       }
+      if (mode === 'choose-permanent-or-player' && permanentOrPlayerAction) {
+        const found = ids.find((i) => permanentOrPlayerAction.eligible.some((t) => t.kind === 'object' && t.object === i))
+        if (found) return found
+      }
       // A tile standing for several identical permanents: take a member not
       // already picked, so a second click picks the next one rather than
       // un-picking the first.
@@ -3449,7 +3461,7 @@ function Table({
       }
       return ids[0]
     },
-    [mode, activeTargeting, pendingSac, copyChoiceAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, pilePicks, proliferatePicks],
+    [mode, activeTargeting, pendingSac, copyChoiceAction, permanentOrPlayerAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, pilePicks, proliferatePicks],
   )
 
   const clickPermanent = useCallback(
@@ -3611,6 +3623,12 @@ function Table({
       if (mode === 'choose-enchant' && enchantAction) {
         if (enchantAction.options.includes(id)) {
           game.dispatch({ type: 'choose-enchant', player: seat, enchant: id })
+        }
+        return
+      }
+      if (mode === 'choose-permanent-or-player' && permanentOrPlayerAction) {
+        if (permanentOrPlayerAction.eligible.some((t) => t.kind === 'object' && t.object === id)) {
+          game.dispatch({ type: 'choose-permanent-or-player', player: seat, choice: { kind: 'object', object: id } })
         }
         return
       }
@@ -3860,6 +3878,7 @@ function Table({
       activeTargeting,
       defendersFor,
       enchantAction,
+      permanentOrPlayerAction,
       copyChoiceAction,
       legendAction,
       game,
@@ -3877,6 +3896,12 @@ function Table({
       if (mode === 'choose-enchant' && enchantAction) {
         if ((enchantAction.players ?? []).includes(pid)) {
           game.dispatch({ type: 'choose-enchant', player: seat, enchant: pid })
+        }
+        return
+      }
+      if (mode === 'choose-permanent-or-player' && permanentOrPlayerAction) {
+        if (permanentOrPlayerAction.eligible.some((t) => t.kind === 'player' && t.player === pid)) {
+          game.dispatch({ type: 'choose-permanent-or-player', player: seat, choice: { kind: 'player', player: pid } })
         }
         return
       }
@@ -3901,7 +3926,7 @@ function Table({
         unpickTarget({ kind: 'player', player: pid })
       }
     },
-    [attackAction, mode, pickTarget, unpickTarget, activeTargeting, sendPicksAt, proliferateAction, enchantAction, modesChoiceAction, game, seat],
+    [attackAction, mode, pickTarget, unpickTarget, activeTargeting, sendPicksAt, proliferateAction, enchantAction, permanentOrPlayerAction, modesChoiceAction, game, seat],
   )
 
   const confirmAttackers = useCallback(() => {
@@ -4067,6 +4092,9 @@ function Table({
     if (mode === 'choose-enchant' && enchantAction) {
       return (enchantAction.players ?? []).includes(pid)
     }
+    if (mode === 'choose-permanent-or-player' && permanentOrPlayerAction) {
+      return permanentOrPlayerAction.eligible.some((t) => t.kind === 'player' && t.player === pid)
+    }
     if (mode === 'attackers' && attackAction) {
       return canSendPicksAt(pid)
     }
@@ -4218,6 +4246,8 @@ function Table({
       if (of > 1 && taken > 0) badge = `↷ ${taken}/${of}`
     } else if (mode === 'choose-enchant' && enchantAction) {
       highlight = enchantAction.options.includes(id)
+    } else if (mode === 'choose-permanent-or-player' && permanentOrPlayerAction) {
+      highlight = ids.some((i) => permanentOrPlayerAction.eligible.some((t) => t.kind === 'object' && t.object === i))
     } else if (mode === 'choose-copy' && copyChoiceAction) {
       highlight = ids.some((i) => copyChoiceAction.options.includes(i))
     } else if (mode === 'legend-rule' && legendAction) {
@@ -4930,6 +4960,18 @@ function Table({
             Show choices
           </button>
         ) : null}
+      </div>
+    )
+  } else if (mode === 'choose-permanent-or-player' && permanentOrPlayerAction) {
+    // Untargeted: anything highlighted can be chosen, hexproof or not.
+    const players = permanentOrPlayerAction.eligible.some((t) => t.kind === 'player')
+    const permanents = permanentOrPlayerAction.eligible.some((t) => t.kind === 'object')
+    controls = (
+      <div className="controls">
+        <span>
+          {view.decisionSource?.cardName ?? game.nameOf(permanentOrPlayerAction.source)}:{' '}
+          {permanentOrPlayerAction.prompt} — click {permanents && players ? 'a highlighted permanent or player' : players ? 'a player' : 'a highlighted permanent'}.
+        </span>
       </div>
     )
   } else if (mode === 'order-triggers' && triggerOrderAction) {
