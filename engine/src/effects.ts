@@ -13925,6 +13925,10 @@ const ASKS_NOTHING: ReadonlySet<EffectSpec["kind"]> = new Set<EffectSpec["kind"]
   "create-token",
   "create-token-copy",
   "add-counter-all",
+  // "Its controller may exile it", for each of several (Disorienting
+  // Choice): every yes is exiled together once the last has answered (its
+  // ruling).
+  "exile-all",
 ]);
 
 /** What an effect says of its tokens besides what they are, as a
@@ -16627,6 +16631,15 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // "You may pay {1} and exile it": not once it has gone from where the
   // trigger found it (Timothar, Baron of Bats's ruling).
   if (action.kind === "exile" && action.target === "trigger-object" && ctx.triggerObjectLost === true) return false;
+  // "For each permanent chosen this way, its controller may exile it"
+  // (Disorienting Choice): an `exile-all` over a set's members, read from the
+  // asked player's side — a player who controls none of them has nothing to
+  // exile, so isn't asked (the ruling: only "an opponent that controls a
+  // permanent chosen" decides).
+  if (action.kind === "exile-all" && action.filter.inSet !== undefined) {
+    const bound = bindDynamicCompares(action, ctx) as typeof action;
+    return amountValue({ countOf: bound.filter }, ctx) > 0;
+  }
   // "They may tap that permanent": only untapped permanents can be tapped
   // (rule 701.26a), so not one already tapped or gone — Charismatic
   // Conqueror's ruling. Untapping likewise (701.26b). Only when that's all the

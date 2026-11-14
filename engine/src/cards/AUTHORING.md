@@ -1475,7 +1475,14 @@ offered to a player who couldn't do it (`mayBeDone`, as for a plain `may`) and
 counts as their not doing it: "they may tap that permanent. If they don't, you
 create …" is `who: "trigger-player"` (the opponent it entered under), `ifDidnt`
 the token, and the token comes with it already tapped or gone (Charismatic
-Conqueror, rule 701.26a).
+Conqueror, rule 701.26a). "For each permanent chosen this way, its controller
+may exile it" over per-opponent target slots is `who: "each-opponent"` with
+`effect: { kind: "exile-all", filter: { inSet: { targets: [0, 1, 2] },
+controlledBy: "you" } }`: only a player controlling one is asked, and every
+yes is exiled together after the last answer. "The chosen permanents still on
+the battlefield" is `{ countOf: { inSet: { targets: [0, 1, 2] } } }`, read as
+it applies, so one exiled or gone (rule 400.7) or an empty slot isn't counted
+(Disorienting Choice, `chosen-targets-remaining.test.ts`).
 "When you cast this spell, **any player may pay 5 life. If a player does, counter
 ~**" (Dash Hopes) is an `each-player-may` of `who: "each-player"` with the
 payment in `options` and `ifDid: { kind: "counter", target: "source" }`: everyone

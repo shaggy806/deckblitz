@@ -351,6 +351,17 @@ exist on the battlefield (`Game.enterExilers`, rule 614.12) — `cast: false`
 true of anything but a cast spell resolving — and ordered against its own "as
 this enters" actions (`exileInsteadOrderAsked`, a `replacement-order`, 616.1e).
 Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
+
+### The triggers-journal lane's second round — built 2026-11-13
+
+- `amount:chosen-targets-remaining` — no new amount: `{ countOf: { inSet: {
+  targets: [...] } } }` counts the chosen targets still on the battlefield as
+  the same objects (rule 400.7). What it needed was the "its controller may
+  exile it" before it: `exile-all` joins the effects an `each-player-may`
+  does for everyone at once after the last answer (the ruling, rule 101.4),
+  and isn't offered to a player who controls none of the set (`mayBeDone`).
+  Disorienting Choice. `test/chosen-targets-remaining.test.ts`.
+
 ### Who attacked whom, and whether it had to — built 2026-11-13
 
 The combat-targeting lane's group of attack-history reads (B322's group).
