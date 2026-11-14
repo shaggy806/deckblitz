@@ -93,7 +93,7 @@ const TERMS = [
 ];
 // `affinity` is read only off a permission kept on the card (the cost reads
 // the cast's own card permission), which is what these grants make.
-const GRANT_EXTRAS = ["duration", "byOwner", "whileSource", "fromNextTurn", "affinity"];
+const GRANT_EXTRAS = ["duration", "durationOf", "byOwner", "whileSource", "fromNextTurn", "affinity"];
 
 describe("the pool holds only the one vocabulary", () => {
   const all = [...POOL_CARDS, ...TOKEN_CARDS];
