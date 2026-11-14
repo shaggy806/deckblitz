@@ -597,6 +597,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.object)} leaves the battlefield → ${event.toZone}`
     case 'permanent-attached':
       return `${name(event.source)} attaches to ${name(event.target)}`
+    case 'permanent-unattached':
+      return `${name(event.object)} becomes unattached from ${name(event.from)}`
     case 'damage-dealt':
       return `${name(event.source)} deals ${event.amount} to ${tgt(event.target)}`
     case 'life-changed':

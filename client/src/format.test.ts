@@ -27,6 +27,12 @@ describe('describeEvent', () => {
     expect(changed({ subtypes: ['Mutant'] })).toBe('card:o1 becomes Mutant in addition to its other types until EOT')
   })
 
+  it('says what an Equipment or Aura became unattached from, not the raw event', () => {
+    expect(describeEvent(event({ type: 'permanent-unattached', object: 'o1', from: 'o2' }), nameOf, seats)).toBe(
+      'card:o1 becomes unattached from card:o2',
+    )
+  })
+
   it('names players by their display names, not their seat ids', () => {
     expect(describeEvent(event({ type: 'turn-began', turn: 3, activePlayer: p1 }), nameOf, seats)).toBe(
       'Turn 3 — Toby',
