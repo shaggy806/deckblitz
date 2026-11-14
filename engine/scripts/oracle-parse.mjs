@@ -21784,20 +21784,25 @@ function parseStatic(line, text) {
   }
   // "~ has flying as long as an exiled card used to craft it has flying. The
   // same is true for first strike, … protection, …" (Wretched Bonemass; Urborg
-  // Scavengers' "a card exiled with it"): `sharesKeywords` over the cards
-  // exiled with it, "protection" every protection ability of theirs.
+  // Scavengers' "a card exiled with it"; "As long as a card exiled with ~ has
+  // flying, ~ / equipped creature has flying" — Death-Mask Duplicant, Eater of
+  // Virtue): `sharesKeywords` over the cards exiled with it, "protection"
+  // every protection ability of theirs, "landwalk" every landwalk.
   {
-    const w = /^~ has flying as long as (?:an exiled card used to craft it|a card exiled with it) has flying\. The same is true for (.+)\.$/.exec(line);
-    const words = w === null ? [] : w[1].split(/, and |, | and /);
-    const listed = words.filter((word) => word !== "protection").map((word) => word.replace(/ /g, "-"));
-    const known = new Set(["first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance", "defender", "flash", "shroud"]);
+    const w =
+      /^(~) has flying as long as (?:an exiled card used to craft it|a card exiled with it) has flying\. The same is true for (.+)\.$/.exec(line) ??
+      /^As long as a card exiled with (?:~|it|this creature) has flying, (~|equipped creature) has flying\. The same is true for (.+)\.$/.exec(line);
+    const words = w === null ? [] : w[2].split(/, and |, | and /);
+    const listed = words.filter((word) => word !== "protection" && word !== "landwalk").map((word) => word.replace(/ /g, "-"));
+    const known = new Set(["first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance", "defender", "flash", "shroud", "fear"]);
     if (w !== null && listed.every((keyword) => known.has(keyword))) {
       return {
-        affects: { scope: "self" },
+        affects: { scope: w[1] === "equipped creature" ? "attached" : "self" },
         sharesKeywords: {
           from: "exiled-with-source",
           keywords: ["flying", ...listed],
           ...(words.includes("protection") ? { protection: true } : {}),
+          ...(words.includes("landwalk") ? { landwalk: true } : {}),
         },
         text,
       };

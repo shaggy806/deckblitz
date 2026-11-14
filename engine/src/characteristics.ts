@@ -1849,8 +1849,10 @@ function staticProtection(
  * exiled card used to craft it has flying. The same is true for …"): the
  * listed keywords some card in the set has, each "hexproof from [quality]"
  * ability of theirs when hexproof is listed (rule 702.11d-e), and each
- * protection ability when protection is (702.16a). A card has what its text
- * gives itself without condition; its protection is read as `source`'s own.
+ * protection ability when protection is (702.16a), and each landwalk ability
+ * when landwalk is (702.14a — a named one as its keyword, any other as its
+ * land). A card has what its text gives itself without condition; its
+ * protection is read as `source`'s own.
  */
 function sharedKeywordsOf(
   state: GameState,
@@ -1861,6 +1863,7 @@ function sharedKeywordsOf(
   readonly keywords: readonly Keyword[];
   readonly protections: readonly NonNullable<AppliedEffect["protection"]>[];
   readonly hexproofs: readonly NonNullable<StaticAbility["hexproofFrom"]>[];
+  readonly landwalks: readonly CardFilter[];
 } | null {
   const shared = ability.sharesKeywords;
   if (shared === undefined) return null;
@@ -1873,11 +1876,19 @@ function sharedKeywordsOf(
   const keywords = new Set<Keyword>();
   const protections: NonNullable<AppliedEffect["protection"]>[] = [];
   const hexproofs: NonNullable<StaticAbility["hexproofFrom"]>[] = [];
+  const landwalks: CardFilter[] = [];
   for (const id of cards) {
     const has = computeCharacteristics(state, registry, id).keywords;
     for (const keyword of shared.keywords) if (has.has(keyword)) keywords.add(keyword);
+    if (shared.landwalk === true) for (const [keyword] of LANDWALK) if (has.has(keyword)) keywords.add(keyword);
     for (const own of registry.get(rulesTextName(state.objects[id]!)).static) {
       if (own.affects.scope !== "self" || own.condition !== undefined) continue;
+      // "Landwalk of the chosen type" names nothing in exile.
+      if (shared.landwalk === true && own.landwalk !== undefined && own.landwalk !== "chosen-land-type") {
+        const walk = staticLandwalk(own, source);
+        if (walk.keyword !== null) keywords.add(walk.keyword);
+        if (walk.land !== null) landwalks.push(walk.land);
+      }
       if (shared.keywords.includes("hexproof") && own.hexproofFrom !== undefined && own.hexproofFrom.notHexproof !== true) {
         hexproofs.push(own.hexproofFrom);
       }
@@ -1887,7 +1898,7 @@ function sharedKeywordsOf(
       }
     }
   }
-  return { keywords: [...keywords], protections, hexproofs };
+  return { keywords: [...keywords], protections, hexproofs, landwalks };
 }
 
 /**
@@ -6099,6 +6110,7 @@ function collectStaticEffects(
       };
       for (const protection of shared?.protections ?? []) out.push({ ...bare, protection });
       for (const hexproofFrom of shared?.hexproofs ?? []) out.push({ ...bare, hexproofFrom });
+      for (const landwalk of shared?.landwalks ?? []) out.push({ ...bare, landwalk });
     }
   }
   if (keywordScoped) {

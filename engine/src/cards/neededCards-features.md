@@ -322,6 +322,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Keywords of the cards exiled with an Equipment, landwalk among them — built 2026-11-14
+
+The key `static:keywords-of-linked-exile`. `sharesKeywords` already took any `affects`, so Eater
+of Virtue's "equipped creature has flying" is `scope: "attached"` with a `linked` dies trigger;
+the new part is `sharesKeywords.landwalk` (`sharedKeywordsOf`, characteristics.ts): every landwalk
+of the exiled cards, named ones as keywords and the rest as their land (rule 702.14a). The
+scaffolder reads "As long as a card exiled with ~ has flying, ~ / equipped creature has flying".
+Eater of Virtue (rank 9503), Death-Mask Duplicant (28913). `test/keywords-of-linked-exile.test.ts`.
+
 ### A granted draw replacement — built 2026-11-14
 
 The key `static:grants-replacement-effect` needed no engine code: a `grantsStatic` whose static is a

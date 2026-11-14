@@ -2597,7 +2597,8 @@
   "effect:cast-now-bottom-of-library-after",
   "effect:copy-spell-retarget-created-token",
   "effect:turn-face-up-or-exile-and-cast",
-  "static:grants-replacement-effect"
+  "static:grants-replacement-effect",
+  "static:keywords-of-linked-exile"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

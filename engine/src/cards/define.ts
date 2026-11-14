@@ -2742,12 +2742,19 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * ruling), read as this static's source's own. A card "has" what its text
    * gives itself without condition; a quality only a choice made on the
    * battlefield names ("the chosen color") is nothing in exile.
+   *
+   * `landwalk` is "landwalk" in the list (Death-Mask Duplicant): every
+   * landwalk ability those cards have (rule 702.14a, its ruling) — the named
+   * ones (swampwalk) as keywords, any other ("nonbasic landwalk") as its land.
+   * The static's `affects` says who has them: `"self"`, or `"attached"` for
+   * "equipped creature has …" (Eater of Virtue).
    */
   readonly sharesKeywords?: {
     readonly from: "exiled-with-source";
     readonly filter?: CardFilter;
     readonly keywords: readonly Keyword[];
     readonly protection?: true;
+    readonly landwalk?: true;
   };
   /** Keywords it takes away in layer 6 — "equipped creature … **loses
    * flying**" (Starforged Sword). A loss applies at the static's timestamp
