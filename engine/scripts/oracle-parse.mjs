@@ -16814,6 +16814,13 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
     if ((m = /^Mayhem((?: (?:\{[^}]+\})+)?)$/.exec(line))) { out.mayhem = m[1] ? { cost: m[1].trim() } : {}; continue; }
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }
+    // An Aura's control effect (rule 613.1b, layer 2): "You control enchanted
+    // creature" (Mind Control), "The monarch controls enchanted creature"
+    // (Fealty to the Realm — `controlEnchanted: "monarch"`).
+    if ((m = /^(You control|The monarch controls) enchanted (?:creature|artifact|land|permanent)\.$/.exec(line))) {
+      out.controlEnchanted = m[1] === "You control" ? true : "monarch";
+      continue;
+    }
     // "~ is all colors" (Transguild Courier): a characteristic-defining
     // ability (rule 604.3) the card's `colors` already hold. "This ability
     // doesn't affect its color identity" (Fallaji Wayfarer) keeps them out of
@@ -22721,6 +22728,16 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
   }
   if (line === "~ attacks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-attack"], text };
+  // An Aura's: "Enchanted creature attacks each combat if able" (Bloodshed
+  // Fever), "… and can't attack you" (Fealty to the Realm — "you" the Aura's
+  // controller).
+  if ((m = /^Enchanted creature attacks each combat if able( and can't attack you)?\.$/.exec(line))) {
+    return {
+      affects: { scope: "attached" },
+      restrictions: ["must-attack", ...(m[1] !== undefined ? [{ kind: "cant-attack", at: "you" }] : [])],
+      text,
+    };
+  }
   // A permission on the blocker (rule 702.28b), either spelling.
   if (line === "~ can block creatures with shadow as though it had shadow." || line === "~ can block creatures with shadow as though they didn't have shadow.") {
     return { affects: { scope: "self" }, blocksAsThoughShadow: true, text };

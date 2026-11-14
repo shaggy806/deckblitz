@@ -20218,3 +20218,27 @@ describe("'… instead exile it and put a number of +1/+1 counters equal to that
     });
   });
 });
+
+describe("'The monarch controls enchanted creature' (Fealty to the Realm)", () => {
+  it("`controlEnchanted: \"monarch\"`, beside Mind Control's `true`, and the attack requirement aimed away from you", () => {
+    const fealty = parseFace({
+      name: "Test Fealty",
+      type_line: "Enchantment — Aura",
+      mana_cost: "{4}{U}",
+      oracle_text:
+        "Enchant creature\nThe monarch controls enchanted creature.\nEnchanted creature attacks each combat if able and can't attack you.",
+    });
+    expect(fealty.controlEnchanted).toBe("monarch");
+    expect(fealty.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      restrictions: ["must-attack", { kind: "cant-attack", at: "you" }],
+    });
+    const control = parseFace({
+      name: "Test Control",
+      type_line: "Enchantment — Aura",
+      mana_cost: "{3}{U}{U}",
+      oracle_text: "Enchant creature\nYou control enchanted creature.",
+    });
+    expect(control.controlEnchanted).toBe(true);
+  });
+});

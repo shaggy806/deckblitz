@@ -5285,8 +5285,11 @@ export interface CardDefinition {
    * player. Not while the permanent has lost its abilities. */
   readonly looksAtOwnLibraryTop: boolean;
   /** An Aura whose controller controls the enchanted permanent for as long as
-   * it stays attached (Mind Control — rule 613.1b, layer 2). */
-  readonly controlEnchanted: boolean;
+   * it stays attached (Mind Control — rule 613.1b, layer 2). `"monarch"`:
+   * the monarch controls it instead (Fealty to the Realm — rule 725), read
+   * each time control is recomputed, the effect's timestamp still the Aura's
+   * (its ruling); with no monarch, the effect does nothing. */
+  readonly controlEnchanted: boolean | "monarch";
   /** "You can't cast this spell unless …" — checked from whatever zone it's
    * cast, the command zone included, from the caster's side: Rakdos, Lord of
    * Riots' "unless an opponent lost life this turn" is `{ kind: "turn-stat",
@@ -6230,7 +6233,7 @@ const PRINTED_ABILITY: {
   static: (def) => def.static.length > 0,
   revealsOwnLibraryTop: (def) => def.revealsOwnLibraryTop,
   looksAtOwnLibraryTop: (def) => def.looksAtOwnLibraryTop,
-  controlEnchanted: (def) => def.controlEnchanted,
+  controlEnchanted: (def) => def.controlEnchanted !== false,
   castOnlyIf: (def) => def.castOnlyIf !== null,
   asCast: (def) => def.asCast.length > 0,
   splitSecond: (def) => def.splitSecond,
@@ -6557,7 +6560,7 @@ interface CardDraft {
   static?: readonly StaticAbility[];
   revealsOwnLibraryTop?: boolean;
   looksAtOwnLibraryTop?: boolean;
-  controlEnchanted?: boolean;
+  controlEnchanted?: boolean | "monarch";
   castOnlyIf?: StaticCondition;
   asCast?: readonly AsCastFact[];
   splitSecond?: boolean;

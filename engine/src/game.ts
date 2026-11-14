@@ -57787,6 +57787,17 @@ controlledBy,
     return this.withControlBatch(() => this.recomputeControlNow());
   }
 
+  /** Who an attached Aura's control effect gives the enchanted permanent to
+   * (`CardDefinition.controlEnchanted`, rule 613.1b): its controller (Mind
+   * Control), or the monarch (Fealty to the Realm, rule 725) — `null` for an
+   * Aura with no such ability, or with no monarch (that effect then does
+   * nothing, its ruling). */
+  private auraControlGrantee(aura: GameObject): PlayerId | null {
+    const grant = this.registry.get(rulesTextName(aura)).controlEnchanted;
+    if (grant === false) return null;
+    return grant === "monarch" ? this.state.monarch : aura.controller;
+  }
+
   private recomputeControlNow(): boolean {
     // Cheap early-out for the overwhelmingly common no-control-effects board.
     const anyControlEffect = this.state.zones.shared.battlefield.some((id) => {
@@ -57794,7 +57805,7 @@ controlledBy,
       return (
         o.controller !== o.owner ||
         o.controlEffects !== undefined ||
-        this.registry.get(rulesTextName(o)).controlEnchanted
+        this.registry.get(rulesTextName(o)).controlEnchanted !== false
       );
     });
     if (!anyControlEffect) return false;
@@ -57826,14 +57837,11 @@ controlledBy,
       }
       for (const auraId of this.state.zones.shared.battlefield) {
         const aura = this.state.objects[auraId];
-        if (
-          aura.attachedTo === id &&
-          this.registry.get(rulesTextName(aura)).controlEnchanted &&
-          !left(aura.controller) &&
-          aura.timestamp >= bestTimestamp
-        ) {
+        if (aura.attachedTo !== id) continue;
+        const grantee = this.auraControlGrantee(aura);
+        if (grantee !== null && !left(aura.controller) && !left(grantee) && aura.timestamp >= bestTimestamp) {
           bestTimestamp = aura.timestamp;
-          controller = aura.controller;
+          controller = grantee;
         }
       }
 
@@ -62866,17 +62874,15 @@ controlledBy,
       }
       for (const auraId of this.state.zones.shared.battlefield) {
         const aura = this.state.objects[auraId];
-        if (
-          aura?.attachedTo !== id ||
-          !this.registry.get(rulesTextName(aura)).controlEnchanted ||
-          aura.controller === player ||
-          aura.owner === player ||
-          gone(aura.controller)
-        ) {
+        // A monarch's Aura (Fealty to the Realm) goes on giving it to whoever
+        // the monarch is next, even when the leaving player is the monarch
+        // now (its rulings: the monarchy passes before control is read).
+        const grantee = aura?.attachedTo === id ? this.auraControlGrantee(aura) : null;
+        if (grantee === null || aura.controller === player || aura.owner === player || gone(aura.controller)) {
           continue;
         }
         if (latest === null || aura.timestamp >= latest.timestamp) {
-          latest = { timestamp: aura.timestamp, byDefault: false, controller: aura.controller };
+          latest = { timestamp: aura.timestamp, byDefault: false, controller: grantee };
         }
       }
       if (latest?.byDefault === true && latest.controller === player) {
