@@ -6351,6 +6351,7 @@ import _poolDeathInHeaven from "./pool/death-in-heaven.js";
 import _poolDeathInTheFamily from "./pool/death-in-the-family.js";
 import _poolDeathIsIrrelevant from "./pool/death-is-irrelevant.js";
 import _poolDeathKiss from "./pool/death-kiss.js";
+import _poolDeathMaskDuplicant from "./pool/death-mask-duplicant.js";
 import _poolDeathMatch from "./pool/death-match.js";
 import _poolDeathMutation from "./pool/death-mutation.js";
 import _poolDeathOfAThousandStings from "./pool/death-of-a-thousand-stings.js";
@@ -7879,6 +7880,7 @@ import _poolEatenBySpiders from "./pool/eaten-by-spiders.js";
 import _poolEaterOfDays from "./pool/eater-of-days.js";
 import _poolEaterOfHope from "./pool/eater-of-hope.js";
 import _poolEaterOfTheDead from "./pool/eater-of-the-dead.js";
+import _poolEaterOfVirtue from "./pool/eater-of-virtue.js";
 import _poolEbonDragon from "./pool/ebon-dragon.js";
 import _poolEbonDrake from "./pool/ebon-drake.js";
 import _poolEbonPraetor from "./pool/ebon-praetor.js";
@@ -23460,6 +23462,7 @@ import _poolScionOfCalamity from "./pool/scion-of-calamity.js";
 import _poolScionOfDarkness from "./pool/scion-of-darkness.js";
 import _poolScionOfDraco from "./pool/scion-of-draco.js";
 import _poolScionOfGlaciers from "./pool/scion-of-glaciers.js";
+import _poolScionOfHalaster from "./pool/scion-of-halaster.js";
 import _poolScionOfOona from "./pool/scion-of-oona.js";
 import _poolScionOfOpulence from "./pool/scion-of-opulence.js";
 import _poolScionOfStygia from "./pool/scion-of-stygia.js";
@@ -23531,6 +23534,7 @@ import _poolScoutingTrek from "./pool/scouting-trek.js";
 import _poolScrabblingClaws from "./pool/scrabbling-claws.js";
 import _poolScrabblingSkullcrab from "./pool/scrabbling-skullcrab.js";
 import _poolScragnoth from "./pool/scragnoth.js";
+import _poolScrambleverse from "./pool/scrambleverse.js";
 import _poolScrapCompactor from "./pool/scrap-compactor.js";
 import _poolScrapMastery from "./pool/scrap-mastery.js";
 import _poolScrapTrawler from "./pool/scrap-trawler.js";
@@ -25149,6 +25153,7 @@ import _poolSlumberingCerberus from "./pool/slumbering-cerberus.js";
 import _poolSlumberingDragon from "./pool/slumbering-dragon.js";
 import _poolSlumberingKeepguard from "./pool/slumbering-keepguard.js";
 import _poolSlumberingTora from "./pool/slumbering-tora.js";
+import _poolSlumberingTrudge from "./pool/slumbering-trudge.js";
 import _poolSlumberingWalker from "./pool/slumbering-walker.js";
 import _poolSlurrkAllIngesting from "./pool/slurrk-all-ingesting.js";
 import _poolSlyInstigator from "./pool/sly-instigator.js";
@@ -39362,6 +39367,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeathInTheFamily,
   _poolDeathIsIrrelevant,
   _poolDeathKiss,
+  _poolDeathMaskDuplicant,
   _poolDeathMatch,
   _poolDeathMutation,
   _poolDeathOfAThousandStings,
@@ -40890,6 +40896,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEaterOfDays,
   _poolEaterOfHope,
   _poolEaterOfTheDead,
+  _poolEaterOfVirtue,
   _poolEbonDragon,
   _poolEbonDrake,
   _poolEbonPraetor,
@@ -56471,6 +56478,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScionOfDarkness,
   _poolScionOfDraco,
   _poolScionOfGlaciers,
+  _poolScionOfHalaster,
   _poolScionOfOona,
   _poolScionOfOpulence,
   _poolScionOfStygia,
@@ -56542,6 +56550,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScrabblingClaws,
   _poolScrabblingSkullcrab,
   _poolScragnoth,
+  _poolScrambleverse,
   _poolScrapCompactor,
   _poolScrapMastery,
   _poolScrapTrawler,
@@ -58160,6 +58169,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSlumberingDragon,
   _poolSlumberingKeepguard,
   _poolSlumberingTora,
+  _poolSlumberingTrudge,
   _poolSlumberingWalker,
   _poolSlurrkAllIngesting,
   _poolSlyInstigator,
@@ -72386,6 +72396,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/death-in-the-family": _poolDeathInTheFamily,
   "pool/death-is-irrelevant": _poolDeathIsIrrelevant,
   "pool/death-kiss": _poolDeathKiss,
+  "pool/death-mask-duplicant": _poolDeathMaskDuplicant,
   "pool/death-match": _poolDeathMatch,
   "pool/death-mutation": _poolDeathMutation,
   "pool/death-of-a-thousand-stings": _poolDeathOfAThousandStings,
@@ -73914,6 +73925,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/eater-of-days": _poolEaterOfDays,
   "pool/eater-of-hope": _poolEaterOfHope,
   "pool/eater-of-the-dead": _poolEaterOfTheDead,
+  "pool/eater-of-virtue": _poolEaterOfVirtue,
   "pool/ebon-dragon": _poolEbonDragon,
   "pool/ebon-drake": _poolEbonDrake,
   "pool/ebon-praetor": _poolEbonPraetor,
@@ -89495,6 +89507,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scion-of-darkness": _poolScionOfDarkness,
   "pool/scion-of-draco": _poolScionOfDraco,
   "pool/scion-of-glaciers": _poolScionOfGlaciers,
+  "pool/scion-of-halaster": _poolScionOfHalaster,
   "pool/scion-of-oona": _poolScionOfOona,
   "pool/scion-of-opulence": _poolScionOfOpulence,
   "pool/scion-of-stygia": _poolScionOfStygia,
@@ -89566,6 +89579,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scrabbling-claws": _poolScrabblingClaws,
   "pool/scrabbling-skullcrab": _poolScrabblingSkullcrab,
   "pool/scragnoth": _poolScragnoth,
+  "pool/scrambleverse": _poolScrambleverse,
   "pool/scrap-compactor": _poolScrapCompactor,
   "pool/scrap-mastery": _poolScrapMastery,
   "pool/scrap-trawler": _poolScrapTrawler,
@@ -91184,6 +91198,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/slumbering-dragon": _poolSlumberingDragon,
   "pool/slumbering-keepguard": _poolSlumberingKeepguard,
   "pool/slumbering-tora": _poolSlumberingTora,
+  "pool/slumbering-trudge": _poolSlumberingTrudge,
   "pool/slumbering-walker": _poolSlumberingWalker,
   "pool/slurrk-all-ingesting": _poolSlurrkAllIngesting,
   "pool/sly-instigator": _poolSlyInstigator,

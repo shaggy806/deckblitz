@@ -657,6 +657,7 @@ import _poolScavengedBlade from "../pool/scavenged-blade.js";
 import _poolScepterOfEmpires from "../pool/scepter-of-empires.js";
 import _poolScionOfDraco from "../pool/scion-of-draco.js";
 import _poolScorchingLava from "../pool/scorching-lava.js";
+import _poolScrambleverse from "../pool/scrambleverse.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
 import _poolScytheSpecter from "../pool/scythe-specter.js";
 import _poolSeaGate from "../pool/sea-gate.js";
@@ -1614,6 +1615,7 @@ const shard: CardShard = {
     _poolScepterOfEmpires,
     _poolScionOfDraco,
     _poolScorchingLava,
+    _poolScrambleverse,
     _poolScrapTrawler,
     _poolScytheSpecter,
     _poolSeaGate,

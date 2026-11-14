@@ -780,6 +780,7 @@ import _poolSlipperyScoundrel from "../pool/slippery-scoundrel.js";
 import _poolSlithAscendant from "../pool/slith-ascendant.js";
 import _poolSlumberingCerberus from "../pool/slumbering-cerberus.js";
 import _poolSlumberingDragon from "../pool/slumbering-dragon.js";
+import _poolSlumberingTrudge from "../pool/slumbering-trudge.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSmaugsFury from "../pool/smaugs-fury.js";
 import _poolSmokestack from "../pool/smokestack.js";
@@ -1832,6 +1833,7 @@ const shard: CardShard = {
     _poolSlithAscendant,
     _poolSlumberingCerberus,
     _poolSlumberingDragon,
+    _poolSlumberingTrudge,
     _poolSmaugWickedWorm,
     _poolSmaugsFury,
     _poolSmokestack,

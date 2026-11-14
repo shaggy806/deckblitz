@@ -230,6 +230,7 @@ import _poolDeadlyInsect from "../pool/deadly-insect.js";
 import _poolDeadlyPrecision from "../pool/deadly-precision.js";
 import _poolDeadlyRollick from "../pool/deadly-rollick.js";
 import _poolDeadshotMinotaur from "../pool/deadshot-minotaur.js";
+import _poolDeathMaskDuplicant from "../pool/death-mask-duplicant.js";
 import _poolDeathMutation from "../pool/death-mutation.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
@@ -1321,6 +1322,7 @@ const shard: CardShard = {
     _poolDeadlyPrecision,
     _poolDeadlyRollick,
     _poolDeadshotMinotaur,
+    _poolDeathMaskDuplicant,
     _poolDeathMutation,
     _poolDeathreapRitual,
     _poolDeathsPresence,
