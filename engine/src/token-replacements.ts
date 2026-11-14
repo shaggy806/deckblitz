@@ -105,12 +105,16 @@ function applyOne(
   r: TokenMultiplierReplacement,
   tokens: readonly PlannedTokens[],
 ): readonly PlannedTokens[] {
-  const total = tokens.reduce((sum, t) => sum + t.count, 0);
-  if (r.plusOneToken !== undefined) return addTo(tokens, r.plusOneToken, 1, search.cap);
-  if (r.plusTokens !== undefined) return addTo(tokens, r.plusTokens, total, search.cap);
   const instead = r.tokensInstead ?? r.creatureTokensInstead;
   const filter = r.ofTokens ?? (r.creatureTokensInstead !== undefined ? { type: "creature" as const } : undefined);
   const matching = (t: PlannedTokens): boolean => tokenKindMatches(kindsOf(search, t.name), filter);
+  if (r.plusOneToken !== undefined) return addTo(tokens, r.plusOneToken, 1, search.cap);
+  // "That many" of the tokens `ofTokens` names — every token of the event
+  // without it (Chatterfang), only the Foods with it (Bilbo's ruling).
+  if (r.plusTokens !== undefined) {
+    const that = tokens.filter(matching).reduce((sum, t) => sum + t.count, 0);
+    return addTo(tokens, r.plusTokens, that, search.cap);
+  }
   // Ojer Taq's "three times that many" of the tokens `ofTokens` names.
   if (r.instead?.modify.times !== undefined) {
     const by = r.instead.modify.times;

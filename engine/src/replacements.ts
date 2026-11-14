@@ -653,7 +653,11 @@ export interface TokenMultiplierReplacement {
    * of the event before it, its own included only once (rule 614.5); with
    * a multiplier the order is the controller's (616.1) and comes out the
    * same, and before Divine Visitation, which makes Squirrels Angels too —
-   * the order that gives the most.
+   * the order that gives the most. With `ofTokens`, that many of the tokens
+   * it names: Bilbo, Fellow Conspirator's "if you would create a Food token,
+   * instead create a Food token and a Treasure token" is `ofTokens: {
+   * subtypesAnyOf: ["Food"] }`, `plusTokens: "Treasure Token"` — a Treasure
+   * for each Food, and two Bilbos two for each (its rulings).
    */
   readonly plusTokens?: string;
   /**
