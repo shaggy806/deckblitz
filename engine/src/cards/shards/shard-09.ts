@@ -824,6 +824,7 @@ import _poolSonorousHowlbonder from "../pool/sonorous-howlbonder.js";
 import _poolSoothsaying from "../pool/soothsaying.js";
 import _poolSorcerousSight from "../pool/sorcerous-sight.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
+import _poolSpawnbroker from "../pool/spawnbroker.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
 import _poolSpikedPitTrap from "../pool/spiked-pit-trap.js";
@@ -1881,6 +1882,7 @@ const shard: CardShard = {
     _poolSoothsaying,
     _poolSorcerousSight,
     _poolSparkTrooper,
+    _poolSpawnbroker,
     _poolSpectralCloak,
     _poolSpiderManWebSpinner,
     _poolSpikedPitTrap,

@@ -10373,6 +10373,7 @@ import _poolFury from "./pool/fury.js";
 import _poolFurybladeVampire from "./pool/furyblade-vampire.js";
 import _poolFurybornHellkite from "./pool/furyborn-hellkite.js";
 import _poolFurycalmSnarl from "./pool/furycalm-snarl.js";
+import _poolFurygaleFlocking from "./pool/furygale-flocking.js";
 import _poolFurystokeGiant from "./pool/furystoke-giant.js";
 import _poolFusionElemental from "./pool/fusion-elemental.js";
 import _poolFussBother from "./pool/fuss-bother.js";
@@ -10729,6 +10730,7 @@ import _poolGetawayGlamer from "./pool/getaway-glamer.js";
 import _poolGethLordOfTheVault from "./pool/geth-lord-of-the-vault.js";
 import _poolGethThaneOfContracts from "./pool/geth-thane-of-contracts.js";
 import _poolGethsGrimoire from "./pool/geths-grimoire.js";
+import _poolGethsSummons from "./pool/geths-summons.js";
 import _poolGethsVerdict from "./pool/geths-verdict.js";
 import _poolGevScaledScorch from "./pool/gev-scaled-scorch.js";
 import _poolGeyadroneDihada from "./pool/geyadrone-dihada.js";
@@ -20860,6 +20862,7 @@ import _poolPublicEnemy from "./pool/public-enemy.js";
 import _poolPublicExecution from "./pool/public-execution.js";
 import _poolPublicThoroughfare from "./pool/public-thoroughfare.js";
 import _poolPucasCovenant from "./pool/pucas-covenant.js";
+import _poolPucasMischief from "./pool/pucas-mischief.js";
 import _poolPufferExtract from "./pool/puffer-extract.js";
 import _poolPugnaciousHammerskull from "./pool/pugnacious-hammerskull.js";
 import _poolPugnaciousPugilist from "./pool/pugnacious-pugilist.js";
@@ -25603,6 +25606,7 @@ import _poolSpawnOfRixMaadi from "./pool/spawn-of-rix-maadi.js";
 import _poolSpawnOfThraxes from "./pool/spawn-of-thraxes.js";
 import _poolSpawnbedProtector from "./pool/spawnbed-protector.js";
 import _poolSpawnbinderMage from "./pool/spawnbinder-mage.js";
+import _poolSpawnbroker from "./pool/spawnbroker.js";
 import _poolSpawningBed from "./pool/spawning-bed.js";
 import _poolSpawningBreath from "./pool/spawning-breath.js";
 import _poolSpawningGrounds from "./pool/spawning-grounds.js";
@@ -28388,6 +28392,7 @@ import _poolThrashingMossdog from "./pool/thrashing-mossdog.js";
 import _poolThrashingMudspawn from "./pool/thrashing-mudspawn.js";
 import _poolThrashingWumpus from "./pool/thrashing-wumpus.js";
 import _poolThrasiosTritonHero from "./pool/thrasios-triton-hero.js";
+import _poolThrastaTempestsRoar from "./pool/thrasta-tempests-roar.js";
 import _poolThraximundar from "./pool/thraximundar.js";
 import _poolThraxodemon from "./pool/thraxodemon.js";
 import _poolThreadbindClique from "./pool/threadbind-clique.js";
@@ -43389,6 +43394,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFurybladeVampire,
   _poolFurybornHellkite,
   _poolFurycalmSnarl,
+  _poolFurygaleFlocking,
   _poolFurystokeGiant,
   _poolFusionElemental,
   _poolFussBother,
@@ -43745,6 +43751,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGethLordOfTheVault,
   _poolGethThaneOfContracts,
   _poolGethsGrimoire,
+  _poolGethsSummons,
   _poolGethsVerdict,
   _poolGevScaledScorch,
   _poolGeyadroneDihada,
@@ -53876,6 +53883,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPublicExecution,
   _poolPublicThoroughfare,
   _poolPucasCovenant,
+  _poolPucasMischief,
   _poolPufferExtract,
   _poolPugnaciousHammerskull,
   _poolPugnaciousPugilist,
@@ -58619,6 +58627,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpawnOfThraxes,
   _poolSpawnbedProtector,
   _poolSpawnbinderMage,
+  _poolSpawnbroker,
   _poolSpawningBed,
   _poolSpawningBreath,
   _poolSpawningGrounds,
@@ -61404,6 +61413,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThrashingMudspawn,
   _poolThrashingWumpus,
   _poolThrasiosTritonHero,
+  _poolThrastaTempestsRoar,
   _poolThraximundar,
   _poolThraxodemon,
   _poolThreadbindClique,
@@ -76418,6 +76428,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/furyblade-vampire": _poolFurybladeVampire,
   "pool/furyborn-hellkite": _poolFurybornHellkite,
   "pool/furycalm-snarl": _poolFurycalmSnarl,
+  "pool/furygale-flocking": _poolFurygaleFlocking,
   "pool/furystoke-giant": _poolFurystokeGiant,
   "pool/fusion-elemental": _poolFusionElemental,
   "pool/fuss-bother": _poolFussBother,
@@ -76774,6 +76785,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/geth-lord-of-the-vault": _poolGethLordOfTheVault,
   "pool/geth-thane-of-contracts": _poolGethThaneOfContracts,
   "pool/geths-grimoire": _poolGethsGrimoire,
+  "pool/geths-summons": _poolGethsSummons,
   "pool/geths-verdict": _poolGethsVerdict,
   "pool/gev-scaled-scorch": _poolGevScaledScorch,
   "pool/geyadrone-dihada": _poolGeyadroneDihada,
@@ -86905,6 +86917,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/public-execution": _poolPublicExecution,
   "pool/public-thoroughfare": _poolPublicThoroughfare,
   "pool/pucas-covenant": _poolPucasCovenant,
+  "pool/pucas-mischief": _poolPucasMischief,
   "pool/puffer-extract": _poolPufferExtract,
   "pool/pugnacious-hammerskull": _poolPugnaciousHammerskull,
   "pool/pugnacious-pugilist": _poolPugnaciousPugilist,
@@ -91648,6 +91661,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spawn-of-thraxes": _poolSpawnOfThraxes,
   "pool/spawnbed-protector": _poolSpawnbedProtector,
   "pool/spawnbinder-mage": _poolSpawnbinderMage,
+  "pool/spawnbroker": _poolSpawnbroker,
   "pool/spawning-bed": _poolSpawningBed,
   "pool/spawning-breath": _poolSpawningBreath,
   "pool/spawning-grounds": _poolSpawningGrounds,
@@ -94433,6 +94447,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thrashing-mudspawn": _poolThrashingMudspawn,
   "pool/thrashing-wumpus": _poolThrashingWumpus,
   "pool/thrasios-triton-hero": _poolThrasiosTritonHero,
+  "pool/thrasta-tempests-roar": _poolThrastaTempestsRoar,
   "pool/thraximundar": _poolThraximundar,
   "pool/thraxodemon": _poolThraxodemon,
   "pool/threadbind-clique": _poolThreadbindClique,

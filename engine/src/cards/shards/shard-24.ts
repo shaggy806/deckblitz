@@ -628,6 +628,7 @@ import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProtectiveBubble from "../pool/protective-bubble.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPsychicAllergy from "../pool/psychic-allergy.js";
+import _poolPucasMischief from "../pool/pucas-mischief.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
 import _poolPullingTeeth from "../pool/pulling-teeth.js";
 import _poolPuncturingBlow from "../pool/puncturing-blow.js";
@@ -1661,6 +1662,7 @@ const shard: CardShard = {
     _poolProtectiveBubble,
     _poolProwlingFelidar,
     _poolPsychicAllergy,
+    _poolPucasMischief,
     _poolPullFromTheGrave,
     _poolPullingTeeth,
     _poolPuncturingBlow,

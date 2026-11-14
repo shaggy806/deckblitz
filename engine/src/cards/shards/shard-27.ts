@@ -320,6 +320,7 @@ import _poolGaladrielElvenQueen from "../pool/galadriel-elven-queen.js";
 import _poolGangUp from "../pool/gang-up.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
 import _poolGatewayPlaza from "../pool/gateway-plaza.js";
+import _poolGethsSummons from "../pool/geths-summons.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
 import _poolGhastlyGloomhunter from "../pool/ghastly-gloomhunter.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
@@ -1328,6 +1329,7 @@ const shard: CardShard = {
     _poolGangUp,
     _poolGarrukCursedHuntsman,
     _poolGatewayPlaza,
+    _poolGethsSummons,
     _poolGhaltaTheImmovable,
     _poolGhastlyGloomhunter,
     _poolGhostSpectralSaboteur,
