@@ -4248,6 +4248,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Code health
 
+- **`room-stop.test.ts`'s two whole-game tests have the time a loaded machine needs** (2026-11-15): each plays a two-bot game, about a second alone, under vitest's five-second default; beside a full verify's fuzzer they timed out in two of three full runs that night (and "once in three full server runs" on 2026-11-11). Thirty seconds each (`WHOLE_GAME_MS`).
 - **A 4-player fuzzer game runs past 240 turns on lands alone** (found by the 2026-11-11 audit to have landed with the fuzzer's turn cap): `random-demo.mjs --max-turns`, 100 turns at 2 players and 120 past that, a capped game passing.
 - **The Playwright suite split into a quick set and a full one** (2026-11-04): 18 minutes to about 11 on a push, so the E2E workflow finishes inside its 20-minute limit, which it had been hitting since 2026-11-02; the whole suite runs daily on GitHub, and `build-family`'s agents leave `test:e2e` to the coordinator.
 - **`canDispatch` refuses a cast with an illegal target**, as `dispatch` does (`whyCastTargetsInvalid`: the chosen face's specs under its modes, kicker, overload and X) — a Lightning Bolt at a player with protection from everything (2026-10-16).

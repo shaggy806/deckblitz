@@ -73,6 +73,11 @@ class RefusedBot extends HeuristicBotController {
   }
 }
 
+/** Each of these plays a whole two-bot game: about a second alone, and past
+ * vitest's five when a full verify runs the fuzzer's seven processes beside
+ * the suite (two of three full runs timed out here on 2026-11-15). */
+const WHOLE_GAME_MS = 30_000;
+
 describe("a bot's move the engine refuses", () => {
   // Each refusal is logged; dozens of them here.
   beforeEach(() => void vi.spyOn(console, "error").mockImplementation(() => {}));
@@ -106,7 +111,7 @@ describe("a bot's move the engine refuses", () => {
     expect(refused!.refusals).toBeGreaterThan(3);
     expect(room.stopped).toBeNull();
     expect(game.state.result.over).toBe(true);
-  });
+  }, WHOLE_GAME_MS);
 
   it("doesn't throw out of the gate's timer either, in real-time pacing", () => {
     const game = deal();
@@ -133,5 +138,5 @@ describe("a bot's move the engine refuses", () => {
     }).not.toThrow();
     expect(refused!.refusals).toBeGreaterThan(3);
     expect(room.stopped).toBeNull();
-  });
+  }, WHOLE_GAME_MS);
 });
