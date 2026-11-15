@@ -36,6 +36,7 @@ import type {
   OracleTagIndex,
 } from "engine";
 import type {
+  CommanderCandidate,
   DeckFormatReport,
   ImportedAttractionReport,
   ImportedCardReport,
@@ -44,7 +45,7 @@ import type {
 } from "protocol";
 import { loadCardData } from "./card-data.js";
 import { loadOracleTagIndex } from "./oracle-tags.js";
-import { SUGGEST_PREFIX } from "./import-route.js";
+import { SUGGEST_PREFIX, chosenCommandersOf } from "./import-route.js";
 import type { ImportSink, SuggestRequest } from "./import-route.js";
 
 /** Re-exported so this module stays the single import site for everything
@@ -954,6 +955,39 @@ export function formatCheck(
   return { ...result, commanders };
 }
 
+/**
+ * The cards of a list that could be its commander, in list order, for a list
+ * that doesn't say (`DeckFormatReport.commanderCandidates`): a card the pool
+ * has that can command alone (rule 903.3, and "can be your commander"), and
+ * one it lacks whose type line reads as a legendary creature — it would be
+ * played as its stand-in. Each with the others it may be paired with (rule
+ * 702.124), a Background of the list among them, though one never leads.
+ */
+export function commanderCandidates(
+  cards: readonly ImportedCardReport[],
+  registry: CardRegistry,
+): CommanderCandidate[] {
+  const has = (name: string): boolean => registry.has(name);
+  const leads = cards.filter((c) =>
+    has(c.name)
+      ? canCommandAlone(registry.get(c.name))
+      : c.found && /\blegendary\b/i.test(c.typeLine.split("//")[0]) && /\bcreature\b/i.test(c.typeLine.split("//")[0]),
+  );
+  // What may stand beside a lead: another lead, or a Background.
+  const partners = cards.filter((c) => leads.includes(c) || (has(c.name) && isBackground(registry.get(c.name))));
+  return leads.map((c) => ({
+    name: c.name,
+    implemented: c.implemented,
+    manaCost: c.manaCost,
+    typeLine: c.typeLine,
+    pairsWith: has(c.name)
+      ? partners
+          .filter((p) => p.name !== c.name && has(p.name) && canPairCommanders(registry, c.name, p.name))
+          .map((p) => p.name)
+      : [],
+  }));
+}
+
 /** An `Attractions` section's lines as report rows: whether the pool has each
  * as an Attraction (rule 717.1), and the printing its collector number names,
  * when the card has that one — else its first, whose lights it then brings. */
@@ -1065,7 +1099,14 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
   }
   let streaming = false;
   try {
-    const { entries, sideboard, attractions, commanders, commanderSource } = parseDecklistText(text, deps.registry);
+    // The player's answer to "which card is the commander?" rides ahead of
+    // the list (`commandersJobText`): it reads as a `Commander` section would.
+    const asked = chosenCommandersOf(text);
+    const parsed = parseDecklistText(asked.text, deps.registry);
+    const { entries, sideboard, attractions } = parsed;
+    const chosen = asked.commanders.filter((name) => entries.some((e) => e.name === name));
+    const commanders = chosen.length > 0 ? chosen : parsed.commanders;
+    const commanderSource = chosen.length > 0 ? "section" : parsed.commanderSource;
     streaming = true;
     const total = entries.length + sideboard.length;
     sink.line({ type: "progress", done: 0, total, name: null });
@@ -1098,10 +1139,19 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
             attractionRows.flatMap((r) => (r.implemented ? Array.from({ length: r.count }, () => r.name) : [])),
             deps.registry,
           );
-    const format: DeckFormatReport =
-      attractionProblems.length === 0
-        ? checked
-        : { ...checked, legal: false, violations: [...checked.violations, ...attractionProblems] };
+    // A list that names no commander has its guessed: when more than one of
+    // its cards could be it, the report says which, for the client to ask.
+    // (`formatCheck` guesses when it trusts none of the list's own: there
+    // were none, or a trailing line's card can't be a commander.)
+    const guessed = !commanders.some((name) => checked.commanders.includes(name));
+    const candidates = guessed ? commanderCandidates(cards, deps.registry) : [];
+    const format: DeckFormatReport = {
+      ...checked,
+      ...(attractionProblems.length === 0
+        ? {}
+        : { legal: false, violations: [...checked.violations, ...attractionProblems] }),
+      ...(candidates.length > 1 ? { commanderCandidates: candidates } : {}),
+    };
     sink.line({
       type: "result",
       cards,

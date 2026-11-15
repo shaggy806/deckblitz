@@ -1,7 +1,8 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { colorIdentityOf, createDefaultRegistry, defineCard, withinIdentity } from "engine";
-import { evaluateDecklist, formatCheck, parseDecklistText, runImportJob } from "../import-deck.js";
-import { suggestJobText } from "../import-route.js";
+import { commanderCandidates, evaluateDecklist, formatCheck, parseDecklistText, runImportJob } from "../import-deck.js";
+import { chosenCommandersOf, commandersJobText, suggestJobText } from "../import-route.js";
+import type { DeckFormatReport, ImportedCardReport } from "protocol";
 
 const registry = createDefaultRegistry();
 
@@ -867,6 +868,75 @@ describe("runImportJob", () => {
     expect(last.cards.map((c) => c.name)).toEqual(["Sol Ring", "Forest"]);
   });
 
+  /** The terminal result's `format`, for a list. */
+  async function formatOf(jobText: string) {
+    const { out, sink } = recorder();
+    await runImportJob(jobText, { registry, tags: () => null, cardData: () => null }, sink);
+    return (out.lines.at(-1) as { format: DeckFormatReport }).format;
+  }
+
+  // An alphabetical export: nothing says which legend leads.
+  const UNLABELLED = [
+    "1 Atraxa, Praetors' Voice",
+    "1 Forest",
+    "1 Krenko, Mob Boss",
+    "1 Raised by Giants",
+    "1 Sol Ring",
+    "1 Thrasios, Triton Hero",
+    "1 Tymna the Weaver",
+    "1 Wilson, Refined Grizzly",
+  ].join("\n");
+
+  it("lists the cards that could be the commander when the list doesn't say", async () => {
+    const format = await formatOf(UNLABELLED);
+    // The guess is still there, for a client that doesn't ask.
+    expect(format.commanders).toEqual(["Atraxa, Praetors' Voice"]);
+    const candidates = format.commanderCandidates ?? [];
+    // Every card that can lead, in list order: a Background can't.
+    expect(candidates.map((c) => c.name)).toEqual([
+      "Atraxa, Praetors' Voice",
+      "Krenko, Mob Boss",
+      "Thrasios, Triton Hero",
+      "Tymna the Weaver",
+      "Wilson, Refined Grizzly",
+    ]);
+    expect(candidates.every((c) => c.implemented)).toBe(true);
+    const pairs = Object.fromEntries(candidates.map((c) => [c.name, c.pairsWith]));
+    expect(pairs["Atraxa, Praetors' Voice"]).toEqual([]);
+    expect(pairs["Thrasios, Triton Hero"]).toEqual(["Tymna the Weaver"]);
+    expect(pairs["Tymna the Weaver"]).toEqual(["Thrasios, Triton Hero"]);
+    // "Choose a Background": the list's Background, which leads nothing itself.
+    expect(pairs["Wilson, Refined Grizzly"]).toEqual(["Raised by Giants"]);
+  });
+
+  it("asks nothing when the list names its commander, or only one card could be it", async () => {
+    expect((await formatOf(`${UNLABELLED}\n\nCommander\n1 Tymna the Weaver`)).commanderCandidates).toBeUndefined();
+    expect((await formatOf("1 Forest\n1 Krenko, Mob Boss\n1 Sol Ring")).commanderCandidates).toBeUndefined();
+  });
+
+  it("takes the player's answer as the list's Commander section", async () => {
+    const one = await formatOf(commandersJobText(["Krenko, Mob Boss"], UNLABELLED));
+    expect(one.commanders).toEqual(["Krenko, Mob Boss"]);
+    expect(one.commanderCandidates).toBeUndefined();
+    const pair = await formatOf(commandersJobText(["Thrasios, Triton Hero", "Tymna the Weaver"], UNLABELLED));
+    expect(pair.commanders).toEqual(["Thrasios, Triton Hero", "Tymna the Weaver"]);
+    // A name that isn't in the list is no answer: the list is read as it was.
+    const stray = await formatOf(commandersJobText(["Black Lotus"], UNLABELLED));
+    expect(stray.commanders).toEqual(["Atraxa, Praetors' Voice"]);
+    expect(stray.commanderCandidates).toHaveLength(5);
+  });
+
+  it("carries only a list of one or two names ahead of the list", () => {
+    expect(commandersJobText(undefined, "1 Forest")).toBe("1 Forest");
+    expect(commandersJobText(["a", "b", "c"], "1 Forest")).toBe("1 Forest");
+    expect(commandersJobText(["a", 3], "1 Forest")).toBe("1 Forest");
+    expect(chosenCommandersOf(commandersJobText(["Krenko, Mob Boss"], "1 Forest\n1 Sol Ring"))).toEqual({
+      text: "1 Forest\n1 Sol Ring",
+      commanders: ["Krenko, Mob Boss"],
+    });
+    expect(chosenCommandersOf("1 Forest")).toEqual({ text: "1 Forest", commanders: [] });
+  });
+
   it("reports a Sideboard section's rows apart, counted in the progress", async () => {
     const { out, sink } = recorder();
     await runImportJob(
@@ -938,5 +1008,40 @@ describe("runImportJob", () => {
     expect(failed.out.rejected).toBeNull();
     expect(failed.out.lines.at(-1)).toEqual({ type: "error", error: "tags unreadable" });
     expect(failed.out.ended).toBe(1);
+  });
+});
+
+describe("commanderCandidates", () => {
+  const row = (name: string, extra: Partial<ImportedCardReport> = {}): ImportedCardReport => ({
+    name,
+    count: 1,
+    implemented: registry.has(name),
+    found: true,
+    manaCost: null,
+    typeLine: "",
+    suggestedReplacement: null,
+    replacements: [],
+    printingId: null,
+    ...extra,
+  });
+
+  it("reads a card the pool lacks from its type line: a legendary creature could lead", () => {
+    const candidates = commanderCandidates(
+      [
+        row("Krenko, Mob Boss"),
+        // Not real names, so the pool can't have them: only the type line speaks.
+        row("Zzyx, Unwritten Legend", { typeLine: "Legendary Creature — Elf Druid", manaCost: "{1}{G}" }),
+        row("Zzyx's Unwritten Relic", { typeLine: "Legendary Artifact" }),
+        row("Zzyx's Unwritten Bear", { typeLine: "Creature — Bear" }),
+        row("Zzyx, Never Found", { typeLine: "Legendary Creature — Elf", found: false }),
+        row("Sol Ring"),
+      ],
+      registry,
+    );
+    expect(candidates.map((c) => [c.name, c.implemented])).toEqual([
+      ["Krenko, Mob Boss", true],
+      ["Zzyx, Unwritten Legend", false],
+    ]);
+    expect(candidates[1]).toMatchObject({ manaCost: "{1}{G}", pairsWith: [] });
   });
 });

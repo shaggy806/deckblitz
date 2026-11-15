@@ -84,7 +84,31 @@ export interface ImportedAttractionReport {
  * terminal `result` line. Empty when there's no commander at all. */
 export type DeckFormatReport = DeckValidationResult & {
   readonly commanders: readonly string[];
+  /**
+   * Set when the list didn't say which card is its commander (no `Commander`
+   * section, no trailing commander line — an alphabetical export) and more
+   * than one of its cards could be: `commanders` is then only a guess, and
+   * these are the cards to ask the player about, in list order. The answer
+   * goes back as the request's `commanders`, and the import is run again
+   * with it (the stand-ins are chosen for the commander's colours).
+   */
+  readonly commanderCandidates?: readonly CommanderCandidate[];
 };
+
+/** A card of an imported list that could be its commander — see
+ * {@link DeckFormatReport.commanderCandidates}. */
+export interface CommanderCandidate {
+  /** As the list's `cards` row names it. */
+  readonly name: string;
+  /** Whether the pool has it; one it lacks is read from its type line (a
+   * legendary creature), and is played as its stand-in. */
+  readonly implemented: boolean;
+  readonly manaCost: string | null;
+  readonly typeLine: string;
+  /** The other candidates it can share the command zone with (Partner,
+   * Friends forever, a Background — rule 702.124): a pair may be chosen. */
+  readonly pairsWith: readonly string[];
+}
 
 /** One newline-delimited JSON line of a `POST /import-deck` response. */
 export type ImportDeckLine =

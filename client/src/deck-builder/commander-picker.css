@@ -1,0 +1,108 @@
+/* "Which card is this deck's commander?" (CommanderPicker.tsx): a popup over
+   the landing page or the deck builder, a column of the list's candidates,
+   each a wide button with its art, name, cost and type line. Sized off the
+   window, never a fixed px: it's the same box on a short laptop and a 1440p
+   monitor. */
+.commander-picker {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 5vh, 60px) clamp(12px, 4vw, 44px);
+  background: rgb(6 9 12 / 0.76);
+  backdrop-filter: blur(3px);
+}
+.commander-picker-box {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vh, 14px);
+  width: min(100%, clamp(420px, 44vw, 720px));
+  max-height: 100%;
+  padding: clamp(14px, 2vw, 24px);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--frame-raised), var(--shadow-dialog);
+}
+.commander-picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.commander-picker-head h3 {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.commander-picker-note {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+/* The candidates scroll inside the box: a list of legends can be long. */
+.commander-picker-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.8vh, 8px);
+  min-height: 0;
+  overflow-y: auto;
+}
+.commander-choice {
+  flex: none;
+  display: grid;
+  grid-template-columns: clamp(64px, 7vw, 104px) minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(8px, 1vw, 14px);
+  padding: 0;
+  text-align: left;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  cursor: pointer;
+}
+.commander-choice:hover,
+.commander-choice:focus-visible {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+.commander-choice-art {
+  min-height: clamp(48px, 7vh, 76px);
+  background-color: var(--panel);
+  background-size: cover;
+  background-position: center 22%;
+}
+.commander-choice-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  padding: clamp(5px, 0.8vh, 9px) clamp(8px, 1vw, 12px) clamp(5px, 0.8vh, 9px) 0;
+}
+.commander-choice-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  font-size: var(--text-md);
+}
+.commander-choice-type,
+.commander-choice-note {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.commander-choice-note {
+  font-style: italic;
+}
+/* The pool writes a type line in lower case ("legendary creature — …"). */
+.commander-choice-type {
+  text-transform: capitalize;
+}
+/* "No partner": no art, so its text takes the art's column too. */
+.commander-choice-alone {
+  grid-template-columns: minmax(0, 1fr);
+}
+.commander-choice-alone .commander-choice-text {
+  padding-left: clamp(8px, 1vw, 12px);
+}

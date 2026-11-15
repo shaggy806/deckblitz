@@ -35,6 +35,7 @@ export type {
 export type { TutorialAllows, TutorialAnchor, TutorialCoachStep, TutorialGoal, TutorialInfo } from "./tutorial.js";
 
 export type {
+  CommanderCandidate,
   DeckFormatReport,
   ImportDeckLine,
   ImportedAttractionReport,

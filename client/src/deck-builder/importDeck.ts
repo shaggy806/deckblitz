@@ -106,10 +106,15 @@ export function looksLikeDecklist(text: string): boolean {
  * (one printed since it was made) or a named printing is looked up on
  * Scryfall, 75 to a request. Most lists resolve locally, in well under a
  * second.
+ *
+ * `commanders` is the player's answer for a list that didn't name its own
+ * (the first import's `format.commanderCandidates`, asked by
+ * `CommanderPicker`): the list is then read with those as its commander.
  */
 export async function importDecklist(
   text: string,
   onProgress: (progress: ImportProgress) => void,
+  commanders?: readonly string[],
 ): Promise<{
   readonly cards: readonly ImportedCardReport[]
   readonly format: DeckFormatReport | null
@@ -119,7 +124,7 @@ export async function importDecklist(
   const res = await fetch(importDeckUrl(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text }),
+    body: JSON.stringify(commanders === undefined ? { text } : { text, commanders }),
   })
   if (!res.ok) {
     const data = (await res.json().catch(() => null)) as { error?: string } | null

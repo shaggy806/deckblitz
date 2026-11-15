@@ -102,3 +102,68 @@ test('with no list on the clipboard, a box to paste it into', async ({ page, con
 
   await expectBlitzStarted(page, 'wait')
 })
+
+// A list that doesn't say which card is its commander (an alphabetical
+// export) used to have it guessed. The import now lists the cards that could
+// be, the page asks, and the list is imported again with the answer.
+test('a list with no commander named asks which card it is', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+  const card = (name: string, count = 1) => ({
+    name,
+    count,
+    implemented: true,
+    found: true,
+    manaCost: null,
+    typeLine: '',
+    suggestedReplacement: null,
+    replacements: [],
+    printingId: null,
+  })
+  const cards = [card('Ghalta, Primal Hunger'), card('Goreclaw, Terror of Qal Sisma'), card('Grizzly Bears'), card('Forest', 30)]
+  const candidate = (name: string, manaCost: string) => ({
+    name,
+    implemented: true,
+    manaCost,
+    typeLine: 'legendary creature — Elder Dinosaur',
+    pairsWith: [],
+  })
+  const asked: (readonly string[] | null)[] = []
+  await page.route('**/import-deck', (route) => {
+    const body = route.request().postDataJSON() as { commanders?: string[] }
+    asked.push(body.commanders ?? null)
+    const format =
+      body.commanders === undefined
+        ? {
+            legal: false,
+            violations: [],
+            identity: 'G',
+            commanders: ['Ghalta, Primal Hunger'],
+            commanderCandidates: [
+              candidate('Ghalta, Primal Hunger', '{10}{G}{G}'),
+              candidate('Goreclaw, Terror of Qal Sisma', '{3}{G}'),
+            ],
+          }
+        : { legal: false, violations: [], identity: 'G', commanders: body.commanders }
+    return route.fulfill({
+      status: 200,
+      contentType: 'application/x-ndjson',
+      body: JSON.stringify({ type: 'result', cards, format }) + '\n',
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    })
+  })
+
+  await page.goto('/')
+  await page.evaluate(() => navigator.clipboard.writeText('1 Ghalta, Primal Hunger\n1 Goreclaw, Terror of Qal Sisma\n1 Grizzly Bears\n30 Forest'))
+  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+
+  const picker = page.getByRole('dialog', { name: 'Choose the commander' })
+  await expect(picker.getByRole('button', { name: /Ghalta, Primal Hunger/ })).toBeVisible()
+  // Nothing has started: the question comes first.
+  await expect(page.getByRole('button', { name: 'History' })).toHaveCount(0)
+  await picker.getByRole('button', { name: /Goreclaw, Terror of Qal Sisma/ }).click()
+
+  // The second import carries the answer, and the game opens with it.
+  await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 20_000 })
+  expect(asked).toEqual([null, ['Goreclaw, Terror of Qal Sisma']])
+  await expect(page.locator('.blitz-report')).toContainText('Imported: Goreclaw, Terror of Qal Sisma')
+})

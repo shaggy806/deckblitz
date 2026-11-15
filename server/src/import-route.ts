@@ -45,6 +45,36 @@ export const SUGGEST_PREFIX = "\u0000suggest-replacement\n";
  * (`runImportJob` reads it back and checks its shape). */
 export const suggestJobText = (requestJson: string): string => SUGGEST_PREFIX + requestJson;
 
+/** What marks an import job's text as a list whose commander the player has
+ * named (asked from the report's `commanderCandidates`): this, the names as
+ * a JSON array on one line, then the list. Carried in the text for the same
+ * reason a {@link SuggestRequest} is. */
+export const COMMANDERS_PREFIX = "\u0000commanders\n";
+
+/** A list and the commanders chosen for it, as the text of an import job. At
+ * most two names (a pair), each a string; anything else is the list alone. */
+export function commandersJobText(commanders: unknown, text: string): string {
+  if (!Array.isArray(commanders)) return text;
+  const names = commanders.filter((n): n is string => typeof n === "string" && n.length > 0 && n.length <= 200);
+  if (names.length === 0 || names.length !== commanders.length || names.length > 2) return text;
+  return `${COMMANDERS_PREFIX}${JSON.stringify(names)}\n${text}`;
+}
+
+/** An import job's text read back: the list, and the commanders chosen for
+ * it when it carries any ({@link commandersJobText}). */
+export function chosenCommandersOf(jobText: string): { readonly text: string; readonly commanders: readonly string[] } {
+  if (!jobText.startsWith(COMMANDERS_PREFIX)) return { text: jobText, commanders: [] };
+  const rest = jobText.slice(COMMANDERS_PREFIX.length);
+  const end = rest.indexOf("\n");
+  try {
+    const names = JSON.parse(end < 0 ? rest : rest.slice(0, end)) as unknown;
+    const ok = Array.isArray(names) && names.every((n) => typeof n === "string");
+    return { text: end < 0 ? "" : rest.slice(end + 1), commanders: ok ? (names as string[]) : [] };
+  } catch {
+    return { text: end < 0 ? "" : rest.slice(end + 1), commanders: [] };
+  }
+}
+
 /**
  * Handles `/import-deck` (and its CORS preflight), or returns `false` for any
  * other request. Newline-delimited JSON, streamed: one `{type:"progress"}`
@@ -108,10 +138,14 @@ export function handleImportRoute(
     let text: unknown;
     try {
       const body = Buffer.concat(chunks).toString("utf8");
-      const parsed = JSON.parse(body) as { text?: unknown } | null;
+      const parsed = JSON.parse(body) as { text?: unknown; commanders?: unknown } | null;
       // One card's stand-ins: the whole body is the request, carried as the
-      // job's text.
-      text = suggesting ? suggestJobText(JSON.stringify(parsed)) : parsed?.text;
+      // job's text. A list's chosen commanders ride in its text too.
+      text = suggesting
+        ? suggestJobText(JSON.stringify(parsed))
+        : typeof parsed?.text === "string"
+          ? commandersJobText(parsed.commanders, parsed.text)
+          : parsed?.text;
     } catch (err) {
       refuse(400, err instanceof Error ? err.message : String(err));
       return;

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import type { CommanderCandidate } from 'protocol'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
+import { CommanderPicker } from '../deck-builder/CommanderPicker.tsx'
 import { importDecklist, looksLikeDecklist, resolveImport } from '../deck-builder/importDeck.ts'
 import type { ImportProgress } from '../deck-builder/importDeck.ts'
 
@@ -8,6 +10,9 @@ type Phase =
   /** The clipboard couldn't be read, or held no list: a box to paste into. */
   | { readonly kind: 'paste'; readonly note: string }
   | { readonly kind: 'importing'; readonly progress: ImportProgress | null }
+  /** The list didn't say which card is its commander, and more than one
+   * could be: asked (`CommanderPicker`), then imported again with the answer. */
+  | { readonly kind: 'choosing'; readonly text: string; readonly candidates: readonly CommanderCandidate[] }
 
 /**
  * Blitzing — goldfishing against bots. One button at the foot of the landing
@@ -55,11 +60,18 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
       ? Math.round((phase.progress.done / phase.progress.total) * 100)
       : null
 
-  const run = (text: string) => {
+  const run = (text: string, commanders?: readonly string[]) => {
     setError(null)
     setPhase({ kind: 'importing', progress: null })
-    importDecklist(text, (progress) => setPhase({ kind: 'importing', progress }))
+    importDecklist(text, (progress) => setPhase({ kind: 'importing', progress }), commanders)
       .then(({ cards, format, attractions }) => {
+        // Its commander is a guess: ask, and read the list again with the
+        // answer (the stand-ins are chosen for the commander's colours).
+        const candidates = commanders === undefined ? (format?.commanderCandidates ?? []) : []
+        if (candidates.length > 1) {
+          setPhase({ kind: 'choosing', text, candidates })
+          return
+        }
         const resolved = resolveImport(cards, format, [], attractions)
         if (resolved.commanders.length === 0) {
           throw new Error(
@@ -114,7 +126,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
         className="landing-cta landing-blitz-btn"
         data-tour="landing-blitz"
         onClick={fromClipboard}
-        disabled={busy}
+        disabled={busy || phase.kind === 'choosing'}
       >
         Have a deck copied? Click here to blitz!
       </button>
@@ -182,6 +194,13 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
               ? `Reading your list: ${phase.progress.done} of ${phase.progress.total} cards`
               : 'Reading your list…'}
         </p>
+      ) : null}
+      {phase.kind === 'choosing' ? (
+        <CommanderPicker
+          candidates={phase.candidates}
+          onPick={(picked) => run(phase.text, picked)}
+          onCancel={() => setPhase({ kind: 'idle' })}
+        />
       ) : null}
       {error !== null ? (
         <p className="landing-blitz-error" role="alert">

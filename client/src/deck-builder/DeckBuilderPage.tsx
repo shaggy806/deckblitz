@@ -15,6 +15,8 @@ import {
 } from './decks.ts'
 import type { SavedDeck } from './decks.ts'
 import { DeckEditor } from './DeckEditor.tsx'
+import type { CommanderCandidate } from 'protocol'
+import { CommanderPicker } from './CommanderPicker.tsx'
 import { importDecklist, resolveImport } from './importDeck.ts'
 import type { ImportProgress, ImportReport } from './importDeck.ts'
 import { ReplacementReview } from './ReplacementReview.tsx'
@@ -311,13 +313,23 @@ function ImportPanel({
       .catch(() => setPasteNote("The browser didn't allow reading the clipboard: press Ctrl+V in the box."))
   }
 
-  const submit = (e: FormEvent) => {
-    e.preventDefault()
+  // The cards that could be the list's commander, while the player is asked
+  // which (`CommanderPicker`): a list that doesn't say has it guessed.
+  const [asking, setAsking] = useState<readonly CommanderCandidate[] | null>(null)
+
+  const runImport = (commanders?: readonly string[]) => {
+    setAsking(null)
     setLoading(true)
     setProgress(null)
     setError(null)
-    importDecklist(text, setProgress)
+    importDecklist(text, setProgress, commanders)
       .then(({ cards: cardReports, format, sideboard, attractions }) => {
+        // Asked once: the answer goes back with the list, read again for it.
+        const candidates = commanders === undefined ? (format?.commanderCandidates ?? []) : []
+        if (candidates.length > 1) {
+          setAsking(candidates)
+          return
+        }
         const resolved = resolveImport(cardReports, format, sideboard, attractions)
         const deck = createDeckFromImport(
           resolved.name,
@@ -331,6 +343,10 @@ function ImportPanel({
       })
       .catch((err: unknown) => setError(err instanceof Error ? err.message : String(err)))
       .finally(() => setLoading(false))
+  }
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    runImport()
   }
 
   return (
@@ -366,6 +382,9 @@ function ImportPanel({
         {pasteNote !== null ? <p className="muted db-import-note">{pasteNote}</p> : null}
       </form>
       {loading ? <ImportProgressBar progress={progress} /> : null}
+      {asking !== null ? (
+        <CommanderPicker candidates={asking} onPick={runImport} onCancel={() => setAsking(null)} />
+      ) : null}
       {error ? <div className="error-banner">⚠ {error}</div> : null}
     </div>
   )
