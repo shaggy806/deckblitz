@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 const PACK_TEXT =
   "Pack tactics — Whenever this creature attacks, if you attacked with creatures with total power 6 or greater this combat, draw a card.";
 const ANIMATE_TEXT =
-  "{3}{G}: Until end of turn, this creature has base power and toughness 5/3, gains trample, and isn't a Human.";
+  "{3}{G}: Until end of turn, this creature has base power and toughness 5/3, gains trample, and is a Werewolf.";
 
 export default defineCard({
   name: "Werewolf Pack Leader",
@@ -39,7 +39,7 @@ export default defineCard({
             keywords: ["trample"],
             duration: "end-of-turn",
           },
-          { kind: "become", target: "source", removeSubtypes: ["Human"], duration: "end-of-turn" },
+          { kind: "become", target: "source", setSubtypes: ["Werewolf"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 27595.
 
 const ENTER_TEXT =
-  "When this enchantment enters, reveal the top five cards of your library. Put a land card from among them onto the battlefield tapped and the rest into your graveyard.";
+  "When this enchantment enters, look at the top five cards of your library. Put a land card from among them onto the battlefield tapped and the rest into your graveyard.";
 
 export default defineCard({
   name: "Hit It!",
@@ -19,7 +19,6 @@ export default defineCard({
         kind: "look-and-choose",
         zone: "library",
         count: 5,
-        reveal: true,
         min: 1,
         max: 1,
         filter: { type: "land" },
