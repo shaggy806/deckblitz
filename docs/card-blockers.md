@@ -666,6 +666,10 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 332 (2026-11-14/15, `author-by-set TRK,TRC`, Star Trek's second run)** — 18 of the 19
+  B331 left authored, each on a feature of its own (`COMPLETED.md` lists them). Star Trek Commander
+  is whole; Star Trek's one left is All Good Things..., which waits on rulings for "all cards
+  exiled with this Saga share a card type" with one card or none (`B332.json`).
 - **Batch 331 (2026-11-14, `author-by-set TRK,TRC`, completing Star Trek)** — after the Oracle
   snapshot refresh brought the released text (no rulings yet), 16 of the sets' 35 cards left were
   authored: Kira Nerys, Firebrand (a creature entering attacking by another permanent's

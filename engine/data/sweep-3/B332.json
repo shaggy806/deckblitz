@@ -1,0 +1,161 @@
+{
+ "batch": "B332",
+ "status": "done",
+ "ranks": "Star Trek (TRK) and Star Trek Commander (TRC), completing the set, second run (author-by-set TRK,TRC, 2026-11-14/15): 18 of the 19 B331 left authored; All Good Things... waits on rulings.",
+ "authored": [
+  {
+   "name": "The City on the Edge of Forever",
+   "files": [
+    "engine/src/cards/pool/the-city-on-the-edge-of-forever.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Dr. Beverly Crusher",
+   "files": [
+    "engine/src/cards/pool/dr-beverly-crusher.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Brad Boimler, Eager Ensign",
+   "files": [
+    "engine/src/cards/pool/brad-boimler-eager-ensign.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Lwaxana Troi, Charming Guest",
+   "files": [
+    "engine/src/cards/pool/lwaxana-troi-charming-guest.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Dominion Saboteur",
+   "files": [
+    "engine/src/cards/pool/dominion-saboteur.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Scotty, Miracle Worker",
+   "files": [
+    "engine/src/cards/pool/scotty-miracle-worker.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Marooned",
+   "files": [
+    "engine/src/cards/pool/marooned.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "T'Pring, Never Parted",
+   "files": [
+    "engine/src/cards/pool/tpring-never-parted.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "The Best of Both Worlds",
+   "files": [
+    "engine/src/cards/pool/the-best-of-both-worlds.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "U.S.S. Farragut, Bold Explorer",
+   "files": [
+    "engine/src/cards/pool/uss-farragut-bold-explorer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "Chief Montgomery Scott",
+   "files": [
+    "engine/src/cards/pool/chief-montgomery-scott.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "Cmdr. Troi, Outgoing Empath",
+   "files": [
+    "engine/src/cards/pool/cmdr-troi-outgoing-empath.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "Ensign Pavel Chekov",
+   "files": [
+    "engine/src/cards/pool/ensign-pavel-chekov.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Gift of Perfection",
+   "files": [
+    "engine/src/cards/pool/gift-of-perfection.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "Dr. McCoy, Surly Surgeon",
+   "files": [
+    "engine/src/cards/pool/dr-mccoy-surly-surgeon.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Q, Stacking the Deck",
+   "files": [
+    "engine/src/cards/pool/q-stacking-the-deck.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "The Holodeck",
+   "files": [
+    "engine/src/cards/pool/the-holodeck.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Võx, Child of the Collective",
+   "files": [
+    "engine/src/cards/pool/vox-child-of-the-collective.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "All Good Things...",
+   "needs": [
+    "condition:exiled-with-source-share-card-type"
+   ],
+   "size": "small",
+   "why": "Waits on rulings (none published 2026-11-14): whether \"all cards exiled with this Saga share a card type\" holds with one card or none, and whether it needs one type common to all (an artifact creature, a creature land and an artifact land share pairwise but not all). The comprehensive rules and existing rulings (Possibility Storm: two cards share one if they have one in common) don't settle it. The condition itself is small: build it once the ruling is out."
+  }
+ ]
+}

@@ -97,17 +97,17 @@ section keeps only what to do next.
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
   `ASSIMILATE` in `helpers.ts`), and so are Marvel: Darkhold Destiny's previews (MDD, MDC) and
   Mystery Booster Commander (MBC) (batch 269). **The walk is caught up**: every released and
-  previewed set is whole but Star Trek's 19 (below), and Nauctis (NAU, out 2027-02-05) has no cards in the
+  previewed set is whole but Star Trek's All Good Things... (below), and Nauctis (NAU, out 2027-02-05) has no cards in the
   snapshot yet. **Next: refresh the snapshot** (`npm run gen:oracle -w engine`) once new previews
   are out, then `cards:sets -- --sets` picks up what it brings. MDD's Hela and Magik wait on
-  release rulings (`mechanic:vengeance`, `B269.json`). **Completing Star Trek** (the user's ask,
-  2026-11-14: its cards rank past 18,000 on EDHREC, so the by-rank work won't reach them): the
-  snapshot was refreshed after the release and the first `/author-by-set TRK,TRC` run (B331)
-  authored 16 of the 35 left. **19 are left, each a small feature recorded in `B331.json`**: re-run
-  `/author-by-set TRK,TRC` (`npm run cards:sets -w engine -- --set TRK,TRC --left` lists them);
-  next by rank, Dr. Beverly Crusher (`static:life-gain-trigger-doubling`). All Good Things... and
-  Võx, Child of the Collective also wait on rulings (none published 2026-11-14); The Holodeck needs a
-  play permission from outside the game (the sideboard) and its client display.
+  release rulings (`mechanic:vengeance`, `B269.json`). **Star Trek is complete but one** (B331-B332, `/author-by-set TRK,TRC`, 2026-11-14/15, after
+  the snapshot refresh): Star Trek Commander is whole (173 of 173), Star Trek 293 of 294. **All Good
+  Things...** waits on rulings (none published yet): whether "all cards exiled with this Saga share a
+  card type" holds with one card or none, and whether it needs one type common to all; the
+  condition (`condition:exiled-with-source-share-card-type`) is small once the ruling is out.
+  Re-read the set's cards when Star Trek's rulings are published (`npm run gen:oracle -w engine`,
+  then `card:text -- --offline`): Võx, Child of the Collective was authored on the text as written
+  (a spell both an artifact creature and a Spacecraft has undaunted twice).
 - **Cards banned in Commander for power: 7 left, each blocked** (`B52.json`). Channel, Erayo,
   Fastbond, Flash, Nadu, Sylvan Primordial and Trade Secrets each wait on a feature of their own
   (`docs/card-blockers.md`).
