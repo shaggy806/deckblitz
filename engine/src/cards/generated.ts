@@ -14571,6 +14571,7 @@ import _poolKagemaroFirstToSuffer from "./pool/kagemaro-first-to-suffer.js";
 import _poolKagemarosClutch from "./pool/kagemaros-clutch.js";
 import _poolKaghaShadowArchdruid from "./pool/kagha-shadow-archdruid.js";
 import _poolKaheeraTheOrphanguard from "./pool/kaheera-the-orphanguard.js";
+import _poolKaiWinnFaithlessLeader from "./pool/kai-winn-faithless-leader.js";
 import _poolKaijinOfTheVanishingTouch from "./pool/kaijin-of-the-vanishing-touch.js";
 import _poolKaimaTheFracturedCalm from "./pool/kaima-the-fractured-calm.js";
 import _poolKainTraitorousDragoon from "./pool/kain-traitorous-dragoon.js";
@@ -15419,6 +15420,7 @@ import _poolKytheonHeroOfAkros from "./pool/kytheon-hero-of-akros.js";
 import _poolKytheonsIrregulars from "./pool/kytheons-irregulars.js";
 import _poolKytheonsTactics from "./pool/kytheons-tactics.js";
 import _poolLaForgePerceptiveEngineer from "./pool/la-forge-perceptive-engineer.js";
+import _poolLaForgeThoughtfulAsEver from "./pool/la-forge-thoughtful-as-ever.js";
 import _poolLaanNoonienSinghSecurity from "./pool/laan-noonien-singh-security.js";
 import _poolLabRats from "./pool/lab-rats.js";
 import _poolLaboratoryBrute from "./pool/laboratory-brute.js";
@@ -28128,6 +28130,7 @@ import _poolTheGreatWork from "./pool/the-great-work.js";
 import _poolTheGreyHavens from "./pool/the-grey-havens.js";
 import _poolTheGrimCaptain from "./pool/the-grim-captain.js";
 import _poolTheGrimCaptainsLocker from "./pool/the-grim-captains-locker.js";
+import _poolTheGuardianOfForever from "./pool/the-guardian-of-forever.js";
 import _poolTheHauntOfHightower from "./pool/the-haunt-of-hightower.js";
 import _poolTheHive from "./pool/the-hive.js";
 import _poolTheHorusHeresy from "./pool/the-horus-heresy.js";
@@ -47752,6 +47755,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKagemarosClutch,
   _poolKaghaShadowArchdruid,
   _poolKaheeraTheOrphanguard,
+  _poolKaiWinnFaithlessLeader,
   _poolKaijinOfTheVanishingTouch,
   _poolKaimaTheFracturedCalm,
   _poolKainTraitorousDragoon,
@@ -48600,6 +48604,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKytheonsIrregulars,
   _poolKytheonsTactics,
   _poolLaForgePerceptiveEngineer,
+  _poolLaForgeThoughtfulAsEver,
   _poolLaanNoonienSinghSecurity,
   _poolLabRats,
   _poolLaboratoryBrute,
@@ -61309,6 +61314,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheGreyHavens,
   _poolTheGrimCaptain,
   _poolTheGrimCaptainsLocker,
+  _poolTheGuardianOfForever,
   _poolTheHauntOfHightower,
   _poolTheHive,
   _poolTheHorusHeresy,
@@ -80946,6 +80952,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kagemaros-clutch": _poolKagemarosClutch,
   "pool/kagha-shadow-archdruid": _poolKaghaShadowArchdruid,
   "pool/kaheera-the-orphanguard": _poolKaheeraTheOrphanguard,
+  "pool/kai-winn-faithless-leader": _poolKaiWinnFaithlessLeader,
   "pool/kaijin-of-the-vanishing-touch": _poolKaijinOfTheVanishingTouch,
   "pool/kaima-the-fractured-calm": _poolKaimaTheFracturedCalm,
   "pool/kain-traitorous-dragoon": _poolKainTraitorousDragoon,
@@ -81794,6 +81801,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kytheons-irregulars": _poolKytheonsIrregulars,
   "pool/kytheons-tactics": _poolKytheonsTactics,
   "pool/la-forge-perceptive-engineer": _poolLaForgePerceptiveEngineer,
+  "pool/la-forge-thoughtful-as-ever": _poolLaForgeThoughtfulAsEver,
   "pool/laan-noonien-singh-security": _poolLaanNoonienSinghSecurity,
   "pool/lab-rats": _poolLabRats,
   "pool/laboratory-brute": _poolLaboratoryBrute,
@@ -94503,6 +94511,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-grey-havens": _poolTheGreyHavens,
   "pool/the-grim-captain": _poolTheGrimCaptain,
   "pool/the-grim-captains-locker": _poolTheGrimCaptainsLocker,
+  "pool/the-guardian-of-forever": _poolTheGuardianOfForever,
   "pool/the-haunt-of-hightower": _poolTheHauntOfHightower,
   "pool/the-hive": _poolTheHive,
   "pool/the-horus-heresy": _poolTheHorusHeresy,

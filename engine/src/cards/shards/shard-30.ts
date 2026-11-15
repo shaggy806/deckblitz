@@ -488,6 +488,7 @@ import _poolJodahsCodex from "../pool/jodahs-codex.js";
 import _poolJoelResoluteSurvivor from "../pool/joel-resolute-survivor.js";
 import _poolJohtullWurm from "../pool/johtull-wurm.js";
 import _poolJoust from "../pool/joust.js";
+import _poolKaiWinnFaithlessLeader from "../pool/kai-winn-faithless-leader.js";
 import _poolKalastriaHighborn from "../pool/kalastria-highborn.js";
 import _poolKalemnesCaptain from "../pool/kalemnes-captain.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
@@ -1547,6 +1548,7 @@ const shard: CardShard = {
     _poolJoelResoluteSurvivor,
     _poolJohtullWurm,
     _poolJoust,
+    _poolKaiWinnFaithlessLeader,
     _poolKalastriaHighborn,
     _poolKalemnesCaptain,
     _poolKambalConsulOfAllocation,

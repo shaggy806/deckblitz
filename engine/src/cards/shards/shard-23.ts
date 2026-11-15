@@ -900,6 +900,7 @@ import _poolTheCrowdGoesWild from "../pool/the-crowd-goes-wild.js";
 import _poolTheCrueltyOfGix from "../pool/the-cruelty-of-gix.js";
 import _poolTheFinalDays from "../pool/the-final-days.js";
 import _poolTheGreatSynthesis from "../pool/the-great-synthesis.js";
+import _poolTheGuardianOfForever from "../pool/the-guardian-of-forever.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolTheMasterMultiplied from "../pool/the-master-multiplied.js";
 import _poolTheTemporalAnchor from "../pool/the-temporal-anchor.js";
@@ -1949,6 +1950,7 @@ const shard: CardShard = {
     _poolTheCrueltyOfGix,
     _poolTheFinalDays,
     _poolTheGreatSynthesis,
+    _poolTheGuardianOfForever,
     _poolTheLordMasterOfHell,
     _poolTheMasterMultiplied,
     _poolTheTemporalAnchor,

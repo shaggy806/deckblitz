@@ -2675,7 +2675,10 @@
   "effect:draw-former-controller-of-target",
   "static:granted-static-land-permissions",
   "amount:count-per-n-rounded-down",
-  "effect:drawn-this-way-count"
+  "effect:drawn-this-way-count",
+  "trigger:activates-ability-source-any-zone",
+  "amount:permanents-you-put-counters-on-this-turn",
+  "effect:delayed-return-sacrificed-card"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

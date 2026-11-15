@@ -521,6 +521,7 @@ import _poolKopalaWardenOfWaves from "../pool/kopala-warden-of-waves.js";
 import _poolKozileksCommand from "../pool/kozileks-command.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
+import _poolLaForgeThoughtfulAsEver from "../pool/la-forge-thoughtful-as-ever.js";
 import _poolLairDelve from "../pool/lair-delve.js";
 import _poolLancerSliver from "../pool/lancer-sliver.js";
 import _poolLastStand from "../pool/last-stand.js";
@@ -1550,6 +1551,7 @@ const shard: CardShard = {
     _poolKozileksCommand,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
+    _poolLaForgeThoughtfulAsEver,
     _poolLairDelve,
     _poolLancerSliver,
     _poolLastStand,

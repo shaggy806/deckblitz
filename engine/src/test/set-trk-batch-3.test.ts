@@ -14,6 +14,7 @@ import {
   enter,
   hand,
   lands,
+  nextTurn,
   pickTargets,
   ref,
   settle,
@@ -370,5 +371,29 @@ describe("Nog, Ambitious Cadet", () => {
     game.dispatch({ type: "play-land", player: A, card: mountain });
     expect(zone(game, mountain)).toBe("battlefield");
     expect(game.canDispatch({ type: "play-land", player: A, card: toHand(game, "Plains") })).not.toBeNull();
+  });
+});
+
+describe("Kai Winn, Faithless Leader", () => {
+  it("drains an opponent for a mana ability of a permanent and a cycling from hand with the chosen name", () => {
+    const { game } = table();
+    const kai = spawn(game, "Kai Winn, Faithless Leader");
+    game.state.objects[kai].chosenNames = ["Llanowar Elves"];
+    const elves = spawn(game, "Llanowar Elves", B);
+    nextTurn(game); // bob's turn, his priority
+    game.dispatch({ type: "activate-ability", player: B, source: elves, abilityIndex: 0, targets: [] });
+    settle(game);
+    expect(game.state.players[B].life).toBe(17);
+
+    game.state.objects[kai].chosenNames = ["Street Wraith"];
+    const wraith = toHand(game, "Street Wraith", B);
+    const cycle = game
+      .legalActions(B)
+      .find((x) => x.kind === "activate-ability" && x.source === wraith);
+    expect(cycle).toBeDefined();
+    if (cycle?.kind !== "activate-ability") return;
+    game.dispatch({ type: "activate-ability", player: B, source: wraith, abilityIndex: cycle.abilityIndex, targets: [] });
+    settle(game);
+    expect(game.state.players[B].life).toBe(17 - 2 - 3);
   });
 });

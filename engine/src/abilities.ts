@@ -2648,6 +2648,12 @@ export type TriggerKind =
        * another player's permanent's ability ("any player may activate this
        * ability") doesn't count. */
       readonly sourceControlledByActivator?: true;
+      /** With `source`: a **source** of any zone, not only a permanent — Kai
+       * Winn, Faithless Leader's "activates an ability of a source with the
+       * chosen name": a card cycled from a hand, an ability activated from a
+       * graveyard (rule 113.6), read as it is where the ability left it (a
+       * permanent its own cost sacrificed, as it last existed there). */
+      readonly sourceAnyZone?: true;
       /** "An ability of **a card in your graveyard**" (Neerdiv, Devious
        * Diver): one activated from the graveyard (`ActivatedAbility.zone` —
        * an unearth, an embalm, a scavenge), the card owned by this

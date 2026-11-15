@@ -35654,10 +35654,11 @@ export class Game {
             // cost sacrificed (a fetchland, a Clue) is still a permanent's
             // ability (rule 113.7a), read as it last existed on the
             // battlefield; a card's in a hand or graveyard never is.
-            if (event.ofPermanent !== true) return false;
+            // `sourceAnyZone`: a card's too, wherever it was (Kai Winn).
+            if (event.ofPermanent !== true && spec.sourceAnyZone !== true) return false;
             const source = this.state.objects[event.source];
             if (source === undefined) return false;
-            const departed = source.zone !== "battlefield";
+            const departed = event.ofPermanent === true && source.zone !== "battlefield";
             // "An artifact they control" (`sourceControlledByActivator`):
             // the activating player's, bound as the engine binds a player set.
             const sourceFilter =
