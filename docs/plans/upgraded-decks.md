@@ -203,6 +203,19 @@ budgets, so they are other games of the same pods, not the clocked games themsel
   their own board and wasting Shiko's copy.
 - **Temur Roar** still wins twice its share: a board of big fliers is what v2 plays best.
   Cutting it back would even the field from the list side; not done, since the ask was stronger
-  decks.
+  decks. **Done 2026-11-15, from the commander's side** (the user's call): Ureni of the
+  Unwritten left for a strong deck of her own (`strong-bot-decks.md`), Eshki, Temur's Roar,
+  the precon's second commander, leads both lists, and the upgrade was rebuilt around her
+  (26 spells: cheap fat creatures such as Lovestruck Beast, Surrak, Elder Gargaroth, Etali,
+  Quartzwood Crasher and Carnage Tyrant; Goreclaw and Temur Battlecrier to cut their cost;
+  Beast Whisperer, Garruk's Uprising, Rishkar's Expertise and Return of the Wildspeaker for
+  cards; Lightning Greaves for Eshki; Ureni herself, Utvara Hellkite, Scourge of Valkas,
+  Ganax, Savage Ventmaw, Dragonspeaker Shaman and Bloomvine Regent out; the same mana
+  base). Measured that day, v2 in every seat, 8 workers: the precon wins 6 of 20 among the
+  fourteen precons (30%, fourth; 71% with Ureni on 2026-10-03), and the upgrade 6 of 20
+  among the thirteen upgrades a blitz deals (30%, level with three others behind Sultai
+  Arisen and Family Matters at 40%; 54% before). In the same 64 games Grave Danger
+  (Upgraded) won none of 20 and Abzan Armor (Upgraded) one: both were the weak decks
+  already, and whether that day's bot changes cost Grave Danger more is in `BACKLOG.md`.
 - **The bench decks** are still precons, so every bot gate and bench stays comparable with its
   history.
