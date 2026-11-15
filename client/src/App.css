@@ -4445,9 +4445,12 @@
    card under the pointer, by the same 1.65x from that same point (the user,
    2026-11-14: "scale it the same way the card is") — so they sit on its top
    edge at either size, still over it, and the pointer keeps the card grown
-   while it follows them. */
+   while it follows them. Their full size is the grown card's (the user, the
+   same day): `--pill` draws them 1/1.65 of it on a card at the fan's size,
+   small in the lowered tray, and the scale brings them back up. */
 .hand-card-actions {
-  --act-h: calc(22px * var(--ui));
+  --pill: calc(1 / 1.65);
+  --act-h: calc(22px * var(--ui) * var(--pill));
   position: absolute;
   left: 0;
   right: 0;
@@ -4455,7 +4458,7 @@
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  gap: 3px;
+  gap: calc(3px * var(--pill));
   z-index: 2;
   pointer-events: none;
   transform-origin: 50% calc(100% + var(--card-w) * 1.4 - var(--act-h) / 2);
@@ -4488,13 +4491,13 @@
   max-width: var(--card-w);
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 calc(10px * var(--ui));
-  font-size: var(--text-sm);
+  padding: 0 calc(10px * var(--ui) * var(--pill));
+  font-size: calc(var(--text-sm) * var(--pill));
   font-weight: 700;
   white-space: nowrap;
   color: var(--on-accent);
   background: var(--accent);
-  border: 1px solid var(--gold);
+  border: calc(1px * var(--pill)) solid var(--gold);
   border-radius: 999px;
   box-shadow: var(--shadow-raised);
 }
@@ -4502,9 +4505,12 @@
   background: var(--gold);
 }
 /* The "All cards" grid's cards hold their pills too (they aren't fanned:
-   no --r or --y). */
+   no --r or --y), at full size: nothing there grows under the pointer. */
 .hand-grid .hand-card {
   position: relative;
+}
+.hand-grid .hand-card-actions {
+  --pill: 1;
 }
 /* The turn-over button on a double-faced card in the zone viewer: a round
    corner badge over the top of the art (the title bar's right end is the
