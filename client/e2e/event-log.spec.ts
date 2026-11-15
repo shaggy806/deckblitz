@@ -68,6 +68,9 @@ test('the History lists the whole game after many frames, and again after a relo
   const hand = page.locator('.hand-cards .hand-card')
   const held = await hand.count()
   await page.locator('.hand-cards .hand-card .card-tile', { hasText: 'Divination' }).first().dispatchEvent('click')
+  // Once the cast has landed (the card has left the hand): Pass is enabled
+  // before it too, and a pass sent ahead of the cast's answer is dropped.
+  await expect(hand).toHaveCount(held - 1, { timeout: 20_000 })
   await expect(pass).toBeEnabled({ timeout: 20_000 })
   await pass.click()
   await expect(hand).toHaveCount(held + 1, { timeout: 20_000 })

@@ -26,30 +26,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   `protocol`'s `RoomSettings`, checked in `PendingRoom.setSettings` and applied in
   `toGameConfig`, as starting life and the first player are.
 - **Server-side deck save and share** is still unscoped. Decks live in `localStorage`.
-- **The library and the deck builder load every card definition.** Both fetch all 32 card
-  shards (`client/src/cards/cardData.ts`): about 3.1 MB, 610 kB gzipped, at 5,400 cards; 6.3 MB
-  (1.26 MB brotli) at 12,089 definitions on 2026-10-13, and growing with the pool. Running the
-  shards blocks the page in one go (~0.25 s on a fast desktop, then ~0.3 s assembling and
-  drawing the library), so the bar can't repaint and seems to stall near the end — the user saw
-  it on the live site (2026-10-13); the largest JS cost is the definition builder's defaults.
-  **Their stall (postponed, 2026-10-13):** in their own Chrome, only on the first visit (a reload
-  is instant), on this same PC. Not reproduced: cold loads in fresh Chrome and Edge profiles and
-  Playwright's Chromium on the same PC and network all showed cards in 0.7–0.85 s with no long
-  task. Suspects: an extension in their profile, or the CPU pegged by test runs at the time. Next:
-  have them try an incognito window, and time the stall.
-  **It's a request that never answers, not a freeze (2026-10-14):** the user's next stall sat at
-  94% on the loading bar, which is 30 of the 32 card shards (`PoolLoading.tsx` counts shards), so
-  two shard requests never came back. Not reproduced: the built-in browser on this PC loaded
-  cleanly twice, and 15 rounds of all 32 shards fetched in parallel past Cloudflare's cache
-  (480 requests, through the tunnel to Caddy) all answered 200 within 1.65 s. cloudflared logged
-  QUIC tunnel connections dropping and reconnecting earlier that day (16:10, 17:56, 18:01 UTC),
-  none near the stall; Caddy keeps no access log. Next time: the Network panel's pending rows
-  (which shards, the protocol). Built the same day: a shard still out after 5 s with none
-  arriving is asked for again under a `?retry=N` URL (`cards/cardData.ts`, `cards/shardFiles.ts`),
-  so a hung request costs about 5 s rather than a reload. Why a request hangs is still unknown.
-  The pages read only printed fields, each ability's text (colour identity)
-  and the tokens a card makes. A generated catalog of just those, sharded the same way, would be
-  a fraction of the size. The game page loads no definitions up front.
 - **The library's card viewer has no printings panel** (the user's ask, 2026-10-09). Add "just
   a scrollable list of all the sets/printings of a card"; clicking a printing changes the
   displayed one to it. Also keep the next/previous buttons still: today they move as the

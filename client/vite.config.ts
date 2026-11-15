@@ -25,12 +25,17 @@ const shardFiles = (): Plugin => ({
     order: 'post',
     handler(_html, ctx) {
       const files: string[] = []
+      // The card catalog's pieces, the same way (`cardCatalog` below).
+      const catalog: string[] = []
       for (const output of Object.values(ctx.bundle ?? {})) {
         if (output.type !== 'chunk') continue
         const shard = /[\\/]cards[\\/]shards[\\/]shard-(\d+)\.js$/.exec(output.facadeModuleId ?? '')
         if (shard !== null) files[Number(shard[1])] = output.fileName
+        const piece = output.facadeModuleId ?? ''
+        if (piece.startsWith(CATALOG_MODULE)) catalog[Number(piece.slice(CATALOG_MODULE.length))] = output.fileName
       }
       if (files.length === 0) throw new Error('card-shard-files: no card shard chunks in the bundle')
+      if (catalog.length === 0) throw new Error('card-catalog-files: no card catalog chunks in the bundle')
       return [
         {
           tag: 'script',
@@ -38,10 +43,49 @@ const shardFiles = (): Plugin => ({
           children: JSON.stringify(files),
           injectTo: 'head',
         },
+        {
+          tag: 'script',
+          attrs: { type: 'application/json', id: 'card-catalog-files' },
+          children: JSON.stringify(catalog),
+          injectTo: 'head',
+        },
       ]
     },
   },
 })
+
+// The card catalog (`engine`'s `cards/catalog.ts`): the whole pool with its
+// behaviour cut away, which is what the library and the deck builder load
+// (`src/cards/catalogChunks.ts`). It's made here, from the built engine's
+// pool, the first time a page asks for a piece of it — so it always matches
+// `engine/dist`, with no generated file to keep in step — and each piece is
+// served as a module that is one `JSON.parse` of a string: data is parsed
+// several times faster than the same thing as an object literal is run.
+// (Each id ends in the name its built file gets: "card-catalog-3".)
+const CATALOG_ID = 'virtual:card-catalog/card-catalog-'
+const CATALOG_MODULE = `\0${CATALOG_ID}`
+const cardCatalog = (): Plugin => {
+  let pieces: Promise<readonly string[]> | null = null
+  const make = async (): Promise<readonly string[]> => {
+    // The engine's barrel, and with it every card: imported only now, so a
+    // dev server that never opens the library never pays for it.
+    const engine = await import('engine')
+    return engine.buildCardCatalog(engine.POOL_CARDS, engine.TOKEN_CARDS).map((piece) => JSON.stringify(piece))
+  }
+  return {
+    name: 'deckblitz:card-catalog',
+    resolveId(id) {
+      return id.startsWith(CATALOG_ID) ? `\0${id}` : null
+    },
+    async load(id) {
+      if (!id.startsWith(CATALOG_MODULE)) return null
+      pieces ??= make()
+      const piece = (await pieces)[Number(id.slice(CATALOG_MODULE.length))]
+      if (piece === undefined) throw new Error(`card-catalog: no piece "${id.slice(CATALOG_MODULE.length)}"`)
+      return `export default JSON.parse(${JSON.stringify(piece)})`
+    },
+  }
+}
 
 // The library's dev-only "Build ASAP" flags (`src/library/buildAsap.ts`): the
 // cards not in the pool yet that the user wants built ahead of EDHREC rank,
@@ -106,7 +150,7 @@ const buildAsap = (): Plugin => ({
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), engineLocal(), shardFiles(), buildAsap()],
+  plugins: [react(), engineLocal(), cardCatalog(), shardFiles(), buildAsap()],
   // The landing page's dev menu of test rooms (`src/lobby/devRooms.ts`)
   // reads dev-rooms' command port (`server/scripts/dev-rooms.mjs`) through
   // this: same-origin, so no CORS, and the dev server only — a build has

@@ -35,6 +35,7 @@ export * from "./cards/edhrec-rank.js";
 export * from "./cards/release-date.js";
 export * from "./cards/flavor-names.js";
 export * from "./cards/card-shards.js";
+export * from "./cards/catalog.js";
 export { CardRegistry } from "./cards/card-registry.js";
 export { COMMANDER_BANNED, PINNED_ART, TOKEN_NAMES } from "./cards/generated-index.js";
 export { attackCompanyViolations, attackingViolations } from "./combat/attacking.js";

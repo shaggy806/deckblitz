@@ -3,18 +3,23 @@ import { join } from 'node:path'
 import { expect, test } from '@playwright/test'
 import type { Page, Route } from '@playwright/test'
 
-// The library and the deck builder wait on all 32 card shards before they
-// render (main.tsx), drawing a progress bar meanwhile (cards/PoolLoading.tsx).
-// Each test here holds the shards' responses and lets them through by hand,
+// The library and the deck builder wait on every piece of the card catalog
+// before they render (main.tsx), drawing a progress bar meanwhile
+// (cards/PoolLoading.tsx). "Shards" below are those pieces: the name is from
+// when the pages loaded every card shard, 32 files of whole definitions.
+// Each test here holds the pieces' responses and lets them through by hand,
 // so the bar can be read part-way.
 //
 // With E2E_SHOTS_DIR set, the tests also save screenshots there: the bar
 // part-way and the loaded page at three screen sizes, and the bar filling a
 // shard at a time as a numbered frame sequence.
 
-/** A shard's file, in the dev server (`…/cards/shards/shard-07.js`) or a
- * build (`assets/shard-07-<hash>.js`). */
-const SHARD = /\/shard-\d+(?:-[\w-]+)?\.js(?:\?.*)?$/
+/** One of the card catalog's pieces (what those pages load the pool from,
+ * `cards/catalogChunks.ts`), in the dev server (a virtual module,
+ * `…card-catalog/card-catalog-3`) or a build (`assets/card-catalog-3-<hash>.js`). */
+const SHARD = /card-catalog-\d+(?:-[\w-]+\.js)?(?:\?.*)?$/
+/** How many pieces the catalog comes in (the engine's `CARD_CATALOG_CHUNKS`). */
+const PIECES = 8
 
 const SIZES = [
   { width: 1366, height: 768 },
@@ -47,7 +52,7 @@ async function holdShards(page: Page) {
   })
   return {
     /** Waits until all `count` shards have been asked for. */
-    async requested(count = 32) {
+    async requested(count = PIECES) {
       await expect.poll(() => held.length, { timeout: 30_000 }).toBe(count)
     },
     /** Lets the next `count` held shards through. */
@@ -82,12 +87,12 @@ for (const { path, name, ready } of [
     const bar = progressBar(page)
     await expect(bar).toBeVisible()
     await expect(bar).toHaveAttribute('aria-valuemin', '0')
-    await expect(bar).toHaveAttribute('aria-valuemax', '32')
+    await expect(bar).toHaveAttribute('aria-valuemax', String(PIECES))
     await expect(bar).toHaveAttribute('aria-valuenow', '0')
 
-    await shards.release(12)
-    await expect(bar).toHaveAttribute('aria-valuenow', '12', { timeout: 30_000 })
-    await expect(bar).toHaveAttribute('aria-valuetext', '38% (12 of 32 card files)')
+    await shards.release(3)
+    await expect(bar).toHaveAttribute('aria-valuenow', '3', { timeout: 30_000 })
+    await expect(bar).toHaveAttribute('aria-valuetext', '38% (3 of 8 card files)')
     await expect(page.getByText('38%')).toBeVisible()
     await shotAtEverySize(page, `${name}-midload`)
     if (shotsDir !== undefined && name === 'library') {
@@ -97,7 +102,7 @@ for (const { path, name, ready } of [
     }
 
     // The rest one at a time, a frame a step, for the frame sequence.
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < PIECES - 3; i++) {
       await shards.release(1)
       if (shotsDir !== undefined) {
         await page.waitForTimeout(100)
@@ -118,8 +123,8 @@ test('a shard that fails to load says so, rather than leaving the bar where it w
   const shards = await holdShards(page)
   await page.goto('/library')
   await shards.requested()
-  await shards.release(20)
-  await expect(progressBar(page)).toHaveAttribute('aria-valuenow', '20', { timeout: 30_000 })
+  await shards.release(5)
+  await expect(progressBar(page)).toHaveAttribute('aria-valuenow', '5', { timeout: 30_000 })
 
   await shards.fail(1)
   const alert = page.getByRole('alert')
@@ -127,7 +132,7 @@ test('a shard that fails to load says so, rather than leaving the bar where it w
   await expect(alert.getByRole('button', { name: 'Reload' })).toBeVisible()
   await expect(progressBar(page)).toHaveCount(0)
   await shotAtEverySize(page, 'library-failed')
-  await shards.release(11)
+  await shards.release(2)
 })
 
 test('a shard that never answers brings up a reload offer after a while', async ({ page }) => {
@@ -135,9 +140,9 @@ test('a shard that never answers brings up a reload offer after a while', async 
   const shards = await holdShards(page)
   await page.goto('/deck-builder')
   await shards.requested()
-  await shards.release(31)
+  await shards.release(PIECES - 1)
   const bar = progressBar(page)
-  await expect(bar).toHaveAttribute('aria-valuenow', '31', { timeout: 30_000 })
+  await expect(bar).toHaveAttribute('aria-valuenow', String(PIECES - 1), { timeout: 30_000 })
   const hint = page.getByText('This is taking longer than usual.')
   await expect(hint).toHaveCount(0)
   // The hint's live region is already there, empty, so a screen reader
@@ -183,7 +188,7 @@ test("the bar's movement follows the viewer's motion settings", async ({ page })
     await page.goto('/library')
     await shards.requested()
     const seen = await motion()
-    await shards.release(32)
+    await shards.release(PIECES)
     await expect(page.getByRole('heading', { name: 'Card Library' })).toBeVisible({
       timeout: 30_000,
     })

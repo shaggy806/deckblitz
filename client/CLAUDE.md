@@ -14,7 +14,10 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
   the server's room code, bundled with `engineLocalPlugin` (`vite.config.ts`). The barrel pulls in every card
   module. Card definitions come only through `cards/cardData.ts`: a single card's shard by name,
   or the whole pool (`loadCardPool`/`cardPool()`) for the library and deck builder, which are
-  lazy chunks. The game page holds no card definitions: everything it plays comes in the
+  lazy chunks. **The whole pool is the card catalog** (engine `cards/catalog.ts`): cards with
+  their behaviour cut away — fields, texts and what the deck rules read. Code over `cardPool()`
+  must not read an ability's effect or targets (there are none), and asks `tokensMadeBy` for a
+  card's tokens. The game page holds no card definitions: everything it plays comes in the
   server's views.
 - **Four pages branch on path in `main.tsx`**: `/library`, `/deck-builder`, `/about`, and
   everything else → `App` (the game). The network-free pages never open the WebSocket.

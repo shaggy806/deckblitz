@@ -1,18 +1,18 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { CardShard } from 'engine/client'
 
-// The engine's shards are swapped for ones the test answers by hand, so it
-// decides which shard arrives when, and which fails. Four shards, one card
-// in each, named for its shard.
+// The catalog's pieces (what the whole pool is loaded from) are swapped for
+// ones the test answers by hand, so it decides which piece arrives when, and
+// which fails. Four pieces, one card in each, named for its piece. A piece
+// is read as it is: the engine's reading of one has its own test.
 const shardLoads = vi.hoisted(() => ({
   pending: new Map<number, { resolve: (shard: CardShard) => void; reject: (e: Error) => void }[]>(),
   count: 0,
 }))
 
-vi.mock('engine/client', () => ({
-  CARD_SHARD_COUNT: 4,
-  cardShardOf: (name: string) => Number(name.slice('card '.length)),
-  loadCardShard: (index: number) => {
+vi.mock('./catalogChunks.ts', () => ({
+  CATALOG_CHUNK_COUNT: 4,
+  loadCatalogChunk: (index: number) => {
     shardLoads.count++
     return new Promise<CardShard>((resolve, reject) => {
       const waiting = shardLoads.pending.get(index) ?? []
@@ -20,6 +20,22 @@ vi.mock('engine/client', () => ({
       shardLoads.pending.set(index, waiting)
     })
   },
+}))
+
+// The engine's shards (what a lookup by name fetches), answered by hand too:
+// shard N holds "card N" whole.
+const lookups = vi.hoisted(() => ({
+  pending: new Map<number, (shard: CardShard) => void>(),
+  count: 0,
+}))
+
+vi.mock('engine/client', () => ({
+  cardShardOf: (name: string) => Number(name.slice('card '.length)),
+  loadCardShard: (index: number) => {
+    lookups.count++
+    return new Promise<CardShard>((resolve) => lookups.pending.set(index, resolve))
+  },
+  readCatalogChunk: (chunk: unknown) => chunk,
   CardRegistry: class {
     register(): void {}
   },
@@ -35,6 +51,7 @@ const retries = vi.hoisted(() => ({
 
 vi.mock('./shardFiles.ts', () => ({
   shardFile: (index: number) => (retries.listed ? `/assets/shard-${index}.js` : undefined),
+  catalogFile: (index: number) => (retries.listed ? `/assets/shard-${index}.js` : undefined),
   loadShardFile: (url: string, attempt: number) =>
     new Promise<CardShard>((resolve, reject) => {
       retries.calls.push({ index: Number(/shard-(\d+)/.exec(url)?.[1]), attempt, resolve, reject })
@@ -67,6 +84,8 @@ async function freshCardData() {
 beforeEach(() => {
   shardLoads.pending.clear()
   shardLoads.count = 0
+  lookups.pending.clear()
+  lookups.count = 0
   retries.listed = true
   retries.calls = []
 })
@@ -99,26 +118,55 @@ describe('poolProgress', () => {
     expect(poolProgress()).toBe(after)
   })
 
-  it('counts a shard a lookup by name already fetched, and fetches it only once', async () => {
+  it("doesn't count a shard a lookup by name fetched: the pool is the catalog's pieces", async () => {
     const { loadCard, loadCardPool, poolProgress } = await freshCardData()
     const card = loadCard('card 3')
-    await arrive(3)
-    expect((await card)?.name).toBe('card 3')
-    expect(poolProgress()).toEqual({ loaded: 1, total: 4 })
+    expect(lookups.count).toBe(1)
+    lookups.pending.get(3)?.({ pool: [{ name: 'card 3', whole: true }], tokens: [] } as unknown as CardShard)
+    expect(await card).toMatchObject({ name: 'card 3', whole: true })
+    expect(poolProgress()).toEqual({ loaded: 0, total: 4 })
 
     void loadCardPool()
-    // Shard 3 is in already, so the pool asks only for the other three.
     expect(shardLoads.count).toBe(4)
+    await arrive(3)
     expect(poolProgress()).toEqual({ loaded: 1, total: 4 })
+    // And the pool fetched no shard of its own.
+    expect(lookups.count).toBe(1)
   })
 
-  it('counts a shard asked for twice at once only once', async () => {
-    const { loadCard, loadCardPool, poolProgress } = await freshCardData()
-    void loadCard('card 0')
+  it('asks for a piece only once however often the pool is asked for', async () => {
+    const { loadCardPool, poolProgress } = await freshCardData()
+    void loadCardPool()
     void loadCardPool()
     expect(shardLoads.count).toBe(4)
     await arrive(0)
     expect(poolProgress()).toEqual({ loaded: 1, total: 4 })
+  })
+})
+
+describe('a lookup by name', () => {
+  it('is answered by the catalog once the pool is in, with no shard fetched', async () => {
+    const { loadCardPool, peekCard, requestCards } = await freshCardData()
+    // Nothing that would know has loaded: not "no such card" yet.
+    expect(peekCard('card 1')).toBeUndefined()
+    const pool = loadCardPool()
+    for (const index of [0, 1, 2, 3]) await arrive(index)
+    await pool
+    expect(peekCard('card 1')).toMatchObject({ name: 'card 1' })
+    expect(peekCard('card 9')).toBeNull()
+    requestCards(['card 1', 'card 2'])
+    expect(lookups.count).toBe(0)
+  })
+
+  it("prefers the card whole, from its shard, to the catalog's", async () => {
+    const { loadCard, loadCardPool, peekCard } = await freshCardData()
+    const pool = loadCardPool()
+    for (const index of [0, 1, 2, 3]) await arrive(index)
+    await pool
+    const card = loadCard('card 2')
+    lookups.pending.get(2)?.({ pool: [{ name: 'card 2', whole: true }], tokens: [] } as unknown as CardShard)
+    await card
+    expect(peekCard('card 2')).toMatchObject({ whole: true })
   })
 
   it("doesn't count a failed shard, and counts it once a retry loads it", async () => {
@@ -169,7 +217,9 @@ describe('a shard that never answers', () => {
     await wait(1)
     expect(retried()).toEqual(['3#2'])
     retries.calls[0].resolve(shard(3))
-    await Promise.resolve()
+    // (A piece asked for again is read as it arrives: a few turns of the
+    // microtask queue.)
+    for (let i = 0; i < 4; i++) await Promise.resolve()
     expect(poolProgress()).toEqual({ loaded: 4, total: 4 })
     expect((await pool).cards).toHaveLength(4)
     // The first request answering late changes nothing.

@@ -12,7 +12,7 @@ import {
   isTokenCard,
   manaValue,
   parseManaCost,
-  tokensCreatedBy,
+  tokensMadeBy,
 } from 'engine/client'
 import { cardPool } from '../cards/cardData.ts'
 import { fetchMorePrintings, fetchPrintings } from '../deck-builder/printings.ts'
@@ -341,7 +341,7 @@ function galleryRows(): Gallery {
 /** The tokens a card makes, either face — resolved to their definitions, in
  * the order its text names them. */
 function tokensOf(entry: Entry): readonly CardDefinition[] {
-  const names = [...tokensCreatedBy(entry.def), ...(entry.other ? tokensCreatedBy(entry.other) : [])]
+  const names = [...tokensMadeBy(entry.def), ...(entry.other ? tokensMadeBy(entry.other) : [])]
   return [...new Set(names)].flatMap((name) => {
     const def = cardPool().byName.get(name)
     return def === undefined ? [] : [def]
