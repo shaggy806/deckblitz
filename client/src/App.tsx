@@ -1422,7 +1422,11 @@ function SeatPickerScreen({ game }: { readonly game: NetworkGame }) {
       <SeatBoard game={game}>
         <BackToMenu game={game} />
         <h2>Room {game.roomId ?? ''}</h2>
-        <p className="muted">Share this room code, then everyone joins.</p>
+        {/* No "share this room code" line: arriving in a waiting room takes
+            a seat at once (`SeatBoard`), so this screen shows there only
+            for the frame until the server answers — the line flickered on
+            every load (the user, 2026-11-15). Where it lasts (a game under
+            way, a full table) there's nothing to share. */}
         {game.roomId !== null ? <InviteLink roomId={game.roomId} /> : null}
         <div className="toast-stack">
           <ErrorLine game={game} />
