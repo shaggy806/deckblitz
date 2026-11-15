@@ -149,6 +149,7 @@ import _poolChapelGeist from "../pool/chapel-geist.js";
 import _poolChargeAcrossTheAraba from "../pool/charge-across-the-araba.js";
 import _poolCharredFoyerWarpedSpace from "../pool/charred-foyer-warped-space.js";
 import _poolChemistersTrick from "../pool/chemisters-trick.js";
+import _poolChiefMontgomeryScott from "../pool/chief-montgomery-scott.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
 import _poolChimericEgg from "../pool/chimeric-egg.js";
 import _poolCinderclasm from "../pool/cinderclasm.js";
@@ -1191,6 +1192,7 @@ const shard: CardShard = {
     _poolChargeAcrossTheAraba,
     _poolCharredFoyerWarpedSpace,
     _poolChemistersTrick,
+    _poolChiefMontgomeryScott,
     _poolChildOfThePack,
     _poolChimericEgg,
     _poolCinderclasm,

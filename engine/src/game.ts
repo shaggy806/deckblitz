@@ -526,6 +526,8 @@ import {
 import type {
   AssistAsk,
   AwaitingDecision,
+  EnterCounter,
+  EnterCounters,
   RevealedHandChoice,
   CasualtyAsk,
   ConspireAsk,
@@ -44001,7 +44003,7 @@ controlledBy,
      * opponent picking from your graveyard (Tasigur, the Golden Fang). */
     picker?: PlayerId,
     /** Chosen cards bound for the battlefield enter with these counters. */
-    withCounters?: { readonly kind: string; readonly amount: number },
+    withCounters?: EnterCounters,
     /** Chosen cards bound for the battlefield enter under this player's
      * control — the one putting them there, from another's library. */
     enterUnder?: PlayerId,
@@ -59084,13 +59086,15 @@ controlledBy,
   /** Put `withCounters` on `id`, just put onto the battlefield by `player`'s
    * effect — "with a finality counter on it". Before its entry is announced,
    * so its enters triggers see them. */
-  private enterWithCounters(
-    id: ObjectId,
-    withCounters: { readonly kind: string; readonly amount: number } | undefined,
-    player: PlayerId,
-  ): void {
+  private enterWithCounters(id: ObjectId, withCounters: EnterCounters | undefined, player: PlayerId): void {
     if (withCounters === undefined || this.state.objects[id]?.zone !== "battlefield") return;
-    this.addCounter({ kind: "object", object: id }, withCounters.kind, withCounters.amount, true, player);
+    const each: readonly EnterCounter[] = Array.isArray(withCounters) ? withCounters : [withCounters as EnterCounter];
+    for (const c of each) {
+      if (c.amount <= 0) continue;
+      if (c.ifType !== undefined && !effectiveTypes(this.state, this.registry, this.state.objects[id]).includes(c.ifType)) continue;
+      if (c.ifSubtype !== undefined && !hasSubtype(effectiveSubtypes(this.state, this.registry, this.state.objects[id]), c.ifSubtype)) continue;
+      this.addCounter({ kind: "object", object: id }, c.kind, c.amount, true, player);
+    }
   }
 
   /** Target player discards `amount` cards. If their hand is that small or

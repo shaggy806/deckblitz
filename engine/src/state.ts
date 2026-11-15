@@ -3901,8 +3901,8 @@ export type AwaitingDecision =
        * they enter (a `look-and-choose`'s `enterAs`). */
       readonly enterAs?: EnterTypes;
       /** Counters each card put onto the battlefield enters with — a
-       * `return-from-graveyard`'s `withCounters`. */
-      readonly enterWithCounters?: { readonly kind: string; readonly amount: number };
+       * `return-from-graveyard`'s `withCounters`, a `look-and-choose`'s. */
+      readonly enterWithCounters?: EnterCounters;
       /** The chosen cards are shown to every player ("search your library for
        * an artifact card, **reveal it**, …" — Enlightened Tutor). */
       readonly reveal?: boolean;
@@ -5002,6 +5002,19 @@ export type AwaitingDecision =
        * more, last, for its controller (`combat/damage.ts`). */
       readonly overPlaneswalker?: OverPlaneswalker;
     };
+
+/** Counters a permanent enters with, put onto the battlefield by an effect
+ * ("with a finality counter on it"): one kind, or several, each with an
+ * `ifType` / `ifSubtype` read as it is on the battlefield (rule 614.12 —
+ * Chief Montgomery Scott's "X additional +1/+1 counters on it if it's a
+ * creature and X additional charge counters on it if it's a Spacecraft"). */
+export interface EnterCounter {
+  readonly kind: string;
+  readonly amount: number;
+  readonly ifType?: CardType;
+  readonly ifSubtype?: string;
+}
+export type EnterCounters = EnterCounter | readonly EnterCounter[];
 
 /** See `GameState.extraTurnRiders`. */
 export interface ExtraTurnRider {

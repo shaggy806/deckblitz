@@ -11,7 +11,7 @@
 import type { CharacteristicsPatch, CopyExceptions, ResolvedPatch } from "./characteristics-patch.js";
 import type { CastNowTerms, EffectPlay, EffectPlaySpec, PlayGrant } from "./play-permission.js";
 import type { AmountChange, ReplacementSpec } from "./replacements.js";
-import type { ActiveReplacement } from "./state.js";
+import type { ActiveReplacement, EnterCounters } from "./state.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   CardType,
@@ -11433,8 +11433,17 @@ export type EffectSpec =
       /** …and **with these counters** on them (rule 122.6 — Undercity's Throne
        * of the Dead Three: "put a creature card from among them onto the
        * battlefield with three +1/+1 counters on it"), as
-       * `put-onto-battlefield`'s `withCounters` are. */
-      readonly withCounters?: { readonly kind: string; readonly amount: number };
+       * `put-onto-battlefield`'s `withCounters` are. A list: several kinds,
+       * each amount read as it resolves, each `ifType` / `ifSubtype` read as
+       * the card would be on the battlefield (Chief Montgomery Scott). */
+      readonly withCounters?:
+        | { readonly kind: string; readonly amount: number }
+        | readonly {
+            readonly kind: string;
+            readonly amount: EffectAmount;
+            readonly ifType?: CardType;
+            readonly ifSubtype?: string;
+          }[];
       /** …and with these types and colours in addition to their own, in
        * place as they enter (as `put-onto-battlefield`'s are — rule 614.12):
        * Necromantic Selection's "It's a black Zombie in addition to its other
@@ -14208,7 +14217,7 @@ export interface EffectApi {
      * `look-and-choose`'s `chooser`. */
     picker?: PlayerId,
     /** See `look-and-choose`'s `withCounters`. */
-    withCounters?: { readonly kind: string; readonly amount: number },
+    withCounters?: EnterCounters,
     /** See `look-and-choose`'s `unlinked`. */
     unlinked?: boolean,
     /** See `look-and-choose`'s `needsMin`. */
@@ -23232,7 +23241,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.enterAs,
         chooser,
         picker,
-        spec.withCounters,
+        Array.isArray(spec.withCounters)
+          ? spec.withCounters.map((c) => ({ ...c, amount: Math.max(0, amountValue(c.amount, ctx)) }))
+          : (spec.withCounters as EnterCounters | undefined),
         spec.unlinked === true,
         spec.needsMin === true,
         attachHost(spec.attachedTo, ctx),

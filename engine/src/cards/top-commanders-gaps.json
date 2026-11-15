@@ -2688,7 +2688,9 @@
   "static:cant-be-beamed-up",
   "trigger:fought-this-way-dies-this-turn",
   "effect:saga-chapter-links-permanent",
-  "condition:this-way-put-on-bottom-from-battlefield"
+  "condition:this-way-put-on-bottom-from-battlefield",
+  "effect:look-and-choose-enters-with-counters-if",
+  "effect:enters-with-counters-dynamic"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

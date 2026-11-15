@@ -4551,6 +4551,7 @@ import _poolChiefEngineer from "./pool/chief-engineer.js";
 import _poolChiefKyleTransporterTech from "./pool/chief-kyle-transporter-tech.js";
 import _poolChiefMagistrateOfMercadia from "./pool/chief-magistrate-of-mercadia.js";
 import _poolChiefMilesObrien from "./pool/chief-miles-obrien.js";
+import _poolChiefMontgomeryScott from "./pool/chief-montgomery-scott.js";
 import _poolChiefOfTheEdge from "./pool/chief-of-the-edge.js";
 import _poolChiefOfTheFoundry from "./pool/chief-of-the-foundry.js";
 import _poolChiefOfTheScale from "./pool/chief-of-the-scale.js";
@@ -37747,6 +37748,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChiefKyleTransporterTech,
   _poolChiefMagistrateOfMercadia,
   _poolChiefMilesObrien,
+  _poolChiefMontgomeryScott,
   _poolChiefOfTheEdge,
   _poolChiefOfTheFoundry,
   _poolChiefOfTheScale,
@@ -70956,6 +70958,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chief-kyle-transporter-tech": _poolChiefKyleTransporterTech,
   "pool/chief-magistrate-of-mercadia": _poolChiefMagistrateOfMercadia,
   "pool/chief-miles-obrien": _poolChiefMilesObrien,
+  "pool/chief-montgomery-scott": _poolChiefMontgomeryScott,
   "pool/chief-of-the-edge": _poolChiefOfTheEdge,
   "pool/chief-of-the-foundry": _poolChiefOfTheFoundry,
   "pool/chief-of-the-scale": _poolChiefOfTheScale,

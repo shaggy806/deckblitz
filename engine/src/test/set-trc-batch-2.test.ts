@@ -101,3 +101,32 @@ describe("U.S.S. Farragut, Bold Explorer", () => {
     expect(hand(game).length).toBe(before + 1);
   });
 });
+
+describe("Chief Montgomery Scott", () => {
+  it("puts a creature in with X +1/+1 counters, a Spacecraft with X charge counters", () => {
+    const { game, a } = table();
+    const scott = spawn(game, "Chief Montgomery Scott");
+    lands(game, "Forest", 3);
+    lands(game, "Island", 3); // two names: X = 2
+    const bears = toHand(game, "Grizzly Bears");
+    a.chooseFromZoneFn = (_view, eligible) => eligible.filter((id) => id === bears);
+    activate(game, scott);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(counters(game, bears, "+1/+1")).toBe(2);
+    expect(counters(game, bears, "charge")).toBe(0);
+  });
+
+  it("gives a Spacecraft charge counters, not +1/+1 counters", () => {
+    const { game, a } = table();
+    const scott = spawn(game, "Chief Montgomery Scott");
+    lands(game, "Forest", 3);
+    lands(game, "Island", 2);
+    spawn(game, "Plains"); // three names: X = 3
+    const sphere = toHand(game, "Borg Scout Sphere");
+    a.chooseFromZoneFn = (_view, eligible) => eligible.filter((id) => id === sphere);
+    activate(game, scott);
+    expect(zone(game, sphere)).toBe("battlefield");
+    expect(counters(game, sphere, "charge")).toBe(3);
+    expect(counters(game, sphere, "+1/+1")).toBe(0);
+  });
+});
