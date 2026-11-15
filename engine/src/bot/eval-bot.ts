@@ -83,7 +83,7 @@ import {
   withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
-import { boardKey, nextTurnValue, passLine, planTurn } from "./turn-plan.js";
+import { boardKey, nextTurnValue, passLine, planTurn, restOfTurnValue } from "./turn-plan.js";
 import type { PlanStep, PlannedLine, ScoredFirst, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
 export interface EvalBotOptions {
@@ -640,6 +640,10 @@ function bestDecision(
   selfFor?: () => PlayerController,
   trace?: EvalBotOptions["trace"],
   keptBy = 0,
+  /** Another measure of an answer, in place of the rollout to `horizon`;
+   * `undefined` leaves that answer to the rollout
+   * (`EvalBotController.byTheTurnItLeaves`). */
+  scoreBy?: (action: Action) => number | null | undefined,
 ): Action {
   const me = view.player;
   if (inherited.player !== me || budget.left <= 1 || spent(budget)) return inherited;
@@ -663,6 +667,8 @@ function bestDecision(
 
   const score = (action: Action): number | null => {
     budget.left -= 1;
+    const other = scoreBy?.(action);
+    if (other !== undefined) return other;
     const after = timed(budget, () =>
       simulateAction(view.state, cards, action, horizon, rollout, selfFor?.()),
     );
@@ -955,6 +961,10 @@ class AnsweringSeat extends DefendingRolloutController {
     return best?.action ?? null;
   }
 }
+
+/** The steps of our own turn in which a main phase is still to come, or is
+ * here: where an answer can be priced by the turn planned after it. */
+const PLANNABLE_STEPS: ReadonlySet<string> = new Set(["upkeep", "draw", "precombat-main", "postcombat-main"]);
 
 /** The steps of a turn before its blocks are declared. */
 const BEFORE_BLOCKS: ReadonlySet<string> = new Set([
@@ -2277,8 +2287,11 @@ export class EvalBotController extends HeuristicBotController {
     // A shock land's 2 life is v1's call (`payLifeForUntapped`): it pays only
     // for a spell the untapped land casts this turn, and the rollouts pass our
     // own seat for the rest of the turn, so they never see that spell and
-    // price paying as 2 life for nothing — as with a land drop.
-    if (view.state.awaiting?.kind === "pay-life-for-untapped") {
+    // price paying as 2 life for nothing — as with a land drop. Except where
+    // the turn can be planned from each answer (`byTheTurnItLeaves`), which
+    // does see the spell.
+    const byTurn = this.byTheTurnItLeaves(view);
+    if (view.state.awaiting?.kind === "pay-life-for-untapped" && byTurn === undefined) {
       this.lastDecision = audit("decision", null, "v1's answer");
       return inherited;
     }
@@ -2291,8 +2304,15 @@ export class EvalBotController extends HeuristicBotController {
     // stands unless paying beats it by `KEPT_PER_MANA` for each mana of the
     // spells it was declined for. Kept outright, it let a 4/4 go to its echo
     // so as to cast a Grizzly Bears.
+    //
+    // Where the turn's plan can be made from each answer (`byTheTurnItLeaves`:
+    // our own turn, an optional payment, before combat), the plan is the
+    // price and no margin is needed: the spell declining keeps is in the
+    // plan made without the payment, and missing from the one made with it.
     const keptBy =
-      view.state.awaiting?.kind === "choose-modes" ? KEPT_PER_MANA * this.manaDeclinedFor(view.state) : 0;
+      byTurn === undefined && view.state.awaiting?.kind === "choose-modes"
+        ? KEPT_PER_MANA * this.manaDeclinedFor(view.state)
+        : 0;
     this.lastKept = keptBy > 0 ? { action: inherited, by: keptBy } : null;
     if (view.state.awaiting?.kind === "commander-replacement" && this.horizon === "next-turn") {
       return this.commanderToGraveyard(view, inherited);
@@ -2317,6 +2337,7 @@ export class EvalBotController extends HeuristicBotController {
         () => this.selfInRollouts(),
         this.trace,
         keptBy,
+        byTurn === undefined ? undefined : (action) => byTurn(action, budget),
       );
     // Which card to discard: every answer keeps as many, so the hand is read
     // for which are worth keeping (`withHandReadForKeeps`) — an engine above
@@ -2328,6 +2349,49 @@ export class EvalBotController extends HeuristicBotController {
     this.lastDecision ??= audit("decision", budget);
     this.noteCost(view.state, budget);
     return answer;
+  }
+
+  /**
+   * **Mana priced by the turn it leaves** (`docs/plans/bot-next-steps.md`,
+   * step 2). For an optional payment asked in our own turn, before or in a
+   * main phase — Mana Vault's {4} in the upkeep, an echo, "you may pay {2}" as a
+   * spell of ours resolves — a measure of each answer: the answer resolved,
+   * then the best turn the planner finds from the board it leaves
+   * (`restOfTurnValue`). `undefined` where it doesn't apply, and for an
+   * answer it can't follow to a main phase (the rollout scores that one).
+   *
+   * A rollout passes our own seat, so mana an answer spends is never missed:
+   * paying always looked free. v1's look ahead was the stand-in (it declines
+   * when a castable spell is lost), with a margin per mana on the search
+   * (`KEPT_PER_MANA`). But v1 uses less mana than v2 does, and the margin is
+   * a guess at what the spell is worth; the planner is the bot's own account
+   * of what it does with the mana.
+   */
+  private byTheTurnItLeaves(
+    view: ControllerView,
+  ): ((action: Action, budget: SearchBudget) => number | null | undefined) | undefined {
+    const state = view.state;
+    const me = this.playerId;
+    const asked = state.awaiting;
+    if (this.planMode === null || this.horizon !== "turn") return undefined;
+    const payment = asked?.kind === "choose-modes" && asked.cost !== undefined && asked.guess === undefined;
+    if (!payment && asked?.kind !== "pay-life-for-untapped") return undefined;
+    if (state.turnOrder[state.turn.activePlayerIndex] !== me || !PLANNABLE_STEPS.has(state.turn.step)) return undefined;
+    const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
+    const hooks = this.planHooks();
+    // The hooks read the last priority decision's pass for an interaction's
+    // score; these lines are valued plainly.
+    this.passOutcome = null;
+    return (action, budget) => {
+      const resolved = timed(budget, () => simulateAction(state, this.cards, action, "stack", "passive"));
+      if (resolved === null) return rolloutAborted() ? null : undefined;
+      const limits = {
+        ...this.planLimits(),
+        clock: { out: () => outOfTime(budget), timed: <T>(simulate: () => T): T => timed(budget, simulate) },
+      };
+      const value = restOfTurnValue(resolved, this.cards, me, hooks, limits, unknown);
+      return value === null ? (rolloutAborted() ? null : undefined) : value;
+    };
   }
 
   /**

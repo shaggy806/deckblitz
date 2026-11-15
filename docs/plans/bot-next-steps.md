@@ -1,8 +1,8 @@
 # Bots: the next steps
 
-Status: **in progress** (written 2026-11-15; step 1 built the same day, and step 5, added
-that day from the user, checked and its own-hand half built; steps 2 to 4 open). The plan of
-record
+Status: **in progress** (written 2026-11-15; steps 1 and 2 built the same day, and step 5,
+added that day from the user, checked and its own-hand half built; steps 3 and 4 open). The
+plan of record
 for the bots is still `bot-effect-knowledge.md`; this is the order of work after the overnight
 session of 2026-11-15, and why it isn't "give them more time".
 
@@ -81,8 +81,12 @@ changed 20 attacks: **net +194 evaluation points** (274 gained, 80 lost; best +1
 the decider's own life +48 and its opponents' +3 in total. Nearly every change sends fewer
 attackers. The largest gain and the two largest losses are one turn (Moraug's three combats
 at one table, +71 between them), where the judge's own play is the noise: after the new
-answer its seat cast nothing for the rest of the turn, after the old one three spells
-(BACKLOG, to look at). One changed attack ended with the bot out of the game where the old
+answer its seat cast nothing for the rest of the turn, after the old one three spells.
+(Looked at the same day: replayed on the later build the Moraug turn comes on turn 12, and
+played on from no attack and from its attack the seat does the same things and passes its
+second main phase the same way. Nothing held and never cast there; the old position itself
+wasn't rebuilt, so that its three spells came off what the attack drew is a guess.) One
+changed attack ended with the bot out of the game where the old
 answer lived: a 2/2 Zombie kept home in a four-player round where the player it would have
 hit finished on 1 life and killed it. Counted apart, and not a pattern.
 
@@ -118,6 +122,30 @@ game there, one in 12,000 on the sample decks), and `.scratch/judge/mana-steady.
 turn's steadiness.
 
 **Done when** the per-mana margin (`KEPT_PER_MANA`) can go, or the measurement says it can't.
+
+**Built, 2026-11-15** (`EvalBotController.byTheTurnItLeaves`, `turn-plan.ts`'s
+`restOfTurnValue`). For an optional payment asked in our own turn before or in a main phase
+(a "you may pay", an echo, Mana Vault's upkeep), and for a shock land's 2 life, each answer is
+resolved and then priced by the better of passing the turn out and the best line `planTurn`
+finds from the board it leaves, never with a card that was in our library when the question
+was asked. No margin there, and a shock land is no longer v1's call outright. Elsewhere (an
+opponent's turn, our combat, the plan switched off) v1's answer and the margin stand.
+
+Judged on the strong decks, 16 four-player games (two tables, seeds 1 to 8), each changed
+payment played on by v2 to the end of the turn: **47 of 179 payment decisions changed, 31
+better, 10 worse, 6 even, net +165 evaluation points** (231 gained, 66 lost; best +86, worst
+−17.5). Optional payments alone, before shock lands were added, were 14 changed and +8 over
+the first eight games: the gain is mostly the shock lands, paid now when the turn has a use
+for the mana (Y'shtola's bot paid, again and again, on lands v1 had brought in tapped) and
+not when it doesn't. The best single change is an extort paid that finished a player on 4 life. The
+worst is one of four identical Smothering Tithe triggers in one draw step, three of which
+came out better by 1.7: the judge's noise.
+
+**Left.** The planner never plans with a card in our library, so a card it may play from
+there is invisible to this price. The Ur-Dragon's bot left Stomping Ground tapped where the
+old answer paid and then cast a Farseek that wasn't in its hand (old better by 7.1; off the
+top of the library by the look of it, not checked). `KEPT_PER_MANA` stays for the decisions the plan can't price. And v2's turn
+still isn't steady in mana.
 
 ## 3. Watched games, one archetype at a time
 

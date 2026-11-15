@@ -965,6 +965,12 @@ sacrifices a land. v2's diff, where v1 plays the rollouts, changed none of 12,87
 Gate scenario "pays echo on a 4/4 though it costs the turn's two-drop";
 `test/bot-declined-payment.test.ts`.
 
+**The untried idea was tried the same day, and stays** (`bot-next-steps.md`, step 2): in our
+own turn, before or in a main phase, each answer is priced by the turn v2's planner finds
+after it, with no margin, and a shock land's life the same way. 47 of 179 payment decisions
+changed over 16 strong-deck games, net +165 points. The margin above now guards only what
+the plan can't price: an opponent's turn, our combat.
+
 ### Which card to keep (2026-11-15)
 
 Two of the watched games' misplays were one: asked to discard, a bot threw away the cards its

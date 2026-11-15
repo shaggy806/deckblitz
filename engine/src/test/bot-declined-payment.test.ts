@@ -111,9 +111,11 @@ describe("v2 keeps v1's declined payment unless declining costs more than the sp
   it("declines Smothering Tithe's {2} when the mana is the turn's spell", () => {
     const bot = new EvalBotController(A, registry);
     expect(modes(bot.act(titheAsked(4).controllerView(A)))).toEqual([]);
-    // Searched, and v1's answer kept: paying scored better, by less than
-    // the margin (a Treasure denied).
-    expect(bot.lastDecision).toMatchObject({ kind: "decision", via: "search", simulations: 2 });
+    // Searched, each answer priced by the turn planned after it
+    // (`byTheTurnItLeaves`): declining casts the Baloth, paying doesn't. More
+    // than the two rollouts a margin on v1's answer took.
+    expect(bot.lastDecision).toMatchObject({ kind: "decision", via: "search" });
+    expect(bot.lastDecision?.simulations).toBeGreaterThan(2);
   });
 
   it("pays it with mana to spare", () => {

@@ -442,3 +442,61 @@ export function nextTurnValue(
   if (limits.clock?.out() === true && rolloutAborted()) return null;
   return Math.max(idle, best?.value ?? -Infinity);
 }
+
+/**
+ * From `state`, in our own turn, on to our next main-phase priority of the
+ * same turn with nothing on the stack and nothing asked: the stack resolved,
+ * the steps before the main phase passed through, v1 answering what comes up.
+ * `null` if the turn ends first, or the game does.
+ */
+function toOurMainPhase(state: GameState, registry: CardRegistry, me: PlayerId): Game | null {
+  return rollout(() => {
+    const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry) });
+    const turn = state.turn.number;
+    let steps = 0;
+    const ours = (s: GameState): boolean =>
+      s.turn.number === turn &&
+      (s.turn.step === "precombat-main" || s.turn.step === "postcombat-main") &&
+      s.priority.holder === me &&
+      s.awaiting === null &&
+      s.zones.shared.stack.length === 0;
+    sim.advanceUntil(untilDeadline((s) => (steps += 1) > CEILING || s.turn.number !== turn || ours(s)));
+    return ours(sim.state) && !sim.state.result.over ? sim : null;
+  });
+}
+
+/**
+ * What the rest of our turn is worth from `state`: an answer given in our own
+ * turn, before or in a main phase, priced by the turn it leaves us. On to
+ * our next main-phase priority (`toOurMainPhase`), then the better of passing
+ * the turn out and the best line `planTurn` finds there, never with a card
+ * that was in our library when the question was asked (`unknown`: the draw
+ * step's card, when the question came in our upkeep).
+ *
+ * This is what a rollout that passes our seat can't say: mana an answer
+ * spends is mana the turn's plan doesn't have, and here the plan is made
+ * without it. `null` when no such window comes this turn (the caller's own
+ * rollout then stands for the answer) or the decision's deadline stopped it.
+ */
+export function restOfTurnValue(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  hooks: TurnPlanHooks,
+  limits: TurnPlanLimits,
+  unknown: ReadonlySet<ObjectId>,
+): number | null {
+  if (state.result.over) return hooks.value(state);
+  const main = toOurMainPhase(state, registry, me);
+  if (main === null) return null;
+  const firsts = hooks.moves(main.controllerView(me)).filter((a) => {
+    const id = usedCard(a);
+    return id === undefined || !unknown.has(id);
+  });
+  const passed = passOut(main.state, registry, me);
+  if (passed === null && rolloutAborted()) return null;
+  const idle = passed === null ? hooks.value(main.state) : hooks.value(passed);
+  const best = planTurn(main.state, registry, me, firsts, hooks, limits, unknown)[0];
+  if (limits.clock?.out() === true && rolloutAborted()) return null;
+  return Math.max(idle, best?.value ?? -Infinity);
+}
