@@ -8050,7 +8050,9 @@ export type EffectSpec =
       readonly newTargets?: true;
       /** Only the stack objects in this set, each still the object it was
        * (rule 400.7) — "copy each of **those spells**" after a `cast-now`
-       * (Finale of Promise: `what: "spells"`, `of: { thisWay: "cast" }`). */
+       * (Finale of Promise: `what: "spells"`, `of: { thisWay: "cast" }`),
+       * whoever controls them (Cmdr. Troi's "if they do, you copy that
+       * spell", an opponent's). */
       readonly of?: ObjectSetRef;
       /** "Copy each of those spells **twice**" (Finale of Promise: 2): how
        * many copies of each, every one its own instruction to copy and its
@@ -13628,7 +13630,7 @@ export interface EffectApi {
    * spells on the stack, bottom first, or the activated and triggered
    * abilities they control there other than the one resolving — an id once
    * per ability instance (`stackCount`). Each with its name, for asking. */
-  stackObjectsToCopy(what: "spells" | "other-abilities"): readonly { readonly id: ObjectId; readonly name: string }[];
+  stackObjectsToCopy(what: "spells" | "other-abilities", anyController?: boolean): readonly { readonly id: ObjectId; readonly name: string }[];
   /** Run one instruction to copy a spell, however many copies it makes: a
    * `would-copy-spell` replacement applies to the instruction, not to each
    * copy (Twinning Staff). */
@@ -21444,7 +21446,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "copy-all": {
       const parked = ctx.parkedCount();
       const newTargets = spec.newTargets === true;
-      let left = spec.progress?.left ?? ctx.stackObjectsToCopy(spec.what);
+      // "Copy that spell" of a set (`of`) is whoever's it is: Cmdr. Troi's
+      // opponent cast it.
+      let left = spec.progress?.left ?? ctx.stackObjectsToCopy(spec.what, spec.of !== undefined);
       if (spec.progress === undefined && spec.of !== undefined) {
         // "Each of those spells": the set's members still on the stack as
         // the objects they were.

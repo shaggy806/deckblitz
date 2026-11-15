@@ -5,7 +5,8 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, counters, destroy, enter, hand, keywords, lands, pickTargets, ref, settle, spawn, subtypes, table, toHand, toStep, tokensNamed, types, zone } from "./harness.js";
+import { A, B, activate, counters, destroy, enter, hand, keywords, lands, nextTurn, pickTargets, ref, settle, spawn, subtypes, table, toHand, toStep, tokensNamed, types, zone } from "./harness.js";
+import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -128,5 +129,42 @@ describe("Chief Montgomery Scott", () => {
     expect(zone(game, sphere)).toBe("battlefield");
     expect(counters(game, sphere, "charge")).toBe(3);
     expect(counters(game, sphere, "+1/+1")).toBe(0);
+  });
+});
+
+describe("Cmdr. Troi, Outgoing Empath", () => {
+  const castFirst = (seat: ScriptedController): void => {
+    seat.chooseCastNowFn = (_view, offer) => {
+      const way = offer.casts[0];
+      if (way === undefined) return null;
+      return { type: "cast-spell", player: seat.playerId, card: way.card, targets: [], via: way.via, ...(offer.free ? { free: true } : {}) };
+    };
+  };
+
+  it("the opponent whose turn it is casts a spell free, and Troi's controller copies it", () => {
+    const { game, b } = table();
+    const troi = spawn(game, "Cmdr. Troi, Outgoing Empath");
+    const divination = toHand(game, "Divination", B);
+    castFirst(b);
+    nextTurn(game); // bob's turn, then alice's priority in it
+    game.advanceUntil((st) => st.priority.holder === A);
+    const bobHand = game.state.zones.perPlayer[B].hand.length;
+    const aliceHand = hand(game).length;
+    game.dispatch({ type: "activate-ability", player: A, source: troi, abilityIndex: 0, targets: [ref(B)] });
+    settle(game);
+    expect(zone(game, divination)).toBe("graveyard");
+    expect(game.state.zones.perPlayer[B].hand.length).toBe(bobHand - 1 + 2);
+    expect(hand(game).length).toBe(aliceHand + 2); // the copy is Alice's
+  });
+
+  it("draws a card when they don't cast one", () => {
+    const { game } = table();
+    const troi = spawn(game, "Cmdr. Troi, Outgoing Empath");
+    nextTurn(game);
+    game.advanceUntil((st) => st.priority.holder === A);
+    const aliceHand = hand(game).length;
+    game.dispatch({ type: "activate-ability", player: A, source: troi, abilityIndex: 0, targets: [ref(B)] });
+    settle(game);
+    expect(hand(game).length).toBe(aliceHand + 1);
   });
 });

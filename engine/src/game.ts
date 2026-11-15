@@ -42710,7 +42710,7 @@ controlledBy,
           opts,
         ),
       copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
-      stackObjectsToCopy: (what) => this.stackObjectsToCopy(controller, what),
+      stackObjectsToCopy: (what, anyController) => this.stackObjectsToCopy(controller, what, anyController),
       changeTargets: (target, how, toSource, optional, byItsController, random) => {
         if (how === "random") {
           if (target.kind !== "object") return;
@@ -49886,6 +49886,8 @@ controlledBy,
   private stackObjectsToCopy(
     controller: PlayerId,
     what: "spells" | "other-abilities",
+    /** Whoever controls them: a named set picks them (`copy-all`'s `of`). */
+    anyController = false,
   ): { readonly id: ObjectId; readonly name: string }[] {
     const resolving = [
       ...this.resolvingAbilities,
@@ -49913,7 +49915,7 @@ controlledBy,
     const out: { id: ObjectId; name: string }[] = [];
     for (const id of this.state.zones.shared.stack) {
       const object = this.state.objects[id];
-      if (object === undefined || object.controller !== controller) continue;
+      if (object === undefined || (!anyController && object.controller !== controller)) continue;
       if ((what === "spells") === (object.kind === "ability")) continue;
       const instances =
         what === "spells" ? 1 : (object.stackCount ?? 1) - resolving.filter((r) => r === id).length;

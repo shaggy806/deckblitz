@@ -4936,6 +4936,7 @@ import _poolClowningAround from "./pool/clowning-around.js";
 import _poolClutchOfCurrents from "./pool/clutch-of-currents.js";
 import _poolClutchOfTheUndercity from "./pool/clutch-of-the-undercity.js";
 import _poolClutchOfUndeath from "./pool/clutch-of-undeath.js";
+import _poolCmdrTroiOutgoingEmpath from "./pool/cmdr-troi-outgoing-empath.js";
 import _poolCoOptionAdjutant from "./pool/co-option-adjutant.js";
 import _poolCoalGolem from "./pool/coal-golem.js";
 import _poolCoalStoker from "./pool/coal-stoker.js";
@@ -38133,6 +38134,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClutchOfCurrents,
   _poolClutchOfTheUndercity,
   _poolClutchOfUndeath,
+  _poolCmdrTroiOutgoingEmpath,
   _poolCoOptionAdjutant,
   _poolCoalGolem,
   _poolCoalStoker,
@@ -71343,6 +71345,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/clutch-of-currents": _poolClutchOfCurrents,
   "pool/clutch-of-the-undercity": _poolClutchOfTheUndercity,
   "pool/clutch-of-undeath": _poolClutchOfUndeath,
+  "pool/cmdr-troi-outgoing-empath": _poolCmdrTroiOutgoingEmpath,
   "pool/co-option-adjutant": _poolCoOptionAdjutant,
   "pool/coal-golem": _poolCoalGolem,
   "pool/coal-stoker": _poolCoalStoker,

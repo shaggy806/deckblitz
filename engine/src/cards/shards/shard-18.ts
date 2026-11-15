@@ -134,6 +134,7 @@ import _poolClashOfWills from "../pool/clash-of-wills.js";
 import _poolClatteringAugur from "../pool/clattering-augur.js";
 import _poolClearwaterGoblet from "../pool/clearwater-goblet.js";
 import _poolCloudspireSkycycle from "../pool/cloudspire-skycycle.js";
+import _poolCmdrTroiOutgoingEmpath from "../pool/cmdr-troi-outgoing-empath.js";
 import _poolCoatOfArms from "../pool/coat-of-arms.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolCoilingStalker from "../pool/coiling-stalker.js";
@@ -1167,6 +1168,7 @@ const shard: CardShard = {
     _poolClatteringAugur,
     _poolClearwaterGoblet,
     _poolCloudspireSkycycle,
+    _poolCmdrTroiOutgoingEmpath,
     _poolCoatOfArms,
     _poolCodsworthHandyHelper,
     _poolCoilingStalker,
