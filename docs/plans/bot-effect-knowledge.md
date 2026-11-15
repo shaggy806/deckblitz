@@ -1015,6 +1015,44 @@ an activated ability (Yawgmoth, Thran Physician) or a static with no rate (Borom
 its body, an untargeted instant as what `effectWorth` reads of it (Teferi's Protection, an
 average card), and v1's own discard (`controller.ts`) is by its own rule.
 
+### The wide attack (2026-11-15)
+
+The BACKLOG had "a commander thrown into blockers for a token": Token Triumph's Emmara
+attacking alone into untapped creatures, three times, in a two-player endgame. Read on its
+board it was something else. By then her attack made two 3/3 lifelink Soldiers (Anointed
+Procession, Dictate of Heliod), she traded with a 4/4 and was recast the same turn, which is
+a fair line. What was wrong is what stayed home: seven 3/3 lifelink Soldiers and two more
+creatures, against four untapped blockers and an opponent on 30.
+
+The attack is built one attacker at a time (`hillClimb` from nothing), and an attacker that
+is good only in company never gets in: one 3/3 sent at those blockers is blocked and killed,
+so adding it scores worse, and so does each of the others. Rebuilt, Emmara alone ends the
+turn at 63.5 by v2's own evaluation with v2 blocking; everything attacking ends it at 98.2,
+the opponent on 7 and 21 life gained.
+
+So the search also tries everything (each attacker at the defender its estimate likes best)
+and climbs down from it, dropping the attacker that does worst while that scores better. The
+crackback check is in every score, as it is in the first climb's.
+
+**Checked against the real blocks.** Every score in the attack search is against v1's
+blocks, and the more creatures an attack sends, the more that prediction can be wrong about.
+The first version took the wide attack on its predicted score: over eight two-player games,
+each changed attack judged by the round v2 then played from both, three were clearly better
+(5, 10 and 12 points) and one was 26 worse: World Shaper's bot sent Braids and an Insect
+token in beside Multani, v1's blocks let them through, and v2 double-blocked Braids and ate
+the token. The wide attack is now taken only if it still beats the built one with the
+defenders' own block search seated (`REAL_BLOCK_SIMULATIONS` each, `simulateCombat`'s
+`seatFor`). With that, over twelve two-player games (119 declarations) five attacks change:
+three better as before, one even, one 2.3 worse (four attackers on turn four, 7 life lost
+over the round). Over five four-player games (89 declarations) two change: one 3.7 better,
+and one in a game's last two seats, where Jeskai Striker's bot sent eight attackers and won
+that turn; the old search, each of them blocked alone, had sent nothing. On the sample decks
+a decision diff changed 1 of 12,888 decisions before the check was added.
+
+Gate scenario "attacks wide when one attacker at a time is blocked and ten are not". Left: a
+wide attack is all or drop-one-at-a-time, so "the tokens but not the commander" is found only
+if dropping the commander alone improves it.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

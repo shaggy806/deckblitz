@@ -394,6 +394,11 @@ function aimedOnlyAt(action: Action, player: PlayerId): boolean {
  */
 const MOVES_PER_ROUND = 8;
 
+/** Simulations each defender's own block search gets where a wide attack is
+ * checked against it (`declareAttackersSearched`): enough for its climb from
+ * v1's blocks on a board of a dozen attackers. */
+const REAL_BLOCK_SIMULATIONS = 24;
+
 /** What an attack scores for each opponent past the first it sends attackers
  * at (the user, 2026-10-07: "Bot should attempt to spread out attackers").
  * Small: it decides a near tie — two open opponents, or commander damage
@@ -2248,12 +2253,17 @@ export class EvalBotController extends HeuristicBotController {
     // A creature that must attack is in every declaration the engine takes,
     // so a candidate is scored with it (at its first defender, where `ask`
     // puts it) unless the candidate already sends it somewhere.
-    const score = (attackers: readonly AttackerDeclaration[]): number | null => {
-      const after = simulateCombat(state, this.cards, {
-        type: "declare-attackers",
-        player: me,
-        attackers: withRequiredAttackers(attackers, legal),
-      });
+    // `seatFor` seats the defenders (`simulateCombat`): left out, v1's blocks.
+    const score = (
+      attackers: readonly AttackerDeclaration[],
+      seatFor?: (player: PlayerId) => PlayerController | undefined,
+    ): number | null => {
+      const after = simulateCombat(
+        state,
+        this.cards,
+        { type: "declare-attackers", player: me, attackers: withRequiredAttackers(attackers, legal) },
+        seatFor,
+      );
       if (after === null) return null;
       const players = new Set(attackers.map((d) => defendingPlayer(d.defender)));
       const value = evaluateState(after, this.cards, me, w) + SPREAD_BONUS * Math.max(0, players.size - 1);
@@ -2394,13 +2404,63 @@ export class EvalBotController extends HeuristicBotController {
       score,
       budget,
     );
+    // **The wide attack.** The climb above adds one attacker at a time, and
+    // an attacker that is good only in company never gets in: one 3/3 sent
+    // at four untapped blockers is blocked and killed, ten of them have six
+    // go through. Token Triumph's bot, with seven 3/3 lifelink Soldiers, a
+    // 4/4 commander and two more creatures against four untapped blockers
+    // and an opponent on 30, attacked with the commander alone, turn after
+    // turn (watched in a bot game, 2026-11-14; rebuilt, that attack ends the
+    // turn at 63.5 by this evaluation and everything attacking at 98.2, the
+    // opponent on 7). So everything is tried too, each attacker at the
+    // defender its estimate likes best, and climbed down from: the attackers
+    // that do worst are dropped one at a time while that scores better. The
+    // crackback check is in every score, as it is in the climb's.
+    //
+    // It is taken only if it still beats the built attack against the
+    // defenders' own block search (`REAL_BLOCK_SIMULATIONS` each): every
+    // score here is against v1's blocks, and the more creatures an attack
+    // sends, the more that prediction can be wrong about. World Shaper's bot
+    // sent Braids and an Insect token in beside Multani, which v1's blocks
+    // let through; v2 double-blocked Braids and ate the token, and the round
+    // ended 26 points worse than Multani alone (a judged two-player game,
+    // 2026-11-15).
+    const wide: AttackerDeclaration[] = legal.eligible
+      .filter((id) => (mine.get(id)?.damage ?? 0) > 0)
+      .flatMap((attacker) => {
+        const defenders = legal.defendersFor[attacker] ?? [];
+        if (defenders.length === 0) return [];
+        const defender = defenders.reduce((best, d) =>
+          estimate({ attacker, defender: d }) > estimate({ attacker, defender: best }) ? d : best,
+        );
+        return [{ attacker, defender }];
+      });
+    let [chosen, chosenScore] = [built, builtScore];
+    if (wide.length > built.length + 1 && !spent(budget)) {
+      const [swing, swingScore] = hillClimb<AttackerDeclaration>(
+        wide,
+        (current) => current.map((d) => ({ next: current.filter((x) => x !== d), estimate: -estimate(d) })),
+        score,
+        budget,
+      );
+      if (swingScore > chosenScore) {
+        const defenders = (player: PlayerId): PlayerController | undefined =>
+          player === me
+            ? undefined
+            : new EvalBotController(player, this.cards, { maxSimulations: REAL_BLOCK_SIMULATIONS, plan: "off" });
+        budget.left -= 2;
+        const real = timed(budget, () => score(swing, defenders));
+        const realBuilt = real === null ? null : timed(budget, () => score(built, defenders));
+        if (real !== null && realBuilt !== null && real > realBuilt) [chosen, chosenScore] = [swing, swingScore];
+      }
+    }
     this.lastDecision = audit("attackers", budget);
     // The deadline stopped the declaration's first simulation in flight, so
     // nothing was scored and the climb never left its start: v1's swing, as
     // every other search falls to v1's answer — not no attack at all, which
     // is what an unscored climb returns.
     if (budget.stalled) return fallback;
-    return fallbackScore !== null && fallbackScore > builtScore ? fallback : built;
+    return fallbackScore !== null && fallbackScore > chosenScore ? fallback : chosen;
   }
 
   declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {

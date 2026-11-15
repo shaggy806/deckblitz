@@ -858,6 +858,42 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "attacks wide when one attacker at a time is blocked and ten are not",
+    rule: "Four blockers stop four attackers: a swarm of ten is an attack, where any one of them alone is a creature lost.",
+    run(weights, registry, makeBot) {
+      // Watched in a bot game (2026-11-14), a two-player endgame: Token
+      // Triumph's bot, with seven 3/3 lifelink Soldiers, its 4/4 commander
+      // and two more creatures against four untapped blockers and an
+      // opponent on 30, attacked with the commander alone, turn after turn.
+      // The attack was built one attacker at a time, and one 3/3 sent at
+      // those blockers is blocked and killed; only Emmara, who makes tokens
+      // as she taps, was worth sending. Rebuilt, that attack ends the turn at
+      // 63.5 and everything attacking at 98.2, the opponent on 7.
+      const game = table(registry, [A, B], A);
+      game.state.turn.number = 32;
+      game.state.players[A].life = 46;
+      game.state.players[B].life = 30;
+      const emmara = onBoard(game, "Emmara, Soul of the Accord", A);
+      game.state.objects[emmara].isCommander = true;
+      onBoard(game, "Anointed Procession", A);
+      onBoard(game, "Dictate of Heliod", A);
+      for (let i = 0; i < 7; i += 1) onBoard(game, "Lifelink Soldier Token", A);
+      onBoard(game, "Jaspera Sentinel", A);
+      onBoard(game, "Mentor of the Meek", A);
+      for (const name of ["Undead Augur", "Diregraf Colossus", "Eternal Skylord", "Lord of the Undead"]) {
+        onBoard(game, name, B);
+      }
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Hill Giant", B, true);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const sent = attackers.reduce((n, d) => n + (d.count ?? game.state.objects[d.attacker]?.stackCount ?? 1), 0);
+      return {
+        passed: sent >= 8,
+        detail: `attacked with ${sent} of 10`,
+      };
+    },
+  },
+  {
     name: "attacks the initiative's holder",
     rule: "Combat damage to the holder takes the initiative (rule 726.2): a room now and every upkeep.",
     run(weights, registry, makeBot) {

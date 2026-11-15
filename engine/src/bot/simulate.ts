@@ -404,16 +404,21 @@ const COMBAT_STEPS: ReadonlySet<string> = new Set([
  * `state` through the end of combat — blocks and damage included, every seat
  * answering as v1 would — and return the state after it, or `null` if the
  * engine refused the declaration.
+ *
+ * `seatFor` seats someone else at a player: the defenders as they would
+ * really block, where v1's blocks are too kind a prediction to act on
+ * (`EvalBotController`'s wide attack).
  */
 export function simulateCombat(
   state: GameState,
   registry: CardRegistry,
   action: Action,
+  seatFor?: (player: PlayerId) => PlayerController | undefined,
 ): GameState | null {
   const seed: GameState = { ...state, eventLog: [] };
   const controllers: Record<PlayerId, PlayerController> = {};
   for (const player of state.turnOrder) {
-    controllers[player] = new CombatRolloutController(player, registry);
+    controllers[player] = seatFor?.(player) ?? new CombatRolloutController(player, registry);
   }
   const startingTurn = state.turn.number;
   return rollout(() => {
