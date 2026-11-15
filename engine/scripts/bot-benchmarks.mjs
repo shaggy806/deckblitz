@@ -25,6 +25,7 @@ import {
   createDefaultRegistry,
   runBenchmark,
 } from "../dist/index.js";
+import { progress } from "./progress.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -59,8 +60,12 @@ console.log(`benchmarks: ${bot}${bot === "v1" ? "" : ` ${JSON.stringify(options)
 
 const width = Math.max(...benchmarks.map((b) => b.name.length));
 const reports = [];
+// The job-progress mod's bar (progress.mjs): a benchmark a unit. They are
+// goals, not a gate, so a missed one isn't a failure.
+const bar = progress("bot:benchmarks", benchmarks.length);
 for (const benchmark of benchmarks) {
   const report = runBenchmark(benchmark, registry, alice);
+  bar.tick();
   reports.push(report);
   const ms = `${report.ms}ms`.padStart(8);
   console.log(

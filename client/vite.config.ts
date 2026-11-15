@@ -172,5 +172,8 @@ export default defineConfig({
   // (`test:e2e`), and vitest's default pattern would pick its specs up too.
   test: {
     include: ['src/**/*.test.ts'],
+    // The default output, plus a progress file the job-progress Claude Code
+    // mod draws as a bar (`vitest-progress.mjs`).
+    reporters: ['default', './vitest-progress.mjs'],
   },
 })

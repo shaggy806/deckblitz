@@ -70,6 +70,7 @@ import {
   evaluateState,
 } from "../dist/index.js";
 import { baselineDist, importBuild } from "./baseline-build.mjs";
+import { progress } from "./progress.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -147,6 +148,8 @@ if (jobs.length > 1) {
   console.log(`bot:judge — ${kind}, working build vs ${base} (${baseline.sha}): ${jobs.length} games, ${parallel} at a time`);
   const total = newTally();
   const started = Date.now();
+  // The job-progress mod's bar (progress.mjs): a game a unit.
+  const bar = progress("bot:judge", jobs.length);
   let next = 0;
   let failed = 0;
   const play = () =>
@@ -178,10 +181,12 @@ if (jobs.length > 1) {
           }
         }
         console.log("");
+        bar.tick({ failed: code !== 0 || tallyLine === undefined });
         play().then(done);
       });
     });
   await Promise.all(Array.from({ length: Math.min(parallel, jobs.length) }, play));
+  bar.finish();
   console.log(
     `== ${jobs.length - failed} games in ${Math.round((Date.now() - started) / 1000)} s${failed > 0 ? ` (${failed} failed)` : ""}: ${summary(total)}`,
   );

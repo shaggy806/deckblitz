@@ -105,12 +105,21 @@ since its pacing tests drive a fake clock.
 **Progress files** (`scripts/progress.mjs`): a long job writes
 `.claude/progress/<label>-<pid>-<n>.json` at the repo root (git-ignored) — `{ label, done, total,
 failed, startedAt, updatedAt, finished }`, at most twice a second, written then renamed so a
-reader never sees half of one, and closed on process exit. The engine and server test runs, the
-client's Playwright suite (`client/e2e/progress-reporter.mjs`, one unit per test),
-`worker-pool.mjs` (so `bot:ab`, `bot:diff`, `bot:decks`), the fuzzer, `bot:bench`/`bot:tune`
-(one per match), `bot:behaviour` and `bot:crackback` write one. A Claude Code mod (`job-progress`,
-kept outside the repo) polls the folder and draws a bar per job above the prompt; nothing else
-reads them, and a failed write is ignored. Each new job sweeps finished files over a minute old.
+reader never sees half of one, and closed on process exit. The engine, server and client test
+runs (a test file a unit; the client's through `client/vitest-progress.mjs`), the client's
+Playwright suite (`client/e2e/progress-reporter.mjs`, one unit per test), `worker-pool.mjs` (so
+`bot:ab`, `bot:diff`, `bot:decks`, `play:situations`), the fuzzer, `bot:bench`/`bot:tune` (one per
+match), `bot:behaviour` and `bot:crackback` write one, and since 2026-11-15 (the user asked for
+the screen's): `bot:losses`, `bot:outs` and `bot:judge` (a game a unit), `bot:scenarios` (a
+scenario a unit, run one at a time for it; a gate failure counts failed), `bot:benchmarks`,
+`bot:watch` and `bot:replay` when they have a turn to get to (`--turns`, `--until`,
+`--snapshot-at`: a turn a unit, through `bar.to`), the engine build's bundling (a shard a unit;
+`tsc` before it reports nothing) and `verify` (a step a unit, the total growing through
+`bar.grow` as each step starts). A write that is due is made in `tick` itself, since a job that
+never yields (the scenarios, a game played in one loop) never lets a timer fire. A Claude Code mod
+(`job-progress`, kept outside the repo) polls the folder and draws a bar per job above the prompt;
+nothing else reads them, and a failed write is ignored. Each new job sweeps finished files over a
+minute old, and a `.tmp` a killed job left.
 
 - **`filter.ts` / `effects.ts`** — `bindDynamicCompares` binds a bare `n: "x"` to the resolution's X and `isSource` / `sameNameAsSource` to its source (`CardFilter.appliedBy`), so every mass effect reads them however its matching is done (2026-11-09). A source that has left is read by its last-known names (rules 113.7a, 608.2h).
 - **`state.ts` / `game.ts`** — `ChoosePermanentsResolution` (2026-11-09): a `choose-permanents` effect's `then` keeps the resolution's trigger value and object and its kept targets' zones.

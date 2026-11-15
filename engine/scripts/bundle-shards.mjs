@@ -41,6 +41,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, renameS
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { rolldown } from "rolldown";
+import { progress } from "./progress.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(here, "../dist");
@@ -116,7 +117,13 @@ async function bundleInPlace(input, stagingDir) {
 const t0 = Date.now();
 const shardStaging = path.join(cardsDir, ".shards-bundling");
 rmSync(shardStaging, { recursive: true, force: true });
-for (const file of shards) await bundleInPlace(path.join(shardsDir, file), shardStaging);
+// The job-progress mod's bar (progress.mjs): each shard a unit, and the
+// barrel. `tsc`, before this, says nothing about how far along it is.
+const bar = progress("engine build: bundling", shards.length + 1);
+for (const file of shards) {
+  await bundleInPlace(path.join(shardsDir, file), shardStaging);
+  bar.tick();
+}
 rmSync(shardStaging, { recursive: true, force: true });
 const shardCards = cards;
 
@@ -124,6 +131,8 @@ const barrelStaging = path.join(distDir, ".barrel-bundling");
 rmSync(barrelStaging, { recursive: true, force: true });
 await bundleInPlace(path.join(cardsDir, "generated.js"), barrelStaging);
 rmSync(barrelStaging, { recursive: true, force: true });
+bar.tick();
+bar.finish();
 
 console.log(
   `bundled ${shards.length} card shards (${shardCards} card modules inlined) and the card barrel (${cards - shardCards}) in ${Date.now() - t0} ms`,

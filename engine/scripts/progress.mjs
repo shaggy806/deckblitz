@@ -11,6 +11,8 @@
 //   const bar = progress("bot:ab", 400);
 //   bar.tick();           // one more done
 //   bar.tick({ failed: true });
+//   bar.to(31);           // or: this far along, of `total` (a replay's turn)
+//   bar.grow();           // one more unit than first said
 //   bar.finish();         // also called on process exit
 //
 // A process may run several bars, one after another (a tune's matches) or at
@@ -36,8 +38,17 @@ function sweep(now) {
     return;
   }
   for (const name of names) {
-    if (!name.endsWith(".json")) continue;
     const path = join(DIR, name);
+    // A write a killed job never renamed into place.
+    if (name.endsWith(".tmp")) {
+      try {
+        if (now - statSync(path).mtimeMs > KEEP_FINISHED_MS) rmSync(path, { force: true });
+      } catch {
+        // already gone
+      }
+      continue;
+    }
+    if (!name.endsWith(".json")) continue;
     try {
       const job = JSON.parse(readFileSync(path, "utf8"));
       const age = now - (job.updatedAt ?? statSync(path).mtimeMs);
@@ -76,6 +87,9 @@ export function progress(label, total) {
     }
   };
   const soon = () => {
+    // A job that never yields (scenarios or a game played in one loop) never
+    // lets a timer fire: a write that is due is made here.
+    if (Date.now() - lastWrite >= WRITE_EVERY_MS) return write();
     if (pending !== null) return;
     const wait = Math.max(0, lastWrite + WRITE_EVERY_MS - Date.now());
     pending = setTimeout(write, wait);
@@ -108,6 +122,19 @@ export function progress(label, total) {
     tick({ failed = false, count = 1 } = {}) {
       job.done += count;
       if (failed) job.failed += count;
+      soon();
+    },
+    /** A job measured by where it has got to (a replay's turn), not by units
+     * finished: `done` is set, never moved back. */
+    to(done) {
+      if (done <= job.done) return;
+      job.done = Math.min(done, job.total);
+      soon();
+    },
+    /** `count` more units than first said: a job that learns its steps as it
+     * starts them (`verify`). */
+    grow(count = 1) {
+      job.total += count;
       soon();
     },
     finish,

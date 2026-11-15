@@ -29,6 +29,7 @@ import {
   runScenarios,
 } from "../dist/index.js";
 import { loadCaptureScenarios, loadResolvedCaptureScenarios } from "./captures.mjs";
+import { progress } from "./progress.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -57,17 +58,23 @@ console.log(`scenarios: ${label}${budget === null ? "" : `, at ${budget} ms a de
 const registry = createDefaultRegistry();
 // Resolved captures (`captures/resolved/`, git-ignored) gate beside the
 // hand-built ones: a blunder fixed once must stay fixed.
-const reports = runScenarios(weights, registry, makeBot, [
-  ...BOT_SCENARIOS,
-  ...loadResolvedCaptureScenarios(),
-]);
+const gated = [...BOT_SCENARIOS, ...loadResolvedCaptureScenarios()];
 // Training scenarios are right answers the shipped weights may still get
 // wrong — reported, never gated on (`src/bot/scenarios.ts`, "Two kinds").
 // Positions captured from live games join them (`captures/`, git-ignored).
-const training = runScenarios(weights, registry, makeBot, [
-  ...TRAINING_SCENARIOS,
-  ...loadCaptureScenarios(),
-]);
+const trained = [...TRAINING_SCENARIOS, ...loadCaptureScenarios()];
+// One at a time, for the job-progress mod's bar (progress.mjs): a scenario a
+// unit, a gate scenario that fails counted failed.
+const bar = progress("bot:scenarios", gated.length + trained.length);
+const each = (scenarios, gates) =>
+  scenarios.map((scenario) => {
+    const [report] = runScenarios(weights, registry, makeBot, [scenario]);
+    bar.tick({ failed: gates && !report.passed });
+    return report;
+  });
+const reports = each(gated, true);
+const training = each(trained, false);
+bar.finish();
 const width = Math.max(...[...reports, ...training].map((r) => r.name.length));
 for (const r of reports) {
   console.log(`  ${r.passed ? "PASS" : "FAIL"}  ${r.name.padEnd(width)} ${r.passed ? "" : `(${r.detail})`}`);

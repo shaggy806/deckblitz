@@ -45,6 +45,7 @@ import {
   describeMove,
   isLethal,
 } from "../dist/index.js";
+import { progress } from "./progress.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -87,6 +88,8 @@ if (jobs.length > 1) {
   console.log(`bot:losses — ${jobs.length} games, ${parallel} at a time`);
   const total = newTally();
   const started = Date.now();
+  // The job-progress mod's bar (progress.mjs): a game a unit.
+  const bar = progress("bot:losses", jobs.length);
   let next = 0;
   let failed = 0;
   const play = () =>
@@ -120,10 +123,12 @@ if (jobs.length > 1) {
           total.flagged += t.flagged;
           for (const f of FLAGS) total.flags[f] += t.flags[f];
         }
+        bar.tick({ failed: code !== 0 || tallyLine === undefined });
         play().then(done);
       });
     });
   await Promise.all(Array.from({ length: Math.min(parallel, jobs.length) }, play));
+  bar.finish();
   console.log(`\n== ${jobs.length - failed} games in ${Math.round((Date.now() - started) / 1000)} s${failed > 0 ? ` (${failed} failed)` : ""}\n${summary(total)}`);
   process.exit(failed > 0 ? 1 : 0);
 }

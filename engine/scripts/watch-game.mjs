@@ -33,6 +33,7 @@ import {
   createDefaultRegistry,
   describeMove,
 } from "../dist/index.js";
+import { progress } from "./progress.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -142,9 +143,17 @@ game = Game.create({
 let lastTurn = -1;
 const lost = new Set();
 const started = Date.now();
+// The job-progress mod's bar (progress.mjs), when the run has a turn to get
+// to (`--turns`, `--snapshot-at`): a turn a unit. A whole game has no known
+// length, so it has no bar.
+const target = toTurn !== Infinity ? toTurn : snapshotAt;
+const bar = target === null ? null : progress(`bot:watch to turn ${target}`, target);
 game.advanceUntil((s) => {
   if (s.turn.number !== lastTurn) {
     lastTurn = s.turn.number;
+    bar?.to(s.turn.number - 1);
+    // Past the turn asked for (a snapshot taken, the game played on): done.
+    if (target !== null && s.turn.number > target) bar?.finish();
     const active = s.turnOrder[s.turn.activePlayerIndex];
     if (snapshotAt !== null && !snapshotSaved && s.turn.number >= snapshotAt) {
       const dir = join(dirname(fileURLToPath(import.meta.url)), "..", "..", ".scratch", "replays");
@@ -168,6 +177,8 @@ game.advanceUntil((s) => {
   // Past the turns asked for there is nothing left to print: stop there.
   return s.result.over || s.turn.number > Math.min(maxTurns, toTurn);
 });
+bar?.to(target);
+bar?.finish();
 console.log(`\n== End: turn ${game.state.turn.number}, ${JSON.stringify(game.state.result)}`);
 console.log(summary(game.state));
 console.log("\nHow each decision was reached:");

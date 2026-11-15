@@ -35,6 +35,7 @@ import {
 } from "../dist/index.js";
 import { ROOT } from "./baseline-build.mjs";
 import { tableFor } from "./bot-seating.mjs";
+import { progress } from "./progress.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -104,8 +105,14 @@ const started = performance.now();
 let turnStart = started;
 let turn = game.state.turn.number;
 let saved = false;
+// The job-progress mod's bar (progress.mjs), when the replay has a turn to
+// get to (`--until`, `--snapshot-at`): a turn a unit.
+const target = until !== Infinity ? until : snapshotAt;
+const bar = target === null ? null : progress(`bot:replay to turn ${target}`, target);
 game.advanceUntil((s) => {
   if (s.turn.number !== turn) {
+    bar?.to(s.turn.number - 1);
+    if (target !== null && s.turn.number > target) bar?.finish();
     const now = performance.now();
     if (turn >= quietBefore) {
       console.log(

@@ -39,6 +39,7 @@ import {
   damageThrough,
   isLethal,
 } from "../dist/index.js";
+import { progress } from "./progress.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -112,6 +113,8 @@ if (jobs.length > 1) {
     }
   };
   const started = Date.now();
+  // The job-progress mod's bar (progress.mjs): a game a unit.
+  const bar = progress("bot:outs", jobs.length);
   let next = 0;
   let failed = 0;
   const play = () =>
@@ -135,10 +138,12 @@ if (jobs.length > 1) {
           failed += 1;
           console.log(`  (this game failed: exit ${code})`);
         } else add(total, JSON.parse(tallyLine.slice(TALLY_MARK.length)));
+        bar.tick({ failed: code !== 0 || tallyLine === undefined });
         play().then(done);
       });
     });
   await Promise.all(Array.from({ length: Math.min(parallel, jobs.length) }, play));
+  bar.finish();
   console.log(`\n== ${jobs.length - failed} games in ${Math.round((Date.now() - started) / 1000)} s${failed > 0 ? ` (${failed} failed)` : ""}\n${summary(total)}`);
   process.exit(failed > 0 ? 1 : 0);
 }

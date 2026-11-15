@@ -87,6 +87,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { release, takeMachine, takeSlot } from "./machine-slots.mjs";
+import { progress } from "../engine/scripts/progress.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ENGINE = path.join(ROOT, "engine");
@@ -202,11 +203,22 @@ function stopLive() {
   live.clear();
 }
 
+/** The job-progress mod's bar (engine/scripts/progress.mjs): a step a unit.
+ * Which steps a run takes is decided as it goes, so the total grows as each
+ * starts; the steps with bars of their own (the suites, the fuzzers, the
+ * gate) draw those beside it. */
+let stepsBar = null;
+function stepStarted() {
+  if (stepsBar === null) stepsBar = progress("verify steps", 1);
+  else stepsBar.grow();
+}
+
 /** Run `cmd args` (a shell only for npm/npx, whose Windows shims need one),
  * logging to a temp file. Resolves to { ok, log, out }. */
 function run(name, cmd, cmdArgs, cwd = ROOT) {
   const log = path.join(LOGS, `verify-${name}.txt`);
   const t = Date.now();
+  stepStarted();
   const useShell = cmd === "npm" || cmd === "npx";
   // A shell gets one command string (Node warns on args beside shell: true);
   // only npm/npx need it, and their arguments here are fixed, never a card name.
@@ -222,6 +234,7 @@ function run(name, cmd, cmdArgs, cwd = ROOT) {
     child.on("close", (code) => {
       live.delete(child);
       writeFileSync(log, out);
+      stepsBar?.tick({ failed: code !== 0 });
       resolve({ name, ok: code === 0, log, out, time: secs(t) });
     });
   });
