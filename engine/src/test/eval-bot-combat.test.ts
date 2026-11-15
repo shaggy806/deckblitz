@@ -82,6 +82,45 @@ describe("combat-math", () => {
     expect(through.damage).toBeLessThan(game.state.players[B].life);
     expect(isLethal(game.state, B, through)).toBe(true);
   });
+
+  it("counts the life lifelink blockers gain against what gets through", () => {
+    // The watched board (2026-11-15): seventeen attackers, 39 power, into
+    // ten 1/1 lifelink Soldiers at 12 life. Fourteen gets through and the
+    // ten blocks gain ten in the same damage step (rule 120.3f).
+    const game = Game.create({ seed: 1, registry, decks: [deckFor(A), deckFor(B)] });
+    game.state.players[B].life = 12;
+    const attackers = [creature(5, 5), creature(4, 4), ...Array.from({ length: 15 }, () => creature(2, 2))];
+    const soldiers = Array.from({ length: 10 }, () => creature(1, 1, ["lifelink"]));
+    const through = damageThrough(attackers, soldiers);
+    expect(through.damage).toBe(14);
+    expect(through.gained).toBe(10);
+    expect(isLethal(game.state, B, through)).toBe(false);
+    // The same ten without lifelink are dead, and so are two with it.
+    const plain = damageThrough(attackers, Array.from({ length: 10 }, () => creature(1, 1)));
+    expect(plain.gained).toBeUndefined();
+    expect(isLethal(game.state, B, plain)).toBe(true);
+    expect(isLethal(game.state, B, damageThrough(attackers, soldiers.slice(0, 2)))).toBe(true);
+  });
+
+  it("has a spare lifelink blocker join a block for its life", () => {
+    const through = damageThrough([creature(3, 3)], [creature(1, 1), creature(2, 2, ["lifelink"])]);
+    expect(through.damage).toBe(0);
+    expect(through.gained).toBe(2);
+  });
+
+  it("gains nothing from a lifelink blocker a first striker kills, or past first-strike damage", () => {
+    // The first striker kills the 1/1 before it deals damage (rule 510.4).
+    expect(damageThrough([creature(2, 2, ["first-strike"])], [creature(1, 1, ["lifelink"])]).gained).toBeUndefined();
+    // It survives a first strike that doesn't kill it.
+    expect(damageThrough([creature(2, 2, ["first-strike"])], [creature(1, 3, ["lifelink"])]).gained).toBe(1);
+    // An unblocked double striker's first hit lands before any blocker's damage.
+    const through = damageThrough(
+      [creature(4, 4), creature(3, 3, ["double-strike", "flying"])],
+      [creature(2, 2, ["lifelink"])],
+    );
+    expect(through.damage).toBe(6);
+    expect(through.gained).toBeUndefined();
+  });
 });
 
 // --- the bot's combat decisions -------------------------------------------
@@ -218,6 +257,30 @@ describe("EvalBotController combat", () => {
       });
     expect(bot().declareBlockers(viewOf(board(40), A))).toHaveLength(0);
     expect(bot().declareBlockers(viewOf(board(5), A))).toHaveLength(1);
+  });
+
+  it("chumps with as many tokens of one stack as it takes to live", () => {
+    // Three 6/4s at 12 life: two of them chumped leaves 6. The five Soldiers
+    // are one stack, which blocked as one creature and so chumped once (a
+    // watched game, 2026-11-15).
+    const game = atDeclaration("blockers", (g) => {
+      const stack = g.debugSpawn("Soldier Token", A, "battlefield", { summoningSick: false });
+      g.state.objects[stack].isToken = true;
+      g.state.objects[stack].stackCount = 5;
+      for (let i = 0; i < 3; i += 1) g.debugSpawn("Craw Wurm", B, "battlefield", { summoningSick: false });
+      g.state.players[A].life = 12;
+    });
+    const chumped = (blocks: readonly { attacker: unknown; count?: number }[]) => ({
+      attackers: new Set(blocks.map((b) => b.attacker)).size,
+      tokens: blocks.reduce((n, b) => n + (b.count ?? 5), 0),
+    });
+    const v1 = new HeuristicBotController(A, registry).declareBlockers(viewOf(game, A));
+    expect(chumped(v1)).toEqual({ attackers: 2, tokens: 2 });
+    const v2 = bot().declareBlockers(viewOf(game, A));
+    expect(chumped(v2).attackers).toBeGreaterThanOrEqual(2);
+    game.dispatch({ type: "declare-blockers", player: A, blocks: v2 });
+    game.advanceUntil((s) => s.turn.step === "end" || s.result.over);
+    expect(game.state.players[A].hasLost).toBe(false);
   });
 });
 

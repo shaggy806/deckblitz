@@ -2596,6 +2596,34 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "does not tap the lifelink blockers that keep it alive to destroy a Sol Ring",
+    rule: "Blockers with lifelink gain life as they block: a board they hold is not 'dead either way', so tapping them is not free.",
+    run(weights, registry, makeBot) {
+      // A watched game (2026-11-15, Token Triumph against Grave Danger, turn
+      // 25): at 12 life with ten lifelink Soldiers fresh off March of the
+      // Multitudes, facing seventeen attackers, it tapped eight of them for
+      // Nullmage Shepherd (Sol Ring, then Wayfarer's Bauble) and died to the
+      // attack. Ten blocks let 14 through and gain 10; the block arithmetic
+      // counted no life gained, read the board as lethal whatever stayed
+      // home, and so the tap guard stood down (`crackbackGuard`). Fixed:
+      // `DamageThrough.gained`. With that fixed it activated twice all the
+      // same, as a batch, which was scored without the guard: the second
+      // artifact here is what offers one.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 12;
+      const shepherd = onBoard(game, "Nullmage Shepherd", A, true);
+      for (let i = 0; i < 10; i += 1) onBoard(game, "Lifelink Soldier Token", A);
+      onBoard(game, "Sol Ring", B);
+      onBoard(game, "Wayfarer's Bauble", B);
+      for (let i = 0; i < 17; i += 1) onBoard(game, "Zombie Token", B);
+      const reached = toSecondMain(game);
+      if (reached !== null) return reached;
+      const action = makeBot(A, registry, weights).act(viewOf(game, A));
+      const taps = action.type === "activate-ability" && action.source === shepherd;
+      return { passed: !taps, detail: `chose ${describeAction(action)}` };
+    },
+  },
+  {
     name: "does not station into a lethal crackback when the clock stops the check",
     rule: "A crackback check the deadline stopped in flight wasn't shown safe: the play is unsafe, not safe.",
     run(weights, registry) {
@@ -5033,6 +5061,72 @@ const SCENARIOS: readonly BotScenario[] = [
         judge: (action) => ({
           passed: !(action.type === "cycle" && action.card === landscape),
           detail: `in its upkeep chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "blocks with every lifelink Soldier when the life they gain is what keeps it alive",
+    rule: "A lifelink blocker gains life as it blocks: against an attack too wide to stop, the blocks that gain the most are the ones that survive it.",
+    position(registry) {
+      // The other half of the watched Nullmage Shepherd turn (2026-11-15):
+      // seventeen 2/2 Zombies into ten 1/1 lifelink Soldiers at 12 life.
+      // Each block stops 2 and gains 1, so eight blocks or more live (ten
+      // leave it at 8) and seven or fewer die.
+      const game = table(registry, [A, B], B);
+      game.state.players[A].life = 12;
+      const soldiers = onBoard(game, "Lifelink Soldier Token", A);
+      game.state.objects[soldiers].isToken = true;
+      game.state.objects[soldiers].stackCount = 10;
+      const zombies = onBoard(game, "Zombie Token", B);
+      game.state.objects[zombies].isToken = true;
+      game.state.objects[zombies].stackCount = 17;
+      const failed = bobAttacks(game, [zombies]);
+      if (failed !== null) return failed;
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const blocks = action.type === "declare-blockers" ? action.blocks : [];
+          const blocking = blocks.reduce((n, b) => n + (b.count ?? 1), 0);
+          return { passed: blocking >= 8, detail: `blocked with ${blocking}: ${describeAction(action).slice(0, 300)}` };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "does not tap its token blockers away in the attacker's main phase for a Sol Ring",
+    kind: "training",
+    rule: "Blockers tapped before an attack are blocks not made: at 15 life in front of 16 power, four of five lifelink Soldiers are worth more home than a Sol Ring.",
+    position(registry) {
+      // The same game replayed after the fixes above (2026-11-15): in Grave
+      // Danger's upkeep, at 15 life, Token Triumph tapped four of its five
+      // lifelink Soldiers to Nullmage Shepherd for a Talisman, and died to
+      // the attack once Liliana shrank the fifth. Here: five attackers, 16
+      // power, at 15 life. Still wrong, and not by arithmetic: one chump
+      // keeps it alive on 6 either way, and the rollouts' defender (v1) only
+      // chumps to stay alive, so the four Soldiers block nothing in the
+      // rollout where they stay home and tapping them reads as free (−85.4
+      // against −88.9). v2's own block search, asked for real, would block
+      // with more. BACKLOG, "Lifelink in the blocks a bot predicts".
+      const game = table(registry, [A, B], B);
+      game.state.players[A].life = 15;
+      const shepherd = onBoard(game, "Nullmage Shepherd", A, true);
+      const soldiers = onBoard(game, "Lifelink Soldier Token", A);
+      game.state.objects[soldiers].isToken = true;
+      game.state.objects[soldiers].stackCount = 5;
+      onBoard(game, "Sol Ring", B);
+      for (const name of ["Craw Wurm", "Hill Giant", "Hill Giant", "Grizzly Bears", "Grizzly Bears"]) onBoard(game, name, B);
+      game.dispatch({ type: "pass-priority", player: B });
+      if (game.state.priority.holder !== A || game.state.turn.step !== "precombat-main") {
+        return { passed: false, detail: `alice never got priority in bob's main phase (${game.state.turn.step})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "activate-ability" && action.source === shepherd),
+          detail: `chose ${describeAction(action).slice(0, 200)}`,
         }),
       };
     },

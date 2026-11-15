@@ -1470,6 +1470,13 @@ export class EvalBotController extends HeuristicBotController {
       if (batched.has(key)) continue;
       batched.add(key);
       if (this.replacesItself(view.state, action)) continue;
+      // Not an activation the search just marked unsafe (`lastUnsafe`): what
+      // one of them taps into the crackback, several tap further. A batch is
+      // scored by the plain evaluation, which has no such term, so Nullmage
+      // Shepherd activated twice was taken where each activation alone had
+      // been refused (a watched game, 2026-11-15) — as the planner's lines
+      // once were.
+      if (this.lastUnsafe.includes(action)) continue;
       const targeted = (action.targets ?? []).some((t) => t !== null);
       for (const spread of targeted ? [false, true] : [false]) {
         if (spent(budget)) break;
@@ -1500,6 +1507,10 @@ export class EvalBotController extends HeuristicBotController {
         // Not one we don't live through, even where passing reads as lost
         // too: among lines all scored as lost, the order means nothing.
         if (result.state.players[this.playerId]?.hasLost === true) continue;
+        // Nor one whose activations together leave us dead to the crackback
+        // where one alone didn't: read on the board the batch ends the turn
+        // on, only while a tap could matter (`tapGuard`).
+        if (this.tapGuard !== null && this.crackbackLethal(result.state, this.tapGuard.grown)) continue;
         const score = evaluateState(result.state, this.cards, this.playerId, this.weights);
         // The cost decides whether the batch is taken, and isn't kept in the
         // score: the turn plan's lines are compared with it after this, and
@@ -2480,12 +2491,16 @@ export class EvalBotController extends HeuristicBotController {
     // To the end of combat — or, under a deep horizon, on to it: a trade
     // that looks even when the combat ends can cost the attack that wins
     // next turn.
+    // The declarations scored that left us out of the game (`wideBlock`).
+    const diedWith = new WeakSet<readonly BlockerDeclaration[]>();
     const score = (blocks: readonly BlockerDeclaration[]): number | null => {
       const action: Action = { type: "declare-blockers", player: me, blocks };
       const after = isDeepHorizon(this.horizon)
         ? simulateAction(state, this.cards, action, this.horizon, this.rollout, this.selfInPriorityRollouts(view.state))
         : simulateCombat(state, this.cards, action);
-      return after === null ? null : evaluateState(after, this.cards, me, w);
+      if (after === null) return null;
+      if (after.players[me]?.hasLost === true) diedWith.add(blocks);
+      return evaluateState(after, this.cards, me, w);
     };
 
     const creatures = new Map<ObjectId, CombatCreature>();
@@ -2546,10 +2561,20 @@ export class EvalBotController extends HeuristicBotController {
     // A move adds one blocker — or, against menace, two at once, since one
     // alone is illegal — or takes one block back, so a climb that starts from
     // v1's blocks can undo a chump it didn't need.
+    // A compacted token stack is one entry standing for `copies` blockers
+    // (rule 509.1a: each token blocks on its own), so it stays free until
+    // every token is declared, and each block names one of them. Counted as
+    // one blocker, a stack of ten Soldiers blocked one attacker of seventeen.
+    const tokensOf = new Map(legal.eligible.map((e) => [e.blocker, e.copies ?? 1]));
+    const one = (blocker: ObjectId, attacker: ObjectId): BlockerDeclaration =>
+      (tokensOf.get(blocker) ?? 1) > 1 ? { blocker, attacker, count: 1 } : { blocker, attacker };
     const neighbours = (current: readonly BlockerDeclaration[]) => {
       const out: { next: BlockerDeclaration[]; estimate: number }[] = [];
-      const used = new Set(current.map((b) => b.blocker));
-      const free = legal.eligible.filter((e) => !used.has(e.blocker));
+      const declared = new Map<ObjectId, number>();
+      for (const b of current) {
+        declared.set(b.blocker, (declared.get(b.blocker) ?? 0) + (b.count ?? tokensOf.get(b.blocker) ?? 1));
+      }
+      const free = legal.eligible.filter((e) => (declared.get(e.blocker) ?? 0) < (e.copies ?? 1));
       // "Can't be blocked by more than one creature": one blocker, never a
       // second (Challenger Troll).
       const single = new Set(legal.singleBlockerAttackers ?? []);
@@ -2559,7 +2584,7 @@ export class EvalBotController extends HeuristicBotController {
           if (legal.menaceAttackers.includes(attacker)) continue;
           if (single.has(attacker) && blockedNow.has(attacker)) continue;
           // One token of a stack per move (see v1's `declareBlockers`).
-          const move = [{ blocker: entry.blocker, attacker, ...((entry.copies ?? 1) > 1 ? { count: 1 } : {}) }];
+          const move = [one(entry.blocker, attacker)];
           out.push({ next: [...current, ...move], estimate: estimate(move) });
         }
       }
@@ -2570,10 +2595,7 @@ export class EvalBotController extends HeuristicBotController {
         let pairs = 0;
         for (let i = 0; i < able.length && pairs < MAX_MENACE_PAIRS; i += 1) {
           for (let j = i + 1; j < able.length && pairs < MAX_MENACE_PAIRS; j += 1) {
-            const move = [
-              { blocker: able[i].blocker, attacker },
-              { blocker: able[j].blocker, attacker },
-            ];
+            const move = [one(able[i].blocker, attacker), one(able[j].blocker, attacker)];
             out.push({ next: [...current, ...move], estimate: estimate(move) });
             pairs += 1;
           }
@@ -2598,10 +2620,7 @@ export class EvalBotController extends HeuristicBotController {
             const x = creatures.get(able[i].blocker);
             const y = creatures.get(able[j].blocker);
             if (x === undefined || y === undefined || x.damage + y.damage < target.toughness) continue;
-            const move = [
-              { blocker: able[i].blocker, attacker },
-              { blocker: able[j].blocker, attacker },
-            ];
+            const move = [one(able[i].blocker, attacker), one(able[j].blocker, attacker)];
             out.push({ next: [...current, ...move], estimate: estimate(move) });
             pairs += 1;
           }
@@ -2622,9 +2641,60 @@ export class EvalBotController extends HeuristicBotController {
     // out of when no single chump is enough by itself. They're its one
     // baseline.
     const budget = this.budget(this.maxSimulations, 1);
-    const [best] = hillClimb(fallback, neighbours, score, budget);
+    const [built, builtScore] = hillClimb(fallback, neighbours, score, budget);
+    // The wide block, when the blocks built one at a time still lose the
+    // game: every attacker a blocker can take, taken. One block more leaves
+    // us just as dead until enough are made, so the climb never gets there —
+    // seventeen 2/2s into ten 1/1 lifelink Soldiers at 12 life needs eight
+    // of them blocking, each gaining a life, before any of it shows (a
+    // watched game, 2026-11-15). The same shape as the wide attack.
+    let best = built;
+    if (diedWith.has(built) && !budget.stalled) {
+      const wide = this.wideBlock(legal, creatures, w);
+      if (wide.length > built.length) {
+        // Scored even with the count spent: it is the one start that may live.
+        budget.left = Math.max(budget.left, 1);
+        const [swung, swungScore] = hillClimb(wide, neighbours, score, budget);
+        if (swungScore > builtScore && !diedWith.has(swung)) best = swung;
+      }
+    }
     this.lastDecision = audit("blockers", budget);
     return best;
+  }
+
+  /**
+   * Every attacker blocked that can be, the ones dealing the most first, each
+   * by the least valuable creature able to block it, one token of a stack at
+   * a time. Menace attackers and declarations with rules of their own (a cap
+   * on blockers, a tax, blockers that need company, all-or-none) are left to
+   * the climb: the engine refuses a declaration that breaks one, and a
+   * refused start scores nothing.
+   */
+  private wideBlock(
+    legal: DeclareBlockersLegal,
+    creatures: ReadonlyMap<ObjectId, CombatCreature>,
+    w: EvalWeights,
+  ): BlockerDeclaration[] {
+    if (legal.blockMost !== undefined || legal.blockTax !== undefined || legal.blockCompany !== undefined) return [];
+    const left = new Map(legal.eligible.map((e) => [e.blocker, e.copies ?? 1]));
+    const skipped = new Set<ObjectId>([...legal.menaceAttackers, ...(legal.blockedByAll ?? [])]);
+    const worth = (id: ObjectId): number => {
+      const c = creatures.get(id);
+      return c === undefined ? Infinity : creatureValue(c, w);
+    };
+    const attackers = [...new Set(legal.eligible.flatMap((e) => e.canBlock))]
+      .filter((a) => !skipped.has(a) && (creatures.get(a)?.damage ?? 0) > 0)
+      .sort((x, y) => (creatures.get(y)?.damage ?? 0) - (creatures.get(x)?.damage ?? 0));
+    const blocks: BlockerDeclaration[] = [];
+    for (const attacker of attackers) {
+      const able = legal.eligible
+        .filter((e) => (left.get(e.blocker) ?? 0) > 0 && e.canBlock.includes(attacker))
+        .sort((x, y) => worth(x.blocker) - worth(y.blocker))[0];
+      if (able === undefined) continue;
+      left.set(able.blocker, (left.get(able.blocker) ?? 0) - 1);
+      blocks.push((able.copies ?? 1) > 1 ? { blocker: able.blocker, attacker, count: 1 } : { blocker: able.blocker, attacker });
+    }
+    return blocks;
   }
 
   /**
@@ -2804,6 +2874,7 @@ export class EvalBotController extends HeuristicBotController {
       scale === 1
         ? through
         : {
+            ...through,
             damage: through.damage * scale,
             commanderDamage: new Map([...through.commanderDamage].map(([c, n]) => [c, n * scale] as const)),
           };

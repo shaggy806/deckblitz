@@ -1053,6 +1053,66 @@ Gate scenario "attacks wide when one attacker at a time is blocked and ten are n
 wide attack is all or drop-one-at-a-time, so "the tokens but not the commander" is found only
 if dropping the commander alone improves it.
 
+### Blocking with a token stack, and with lifelink (2026-11-15)
+
+A game watched at the live clock (Token Triumph against Grave Danger, seed 22). On turn 25
+Token Triumph, at 12 life and facing seventeen attackers with 39 power, cast March of the
+Multitudes for nine lifelink Soldiers, then tapped eight of them to activate Nullmage
+Shepherd twice (a Sol Ring and a Wayfarer's Bauble) and died to the attack with two blockers
+up. Four things were wrong, each found by rebuilding the board.
+
+**The block arithmetic counted no life gained.** Ten blocks stop twenty of the damage and
+gain ten life in the same damage step (rule 120.3f), so the board was survivable: 12 life,
+14 through, 10 gained. `damageThrough` returned only the 14, the crackback read as lethal
+whatever stayed home, and `crackbackGuard` stands down when holding back buys nothing. It
+now returns `gained` too, and `isLethal` takes it off. A spare lifelink blocker joins a block
+for its life; a blocker a first striker kills gains nothing; and nothing is counted when
+first-strike damage gets through, since that lands a step earlier. A player who can't gain
+life isn't read.
+
+**A token stack blocked as one creature.** A compacted stack is one entry in the block offer
+with `copies`, and both bots took one token of it and called the stack used: v1's chump loop
+chumped once and stopped, and v2's climb never offered a second token. So ten Soldiers in a
+stack put one blocker in front of seventeen attackers. Now v1's blocks are built over units,
+one a creature, a stack being as many as could matter (two for each attacker; one under
+Lure, whose block takes the whole stack), so every pass of it (trades, gang blocks, free
+blocks, chumps) can take a token each. v2's climb keeps a stack free until every token is
+declared (its menace and gang pairs name one token each, where they named the whole stack).
+
+**One block more is no better until enough are made.** With every block needed to live, each
+single block added still loses the game, so a climb from v1's blocks stops. When the blocks
+it built lose, v2 now scores the wide block (every attacker a blocker can take, the hardest
+hitters first, by the least valuable blocker able to) and climbs down from it, taking it only
+if we live. The same shape as the wide attack, and only asked when we're dying.
+
+**A batch went round the tap guard.** With the three above fixed, the gate scenario passed and
+the same seed, replayed, tapped the Soldiers all the same. On the real board there were two
+artifacts to destroy, so the search also scored "activate it twice" as one candidate (a
+batch), by the plain evaluation, which has no crackback term: each single activation had been
+marked unsafe and the pair was taken. A batch now isn't built from an activation the search
+marked unsafe, nor taken when it ends the turn dead to the crackback while a tap could matter
+(`tapGuard`). The planner's lines had the same hole until 2026-11-10. Replayed once more, the
+bot keeps the Soldiers home, blocks with all of them, taps them for the Shepherd after blocks
+are declared, and wins on turn 27 the game it lost on 26.
+
+Gate scenarios "does not tap the lifelink blockers that keep it alive to destroy a Sol Ring"
+(red with `isLethal` reading the damage alone) and "blocks with every lifelink Soldier when
+the life they gain is what keeps it alive". Left: v1 doesn't count lifelink when it decides
+how many chumps it needs, and the attack side's estimate of an opponent's blocks doesn't
+choose blocks for the life they gain.
+
+**Not fixed: blockers tapped on the attacker's turn.** The same seed replayed on the fixed
+build died a second way. In Grave Danger's upkeep, at 15 life in front of 16 power, Token
+Triumph tapped four of five lifelink Soldiers to Nullmage Shepherd for a Talisman; one chump
+kept it alive on 6 by its own arithmetic, and Liliana, Untouched by Death shrank the fifth
+Soldier. Rebuilt, the activation scores −85.4 and passing −88.9, both ending on 6 life: the
+rollout's defender is v1, which chumps only to stay alive, so the Soldiers left home block
+nothing there and tapping them is free. Asked for real, v2's block search would block with
+more of them. The tap guard doesn't reach it either: it asks on our own turn, and about
+lethal. Training scenario "does not tap its token blockers away in the attacker's main phase
+for a Sol Ring"; what would fix it is a rollout defender that blocks the way v2 does, which
+is the same open item as "an attack's blocks are predicted with v1's".
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

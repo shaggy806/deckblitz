@@ -5462,27 +5462,41 @@ export class HeuristicBotController extends AutomaticController {
     const power = (id: ObjectId) => assignedCombatDamage(state, this.registry, id);
     const toughness = (id: ObjectId) => computeCharacteristics(state, this.registry, id).toughness;
 
-    const chosen = new Map<ObjectId, ObjectId>(); // blocker -> attacker
-    const used = new Set<ObjectId>();
+    // The blockers on offer, one unit a creature. A compacted token stack is
+    // one entry standing for `copies` creatures (rule 509.1a: each token
+    // blocks on its own), so it is as many units as could matter: two for
+    // each attacker. Taken as one blocker, a stack of ten Soldiers made one
+    // block while sixteen attackers went by, and a rollout defending with
+    // five of them lost nothing when four were tapped away (two watched
+    // games, 2026-11-15). Under Lure a stack stays one unit: its block there
+    // takes every token (below).
+    type Unit = { readonly blocker: ObjectId; readonly canBlock: readonly ObjectId[] };
+    const attackerCount = new Set(legal.eligible.flatMap((e) => e.canBlock)).size;
+    const units: Unit[] = legal.eligible.flatMap((e) => {
+      const tokens = legal.mustBlock.length > 0 ? 1 : Math.min(e.copies ?? 1, Math.max(1, 2 * attackerCount));
+      return Array.from({ length: tokens }, () => ({ blocker: e.blocker, canBlock: e.canBlock }));
+    });
+    const chosen = new Map<Unit, ObjectId>(); // blocker -> attacker
+    const used = new Set<Unit>();
 
     // Lure (rule 509.1c): a creature able to block a must-be-blocked
     // attacker must block one of them. One with menace forces blocks only in
     // pairs, which `obeyingLure` sorts out at the end.
-    for (const entry of legal.eligible) {
+    for (const entry of units) {
       const mustOptions = entry.canBlock.filter(
         (a) => legal.mustBlock.includes(a) && !legal.menaceAttackers.includes(a),
       );
       if (mustOptions.length > 0) {
-        chosen.set(entry.blocker, mustOptions[0]);
-        used.add(entry.blocker);
+        chosen.set(entry, mustOptions[0]);
+        used.add(entry);
       }
     }
 
     // A favorable trade: this blocker kills the attacker and survives.
     // Doesn't account for deathtouch/first strike — a simplification, not
     // a correctness bug (the engine still resolves the real combat math).
-    for (const entry of legal.eligible) {
-      if (used.has(entry.blocker)) continue;
+    for (const entry of units) {
+      if (used.has(entry)) continue;
       // Not a deathtouch attacker (it kills any blocker it touches, unless a
       // first striker kills it first), nor one already blocked — the Mardu
       // autopsy found v2 attacking with a deathtouch Snake expecting this
@@ -5501,8 +5515,8 @@ export class HeuristicBotController extends AutomaticController {
           (firstStrike || !computeCharacteristics(state, this.registry, a).keywords.has("deathtouch")),
       );
       if (favorable !== undefined) {
-        chosen.set(entry.blocker, favorable);
-        used.add(entry.blocker);
+        chosen.set(entry,favorable);
+        used.add(entry);
       }
     }
 
@@ -5518,8 +5532,8 @@ export class HeuristicBotController extends AutomaticController {
     const blocked = () => new Set(chosen.values());
     // A blocker that kills the attacker and dies to it, for an attacker
     // worth clearly more (`tradeMargin`).
-    for (const entry of legal.eligible) {
-      if (used.has(entry.blocker)) continue;
+    for (const entry of units) {
+      if (used.has(entry)) continue;
       const taken = blocked();
       const trade = entry.canBlock
         .filter(
@@ -5531,8 +5545,8 @@ export class HeuristicBotController extends AutomaticController {
         )
         .sort((a, b) => worth(b) - worth(a))[0];
       if (trade !== undefined) {
-        chosen.set(entry.blocker, trade);
-        used.add(entry.blocker);
+        chosen.set(entry,trade);
+        used.add(entry);
       }
     }
     // Two blockers that kill together what neither kills alone, when the
@@ -5547,16 +5561,21 @@ export class HeuristicBotController extends AutomaticController {
     for (const attacker of [...new Set(legal.eligible.flatMap((e) => e.canBlock))]) {
       if (blocked().has(attacker)) continue;
       const menace = legal.menaceAttackers.includes(attacker);
-      const able = legal.eligible.filter((e) => !used.has(e.blocker) && e.canBlock.includes(attacker));
+      const able = units.filter((e) => !used.has(e) && e.canBlock.includes(attacker));
       if (!menace && able.some((e) => kills(e.blocker, attacker))) continue;
-      let best: { pair: readonly [ObjectId, ObjectId]; loss: number } | null = null;
+      let best: { pair: readonly [Unit, Unit]; loss: number } | null = null;
+      // Tokens of one stack are the same creature: each pairing is tried once.
+      const tried = new Set<string>();
       for (let i = 0; i < able.length; i += 1) {
         for (let j = i + 1; j < able.length; j += 1) {
           const x = able[i].blocker;
           const y = able[j].blocker;
+          const pairing = `${x}|${y}`;
+          if (tried.has(pairing)) continue;
+          tried.add(pairing);
           if (power(x) + power(y) < toughness(attacker) && !kills(x, attacker) && !kills(y, attacker)) continue;
           const loss = gangLoss(state, this.registry, power(attacker), deathtouch(attacker), x, y);
-          if (worth(attacker) > loss + 1 && (best === null || loss < best.loss)) best = { pair: [x, y], loss };
+          if (worth(attacker) > loss + 1 && (best === null || loss < best.loss)) best = { pair: [able[i], able[j]], loss };
         }
       }
       if (best !== null) {
@@ -5574,8 +5593,8 @@ export class HeuristicBotController extends AutomaticController {
     // predicts every defender with these blocks, swung a 2/2 Scavenging Ooze
     // into an untapped 1/3 as though the 2 damage would land (capture AGB72
     // t15): it only ever tapped the Ooze.
-    for (const entry of legal.eligible) {
-      if (used.has(entry.blocker)) continue;
+    for (const entry of units) {
+      if (used.has(entry)) continue;
       const taken = new Set(chosen.values());
       const safe = entry.canBlock
         .filter(
@@ -5588,8 +5607,8 @@ export class HeuristicBotController extends AutomaticController {
         )
         .sort((a, b) => power(b) - power(a))[0];
       if (safe !== undefined) {
-        chosen.set(entry.blocker, safe);
-        used.add(entry.blocker);
+        chosen.set(entry,safe);
+        used.add(entry);
       }
     }
 
@@ -5603,18 +5622,18 @@ export class HeuristicBotController extends AutomaticController {
     const myLife = view.state.players[this.playerId].life;
     for (const attacker of unblocked) {
       if (remaining < myLife) break;
-      const entry = legal.eligible.find((e) => !used.has(e.blocker) && e.canBlock.includes(attacker));
+      const entry = units.find((e) => !used.has(e) && e.canBlock.includes(attacker));
       if (entry === undefined) continue;
-      chosen.set(entry.blocker, attacker);
-      used.add(entry.blocker);
+      chosen.set(entry, attacker);
+      used.add(entry);
       remaining -= power(attacker);
     }
 
-    // One token of a compacted stack per block, never the whole stack (the
+    // One token of a compacted stack per unit, never the whole stack (the
     // Mardu autopsy: a lethal attacker chumped with all nine Soldiers) — but
     // a Lure block takes every token able to block (rule 509.1c).
     const stackOf = new Map(legal.eligible.map((e) => [e.blocker, e.copies ?? 1]));
-    let blocks: BlockerDeclaration[] = [...chosen].map(([blocker, attacker]) => ({
+    let blocks: BlockerDeclaration[] = [...chosen].map(([{ blocker }, attacker]) => ({
       blocker,
       attacker,
       ...((stackOf.get(blocker) ?? 1) > 1 && !legal.mustBlock.includes(attacker) ? { count: 1 } : {}),

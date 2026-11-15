@@ -171,6 +171,30 @@ export interface DamageThrough {
   readonly damage: number;
   /** Of that, how much each commander dealt. */
   readonly commanderDamage: ReadonlyMap<ObjectId, number>;
+  /** Life the defending player gains in the same combat from blockers with
+   * lifelink (rule 702.15b: gained as the damage is dealt, so before
+   * state-based actions look at their life). `isLethal` takes it off the
+   * damage. Left out when a first or double striker gets damage through:
+   * that damage lands a step before the blockers' does. Not read: a player
+   * who can't gain life (rule 119.7). */
+  readonly gained?: number;
+}
+
+/** Deals its combat damage in the first combat damage step (rule 510.4). */
+const strikesFirst = (c: CombatCreature): boolean =>
+  c.keywords.has("first-strike") || c.keywords.has("double-strike");
+
+/** The life a lifelink `blocker` gains its controller by blocking
+ * `attacker`: its damage, unless the attacker strikes first and kills it
+ * before it deals any. */
+function lifelinkGain(blocker: CombatCreature, attacker: CombatCreature): number {
+  if (!blocker.keywords.has("lifelink") || blocker.damage <= 0) return 0;
+  const diesFirst =
+    strikesFirst(attacker) &&
+    !strikesFirst(blocker) &&
+    attacker.damage > 0 &&
+    (attacker.damage >= blocker.toughness || attacker.keywords.has("deathtouch"));
+  return diesFirst ? 0 : blocker.damage;
 }
 
 /**
@@ -183,6 +207,12 @@ export interface DamageThrough {
  * creature is saved for a flyer when a ground blocker would do. A trampler
  * takes the one with the most toughness instead, since only toughness holds it
  * back. Menace needs two. Close to exact at the board sizes that come up.
+ *
+ * Blockers with lifelink gain their controller life as they deal damage
+ * (`gained`), and one left over joins a block already made for that alone.
+ * Ten 1/1 lifelink Soldiers in front of seventeen attackers read as dead at
+ * 12 life without it, and so "dead either way": the bot tapped eight of them
+ * for Nullmage Shepherd and died to the attack (a watched game, 2026-11-15).
  */
 export function damageThrough(
   attackers: readonly CombatCreature[],
@@ -202,6 +232,9 @@ export function damageThrough(
   const usefulness = (b: number): number => legal.filter((l) => l.includes(b)).length;
 
   let damage = 0;
+  let gained = 0;
+  let firstStrikeThrough = false;
+  const blocked: number[] = [];
   const commanderDamage = new Map<ObjectId, number>();
   for (const index of order) {
     const attacker = attackers[index];
@@ -225,16 +258,32 @@ export function damageThrough(
       const excess = trample ? Math.max(0, full - absorbed) : 0;
       // Worth spending the blockers only if they actually stop something.
       if (full - excess > 0) {
-        for (const b of chosen) free.delete(b);
+        for (const b of chosen) {
+          free.delete(b);
+          gained += lifelinkGain(blockers[b], attacker);
+        }
+        blocked.push(index);
         through = excess;
       }
     }
     damage += through;
+    if (through > 0 && strikesFirst(attacker)) firstStrikeThrough = true;
     if (attacker.isCommander && through > 0) {
       commanderDamage.set(attacker.id, (commanderDamage.get(attacker.id) ?? 0) + through);
     }
   }
-  return { damage, commanderDamage };
+  // A lifelink blocker with nothing left to stop joins a block for its life.
+  if (blocked.length > 0 && !firstStrikeThrough) {
+    for (const b of free) {
+      if (!blockers[b].keywords.has("lifelink")) continue;
+      let best = 0;
+      for (const index of blocked) {
+        if (legal[index].includes(b)) best = Math.max(best, lifelinkGain(blockers[b], attackers[index]));
+      }
+      gained += best;
+    }
+  }
+  return gained > 0 && !firstStrikeThrough ? { damage, commanderDamage, gained } : { damage, commanderDamage };
 }
 
 /**
@@ -250,7 +299,7 @@ export function isLethal(
 ): boolean {
   const p = state.players[defender];
   if (p === undefined || p.hasLost) return false;
-  if (through.damage >= p.life + margin) return true;
+  if (through.damage - (through.gained ?? 0) >= p.life + margin) return true;
   for (const [commander, amount] of through.commanderDamage) {
     if ((p.commanderDamageTaken[commander] ?? 0) + amount >= COMMANDER_DAMAGE_LETHAL) return true;
   }
@@ -290,6 +339,7 @@ export function crackback(
   const opponents = [...order.slice(mine + 1), ...order.slice(0, Math.max(0, mine))];
 
   let damage = 0;
+  let gained = 0;
   const commanderDamage = new Map<ObjectId, number>();
   const shared = Math.max(0, Math.min(1, paranoia));
   const killWeight = Math.max(0, Math.min(1, killShot.weight));
@@ -300,10 +350,11 @@ export function crackback(
     const weight =
       i === 0 ? 1 : killWeight > shared && isLethal(state, me, through, -killShot.margin) ? killWeight : shared;
     if (weight === 0) return;
+    gained += (through.gained ?? 0) * weight;
     damage += through.damage * weight;
     for (const [commander, amount] of through.commanderDamage) {
       commanderDamage.set(commander, (commanderDamage.get(commander) ?? 0) + amount * weight);
     }
   });
-  return { damage, commanderDamage };
+  return gained > 0 ? { damage, commanderDamage, gained } : { damage, commanderDamage };
 }
