@@ -230,6 +230,36 @@ losses, 14 flagged. Read on their boards:
 So two real faults in 20 games, both in under an hour of reading, against the four an hour of
 whole-game reading found on one deck: the screen is the way into step 3.
 
+**The same games on the fixed build** (18 of them, without the Krenko pod; 565 s at six at a
+time): 54 losses, 10 flagged, and none of the ten a misplay by what the bot could know.
+Four are the Y'shtola list dying with life spent and a full hand (the list a bot can't
+pilot). Three are a board that grew in the turn it killed: Grave Danger tapped three Zombies
+to Cryptbreaker in World Shaper's upkeep with 14 life to spare on the board as it stood, and
+World Shaper then cast Moraug with three fetch lands for extra combats; two "blocks" were a
+one-life margin on paper finished by a trigger. The rest are attacks made turns before the
+board that punished them existed. What the arithmetic can't see is a hand: the growth margin
+(`crackbackGrowth`) is one number for every opponent, whatever they hold or have shown.
+
+**The flags sharpened on what those runs showed** (the same day). *Tapped away* counts only
+creatures the seat's own spells, abilities and costs tapped (`permanent-tapped` events), not
+ones that entered tapped (Victimize's two, a mobilize token) or that an opponent tapped.
+*Blocks* asks that combat dealt more than the arithmetic allowed, so a death the rest of
+which was a drain engine or a trigger is noted and not flagged. *Attacked itself open* is
+read against the killer's board as it stood when the seat attacked: flagged when that board
+was lethal through the blockers left home or within half again of it, and otherwise noted as
+a board that grew (Reign of Dragons attacked into 26 power and died to 92). A game past
+`--game-minutes` (15) is stopped and named, so one long game doesn't hold a batch.
+
+**Fresh seeds** (4 to 6 on the same pods, 17 games; a Jeskai pod stopped at its time): 51
+losses, 6 flagged before the last of those changes, 5 of them "attacked itself open". Read
+with the board at the time of the attack, two were boards that grew, and the others were an
+attack that killed a player and left the attacker a close call against the next (Token
+Triumph killed Grave Danger with everything at 22 life, with 16 through from Abzan Armor's
+board as it stood, and died to a Towering Titan that had grown to 30). No new misplay. So
+after the two fixes the screen's rate is about one flag in ten losses, and what it flags is
+mostly the bet an attack makes on an opponent's board not growing, which is a tuning
+question (`crackbackGrowth`, `crackbackParanoia`) and not a fault to rebuild.
+
 ## 5. Playing to its outs
 
 The user, 2026-11-15: "check whether or not the bots play to their outs. If they are dead to

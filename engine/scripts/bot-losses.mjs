@@ -3,13 +3,16 @@
 // and in the windows after it that the loss may turn on. A loss is flagged
 // when one of these holds:
 //
-// - **tapped away**: creatures it had tapped for something other than an
-//   attack (a cost, mana) would have made the attack that killed it one the
-//   block arithmetic survives;
+// - **tapped away**: creatures its own spells, abilities and costs had tapped
+//   (not ones that entered tapped, or that an opponent tapped) would have
+//   made the attack that killed it one the block arithmetic survives;
 // - **attacked itself open**: the same, of the creatures it attacked with on
-//   its own last turn;
-// - **blocks**: the arithmetic had it alive against that attack as it was
-//   declared, and it died to it anyway (its blocks, a trick, a trigger);
+//   its own last turn, where the board that killed it was there to see when
+//   it attacked: lethal through the blockers it left, or within half again
+//   of it (a board that grew afterwards is noted, not flagged);
+// - **blocks**: the arithmetic had it alive against that attack as it
+//   blocked, and combat dealt it more than the arithmetic allowed (a death
+//   the rest of which was a drain or a trigger is noted, not flagged);
 // - **answer held**: it was offered a cast of removal, a counterspell, a
 //   wipe or damage prevention in the turn it died, and still held the card;
 // - **wipe unplayed**: it could have cast a wipe on its own last turn, didn't,
@@ -26,8 +29,9 @@
 //
 // Flags: --decks "A,B,C,D[;…]" (by substring, strong decks first), --seed N or
 // --seeds "1-8", --parallel N (default 6, a process a game), --max-turns N
-// (default 100), --all (unflagged losses too), --quiet (totals only). It
-// plays `dist/`: build first.
+// (default 100), --game-minutes N (default 15: a game past it is stopped and
+// named), --all (unflagged losses too), --quiet (totals only). It plays
+// `dist/`: build first.
 
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -70,6 +74,9 @@ const deckSets = flag("decks", "Token Triumph,Grave Danger,World Shaper,Mardu Su
 /** Life a seat spent on itself below which "life spent" isn't worth a read:
  * a fetch land and a shock land are 3, and every strong deck pays them. */
 const LIFE_SPENT_FLOOR = 4;
+/** An attack "left it open" when the killer's board, as it stood then, put
+ * at least its life through the blockers left home once grown by this much. */
+const SWING_BACK_NEAR = 1.5;
 const TALLY_MARK = "@@tally ";
 const FLAGS = ["tapped away", "attacked itself open", "blocks", "answer held", "wipe unplayed", "life spent", "own turn"];
 const newTally = () => ({ losses: 0, flagged: 0, flags: Object.fromEntries(FLAGS.map((f) => [f, 0])) });
@@ -90,8 +97,10 @@ if (jobs.length > 1) {
   const started = Date.now();
   // The job-progress mod's bar (progress.mjs): a game a unit.
   const bar = progress("bot:losses", jobs.length);
+  const gameMinutes = Math.max(1, Number(flag("game-minutes", "15")));
   let next = 0;
   let failed = 0;
+  let stopped = 0;
   const play = () =>
     new Promise((done) => {
       const job = jobs[next];
@@ -110,11 +119,22 @@ if (jobs.length > 1) {
       let out = "";
       child.stdout.on("data", (chunk) => (out += chunk));
       child.stderr.on("data", (chunk) => (out += chunk));
+      // A game past its time is stopped and said so, not waited for: one
+      // Krenko pod ran half an hour at 1.6 GB while nineteen games sat done.
+      let overTime = false;
+      const timer = setTimeout(() => {
+        overTime = true;
+        child.kill();
+      }, gameMinutes * 60_000);
       child.on("close", (code) => {
+        clearTimeout(timer);
         const lines = out.split("\n");
         const tallyLine = lines.find((l) => l.startsWith(TALLY_MARK));
         console.log(lines.filter((l) => !l.startsWith(TALLY_MARK)).join("\n").trimEnd());
-        if (code !== 0 || tallyLine === undefined) {
+        if (overTime) {
+          stopped += 1;
+          console.log(`bot:losses — seed ${job.seed}: ${job.decks}\n  (stopped: over ${gameMinutes} minutes; --game-minutes N gives it longer)`);
+        } else if (code !== 0 || tallyLine === undefined) {
           failed += 1;
           console.log(`  (this game failed: exit ${code})`);
         } else {
@@ -123,13 +143,16 @@ if (jobs.length > 1) {
           total.flagged += t.flagged;
           for (const f of FLAGS) total.flags[f] += t.flags[f];
         }
-        bar.tick({ failed: code !== 0 || tallyLine === undefined });
+        bar.tick({ failed: !overTime && (code !== 0 || tallyLine === undefined) });
         play().then(done);
       });
     });
   await Promise.all(Array.from({ length: Math.min(parallel, jobs.length) }, play));
   bar.finish();
-  console.log(`\n== ${jobs.length - failed} games in ${Math.round((Date.now() - started) / 1000)} s${failed > 0 ? ` (${failed} failed)` : ""}\n${summary(total)}`);
+  console.log(
+    `\n== ${jobs.length - failed - stopped} games in ${Math.round((Date.now() - started) / 1000)} s` +
+      `${failed > 0 ? ` (${failed} failed)` : ""}${stopped > 0 ? ` (${stopped} stopped at ${gameMinutes} minutes)` : ""}\n${summary(total)}`,
+  );
   process.exit(failed > 0 ? 1 : 0);
 }
 
@@ -191,6 +214,10 @@ const fresh = (turn, life) => ({
   lifeEnd: life,
   moves: [],
   attackerIds: new Set(),
+  /** Its creatures its own spells, abilities and costs tapped since. */
+  tappedForCost: new Set(),
+  /** Per opponent, the swing back as the board stood when it attacked. */
+  swingBack: {},
   attackedWith: [],
   wipesOffered: new Set(),
   wipesCast: new Set(),
@@ -205,6 +232,51 @@ const last = Object.fromEntries(seats.map((s) => [s, null]));
 const now = Object.fromEntries(seats.map((s) => [s, { attacks: [], offered: new Map(), cast: [], hand: [] }]));
 
 let game;
+/** Per seat, this turn: the combat damage it took, and all the life it lost. */
+const taken = Object.fromEntries(seats.map((s) => [s, { combat: 0, lost: 0 }]));
+/** A seat's life after the last change to it: what it died on. */
+const lifeAt = Object.fromEntries(seats.map((s) => [s, 0]));
+const lostEvents = [];
+let seenEvents = 0;
+/** The game's events since the last call, read into the records above. Called
+ * wherever a record is about to be read, mid-turn included. */
+function drain() {
+  if (game === undefined) return;
+  const events = game.events;
+  for (; seenEvents < events.length; seenEvents += 1) {
+    const e = events[seenEvents];
+    if (e.type === "life-paid") {
+      if (last[e.player] != null) last[e.player].lifeSpent += e.amount;
+    } else if (e.type === "life-changed") {
+      lifeAt[e.player] = e.life;
+      if (e.delta < 0) {
+        taken[e.player].lost += -e.delta;
+        // A loss its own effect caused (Reanimate): spent, like a payment.
+        if (e.byEffectOf === e.player && last[e.player] != null) last[e.player].lifeSpent += -e.delta;
+      }
+    } else if (e.type === "damage-dealt" && e.target?.kind === "player") {
+      if (e.combat) taken[e.target.player].combat += e.amount;
+      // Damage from its own source (a City of Brass, a Mana Confluence).
+      else if (e.target.player === e.by && last[e.by] != null) last[e.by].lifeSpent += e.amount;
+    } else if (e.type === "permanent-tapped" && e.asAttacker !== true && e.by !== undefined) {
+      // Tapped by its own controller's spell, ability or cost: not one that
+      // entered tapped (Victimize), and not one an opponent tapped.
+      if (game.state.objects[e.object]?.controller === e.by && last[e.by] != null) last[e.by].tappedForCost.add(e.object);
+    } else if (e.type === "player-lost") lostEvents.push(e);
+  }
+}
+/** The turn's player's creatures that are attacking, declared or not (a
+ * mobilize token enters tapped and attacking): tapped by an attack. */
+function noteAttacking(s) {
+  const active = s.turnOrder[s.turn.activePlayerIndex];
+  const record = last[active];
+  if (record == null) return;
+  for (const id of s.zones.shared.battlefield) {
+    const o = s.objects[id];
+    if (o !== undefined && o.controller === active && o.attacking != null) record.attackerIds.add(id);
+  }
+}
+const COMBAT_STEPS = new Set(["declare-blockers", "combat-damage", "end-combat"]);
 const controllers = {};
 for (const seat of seats) {
   const bot = new EvalBotController(seat, registry);
@@ -214,6 +286,7 @@ for (const seat of seats) {
     const mine = s.turnOrder[s.turn.activePlayerIndex] === seat;
     const hand = handOf(s, seat);
     now[seat].hand = hand;
+    if (COMBAT_STEPS.has(s.turn.step)) noteAttacking(s);
     // An attack it was never asked to block (nothing of its own could), read
     // again once the attack's triggers have resolved: Kangee's +2/+0 to the
     // flyers made 7 power 13, and "alive with its attackers home" untrue.
@@ -264,6 +337,23 @@ for (const seat of seats) {
         const at = s.players[d.defender] !== undefined ? d.defender : s.objects[d.defender]?.controller;
         record.attackedWith.push(`${nameOf(s, d.attacker)} → ${label[at] ?? "?"}`);
       }
+      // Each opponent's board as it stood when this attack was declared,
+      // against the blockers the attack leaves untapped: what the attack
+      // knew of the swing back. An "attacked itself open" is read against it.
+      const sent = new Set(declared.map((d) => d.attacker));
+      const home = combatCreatures(s, registry, seat, true).filter((c) => !sent.has(c.id) || c.keywords.has("vigilance"));
+      for (const opponent of seats) {
+        if (opponent === seat || s.players[opponent].hasLost) continue;
+        const theirs = combatCreatures(s, registry, opponent, false).filter((c) => c.canAttack);
+        const through = damageThrough(theirs, home);
+        record.swingBack[opponent] = {
+          through: Math.round(through.damage - (through.gained ?? 0)),
+          lethal: isLethal(s, seat, through),
+          life: s.players[seat].life,
+          creatures: theirs.length,
+          power: theirs.reduce((sum, c) => sum + Math.max(0, c.damage), 0),
+        };
+      }
     }
     // The attack as declared at each player.
     const mineAll = combatCreatures(s, registry, seat, false);
@@ -286,8 +376,9 @@ for (const seat of seats) {
   bot.declareBlockers = (view) => {
     const s = view.state;
     const active = s.turnOrder[s.turn.activePlayerIndex];
+    noteAttacking(s);
     const attackers = combatCreatures(s, registry, active, false).filter((c) => s.objects[c.id]?.attacking === seat);
-    const snapshot = attackers.length > 0 ? attackOn(s, active, seat, attackers, "blocked") : null;
+    const snapshot =attackers.length > 0 ? attackOn(s, active, seat, attackers, "blocked") : null;
     const blocks = block(view);
     if (snapshot !== null) {
       snapshot.blocks = blocks.length;
@@ -306,9 +397,11 @@ for (const seat of seats) {
 function attackOn(s, by, defender, attackers, when) {
   const theirs = combatCreatures(s, registry, defender, false);
   const tapped = theirs.filter((c) => s.objects[c.id]?.tapped === true);
+  drain();
   const attackedLast = last[defender]?.attackerIds ?? new Set();
+  const forCost = last[defender]?.tappedForCost ?? new Set();
   const fromAttack = tapped.filter((c) => attackedLast.has(c.id));
-  const other = tapped.filter((c) => !attackedLast.has(c.id));
+  const other = tapped.filter((c) => !attackedLast.has(c.id) && forCost.has(c.id));
   const home = (extra) => theirs.map((c) => (extra.includes(c) ? { ...c, canBlock: true } : c));
   const lethalWith = (blockers) => isLethal(s, defender, damageThrough(attackers, blockers));
   const through = damageThrough(attackers, theirs);
@@ -359,9 +452,16 @@ function report(seat, s, turn, active, reason, lifeNow) {
     const line =
       `${label[a.by]} attacked it at ${a.life} life with ${a.attackers} (${a.power} power) into ${a.blockers} untapped blocker${a.blockers === 1 ? "" : "s"}: ` +
       `${a.through} through on paper ${a.when === "blocked" ? `as it blocked (${a.blocks} block${a.blocks === 1 ? "" : "s"})` : a.when === "unblocked" ? "(nothing of its own could block)" : "as declared"}`;
-    if (!a.lethal && a.when === "blocked") {
+    // What combat did to it this turn against what the arithmetic allowed,
+    // over every attack on it (an extra combat is another one).
+    const paper = seen.attacks.reduce((n, x) => n + x.through, 0);
+    const { combat, lost } = taken[seat];
+    if (!a.lethal && a.when === "blocked" && combat > paper) {
       flags.push("blocks");
-      notes.push(`${line} — not lethal, and it died`);
+      notes.push(`${line} — not lethal, and it took ${combat} in combat (of the ${lost} life it lost this turn)`);
+    } else if (!a.lethal && a.when === "blocked") {
+      // Its blocks did what the arithmetic said: the rest wasn't combat.
+      notes.push(`${line} — not lethal, and combat did ${combat}; the other ${lost - combat} of the ${lost} it lost this turn was not combat damage`);
     } else if (!a.lethal) {
       // Never asked to block (nothing that could): what killed it came
       // after the declaration, and there was no block to get wrong.
@@ -370,8 +470,15 @@ function report(seat, s, turn, active, reason, lifeNow) {
       flags.push("tapped away");
       notes.push(`${line}; with ${a.other} untapped it lives`);
     } else if (a.lethalWithAttack === false) {
-      flags.push("attacked itself open");
-      notes.push(`${line}; with its own attackers home (${a.fromAttack}) it lives`);
+      // Flagged only if the board that killed it was there to be seen when
+      // it attacked: lethal through the blockers it left, or within half
+      // again of it. A board that grew afterwards is no fault of the attack.
+      const then = record?.swingBack[a.by];
+      const board = then === undefined ? "" : `${label[a.by]}'s ${then.creatures} creatures (${then.power} power) put ${then.through} through at ${then.life} life`;
+      if (then === undefined || then.lethal || then.through * SWING_BACK_NEAR >= then.life) {
+        flags.push("attacked itself open");
+        notes.push(`${line}; with its own attackers home (${a.fromAttack}) it lives${board === "" ? "" : `\n      when it attacked, ${board}`}`);
+      } else notes.push(`${line}; with its own attackers home (${a.fromAttack}) it lives, but when it attacked ${board}: the board grew`);
     } else if (a.lethalWithBoth === false) {
       flags.push("tapped away", "attacked itself open");
       notes.push(`${line}; with ${a.other} untapped and its attackers home (${a.fromAttack}) it lives`);
@@ -423,34 +530,21 @@ function report(seat, s, turn, active, reason, lifeNow) {
 }
 
 const started = Date.now();
-let seenEvents = 0;
 const out = new Set();
-/** A seat's life just before the event that took it out. */
-const lifeAt = Object.fromEntries(seats.map((s) => [s, 0]));
 while (!game.state.result.over && game.state.turn.number <= maxTurns) {
   const turn = game.state.turn.number;
   const active = game.state.turnOrder[game.state.turn.activePlayerIndex];
+  drain();
   if (!game.state.players[active].hasLost) last[active] = fresh(turn, game.state.players[active].life);
-  for (const seat of seats) now[seat] = { attacks: [], offered: new Map(), cast: [], hand: now[seat].hand };
+  for (const seat of seats) {
+    now[seat] = { attacks: [], offered: new Map(), cast: [], hand: now[seat].hand };
+    taken[seat] = { combat: 0, lost: 0 };
+  }
   game.advanceUntil((s) => s.result.over || s.turn.number !== turn);
   const s = game.state;
-  const events = game.events;
-  const lost = [];
-  for (let i = seenEvents; i < events.length; i += 1) {
-    const e = events[i];
-    if (e.type === "life-paid" && last[e.player] != null) last[e.player].lifeSpent += e.amount;
-    else if (e.type === "life-changed") {
-      lifeAt[e.player] = e.life;
-      // A loss its own effect caused (Reanimate): spent, like a payment.
-      if (e.delta < 0 && e.byEffectOf === e.player && last[e.player] != null) last[e.player].lifeSpent += -e.delta;
-    } else if (e.type === "damage-dealt" && !e.combat && e.target?.kind === "player" && e.target.player === e.by && last[e.by] != null) {
-      // Damage from its own source (a City of Brass, a Mana Confluence).
-      last[e.by].lifeSpent += e.amount;
-    } else if (e.type === "player-lost") lost.push(e);
-  }
-  seenEvents = events.length;
+  drain();
   if (last[active] !== null && last[active].turn === turn && !s.players[active].hasLost) last[active].lifeEnd = s.players[active].life;
-  for (const e of lost) {
+  for (const e of lostEvents.splice(0)) {
     if (out.has(e.player)) continue;
     out.add(e.player);
     report(e.player, s, turn, active, e.reason, lifeAt[e.player]);
