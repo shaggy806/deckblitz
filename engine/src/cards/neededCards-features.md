@@ -1049,6 +1049,18 @@ vocabulary, `test/trigger-new-events.test.ts`.
   `zone:exile-from-library-bottom` (exile-from-library has no "from the
   bottom").
 
+### "Play target card from your graveyard this turn; it enters tapped" — built 2026-11-14
+
+The commander gap's `zone:play-from-graveyard-this-turn-enters-tapped`. Almost
+all there already: `grant-play` with `play: true`, and Edgar's `entersTapped`
+(the same day) for a permanent spell cast this way. The missing half was a
+land: `landsEnterTapped` was read only for a land played from exile or the
+library, and now a land played under a graveyard grant reads it too (rule
+614.1d). Jorn, God of Winter // Kaldring, the Rimestaff (commander 499) is the
+only card that needs it; the scaffolder reads the line, and `parseTypePhrase`
+reads "snow" as a supertype (Sunstone's cost now parses too).
+`test/commanders-jorn.test.ts`.
+
 ### "A land and a spell from among cards in graveyards" — built 2026-11-13
 
 The commander gap's `static:cast-from-any-graveyard-put-from-library-this-turn`.

@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-969 already implemented / 31 missing
+970 already implemented / 30 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -537,7 +537,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  531  Splinter, Radical Rat                           6153 decks  {1}{W/B}{W/B}    Legendary Creature — Mutant Ninja Rat
 [x]  532  Hapatra, Vizier of Poisons                      6149 decks  {B}{G}           Legendary Creature — Human Cleric
 [x]  533  Magnus the Red                                  6148 decks  {3}{U}{R}        Legendary Creature — Demon Primarch
-[ ]  534  Jorn, God of Winter                             6145 decks  {2}{G}           Legendary Snow Creature — God // Legendary Snow Artifact
+[x]  534  Jorn, God of Winter                             6145 decks  {2}{G}           Legendary Snow Creature — God // Legendary Snow Artifact
 [x]  535  Gisa, the Hellraiser                            6140 decks  {3}{B}{B}        Legendary Creature — Human Warlock
 [x]  536  Imoti, Celebrant of Bounty                      6133 decks  {3}{G}{U}        Legendary Creature — Snake Druid
 [x]  537  Amalia Benavides Aguirre                        6132 decks  {W}{B}           Legendary Creature — Vampire Scout

@@ -729,6 +729,7 @@ export function parseTypePhrase(phrase, { cards = false } = {}) {
     else if (w === "token" || w === "tokens") filter.token = true;
     else if (w === "legendary") filter.supertype = "legendary";
     else if (w === "basic") filter.supertype = "basic";
+    else if (w === "snow" && filter.supertype === undefined) filter.supertype = "snow";
     else if (w === "nonland" || w === "noncreature" || w === "nonartifact" || w === "nonenchantment") {
       notTypes.push(w.slice(3));
     } else if (CARD_TYPES.includes(w)) {
@@ -14753,6 +14754,25 @@ function castNowTermsAt(sentences, i, ctx) {
         ...(exiled ? { exileAfter: true } : {}),
       },
       used: exiled ? 2 : 1,
+    };
+  }
+  // "You may play target snow permanent card from your graveyard this turn. If
+  // you do, it enters tapped." (Kaldring, the Rimestaff): `play` reaches a land
+  // too, and "it enters tapped" is both halves of the entry replacement.
+  const playTarget = /^you may play target (.+?) card from your graveyard this turn\.$/i.exec(sentences[i]);
+  if (playTarget !== null) {
+    const filter = parseTypePhrase(playTarget[1], { cards: true });
+    if (filter === null) return null;
+    const entersTapped = /^if you do, it enters tapped\.$/i.test(sentences[i + 1] ?? "");
+    return {
+      effect: {
+        kind: "grant-play",
+        cards: ctx.target({ kind: "card-in-graveyard", whose: "you", filter }),
+        duration: "end-of-turn",
+        play: true,
+        ...(entersTapped ? { entersTapped: true, landsEnterTapped: true } : {}),
+      },
+      used: entersTapped ? 2 : 1,
     };
   }
   // "Target creature card in your graveyard gains escape until end of turn. The

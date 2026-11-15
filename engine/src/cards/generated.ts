@@ -14456,6 +14456,7 @@ import _poolJoragaTreespeaker from "./pool/joraga-treespeaker.js";
 import _poolJoragaVisionary from "./pool/joraga-visionary.js";
 import _poolJoragaWarcaller from "./pool/joraga-warcaller.js";
 import _poolJoriEnRuinDiver from "./pool/jori-en-ruin-diver.js";
+import _poolJornGodOfWinter from "./pool/jorn-god-of-winter.js";
 import _poolJorubaiMurkLurker from "./pool/jorubai-murk-lurker.js";
 import _poolJoshuaPhoenixsDominant from "./pool/joshua-phoenixs-dominant.js";
 import _poolJosuVessLichKnight from "./pool/josu-vess-lich-knight.js";
@@ -14597,6 +14598,7 @@ import _poolKalastriaHealer from "./pool/kalastria-healer.js";
 import _poolKalastriaHighborn from "./pool/kalastria-highborn.js";
 import _poolKalastriaNightwatch from "./pool/kalastria-nightwatch.js";
 import _poolKaldraCompleat from "./pool/kaldra-compleat.js";
+import _poolKaldringTheRimestaff from "./pool/kaldring-the-rimestaff.js";
 import _poolKaleidoscorch from "./pool/kaleidoscorch.js";
 import _poolKaleidostone from "./pool/kaleidostone.js";
 import _poolKalemneDiscipleOfIroas from "./pool/kalemne-disciple-of-iroas.js";
@@ -47660,6 +47662,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJoragaVisionary,
   _poolJoragaWarcaller,
   _poolJoriEnRuinDiver,
+  _poolJornGodOfWinter,
   _poolJorubaiMurkLurker,
   _poolJoshuaPhoenixsDominant,
   _poolJosuVessLichKnight,
@@ -47801,6 +47804,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKalastriaHighborn,
   _poolKalastriaNightwatch,
   _poolKaldraCompleat,
+  _poolKaldringTheRimestaff,
   _poolKaleidoscorch,
   _poolKaleidostone,
   _poolKalemneDiscipleOfIroas,
@@ -80877,6 +80881,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/joraga-visionary": _poolJoragaVisionary,
   "pool/joraga-warcaller": _poolJoragaWarcaller,
   "pool/jori-en-ruin-diver": _poolJoriEnRuinDiver,
+  "pool/jorn-god-of-winter": _poolJornGodOfWinter,
   "pool/jorubai-murk-lurker": _poolJorubaiMurkLurker,
   "pool/joshua-phoenixs-dominant": _poolJoshuaPhoenixsDominant,
   "pool/josu-vess-lich-knight": _poolJosuVessLichKnight,
@@ -81018,6 +81023,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kalastria-highborn": _poolKalastriaHighborn,
   "pool/kalastria-nightwatch": _poolKalastriaNightwatch,
   "pool/kaldra-compleat": _poolKaldraCompleat,
+  "pool/kaldring-the-rimestaff": _poolKaldringTheRimestaff,
   "pool/kaleidoscorch": _poolKaleidoscorch,
   "pool/kaleidostone": _poolKaleidostone,
   "pool/kalemne-disciple-of-iroas": _poolKalemneDiscipleOfIroas,

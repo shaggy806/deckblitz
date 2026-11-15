@@ -15294,8 +15294,10 @@ export class Game {
     const from = this.state.objects[cardId].zone;
     // From exile or the top of the library: the permission it's played under,
     // what that says of a land, and any use of it this spends (Raphael, Most
-    // Attitude; Unlucky Witness: not under one that spends nothing).
-    let tapped = false;
+    // Attitude; Unlucky Witness: not under one that spends nothing). From a
+    // graveyard, the grant found above says it: "if you do, it enters tapped"
+    // (Kaldring, the Rimestaff — a replacement on its entry, rule 614.1d).
+    let tapped = graveyardTerms?.landsEnterTapped === true;
     let underPermission: PlayOption | undefined;
     if (from === "exile") {
       underPermission = this.chosenPlayOption(player, cardId, face, "paid");

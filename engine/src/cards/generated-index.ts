@@ -1080,6 +1080,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Jwari Ruins": "https://cards.scryfall.io/art_crop/back/3/0/301750a7-d1fd-435e-bfa8-9d2fb22ad627.jpg",
   "Kabira Plateau": "https://cards.scryfall.io/art_crop/back/3/6/366e9845-019d-47cc-adb8-8fbbaad35b6d.jpg",
   "Kaiso, Memory of Loyalty": "https://cards.scryfall.io/art_crop/front/7/5/758abd53-6ad2-406e-8615-8e48678405b4.jpg",
+  "Kaldring, the Rimestaff": "https://cards.scryfall.io/art_crop/back/c/6/c697548f-925b-405e-970a-4e78067d5c8e.jpg",
   "Kaslem's Strider": "https://cards.scryfall.io/art_crop/back/7/8/78b1b412-228a-4e05-a4b3-8159ebf54dc6.jpg",
   "Katilda's Rising Dawn": "https://cards.scryfall.io/art_crop/back/0/e/0ef240aa-2a88-4ec4-888a-918466372adb.jpg",
   "Kazandu Valley": "https://cards.scryfall.io/art_crop/back/2/f/2f632537-63bf-4490-86e6-e6067b9c1a3b.jpg",

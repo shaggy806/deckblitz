@@ -454,6 +454,7 @@ import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
 import _poolJestersCap from "../pool/jesters-cap.js";
 import _poolJoinTheCollective from "../pool/join-the-collective.js";
+import _poolJornGodOfWinter from "../pool/jorn-god-of-winter.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolJourneyForTheElixir from "../pool/journey-for-the-elixir.js";
 import _poolJunglePatrol from "../pool/jungle-patrol.js";
@@ -1513,6 +1514,7 @@ const shard: CardShard = {
     _poolJeeringHomunculus,
     _poolJestersCap,
     _poolJoinTheCollective,
+    _poolJornGodOfWinter,
     _poolJosuVessLichKnight,
     _poolJourneyForTheElixir,
     _poolJunglePatrol,

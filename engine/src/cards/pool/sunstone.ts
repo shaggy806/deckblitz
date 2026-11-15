@@ -15,7 +15,7 @@ export default defineCard({
       cost: {
         mana: "{2}",
         tap: false,
-        sacrifice: { filter: { type: "land", supertype: "snow", controlledBy: "you" } },
+        sacrifice: { filter: { type: "land", supertype: "snow" } },
       },
       targets: [],
       effect: { kind: "prevent-all-combat-damage" },

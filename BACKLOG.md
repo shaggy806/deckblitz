@@ -16,12 +16,12 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**969 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
+**970 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
 doubled from 500 on 2026-11-14; re-mark with `npm run cmdrs:mark -w engine`). An imported decklist
 usually has its commander substituted, and that one card is the reason the deck exists. Live
 numbers for everything below come from `npm run cmdrs:gaps -w engine`.
 
-- **The 31 left** (`cmdrs:gaps` names them with today's ranks): 2 from the old top 500, below, and
+- **The 30 left** (`cmdrs:gaps` names them with today's ranks): 1 from the old top 500, below, and
   29 from ranks 501-1000, each already triaged in the sweep records on one need key (Ranar the
   Ever-Watchful on two) — `card:brief -- "Name"` shows a card's, `cards:needs -- --by-rank` ranks
   the keys. Two of the 29 have every recorded need built and want a re-read (the `author-freed`
@@ -32,11 +32,10 @@ numbers for everything below come from `npm run cmdrs:gaps -w engine`.
   of the other 12 waited on one narrow key, recorded in `engine/src/cards/top-commanders-gaps.json`;
   Jaws, Relentless Predator's (`trigger:destroyed`) was built 2026-11-10, Tevesh Szat's,
   Omnath, Locus of All's and Ob Nixilis, Captive Kingpin's 2026-11-12, Indominus Rex, Alpha's and
-  Coram, the Undertaker's 2026-11-13.
-- **The 2 left of the old top 500, each with its key** (`cmdrs:gaps` ranks them; when a key lands,
-  add it to that file's `built` array and author its commander in the same commit): Magar of the
-  Magic Strings `effect:noted-card-name-copy`; Jorn, God of Winter
-  `zone:play-from-graveyard-this-turn-enters-tapped`.
+  Coram, the Undertaker's 2026-11-13, Jorn, God of Winter's 2026-11-14.
+- **The 1 left of the old top 500, with its key** (when it lands, add it to that file's `built`
+  array and author its commander in the same commit): Magar of the Magic Strings
+  `effect:noted-card-name-copy`.
 
 ## Card backlog (by EDHREC rank, and the precons)
 

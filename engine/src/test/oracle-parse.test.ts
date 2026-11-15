@@ -16321,6 +16321,24 @@ describe("a cast as this resolves, on its own terms", () => {
     );
     expect(sins.complete).toBe(true);
     expect(sins.effect).toEqual({ kind: "grant-play", cards: 0, duration: "end-of-turn", free: true, exileAfter: true });
+    const kaldring = read(
+      "Legendary Snow Artifact",
+      "{T}: You may play target snow permanent card from your graveyard this turn. If you do, it enters tapped.",
+    );
+    expect(kaldring.complete).toBe(true);
+    expect(kaldring.activated[0].targets[0]).toEqual({
+      kind: "card-in-graveyard",
+      whose: "you",
+      filter: { supertype: "snow", notTypes: ["instant", "sorcery"] },
+    });
+    expect(kaldring.activated[0].effect).toEqual({
+      kind: "grant-play",
+      cards: 0,
+      duration: "end-of-turn",
+      play: true,
+      entersTapped: true,
+      landsEnterTapped: true,
+    });
     const seeker = read(
       "Creature — Fish Illusion",
       "When this creature enters, target opponent mills five cards. You may cast an instant or sorcery spell from among them without paying its mana cost.",

@@ -2697,7 +2697,8 @@
   "replacement:would-be-destroyed-instead",
   "effect:exiled-card-gains-activated",
   "effect:play-from-outside-the-game",
-  "effect:grant-undaunted-next-spell"
+  "effect:grant-undaunted-next-spell",
+  "zone:play-from-graveyard-this-turn-enters-tapped"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
