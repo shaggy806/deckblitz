@@ -6108,7 +6108,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   over, and the `assign-combat-damage` offer (`combatDamageOf` in
   `characteristics.ts`). A fight, "damage equal to its power" and a power
   condition all still read the real power.
-- `crewsAs: { plus?, toughness?, saddles? }` with `affects: { scope: "self" }`
+- `crewsAs: { plus?, times?, toughness?, saddles?, stations? }` with `affects: { scope: "self" }`
+  (`times: 3` with `stations: true`: Sulu, Heroic Helmsman's "stations Spacecraft and crews
+  Vehicles as though his power were tripled", the station read as it resolves, rule 702.184a)
   — what the creature pays a **crew** cost with (rule 702.122a — an
   activated ability marked `crew: true`, which `crew(n)` writes): "This
   creature crews Vehicles **as though its power were 2 greater**" is `{

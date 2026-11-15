@@ -26890,6 +26890,7 @@ import _poolSultaiRunemark from "./pool/sultai-runemark.js";
 import _poolSultaiScavenger from "./pool/sultai-scavenger.js";
 import _poolSultaiSkullkeeper from "./pool/sultai-skullkeeper.js";
 import _poolSultaiSoothsayer from "./pool/sultai-soothsayer.js";
+import _poolSuluHeroicHelmsman from "./pool/sulu-heroic-helmsman.js";
 import _poolSuluSpaceSwashbuckler from "./pool/sulu-space-swashbuckler.js";
 import _poolSumalaRumblers from "./pool/sumala-rumblers.js";
 import _poolSumalaSentry from "./pool/sumala-sentry.js";
@@ -60067,6 +60068,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSultaiScavenger,
   _poolSultaiSkullkeeper,
   _poolSultaiSoothsayer,
+  _poolSuluHeroicHelmsman,
   _poolSuluSpaceSwashbuckler,
   _poolSumalaRumblers,
   _poolSumalaSentry,
@@ -93257,6 +93259,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sultai-scavenger": _poolSultaiScavenger,
   "pool/sultai-skullkeeper": _poolSultaiSkullkeeper,
   "pool/sultai-soothsayer": _poolSultaiSoothsayer,
+  "pool/sulu-heroic-helmsman": _poolSuluHeroicHelmsman,
   "pool/sulu-space-swashbuckler": _poolSuluSpaceSwashbuckler,
   "pool/sumala-rumblers": _poolSumalaRumblers,
   "pool/sumala-sentry": _poolSumalaSentry,

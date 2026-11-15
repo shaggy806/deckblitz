@@ -41662,6 +41662,14 @@ controlledBy,
           ? 0
           : chars.power;
       },
+      // Station (rule 702.184a): the tapped creature's power, as a
+      // `crewsAs` static of its own with `stations` makes it.
+      stationPowerOf: (target) => {
+        if (target.kind !== "object") return context.powerOf(target);
+        const as = this.crewsAsOf(target.object, "station");
+        const base = as.byToughness ? context.toughnessOf(target) : context.powerOf(target);
+        return base * as.times + as.plus;
+      },
       toughnessOf: (target) => {
         const lki = lastKnownOf(target);
         if (lki !== undefined) return lki.offBattlefield === true || lki.types.includes("creature") ? lki.toughness : 0;
@@ -47217,19 +47225,33 @@ controlledBy,
    */
   private tapCostPower(id: ObjectId, keyword: "crew" | "saddle" | undefined): number {
     const c = computeCharacteristics(this.state, this.registry, id);
+    if (keyword === undefined) return c.power;
+    const as = this.crewsAsOf(id, keyword);
+    return (as.byToughness ? c.toughness : c.power) * as.times + as.plus;
+  }
+
+  /** What `id`'s own `crewsAs` statics make of its power for `keyword` (its
+   * crew, saddle or station): read its toughness, multiply, add. Nothing
+   * once it has lost its abilities (layer 6); off the battlefield, its
+   * card's (as it last existed). */
+  private crewsAsOf(
+    id: ObjectId,
+    keyword: "crew" | "saddle" | "station",
+  ): { byToughness: boolean; times: number; plus: number } {
+    const out = { byToughness: false, times: 1, plus: 0 };
     const object = this.state.objects[id];
-    if (keyword === undefined || object === undefined || hasLostAbilities(this.state, this.registry,object)) return c.power;
-    let byToughness = false;
-    let plus = 0;
+    if (object === undefined || hasLostAbilities(this.state, this.registry, object)) return out;
     for (const ability of this.registry.get(rulesTextName(object)).static) {
       const crews = ability.crewsAs;
       if (crews === undefined || ability.affects.scope !== "self") continue;
       if (keyword === "saddle" && crews.saddles !== true) continue;
-      if (!this.staticActive(object, ability)) continue;
-      if (crews.toughness === true) byToughness = true;
-      plus += crews.plus ?? 0;
+      if (keyword === "station" && crews.stations !== true) continue;
+      if (object.zone === "battlefield" && !this.staticActive(object, ability)) continue;
+      if (crews.toughness === true) out.byToughness = true;
+      out.times *= crews.times ?? 1;
+      out.plus += crews.plus ?? 0;
     }
-    return (byToughness ? c.toughness : c.power) + plus;
+    return out;
   }
 
   /** {@link tapCostOffer} for casting `cardId` for its alternative cost

@@ -823,6 +823,7 @@ import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
 import _poolSublimeArchangel from "../pool/sublime-archangel.js";
 import _poolSuitUp from "../pool/suit-up.js";
+import _poolSuluHeroicHelmsman from "../pool/sulu-heroic-helmsman.js";
 import _poolSummaryJudgment from "../pool/summary-judgment.js";
 import _poolSunBlessedGuardian from "../pool/sun-blessed-guardian.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
@@ -1831,6 +1832,7 @@ const shard: CardShard = {
     _poolSubjugateTheHobbits,
     _poolSublimeArchangel,
     _poolSuitUp,
+    _poolSuluHeroicHelmsman,
     _poolSummaryJudgment,
     _poolSunBlessedGuardian,
     _poolSunBlessedPeak,

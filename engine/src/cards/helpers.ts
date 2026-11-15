@@ -1410,7 +1410,12 @@ export const mobilize = (n: EffectAmount): TriggeredAbility => ({
 export const station = (text: string): ActivatedAbility => ({
   cost: { mana: null, tap: false, tapOthers: { count: 1, filter: { type: "creature" } } },
   targets: [],
-  effect: { kind: "add-counter", target: "source", counter: "charge", amount: { powerOf: { paid: "tapped" } } },
+  effect: {
+    kind: "add-counter",
+    target: "source",
+    counter: "charge",
+    amount: { powerOf: { paid: "tapped" }, stationing: true },
+  },
   resolve: null,
   sorcerySpeed: true,
   station: true,

@@ -271,3 +271,24 @@ describe("H.M.S. Bounty, Unlikely Timeship", () => {
     expect(game.state.extraTurns).toEqual([]);
   });
 });
+
+describe("Sulu, Heroic Helmsman", () => {
+  it("stations as though his power were tripled", () => {
+    const { game, a } = table();
+    const sulu = spawn(game, "Sulu, Heroic Helmsman");
+    const sphere = spawn(game, "Borg Scout Sphere");
+    a.choosePermanentsFn = () => [sulu];
+    activate(game, sphere, 0);
+    expect(counters(game, sphere, "charge")).toBe(6);
+    expect(game.state.objects[sulu].tapped).toBe(true);
+  });
+
+  it("crews as though his power were tripled", () => {
+    const { game } = table();
+    spawn(game, "Sulu, Heroic Helmsman");
+    const vehicle = spawn(game, "Smuggler's Copter"); // crew 1
+    const titan = spawn(game, "Parhelion II"); // crew 4
+    expect(game.legalActions(A).some((x) => x.kind === "activate-ability" && x.source === titan)).toBe(true);
+    expect(vehicle).toBeDefined();
+  });
+});

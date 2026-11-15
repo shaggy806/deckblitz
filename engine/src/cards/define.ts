@@ -2633,8 +2633,21 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * anything else (the rulings): a 0-power Pilot still adds 2, and teamwork
    * (702.194a) or any other total-power cost reads the real power. Read as
    * the cost is offered (`Game.tapCostPower`), into the offer's `power`.
+   *
+   * `times`: "as though its power were **tripled**" `{ times: 3 }`, before
+   * any `plus`; `stations`: it stations Spacecraft so too (rule 702.184a,
+   * read as the station ability resolves — Sulu, Heroic Helmsman's "stations
+   * Spacecraft and crews Vehicles as though his power were tripled" is `{
+   * times: 3, stations: true }`). A station ability's own power read is
+   * `{ powerOf, stationing }`.
    */
-  readonly crewsAs?: { readonly plus?: number; readonly toughness?: true; readonly saddles?: true };
+  readonly crewsAs?: {
+    readonly plus?: number;
+    readonly times?: number;
+    readonly toughness?: true;
+    readonly saddles?: true;
+    readonly stations?: true;
+  };
   /**
    * "If this creature would be destroyed, regenerate it" (rule 701.19b —
    * Mossbridge Troll, Knight of the Holy Nimbus): every destruction is

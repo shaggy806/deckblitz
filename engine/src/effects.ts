@@ -853,8 +853,12 @@ export type EffectAmount =
    * power it died with, and `{ powerOf: "sacrificed" }` is the Fling family's
    * "the sacrificed creature's power". `doubling` marks a "double its power"
    * P/T change, the one place a power below 0 is used as it is (see
-   * {@link ptChangeValue}). */
-  | { readonly powerOf: ObjectRef; readonly doubling?: true }
+   * {@link ptChangeValue}). `stationing`: station's "charge counters equal
+   * to its power" (rule 702.184a — `cards/helpers.ts`'s `station()`), with
+   * what a `crewsAs` static of the tapped creature's with `stations` makes it
+   * (Sulu, Heroic Helmsman's "stations Spacecraft … as though his power
+   * were tripled"). */
+  | { readonly powerOf: ObjectRef; readonly doubling?: true; readonly stationing?: true }
   /** The current toughness of whatever an {@link ObjectRef} points at —
    * Condemn's "its controller gains life equal to its toughness", read as
    * the creature last existed on the battlefield. `doubling` as for
@@ -12148,6 +12152,8 @@ export interface EffectApi {
    * permanent that has left the battlefield since the spell or ability
    * referred to it reads as it last existed there. */
   powerOf(target: TargetRef): number;
+  /** `powerOf` as a creature stations (`{ powerOf, stationing }`). */
+  stationPowerOf(target: TargetRef): number;
   toughnessOf(target: TargetRef): number;
   /** See the `{ basePowerOf }` {@link EffectAmount}. */
   basePowerOf(target: TargetRef): number;
@@ -16592,7 +16598,8 @@ export function signedAmountValue(
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
   if ("powerOf" in amount) {
     const ref = objectRefRead(amount.powerOf, ctx);
-    return ref === undefined ? 0 : ctx.powerOf(ref);
+    if (ref === undefined) return 0;
+    return amount.stationing === true ? ctx.stationPowerOf(ref) : ctx.powerOf(ref);
   }
   if ("toughnessOf" in amount) {
     const ref = objectRefRead(amount.toughnessOf, ctx);
