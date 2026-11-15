@@ -95,23 +95,72 @@ function useLandingZoom(): number {
  * jitter sweep, 2026-10-10). Measured once laid out, and again on a resize,
  * the column then stays top-anchored at that offset (`.landing.pinned`) and
  * grows downward.
+ *
+ * Until it would grow past the window's foot: then it moves up by just what
+ * doesn't fit, as far as the top padding the foot has (`fit`). The paste box
+ * otherwise overflowed the page, and the scrollbar that appeared shifted
+ * everything sideways (the user, 2026-11-14). It follows the column's own
+ * size frame by frame (a `ResizeObserver` runs before paint), so the box
+ * unfolding slides the column up with it, and folding lets it back down.
  */
 function usePinnedColumn(zoom: number): React.RefObject<HTMLDivElement | null> {
   const ref = useRef<HTMLDivElement>(null)
   useLayoutEffect(() => {
     const el = ref.current
     if (!el) return
+    /** The column's own blocks: not the backdrop, nor what's fixed over the page. */
+    const blocks = (): HTMLElement[] =>
+      [...el.children].filter(
+        (c): c is HTMLElement =>
+          c instanceof HTMLElement &&
+          !c.classList.contains('landing-backdrop') &&
+          !['fixed', 'absolute'].includes(getComputedStyle(c).position),
+      )
+    // Where the column was centred: `fit` never puts it lower.
+    let centred = 0
+    const fit = (): void => {
+      // Those drawn: one set aside (`display: none`) has no box to measure.
+      const all = blocks().filter((b) => b.getClientRects().length > 0)
+      const first = all[0]
+      const last = all[all.length - 1]
+      if (first === undefined || last === undefined) return
+      const height = last.getBoundingClientRect().bottom - first.getBoundingClientRect().top
+      const foot = parseFloat(getComputedStyle(el).paddingBottom) || 0
+      // The window's height, not the page's: the page is at least as tall
+      // (`min-height: 100vh`) and grows with what's in it.
+      const room = document.documentElement.clientHeight
+      const top = Math.max(Math.min(foot, centred), Math.min(centred, room - height - foot))
+      el.style.setProperty('--landing-top', `${top}px`)
+    }
     const pin = (): void => {
       el.classList.remove('pinned')
-      const first = el.querySelector<HTMLElement>(':scope > :not(.landing-backdrop)')
+      const first = blocks()[0]
       if (!first) return
       const top = first.getBoundingClientRect().top - el.getBoundingClientRect().top + el.scrollTop
-      el.style.setProperty('--landing-top', `${Math.max(0, top)}px`)
+      centred = Math.max(0, top)
+      el.style.setProperty('--landing-top', `${centred}px`)
       el.classList.add('pinned')
+      fit()
     }
     pin()
+    const sizes = new ResizeObserver(fit)
+    const watch = (): void => {
+      sizes.disconnect()
+      for (const block of blocks()) sizes.observe(block)
+    }
+    watch()
+    // A block that appears or goes (a join error) changes no other's size.
+    const kids = new MutationObserver(() => {
+      watch()
+      fit()
+    })
+    kids.observe(el, { childList: true })
     window.addEventListener('resize', pin)
-    return () => window.removeEventListener('resize', pin)
+    return () => {
+      window.removeEventListener('resize', pin)
+      sizes.disconnect()
+      kids.disconnect()
+    }
   }, [zoom])
   return ref
 }

@@ -367,10 +367,60 @@
 .landing-blitz-btn {
   width: 100%;
 }
+/* The paste box unfolds into its space and folds out of it (the user,
+   2026-11-14: it "brings up the place to paste it in very abruptly"). A
+   one-row grid animated between 0fr and 1fr is a height animation to and
+   from the box's own height, whatever that is; the column makes room as it
+   grows (`usePinnedColumn`). `BlitzPanel` drops the box when the fold ends,
+   so a reduced-motion page keeps the animation, at no length. */
+.landing-blitz-reveal {
+  display: grid;
+  grid-template-rows: 1fr;
+  animation: landing-blitz-unfold 0.24s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.landing-blitz-reveal.closing {
+  animation: landing-blitz-fold 0.16s ease-in forwards;
+}
+@keyframes landing-blitz-unfold {
+  from {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+@keyframes landing-blitz-fold {
+  to {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-blitz-reveal,
+  .landing-blitz-reveal.closing {
+    animation-duration: 1ms;
+  }
+}
+:root[data-reduce-motion] .landing-blitz-reveal,
+:root[data-reduce-motion] .landing-blitz-reveal.closing {
+  animation-duration: 1ms;
+}
 .landing-blitz-paste {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  /* The grid row's height is this box's while it folds: clipped to it, with
+     room left for the textarea's focus ring. */
+  min-height: 0;
+  overflow: clip;
+  overflow-clip-margin: 4px;
+}
+/* A window too short for the whole column and the paste box: the footer
+   links step aside while a list is being pasted, so the page never scrolls
+   (a scrollbar appearing shifted everything sideways). They're back once
+   the box has folded away, not while it still takes its room. */
+@media (max-height: 1040px) {
+  .landing:has(.landing-blitz-reveal) .landing-nav {
+    display: none;
+  }
 }
 .landing-blitz-textarea {
   width: 100%;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { importDecklist, looksLikeDecklist, resolveImport } from '../deck-builder/importDeck.ts'
 import type { ImportProgress } from '../deck-builder/importDeck.ts'
@@ -31,6 +31,23 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
   const [error, setError] = useState<string | null>(null)
 
   const busy = phase.kind === 'importing' || game.blitzing
+  // The paste box on the page: open, or folding away (`closing`) with the
+  // note it had. It unfolds into its space and folds out of it rather than
+  // popping (the user, 2026-11-14), so it outlives the phase that asked for it
+  // by one animation. State adjusted while rendering, not in an effect, so
+  // no frame shows the box without its class.
+  const [box, setBox] = useState<{ readonly note: string; readonly closing: boolean } | null>(null)
+  const note = phase.kind === 'paste' && !busy ? phase.note : null
+  if (note !== null && (box === null || box.closing || box.note !== note)) setBox({ note, closing: false })
+  else if (note === null && box !== null && !box.closing) setBox({ note: box.note, closing: true })
+  // The fold's end drops the box (`onAnimationEnd` below); so does a timer,
+  // for a page whose animations aren't running (a tab in the background).
+  const closing = box?.closing === true
+  useEffect(() => {
+    if (!closing) return
+    const timer = window.setTimeout(() => setBox((b) => (b?.closing === true ? null : b)), 400)
+    return () => window.clearTimeout(timer)
+  }, [closing])
   // Indeterminate before the server's first progress line, and once the
   // list is read and the room is being set up.
   const progressPct =
@@ -102,7 +119,14 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
         Have a deck copied? Click here to blitz!
       </button>
 
-      {phase.kind === 'paste' && !busy ? (
+      {box !== null ? (
+        <div
+          className={`landing-blitz-reveal${box.closing ? ' closing' : ''}`}
+          inert={box.closing}
+          onAnimationEnd={(e) => {
+            if (e.target === e.currentTarget && box.closing) setBox(null)
+          }}
+        >
         <form
           className="landing-blitz-paste"
           onSubmit={(e) => {
@@ -111,7 +135,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
           }}
         >
           <label className="landing-field-label" htmlFor="landing-blitz-list">
-            {phase.note}
+            {box.note}
           </label>
           <textarea
             id="landing-blitz-list"
@@ -139,6 +163,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
             </button>
           </div>
         </form>
+        </div>
       ) : null}
 
       {busy ? (
