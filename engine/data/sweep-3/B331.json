@@ -1,0 +1,291 @@
+{
+ "batch": "B331",
+ "status": "done",
+ "ranks": "Star Trek (TRK) and Star Trek Commander (TRC), completing the set (author-by-set TRK,TRC, 2026-11-14), after the Oracle snapshot refresh that brought the released text (no rulings published yet). 16 of the 35 left authored; the other 19 not reached this session, each recorded with its key.",
+ "authored": [
+  {
+   "name": "Borg Cube",
+   "files": [
+    "engine/src/cards/pool/borg-cube.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Starfleet Academy",
+   "files": [
+    "engine/src/cards/pool/starfleet-academy.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Kira Nerys, Firebrand",
+   "files": [
+    "engine/src/cards/pool/kira-nerys-firebrand.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Guinan, Ancient Advisor",
+   "files": [
+    "engine/src/cards/pool/guinan-ancient-advisor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Jean-Luc Picard, Luminary",
+   "files": [
+    "engine/src/cards/pool/jean-luc-picard-luminary.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Captain Benjamin Sisko",
+   "files": [
+    "engine/src/cards/pool/captain-benjamin-sisko.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "The Caretaker",
+   "files": [
+    "engine/src/cards/pool/the-caretaker.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "H.M.S. Bounty, Unlikely Timeship",
+   "files": [
+    "engine/src/cards/pool/hms-bounty-unlikely-timeship.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Sulu, Heroic Helmsman",
+   "files": [
+    "engine/src/cards/pool/sulu-heroic-helmsman.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Sarek, Federation Ambassador",
+   "files": [
+    "engine/src/cards/pool/sarek-federation-ambassador.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Rules of Acquisition",
+   "files": [
+    "engine/src/cards/pool/rules-of-acquisition.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Nog, Ambitious Cadet",
+   "files": [
+    "engine/src/cards/pool/nog-ambitious-cadet.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "Kai Winn, Faithless Leader",
+   "files": [
+    "engine/src/cards/pool/kai-winn-faithless-leader.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  },
+  {
+   "name": "La Forge, Thoughtful as Ever",
+   "files": [
+    "engine/src/cards/pool/la-forge-thoughtful-as-ever.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "The Guardian of Forever",
+   "files": [
+    "engine/src/cards/pool/the-guardian-of-forever.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trc-batch-2.test.ts"
+  },
+  {
+   "name": "Romulan Bird-of-Prey",
+   "files": [
+    "engine/src/cards/pool/romulan-bird-of-prey.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/set-trk-batch-3.test.ts"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Dr. Beverly Crusher",
+   "needs": [
+    "static:life-gain-trigger-doubling"
+   ],
+   "size": "small",
+   "why": "Not reached this run (author-by-set B331). Trigger doubling (doubleTriggers) has no cause for a life-gain event."
+  },
+  {
+   "name": "Q, Stacking the Deck",
+   "needs": [
+    "effect:exiled-card-gains-activated"
+   ],
+   "size": "small",
+   "why": "Not reached. The exiled card gains an activated ability usable only while exiled (\"create a copy of this card. You may cast the copy\"): no grant of an ability to a card in exile, nor an exile-zone activated ability."
+  },
+  {
+   "name": "Dominion Saboteur",
+   "needs": [
+    "replacement:clone-enters-with-copied-counters"
+   ],
+   "size": "small",
+   "why": "Not reached. A clone that enters with the same number and kinds of counters as the copied permanent."
+  },
+  {
+   "name": "Brad Boimler, Eager Ensign",
+   "needs": [
+    "effect:grant-replacement-until-eot"
+   ],
+   "size": "small",
+   "why": "Not reached. A trigger making Pir's counter replacement (\"that many plus one of each of those kinds\") for its controller until end of turn."
+  },
+  {
+   "name": "Lwaxana Troi, Charming Guest",
+   "needs": [
+    "duration:while-source-tapped-since-activation",
+    "effect:grant-trigger-doubling"
+   ],
+   "size": "small",
+   "why": "Not reached. Granted trigger doubling for another creature's triggered abilities for as long as she stays tapped."
+  },
+  {
+   "name": "Dr. McCoy, Surly Surgeon",
+   "needs": [
+    "replacement:would-be-destroyed-instead"
+   ],
+   "size": "small",
+   "why": "Not reached. Another creature with a +1/+1 counter that would be destroyed instead loses them and has its damage healed."
+  },
+  {
+   "name": "The Holodeck",
+   "needs": [
+    "effect:play-from-outside-the-game"
+   ],
+   "size": "small",
+   "why": "Not reached. A static permission to play a permanent card from outside the game (the sideboard, zone outside; PlayFrom has no \"outside\") or the graveyard once during each of your turns; the client would also need to show sideboard cards as playable."
+  },
+  {
+   "name": "Ensign Pavel Chekov",
+   "needs": [
+    "effect:each-opponent-exiles-top-you-choose-one-playable"
+   ],
+   "size": "small",
+   "why": "Not reached. Each opponent exiles their top X; you choose one land card among each one's own exiled cards, playable while exiled."
+  },
+  {
+   "name": "Scotty, Miracle Worker",
+   "needs": [
+    "static:grant-beam-me-up-to-graveyard"
+   ],
+   "size": "small",
+   "why": "Not reached. Beam me up granted to graveyard cards at their mana cost during your main phase, Scotty excluded as the returned creature."
+  },
+  {
+   "name": "The City on the Edge of Forever",
+   "needs": [
+    "static:permanents-cant-phase-in"
+   ],
+   "size": "small",
+   "why": "Not reached. Chapter I's Human token has \"Permanents can't phase in\": no prohibition act for phasing in."
+  },
+  {
+   "name": "Marooned",
+   "needs": [
+    "static:cant-be-beamed-up"
+   ],
+   "size": "small",
+   "why": "Not reached. Nothing stops the enchanted permanent being returned for a beam me up cost (a prohibition act)."
+  },
+  {
+   "name": "All Good Things...",
+   "needs": [
+    "condition:exiled-with-source-share-card-type"
+   ],
+   "size": "small",
+   "why": "Not reached; also waits on rulings (none published 2026-11-14) for zero or one card exiled with it."
+  },
+  {
+   "name": "Võx, Child of the Collective",
+   "needs": [
+    "effect:grant-undaunted-next-spell"
+   ],
+   "size": "small",
+   "why": "Not reached; no rulings yet (2026-11-14). Undaunted granted to the next artifact creature spell and the next Spacecraft spell, counting opponents as each is cast."
+  },
+  {
+   "name": "Gift of Perfection",
+   "needs": [
+    "effect:assimilate-one-of-each-opponents-reveal"
+   ],
+   "size": "small",
+   "why": "Not reached. Each opponent reveals until a creature; you assimilate one of all revealed creatures; the rest go to the bottom in a random order."
+  },
+  {
+   "name": "Cmdr. Troi, Outgoing Empath",
+   "needs": [
+    "effect:copy-spell-cast-this-way-by-opponent"
+   ],
+   "size": "small",
+   "why": "Not reached. copy-all of { thisWay: 'cast' } copies only the effect controller's spells; the opponent cast this one."
+  },
+  {
+   "name": "U.S.S. Farragut, Bold Explorer",
+   "needs": [
+    "condition:this-way-put-on-bottom-from-battlefield"
+   ],
+   "size": "small",
+   "why": "Not reached. \"Put it on the bottom of your library. When you do, draw a card\": the put-on-bottom this-way record covers cards from a hand only."
+  },
+  {
+   "name": "The Best of Both Worlds",
+   "needs": [
+    "effect:saga-chapter-links-permanent"
+   ],
+   "size": "small",
+   "why": "Not reached. Chapter III exiles the Borg chapter I assimilated: nothing links a permanent a chapter gained control of to the Saga."
+  },
+  {
+   "name": "Chief Montgomery Scott",
+   "needs": [
+    "effect:look-and-choose-enters-with-counters-if",
+    "effect:enters-with-counters-dynamic"
+   ],
+   "size": "small",
+   "why": "Not reached. Puts a creature or Spacecraft from hand onto the battlefield with X +1/+1 or X charge counters by its type."
+  },
+  {
+   "name": "T'Pring, Never Parted",
+   "needs": [
+    "trigger:fought-this-way-dies-this-turn"
+   ],
+   "size": "small",
+   "why": "Not reached. \"Whenever a creature that fought this way dies this turn, you draw a card\": no trigger on the creatures a fight involved."
+  }
+ ]
+}

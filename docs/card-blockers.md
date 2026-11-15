@@ -666,6 +666,17 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 331 (2026-11-14, `author-by-set TRK,TRC`, completing Star Trek)** — after the Oracle
+  snapshot refresh brought the released text (no rulings yet), 16 of the sets' 35 cards left were
+  authored: Kira Nerys, Firebrand (a creature entering attacking by another permanent's
+  replacement), Captain Benjamin Sisko and The Caretaker (the `dilemmas-faced` turn stat), H.M.S.
+  Bounty (an extra turn begun this game; "this game" journal reads now see the whole game, not the
+  last round), Sulu (`crewsAs` `times`/`stations`), Rules of Acquisition (the player control was
+  taken from), Nog (granted extra land drops), Kai Winn (`sourceAnyZone`), and Borg Cube, Starfleet
+  Academy, Guinan, Jean-Luc Picard, Luminary, Sarek, La Forge, The Guardian of Forever and Romulan
+  Bird-of-Prey on what was built (its recorded bug didn't reproduce). The other 19 weren't reached,
+  each recorded `size: "small"` with its key in `B331.json`; All Good Things... and Võx also wait
+  on rulings. The Holodeck needs a play permission from outside the game and its client display.
 - **Batches 328 and 329 (2026-11-14/15, `author-top-cards`, EDHREC ranks 18569–30935, overnight beside the lanes)** — 72 authored by two card-author agents (Vikya, Scorching Stalwart; Immard, the Stormcleaver; Henry Wu, InGen Geneticist; the TMNT duos; Dee Kay, Ride Guide and Motion Sickness on the night's Attractions; Bison Whistle; Turtle Tracks; Down for Repairs; …), the 13 a fresh reviewer read in full all right. Blocked 48: 41 Unfinity sticker and ticket cards (`mechanic:stickers`, major — 33 of B329's 60), and seven small keys handed to agents the same night: the dice read per die this turn (Resolute Veggiesaur, The Space Family Goblinson, Eelectrocute), Rose Noble (`filter:has-doctors-companion`), Blue, Loyal Raptor, Sewers of Estark, and Casey & Raph, Hotheads, whose impulse permission expired at the caster's end step (`bug:permission-duration-read-from-granter`).
 - **Batch 327 (2026-11-14, `author-top-cards`, EDHREC ranks 15527–18514, and the Attractions)** —
   77 authored. The 60 by rank: 41 by one card-author agent (Abby, Merciless Soldier; Ultra

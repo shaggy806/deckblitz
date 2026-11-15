@@ -97,20 +97,17 @@ section keeps only what to do next.
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
   `ASSIMILATE` in `helpers.ts`), and so are Marvel: Darkhold Destiny's previews (MDD, MDC) and
   Mystery Booster Commander (MBC) (batch 269). **The walk is caught up**: every released and
-  previewed set is whole but TRC's two below, and Nauctis (NAU, out 2027-02-05) has no cards in the
+  previewed set is whole but Star Trek's 19 (below), and Nauctis (NAU, out 2027-02-05) has no cards in the
   snapshot yet. **Next: refresh the snapshot** (`npm run gen:oracle -w engine`) once new previews
   are out, then `cards:sets -- --sets` picks up what it brings. MDD's Hela and Magik wait on
-  release rulings (`mechanic:vengeance`, `B269.json`). **After Star Trek's release (2026-11-13)**: `npm run gen:oracle -w engine`
-  drops the `preview` lines and brings the rulings; `card:verify -- --offline` then shows any card
-  whose text changed. Then author TRC's two left: Worf, Chief Tactical Officer (left out of B268:
-  its preview text is only "Vigilance" on a 3-mana legendary, which looked incomplete) and
-  Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
-  (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
-  (blocked, also waiting on a ruling) against the released text. **Completing Star Trek** (the
-  user's ask, 2026-11-14: its cards rank past 18,000 on EDHREC, so the by-rank work won't reach
-  them): `/author-by-set TRK,TRC`, the skill that finishes one set by its code, building what its
-  last cards need. 23 of TRK's 294 and 12 of TRC's 173 are out, each with its need in
-  `npm run cards:sets -w engine -- --set TRK,TRC --left`; the snapshot refresh above comes first.
+  release rulings (`mechanic:vengeance`, `B269.json`). **Completing Star Trek** (the user's ask,
+  2026-11-14: its cards rank past 18,000 on EDHREC, so the by-rank work won't reach them): the
+  snapshot was refreshed after the release and the first `/author-by-set TRK,TRC` run (B331)
+  authored 16 of the 35 left. **19 are left, each a small feature recorded in `B331.json`**: re-run
+  `/author-by-set TRK,TRC` (`npm run cards:sets -w engine -- --set TRK,TRC --left` lists them);
+  next by rank, Dr. Beverly Crusher (`static:life-gain-trigger-doubling`). All Good Things... and
+  Võx, Child of the Collective also wait on rulings (none published 2026-11-14); The Holodeck needs a
+  play permission from outside the game (the sideboard) and its client display.
 - **Cards banned in Commander for power: 7 left, each blocked** (`B52.json`). Channel, Erayo,
   Fastbond, Flash, Nadu, Sylvan Primordial and Trade Secrets each wait on a feature of their own
   (`docs/card-blockers.md`).

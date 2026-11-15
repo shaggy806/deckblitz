@@ -19,7 +19,7 @@ export default defineCard({
   power: 3,
   toughness: 1,
   text: `${NAME_TEXT}\n${DRAIN_TEXT}`,
-  chooseCardNameOnEnter: { filter: { notTypes: ["land"] }, aim: "opponent-spells" },
+  chooseCardNameOnEnter: { filter: { notTypes: ["land"] } },
   triggered: [
     {
       trigger: { on: "cast-spell", who: "opponent", filter: { chosenName: true } },
