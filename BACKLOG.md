@@ -321,6 +321,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **The lobby's bot speed resets to Slow for every game** (the user, 2026-11-15): the speed picked in a room's settings should persist between games rather than defaulting to slow every time. A new room starts from `PendingRoom.botSpeed = "slow"` (`server/src/pending-room.ts`), and the picker is `client/src/lobby/RoomSettingsPanel.tsx` (`game.setBotSpeed`); the last choice would be remembered on the client and sent as the room is made.
 - **Read through a couple of games' history logs, and let a finished game's full log be downloaded** (the user, 2026-11-15): go through the history tab's log for a couple of games and make sure everything reads sensibly (`client/src/ui/EventLog.tsx`). And add an option on the end screen of a game to download a full log, with all information revealed, not just what your seat could see (so it comes from the room's whole game, not the seat's redacted view).
 
 
