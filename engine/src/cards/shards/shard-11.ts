@@ -893,6 +893,7 @@ import _poolTezzeretCruelMachinist from "../pool/tezzeret-cruel-machinist.js";
 import _poolThaliaHereticCathar from "../pool/thalia-heretic-cathar.js";
 import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
 import _poolTheBeamtownBullies from "../pool/the-beamtown-bullies.js";
+import _poolTheBestOfBothWorlds from "../pool/the-best-of-both-worlds.js";
 import _poolTheNeutrinos from "../pool/the-neutrinos.js";
 import _poolTheRuinousPowers from "../pool/the-ruinous-powers.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
@@ -1937,6 +1938,7 @@ const shard: CardShard = {
     _poolThaliaHereticCathar,
     _poolThatsRoughBuddy,
     _poolTheBeamtownBullies,
+    _poolTheBestOfBothWorlds,
     _poolTheNeutrinos,
     _poolTheRuinousPowers,
     _poolTheThingBenGrimm,

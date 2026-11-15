@@ -28022,6 +28022,7 @@ import _poolTheBeaconOfKahless from "./pool/the-beacon-of-kahless.js";
 import _poolTheBeamtownBullies from "./pool/the-beamtown-bullies.js";
 import _poolTheBearsOfLittjara from "./pool/the-bears-of-littjara.js";
 import _poolTheBelligerent from "./pool/the-belligerent.js";
+import _poolTheBestOfBothWorlds from "./pool/the-best-of-both-worlds.js";
 import _poolTheBiblioplex from "./pool/the-biblioplex.js";
 import _poolTheBindingOfTheTitans from "./pool/the-binding-of-the-titans.js";
 import _poolTheBirthOfMeletis from "./pool/the-birth-of-meletis.js";
@@ -61216,6 +61217,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheBeamtownBullies,
   _poolTheBearsOfLittjara,
   _poolTheBelligerent,
+  _poolTheBestOfBothWorlds,
   _poolTheBiblioplex,
   _poolTheBindingOfTheTitans,
   _poolTheBirthOfMeletis,
@@ -94423,6 +94425,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-beamtown-bullies": _poolTheBeamtownBullies,
   "pool/the-bears-of-littjara": _poolTheBearsOfLittjara,
   "pool/the-belligerent": _poolTheBelligerent,
+  "pool/the-best-of-both-worlds": _poolTheBestOfBothWorlds,
   "pool/the-biblioplex": _poolTheBiblioplex,
   "pool/the-binding-of-the-titans": _poolTheBindingOfTheTitans,
   "pool/the-birth-of-meletis": _poolTheBirthOfMeletis,

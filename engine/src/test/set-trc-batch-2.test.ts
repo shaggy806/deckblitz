@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, destroy, enter, hand, lands, pickTargets, ref, settle, spawn, table, toStep, tokensNamed, zone } from "./harness.js";
+import { A, B, activate, counters, destroy, enter, hand, lands, pickTargets, ref, settle, spawn, subtypes, table, toStep, tokensNamed, types, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -59,5 +59,25 @@ describe("T'Pring, Never Parted", () => {
     destroy(game, giant); // it fought: its death this turn draws too
     settle(game);
     expect(hand(game).length).toBe(before + 2);
+  });
+});
+
+describe("The Best of Both Worlds", () => {
+  it("assimilates a creature, then III blinks that Borg back to its owner", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    pickTargets(a, bears);
+    const saga = enter(game, "The Best of Both Worlds");
+    expect(game.state.objects[bears].controller).toBe(A);
+    expect(subtypes(game, bears)).toEqual(["Borg"]);
+    expect(types(game, bears)).toContain("artifact");
+    expect(counters(game, bears, "+1/+1")).toBe(1);
+    game.state.objects[saga].counters.lore = 2;
+    toStep(game, "precombat-main");
+    settle(game);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.objects[bears].controller).toBe(B);
+    expect(subtypes(game, bears)).toEqual(["Bear"]);
+    expect(counters(game, bears, "+1/+1")).toBe(0);
   });
 });

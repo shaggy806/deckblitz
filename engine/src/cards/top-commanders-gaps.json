@@ -2686,7 +2686,8 @@
   "replacement:clone-enters-with-copied-counters",
   "static:grant-beam-me-up-to-graveyard",
   "static:cant-be-beamed-up",
-  "trigger:fought-this-way-dies-this-turn"
+  "trigger:fought-this-way-dies-this-turn",
+  "effect:saga-chapter-links-permanent"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
