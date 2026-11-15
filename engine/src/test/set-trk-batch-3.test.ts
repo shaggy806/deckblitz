@@ -13,6 +13,7 @@ import {
   counters,
   enter,
   hand,
+  keywords,
   lands,
   nextTurn,
   pickTargets,
@@ -395,5 +396,22 @@ describe("Kai Winn, Faithless Leader", () => {
     game.dispatch({ type: "activate-ability", player: B, source: wraith, abilityIndex: cycle.abilityIndex, targets: [] });
     settle(game);
     expect(game.state.players[B].life).toBe(17 - 2 - 3);
+  });
+});
+
+describe("Romulan Bird-of-Prey", () => {
+  it("has hexproof only while it isn't a creature, and charges on noncreature spells then", () => {
+    const { game } = table();
+    const bird = spawn(game, "Romulan Bird-of-Prey");
+    expect(keywords(game, bird)).toContain("hexproof");
+    lands(game, "Island", 2);
+    cast(game, toHand(game, "Opt"));
+    expect(counters(game, bird, "charge")).toBe(2);
+    addCounters(game, bird, "charge", 6);
+    expect(types(game, bird)).toContain("creature");
+    expect(keywords(game, bird)).not.toContain("hexproof");
+    expect(keywords(game, bird)).toContain("flying");
+    cast(game, toHand(game, "Opt"));
+    expect(counters(game, bird, "charge")).toBe(8);
   });
 });

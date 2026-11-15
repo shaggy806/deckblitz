@@ -780,6 +780,7 @@ import _poolRoaringEarth from "../pool/roaring-earth.js";
 import _poolRoaringPrimadox from "../pool/roaring-primadox.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
 import _poolRollingSpoil from "../pool/rolling-spoil.js";
+import _poolRomulanBirdOfPrey from "../pool/romulan-bird-of-prey.js";
 import _poolRoninCliffrider from "../pool/ronin-cliffrider.js";
 import _poolRoninHoundmaster from "../pool/ronin-houndmaster.js";
 import _poolRonomSerpent from "../pool/ronom-serpent.js";
@@ -1865,6 +1866,7 @@ const shard: CardShard = {
     _poolRoaringPrimadox,
     _poolRoguesPassage,
     _poolRollingSpoil,
+    _poolRomulanBirdOfPrey,
     _poolRoninCliffrider,
     _poolRoninHoundmaster,
     _poolRonomSerpent,

@@ -22730,6 +22730,7 @@ import _poolRollingThunder from "./pool/rolling-thunder.js";
 import _poolRomAndLeetaUnlikelyPair from "./pool/rom-and-leeta-unlikely-pair.js";
 import _poolRomanaIi from "./pool/romana-ii.js";
 import _poolRomanticRendezvous from "./pool/romantic-rendezvous.js";
+import _poolRomulanBirdOfPrey from "./pool/romulan-bird-of-prey.js";
 import _poolRomulus from "./pool/romulus.js";
 import _poolRonaDiscipleOfGix from "./pool/rona-disciple-of-gix.js";
 import _poolRonaHeraldOfInvasion from "./pool/rona-herald-of-invasion.js";
@@ -55914,6 +55915,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRomAndLeetaUnlikelyPair,
   _poolRomanaIi,
   _poolRomanticRendezvous,
+  _poolRomulanBirdOfPrey,
   _poolRomulus,
   _poolRonaDiscipleOfGix,
   _poolRonaHeraldOfInvasion,
@@ -89111,6 +89113,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rom-and-leeta-unlikely-pair": _poolRomAndLeetaUnlikelyPair,
   "pool/romana-ii": _poolRomanaIi,
   "pool/romantic-rendezvous": _poolRomanticRendezvous,
+  "pool/romulan-bird-of-prey": _poolRomulanBirdOfPrey,
   "pool/romulus": _poolRomulus,
   "pool/rona-disciple-of-gix": _poolRonaDiscipleOfGix,
   "pool/rona-herald-of-invasion": _poolRonaHeraldOfInvasion,
