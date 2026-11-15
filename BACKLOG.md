@@ -179,6 +179,8 @@ live games for" (wraths since `threat`, pumping an opponent's attacker, the `"ac
 big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
 Shiko or the other spell, and haste enablers in the crackback).
 
+- **The next four steps, in order** (2026-11-15, `docs/plans/bot-next-steps.md`, which also says why the answer isn't a longer clock): **1.** a rollout's defender blocks the way v2 does (in progress: the chosen attack checked against real blocks, our own blocks in a priority rollout); **2.** mana priced by v2's own turn planner; **3.** watched games one archetype at a time (tokens done; aristocrats, spellslinger, voltron, reanimator, big-mana Dragons left); **4.** a screen for suspicious losses, so the games worth reading are found without reading them all.
+
 - **What the bot audit's fixes left** (2026-11-10; every step of `docs/plans/bot-audit-fixes.md` is built, its step 5 A/B level) — each needs a design of its own (the plan's "What this plan does not take on"): opponents that respond inside a rollout and holding instants for a better moment (Q8); hidden information (rollouts read the real library order); a worker thread for bots. Also from step 5: a triggered ability's target chosen as it goes on the stack is scored by standings, edicts aren't wipes, `bot:ab` has no pairing by seed, and the five sequencing rules v2 dropped are still v1's (`controller.ts`), so still play in rollouts.
 
 - **`legalActions` plans a payment for every activated ability it offers** (what the wide-board fix of 2026-11-15 left, `COMPLETED.md`): on `engine/data/bot-positions/seed-50-t40-b73.json` (356 permanents, about 1,700 offers) a call is 22 ms, most of it `whyCannotActivateAbility` → `payMana` once an ability, each plan setting up over every source (`planManaPaymentOrdered`, 3 s of a 13 s turn). An answer kept by cost for the sources that aren't mana sources themselves would cut it; not needed until a board that wide is slow in a live room.
@@ -273,8 +275,8 @@ Shiko or the other spell, and haste enablers in the crackback).
   aims a group at one target; v2's `targetCombos` spreads over 1, 2, 3 distinct ones) — Inferno
   Titan never goes 1 + 1 + 1 at three 1/1s, which the engine refuses anyway while a stack can't
   fill two slots of one target group ("Distinct targets in one token stack", Engine rules gaps).
-  And neither gang-blocks with two tokens of one stack, which the engine allows (`count`): v1 keys
-  blocks by blocker id at `count: 1`, v2's block climb drops a blocker once used.
+  (Gang blocks with two tokens of one stack are done, 2026-11-15: `COMPLETED.md`, "blocks with a
+  whole token stack".)
 - **More training scenarios.** About 175 hand-built scenarios, all of them gating
   (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
   live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which

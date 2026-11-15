@@ -103,9 +103,10 @@ for:
   (Wizards' text, unedited). Grep it for a rule's number and wording before citing one in code, a
   comment or a commit; when a newer edition is added, replace the file and this line.
 - **`docs/plans/*.md`** — design records, each saying *why* its piece is shaped the way it is,
-  with a `Status:` line at the top. `docs/plans/README.md` indexes them. Two are **in
+  with a `Status:` line at the top. `docs/plans/README.md` indexes them. Three are **in
   progress**: `bot-effect-knowledge` (the plan of record for the bots — read it before changing
-  how a bot picks actions) and `token-stack-choices`.
+  how a bot picks actions), `bot-next-steps` (the order of the bot work from 2026-11-15, and why
+  it isn't a longer clock) and `token-stack-choices`.
 - **`client/BOARD_REDESIGN_PLAN.md`** — the board-overhaul record: the mockup URL, the settled
   design rules, and the known gaps. All 18 phases shipped.
 
