@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, activate, lands, ref, settle, spawn, table, toStep, tokensNamed, zone } from "./harness.js";
+import { A, B, activate, destroy, enter, hand, lands, pickTargets, ref, settle, spawn, table, toStep, tokensNamed, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -41,5 +41,23 @@ describe("The Guardian of Forever", () => {
     settle(game);
     expect(zone(game, bears)).toBe("battlefield");
     expect(game.state.objects[bears].controller).toBe(A);
+  });
+});
+
+describe("T'Pring, Never Parted", () => {
+  it("has the chosen creatures fight, and draws for each that dies this turn", () => {
+    const { game, a } = table();
+    const giant = spawn(game, "Hill Giant"); // 3/3
+    const bears = spawn(game, "Grizzly Bears", B); // 2/2: dies
+    pickTargets(a, giant, bears);
+    a.chooseModesFn = (_view, _min, max) => Array.from({ length: max }, (_, i) => i);
+    const before = hand(game).length;
+    enter(game, "T'Pring, Never Parted");
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(zone(game, giant)).toBe("battlefield");
+    expect(hand(game).length).toBe(before + 1);
+    destroy(game, giant); // it fought: its death this turn draws too
+    settle(game);
+    expect(hand(game).length).toBe(before + 2);
   });
 });

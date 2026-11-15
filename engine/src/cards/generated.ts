@@ -29082,6 +29082,7 @@ import _poolToxinSliver from "./pool/toxin-sliver.js";
 import _poolToxrillTheCorrosive from "./pool/toxrill-the-corrosive.js";
 import _poolToymaker from "./pool/toymaker.js";
 import _poolTpolVulcanRepresentative from "./pool/tpol-vulcan-representative.js";
+import _poolTpringNeverParted from "./pool/tpring-never-parted.js";
 import _poolTraceOfAbundance from "./pool/trace-of-abundance.js";
 import _poolTrackDown from "./pool/track-down.js";
 import _poolTracker from "./pool/tracker.js";
@@ -62275,6 +62276,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolToxrillTheCorrosive,
   _poolToymaker,
   _poolTpolVulcanRepresentative,
+  _poolTpringNeverParted,
   _poolTraceOfAbundance,
   _poolTrackDown,
   _poolTracker,
@@ -95481,6 +95483,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/toxrill-the-corrosive": _poolToxrillTheCorrosive,
   "pool/toymaker": _poolToymaker,
   "pool/tpol-vulcan-representative": _poolTpolVulcanRepresentative,
+  "pool/tpring-never-parted": _poolTpringNeverParted,
   "pool/trace-of-abundance": _poolTraceOfAbundance,
   "pool/track-down": _poolTrackDown,
   "pool/tracker": _poolTracker,

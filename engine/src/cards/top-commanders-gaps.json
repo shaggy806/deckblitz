@@ -2685,7 +2685,8 @@
   "static:permanents-cant-phase-in",
   "replacement:clone-enters-with-copied-counters",
   "static:grant-beam-me-up-to-graveyard",
-  "static:cant-be-beamed-up"
+  "static:cant-be-beamed-up",
+  "trigger:fought-this-way-dies-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

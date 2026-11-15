@@ -915,6 +915,7 @@ import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
 import _poolTorture from "../pool/torture.js";
+import _poolTpringNeverParted from "../pool/tpring-never-parted.js";
 import _poolTrackDown from "../pool/track-down.js";
 import _poolTraitorsRoar from "../pool/traitors-roar.js";
 import _poolTranquilGrove from "../pool/tranquil-grove.js";
@@ -1960,6 +1961,7 @@ const shard: CardShard = {
     _poolToothOfRamos,
     _poolTorchDrake,
     _poolTorture,
+    _poolTpringNeverParted,
     _poolTrackDown,
     _poolTraitorsRoar,
     _poolTranquilGrove,
