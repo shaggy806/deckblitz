@@ -3962,6 +3962,7 @@ import _poolCaptainAmericaUnbowed from "./pool/captain-america-unbowed.js";
 import _poolCaptainAmericaWingsOfFreedom from "./pool/captain-america-wings-of-freedom.js";
 import _poolCaptainAmericasMotorcycle from "./pool/captain-americas-motorcycle.js";
 import _poolCaptainAmericasShield from "./pool/captain-americas-shield.js";
+import _poolCaptainBenjaminSisko from "./pool/captain-benjamin-sisko.js";
 import _poolCaptainHowlerSeaScourge from "./pool/captain-howler-sea-scourge.js";
 import _poolCaptainJamesTKirk from "./pool/captain-james-t-kirk.js";
 import _poolCaptainJanewayEndgame from "./pool/captain-janeway-endgame.js";
@@ -28024,6 +28025,7 @@ import _poolTheBrothersWar from "./pool/the-brothers-war.js";
 import _poolTheBrute from "./pool/the-brute.js";
 import _poolTheCabbageMerchant from "./pool/the-cabbage-merchant.js";
 import _poolTheCapitolineTriad from "./pool/the-capitoline-triad.js";
+import _poolTheCaretaker from "./pool/the-caretaker.js";
 import _poolTheCauldronOfEternity from "./pool/the-cauldron-of-eternity.js";
 import _poolTheCaveOfTwoLovers from "./pool/the-cave-of-two-lovers.js";
 import _poolTheCavesOfAndrozani from "./pool/the-caves-of-androzani.js";
@@ -37136,6 +37138,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaptainAmericaWingsOfFreedom,
   _poolCaptainAmericasMotorcycle,
   _poolCaptainAmericasShield,
+  _poolCaptainBenjaminSisko,
   _poolCaptainHowlerSeaScourge,
   _poolCaptainJamesTKirk,
   _poolCaptainJanewayEndgame,
@@ -61198,6 +61201,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheBrute,
   _poolTheCabbageMerchant,
   _poolTheCapitolineTriad,
+  _poolTheCaretaker,
   _poolTheCauldronOfEternity,
   _poolTheCaveOfTwoLovers,
   _poolTheCavesOfAndrozani,
@@ -70323,6 +70327,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/captain-america-wings-of-freedom": _poolCaptainAmericaWingsOfFreedom,
   "pool/captain-americas-motorcycle": _poolCaptainAmericasMotorcycle,
   "pool/captain-americas-shield": _poolCaptainAmericasShield,
+  "pool/captain-benjamin-sisko": _poolCaptainBenjaminSisko,
   "pool/captain-howler-sea-scourge": _poolCaptainHowlerSeaScourge,
   "pool/captain-james-t-kirk": _poolCaptainJamesTKirk,
   "pool/captain-janeway-endgame": _poolCaptainJanewayEndgame,
@@ -94385,6 +94390,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-brute": _poolTheBrute,
   "pool/the-cabbage-merchant": _poolTheCabbageMerchant,
   "pool/the-capitoline-triad": _poolTheCapitolineTriad,
+  "pool/the-caretaker": _poolTheCaretaker,
   "pool/the-cauldron-of-eternity": _poolTheCauldronOfEternity,
   "pool/the-cave-of-two-lovers": _poolTheCaveOfTwoLovers,
   "pool/the-caves-of-androzani": _poolTheCavesOfAndrozani,

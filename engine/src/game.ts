@@ -56976,6 +56976,12 @@ controlledBy,
       case "investigated":
         add({ kind: "investigated", player: event.player });
         return;
+      case "modes-chosen":
+        // Facing a dilemma: what the `faces-dilemma` trigger reads.
+        if (event.modal === true && event.modes.length > 0 && event.player !== undefined) {
+          add({ kind: "faced-dilemma", player: event.player });
+        }
+        return;
       case "coin-flipped":
         add({
           kind: "flipped",

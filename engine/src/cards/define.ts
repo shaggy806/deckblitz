@@ -879,7 +879,14 @@ export type TurnStat =
   | "power-attacked-with-this-combat"
   /** Energy counters the player has paid or lost this turn — Blaster Hulk's
    * "for each {E} you've paid or lost this turn". */
-  | "energy-paid-or-lost";
+  | "energy-paid-or-lost"
+  /** Dilemmas the player has faced this turn (Star Trek: "you face a dilemma
+   * as you choose one or more modes for a spell or ability") — Captain
+   * Benjamin Sisko's "for each dilemma you've faced this turn", The
+   * Caretaker's "if you faced a dilemma this turn". One a choice of a modal
+   * spell's or ability's modes (rule 700.2), as the `faces-dilemma` trigger
+   * counts them. */
+  | "dilemmas-faced";
 
 /**
  * Counters put on permanents this turn — the `countersPutThisTurn` amount and

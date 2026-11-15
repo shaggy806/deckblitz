@@ -129,6 +129,11 @@ export type JournalKind =
   | "library-searched"
   /** `player` investigated (701.16a), an entry per investigation. */
   | "investigated"
+  /** `player` faced a dilemma: chose one or more modes of a modal spell or
+   * ability as it was cast, activated or put on the stack (rule 700.2), an
+   * entry per choice (`modes-chosen`'s `modal`; the `faces-dilemma`
+   * trigger's event). */
+  | "faced-dilemma"
   /** `player` spent `amount` mana to cast a spell (700.14, expend). */
   | "mana-spent"
   /** `player` paid or lost `amount` energy counters. */

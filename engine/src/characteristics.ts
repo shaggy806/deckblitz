@@ -2060,6 +2060,7 @@ const TURN_STAT_READS: { readonly [S in TurnStat]: (state: GameState, player: Pl
   "power-attacked-with-this-combat": (state, player) =>
     PHASE_OF_STEP[state.turn.step] !== "combat" ? 0 : powerAttackedWith(state, player, state.turn.combatPhases ?? 1),
   "energy-paid-or-lost": (state, player) => journalTotal(state, "energy-lost", player, "amount"),
+  "dilemmas-faced": (state, player) => journalTotal(state, "faced-dilemma", player, "count"),
 };
 
 /** How many units of mana are unspent in `player`'s pool (rule 106.4), of

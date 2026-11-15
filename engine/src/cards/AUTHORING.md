@@ -1058,6 +1058,10 @@ creatures put onto the battlefield attacking don't touch it: pack tactics' "if
 you attacked with creatures with total power 6 or greater this combat" is the
 `turn-stat` condition `{ stat: "power-attacked-with-this-combat", who: "you",
 atLeast: 6 }`),
+`"dilemmas-faced"` (Star Trek's dilemmas: one per choice of a modal spell's or ability's modes,
+as `faces-dilemma` counts them — Captain Benjamin Sisko's "for each dilemma you've faced this
+turn", The Caretaker's "if you faced a dilemma this turn" `{ stat: "dilemmas-faced", who:
+"you", atLeast: 1 }`),
 `"cards-to-graveyard-from-hand-or-library"` (cards put into their graveyard
 from their hand or library — discarded, milled, surveilled, cycled; Welcome
 the Dead's X) or `"cards-left-graveyard"` (cards that left their graveyard,

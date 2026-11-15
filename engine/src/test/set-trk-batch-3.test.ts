@@ -21,10 +21,13 @@ import {
   subtypes,
   table,
   toHand,
+  toLibrary,
   toStep,
+  tokensNamed,
   types,
   zone,
 } from "./harness.js";
+import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ManaType } from "../mana.js";
 import { poolCounts } from "../mana.js";
@@ -34,6 +37,21 @@ const addCounters = (game: Game, id: ObjectId, counter: string, amount: number):
   game.debugApplyEffect(game.state.objects[id].controller, { kind: "add-counter", target: 0, counter, amount }, [
     ref(id),
   ]);
+
+/** The seat casts every card it's offered, once each; records the offers. */
+function castEverything(seat: ScriptedController): { offered: ObjectId[][] } {
+  const seen = { offered: [] as ObjectId[][] };
+  const done = new Set<ObjectId>();
+  seat.chooseCastNowFn = (_view, offer) => {
+    seen.offered.push([...offer.cards]);
+    const pick = offer.cards.find((id) => !done.has(id));
+    if (pick === undefined) return null;
+    done.add(pick);
+    const way = offer.casts.find((c) => c.card === pick)!;
+    return { type: "cast-spell", player: seat.playerId, card: pick, targets: [], via: way.via, ...(offer.free ? { free: true } : {}) };
+  };
+  return seen;
+}
 
 describe("Borg Cube", () => {
   it("exiles a creature when none is exiled with it, then assimilates that card", () => {
@@ -174,5 +192,57 @@ describe("Werewolf Pack Leader", () => {
     lands(game, "Forest", 4);
     activate(game, leader, 0);
     expect(subtypes(game, leader)).toEqual(["Werewolf"]);
+  });
+});
+
+describe("Captain Benjamin Sisko", () => {
+  it("makes an Officer for each dilemma faced this turn", () => {
+    const { game } = table();
+    spawn(game, "Captain Benjamin Sisko");
+    lands(game, "Island", 2);
+    lands(game, "Mountain", 2);
+    cast(game, toHand(game, "Izzet Charm"), { modes: [2] });
+    cast(game, toHand(game, "Izzet Charm"), { modes: [2] });
+    toStep(game, "end");
+    settle(game);
+    expect(tokensNamed(game, "Officer Token")).toBe(2);
+  });
+
+  it("casts the exiled spells whose mana value is at most the Officers you control, free", () => {
+    const { game, a } = table();
+    const seen = castEverything(a);
+    const sisko = spawn(game, "Captain Benjamin Sisko");
+    spawn(game, "Officer Token");
+    for (const land of ["Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes", "Wastes"]) spawn(game, land);
+    for (let i = 0; i < 4; i += 1) toLibrary(game, "Hill Giant"); // MV 4: too big
+    const bears = toLibrary(game, "Grizzly Bears"); // MV 2, on top
+    activate(game, sisko);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(seen.offered.flat().every((id) => id === bears)).toBe(true);
+    expect(
+      game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === "Hill Giant"),
+    ).toHaveLength(0);
+  });
+});
+
+describe("The Caretaker", () => {
+  it("at each end step after you faced a dilemma, casts an opponent's next nonland card free", () => {
+    const { game, a } = table();
+    castEverything(a);
+    spawn(game, "The Caretaker");
+    lands(game, "Island", 2);
+    lands(game, "Mountain", 2);
+    toLibrary(game, "Forest", B);
+    const bears = toLibrary(game, "Grizzly Bears", B);
+    toLibrary(game, "Forest", B);
+    toStep(game, "end"); // no dilemma: nothing
+    settle(game);
+    expect(zone(game, bears)).toBe("library");
+    toStep(game, "precombat-main");
+    cast(game, toHand(game, "Izzet Charm"), { modes: [2] });
+    toStep(game, "end");
+    settle(game);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.objects[bears].controller).toBe(A);
   });
 });
