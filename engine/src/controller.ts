@@ -5622,8 +5622,31 @@ export class HeuristicBotController extends AutomaticController {
     const myLife = view.state.players[this.playerId].life;
     for (const attacker of unblocked) {
       if (remaining < myLife) break;
-      const entry = units.find((e) => !used.has(e) && e.canBlock.includes(attacker));
-      if (entry === undefined) continue;
+      // The creature worth least of those free: a chump dies whatever it is
+      // (the first one listed was a 5/5 commander with 2/2 tokens beside it).
+      const entry = units
+        .filter((e) => !used.has(e) && e.canBlock.includes(attacker))
+        .sort((x, y) => worth(x.blocker) - worth(y.blocker))[0];
+      if (entry === undefined) {
+        // Every blocker is already on something: the one stopping the least
+        // is moved here (of several, the one worth least: a 2/2 token, not
+        // the 5/5 beside it), if this attacker deals more. The blocks above are
+        // made for value and take a creature each, so five 2/2s each killed
+        // a 1/1 Warrior while a 17/17 came through for the game at 16 life,
+        // with nothing left to chump it (found by `bot:losses`, 2026-11-15).
+        // Not a block the rules require, and not onto a menace attacker,
+        // which one blocker can't block.
+        if (legal.menaceAttackers.includes(attacker)) continue;
+        const moved = [...chosen]
+          .filter(([unit, on]) => unit.canBlock.includes(attacker) && !legal.mustBlock.includes(on) && power(on) < power(attacker))
+          .sort(([ux, x], [uy, y]) => power(x) - power(y) || worth(ux.blocker) - worth(uy.blocker))[0];
+        if (moved === undefined) continue;
+        const [unit, was] = moved;
+        chosen.set(unit, attacker);
+        if (![...chosen.values()].includes(was)) remaining += power(was);
+        remaining -= power(attacker);
+        continue;
+      }
       chosen.set(entry, attacker);
       used.add(entry);
       remaining -= power(attacker);

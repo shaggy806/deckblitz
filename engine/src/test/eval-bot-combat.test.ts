@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { EvalBotController } from "../bot/eval-bot.js";
-import { canBlock, damageThrough, isLethal } from "../bot/combat-math.js";
+import { canBlock, crackback, damageThrough, isLethal } from "../bot/combat-math.js";
 import { simulateAction } from "../bot/simulate.js";
 import { combinations, decisionCandidates } from "../bot/decisions.js";
 import type { CombatCreature } from "../bot/combat-math.js";
@@ -281,6 +281,60 @@ describe("EvalBotController combat", () => {
     game.dispatch({ type: "declare-blockers", player: A, blocks: v2 });
     game.advanceUntil((s) => s.turn.step === "end" || s.result.over);
     expect(game.state.players[A].hasLost).toBe(false);
+  });
+
+  it("moves a blocker off a 1/1 to chump the attacker that kills it", () => {
+    // v1 blocks for value first: each Bears kills a Memnite and lives, which
+    // took all five, and the 17/15 came through at 16 life with nothing left
+    // to chump it (found by `bot:losses`, 2026-11-15).
+    const game = Game.create({ seed: 3, registry, decks: [deckFor(A), deckFor(B)] });
+    game.advanceUntil((s) => s.priority.holder !== null);
+    for (let i = 0; i < 5; i += 1) game.debugSpawn("Grizzly Bears", A, "battlefield", { summoningSick: false });
+    const wurm = game.debugSpawn("Craw Wurm", B, "battlefield", { summoningSick: false });
+    game.state.objects[wurm].counters["+1/+1"] = 11;
+    const small = Array.from({ length: 6 }, () => game.debugSpawn("Memnite", B, "battlefield", { summoningSick: false }));
+    game.state.players[A].life = 16;
+    game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === B);
+    game.dispatch({ type: "declare-attackers", player: B, attackers: [wurm, ...small].map((attacker) => ({ attacker, defender: A })) });
+    game.advanceUntil((s) => s.awaiting?.kind === "blockers" && s.awaiting.player === A);
+    const v1 =new HeuristicBotController(A, registry).declareBlockers(viewOf(game, A));
+    expect(v1.filter((b) => b.attacker === wurm)).toHaveLength(1);
+    expect(v1).toHaveLength(5);
+    game.dispatch({ type: "declare-blockers", player: A, blocks: [...v1] });
+    game.advanceUntil((s) => s.turn.step === "end" || s.result.over);
+    expect(game.state.players[A].hasLost).toBe(false);
+  });
+});
+
+describe("crackback in another player's turn", () => {
+  const C = asPlayerId("carol");
+  /** Alice, Bob and Carol; three Craw Wurms each for Bob and Carol, and
+   * Alice with nothing to block with. Paused in `active`'s `step`. */
+  const board = (active: PlayerId, step: string): Game => {
+    const game = Game.create({ seed: 3, registry, decks: [deckFor(A), deckFor(B), deckFor(C)] });
+    game.advanceUntil((s) => s.priority.holder !== null);
+    for (const p of [B, C]) for (let i = 0; i < 3; i += 1) game.debugSpawn("Craw Wurm", p, "battlefield", { summoningSick: false });
+    game.advanceUntil((s) => s.turnOrder[s.turn.activePlayerIndex] === active && s.turn.step === step && s.priority.holder !== null);
+    return game;
+  };
+  const through = (game: Game): number => crackback(game.state, registry, A, 1).damage;
+
+  it("counts every opponent in our own turn", () => {
+    expect(through(board(A, "precombat-main"))).toBe(36);
+  });
+
+  it("counts the turn's player while its attack is still to come, and the players after it", () => {
+    expect(through(board(B, "precombat-main"))).toBe(36);
+  });
+
+  it("leaves out the turn's player once its attack is past", () => {
+    // Bob's Wurms stayed home; they don't attack again before Alice untaps.
+    expect(through(board(B, "postcombat-main"))).toBe(18);
+  });
+
+  it("leaves out the players whose turns are behind us", () => {
+    expect(through(board(C, "precombat-main"))).toBe(18);
+    expect(through(board(C, "end"))).toBe(0);
   });
 });
 

@@ -1,7 +1,8 @@
 # Bots: the next steps
 
-Status: **in progress** (written 2026-11-15; steps 1 and 2 built the same day, and step 5,
-added that day from the user, checked and its own-hand half built; steps 3 and 4 open). The
+Status: **in progress** (written 2026-11-15; steps 1, 2 and 4 built the same day, and step 5,
+added that day from the user, checked and its own-hand half built; step 3 open, now read
+through step 4's screen). The
 plan of record
 for the bots is still `bot-effect-knowledge.md`; this is the order of work after the overnight
 session of 2026-11-15, and why it isn't "give them more time".
@@ -174,6 +175,60 @@ alone and is the pattern.
 
 **Done when** `bot:watch`'s reader can be pointed at a list of seeds and turns instead of
 whole games.
+
+**Built, 2026-11-15** (`npm run bot:losses -w engine`, `engine/scripts/bot-losses.mjs`, a
+process a game like the judge; taken before step 3 because it says where step 3 should look).
+For each seat eliminated it prints the attack that killed it against the block arithmetic,
+its own last turn, what it did after it, and its hand, and flags the loss when:
+
+- **tapped away** / **attacked itself open**: with the creatures it had tapped for something
+  other than an attack, or the ones it attacked with on its last turn, untapped, the
+  arithmetic survives the attack;
+- **blocks**: the arithmetic had it alive as it declared its blocks, and it died;
+- **answer held**: it was offered a cast of removal, a wipe or damage prevention in the turn
+  it died and still held the card (a counterspell counts only for a loss outside combat);
+- **wipe unplayed**: a wipe it could cast on its own last turn, before dying to creatures;
+- **life spent**: four life or more paid, lost to its own effects or dealt by its own
+  sources since its last turn began, and more than it died by;
+- **own turn**: it lost on its own turn.
+
+The attack is read when the defender blocks, not when it is declared: the first run flagged
+three losses in three games that were an attack trigger (Atarka's double strike, Kangee's
++2/+0, Drakuseth's damage) landing after the declaration. A flag is a reason to read, never
+a verdict. Each flagged loss prints its `bot:watch` line: `--count` plays the same count
+budgets (so the seed is the same game) and `--turns A-B` prints those turns alone, both new,
+with `--snapshot-at N` to save the board a probe rebuilds the decision on.
+
+**First run** (20 four-player games on the upgraded precons and the strong decks, about
+five minutes a game at ten at a time; a Krenko game was stopped after half an hour): 60
+losses, 14 flagged. Read on their boards:
+
+- *Tapped away, a misplay, fixed.* Grave Danger, on 30 life with nine creatures tapped from
+  its own attack, blocked Mardu Surge's tokens with its last three and then tapped those
+  three to Cryptbreaker for a card. The next player sacrificed a 12/12 to Jarad and swung 20
+  power into no blockers. The tap guard was asked in our own turn only; it is asked in every
+  turn now, and `crackback` counts the players still to attack before we untap (the turn's
+  player while its attack is to come, and those between it and us).
+- *Blocks, a misplay, fixed.* Sultai Arisen, on 16 life, put all five blockers on 1/1
+  Warrior tokens and let a 17/17 Yahenni through. v1's blocks are made for value first and
+  chump with what is left, which was nothing; v2's climb starts from them, taking a block
+  off is just as dead, and the wide block was tried only when it was more blocks than the
+  ones that lost. v1 now moves the blocker stopping the least onto the attacker that kills
+  it and chumps with the creature worth least; v2 tries the wide block whenever it differs.
+- *Dead anyway, a judgment call, logged.* Sultai Arisen, dead on paper to Grave Danger's
+  twelve tapped Zombies two turns on, took the kill on Grave Danger with everything
+  (`alphaStrike`'s `deadAnyway`) and died to World Shaper's 45 power the turn after. Home, it
+  survives World Shaper by arithmetic, World Shaper most likely kills Grave Danger itself,
+  and two Jarad activations then finish World Shaper on 5. Seeing that takes an opponent's
+  turn played out, not arithmetic. In BACKLOG.
+- *Forced.* Grave Danger "lost on its own turn" attacking six creatures into Blood Artist at
+  4 life: Kardur, Doomscourge had been recast, and its creatures had to attack.
+- *Not misplays.* Two thin "attacked itself open" (an opponent's board tripled in the three
+  turns between), the Y'shtola deck dying with a hand of counterspells and tutors (the list a
+  bot can't pilot, already in BACKLOG), small life payments.
+
+So two real faults in 20 games, both in under an hour of reading, against the four an hour of
+whole-game reading found on one deck: the screen is the way into step 3.
 
 ## 5. Playing to its outs
 

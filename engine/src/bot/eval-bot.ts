@@ -1336,9 +1336,7 @@ export class EvalBotController extends HeuristicBotController {
 
     const player = this.playerId;
     const pass: Action = { type: "pass-priority", player };
-    // Whether a cast or activation could leave us dead to the crackback by
-    // what it taps or sacrifices (`crackbackGuard`), read once per decision.
-    this.tapGuard = this.crackbackGuard(view.state);
+    this.tapGuard = null;
     this.lastUnsafe = [];
     this.lastEnds = new Map();
     this.passOutcome = null;
@@ -1371,6 +1369,11 @@ export class EvalBotController extends HeuristicBotController {
       this.lastDecision = audit("priority", null, "no candidates");
       return pass;
     }
+    // Whether a cast or activation could leave us dead to the crackback by
+    // what it taps or sacrifices (`crackbackGuard`), read once per decision,
+    // and only for one with something to choose: it is asked in every
+    // player's turn, and most windows there have nothing.
+    this.tapGuard = this.crackbackGuard(view.state);
 
     // **A land drop is not weighed against passing.** Playing a land costs
     // nothing but the card, doesn't use the turn, and leaves another priority
@@ -2947,10 +2950,20 @@ export class EvalBotController extends HeuristicBotController {
     // seventeen 2/2s into ten 1/1 lifelink Soldiers at 12 life needs eight
     // of them blocking, each gaining a life, before any of it shows (a
     // watched game, 2026-11-15). The same shape as the wide attack.
+    //
+    // Tried whenever it is a different declaration, not only a longer one:
+    // five blockers each on a 1/1 Warrior they kill, and a 17/17 Yahenni
+    // through for the game at 16 life, is as many blocks as the wide one
+    // makes, on the wrong attackers. Taking a block off is just as dead and
+    // putting it on Yahenni is a second step, so the climb never moved one
+    // (found by `bot:losses`, 2026-11-15).
     let best = built;
     if (diedWith.has(built) && !budget.stalled) {
       const wide = this.wideBlock(legal, creatures, w);
-      if (wide.length > built.length) {
+      const same =
+        wide.length === built.length &&
+        wide.every((b) => built.some((x) => x.blocker === b.blocker && x.attacker === b.attacker && x.count === b.count));
+      if (wide.length > 0 && !same) {
         // Scored even with the count spent: it is the one start that may live.
         budget.left = Math.max(budget.left, 1);
         const [swung, swungScore] = hillClimb(wide, neighbours, score, budget);
@@ -3737,13 +3750,21 @@ export class EvalBotController extends HeuristicBotController {
     // the game has since become (a turn-34 answer was read back on turn 37,
     // and the bot held its mana for an out it no longer had).
     this.swings = new WeakMap();
-    if (state.turnOrder[state.turn.activePlayerIndex] !== this.playerId) return null;
+    // In another player's turn too: the players still to attack before we
+    // untap are who the crackback counts there (`crackback`). Grave Danger's
+    // bot, on 30 life, blocked Mardu Surge's tokens with its last three
+    // untapped Zombies and then tapped them to Cryptbreaker for a card; the
+    // next player sacrificed a 12/12 to Jarad and swung 20 power into no
+    // blockers (found by `bot:losses`, 2026-11-15). The guard was our own
+    // turn's alone.
+    const ours = state.turnOrder[state.turn.activePlayerIndex] === this.playerId;
     if (this.crackbackLethal(state, false)) {
       // Dead on the board whatever stays home: holding creatures back buys
       // nothing, but an answer in hand may (`survivesSwing`). If passing
       // lives through the swing back, that is the out, and what a candidate
-      // spends is checked against it.
-      return this.holdsAnAnswer(state) && this.survivesSwing(state) === true ? { grown: false, outs: true } : null;
+      // spends is checked against it. Our own turn only: the swing back is
+      // played from a turn of ours.
+      return ours && this.holdsAnAnswer(state) && this.survivesSwing(state) === true ? { grown: false, outs: true } : null;
     }
     const grown = !this.crackbackLethal(state, true);
     if (!this.crackbackLethal(state, grown, "all")) return null;

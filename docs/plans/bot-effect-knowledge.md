@@ -1124,6 +1124,28 @@ lethal. Training scenario "does not tap its token blockers away in the attacker'
 for a Sol Ring"; what would fix it is a rollout defender that blocks the way v2 does, which
 is the same open item as "an attack's blocks are predicted with v1's".
 
+**The tap guard in every player's turn, and a chump that takes a blocker back** (2026-11-15,
+both found by `bot:losses`, `bot-next-steps.md` step 4, and each rebuilt from a snapshot of
+its game). *The guard*: `crackbackGuard` returned nothing outside our own turn, so a creature
+tapped in one opponent's turn was never weighed against the opponents still to attack before
+we untap. Grave Danger blocked with its last three untapped Zombies and tapped them to
+Cryptbreaker in the same step, then died to the next player with no blockers. `crackback`
+now reads whose turn it is: in another player's turn it counts that player while its attack
+is still to be declared and the players between it and us, and nothing else (they have had
+their turn). The guard is asked in every turn, after the candidates are listed (most windows
+in other turns have none), and its dead-anyway branch (`survivesSwing`) stays our own turn's.
+*The chump*: v1's blocks take a blocker each for value (a kill it survives, a trade, a safe
+block) before the chump loop runs, so against a 17/17 and six 1/1s at 16 life all five
+blockers killed a 1/1 and nothing was left for the 17/17. The chump loop now takes back the
+blocker stopping the least, and chumps with the creature worth least rather than the first
+listed. v2 starts its block climb from v1's blocks; taking a block off was just as dead, and
+the wide block was tried only when longer than the blocks that lost, so v2 declared v1's.
+It is tried now whenever it is a different declaration. Gate scenarios "does not tap its
+blockers for a card in one opponent's turn with the next opponent's board lethal", "chumps
+the 17/15 that kills it rather than kill five 1/1s" and "chumps the double striker its first
+blocks left unblocked" (the last is v2's fix alone: a double striker is half its damage to
+v1's count).
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

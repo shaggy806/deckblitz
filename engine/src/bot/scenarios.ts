@@ -5169,6 +5169,97 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "does not tap its blockers for a card in one opponent's turn with the next opponent's board lethal",
+    rule: "A creature tapped in another player's turn stays tapped through every turn before our own: the players still to attack are a crackback too.",
+    position(registry) {
+      // Found by `bot:losses` (2026-11-15, the upgraded precons, seed 3):
+      // Grave Danger's bot, on 30 life with nine creatures tapped from its
+      // own attack, blocked Mardu Surge's tokens with its last three and then
+      // tapped those three to Cryptbreaker for a card. The next player swung
+      // 20 power into no blockers after a Jarad activation, and a third had
+      // 45 power waiting. The tap guard was asked in our own turn only.
+      // Here: Bob's Bears is blocked, and Carol, next, has 24 power in front
+      // of our 20 life. With three blockers home one Wurm gets through.
+      const game = table(registry, [A, B, C], B);
+      game.state.players[A].life = 20;
+      const breaker = onBoard(game, "Cryptbreaker", A);
+      const corpse = onBoard(game, "Walking Corpse", A);
+      onBoard(game, "Walking Corpse", A);
+      const bears = onBoard(game, "Grizzly Bears", B);
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Craw Wurm", C);
+      const failed = bobAttacks(game, [bears]);
+      if (failed !== null) return failed;
+      game.dispatch({ type: "declare-blockers", player: A, blocks: [{ blocker: corpse, attacker: bears }] });
+      game.advanceUntil((s) => s.priority.holder === A || s.turn.step !== "declare-blockers" || s.result.over);
+      if (game.state.priority.holder !== A || game.state.turn.step !== "declare-blockers") {
+        return { passed: false, detail: `alice never got priority after blocking (${game.state.turn.step})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "activate-ability" && action.source === breaker),
+          detail: `chose ${describeAction(action).slice(0, 200)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "chumps the 17/15 that kills it rather than kill five 1/1s",
+    rule: "Staying alive comes before a good block: a blocker already on a small attacker moves to the one whose damage is the game.",
+    position(registry) {
+      // Found by `bot:losses` (2026-11-15, the upgraded precons, seed 2):
+      // Sultai Arisen's bot, on 16 life, put all five of its blockers on 1/1
+      // Warrior tokens and let a 17/17 Yahenni through. v1's blocks are made
+      // for value first (each 2/2 kills a 1/1 and lives) and chump with what
+      // is left, which was nothing; v2's climb starts there, and neither
+      // taking a block off nor the wide block (as many blocks, so never
+      // tried) got it out. Here: a 17/15 and six 1/1s into five Bears.
+      const game = table(registry, [A, B], B);
+      game.state.players[A].life = 16;
+      for (let i = 0; i < 5; i += 1) onBoard(game, "Grizzly Bears", A);
+      const wurm = onBoard(game, "Craw Wurm", B);
+      game.state.objects[wurm].counters["+1/+1"] = 11;
+      const small = Array.from({ length: 6 }, () => onBoard(game, "Memnite", B));
+      const failed = bobAttacks(game, [wurm, ...small]);
+      if (failed !== null) return failed;
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const blocks = blocksOf(action) ?? [];
+          return { passed: blocks.some((b) => b.attacker === wurm), detail: describeAction(action).slice(0, 300) };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "chumps the double striker its first blocks left unblocked",
+    rule: "Blocks that lose the game are thrown out for the widest block, even when it is no more blocks than the ones that lost.",
+    position(registry) {
+      // The same turn where v1's arithmetic says it lives: a 9/9 with double
+      // strike is 9 power to v1's chump count, under 16 life, so v1 leaves
+      // its five Bears on the five 1/1s and takes 18. Only the search sees
+      // it die, and only the wide block gets out.
+      const game = table(registry, [A, B], B);
+      game.state.players[A].life = 16;
+      for (let i = 0; i < 5; i += 1) onBoard(game, "Grizzly Bears", A);
+      const ace = onBoard(game, "Fencing Ace", B);
+      game.state.objects[ace].counters["+1/+1"] = 8;
+      const small = Array.from({ length: 5 }, () => onBoard(game, "Memnite", B));
+      const failed = bobAttacks(game, [ace, ...small]);
+      if (failed !== null) return failed;
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const blocks = blocksOf(action) ?? [];
+          return { passed: blocks.some((b) => b.attacker === ace), detail: describeAction(action).slice(0, 300) };
+        },
+      };
+    },
+  }),
+  asked({
     name: "chumps with one token of a stack, not the stack",
     rule: "A chump block against lethal takes one token; the rest of a stack stays home.",
     position(registry) {

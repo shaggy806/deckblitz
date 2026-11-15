@@ -306,6 +306,9 @@ export function isLethal(
   return false;
 }
 
+/** The steps of a turn in which its player's attack is still to be declared. */
+const ATTACK_TO_COME: ReadonlySet<string> = new Set(["untap", "upkeep", "draw", "precombat-main", "begin-combat"]);
+
 /**
  * Crackback: before `me` untaps again, every living opponent gets a turn. If
  * each swings every creature able to attack into the blockers `me` has
@@ -321,6 +324,12 @@ export function isLethal(
  *
  * `lost` are blockers to count as gone — ones a cost is about to tap or
  * sacrifice — or `"all"`, for the crackback with nothing left home.
+ *
+ * In another player's turn the opponents who have had their turn since `me`
+ * last untapped are out of it: what is left is the turn's player, while its
+ * attack is still to be declared ({@link ATTACK_TO_COME}), and the players
+ * between it and `me`. On the turn of the player before `me`, with its
+ * attack made, nothing is.
  */
 export function crackback(
   state: GameState,
@@ -336,7 +345,10 @@ export function crackback(
       : combatCreatures(state, registry, me, true).filter((c) => lost === undefined || !lost.has(c.id));
   const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
   const mine = order.indexOf(me);
-  const opponents = [...order.slice(mine + 1), ...order.slice(0, Math.max(0, mine))];
+  let opponents = [...order.slice(mine + 1), ...order.slice(0, Math.max(0, mine))];
+  const active = state.turnOrder[state.turn.activePlayerIndex];
+  const acting = active === undefined ? -1 : opponents.indexOf(active);
+  if (acting >= 0) opponents = opponents.slice(ATTACK_TO_COME.has(state.turn.step) ? acting : acting + 1);
 
   let damage = 0;
   let gained = 0;
