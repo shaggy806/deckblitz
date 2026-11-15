@@ -2691,7 +2691,8 @@
   "condition:this-way-put-on-bottom-from-battlefield",
   "effect:look-and-choose-enters-with-counters-if",
   "effect:enters-with-counters-dynamic",
-  "effect:copy-spell-cast-this-way-by-opponent"
+  "effect:copy-spell-cast-this-way-by-opponent",
+  "effect:each-opponent-exiles-top-you-choose-one-playable"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

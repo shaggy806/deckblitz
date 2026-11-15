@@ -236,6 +236,7 @@ import _poolEnchantersBane from "../pool/enchanters-bane.js";
 import _poolEndOfTheHunt from "../pool/end-of-the-hunt.js";
 import _poolEndrekSahrMasterBreeder from "../pool/endrek-sahr-master-breeder.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
+import _poolEnsignPavelChekov from "../pool/ensign-pavel-chekov.js";
 import _poolEnslave from "../pool/enslave.js";
 import _poolEnslavedHorror from "../pool/enslaved-horror.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
@@ -1255,6 +1256,7 @@ const shard: CardShard = {
     _poolEndOfTheHunt,
     _poolEndrekSahrMasterBreeder,
     _poolEnduringBondwarden,
+    _poolEnsignPavelChekov,
     _poolEnslave,
     _poolEnslavedHorror,
     _poolEnvironmentalScientist,

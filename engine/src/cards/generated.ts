@@ -8494,6 +8494,7 @@ import _poolEnroot from "./pool/enroot.js";
 import _poolEnshrinedMemories from "./pool/enshrined-memories.js";
 import _poolEnshroudingMist from "./pool/enshrouding-mist.js";
 import _poolEnsignHarryKimOperations from "./pool/ensign-harry-kim-operations.js";
+import _poolEnsignPavelChekov from "./pool/ensign-pavel-chekov.js";
 import _poolEnslave from "./pool/enslave.js";
 import _poolEnslavedDwarf from "./pool/enslaved-dwarf.js";
 import _poolEnslavedHorror from "./pool/enslaved-horror.js";
@@ -41692,6 +41693,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnshrinedMemories,
   _poolEnshroudingMist,
   _poolEnsignHarryKimOperations,
+  _poolEnsignPavelChekov,
   _poolEnslave,
   _poolEnslavedDwarf,
   _poolEnslavedHorror,
@@ -74903,6 +74905,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/enshrined-memories": _poolEnshrinedMemories,
   "pool/enshrouding-mist": _poolEnshroudingMist,
   "pool/ensign-harry-kim-operations": _poolEnsignHarryKimOperations,
+  "pool/ensign-pavel-chekov": _poolEnsignPavelChekov,
   "pool/enslave": _poolEnslave,
   "pool/enslaved-dwarf": _poolEnslavedDwarf,
   "pool/enslaved-horror": _poolEnslavedHorror,

@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import {
   A,
   B,
+  C,
   activate,
   cast,
   counters,
@@ -551,5 +552,26 @@ describe("Marooned", () => {
     expect(offered()).toBe(false);
     spawn(game, "Grizzly Bears");
     expect(offered()).toBe(true);
+  });
+});
+
+describe("Ensign Pavel Chekov", () => {
+  it("each opponent exiles their top X; you may play a land of each one's while it's exiled", () => {
+    const { game, a } = table({ players: 3 });
+    game.state.rules.maxLandsPerTurn = 2;
+    lands(game, "Forest", 1);
+    lands(game, "Island", 1); // X = 2
+    const bLand = toLibrary(game, "Mountain", B);
+    toLibrary(game, "Grizzly Bears", B);
+    const cLand = toLibrary(game, "Swamp", C);
+    toLibrary(game, "Hill Giant", C);
+    a.chooseFromZoneFn = (_view, eligible) => eligible.slice(0, 1);
+    enter(game, "Ensign Pavel Chekov");
+    expect(zone(game, bLand)).toBe("exile");
+    expect(zone(game, cLand)).toBe("exile");
+    game.dispatch({ type: "play-land", player: A, card: bLand });
+    expect(zone(game, bLand)).toBe("battlefield");
+    game.dispatch({ type: "play-land", player: A, card: cLand });
+    expect(zone(game, cLand)).toBe("battlefield");
   });
 });
