@@ -59,7 +59,10 @@ for (const seat of seats) {
     if (action.type !== "pass-priority") {
       const s = view.state;
       const how = audit === null || audit === undefined ? "" : `  [${via}${audit.simulations ? `, ${audit.simulations} sims` : ""}${ms >= 1500 ? `, ${ms} ms` : ""}]`;
-      console.log(`  ${label[seat].padEnd(13)} ${s.turn.step.padEnd(17)} ${describeMove(s, action, registry)}${how}`);
+      // What asked, for an answer that doesn't say ("Choose no mode").
+      const asking = s.awaiting?.source !== undefined ? s.objects[s.awaiting.source]?.cardName : undefined;
+      const asked = asking !== undefined ? ` (${asking})` : "";
+      console.log(`  ${label[seat].padEnd(13)} ${s.turn.step.padEnd(17)} ${describeMove(s, action, registry)}${asked}${how}`);
     }
     return action;
   };
