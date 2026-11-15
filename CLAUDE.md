@@ -63,7 +63,10 @@ for:
   **The set walks are done** (whole sets, newest first and oldest first, October-November 2026;
   their skills were retired 2026-11-10, and what the other authoring skills shared with them is in
   `.claude/authoring/`); `npm run cards:sets -w engine -- --sets` still lists each set's cards
-  left. Several sessions on one PC share its memory through `scripts/machine-slots.mjs`:
+  left. What a walk left blocked in a set is the **`author-by-set`** skill's work (back 2026-11-14,
+  `/author-by-set TRK,TRC`): it completes one set by its code, building the features its last
+  cards need, since a new set's cards sit past EDHREC rank 20,000 for months
+  (`cards:sets -- --set <code> --left` lists them with what each waits on). Several sessions on one PC share its memory through `scripts/machine-slots.mjs`:
   typechecks and builds take a slot, a verify the whole machine.
   The other order is EDHREC rank across all sets (the `author-top-cards` skill;
   `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`

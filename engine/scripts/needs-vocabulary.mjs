@@ -319,7 +319,7 @@ function uniqueFaces() {
 
 // ------------------------------------------------------------------ CLI
 
-function openNeeds(record, vocab) {
+export function openNeeds(record, vocab) {
   return record.needs
     .map((raw) => vocab.canonical(raw) ?? raw)
     .filter((key) => !vocab.isMeta(key) && !vocab.isBuilt(key));

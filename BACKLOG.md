@@ -106,7 +106,11 @@ section keeps only what to do next.
   its preview text is only "Vigilance" on a 3-mana legendary, which looked incomplete) and
   Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
   (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
-  (blocked, also waiting on a ruling) against the released text.
+  (blocked, also waiting on a ruling) against the released text. **Completing Star Trek** (the
+  user's ask, 2026-11-14: its cards rank past 18,000 on EDHREC, so the by-rank work won't reach
+  them): `/author-by-set TRK,TRC`, the skill that finishes one set by its code, building what its
+  last cards need. 23 of TRK's 294 and 12 of TRC's 173 are out, each with its need in
+  `npm run cards:sets -w engine -- --set TRK,TRC --left`; the snapshot refresh above comes first.
 - **Cards banned in Commander for power: 7 left, each blocked** (`B52.json`). Channel, Erayo,
   Fastbond, Flash, Nadu, Sylvan Primordial and Trade Secrets each wait on a feature of their own
   (`docs/card-blockers.md`).

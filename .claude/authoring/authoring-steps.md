@@ -2,6 +2,8 @@
 
 Steps 2 and 3 of the set walks' procedure (the walks finished in November 2026), kept
 because `author-freed`, `author-flagged`, `author-top-cards` and `author-top-commanders` follow them.
+(`author-by-set`, back 2026-11-14 to complete one set, has its own steps: it builds every feature
+a set's last cards need, not only one that blocks five.)
 Where a step says "the set", read the batch the calling skill picked. `agent-batches.md` beside
 this file is the procedure for batches authored by agents.
 

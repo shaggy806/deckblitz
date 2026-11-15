@@ -9,6 +9,9 @@
 //   npm run cards:sets -w engine -- --next 60          the next untriaged cards, set by set
 //   npm run cards:sets -w engine -- --sets [N]         the newest N sets (default 12): new cards, done, left
 //   npm run cards:sets -w engine -- --set FRA          one set's cards, each marked
+//   npm run cards:sets -w engine -- --set TRK,TRC --left   only the cards not in the pool yet, each with
+//                     what it waits on: untriaged, every need built (re-read it), or its open
+//                     need keys and the record's why — what the `author-by-set` skill works from
 //   … --top 50        keep only that share of each set's ranked new cards (percent, default 100)
 //   … --ranked-only   leave out the cards EDHREC hasn't ranked yet (kept by default, last)
 //   … --refresh       fetch Scryfall's set list and first printings again (cached 3 days)
@@ -33,6 +36,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { POOL_CARDS, TOKEN_CARDS } from "../dist/cards/generated.js";
+import { frontName, latestByCard, loadRecords, loadVocabulary, openNeeds } from "./needs-vocabulary.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, "..");
@@ -164,13 +168,35 @@ const mark = (c) =>
 
 const all = await sets();
 if (option("--set") !== undefined) {
-  const code = option("--set").toLowerCase();
-  const set = (await sets(true)).find((s) => s.code === code);
-  if (set === undefined) throw new Error(`no set ${code} among the sets walked`);
-  const cards = aboveThreshold(await newCards(set));
-  const when = set.released_at > today ? `out ${set.released_at}: previews` : set.released_at;
-  console.log(`${set.name} (${code.toUpperCase()}, ${when}, ${set.set_type}) — ${cards.length} above the threshold (top ${top}%):`);
-  for (const c of cards) console.log(`  ${String(c.rank ?? "—").padStart(6)}  ${c.name}  — ${c.type}  [${mark(c)}]`);
+  // One set, or several by comma (a set and its Commander set: `TRK,TRC`).
+  const onlyLeft = flag("--left");
+  const vocab = onlyLeft ? loadVocabulary() : null;
+  const latest = onlyLeft ? latestByCard(loadRecords()) : null;
+  /** What a card not in the pool waits on, from its latest triage record. */
+  const waitsOn = (c) => {
+    if (!snapshot.has(c.name)) return "not in the snapshot — npm run gen:oracle";
+    const record = latest.get(frontName(c.name));
+    if (record === undefined) return isTriaged(c.name) ? "triaged, no needs recorded — re-read it" : "untriaged";
+    const open = [...new Set(openNeeds(record, vocab))];
+    const why = String(record.why).replace(/\s+/g, " ").trim();
+    return open.length === 0
+      ? `every need built (${record.batch}) — re-read it`
+      : `${open.join(" + ")} (${record.batch})${why === "" ? "" : `: ${why.length > 160 ? `${why.slice(0, 159)}…` : why}`}`;
+  };
+  for (const code of option("--set").toLowerCase().split(",")) {
+    const set = (await sets(true)).find((s) => s.code === code);
+    if (set === undefined) throw new Error(`no set ${code} among the sets walked`);
+    const cards = aboveThreshold(await newCards(set));
+    const when = set.released_at > today ? `out ${set.released_at}: previews` : set.released_at;
+    if (onlyLeft) {
+      const left = cards.filter((c) => !inPool(c.name));
+      console.log(`${set.name} (${code.toUpperCase()}, ${when}, ${set.set_type}) — ${left.length} of ${cards.length} not in the pool:`);
+      for (const c of left) console.log(`  ${String(c.rank ?? "—").padStart(6)}  ${c.name}  — ${c.type}\n          ${waitsOn(c)}`);
+    } else {
+      console.log(`${set.name} (${code.toUpperCase()}, ${when}, ${set.set_type}) — ${cards.length} above the threshold (top ${top}%):`);
+      for (const c of cards) console.log(`  ${String(c.rank ?? "—").padStart(6)}  ${c.name}  — ${c.type}  [${mark(c)}]`);
+    }
+  }
 } else if (flag("--sets")) {
   const n = Number(option("--sets", "12"));
   console.log(`set        released    new  above  done  triaged  left   (threshold: top ${top}% by EDHREC rank${withUnranked ? ", unranked kept" : ""})`);
