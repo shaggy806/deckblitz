@@ -31,7 +31,11 @@ describe("the manual-check presets", () => {
       }
     }
     expect(failures).toEqual([]);
-  });
+    // Every preset's board: under a second alone, three in the suite, and
+    // past vitest's five when `worker-smoke` runs its real workers beside it
+    // (it does whenever `dist/` is fresh: three suite runs in a row timed out
+    // here on 2026-11-15, right after a server build).
+  }, 30_000);
 
   it("names a real entry, and every entry has one", () => {
     const headings = entryHeadings();
