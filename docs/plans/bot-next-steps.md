@@ -1,7 +1,8 @@
 # Bots: the next steps
 
-Status: **in progress** (written 2026-11-15; step 1 built the same day, steps 2 to 5 open;
-step 5 added that day from the user). The plan of record
+Status: **in progress** (written 2026-11-15; step 1 built the same day, and step 5, added
+that day from the user, checked and its own-hand half built; steps 2 to 4 open). The plan of
+record
 for the bots is still `bot-effect-knowledge.md`; this is the order of work after the overnight
 session of 2026-11-15, and why it isn't "give them more time".
 
@@ -180,3 +181,57 @@ that does save it (its own wipe, a chump that buys a turn) still wins outright.
 
 **Done when** the check has numbers, and either a scenario gates the behaviour or the numbers
 say it is too rare to build for.
+
+**Checked, 2026-11-15** (`npm run bot:outs -w engine`, new: every turn a seat ends dead to one
+opponent's creatures whatever it blocks with, followed to its next turn). Over 24 four-player
+games on the upgraded precons and the strong decks, 1,025 turns ended and **58 (6%) were dead
+on the board**. What happened next:
+
+| | turns | |
+|---|---|---|
+| died | 46 | 79% |
+| not attacked (the board went elsewhere, or nowhere) | 8 | 14% |
+| attacked, lived | 3 | 5% |
+| that board cut down by someone before it untapped | 1 | 2% |
+
+So at a table of bots **another player's wipe is not an out worth planning for**: once in 58.
+The out that comes is the big board choosing someone else, and nothing a seat casts changes
+that. On 30 of the 58 the seat had cast a creature that turn, and 81% of those creatures were
+still there a round later: holding them back would have saved little. (Bots may also wipe too
+rarely on another player's behalf; a third player held a wipe on 12 of the 58 and the seat
+died on 8 of them. Not looked at.)
+
+**What was real is the seat's own out.** On 12 of the 58 it ended the turn with a wipe in its
+own hand, and died on 8. Most couldn't be cast (one to three lands, after a land wipe). One
+could and wasn't: First Flight at 10 life, ten lands, Aetherize in hand, cast three creatures
+that couldn't save it and died with one land open. Rebuilt, it does the same; with the mana
+open it casts Aetherize as the attackers are declared and lives. The block arithmetic knows
+only creatures, so "dead either way" meant race and tap out.
+
+**Built: the outs guard.** Dead on the board whatever stays home, holding an instant or a
+flash card, the bot plays the swing back (`survivesSwing`): the opponents whose creatures
+alone have it dead attack it with everything, the others play v1's combat, and its own seat,
+once attackers are declared at it, casts the spell in hand that leaves it alive, if one does
+(`AnsweringSeat`). If passing lives through that, the out exists, and a cast or activation
+after which it doesn't is unsafe, the way a tap into the crackback is (`tapGuard.outs`, the
+same check on a planned line's every step). Gate scenario "holds the mana for Aetherize when
+the board has it dead without it" (red with the guard off: one land open). The first version
+seated a whole v2 on the opponents' turns and took 21 seconds over that scenario's one turn;
+the answerer that tries each spell once takes 1.4. And the first run of `bot:outs` with the
+guard in showed a turn where the bot now cast nothing and died as before: the guard had
+remembered a swing back by the state it started from, and the live game's state is one object
+changed in place, so turn 34's "passing lives" was read back on turn 37. A decision's swing
+backs are now its own (`bot-outs-guard.test.ts`). Nothing else in the bot may key a memo on
+`view.state` across decisions.
+
+*Measured again with the guard in*, the same 24 games: the First Flight turn is the one that
+changes (it casts two creatures, keeps four lands, Aetherize returns seven attackers and it
+lives), 45 deaths for 46, and the games take the same time (474 s for 468 s). A rare
+position, then, played right when it comes.
+
+**Left of step 5.** The answer is a spell from hand at the declaration of attackers: not an
+activated ability on the battlefield (a fog engine, a sacrifice outlet), not a counterspell
+held for a pump. A sorcery-speed out on its own turn (its own wipe over a board of nineteen
+creatures: Grave Danger cast Crippling Fear instead of Necromantic Selection and died) is the
+evaluation's call and didn't reproduce on a small board. An attack, dead on the board, still
+races. And whether the bots wipe for a table's sake is unmeasured.

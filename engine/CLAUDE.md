@@ -170,6 +170,10 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   decider's life and its opponents', and the lines only one answer lived through. For a decision the sample decks
   hardly raise (so `bot:diff` says nothing), and for whether a change was for the better; its verdicts are v2's own
   play, so read the big gaps on their boards.
+- `bot:outs -- --seeds 1-6 --decks "A,B,C,D[;…]" [--parallel 6]`: every turn a seat ends dead to one opponent's
+  creatures whatever it blocks with, followed to its next turn and filed (died, not attacked, that board cut down,
+  attacked and lived), with what it cast that turn and the wipes it and the others held. Says how often each out comes,
+  and finds the turns worth rebuilding.
 - `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000]`: one whole game of v2 seats at the
   live clock, written out to read: each turn's board and hands, and every decision with how it was reached. For looking
   over the bots' play by eye; deck names match the strong decks first, then the starter decks.

@@ -71,6 +71,7 @@ import { mostWorthKeepingFirst } from "./hand-worth.js";
 import type { EvalWeights } from "./evaluate.js";
 import {
   CombatRolloutController,
+  DefendingRolloutController,
   isDeepHorizon,
   MAX_BATCH,
   rolloutAborted,
@@ -78,6 +79,7 @@ import {
   simulateCombat,
   simulatePlan,
   simulateRepeated,
+  simulateSwingBack,
   withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
@@ -364,6 +366,15 @@ const DEFAULT_MAX_SIMULATIONS = 200;
 export const LIVE_BOT_BUDGET_MS = 1000;
 
 type DeclareAttackersLegal = Extract<LegalAction, { kind: "declare-attackers" }>;
+
+/** What a priority decision on our own turn must not spend
+ * (`crackbackGuard`): blockers the crackback needs home, read with or
+ * without `crackbackGrowth` (`grown`), or, dead on the board whatever stays
+ * home, the out it holds in hand (`outs`). */
+interface TapGuard {
+  readonly grown: boolean;
+  readonly outs?: true;
+}
 type DeclareBlockersLegal = Extract<LegalAction, { kind: "declare-blockers" }>;
 
 /** An attack that would leave us dead to the crackback scores below every safe
@@ -398,6 +409,11 @@ const MOVES_PER_ROUND = 8;
  * checked against it (`declareAttackersSearched`): enough for its climb from
  * v1's blocks on a board of a dozen attackers. */
 const REAL_BLOCK_SIMULATIONS = 24;
+
+/** How many fillings (targets, modes) of each spell our own seat tries as an
+ * answer in a simulated swing back (`AnsweringSeat`), in the order the
+ * candidates come: the ones aimed best first. */
+const ANSWER_FILLINGS = 3;
 
 /** How far below its predicted score an attack may come out against the real
  * blocks and still be declared unasked (`declareAttackersSearched`): the
@@ -858,6 +874,88 @@ class RealBlocksController extends CombatRolloutController {
   }
 }
 
+/**
+ * An opponent in the swing back (`survivesSwing`): v1's rollout stand-in,
+ * attacking `target` with everything that can. The worst case the crackback
+ * arithmetic counts, played out.
+ */
+class SwingAtController extends CombatRolloutController {
+  private readonly target: PlayerId;
+
+  constructor(playerId: PlayerId, cards: CardRegistry, target: PlayerId) {
+    super(playerId, cards);
+    this.target = target;
+  }
+
+  declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
+    const legal = view.legalActions().find((o): o is DeclareAttackersLegal => o.kind === "declare-attackers");
+    if (legal === undefined) return [];
+    return legal.eligible
+      .filter((attacker) => (legal.defendersFor[attacker] ?? []).includes(this.target))
+      .map((attacker) => ({ attacker, defender: this.target }));
+  }
+}
+
+/**
+ * Our own seat in the swing back: v1's rollout stand-in that does nothing
+ * more with its own turn (what the candidate left is what it has) and, once
+ * attackers are declared at it, casts the spell in its hand that leaves it
+ * alive at the end of that turn, if one does — each castable spell tried in
+ * its first few fillings (`ANSWER_FILLINGS`), one combat rollout each, the
+ * best board among the ones it lives through.
+ *
+ * Not a whole v2 on the opponents' turns: that searched every window of
+ * them, each candidate a rollout with a block search inside, and one turn of
+ * the scenario this is for took 21 seconds.
+ */
+class AnsweringSeat extends DefendingRolloutController {
+  private readonly cards: CardRegistry;
+  private readonly weights: EvalWeights;
+
+  constructor(playerId: PlayerId, cards: CardRegistry, weights: EvalWeights) {
+    super(playerId, cards);
+    this.cards = cards;
+    this.weights = weights;
+  }
+
+  act(view: ControllerView): Action {
+    const s = view.state;
+    const me = this.playerId;
+    if (
+      s.awaiting === null &&
+      s.priority.holder === me &&
+      s.turn.step === "declare-attackers" &&
+      s.turnOrder[s.turn.activePlayerIndex] !== me &&
+      s.zones.shared.stack.length === 0
+    ) {
+      const answer = this.answer(view);
+      if (answer !== null) return answer;
+    }
+    return super.act(view);
+  }
+
+  private answer(view: ControllerView): Action | null {
+    const s = view.state;
+    const me = this.playerId;
+    const attacked = s.zones.shared.battlefield.some((id) => {
+      const target = s.objects[id]?.attacking ?? null;
+      return target !== null && (target === me || s.objects[target as ObjectId]?.controller === me);
+    });
+    if (!attacked) return null;
+    let best: { readonly action: Action; readonly value: number } | null = null;
+    for (const legal of view.legalActions()) {
+      if (legal.kind !== "cast-spell") continue;
+      for (const action of candidateActions(aimOffer(s, this.cards, me, legal), me).slice(0, ANSWER_FILLINGS)) {
+        const after = simulateAction(s, this.cards, action, "turn", "combat");
+        if (after === null || after.players[me]?.hasLost === true) continue;
+        const value = evaluateState(after, this.cards, me, this.weights);
+        if (best === null || value > best.value) best = { action, value };
+      }
+    }
+    return best?.action ?? null;
+  }
+}
+
 /** The steps of a turn before its blocks are declared. */
 const BEFORE_BLOCKS: ReadonlySet<string> = new Set([
   "untap",
@@ -915,7 +1013,11 @@ export class EvalBotController extends HeuristicBotController {
   private decisionRollout: RolloutPolicy;
   /** This priority decision's `crackbackGuard`: null when nothing a cast or
    * activation taps or sacrifices could make the crackback lethal. */
-  private tapGuard: { readonly grown: boolean } | null = null;
+  private tapGuard: TapGuard | null = null;
+  /** This decision's swing backs, by the board each started from
+   * (`survivesSwing`): a decision asks the same board more than once.
+   * Emptied as each decision's guard is read (`crackbackGuard`). */
+  private swings = new WeakMap<GameState, boolean | null>();
   /** A play held for after combat this turn (`holdsWipeForCombat`, or a
    * planned line's move after combat): our combat steps keep its mana
    * (`spendsHeldMana`). */
@@ -3431,6 +3533,9 @@ export class EvalBotController extends HeuristicBotController {
     return line.steps.every((step, i) => {
       const state = line.before[i];
       if (step === "combat" || state === undefined) return true;
+      // With an out in hand the board reads lethal at every step, so each is
+      // asked outright whether it keeps the out.
+      if (guard.outs === true) return !this.tapsIntoCrackback(state, step, budget);
       return this.crackbackLethal(state, guard.grown) || !this.tapsIntoCrackback(state, step, budget);
     });
   }
@@ -3510,6 +3615,12 @@ export class EvalBotController extends HeuristicBotController {
     // Stopped by the deadline, it wasn't shown safe: unsafe (it read as safe).
     if (resolved === null) return budget.until !== Infinity && rolloutAborted();
     if (resolved.result.over) return false;
+    if (guard.outs === true) {
+      // Dead on the board with an out in hand: unsafe is spending what the
+      // out needs, read by playing the swing back from the board it leaves.
+      const alive = timed(budget, () => this.survivesSwing(resolved));
+      return alive === null ? budget.until !== Infinity && rolloutAborted() : !alive;
+    }
     return this.crackbackLethal(resolved, guard.grown);
   }
 
@@ -3556,12 +3667,67 @@ export class EvalBotController extends HeuristicBotController {
    * (`grown`), and not when even nothing left home isn't lethal — then no
    * tap can matter, and no candidate pays for the extra simulation.
    */
-  private crackbackGuard(state: GameState): { readonly grown: boolean } | null {
+  private crackbackGuard(state: GameState): TapGuard | null {
+    // A decision's swing backs are its own: the game's state is one object
+    // changed in place, so a board remembered across decisions is whatever
+    // the game has since become (a turn-34 answer was read back on turn 37,
+    // and the bot held its mana for an out it no longer had).
+    this.swings = new WeakMap();
     if (state.turnOrder[state.turn.activePlayerIndex] !== this.playerId) return null;
-    if (this.crackbackLethal(state, false)) return null;
+    if (this.crackbackLethal(state, false)) {
+      // Dead on the board whatever stays home: holding creatures back buys
+      // nothing, but an answer in hand may (`survivesSwing`). If passing
+      // lives through the swing back, that is the out, and what a candidate
+      // spends is checked against it.
+      return this.holdsAnAnswer(state) && this.survivesSwing(state) === true ? { grown: false, outs: true } : null;
+    }
     const grown = !this.crackbackLethal(state, true);
     if (!this.crackbackLethal(state, grown, "all")) return null;
     return { grown };
+  }
+
+  /** A card in our hand that can be cast in an opponent's turn: an instant,
+   * or one with flash. The cheap test before a swing back is simulated. */
+  private holdsAnAnswer(state: GameState): boolean {
+    return (state.zones.perPlayer[this.playerId]?.hand ?? []).some((id) => {
+      const name = state.objects[id]?.cardName;
+      if (name === undefined || !this.cards.has(name)) return false;
+      const def = this.cards.get(name);
+      return def.types.includes("instant") || def.keywords.includes("flash");
+    });
+  }
+
+  /**
+   * **Playing to its outs** (`docs/plans/bot-next-steps.md`, step 5). Whether
+   * we are alive when our next turn begins, from `state` as it stands: the
+   * opponents whose creatures alone have us dead each attack us with
+   * everything (`SwingAtController`), the others play v1's combat, and our
+   * own seat answers with what it holds and the mana it has left
+   * (`AnsweringSeat`). `null` when the simulation was refused or stopped.
+   *
+   * The block arithmetic knows only creatures, so a bot dead on the board
+   * raced and tapped out: at 10 life in front of ten 6/4s, with Aetherize in
+   * hand and ten lands, it cast three creatures that couldn't save it and
+   * died with one land open (found by `bot:outs`, 2026-11-15, after the user
+   * asked whether the bots play to their outs). With the mana open it casts
+   * Aetherize as the attackers are declared and lives.
+   */
+  private survivesSwing(state: GameState): boolean | null {
+    const known = this.swings.get(state);
+    if (known !== undefined) return known;
+    const me = this.playerId;
+    const blockers = combatCreatures(state, this.cards, me, true);
+    const seatFor = (player: PlayerId): PlayerController => {
+      if (player === me) return new AnsweringSeat(me, this.cards, this.weights);
+      const attackers = combatCreatures(state, this.cards, player, false).filter((c) => c.canAttack);
+      return isLethal(state, me, damageThrough(attackers, blockers))
+        ? new SwingAtController(player, this.cards, me)
+        : new CombatRolloutController(player, this.cards);
+    };
+    const after = simulateSwingBack(state, this.cards, me, seatFor);
+    const alive = after === null ? null : after.players[me]?.hasLost !== true;
+    this.swings.set(state, alive);
+    return alive;
   }
 }
 

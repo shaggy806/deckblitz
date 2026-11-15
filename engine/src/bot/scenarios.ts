@@ -2624,6 +2624,43 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "holds the mana for Aetherize when the board has it dead without it",
+    rule: "Dead on the board whatever blocks, an instant in hand is the out: nothing is cast with the mana it needs.",
+    run(weights, registry, makeBot) {
+      // The user (2026-11-15): do the bots play to their outs, or put more on
+      // a board that can't save them? `bot:outs` found First Flight's bot at
+      // 10 life in front of a board that had it dead, Aetherize in hand and
+      // ten lands, casting three creatures and dying with one land open.
+      // Here ten Craw Wurms: seven blockers leave three through. The block
+      // arithmetic knows only creatures, so "dead either way" meant race and
+      // tap out. Fixed: `survivesSwing` plays the swing back with our seat
+      // answering, and a cast that spends the answer's mana is unsafe.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 10;
+      lands(game, "Island", A, 5);
+      lands(game, "Plains", A, 5);
+      for (let i = 0; i < 3; i += 1) onBoard(game, "Grizzly Bears", A);
+      const aetherize = game.debugSpawn("Aetherize", A, "hand");
+      for (const card of ["Hanged Executioner", "Tide Skimmer", "Skycat Sovereign"]) game.debugSpawn(card, A, "hand");
+      for (let i = 0; i < 10; i += 1) onBoard(game, "Craw Wurm", B);
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const state = game.state;
+      const open = state.zones.shared.battlefield.filter((id) => {
+        const o = state.objects[id];
+        return o?.controller === A && !o.tapped && (o.cardName === "Island" || o.cardName === "Plains");
+      });
+      const blue = open.some((id) => state.objects[id]?.cardName === "Island");
+      const held = state.objects[aetherize]?.zone === "hand";
+      return {
+        passed: held && open.length >= 4 && blue,
+        detail: `${open.length} lands open${blue ? "" : ", no Island"}, Aetherize ${held ? "held" : "gone"}; took ${taken
+          .filter((a) => a.type !== "pass-priority")
+          .map((a) => a.type)
+          .join(", ")}`,
+      };
+    },
+  },
+  {
     name: "does not station into a lethal crackback when the clock stops the check",
     rule: "A crackback check the deadline stopped in flight wasn't shown safe: the play is unsafe, not safe.",
     run(weights, registry) {

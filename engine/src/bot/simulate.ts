@@ -437,6 +437,41 @@ export function simulateCombat(
   });
 }
 
+/**
+ * Play `state` on from where it stands until `me`'s next turn begins — the
+ * rest of this turn and every opponent's — with `seatFor`'s controller at
+ * each seat, and return the state there (or where `me` lost, or the game
+ * ended). The swing back, simulated: `EvalBotController` seats the
+ * opponents whose boards have it dead as attacking it with everything, and
+ * itself as answering with what it holds (`survivesSwing`).
+ */
+export function simulateSwingBack(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  seatFor: (player: PlayerId) => PlayerController,
+): GameState | null {
+  const seed: GameState = { ...state, eventLog: [] };
+  const controllers: Record<PlayerId, PlayerController> = {};
+  for (const player of state.turnOrder) controllers[player] = seatFor(player);
+  const startingTurn = state.turn.number;
+  const ceiling = MAX_STEPS * (state.turnOrder.length + 1);
+  return rollout(() => {
+    const sim = Game.fromSnapshot(seed, { registry, controllers });
+    let steps = 0;
+    sim.advanceUntil(untilDeadline((s) => {
+      steps += 1;
+      return (
+        steps > ceiling ||
+        s.result.over ||
+        s.players[me]?.hasLost === true ||
+        (s.turn.number !== startingTurn && s.turnOrder[s.turn.activePlayerIndex] === me)
+      );
+    }));
+    return sim.state;
+  });
+}
+
 /** Holds back from attacking; otherwise v1's answers, like its parent. */
 export class DefendingRolloutController extends CombatRolloutController {
   declareAttackers(): readonly [] {

@@ -78,6 +78,7 @@
     "bot:ab": "node scripts/bot-ab.mjs",
     "bot:diff": "node scripts/bot-diff.mjs",
     "bot:judge": "node scripts/bot-judge.mjs",
+    "bot:outs": "node scripts/bot-outs.mjs",
     "bot:replay": "node scripts/bot-replay.mjs",
     "bot:watch": "node scripts/watch-game.mjs",
     "bot:anatomy": "node scripts/bot-anatomy.mjs",
