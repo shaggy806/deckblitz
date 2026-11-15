@@ -48,12 +48,17 @@ decks. A change to one of those diffs as zero and is still live. Ask that
 kind of decision on decks that raise it:
 
 ```bash
-cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:judge -- --kind payments --decks "The Ur-Dragon,Lathril,Atraxa,Giada" --seed 1
+cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:judge -- --kind attacks --seeds 1-3 --decks "Token Triumph,Grave Danger,World Shaper,Mardu Surge;Token Triumph,Grave Danger;The Ur-Dragon,Lathril,Atraxa,Giada"
 ```
 
-`--kind payments | discards | attacks`; `--base` as above; a game is one to
-four minutes, so run a few seeds and deck sets side by side. Each
-disagreement is played on by v2 and scored ("new better by 5.4"). That
-verdict is v2's own play and evaluation: trust it where the two lines did the
-same things or one did more, and read the big gaps on their boards, as above.
-On 2026-11-15 it stopped two changes the gate and the diff both passed.
+`--kind payments | discards | attacks | blocks`; `--base` as above. Each deck
+set (`;` between them) and seed is a game, played `--parallel` at a time
+(default 6) and totalled at the bottom; a game is a few seconds to four
+minutes. Each disagreement is played on by v2 and scored ("new better by 5.4
+(own life +3, opponents' −4)"), and the total says how much, not only how
+often: the net in evaluation points, gained and lost, the largest gap each
+way, life, and the lines only one answer lived through. Report the net first.
+That verdict is v2's own play and evaluation: trust it where the two lines
+did the same things or one did more, and read the big gaps on their boards,
+as above. On 2026-11-15 it stopped two changes the gate and the diff both
+passed, and a third that made eleven of twelve changed attacks "no attack".

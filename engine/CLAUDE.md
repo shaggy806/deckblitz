@@ -163,10 +163,13 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `bot:bench`, `bot:scenarios`, `bot:benchmarks`, `bot:behaviour`, `bot:crackback`, `bot:ab`, `bot:diff`,
   `bot:replay`, `bot:anatomy` (where a decision's time goes, on `data/bot-positions/`), `bot:timings`
   (decision cost in bench games at the live budget): bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
-- `bot:judge -- --kind payments|discards|attacks --decks "A,B,C,D" [--base origin/main] [--seed 1] [--all]`: one kind of
-  decision on named decks, the working build's answer beside an older commit's at each, and each disagreement played on
-  by v2 and scored. For a decision the sample decks hardly raise (so `bot:diff` says nothing), and for whether a change
-  was for the better; its verdicts are v2's own play, so read the big gaps on their boards.
+- `bot:judge -- --kind payments|discards|attacks|blocks --decks "A,B,C,D[;E,F]" [--seeds 1-8] [--parallel 6] [--base origin/main] [--all]`:
+  one kind of decision on named decks, the working build's answer beside an older commit's at each, and each
+  disagreement played on by v2 and scored. Several deck sets and seeds are a game each, played in parallel and totalled:
+  the net in evaluation points (a block that saves 23 life and one that costs 1 come to +22, not one each), the
+  decider's life and its opponents', and the lines only one answer lived through. For a decision the sample decks
+  hardly raise (so `bot:diff` says nothing), and for whether a change was for the better; its verdicts are v2's own
+  play, so read the big gaps on their boards.
 - `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000]`: one whole game of v2 seats at the
   live clock, written out to read: each turn's board and hands, and every decision with how it was reached. For looking
   over the bots' play by eye; deck names match the strong decks first, then the starter decks.
