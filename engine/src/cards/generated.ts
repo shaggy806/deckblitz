@@ -7222,6 +7222,7 @@ import _poolDomineer from "./pool/domineer.js";
 import _poolDomineeringWill from "./pool/domineering-will.js";
 import _poolDominionAssaultForce from "./pool/dominion-assault-force.js";
 import _poolDominionInfiltration from "./pool/dominion-infiltration.js";
+import _poolDominionSaboteur from "./pool/dominion-saboteur.js";
 import _poolDominionSupervisor from "./pool/dominion-supervisor.js";
 import _poolDominusOfFealty from "./pool/dominus-of-fealty.js";
 import _poolDomriAnarchOfBolas from "./pool/domri-anarch-of-bolas.js";
@@ -40412,6 +40413,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDomineeringWill,
   _poolDominionAssaultForce,
   _poolDominionInfiltration,
+  _poolDominionSaboteur,
   _poolDominionSupervisor,
   _poolDominusOfFealty,
   _poolDomriAnarchOfBolas,
@@ -73615,6 +73617,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/domineering-will": _poolDomineeringWill,
   "pool/dominion-assault-force": _poolDominionAssaultForce,
   "pool/dominion-infiltration": _poolDominionInfiltration,
+  "pool/dominion-saboteur": _poolDominionSaboteur,
   "pool/dominion-supervisor": _poolDominionSupervisor,
   "pool/dominus-of-fealty": _poolDominusOfFealty,
   "pool/domri-anarch-of-bolas": _poolDomriAnarchOfBolas,

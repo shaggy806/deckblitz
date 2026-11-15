@@ -189,6 +189,11 @@ export interface CopyOnEnter {
    * ruling), rather than a number written in `except.basePt`.
    */
   readonly ownPt?: true;
+  /** "If you do, it enters with additional counters on it equal to the same
+   * number and kinds of counters the copied permanent has on it" (Dominion
+   * Saboteur): the copied permanent's counters as it's chosen, put on as it
+   * enters (rule 707.9e), so a doubler changes them. */
+  readonly copiedCounters?: true;
   /** "Enter **tapped** as a copy" (Vesuva): an additional effect of copying
    * (rule 707.9e), so it enters tapped only if it copies something. */
   readonly tapped?: true;

@@ -8112,6 +8112,7 @@ export class Game {
       spec !== null &&
       (spec.tapped === true ||
         spec.counters !== undefined ||
+        spec.copiedCounters === true ||
         spec.untilEndOfTurn === true ||
         spec.untilTurnedFaceDown === true ||
         spec.whenYouDo !== undefined)
@@ -8120,9 +8121,17 @@ export class Game {
               ...(spec.tapped === true ? { tapped: true as const } : {}),
               ...(spec.untilEndOfTurn === true ? { untilEndOfTurn: true as const } : {}),
               ...(spec.untilTurnedFaceDown === true ? { untilTurnedFaceDown: true as const } : {}),
-              ...(spec.counters !== undefined
+              ...(spec.counters !== undefined || spec.copiedCounters === true
                 ? {
-                    counters: spec.counters
+                    counters: [
+                      // "The same number and kinds of counters the copied
+                      // permanent has on it" (Dominion Saboteur), as it's chosen.
+                      ...(spec.copiedCounters === true
+                        ? Object.entries(copied.counters)
+                            .filter(([, n]) => n > 0)
+                            .map(([kind, amount]) => ({ kind, amount }))
+                        : []),
+                      ...(spec.counters ?? [])
                       .filter((c) => c.ifYouControlCopied !== true || copiedIsYours)
                       .map((c) => ({
                         kind: c.kind,
@@ -8143,6 +8152,7 @@ export class Game {
                               : c.amount,
                         ...(c.ifType !== undefined ? { ifType: c.ifType } : {}),
                       })),
+                    ],
                   }
                 : {}),
               ...(spec.whenYouDo !== undefined

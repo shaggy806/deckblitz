@@ -2682,7 +2682,8 @@
   "effect:grant-replacement-until-eot",
   "duration:while-source-tapped-since-activation",
   "effect:grant-trigger-doubling",
-  "static:permanents-cant-phase-in"
+  "static:permanents-cant-phase-in",
+  "replacement:clone-enters-with-copied-counters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

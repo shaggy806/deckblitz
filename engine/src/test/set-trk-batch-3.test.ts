@@ -21,6 +21,7 @@ import {
   settle,
   spawn,
   subtypes,
+  supertypes,
   table,
   toGraveyard,
   toHand,
@@ -488,5 +489,23 @@ describe("Lwaxana Troi, Charming Guest", () => {
     game.debugApplyEffect(A, { kind: "draw", amount: 2 }, []);
     settle(game);
     expect(counters(game, julian, "+1/+1")).toBe(3);
+  });
+});
+
+describe("Dominion Saboteur", () => {
+  it("enters as a nonlegendary copy with the copied permanent's counters", () => {
+    const { game, a } = table();
+    const julian = spawn(game, "Julian Bashir, Frontier Doctor", B);
+    addCounters(game, julian, "+1/+1", 2);
+    addCounters(game, julian, "charge", 1);
+    a.chooseCopyFn = (_view, _source, options) => (options.includes(julian) ? julian : (options[0] ?? null));
+    lands(game, "Island", 5);
+    const saboteur = toHand(game, "Dominion Saboteur");
+    cast(game, saboteur);
+    expect(game.state.objects[saboteur].zone).toBe("battlefield");
+    expect(subtypes(game, saboteur)).toContain("Human");
+    expect(supertypes(game, saboteur)).not.toContain("legendary");
+    expect(counters(game, saboteur, "+1/+1")).toBe(2);
+    expect(counters(game, saboteur, "charge")).toBe(1);
   });
 });
