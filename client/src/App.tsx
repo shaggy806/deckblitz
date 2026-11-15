@@ -140,6 +140,7 @@ import type { StackSeeThrough } from './ui/stackSeeThrough.ts'
 import { EventLog } from './ui/EventLog.tsx'
 import { CapturePanel } from './ui/CapturePanel.tsx'
 import { ZoneViewer } from './ui/ZoneViewer.tsx'
+import { targetLabelFor } from './game/targetWording.ts'
 import { PileViewer } from './ui/PileViewer.tsx'
 import { DungeonViewer } from './ui/DungeonViewer.tsx'
 import { emblemToVisible } from './ui/defToVisible.ts'
@@ -2594,6 +2595,14 @@ function Table({
         : null),
     [targeting, chooseTargetsAction, ctPicks, view],
   )
+  // A slot's label, which is written from its controller's side: when these
+  // are another player's targets (Mausoleum Turnkey's "of an opponent's
+  // choice"), "your graveyard" names that player.
+  const targetsFor = targeting === null ? chooseTargetsAction?.targetsFor : undefined
+  const describeSlot = (spec: TargetSpec | string): string =>
+    targetsFor === undefined || targetsFor === seat
+      ? describeTargetSpec(spec)
+      : targetLabelFor(describeTargetSpec(spec), playerLabel(targetsFor, game.seats))
   const canPass = actions.some((a) => a.kind === 'pass-priority')
   // Only the active player may skip the rest of their own turn — a defender
   // holding priority to respond during it shouldn't get this button.
@@ -6415,7 +6424,7 @@ function Table({
     controls = allStackTargets && !grouped && keep === undefined && !mayDecline ? null : (
       <div className="controls">
         <span>
-          {activeTargeting.label}: choose {slotSpec === undefined ? 'a target' : describeTargetSpec(slotSpec)}{' '}
+          {activeTargeting.label}: choose {slotSpec === undefined ? 'a target' : describeSlot(slotSpec)}{' '}
           {grouped
             ? `— ${groupPicked} chosen`
             : `(${nextTargetSlot(activeTargeting.specs, activeTargeting.picked).slot + 1}/${activeTargeting.specs.length})`}
@@ -8469,7 +8478,7 @@ function Table({
           // One popup per slot, so a pick made for the last one doesn't
           // carry over.
           key={zoneTargetKey ?? ''}
-          title={`${game.nameOf(activeTargeting.source)} — target ${describeTargetSpec(currentSpec(activeTargeting) ?? 'card')}`}
+          title={`${game.nameOf(activeTargeting.source)} — target ${describeSlot(currentSpec(activeTargeting) ?? 'card')}`}
           ids={zoneTargetIds}
           resolve={(id) => view.objects[id]}
           selection={

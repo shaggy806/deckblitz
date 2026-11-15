@@ -2594,6 +2594,10 @@ export type LegalAction =
       /** Exactly one slot's answer must differ from `current` — see the
        * decision's. */
       readonly changeOne?: true;
+      /** Whose targets these are, when not the chooser's (the decision's
+       * `targetsFor`): `specs` read from that player's side ("your
+       * graveyard" is theirs), so a client names them. */
+      readonly targetsFor?: PlayerId;
     };
 
 /** A `cast-spell` offer — what a `cast-now` decision lists as its `casts`. */

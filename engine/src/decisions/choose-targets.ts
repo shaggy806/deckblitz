@@ -113,6 +113,7 @@ export const chooseTargets = defineDecision({
       ...(awaiting.divide !== undefined ? { divide: awaiting.divide } : {}),
       ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
       ...(awaiting.changeOne === true ? { changeOne: true as const } : {}),
+      ...(awaiting.targetsFor !== undefined ? { targetsFor: awaiting.targetsFor } : {}),
     },
   ],
 

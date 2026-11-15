@@ -103,11 +103,16 @@ describe("Mausoleum Turnkey", () => {
     const bears = toGraveyard(game, "Grizzly Bears");
     const giant = toGraveyard(game, "Hill Giant");
     let offered: readonly TargetRef[] = [];
+    // The offer says whose targets they are: "your graveyard" is Alice's.
+    let targetsFor: PlayerId | undefined;
     b.chooseTargetsFn = (_view, _source, _specs, options) => {
       offered = options[0] ?? [];
+      const legal = game.legalActions(B).find((l) => l.kind === "choose-targets");
+      targetsFor = legal?.kind === "choose-targets" ? legal.targetsFor : undefined;
       return [ref(bears)];
     };
     cast(game, toHand(game, "Mausoleum Turnkey"));
+    expect(targetsFor).toBe(A);
     expect(offered.map((t) => (t.kind === "object" ? t.object : t.kind)).sort()).toEqual([bears, giant].sort());
     expect(zone(game, bears)).toBe("hand");
     expect(zone(game, giant)).toBe("graveyard");
