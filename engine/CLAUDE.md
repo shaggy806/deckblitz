@@ -174,9 +174,16 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   creatures whatever it blocks with, followed to its next turn and filed (died, not attacked, that board cut down,
   attacked and lived), with what it cast that turn and the wipes it and the others held. Says how often each out comes,
   and finds the turns worth rebuilding.
-- `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000]`: one whole game of v2 seats at the
-  live clock, written out to read: each turn's board and hands, and every decision with how it was reached. For looking
-  over the bots' play by eye; deck names match the strong decks first, then the starter decks.
+- `bot:losses -- --seeds 1-4 --decks "A,B,C,D[;…]" [--parallel 6] [--all]`: the screen for losses worth reading. For
+  each seat eliminated: the attack that killed it against the block arithmetic (alive on paper as it blocked; alive had
+  the creatures it tapped for a cost, or attacked with, stayed home), an answer it was offered a cast of and held, a
+  wipe it could have cast on its own turn, and life it spent against what it died by. A flag is a reason to read, not a
+  verdict; each flagged loss prints the `bot:watch` line for its turns.
+- `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000] [--count] [--turns 31-34]`: one
+  whole game of v2 seats at the live clock, written out to read: each turn's board and hands, and every decision with
+  how it was reached. For looking over the bots' play by eye; deck names match the strong decks first, then the starter
+  decks. `--count` plays count budgets (the game `bot:losses`, `bot:outs` and `bot:judge` play for that seed), and
+  `--turns` prints those turns alone.
 - `bot:bench:last`: whether this engine code already has a bench figure on this machine, so a "before" needn't be
   played again (`data/bench-log.jsonl`, keyed by a hash of the non-card source; a plain `bot:bench` appends to it, and
   the file is committed with the work it measured).

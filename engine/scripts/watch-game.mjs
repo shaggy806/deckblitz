@@ -9,6 +9,18 @@
 // `--decks` matches each name against the strong decks first, then the
 // upgraded and starter decks (a case-insensitive substring). Build first
 // (it plays `dist/`); it prints to stdout, a few hundred lines a game.
+//
+// `--count` plays on count budgets instead of the clock, so the seed is the
+// game `bot:losses`, `bot:outs` and `bot:judge` played; `--turns 31-34`
+// prints those turns alone (the game before them is played unprinted). The
+// two together are what `bot:losses` prints for a loss worth reading.
+// `--snapshot-at 50` saves the game as that turn begins
+// (`.scratch/replays/watch-seed-N-t50.json`), the exact board to rebuild a
+// suspected misplay on: `Game.fromSnapshot`, as `bot:replay --from` does.
+
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import {
   COMMANDER_RULES,
@@ -31,6 +43,18 @@ const seed = Number(flag("seed", "1"));
 const budget = Number(flag("budget", "1000"));
 const maxTurns = Number(flag("max-turns", "120"));
 const wanted = flag("decks", "The Ur-Dragon,Lathril,Atraxa,Giada").split(",").map((s) => s.trim());
+const counted = args.includes("--count");
+const [fromTurn, toTurn] = (() => {
+  const text = flag("turns", null);
+  if (text === null) return [0, Infinity];
+  const [from, to] = text.split("-").map((n) => Number(n.trim()));
+  if (!Number.isInteger(from) || (to !== undefined && !Number.isInteger(to))) throw new Error(`--turns: "${text}" is not a turn or a range`);
+  return [from, to ?? from];
+})();
+const snapshotAt = flag("snapshot-at", null) === null ? null : Number(flag("snapshot-at", null));
+let snapshotSaved = false;
+/** Whether the turn being played is one to print. */
+const shown = (turn) => turn >= fromTurn && turn <= toTurn;
 
 const pool = [...STRONG_DECKS, ...STARTER_DECKS];
 const decks = wanted.map((name) => {
@@ -46,7 +70,7 @@ const viaCounts = {};
 const controllers = {};
 let game;
 for (const seat of seats) {
-  const bot = new EvalBotController(seat, registry, { timeBudgetMs: budget });
+  const bot = counted ? new EvalBotController(seat, registry) : new EvalBotController(seat, registry, { timeBudgetMs: budget });
   const act = bot.act.bind(bot);
   bot.act = (view) => {
     const started = Date.now();
@@ -56,7 +80,7 @@ for (const seat of seats) {
     const via = audit?.via ?? "-";
     const kind = view.state.awaiting?.kind ?? "priority";
     viaCounts[`${kind}: ${via}`] = (viaCounts[`${kind}: ${via}`] ?? 0) + 1;
-    if (action.type !== "pass-priority") {
+    if (action.type !== "pass-priority" && shown(view.state.turn.number)) {
       const s = view.state;
       const how = audit === null || audit === undefined ? "" : `  [${via}${audit.simulations ? `, ${audit.simulations} sims` : ""}${ms >= 1500 ? `, ${ms} ms` : ""}]`;
       // What asked, for an answer that doesn't say ("Choose no mode").
@@ -106,7 +130,7 @@ function summary(state) {
   return lines.join("\n");
 }
 
-console.log(`watch-game: seed ${seed}, ${budget} ms a decision — ${seats.map((s) => `${s} = ${decks[seats.indexOf(s)].name}`).join("; ")}`);
+console.log(`watch-game: seed ${seed}, ${counted ? "count budgets" : `${budget} ms a decision`}${toTurn === Infinity ? "" : `, turns ${fromTurn}-${toTurn}`} —${seats.map((s) => `${s} = ${decks[seats.indexOf(s)].name}`).join("; ")}`);
 game = Game.create({
   seed,
   registry,
@@ -122,16 +146,27 @@ game.advanceUntil((s) => {
   if (s.turn.number !== lastTurn) {
     lastTurn = s.turn.number;
     const active = s.turnOrder[s.turn.activePlayerIndex];
-    console.log(`\n== Turn ${s.turn.number} (round ${Math.ceil(s.turn.number / seats.length)}) — ${label[active]} — ${Math.round((Date.now() - started) / 1000)} s`);
-    console.log(summary(s));
+    if (snapshotAt !== null && !snapshotSaved && s.turn.number >= snapshotAt) {
+      const dir = join(dirname(fileURLToPath(import.meta.url)), "..", "..", ".scratch", "replays");
+      mkdirSync(dir, { recursive: true });
+      const file = join(dir, `watch-seed-${seed}-t${s.turn.number}.json`);
+      writeFileSync(file, JSON.stringify({ ...game.snapshot(), eventLog: [] }));
+      console.log(`snapshot at turn ${s.turn.number} (${s.turn.step}): ${file}`);
+      snapshotSaved = true;
+    }
+    if (shown(s.turn.number)) {
+      console.log(`\n== Turn ${s.turn.number} (round ${Math.ceil(s.turn.number / seats.length)}) — ${label[active]} — ${Math.round((Date.now() - started) / 1000)} s`);
+      console.log(summary(s));
+    }
   }
   for (const seat of seats) {
     if (s.players[seat].hasLost && !lost.has(seat)) {
       lost.add(seat);
-      console.log(`  *** ${label[seat]} is out (turn ${s.turn.number})`);
+      console.log(`  *** ${label[seat]} is out (turn ${s.turn.number}: ${s.players[seat].lossReason})`);
     }
   }
-  return s.result.over || s.turn.number > maxTurns;
+  // Past the turns asked for there is nothing left to print: stop there.
+  return s.result.over || s.turn.number > Math.min(maxTurns, toTurn);
 });
 console.log(`\n== End: turn ${game.state.turn.number}, ${JSON.stringify(game.state.result)}`);
 console.log(summary(game.state));
