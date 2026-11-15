@@ -19293,9 +19293,9 @@ export class Game {
     return this.withFace(cardId, face, () => {
       const atSources = this.castingCostOf(player, cardId, def, sources, costString, targetCount);
       const cap = sources + Math.max(0, sources + parsed.generic - atSources.generic);
-      let best = 0;
-      for (let k = 1; k <= cap; k += 1) {
-        if (
+      return Game.largestPayable(
+        cap,
+        (k) =>
           this.payMana(
             player,
             this.castingCostOf(player, cardId, def, k, costString, targetCount),
@@ -19303,14 +19303,43 @@ export class Game {
             undefined,
             { kind: "cast", card: cardId, ...castPaying(undefined, costString) },
             arrangement,
-          ) === null
-        ) {
-          break;
-        }
-        best = k;
-      }
-      return best;
+          ) !== null,
+      );
     });
+  }
+
+  /**
+   * The largest `k` from 1 to `cap` that `pays`, or 0 when none does, for a
+   * cost that only grows with `k` (an `{X}`): what pays a larger X pays a
+   * smaller one, so the answer is found by halving, in about log2(`cap`)
+   * payments planned. It was every `k` from 1 up until one failed, and with
+   * an {X} spell in hand on a board of 370 mana sources that was 370
+   * payments, each of up to 370 mana, for every `legalActions`: one call
+   * took 21 seconds (`engine/data/bot-positions/seed-50-t40-b73.json`,
+   * 2026-11-15).
+   */
+  private static largestPayable(cap: number, pays: (k: number) => boolean): number {
+    let best = 0;
+    let limit = cap;
+    while (best < limit) {
+      const k = best + Math.ceil((limit - best) / 2);
+      if (pays(k)) best = k;
+      else limit = k - 1;
+    }
+    return best;
+  }
+
+  /** Whether any of `sources` has an option with extra units (`ManaOption.extras`),
+   * kept by the list: `manaSources` hands the same one out all through a
+   * cache region. */
+  private static readonly extraUnitsOf = new WeakMap<readonly ManaSource[], boolean>();
+  private static carriesExtraUnits(sources: readonly ManaSource[]): boolean {
+    let carries = Game.extraUnitsOf.get(sources);
+    if (carries === undefined) {
+      carries = sources.some((source) => source.options.some((option) => option.extras !== undefined));
+      Game.extraUnitsOf.set(sources, carries);
+    }
+    return carries;
   }
 
   /** Largest value of `{X}` this player could currently pay for in an
@@ -19338,12 +19367,7 @@ export class Game {
     const cap =
       this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
       pool.length;
-    let best = 0;
-    for (let k = 1; k <= cap; k += 1) {
-      if (this.payMana(player, costAt(k), avoid, exclude, purpose) === null) break;
-      best = k;
-    }
-    return best;
+    return Game.largestPayable(cap, (k) => this.payMana(player, costAt(k), avoid, exclude, purpose) !== null);
   }
 
   /** The mana-cost string `player` would pay to cast `cardId` under `via`
@@ -28324,8 +28348,12 @@ export class Game {
     // once per castable-candidate variant (and several times per hybrid pip).
     // The list is a pure function of the state and the planner treats it
     // read-only, so within a cache region it's computed once per player.
+    // The scan itself runs in one too: outside any (a payment being made, as
+    // an action is dispatched) each permanent asked afresh for every
+    // prohibition on the battlefield, 127,000 statics read for a board of
+    // 356 permanents.
     return computedCacheMemo(`manaSources:${player}`, () =>
-      this.manaSourcesUncached(player),
+      withComputedCache(() => this.manaSourcesUncached(player)),
     );
   }
 
@@ -28978,7 +29006,16 @@ export class Game {
       extra.tag?.restriction === undefined ||
       this.manaUnitCanPay(player, { type: extra.type ?? "C", ...extra.tag }, purpose);
     const onlyType = this.spendOnlyManaTypeFor(purpose);
-    const sources = this.manaSources(player)
+    const listed = this.manaSources(player);
+    // Nearly every payment: nothing limits where its mana comes from or what
+    // type it is, and no source carries extra units. The list then is the one
+    // `manaSources` made, as it stands — which the passes below would come to
+    // source by source, at four passes over every source for each of the
+    // thousand payments a wide board's `legalActions` plans.
+    const sources =
+      onlyFrom === undefined && onlyType === undefined && !Game.carriesExtraUnits(listed)
+        ? listed
+        : listed
       .filter((source) => onlyFrom === undefined || fits(source.id))
       .map((source) =>
         source.options.every((option) => option.extras === undefined)

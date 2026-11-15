@@ -1264,27 +1264,25 @@ function planManaPaymentOrdered(
   // 0 when the rest of the cost spends every point of life (Liesa's
   // commander tax paid down to exactly 0), and a Plains costs none of it.
   const currentLife = view.life;
-  const affordableOptions = (s: ManaSource): ManaSource => ({
-    ...s,
-    options: s.options.filter((o) => {
+  // Both filters hand a source back as it is when they drop none of its
+  // options, which is nearly every source of nearly every payment: a copy of
+  // each for each plan was most of what a plan allocated, and on a board of
+  // 370 sources `legalActions` makes a thousand plans.
+  const keeping = (s: ManaSource, keep: (o: ManaOption) => boolean): ManaSource =>
+    s.options.every(keep) ? s : { ...s, options: s.options.filter(keep) };
+  const affordableOptions = (s: ManaSource): ManaSource =>
+    keeping(s, (o) => {
       if (o.lifeCost > 0 && view.cantPayLife === true) return false;
       const toll = o.pain + o.lifeCost;
       return toll === 0 || toll < currentLife;
-    }),
-  });
+    });
   // Drop options whose mana couldn't pay for what's being paid for (rule
   // 106.6b). Done at the *option* level rather than the source level
   // because a card can offer both — Plaza of Heroes taps for {C} freely and
   // for a colour only toward a legendary spell — and dropping the whole
   // permanent would lose the unrestricted half.
-  const usableOptions = (s: ManaSource): ManaSource => ({
-    ...s,
-    options: s.options.filter(
-      (o) =>
-        o.tag?.restriction === undefined ||
-        view.canPay({ type: "C", ...o.tag }),
-    ),
-  });
+  const usableOptions = (s: ManaSource): ManaSource =>
+    keeping(s, (o) => o.tag?.restriction === undefined || view.canPay({ type: "C", ...o.tag }));
   const all = view.sources
     .map(affordableOptions)
     .map(usableOptions)
@@ -1320,11 +1318,14 @@ function planManaPaymentOrdered(
   /** `groupOf`, for a source whose mana here would cost `toll` life: behind
    * the Treasures when life is weighed last (`SourceOrder`). */
   const groupAt = (s: ManaSource, toll: number): number => {
-    const group = groupOf(s);
+    const group = groups.get(s) ?? groupOf(s);
     return lifeLast && toll > 0 && group < 2 ? 2.5 : group;
   };
-  // A stable sort: within a group, the order the sources came in.
-  const sources = [...ordered].sort((a, b) => groupOf(a) - groupOf(b));
+  // A stable sort: within a group, the order the sources came in. Each
+  // source's group is read once, not once a comparison.
+  const groups = new Map<ManaSource, number>();
+  for (const s of ordered) groups.set(s, groupOf(s));
+  const sources = [...ordered].sort((a, b) => (groups.get(a) ?? 0) - (groups.get(b) ?? 0));
   const pipSources = matchingPips ? matchPips(need, sources) : null;
   if (matchingPips) {
     // No more passes than can help, where a cost truly can't be paid.
@@ -1376,7 +1377,16 @@ function planManaPaymentOrdered(
     (["W", "U", "B", "R", "G", "C"] as const).filter((m) => need[m] > 0),
   );
   const tapped: Tapped[] = [];
-  const isTapped = (id: ObjectId): boolean => tapped.some((t) => t.src.id === id);
+  // Whose ids `tapped` holds, kept beside it (`open`, `untapFrom`): asked of
+  // every source for every unit of generic, a scan of `tapped` made a plan
+  // cubic in its sources.
+  const tappedIds = new Set<ObjectId>();
+  const isTapped = (id: ObjectId): boolean => tappedIds.has(id);
+  /** Forget every source opened since `tapped` was `mark` long. */
+  const untapFrom = (mark: number): void => {
+    for (let i = mark; i < tapped.length; i += 1) tappedIds.delete(tapped[i].src.id);
+    tapped.length = mark;
+  };
   // Which of a source's alternative outputs to commit to as it's tapped:
   // for a specific need, an option that makes that colour directly, else an
   // "any colour" one; for a generic need (or no match), the richest option,
@@ -1469,6 +1479,7 @@ function planManaPaymentOrdered(
       ...extraTagsOf(opt.extras ?? []),
     };
     tapped.push(t);
+    tappedIds.add(src.id);
     return t;
   };
 
@@ -1489,9 +1500,15 @@ function planManaPaymentOrdered(
     for (const opt of optionsFor(src, want)) {
       if (!tollBearable(opt)) continue;
       const mark = tapped.length;
-      const taken = tapped.map((t) => ({ t, ...snapshotOf(t) }));
-      const spareBefore = { ...spare };
-      const fundableBefore = { ...fundable };
+      // Only an option that must be funded takes anything from the sources
+      // already open, the pool or the cost, so only it needs them kept to
+      // put back: a free one is undone by forgetting it. (Kept for every
+      // option, a {300} from Treasures copied each open Treasure as each
+      // next one opened.)
+      const funds = costsMana(opt);
+      const taken = funds ? tapped.map((t) => ({ t, ...snapshotOf(t) })) : [];
+      const spareBefore = funds ? { ...spare } : spare;
+      const fundableBefore = funds ? { ...fundable } : fundable;
       const genericBefore = genericNeed;
       const t = open(src, opt);
       const owed: Lent[] = [];
@@ -1522,10 +1539,12 @@ function planManaPaymentOrdered(
       if (funded && gives) return t;
       // Undone: the sources this opened, and what it took from those
       // already open.
-      tapped.length = mark;
+      untapFrom(mark);
       for (const { t: before, ...was } of taken) restore(before, was);
-      Object.assign(spare, spareBefore);
-      Object.assign(fundable, fundableBefore);
+      if (funds) {
+        Object.assign(spare, spareBefore);
+        Object.assign(fundable, fundableBefore);
+      }
       genericNeed = genericBefore;
     }
     return null;
@@ -1775,22 +1794,37 @@ function planManaPaymentOrdered(
   const supplyLeft = (m: ManaType, counted: Map<ManaType, number>): number => {
     const known = counted.get(m);
     if (known !== undefined) return known;
-    const left = sources.filter((src) => !isTapped(src.id) && makesOf(src).has(m)).length;
+    let left = 0;
+    for (const src of sources) if (!isTapped(src.id) && makesOf(src).has(m)) left += 1;
     counted.set(m, left);
     return left;
   };
   // A source's worth to the rest of the hand: for each colour it makes, how
   // much that colour is wanted over how many untapped sources still make it.
+  // A colour nothing wants adds nothing, and isn't counted.
   const keepScore = (src: ManaSource, counted: Map<ManaType, number>): number => {
     if (keep === undefined) return 0;
     let score = 0;
-    for (const m of makesOf(src)) score += (keep[m] ?? 0) / Math.max(1, supplyLeft(m, counted));
+    for (const m of makesOf(src)) {
+      const wanted = keep[m] ?? 0;
+      if (wanted !== 0) score += wanted / Math.max(1, supplyLeft(m, counted));
+    }
     return score;
   };
-  const colourCount = (src: ManaSource): number =>
-    new Set(
-      src.options.flatMap((o) => [...o.fixed.filter((m) => m !== "C"), ...(o.anyColor > 0 ? (o.anyColorOf ?? COLORS) : [])]),
-    ).size;
+  // How many colours `src` can make (a fixed {C} isn't one), as bits: a set
+  // built from every option of every source was a third of a plan's time on
+  // a wide board.
+  const MANA_BIT: Record<ManaType, number> = { W: 1, U: 2, B: 4, R: 8, G: 16, C: 32 };
+  const colourCount = (src: ManaSource): number => {
+    let bits = 0;
+    for (const o of src.options) {
+      for (const m of o.fixed) if (m !== "C") bits |= MANA_BIT[m];
+      if (o.anyColor > 0) for (const m of o.anyColorOf ?? COLORS) bits |= MANA_BIT[m];
+    }
+    let count = 0;
+    for (; bits !== 0; bits &= bits - 1) count += 1;
+    return count;
+  };
   // Sorted within each group only: converters and the last resorts stay
   // where `order` put them, which the plan depends on.
   // Then `avoid` last (a man-land paying its own animation stays untapped to
@@ -1804,34 +1838,64 @@ function planManaPaymentOrdered(
   // before two coloured lands do (a bug report, 2026-10-06: the lands went
   // first, in battlefield order, as `Game.manaSources` lists them).
   // The keep score is read afresh for each unit of generic, as sources go.
-  const ranked = sources.map((src, i) => {
-    const toll = Math.min(...src.options.map(lifeToll));
-    return {
-      src,
-      i,
-      group: groupAt(src, toll),
-      avoided: src.id === avoid ? 1 : 0,
-      toll,
-      creature: src.isCreature === true ? 1 : 0,
-      colours: colourCount(src),
-    };
-  });
+  interface Ranked {
+    readonly src: ManaSource;
+    readonly i: number;
+    readonly group: number;
+    readonly avoided: number;
+    readonly toll: number;
+    readonly creature: number;
+    readonly colours: number;
+  }
+  // Read when the first unit of generic asks: a cost with none never does.
+  let rankedOnce: Ranked[] | null = null;
+  const ranked = (): Ranked[] => {
+    rankedOnce ??= sources.map((src, i) => {
+      let toll = Infinity;
+      for (const o of src.options) toll = Math.min(toll, lifeToll(o));
+      return {
+        src,
+        i,
+        group: groupAt(src, toll),
+        avoided: src.id === avoid ? 1 : 0,
+        toll,
+        creature: src.isCreature === true ? 1 : 0,
+        colours: colourCount(src),
+      };
+    });
+    return rankedOnce;
+  };
+  // The colours the rest of the hand wants: the only ones a keep score reads.
+  const keptColours = keep === undefined ? [] : (["W", "U", "B", "R", "G", "C"] as const).filter((m) => (keep[m] ?? 0) !== 0);
+  // The last ranking, every source in it, and the supply of each wanted
+  // colour it was scored at. A keep score moves only when one of those
+  // supplies does, so until then the next unit of generic reads the same
+  // order with the sources tapped since left out. Sorted afresh for every
+  // unit, a {300} from 370 sources sorted them 300 times.
+  let lastRanking: { readonly supplies: string; readonly order: readonly ManaSource[] } | null = null;
   const byKeep = (): ManaSource[] => {
     const counted = new Map<ManaType, number>();
-    return ranked
-      .filter((e) => !isTapped(e.src.id))
-      .map((e) => ({ ...e, keep: keepScore(e.src, counted) }))
-      .sort(
-        (a, b) =>
-          a.group - b.group ||
-          a.avoided - b.avoided ||
-          a.toll - b.toll ||
-          a.creature - b.creature ||
-          a.keep - b.keep ||
-          a.colours - b.colours ||
-          a.i - b.i,
-      )
-      .map((e) => e.src);
+    let supplies = "";
+    for (const m of keptColours) supplies += `${supplyLeft(m, counted)},`;
+    if (lastRanking === null || lastRanking.supplies !== supplies) {
+      lastRanking = {
+        supplies,
+        order: ranked()
+          .map((e) => ({ ...e, keep: keepScore(e.src, counted) }))
+          .sort(
+            (a, b) =>
+              a.group - b.group ||
+              a.avoided - b.avoided ||
+              a.toll - b.toll ||
+              a.creature - b.creature ||
+              a.keep - b.keep ||
+              a.colours - b.colours ||
+              a.i - b.i,
+          )
+          .map((e) => e.src),
+      };
+    }
+    return lastRanking.order.filter((src) => !isTapped(src.id));
   };
   /** Take one generic from `t` toward the cost itself, recording it as
    * lendable. */
