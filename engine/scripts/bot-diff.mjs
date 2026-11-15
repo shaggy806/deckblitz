@@ -17,6 +17,7 @@ import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path";
 
 import { ROOT, baselineDist, workingDist } from "./baseline-build.mjs";
+import { TWO_BUILD_LIMITS } from "./worker-limits.mjs";
 import { runPool } from "./worker-pool.mjs";
 
 const args = process.argv.slice(2);
@@ -61,6 +62,7 @@ runPool({
   workerData: { working: working.dist, baseline: baseline.dist, bot, players },
   jobs: queue,
   workers: parallel,
+  resourceLimits: TWO_BUILD_LIMITS,
   isFinal: (m) => m.type === "done" || m.type === "error",
   onMessage: (m, seed) => {
     if (m.type === "diff") appendFileSync(out, JSON.stringify(m.row) + "\n");
