@@ -26,9 +26,9 @@ const SIZES = SHOTS
 /** Every card the lesson shows, in order. */
 const CARDS = [
   'welcome', 'life', 'hand', 'read-a-card', 'command-zone', 'library',
-  'first-land', 'cast-rats', 'tapped', 'summoning-sick', 'first-pass',
+  'first-land', 'tap-first-land', 'mana-pool', 'cast-rats', 'tapped', 'summoning-sick', 'first-pass',
   'phase-track', 'rowan-creature',
-  'your-turn-again', 'second-land', 'cast-evangel', 'first-to-combat', 'first-attack', 'first-hit', 'second-pass',
+  'your-turn-again', 'second-land', 'tap-two-lands', 'cast-evangel', 'first-to-combat', 'first-attack', 'first-hit', 'second-pass',
   'block', 'block-result', 'graveyard',
   'third-land', 'cast-commander', 'commander-rules', 'second-to-combat', 'second-attack', 'third-pass',
   'rowan-commander', 'last-turn', 'last-to-combat', 'last-attack', 'blocked', 'won',
@@ -207,9 +207,25 @@ for (const size of SIZES) {
     await expect(page.locator('.hand-strip')).toHaveClass(/raised/)
     await expectApart(land, handCard(page, 'Swamp'), 'the Swamp')
     await handCard(page, 'Swamp').click()
-    await expectCard(page, 'cast-rats', size)
+    // Mana by hand, the first time: the Swamp is tapped for it, the pool shows
+    // it, and only then is the creature there to cast.
+    const tap = await expectCard(page, 'tap-first-land', size)
     expect((await state(page, request)).players.alice.lands).toBe(1)
+    await expectSpotlit(page, myTile(page, 'Swamp'))
+    await expectApart(tap, myTile(page, 'Swamp'), 'the Swamp')
+    await myTile(page, 'Swamp').click()
+    // Its menu opens beside it, clear of the card that asks for it.
+    const add = page.getByRole('menuitem', { name: /Add/ })
+    await expectApart(tap, add, "the Swamp's menu")
+    await add.click()
+    const pool = await expectCard(page, 'mana-pool', size)
+    const mana = page.locator('[data-player-id="alice"] .pp-mana')
+    await expect(mana.locator('.pip')).toHaveCount(1)
+    await expectSpotlit(page, mana)
+    await pool.getByRole('button', { name: 'Next' }).click()
+    await expectCard(page, 'cast-rats', size)
     await handCard(page, 'Muck Rats').click()
+    await expect(mana).toHaveCount(0)
     await next(page, 'tapped', size)
     await next(page, 'summoning-sick', size)
     const firstPass = await expectCard(page, 'first-pass', size)
@@ -227,7 +243,22 @@ for (const size of SIZES) {
     await next(page, 'your-turn-again', size)
     await expectCard(page, 'second-land', size)
     await handCard(page, 'Swamp').click()
+    // Two Swamps, tapped one at a time: the card waits for both.
+    await expectCard(page, 'tap-two-lands', size)
+    await myTile(page, 'Swamp').click()
+    await page.getByRole('menuitem', { name: /Add/ }).click()
+    await expect(page.locator('[data-player-id="alice"] .pp-mana .pip')).toHaveCount(1)
+    await expect(cardOf(page, 'tap-two-lands')).toBeVisible()
+    // The other Swamp, once the first one's tap has been drawn: a frame
+    // landing closes a menu opened just before it (the board is drawn anew).
+    const untapped = page.locator('.quadrant-cell.self .mini-tile-wrap:not(:has(.tapped))', { hasText: 'Swamp' }).first()
+    await expect(async () => {
+      if (!(await page.getByRole('menuitem', { name: /Add/ }).isVisible())) await untapped.click({ timeout: 2_000 })
+      await expect(page.getByRole('menuitem', { name: /Add/ })).toBeVisible({ timeout: 1_500 })
+    }).toPass({ timeout: 20_000 })
+    await page.getByRole('menuitem', { name: /Add/ }).click()
     await expectCard(page, 'cast-evangel', size)
+    await expect(page.locator('[data-player-id="alice"] .pp-mana .pip')).toHaveCount(2)
     await handCard(page, 'Cabal Evangel').click()
     await expectCard(page, 'first-to-combat', size)
     await expect(passTurn).toBeDisabled()
@@ -332,14 +363,18 @@ test('nothing can run off and leave the lesson waiting, Back looks, and Retry re
   // No Retry until there's something to undo; then back to the chapter's start.
   await expect(cardOf(page, 'first-land').getByRole('button', { name: 'Retry chapter' })).toHaveCount(0)
   await handCard(page, 'Swamp').click()
-  const cast = await expectCard(page, 'cast-rats', size)
+  const tap = await expectCard(page, 'tap-first-land', size)
   expect((await state(page, request)).players.alice.lands).toBe(1)
-  await cast.getByRole('button', { name: 'Retry chapter' }).click()
+  // The creature waits for its mana: a click on it casts nothing.
+  await handCard(page, 'Muck Rats').click({ force: true })
+  await page.waitForTimeout(300)
+  await expect(tap).toBeVisible()
+  await tap.getByRole('button', { name: 'Retry chapter' }).click()
   await expect(cardOf(page, 'first-land')).toBeVisible({ timeout: 30_000 })
   await expect.poll(async () => (await state(page, request)).players.alice.lands, { timeout: 30_000 }).toBe(0)
 
   // And it plays on from there.
   await handCard(page, 'Swamp').click()
-  await expect(cardOf(page, 'cast-rats')).toBeVisible({ timeout: 30_000 })
+  await expect(cardOf(page, 'tap-first-land')).toBeVisible({ timeout: 30_000 })
   expect(errors).toEqual([])
 })

@@ -14,6 +14,11 @@
  * - Turn 7: Tyrox blocks the Rats, and Kalakscion and the Evangel hit for 9.
  *
  * The lesson is `scripted`, so the player can only do what the card up asks.
+ *
+ * The first two spells are paid for by hand (turns 1 and 3: tap the Swamps,
+ * see the mana in the pool, spend it), so mana is something the player has
+ * done before the game starts doing it for them; the commander, on turn 5, is
+ * cast the usual way, the game tapping the lands.
  */
 
 import { asPlayerId } from "engine/local";
@@ -61,6 +66,30 @@ const playLand = (id: string, title: string, body: string): LessonStep => ({
   allow: [{ do: "play-land", card: LAND }],
   goals: [{ id: `${id}-done`, label: `Play a ${LAND}`, when: { event: "land-played", player: YOU } }],
 });
+
+/** "Tap for mana": the lesson's first two spells are paid for by hand, so the
+ * player sees a land tap, the mana arrive in their pool and a spell spend it
+ * (the user, 2026-11-14: the game paid for everything itself, so it never
+ * taught mana). Met with `mana` in the pool, however it got there. */
+const tapForMana = (id: string, mana: number, title: string, body: string): LessonStep => ({
+  id,
+  title,
+  body,
+  anchor: `battlefield:${LAND}`,
+  // Above the land: its menu opens beside it, where a card would cover it.
+  placement: "top",
+  allow: [{ do: "tap-for-mana", card: LAND }],
+  goals: [
+    {
+      id: `${id}-done`,
+      label: mana === 1 ? `Tap your ${LAND} for mana` : `Tap ${mana} ${LAND}s for mana`,
+      when: { manaInPool: { player: YOU, atLeast: mana } },
+    },
+  ],
+});
+
+/** Your own panel's mana pool, which is only there while it holds mana. */
+const MANA_POOL = `css:[data-player-id="${YOU}"] .pp-mana`;
 
 /** Cast `card`, the goal met once it has resolved, so it's on the battlefield
  * for the card after this one to point at. */
@@ -218,19 +247,35 @@ export const LEARN_COMMANDER: Lesson = {
           "Play a land",
           "Lands make mana, and mana pays for everything else. You can play one land each turn. Click a Swamp in your hand.",
         ),
+        tapForMana(
+          "tap-first-land",
+          1,
+          "Tap it for mana",
+          "A land makes mana when you tap it. Click your Swamp, then its ability in the little menu: {T}: Add {B}.\n\n" +
+            "{T} means \"tap this\". The Swamp turns sideways and makes one black mana.",
+        ),
+        {
+          id: "mana-pool",
+          title: "Your mana pool",
+          body:
+            "That {B} is in your mana pool now, here by your name, ready to spend.\n\n" +
+            "Mana doesn't keep. Whatever you haven't spent drains away when the step or phase ends, so tap for mana only when you're about to use it.",
+          anchor: MANA_POOL,
+          placement: "right",
+        },
         cast(
           "cast-rats",
           RATS,
-          "Cast a creature",
-          "A Swamp makes one black mana, which is exactly what Muck Rats cost. Click them to cast them.",
+          "Spend it on a creature",
+          "Muck Rats cost {B}, exactly what's in your pool. Click them to cast them.",
           true,
         ),
         {
           id: "tapped",
           title: "Tapped",
           body:
-            "See your Swamp lying sideways? It's tapped: it has made its mana this turn. It stands back up at the start of your next turn.\n\n" +
-            "You don't have to tap lands yourself. Casting a spell does it for you.",
+            "The mana is spent, and your Swamp is still lying sideways. It's tapped: it has made its mana for this turn.\n\n" +
+            "It stands back up at the start of your next turn, ready to tap again.",
           anchor: `battlefield:${LAND}`,
           placement: "right",
         },
@@ -281,11 +326,17 @@ export const LEARN_COMMANDER: Lesson = {
           placement: "right",
         },
         playLand("second-land", "Another land", "A new turn means you can play another land."),
+        tapForMana(
+          "tap-two-lands",
+          2,
+          "Two lands, two mana",
+          "Cabal Evangel costs {1}{B}: one black mana, and one more of any kind. Tap both of your Swamps, one after the other.",
+        ),
         cast(
           "cast-evangel",
           EVANGEL,
-          "Two lands, two mana",
-          "Cabal Evangel costs {1}{B}, and your two Swamps can pay for that. Cast it.",
+          "Cast Cabal Evangel",
+          "Two mana in your pool, and a creature that costs two. Click it.",
           true,
         ),
         toCombat(
@@ -358,7 +409,8 @@ export const LEARN_COMMANDER: Lesson = {
           "cast-commander",
           COMMANDER,
           "Cast your commander",
-          "You cast it from the command zone, just like a card from your hand. Click it.",
+          "You cast it from the command zone, just like a card from your hand.\n\n" +
+            "This time, don't tap anything first. Click it, and the game taps the lands that pay for it: it does that whenever you cast a spell without the mana ready.",
           false,
         ),
         {

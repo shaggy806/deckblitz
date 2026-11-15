@@ -47,6 +47,9 @@ export type LessonMove =
   | { readonly do: "play-land"; readonly card?: string }
   | { readonly do: "cast"; readonly card?: string; readonly target?: string }
   | { readonly do: "pass" | "pass-turn" }
+  /** Tapping a permanent for mana by hand (its mana ability): a lesson that
+   * teaches mana opens it, and the cast after it spends what's in the pool. */
+  | { readonly do: "tap-for-mana"; readonly card?: string }
   | { readonly do: "block"; readonly card?: readonly string[]; readonly atLeast: number }
   | {
       readonly do: "attack";

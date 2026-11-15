@@ -10,7 +10,8 @@ import type { GameEvent, GameState, ObjectId, PlayerId, Step } from "engine/loca
 /**
  * One thing to wait for. Every `event` condition is met by the first such
  * event in the log since the index it's checked from; `player` and `card`,
- * where given, narrow it. `lifeAtMost` is met by the board as it stands.
+ * where given, narrow it. `lifeAtMost` and `manaInPool` are met by the board
+ * as it stands (`manaInPool`: `player` has at least that much unspent mana).
  *
  * - `land-played`, `spell-cast`, `ability-activated`: by `player`, of a card
  *   named `card` (an ability: its source's name).
@@ -37,7 +38,8 @@ export type TutorialCondition =
   | { readonly event: "turn-began"; readonly turn?: number; readonly player?: PlayerId }
   | { readonly event: "step-began"; readonly step: Step; readonly player?: PlayerId }
   | { readonly event: "player-lost"; readonly player?: PlayerId }
-  | { readonly lifeAtMost: { readonly player: PlayerId; readonly value: number } };
+  | { readonly lifeAtMost: { readonly player: PlayerId; readonly value: number } }
+  | { readonly manaInPool: { readonly player: PlayerId; readonly atLeast: number } };
 
 /** The card names a condition mentions, for checking a lesson against the
  * card pool. */
@@ -65,6 +67,10 @@ export function metAt(state: GameState, from: number, condition: TutorialConditi
   if ("lifeAtMost" in condition) {
     const player = state.players[condition.lifeAtMost.player];
     return player !== undefined && player.life <= condition.lifeAtMost.value ? log.length : null;
+  }
+  if ("manaInPool" in condition) {
+    const player = state.players[condition.manaInPool.player];
+    return player !== undefined && player.manaPool.length >= condition.manaInPool.atLeast ? log.length : null;
   }
   const name = (id: ObjectId): string => state.objects[id]?.cardName ?? "";
   const by = (player: PlayerId): boolean =>

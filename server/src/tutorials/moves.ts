@@ -67,6 +67,15 @@ export function openActions(state: GameState, moves: readonly LessonMove[], lega
         );
         break;
       }
+      case "activate-ability":
+        // A mana ability the card asks for by hand ("tap your Swamp").
+        if (
+          state.awaiting !== null ||
+          (action.manaAbility === true && moves.some((m) => m.do === "tap-for-mana" && named(m.card, action.cardName)))
+        ) {
+          open.push(action);
+        }
+        break;
       default:
         // The rest of a priority window (abilities, mana) is closed; any other
         // decision is the rules asking, and has to be answerable.
@@ -99,6 +108,12 @@ export function refusal(
       const aimed = (action.targets ?? []).every((t) => t?.kind === "object" && state.objects[t.object]?.cardName === move.target);
       return aimed ? null : closed;
     }
+    case "activate-ability":
+      return open.some(
+        (a) => a.kind === "activate-ability" && a.source === action.source && a.abilityIndex === action.abilityIndex,
+      )
+        ? null
+        : closed;
     case "commander-replacement":
       // A commander left in the graveyard couldn't be cast again: no card
       // waiting on it could ever be met.

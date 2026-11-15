@@ -44,7 +44,7 @@ describe("a lesson's conditions", () => {
   const state = {
     eventLog: events,
     objects,
-    players: { alice: { life: 38 }, bob: { life: 40 } },
+    players: { alice: { life: 38, manaPool: [{ type: "B" }, { type: "B" }] }, bob: { life: 40, manaPool: [] } },
   } as unknown as GameState;
 
   it("are met just past the first event that meets them, from where they're checked", () => {
@@ -73,6 +73,10 @@ describe("a lesson's conditions", () => {
   it("can be met by the board as it stands", () => {
     expect(metAt(state, 0, { lifeAtMost: { player: ALICE, value: 38 } })).toBe(events.length);
     expect(metAt(state, 0, { lifeAtMost: { player: BOB, value: 39 } })).toBeNull();
+    // Unspent mana: at least so much in the player's pool.
+    expect(metAt(state, 0, { manaInPool: { player: ALICE, atLeast: 2 } })).toBe(events.length);
+    expect(metAt(state, 0, { manaInPool: { player: ALICE, atLeast: 3 } })).toBeNull();
+    expect(metAt(state, 0, { manaInPool: { player: BOB, atLeast: 1 } })).toBeNull();
   });
 });
 
@@ -151,6 +155,16 @@ function coachedMoves({ session }: { readonly session: ReturnType<typeof openLes
     cast: (name: string, zone = "hand") =>
       session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: idNamed(state(), name, zone), targets: [] }),
     pass: () => session.room.dispatch(connection, { type: "pass-priority", player: ALICE }),
+    /** Taps `count` untapped Swamps for mana, one click each, as the lesson's
+     * first two spells are paid for. */
+    tap: (count = 1) => {
+      for (let i = 0; i < count; i += 1) {
+        const s = state();
+        const swamp = s.zones.shared.battlefield.find((b) => s.objects[b].cardName === "Swamp" && !s.objects[b].tapped);
+        if (swamp === undefined) throw new Error("no untapped Swamp");
+        session.room.dispatch(connection, { type: "activate-ability", player: ALICE, source: swamp, abilityIndex: 0 });
+      }
+    },
     attack: (...names: string[]) =>
       session.room.dispatch(connection, {
         type: "declare-attackers",
@@ -193,8 +207,16 @@ describe("Learn Commander", () => {
     expect(info().step).toMatchObject({ id: "first-land", advance: "goal", anchor: "card:Swamp", showHand: true });
     expect(() => session.next("first-land")).toThrow(/goals/);
     m.land();
+    // Mana by hand, the first time: tap the Swamp, see it in the pool, spend it.
+    expect(info().step).toMatchObject({ id: "tap-first-land", advance: "goal", anchor: "battlefield:Swamp" });
+    expect([...new Set(session.room.actionsFor(ALICE).map((a) => a.kind))]).toEqual(["activate-ability"]);
+    m.tap();
+    expect(info().step).toMatchObject({ id: "mana-pool", advance: "next" });
+    expect(m.state().players[ALICE].manaPool).toHaveLength(1);
+    session.next("mana-pool");
     expect(info().step?.id).toBe("cast-rats");
     m.cast("Muck Rats");
+    expect(m.state().players[ALICE].manaPool).toHaveLength(0);
     // Her cast has resolved and the card after it can point at the Rats.
     expect(info().step?.id).toBe("tapped");
     expect(m.state().objects[m.named("Muck Rats")].zone).toBe("battlefield");
@@ -220,6 +242,13 @@ describe("Learn Commander", () => {
     expect(m.state().objects[m.named("Swamp")].tapped).toBe(false);
     session.next("your-turn-again");
     m.land();
+    // By hand once more: one Swamp isn't two mana.
+    expect(info().step?.id).toBe("tap-two-lands");
+    m.tap();
+    expect(info().step?.id).toBe("tap-two-lands");
+    expect(() => m.cast("Cabal Evangel")).toThrow(/waiting for something else/);
+    m.tap();
+    expect(info().step?.id).toBe("cast-evangel");
     m.cast("Cabal Evangel");
     expect(info().step?.id).toBe("first-to-combat");
     m.pass();
@@ -248,6 +277,8 @@ describe("Learn Commander", () => {
     expect(info()).toMatchObject({ chapter: "commander", step: { id: "third-land" } });
     expect(m.state().turn.number).toBe(5);
     m.land();
+    // The commander is paid for the usual way: the game taps the lands.
+    expect(session.room.actionsFor(ALICE).some((a) => a.kind === "activate-ability")).toBe(false);
     m.cast("Kalakscion, Hunger Tyrant", "command");
     expect(info().step?.id).toBe("commander-rules");
     expect(m.state().objects[m.named("Kalakscion, Hunger Tyrant")].zone).toBe("battlefield");
@@ -298,7 +329,13 @@ describe("Learn Commander", () => {
     expect(m.state().turn.number).toBe(1);
 
     m.land();
+    // Only the Swamp's mana now: the cast waits for it.
+    expect(offered()).toEqual(["activate-ability"]);
+    expect(() => m.cast("Muck Rats")).toThrow(/waiting for something else/);
+    m.tap();
+    session.next("mana-pool");
     // The wrong card, and a land too many, are closed as well.
+    expect(offered()).toEqual(["cast-spell"]);
     expect(() => m.cast("Barony Vampire")).toThrow(/waiting for something else/);
     expect(() => m.land()).toThrow(/waiting for something else/);
     m.cast("Muck Rats");
@@ -324,6 +361,8 @@ describe("Learn Commander", () => {
     const m = coachedMoves(opened);
     m.pastTheTable();
     m.land();
+    m.tap();
+    session.next("mana-pool");
     m.cast("Muck Rats");
     session.next("tapped");
     session.next("summoning-sick");
@@ -332,6 +371,7 @@ describe("Learn Commander", () => {
     session.next("rowan-creature");
     session.next("your-turn-again");
     m.land();
+    m.tap(2);
     m.cast("Cabal Evangel");
 
     // To combat: Pass, and not Pass Turn, which would skip the attack.
@@ -375,6 +415,8 @@ describe("Learn Commander", () => {
     const m = coachedMoves(opened);
     m.pastTheTable();
     m.land();
+    m.tap();
+    session.next("mana-pool");
     m.cast("Muck Rats");
     session.next("tapped");
     session.next("summoning-sick");
@@ -400,7 +442,7 @@ describe("Learn Commander", () => {
     const m = coachedMoves(opened);
     m.pastTheTable();
     m.land();
-    expect(info().step?.id).toBe("cast-rats");
+    expect(info().step?.id).toBe("tap-first-land");
     expect(info().canRetry).toBe(true);
     const before = session.room;
     session.retry();
@@ -414,6 +456,8 @@ describe("Learn Commander", () => {
 
     // And the chapter plays on from there as it would have.
     m.land();
+    m.tap();
+    session.next("mana-pool");
     m.cast("Muck Rats");
     expect(info().step?.id).toBe("tapped");
   });
