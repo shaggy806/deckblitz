@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { CardDefinition, GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
@@ -166,13 +166,24 @@ export function EventLog({ events, nameAt, seats, onSelect, onSelectCard }: Even
     )
   }, [events, detailed])
 
-  useEffect(() => {
+  // New lines are followed only while the reader is at the newest one (the
+  // user, 2026-11-14): scrolled up to read something, the list stays where
+  // it is as lines arrive below. It opens at the bottom. "At the bottom" has
+  // a line's slack, so a sub-pixel scroll offset doesn't count as scrolled up.
+  const following = useRef(true)
+  const noteScroll = () => {
     const box = boxRef.current
-    if (box) box.scrollTop = box.scrollHeight
+    if (!box) return
+    const slack = parseFloat(getComputedStyle(box).lineHeight) || box.clientHeight * 0.05
+    following.current = box.scrollHeight - box.scrollTop - box.clientHeight <= slack
+  }
+  useLayoutEffect(() => {
+    const box = boxRef.current
+    if (box && following.current) box.scrollTop = box.scrollHeight
   }, [shown.length])
 
   return (
-    <div className={detailed ? 'event-log detailed' : 'event-log'} ref={boxRef}>
+    <div className={detailed ? 'event-log detailed' : 'event-log'} ref={boxRef} onScroll={noteScroll}>
       <div className="event-log-head">
         <h3>Log</h3>
         <label className="event-log-toggle">
