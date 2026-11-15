@@ -603,3 +603,30 @@ describe("Dr. McCoy, Surly Surgeon", () => {
     expect(counters(game, bears, "+1/+1")).toBe(0);
   });
 });
+
+describe("Q, Stacking the Deck", () => {
+  it("the exiled nonland card gains an ability that casts copies of it from exile, on your turn", () => {
+    const { game, a } = table();
+    castEverything(a);
+    const bears = toLibrary(game, "Grizzly Bears");
+    toLibrary(game, "Forest");
+    lands(game, "Forest", 2);
+    enter(game, "Q, Stacking the Deck");
+    expect(zone(game, bears)).toBe("exile");
+    toHand(game, "Plains");
+    const offer = game.legalActions(A).find((x) => x.kind === "activate-ability" && x.source === bears);
+    expect(offer).toBeDefined();
+    if (offer?.kind !== "activate-ability") return;
+    game.dispatch({ type: "activate-ability", player: A, source: bears, abilityIndex: offer.abilityIndex, targets: [] });
+    settle(game);
+    expect(zone(game, bears)).toBe("exile");
+    const copies = game.state.zones.shared.battlefield.filter(
+      (id) => game.state.objects[id].cardName === "Grizzly Bears" && game.state.objects[id].isToken,
+    );
+    expect(copies).toHaveLength(1);
+    nextTurn(game); // bob's turn: not activatable
+    game.advanceUntil((st) => st.priority.holder === A);
+    toHand(game, "Plains");
+    expect(game.legalActions(A).some((x) => x.kind === "activate-ability" && x.source === bears)).toBe(false);
+  });
+});

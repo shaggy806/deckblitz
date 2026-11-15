@@ -4766,10 +4766,12 @@ export class Game {
     for (const card of this.state.zones.shared.exile) {
       if (onlySource !== undefined && card !== onlySource) continue;
       const object = this.state.objects[card];
-      if (object === undefined || object.owner !== player || object.kind !== "card" || !this.isSuspended(card)) continue;
+      if (object === undefined || object.owner !== player || object.kind !== "card") continue;
       const def = this.registry.get(object.cardName);
+      const suspended = this.isSuspended(card);
       this.effectiveActivated(card).forEach((ability, index) => {
-        if (ability.zone === "suspended") pushActivateAbility(card, def.name, ability, index);
+        // "Activate only if this card is exiled" (Q's grant): any exiled card.
+        if ((ability.zone === "suspended" && suspended) || ability.zone === "exile") pushActivateAbility(card, def.name, ability, index);
       });
     }
   }
@@ -24950,8 +24952,10 @@ export class Game {
     const target = this.state.objects[objectId];
     if (target?.zone === "hand") return this.handGrantedActivated(target);
     if (target?.zone === "graveyard") return this.graveyardGrantedActivated(target);
-    // An emblem's own activated abilities (rule 114.4), on its one modifier.
-    if (target?.kind === "emblem") {
+    // An emblem's own activated abilities (rule 114.4), on its one modifier;
+    // and a card in exile's, granted for as long as it stays there (Q,
+    // Stacking the Deck) — the modifiers go with any move.
+    if (target?.kind === "emblem" || (target?.zone === "exile" && target.kind === "card")) {
       return target.modifiers.flatMap((m) =>
         (m.grantsActivated ?? []).map((ability) => ({ ability, ref: { kind: "modifier-activated" as const, ability } })),
       );
@@ -26993,7 +26997,7 @@ export class Game {
         ...(granterRef !== undefined ? { granter: granterRef } : {}),
       };
     }
-    if (ability.zone === "command" || ability.zone === "suspended" || ability.staysInZone === true) {
+    if (ability.zone === "command" || ability.zone === "suspended" || ability.zone === "exile" || ability.staysInZone === true) {
       // The source is still sitting in that zone — remember which object it
       // is, so a round trip before this resolves reads as a new one (rule
       // 400.7). See `resolveAbility`.
@@ -42130,7 +42134,10 @@ controlledBy,
         const id = this.splitOneFromStack(target.object);
         const object = this.state.objects[id];
         const kept = lastingHere(duration);
-        if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, kept)) return;
+        // A card in exile gains one that works there (Q, Stacking the Deck),
+        // for as long as it stays (rule 400.7).
+        const inExile = object?.zone === "exile" && ability.zone === "exile";
+        if (object === undefined || (object.zone !== "battlefield" && !inExile) || !durationBegins(object, kept)) return;
         object.modifiers.push({
           timestamp: this.freshTimestamp(),
           power: 0,

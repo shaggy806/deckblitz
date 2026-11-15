@@ -5233,7 +5233,7 @@ seen though the card then has none; any other trigger needs a time counter on
 it. Its controller is the owner. The activated form is **`zone: "suspended"`**
 on an `activated` entry — "Activate only if this card is suspended" (Greater
 Gargadon): its owner activates it from exile, the cost doesn't move the card,
-and the client offers it from the exile viewer. `while-suspended.test.ts`.
+and the client offers it from the exile viewer. `while-suspended.test.ts`. **`zone: "exile"`** is "activate only if this card is exiled", any exiled card's: Q, Stacking the Deck's `grant-activated` to the card it exiled (a card in exile keeps a granted ability while it stays there), whose `cast-now` of `"source"` with `copies: 1` is "create a copy of this card. You may cast the copy".
 
 ---
 

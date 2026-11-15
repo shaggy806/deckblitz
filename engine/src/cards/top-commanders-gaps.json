@@ -2694,7 +2694,8 @@
   "effect:copy-spell-cast-this-way-by-opponent",
   "effect:each-opponent-exiles-top-you-choose-one-playable",
   "effect:assimilate-one-of-each-opponents-reveal",
-  "replacement:would-be-destroyed-instead"
+  "replacement:would-be-destroyed-instead",
+  "effect:exiled-card-gains-activated"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

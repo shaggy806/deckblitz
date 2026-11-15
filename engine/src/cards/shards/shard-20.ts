@@ -687,6 +687,7 @@ import _poolPunishment from "../pool/punishment.js";
 import _poolPutridGoblin from "../pool/putrid-goblin.js";
 import _poolPyreOfHeroes from "../pool/pyre-of-heroes.js";
 import _poolPyreswipeHawk from "../pool/pyreswipe-hawk.js";
+import _poolQStackingTheDeck from "../pool/q-stacking-the-deck.js";
 import _poolQYourIllustriousHost from "../pool/q-your-illustrious-host.js";
 import _poolQasaliPridemage from "../pool/qasali-pridemage.js";
 import _poolQuagSickness from "../pool/quag-sickness.js";
@@ -1784,6 +1785,7 @@ const shard: CardShard = {
     _poolPutridGoblin,
     _poolPyreOfHeroes,
     _poolPyreswipeHawk,
+    _poolQStackingTheDeck,
     _poolQYourIllustriousHost,
     _poolQasaliPridemage,
     _poolQuagSickness,

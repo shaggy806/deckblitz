@@ -21134,6 +21134,7 @@ import _poolPyrrhicStrike from "./pool/pyrrhic-strike.js";
 import _poolPython from "./pool/python.js";
 import _poolPyxisOfPandemonium from "./pool/pyxis-of-pandemonium.js";
 import _poolQContinuum from "./pool/q-continuum.js";
+import _poolQStackingTheDeck from "./pool/q-stacking-the-deck.js";
 import _poolQYourIllustriousHost from "./pool/q-your-illustrious-host.js";
 import _poolQalSismaBehemoth from "./pool/qal-sisma-behemoth.js";
 import _poolQalaAjanisPridemate from "./pool/qala-ajanis-pridemate.js";
@@ -54335,6 +54336,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPython,
   _poolPyxisOfPandemonium,
   _poolQContinuum,
+  _poolQStackingTheDeck,
   _poolQYourIllustriousHost,
   _poolQalSismaBehemoth,
   _poolQalaAjanisPridemate,
@@ -87549,6 +87551,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/python": _poolPython,
   "pool/pyxis-of-pandemonium": _poolPyxisOfPandemonium,
   "pool/q-continuum": _poolQContinuum,
+  "pool/q-stacking-the-deck": _poolQStackingTheDeck,
   "pool/q-your-illustrious-host": _poolQYourIllustriousHost,
   "pool/qal-sisma-behemoth": _poolQalSismaBehemoth,
   "pool/qala-ajanis-pridemate": _poolQalaAjanisPridemate,

@@ -867,7 +867,13 @@ export interface ActivatedAbility {
    *   (in exile, with suspend and a time counter — rule 702.62b); the cost
    *   doesn't move it, so `"source"` finds it as with `"command"`.
    */
-  readonly zone?: "hand" | "graveyard" | "command" | "suspended";
+  /**
+   * - `"exile"` — "Activate only if this card is exiled" (Q, Stacking the
+   *   Deck's granted "Exile a card from your hand: Create a copy of this card.
+   *   You may cast the copy"): its owner's, while it's in exile; the cost
+   *   doesn't move it, so `"source"` finds it as with `"command"`.
+   */
+  readonly zone?: "hand" | "graveyard" | "command" | "suspended" | "exile";
   /**
    * A `zone: "graveyard"` ability whose cost *doesn't* exile the card
    * (Reassembling Skeleton: "{1}{B}: Return this card from your graveyard to
