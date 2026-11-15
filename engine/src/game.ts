@@ -5933,6 +5933,7 @@ export class Game {
           capDivide === undefined || capDivide.x === true ? offerSpecs : specsCappedByDivision(offerSpecs, capDivide),
         targetOptions: options,
         ...this.phyrexianPipsOffer(player, variantCost),
+        ...(variantCost !== null && variantCost !== "" ? { manaCost: variantCost } : {}),
         ...(divide !== undefined ? { divide } : {}),
         ...(via !== undefined ? { via } : {}),
         ...(graveyardGrant !== undefined ? { graveyardGrant } : {}),

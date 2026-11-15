@@ -1571,6 +1571,13 @@ export type LegalAction =
        * Will) or an `evoke` variant's "exile a white card from your hand"
        * (Solitude). Informational: nothing echoes it back. */
       readonly altCostText?: string;
+      /** The mana this way of casting it costs before anything raises or
+       * lowers it (rule 601.2f): the mana cost, or the alternative cost this
+       * offer is for (flashback, blitz, `{0}` for a free cast), with the
+       * additional mana it has chosen (a kicker, a mana branch of a choice
+       * of costs). Absent for a card with no mana cost to pay. For a label
+       * that tells one way from another: nothing echoes it back. */
+      readonly manaCost?: string;
       /** What the `altCost` variant may tap, and how many — see
        * {@link TapCostOffer}. */
       readonly tapCost?: TapCostOffer;

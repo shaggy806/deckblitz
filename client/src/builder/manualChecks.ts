@@ -12766,4 +12766,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Baxter Building', 'Island*4', 'Craw Wurm'], hand: ['Fusion Elemental'] },
     }),
   ),
+  preset(
+    'Star Athlete: a click lists both ways to cast it, each with its cost',
+    board({
+      you: { bf: ['Mountain*4'], hand: ['Star Athlete', 'Shock', 'Mountain'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Boseiju, Who Endures: its Channel pill stays inside the card',
+    board({
+      you: { bf: ['Forest*2'], hand: ['Boseiju, Who Endures', 'Grizzly Bears', 'Forest'] },
+      opp: { bf: ['Sol Ring'] },
+    }),
+  ),
 ]

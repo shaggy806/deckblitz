@@ -43,9 +43,12 @@ export function AbilityMenu({
   title,
   items,
   ariaLabel,
+  placement = 'beside',
   onClose,
   children,
 }: {
+  /** Where it hangs off its tile: beside a permanent, above a hand card. */
+  readonly placement?: 'beside' | 'above'
   readonly source: ObjectId
   /** The permanent's name, as the menu's heading. */
   readonly title: string
@@ -65,11 +68,26 @@ export function AbilityMenu({
     const place = () => {
       const menu = ref.current
       if (!menu) return
-      const anchor = document.querySelector(`[data-obj-id="${CSS.escape(source)}"]`)
+      // A hand card is drawn twice while the "All cards" grid is open over
+      // the fan: the menu belongs to the one in the grid, on top.
+      const tile = `[data-obj-id="${CSS.escape(source)}"]`
+      const anchor = document.querySelector(`.hand-grid-overlay ${tile}`) ?? document.querySelector(tile)
       const m = menu.getBoundingClientRect()
       if (anchor === null) {
         menu.style.left = `${Math.max(GAP, (window.innerWidth - m.width) / 2)}px`
         menu.style.top = `${Math.max(GAP, (window.innerHeight - m.height) / 2)}px`
+        menu.classList.add('placed')
+        return
+      }
+      if (placement === 'above') {
+        // A hand card: the card as it's drawn now (grown under the pointer,
+        // or peeking from the lowered tray), with the menu centred over it.
+        // Beside it are its neighbours in the fan, and at the foot of the
+        // screen the Pass bar.
+        const t = (anchor.querySelector('.card-tile') ?? anchor).getBoundingClientRect()
+        const x = t.left + t.width / 2 - m.width / 2
+        menu.style.left = `${Math.max(GAP, Math.min(x, window.innerWidth - m.width - GAP))}px`
+        menu.style.top = `${Math.max(GAP, t.top - GAP - m.height)}px`
         menu.classList.add('placed')
         return
       }
@@ -107,7 +125,7 @@ export function AbilityMenu({
       window.removeEventListener('scroll', place, { capture: true })
       window.removeEventListener('resize', place)
     }
-  }, [source, items])
+  }, [source, items, placement])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

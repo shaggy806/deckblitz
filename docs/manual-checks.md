@@ -6000,7 +6000,7 @@ engine terms. A second thing to check is a second test.
 ## Another player helps pay (2026-10-31, need-keys Phase 2: build-family, features only)
 
 ### Charging Binox: Bob helps pay
-- **Do:** Click "Cast Charging Binox (assist: Bob may pay up to 5)" under the card. As Bob, choose 4.
+- **Do:** Click Charging Binox, then "Cast Charging Binox (assist: Bob may pay up to 5)" in its menu. As Bob, choose 4.
 - **Expect:** Bob's bar reads "Charging Binox — assist: pay up to 5 of this spell's generic mana (less than 4 and the cast is undone) (0–5)". Charging Binox resolves onto your battlefield; four of Bob's Islands and your four Forests are tapped.
 - **Not a bug:** clicking the card itself does nothing — the button says who you're asking.
 
@@ -8475,3 +8475,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Baxter Building: four mana in any combination is one menu row
 - **Do:** Click Baxter Building, pick "Add four mana in any combination of colors", set the five colours to add up to four, then "Add mana".
 - **Expect:** The menu has three rows, all on screen: {C}, the four mana "(choose how much of each)" and "Draw a card". The banner counts your picks ("3/4") and the four Islands tap for the cost; the mana you picked is in your pool.
+
+### Star Athlete: a click lists both ways to cast it, each with its cost
+- **Do:** Hover Star Athlete in your hand, then click it. Pick the blitz row.
+- **Expect:** The card has a "2 ways to play" pill on its top edge. The click opens a small menu above it: "Cast Star Athlete — {1}{R}{R}" and "Cast Star Athlete (blitz) — {3}{R}". Nothing is cast until you pick a row; the blitz row casts it with haste.
+
+### Boseiju, Who Endures: its Channel pill stays inside the card
+- **Do:** Look at Boseiju in your hand without hovering it, then hover it.
+- **Expect:** The pill on its top edge reads "Channel — {1}{G}" and is no wider than the card, hovered or not.

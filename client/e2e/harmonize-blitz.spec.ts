@@ -113,11 +113,18 @@ test('BLITZ: Star Athlete is offered for its blitz cost, then attacks at once', 
   const [giant] = idsOf(state, 'bob', 'Hill Giant')
   await ready(page)
   const card = page.locator(`.hand-card[data-obj-id="${athlete}"]`)
-  await expect(card.getByRole('button', { name: /Cast Star Athlete \(blitz\)/ })).toBeVisible()
+  // Two ways to cast it: the card says so, and a click on it opens them as a
+  // menu, each with its cost.
+  await expect(card.getByRole('button', { name: '2 ways to play' })).toBeVisible()
   await card.locator('.card-tile').hover({ force: true })
-  await shots(page, 'BLITZ-menu')
   // The fanned hand never holds still for a click.
-  await card.getByRole('button', { name: /Cast Star Athlete \(blitz\)/ }).dispatchEvent('click')
+  await card.locator('.card-tile').dispatchEvent('click')
+  const ways = page.getByRole('menu', { name: 'Ways to play Star Athlete' })
+  await expect(ways.getByRole('menuitem')).toHaveCount(2)
+  await expect(ways.getByRole('menuitem', { name: /Cast Star Athlete — \{1\} \{R\} \{R\}/ })).toBeVisible()
+  await expect(ways.getByRole('menuitem', { name: /Cast Star Athlete \(blitz\) — \{3\} \{R\}/ })).toBeVisible()
+  await shots(page, 'BLITZ-menu')
+  await ways.getByRole('menuitem', { name: /Cast Star Athlete \(blitz\)/ }).click()
   await untilChoice(page, /No attacks|Attack with/)
   await page.locator(`.board [data-obj-id="${athlete}"]`).first().click()
   await page.locator('.decision-banner').getByRole('button', { name: /^Attack with 1/ }).click()
@@ -144,17 +151,17 @@ test('EMRGE: emerge is offered per creature it makes affordable, and sacrifices 
   const [gryff] = idsOf(state, 'alice', 'Wretched Gryff')
   await ready(page)
   const card = page.locator(`.hand-card[data-obj-id="${gryff}"]`)
-  const emerge = card.getByRole('button', { name: /emerge, sacrificing Hill Giant: −4/ })
-  await expect(emerge).toBeVisible()
-  // Grizzly Bears (mana value 2) would leave {3}{U}: not offered.
-  await expect(card.getByRole('button', { name: /sacrificing Grizzly Bears/ })).toHaveCount(0)
   await card.locator('.card-tile').hover({ force: true })
-  await shots(page, 'EMRGE-menu')
-  // The only way to cast it, but a click on the card doesn't sacrifice: only
-  // the button that says so does.
+  // The only way to cast it, but a click on the card doesn't sacrifice: it
+  // opens the menu, and only the row that says so does.
   // (A forced click lands wherever the hand's fan puts it, sometimes on a neighbour.)
   await card.locator('.card-tile').dispatchEvent('click')
-  await expect(card.getByRole('button', { name: /emerge, sacrificing Hill Giant/ })).toBeVisible()
+  const ways = page.getByRole('menu', { name: 'Ways to play Wretched Gryff' })
+  const emerge = ways.getByRole('menuitem', { name: /emerge, sacrificing Hill Giant: −4/ })
+  await expect(emerge).toBeVisible()
+  // Grizzly Bears (mana value 2) would leave {3}{U}: not offered.
+  await expect(ways.getByRole('menuitem', { name: /sacrificing Grizzly Bears/ })).toHaveCount(0)
+  await shots(page, 'EMRGE-menu')
   const unmoved = await control<RoomState>(request, { op: 'state', room: 'EMRGE' })
   expect(linesOf(unmoved, 'alice', 'Hill Giant')).toHaveLength(1)
   expect(unmoved.players.alice.hand.some((l) => l.includes('Wretched Gryff'))).toBe(true)

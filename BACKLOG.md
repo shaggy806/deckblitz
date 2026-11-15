@@ -311,7 +311,6 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
-- **Alternate casting options in hand need a clearer display** — either shown the way cycling is, or a small menu on clicking a castable card to choose how to cast it and for what cost (the user, 2026-11-14; `docs/client-gaps.md`).
 
 
 

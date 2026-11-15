@@ -4431,8 +4431,7 @@
    rule is only meant for the small secondary action buttons (Suspend/
    Foretell/Cycle/multi-face plays, cast-from-zone) that sit alongside it. */
 .zone-viewer-card > button:not(.card-tile),
-.hand-card > button:not(.card-tile),
-.hand-card-ways > button {
+.hand-card > button:not(.card-tile) {
   font-size: var(--text-sm);
   padding: 2px 8px;
 }
@@ -4442,9 +4441,11 @@
    cards' sat under the Pass bar (the user, 2026-11-02); on the top edge
    they show in the lowered tray too. They turn and droop with their card
    (its own rotate and translate, about the same point — the tile's bottom
-   centre, a card's height below the pills' lowest edge), and ride up to the
-   top edge of the card grown under the pointer — still over it, so the
-   pointer keeps the card grown while it follows them. */
+   centre, a card's height below the pills' lowest edge), and grow with the
+   card under the pointer, by the same 1.65x from that same point (the user,
+   2026-11-14: "scale it the same way the card is") — so they sit on its top
+   edge at either size, still over it, and the pointer keeps the card grown
+   while it follows them. */
 .hand-card-actions {
   --act-h: calc(22px * var(--ui));
   position: absolute;
@@ -4460,16 +4461,20 @@
   transform-origin: 50% calc(100% + var(--card-w) * 1.4 - var(--act-h) / 2);
   rotate: var(--r, 0deg);
   translate: 0 var(--y, 0px);
+  scale: 1;
   transition:
     translate 0.15s ease,
-    rotate 0.15s ease;
+    rotate 0.15s ease,
+    scale 0.15s ease;
 }
 /* The grown card (`.hand-card:hover .card-tile`: lifted 30px, upright, 1.65x
-   from its bottom edge, and taller by --read-extra for a wordy one). */
+   from its bottom edge, and taller by --read-extra for a wordy one, which
+   the scale carries up with the rest). */
 .hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, :focus-within) > .hand-card-actions,
 .hand-strip .hand-cards .hand-card[data-sweep] > .hand-card-actions {
   rotate: 0deg;
-  translate: 0 calc(-30px - (var(--card-w) * 1.4 + var(--read-extra, 0px)) * 0.65 - var(--read-extra, 0px));
+  scale: 1.65;
+  translate: 0 calc(-30px - var(--read-extra, 0px) * 1.65);
 }
 :root[data-reduce-motion] .hand-card-actions {
   transition: none;
@@ -4477,6 +4482,12 @@
 .hand-card-actions > button {
   pointer-events: auto;
   height: var(--act-h);
+  /* No wider than its card, at either size (it scales with the card): a
+     wordy one is cut short with an ellipsis rather than running past the
+     card's sides onto its neighbours' (the user, 2026-11-14). */
+  max-width: var(--card-w);
+  overflow: hidden;
+  text-overflow: ellipsis;
   padding: 0 calc(10px * var(--ui));
   font-size: var(--text-sm);
   font-weight: 700;
@@ -4494,22 +4505,6 @@
    no --r or --y). */
 .hand-grid .hand-card {
   position: relative;
-}
-/* More than three ways to cast a card: stacked above it, over the board, and
-   scrolling if even that isn't room enough. */
-.hand-card-ways {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: 40vw;
-  max-height: 45vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25vh;
-  z-index: 30;
 }
 /* The turn-over button on a double-faced card in the zone viewer: a round
    corner badge over the top of the art (the title bar's right end is the

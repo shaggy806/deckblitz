@@ -250,7 +250,9 @@ function graveyardVariantLabel(
     if (source !== undefined) parts.push(`via ${source}`)
   }
   if (a.kind === 'cast-spell') {
-    if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push((a.via === 'flashback' || a.via === 'foretell-given') && a.altCostText !== undefined ? a.altCostText : a.via === 'more-than-meets-the-eye' ? 'More Than Meets the Eye' : a.via)
+    if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push((a.via === 'flashback' || a.via === 'foretell-given') && a.altCostText !== undefined ? a.altCostText : a.via === 'more-than-meets-the-eye' ? 'More Than Meets the Eye' : a.via === 'face-down' ? 'face down, a 2/2' : a.via)
+    if (a.overload) parts.push(`${a.overloadKeyword ?? 'overload'} ${a.overloadCost ?? ''}`.trim())
+    if (a.free) parts.push('free')
     if (a.via === 'emerge' && a.emergeSacrifice) parts.push(`sacrificing ${a.emergeSacrifice.cardName}: −${a.emergeSacrifice.manaValue}`)
     if (a.kicked) parts.push(`${a.kickerKeyword ?? 'kicked'} ${a.kickerCost ?? ''}`.trim())
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
@@ -264,7 +266,8 @@ function graveyardVariantLabel(
     if (a.harmonizeTap) parts.push(`tapping ${a.harmonizeTap.cardName} (−${a.harmonizeTap.power})`)
     if (a.sneakReturn) parts.push(`returning ${a.sneakReturn.cardName}`)
     if (a.webSlingingReturn) parts.push(`returning ${a.webSlingingReturn.cardName}`)
-    if (a.assist !== undefined) parts.push('asking for assist')
+    if (a.costOptionText) parts.push(a.costOptionText)
+    if (a.assist !== undefined) parts.push(`assist: ${playerLabel(a.assist)} may pay up to ${a.assistMax ?? 0}`)
     if (a.otherChooser !== undefined) parts.push(`${playerLabel(a.otherChooser)} chooses`)
   }
   return parts.length > 0 ? `${verb} ${parts.join(', ')}` : verb
@@ -276,6 +279,15 @@ function castWayLabel(a: CastAction | LandAction, view: PlayerView): string {
   const variant = graveyardVariantLabel(a, view, false)
   const space = variant.indexOf(' ')
   return `${a.kind === 'play-land' ? 'Play' : 'Cast'} ${a.cardName}${space < 0 ? '' : ` (${variant.slice(space + 1)})`}`
+}
+
+/** A row of a hand card's menu of ways to play it (the user, 2026-11-14: "a
+ * small menu to choose in which manner you want to cast it and for what
+ * cost"): `castWayLabel`, then the mana that way costs (the offer's
+ * `manaCost`: the printed cost, or blitz's, with a kicker's added). */
+function castWayRow(a: CastAction | LandAction, view: PlayerView): string {
+  const label = castWayLabel(a, view)
+  return a.kind === 'cast-spell' && a.manaCost !== undefined ? `${label} — ${a.manaCost}` : label
 }
 
 /** The "which variant of this cast" fields a `cast-spell` action carries all
@@ -962,10 +974,17 @@ const COLOR_CHOICE_NAMES: Readonly<Record<string, string>> = {
   R: 'Red',
   G: 'Green',
 }
-/** A hand ability's button: its text up to its reminder or its effect —
- * "Ninjutsu {1}{U}", "Channel — {1}{G}, Discard this card". */
+/** A hand ability's button: its text up to its reminder or its effect, less
+ * the part of the cost every such ability has (the card itself, discarded or
+ * revealed) — "Ninjutsu {1}{U}", "Channel — {1}{G}". Short, as it's a pill
+ * on a card's top edge: "…, Discard this card" ran past the card's sides
+ * (the user, 2026-11-14). */
 function handAbilityLabel(text: string): string {
-  return text.split(' (')[0].split(':')[0].trim()
+  return text
+    .split(' (')[0]
+    .split(':')[0]
+    .replace(/, (Discard|Reveal) this card( from your hand)?$/i, '')
+    .trim()
 }
 
 
@@ -3481,13 +3500,15 @@ function Table({
       }
       if (mode !== 'priority') return
       const opts = playFacesByCard.get(id) ?? []
-      // A multi-face card shows a button per face (below the tile) — a bare
-      // click does nothing so the choice stays explicit.
-      // So does a lone cast that sacrifices a permanent or asks another player
-      // to help pay: its button says so.
+      // More than one way to play it (a second face, a kicker, blitz), or a
+      // lone cast that sacrifices a permanent or asks another player to help
+      // pay: a hand card opens a menu of them, each with its cost (the cast
+      // rows of `AbilityMenu` below), so the choice stays explicit. Elsewhere
+      // (the top of a library) the ways are buttons by the card.
       if (opts.length === 1 && !needsOwnButton(opts[0])) playFace(opts[0])
+      else if (opts.length > 0 && view.objects[id]?.zone === 'hand') setSelectedSource((cur) => (cur === id ? null : id))
     },
-    [bottomAction, discardAction, revealChoiceAction, mode, playFace, playFacesByCard],
+    [bottomAction, discardAction, revealChoiceAction, mode, playFace, playFacesByCard, view.objects],
   )
 
   /** Which id a click on a (possibly stacked) tile should act on. */
@@ -7347,7 +7368,11 @@ function Table({
     )
   }
 
-  const selectedAbilities = selectedSource
+  // A hand card's menu is its ways to be cast alone: what else it does from
+  // the hand (cycling, ninjutsu) is the pills on its top edge.
+  const selectedInHand =
+    mode === 'priority' && selectedSource !== null && view.objects[selectedSource]?.zone === 'hand'
+  const selectedAbilities = selectedSource && !selectedInHand
     ? (abilitiesBySource.get(selectedSource) ?? [])
     : []
   const selectedFaceUp = selectedSource ? faceUpBySource.get(selectedSource) : undefined
@@ -7357,8 +7382,13 @@ function Table({
   const selectedPreparedCasts = selectedSource ? (preparedCastsBySource.get(selectedSource) ?? []) : []
   // A commander whose tile opened the menu (it has an ability that works from
   // the command zone) is still cast from it.
+  // So is a hand card with more than one way to be played (`clickHandCard`):
+  // a face that's a land is one of them.
   const selectedCast =
-    selectedSource !== null && view.objects[selectedSource]?.zone === 'command' && castByCard.has(selectedSource)
+    selectedSource !== null &&
+    (selectedInHand
+      ? playFacesByCard.has(selectedSource)
+      : view.objects[selectedSource]?.zone === 'command' && castByCard.has(selectedSource))
   const selectedCastOpts = selectedCast ? (playFacesByCard.get(selectedSource) ?? []) : []
   const selectedCastWays = selectedCastOpts.length > 1 || selectedCastOpts.some(needsOwnButton)
 
@@ -7828,21 +7858,20 @@ function Table({
             mode === 'priority' ? (playFacesByCard.get(id) ?? []) : []
           // More than one way to play this card: a multi-face card's sides,
           // or a kickable spell's kicked / unkicked casts (P8). An emerge or
-          // offering cast sacrifices a permanent, so even alone it's a button
-          // that names it — never a click on the card that sacrifices silently.
+          // offering cast sacrifices a permanent, so even alone it's chosen
+          // by name — never a click on the card that sacrifices silently.
           // So is a cast that asks another player to help pay (assist).
+          // A click on the card opens them as a menu, each with its cost
+          // (`clickHandCard`; the user, 2026-11-14 — they were a column of
+          // buttons under the card); a pill on its top edge says there's a
+          // choice, and opens it too.
           const multiFace = faceOpts.length > 1 || faceOpts.some(needsOwnButton)
-          // Many ways to cast it (a multikicker, a replicate paid n times)
-          // open upward over the board: below the card they run off a short
-          // screen.
-          const wrapWays = (ways: ReactNode): ReactNode =>
-            faceOpts.length > 3 ? <div className="hand-card-ways">{ways}</div> : ways
           return (
             <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
               <CardTile
                 obj={obj}
                 highlight={highlight || Boolean(suspend) || Boolean(foretell) || Boolean(plot) || Boolean(cycle) || handAbilities.length > 0}
-                selected={selected}
+                selected={selected || (multiFace && selectedSource === id)}
                 layout="art-first"
                 onClick={() => clickHandCard(id)}
               />
@@ -7855,85 +7884,20 @@ function Table({
                 className={`hand-other-face${fanOffset > 0 ? ' to-left' : ''}`}
               />
               <KeywordTips obj={obj} className={`hand-kw-tips${fanOffset > 0 ? ' to-left' : ''}`} />
-              {multiFace
-                ? wrapWays(faceOpts.map((a, i) => (
-                    <button key={i} type="button" onClick={() => playFace(a)}>
-                      {a.kind === 'play-land' ? 'Play' : 'Cast'} {a.cardName}
-                      {a.kind === 'cast-spell' && a.kicked ? (
-                        <>
-                          {' '}({a.kickerKeyword ?? 'kicked'}
-                          {a.kickerCost ? <> <Symbols text={a.kickerCost} /></> : null})
-                        </>
-                      ) : null}
-                      {a.kind === 'cast-spell' && a.overload ? (
-                        <> ({a.overloadKeyword ?? 'overload'} <Symbols text={a.overloadCost ?? ''} />)</>
-                      ) : null}
-                      {a.kind === 'cast-spell' && a.free ? ' (free)' : ''}
-                      {a.kind === 'cast-spell' && a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX
-                        ? ` (X=${a.xCost.maxX})`
-                        : ''}
-                      {a.kind === 'cast-spell' && a.via === 'warp' ? ' (warp)' : ''}
-                      {a.kind === 'cast-spell' && a.via === 'face-down' ? (
-                        <> face down (a 2/2 for <Symbols text="{3}" />)</>
-                      ) : null}
-                      {a.kind === 'cast-spell' && a.via === 'blitz' ? ' (blitz)' : ''}
-                      {a.kind === 'cast-spell' && a.via === 'dash' ? ' (dash)' : ''}
-                      {a.kind === 'cast-spell' && a.via === 'impending' ? ' (impending)' : ''}
-                      {a.kind === 'cast-spell' && a.via === 'more-than-meets-the-eye' ? ' (More Than Meets the Eye)' : ''}
-                      {a.kind === 'cast-spell' && a.via === 'freerunning' ? ' (freerunning)' : ''}
-                      {a.kind === 'cast-spell' && a.keywordCostsText ? (
-                        <> (<Symbols text={a.keywordCostsText} />)</>
-                      ) : null}
-                      {a.kind === 'cast-spell' && a.optionalLifeText !== undefined ? ` (${a.optionalLifeText})` : ''}
-                      {a.kind === 'cast-spell' && a.assist !== undefined
-                        ? ` (assist: ${playerLabel(a.assist, game.seats)} may pay up to ${a.assistMax ?? 0})`
-                        : ''}
-                      {a.kind === 'cast-spell' && a.otherChooser !== undefined
-                        ? ` (${playerLabel(a.otherChooser, game.seats)} chooses)`
-                        : ''}
-                      {a.kind === 'cast-spell' && a.evoke ? (
-                        a.altCostText !== undefined ? (
-                          ` (evoke: ${a.altCostText})`
-                        ) : (
-                          <> (evoke <Symbols text={a.evokeCost ?? ''} />)</>
-                        )
-                      ) : null}
-                      {a.kind === 'cast-spell' && a.prototype ? (
-                        <> (prototype <Symbols text={a.prototypeCost ?? ''} />)</>
-                      ) : null}
-                      {a.kind === 'cast-spell' && a.altCost ? <> (<Symbols text={a.altCostText ?? 'alternative cost'} />)</> : ''}
-                      {a.kind === 'cast-spell' && a.altCostGainer !== undefined
-                        ? ` (${playerLabel(a.altCostGainer, game.seats)} gains)`
-                        : ''}
-                      {a.kind === 'cast-spell' && a.via === 'harmonize'
-                        ? a.harmonizeTap
-                          ? ` (harmonize, tapping ${a.harmonizeTap.cardName}: −${a.harmonizeTap.power})`
-                          : ' (harmonize)'
-                        : ''}
-                      {a.kind === 'cast-spell' && a.via === 'sneak' && a.sneakReturn
-                        ? ` (sneak, returning ${a.sneakReturn.cardName})`
-                        : ''}
-                      {a.kind === 'cast-spell' && a.via === 'web-slinging' && a.webSlingingReturn
-                        ? ` (web-slinging, returning ${a.webSlingingReturn.cardName})`
-                        : ''}
-                      {a.kind === 'cast-spell' && a.via === 'emerge' && a.emergeSacrifice
-                        ? ` (emerge, sacrificing ${a.emergeSacrifice.cardName}: −${a.emergeSacrifice.manaValue})`
-                        : ''}
-                      {a.kind === 'cast-spell' && a.costOptionText ? (
-                        <> (<Symbols text={a.costOptionText} />)</>
-                      ) : null}
-                      {a.kind === 'cast-spell'
-                        ? a.splice?.map((s) => (
-                            <span key={s.object}> (splicing {s.cardName} <Symbols text={s.cost} />)</span>
-                          ))
-                        : null}
-                    </button>
-                  )))
-                : null}
               {/* What else the card can do from the hand: pills on its top
                   edge (App.css), seen in the lowered tray too. */}
-              {suspend || foretell || plot || cycle || handAbilities.length > 0 ? (
+              {multiFace || suspend || foretell || plot || cycle || handAbilities.length > 0 ? (
               <div className="hand-card-actions">
+              {multiFace ? (
+                <button
+                  type="button"
+                  className="hand-card-ways-pill"
+                  aria-haspopup="menu"
+                  onClick={() => clickHandCard(id)}
+                >
+                  {faceOpts.length > 1 ? `${faceOpts.length} ways to play` : 'Cast…'}
+                </button>
+              ) : null}
               {suspend ? (
                 <button
                   type="button"
@@ -8108,6 +8072,8 @@ function Table({
         selectedPreparedCasts.length > 0) ? (
         <AbilityMenu
           source={selectedSource}
+          placement={selectedInHand ? 'above' : 'beside'}
+          {...(selectedInHand ? { ariaLabel: `Ways to play ${game.nameOf(selectedSource)}` } : {})}
           title={game.nameOf(selectedSource)}
           items={[
             // More than one way to cast it, or one that must say what it
@@ -8116,7 +8082,7 @@ function Table({
             ...(selectedCastWays
               ? selectedCastOpts.map((a, i) => ({
                   key: `cast:${i}`,
-                  label: castWayLabel(a, view),
+                  label: castWayRow(a, view),
                   onSelect: () => {
                     setSelectedSource(null)
                     playFace(a)
