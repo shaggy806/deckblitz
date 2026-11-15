@@ -10068,6 +10068,7 @@ export class Game {
     // The journal notes whose turn this is and lets go of what no window can
     // name any more (`journal.ts`).
     beginJournalTurn(this.state, this.state.turn.number, this.activePlayer);
+    if (this.state.turn.isExtra) appendJournal(this.state, { kind: "extra-turn-began", player: this.activePlayer });
     // Nothing waits on a departed ability across turns: the stack is empty.
     delete this.state.departedAbilities;
     // "Until your next turn" effects end as that turn begins (the active

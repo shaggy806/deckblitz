@@ -378,6 +378,7 @@ import _poolHighStride from "../pool/high-stride.js";
 import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
 import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
+import _poolHmsBountyUnlikelyTimeship from "../pool/hms-bounty-unlikely-timeship.js";
 import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
 import _poolHonorTheFallen from "../pool/honor-the-fallen.js";
 import _poolHopefulEidolon from "../pool/hopeful-eidolon.js";
@@ -1410,6 +1411,7 @@ const shard: CardShard = {
     _poolHillGiantHerdgorger,
     _poolHinderingTouch,
     _poolHippoCows,
+    _poolHmsBountyUnlikelyTimeship,
     _poolHoardingRecluse,
     _poolHonorTheFallen,
     _poolHopefulEidolon,

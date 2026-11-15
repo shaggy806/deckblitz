@@ -6827,6 +6827,10 @@ clause (section 9):
   Hospitality) is `attackingEnchantedPlayer: true`, the player the Curse
   enchants.
 - `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, doneBy?, from?, notFrom?, against? }` —
+  (`window: "this-game"` reads the whole game's count of a view that is its kind, unfiltered
+  — the journal's entries last only a round: H.M.S. Bounty's "haven't begun an extra turn this
+  game" is `{ kind: "not", of: { kind: "turn-history", what: "extra-turn-began", window:
+  "this-game" } }`, an extra turn of yours that began, rule 500.7.)
   (`doneBy`, for a view about what was done to something — `"crewers"`, whose
   `filter` and `selfOnly` read the Vehicle — keeps only the entries whose doer
   matched it as it was then: Adrestia's "if an Assassin crewed it this turn"

@@ -117,6 +117,7 @@ import {
   cycledNamedCount,
   entriesThisTurn,
   journalEntries,
+  journalGameCount,
   journalListOf,
   journalTotal,
   type JournalReader,
@@ -2173,6 +2174,21 @@ export function journalCount(
 ): number {
   let n = 0;
   const view = JOURNAL_VIEWS[what];
+  // "This game" is the whole game's counts (`Journal.game`), not the entries,
+  // which last a round: only a view that is its kind, unfiltered, has one.
+  if (
+    options?.window === "this-game" &&
+    view.match === undefined &&
+    view.whose === undefined &&
+    view.distinct !== true &&
+    view.oncePerList !== true &&
+    filter === undefined &&
+    except === undefined &&
+    only === undefined
+  ) {
+    for (const player of players) n += journalGameCount(state, view.kind, player);
+    return n;
+  }
   const entries = journalEntries(journalReader(state, registry), view, players, options?.window ?? "this-turn", you);
   // `oncePerList`: the objects already counted, each per stint and list.
   const counted = view.oncePerList === true ? new Set<string>() : undefined;

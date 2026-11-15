@@ -134,6 +134,8 @@ export type JournalKind =
    * entry per choice (`modes-chosen`'s `modal`; the `faces-dilemma`
    * trigger's event). */
   | "faced-dilemma"
+  /** An extra turn of `player`'s began (rule 500.7). */
+  | "extra-turn-began"
   /** `player` spent `amount` mana to cast a spell (700.14, expend). */
   | "mana-spent"
   /** `player` paid or lost `amount` energy counters. */
@@ -382,7 +384,11 @@ export type JournalWhat =
    * visited this turn" (Storybook Ride, Black Hole), "if you've visited an
    * Attraction this turn" (Soul Swindler). They needn't still be on the
    * battlefield (Black Hole's ruling). */
-  | "visited";
+  | "visited"
+  /** An extra turn of the player's began (rule 500.7): H.M.S. Bounty,
+   * Unlikely Timeship's "if you … haven't begun an extra turn this game"
+   * (window `"this-game"`). A skipped one never began (614.10). */
+  | "extra-turn-began";
 
 /** The zones a `to-graveyard` read takes its arrivals from (`from`: only
  * these) or leaves out (`notFrom`): "put into graveyards from the
@@ -462,6 +468,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   firebent: { kind: "bent", match: (e) => e.how === "fire" },
   airbent: { kind: "bent", match: (e) => e.how === "air" },
   visited: { kind: "visited", distinct: true },
+  "extra-turn-began": { kind: "extra-turn-began" },
 };
 
 const PERMANENT_CARD_TYPES: ReadonlySet<string> = new Set([

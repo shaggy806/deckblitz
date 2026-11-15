@@ -2669,7 +2669,8 @@
   "filter:controlled-by-monarch",
   "cost:ability-tap-creatures-for-mana",
   "amount:dilemmas-faced-this-turn",
-  "replacement:others-enter-attacking"
+  "replacement:others-enter-attacking",
+  "condition:begun-extra-turn-this-game"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

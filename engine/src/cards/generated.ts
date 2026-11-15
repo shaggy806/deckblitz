@@ -12909,6 +12909,7 @@ import _poolHivespineWolverine from "./pool/hivespine-wolverine.js";
 import _poolHivestone from "./pool/hivestone.js";
 import _poolHivisOfTheScale from "./pool/hivis-of-the-scale.js";
 import _poolHixusPrisonWarden from "./pool/hixus-prison-warden.js";
+import _poolHmsBountyUnlikelyTimeship from "./pool/hms-bounty-unlikely-timeship.js";
 import _poolHoarShade from "./pool/hoar-shade.js";
 import _poolHoardHauler from "./pool/hoard-hauler.js";
 import _poolHoardRobber from "./pool/hoard-robber.js";
@@ -46085,6 +46086,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHivestone,
   _poolHivisOfTheScale,
   _poolHixusPrisonWarden,
+  _poolHmsBountyUnlikelyTimeship,
   _poolHoarShade,
   _poolHoardHauler,
   _poolHoardRobber,
@@ -79274,6 +79276,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hivestone": _poolHivestone,
   "pool/hivis-of-the-scale": _poolHivisOfTheScale,
   "pool/hixus-prison-warden": _poolHixusPrisonWarden,
+  "pool/hms-bounty-unlikely-timeship": _poolHmsBountyUnlikelyTimeship,
   "pool/hoar-shade": _poolHoarShade,
   "pool/hoard-hauler": _poolHoardHauler,
   "pool/hoard-robber": _poolHoardRobber,

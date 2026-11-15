@@ -246,3 +246,28 @@ describe("The Caretaker", () => {
     expect(game.state.objects[bears].controller).toBe(A);
   });
 });
+
+describe("H.M.S. Bounty, Unlikely Timeship", () => {
+  it("takes an extra turn with a Whale only until an extra turn of yours has begun this game", () => {
+    const { game, a } = table();
+    const bounty = spawn(game, "H.M.S. Bounty, Unlikely Timeship");
+    addCounters(game, bounty, "charge", 8);
+    spawn(game, "Aethertide Whale");
+    a.declareAttackersFn = () => [{ attacker: bounty, defender: B }];
+    toStep(game, "postcombat-main");
+    expect(game.state.extraTurns).toEqual([A]);
+
+    // The extra turn begins; two rounds later, Bounty connects again.
+    toStep(game, "precombat-main");
+    expect(game.state.turn.isExtra).toBe(true);
+    a.declareAttackersFn = () => [];
+    toStep(game, "precombat-main");
+    toStep(game, "precombat-main");
+    expect(game.state.turn.isExtra).toBe(false);
+    const before = hand(game).length;
+    a.declareAttackersFn = () => [{ attacker: bounty, defender: B }];
+    toStep(game, "postcombat-main");
+    expect(hand(game).length).toBe(before + 1);
+    expect(game.state.extraTurns).toEqual([]);
+  });
+});
