@@ -59,23 +59,29 @@ export function AboutPage() {
         <h2>Players&apos; decks</h2>
         <p>
           A bot can be given a &ldquo;Strong&rdquo; deck: one of these real Commander decks that players built and shared on
-          Archidekt, each played exactly as its creator listed it on {STRONG_DECKS[0]?.credit?.taken} and named for
-          them. Their own pages show their latest versions:
+          Archidekt or Moxfield, each named for its creator and played exactly as they listed it on{' '}
+          {STRONG_DECKS[0]?.credit?.taken}, except where it says what was changed. Their own pages show their latest
+          versions:
         </p>
         <ul className="about-credits">
           {STRONG_DECKS.map((deck) =>
             deck.credit === undefined ? null : (
               <li key={deck.name}>
-                <a href={`https://archidekt.com/decks/${deck.credit.archidektId}`} target="_blank" rel="noreferrer">
+                <a
+                  href={deck.credit.url ?? `https://archidekt.com/decks/${deck.credit.archidektId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {deck.credit.title}
                 </a>{' '}
                 by {deck.credit.author} ({deck.commanders?.[0]})
+                {deck.credit.changed === undefined ? null : `, with ${deck.credit.changed}`}
               </li>
             ),
           )}
         </ul>
         <p>
-          {SITE_TITLE} isn&apos;t affiliated with or endorsed by Archidekt or these players.
+          {SITE_TITLE} isn&apos;t affiliated with or endorsed by Archidekt, Moxfield or these players.
         </p>
       </section>
 

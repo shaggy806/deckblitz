@@ -1,7 +1,8 @@
 # Strong Commander decks for the bots
 
 Status: **shipped as an optional pool, and closed there** (2026-11-11, the user's decision after the
-pilot failed its gate twice, below). The eight pilot decks are `STRONG_DECKS`: what the lobby's
+pilot failed its gate twice, below). The eight pilot decks, and since 2026-11-15 a ninth from
+Moxfield (the last section), are `STRONG_DECKS`: what the lobby's
 "Strong" button deals a bot (an open seat has three "Add bot" buttons: Precon, Upgraded, Strong),
 for bots only, published with the user's go-ahead and with no stand-ins
 left (all ten missing cards were built by 2026-11-10). **A blitz doesn't deal them**: it deals the
@@ -240,3 +241,42 @@ graveyard ones (Y'shtola, Lathril, Krenko's combo pieces) trail.
 - **What a blitz deals**, at step 5. Recommended: the strong pool, once it has passed step 4, since
   blitz is where a player goes to test a deck against real opposition. Rooms keep the current
   default of precons.
+
+## A ninth deck, from Moxfield, and changed (2026-11-15)
+
+The site owner's own Ureni of the Unwritten deck, "Here Be Dragons" by Shaggy5405 on Moxfield
+(https://moxfield.com/decks/WIiaiQJlOEuEkYAPH9jmvQ), joined the pool the day Ureni left the
+Temur Roar precon's command zone for being too strong there (`upgraded-decks.md`). It breaks
+two of this plan's rules, on its creator's own word, and is the only deck that may:
+
+- **It isn't from Archidekt.** `DeckCredit` takes a `url` in place of an Archidekt id, the
+  About page links it, and its text says Archidekt or Moxfield. The list is hand-written in
+  `sample-decks.ts` (`houseStrongDecks`), not generated: the generator still reads only the
+  Archidekt lists.
+- **It isn't played exactly as listed** (`credit.changed`, which the About page prints). For
+  the bots' sake: Mirror Room // Fractured Realm, Virtue of Knowledge and Dracogenesis became
+  Ancient Copper Dragon, Ancient Silver Dragon and Klauth, Unrivaled Ancient; and the eight
+  lands that enter tapped and six basics became the upgraded decks' mana base (the three
+  original duals, the other two shocks, the Triome, three fetches, the three bond lands, Cavern
+  of Souls and Reflecting Pool). "No altered lists" stands for every list under another
+  person's name.
+
+**Does it hold its own?** The nine strong decks among themselves (`deck-winrates.mjs --pool
+strong-only`, new), v2 in every seat at the live clock, 52 four-player games:
+
+| deck | games | wins | win % |
+|---|---|---|---|
+| Ureni by Shaggy5405 | 20 | 9 | 45% |
+| Edgar Markov by Ozymandias- | 24 | 9 | 38% |
+| Pantlaza by DeltaCubes20 | 24 | 7 | 29% |
+| The Ur-Dragon by Lat-er-alus | 24 | 6 | 25% |
+| Giada by SmokyCashew01 | 24 | 5 | 21% |
+| Atraxa by pmaddox | 24 | 5 | 21% |
+| Krenko by MagicApple | 20 | 4 | 20% |
+| Y'shtola by Scorge | 24 | 4 | 17% |
+| Lathril by joedf | 24 | 1 | 4% |
+
+It does, and more: top of the pool, winning on turn 27 on average, though twenty games put
+its rate anywhere from 26% to 66%. A board of big fliers is what v2 plays best
+(`upgraded-decks.md` says the same of Temur Roar). A first run of 39 games at 14 workers, too
+many for clocked games, had it at 45% as well.

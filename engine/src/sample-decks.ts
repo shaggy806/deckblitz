@@ -145,8 +145,13 @@ function precon(deck: {
 export const SAMPLE_DECKS: readonly SampleDeck[] = [
   precon({
     name: "Temur Roar",
-    commander: "Ureni of the Unwritten",
-    description: "Temur Dragons: ramp, then Ureni digs Dragons out of the library onto the battlefield.",
+    // Eshki, the precon's second commander, since 2026-11-15 (the user's
+    // call): with Ureni in the command zone this deck won its pod by round
+    // six, cheating Dragons in from the fourth turn (71% in the 2026-10-03
+    // deck-against-deck run), and so did its upgrade. Ureni is in the 99 now,
+    // and leads a strong deck of its own (`houseStrongDecks`).
+    commander: "Eshki, Temur's Roar",
+    description: "Temur Dragons: ramp, and Eshki grows, draws and burns as the big creatures are cast.",
     printed: [
       ["Arcane Signet", 1],
       ["Atarka, World Render", 1],
@@ -169,7 +174,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Dragonmaster Outcast", 1],
       ["Elemental Bond", 1],
       ["Encroaching Dragonstorm", 1],
-      ["Eshki, Temur's Roar", 1],
       ["Evolving Wilds", 1],
       ["Exotic Orchard", 1],
       ["Farseek", 1],
@@ -230,6 +234,7 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Territorial Hellkite", 1],
       ["Thunderbreak Regent", 1],
       ["Thundermane Dragon", 1],
+      ["Ureni of the Unwritten", 1],
       ["Vengeful Ancestor", 1],
       ["Verix Bladewing", 1],
       ["Whirlwing Stormbrood", 1],
@@ -1479,28 +1484,44 @@ export const botPool = (pool: readonly SampleDeck[]): readonly SampleDeck[] => p
  */
 export const UPGRADED_DECKS: readonly SampleDeck[] = [
   upgraded("Temur Roar", {
-    description: "Ureni's Dragons on duals, shocks and fetches, with more two-mana ramp, haste and the strongest Dragons.",
+    // Rebuilt around Eshki on 2026-11-15, when she took the command zone
+    // (the user: "we need an overhaul at the upgraded level"). She grows with
+    // each creature cast, draws for one of power 4 and burns the table for
+    // one of power 6, so the upgrade is cheap fat bodies, cost reducers and
+    // creature-cast card draw, where it had been ramp to Ureni and the
+    // Dragon payoffs she cheated in. Ureni herself leaves this list (she
+    // leads a strong deck now), as do Utvara Hellkite, Scourge of Valkas,
+    // Ganax, Savage Ventmaw, Dragonspeaker Shaman and Bloomvine Regent; the
+    // precon's own cheap big Dragons the old upgrade cut (Gadrak, Territorial
+    // Hellkite, Hellkite Courser, Glorybringer) stay. The mana base is the
+    // same.
+    description: "Eshki's big creatures on duals, shocks and fetches: cheap fat bodies and cost reducers, so each creature cast grows her, draws and burns the table.",
     cards: [
       ["Stormshriek Feral", "Temur Battlecrier"],
-      ["Zenith Festival", "Miirym, Sentinel Wyrm"],
+      ["Zenith Festival", "Goreclaw, Terror of Qal Sisma"],
       ["Rapacious Dragon", "Garruk's Uprising"],
-      ["Draconic Lore", "Bloomvine Regent"],
-      ["Gadrak, the Crown-Scourge", "Cultivate"],
-      ["Taurean Mauler", "Dragonspeaker Shaman"],
-      ["Harbinger of the Hunt", "Rhythm of the Wild"],
+      ["Draconic Lore", "Beast Whisperer"],
+      ["Taurean Mauler", "Lovestruck Beast"],
+      ["Dragonmaster Outcast", "Surrak, the Hunt Caller"],
       ["Skarrgan Hellkite", "Terror of the Peaks"],
       ["Verix Bladewing", "Drakuseth, Maw of Flames"],
       ["Vengeful Ancestor", "Old Gnawbone"],
-      ["Storm's Wrath", "Goreclaw, Terror of Qal Sisma"],
-      ["Glorybringer", "Utvara Hellkite"],
-      ["Steel Hellkite", "Ganax, Astral Hunter"],
-      ["Nesting Dragon", "Nature's Lore"],
-      ["Hellkite Courser", "Savage Ventmaw"],
+      ["Storm's Wrath", "Elder Gargaroth"],
+      ["Steel Hellkite", "Etali, Primal Storm"],
+      ["Harbinger of the Hunt", "Quartzwood Crasher"],
+      ["Keiga, the Tide Star", "Carnage Tyrant"],
+      ["Ureni of the Unwritten", "Miirym, Sentinel Wyrm"],
+      ["Nogi, Draco-Zealot", "Twinflame Tyrant"],
       ["Opportunistic Dragon", "Ancient Copper Dragon"],
-      ["Stormbreath Dragon", "Scourge of Valkas"],
-      ["Spit Flame", "Goldspan Dragon"],
+      ["Stormbreath Dragon", "Goldspan Dragon"],
+      ["Selvala's Stampede", "Selvala, Heart of the Wilds"],
+      ["Spit Flame", "Rishkar's Expertise"],
+      ["Will of the Temur", "Return of the Wildspeaker"],
+      ["Reflections of Littjara", "Rhythm of the Wild"],
+      ["Dragon's Hoard", "Lightning Greaves"],
+      ["Nesting Dragon", "Nature's Lore"],
       ["Breaching Dragonstorm", "Three Visits"],
-      ["Territorial Hellkite", "Twinflame Tyrant"],
+      ["Migration Path", "Cultivate"],
       ["Frontier Siege", "Birds of Paradise"],
     ],
     lands: [
@@ -2136,14 +2157,150 @@ export const STARTER_DECKS: readonly SampleDeck[] = [...SAMPLE_DECKS, ...UPGRADE
  * The strong decks: real bracket 4 decks that players built on Archidekt,
  * each exactly as its creator built it and credited to them, in its name
  * ("Edgar Markov by Ozymandias-") and its `credit` (the About page links each
- * one). Generated from the lists the user copied by hand
+ * one), and after them one from Moxfield (`houseStrongDecks`). The
+ * Archidekt ones are generated from the lists the user copied by hand
  * (`scripts/gen-strong-decks.mjs`; nothing may fetch from Archidekt). A third
  * pool a room's host can deal a bot from (the lobby's "Strong" button), and
  * only that (the user's call, 2026-11-11): a blitz deals the upgraded precons, and
  * these aren't starter decks, so the deck builder and the deck pickers don't
  * offer them. `docs/plans/strong-bot-decks.md`.
  */
-export const STRONG_DECKS: readonly SampleDeck[] = STRONG_DECK_DATA.map((deck) => ({
-  ...precon(deck),
-  credit: deck.credit,
-}));
+export const STRONG_DECKS: readonly SampleDeck[] = [
+  ...STRONG_DECK_DATA.map((deck) => ({
+    ...precon(deck),
+    credit: deck.credit,
+  })),
+  ...houseStrongDecks(),
+];
+
+/**
+ * Strong decks from outside the generated Archidekt lists: one so far.
+ *
+ * **Ureni** (2026-11-15) is the site owner's own deck, "Here Be Dragons" on
+ * Moxfield, credited there (`credit.url`). It is here because Ureni left the
+ * Temur Roar precon's command zone for being too strong in it. Unlike the
+ * others it is not played exactly as listed (`credit.changed`), on its
+ * creator's own word, for the bots' sake: Mirror Room // Fractured Realm,
+ * Virtue of Knowledge and Dracogenesis are Ancient Copper Dragon, Ancient
+ * Silver Dragon and Klauth, Unrivaled Ancient (cards the bots use badly, for
+ * Dragons they use well); and the mana base is the upgraded decks' (eight
+ * lands that enter tapped and six basics out, for the three original duals,
+ * the other two shocks, the Triome, three fetches, the three bond lands,
+ * Cavern of Souls and Reflecting Pool).
+ */
+function houseStrongDecks(): SampleDeck[] {
+  const hereBeDragons = (deck: SampleDeck): SampleDeck => ({
+    ...deck,
+    credit: {
+      author: "Shaggy5405",
+      title: "Here Be Dragons",
+      url: "https://moxfield.com/decks/WIiaiQJlOEuEkYAPH9jmvQ",
+      changed: "three cards swapped for Dragons the bots play better, and a stronger mana base",
+      taken: "2026-11-15",
+    },
+  });
+  return [
+    hereBeDragons(precon({
+      name: "Ureni by Shaggy5405",
+      commander: "Ureni of the Unwritten",
+      description: "A real deck, \"Here Be Dragons\", built by Shaggy5405 on Moxfield: ramp to Ureni, who digs Dragons out of the library onto the battlefield.",
+      printed: [
+        ["An Offer You Can't Refuse", 1],
+        ["Ancient Copper Dragon", 1],
+        ["Ancient Silver Dragon", 1],
+        ["Arcane Signet", 1],
+        ["Atarka, World Render", 1],
+        ["Beast Within", 1],
+        ["Birds of Paradise", 1],
+        ["Blasphemous Act", 1],
+        ["Bloom Tender", 1],
+        ["Breeding Pool", 1],
+        ["Broodcaller Scourge", 1],
+        ["Carnelian Orb of Dragonkind", 1],
+        ["Cavern of Souls", 1],
+        ["Command Tower", 1],
+        ["Cultivate", 1],
+        ["Deceptive Frostkite", 1],
+        ["Defense of the Heart", 1],
+        ["Dragon Tempest", 1],
+        ["Dragonhawk, Fate's Tempest", 1],
+        ["Dragonlord Atarka", 1],
+        ["Dragonspeaker Shaman", 1],
+        ["Encroaching Dragonstorm", 1],
+        ["Essence Flux", 1],
+        ["Exotic Orchard", 1],
+        ["Fanatic of Rhonas", 1],
+        ["Farseek", 1],
+        ["Flooded Grove", 1],
+        ["Forest", 3],
+        ["Frontier Siege", 1],
+        ["Frostcliff Siege", 1],
+        ["Ganax, Astral Hunter", 1],
+        ["Garruk's Uprising", 1],
+        ["Genesis Ultimatum", 1],
+        ["Goldspan Dragon", 1],
+        ["Haven of the Spirit Dragon", 1],
+        ["Hellkite Courser", 1],
+        ["Hellkite Tyrant", 1],
+        ["Heroic Intervention", 1],
+        ["Hinterland Harbor", 1],
+        ["Incinerator of the Guilty", 1],
+        ["Island", 2],
+        ["Karplusan Forest", 1],
+        ["Kessig Wolf Run", 1],
+        ["Ketria Triome", 1],
+        ["Kiora, Behemoth Beckoner", 1],
+        ["Klauth, Unrivaled Ancient", 1],
+        ["Kodama's Reach", 1],
+        ["Last March of the Ents", 1],
+        ["Lathliss, Dragon Queen", 1],
+        ["Lightning Greaves", 1],
+        ["Llanowar Elves", 1],
+        ["Magmaquake", 1],
+        ["Marang River Regent", 1],
+        ["Miirym, Sentinel Wyrm", 1],
+        ["Misty Rainforest", 1],
+        ["Mossfire Valley", 1],
+        ["Mountain", 3],
+        ["Nature's Lore", 1],
+        ["Old Gnawbone", 1],
+        ["Rampant Growth", 1],
+        ["Rapid Hybridization", 1],
+        ["Reflecting Pool", 1],
+        ["Rejuvenating Springs", 1],
+        ["Rhythm of the Wild", 1],
+        ["Rockfall Vale", 1],
+        ["Roiling Dragonstorm", 1],
+        ["Rootbound Crag", 1],
+        ["Sakura-Tribe Elder", 1],
+        ["Sarkhan, Soul Aflame", 1],
+        ["Scalding Tarn", 1],
+        ["Scourge of Valkas", 1],
+        ["Selvala, Heart of the Wilds", 1],
+        ["Shivan Reef", 1],
+        ["Smuggler's Surprise", 1],
+        ["Sol Ring", 1],
+        ["Spire Garden", 1],
+        ["Starfield Vocalist", 1],
+        ["Steam Vents", 1],
+        ["Stomping Ground", 1],
+        ["Sulfur Falls", 1],
+        ["Taiga", 1],
+        ["Temple of the Dragon Queen", 1],
+        ["Temur Ascendancy", 1],
+        ["Temur Battlecrier", 1],
+        ["Terror of the Peaks", 1],
+        ["Training Center", 1],
+        ["Tropical Island", 1],
+        ["Ureni, the Song Unending", 1],
+        ["Urza's Incubator", 1],
+        ["Utvara Hellkite", 1],
+        ["Volcanic Island", 1],
+        ["Wooded Foothills", 1],
+        ["World War Hulk", 1],
+        ["Yavimaya Coast", 1],
+      ],
+      substitutions: [],
+    })),
+  ];
+}

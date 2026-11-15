@@ -98,13 +98,20 @@ describe("STRONG_DECKS", () => {
         expect(result.legal).toBe(true);
       });
 
-      it("credits its creator, with the deck's Archidekt page", () => {
+      it("credits its creator, with the deck's page", () => {
         expect(deck.credit?.author).toBeTruthy();
-        expect(deck.credit?.archidektId).toBeGreaterThan(0);
         expect(deck.name).toContain(`by ${deck.credit?.author}`);
+        // An Archidekt deck by its id; one from elsewhere by its address,
+        // and only that one may differ from its creator's list.
+        if (deck.credit?.url === undefined) {
+          expect(deck.credit?.archidektId).toBeGreaterThan(0);
+          expect(deck.credit?.changed).toBeUndefined();
+        } else {
+          expect(deck.credit.url).toMatch(/^https:\/\/moxfield\.com\/decks\/[\w-]+$/);
+        }
       });
 
-      it("plays its creator's list exactly: no stand-ins", () => {
+      it("plays its list whole: no stand-ins", () => {
         expect(deck.printed).toHaveLength(99);
         expect(deck.substitutions).toEqual([]);
         expect(deck.cards).toEqual(deck.printed);

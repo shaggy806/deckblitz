@@ -2,12 +2,18 @@
 // See docs/plans/strong-bot-decks.md.
 
 export interface DeckCredit {
-  /** The creator's Archidekt username. */
+  /** The creator's username where the deck is shared. */
   readonly author: string;
   /** The creator's own title for the deck. */
   readonly title: string;
-  /** Its page is https://archidekt.com/decks/<id>. */
-  readonly archidektId: number;
+  /** Its page is https://archidekt.com/decks/<id>; absent for a deck shared
+   * somewhere else (`url`). */
+  readonly archidektId?: number;
+  /** The deck's page, when it isn't on Archidekt. */
+  readonly url?: string;
+  /** What differs from the creator's list, for a deck not played exactly as
+   * listed: only ever with its creator's word (`houseStrongDecks`). */
+  readonly changed?: string;
   /** When the list was copied: their page shows their latest version. */
   readonly taken: string;
 }

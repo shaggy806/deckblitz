@@ -3,8 +3,9 @@
 // upgraded` the precons beside their upgrades (`UPGRADED_DECKS`), to measure
 // what an upgrade is worth; with `--pool blitz` the upgrades alone, the
 // field a blitz deals from, to see how even it is; with `--pool upgrades`
-// every upgrade, those kept from the bots too; or with `--pool strong`
-// the real players' decks (`STRONG_DECKS`) against those upgrades.
+// every upgrade, those kept from the bots too; with `--pool strong`
+// the real players' decks (`STRONG_DECKS`) against those upgrades; or with
+// `--pool strong-only` the strong decks among themselves.
 import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS, botPool } from "../dist/index.js";
 
 const POOLS = {
@@ -15,6 +16,9 @@ const POOLS = {
   // `upgraded-decks.md`'s Run 3 measured, for comparing against it.
   upgrades: () => [...UPGRADED_DECKS],
   strong: () => [...UPGRADED_DECKS, ...STRONG_DECKS],
+  // The strong decks among themselves: whether one holds its own in the pool
+  // a host deals "Strong" bots from.
+  "strong-only": () => [...STRONG_DECKS],
 };
 
 export const DECK_POOL = POOLS[process.env.DECK_POOL]?.() ?? SAMPLE_DECKS;

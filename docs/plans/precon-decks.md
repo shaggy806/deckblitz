@@ -28,7 +28,7 @@ Tarkir: Dragonstorm decks to replace the 2022 Starter Commander Decks as the bot
 
 | deck | commander | plan | cards left to author |
 |---|---|---|---|
-| Temur Roar | Ureni of the Unwritten | Dragons, dug out of the library by Ureni | 18 |
+| Temur Roar | Ureni of the Unwritten (Eshki, Temur's Roar since 2026-11-15, the precon's second commander: Ureni's deck won its pods too easily) | Dragons, dug out of the library by Ureni | 18 |
 | Sultai Arisen | Teval, the Balanced Scale | self-mill, lands and creatures back from the graveyard | 25 |
 | Abzan Armor | Felothar the Steadfast | walls and toughness, dealing damage by toughness | 15 |
 | Mardu Surge | Zurgo Stormrender | attacking tokens, cashed in as they leave | 12 |
