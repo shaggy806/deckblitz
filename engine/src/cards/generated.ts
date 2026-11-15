@@ -3299,6 +3299,7 @@ import _poolBraceForImpact from "./pool/brace-for-impact.js";
 import _poolBrackishBlunder from "./pool/brackish-blunder.js";
 import _poolBrackishTrudge from "./pool/brackish-trudge.js";
 import _poolBrackwaterElemental from "./pool/brackwater-elemental.js";
+import _poolBradBoimlerEagerEnsign from "./pool/brad-boimler-eager-ensign.js";
 import _poolBragoKingEternal from "./pool/brago-king-eternal.js";
 import _poolBraidOfFire from "./pool/braid-of-fire.js";
 import _poolBraidsArisenNightmare from "./pool/braids-arisen-nightmare.js";
@@ -7330,6 +7331,7 @@ import _poolDownwindAmbusher from "./pool/downwind-ambusher.js";
 import _poolDowsingDagger from "./pool/dowsing-dagger.js";
 import _poolDowsingDevice from "./pool/dowsing-device.js";
 import _poolDowsingShaman from "./pool/dowsing-shaman.js";
+import _poolDrBeverlyCrusher from "./pool/dr-beverly-crusher.js";
 import _poolDrEggman from "./pool/dr-eggman.js";
 import _poolDrJosephMbenga from "./pool/dr-joseph-mbenga.js";
 import _poolDrLeonardBonesMccoy from "./pool/dr-leonard-bones-mccoy.js";
@@ -16407,6 +16409,7 @@ import _poolLuxknightBreacher from "./pool/luxknight-breacher.js";
 import _poolLuxuriousLibation from "./pool/luxurious-libation.js";
 import _poolLuxuriousLocomotive from "./pool/luxurious-locomotive.js";
 import _poolLuxurySuite from "./pool/luxury-suite.js";
+import _poolLwaxanaTroiCharmingGuest from "./pool/lwaxana-troi-charming-guest.js";
 import _poolLychguard from "./pool/lychguard.js";
 import _poolLydiaFrye from "./pool/lydia-frye.js";
 import _poolLyevDecree from "./pool/lyev-decree.js";
@@ -28042,6 +28045,7 @@ import _poolTheChainVeil from "./pool/the-chain-veil.js";
 import _poolTheChaseIsOn from "./pool/the-chase-is-on.js";
 import _poolTheChiefWarg from "./pool/the-chief-warg.js";
 import _poolTheCircleOfLoyalty from "./pool/the-circle-of-loyalty.js";
+import _poolTheCityOnTheEdgeOfForever from "./pool/the-city-on-the-edge-of-forever.js";
 import _poolTheCloneSaga from "./pool/the-clone-saga.js";
 import _poolTheCloningOfShredder from "./pool/the-cloning-of-shredder.js";
 import _poolTheComingOfGalactus from "./pool/the-coming-of-galactus.js";
@@ -32744,6 +32748,7 @@ import _tokensHumanRogueToken12HastePing from "./tokens/human-rogue-token-1-2-ha
 import _tokensHumanRogueToken from "./tokens/human-rogue-token.js";
 import _tokensHumanSoldierTokenTorensFistOfTheAngels from "./tokens/human-soldier-token-torens-fist-of-the-angels.js";
 import _tokensHumanSoldierToken from "./tokens/human-soldier-token.js";
+import _tokensHumanTokenCantPhaseIn from "./tokens/human-token-cant-phase-in.js";
 import _tokensHumanToken from "./tokens/human-token.js";
 import _tokensHumanWarriorToken31TrampleHaste from "./tokens/human-warrior-token-3-1-trample-haste.js";
 import _tokensHumanWarriorToken from "./tokens/human-warrior-token.js";
@@ -36484,6 +36489,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrackishBlunder,
   _poolBrackishTrudge,
   _poolBrackwaterElemental,
+  _poolBradBoimlerEagerEnsign,
   _poolBragoKingEternal,
   _poolBraidOfFire,
   _poolBraidsArisenNightmare,
@@ -40515,6 +40521,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDowsingDagger,
   _poolDowsingDevice,
   _poolDowsingShaman,
+  _poolDrBeverlyCrusher,
   _poolDrEggman,
   _poolDrJosephMbenga,
   _poolDrLeonardBonesMccoy,
@@ -49592,6 +49599,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLuxuriousLibation,
   _poolLuxuriousLocomotive,
   _poolLuxurySuite,
+  _poolLwaxanaTroiCharmingGuest,
   _poolLychguard,
   _poolLydiaFrye,
   _poolLyevDecree,
@@ -61227,6 +61235,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheChaseIsOn,
   _poolTheChiefWarg,
   _poolTheCircleOfLoyalty,
+  _poolTheCityOnTheEdgeOfForever,
   _poolTheCloneSaga,
   _poolTheCloningOfShredder,
   _poolTheComingOfGalactus,
@@ -65935,6 +65944,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensHumanRogueToken,
   _tokensHumanSoldierTokenTorensFistOfTheAngels,
   _tokensHumanSoldierToken,
+  _tokensHumanTokenCantPhaseIn,
   _tokensHumanToken,
   _tokensHumanWarriorToken31TrampleHaste,
   _tokensHumanWarriorToken,
@@ -69682,6 +69692,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brackish-blunder": _poolBrackishBlunder,
   "pool/brackish-trudge": _poolBrackishTrudge,
   "pool/brackwater-elemental": _poolBrackwaterElemental,
+  "pool/brad-boimler-eager-ensign": _poolBradBoimlerEagerEnsign,
   "pool/brago-king-eternal": _poolBragoKingEternal,
   "pool/braid-of-fire": _poolBraidOfFire,
   "pool/braids-arisen-nightmare": _poolBraidsArisenNightmare,
@@ -73713,6 +73724,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dowsing-dagger": _poolDowsingDagger,
   "pool/dowsing-device": _poolDowsingDevice,
   "pool/dowsing-shaman": _poolDowsingShaman,
+  "pool/dr-beverly-crusher": _poolDrBeverlyCrusher,
   "pool/dr-eggman": _poolDrEggman,
   "pool/dr-joseph-mbenga": _poolDrJosephMbenga,
   "pool/dr-leonard-bones-mccoy": _poolDrLeonardBonesMccoy,
@@ -82790,6 +82802,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/luxurious-libation": _poolLuxuriousLibation,
   "pool/luxurious-locomotive": _poolLuxuriousLocomotive,
   "pool/luxury-suite": _poolLuxurySuite,
+  "pool/lwaxana-troi-charming-guest": _poolLwaxanaTroiCharmingGuest,
   "pool/lychguard": _poolLychguard,
   "pool/lydia-frye": _poolLydiaFrye,
   "pool/lyev-decree": _poolLyevDecree,
@@ -94425,6 +94438,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-chase-is-on": _poolTheChaseIsOn,
   "pool/the-chief-warg": _poolTheChiefWarg,
   "pool/the-circle-of-loyalty": _poolTheCircleOfLoyalty,
+  "pool/the-city-on-the-edge-of-forever": _poolTheCityOnTheEdgeOfForever,
   "pool/the-clone-saga": _poolTheCloneSaga,
   "pool/the-cloning-of-shredder": _poolTheCloningOfShredder,
   "pool/the-coming-of-galactus": _poolTheComingOfGalactus,
@@ -99127,6 +99141,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/human-rogue-token": _tokensHumanRogueToken,
   "tokens/human-soldier-token-torens-fist-of-the-angels": _tokensHumanSoldierTokenTorensFistOfTheAngels,
   "tokens/human-soldier-token": _tokensHumanSoldierToken,
+  "tokens/human-token-cant-phase-in": _tokensHumanTokenCantPhaseIn,
   "tokens/human-token": _tokensHumanToken,
   "tokens/human-warrior-token-3-1-trample-haste": _tokensHumanWarriorToken31TrampleHaste,
   "tokens/human-warrior-token": _tokensHumanWarriorToken,

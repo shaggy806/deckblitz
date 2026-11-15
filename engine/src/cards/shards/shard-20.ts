@@ -1085,6 +1085,7 @@ import _tokensGiantWizardToken from "../tokens/giant-wizard-token.js";
 import _tokensGnomeSoldierToken from "../tokens/gnome-soldier-token.js";
 import _tokensGreenCatToken22Haste from "../tokens/green-cat-token-2-2-haste.js";
 import _tokensGreenDogToken11 from "../tokens/green-dog-token-1-1.js";
+import _tokensHumanTokenCantPhaseIn from "../tokens/human-token-cant-phase-in.js";
 import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
 import _tokensKorSoldierToken from "../tokens/kor-soldier-token.js";
@@ -2183,6 +2184,7 @@ const shard: CardShard = {
     _tokensGnomeSoldierToken,
     _tokensGreenCatToken22Haste,
     _tokensGreenDogToken11,
+    _tokensHumanTokenCantPhaseIn,
     _tokensIllusionTokenMinn,
     _tokensInsectTokenBlackGreen,
     _tokensKorSoldierToken,

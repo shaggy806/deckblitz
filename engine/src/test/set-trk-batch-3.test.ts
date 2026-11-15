@@ -415,3 +415,78 @@ describe("Romulan Bird-of-Prey", () => {
     expect(counters(game, bird, "charge")).toBe(8);
   });
 });
+
+describe("The City on the Edge of Forever", () => {
+  it("phases out every artifact and creature, which stay out while the Human remains", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const relic = spawn(game, "Darksteel Relic");
+    enter(game, "The City on the Edge of Forever");
+    expect(zone(game, bears)).toBe("phased-out");
+    expect(zone(game, relic)).toBe("phased-out");
+    expect(tokensNamed(game, "Human Token (Permanents can't phase in)")).toBe(1);
+    nextTurn(game); // bob's untap step: his Bears can't phase in
+    expect(zone(game, bears)).toBe("phased-out");
+  });
+
+  it("III: sacrifices a creature token for 5 life", () => {
+    const { game } = table();
+    spawn(game, "Soldier Token");
+    const city = enter(game, "The City on the Edge of Forever");
+    game.state.objects[city].counters.lore = 2;
+    toStep(game, "precombat-main"); // the next draw step adds the third lore counter
+    settle(game);
+    expect(tokensNamed(game, "Soldier Token")).toBe(0);
+    expect(game.state.players[A].life).toBeGreaterThanOrEqual(20 + 5 - 2);
+  });
+});
+
+describe("Dr. Beverly Crusher", () => {
+  it("makes her own life-gain trigger happen an additional time", () => {
+    const { game } = table();
+    const crusher = spawn(game, "Dr. Beverly Crusher");
+    game.debugApplyEffect(A, { kind: "gain-life", amount: 1 }, []);
+    settle(game);
+    expect(counters(game, crusher, "+1/+1")).toBe(2);
+  });
+});
+
+describe("Brad Boimler, Eager Ensign", () => {
+  it("becoming tapped makes counters on your permanents one more until end of turn", () => {
+    const { game } = table();
+    const brad = spawn(game, "Brad Boimler, Eager Ensign");
+    const bears = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    addCounters(game, bears, "+1/+1", 1);
+    expect(counters(game, bears, "+1/+1")).toBe(1);
+    game.debugApplyEffect(A, { kind: "tap", target: 0 }, [ref(brad)]);
+    settle(game);
+    addCounters(game, bears, "+1/+1", 1);
+    expect(counters(game, bears, "+1/+1")).toBe(3);
+    addCounters(game, theirs, "+1/+1", 1);
+    expect(counters(game, theirs, "+1/+1")).toBe(1);
+    nextTurn(game);
+    addCounters(game, bears, "+1/+1", 1);
+    expect(counters(game, bears, "+1/+1")).toBe(4);
+  });
+});
+
+describe("Lwaxana Troi, Charming Guest", () => {
+  it("doubles the chosen creature's triggers while she stays tapped", () => {
+    const { game, a } = table();
+    const lwaxana = spawn(game, "Lwaxana Troi, Charming Guest");
+    const julian = spawn(game, "Julian Bashir, Frontier Doctor"); // seek out: a counter on himself
+    lands(game, "Mountain", 2);
+    pickTargets(a, julian);
+    activate(game, lwaxana, 0, { targets: [ref(julian)] });
+    game.debugApplyEffect(A, { kind: "draw", amount: 2 }, []);
+    settle(game);
+    expect(counters(game, julian, "+1/+1")).toBe(2);
+    a.choosePermanentsFn = () => []; // her untap step: she untaps, and it ends
+    toStep(game, "precombat-main");
+    expect(game.state.objects[lwaxana].tapped).toBe(false);
+    game.debugApplyEffect(A, { kind: "draw", amount: 2 }, []);
+    settle(game);
+    expect(counters(game, julian, "+1/+1")).toBe(3);
+  });
+});

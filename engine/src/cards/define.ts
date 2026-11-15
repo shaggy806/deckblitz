@@ -2218,6 +2218,9 @@ export type TriggerCause =
   | "draws"
   | "turned-face-up"
   | "room"
+  /** The static's controller gaining life (rule 119.9 — Dr. Beverly Crusher's "if you
+   * gaining life causes a triggered ability … to trigger"). No subject: no `filter`. */
+  | "you-gain-life"
   | TriggerEventName;
 
 export interface StaticAbility extends TypePatch, ColorPatch {

@@ -114,6 +114,7 @@ import _poolBorosGuildgate from "../pool/boros-guildgate.js";
 import _poolBorrowedTime from "../pool/borrowed-time.js";
 import _poolBottleGnomes from "../pool/bottle-gnomes.js";
 import _poolBoundaryLandsRanger from "../pool/boundary-lands-ranger.js";
+import _poolBradBoimlerEagerEnsign from "../pool/brad-boimler-eager-ensign.js";
 import _poolBrawlersPlate from "../pool/brawlers-plate.js";
 import _poolBrazenFreebooter from "../pool/brazen-freebooter.js";
 import _poolBreathOfLife from "../pool/breath-of-life.js";
@@ -252,6 +253,7 @@ import _poolDonate from "../pool/donate.js";
 import _poolDoppelgang from "../pool/doppelgang.js";
 import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
+import _poolDrBeverlyCrusher from "../pool/dr-beverly-crusher.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
 import _poolDragonsHerald from "../pool/dragons-herald.js";
 import _poolDralnusCrusade from "../pool/dralnus-crusade.js";
@@ -1154,6 +1156,7 @@ const shard: CardShard = {
     _poolBorrowedTime,
     _poolBottleGnomes,
     _poolBoundaryLandsRanger,
+    _poolBradBoimlerEagerEnsign,
     _poolBrawlersPlate,
     _poolBrazenFreebooter,
     _poolBreathOfLife,
@@ -1292,6 +1295,7 @@ const shard: CardShard = {
     _poolDoppelgang,
     _poolDovinsDismissal,
     _poolDownInTheValley,
+    _poolDrBeverlyCrusher,
     _poolDragonbackAssault,
     _poolDragonsHerald,
     _poolDralnusCrusade,

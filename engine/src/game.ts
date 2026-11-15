@@ -18669,6 +18669,8 @@ export class Game {
           return event.type === "permanent-turned-face-up" ? [event.object] : undefined;
         case "room":
           return undefined;
+        case "you-gain-life":
+          return event.type === "life-changed" && event.delta > 0 && event.player === controller ? null : undefined;
         default: {
           const held = triggerEventSubjects(cause, event);
           return held === undefined ? undefined : held.objects ?? null;
@@ -18756,7 +18758,9 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const doubler = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,doubler)) continue;
-      for (const ability of this.registry.get(rulesTextName(doubler)).static) {
+      // Its own statics and those granted it (Lwaxana Troi's "for as long as
+      // she remains tapped").
+      for (const ability of this.staticsOfSource(doubler)) {
         const d = ability.doubleTriggersOf;
         if (d === undefined || !this.staticActive(doubler, ability)) continue;
         // "A triggered ability of equipped creature" (Wizard's Staff): the
@@ -65228,6 +65232,30 @@ controlledBy,
         }
       }
     }
+    // A resolved one that lasts (rule 611.2c), from its controller's side,
+    // its source gone or not — Brad Boimler's "until end of turn, if one or
+    // more counters would be put on a permanent you control, that many plus
+    // one …".
+    this.state.activeReplacements.forEach((active, index) => {
+      const r = active.replacement;
+      if (r.event !== "would-add-counter" || active.next === true || active.left !== undefined) return;
+      if (asCost && r.byEffectOnly === true) return;
+      if (r.counterKind !== undefined && r.counterKind !== kind) return;
+      if (this.state.players[active.owner]?.hasLost === true) return;
+      const holder = { ...(this.state.objects[active.source] ?? { id: active.source }), controller: active.owner } as GameObject;
+      if (r.whoPuts !== undefined && (r.whoPuts === "you") !== (by === active.owner)) return;
+      if (!reaches(r, holder, active.source)) return;
+      const change = r.instead.modify;
+      steps.push({
+        key: `active:${index}`,
+        by: active.source,
+        change: {
+          ...(change.times !== undefined ? { times: change.times } : {}),
+          ...(change.plus !== undefined ? { plus: this.replacementAmount(change.plus, holder) } : {}),
+          ...(change.half !== undefined ? { half: true as const } : {}),
+        },
+      });
+    });
     return steps;
   }
 

@@ -376,6 +376,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Human Soldier Token",
   "Human Soldier Token (Torens, Fist of the Angels)",
   "Human Token",
+  "Human Token (Permanents can't phase in)",
   "Human Warrior Token",
   "Human Wizard Token",
   "Hydra Token",

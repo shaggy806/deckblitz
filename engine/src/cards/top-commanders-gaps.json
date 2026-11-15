@@ -2677,7 +2677,12 @@
   "effect:drawn-this-way-count",
   "trigger:activates-ability-source-any-zone",
   "amount:permanents-you-put-counters-on-this-turn",
-  "effect:delayed-return-sacrificed-card"
+  "effect:delayed-return-sacrificed-card",
+  "static:life-gain-trigger-doubling",
+  "effect:grant-replacement-until-eot",
+  "duration:while-source-tapped-since-activation",
+  "effect:grant-trigger-doubling",
+  "static:permanents-cant-phase-in"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -6503,7 +6503,8 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   helper's ability, printed or granted) doesn't trigger as it becomes a target.
 - `doubleTriggers: { cause, filter? }` — "if [something] causes a triggered
   ability of a permanent you control to trigger, that ability triggers an
-  additional time", for **any** trigger that event causes. `cause` is
+  additional time", for **any** trigger that event causes (`"you-gain-life"`: Dr. Beverly
+  Crusher's "if you gaining life causes"). `cause` is
   `"enters"` (Elesh Norn, Mother of Machines), `"attacks"` (Isshin — a
   per-attacker or a whole-declaration trigger; leave `filter` off for it),
   `"combat-damage-to-player"` (Felix Five-Boots), `"cast-or-copy"` (Veyran,
@@ -6522,7 +6523,8 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   emblem's ability is never doubled. A doubler can be granted
   (`grantsStatic`): it's read off the creature it's granted to, and a death
   at the same time looks back at it as that creature last had it.
-- `doubleTriggersOf: { filter?, selfAndEquipment?, others?, spells?, host? }` — the same, keyed on
+- `doubleTriggersOf: { filter?, selfAndEquipment?, others?, spells?, host? }` (granted ones count: Lwaxana
+  Troi's `grant-static` of `{ filter: { isSource: true } }`, `while-source-tapped`) — the same, keyed on
   **whose** ability it is: "if a triggered ability of an Ally you control
   triggers" (Katara, the Fearless: `filter: { subtype: "Ally", controlledBy:
   "you" }`), "…of a creature you control with power 2 or less" (Delney).
@@ -7271,7 +7273,8 @@ refuses it elsewhere. **New events:** `would-lose-game` (`{ who, instead: { effe
 cards", "two or more", `"x"` the number) and `whileHandAtMost`; `would-create-token` takes `becomes: { effect, text? }` with
 `firstEachTurn` and `may` (Moonlit Meditation); `would-deal-damage` takes `ifAtLeast`.
 **A resolved replacement for a while** is `replacement-effect { replacement, duration, next?, players?, permanentsToo?, object?, fromObject? }`
-(`state.activeReplacements`): the same words as a static's, with a `PlayerDuration`. `next: true` is "the next time" (spent
+(`state.activeReplacements`): the same words as a static's, with a `PlayerDuration` (a `would-add-counter` too: Brad
+Boimler's "until end of turn … that many plus one"). `next: true` is "the next time" (spent
 when it applies, 615.8), an amount "the next N" damage (615.7); `players`, `object` and `fromObject` are what its references
 name, fixed as it resolves. Amounts in a `modify` are fixed as it resolves too; filters are read at each event, so what arrives later counts.
 An `others-enter-battlefield` one that lasts (not `next`) gives each permanent entering its `counters` and `enterAs`, its filter read from the effect's controller's side, its source gone or not — Arlinn, the Pack's Hope's "until your next turn, … each creature you control enters with an additional +1/+1 counter on it"; Zameck Guildmage's "**this turn**, each creature you control enters with …" is the same with `duration: "end-of-turn"`.
