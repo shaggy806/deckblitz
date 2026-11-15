@@ -358,6 +358,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
           title={pickingForMySeat ? 'Choose your deck' : "Choose the bot's deck"}
           roomId={game.roomId}
           includeSaved={pickingForMySeat}
+          current={pickingForMySeat ? myDeck?.name : game.seats.find((s) => s.player === pickerSeat)?.deck?.name}
           onPick={pick}
           onClose={() => setPickerSeat(null)}
         />

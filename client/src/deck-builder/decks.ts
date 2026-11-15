@@ -13,7 +13,7 @@
  * duplicating it into "my decks" first.
  */
 
-import { STARTER_DECKS, commandersOf, nameForFlavorName } from 'engine/client'
+import { STARTER_DECKS, STRONG_DECKS, commandersOf, nameForFlavorName } from 'engine/client'
 import type { SeatCommander, WireDeck } from 'protocol'
 
 export interface SavedDeck {
@@ -335,7 +335,14 @@ export function getActiveDeck(): DeckContents | null {
 export interface PickableDeck extends DeckContents {
   readonly key: string
   readonly ref: ActiveRef | null
+  /** A built-in deck's strength, which the picker groups by; a saved deck
+   * has none. */
+  readonly strength?: DeckStrength
 }
+
+/** How strong a built-in deck is: a precon as printed, its upgrade, or a real
+ * player's deck (bots only: `listStrongDecks`). */
+export type DeckStrength = 'precon' | 'upgraded' | 'strong'
 
 /** Every deck the seat-picker's popup can offer: this browser's saved decks,
  * then the starter decks — in that order, since a saved deck is more likely
@@ -359,6 +366,22 @@ export function listPickableDecks(): readonly PickableDeck[] {
       commanders: commandersOf(d),
       cards: d.cards,
       printings: d.printings,
+      strength: (d.upgradeOf !== undefined ? 'upgraded' : 'precon') as DeckStrength,
     })),
   ]
+}
+
+/** The strong decks (`engine`'s `STRONG_DECKS`), as the picker offers them
+ * for a bot's seat: real players' decks, credited on the About page, which a
+ * player's own seat and the deck builder don't offer. */
+export function listStrongDecks(): readonly PickableDeck[] {
+  return STRONG_DECKS.map((d, i) => ({
+    key: `strong:${i}`,
+    ref: null,
+    name: d.name,
+    commanders: commandersOf(d),
+    cards: d.cards,
+    printings: d.printings,
+    strength: 'strong' as DeckStrength,
+  }))
 }

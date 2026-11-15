@@ -1,4 +1,5 @@
-import { commanderPrintings, listPickableDecks } from '../deck-builder/decks.ts'
+import { useState } from 'react'
+import { commanderPrintings, listPickableDecks, listStrongDecks } from '../deck-builder/decks.ts'
 import type { PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderArt } from './CommanderArt.tsx'
 import { DeckIdentityPips } from '../ui/DeckIdentityPips.tsx'
@@ -16,23 +17,43 @@ import './lobby.css'
  * one" link, which only makes sense alongside them) — on for your own seat,
  * off for a bot's: a bot only ever plays a curated starter deck, never a
  * deck you're still building or one meant for you to actually play.
+ *
+ * The decks are in groups, one shown at a time (the user, 2026-11-15: "they
+ * should be sorted into 3 strength categories rather than a long list"):
+ * for a bot Precon, Upgraded and Strong, the strengths its "+ Bot" buttons
+ * deal from; for your own seat My decks, Precon and Upgraded (the strong
+ * decks are real players' lists, dealt to bots only). It opens on the group
+ * holding `current`, the seat's deck by name, so the choice already made is
+ * in view.
  */
 export function DeckPickerModal({
   title,
   roomId,
   includeSaved,
+  current,
   onPick,
   onClose,
 }: {
   readonly title: string
   readonly roomId: string | null
   readonly includeSaved: boolean
+  readonly current?: string | null
   readonly onPick: (deck: PickableDeck) => void
   readonly onClose: () => void
 }) {
   const decks = listPickableDecks()
-  const saved = includeSaved ? decks.filter((d) => d.key.startsWith('saved:')) : []
   const starters = decks.filter((d) => d.key.startsWith('starter:'))
+  const groups: readonly { readonly id: string; readonly label: string; readonly decks: readonly PickableDeck[] }[] = [
+    { id: 'saved', label: 'My decks', decks: includeSaved ? decks.filter((d) => d.key.startsWith('saved:')) : [] },
+    { id: 'precon', label: 'Precon', decks: starters.filter((d) => d.strength === 'precon') },
+    { id: 'upgraded', label: 'Upgraded', decks: starters.filter((d) => d.strength === 'upgraded') },
+    { id: 'strong', label: 'Strong', decks: includeSaved ? [] : listStrongDecks() },
+  ].filter((g) => g.decks.length > 0)
+  const [chosen, setChosen] = useState<string | null>(null)
+  const open =
+    groups.find((g) => g.id === chosen) ??
+    groups.find((g) => current != null && g.decks.some((d) => d.name === current)) ??
+    groups[0]
 
   return (
     <div className="deck-picker-overlay" onClick={onClose}>
@@ -43,18 +64,23 @@ export function DeckPickerModal({
             ✕
           </button>
         </div>
-        <div className="deck-picker-list">
-          {saved.length > 0 ? (
-            <>
-              <p className="deck-picker-section">My decks</p>
-              {saved.map((d) => (
-                <DeckPickerRow key={d.key} deck={d} onPick={onPick} />
-              ))}
-            </>
-          ) : null}
-          {includeSaved ? <p className="deck-picker-section">Starter decks</p> : null}
-          {starters.map((d) => (
-            <DeckPickerRow key={d.key} deck={d} onPick={onPick} />
+        <div className="deck-picker-tabs" role="tablist" aria-label="Kind of deck">
+          {groups.map((g) => (
+            <button
+              key={g.id}
+              type="button"
+              role="tab"
+              aria-selected={g === open}
+              className={`seg-option${g === open ? ' active' : ''}`}
+              onClick={() => setChosen(g.id)}
+            >
+              {g.label}
+            </button>
+          ))}
+        </div>
+        <div className="deck-picker-list" role="tabpanel">
+          {(open?.decks ?? []).map((d) => (
+            <DeckPickerRow key={d.key} deck={d} onPick={onPick} current={d.name === current} />
           ))}
         </div>
         {includeSaved ? (
@@ -73,12 +99,20 @@ export function DeckPickerModal({
 function DeckPickerRow({
   deck,
   onPick,
+  current,
 }: {
   readonly deck: PickableDeck
   readonly onPick: (deck: PickableDeck) => void
+  /** The deck the seat has now. */
+  readonly current: boolean
 }) {
   return (
-    <button type="button" className="deck-picker-row" onClick={() => onPick(deck)}>
+    <button
+      type="button"
+      className={`deck-picker-row${current ? ' current' : ''}`}
+      aria-current={current ? 'true' : undefined}
+      onClick={() => onPick(deck)}
+    >
       <CommanderArt
         commanders={commanderPrintings(deck)}
         className="deck-picker-row-art"

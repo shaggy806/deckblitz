@@ -518,7 +518,9 @@ button.seat-add-panel:hover {
   flex-direction: column;
   gap: 10px;
   width: min(420px, 100%);
-  max-height: min(640px, 90vh);
+  /* One height whichever group of decks is showing: the box, and the tabs in
+     it, would otherwise move as a short list replaced a long one. */
+  height: min(640px, 90vh);
   padding: 16px;
   background: var(--panel);
   border: 1px solid var(--border);
@@ -545,6 +547,8 @@ button.seat-add-panel:hover {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
 }
 .deck-picker-section {
@@ -566,8 +570,15 @@ button.seat-add-panel:hover {
   text-align: left;
   font: inherit;
 }
-.deck-picker-row:hover {
+.deck-picker-row:hover,
+.deck-picker-row.current {
   border-color: var(--accent);
+}
+/* the kinds of deck, one shown at a time */
+.deck-picker-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .deck-picker-row-art {
   flex: none;
