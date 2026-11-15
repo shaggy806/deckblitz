@@ -974,6 +974,11 @@ export class EvalBotController extends HeuristicBotController {
    * (`valueAimed`). `null` until that pass is scored. */
   private passOutcome: EvalOutcome | null = null;
   private passAloneOutcome: EvalOutcome | null = null;
+  /** Whether this decision's pass ends the turn dead to the crackback while
+   * a tap could matter (`tapGuard`): then that is the rollout's doing (the
+   * attack v1 makes for our seat in it), and a batch that ends the same way
+   * isn't blamed for it. */
+  private passEndsOpen = false;
 
   constructor(
     playerId: PlayerId,
@@ -1174,6 +1179,7 @@ export class EvalBotController extends HeuristicBotController {
     this.lastUnsafe = [];
     this.lastEnds = new Map();
     this.passOutcome = null;
+    this.passEndsOpen = false;
     this.passAloneOutcome = null;
     this.lastRefusedTies = [];
     // A cast payoff in play or about to be (Shiko and Narset's Flurry, a
@@ -1509,8 +1515,12 @@ export class EvalBotController extends HeuristicBotController {
         if (result.state.players[this.playerId]?.hasLost === true) continue;
         // Nor one whose activations together leave us dead to the crackback
         // where one alone didn't: read on the board the batch ends the turn
-        // on, only while a tap could matter (`tapGuard`).
-        if (this.tapGuard !== null && this.crackbackLethal(result.state, this.tapGuard.grown)) continue;
+        // on, only while a tap could matter (`tapGuard`), and not when
+        // passing ends the turn just as open (`passEndsOpen`: Lathliss's
+        // pump before combat was dropped for the attack the rollout made).
+        if (this.tapGuard !== null && !this.passEndsOpen && this.crackbackLethal(result.state, this.tapGuard.grown)) {
+          continue;
+        }
         const score = evaluateState(result.state, this.cards, this.playerId, this.weights);
         // The cost decides whether the batch is taken, and isn't kept in the
         // score: the turn plan's lines are compared with it after this, and
@@ -3000,7 +3010,10 @@ export class EvalBotController extends HeuristicBotController {
       action.type === "pass-priority" ? null : aimedAt(view.state, this.cards, this.playerId, action),
       this.passOutcome,
     );
-    if (action.type === "pass-priority") this.passOutcome = outcome;
+    if (action.type === "pass-priority") {
+      this.passOutcome = outcome;
+      this.passEndsOpen = this.tapGuard !== null && this.crackbackLethal(after, this.tapGuard.grown);
+    }
     this.trace?.(action, after, outcome.hit === undefined ? undefined : outcome);
     if (mustKill !== undefined && after.players[mustKill]?.hasLost !== true) return null;
     const value = scoreOutcome(outcome, this.weights);

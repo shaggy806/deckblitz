@@ -1091,7 +1091,10 @@ artifacts to destroy, so the search also scored "activate it twice" as one candi
 batch), by the plain evaluation, which has no crackback term: each single activation had been
 marked unsafe and the pair was taken. A batch now isn't built from an activation the search
 marked unsafe, nor taken when it ends the turn dead to the crackback while a tap could matter
-(`tapGuard`). The planner's lines had the same hole until 2026-11-10. Replayed once more, the
+(`tapGuard`), unless passing ends it just as open (`passEndsOpen`): the rollout attacks for our
+seat with v1's attack, and the first version of this check dropped Lathliss's pump before
+combat for that attack (2 of 12,774 decisions in a diff, gone with the exception). The
+planner's lines had the same hole until 2026-11-10. Replayed once more, the
 bot keeps the Soldiers home, blocks with all of them, taps them for the Shepherd after blocks
 are declared, and wins on turn 27 the game it lost on 26.
 
