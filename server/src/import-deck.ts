@@ -962,29 +962,105 @@ export function formatCheck(
  * one it lacks whose type line reads as a legendary creature — it would be
  * played as its stand-in. Each with the others it may be paired with (rule
  * 702.124), a Background of the list among them, though one never leads.
+ *
+ * Two cards the pool has pair as the deck rules say (`canPairCommanders`). A
+ * card it lacks is read from its Oracle keywords (`keywordsOf`: Scryfall's
+ * "Partner", "Partner with", "Choose a background", "Doctor's companion") and
+ * its type line, which say which family it's in but not the rest — whom a
+ * "Partner with" names, which "Partner—[text]" it is — so such a pair is
+ * offered where nothing known rules it out, as a `Commander` section's
+ * unimplemented pair is taken at its word.
  */
 export function commanderCandidates(
   cards: readonly ImportedCardReport[],
   registry: CardRegistry,
+  keywordsOf: (name: string) => readonly string[] = () => [],
 ): CommanderCandidate[] {
   const has = (name: string): boolean => registry.has(name);
+  const front = (c: ImportedCardReport): string => c.typeLine.split("//")[0];
   const leads = cards.filter((c) =>
     has(c.name)
       ? canCommandAlone(registry.get(c.name))
-      : c.found && /\blegendary\b/i.test(c.typeLine.split("//")[0]) && /\bcreature\b/i.test(c.typeLine.split("//")[0]),
+      : c.found && /\blegendary\b/i.test(front(c)) && /\bcreature\b/i.test(front(c)),
   );
+
+  /** What a card brings to a pairing (rule 702.124), as far as is known. */
+  interface Pairing {
+    readonly name: string;
+    readonly family: "partner" | "partner-with" | "partner-group" | "choose-a-background" | "doctors-companion" | null;
+    /** A "Partner with" card's named partner, a "Partner—[text]" card's
+     * text: `undefined` for a card the pool lacks. */
+    readonly detail: string | undefined;
+    readonly background: boolean;
+    readonly doctor: boolean;
+  }
+  const pairingOf = (c: ImportedCardReport): Pairing => {
+    if (has(c.name)) {
+      const def = registry.get(c.name);
+      const p = def.pairing;
+      return {
+        name: c.name,
+        family: p?.kind ?? null,
+        detail: p?.kind === "partner-with" ? p.name : p?.kind === "partner-group" ? p.group : undefined,
+        background: isBackground(def),
+        doctor: def.subtypes.includes("Time Lord") && def.subtypes.includes("Doctor"),
+      };
+    }
+    const keywords = keywordsOf(c.name).map((k) => k.toLowerCase());
+    return {
+      name: c.name,
+      family: keywords.includes("partner with")
+        ? "partner-with"
+        : keywords.includes("partner")
+          ? "partner"
+          : keywords.includes("choose a background")
+            ? "choose-a-background"
+            : keywords.includes("doctor's companion")
+              ? "doctors-companion"
+              : null,
+      detail: undefined,
+      background: /\bbackground\b/i.test(front(c)),
+      doctor: /\btime lord doctor\b/i.test(front(c)),
+    };
+  };
+  /** Does `a`'s ability let `b` stand beside it, one of them unknown to the
+   * pool? Scryfall files "Partner—[text]" and "Friends forever" under
+   * "Partner", so an unknown plain partner may be one of those. */
+  const lets = (a: Pairing, b: Pairing): boolean => {
+    const unknown = !has(a.name) || !has(b.name);
+    switch (a.family) {
+      case "partner":
+        return b.family === "partner" || (b.family === "partner-group" && unknown);
+      case "partner-group":
+        return (b.family === "partner-group" && (unknown || a.detail === b.detail)) || (b.family === "partner" && unknown);
+      case "partner-with":
+        return (
+          b.family === "partner-with" &&
+          (a.detail === undefined || a.detail === b.name) &&
+          (b.detail === undefined || b.detail === a.name)
+        );
+      case "choose-a-background":
+        return b.background;
+      case "doctors-companion":
+        return b.doctor;
+      default:
+        return false;
+    }
+  };
+  const mayPair = (a: Pairing, b: Pairing): boolean =>
+    has(a.name) && has(b.name) ? canPairCommanders(registry, a.name, b.name) : lets(a, b) || lets(b, a);
+
+  const pairings = new Map(cards.map((c) => [c, pairingOf(c)]));
   // What may stand beside a lead: another lead, or a Background.
-  const partners = cards.filter((c) => leads.includes(c) || (has(c.name) && isBackground(registry.get(c.name))));
+  const partners = cards.filter((c) => leads.includes(c) || (c.found && pairings.get(c)!.background));
   return leads.map((c) => ({
     name: c.name,
     implemented: c.implemented,
     manaCost: c.manaCost,
     typeLine: c.typeLine,
-    pairsWith: has(c.name)
-      ? partners
-          .filter((p) => p.name !== c.name && has(p.name) && canPairCommanders(registry, c.name, p.name))
-          .map((p) => p.name)
-      : [],
+    pairsWith: partners
+      .filter((p) => p.name !== c.name && mayPair(pairings.get(c)!, pairings.get(p)!))
+      .map((p) => p.name),
   }));
 }
 
@@ -1144,7 +1220,9 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
     // (`formatCheck` guesses when it trusts none of the list's own: there
     // were none, or a trailing line's card can't be a commander.)
     const guessed = !commanders.some((name) => checked.commanders.includes(name));
-    const candidates = guessed ? commanderCandidates(cards, deps.registry) : [];
+    const candidates = guessed
+      ? commanderCandidates(cards, deps.registry, (name) => evaluate.cardData?.(name)?.keywords ?? [])
+      : [];
     const format: DeckFormatReport = {
       ...checked,
       ...(attractionProblems.length === 0

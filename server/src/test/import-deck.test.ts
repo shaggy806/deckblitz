@@ -1044,4 +1044,54 @@ describe("commanderCandidates", () => {
     ]);
     expect(candidates[1]).toMatchObject({ manaCost: "{1}{G}", pairsWith: [] });
   });
+
+  it("pairs a card the pool lacks by its Oracle keywords, where nothing known rules the pair out", () => {
+    const legend = (name: string, typeLine = "Legendary Creature — Human") => row(name, { typeLine });
+    const keywords: Record<string, readonly string[]> = {
+      "Zzyx Partner One": ["Flying", "Partner"],
+      "Zzyx Partner Two": ["Partner"],
+      // Scryfall lists both on a "Partner with" card.
+      "Zzyx With One": ["Partner with", "Partner"],
+      "Zzyx With Two": ["Partner with", "Partner"],
+      "Zzyx Chooser": ["Choose a background"],
+      "Zzyx Companion": ["Doctor's companion"],
+    };
+    const candidates = commanderCandidates(
+      [
+        legend("Zzyx Partner One"),
+        legend("Zzyx Partner Two"),
+        legend("Zzyx With One"),
+        legend("Zzyx With Two"),
+        legend("Zzyx Chooser"),
+        legend("Zzyx Companion"),
+        legend("Zzyx Doctor", "Legendary Creature — Time Lord Doctor"),
+        row("Zzyx Background", { typeLine: "Legendary Enchantment — Background" }),
+        legend("Zzyx Loner"),
+        row("Thrasios, Triton Hero"),
+        row("Wilson, Refined Grizzly"),
+        row("Raised by Giants"),
+        row("Krenko, Mob Boss"),
+      ],
+      registry,
+      (name) => keywords[name] ?? [],
+    );
+    const pairs = Object.fromEntries(candidates.map((c) => [c.name, c.pairsWith]));
+    // A Background stands beside a commander, and never leads.
+    expect(Object.keys(pairs)).not.toContain("Zzyx Background");
+    expect(Object.keys(pairs)).not.toContain("Raised by Giants");
+    // Plain Partner: the other unknown one, and the pool's own.
+    expect(pairs["Zzyx Partner One"]).toEqual(["Zzyx Partner Two", "Thrasios, Triton Hero"]);
+    expect(pairs["Thrasios, Triton Hero"]).toEqual(["Zzyx Partner One", "Zzyx Partner Two"]);
+    // "Partner with" only with its like: whom each names isn't known.
+    expect(pairs["Zzyx With One"]).toEqual(["Zzyx With Two"]);
+    // "Choose a Background": either Background, the pool's or not.
+    expect(pairs["Zzyx Chooser"]).toEqual(["Zzyx Background", "Raised by Giants"]);
+    expect(pairs["Wilson, Refined Grizzly"]).toEqual(["Zzyx Background", "Raised by Giants"]);
+    // "Doctor's companion" and the Time Lord Doctor, both ways.
+    expect(pairs["Zzyx Companion"]).toEqual(["Zzyx Doctor"]);
+    expect(pairs["Zzyx Doctor"]).toEqual(["Zzyx Companion"]);
+    // No partner ability, no partner.
+    expect(pairs["Zzyx Loner"]).toEqual([]);
+    expect(pairs["Krenko, Mob Boss"]).toEqual([]);
+  });
 });

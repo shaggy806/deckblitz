@@ -167,3 +167,88 @@ test('a list with no commander named asks which card it is', async ({ page, cont
   expect(asked).toEqual([null, ['Goreclaw, Terror of Qal Sisma']])
   await expect(page.locator('.blitz-report')).toContainText('Imported: Goreclaw, Terror of Qal Sisma')
 })
+
+// A commander that can share the command zone with another card of the list
+// (Partner, a Background) asks a second question: with which, or alone.
+test('a commander with a partner in the list can be picked as a pair, or alone', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+  const card = (name: string, count = 1) => ({
+    name,
+    count,
+    implemented: true,
+    found: true,
+    manaCost: null,
+    typeLine: '',
+    suggestedReplacement: null,
+    replacements: [],
+    printingId: null,
+  })
+  const cards = [
+    card('Krenko, Mob Boss'),
+    card('Thrasios, Triton Hero'),
+    card('Tymna the Weaver'),
+    card('Sol Ring'),
+    card('Forest', 10),
+    card('Island', 10),
+    card('Plains', 10),
+    card('Swamp', 10),
+  ]
+  const candidate = (name: string, manaCost: string, pairsWith: readonly string[]) => ({
+    name,
+    implemented: true,
+    manaCost,
+    typeLine: 'legendary creature — Human',
+    pairsWith,
+  })
+  const asked: (readonly string[] | null)[] = []
+  await page.route('**/import-deck', (route) => {
+    const body = route.request().postDataJSON() as { commanders?: string[] }
+    asked.push(body.commanders ?? null)
+    const format =
+      body.commanders === undefined
+        ? {
+            legal: false,
+            violations: [],
+            identity: 'R',
+            commanders: ['Krenko, Mob Boss'],
+            commanderCandidates: [
+              candidate('Krenko, Mob Boss', '{2}{R}{R}', []),
+              candidate('Thrasios, Triton Hero', '{G}{U}', ['Tymna the Weaver']),
+              candidate('Tymna the Weaver', '{1}{W}{B}', ['Thrasios, Triton Hero']),
+            ],
+          }
+        : { legal: false, violations: [], identity: 'WUBG', commanders: body.commanders }
+    return route.fulfill({
+      status: 200,
+      contentType: 'application/x-ndjson',
+      body: JSON.stringify({ type: 'result', cards, format }) + '\n',
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    })
+  })
+
+  await page.goto('/')
+  await page.evaluate(() => navigator.clipboard.writeText('1 Krenko, Mob Boss\n1 Thrasios, Triton Hero\n1 Tymna the Weaver\n1 Sol Ring\n40 Forest'))
+  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+
+  const picker = page.getByRole('dialog', { name: 'Choose the commander' })
+  // Only the two that can pair say so.
+  await expect(picker.getByRole('button', { name: /Thrasios, Triton Hero/ })).toContainText('Can have a partner from this list.')
+  await expect(picker.getByRole('button', { name: /Krenko, Mob Boss/ })).not.toContainText('partner')
+  await picker.getByRole('button', { name: /Thrasios, Triton Hero/ }).click()
+  // The second question: its partner, or nobody. Back returns to the first.
+  await expect(picker.getByRole('heading')).toHaveText('Thrasios, Triton Hero: with a partner?')
+  await expect(picker.getByRole('button', { name: /Tymna the Weaver/ })).toBeVisible()
+  await expect(picker.getByRole('button', { name: /No partner/ })).toBeVisible()
+  await expect(picker.getByRole('button', { name: /Krenko, Mob Boss/ })).toHaveCount(0)
+  await picker.getByRole('button', { name: 'Back' }).click()
+  await expect(picker.getByRole('button', { name: /Krenko, Mob Boss/ })).toBeVisible()
+  await picker.getByRole('button', { name: /Thrasios, Triton Hero/ }).click()
+  await picker.getByRole('button', { name: /Tymna the Weaver/ }).click()
+
+  // Both names go back with the list, and both lead the deck.
+  await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 20_000 })
+  expect(asked).toEqual([null, ['Thrasios, Triton Hero', 'Tymna the Weaver']])
+  await expect(page.locator('.blitz-report')).toContainText('Imported: Thrasios, Triton Hero & Tymna the Weaver')
+  const commanders = page.locator('.quadrant-cell.self .commander-tile-wrap')
+  await expect(commanders).toHaveCount(2)
+})
