@@ -30874,6 +30874,7 @@ import _poolVowOfMalice from "./pool/vow-of-malice.js";
 import _poolVowOfTorment from "./pool/vow-of-torment.js";
 import _poolVowOfWildness from "./pool/vow-of-wildness.js";
 import _poolVowToErebor from "./pool/vow-to-erebor.js";
+import _poolVoxChildOfTheCollective from "./pool/vox-child-of-the-collective.js";
 import _poolVoyageHome from "./pool/voyage-home.js";
 import _poolVoyagerGlidecar from "./pool/voyager-glidecar.js";
 import _poolVoyagerQuickwelder from "./pool/voyager-quickwelder.js";
@@ -64077,6 +64078,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVowOfTorment,
   _poolVowOfWildness,
   _poolVowToErebor,
+  _poolVoxChildOfTheCollective,
   _poolVoyageHome,
   _poolVoyagerGlidecar,
   _poolVoyagerQuickwelder,
@@ -97293,6 +97295,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vow-of-torment": _poolVowOfTorment,
   "pool/vow-of-wildness": _poolVowOfWildness,
   "pool/vow-to-erebor": _poolVowToErebor,
+  "pool/vox-child-of-the-collective": _poolVoxChildOfTheCollective,
   "pool/voyage-home": _poolVoyageHome,
   "pool/voyager-glidecar": _poolVoyagerGlidecar,
   "pool/voyager-quickwelder": _poolVoyagerQuickwelder,

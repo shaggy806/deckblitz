@@ -18511,11 +18511,13 @@ export class Game {
     const card = this.state.objects[cardId];
     const castFrom = card?.zone === "stack" ? (card.castFrom ?? undefined) : card?.zone;
     for (const grant of this.state.spellGrantsThisTurn ?? []) {
-      if (grant.reduceGeneric === undefined && grant.affinityFor === undefined) continue;
+      if (grant.reduceGeneric === undefined && grant.affinityFor === undefined && grant.undaunted !== true) continue;
       if (!turnCastGrantReaches(this.state, this.registry, grant, cardId, player, castFrom)) continue;
       reduceGeneric += grant.reduceGeneric ?? 0;
       // Rule 702.41a: {1} less for each one its caster controls now, as it's cast.
       if (grant.affinityFor !== undefined) reduceGeneric += this.countBattlefieldMatching(player, grant.affinityFor);
+      // Rule 702.125a: {1} less for each opponent the caster has, as it's cast.
+      if (grant.undaunted === true) reduceGeneric += this.costAmount({ countPlayers: "each-opponent" }, player, cardId);
     }
     return { increaseGeneric, increaseColored, reduceGeneric, colored, minimumMana };
   }

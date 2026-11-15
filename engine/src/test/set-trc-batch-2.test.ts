@@ -187,3 +187,20 @@ describe("Gift of Perfection", () => {
     expect(bLibrary.slice(-2).sort()).toEqual([bTop, bLand].sort());
   });
 });
+
+describe("Võx, Child of the Collective", () => {
+  it("the next artifact creature spell costs {1} less for each opponent, counted as it's cast", () => {
+    const { game } = table({ players: 4 });
+    enter(game, "Võx, Child of the Collective");
+    lands(game, "Wastes", 2);
+    // Solemn Simulacrum {4}: three opponents take {3} off, so two lands do.
+    const solemn = toHand(game, "Solemn Simulacrum");
+    expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === solemn)).toBe(true);
+    cast(game, solemn);
+    expect(zone(game, solemn)).toBe("battlefield");
+    // Spent: the next one costs full.
+    const another = toHand(game, "Solemn Simulacrum");
+    lands(game, "Wastes", 2);
+    expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === another)).toBe(false);
+  });
+});

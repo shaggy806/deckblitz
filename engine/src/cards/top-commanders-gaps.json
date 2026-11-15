@@ -2696,7 +2696,8 @@
   "effect:assimilate-one-of-each-opponents-reveal",
   "replacement:would-be-destroyed-instead",
   "effect:exiled-card-gains-activated",
-  "effect:play-from-outside-the-game"
+  "effect:play-from-outside-the-game",
+  "effect:grant-undaunted-next-spell"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

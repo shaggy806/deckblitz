@@ -1009,6 +1009,7 @@ import _poolVolcanicVision from "../pool/volcanic-vision.js";
 import _poolVoldarenDuelist from "../pool/voldaren-duelist.js";
 import _poolVoldarenStinger from "../pool/voldaren-stinger.js";
 import _poolVonasHunger from "../pool/vonas-hunger.js";
+import _poolVoxChildOfTheCollective from "../pool/vox-child-of-the-collective.js";
 import _poolVraskaRegalGorgon from "../pool/vraska-regal-gorgon.js";
 import _poolWailOfTheForgotten from "../pool/wail-of-the-forgotten.js";
 import _poolWaildrifter from "../pool/waildrifter.js";
@@ -2105,6 +2106,7 @@ const shard: CardShard = {
     _poolVoldarenDuelist,
     _poolVoldarenStinger,
     _poolVonasHunger,
+    _poolVoxChildOfTheCollective,
     _poolVraskaRegalGorgon,
     _poolWailOfTheForgotten,
     _poolWaildrifter,

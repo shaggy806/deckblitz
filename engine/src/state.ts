@@ -2420,6 +2420,9 @@ export interface SpellGrantThisTurn {
   /** The matching spell has affinity for these (rule 702.41a): {1} less for
    * each its caster controls as it's cast. */
   readonly affinityFor?: CardFilter;
+  /** The matching spell has undaunted (rule 702.125a): {1} less for each
+   * opponent its caster has as it's cast. */
+  readonly undaunted?: true;
   /** The matching spell may be cast by paying life equal to its mana value
    * rather than its mana cost (Marshland Bloodcaster). */
   /** "…can be cast without paying its mana cost" (World War Hulk). */

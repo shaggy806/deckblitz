@@ -6576,6 +6576,12 @@ export type EffectSpec =
        * 702.41a), so nothing's fixed as this resolves. Several are cumulative
        * (the Don & Raph ruling). */
       readonly affinityFor?: CardFilter;
+      /** "The next artifact creature spell … you cast this turn **has
+       * undaunted**" (Võx, Child of the Collective): {1} less for each
+       * opponent its caster has as it's cast (rule 702.125a), so nothing's
+       * fixed as this resolves; with another instance, each applies
+       * (702.125c). */
+      readonly undaunted?: true;
       /** "Rather than pay the mana cost of the next spell you cast this turn,
        * you may pay life equal to that spell's mana value" (Marshland
        * Bloodcaster, with `next`): an alternative cost the spell may be cast
@@ -20380,6 +20386,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.entersWithCounters !== undefined ? { entersWithCounters: spec.entersWithCounters } : {}),
         ...(spec.reduceGeneric !== undefined ? { reduceGeneric: amountValue(spec.reduceGeneric, ctx) } : {}),
         ...(spec.affinityFor !== undefined ? { affinityFor: spec.affinityFor } : {}),
+        ...(spec.undaunted === true ? { undaunted: true as const } : {}),
         ...(spec.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
         ...(spec.free === true ? { free: true as const } : {}),
       });
