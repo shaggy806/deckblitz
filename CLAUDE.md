@@ -48,12 +48,13 @@ for:
   engine features ranked by how many real cards each would unblock, over two measured
   populations, plus a compact index of finished passes (P0–P20, Tier 1, E1–E3) that source
   comments cite. **The commander gap comes first**: `top-commanders.txt` (`npm run cmdrs:top` /
-  `cmdrs:mark -w engine`) is the top 500 commanders by decks run *as commander* — ranking them by
+  `cmdrs:mark -w engine`) is the top 1000 commanders by decks run *as commander* (500 until
+  2026-11-14) — ranking them by
   card popularity misses 53 of the top 100, because a commander is a singleton played almost
-  nowhere but its own deck — and `top-commanders-gaps.json` maps every unimplemented one to the
-  engine features it needs (a per-card triage over one ~245-feature vocabulary), which
-  `npm run cmdrs:gaps -w engine` ranks by commanders blocked and as a greedy engine-only build
-  order. Add a feature's key to the JSON's `built` array when it lands. The coverage figure is
+  nowhere but its own deck — and `top-commanders-gaps.json` maps every unimplemented one of the
+  first 500 to the engine features it needs (a per-card triage over one ~245-feature vocabulary),
+  which `npm run cmdrs:gaps -w engine` ranks by commanders blocked and as a greedy engine-only build
+  order; it names the ones past 500 too, whose triage is in the sweep records. Add a feature's key to the JSON's `built` array when it lands. The coverage figure is
   `top-commander-cards.txt` (the top 5000 Commander cards by EDHREC rank against the pool, fully
   triaged), re-marked in place by `npm run cards:mark -w engine`; new cards now come from the
   Oracle EDHREC ranks past it.

@@ -145,7 +145,7 @@ async function main() {
     const cardRank = listRank("top-commander-cards.txt", name);
     if (cardRank) status.push(`top-5000 #${cardRank.rank}`);
     const cmdrRank = listRank("top-commanders.txt", name);
-    if (cmdrRank) status.push(`top-500 commander #${cmdrRank.rank}`);
+    if (cmdrRank) status.push(`top-1000 commander #${cmdrRank.rank}`);
     if (card.edhrec_rank) status.push(`EDHREC ${card.edhrec_rank}`);
     console.log(status.join(" · "));
     if (card.keywords?.length) {

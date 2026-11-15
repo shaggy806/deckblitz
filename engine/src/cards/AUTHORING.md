@@ -151,7 +151,7 @@ it doesn't know. When a feature lands, add its key to the gaps file's
 `built` array.
 
 **Or start from a scaffold.** `npm run card:scaffold -w engine -- "Card
-Name"` (or `--next 10` for the next unimplemented top-500 commanders,
+Name"` (or `--next 10` for the next unimplemented top-1000 commanders,
 `--next 10 --cards` for the top-5000 backlog) writes the card's file from
 the snapshot into `engine/src/cards/scaffold/`: name, cost, colours, types,
 P/T, loyalty, faces and their layout flags, `text`, the keywords the engine

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-// Ranks the engine features that stand between the pool and the top-500
+// Ranks the engine features that stand between the pool and the top
 // commanders, from `src/cards/top-commanders-gaps.json` (the per-commander
-// triage, normalized onto one feature vocabulary — see
-// neededCards-features.md, "The commander gap").
+// triage of the first 500, normalized onto one feature vocabulary — see
+// neededCards-features.md, "The commander gap"). The list is 1000 long since
+// 2026-11-14; an unimplemented commander with no record here is named, with
+// where its triage is (the sweep records, which `cards:needs` reads).
 //
 // Commanders already implemented (marked [x] in top-commanders.txt — run
 // `npm run cmdrs:mark` first) and features listed in the JSON's `built`
@@ -34,17 +36,31 @@ const EFFORT = { small: 1, medium: 3, large: 10 };
 
 const data = JSON.parse(readFileSync(gapsPath, "utf8"));
 const built = new Set(data.built ?? []);
-const implemented = new Set(
-  readFileSync(listPath, "utf8")
-    .split("\n")
-    .filter((l) => l.startsWith("[x]"))
-    .map((l) => l.replace(/^\[x\]\s+\d+\s+/, "").split(/\s{2,}/)[0]),
-);
+/** The list as it stands: name → its rank today and whether it's in the pool.
+ * The ranks in the gaps file are the 2026-09-22 list's, so they're read here. */
+const listed = new Map();
+for (const line of readFileSync(listPath, "utf8").split("\n")) {
+  const m = /^\[([x ])\]\s+(\d+)\s+(.+?)\s{2,}/.exec(line);
+  if (m) listed.set(m[3], { rank: Number(m[2]), done: m[1] === "x" });
+}
+// The list names a double-faced commander by its front face alone.
+const entryOf = (name) => listed.get(name) ?? listed.get(name.split(" // ")[0]);
 
 const open = data.commanders
-  // The list names a double-faced commander by its front face alone.
-  .filter((c) => !implemented.has(c.name) && !implemented.has(c.name.split(" // ")[0]))
-  .map((c) => ({ ...c, needs: c.needs.filter((k) => !built.has(k)) }));
+  .filter((c) => entryOf(c.name)?.done !== true)
+  .map((c) => ({
+    ...c,
+    rank: entryOf(c.name)?.rank ?? c.rank,
+    needs: c.needs.filter((k) => !built.has(k)),
+  }));
+
+/** Unimplemented commanders on the list that the gaps file has no record for:
+ * the file triaged the first 500 (2026-09-22), and the list has been 1000
+ * since 2026-11-14. Their needs are in the sweep records, on the same keys. */
+const triagedHere = new Set(data.commanders.map((c) => c.name.split(" // ")[0]));
+const elsewhere = [...listed.entries()]
+  .filter(([name, entry]) => !entry.done && !triagedHere.has(name.split(" // ")[0]))
+  .map(([name, entry]) => ({ name, rank: entry.rank }));
 
 const need = new Map();
 const sole = new Map();
@@ -54,8 +70,18 @@ for (const c of open) {
 }
 
 const ready = open.filter((c) => c.needs.length === 0);
-console.log(`${open.length} top-500 commanders not yet implemented; ${ready.length} need no engine work:`);
+console.log(
+  `${open.length + elsewhere.length} of the top ${listed.size} commanders not yet implemented. ` +
+    `${open.length} are triaged here; ${ready.length} of those need no engine work:`,
+);
 console.log(`  ${ready.map((c) => `${c.rank} ${c.name}`).join(" · ")}\n`);
+if (elsewhere.length > 0) {
+  console.log(
+    `${elsewhere.length} more are triaged in the sweep records, not here ` +
+      "(`npm run cards:needs -w engine -- --by-rank` ranks their keys; `card:brief` shows one's):",
+  );
+  console.log(`  ${elsewhere.map((c) => `${c.rank} ${c.name}`).join(" · ")}\n`);
+}
 
 const byCount = new Map();
 for (const c of open) byCount.set(c.needs.length, (byCount.get(c.needs.length) ?? 0) + 1);

@@ -1,12 +1,14 @@
 ---
 name: author-top-commanders
-description: Author the next batch of the top-500 commanders (engine/src/cards/top-commanders.txt, ranked by decks run as commander) — take the next feature in the commander gaps' greedy build order, build it, then author every commander (and any top-5000 card) it unblocks, test, and ship. Nearly done (488 of 500 on 2026-11-10); the rest wait on need keys that `build-family` also ranks. Use when the user says to work on commanders, author commanders, do the next commander batch, close the commander gap, or runs this skill with no other instructions.
+description: Author the next batch of the top-1000 commanders (engine/src/cards/top-commanders.txt, ranked by decks run as commander) — take the next feature in the commander gaps' greedy build order, build it, then author every commander (and any top-5000 card) it unblocks, test, and ship. Nearly done (969 of 1000 on 2026-11-14, when the list doubled from 500); the rest wait on need keys that `build-family` also ranks. Use when the user says to work on commanders, author commanders, do the next commander batch, close the commander gap, or runs this skill with no other instructions.
 ---
 
 # Author the next commander batch
 
-`top-commanders.txt` ranks the 500 most-played commanders by decks built
+`top-commanders.txt` ranks the 1000 most-played commanders by decks built
 around them — a commander is the one card an imported deck can't do without.
+The gaps file triaged the first 500; a missing commander past that has its
+needs in the sweep records (`cmdrs:gaps` names them, `card:brief` shows one's).
 No commander is left that needs no engine work (BACKLOG, "Commander gap"), so
 a batch is **a feature, then the commanders it unblocks**.
 

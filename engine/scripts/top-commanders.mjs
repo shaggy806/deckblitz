@@ -2,7 +2,7 @@
 // Fetches the most-played *commanders* and cross-references them against the
 // cards already authored in `cards/pool/`.
 //
-//   node scripts/top-commanders.mjs [--count 500] [--out path]
+//   node scripts/top-commanders.mjs [--count 1000] [--out path]
 //   node scripts/top-commanders.mjs --refresh          # re-mark in place
 //
 // **Not the same list as `top-commander-cards.txt`, and that is the point.**
@@ -25,8 +25,9 @@
 // file. If the endpoint changes, the list it already wrote keeps working and
 // only `--refresh`-from-network stops — a build-time dependency, never a
 // runtime one. `/pages/commanders.json` answers 403; the per-colour-identity
-// pages (32 of them, 100 commanders each) do not, and together they cover far
-// more than the top 500. Card names, costs and type lines still come from
+// pages (32 of them, 100 commanders a page, each read to its last page) do
+// not, and together they list every commander EDHREC has a deck for, far
+// more than the top 1000. Card names, costs and type lines still come from
 // Scryfall, which stays the authority on what a card actually is.
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -50,8 +51,11 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /** EDHREC is one site serving a static JSON blob per page and is not an API
  * anyone promised us — one request a second, sequentially, is the polite
- * reading of that. The whole run is ~32 requests. */
+ * reading of that. The whole run is ~90 requests (2026-11-14: 32 identities,
+ * 1 to 5 pages each). */
 const EDHREC_INTERVAL_MS = 1000;
+/** A stop for a paging chain that never ends, well past the 5 seen. */
+const MAX_PAGES_PER_IDENTITY = 20;
 /** Scryfall asks for ~10 req/sec; this only sends a handful of batches. */
 const SCRYFALL_INTERVAL_MS = 150;
 
@@ -77,15 +81,36 @@ async function fetchIdentity(identity) {
   const page = await getJson(`https://json.edhrec.com/pages/commanders/${identity}.json`);
   const lists = page?.container?.json_dict?.cardlists ?? [];
   const out = [];
-  for (const list of lists) {
-    for (const card of list.cardviews ?? []) {
+  const take = (cardviews) => {
+    for (const card of cardviews ?? []) {
       if (typeof card?.name !== "string") continue;
       const decks = Number(card.num_decks ?? 0);
       if (!Number.isFinite(decks) || decks <= 0) continue;
       out.push({ name: card.name, decks, identity });
     }
+  };
+  let pages = 0;
+  for (const list of lists) {
+    take(list.cardviews);
+    pages += 1;
+    // A list shows 100 commanders and names the page that continues it
+    // (`more`, relative to /pages/), which names the next in turn. Read to
+    // the end: a single commander past the first page is never in the top
+    // 1000 (the 100th of any identity has under 1,000 decks), but a partner's
+    // count is the sum of every pair it appears in, and most pairs are small.
+    let more = list.more;
+    while (typeof more === "string" && more !== "") {
+      if (pages >= MAX_PAGES_PER_IDENTITY) {
+        throw new Error(`${identity}: more than ${MAX_PAGES_PER_IDENTITY} pages — has the paging changed?`);
+      }
+      await delay(EDHREC_INTERVAL_MS);
+      const next = await getJson(`https://json.edhrec.com/pages/${more}`);
+      take(next?.cardviews);
+      pages += 1;
+      more = next?.more;
+    }
   }
-  return out;
+  return { rows: out, pages };
 }
 
 /** Scryfall's record for each name, for the cost and type line the list
@@ -162,7 +187,7 @@ async function refresh(out) {
 }
 
 function parseArgs(argv) {
-  const opts = { count: 500, out: DEFAULT_OUT, refresh: false, cacheJson: null };
+  const opts = { count: 1000, out: DEFAULT_OUT, refresh: false, cacheJson: null };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === "--count") opts.count = Number(argv[++i]);
@@ -183,14 +208,14 @@ async function main() {
 
   const all = new Map();
   for (const identity of IDENTITIES) {
-    const rows = await fetchIdentity(identity);
+    const { rows, pages } = await fetchIdentity(identity);
     for (const row of rows) {
       // A partner can be listed under more than one identity; the larger
       // count is the one that answers "how often is this someone's commander".
       const seen = all.get(row.name);
       if (seen === undefined || row.decks > seen.decks) all.set(row.name, row);
     }
-    process.stderr.write(`  ${identity}: ${rows.length} (${all.size} total)\n`);
+    process.stderr.write(`  ${identity}: ${rows.length} in ${pages} page(s) (${all.size} total)\n`);
     await delay(EDHREC_INTERVAL_MS);
   }
 

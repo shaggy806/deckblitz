@@ -16,10 +16,16 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**494 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
-`npm run cmdrs:mark -w engine`). An imported decklist usually has its commander substituted, and
-that one card is the reason the deck exists. Live numbers for everything below come from
-`npm run cmdrs:gaps -w engine`.
+**969 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
+doubled from 500 on 2026-11-14; re-mark with `npm run cmdrs:mark -w engine`). An imported decklist
+usually has its commander substituted, and that one card is the reason the deck exists. Live
+numbers for everything below come from `npm run cmdrs:gaps -w engine`.
+
+- **The 31 left** (`cmdrs:gaps` names them with today's ranks): 2 from the old top 500, below, and
+  29 from ranks 501-1000, each already triaged in the sweep records on one need key (Ranar the
+  Ever-Watchful on two) — `card:brief -- "Name"` shows a card's, `cards:needs -- --by-rank` ranks
+  the keys. Two of the 29 have every recorded need built and want a re-read (the `author-freed`
+  queue): Ian Malcolm, Chaotician and The Fourteenth Doctor.
 
 - **Ready to author, no engine work: none.** B294 (2026-11-09) re-attempted all 18 still missing
   and authored 6 (Mr. House, Hazel of the Rootbloom, Indoraptor, Orvar, Noctis, Minsc & Boo). Each
@@ -27,12 +33,9 @@ that one card is the reason the deck exists. Live numbers for everything below c
   Jaws, Relentless Predator's (`trigger:destroyed`) was built 2026-11-10, Tevesh Szat's,
   Omnath, Locus of All's and Ob Nixilis, Captive Kingpin's 2026-11-12, Indominus Rex, Alpha's and
   Coram, the Undertaker's 2026-11-13.
-- **The 6 left, each with its key** (`cmdrs:gaps` ranks them; when a key lands, add it to that
-  file's `built` array and author its commander in the same commit): Marvo, Deep Operative
-  `effect:clash-with-named-opponent`; Arna Kennerüd, Skycaptain `effect:token-copy-enters-attached`;
-  Winter, Cynical Opportunist `decision:zone-choice-card-types-among`; The Mimeoplasm
-  `replacement:copy-on-enter-exile-two-counters-from-other`; Magar of the Magic Strings
-  `effect:noted-card-name-copy`; Jorn, God of Winter
+- **The 2 left of the old top 500, each with its key** (`cmdrs:gaps` ranks them; when a key lands,
+  add it to that file's `built` array and author its commander in the same commit): Magar of the
+  Magic Strings `effect:noted-card-name-copy`; Jorn, God of Winter
   `zone:play-from-graveyard-this-turn-enters-tapped`.
 
 ## Card backlog (by EDHREC rank, and the precons)
@@ -344,9 +347,9 @@ delete its detail there and move this line to `COMPLETED.md`.
   208): it applies the destroy and settles, but with nothing else pending no state-based actions
   run, so an Aura stays attached to a creature already in the graveyard (Chime of Night's test
   destroys the Aura itself instead). Have `destroy()` check state-based actions after it.
-- **Refresh the snapshots.** The EDHREC ranking snapshots (`top-commander-cards.txt`,
-  `top-commanders.txt`) and `edhrec-rank.ts` are frozen. Re-fetching them moves the roster, so
-  do it on purpose. `release-date.ts` (the library's first-printing dates) wants `npm run gen:release-dates -w engine` after each `gen:oracle` or a batch of new cards: a card it doesn't list sorts last.
+- **Refresh the snapshots.** The EDHREC card-rank snapshot (`top-commander-cards.txt`) and
+  `edhrec-rank.ts` are frozen (`top-commanders.txt` was refetched 2026-11-14). Re-fetching them
+  moves the roster, so do it on purpose. `release-date.ts` (the library's first-printing dates) wants `npm run gen:release-dates -w engine` after each `gen:oracle` or a batch of new cards: a card it doesn't list sorts last.
 - **Keyword-action citations on an older numbering** (found 2026-10-13, fixing 701.19b): section
   701 was renumbered in a later edition and many comments still cite the old numbers —
   regeneration as 701.15 (Goad now; regenerate is 701.19), reveal as 701.16 (Investigate; reveal
