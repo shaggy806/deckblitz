@@ -3801,6 +3801,10 @@
   width: max-content;
   min-width: calc(var(--card-w) * 0.95);
   max-width: min(80vw, calc(var(--card-w) * 1.6));
+  /* Never taller than the window: a permanent with a great many options
+     scrolls inside its menu, so the last one is still reachable. */
+  max-height: 94vh;
+  overflow-y: auto;
   padding: 5px;
   background: var(--panel);
   border: 1px solid var(--warn);
@@ -3809,6 +3813,10 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.1s ease;
+}
+/* A scrolling column keeps its rows their own height. */
+.ability-menu > * {
+  flex-shrink: 0;
 }
 /* added once JS has measured the menu and knows where to put it — until then
    it renders invisible for a single layout pass */

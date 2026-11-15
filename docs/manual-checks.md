@@ -8468,3 +8468,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Heirloom Epic: tapping creatures for it in a 4-player game
 - **Do:** In this 4-player game, activate Heirloom Epic. All four of your creatures start picked: confirm.
 - **Expect:** The prompt fits the banner and the confirm reads "Tap 4". All four creatures and Heirloom Epic tap with no land, and you draw a card. Bob's Llanowar Elves never lights up.
+
+
+## Client fixes (2026-11-14)
+
+### Baxter Building: four mana in any combination is one menu row
+- **Do:** Click Baxter Building, pick "Add four mana in any combination of colors", set the five colours to add up to four, then "Add mana".
+- **Expect:** The menu has three rows, all on screen: {C}, the four mana "(choose how much of each)" and "Draw a card". The banner counts your picks ("3/4") and the four Islands tap for the cost; the mana you picked is in your pool.

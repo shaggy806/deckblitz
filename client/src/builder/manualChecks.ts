@@ -12759,4 +12759,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Llanowar Elves'] }, {}, {}],
     }),
   ),
+  // --- Client fixes (2026-11-14) ----------------------------------------------
+  preset(
+    'Baxter Building: four mana in any combination is one menu row',
+    board({
+      you: { bf: ['Baxter Building', 'Island*4', 'Craw Wurm'], hand: ['Fusion Elemental'] },
+    }),
+  ),
 ]
