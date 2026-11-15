@@ -56,7 +56,10 @@ const COLOR_NAME: Record<ColorFilter, string> = {
 }
 
 // Popularity first, the default (the user, 2026-10-07): the cards people
-// actually play at the top, rather than an alphabetical wall.
+// actually play at the top, rather than an alphabetical wall. Named for
+// whose count it is (the user, 2026-11-15: "to give credit to the site
+// providing the data"): the sort reads "EDHREC rank", and the About page
+// links the site.
 const SORTS = ['edhrec', 'name', 'released', 'mana', 'color', 'type'] as const
 type Sort = (typeof SORTS)[number]
 
@@ -66,7 +69,7 @@ type Show = 'pool' | 'missing' | 'asap'
 
 const SORT_LABEL: Record<Sort, string> = {
   name: 'Name',
-  edhrec: 'Popularity',
+  edhrec: 'EDHREC rank',
   released: 'Release date',
   mana: 'Mana value',
   color: 'Colour',

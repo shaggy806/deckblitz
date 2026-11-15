@@ -32,3 +32,8 @@ export const ART_RIGHTS = 'All card art and its licenses belong to Wizards of th
 export const TRADEMARK_LINE = 'Magic: The Gathering and its logos are trademarks of Wizards of the Coast LLC.'
 
 export const SCRYFALL_URL = 'https://scryfall.com'
+
+/** Whose ranking the library and the deck builder list cards by: how many
+ * Commander decks on EDHREC play each card (Scryfall's card data carries
+ * the rank). Named wherever the order is, and on the About page. */
+export const EDHREC_URL = 'https://edhrec.com'

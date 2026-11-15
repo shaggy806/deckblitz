@@ -738,6 +738,13 @@
   font-size: var(--text-base);
   font-weight: 600;
 }
+/* whose order the card pool is listed in: beside its title, the count staying
+   at the far end */
+.db-pool-order {
+  margin-right: auto;
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
 /* The deck pane is a drop target for a card dragged out of the pool; the
    dashed outline only appears while a drag is actually over it. */
 .db-pane-deck {

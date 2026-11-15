@@ -1,6 +1,7 @@
 import { STRONG_DECKS } from 'engine/client'
 import {
   ART_RIGHTS,
+  EDHREC_URL,
   FAN_CONTENT_POLICY_URL,
   NOTICE_LEAD,
   NOTICE_REST,
@@ -52,6 +53,14 @@ export function AboutPage() {
             Scryfall
           </a>
           . {SITE_TITLE} isn&apos;t produced by, affiliated with or endorsed by Scryfall.
+        </p>
+        <p>
+          Where the card library and the deck builder list cards by how much they&apos;re played, that is each
+          card&apos;s rank on{' '}
+          <a href={EDHREC_URL} target="_blank" rel="noreferrer">
+            EDHREC
+          </a>
+          , as Scryfall&apos;s data carries it. {SITE_TITLE} isn&apos;t affiliated with or endorsed by EDHREC.
         </p>
       </section>
 

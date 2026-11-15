@@ -18,6 +18,7 @@ import {
   withinIdentity,
 } from 'engine/client'
 import { cardPool } from '../cards/cardData.ts'
+import { EDHREC_URL } from '../legal/notice.ts'
 import { Symbols } from '../ui/Symbols.tsx'
 import { CardHoverPreview } from '../ui/CardHoverPreview.tsx'
 import type { HoverTarget } from '../ui/CardHoverPreview.tsx'
@@ -622,6 +623,17 @@ export function DeckEditor({
         <section className="db-pane db-pane-library">
           <header className="db-pane-head">
             <h3>Card pool</h3>
+            {/* Whose order the list is in (`buildableCards`), credited where
+                it shows (the user, 2026-11-15). */}
+            <a
+              className="db-pool-order muted"
+              href={EDHREC_URL}
+              target="_blank"
+              rel="noreferrer"
+              title="Listed most played first, by each card's rank on EDHREC"
+            >
+              by EDHREC rank
+            </a>
             <span className="muted mono">{filtered.length}</span>
           </header>
           <div className="db-search-row">
