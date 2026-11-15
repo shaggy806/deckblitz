@@ -2791,6 +2791,147 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  asked({
+    name: "holds Abrupt Decay from a 1/1 token",
+    rule: "A removal spell is a card: spent on a 1/1 token it trades down, with real threats still to come.",
+    position(registry) {
+      // Reported from a live game (2026-11-14, room K6DYC, turn 17): Meren's
+      // bot cast Abrupt Decay at Atraxa's 1/1 Army token in its draw step,
+      // and Collective Resistance at a one-mana Walking Bulwark on its
+      // second turn. `earlyRemoval` holds removal through the first rounds
+      // and has faded by the fifth; past that a card in hand is an average
+      // card and anything it kills is a gain. Removal now waits for a
+      // creature worth a Grizzly Bears on the search's own ranking
+      // (`removesTooLittle`), unless it's a commander or attacking.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Swamp", A, 2);
+      lands(game, "Forest", A, 2);
+      const token = onBoard(game, "Goblin Token", C);
+      game.state.objects[token].isToken = true;
+      const decay = game.debugSpawn("Abrupt Decay", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === decay),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "spends Abrupt Decay on a creature worth the card",
+    rule: "The hold is for small targets only: a 3/3 for three is what the spell is for.",
+    position(registry) {
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Swamp", A, 2);
+      lands(game, "Forest", A, 2);
+      const token = onBoard(game, "Goblin Token", C);
+      game.state.objects[token].isToken = true;
+      const courser = onBoard(game, "Centaur Courser", C);
+      const decay = game.debugSpawn("Abrupt Decay", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed:
+            action.type === "cast-spell" &&
+            action.card === decay &&
+            action.targets?.[0]?.kind === "object" &&
+            action.targets[0].object === courser,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "holds Clone with only a mana Elf to copy",
+    rule: "A Clone is worth what it copies: with a 1/1 the best thing out, it waits.",
+    position(registry) {
+      // The user, 2026-11-14: bots "struggle to know when they should hold
+      // off on using a spell to get more value". A Clone has no target (the
+      // copy is chosen as it enters), so its worth is read off the
+      // battlefield (`holdsCloneForMore`).
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Island", A, 4);
+      onBoard(game, "Llanowar Elves", B);
+      const clone = game.debugSpawn("Clone", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === clone),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "does not cast Progenitor Exarch for X = 0",
+    rule: "An X creature cast for nothing is a 1/2: a land later it makes an Incubator token.",
+    position(registry) {
+      // Watched in a bot game on the strong decks (2026-11-14): Progenitor
+      // Exarch ({X}{X}{W}, "incubate 3 X times") cast for X = 0. Every X
+      // spell was cast at the most the mana paid, whatever that was; a
+      // permanent now needs X of at least 1 and an instant or sorcery 3
+      // (`xTooSmall`).
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Plains", A, 2);
+      const exarch = game.debugSpawn("Progenitor Exarch", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === exarch),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "casts Progenitor Exarch for X = 1",
+    rule: "With the mana for one Incubator, the X creature is cast.",
+    position(registry) {
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Plains", A, 3);
+      const exarch = game.debugSpawn("Progenitor Exarch", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === exarch && action.xValue === 1,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "does not sacrifice Selfless Spirit with nothing to save its creatures from",
+    rule: "A sacrifice for a turn of indestructible is a card: it waits for a wipe or a combat to answer.",
+    position(registry) {
+      // Watched in a bot game on the upgraded precons (2026-11-14): Family
+      // Matters' bot cast Selfless Spirit and sacrificed it in the same main
+      // phase, before an attack nobody could punish. A turn's effect "can
+      // matter" in our own first main phase, for the attack to come; one
+      // paid for with a sacrifice now needs something to answer
+      // (`wastedNow`). This board alone didn't reproduce it (the live one
+      // was a step of a turn plan, with Zinnia cast after), so it holds
+      // what the bot gets right rather than proving the fix.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Plains", A, 3);
+      const spirit = onBoard(game, "Selfless Spirit", A);
+      onBoard(game, "Centaur Courser", A);
+      onBoard(game, "Grizzly Bears", B);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "activate-ability" && action.source === spirit),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   {
     name: "does not pay its last life to Necropotence",
     rule: "A life payment down to 0 loses the game (rule 704.5a), however lost the position looks.",

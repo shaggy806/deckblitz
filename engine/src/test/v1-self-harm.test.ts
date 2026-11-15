@@ -287,6 +287,202 @@ describe("v1 holds a reanimation spell for a target worth it", () => {
   });
 });
 
+describe("v1 holds a one-for-one spell for a target worth the card", () => {
+  /** Alice with `landName` x `count` and `spell` in hand; `theirs` on Bob's
+   * side of the battlefield. */
+  function offered(
+    spell: string,
+    landName: string,
+    count: number,
+    theirs: readonly string[],
+    setup: (game: Game, ids: ObjectId[]) => void = () => {},
+  ): { game: Game; card: ObjectId; ids: ObjectId[] } {
+    let card: ObjectId = "" as ObjectId;
+    let ids: ObjectId[] = [];
+    const game = mainPhase((g) => {
+      lands(g, landName, count);
+      ids = theirs.map((name) => onBoard(g, name, B));
+      card = g.debugSpawn(spell, A, "hand");
+      setup(g, ids);
+    });
+    return { game, card, ids };
+  }
+  const targetOf = (action: Action): unknown => (action.type === "cast-spell" ? action.targets?.[0] : undefined);
+
+  it("keeps Murder from a 1/1, and spends it on a Craw Wurm", () => {
+    const small = offered("Murder", "Swamp", 3, ["Elvish Visionary"]);
+    expect(casts(v1(small.game), small.card)).toBe(false);
+    const big = offered("Murder", "Swamp", 3, ["Elvish Visionary", "Craw Wurm"]);
+    const action = v1(big.game);
+    expect(casts(action, big.card)).toBe(true);
+    expect(targetOf(action)).toEqual({ kind: "object", object: big.ids[1] });
+  });
+
+  it("spends Murder on a mana Elf in the opening rounds, and not later", () => {
+    // Acceleration is worth the card early (the gate's "kills an early
+    // Llanowar Elves"); by round six it's one source among many.
+    const early = offered("Murder", "Swamp", 3, ["Llanowar Elves"]);
+    expect(casts(v1(early.game), early.card)).toBe(true);
+    const late = offered("Murder", "Swamp", 3, ["Llanowar Elves"], (g) => {
+      g.state.turn.number += 20;
+    });
+    expect(casts(v1(late.game), late.card)).toBe(false);
+  });
+
+  it("spends Murder on a small commander", () => {
+    const { game, card } = offered("Murder", "Swamp", 3, ["Llanowar Elves"], (g, ids) => {
+      g.state.objects[ids[0]].isCommander = true;
+    });
+    expect(casts(v1(game), card)).toBe(true);
+  });
+
+  it("spends Murder on anything when it is low on life", () => {
+    const { game, card } = offered("Murder", "Swamp", 3, ["Llanowar Elves"], (g) => {
+      g.state.players[A].life = 8;
+    });
+    expect(casts(v1(game), card)).toBe(true);
+  });
+
+  it("keeps Control Magic from a Grizzly Bears, and takes a Craw Wurm", () => {
+    const small = offered("Control Magic", "Island", 4, ["Grizzly Bears"]);
+    expect(casts(v1(small.game), small.card)).toBe(false);
+    const big = offered("Control Magic", "Island", 4, ["Grizzly Bears", "Craw Wurm"]);
+    const action = v1(big.game);
+    expect(casts(action, big.card)).toBe(true);
+    expect(targetOf(action)).toEqual({ kind: "object", object: big.ids[1] });
+  });
+
+  it("keeps Clone with only a mana Elf to copy, and casts it with a Craw Wurm out", () => {
+    const small = offered("Clone", "Island", 4, ["Llanowar Elves"]);
+    expect(casts(v1(small.game), small.card)).toBe(false);
+    const big = offered("Clone", "Island", 4, ["Craw Wurm"]);
+    expect(casts(v1(big.game), big.card)).toBe(true);
+  });
+
+  it("keeps Blaze for a bigger X, and casts it for five or for the kill", () => {
+    // Three Mountains: X = 2.
+    const small = offered("Blaze", "Mountain", 3, []);
+    expect(casts(v1(small.game), small.card)).toBe(false);
+    const big = offered("Blaze", "Mountain", 6, []);
+    expect(casts(v1(big.game), big.card)).toBe(true);
+    const lethal = offered("Blaze", "Mountain", 3, [], (g) => {
+      g.state.players[B].life = 2;
+    });
+    expect(casts(v1(lethal.game), lethal.card)).toBe(true);
+  });
+});
+
+describe("v1 holds a counterspell for a spell worth the card", () => {
+  /** Bob, in his main phase with eight Forests, casts `spell`; Alice holds
+   * priority over it with two Islands and a Counterspell. */
+  function countering(spell: string, hand = 3): { game: Game; counterspell: ObjectId } {
+    const game = Game.create({
+      seed: 3,
+      registry,
+      decks: [A, B].map((player) => ({ player, cards: Array<string>(40).fill("Forest") })),
+    });
+    game.advanceUntil(
+      (s) => s.turnOrder[s.turn.activePlayerIndex] === B && s.priority.holder === B && s.turn.step === "precombat-main",
+    );
+    for (const player of [A, B]) game.state.zones.perPlayer[player].hand = [];
+    lands(game, "Island", 2);
+    lands(game, "Forest", 8, B);
+    const counterspell = game.debugSpawn("Counterspell", A, "hand");
+    const cast = game.debugSpawn(spell, B, "hand");
+    // Cards still to come: with every opponent's hand empty there is nothing
+    // better to wait for, and anything is countered.
+    for (let i = 0; i < hand; i += 1) game.debugSpawn("Forest", B, "hand");
+    game.dispatch({ type: "cast-spell", player: B, card: cast, targets: [] });
+    game.advanceUntil((s) => s.priority.holder === A);
+    expect(game.state.zones.shared.stack.length).toBe(1);
+    return { game, counterspell };
+  }
+
+  it("lets an Arcane Signet resolve", () => {
+    const { game, counterspell } = countering("Arcane Signet");
+    expect(casts(v1(game), counterspell)).toBe(false);
+  });
+
+  it("counters a Craw Wurm", () => {
+    const { game, counterspell } = countering("Craw Wurm");
+    expect(casts(v1(game), counterspell)).toBe(true);
+  });
+
+  it("counters the Signet too once the opponent's hand is empty", () => {
+    const { game, counterspell } = countering("Arcane Signet", 0);
+    expect(casts(v1(game), counterspell)).toBe(true);
+  });
+});
+
+describe("v1 keeps a conditional ability's mana for its main phase too", () => {
+  /** Alice with a Craw Wurm, four Forests and Bonders' Enclave ("{3}, {T}:
+   * Draw a card. Activate only if you control a creature with power 4 or
+   * greater"), in the named step of her turn with nothing on the stack. */
+  function enclave(step: "upkeep" | "precombat-main"): { game: Game; land: ObjectId } {
+    let land: ObjectId = "" as ObjectId;
+    const game = mainPhase((g) => {
+      lands(g, "Forest", 4);
+      onBoard(g, "Craw Wurm");
+      land = onBoard(g, "Bonders' Enclave");
+    });
+    if (step === "upkeep") {
+      game.advanceUntil(
+        (s) =>
+          s.turn.number > 1 &&
+          s.turnOrder[s.turn.activePlayerIndex] === A &&
+          s.turn.step === "upkeep" &&
+          s.priority.holder === A,
+      );
+      game.state.zones.perPlayer[A].hand = [];
+    }
+    return { game, land };
+  }
+  const draws = (action: Action, land: ObjectId): boolean =>
+    action.type === "activate-ability" && action.source === land;
+
+  it("doesn't activate Bonders' Enclave in its upkeep", () => {
+    const { game, land } = enclave("upkeep");
+    expect(game.state.turn.step).toBe("upkeep");
+    expect(draws(v1(game), land)).toBe(false);
+  });
+
+  it("activates it in its main phase", () => {
+    const { game, land } = enclave("precombat-main");
+    expect(draws(v1(game), land)).toBe(true);
+  });
+});
+
+describe("v1 casts a tutor to the top of its library at the end of the turn before its own", () => {
+  it("keeps Worldly Tutor in its own main phase", () => {
+    let tutor: ObjectId = "" as ObjectId;
+    const game = mainPhase((g) => {
+      lands(g, "Forest", 2);
+      g.debugSpawn("Craw Wurm", A, "library");
+      tutor = g.debugSpawn("Worldly Tutor", A, "hand");
+    });
+    expect(casts(v1(game), tutor)).toBe(false);
+  });
+
+  it("casts it in the end step of the turn before", () => {
+    const game = mainPhase((g) => {
+      lands(g, "Forest", 2);
+      g.debugSpawn("Craw Wurm", A, "library");
+    });
+    // Bob's end step, Alice holding priority, nothing on the stack.
+    game.advanceUntil(
+      (s) =>
+        s.turnOrder[s.turn.activePlayerIndex] === B &&
+        s.turn.step === "end" &&
+        s.priority.holder === A &&
+        s.zones.shared.stack.length === 0,
+    );
+    expect(game.state.turn.step).toBe("end");
+    game.state.zones.perPlayer[A].hand = [];
+    const tutor = game.debugSpawn("Worldly Tutor", A, "hand");
+    expect(casts(v1(game), tutor)).toBe(true);
+  });
+});
+
 describe("a draw keeps a reserve in the library", () => {
   const draw = (n: number): EffectSpec => ({ kind: "draw", amount: n });
   const worth = (game: Game, effect: EffectSpec): number =>

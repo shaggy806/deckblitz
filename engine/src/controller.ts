@@ -17,7 +17,7 @@ import type {
   LegalAction,
   TapCostOffer,
 } from "./actions.js";
-import { abilityLifeCost } from "./abilities.js";
+import { abilityLifeCost, isManaAbility } from "./abilities.js";
 import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapCountForModes, tapPicksPower, tapShareChoices } from "./actions.js";
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
@@ -94,6 +94,7 @@ import {
   sideOf,
   stackEffectOf,
   slotPolarities,
+  slotStrengths,
   targetValue,
   waitingTriggerDamage,
 } from "./target-polarity.js";
@@ -3513,9 +3514,19 @@ export class HeuristicBotController extends AutomaticController {
    * left out.
    */
   protected wastedNow(state: GameState, offer: LegalAction): boolean {
-    if (temporaryEffectCanMatter(state, this.playerId)) return false;
     const effect = this.offerEffect(offer);
-    return effect !== undefined && onlyUntilEndOfTurn(effect);
+    if (effect === undefined || !onlyUntilEndOfTurn(effect)) return false;
+    if (!temporaryEffectCanMatter(state, this.playerId)) return true;
+    // A sacrifice for it is a card for a turn's effect: only with something
+    // to answer — an opponent's spell or ability on the stack, or a combat
+    // under way. In our own first main phase the effect "could matter" for
+    // the attack to come, and Selfless Spirit was cast and sacrificed at
+    // once for an indestructible nobody threatened (watched in a bot game,
+    // 2026-11-14).
+    // Anything on the stack counts, our own included: Yahenni sacrifices
+    // into the wrath its controller just cast.
+    if (offer.kind !== "activate-ability" || offer.sacrifice === undefined) return false;
+    return state.zones.shared.stack.length === 0 && !SACRIFICE_STEPS.has(state.turn.step);
   }
 
   /**
@@ -3740,7 +3751,12 @@ export class HeuristicBotController extends AutomaticController {
     }
     const ability = def.activated?.[offer.abilityIndex];
     if (ability === undefined || !offer.text.startsWith(ability.text)) return false;
-    if (ability.condition !== undefined) return false;
+    // Only a condition on the step lets it out ("activate only during your
+    // upkeep": now or never). One on the board holds all turn — Bonders'
+    // Enclave's "only if you control a creature with power 4 or greater" was
+    // activated every upkeep, {3} and the land, with the main phase's spell
+    // still to cast (watched in a bot game, 2026-11-14).
+    if (ability.condition !== undefined && JSON.stringify(ability.condition).includes('"turn-structure"')) return false;
     const mana = ability.cost.mana;
     return mana !== null && mana !== "" && mana !== "{0}";
   }
@@ -4177,6 +4193,188 @@ export class HeuristicBotController extends AutomaticController {
     if (take === null) return false;
     const target = action.targets?.[take.slot];
     return target !== null && target !== undefined && targetValue(state, this.registry, target) < take.least;
+  }
+
+  /**
+   * Whether `action` casts an instant or sorcery whose removal (a `harm`
+   * slot of decisive weight: destroy, exile, lethal damage) is aimed at an
+   * opponent's creature worth less than {@link REMOVAL_FLOOR} — a Grizzly
+   * Bears, on `value`'s scale (`targetValue`; v2 passes its own, which
+   * counts how much of an engine the creature is). Held for a target worth
+   * the card, as a reanimation spell is (`takeSlot`), and for the same
+   * reason: a card in hand is an average card, anything it kills is a gain
+   * over that, and a rollout never shows the threat that comes later.
+   * Abrupt Decay went at a 1/1 Army token and Collective Resistance at a
+   * one-mana 0/3 (a live game, 2026-11-14; `earlyRemoval` holds removal
+   * only through the first rounds).
+   *
+   * Not held from a commander, from a creature that is attacking (the
+   * removal is a block), with seven cards in hand (it would be discarded),
+   * or at {@link TAKE_ANYTHING_AT} life or less. A noncreature target is
+   * left to the search: a Sol Ring is worth a card whatever it cost.
+   *
+   * A spell that takes the creature (`gain-control`, or an Aura's "you
+   * control enchanted creature") is the same slot at a higher floor
+   * ({@link STEAL_FLOOR}).
+   */
+  protected removesTooLittle(
+    state: GameState,
+    offer: LegalAction,
+    action: Action,
+    value: (state: GameState, registry: CardRegistry, ref: TargetRef) => number = targetValue,
+  ): boolean {
+    if (offer.kind !== "cast-spell" || action.type !== "cast-spell" || offer.face !== undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    const aura = (def.subtypes ?? []).includes("Aura") && def.controlEnchanted === true;
+    if (!aura && !def.types.includes("instant") && !def.types.includes("sorcery")) return false;
+    const me = this.playerId;
+    if ((state.players[me]?.life ?? 0) <= TAKE_ANYTHING_AT) return false;
+    if ((state.zones.perPlayer[me]?.hand.length ?? 0) >= FULL_HAND) return false;
+    const slots =
+      offer.castModal !== undefined
+        ? (action.modes ?? []).flatMap((index) => {
+            const mode = def.castModal?.modes[index];
+            return mode === undefined ? [] : [...slotStrengths(mode.effect, mode.targets?.length ?? 0)];
+          })
+        : slotStrengths(def.effect, def.targets?.length ?? 0);
+    // Taking a creature costs more than killing it and is worth what it
+    // takes: a Control Magic waits for more than a Murder does.
+    const floor = stealsATarget(def) ? STEAL_FLOOR : REMOVAL_FLOOR;
+    const earlyRounds = Math.ceil(state.turn.number / Math.max(1, state.turnOrder.length)) < EARLY_MANA_ROUNDS;
+    const tooLittle = (target: TargetRef | null | undefined): boolean => {
+      if (target === null || target === undefined || target.kind !== "object") return false;
+      const object = state.objects[target.object];
+      // A counterspell at a spell below `COUNTER_FLOOR`: Negate went at an
+      // Arcane Signet and Counterspell at a two-mana creature (watched in a
+      // bot game, 2026-11-14). Not at a commander, nor at a spell aimed at
+      // us or something of ours — countering that is protection.
+      if (object !== undefined && object.zone === "stack") {
+        if (object.kind !== "card" || object.controller === me || object.isCommander === true) return false;
+        // With every opponent's hand empty there is no better spell to wait
+        // for (the gate's "counters a Grizzly Bears when every hand is empty").
+        const cardsToCome = state.turnOrder.some(
+          (p) => p !== me && !state.players[p].hasLost && state.zones.perPlayer[p].hand.length > 0,
+        );
+        if (!cardsToCome) return false;
+        const atUs = (object.targets ?? []).some(
+          (aimed) =>
+            aimed !== undefined &&
+            aimed !== null &&
+            (aimed.kind === "player" ? aimed.player === me : state.objects[aimed.object]?.controller === me),
+        );
+        return !atUs && this.manaValueOf(object.cardName) < COUNTER_FLOOR;
+      }
+      if (object === undefined || object.zone !== "battlefield" || object.controller === me) return false;
+      if (object.isCommander === true || object.attacking !== null) return false;
+      if (!computeCharacteristics(state, this.registry, target.object).types.includes("creature")) return false;
+      // A mana creature in the opening rounds is acceleration, and worth the
+      // removal (the evaluation's `earlyMana`; the gate's "kills an early
+      // Llanowar Elves").
+      if (earlyRounds && this.registry.has(object.cardName) && this.registry.get(object.cardName).activated.some(isManaAbility)) {
+        return false;
+      }
+      return value(state, this.registry, target) < floor;
+    };
+    // "You control enchanted creature" (Control Magic): the Aura's one slot.
+    if (aura) return tooLittle(action.targets?.[0]);
+    return slots.some((slot, i) => slot !== null && slot.polarity === "harm" && slot.weight === 2 && tooLittle(action.targets?.[i]));
+  }
+
+  /**
+   * Whether `offer` casts a creature that enters as a copy of a permanent
+   * (Clone, Phyrexian Metamorph — `copyOnEnter`) with nothing on the
+   * battlefield yet worth copying: the best permanent its filter allows is
+   * below {@link STEAL_FLOOR}, or there is none (and it enters as itself, a
+   * 0/0). Held as a reanimation spell is (`takeSlot`); the copy is chosen
+   * as it enters, so there is no target to weigh.
+   */
+  protected holdsCloneForMore(state: GameState, offer: LegalAction): boolean {
+    if (offer.kind !== "cast-spell" || offer.face !== undefined || !this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    if (def.copyOnEnter === null || !def.types.includes("creature")) return false;
+    const me = this.playerId;
+    if ((state.players[me]?.life ?? 0) <= TAKE_ANYTHING_AT) return false;
+    if ((state.zones.perPlayer[me]?.hand.length ?? 0) >= FULL_HAND) return false;
+    let best = 0;
+    for (const id of state.zones.shared.battlefield) {
+      let matches = false;
+      try {
+        matches = matchesFilter(state, this.registry, id, def.copyOnEnter.filter, { you: me });
+      } catch {
+        // A filter read off the entering permanent (Mockingbird's mana
+        // spent): not answerable here, so nothing is held on its account.
+        return false;
+      }
+      if (matches) best = Math.max(best, targetValue(state, this.registry, { kind: "object", object: id }));
+    }
+    return best < STEAL_FLOOR;
+  }
+
+  /**
+   * Whether `action` casts a spell with X in its cost for too small an X: an
+   * instant or sorcery below {@link X_FLOOR}, a permanent at 0. This bot and
+   * v2's candidates cast an X spell at the most the mana pays, whatever
+   * that is — Progenitor Exarch for X = 0 on three lands (watched in a bot
+   * game, 2026-11-14), a Fireball for 1. Not held where it kills a player
+   * it's aimed at, from a full hand, or at {@link TAKE_ANYTHING_AT} life or
+   * less; X counted in sacrifices or counters removed isn't mana and isn't
+   * read.
+   */
+  protected xTooSmall(state: GameState, offer: LegalAction, action: Action): boolean {
+    if (offer.kind !== "cast-spell" || action.type !== "cast-spell") return false;
+    if (offer.xCost === undefined || action.xValue === undefined || !this.registry.has(offer.cardName)) return false;
+    if (offer.xCost.sacrifice === true || offer.xCost.removesCounters === true) return false;
+    const me = this.playerId;
+    if ((state.players[me]?.life ?? 0) <= TAKE_ANYTHING_AT) return false;
+    if ((state.zones.perPlayer[me]?.hand.length ?? 0) >= FULL_HAND) return false;
+    const def = this.registry.get(offer.cardName);
+    const spell = def.types.includes("instant") || def.types.includes("sorcery");
+    const x = action.xValue;
+    if (x >= (spell ? X_FLOOR : 1)) return false;
+    const kills = (action.targets ?? []).some(
+      (target) =>
+        target !== null &&
+        target !== undefined &&
+        target.kind === "player" &&
+        target.player !== me &&
+        (state.players[target.player]?.life ?? Infinity) <= x,
+    );
+    return !kills;
+  }
+
+  /**
+   * Whether `offer` casts an instant that searches our library for a card
+   * and puts it on top (Vampiric, Worldly, Mystical and Enlightened Tutor)
+   * at any time but the end of the turn before ours. Cast then, the card is
+   * drawn in our next draw step all the same, and until then the tutor is
+   * still in hand to find whatever the turn round turns out to need; cast
+   * in our own main phase it sits on top of the library for a whole round.
+   */
+  protected holdsTopTutor(state: GameState, offer: LegalAction): boolean {
+    if (offer.kind !== "cast-spell" || offer.face !== undefined || offer.castModal !== undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    if (!def.types.includes("instant") || !searchesToTop(def.effect)) return false;
+    return !this.isEndOfTurnBeforeOurs(state);
+  }
+
+  /** Whether this bot's own cast of `offer`, aimed as it would aim it, is
+   * removal at too small a creature (`removesTooLittle`). */
+  private holdsRemovalForMore(state: GameState, offer: CastSpellLegal): boolean {
+    if (offer.targetOptions.length === 0 && offer.castModal === undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    if (!def.types.includes("instant") && !def.types.includes("sorcery") && def.controlEnchanted !== true) return false;
+    const action = this.toCastSpell(state, offer);
+    return this.removesTooLittle(state, offer, action);
+  }
+
+  /** Whether this bot's own cast of `offer` is an X spell at too small an X
+   * (`xTooSmall`). */
+  private holdsXForMore(state: GameState, offer: CastSpellLegal): boolean {
+    if (offer.xCost === undefined) return false;
+    return this.xTooSmall(state, offer, this.toCastSpell(state, offer));
   }
 
   /** Which modes of a targeted modal spell to choose: as many as allowed, in
@@ -4880,6 +5078,10 @@ export class HeuristicBotController extends AutomaticController {
       !this.harmsOnlyUs(state, o) &&
       !this.holdsOwnPhaseOut(state, o) &&
       !this.holdsTakeForBetter(state, o) &&
+      !this.holdsRemovalForMore(state, o) &&
+      !this.holdsCloneForMore(state, o) &&
+      !this.holdsXForMore(state, o) &&
+      !this.holdsTopTutor(state, o) &&
       !this.wastedNow(state, o) &&
       !this.holdsForASpell(state, o) &&
       !this.holdsWipeForCombat(state, o) &&
@@ -5423,6 +5625,52 @@ const TAKE_FLOOR = 4;
 const TAKE_SHARE = 0.75;
 /** The life at or below which a reanimation spell takes whatever there is. */
 const TAKE_ANYTHING_AT = 10;
+/** The least an opponent's creature is worth (`targetValue`: a Grizzly Bears
+ * is 6, a vanilla 3/3 for three 9) for a removal spell to be spent on it
+ * (`removesTooLittle`). */
+const REMOVAL_FLOOR = 6;
+/** A hand at the maximum size: a spell held from it would be discarded. */
+const FULL_HAND = 7;
+/** The same for a spell that takes the creature rather than killing it, and
+ * for what a Clone copies: a vanilla 3/3 for three. */
+const STEAL_FLOOR = 9;
+/** The least X an instant or sorcery with X in its cost is cast for
+ * (`xTooSmall`). */
+const X_FLOOR = 3;
+/** The least mana value a spell has for a counterspell to be spent on it
+ * (`removesTooLittle`): a Signet or a two-mana creature isn't worth the card. */
+const COUNTER_FLOOR = 3;
+/** The steps of a combat under way, where a sacrifice for a turn's effect
+ * has something to answer (`wastedNow`). */
+const SACRIFICE_STEPS: ReadonlySet<string> = new Set(["declare-attackers", "declare-blockers", "combat-damage"]);
+/** The round by which a mana creature is one source among many and no
+ * longer worth removal for being one: the evaluation's `EARLY_MANA_END`
+ * (`bot/features.ts`), repeated here because this module imports nothing
+ * from `bot/`. */
+const EARLY_MANA_ROUNDS = 6;
+
+/** Whether `def` takes control of what it targets: an Aura's "you control
+ * enchanted creature" (Control Magic) or a `gain-control` anywhere in its
+ * effect (Mind Control's kin, Act of Treason). */
+function stealsATarget(def: CardDefinition): boolean {
+  if (def.controlEnchanted === true) return true;
+  const has = (node: unknown): boolean => {
+    if (node === null || typeof node !== "object") return false;
+    if (Array.isArray(node)) return node.some(has);
+    if ((node as { readonly kind?: unknown }).kind === "gain-control") return true;
+    return Object.values(node).some(has);
+  };
+  return has(def.effect) || has(def.castModal);
+}
+
+/** Whether `effect` searches its controller's library for a card and puts
+ * it on top, alone or as a step of a sequence (Vampiric Tutor's, before its
+ * life loss). */
+function searchesToTop(effect: EffectSpec | null | undefined): boolean {
+  if (effect === null || effect === undefined) return false;
+  if (effect.kind === "sequence") return effect.effects.some(searchesToTop);
+  return effect.kind === "search-library" && effect.destination === "library-top" && effect.who === undefined;
+}
 
 /** Whether `effect` phases out the permanents its controller controls, all
  * of them ("All permanents you control phase out" — Teferi's Protection),

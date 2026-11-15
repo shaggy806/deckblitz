@@ -6,7 +6,7 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-14 — Reanimate on a one-drop, instead of waiting for something stronger
 
-Status: fixed 2026-11-14 for reanimation (its scenarios gate); the wider habit is open (`BACKLOG.md`).
+Status: fixed 2026-11-14 (its scenarios gate), for reanimation and then removal, steal effects, Clones, X spells and tutors to the top of the library.
 
 - **Seen:** room K6DYC, turn 15 (the bot's fourth turn). Jodah's bot cast Reanimate at the user's
   Walking Bulwark, a one-mana 0/3 and the only creature card in any graveyard, with a table of
@@ -23,8 +23,26 @@ Status: fixed 2026-11-14 for reanimation (its scenarios gate); the wider habit i
   creatures cost on average, whichever is more (`takeSlot` in `controller.ts`). v1 doesn't cast
   it below that; v2's search leaves out the targets below it and chooses among the rest. At ten
   life or less it takes what there is. `test/v1-self-harm.test.ts`.
-- **Not covered:** the same habit with other one-for-one spells. In the same game Abrupt Decay
-  went at a 1/1 Army token and Collective Resistance at the Walking Bulwark.
+- **The same habit with other one-for-one spells** (the user asked for these too). In the same
+  game Abrupt Decay went at a 1/1 Army token and Collective Resistance at the Walking Bulwark; a
+  watched game had Progenitor Exarch cast for X = 0. Each waits now, all in `controller.ts`, with
+  v2's candidates leaving out what v1 wouldn't cast:
+  - *Removal* at an opponent's creature worth less than a Grizzly Bears (6 on `targetValue`'s
+    scale; v2 prices it with `rankValue`, so an engine counts) is held (`removesTooLittle`). Not
+    from a commander or an attacking creature; a noncreature target is the search's.
+  - *A steal* (`gain-control`, or an Aura's "you control enchanted creature") is the same at 9, a
+    vanilla 3/3 for three.
+  - *A Clone* (`copyOnEnter`) waits for something on the battlefield worth 9
+    (`holdsCloneForMore`).
+  - *An X spell* isn't cast below X = 3 for an instant or sorcery, or at X = 0 for a permanent,
+    unless it kills a player it's aimed at (`xTooSmall`).
+  - *An instant tutor to the top of the library* waits for the end of the turn before ours
+    (`holdsTopTutor`): the card is drawn in the same draw step, and until then the tutor is still
+    in hand. Other tutors are priced by what they find (`hand-worth.ts`) and are cast as before.
+  - All of them are off at ten life or less and (but the tutor) with seven cards in hand.
+  - Scenarios (gate): "holds Abrupt Decay from a 1/1 token", "spends Abrupt Decay on a creature
+    worth the card", "holds Clone with only a mana Elf to copy", "does not cast Progenitor Exarch
+    for X = 0", "casts Progenitor Exarch for X = 1"; the rest in `test/v1-self-harm.test.ts`.
 
 ## 2026-11-14 — Crux of Fate at its own Dragons, with no opposing creature
 

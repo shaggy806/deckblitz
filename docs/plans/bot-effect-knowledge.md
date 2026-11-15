@@ -870,6 +870,34 @@ are fixed and four that aren't (`BACKLOG.md`):
 - **Suicide when the rollout says we're dead.** With every line scored as lost, their order is
   noise, and a life payment to 0 won it. A move we don't live through never beats passing.
 
+### Holding a card for value (2026-11-14)
+
+The user, of a Reanimate cast at their one-drop: bots "struggle to know when they should hold
+off on using a spell to get more value". A card in hand is an average card to the evaluation
+(`hand-worth.ts` prices only tutors, card flow and bodies), so whatever a one-for-one spell
+does now is a gain over holding it, and a rollout never shows the better target that comes
+later. `earlyRemoval` and `answers` hold removal and counterspells by weight, and only early or
+against full hands. So the rest are rules, each a floor on what the spell is spent on, in v1's
+`wouldCast` and v2's `listCandidates` alike (`controller.ts`):
+
+| Spell | Waits for | Rule |
+| --- | --- | --- |
+| Reanimation | a card of mana value 4, or 3/4 of the battlefield's average creature | `takeSlot` |
+| Removal | a creature worth a Grizzly Bears (v2: by `rankValue`); not held from a commander, an attacker, or an early mana creature | `removesTooLittle` |
+| Steal | the same at a 3/3 for three | `removesTooLittle` |
+| Counterspell | a spell of mana value 3; not held from a commander, a spell aimed at us, or when every opponent's hand is empty | `removesTooLittle` |
+| Clone | something on the battlefield worth a 3/3 for three | `holdsCloneForMore` |
+| X spell | X of 3 (a permanent: 1), unless it kills a player | `xTooSmall` |
+| Instant tutor to the top of the library | the end of the turn before ours | `holdsTopTutor` |
+
+All off at ten life or less, and with a full hand. The floors are hand-set from the cases seen,
+not measured (`BACKLOG.md`). Two existing gate scenarios drew the exceptions: "kills an early
+Llanowar Elves" and "counters a Grizzly Bears when every hand is empty".
+
+Four more games watched, on the upgraded precons, found the counterspells (Negate at an Arcane
+Signet), an upkeep hold that let out any conditional ability (Bonders' Enclave every upkeep),
+and a sacrifice for a turn's effect with nothing to answer (Selfless Spirit).
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

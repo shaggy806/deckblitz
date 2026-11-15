@@ -1667,6 +1667,11 @@ export class EvalBotController extends HeuristicBotController {
         if (this.holdsManaForMain(view.state, legal)) continue;
         // A life cost that would be our last life (`lifeCostWouldKill`).
         if (this.lifeCostWouldKill(view.state, legal)) continue;
+        // A Clone with nothing worth copying yet (`holdsCloneForMore`), and a
+        // tutor to the top of the library before the end of the turn before
+        // ours (`holdsTopTutor`): what waiting gains is nothing a rollout shows.
+        if (this.holdsCloneForMore(view.state, legal)) continue;
+        if (this.holdsTopTutor(view.state, legal)) continue;
         // A land that taps for mana and fetches (Bountiful Landscape) waits
         // for the end of the turn before ours (`holdsManaLandFetch`).
         if (this.holdsManaLandFetch(view.state, legal)) continue;
@@ -1686,6 +1691,11 @@ export class EvalBotController extends HeuristicBotController {
           // nothing in a rollout dies and comes back, so the better target
           // it would have had is something only this rule knows of.
           if (this.takesTooLittle(view.state, legal, action)) continue;
+          // And removal at a creature not worth the card (`removesTooLittle`),
+          // priced as the search ranks targets, so an engine counts.
+          if (this.removesTooLittle(view.state, legal, action, rankValue)) continue;
+          // An X spell at too small an X (`xTooSmall`).
+          if (this.xTooSmall(view.state, legal, action)) continue;
           const verdict = this.opponentPump(view.state, legal, action);
           if (verdict === "drop") continue;
           if (verdict !== "ok") mustKill.set(action, verdict.kills);
