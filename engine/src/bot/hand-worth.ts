@@ -49,9 +49,9 @@
  * a fifth of its board terms against the half that would equal them, and a
  * noncreature permanent stays at 1, which `otherPermanents` matches.
  *
- * **Read for what to keep** ({@link Reader.engine} given: a discard being
+ * **Read for what to keep** ({@link Reader.keeps} given: a discard being
  * chosen, `features.ts`'s `withHandReadForKeeps`). Every answer there keeps
- * the same number of cards, so only which ones matters, and three things
+ * the same number of cards, so only which ones matters, and four things
  * read differently:
  *
  * - **A permanent that is an engine** adds the same fifth of what its engine
@@ -61,6 +61,10 @@
  *   land's 1.25 it was the first thing thrown away: Ledger Shredder connived
  *   away Smothering Tithe, Kykar and Monastery Mentor with four lands out,
  *   and Grave Pact went to Necropotence at cleanup (watched, 2026-11-14).
+ * - **Removal and counterspells** (`worthKeeping`: an instant or sorcery
+ *   that `isRemoval` or `isAnswer`) are 1.3: over the fifth land and an
+ *   average card, under an engine. Fierce Guardianship went ahead of a
+ *   vanilla 2/2.
  * - **The first land** is {@link EARLY_LAND}, more than any spell, while the
  *   board has fewer than {@link EARLY_LANDS}: it is what casts them.
  * - **Reach** comes off the capped quality, so the best card in the hand is
@@ -154,14 +158,14 @@ interface Reader {
    * in the hand (a tutor's find), all of the hand's. */
   readonly landsAhead: number;
   /** Given when the hand is read for what to keep (the module comment): what
-   * a card's engine scores once it is on the battlefield, in points
-   * (`features.ts`'s `engineWorthDeployed`, handed in: that module reads
-   * this one). Left out, the hand is read as the evaluation at large does. */
-  readonly engine?: EngineWorth;
+   * a card is kept for, in points beside an average card (`features.ts`'s
+   * `worthKeeping`, handed in: that module reads this one). Left out, the
+   * hand is read as the evaluation at large does. */
+  readonly keeps?: KeepWorth;
 }
 
-/** See {@link Reader.engine}. */
-export type EngineWorth = (def: CardDefinition) => number;
+/** See {@link Reader.keeps}. */
+export type KeepWorth = (def: CardDefinition) => number;
 
 function isLand(state: GameState, registry: CardRegistry, id: ObjectId): boolean {
   const name = state.objects[id]?.cardName;
@@ -240,7 +244,7 @@ function qualityOf(reader: Reader, id: ObjectId, tutors: boolean): number {
   if (def.types.includes("land")) {
     if (reader.lands >= reader.landsWanted) return SURPLUS_LAND;
     if (reader.landsAhead > 0) return 1;
-    return reader.engine !== undefined && reader.lands < EARLY_LANDS ? EARLY_LAND : NEXT_LAND;
+    return reader.keeps !== undefined && reader.lands < EARLY_LANDS ? EARLY_LAND : NEXT_LAND;
   }
   let quality = 1;
   const spell = def.types.includes("instant") || def.types.includes("sorcery");
@@ -249,21 +253,22 @@ function qualityOf(reader: Reader, id: ObjectId, tutors: boolean): number {
   // aims its draw.
   const flow = spell ? flowOf(reader.registry, def) : null;
   if (flow !== null) return FLOW_CARD * flow;
-  // A permanent's engine, at the share of its board terms a body gets.
-  const engine = spell || reader.engine === undefined ? 0 : BODY_SHARE * reader.engine(def);
+  // What the card is kept for (a permanent's engine, a spell's interaction),
+  // at the share of its board terms a body gets.
+  const kept = reader.keeps === undefined ? 0 : BODY_SHARE * reader.keeps(def);
   if (def.types.includes("creature")) {
     const body = BODY_SHARE * (BODY + STAT * ((def.power ?? 0) + (def.toughness ?? 0)));
-    quality = (hasAbilities(def) ? Math.max(1, body) : body) + engine;
+    quality = (hasAbilities(def) ? Math.max(1, body) : body) + kept;
   } else if (spell) {
-    quality = spellQuality(reader, def, tutors);
+    quality = spellQuality(reader, def, tutors) + kept;
   } else {
-    quality = 1 + engine;
+    quality = 1 + kept;
   }
   const short = Math.max(0, cheapestManaValue(reader.registry, def) - (reader.lands + 1));
   const reach = Math.max(REACH_FLOOR, 1 - OUT_OF_REACH * short);
   // Read for what to keep, reach comes off the capped quality: the best card
   // in the hand is still worth less while it can't be cast.
-  if (reader.engine !== undefined) return Math.max(QUALITY_MIN, Math.min(QUALITY_MAX, quality) * reach);
+  if (reader.keeps !== undefined) return Math.max(QUALITY_MIN, Math.min(QUALITY_MAX, quality) * reach);
   return Math.min(QUALITY_MAX, Math.max(QUALITY_MIN, quality * reach));
 }
 
@@ -290,10 +295,10 @@ export function handQuality(
   player: PlayerId,
   lands: number,
   landsWanted: number,
-  engine?: EngineWorth,
+  keeps?: KeepWorth,
 ): number {
   let total = 0;
-  for (const quality of handQualities(state, registry, player, lands, landsWanted, engine).values()) total += quality - 1;
+  for (const quality of handQualities(state, registry, player, lands, landsWanted, keeps).values()) total += quality - 1;
   return total;
 }
 
@@ -304,10 +309,17 @@ function handQualities(
   player: PlayerId,
   lands: number,
   landsWanted: number,
-  engine?: EngineWorth,
+  keeps?: KeepWorth,
 ): Map<ObjectId, number> {
   const hand = state.zones.perPlayer[player].hand;
-  const base = { state, registry, player, lands, landsWanted, ...(engine !== undefined ? { engine } : {}) };
+  const base: Omit<Reader, "landsAhead"> = {
+    state,
+    registry,
+    player,
+    lands,
+    landsWanted,
+    ...(keeps !== undefined ? { keeps } : {}),
+  };
   const landsInHand = hand.filter((id) => isLand(state, registry, id)).length;
   const out = new Map<ObjectId, number>();
   let landsAhead = 0;
@@ -337,9 +349,9 @@ export function mostWorthKeepingFirst(
   ids: readonly ObjectId[],
   lands: number,
   landsWanted: number,
-  engine: EngineWorth,
+  keeps: KeepWorth,
 ): ObjectId[] {
-  const qualities = handQualities(state, registry, player, lands, landsWanted, engine);
+  const qualities = handQualities(state, registry, player, lands, landsWanted, keeps);
   return ids
     .map((id, at) => ({ id, at, quality: qualities.get(id) ?? 1 }))
     .sort((a, b) => b.quality - a.quality || a.at - b.at)

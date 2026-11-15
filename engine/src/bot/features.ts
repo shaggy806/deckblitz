@@ -934,6 +934,27 @@ export function engineWorthDeployed(registry: CardRegistry, def: CardDefinition,
   return def.types.includes("creature") ? rates : rates + standingWorth(registry, def, opponents);
 }
 
+/** What an instant or sorcery that removes a creature or counters a spell is
+ * worth to keep, in the points {@link engineWorthDeployed} counts in: a
+ * point and a half, which reads as 1.3 of a card (`hand-worth.ts`) — over
+ * the fifth land and an average card, under an engine. */
+const INTERACTION_KEPT = 1.5;
+
+/**
+ * What `def` is worth keeping in hand for, in points beside an average card:
+ * a permanent's engine ({@link engineWorthDeployed}), and for an instant or
+ * sorcery, {@link INTERACTION_KEPT} if it is removal or a counterspell
+ * (`isRemoval`, `isAnswer`: the cards `earlyRemoval` and `answers` hold
+ * back). What a discard is chosen by ({@link withHandReadForKeeps}): read as
+ * an average card, Fierce Guardianship went ahead of a vanilla 2/2.
+ */
+export function worthKeeping(registry: CardRegistry, def: CardDefinition, opponents: number): number {
+  if (def.types.includes("instant") || def.types.includes("sorcery")) {
+    return isRemoval(def) || isAnswer(def) ? INTERACTION_KEPT : 0;
+  }
+  return engineWorthDeployed(registry, def, opponents);
+}
+
 /** Whether `handQuality` is being read for what to keep — see
  * {@link withHandReadForKeeps}. */
 let handReadForKeeps = false;
@@ -1416,7 +1437,7 @@ function playerFeaturesUncached(
           player,
           landCount,
           cap,
-          handReadForKeeps ? (def) => engineWorthDeployed(registry, def, opponents) : undefined,
+          handReadForKeeps ? (def) => worthKeeping(registry, def, opponents) : undefined,
         )
       : 0,
     // The nearest loss that isn't life: the worst commander's damage, or

@@ -2841,6 +2841,34 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "discards a vanilla body, not its removal or its counterspell",
+    rule: "A kill spell or a counterspell answers whatever comes; a 3/3 for four is the card a hand can spare.",
+    position(registry) {
+      // From a strong-deck game played against the old build (2026-11-15):
+      // Y'shtola's bot at cleanup threw Fierce Guardianship beside a 2/2. A
+      // spell with a target read as an average card (its worth depends on
+      // the board), under a Hill Giant's 1.1.
+      const game = table(registry, [A, B], A);
+      lands(game, "Plains", A, 5);
+      const answers = ["Counterspell", "Murder"].map((name) => game.debugSpawn(name, A, "hand"));
+      game.debugSpawn("Hill Giant", A, "hand");
+      for (let i = 0; i < 5; i += 1) game.debugSpawn("Craw Wurm", A, "hand");
+      const turn = game.state.turn.number;
+      game.advanceUntil(
+        (s) => (s.awaiting?.kind === "discard" && s.awaiting.player === A) || s.result.over || s.turn.number > turn,
+      );
+      if (game.state.awaiting?.kind !== "discard") return { passed: false, detail: "never asked to discard" };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "discard" && !action.cards.some((card) => answers.includes(card)),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "holds Reanimate when the graveyards hold only a one-drop",
     rule: "A reanimation spell waits for something worth bringing back: a 0/3 for a card is a poor trade with a table of Dragons still to die.",
     position(registry) {

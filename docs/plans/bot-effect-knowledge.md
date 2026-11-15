@@ -989,13 +989,21 @@ Measured: nothing changes on the sample decks, which hardly discard (a decision 
 the new, 4 of 12 changed. Edgar Markov's bot at cleanup on one land threw And They Shall Know
 No Fear and Cordial Vampire where the old one threw Grave Pact and Yawgmoth (the watched
 misplay, in the same deck); later it kept Authority of the Consuls over Culling the Weak. The
-other two swap cards the reading can't tell apart: a counterspell in hand is still an average
-card (`BACKLOG.md`).
+other two swapped cards the reading couldn't tell apart, Fierce Guardianship for one: a spell
+with a target was an average card, under a vanilla 3/3's 1.1.
 
-Gate scenarios "discards a fifth land, not an engine, down to hand size" and "keeps its third
-land over a four-mana engine it can't cast yet"; `test/bot-hand-worth.test.ts`. Left as it was:
-a creature whose worth is an activated ability (Yawgmoth, Thran Physician) has no rate and reads
-as its body, and v1's own discard (`controller.ts`) is by its own rule.
+So, the same day, **removal and counterspells** read as 1.3 there (`worthKeeping`: an instant
+or sorcery that `isRemoval` or `isAnswer`, the cards `earlyRemoval` and `answers` already hold
+back): over the fifth land and an average card, under an engine. With it 5 of 12 changed, and
+Y'shtola's bot kept Swan Song, Mystical Dispute and Fierce Guardianship where it had thrown
+one each time.
+
+Gate scenarios "discards a fifth land, not an engine, down to hand size", "keeps its third
+land over a four-mana engine it can't cast yet" and "discards a vanilla body, not its removal
+or its counterspell"; `test/bot-hand-worth.test.ts`. Left as it was: a creature whose worth is
+an activated ability (Yawgmoth, Thran Physician) or a static with no rate (Boromir) reads as
+its body, an untargeted instant as what `effectWorth` reads of it (Teferi's Protection, an
+average card), and v1's own discard (`controller.ts`) is by its own rule.
 
 ## Watching live games for
 

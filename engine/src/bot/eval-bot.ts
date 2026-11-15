@@ -66,7 +66,7 @@ import { DEFAULT_WEIGHTS, aimedOutcome, evaluateState, normalizeWeights, outcome
 import type { EvalOutcome } from "./evaluate.js";
 import { aimedAt, aimedByLine } from "./interaction.js";
 import type { Aimed } from "./interaction.js";
-import { engineScore, engineWorthDeployed, lifeCost, withHandReadForKeeps, withTrackRecordEvidence } from "./features.js";
+import { engineScore, lifeCost, withHandReadForKeeps, withTrackRecordEvidence, worthKeeping } from "./features.js";
 import { mostWorthKeepingFirst } from "./hand-worth.js";
 import type { EvalWeights } from "./evaluate.js";
 import {
@@ -578,7 +578,7 @@ function keepFirst(
   }).length;
   const opponents = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost).length;
   return mostWorthKeepingFirst(state, cards, me, ids, lands, weights.landCap, (def) =>
-    engineWorthDeployed(cards, def, opponents),
+    worthKeeping(cards, def, opponents),
   );
 }
 

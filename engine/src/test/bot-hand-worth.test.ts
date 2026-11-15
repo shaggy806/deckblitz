@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { DEFAULT_WEIGHTS, evaluateState } from "../bot/evaluate.js";
-import { engineWorthDeployed, withHandReadForKeeps } from "../bot/features.js";
+import { engineWorthDeployed, withHandReadForKeeps, worthKeeping } from "../bot/features.js";
 import { handCardQuality, handQuality, mostWorthKeepingFirst, QUALITY_MAX, QUALITY_MIN } from "../bot/hand-worth.js";
 import { createDefaultRegistry } from "../cards.js";
 import type { CardDefinition } from "../cards/define.js";
@@ -115,8 +115,9 @@ describe("the handQuality feature", () => {
 
   describe("read for what to keep", () => {
     // What a discard is chosen by (`withHandReadForKeeps`): the feature given
-    // each card's engine, as it scores on the battlefield.
-    const engine = (def: CardDefinition): number => engineWorthDeployed(registry, def, 1);
+    // what each card is kept for — a permanent's engine as it scores on the
+    // battlefield, a spell's interaction.
+    const engine = (def: CardDefinition): number => worthKeeping(registry, def, 1);
     const alone = (name: string, lands: number, keeps = true): number => {
       const game = emptyHanded();
       game.debugSpawn(name, A, "hand");
@@ -130,10 +131,23 @@ describe("the handQuality feature", () => {
       expect(alone("Monastery Mentor", 4)).toBeGreaterThan(1.25);
       expect(alone("Kykar, Wind's Fury", 4)).toBeGreaterThan(1.25);
       expect(alone("Forest", 4)).toBe(1.25);
-      // No engine: a mana rock, a vanilla body, a removal spell.
+      // No engine: a mana rock, a vanilla body.
       expect(alone("Sol Ring", 4)).toBe(1);
       expect(alone("Grizzly Bears", 4)).toBeCloseTo(0.9);
-      expect(alone("Murder", 4)).toBe(1);
+      // The floor a noncreature permanent that keeps working gets, and none
+      // for a creature, whose body is its floor.
+      expect(engineWorthDeployed(registry, registry.get("Smothering Tithe"), 3)).toBeGreaterThanOrEqual(5.5);
+      expect(engineWorthDeployed(registry, registry.get("Grizzly Bears"), 3)).toBe(0);
+    });
+
+    it("reads removal and a counterspell as more than an average card or a fifth land", () => {
+      // A spell with a target was an average card, under a Hill Giant's 1.1.
+      expect(alone("Murder", 4)).toBeCloseTo(1.3);
+      expect(alone("Counterspell", 4)).toBeCloseTo(1.3);
+      expect(alone("Hill Giant", 4)).toBeCloseTo(1.1);
+      // Not a spell that is neither: a pump, a ramp spell.
+      expect(alone("Giant Growth", 4)).toBe(1);
+      expect(worthKeeping(registry, registry.get("Rampant Growth"), 3)).toBe(0);
     });
 
     it("has the next land above any spell below four lands", () => {
@@ -165,7 +179,7 @@ describe("the handQuality feature", () => {
       // What a discard's candidates are drawn in: by mana value they were
       // all pairs of the cheapest cards, the land first of them.
       const game = emptyHanded();
-      const names = ["Grizzly Bears", "Forest", "Smothering Tithe", "Murder", "Forest", "Monastery Mentor"];
+      const names = ["Grizzly Bears", "Forest", "Smothering Tithe", "Giant Growth", "Forest", "Monastery Mentor"];
       const ids = names.map((name) => game.debugSpawn(name, A, "hand"));
       const order = (lands: number): string[] =>
         mostWorthKeepingFirst(game.state, registry, A, ids, lands, 7, engine).map(
@@ -173,7 +187,14 @@ describe("the handQuality feature", () => {
         );
       // Four lands out: the engines, the next land, then the average cards
       // as they came (a second land is one), and the vanilla 2/2 last.
-      expect(order(4)).toEqual(["Smothering Tithe", "Monastery Mentor", "Forest", "Murder", "Forest", "Grizzly Bears"]);
+      expect(order(4)).toEqual([
+        "Smothering Tithe",
+        "Monastery Mentor",
+        "Forest",
+        "Giant Growth",
+        "Forest",
+        "Grizzly Bears",
+      ]);
       // Two lands out: the land first, and the Tithe a mana short behind the Mentor.
       expect(order(2).slice(0, 3)).toEqual(["Forest", "Monastery Mentor", "Smothering Tithe"]);
     });
