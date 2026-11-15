@@ -950,7 +950,17 @@ payment is weighed against the spell v1 then doesn't cast. Three versions, each 
 So v1's look ahead stays the default, and the search only overrules it on what it can see.
 Two things the judging showed that are not this change's (`BACKLOG.md`): v2's own turn isn't
 steady in mana (with one mana less it played a turn 36 points better by its own evaluation),
-and v1 still makes the echo answer itself, where it plays unsearched.
+and v1 still made the echo answer itself, where it plays unsearched.
+
+That last one went the same day. v1 declines a payment for a spell only while paying gains no
+more than the spell's delay is worth (`SPELL_DELAY_PER_MANA`, half a point for each mana of the
+spells lost, on `effectWorth`'s scale), and `effectWorth` prices sacrificing an effect's own
+source as a card and its mana value (`sourceWorth`), where it was one card whatever the
+permanent. Echo on Cradle Guard: 3.5 gained by paying, against a Grizzly Bears' 1. Smothering
+Tithe's {2}: half a point gained, against a Baloth's 2. Where v1 pays, v2 searches without a
+margin; the margin still guards what v1 declines. A v1 decision diff over 40 games changed 3 of
+77,320 decisions, all The Gitrog Monster's upkeep: v1 let the Monster go where it now
+sacrifices a land. v2's diff, where v1 plays the rollouts, changed none of 12,871.
 
 Gate scenario "pays echo on a 4/4 though it costs the turn's two-drop";
 `test/bot-declined-payment.test.ts`.

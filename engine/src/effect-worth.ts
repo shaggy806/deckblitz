@@ -87,6 +87,20 @@ export interface WorthContext {
   readonly cards?: CardRegistry;
 }
 
+/**
+ * What the effect's own source is worth on the battlefield, for an effect
+ * that sacrifices it: a card and its mana value (a token, or a source this
+ * can't read, a card). It was one card whatever the permanent, so paying
+ * echo's {1}{G}{G} (1.5) to keep a 4/4 beat sacrificing it by half a point,
+ * and anything else in the balance tipped it (`HeuristicBotController`'s
+ * `chooseModes`: the spell the mana was for).
+ */
+function sourceWorth(ctx: WorthContext): number {
+  const source = ctx.source !== undefined ? ctx.state.objects[ctx.source] : undefined;
+  if (source === undefined || source.isToken || ctx.cards === undefined) return CARD;
+  return CARD + manaValueOfObject(ctx.cards, source);
+}
+
 /** A plain number of an amount, or `fallback` for a live one. */
 function sizeOf(amount: EffectAmount | undefined, fallback = 1): number {
   return typeof amount === "number" ? Math.max(0, amount) : fallback;
@@ -498,7 +512,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0;
     case "sacrifice-source":
       return (
-        onObjectRef("source", -CARD, ctx) +
+        onObjectRef("source", -sourceWorth(ctx), ctx) +
         (effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
       );
     case "create-token": {

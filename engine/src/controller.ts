@@ -2137,6 +2137,12 @@ const LANDS_BEFORE_FLOOD = 7;
  * less above its payment — see `isFreeFetch`. */
 const FETCH_LIFE_FLOOR = 4;
 
+/** What a spell put off a turn by a payment is worth, for each mana of it, on
+ * `effectWorth`'s scale (where a card is 2 and mana spent half a point): the
+ * most paying may gain over declining and still be declined for the spell
+ * (`HeuristicBotController.chooseModes`). */
+const SPELL_DELAY_PER_MANA = 0.5;
+
 /** The life an effect makes its controller lose outright — a ward payment's
  * "Pay N life" part, which is a `lose-life` of `"you"` inside its mode. */
 function lifePaidBy(effect: EffectSpec | undefined): number {
@@ -4799,11 +4805,23 @@ export class HeuristicBotController extends AutomaticController {
       const best = scored[0];
       if (chosen.length === 0 && best !== undefined && maxModes > 0) chosen.push(best);
       // Asked whichever way the worth below falls: v2 searches this choice
-      // over our answer, and has to be told when paying costs a spell
-      // (`declinedForASpell`) — its rollouts make the mana free.
+      // over our answer, and has to be told when it was declined to keep a
+      // spell castable (`declinedForASpell`) — its rollouts make the mana free.
       const paying = chosen.map((mode) => mode.index).sort((a, b) => a - b);
-      if (paying.length > 0 && this.payingCostsASpell(view, paying)) return [];
       const taken = chosen.reduce((sum, mode) => sum + mode.worth, 0) + cost;
+      // The spell is put off a turn, not lost: paying is declined for it
+      // only while paying gains no more than that delay is worth
+      // (`SPELL_DELAY_PER_MANA` of the spells' mana). It was declined for any
+      // spell, whatever declining cost, and a 4/4 went to its echo so that a
+      // Grizzly Bears could be cast.
+      if (this.declinedChoice === awaiting) this.declinedChoice = null;
+      if (paying.length > 0 && this.payingCostsASpell(view, paying)) {
+        const delay = SPELL_DELAY_PER_MANA * (this.paidChoiceMemo?.lost ?? 0);
+        if (taken - declined <= delay) {
+          this.declinedChoice = awaiting;
+          return [];
+        }
+      }
       if (taken <= declined) return [];
     }
     return chosen.map((mode) => mode.index).sort((a, b) => a - b);
@@ -4880,13 +4898,19 @@ export class HeuristicBotController extends AutomaticController {
    * see that spell — unless what they do see of declining costs more than
    * that spell's delay (`manaDeclinedFor`). */
   protected declinedForASpell(state: GameState): boolean {
-    return state.awaiting !== null && this.paidChoiceMemo?.awaiting === state.awaiting && this.paidChoiceMemo.costs;
+    return state.awaiting !== null && this.declinedChoice === state.awaiting;
   }
+
+  /** The choice `chooseModes` last declined to keep a spell castable, by its
+   * `awaiting` object (as `paidChoiceMemo` is kept): paying that costs a
+   * spell isn't always declined for it. */
+  private declinedChoice: object | null = null;
 
   /** The total mana value of the spells `declinedForASpell`'s answer kept
    * castable (each at least 1); 0 when it wasn't declined for one. */
   protected manaDeclinedFor(state: GameState): number {
-    return this.declinedForASpell(state) ? (this.paidChoiceMemo?.lost ?? 0) : 0;
+    if (!this.declinedForASpell(state) || this.paidChoiceMemo?.awaiting !== state.awaiting) return 0;
+    return this.paidChoiceMemo.lost;
   }
 
   /**

@@ -122,11 +122,9 @@ describe("v2 keeps v1's declined payment unless declining costs more than the sp
   });
 
   it("pays echo on a 4/4 rather than sacrifice it to cast a 2/2", () => {
-    // v1's answer is to decline, the Bears being lost to the payment (a
-    // sacrifice is one card to its worth, whatever is sacrificed), and v2
-    // kept it unsearched.
+    // v1's answer was to decline, the Bears being lost to the payment, and
+    // v2 kept it unsearched.
     const game = echoAsked();
-    expect(modes(v1(game))).toEqual([]);
     expect(modes(new EvalBotController(A, registry).act(game.controllerView(A)))).toEqual([0]);
   });
 
@@ -140,5 +138,28 @@ describe("v2 keeps v1's declined payment unless declining costs more than the sp
     game.dispatch(answer);
     game.advanceUntil((s) => s.turn.step === "draw" || s.result.over);
     expect(game.state.players[A].hasLost).toBe(false);
+  });
+});
+
+describe("v1 declines a payment for a spell only while paying gains less than the spell's delay", () => {
+  // It declined whenever a spell was lost, whatever declining cost, and a
+  // sacrifice was one card to its worth whatever was sacrificed: where v1
+  // answers unsearched (a turn too slow to search), the 4/4 went to its echo.
+  it("pays echo on a 4/4 rather than sacrifice it to cast a 2/2", () => {
+    // Paying is {1}{G}{G} (1.5) against a card and its three mana (5): 3.5
+    // gained, and the Bears put off a turn is worth 1.
+    expect(modes(v1(echoAsked()))).toEqual([0]);
+  });
+
+  it("still declines Smothering Tithe's {2} for its four-drop", () => {
+    // Half a point gained (a Treasure denied) against a Baloth's 2.
+    expect(modes(v1(titheAsked(4)))).toEqual([]);
+  });
+
+  it("still pays it with mana to spare, or with nothing to cast", () => {
+    expect(modes(v1(titheAsked(6)))).toEqual([0]);
+    const game = titheAsked(4);
+    game.state.zones.perPlayer[A].hand = [];
+    expect(modes(v1(game))).toEqual([0]);
   });
 });
