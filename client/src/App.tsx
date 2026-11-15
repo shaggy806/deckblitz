@@ -8295,7 +8295,9 @@ function Table({
               // Most routes read fine as their own name ("flashback", "escape");
               // a permission granted by another permanent doesn't.
               if (c?.via === 'graveyard-permission') return 'Cast from graveyard'
-              if (c?.via === 'other-hand') return 'Cast from their hand'
+              // `other-hand` is a permission's play from a hidden zone: another
+              // player's hand (Sen Triplets) or the sideboard (The Holodeck).
+              if (c?.via === 'other-hand') return openZoneOf?.zone === 'sideboard' ? 'Cast from sideboard' : 'Cast from their hand'
               if (c?.via) return `Cast (${c.via})`
               if (landByCard.has(id)) return 'Play land'
               return 'Cast'

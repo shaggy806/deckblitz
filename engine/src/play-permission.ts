@@ -30,8 +30,9 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 /** The zones a permission reaches. `"library-top"` is the top card of the
  * permission holder's library — or, on a resolved rule whose `whose` names
  * them, another player's (Xanathar, Guild Kingpin); `"hand"` another player's
- * hand. */
-export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
+ * hand; `"outside"` a card the holder owns outside the game, their sideboard
+ * (rule 400.11a — The Holodeck; none in a Commander game, 903.5e). */
+export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside";
 
 /**
  * What a permission says.

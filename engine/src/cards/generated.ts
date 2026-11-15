@@ -28148,6 +28148,7 @@ import _poolTheGrimCaptainsLocker from "./pool/the-grim-captains-locker.js";
 import _poolTheGuardianOfForever from "./pool/the-guardian-of-forever.js";
 import _poolTheHauntOfHightower from "./pool/the-haunt-of-hightower.js";
 import _poolTheHive from "./pool/the-hive.js";
+import _poolTheHolodeck from "./pool/the-holodeck.js";
 import _poolTheHorusHeresy from "./pool/the-horus-heresy.js";
 import _poolTheHowlingAbomination from "./pool/the-howling-abomination.js";
 import _poolTheHowlingCommandos from "./pool/the-howling-commandos.js";
@@ -61350,6 +61351,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheGuardianOfForever,
   _poolTheHauntOfHightower,
   _poolTheHive,
+  _poolTheHolodeck,
   _poolTheHorusHeresy,
   _poolTheHowlingAbomination,
   _poolTheHowlingCommandos,
@@ -94565,6 +94567,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-guardian-of-forever": _poolTheGuardianOfForever,
   "pool/the-haunt-of-hightower": _poolTheHauntOfHightower,
   "pool/the-hive": _poolTheHive,
+  "pool/the-holodeck": _poolTheHolodeck,
   "pool/the-horus-heresy": _poolTheHorusHeresy,
   "pool/the-howling-abomination": _poolTheHowlingAbomination,
   "pool/the-howling-commandos": _poolTheHowlingCommandos,

@@ -630,3 +630,39 @@ describe("Q, Stacking the Deck", () => {
     expect(game.legalActions(A).some((x) => x.kind === "activate-ability" && x.source === bears)).toBe(false);
   });
 });
+
+describe("The Holodeck", () => {
+  it("plays one permanent card a turn, from the sideboard or the graveyard", () => {
+    const { game } = table({ sideboard: ["Grizzly Bears"] });
+    spawn(game, "The Holodeck");
+    lands(game, "Forest", 4);
+    const fromSideboard = game.state.outside?.[A]?.[0];
+    expect(fromSideboard).toBeDefined();
+    const giant = toGraveyard(game, "Llanowar Elves");
+    const castFrom = (card: ObjectId) =>
+      game.legalActions(A).find((x) => x.kind === "cast-spell" && x.card === card);
+    const offer = castFrom(fromSideboard!);
+    expect(offer).toBeDefined();
+    expect(castFrom(giant)).toBeDefined();
+    if (offer?.kind !== "cast-spell") return;
+    game.dispatch({ type: "cast-spell", player: A, card: fromSideboard!, targets: [], ...(offer.via !== undefined ? { via: offer.via } : {}) });
+    settle(game);
+    expect(zone(game, fromSideboard!)).toBe("battlefield");
+    expect(castFrom(giant)).toBeUndefined(); // once this turn
+    toStep(game, "precombat-main");
+    expect(castFrom(giant)).toBeDefined();
+    nextTurn(game); // not on bob's turn
+    game.advanceUntil((st) => st.priority.holder === A);
+    expect(castFrom(giant)).toBeUndefined();
+  });
+
+  it("reaches nothing outside the game in Commander: the graveyard only", () => {
+    const { game } = table();
+    spawn(game, "The Holodeck");
+    lands(game, "Forest", 4);
+    const bears = toGraveyard(game, "Grizzly Bears");
+    expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === bears)).toBe(true);
+    const sorcery = toGraveyard(game, "Divination");
+    expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === sorcery)).toBe(false);
+  });
+});

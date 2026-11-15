@@ -4016,6 +4016,25 @@ export class Game {
       }
     }
 
+    // From outside the game, their sideboard (The Holodeck): what a
+    // permission reaches there, by the ordinary rules for timing and costs.
+    if (this.reachesZone(player, "outside")) {
+      for (const card of sideboardOf(this.state, player)) {
+        for (const face of this.modalFaces(card)) {
+          if (this.playOptions(player, card, face ?? 0).length === 0) continue;
+          const def = this.faceDef(card, face ?? 0);
+          const faceProp = face !== undefined ? { face } : {};
+          if (def.types.includes("land")) {
+            if (this.whyCannotPlayLand(player, card, face ?? 0) === null) {
+              out.push({ kind: "play-land", card, cardName: def.name, ...faceProp });
+            }
+            continue;
+          }
+          out.push(...this.castSpellActions(player, card, def.name, def, { via: "other-hand", ...faceProp, costString: def.manaCost }));
+        }
+      }
+    }
+
     // Graveyard permissions: one granted by a permanent (Gisa and Geralf,
     // Muldrotha) or one riding on the card itself (Silas Renn, Emry). Offered
     // once per permission that applies — and, for Muldrotha, once per
@@ -15211,6 +15230,8 @@ export class Game {
       (this.state.objects[cardId]?.zone === "library" &&
         this.playZoneOf(this.state.objects[cardId], player) === "library-top" &&
         this.playOptions(player, cardId, face).length > 0) ||
+      // From outside the game (The Holodeck).
+      (this.state.objects[cardId]?.zone === "outside" && this.playOptions(player, cardId, face).length > 0) ||
       // "Impulse draw" that says *play* rather than *cast* includes lands
       // (Tectonic Giant, Theater of Horrors), as does a `playFromExile`
       // static that plays lands (Grolnok, the Omnivore).
@@ -20212,7 +20233,10 @@ export class Game {
         return `${def.name} can't be cast as ${asType} from exile now`;
       }
     } else if (via === "other-hand") {
-      if (this.state.objects[cardId]?.zone !== "hand" || this.playOptions(player, cardId, face).length === 0) {
+      // Another player's hand (Sen Triplets), or outside the game (The
+      // Holodeck): a permission names it.
+      const zone = this.state.objects[cardId]?.zone;
+      if ((zone !== "hand" && zone !== "outside") || this.playOptions(player, cardId, face).length === 0) {
         return `${player} may not cast ${def.name} from that hand`;
       }
     } else if (via === "library-top") {
@@ -46245,6 +46269,7 @@ controlledBy,
       card.exiledFaceDown === undefined &&
       from !== "library-top" &&
       from !== "hand" &&
+      from !== "outside" &&
       self.from.includes(from) &&
       !(isLand && self.play !== true) &&
       out.length === 0 &&
@@ -46298,6 +46323,8 @@ controlledBy,
    * none can (a library card that isn't on top, a card in their own hand). */
   private playZoneOf(card: GameObject, player: PlayerId): PlayFrom | null {
     if (card.zone === "exile" || card.zone === "graveyard") return card.zone;
+    // Their own sideboard (rule 400.11a; none in a Commander game, 903.5e).
+    if (card.zone === "outside" && card.owner === player && sideboardOf(this.state, player).includes(card.id)) return "outside";
     // The top of a library: the player's own, or another's a resolved rule
     // reaches (Xanathar, Guild Kingpin's "the top card of their library").
     if (
