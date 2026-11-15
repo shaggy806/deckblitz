@@ -99,6 +99,16 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 
+**Baxter Building's ability menu lists every colour combination**
+
+Reported from a live game (the user, 2026-11-14, room 4M2LS): clicking Baxter Building opens its
+ability menu with one row for "{T}: Add {C}" and then one row for every way to split "{4}, {T}:
+Add four mana in any combination of colors" (dozens of them: WWWW, WWWU, …). The column runs off
+the bottom of a 1080p screen and pushes the land's third ability ("Draw a card") out of reach, so
+the land's options are unusable. The combinations should be one row that asks for the colours
+after it's picked (as a spell's "N mana in any combination" does), or the menu should at least
+scroll and group them.
+
 **Another player's target popup says "your graveyard"**
 
 When an opponent chooses a trigger's target for its controller (Mausoleum Turnkey's
