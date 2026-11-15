@@ -327,6 +327,7 @@ import _poolGetALegUp from "../pool/get-a-leg-up.js";
 import _poolGhorClanRampager from "../pool/ghor-clan-rampager.js";
 import _poolGhostlySentinel from "../pool/ghostly-sentinel.js";
 import _poolGideonsMemorial from "../pool/gideons-memorial.js";
+import _poolGiftOfPerfection from "../pool/gift-of-perfection.js";
 import _poolGigglingSkitterspike from "../pool/giggling-skitterspike.js";
 import _poolGisaTheHellraiser from "../pool/gisa-the-hellraiser.js";
 import _poolGladewalkerRitualist from "../pool/gladewalker-ritualist.js";
@@ -1357,6 +1358,7 @@ const shard: CardShard = {
     _poolGhorClanRampager,
     _poolGhostlySentinel,
     _poolGideonsMemorial,
+    _poolGiftOfPerfection,
     _poolGigglingSkitterspike,
     _poolGisaTheHellraiser,
     _poolGladewalkerRitualist,

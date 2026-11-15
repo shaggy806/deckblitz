@@ -10975,6 +10975,7 @@ import _poolGiftOfGrowth from "./pool/gift-of-growth.js";
 import _poolGiftOfImmortality from "./pool/gift-of-immortality.js";
 import _poolGiftOfOrzhova from "./pool/gift-of-orzhova.js";
 import _poolGiftOfParadise from "./pool/gift-of-paradise.js";
+import _poolGiftOfPerfection from "./pool/gift-of-perfection.js";
 import _poolGiftOfStrands from "./pool/gift-of-strands.js";
 import _poolGiftOfStrength from "./pool/gift-of-strength.js";
 import _poolGiftOfTheDeity from "./pool/gift-of-the-deity.js";
@@ -44174,6 +44175,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGiftOfImmortality,
   _poolGiftOfOrzhova,
   _poolGiftOfParadise,
+  _poolGiftOfPerfection,
   _poolGiftOfStrands,
   _poolGiftOfStrength,
   _poolGiftOfTheDeity,
@@ -77386,6 +77388,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gift-of-immortality": _poolGiftOfImmortality,
   "pool/gift-of-orzhova": _poolGiftOfOrzhova,
   "pool/gift-of-paradise": _poolGiftOfParadise,
+  "pool/gift-of-perfection": _poolGiftOfPerfection,
   "pool/gift-of-strands": _poolGiftOfStrands,
   "pool/gift-of-strength": _poolGiftOfStrength,
   "pool/gift-of-the-deity": _poolGiftOfTheDeity,

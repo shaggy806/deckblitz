@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, counters, destroy, enter, hand, keywords, lands, nextTurn, pickTargets, ref, settle, spawn, subtypes, table, toHand, toStep, tokensNamed, types, zone } from "./harness.js";
+import { A, B, C, activate, cast, counters, destroy, enter, hand, keywords, lands, nextTurn, pickTargets, ref, settle, spawn, subtypes, table, toHand, toLibrary, toStep, tokensNamed, types, zone } from "./harness.js";
 import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
@@ -166,5 +166,24 @@ describe("Cmdr. Troi, Outgoing Empath", () => {
     game.dispatch({ type: "activate-ability", player: A, source: troi, abilityIndex: 0, targets: [ref(B)] });
     settle(game);
     expect(hand(game).length).toBe(aliceHand + 1);
+  });
+});
+
+describe("Gift of Perfection", () => {
+  it("assimilates one creature among every opponent's reveals; the rest go to the bottom", () => {
+    const { game, a } = table({ players: 3 });
+    lands(game, "Island", 5);
+    const bTop = toLibrary(game, "Hill Giant", B);
+    const bLand = toLibrary(game, "Forest", B); // on top: revealed first
+    const cCreature = toLibrary(game, "Grizzly Bears", C);
+    a.chooseFromZoneFn = (_view, eligible) => eligible.filter((id) => id === cCreature);
+    cast(game, toHand(game, "Gift of Perfection"));
+    expect(zone(game, cCreature)).toBe("battlefield");
+    expect(game.state.objects[cCreature].controller).toBe(A);
+    expect(subtypes(game, cCreature)).toEqual(["Borg"]);
+    expect(counters(game, cCreature, "+1/+1")).toBe(1);
+    // Bob's Forest and his Hill Giant (found, not chosen) go to his bottom.
+    const bLibrary = game.state.zones.perPlayer[B].library;
+    expect(bLibrary.slice(-2).sort()).toEqual([bTop, bLand].sort());
   });
 });

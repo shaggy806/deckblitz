@@ -117,7 +117,9 @@ export type LookAndChooseZone =
   | "graveyards"
   | "command"
   | "exile"
-  | { readonly cards: readonly ObjectId[] }
+  /** `revealed`: the cards a `"revealed-this-way"` names, in a library or a
+   * hand; otherwise cards in a graveyard. */
+  | { readonly cards: readonly ObjectId[]; readonly revealed?: true }
   | {
       readonly exiled: readonly ObjectId[];
       /** Its `"exiled-this-way"`: the chooser was told to look at them, so a
@@ -4544,6 +4546,11 @@ export type EffectSpec =
        * order. */
       readonly to: "hand" | "library-bottom";
       readonly filter?: CardFilter;
+      /** The cards this resolution **revealed** instead, still in the library
+       * they were revealed from: "then each opponent puts the other cards they
+       * revealed this way on the bottom of their library in a random order"
+       * (Gift of Perfection, `to: "library-bottom"`). */
+      readonly revealed?: true;
     }
   | {
       /** Exile a target permanent, then immediately return it to the
@@ -11330,7 +11337,20 @@ export type EffectSpec =
        * at them even if they're face down (rule 406.3) — Scroll Rack's "then
        * look at the exiled cards and put them on top of your library in any
        * order". One card going back on top has no order, so isn't asked. */
-      readonly zone: "library" | "graveyard" | "hand" | "graveyards" | "command" | "targets" | "exile" | "exiled-with-source" | "exiled-this-way";
+      readonly zone:
+        | "library"
+        | "graveyard"
+        | "hand"
+        | "graveyards"
+        | "command"
+        | "targets"
+        | "exile"
+        | "exiled-with-source"
+        | "exiled-this-way"
+        /** The cards this resolution revealed from a library or hand, still
+         * there as the same objects (Gift of Perfection's "assimilate one of
+         * the creature cards revealed this way", among every opponent's). */
+        | "revealed-this-way";
       /** With `zone: "targets"`: the ones still in exile as the objects they
        * were (rule 400.7), that could return: "you can't pick a card that can't
        * legally be returned to the battlefield" (Dimensional Breach's ruling), so
@@ -12722,7 +12742,7 @@ export interface EffectApi {
    * that's answered). `exileAgain` false returns them and leaves them. */
   reflicker(exileAgain: boolean): boolean;
   /** See the `"move-exiled-this-way"` {@link EffectSpec}. */
-  moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter): void;
+  moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter, revealed?: boolean): void;
   /** See the `"put-arrived-onto-battlefield"` {@link EffectSpec}. `true`
    * when it stopped first to ask an "as this enters" choice. */
   putArrivedOntoBattlefield(spec: Extract<EffectSpec, { kind: "put-arrived-onto-battlefield" }>): boolean;
@@ -19491,7 +19511,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "move-exiled-this-way":
-      ctx.moveExiledThisWay(spec.to, spec.filter);
+      ctx.moveExiledThisWay(spec.to, spec.filter, spec.revealed === true);
       return;
     case "reflicker": {
       const parked = ctx.parkedCount();
@@ -23218,7 +23238,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               { exiled: ctx.cardsExiledWithSource(true) }
             : spec.zone === "exiled-this-way"
               ? { exiled: ctx.cardsExiledThisWay(true), looked: true as const }
-              : spec.zone;
+              : spec.zone === "revealed-this-way"
+                ? {
+                    cards: ctx
+                      .objectSet({ thisWay: "revealed" })
+                      .flatMap((m) => (ctx.stintNow(m.object) === m.stint ? [m.object] : [])),
+                    revealed: true as const,
+                  }
+                : spec.zone;
       ctx.lookAndChoose(
         zone,
         spec.count === undefined ? undefined : amountValue(spec.count, ctx),

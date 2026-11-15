@@ -40233,7 +40233,24 @@ export class Game {
         });
         return false;
       },
-      moveExiledThisWay: (to, filter) => {
+      moveExiledThisWay: (to, filter, revealed) => {
+        // The cards this resolution revealed, still in the library they were
+        // revealed from: each owner's to the bottom, in a random order.
+        if (revealed === true) {
+          const still = thisWayEntries(this.state, "revealed", since)
+            .map((e) => e.object)
+            .filter((id) => {
+              const object = this.state.objects[id];
+              if (object === undefined || object.zone !== "library") return false;
+              return filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller });
+            });
+          for (const owner of this.state.turnOrder) {
+            const theirs = still.filter((id) => this.state.objects[id]?.owner === owner);
+            if (to === "library-bottom" && theirs.length > 0) this.placeRevealed(owner, theirs, "bottom-random", false);
+            else if (to === "hand") for (const id of theirs) this.moveObject(id, "hand");
+          }
+          return;
+        }
         // Every card this resolution exiled, from anywhere — a permanent too
         // (Worlds Within Worlds' "exile all creatures … then put all cards
         // exiled this way into their owners' hands") — still in exile as
@@ -44102,7 +44119,12 @@ controlledBy,
     const fromAnyGraveyard = zone === "graveyards" || typeof zone === "object";
     const zoneCards =
       typeof zone === "object"
-        ? ("cards" in zone ? zone.cards : []).filter((id) => this.state.objects[id]?.zone === "graveyard")
+        ? ("cards" in zone ? zone.cards : []).filter((id) => {
+            const where = this.state.objects[id]?.zone;
+            // Cards revealed this way are where they were revealed (Gift of
+            // Perfection's, in libraries).
+            return "revealed" in zone && zone.revealed === true ? where === "library" || where === "hand" : where === "graveyard";
+          })
         : zone === "graveyards"
         ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p].graveyard)
         : zone === "command"
