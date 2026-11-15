@@ -16,7 +16,7 @@
  * null-checks through `Room`'s entire API for no benefit.
  */
 
-import { attractionDeckProblems, colorIdentityOf, commandersOf, validateCommanderDeck } from "engine/local";
+import { STRONG_DECKS, attractionDeckProblems, colorIdentityOf, commandersOf, validateCommanderDeck } from "engine/local";
 import { cardRegistry } from "./card-registry.js";
 import type { CardRegistry, Color, DeckList, GameConfig, PlayerId } from "engine/local";
 import { botNameFits, botNameFor } from "./bot-names.js";
@@ -61,6 +61,18 @@ const MAX_SIDEBOARD = 15;
 
 /** A deck's colours, for naming the bot that plays it: its commanders'
  * colour identity (rule 903.4), or, without a commander, every card's. */
+/**
+ * Who built `deck`, when it is one of the real players' decks
+ * (`STRONG_DECKS`): the same name and the same commander. The bot playing it
+ * takes their name. A deck someone merely named alike has another's
+ * commander or none, and a character's name.
+ */
+function deckCreator(deck: PendingDeck): string | null {
+  const commander = commandersOf(deck)[0];
+  const strong = STRONG_DECKS.find((d) => d.name === deck.name && d.commanders?.[0] === commander);
+  return strong?.credit?.author.slice(0, MAX_DISPLAY_NAME_LENGTH) ?? null;
+}
+
 function deckIdentity(deck: PendingDeck): Set<Color> {
   const commanders = commandersOf(deck);
   const identity = new Set<Color>();
@@ -362,12 +374,17 @@ export class PendingRoom {
   }
 
   /** A name for the bot playing `deck` in `player`'s seat, unlike any other
-   * seat's ({@link botNameFor}). */
+   * seat's: the creator's, for a real player's deck ({@link deckCreator};
+   * the user, 2026-11-15: "could we have the bot names be the creator of
+   * the decks when they are being played"), and otherwise a character
+   * fitting its colours ({@link botNameFor}). */
   private botName(player: PlayerId, deck: PendingDeck): string {
     const taken = new Set<string>();
     for (const s of this.seats) {
       if (s.player !== player && s.displayName !== null) taken.add(s.displayName);
     }
+    const creator = deckCreator(deck);
+    if (creator !== null && !taken.has(creator)) return creator;
     return botNameFor(deckIdentity(deck), taken);
   }
 
@@ -510,9 +527,14 @@ export class PendingRoom {
     assertDeckIsBuildable(deck);
     this.assertDeckAllowed(deck);
     seat.deck = deck;
-    if (seat.displayName === null || !botNameFits(seat.displayName, deckIdentity(deck))) {
-      seat.displayName = this.botName(player, deck);
-    }
+    // A real player's deck is played under its creator's name; any other
+    // keeps a name that still suits its colours.
+    const creator = deckCreator(deck);
+    const keeps =
+      creator !== null
+        ? seat.displayName === creator
+        : seat.displayName !== null && botNameFits(seat.displayName, deckIdentity(deck));
+    if (!keeps) seat.displayName = this.botName(player, deck);
     this.lastActivityAt = Date.now();
   }
 

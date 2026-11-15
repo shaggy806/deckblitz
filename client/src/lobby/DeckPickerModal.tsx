@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { commanderPrintings, listPickableDecks, listStrongDecks } from '../deck-builder/decks.ts'
+import { commanderPrintings, deckLabel, listPickableDecks, listStrongDecks } from '../deck-builder/decks.ts'
 import type { PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderArt } from './CommanderArt.tsx'
 import { DeckIdentityPips } from '../ui/DeckIdentityPips.tsx'
@@ -119,9 +119,12 @@ function DeckPickerRow({
         blankClass="deck-picker-row-art-blank"
       />
       <span className="deck-picker-row-text">
-        <span className="deck-picker-row-name">{deck.name}</span>
+        <span className="deck-picker-row-name">{deckLabel(deck.name)}</span>
         {deck.commanders.length > 0 ? (
-          <span className="deck-picker-row-commander">{deck.commanders.join(' & ')}</span>
+          <span className="deck-picker-row-commander">
+            {deck.commanders.join(' & ')}
+            {deck.author !== undefined ? ` · by ${deck.author}` : ''}
+          </span>
         ) : (
           <span className="deck-picker-row-commander muted">{deck.cards.length} cards</span>
         )}

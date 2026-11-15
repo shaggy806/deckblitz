@@ -4,7 +4,7 @@ import type { PlayerId } from 'engine/client'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import type { SeatCommander, WireDeck } from 'protocol'
 import { playerLabel, SEAT_CLASSES } from '../format.ts'
-import { commanderPrintings, getActiveDeck, playableSideboard, setActive } from '../deck-builder/decks.ts'
+import { commanderPrintings, deckLabel, getActiveDeck, playableSideboard, setActive } from '../deck-builder/decks.ts'
 import type { DeckContents, PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderArt } from './CommanderArt.tsx'
 import { DeckPickerModal } from './DeckPickerModal.tsx'
@@ -403,7 +403,7 @@ function DeckSlot({
       {deck ? (
         <>
           <CommanderArt commanders={deck.commanders} className="seat-deck-art" blankClass="blank" />
-          <span className="seat-deck-name">{deck.name}</span>
+          <span className="seat-deck-name">{deckLabel(deck.name)}</span>
           <span className="seat-deck-commander" title={commanderNames || undefined}>
             {commanderNames || 'No commander'}
           </span>

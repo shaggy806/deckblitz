@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { PendingRoom } from "../pending-room.js";
-import { createDefaultRegistry, validateCommanderDeck } from "engine";
+import { STRONG_DECKS, createDefaultRegistry, validateCommanderDeck } from "engine";
 import { ALICE, BOB, SEATS } from "../decks.js";
 
 function pendingRoom(players = 2): PendingRoom {
@@ -307,6 +307,30 @@ describe("PendingRoom", () => {
     expect(["Surrak", "Yasova", "Animar"]).toContain(nameOf());
     room.setBotDeck(BOB, { cards: ["Swamp"], commanders: ["Ayara, First of Locthwain"], name: "Mono-Black" });
     expect(["Liliana", "Yawgmoth", "Sheoldred", "Ob Nixilis"]).toContain(nameOf());
+  });
+
+  it("names the bot playing a real player's deck for its creator", () => {
+    // The user, 2026-11-15: "could we have the bot names be the creator of
+    // the decks when they are being played".
+    const strong = STRONG_DECKS.find((d) => d.name === "Ureni by Shaggy5405")!;
+    const wire = { name: strong.name, cards: [...strong.cards], commanders: [...strong.commanders!] };
+    const room = pendingRoom(3);
+    const nameOf = (seat: typeof BOB) => room.seatStatuses().find((s) => s.player === seat)?.displayName;
+    room.addBot(BOB, wire);
+    expect(nameOf(BOB)).toBe("Shaggy5405");
+    // A second bot on the same deck can't share the name: a character's.
+    const carol = room.seatStatuses()[2].player;
+    room.addBot(carol, wire);
+    expect(nameOf(carol)).not.toBe("Shaggy5405");
+    expect(nameOf(carol)).toBeTruthy();
+    // Off the creator's deck, the creator's name goes; back on it, it returns.
+    room.setBotDeck(BOB, { cards: ["Swamp"], commanders: ["Ayara, First of Locthwain"], name: "Mono-Black" });
+    expect(["Liliana", "Yawgmoth", "Sheoldred", "Ob Nixilis"]).toContain(nameOf(BOB));
+    room.setBotDeck(BOB, wire);
+    expect(nameOf(BOB)).toBe("Shaggy5405");
+    // A deck only named alike, with another commander, is nobody's.
+    room.setBotDeck(BOB, { cards: ["Forest"], commanders: ["Eshki, Temur's Roar"], name: strong.name });
+    expect(nameOf(BOB)).not.toBe("Shaggy5405");
   });
 
   it("setBotDeck changes an already-bot-filled seat's deck, and only a bot seat's", () => {

@@ -338,6 +338,10 @@ export interface PickableDeck extends DeckContents {
   /** A built-in deck's strength, which the picker groups by; a saved deck
    * has none. */
   readonly strength?: DeckStrength
+  /** A real player's deck: its creator, whose name the bot playing it takes
+   * (the server's `PendingRoom.botName`). Its title is what `deckLabel`
+   * shows for it. */
+  readonly author?: string
 }
 
 /** How strong a built-in deck is: a precon as printed, its upgrade, or a real
@@ -383,5 +387,19 @@ export function listStrongDecks(): readonly PickableDeck[] {
     cards: d.cards,
     printings: d.printings,
     strength: 'strong' as DeckStrength,
+    ...(d.credit !== undefined ? { author: d.credit.author } : {}),
   }))
+}
+
+/**
+ * What to call a deck where its name is shown: a real player's deck (a
+ * strong deck) by its creator's own title, "Here Be Dragons", where its
+ * `name` is "<commander> by <creator>", the form that carries the credit
+ * wherever only a name travels (the wire, a script). Any other deck's name
+ * is its label. The bot playing one is named for the creator, so the two
+ * lines of a seat read "Shaggy5405" and "Here Be Dragons" (the user,
+ * 2026-11-15).
+ */
+export function deckLabel(name: string): string {
+  return STRONG_DECKS.find((d) => d.name === name)?.credit?.title ?? name
 }
