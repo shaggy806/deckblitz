@@ -8,8 +8,10 @@
 import { describe, expect, it } from "vitest";
 
 import { DEFAULT_WEIGHTS, evaluateState } from "../bot/evaluate.js";
-import { handCardQuality, handQuality, QUALITY_MAX, QUALITY_MIN } from "../bot/hand-worth.js";
+import { engineWorthDeployed, withHandReadForKeeps } from "../bot/features.js";
+import { handCardQuality, handQuality, mostWorthKeepingFirst, QUALITY_MAX, QUALITY_MIN } from "../bot/hand-worth.js";
 import { createDefaultRegistry } from "../cards.js";
+import type { CardDefinition } from "../cards/define.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 
@@ -109,6 +111,72 @@ describe("the handQuality feature", () => {
     game.debugSpawn("Forest", A, "hand");
     game.debugSpawn("Forest", A, "hand");
     expect(handQuality(game.state, registry, A, 4, 7)).toBeCloseTo(-0.6 + 0.25);
+  });
+
+  describe("read for what to keep", () => {
+    // What a discard is chosen by (`withHandReadForKeeps`): the feature given
+    // each card's engine, as it scores on the battlefield.
+    const engine = (def: CardDefinition): number => engineWorthDeployed(registry, def, 1);
+    const alone = (name: string, lands: number, keeps = true): number => {
+      const game = emptyHanded();
+      game.debugSpawn(name, A, "hand");
+      return 1 + handQuality(game.state, registry, A, lands, 7, keeps ? engine : undefined);
+    };
+
+    it("reads a permanent that is an engine as more than the next land", () => {
+      // A noncreature permanent was an average card whatever it did, under
+      // the next land's 1.25, and a bot asked to discard kept the land.
+      expect(alone("Smothering Tithe", 4)).toBe(QUALITY_MAX);
+      expect(alone("Monastery Mentor", 4)).toBeGreaterThan(1.25);
+      expect(alone("Kykar, Wind's Fury", 4)).toBeGreaterThan(1.25);
+      expect(alone("Forest", 4)).toBe(1.25);
+      // No engine: a mana rock, a vanilla body, a removal spell.
+      expect(alone("Sol Ring", 4)).toBe(1);
+      expect(alone("Grizzly Bears", 4)).toBeCloseTo(0.9);
+      expect(alone("Murder", 4)).toBe(1);
+    });
+
+    it("has the next land above any spell below four lands", () => {
+      expect(alone("Forest", 3)).toBe(1.75);
+      expect(alone("Forest", 3)).toBeGreaterThan(QUALITY_MAX);
+      // The Tithe, a mana short on two lands, is under the land that casts it.
+      expect(alone("Smothering Tithe", 2)).toBeCloseTo(QUALITY_MAX * 0.85);
+    });
+
+    it("takes reach off the capped quality", () => {
+      // A 6/6 for six: past the cap by its body, and three mana short on two lands.
+      expect(alone("Colossal Dreadmaw", 5)).toBe(QUALITY_MAX);
+      expect(alone("Colossal Dreadmaw", 2)).toBeCloseTo(QUALITY_MAX * (1 - 0.15 * 3));
+    });
+
+    it("is not how the evaluation at large reads the hand", () => {
+      // There an engine worth more in hand is worth less to cast.
+      expect(alone("Smothering Tithe", 4, false)).toBe(1);
+      expect(alone("Forest", 3, false)).toBe(1.25);
+      const game = emptyHanded();
+      game.debugSpawn("Smothering Tithe", A, "hand");
+      const plain = evaluateState(game.state, registry, A, DEFAULT_WEIGHTS);
+      const forKeeps = withHandReadForKeeps(() => evaluateState(game.state, registry, A, DEFAULT_WEIGHTS));
+      expect(forKeeps).toBeGreaterThan(plain);
+      expect(evaluateState(game.state, registry, A, DEFAULT_WEIGHTS)).toBe(plain);
+    });
+
+    it("orders a hand from the card most worth keeping to the least", () => {
+      // What a discard's candidates are drawn in: by mana value they were
+      // all pairs of the cheapest cards, the land first of them.
+      const game = emptyHanded();
+      const names = ["Grizzly Bears", "Forest", "Smothering Tithe", "Murder", "Forest", "Monastery Mentor"];
+      const ids = names.map((name) => game.debugSpawn(name, A, "hand"));
+      const order = (lands: number): string[] =>
+        mostWorthKeepingFirst(game.state, registry, A, ids, lands, 7, engine).map(
+          (id) => game.state.objects[id].cardName,
+        );
+      // Four lands out: the engines, the next land, then the average cards
+      // as they came (a second land is one), and the vanilla 2/2 last.
+      expect(order(4)).toEqual(["Smothering Tithe", "Monastery Mentor", "Forest", "Murder", "Forest", "Grizzly Bears"]);
+      // Two lands out: the land first, and the Tithe a mana short behind the Mentor.
+      expect(order(2).slice(0, 3)).toEqual(["Forest", "Monastery Mentor", "Smothering Tithe"]);
+    });
   });
 
   it("scores a hand's cards for their owner only", () => {

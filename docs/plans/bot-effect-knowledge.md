@@ -955,6 +955,48 @@ and v1 still makes the echo answer itself, where it plays unsearched.
 Gate scenario "pays echo on a 4/4 though it costs the turn's two-drop";
 `test/bot-declined-payment.test.ts`.
 
+### Which card to keep (2026-11-15)
+
+Two of the watched games' misplays were one: asked to discard, a bot threw away the cards its
+deck is built on and kept a land. Ledger Shredder connived away Smothering Tithe, Kykar and
+Monastery Mentor with four lands out; Grave Pact went to Necropotence at cleanup. `hand-worth.ts`
+reads a noncreature permanent as an average card whatever it does (its worth is on the board,
+which `standingEffects` and the engine rates price there) and the first land in hand as the
+next land drop, 1.25 of a card. So the land outranked every engine.
+
+For a discard, the hand is now read for what to keep (`withHandReadForKeeps`, around the
+decision's search): a permanent adds a fifth of what its engine scores once it is out
+(`engineWorthDeployed`: its draw, token and value rates, and a noncreature permanent's standing
+floor), the same share of its board terms a body already gets; the first land is 1.75, above
+any spell's cap, while the board has fewer than four (it is what casts them); and reach comes
+off the capped quality, so the best card in hand is worth less while it can't be cast. With
+four lands out the fifth land goes before the engines; on two, a five-drop goes and the land
+stays.
+
+**Only for the discard.** Read that way everywhere, an engine worth more in hand is worth less
+to cast, and a decision diff changed 11 of 12,187 decisions, every one an order of casting
+(Haughty Djinn ahead of Guttersnipe). Every answer to a discard keeps the same number of cards,
+so there the reading can only change which.
+
+**And the answers tried.** A discard of two from nine has 36 answers and the search plays out
+a dozen, drawn from the hand's cheapest cards first (`byManaValue`). So the first run on the
+strong decks threw away Fierce Guardianship and a land: every pair tried was among the cheap
+cards, and the two weakest were never weighed. A discard from our own hand is now tried from
+the cards least worth keeping (`mostWorthKeepingFirst`, `keepFirst`).
+
+Measured: nothing changes on the sample decks, which hardly discard (a decision diff,
+1 row of 12,460, the same three cards in another order); over six strong-deck games, each discard answered by the old build beside
+the new, 4 of 12 changed. Edgar Markov's bot at cleanup on one land threw And They Shall Know
+No Fear and Cordial Vampire where the old one threw Grave Pact and Yawgmoth (the watched
+misplay, in the same deck); later it kept Authority of the Consuls over Culling the Weak. The
+other two swap cards the reading can't tell apart: a counterspell in hand is still an average
+card (`BACKLOG.md`).
+
+Gate scenarios "discards a fifth land, not an engine, down to hand size" and "keeps its third
+land over a four-mana engine it can't cast yet"; `test/bot-hand-worth.test.ts`. Left as it was:
+a creature whose worth is an activated ability (Yawgmoth, Thran Physician) has no rate and reads
+as its body, and v1's own discard (`controller.ts`) is by its own rule.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

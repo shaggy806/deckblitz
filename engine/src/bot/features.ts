@@ -918,6 +918,44 @@ function standingWorth(registry: CardRegistry, def: CardDefinition, opponents: n
   return Math.max(0, manaValue(parseManaCost(def.manaCost)) + STANDING_BASE - priced);
 }
 
+/**
+ * What `def`'s engine scores once it is on the battlefield, in points beside
+ * its body: its draw, value and token rates at the shipped weights
+ * (`PRICED`), and for a noncreature permanent the standing floor under them
+ * (`standingWorth`). What a card in hand is read as an engine by
+ * (`hand-worth.ts`): never the mana a rock makes, which the hand's reach
+ * already wants, nor a track record, which a card in hand has none of.
+ */
+export function engineWorthDeployed(registry: CardRegistry, def: CardDefinition, opponents: number): number {
+  const rates =
+    PRICED.draw * drawRate(def, opponents) +
+    PRICED.value * valueRate(registry, def, opponents) +
+    PRICED.token * tokenRate(registry, def, opponents);
+  return def.types.includes("creature") ? rates : rates + standingWorth(registry, def, opponents);
+}
+
+/** Whether `handQuality` is being read for what to keep — see
+ * {@link withHandReadForKeeps}. */
+let handReadForKeeps = false;
+
+/**
+ * Run `decide` — a bot choosing which of its cards to discard — with the
+ * hand read for what to keep (`hand-worth.ts`): an engine for what it does
+ * once it is out, the next land for what it casts. Module state, like
+ * {@link withTrackRecordEvidence}: the search's rollouts evaluate inside
+ * `decide`, and the engine is synchronous, so one decision is under way at a
+ * time. Outside it the evaluation reads the hand as it always has.
+ */
+export function withHandReadForKeeps<T>(decide: () => T): T {
+  const was = handReadForKeeps;
+  handReadForKeeps = true;
+  try {
+    return decide();
+  } finally {
+    handReadForKeeps = was;
+  }
+}
+
 /** The most a permanent's track record is credited a round, as for
  * {@link DRAW_RATE_CAP}: one that has drawn a hand in a turn shouldn't
  * outweigh the board. */
@@ -1371,7 +1409,16 @@ function playerFeaturesUncached(
     // How far our own hand is from a hand of average cards (`hand-worth.ts`):
     // a tutor with something to find, a land past the ones we want, a spell
     // still out of reach. Ours only, like `handManaValue`.
-    handQuality: isMe ? handQualityOf(state, registry, player, landCount, cap) : 0,
+    handQuality: isMe
+      ? handQualityOf(
+          state,
+          registry,
+          player,
+          landCount,
+          cap,
+          handReadForKeeps ? (def) => engineWorthDeployed(registry, def, opponents) : undefined,
+        )
+      : 0,
     // The nearest loss that isn't life: the worst commander's damage, or
     // poison on the same scale (10 counters lose as 21 damage does). Folded
     // into one term, so the fitted weight reads poison too without a refit.

@@ -49,6 +49,28 @@
  * a fifth of its board terms against the half that would equal them, and a
  * noncreature permanent stays at 1, which `otherPermanents` matches.
  *
+ * **Read for what to keep** ({@link Reader.engine} given: a discard being
+ * chosen, `features.ts`'s `withHandReadForKeeps`). Every answer there keeps
+ * the same number of cards, so only which ones matters, and three things
+ * read differently:
+ *
+ * - **A permanent that is an engine** adds the same fifth of what its engine
+ *   scores once it is out (`engineWorthDeployed`: its draw, token and value
+ *   rates, and for a noncreature permanent the standing floor): Monastery
+ *   Mentor 1.3, Smothering Tithe the cap. As an average card under the next
+ *   land's 1.25 it was the first thing thrown away: Ledger Shredder connived
+ *   away Smothering Tithe, Kykar and Monastery Mentor with four lands out,
+ *   and Grave Pact went to Necropotence at cleanup (watched, 2026-11-14).
+ * - **The first land** is {@link EARLY_LAND}, more than any spell, while the
+ *   board has fewer than {@link EARLY_LANDS}: it is what casts them.
+ * - **Reach** comes off the capped quality, so the best card in the hand is
+ *   still worth less while it can't be cast.
+ *
+ * Only there, and not in the evaluation at large: read everywhere, an engine
+ * worth more in hand was worth less to cast, and a decision diff had Haughty
+ * Djinn cast ahead of Guttersnipe (11 of 12,187 decisions, all an order of
+ * casting).
+ *
  * Only ever asked about the bot's own hand (`isMe` in `features.ts`). Pure
  * over the state and the card definitions, so the same position reads the
  * same in every process.
@@ -77,6 +99,12 @@ const FLOW_CARD = 0.4;
 const CARD = 2;
 /** The first land in hand while the board wants lands: the next land drop. */
 const NEXT_LAND = 1.25;
+/** The same, read for what to keep, while the board has fewer than
+ * {@link EARLY_LANDS} lands: past the cap of any spell, because without it
+ * the spells aren't cast. With an engine in hand at the cap and the land at
+ * 1.25, a hand on three lands would have thrown its fourth away. */
+const EARLY_LAND = 1.75;
+const EARLY_LANDS = 4;
 /** A land in hand once the board has the lands it wants. */
 const SURPLUS_LAND = 0.5;
 /** Lost per mana a card costs past one more than the lands in play. */
@@ -125,7 +153,15 @@ interface Reader {
   /** Lands in the hand ahead of the card being read: for a card that isn't
    * in the hand (a tutor's find), all of the hand's. */
   readonly landsAhead: number;
+  /** Given when the hand is read for what to keep (the module comment): what
+   * a card's engine scores once it is on the battlefield, in points
+   * (`features.ts`'s `engineWorthDeployed`, handed in: that module reads
+   * this one). Left out, the hand is read as the evaluation at large does. */
+  readonly engine?: EngineWorth;
 }
+
+/** See {@link Reader.engine}. */
+export type EngineWorth = (def: CardDefinition) => number;
 
 function isLand(state: GameState, registry: CardRegistry, id: ObjectId): boolean {
   const name = state.objects[id]?.cardName;
@@ -203,7 +239,8 @@ function qualityOf(reader: Reader, id: ObjectId, tutors: boolean): number {
   const def = reader.registry.get(object.cardName);
   if (def.types.includes("land")) {
     if (reader.lands >= reader.landsWanted) return SURPLUS_LAND;
-    return reader.landsAhead === 0 ? NEXT_LAND : 1;
+    if (reader.landsAhead > 0) return 1;
+    return reader.engine !== undefined && reader.lands < EARLY_LANDS ? EARLY_LAND : NEXT_LAND;
   }
   let quality = 1;
   const spell = def.types.includes("instant") || def.types.includes("sorcery");
@@ -212,15 +249,22 @@ function qualityOf(reader: Reader, id: ObjectId, tutors: boolean): number {
   // aims its draw.
   const flow = spell ? flowOf(reader.registry, def) : null;
   if (flow !== null) return FLOW_CARD * flow;
+  // A permanent's engine, at the share of its board terms a body gets.
+  const engine = spell || reader.engine === undefined ? 0 : BODY_SHARE * reader.engine(def);
   if (def.types.includes("creature")) {
     const body = BODY_SHARE * (BODY + STAT * ((def.power ?? 0) + (def.toughness ?? 0)));
-    quality = hasAbilities(def) ? Math.max(1, body) : body;
+    quality = (hasAbilities(def) ? Math.max(1, body) : body) + engine;
   } else if (spell) {
     quality = spellQuality(reader, def, tutors);
+  } else {
+    quality = 1 + engine;
   }
   const short = Math.max(0, cheapestManaValue(reader.registry, def) - (reader.lands + 1));
-  quality *= Math.max(REACH_FLOOR, 1 - OUT_OF_REACH * short);
-  return Math.min(QUALITY_MAX, Math.max(QUALITY_MIN, quality));
+  const reach = Math.max(REACH_FLOOR, 1 - OUT_OF_REACH * short);
+  // Read for what to keep, reach comes off the capped quality: the best card
+  // in the hand is still worth less while it can't be cast.
+  if (reader.engine !== undefined) return Math.max(QUALITY_MIN, Math.min(QUALITY_MAX, quality) * reach);
+  return Math.min(QUALITY_MAX, Math.max(QUALITY_MIN, quality * reach));
 }
 
 /** The quality of one card of `player`'s that isn't in their hand, were it
@@ -246,18 +290,58 @@ export function handQuality(
   player: PlayerId,
   lands: number,
   landsWanted: number,
+  engine?: EngineWorth,
 ): number {
-  const hand = state.zones.perPlayer[player].hand;
-  const base = { state, registry, player, lands, landsWanted };
-  const landsInHand = hand.filter((id) => isLand(state, registry, id)).length;
   let total = 0;
+  for (const quality of handQualities(state, registry, player, lands, landsWanted, engine).values()) total += quality - 1;
+  return total;
+}
+
+/** Each card of `player`'s hand with its quality, in hand order. */
+function handQualities(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  lands: number,
+  landsWanted: number,
+  engine?: EngineWorth,
+): Map<ObjectId, number> {
+  const hand = state.zones.perPlayer[player].hand;
+  const base = { state, registry, player, lands, landsWanted, ...(engine !== undefined ? { engine } : {}) };
+  const landsInHand = hand.filter((id) => isLand(state, registry, id)).length;
+  const out = new Map<ObjectId, number>();
   let landsAhead = 0;
   for (const id of hand) {
     const land = isLand(state, registry, id);
     // A tutor's find joins the whole hand; a hand card is read behind the
     // lands before it.
-    total += qualityOf({ ...base, landsAhead: land ? landsAhead : landsInHand }, id, true) - 1;
+    out.set(id, qualityOf({ ...base, landsAhead: land ? landsAhead : landsInHand }, id, true));
     if (land) landsAhead += 1;
   }
-  return total;
+  return out;
+}
+
+/**
+ * `ids`, cards of `player`'s hand, from the one most worth keeping to the
+ * least, read for what to keep (the module comment); ties in the order
+ * given. What a discard's candidates are tried in (`EvalBotController.decide`):
+ * the search plays out a dozen answers of the dozens there are, and tried by
+ * mana value, cheapest first, they were all pairs of the hand's cheapest
+ * cards — Fierce Guardianship and a land went with Ophidian Eye and
+ * Misleading Signpost never weighed.
+ */
+export function mostWorthKeepingFirst(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  ids: readonly ObjectId[],
+  lands: number,
+  landsWanted: number,
+  engine: EngineWorth,
+): ObjectId[] {
+  const qualities = handQualities(state, registry, player, lands, landsWanted, engine);
+  return ids
+    .map((id, at) => ({ id, at, quality: qualities.get(id) ?? 1 }))
+    .sort((a, b) => b.quality - a.quality || a.at - b.at)
+    .map((entry) => entry.id);
 }

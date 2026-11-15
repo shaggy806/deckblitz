@@ -518,6 +518,26 @@ function echoAsked(registry: CardRegistry): Game | ScenarioResult {
   return game;
 }
 
+/** Alice's cleanup step with eight cards in hand, asked which to discard, on
+ * `plains` Plains: a Plains, Smothering Tithe, Monastery Mentor, Kykar,
+ * Wind's Fury and four Serra Angels. The cards' ids come back with the game. */
+function handSizeAsked(
+  registry: CardRegistry,
+  plains: number,
+): { game: Game; land: ObjectId; engines: readonly ObjectId[] } | ScenarioResult {
+  const game = table(registry, [A, B], A);
+  lands(game, "Plains", A, plains);
+  const land = game.debugSpawn("Plains", A, "hand");
+  const engines = ["Smothering Tithe", "Monastery Mentor", "Kykar, Wind's Fury"].map((name) =>
+    game.debugSpawn(name, A, "hand"),
+  );
+  for (let i = 0; i < 4; i += 1) game.debugSpawn("Serra Angel", A, "hand");
+  const turn = game.state.turn.number;
+  game.advanceUntil((s) => (s.awaiting?.kind === "discard" && s.awaiting.player === A) || s.result.over || s.turn.number > turn);
+  if (game.state.awaiting?.kind !== "discard") return { passed: false, detail: "never asked to discard" };
+  return { game, land, engines };
+}
+
 /** A scenario asked with one `act`, its `run` following from its position. */
 function asked(
   spec: Omit<BotScenario, "run" | "position"> & Required<Pick<BotScenario, "position">>,
@@ -2775,6 +2795,46 @@ const SCENARIOS: readonly BotScenario[] = [
         player: A,
         judge: (action) => ({
           passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "discards a fifth land, not an engine, down to hand size",
+    rule: "With four lands out a land in hand is one more land drop; a tax engine or a token maker is what the deck is for.",
+    position(registry) {
+      // Watched in bot games (2026-11-14): Jeskai Striker's Ledger Shredder
+      // connived away Smothering Tithe, Kykar and Monastery Mentor with four
+      // lands out, keeping a land each time, and Edgar Markov's bot threw
+      // Grave Pact to Necropotence at cleanup. The first land in hand was the
+      // next land drop (1.25 of a card) and a noncreature permanent an
+      // average card, whatever it does once it is out.
+      const asking = handSizeAsked(registry, 4);
+      if (!("game" in asking)) return asking;
+      return {
+        game: asking.game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "discard" && !action.cards.some((card) => asking.engines.includes(card)),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "keeps its third land over a four-mana engine it can't cast yet",
+    rule: "On two lands the next land is the card the hand needs most: nothing in it is cast without it.",
+    position(registry) {
+      // The scenario above on two Plains: the engines are worth what they
+      // are once they can be cast, and the land is what casts them.
+      const asking = handSizeAsked(registry, 2);
+      if (!("game" in asking)) return asking;
+      return {
+        game: asking.game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "discard" && !action.cards.includes(asking.land),
           detail: `chose ${describeAction(action)}`,
         }),
       };

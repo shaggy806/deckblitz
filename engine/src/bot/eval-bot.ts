@@ -66,7 +66,8 @@ import { DEFAULT_WEIGHTS, aimedOutcome, evaluateState, normalizeWeights, outcome
 import type { EvalOutcome } from "./evaluate.js";
 import { aimedAt, aimedByLine } from "./interaction.js";
 import type { Aimed } from "./interaction.js";
-import { engineScore, lifeCost, withTrackRecordEvidence } from "./features.js";
+import { engineScore, engineWorthDeployed, lifeCost, withHandReadForKeeps, withTrackRecordEvidence } from "./features.js";
+import { mostWorthKeepingFirst } from "./hand-worth.js";
 import type { EvalWeights } from "./evaluate.js";
 import {
   CombatRolloutController,
@@ -550,6 +551,38 @@ const NESTED_DECISION_KINDS: ReadonlySet<string> = new Set(["choose-modes", "cas
 const COMMANDER_STAYS_MARGIN = 1;
 
 /**
+ * `ids` in the order a decision's candidates are drawn from, most valuable
+ * first: as given (by mana value) but for a discard from our own hand, which
+ * is tried from the cards least worth keeping (`hand-worth.ts`'s
+ * `mostWorthKeepingFirst`, the hand read as `withHandReadForKeeps` has the
+ * search read it).
+ */
+function keepFirst(
+  state: GameState,
+  cards: CardRegistry,
+  weights: EvalWeights,
+  me: PlayerId,
+  ids: ObjectId[],
+): ObjectId[] {
+  if (state.awaiting?.kind !== "discard") return ids;
+  const hand = new Set(state.zones.perPlayer[me]?.hand ?? []);
+  if (!ids.every((id) => hand.has(id))) return ids;
+  const lands = state.zones.shared.battlefield.filter((id) => {
+    const object = state.objects[id];
+    return (
+      object !== undefined &&
+      object.controller === me &&
+      cards.has(object.cardName) &&
+      cards.get(object.cardName).types.includes("land")
+    );
+  }).length;
+  const opponents = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost).length;
+  return mostWorthKeepingFirst(state, cards, me, ids, lands, weights.landCap, (def) =>
+    engineWorthDeployed(cards, def, opponents),
+  );
+}
+
+/**
  * The best answer to the decision pending in `view`, by playing each candidate
  * out to `horizon` and scoring it. Ties keep `inherited` — v1's answer — so a
  * search only ever changes an answer it can see is better.
@@ -589,7 +622,7 @@ function bestDecision(
       : decisionCandidates(
           withComputedCache(() => aimOffer(view.state, cards, me, legal)),
           me,
-          (ids) => byManaValue(view.state, cards, ids, me),
+          (ids) => keepFirst(view.state, cards, weights, me, byManaValue(view.state, cards, ids, me)),
           (id) => view.state.objects[id]?.controller,
           // Poison and rad counters are both bad to have (rad mills and
           // drains its player, rule 728.1): proliferate them only onto opponents.
@@ -2093,18 +2126,23 @@ export class EvalBotController extends HeuristicBotController {
     }
     // One baseline: v1's answer, which every other is compared with.
     const budget = this.budget(Math.min(DECISION_ROLLOUTS, this.maxSimulations), 1);
-    const answer = bestDecision(
-      view,
-      inherited,
-      this.cards,
-      this.weights,
-      this.horizon,
-      this.rollout,
-      budget,
-      () => this.selfInRollouts(),
-      this.trace,
-      keptBy,
-    );
+    const search = (): Action =>
+      bestDecision(
+        view,
+        inherited,
+        this.cards,
+        this.weights,
+        this.horizon,
+        this.rollout,
+        budget,
+        () => this.selfInRollouts(),
+        this.trace,
+        keptBy,
+      );
+    // Which card to discard: every answer keeps as many, so the hand is read
+    // for which are worth keeping (`withHandReadForKeeps`) — an engine above
+    // a fifth land, where the evaluation at large has them the other way.
+    const answer = view.state.awaiting?.kind === "discard" ? withHandReadForKeeps(search) : search();
     // A combat declaration reaches here too, already searched — and recorded —
     // by its own method on the way through `super.act`; `bestDecision` has no
     // candidates for it, so that record is the one worth keeping.
