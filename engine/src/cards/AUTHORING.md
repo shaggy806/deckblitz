@@ -7191,8 +7191,11 @@ clause (section 9):
   Stranglehold). `may` asks that player as the turn would begin, and `thenUntapSource` is "if you do, untap
   this", the first thing in the next turn to occur (rule 614.10b); a static's `condition` is "while this
   is tapped" (Time Vault). "You skip your next turn" is the `skip-turn` effect (Chronatog, Magosi).
-- `{ event: "others-enter-battlefield", filter, tapped?, untapped?,
-  counters?: { kind, amount }, counterKindsOfSource?, enterAs? }` — how **other** permanents enter. `filter`
+- `{ event: "others-enter-battlefield", filter, tapped?, untapped?, attacking?,
+  counters?: { kind, amount }, counterKindsOfSource?, enterAs? }` — how **other** permanents enter
+  (`attacking: true` with `tapped`: "instead it enters tapped and attacking", its controller
+  choosing what it attacks, rule 508.4 — Kira Nerys, Firebrand, with the static's `condition`
+  "while you control an attacking creature"). `filter`
   picks which, read from this permanent's controller's side against each one
   as it will exist on the battlefield, including the player it's entering
   under: Thalia, Heretic Cathar's "creatures and nonbasic lands your

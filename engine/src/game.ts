@@ -1632,6 +1632,9 @@ interface EnteringReplacement {
   /** Riot (rule 702.136a) gives it haste: its controller didn't have it
    * enter with the +1/+1 counter. */
   readonly riotHaste: boolean;
+  /** Another permanent's replacement has it enter attacking (rule 508.4 —
+   * `others-enter-battlefield`'s `attacking`). */
+  readonly attacking?: true;
   /** Tribute (rule 702.104b): it has tribute and the chosen opponent didn't
    * have it enter with the counters. */
   readonly tributeUnpaid: boolean;
@@ -48772,6 +48775,8 @@ controlledBy,
         }
         this.becomePrepared(id);
       }
+      // "Instead it enters tapped and attacking" (rule 508.4).
+      if (entering.attacking === true) this.putIntoAttack([id], this.state.objects[id].controller, "choose");
     }
     return id;
   }
@@ -64667,6 +64672,7 @@ controlledBy,
     // that never asked (a token copy), nobody had it enter with the counter,
     // so it gains haste.
     let riotHaste = false;
+    let attacking = false;
     if (
       !ownLost &&
       (riot !== undefined ||
@@ -64734,6 +64740,7 @@ controlledBy,
           untapped = true;
           untappedBy = sourceId;
         }
+        if (r.attacking === true) attacking = true;
         if (r.counters !== undefined) {
           // A compacted stack of such permanents is that many replacements.
           const each = this.enteringCounterAmount(sourceId, source.controller, id, r.counters.amount);
@@ -64800,6 +64807,7 @@ controlledBy,
       ...(choseTappedThen !== undefined ? { choseTappedThen } : {}),
       ...(asEntersEffects.length > 0 ? { asEntersEffects } : {}),
       riotHaste,
+      ...(attacking ? { attacking: true as const } : {}),
       tributeUnpaid,
       prepared,
       ...(noted !== undefined ? { noted } : {}),
@@ -66920,6 +66928,8 @@ controlledBy,
         object.counters[c.kind] = (object.counters[c.kind] ?? 0) + c.amount;
       }
       if (entering.riotHaste) this.gainRiotHaste(id);
+      // "Instead it enters tapped and attacking" (rule 508.4), as it enters.
+      if (entering.attacking === true) this.putIntoAttack([id], object.controller, "choose");
       if (entering.tributeUnpaid) object.tributeUnpaid = true;
       if (entering.painIfUntapped > 0) {
         this.dealDamage(

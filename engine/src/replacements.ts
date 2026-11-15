@@ -570,6 +570,16 @@ export interface OthersEnterReplacement {
    */
   readonly untapped?: boolean;
   /**
+   * It enters **attacking** (rule 508.4) — Kira Nerys, Firebrand's "if a
+   * creature you control would enter while you control an attacking
+   * creature, instead it enters tapped and attacking" (with `tapped` and
+   * the static's `condition`). Its controller chooses what it attacks
+   * (`Game.putIntoAttack`'s `"choose"`); outside combat, or a creature that
+   * isn't the attacking player's, it only enters (506.3a-c). Never declared,
+   * it never "attacked" (508.3a).
+   */
+  readonly attacking?: true;
+  /**
    * It enters with this many additional counters of `kind`. `amount` is read
    * as it enters, from this permanent's perspective (so `countOf` counts what
    * *its* controller controls), and **never counts the permanent entering, or

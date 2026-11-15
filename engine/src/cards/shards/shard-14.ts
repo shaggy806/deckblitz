@@ -102,6 +102,7 @@ import _poolBlossomDryad from "../pool/blossom-dryad.js";
 import _poolBoltwingMarauder from "../pool/boltwing-marauder.js";
 import _poolBoneCairnButcher from "../pool/bone-cairn-butcher.js";
 import _poolBontusMonument from "../pool/bontus-monument.js";
+import _poolBorgCube from "../pool/borg-cube.js";
 import _poolBorosSignet from "../pool/boros-signet.js";
 import _poolBorrowingTheEastWind from "../pool/borrowing-the-east-wind.js";
 import _poolBoulderDash from "../pool/boulder-dash.js";
@@ -1134,6 +1135,7 @@ const shard: CardShard = {
     _poolBoltwingMarauder,
     _poolBoneCairnButcher,
     _poolBontusMonument,
+    _poolBorgCube,
     _poolBorosSignet,
     _poolBorrowingTheEastWind,
     _poolBoulderDash,

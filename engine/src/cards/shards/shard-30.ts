@@ -499,6 +499,7 @@ import _poolKheruSpellsnatcher from "../pool/kheru-spellsnatcher.js";
 import _poolKingpinsEnforcers from "../pool/kingpins-enforcers.js";
 import _poolKingpinsPet from "../pool/kingpins-pet.js";
 import _poolKinsbaileCourier from "../pool/kinsbaile-courier.js";
+import _poolKiraNerysFirebrand from "../pool/kira-nerys-firebrand.js";
 import _poolKitsunesTechnique from "../pool/kitsunes-technique.js";
 import _poolKlothysGodOfDestiny from "../pool/klothys-god-of-destiny.js";
 import _poolKnightOfMalice from "../pool/knight-of-malice.js";
@@ -1556,6 +1557,7 @@ const shard: CardShard = {
     _poolKingpinsEnforcers,
     _poolKingpinsPet,
     _poolKinsbaileCourier,
+    _poolKiraNerysFirebrand,
     _poolKitsunesTechnique,
     _poolKlothysGodOfDestiny,
     _poolKnightOfMalice,

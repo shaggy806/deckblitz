@@ -3202,6 +3202,7 @@ import _poolBorealElemental from "./pool/boreal-elemental.js";
 import _poolBorealGriffin from "./pool/boreal-griffin.js";
 import _poolBorealShelf from "./pool/boreal-shelf.js";
 import _poolBoreasCharger from "./pool/boreas-charger.js";
+import _poolBorgCube from "./pool/borg-cube.js";
 import _poolBorgIncursion from "./pool/borg-incursion.js";
 import _poolBorgQueenPerfectionManifest from "./pool/borg-queen-perfection-manifest.js";
 import _poolBorgScoutSphere from "./pool/borg-scout-sphere.js";
@@ -12093,6 +12094,7 @@ import _poolGuildswornProwler from "./pool/guildsworn-prowler.js";
 import _poolGuile from "./pool/guile.js";
 import _poolGuiltfeeder from "./pool/guiltfeeder.js";
 import _poolGuiltyConscience from "./pool/guilty-conscience.js";
+import _poolGuinanAncientAdvisor from "./pool/guinan-ancient-advisor.js";
 import _poolGuiseOfFire from "./pool/guise-of-fire.js";
 import _poolGulDukatColonialPrefect from "./pool/gul-dukat-colonial-prefect.js";
 import _poolGulfSquid from "./pool/gulf-squid.js";
@@ -14304,6 +14306,7 @@ import _poolJayasPhoenix from "./pool/jayas-phoenix.js";
 import _poolJayemdaeTome from "./pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "./pool/jazal-goldmane.js";
 import _poolJeanLucMonCapitaine from "./pool/jean-luc-mon-capitaine.js";
+import _poolJeanLucPicardLuminary from "./pool/jean-luc-picard-luminary.js";
 import _poolJechtReluctantGuardian from "./pool/jecht-reluctant-guardian.js";
 import _poolJeditOjanenMercenary from "./pool/jedit-ojanen-mercenary.js";
 import _poolJeditOjanenOfEfrava from "./pool/jedit-ojanen-of-efrava.js";
@@ -15007,6 +15010,7 @@ import _poolKiorasDambreaker from "./pool/kioras-dambreaker.js";
 import _poolKiorasDismissal from "./pool/kioras-dismissal.js";
 import _poolKiorasFollower from "./pool/kioras-follower.js";
 import _poolKiraGreatGlassSpinner from "./pool/kira-great-glass-spinner.js";
+import _poolKiraNerysFirebrand from "./pool/kira-nerys-firebrand.js";
 import _poolKirdApe from "./pool/kird-ape.js";
 import _poolKirdChieftain from "./pool/kird-chieftain.js";
 import _poolKiriOnna from "./pool/kiri-onna.js";
@@ -26290,6 +26294,7 @@ import _poolStarfieldOfNyx from "./pool/starfield-of-nyx.js";
 import _poolStarfieldShepherd from "./pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "./pool/starfield-vocalist.js";
 import _poolStarfighterPilot from "./pool/starfighter-pilot.js";
+import _poolStarfleetAcademy from "./pool/starfleet-academy.js";
 import _poolStarfleetCommunicator from "./pool/starfleet-communicator.js";
 import _poolStarfleetCrew from "./pool/starfleet-crew.js";
 import _poolStarfleetSecurity from "./pool/starfleet-security.js";
@@ -36371,6 +36376,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBorealGriffin,
   _poolBorealShelf,
   _poolBoreasCharger,
+  _poolBorgCube,
   _poolBorgIncursion,
   _poolBorgQueenPerfectionManifest,
   _poolBorgScoutSphere,
@@ -45262,6 +45268,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGuile,
   _poolGuiltfeeder,
   _poolGuiltyConscience,
+  _poolGuinanAncientAdvisor,
   _poolGuiseOfFire,
   _poolGulDukatColonialPrefect,
   _poolGulfSquid,
@@ -47473,6 +47480,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJayemdaeTome,
   _poolJazalGoldmane,
   _poolJeanLucMonCapitaine,
+  _poolJeanLucPicardLuminary,
   _poolJechtReluctantGuardian,
   _poolJeditOjanenMercenary,
   _poolJeditOjanenOfEfrava,
@@ -48176,6 +48184,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKiorasDismissal,
   _poolKiorasFollower,
   _poolKiraGreatGlassSpinner,
+  _poolKiraNerysFirebrand,
   _poolKirdApe,
   _poolKirdChieftain,
   _poolKiriOnna,
@@ -59459,6 +59468,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStarfieldShepherd,
   _poolStarfieldVocalist,
   _poolStarfighterPilot,
+  _poolStarfleetAcademy,
   _poolStarfleetCommunicator,
   _poolStarfleetCrew,
   _poolStarfleetSecurity,
@@ -69553,6 +69563,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/boreal-griffin": _poolBorealGriffin,
   "pool/boreal-shelf": _poolBorealShelf,
   "pool/boreas-charger": _poolBoreasCharger,
+  "pool/borg-cube": _poolBorgCube,
   "pool/borg-incursion": _poolBorgIncursion,
   "pool/borg-queen-perfection-manifest": _poolBorgQueenPerfectionManifest,
   "pool/borg-scout-sphere": _poolBorgScoutSphere,
@@ -78444,6 +78455,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/guile": _poolGuile,
   "pool/guiltfeeder": _poolGuiltfeeder,
   "pool/guilty-conscience": _poolGuiltyConscience,
+  "pool/guinan-ancient-advisor": _poolGuinanAncientAdvisor,
   "pool/guise-of-fire": _poolGuiseOfFire,
   "pool/gul-dukat-colonial-prefect": _poolGulDukatColonialPrefect,
   "pool/gulf-squid": _poolGulfSquid,
@@ -80655,6 +80667,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jayemdae-tome": _poolJayemdaeTome,
   "pool/jazal-goldmane": _poolJazalGoldmane,
   "pool/jean-luc-mon-capitaine": _poolJeanLucMonCapitaine,
+  "pool/jean-luc-picard-luminary": _poolJeanLucPicardLuminary,
   "pool/jecht-reluctant-guardian": _poolJechtReluctantGuardian,
   "pool/jedit-ojanen-mercenary": _poolJeditOjanenMercenary,
   "pool/jedit-ojanen-of-efrava": _poolJeditOjanenOfEfrava,
@@ -81358,6 +81371,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kioras-dismissal": _poolKiorasDismissal,
   "pool/kioras-follower": _poolKiorasFollower,
   "pool/kira-great-glass-spinner": _poolKiraGreatGlassSpinner,
+  "pool/kira-nerys-firebrand": _poolKiraNerysFirebrand,
   "pool/kird-ape": _poolKirdApe,
   "pool/kird-chieftain": _poolKirdChieftain,
   "pool/kiri-onna": _poolKiriOnna,
@@ -92641,6 +92655,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/starfield-shepherd": _poolStarfieldShepherd,
   "pool/starfield-vocalist": _poolStarfieldVocalist,
   "pool/starfighter-pilot": _poolStarfighterPilot,
+  "pool/starfleet-academy": _poolStarfleetAcademy,
   "pool/starfleet-communicator": _poolStarfleetCommunicator,
   "pool/starfleet-crew": _poolStarfleetCrew,
   "pool/starfleet-security": _poolStarfleetSecurity,

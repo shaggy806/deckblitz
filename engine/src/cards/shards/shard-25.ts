@@ -818,6 +818,7 @@ import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStalkedResearcher from "../pool/stalked-researcher.js";
 import _poolStalkingBloodsucker from "../pool/stalking-bloodsucker.js";
 import _poolStarCrownedStag from "../pool/star-crowned-stag.js";
+import _poolStarfleetAcademy from "../pool/starfleet-academy.js";
 import _poolStarforgedSword from "../pool/starforged-sword.js";
 import _poolStarnheimUnleashed from "../pool/starnheim-unleashed.js";
 import _poolStatue from "../pool/statue.js";
@@ -1823,6 +1824,7 @@ const shard: CardShard = {
     _poolStalkedResearcher,
     _poolStalkingBloodsucker,
     _poolStarCrownedStag,
+    _poolStarfleetAcademy,
     _poolStarforgedSword,
     _poolStarnheimUnleashed,
     _poolStatue,

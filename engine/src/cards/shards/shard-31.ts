@@ -404,6 +404,7 @@ import _poolGuardianOfTheGreatDoor from "../pool/guardian-of-the-great-door.js";
 import _poolGuardiansMagemark from "../pool/guardians-magemark.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolGuildSummit from "../pool/guild-summit.js";
+import _poolGuinanAncientAdvisor from "../pool/guinan-ancient-advisor.js";
 import _poolGysahlGreens from "../pool/gysahl-greens.js";
 import _poolHagraDiabolist from "../pool/hagra-diabolist.js";
 import _poolHalberdier from "../pool/halberdier.js";
@@ -1501,6 +1502,7 @@ const shard: CardShard = {
     _poolGuardiansMagemark,
     _poolGuidingBolt,
     _poolGuildSummit,
+    _poolGuinanAncientAdvisor,
     _poolGysahlGreens,
     _poolHagraDiabolist,
     _poolHalberdier,
