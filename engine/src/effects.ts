@@ -2204,6 +2204,13 @@ export type PlayerScope =
    * the damage was aimed, in turn order. Prevented damage was never dealt
    * (rule 615.1), so nobody for that. */
   | "players-dealt-damage-this-way"
+  /** "Gain control of target nonland permanent an opponent controls. **That
+   * opponent** draws three cards" (Rules of Acquisition): each player who
+   * controlled a permanent just before the resolution under way changed its
+   * control (`control-changed`'s `previousController`), in turn order —
+   * the player it was taken from, though the target now names you. Nobody
+   * where no control changed. */
+  | "players-who-lost-control-this-way"
   /** "Whenever one or more Pirates you control deal damage to your
    * opponents, exile the top card of **each of those opponents'** libraries"
    * (Breeches, Brazen Plunderer): each player the sources of a `once:

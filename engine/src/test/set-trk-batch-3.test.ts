@@ -20,6 +20,7 @@ import {
   spawn,
   subtypes,
   table,
+  toGraveyard,
   toHand,
   toLibrary,
   toStep,
@@ -290,5 +291,84 @@ describe("Sulu, Heroic Helmsman", () => {
     const titan = spawn(game, "Parhelion II"); // crew 4
     expect(game.legalActions(A).some((x) => x.kind === "activate-ability" && x.source === titan)).toBe(true);
     expect(vehicle).toBeDefined();
+  });
+});
+
+describe("Sarek, Federation Ambassador", () => {
+  it("draws a card for every five creature types, and three or more pump every creature", () => {
+    const { game } = table();
+    const sarek = spawn(game, "Sarek, Federation Ambassador"); // Vulcan Advisor
+    // Fifteen more types: three cards, so two counters on each creature.
+    for (const name of ["Grizzly Bears", "Llanowar Elves", "Goblin Guide", "Savannah Lions", "Merfolk Looter", "Hill Giant", "Squadron Hawk", "Walking Corpse", "Typhoid Rats", "Wall of Omens"]) {
+      spawn(game, name);
+    }
+    const types = new Set<string>();
+    for (const id of game.state.zones.shared.battlefield) for (const t of subtypes(game, id)) types.add(t);
+    const draws = Math.floor(types.size / 5);
+    const before = hand(game).length;
+    toStep(game, "begin-combat");
+    settle(game);
+    expect(hand(game).length).toBe(before + draws);
+    expect(counters(game, sarek, "+1/+1")).toBe(draws >= 3 ? 2 : 0);
+    expect(draws).toBeGreaterThanOrEqual(3);
+  });
+
+  it("draws one for five types and puts no counters", () => {
+    const { game } = table();
+    const sarek = spawn(game, "Sarek, Federation Ambassador"); // Vulcan Advisor
+    spawn(game, "Llanowar Elves"); // Elf Druid
+    spawn(game, "Grizzly Bears"); // Bear
+    spawn(game, "Assimilation Assessor"); // Borg: none
+    const before = hand(game).length;
+    toStep(game, "begin-combat");
+    settle(game);
+    expect(hand(game).length).toBe(before + 1);
+    expect(counters(game, sarek, "+1/+1")).toBe(0);
+  });
+});
+
+describe("Rules of Acquisition", () => {
+  it("the 3rd Rule: takes the permanent, and the player it was taken from draws three", () => {
+    const { game } = table();
+    lands(game, "Island", 5);
+    const relic = spawn(game, "Darksteel Relic", B);
+    const before = game.state.zones.perPlayer[B].hand.length;
+    cast(game, toHand(game, "Rules of Acquisition"), { modes: [0], targets: [ref(relic)] });
+    expect(game.state.objects[relic].controller).toBe(A);
+    expect(game.state.zones.perPlayer[B].hand.length).toBe(before + 3);
+  });
+
+  it("the 98th Rule: gives the permanent away, then you draw three", () => {
+    const { game } = table();
+    lands(game, "Island", 5);
+    const relic = spawn(game, "Darksteel Relic");
+    const before = hand(game).length;
+    const roa = toHand(game, "Rules of Acquisition");
+    cast(game, roa, { modes: [1], targets: [ref(B), ref(relic)] });
+    expect(game.state.objects[relic].controller).toBe(B);
+    expect(hand(game).length).toBe(before + 3);
+  });
+});
+
+describe("Nog, Ambitious Cadet", () => {
+  it("becomes a Scout, then an Officer who plays lands from the graveyard and an extra land", () => {
+    const { game } = table();
+    game.state.rules.maxLandsPerTurn = 1; // the harness allows any number
+    const nog = spawn(game, "Nog, Ambitious Cadet");
+    lands(game, "Swamp", 4);
+    activate(game, nog, 1); // not a Scout yet: nothing
+    expect(subtypes(game, nog)).toEqual(["Ferengi", "Rogue"]);
+    activate(game, nog, 0);
+    expect(subtypes(game, nog)).toEqual(["Ferengi", "Scout"]);
+    toStep(game, "precombat-main"); // his next turn: lands untapped
+    activate(game, nog, 1);
+    expect(subtypes(game, nog)).toEqual(["Ferengi", "Officer"]);
+    const forest = toGraveyard(game, "Forest");
+    const mountain = toHand(game, "Mountain");
+    game.dispatch({ type: "play-land", player: A, card: forest });
+    expect(zone(game, forest)).toBe("battlefield");
+    game.dispatch({ type: "play-land", player: A, card: mountain });
+    expect(zone(game, mountain)).toBe("battlefield");
+    expect(game.canDispatch({ type: "play-land", player: A, card: toHand(game, "Plains") })).not.toBeNull();
   });
 });

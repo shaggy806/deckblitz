@@ -716,6 +716,7 @@ import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSaprazzanOutrigger from "../pool/saprazzan-outrigger.js";
 import _poolSarcomancy from "../pool/sarcomancy.js";
 import _poolSarcophagusShipOfTheDead from "../pool/sarcophagus-ship-of-the-dead.js";
+import _poolSarekFederationAmbassador from "../pool/sarek-federation-ambassador.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
 import _poolSarkhansWhelp from "../pool/sarkhans-whelp.js";
 import _poolSaruliGatekeepers from "../pool/saruli-gatekeepers.js";
@@ -1734,6 +1735,7 @@ const shard: CardShard = {
     _poolSaprazzanOutrigger,
     _poolSarcomancy,
     _poolSarcophagusShipOfTheDead,
+    _poolSarekFederationAmbassador,
     _poolSarevokDeathbringer,
     _poolSarkhansWhelp,
     _poolSaruliGatekeepers,

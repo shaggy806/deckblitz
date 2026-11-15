@@ -1470,7 +1470,9 @@ every player its sources dealt damage to in the event that fired it, once for
 them all: Breeches, Brazen Plunderer's "whenever one or more Pirates you
 control deal damage to your opponents, exile the top card of each of those
 opponents' libraries" is an `impulse-exile` with `whose: "damaged-players"`;
-nobody outside such a trigger. `"players-being-attacked"` is the same
+nobody outside such a trigger. `"players-who-lost-control-this-way"` is the player a permanent
+was just taken from (Rules of Acquisition's "gain control of target nonland permanent an
+opponent controls. **That opponent** draws three cards", control changed first). `"players-being-attacked"` is the same
 players read from the state — whoever the active player declared attackers at
 this combat — so it also answers in a trigger's intervening `condition`, which
 is asked before the trigger has its attackers ("whenever a player attacks,
@@ -6479,7 +6481,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `mana-spending-rules.test.ts`.
 - `extraLandsPerTurn: number` — additional land drops per turn for this
   permanent's controller (Oracle of Mul Daya, Azusa, Lost but Seeking — needed-cards
-  P16). `affects` is ignored. With `extraLandsForEachPlayer: true` it reaches
+  P16); granted ones count too (Nog, Ambitious Cadet's `become` with `static`). `affects` is ignored. With `extraLandsForEachPlayer: true` it reaches
   every player instead (Rites of Flourishing: "each player may play an
   additional land on each of their turns").
 - `doubleEntryTriggers: { filter? }` — Panharmonicon-style doubling (needed-cards

@@ -597,6 +597,7 @@ import _poolNimbleLarcenist from "../pool/nimble-larcenist.js";
 import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNissaWorldsoulSpeaker from "../pool/nissa-worldsoul-speaker.js";
 import _poolNivMizzetGuildpact from "../pool/niv-mizzet-guildpact.js";
+import _poolNogAmbitiousCadet from "../pool/nog-ambitious-cadet.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNosyGoblin from "../pool/nosy-goblin.js";
 import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
@@ -1621,6 +1622,7 @@ const shard: CardShard = {
     _poolNissaGenesisMage,
     _poolNissaWorldsoulSpeaker,
     _poolNivMizzetGuildpact,
+    _poolNogAmbitiousCadet,
     _poolNornsInquisitor,
     _poolNosyGoblin,
     _poolNoxiousGrasp,

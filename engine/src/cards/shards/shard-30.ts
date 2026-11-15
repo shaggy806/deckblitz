@@ -753,6 +753,7 @@ import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
 import _poolRubiniaSoulsinger from "../pool/rubinia-soulsinger.js";
 import _poolRuinGrinder from "../pool/ruin-grinder.js";
+import _poolRulesOfAcquisition from "../pool/rules-of-acquisition.js";
 import _poolRunForYourLife from "../pool/run-for-your-life.js";
 import _poolRushOfBattle from "../pool/rush-of-battle.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
@@ -1811,6 +1812,7 @@ const shard: CardShard = {
     _poolRoyalTalonFighterJet,
     _poolRubiniaSoulsinger,
     _poolRuinGrinder,
+    _poolRulesOfAcquisition,
     _poolRunForYourLife,
     _poolRushOfBattle,
     _poolRustrazorButcher,

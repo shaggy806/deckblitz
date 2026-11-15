@@ -2671,7 +2671,11 @@
   "amount:dilemmas-faced-this-turn",
   "replacement:others-enter-attacking",
   "condition:begun-extra-turn-this-game",
-  "static:stations-as-though-power"
+  "static:stations-as-though-power",
+  "effect:draw-former-controller-of-target",
+  "static:granted-static-land-permissions",
+  "amount:count-per-n-rounded-down",
+  "effect:drawn-this-way-count"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

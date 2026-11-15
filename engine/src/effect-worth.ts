@@ -175,6 +175,7 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "each-friend":
     case "each-foe":
     case "players-dealt-damage-this-way":
+    case "players-who-lost-control-this-way":
     case "damaged-players":
     case "attacked-players":
     case "players-being-attacked":

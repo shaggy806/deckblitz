@@ -15153,7 +15153,9 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      // Its own statics and those granted it (Nog, Ambitious Cadet's "gains
+      // 'You may play an additional land on each of your turns'").
+      for (const ability of this.staticsOfSource(source)) {
         if (source.controller !== player && ability.extraLandsForEachPlayer !== true) continue;
         if (ability.extraLandsPerTurn !== undefined && this.staticActive(source, ability)) {
           extra += ability.extraLandsPerTurn;
@@ -37746,6 +37748,13 @@ export class Game {
           if (event.type === "damage-dealt" && event.target.kind === "player") dealt.add(event.target.player);
         }
         return this.state.turnOrder.filter((p) => dealt.has(p) && this.state.players[p]?.hasLost === false);
+      }
+      if (who === "players-who-lost-control-this-way") {
+        const lost = new Set<PlayerId>();
+        for (const event of this.eventsSince(since)) {
+          if (event.type === "control-changed" && event.previousController !== event.controller) lost.add(event.previousController);
+        }
+        return this.state.turnOrder.filter((p) => lost.has(p) && this.state.players[p]?.hasLost === false);
       }
       if (who === "damaged-players") {
         const dealt = refs.damagedPlayers ?? [];
@@ -61752,6 +61761,7 @@ controlledBy,
       who === "each-friend" ||
       who === "each-foe" ||
       who === "players-dealt-damage-this-way" ||
+      who === "players-who-lost-control-this-way" ||
       who === "damaged-players" ||
       who === "attacked-players" ||
       who === "you-and-attacked-players" ||

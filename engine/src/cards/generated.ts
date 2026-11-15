@@ -18851,6 +18851,7 @@ import _poolNocturnalFeeder from "./pool/nocturnal-feeder.js";
 import _poolNocturnalHunger from "./pool/nocturnal-hunger.js";
 import _poolNocturnalRaid from "./pool/nocturnal-raid.js";
 import _poolNoeticScales from "./pool/noetic-scales.js";
+import _poolNogAmbitiousCadet from "./pool/nog-ambitious-cadet.js";
 import _poolNogginWhack from "./pool/noggin-whack.js";
 import _poolNoggleBandit from "./pool/noggle-bandit.js";
 import _poolNoggleBridgebreaker from "./pool/noggle-bridgebreaker.js";
@@ -22919,6 +22920,7 @@ import _poolRuinsRecluse from "./pool/ruins-recluse.js";
 import _poolRukarumelBiologist from "./pool/rukarumel-biologist.js";
 import _poolRukhEgg from "./pool/rukh-egg.js";
 import _poolRuleOfLaw from "./pool/rule-of-law.js";
+import _poolRulesOfAcquisition from "./pool/rules-of-acquisition.js";
 import _poolRulikMonsWarrenChief from "./pool/rulik-mons-warren-chief.js";
 import _poolRumbleArena from "./pool/rumble-arena.js";
 import _poolRumbleweed from "./pool/rumbleweed.js";
@@ -23357,6 +23359,7 @@ import _poolSarcomiteMyr from "./pool/sarcomite-myr.js";
 import _poolSarcophagusShipOfTheDead from "./pool/sarcophagus-ship-of-the-dead.js";
 import _poolSardianAvenger from "./pool/sardian-avenger.js";
 import _poolSardianCliffstomper from "./pool/sardian-cliffstomper.js";
+import _poolSarekFederationAmbassador from "./pool/sarek-federation-ambassador.js";
 import _poolSarevokDeathbringer from "./pool/sarevok-deathbringer.js";
 import _poolSarevoksTome from "./pool/sarevoks-tome.js";
 import _poolSarinthGreatwurm from "./pool/sarinth-greatwurm.js";
@@ -52029,6 +52032,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNocturnalHunger,
   _poolNocturnalRaid,
   _poolNoeticScales,
+  _poolNogAmbitiousCadet,
   _poolNogginWhack,
   _poolNoggleBandit,
   _poolNoggleBridgebreaker,
@@ -56097,6 +56101,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRukarumelBiologist,
   _poolRukhEgg,
   _poolRuleOfLaw,
+  _poolRulesOfAcquisition,
   _poolRulikMonsWarrenChief,
   _poolRumbleArena,
   _poolRumbleweed,
@@ -56535,6 +56540,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSarcophagusShipOfTheDead,
   _poolSardianAvenger,
   _poolSardianCliffstomper,
+  _poolSarekFederationAmbassador,
   _poolSarevokDeathbringer,
   _poolSarevoksTome,
   _poolSarinthGreatwurm,
@@ -85220,6 +85226,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nocturnal-hunger": _poolNocturnalHunger,
   "pool/nocturnal-raid": _poolNocturnalRaid,
   "pool/noetic-scales": _poolNoeticScales,
+  "pool/nog-ambitious-cadet": _poolNogAmbitiousCadet,
   "pool/noggin-whack": _poolNogginWhack,
   "pool/noggle-bandit": _poolNoggleBandit,
   "pool/noggle-bridgebreaker": _poolNoggleBridgebreaker,
@@ -89288,6 +89295,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rukarumel-biologist": _poolRukarumelBiologist,
   "pool/rukh-egg": _poolRukhEgg,
   "pool/rule-of-law": _poolRuleOfLaw,
+  "pool/rules-of-acquisition": _poolRulesOfAcquisition,
   "pool/rulik-mons-warren-chief": _poolRulikMonsWarrenChief,
   "pool/rumble-arena": _poolRumbleArena,
   "pool/rumbleweed": _poolRumbleweed,
@@ -89726,6 +89734,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sarcophagus-ship-of-the-dead": _poolSarcophagusShipOfTheDead,
   "pool/sardian-avenger": _poolSardianAvenger,
   "pool/sardian-cliffstomper": _poolSardianCliffstomper,
+  "pool/sarek-federation-ambassador": _poolSarekFederationAmbassador,
   "pool/sarevok-deathbringer": _poolSarevokDeathbringer,
   "pool/sarevoks-tome": _poolSarevoksTome,
   "pool/sarinth-greatwurm": _poolSarinthGreatwurm,
