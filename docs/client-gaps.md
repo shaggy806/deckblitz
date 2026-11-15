@@ -99,6 +99,16 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 
+**Blitz's paste box appears abruptly and adds a page scrollbar**
+
+The user, 2026-11-14: "clicking blitz when you don't have a decklist copied brings up the place to
+paste it in very abruptly, have it scale up to fill the space. Also it adds a scroll bar to the
+right hand of the screen which causes everything to shift awkwardly. Please make the elements move
+so the scrollbar doesn't appear." The box is `BlitzPanel.tsx`'s `.landing-blitz-paste` on the
+landing page (`LandingScreen.tsx`, whose column already scales by `--landing-zoom`). Two parts: an
+opening transition for the box (grow into place, not pop in), and the landing layout making room
+for it within the window's height so the page never overflows and no vertical scrollbar appears.
+
 **Baxter Building's ability menu lists every colour combination**
 
 Reported from a live game (the user, 2026-11-14, room 4M2LS): clicking Baxter Building opens its

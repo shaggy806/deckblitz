@@ -310,6 +310,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **Blitz's paste box appears abruptly and adds a page scrollbar** — clicking Blitz with no decklist copied should scale the box up into its space, and the page should make room without the scrollbar that shifts everything (the user, 2026-11-14; `docs/client-gaps.md`).
 - **Baxter Building's ability menu lists every colour combination** — "add four mana in any combination of colors" shows a row per combination, a column taller than the screen, so the land's options are unusable (the user, 2026-11-14; `docs/client-gaps.md`).
 - **Another player's target popup says "your graveyard"** — Mausoleum Turnkey's opponent picks a card in its controller's graveyard under a title written from the controller's side (`docs/client-gaps.md`).
 
