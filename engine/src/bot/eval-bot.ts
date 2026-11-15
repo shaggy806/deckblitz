@@ -399,6 +399,16 @@ const MOVES_PER_ROUND = 8;
  * v1's blocks on a board of a dozen attackers. */
 const REAL_BLOCK_SIMULATIONS = 24;
 
+/** How far below its predicted score an attack may come out against the real
+ * blocks and still be declared unasked (`declareAttackersSearched`): the
+ * evaluation's points, about a fifth of a card. */
+const REAL_BLOCK_SLACK = 1;
+
+/** When the real blocks beat the prediction, how many "the same attack
+ * without this attacker" are tried beside no attack: the attackers the
+ * estimate likes least. Each is a block search per defender. */
+const REAL_BLOCK_VARIANTS = 4;
+
 /** What an attack scores for each opponent past the first it sends attackers
  * at (the user, 2026-10-07: "Bot should attempt to spread out attackers").
  * Small: it decides a near tie — two open opponents, or commander damage
@@ -816,6 +826,47 @@ class DecisionRolloutController extends CombatRolloutController {
     return this.rollout === "passive" ? [] : super.declareBlockers(view);
   }
 }
+
+/**
+ * Our own seat inside a priority rollout on an opponent's turn, before blocks
+ * are declared: v1's answers, as the rollout's stand-in gives, but our blocks
+ * by v2's own block search (`REAL_BLOCK_SIMULATIONS`). v1 chumps only to stay
+ * alive, so under it creatures left home often block nothing, and whatever a
+ * candidate taps or sacrifices of them costs nothing in the rollout: at 15
+ * life in front of 16 power, four of five lifelink Soldiers went to Nullmage
+ * Shepherd for a Talisman (a watched game, 2026-11-15). Every candidate of
+ * the decision, the pass included, is rolled out with the same seat, so what
+ * differs between them is the blocks each leaves us able to make.
+ * `docs/plans/bot-next-steps.md`, step 1b.
+ */
+class RealBlocksController extends CombatRolloutController {
+  private readonly cards: CardRegistry;
+  private readonly weights: EvalWeights;
+
+  constructor(playerId: PlayerId, cards: CardRegistry, weights: EvalWeights) {
+    super(playerId, cards);
+    this.cards = cards;
+    this.weights = weights;
+  }
+
+  declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {
+    return new EvalBotController(this.playerId, this.cards, {
+      weights: this.weights,
+      maxSimulations: REAL_BLOCK_SIMULATIONS,
+      plan: "off",
+    }).declareBlockers(view);
+  }
+}
+
+/** The steps of a turn before its blocks are declared. */
+const BEFORE_BLOCKS: ReadonlySet<string> = new Set([
+  "untap",
+  "upkeep",
+  "draw",
+  "precombat-main",
+  "begin-combat",
+  "declare-attackers",
+]);
 
 /**
  * A searching bot making another player's decisions: `StandInController`'s turn
@@ -2210,13 +2261,37 @@ export class EvalBotController extends HeuristicBotController {
    * Our own seat in a priority rollout: under a deep horizon a
    * {@link DeepRolloutController}, which answers opponents' turns with a
    * small search of its own; otherwise a {@link DecisionRolloutController}
-   * when `rolloutDecisions` asks for one, and the policy's stand-in when not.
+   * when `rolloutDecisions` asks for one, and the policy's stand-in when not
+   * — blocking for real (`RealBlocksController`) where an attack on us is
+   * still to be blocked this turn.
    */
   private selfInPriorityRollouts(state: GameState): PlayerController | undefined {
     if (isDeepHorizon(this.horizon) && this.rollout === "playing") {
       return new DeepRolloutController(this.playerId, this.cards, this.weights, state.turn.number);
     }
-    return this.rolloutDecisions ? this.selfInRollouts() : undefined;
+    if (this.rolloutDecisions) return this.selfInRollouts();
+    return this.blocksToCome(state) ? new RealBlocksController(this.playerId, this.cards, this.weights) : undefined;
+  }
+
+  /**
+   * Whether this turn may still ask us to block: an opponent's turn, before
+   * blocks, under the `"combat"` rollout (the one whose stand-ins fight),
+   * with a creature of ours able to block and either attackers already
+   * declared at us or a creature of theirs able to attack.
+   */
+  private blocksToCome(state: GameState): boolean {
+    if (this.decisionRollout !== "combat") return false;
+    const me = this.playerId;
+    const active = state.turnOrder[state.turn.activePlayerIndex];
+    if (active === undefined || active === me || !BEFORE_BLOCKS.has(state.turn.step)) return false;
+    if (!combatCreatures(state, this.cards, me, true).some((c) => c.canBlock)) return false;
+    if (state.turn.step === "declare-attackers") {
+      return state.zones.shared.battlefield.some((id) => {
+        const target = state.objects[id]?.attacking ?? null;
+        return target !== null && (target === me || state.objects[target as ObjectId]?.controller === me);
+      });
+    }
+    return combatCreatures(state, this.cards, active, false).some((c) => c.canAttack);
   }
 
   private selfInRollouts(): DecisionRolloutController {
@@ -2456,6 +2531,28 @@ export class EvalBotController extends HeuristicBotController {
         );
         return [{ attacker, defender }];
       });
+    // An attack scored against the defenders' own block search, once each.
+    // Their blocks only (`RealBlocksController`): a whole v2 seated there
+    // also casts and activates in the combat it is given, which an attack
+    // then pays for and no attack doesn't. And our own seat deciding what
+    // the attack asks of it (`selfInRollouts`: an exert, a trigger's target),
+    // as it will: with v1 answering those, Glorybringer's exert went
+    // elsewhere, a 2/5 flyer blocked it for nothing, and the attack was
+    // called off that the real table let through for 4 (a judged game,
+    // 2026-11-15: three attacks worse of eleven changed, one of ten with
+    // this).
+    const defenders = (player: PlayerId): PlayerController | undefined =>
+      player === me ? this.selfInRollouts() : new RealBlocksController(player, this.cards, w);
+    const realScores = new Map<readonly AttackerDeclaration[], number | null>();
+    const real = (attackers: readonly AttackerDeclaration[]): number | null => {
+      let value = realScores.get(attackers);
+      if (value === undefined) {
+        budget.left -= 1;
+        value = timed(budget, () => score(attackers, defenders));
+        realScores.set(attackers, value);
+      }
+      return value;
+    };
     let [chosen, chosenScore] = [built, builtScore];
     if (wide.length > built.length + 1 && !spent(budget)) {
       const [swing, swingScore] = hillClimb<AttackerDeclaration>(
@@ -2465,23 +2562,49 @@ export class EvalBotController extends HeuristicBotController {
         budget,
       );
       if (swingScore > chosenScore) {
-        const defenders = (player: PlayerId): PlayerController | undefined =>
-          player === me
-            ? undefined
-            : new EvalBotController(player, this.cards, { maxSimulations: REAL_BLOCK_SIMULATIONS, plan: "off" });
-        budget.left -= 2;
-        const real = timed(budget, () => score(swing, defenders));
-        const realBuilt = real === null ? null : timed(budget, () => score(built, defenders));
-        if (real !== null && realBuilt !== null && real > realBuilt) [chosen, chosenScore] = [swing, swingScore];
+        const realSwing = real(swing);
+        const realBuilt = realSwing === null ? null : real(built);
+        if (realSwing !== null && realBuilt !== null && realSwing > realBuilt) [chosen, chosenScore] = [swing, swingScore];
       }
     }
-    this.lastDecision = audit("attackers", budget);
     // The deadline stopped the declaration's first simulation in flight, so
     // nothing was scored and the climb never left its start: v1's swing, as
     // every other search falls to v1's answer — not no attack at all, which
     // is what an unscored climb returns.
-    if (budget.stalled) return fallback;
-    return fallbackScore !== null && fallbackScore > chosenScore ? fallback : chosen;
+    if (budget.stalled) {
+      this.lastDecision = audit("attackers", budget);
+      return fallback;
+    }
+    let [picked, pickedScore] =
+      fallbackScore !== null && fallbackScore > chosenScore ? [fallback, fallbackScore] : [chosen, chosenScore];
+    // **Checked against the real blocks.** Every score above is against v1's
+    // blocks, which are a narrow policy (a kill it survives, a trade up, a
+    // gang block that pays, chumps to stay alive); v2's own defenders block
+    // differently, and an attacker sent into a block v1 never makes is a
+    // creature thrown away (Mentor of the Meek beside Emmara, double-blocked:
+    // a watched game, 2026-11-14). So the attack picked is scored once more
+    // with each defender seated as its own block search. If that holds up to
+    // what was predicted, it is declared. If it doesn't, the same attack with
+    // each attacker left out, and no attack, are scored the same way, and the
+    // best of them is declared. Only where a defender has something to block
+    // with; `docs/plans/bot-next-steps.md`, step 1a.
+    const blockable = picked.some((d) => blockersFor(defendingPlayer(d.defender)).length > 0);
+    if (picked.length > 0 && blockable && Number.isFinite(pickedScore)) {
+      const realPicked = real(picked);
+      if (realPicked !== null && realPicked < pickedScore - REAL_BLOCK_SLACK) {
+        let bestReal = realPicked;
+        const without = [...picked]
+          .sort((x, y) => estimate(x) - estimate(y))
+          .slice(0, REAL_BLOCK_VARIANTS)
+          .map((d) => picked.filter((x) => x !== d));
+        for (const variant of [[], ...without]) {
+          const value = real(variant);
+          if (value !== null && value > bestReal) [picked, bestReal] = [variant, value];
+        }
+      }
+    }
+    this.lastDecision = audit("attackers", budget);
+    return picked;
   }
 
   declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {

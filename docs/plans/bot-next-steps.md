@@ -1,6 +1,7 @@
-# Bots: the next four steps
+# Bots: the next steps
 
-Status: **in progress** (written 2026-11-15; step 1 started the same day). The plan of record
+Status: **in progress** (written 2026-11-15; step 1 built the same day, steps 2 to 5 open;
+step 5 added that day from the user). The plan of record
 for the bots is still `bot-effect-knowledge.md`; this is the order of work after the overnight
 session of 2026-11-15, and why it isn't "give them more time".
 
@@ -65,6 +66,38 @@ live clock before and after.
 **Done when** the judged games show the changed attacks better on balance with none badly
 worse, the training scenario passes, and a watched game's thinking time is not noticeably up.
 
+**Built, 2026-11-15.** Both parts, as `RealBlocksController` (v1's rollout stand-in whose
+blocks are v2's block search at `REAL_BLOCK_SIMULATIONS`).
+
+*1a took three versions, each judged.* Seating a whole v2 at each defender made eleven of
+twelve changed attacks "no attack": it also casts and activates in the combat it is given,
+which an attack pays for and no attack doesn't. Seating only its blocks was no better (eleven
+changed: three better, three worse): the attack's own choices were still v1's, so
+Glorybringer's exert went elsewhere, a 2/5 flyer blocked it for nothing, and an attack the
+real table let through for 4 was called off. With our own seat deciding what its attack asks
+of it too (`selfInRollouts`), 21 games (seven deck sets, three seeds, 225 attack declarations)
+changed 20 attacks: **net +194 evaluation points** (274 gained, 80 lost; best +142, worst −51),
+the decider's own life +48 and its opponents' +3 in total. Nearly every change sends fewer
+attackers. The largest gain and the two largest losses are one turn (Moraug's three combats
+at one table, +71 between them), where the judge's own play is the noise: after the new
+answer its seat cast nothing for the rest of the turn, after the old one three spells
+(BACKLOG, to look at). One changed attack ended with the bot out of the game where the old
+answer lived: a 2/2 Zombie kept home in a four-player round where the player it would have
+hit finished on 1 life and killed it. Counted apart, and not a pattern.
+
+*1b turned its scenario:* "does not tap its token blockers away in the attacker's main phase
+for a Sol Ring" is a gate scenario now (253 of 253).
+
+*Cost.* At the live clock, the same three seeds watched before and after: a creature-heavy
+four-player pod 31 s to 44 s of thinking over 33 turns, the strong decks 28 s to 29 s over
+61, a two-player game 19 s to 23 s over 27. A v2 decision diff on the sample decks: 8 of
+13,090 decisions, all attack declarations.
+
+*Left of step 1.* The climb itself still scores every candidate against v1's blocks; only its
+answer is checked, against that answer less one attacker and no attack. No gate scenario
+holds 1a (a board where v1's blocks and v2's differ wasn't found by hand): the judge is its
+measure. And a rollout's *attacker* is still v1 everywhere.
+
 ## 2. Mana priced by v2's own turn planner
 
 **What is wrong.** A rollout passes our own seat, so mana a choice spends looks free, and v1
@@ -112,3 +145,38 @@ alone and is the pattern.
 
 **Done when** `bot:watch`'s reader can be pointed at a list of seeds and turns instead of
 whole games.
+
+## 5. Playing to its outs
+
+The user, 2026-11-15: "check whether or not the bots play to their outs. If they are dead to
+a player's giant board is there a chance someone else casts a board wipe? If so it might be
+best to plan for that rather than to put more stuff on board that can't save them."
+
+**What the bot does today.** It knows "dead whatever I do" in two places, and in both it
+stops being careful: an attack drops the crackback constraint and races (`deadAnyway`), and
+the tap guard stands down (`crackbackGuard`). Nowhere does it ask what would have to happen
+for it to live, or play as though that happens. Its rollouts end with its own turn, so a board
+it can't beat scores the same whether it holds three creatures or casts them.
+
+**To check first** (nothing is built):
+
+- How often it comes up: over self-play, the turns a seat ends dead to one opponent's board
+  by the block arithmetic, and how many it survived anyway and why (a wipe by a third player,
+  the big board attacking someone else, its own draw). Step 4's screen is the tool.
+- What it does there: a scenario with a hand of creatures that can't block enough, at a
+  table where another player could wipe. Does it dump the hand?
+- What "an out" is, in order of how knowable: its own draw (a wipe, a fog, a lifegain swing
+  left in its library); the threatening player choosing another target (at four players the
+  crackback already counts a non-next opponent at `crackbackParanoia`); another player's
+  wipe (their open mana and hand size are public, their deck's wipes are not, though a bot
+  seat's list is known to the engine and must not be read: hidden information).
+
+**The shape to try**, if the check says it matters: when the block arithmetic says dead to a
+board and no line of its own changes that, score its candidates as though the board is wiped
+before it untaps (what it kept in hand is what it rebuilds with, what it put on the
+battlefield is gone), weighted by a chance that grows with the players still able to act and
+their open mana. Holding creatures then beats casting ones that can't save it, and a play
+that does save it (its own wipe, a chump that buys a turn) still wins outright.
+
+**Done when** the check has numbers, and either a scenario gates the behaviour or the numbers
+say it is too rare to build for.

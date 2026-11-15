@@ -1104,7 +1104,9 @@ the life they gain is what keeps it alive". Left: v1 doesn't count lifelink when
 how many chumps it needs, and the attack side's estimate of an opponent's blocks doesn't
 choose blocks for the life they gain.
 
-**Not fixed: blockers tapped on the attacker's turn.** The same seed replayed on the fixed
+**Blockers tapped on the attacker's turn** (fixed the same day: step 1 of
+`bot-next-steps.md`, our own seat in a priority rollout blocks by v2's block search, and the
+scenario below is in the gate). The same seed replayed on the fixed
 build died a second way. In Grave Danger's upkeep, at 15 life in front of 16 power, Token
 Triumph tapped four of five lifelink Soldiers to Nullmage Shepherd for a Talisman; one chump
 kept it alive on 6 by its own arithmetic, and Liliana, Untouched by Death shrank the fifth

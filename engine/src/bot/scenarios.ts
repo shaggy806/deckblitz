@@ -5096,19 +5096,19 @@ const SCENARIOS: readonly BotScenario[] = [
   }),
   asked({
     name: "does not tap its token blockers away in the attacker's main phase for a Sol Ring",
-    kind: "training",
     rule: "Blockers tapped before an attack are blocks not made: at 15 life in front of 16 power, four of five lifelink Soldiers are worth more home than a Sol Ring.",
     position(registry) {
       // The same game replayed after the fixes above (2026-11-15): in Grave
       // Danger's upkeep, at 15 life, Token Triumph tapped four of its five
       // lifelink Soldiers to Nullmage Shepherd for a Talisman, and died to
       // the attack once Liliana shrank the fifth. Here: five attackers, 16
-      // power, at 15 life. Still wrong, and not by arithmetic: one chump
-      // keeps it alive on 6 either way, and the rollouts' defender (v1) only
-      // chumps to stay alive, so the four Soldiers block nothing in the
-      // rollout where they stay home and tapping them reads as free (−85.4
-      // against −88.9). v2's own block search, asked for real, would block
-      // with more. BACKLOG, "Lifelink in the blocks a bot predicts".
+      // power, at 15 life. Not arithmetic: one chump keeps it alive on 6
+      // either way, and the rollouts' defender was v1, which only chumps to
+      // stay alive, so the four Soldiers blocked nothing in the rollout
+      // where they stayed home and tapping them read as free (−85.4 against
+      // −88.9; a training scenario for a morning). Fixed: our own seat in a
+      // priority rollout blocks by v2's block search where an attack is
+      // still to come (`RealBlocksController`).
       const game = table(registry, [A, B], B);
       game.state.players[A].life = 15;
       const shepherd = onBoard(game, "Nullmage Shepherd", A, true);
