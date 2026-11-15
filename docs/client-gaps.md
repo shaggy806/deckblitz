@@ -99,6 +99,16 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 
+**Alternate casting options in hand need a clearer display**
+
+The user, 2026-11-14: "Adjust how alternate casting options are displayed in hand. Either make it
+closer to how cycling shows or make it so when you click on a castable card it brings up a small
+menu to choose in which manner you want to cast it and for what cost." A hand card with more than
+one way to cast it (an alternative cost, blitz, emerge, sneak, a kicker, the prepared or adventure
+half) offers each as its own entry on the card today. Two designs to choose between: present them
+as cycling is presented, or open a small menu from a click on the card listing each way with its
+cost. The second is the same shape as a permanent's ability menu (`.ability-menu`).
+
 **Blitz's paste box appears abruptly and adds a page scrollbar**
 
 The user, 2026-11-14: "clicking blitz when you don't have a decklist copied brings up the place to
