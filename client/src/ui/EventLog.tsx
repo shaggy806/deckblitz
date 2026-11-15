@@ -6,6 +6,7 @@ import { HIDDEN_CARD, describeEvent, isDetailOnlyEvent } from '../format.ts'
 import { requestCards, useCardData } from '../cards/cardData.ts'
 import { CardTile } from './CardTile.tsx'
 import { defToVisible } from './defToVisible.ts'
+import { markCard, splitMarked } from './logMarks.ts'
 import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
 
@@ -23,34 +24,37 @@ export interface EventLogProps {
   readonly seats: readonly SeatStatus[]
   /** Picks an entry: the caller points out on the board what it was about. */
   readonly onSelect?: (event: GameEvent) => void
+  /** Picks one card's name in an entry: the caller points out that card,
+   * not the entry's first. Without it a name's click is the entry's. */
+  readonly onSelectCard?: (id: ObjectId, event: GameEvent) => void
 }
 
-/**
- * Card names are marked as they're substituted rather than re-found in the
- * finished sentence. `describeEvent` routes every card name through `nameOf`,
- * so wrapping that one function marks all of them — across ~100 event cases —
- * without any of those cases knowing. Searching the rendered string for known
- * card names instead would mis-hit every time a name is a common word
- * ("Fog", "Six", "Giada") or is a substring of another card's.
- *
- * Control characters because no card name contains one, so the split can't
- * collide with real text.
- */
-const MARK_START = '\u0001'
-const MARK_END = '\u0002'
+/** The History panel a log name sits in: its card preview opens beside it,
+ * not over the lines under the name (`useHoverPopover`'s `beside`). Module
+ * level, so its identity is stable across renders. */
+const besideHistory = (anchor: HTMLElement): Element | null => anchor.closest('.history-box')
 
 /**
- * A card name in a log line, which shows the whole card on hover or focus,
+ * A card name in a log line (marked as it's substituted — `logMarks.ts`), which shows the whole card on hover or focus,
  * portalled out of the log's scroll box the way the board's previews are
  * (`useHoverPopover`). The definition is fetched the first time the pointer
  * reaches the name rather than for every name the log holds.
  */
-function LogCardName({ name, lookup }: { readonly name: string; readonly lookup: CardLookup }) {
+function LogCardName({
+  name,
+  lookup,
+  onPick,
+}: {
+  readonly name: string
+  readonly lookup: CardLookup
+  /** A click on this name, when the log's entries can be picked. */
+  readonly onPick?: () => void
+}) {
   const def = lookup(name)
   // Drawn as the face the log names, which for a double-faced card can be
   // its back (`defToVisible` titles one by its front).
   const card = def ? { ...defToVisible(def), faceName: def.name } : null
-  const { wrapRef, popoverRef, open, handlers } = useHoverPopover<HTMLElement>(def)
+  const { wrapRef, popoverRef, open, handlers } = useHoverPopover<HTMLElement>(def, besideHistory)
   const load = () => requestCards([name])
   return (
     <strong
@@ -58,6 +62,17 @@ function LogCardName({ name, lookup }: { readonly name: string; readonly lookup:
       ref={wrapRef}
       tabIndex={0}
       {...handlers}
+      title={onPick ? 'Show this card' : undefined}
+      onClick={
+        onPick
+          ? (e) => {
+              // This card, not the entry's first: the line's own click
+              // would point out whichever card it finds first.
+              e.stopPropagation()
+              onPick()
+            }
+          : undefined
+      }
       onMouseEnter={() => {
         load()
         handlers.onMouseEnter()
@@ -87,41 +102,38 @@ function EventText({
   nameAt,
   seats,
   lookup,
+  onSelectCard,
 }: {
   readonly event: GameEvent
   readonly nameAt: NameAt
   readonly seats: readonly SeatStatus[]
   readonly lookup: CardLookup
+  readonly onSelectCard?: (id: ObjectId, event: GameEvent) => void
 }) {
   // A card this seat was never shown is plain words: there's nothing to hover.
   const marked = describeEvent(
     event,
     (id, heldBy) => {
       const name = nameAt(id, event.seq, heldBy)
-      return name === HIDDEN_CARD ? name : `${MARK_START}${name}${MARK_END}`
+      return name === HIDDEN_CARD ? name : markCard(id, name)
     },
     seats,
   )
-  // Odd indices are the marked names — `split` on a single-char delimiter
-  // pair alternates plain/marked as long as marks never nest, which they
-  // can't: the name is a leaf substitution.
-  const parts = marked.split(MARK_START).flatMap((chunk, i) => {
-    if (i === 0) return [{ text: chunk, card: false }]
-    const [name, ...rest] = chunk.split(MARK_END)
-    return [
-      { text: name, card: true },
-      { text: rest.join(MARK_END), card: false },
-    ]
-  })
   return (
     <span className="ev-text">
-      {parts.map((part, i) =>
-        part.text.length === 0 ? null : part.card ? (
-          <LogCardName key={i} name={part.text} lookup={lookup} />
-        ) : (
-          <span key={i}>{part.text}</span>
-        ),
-      )}
+      {splitMarked(marked).map((part, i) => {
+        if (part.text.length === 0) return null
+        if (!part.card) return <span key={i}>{part.text}</span>
+        const id = part.id
+        return (
+          <LogCardName
+            key={i}
+            name={part.text}
+            lookup={lookup}
+            onPick={onSelectCard !== undefined && id !== undefined ? () => onSelectCard(id, event) : undefined}
+          />
+        )
+      })}
     </span>
   )
 }
@@ -136,7 +148,7 @@ function EventText({
  * The choice is per-session rather than persisted — it's a debugging mode,
  * and the useful default is the one you get on every fresh visit.
  */
-export function EventLog({ events, nameAt, seats, onSelect }: EventLogProps) {
+export function EventLog({ events, nameAt, seats, onSelect, onSelectCard }: EventLogProps) {
   const boxRef = useRef<HTMLDivElement>(null)
   const [detailed, setDetailed] = useState(false)
   const lookup = useCardData()
@@ -183,7 +195,7 @@ export function EventLog({ events, nameAt, seats, onSelect }: EventLogProps) {
             {/* The event's number is for telling a bug report's lines apart:
                 only the detailed view carries it. */}
             {detailed ? <span className="ev-seq">{event.seq}</span> : null}
-            <EventText event={event} nameAt={nameAt} seats={seats} lookup={lookup} />
+            <EventText event={event} nameAt={nameAt} seats={seats} lookup={lookup} onSelectCard={onSelectCard} />
           </li>
         ))}
       </ul>

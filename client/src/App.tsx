@@ -122,7 +122,7 @@ import { PhaseTrack } from './ui/PhaseTrack.tsx'
 import { TurnBanner } from './ui/TurnBanner.tsx'
 import { AnimationLayer } from './ui/AnimationLayer.tsx'
 import { ArrowLayer } from './ui/ArrowLayer.tsx'
-import { highlightEvent } from './ui/highlight.ts'
+import { highlightEvent, highlightObject } from './ui/highlight.ts'
 import { SeatMenu } from './ui/SeatMenu.tsx'
 import { TriggerOrder } from './ui/TriggerOrder.tsx'
 import { usePassSettings } from './game/passSettings.ts'
@@ -1810,6 +1810,16 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
                   const o = view.objects[id]
                   return o === undefined ? undefined : { zone: o.zone, owner: o.owner }
                 })
+              }}
+              onSelectCard={(id, event) => {
+                // A name in the entry: that card, wherever it is now, and
+                // the entry as a whole only when it can't be found (an
+                // ability that has left the stack).
+                const locate = (each: ObjectId) => {
+                  const o = view.objects[each]
+                  return o === undefined ? undefined : { zone: o.zone, owner: o.owner }
+                }
+                if (highlightObject(id, locate) === 0) highlightEvent(event, locate)
               }}
             />
           </div>

@@ -47,7 +47,13 @@ export interface HoverPopover<T extends HTMLElement = HTMLDivElement> {
  *   pushed view changing the card's rules text, say) and so is a reason to
  *   re-place it.
  */
-export function useHoverPopover<T extends HTMLElement = HTMLDivElement>(dep?: unknown): HoverPopover<T> {
+export function useHoverPopover<T extends HTMLElement = HTMLDivElement>(
+  dep?: unknown,
+  /** A panel the anchor sits in that the popover should open beside, to its
+   * left and level with the anchor, rather than over: the History log's
+   * names, whose card otherwise covered the lines under the one being read. */
+  beside?: (anchor: T) => Element | null,
+): HoverPopover<T> {
   const wrapRef = useRef<T>(null)
   const popoverRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
@@ -86,6 +92,17 @@ export function useHoverPopover<T extends HTMLElement = HTMLDivElement>(dep?: un
       if (!anchor || !popover) return
       const a = anchor.getBoundingClientRect()
       const p = popover.getBoundingClientRect()
+      const panel = beside?.(anchor)?.getBoundingClientRect()
+      if (panel !== undefined && panel.left - p.width - POPOVER_GAP >= POPOVER_GAP) {
+        // Clear of the panel, on its left, as near level with the anchor as
+        // the screen allows.
+        popover.classList.add('to-left')
+        popover.style.left = `${panel.left - p.width - POPOVER_GAP}px`
+        popover.style.top = `${Math.max(POPOVER_GAP, Math.min(a.top, window.innerHeight - p.height - POPOVER_GAP))}px`
+        popover.classList.toggle('hover-carry', carried.current)
+        popover.classList.add('placed')
+        return
+      }
       // Below the anchor by preference (the board area below a tile, or the
       // collapsed hand tray under your own board, usually has the most
       // slack); above it when that would run off the bottom of the screen,
@@ -132,7 +149,9 @@ export function useHoverPopover<T extends HTMLElement = HTMLDivElement>(dep?: un
       window.removeEventListener('resize', place)
       grown.disconnect()
     }
-  }, [open, dep])
+    // `beside` is a module-level function where it's passed (`EventLog`),
+    // so it doesn't re-run this.
+  }, [open, dep, beside])
 
   return {
     wrapRef,

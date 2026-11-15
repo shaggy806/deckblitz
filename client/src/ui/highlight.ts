@@ -43,6 +43,21 @@ export type Locate = (id: ObjectId) => { readonly zone: string; readonly owner: 
  */
 export function highlightEvent(ev: GameEvent, locate?: Locate): number {
   const { objects, players } = idsInvolved(ev)
+  return pointOut(objects, players, locate)
+}
+
+/**
+ * Points out one card of a history entry: the one whose name was clicked.
+ * An entry naming two ("casts Beast Within at Felothar") points out the
+ * first it can find as a whole, so with neither on the board it opened the
+ * graveyard holding Beast Within whichever name was clicked (a bug report,
+ * 2026-11-14).
+ */
+export function highlightObject(id: ObjectId, locate?: Locate): number {
+  return pointOut([id], [], locate)
+}
+
+function pointOut(objects: readonly ObjectId[], players: readonly PlayerId[], locate?: Locate): number {
   const els: HTMLElement[] = []
   for (const id of objects) {
     const esc = CSS.escape(id)

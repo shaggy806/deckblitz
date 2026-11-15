@@ -3733,10 +3733,18 @@
 .popover-held.held-2 .popover-held-cards {
   grid-template-columns: repeat(2, var(--card-w));
 }
-/* The history's card preview opens over the history popup (130), which the
-   board's own preview sits under on purpose. */
+/* The history's card preview opens over the history popup, which the board's
+   own preview sits under on purpose. Above `.history-overlay`'s 10002 and
+   the top strip's 10003: it was 140, from when the popup sat at 130, and
+   once the popup was raised over the animation layer the preview drew
+   behind the log it was opened from (a bug report, 2026-11-14). */
 .mini-tile-popover.over-history {
-  z-index: 140;
+  z-index: 10004;
+}
+/* A name in a pickable log line is its own click: that card, not the line's
+   first. */
+.ev.selectable .ev-card {
+  cursor: pointer;
 }
 .mini-tile-popover .card-tile {
   --ct-scale: calc(var(--card-w) / var(--card-w-max) * var(--ui));
