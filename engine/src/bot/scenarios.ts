@@ -2731,6 +2731,66 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  asked({
+    name: "holds Reanimate when the graveyards hold only a one-drop",
+    rule: "A reanimation spell waits for something worth bringing back: a 0/3 for a card is a poor trade with a table of Dragons still to die.",
+    position(registry) {
+      // Reported from a live game (2026-11-14, room K6DYC, turn 15): "a bot
+      // used Reanimate on my 1 drop instead of waiting to get something
+      // stronger" — Jodah's bot, on its fourth turn, at the user's Walking
+      // Bulwark, the only creature card in any graveyard. A card in hand is
+      // worth `hand`, and a creature on the battlefield more, so any target
+      // beat holding; and nothing in a rollout dies and is brought back, so
+      // the search never sees the better one. A reanimation spell now waits
+      // for a card of mana value four, or three quarters of what the
+      // battlefield's creatures cost (`takeSlot`).
+      const game = table(registry, [A, B, C, D], A);
+      game.state.turn.number = 15;
+      lands(game, "Swamp", A, 3);
+      onBoard(game, "Old Gnawbone", A);
+      onBoard(game, "Orcish Bowmasters", C);
+      onBoard(game, "Felothar the Steadfast", B);
+      game.debugSpawn("Walking Bulwark", B, "graveyard");
+      const reanimate = game.debugSpawn("Reanimate", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === reanimate),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "casts Reanimate at the six-drop in a graveyard",
+    rule: "With a creature worth the card in a graveyard, the spell is cast, at that one.",
+    position(registry) {
+      // The scenario above with a Craw Wurm beside the Bulwark: the hold
+      // must not keep the spell from a real target.
+      const game = table(registry, [A, B, C, D], A);
+      game.state.turn.number = 15;
+      lands(game, "Swamp", A, 3);
+      onBoard(game, "Old Gnawbone", A);
+      onBoard(game, "Orcish Bowmasters", C);
+      onBoard(game, "Felothar the Steadfast", B);
+      game.debugSpawn("Walking Bulwark", B, "graveyard");
+      const wurm = game.debugSpawn("Craw Wurm", C, "graveyard");
+      const reanimate = game.debugSpawn("Reanimate", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed:
+            action.type === "cast-spell" &&
+            action.card === reanimate &&
+            action.targets?.[0]?.kind === "object" &&
+            action.targets[0].object === wurm,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   {
     name: "does not pay its last life to Necropotence",
     rule: "A life payment down to 0 loses the game (rule 704.5a), however lost the position looks.",

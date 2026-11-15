@@ -4,6 +4,28 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-14 — Reanimate on a one-drop, instead of waiting for something stronger
+
+Status: fixed 2026-11-14 for reanimation (its scenarios gate); the wider habit is open (`BACKLOG.md`).
+
+- **Seen:** room K6DYC, turn 15 (the bot's fourth turn). Jodah's bot cast Reanimate at the user's
+  Walking Bulwark, a one-mana 0/3 and the only creature card in any graveyard, with a table of
+  Dragons and commanders still to die. The user: bots "struggle to know when they should hold off
+  on using a spell to get more value". A watched game had the same: Reanimate on a Wood Elves.
+- **Right:** hold it. The same card brings back a seven-drop a few turns on.
+- **Why:** a card in hand is worth `hand` (2), a targeted spell an average card (`hand-worth.ts`),
+  and a creature on the battlefield more than that, so any target beats holding. The search can't
+  see the better target either: nothing in its rollouts dies and is brought back.
+- **Scenarios:** "holds Reanimate when the graveyards hold only a one-drop" and "casts Reanimate
+  at the six-drop in a graveyard" (gate). The first read "cast at the Bulwark" without the fix.
+- **Fix (built):** a spell that takes a card from a graveyard for us (a `take` slot aimed at a
+  graveyard) waits for a card of mana value four, or three quarters of what the battlefield's
+  creatures cost on average, whichever is more (`takeSlot` in `controller.ts`). v1 doesn't cast
+  it below that; v2's search leaves out the targets below it and chooses among the rest. At ten
+  life or less it takes what there is. `test/v1-self-harm.test.ts`.
+- **Not covered:** the same habit with other one-for-one spells. In the same game Abrupt Decay
+  went at a 1/1 Army token and Collective Resistance at the Walking Bulwark.
+
 ## 2026-11-14 — Crux of Fate at its own Dragons, with no opposing creature
 
 Status: fixed 2026-11-14 (its scenario now gates).

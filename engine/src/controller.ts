@@ -4119,6 +4119,66 @@ export class HeuristicBotController extends AutomaticController {
     return !attacked;
   }
 
+  /**
+   * The slot of `offer` that takes a card from a graveyard for us (a `take`
+   * slot aimed at a graveyard: Reanimate, Animate Dead, Necromancy), and the
+   * least a card there has to be worth (`targetValue`: its mana value)
+   * before the spell is spent on it: {@link TAKE_FLOOR}, or
+   * {@link TAKE_SHARE} of what the creatures on the battlefield cost on
+   * average, whichever is more — those are what dies next. `null` when the
+   * offer has no such slot, or when we're low enough on life that any body
+   * is worth having now.
+   *
+   * A card in hand is a card, and a creature on the battlefield is worth
+   * more than a card, so a reanimation spell was cast at whatever the
+   * graveyards held: Reanimate on an opponent's one-mana Walking Bulwark on
+   * the bot's fourth turn, with a table of Dragons still to die (reported
+   * from a live game, 2026-11-14: "instead of waiting to get something
+   * stronger"), and on its own Wood Elves in another. The search can't see
+   * the better target: nothing in its rollouts dies and is brought back.
+   */
+  private takeSlot(state: GameState, offer: CastSpellLegal): { readonly slot: number; readonly least: number } | null {
+    if (offer.castModal !== undefined || offer.face !== undefined) return null;
+    if ((state.players[this.playerId]?.life ?? 0) <= TAKE_ANYTHING_AT) return null;
+    const polarities = offerPolarities(this.registry, offer, polarityBias(state, this.playerId));
+    if (polarities === null) return null;
+    const slot = offer.targetSpecs.findIndex(
+      (spec, i) => polarities[i] === "take" && typeof spec === "object" && spec.kind === "card-in-graveyard",
+    );
+    if (slot < 0) return null;
+    let total = 0;
+    let count = 0;
+    for (const id of state.zones.shared.battlefield) {
+      const object = state.objects[id];
+      if (object === undefined || object.isToken === true) continue;
+      if (!computeCharacteristics(state, this.registry, id).types.includes("creature")) continue;
+      total += this.manaValueOf(object.cardName);
+      count += 1;
+    }
+    return { slot, least: Math.max(TAKE_FLOOR, count === 0 ? 0 : (TAKE_SHARE * total) / count) };
+  }
+
+  /** Whether `offer` is a reanimation spell with nothing in any graveyard
+   * yet worth spending it on (`takeSlot`): held for a better target. */
+  private holdsTakeForBetter(state: GameState, offer: CastSpellLegal): boolean {
+    const take = this.takeSlot(state, offer);
+    if (take === null) return false;
+    return (offer.targetOptions[take.slot] ?? []).every(
+      (option) => targetValue(state, this.registry, option) < take.least,
+    );
+  }
+
+  /** Whether `action` casts a reanimation spell at a card worth less than
+   * the spell is held for (`takeSlot`): a candidate v2's search leaves out,
+   * so that it chooses among the targets worth taking. */
+  protected takesTooLittle(state: GameState, offer: LegalAction, action: Action): boolean {
+    if (offer.kind !== "cast-spell" || action.type !== "cast-spell") return false;
+    const take = this.takeSlot(state, offer);
+    if (take === null) return false;
+    const target = action.targets?.[take.slot];
+    return target !== null && target !== undefined && targetValue(state, this.registry, target) < take.least;
+  }
+
   /** Which modes of a targeted modal spell to choose: as many as allowed, in
    * order, of the aimable ones — or of every mode with a legal target, when
    * the aimable ones don't make the minimum. Never a mode that only harms us
@@ -4819,6 +4879,7 @@ export class HeuristicBotController extends AutomaticController {
       !this.aimsOnlyAtWrongSide(state, o) &&
       !this.harmsOnlyUs(state, o) &&
       !this.holdsOwnPhaseOut(state, o) &&
+      !this.holdsTakeForBetter(state, o) &&
       !this.wastedNow(state, o) &&
       !this.holdsForASpell(state, o) &&
       !this.holdsWipeForCombat(state, o) &&
@@ -5353,6 +5414,15 @@ type Sweep = Extract<
   EffectSpec,
   { readonly kind: "destroy-all" | "damage-all" | "exile-all" | "return-to-hand-all" }
 >;
+
+/** The least mana value a graveyard card has for a reanimation spell to be
+ * spent on it (`takeSlot`): a four-drop back for one or two mana is the
+ * point of the spell; a one-drop isn't. */
+const TAKE_FLOOR = 4;
+/** And the share of the battlefield's average creature it has to match. */
+const TAKE_SHARE = 0.75;
+/** The life at or below which a reanimation spell takes whatever there is. */
+const TAKE_ANYTHING_AT = 10;
 
 /** Whether `effect` phases out the permanents its controller controls, all
  * of them ("All permanents you control phase out" — Teferi's Protection),

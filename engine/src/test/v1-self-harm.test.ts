@@ -253,6 +253,40 @@ describe("v1 keeps the mana a spell needs from an optional payment", () => {
   });
 });
 
+describe("v1 holds a reanimation spell for a target worth it", () => {
+  /** Alice with a Swamp and Reanimate; `graveyard` in Bob's graveyard, a
+   * Craw Wurm of Bob's on the battlefield still to die. */
+  function reanimateOffered(graveyard: readonly string[], life = 40): { game: Game; reanimate: ObjectId; cards: ObjectId[] } {
+    let reanimate: ObjectId = "" as ObjectId;
+    let cards: ObjectId[] = [];
+    const game = mainPhase((g) => {
+      lands(g, "Swamp", 1);
+      onBoard(g, "Craw Wurm", B);
+      cards = graveyard.map((name) => g.debugSpawn(name, B, "graveyard"));
+      reanimate = g.debugSpawn("Reanimate", A, "hand");
+      g.state.players[A].life = life;
+    });
+    return { game, reanimate, cards };
+  }
+
+  it("keeps Reanimate with only a one-drop in the graveyards", () => {
+    const { game, reanimate } = reanimateOffered(["Walking Bulwark"]);
+    expect(casts(v1(game), reanimate)).toBe(false);
+  });
+
+  it("casts it at a six-drop, past the one-drop beside it", () => {
+    const { game, reanimate, cards } = reanimateOffered(["Walking Bulwark", "Craw Wurm"]);
+    const action = v1(game);
+    expect(casts(action, reanimate)).toBe(true);
+    expect(action.type === "cast-spell" ? action.targets?.[0] : undefined).toEqual({ kind: "object", object: cards[1] });
+  });
+
+  it("takes the one-drop when it's low on life and needs a body", () => {
+    const { game, reanimate } = reanimateOffered(["Walking Bulwark"], 8);
+    expect(casts(v1(game), reanimate)).toBe(true);
+  });
+});
+
 describe("a draw keeps a reserve in the library", () => {
   const draw = (n: number): EffectSpec => ({ kind: "draw", amount: n });
   const worth = (game: Game, effect: EffectSpec): number =>

@@ -1682,6 +1682,10 @@ export class EvalBotController extends HeuristicBotController {
           // Beast Within and kin wait for the target's controller's turn
           // (`holdsCompensationFor`), when their token can't attack.
           if (this.holdsCompensationFor(view.state, action)) continue;
+          // A reanimation spell at a card not worth it yet (`takesTooLittle`):
+          // nothing in a rollout dies and comes back, so the better target
+          // it would have had is something only this rule knows of.
+          if (this.takesTooLittle(view.state, legal, action)) continue;
           const verdict = this.opponentPump(view.state, legal, action);
           if (verdict === "drop") continue;
           if (verdict !== "ok") mustKill.set(action, verdict.kills);
