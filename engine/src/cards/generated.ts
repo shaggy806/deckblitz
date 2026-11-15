@@ -16859,6 +16859,7 @@ import _poolMarkovWarlord from "./pool/markov-warlord.js";
 import _poolMarkovsServant from "./pool/markovs-servant.js";
 import _poolMarneusCalgar from "./pool/marneus-calgar.js";
 import _poolMaro from "./pool/maro.js";
+import _poolMarooned from "./pool/marooned.js";
 import _poolMarrowBats from "./pool/marrow-bats.js";
 import _poolMarrowChomper from "./pool/marrow-chomper.js";
 import _poolMarrowGnawer from "./pool/marrow-gnawer.js";
@@ -23636,6 +23637,7 @@ import _poolScorpionSeethingStriker from "./pool/scorpion-seething-striker.js";
 import _poolScorpionSentinel from "./pool/scorpion-sentinel.js";
 import _poolScorpionsSting from "./pool/scorpions-sting.js";
 import _poolScottyChiefEngineer from "./pool/scotty-chief-engineer.js";
+import _poolScottyMiracleWorker from "./pool/scotty-miracle-worker.js";
 import _poolScourAllPossibilities from "./pool/scour-all-possibilities.js";
 import _poolScourForScrap from "./pool/scour-for-scrap.js";
 import _poolScourFromExistence from "./pool/scour-from-existence.js";
@@ -50050,6 +50052,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarkovsServant,
   _poolMarneusCalgar,
   _poolMaro,
+  _poolMarooned,
   _poolMarrowBats,
   _poolMarrowChomper,
   _poolMarrowGnawer,
@@ -56827,6 +56830,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScorpionSentinel,
   _poolScorpionsSting,
   _poolScottyChiefEngineer,
+  _poolScottyMiracleWorker,
   _poolScourAllPossibilities,
   _poolScourForScrap,
   _poolScourFromExistence,
@@ -83254,6 +83258,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/markovs-servant": _poolMarkovsServant,
   "pool/marneus-calgar": _poolMarneusCalgar,
   "pool/maro": _poolMaro,
+  "pool/marooned": _poolMarooned,
   "pool/marrow-bats": _poolMarrowBats,
   "pool/marrow-chomper": _poolMarrowChomper,
   "pool/marrow-gnawer": _poolMarrowGnawer,
@@ -90031,6 +90036,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scorpion-sentinel": _poolScorpionSentinel,
   "pool/scorpions-sting": _poolScorpionsSting,
   "pool/scotty-chief-engineer": _poolScottyChiefEngineer,
+  "pool/scotty-miracle-worker": _poolScottyMiracleWorker,
   "pool/scour-all-possibilities": _poolScourAllPossibilities,
   "pool/scour-for-scrap": _poolScourForScrap,
   "pool/scour-from-existence": _poolScourFromExistence,

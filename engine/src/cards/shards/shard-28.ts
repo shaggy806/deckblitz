@@ -514,6 +514,7 @@ import _poolMarionetteApprentice from "../pool/marionette-apprentice.js";
 import _poolMarkOfTheVampire from "../pool/mark-of-the-vampire.js";
 import _poolMarkovDreadknight from "../pool/markov-dreadknight.js";
 import _poolMarkovWarlord from "../pool/markov-warlord.js";
+import _poolMarooned from "../pool/marooned.js";
 import _poolMarshGoblins from "../pool/marsh-goblins.js";
 import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
@@ -758,6 +759,7 @@ import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
 import _poolScarmaker from "../pool/scarmaker.js";
 import _poolScentOfJasmine from "../pool/scent-of-jasmine.js";
 import _poolScorchedEarth from "../pool/scorched-earth.js";
+import _poolScottyMiracleWorker from "../pool/scotty-miracle-worker.js";
 import _poolScourgeOfKherRidges from "../pool/scourge-of-kher-ridges.js";
 import _poolScrapyardMongrel from "../pool/scrapyard-mongrel.js";
 import _poolScreamreachBrawler from "../pool/screamreach-brawler.js";
@@ -1566,6 +1568,7 @@ const shard: CardShard = {
     _poolMarkOfTheVampire,
     _poolMarkovDreadknight,
     _poolMarkovWarlord,
+    _poolMarooned,
     _poolMarshGoblins,
     _poolMartialGlory,
     _poolMassAppeal,
@@ -1810,6 +1813,7 @@ const shard: CardShard = {
     _poolScarmaker,
     _poolScentOfJasmine,
     _poolScorchedEarth,
+    _poolScottyMiracleWorker,
     _poolScourgeOfKherRidges,
     _poolScrapyardMongrel,
     _poolScreamreachBrawler,

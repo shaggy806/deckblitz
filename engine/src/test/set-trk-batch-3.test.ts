@@ -509,3 +509,47 @@ describe("Dominion Saboteur", () => {
     expect(counters(game, saboteur, "charge")).toBe(1);
   });
 });
+
+describe("Scotty, Miracle Worker", () => {
+  const offers = (game: Game, card: ObjectId) =>
+    game.legalActions(A).filter((x) => x.kind === "cast-spell" && x.card === card && x.via === "flashback");
+
+  it("gives instants and sorceries in your graveyard beam me up at their mana cost, in your main phase", () => {
+    const { game } = table();
+    const scotty = spawn(game, "Scotty, Miracle Worker");
+    lands(game, "Island", 1);
+    const opt = toGraveyard(game, "Opt");
+    expect(offers(game, opt)).toHaveLength(0); // only Scotty to return: he can't be
+    const bears = spawn(game, "Grizzly Bears");
+    expect(offers(game, opt)).toHaveLength(1);
+    cast(game, opt, { via: "flashback" });
+    expect(zone(game, bears)).toBe("hand");
+    expect(zone(game, scotty)).toBe("battlefield");
+    expect(zone(game, opt)).toBe("exile");
+  });
+
+  it("does nothing outside your main phase", () => {
+    const { game } = table();
+    spawn(game, "Scotty, Miracle Worker");
+    spawn(game, "Grizzly Bears");
+    lands(game, "Island", 1);
+    const opt = toGraveyard(game, "Opt");
+    toStep(game, "upkeep");
+    expect(offers(game, opt)).toHaveLength(0);
+  });
+});
+
+describe("Marooned", () => {
+  it("the enchanted creature can't be returned for beam me up", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Island", 4);
+    cast(game, toHand(game, "Marooned"), { targets: [ref(bears)] });
+    const comms = toGraveyard(game, "Open Communications");
+    const offered = () =>
+      game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === comms && x.via === "flashback");
+    expect(offered()).toBe(false);
+    spawn(game, "Grizzly Bears");
+    expect(offered()).toBe(true);
+  });
+});

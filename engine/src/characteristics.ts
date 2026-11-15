@@ -754,6 +754,8 @@ function evalStaticCondition(
       return mostCommonColorHolds(state, registry, source, condition, opts);
     case "your-turn":
       return state.turnOrder[state.turn.activePlayerIndex] === you;
+    case "your-main-phase":
+      return state.turnOrder[state.turn.activePlayerIndex] === you && isMainPhase(state.turn.step);
     case "turns-taken":
       return (state.players[you]?.turnsTaken ?? 0) <= condition.atMost;
     case "extra-turn":

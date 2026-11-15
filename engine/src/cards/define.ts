@@ -1152,6 +1152,9 @@ export type StaticCondition =
   | { readonly kind: "opponent-count"; readonly atLeast: number }
   /** It's your turn. */
   | { readonly kind: "your-turn" }
+  /** It's your main phase, precombat or postcombat (rule 505) — Scotty, Miracle
+   * Worker's "during your main phase, each card in your graveyard has beam me up". */
+  | { readonly kind: "your-main-phase" }
   /** You've taken at most `atMost` turns this game, the one under way included
    * (`PlayerState.turnsTaken`: another player's turns don't count, an extra
    * turn of yours does). "Your first, second, or third turn of the game" also
@@ -2995,7 +2998,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly grantsToGraveyard?: {
     readonly filter: CardFilter;
-    readonly flashback?: { readonly cost: string | "mana-cost" };
+    /** With `keyword: "beam-me-up"` and `returnToHand`, beam me up (Scotty,
+     * Miracle Worker: "each card in your graveyard has beam me up. The beam
+     * me up cost is equal to that spell's mana cost. Scotty can't be beamed
+     * up to cast a spell this way" — `isSource: false` in the return's filter
+     * is this permanent). */
+    readonly flashback?: {
+      readonly cost: string | "mana-cost";
+      readonly keyword?: "beam-me-up";
+      readonly returnToHand?: { readonly filter: CardFilter; readonly count: number };
+    };
     readonly escape?: { readonly cost: string | "mana-cost"; readonly exileCount: number };
     /** Mayhem (rule 702.187) — Green Goblin's "each nonland card in your
      * graveyard has mayhem. The mayhem cost is equal to its mana cost": cast

@@ -46904,8 +46904,19 @@ controlledBy,
     // owner's hand": the flashback cost's return, chosen and paid as an
     // additional cost's is (601.2h).
     const flashbackReturn = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.returnToHand : undefined;
+    // "Can't be beamed up" (Marooned): left out of the return.
+    const unbeamable =
+      flashbackReturn === undefined
+        ? []
+        : this.state.zones.shared.battlefield.filter((id) => objectProhibited(this.state, this.registry, "be-beamed-up", id));
     const fromFlashback: KickerAlsoCost | undefined =
-      flashbackReturn !== undefined ? { text: "Beam me up", returnToHand: flashbackReturn } : undefined;
+      flashbackReturn !== undefined
+        ? {
+            text: "Beam me up",
+            returnToHand:
+              unbeamable.length === 0 ? flashbackReturn : { ...flashbackReturn, filter: { ...flashbackReturn.filter, notObjects: unbeamable } },
+          }
+        : undefined;
     // A madness cost's part that isn't mana (Shadowgrange Archfiend's "Pay 8
     // life"), when it's cast for its madness cost (rule 702.35a).
     const madnessAlso =
@@ -57320,7 +57331,9 @@ controlledBy,
     if (granted != null) {
       add({ cost: (granted.ownManaCost === true ? ownManaCost() : null) ?? granted.cost, ...(granted.by !== undefined ? { grantor: granted.by } : {}) });
     }
-    if (object.zone !== "graveyard") return out;
+    // A static's grant reaches a card in the graveyard — and one being cast
+    // from there, on the stack as its costs are worked out (rule 601.2a-h).
+    if (object.zone !== "graveyard" && !(object.zone === "stack" && object.castFrom === "graveyard")) return out;
     for (const { source, ability } of this.activeStaticsOf(
       object.owner,
       (a) => a.grantsToGraveyard?.flashback !== undefined,
@@ -57329,7 +57342,16 @@ controlledBy,
       if (!matchesFilter(this.state, this.registry, cardId, grant.filter, { you: object.owner })) continue;
       const spec = grant.flashback!;
       const cost = spec.cost === "mana-cost" ? ownManaCost() : spec.cost;
-      if (cost !== null) add({ cost, grantor: source.id });
+      if (cost === null) continue;
+      add({
+        cost,
+        grantor: source.id,
+        ...(spec.keyword !== undefined ? { keyword: spec.keyword } : {}),
+        // "Scotty can't be beamed up": `isSource` is the granting permanent.
+        ...(spec.returnToHand !== undefined
+          ? { returnToHand: { ...spec.returnToHand, filter: { ...spec.returnToHand.filter, appliedBy: source.id } } }
+          : {}),
+      });
     }
     return out;
   }

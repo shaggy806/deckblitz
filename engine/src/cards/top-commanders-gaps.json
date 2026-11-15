@@ -2683,7 +2683,9 @@
   "duration:while-source-tapped-since-activation",
   "effect:grant-trigger-doubling",
   "static:permanents-cant-phase-in",
-  "replacement:clone-enters-with-copied-counters"
+  "replacement:clone-enters-with-copied-counters",
+  "static:grant-beam-me-up-to-graveyard",
+  "static:cant-be-beamed-up"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -5575,8 +5575,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   permanent's or emblem's controller draws, once for each such ability.
 - `mayPlay: { from: "graveyard", … }` — see **`mayPlay` / `grant-play` / `impulse-exile`** in §6. Each permission that applies is offered as its own `via: "graveyard-permission"` variant carrying a `graveyardGrant: { source, asType? }` the driver echoes back, so which one is spent is the player's choice (601.3). A land face is only offered under a permission that spends something (Muldrotha's `perType` with `"land"`); one that doesn't has nothing to name (Ramunap Excavator).
 
-- `grantsToGraveyard: { filter, flashback?: { cost }, escape?: { cost,
-  exileCount } }` — cards in your graveyard matching `filter` **have**
+- `grantsToGraveyard: { filter, flashback?: { cost, keyword?, returnToHand? }, escape?: { cost,
+  exileCount } }` (beam me up: Scotty, Miracle Worker's `{ cost: "mana-cost", keyword: "beam-me-up",
+  returnToHand: { filter: { type: "creature", isSource: false }, count: 1 } }` with the condition
+  `{ kind: "your-main-phase" }`) — cards in your graveyard matching `filter` **have**
   flashback or escape (rule 604.1): Iroh, Grand Lotus's "during your turn,
   each instant and sorcery card in your graveyard has flashback. The
   flashback cost is equal to its mana cost" is `{ filter: { typesAnyOf:
@@ -5801,7 +5803,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   - `{ act: "be-caused", who, what: "discard" | "sacrifice" }` — `who` is protected from their opponents' spells and abilities (Sigarda).
   - `{ act: "be-caused", who, what: "sacrifice" | "exile", by: "own-triggered", object? }` — "**triggered abilities you control** can't cause you to sacrifice or exile creature tokens you control" (The Master, Multiplied): while a triggered ability of `who`'s resolves, the permanents of theirs `object` matches aren't sacrificed or exiled by it (an edict, a delayed "sacrifice / exile it", myriad's end-of-combat exile).
 
-  Acts that happen to an object take `object`, a `CardFilter` from this permanent's controller's side (`hostOfSource` for "enchanted creature", `isSource`, `inZone`): `untap`, `transform`, `phase-in`, `phase-out`, `enter` (Grafdigger's Cage: the card stays where it is), `become-suspected`, `be-attached` (`attachment: "aura" | "equipment"`, `other`). `be-targeted` (`by: "opponents"`, `sourceFilter`, `only: "spells"`) and `get-counters` (`kind`) take `object` or `who`. `be-targeted` isn't hexproof, so `targetsIgnoringHexproof` doesn't reach it. Time any of them with the static's `condition`; `affects` is irrelevant.
+  Acts that happen to an object take `object`, a `CardFilter` from this permanent's controller's side (`hostOfSource` for "enchanted creature", `isSource`, `inZone`): `untap`, `transform`, `phase-in`, `phase-out`, `enter` (Grafdigger's Cage: the card stays where it is), `become-suspected`, `be-beamed-up` (Marooned: not returned for a beam me up cost), `be-attached` (`attachment: "aura" | "equipment"`, `other`). `be-targeted` (`by: "opponents"`, `sourceFilter`, `only: "spells"`) and `get-counters` (`kind`) take `object` or `who`. `be-targeted` isn't hexproof, so `targetsIgnoringHexproof` doesn't reach it. Time any of them with the static's `condition`; `affects` is irrelevant.
 
   The `prohibit` effect says the same for a while: `{ kind: "prohibit", prohibits: [...], duration? }` (this turn when omitted, or any `PlayerDuration`). `who` is a `PlayerScope` (`{ target: 0 }`, `"each-opponent"`), an object act's `target` an `ObjectRef` in place of `object`, a `filter`/`object` stays a filter so "creatures you control" reaches later arrivals (rule 611.2c), and `cast`'s `more: 1` is "only one more spell this turn" (Irencrag Feat). "Target creature can't be regenerated this turn" is `cant-regenerate`.
 - `castAsThoughFlash: true | CardFilter` — "you may cast spells as though

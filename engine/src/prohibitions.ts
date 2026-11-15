@@ -220,7 +220,9 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly object?: CardFilter;
     }
   | ({
-      readonly act: "untap" | "transform" | "phase-in" | "phase-out" | "enter" | "become-suspected";
+      /** `"be-beamed-up"`: "can't be beamed up" (Marooned) — not returned for a
+       * beam me up cost. */
+      readonly act: "untap" | "transform" | "phase-in" | "phase-out" | "enter" | "become-suspected" | "be-beamed-up";
     } & ObjectSide)
   | ({
       /** "Can't be enchanted / equipped." `other`: "by other Auras". */
@@ -396,7 +398,7 @@ export function reachesObject(
 export function objectProhibited(
   state: GameState,
   registry: CardRegistry,
-  act: "untap" | "transform" | "phase-in" | "phase-out" | "enter" | "become-suspected",
+  act: "untap" | "transform" | "phase-in" | "phase-out" | "enter" | "become-suspected" | "be-beamed-up",
   id: ObjectId,
 ): boolean {
   return liveProhibitions(state, registry, act).some((live) => reachesObject(state, registry, live, id));

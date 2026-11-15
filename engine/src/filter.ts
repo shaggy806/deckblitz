@@ -681,6 +681,10 @@ export interface CardFilter {
    * filter, however that filter is then matched: bound by
    * `bindDynamicCompares`, never authored. */
   readonly appliedBy?: ObjectId;
+  /** Objects it never matches, bound as the filter is read, never authored:
+   * the permanents that "can't be beamed up" left out of beam me up's return
+   * (Marooned — a `be-beamed-up` prohibition). */
+  readonly notObjects?: readonly ObjectId[];
   /**
    * With `sameNameAsTarget`: the namesakes must be tokens, the target itself
    * needn't be — Legions to Ashes' "exile target nonland permanent an opponent
@@ -2635,6 +2639,7 @@ export function matchesFilter(
     const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
     if (!blockedThisTurnMatches(state, registry, id, stint, filter.blockedThisTurn, ctx)) return false;
   }
+  if (filter.notObjects?.includes(id) === true) return false;
   if (filter.isSource !== undefined) {
     const applying = filter.appliedBy ?? ctx.source;
     if ((applying !== undefined && applying === id) !== filter.isSource) return false;
