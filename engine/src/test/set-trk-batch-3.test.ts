@@ -12,6 +12,7 @@ import {
   activate,
   cast,
   counters,
+  destroy,
   enter,
   hand,
   keywords,
@@ -573,5 +574,32 @@ describe("Ensign Pavel Chekov", () => {
     expect(zone(game, bLand)).toBe("battlefield");
     game.dispatch({ type: "play-land", player: A, card: cLand });
     expect(zone(game, cLand)).toBe("battlefield");
+  });
+});
+
+describe("Dr. McCoy, Surly Surgeon", () => {
+  it("a creature with a +1/+1 counter that would be destroyed loses its counters instead", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    pickTargets(a, bears);
+    enter(game, "Dr. McCoy, Surly Surgeon");
+    expect(counters(game, bears, "+1/+1")).toBe(1);
+    destroy(game, bears);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(counters(game, bears, "+1/+1")).toBe(0);
+    destroy(game, bears); // no counter now: destroyed
+    expect(zone(game, bears)).toBe("graveyard");
+  });
+
+  it("saves it from lethal damage too, healing the damage", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    pickTargets(a, bears);
+    enter(game, "Dr. McCoy, Surly Surgeon");
+    lands(game, "Mountain", 1);
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(bears)] }); // 3 to a 3/3
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.objects[bears].damageMarked).toBe(0);
+    expect(counters(game, bears, "+1/+1")).toBe(0);
   });
 });

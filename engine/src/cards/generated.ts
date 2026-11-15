@@ -7339,6 +7339,7 @@ import _poolDrEggman from "./pool/dr-eggman.js";
 import _poolDrJosephMbenga from "./pool/dr-joseph-mbenga.js";
 import _poolDrLeonardBonesMccoy from "./pool/dr-leonard-bones-mccoy.js";
 import _poolDrMadisonLi from "./pool/dr-madison-li.js";
+import _poolDrMccoySurlySurgeon from "./pool/dr-mccoy-surly-surgeon.js";
 import _poolDrPulaskiCynicalClinician from "./pool/dr-pulaski-cynical-clinician.js";
 import _poolDrachnyen from "./pool/drachnyen.js";
 import _poolDraco from "./pool/draco.js";
@@ -40539,6 +40540,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrJosephMbenga,
   _poolDrLeonardBonesMccoy,
   _poolDrMadisonLi,
+  _poolDrMccoySurlySurgeon,
   _poolDrPulaskiCynicalClinician,
   _poolDrachnyen,
   _poolDraco,
@@ -73752,6 +73754,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dr-joseph-mbenga": _poolDrJosephMbenga,
   "pool/dr-leonard-bones-mccoy": _poolDrLeonardBonesMccoy,
   "pool/dr-madison-li": _poolDrMadisonLi,
+  "pool/dr-mccoy-surly-surgeon": _poolDrMccoySurlySurgeon,
   "pool/dr-pulaski-cynical-clinician": _poolDrPulaskiCynicalClinician,
   "pool/drachnyen": _poolDrachnyen,
   "pool/draco": _poolDraco,

@@ -241,6 +241,7 @@ import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDoubtlessOne from "../pool/doubtless-one.js";
 import _poolDownsize from "../pool/downsize.js";
 import _poolDrLeonardBonesMccoy from "../pool/dr-leonard-bones-mccoy.js";
+import _poolDrMccoySurlySurgeon from "../pool/dr-mccoy-surly-surgeon.js";
 import _poolDragonBreath from "../pool/dragon-breath.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
@@ -1279,6 +1280,7 @@ const shard: CardShard = {
     _poolDoubtlessOne,
     _poolDownsize,
     _poolDrLeonardBonesMccoy,
+    _poolDrMccoySurlySurgeon,
     _poolDragonBreath,
     _poolDragonHatchling,
     _poolDragonMage,

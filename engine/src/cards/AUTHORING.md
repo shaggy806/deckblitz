@@ -7391,6 +7391,7 @@ The `prevent-damage` family makes the same record.
   pick, still a discard to every trigger: Library of Leng's "if an effect causes
   you to discard a card" (never a cost's), Nephalia Academy's "a spell or ability
   an opponent controls", which reveals them.
+- `{ event: "would-be-destroyed", filter, instead: { effect } }` — another permanent's "if [filter] would be destroyed, instead [effect]" (rule 614.6), by an effect or lethal damage / deathtouch (704.5g-h), the creature the effect's slot `0`: Dr. McCoy, Surly Surgeon's "instead remove all +1/+1 counters from it and all damage already dealt to it is healed". Beside regeneration, a shield counter or umbra armor, its controller chooses (616.1).
 - `{ event: "would-be-put-into-graveyard", instead: "library-top", self: true, from: "battlefield" }`
   — "if this creature would die, put it on top of its owner's library instead"
   (Gravebane Zombie). `notCycled: true` beside an exile's `filter` is "and it

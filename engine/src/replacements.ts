@@ -118,7 +118,26 @@ export type ReplacementSpec =
   | ScryReplacement
   | CoinFlipReplacement
   | DiceRollReplacement
-  | VillainousChoiceReplacement;
+  | VillainousChoiceReplacement
+  | DestroyReplacement;
+
+/**
+ * "If another creature you control with a +1/+1 counter on it **would be
+ * destroyed**, instead remove all +1/+1 counters from it and all damage
+ * already dealt to it is healed" (Dr. McCoy, Surly Surgeon): a permanent
+ * matching `filter` (from this permanent's controller's side) isn't
+ * destroyed (rule 614.6), by an effect or by a state-based action's lethal
+ * damage or deathtouch (704.5g-h), and `instead.effect` happens to it,
+ * `0` its target slot, run by this permanent's controller. Beside its
+ * regeneration, shield counter or umbra armor, its controller chooses which
+ * applies (rule 616.1, `Game.destructionReplacements`). Applied by
+ * `Game.destroyReplacedInstead`.
+ */
+export interface DestroyReplacement {
+  readonly event: "would-be-destroyed";
+  readonly filter: CardFilter;
+  readonly instead: { readonly effect: EffectSpec };
+}
 
 /**
  * "If an opponent would face a villainous choice, they face that choice an

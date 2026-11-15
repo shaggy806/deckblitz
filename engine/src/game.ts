@@ -53670,6 +53670,9 @@ controlledBy,
         return;
       }
     }
+    // "Instead remove all +1/+1 counters from it …" (Dr. McCoy): chosen, or
+    // the only replacement there is.
+    if ((chosen === undefined || chosen.startsWith("replace:")) && this.destroyReplacedInstead(id, chosen)) return;
     if (chosen !== "shield-counter" && !cantBeRegenerated && this.regenerateInstead(id)) return;
     // A shield counter: "if this permanent would be destroyed as the result of
     // an effect, instead remove a shield counter from it" (rule 122.1c) — an
@@ -53755,7 +53758,49 @@ controlledBy,
       seen.add(name);
       options.push({ key: `umbra:${aura}`, name, text: "destroy this Aura instead", object: aura });
     }
+    for (const replacing of this.destroyReplacementsOn(id)) {
+      options.push({ key: replacing.key, name: replacing.name, text: replacing.text, object: replacing.source });
+    }
     return options;
+  }
+
+  /** Every `would-be-destroyed` static that would replace `id` being
+   * destroyed now (Dr. McCoy, Surly Surgeon), one per permanent and ability. */
+  private destroyReplacementsOn(
+    id: ObjectId,
+  ): { key: string; name: string; text: string; source: ObjectId; ability: StaticAbility }[] {
+    const out: { key: string; name: string; text: string; source: ObjectId; ability: StaticAbility }[] = [];
+    for (const sourceId of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[sourceId];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      if (this.state.players[source.controller]?.hasLost === true) continue;
+      const statics = this.staticsOfSource(source);
+      statics.forEach((ability, index) => {
+        const r = ability.replacement;
+        if (r?.event !== "would-be-destroyed" || !this.staticActive(source, ability)) return;
+        if (!matchesFilter(this.state, this.registry, id, r.filter, { you: source.controller, source: sourceId })) return;
+        out.push({ key: `replace:${sourceId}:${index}`, name: source.cardName, text: ability.text ?? "instead", source: sourceId, ability });
+      });
+    }
+    return out;
+  }
+
+  /** Rule 614.6: a `would-be-destroyed` static replaces `id` being destroyed
+   * — the one its controller chose (`chosen`, a `replace:` key), or the only
+   * one. Whether one did: its effect happens to `id` instead. */
+  private destroyReplacedInstead(id: ObjectId, chosen: string | undefined): boolean {
+    if (chosen !== undefined && !chosen.startsWith("replace:")) return false;
+    const all = this.destroyReplacementsOn(id);
+    const replacing = chosen === undefined ? all[0] : all.find((r) => r.key === chosen);
+    if (replacing === undefined || replacing.ability.replacement?.event !== "would-be-destroyed") return false;
+    const source = this.state.objects[replacing.source];
+    applyEffectSpec(
+      replacing.ability.replacement.instead.effect,
+      this.makeResolutionContext(replacing.source, source.controller, [{ kind: "object", object: id }], 0),
+    );
+    invalidateComputedCache();
+    this.emit({ type: "permanent-destroy-prevented", object: id, reason: "replaced" });
+    return true;
   }
 
   /** Rule 616.1 for `id` about to be destroyed, where two different things
@@ -63184,6 +63229,16 @@ controlledBy,
         const umbraChosen = this.state.replacementAnswers?.[`destroy:${id}`]?.[0]?.startsWith("umbra:")
           ? (this.state.replacementAnswers[`destroy:${id}`][0].slice("umbra:".length) as ObjectId)
           : undefined;
+        // A `would-be-destroyed` static (Dr. McCoy), chosen or the only one.
+        const destroyChosen = this.state.replacementAnswers?.[`destroy:${id}`]?.[0];
+        if (
+          reason !== null &&
+          reason !== "toughness is 0 or less" &&
+          (destroyChosen === undefined || destroyChosen.startsWith("replace:")) &&
+          this.destroyReplacedInstead(id, destroyChosen)
+        ) {
+          reason = null;
+        }
         // Both damage checks destroy it (704.5g-h), which a regeneration
         // shield replaces (701.15a); 0 toughness doesn't.
         if (reason !== null && reason !== "toughness is 0 or less" && umbraChosen === undefined && this.regenerateInstead(id)) {
