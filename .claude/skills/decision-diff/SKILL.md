@@ -39,3 +39,21 @@ odd ones and look at the actual board if needed (`replay-seed` with
 `--snapshot-at` that turn). Lead with anything wrong; a list of "all
 intended" is a fine result. A wrong one found this way is a bug to fix, or a
 training scenario to capture.
+
+## When the diff comes back empty, or can't say which is better
+
+The diff plays the sample decks, which hardly raise some decisions: an
+optional payment is 1 in 12,000 decisions there and ten a game on the strong
+decks. A change to one of those diffs as zero and is still live. Ask that
+kind of decision on decks that raise it:
+
+```bash
+cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:judge -- --kind payments --decks "The Ur-Dragon,Lathril,Atraxa,Giada" --seed 1
+```
+
+`--kind payments | discards | attacks`; `--base` as above; a game is one to
+four minutes, so run a few seeds and deck sets side by side. Each
+disagreement is played on by v2 and scored ("new better by 5.4"). That
+verdict is v2's own play and evaluation: trust it where the two lines did the
+same things or one did more, and read the big gaps on their boards, as above.
+On 2026-11-15 it stopped two changes the gate and the diff both passed.
