@@ -67,6 +67,9 @@ export interface ScenarioRecord {
   readonly refusedTies?: readonly Action[];
   /** Candidates ranked below every safe one for the crackback (`lastUnsafe`). */
   readonly unsafe?: readonly Action[];
+  /** v1's answer to a decision, and how much another had to beat it by
+   * (`lastKept`): a payment declined to keep a spell castable. */
+  readonly kept?: { readonly action: Action; readonly by: number } | null;
 }
 
 /**
@@ -113,6 +116,8 @@ export function recordScenario(
     tiesAct: bot.lastTiesAct,
     refusedTies: bot.lastRefusedTies,
     unsafe: bot.lastUnsafe,
+    // Only a decision's: a priority window doesn't set or clear it.
+    kept: exact ? null : bot.lastKept,
   };
 }
 
@@ -123,11 +128,16 @@ export function replayChoice(record: ScenarioRecord, weights: EvalWeights): numb
   const key = (a: Action | undefined): string => JSON.stringify(a);
   const unsafe = new Set((record.unsafe ?? []).map(key));
   const refused = new Set((record.refusedTies ?? []).map(key));
+  const kept = record.kept == null ? null : key(record.kept.action);
   let best = 0;
   let bestScore = -Infinity;
   record.answers.forEach((answer, i) => {
     if (answer.outcome === null) return;
-    const score = scoreOutcome(answer.outcome, w) + (unsafe.has(key(answer.action)) ? UNSAFE : 0);
+    const score =
+      scoreOutcome(answer.outcome, w) +
+      (unsafe.has(key(answer.action)) ? UNSAFE : 0) +
+      // v1's answer, which another must beat by a margin (`bestDecision`).
+      (kept !== null && key(answer.action) === kept ? (record.kept?.by ?? 0) : 0);
     // A tie with passing goes to acting under the `"acting"` rollout, as
     // the search breaks it — unless acting wasn't worth it alone.
     const tie =

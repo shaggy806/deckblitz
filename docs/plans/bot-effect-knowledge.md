@@ -898,6 +898,63 @@ Four more games watched, on the upgraded precons, found the counterspells (Negat
 Signet), an upkeep hold that let out any conditional ability (Bonders' Enclave every upkeep),
 and a sacrifice for a turn's effect with nothing to answer (Selfless Spirit).
 
+### What a declined payment costs (2026-11-15)
+
+The recurring cause above, looked at for the decisions the engine raises. A rollout passes our
+own seat, so mana an answer spends is never missed; an optional payment that costs a spell had
+been handed to v1's look ahead (`payingCostsASpell`), whose answer v2 kept without a search.
+But v1's rule is "decline whenever a spell is lost", whatever declining costs, and
+`effectWorth` prices a sacrifice as one card whatever is sacrificed: v1 lets a 4/4 go to its
+echo to cast a Grizzly Bears, and v2 kept that.
+
+**Built.** What the rollouts can't see is the spell; what declining costs, they can. So the
+decision is searched as any other, and v1's "decline" stands unless another answer scores
+better by `KEPT_PER_MANA` (1.5) for each mana of the spells declining keeps castable
+(`manaDeclinedFor`; `bestDecision`'s `keptBy`). Smothering Tithe's {2} against the turn's
+four-drop is still declined (paying is half a point better, a Treasure denied, against a
+margin of 6); echo on Cradle Guard is paid over a Grizzly Bears (27.9 against 16.0, margin 3).
+A shock land's life is unchanged, v1's outright. `scenario-fit.ts` replays the margin
+(`lastKept`).
+
+The margin was a flat 3 at first. Six strong-deck games, each payment decision answered by
+the old v2 beside the new and each disagreement judged by the turn v2 then played, found one
+change in 32 decisions, and it was wrong: at 13 life a bot paid Mana Vault's {4} to be spared
+its 1 damage (4 points, with the opponents' boards out) and left its nine-mana commander
+uncast. Scaled by the spell, that margin is 13.5. As built it changes nothing in those games
+(0 of 37 payment decisions over four strong-deck games) or on the sample decks (a decision
+diff, 0 of 12,460): what it changes is the echo kind, which those games don't raise.
+
+**Tried first, and dropped: playing the turn on in the rollout.** The general fix would be a
+rollout whose own seat plays the rest of the turn as v1 (`simulate.ts`'s `"acting"`), so the
+payment is weighed against the spell v1 then doesn't cast. Three versions, each measured:
+
+1. *Every decision on our own turn.* The gate passed. A decision diff changed 18 of 9,786
+   decisions, one of them a bot at 4 life aiming Ob Nixilis, the Fallen's "target player loses
+   3 life" at itself: v1, playing on, paid life down to 2 in the other two rollouts and to 3 in
+   that one, and at that life a point is worth ninety. `simulate.ts` warns of exactly this: a
+   stand-in that acts puts its own mistakes inside the measurement.
+2. *Only near-ties of the passing rollouts, and only where the answers leave different mana.*
+   2 of 7,924 changed, both noise: Fortified Village came in tapped over 0.12 (v1 tapped
+   different lands), and Riveteers Overlook's fetch was judged from five differently shuffled
+   libraries, one Swamp at 63.6 and the other at 22.7 by what the turn then drew.
+3. *The same, with an edge to beat and the same library required.* Clean on the sample decks
+   (1 of 12,466), which hardly ever raise these decisions. On the strong decks they are about
+   ten a game, so each disagreement with v1 was judged by letting the real v2 play the turn out
+   from both answers. Paying where v1 declined was usually even or half a point better (the
+   lost "castable" card was one v2 didn't cast either way), but it also paid Smothering Tithe
+   at the cost of two spells v2 would have cast and v1's turn didn't: v1 uses less mana than v2
+   does, so a rollout it plays under-prices mana. And the near-tie margin was too tight on real
+   boards: with opponents' creatures out, a shock land's 2 life scored over the margin and
+   Pantlaza's bot left its commander uncast.
+
+So v1's look ahead stays the default, and the search only overrules it on what it can see.
+Two things the judging showed that are not this change's (`BACKLOG.md`): v2's own turn isn't
+steady in mana (with one mana less it played a turn 36 points better by its own evaluation),
+and v1 still makes the echo answer itself, where it plays unsearched.
+
+Gate scenario "pays echo on a 4/4 though it costs the turn's two-drop";
+`test/bot-declined-payment.test.ts`.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

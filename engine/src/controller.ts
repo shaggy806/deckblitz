@@ -4822,7 +4822,13 @@ export class HeuristicBotController extends AutomaticController {
    * By the `awaiting` object and not the state, which the game changes in
    * place — keyed on that, the first answer of a game stood for every
    * later choice. */
-  private paidChoiceMemo: { readonly awaiting: object; readonly modes: string; readonly costs: boolean } | null = null;
+  private paidChoiceMemo: {
+    readonly awaiting: object;
+    readonly modes: string;
+    readonly costs: boolean;
+    /** The total mana value of the spells paying would cost, each at least 1. */
+    readonly lost: number;
+  } | null = null;
 
   /**
    * Whether paying an optional choice's mana, on our own turn, costs us a
@@ -4849,24 +4855,38 @@ export class HeuristicBotController extends AutomaticController {
     const key = modes.join(",");
     if (this.paidChoiceMemo?.awaiting === awaiting && this.paidChoiceMemo.modes === key) return this.paidChoiceMemo.costs;
     this.lookingPastAChoice = true;
-    let costs = false;
+    let lost = 0;
     try {
       const paid = this.mainPhaseCastsAfter(view, { type: "choose-modes", player: this.playerId, modes: [...modes] });
       const kept = paid === null ? null : this.mainPhaseCastsAfter(view, { type: "choose-modes", player: this.playerId, modes: [] });
-      costs = paid !== null && kept !== null && [...kept].some((card) => !paid.has(card));
+      if (paid !== null && kept !== null) {
+        for (const card of kept) {
+          if (paid.has(card)) continue;
+          const name = state.objects[card]?.cardName;
+          const cost = name !== undefined && this.registry.has(name) ? this.registry.get(name).manaCost : null;
+          lost += Math.max(1, cost === null ? 0 : manaValue(parseManaCost(cost)));
+        }
+      }
     } finally {
       this.lookingPastAChoice = false;
     }
-    this.paidChoiceMemo = { awaiting, modes: key, costs };
-    return costs;
+    this.paidChoiceMemo = { awaiting, modes: key, costs: lost > 0, lost };
+    return lost > 0;
   }
 
   /** Whether this bot's answer to the choice pending on `state` was to
    * decline so as to keep the mana for a spell (`payingCostsASpell`): an
    * answer v2 keeps, as it keeps a shock land's, because its rollouts can't
-   * see that spell. */
+   * see that spell — unless what they do see of declining costs more than
+   * that spell's delay (`manaDeclinedFor`). */
   protected declinedForASpell(state: GameState): boolean {
     return state.awaiting !== null && this.paidChoiceMemo?.awaiting === state.awaiting && this.paidChoiceMemo.costs;
+  }
+
+  /** The total mana value of the spells `declinedForASpell`'s answer kept
+   * castable (each at least 1); 0 when it wasn't declined for one. */
+  protected manaDeclinedFor(state: GameState): number {
+    return this.declinedForASpell(state) ? (this.paidChoiceMemo?.lost ?? 0) : 0;
   }
 
   /**

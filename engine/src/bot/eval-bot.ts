@@ -492,6 +492,26 @@ function hillClimb<T>(
 const DECISION_ROLLOUTS = 12;
 const NESTED_DECISION_ROLLOUTS = 2;
 
+/**
+ * How much better paying has to score than v1's "decline, the mana is a
+ * spell's" (`payingCostsASpell`) for the search to pay anyway
+ * (`EvalBotController.decide`), for each mana of the spells declining keeps
+ * castable (`manaDeclinedFor`): a point and a half, about what a spell on
+ * the battlefield scores over one in hand (a Rumbling Baloth, 5.2 for four).
+ * The rollouts pass our own seat, so they never see those spells and price
+ * the payment as free; what they do see is what declining costs. Under the
+ * margin v1's answer stands (Smothering Tithe's Treasure for an opponent,
+ * half a point); over it, declining costs more than the spells' delay (a 4/4
+ * sacrificed to its echo for a two-drop, 12 against 3).
+ *
+ * By the mana and not a flat margin: at three points whatever the spell, a
+ * bot at 13 life paid Mana Vault's {4} to be spared its 1 damage (which the
+ * opponents' boards made 4 points) and had its nine-mana commander left in
+ * the command zone (a strong-deck game judged against the old answer,
+ * 2026-11-15).
+ */
+const KEPT_PER_MANA = 1.5;
+
 /** `TurnPlanLimits` for a plan (`planLines`): moves in a line, lines kept at
  * each depth, and simulations by default (`EvalBotOptions.planSimulations`). */
 const PLAN_DEPTH = 5;
@@ -540,6 +560,10 @@ const COMMANDER_STAYS_MARGIN = 1;
  * another is judged by what we'd really answer next: a trigger's target is
  * worth nothing if the "you may" after it is declined, which is exactly what
  * v1 would do.
+ *
+ * `keptBy` is how much better than `inherited` another answer has to score
+ * to replace it: 0 for a search, and a margin where v1's answer rests on
+ * something the rollouts can't see (`KEPT_PER_MANA`, `EvalBotController.decide`).
  */
 function bestDecision(
   view: ControllerView,
@@ -551,6 +575,7 @@ function bestDecision(
   budget: SearchBudget,
   selfFor?: () => PlayerController,
   trace?: EvalBotOptions["trace"],
+  keptBy = 0,
 ): Action {
   const me = view.player;
   if (inherited.player !== me || budget.left <= 1 || spent(budget)) return inherited;
@@ -581,7 +606,8 @@ function bestDecision(
     return after === null ? null : evaluateState(after, cards, me, weights);
   };
   let best = inherited;
-  let bestScore = score(inherited) ?? -Infinity;
+  const inheritedScore = score(inherited);
+  let bestScore = inheritedScore === null ? -Infinity : inheritedScore + keptBy;
   const seen = JSON.stringify(inherited);
   for (const candidate of candidates) {
     if (spent(budget)) break;
@@ -894,6 +920,9 @@ export class EvalBotController extends HeuristicBotController {
   /** The candidates the last priority search ranked unsafe for the
    * crackback (`tapsIntoCrackback`), for the replay. */
   lastUnsafe: Action[] = [];
+  /** v1's answer to the last decision searched, where another had to beat it
+   * by a margin (`KEPT_PER_MANA`), and that margin — for the replay. */
+  lastKept: { readonly action: Action; readonly by: number } | null = null;
   /**
    * Where the last priority search's rollout of each candidate ended, when
    * that rollout is the one a plan scores a line by — our seat passing to
@@ -2041,14 +2070,18 @@ export class EvalBotController extends HeuristicBotController {
       this.lastDecision = audit("decision", null, "v1's answer");
       return inherited;
     }
-    // So is declining an optional mana payment to keep a spell castable this
-    // turn (`payingCostsASpell` — Smothering Tithe's {2} at the draw step),
-    // for the same reason: the rollouts never cast that spell, so paying
-    // looks free and the search took it every time.
-    if (view.state.awaiting?.kind === "choose-modes" && this.declinedForASpell(view.state)) {
-      this.lastDecision = audit("decision", null, "v1's answer");
-      return inherited;
-    }
+    // Declining an optional mana payment to keep a spell castable this turn
+    // (`payingCostsASpell` — Smothering Tithe's {2} at the draw step) is
+    // v1's too, for the same reason: the rollouts never cast that spell, so
+    // paying looks free and the search took it every time. But v1 declines
+    // whenever a spell is lost, whatever declining costs, and what declining
+    // costs the rollouts do see: so the search still runs, and v1's answer
+    // stands unless paying beats it by `KEPT_PER_MANA` for each mana of the
+    // spells it was declined for. Kept outright, it let a 4/4 go to its echo
+    // so as to cast a Grizzly Bears.
+    const keptBy =
+      view.state.awaiting?.kind === "choose-modes" ? KEPT_PER_MANA * this.manaDeclinedFor(view.state) : 0;
+    this.lastKept = keptBy > 0 ? { action: inherited, by: keptBy } : null;
     if (view.state.awaiting?.kind === "commander-replacement" && this.horizon === "next-turn") {
       return this.commanderToGraveyard(view, inherited);
     }
@@ -2070,6 +2103,7 @@ export class EvalBotController extends HeuristicBotController {
       budget,
       () => this.selfInRollouts(),
       this.trace,
+      keptBy,
     );
     // A combat declaration reaches here too, already searched — and recorded —
     // by its own method on the way through `super.act`; `bestDecision` has no

@@ -495,6 +495,29 @@ function titheAsked(registry: CardRegistry, forests: number): Game | ScenarioRes
   return game;
 }
 
+/** Alice's upkeep, asked to pay Cradle Guard's echo ({1}{G}{G}, a 4/4
+ * trampler) or sacrifice it, on three untapped Forests with a Grizzly Bears
+ * her whole hand: paying leaves nothing for the Bears. */
+function echoAsked(registry: CardRegistry): Game | ScenarioResult {
+  const game = table(registry, [A, B], A);
+  lands(game, "Forest", A, 3);
+  onBoard(game, "Cradle Guard", A);
+  const turn = game.state.turn.number;
+  game.advanceUntil(
+    (s) =>
+      (s.turn.number > turn &&
+        s.turnOrder[s.turn.activePlayerIndex] === A &&
+        s.awaiting?.kind === "choose-modes" &&
+        s.awaiting.player === A) ||
+      s.result.over ||
+      s.turn.number > turn + 4,
+  );
+  if (game.state.awaiting?.kind !== "choose-modes") return { passed: false, detail: "Cradle Guard's echo never asked" };
+  game.state.zones.perPlayer[A].hand = [];
+  game.debugSpawn("Grizzly Bears", A, "hand");
+  return game;
+}
+
 /** A scenario asked with one `act`, its `run` following from its position. */
 function asked(
   spec: Omit<BotScenario, "run" | "position"> & Required<Pick<BotScenario, "position">>,
@@ -2702,7 +2725,9 @@ const SCENARIOS: readonly BotScenario[] = [
       // its commander. The choice comes in the draw step, the rollouts pass
       // our own seat for the rest of the turn, and so the mana looked free.
       // v1 looks ahead to its main phase both ways and declines when paying
-      // costs it a cast (`payingCostsASpell`); v2 keeps that answer.
+      // costs it a cast (`payingCostsASpell`); v2 keeps that answer unless
+      // paying scores better by `KEPT_PER_MANA` for each mana of the Baloth
+      // (6 points), and a Treasure denied is half a point.
       const game = titheAsked(registry, 4);
       if (!("state" in game)) return game;
       return {
@@ -2720,6 +2745,30 @@ const SCENARIOS: readonly BotScenario[] = [
     rule: "With the turn's spell still castable after it, denying the Treasure is free.",
     position(registry) {
       const game = titheAsked(registry, 6);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "pays echo on a 4/4 though it costs the turn's two-drop",
+    rule: "A payment is weighed against the spell it costs, not declined for any spell: a 4/4 trampler isn't sacrificed to cast a Grizzly Bears.",
+    position(registry) {
+      // v1's look ahead declines a payment whenever it costs a spell it
+      // would cast (`payingCostsASpell`), whatever declining costs, and v2
+      // kept that answer unsearched because its rollouts couldn't see the
+      // spell: Cradle Guard went to its echo for a 2/2. v2 searches it now
+      // (2026-11-15), keeping v1's answer only while paying scores less than
+      // `KEPT_PER_MANA` better for each mana of the Bears (3 points): the
+      // rollouts can't see the Bears, but they do see the 4/4 gone (27.9
+      // against 16.0).
+      const game = echoAsked(registry);
       if (!("state" in game)) return game;
       return {
         game,
