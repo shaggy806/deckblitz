@@ -525,6 +525,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "turn-exiled-face-up": () => {},
   "cast-now": (n, v) => {
     v.touch(n.from === "targets" ? EVERY_SLOT : n.target, "take", MAJOR);
+    // "Target opponent … may cast a spell … without paying its mana cost" (Cmdr.
+    // Troi): a free spell for the player it names.
+    if (typeof n.by === "object" && "target" in n.by) v.touch(n.by.target, "help", MINOR);
     v.child(n.then);
     v.child(n.else);
   },
