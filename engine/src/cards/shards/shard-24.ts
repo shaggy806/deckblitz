@@ -935,6 +935,7 @@ import _poolUrgentExorcism from "../pool/urgent-exorcism.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
 import _poolUrzasRuinousBlast from "../pool/urzas-ruinous-blast.js";
 import _poolUrzasTower from "../pool/urzas-tower.js";
+import _poolUssFarragutBoldExplorer from "../pool/uss-farragut-bold-explorer.js";
 import _poolValakutExploration from "../pool/valakut-exploration.js";
 import _poolVampireOpportunist from "../pool/vampire-opportunist.js";
 import _poolVampireSocialite from "../pool/vampire-socialite.js";
@@ -1973,6 +1974,7 @@ const shard: CardShard = {
     _poolUrtetRemnantOfMemnarch,
     _poolUrzasRuinousBlast,
     _poolUrzasTower,
+    _poolUssFarragutBoldExplorer,
     _poolValakutExploration,
     _poolVampireOpportunist,
     _poolVampireSocialite,

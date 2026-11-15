@@ -1879,7 +1879,8 @@ export type GameEvent =
   | (Base & {
       /** Cards `player` put on the bottom of their library: from their hand
        * (a mulligan, a resolution's choice), or a spell of theirs put there
-       * off the stack (Neera, Wild Mage) — what "put on the bottom this way"
+       * off the stack (Neera, Wild Mage), or a permanent put there by an effect
+       * (U.S.S. Farragut) — what "put on the bottom this way"
        * counts. */
       readonly type: "cards-put-on-bottom";
       readonly player: PlayerId;

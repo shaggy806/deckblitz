@@ -2687,7 +2687,8 @@
   "static:grant-beam-me-up-to-graveyard",
   "static:cant-be-beamed-up",
   "trigger:fought-this-way-dies-this-turn",
-  "effect:saga-chapter-links-permanent"
+  "effect:saga-chapter-links-permanent",
+  "condition:this-way-put-on-bottom-from-battlefield"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -41756,7 +41756,14 @@ controlledBy,
         // `moveObject` pushes onto the end — so a plain move already lands on
         // the bottom, which is what `applyPutOnBottom` relies on too. A token
         // ceases to exist either way (rule 111.7).
-        this.moveObject(id, "library");
+        const moved = this.moveObject(id, "library");
+        // "Put it on the bottom of your library. When you do, …" (U.S.S.
+        // Farragut): it's put there this way, unless a replacement sent it
+        // elsewhere.
+        const card = this.state.objects[id];
+        if (moved && card?.zone === "library" && !card.isToken) {
+          this.emit({ type: "cards-put-on-bottom", player: card.owner, objects: [id] });
+        }
       },
       addCounterAll: (filter, counter, amount, exceptSource, scopeTo, by, except) => {
         // Snapshot first — `addCounter` can kill a permanent (a -1/-1 counter)

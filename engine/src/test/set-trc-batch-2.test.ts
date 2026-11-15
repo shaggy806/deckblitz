@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, counters, destroy, enter, hand, lands, pickTargets, ref, settle, spawn, subtypes, table, toStep, tokensNamed, types, zone } from "./harness.js";
+import { A, B, activate, counters, destroy, enter, hand, keywords, lands, pickTargets, ref, settle, spawn, subtypes, table, toHand, toStep, tokensNamed, types, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -79,5 +79,25 @@ describe("The Best of Both Worlds", () => {
     expect(game.state.objects[bears].controller).toBe(B);
     expect(subtypes(game, bears)).toEqual(["Bear"]);
     expect(counters(game, bears, "+1/+1")).toBe(0);
+  });
+});
+
+describe("U.S.S. Farragut, Bold Explorer", () => {
+  it("puts a creature in with haste on landfall, bottoms it at the end step and draws", () => {
+    const { game, a } = table();
+    spawn(game, "U.S.S. Farragut, Bold Explorer");
+    const giant = toHand(game, "Hill Giant");
+    a.chooseFromZoneFn = (_view, eligible) => eligible.filter((id) => id === giant);
+    const forest = toHand(game, "Forest");
+    game.dispatch({ type: "play-land", player: A, card: forest });
+    settle(game);
+    expect(zone(game, giant)).toBe("battlefield");
+    expect(keywords(game, giant)).toContain("haste");
+    const before = hand(game).length;
+    toStep(game, "end");
+    settle(game);
+    expect(zone(game, giant)).toBe("library");
+    expect(game.state.zones.perPlayer[A].library.at(-1)).toBe(giant);
+    expect(hand(game).length).toBe(before + 1);
   });
 });

@@ -30044,6 +30044,7 @@ import _poolUrzasTower from "./pool/urzas-tower.js";
 import _poolUrzasWorkshop from "./pool/urzas-workshop.js";
 import _poolUsherOfTheFallen from "./pool/usher-of-the-fallen.js";
 import _poolUsherToSafety from "./pool/usher-to-safety.js";
+import _poolUssFarragutBoldExplorer from "./pool/uss-farragut-bold-explorer.js";
 import _poolUthdenTroll from "./pool/uthden-troll.js";
 import _poolUthrosPsionicist from "./pool/uthros-psionicist.js";
 import _poolUthrosResearchCraft from "./pool/uthros-research-craft.js";
@@ -63239,6 +63240,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrzasWorkshop,
   _poolUsherOfTheFallen,
   _poolUsherToSafety,
+  _poolUssFarragutBoldExplorer,
   _poolUthdenTroll,
   _poolUthrosPsionicist,
   _poolUthrosResearchCraft,
@@ -96447,6 +96449,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/urzas-workshop": _poolUrzasWorkshop,
   "pool/usher-of-the-fallen": _poolUsherOfTheFallen,
   "pool/usher-to-safety": _poolUsherToSafety,
+  "pool/uss-farragut-bold-explorer": _poolUssFarragutBoldExplorer,
   "pool/uthden-troll": _poolUthdenTroll,
   "pool/uthros-psionicist": _poolUthrosPsionicist,
   "pool/uthros-research-craft": _poolUthrosResearchCraft,
