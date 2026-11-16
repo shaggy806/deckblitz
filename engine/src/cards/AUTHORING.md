@@ -2297,6 +2297,24 @@ when the dice differ: its own `then` reads the chosen one as `"x"` (a filter's
 Valiant Endeavor, Wild Endeavor). Not yet: "roll an extra die and ignore the
 lowest", "roll again", and each player rolling.
 
+**Shifting a die's result after the roll** (rule 706.2a) is a static's
+`shiftsRoll: { by, payLife?, removeCounter?, oncePerTurn? }` (`affects: { scope:
+"self" }`): "After you roll a die, you may pay 1 life. If you do, increase or
+decrease the result by 1. Do this only once each turn" (Night Shift of the
+Living Dead — `{ by: 1, payLife: 1, oncePerTurn: true }`); "… you may remove a
++1/+1 counter from this creature. If you do, …" (Xenosquirrels — `{ by: 1,
+removeCounter: "+1/+1" }`). After each roll its controller makes — an effect's,
+a roll to visit, a roll as a permanent enters, a reroll of stored results, a
+mana ability's — and before anything reads it, they're asked (a `choose-modes`,
+`shiftRoll`) which die to move which way, each die once per ability (each die is
+"a die" rolled), seeing every result first, one shift at a time in the order they
+choose (706.2b); none ends it. The roll is final only then: "whenever you roll a
+6" (`rolls-die` with `die: { atLeast: 6, atMost: 6 }`), a results table, `{ roll
+}` amounts, "choose one result" and stored results all read each die's result
+with its shift (`dieResults`), the natural result only where the card says
+"natural". Once each turn is per object (a new one after a zone change); declining
+isn't doing it. No bounds: a 1 decreased is 0.
+
 **The Ring tempts you** (rule 701.54) is `{ kind: "the-ring-tempts-you" }`: the
 effect's controller gets the Ring emblem if they have none, chooses a creature
 they control as their Ring-bearer (asked, never declined), and is tempted — the

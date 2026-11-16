@@ -12953,4 +12953,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Jace Beleren'] },
     }),
   ),
+  // --- A die's result shifted after the roll (2026-11-16) ---------------------
+  // Each board's seeded die comes up 4.
+  preset(
+    'Night Shift of the Living Dead: pay 1 life to move your die by one',
+    board({
+      you: { bf: ['Night Shift of the Living Dead', 'Vegetation Abomination'] },
+    }),
+  ),
+  preset(
+    'Night Shift of the Living Dead: two cards shift one die at a four-player table',
+    board({
+      you: {
+        bf: [
+          'Night Shift of the Living Dead',
+          { name: 'Xenosquirrels', counters: { '+1/+1': 2 } },
+          'Vegetation Abomination',
+        ],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

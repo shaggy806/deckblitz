@@ -8570,3 +8570,16 @@ A board's player with a card that puts stickers plays with the first three of Un
 ### Kaboom!: a target's own question comes before the next pick
 - **Do:** Cast Kaboom!: click Bob, then his Jace Beleren, then Done. When asked, click Jace Beleren, then put the two revealed cards on the bottom in either order.
 - **Expect:** Jace is revealed a Forest and Lightning Bolt and drops to 2 loyalty; you're asked their order on the bottom before anything is revealed for Bob. Then Bob is revealed the Hill Giant and goes to 36.
+
+## A die's result shifted after the roll (2026-11-16)
+
+Each board's die comes up 4.
+
+### Night Shift of the Living Dead: pay 1 life to move your die by one
+- **Do:** Use Vegetation Abomination's ability. In the banner, pick "Pay 1 life: 4 → 5".
+- **Expect:** The banner reads "Night Shift of the Living Dead — choose one or none" with "Pay 1 life: 4 → 5", "Pay 1 life: 4 → 3" and "Choose none". You pay 1 life and gain 5, ending at 44; the log says "Alice rolls a d6: 4 → 5". No Zombie: it wasn't a 6.
+- **Not a bug:** The dice land after you answer: the roll isn't over until the shift is chosen.
+
+### Night Shift of the Living Dead: two cards shift one die at a four-player table
+- **Do:** In this 4-player game, use Vegetation Abomination's ability. Pick "Xenosquirrels: Remove a +1/+1 counter: 4 → 5", then "Pay 1 life: 5 → 6".
+- **Expect:** The first banner fits and lists four shifts, each led by its card's name, and "Choose none". After the first, Xenosquirrels is 1/1 and the banner asks again with Night Shift's two alone ("Pay 1 life: 5 → 6", "Pay 1 life: 5 → 4"). You end at 45 life (40, less 1, plus 6), the log says "Alice rolls a d6: 4 → 6", and you get a 2/2 Zombie Employee token.
