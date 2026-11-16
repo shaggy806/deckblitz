@@ -976,8 +976,9 @@ export type EffectAmount =
    * or who can't lose life counts for what they lost. */
   | { readonly lifeLostThisWay: true; readonly who?: PlayerScope }
   /** The excess damage dealt so far in the resolution under way (rule
-   * 120.4a): past lethal damage for a creature — its toughness less damage
-   * already marked, or 1 from a deathtouch source — past its loyalty for a
+   * 120.4a): past lethal damage for a creature — its toughness (its power
+   * under Zilortha) less damage already marked, or 1 from a deathtouch
+   * source — past its loyalty for a
    * planeswalker. Hell to Pay's "Treasure tokens equal to the amount of
    * excess damage dealt to that creature this way", Razor Rings' "you gain
    * life equal to the excess damage dealt this way". `to` counts only what
@@ -3166,8 +3167,9 @@ export type EffectSpec =
       /**
        * "Excess damage is dealt to that creature's controller instead" (Ram
        * Through — rule 120.4a): of the damage to a target creature, what's
-       * beyond lethal (`lethalDamageTo`: toughness less damage marked, 1 from
-       * deathtouch) goes to its controller, both dealt at once. `ifSourceHas`
+       * beyond lethal (`lethalDamageTo`: toughness — power under Zilortha,
+       * Strength Incarnate — less damage marked, 1 from deathtouch) goes to
+       * its controller, both dealt at once. `ifSourceHas`
        * makes it conditional on the source's keyword ("if the creature you
        * control has trample"). `then` is what else the redirect does
        * ("…instead that damage is dealt to that creature's controller **and

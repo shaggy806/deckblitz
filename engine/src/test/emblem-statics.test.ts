@@ -355,6 +355,7 @@ describe("what is read off an emblem", () => {
     "grantToxic",
     "restrictions",
     "combatDamageByToughness",
+    "lethalDamageByPower",
     "canAttackAsThoughNoDefender",
     "assignAsThoughUnblocked",
     "cantBeSacrificed",

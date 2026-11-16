@@ -61220,7 +61220,8 @@ controlledBy,
    * Note on `object` that `source` is dealing it `amount` damage now (see
    * `DamageHistory`): the source as it is — or as it last existed, if it
    * has left — and whether this is more than the lethal damage it needs
-   * (rule 120.4a): toughness less damage already marked, or 1 from a
+   * (rule 120.4a): toughness (power under Zilortha — `lethalDamageTo`) less
+   * damage already marked, or 1 from a
    * deathtouch source, none at all once it has lethal damage (or deathtouch
    * damage since state-based actions were last checked — damage dealt at the
    * same time, which 120.4a takes into account); a
