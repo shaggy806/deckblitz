@@ -5,8 +5,12 @@
 // field a blitz deals from, to see how even it is; with `--pool upgrades`
 // every upgrade, those kept from the bots too; with `--pool strong`
 // the real players' decks (`STRONG_DECKS`) against those upgrades; or with
-// `--pool strong-only` the strong decks among themselves.
+// `--pool strong-only` the strong decks among themselves; or with `--pool
+// tooling` the tooling precons (`tool-decks.mjs`: the other Wizards precons
+// the pool plays as printed, kept from players), to see which of their cards
+// the bots leave uncast.
 import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS, botPool } from "../dist/index.js";
+import { TOOLING_PRECONS } from "./tool-decks.mjs";
 
 const POOLS = {
   upgraded: () => [...SAMPLE_DECKS.filter((d) => UPGRADED_DECKS.some((u) => u.upgradeOf === d.name)), ...UPGRADED_DECKS],
@@ -19,6 +23,7 @@ const POOLS = {
   // The strong decks among themselves: whether one holds its own in the pool
   // a host deals "Strong" bots from.
   "strong-only": () => [...STRONG_DECKS],
+  tooling: () => [...TOOLING_PRECONS],
 };
 
 export const DECK_POOL = POOLS[process.env.DECK_POOL]?.() ?? SAMPLE_DECKS;

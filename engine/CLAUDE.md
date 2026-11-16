@@ -194,8 +194,10 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000] [--count] [--turns 31-34]`: one
   whole game of v2 seats at the live clock, written out to read: each turn's board and hands, and every decision with
   how it was reached. For looking over the bots' play by eye; deck names match the strong decks first, then the starter
-  decks. `--count` plays count budgets (the game `bot:losses`, `bot:outs` and `bot:judge` play for that seed), and
-  `--turns` prints those turns alone.
+  decks, then the **tooling precons** (`scripts/tool-decks.mjs`, for all four `--decks` tools: 69 more Wizards precons
+  the pool plays as printed, `data/tooling-precons.json`, read by scripts alone so no player is ever offered one;
+  `node scripts/gen-tooling-precons.mjs` rewrites the file as the pool grows). `--count` plays count budgets (the game
+  `bot:losses`, `bot:outs` and `bot:judge` play for that seed), and `--turns` prints those turns alone.
 - `bot:bench:last`: whether this engine code already has a bench figure on this machine, so a "before" needn't be
   played again (`data/bench-log.jsonl`, keyed by a hash of the non-card source; a plain `bot:bench` appends to it, and
   the file is committed with the work it measured).

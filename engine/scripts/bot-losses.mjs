@@ -40,8 +40,6 @@ import {
   COMMANDER_RULES,
   EvalBotController,
   Game,
-  STARTER_DECKS,
-  STRONG_DECKS,
   asPlayerId,
   combatCreatures,
   createDefaultRegistry,
@@ -50,6 +48,7 @@ import {
   isLethal,
 } from "../dist/index.js";
 import { progress } from "./progress.mjs";
+import { findDeck } from "./tool-decks.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -159,12 +158,7 @@ if (jobs.length > 1) {
 // --- One game. --------------------------------------------------------------
 
 const seed = seeds[0];
-const pool = [...STRONG_DECKS, ...STARTER_DECKS];
-const decks = deckSets[0].split(",").map((name) => {
-  const deck = pool.find((d) => d.name.toLowerCase().includes(name.trim().toLowerCase()));
-  if (deck === undefined) throw new Error(`no deck matching "${name}"`);
-  return deck;
-});
+const decks = deckSets[0].split(",").map(findDeck);
 const seats = ["alice", "bob", "carol", "dave"].slice(0, decks.length).map(asPlayerId);
 const label = Object.fromEntries(seats.map((seat, i) => [seat, decks[i].name.split(" by ")[0].replace(" (Upgraded)", "")]));
 const registry = createDefaultRegistry();

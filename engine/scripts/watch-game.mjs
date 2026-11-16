@@ -7,7 +7,8 @@
 //   npm run bot:watch -w engine -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000] [--max-turns 120]
 //
 // `--decks` matches each name against the strong decks first, then the
-// upgraded and starter decks (a case-insensitive substring). Build first
+// upgraded and starter decks, then the tooling precons (`tool-decks.mjs`: a
+// deck named exactly that, else a case-insensitive substring). Build first
 // (it plays `dist/`); it prints to stdout, a few hundred lines a game.
 //
 // `--count` plays on count budgets instead of the clock, so the seed is the
@@ -26,14 +27,13 @@ import {
   COMMANDER_RULES,
   EvalBotController,
   Game,
-  STARTER_DECKS,
-  STRONG_DECKS,
   asPlayerId,
   computeCharacteristics,
   createDefaultRegistry,
   describeMove,
 } from "../dist/index.js";
 import { progress } from "./progress.mjs";
+import { findDeck } from "./tool-decks.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -57,12 +57,7 @@ let snapshotSaved = false;
 /** Whether the turn being played is one to print. */
 const shown = (turn) => turn >= fromTurn && turn <= toTurn;
 
-const pool = [...STRONG_DECKS, ...STARTER_DECKS];
-const decks = wanted.map((name) => {
-  const deck = pool.find((d) => d.name.toLowerCase().includes(name.toLowerCase()));
-  if (deck === undefined) throw new Error(`no deck matching "${name}"`);
-  return deck;
-});
+const decks = wanted.map(findDeck);
 const seats = ["alice", "bob", "carol", "dave"].slice(0, decks.length).map(asPlayerId);
 const label = Object.fromEntries(seats.map((seat, i) => [seat, decks[i].name.split(" by ")[0]]));
 const registry = createDefaultRegistry();

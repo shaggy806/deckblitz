@@ -126,10 +126,15 @@ function usageReport(rows) {
       }
     });
   }
-  const held = [...cards].filter(([, c]) => c.castable >= 5).sort((a, b) => a[1].cast / a[1].castable - b[1].cast / b[1].castable);
+  // `--usage-min N` / `--usage-top N`: a pool of many decks gives each card
+  // few games (the tooling precons: four a round), so both can be set.
+  const least = Number(flag("usage-min", "5"));
+  const held = [...cards]
+    .filter(([, c]) => c.castable >= least)
+    .sort((a, b) => a[1].cast / a[1].castable - b[1].cast / b[1].castable || b[1].castable - a[1].castable);
   if (held.length === 0) return;
-  console.log(`\nCastable but least often cast (at least 5 games castable, ${held.length} cards):`);
-  for (const [name, c] of held.slice(0, 40)) {
+  console.log(`\nCastable but least often cast (at least ${least} games castable, ${held.length} cards):`);
+  for (const [name, c] of held.slice(0, Number(flag("usage-top", "40")))) {
     console.log(`  ${name.padEnd(36)} cast in ${String(c.cast).padStart(3)} of ${String(c.castable).padStart(3)} games`);
   }
 }
