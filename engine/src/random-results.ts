@@ -218,7 +218,10 @@ export type RollQuery =
 /** What `query` asks of `roll`, each die read by its result ({@link dieResults}). */
 export function rollRead(roll: RollRecord, query: RollQuery, chosen: number): number {
   if (query === "total") return roll.total;
-  const results = dieResults(roll);
+  // The counts read each die's own result — its natural one and what a shift
+  // after the roll moved it by — the instruction's modifier being the
+  // total's, as these reads have always taken it.
+  const results = roll.shifts === undefined ? roll.results : roll.results.map((n, i) => n + (roll.shifts?.[i] ?? 0));
   if (query === "odd") return results.filter((r) => Math.abs(r) % 2 === 1).length;
   if (query === "even") return results.filter((r) => r % 2 === 0).length;
   if (query === "other") return results.reduce((n, r) => n + r, 0) - chosen;
