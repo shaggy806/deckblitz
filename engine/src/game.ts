@@ -56600,7 +56600,7 @@ controlledBy,
     controller: PlayerId,
     underYourControl: boolean,
     enterTapped: boolean,
-    withCounters?: { readonly kind: string; readonly amount: number; readonly ifCreature?: true },
+    withCounters?: EnterCounters,
     exileIfItWouldLeave: boolean | "ability" = false,
     turned: boolean | "flipped" = false,
     underPlayer?: PlayerId,
@@ -56662,16 +56662,11 @@ controlledBy,
       });
       invalidateComputedCache();
     }
-    // "If a creature enters this way, it enters with …" (`ifCreature`): what
-    // it is on the battlefield, every effect applying (rule 614.12).
-    if (
-      withCounters !== undefined &&
-      (withCounters.ifCreature !== true ||
-        computeCharacteristics(this.state, this.registry, target.object).types.includes("creature"))
-    ) {
-      // Put there, counters and all, by whoever puts it onto the battlefield.
-      this.addCounter(target, withCounters.kind, withCounters.amount, true, under ?? controller);
-    }
+    // Put there, counters and all, by whoever puts it onto the battlefield —
+    // every kind it names (Perennation). "If a creature enters this way, it
+    // enters with …" (an `ifType`): what it is on the battlefield, every
+    // effect applying (rule 614.12).
+    this.enterWithCounters(target.object, withCounters, under ?? controller);
     // "…tapped and attacking" (rule 508.4): as it enters, before anything
     // sees it arrive.
     if (attacking !== undefined) this.putIntoAttack([target.object], entered.controller, attacking);

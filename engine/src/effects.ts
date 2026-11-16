@@ -4422,8 +4422,18 @@ export type EffectSpec =
        * counters on it if it's a creature". `amount` may be read as it
        * resolves: Nine-Lives Familiar's "return it … with one fewer revival
        * counter on it" is `{ difference: [{ countersOn: "trigger-object",
-       * counter: "revival" }, 1] }`, the counters it died with (608.2h). */
-      readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount; readonly ifCreature?: true };
+       * counter: "revival" }, 1] }`, the counters it died with (608.2h).
+       * A list is several kinds, all put on as it enters (rule 122.6 —
+       * Perennation's "with a hexproof counter and an indestructible counter
+       * on it"), each `ifType` / `ifSubtype` read as `ifCreature` is. */
+      readonly withCounters?:
+        | { readonly kind: string; readonly amount: EffectAmount; readonly ifCreature?: true }
+        | readonly {
+            readonly kind: string;
+            readonly amount: EffectAmount;
+            readonly ifType?: CardType;
+            readonly ifSubtype?: string;
+          }[];
       /** "If it would leave the battlefield, exile it instead of putting it
        * anywhere else" (Whip of Erebos) — sets
        * `GameObject.exileIfItWouldLeave` on the permanent it becomes: a
@@ -14417,7 +14427,8 @@ export interface EffectApi {
      * effect's controller for "under your control", or another player. */
     under: PlayerId | undefined,
     enterTapped: boolean,
-    withCounters?: { readonly kind: string; readonly amount: number; readonly ifCreature?: true },
+    /** Counters it enters with, each amount already read. */
+    withCounters?: EnterCounters,
     exileIfItWouldLeave?: boolean | "ability",
     /** It enters transformed (`true`), or flipped (`"flipped"` — rule 710). */
     transformed?: boolean | "flipped",
@@ -17694,6 +17705,33 @@ function illegalSlot(ref: ObjectRef, ctx: ResolutionContext): boolean {
   return typeof ref === "number" && ctx.illegalTargets?.includes(ref) === true;
 }
 
+/** `put-onto-battlefield`'s `withCounters`, each amount read as it resolves:
+ * one kind or a list of them (Perennation), `ifCreature` read as an `ifType`
+ * of creature. */
+function enterCountersOf(
+  spec: Extract<EffectSpec, { kind: "put-onto-battlefield" }>["withCounters"],
+  ctx: ResolutionContext,
+): EnterCounters | undefined {
+  if (spec === undefined) return undefined;
+  type One = {
+    readonly kind: string;
+    readonly amount: EffectAmount;
+    readonly ifCreature?: true;
+    readonly ifType?: CardType;
+    readonly ifSubtype?: string;
+  };
+  const each: readonly One[] = Array.isArray(spec) ? (spec as readonly One[]) : [spec as One];
+  return each.map((c) => {
+    const ifType = c.ifType ?? (c.ifCreature === true ? ("creature" as const) : undefined);
+    return {
+      kind: c.kind,
+      amount: Math.max(0, amountValue(c.amount, ctx)),
+      ...(ifType !== undefined ? { ifType } : {}),
+      ...(c.ifSubtype !== undefined ? { ifSubtype: c.ifSubtype } : {}),
+    };
+  });
+}
+
 /** The one player `ref` names, or `undefined` for nobody — see
  * {@link PlayerRef}. */
 function resolveEnterAttacking(
@@ -19892,9 +19930,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           target,
           under,
           spec.enterTapped === true,
-          spec.withCounters === undefined
-            ? undefined
-            : { ...spec.withCounters, amount: Math.max(0, amountValue(spec.withCounters.amount, ctx)) },
+          enterCountersOf(spec.withCounters, ctx),
           spec.exileIfItWouldLeave,
           spec.flipped === true ? "flipped" : spec.transformed === true,
           spec.setTypes !== undefined ||
