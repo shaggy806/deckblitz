@@ -8490,6 +8490,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Pass to your turn. At your upkeep, pick Llanowar Elves and confirm.
 - **Expect:** Descent into Madness gets a despair counter and you're asked first: "Choose a permanent you control or a card from your hand to exile", among Descent into Madness, Llanowar Elves and Grizzly Bears. Then Bob chooses one of his Hill Giant, Forest and Shock, and his pick and your Llanowar Elves are exiled together.
 
+## Another player chooses the colour of the mana they're given (2026-11-16)
+
+### Spectral Searchlight: Bob chooses the colour of the mana you give him
+- **Do:** Click Spectral Searchlight and pick the row ending "(Bob adds it)". As Bob, choose "Add {R}". Then pass, and as Bob cast Lightning Bolt at Alice.
+- **Expect:** The menu has five rows for you, "(add {W})" to "(add {G})", then one for Bob with no colour. Bob is asked "Spectral Searchlight — choose one" with five buttons, Add {W} to Add {G}; you aren't. Spectral Searchlight is tapped, Bob's mana shows {R}, yours nothing, and it's your move again with nothing on the stack. Bob, with no land, casts Lightning Bolt with that {R}: you go to 37.
+
+### Spectral Searchlight: Carol is asked, and only Carol (4 players)
+- **Do:** Click Spectral Searchlight and pick the row ending "(Carol adds it)". As Carol, choose "Add {G}".
+- **Expect:** The menu has one row each for Bob, Carol and Dave besides your five. Only Carol is asked "Spectral Searchlight — choose one"; then Carol's mana shows {G}, nobody else's anything, and it's your move again.
+
 ## Client fixes (2026-11-14)
 
 ### Baxter Building: four mana in any combination is one menu row

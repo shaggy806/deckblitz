@@ -20391,3 +20391,33 @@ describe("'Restart the game' (Karn Liberated — rule 727)", () => {
     });
   });
 });
+
+describe("a mana ability's player of choice, and 'they choose' (playerOfChoice, theyChoose)", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Choice", type_line: "Artifact", oracle_text }, { tokenFor: () => null });
+  it("reads Spectral Searchlight's 'Choose a player. That player adds one mana of any color they choose.'", () => {
+    const light = face("{T}: Choose a player. That player adds one mana of any color they choose.");
+    expect(light.activated[0].targets).toEqual([]);
+    expect(light.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "any-color",
+      amount: 1,
+      playerOfChoice: true,
+      theyChoose: true,
+    });
+  });
+  it("reads Valleymaker's fixed mana and Victory Chimes' 'a player of your choice', with no colour to choose", () => {
+    expect(face("{T}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}.").activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "G",
+      amount: 3,
+      playerOfChoice: true,
+    });
+    expect(face("{T}: A player of your choice adds {C}.").activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "C",
+      amount: 1,
+      playerOfChoice: true,
+    });
+  });
+});

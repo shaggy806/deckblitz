@@ -4373,8 +4373,21 @@ export class Game {
       // player still in the game, the activator first (rule 605.3b — named
       // as the mana ability is activated).
       if (manaFor === undefined && ability.effect?.kind === "add-mana" && ability.effect.playerOfChoice === true) {
+        const theyChoose = ability.effect.theyChoose === true;
         const players = this.state.turnOrder.filter((p) => this.state.players[p]?.hasLost !== true);
         for (const p of [player, ...players.filter((p) => p !== player)]) {
+          // "… of any color they choose" (Spectral Searchlight): another
+          // player's colour is theirs, asked as it resolves — one offer
+          // naming them, with no pick, however many colours the
+          // activator's own offers list, and listed after them.
+          if (theyChoose && p !== player) {
+            const named = out.findIndex(
+              (o) => o.kind === "activate-ability" && o.source === source && o.abilityIndex === index && o.manaFor === p,
+            );
+            if (named >= 0) out.push(...out.splice(named, 1));
+            else pushActivateAbility(source, cardName, ability, index, undefined, undefined, undefined, p);
+            continue;
+          }
           pushActivateAbility(source, cardName, ability, index, manaColors, makes, manaSplit, p);
         }
         return;
@@ -9027,6 +9040,36 @@ export class Game {
         invalidateComputedCache();
       }
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
+    // The colour of a mana ability's mana, chosen by the player it goes to
+    // (Spectral Searchlight's "they choose"): the ability resolves with their
+    // pick, still off the stack, and whoever activated it gets priority back
+    // (rules 605.3b, 405.6c).
+    if (awaiting.manaAbilityPick !== undefined) {
+      const wait = awaiting.manaAbilityPick;
+      this.state.awaiting = null;
+      this.state.decisionSource = null;
+      const granted = wait.grantedAbility === undefined ? undefined : this.abilityFromRef(wait.grantedAbility);
+      const ability =
+        granted !== undefined && "cost" in granted ? granted : this.effectiveActivated(wait.source)[wait.abilityIndex];
+      if (ability !== undefined) {
+        this.resolveManaAbility(
+          wait.source,
+          wait.activator,
+          ability,
+          wait.x,
+          wait.picks[modeIndices[0] ?? 0] ?? wait.picks[0],
+          wait.grantedAbility,
+          wait.paidSets,
+          wait.sacrificedCouldMake,
+          wait.manaFor,
+          wait.revealSince,
+          wait.abilityIndex,
+          true,
+        );
+      }
+      this.prepareForPriority(wait.activator);
       return;
     }
     // Storage Matrix's question (rule 502.3): only that type goes on untapping
@@ -27053,10 +27096,10 @@ export class Game {
           return;
         }
         // Nothing to reveal: the mana, none of it for a revealed card.
-        this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, revealSince);
+        this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, revealSince, abilityIndex);
         return;
       }
-      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice);
+      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, undefined, abilityIndex);
       return;
     }
 
@@ -27366,12 +27409,79 @@ export class Game {
     /** Its reveal (`Game.manaRevealFirst`) is done, asked at this `eventSeq`:
      * the mana alone is left, reading "revealed this way" from there. */
     revealSince?: number,
+    /** Which of its source's abilities this is — where "they choose" asks
+     * another player, what their answer resolves again. */
+    abilityIndex?: number,
+    /** `manaColors` are the picks of the player the mana goes to, who was
+     * asked for them (`ManaAbilityPick`). */
+    pickedByRecipient = false,
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
     if (revealSince !== undefined && ability.effect?.kind === "add-mana" && ability.effect.first !== undefined) {
       const { first: _done, ...mana } = ability.effect;
       ability = { ...ability, effect: mana };
+    }
+    // "Choose a player. That player adds one mana of any color they choose"
+    // (Spectral Searchlight): another player named, the colour is theirs
+    // (rule 608.2d), asked now the cost is paid — the mana ability still off
+    // the stack, nobody getting priority until it has resolved (605.3b,
+    // 405.6c). Their answer comes back here with its picks. Naming
+    // themselves, the activator picked as they activated.
+    const theirs = ability.effect;
+    if (
+      !pickedByRecipient &&
+      manaFor !== undefined &&
+      manaFor !== player &&
+      theirs?.kind === "add-mana" &&
+      theirs.theyChoose === true
+    ) {
+      const picks =
+        standaloneManaChoices(
+          ability,
+          (mana) => this.manaOneOf(mana, player, sourceId),
+          () => (typeof theirs.amount === "number" ? null : this.liveManaAmount(sourceId, player, theirs.amount, undefined, theirs.first)),
+        ) ?? [];
+      const index = abilityIndex ?? this.effectiveActivated(sourceId).indexOf(ability);
+      if (picks.length > 1 && index >= 0) {
+        const unitsOf = (pick: readonly ManaType[]) => pick.map((type) => `{${type}}`).join("");
+        this.state.awaiting = {
+          kind: "choose-modes",
+          player: manaFor,
+          source: sourceId,
+          minModes: 1,
+          maxModes: 1,
+          modes: picks.map((pick) => ({
+            text: pick.length === 0 ? "Add no mana." : `Add ${unitsOf(pick)}.`,
+            effect:
+              pick.length === 1
+                ? { kind: "add-mana", mana: pick[0], amount: 1 }
+                : { kind: "add-mana", mana: { all: pick }, amount: 1 },
+          })),
+          x: chosenX,
+          targets: [],
+          manaAbilityPick: {
+            source: sourceId,
+            abilityIndex: index,
+            activator: player,
+            manaFor,
+            x: chosenX,
+            picks,
+            ...(grantedAbility !== undefined ? { grantedAbility } : {}),
+            ...(paidSets !== undefined ? { paidSets } : {}),
+            ...(sacrificedCouldMake !== undefined ? { sacrificedCouldMake } : {}),
+            ...(revealSince !== undefined ? { revealSince } : {}),
+          },
+        };
+        this.state.decisionSource =
+          source === undefined
+            ? null
+            : { object: sourceId, cardName: printedCardName(source), controller: source.controller };
+        this.afterPlayerAction(player);
+        return;
+      }
+      // One outcome, or none: nothing to ask.
+      manaColors = picks[0];
     }
     const base = this.makeResolutionContext(
       sourceId,

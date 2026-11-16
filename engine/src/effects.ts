@@ -3373,14 +3373,26 @@ export type EffectSpec =
        * (choosing themselves); activated with no `manaFor`, its controller
        * adds it. */
       readonly playerOfChoice?: true;
+      /** "That player adds one mana of any color **they choose**" (Spectral
+       * Searchlight, with `playerOfChoice`): the choice of colour is the
+       * player's who adds the mana, not the ability's controller's. Naming
+       * themselves, the controller picks as they activate, as for any mana
+       * ability (the auto-payer does). Naming another player, that player is
+       * asked — a `choose-modes` whose `manaAbilityPick` the engine answers —
+       * once the cost is paid, the mana ability still off the stack and
+       * nobody getting priority until it has resolved (rules 605.3b, 608.2d,
+       * 405.6c); a player controlling them answers for them (723.5). On the
+       * stack, "that player adds … they choose" is `as-player` round a plain
+       * `add-mana` (Stadium Vendors), so this is a mana ability's. */
+      readonly theyChoose?: true;
       /** A target slot holding the player who adds it — "**Target player**
        * adds one mana of any color" (The Warring Triad), "Choose a color.
        * Target player adds three mana of the chosen color" (Radiant Lotus).
        * Wins over `who`. An ability with a target is never a mana ability
        * (rule 605.5a): it uses the stack, and a choice of colour in it is
        * made as it resolves by its controller (rule 608.2d) — a card that
-       * lets the other player choose says "they choose" (Spectral
-       * Searchlight). A player gone illegal adds nothing. */
+       * lets the other player choose says "they choose" (`theyChoose`).
+       * A player gone illegal adds nothing. */
       readonly target?: number;
     }
   | {
@@ -14549,7 +14561,8 @@ export interface ResolutionContext extends EffectApi {
    * ability — what `{ devotionTo: "that-color" }` reads. */
   readonly manaColor?: ManaType;
   /** The player a mana ability's "a player of your choice adds" names — the
-   * activation's `manaFor` (`add-mana`'s `playerOfChoice`). */
+   * activation's `manaFor` (`add-mana`'s `playerOfChoice`). Its colour
+   * picks are theirs where the ability says "they choose" (`theyChoose`). */
   readonly manaFor?: PlayerId;
   /** The spell, or the source of the ability, whose cost a modifier's amount
    * is reading (the `"priced"` {@link ObjectRef}). */

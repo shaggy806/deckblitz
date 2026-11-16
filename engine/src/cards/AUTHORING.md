@@ -4865,7 +4865,19 @@ own `add-mana` is scoped to someone else is never an auto-payer source.
 (Victory Chimes): a mana ability, so the player is named as it's activated
 (rule 605.3b) — offered once per player still in the game, each offer's
 `manaFor` naming them (the client labels it). The auto-payer counts it as
-its controller's own mana.
+its controller's own mana. "Choose a player. That player adds {G}{G}{G}"
+(Valleymaker) is the same field.
+
+With it, `add-mana`'s `theyChoose: true` is "that player adds one mana of any
+color **they choose**" (Spectral Searchlight): the colour is the chosen
+player's. Named themselves, the activator picks it as they activate (an offer
+a colour, as any mana ability); another player named gets one offer with no
+colour, and is asked as the mana ability resolves — a `choose-modes` put to
+them (its `manaAbilityPick`), nobody getting priority until they answer (rules
+605.3b, 608.2d). On the stack ("When this enters, choose a player. That player
+adds two mana of any one color they choose", Stadium Vendors) write
+`choose-opponent` `anyPlayer` then `as-player` round a plain `add-mana`
+instead.
 
 `add-mana`'s `notGeneric: true` is "this mana **can't be spent to pay generic mana costs**"
 (Jegantha, the Wellspring): each unit pays only a pip of its own type (a hybrid pip's coloured

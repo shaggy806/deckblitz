@@ -9650,6 +9650,20 @@ export function parseEffect(text, outer) {
         effect: readsIt
           ? { ...put, count: "unique-vowels", then: after.effect }
           : { kind: "sequence", effects: [put, after.effect] },
+  // "Choose a player. That player adds {G}{G}{G}." (Valleymaker), "A player of
+  // your choice adds {C}." (Victory Chimes), "… adds one mana of any color they
+  // choose." (Spectral Searchlight): in a mana ability (no target, rule 605.1a)
+  // the player is named as it's activated (`playerOfChoice`), and "they choose"
+  // makes a choice of colour theirs (`theyChoose`). On the stack (Stadium
+  // Vendors' trigger) it's `as-player`, written by hand.
+  const ofChoice = outer?.onStack ? null : /^(?:Choose a player\. That player|A player of your choice) adds (.+?)( they choose)?\.$/.exec(text);
+  if (ofChoice !== null) {
+    const added = parseEffect(`Add ${ofChoice[1]}.`, outer);
+    const mana = added.effect?.kind === "add-mana" ? added.effect.mana : undefined;
+    const chosen = mana === "any-color" || (typeof mana === "object" && mana !== null && "oneOf" in mana);
+    if (added.todo.length === 0 && mana !== undefined && (ofChoice[2] === undefined || chosen)) {
+      return {
+        effect: { ...added.effect, playerOfChoice: true, ...(ofChoice[2] !== undefined ? { theyChoose: true } : {}) },
         todo: [],
         hints: [],
       };

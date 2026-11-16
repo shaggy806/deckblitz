@@ -4809,6 +4809,17 @@ export class HeuristicBotController extends AutomaticController {
     if (awaiting.guess !== undefined) {
       return [awaiting.guess.matching * 2 > awaiting.guess.unseen ? 0 : 1];
     }
+    // The colour of the mana another player's mana ability gives us (Spectral
+    // Searchlight's "they choose"): the one our hand wants, as a split's units
+    // go (`chooseManaSplit`). `effectWorth` prices every colour alike, so the
+    // first mode — white — took it whatever the hand held.
+    const given = awaiting.manaAbilityPick?.picks;
+    if (given !== undefined && given.every((pick) => pick.length === 1)) {
+      const colors = given.map((pick) => pick[0]);
+      const split = this.chooseManaSplit(view, colors, 1);
+      const wanted = colors.findIndex((color) => (split[color] ?? 0) > 0);
+      if (wanted >= 0) return [wanted];
+    }
     const context = {
       state,
       me: this.playerId,

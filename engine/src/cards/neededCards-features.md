@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Another player's choice inside a mana ability — built 2026-11-16
+
+The key `effect:other-player-adds-mana-choice`: `add-mana`'s `theyChoose`, beside `playerOfChoice`. Named
+themselves, the activator picks the colour as they activate (the auto-payer does); another player named gets
+one offer with no colour, and once the cost is paid the mana ability asks them — a `choose-modes` with
+`manaAbilityPick`, the engine's own to answer — still off the stack, nobody getting priority until it has
+resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
+back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
+`test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+
 ### One choice across a player's own zones, exiled at once — built 2026-11-16
 
 The keys `effect:exile-per-life-lost-mixed-zones`, `effect:each-opponent-exiles-card-from-hand-or-permanent`

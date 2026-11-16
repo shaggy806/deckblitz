@@ -2178,6 +2178,31 @@ export type GrantedAbilityRef =
    * so the trigger resolves as that text however its source changes. */
   | { readonly kind: "card-triggered"; readonly cardName: string; readonly index: number };
 
+/**
+ * A mana ability waiting on the colour of its mana from the player it goes
+ * to — "Choose a player. That player adds one mana of any color they choose"
+ * (Spectral Searchlight, `add-mana`'s `theyChoose`), another player named.
+ * Its cost is paid; it resolves as the answer comes, still off the stack
+ * (rule 605.3b), and `activator` gets priority back (405.6c). Kept on the
+ * `choose-modes` question that asks it (`manaAbilityPick`): mode i makes
+ * `picks[i]`, one colour per unit the ability's own picks name (as an
+ * activation's `manaColors`). The rest is what `Game.resolveManaAbility` was
+ * handed, kept so the mana reads the same once it's made.
+ */
+export interface ManaAbilityPick {
+  readonly source: ObjectId;
+  readonly abilityIndex: number;
+  readonly activator: PlayerId;
+  /** The player the mana goes to, who answers. */
+  readonly manaFor: PlayerId;
+  readonly x: number;
+  readonly picks: readonly (readonly ManaType[])[];
+  readonly grantedAbility?: GrantedAbilityRef;
+  readonly paidSets?: ObjectSets;
+  readonly sacrificedCouldMake?: readonly ManaType[];
+  readonly revealSince?: number;
+}
+
 /** A permanent attached to another, in the stint (`zoneChangeCount`) it was
  * attached in (rule 400.7) — `LastKnownInfo.attachments`. */
 export interface AttachmentRecord {
@@ -4844,6 +4869,12 @@ export type AwaitingDecision =
         readonly types: readonly CardType[];
         readonly asked: number;
       };
+      /** The colour of a mana ability's mana, asked of the player it goes to
+       * (`add-mana`'s `theyChoose` — Spectral Searchlight): mode i makes
+       * `picks[i]` and the ability resolves (see {@link ManaAbilityPick}).
+       * Answered by the engine itself; each mode's effect is the `add-mana`
+       * it comes to, for a reader (a bot's worth of the mode). */
+      readonly manaAbilityPick?: ManaAbilityPick;
       /** The permanent (for an ability) or spell object the effect belongs to
        * — used to build the resolution context for the chosen modes. */
       readonly source: ObjectId;

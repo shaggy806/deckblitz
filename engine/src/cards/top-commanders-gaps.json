@@ -2709,7 +2709,8 @@
   "mechanic:name-stickers",
   "effect:text-change-creature-type-words",
   "effect:for-each-target-turn-order-chosen-at-resolution",
-  "effect:for-each-target-apnap-order"
+  "effect:for-each-target-apnap-order",
+  "effect:other-player-adds-mana-choice"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

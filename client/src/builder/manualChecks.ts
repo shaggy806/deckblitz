@@ -12806,6 +12806,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'end',
     }),
   ),
+  // --- Another player chooses the colour of the mana they're given (2026-11-16)
+  preset(
+    'Spectral Searchlight: Bob chooses the colour of the mana you give him',
+    board({
+      you: { bf: ['Spectral Searchlight', 'Mountain'], hand: ['Lightning Bolt'] },
+      opp: { human: true, hand: ['Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    'Spectral Searchlight: Carol is asked, and only Carol (4 players)',
+    board({
+      you: { bf: ['Spectral Searchlight', 'Mountain'], hand: ['Lightning Bolt'] },
+      opp: [{}, { human: true }, {}],
+    }),
+  ),
   preset(
     'Baxter Building: four mana in any combination is one menu row',
     board({
