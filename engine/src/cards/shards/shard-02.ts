@@ -442,6 +442,7 @@ import _poolImplementOfExamination from "../pool/implement-of-examination.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIncubatorDrone from "../pool/incubator-drone.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
+import _poolInfectiousCurse from "../pool/infectious-curse.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolInfiniteDiversity from "../pool/infinite-diversity.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
@@ -1485,6 +1486,7 @@ const shard: CardShard = {
     _poolImpulsivity,
     _poolIncubatorDrone,
     _poolIndomitableArchangel,
+    _poolInfectiousCurse,
     _poolInfectiousHost,
     _poolInfiniteDiversity,
     _poolIngrisStingerquill,

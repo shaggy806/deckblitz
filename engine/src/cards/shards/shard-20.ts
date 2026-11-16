@@ -14,6 +14,7 @@ import _poolAbsoluteLaw from "../pool/absolute-law.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolAbstruseInterference from "../pool/abstruse-interference.js";
 import _poolAbyssalHunter from "../pool/abyssal-hunter.js";
+import _poolAccursedWitch from "../pool/accursed-witch.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAdrestia from "../pool/adrestia.js";
 import _poolAdversaryByAlgorithm from "../pool/adversary-by-algorithm.js";
@@ -1113,6 +1114,7 @@ const shard: CardShard = {
     _poolAbsorbingMan,
     _poolAbstruseInterference,
     _poolAbyssalHunter,
+    _poolAccursedWitch,
     _poolActOfTreason,
     _poolAdrestia,
     _poolAdversaryByAlgorithm,

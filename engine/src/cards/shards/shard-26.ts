@@ -113,6 +113,7 @@ import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBolgEreborsReckoning from "../pool/bolg-erebors-reckoning.js";
+import _poolBoltbender from "../pool/boltbender.js";
 import _poolBondOfRevival from "../pool/bond-of-revival.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
 import _poolBonnyPallClearcutter from "../pool/bonny-pall-clearcutter.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolBogardanDragonheart,
     _poolBoldImpaler,
     _poolBolgEreborsReckoning,
+    _poolBoltbender,
     _poolBondOfRevival,
     _poolBoneyardLurker,
     _poolBonnyPallClearcutter,

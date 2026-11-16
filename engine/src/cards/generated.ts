@@ -156,6 +156,7 @@ import _poolAccursedDuneyard from "./pool/accursed-duneyard.js";
 import _poolAccursedHorde from "./pool/accursed-horde.js";
 import _poolAccursedMarauder from "./pool/accursed-marauder.js";
 import _poolAccursedSpirit from "./pool/accursed-spirit.js";
+import _poolAccursedWitch from "./pool/accursed-witch.js";
 import _poolAceFearlessRebel from "./pool/ace-fearless-rebel.js";
 import _poolAcererakTheArchlich from "./pool/acererak-the-archlich.js";
 import _poolAcesBaseballBat from "./pool/aces-baseball-bat.js";
@@ -3093,6 +3094,7 @@ import _poolBolracClanCrusher from "./pool/bolrac-clan-crusher.js";
 import _poolBoltBend from "./pool/bolt-bend.js";
 import _poolBoltHound from "./pool/bolt-hound.js";
 import _poolBoltOfKeranos from "./pool/bolt-of-keranos.js";
+import _poolBoltbender from "./pool/boltbender.js";
 import _poolBoltwave from "./pool/boltwave.js";
 import _poolBoltwingMarauder from "./pool/boltwing-marauder.js";
 import _poolBomatBazaarBarge from "./pool/bomat-bazaar-barge.js";
@@ -4453,6 +4455,7 @@ import _poolChangelingTitan from "./pool/changeling-titan.js";
 import _poolChangelingWayfinder from "./pool/changeling-wayfinder.js";
 import _poolChangingLoyalty from "./pool/changing-loyalty.js";
 import _poolChannelTheSuns from "./pool/channel-the-suns.js";
+import _poolChannel from "./pool/channel.js";
 import _poolChanneledDragonfire from "./pool/channeled-dragonfire.js";
 import _poolChanneledForce from "./pool/channeled-force.js";
 import _poolChannelerInitiate from "./pool/channeler-initiate.js";
@@ -13700,6 +13703,7 @@ import _poolInfectedDefector from "./pool/infected-defector.js";
 import _poolInfectedVermin from "./pool/infected-vermin.js";
 import _poolInfectiousBite from "./pool/infectious-bite.js";
 import _poolInfectiousBloodlust from "./pool/infectious-bloodlust.js";
+import _poolInfectiousCurse from "./pool/infectious-curse.js";
 import _poolInfectiousHorror from "./pool/infectious-horror.js";
 import _poolInfectiousHost from "./pool/infectious-host.js";
 import _poolInfectiousInquiry from "./pool/infectious-inquiry.js";
@@ -22173,6 +22177,7 @@ import _poolResearchTheDeep from "./pool/research-the-deep.js";
 import _poolResearchThief from "./pool/research-thief.js";
 import _poolResearch from "./pool/research.js";
 import _poolResentfulRevelation from "./pool/resentful-revelation.js";
+import _poolReservoirKraken from "./pool/reservoir-kraken.js";
 import _poolReservoirWalker from "./pool/reservoir-walker.js";
 import _poolReset from "./pool/reset.js";
 import _poolReshapeTheEarth from "./pool/reshape-the-earth.js";
@@ -32162,6 +32167,7 @@ import _poolYathanTombguard from "./pool/yathan-tombguard.js";
 import _poolYavimayaAncients from "./pool/yavimaya-ancients.js";
 import _poolYavimayaAnts from "./pool/yavimaya-ants.js";
 import _poolYavimayaBarbarian from "./pool/yavimaya-barbarian.js";
+import _poolYavimayaBloomsage from "./pool/yavimaya-bloomsage.js";
 import _poolYavimayaCoast from "./pool/yavimaya-coast.js";
 import _poolYavimayaCradleOfGrowth from "./pool/yavimaya-cradle-of-growth.js";
 import _poolYavimayaDryad from "./pool/yavimaya-dryad.js";
@@ -33404,6 +33410,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAccursedHorde,
   _poolAccursedMarauder,
   _poolAccursedSpirit,
+  _poolAccursedWitch,
   _poolAceFearlessRebel,
   _poolAcererakTheArchlich,
   _poolAcesBaseballBat,
@@ -36341,6 +36348,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoltBend,
   _poolBoltHound,
   _poolBoltOfKeranos,
+  _poolBoltbender,
   _poolBoltwave,
   _poolBoltwingMarauder,
   _poolBomatBazaarBarge,
@@ -37701,6 +37709,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChangelingWayfinder,
   _poolChangingLoyalty,
   _poolChannelTheSuns,
+  _poolChannel,
   _poolChanneledDragonfire,
   _poolChanneledForce,
   _poolChannelerInitiate,
@@ -46948,6 +46957,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInfectedVermin,
   _poolInfectiousBite,
   _poolInfectiousBloodlust,
+  _poolInfectiousCurse,
   _poolInfectiousHorror,
   _poolInfectiousHost,
   _poolInfectiousInquiry,
@@ -55421,6 +55431,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolResearchThief,
   _poolResearch,
   _poolResentfulRevelation,
+  _poolReservoirKraken,
   _poolReservoirWalker,
   _poolReset,
   _poolReshapeTheEarth,
@@ -65410,6 +65421,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYavimayaAncients,
   _poolYavimayaAnts,
   _poolYavimayaBarbarian,
+  _poolYavimayaBloomsage,
   _poolYavimayaCoast,
   _poolYavimayaCradleOfGrowth,
   _poolYavimayaDryad,
@@ -66665,6 +66677,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/accursed-horde": _poolAccursedHorde,
   "pool/accursed-marauder": _poolAccursedMarauder,
   "pool/accursed-spirit": _poolAccursedSpirit,
+  "pool/accursed-witch": _poolAccursedWitch,
   "pool/ace-fearless-rebel": _poolAceFearlessRebel,
   "pool/acererak-the-archlich": _poolAcererakTheArchlich,
   "pool/aces-baseball-bat": _poolAcesBaseballBat,
@@ -69602,6 +69615,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bolt-bend": _poolBoltBend,
   "pool/bolt-hound": _poolBoltHound,
   "pool/bolt-of-keranos": _poolBoltOfKeranos,
+  "pool/boltbender": _poolBoltbender,
   "pool/boltwave": _poolBoltwave,
   "pool/boltwing-marauder": _poolBoltwingMarauder,
   "pool/bomat-bazaar-barge": _poolBomatBazaarBarge,
@@ -70962,6 +70976,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/changeling-wayfinder": _poolChangelingWayfinder,
   "pool/changing-loyalty": _poolChangingLoyalty,
   "pool/channel-the-suns": _poolChannelTheSuns,
+  "pool/channel": _poolChannel,
   "pool/channeled-dragonfire": _poolChanneledDragonfire,
   "pool/channeled-force": _poolChanneledForce,
   "pool/channeler-initiate": _poolChannelerInitiate,
@@ -80209,6 +80224,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/infected-vermin": _poolInfectedVermin,
   "pool/infectious-bite": _poolInfectiousBite,
   "pool/infectious-bloodlust": _poolInfectiousBloodlust,
+  "pool/infectious-curse": _poolInfectiousCurse,
   "pool/infectious-horror": _poolInfectiousHorror,
   "pool/infectious-host": _poolInfectiousHost,
   "pool/infectious-inquiry": _poolInfectiousInquiry,
@@ -88682,6 +88698,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/research-thief": _poolResearchThief,
   "pool/research": _poolResearch,
   "pool/resentful-revelation": _poolResentfulRevelation,
+  "pool/reservoir-kraken": _poolReservoirKraken,
   "pool/reservoir-walker": _poolReservoirWalker,
   "pool/reset": _poolReset,
   "pool/reshape-the-earth": _poolReshapeTheEarth,
@@ -98671,6 +98688,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/yavimaya-ancients": _poolYavimayaAncients,
   "pool/yavimaya-ants": _poolYavimayaAnts,
   "pool/yavimaya-barbarian": _poolYavimayaBarbarian,
+  "pool/yavimaya-bloomsage": _poolYavimayaBloomsage,
   "pool/yavimaya-coast": _poolYavimayaCoast,
   "pool/yavimaya-cradle-of-growth": _poolYavimayaCradleOfGrowth,
   "pool/yavimaya-dryad": _poolYavimayaDryad,

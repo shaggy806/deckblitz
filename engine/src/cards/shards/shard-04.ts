@@ -115,6 +115,7 @@ import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChancellorOfTheAnnex from "../pool/chancellor-of-the-annex.js";
 import _poolChandraChillOfCompliance from "../pool/chandra-chill-of-compliance.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
+import _poolChannel from "../pool/channel.js";
 import _poolChaoticStrike from "../pool/chaotic-strike.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
@@ -1132,6 +1133,7 @@ const shard: CardShard = {
     _poolChancellorOfTheAnnex,
     _poolChandraChillOfCompliance,
     _poolChangelingBerserker,
+    _poolChannel,
     _poolChaoticStrike,
     _poolChardalynDragon,
     _poolChasmDrake,

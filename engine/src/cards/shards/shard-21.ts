@@ -966,6 +966,7 @@ import _poolWormfangDrake from "../pool/wormfang-drake.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolXenograft from "../pool/xenograft.js";
+import _poolYavimayaBloomsage from "../pool/yavimaya-bloomsage.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolYouComeToTheGnollCamp from "../pool/you-come-to-the-gnoll-camp.js";
 import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
@@ -1963,6 +1964,7 @@ const shard: CardShard = {
     _poolWurmquake,
     _poolWylieDukeAtiinHero,
     _poolXenograft,
+    _poolYavimayaBloomsage,
     _poolYavimayaIconoclast,
     _poolYouComeToTheGnollCamp,
     _poolYuanTiFangBlade,

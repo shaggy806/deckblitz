@@ -723,6 +723,7 @@ import _poolRelicSloth from "../pool/relic-sloth.js";
 import _poolRemand from "../pool/remand.js";
 import _poolRendFlesh from "../pool/rend-flesh.js";
 import _poolReprobation from "../pool/reprobation.js";
+import _poolReservoirKraken from "../pool/reservoir-kraken.js";
 import _poolResoluteVeggiesaur from "../pool/resolute-veggiesaur.js";
 import _poolRetributiveWand from "../pool/retributive-wand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
@@ -1821,6 +1822,7 @@ const shard: CardShard = {
     _poolRemand,
     _poolRendFlesh,
     _poolReprobation,
+    _poolReservoirKraken,
     _poolResoluteVeggiesaur,
     _poolRetributiveWand,
     _poolReturnToDust,
