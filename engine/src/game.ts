@@ -15943,6 +15943,8 @@ export class Game {
     // don't own too (played off an opponent's exiled card).
     const owner = this.state.objects[cardId]?.owner;
     const under = owner !== undefined && owner !== player ? player : undefined;
+    // Exiled with a permanent, as it's played (Prowl, Stoic Strategist).
+    const exiledWith = this.exiledWithLink(cardId);
     const entered = this.moveObject(cardId, "battlefield", {
       played: true,
       ...(under !== undefined ? { under } : {}),
@@ -15970,6 +15972,7 @@ export class Game {
       object: cardId,
       from,
       ...(entry.permission !== undefined ? { permission: entry.permission } : {}),
+      ...(exiledWith !== undefined ? { exiledWith } : {}),
     });
     // Lake of the Dead that wasn't paid for never entered (`EnterInstead`).
     if (entered) this.emit({ type: "permanent-entered-battlefield", object: cardId });
@@ -23733,6 +23736,8 @@ export class Game {
     // once the costs are paid, below. A face-down spell goes there face down
     // (708.4): nobody else ever learns what was cast.
     const castDown = object.faceDown?.kind;
+    // Exiled with a permanent, as it's cast (Prowl, Stoic Strategist).
+    const exiledWith = this.exiledWithLink(cardId);
     this.moveObject(cardId, "stack", castDown !== undefined ? { faceDown: castDown } : {});
     // The player who casts a spell controls it (rule 601.2a) — a card cast
     // from an opponent's exile or library (Maralen) too.
@@ -24065,6 +24070,7 @@ export class Game {
       spellsThisTurn: this.state.players[player].spellsCastThisTurn,
       ...(via !== undefined ? { via: freeCastOf ?? via } : {}),
       ...(playedUnder !== undefined ? { permission: playedUnder } : {}),
+      ...(exiledWith !== undefined ? { exiledWith } : {}),
       from: castFrom,
     });
     if (exiledStint !== undefined) this.endUntilCastEffects(cardId, exiledStint);
@@ -36321,6 +36327,14 @@ export class Game {
         ) {
           return false;
         }
+        // "A card exiled with ~": exiled with this permanent in the stint
+        // it's in now, as it was played (Prowl, Stoic Strategist).
+        if (
+          spec.exiledWithThis === true &&
+          (event.exiledWith?.source !== self.id || event.exiledWith.stint !== (self.zoneChangeCount ?? 0))
+        ) {
+          return false;
+        }
         // A copy of a card cast isn't a card played (Recycle's ruling).
         if (event.type === "spell-cast" && this.state.objects[event.object]?.isCopy === true) return false;
         // The card played: the land on the battlefield, the spell on the stack.
@@ -47538,6 +47552,17 @@ controlledBy,
       return { source: carrier.permission.source.id, stint: carrier.permission.source.zoneChangeCount };
     }
     return undefined;
+  }
+
+  /** The permanent, in its stint, the card `id` in exile was exiled with
+   * (rule 607.2a): its `exiledWith` link, or its `exiledUntil` one. Read as
+   * it's played, before the move ends both — what the `spell-cast` /
+   * `land-played` event says (`plays-card`'s `exiledWithThis`). */
+  private exiledWithLink(id: ObjectId): PlayedUnder | undefined {
+    const card = this.state.objects[id];
+    if (card?.zone !== "exile") return undefined;
+    const link = card.exiledWith ?? card.exiledUntil;
+    return link === undefined ? undefined : { source: link.source, stint: link.zoneChangeCount };
   }
 
   /** Spend what this permission uses up as a card is played under it — before

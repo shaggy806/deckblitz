@@ -1355,6 +1355,13 @@ export type TriggerKind =
        * they do, exile the top card of their library" (the event's
        * `permission`). The player who played it is `"trigger-player"`. */
       readonly underThis?: true;
+      /** Only a card **exiled with this permanent** as it was played — in
+       * exile linked to its present stint (rule 607.2a; a double-faced
+       * permanent's two faces' abilities are linked, 607.1b), under whatever
+       * permission: Prowl, Stoic Strategist's "whenever a player plays a card
+       * exiled with Prowl", Voltaic Visionary's "when you play a card exiled
+       * with this creature" (the event's `exiledWith`). */
+      readonly exiledWithThis?: true;
     }
   | {
       /**

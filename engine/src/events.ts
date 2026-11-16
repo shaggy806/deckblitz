@@ -696,6 +696,8 @@ export type GameEvent =
       /** The permanent whose permission it was played under — see
        * `spell-cast`'s. */
       readonly permission?: PlayedUnder;
+      /** The permanent it was exiled with — see `spell-cast`'s. */
+      readonly exiledWith?: PlayedUnder;
     })
   | (Base & {
       readonly type: "permanent-tapped";
@@ -743,6 +745,11 @@ export type GameEvent =
        * static `mayPlay`, or one on the card linked to a source) — read by
        * `plays-card`'s `underThis` (Share the Spoils' "when they do"). */
       readonly permission?: PlayedUnder;
+      /** Cast from exile: the permanent, in its stint, the card was exiled
+       * with (rule 607.2a — its `exiledWith` or `exiledUntil` link), read
+       * before the move ended it. Read by `plays-card`'s `exiledWithThis`
+       * (Prowl, Stoic Strategist). */
+      readonly exiledWith?: PlayedUnder;
       /** The caster's spell count *including* this spell (the storm count —
        * ROADMAP Phase 8). Absent for a copy (a copy isn't cast). */
       readonly spellsThisTurn?: number;

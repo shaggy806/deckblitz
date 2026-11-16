@@ -2081,6 +2081,12 @@ export function parseTrigger(clause) {
     return [{ on: "state", state: m[1] === "no" ? { kind: "not", of: controls } : controls }];
   }
   if (/^Whenever ~ attacks or blocks$/.test(c)) return [...self("attacks"), ...self("blocks")];
+  // "Whenever a player plays a card exiled with ~" (Prowl, Stoic Strategist),
+  // "When you play a card exiled with this creature" (Voltaic Visionary): a
+  // card in exile linked to it as it was played (rule 607.2a).
+  if ((m = /^When(?:ever)? (a player|you) plays? a card exiled with (?:~|this creature)$/.exec(c))) {
+    return [{ on: "plays-card", who: m[1] === "you" ? "you" : "any", exiledWithThis: true }];
+  }
   // Mutate (rule 702.140d).
   if (/^Whenever ~ mutates$/.test(c)) return self("mutates");
   if (/^Whenever a creature you control mutates$/.test(c)) return [{ on: "mutates", who: "you-control" }];
