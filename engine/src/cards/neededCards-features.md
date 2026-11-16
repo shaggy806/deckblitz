@@ -334,6 +334,15 @@ one offer with no colour, and once the cost is paid the mana ability asks them �
 resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
 back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
 `test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+### "If the discarded card was an artifact card, exile it" — marked built 2026-11-16
+
+The key `effect:act-on-discarded-card` needed no engine code: `{ thisWay: "discarded" }` names the one card
+the resolution's own discard put in the graveyard (an `ObjectSetRef`, acted on while it's that object, rule
+400.7), the `this-way` `"discarded"` condition's `filter` takes `inZone: "graveyard"` ("from your
+graveyard": a card madness exiled instead isn't there), and "if you do" is the `"exiled"` condition, the
+token copy `of: { thisWay: "exiled" }` with its exceptions (707.9b). Leonardo da Vinci (rank 11168,
+top-1000 commander #693); his Thopters' base X/X is Jolrael's `become`. `test/act-on-discarded-card.test.ts`.
+
 ### "Mana from snow sources as though it were mana of any color" — built 2026-11-16
 
 The key `effect:spend-snow-as-any-color`. `SpendUnitAs` takes `unit: "snow"`: mana a snow source made,

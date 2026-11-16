@@ -2749,7 +2749,8 @@
   "effect:return-aura-cards-that-were-attached-from-graveyard",
   "effect:return-aura-cards-that-were-attached-from-graveyard",
   "static:graveyard-cast-filter-amount",
-  "effect:spend-snow-as-any-color"
+  "effect:spend-snow-as-any-color",
+  "effect:act-on-discarded-card"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
