@@ -2755,7 +2755,9 @@
   "trigger:manifests-dread",
   "cost:returned-for-cost-lki",
   "scope:each-player-with-life-total",
-  "zone:play-from-graveyard-surveilled-this-turn"
+  "zone:play-from-graveyard-surveilled-this-turn",
+  "zone:play-from-graveyard-surveilled-this-turn",
+  "trigger:spell-or-ability-put-on-stack"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

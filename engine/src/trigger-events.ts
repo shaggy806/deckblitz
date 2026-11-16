@@ -32,7 +32,10 @@ type EventOf<T extends GameEvent["type"]> = Extract<GameEvent, { type: T }>;
  * or `objects` for one event with several), otherwise its player.
  */
 export interface TriggerEventRow<T extends GameEvent["type"] = GameEvent["type"]> {
-  readonly type: T;
+  /** The event — or, for one trigger event the rules name that the engine
+   * announces as several, each of them: "a spell or ability is put onto the
+   * stack" is a cast, an activation, a trigger or a copy. */
+  readonly type: T | readonly T[];
   /** Narrows the event: a surveil, not a scry; a coin flip that was won. */
   when?(event: EventOf<T>): boolean;
   /** Whose act or state it is: the player who proliferated, the new
@@ -59,6 +62,11 @@ export interface TriggerEventRow<T extends GameEvent["type"] = GameEvent["type"]
 
 function row<T extends GameEvent["type"]>(r: TriggerEventRow<T>): TriggerEventRow {
   return r as unknown as TriggerEventRow;
+}
+
+/** The `GameEvent` types row `r` watches. */
+export function rowEventTypes(r: TriggerEventRow): readonly GameEvent["type"][] {
+  return typeof r.type === "string" ? [r.type] : (r.type as readonly GameEvent["type"][]);
 }
 
 export const TRIGGER_EVENTS = {
@@ -115,6 +123,22 @@ export const TRIGGER_EVENTS = {
   /** "Whenever you take the initiative" (rule 726) — again when they already
    * had it (726.5). */
   "takes-initiative": row({ type: "initiative-taken", player: (e) => e.player }),
+  /** "Whenever a spell or ability is put onto the stack" (Grip of Chaos —
+   * rules 405.1, 707.10): a spell cast (601.2i), an activated ability
+   * activated (602.2) or a triggered ability put there (603.3), or a copy of
+   * either put there (707.10) — once it's there with its targets chosen. The
+   * subject is that spell or ability ("it": `"trigger-object"`), `who`
+   * reading its controller. A mana ability never goes on the stack (605.3b):
+   * its activation names no ability, so nothing triggers. */
+  "put-on-stack": row({
+    type: ["spell-cast", "spell-copied", "ability-activated", "ability-triggered", "ability-copied"],
+    object: (e) =>
+      e.type === "spell-cast" || e.type === "ability-triggered"
+        ? e.object
+        : e.type === "ability-activated"
+          ? e.ability
+          : e.copy,
+  }),
   /** "Whenever you venture into the dungeon" (rule 701.49). */
   ventures: row({ type: "ventured", player: (e) => e.player }),
   /** "Whenever you complete a dungeon" (rule 309.7). */
@@ -264,9 +288,11 @@ export type TriggerEventName = keyof typeof TRIGGER_EVENTS;
 export const TRIGGER_EVENTS_BY_TYPE: ReadonlyMap<GameEvent["type"], readonly TriggerEventRow[]> = (() => {
   const byType = new Map<GameEvent["type"], TriggerEventRow[]>();
   for (const r of Object.values(TRIGGER_EVENTS) as TriggerEventRow[]) {
-    const list = byType.get(r.type);
-    if (list === undefined) byType.set(r.type, [r]);
-    else list.push(r);
+    for (const type of rowEventTypes(r)) {
+      const list = byType.get(type);
+      if (list === undefined) byType.set(type, [r]);
+      else list.push(r);
+    }
   }
   return byType;
 })();
@@ -283,8 +309,8 @@ export function triggerEventSubjects(
   name: TriggerEventName,
   event: GameEvent,
 ): { readonly objects?: readonly ObjectId[]; readonly player?: PlayerId } | undefined {
-  const r = TRIGGER_EVENTS[name];
-  if (event.type !== r.type) return undefined;
+  const r: TriggerEventRow = TRIGGER_EVENTS[name];
+  if (typeof r.type === "string" ? event.type !== r.type : !r.type.includes(event.type)) return undefined;
   if (r.when !== undefined && !r.when(event as never)) return undefined;
   if (r.objects !== undefined) return { objects: r.objects(event as never) };
   if (r.object !== undefined) {

@@ -325,6 +325,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Whenever a spell or ability is put onto the stack" — built 2026-11-16
+
+The key `trigger:spell-or-ability-put-on-stack`: the `TRIGGER_EVENTS` row `put-on-stack`. A row may now
+watch several `GameEvent` types (`type` a list, `rowEventTypes`): this one is a spell cast, an activated or
+triggered ability put there, or a copy of either (rules 405.1, 707.10), its subject the spell or ability on
+the stack, once its targets are chosen; a mana ability names none (605.3b). Grip of Chaos (rank 11094):
+"if it has a single target" is a `trigger-object` condition over `stackObjectTargets: { count: 1 }`
+(115.9a), and `change-targets` `"random"` of `"trigger-object"` (`effect:random-target`, already built)
+reselects it — `change-targets` now reads `"trigger-object"` only while it's still that spell (400.7).
+Its own trigger has no target, so it never triggers itself. `test/put-on-stack-trigger.test.ts`.
+
 ### Cards you've surveilled this turn, played from the graveyard for life — built 2026-11-16
 
 The key `zone:play-from-graveyard-surveilled-this-turn`. A surveil's cards are tagged as they land

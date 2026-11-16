@@ -22000,7 +22000,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         }
         return;
       }
-      const target = typeof spec.target === "number" ? ctx.targets[spec.target] : objectRefAct(spec.target, ctx);
+      // "Its target": the spell that fired this only while it's still that
+      // spell on the stack — not one cast again since (rule 400.7).
+      const target = typeof spec.target === "number" ? ctx.targets[spec.target] : movedRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.changeTargets(
           target,
