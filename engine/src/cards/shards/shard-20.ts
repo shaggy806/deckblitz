@@ -612,6 +612,7 @@ import _poolNecromentia from "../pool/necromentia.js";
 import _poolNecroskitter from "../pool/necroskitter.js";
 import _poolNehebDreadhordeChampion from "../pool/neheb-dreadhorde-champion.js";
 import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
+import _poolNightShiftOfTheLivingDead from "../pool/night-shift-of-the-living-dead.js";
 import _poolNightfireGiant from "../pool/nightfire-giant.js";
 import _poolNightmareIncursion from "../pool/nightmare-incursion.js";
 import _poolNimShrieker from "../pool/nim-shrieker.js";
@@ -1710,6 +1711,7 @@ const shard: CardShard = {
     _poolNecroskitter,
     _poolNehebDreadhordeChampion,
     _poolNemesisOfReason,
+    _poolNightShiftOfTheLivingDead,
     _poolNightfireGiant,
     _poolNightmareIncursion,
     _poolNimShrieker,

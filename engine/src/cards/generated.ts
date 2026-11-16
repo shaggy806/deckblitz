@@ -18701,6 +18701,7 @@ import _poolNightOfSoulsBetrayal from "./pool/night-of-souls-betrayal.js";
 import _poolNightOfTheSweetsRevenge from "./pool/night-of-the-sweets-revenge.js";
 import _poolNightRevelers from "./pool/night-revelers.js";
 import _poolNightScythe from "./pool/night-scythe.js";
+import _poolNightShiftOfTheLivingDead from "./pool/night-shift-of-the-living-dead.js";
 import _poolNightSoil from "./pool/night-soil.js";
 import _poolNightTerrors from "./pool/night-terrors.js";
 import _poolNight from "./pool/night.js";
@@ -32116,6 +32117,7 @@ import _poolXenagosTheReveler from "./pool/xenagos-the-reveler.js";
 import _poolXenicPoltergeist from "./pool/xenic-poltergeist.js";
 import _poolXenobotanist from "./pool/xenobotanist.js";
 import _poolXenograft from "./pool/xenograft.js";
+import _poolXenosquirrels from "./pool/xenosquirrels.js";
 import _poolXerexStrobeKnight from "./pool/xerex-strobe-knight.js";
 import _poolXiahouDunTheOneEyed from "./pool/xiahou-dun-the-one-eyed.js";
 import _poolXindiSurveyors from "./pool/xindi-surveyors.js";
@@ -33212,6 +33214,7 @@ import _tokensZabu from "./tokens/zabu.js";
 import _tokensZeppelin from "./tokens/zeppelin.js";
 import _tokensZombieBerserkerToken from "./tokens/zombie-berserker-token.js";
 import _tokensZombieDruidToken from "./tokens/zombie-druid-token.js";
+import _tokensZombieEmployeeToken from "./tokens/zombie-employee-token.js";
 import _tokensZombieGiantToken from "./tokens/zombie-giant-token.js";
 import _tokensZombieHorrorToken from "./tokens/zombie-horror-token.js";
 import _tokensZombieKnightToken from "./tokens/zombie-knight-token.js";
@@ -51932,6 +51935,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNightOfTheSweetsRevenge,
   _poolNightRevelers,
   _poolNightScythe,
+  _poolNightShiftOfTheLivingDead,
   _poolNightSoil,
   _poolNightTerrors,
   _poolNight,
@@ -65347,6 +65351,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolXenicPoltergeist,
   _poolXenobotanist,
   _poolXenograft,
+  _poolXenosquirrels,
   _poolXerexStrobeKnight,
   _poolXiahouDunTheOneEyed,
   _poolXindiSurveyors,
@@ -66449,6 +66454,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensZeppelin,
   _tokensZombieBerserkerToken,
   _tokensZombieDruidToken,
+  _tokensZombieEmployeeToken,
   _tokensZombieGiantToken,
   _tokensZombieHorrorToken,
   _tokensZombieKnightToken,
@@ -85176,6 +85182,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/night-of-the-sweets-revenge": _poolNightOfTheSweetsRevenge,
   "pool/night-revelers": _poolNightRevelers,
   "pool/night-scythe": _poolNightScythe,
+  "pool/night-shift-of-the-living-dead": _poolNightShiftOfTheLivingDead,
   "pool/night-soil": _poolNightSoil,
   "pool/night-terrors": _poolNightTerrors,
   "pool/night": _poolNight,
@@ -98591,6 +98598,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/xenic-poltergeist": _poolXenicPoltergeist,
   "pool/xenobotanist": _poolXenobotanist,
   "pool/xenograft": _poolXenograft,
+  "pool/xenosquirrels": _poolXenosquirrels,
   "pool/xerex-strobe-knight": _poolXerexStrobeKnight,
   "pool/xiahou-dun-the-one-eyed": _poolXiahouDunTheOneEyed,
   "pool/xindi-surveyors": _poolXindiSurveyors,
@@ -99687,6 +99695,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/zeppelin": _tokensZeppelin,
   "tokens/zombie-berserker-token": _tokensZombieBerserkerToken,
   "tokens/zombie-druid-token": _tokensZombieDruidToken,
+  "tokens/zombie-employee-token": _tokensZombieEmployeeToken,
   "tokens/zombie-giant-token": _tokensZombieGiantToken,
   "tokens/zombie-horror-token": _tokensZombieHorrorToken,
   "tokens/zombie-knight-token": _tokensZombieKnightToken,

@@ -1072,6 +1072,7 @@ import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
 import _tokensWolfToken from "../tokens/wolf-token.js";
 import _tokensX1ElementalTokenTrampleHaste from "../tokens/x-1-elemental-token-trample-haste.js";
+import _tokensZombieEmployeeToken from "../tokens/zombie-employee-token.js";
 import _tokensZombieTokenCurseOfTheRestlessDead from "../tokens/zombie-token-curse-of-the-restless-dead.js";
 
 const shard: CardShard = {
@@ -2147,6 +2148,7 @@ const shard: CardShard = {
     _tokensWarriorToken,
     _tokensWolfToken,
     _tokensX1ElementalTokenTrampleHaste,
+    _tokensZombieEmployeeToken,
     _tokensZombieTokenCurseOfTheRestlessDead,
   ],
 };

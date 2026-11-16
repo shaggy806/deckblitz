@@ -1008,6 +1008,7 @@ import _poolWrithingChrysalis from "../pool/writhing-chrysalis.js";
 import _poolWulfgarOfIcewindDale from "../pool/wulfgar-of-icewind-dale.js";
 import _poolXandeDarkMage from "../pool/xande-dark-mage.js";
 import _poolXenobotanist from "../pool/xenobotanist.js";
+import _poolXenosquirrels from "../pool/xenosquirrels.js";
 import _poolXolatoyacTheSmilingFlood from "../pool/xolatoyac-the-smiling-flood.js";
 import _poolYavimayaAncients from "../pool/yavimaya-ancients.js";
 import _poolYavimayaGnats from "../pool/yavimaya-gnats.js";
@@ -2066,6 +2067,7 @@ const shard: CardShard = {
     _poolWulfgarOfIcewindDale,
     _poolXandeDarkMage,
     _poolXenobotanist,
+    _poolXenosquirrels,
     _poolXolatoyacTheSmilingFlood,
     _poolYavimayaAncients,
     _poolYavimayaGnats,
