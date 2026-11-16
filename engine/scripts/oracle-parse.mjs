@@ -20373,6 +20373,23 @@ function parseGrantedStatic(quoted) {
   if (quoted === "You can't lose the game and your opponents can't win the game.") {
     return { affects: { scope: "self" }, prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }], text: quoted };
   }
+  // "If this permanent would be put into a graveyard, you may put it on top of
+  // its owner's library instead" (Pulmonic Sliver's grant): an optional
+  // replacement its controller is asked each time (`optional`). "This
+  // permanent" is ~ by now (`normalize`).
+  if ((m = /^If (?:~|this permanent|this creature) would (?:be put into a graveyard|die), you may (put it on top of its owner's library|put it on the bottom of its owner's library|return it to its owner's hand|exile it) instead\.$/.exec(quoted))) {
+    const instead = {
+      "put it on top of its owner's library": "library-top",
+      "put it on the bottom of its owner's library": "library-bottom",
+      "return it to its owner's hand": "hand",
+      "exile it": "exile",
+    }[m[1]];
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-be-put-into-graveyard", instead, self: true, from: "battlefield", optional: true },
+      text: quoted,
+    };
+  }
   return null;
 }
 
@@ -23659,6 +23676,15 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "All Sliver creatures have flying" (Winged Sliver, Pulmonic Sliver): every
+  // Sliver creature, whoever controls it, this one included.
+  if ((m = new RegExp(`^All Sliver creatures have ${KW}(?: and ${KW})?\\.$`).exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
+      grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
+      text,
+    };
+  }
   // "Bands with other legendary creatures" (rule 702.22b) for the
   // creatures of one colour you control — the Legends lands.
   if ((m = /^(White|Blue|Black|Red|Green) legendary creatures you control have "bands with other legendary creatures\."$/.exec(line))) {
@@ -23715,12 +23741,14 @@ function parseStatic(line, text) {
   // get +2/+2'" (Inspiring Leader), "All Sliver creatures have 'This creature
   // gets +1/+1 as long as you control a Swamp'" (Sedge Sliver). The quoted
   // line is read as a static of the object that has it.
-  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|Creatures you control|Creatures you control with flying|Creatures and enchantments you control|Planeswalkers you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
+  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|All Slivers|Creatures you control|Creatures you control with flying|Creatures and enchantments you control|Planeswalkers you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
     const affects = {
       "Equipped creature": { scope: "attached" },
       "Enchanted creature": { scope: "attached" },
       "Commander creatures you own": { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
       "All Sliver creatures": { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
+      // Sliver permanents of every type (Pulmonic Sliver).
+      "All Slivers": { scope: "filter", filter: { subtype: "Sliver" } },
       "Creatures you control": { scope: "creatures-you-control" },
       "Creatures you control with flying": { scope: "filter", filter: { type: "creature", keyword: "flying", controlledBy: "you" } },
       "Creatures and enchantments you control": { scope: "filter", filter: { typesAnyOf: ["creature", "enchantment"], controlledBy: "you" } },

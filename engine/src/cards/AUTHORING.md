@@ -7495,7 +7495,15 @@ The `prevent-damage` family makes the same record.
 - `{ event: "would-be-put-into-graveyard", instead: "library-top", self: true, from: "battlefield" }`
   — "if this creature would die, put it on top of its owner's library instead"
   (Gravebane Zombie). `notCycled: true` beside an exile's `filter` is "and it
-  wasn't cycled" (Abandoned Sarcophagus).
+  wasn't cycled" (Abandoned Sarcophagus). **`optional: true`** is "**you may** put
+  it … instead" — Pulmonic Sliver's `grantsStatic` under `affects: { scope:
+  "filter", filter: { subtype: "Sliver" } }` ("All Slivers have 'If this permanent
+  would be put into a graveyard, you may put it on top of its owner's library
+  instead'"). With `self` and `from: "battlefield"` only, printed or granted: the
+  move waits on the battlefield while its controller (rule 109.5) picks, as a
+  `choose-from-zone`, which of theirs leaving in the same event go there and in
+  what order; declined, any other replacement still applies (616.1).
+  `docs/plans/optional-graveyard-replacement.md`.
 - `{ event: "would-be-put-into-graveyard", instead: "exile", filter?, from? }`
   — Rest in Peace / Anafenza. `from: "battlefield"` is the **dies-only** form
   ("if a creature an opponent controls would die, exile it instead"): it lets

@@ -47,7 +47,7 @@ import type { CardPlayPermission, CastNowTerms, EffectPlay, PlayedUnder } from "
 import type { Journal } from "./journal.js";
 import type { ObjectSets, SetMember } from "./object-sets.js";
 export type { JournalOrigin, JournalWhat } from "./journal.js";
-import type { GameEvent, Vote } from "./events.js";
+import type { GameEvent, GameEventInput, Vote } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
@@ -2824,6 +2824,55 @@ export interface LeftBattlefield {
   readonly to: "graveyard" | "exile" | "hand" | "library" | "command";
 }
 
+/** The cards a simultaneous event has put into graveyards and exile so far,
+ * held unannounced while a move of it waits on an optional replacement's
+ * answer: "whenever one or more cards are put into …" sees the whole event
+ * once (`cards-put-into-graveyard`, `cards-put-into-exile`). */
+export interface HeldArrivals {
+  readonly graveyard: readonly { readonly object: ObjectId; readonly from: ZoneType }[];
+  readonly exile: readonly { readonly object: ObjectId; readonly from: ZoneType; readonly owner: PlayerId }[];
+}
+
+/** One permanent waiting on the battlefield for its controller's answer to an
+ * optional "would be put into a graveyard … you may … instead" replacement —
+ * see `GameState.pendingOptionalGraveyardMoves`. */
+export interface PendingOptionalGraveyardMove {
+  readonly object: ObjectId;
+  /** Its zone-change count as it would have left: an answer is carried out
+   * only on that object (rule 400.7). */
+  readonly stint: number;
+  /** Who answers: its controller as it would move ("you", rule 109.5). */
+  readonly player: PlayerId;
+  /** Where it goes if they take the replacement. */
+  readonly instead: "exile" | "library-top" | "library-bottom" | "hand";
+  /** The permanent the ability comes from — the one granting it (Pulmonic
+   * Sliver), or the permanent itself — named as the question's source. */
+  readonly source: ObjectId;
+  /** The moves that complete together: one simultaneous event's. */
+  readonly group: number;
+  /** What the move announces once made, as the caller would have had the
+   * move not waited (a destroy's `permanent-destroyed` — rule 701.8b — or a
+   * state-based action's). */
+  readonly announce?: readonly GameEventInput[];
+  /** The answer: taken, and where in the order picked (0 nearest the top);
+   * or declined. Absent until asked. */
+  readonly taken?: boolean;
+  readonly order?: number;
+  /** Arranged by its owner among their others going to the same place
+   * (rule 401.4): its place, 0 nearest the top. */
+  readonly arranged?: number;
+  /** Who gets priority once the group is carried out: whoever
+   * `prepareForPriority` was about to give it to as it asked. */
+  readonly priorityTo?: PlayerId;
+  /** The simultaneous event it belongs to (rule 603.10a), as a deferred
+   * commander's `leftWith` / `leftMoved` / `leftDied`, and the cards it put
+   * into graveyards and exile (`leftArrivals`). */
+  readonly leftWith?: readonly ObjectId[];
+  readonly leftMoved?: readonly LeftBattlefield[];
+  readonly leftDied?: readonly ObjectId[];
+  readonly leftArrivals?: HeldArrivals;
+}
+
 /** A counter a player can be asked how many of: energy too ("where X is the
  * amount of {E} you have" — Razorfield Ripper), which `PlayerState.energy` holds
  * and only its own effects change. */
@@ -3816,6 +3865,14 @@ export type AwaitingDecision =
        * (rule 401.4), the rest as a discard otherwise would, one
        * `cards-discarded` for them all. `reveal`: Nephalia Academy's. */
       readonly discardToLibrary?: { readonly cause?: PlayerId; readonly reveal?: true };
+      /** The `ids` are `player`'s permanents waiting on an optional "would be
+       * put into a graveyard … you may … instead" replacement
+       * (`GameState.pendingOptionalGraveyardMoves`, its `group`): the chosen
+       * ones go to `destination` instead, the first picked nearest the top
+       * (rule 401.4), the rest where they were going. With `arrange`, `player`
+       * is the owner of all of them, ordering where they go (401.4): every
+       * one is picked. Nothing moves until the whole group is answered. */
+      readonly graveyardInstead?: { readonly group: number; readonly arrange?: true };
       /** The cards picked are at stake — see the offer's `givesUp`. */
       readonly givesUp?: true;
       /** Set for a `choose-among-targets` choice (Barrin's Spite, Wake to
@@ -6745,6 +6802,10 @@ export interface GameState {
     /** That event's permanents already off the battlefield, and where to:
      * "whenever one or more … leave" waits on the last answer (`permanents-left`). */
     readonly leftMoved?: readonly LeftBattlefield[];
+    /** That event's permanents already in a graveyard, when it held
+     * "whenever one or more … die" too (`pendingCommanderMoves`' `leftDied`). */
+    readonly leftDied?: readonly ObjectId[];
+    readonly leftArrivals?: HeldArrivals;
     /** Where it waits meanwhile — the battlefield when absent. A 903.9a
      * offer waits in the graveyard or exile it's in. A commander put into
      * its owner's hand or library *from anywhere* is asked too (rule
@@ -6781,10 +6842,36 @@ export interface GameState {
     /** That event's permanents already off the battlefield, and where to:
      * "whenever one or more … leave" waits on the last answer (`permanents-left`). */
     readonly leftMoved?: readonly LeftBattlefield[];
+    /** That event's permanents already in a graveyard, held with `leftMoved`
+     * when an optional graveyard replacement was asked in it too
+     * (`pendingOptionalGraveyardMoves`): "whenever one or more … die" waits on
+     * the last answer (`permanents-died`) — and the cards it put into
+     * graveyards and exile, "whenever one or more cards are put into …". */
+    readonly leftDied?: readonly ObjectId[];
+    readonly leftArrivals?: HeldArrivals;
     readonly from?: CommanderMoveOrigin;
     readonly libraryPlacement?: CommanderLibraryPlacement;
     readonly heldByZoneChoice?: true;
   }[];
+  /**
+   * Permanents whose move to a graveyard waits on an optional replacement's
+   * answer ("If this permanent would be put into a graveyard, you may put it
+   * on top of its owner's library instead" — Pulmonic Sliver's grant,
+   * `GraveyardExileReplacement.optional`). `moveObject` leaves each on the
+   * battlefield and queues it here; `prepareForPriority` asks each `player`
+   * in APNAP order (rules 616.1, 101.4) about all of theirs in one `group` at
+   * once, as a `choose-from-zone` (`graveyardInstead`) — which go to
+   * `instead`, the first picked on top — and then an owner who isn't the
+   * chooser arranges any two or more of theirs going to one place in their
+   * library (rule 401.4). Once every one of a group is answered the moves are
+   * carried out together, as part of the simultaneous event that deferred
+   * them (`leftWith`, `leftMoved`, `leftDied` — rule 603.10a), and the
+   * resolution or cost that made them goes on. Optional so a snapshot saved
+   * before it existed still loads; absent when empty.
+   */
+  pendingOptionalGraveyardMoves?: PendingOptionalGraveyardMove[];
+  /** The last `PendingOptionalGraveyardMove.group` handed out. */
+  optionalGraveyardGroup?: number;
   /**
    * Commanders put into a graveyard or exile since state-based actions were
    * last checked, each with the zone-change count it arrived with. Rule

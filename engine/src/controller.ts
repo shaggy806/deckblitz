@@ -4725,6 +4725,24 @@ export class HeuristicBotController extends AutomaticController {
     if (forPlayer !== undefined && forPlayer !== this.playerId) {
       return this.leastUsefulTo(view.state, forPlayer, eligible, min);
     }
+    // Our permanents an optional replacement would put somewhere instead of
+    // a graveyard (Pulmonic Sliver's "on top of its owner's library"): a card
+    // of our own back in hand or on top of the library is a card we get
+    // again, the most useful on top; a token comes back as nothing, another
+    // player's card goes back to them, and the bottom of a library or exile
+    // is worse than a graveyard, so those go where they were going. Arranging
+    // them (every one is picked): the most useful on top.
+    if (awaiting?.kind === "choose-from-zone" && awaiting.graveyardInstead !== undefined) {
+      if (awaiting.graveyardInstead.arrange === true) {
+        return this.mostUsefulTo(view.state, this.playerId, eligible, eligible.length);
+      }
+      if (awaiting.destination !== "library-top" && awaiting.destination !== "hand") return [];
+      const ours = eligible.filter((id) => {
+        const object = view.state.objects[id];
+        return object !== undefined && object.owner === this.playerId && object.isToken !== true;
+      });
+      return this.mostUsefulTo(view.state, this.playerId, ours, ours.length);
+    }
     // Our own things to exile from several zones (Lich's Mastery, an
     // opponent's Nicol Bolas, Dragon-God): give up the least.
     if (awaiting?.kind === "choose-from-zone" && awaiting.acrossZones === true) {

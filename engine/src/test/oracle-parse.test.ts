@@ -8676,6 +8676,31 @@ describe("attach hosts (attachedTo among / a player / put-this-way, a chosen hos
     expect(face("Test", "Enchantment", 'Creatures you control have "This creature can\'t be the target of anything weird."').static).toEqual([]);
   });
 
+  it("reads 'All Slivers have' an optional graveyard replacement (Pulmonic Sliver)", () => {
+    const pulmonic = face(
+      "Pulmonic Sliver",
+      "Creature — Sliver",
+      'All Sliver creatures have flying.\nAll Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner\'s library instead."',
+    );
+    expect(pulmonic.complete).toBe(true);
+    expect(pulmonic.static[0]).toEqual({
+      affects: { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
+      grantKeywords: ["flying"],
+      text: "All Sliver creatures have flying.",
+    });
+    expect(pulmonic.static[1]).toEqual({
+      affects: { scope: "filter", filter: { subtype: "Sliver" } },
+      grantsStatic: [
+        {
+          affects: { scope: "self" },
+          replacement: { event: "would-be-put-into-graveyard", instead: "library-top", self: true, from: "battlefield", optional: true },
+          text: "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.",
+        },
+      ],
+      text: 'All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner\'s library instead."',
+    });
+  });
+
   it("reads an attach-only-to restriction", () => {
     expect(face("Gate Smasher", "Artifact — Equipment", "This Equipment can be attached only to a creature with toughness 4 or greater.").static[0]).toEqual({
       affects: { scope: "self" },

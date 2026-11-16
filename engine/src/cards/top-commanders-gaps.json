@@ -2717,7 +2717,8 @@
   "decision:ward-collect-evidence",
   "effect:cant-be-attacked-except-by-filter",
   "replacement:modify-die-result-after-roll",
-  "replacement:modify-roll-result"
+  "replacement:modify-roll-result",
+  "replacement:graveyard-to-library-top-optional"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

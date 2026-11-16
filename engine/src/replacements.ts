@@ -985,6 +985,21 @@ export interface GraveyardExileReplacement {
    * instead" (Wildwood Escort — rule 700.4): countered or discarded, it goes
    * to its graveyard. */
   readonly self?: true;
+  /** "…, **you may** put it on top of its owner's library instead" (Pulmonic
+   * Sliver's grant, "If this permanent would be put into a graveyard, …"): an
+   * optional replacement, which the permanent's controller as it would move
+   * ("you", rule 109.5 — the affected object's controller, 616.1) takes or
+   * declines each time. With `self` and `from: "battlefield"` only: it's
+   * read off the permanent's own statics, printed or granted
+   * (`StaticAbility.grantsStatic` — "All Slivers have …"), and only a
+   * permanent can wait on the battlefield for the answer. `Game.moveObject`
+   * defers the move (`GameState.pendingOptionalGraveyardMoves`) and asks
+   * each controller once for every permanent of theirs leaving in the same
+   * event, as a `choose-from-zone` (`graveyardInstead`): which go to
+   * `instead`, in what order (rule 401.4). Declined, it goes where it was
+   * going — another replacement (Rest in Peace) still applies to that move
+   * (rule 616.1). See `docs/plans/optional-graveyard-replacement.md`. */
+  readonly optional?: true;
 }
 
 /** A discarded card its owner may put on top of their library instead of anywhere

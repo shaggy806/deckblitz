@@ -8583,3 +8583,19 @@ Each board's die comes up 4.
 ### Night Shift of the Living Dead: two cards shift one die at a four-player table
 - **Do:** In this 4-player game, use Vegetation Abomination's ability. Pick "Xenosquirrels: Remove a +1/+1 counter: 4 → 5", then "Pay 1 life: 5 → 6".
 - **Expect:** The first banner fits and lists four shifts, each led by its card's name, and "Choose none". After the first, Xenosquirrels is 1/1 and the banner asks again with Night Shift's two alone ("Pay 1 life: 5 → 6", "Pay 1 life: 5 → 4"). You end at 45 life (40, less 1, plus 6), the log says "Alice rolls a d6: 4 → 6", and you get a 2/2 Zombie Employee token.
+## A Sliver that may go on top of its library instead of dying (2026-11-16)
+
+### Pulmonic Sliver: a destroyed Sliver may go on top of your library instead
+- **Do:** Cast Murder on Muscle Sliver. In the choice that opens, pick Muscle Sliver and confirm.
+- **Expect:** The popup reads "Instead of into a graveyard, you may put Muscle Sliver on top of its owner's library." and shows Muscle Sliver alone, still on the battlefield behind it. Once confirmed it goes to your library (one card more there); your graveyard holds Murder alone.
+- **Not a bug:** Confirming with nothing picked is allowed: then it dies as usual.
+
+### Pulmonic Sliver: a wrath asks once about all your Slivers
+- **Do:** Cast Wrath of God. Pick Winged Sliver, then Pulmonic Sliver, and confirm.
+- **Expect:** One popup, "Instead of into a graveyard, you may put any of these on top of their owner's library — the first you pick goes on top.", with your three Slivers (Pulmonic Sliver among them) and not Grizzly Bears. Winged Sliver and Pulmonic Sliver go to your library (two cards more there); Muscle Sliver and Grizzly Bears go to your graveyard.
+- **Not a bug:** Nobody sees the order they went on top in. Grizzly Bears is in the graveyard already while you choose: the Slivers wait for your answer, and the rules count them as leaving with it.
+
+### Pulmonic Sliver: a wrath with Slivers on every side (4 players)
+- **Do:** In this 4-player game, cast Wrath of God. Pick Pulmonic Sliver and confirm. As Bob, confirm with nothing picked.
+- **Expect:** Dave's Grizzly Bears goes to his graveyard at once. You're asked first, about Pulmonic Sliver alone, then Bob about his Muscle Sliver alone, then Carol about her Winged Sliver. The three Slivers stay on the battlefield until Carol has answered; then Pulmonic Sliver goes to your library, Bob's Muscle Sliver to his graveyard and Carol's Winged Sliver to her library (her bot keeps its own card), together.
+- **Not a bug:** The Bears leave before the Slivers on screen; in the rules they all left at once, and anything that triggers on them sees one event.

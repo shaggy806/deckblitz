@@ -402,7 +402,16 @@ import {
 } from "./object-sets.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer, voteChooser } from "./player-control.js";
-import type { AddedPhase, ChoosePermanentsResolution, LeftBattlefield, PlayerControl, ReplacementOrderOption, ReplacementOrderResume } from "./state.js";
+import type {
+  AddedPhase,
+  ChoosePermanentsResolution,
+  HeldArrivals,
+  LeftBattlefield,
+  PendingOptionalGraveyardMove,
+  PlayerControl,
+  ReplacementOrderOption,
+  ReplacementOrderResume,
+} from "./state.js";
 import { blockersRequiredBy, defendersForAttacker, mustBeBlockedByExactlyOne } from "./combat/eligibility.js";
 import { combatRuleWord } from "./combat/rules.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
@@ -2473,6 +2482,15 @@ export class Game {
    * right now — the one move of it `moveObject` must not defer again. Not
    * game state: it only ever spans that one synchronous call. */
   private completingCommanderMove: ObjectId | null = null;
+  /** The permanents whose optional graveyard replacement was answered and
+   * whose moves `completeOptionalGraveyardMoves` is making right now — moves
+   * `moveObject` mustn't defer again. Not game state: one synchronous call. */
+  private readonly completingOptionalMoves = new Set<ObjectId>();
+  /** What the caller of the `moveObject` under way announces once the move is
+   * made (a destroy's `permanent-destroyed`), for a move an optional
+   * replacement defers to announce when it's made (`PendingOptionalGraveyardMove
+   * .announce`). Set around that one call only. */
+  private announcingMove: readonly GameEventInput[] | null = null;
   /** The `sourceTimestamp` of the ability resolving right now, if one is —
    * how a `flicker` of its own source tells the permanent that put the
    * ability on the stack from a new object with the same id (rule 400.7).
@@ -2601,6 +2619,10 @@ export class Game {
     /** Those of `left` that went to a graveyard (rule 700.4). */
     readonly died: ObjectId[];
     readonly deferred: ObjectId[];
+    /** Those whose move waits on an optional graveyard replacement's answer
+     * (`GameState.pendingOptionalGraveyardMoves`), and the `group` they share. */
+    readonly optional: ObjectId[];
+    optionalGroup?: number;
     /** The event's victims as they were before any of them moved — see
      * {@link snapshotLeaving}. */
     readonly snapshots: Map<ObjectId, LastKnownInfo>;
@@ -7219,7 +7241,9 @@ export class Game {
       this.state.awaiting !== null ||
       this.state.zones.shared.stack.length > 0 ||
       this.state.pendingTriggers.length > 0 ||
-      this.state.suspendedResolutions.length > 0
+      this.state.suspendedResolutions.length > 0 ||
+      // Tokens woken to be asked about one by one stay apart until they move.
+      this.state.pendingOptionalGraveyardMoves !== undefined
     ) {
       return;
     }
@@ -7899,7 +7923,7 @@ export class Game {
       throw new Error("unreachable: whyCannotCommanderChoice should have caught this");
     }
 
-    const { commander, intendedZone, leftWith, leftMoved } = deferred;
+    const { commander, intendedZone, leftWith, leftMoved, leftDied, leftArrivals } = deferred;
     this.state.awaiting = null;
     if (deferred.heldByZoneChoice === true) {
       // A `choose-from-zone` putting it from its owner's hand into their
@@ -7953,7 +7977,7 @@ export class Game {
       }
       if (destination === "library") this.placeInLibrary(commander, deferred.libraryPlacement ?? "bottom");
       this.state.deferredCommanderMove = null;
-    }, leftWith, leftMoved);
+    }, leftWith, leftMoved, leftDied, leftArrivals);
     this.emit({
       type: "commander-zone-decision",
       object: commander,
@@ -9824,6 +9848,9 @@ export class Game {
     if (this.state.awaiting === null && (this.state.pendingEnterAttacking?.length ?? 0) > 0) {
       this.promptNextEnterAttacking();
     }
+    // And a permanent it would put into a graveyard that waits on an optional
+    // replacement (Pulmonic Sliver's grant) asks its controller.
+    this.raiseNextOptionalGraveyardMove(this.activePlayer);
     if (!this.decisionOutstanding()) {
       this.endResolutionIfDone();
       this.debugPlaceTriggers();
@@ -10654,6 +10681,9 @@ export class Game {
       // Before the SBAs, so a commander still waiting on the battlefield for
       // its 903.9b choice is asked about rather than swept up by them.
       this.raiseNextCommanderChoice();
+      // So too a permanent waiting for its optional graveyard replacement's
+      // answer (Pulmonic Sliver's grant).
+      this.raiseNextOptionalGraveyardMove(player);
       this.lapsePermissionsOfLostControl();
       // Not partway through a resolution (rule 704.3): a spell that paused
       // to ask for a discard is still resolving until its last step is done.
@@ -11810,6 +11840,12 @@ export class Game {
     // A face-down card in exile picked is its group picked: the card is
     // taken from that group at random (a processor — its ruling).
     if (awaiting.faceDownGroups !== undefined) chosen = this.drawFromFaceDownGroups(chosen, awaiting.faceDownGroups);
+    // Permanents waiting on an optional graveyard replacement (Pulmonic
+    // Sliver's grant): recorded, and moved once their whole group is answered.
+    if (awaiting.graveyardInstead !== undefined) {
+      this.answerOptionalGraveyardMoves(player, awaiting, chosen);
+      return;
+    }
     // A behold (rule 701.4a) moves nothing by `destination`: its own answer.
     if (awaiting.behold !== undefined) {
       this.applyBehold(player, chosen, awaiting);
@@ -31248,6 +31284,7 @@ export class Game {
       s.pendingDestruction.length > 0 ||
       s.deferredCommanderMove !== null ||
       s.pendingCommanderMoves.length > 0 ||
+      (s.pendingOptionalGraveyardMoves?.length ?? 0) > 0 ||
       s.pendingPayLifeForUntapped.length > 0 ||
       (s.pendingRollShifts?.length ?? 0) > 0
     );
@@ -34959,43 +34996,67 @@ export class Game {
    * done, every commander whose move this batch deferred is handed the
    * finished list to carry.
    */
-  private withLeaveBatch(fn: () => void, seed?: readonly ObjectId[], seedMoved?: readonly LeftBattlefield[]): void {
+  private withLeaveBatch(
+    fn: () => void,
+    seed?: readonly ObjectId[],
+    seedMoved?: readonly LeftBattlefield[],
+    /** That event's deaths so far, held for an answer (`leftDied`). */
+    seedDied?: readonly ObjectId[],
+    /** That event's arrivals in graveyards and exile so far (`leftArrivals`). */
+    seedArrivals?: HeldArrivals,
+  ): void {
     if (this.leaveBatch !== null) {
       fn();
       return;
     }
-    const batch = {
+    const batch: NonNullable<Game["leaveBatch"]> = {
       left: (seed ?? []).filter((id) => {
         const object = this.state.objects[id];
         return object !== undefined && object.zone !== "battlefield";
       }),
       moved: [...(seedMoved ?? [])],
-      died: [] as ObjectId[],
+      died: [...(seedDied ?? [])],
       deferred: [] as ObjectId[],
+      optional: [] as ObjectId[],
       snapshots: new Map<ObjectId, LastKnownInfo>(),
       endsWhileSource: [] as ObjectId[],
       phaseInAfter: [] as { readonly source: ObjectId; readonly zoneChangeCount: number }[],
     };
     this.leaveBatch = batch;
     try {
-      // What goes to graveyards goes together too.
-      this.withGraveyardEnterBatch(fn);
-      if (batch.died.length > 0) this.emit({ type: "permanents-died", died: batch.died, left: batch.left });
       // "Whenever one or more … leave": once the whole event has happened, a
       // commander's deferred move being part of it (rule 903.9b).
-      const waiting = [...batch.deferred, ...(seed ?? [])];
-      const answersOwed =
-        batch.deferred.length > 0 || this.state.pendingCommanderMoves.some((move) => waiting.includes(move.commander));
-      if (answersOwed) {
-        const deferred = this.state.deferredCommanderMove;
-        if (deferred !== null && waiting.includes(deferred.commander)) {
-          this.state.deferredCommanderMove = { ...deferred, leftMoved: batch.moved };
+      const waiting = (): ObjectId[] => [...batch.deferred, ...batch.optional, ...(seed ?? [])];
+      // A move still waiting on an optional graveyard replacement's answer
+      // may yet be a death: "whenever one or more … die", "… leave" and
+      // "… are put into a graveyard" all wait for the last answer, as one
+      // event (`holdLeaveAnnouncements`).
+      const optionalOwed = (): boolean =>
+        batch.optional.length > 0 ||
+        (this.state.pendingOptionalGraveyardMoves ?? []).some((move) => waiting().includes(move.object));
+      // What goes to graveyards goes together too.
+      const arrivals = this.withGraveyardEnterBatch(fn, {
+        ...(seedArrivals !== undefined ? { seed: seedArrivals } : {}),
+        hold: optionalOwed,
+      });
+      if (optionalOwed()) {
+        this.holdLeaveAnnouncements(waiting(), batch.moved, batch.died, arrivals);
+      } else {
+        if (batch.died.length > 0) this.emit({ type: "permanents-died", died: batch.died, left: batch.left });
+        const waits = waiting();
+        const answersOwed =
+          batch.deferred.length > 0 || this.state.pendingCommanderMoves.some((move) => waits.includes(move.commander));
+        if (answersOwed) {
+          const deferred = this.state.deferredCommanderMove;
+          if (deferred !== null && waits.includes(deferred.commander)) {
+            this.state.deferredCommanderMove = { ...deferred, leftMoved: batch.moved };
+          }
+          this.state.pendingCommanderMoves = this.state.pendingCommanderMoves.map((move) =>
+            waits.includes(move.commander) ? { ...move, leftMoved: batch.moved } : move,
+          );
+        } else if (batch.moved.length > 0) {
+          this.emit({ type: "permanents-left", left: batch.moved });
         }
-        this.state.pendingCommanderMoves = this.state.pendingCommanderMoves.map((move) =>
-          waiting.includes(move.commander) ? { ...move, leftMoved: batch.moved } : move,
-        );
-      } else if (batch.moved.length > 0) {
-        this.emit({ type: "permanents-left", left: batch.moved });
       }
     } finally {
       this.leaveBatch = null;
@@ -35005,11 +35066,13 @@ export class Game {
     // event — so a wrath that took Oubliette with it doesn't reach what it
     // held.
     if (batch.phaseInAfter.length > 0) this.afterUntilSourcesLeft(batch.phaseInAfter);
-    if (batch.deferred.length === 0 || batch.left.length + batch.deferred.length < 2) return;
+    const waited = batch.deferred.length + batch.optional.length;
+    if (waited === 0 || batch.left.length + waited < 2) return;
     // The other deferred commanders too: whichever of them is answered
     // later still left with the ones answered first (the seed drops any
-    // still on the battlefield, which see it the ordinary way).
-    const leftWith = [...batch.left, ...batch.deferred];
+    // still on the battlefield, which see it the ordinary way). And the
+    // permanents waiting on an optional replacement's answer, the same way.
+    const leftWith = [...batch.left, ...batch.deferred, ...batch.optional];
     const state = this.state;
     const deferred = state.deferredCommanderMove;
     if (deferred !== null && batch.deferred.includes(deferred.commander)) {
@@ -35018,6 +35081,41 @@ export class Game {
     state.pendingCommanderMoves = state.pendingCommanderMoves.map((move) =>
       batch.deferred.includes(move.commander) ? { ...move, leftWith } : move,
     );
+    if (batch.optional.length > 0 && state.pendingOptionalGraveyardMoves !== undefined) {
+      state.pendingOptionalGraveyardMoves = state.pendingOptionalGraveyardMoves.map((move) =>
+        batch.optional.includes(move.object) ? { ...move, leftWith } : move,
+      );
+    }
+  }
+
+  /**
+   * A simultaneous event in which a move still waits on an optional
+   * graveyard replacement's answer (`GameState.pendingOptionalGraveyardMoves`)
+   * — a wrath that took a Sliver: what it has done so far (`moved`, `died`)
+   * goes with each move still waiting, commanders' too, and is announced as
+   * one "whenever one or more … die / leave" event by whichever is carried
+   * out last (rule 603.10a), with whatever that one adds.
+   */
+  private holdLeaveAnnouncements(
+    waiting: readonly ObjectId[],
+    moved: readonly LeftBattlefield[],
+    died: readonly ObjectId[],
+    arrivals: HeldArrivals | null,
+  ): void {
+    const state = this.state;
+    const held = { leftMoved: moved, leftDied: died, ...(arrivals !== null ? { leftArrivals: arrivals } : {}) };
+    const deferred = state.deferredCommanderMove;
+    if (deferred !== null && waiting.includes(deferred.commander)) {
+      state.deferredCommanderMove = { ...deferred, ...held };
+    }
+    state.pendingCommanderMoves = state.pendingCommanderMoves.map((move) =>
+      waiting.includes(move.commander) ? { ...move, ...held } : move,
+    );
+    if (state.pendingOptionalGraveyardMoves !== undefined) {
+      state.pendingOptionalGraveyardMoves = state.pendingOptionalGraveyardMoves.map((move) =>
+        waiting.includes(move.object) ? { ...move, ...held } : move,
+      );
+    }
   }
 
   /**
@@ -54558,15 +54656,30 @@ controlledBy,
       this.destroyByEffect({ kind: "object", object: umbra }, false);
       return;
     }
-    if (!this.moveObject(id, "graveyard")) return;
     // Whose spell or ability did it: the one resolving (rule 608.2).
     const by = this.state.resolvingController;
-    this.emit({
+    const destroyed: GameEventInput = {
       type: "permanent-destroyed",
       object: id,
       reason: "destroyed",
       ...(by !== undefined ? { by } : {}),
-    });
+    };
+    // A move an optional replacement makes wait announces this once it's made.
+    if (!this.moveAnnouncing(id, [destroyed])) return;
+    this.emit(destroyed);
+  }
+
+  /** `moveObject(id, "graveyard")`, with what its caller announces once it's
+   * made: a move an optional graveyard replacement defers (Pulmonic Sliver)
+   * carries `announce` to announce when it's made (`announcingMove`). */
+  private moveAnnouncing(id: ObjectId, announce: readonly GameEventInput[]): boolean {
+    const outer = this.announcingMove;
+    this.announcingMove = announce;
+    try {
+      return this.moveObject(id, "graveyard");
+    } finally {
+      this.announcingMove = outer;
+    }
   }
 
   /**
@@ -55516,7 +55629,10 @@ controlledBy,
     // Its controller sacrifices it (rule 701.21a) — read before the move
     // hands it back to its owner.
     const sacrificer = object.controller;
-    if (!this.moveObject(source, "graveyard")) return false;
+    // Sacrificed whether it goes to the graveyard or, by a replacement,
+    // elsewhere (rule 701.21a): a move waiting on an optional replacement's
+    // answer (Pulmonic Sliver) is sacrificed too, and "if you do" holds.
+    if (!this.moveObject(source, "graveyard") && !this.optionalMoveWaiting(source)) return false;
     this.emit({ type: "permanent-sacrificed", object: source, player: sacrificer });
     return true;
   }
@@ -63563,11 +63679,14 @@ controlledBy,
             // Who sacrifices a completed Saga: its controller (rule 714.4),
             // read before the move hands it back to its owner.
             const controller = this.state.objects[id].controller;
-            if (!this.moveObject(id, "graveyard")) continue;
-            this.emit(event);
+            const announce: GameEventInput[] = [event];
             if (event.type === "saga-completed") {
-              this.emit({ type: "permanent-sacrificed", object: id, player: controller });
+              announce.push({ type: "permanent-sacrificed", object: id, player: controller });
             }
+            // A move an optional replacement makes wait announces these once
+            // it's made.
+            if (!this.moveAnnouncing(id, announce)) continue;
+            for (const one of announce) this.emit(one);
             changed = true;
           }
         });
@@ -64338,9 +64457,11 @@ controlledBy,
       moves.push({ id, event });
     };
     // A departed player's permanents aren't in the game (rule 800.4a): no
-    // state-based action applies to them.
-    const battlefield = this.state.zones.shared.battlefield.filter((id) =>
-      this.inGame(this.state.objects[id]),
+    // state-based action applies to them. Nor to one already on its way to a
+    // graveyard, waiting for an optional replacement's answer.
+    const waiting = this.state.pendingOptionalGraveyardMoves;
+    const battlefield = this.state.zones.shared.battlefield.filter(
+      (id) => this.inGame(this.state.objects[id]) && (waiting === undefined || !this.optionalMoveWaiting(id)),
     );
 
     for (const id of battlefield) {
@@ -66662,7 +66783,9 @@ controlledBy,
     // whichever zone it has the ability in.
     for (const ability of this.registry.get(rulesTextName(object)).static) {
       const r = ability.replacement;
-      if (r?.event !== "would-be-put-into-graveyard" || r.self !== true || r.instead === "exile") continue;
+      // An optional one ("you may …") is asked before the move
+      // (`optionalGraveyardInstead`), not taken here.
+      if (r?.event !== "would-be-put-into-graveyard" || r.self !== true || r.instead === "exile" || r.optional === true) continue;
       if (r.from === "battlefield" && object.zone !== "battlefield") continue;
       if (object.zone === "battlefield" || r.from === undefined) return r.instead;
     }
@@ -66692,12 +66815,353 @@ controlledBy,
         r?.event === "would-be-put-into-graveyard" &&
         r.instead === "exile" &&
         r.self === true &&
+        r.optional !== true &&
         // "If this creature would die" (Wildwood Escort): only from the
         // battlefield (rule 700.4), so a countered or discarded one goes to
         // its graveyard.
         (r.from !== "battlefield" || object.zone === "battlefield")
       );
     });
+  }
+
+  /**
+   * The permanent's own optional "if this permanent would be put into a
+   * graveyard, you may … instead" (`GraveyardExileReplacement.optional`):
+   * where it would go if its controller takes it, and the permanent the
+   * ability comes from — or `undefined`. Read from its text as it is now
+   * (rule 400.6: its own abilities that would affect the move), printed or
+   * granted: Pulmonic Sliver's "All Slivers have …" (`grantsStatic`), or a
+   * `grant-static` effect's.
+   *
+   * A granting permanent that left in the same event still grants it — the
+   * Pulmonic Sliver ruling, "applies to Pulmonic Sliver and any Slivers that
+   * would die at the same time as it" (603.10a's look back, as Rest in Peace
+   * gone with a wrath still exiles its victims): read off the batch's departed
+   * members as they last existed, an unconditional `"filter"`-scoped grant
+   * matched for its controller then. A Sliver among them already waits on the
+   * battlefield for its own answer, so this is for a granting permanent that
+   * wasn't asked (no longer a Sliver itself).
+   */
+  private optionalGraveyardInstead(
+    object: GameObject,
+  ): { readonly instead: PendingOptionalGraveyardMove["instead"]; readonly source: ObjectId } | undefined {
+    const optional = (ability: StaticAbility): boolean => {
+      const r = ability.replacement;
+      return r?.event === "would-be-put-into-graveyard" && r.self === true && r.optional === true;
+    };
+    const instead = (ability: StaticAbility): PendingOptionalGraveyardMove["instead"] =>
+      (ability.replacement as GraveyardExileReplacement).instead;
+    if (!hasLostAbilities(this.state, this.registry, object)) {
+      const own = this.registry.get(rulesTextName(object)).static.find((a) => optional(a) && this.staticActive(object, a));
+      if (own !== undefined) return { instead: instead(own), source: object.id };
+    }
+    const granted = grantedStatics(this.state, this.registry, object, optional).find(
+      (a) => optional(a) && this.staticActive(object, a),
+    );
+    if (granted !== undefined) {
+      // The permanent whose static grants it, for the question to name.
+      const by = this.state.zones.shared.battlefield.find((id) =>
+        this.registry.get(rulesTextName(this.state.objects[id])).static.some((s) => s.grantsStatic?.includes(granted) === true),
+      );
+      return { instead: instead(granted), source: by ?? object.id };
+    }
+    const batch = this.leaveBatch;
+    if (batch === null) return undefined;
+    for (const id of batch.left) {
+      const was = this.state.objects[id];
+      const last = was?.lastKnown;
+      if (was === undefined || was.zone === "battlefield" || last === undefined || last.lostAbilities) continue;
+      for (const ability of this.registry.get(last.textName ?? last.name).static) {
+        if (ability.condition !== undefined || ability.affects.scope !== "filter") continue;
+        const grants = (ability.grantsStatic ?? []).find(optional);
+        if (grants === undefined) continue;
+        if (ability.affects.excludeSelf === true && id === object.id) continue;
+        if (!matchesFilter(this.state, this.registry, object.id, ability.affects.filter, { you: last.controller, source: id })) {
+          continue;
+        }
+        return { instead: instead(grants), source: id };
+      }
+    }
+    return undefined;
+  }
+
+  /** Whether `object` goes to `instead` whichever way its controller
+   * answers, so there's nothing to ask: "if it would leave the battlefield,
+   * exile it instead of putting it anywhere else" (Whip of Erebos) takes it
+   * into exile from the library as from the graveyard, and its own mandatory
+   * "instead" (Gravebane Zombie's) may already send it to the same place. */
+  private optionalAnswerMoot(object: GameObject, instead: PendingOptionalGraveyardMove["instead"]): boolean {
+    if (object.exileIfItWouldLeave === true || hasExileIfLeavesAbility(this.state, this.registry, object)) return true;
+    return this.ownDestinationInstead(object) === instead;
+  }
+
+  /** Whether `id` waits on the battlefield for an optional graveyard
+   * replacement's answer (`GameState.pendingOptionalGraveyardMoves`). */
+  private optionalMoveWaiting(id: ObjectId): boolean {
+    const queue = this.state.pendingOptionalGraveyardMoves;
+    return queue !== undefined && queue.some((move) => move.object === id);
+  }
+
+  /**
+   * Leave `id` on the battlefield, waiting for its controller's answer to
+   * its optional graveyard replacement (`GameState.pendingOptionalGraveyardMoves`),
+   * in the group of the simultaneous event moving it (`leaveBatch`), with
+   * what its caller announces once it moves (`announcingMove`). A token
+   * stack is woken into its tokens first, each answered on its own — past
+   * `MAX_MATERIALIZED` the rest stay one stack, answered as one (engine
+   * resource safety, as combat's bound). Each keeps the last-known
+   * information it has now, as the event happens (rule 603.10a).
+   */
+  private deferOptionalGraveyardMove(
+    id: ObjectId,
+    instead: PendingOptionalGraveyardMove["instead"],
+    source: ObjectId,
+  ): void {
+    const state = this.state;
+    const batch = this.leaveBatch;
+    let group = batch?.optionalGroup;
+    if (group === undefined) {
+      group = (state.optionalGraveyardGroup ?? 0) + 1;
+      state.optionalGraveyardGroup = group;
+      if (batch !== null) batch.optionalGroup = group;
+    }
+    const woken = (state.objects[id].stackCount ?? 1) > 1;
+    const ids = woken ? this.materializeStack(id) : [id];
+    if (!ids.includes(id)) ids.push(id);
+    if (woken) invalidateComputedCache();
+    // Only what's announced about this permanent: a move nested inside the
+    // announcing one is of something else.
+    const announce = (this.announcingMove ?? []).filter((event) => "object" in event && event.object === id);
+    const queue = [...(state.pendingOptionalGraveyardMoves ?? [])];
+    for (const one of ids) {
+      const object = state.objects[one];
+      if (woken) object.lastKnown = this.takeLastKnown(one);
+      queue.push({
+        object: one,
+        stint: object.zoneChangeCount ?? 0,
+        player: object.controller,
+        instead,
+        source: source === id ? one : source,
+        group,
+        ...(announce.length > 0
+          ? { announce: announce.map((event) => ({ ...event, object: one }) as GameEventInput) }
+          : {}),
+      });
+      batch?.optional.push(one);
+    }
+    state.pendingOptionalGraveyardMoves = queue;
+  }
+
+  /**
+   * Ask the next optional graveyard replacement owed, once nothing else is
+   * being asked — or, every one of a group answered, carry its moves out.
+   * Of the oldest group: each controller in APNAP order (rules 616.1, 101.4)
+   * about all of their permanents in it at once, which go to `instead` and in
+   * what order (the first picked nearest the top — rule 401.4); then an owner
+   * who isn't the controller arranging two or more of theirs going to one
+   * place in their library (401.4). A permanent that has left meanwhile, or
+   * whose controller has left the game (800.4a), isn't asked about and isn't
+   * moved — but its group is still carried out, with what the event held for
+   * it. `priorityTo` is who `prepareForPriority` was about to give priority
+   * to: the group gives it to them once it's done.
+   */
+  private raiseNextOptionalGraveyardMove(priorityTo: PlayerId): void {
+    const state = this.state;
+    const gone = (move: PendingOptionalGraveyardMove): boolean => {
+      const object = state.objects[move.object];
+      return (
+        object === undefined ||
+        object.zone !== "battlefield" ||
+        (object.zoneChangeCount ?? 0) !== move.stint ||
+        state.players[move.player]?.hasLost === true
+      );
+    };
+    for (;;) {
+      const queue = state.pendingOptionalGraveyardMoves;
+      if (state.awaiting !== null || queue === undefined) return;
+      if (queue.length === 0) {
+        delete state.pendingOptionalGraveyardMoves;
+        return;
+      }
+      const group = queue[0].group;
+      state.pendingOptionalGraveyardMoves = queue.map((move) =>
+        move.group === group && move.priorityTo === undefined ? { ...move, priorityTo } : move,
+      );
+      const members = state.pendingOptionalGraveyardMoves.filter((move) => move.group === group && !gone(move));
+      const unanswered = members.filter((move) => move.taken === undefined);
+      const order = this.apnapOrder();
+      const rank = (player: PlayerId): number => {
+        const at = order.indexOf(player);
+        return at < 0 ? order.length : at;
+      };
+      if (unanswered.length > 0) {
+        const first = unanswered.reduce((a, b) => (rank(b.player) < rank(a.player) ? b : a));
+        const asked = unanswered.filter((move) => move.player === first.player && move.instead === first.instead);
+        this.askOptionalGraveyardMoves(first.player, asked, group, false);
+        return;
+      }
+      // Rule 401.4: two or more cards put into one place in a library at once
+      // are arranged by their owner — asked when someone else chose any of
+      // them; an owner who chose them all arranged them by the order picked.
+      const toLibrary = members.filter(
+        (move) =>
+          move.taken === true &&
+          move.arranged === undefined &&
+          (move.instead === "library-top" || move.instead === "library-bottom"),
+      );
+      if (toLibrary.length > 0) {
+        const ownerOf = (move: PendingOptionalGraveyardMove): PlayerId => state.objects[move.object].owner;
+        const head = toLibrary.reduce((a, b) => (rank(ownerOf(b)) < rank(ownerOf(a)) ? b : a));
+        const owner = ownerOf(head);
+        const theirs = toLibrary.filter((move) => ownerOf(move) === owner && move.instead === head.instead);
+        if (theirs.length >= 2 && theirs.some((move) => move.player !== owner) && state.players[owner]?.hasLost !== true) {
+          this.askOptionalGraveyardMoves(owner, theirs, group, true);
+          return;
+        }
+        const settled = new Set(theirs.map((move) => move.object));
+        state.pendingOptionalGraveyardMoves = state.pendingOptionalGraveyardMoves.map((move) =>
+          settled.has(move.object) ? { ...move, arranged: move.order ?? 0 } : move,
+        );
+        continue;
+      }
+      this.completeOptionalGraveyardMoves(group);
+    }
+  }
+
+  /** Put the question about `moves` (all `player`'s to answer) on `awaiting`:
+   * which to take, or with `arrange`, their order. */
+  private askOptionalGraveyardMoves(
+    player: PlayerId,
+    moves: readonly PendingOptionalGraveyardMove[],
+    group: number,
+    arrange: boolean,
+  ): void {
+    const ids = moves.map((move) => move.object);
+    const instead = moves[0].instead;
+    const one = ids.length === 1 ? this.state.objects[ids[0]].cardName : null;
+    const where =
+      instead === "library-top"
+        ? "on top of"
+        : instead === "library-bottom"
+          ? "on the bottom of"
+          : null;
+    const place = (whose: string): string =>
+      where !== null ? `${where} ${whose} library` : instead === "hand" ? `into ${whose} hand` : "into exile";
+    const prompt = arrange
+      ? `These go ${where ?? "into"} your library: put them in the order you pick — the first you pick goes ${instead === "library-bottom" ? "nearest the top" : "on top"}.`
+      : one !== null
+        ? `Instead of into a graveyard, you may put ${one} ${place("its owner's")}.`
+        : `Instead of into a graveyard, you may put any of these ${place("their owner's")}${where !== null ? ` — the first you pick goes ${instead === "library-bottom" ? "nearest the top" : "on top"}` : ""}.`;
+    const source = this.state.objects[moves[0].source];
+    if (source !== undefined) this.state.decisionSource = { object: source.id, cardName: printedCardName(source) };
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids,
+      eligible: ids,
+      min: arrange ? ids.length : 0,
+      max: ids.length,
+      destination: instead,
+      leftover: "stay",
+      prompt,
+      ...(arrange ? { order: true as const } : {}),
+      graveyardInstead: { group, ...(arrange ? { arrange: true as const } : {}) },
+    };
+  }
+
+  /** An answer to `askOptionalGraveyardMoves`: recorded on the waiting moves,
+   * then the next question or the group's moves (`raiseNextOptionalGraveyardMove`),
+   * and priority to whoever it was owed. */
+  private answerOptionalGraveyardMoves(
+    player: PlayerId,
+    awaiting: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
+    chosen: readonly ObjectId[],
+  ): void {
+    const asked = awaiting.graveyardInstead;
+    if (asked === undefined) return;
+    this.state.awaiting = null;
+    const queue = this.state.pendingOptionalGraveyardMoves ?? [];
+    const priorityTo = queue.find((move) => move.group === asked.group)?.priorityTo ?? this.activePlayer;
+    this.state.pendingOptionalGraveyardMoves = queue.map((move) => {
+      if (move.group !== asked.group || !awaiting.ids.includes(move.object)) return move;
+      const at = chosen.indexOf(move.object);
+      return asked.arrange === true
+        ? { ...move, arranged: at < 0 ? chosen.length : at }
+        : { ...move, taken: at >= 0, ...(at >= 0 ? { order: at } : {}) };
+    });
+    // What was taken is seen leaving for it; only the order stays hidden
+    // (rule 401.4), so the log names them in the order shown. Nothing taken,
+    // nothing to say: they go where they were going.
+    const taken = awaiting.ids.filter((id) => chosen.includes(id));
+    if (asked.arrange !== true && taken.length > 0) {
+      this.emit({
+        type: "cards-chosen-from-zone",
+        player,
+        objects: taken,
+        ...(awaiting.destination === "library-top" || awaiting.destination === "library-bottom"
+          ? { to: awaiting.destination }
+          : {}),
+      });
+    }
+    this.raiseNextOptionalGraveyardMove(priorityTo);
+    this.prepareForPriority(priorityTo);
+  }
+
+  /**
+   * Carry out a group's answered moves at once, as the simultaneous event
+   * they were deferred from (`leftWith`, `leftMoved`, `leftDied` — rule
+   * 603.10a), announcing each as its caller would have (`announce`). The
+   * ones taken go to `instead` — into a library in the order chosen or
+   * arranged, the first nearest the top — and the rest to the graveyard,
+   * where any other replacement of that move still applies (rule 616.1).
+   */
+  private completeOptionalGraveyardMoves(group: number): void {
+    const state = this.state;
+    const all = state.pendingOptionalGraveyardMoves ?? [];
+    const moves = all.filter((move) => move.group === group);
+    const rest = all.filter((move) => move.group !== group);
+    if (rest.length > 0) state.pendingOptionalGraveyardMoves = rest;
+    else delete state.pendingOptionalGraveyardMoves;
+    if (moves.length === 0) return;
+    const sample = moves[0];
+    // Into a library from the last to the first, each on top (or the first
+    // to the last, each on the bottom), so the first ends nearest the top.
+    const rank = (move: PendingOptionalGraveyardMove): number => move.arranged ?? move.order ?? 0;
+    const taken = moves.filter((move) => move.taken === true).sort((a, b) => rank(a) - rank(b));
+    const ordered = [
+      ...moves.filter((move) => move.taken !== true),
+      ...taken.filter((move) => move.instead !== "library-top"),
+      ...taken.filter((move) => move.instead === "library-top").reverse(),
+    ];
+    this.withLeaveBatch(
+      () => {
+        for (const move of ordered) {
+          const object = state.objects[move.object];
+          if (object === undefined || object.zone !== "battlefield" || (object.zoneChangeCount ?? 0) !== move.stint) continue;
+          const to: ZoneType =
+            move.taken !== true
+              ? "graveyard"
+              : move.instead === "library-top" || move.instead === "library-bottom"
+                ? "library"
+                : move.instead;
+          const placement = move.instead === "library-top" ? "top" : "bottom";
+          this.completingOptionalMoves.add(move.object);
+          let moved: boolean;
+          try {
+            moved = this.moveObject(move.object, to, to === "library" ? { libraryPlacement: placement } : {});
+          } finally {
+            this.completingOptionalMoves.delete(move.object);
+          }
+          if (!moved) continue;
+          if (to === "library") this.placeInLibrary(move.object, placement);
+          for (const event of move.announce ?? []) this.emit(event);
+        }
+      },
+      sample.leftWith ?? [],
+      sample.leftMoved,
+      sample.leftDied,
+      sample.leftArrivals,
+    );
   }
 
   /** Exert `id` (rule 701.43): only a permanent can be exerted (701.43c),
@@ -67311,7 +67775,10 @@ controlledBy,
         object.isCommander &&
         (this.state.deferredCommanderMove?.commander === id ||
           this.state.pendingCommanderMoves.some((m) => m.commander === id));
-      const kept = commanderWaiting && object.lastKnown?.zoneChangeCount === stint;
+      // So too one an optional graveyard replacement's answer deferred: the
+      // snapshot it was given as the event happened.
+      const optionalWaiting = this.completingOptionalMoves.has(id) || this.optionalMoveWaiting(id);
+      const kept = (commanderWaiting || optionalWaiting) && object.lastKnown?.zoneChangeCount === stint;
       if (!kept) {
         const pre = this.leaveBatch?.snapshots.get(id);
         const previous = object.lastKnown;
@@ -67338,6 +67805,26 @@ controlledBy,
     // goes where it was going (Draconian Gate-Bot's ruling).
     if ((to === "graveyard" || to === "hand" || to === "library") && this.isAttractionCard(object)) {
       to = "command";
+    }
+    // "If this permanent would be put into a graveyard, you may put it on top
+    // of its owner's library instead" (Pulmonic Sliver's grant — an optional
+    // replacement, `GraveyardExileReplacement.optional`): its controller says
+    // whether, so the move waits on the battlefield for the answer, asked by
+    // `prepareForPriority` (`raiseNextOptionalGraveyardMove`), and this
+    // returns `false` as a deferred commander's move does. Asked ahead of the
+    // other replacements below, since its controller chooses among them all
+    // (rule 616.1): declined, the move goes on to them — Rest in Peace, a
+    // finality counter or its own "instead" may still send it elsewhere — and
+    // taken, none of them applies to a move into a library. A permanent
+    // already waiting goes nowhere until it's answered (a second state-based
+    // check reaching it, say).
+    if (to === "graveyard" && leavingBattlefield && !this.completingOptionalMoves.has(id)) {
+      if (this.optionalMoveWaiting(id)) return false;
+      const optional = this.optionalGraveyardInstead(object);
+      if (optional !== undefined && !this.optionalAnswerMoot(object, optional.instead)) {
+        this.deferOptionalGraveyardMove(id, optional.instead, optional.source);
+        return false;
+      }
     }
     // "If this would be put into a graveyard from anywhere, reveal it and
     // shuffle it into its owner's library instead" (Blightsteel Colossus):
@@ -68492,13 +68979,20 @@ controlledBy,
    * or state-based sweep (`withLeaveBatch`), one mill, discard or surveil
    * each run inside one. Nested calls join the outer move.
    */
-  private withGraveyardEnterBatch(fn: () => void): void {
+  private withGraveyardEnterBatch(
+    fn: () => void,
+    /** A leave event's (`withLeaveBatch`): what it put there before a move
+     * of it waited on an optional replacement's answer (`seed`), and whether
+     * a move of it waits now (`hold`) — then nothing is announced, and what
+     * it put there is returned to be held for the last answer. */
+    held?: { readonly seed?: HeldArrivals; readonly hold: () => boolean },
+  ): HeldArrivals | null {
     if (this.graveyardEnterBatch !== null) {
       fn();
-      return;
+      return null;
     }
-    const batch: { object: ObjectId; from: ZoneType }[] = [];
-    const exiled: { object: ObjectId; from: ZoneType; owner: PlayerId }[] = [];
+    const batch: { object: ObjectId; from: ZoneType }[] = [...(held?.seed?.graveyard ?? [])];
+    const exiled: { object: ObjectId; from: ZoneType; owner: PlayerId }[] = [...(held?.seed?.exile ?? [])];
     this.graveyardEnterBatch = batch;
     this.exileEnterBatch = exiled;
     try {
@@ -68507,9 +69001,11 @@ controlledBy,
       this.graveyardEnterBatch = null;
       this.exileEnterBatch = null;
     }
+    if (held?.hold() === true) return batch.length + exiled.length > 0 ? { graveyard: batch, exile: exiled } : null;
     if (batch.length > 1) this.queueGraveyardOrders(batch.map((arrival) => arrival.object));
     if (batch.length > 0) this.emit({ type: "cards-put-into-graveyard", arrivals: batch });
     if (exiled.length > 0) this.emit({ type: "cards-put-into-exile", arrivals: exiled, ...this.exileCause() });
+    return null;
   }
 
   /**

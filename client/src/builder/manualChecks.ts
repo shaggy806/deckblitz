@@ -12974,4 +12974,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- A Sliver that may go on top of its library instead of dying (2026-11-16)
+  preset(
+    'Pulmonic Sliver: a destroyed Sliver may go on top of your library instead',
+    board({
+      you: { bf: ['Pulmonic Sliver', 'Muscle Sliver', 'Swamp*3'], hand: ['Murder'] },
+    }),
+  ),
+  preset(
+    'Pulmonic Sliver: a wrath asks once about all your Slivers',
+    board({
+      you: { bf: ['Pulmonic Sliver', 'Muscle Sliver', 'Winged Sliver', 'Grizzly Bears', 'Plains*4'], hand: ['Wrath of God'] },
+    }),
+  ),
+  preset(
+    'Pulmonic Sliver: a wrath with Slivers on every side (4 players)',
+    board({
+      you: { bf: ['Pulmonic Sliver', 'Plains*4'], hand: ['Wrath of God'] },
+      opp: [{ human: true, bf: ['Muscle Sliver'] }, { bf: ['Winged Sliver'] }, { bf: ['Grizzly Bears'] }],
+    }),
+  ),
 ]
