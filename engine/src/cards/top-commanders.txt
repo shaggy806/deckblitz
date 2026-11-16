@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-971 already implemented / 29 missing
+972 already implemented / 28 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -841,7 +841,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  835  Zurzoth, Chaos Rider                            3724 decks  {2}{R}           Legendary Creature — Devil
 [x]  836  Orah, Skyclave Hierophant                       3714 decks  {2}{W}{B}        Legendary Creature — Kor Cleric
 [x]  837  Beluna Grandsquall                              3693 decks  {G}{U}{R} // {2}{G}{U}{R} Legendary Creature — Giant Noble // Instant — Adventure
-[ ]  838  Chandra, Fire of Kaladesh                       3691 decks  {1}{R}{R}        Legendary Creature — Human Shaman // Legendary Planeswalker — Chandra
+[x]  838  Chandra, Fire of Kaladesh                       3691 decks  {1}{R}{R}        Legendary Creature — Human Shaman // Legendary Planeswalker — Chandra
 [x]  839  Marath, Will of the Wild                        3684 decks  {R}{G}{W}        Legendary Creature — Elemental Beast
 [x]  840  Meria, Scholar of Antiquity                     3680 decks  {1}{R}{G}        Legendary Creature — Elf Artificer
 [x]  841  Aerith Gainsborough                             3678 decks  {2}{W}           Legendary Creature — Human Cleric
