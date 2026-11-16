@@ -198,10 +198,13 @@ export type WideSpendAs = "any-color" | "any-type";
  * (Sunglasses of Urza), "colorless mana as though it were mana of any color"
  * (Abstruse Appropriation). A pip keeps its own colour too, so this widens the
  * pip rather than folding it into generic: `mana-payment.ts`'s
- * `pipsAsSpendable`.
+ * `pipsAsSpendable`. `unit: "snow"` is mana from a snow source, whatever its
+ * type (snow isn't a type of mana — rules 107.4h, 609.4b): Draugr
+ * Necromancer's "you may spend mana from snow sources as though it were mana
+ * of any color to cast those spells", `{ unit: "snow", as: "any-color" }`.
  */
 export interface SpendUnitAs {
-  readonly unit: ManaType;
+  readonly unit: ManaType | "snow";
   readonly as: Color | "any-color";
 }
 
@@ -397,7 +400,12 @@ export type HybridOption =
   /** Colorless mana specifically (rule 107.4c): the `{C}` half of a
    * colorless hybrid symbol (`{C/W}` — rule 107.4, Ulalek, Fused Atrocity),
    * or a pip a payment widened (`pipsAsSpendable`). */
-  | { readonly kind: "colorless" };
+  | { readonly kind: "colorless" }
+  /** One mana of any type from a snow source, paid as an `{S}` pip is (rule
+   * 107.4h): only a coloured pip a payment widened (`pipsAsSpendable`) —
+   * Draugr Necromancer's "mana from snow sources as though it were mana of
+   * any color". No printed symbol has it. */
+  | { readonly kind: "snow" };
 
 /** A single hybrid pip: the alternative payments it accepts, in the symbol's
  * written order (`{2/W}` → `[{2}, {W}]`, `{W/P}` → `[{W}, {P}]`). */

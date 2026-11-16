@@ -334,6 +334,18 @@ one offer with no colour, and once the cost is paid the mana ability asks them �
 resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
 back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
 `test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+### "Mana from snow sources as though it were mana of any color" — built 2026-11-16
+
+The key `effect:spend-snow-as-any-color`. `SpendUnitAs` takes `unit: "snow"`: mana a snow source made,
+whatever its type (snow isn't a type of mana, rule 107.4h), spent as though it were any colour (609.4b).
+`pipsAsSpendable` widens each coloured pip it covers with a `{ kind: "snow" }` half, which
+`resolveHybridCost` lowers to an `{S}` pip only when the pip's own colour can't be paid, so
+`planSnowPayment` picks the snow sources and `spendFromPool` spends snow units on it; a `{C}` pip still
+wants colorless mana. Draugr Necromancer (rank 11163): its die replacement is Dauthi Voidwalker's
+`withCounters` (an ice counter), its permission a static `mayPlay` from exile over opponent-owned cards with
+ice counters (`zone:cast-from-linked-exile` wasn't needed: any Draugr's ice counts, the ruling).
+`test/spend-snow-as-any-color.test.ts`.
+
 ### A graveyard permission's mana value against counters on its source — built 2026-11-16
 
 The key `static:graveyard-cast-filter-amount`. A static permission's `filter` (and `spell`) now reads an

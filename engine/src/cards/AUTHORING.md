@@ -6604,7 +6604,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   spent", `{C}` included; `{ unit: "W", as: "R" }` is one type of mana only
   (Sunglasses of Urza's "white mana as though it were red mana", and
   `{ unit: "C", as: "any-color" }` on an exile's `mayPlay`, Abstruse
-  Appropriation). Without `spell` it covers every mana cost they
+  Appropriation); `{ unit: "snow", as: "any-color" }` is mana from a snow
+  source, whatever its type, each coloured pip it pays planned as an `{S}`
+  pip (rule 107.4h — Draugr Necromancer's "mana from snow sources as though
+  it were mana of any color", on its `mayPlay`). Without `spell` it covers every mana cost they
   pay (Orrery); with it, only casting a spell that matches (Vizier of the
   Menagerie's "creature spells", from anywhere — its ruling). It changes how
   a cost may be paid, never the cost: the spell's mana value, converge's

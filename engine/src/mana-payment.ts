@@ -460,10 +460,14 @@ export function withLifeForPips(cost: ManaCost, colors: readonly Color[] | undef
  */
 export function pipsAsSpendable(cost: ManaCost, units: readonly SpendUnitAs[] | undefined): ManaCost {
   if (units === undefined || units.length === 0) return cost;
+  // Mana from a snow source pays the pip as an `{S}` pip would (Draugr
+  // Necromancer), so the planner picks snow sources for it.
   const extraFor = (color: Color): HybridOption[] =>
     units
       .filter((u) => u.unit !== color && (u.as === "any-color" || u.as === color))
-      .map((u): HybridOption => (u.unit === "C" ? { kind: "colorless" } : { kind: "color", color: u.unit }));
+      .map((u): HybridOption =>
+        u.unit === "C" ? { kind: "colorless" } : u.unit === "snow" ? { kind: "snow" } : { kind: "color", color: u.unit },
+      );
   const colored = { ...cost.colored };
   const widened: HybridPip[] = cost.hybrid.map((pip) => {
     const options = [...pip];
@@ -488,9 +492,10 @@ export function pipsAsSpendable(cost: ManaCost, units: readonly SpendUnitAs[] | 
 }
 
 /** `concrete` with one more pip paid by `option`, when it's one a payment can
- * simply add (a colour, or colorless mana on a widened pip). */
+ * simply add (a colour, or colorless or snow mana on a widened pip). */
 function withOptionPaid(concrete: ManaCost, option: HybridOption): ManaCost | null {
   if (option.kind === "colorless") return { ...concrete, colorless: concrete.colorless + 1 };
+  if (option.kind === "snow") return { ...concrete, snow: concrete.snow + 1 };
   if (option.kind !== "color") return null;
   return { ...concrete, colored: { ...concrete.colored, [option.color]: concrete.colored[option.color] + 1 } };
 }
