@@ -3678,6 +3678,12 @@ export type EffectSpec =
       /** Who deals it, when that isn't the effect's own source — see
        * {@link ObjectRef}. */
       readonly from?: ObjectRef;
+      /** Spare the one object this names, while it's still that object (rule
+       * 400.7): Kusari-Gama's "whenever equipped creature deals damage to a
+       * blocking creature, this Equipment deals that much damage to **each
+       * other creature** defending player controls" is `"trigger-recipient"`.
+       * One that has left is spared nothing — it isn't there. */
+      readonly except?: ObjectRef;
     }
   | {
       /** Every permanent matching `filter` deals `amount` damage to its own
@@ -12499,6 +12505,8 @@ export interface EffectApi {
     exceptSource?: boolean,
     whose?: readonly PlayerId[],
     from?: ObjectRef,
+    /** The permanent `except` names, spared. */
+    except?: ObjectId,
   ): void;
   /** Every battlefield permanent matching `filter` deals `amount` damage to
    * its own controller — see the `"creatures-damage-controllers"`
@@ -17715,15 +17723,19 @@ export function resolvePlayerRef(ref: PlayerRef, ctx: ResolutionContext): Player
     "controllerOf" in ref ? ref.controllerOf : "ownerOf" in ref ? ref.ownerOf : "assistantOf" in ref ? ref.assistantOf : ref.defendingPlayerOf,
     ctx,
   );
-  if (inner === undefined) return undefined;
   const player =
-    "controllerOf" in ref
-      ? ctx.controllerOf(inner)
-      : "ownerOf" in ref
-        ? ctx.ownerOf(inner)
-        : "assistantOf" in ref
-          ? ctx.assistantOf(inner)
-          : ctx.defendingPlayerOf(inner);
+    inner === undefined
+      ? undefined
+      : "controllerOf" in ref
+        ? ctx.controllerOf(inner)
+        : "ownerOf" in ref
+          ? ctx.ownerOf(inner)
+          : "assistantOf" in ref
+            ? ctx.assistantOf(inner)
+            : ctx.defendingPlayerOf(inner);
+  // A creature that never attacked this combat: the defending player meant
+  // otherwise (Kusari-Gama's blocking creature's controller).
+  if (player === undefined && "defendingPlayerOf" in ref && ref.orElse !== undefined) return resolvePlayerRef(ref.orElse, ctx);
   return player !== undefined && ctx.playersInScope("each-player").includes(player) ? player : undefined;
 }
 
@@ -19375,7 +19387,15 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (scoped === undefined) return;
         players = [scoped];
       }
-      ctx.damageAll(spec.filter, amountValue(spec.amount, ctx), spec.exceptSource === true, players, spec.from);
+      const spared = spec.except === undefined ? undefined : objectRefAct(spec.except, ctx);
+      ctx.damageAll(
+        spec.filter,
+        amountValue(spec.amount, ctx),
+        spec.exceptSource === true,
+        players,
+        spec.from,
+        spared?.kind === "object" ? spared.object : undefined,
+      );
       return;
     }
     case "creatures-damage-controllers":

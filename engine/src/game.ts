@@ -40015,10 +40015,10 @@ export class Game {
           by: controller,
         });
       },
-      damageAll: (filter, amount, exceptSource, whose, from) => {
+      damageAll: (filter, amount, exceptSource, whose, from, except) => {
         const by = damageSource(from);
         if (by === undefined) return;
-        this.damageAllByEffect(by.id, controller, filter, amount, exceptSource === true, by.lastKnown, whose);
+        this.damageAllByEffect(by.id, controller, filter, amount, exceptSource === true, by.lastKnown, whose, except);
       },
       creaturesDamageControllers: (filter, amount) =>
         this.creaturesDamageControllersByEffect(controller, filter, amount),
@@ -55596,12 +55596,15 @@ controlledBy,
     sourceLastKnown?: LastKnownInfo,
     /** Only permanents these players control (`damage-all`'s `whose`). */
     whose?: readonly PlayerId[],
+    /** The one permanent `damage-all`'s `except` spares. */
+    except?: ObjectId,
   ): void {
     if (amount <= 0) return;
     if (exceptSource) source = this.oneTokenSpared(source);
     this.withDamageBatch(() => {
       for (const id of [...this.state.zones.shared.battlefield]) {
         if (exceptSource && id === source) continue;
+        if (id === except) continue;
         if (whose !== undefined && !whose.includes(this.state.objects[id].controller)) continue;
         if (matchesFilter(this.state, this.registry, id, filter, { you })) {
           this.dealDamage(source, { kind: "object", object: id }, amount, false, sourceLastKnown);

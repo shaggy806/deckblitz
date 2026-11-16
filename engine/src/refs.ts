@@ -83,7 +83,13 @@ export type ObjectRef =
  * - `{ defendingPlayerOf }`: the player it's attacking, the controller of the
  *   planeswalker it's attacking, or the protector of the battle it's attacking;
  *   no longer attacking, the same as it was before it was removed from combat
- *   (rules 508.5, 310.9d).
+ *   (rules 508.5, 310.9d). `orElse` names the defending player meant when it
+ *   never attacked this combat: Kusari-Gama's "whenever equipped creature
+ *   deals damage to a blocking creature, … each other creature **defending
+ *   player** controls" is `{ defendingPlayerOf: "trigger-object", orElse:
+ *   "trigger-player" }` — the player its creature attacks (rule 802.2a), or,
+ *   for a creature that isn't attacking, the blocking creature's controller,
+ *   a defending player (509.1a).
  */
 export type PlayerRef =
   | "you"
@@ -107,7 +113,7 @@ export type PlayerRef =
   | { readonly target: number }
   | { readonly controllerOf: ObjectRef }
   | { readonly ownerOf: ObjectRef }
-  | { readonly defendingPlayerOf: ObjectRef }
+  | { readonly defendingPlayerOf: ObjectRef; readonly orElse?: PlayerRef }
   /** The player who helped pay for that spell through assist (rule
    * 702.132a) — Yume, Chronicler of Valor's "you and **that player** each
    * draw a card". Nobody when nobody did. */

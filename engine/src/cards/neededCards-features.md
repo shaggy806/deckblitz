@@ -398,6 +398,16 @@ action (704.5g), combat damage assignment and trample (`combat/damage.ts`'s `let
 (`CombatCreature.lethal`, v1's blocks, `damageLands`, divisions, sweeps). Lethal by power is at least 1: a
 0-power creature dies only with damage marked (the ruling). Zilortha, Strength Incarnate (rank 8983).
 `test/lethal-damage-by-power.test.ts`; design record `docs/plans/lethal-damage-by-power.md`.
+### Damage to each other creature the defending player controls — built 2026-11-16
+
+The key `effect:damage-all-except-trigger-recipient`: `damage-all`'s `except` (an `ObjectRef` spared while it's
+still that object — `"trigger-recipient"`), and `PlayerRef`'s `{ defendingPlayerOf, orElse }`, the defending
+player meant when the creature never attacked this combat (rule 802.2a for one that did). Kusari-Gama (rank
+10799): "whenever equipped creature deals damage to a blocking creature" is a `deals-damage` trigger with
+`toFilter: { blocking: true }`, and its sweep reaches the player that creature attacks, or — a pinger at home
+hitting a blocker — the blocker's controller. The line is the card's alone, so no scaffolder template.
+`test/damage-all-except-trigger-recipient.test.ts`.
+
 ### The next combat damage doubled or prevented — found built 2026-11-16
 
 The key `replacement:next-combat-damage-double-or-prevent` needed no engine code: a `flip-coin` whose `won` and
