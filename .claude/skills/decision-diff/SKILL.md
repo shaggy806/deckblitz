@@ -51,11 +51,17 @@ kind of decision on decks that raise it:
 cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:judge -- --kind attacks --seeds 1-3 --decks "Token Triumph,Grave Danger,World Shaper,Mardu Surge;Token Triumph,Grave Danger;The Ur-Dragon,Lathril,Atraxa,Giada"
 ```
 
-`--kind payments | discards | attacks | blocks | removal`; `--base` as above.
+`--kind payments | discards | attacks | blocks | removal | answers`; `--base` as above.
 `removal` is what a removal is aimed at and whether it is fired, judged two
 of the decider's turns on (an engine shows later than a block); it shadows
-each seat with the old build, so a game takes about twice as long. Add
-`--to-end` to play each line to the end of the game and count who won, and
+each seat with the old build, so a game takes about twice as long. `answers`
+is every other answer a spell or ability asks for (a sacrifice, a trigger's
+target, a mode, a word as a permanent enters): thirty to sixty a game. The
+baseline is built first (about ten minutes, kept by commit in
+`.scratch/baseline/`), and a run holds `engine/dist` still: don't rebuild
+while one plays. Add
+`--to-end` to play each line to the end of the game and count who won (about
+three hours for 40 games), and
 `--weights '{"tokenEngines":4}'` to judge evaluation weights without a build. Each deck
 set (`;` between them) and seed is a game, played `--parallel` at a time
 (default 6) and totalled at the bottom; a game is a few seconds to four

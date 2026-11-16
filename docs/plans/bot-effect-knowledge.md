@@ -1160,6 +1160,15 @@ them is unsafe (`diesSooner`). The same rule for the tap guard was built and tak
 position could be built where the bot would otherwise have tapped. Judged over 19 games it
 changed one attack, so it rests on its gate scenario.
 
+A screen of fresh seeds the same night (`bot:losses`, 24 games) showed the commoner shape:
+"dead to the table" is a sum (the later opponents at their weights, two life in reserve),
+and a seat dead by that sum to no single opponent was racing. So the crackback is also read
+opponent by opponent, alone and to the last point (`opponentsLethalAlone`): an attack that
+lets one opponent kill the bot alone who couldn't with its creatures home is unsafe. The
+cautious sum is right for calling a board safe and wrong for calling it lost. An attack that
+takes a player out is exempt: the first decision the judge showed this rule changing was a
+kill on a player at 3 life that it forbade, and the kill was the better line.
+
 **An answer is checked against the swing back.** A sacrifice, a trigger's target, a word as a
 permanent enters: `bestDecision` now ranks an answer that leaves the bot dead to the
 crackback below every answer that doesn't (`OPEN_ANSWER`), and above a lost game. The first

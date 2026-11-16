@@ -938,6 +938,35 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "dead only to three boards added up, keeps home the blockers no single one beats",
+    rule: "Dead to the table is not dead to each player at it: an attack mustn't let one opponent kill the bot alone who couldn't with its creatures home.",
+    run(weights, registry, makeBot) {
+      // From a screened loss (`bot:losses`, 2026-11-16, the upgraded
+      // precons, seed 11): Sultai Arisen on 26, two creatures home, read as
+      // dead by one point to three boards added up (the later ones at their
+      // weights, two life in reserve), so it raced with its 6/6. Nobody could
+      // kill it alone: the widest board got 24 through two blockers. That
+      // board then swung at it, into one blocker, for 27.
+      // Here: Dave's ten Giants put 24 through Alice's two blockers and 27
+      // through one; Carol's four add 3 at their half weight, which is what
+      // makes the sum lethal. Dave's are tapped from his own attack, so a
+      // creature sent at him is unblocked and can't trade one of them away.
+      const game = table(registry, [A, B, C, D], A);
+      game.state.players[A].life = 26;
+      onBoard(game, "Craw Wurm", A);
+      onBoard(game, "Hill Giant", A);
+      onBoard(game, "Grizzly Bears", B);
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Hill Giant", C);
+      for (let i = 0; i < 10; i += 1) onBoard(game, "Hill Giant", D, true);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      return {
+        passed: attackers.length === 0,
+        detail: `attacked with ${attackers.length} of 2${attackers.map((d) => ` (${game.state.objects[d.attacker]?.cardName} at ${String(d.defender)})`).join("")}`,
+      };
+    },
+  },
+  {
     name: "does not swing into a lethal crackback",
     rule: "Two free damage isn't worth dying to the swing back.",
     run(weights, registry, makeBot) {

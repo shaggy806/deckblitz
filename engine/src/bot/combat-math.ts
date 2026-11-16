@@ -347,6 +347,19 @@ export function crackback(
   return through;
 }
 
+/** The opponents whose attack is still to come before `me` untaps again, in
+ * the order they act: every living one from a turn of our own; in another
+ * player's turn, that player while its attack is still to be declared
+ * ({@link ATTACK_TO_COME}) and the players between it and `me`. */
+function opponentsToAct(state: GameState, me: PlayerId): PlayerId[] {
+  const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
+  const mine = order.indexOf(me);
+  const opponents = [...order.slice(mine + 1), ...order.slice(0, Math.max(0, mine))];
+  const active = state.turnOrder[state.turn.activePlayerIndex];
+  const acting = active === undefined ? -1 : opponents.indexOf(active);
+  return acting >= 0 ? opponents.slice(ATTACK_TO_COME.has(state.turn.step) ? acting : acting + 1) : opponents;
+}
+
 /**
  * {@link crackback}'s sum, one opponent at a time in the order they act:
  * `each` is told the opponent whose swing was just added and the damage
@@ -367,12 +380,7 @@ function crackbackByOpponent(
     lost === "all"
       ? []
       : combatCreatures(state, registry, me, true).filter((c) => lost === undefined || !lost.has(c.id));
-  const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
-  const mine = order.indexOf(me);
-  let opponents = [...order.slice(mine + 1), ...order.slice(0, Math.max(0, mine))];
-  const active = state.turnOrder[state.turn.activePlayerIndex];
-  const acting = active === undefined ? -1 : opponents.indexOf(active);
-  if (acting >= 0) opponents = opponents.slice(ATTACK_TO_COME.has(state.turn.step) ? acting : acting + 1);
+  const opponents = opponentsToAct(state, me);
 
   let damage = 0;
   let gained = 0;
@@ -398,6 +406,34 @@ function crackbackByOpponent(
     }
     if (!each(opponent, sofar())) return;
   }
+}
+
+/**
+ * The opponents still to act before `me` untaps whose swing kills it alone:
+ * each one's creatures able to attack into the blockers home, counted in
+ * full and by itself, with `margin` life in reserve (none by default).
+ *
+ * {@link crackback} adds the opponents up, the later ones at a weight, which
+ * is the cautious reading and right for calling a board safe. It is the
+ * wrong one for calling a board lost: three boards that kill only together
+ * rarely all swing at one player. A seat no single opponent can kill has
+ * something to protect, however the sum reads.
+ */
+export function opponentsLethalAlone(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  lost?: ReadonlySet<ObjectId> | "all",
+  margin = 0,
+): PlayerId[] {
+  const blockers =
+    lost === "all"
+      ? []
+      : combatCreatures(state, registry, me, true).filter((c) => lost === undefined || !lost.has(c.id));
+  return opponentsToAct(state, me).filter((opponent) => {
+    const attackers = combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack);
+    return isLethal(state, me, damageThrough(attackers, blockers), margin);
+  });
 }
 
 /**

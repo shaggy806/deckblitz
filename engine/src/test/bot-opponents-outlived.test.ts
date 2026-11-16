@@ -4,7 +4,7 @@
  * opponent whose swing kills, and the ones before it are lived through.
  */
 import { describe, expect, it } from "vitest";
-import { crackback, isLethal, opponentsOutlived } from "../bot/combat-math.js";
+import { crackback, isLethal, opponentsLethalAlone, opponentsOutlived } from "../bot/combat-math.js";
 import { A, B, C, D, spawn, table } from "./harness.js";
 
 /** Alice on 12 with three Hill Giants; Bob (next) with four, Carol with six
@@ -41,6 +41,19 @@ describe("the opponents a seat lives through", () => {
     spawn(game, "Hill Giant");
     spawn(game, "Grizzly Bears", B);
     expect(opponentsOutlived(game.state, game.registry, A, 0.5, undefined, KILL_SHOT, -2)).toEqual([B, C, D]);
+  });
+
+  it("names the opponents who kill alone, each by its own creatures and to the last point", () => {
+    const { game, mine } = board();
+    // Carol's six Wurms get 18 through three blockers: 12 life is dead to her alone.
+    expect(opponentsLethalAlone(game.state, game.registry, A)).toEqual([C]);
+    // Bob's four Giants need the blockers gone: 12 through nothing.
+    expect(opponentsLethalAlone(game.state, game.registry, A, "all")).toEqual([B, C]);
+    expect(opponentsLethalAlone(game.state, game.registry, A, new Set(mine.slice(0, 2)))).toEqual([C]);
+    // On 19, Carol's 18 kills only with life kept in reserve.
+    game.state.players[A].life = 19;
+    expect(opponentsLethalAlone(game.state, game.registry, A)).toEqual([]);
+    expect(opponentsLethalAlone(game.state, game.registry, A, undefined, -2)).toEqual([C]);
   });
 
   it("leaves the crackback's own sum as it was", () => {

@@ -62,7 +62,15 @@ import { collapseTwins } from "./twins.js";
 import type { TargetRef } from "../target.js";
 import type { Polarity } from "../target-polarity.js";
 import { decisionCandidates } from "./decisions.js";
-import { canBlock, combatCreatures, crackback, damageThrough, isLethal, opponentsOutlived } from "./combat-math.js";
+import {
+  canBlock,
+  combatCreatures,
+  crackback,
+  damageThrough,
+  isLethal,
+  opponentsLethalAlone,
+  opponentsOutlived,
+} from "./combat-math.js";
 import type { CombatCreature } from "./combat-math.js";
 import { DEFAULT_WEIGHTS, aimedOutcome, evaluateState, normalizeWeights, outcomeOf, scoreOutcome } from "./evaluate.js";
 import type { EvalOutcome } from "./evaluate.js";
@@ -2594,7 +2602,23 @@ export class EvalBotController extends HeuristicBotController {
     // to play before the one whose swing kills it. Racing is for when the
     // next swing kills it either way.
     const spared = deadAnyway ? this.outlives(state) : [];
-    const diesSooner = (after: GameState): boolean => this.diesSooner(after, spared);
+    // The opponents who have it dead alone. With some who don't, there is a
+    // swing it lives through and an attack can still cost it that.
+    const killers = deadAnyway ? opponentsLethalAlone(state, this.cards, me) : [];
+    const toAct = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost).length;
+    const somethingToLose = spared.length > 0 || killers.length < toAct;
+    const others = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost);
+    const diesSooner = (after: GameState): boolean =>
+      somethingToLose &&
+      this.diesSooner(
+        after,
+        spared,
+        // An attack that takes a player out is held to the opponents before
+        // the killer alone: the table it leaves is another table. Judged
+        // (2026-11-16), the kill on a player at 3 life that the wider
+        // reading forbade was the better line.
+        others.some((p) => after.players[p]?.hasLost === true) ? null : killers,
+      );
     // `crackbackGrowth` only sorts attacks while holding back passes it. When
     // even no attack reads as unsafe scaled up (but not plainly — that's
     // `deadAnyway`), every candidate would score `UNSAFE`, ranked by board
@@ -2603,7 +2627,7 @@ export class EvalBotController extends HeuristicBotController {
     // deaths. Then the plain check sorts them, as it did before the scaling.
     const grown = !this.crackbackLethal(state, true);
 
-    const alpha = this.alphaStrike(state, legal, deadAnyway, grown, budget, spared.length > 0 ? diesSooner : undefined);
+    const alpha = this.alphaStrike(state, legal, deadAnyway, grown, budget, somethingToLose ? diesSooner : undefined);
     if (alpha !== null) {
       this.lastDecision = audit("attackers", budget);
       return alpha;
@@ -3829,8 +3853,22 @@ export class EvalBotController extends HeuristicBotController {
    * Sultai Arisen, dead on paper to twelve Zombies two turns on, tapped out
    * for a kill and died next turn to a board its creatures would have held
    * (`bot:losses`, 2026-11-15).
+   *
+   * And "dead to the table" is a sum: three opponents' swings, the later
+   * ones at a weight, with life kept in reserve. `killers` are the opponents
+   * who had us dead alone, each by its own creatures and to the last point
+   * of life (`opponentsLethalAlone`); an attack after which another one
+   * does dies to a single swing it would have lived through. Sultai Arisen
+   * again, on 26: dead by one point to three boards added up, to none of
+   * them alone, it sent its 6/6 and the one board that then swung at it
+   * dealt 27 (`bot:losses`, 2026-11-16).
    */
-  private diesSooner(state: GameState, spared: readonly PlayerId[]): boolean {
+  private diesSooner(state: GameState, spared: readonly PlayerId[], killers: readonly PlayerId[] | null): boolean {
+    // `killers` null: an attack that eliminated a player, which is not held
+    // to this reading.
+    if (killers !== null && opponentsLethalAlone(state, this.cards, this.playerId).some((p) => !killers.includes(p))) {
+      return true;
+    }
     const still = spared.filter((p) => state.players[p]?.hasLost !== true);
     if (still.length === 0) return false;
     const now = this.outlives(state);
