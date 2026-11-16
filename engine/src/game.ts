@@ -2578,6 +2578,14 @@ export class Game {
     { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
   > | null = null;
 
+  /** Batched `becomes-target` triggers owed for the spell or ability whose
+   * targets are being announced (`announceTargeted`), per watcher ability:
+   * once for all its targets. Not game state, like `counterBatch`. */
+  private targetBatch: Map<
+    string,
+    { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+  > | null = null;
+
   /** `mills` triggers owed for the simultaneous mill under way
    * (`withMillBatch`), per watcher ability. Not game state, like
    * `counterBatch`. */
@@ -28823,8 +28831,34 @@ export class Game {
    * creature in two slots makes it "become the target" once (rule 115.7 /
    * 603.2 speak of the object becoming a target, not of each instance of
    * the word "target").
+   *
+   * A batched watcher ("whenever you and/or at least one permanent you
+   * control becomes the target" — Leyline of Combustion) triggers once for
+   * all of them (`targetBatch`), queued once every target is announced.
    */
   private announceTargeted(
+    targets: ResolvedTargets,
+    by: PlayerId,
+    source: ObjectId,
+    bySpell: boolean,
+    stackObject: ObjectId = source,
+    autoSlots: readonly number[] = [],
+  ): void {
+    if (this.targetBatch !== null) {
+      this.announceEachTargeted(targets, by, source, bySpell, stackObject, autoSlots);
+      return;
+    }
+    const batch: NonNullable<Game["targetBatch"]> = new Map();
+    this.targetBatch = batch;
+    try {
+      this.announceEachTargeted(targets, by, source, bySpell, stackObject, autoSlots);
+    } finally {
+      this.targetBatch = null;
+    }
+    for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);
+  }
+
+  private announceEachTargeted(
     targets: ResolvedTargets,
     by: PlayerId,
     source: ObjectId,
@@ -34648,6 +34682,19 @@ export class Game {
                 multiplier,
               );
             }
+            return;
+          }
+          // "Whenever you and/or at least one permanent you control becomes
+          // the target" (Leyline of Combustion): once for the spell or
+          // ability, however many of them it targets (603.2c).
+          if (
+            ability.trigger.on === "becomes-target" &&
+            ability.trigger.batched === true &&
+            (event.type === "object-targeted" || event.type === "player-targeted") &&
+            this.targetBatch !== null
+          ) {
+            const key = `${id}#${index}#${event.stackObject}`;
+            if (!this.targetBatch.has(key)) this.targetBatch.set(key, { ability, trigger: base, multiplier });
             return;
           }
           // "Whenever one or more counters are put on one or more …": once

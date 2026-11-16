@@ -331,8 +331,9 @@ export function timingCountable(spec: TriggerSpec): boolean {
       return true;
     case "becomes-target":
       // The journal's `targeted` entry doesn't keep the spell, so a
-      // `spellFilter` can't be asked of earlier ones.
-      return spec.playerOnly !== true && spec.spellFilter === undefined;
+      // `spellFilter` can't be asked of earlier ones; it counts objects, not
+      // the spells a `batched` watcher counts.
+      return spec.playerOnly !== true && spec.spellFilter === undefined && spec.batched !== true;
     case "step-begins":
       return spec.step === "upkeep";
     case "deals-combat-damage-to-player":

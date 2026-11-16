@@ -2242,14 +2242,17 @@ export function parseTrigger(clause) {
   // of a spell[ or ability][ an opponent controls]" (Amulet of Safekeeping,
   // Dormant Gomazoa), "whenever you or a permanent you control becomes …"
   // (Unsettled Mariner), "whenever a player or permanent becomes the target
-  // of an ability you control" (Loki).
-  if ((m = /^Whenever (you become|you or a permanent you control becomes|a player or permanent becomes) the target of (a spell or ability|a spell|an ability)( an opponent controls| you control)?$/.exec(c))) {
+  // of an ability you control" (Loki); "you and/or at least one permanent you
+  // control" once per spell or ability (Leyline of Combustion — `batched`).
+  if ((m = /^Whenever (you become|you or a permanent you control becomes|you and\/or at least one permanent you control becomes|a player or permanent becomes) the target of (a spell or ability|a spell|an ability)( an opponent controls| you control)?$/.exec(c))) {
     const by = m[3] === " an opponent controls" ? { byOpponentOnly: true } : m[3] === " you control" ? { byControllerOnly: true } : {};
     const kind = m[2] === "a spell" ? { spellOnly: true } : m[2] === "an ability" ? { abilityOnly: true } : {};
     const whose =
       m[1] === "you become"
         ? { who: "self", player: "you", playerOnly: true }
-        : m[1].startsWith("you or") ? { who: "you-control", player: "you" } : { who: "any", player: "any" };
+        : m[1].startsWith("you and/or")
+          ? { who: "you-control", player: "you", batched: true }
+          : m[1].startsWith("you or") ? { who: "you-control", player: "you" } : { who: "any", player: "any" };
     return [{ on: "becomes-target", ...whose, ...by, ...kind }];
   }
   // "For the first time each turn", by anyone's spell or ability (Angelic Cub).

@@ -1511,6 +1511,13 @@ export type TriggerKind =
       /** With `player`: players alone, no permanent — "whenever you become
        * the target of a spell" (Dormant Gomazoa, Amulet of Safekeeping). */
       readonly playerOnly?: true;
+      /** "Whenever you **and/or at least one** permanent you control becomes
+       * the target" (Leyline of Combustion): once per spell or ability,
+       * however many of the players and permanents it watches that spell or
+       * ability targets as it goes on the stack (the card's ruling; rule
+       * 603.2c) — not once per target. Its trigger object is the first of
+       * them; don't read it. */
+      readonly batched?: true;
       /** Only an *ability* targeting it, not a spell — "becomes the target of
        * an ability you control" (Loki, God of Mischief). `"activated"` is
        * only an activated ability, never a triggered one: "become the target

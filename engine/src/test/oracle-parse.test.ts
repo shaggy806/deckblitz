@@ -11853,6 +11853,18 @@ describe("a static acting on a player", () => {
       "Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {1}.",
     );
     expect(mariner.triggered[0].trigger).toEqual({ on: "becomes-target", who: "you-control", player: "you", byOpponentOnly: true });
+    // "You and/or at least one permanent": once per spell or ability (Leyline of Combustion).
+    const leyline = face(
+      "Enchantment",
+      "Whenever you and/or at least one permanent you control becomes the target of a spell or ability an opponent controls, this enchantment deals 2 damage to that player.",
+    );
+    expect(leyline.triggered[0].trigger).toEqual({
+      on: "becomes-target",
+      who: "you-control",
+      player: "you",
+      batched: true,
+      byOpponentOnly: true,
+    });
     const loki = face(
       "Legendary Creature",
       "Whenever a player or permanent becomes the target of an ability you control, draw a card. This ability triggers only once each turn.",
