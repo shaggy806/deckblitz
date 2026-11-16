@@ -4525,12 +4525,15 @@ export function cardTypesInGraveyards(
   registry: CardRegistry,
   you: PlayerId,
   filter: CardFilter,
+  /** A card to leave out — a spell cast from a graveyard, on the stack as
+   * its cost is worked out (rules 601.2a, 601.2f). */
+  except?: ObjectId,
 ): number {
   const types = new Set<CardType>();
   for (const player of state.turnOrder) {
     for (const id of state.zones.perPlayer[player]?.graveyard ?? []) {
       const object = state.objects[id];
-      if (object === undefined || object.isToken) continue;
+      if (object === undefined || object.isToken || id === except) continue;
       if (!matchesFilter(state, registry, id, filter, { you })) continue;
       for (const type of effectiveTypes(state, registry, object)) types.add(type);
     }

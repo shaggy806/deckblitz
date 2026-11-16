@@ -2791,6 +2791,10 @@ export function parseTrigger(clause) {
     ];
   }
   if (/^Whenever you discard one or more cards$/.test(c)) return [{ on: "discards", who: "you" }];
+  // Once per card, of a kind (Green Goblin, Nemesis; Oskar, Rubbish Reclaimer).
+  if ((m = /^Whenever you discard a (nonland|land) card$/.exec(c))) {
+    return [{ on: "discards", who: "you", perCard: true, filter: m[1] === "land" ? { type: "land" } : { notTypes: ["land"] } }];
+  }
   // The turn's first discard, read off its history (Rielle, the Everwise).
   if (/^Whenever you discard one or more cards for the first time each turn$/.test(c)) {
     return [{ on: "discards", who: "you", firstTimeEachTurn: true }];
@@ -6574,6 +6578,12 @@ export function parseSentence(sentence, ctx) {
       duration: "until-end-of-your-next-turn",
       ...(m[1] ? { spell: { subtype: "Adventure" } } : {}),
     };
+  }
+  // "Whenever you discard a nonland card, you may cast it from your
+  // graveyard" (Oskar, Rubbish Reclaimer): now, as the trigger resolves —
+  // the card where the discard put it, if that's your graveyard.
+  if (ctx.it === "trigger-object" && ctx.targets.length === 0 && ctx.departed === undefined && re("you may cast it from your graveyard").test(s)) {
+    return { kind: "cast-now", target: "trigger-object", spell: { inZone: "graveyard", ownedBy: "you" } };
   }
   if (ctx.it === "trigger-object" && ctx.targets.length === 0) {
     if (re("search your library for a card with the same name as that creature, reveal it, put it into your hand, then shuffle").test(s)) {
@@ -19992,6 +20002,8 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "counters-put" && t.byYou === true && t.who === "any")) return "trigger-object";
   // "That card": the one put into the graveyard, when it's once per card.
   if (triggers.every((t) => t.on === "put-into-graveyard" && t.batched !== true)) return "trigger-object";
+  // "It": the card discarded, once per card (Oskar, Rubbish Reclaimer).
+  if (triggers.every((t) => t.on === "discards" && t.perCard === true)) return "trigger-object";
   // "Whenever Ma Chao attacks alone, it …"; "whenever this creature evolves, …
   // a copy of it".
   if (triggers.every((t) => (t.on === "attacks-alone" || t.on === "evolves") && t.who === "self")) return "source";
@@ -20721,6 +20733,8 @@ function costEachAmount(phrase) {
     "card type among permanents you've sacrificed this turn": { turnHistory: "sacrificed", cardTypes: true },
     "{E} you've paid or lost this turn": { turnStat: "energy-paid-or-lost", who: "you" },
     "basic land type among lands you control": { basicLandTypes: "you" },
+    // Oskar, Rubbish Reclaimer: cast from the graveyard, itself left out.
+    "different mana value among cards in your graveyard": { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
   }[phrase];
   if (fixed !== undefined) return fixed;
   let m;

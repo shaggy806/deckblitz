@@ -26205,7 +26205,7 @@ export class Game {
     // apart until the targets settle which apply.
     const perTarget = new Map<ObjectId, { increase: number; reduce: number; leavingOne: number }>();
     const amount = (value: EffectAmount | undefined, by: ObjectId): number =>
-      value === undefined ? 0 : this.costAmount(value, this.state.objects[by]?.controller ?? player, by, sourceId);
+      value === undefined ? 0 : this.costAmount(value, this.state.objects[by]?.controller ?? player, by, sourceId, false);
     for (const { controller, source, mod } of this.abilityCostModifiers()) {
       if (!this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod)) continue;
       // "The first activated ability of an artifact you activate each turn"
@@ -34883,6 +34883,12 @@ export class Game {
         // Damage dealt by a permanent that had already left (a dies
         // trigger's "it deals damage"): "it" is as it last existed there.
         triggerStint = t.lastKnown.zoneChangeCount;
+      } else if (t !== undefined && event.type === "cards-discarded" && event.objects.includes(triggerObject)) {
+        // A discarded card, where the discard put it (its graveyard, or
+        // exile for madness): "it" is followed no further, since a card that
+        // moves again is a new object (rule 400.7) — Oskar, Rubbish
+        // Reclaimer's "you may cast it from your graveyard".
+        afterLeaving = t.zoneChangeCount ?? 0;
       }
     }
     // What the event was aimed at, and "that player": the recipient of
@@ -34992,6 +34998,7 @@ export class Game {
       roll === undefined &&
       sourceStint === undefined &&
       triggerStint === undefined &&
+      afterLeaving === undefined &&
       triggerSpell === undefined &&
       recipient === undefined &&
       player === undefined &&
@@ -38355,6 +38362,12 @@ export class Game {
       readonly announcedModes?: readonly number[];
       readonly division?: readonly number[];
       readonly priced?: ObjectId;
+      /** `priced` is a spell being cast: it's on the stack as its cost is
+       * worked out (rules 601.2a, 601.2f), wherever the card is while the
+       * cast is only offered, so what counts the cards in graveyards leaves
+       * it out — Oskar, Rubbish Reclaimer cast from a graveyard doesn't count
+       * its own mana value. */
+      readonly pricedSpell?: true;
       /** A cost act is being paid, by this player, to whom priority goes (`Game.payCostAct`). */
       readonly payingCost?: PlayerId;
       /** Where "this way" starts, for a mana ability whose first instruction
@@ -38367,6 +38380,9 @@ export class Game {
     // Where "this way" starts: the resolution under way (every continuation
     // of it reads the same), or — outside one — this context's own start.
     const since = opts.since ?? this.state.resolutionSince ?? this.state.eventSeq;
+    // The spell whose cost is being worked out: on the stack, out of every
+    // graveyard count (`pricedSpell`).
+    const pricedOnStack = opts.pricedSpell === true ? opts.priced : undefined;
     const expectedZoneOf = (target: TargetRef): ZoneType | null => {
       if (target.kind !== "object") return null;
       const i = (opts.readTargets ?? targets).findIndex(
@@ -39517,7 +39533,7 @@ export class Game {
         return read?.greatest === undefined ? cast.length : cast.reduce((n, { spell }) => Math.max(n, spell.manaValue), 0);
       },
       countersPutThisTurn: (spec) => countersPutThisTurn(this.state, spec, controller),
-      countInGraveyard: (filter, you = controller, except) => {
+      countInGraveyard: (filter, you = controller, except = pricedOnStack) => {
         let n = 0;
         for (const player of this.state.turnOrder) {
           for (const id of this.state.zones.perPlayer[player].graveyard) {
@@ -39720,7 +39736,7 @@ export class Game {
           ),
         ),
       cardTypesInGraveyard: (filter) =>
-        cardTypesInGraveyards(this.state, this.registry, controller, filter),
+        cardTypesInGraveyards(this.state, this.registry, controller, filter, pricedOnStack),
       thisWay: thisWayDone,
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
       playerCountersRemovedThisWay: (players) => playerCountersRemovedSince(this.state, since, players),
@@ -41448,7 +41464,10 @@ controlledBy,
       // "Among them": the attackers of the declaration that fired this
       // trigger, as `AggregateZone` "attackers" reads them.
       aggregate: (spec, except, you = controller, each) =>
-        this.aggregateBattlefield(you, spec, except, { members: (ref) => setMatches(ref, each), source }),
+        this.aggregateBattlefield(you, spec, pricedOnStack === undefined ? except : [...except, pricedOnStack], {
+          members: (ref) => setMatches(ref, each),
+          source,
+        }),
       returnFromGraveyard: (filter, destination, count, enterTapped, withCounters, opts) =>
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
       discardCards: (target, amount, random, unlessOne, anyNumber, filter) =>
@@ -52201,15 +52220,18 @@ controlledBy,
     return ref === undefined ? null : Math.max(0, ctx.manaValueOf(ref));
   }
 
-  private costAmount(amount: EffectAmount, player: PlayerId, sourceId: ObjectId, pricedId?: ObjectId): number {
+  private costAmount(
+    amount: EffectAmount,
+    player: PlayerId,
+    sourceId: ObjectId,
+    pricedId?: ObjectId,
+    /** `pricedId` is a spell being cast, as it is unless an activated
+     * ability's source is what's priced: see `pricedSpell`. */
+    pricedIsSpell = true,
+  ): number {
     if (typeof amount === "number") return amount;
-    return Math.max(
-      0,
-      amountValue(
-        amount,
-        this.makeResolutionContext(sourceId, player, [], 0, 0, undefined, 1, 0, [], {}, pricedId === undefined ? {} : { priced: pricedId }),
-      ),
-    );
+    const opts = pricedId === undefined ? {} : { priced: pricedId, ...(pricedIsSpell ? { pricedSpell: true as const } : {}) };
+    return Math.max(0, amountValue(amount, this.makeResolutionContext(sourceId, player, [], 0, 0, undefined, 1, 0, [], {}, opts)));
   }
 
   /** Every counter on a player or a permanent — energy, poison and the rest,

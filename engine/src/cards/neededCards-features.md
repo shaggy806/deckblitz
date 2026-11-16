@@ -398,6 +398,16 @@ action (704.5g), combat damage assignment and trample (`combat/damage.ts`'s `let
 (`CombatCreature.lethal`, v1's blocks, `damageLands`, divisions, sweeps). Lethal by power is at least 1: a
 0-power creature dies only with damage marked (the ruling). Zilortha, Strength Incarnate (rank 8983).
 `test/lethal-damage-by-power.test.ts`; design record `docs/plans/lethal-damage-by-power.md`.
+### A spell's cost leaves it out of the graveyards — built 2026-11-16
+
+The key `amount:aggregate-graveyards-except-spell-being-cast`: an amount a spell's cost reads (`Game.costAmount`
+for a spell, `pricedSpell` on its context) leaves that spell out of `countInGraveyard`, `cardTypesInGraveyard`
+and an `aggregate` over `"graveyards"`, since it's on the stack as its cost is worked out (rules 601.2a,
+601.2f); `aggregateMatches` now honours `except` in the graveyards. A discard trigger's "it" is the card where
+the discard put it and no further (`refsAtTrigger`'s `afterLeaving`, rule 400.7). Oskar, Rubbish Reclaimer
+(rank 10769; commander #997), and Emrakul, the Promised End cast from a graveyard no longer counts its own
+creature type. The scaffolder reads both Oskar lines. `test/graveyard-count-spell-being-cast.test.ts`.
+
 ### Control for as long as it matches — built 2026-11-16
 
 The key `effect:control-while-condition`: `gain-control`'s `whileIt`, a `CardFilter` the permanent whose

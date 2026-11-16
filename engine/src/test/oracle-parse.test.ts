@@ -20560,3 +20560,22 @@ describe("Control for as long as it matches (Shield Broker, Rootwater Matriarch)
     expect(matriarch.complete).toBe(true);
   });
 });
+
+describe("Oskar, Rubbish Reclaimer's lines", () => {
+  it("reads the reduction by distinct mana values and casting the discarded card", () => {
+    const oskar = parseFace({
+      name: "Oskar, Rubbish Reclaimer",
+      type_line: "Legendary Creature — Human Wizard",
+      mana_cost: "{3}{U}{B}",
+      oracle_text:
+        "This spell costs {1} less to cast for each different mana value among cards in your graveyard.\nWhenever you discard a nonland card, you may cast it from your graveyard.",
+    } as never) as unknown as { complete: boolean; selfCostReduction: unknown; triggered: { trigger: unknown; effect: unknown }[] };
+    expect(oskar.selfCostReduction).toEqual({
+      condition: { kind: "controls", filter: {}, atLeast: 0 },
+      reduceGeneric: { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+    });
+    expect(oskar.triggered[0].trigger).toEqual({ on: "discards", who: "you", perCard: true, filter: { notTypes: ["land"] } });
+    expect(oskar.triggered[0].effect).toEqual({ kind: "cast-now", target: "trigger-object", spell: { inZone: "graveyard", ownedBy: "you" } });
+    expect(oskar.complete).toBe(true);
+  });
+});

@@ -3629,8 +3629,9 @@ interface AggregateBase {
  * member already resolved to what it's read as (`members`); the source a
  * static's own sets belong to (`source`); cards that count as being in a
  * graveyard though they are moving out of it (an entering permanent's own
- * replacement, rule 614.12); and the permanents to leave out ("other", "not
- * yet here"). */
+ * replacement, rule 614.12); and the objects to leave out ("other", "not
+ * yet here", a spell being cast from a graveyard), on the battlefield or in a
+ * graveyard. */
 export interface AggregateReads {
   readonly except?: readonly ObjectId[];
   /** A resolution's sets, each member as it's read: live (no `lastKnown`)
@@ -3695,7 +3696,10 @@ export function aggregateMatches(
         const keep = reads.battlefieldMatch ?? ((id: ObjectId, f: CardFilter) => matchesFilter(state, registry, id, f, { you }));
         for (const m of weightedMatches(state, state.zones.shared.battlefield, (id) => keep(id, filter), except)) push(m);
       } else if (zone === "graveyards") {
-        for (const m of graveyardMatches(state, registry, filter, you)) push(m);
+        // `except` too: a spell cast from a graveyard is on the stack as its
+        // cost is worked out (rules 601.2a, 601.2f — Oskar, Rubbish
+        // Reclaimer), and "other" leaves out a source that is a card there.
+        for (const m of graveyardMatches(state, registry, filter, you)) if (!except.includes(m.id)) push(m);
         for (const id of reads.stillInGraveyard ?? []) {
           const object = state.objects[id];
           if (object === undefined || object.isToken) continue;
