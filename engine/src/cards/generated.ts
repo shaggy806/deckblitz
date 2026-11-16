@@ -14692,6 +14692,7 @@ import _poolKarmicJustice from "./pool/karmic-justice.js";
 import _poolKarnArgentDefender from "./pool/karn-argent-defender.js";
 import _poolKarnGildedGuardian from "./pool/karn-gilded-guardian.js";
 import _poolKarnLegacyReforged from "./pool/karn-legacy-reforged.js";
+import _poolKarnLiberated from "./pool/karn-liberated.js";
 import _poolKarnLivingLegacy from "./pool/karn-living-legacy.js";
 import _poolKarnScionOfUrza from "./pool/karn-scion-of-urza.js";
 import _poolKarnSilverGolem from "./pool/karn-silver-golem.js";
@@ -47913,6 +47914,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKarnArgentDefender,
   _poolKarnGildedGuardian,
   _poolKarnLegacyReforged,
+  _poolKarnLiberated,
   _poolKarnLivingLegacy,
   _poolKarnScionOfUrza,
   _poolKarnSilverGolem,
@@ -81147,6 +81149,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/karn-argent-defender": _poolKarnArgentDefender,
   "pool/karn-gilded-guardian": _poolKarnGildedGuardian,
   "pool/karn-legacy-reforged": _poolKarnLegacyReforged,
+  "pool/karn-liberated": _poolKarnLiberated,
   "pool/karn-living-legacy": _poolKarnLivingLegacy,
   "pool/karn-scion-of-urza": _poolKarnScionOfUrza,
   "pool/karn-silver-golem": _poolKarnSilverGolem,

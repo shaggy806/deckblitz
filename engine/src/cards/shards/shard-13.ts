@@ -440,6 +440,7 @@ import _poolJuniperOrderRanger from "../pool/juniper-order-ranger.js";
 import _poolKaervekTheSpiteful from "../pool/kaervek-the-spiteful.js";
 import _poolKaghaShadowArchdruid from "../pool/kagha-shadow-archdruid.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
+import _poolKarnLiberated from "../pool/karn-liberated.js";
 import _poolKashiTribeReaver from "../pool/kashi-tribe-reaver.js";
 import _poolKatildaDawnhartMartyr from "../pool/katilda-dawnhart-martyr.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
@@ -1450,6 +1451,7 @@ const shard: CardShard = {
     _poolKaervekTheSpiteful,
     _poolKaghaShadowArchdruid,
     _poolKamahlsDruidicVow,
+    _poolKarnLiberated,
     _poolKashiTribeReaver,
     _poolKatildaDawnhartMartyr,
     _poolKeenGlidemaster,
