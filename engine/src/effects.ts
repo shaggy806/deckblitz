@@ -7253,6 +7253,12 @@ export type EffectSpec =
        */
       readonly kind: "lose-game";
       readonly who?: PlayerScope;
+      /** With `who`: only the players of it this holds for, each asked about
+       * as `"that-player"` as it resolves — Triskaidekaphobia's "each player
+       * **with exactly 13 life** loses the game" is `{ kind: "life-total",
+       * who: "that-player", atLeast: 13, atMost: 13 }`. They lose at once, so
+       * every player at 13 is a draw (rule 104.4a). */
+      readonly whoseIf?: StaticCondition;
       readonly target?: number;
     }
   | {
@@ -21527,7 +21533,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (target?.kind === "player") ctx.loseGame([target.player]);
         return;
       }
-      ctx.loseGame(ctx.playersInScope(spec.who ?? "you"));
+      const whoseIf = spec.whoseIf;
+      const losers = ctx.playersInScope(spec.who ?? "you");
+      // Each asked about before any loses: one instruction (rule 104.4a).
+      ctx.loseGame(whoseIf === undefined ? losers : losers.filter((p) => ctx.aboutPlayer(p).conditionMet(whoseIf)));
       return;
     }
     case "restart-game":
