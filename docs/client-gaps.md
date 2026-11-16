@@ -26,12 +26,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   `protocol`'s `RoomSettings`, checked in `PendingRoom.setSettings` and applied in
   `toGameConfig`, as starting life and the first player are.
 - **Server-side deck save and share** is still unscoped. Decks live in `localStorage`.
-- **The library's card viewer has no printings panel** (the user's ask, 2026-10-09). Add "just
-  a scrollable list of all the sets/printings of a card"; clicking a printing changes the
-  displayed one to it. Also keep the next/previous buttons still: today they move as the
-  viewer box grows and shrinks with whether the card has associated tokens.
-  `client/src/library/LibraryPage.tsx`, `library.css`.
-
 - **The game page's own rendering on a slow laptop** (2026-10-13/14). **Mostly fixed; one
   cost left, no Lite setting needed yet.** The user's i5-6300U laptop (2 cores / 4 threads,
   16 GB, Chrome 153, 1366x768) ran a local blitz on 2026-10-13 at ~42 fps with ~120 main-thread
@@ -74,13 +68,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   forced-layout call stacks) on a `vite preview` build, mapped through a `vite build
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
-
-**A cast copy logs as "a card"**
-
-The game log prints "a card resolves" for a cast copy and "commits a crime with a card", from
-`format.ts`'s `spell-resolved` case and the crime line. A name lookup that fails falls through to
-`logName`'s "a card" (it was the raw id until 2026-11-02), and the copy, gone by then, should be
-named. Seen 2026-11-02 playing Collected Conjuring's copies; not caused by that family.
 
 **The scenario builder can't hold the initiative or a dungeon position**
 

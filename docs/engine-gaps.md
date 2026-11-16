@@ -7,14 +7,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 `BACKLOG.md` line to `COMPLETED.md`.
 
 - **B294's small gaps** (2026-11-09, what the re-attempt's agents and reader reported while writing cards).
-  Checked against the code: `CardFilter.notThisWay` (`filter.ts`) has no player scope, so Deadly Brew's and
-  Rise of the Witch-king's "another" also bars a card you own that an opponent sacrificed, where the ruling
-  bars only the one you sacrificed (Rise blocked, `filter:not-this-way-by-you`). A `create-token-copy`
-  exception's static can't say "this object": `bindDynamicCompares` binds `isSource` to the resolving ability's
-  source, and `abilityCostModifiers` reads printed statics only (Firion, `bug:copy-exception-static-self-reference`).
-  Reported, not checked: an `amounts` condition or a dynamic `{ amount }` filter operand isn't evaluated in
-  static or cost contexts (`selfCostReduction`, `affects.filter`; Hagra Mauling, Thryx, Ensnaring Bridge,
-  Lavinia); `would-draw` with `instruction: { atLeast }` doesn't honour `whileHandAtMost` (Phial of Galadriel
+  Built since: `CardFilter.notThisWay`'s player scope (`thisWayBy: "you"`, 2026-11-12: Deadly Brew, Rise of the
+  Witch-king), and Firion is authored. Left, reported and never checked (audited 2026-11-15: every card named
+  here is in the pool, so each either works or was written round it; check one before building anything): an
+  `amounts` condition or a dynamic `{ amount }` filter operand isn't evaluated in static or cost contexts
+  (`selfCostReduction`, `affects.filter`; Hagra Mauling, Thryx, Ensnaring Bridge, Lavinia); `would-draw` with `instruction: { atLeast }` doesn't honour `whileHandAtMost` (Phial of Galadriel
   uses the static's `condition`); `of-player "that-player"` in `whileCondition` never holds on a `cast-spell`
   trigger (The Council of Four uses a filter); `put-into-graveyard` on a set ref moves only one object
   (Glimpse the Impossible and Mnemonic Betrayal use `for-each-target`).
@@ -53,12 +50,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **Simultaneous as-enters removals of every counter.** Two Thieves of Blood entering at once:
   the first applied takes every counter, where the player should choose which gets them
   (`removeAllCountersFrom`, 2026-10-31; 616.1).
-- **Face-down leftovers.** Built 2026-10-31: faces down by an effect, manifest from another's
-  library, `cant-turn-face-up`. Still open: Illusionary Mask (cast face down for X); Ugin, the
-  Ineffable and Gustha's Scepter (a face-down exile linked to a token or source); Kozilek, the
-  Broken Reality (manifest from hands with a "manifested this way" count); Ixidron (as it enters,
-  turn others face down); Vesuvan Shapeshifter; Thieving Amalgam (a trigger's "its owner"
-  player); Death in Heaven (an exile linked to the Saga).
+- **Face-down leftovers: Illusionary Mask.** Built 2026-10-31: faces down by an effect, manifest
+  from another's library, `cant-turn-face-up`. Still open: Illusionary Mask (cast face down for
+  X). The others this listed are in the pool (audited 2026-11-15): Ugin, the Ineffable, Gustha's
+  Scepter, Kozilek, the Broken Reality, Ixidron, Vesuvan Shapeshifter, Thieving Amalgam and Death
+  in Heaven.
 - **`put-onto-battlefield` follows a target that changed zones during the resolution.** A
   target is checked once, as the spell or ability begins to resolve (`illegalSlot` reads the
   `illegalTargets` found then, rule 608.2b); a step of the same resolution that moves it first
@@ -115,18 +111,11 @@ shuffle them and cloak one, but an object keeps its id through the exile, so a c
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the
 leak. Needs a design call: a fresh id at the shuffle, or redaction in `view.ts`. Found 2026-11-04.
 
-**A self-replacement beside an exile: no 616.1 choice.** Rule 616.1: the affected object's controller picks which replacement
-applies, and these aren't self-replacement effects under 614.15. `moveObjectUncached` applies `shufflesItselfInstead` and
-`topsItselfInstead` first, assuming the owner prefers the library. Cards: Gravebane Zombie, the Blightsteel shuffle family. Needs a
-choice on a move that can't wait yet, as Pulmonic Sliver's key does. Found 2026-11-04.
-
-**A player can't play another player's face-down exiled card blind.** Rule 406.3a lets the effect that exiled a
-card face down allow it to be played; the engine offers a linked grant only to a player who may look at the card
-(`linkedCastGrantFor`, `game.ts`). Blocks Urianger Augurelt and Lobelia. Found 2026-11-02; not reported from play.
-
-**A token with riot is never asked.** A token enters without the riot choice and takes haste
-(`entersBattlefieldReplacement`, `game.ts`), though rule 702.136a gives it the choice as it enters. Blocks Spider-Punk's
-Spider tokens; Spider-Punk isn't authored. Found 2026-11-02; not reported from play.
+**A token with riot is never asked.** A named token enters without the riot choice
+(`entersBattlefieldReplacement`, `game.ts`), though rule 702.136a gives it the choice as it enters. Found 2026-11-02.
+Spider-Punk ("Other Spiders you control have riot") is in the pool since B315 (2026-11-12), so the gap is live: checked
+2026-11-15, a Spider token made by Spider Spawning under it enters with no choice asked and no counter. Token copies are
+asked (2026-11-09); a named token would have to go through `enterTokenCopies`.
 
 **Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked at the two effects that make tokens as a resolution step, `create-token` and `create-token-copy` (a batch's copies aside). Tokens made inside another operation, amass (701.47), incubate, encore, myriad, populate and the like, go straight through `Game.createTokens`, which can't stop to ask: the replacement isn't offered for them, and only the tokens of a token doubler apply there (rule 614.1a). Moonlit Meditation's the only card with it so far.
 

@@ -27,14 +27,9 @@ numbers for everything below come from `npm run cmdrs:gaps -w engine`.
   the keys. Two of the 29 have every recorded need built and want a re-read (the `author-freed`
   queue): Ian Malcolm, Chaotician and The Fourteenth Doctor.
 
-- **Ready to author, no engine work: none.** B294 (2026-11-09) re-attempted all 18 still missing
-  and authored 6 (Mr. House, Hazel of the Rootbloom, Indoraptor, Orvar, Noctis, Minsc & Boo). Each
-  of the other 12 waited on one narrow key, recorded in `engine/src/cards/top-commanders-gaps.json`;
-  Jaws, Relentless Predator's (`trigger:destroyed`) was built 2026-11-10, Tevesh Szat's,
-  Omnath, Locus of All's and Ob Nixilis, Captive Kingpin's 2026-11-12, Indominus Rex, Alpha's and
-  Coram, the Undertaker's 2026-11-13, Jorn, God of Winter's 2026-11-14.
-- **The 1 left of the old top 500, with its key** (when it lands, add it to that file's `built`
-  array and author its commander in the same commit): Magar of the Magic Strings
+- **The 1 left of the old top 500, with its key** (when it lands, add it to
+  `engine/src/cards/top-commanders-gaps.json`'s `built` array and author its commander in the same
+  commit): Magar of the Magic Strings
   `effect:noted-card-name-copy`.
 
 ## Card backlog (by EDHREC rank, and the precons)
@@ -46,55 +41,23 @@ section keeps only what to do next.
 
 - **The rank goal (the user's, 2026-11-11): every card to EDHREC rank 10,000, but for those needing
   a major engine change.** `npm run -s cards:goal -w engine` lists what's left, best rank first,
-  each with its open need keys and its size; `-- --size small --keys` is the build list, one key a
-  unit. After B296-B298 (161 cards re-attempted and authored with no engine code) 383 were left;
-  the first overnight run down the small list (2026-11-11, 92 keys, 101 cards, `COMPLETED.md`)
-  leaves 285: 88 sized **small** (a field, an amount, a filter clause, a trigger event), 48
-  **major** (a new decision, a new subsystem, a core rule changed — flagged, not built), 149
-  **unsized** (records from B291-B296, read against today's engine but before sizes were
-  recorded: size each as it is picked up). Every one needs engine work; the sizes are the
-  authoring agents' estimates from reading, and held well on the small list: of 95 units tried,
-  three were really major (Kamahl's Will, Soulfire Eruption, Spectral Searchlight) and about one in five needed no engine
-  code. **The lanes run (2026-11-13, `build-family overnight lanes`, `COMPLETED.md`)** built 46 keys and 48 cards, leaving
-  147 keys over 139 cards (`cards:goal`); the 7 cards it freed went through `author-freed` as **B324** (all 7 authored,
-  `--stale` empty again). **The second lanes run (2026-11-13/14, `author-top-cards overnight lanes`, `COMPLETED.md`)**
-  built 16 agents' shares, 79 cards (83 card files), leaving 72 keys over 68 cards; **B325** re-keyed the six cards
-  its keys didn't cover (North Star, False Dawn, Oath of Kaya, Tahngarth, Deification, Curie) and recorded Pulmonic
-  Sliver major (an asked optional graveyard replacement). Skipped: Spectral Searchlight and Soulfire Eruption (major),
-  Lich's Mastery (one implementation group with Nicol Bolas's deferred major). The 9 cards its keys freed went
-  through `author-freed` as **B326** (2026-11-14): all 9 authored, three on small pieces built there (`CardFilter.isCopy`,
-  `payLife: { atMost }`, a counter-removed event off an exiled card); `--stale` is empty. **B327** (2026-11-14,
-  ranks 15527–18514, `author-top-cards`) authored 77 with Attractions built (the next untriaged rank is past
-  18514, `cards:needs -- --next`); its small blocked keys went to the lanes. **The third lanes run (2026-11-14/15, `COMPLETED.md`)** built every small key of the rank goal (10 left there, all majors or skipped), batches B328-B330 emptied `cards:needs -- --next`, and by-rank key agents went on past rank 10,000 (next by rank: Rowan's Talent, Signal the Clans, Bring the Ending — `rank-goal.mjs --rank 20000 --keys`, most keys not yet laned); skipped: Night Shift of the Living Dead (major, a choice inside a die roll). **Next: the lanes again**
-  (`build-family overnight lanes`, or `author-top-cards`). Each lane's next share is
-  `rank-goal.mjs --lane <lane> --keys`; the lanes' hand-off notes are in `engine/.cache/lanes/`. The 28
-  triaged cards the run's keys freed went through `author-freed` as **B314** (2026-11-12): 13
-  authored, 15 given narrow keys (`B314.json`), and `cards:needs -- --stale` is empty. Past rank 10,000 the order is still EDHREC
-  rank (`author-top-cards`, which since 2026-11-12 builds the small features its cards need
-  rather than blocking them; `cards:needs -- --next 60` lists the next untriaged). **First, the
-  top 5000 (the user's call, 2026-11-12):** the 112 cards still missing from
-  `top-commander-cards.txt` (110 with B294 records, `cards:goal` at rank ≤ 5000) need 109
-  different features, one each but `effect:additional-beginning-phase` (Sphinx and Shadow of the
-  Second Sun, and Cyclonus). Size each against today's engine first (B294 read them on
-  2026-11-09; some may run now), then build the small ones best rank first, asking once about the
-  majors (likely Odric, Master Tactician; Leyline of Transformation; Teferi, Who Slows the Sunset;
-  New Blood). **B310** built the first ten (ranks 2002–2870, 12 cards with Cyclonus; the user
-  approved the additional beginning phase), **B311** the next ten (ranks 2441–2796, Lim-Dûl's
-  Vault to The Unagi of Kyoshi Island), **B312** the next ten (ranks 2902–3108, Duplicant to
-  Rottenmouth Viper, and Drach'Nyen and Phantom Carriage on the way), **B313** the next ten (ranks
-  3173–3469, Autumn's Veil to Selective Obliteration; all small, no majors), **B315** eight of the
-  next ten (ranks 3479–3698, Spider-Punk to Final Act; Nicol Bolas, Dragon-God's +1 left major by
-  the user), **B316** eight of the next ten (ranks 3596–3964, The Masamune to Tevesh Szat; no majors), **B317** the next six (ranks 3865–4068, Metalworker to Chaos Dragon, and Essence of the Wild on Mystic Reflection's feature; no majors). **B318** five more (ranks 4075–4207, Hushbringer to Old Stickfingers; no majors). **B319** ten more (ranks 4159–4411, Shay Cormac to Animation Module; no majors — Teferi, Who Slows the Sunset's emblem, guessed major, was a draw-step hook, and Benthic Anomaly needed no engine code). **B320** six more (ranks 4407–4511, Jinnie Fay to Senu, Keen-Eyed Protector; no majors built). **B321** five more (ranks 4533–4680, Guff Rewrites History, Tasha, the Witch Queen, Mechtitan Core, Thran Portal, Blatant Thievery; no majors). **B322** (2026-11-13) re-triaged the 55 unsized records and the 50 majors: 7 run now, 93 small, 5 major, all five approved by the user (`docs/plans/rank-goal-majors.md`). **B323** authored those seven (ranks 4670–9404, Displaced Dinosaurs to Vaevictis Asmadi; four needed a small piece each, `B323.json`). **Next:** `/build-family overnight lanes` — the small keys by lane (`engine/data/lanes.json`, `cards:goal -- --lane <lane> --keys`), the majors as agents of their own, Nicol Bolas and Zilortha first. Sylvan Primordial (B52) is freed by B321's required seat slots, but its ruling reads as though an opponent with nothing to target were skipped, against Vaevictis Asmadi's (the ability removed): settle that before authoring it (`B321.json`). New Blood (4536) is a major the user approved for a later session: change-text for creature-type words. The tail past rank 10,000 waits. **After that:**
-  B308 (ranks 10,246–12,810) left five small features unbuilt — Prowl's
-  `trigger:plays-card-exiled-with-source`, Ian Malcolm's `zone:cast-cards-you-dont-own`, Priority
-  Boarding's reveal trigger, Reckless Blaze's `effect:delayed-trigger-dealt-damage-this-way-dies`,
-  Cyclonus's `effect:additional-beginning-phase` (`B308.json` says what each lacks) — and
-  Starlight Spectacular's ordering decision to ask about. **B309** (ranks 12,838–15,470): 44
-  authored, 16 left — 8 on majors (Attractions ×7, Malik's secret choice) and 8 small keys,
-  `B309.json`. And the nine starter precons' 4 stand-ins
-  (`engine/data/sweep-3/PC-*.json`) go as their originals land. `docs/plans/after-the-themes.md`
-  has the order agreed before the goal (step 3 next). How the need keys were worked down to here
-  (the recheck rounds, the families, the freed-card batches, the themes) is in `COMPLETED.md`.
+  each with its open need keys and its size. **10 cards are left (2026-11-15), and every small key
+  is built:** seven majors to ask the user about before building (Nicol Bolas, Dragon-God's +1,
+  left major by the user; New Blood; _____ Goblin's stickers; Karn Liberated's restart of the game;
+  Pulmonic Sliver's asked graveyard replacement; Night Shift of the Living Dead's choice inside a
+  die roll; Zilortha, Strength Incarnate) and three the runs skipped (Soulfire Eruption and
+  Spectral Searchlight, sized small but really major; Lich's Mastery, one implementation group
+  with Nicol Bolas's). **Past rank 10,000** the order is still EDHREC rank: the triaged cards'
+  keys through `build-family overnight lanes` (`rank-goal.mjs --rank 20000 --keys`; next by rank
+  Rowan's Talent, Signal the Clans, Bring the Ending; each lane's share is `rank-goal.mjs --lane
+  <lane> --keys`, the lanes' hand-off notes in `engine/.cache/lanes/`), and new cards through
+  `author-top-cards` once a snapshot refresh brings untriaged ones (`cards:needs -- --next 60`;
+  B328-B330 emptied it). Two decisions past the goal wait on the user: Starlight Spectacular's
+  ordering and Malik's secret choice (`B308.json`, `B309.json`). **The freed-card queue holds two
+  cards** to re-read (`cards:needs -- --stale`, 2026-11-15: Preacher and Wish; `author-freed`).
+  The nine starter precons' 4 stand-ins (`engine/data/sweep-3/PC-*.json`) go as their originals
+  land. How the keys were worked down to here (the lanes runs, B310-B330, the freed-card batches)
+  is in `COMPLETED.md`.
 - **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
   `ASSIMILATE` in `helpers.ts`), and so are Marvel: Darkhold Destiny's previews (MDD, MDC) and
@@ -110,9 +73,9 @@ section keeps only what to do next.
   Re-read the set's cards when Star Trek's rulings are published (`npm run gen:oracle -w engine`,
   then `card:text -- --offline`): Võx, Child of the Collective was authored on the text as written
   (a spell both an artifact creature and a Spacecraft has undaunted twice).
-- **Cards banned in Commander for power: 7 left, each blocked** (`B52.json`). Channel, Erayo,
-  Fastbond, Flash, Nadu, Sylvan Primordial and Trade Secrets each wait on a feature of their own
-  (`docs/card-blockers.md`).
+- **Cards banned in Commander for power: 4 left, each blocked** (`B52.json`). Channel, Fastbond,
+  Nadu and Trade Secrets each wait on a feature of their own (`docs/card-blockers.md`); Erayo,
+  Flash and Sylvan Primordial are in the pool since.
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
 - **Features with a family of cards behind them**: the rest of "enters tapped and attacking"
@@ -128,7 +91,7 @@ section keeps only what to do next.
 
 - **Opposition Agent and a search of every library** — Jace, Architect of Thought's −8 (`eachLibrary`) begins the Agent's search control, but the Agent's "may play those cards" isn't granted for a find from the searcher's own library (`docs/engine-gaps.md`).
 - **A token copy skips "exile first" and "pay any amount of life" as it enters** — The Mimeoplasm's `exileFirst` and Phyrexian Processor's `payLife` are asked only of a card entering, the same gap as Vizier of Many Faces (`docs/engine-gaps.md`).
-- **An object's own "instead" against an exile replacement isn't asked** — Blightsteel Colossus's shuffle and Gravebane Zombie's library top are applied ahead of Rest in Peace without the owner choosing (rule 616.1e), and a Quintorius-cast spell countered by another spell's resolution goes to the library bottom unasked (`docs/engine-gaps.md`).
+- **An object's own "instead" against an exile replacement isn't asked** — Blightsteel Colossus's shuffle and Gravebane Zombie's library top are applied ahead of Rest in Peace or a finality counter without the owner choosing (rule 616.1e), and a Quintorius-cast spell countered by another spell's resolution goes to the library bottom unasked (`docs/engine-gaps.md`).
 - **A `turn-history` condition with `who: "opponent"` sums over every opponent** — B327: "an opponent had two or more creatures enter" passes on one each from two opponents; and a `trigger-value` condition reads false while triggering, so it can't be an intervening "if" (`docs/engine-gaps.md`).
 - **Which permission a play from outside a graveyard uses is the engine's pick** — `chosenPlayOption` takes the one that spends nothing, so The Fourth Doctor's once-a-turn permission and its Food never come beside Courser of Kruphix or Crystal Skull; graveyards already offer one choice per permission (`docs/engine-gaps.md`, key `zone:choose-play-permission-any-zone`, the card's patch in `engine/.cache/patches/`).
 - **A card exiled with time counters but not by suspend isn't heard as suspended** — rule 702.62b counts any card with suspend and a time counter in exile (Alaundo the Seer's), but the `whileSuspended` scan covers only cards suspended by suspend (`docs/engine-gaps.md`).
@@ -147,19 +110,17 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **B294's small gaps** (2026-11-09) — `notThisWay` has no player scope (Deadly Brew; Rise of the Witch-king blocked); `amounts` conditions and dynamic filter operands aren't read in static or cost contexts (Hagra Mauling, Thryx, Ensnaring Bridge, Lavinia); three more the agents reported, unverified.
+- **B294's small gaps** (2026-11-09) — reported by the agents and never checked: `amounts` conditions and dynamic filter operands aren't read in static or cost contexts (Hagra Mauling, Thryx, Ensnaring Bridge and Lavinia are all authored, so each either works or was written round it); a `would-draw` `atLeast` that ignores `whileHandAtMost`; `of-player "that-player"` in a `whileCondition` on a cast trigger; `put-into-graveyard` on a set ref moving one object (`docs/engine-gaps.md`). `notThisWay`'s player scope is built (`thisWayBy`, 2026-11-12).
 - **"Each player may" acts on each answer before asking the next** (rule 101.4; the tempting offers and Kwain). (2026-11-09: tokens and counters fixed, and searches are held; `modal` effects, `options` and a find bound for a hand, Jungle Wayfinder and Weird Harvest, are left.)
 - **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).
-- **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).
 
-- **A player can't play another player's face-down exiled card blind** (rule 406.3a). (2026-11-11 audit: Urianger Augurelt and Lobelia, the two cards it named, are authored since B263 and `linkedCastGrantFor` is gone; check whether any gap is left before working on it.)
-- **A token with riot is never asked** (it takes haste; blocks Spider-Punk's Spider tokens). (2026-11-09: token copies are asked; named tokens would have to go through `enterTokenCopies`. Only Spider-Punk needs it.)
+- **A token with riot is never asked** (rule 702.136a) — and Spider-Punk, which gives other Spiders riot, is in the pool since B315 (2026-11-12), so this is a live inaccuracy: checked 2026-11-15, a Spider token made under it (Spider Spawning) enters with no choice and no counter. Token copies are asked (2026-11-09); named tokens would have to go through `enterTokenCopies` (`docs/engine-gaps.md`).
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b). (2026-11-09: 103.5c and 103.6b settled; only turn-order declarations are left.)
 - **Limited-duration control of a player** — rule 723.2's Word of Command (one spell's worth of control); `player-control.ts` holds a next turn, a next combat or Opposition Agent's search only.
 - **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change.)
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Simultaneous as-enters removals of every counter**: two Thieves of Blood at once — the player should choose which gets them (`docs/engine-gaps.md`).
-- **Face-down leftovers**: Illusionary Mask, Ixidron, Vesuvan Shapeshifter and others, each needing its own face-down link or choice (`docs/engine-gaps.md`).
+- **Face-down leftovers: Illusionary Mask** — cast face down for X; the others the line named (Ixidron, Vesuvan Shapeshifter, Ugin, the Ineffable, Gustha's Scepter, Kozilek, the Broken Reality, Thieving Amalgam, Death in Heaven) are in the pool (`docs/engine-gaps.md`).
 - **`put-onto-battlefield` follows a target that changed zones during the resolution** (400.7): Celestial Gatekeeper's "exile it, then return target …" returns itself from exile (`bug:moved-target-card-still-acted-on`, batches 219 and 235). (2026-11-09: moved under another name is fixed; a target moved by a mass effect and then named by its slot is left.)
 - **Splice's limits** (702.47): only onto a spell with one plain `effect` (not modal, fused, divided or `resolve`), not with overload, and at most four splice cards a cast. (2026-11-09: onto modal, fused and overloaded spells landed, and non-mana splice costs; a spliced card with targets onto a modal spell, divided and `resolve` spells, the four-card cap and 702.47b's order are left.)
 - **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone** (702.152a, 702.109a, 702.190a, 702.188a, 702.162a).
@@ -229,19 +190,6 @@ and Shiko or the other spell; haste enablers in the crackback were measured and 
   several sacrifices (every opponent at 2 with Viscera Seer, Blood Artist and two creatures) v2
   now takes, with tokens or with real creatures: the fault was the fodder choice, fixed
   2026-11-10 (the audit's Q3, `cheapestFodder`). **Left: v1 still passes there.**
-- **Explore aiming bot removal by EDHREC rank or salt score** (the user, 2026-11-06): a bot picks
-  removal targets by simulated board value alone; try weighting the pick by how played or how hated
-  a card is (`cards/edhrec-rank.ts` has the rank, `cards/salt-score.ts` the salt score since
-  2026-11-06). **Salt started 2026-11-09, unfinished**, on the local `strong-decks-pilot` branch
-  only (not main: the 650 KB salt table would ship in the browser's bot bundle): a `salt` evaluation
-  term (`bot/features.ts`, each nontoken permanent's salt score; weight 0). In built positions
-  weight 1 tips close calls (Disenchant takes Rhystic Study over passing), 4 overrides board value
-  (Vindicate takes Smothering Tithe over a Craw Wurm). The bench decks hold almost no salty cards
-  (Sol Ring alone), so it's measured on the real decks: `BENCH_POOL=strong npm run bot:ab -w engine
-  -- --budget 1000` (both flags new on the branch). Weight 3 against main, stopped at 55 of 400
-  games: 24.1%, even, too few to say. Left: finish that A/B (about 4.5 h at 8 workers; each worker
-  holds two builds, and one game hit the 768 MB heap cap), then weigh shipping against the bundle
-  (a table of only the cards above about 0.5 salt would be small). EDHREC rank untried.
 - **Deeper lookahead** (the user, 2026-10-18): let the bot look further ahead, a clock off, to see
   whether it finds smarter lines. The yardstick is `bot/benchmarks.ts` (`npm run bot:benchmarks -w
   engine`): seventeen hard positions played out over whole turns and judged on the outcome — goals,
@@ -276,12 +224,13 @@ and Shiko or the other spell; haste enablers in the crackback were measured and 
   lands, each look ~90 ms (`lookAfterPlay`). Each overrun holds every other room on its shard as
   long (`docs/plans/room-shards.md`, "The one-second budget").
 - **Bots and token stacks: three tokens of one stack as three targets** (the user, 2026-10-18; what the divided-damage fix of 2026-11-15 left, `COMPLETED.md`, "divides damage to kill"). A bot's candidates now carry the shares of a divided amount, but Inferno Titan still never goes 1 + 1 + 1 at three 1/1s of one token stack: the engine refuses a stack filling two slots of one target group ("Distinct targets in one token stack", Engine rules gaps). v1's own answer still aims a divided group at one target (it is the floor v2's search starts from, and what a rollout's seats play). And a group's candidates are the best one, two, three… of the ranked targets, so the split that skips the best creature to kill three small ones is never listed (`decisions/shared/target-combos.ts`).
-- **More training scenarios.** About 175 hand-built scenarios, all of them gating
-  (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
-  live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which
-  `bot:scenarios` and `bot:fit-scenarios` read as training scenarios, as does each blunder
-  `bot:behaviour` shows. `npm run bot:captures -w engine` lists them with v2's answer today;
-  once one is fixed, `-- resolve` moves it to `captures/resolved/`, where it gates.
+- **More training scenarios.** 259 scenarios gate (2026-11-15: the hand-built ones in
+  `bot/scenarios.ts` and the resolved captures). Not yet covered: mulligans
+  (`mulligan-policy.test.ts`). More come from live games: the in-game Capture button
+  (`--capture`) saves a position to `captures/`, which `bot:scenarios` and `bot:fit-scenarios`
+  read as training scenarios, as does each blunder `bot:behaviour` shows. `npm run bot:captures
+  -w engine` lists them with v2's answer today; once one is fixed, `-- resolve` moves it to
+  `captures/resolved/`, where it gates.
 - **What the four weak upgraded decks' autopsies found in the bots** (2026-11-11; ten replayed
   losses each, `docs/plans/upgraded-decks.md`, "The four weakest decks"). None is fixed:
   - `graveyardCastable` counts only a card's own flashback, escape or `mayPlaySelf`
@@ -309,7 +258,6 @@ and Shiko or the other spell; haste enablers in the crackback were measured and 
 - **The About page doesn't say how a creator can have a strong deck removed** (2026-11-11): the
   site has no contact route; the user's call what it should be
   (`docs/plans/strong-bot-decks.md`).
-- **`crackbackGrowth` is unbenched since its last change** (2026-10-05, merged to main on the user's call with the tests, scenario gate and a 20-game fuzzer pass clean): the scaled crackback check now applies only while holding back passes it. Still to do: rerun the paired `bot:crackback` (0.5 against `--weights '{"crackbackGrowth":0}'`, 120+ seeds) to confirm the 25 swings into a plainly lethal board are gone and the 3.5% → 2.0% holds, re-bench against main, and add a training scenario (`docs/plans/smarter-bots.md`, "Combat: the alpha strike and crackback").
 
 ## Client / UI
 
@@ -350,7 +298,6 @@ delete its detail there and move this line to `COMPLETED.md`.
   went from 8 to 6 on the dev PC's measurement of the bots' one-second budget
   (`docs/plans/room-shards.md`, "The one-second budget"); run `npm run load-test -w server` on the
   box with nobody playing, as `DEPLOYMENT.md` describes, and adjust from its knee.
-- **An on-screen progress bar for the long checks** (the user, 2026-10-06): use Claude Code's new mods feature (a plugin's live pane or status line — the `plugin-authoring` skill) to show progress for the runs we do regularly: the engine suite, `bot:scenarios`, `bot:diff`, `bot:ab`, the fuzzer and the Playwright suites. (2026-11-11 audit: the writers exist, `engine/scripts/progress.mjs` into `.claude/progress/`, wired into the engine and server suites, the bot benches, the fuzzers and Playwright; left are the mod that shows them, if it isn't on the user's machine already, and `bot:scenarios`.)
 - **The test harness's `destroy()` leaves an Aura on a dead creature** (found 2026-10-26, batch
   208): it applies the destroy and settles, but with nothing else pending no state-based actions
   run, so an Aura stays attached to a creature already in the graveyard (Chime of Night's test

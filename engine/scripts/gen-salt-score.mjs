@@ -7,9 +7,10 @@
 //
 // The score is the average of EDHREC's yearly salt survey, where players rate
 // how unpleasant a card is to play against from 0 to 4. It's here as an input
-// for the bots: removal could lean towards what players hate to see resolve
-// (BACKLOG.md, Bots, "Explore aiming bot removal by EDHREC rank or salt
-// score"), beside `edhrec-rank.ts`'s popularity.
+// for the bots: removal could lean towards what players hate to see resolve,
+// beside `edhrec-rank.ts`'s popularity. Measured 2026-11-15 (`bot:engines`,
+// COMPLETED.md, Bots, "Explore aiming bot removal by EDHREC rank or salt
+// score"): neither sorts the permanents worth answering, so no bot reads it.
 //
 // **Source, and the risk it carries.** Like `top-commanders.mjs`, this reads
 // json.edhrec.com, which is not a documented API: the `top/salt` list, 100
