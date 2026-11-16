@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4999 already implemented / 1 missing (marks refreshed 2026-11-16)
+5000 already implemented / 0 missing (marks refreshed 2026-11-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4393,7 +4393,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4400  Necrodominance                           {B}{B}{B}        Legendary Enchantment
 [x]  4401  Hashep Oasis                             {0}              Land — Desert
 [x]  4402  Fiend Artisan                            {B/G}{B/G}       Creature — Nightmare
-[ ]  4403  Nicol Bolas, Dragon-God                  {U}{B}{B}{B}{R}  Legendary Planeswalker — Bolas
+[x]  4403  Nicol Bolas, Dragon-God                  {U}{B}{B}{B}{R}  Legendary Planeswalker — Bolas
 [x]  4404  Jackdaw Savior                           {2}{W}           Creature — Bird Cleric
 [x]  4405  Vicious Rumors                           {B}              Sorcery
 [x]  4406  Compulsive Research                      {2}{U}           Sorcery
