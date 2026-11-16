@@ -9,6 +9,7 @@
 //   npm run bot:judge -w engine -- --kind blocks --decks "Token Triumph,Grave Danger;World Shaper,Mardu Surge" --seeds 1-4
 //   npm run bot:judge -w engine -- --kind discards --decks "Edgar Markov,Y'shtola,Krenko,Pantlaza" --all
 //   npm run bot:judge -w engine -- --kind removal --decks "Edgar Markov,Giada,Ureni,Pantlaza" --seeds 1-6 --to-end
+//   npm run bot:judge -w engine -- --kind answers --decks "Grave Danger,Mardu Surge,Sultai Arisen,World Shaper" --seeds 1-8
 //
 // `bot:diff` says what changed over the sample decks, which hardly raise some
 // decisions at all (an optional payment: 1 in 12,000 there, ten a game on the
@@ -94,7 +95,12 @@ const flag = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : fallback;
 };
-const KINDS = ["payments", "discards", "attacks", "blocks", "removal"];
+const KINDS = ["payments", "discards", "attacks", "blocks", "removal", "answers"];
+/** Decisions `--kind answers` leaves to the other kinds, or that no search
+ * weighs: the rest are the answers a spell or ability asks for as it
+ * resolves or enters (a sacrifice, a target for a trigger, a mode, a word
+ * as a permanent enters). */
+const NOT_ANSWERS = new Set(["attackers", "blockers", "mulligan", "discard", "pay-life-for-untapped", "reveal-for-untapped", "order-triggers"]);
 const kind = flag("kind", "");
 if (!KINDS.includes(kind)) {
   console.error(`bot:judge needs --kind ${KINDS.join(" | ")}`);
@@ -523,7 +529,9 @@ for (const seat of seats) {
         a.player === seat &&
         (kind === "discards"
           ? a.kind === "discard"
-          : own &&
+          : kind === "answers"
+            ? s.turn.number >= 1 && !NOT_ANSWERS.has(a.kind) && !(a.kind === "choose-modes" && a.cost !== undefined)
+            : own &&
             (a.kind === "pay-life-for-untapped" || a.kind === "reveal-for-untapped" || (a.kind === "choose-modes" && a.cost !== undefined)));
       if (!asked) return act(view);
       const theirs = oldBot().act(view);
@@ -534,7 +542,7 @@ for (const seat of seats) {
           ? (x) => (x.type === "discard" ? x.cards.map((id) => s.objects[id]?.cardName).sort().join(" + ") || "nothing" : x.type)
           : (x) => `${describeMove(s, x, registry)}${x.type === "pay-life-for-untapped" ? (x.pay ? " (pay)" : " (don't)") : x.type === "reveal-for-untapped" ? (x.reveal == null ? " (don't)" : " (reveal)") : ""}`;
       const what = `${a.kind}${source !== undefined ? ` (${source})` : ""}${a.cost !== undefined ? ` ${a.cost}` : ""}`;
-      report(seat, s, what, mine, theirs, say, (x) => x, kind === "discards" ? rounds : false, `${landsOf(s, seat)} lands; hand: ${handOf(s, seat)}`);
+      report(seat, s, what, mine, theirs, say, (x) => x, kind === "payments" ? false : rounds, `${landsOf(s, seat)} lands; hand: ${handOf(s, seat)}`);
       return mine;
     };
   }

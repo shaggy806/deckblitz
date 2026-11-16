@@ -1146,6 +1146,37 @@ the 17/15 that kills it rather than kill five 1/1s" and "chumps the double strik
 blocks left unblocked" (the last is v2's fix alone: a double striker is half its damage to
 v1's count).
 
+### The swing back, read in more places (2026-11-16)
+
+Four changes from one night, each a place where the bot's search ended with its own turn and
+something past it decided the right answer.
+
+**Dead to the table is not dead to each player at it.** With every opponent together lethal
+whatever stayed home (`deadAnyway`), the attack dropped all caution and took the first kill.
+The crackback is now also read one opponent at a time in the order they act
+(`opponentsOutlived`): the ones the bot lives through with its creatures home still have
+their turns to play before the one that kills it, and an attack that leaves it dead to one of
+them is unsafe (`diesSooner`). The same rule for the tap guard was built and taken out: no
+position could be built where the bot would otherwise have tapped. Judged over 19 games it
+changed one attack, so it rests on its gate scenario.
+
+**An answer is checked against the swing back.** A sacrifice, a trigger's target, a word as a
+permanent enters: `bestDecision` now ranks an answer that leaves the bot dead to the
+crackback below every answer that doesn't (`OPEN_ANSWER`), and above a lost game. The first
+version had that last part wrong (exposed next turn scored below dead this turn, and an
+edict took the creature that was the only blocker for a flier); a scenario holds it. None of
+467 answers judged over nine games changed (`bot:judge --kind answers`, new), so this is rare
+too.
+
+**Riot's and unleash's choice is searched**, where every word menu asked as a permanent
+enters was answered with its first option; and **a plan uses the one card of the library the
+seat can see** (the top card under Future Sight's kind of permanent), where it used none.
+
+**What didn't work:** aiming removal at an opponent's commander
+(`docs/plans/bot-next-steps.md`, step 7). The lesson for the next rule of this kind is in the
+largest loss: what the log measured ("a commander in play comes before big turns") was true
+and still named the wrong target, because a commander removed comes back.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

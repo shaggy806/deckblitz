@@ -62,7 +62,7 @@ import { collapseTwins } from "./twins.js";
 import type { TargetRef } from "../target.js";
 import type { Polarity } from "../target-polarity.js";
 import { decisionCandidates } from "./decisions.js";
-import { canBlock, combatCreatures, crackback, damageThrough, isLethal } from "./combat-math.js";
+import { canBlock, combatCreatures, crackback, damageThrough, isLethal, opponentsOutlived } from "./combat-math.js";
 import type { CombatCreature } from "./combat-math.js";
 import { DEFAULT_WEIGHTS, aimedOutcome, evaluateState, normalizeWeights, outcomeOf, scoreOutcome } from "./evaluate.js";
 import type { EvalOutcome } from "./evaluate.js";
@@ -631,6 +631,28 @@ function keepFirst(
  * to replace it: 0 for a search, and a margin where v1's answer rests on
  * something the rollouts can't see (`KEPT_PER_MANA`, `EvalBotController.decide`).
  */
+/** What an answer that leaves us dead to the swing back scores below every
+ * answer that doesn't (`bestDecision`). Half a lost game, and so still above
+ * one: exposed next turn beats dead this turn. (An attack's `UNSAFE` is a
+ * hundred lost games, among declarations none of which loses on the spot.) */
+export const OPEN_ANSWER = -5e5;
+
+/** Whether `me`, still in a game still going, is dead to the opponents'
+ * swing back on `state` as it shows: the crackback with its weights and
+ * margin, without `crackbackGrowth` (`EvalBotController.crackbackLethal`,
+ * ungrown, for a caller that is no controller). Not in a turn of our own:
+ * a rollout that has come round to it has played the opponents' attacks,
+ * and what they could do after our turn is that turn's to answer. */
+function openToCrackback(state: GameState, cards: CardRegistry, me: PlayerId, weights: EvalWeights): boolean {
+  if (state.result.over || state.players[me]?.hasLost !== false) return false;
+  if (state.turnOrder[state.turn.activePlayerIndex] === me) return false;
+  const through = crackback(state, cards, me, weights.crackbackParanoia, undefined, {
+    weight: weights.crackbackKillShot,
+    margin: weights.crackbackMargin,
+  });
+  return isLethal(state, me, through, -weights.crackbackMargin);
+}
+
 function bestDecision(
   view: ControllerView,
   inherited: Action,
@@ -646,6 +668,9 @@ function bestDecision(
    * `undefined` leaves that answer to the rollout
    * (`EvalBotController.byTheTurnItLeaves`). */
   scoreBy?: (action: Action) => number | null | undefined,
+  /** Filled with the answers scored as leaving us dead to the swing back
+   * (`OPEN_ANSWER`), for the replay (`EvalBotController.lastOpenAnswers`). */
+  opened?: Action[],
 ): Action {
   const me = view.player;
   if (inherited.player !== me || budget.left <= 1 || spent(budget)) return inherited;
@@ -679,8 +704,24 @@ function bestDecision(
       simulateAction(view.state, cards, action, horizon, rollout, selfFor?.()),
     );
     trace?.(action, after);
-    return after === null ? null : evaluateState(after, cards, me, weights);
+    if (after === null) return null;
+    // An answer is checked against the swing back as an attack or a tap is:
+    // one that leaves us dead to the crackback on the board it ends on
+    // scores below every answer that doesn't (`OPEN_ANSWER`). A creature
+    // that enters unable to block, the blocker sacrificed, the removal aimed
+    // past the attacker that kills us: a rollout that ends with our own turn
+    // saw none of it. Where every answer leaves us dead it sorts nothing.
+    const value = evaluateState(after, cards, me, weights);
+    if (!openToCrackback(after, cards, me, weights)) return value;
+    opened?.push(action);
+    return OPEN_ANSWER + value;
   };
+  // Where the answer is a removal's targets, what its aim is worth past the
+  // evaluation (`aimPremium`): every candidate here is the same removal.
+  const aim = (action: Action): number =>
+    legal !== undefined && legal.kind === "choose-targets" && action.type === "choose-targets"
+      ? aimPremium(view.state, cards, weights, me, legal.cardName, action.targets)
+      : 0;
   let best = inherited;
   const inheritedScore = score(inherited);
   let bestScore = inheritedScore === null ? -Infinity : inheritedScore + keptBy + aim(inherited);
@@ -717,12 +758,6 @@ function rankValue(state: GameState, cards: CardRegistry, ref: TargetRef): numbe
   return ref.kind === "object" ? stats + RANK_ENGINE * engineScore(state, cards, ref.object) : stats;
 }
 
-  // Where the answer is a removal's targets, what its aim is worth past the
-  // evaluation (`aimPremium`): every candidate here is the same removal.
-  const aim = (action: Action): number =>
-    legal !== undefined && legal.kind === "choose-targets" && action.type === "choose-targets"
-      ? aimPremium(view.state, cards, weights, me, legal.cardName, action.targets)
-      : 0;
 /**
  * `legal` with each target slot's options in the order worth simulating:
  * the side the slot's effect belongs on first, most valuable first
@@ -1137,6 +1172,9 @@ export class EvalBotController extends HeuristicBotController {
   /** v1's answer to the last decision searched, where another had to beat it
    * by a margin (`KEPT_PER_MANA`), and that margin — for the replay. */
   lastKept: { readonly action: Action; readonly by: number } | null = null;
+  /** The answers to the last decision searched that left us dead to the
+   * swing back (`OPEN_ANSWER`), for the replay. */
+  lastOpenAnswers: Action[] = [];
   /**
    * Where the last priority search's rollout of each candidate ended, when
    * that rollout is the one a plan scores a line by — our seat passing to
@@ -1758,6 +1796,9 @@ export class EvalBotController extends HeuristicBotController {
       batch = null;
       plan = null;
     }
+    // The removal chosen, aimed again among its own targets (`reaimed`): not
+    // a batch's or an untap plan's first activation, which stand as scored.
+    if (batch === null && plan === null) best = this.reaimed(view.state, best, scored);
     if (plan !== null && best.type === "activate-ability") {
       this.plan = {
         ...plan,
@@ -1796,9 +1837,6 @@ export class EvalBotController extends HeuristicBotController {
     // `payoffBeforeWipe` is not asked here (the bot audit's Q1, retired
     // 2026-11-10).
     if (best.type === "pass-priority" && landfall !== undefined) {
-    // The removal chosen, aimed again among its own targets (`reaimed`): not
-    // a batch's or an untap plan's first activation, which stand as scored.
-    if (batch === null && plan === null) best = this.reaimed(view.state, best, scored);
       const land = landRule();
       if (land !== null) return land;
     }
@@ -2049,6 +2087,37 @@ export class EvalBotController extends HeuristicBotController {
    * an effect that doesn't read the sacrifice keeps one candidate, paying
    * with the cheapest thing it can (`cheapestPermanents`).
    */
+  /**
+   * `best`, or the same cast or activation at other targets where its aim
+   * is worth more there (`aimPremium`: an opponent's commander, its token
+   * makers). Only among the fillings of that one spell or ability that the
+   * search scored, each by its own score and its premium: which removal to
+   * fire, and whether to, were decided without it.
+   */
+  private reaimed(state: GameState, best: Action, scored: ReadonlyMap<Action, number>): Action {
+    const w = this.weights;
+    if (w.opposingCommander === 0 && w.opposingTokenEngines === 0) return best;
+    if (best.type !== "cast-spell" && best.type !== "activate-ability") return best;
+    const base = scored.get(best);
+    if (base === undefined) return best;
+    const sourceOf = (a: Action): string | undefined =>
+      a.type === "cast-spell" ? state.objects[a.card]?.cardName : a.type === "activate-ability" ? state.objects[a.source]?.cardName : undefined;
+    const targetsOf = (a: Action) => (a.type === "cast-spell" || a.type === "activate-ability" ? a.targets : undefined);
+    /** The move with its targets and their shares left out: equal for two
+     * fillings of one spell or ability. */
+    const shape = (a: Action): string => JSON.stringify({ ...a, targets: undefined, division: undefined });
+    const mine = shape(best);
+    const premium = (a: Action): number => aimPremium(state, this.cards, w, this.playerId, sourceOf(a), targetsOf(a));
+    let top = best;
+    let topValue = base + premium(best);
+    for (const [action, score] of scored) {
+      if (action === best || action.type !== best.type || shape(action) !== mine) continue;
+      const value = score + premium(action);
+      if (value > topValue) [top, topValue] = [action, value];
+    }
+    return top;
+  }
+
   private withSacrificeChoices(state: GameState, legal: LegalAction, actions: readonly Action[]): Action[] {
     if (legal.kind !== "cast-spell" && legal.kind !== "activate-ability") return [...actions];
     const choices = legal.sacrifice?.choices ?? [];
@@ -2087,37 +2156,6 @@ export class EvalBotController extends HeuristicBotController {
       .filter((choice) => (seen.has(choice.key) ? false : (seen.add(choice.key), true)))
       .sort((a, b) => b.size - a.size)
       .map((choice) => choice.id);
-  /**
-   * `best`, or the same cast or activation at other targets where its aim
-   * is worth more there (`aimPremium`: an opponent's commander, its token
-   * makers). Only among the fillings of that one spell or ability that the
-   * search scored, each by its own score and its premium: which removal to
-   * fire, and whether to, were decided without it.
-   */
-  private reaimed(state: GameState, best: Action, scored: ReadonlyMap<Action, number>): Action {
-    const w = this.weights;
-    if (w.opposingCommander === 0 && w.opposingTokenEngines === 0) return best;
-    if (best.type !== "cast-spell" && best.type !== "activate-ability") return best;
-    const base = scored.get(best);
-    if (base === undefined) return best;
-    const sourceOf = (a: Action): string | undefined =>
-      a.type === "cast-spell" ? state.objects[a.card]?.cardName : a.type === "activate-ability" ? state.objects[a.source]?.cardName : undefined;
-    const targetsOf = (a: Action) => (a.type === "cast-spell" || a.type === "activate-ability" ? a.targets : undefined);
-    /** The move with its targets and their shares left out: equal for two
-     * fillings of one spell or ability. */
-    const shape = (a: Action): string => JSON.stringify({ ...a, targets: undefined, division: undefined });
-    const mine = shape(best);
-    const premium = (a: Action): number => aimPremium(state, this.cards, w, this.playerId, sourceOf(a), targetsOf(a));
-    let top = best;
-    let topValue = base + premium(best);
-    for (const [action, score] of scored) {
-      if (action === best || action.type !== best.type || shape(action) !== mine) continue;
-      const value = score + premium(action);
-      if (value > topValue) [top, topValue] = [action, value];
-    }
-    return top;
-  }
-
     const out: Action[] = [];
     for (const action of actions) {
       if (action.type !== "cast-spell" && action.type !== "activate-ability") {
@@ -2365,6 +2403,7 @@ export class EvalBotController extends HeuristicBotController {
         ? KEPT_PER_MANA * this.manaDeclinedFor(view.state)
         : 0;
     this.lastKept = keptBy > 0 ? { action: inherited, by: keptBy } : null;
+    this.lastOpenAnswers = [];
     if (view.state.awaiting?.kind === "commander-replacement" && this.horizon === "next-turn") {
       return this.commanderToGraveyard(view, inherited);
     }
@@ -2389,6 +2428,7 @@ export class EvalBotController extends HeuristicBotController {
         this.trace,
         keptBy,
         byTurn === undefined ? undefined : (action) => byTurn(action, budget),
+        this.lastOpenAnswers,
       );
     // Which card to discard: every answer keeps as many, so the hand is read
     // for which are worth keeping (`withHandReadForKeeps`) — an engine above
@@ -2549,6 +2589,12 @@ export class EvalBotController extends HeuristicBotController {
     // it shows, without `crackbackGrowth`: scaled, a merely threatening board
     // would read as lost and turn the caution into an all-in race.
     const deadAnyway = this.crackbackLethal(state, false);
+    // Dead to the table is not dead to each player at it (`diesSooner`): the
+    // opponents it lives through with everything home still have their turns
+    // to play before the one whose swing kills it. Racing is for when the
+    // next swing kills it either way.
+    const spared = deadAnyway ? this.outlives(state) : [];
+    const diesSooner = (after: GameState): boolean => this.diesSooner(after, spared);
     // `crackbackGrowth` only sorts attacks while holding back passes it. When
     // even no attack reads as unsafe scaled up (but not plainly — that's
     // `deadAnyway`), every candidate would score `UNSAFE`, ranked by board
@@ -2557,7 +2603,7 @@ export class EvalBotController extends HeuristicBotController {
     // deaths. Then the plain check sorts them, as it did before the scaling.
     const grown = !this.crackbackLethal(state, true);
 
-    const alpha = this.alphaStrike(state, legal, deadAnyway, grown, budget);
+    const alpha = this.alphaStrike(state, legal, deadAnyway, grown, budget, spared.length > 0 ? diesSooner : undefined);
     if (alpha !== null) {
       this.lastDecision = audit("attackers", budget);
       return alpha;
@@ -2580,7 +2626,8 @@ export class EvalBotController extends HeuristicBotController {
       if (after === null) return null;
       const players = new Set(attackers.map((d) => defendingPlayer(d.defender)));
       const value = evaluateState(after, this.cards, me, w) + SPREAD_BONUS * Math.max(0, players.size - 1);
-      if (after.result.over || deadAnyway) return value;
+      if (after.result.over) return value;
+      if (deadAnyway) return diesSooner(after) ? UNSAFE + value : value;
       return lessBystanders(after, this.crackbackLethal(after, grown) ? UNSAFE + value : value);
     };
 
@@ -3075,6 +3122,10 @@ export class EvalBotController extends HeuristicBotController {
     deadAnyway: boolean,
     grown: boolean,
     budget: SearchBudget,
+    /** Dead whatever stays home, but not to every opponent: whether the
+     * board after an attack is dead to one it lived through before (the
+     * attack decision's `diesSooner`). Left out, a kill is taken as it comes. */
+    diesSooner?: (after: GameState) => boolean,
   ): AttackerDeclaration[] | null {
     const me = this.playerId;
     // Every token of a compacted stack is its own attacker here, cloned so
@@ -3207,7 +3258,7 @@ export class EvalBotController extends HeuristicBotController {
       .map(({ plan }) => plan);
 
     for (const plan of ranked) {
-      if (plan.kills === living.length || deadAnyway) return plan.declaration;
+      if (plan.kills === living.length || (deadAnyway && diesSooner === undefined)) return plan.declaration;
       const after = timed(budget, () =>
         simulateCombat(state, this.cards, {
           type: "declare-attackers",
@@ -3215,9 +3266,29 @@ export class EvalBotController extends HeuristicBotController {
           attackers: withRequiredAttackers(plan.declaration, legal),
         }),
       );
+      if (deadAnyway) {
+        // A kill that doesn't cost it a turn of life it had.
+        if (after !== null && diesSooner?.(after) !== true) return plan.declaration;
+        continue;
+      }
       if (after !== null && !this.crackbackLethal(after, grown)) return plan.declaration;
     }
     return null;
+  }
+
+  /** The opponents we live through before we untap, in the order they act
+   * (`opponentsOutlived`), on the board as it shows: the crackback's weights
+   * and margin, without `crackbackGrowth`, as `deadAnyway` is read. */
+  private outlives(state: GameState): PlayerId[] {
+    return opponentsOutlived(
+      state,
+      this.cards,
+      this.playerId,
+      this.weights.crackbackParanoia,
+      undefined,
+      { weight: this.weights.crackbackKillShot, margin: this.weights.crackbackMargin },
+      -this.weights.crackbackMargin,
+    );
   }
 
   /** Would every opponent swinging at us before we untap again be lethal,
@@ -3747,6 +3818,23 @@ export class EvalBotController extends HeuristicBotController {
       return alive === null ? budget.until !== Infinity && rolloutAborted() : !alive;
     }
     return this.crackbackLethal(resolved, guard.grown);
+  }
+
+  /**
+   * Dead to the table is not dead to each player at it. `spared` are the
+   * opponents we lived through with our creatures home, who act before the
+   * one whose swing kills us; this is whether, on `state`, one of them still
+   * in the game now has us dead. An attack that makes it so dies a turn or
+   * two sooner than it had to, with other people's turns unplayed:
+   * Sultai Arisen, dead on paper to twelve Zombies two turns on, tapped out
+   * for a kill and died next turn to a board its creatures would have held
+   * (`bot:losses`, 2026-11-15).
+   */
+  private diesSooner(state: GameState, spared: readonly PlayerId[]): boolean {
+    const still = spared.filter((p) => state.players[p]?.hasLost !== true);
+    if (still.length === 0) return false;
+    const now = this.outlives(state);
+    return still.some((p) => !now.includes(p));
   }
 
   /**

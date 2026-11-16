@@ -353,7 +353,10 @@ activated ability on the battlefield (a fog engine, a sacrifice outlet), not a c
 held for a pump. A sorcery-speed out on its own turn (its own wipe over a board of nineteen
 creatures: Grave Danger cast Crippling Fear instead of Necromantic Selection and died) is the
 evaluation's call and didn't reproduce on a small board. An attack, dead on the board, still
-races. And whether the bots wipe for a table's sake is unmeasured.
+races when the next swing kills it either way; since 2026-11-16 it no longer taps out when
+only a later player has it dead (`diesSooner`: the opponents it lives through with its
+creatures home are read one at a time, `COMPLETED.md`). And whether the bots wipe for a
+table's sake is unmeasured.
 
 ## 6. The swing-back margin
 

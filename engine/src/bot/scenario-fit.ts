@@ -25,7 +25,7 @@
 
 import type { Action } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
-import { EvalBotController, TIE, UNSAFE } from "./eval-bot.js";
+import { EvalBotController, OPEN_ANSWER, TIE, UNSAFE } from "./eval-bot.js";
 import { normalizeWeights, outcomeOf, scoreOutcome } from "./evaluate.js";
 import type { EvalOutcome, EvalWeights } from "./evaluate.js";
 import type { BotScenario, ScenarioResult } from "./scenarios.js";
@@ -70,6 +70,9 @@ export interface ScenarioRecord {
   /** v1's answer to a decision, and how much another had to beat it by
    * (`lastKept`): a payment declined to keep a spell castable. */
   readonly kept?: { readonly action: Action; readonly by: number } | null;
+  /** A decision's answers that left the seat dead to the swing back, ranked
+   * below every one that didn't (`lastOpenAnswers`). */
+  readonly open?: readonly Action[];
 }
 
 /**
@@ -118,6 +121,7 @@ export function recordScenario(
     unsafe: bot.lastUnsafe,
     // Only a decision's: a priority window doesn't set or clear it.
     kept: exact ? null : bot.lastKept,
+    open: exact ? [] : bot.lastOpenAnswers,
   };
 }
 
@@ -127,6 +131,7 @@ export function replayChoice(record: ScenarioRecord, weights: EvalWeights): numb
   const w = normalizeWeights(weights);
   const key = (a: Action | undefined): string => JSON.stringify(a);
   const unsafe = new Set((record.unsafe ?? []).map(key));
+  const open = new Set((record.open ?? []).map(key));
   const refused = new Set((record.refusedTies ?? []).map(key));
   const kept = record.kept == null ? null : key(record.kept.action);
   let best = 0;
@@ -136,6 +141,7 @@ export function replayChoice(record: ScenarioRecord, weights: EvalWeights): numb
     const score =
       scoreOutcome(answer.outcome, w) +
       (unsafe.has(key(answer.action)) ? UNSAFE : 0) +
+      (open.has(key(answer.action)) ? OPEN_ANSWER : 0) +
       // v1's answer, which another must beat by a margin (`bestDecision`).
       (kept !== null && key(answer.action) === kept ? (record.kept?.by ?? 0) : 0);
     // A tie with passing goes to acting under the `"acting"` rollout, as
@@ -351,14 +357,14 @@ export function fitWeights(records: readonly ScenarioRecord[], options: FitOptio
 export const FIT_FIXED: readonly WeightKey[] = [
   "hand",
   "opponent",
+  "opposingCommander",
+  "opposingTokenEngines",
   "landCap",
   "crackbackParanoia",
   "crackbackMargin",
   "crackbackGrowth",
   "crackbackKillShot",
   "idlePower",
-  "opposingCommander",
-  "opposingTokenEngines",
 ];
 
 export const FIT_TIED: readonly (readonly [WeightKey, WeightKey])[] = [["idlePower", "power"]];

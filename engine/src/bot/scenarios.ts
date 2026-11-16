@@ -912,6 +912,32 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "dead to the last opponent, takes the kill that keeps it alive through the next one",
+    rule: "Dead to the table is not dead to each player at it: an attack mustn't leave the bot dead to an opponent it would have lived through.",
+    run(weights, registry, makeBot) {
+      // From a screened loss (`bot:losses`, 2026-11-15): Sultai Arisen, dead
+      // on paper to twelve Zombies two turns on, tapped out for a kill and
+      // died next turn to a board its creatures would have held. Carol's six
+      // Wurms kill Alice whatever stays home, so "dead anyway" held and the
+      // first kill plan was taken: all three Giants at Dave. Bob acts first,
+      // and his four Giants kill her only with her blockers tapped. Two
+      // Giants kill Dave; the third holds Bob to 9 of her 12.
+      const game = table(registry, [A, B, C, D], A);
+      game.state.players[A].life = 12;
+      game.state.players[D].life = 5;
+      for (let i = 0; i < 3; i += 1) onBoard(game, "Hill Giant", A);
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Hill Giant", B);
+      for (let i = 0; i < 6; i += 1) onBoard(game, "Craw Wurm", C);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const atDave = attackers.filter((d) => d.defender === D).length;
+      return {
+        passed: attackers.length === 2 && atDave === 2,
+        detail: `attacked with ${attackers.length} of 3, ${atDave} at dave`,
+      };
+    },
+  },
+  {
     name: "does not swing into a lethal crackback",
     rule: "Two free damage isn't worth dying to the swing back.",
     run(weights, registry, makeBot) {
@@ -5392,6 +5418,111 @@ const SCENARIOS: readonly BotScenario[] = [
       const goblin = game.debugSpawn("Zhur-Taa Goblin", A, "hand");
       game.advanceUntil((s) => s.turn.step === "postcombat-main" && s.priority.holder === A);
       game.dispatch({ type: "cast-spell", player: A, card: goblin, targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type" || s.result.over);
+      return {
+        game,
+        player: A,
+        judge(action) {
+          return {
+            passed: action.type === "choose-creature-type" && action.creatureType === "+1/+1 counter",
+            detail: describeAction(action).slice(0, 120),
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "declines unleash's counter when it needs the creature to block",
+    rule: "Unleash's counter costs the block: a creature that is the only thing between its controller and a lethal attack enters without it.",
+    position(registry) {
+      // Unleash's question is searched as riot's is (2026-11-16). Bob's Hill
+      // Giant kills Alice, on 3, next turn unless something blocks it, and a
+      // Rakdos Cackler with its counter can't block. The search alone took
+      // the counter: it ends with our own turn, so the 2/2 that can't block
+      // scored above the 1/1 that can. An answer is now checked against the
+      // swing back, as an attack or a tap is (`openToCrackback`).
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 3;
+      lands(game, "Swamp", A, 1);
+      onBoard(game, "Hill Giant", B);
+      const cackler = game.debugSpawn("Rakdos Cackler", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: cackler, targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type" || s.result.over);
+      return {
+        game,
+        player: A,
+        judge(action) {
+          return {
+            passed: action.type === "choose-creature-type" && action.creatureType === "No counter",
+            detail: describeAction(action).slice(0, 120),
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "sacrifices the bigger creature to an edict when the smaller is its only blocker for a flier",
+    rule: "The blocker that keeps the bot alive this turn is not the fodder, and being exposed next turn is still better than dying in this one.",
+    position(registry) {
+      // v1 gives an edict its cheapest creature, the Giant Spider; Bob's
+      // Serra Angel then has nothing with reach in its way and Alice, on 4,
+      // dies this turn. The rollout sees that and gives up the Craw Wurm.
+      // Here for the swing-back check on answers (2026-11-16), whose first
+      // version undid it: keeping the Spider leaves Alice dead on paper to
+      // the Angel a turn later, and that scored below dying now.
+      const game = table(registry, [A, B], B);
+      game.state.players[A].life = 4;
+      const spider = onBoard(game, "Giant Spider", A);
+      const wurm = onBoard(game, "Craw Wurm", A);
+      onBoard(game, "Serra Angel", B);
+      lands(game, "Swamp", B, 2);
+      const edict = game.debugSpawn("Diabolic Edict", B, "hand");
+      game.dispatch({ type: "cast-spell", player: B, card: edict, targets: [{ kind: "player", player: A }] });
+      game.advanceUntil((s) => (s.awaiting !== null && s.awaiting.player === A) || s.result.over);
+      if (game.state.awaiting === null) return { passed: false, detail: "alice was never asked what to sacrifice" };
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const text = JSON.stringify(action);
+          return { passed: text.includes(wurm) && !text.includes(spider), detail: describeAction(action).slice(0, 160) };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "exiles its graveyard's creatures to Sutured Ghoul",
+    rule: "An \"any number\" that makes the permanent is taken: Sutured Ghoul with nothing exiled is a 0/0 and dies.",
+    position(registry) {
+      // v1's `chooseFromZone` returns its minimum, so it exiles nothing and
+      // the Ghoul dies. v2 searches the answer and exiles them all (checked
+      // 2026-11-16, which is what this holds).
+      const game = table(registry, [A, B], A);
+      lands(game, "Swamp", A, 7);
+      for (const name of ["Craw Wurm", "Hill Giant", "Grizzly Bears"]) game.debugSpawn(name, A, "graveyard");
+      const ghoul = game.debugSpawn("Sutured Ghoul", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: ghoul, targets: [] });
+      game.advanceUntil((s) => (s.awaiting !== null && s.awaiting.player === A) || s.result.over);
+      if (game.state.awaiting === null) return { passed: false, detail: "the Ghoul never asked what to exile" };
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const chosen = action.type === "choose-from-zone" ? action.chosen : [];
+          return { passed: chosen.length === 3, detail: `exiled ${chosen.length} of 3: ${describeAction(action).slice(0, 120)}` };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "takes unleash's counter with nothing to block",
+    rule: "Unleash's counter costs the block: a creature that is the only thing between its controller and a lethal attack enters without it.",
+    position(registry) {
+      // The other half: no attacker to block, so the bigger creature it is.
+      const game = table(registry, [A, B], A);
+      lands(game, "Swamp", A, 1);
+      const cackler = game.debugSpawn("Rakdos Cackler", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: cackler, targets: [] });
       game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type" || s.result.over);
       return {
         game,

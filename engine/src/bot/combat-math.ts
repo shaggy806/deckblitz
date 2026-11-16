@@ -339,6 +339,30 @@ export function crackback(
   lost?: ReadonlySet<ObjectId> | "all",
   killShot: { readonly weight: number; readonly margin: number } = { weight: 0, margin: 0 },
 ): DamageThrough {
+  let through: DamageThrough = { damage: 0, commanderDamage: new Map() };
+  crackbackByOpponent(state, registry, me, paranoia, lost, killShot, (_opponent, sofar) => {
+    through = sofar;
+    return true;
+  });
+  return through;
+}
+
+/**
+ * {@link crackback}'s sum, one opponent at a time in the order they act:
+ * `each` is told the opponent whose swing was just added and the damage
+ * through so far, and stops the count by returning `false`. An opponent
+ * whose swing counts for nothing (no paranoia, no kill shot) is still told,
+ * with the sum unchanged.
+ */
+function crackbackByOpponent(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  paranoia: number,
+  lost: ReadonlySet<ObjectId> | "all" | undefined,
+  killShot: { readonly weight: number; readonly margin: number },
+  each: (opponent: PlayerId, sofar: DamageThrough) => boolean,
+): void {
   const blockers =
     lost === "all"
       ? []
@@ -355,18 +379,53 @@ export function crackback(
   const commanderDamage = new Map<ObjectId, number>();
   const shared = Math.max(0, Math.min(1, paranoia));
   const killWeight = Math.max(0, Math.min(1, killShot.weight));
-  opponents.forEach((opponent, i) => {
-    if (i > 0 && shared === 0 && killWeight === 0) return;
-    const attackers = combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack);
-    const through = damageThrough(attackers, blockers);
-    const weight =
-      i === 0 ? 1 : killWeight > shared && isLethal(state, me, through, -killShot.margin) ? killWeight : shared;
-    if (weight === 0) return;
-    gained += (through.gained ?? 0) * weight;
-    damage += through.damage * weight;
-    for (const [commander, amount] of through.commanderDamage) {
-      commanderDamage.set(commander, (commanderDamage.get(commander) ?? 0) + amount * weight);
+  // The one map throughout: `each` reads it as it stands, and the last
+  // record told is the whole sum.
+  const sofar = (): DamageThrough => (gained > 0 ? { damage, commanderDamage, gained } : { damage, commanderDamage });
+  for (const [i, opponent] of opponents.entries()) {
+    if (!(i > 0 && shared === 0 && killWeight === 0)) {
+      const attackers = combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack);
+      const through = damageThrough(attackers, blockers);
+      const weight =
+        i === 0 ? 1 : killWeight > shared && isLethal(state, me, through, -killShot.margin) ? killWeight : shared;
+      if (weight !== 0) {
+        gained += (through.gained ?? 0) * weight;
+        damage += through.damage * weight;
+        for (const [commander, amount] of through.commanderDamage) {
+          commanderDamage.set(commander, (commanderDamage.get(commander) ?? 0) + amount * weight);
+        }
+      }
     }
+    if (!each(opponent, sofar())) return;
+  }
+}
+
+/**
+ * The opponents `me` lives through before it untaps again, in the order they
+ * act: {@link crackback}'s sum taken one opponent further at a time, up to
+ * the first whose swing (added to the ones before it) is lethal by
+ * {@link isLethal} with `margin` life kept in reserve. All of them when the
+ * whole crackback isn't lethal, none when the next swing alone is.
+ *
+ * "Dead to the table" isn't one thing: a player dead to the third opponent to
+ * act and safe from the first two still has two turns of other people's play
+ * to live through, and an attack that taps the blockers keeping it alive
+ * through those dies sooner than it had to.
+ */
+export function opponentsOutlived(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  paranoia: number,
+  lost?: ReadonlySet<ObjectId> | "all",
+  killShot: { readonly weight: number; readonly margin: number } = { weight: 0, margin: 0 },
+  margin = 0,
+): PlayerId[] {
+  const outlived: PlayerId[] = [];
+  crackbackByOpponent(state, registry, me, paranoia, lost, killShot, (opponent, sofar) => {
+    if (isLethal(state, me, sofar, margin)) return false;
+    outlived.push(opponent);
+    return true;
   });
-  return gained > 0 ? { damage, commanderDamage, gained } : { damage, commanderDamage };
+  return outlived;
 }
