@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-973 already implemented / 27 missing
+974 already implemented / 26 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -744,7 +744,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  738  Gut, True Soul Zealot                           4475 decks  {2}{R}           Legendary Creature — Goblin Shaman
 [ ]  739  Kathril, Aspect Warper                          4465 decks  {2}{W}{B}{G}     Legendary Creature — Nightmare Insect
 [x]  740  Kresh the Bloodbraided                          4461 decks  {2}{B}{R}{G}     Legendary Creature — Human Warrior
-[ ]  741  River Song                                      4433 decks  {1}{U}{R}        Legendary Creature — Human Time Lord Rogue
+[x]  741  River Song                                      4433 decks  {1}{U}{R}        Legendary Creature — Human Time Lord Rogue
 [ ]  742  Firesong and Sunspeaker                         4432 decks  {4}{R}{W}        Legendary Creature — Minotaur Cleric
 [x]  743  Sovereign Okinec Ahau                           4421 decks  {2}{G}{W}        Legendary Creature — Cat Noble
 [x]  744  Agent of the Iron Throne                        4420 decks  {2}{B}           Legendary Enchantment — Background
