@@ -13015,4 +13015,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  // --- Cards exiled with a creature, counted (2026-11-16) ---------------------
+  preset(
+    'Hostile Hostel: the third soul counter turns it into Creeping Inn, untapped',
+    board({
+      you: { bf: [{ name: 'Hostile Hostel', counters: { soul: 2 } }, 'Grizzly Bears', 'Wastes'] },
+    }),
+  ),
 ]

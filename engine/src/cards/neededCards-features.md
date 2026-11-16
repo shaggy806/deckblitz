@@ -334,6 +334,15 @@ one offer with no colour, and once the cost is paid the mana ability asks them �
 resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
 back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
 `test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+### "The number of creature cards exiled with this creature" — marked built 2026-11-16
+
+The key `amount:exiled-with-source-count` needed no engine code: the aggregate amount over the linked set,
+`{ aggregate: "count", filter: { type: "creature" }, in: "exiled-with-source" }` (rule 607.2a; Unlicensed
+Hearse's CDA reads it the same way), counts the cards a `look-and-choose` `"exile"` destination linked to
+the source, the one just exiled included. Hostile Hostel // Creeping Inn (rank 10663), its land half's soul
+counters, transform and untap already expressible (Westvale Abbey's, Brass's Tunnel-Grinder's).
+`test/hostile-hostel.test.ts`. Lumbering Battlement waits on this key alone.
+
 ### A permission's "costs {N} more unless it targets …" — built 2026-11-16
 
 The key `cost:granted-graveyard-cast-increase-unless-targets`. A permission's `tax` takes `unlessTargets`

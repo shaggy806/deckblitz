@@ -2721,7 +2721,8 @@
   "replacement:graveyard-to-library-top-optional",
   "zone:choose-play-permission-any-zone",
   "zone:choose-play-permission-any-zone",
-  "cost:granted-graveyard-cast-increase-unless-targets"
+  "cost:granted-graveyard-cast-increase-unless-targets",
+  "amount:exiled-with-source-count"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

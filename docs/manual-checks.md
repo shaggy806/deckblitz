@@ -8613,3 +8613,9 @@ Each board's die comes up 4.
 ### Mavinda, Students' Advocate: a spell from your graveyard costs {8} more unless it targets your creature
 - **Do:** Use Mavinda's ability on Giant Growth in your graveyard. Then cast Giant Growth from your graveyard at your Grizzly Bears.
 - **Expect:** With your two Forests, only your own creatures (Mavinda and your Grizzly Bears) light up as targets, not Bob's Bears: at Bob's it would cost {8}{G}. It resolves for {G}, your Bears are 5/5, and Giant Growth goes to exile, not your graveyard.
+
+## Cards exiled with a creature, counted (2026-11-16)
+
+### Hostile Hostel: the third soul counter turns it into Creeping Inn, untapped
+- **Do:** Use Hostile Hostel's "{1}, {T}, Sacrifice a creature" ability, sacrificing Grizzly Bears.
+- **Expect:** It already has two soul counters; the third comes off with them, and it turns over into Creeping Inn, a 3/7 artifact creature, untapped and with no counters.
