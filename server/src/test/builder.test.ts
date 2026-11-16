@@ -379,6 +379,11 @@ describe("the turn number, a commander's tax and damage", () => {
     expect(() =>
       buildScenario(spec([card("bears", "Grizzly Bears", { damage: 2 }), card("anthem", "Glorious Anthem")])),
     ).not.toThrow();
+    // Under Zilortha, Strength Incarnate, lethal is power, at least 1: a 6/4
+    // holds 5, a 0/8 wall none.
+    const zilortha = card("zilortha", "Zilortha, Strength Incarnate");
+    expect(() => buildScenario(spec([card("wurm", "Craw Wurm", { damage: 5 }), zilortha]))).not.toThrow();
+    expect(() => buildScenario(spec([card("wall", "Wall of Stone", { damage: 1 }), zilortha]))).toThrow(/would die.*power/);
     // Indestructible survives any amount.
     const myr = buildScenario(spec([card("myr", "Darksteel Myr", { damage: 5 })]));
     expect(myr.game.state.objects[idOf(myr.objects, "myr")].damageMarked).toBe(5);
