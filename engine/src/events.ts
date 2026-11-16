@@ -427,6 +427,8 @@ export type GameEvent =
       readonly results: readonly number[];
       /** What the instruction adds to the natural results (rule 706.2). */
       readonly modifier?: number;
+      /** Die by die, what a shift after the roll added (706.2 — `RollRecord.shifts`). */
+      readonly shifts?: readonly number[];
       /** Natural results rolled and ignored, for the log and the dice thrown:
        * no trigger or effect sees them (706.6). */
       readonly ignored?: readonly number[];

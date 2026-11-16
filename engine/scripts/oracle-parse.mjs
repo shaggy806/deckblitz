@@ -2741,6 +2741,12 @@ export function parseTrigger(clause) {
   // Rule 706: once per die rolled; "your third die each turn" (Resolute
   // Veggiesaur) the timing wrapper, counted die by die.
   if (/^Whenever you roll a die$/.test(c)) return [{ on: "event", event: "rolls-die", who: "you" }];
+  // "Whenever you roll a 6" (Night Shift of the Living Dead), "a 1"
+  // (Complaints Clerk): a die whose result, every modifier included (706.2),
+  // is that number.
+  if ((m = /^Whenever you roll a (\d+)$/.exec(c))) {
+    return [{ on: "event", event: "rolls-die", who: "you", die: { atLeast: Number(m[1]), atMost: Number(m[1]) } }];
+  }
   if ((m = /^Whenever you roll your (first|second|third|fourth|fifth) die each turn$/.exec(c))) {
     const nth = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }[m[1]];
     return [{ on: "event", event: "rolls-die", who: "you", nthEachTurn: nth }];
@@ -22385,6 +22391,28 @@ function parseStatic(line, text) {
           event: "enters-battlefield",
           rollAsEnters: { sides: Number(w[2]), count: w[1] === "X" ? "x" : Number(w[1]) },
           counters: { kind: w[3], amount: "rolled-as-enters" },
+        },
+        text,
+      };
+    }
+  }
+  // "After you roll a die, you may pay 1 life. If you do, increase or decrease
+  // the result by 1. Do this only once each turn." (Night Shift of the Living
+  // Dead); "… you may remove a +1/+1 counter from ~. If you do, …"
+  // (Xenosquirrels): a modifier from another source, optional and with a cost
+  // (rule 706.2a) — `shiftsRoll`.
+  {
+    const w =
+      /^After you roll a die, you may (?:pay (\d+) life|remove an? ([+-]\d+\/[+-]\d+|[a-z]+) counter from (?:~|this creature))\. If you do, increase or decrease the result by (\d+)\.( Do this only once each turn\.)?$/.exec(
+        line,
+      );
+    if (w !== null) {
+      return {
+        affects: { scope: "self" },
+        shiftsRoll: {
+          by: Number(w[3]),
+          ...(w[1] !== undefined ? { payLife: Number(w[1]) } : { removeCounter: w[2] }),
+          ...(w[4] !== undefined ? { oncePerTurn: true } : {}),
         },
         text,
       };

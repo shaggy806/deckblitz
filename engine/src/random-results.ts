@@ -5,9 +5,10 @@
  * docs/plans/need-key-themes.md, theme 12's design note.
  */
 
+import type { EffectSpec } from "./effects.js";
 import type { JournalEntry } from "./journal.js";
-import type { PlayerId } from "./primitives.js";
-import type { GameState } from "./state.js";
+import type { ObjectId, PlayerId } from "./primitives.js";
+import type { GameState, ResolutionResume } from "./state.js";
 
 export type CoinSide = "heads" | "tails";
 
@@ -31,7 +32,13 @@ export interface RollRecord {
   readonly sides: number;
   readonly results: readonly number[];
   readonly modifier: number;
-  /** The natural results' sum plus `modifier`: the roll's result (706.2). */
+  /** Die by die, as `results`, what modifiers from other sources added after
+   * the roll (rule 706.2): "after you roll a die, you may pay 1 life. If you
+   * do, increase or decrease the result by 1" (Night Shift of the Living
+   * Dead — {@link RollShift}). Absent when nothing was shifted. */
+  readonly shifts?: readonly number[];
+  /** The natural results' sum plus `modifier` and the `shifts`: the roll's
+   * result (706.2). */
   readonly total: number;
   readonly ignored?: readonly number[];
 }
@@ -42,15 +49,126 @@ export function rollOfEvent(event: {
   readonly sides: number;
   readonly results: readonly number[];
   readonly modifier?: number;
+  readonly shifts?: readonly number[];
 }): RollRecord {
   const modifier = event.modifier ?? 0;
+  const shifted = event.shifts?.reduce((n, s) => n + s, 0) ?? 0;
   return {
     player: event.player,
     sides: event.sides,
     results: event.results,
     modifier,
-    total: event.results.reduce((n, r) => n + r, 0) + modifier,
+    ...(event.shifts !== undefined ? { shifts: event.shifts } : {}),
+    total: event.results.reduce((n, r) => n + r, 0) + modifier + shifted,
   };
+}
+
+/**
+ * Each die's result, in the order rolled: its natural result with every
+ * modifier (rule 706.2) — the instruction's, and what a shift after the roll
+ * added to that die. What "for each odd result", "doubles" (706.5) and "choose
+ * one result" read.
+ */
+export function dieResults(roll: RollRecord): readonly number[] {
+  if (roll.modifier === 0 && roll.shifts === undefined) return roll.results;
+  return roll.results.map((natural, i) => natural + roll.modifier + (roll.shifts?.[i] ?? 0));
+}
+
+/**
+ * "After you roll a die, you may pay 1 life. If you do, increase or decrease
+ * the result by 1. Do this only once each turn" (Night Shift of the Living
+ * Dead); "… you may remove a +1/+1 counter from this creature. If you do, …"
+ * (Xenosquirrels) — a static ability's `shiftsRoll`. A modifier from another
+ * source (rule 706.2), optional and with a cost (706.2a): after each die its
+ * controller rolls, before anything reads the result, they may pay the cost
+ * to move that die's result up or down by `by`. Each die is "a die" rolled
+ * (The Space Family Goblinson's ruling), so each gives it one chance; seeing
+ * every result first, they choose which die and which way (Night Shift's
+ * ruling). Asked as a `choose-modes` of every shift on offer
+ * (`Game.askRollShift`), the player choosing the order they apply in (706.2b).
+ * There is no lower or upper bound: a 1 decreased is 0 (706.2).
+ */
+export interface RollShift {
+  /** How far either way: "increase or decrease the result by 1". */
+  readonly by: number;
+  /** "You may pay N life" (rule 119.4: only with at least that much). */
+  readonly payLife?: number;
+  /** "You may remove a +1/+1 counter from this creature": one counter of
+   * this kind off the permanent with the ability. */
+  readonly removeCounter?: string;
+  /** "Do this only once each turn": done, it's done for the turn — for this
+   * object (rule 400.7), journaled as the ability's `done`. Declining isn't
+   * doing it. */
+  readonly oncePerTurn?: true;
+}
+
+/** One shift on offer: the permanent `by` (in `stint`) pays to move die
+ * `die` by `delta`; `key` is the ability's, for its once each turn. */
+export interface RollShiftOption {
+  readonly by: ObjectId;
+  readonly stint: number;
+  readonly key: string;
+  readonly die: number;
+  readonly delta: number;
+  readonly payLife?: number;
+  readonly removeCounter?: string;
+  readonly oncePerTurn?: true;
+}
+
+/**
+ * A shift on offer as its mode reads: "Pay 1 life: 5 → 6", "Remove a +1/+1
+ * counter: die 2, 3 → 2" — `dice` the results so far — led by the
+ * permanent's `name` when more than one offers.
+ */
+export function rollShiftText(option: RollShiftOption, dice: readonly number[], name?: string): string {
+  const cost =
+    option.payLife !== undefined
+      ? `Pay ${option.payLife} life`
+      : option.removeCounter !== undefined
+        ? `Remove a ${option.removeCounter} counter`
+        : "Shift";
+  const from = dice[option.die];
+  const which = dice.length > 1 ? `die ${option.die + 1}, ` : "";
+  return `${name !== undefined ? `${name}: ` : ""}${cost}: ${which}${from} → ${from + option.delta}`;
+}
+
+/**
+ * What a roll carries on with once its result is final (`Game.finishRoll`),
+ * when a shift was asked between: the rest of the `roll-dice` effect (`then`,
+ * with the result as its `rolled`) under the resolution it was part of; the
+ * visit a roll to visit makes (rule 701.52a); the stored results a reroll
+ * replaces (Centaur of Attention, `into` die by die, then the rerolls of the
+ * other kinds of die, `rest`); or the permanent about to enter that rolled as
+ * it enters (Neverwinter Hydra — `enterChoice.rolledAsEnters`).
+ */
+export type RollThen =
+  | { readonly kind: "effect"; readonly then: EffectSpec; readonly source: ObjectId; readonly resume: ResolutionResume }
+  | { readonly kind: "visit" }
+  | {
+      readonly kind: "reroll-stored";
+      readonly object: ObjectId;
+      readonly stint: number;
+      readonly into: readonly number[];
+      readonly rest: readonly { readonly sides: number; readonly into: readonly number[] }[];
+    }
+  | { readonly kind: "enters"; readonly object: ObjectId };
+
+/**
+ * A roll thrown and not yet final: its dice are on the table and a shift is
+ * being asked (the `choose-modes` decision's `shiftRoll`). `shifts` die by die
+ * so far; `used` the shifts already made to it, as `key@die` — each ability
+ * once a die.
+ */
+export interface RollInProgress {
+  readonly player: PlayerId;
+  readonly source?: ObjectId;
+  readonly sides: number;
+  readonly results: readonly number[];
+  readonly modifier: number;
+  readonly ignored?: readonly number[];
+  readonly shifts: readonly number[];
+  readonly used: readonly string[];
+  readonly then: RollThen;
 }
 
 /** One die of a roll: "whenever you roll a 4 or higher", "a natural 20". */
@@ -67,8 +185,10 @@ export interface DieTest {
 /** Each die of the roll that passes `test`, as its result (706.2). */
 export function matchingDice(roll: RollRecord, test: DieTest | undefined): readonly number[] {
   const out: number[] = [];
-  for (const natural of roll.results) {
-    const result = natural + roll.modifier;
+  const results = dieResults(roll);
+  for (let i = 0; i < roll.results.length; i += 1) {
+    const natural = roll.results[i];
+    const result = results[i];
     if (test?.atLeast !== undefined && result < test.atLeast) continue;
     if (test?.atMost !== undefined && result > test.atMost) continue;
     if (test?.natural !== undefined && natural !== (test.natural === "highest" ? roll.sides : test.natural)) continue;
@@ -79,14 +199,14 @@ export function matchingDice(roll: RollRecord, test: DieTest | undefined): reado
 
 /** What a `{ roll }` amount asks about a roll. */
 export type RollQuery =
-  /** The result: natural results plus the modifier. */
+  /** The result: natural results plus every modifier. */
   | "total"
   /** How many dice came up odd, or even. */
   | "odd"
   | "even"
-  /** The natural results but the one chosen ({@link ChooseValue}'s `x`). */
+  /** The results but the one chosen ({@link ChooseValue}'s `x`). */
   | "other"
-  /** The highest natural result. */
+  /** The highest result. */
   | "highest"
   /** How many different numbers came up: doubles is 1 over two dice (706.5). */
   | "distinct"
@@ -95,15 +215,17 @@ export type RollQuery =
   /** How many dice came up N or higher. */
   | { readonly atLeast: number };
 
+/** What `query` asks of `roll`, each die read by its result ({@link dieResults}). */
 export function rollRead(roll: RollRecord, query: RollQuery, chosen: number): number {
   if (query === "total") return roll.total;
-  if (query === "odd") return roll.results.filter((r) => r % 2 === 1).length;
-  if (query === "even") return roll.results.filter((r) => r % 2 === 0).length;
-  if (query === "other") return roll.results.reduce((n, r) => n + r, 0) - chosen;
-  if (query === "highest") return roll.results.reduce((n, r) => Math.max(n, r), 0);
-  if (query === "distinct") return new Set(roll.results).size;
-  if ("equals" in query) return roll.results.filter((r) => r === query.equals).length;
-  return roll.results.filter((r) => r >= query.atLeast).length;
+  const results = dieResults(roll);
+  if (query === "odd") return results.filter((r) => Math.abs(r) % 2 === 1).length;
+  if (query === "even") return results.filter((r) => r % 2 === 0).length;
+  if (query === "other") return results.reduce((n, r) => n + r, 0) - chosen;
+  if (query === "highest") return results.reduce((n, r) => Math.max(n, r), 0);
+  if (query === "distinct") return new Set(results).size;
+  if ("equals" in query) return results.filter((r) => r === query.equals).length;
+  return results.filter((r) => r >= query.atLeast).length;
 }
 
 /** Natural results to keep of `rolled`, ignoring the lowest (706.6) until

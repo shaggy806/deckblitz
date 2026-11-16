@@ -442,14 +442,19 @@ import {
   flipsSince,
   hasFlippedThisTurn,
   isFlipThisWay,
+  dieResults,
   keepHighest,
   lastRollEntry,
   lastRollIn,
   matchingDice,
   rollOfEvent,
+  rollShiftText,
   rollsSince,
   type CoinSide,
   type FlipLanding,
+  type RollInProgress,
+  type RollShiftOption,
+  type RollThen,
 } from "./random-results.js";
 import type { CoinFlipReplacement, DiceRollReplacement, ReplacementSpec, VillainousChoiceReplacement } from "./replacements.js";
 import {
@@ -9029,17 +9034,11 @@ export class Game {
       const picked = [...new Set(modeIndices)].filter((i) => stored !== undefined && i >= 0 && i < stored.length).sort((a, b) => a - b);
       if (on !== undefined && stored !== undefined && on.zone === "battlefield" && (on.zoneChangeCount ?? 0) === stint && picked.length > 0) {
         // One roll a kind of die: all of Centaur's are d6s.
-        const next = [...stored];
-        for (const sides of [...new Set(picked.map((i) => stored[i].sides))]) {
-          const of = picked.filter((i) => stored[i].sides === sides);
-          this.rollDice(player, id, sides, of.length, 0);
-          const results = lastRollIn(this.state, player)?.results ?? [];
-          of.forEach((i, n) => {
-            if (results[n] !== undefined) next[i] = { sides, result: results[n] };
-          });
-        }
-        on.storedResults = next;
-        invalidateComputedCache();
+        const groups = [...new Set(picked.map((i) => stored[i].sides))].map((sides) => ({
+          sides,
+          into: picked.filter((i) => stored[i].sides === sides),
+        }));
+        this.rerollStoredResults(player, id, stint, groups);
       }
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
@@ -9072,6 +9071,12 @@ export class Game {
         );
       }
       this.prepareForPriority(wait.activator);
+      return;
+    }
+    // A shift of a die roll (rule 706.2a): its cost paid and the die moved,
+    // or none, and the roll is final.
+    if (awaiting.shiftRoll !== undefined) {
+      this.applyRollShift(player, awaiting.shiftRoll, modeIndices[0]);
       return;
     }
     // Storage Matrix's question (rule 502.3): only that type goes on untapping
@@ -10657,6 +10662,8 @@ export class Game {
       // After the SBAs rather than before: several of them read a pending
       // decision as "my move was deferred".
       this.raiseNextPayLifeOffer();
+      // A roll held for its shift (rule 706.2a) while mana was being paid.
+      if (this.raiseNextHeldRoll() && this.state.awaiting === null) continue;
       // An SBA / replacement raised a decision (e.g. a commander put into a
       // graveyard owes its owner a 903.9a choice) — hand that player
       // priority to answer it. `apply…Choice` calls back into here.
@@ -13810,10 +13817,24 @@ export class Game {
 
   /**
    * `player` rolls `count` dice of `sides` sides for `source` (rule 706): the
-   * total of the results kept, plus `modifier` (706.2). An effect's roll, and
-   * one made as a permanent enters (`rollAsEnters`).
+   * total of the results kept, plus `modifier` (706.2). An effect's roll, a
+   * roll to visit, a reroll of stored results, and one made as a permanent
+   * enters (`rollAsEnters`). A modifier its roller may pay for after seeing
+   * the dice (706.2a — `RollShift`) is asked first: then the roll returns
+   * `undefined`, and `then` carries on with it once it's final
+   * (`carryOnFromRoll`). Without one on offer, it's final at once — and with
+   * `then` null, a roll where nothing can wait (a token rolling as it
+   * enters, whose entry asks nothing first), nothing is asked.
    */
-  private rollDice(player: PlayerId, source: ObjectId, sides: number, count: number, modifier: number, keep?: number): number {
+  private rollDice(
+    player: PlayerId,
+    source: ObjectId,
+    sides: number,
+    count: number,
+    modifier: number,
+    keep: number | undefined,
+    then: RollThen | null,
+  ): number | undefined {
     // Each source adds its own die and ignores its own lowest (614.5).
     let ignoring = 0;
     let extra = 0;
@@ -13830,18 +13851,249 @@ export class Game {
     // What's ignored never happened (706.6): nothing reads it.
     const kept = count + extra - ignoring;
     const { kept: results, ignored } = keepHighest(rolled, Math.min(keep ?? kept, kept));
-    const from = this.state.objects[source];
-    this.emit({
-      type: "dice-rolled",
+    const thrown: Omit<RollInProgress, "then"> = {
       player,
+      ...(this.state.objects[source] !== undefined ? { source } : {}),
       sides,
       results,
-      ...(modifier !== 0 ? { modifier } : {}),
+      modifier,
       ...(ignored.length > 0 ? { ignored } : {}),
-      ...(from !== undefined ? { source } : {}),
+      shifts: results.map(() => 0),
+      used: [],
+    };
+    if (then !== null && this.askRollShift({ ...thrown, then })) return undefined;
+    return this.finishRoll(thrown);
+  }
+
+  /**
+   * The roll is final (rule 706.2): it happened — the `dice-rolled` event, on
+   * which "whenever you roll" triggers and the journal read it, with what its
+   * shifts made of each die — and its result is what's returned. One that
+   * stopped for a shift carries on from `applyRollShift`.
+   */
+  private finishRoll(roll: Omit<RollInProgress, "then">): number {
+    const shifted = roll.shifts.some((s) => s !== 0);
+    this.emit({
+      type: "dice-rolled",
+      player: roll.player,
+      sides: roll.sides,
+      results: roll.results,
+      ...(roll.modifier !== 0 ? { modifier: roll.modifier } : {}),
+      ...(shifted ? { shifts: roll.shifts } : {}),
+      ...(roll.ignored !== undefined ? { ignored: roll.ignored } : {}),
+      ...(roll.source !== undefined ? { source: roll.source } : {}),
     });
-    if (count + extra > 0) this.emit({ type: "acted-at-random", player, act: "dice" });
-    return results.reduce((n, r) => n + r, 0) + modifier;
+    if (roll.results.length + (roll.ignored?.length ?? 0) > 0) this.emit({ type: "acted-at-random", player: roll.player, act: "dice" });
+    return roll.results.reduce((n, r) => n + r, 0) + roll.modifier + roll.shifts.reduce((n, s) => n + s, 0);
+  }
+
+  /**
+   * What a roll that stopped for a shift was for, now that it's final: the
+   * rest of its `roll-dice` instruction, the visit it rolled for, the stored
+   * results it rerolls, or the permanent entering with it.
+   */
+  private carryOnFromRoll(roll: RollInProgress, total: number): void {
+    const then = roll.then;
+    if (then.kind === "effect") {
+      if (then.then.kind === "roll-dice") this.resumeResolution({ ...then.then, rolled: total }, then.source, then.resume);
+      return;
+    }
+    if (then.kind === "visit") {
+      this.visitAttractions(roll.player, total);
+      return;
+    }
+    if (then.kind === "reroll-stored") {
+      this.storeRerolled(then.object, then.stint, then.into, roll);
+      this.rerollStoredResults(roll.player, then.object, then.stint, then.rest);
+      return;
+    }
+    const entering = this.state.objects[then.object];
+    if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, rolledAsEnters: total };
+  }
+
+  /**
+   * Ask a shift of `roll` (rule 706.2a), if any is on offer
+   * (`rollShiftOptions`): one choice at a time (706.2b: the roller chooses
+   * the order); none ends it. Returns whether it asked. Where nothing can be
+   * asked yet — partway through paying mana (a mana ability that rolls,
+   * Vexing Puzzlebox, tapped for a spell's cost), or with another question
+   * up — the roll is held, unread, in `pendingRollShifts` and asked as soon
+   * as someone would next receive priority (`raiseNextHeldRoll`); that's
+   * asked too.
+   */
+  private askRollShift(roll: RollInProgress): boolean {
+    const options = this.rollShiftOptions(roll);
+    if (options.length === 0) return false;
+    if (this.manaPaymentDepth > 0 || this.state.awaiting !== null) {
+      (this.state.pendingRollShifts ??= []).push(roll);
+      return true;
+    }
+    const dice = dieResults({ ...roll, total: 0 });
+    const sources = new Set(options.map((o) => o.by));
+    this.state.awaiting = {
+      kind: "choose-modes",
+      player: roll.player,
+      source: options[0].by,
+      minModes: 0,
+      maxModes: 1,
+      modes: options.map((option) => ({
+        text: rollShiftText(option, dice, sources.size > 1 ? nameOf(this.state.objects[option.by]) : undefined),
+        effect: { kind: "sequence", effects: [] },
+      })),
+      x: 0,
+      targets: [],
+      shiftRoll: { roll, options },
+    };
+    return true;
+  }
+
+  /** How deep in `executePayment` the game is: a roll made there is held
+   * (`askRollShift`). Never set across a dispatch. */
+  private manaPaymentDepth = 0;
+
+  /**
+   * The roll a shift was held for (`askRollShift`), asked now that nothing
+   * else is — or, its shifts no longer on offer, final, carrying on. Returns
+   * whether it did anything.
+   */
+  private raiseNextHeldRoll(): boolean {
+    const held = this.state.pendingRollShifts;
+    if (this.state.awaiting !== null || held === undefined || held.length === 0) return false;
+    const roll = held.shift() as RollInProgress;
+    if (held.length === 0) delete this.state.pendingRollShifts;
+    if (!this.askRollShift(roll)) this.carryOnFromRoll(roll, this.finishRoll(roll));
+    return true;
+  }
+
+  /**
+   * The shifts on offer for `roll` (rule 706.2a — `RollShift`): each of its
+   * roller's permanents with one, for each die it hasn't moved yet, either
+   * way, while its cost can be paid — and, once each turn, only if not done
+   * this turn.
+   */
+  private rollShiftOptions(roll: RollInProgress): readonly RollShiftOption[] {
+    if (roll.results.length === 0 || this.state.players[roll.player]?.hasLost !== false) return [];
+    const options: RollShiftOption[] = [];
+    const seen = new Set<string>();
+    const dice = dieResults({ ...roll, total: 0 });
+    for (const id of this.staticSourceIds()) {
+      const by = this.state.objects[id];
+      if (by === undefined || by.controller !== roll.player || hasLostAbilities(this.state, this.registry, by)) continue;
+      this.staticsOfSource(by).forEach((ability, index) => {
+        const shift = ability.shiftsRoll;
+        if (shift === undefined || !this.staticActive(by, ability)) return;
+        const stint = by.zoneChangeCount ?? 0;
+        const key = `${by.id}~${stint}#shifts-roll:${index}`;
+        if (shift.oncePerTurn === true && abilityCountThisTurn(this.state, "done", key) > 0) return;
+        if (shift.payLife !== undefined && !this.canPayLife(roll.player, shift.payLife, "not-a-cost")) return;
+        if (
+          shift.removeCounter !== undefined &&
+          (by.zone !== "battlefield" || (by.counters[shift.removeCounter] ?? 0) < 1 || this.countersLocked(by.id, shift.removeCounter))
+        ) {
+          return;
+        }
+        roll.results.forEach((_natural, die) => {
+          if (roll.used.includes(`${key}@${die}`)) return;
+          for (const delta of [shift.by, -shift.by]) {
+            // Two dice alike in every way that matters are one choice.
+            const same = `${key}|${delta}|${dice[die]}|${roll.used.filter((u) => u.endsWith(`@${die}`)).sort().join(",")}`;
+            if (seen.has(same)) continue;
+            seen.add(same);
+            options.push({
+              by: by.id,
+              stint,
+              key,
+              die,
+              delta,
+              ...(shift.payLife !== undefined ? { payLife: shift.payLife } : {}),
+              ...(shift.removeCounter !== undefined ? { removeCounter: shift.removeCounter } : {}),
+              ...(shift.oncePerTurn === true ? { oncePerTurn: true as const } : {}),
+            });
+          }
+        });
+      });
+    }
+    return options;
+  }
+
+  /**
+   * Centaur of Attention's reroll (`reroll-stored-results`): each kind of die
+   * among the chosen stored results rolled again as one roll of that many
+   * (rule 706), each new result — after any shift — in its old one's place,
+   * while `object` is still in `stint`. A roll stopped for a shift carries on
+   * from `finishRoll` with the kinds left.
+   */
+  private rerollStoredResults(
+    player: PlayerId,
+    object: ObjectId,
+    stint: number,
+    groups: readonly { readonly sides: number; readonly into: readonly number[] }[],
+  ): void {
+    for (let g = 0; g < groups.length; g += 1) {
+      const { sides, into } = groups[g];
+      const then: RollThen = { kind: "reroll-stored", object, stint, into, rest: groups.slice(g + 1) };
+      if (this.rollDice(player, object, sides, into.length, 0, undefined, then) === undefined) return;
+      const last = lastRollIn(this.state, player);
+      if (last !== undefined) this.storeRerolled(object, stint, into, { ...last, shifts: last.shifts ?? [] });
+    }
+  }
+
+  /** The new results of a reroll in the old ones' places, die by die. */
+  private storeRerolled(
+    object: ObjectId,
+    stint: number,
+    into: readonly number[],
+    roll: Pick<RollInProgress, "sides" | "results" | "modifier" | "shifts">,
+  ): void {
+    const on = this.state.objects[object];
+    const stored = on?.storedResults;
+    if (on === undefined || stored === undefined || on.zone !== "battlefield" || (on.zoneChangeCount ?? 0) !== stint) return;
+    const results = dieResults({ ...roll, player: on.controller, total: 0 });
+    const next = [...stored];
+    into.forEach((i, n) => {
+      if (results[n] !== undefined && i < next.length) next[i] = { sides: roll.sides, result: results[n] };
+    });
+    on.storedResults = next;
+    invalidateComputedCache();
+  }
+
+  /**
+   * The answer to a shift of a roll (`askRollShift`): the cost paid — life,
+   * or a counter off the permanent — and the die moved; then the next shift is
+   * asked, or the roll is final and carries on. None chosen, it's final now.
+   */
+  private applyRollShift(
+    player: PlayerId,
+    asked: { readonly roll: RollInProgress; readonly options: readonly RollShiftOption[] },
+    pick: number | undefined,
+  ): void {
+    this.state.awaiting = null;
+    let roll = asked.roll;
+    const option = pick === undefined ? undefined : asked.options[pick];
+    if (option !== undefined) {
+      const by = this.state.objects[option.by];
+      const here = by !== undefined && (by.zoneChangeCount ?? 0) === option.stint;
+      // "If you do": only a cost paid moves the die.
+      let paid = here;
+      if (paid && option.payLife !== undefined) {
+        paid = this.canPayLife(player, option.payLife, "not-a-cost");
+        if (paid) this.payLife(player, option.payLife);
+      }
+      if (paid && option.removeCounter !== undefined) {
+        paid = this.removeCountersFrom(option.by, option.removeCounter, 1, false) > 0;
+      }
+      if (paid) {
+        if (option.oncePerTurn === true) this.markDone(option.key, player);
+        roll = {
+          ...roll,
+          shifts: roll.shifts.map((s, die) => (die === option.die ? s + option.delta : s)),
+          used: [...roll.used, `${option.key}@${option.die}`],
+        };
+      }
+      if (this.askRollShift(roll)) return;
+    }
+    this.carryOnFromRoll(roll, this.finishRoll(roll));
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
   /**
@@ -15508,6 +15760,7 @@ export class Game {
     | { readonly kind: "number" }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
     | { readonly kind: "at-random"; readonly options: readonly string[] }
+    | { readonly kind: "roll"; readonly sides: number; readonly count: EffectAmount | "x" }
     | { readonly kind: "instead"; readonly spec: EnterInstead }
     | { readonly kind: "as-enters"; readonly spec: AsEntersAction }
     | { readonly kind: "enchant"; readonly as: CardDefinition }
@@ -15688,6 +15941,15 @@ export class Game {
     // A battle's protector (rule 310.9a), chosen as it enters.
     if (answered?.protector === undefined && becoming.types.includes("battle")) {
       return { kind: "protector", siege: becoming.subtypes.includes("Siege") };
+    }
+    // "As this creature enters, roll X d6" (Neverwinter Hydra) — printed, or
+    // a copy's: rolled before it moves, as Molten Sentry's coin is flipped,
+    // so its roller may shift a die (rule 706.2a) before it enters.
+    if (answered?.rolledAsEnters === undefined) {
+      for (const ability of becoming.static) {
+        const r = ability.replacement;
+        if (r?.event === "enters-battlefield" && r.rollAsEnters !== undefined) return { kind: "roll", ...r.rollAsEnters };
+      }
     }
     // Riot (rule 702.136a): "you may have this permanent enter with an
     // additional +1/+1 counter on it" — printed or copied, and what it will
@@ -16286,6 +16548,17 @@ export class Game {
         }
         this.emit({ type: "coin-flipped", player: chooser, ...landed });
         object.enterChoice = { ...object.enterChoice, chosen: landed.came === "heads" ? next.heads : next.tails };
+        continue;
+      }
+      if (next.kind === "roll") {
+        // "As this creature enters, roll X d6" (rule 614.1c): its controller
+        // rolls; with no dice, nothing is rolled. A shift asked of the roll
+        // (706.2a) holds the entry until it's final (`carryOnFromRoll`).
+        const dice = next.count === "x" ? (object.xValue ?? 0) : this.enteringCounterAmount(id, chooser, id, next.count);
+        const total =
+          dice > 0 ? this.rollDice(chooser, id, next.sides, dice, 0, undefined, { kind: "enters", object: id }) : 0;
+        if (total === undefined) return true;
+        object.enterChoice = { ...object.enterChoice, rolledAsEnters: total };
         continue;
       }
       if (next.kind === "name") {
@@ -29463,7 +29736,12 @@ export class Game {
    * assisting player's (rule 702.132a) — what the spell records of the mana
    * spent on it is added to theirs rather than replacing it. */
   private executePayment(player: PlayerId, payment: ManaPayment): readonly SpentMana[] {
-    for (const step of payment.steps) this.useManaSource(step);
+    this.manaPaymentDepth += 1;
+    try {
+      for (const step of payment.steps) this.useManaSource(step);
+    } finally {
+      this.manaPaymentDepth -= 1;
+    }
     const spent = this.spendFromPool(player, payment.resolved, payment.purpose);
     if (payment.life > 0) this.payLife(player, payment.life);
     return spent;
@@ -30970,7 +31248,8 @@ export class Game {
       s.pendingDestruction.length > 0 ||
       s.deferredCommanderMove !== null ||
       s.pendingCommanderMoves.length > 0 ||
-      s.pendingPayLifeForUntapped.length > 0
+      s.pendingPayLifeForUntapped.length > 0 ||
+      (s.pendingRollShifts?.length ?? 0) > 0
     );
   }
 
@@ -40144,7 +40423,8 @@ export class Game {
         }
         if (spec.value === "roll-result") {
           const last = lastRollIn(this.state, controller);
-          const results = last !== undefined ? [...new Set(last.results)] : [];
+          // Each die's result, any shift of it included (rule 706.2).
+          const results = last !== undefined ? [...new Set(dieResults(last))] : [];
           // The same number on each die, or no roll: nothing to choose between.
           if (results.length <= 1) {
             this.resumeResolution(spec.then, source, { ...resume, x: results[0] ?? 0 });
@@ -42447,14 +42727,30 @@ controlledBy,
       clashed: (results) => {
         for (const { player, won } of results) this.emit({ type: "clashed", player, won });
       },
-      rollDice: (sides, count, modifier, keep) => this.rollDice(controller, source, sides, count, modifier, keep),
+      rollDice: (sides, count, modifier, keep, rest) =>
+        this.rollDice(controller, source, sides, count, modifier, keep, {
+          kind: "effect",
+          then: rest,
+          source,
+          resume: {
+            controller,
+            targets,
+            x,
+            triggerValue,
+            ...(triggerObject !== undefined ? { triggerObject } : {}),
+            targetZones,
+            refs,
+          },
+        }),
       storeLastRollOnSource: (sides) => {
         // "Store those results on it": only on the object the ability came
-        // from, still on the battlefield (rule 400.7).
+        // from, still on the battlefield (rule 400.7) — each after any
+        // modification (the card's ruling).
         const link = tokenLinkToSource();
         const on = this.state.objects[source];
         if (link === null || on?.zone !== "battlefield" || (on.zoneChangeCount ?? 0) !== link.zoneChangeCount) return;
-        const results = lastRollIn(this.state, controller)?.results ?? [];
+        const last = lastRollIn(this.state, controller);
+        const results = last === undefined ? [] : dieResults(last);
         if (results.length === 0) return;
         on.storedResults = [...(on.storedResults ?? []), ...results.map((result) => ({ sides, result }))];
         invalidateComputedCache();
@@ -62732,7 +63028,14 @@ controlledBy,
   private rollToVisit(player: PlayerId, source: ObjectId | null): void {
     const ps = this.state.players[player];
     if (ps === undefined || ps.hasLost) return;
-    const result = this.rollDice(player, source ?? asObjectId("roll-to-visit"), 6, 1, 0);
+    const result = this.rollDice(player, source ?? asObjectId("roll-to-visit"), 6, 1, 0, undefined, { kind: "visit" });
+    // A shift of the roll is being asked (rule 706.2a): the visit follows it.
+    if (result !== undefined) this.visitAttractions(player, result);
+  }
+
+  /** The visit a roll to visit makes once its result is final (rule
+   * 701.52a): each Attraction `player` controls with `result` lit up. */
+  private visitAttractions(player: PlayerId, result: number): void {
     this.emit({ type: "rolled-to-visit", player, result });
     for (const id of [...this.state.zones.shared.battlefield]) {
       const object = this.state.objects[id];
@@ -65110,6 +65413,7 @@ controlledBy,
     asEntersDone?: number,
     asEntersCounters?: readonly string[],
     choseTapped?: boolean,
+    rolledAsEnters?: number,
   ): EnteringReplacement {
     // It isn't on the battlefield yet as these are judged (rule 614.12), so
     // its mana cost — and what enters with it — doesn't count toward a
@@ -65129,6 +65433,7 @@ controlledBy,
         asEntersDone,
         asEntersCounters,
         choseTapped,
+        rolledAsEnters,
       ),
     );
     this.enterBatch?.add(id);
@@ -65501,6 +65806,8 @@ controlledBy,
     asEntersDone?: number,
     asEntersCounters?: readonly string[],
     choseTapped?: boolean,
+    /** What its `rollAsEnters` rolled before it moved (`askEnterChoice`). */
+    rolledBefore?: number,
   ): EnteringReplacement {
     const object = this.state.objects[id];
     // Its text as changed (rule 612.2), a permanent spell's change kept (400.7a).
@@ -65615,13 +65922,18 @@ controlledBy,
       // Neverwinter Hydra's "as this creature enters, roll X d6" (rule
       // 614.1c): rolled by its controller as it enters, part of the
       // replacement, so nothing can respond between. No dice, no roll.
+      // Rolled just before it moved, among its "as this enters" choices, so a
+      // shift of the roll could be asked (`askEnterChoice`); a way in that
+      // asks none (a token) rolls here, with no shift to ask.
       let rolledAsEnters = 0;
-      if (r.rollAsEnters !== undefined && !this.probingEnter) {
+      if (r.rollAsEnters !== undefined && rolledBefore !== undefined) {
+        rolledAsEnters = rolledBefore;
+      } else if (r.rollAsEnters !== undefined && !this.probingEnter) {
         const dice =
           r.rollAsEnters.count === "x"
             ? (object.xValue ?? 0)
             : this.enteringCounterAmount(id, object.controller, id, r.rollAsEnters.count);
-        if (dice > 0) rolledAsEnters = this.rollDice(object.controller, id, r.rollAsEnters.sides, dice, 0);
+        if (dice > 0) rolledAsEnters = this.rollDice(object.controller, id, r.rollAsEnters.sides, dice, 0, undefined, null) ?? 0;
       }
       // A copy whose "starting loyalty is 1" (Jace, Mirror Mage — a copiable
       // value, rule 707.9b) enters with that many in place of the printed
@@ -67968,6 +68280,7 @@ controlledBy,
         enterChoice?.asEntersDone,
         enterChoice?.asEntersCounters,
         enterChoice?.enterTapped,
+        enterChoice?.rolledAsEnters,
       );
       object.tapped = entering.tapped;
       for (const c of entering.counters) {

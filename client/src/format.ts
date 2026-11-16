@@ -606,8 +606,14 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${event.attackers.map(name).join(', ')} blocked`
     case 'cards-put-into-graveyard':
       return `${event.arrivals.map((a) => name(a.object)).join(', ')} put into a graveyard`
-    case 'dice-rolled':
-      return `${who(event.player)} rolls ${event.results.length === 1 ? `a d${event.sides}` : `${event.results.length}d${event.sides}`}: ${event.results.join(', ')}${event.results.length > 1 ? ` (total ${event.results.reduce((n, r) => n + r, 0)})` : ''}`
+    case 'dice-rolled': {
+      // A die shifted after the roll (Night Shift of the Living Dead) reads
+      // as what it came up and what it became.
+      const shifts = event.shifts
+      const shown = event.results.map((r, i) => (shifts?.[i] ? `${r} → ${r + shifts[i]}` : String(r)))
+      const total = event.results.reduce((n, r, i) => n + r + (shifts?.[i] ?? 0), 0)
+      return `${who(event.player)} rolls ${event.results.length === 1 ? `a d${event.sides}` : `${event.results.length}d${event.sides}`}: ${shown.join(', ')}${event.results.length > 1 ? ` (total ${total})` : ''}`
+    }
     // Attractions (rules 701.51, 701.52, 702.159).
     case 'attraction-opened':
       return `${who(event.player)} opens an Attraction: ${name(event.object)}`

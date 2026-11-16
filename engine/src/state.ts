@@ -41,7 +41,7 @@ import type { Color, ManaProductionRule, ManaType, ManaUnit, SpendAs, SpentMana 
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { DelayedStepWatch } from "./delayed-at.js";
 import type { Expiry, UntilCast, UntilPoint, WatchExpiry, WhileSource } from "./duration.js";
-import type { RollRecord } from "./random-results.js";
+import type { RollInProgress, RollRecord, RollShiftOption } from "./random-results.js";
 import type { ReplacementSpec } from "./replacements.js";
 import type { CardPlayPermission, CastNowTerms, EffectPlay, PlayedUnder } from "./play-permission.js";
 import type { Journal } from "./journal.js";
@@ -1018,6 +1018,10 @@ export interface GameObject {
     /** How many cards its `AsEntersAction` exiled or returned as it was about to
      * enter, once that's settled: what its `"done-as-enters"` counters count. */
     readonly asEntersDone?: number;
+    /** The total its `rollAsEnters` rolled (Neverwinter Hydra), rolled before
+     * it moved so a shift of that roll could be asked (rule 706.2a): what
+     * its `"rolled-as-enters"` counters count. */
+    readonly rolledAsEnters?: number;
     /** The cards its `AsEntersAction` exiled: linked to it as it enters (rule
      * 607.2a), for its stint there. */
     readonly asEntersExiled?: readonly ObjectId[];
@@ -4859,6 +4863,14 @@ export type AwaitingDecision =
        * again as one roll. Answered by the engine itself; the modes' effects
        * are unused. */
       readonly rerollStored?: { readonly object: ObjectId; readonly stint: number };
+      /** A die roll's "after you roll a die, you may pay 1 life. If you do,
+       * increase or decrease the result by 1" (rule 706.2a — `RollShift`):
+       * `roll` is thrown and not yet final, and mode i is `options[i]`, its
+       * permanent paying to move that die. None is final: no more shifts.
+       * Asked again while any is left to make; then the roll is final and
+       * carries on (`Game.finishRoll`). Answered by the engine itself; the
+       * modes' effects are unused. */
+      readonly shiftRoll?: { readonly roll: RollInProgress; readonly options: readonly RollShiftOption[] };
       /** Storage Matrix's question in the untap step (rule 502.3 —
        * `untapOnlyChosenType`): mode i keeps only `types[i]` among `untapping`,
        * the permanents about to untap, and the step carries on with `asked`
@@ -6798,6 +6810,14 @@ export interface GameState {
     readonly source: ObjectId;
     readonly life: number;
   }[];
+  /**
+   * Die rolls thrown where their shift (rule 706.2a — `RollShift`) couldn't be
+   * asked: partway through paying mana (Vexing Puzzlebox tapped for a spell's
+   * cost), or with another question up. Nothing has read them yet; each is
+   * asked, then final, as someone would next receive priority, first first
+   * (`Game.raiseNextHeldRoll`). Absent when none.
+   */
+  pendingRollShifts?: RollInProgress[];
   /**
    * Resolutions waiting on a decision one of their own steps raised, most
    * recent last (rule 608.2c: a spell's instructions are followed in order,

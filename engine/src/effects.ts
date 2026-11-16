@@ -7439,6 +7439,10 @@ export type EffectSpec =
        * (rule 400.7). A note, not a counter: see `reroll-stored-results`. */
       readonly storeResults?: true;
       readonly then?: EffectSpec;
+      /** Engine-built: the roll's result, once final after a shift of it was
+       * asked (rule 706.2a — `RollShift`). The dice were thrown; the rest of
+       * the instruction carries on with this. Never authored. */
+      readonly rolled?: number;
     }
   | {
       /**
@@ -13538,8 +13542,11 @@ export interface EffectApi {
   clashed(results: readonly { readonly player: PlayerId; readonly won: boolean }[]): void;
   /** Roll `count` `sides`-sided dice for the controller (rule 706), on the
    * seeded stream, keeping the `keep` highest if given; returns the result —
-   * the natural total plus `modifier` — and journals the roll. */
-  rollDice(sides: number, count: number, modifier: number, keep?: number): number;
+   * the natural total plus `modifier` — and journals the roll. `undefined`
+   * when a shift of the roll is being asked first (rule 706.2a — `RollShift`):
+   * once it's final, `rest` (this `roll-dice` with the result as its
+   * `rolled`) carries on in this resolution. */
+  rollDice(sides: number, count: number, modifier: number, keep: number | undefined, rest: EffectSpec): number | undefined;
   /** Note the controller's last roll's results on the source, while it's
    * still the object the ability came from — `roll-dice`'s `storeResults`. */
   storeLastRollOnSource(sides: number): void;
@@ -21367,19 +21374,28 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // The planar die: there is none outside a Planechase game (rule 901.3),
       // so the instruction is ignored (101.3).
       if (spec.sides === "planar") return;
+      const { rolled, ...unrolled } = spec;
+      // Resumed, `count` is the number the roll was made with.
       const count = spec.count === undefined ? 1 : Math.max(0, Math.floor(amountValue(spec.count, ctx)));
       if (count === 0) return;
-      // Signed: "roll a d20 and subtract the number of cards in your hand"
-      // (The Deck of Many Things) can come out at 0 or less (rule 706.2).
-      const modifier = spec.modifier === undefined ? 0 : signedAmountValue(spec.modifier, ctx);
-      const total = ctx.rollDice(spec.sides, count, modifier, spec.keepHighest);
+      let total = rolled;
+      if (total === undefined) {
+        // Signed: "roll a d20 and subtract the number of cards in your hand"
+        // (The Deck of Many Things) can come out at 0 or less (rule 706.2).
+        const modifier = spec.modifier === undefined ? 0 : signedAmountValue(spec.modifier, ctx);
+        total = ctx.rollDice(spec.sides, count, modifier, spec.keepHighest, { ...unrolled, count });
+        // A shift of it is being asked (rule 706.2a): the rest of this
+        // instruction carries on with the result once it's final.
+        if (total === undefined) return;
+      }
       if (spec.storeResults === true) ctx.storeLastRollOnSource(spec.sides);
-      const row =spec.table?.find((r) => total >= r.min && (r.max === undefined || total <= r.max));
+      const final = total;
+      const row = spec.table?.find((r) => final >= r.min && (r.max === undefined || final <= r.max));
       // A row's "you may roll again" comes after what the row and any `then`
       // do with this roll. The number of dice stays what it was (rule 706.3c).
       const again: EffectSpec | undefined =
         row?.mayRollAgain === true
-          ? { kind: "may", prompt: "Roll again?", effect: { ...spec, count } }
+          ? { kind: "may", prompt: "Roll again?", effect: { ...unrolled, count } }
           : undefined;
       const steps = [row?.effect, spec.then, again].filter((s): s is EffectSpec => s !== undefined);
       if (steps.length > 0) applyEffectSpec(steps.length === 1 ? steps[0] : { kind: "sequence", effects: steps }, ctx);

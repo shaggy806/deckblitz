@@ -13,7 +13,7 @@
  */
 
 import type { KeywordValue } from "../keyword-values.js";
-import type { DieTest } from "../random-results.js";
+import type { DieTest, RollShift } from "../random-results.js";
 import type { TriggerEventName } from "../trigger-events.js";
 import type { ColorPatch, KeywordAbilityName, StaticPt, TypePatch } from "../characteristics-patch.js";
 import type { SelfPlay, StaticPlay } from "../play-permission.js";
@@ -2287,6 +2287,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * irrelevant to one: each `ReplacementSpec` names what it reaches itself
    * (`scope: "self"` is the convention). */
   readonly replacement?: ReplacementSpec;
+  /** "After you roll a die, you may pay 1 life. If you do, increase or
+   * decrease the result by 1" (Night Shift of the Living Dead): a modifier
+   * its controller may apply to each die they roll (rule 706.2a) — see
+   * `random-results.ts`'s {@link RollShift}. `affects` is unused. */
+  readonly shiftsRoll?: RollShift;
   /** `[power, toughness]` bonus applied in layer 7d. */
   readonly grantPt?: readonly [number, number];
   /**

@@ -8935,6 +8935,29 @@ describe("counters put or removed this way", () => {
     });
   });
 
+  it("reads a die's result shifted after the roll, and \"whenever you roll a 6\"", () => {
+    const night = parseFace(
+      {
+        name: "Night Shift of the Living Dead",
+        type_line: "Enchantment",
+        oracle_text:
+          "After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn.\nWhenever you roll a 6, create a 2/2 black Zombie Employee creature token.",
+      },
+      { tokenFor: () => "Zombie Employee Token" },
+    );
+    expect(night.complete).toBe(true);
+    expect(night.static[0].shiftsRoll).toEqual({ by: 1, payLife: 1, oncePerTurn: true });
+    expect(night.triggered[0].trigger).toEqual({ on: "event", event: "rolls-die", who: "you", die: { atLeast: 6, atMost: 6 } });
+    expect(night.triggered[0].effect).toEqual({ kind: "create-token", token: "Zombie Employee Token", count: 1 });
+    const squirrels = face(
+      "Xenosquirrels",
+      "Creature — Alien Squirrel",
+      "This creature enters with two +1/+1 counters on it.\nAfter you roll a die, you may remove a +1/+1 counter from this creature. If you do, increase or decrease the result by 1.",
+    );
+    expect(squirrels.complete).toBe(true);
+    expect(squirrels.static[1].shiftsRoll).toEqual({ by: 1, removeCounter: "+1/+1" });
+  });
+
   it("reads the damage dealt to it this turn, a dies trigger's intervening if", () => {
     const zubera = face(
       "Rushing-Tide Zubera",
