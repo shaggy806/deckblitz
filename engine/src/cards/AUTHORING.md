@@ -2098,7 +2098,11 @@ new target is the effect's own permanent, if it's legal (Spellskite's
 (Hydroelectric Specimen). Asked as a `choose-targets` decision with `current`
 (`GameState.pendingRetarget`) unless forced, and nothing at all when nothing
 can change. Steps after it in a `sequence` wait for the answer (Imp's
-Mischief's life loss, Wild Ricochet's copy).
+Mischief's life loss, Wild Ricochet's copy). `target: "each-other"` with
+`"choose-new"` is "you may choose new targets for **any number of other spells
+and/or abilities**" (Boltbender): untargeted, every spell and ability on the
+stack but this one, whoever's, asked about one at a time from the top — keeping
+all of one's targets is not choosing it (115.7d).
 
 `copy-ability` copies an **activated or triggered ability** on the stack (rule
 707.10): the one in target slot `target` — a `{ kind: "ability" }` target

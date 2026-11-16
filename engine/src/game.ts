@@ -43835,6 +43835,18 @@ controlledBy,
         ),
       copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
       stackObjectsToCopy: (what, anyController) => this.stackObjectsToCopy(controller, what, anyController),
+      otherStackObjects: () => {
+        // The one resolving: an ability's own stack object (or, waiting on a
+        // decision, the one it will leave), or a spell — this context's source.
+        const resolving = [
+          ...this.resolvingAbilities,
+          ...this.state.suspendedResolutions.flatMap((s) =>
+            s.effect === null && s.leaveStack !== undefined ? [s.leaveStack] : [],
+          ),
+        ];
+        if (this.resolvingAbilities.length === 0) resolving.push(source);
+        return [...this.state.zones.shared.stack].reverse().filter((id) => !resolving.includes(id) && this.state.objects[id] !== undefined);
+      },
       changeTargets: (target, how, toSource, optional, byItsController, random) => {
         if (how === "random") {
           if (target.kind !== "object") return;

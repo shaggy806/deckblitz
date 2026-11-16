@@ -2731,7 +2731,9 @@
   "zone:choose-play-permission-any-zone",
   "cost:granted-graveyard-cast-increase-unless-targets",
   "amount:exiled-with-source-count",
-  "effect:player-mana-ability-until-eot"
+  "effect:player-mana-ability-until-eot",
+  "effect:player-mana-ability-until-eot",
+  "effect:choose-new-targets-any-number"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

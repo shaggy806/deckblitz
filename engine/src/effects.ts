@@ -8309,9 +8309,21 @@ export type EffectSpec =
        * `"trigger-object"` is the spell whose casting fired this triggered
        * ability, as long as it's still that spell on the stack (Perplexing
        * Chimera's "you may choose new targets for the spell").
+       *
+       * `"each-other"` is "you may choose new targets for **any number of
+       * other spells and/or abilities**" (Boltbender, with `"choose-new"`):
+       * every spell and ability on the stack but this one, whoever controls
+       * it, top of the stack first, each with targets asked about in turn.
+       * Choosing new targets for one may leave any of its targets as they
+       * were (rule 115.7d), so keeping them all is the same as not choosing
+       * it. Untargeted: nothing is chosen as this goes on the stack.
        */
       readonly kind: "change-targets";
-      readonly target: number | "trigger-object";
+      readonly target: number | "trigger-object" | "each-other";
+      /** Only the engine sets this: with `"each-other"`, the stack objects
+       * still to ask about, top first, as the resolution waits on the
+       * choice for the one before. */
+      readonly progress?: readonly ObjectId[];
       readonly how: "change" | "change-one" | "choose-new" | "random";
       /** With `"random"`: none of the new targets is this effect's controller
        * or a permanent they control. */
@@ -13917,6 +13929,9 @@ export interface EffectApi {
    * abilities they control there other than the one resolving — an id once
    * per ability instance (`stackCount`). Each with its name, for asking. */
   stackObjectsToCopy(what: "spells" | "other-abilities", anyController?: boolean): readonly { readonly id: ObjectId; readonly name: string }[];
+  /** Every spell and ability on the stack but the one resolving, whoever
+   * controls it, top first — `change-targets`' `"each-other"`. */
+  otherStackObjects(): readonly ObjectId[];
   /** Run one instruction to copy a spell, however many copies it makes: a
    * `would-copy-spell` replacement applies to the instruction, not to each
    * copy (Twinning Staff). */
@@ -21891,6 +21906,22 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "change-targets": {
+      if (spec.target === "each-other") {
+        // One at a time: each one's choice is answered before the next is
+        // asked, the rest parked with the resolution.
+        const parked = ctx.parkedCount();
+        let left = spec.progress ?? ctx.otherStackObjects();
+        while (left.length > 0) {
+          if (ctx.decisionPending()) {
+            ctx.resumeAfterDecisions({ ...spec, progress: left }, parked);
+            return;
+          }
+          const [next, ...rest] = left;
+          left = rest;
+          ctx.changeTargets({ kind: "object", object: next }, spec.how, false, spec.optional === true, spec.by === "its-controller");
+        }
+        return;
+      }
       const target = typeof spec.target === "number" ? ctx.targets[spec.target] : objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.changeTargets(
