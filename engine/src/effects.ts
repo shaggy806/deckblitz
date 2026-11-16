@@ -63,6 +63,7 @@ import type {
   PlayerCounterKind,
   CombatChoice,
   PlayerEffect,
+  PlayerManaAbility,
   SpellGrantThisTurn,
   SpellSnapshot,
   JournalWhat,
@@ -7167,6 +7168,12 @@ export type EffectSpec =
        * permanent makes, as a static's `manaProduction` entry, with "you"
        * being the effect's controller. */
       readonly manaProduction?: ManaProductionRule;
+      /** "Until end of turn, any time you could activate a mana ability, you
+       * may pay 1 life. If you do, add {C}" (Channel — `{ payLife: 1, add:
+       * ["C"] }`): a mana ability the controller has while this lasts (rules
+       * 605.1a, 605.3a), activated by hand with priority and reached for by
+       * the payment planner after every permanent. See `PlayerManaAbility`. */
+      readonly manaAbility?: PlayerManaAbility;
       /** "You gain protection from everything" (rule 702.16j): not a target
        * of spells or abilities, not enchanted by Auras, all damage to them
        * prevented. */
@@ -21395,6 +21402,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.extraLoyaltyActivation === true ? { extraLoyaltyActivation: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.manaProduction !== undefined ? { manaProduction: spec.manaProduction } : {}),
+        ...(spec.manaAbility !== undefined ? { manaAbility: spec.manaAbility } : {}),
         ...(spec.protectionFromEverything !== undefined
           ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }
           : {}),

@@ -370,6 +370,10 @@ export function candidateActions(
       return [{ type: "ignore-static-effect", player, permanent: legal.permanent }];
     case "cycle":
       return [{ type: "cycle", player, card: legal.card }];
+    // A mana ability the bot has (Channel): never floated by hand — every
+    // payment reaches for it already.
+    case "player-mana-ability":
+      return [];
     default:
       return [];
   }

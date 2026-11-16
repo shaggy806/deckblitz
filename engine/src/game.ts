@@ -575,6 +575,7 @@ import type {
   ControlEffect,
   EmblemState,
   PlayerEffect,
+  PlayerManaAbility,
   DelayedCastWatch,
   DelayedLeaveWatch,
   DelayedLoseControlWatch,
@@ -2201,6 +2202,20 @@ function everySubsetHolds<T>(
   return walk(0, []);
 }
 
+/** What a payment plan calls one use of a mana ability a player has
+ * (`PlayerManaAbility`, Channel — `Game.heldManaSources`): no object's id, so
+ * `useManaSource` knows it for what it is. The player comes last, whatever
+ * characters their id has. */
+const HELD_MANA_PREFIX = "held-mana:";
+function heldManaSourceId(player: PlayerId, ability: number, use: number): ObjectId {
+  return `${HELD_MANA_PREFIX}${ability}:${use}:${player}` as ObjectId;
+}
+function heldManaSourceOf(id: ObjectId): { readonly player: PlayerId; readonly ability: number } | undefined {
+  if (!id.startsWith(HELD_MANA_PREFIX)) return undefined;
+  const [ability, _use, ...player] = id.slice(HELD_MANA_PREFIX.length).split(":");
+  return { player: player.join(":") as PlayerId, ability: Number(ability) };
+}
+
 interface ManaSourceArrangement {
   readonly first?: ReadonlySet<ObjectId>;
   readonly last?: ReadonlySet<ObjectId>;
@@ -3167,6 +3182,13 @@ export class Game {
       case "ignore-static-effect":
         this.ignoreStaticEffect(action.player, action.permanent);
         break;
+      case "player-mana-ability": {
+        const why = this.whyCannotHeldManaAbility(action.player, action.ability);
+        if (why !== null) throw new Error(why);
+        this.activateHeldManaAbility(action.player, this.heldManaAbilities(action.player)[action.ability]);
+        this.afterPlayerAction(action.player);
+        break;
+      }
       case "cycle":
         this.withLifeChoice(action.phyrexianLife, () => this.cycleCard(action.player, action.card));
         break;
@@ -3455,6 +3477,8 @@ export class Game {
         return this.whyCannotEndLicidEffect(action.player, action.permanent);
       case "ignore-static-effect":
         return this.whyCannotIgnoreStatic(action.player, action.permanent);
+      case "player-mana-ability":
+        return this.whyCannotHeldManaAbility(action.player, action.ability);
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
@@ -3862,6 +3886,13 @@ export class Game {
       const card = this.state.companions![player];
       out.push({ kind: "take-companion", card, cardName: this.state.objects[card].cardName, cost: COMPANION_COST });
     }
+
+    // A mana ability the player has rather than a permanent (rule 605.3a —
+    // Channel): any time they have priority, as well as while paying.
+    this.heldManaAbilities(player).forEach((ability, index) => {
+      if (this.whyCannotHeldManaAbility(player, index) !== null) return;
+      out.push({ kind: "player-mana-ability", ability: index, text: ability.text, payLife: ability.payLife, mana: ability.add });
+    });
 
     // Foretell (rule 702.143) — a card foretold on an earlier turn may be cast
     // from exile for its foretell cost.
@@ -4940,7 +4971,7 @@ export class Game {
   isDeadForMana(player: PlayerId): boolean {
     if (this.state.priority.holder !== player) return false;
     return this.offersFor(player).every((action) => {
-      if (action.kind === "pass-priority") return true;
+      if (action.kind === "pass-priority" || action.kind === "player-mana-ability") return true;
       if (action.kind !== "activate-ability") return false;
       const ability = this.effectiveActivated(action.source)[action.abilityIndex];
       return ability !== undefined && isManaAbility(ability);
@@ -4958,7 +4989,7 @@ export class Game {
   isDeadButForAbilities(player: PlayerId): boolean {
     if (this.state.priority.holder !== player) return false;
     return this.offersFor(player).every((action) => {
-      if (action.kind === "pass-priority") return true;
+      if (action.kind === "pass-priority" || action.kind === "player-mana-ability") return true;
       if (action.kind !== "activate-ability") return false;
       return this.state.objects[action.source]?.zone === "battlefield";
     });
@@ -29366,7 +29397,71 @@ export class Game {
       if (ka.costly !== kb.costly) return ka.costly ? 1 : -1;
       return ka.flex - kb.flex;
     });
+    out.push(...this.heldManaSources(player));
     return out;
+  }
+
+  /** The mana abilities `player` has rather than a permanent (Channel — see
+   * `PlayerManaAbility`), one of each: two Channels in a turn are the same
+   * ability twice, and offering it once loses nothing. */
+  private heldManaAbilities(player: PlayerId): PlayerManaAbility[] {
+    const out: PlayerManaAbility[] = [];
+    if (this.state.players[player]?.hasLost === true) return out;
+    for (const effect of this.state.playerEffects ?? []) {
+      const ability = effect.owner === player ? effect.manaAbility : undefined;
+      if (ability === undefined) continue;
+      if (!out.some((held) => held.payLife === ability.payLife && held.add.join() === ability.add.join())) out.push(ability);
+    }
+    return out;
+  }
+
+  /**
+   * `player`'s held mana abilities (`heldManaAbilities`) as sources for a
+   * payment: they may be activated while paying for anything (rule 605.3a),
+   * and any number of times, so each is as many sources as there are
+   * activations the payer could afford — one per `payLife` life above the
+   * last, since the planner never pays a toll that would leave them dead
+   * (`tollBearable`). Each is `reserved`, reached for after every permanent:
+   * a cost the lands can pay is no reason to pay life. Their ids are no
+   * object's (`heldManaSourceId`), which `useManaSource` reads back.
+   */
+  private heldManaSources(player: PlayerId): ManaSource[] {
+    const held = this.heldManaAbilities(player);
+    if (held.length === 0) return [];
+    const life = this.state.players[player].life;
+    const out: ManaSource[] = [];
+    held.forEach((ability, index) => {
+      if (ability.payLife <= 0 || !this.canPayLife(player, ability.payLife, "mana-ability")) return;
+      const uses = Math.min(Math.floor((life - 1) / ability.payLife), Game.MAX_EFFECT_INSTANCES);
+      for (let use = 0; use < uses; use += 1) {
+        out.push({
+          id: heldManaSourceId(player, index, use),
+          isLand: false,
+          options: [{ fixed: [...ability.add], anyColor: 0, pain: 0, lifeCost: ability.payLife, genericCost: 0, untapped: true }],
+          sacrificeSelf: false,
+          reserved: true,
+        });
+      }
+    });
+    return out;
+  }
+
+  /** Activate one of `player`'s held mana abilities (rule 605.3a — Channel):
+   * pay its life, add its mana. A mana ability, so nothing waits on the stack
+   * (605.3b) and the player keeps priority. */
+  private activateHeldManaAbility(player: PlayerId, ability: PlayerManaAbility): void {
+    this.payLife(player, ability.payLife);
+    for (const type of ability.add) this.addMana(player, type, 1);
+    invalidateComputedCache();
+  }
+
+  private whyCannotHeldManaAbility(player: PlayerId, index: number): string | null {
+    const blocked = this.whyCannotAct(player);
+    if (blocked !== null) return blocked;
+    const ability = this.heldManaAbilities(player)[index];
+    if (ability === undefined) return `${player} has no such mana ability`;
+    if (!this.canPayLife(player, ability.payLife, "mana-ability")) return `${player} cannot pay ${ability.payLife} life`;
+    return null;
   }
 
   /**
@@ -29934,6 +30029,13 @@ export class Game {
   }
 
   private useManaSource(step: ManaPlanStep): void {
+    // A mana ability the payer has rather than a permanent (Channel).
+    const held = heldManaSourceOf(step.source);
+    if (held !== undefined) {
+      const ability = this.heldManaAbilities(held.player)[held.ability];
+      if (ability !== undefined) this.activateHeldManaAbility(held.player, ability);
+      return;
+    }
     const object = this.state.objects[step.source];
     const player = object.controller;
     // A mana ability activated while paying, as `activateAbility` journals

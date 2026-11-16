@@ -4729,6 +4729,15 @@ Mage); `colorsOnly` is "any other color", leaving {C} alone (Hall of Gemstone). 
 filter, "you" is the permanent's controller or the effect's. What triggered mana
 abilities add isn't changed. `land-mana-instead.test.ts`, `mana-reads.test.ts`.
 
+**A mana ability a player has, not a permanent** (rules 605.1a, 605.3a — Channel's "until end of
+turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}"): a
+`player-effect` with `duration: "end-of-turn"` and `manaAbility: { payLife: 1, add: ["C"], text:
+"Pay 1 life: Add {C}." }`. Its controller gets a `player-mana-ability` offer with priority (a
+button on their own panel in the client), and every payment reaches for it after all their
+permanents, one source per life above the last (`Game.heldManaSources`). It has no source object:
+nothing that asks what was tapped for mana sees it. `player-mana-ability.test.ts` (Channel,
+Yavimaya Bloomsage).
+
 **Unspent mana** (rule 106.4): the `{ unspentMana: PlayerRef, type? }` amount, `grantPtPerCount`'s `unspentMana: { type? }` (Omnath, Locus of the Void) and the `unspent-mana` condition (Ozai). The `lose-unspent-mana` effect (`who` or `target`) is the same loss a step's end causes: "if you would lose unspent mana" replaces it and "you don't lose … as steps and phases end" doesn't stop it. `add-mana`'s `{ sacrificedCouldProduce: filter }` is "any type the sacrificed land could produce" (Squandered Resources, rule 106.7), read just before the cost takes it; the offer names the land with the colour.
 
 **Mana abilities** (`isManaAbility`, rule 605.1a): an ability with no

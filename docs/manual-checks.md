@@ -8619,3 +8619,17 @@ Each board's die comes up 4.
 ### Hostile Hostel: the third soul counter turns it into Creeping Inn, untapped
 - **Do:** Use Hostile Hostel's "{1}, {T}, Sacrifice a creature" ability, sacrificing Grizzly Bears.
 - **Expect:** It already has two soul counters; the third comes off with them, and it turns over into Creeping Inn, a 3/7 artifact creature, untapped and with no counters.
+## A mana ability you have, not a permanent (2026-11-16)
+
+### Channel: "Pay 1 life: Add {C}." on your own panel
+- **Do:** Cast Channel. Click "Pay 1 life: Add {C}." on your panel three times.
+- **Expect:** The button shows on your panel once Channel resolves, beside your lands-played count. Each click takes 1 life and adds a {C} to your pool: 37 life and three {C}.
+
+### Channel: a spell your lands can't pay is paid with life
+- **Do:** Cast Channel, then Colossal Dreadmaw.
+- **Expect:** The Dreadmaw resolves, your last two Forests paying its {G}{G} and 4 life the rest: 36 life.
+- **Not a bug:** Before Channel the Dreadmaw isn't castable.
+
+### Channel: the button is yours alone, and gone at the end of your turn, in a 4-player game
+- **Do:** In this 4-player game, cast Channel, then pass the turn.
+- **Expect:** Only your panel has "Pay 1 life: Add {C}."; no one else's ever shows it. It's gone once Bob's turn begins.

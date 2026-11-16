@@ -544,6 +544,15 @@ export type Action =
       readonly permanent: ObjectId;
     }
   | {
+      /** Activate a mana ability the player has rather than a permanent
+       * (Channel's "any time you could activate a mana ability, you may pay
+       * 1 life. If you do, add {C}" — rule 605.3a): `ability` is its offer's.
+       * Resolves at once, and the player keeps priority. */
+      readonly type: "player-mana-ability";
+      readonly player: PlayerId;
+      readonly ability: number;
+    }
+  | {
       /** Cycle a card from hand (rule 702.29): pay its cycling cost, discard
        * it, draw a card. Any time you could cast an instant. */
       readonly type: "cycle";
@@ -1279,6 +1288,16 @@ export type LegalAction =
       readonly permanent: ObjectId;
       readonly cardName: string;
       readonly cost: string;
+    }
+  | {
+      /** A mana ability the player has rather than a permanent (rule 605.3a
+       * — Channel), offered whenever they have priority: pay `payLife` life,
+       * add `mana`. Echo `ability` back. Payments reach for it themselves. */
+      readonly kind: "player-mana-ability";
+      readonly ability: number;
+      readonly text: string;
+      readonly payLife: number;
+      readonly mana: readonly ManaType[];
     }
   | {
       readonly kind: "cycle";

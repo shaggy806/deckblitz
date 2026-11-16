@@ -6048,6 +6048,28 @@ export interface LaterTimedStatic {
 }
 
 /**
+ * A mana ability a player has rather than a permanent (rule 605.1a): "until
+ * end of turn, any time you could activate a mana ability, you may pay 1 life.
+ * If you do, add {C}" (Channel) — `payLife` life for `add`. Its owner may
+ * activate it whenever they could activate a mana ability (rule 605.3a): with
+ * priority, by its own `player-mana-ability` action, and while paying for
+ * anything, as a source the payment planner reaches for after every
+ * permanent (`Game.heldManaSources`). Kept on a {@link PlayerEffect}, which
+ * says how long it lasts; it has no source object, so nothing that asks what
+ * a mana ability's source is (a permanent tapped for mana, a creature's
+ * ability) sees it.
+ */
+export interface PlayerManaAbility {
+  /** The life paid as its cost (rule 119.4: not while that's more than the
+   * player has, nor while they can't lose life, 119.8). */
+  readonly payLife: number;
+  /** The mana it adds, one unit each. */
+  readonly add: readonly ManaType[];
+  /** Its words, for the offer. */
+  readonly text: string;
+}
+
+/**
  * A continuous effect a resolved spell or ability gave a player for a while
  * — an emblem that expires. See the `player-effect` EffectSpec.
  */
@@ -6125,6 +6147,9 @@ export interface PlayerEffect {
    * (rules 106.12b, 614.1a), with "you" being `owner`. See
    * `Game.manaProductionRules`. */
   readonly manaProduction?: ManaProductionRule;
+  /** A mana ability `owner` has for as long as this lasts (Channel): see
+   * {@link PlayerManaAbility}. */
+  readonly manaAbility?: PlayerManaAbility;
   /** "You gain protection from everything" (rule 702.16j): these players
    * can't be the target of spells or abilities, can't be enchanted by Auras
    * (a Curse on one goes, 704.5m), and all damage that would be dealt to them

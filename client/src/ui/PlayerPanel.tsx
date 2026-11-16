@@ -60,6 +60,10 @@ export interface PlayerPanelProps {
    * you can now, at `companionCost`. */
   readonly onTakeCompanion?: () => void
   readonly companionCost?: string
+  /** Mana abilities you have rather than a permanent (Channel's "pay 1 life:
+   * add {C}", rule 605.3a), each with its words and what activating it does,
+   * when you could activate one now. */
+  readonly heldManaAbilities?: readonly { readonly text: string; readonly onActivate: () => void }[]
   readonly targetable?: boolean
   /** Picked in a decision still being built (a proliferate's players). */
   readonly selected?: boolean
@@ -115,6 +119,7 @@ export function PlayerPanel({
   companionName,
   onTakeCompanion,
   companionCost,
+  heldManaAbilities = [],
   targetable = false,
   selected = false,
   aimedBy = null,
@@ -417,6 +422,21 @@ export function PlayerPanel({
             To hand <Symbols text={companionCost ?? ''} />
           </button>
         ) : null}
+        {heldManaAbilities.map((held, i) => (
+          <button
+            key={held.text + i}
+            type="button"
+            className="pp-zone-link"
+            title={`A mana ability you have this turn: ${held.text}`}
+            data-held-mana={info.id}
+            onClick={(e) => {
+              e.stopPropagation()
+              held.onActivate()
+            }}
+          >
+            <Symbols text={held.text} />
+          </button>
+        ))}
         <span>
           lands {info.landsPlayedThisTurn}/{info.maxLandsThisTurn}
         </span>

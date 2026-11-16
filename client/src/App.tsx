@@ -2326,6 +2326,12 @@ function Table({
     for (const a of actions) if (a.kind === 'take-companion') return a
     return undefined
   }, [actions])
+  // A mana ability you have rather than a permanent (Channel's "pay 1 life:
+  // add {C}", rule 605.3a): on your own panel too, for the same reason.
+  const heldManaAbilities = useMemo(
+    () => actions.filter((a): a is Extract<LegalAction, { kind: 'player-mana-ability' }> => a.kind === 'player-mana-ability'),
+    [actions],
+  )
   // A face-down permanent that can be turned face up (rule 701.40b): the
   // offer sits in the permanent's own ability menu, as its abilities do.
   // A Room's locked doors that can be unlocked (rule 709.5e): a special
@@ -7502,6 +7508,14 @@ function Table({
         ? {
             onTakeCompanion: () => game.dispatch({ type: 'take-companion', player: seat }),
             companionCost: takeCompanion.cost,
+          }
+        : {})}
+      {...(pid === seat && mode === 'priority' && heldManaAbilities.length > 0
+        ? {
+            heldManaAbilities: heldManaAbilities.map((held) => ({
+              text: held.text,
+              onActivate: () => game.dispatch({ type: 'player-mana-ability', player: seat, ability: held.ability }),
+            })),
           }
         : {})}
       onOpenHand={

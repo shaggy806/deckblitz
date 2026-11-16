@@ -13022,4 +13022,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: [{ name: 'Hostile Hostel', counters: { soul: 2 } }, 'Grizzly Bears', 'Wastes'] },
     }),
   ),
+  // --- A mana ability a player has (2026-11-16) ------------------------------
+  preset(
+    'Channel: "Pay 1 life: Add {C}." on your own panel',
+    board({ you: { bf: ['Forest*2'], hand: ['Channel'] } }),
+  ),
+  preset(
+    'Channel: a spell your lands can\'t pay is paid with life',
+    board({ you: { bf: ['Forest*4'], hand: ['Channel', 'Colossal Dreadmaw'] } }),
+  ),
+  preset(
+    'Channel: the button is yours alone, and gone at the end of your turn, in a 4-player game',
+    board({ you: { bf: ['Forest*2'], hand: ['Channel'] }, opp: [{}, {}, {}] }),
+  ),
 ]
