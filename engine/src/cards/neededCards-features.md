@@ -365,6 +365,14 @@ clause is "cards in your graveyard you've surveilled this turn" — the same obj
 seen, left on top and put there later (the ruling). A graveyard permission's `byPayingLife` now works as
 from exile and a library's top: the only way under it (118.9a; X 0, 107.3b), read from the permission the
 cast names. Eye of Duskmantle (rank 11084). `test/surveilled-this-turn.test.ts`.
+### "When damage is prevented this way", on the stack — found built 2026-11-16
+
+The key `replacement:prevention-reflexive-trigger` needed no engine code: a prevention shield's `then` that
+is a `reflexive-trigger` (`targets: []`) triggers as the shield prevents the damage and goes on the stack the
+next time a player would receive priority (rule 603.7a: the spell's resolution created it), carrying the
+damage prevented as its X and the damage's source as its trigger object, so `who: "trigger-controller"` is
+"that source's controller" (608.2h). New Way Forward (rank 11227). `test/prevention-reflexive-trigger.test.ts`.
+
 ### A spell or ability copied for each permanent or player it could target — built 2026-11-16
 
 The keys `effect:copy-spell-for-each-permanent-or-player-it-could-target` and
