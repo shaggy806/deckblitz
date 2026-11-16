@@ -1,6 +1,7 @@
 # Bots: the next steps
 
-Status: **in progress** (written 2026-11-15; steps 1, 2 and 4 built the same day, step 6, the
+Status: **in progress** (written 2026-11-15; steps 1, 2 and 4 built the same day, step 7,
+which permanents to answer, measured (not by salt; a judge for removal targets is next), step 6, the
 swing-back margin, measured and left as it is, and step 5,
 added that day from the user, checked and its own-hand half built; step 3 open, now read
 through step 4's screen). The
@@ -408,3 +409,59 @@ whole board had in power a turn before: an engine already on the battlefield (La
 her tokens, Eshki's counters, Titania's Elementals, a Towering Titan), not a hand. That is a
 question about which permanents the bots answer and when, not about how they attack. In
 BACKLOG.
+
+## 7. Which permanents to answer: salt, labels, or what the card does
+
+**The question** (the user, 2026-11-15, after step 6): the deaths out of a safe reading come
+from an engine already in play, so which permanents should a bot answer, and can a number we
+already have say so? The user's hope was EDHREC's salt score; the fallback was labelling
+cards by hand as threats.
+
+**Measured** (`npm run bot:engines -w engine`, new: `engine/scripts/bot-engines.mjs` logs,
+`bot-engines-report.mjs` reads). Every turn a player takes is logged with the cards it had in
+play as the turn began, which is what the table had a round to answer, beside what the turn
+then *brought past its board*: the more of the damage it dealt and the power it ended with,
+less the power it began with (capped at 40; a turn of 15 or more is a "big turn"). Every
+removal a bot aims at an opponent's card is logged with what else was there. 93 games on the
+upgraded precons (3,062 turns) and 45 on the strong decks (1,523 turns).
+
+- *Salt does not sort the cards.* Counting a board's cards by salt band, on the strong
+  decks, where the salty cards are, one more card adds 1.5%, 1.3%, 1.1% and 0.8% to the
+  chance of a big turn at salt up to 0.3, to 0.6, to 1.0 and over 1.0: nothing, and the
+  wrong way round. Toward winning the game it is 7.5%, 7.2%, 0.9% and 8.0%: a card is a
+  card. On the precons the middle of the range looks better (2.0%, 6.9%, 9.1%, then 1.5%
+  over 1.0), which is where precon commanders and their engines happen to sit (Teval 0.70,
+  Moraug 0.70, Lathliss 0.41). Card by card, salt orders the measured cards against their
+  lift at 0.11 and 0.24 (Spearman; 1 is the same order), EDHREC rank at -0.05 and -0.11.
+  Salt is what players resent (Rhystic Study 2.82, Smothering Tithe 2.62, Sol Ring 1.59),
+  and what they resent is mostly cards and mana, not the turn that kills them.
+- *The bots' own `engineScore` does no better* (0.06 and 0.13): it reads draws, tokens and
+  drains, and the draw engines it rates highest come before no big turn at all.
+- *What does mark a card: it is the commander, and then that it makes tokens.* Strong decks:
+  one more commander in play adds 7.4% to the chance of a big turn and 3.2 to what a turn
+  brings, a token maker 5.6% and 1.6, anything else under 2%, a draw engine -3.5%. Card by
+  card the commanders are the top of the table in both pools: a big turn on 71% of Ureni's
+  turns with Ureni in play against 27% without, Pantlaza 36% against 2%, Krenko 22% against
+  2%, Teval 44% against 15%, Lathliss 36% against 9%, Szarel 35% against 12%. Both marks are
+  read off the game and the definition, with no label and no table.
+- *None of it says much.* Sorting by what the card does explains 20% of what a strong
+  deck's turn brings and 8.5% of a precon's (salt's bands 18% and 9.7%), hardly more than
+  counting cards (17.6% and 8.2%). Most of a big turn is what is cast that turn onto a board
+  that is simply larger.
+- *The bots already aim at these.* Of 484 and 255 removals (5.2 and 5.7 a game: about one
+  and a third a bot), a commander was taken 0.33 and 0.30 times for each one there to take,
+  a token maker 0.26 and 0.27, a plain card 0.12 and 0.16. Their aim is blind to salt
+  (taken 0.41 against 0.39 at random on the precons; 0.73 against 0.67 on the strong decks).
+
+**What it means for labels.** A table of threats made by hand can't be checked this way: in
+a singleton format 93 games measure 69 cards well enough to rank, and the lift of any one
+card is within its own noise. So a hand label would be a judgment, and the test of it is not
+this log but the games a bot plays aiming by it. The same goes for salt as a design choice
+(bots that kill what players expect to see killed), which this measurement neither supports
+as strength nor rules out as feel.
+
+**Next, if any of it is to be built:** the instrument first. `bot:judge` has no kind for a
+removal's target, so no rule for aiming one (a commander and token-maker bonus, a salt
+weight, a hand list) can be judged by playing its changed choices on, which step 6 showed is
+the only reading to trust. Then the cheapest rule the data supports: weigh an opponent's
+commander and its token makers more when a removal picks among targets. In BACKLOG.

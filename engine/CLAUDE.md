@@ -181,6 +181,11 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   cast of and held, a wipe it could have cast on its own turn, and life it spent against what it died by. A flag is a
   reason to read, not a verdict (about one loss in ten is flagged); each flagged loss prints the `bot:watch` line for
   its turns, and a game past its minutes is stopped and named.
+- `bot:engines -- --pool blitz|strong-only|strong --games 96 [--parallel 6]` / `-- --report FILE`: which permanents come
+  before a turn that brings far more than its board showed, and what the bots' removal takes. Logs each turn's board as
+  it began beside what the turn brought, and each removal aimed with what else was there; the report sorts the cards by
+  salt score, EDHREC rank, the bots' `engineScore` and what the definition says the card does, and says which sorting
+  tells apart the cards worth answering (2026-11-15: not salt; the commander, then token makers).
 - `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000] [--count] [--turns 31-34]`: one
   whole game of v2 seats at the live clock, written out to read: each turn's board and hands, and every decision with
   how it was reached. For looking over the bots' play by eye; deck names match the strong decks first, then the starter
