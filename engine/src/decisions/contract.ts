@@ -46,6 +46,7 @@ import type { AwaitingDecision, GameState } from "../state.js";
 import type { ResolvedTargets } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 import type { TargetSource } from "../targeting.js";
+import type { NameStickerRef } from "../stickers.js";
 
 /** One of the 19 decisions the rules can stop and ask a player for. */
 export type DecisionKind = AwaitingDecision["kind"];
@@ -119,6 +120,7 @@ export const DECISION_ACTIONS = {
   "choose-number": ["choose-number"],
   "replacement-order": ["replacement-order"],
   "choose-permanent-or-player": ["choose-permanent-or-player"],
+  "put-name-sticker": ["put-name-sticker"],
 } as const satisfies Record<DecisionKind, readonly Action["type"][]>;
 
 /**
@@ -165,6 +167,7 @@ export const DECISION_OFFERS = {
   "choose-number": ["choose-number"],
   "replacement-order": ["replacement-order"],
   "choose-permanent-or-player": ["choose-permanent-or-player"],
+  "put-name-sticker": ["put-name-sticker"],
 } as const satisfies Record<DecisionKind, readonly LegalAction["kind"][]>;
 
 /**
@@ -348,6 +351,7 @@ export interface DecisionHost {
   readonly applyNumberChoice: (player: PlayerId, number: number) => void;
   readonly applyReplacementOrder: (player: PlayerId, option: number) => void;
   readonly applyChoosePermanentOrPlayer: (player: PlayerId, choice: TargetRef) => void;
+  readonly applyPutNameSticker: (player: PlayerId, sticker: NameStickerRef | null, position: number) => void;
 }
 
 /**

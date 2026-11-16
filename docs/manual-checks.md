@@ -8503,3 +8503,23 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Boseiju, Who Endures: its Channel pill stays inside the card
 - **Do:** Look at Boseiju in your hand without hovering it, then hover it.
 - **Expect:** The pill on its top edge reads "Channel — {1}{G}" and is no wider than the card, hovered or not.
+
+## Name stickers (2026-11-16)
+
+A board's player with a card that puts stickers plays with the first three of Unfinity's sticker sheets: Eldrazi / Guacamole / Tightrope, Trendy / Circus / Pirate and Night / Brushwagg / Ringmaster.
+
+### _____ Goblin: a name sticker fills its blank and adds {R} for each vowel
+- **Do:** Cast _____ Goblin. When it enters, pick "Guacamole", then "Guacamole Goblin". Then cast Hill Giant.
+- **Expect:** The banner lists nine name stickers, each with its vowels ("Guacamole (4 vowels)"), and "No sticker". After Guacamole it offers two places, "Guacamole Goblin" and "_____ Goblin Guacamole". The Goblin is named Guacamole Goblin, the log says you put the name sticker "Guacamole" on it, and the four {R} it added pay for Hill Giant.
+
+### _____ Goblin: no sticker, no mana
+- **Do:** Cast _____ Goblin. When it enters, pick "No sticker".
+- **Expect:** It stays "_____ Goblin" and your pool stays empty.
+
+### Wizards of the _____: its blank is at the end of its name
+- **Do:** Cast Wizards of the _____. Pick "Pirate", then "Wizards of the Pirate". Take Hill Giant from the cards shown, then order the other two.
+- **Expect:** The places offered are "Pirate Wizards of the _____", "Wizards Pirate of the _____", "Wizards of Pirate the _____" and "Wizards of the Pirate". You look at three cards, Grizzly Bears, Hill Giant and Forest (Pirate has three vowels); Hill Giant goes to your hand and the other two to the bottom of your library in the order you pick.
+
+### _____ Goblin: name stickers at a four-player table
+- **Do:** In this 4-player game, hover the 🏷️ on your player panel. Then cast _____ Goblin and pick "Eldrazi", then "Eldrazi Goblin". Then cast Gray Ogre.
+- **Expect:** The tooltip lists your three sticker sheets and their name stickers, none "(on)". The banner fits, the Goblin becomes Eldrazi Goblin, its three {R} pay for Gray Ogre, and the 🏷️ tooltip now shows "Eldrazi (on)". Nobody else has a 🏷️.

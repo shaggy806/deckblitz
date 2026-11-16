@@ -29,6 +29,7 @@ export * from "./view.js";
 export * from "./identity.js";
 export * from "./deck-validation.js";
 export * from "./companion.js";
+export * from "./stickers.js";
 export * from "./sample-decks.js";
 export * from "./cards/classify.js";
 export * from "./cards/edhrec-rank.js";

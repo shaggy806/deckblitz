@@ -12813,4 +12813,33 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Sol Ring'] },
     }),
   ),
+  // --- Name stickers (2026-11-16) ---------------------------------------------
+  // A board's player with a card that puts stickers brings every sheet, and
+  // has the first three: Eldrazi / Guacamole / Tightrope, Trendy / Circus /
+  // Pirate and Night / Brushwagg / Ringmaster.
+  preset(
+    '_____ Goblin: a name sticker fills its blank and adds {R} for each vowel',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['_____ Goblin', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    '_____ Goblin: no sticker, no mana',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['_____ Goblin'] },
+    }),
+  ),
+  preset(
+    'Wizards of the _____: its blank is at the end of its name',
+    board({
+      you: { bf: ['Island*4'], hand: ['Wizards of the _____'], lib: ['Grizzly Bears', 'Hill Giant', 'Forest', 'Swamp'] },
+    }),
+  ),
+  preset(
+    '_____ Goblin: name stickers at a four-player table',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['_____ Goblin', 'Gray Ogre'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

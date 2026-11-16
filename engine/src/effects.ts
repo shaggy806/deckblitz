@@ -73,6 +73,7 @@ import type { JournalWindow } from "./journal.js";
 import { isCardSet, isObjectSetRef, memberCount, onlyMember, type ObjectSetRef, type RememberSpec, type SetMember } from "./object-sets.js";
 import type { BoundObject, EffectProhibition, Prohibition } from "./prohibitions.js";
 import type { ObjectRef, PlayerRef } from "./refs.js";
+import type { StickerCount } from "./stickers.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import {
   isAttachAll,
@@ -7359,6 +7360,32 @@ export type EffectSpec =
     }
   | {
       /**
+       * "You may put a name sticker on it" (rules 123.3, 123.6 — _____
+       * Goblin): the effect's controller chooses one of the name stickers
+       * they have access to and aren't using (`stickers.ts`), or none when
+       * `optional`; the object's controller chooses where in its name its
+       * words go (123.6b) — the `put-name-sticker` decision. `on` is the
+       * object (the source, "it", when omitted), acted on only while it's the
+       * same object (rule 400.7: the source gone, nothing is put — Last
+       * Voyage of the _____'s ruling) and only if the controller owns it
+       * (123.3b: otherwise that part does nothing). Nothing is asked with no
+       * sticker to put.
+       *
+       * `then` follows only once a sticker is on — every card that reads
+       * "that sticker" reads nothing without one — and reads `count` of it as
+       * `"x"`: "Add {R} for each unique vowel on that sticker" is `count:
+       * "unique-vowels"` with `then: { kind: "add-mana", mana: "R", amount:
+       * "x" }`.
+       */
+      readonly kind: "put-sticker";
+      readonly sticker: "name";
+      readonly on?: ObjectRef;
+      readonly optional?: true;
+      readonly count?: StickerCount;
+      readonly then?: EffectSpec;
+    }
+  | {
+      /**
        * "Can't", for a while: one {@link EffectProhibition} per act, fixed as
        * this resolves and lasting `duration` (this turn when omitted). `who`
        * is a `PlayerScope`; an activate's or an object act's `target` is the
@@ -13399,6 +13426,9 @@ export interface EffectApi {
   /** Ask the controller which of the source's stored results to reroll —
    * the `reroll-stored-results` {@link EffectSpec}. */
   chooseStoredResultsToReroll(): void;
+  /** Put a name sticker on `object` (the `put-sticker` {@link EffectSpec}):
+   * the controller chooses one if they own it and have one to put. */
+  putNameSticker(spec: Extract<EffectSpec, { kind: "put-sticker" }>, object: ObjectId): void;
   /** The roll a `{ roll }` amount reads: one this resolution made, else the
    * roll this ability triggered on, else the controller's last this turn. */
   lastRoll(): RollRecord | undefined;
@@ -21108,6 +21138,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "reroll-stored-results":
       ctx.chooseStoredResultsToReroll();
       return;
+    case "put-sticker": {
+      const on = objectRefAct(spec.on ?? "source", ctx);
+      if (on?.kind === "object") ctx.putNameSticker(spec, on.object);
+      return;
+    }
     case "flip-coin":
       applyFlipCoin(spec, ctx);
       return;

@@ -1401,6 +1401,15 @@ export type GameEvent =
       readonly chosen: TargetRef;
     })
   | (Base & {
+      /** `player` put a name sticker reading `sticker` on `object`, whose
+       * name is now `name` — announced to every player (rule 123.6b). */
+      readonly type: "name-sticker-put";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+      readonly sticker: string;
+      readonly name: string;
+    })
+  | (Base & {
       /** `player` chose `number` as `object` resolved (a `choose-value` of
        * `value: "number"` — Void's "choose a number"). */
       readonly type: "number-chosen";

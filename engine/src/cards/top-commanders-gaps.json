@@ -2704,7 +2704,8 @@
   "condition:target-controller-player-counters",
   "effect:exile-per-life-lost-mixed-zones",
   "effect:each-opponent-exiles-card-from-hand-or-permanent",
-  "effect:each-player-exiles-permanents-or-hand-cards"
+  "effect:each-player-exiles-permanents-or-hand-cards",
+  "mechanic:name-stickers"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

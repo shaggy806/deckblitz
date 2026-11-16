@@ -2368,7 +2368,21 @@ takes the timing wrapper die by die: "whenever you roll your third die each turn
 visited an Attraction this turn" `{ kind: "turn-history", what: "visited" }` (each Attraction once
 however often visited; gone ones count — Black Hole's ruling); "you control three or more
 Attractions" is `{ kind: "controls", filter: { subtype: "Attraction" }, atLeast: 3 }`. Not yet:
-stickers and tickets (Costume Shop, Command Performance), rerolls (Monitor Monitor).
+tickets (Costume Shop, Command Performance), rerolls (Monitor Monitor).
+
+**Name stickers** (rule 123.6 — Unfinity; `docs/plans/stickers.md`): "you may put a name sticker on
+it" is `put-sticker { sticker: "name", on?, optional?, count?, then? }` — `on` an `ObjectRef`
+(the source, "it", when omitted), acted on only while it's the same object and only if the
+controller owns it (123.3b); `optional` for "may". `then` follows **only once a sticker is on**,
+with X `count` of it: "Add {R} for each unique vowel on that sticker" is `count: "unique-vowels",
+then: { kind: "add-mana", mana: "R", amount: "x" }` (_____ Goblin); "You gain X life, where X is
+the number of unique vowels on that sticker" `then: { kind: "gain-life", amount: "x" }` (_____ Bird
+Gets the Worm); Wizards of the _____'s "then look at the top X cards" a `look-and-choose` of `count:
+"x"`. Words that happen whether or not a sticker went on are a step after it in a `sequence`, not
+`then`. A deck with such a card plays with stickers (`putsStickers`, `DeckList.stickerSheets`); a
+blank in a printed name ("_____ Goblin") is filled by a sticker put there (`nameWithSticker`). Not
+yet: ability, power/toughness and art stickers, tickets, "put a sticker" of any kind, triggers on
+putting one, "stickered" reads, a blank inside a word (_____-o-saurus).
 
 `become-monarch { who? }` (`who` a scope, or a target slot holding a player — Jared Carthalion's "target opponent becomes the monarch"), `get-energy { amount, who? }` (`amount` an amount: Aetherflux Conduit's
 "equal to the amount of mana spent to cast that spell" is `{ manaSpentOf: "trigger-object" }`),

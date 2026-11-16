@@ -5693,6 +5693,10 @@
   "mechanic:stickers": {
    "example": "_____ Goblin: Unfinity stickers (rule 123): sticker sheets, putting name/art/ability/power-toughness stickers on permanents, and reading them (vowels on a name sticker, tickets)."
   },
+  "mechanic:name-stickers": {
+   "family": "mechanic:stickers",
+   "example": "_____ Goblin: the sticker sheets dealt at the start of the game (rules 103.2d, 123.2a) and putting a name sticker on an object you own (123.3, 123.6b), its words added to the object's name and counted ('for each unique vowel on that sticker', 123.6e) — `put-sticker`. Not ability, power/toughness or art stickers, nor tickets."
+  },
   "cost:spend-only-turn-face-up": {
    "family": "cost:mana-spending-rules",
    "example": "Overgrown Zealot: Mana restricted to turning permanents face up ('Spend this mana only to turn permanents face up' — Overgrown Zealot): a ManaSpendOnly kind the face-up special action's payment admits and every other payment refuses."

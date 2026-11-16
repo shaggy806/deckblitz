@@ -41,6 +41,16 @@ describe('describeEvent', () => {
     expect(chose({ kind: 'object', object: 'o2' })).toBe('Toby chooses card:o2 for card:o1')
   })
 
+  it('announces the name a name sticker makes (rule 123.6b)', () => {
+    expect(
+      describeEvent(
+        event({ type: 'name-sticker-put', player: p1, object: 'o1', sticker: 'Hot Dog', name: 'Hot Dog Goblin' }),
+        nameOf,
+        seats,
+      ),
+    ).toBe('Toby puts the name sticker “Hot Dog” on card:o1, now named Hot Dog Goblin')
+  })
+
   it('says what a type change made it, "in addition" only when nothing was replaced', () => {
     const changed = (fields: Record<string, unknown>) =>
       describeEvent(event({ type: 'types-added', object: 'o1', types: [], duration: 'end-of-turn', ...fields }), nameOf, seats)

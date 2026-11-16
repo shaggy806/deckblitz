@@ -30,6 +30,7 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   'choose-pile': 'choosing a pile',
   'choose-number': 'choosing a number',
   'replacement-order': 'choosing which effect applies first',
+  'put-name-sticker': 'putting a name sticker',
   'choose-modes': 'choosing a mode',
   'choose-targets': 'targeting',
   'cast-now': 'deciding whether to cast',

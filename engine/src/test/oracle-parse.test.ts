@@ -20302,3 +20302,41 @@ describe("a choice across a player's own zones, exiled at once (exile-from-zones
     });
   });
 });
+
+describe("'you may put a name sticker on it' (rule 123.6 — _____ Goblin, Wizards of the _____)", () => {
+  const trigger = (oracle_text: string) =>
+    parseFace({ name: "Card", type_line: "Creature — Goblin", mana_cost: "{2}{R}", oracle_text, power: "2", toughness: "2" })
+      .triggered[0];
+
+  it("a `put-sticker`, what follows reading its unique vowels as X only once a sticker is on", () => {
+    expect(
+      trigger(
+        "When this creature enters, you may put a name sticker on it. Add {R} for each unique vowel on that sticker. (The vowels are A, E, I, O, U, and Y.)",
+      ).effect,
+    ).toEqual({
+      kind: "put-sticker",
+      sticker: "name",
+      optional: true,
+      count: "unique-vowels",
+      then: { kind: "add-mana", mana: "R", amount: "x" },
+    });
+    expect(
+      trigger(
+        "When this creature enters, you may put a name sticker on it. You gain X life, where X is the number of unique vowels on that sticker. (The vowels are A, E, I, O, U, and Y.)",
+      ).effect,
+    ).toEqual({
+      kind: "put-sticker",
+      sticker: "name",
+      optional: true,
+      count: "unique-vowels",
+      then: { kind: "gain-life", amount: "x" },
+    });
+  });
+
+  it("leaves what it can't read of the sticker to the author", () => {
+    const saurus = trigger(
+      "When this creature enters, you may put a name sticker on it. Put a +1/+1 counter on it for each unique vowel on that sticker.",
+    );
+    expect(JSON.stringify(saurus.effect ?? null)).not.toContain("put-sticker");
+  });
+});

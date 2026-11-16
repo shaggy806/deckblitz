@@ -60,6 +60,7 @@ import {
 } from "./effect-worth.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
+import type { NameStickerRef } from "./stickers.js";
 
 /** A `separate-piles` offer — see `PlayerController.separatePiles`. */
 export type SeparatePilesOffer = Extract<LegalAction, { kind: "separate-piles" }>;
@@ -71,6 +72,13 @@ export type ReplacementOrderOffer = Extract<LegalAction, { kind: "replacement-or
 export type ChooseNumberOffer = Extract<LegalAction, { kind: "choose-number" }>;
 /** A `choose-permanent-or-player` offer — see `PlayerController.choosePermanentOrPlayer`. */
 export type ChoosePermanentOrPlayerOffer = Extract<LegalAction, { kind: "choose-permanent-or-player" }>;
+/** A `put-name-sticker` offer — see `PlayerController.putNameSticker`. */
+export type PutNameStickerOffer = Extract<LegalAction, { kind: "put-name-sticker" }>;
+/** A `put-name-sticker` answer: the sticker (none, `null`) and its place. */
+export interface NameStickerAnswer {
+  readonly sticker: NameStickerRef | null;
+  readonly position: number;
+}
 import type { EnterAttackingChoice, GameObject, GameState, OverPlaneswalker, TriggerOrderEntry } from "./state.js";
 import { activePlayerOf, printedCardName, rulesTextName } from "./state.js";
 import { anyNumberSlot, concatModeSpecs, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
@@ -162,6 +170,25 @@ export function defaultPermanentOrPlayer(view: ControllerView, offer: ChoosePerm
     if (mine !== undefined) return mine;
   }
   return offer.eligible[0];
+}
+
+/**
+ * A plain controller's name sticker: the one with the most of what the card
+ * counts on it (_____ Goblin's unique vowels), the first of those tied — a
+ * sticker's only cost is that it's then in use (rule 123.3) — put where the
+ * name has a blank waiting for it (`fill`). Asked only where it goes, there.
+ */
+export function defaultNameSticker(offer: PutNameStickerOffer): NameStickerAnswer {
+  let best = 0;
+  if (offer.count !== undefined) {
+    offer.stickers.forEach((s, i) => {
+      if (s.uniqueVowels > offer.stickers[best].uniqueVowels) best = i;
+    });
+  }
+  const chosen = offer.stickers[best];
+  if (chosen === undefined) return { sticker: null, position: 0 };
+  const places = offer.names[best]?.length ?? 1;
+  return { sticker: { sheet: chosen.sheet, index: chosen.index }, position: places === 1 ? 0 : offer.fill };
 }
 
 /**
@@ -371,6 +398,10 @@ export interface PlayerController {
    * (Comet, Stellar Pup's "to a creature or player"): one of the offer's
    * `eligible`. */
   choosePermanentOrPlayer(view: ControllerView, offer: ChoosePermanentOrPlayerOffer): TargetRef;
+  /** Put a name sticker (rule 123.6b — _____ Goblin): which of the offer's
+   * `stickers` (or none, when `optional`) and after how many words of the
+   * name, an index into that sticker's `names`. */
+  putNameSticker(view: ControllerView, offer: PutNameStickerOffer): NameStickerAnswer;
   /**
    * A modal spell/ability is resolving (rule 700.2), or a "you may" clause
    * (rule 601.3e). Return the indices of the modes to apply — distinct, and
@@ -870,6 +901,10 @@ export class AutomaticController implements PlayerController {
     return defaultPermanentOrPlayer(view, offer);
   }
 
+  putNameSticker(_view: ControllerView, offer: PutNameStickerOffer): NameStickerAnswer {
+    return defaultNameSticker(offer);
+  }
+
   /** The order the engine works out as best for the player: the least damage
    * and the most shields kept. */
   chooseReplacementOrder(_view: ControllerView, offer: ReplacementOrderOffer): number {
@@ -1270,6 +1305,8 @@ export class ScriptedController implements PlayerController {
   chooseNumberFn: (view: ControllerView, offer: ChooseNumberOffer) => number = (_view, offer) => offer.min;
   choosePermanentOrPlayerFn: (view: ControllerView, offer: ChoosePermanentOrPlayerOffer) => TargetRef = (view, offer) =>
     defaultPermanentOrPlayer(view, offer);
+  putNameStickerFn: (view: ControllerView, offer: PutNameStickerOffer) => NameStickerAnswer = (_view, offer) =>
+    defaultNameSticker(offer);
   chooseReplacementOrderFn: (view: ControllerView, offer: ReplacementOrderOffer) => number = (_view, offer) => offer.best;
   chooseModesFn: ModesChooser = (_view, minModes) =>
     Array.from({ length: minModes }, (_unused, i) => i);
@@ -1466,6 +1503,10 @@ export class ScriptedController implements PlayerController {
 
   choosePermanentOrPlayer(view: ControllerView, offer: ChoosePermanentOrPlayerOffer): TargetRef {
     return this.choosePermanentOrPlayerFn(view, offer);
+  }
+
+  putNameSticker(view: ControllerView, offer: PutNameStickerOffer): NameStickerAnswer {
+    return this.putNameStickerFn(view, offer);
   }
 
   chooseReplacementOrder(view: ControllerView, offer: ReplacementOrderOffer): number {

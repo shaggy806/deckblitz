@@ -694,6 +694,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // Rerolls its own stored results: no target.
   "reroll-stored-results": none,
+  // Only on something its controller owns (rule 123.3b), and the
+  // sticker's reward is theirs.
+  "put-sticker": (n, v) => {
+    v.touch(n.on, "help", MINOR);
+    if (n.then) v.child(n.then);
+  },
   "flip-coin": (n, v) => {
     v.child(n.won);
     v.child(n.lost);

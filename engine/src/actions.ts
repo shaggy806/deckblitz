@@ -18,6 +18,7 @@ import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 import type { TargetCountRange, TargetTaxShare } from "./target-count.js";
 import type { OverPlaneswalker, ReplacementOrderOption, TriggerOrderEntry } from "./state.js";
+import type { NameStickerOption, NameStickerRef, StickerCount } from "./stickers.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
 /** One creature tapped to help pay a convoke cost (rule 702.51a): it pays
@@ -918,6 +919,17 @@ export type Action =
       readonly type: "choose-permanent-or-player";
       readonly player: PlayerId;
       readonly choice: TargetRef;
+    }
+  | {
+      /** Answers a pending `put-name-sticker` decision: the name sticker to
+       * put (`null` for none, when that's allowed) and after how many of the
+       * object's words it goes (0, the beginning, to its word count, the
+       * end). Asked only for the position, `sticker` is the one already
+       * chosen; asked only for the sticker, `position` is 0. */
+      readonly type: "put-name-sticker";
+      readonly player: PlayerId;
+      readonly sticker: NameStickerRef | null;
+      readonly position: number;
     }
   | {
       /** Answers a pending `choose-modes` decision (a modal spell/ability, or
@@ -2345,6 +2357,25 @@ export type LegalAction =
       /** Whether what's done to the one chosen helps or harms it (the
        * `then`'s slot 0, `target-polarity.ts`), for a bot's ranking. */
       readonly polarity: "harm" | "help" | "take" | "either";
+    }
+  | {
+      /** Put a name sticker on `object` — see `AwaitingDecision`'s
+       * `put-name-sticker`. `stickers` are those to choose among (the one
+       * already chosen, when only its place is asked); `names[i][p]` is the
+       * object's name with sticker `i` after `p` of its words — one entry
+       * when someone else will place it, or there's only one place.
+       * `optional`: none is an answer. `fill` is the place a blank line in
+       * its name waits for words (rule 123.6a), else 0. */
+      readonly kind: "put-name-sticker";
+      readonly source: ObjectId;
+      readonly object: ObjectId;
+      readonly stage: "choose" | "place";
+      readonly stickers: readonly NameStickerOption[];
+      readonly names: readonly (readonly string[])[];
+      readonly optional: boolean;
+      readonly fill: number;
+      /** What the card counts on the sticker, if anything ("that sticker"). */
+      readonly count?: StickerCount;
     }
   | {
       readonly kind: "choose-modes";

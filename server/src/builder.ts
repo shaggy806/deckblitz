@@ -12,7 +12,16 @@
  * way: `docs/plans/scenario-builder.md`.
  */
 
-import { COMMANDER_RULES, Game, asPlayerId, computeCharacteristics, isTokenCard, revealedCompanion } from "engine/local";
+import {
+  COMMANDER_RULES,
+  Game,
+  STICKER_SHEETS,
+  asPlayerId,
+  computeCharacteristics,
+  isTokenCard,
+  putsStickers,
+  revealedCompanion,
+} from "engine/local";
 import { cardRegistry } from "./card-registry.js";
 import type { CardRegistry, GameObject, ObjectId, PlayerId, Step } from "engine/local";
 import type { BuilderInfo, ScenarioCard, ScenarioSeat, ScenarioSpec, ScenarioStep, ScenarioZone } from "protocol";
@@ -319,6 +328,12 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
       attractions: attractionPile(spec, player).map((c) =>
         c.collector === undefined ? c.name : { name: c.name, collector: c.collector },
       ),
+      // A board's library is basics, so its cards say who plays with
+      // stickers (rule 123.2a): every sheet, the first three theirs (the
+      // board doesn't shuffle).
+      ...(spec.cards.some((c) => c.owner === player && registry.has(c.name) && putsStickers(registry.get(c.name)))
+        ? { stickerSheets: STICKER_SHEETS.map((s) => s.name) }
+        : {}),
     })),
   });
   if (turn > 1) {

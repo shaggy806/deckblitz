@@ -137,6 +137,21 @@ const FIXTURES: Partial<Record<DecisionKind, AwaitingDecision>> = {
     then: { kind: "damage", amount: 3, target: 0 },
     x: 0,
   },
+  "put-name-sticker": {
+    kind: "put-name-sticker",
+    player: ALICE,
+    putter: ALICE,
+    placer: ALICE,
+    stage: "choose",
+    source: asObjectId("obj-1"),
+    object: asObjectId("obj-1"),
+    stint: 1,
+    options: [{ sheet: "Spooky Clown Mox", index: 2, text: "Mox", uniqueVowels: 1 }],
+    optional: true,
+    count: "unique-vowels",
+    then: { kind: "add-mana", mana: "R", amount: "x" },
+    resume: { controller: ALICE, targets: [], x: 0, triggerValue: 0, targetZones: [], refs: {} },
+  },
   "choose-number": {
     kind: "choose-number",
     player: ALICE,
@@ -304,7 +319,7 @@ describe("decision registry", () => {
   it("covers all thirty-one kinds, with a fixture for each", () => {
     // The table is total now, so a missing module fails the build. This is
     // the check that the fixtures below don't fall behind it.
-    expect(Object.keys(DECISIONS)).toHaveLength(33);
+    expect(Object.keys(DECISIONS)).toHaveLength(34);
     for (const kind of Object.keys(DECISIONS) as DecisionKind[]) {
       expect(FIXTURES[kind], `no FIXTURES entry for "${kind}"`).toBeDefined();
     }

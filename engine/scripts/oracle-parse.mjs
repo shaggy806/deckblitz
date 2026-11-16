@@ -9590,6 +9590,35 @@ export function parseEffect(text, outer) {
   const tempting = temptingOfferOf(text, outer);
   if (tempting !== null) return { effect: tempting, todo: [], hints: [] };
 
+  // "You may put a name sticker on it. Add {R} for each unique vowel on that
+  // sticker." (_____ Goblin; rule 123.6e), "…, then look at the top X cards
+  // …, where X is the number of unique vowels on that sticker" (Wizards of
+  // the _____): `put-sticker`, its `then` reading the count as X — and only
+  // once a sticker is on, which "that sticker" needs anyway. What follows
+  // without reading the sticker happens either way, a step after it.
+  const sticker = /^You may put a name sticker on (?:it|~)(?:\. |, then )(.+)$/.exec(text);
+  if (sticker !== null) {
+    const readsIt = /that sticker/.test(sticker[1]);
+    const rest = sticker[1].replace(/, where X is the number of unique vowels on that sticker/, "");
+    const mana = /^Add (\{[WUBRGC]\}) for each unique vowel on that sticker\.$/.exec(rest);
+    const after =
+      mana !== null
+        ? { effect: { kind: "add-mana", mana: mana[1].slice(1, -1), amount: "x" }, todo: [] }
+        : /that sticker/.test(rest)
+          ? null
+          : parseEffect(rest.charAt(0).toUpperCase() + rest.slice(1), outer);
+    if (after !== null && after.todo.length === 0 && after.effect !== null) {
+      const put = { kind: "put-sticker", sticker: "name", optional: true };
+      return {
+        effect: readsIt
+          ? { ...put, count: "unique-vowels", then: after.effect }
+          : { kind: "sequence", effects: [put, after.effect] },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
+
   // "Any player may pay 5 life. If a player does, counter ~." (Dash Hopes), "…
   // pay half their life, rounded up" (Temporal Extortion): each player asked
   // in turn (rule 101.4), the life their own, any payment countering it.

@@ -463,6 +463,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
             ? name(event.chosen.object)
             : 'nothing'
       } for ${name(event.source)}`
+    case 'name-sticker-put':
+      return `${who(event.player)} puts the name sticker “${event.sticker}” on ${name(event.object)}, now named ${event.name}`
     case 'assist-requested':
       return `${who(event.caster)} asks ${who(event.player)} to assist with ${name(event.object)}`
     case 'assist-chosen':

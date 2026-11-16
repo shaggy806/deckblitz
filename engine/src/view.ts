@@ -70,6 +70,7 @@ import {
   playersControlledBy,
 } from "./player-control.js";
 import { EVERY_CREATURE_TYPE, withoutTypeMarkers } from "./subtypes.js";
+import { stickerSheetsView } from "./stickers.js";
 import type { TargetRef } from "./target.js";
 
 export interface PublicPlayerInfo {
@@ -129,6 +130,14 @@ export interface PublicPlayerInfo {
    * command zone instead of a graveyard, hand or library, oldest first —
    * face up and public, each in `objects` for every seat (with its `lights`). */
   readonly junkyard: readonly ObjectId[];
+  /** The sticker sheets they have access to (rules 103.2d, 123.2c),
+   * revealed to everyone: each with its name stickers and whether each is on
+   * an object they own now (123.3). Empty for a player who plays without
+   * stickers. */
+  readonly stickerSheets: readonly {
+    readonly name: string;
+    readonly names: readonly { readonly text: string; readonly used: boolean }[];
+  }[];
 }
 
 /** Combat damage one commander has dealt one player. */
@@ -387,6 +396,9 @@ export interface VisibleObject {
   /** On a permanent: the die results stored on it, oldest first (Centaur of
    * Attention — `GameObject.storedResults`). Public. Absent with none. */
   readonly storedResults?: readonly number[];
+  /** The words of the name stickers on it, oldest first (rule 123.6) —
+   * public, like the name they make (`name`). Absent with none. */
+  readonly nameStickers?: readonly string[];
 }
 
 export interface PlayerView {
@@ -814,6 +826,9 @@ function visible(
     ...(secret !== null ? { secretChoice: secret } : {}),
     ...(zone === "battlefield" && object.storedResults !== undefined && object.storedResults.length > 0
       ? { storedResults: object.storedResults.map((s) => s.result) }
+      : {}),
+    ...(object.stickers !== undefined && object.stickers.length > 0
+      ? { nameStickers: object.stickers.filter((s) => s.kind === "name").map((s) => s.text) }
       : {}),
     counters: { ...object.counters },
     summoningSick: object.summoningSick,
@@ -1291,6 +1306,7 @@ function viewForUncached(
       completedDungeons: [...(playerState.completedDungeons ?? [])],
       attractionDeckSize: playerState.attractionDeck?.length ?? 0,
       junkyard: [...(playerState.junkyard ?? [])],
+      stickerSheets: stickerSheetsView(state, player),
     };
     graveyards[player] = [...zones.graveyard];
     visibleIds.push(...zones.graveyard);

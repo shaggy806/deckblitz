@@ -108,6 +108,16 @@ import {
   licidDefinition,
   readsGraveyardOrder,
 } from "./cards/define.js";
+import {
+  STICKER_SHEETS,
+  STICKER_SHEETS_IN_PLAY,
+  availableNameStickers,
+  nameWordCount,
+  putsStickers,
+  stickerCount,
+  stickerSheet,
+  type NameStickerRef,
+} from "./stickers.js";
 import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause } from "./cards/define.js";
 import { costActMaxX, costActPaidLast, costActPayable, costActReadsX, payableCostAct } from "./cost-acts.js";
 import { DUNGEONS } from "./cards/dungeons.js";
@@ -263,6 +273,7 @@ import { chooseCopy } from "./decisions/choose-copy.js";
 import { chooseEnchant } from "./decisions/choose-enchant.js";
 import { choosePermanents } from "./decisions/choose-permanents.js";
 import { choosePermanentOrPlayer } from "./decisions/choose-permanent-or-player.js";
+import { putNameSticker, stickerPlaces } from "./decisions/put-name-sticker.js";
 import { separatePiles } from "./decisions/separate-piles.js";
 import { choosePile } from "./decisions/choose-pile.js";
 import { replacementOrder } from "./decisions/replacement-order.js";
@@ -519,6 +530,7 @@ import {
   rulesTextName,
   textNameOf,
   nameOf,
+  nameIfAny,
   tokenFoldKey,
   speedOf,
   playerCountersHeld,
@@ -700,6 +712,17 @@ export interface DeckList {
    * are `deck-validation.ts`'s `attractionDeckProblems`.
    */
   readonly attractions?: readonly AttractionDeckEntry[];
+  /**
+   * The sticker sheets the player brings (rule 123.2a), by name
+   * (`stickers.ts`'s `STICKER_SHEETS`): at least ten, each unique — the
+   * server's check (`stickerSheetProblems`), not the engine's. Three of them,
+   * chosen at random as the game begins (103.2d; the first three when the
+   * game's `shuffle` is off), are the stickers they have access to all game
+   * (`PlayerState.stickerSheets`). Absent, a deck with a card that puts
+   * stickers (`putsStickers`) brings every sheet there is — 123.2a sets no
+   * maximum — and any other deck plays without stickers.
+   */
+  readonly stickerSheets?: readonly string[];
 }
 
 /** One card of a {@link DeckList.attractions}: its name, or its name and
@@ -2822,6 +2845,7 @@ export class Game {
       applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
       applyReplacementOrder: (player, option) => this.applyReplacementOrder(player, option),
       applyChoosePermanentOrPlayer: (player, choice) => this.applyChoosePermanentOrPlayer(player, choice),
+      applyPutNameSticker: (player, sticker, position) => this.applyPutNameSticker(player, sticker, position),
       applyAttackerDeclarations: (p, d, life) => this.applyAttackerDeclarations(p, d, life),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
       applyChooseTargets: (p, t, d) => this.applyChooseTargets(p, t, d),
@@ -7342,7 +7366,7 @@ export class Game {
     mulligans: boolean,
     skipCompanionReveals: boolean,
   ): void {
-    for (const { player, cards, commanders, printings, sideboard, attractions } of decks) {
+    for (const { player, cards, commanders, printings, sideboard, attractions, stickerSheets } of decks) {
       const commanderNames = commanders ?? [];
       this.state.players[player] = createPlayerState(player, this.state.rules);
       // Copied, not aliased: `GameState` has to stay a self-contained,
@@ -7397,6 +7421,17 @@ export class Game {
         const deck = attractions.map((entry) => this.makeAttractionCard(entry, player));
         this.state.players[player].attractionDeck = shuffleLibrary ? shuffle(deck, this.rng) : deck;
       }
+
+      // Its sticker sheets: all of them revealed, three chosen at random
+      // (rules 103.2d, 123.2a) — last, and only for a player who plays with
+      // stickers, so any other game draws from the random stream as before.
+      const brought = this.stickerSheetsBrought(stickerSheets, [...cards, ...commanderNames, ...(sideboard ?? [])]);
+      if (brought.length > 0) {
+        this.state.players[player].stickerSheets = (shuffleLibrary ? shuffle(brought, this.rng) : brought).slice(
+          0,
+          STICKER_SHEETS_IN_PLAY,
+        );
+      }
     }
     this.state.rngState = this.rng.seed;
 
@@ -7410,6 +7445,17 @@ export class Game {
     const opening = mulligans ? "mulligans" : "hands";
     if (skipCompanionReveals) this.dealOpeningHands(opening);
     else this.beginCompanionReveals(0, opening);
+  }
+
+  /** The sticker sheets a deck brings (rule 123.2a): its own list, real
+   * sheets once each; with none, every sheet when one of `cards` puts
+   * stickers, else none — it plays without them. */
+  private stickerSheetsBrought(listed: readonly string[] | undefined, cards: readonly string[]): string[] {
+    if (listed !== undefined && listed.length > 0) {
+      return [...new Set(listed)].filter((name) => stickerSheet(name) !== undefined);
+    }
+    const puts = cards.some((name) => this.registry.has(name) && putsStickers(this.registry.get(name)));
+    return puts ? STICKER_SHEETS.map((s) => s.name) : [];
   }
 
   private dealOpeningHands(opening: "mulligans" | "hands"): void {
@@ -42276,6 +42322,16 @@ controlledBy,
           rerollStored: { object: source, stint: link.zoneChangeCount },
         };
       },
+      putNameSticker: (spec, object) =>
+        this.putNameSticker(spec, object, source, {
+          controller,
+          targets,
+          x,
+          triggerValue,
+          ...(triggerObject !== undefined ? { triggerObject } : {}),
+          targetZones,
+          refs,
+        }),
       lastRoll: () => {
         const last = lastRollEntry(this.state, controller);
         // One this resolution made, or the roll this ability triggered on.
@@ -53544,6 +53600,94 @@ controlledBy,
     ];
     if (eligible.length === 0) return;
     this.state.awaiting = { kind: "choose-permanent-or-player", player, eligible, prompt, then, source, x, thenResolution };
+  }
+
+  /**
+   * Raise the `put-name-sticker` decision for the `put-sticker` effect (rule
+   * 123.3): `putter` — the effect's controller — puts one of the name
+   * stickers they have access to and aren't using on `object`, if they own it
+   * (123.3b: otherwise that part does nothing) and have one. Its controller
+   * chooses the place (123.6b): in the same answer when that's `putter`.
+   */
+  private putNameSticker(
+    spec: Extract<EffectSpec, { kind: "put-sticker" }>,
+    object: ObjectId,
+    source: ObjectId,
+    resume: ResolutionResume,
+  ): void {
+    const putter = resume.controller;
+    const target = this.state.objects[object];
+    if (target === undefined || target.owner !== putter || this.state.players[putter]?.hasLost !== false) return;
+    const options = availableNameStickers(this.state, putter);
+    if (options.length === 0) return;
+    const placer = target.zone === "battlefield" || target.zone === "stack" ? target.controller : target.owner;
+    this.state.awaiting = {
+      kind: "put-name-sticker",
+      player: putter,
+      putter,
+      placer: this.state.players[placer]?.hasLost === false ? placer : putter,
+      stage: "choose",
+      source,
+      object,
+      stint: target.zoneChangeCount ?? 0,
+      options,
+      optional: spec.optional === true,
+      ...(spec.count !== undefined ? { count: spec.count } : {}),
+      ...(spec.then !== undefined ? { then: spec.then } : {}),
+      resume,
+    };
+  }
+
+  /**
+   * Answers a pending `put-name-sticker` decision. The sticker chosen, its
+   * place is asked of the object's controller when that's someone else and
+   * the name has more than one; then it's put on (rule 123.6b), the new name
+   * announced, and `then` carries on the resolution with X its `count`. None
+   * chosen, nothing more happens. An object gone by then (rule 400.7) gets
+   * none.
+   */
+  private applyPutNameSticker(player: PlayerId, sticker: NameStickerRef | null, position: number): void {
+    const why = putNameSticker.whyCannot(this.decisionCtx, { type: "put-name-sticker", player, sticker, position }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "put-name-sticker") {
+      throw new Error("unreachable: putNameSticker.whyCannot should have caught this");
+    }
+    this.state.awaiting = null;
+    const chosen = sticker === null ? undefined : awaiting.options.find((o) => o.sheet === sticker.sheet && o.index === sticker.index);
+    const asked = this.state.objects[awaiting.object];
+    if (chosen !== undefined && asked !== undefined && (asked.zoneChangeCount ?? 0) === awaiting.stint) {
+      if (awaiting.stage === "choose" && awaiting.placer !== awaiting.putter) {
+        const asking = { ...awaiting, player: awaiting.placer, stage: "place" as const, options: [chosen] };
+        if (stickerPlaces(this.state, asking) > 1) {
+          this.state.awaiting = asking;
+          return;
+        }
+      }
+      // One of a stack of tokens is singled out to have it (each is its own
+      // object, rule 111.1).
+      const id = (asked.stackCount ?? 1) > 1 ? this.splitOneFromStack(awaiting.object) : awaiting.object;
+      const target = this.state.objects[id] ?? asked;
+      const places = nameWordCount(nameIfAny(target)) + 1;
+      target.stickers = [
+        ...(target.stickers ?? []),
+        {
+          kind: "name",
+          sheet: chosen.sheet,
+          index: chosen.index,
+          text: chosen.text,
+          position: Math.min(position, places - 1),
+          timestamp: this.freshTimestamp(),
+        },
+      ];
+      invalidateComputedCache();
+      this.emit({ type: "name-sticker-put", player: awaiting.putter, object: id, sticker: chosen.text, name: nameOf(target) });
+      if (awaiting.then !== undefined) {
+        const x = awaiting.count === undefined ? 0 : stickerCount(chosen.text, awaiting.count);
+        this.resumeResolution(awaiting.then, awaiting.source, { ...awaiting.resume, x });
+      }
+    }
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
   /** Answers a pending `choose-permanent-or-player` decision: `then` with the
@@ -66884,6 +67028,13 @@ controlledBy,
     delete object.enlistedIn;
     // And the die results stored on it (Centaur of Attention).
     delete object.storedResults;
+    // Its stickers go with it to another public zone, an exception to rule
+    // 400.7, each with a new timestamp in the order they had (rules 123.5,
+    // 613.7k); to a hand or library they're lost (123.5).
+    if (object.stickers !== undefined) {
+      if (to === "hand" || to === "library") delete object.stickers;
+      else object.stickers = object.stickers.map((s) => ({ ...s, timestamp: this.freshTimestamp() }));
+    }
     // And solved (719.3b).
     delete object.solved;
     delete object.exertedBy;

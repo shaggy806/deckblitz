@@ -266,6 +266,19 @@ export function PlayerPanel({
             🏛️
           </span>
         ) : null}
+        {/* Their sticker sheets, revealed all game (rule 123.2c): the name
+            stickers on each, and which are on something of theirs now. */}
+        {(info.stickerSheets ?? []).length > 0 ? (
+          <span
+            className="pp-story"
+            data-testid="pp-sticker-sheets"
+            title={`Sticker sheets (rule 123.2c):\n${(info.stickerSheets ?? [])
+              .map((s) => `${s.name}: ${s.names.map((n) => (n.used ? `${n.text} (on)` : n.text)).join(', ')}`)
+              .join('\n')}`}
+          >
+            🏷️
+          </span>
+        ) : null}
         {info.commanderDamageTaken.length > 0 ? (
           <span className="pp-cmdr-dmg">
             {info.commanderDamageTaken.map((d) => (

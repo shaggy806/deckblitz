@@ -100,6 +100,9 @@ export function table(
     /** Each player's Attraction deck (rule 717.2), top card first (the table
      * doesn't shuffle) — alice's if given as a list. */
     attractions?: readonly AttractionDeckEntry[] | Readonly<Partial<Record<PlayerId, readonly AttractionDeckEntry[]>>>;
+    /** The sticker sheets each player brings (rule 123.2a) — alice's if given
+     * as a list. The table doesn't shuffle, so the first three are theirs. */
+    stickerSheets?: readonly string[] | Readonly<Partial<Record<PlayerId, readonly string[]>>>;
     /** Cards each player opens with (the rules' default otherwise). */
     openingHandSize?: number;
     /** The cards the game plays with, for a test that defines its own. */
@@ -129,6 +132,7 @@ export function table(
       cards: Array<string>(40).fill(opts.deck ?? "Wastes"),
       ...(player === A && opts.sideboard !== undefined ? { sideboard: opts.sideboard } : {}),
       ...attractionsOf(opts.attractions, player),
+      ...stickerSheetsOf(opts.stickerSheets, player),
     })),
   });
   const step = opts.step ?? "precombat-main";
@@ -146,6 +150,16 @@ function attractionsOf(
   if (given === undefined) return {};
   const list = Array.isArray(given) ? (player === A ? given : undefined) : (given as Partial<Record<PlayerId, readonly AttractionDeckEntry[]>>)[player];
   return list === undefined ? {} : { attractions: list };
+}
+
+/** A table's `stickerSheets` option, as `player`'s deck's field. */
+function stickerSheetsOf(
+  given: readonly string[] | Readonly<Partial<Record<PlayerId, readonly string[]>>> | undefined,
+  player: PlayerId,
+): { stickerSheets?: readonly string[] } {
+  if (given === undefined) return {};
+  const list = Array.isArray(given) ? (player === A ? given : undefined) : (given as Partial<Record<PlayerId, readonly string[]>>)[player];
+  return list === undefined ? {} : { stickerSheets: list };
 }
 
 /** Light up `lights` on the Attraction card `id` (rule 717.1) — `[1, 2, 3, 4,

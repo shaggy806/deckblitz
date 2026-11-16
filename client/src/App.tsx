@@ -98,6 +98,7 @@ import {
 import type { Members } from './game/stackMembers.ts'
 import { CountStepper } from './ui/CountStepper.tsx'
 import { NumberChoice } from './ui/NumberChoice.tsx'
+import { NameStickerChoice } from './ui/NameStickerChoice.tsx'
 import {
   addToGroup,
   clickMembers,
@@ -461,6 +462,7 @@ type SeparatePilesAction = Extract<LegalAction, { kind: 'separate-piles' }>
 type ChoosePileAction = Extract<LegalAction, { kind: 'choose-pile' }>
 type ChooseNumberAction = Extract<LegalAction, { kind: 'choose-number' }>
 type ReplacementOrderAction = Extract<LegalAction, { kind: 'replacement-order' }>
+type NameStickerAction = Extract<LegalAction, { kind: 'put-name-sticker' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
 type CastNowAction = Extract<LegalAction, { kind: 'cast-now' }>
 
@@ -928,6 +930,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   'choose-pile': 'choose a pile',
   'choose-number': 'choose a number',
   'replacement-order': 'choose which effect applies first',
+  'put-name-sticker': 'put a name sticker',
   'choose-modes': 'choose a mode',
   'choose-targets': 'choose targets',
   'cast-now': 'decide whether to cast a spell',
@@ -2524,6 +2527,7 @@ function Table({
   const choosePileAction = actions.find((a): a is ChoosePileAction => a.kind === 'choose-pile')
   const chooseNumberAction = actions.find((a): a is ChooseNumberAction => a.kind === 'choose-number')
   const replacementOrderAction = actions.find((a): a is ReplacementOrderAction => a.kind === 'replacement-order')
+  const nameStickerAction = actions.find((a): a is NameStickerAction => a.kind === 'put-name-sticker')
   // Piles of permanents (Liliana of the Veil) are made and shown on the
   // board; piles of cards (Fact or Fiction) in a popup.
   const pilesOnBoard = useMemo(() => {
@@ -2662,6 +2666,7 @@ function Table({
     | 'choose-pile'
     | 'choose-number'
     | 'replacement-order'
+    | 'put-name-sticker'
     | 'choose-modes'
     | 'sacrifice'
     | 'proliferate'
@@ -2716,6 +2721,8 @@ function Table({
           ? 'choose-number'
         : replacementOrderAction
           ? 'replacement-order'
+        : nameStickerAction
+          ? 'put-name-sticker'
         : pendingPhyrexian !== null && (modesChoiceAction || attackAction)
           ? 'choose-phyrexian'
         // "Unless you waterbend {2}": which tap, once the player says yes.
@@ -6014,6 +6021,17 @@ function Table({
         min={chooseNumberAction.min}
         {...(chooseNumberAction.max !== undefined ? { max: chooseNumberAction.max } : {})}
         onChoose={(number) => game.dispatch({ type: 'choose-number', player: seat, number })}
+      />
+    )
+  } else if (mode === 'put-name-sticker' && nameStickerAction) {
+    controls = (
+      <NameStickerChoice
+        key={`${nameStickerAction.object}|${nameStickerAction.stage}`}
+        title={`${game.nameOf(nameStickerAction.source)} — a name sticker on ${
+          nameStickerAction.object === nameStickerAction.source ? 'it' : game.nameOf(nameStickerAction.object)
+        }`}
+        offer={nameStickerAction}
+        onPut={(sticker, position) => game.dispatch({ type: 'put-name-sticker', player: seat, sticker, position })}
       />
     )
   } else if (mode === 'replacement-order' && replacementOrderAction) {

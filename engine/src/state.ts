@@ -52,6 +52,7 @@ import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
 import { textChangedKey, type TextChange } from "./text-change.js";
+import { nameWithStickers, type NameStickerOption, type StickerCount } from "./stickers.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
 export type PrivateZone = "library" | "hand" | "graveyard";
@@ -474,6 +475,12 @@ export interface GameObject {
    * "most-alike-stored-results"`. The object's own, so a change of zone
    * forgets them (rule 400.7). Absent until the first. */
   storedResults?: { readonly sides: number; readonly result: number }[];
+  /** The stickers on it (rule 123), oldest first — see {@link PlacedSticker}.
+   * Not part of its copiable values (123.1), so a copy of it has none. Kept
+   * as it moves from one public zone to another, an exception to rule 400.7,
+   * and lost as it moves to a hand or library (123.5). Absent until the
+   * first. See `stickers.ts`. */
+  stickers?: PlacedSticker[];
   /** The creature types noted for this permanent, in the order noted (Volo's
    * Journal's "note one of its creature types that hasn't been noted for this
    * artifact", Long List of the Ents): written by `choose-creature-type`'s
@@ -2879,6 +2886,12 @@ export interface PlayerState {
    * command zone and went to the command zone instead (717.6), oldest first —
    * face up, public, in no zone list either. Absent until the first. */
   junkyard?: ObjectId[];
+  /** The sticker sheets this player has access to (rules 103.2d, 123.2c): the
+   * three chosen at random as the game began from those they brought
+   * (`DeckList.stickerSheets`), by name (`stickers.ts`'s `STICKER_SHEETS`) —
+   * revealed, and theirs all game. Absent for a player who plays without
+   * stickers, who has none to put (123.3). */
+  stickerSheets?: readonly string[];
   /** Mana floating in this player's pool, as individual units rather than a
    * count per colour — a unit may be restricted in what it pays for, may
    * survive the end of a step, or may carry a rider that fires when it's
@@ -3437,6 +3450,26 @@ export interface EnterAttackingChoice {
   /** It's already attacking `options[0]`, and this is a reselection of what it
    * attacks (rule 508.7), not a creature entering attacking. */
   readonly reselect?: true;
+}
+
+/**
+ * A sticker on an object (rule 123.1) — not an object, a counter or a token.
+ * Only name stickers are put (123.6): `text` is the word or words it adds to
+ * the object's name, after `position` of its words (0 is the beginning) —
+ * kept as a count of words, so it stays there as the name changes (123.6c).
+ * `sheet` and `index` say which sticker it is: its owner's (the object's
+ * owner, 123.3b) `index`th name sticker on that sheet, never on two objects
+ * they own at once (123.3). `timestamp` orders it among the object's other
+ * name changes (613.7k), and is renewed as the object moves to another
+ * public zone, the stickers keeping their order.
+ */
+export interface PlacedSticker {
+  readonly kind: "name";
+  readonly sheet: string;
+  readonly index: number;
+  readonly text: string;
+  readonly position: number;
+  readonly timestamp: number;
 }
 
 /** A resolving spell or ability paused on a choice made partway through
@@ -4687,6 +4720,32 @@ export type AwaitingDecision =
       readonly source: ObjectId;
       readonly x: number;
       readonly thenResolution?: ChoosePermanentsResolution;
+    }
+  | {
+      /**
+       * A name sticker being put on `object` (rules 123.3, 123.6b) — the
+       * `put-sticker` effect, "you may put a name sticker on it". In two
+       * parts, which are one answer when one player makes both: `putter`
+       * chooses which sticker (`stage: "choose"`, among `options`, or none
+       * when `optional`), and the object's controller chooses where in its
+       * name the words go (`stage: "place"`, `options` then the one chosen) —
+       * `player` is whichever is being asked. `stint` is the object's
+       * `zoneChangeCount` when asked. Once it's on, `then` carries on the
+       * resolution with X the sticker's `count` (`resume`).
+       */
+      readonly kind: "put-name-sticker";
+      readonly player: PlayerId;
+      readonly putter: PlayerId;
+      readonly placer: PlayerId;
+      readonly stage: "choose" | "place";
+      readonly source: ObjectId;
+      readonly object: ObjectId;
+      readonly stint: number;
+      readonly options: readonly NameStickerOption[];
+      readonly optional: boolean;
+      readonly count?: StickerCount;
+      readonly then?: EffectSpec;
+      readonly resume: ResolutionResume;
     }
   | {
       /** A modal spell/ability is resolving (rule 700.2), or a "you may"
@@ -7235,9 +7294,28 @@ export const manaCostOverride = (object: GameObject): string | null | undefined 
 export const startingLoyaltyOverride = (object: GameObject): number | undefined =>
   object.modifiers.findLast((m) => m.copiable === true && m.startingLoyalty !== undefined)?.startingLoyalty;
 
-export const nameOf = (object: GameObject): string => {
+export const nameOf = (object: GameObject): string =>
   // An effect that names it (Awakening of Vitu-Ghazi, Witness Protection) beats
   // anything its copiable values say, even face down: the latest wins (613.7).
+  // With no name at all, its registry key stands in.
+  nameIfAny(object) ?? printedCardName(object);
+
+/** {@link nameOf}, but `null` for an object with no name at all (rule
+ * 708.2a — face down) rather than its registry key: what a name sticker adds
+ * its words to (123.6b). */
+export const nameIfAny = (
+  object: GameObject,
+  named: { readonly name: string; readonly timestamp: number } | undefined = latestNaming(object),
+): string | null => {
+  // Its name stickers are applied with those in timestamp order (rule
+  // 123.6c): the ones put on after the latest naming add to its name.
+  if (named !== undefined) return nameWithStickers(object, named.name, named.timestamp) ?? named.name;
+  const base = copiableNameOf(object);
+  return nameWithStickers(object, base, Number.NEGATIVE_INFINITY) ?? base;
+};
+
+/** The latest effect that names it, not a copy effect's (see `nameOf`). */
+const latestNaming = (object: GameObject): { readonly name: string; readonly timestamp: number } | undefined => {
   let named = object.staticName;
   for (let i = object.modifiers.length - 1; i >= 0; i -= 1) {
     const m = object.modifiers[i];
@@ -7246,11 +7324,17 @@ export const nameOf = (object: GameObject): string => {
     if (named === undefined || timestamp > named.timestamp) named = { name: m.setName, timestamp };
     break;
   }
-  if (named !== undefined) return named.name;
-  // A face-down permanent has no name at all (rule 708.2a), whatever a copy
-  // effect's exception would have named it: its registry key stands in. So
-  // does a Room with both doors locked (709.5).
-  if (object.faceDown !== undefined || printedCardName(object) === LOCKED_ROOM) return printedCardName(object);
+  return named;
+};
+
+/** Its name from its copiable values alone (rule 707.2): a copy effect's
+ * exception's, else its card's — `null` for one with no name at all, face
+ * down (rule 708.2a) or a Room with both doors locked (709.5). */
+const copiableNameOf = (object: GameObject): string | null => {
+  // A face-down permanent has no name, whatever a copy effect's exception
+  // would have named it: its registry key stands in (`nameOf`) unless a name
+  // sticker gives it one (123.6b).
+  if (object.faceDown !== undefined || printedCardName(object) === LOCKED_ROOM) return null;
   for (let i = object.modifiers.length - 1; i >= 0; i -= 1) {
     const m = object.modifiers[i];
     if (m.copiable === true && m.setName !== undefined) return m.setName;
@@ -7393,6 +7477,8 @@ export function tokenFoldKey(o: GameObject): string {
     o.cantBeRegeneratedTurn ?? null,
     o.exileIfDiesTurn ?? null,
     o.adaptAsThoughNoCountersTurn ?? null,
+    // Each sticker is its owner's one (rule 123.3a): never two tokens' at once.
+    o.stickers ?? null,
   ]);
 }
 
