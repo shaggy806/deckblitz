@@ -8537,3 +8537,13 @@ A board's player with a card that puts stickers plays with the first three of Un
 ### Artificial Evolution: two creature types, the second never Wall
 - **Do:** Cast Artificial Evolution at Bob's Goblin King. Pick Goblin, then search the second picker for "Wall" before picking Elf.
 - **Expect:** The first picker reads "Artificial Evolution — choose a creature type to replace", the second "Artificial Evolution — choose a creature type to replace Goblin with", and the second's search finds no Wall and no Goblin. Goblin King stays Bob's, an Elf now, its text "Other Elves get +1/+1 and have mountainwalk."; Bob's Llanowar Elves is 2/2 with mountainwalk.
+## Restarting the game (2026-11-16)
+
+### Karn Liberated: −14 starts a new game, the Angel it exiled on your side
+- **Do:** Use Karn's −14. When the new hand comes up, keep it.
+- **Expect:** A fresh table: the mulligan popup with a new seven, a notice that you restarted the game with Karn Liberated and go first, and the log line "… restarts the game with Karn Liberated: a new game begins, … first". Once both keep, it's turn 1, yours, both at 40 life, and Bob's Serra Angel is on your side; his Pacifism, Lightning Bolt and Hill Giant are gone, back in his deck, and so are your Plains and Karn.
+- **Not a bug:** Exile is empty: only the cards Karn exiled that are permanents and not Auras stay out, and they come in before turn 1. The Angel can attack this turn.
+
+### Karn Liberated: −14 in a 4-player game sends a commander home
+- **Do:** In this 4-player game, use Karn's −14 and keep your new hand.
+- **Expect:** Everyone takes the mulligans again. Then it's turn 1, yours: Bob's Kenrith is back in his command zone, Carol's Serra Angel is on your side, and Dave's Hill Giant is gone. Everyone is at 40 life.

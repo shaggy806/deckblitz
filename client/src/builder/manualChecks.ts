@@ -26,6 +26,9 @@ type Card =
       readonly counters?: Readonly<Record<string, number>>
       /** The name of a permanent on any side to attach to (the first found). */
       readonly attach?: string
+      /** In exile: the name of a permanent on any side it was exiled with (the
+       * first found) — what that permanent's "cards exiled with" it finds. */
+      readonly exiledWith?: string
       readonly commander?: boolean
       /** An Attraction's printing, by collector number: the numbers it lights. */
       readonly collector?: string
@@ -94,6 +97,7 @@ export function board(opts: BoardOpts): ScenarioSpec {
   const sides: readonly Side[] = [opts.you, ...opps]
   const cards: ScenarioCard[] = []
   const pendingAttach: { key: string; to: string }[] = []
+  const pendingLinks: { key: string; to: string }[] = []
   let next = 1
   sides.forEach((side, i) => {
     const owner = PLAYERS[i]
@@ -112,6 +116,7 @@ export function board(opts: BoardOpts): ScenarioSpec {
           ...(zone === 'battlefield' && card.counters ? { counters: card.counters } : {}),
         })
         if (zone === 'battlefield' && card.attach !== undefined) pendingAttach.push({ key, to: card.attach })
+        if (zone === 'exile' && card.exiledWith !== undefined) pendingLinks.push({ key, to: card.exiledWith })
       }
     }
     put(side.bf, 'battlefield')
@@ -139,6 +144,12 @@ export function board(opts: BoardOpts): ScenarioSpec {
     const host = cards.find((h) => h.zone === 'battlefield' && h.name === want.to && h.key !== c.key)
     if (host === undefined) throw new Error(`nothing named ${want.to} to attach ${c.name} to`)
     return { ...c, attachedTo: host.key }
+  }).map((c) => {
+    const want = pendingLinks.find((p) => p.key === c.key)
+    if (want === undefined) return c
+    const source = cards.find((h) => h.zone === 'battlefield' && h.name === want.to)
+    if (source === undefined) throw new Error(`nothing named ${want.to} for ${c.name} to be exiled with`)
+    return { ...c, exiledWith: source.key }
   })
   const seats: ScenarioSeat[] = sides.map((side, i) => ({
     player: PLAYERS[i],
@@ -158,6 +169,8 @@ export function board(opts: BoardOpts): ScenarioSpec {
 
 /** The seven cards Serum Powder's checks draw. */
 const POWDER_NEXT_HAND = ['Grizzly Bears', 'Hill Giant', 'Island', 'Mountain', 'Plains', 'Swamp', 'Shock']
+/** A library whose top seven a bot keeps as a hand (Karn Liberated's restarts). */
+const KARN_KEEPABLE = ['Plains*3', 'Forest', 'Grizzly Bears', 'Llanowar Elves', 'Hill Giant']
 /** A hand a bot keeps, with a Leyline it begins the game with. */
 const BOT_KEEPS_LEYLINE = ['Leyline of Sanctity', 'Plains*3', 'Grizzly Bears', 'Hill Giant', 'Shock']
 
@@ -12862,6 +12875,41 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Island'], hand: ['Artificial Evolution'] },
       opp: { bf: ['Goblin King', 'Llanowar Elves'] },
+    }),
+  ),
+  // --- Restarting the game (2026-11-16) ---------------------------------------------
+  // Each library's top seven is a hand a bot keeps: the restarted game deals
+  // from the old one's library first, unshuffled on a builder board.
+  preset(
+    'Karn Liberated: −14 starts a new game, the Angel it exiled on your side',
+    board({
+      you: {
+        bf: [{ name: 'Karn Liberated', counters: { loyalty: 14 } }, 'Plains*2'],
+        hand: ['Grizzly Bears'],
+        lib: KARN_KEEPABLE,
+        life: 12,
+      },
+      opp: {
+        bf: ['Hill Giant'],
+        exile: [
+          { name: 'Serra Angel', exiledWith: 'Karn Liberated' },
+          { name: 'Pacifism', exiledWith: 'Karn Liberated' },
+          'Lightning Bolt',
+        ],
+        lib: KARN_KEEPABLE,
+        life: 7,
+      },
+    }),
+  ),
+  preset(
+    'Karn Liberated: −14 in a 4-player game sends a commander home',
+    board({
+      you: { bf: [{ name: 'Karn Liberated', counters: { loyalty: 15 } }], lib: KARN_KEEPABLE },
+      opp: [
+        { bf: [{ name: 'Kenrith, the Returned King', commander: true }], lib: KARN_KEEPABLE },
+        { exile: [{ name: 'Serra Angel', exiledWith: 'Karn Liberated' }], lib: KARN_KEEPABLE },
+        { bf: ['Hill Giant'], lib: KARN_KEEPABLE },
+      ],
     }),
   ),
 ]

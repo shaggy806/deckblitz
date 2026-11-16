@@ -14,6 +14,7 @@
 
 import {
   COMMANDER_RULES,
+  DEFAULT_RULES,
   Game,
   STICKER_SHEETS,
   asPlayerId,
@@ -195,6 +196,13 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = ca
     const host = keys.get(card.attachedTo);
     if (card.zone !== "battlefield" || host === undefined || host.zone !== "battlefield" || host === card) {
       throw new Error(`${card.name} can only be attached to another card on the battlefield`);
+    }
+  }
+  for (const card of spec.cards) {
+    if (card.exiledWith === undefined) continue;
+    const source = keys.get(card.exiledWith);
+    if (card.zone !== "exile" || source === undefined || source.zone !== "battlefield") {
+      throw new Error(`${card.name} can only be exiled with a card on the battlefield, from exile`);
     }
   }
 }
@@ -478,6 +486,13 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     // entered this turn, as it always has.
     if (turn > 1 && card.sick !== true) object.enteredBattlefieldOnTurn = turn - 1;
   }
+  // Exiled with a permanent (rule 607.2a): linked to it as it stands.
+  for (const card of spec.cards) {
+    const placed = byKey.get(card.key);
+    const source = card.exiledWith === undefined ? undefined : byKey.get(card.exiledWith);
+    if (placed === undefined || source === undefined || s.objects[placed]?.zone !== "exile") continue;
+    s.objects[placed].exiledWith = { source, zoneChangeCount: s.objects[source].zoneChangeCount ?? 0 };
+  }
   for (const seat of spec.seats) {
     const player = s.players[seat.player];
     player.life = seat.life;
@@ -497,6 +512,10 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     });
     game.debugAskCompanion(firstAsked.owner, eligible);
   }
+  // The board was dealt no hands, but a game it restarts (rule 727 — Karn
+  // Liberated) is a room's: seven cards each, and mulligans.
+  s.rules = { ...s.rules, openingHandSize: DEFAULT_RULES.openingHandSize };
+  s.pregame = { ...s.pregame, mulligans: true };
   return { game, objects, registry, byKey };
 }
 
@@ -606,10 +625,22 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
     const hostKey = host === null ? undefined : keyOf.get(host);
     return hostKey !== undefined && card.zone === "battlefield" ? { ...card, attachedTo: hostKey } : card;
   });
+  // A card in exile linked to a permanent still there in that stint (rule
+  // 607.2a), by the permanent's key.
+  const withLinks = withAttachments.map((card) => {
+    const id = [...keyOf].find(([, key]) => key === card.key)?.[0];
+    const link = id === undefined || card.zone !== "exile" ? undefined : s.objects[id].exiledWith;
+    const source = link === undefined ? undefined : s.objects[link.source];
+    const sourceKey =
+      link === undefined || source?.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== link.zoneChangeCount
+        ? undefined
+        : keyOf.get(link.source);
+    return sourceKey !== undefined ? { ...card, exiledWith: sourceKey } : card;
+  });
   // Tokens off the battlefield are gone (rule 704.5d), and so is a card a
   // scenario can't name (an emblem has no card).
   const registry = cardRegistry();
-  const kept = withAttachments.filter(
+  const kept = withLinks.filter(
     (c) => registry.has(c.name) && (c.zone === "battlefield" || !isTokenCard(registry.get(c.name))),
   );
   const seats: ScenarioSeat[] = previous.seats.map((seat) => {

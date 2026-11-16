@@ -65,6 +65,10 @@ export interface ScenarioCard {
   /** Battlefield only: the `key` of the permanent this Aura or Equipment is
    * attached to. */
   readonly attachedTo?: string;
+  /** Exile only: the `key` of the permanent on the battlefield this card was
+   * exiled with (rule 607.2a), so that permanent's abilities find it among
+   * "the cards exiled with" it — Karn Liberated's −14. */
+  readonly exiledWith?: string;
   /** Battlefield only, and only on a creature: damage marked on it this turn
    * (rule 120.3e), there until the cleanup step (514.2). Never lethal — a
    * board where it would be (704.5g) is refused, unless it's indestructible.

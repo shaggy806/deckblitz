@@ -176,6 +176,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
   switch (event.type) {
     case 'game-started':
       return `${event.players.map(who).join(' vs ')} · ${who(event.startingPlayer)} first · seed ${event.seed}`
+    case 'game-restarted':
+      return `${who(event.by)} restarts the game with ${event.source}: a new game begins, ${who(event.by)} first`
     case 'turn-began':
       return `${event.round !== undefined ? `Round ${event.round}, turn ${event.turn}` : `Turn ${event.turn}`} — ${who(event.activePlayer)}${event.extra ? ' (extra turn)' : ''}`
     case 'extra-turn-queued':

@@ -163,6 +163,23 @@ describe("buildScenario", () => {
     expect(() => validateScenario(spec([], { step: "declare-attackers" as never }))).toThrow(/step/);
   });
 
+  it("links a card in exile to the permanent it was exiled with, and keeps the link coming back", () => {
+    const original = spec([
+      card("karn", "Karn Liberated", { counters: { loyalty: 14 } }),
+      card("angel", "Serra Angel", { owner: BOB, zone: "exile", exiledWith: "karn" }),
+      card("bolt", "Lightning Bolt", { owner: BOB, zone: "exile" }),
+    ]);
+    const { game, objects } = buildScenario(original);
+    const s = game.state;
+    const karn = idOf(objects, "karn");
+    expect(s.objects[idOf(objects, "angel")].exiledWith).toEqual({ source: karn, zoneChangeCount: s.objects[karn].zoneChangeCount ?? 0 });
+    expect(s.objects[idOf(objects, "bolt")].exiledWith).toBeUndefined();
+    const back = snapshotScenario(game, original);
+    expect(back.cards.find((c) => c.name === "Serra Angel")?.exiledWith).toBe(back.cards.find((c) => c.name === "Karn Liberated")?.key);
+    expect(back.cards.find((c) => c.name === "Lightning Bolt")?.exiledWith).toBeUndefined();
+    expect(() => validateScenario(spec([card("x", "Serra Angel", { zone: "exile", exiledWith: "nobody" })]))).toThrow(/exiled with/);
+  });
+
   it("comes back from a game as the same scenario, give or take keys", () => {
     const original = spec([
       card("bears", "Grizzly Bears", { tapped: true, counters: { "+1/+1": 1 } }),

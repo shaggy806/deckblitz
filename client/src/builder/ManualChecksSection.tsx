@@ -63,6 +63,9 @@ export function ManualChecksSection({
   const entries = MANUAL_CHECK_ENTRIES
   const [at, setAtState] = useState(() => {
     const wanted = checkFromUrl(entries)
+    // Kept as the place, as a pick from the list is: a game screen started
+    // afresh (a restarted game — Karn Liberated) reads it back.
+    if (wanted !== null) write(AT_KEY, wanted)
     return wanted ?? Math.min(Math.max(0, read(AT_KEY, 0)), entries.length - 1)
   })
   // `?check=` plays its test once, then comes off the URL so a reload

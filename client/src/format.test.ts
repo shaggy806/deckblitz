@@ -14,6 +14,12 @@ const event = (fields: Record<string, unknown>) => ({ seq: 1, ...fields }) as un
 const nameOf = (id: ObjectId) => `card:${id}`
 
 describe('describeEvent', () => {
+  it('says who restarted the game, with what, and who goes first in the new one', () => {
+    expect(
+      describeEvent(event({ type: 'game-restarted', by: p1, source: 'Karn Liberated', players: [p1, p2] }), nameOf, seats),
+    ).toBe('Toby restarts the game with Karn Liberated: a new game begins, Toby first')
+  })
+
   it('says who gained control of a spell', () => {
     expect(
       describeEvent(event({ type: 'spell-control-changed', object: 'o1', controller: p1, previousController: p2 }), nameOf, seats),

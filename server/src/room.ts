@@ -58,11 +58,13 @@ export interface Connection {
  * turn only ("Pass Turn"), or all the way through an opponent's turn too,
  * stopping only once it's this seat's own turn again ("Auto-pass").
  * `afterTurn` is the turn number in effect when requested, so "my turn"
- * means a *later* turn than that — not an already-current one.
+ * means a *later* turn than that — not an already-current one. `restarts`
+ * is the game's restart count then (rule 727): a restart begins a new game at
+ * turn 1, and ends every auto-pass armed in the old one.
  */
 type AutoPassUntil =
-  | { readonly kind: "rest-of-turn"; readonly turn: number }
-  | { readonly kind: "next-own-turn"; readonly afterTurn: number };
+  | { readonly kind: "rest-of-turn"; readonly turn: number; readonly restarts: number }
+  | { readonly kind: "next-own-turn"; readonly afterTurn: number; readonly restarts: number };
 
 interface Seat {
   readonly player: PlayerId;
@@ -264,8 +266,9 @@ const COMBAT_STEPS: ReadonlySet<Step> = new Set<Step>([
   "end-combat",
 ]);
 
-/** One step of one turn, for `Seat.stoppedAt`. */
-const stepKey = (state: GameState): string => `${state.turn.number}:${state.turn.step}`;
+/** One step of one turn, for `Seat.stoppedAt` — of the game as it is since
+ * its last restart (rule 727: turn 1 again). */
+const stepKey = (state: GameState): string => `${state.restarts ?? 0}:${state.turn.number}:${state.turn.step}`;
 
 /** How many decisions in a row a conceding player's stand-in bot answers
  * before giving up — a backstop against a decision loop, never reached by
@@ -908,7 +911,7 @@ export class Room {
     if (player === null) throw new Error("claim a seat before acting");
     this.refuseIfGuided(player, "pass-turn");
     const seat = this.seatFor(player);
-    seat.autoPassUntil = { kind: "rest-of-turn", turn: this.game.state.turn.number };
+    seat.autoPassUntil = { kind: "rest-of-turn", turn: this.game.state.turn.number, restarts: this.game.state.restarts ?? 0 };
     seat.autoPassFrom = this.game.events.length;
     seat.autoPassPausedAt = null;
     seat.stoppedAt = stepKey(this.game.state);
@@ -930,7 +933,7 @@ export class Room {
     if (!cancelling) this.refuseIfGuided(player, "auto-pass");
     seat.autoPassUntil = cancelling
       ? null
-      : { kind: "next-own-turn", afterTurn: this.game.state.turn.number };
+      : { kind: "next-own-turn", afterTurn: this.game.state.turn.number, restarts: this.game.state.restarts ?? 0 };
     seat.autoPassFrom = cancelling ? null : this.game.events.length;
     seat.autoPassPausedAt = null;
     if (!cancelling) seat.stoppedAt = stepKey(this.game.state);
@@ -1303,10 +1306,12 @@ export class Room {
     if (until === null) return false;
     const isMyTurnNow = this.playsActiveTurn(seat, state);
     const done =
-      until.kind === "rest-of-turn"
+      // The game restarted (rule 727): what was asked of the old one is over.
+      until.restarts !== (state.restarts ?? 0) ||
+      (until.kind === "rest-of-turn"
         ? // That turn only: the next may be another this seat plays (rule 723).
           !isMyTurnNow || state.turn.number !== until.turn
-        : isMyTurnNow && state.turn.number > until.afterTurn;
+        : isMyTurnNow && state.turn.number > until.afterTurn);
     if (done) {
       seat.autoPassUntil = null;
       seat.autoPassFrom = null;

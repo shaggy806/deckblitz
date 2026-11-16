@@ -3,6 +3,7 @@ import type { CSSProperties, MouseEvent as ReactMouseEvent, ReactNode } from 're
 import type {
   Action,
   CastVia,
+  GameEvent,
   GraveyardGrant,
   KeywordCostsPaid,
   LegalAction,
@@ -1126,8 +1127,10 @@ function StatusScreen({ game, status }: { readonly game: NetworkGame; readonly s
   }
   // Keyed on the game, so a rematch starts the screen afresh: its playback
   // seeded from the new game's first frame rather than animating it as what
-  // the old one did next, and none of the old game's panels left open.
-  return <GameScreen key={game.gameNumber} game={game} />
+  // the old one did next, and none of the old game's panels left open. A
+  // restart (rule 727 — Karn Liberated) is a new game in the same room, the
+  // same way.
+  return <GameScreen key={`${game.gameNumber}.${game.view?.restarts ?? 0}`} game={game} />
 }
 
 function CenteredScreen({
@@ -1241,6 +1244,16 @@ function BlitzReportToast({ report, onDismiss }: { readonly report: BlitzReport;
 /** Who won the highroll (or who the host picked to go first), as the same toast a refusal is (in the accent
  * colours rather than the error's): over the board while the opening hands
  * are decided, gone on its own after {@link TOAST_LINGER_MS} or on a click. */
+/** " with Karn Liberated": what the game's latest restart (rule 727) was done
+ * with, as its log event names it, for the new game's first-player toast. */
+function restartedWith(events: readonly GameEvent[]): string {
+  for (let i = events.length - 1; i >= 0; i -= 1) {
+    const event = events[i]
+    if (event.type === 'game-restarted') return ` with ${event.source}`
+  }
+  return ''
+}
+
 function HighrollToast({ onDismiss, children }: { readonly onDismiss: () => void; readonly children: ReactNode }) {
   useEffect(() => {
     const t = window.setTimeout(onDismiss, TOAST_LINGER_MS)
@@ -1742,7 +1755,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
         ) : null}
         {showHighroll ? (
           <HighrollToast onDismiss={dismissHighroll}>
-            {game.firstPlayerChosen
+            {(view.restarts ?? 0) > 0
+              ? `${playerLabel(view.startingPlayer, game.seats)} restarted the game${restartedWith(view.events)} and goes first`
+              : game.firstPlayerChosen
               ? `${playerLabel(view.startingPlayer, game.seats)} goes first, the host's pick`
               : `🎲 ${playerLabel(view.startingPlayer, game.seats)} won the highroll and goes first`}
           </HighrollToast>
