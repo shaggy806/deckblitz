@@ -398,6 +398,15 @@ action (704.5g), combat damage assignment and trample (`combat/damage.ts`'s `let
 (`CombatCreature.lethal`, v1's blocks, `damageLands`, divisions, sweeps). Lethal by power is at least 1: a
 0-power creature dies only with damage marked (the ruling). Zilortha, Strength Incarnate (rank 8983).
 `test/lethal-damage-by-power.test.ts`; design record `docs/plans/lethal-damage-by-power.md`.
+### The next combat damage doubled or prevented — found built 2026-11-16
+
+The key `replacement:next-combat-damage-double-or-prevent` needed no engine code: a `flip-coin` whose `won` and
+`lost` are each a `replacement-effect` shield (`next: true`, `fromObject: "trigger-object"`, `duration:
+"end-of-turn"`) — `{ modify: { times: 2 } }` or `{ prevent: true }` on a combat `would-deal-damage`. A creature's
+combat damage in one step is one event (the damage batch's `nextTimeSpent`), so a trampler's damage to its blocker
+and the player is all doubled and the shield spent. Impulsive Maneuvers (rank 10797);
+`test/next-combat-damage-double-or-prevent.test.ts`. The line is the card's alone, so no scaffolder template.
+
 ### A spell's cost leaves it out of the graveyards — built 2026-11-16
 
 The key `amount:aggregate-graveyards-except-spell-being-cast`: an amount a spell's cost reads (`Game.costAmount`

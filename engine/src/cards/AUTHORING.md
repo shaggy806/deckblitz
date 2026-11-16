@@ -7381,6 +7381,11 @@ cards", "two or more", `"x"` the number) and `whileHandAtMost`; `would-create-to
 Boimler's "until end of turn … that many plus one"). `next: true` is "the next time" (spent
 when it applies, 615.8), an amount "the next N" damage (615.7); `players`, `object` and `fromObject` are what its references
 name, fixed as it resolves. Amounts in a `modify` are fixed as it resolves too; filters are read at each event, so what arrives later counts.
+"The next time that creature would deal combat damage this turn, it deals double that damage instead" / "…, prevent that
+damage" (Impulsive Maneuvers' two coin-flip outcomes) is `{ event: "would-deal-damage", combat: true, instead: { modify: {
+times: 2 } } }` / `instead: { prevent: true }` with `next: true`, `duration: "end-of-turn"` and `fromObject: "trigger-object"`:
+everything the creature deals in one combat damage step is one event, so the whole of it is changed and the shield is spent
+(first-strike damage alone, with double strike).
 An `others-enter-battlefield` one that lasts (not `next`) gives each permanent entering its `counters` and `enterAs`, its filter read from the effect's controller's side, its source gone or not — Arlinn, the Pack's Hope's "until your next turn, … each creature you control enters with an additional +1/+1 counter on it"; Zameck Guildmage's "**this turn**, each creature you control enters with …" is the same with `duration: "end-of-turn"`.
 The `prevent-damage` family makes the same record.
 
