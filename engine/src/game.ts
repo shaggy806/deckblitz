@@ -11716,7 +11716,17 @@ export class Game {
     if (awaiting.keepChoice === true) {
       this.state.awaiting = null;
       this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...chosen];
-      this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+      // A choice across zones (`exile-from-zones`): the hand's picks stay
+      // hidden until they're exiled — the players after know how many
+      // (rule 101.4a), and which permanents and graveyard cards (101.4b).
+      const hidden = awaiting.acrossZones === true ? chosen.filter((id) => this.state.objects[id]?.zone === "hand") : [];
+      this.emit({
+        type: "cards-chosen-from-zone",
+        player,
+        objects: chosen.filter((id) => !hidden.includes(id)),
+        ...(awaiting.acrossZones === true ? { chosenOnly: true as const } : {}),
+        ...(hidden.length > 0 ? { fromHand: hidden.length } : {}),
+      });
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
@@ -41378,6 +41388,71 @@ controlledBy,
           keepChoice: true,
         };
         return true;
+      },
+      askExileFromZones: (player, zones, count, prompt) => {
+        if (this.state.players[player]?.hasLost !== false) return [];
+        const own = this.state.zones.perPlayer[player];
+        // The effect's source last: what the default answer gives up last.
+        const permanents = zones.includes("battlefield")
+          ? this.state.zones.shared.battlefield
+              .filter((id) => this.state.objects[id]?.controller === player)
+              .sort((a, b) => Number(a === source) - Number(b === source))
+          : [];
+        const hand = zones.includes("hand") ? [...own.hand] : [];
+        const graveyard = zones.includes("graveyard") ? [...own.graveyard] : [];
+        // No more than it takes: all of it, a token stack whole (Lich's
+        // Mastery's ruling — "you'll just exile everything you can").
+        if (permanentCount(this.state, permanents) + hand.length + graveyard.length <= count) {
+          return [...graveyard, ...hand, ...permanents];
+        }
+        // A stack's tokens are offered one by one, as many as it could take,
+        // the rest staying stacked behind the first (as a behold's are).
+        const units = permanents.flatMap((id) => {
+          const split: ObjectId[] = [id];
+          while (split.length < count && (this.state.objects[id]?.stackCount ?? 1) > 1) {
+            split.push(this.splitOneFromStack(id));
+          }
+          return split;
+        });
+        const ids = [...graveyard, ...hand, ...units];
+        this.state.awaiting = {
+          kind: "choose-from-zone",
+          player,
+          ids,
+          eligible: ids,
+          min: count,
+          max: count,
+          destination: "exile",
+          leftover: "stay",
+          prompt,
+          keepChoice: true,
+          acrossZones: true,
+        };
+        return "asked";
+      },
+      exileTogether: (objects) => {
+        const still = objects.filter(({ object, stint }) => {
+          const o = this.state.objects[object];
+          return (
+            o !== undefined &&
+            (o.zoneChangeCount ?? 0) === stint &&
+            (o.zone === "battlefield" || o.zone === "hand" || o.zone === "graveyard")
+          );
+        });
+        if (still.length === 0) return;
+        // A token picked out of a stack is one token: singled out first.
+        const going = still.map(({ object, whole }) =>
+          whole !== true && this.state.objects[object]?.zone === "battlefield" ? this.splitOneFromStack(object) : object,
+        );
+        this.withLeaveBatch(() =>
+          this.withGraveyardLeaveBatch(() => {
+            this.snapshotLeaving(going.filter((id) => this.state.objects[id]?.zone === "battlefield"));
+            for (const object of going) {
+              if (this.state.objects[object]?.zone === "hand") this.moveObject(object, "exile");
+              else this.exileByEffect({ kind: "object", object }, undefined, false);
+            }
+          }),
+        );
       },
       askLibraryEnds: (owner, objects) => {
         if (this.state.players[owner]?.hasLost !== false) return false;

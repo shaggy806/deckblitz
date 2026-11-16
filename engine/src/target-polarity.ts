@@ -382,6 +382,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.filter.sameNameWith, "harm", DECISIVE);
     v.touch(n.filter.sharesColorWith, "harm", DECISIVE);
   },
+  // "Target opponent exiles a card from their hand or a permanent they
+  // control": aimed at an opponent, as a discard or an edict is.
+  "exile-from-zones": (n, v) => v.touch(n.who, "harm", MAJOR),
   "exile-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameWith, "harm", DECISIVE);

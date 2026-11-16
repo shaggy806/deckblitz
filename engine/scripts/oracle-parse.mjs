@@ -4089,6 +4089,45 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^add X mana of any one color, where X is the number of ([\w+/-]+) counters on ~\.$/i.exec(s))) {
     return { kind: "add-mana", mana: "any-color", amount: { countersOn: "source", counter: m[1].toLowerCase() } };
   }
+  // One choice across a player's own zones, everything chosen exiled at once
+  // (`exile-from-zones`, rule 101.4): Nicol Bolas, Dragon-God's "each
+  // opponent exiles a card from their hand or a permanent they control",
+  // Descent into Madness's "each player exiles X permanents they control
+  // and/or cards from their hand, where X is the number of despair counters
+  // on ~" (read here, ahead of the "where X" refusal below).
+  if (
+    (m = sentenceRe(
+      `(each player|each opponent) exiles (a|one|two|three|X) (cards? from their hand or (?:a )?permanents? they control|permanents? they control (?:and/or|or) (?:a )?cards? from their hand)(?:, where X is (.+?))?`,
+    ).exec(s))
+  ) {
+    const count = m[2].toLowerCase() === "x" ? (m[4] === undefined ? null : dividedTotalOf(m[4])) : numberOf(m[2]);
+    if (count !== null && count !== undefined && count !== "x") {
+      return {
+        kind: "exile-from-zones",
+        who: m[1].toLowerCase() === "each player" ? "each-player" : "each-opponent",
+        zones: /^cards?/i.test(m[3]) ? ["hand", "battlefield"] : ["battlefield", "hand"],
+        count,
+      };
+    }
+  }
+  // Descent into Madness's "put a despair counter on ~, then each player
+  // exiles X …, where X is the number of despair counters on ~": the counter,
+  // then the rest, which reads it.
+  const counterThen = /^put an? ([a-z]+) counter on ~, then (each (?:player|opponent) exiles .+)\.$/i.exec(s);
+  if (counterThen !== null) {
+    const then = parseSentence(`${counterThen[2][0].toUpperCase()}${counterThen[2].slice(1)}.`, ctx);
+    if (then?.kind === "exile-from-zones") {
+      return {
+        kind: "sequence",
+        effects: [{ kind: "add-counter", target: "source", counter: counterThen[1].toLowerCase(), amount: 1 }, then],
+      };
+    }
+  }
+  // Lich's Mastery's "for each 1 life you lost, exile a permanent you control
+  // or a card from your hand or graveyard" (of a "whenever you lose life").
+  if (sentenceRe(`for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard`).test(s)) {
+    return { kind: "exile-from-zones", zones: ["battlefield", "hand", "graveyard"], count: { triggerValue: true } };
+  }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
     !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s) &&

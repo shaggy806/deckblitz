@@ -328,8 +328,14 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       // what's done with them comes next. Named as any other: a hand card is
       // only named to who may see it.
       if (event.chosenOnly === true) {
-        return event.objects.length > 0
-          ? `${who(event.player)} chooses ${event.objects.map(name).join(', ')}`
+        // A choice across zones (Lich's Mastery, Nicol Bolas, Dragon-God):
+        // the hand's picks are counted, never named, until they're exiled.
+        const hidden = event.fromHand ?? 0
+        const named = event.objects.map(name).join(', ')
+        const fromHand = hidden === 1 ? 'a card from their hand' : `${hidden} cards from their hand`
+        const picks = hidden === 0 ? named : named === '' ? fromHand : `${named} and ${fromHand}`
+        return picks !== ''
+          ? `${who(event.player)} chooses ${picks}`
           : `${who(event.player)} chooses nothing`
       }
       if (event.objects.length === 0) return `${who(event.player)} takes nothing`

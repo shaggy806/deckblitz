@@ -24,6 +24,11 @@
  * which a client draws side by side. The awaiting's `behold` routes the
  * answer to `Game.applyBehold` instead of a move; `destination` is
  * `"behold"`, or `"exile"` for the Champions' "behold … and exile it".
+ *
+ * A sixth, the `exile-from-zones` effect's `askExileFromZones`, spans three:
+ * the chooser's permanents, hand and graveyard (Lich's Mastery, Nicol Bolas,
+ * Dragon-God). Its `acrossZones` answer is kept (`keepChoice`) and exiled
+ * with every other player's once all have chosen (rule 101.4).
  */
 
 import type { Action, LegalAction } from "../actions.js";

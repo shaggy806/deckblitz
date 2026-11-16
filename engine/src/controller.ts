@@ -4682,6 +4682,11 @@ export class HeuristicBotController extends AutomaticController {
     if (forPlayer !== undefined && forPlayer !== this.playerId) {
       return this.leastUsefulTo(view.state, forPlayer, eligible, min);
     }
+    // Our own things to exile from several zones (Lich's Mastery, an
+    // opponent's Nicol Bolas, Dragon-God): give up the least.
+    if (awaiting?.kind === "choose-from-zone" && awaiting.acrossZones === true) {
+      return this.leastToLoseAcrossZones(view.state, eligible, min);
+    }
     // What a Champion beholds is exiled (rule 701.4a): give up the least.
     if (awaiting?.kind === "choose-from-zone" && awaiting.behold !== undefined && awaiting.destination === "exile") {
       return this.leastUsefulTo(view.state, this.playerId, eligible, min);
@@ -5048,6 +5053,29 @@ export class HeuristicBotController extends AutomaticController {
       (id) => view.state.objects[id],
     );
     return shouldMulligan(hand, this.registry, count, view.state.rules);
+  }
+
+  /**
+   * `count` of our own cards and permanents to give up from several zones at
+   * once (`exile-from-zones`): the graveyard's first, then the hand's least
+   * useful (`leastUsefulTo`), then the cheapest permanents
+   * (`cheapestPermanents`) — the card that asked last of all, since Lich's
+   * Mastery leaving loses the game. v2's search weighs the other answers.
+   */
+  private leastToLoseAcrossZones(state: GameState, eligible: readonly ObjectId[], count: number): readonly ObjectId[] {
+    const zone = (id: ObjectId): string | undefined => state.objects[id]?.zone;
+    const source = state.decisionSource?.object;
+    const graveyard = eligible.filter((id) => zone(id) === "graveyard");
+    const hand = eligible.filter((id) => zone(id) === "hand");
+    const permanents = eligible.filter((id) => zone(id) === "battlefield" && id !== source);
+    const ordered = [
+      ...graveyard,
+      ...this.leastUsefulTo(state, this.playerId, hand, hand.length),
+      // A stack is ranked once for each token in it; each id is picked once.
+      ...new Set(this.cheapestPermanents(state, permanents, Number.MAX_SAFE_INTEGER)),
+      ...eligible.filter((id) => id === source),
+    ];
+    return ordered.slice(0, count);
   }
 
   /** The `count` cards of `eligible` that would do `player` the least good in

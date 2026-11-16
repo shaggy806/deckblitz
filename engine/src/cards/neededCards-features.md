@@ -325,6 +325,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### One choice across a player's own zones, exiled at once — built 2026-11-16
+
+The keys `effect:exile-per-life-lost-mixed-zones`, `effect:each-opponent-exiles-card-from-hand-or-permanent`
+and `effect:each-player-exiles-permanents-or-hand-cards`: the `exile-from-zones` effect (`who`, `zones` of
+battlefield/hand/graveyard, `count`). The players choose in turn order (rule 101.4), each told the permanents
+and graveyard cards those before chose and only how many hand cards (101.4a/b — the `cards-chosen-from-zone`
+event's `fromHand`, the hand's candidates redacted from the others' view), then everything is exiled as one
+event. The choice is the `choose-from-zone` decision with `acrossZones` (a `keepChoice` answer); no more than
+`count` to give goes unasked. Lich's Mastery (rank 7967), Nicol Bolas, Dragon-God (3632), Descent into Madness.
+`test/exile-from-zones.test.ts`; design record `docs/plans/exile-from-zones.md`.
+
 ### "When each opponent casts their first spell of the game" — built 2026-11-14
 
 The key `trigger:opponent-first-spell-of-game`: an opening-hand reveal's `at` may be `{ whenever:

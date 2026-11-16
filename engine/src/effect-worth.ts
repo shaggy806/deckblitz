@@ -483,6 +483,9 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "sacrifice":
       if (effect.who === "target") return 0;
       return onPlayers(playersIn(effect.who, ctx), -CARD * sizeOf(effect.count), ctx);
+    // Each one's cheapest things, from wherever they are: a card each.
+    case "exile-from-zones":
+      return onPlayers(playersIn(effect.who ?? "you", ctx), -CARD * sizeOf(effect.count), ctx);
     case "exile": {
       // "Exile it *with this*" of one of your own cards (rule 607.2a): it is
       // set aside for the source to give back — Colfenor's Urn returns its

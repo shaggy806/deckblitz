@@ -1403,9 +1403,10 @@ function viewForUncached(
               ? { ...state.awaiting, together: { ...state.awaiting.together, tags: {} } }
               : // Which hand cards a behold could reveal says what they are
                 // (rule 701.4a), until one is: the others see only the
-                // permanents it could choose.
+                // permanents it could choose. So too a choice across zones
+                // (`exile-from-zones`): its hand cards are the chooser's.
                 state.awaiting?.kind === "choose-from-zone" &&
-                  state.awaiting.behold !== undefined &&
+                  (state.awaiting.behold !== undefined || state.awaiting.acrossZones === true) &&
                   state.awaiting.player !== viewer
                 ? {
                     ...state.awaiting,

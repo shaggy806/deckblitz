@@ -20260,3 +20260,45 @@ describe("'The monarch controls enchanted creature' (Fealty to the Realm)", () =
     expect(control.controlEnchanted).toBe(true);
   });
 });
+
+describe("a choice across a player's own zones, exiled at once (exile-from-zones)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Zones", type_line, oracle_text }, { tokenFor: () => null });
+  it("reads Lich's Mastery's 'for each 1 life you lost, exile a permanent … or a card from your hand or graveyard'", () => {
+    const mastery = face(
+      "Legendary Enchantment",
+      "Whenever you lose life, for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.",
+    );
+    expect(mastery.triggered[0].effect).toEqual({
+      kind: "exile-from-zones",
+      zones: ["battlefield", "hand", "graveyard"],
+      count: { triggerValue: true },
+    });
+  });
+  it("reads 'each opponent exiles a card from their hand or a permanent they control'", () => {
+    expect(parseSentence("Each opponent exiles a card from their hand or a permanent they control.", ctx())).toEqual({
+      kind: "exile-from-zones",
+      who: "each-opponent",
+      zones: ["hand", "battlefield"],
+      count: 1,
+    });
+  });
+  it("reads Descent into Madness's 'each player exiles X permanents … and/or cards from their hand, where X is …'", () => {
+    const descent = face(
+      "Enchantment",
+      "At the beginning of your upkeep, put a despair counter on this enchantment, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on this enchantment.",
+    );
+    expect(descent.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "despair", amount: 1 },
+        {
+          kind: "exile-from-zones",
+          who: "each-player",
+          zones: ["battlefield", "hand"],
+          count: { countersOn: "source", counter: "despair" },
+        },
+      ],
+    });
+  });
+});

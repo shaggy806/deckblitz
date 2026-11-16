@@ -8475,6 +8475,21 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Expect:** The prompt fits the banner and the confirm reads "Tap 4". All four creatures and Heirloom Epic tap with no land, and you draw a card. Bob's Llanowar Elves never lights up.
 
 
+## Exiling a mix of permanents and cards from hand or graveyard (2026-11-16)
+
+### Lich's Mastery: exile a mix from your permanents, hand and graveyard
+- **Do:** Cast Lightning Bolt at yourself. In the choice that opens, pick Llanowar Elves, Grizzly Bears and Hill Giant, then confirm.
+- **Expect:** The popup reads "Choose 3 permanents you control and/or cards from your hand or graveyard to exile" and shows six cards, each captioned where it is: Hill Giant and the Lightning Bolt just cast "In a graveyard", Grizzly Bears "In a hand", Llanowar Elves, Mountain and Lich's Mastery "On the battlefield". The three you picked go to exile together; you're at 37 life.
+- **Not a bug:** The log reads "Alice chooses Llanowar Elves, Hill Giant and a card from their hand": a card from a hand is never named to the table before it's exiled.
+
+### Nicol Bolas, Dragon-God: each opponent exiles a card from hand or a permanent (4 players)
+- **Do:** Activate Nicol Bolas's +1. As Bob, pick the Grizzly Bears in your hand and confirm.
+- **Expect:** You draw a card. Bob is asked first, with his Grizzly Bears ("In a hand") and Llanowar Elves ("On the battlefield"). The log reads "Bob chooses a card from their hand" — not its name. Once Carol has chosen, Bob's Grizzly Bears, one of Carol's two and Dave's Grizzly Bears (his only one, taken unasked) are exiled at the same time.
+
+### Descent into Madness: you choose first, then each opponent, all exiled together
+- **Do:** Pass to your turn. At your upkeep, pick Llanowar Elves and confirm.
+- **Expect:** Descent into Madness gets a despair counter and you're asked first: "Choose a permanent you control or a card from your hand to exile", among Descent into Madness, Llanowar Elves and Grizzly Bears. Then Bob chooses one of his Hill Giant, Forest and Shock, and his pick and your Llanowar Elves are exiled together.
+
 ## Client fixes (2026-11-14)
 
 ### Baxter Building: four mana in any combination is one menu row

@@ -3715,6 +3715,45 @@ export type EffectSpec =
     }
   | {
       /**
+       * Each affected player exiles `count` of their own things from
+       * several zones at once, any mix: `"battlefield"` is the permanents
+       * they control, `"hand"` and `"graveyard"` their own cards there.
+       * Lich's Mastery's "for each 1 life you lost, exile a permanent you
+       * control or a card from your hand or graveyard" (`count: {
+       * triggerValue: true }` — its ruling: "you may exile one permanent, two
+       * cards from hand, and two cards from your graveyard"); Nicol Bolas,
+       * Dragon-God's "each opponent exiles a card from their hand or a
+       * permanent they control"; Descent into Madness's "each player exiles
+       * X permanents they control and/or cards from their hand".
+       *
+       * Rule 101.4: the players choose in turn order from the active
+       * player, each knowing the choices before theirs (101.4b) — the
+       * permanents and graveyard cards by name, the hand's only by how many
+       * (101.4a, the `cards-chosen-from-zone` event's `fromHand`) — and
+       * then everything chosen is exiled at once, one event (603.10a). A
+       * player with no more than `count` to give exiles all of it unasked
+       * (Lich's Mastery's ruling: "you'll just exile everything you can"),
+       * a token stack whole; otherwise a stack is offered token by token, as
+       * many as it could take. The choice is the `choose-from-zone`
+       * decision over all their zones together (its `acrossZones`).
+       */
+      readonly kind: "exile-from-zones";
+      /** Who exiles: the effect's controller when omitted. */
+      readonly who?: PlayerScope;
+      readonly zones: readonly ("battlefield" | "hand" | "graveyard")[];
+      /** How many each, read for each player as they're asked. */
+      readonly count: EffectAmount;
+      /** Internal: the players still to choose and what those before chose,
+       * each as the object it was (rule 400.7). */
+      readonly progress?: {
+        readonly left: readonly PlayerId[];
+        readonly held: readonly { readonly object: ObjectId; readonly stint: number; readonly whole?: true }[];
+        /** Whose answer waits for `takeKept`. */
+        readonly asking?: PlayerId;
+      };
+    }
+  | {
+      /**
        * "They put this card into their graveyard" (rule 702.35a — the
        * madness trigger's card, not cast): `target`, a card in exile, is put
        * into its owner's graveyard — only while it's still the object the
@@ -13214,6 +13253,22 @@ export interface EffectApi {
    * they've left the game, and nothing was asked. `min` below `count` is
    * "up to" — `reveal-until-count`'s `anyNumber` asks 0 to all of them. */
   askChooseAmong(chooser: PlayerId, objects: readonly ObjectId[], count: number, prompt: string, min?: number): boolean;
+  /** See the `"exile-from-zones"` {@link EffectSpec}: `player`'s `count`
+   * things from `zones` to exile. `"asked"` when they have more than that
+   * to choose among — the `choose-from-zone` decision raised, its answer
+   * waiting for `takeKept`; otherwise everything they have there (nothing
+   * at all once they've left the game), unasked. */
+  askExileFromZones(
+    player: PlayerId,
+    zones: readonly ("battlefield" | "hand" | "graveyard")[],
+    count: number,
+    prompt: string,
+  ): "asked" | readonly ObjectId[];
+  /** Exile `objects` at once — permanents, cards in hands and graveyards —
+   * as one event (rules 101.4, 603.10a), each only while it's still the
+   * object it was (`stint`, rule 400.7). A token stack gives one token, or
+   * every one with `whole`. */
+  exileTogether(objects: readonly { readonly object: ObjectId; readonly stint: number; readonly whole?: true }[]): void;
   /** `put-on-libraries`' `"owner-chooses"`: ask `owner` which of the
    * permanents among `objects` they own (tokens aside, which cease to exist
    * in a library — rule 111.8) go on the bottom of their library, the rest
@@ -15810,6 +15865,19 @@ function applyForEachVoted(spec: Extract<EffectSpec, { kind: "for-each-voted" }>
   };
   if (spec.simultaneous === true) ctx.simultaneously(each);
   else each();
+}
+
+/** What an `exile-from-zones` choice asks, in the card's words: "Choose a
+ * permanent you control or a card from your hand or graveyard to exile",
+ * "Choose 3 permanents you control and/or cards from your hand to exile". */
+function exileFromZonesPrompt(zones: readonly ("battlefield" | "hand" | "graveyard")[], count: number): string {
+  const one = count === 1;
+  const cardZones = (["hand", "graveyard"] as const).filter((z) => zones.includes(z));
+  const parts = [
+    ...(zones.includes("battlefield") ? [one ? "a permanent you control" : "permanents you control"] : []),
+    ...(cardZones.length > 0 ? [`${one ? "a card" : "cards"} from your ${cardZones.join(" or ")}`] : []),
+  ];
+  return `Choose ${one ? "" : `${count} `}${parts.join(one ? " or " : " and/or ")} to exile`;
 }
 
 /** See the `for-each-unless` {@link EffectSpec}. Each question and the rest of
@@ -22836,6 +22904,32 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.chosen,
         spec.rest,
       );
+      return;
+    }
+    case "exile-from-zones": {
+      // Each player in turn order from the active player chooses, knowing
+      // the choices before theirs; then everything chosen is exiled at once
+      // (rule 101.4).
+      const below = ctx.parkedCount();
+      // A pick is one object — one token of a stack; what goes unasked is
+      // everything the player had there, a stack whole.
+      const stints = (ids: readonly ObjectId[], whole: boolean): { object: ObjectId; stint: number; whole?: true }[] =>
+        ids.map((object) => ({ object, stint: ctx.zoneChangeCountOf(object) ?? 0, ...(whole ? { whole: true as const } : {}) }));
+      const start = spec.progress ?? { left: ctx.apnap(ctx.playersInScope(spec.who ?? "you")), held: [] };
+      const held = [...start.held, ...(start.asking !== undefined ? stints(ctx.takeKept(), false) : [])];
+      for (let i = 0; i < start.left.length; i += 1) {
+        const player = start.left[i];
+        const count = amountValue(spec.count, ctx, player);
+        if (count <= 0) continue;
+        const asked = ctx.askExileFromZones(player, spec.zones, count, exileFromZonesPrompt(spec.zones, count));
+        if (asked !== "asked") {
+          held.push(...stints(asked, true));
+          continue;
+        }
+        ctx.resumeAfterDecisions({ ...spec, progress: { left: start.left.slice(i + 1), held, asking: player } }, below);
+        return;
+      }
+      ctx.exileTogether(held);
       return;
     }
     case "choose-among-targets": {

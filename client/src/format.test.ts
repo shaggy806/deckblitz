@@ -208,6 +208,13 @@ describe('log lines that name where a thing went or came from', () => {
     expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o, o], to: 'battlefield', rest: 'hand' })).toBe(
       'Toby puts Hill Giant onto the battlefield and takes Hill Giant',
     )
+    // A choice across zones (Lich's Mastery): the hand's picks only counted.
+    expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o], chosenOnly: true, fromHand: 2 })).toBe(
+      'Toby chooses Hill Giant and 2 cards from their hand',
+    )
+    expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [], chosenOnly: true, fromHand: 1 })).toBe(
+      'Toby chooses a card from their hand',
+    )
     expect(line({ type: 'library-searched', player: p1, owner: p1 })).toBe('Toby searches their library')
     expect(line({ type: 'library-searched', player: p1, owner: p2 })).toBe("Toby searches P2's library")
   })

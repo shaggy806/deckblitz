@@ -598,6 +598,11 @@ export type GameEvent =
       /** Chosen and not moved (a `destination: "stay"` choice — Sylvan
        * Library's two cards): what's done with them comes next. */
       readonly chosenOnly?: true;
+      /** How many more were chosen from the player's hand, left out of
+       * `objects` — a choice across zones (`acrossZones`), whose hand picks
+       * stay hidden until they're exiled (rule 101.4a): the players after
+       * know only how many (Descent into Madness's ruling). */
+      readonly fromHand?: number;
       /** A split search (Cultivate): only the first of `objects` went to
        * `to`; the others went here. */
       readonly rest?: "hand" | "battlefield";

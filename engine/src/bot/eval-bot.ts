@@ -605,7 +605,34 @@ function keepFirst(
   me: PlayerId,
   ids: ObjectId[],
 ): ObjectId[] {
+  // Our own things to exile from several zones (`exile-from-zones`): the
+  // permanents first, the card asking first of them (Lich's Mastery), then
+  // the hand as a discard reads it, the graveyard last — so the candidates,
+  // tried least valuable first, give up the graveyard, then the hand.
+  if (state.awaiting?.kind === "choose-from-zone" && state.awaiting.acrossZones === true) {
+    const zone = (id: ObjectId): string | undefined => state.objects[id]?.zone;
+    const source = state.decisionSource?.object;
+    const hand = ids.filter((id) => zone(id) === "hand");
+    return [
+      ...ids.filter((id) => id === source),
+      ...ids.filter((id) => zone(id) === "battlefield" && id !== source),
+      ...(hand.length > 0 ? keepFirstInHand(state, cards, weights, me, hand) : []),
+      ...ids.filter((id) => zone(id) !== "battlefield" && zone(id) !== "hand"),
+    ];
+  }
   if (state.awaiting?.kind !== "discard") return ids;
+  return keepFirstInHand(state, cards, weights, me, ids);
+}
+
+/** `ids`, cards in our hand, the ones most worth keeping first — see
+ * `keepFirst`. */
+function keepFirstInHand(
+  state: GameState,
+  cards: CardRegistry,
+  weights: EvalWeights,
+  me: PlayerId,
+  ids: ObjectId[],
+): ObjectId[] {
   const hand = new Set(state.zones.perPlayer[me]?.hand ?? []);
   if (!ids.every((id) => hand.has(id))) return ids;
   const lands = state.zones.shared.battlefield.filter((id) => {

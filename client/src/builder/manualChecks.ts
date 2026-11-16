@@ -12768,6 +12768,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   ),
   // --- Client fixes (2026-11-14) ----------------------------------------------
   preset(
+    "Lich's Mastery: exile a mix from your permanents, hand and graveyard",
+    board({
+      you: { bf: ["Lich's Mastery", 'Llanowar Elves', 'Mountain'], hand: ['Lightning Bolt', 'Grizzly Bears'], gy: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Nicol Bolas, Dragon-God: each opponent exiles a card from hand or a permanent (4 players)',
+    board({
+      you: { bf: ['Nicol Bolas, Dragon-God'] },
+      opp: [
+        { human: true, bf: ['Llanowar Elves'], hand: ['Grizzly Bears'] },
+        { bf: ['Hill Giant'], hand: ['Shock'] },
+        { bf: ['Grizzly Bears'] },
+      ],
+    }),
+  ),
+  preset(
+    'Descent into Madness: you choose first, then each opponent, all exiled together',
+    board({
+      you: { bf: ['Descent into Madness', 'Llanowar Elves'], hand: ['Grizzly Bears'] },
+      opp: { bf: ['Hill Giant', 'Forest'], hand: ['Shock'] },
+      turn: 0,
+      step: 'end',
+    }),
+  ),
+  preset(
     'Baxter Building: four mana in any combination is one menu row',
     board({
       you: { bf: ['Baxter Building', 'Island*4', 'Craw Wurm'], hand: ['Fusion Elemental'] },

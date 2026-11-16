@@ -3650,6 +3650,14 @@ export type AwaitingDecision =
   | {
       readonly kind: "choose-from-zone";
       readonly player: PlayerId;
+      /** A choice across the chooser's own zones — their permanents, hand
+       * and graveyard together — for the `exile-from-zones` effect (Lich's
+       * Mastery, Nicol Bolas, Dragon-God): answered as `keepChoice` is, the
+       * picks held until every player has chosen (rule 101.4). Only the
+       * chooser sees which hand cards are candidates or picked (101.4a): the
+       * log names the permanents and graveyard cards chosen, and only counts
+       * the hand's (101.4b). */
+      readonly acrossZones?: true;
       /** Whose the cards are when `player` chooses for someone else — an
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
