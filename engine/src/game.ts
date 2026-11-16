@@ -44319,6 +44319,27 @@ controlledBy,
         const caster = refs.triggerSpellController ?? this.state.objects[triggerObject]?.controller ?? copier;
         this.copySpellForEachItCouldTarget(spell, triggerObject, copier, caster, source, each);
       },
+      copyStackObjectForEach: (target, each, copier) => {
+        const id = target === "trigger-ability" ? triggerObject : target.kind === "object" ? target.object : undefined;
+        if (id === undefined) return;
+        const live = this.state.objects[id];
+        if (target !== "trigger-ability" && live?.zone === "stack" && live.kind === "card") {
+          // "Could target" as its controller would choose (Radiate).
+          this.copySpellForEachItCouldTarget(this.spellSnapshot(live), id, copier, live.controller, source, each);
+          return;
+        }
+        // An ability — the trigger's, as it last was on the stack if it has
+        // gone (Agrus Kos).
+        const ability =
+          live?.zone === "stack" && live.kind === "ability"
+            ? live
+            : target === "trigger-ability"
+              ? this.state.departedAbilities?.[id]
+              : undefined;
+        if (ability !== undefined) this.copyAbilityForEachItCouldTarget(ability, copier, source, each);
+      },
+      copyAbilityAimed: (original, to, left) => this.copyAbilityAimed(original, to, controller, source, left),
+      copyNextSpellAimed: (spell, made) => this.copyNextSpellAimed(spell, made, controller, source),
       solveSource: () => {
         const object = this.state.objects[source];
         if (object?.zone !== "battlefield" || (refs.source !== undefined && (object.zoneChangeCount ?? 0) !== refs.source) || object.solved === true) return;
@@ -50882,23 +50903,30 @@ controlledBy,
     source: ObjectId,
     each: CopyForEach,
   ): void {
-    const aims: ObjectId[] = [];
     const cost = each.chooseAndPayEach;
-    const targeted = (id: ObjectId): boolean =>
-      (spell.targets ?? []).some((t) => t?.kind === "object" && t.object === id);
-    for (const id of this.battlefieldMatching(controller, each.filter)) {
-      if (each.other === true && id === source) continue;
-      if (each.other === "targeted" && targeted(id)) continue;
-      if (this.retargetedSnapshot(spell, { kind: "object", object: id }, caster, original) === null) continue;
-      aims.push(id);
-      let more = (this.state.objects[id]?.stackCount ?? 1) - 1;
-      while (more > 0 && aims.length < Game.MAX_EFFECT_INSTANCES) {
-        aims.push(this.splitOneFromStack(id));
-        more -= 1;
+    const found = this.copyForEachAims(
+      spell.targets ?? [],
+      controller,
+      source,
+      each,
+      (to) => this.retargetedSnapshot(spell, to, caster, original) !== null,
+    );
+    if (found.length === 0) return;
+    if (cost === undefined && found.some((to) => to.kind === "player")) {
+      // Players among them: the order asked a copy at a time.
+      if (found.length === 1) {
+        this.copyNextSpellAimed({ snapshot: spell, original, caster, left: found }, undefined, controller, source);
+        return;
       }
-      if (aims.length >= Game.MAX_EFFECT_INSTANCES) break;
+      this.askNextCopyAim(controller, source, spell.cardName, found, {
+        kind: "copy-spell",
+        target: "trigger-spell",
+        retargetTo: 0,
+        spell: { snapshot: spell, original, caster, left: found },
+      });
+      return;
     }
-    if (aims.length === 0) return;
+    const aims = found.flatMap((to) => (to.kind === "object" ? [to.object] : []));
     // As many as they could pay for, all of it (rule 118.3).
     let affordable = aims.length;
     if (cost !== undefined) {
@@ -50938,6 +50966,219 @@ controlledBy,
       source,
       x: 0,
     };
+  }
+
+  /**
+   * What a "copy it for each … it could target" (rule 707.10d) makes a copy
+   * for: each battlefield permanent matching `each.filter` from `controller`'s
+   * side — less `source` with `other: true`, less what it targets with
+   * `"targeted"` — and with `each.players` each player still in the game,
+   * in turn order from the active player, less one it targets with
+   * `"targeted"`; each one that `couldAim` (a legal target for every one of
+   * its targets). A token stack is that many permanents, each split off to
+   * be its own target.
+   */
+  private copyForEachAims(
+    targets: readonly (TargetRef | null | undefined)[],
+    controller: PlayerId,
+    source: ObjectId,
+    each: CopyForEach,
+    couldAim: (to: TargetRef) => boolean,
+  ): TargetRef[] {
+    const aims: TargetRef[] = [];
+    const targeted = (to: TargetRef): boolean =>
+      targets.some((t) => t !== undefined && t !== null && sameTargetRef(t, to));
+    for (const id of this.battlefieldMatching(controller, each.filter)) {
+      const to = { kind: "object", object: id } as const;
+      if (each.other === true && id === source) continue;
+      if (each.other === "targeted" && targeted(to)) continue;
+      if (!couldAim(to)) continue;
+      aims.push(to);
+      let more = (this.state.objects[id]?.stackCount ?? 1) - 1;
+      while (more > 0 && aims.length < Game.MAX_EFFECT_INSTANCES) {
+        aims.push({ kind: "object", object: this.splitOneFromStack(id) });
+        more -= 1;
+      }
+      if (aims.length >= Game.MAX_EFFECT_INSTANCES) return aims;
+    }
+    if (each.players === true) {
+      for (const player of this.apnapOrder()) {
+        const to = { kind: "player", player } as const;
+        if (this.state.players[player]?.hasLost === true) continue;
+        if (each.other === "targeted" && targeted(to)) continue;
+        if (couldAim(to)) aims.push(to);
+      }
+    }
+    return aims;
+  }
+
+  /** Ask `controller` which of `left` the next copy of `name` targets — a
+   * "for each" copy's order (rule 707.10d) with players among them, a copy at
+   * a time: `then` makes it with the one chosen as target 0 and asks again. */
+  private askNextCopyAim(
+    controller: PlayerId,
+    source: ObjectId,
+    name: string,
+    left: readonly TargetRef[],
+    then: EffectSpec,
+  ): void {
+    this.state.awaiting = {
+      kind: "choose-permanent-or-player",
+      player: controller,
+      eligible: [...left],
+      prompt:
+        `Order the copies of ${name}: choose what the next copy targets — the first goes on the stack ` +
+        "first, and resolves last",
+      then,
+      source,
+      x: 0,
+    };
+  }
+
+  /** After the copy of a captured spell aimed at `made` (a "for each" with
+   * players among its targets — `copy-spell`'s `spell.left`), the rest: none,
+   * the last made at once, or the next asked about. */
+  private copyNextSpellAimed(
+    spell: NonNullable<Extract<EffectSpec, { kind: "copy-spell" }>["spell"]>,
+    made: TargetRef | undefined,
+    controller: PlayerId,
+    source: ObjectId,
+  ): void {
+    const rest = (spell.left ?? []).filter((to) => made === undefined || !sameTargetRef(to, made));
+    if (rest.length === 0) return;
+    if (rest.length === 1) {
+      const aimed = this.retargetedSnapshot(spell.snapshot, rest[0], spell.caster ?? controller, spell.original);
+      if (aimed !== null) this.copySpellFrom(aimed, spell.original, controller, false, undefined, spell.snapshot);
+      return;
+    }
+    this.askNextCopyAim(controller, source, spell.snapshot.cardName, rest, {
+      kind: "copy-spell",
+      target: "trigger-spell",
+      retargetTo: 0,
+      spell: { ...spell, left: rest },
+    });
+  }
+
+  /**
+   * The targets of a copy of the ability `ability` (on the stack, or as it
+   * last was there) with every one of them `to` instead (rules 707.10d–e) —
+   * or `null` when `to` isn't a legal target for each of them, as the
+   * ability's controller would choose it from its source. A slot its own
+   * rules filled isn't a target (rule 115.1) and keeps what it had.
+   */
+  private retargetedAbility(
+    ability: GameObject,
+    to: TargetRef,
+  ): Pick<GameObject, "targets" | "targetZones" | "targetStints"> | null {
+    const targets = [...(ability.targets ?? [])];
+    const auto = new Set(ability.autoTargetSlots ?? []);
+    const slots = targets.flatMap((t, i) => (t !== undefined && t !== null && !auto.has(i) ? [i] : []));
+    if (slots.length === 0) return null;
+    const specs = concreteTargetSpecs(triggerTargetSpecs(this.stackAbilityOf(ability), ability.chosenModes), targets);
+    if (specs.length === 0) return null;
+    const source = this.abilityTargetSource({
+      sourceObjectId: ability.sourceObjectId ?? ability.id,
+      controller: ability.controller,
+      targets,
+      x: ability.xValue ?? 0,
+      triggerValue: ability.triggerValue ?? 0,
+      ...(ability.triggerObject !== undefined ? { triggerObject: ability.triggerObject } : {}),
+      ...(ability.targetZones !== undefined ? { targetZones: ability.targetZones } : {}),
+      ...(ability.lastKnownRefs !== undefined ? { lastKnownRefs: ability.lastKnownRefs } : {}),
+    });
+    for (const i of slots) {
+      const spec = specs[Math.min(i, specs.length - 1)];
+      if (!isLegalTarget(this.state, this.registry, spec, to, ability.controller, source)) return null;
+    }
+    const zones = [...(ability.targetZones ?? targets.map(() => null))];
+    const stints = [...(ability.targetStints ?? targets.map(() => null))];
+    const zone = this.zonesOfTargets([to])[0] ?? null;
+    const stint = this.stintsOfTargets([to])[0] ?? null;
+    for (const i of slots) {
+      targets[i] = to;
+      zones[i] = zone;
+      stints[i] = stint;
+    }
+    return { targets, targetZones: zones, targetStints: stints };
+  }
+
+  /**
+   * `copy-ability`'s `forEachItCouldTarget` (rule 707.10d — Radiant
+   * Performer, Agrus Kos): copy the ability `ability` once for each permanent
+   * (or player) it could target, as {@link copySpellForEachItCouldTarget}
+   * copies a spell. With two or more, `controller` orders them: every one a
+   * permanent, by a `choose-permanents` naming each in turn; with players
+   * among them, a copy at a time.
+   */
+  private copyAbilityForEachItCouldTarget(
+    ability: GameObject,
+    controller: PlayerId,
+    source: ObjectId,
+    each: CopyForEach,
+  ): void {
+    const aims = this.copyForEachAims(ability.targets ?? [], controller, source, each, (to) =>
+      this.retargetedAbility(ability, to) !== null,
+    );
+    if (aims.length === 0) return;
+    if (aims.length === 1) {
+      this.copyAbilityAimed(ability.id, aims[0], controller, source, undefined);
+      return;
+    }
+    const name = `${ability.cardName}'s ability`;
+    if (aims.some((to) => to.kind === "player")) {
+      this.askNextCopyAim(controller, source, name, aims, {
+        kind: "copy-ability",
+        target: "trigger-ability",
+        aimed: { original: ability.id, left: aims },
+      });
+      return;
+    }
+    this.state.awaiting = {
+      kind: "choose-permanents",
+      player: controller,
+      eligible: aims.flatMap((to) => (to.kind === "object" ? [to.object] : [])),
+      min: aims.length,
+      max: aims.length,
+      prompt:
+        `Order the copies of ${name}: pick each target in turn — the copy for the first ` +
+        "goes on the stack first, and resolves last",
+      then: { kind: "copy-ability", target: "trigger-ability", aimed: { original: ability.id } },
+      source,
+      x: 0,
+    };
+  }
+
+  /** One copy a "for each" ordered (`copy-ability`'s `aimed`): of the ability
+   * `originalId` — on the stack, or as it last was there — every target `to`,
+   * if `to` is still a legal one for each; then, with `left`, the rest: the
+   * last made at once, or the next asked about. */
+  private copyAbilityAimed(
+    originalId: ObjectId,
+    to: TargetRef,
+    controller: PlayerId,
+    source: ObjectId,
+    left: readonly TargetRef[] | undefined,
+  ): void {
+    const live = this.state.objects[originalId];
+    const ability =
+      live !== undefined && live.zone === "stack" && live.kind === "ability"
+        ? live
+        : this.state.departedAbilities?.[originalId];
+    if (ability === undefined) return;
+    const aimed = this.retargetedAbility(ability, to);
+    if (aimed !== null) this.copyStackAbility(ability, controller, false, aimed);
+    if (left === undefined) return;
+    const rest = left.filter((t) => !sameTargetRef(t, to));
+    if (rest.length === 0) return;
+    if (rest.length === 1) {
+      this.copyAbilityAimed(originalId, rest[0], controller, source, undefined);
+      return;
+    }
+    this.askNextCopyAim(controller, source, `${ability.cardName}'s ability`, rest, {
+      kind: "copy-ability",
+      target: "trigger-ability",
+      aimed: { original: originalId, left: rest },
+    });
   }
 
   /**
@@ -51607,8 +51848,16 @@ controlledBy,
    * With `newTargets` (707.10c) its controller is asked which targets to
    * change, as for a spell's copy; meanwhile it sits on the stack with the
    * original's.
+   *
+   * `aimed` are the copy's targets instead of the original's, when an effect
+   * aims it (rules 707.10d–e — {@link retargetedAbility}).
    */
-  private copyStackAbility(original: GameObject, controller: PlayerId, newTargets: boolean): ObjectId | null {
+  private copyStackAbility(
+    original: GameObject,
+    controller: PlayerId,
+    newTargets: boolean,
+    aimed?: Pick<GameObject, "targets" | "targetZones" | "targetStints">,
+  ): ObjectId | null {
     // "This ability can't be copied" (Gogo, Master of Mimicry): nothing made.
     if (original.abilityKind === "activated" && (this.stackAbilityOf(original) as ActivatedAbility).cantBeCopied === true) {
       return null;
@@ -51623,6 +51872,7 @@ controlledBy,
       zone: "stack",
       isCopy: true,
       stackedAtSeq: this.state.eventSeq,
+      ...(aimed ?? {}),
     };
     this.state.zones.shared.stack.push(id);
     this.emit({ type: "ability-copied", original: original.id, copy: id, source: original.sourceObjectId, controller });

@@ -2022,7 +2022,7 @@ play an additional land this turn"), `untap-all { filter, controlledByTarget?, e
 delayed trigger's "the next instant or sorcery spell you cast this turn has storm" — Storm, Force
 of Nature),
 `cascade`, `copy-spell { target, newTargets?, except?, gains?, ifTargets?, otherwise?, retargetTo?,
-forEachItCouldTarget?, count?, controller? }`, `copy-ability { target, newTargets? }`,
+forEachItCouldTarget?, count?, controller? }`, `copy-ability { target, newTargets?, forEachItCouldTarget? }`,
 `change-targets { target, how, to?, optional? }`,
 `exile-spell-as-it-resolves { returnAtNextEndStep? }`,
 `shuffle-library` (the effect's controller shuffles — Ponder's "You may shuffle" inside a `may`). `exceptTop: n` shuffles all but the top `n`, those staying on top — Lim-Dûl's Vault's "then shuffle and put the last cards you looked at this way on top in any order" (its ruling: shuffle the rest, then a `look-and-choose` `top-any-order` of the five).
@@ -2080,7 +2080,21 @@ made, while it's still that spell on the stack (`spell-on-stack-gains-keyword.te
   "targeted"` leaves out what the spell targets rather than the source ("each other Golem" —
   Precursor Golem). `chooseAndPayEach: "{2}"`: "you may choose any number … and pay {2} for each
   … for each of those creatures, copy that spell" (Feather, Radiant Arbiter), as many offered
-  as can be paid for.
+  as can be paid for. `players: true`: "for each other permanent **or player** the spell could
+  target" — every player still in the game it could target too, `other: "targeted"` leaving out
+  a player it targets; with players among two or more, the order is asked a copy at a time (a
+  `choose-permanent-or-player` per copy, the last made unasked). It also works on a **target
+  slot**: Radiate's "choose target instant or sorcery spell that targets only a single permanent
+  or player. Copy that spell for each other permanent or player the spell could target. Each
+  copy targets a different one of those permanents and players" is `{ target: 0,
+  forEachItCouldTarget: { filter: {}, players: true, other: "targeted" } }` on a `{ kind:
+  "spell", filter: { typesAnyOf: ["instant", "sorcery"], targets: { only: true, single: true,
+  permanent: {}, player: "any" } } }` slot, "could target" judged as the spell's controller
+  would choose; a slot that may hold an ability (Radiant Performer's `{ kind: "stack", spells:
+  "any", abilities: true, targeting: … }`) copies one as `copy-ability`'s `forEachItCouldTarget`
+  does — the same `CopyForEach` on `copy-ability { target, forEachItCouldTarget }`, "could
+  target" judged from the ability's source as its controller would choose
+  (`copy-for-each-permanent-or-player.test.ts`).
 - **Gravestorm** is `gravestorm()` (helpers.ts, rule 702.69a): a `this-cast` `copy-spell` with
   `newTargets` and a `count` of `{ turnHistory: "to-graveyard", who: "each-player", from:
   ["battlefield"] }`, tokens included, read as it resolves (Ominous Harvest).

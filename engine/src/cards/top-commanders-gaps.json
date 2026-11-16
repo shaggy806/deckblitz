@@ -6,6 +6,8 @@
     "stat:granted-once-per-turn-per-grantor",
     "trigger:plays-card-exiled-with-source",
     "filter:shares-color-with-source",
+    "effect:copy-spell-for-each-permanent-or-player-it-could-target",
+    "effect:copy-ability-for-each-it-could-target",
     "effect:damage-all-except-trigger-recipient",
     "replacement:next-combat-damage-double-or-prevent",
     "amount:aggregate-graveyards-except-spell-being-cast",

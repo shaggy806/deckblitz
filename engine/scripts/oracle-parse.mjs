@@ -11495,6 +11495,16 @@ export function parseEffect(text, outer) {
       skip = gained.used - 1;
       continue;
     }
+    // "Choose target … spell that targets only a single permanent or player.
+    // Copy that spell for each other permanent or player the spell could
+    // target. Each copy targets …" (Radiate, Radiant Performer)
+    const copiedEach = copyForEachTargetAt(sentences, i, ctx);
+    if (copiedEach !== null) {
+      parsed.push(copiedEach.effect);
+      hints.push({ sentence, effect: copiedEach.effect });
+      skip = copiedEach.used - 1;
+      continue;
+    }
     // A choice among the spell's own targets as it resolves (Incriminate,
     // Barrin's Spite): two or three sentences, one `choose-among-targets`.
     // A removal of counters and "that many" after it (`countersRemovedAt`).
@@ -20023,6 +20033,40 @@ function meldAttackingAt(sentences, i) {
       },
     },
     used: 2,
+  };
+}
+
+/**
+ * "Choose target instant or sorcery spell [/ spell or ability] that targets
+ * only a single permanent or player. Copy that spell [or ability] for each
+ * other permanent or player the spell [or ability] could target. Each copy
+ * targets a different one of those permanents and players." (Radiate,
+ * Radiant Performer — rule 707.10d): `copy-spell`'s `forEachItCouldTarget` on
+ * the slot, with players, less the one it targets.
+ */
+function copyForEachTargetAt(sentences, i, ctx) {
+  const chosen =
+    /^choose target (instant or sorcery spell|spell or ability) that targets only a single permanent or player\.$/i.exec(
+      sentences[i],
+    );
+  if (chosen === null) return null;
+  const what = chosen[1] === "spell or ability" ? "spell or ability" : "spell";
+  if (
+    (sentences[i + 1] ?? "").toLowerCase() !==
+      `copy that ${what} for each other permanent or player the ${what} could target.` ||
+    !/^each copy targets a different one of those permanents and players\.$/i.test(sentences[i + 2] ?? "")
+  ) {
+    return null;
+  }
+  const targeting = { only: true, single: true, permanent: {}, player: "any" };
+  const target = ctx.target(
+    what === "spell"
+      ? { kind: "spell", filter: { typesAnyOf: ["instant", "sorcery"], targets: targeting } }
+      : { kind: "stack", spells: "any", abilities: true, targeting },
+  );
+  return {
+    effect: { kind: "copy-spell", target, forEachItCouldTarget: { filter: {}, players: true, other: "targeted" } },
+    used: 3,
   };
 }
 

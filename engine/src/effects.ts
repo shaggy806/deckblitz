@@ -1643,7 +1643,15 @@ export type UnlessOption =
 export interface CopyForEach {
   readonly filter: CardFilter;
   readonly other?: true | "targeted";
+  /** With a spell only. */
   readonly chooseAndPayEach?: string;
+  /** "Copy that spell for each other permanent **or player** the spell could
+   * target" (Radiate, Radiant Performer): every player still in the game it
+   * could target too, beside the permanents matching `filter`; `other:
+   * "targeted"` leaves out a player it targets as it does a permanent. With
+   * players among two or more, the order is asked a copy at a time (a
+   * `choose-permanent-or-player` per copy, the last made unasked). */
+  readonly players?: true;
 }
 
 /** An {@link UnlessOption} with any generic or life amount fixed — what the
@@ -8245,6 +8253,14 @@ export type EffectSpec =
        * Nephilim's ruling). `other: "targeted"` leaves out what the spell
        * targets instead of the effect's own permanent: "each **other** Golem"
        * (Precursor Golem). See {@link CopyForEach} for `chooseAndPayEach`.
+       *
+       * With a target slot: "choose target instant or sorcery spell that
+       * targets only a single permanent or player. Copy that spell for each
+       * other permanent or player the spell could target" (Radiate) — the
+       * spell in that slot as it is on the stack, "could target" judged as
+       * its controller would choose. A slot that may hold an ability copies
+       * one the way `copy-ability`'s `forEachItCouldTarget` does (Radiant
+       * Performer's "target spell or ability").
        */
       readonly forEachItCouldTarget?: CopyForEach;
       /**
@@ -8262,12 +8278,16 @@ export type EffectSpec =
        * that a `forEachItCouldTarget` hands its `choose-permanents` decision
        * (which applies it once per permanent chosen, with that one as target
        * 0, outside the triggered ability that knew the spell). `caster`: whose
-       * side "could target" is judged from. `payEach`: what this copy costs. */
+       * side "could target" is judged from. `payEach`: what this copy costs.
+       * `left`: with players among the targets (a `choose-permanent-or-player`
+       * per copy), every one still without a copy, this one included — once
+       * it's made, the next is asked about, or the last made. */
       readonly spell?: {
         readonly snapshot: SpellSnapshot;
         readonly original: ObjectId;
         readonly caster?: PlayerId;
         readonly payEach?: string;
+        readonly left?: readonly TargetRef[];
       };
     }
   | {
@@ -8294,6 +8314,25 @@ export type EffectSpec =
        * the effect applies, as `copy-spell`'s `count` is. One when omitted;
        * none at 0. With `newTargets`, each copy is asked about in turn. */
       readonly count?: EffectAmount;
+      /**
+       * "Copy that ability for each other creature you control that ability
+       * could target. Each copy targets a different one of those creatures"
+       * (rule 707.10d), as `copy-spell`'s `forEachItCouldTarget` copies a
+       * spell: one copy per permanent matching `filter` (and with `players`
+       * per player) that is a legal target for each of the ability's targets
+       * — as its controller would choose it, from its source — every target
+       * of a copy that one, in the order the copier chooses. Not with
+       * `count`, `newTargets` or `chooseAndPayEach`. Radiant Performer's
+       * "target spell or ability" is `copy-spell`'s, which comes here for an
+       * ability.
+       */
+      readonly forEachItCouldTarget?: CopyForEach;
+      /** Only the engine sets this: the ability a `forEachItCouldTarget` is
+       * copying, on the copy its order question hands on — applied with the
+       * one chosen as target 0, every target of the copy that one. `left`, as
+       * `copy-spell`'s `spell.left`: with players among them, every one still
+       * without a copy, this one included. */
+      readonly aimed?: { readonly original: ObjectId; readonly left?: readonly TargetRef[] };
     }
   | {
       /**
@@ -14033,6 +14072,21 @@ export interface EffectApi {
   /** See `copy-spell`'s `forEachItCouldTarget`: copy `spell` once for each
    * permanent it could target, in the order its controller chooses. */
   copyTriggerSpellForEach(spell: SpellSnapshot, each: CopyForEach, copier: PlayerId): void;
+  /** `forEachItCouldTarget` on a target slot, or on `"trigger-ability"`:
+   * copy the spell or ability there (on the stack — an ability as it last
+   * was there if it has gone) once for each permanent or player it could
+   * target, in the order `copier` chooses. */
+  copyStackObjectForEach(target: TargetRef | "trigger-ability", each: CopyForEach, copier: PlayerId): void;
+  /** A copy a `forEachItCouldTarget` ordered: of the ability `original`,
+   * every target `to`; then, with `left`, the next asked about. See
+   * `copy-ability`'s `aimed`. */
+  copyAbilityAimed(original: ObjectId, to: TargetRef, left: readonly TargetRef[] | undefined): void;
+  /** With a `copy-spell`'s `spell.left`: after the copy aimed at `made`, ask
+   * which of the rest the next copy targets, or make the last. */
+  copyNextSpellAimed(
+    spell: NonNullable<Extract<EffectSpec, { kind: "copy-spell" }>["spell"]>,
+    made: TargetRef,
+  ): void;
   /** See the `exile-spell-as-it-resolves` {@link EffectSpec}: mark the
    * trigger's spell. */
   exileTriggerSpellAsItResolves(
@@ -21975,13 +22029,21 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                   copied = copied || made;
                 }
               }
+              // The rest of a "for each" with players among them: the next
+              // asked about, or the last made.
+              if (spec.spell?.left !== undefined && retargetTo !== undefined) ctx.copyNextSpellAimed(spec.spell, retargetTo);
             }
           }
         } else {
           // "Copy this spell" — the spell now resolving, still on the stack.
           const target =
             spec.target === "source" ? ({ kind: "object", object: ctx.source } as const) : ctx.targets[spec.target];
-          if (target !== undefined) {
+          if (target !== undefined && spec.forEachItCouldTarget !== undefined) {
+            // "Copy that spell for each other permanent or player the spell
+            // could target" (Radiate) — an ability too (Radiant Performer).
+            ctx.copyStackObjectForEach(target, spec.forEachItCouldTarget, copier ?? ctx.controller);
+            copied = true;
+          } else if (target !== undefined) {
             for (let i = 0; i < times; i += 1) ctx.copySpell(target, newTargets, copier, change);
             copied = times > 0;
           }
@@ -22039,8 +22101,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // "X times": the count, read as this applies.
       const times =
         spec.count === undefined ? 1 : Math.min(Math.max(0, Math.floor(amountValue(spec.count, ctx))), MAX_COPY_COUNT);
+      if (spec.aimed !== undefined) {
+        // One copy a "for each" ordered, aimed at the one chosen.
+        const to = ctx.targets[0];
+        if (to !== undefined) ctx.copyAbilityAimed(spec.aimed.original, to, spec.aimed.left);
+        return;
+      }
       const target = spec.target === "trigger-ability" ? "trigger-ability" : ctx.targets[spec.target];
       if (target === undefined || target === null) return;
+      if (spec.forEachItCouldTarget !== undefined) {
+        ctx.copyStackObjectForEach(target, spec.forEachItCouldTarget, ctx.controller);
+        return;
+      }
       for (let i = 0; i < times; i += 1) ctx.copyAbility(target, spec.newTargets === true);
       return;
     }

@@ -19763,6 +19763,43 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     });
   });
 
+  it("reads a spell copied for each other permanent or player it could target (Radiate)", () => {
+    const radiate = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text:
+        "Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell for each other permanent or player the spell could target. Each copy targets a different one of those permanents and players.",
+    });
+    expect(radiate.targets).toEqual([
+      {
+        kind: "spell",
+        filter: { typesAnyOf: ["instant", "sorcery"], targets: { only: true, single: true, permanent: {}, player: "any" } },
+      },
+    ]);
+    expect(radiate.effect).toEqual({
+      kind: "copy-spell",
+      target: 0,
+      forEachItCouldTarget: { filter: {}, players: true, other: "targeted" },
+    });
+  });
+
+  it("reads a spell or ability copied for each other permanent or player it could target (Radiant Performer)", () => {
+    const performer = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human Wizard",
+      oracle_text:
+        "When this creature enters, if you cast it from your hand, choose target spell or ability that targets only a single permanent or player. Copy that spell or ability for each other permanent or player the spell or ability could target. Each copy targets a different one of those permanents and players.",
+    });
+    expect(performer.triggered[0].targets).toEqual([
+      { kind: "stack", spells: "any", abilities: true, targeting: { only: true, single: true, permanent: {}, player: "any" } },
+    ]);
+    expect(performer.triggered[0].effect).toEqual({
+      kind: "copy-spell",
+      target: 0,
+      forEachItCouldTarget: { filter: {}, players: true, other: "targeted" },
+    });
+  });
+
   it("reads plot given to and taken from the top of your library (Fblthp, Lost on the Range)", () => {
     const fblthp = parseFace({
       name: "Test Card",

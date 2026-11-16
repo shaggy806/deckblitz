@@ -365,6 +365,19 @@ clause is "cards in your graveyard you've surveilled this turn" — the same obj
 seen, left on top and put there later (the ruling). A graveyard permission's `byPayingLife` now works as
 from exile and a library's top: the only way under it (118.9a; X 0, 107.3b), read from the permission the
 cast names. Eye of Duskmantle (rank 11084). `test/surveilled-this-turn.test.ts`.
+### A spell or ability copied for each permanent or player it could target — built 2026-11-16
+
+The keys `effect:copy-spell-for-each-permanent-or-player-it-could-target` and
+`effect:copy-ability-for-each-it-could-target` (family `effect:copy-ability`). `CopyForEach` takes
+`players` (every player still in the game it could target, `other: "targeted"` leaving out one it
+targets), `copy-spell`'s `forEachItCouldTarget` works on a target slot as well as a trigger's spell
+("could target" as the spell's controller would choose), and an ability there — or `copy-ability`'s own
+`forEachItCouldTarget` — is copied once per permanent or player legal for each of its targets, judged from
+its source (`Game.retargetedAbility`; rule 707.10d). With players among two or more, the copier orders them
+a copy at a time (`choose-permanent-or-player`, the last made unasked); permanents alone stay one
+`choose-permanents`. Radiant Performer (rank 11213) and Radiate (13992). Agrus Kos, Eternal Soldier still
+waits on `trigger:becomes-target-of-ability-targeting-only-it`.
+`test/copy-for-each-permanent-or-player.test.ts`.
 
 ### Another player's choice inside a mana ability — built 2026-11-16
 
