@@ -1119,6 +1119,7 @@ import _poolArcSlogger from "./pool/arc-slogger.js";
 import _poolArcSpitter from "./pool/arc-spitter.js";
 import _poolArcTrail from "./pool/arc-trail.js";
 import _poolArcadeCabinet from "./pool/arcade-cabinet.js";
+import _poolArcadeGannon from "./pool/arcade-gannon.js";
 import _poolArcadesSabboth from "./pool/arcades-sabboth.js";
 import _poolArcadesTheStrategist from "./pool/arcades-the-strategist.js";
 import _poolArcaneAdaptation from "./pool/arcane-adaptation.js";
@@ -4111,6 +4112,7 @@ import _poolCaseyJonesBackAlleyBrute from "./pool/casey-jones-back-alley-brute.j
 import _poolCaseyJonesJuryRigJusticiar from "./pool/casey-jones-jury-rig-justiciar.js";
 import _poolCaseyJonesVigilante from "./pool/casey-jones-vigilante.js";
 import _poolCaseyRaphHotheads from "./pool/casey-raph-hotheads.js";
+import _poolCassHandOfVengeance from "./pool/cass-hand-of-vengeance.js";
 import _poolCastAwayDoubt from "./pool/cast-away-doubt.js";
 import _poolCastDown from "./pool/cast-down.js";
 import _poolCastIntoDarkness from "./pool/cast-into-darkness.js";
@@ -7488,6 +7490,7 @@ import _poolDrannithMagistrate from "./pool/drannith-magistrate.js";
 import _poolDrannithRuins from "./pool/drannith-ruins.js";
 import _poolDrannithStinger from "./pool/drannith-stinger.js";
 import _poolDrasticRevelation from "./pool/drastic-revelation.js";
+import _poolDraugrNecromancer from "./pool/draugr-necromancer.js";
 import _poolDraugrRecruiter from "./pool/draugr-recruiter.js";
 import _poolDraugrThoughtThief from "./pool/draugr-thought-thief.js";
 import _poolDraugrsHelm from "./pool/draugrs-helm.js";
@@ -15739,6 +15742,7 @@ import _poolLensFlare from "./pool/lens-flare.js";
 import _poolLensOfClarity from "./pool/lens-of-clarity.js";
 import _poolLeonardoBigBrother from "./pool/leonardo-big-brother.js";
 import _poolLeonardoCuttingEdge from "./pool/leonardo-cutting-edge.js";
+import _poolLeonardoDaVinci from "./pool/leonardo-da-vinci.js";
 import _poolLeonardoLeaderInBlue from "./pool/leonardo-leader-in-blue.js";
 import _poolLeonardoTheBalance from "./pool/leonardo-the-balance.js";
 import _poolLeonardoWorldlyWarrior from "./pool/leonardo-worldly-warrior.js";
@@ -34381,6 +34385,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArcSpitter,
   _poolArcTrail,
   _poolArcadeCabinet,
+  _poolArcadeGannon,
   _poolArcadesSabboth,
   _poolArcadesTheStrategist,
   _poolArcaneAdaptation,
@@ -37373,6 +37378,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaseyJonesJuryRigJusticiar,
   _poolCaseyJonesVigilante,
   _poolCaseyRaphHotheads,
+  _poolCassHandOfVengeance,
   _poolCastAwayDoubt,
   _poolCastDown,
   _poolCastIntoDarkness,
@@ -40750,6 +40756,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrannithRuins,
   _poolDrannithStinger,
   _poolDrasticRevelation,
+  _poolDraugrNecromancer,
   _poolDraugrRecruiter,
   _poolDraugrThoughtThief,
   _poolDraugrsHelm,
@@ -49001,6 +49008,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLensOfClarity,
   _poolLeonardoBigBrother,
   _poolLeonardoCuttingEdge,
+  _poolLeonardoDaVinci,
   _poolLeonardoLeaderInBlue,
   _poolLeonardoTheBalance,
   _poolLeonardoWorldlyWarrior,
@@ -67656,6 +67664,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arc-spitter": _poolArcSpitter,
   "pool/arc-trail": _poolArcTrail,
   "pool/arcade-cabinet": _poolArcadeCabinet,
+  "pool/arcade-gannon": _poolArcadeGannon,
   "pool/arcades-sabboth": _poolArcadesSabboth,
   "pool/arcades-the-strategist": _poolArcadesTheStrategist,
   "pool/arcane-adaptation": _poolArcaneAdaptation,
@@ -70648,6 +70657,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/casey-jones-jury-rig-justiciar": _poolCaseyJonesJuryRigJusticiar,
   "pool/casey-jones-vigilante": _poolCaseyJonesVigilante,
   "pool/casey-raph-hotheads": _poolCaseyRaphHotheads,
+  "pool/cass-hand-of-vengeance": _poolCassHandOfVengeance,
   "pool/cast-away-doubt": _poolCastAwayDoubt,
   "pool/cast-down": _poolCastDown,
   "pool/cast-into-darkness": _poolCastIntoDarkness,
@@ -74025,6 +74035,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/drannith-ruins": _poolDrannithRuins,
   "pool/drannith-stinger": _poolDrannithStinger,
   "pool/drastic-revelation": _poolDrasticRevelation,
+  "pool/draugr-necromancer": _poolDraugrNecromancer,
   "pool/draugr-recruiter": _poolDraugrRecruiter,
   "pool/draugr-thought-thief": _poolDraugrThoughtThief,
   "pool/draugrs-helm": _poolDraugrsHelm,
@@ -82276,6 +82287,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lens-of-clarity": _poolLensOfClarity,
   "pool/leonardo-big-brother": _poolLeonardoBigBrother,
   "pool/leonardo-cutting-edge": _poolLeonardoCuttingEdge,
+  "pool/leonardo-da-vinci": _poolLeonardoDaVinci,
   "pool/leonardo-leader-in-blue": _poolLeonardoLeaderInBlue,
   "pool/leonardo-the-balance": _poolLeonardoTheBalance,
   "pool/leonardo-worldly-warrior": _poolLeonardoWorldlyWarrior,

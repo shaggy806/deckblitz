@@ -221,6 +221,7 @@ import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
 import _poolDragonlordsPrerogative from "../pool/dragonlords-prerogative.js";
 import _poolDranaAndLinvala from "../pool/drana-and-linvala.js";
+import _poolDraugrNecromancer from "../pool/draugr-necromancer.js";
 import _poolDreamProwler from "../pool/dream-prowler.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
 import _poolDriven from "../pool/driven.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolDragonEgg,
     _poolDragonlordsPrerogative,
     _poolDranaAndLinvala,
+    _poolDraugrNecromancer,
     _poolDreamProwler,
     _poolDrillworksMole,
     _poolDriven,

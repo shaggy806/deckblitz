@@ -478,6 +478,7 @@ import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeatherArmor from "../pool/leather-armor.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
+import _poolLeonardoDaVinci from "../pool/leonardo-da-vinci.js";
 import _poolLeoninArbiter from "../pool/leonin-arbiter.js";
 import _poolLiberatingCombustion from "../pool/liberating-combustion.js";
 import _poolLibraryOfLatNam from "../pool/library-of-lat-nam.js";
@@ -1487,6 +1488,7 @@ const shard: CardShard = {
     _poolLeafkinDruid,
     _poolLeatherArmor,
     _poolLeechCollector,
+    _poolLeonardoDaVinci,
     _poolLeoninArbiter,
     _poolLiberatingCombustion,
     _poolLibraryOfLatNam,

@@ -128,6 +128,7 @@ import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
 import _poolCarrionGrub from "../pool/carrion-grub.js";
 import _poolCasalLurkwoodPathfinder from "../pool/casal-lurkwood-pathfinder.js";
+import _poolCassHandOfVengeance from "../pool/cass-hand-of-vengeance.js";
 import _poolCementShoes from "../pool/cement-shoes.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolCeremoniousRejection from "../pool/ceremonious-rejection.js";
@@ -1127,6 +1128,7 @@ const shard: CardShard = {
     _poolCarnivorousPlant,
     _poolCarrionGrub,
     _poolCasalLurkwoodPathfinder,
+    _poolCassHandOfVengeance,
     _poolCementShoes,
     _poolCephalidFacetaker,
     _poolCeremoniousRejection,

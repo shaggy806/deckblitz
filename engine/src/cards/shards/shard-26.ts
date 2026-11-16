@@ -51,6 +51,7 @@ import _poolApocalypseHydra from "../pool/apocalypse-hydra.js";
 import _poolAranaHeartOfTheSpider from "../pool/arana-heart-of-the-spider.js";
 import _poolArborealAlliance from "../pool/arboreal-alliance.js";
 import _poolArcSpitter from "../pool/arc-spitter.js";
+import _poolArcadeGannon from "../pool/arcade-gannon.js";
 import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolAranaHeartOfTheSpider,
     _poolArborealAlliance,
     _poolArcSpitter,
+    _poolArcadeGannon,
     _poolArcumsAstrolabe,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
