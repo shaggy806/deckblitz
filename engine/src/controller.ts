@@ -82,7 +82,7 @@ export interface NameStickerAnswer {
   readonly position: number;
 }
 import type { EnterAttackingChoice, GameObject, GameState, OverPlaneswalker, TriggerOrderEntry } from "./state.js";
-import { activePlayerOf, printedCardName, rulesTextName } from "./state.js";
+import { activePlayerOf, POISON_LETHAL, printedCardName, rulesTextName } from "./state.js";
 import { anyNumberSlot, concatModeSpecs, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
 import type { TargetFacts, TargetRef, TargetSpec } from "./target.js";
 import { legalTargets, stateTargetFacts } from "./targeting.js";
@@ -2195,6 +2195,22 @@ function lifePaidBy(effect: EffectSpec | undefined): number {
     return effect.effects.reduce((n, each) => n + lifePaidBy(each), 0);
   }
   return effect.kind === "lose-life" && effect.who === "you" && typeof effect.amount === "number"
+    ? effect.amount
+    : 0;
+}
+
+/** The poison counters an effect gives its controller outright — a ward
+ * payment's "Get five poison counters" part, an `add-player-counters` of
+ * `"you"` inside its mode. */
+function poisonTakenBy(effect: EffectSpec | undefined): number {
+  if (effect === undefined) return 0;
+  if (effect.kind === "sequence") {
+    return effect.effects.reduce((n, each) => n + poisonTakenBy(each), 0);
+  }
+  return effect.kind === "add-player-counters" &&
+    effect.counter === "poison" &&
+    effect.who === "you" &&
+    typeof effect.amount === "number"
     ? effect.amount
     : 0;
 }
@@ -4796,7 +4812,8 @@ export class HeuristicBotController extends AutomaticController {
   /**
    * A ward payment (rule 702.21a) is offered only when it's affordable, and
    * a spell of this bot's that targeted something is one it wanted to
-   * resolve, so it pays — unless the life it would pay is all it has left.
+   * resolve, so it pays — unless the life it would pay is all it has left,
+   * or the poison counters it would get make ten.
    *
    * Everything else — a "you may", a punisher's "unless", a villainous
    * choice, a modal choice — is weighed by `effect-worth.ts`: each mode by
@@ -4819,8 +4836,12 @@ export class HeuristicBotController extends AutomaticController {
       return super.chooseModes(view, minModes, maxModes, modeTexts);
     }
     if (awaiting.ward !== undefined) {
-      const life = state.players[view.player].life;
-      return lifePaidBy(awaiting.modes[0]?.effect) >= life ? [] : [0];
+      const me = state.players[view.player];
+      const pay = awaiting.modes[0]?.effect;
+      // Nor the poison counters that would make ten (rule 704.5c).
+      const poison = poisonTakenBy(pay);
+      if (poison > 0 && (me.counters.poison ?? 0) + poison >= POISON_LETHAL) return [];
+      return lifePaidBy(pay) >= me.life ? [] : [0];
     }
     // A guess about a card we can't see (Gollum, Scheming Guide; Master of
     // Predicaments): by what we could know — how much of its owner's hand

@@ -1355,6 +1355,12 @@ export interface WardCost {
    * which as they pay — the `collect-evidence` effect, evidence collected.
    * Payable only while their graveyard holds that much (701.59b). */
   readonly collectEvidence?: number;
+  /** "Ward—Get five poison counters" (The Serpent Society): the payer gets
+   * that many poison counters (rule 122.1f), the `add-player-counters`
+   * effect. Payable only while they can get poison counters — not under a
+   * `get-counters` prohibition (Melira): a cost that can't be done can't be
+   * paid (rule 118.3). */
+  readonly poisonCounters?: number;
   /** "Ward {X}, where X is the number of experience counters you have"
    * (Minthara, Merciless Soul): a generic mana part whose size is read as the
    * ward ability resolves, from its controller's side — not as the permanent
@@ -1472,6 +1478,11 @@ export function wardCostText(cost: WardCost): string {
   }
   if (cost.blight !== undefined) parts.push(`Blight ${cost.blight}`);
   if (cost.collectEvidence !== undefined) parts.push(`Collect evidence ${cost.collectEvidence}`);
+  if (cost.poisonCounters !== undefined) {
+    const n = cost.poisonCounters;
+    const word = ["", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"][n] ?? String(n);
+    parts.push(`Get ${word} poison counter${n === 1 ? "" : "s"}`);
+  }
   const onlyMana = cost.mana !== undefined && parts.length === 1 && cost.waterbend !== true;
   return onlyMana ? ` ${cost.mana}` : `—${parts.join(", ")}.`;
 }

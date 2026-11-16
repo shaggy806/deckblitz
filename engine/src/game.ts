@@ -60179,6 +60179,10 @@ controlledBy,
     if (cost.collectEvidence !== undefined) {
       parts.push({ kind: "collect-evidence", amount: cost.collectEvidence, required: true });
     }
+    // "Ward—Get five poison counters" (rule 122.1f): the payer gets them.
+    if (cost.poisonCounters !== undefined) {
+      parts.push({ kind: "add-player-counters", counter: "poison", amount: cost.poisonCounters, who: "you" });
+    }
     const spellName = printedCardName(spell);
     const what = spell.kind === "card" ? spellName : `${spellName}'s ability`;
     this.beginModesChoice(
@@ -60216,7 +60220,7 @@ controlledBy,
   /**
    * Can `player` pay all of a ward cost right now? Life can be paid down to
    * exactly 0 (rule 119.4); a blight needs a creature to put the counters on
-   * (701.68b).
+   * (701.68b); poison counters need a player who can get them.
    *
    * The parts are one cost, so they're checked together: the mana is paid
    * first (it rides on the decision), and the plan for it — the same plan
@@ -60272,6 +60276,12 @@ controlledBy,
     }
     // Enough mana value in their graveyard (701.59b).
     if (cost.collectEvidence !== undefined && !this.canCollectEvidence(player, cost.collectEvidence)) return false;
+    // Poison counters they can get: not under Melira's "you can't get
+    // poison counters" (rule 118.3, as Devoted Druid's counters under
+    // Solemnity).
+    if (cost.poisonCounters !== undefined && cost.poisonCounters > 0 && this.countersPrevented({ player }, "poison")) {
+      return false;
+    }
     return true;
   }
 

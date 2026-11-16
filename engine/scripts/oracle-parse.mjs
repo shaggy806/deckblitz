@@ -16514,6 +16514,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.triggered.push({ ...wardAbility({ collectEvidence: Number(m[1]) }), text: `Ward—Collect evidence ${m[1]}.` });
       continue;
     }
+    // "Ward—Get five poison counters" (The Serpent Society): the payer gets
+    // them (rule 122.1f).
+    if ((m = /^Ward—Get (a|one|two|three|four|five|six|seven|eight|nine|ten) poison counters?\.$/.exec(line))) {
+      out.triggered.push({ ...wardAbility({ poisonCounters: NUMBERS[m[1]] }), text: line });
+      continue;
+    }
     // A ward cost read as the ability resolves (rules 702.21a, 608.2h): "~ has
     // ward {X}, where X is the number of experience counters you have"
     // (Minthara, Merciless Soul), "Ward—Pay life equal to ~'s power" (Raubahn).

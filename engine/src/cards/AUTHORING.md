@@ -5388,6 +5388,8 @@ counters on a creature they control, rule 701.68a — payable only with one,
 701.68b), `{ collectEvidence: 4 }` (Ward—Collect evidence 4, Axebane Ferox: the payer
 exiles cards with total mana value 4 or more from their graveyard, rule 701.59a — payable only
 while it holds that much, 701.59b — and that is collecting evidence),
+`{ poisonCounters: 5 }` (Ward—Get five poison counters, The Serpent Society: the payer gets
+them, rule 122.1f — not payable by a player who can't get poison counters, rule 118.3),
 `{ mana: "{4}", waterbend: true }` (Ward—Waterbend {4}, The Unagi of Kyoshi Island: the payer
 may tap their untapped artifacts and creatures for its generic mana, rule 701.67a). A part whose size is read as the ward ability resolves (rule
 608.2h) is `payGeneric` or `payLifeAmount`, an `EffectAmount` each, with

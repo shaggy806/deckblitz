@@ -2763,7 +2763,8 @@
   "zone:play-from-graveyard-surveilled-this-turn",
   "trigger:spell-or-ability-put-on-stack",
   "trigger:paired-creature-dealt-damage",
-  "filter:foretold"
+  "filter:foretold",
+  "decision:ward-poison-counters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

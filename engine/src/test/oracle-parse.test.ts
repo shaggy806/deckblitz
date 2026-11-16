@@ -18525,6 +18525,16 @@ describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () 
     expect(ferox.triggered[0].text).toBe("Ward—Collect evidence 4.");
   });
 
+  it("ward, get poison counters (The Serpent Society)", () => {
+    const society = face(
+      "The Serpent Society",
+      "Ward—Get five poison counters. (A player with ten or more poison counters loses the game.)",
+    );
+    expect(society.complete).toBe(true);
+    expect(society.triggered[0].effect).toEqual({ kind: "ward", cost: { poisonCounters: 5 } });
+    expect(society.triggered[0].text).toBe("Ward—Get five poison counters.");
+  });
+
   it("ward, pay life equal to this creature's power (Phyrexian Fleshgorger)", () => {
     const gorger = face("Phyrexian Fleshgorger", "Ward—Pay life equal to this creature's power.");
     expect(gorger.complete).toBe(true);
