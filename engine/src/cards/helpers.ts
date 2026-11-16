@@ -25,6 +25,7 @@ export { ODD_OR_EVEN } from "../filter.js";
 /** Every creature type (rule 205.3m) — what the scaffolder
  * (`scripts/oracle-parse.mjs`) reads a "with Vampire" or "can't be Wall" by. */
 export { CREATURE_TYPES } from "../creature-types.js";
+export { NONBASIC_LAND_TYPES } from "../subtypes.js";
 
 /**
  * "Search your graveyard, hand, **and/or** library for …" (Boonweaver Giant,

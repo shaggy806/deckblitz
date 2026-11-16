@@ -20675,3 +20675,95 @@ describe("'whenever equipped creature dies, return that card … if it's a Samur
     expect(demise.triggered[0].effect).toEqual(put);
   });
 });
+
+describe("batch 333's need keys (Perennation, Paranormal Analyst, Wonderscape Sage, Triskaidekaphobia)", () => {
+  it("reads a return with several kinds of counter on it", () => {
+    const perennation = parseFace({
+      name: "Perennation",
+      type_line: "Sorcery",
+      mana_cost: "{3}{W}{B}{G}",
+      oracle_text:
+        "Return target permanent card from your graveyard to the battlefield with a hexproof counter and an indestructible counter on it.",
+    });
+    expect(perennation.effect).toEqual({
+      kind: "put-onto-battlefield",
+      target: 0,
+      withCounters: [
+        { kind: "hexproof", amount: 1 },
+        { kind: "indestructible", amount: 1 },
+      ],
+    });
+    // One kind stays the one-counter shape.
+    const one = parseFace({
+      name: "Test Return",
+      type_line: "Sorcery",
+      oracle_text: "Return target creature card from your graveyard to the battlefield with a finality counter on it.",
+    });
+    expect(one.effect).toEqual({ kind: "put-onto-battlefield", target: 0, withCounters: { kind: "finality", amount: 1 } });
+  });
+
+  it("reads 'whenever you manifest dread' and the card it put into your graveyard", () => {
+    const analyst = parseFace({
+      name: "Paranormal Analyst",
+      type_line: "Creature — Human Detective",
+      mana_cost: "{1}{U}",
+      oracle_text: "Whenever you manifest dread, put a card you put into your graveyard this way into your hand.",
+      power: "1",
+      toughness: "3",
+    });
+    expect(analyst.triggered[0].trigger).toEqual({ on: "event", event: "manifests-dread", who: "you" });
+    expect(analyst.triggered[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "graveyard",
+      min: 1,
+      max: 1,
+      filter: { inSet: "trigger-batch" },
+      destination: "hand",
+      leftover: "stay",
+      prompt: "Put a card you put into your graveyard by manifesting dread into your hand.",
+    });
+    expect(analyst.complete).toBe(true);
+  });
+
+  it("reads 'unless that land had a nonbasic land type' of a land returned for the cost", () => {
+    const sage = parseFace({
+      name: "Wonderscape Sage",
+      type_line: "Creature — Moonfolk Wizard",
+      mana_cost: "{1}{U}",
+      oracle_text:
+        "Flying\n{T}, Return a land you control to its owner's hand: Draw a card. Then discard a card unless that land had a nonbasic land type.",
+      power: "1",
+      toughness: "3",
+    });
+    const effect = sage.activated[0].effect;
+    expect(effect.kind).toBe("sequence");
+    expect(effect.effects[1]).toEqual({
+      kind: "conditional",
+      condition: {
+        kind: "not",
+        of: {
+          kind: "object-matches",
+          object: { paid: "returned" },
+          filter: { subtypes: ["Cave", "Desert", "Gate", "Lair", "Locus", "Mine", "Planet", "Power-Plant", "Sphere", "Tower", "Town", "Urza's"] },
+        },
+      },
+      then: { kind: "discard", target: "you", amount: 1 },
+    });
+  });
+
+  it("reads 'each player with exactly 13 life loses the game, then …'", () => {
+    const line = (text: string) => parseFace({ name: "Test Card", type_line: "Sorcery", oracle_text: text }).effect;
+    expect(line("Each player with exactly 13 life loses the game, then each player gains 1 life.")).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "lose-game", who: "each-player", whoseIf: { kind: "life-total", who: "that-player", atLeast: 13, atMost: 13 } },
+        { kind: "gain-life", amount: 1, who: "each-player" },
+      ],
+    });
+    expect(line("Each opponent with 5 or less life loses the game.")).toEqual({
+      kind: "lose-game",
+      who: "each-opponent",
+      whoseIf: { kind: "life-total", who: "that-player", atMost: 5 },
+    });
+  });
+});

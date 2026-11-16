@@ -68,6 +68,7 @@ import {
   unearth,
   vanishing,
   CREATURE_TYPES,
+  NONBASIC_LAND_TYPES,
 } from "../dist/cards/helpers.js";
 
 // ------------------------------------------------------------------ text
@@ -1840,6 +1841,13 @@ export function parseCost(text) {
     else if ((m = /^Waterbend (\{(?:\d+|X)\})$/.exec(part)) && cost.mana === null) {
       cost.mana = m[1];
       cost.waterbend = true;
+    } else if ((m = new RegExp(`^Return ${N} (.+?) you control to (?:its|their) owner's hand$`).exec(part))) {
+      // "Return a land you control to its owner's hand" (Soratami
+      // Cloudskater, Wonderscape Sage): which, chosen as it's paid.
+      const count = numberOf(m[1]);
+      const filter = parseTypePhrase(m[2]);
+      if (typeof count !== "number" || filter === null || Object.keys(filter).length === 0) return null;
+      cost.returnToHand = { count, filter };
     } else return null;
   }
   // Without a {T} of its own, the source may be one of the creatures it taps
@@ -2745,6 +2753,8 @@ export function parseTrigger(clause) {
   // Expend N (rule 700.14) and "whenever you forage" (701.61a).
   if ((m = /^Whenever you expend (\d+)$/.exec(c))) return [{ on: "expend", who: "you", amount: Number(m[1]) }];
   if (/^Whenever you forage$/.test(c)) return [{ on: "event", event: "forages", who: "you" }];
+  // Once the whole manifest dread is done, even if it couldn't be (701.62b).
+  if (/^Whenever you manifest dread$/.test(c)) return [{ on: "event", event: "manifests-dread", who: "you" }];
   // Rule 706: once per die rolled; "your third die each turn" (Resolute
   // Veggiesaur) the timing wrapper, counted die by die.
   if (/^Whenever you roll a die$/.test(c)) return [{ on: "event", event: "rolls-die", who: "you" }];
@@ -3357,6 +3367,22 @@ export function parseSentence(sentence, ctx) {
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
+  // "Each player with exactly 13 life loses the game, then each player gains
+  // 1 life" (Triskaidekaphobia): every one of them at once (rule 104.4a), each
+  // asked about as "that player"; the rest after.
+  const lifeLosers = /^each (player|opponent) with (exactly )?(\d+) (or (less|more) )?life loses the game(?:, then (.+?))?\.$/i.exec(s);
+  if (lifeLosers !== null && (lifeLosers[2] !== undefined) !== (lifeLosers[4] !== undefined)) {
+    const n = Number(lifeLosers[3]);
+    const bounds = lifeLosers[2] !== undefined ? { atLeast: n, atMost: n } : lifeLosers[5].toLowerCase() === "less" ? { atMost: n } : { atLeast: n };
+    const lose = {
+      kind: "lose-game",
+      who: lifeLosers[1].toLowerCase() === "player" ? "each-player" : "each-opponent",
+      whoseIf: { kind: "life-total", who: "that-player", ...bounds },
+    };
+    if (lifeLosers[6] === undefined) return lose;
+    const then = parseSentence(`${lifeLosers[6][0].toUpperCase()}${lifeLosers[6].slice(1)}.`, ctx);
+    return then === null ? null : { kind: "sequence", effects: [lose, then] };
+  }
   // "Create a 5/5 black Demon creature token with flying, then mill two
   // cards." (Demonic Covenant): the two in order.
   const createThenMill = CREATE_THEN_MILL.exec(s);
@@ -6268,13 +6294,24 @@ export function parseSentence(sentence, ctx) {
     };
   }
   // "…card with mana value X plus 1 from your graveyard" (Sidisi, Regent of
-  // the Mire): the cost's X, a sum on it.
-  if ((m = /^return (target .+? card(?: with mana value X(?: plus \d+)?)? from your graveyard) to the battlefield( tapped)?\.$/i.exec(s))) {
+  // the Mire): the cost's X, a sum on it. "…with a hexproof counter and an
+  // indestructible counter on it" (Perennation): each kind its own entry,
+  // all put on as it enters (rule 122.6).
+  if ((m = /^return (target .+? card(?: with mana value X(?: plus \d+)?)? from your graveyard) to the battlefield( tapped)?(?: with ((?:an? [a-z+/\d-]+ counter)(?:(?:,| and|, and) an? [a-z+/\d-]+ counter)*) on it)?\.$/i.exec(s))) {
     // An Aura put onto the battlefield this way isn't attached to anything
     // (BACKLOG), so a card that names one (Rise to Glory) is left to author.
     if (/\bAura\b/.test(m[1])) return null;
     const i = slot(m[1]);
-    return i === undefined ? null : { kind: "put-onto-battlefield", target: i, ...(m[2] ? { enterTapped: true } : {}) };
+    const kinds = m[3] === undefined ? [] : [...m[3].matchAll(/an? ([a-z+/\d-]+) counter/gi)].map((c) => ({ kind: c[1].toLowerCase(), amount: 1 }));
+    const withCounters = kinds.length === 0 ? undefined : kinds.length === 1 ? kinds[0] : kinds;
+    return i === undefined
+      ? null
+      : {
+          kind: "put-onto-battlefield",
+          target: i,
+          ...(m[2] ? { enterTapped: true } : {}),
+          ...(withCounters !== undefined ? { withCounters } : {}),
+        };
   }
   // Copying a spell (rule 707.10), with the copy's exceptions (707.9b —
   // `copyExceptOf`): "copy target creature spell you control, except it
@@ -7822,6 +7859,7 @@ export function parseSentence(sentence, ctx) {
   // Life, in the shapes the pool writes it.
   if ((m = re(`you lose ${N} life`).exec(s))) return { kind: "lose-life", amount: amount(m[1]) };
   if ((m = re(`each player loses ${N} life`).exec(s))) return { kind: "lose-life", amount: amount(m[1]), who: "each-player" };
+  if ((m = re(`each player gains ${N} life`).exec(s))) return { kind: "gain-life", amount: amount(m[1]), who: "each-player" };
   if ((m = re(`(target player|target opponent) loses ${N} life and you gain ${N} life`).exec(s))) {
     return {
       kind: "sequence",
@@ -7903,6 +7941,18 @@ export function parseSentence(sentence, ctx) {
   if ((m = new RegExp(`^(?:then )?discard ${N} cards? unless you discard an? (.+?) card\\.$`, "i").exec(s))) {
     const filter = discardFilterOf(m[2]);
     if (filter !== null) return { kind: "discard", target: "you", amount: amount(m[1]), unlessOne: filter };
+  }
+  // "…unless that land had a nonbasic land type" (Wonderscape Sage): the land
+  // a return-to-hand cost took, as it last existed (608.2h).
+  if (ctx?.costReturned === true && /^(?:then )?discard a card unless that land had a nonbasic land type\.$/i.test(s)) {
+    return {
+      kind: "conditional",
+      condition: {
+        kind: "not",
+        of: { kind: "object-matches", object: { paid: "returned" }, filter: { subtypes: [...NONBASIC_LAND_TYPES] } },
+      },
+      then: { kind: "discard", target: "you", amount: 1 },
+    };
   }
   if ((m = /^(?:then )?discard a card unless (.+)\.$/i.exec(s))) {
     const condition = INTERVENING_IFS[`if ${m[1].toLowerCase()},`];
@@ -10942,6 +10992,24 @@ export function parseEffect(text, outer) {
         if (sameAs) skip = 1;
         continue;
       }
+    }
+    // "Put a card you put into your graveyard this way into your hand" of a
+    // "whenever you manifest dread" trigger (Paranormal Analyst): one of the
+    // cards that manifest dread put there, its batch.
+    if (ctx.dreadBatch === true && /^put a card you put into your graveyard this way into your hand\.$/i.test(sentence)) {
+      const take = {
+        kind: "look-and-choose",
+        zone: "graveyard",
+        min: 1,
+        max: 1,
+        filter: { inSet: "trigger-batch" },
+        destination: "hand",
+        leftover: "stay",
+        prompt: "Put a card you put into your graveyard by manifesting dread into your hand.",
+      };
+      parsed.push(take);
+      hints.push({ sentence, effect: take });
+      continue;
     }
     // "You may return one of them to its owner's hand. If you do, you may
     // activate loyalty abilities of ~ twice this turn rather than only once."
@@ -18561,6 +18629,9 @@ function parseFaceAsWritten(face, ctx = {}) {
             : {}),
           // "One of them": the sources of a batched damage trigger.
           ...(triggers.every((t) => t.on === "deals-damage-batch") ? { damageBatch: true } : {}),
+          // "A card you put into your graveyard this way": the cards the
+          // manifest dread put there, its batch.
+          ...(triggers.every((t) => t.on === "event" && t.event === "manifests-dread") ? { dreadBatch: true } : {}),
         },
         lines,
         i,
@@ -20213,11 +20284,14 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(ability.cost?.exileFromGraveyard?.count === 1 ? { costExiled: true } : {}),
     // A cost that reveals one card: "the revealed card" is that card.
     ...(ability.cost?.reveal?.count === 1 ? { costRevealed: true } : {}),
+    // A cost that returns one permanent: "that land" is it.
+    ...(ability.cost?.returnToHand?.count === 1 ? { costReturned: true } : {}),
     // A cost removing all of a kind of counter: how many is the X.
     ...(ability.cost?.removeCounter?.count === "all" ? { removedIsX: true } : {}),
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(ctx.attackBatch === true ? { attackBatch: true } : {}),
     ...(ctx.damageBatch === true ? { damageBatch: true } : {}),
+    ...(ctx.dreadBatch === true ? { dreadBatch: true } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });
   if (r.effect !== null && theirSlots !== undefined && theirSlots.length > 0) ability.opponentChoosesTargets = theirSlots;
