@@ -1041,6 +1041,14 @@ export interface CardFilter {
    * soulbond's "if … both are **unpaired**" is `paired: false`. Read on the
    * battlefield only: off it, never paired. */
   readonly paired?: boolean;
+  /** Is (or isn't) a **foretold** card (rule 702.143c-d): one in exile,
+   * face down, foretold or become foretold, for as long as it's there —
+   * Alrund, God of the Cosmos's "each foretold card you own in exile"
+   * (`grantPtPerCount.exiled: { ownedBy: "you", foretold: true }`). That it's
+   * foretold, and whose it is, is all a face-down card shows (rule 406.3a):
+   * with `ownedBy` alone beside it, a set's face-down cards are still asked
+   * (`ownerOnly`). */
+  readonly foretold?: boolean;
   /** Is (or isn't) prepared (rule 722.3a) — Woodwork Prodigy's "if this
    * creature isn't prepared". Read on the battlefield only: off it, never. */
   readonly prepared?: boolean;
@@ -3064,6 +3072,10 @@ export function matchesFilter(
     const paired = live !== undefined && pairedPartner(state, live) !== undefined;
     if (paired !== filter.paired) return false;
   }
+  if (filter.foretold !== undefined) {
+    const foretold = live !== undefined && live.zone === "exile" && live.foretold === true;
+    if (foretold !== filter.foretold) return false;
+  }
   if (filter.prepared !== undefined) {
     const prepared = live !== undefined && live.zone === "battlefield" && live.prepared !== undefined;
     if (prepared !== filter.prepared) return false;
@@ -3670,10 +3682,11 @@ export interface AggregateReads {
   readonly battlefieldMatch?: (id: ObjectId, filter: CardFilter) => boolean;
 }
 
-/** Whether a filter asks about nothing but whose a card is — what a card
- * exiled face down (no characteristics, rule 406.3a) can still match. */
+/** Whether a filter asks about nothing but whose a card is, and whether it's
+ * foretold — what a card exiled face down (no characteristics, rule 406.3a)
+ * can still match. */
 export function ownerOnly(filter: CardFilter): boolean {
-  return Object.keys(filter).every((k) => k === "ownedBy");
+  return Object.keys(filter).every((k) => k === "ownedBy" || k === "foretold");
 }
 
 /**

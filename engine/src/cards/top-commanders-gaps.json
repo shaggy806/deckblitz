@@ -2758,7 +2758,8 @@
   "zone:play-from-graveyard-surveilled-this-turn",
   "zone:play-from-graveyard-surveilled-this-turn",
   "trigger:spell-or-ability-put-on-stack",
-  "trigger:paired-creature-dealt-damage"
+  "trigger:paired-creature-dealt-damage",
+  "filter:foretold"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

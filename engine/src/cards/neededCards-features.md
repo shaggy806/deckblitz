@@ -325,6 +325,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Each foretold card you own in exile" — built 2026-11-16
+
+The key `filter:foretold`: the `CardFilter` clause `foretold` (rule 702.143c-d — a card in exile, face down,
+foretold or become foretold), which `ownerOnly` lets a set ask of face-down cards beside `ownedBy`.
+Alrund, God of the Cosmos // Hakka, Whispering Raven (rank 11122): its bonus is two statics with one text
+(`cardsInHand` and `exiled: { ownedBy: "you", foretold: true }`, Multani's shape); its end-step "choose a
+card type" is a modal of the nine card types a library can hold and one for the rest (a choice the rulings
+allow, which sends both cards to the bottom). `test/foretold-filter.test.ts`. Vigean Intuition, authored
+earlier on the same nine modes, lacks that tenth: choosing a type no card in a library can have would put
+all four in the graveyard.
+
 ### "Whenever ~ or a creature it's paired with is dealt damage" — built 2026-11-16
 
 The key `trigger:paired-creature-dealt-damage`: the `CardFilter` clause `pairedWithSource` — the creature the

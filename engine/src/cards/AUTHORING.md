@@ -2187,6 +2187,13 @@ mana cost of the face cast, a land face never: a card that has its own foretell 
 mana cost, no cost given. Dream Devourer's `grantsToHand` foretell gives one the same way
 (`GameObject.foretoldReducedBy`).
 
+"A foretold card" is the filter clause `foretold: true` (rule 702.143c-d: in exile, face down, foretold
+or become foretold): Alrund, God of the Cosmos's "+1/+1 for each card in your hand and each foretold card
+you own in exile" is two statics with one text, `grantPtPerCount: { cardsInHand: true }` and
+`grantPtPerCount: { exiled: { ownedBy: "you", foretold: true } }` (Multani's shape for "each X and each
+Y"). Beside `ownedBy` alone it still reaches a set's face-down cards (`ownerOnly`).
+`foretold-filter.test.ts`.
+
 **Cards chosen for each to have something done to them** ("choose two cards in your hand drawn this
 turn. For each of those cards, pay 4 life or put the card on top of your library" — Sylvan Library): a
 `look-and-choose` with `destination: "stay"`, its `filter`, its own `prompt` (what `"stay"` can't say)
