@@ -8,6 +8,9 @@ import type { PassSettings } from 'protocol'
  * phase track. Per device, in `localStorage`, like the animation settings;
  * the server does the passing, so `GameScreen` sends them whenever they change
  * and whenever a game screen opens.
+ *
+ * The stops alone belong to the game they were set in (`stopsBelongTo`): a
+ * reload of that game keeps them, the next game starts with none.
  */
 
 /** The steps a stop can go on — the ones a player gets priority in. Mirrors
@@ -85,6 +88,40 @@ export function setPassSettings(next: Partial<PassSettings>): void {
     // Not remembered past this page load; still applies now.
   }
   for (const l of listeners) l()
+}
+
+const STOPS_GAME_KEY = 'mtg.pass.game'
+
+function readStopsGame(): string | null {
+  try {
+    return window.localStorage.getItem(STOPS_GAME_KEY)
+  } catch {
+    return null
+  }
+}
+
+/** The game the stops were set in, as `stopsBelongTo` was last told. */
+let stopsGame: string | null = readStopsGame()
+
+/**
+ * Says which game this device is playing, so the stops don't carry over into
+ * the next one (the user, 2026-11-15): the first frame of a game other than
+ * the one the stops were set in clears them, and a reload of the same game
+ * keeps them. `game` names a room and which of its games it is, a rematch
+ * being a new one. The other preferences are the device's, not a game's, and
+ * stay.
+ */
+export function stopsBelongTo(game: string): void {
+  if (game === stopsGame) return
+  stopsGame = game
+  try {
+    window.localStorage.setItem(STOPS_GAME_KEY, game)
+  } catch {
+    // Not remembered past this page load: a reload then clears the stops.
+  }
+  if (current.stops.mine.length > 0 || current.stops.theirs.length > 0) {
+    setPassSettings({ stops: { mine: [], theirs: [] } })
+  }
 }
 
 /** Flags or unflags `step` as a stop on your own turns (`mine`) or on

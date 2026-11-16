@@ -126,6 +126,7 @@ import { highlightEvent, highlightObject } from './ui/highlight.ts'
 import { SeatMenu } from './ui/SeatMenu.tsx'
 import { TriggerOrder } from './ui/TriggerOrder.tsx'
 import { usePassSettings } from './game/passSettings.ts'
+import { printingSeen } from './game/seenPrintings.ts'
 import { MotionControl } from './ui/MotionControl.tsx'
 import { PlayerPanel } from './ui/PlayerPanel.tsx'
 import { CardTile } from './ui/CardTile.tsx'
@@ -1826,6 +1827,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
                 abilitySourcesOf(view.events),
               )}
               seats={game.seats}
+              printingOf={printingSeen}
               onSelect={(event) => {
                 // The board is in view beside the panel: point the entry's
                 // cards and players out on it — or, for a card since gone to

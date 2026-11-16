@@ -35,6 +35,9 @@ import type {
 import { prefetchArt } from '../ui/art.ts'
 import { randomBotDecks } from '../lobby/randomBotDeck.ts'
 import { isRematch } from './rematch.ts'
+import { stopsBelongTo } from '../game/passSettings.ts'
+import { notePrintings } from '../game/seenPrintings.ts'
+import { rememberBotSpeed, rememberedBotSpeed } from '../ui/botSpeeds.ts'
 import { NO_EVENT_LOG, receiveFrame } from './eventLog.ts'
 import type { EventLogState } from './eventLog.ts'
 import { FIRST_GAME_PARAM, LESSON_PARAM } from '../tutorial/lesson.ts'
@@ -461,6 +464,10 @@ export function useNetworkGame(): NetworkGame {
   /** The host token sent with `create-room`, kept until `room-created` says
    * which room it belongs to. */
   const pendingHostTokenRef = useRef<string | null>(null)
+  /** A waiting room this tab just made, until its first seat board: where
+   * the bot speed last picked on this device is asked for
+   * (`rememberedBotSpeed`). */
+  const newRoomRef = useRef<string | null>(null)
   /** Set by `createBuilder` until its room is joined: a builder room seats
    * its creator at once, with no seat board to choose from. */
   const pendingBuilderRef = useRef(false)
@@ -680,6 +687,9 @@ export function useNetworkGame(): NetworkGame {
           if (pendingHostTokenRef.current !== null) {
             storeHostToken(message.roomId, pendingHostTokenRef.current)
             pendingHostTokenRef.current = null
+            // A lobby's room: a blitz's sets its own speed, a lesson keeps
+            // the server's.
+            if (pendingBlitzRef.current === null && pendingTutorialRef.current === null) newRoomRef.current = message.roomId
           }
           if (pendingBlitzRef.current !== null) setBlitzRoomId(message.roomId)
           if (pendingTutorialRef.current !== null) pendingTutorialRef.current.seat = message.seat ?? null
@@ -740,10 +750,22 @@ export function useNetworkGame(): NetworkGame {
                 const botName = blitz.botNames?.[i] ?? undefined
                 send({ type: 'add-bot', roomId: message.roomId, seat: s.player, deck: blitz.bots[i], ...(botName ? { displayName: botName } : {}) })
               })
-              if (blitz.botSpeed !== undefined) send({ type: 'set-bot-speed', roomId: message.roomId, speed: blitz.botSpeed })
+              // A lobby's game keeps the lobby's speed; a blitz plays at the
+              // one last picked on this device.
+              const speed = blitz.botSpeed ?? rememberedBotSpeed()
+              if (speed !== null && speed !== message.botSpeed) send({ type: 'set-bot-speed', roomId: message.roomId, speed })
               send({ type: 'start-game', roomId: message.roomId })
             }
             return
+          }
+          // A waiting room this tab just made opens at the speed its host
+          // last picked, not at the server's Slow every time.
+          if (newRoomRef.current === message.roomId) {
+            newRoomRef.current = null
+            const speed = rememberedBotSpeed()
+            if (speed !== null && speed !== message.botSpeed && message.isHost && message.pending === true) {
+              send({ type: 'set-bot-speed', roomId: message.roomId, speed })
+            }
           }
           // A tutorial room, just made: claim the seat it kept for this tab.
           // Its game is already dealt, so straight to the first frame.
@@ -864,6 +886,10 @@ export function useNetworkGame(): NetworkGame {
           }
           lastGameRef.current = game
           lastOverRef.current = view.result.over
+          // A player's priority stops are this game's, not the next one's.
+          if (message.spectating !== true) stopsBelongTo(`${message.roomId}:${message.game}`)
+          // The History log draws a card in the printing a frame showed it in.
+          notePrintings(`${message.roomId}:${message.game}`, view.objects)
           setGameNumber(message.game)
           setSpectating(message.spectating === true)
           setCanRematch(message.canRematch === true)
@@ -1084,6 +1110,8 @@ export function useNetworkGame(): NetworkGame {
     (speed: BotSpeed) => {
       const id = roomIdRef.current
       if (id === null) return
+      // The next room this device makes opens at it too.
+      rememberBotSpeed(speed)
       send({ type: 'set-bot-speed', roomId: id, speed })
     },
     [send],
