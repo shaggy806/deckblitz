@@ -2754,7 +2754,8 @@
   "effect:put-onto-battlefield-multiple-counter-kinds",
   "trigger:manifests-dread",
   "cost:returned-for-cost-lki",
-  "scope:each-player-with-life-total"
+  "scope:each-player-with-life-total",
+  "zone:play-from-graveyard-surveilled-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

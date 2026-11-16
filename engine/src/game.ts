@@ -2804,7 +2804,13 @@ export class Game {
   /** The cards put into graveyards so far in the simultaneous move under
    * way (see `withGraveyardEnterBatch`), each with the zone it came from.
    * Not game state: it only ever spans one synchronous call. */
-  private graveyardEnterBatch: { object: ObjectId; from: ZoneType }[] | null = null;
+  private graveyardEnterBatch: { object: ObjectId; from: ZoneType; how?: "surveil" }[] | null = null;
+  /** What is putting cards from a library into graveyards just now, when the
+   * zone doesn't say: `"surveil"` while a surveil's cards move (rule
+   * 701.25a), so each arrival — and its journal entry — says so (Eye of
+   * Duskmantle's "cards in your graveyard you've surveilled this turn"). Not
+   * game state: it only ever spans one synchronous call. */
+  private graveyardArrivalHow: "surveil" | null = null;
   /** The same for cards put into exile, collected alongside — see
    * `withGraveyardEnterBatch`. */
   private exileEnterBatch: { object: ObjectId; from: ZoneType; owner: PlayerId }[] | null = null;
@@ -5384,7 +5390,11 @@ export class Game {
     // cost" is the only way it allows (Inside Information): no paid variant.
     // So too a static's, when nothing else lets the card be cast (Valgavoth,
     // Terror Eater).
-    if (via === "impulse" && this.playLifeMode(player, card, face ?? 0) === "only") {
+    // And a graveyard permission's (Eye of Duskmantle), which the cast names.
+    if (
+      (via === "impulse" && this.playLifeMode(player, card, face ?? 0) === "only") ||
+      (via === "graveyard-permission" && this.graveyardPaysLife(player, card, face ?? 0))
+    ) {
       variants.length = 0;
     }
     // So is a library-top permission's (Bolas's Citadel), unless another
@@ -21314,6 +21324,9 @@ export class Game {
     }
     if (via === "impulse" && !altCost && this.playLifeMode(player, cardId, face ?? 0) === "only") {
       return `${def.name} may be cast from exile only by paying life equal to its mana value`;
+    }
+    if (via === "graveyard-permission" && !altCost && this.graveyardPaysLife(player, cardId, face ?? 0)) {
+      return `${def.name} may be cast from a graveyard this way only by paying life equal to its mana value`;
     }
     if (via === "library-top" && !altCost && this.libraryTopPaysLifeOnly(player, cardId, face)) {
       return `${def.name} may be cast from the top of the library only by paying life equal to its mana value`;
@@ -46356,9 +46369,16 @@ controlledBy,
     this.state.awaiting = null;
 
     if (mode === "surveil") {
-      this.withGraveyardEnterBatch(() => {
-        for (const id of awayOrdered) this.moveObject(id, "graveyard");
-      });
+      // Each card that lands is one its owner surveilled into the graveyard
+      // (701.25a): its arrival says so.
+      this.graveyardArrivalHow = "surveil";
+      try {
+        this.withGraveyardEnterBatch(() => {
+          for (const id of awayOrdered) this.moveObject(id, "graveyard");
+        });
+      } finally {
+        this.graveyardArrivalHow = null;
+      }
     }
     this.emit({
       type: "scried",
@@ -48124,6 +48144,17 @@ controlledBy,
     const life = options.filter((o) => o.terms.byPayingLife === true);
     if (life.length === 0) return null;
     return life.length === options.length ? "only" : "may";
+  }
+
+  /** Whether a cast of `cardId` from a graveyard is under a permission that
+   * says "pay life equal to its mana value rather than pay its mana cost"
+   * (Eye of Duskmantle): the only way that permission allows it (rule
+   * 118.9a). A graveyard cast names its permission (`castGrantScope`), so
+   * another reaching the card is a variant of its own. */
+  private graveyardPaysLife(player: PlayerId, cardId: ObjectId, face: number): boolean {
+    const scope = this.castGrantScope;
+    if (scope === null || scope.card !== cardId) return false;
+    return this.findGraveyardGrant(player, cardId, face, scope.grant)?.permission.byPayingLife === true;
   }
 
   /** Whether a permission lets `cardId` be cast without paying its mana cost:
@@ -58754,10 +58785,17 @@ controlledBy,
       case "cards-put-into-graveyard":
         // From the battlefield, the leave already wrote it, with the card as
         // it left.
-        for (const { object: id, from } of event.arrivals) {
+        for (const { object: id, from, how } of event.arrivals) {
           const card = this.state.objects[id];
           if (card === undefined || from === "battlefield") continue;
-          add({ kind: "to-graveyard", player: card.owner, object: id, from, arrived: card.zoneChangeCount ?? 0 });
+          add({
+            kind: "to-graveyard",
+            player: card.owner,
+            object: id,
+            from,
+            arrived: card.zoneChangeCount ?? 0,
+            ...(how !== undefined ? { how } : {}),
+          });
         }
         return;
       case "energy-changed":
@@ -59346,6 +59384,10 @@ controlledBy,
     const face0 = Math.max(0, card?.faces?.indexOf(def.name) ?? 0);
     const staticLife = via === "impulse" && caster !== undefined ? this.playLifeMode(caster, cardId, face0) : null;
     if (staticLife === "only") return payLifeOnly();
+    // A graveyard permission's (Eye of Duskmantle): the one the cast names.
+    if (via === "graveyard-permission" && caster !== undefined && this.graveyardPaysLife(caster, cardId, face0)) {
+      return payLifeOnly();
+    }
     // The same from the top of the library (Bolas's Citadel) — the only way
     // when no other permission reaches the card; beside one that does
     // (Future Sight), one more way, after every other.
@@ -69604,10 +69646,12 @@ controlledBy,
    * simultaneous move under way, announced when that's done — or, on its
    * own, a move of its own, announced now. */
   private noteGraveyardArrival(id: ObjectId, from: ZoneType): void {
+    const how = from === "library" ? this.graveyardArrivalHow : null;
+    const arrival = how === null ? { object: id, from } : { object: id, from, how };
     if (this.graveyardEnterBatch !== null) {
-      this.graveyardEnterBatch.push({ object: id, from });
+      this.graveyardEnterBatch.push(arrival);
     } else {
-      this.emit({ type: "cards-put-into-graveyard", arrivals: [{ object: id, from }] });
+      this.emit({ type: "cards-put-into-graveyard", arrivals: [arrival] });
     }
   }
 

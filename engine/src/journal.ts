@@ -202,7 +202,8 @@ export interface JournalEntry {
   /** The kind of counter (`counters-put`). */
   readonly counter?: string;
   /** The kind's own qualifier (`scried`: scry or surveil; `activated`: the
-   * ability's kind; `targeted`: a spell's or an ability's). */
+   * ability's kind; `targeted`: a spell's or an ability's; `to-graveyard`:
+   * `"surveil"` for a card surveilled there). */
   readonly how?: string;
   /** Which ability of which object (`activated`, `triggered`, `resolved`,
    * `did`, `done`): an opaque key, compared for equality, as `Game` builds
@@ -330,6 +331,12 @@ export type JournalWhat =
   | "descended"
   | "discarded"
   | "to-graveyard"
+  /** A card its owner surveilled into their graveyard (rule 701.25a), the
+   * `to-graveyard` entries a surveil wrote (`how: "surveil"`): with a
+   * `journaled` clause, "cards in your graveyard you've surveilled this
+   * turn" (Eye of Duskmantle) — not one seen while surveilling, left on top
+   * and put there later by other means (its ruling). */
+  | "surveilled"
   /** A source dealt combat damage to this player, one entry a source a combat
    * damage step: the list is the damaged player's. */
   | "combat-damaged-by"
@@ -441,6 +448,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   descended: { kind: "to-graveyard", match: (e, read) => isPermanentCard(e, read) },
   discarded: { kind: "discarded" },
   "to-graveyard": { kind: "to-graveyard" },
+  surveilled: { kind: "to-graveyard", match: (e) => e.how === "surveil" },
   "combat-damaged-by": {
     kind: "damage",
     whose: "target",

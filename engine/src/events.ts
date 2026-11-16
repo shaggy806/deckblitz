@@ -1838,9 +1838,12 @@ export type GameEvent =
        * each with the zone it came from. Once per simultaneous move (a
        * wrath, one state-based sweep, one mill or discard); a move of its
        * own is its own. Tokens aren't cards and never appear. The hook for
-       * `put-into-graveyard` triggers. */
+       * `put-into-graveyard` triggers. An arrival's `how` is what put it
+       * there when the zone doesn't say: `"surveil"`, a card its owner
+       * surveilled into the graveyard (rule 701.25a) — "cards in your
+       * graveyard you've surveilled this turn" (Eye of Duskmantle). */
       readonly type: "cards-put-into-graveyard";
-      readonly arrivals: readonly { readonly object: ObjectId; readonly from: ZoneType }[];
+      readonly arrivals: readonly { readonly object: ObjectId; readonly from: ZoneType; readonly how?: "surveil" }[];
     })
   | (Base & {
       /** Permanents went from the battlefield to graveyards (rule 700.4), once

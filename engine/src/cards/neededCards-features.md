@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Cards you've surveilled this turn, played from the graveyard for life — built 2026-11-16
+
+The key `zone:play-from-graveyard-surveilled-this-turn`. A surveil's cards are tagged as they land
+(`cards-put-into-graveyard`'s arrival `how: "surveil"`, rule 701.25a), so their `to-graveyard` journal
+entries say so; the journal word `surveilled` reads them, and a `journaled: { what: "surveilled", by: "you" }`
+clause is "cards in your graveyard you've surveilled this turn" — the same objects still (400.7), never one
+seen, left on top and put there later (the ruling). A graveyard permission's `byPayingLife` now works as
+from exile and a library's top: the only way under it (118.9a; X 0, 107.3b), read from the permission the
+cast names. Eye of Duskmantle (rank 11084). `test/surveilled-this-turn.test.ts`.
+
 ### Another player's choice inside a mana ability — built 2026-11-16
 
 The key `effect:other-player-adds-mana-choice`: `add-mana`'s `theyChoose`, beside `playerOfChoice`. Named
