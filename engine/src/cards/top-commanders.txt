@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-974 already implemented / 26 missing
+975 already implemented / 25 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -696,7 +696,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  690  Imskir Iron-Eater                               4843 decks  {6}{B}{R}        Legendary Creature — Demon
 [x]  691  Mogis, God of Slaughter                         4843 decks  {2}{B}{R}        Legendary Enchantment Creature — God
 [x]  692  Smaug the Magnificent                           4828 decks  {2}{R}{R}        Legendary Creature — Dragon
-[ ]  693  Leonardo da Vinci                               4827 decks  {2}{U}           Legendary Creature — Human Artificer
+[x]  693  Leonardo da Vinci                               4827 decks  {2}{U}           Legendary Creature — Human Artificer
 [x]  694  Zacama, Primal Calamity                         4823 decks  {6}{R}{G}{W}     Legendary Creature — Elder Dinosaur
 [x]  695  Agatha of the Vile Cauldron                     4821 decks  {R}{G}           Legendary Creature — Human Warlock
 [x]  696  Azami, Lady of Scrolls                          4809 decks  {2}{U}{U}{U}     Legendary Creature — Human Wizard
