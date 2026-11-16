@@ -27,6 +27,10 @@ export interface CreatureTypePickerProps {
   /** At most this many results drawn at once: thousands of card names are
    * too many buttons for a low-end laptop, and a search narrows them. */
   readonly maxShown?: number
+  /** What the choice is for, in place of "choose a creature type", when the
+   * engine says ("Choose a creature type to replace with Vampire" — New
+   * Blood; Artificial Evolution asks twice, the word out and the word in). */
+  readonly prompt?: string
 }
 
 /**
@@ -67,6 +71,7 @@ export function CreatureTypePicker({
   suggestedLabel = 'In your deck and on the board',
   seen,
   maxShown,
+  prompt,
 }: CreatureTypePickerProps) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -111,7 +116,8 @@ export function CreatureTypePicker({
       <div className="zone-viewer-box ctype-box" role="dialog" aria-label={`Choose ${noun.one}`}>
         <div className="zone-viewer-head">
           <h2>
-            {sourceName} — choose {noun.one}
+            {sourceName} —{' '}
+            {prompt !== undefined ? prompt.charAt(0).toLowerCase() + prompt.slice(1) : `choose ${noun.one}`}
           </h2>
           <button type="button" onClick={onCollapse}>
             View board

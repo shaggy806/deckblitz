@@ -8523,3 +8523,17 @@ A board's player with a card that puts stickers plays with the first three of Un
 ### _____ Goblin: name stickers at a four-player table
 - **Do:** In this 4-player game, hover the 🏷️ on your player panel. Then cast _____ Goblin and pick "Eldrazi", then "Eldrazi Goblin". Then cast Gray Ogre.
 - **Expect:** The tooltip lists your three sticker sheets and their name stickers, none "(on)". The banner fits, the Goblin becomes Eldrazi Goblin, its three {R} pay for Gray Ogre, and the 🏷️ tooltip now shows "Eldrazi (on)". Nobody else has a 🏷️.
+
+## One creature type for another in a card's text (2026-11-16)
+
+### New Blood: Bob's Goblin King becomes your Vampire lord
+- **Do:** Cast New Blood at Bob's Goblin King, tapping your Vampire Nighthawk. In the creature type picker, pick Goblin.
+- **Expect:** The picker reads "New Blood — choose a creature type to replace with Vampire", with Goblin first among the suggestions and no Vampire anywhere in it. Goblin King comes to your side, a Vampire, its text "Other Vampires get +1/+1 and have mountainwalk."; your Nighthawk is 3/4 with mountainwalk, and Bob's Goblin Piker is back to 2/1.
+
+### New Blood: stealing a creature in a 4-player game
+- **Do:** In this 4-player game, cast New Blood at Carol's Krenko, Mob Boss, tapping your Vampire Nighthawk, and pick Goblin.
+- **Expect:** The picker fits the screen. Krenko comes to your side as a Vampire Warrior, its text "{T}: Create X 1/1 red Vampire creature tokens, where X is the number of Vampires you control." Nobody else's creatures change.
+
+### Artificial Evolution: two creature types, the second never Wall
+- **Do:** Cast Artificial Evolution at Bob's Goblin King. Pick Goblin, then search the second picker for "Wall" before picking Elf.
+- **Expect:** The first picker reads "Artificial Evolution — choose a creature type to replace", the second "Artificial Evolution — choose a creature type to replace Goblin with", and the second's search finds no Wall and no Goblin. Goblin King stays Bob's, an Elf now, its text "Other Elves get +1/+1 and have mountainwalk."; Bob's Llanowar Elves is 2/2 with mountainwalk.

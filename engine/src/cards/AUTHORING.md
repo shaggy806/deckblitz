@@ -2489,7 +2489,7 @@ each damage would be dealt, rule 615.1),
 
 `become-color { target, colors, duration, inAddition? }` (layer 5 — the Laces: `{ target: 0, colors: ["B"], duration: "permanent" }` on a `{ kind: "spell-or-permanent" }` target; Crimson Wisps' `"end-of-turn"`; Indigo Faerie's "becomes blue in addition to its other colors until end of turn" adds `inAddition: true`, read by the scaffolder). Without `inAddition` its colours are replaced, not added to; a spell keeps them while it's on the stack, and the permanent it becomes has its own (400.7). The scaffolder reads both sentences.
 
-`change-text { target, words: "color" | "land-type" | "color-or-land-type", duration }` (layer 3, rule 612 — Sleight of Mind's "change the text of target spell or permanent by replacing all instances of one color word with another" is `{ target: 0, words: "color", duration: "permanent" }` on a `{ kind: "spell-or-permanent" }` target; Magical Hack's `"land-type"`; Mind Bend's "… or one basic land type with another" `"color-or-land-type"` on `"permanent"`; Crystal Spray's "until end of turn" `"end-of-turn"`). As it resolves its controller picks the word to replace, then a different one of the same kind (the `choose-creature-type` menu); `from`/`to` are filled in by those answers — never write them. Every instance in the object's own text changes (`text-change.ts`): filters, protection, a static's scope, costs, landwalk, a spell's target restriction (re-checked as it resolves), its type line's land types (a Forest made an Island taps for {U}); never a name or a mana symbol (612.2). A spell's change stays on the permanent it becomes (400.7a). Not yet: a token its changed text creates keeps its own colours. The scaffolder reads all four sentences.
+`change-text { target, words: "color" | "land-type" | "color-or-land-type" | "creature-type", to?, notTo?, duration }` (layer 3, rule 612 — Sleight of Mind's "change the text of target spell or permanent by replacing all instances of one color word with another" is `{ target: 0, words: "color", duration: "permanent" }` on a `{ kind: "spell-or-permanent" }` target; Magical Hack's `"land-type"`; Mind Bend's "… or one basic land type with another" `"color-or-land-type"` on `"permanent"`; Crystal Spray's "until end of turn" `"end-of-turn"`; Artificial Evolution's "one creature type with another. The new creature type can't be Wall." `words: "creature-type", notTo: ["Wall"]`; New Blood's "… with Vampire" `to: "Vampire"`). As it resolves its controller picks the word to replace, then a different one of the same kind (the `choose-creature-type` menu — every creature type is the catalog picker, the target's own types suggested first); `from` is filled in by that answer, and `to` too unless the card names it — never write `from`. Every instance in the object's own text changes (`text-change.ts`): filters, protection, a static's scope, costs, landwalk, a spell's target restriction (re-checked as it resolves), its type line's land types and creature types (a Forest made an Island taps for {U}, a Goblin made a Vampire is no Goblin); a creature type also in "non-Human", "becomes a Zombie", amass's type, typecycling, the tokens it makes and their names ("a 1/1 red Goblin" becomes a "Vampire Token", 612.2a), a gift's Fish, a would-create-token replacement's tokens (Chatterfang's Squirrels) and what a face-down permanent is listed as — but only where the ability's own line prints the word: soulshift's Spirit, afterlife's Spirits, embalm's Zombie and "outlaw"'s five types are in reminder text or the rules, and stay. Never a name or a mana symbol (612.2). A spell's change stays on the permanent it becomes (400.7a). A token its changed text creates takes its colour words and creature types (and their own text, as copiable values: a copy of it is the same). The scaffolder reads all six sentences.
 
 `visibility` (a `StaticAbility`, read by `viewFor`, so it changes only what a player knows): `handsRevealed: "you" | "opponents" | "each-player"` — "your opponents play with their hands revealed" (Telepathy, rules 701.18c, 701.20c), "players …" (Wandering Eye), to every player; `libraryTopRevealed`, the same for the top card (Wizened Snitches, rule 401.5; the "you" form is usually the card's `revealsOwnLibraryTop`); `looksAtFaceDownCreatures: true` — "you may look at face-down creatures you don't control any time" (Keeper of the Lens, Found Footage), its controller alone, creatures on the battlefield alone, never a face-down spell (the rulings); `looksAtOwnLibraryTop: true`, the card field's look as a static a permanent has by a grant (Glowcap Lantern). Grantable like any static: Lumbering Laundry's "until end of turn" is a `grant-static` on itself.
 
@@ -8105,13 +8105,12 @@ Delete an entry in the same commit as the feature that retires it.
   from a hand, a graveyard permission, a `cast-now` — they're whole.
 - **Text-change** (rule 612): exchanging text boxes is built (612.5 —
   `exchangeTextOnEnter`, Deadpool, Trading Card; `GameObject.textFrom`, and
-  every ability read goes through `rulesTextName`). Word replacement isn't
-  (612.2 — "change the text of target permanent by replacing all instances of
-  one creature type with another": Artificial Evolution, Mind Bend, Magical
-  Hack, New Blood); the partial `change-text` effect, which only ever changed
-  the type line from a fixed menu, was removed on 2026-10-09. Exchange of
-  Words (its "for as long as this enchantment remains on the battlefield"
-  duration) isn't built.
+  every ability read goes through `rulesTextName`), and so is word
+  replacement (612.2 — `change-text`: colour words, basic land types and,
+  since 2026-11-16, creature types — Sleight of Mind, Magical Hack, Mind
+  Bend, Artificial Evolution, New Blood). Exchange of Words (its "for as
+  long as this enchantment remains on the battlefield" duration) and Swirl
+  the Mists' static over every object's text aren't built.
 - **Conditional statics / intervening-ifs** are limited to the
   `StaticCondition` kinds the union lists (`controls` / `opponent-controls` /
   `your-turn` / `threshold` / `delirium` / `metalcraft` / … — read the type).
@@ -8189,7 +8188,9 @@ creature's type line, not the creature-type words in its rules text, and only
 from a fixed menu of 12 types, and doing it properly — layer-3 text changing
 across a card's abilities, for spells too — was more than one card rated. The
 `change-text` effect and `choose-text` decision it used were removed on
-2026-10-09. The fixes: Rydia, Summoner of Mist (the Summon
+2026-10-09. (It came back whole on 2026-11-16, with creature types in the
+rebuilt `change-text`: `docs/plans/text-change-creature-types.md`.) The
+fixes: Rydia, Summoner of Mist (the Summon
 ability — Saga reanimation, `{X}` in a target filter); Saw in Half (half the
 creature's P/T as a copy's `basePt`, and the `"died"` this-way gate — it had
 made two 1/1s even of an indestructible creature); Finale of Devastation

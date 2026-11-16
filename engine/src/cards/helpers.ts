@@ -22,6 +22,9 @@ export { BASIC_LAND_TYPE_CHOICES, LAND_TYPES, PLANESWALKER_TYPES } from "../subt
  * `powerParity` reads, for a `chooseOnEnter` or a `choose-creature-type`'s
  * `options`. */
 export { ODD_OR_EVEN } from "../filter.js";
+/** Every creature type (rule 205.3m) — what the scaffolder
+ * (`scripts/oracle-parse.mjs`) reads a "with Vampire" or "can't be Wall" by. */
+export { CREATURE_TYPES } from "../creature-types.js";
 
 /**
  * "Search your graveyard, hand, **and/or** library for …" (Boonweaver Giant,

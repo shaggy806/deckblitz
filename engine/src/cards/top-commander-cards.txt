@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4998 already implemented / 2 missing (marks refreshed 2026-11-15)
+4999 already implemented / 1 missing (marks refreshed 2026-11-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4438,7 +4438,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4445  Gollum, Patient Plotter                  {1}{B}           Legendary Creature — Halfling Horror
 [x]  4446  Dusk Legion Zealot                       {1}{B}           Creature — Vampire Soldier
 [x]  4447  Akroan Horse                             {4}              Artifact Creature — Horse
-[ ]  4448  New Blood                                {2}{B}{B}        Sorcery
+[x]  4448  New Blood                                {2}{B}{B}        Sorcery
 [x]  4449  Vindictive Vampire                       {3}{B}           Creature — Vampire
 [x]  4450  Flickering Ward                          {W}              Enchantment — Aura
 [x]  4451  Gigantosaurus                            {G}{G}{G}{G}{G}  Creature — Dinosaur

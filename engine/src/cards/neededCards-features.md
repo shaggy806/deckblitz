@@ -2356,6 +2356,29 @@ Magical Hack, Mind Bend, Crystal Spray. Left: a token the changed text
 creates keeps its definition's colours (612.4); Swirl the Mists' static
 changing every object's colour words; Sarpadian Empires' option words.
 
+### Text-changing effects: one creature type for another — built 2026-11-16
+
+`effect:text-change-creature-type-words`, a major feature the user approved
+for author-top-cards batch 333 (design record:
+`docs/plans/text-change-creature-types.md`). `change-text`'s `words` takes
+`"creature-type"` (the whole catalog, the target's own types suggested
+first), a fixed `to` ("with Vampire") and `notTo` ("can't be Wall"). A
+creature type changes in every creature-type field its ability's own line
+prints (`CREATURE_TYPE_WORD_KEYS`: filters, "non-", "becomes a …", amass,
+typecycling, "other than Wall"…) and on the type line (`changeSubtypes`);
+a keyword's or a batch word's type (soulshift, afterlife, embalm,
+"outlaw") is in reminder text and stays. The tokens a changed text makes
+take the type and the name it gives them (612.2a, 612.4 — copiable text
+changes and name, `tokenTextChangesFor`): `create-token`, a gift's token,
+a would-create-token replacement's (the name carries the change,
+`changedTokenName`), and a face-down permanent's listed types
+(`GameObject.faceDown.textChanges` — land types too, so Magical Hack now
+reaches Yedora's Forest land). Pool audits pin the fields and the skipped
+keyword words. Key: effect:text-change-creature-type-words. Proving cards:
+New Blood, Artificial Evolution (back in the pool). Left: Sarpadian
+Empires' option labels (values, kept); a bot's token valuation reads the
+token's definition, not the changed one.
+
 ### The card revealed for a cost, and cards revealed that share a colour — built 2026-10-31
 
 The need-keys Phase 2 family `cost:reveal-card-as-additional-cost`, features

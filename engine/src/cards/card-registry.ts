@@ -7,7 +7,7 @@
  * the pool (see `client.ts`).
  */
 
-import { changeDefinitionText, parseTextChangedKey, TEXT_CHANGED_PREFIX } from "../text-change.js";
+import { changeDefinitionText, parseTextChangedKey, TEXT_CHANGED_PREFIX, tokenNamedByTypes } from "../text-change.js";
 import type { CardDefinition } from "./define.js";
 
 /** The prefix of a merged permanent's combined definition's key (rule 730 —
@@ -63,7 +63,14 @@ export class CardRegistry {
     const known = this.textChanged.get(key);
     if (known !== undefined) return known;
     const { base, changes } = parseTextChangedKey(key);
-    const def = changeDefinitionText(this.get(base), changes);
+    // A token it makes with a name of its own ("named Llanowar Elves") keeps
+    // that name in its text (rule 612.2).
+    const tokenNamed = (token: string): string | undefined => {
+      if (!this.byName.has(token)) return undefined;
+      const made = this.byName.get(token)!;
+      return tokenNamedByTypes(made) ? undefined : (made.tokenName ?? made.name.replace(/ Token$/, ""));
+    };
+    const def = changeDefinitionText(this.get(base), changes, tokenNamed);
     this.textChanged.set(key, def);
     return def;
   }

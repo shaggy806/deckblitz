@@ -12842,4 +12842,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- One creature type for another in a card's text (2026-11-16) -----------
+  preset(
+    "New Blood: Bob's Goblin King becomes your Vampire lord",
+    board({
+      you: { bf: ['Vampire Nighthawk', 'Swamp*4'], hand: ['New Blood'] },
+      opp: { bf: ['Goblin King', 'Goblin Piker'] },
+    }),
+  ),
+  preset(
+    'New Blood: stealing a creature in a 4-player game',
+    board({
+      you: { bf: ['Vampire Nighthawk', 'Swamp*4'], hand: ['New Blood'] },
+      opp: [{ bf: ['Goblin Piker'] }, { bf: ['Krenko, Mob Boss'] }, { bf: ['Llanowar Elves'] }],
+    }),
+  ),
+  preset(
+    'Artificial Evolution: two creature types, the second never Wall',
+    board({
+      you: { bf: ['Island'], hand: ['Artificial Evolution'] },
+      opp: { bf: ['Goblin King', 'Llanowar Elves'] },
+    }),
+  ),
 ]

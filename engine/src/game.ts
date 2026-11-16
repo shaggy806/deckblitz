@@ -649,7 +649,15 @@ import {
   thisWayEntries,
 } from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
-import { textWords, tokenColorsAfter, type TextChange } from "./text-change.js";
+import {
+  changeSubtypes,
+  creatureTypeWordsIn,
+  splitChangedTokenName,
+  textWords,
+  tokenNameWithChanges,
+  tokenTextChangesFor,
+  type TextChange,
+} from "./text-change.js";
 import type { TargetCopies, TargetCountRange, TargetTaxShare } from "./target-count.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import {
@@ -1599,6 +1607,8 @@ interface EnterOptions {
   /** …with the characteristics its effect lists instead of the 2/2's (rule
    * 708.2 — "It's a 2/2 Cyberman artifact creature"). */
   readonly faceDownAs?: FaceDownAs;
+  /** …as a text change made those words (`EnterTypes.faceDownTextChanges`). */
+  readonly faceDownTextChanges?: readonly TextChange[];
   /** It enters melded with the other card of its meld pair (rules 701.42a,
    * 712.14c): one permanent, the combined back face up from the start, so
    * its replacements and every trigger that sees it arrive see that face.
@@ -1619,10 +1629,26 @@ interface EnterOptions {
 /** The {@link EnterOptions} of an entry an effect puts face down (its
  * {@link EnterTypes}' `faceDown` — rule 708.3): the `"effect"` kind, with
  * the characteristics it lists (708.2). Nothing when it enters face up. */
-function faceDownEntry(types: EnterTypes | undefined): Pick<EnterOptions, "faceDown" | "faceDownAs"> {
+function faceDownEntry(types: EnterTypes | undefined): Pick<EnterOptions, "faceDown" | "faceDownAs" | "faceDownTextChanges"> {
   const down = types?.faceDown;
   if (down === undefined) return {};
-  return { faceDown: "effect", ...(down !== true ? { faceDownAs: down } : {}) };
+  return {
+    faceDown: "effect",
+    ...(down !== true ? { faceDownAs: down } : {}),
+    ...(down !== true && types?.faceDownTextChanges !== undefined ? { faceDownTextChanges: types.faceDownTextChanges } : {}),
+  };
+}
+
+/** A face-down entry's `GameObject.faceDown`: its kind, what its effect
+ * listed, and what a text change made of those words. */
+function faceDownStatus(kind: FaceDownKind, enter: EnterOptions): NonNullable<GameObject["faceDown"]> {
+  return {
+    kind,
+    ...(enter.faceDownAs !== undefined ? { as: enter.faceDownAs } : {}),
+    ...(enter.faceDownAs !== undefined && enter.faceDownTextChanges !== undefined
+      ? { textChanges: [...enter.faceDownTextChanges] }
+      : {}),
+  };
 }
 
 /** The {@link EnterOptions} for what an effect says a permanent is as it
@@ -40046,6 +40072,10 @@ export class Game {
         let options: readonly string[];
         let sentinel: string;
         let prompt: string;
+        // Every creature type is a catalog (a search box), led by the types
+        // the target's own text names (New Blood).
+        let catalog = false;
+        let suggestFirst: readonly string[] | undefined;
         if (spec.value === "color") {
           options = COLORS;
           sentinel = CHOSEN_COLOR;
@@ -40057,9 +40087,16 @@ export class Game {
         } else if (spec.value === "text-word") {
           // A text change's word (rule 612): any of the kind, there in the
           // text or not, but never the word it replaces.
-          options = textWords(spec.words ?? "color").filter((w) => w !== spec.except);
+          const except = typeof spec.except === "string" ? [spec.except] : (spec.except ?? []);
+          options = textWords(spec.words ?? "color").filter((w) => !except.includes(w));
           sentinel = CHOSEN_TEXT_WORD;
           prompt = spec.prompt ?? "Choose a word";
+          catalog = spec.words === "creature-type";
+          const ref = spec.on !== undefined ? targets[spec.on] : undefined;
+          const on = ref?.kind === "object" ? this.state.objects[ref.object] : undefined;
+          if (catalog && on !== undefined) {
+            suggestFirst = creatureTypeWordsIn(this.registry.get(rulesTextName(on))).filter((t) => options.includes(t));
+          }
         } else {
           // A kind of counter on the target, or on a permanent matching
           // `among`: only kinds actually there can be chosen, and with none
@@ -40095,8 +40132,9 @@ export class Game {
           player: controller,
           source,
           options,
-          catalog: false,
+          catalog,
           prompt,
+          ...(suggestFirst !== undefined && suggestFirst.length > 0 ? { suggestFirst } : {}),
           then: spec.then,
           value: { sentinel, resume },
         };
@@ -42478,7 +42516,7 @@ controlledBy,
       chooseCombat: (choice) => {
         this.state.combatChoices = [...(this.state.combatChoices ?? []), { chooser: controller, ...choice }];
       },
-      giveGift: (gift) => {
+      giveGift: (gift, textChanges) => {
         // Who it was promised to: the resolving spell's, or the permanent's
         // spell's as it entered — as it last existed there, if it has left.
         const live = this.state.objects[source];
@@ -42501,8 +42539,10 @@ controlledBy,
             this.state.extraTurns.push(to);
             this.emit({ type: "extra-turn-queued", player: to });
             return;
+          // A gift's token as its text says, a text change's words and all
+          // ("Gift a tapped Fish" made "Gift a tapped Vampire").
           case "tapped-fish":
-            this.createTokens(to, "Fish Token", 1, true);
+            this.createTokens(to, tokenNameWithChanges("Fish Token", textChanges), 1, true);
             return;
           case "food":
             this.createTokens(to, "Food Token", 1);
@@ -42511,7 +42551,7 @@ controlledBy,
             this.createTokens(to, "Treasure Token", 1);
             return;
           case "octopus":
-            this.createTokens(to, "Octopus Token", 1);
+            this.createTokens(to, tokenNameWithChanges("Octopus Token", textChanges), 1);
             return;
         }
       },
@@ -43361,8 +43401,8 @@ controlledBy,
       turnFaceUp: (target) => {
         if (target.kind === "object") this.turnFaceUpByEffect(target.object);
       },
-      turnFaceDown: (target, as) => {
-        if (target.kind === "object") this.turnFaceDown(target.object, as);
+      turnFaceDown: (target, as, textChanges) => {
+        if (target.kind === "object") this.turnFaceDown(target.object, as, textChanges);
       },
       sourceStintNow: () => tokenLinkToSource()?.zoneChangeCount,
       whileSourceHere: (duration) => {
@@ -47906,7 +47946,14 @@ controlledBy,
     },
   ): readonly ObjectId[] {
     if (withCounters !== undefined && withCounters.amount <= 0) withCounters = undefined;
+    // A token a changed text names by a name that carries the change (a
+    // gift's — `changedTokenName`): its definition, and the changes.
+    const named = splitChangedTokenName(tokenName);
+    tokenName = named.base;
+    if (named.changes.length > 0) textChanges = [...named.changes, ...(textChanges ?? [])];
     const def = this.registry.get(tokenName); // validate the token is a known definition
+    // What its maker's changed text makes of it (rules 111.3, 612.2a, 612.4).
+    const made = tokenTextChangesFor(def, textChanges);
     const creator = controller;
     controller = this.tokenCreatorAfterRedirects(controller);
     if (attachTo !== undefined) {
@@ -47920,7 +47967,8 @@ controlledBy,
     // only where they're still what the effect named. In their place, Divine
     // Visitation's Angels (rule 614.1a) — what the token was, an X/X's size
     // too, is gone.
-    const plan = this.tokenEventPlan(controller, { types: def.types, subtypes: withChangeling(def, def.subtypes) }, count);
+    const subtypes = made.textChanges.length > 0 ? changeSubtypes(def.subtypes, made.textChanges) : def.subtypes;
+    const plan = this.tokenEventPlan(controller, { types: def.types, subtypes: withChangeling(def, subtypes) }, count);
     const total = plan.find((t) => t.name === null)?.count ?? 0;
     // What the effect does to the tokens, not what they are: Chatterfang's
     // Squirrels get these and nothing else of the tokens' (the ruling).
@@ -47943,38 +47991,10 @@ controlledBy,
         : []),
       ...(attacksThisTurn !== undefined ? [attacksThisTurnRider(attacksThisTurn, controller)] : []),
     ];
-    const changedColors = tokenColorsAfter(def.colors, textChanges);
     const modifiers: PtModifier[] = [
-          // The colour the changed text gave it, a copiable value (rules
-          // 111.3, 612.2), under every other colour-setting effect.
-          ...(changedColors === undefined
-            ? []
-            : [
-                {
-                  power: 0,
-                  toughness: 0,
-                  keywords: [],
-                  copiable: true as const,
-                  setColors: [...changedColors],
-                  untilEndOfTurn: false,
-                  timestamp: -1,
-                },
-              ]),
-          // A token named after a real card carries its name as a copiable
-          // value (`CardDefinition.tokenName`, rule 111.3).
-          ...(def.tokenName === undefined
-            ? []
-            : [
-                {
-                  power: 0,
-                  toughness: 0,
-                  keywords: [],
-                  copiable: true as const,
-                  setName: def.tokenName,
-                  untilEndOfTurn: false,
-                  timestamp: -1,
-                },
-              ]),
+          // Its real name, and what a changed text made of it: copiable
+          // values (rule 111.3), under every other effect.
+          ...this.tokenMadeModifiers(def, made),
           ...riders,
           // "An X/X token": what the effect made it (rule 111.3 — its copiable
           // values, 707.2: a copy of it is X/X too), under every other effect
@@ -48062,7 +48082,7 @@ controlledBy,
           ? []
           : this.mintTokenBatch(
               controller,
-              t.name,
+              splitChangedTokenName(t.name).base,
               null,
               t.count,
               [...this.tokenNameModifier(t.name), ...riders.map((m) => ({ ...m }))],
@@ -48148,20 +48168,34 @@ controlledBy,
   /** A token named after a real card carries its name as a copiable value
    * (`CardDefinition.tokenName`, rule 111.3). */
   private tokenNameModifier(tokenName: string): PtModifier[] {
-    const name = this.registry.get(tokenName).tokenName;
-    return name === undefined
-      ? []
-      : [
-          {
-            power: 0,
-            toughness: 0,
-            keywords: [],
-            copiable: true as const,
-            setName: name,
-            untilEndOfTurn: false,
-            timestamp: -1,
-          },
-        ];
+    // A replacement's token named in a changed text (`changedTokenName`).
+    const { base, changes } = splitChangedTokenName(tokenName);
+    const def = this.registry.get(base);
+    return this.tokenMadeModifiers(def, tokenTextChangesFor(def, changes));
+  }
+
+  /**
+   * The copiable values a token is made with beyond its definition (rule
+   * 111.3): a real card's name (`CardDefinition.tokenName`), and what its
+   * maker's changed text made of it (`tokenTextChangesFor`): its colour
+   * (612.2), its creature types and own text as copiable text changes
+   * (612.4 — so a copy of it is the same), and the name 612.2a gives it.
+   */
+  private tokenMadeModifiers(def: CardDefinition, made: ReturnType<typeof tokenTextChangesFor>): PtModifier[] {
+    const copiable = (): PtModifier => ({
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      copiable: true as const,
+      untilEndOfTurn: false,
+      timestamp: -1,
+    });
+    const name = made.name ?? def.tokenName;
+    return [
+      ...(made.colors !== undefined ? [{ ...copiable(), setColors: [...made.colors] }] : []),
+      ...made.textChanges.map((change) => ({ ...copiable(), textChange: { ...change } })),
+      ...(name !== undefined ? [{ ...copiable(), setName: name }] : []),
+    ];
   }
 
   /**
@@ -48337,8 +48371,11 @@ controlledBy,
       replacements,
       this.tokenCreationMultiplier(controller),
       (name) => {
-        const def = this.registry.get(name);
-        return { types: def.types, subtypes: withChangeling(def, def.subtypes) };
+        // A token a changed text names is what that text made it.
+        const { base, changes } = splitChangedTokenName(name);
+        const def = this.registry.get(base);
+        const changed = tokenTextChangesFor(def, changes).textChanges;
+        return { types: def.types, subtypes: withChangeling(def, changed.length > 0 ? changeSubtypes(def.subtypes, changed) : def.subtypes) };
       },
       Game.MAX_EFFECT_INSTANCES,
     );
@@ -48680,7 +48717,7 @@ controlledBy,
     const mint = (name: string, count: number, withCounters?: { readonly kind: string; readonly amount: number }) =>
       this.mintTokenBatch(
         group.controller,
-        name,
+        splitChangedTokenName(name).base,
         null,
         count,
         [...this.tokenNameModifier(name), ...group.riders.map((m) => ({ ...m }))],
@@ -55757,7 +55794,7 @@ controlledBy,
    * this way, it can be turned face up only by its morph or disguise cost
    * (702.37e, 702.168d) — the `"effect"` kind.
    */
-  private turnFaceDown(id: ObjectId, as?: FaceDownAs): void {
+  private turnFaceDown(id: ObjectId, as?: FaceDownAs, textChanges?: readonly TextChange[]): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield" || object.faceDown !== undefined) return;
     if (this.isDoubleFacedCard(id) || object.melded !== undefined || object.merged !== undefined) return;
@@ -55765,7 +55802,12 @@ controlledBy,
     const one = this.splitOneFromStack(id);
     const turned = this.state.objects[one];
     if (turned === undefined) return;
-    turned.faceDown = { kind: "effect", ...(as !== undefined ? { as } : {}) };
+    turned.faceDown = {
+      kind: "effect",
+      ...(as !== undefined ? { as } : {}),
+      // What a text change made of the listed characteristics (rule 612).
+      ...(as !== undefined && textChanges !== undefined ? { textChanges: [...textChanges] } : {}),
+    };
     // "Until this creature is turned face down, it becomes a copy …"
     // (Vesuvan Shapeshifter): it's itself again under its face-down status.
     this.endTemporaryCopies(turned, (ends) => ends === "turned-face-down");
@@ -64809,7 +64851,7 @@ controlledBy,
       object.controller = under;
       object.entry = entry;
       if (enter.faceDown !== undefined) {
-        object.faceDown = { kind: enter.faceDown, ...(enter.faceDownAs !== undefined ? { as: enter.faceDownAs } : {}) };
+        object.faceDown = faceDownStatus(enter.faceDown, enter);
       }
       const transformed = enter.transformed === true || object.enterChoice?.transformed === true;
       if (object.faceDown === undefined && this.isTransformingDfc(id) && this.entersTransformed(id, transformed)) object.face = 1;
@@ -67405,7 +67447,7 @@ controlledBy,
       // the entry — its replacements, other permanents' replacements judging
       // it, the triggers that see it arrive — sees the face-down 2/2.
       if (enter.faceDown !== undefined) {
-        object.faceDown = { kind: enter.faceDown, ...(enter.faceDownAs !== undefined ? { as: enter.faceDownAs } : {}) };
+        object.faceDown = faceDownStatus(enter.faceDown, enter);
       }
       // Melded as it enters (712.14c): the combined back face from the start.
       if (enter.melded !== undefined) object.melded = enter.melded;

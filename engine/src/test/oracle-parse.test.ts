@@ -4579,6 +4579,31 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(spray.complete).toBe(true);
   });
 
+  it("a text change of one creature type (rule 612.2) — Artificial Evolution's two and its Wall, New Blood's Vampire", () => {
+    const evolution = face(
+      "Change the text of target spell or permanent by replacing all instances of one creature type with another. The new creature type can't be Wall. (This effect lasts indefinitely.)",
+      "Instant",
+    );
+    expect(evolution.targets).toEqual([{ kind: "spell-or-permanent" }]);
+    expect(evolution.effect).toEqual({ kind: "change-text", target: 0, words: "creature-type", notTo: ["Wall"], duration: "permanent" });
+    expect(evolution.complete).toBe(true);
+    const blood = face(
+      "As an additional cost to cast this spell, tap an untapped Vampire you control.\nGain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire.",
+      "Sorcery",
+    );
+    expect(blood.targets).toEqual(["creature"]);
+    expect(blood.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "gain-control", target: 0, untilEndOfTurn: false },
+        { kind: "change-text", target: 0, words: "creature-type", to: "Vampire", duration: "permanent" },
+      ],
+    });
+    expect(blood.complete).toBe(true);
+    // "With" a word that's no creature type isn't read.
+    expect(face("Change the text of target permanent by replacing all instances of one creature type with Planeswalker.", "Instant").complete).toBe(false);
+  });
+
   it("a colour in addition to its others (rule 105.3) — Indigo Faerie, Unctus, Grand Metatect", () => {
     const faerie = face("{U}: Target permanent becomes blue in addition to its other colors until end of turn.", "Creature — Faerie Wizard");
     expect(faerie.activated[0].targets).toEqual(["permanent"]);

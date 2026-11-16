@@ -8676,6 +8676,7 @@ function Table({
           sourceName={game.nameOf(creatureTypeChoiceAction.source)}
           options={creatureTypeChoiceAction.options}
           suggested={creatureTypeChoiceAction.suggested}
+          prompt={creatureTypeChoiceAction.prompt}
           onPick={(creatureType) =>
             game.dispatch({ type: 'choose-creature-type', player: seat, creatureType })
           }

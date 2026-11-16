@@ -51,7 +51,7 @@ import type { DelayedAt, DelayedStepWatch } from "./delayed-at.js";
 import { readDelayedAt } from "./delayed-at.js";
 import { bindCombatRule } from "./combat/rules.js";
 import type { CombatRuleRefs } from "./combat/rules.js";
-import { textWordKind, type TextChange } from "./text-change.js";
+import { textWordKind, type TextChange, type TextWords } from "./text-change.js";
 import type {
   AttachmentRecord,
   AwaitingDecision,
@@ -4238,10 +4238,12 @@ export type EffectSpec =
         | "spell-damage";
       readonly then: EffectSpec;
       /** With `"text-word"` (a `change-text`'s words, `CHOSEN_TEXT_WORD` in
-       * `then`): the colour words, the basic land types, or both
-       * (`text-change.ts`'s `textWords`), less `except`. */
-      readonly words?: "color" | "land-type" | "color-or-land-type";
-      readonly except?: string;
+       * `then`): the colour words, the basic land types, both, or every
+       * creature type (`text-change.ts`'s `textWords` — a catalog choice),
+       * less `except`. With `on`, a creature type choice offers the types
+       * that target's text names first (`creatureTypeWordsIn`). */
+      readonly words?: TextWords;
+      readonly except?: string | readonly string[];
       readonly on?: number;
       readonly among?: CardFilter;
       readonly min?: number;
@@ -4419,6 +4421,9 @@ export type EffectSpec =
        * face down and tapped. It's a 2/2 Cyberman artifact creature" is
        * `faceDown: "2/2 Cyberman artifact creature"`. */
       readonly faceDown?: true | FaceDownAs;
+      /** Only built by a text change (`text-change.ts`): what it made of
+       * `faceDown`'s words ("Cyberman" made "Vampire"). */
+      readonly faceDownTextChanges?: readonly TextChange[];
       /** "…if it's a permanent card" (Yarus, Roar of the Old Gods), the card
        * itself and not what it was as a face-down permanent: an instant or
        * sorcery card stays where it is, though `faceDown` alone would let it
@@ -7852,6 +7857,10 @@ export type EffectSpec =
        */
       readonly kind: "gift";
       readonly gift: GiftKind;
+      /** Only built by a text change (`text-change.ts`): "Gift a tapped
+       * Fish" made "Gift a tapped Vampire" (rule 612.2a) — the gift's
+       * token, as `create-token`'s `tokenTextChanges`. */
+      readonly tokenTextChanges?: readonly TextChange[];
     }
   | {
       /** Storm (rule 702.40 — ROADMAP Phase 8): put a copy of the spell this
@@ -8717,6 +8726,8 @@ export type EffectSpec =
       readonly kind: "turn-face-down";
       readonly target: ObjectRef;
       readonly as?: FaceDownAs;
+      /** Only built by a text change: what it made of `as`'s words. */
+      readonly faceDownTextChanges?: readonly TextChange[];
     }
   | {
       /**
@@ -8757,8 +8768,9 @@ export type EffectSpec =
   | {
       readonly kind: "create-token";
       /** Only built by a text change (`text-change.ts`): the colour words
-       * changed in this text, in order — "create a 1/1 white Soldier" made
-       * "blue" makes a blue one (rules 111.3, 612.2). */
+       * and creature types changed in this text, in order — "create a 1/1
+       * white Soldier" made "blue" makes a blue one (rules 111.3, 612.2), "a
+       * 1/1 red Goblin" made "Vampire" a Vampire Token (612.2a, 612.4). */
       readonly tokenTextChanges?: readonly TextChange[];
       /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
       readonly replacementAsked?: true;
@@ -9939,24 +9951,30 @@ export type EffectSpec =
       /**
        * "Change the text of target spell or permanent by replacing all
        * instances of one color word with another" (Sleight of Mind), "one
-       * basic land type with another" (Magical Hack), or either (Mind Bend's
-       * "one color word with another or one basic land type with another") —
-       * a text-changing effect (rule 612, layer 3), for `duration`: for good
+       * basic land type with another" (Magical Hack), either (Mind Bend's
+       * "one color word with another or one basic land type with another"),
+       * or "one creature type with another" (Artificial Evolution) — a
+       * text-changing effect (rule 612, layer 3), for `duration`: for good
        * (`"permanent"`, "this effect lasts indefinitely") or `"end-of-turn"`.
        * As it resolves its controller chooses the word to replace out of
-       * `words` (a `choose-value` of `"text-word"`), then a different word
-       * of the same kind to put in its place — any word, there or not.
-       * `from` and `to` are filled in by those answers; a card leaves them
-       * out. What changes is every instance in the object's own text
-       * (`text-change.ts`), its type line's land types included; a spell
-       * keeps the change as the permanent it becomes (400.7a).
+       * `words` (a `choose-value` of `"text-word"`; every creature type is a
+       * catalog choice, the target's own first), then a different word of
+       * the same kind to put in its place, none of `notTo` ("The new
+       * creature type can't be Wall") — any word, there or not. A card that
+       * names the new word sets `to` ("with Vampire" — New Blood), and only
+       * the first is asked; otherwise `from` and `to` are filled in by those
+       * answers. What changes is every instance in the object's own text
+       * (`text-change.ts`), its type line's land types and creature types
+       * included; a spell keeps the change as the permanent it becomes
+       * (400.7a).
        */
       readonly kind: "change-text";
       readonly target: ObjectRef;
-      readonly words: "color" | "land-type" | "color-or-land-type";
+      readonly words: TextWords;
       readonly duration: PermanentDuration;
       readonly from?: string;
       readonly to?: string;
+      readonly notTo?: readonly string[];
     }
   | {
       /** A modal spell/ability (rule 700.2): as it resolves, its controller
@@ -11702,6 +11720,10 @@ export interface EnterTypes extends ResolvedPatch {
    * morph or disguise cost (702.37e). Any card may enter so, an instant or
    * sorcery too. */
   readonly faceDown?: true | FaceDownAs;
+  /** Only built by a text change (`text-change.ts`): what it made of
+   * `faceDown`'s words ("Cyberman" made "Vampire", "Forest" made "Island" —
+   * rule 612), kept on the permanent as `GameObject.faceDown.textChanges`. */
+  readonly faceDownTextChanges?: readonly TextChange[];
 }
 
 /** What a spell's copy gains — see `copy-spell`'s `gains`. */
@@ -13701,7 +13723,7 @@ export interface EffectApi {
   /** See the `"choose-combat"` {@link EffectSpec}. */
   chooseCombat(choice: Omit<CombatChoice, "chooser">): void;
   /** See the `"gift"` {@link EffectSpec}. */
-  giveGift(gift: GiftKind): void;
+  giveGift(gift: GiftKind, textChanges?: readonly TextChange[]): void;
   /** `player` wins the game, unless they can't — see the `"win-game"`
    * {@link EffectSpec}. */
   winGame(player: PlayerId): void;
@@ -13893,7 +13915,7 @@ export interface EffectApi {
   cloakExiledPile(libraryTop: number, tapped: boolean): void;
   /** Turn the permanent `target` face down — see the `"turn-face-down"`
    * {@link EffectSpec}. */
-  turnFaceDown(target: TargetRef, as?: FaceDownAs): void;
+  turnFaceDown(target: TargetRef, as?: FaceDownAs, textChanges?: readonly TextChange[]): void;
   /** Turn the face-down permanent `target` face up — see the `"turn-face-up"`
    * {@link EffectSpec}. */
   turnFaceUp(target: TargetRef): void;
@@ -13928,7 +13950,8 @@ export interface EffectApi {
     attachTo?: ObjectId | { readonly player: PlayerId } | null,
     /** The new tokens remember this effect's source (`GameObject.createdWith`). */
     linkedToSource?: boolean,
-    /** The colour words changed in the creating text (`tokenTextChanges`). */
+    /** The colour words and creature types changed in the creating text
+     * (`tokenTextChanges`). */
     textChanges?: readonly TextChange[],
     /** Counters each new token enters with — the effect's `withCounters`, read. */
     withCounters?: { readonly kind: string; readonly amount: number },
@@ -19397,7 +19420,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "turn-face-down": {
       const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.turnFaceDown(target, spec.as);
+      if (target !== undefined) ctx.turnFaceDown(target, spec.as, spec.faceDownTextChanges);
       return;
     }
     case "turn-face-up": {
@@ -19574,6 +19597,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                   ? { addSubtypes: [...(spec.addSubtypes ?? []), ...(spec.enterAs?.addSubtypes ?? [])] }
                   : {}),
                 ...(spec.faceDown !== undefined ? { faceDown: spec.faceDown } : {}),
+                ...(spec.faceDownTextChanges !== undefined ? { faceDownTextChanges: spec.faceDownTextChanges } : {}),
               }
             : undefined,
           resolveEnterAttacking(spec.attacking, ctx),
@@ -21339,7 +21363,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.grantActivatedAll(spec.filter, spec.ability, spec.duration);
       return;
     case "gift":
-      ctx.giveGift(spec.gift);
+      ctx.giveGift(spec.gift, spec.tokenTextChanges);
       return;
     case "take-extra-turn": {
       const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
@@ -22507,13 +22531,22 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "change-text": {
       // The word to replace, then its replacement — of the same kind and
       // not the same word — each asked as it resolves, each answer filled
-      // into the spec for the next step.
+      // into the spec for the next step. A word the card names ("with
+      // Vampire") isn't asked, and isn't offered as the one to replace.
+      const creature = spec.words === "creature-type";
       if (spec.from === undefined) {
         ctx.chooseValue({
           kind: "choose-value",
           value: "text-word",
           words: spec.words,
-          prompt: "Replace which word?",
+          ...(spec.to !== undefined ? { except: spec.to } : {}),
+          // The target's own creature types lead a catalog of them.
+          ...(creature && typeof spec.target === "number" ? { on: spec.target } : {}),
+          prompt: creature
+            ? spec.to !== undefined
+              ? `Choose a creature type to replace with ${spec.to}`
+              : "Choose a creature type to replace"
+            : "Replace which word?",
           then: { ...spec, from: CHOSEN_TEXT_WORD },
         });
         return;
@@ -22525,13 +22558,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           kind: "choose-value",
           value: "text-word",
           words: kind,
-          except: spec.from,
-          prompt: `Replace "${spec.from}" with which word?`,
+          except: [spec.from, ...(spec.notTo ?? [])],
+          prompt: creature ? `Choose a creature type to replace ${spec.from} with` : `Replace "${spec.from}" with which word?`,
           then: { ...spec, to: CHOSEN_TEXT_WORD },
         });
         return;
       }
-      if (textWordKind(spec.to) !== kind || spec.to === spec.from) return;
+      if (textWordKind(spec.to) !== kind || spec.to === spec.from || spec.notTo?.includes(spec.to) === true) return;
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.changeText(target, { from: spec.from, to: spec.to }, spec.duration);
       return;

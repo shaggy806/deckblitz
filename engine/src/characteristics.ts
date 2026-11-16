@@ -3451,9 +3451,13 @@ export function suspectedGrantsApply(state: GameState, registry: CardRegistry, o
  * subtypes layer 4 starts from. */
 function printedSubtypes(registry: CardRegistry, object: GameObject): readonly string[] {
   const def = printedDefinition(registry, object);
-  // A text change's land types reach its type line (rule 612.1), in layer 3
-  // — before every layer-4 effect.
-  const changes = textChangesOf(object);
+  // A text change's land types and creature types reach its type line (rule
+  // 612.1), in layer 3 — before every layer-4 effect. A face-down
+  // permanent's listed subtypes are its effect's words, as that effect's
+  // text was changed (`GameObject.faceDown.textChanges`).
+  const own = textChangesOf(object);
+  const listed = object.faceDown?.textChanges;
+  const changes = listed === undefined ? own : [...listed, ...(own ?? [])];
   const subtypes = changes === undefined ? def.subtypes : changeSubtypes(def.subtypes, changes);
   return withChangeling(def, subtypes, registry.get(rulesTextName(object)));
 }

@@ -67,6 +67,7 @@ import {
   undying,
   unearth,
   vanishing,
+  CREATURE_TYPES,
 } from "../dist/cards/helpers.js";
 
 // ------------------------------------------------------------------ text
@@ -7273,14 +7274,34 @@ export function parseSentence(sentence, ctx) {
     }
   }
   // Layer 3 (rule 612 — Sleight of Mind, Magical Hack, Mind Bend, Crystal
-  // Spray): a text change of one word for another, both chosen as it resolves.
-  if ((m = re(`change the text of target (spell or permanent|permanent) by replacing all instances of one (color word with another|basic land type with another|color word with another or one basic land type with another)( until end of turn)?(?: \\(.*\\))?`).exec(s))) {
-    const words = m[2].startsWith("color word with another or") ? "color-or-land-type" : m[2].startsWith("color") ? "color" : "land-type";
+  // Spray, Artificial Evolution): a text change of one word for another, both
+  // chosen as it resolves — or one creature type for one the text names
+  // (New Blood's "with Vampire", of the creature it just took: "that
+  // creature", the one target so far). Artificial Evolution's "The new
+  // creature type can't be Wall." is `creatureTypeTextChangeAt`'s.
+  if ((m = re(`change the text of (target spell or permanent|target permanent|that creature) by replacing all instances of one (color word with another|basic land type with another|color word with another or one basic land type with another|creature type with another|creature type with ([A-Z][a-z]+))( until end of turn)?(?: \\(.*\\))?`).exec(s))) {
+    const words = m[2].startsWith("color word with another or")
+      ? "color-or-land-type"
+      : m[2].startsWith("color")
+        ? "color"
+        : m[2].startsWith("creature")
+          ? "creature-type"
+          : "land-type";
+    const named = m[3];
+    if (named !== undefined && !CREATURE_TYPES.includes(named)) return undefined;
+    const target =
+      m[1].toLowerCase() === "that creature"
+        ? ctx.targets.length === 1
+          ? 0
+          : undefined
+        : ctx.target(m[1].toLowerCase() === "target permanent" ? "permanent" : { kind: "spell-or-permanent" });
+    if (target === undefined) return undefined;
     return {
       kind: "change-text",
-      target: ctx.target(m[1] === "permanent" ? "permanent" : { kind: "spell-or-permanent" }),
+      target,
       words,
-      duration: m[3] ? "end-of-turn" : "permanent",
+      ...(named !== undefined ? { to: named } : {}),
+      duration: m[4] ? "end-of-turn" : "permanent",
     };
   }
 
@@ -11293,6 +11314,13 @@ export function parseEffect(text, outer) {
       skip = extraTurn.used - 1;
       continue;
     }
+    const typeTextChange = creatureTypeTextChangeAt(sentences, i, ctx);
+    if (typeTextChange !== null) {
+      parsed.push(typeTextChange.effect);
+      hints.push({ sentence, effect: typeTextChange.effect });
+      skip = typeTextChange.used - 1;
+      continue;
+    }
     const handsAway = handsFaceDownAt(sentences, i, ctx);
     if (handsAway !== null) {
       for (const effect of handsAway.effects) {
@@ -12598,6 +12626,22 @@ function blockPartnerPhrase(phrase) {
  * that turn: "Skip the untap step of that turn" (Savor the Moment), "During
  * that turn, damage can't be prevented" (Alchemist's Gambit), "At the
  * beginning of that turn's end step, you lose the game" (Warrior's Oath). */
+/**
+ * "Change the text of target spell or permanent by replacing all instances of
+ * one creature type with another. The new creature type can't be Wall."
+ * (Artificial Evolution, rule 612.2): one `change-text`, the second sentence
+ * its `notTo`.
+ */
+function creatureTypeTextChangeAt(sentences, i, ctx) {
+  const next = /^The new creature type can't be ([A-Z][a-z]+)\.$/.exec(sentences[i + 1] ?? "");
+  if (next === null || !CREATURE_TYPES.includes(next[1])) return null;
+  if (!/^Change the text of .+ by replacing all instances of one creature type with another\.$/.test(sentences[i] ?? "")) return null;
+  const change = parseSentence(sentences[i], ctx);
+  if (change?.kind !== "change-text") return null;
+  const { duration, ...rest } = change;
+  return { effect: { ...rest, notTo: [next[1]], duration }, used: 2 };
+}
+
 function extraTurnScopeAt(sentences, i) {
   if (!/^(?:you )?take an extra turn after this one\.$/i.test(sentences[i] ?? "")) return null;
   const effect = { kind: "take-extra-turn" };

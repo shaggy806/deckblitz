@@ -135,8 +135,14 @@ export const chooseCreatureType = defineDecision({
       // Imagecrafter): a bot answers with a suggestion.
       // A menu of planeswalker types (Deification) is a long one too: the
       // chooser's own planeswalkers' types lead it.
+      // A text change's target's own types lead (`suggestFirst`).
       suggested: awaiting.catalog
-        ? suggestedCreatureTypes(ctx.state, ctx.registry, player).filter((t) => awaiting.options.includes(t))
+        ? [
+            ...new Set([
+              ...(awaiting.suggestFirst ?? []),
+              ...suggestedCreatureTypes(ctx.state, ctx.registry, player).filter((t) => awaiting.options.includes(t)),
+            ]),
+          ]
         : awaiting.options.length > 0 && awaiting.options.every(isPlaneswalkerType)
           ? suggestedPlaneswalkerTypes(ctx.state, ctx.registry, player)
           : [],

@@ -1369,8 +1369,12 @@ export interface GameObject {
    * turned face up as a special action (701.40b). `as` is the
    * characteristics the effect that put or turned it face down listed in
    * place of the 2/2's (rule 708.2 — "It's a 2/2 Cyberman artifact
-   * creature"), read through {@link FACE_DOWN_AS_CARDS}. */
-  faceDown?: { readonly kind: FaceDownKind; readonly as?: FaceDownAs };
+   * creature"), read through {@link FACE_DOWN_AS_CARDS}; `textChanges` what
+   * a text change made of that effect's words (rule 612 — a Missy whose
+   * Cyberman became a Vampire turns cards into 2/2 Vampire artifact
+   * creatures), applied to the listed subtypes in layer 3 and gone as it's
+   * turned face up. */
+  faceDown?: { readonly kind: FaceDownKind; readonly as?: FaceDownAs; readonly textChanges?: readonly TextChange[] };
   /**
    * A **Room**'s unlocked designations (rule 709.5c — a split permanent with
    * a shared type line): which of its doors, the card's left and right
@@ -4284,6 +4288,11 @@ export type AwaitingDecision =
       readonly targetChooserFor?: true;
       /** What the choice is, in words, for a menu that needs saying. */
       readonly prompt?: string;
+      /** A catalog choice's own lead, ahead of the chooser's usual
+       * suggestions: the creature types a text change's target names (New
+       * Blood's "replace … with Vampire" — its type line's first). Public:
+       * it reads only that permanent's text. */
+      readonly suggestFirst?: readonly string[];
       readonly then?: EffectSpec;
       readonly targets?: ResolvedTargets;
       readonly x?: number;
