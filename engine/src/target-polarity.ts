@@ -38,7 +38,7 @@ import type { LegalAction } from "./actions.js";
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
 import { bestowedDefinition, enchantsGraveyardCard, licidDefinition } from "./cards/define.js";
-import { computeCharacteristics } from "./characteristics.js";
+import { computeCharacteristics, lethalDamageLeft } from "./characteristics.js";
 import { playerCantLoseGame, playerCantLoseLife } from "./prohibitions.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
@@ -1926,7 +1926,8 @@ export function rankTargets(
 
 /** Whether `amount` damage to `ref` does something that lasts: a player
  * (life lost stays lost), or a permanent it destroys — a creature whose
- * toughness it meets (less damage already marked), not indestructible; a
+ * lethal damage it meets (`lethalDamageLeft`: toughness, or power under
+ * Zilortha, less damage already marked), not indestructible; a
  * planeswalker's loyalty or a battle's defence it removes. */
 export function damageLands(state: GameState, registry: CardRegistry, ref: TargetRef, amount: number): boolean {
   if (ref.kind === "player") return true;
@@ -1938,7 +1939,7 @@ export function damageLands(state: GameState, registry: CardRegistry, ref: Targe
   return (
     c.types.includes("creature") &&
     !c.keywords.has("indestructible") &&
-    c.toughness - (object.damageMarked ?? 0) <= amount
+    lethalDamageLeft(c, object.damageMarked ?? 0) <= amount
   );
 }
 
@@ -2090,8 +2091,9 @@ export function waitingTriggerDamage(state: GameState, registry: CardRegistry, c
   return out.slice(0, MAX_PLANNED_CHUNKS - 1);
 }
 
-/** How much more damage kills `ref` (a creature's toughness less the damage
- * on it and on its way, a planeswalker's loyalty, a battle's defence), or
+/** How much more damage kills `ref` (what's left of a creature's lethal
+ * damage — `lethalDamageLeft`, toughness or power under Zilortha — less the
+ * damage on its way, a planeswalker's loyalty, a battle's defence), or
  * null when damage can't kill it or it's dead already. */
 function damageToKill(
   state: GameState,
@@ -2106,7 +2108,7 @@ function damageToKill(
   const already = pending.get(ref.object) ?? 0;
   let need: number | null = null;
   if (c.types.includes("creature") && !c.keywords.has("indestructible")) {
-    need = c.toughness - (object.damageMarked ?? 0);
+    need = lethalDamageLeft(c, object.damageMarked ?? 0);
   } else if (c.types.includes("planeswalker")) {
     need = object.counters.loyalty ?? 0;
   } else if (c.types.includes("battle")) {

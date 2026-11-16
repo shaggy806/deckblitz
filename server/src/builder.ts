@@ -20,6 +20,7 @@ import {
   asPlayerId,
   computeCharacteristics,
   isTokenCard,
+  lethalDamageOf,
   putsStickers,
   revealedCompanion,
 } from "engine/local";
@@ -240,9 +241,10 @@ interface LaidOut extends BuiltScenario {
  * only ever marked on a creature (rule 120.3e — a planeswalker loses loyalty
  * instead, 120.3c), and a scenario's is never lethal: a board where it was
  * would have the creature destroyed before anyone could act (704.5g), so a
- * creature with damage at or over its toughness is refused rather than
- * killed at the start — unless it's indestructible, which lets it live with
- * any amount.
+ * creature with damage at or over what's lethal to it — its toughness, or
+ * its power under Zilortha, Strength Incarnate (`lethalDamageOf`) — is
+ * refused rather than killed at the start, unless it's indestructible, which
+ * lets it live with any amount.
  */
 function damageProblem(laid: LaidOut, card: ScenarioCard): string | null {
   if (card.damage === undefined || card.damage === 0) return null;
@@ -251,8 +253,10 @@ function damageProblem(laid: LaidOut, card: ScenarioCard): string | null {
   const computed = computeCharacteristics(laid.game.state, laid.registry, id);
   if (!computed.types.includes("creature")) return `${card.name} isn't a creature: only a creature has damage marked`;
   if (computed.keywords.has("indestructible") || computed.toughness <= 0) return null;
-  if (card.damage >= computed.toughness) {
-    return `${card.name} would die to its ${card.damage} damage (toughness ${computed.toughness}): at most ${computed.toughness - 1}`;
+  const lethal = lethalDamageOf(computed);
+  if (card.damage >= lethal) {
+    const of = computed.lethalDamageByPower === true ? `lethal by its power, ${computed.power}` : `toughness ${computed.toughness}`;
+    return `${card.name} would die to its ${card.damage} damage (${of}): at most ${lethal - 1}`;
   }
   return null;
 }

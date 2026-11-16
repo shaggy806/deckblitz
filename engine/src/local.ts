@@ -22,7 +22,7 @@ export { registryFrom } from "./cards/registry-from.js";
 export { defaultRegistry } from "./cards/default-registry.js";
 export { actionPlayer } from "./actions.js";
 export { answeringPlayer, askedPlayer, decidingPlayer, playersControlledBy } from "./player-control.js";
-export { computeCharacteristics } from "./characteristics.js";
+export { computeCharacteristics, lethalDamageOf } from "./characteristics.js";
 export { autoAnswerFor, decisionHasSource, mayActOn } from "./decisions/registry.js";
 export * from "./game.js";
 export * from "./controller.js";

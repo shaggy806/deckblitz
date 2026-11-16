@@ -2710,7 +2710,8 @@
   "effect:text-change-creature-type-words",
   "effect:for-each-target-turn-order-chosen-at-resolution",
   "effect:for-each-target-apnap-order",
-  "effect:other-player-adds-mana-choice"
+  "effect:other-player-adds-mana-choice",
+  "static:lethal-damage-by-power"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

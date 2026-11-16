@@ -20421,3 +20421,20 @@ describe("a mana ability's player of choice, and 'they choose' (playerOfChoice, 
     });
   });
 });
+
+describe("'lethal damage … is determined by their power' (rule 613.11 — Zilortha, Strength Incarnate)", () => {
+  it("a `lethalDamageByPower` static over the creatures you control", () => {
+    const line = "Lethal damage dealt to creatures you control is determined by their power rather than their toughness.";
+    const zilortha = parseFace({
+      name: "Zilortha, Strength Incarnate",
+      type_line: "Legendary Creature — Dinosaur",
+      mana_cost: "{3}{R}{G}",
+      oracle_text: `Trample\n${line}`,
+      power: "7",
+      toughness: "3",
+    });
+    expect(zilortha.static).toEqual([{ affects: { scope: "creatures-you-control" }, lethalDamageByPower: true, text: line }]);
+    expect(zilortha.keywords).toEqual(["trample"]);
+    expect(zilortha.complete).toBe(true);
+  });
+});

@@ -33,7 +33,7 @@
 import { insteadEffect } from "./replacements.js";
 import type { CardRegistry } from "./cards/card-registry.js";
 import type { CardDefinition } from "./cards/define.js";
-import { computeCharacteristics } from "./characteristics.js";
+import { computeCharacteristics, lethalDamageLeft } from "./characteristics.js";
 import { polarityBias } from "./deck-bias.js";
 import type { EffectAmount, EffectSpec, ObjectRef, PlayerScope, ProtectionQualities } from "./effects.js";
 import { manaValueOfObject, matchesFilter } from "./filter.js";
@@ -278,7 +278,8 @@ type Sweep = Extract<
  * text decides alone: a sweep narrowed by a target, by who its source damaged
  * or to one player's side, or dealing an amount read off the game, is 0 —
  * unknown, as the module comment has it. An indestructible permanent survives
- * a destroy (rule 702.12b), a creature damage short of its toughness.
+ * a destroy (rule 702.12b), a creature damage short of lethal (its toughness,
+ * or its power under Zilortha — `lethalDamageLeft`).
  */
 function sweepWorth(effect: Sweep, ctx: WorthContext): number {
   const cards = ctx.cards;
@@ -298,7 +299,7 @@ function sweepWorth(effect: Sweep, ctx: WorthContext): number {
     const c = computeCharacteristics(state, cards, id);
     if (effect.kind === "destroy-all" && c.keywords.has("indestructible")) continue;
     if (effect.kind === "damage-all") {
-      if (!c.types.includes("creature") || damage < c.toughness - (object.damageMarked ?? 0)) continue;
+      if (!c.types.includes("creature") || damage < lethalDamageLeft(c, object.damageMarked ?? 0)) continue;
     }
     const value = object.isToken === true ? (object.stackCount ?? 1) : SLOT_WORTH[2];
     worth += object.controller === me ? -value : value / opponents;

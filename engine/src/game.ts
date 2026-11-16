@@ -222,6 +222,8 @@ import {
   withComputedCache,
   meldPartners,
   withChangeling,
+  lethalDamageOf,
+  lethalDamageLeft,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
 import {
@@ -61904,14 +61906,15 @@ controlledBy,
    * include `keyword` — or, given its last-known information, was one as it
    * left (rule 608.2h: a lifelinker's dies trigger still gains the life). */
   /** The damage from `source` that's lethal to the creature `object` right
-   * now (rules 120.4a, 120.6, 702.2c): its toughness less the damage marked
-   * on it, or 1 from a deathtouch source — none at all once it has lethal
-   * damage, or deathtouch damage since state-based actions were last
-   * checked. Prevention, replacement and indestructible don't enter into it
-   * (Ram Through's ruling). */
+   * now (rules 120.4a, 120.6, 702.2c): its toughness (its power under
+   * Zilortha — `lethalDamageLeft`) less the damage marked on it, or 1 from a
+   * deathtouch source — none at all once it has lethal damage, or deathtouch
+   * damage since state-based actions were last checked. Prevention,
+   * replacement and indestructible don't enter into it (Ram Through's
+   * ruling). */
   private lethalDamageTo(object: GameObject, source: ObjectId, sourceLastKnown?: LastKnownInfo): number {
     const c = computeCharacteristics(this.state, this.registry, object.id);
-    const needed = Math.max(0, c.toughness - object.damageMarked);
+    const needed = lethalDamageLeft(c, object.damageMarked);
     if (needed === 0 || object.markedByDeathtouch) return 0;
     return this.sourceHasKeyword(source, "deathtouch", sourceLastKnown) ? 1 : needed;
   }
@@ -64043,7 +64046,10 @@ controlledBy,
           // 0 toughness is a state-based *loss*, not destruction —
           // indestructible does not save it (rule 704.5f vs 704.5g).
           reason = "toughness is 0 or less";
-        } else if (!indestructible && object.damageMarked >= toughness) {
+        } else if (!indestructible && object.damageMarked >= lethalDamageOf(computed)) {
+          // Rule 704.5g: damage marked, at or over its toughness — or its
+          // power under Zilortha (`lethalDamageOf`, at least 1: a 0-power
+          // creature dies only once it has damage marked, the ruling).
           reason = "lethal damage";
         } else if (!indestructible && object.markedByDeathtouch) {
           // Dealt damage by a deathtouch source since the last check (704.5h)

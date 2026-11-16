@@ -1655,6 +1655,11 @@ export interface Characteristics {
    * resolved against its final P/T for the `"if-toughness-greater"` form.
    * Read it through {@link combatDamageOf}, never directly. */
   readonly damageByToughness: boolean;
+  /** Lethal damage to it is determined by its power rather than its
+   * toughness (a `lethalDamageByPower` static — Zilortha, Strength
+   * Incarnate). Read it through {@link lethalDamageOf} and
+   * {@link lethalDamageLeft}, never directly. */
+  readonly lethalDamageByPower?: true;
   /** It assigns no combat damage this turn (an `assigns-no-combat-damage`
    * effect — Farrel's Zealot). Read it through {@link combatDamageOf}. */
   readonly assignsNoCombatDamage?: boolean;
@@ -5637,6 +5642,7 @@ interface AppliedEffect {
   readonly toxic: number;
   readonly restrictions: readonly CombatRule[];
   readonly combatDamageByToughness: StaticAbility["combatDamageByToughness"];
+  readonly lethalDamageByPower: boolean;
   readonly canAttackAsThoughNoDefender: boolean;
   readonly canAttackAttackersDespiteDefender: boolean;
   readonly assignAsThoughUnblocked: boolean;
@@ -5775,6 +5781,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.grantToxic !== undefined ||
     hasRestrictionWord(ability) ||
     ability.combatDamageByToughness !== undefined ||
+    ability.lethalDamageByPower === true ||
     (ability.canAttackAsThoughNoDefender !== undefined && ability.canAttackAsThoughNoDefender !== false) ||
     ability.assignAsThoughUnblocked === true ||
     ability.cantBeSacrificed === true ||
@@ -6109,6 +6116,7 @@ function collectStaticEffects(
       toxic: ability.grantToxic ?? 0,
       restrictions: ability.restrictions ?? [],
       combatDamageByToughness: ability.combatDamageByToughness,
+      lethalDamageByPower: ability.lethalDamageByPower === true,
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       assignAsThoughUnblocked: ability.assignAsThoughUnblocked === true,
@@ -6152,6 +6160,7 @@ function collectStaticEffects(
         toxic: 0,
         restrictions: [],
         combatDamageByToughness: undefined,
+        lethalDamageByPower: false,
         canAttackAsThoughNoDefender: false,
         canAttackAttackersDespiteDefender: false,
         assignAsThoughUnblocked: false,
@@ -6294,6 +6303,7 @@ function assertSameCharacteristics(
       controller: c.controller,
       restrictions: [...c.restrictions].sort(),
       damageByToughness: c.damageByToughness,
+      lethalDamageByPower: c.lethalDamageByPower === true,
       assignsNoCombatDamage: c.assignsNoCombatDamage === true,
       extraBlocks: c.extraBlocks ?? 0,
       canAttackAsThoughNoDefender: c.canAttackAsThoughNoDefender,
@@ -6401,6 +6411,7 @@ function computeCharacteristicsUncached(
   const bandsWithOther: CardFilter[] = [];
   const landwalk: CardFilter[] = [];
   let byToughness: StaticAbility["combatDamageByToughness"];
+  let lethalByPower = false;
   let assignsNoCombatDamage = false;
   let canAttackAsThoughNoDefender = false;
   let canAttackAttackersDespiteDefender = false;
@@ -6434,6 +6445,9 @@ function computeCharacteristicsUncached(
     if (effect.combatDamageByToughness !== undefined && byToughness !== "always") {
       byToughness = effect.combatDamageByToughness;
     }
+    // A rule about it (613.11), not an ability it has: no loss of abilities
+    // ends it — only its source's leaving, or the source losing its own.
+    if (effect.lethalDamageByPower) lethalByPower = true;
     if (effect.canAttackAsThoughNoDefender) canAttackAsThoughNoDefender = true;
     if (effect.canAttackAttackersDespiteDefender) canAttackAttackersDespiteDefender = true;
     // A rule about how it assigns damage, not an ability it has (Indomitable
@@ -6747,6 +6761,7 @@ function computeCharacteristicsUncached(
     controller: object.controller,
     restrictions,
     damageByToughness,
+    ...(lethalByPower ? { lethalDamageByPower: true } : {}),
     ...(assignsNoCombatDamage ? { assignsNoCombatDamage: true } : {}),
     ...(extraBlocks !== 0 ? { extraBlocks } : {}),
     canAttackAsThoughNoDefender,
@@ -6929,6 +6944,37 @@ export function assignedCombatDamage(
   id: ObjectId,
 ): number {
   return combatDamageOf(computeCharacteristics(state, registry, id));
+}
+
+/**
+ * The least damage, with none marked, that is lethal to a creature with
+ * these characteristics (rules 120.6, 704.5g): its toughness — or, under a
+ * `lethalDamageByPower` static (Zilortha, Strength Incarnate), its power,
+ * but never less than 1, since 704.5g destroys only a creature that "has
+ * damage marked on it" (Zilortha's ruling: "A creature with 0 power isn't
+ * destroyed unless it has at least 1 damage marked on it"). **Every** place
+ * that asks what damage kills a creature reads this, or
+ * {@link lethalDamageLeft} — the state-based action, the combat damage split
+ * and trample, "excess damage", the scenario builder and the bots — never
+ * `toughness` (Zilortha's ruling: "Any time the game is checking whether
+ * damage is lethal … use the power"). Toughness 0 or less is 704.5f's, not
+ * a question of damage, and stays on `toughness` (the ruling); so does
+ * everything else that says "toughness".
+ */
+export function lethalDamageOf(c: Characteristics): number {
+  return c.lethalDamageByPower === true ? Math.max(1, c.power) : c.toughness;
+}
+
+/**
+ * How much more damage is lethal to a creature with these characteristics
+ * and `damageMarked` damage already marked on it (rules 120.4a, 120.6,
+ * 702.19b — "take into account damage already marked"): what's left of
+ * {@link lethalDamageOf}, and 0 once that's reached (an indestructible
+ * creature with lethal damage on it). Deathtouch is the caller's: any
+ * nonzero amount from such a source is lethal (702.2c), so at most 1.
+ */
+export function lethalDamageLeft(c: Characteristics, damageMarked: number): number {
+  return Math.max(0, lethalDamageOf(c) - damageMarked);
 }
 
 /** Whether a static says a combat rule with no parameters (a `CombatWord`):

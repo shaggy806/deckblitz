@@ -21143,6 +21143,11 @@ function parseStatic(line, text) {
     },
   }[line];
   if (fixed !== undefined) return { affects: { scope: "self" }, ...fixed, text };
+  // Lethal damage by power (Zilortha, Strength Incarnate): a rule for every
+  // creature its controller controls (613.11), read wherever lethal damage is.
+  if (line === "Lethal damage dealt to creatures you control is determined by their power rather than their toughness.") {
+    return { affects: { scope: "creatures-you-control" }, lethalDamageByPower: true, text };
+  }
   let m;
   // "You may play lands and cast spells from among cards exiled with ~ [. If you
   // cast a spell this way, you may spend mana as though it were mana of any

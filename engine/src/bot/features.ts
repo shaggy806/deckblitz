@@ -40,7 +40,7 @@
 import { costLosesSource, isManaAbility } from "../abilities.js";
 import { journalTotal } from "../journal.js";
 import type { TriggeredAbility } from "../abilities.js";
-import { combatDamageOf, computeCharacteristics, withComputedCache } from "../characteristics.js";
+import { combatDamageOf, computeCharacteristics, lethalDamageOf, withComputedCache } from "../characteristics.js";
 import type { Characteristics } from "../characteristics.js";
 import type { CardRegistry } from "../cards.js";
 import type { CardDefinition, Keyword } from "../cards/define.js";
@@ -1142,9 +1142,9 @@ function deterringBlockers(state: GameState, registry: CardRegistry, player: Pla
     const holds = attackers.some(
       (attacker) =>
         canBlock(blocker, attacker) &&
-        (blocker.damage >= attacker.toughness ||
+        (blocker.damage >= attacker.lethal ||
           blocker.keywords.has("deathtouch") ||
-          (attacker.damage < blocker.toughness && !attacker.keywords.has("deathtouch"))),
+          (attacker.damage < blocker.lethal && !attacker.keywords.has("deathtouch"))),
     );
     if (holds) deter(blocker);
     else if (blocker.damage > 0) small.push(blocker);
@@ -1154,16 +1154,16 @@ function deterringBlockers(state: GameState, registry: CardRegistry, player: Pla
   const gangsAgainst = (opponent: readonly CombatCreature[]): CombatCreature[] => {
     const left = [...small];
     const taken: CombatCreature[] = [];
-    for (const attacker of [...opponent].sort((a, b) => a.toughness - b.toughness)) {
+    for (const attacker of [...opponent].sort((a, b) => a.lethal - b.lethal)) {
       const gang: CombatCreature[] = [];
       let damage = 0;
       for (const blocker of left) {
-        if (damage >= attacker.toughness) break;
+        if (damage >= attacker.lethal) break;
         if (!canBlock(blocker, attacker)) continue;
         gang.push(blocker);
         damage += blocker.damage;
       }
-      if (gang.length < 2 || damage < attacker.toughness) continue;
+      if (gang.length < 2 || damage < attacker.lethal) continue;
       for (const blocker of gang) left.splice(left.indexOf(blocker), 1);
       taken.push(...gang);
     }
@@ -1239,8 +1239,10 @@ function playerFeaturesUncached(
       power += damage * n;
       // Capped: a wall's toughness past anything on the table that could
       // hit it blocks no better. Uncapped, Tree of Redemption's swap of 40
-      // life for a 0/40 scored as a gain (a live capture, 2026-10-04).
-      toughness += Math.min(c.toughness, TOUGHNESS_CAP) * n;
+      // life for a 0/40 scored as a gain (a live capture, 2026-10-04). What
+      // the damage that kills it is (`lethalDamageOf`): its toughness, or its
+      // power under Zilortha, Strength Incarnate.
+      toughness += Math.min(lethalDamageOf(c), TOUGHNESS_CAP) * n;
       if (count(c, EVASION) > 0) evasivePower += damage * n;
       // A 1/1 token: `creatures` prices every body alike, so before this one
       // outweighed two cards and v2 wouldn't Skullclamp it or feed it to

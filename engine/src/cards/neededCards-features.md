@@ -358,6 +358,16 @@ and putting them onto the battlefield under its controller just before the first
 Liberated (rank 7155), the one card that restarts the game. `test/restart-game.test.ts`;
 `docs/plans/restart-the-game.md`.
 
+### Lethal damage determined by power — built 2026-11-16
+
+The key `static:lethal-damage-by-power`: the static `lethalDamageByPower` (rule 613.11), and every reading of
+lethal damage routed through `lethalDamageOf` / `lethalDamageLeft` (`characteristics.ts`) — the state-based
+action (704.5g), combat damage assignment and trample (`combat/damage.ts`'s `lethalFor`, 702.19b), excess damage
+(`Game.lethalDamageTo`, 120.4a/120.10), the scenario builder's damage cap, and the bots' estimates of what dies
+(`CombatCreature.lethal`, v1's blocks, `damageLands`, divisions, sweeps). Lethal by power is at least 1: a
+0-power creature dies only with damage marked (the ruling). Zilortha, Strength Incarnate (rank 8983).
+`test/lethal-damage-by-power.test.ts`; design record `docs/plans/lethal-damage-by-power.md`.
+
 ### "When each opponent casts their first spell of the game" — built 2026-11-14
 
 The key `trigger:opponent-first-spell-of-game`: an opening-hand reveal's `at` may be `{ whenever:

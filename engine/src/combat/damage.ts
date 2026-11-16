@@ -23,7 +23,7 @@
  */
 
 import type { CardRegistry } from "../cards.js";
-import { assignedCombatDamage, computeCharacteristics, objHasKeyword } from "../characteristics.js";
+import { assignedCombatDamage, computeCharacteristics, lethalDamageLeft, objHasKeyword } from "../characteristics.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState, OverPlaneswalker } from "../state.js";
 import { blockedAttackersOf, damageAssigner, opposedAssignment } from "./banding.js";
@@ -42,10 +42,13 @@ export function liveBlockersOf(state: GameState, attackerId: ObjectId): ObjectId
   });
 }
 
-/** How much damage counts as lethal to `blockerId` right now: its remaining
- * toughness, or 1 from a deathtouch attacker (rule 702.2c) — and none from
- * either once it has lethal damage marked (an indestructible one), since
- * 702.19b takes "damage already marked on the creature" into account. */
+/** How much damage counts as lethal to `blockerId` right now: what's left of
+ * its lethal damage (`lethalDamageLeft` — its toughness, or its power under
+ * Zilortha, Strength Incarnate, less the damage marked), or 1 from a
+ * deathtouch attacker (rule 702.2c) — and none from either once it has
+ * lethal damage marked (an indestructible one), since 702.19b takes "damage
+ * already marked on the creature" into account. Every split of combat damage
+ * reads it: the offer's `lethal`, the standard split, trample. */
 export function lethalFor(
   state: GameState,
   registry: CardRegistry,
@@ -53,8 +56,7 @@ export function lethalFor(
   blockerId: ObjectId,
 ): number {
   const marked = state.objects[blockerId].damageMarked;
-  const toughness = computeCharacteristics(state, registry, blockerId).toughness;
-  const left = Math.max(0, toughness - marked);
+  const left = lethalDamageLeft(computeCharacteristics(state, registry, blockerId), marked);
   return objHasKeyword(state, registry, attackerId, "deathtouch") ? Math.min(1, left) : left;
 }
 

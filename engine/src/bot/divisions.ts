@@ -15,14 +15,15 @@
 
 import type { Action, LegalAction } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
-import { computeCharacteristics } from "../characteristics.js";
+import { computeCharacteristics, lethalDamageLeft } from "../characteristics.js";
 import type { GameState } from "../state.js";
 import type { TargetRef } from "../target.js";
 
 type Divide = { readonly total: number; readonly slot: number; readonly upTo?: true };
 
-/** The damage that kills `target`: a creature's toughness less what it has
- * taken, a planeswalker's loyalty. `Infinity` for what a share can't kill (an
+/** The damage that kills `target`: what's left of a creature's lethal damage
+ * (`lethalDamageLeft` — its toughness, or its power under Zilortha, less what
+ * it has taken), a planeswalker's loyalty. `Infinity` for what a share can't kill (an
  * indestructible creature, anything else) and for a player, who is where
  * what's left over goes. */
 function lethalTo(state: GameState, registry: CardRegistry, target: TargetRef): { readonly lethal: number; readonly player: boolean } {
@@ -31,7 +32,7 @@ function lethalTo(state: GameState, registry: CardRegistry, target: TargetRef): 
   if (object === undefined || object.zone !== "battlefield") return { lethal: Infinity, player: false };
   const c = computeCharacteristics(state, registry, target.object);
   if (c.types.includes("creature")) {
-    return { lethal: c.keywords.has("indestructible") ? Infinity : Math.max(1, c.toughness - object.damageMarked), player: false };
+    return { lethal: c.keywords.has("indestructible") ? Infinity : Math.max(1, lethalDamageLeft(c, object.damageMarked)), player: false };
   }
   if (c.types.includes("planeswalker")) return { lethal: Math.max(1, object.counters.loyalty ?? 1), player: false };
   return { lethal: Infinity, player: false };

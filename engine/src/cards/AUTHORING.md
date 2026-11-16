@@ -6169,6 +6169,17 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   over, and the `assign-combat-damage` offer (`combatDamageOf` in
   `characteristics.ts`). A fight, "damage equal to its power" and a power
   condition all still read the real power.
+- `lethalDamageByPower: true` — "Lethal damage dealt to creatures you control
+  is determined by their power rather than their toughness" (Zilortha,
+  Strength Incarnate, over `creatures-you-control`): a rule (613.11), not an
+  ability the creatures have. Every reading of lethal damage goes through
+  `lethalDamageOf` / `lethalDamageLeft` (`characteristics.ts`) and so
+  changes with it: the state-based action (704.5g), the combat damage split
+  and trample (702.19b), "excess damage" (120.4a, 120.10 — Flame Spill), the
+  scenario builder's cap and the bots' arithmetic. Lethal by power is at
+  least 1 (a 0-power creature dies only with damage marked — the ruling).
+  Toughness 0 (704.5f), indestructible and deathtouch are unchanged.
+  `docs/plans/lethal-damage-by-power.md`.
 - `crewsAs: { plus?, times?, toughness?, saddles?, stations? }` with `affects: { scope: "self" }`
   (`times: 3` with `stations: true`: Sulu, Heroic Helmsman's "stations Spacecraft and crews
   Vehicles as though his power were tripled", the station read as it resolves, rule 702.184a)

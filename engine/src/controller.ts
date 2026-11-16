@@ -38,6 +38,8 @@ import {
   assignedCombatDamage,
   combatDamageOf,
   computeCharacteristics,
+  lethalDamageLeft,
+  lethalDamageOf,
   staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
@@ -3744,7 +3746,7 @@ export class HeuristicBotController extends AutomaticController {
               : dealtByTarget(sweep) && dealer !== undefined && typeof sweep.amount === "object" && "powerOf" in sweep.amount
                 ? computeCharacteristics(state, this.registry, dealer).power
                 : undefined;
-          return amount === undefined || amount >= c.toughness - (state.objects[id]?.damageMarked ?? 0);
+          return amount === undefined || amount >= lethalDamageLeft(c, state.objects[id]?.damageMarked ?? 0);
         }
         return true;
       });
@@ -5509,7 +5511,9 @@ export class HeuristicBotController extends AutomaticController {
     });
     const deals = (id: ObjectId) => combatDamageOf(computeCharacteristics(state, this.registry, id));
     const deathtouch = (id: ObjectId) => computeCharacteristics(state, this.registry, id).keywords.has("deathtouch");
-    if (blockers.some((id) => deals(id) >= me.toughness || deathtouch(id))) return true;
+    // What kills it: its toughness, or its power under Zilortha.
+    const lethal = lethalDamageOf(me);
+    if (blockers.some((id) => deals(id) >= lethal || deathtouch(id))) return true;
     // A gang block `declareBlockers` would make: two that kill it together,
     // for less than it's worth.
     const damage = combatDamageOf(me);
@@ -5517,7 +5521,7 @@ export class HeuristicBotController extends AutomaticController {
       for (let j = i + 1; j < blockers.length; j += 1) {
         const x = blockers[i];
         const y = blockers[j];
-        if (deals(x) + deals(y) < me.toughness) continue;
+        if (deals(x) + deals(y) < lethal) continue;
         if (blockWorth(state, this.registry, attacker) > gangLoss(state, this.registry, damage, me.keywords.has("deathtouch"), x, y) + 1) {
           return true;
         }
@@ -5540,7 +5544,9 @@ export class HeuristicBotController extends AutomaticController {
     // What each creature deals in combat (its power, or its toughness under
     // Doran, the Siege Tower) — the only "power" a block is judged on.
     const power = (id: ObjectId) => assignedCombatDamage(state, this.registry, id);
-    const toughness = (id: ObjectId) => computeCharacteristics(state, this.registry, id).toughness;
+    // The damage that kills each (its toughness, or its power under
+    // Zilortha, Strength Incarnate) — the only "toughness" a block is judged on.
+    const lethal = (id: ObjectId) => lethalDamageOf(computeCharacteristics(state, this.registry, id));
 
     // The blockers on offer, one unit a creature. A compacted token stack is
     // one entry standing for `copies` creatures (rule 509.1a: each token
@@ -5590,8 +5596,8 @@ export class HeuristicBotController extends AutomaticController {
           // 702.111b), and taken here it was dropped at the end, the blocker
           // spent on nothing. The gang blocks below pair it up.
           !legal.menaceAttackers.includes(a) &&
-          power(entry.blocker) >= toughness(a) &&
-          toughness(entry.blocker) > power(a) &&
+          power(entry.blocker) >= lethal(a) &&
+          lethal(entry.blocker) > power(a) &&
           (firstStrike || !computeCharacteristics(state, this.registry, a).keywords.has("deathtouch")),
       );
       if (favorable !== undefined) {
@@ -5608,7 +5614,7 @@ export class HeuristicBotController extends AutomaticController {
     // A creature's worth is `blockWorth`.
     const worth = (id: ObjectId): number => blockWorth(state, this.registry, id);
     const deathtouch = (id: ObjectId) => computeCharacteristics(state, this.registry, id).keywords.has("deathtouch");
-    const kills = (x: ObjectId, y: ObjectId) => power(x) >= toughness(y) || deathtouch(x);
+    const kills = (x: ObjectId, y: ObjectId) => power(x) >= lethal(y) || deathtouch(x);
     const blocked = () => new Set(chosen.values());
     // A blocker that kills the attacker and dies to it, for an attacker
     // worth clearly more (`tradeMargin`).
@@ -5653,7 +5659,7 @@ export class HeuristicBotController extends AutomaticController {
           const pairing = `${x}|${y}`;
           if (tried.has(pairing)) continue;
           tried.add(pairing);
-          if (power(x) + power(y) < toughness(attacker) && !kills(x, attacker) && !kills(y, attacker)) continue;
+          if (power(x) + power(y) < lethal(attacker) && !kills(x, attacker) && !kills(y, attacker)) continue;
           const loss = gangLoss(state, this.registry, power(attacker), deathtouch(attacker), x, y);
           if (worth(attacker) > loss + 1 && (best === null || loss < best.loss)) best = { pair: [able[i], able[j]], loss };
         }
@@ -5682,7 +5688,7 @@ export class HeuristicBotController extends AutomaticController {
             !taken.has(a) &&
             !legal.menaceAttackers.includes(a) &&
             power(a) > 0 &&
-            toughness(entry.blocker) > power(a) &&
+            lethal(entry.blocker) > power(a) &&
             !computeCharacteristics(state, this.registry, a).keywords.has("deathtouch"),
         )
         .sort((a, b) => power(b) - power(a))[0];
@@ -5771,7 +5777,7 @@ function gangLoss(
   x: ObjectId,
   y: ObjectId,
 ): number {
-  const needs = (b: ObjectId) => (deathtouch ? 1 : computeCharacteristics(state, registry, b).toughness);
+  const needs = (b: ObjectId) => (deathtouch ? 1 : lethalDamageOf(computeCharacteristics(state, registry, b)));
   const worth = (b: ObjectId) => blockWorth(state, registry, b);
   return needs(x) + needs(y) <= damage
     ? worth(x) + worth(y)

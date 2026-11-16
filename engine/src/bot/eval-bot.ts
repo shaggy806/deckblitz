@@ -2803,7 +2803,7 @@ export class EvalBotController extends HeuristicBotController {
       if (attacker === undefined) return -Infinity;
       const blockers = blockersFor(defendingPlayer(d.defender)).filter((b) => canBlock(b, attacker));
       const dies = blockers.some(
-        (b) => b.damage >= attacker.toughness || b.keywords.has("deathtouch"),
+        (b) => b.damage >= attacker.lethal || b.keywords.has("deathtouch"),
       );
       const player = state.players[d.defender as PlayerId];
       const unblocked =
@@ -3035,7 +3035,7 @@ export class EvalBotController extends HeuristicBotController {
       for (const c of combatCreatures(state, this.cards, player, false)) creatures.set(c.id, c);
     }
     const kills = (x: CombatCreature, y: CombatCreature): boolean =>
-      x.damage >= y.toughness || x.keywords.has("deathtouch");
+      x.damage >= y.lethal || x.keywords.has("deathtouch");
 
     // Everything attacking us or our planeswalkers, as if unblocked — what a
     // block's stopped damage comes off the end of.
@@ -3060,12 +3060,13 @@ export class EvalBotController extends HeuristicBotController {
       const blockers = move.map((b) => creatures.get(b.blocker));
       if (attacker === undefined || blockers.some((b) => b === undefined)) return -Infinity;
       const damage = attacker.damage * (attacker.keywords.has("double-strike") ? 2 : 1);
-      const toughness = blockers.reduce((sum, b) => sum + (b?.toughness ?? 0), 0);
-      const stopped = attacker.keywords.has("trample") ? Math.min(damage, toughness) : damage;
+      // A trampler is held back only by what's lethal to the blockers.
+      const holds = blockers.reduce((sum, b) => sum + (b?.lethal ?? 0), 0);
+      const stopped = attacker.keywords.has("trample") ? Math.min(damage, holds) : damage;
       const power = blockers.reduce((sum, b) => sum + (b?.damage ?? 0), 0);
       let value =
         lifeCost(life, incoming, w) - lifeCost(life, Math.max(0, incoming - stopped), w);
-      if (power >= attacker.toughness || blockers.some((b) => b?.keywords.has("deathtouch"))) {
+      if (power >= attacker.lethal || blockers.some((b) => b?.keywords.has("deathtouch"))) {
         value += creatureValue(attacker, w);
       }
       // The attacker's damage kills what it can of the blockers, the most
@@ -3077,7 +3078,7 @@ export class EvalBotController extends HeuristicBotController {
         .filter((b): b is CombatCreature => b !== undefined)
         .sort((x, y) => creatureValue(y, w) - creatureValue(x, w));
       for (const b of byValue) {
-        const needs = deathtouch ? 1 : b.toughness;
+        const needs = deathtouch ? 1 : b.lethal;
         if (left < needs) continue;
         left -= needs;
         value -= creatureValue(b, w);
@@ -3146,7 +3147,7 @@ export class EvalBotController extends HeuristicBotController {
           for (let j = i + 1; j < able.length && pairs < MAX_GANG_PAIRS; j += 1) {
             const x = creatures.get(able[i].blocker);
             const y = creatures.get(able[j].blocker);
-            if (x === undefined || y === undefined || x.damage + y.damage < target.toughness) continue;
+            if (x === undefined || y === undefined || x.damage + y.damage < target.lethal) continue;
             const move = [one(able[i].blocker, attacker), one(able[j].blocker, attacker)];
             out.push({ next: [...current, ...move], estimate: estimate(move) });
             pairs += 1;

@@ -2639,6 +2639,26 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly combatDamageByToughness?: "always" | "if-toughness-greater";
   /**
+   * Lethal damage dealt to the affected creatures is determined by their
+   * **power** rather than their toughness (Zilortha, Strength Incarnate:
+   * "… to creatures you control …", `affects: { scope:
+   * "creatures-you-control" }`). A rule-modifying effect (rule 613.11), not
+   * an ability the creatures have, so a creature that loses its abilities
+   * still has it; read live, so damage already marked becomes lethal or
+   * stops being so as the source comes and goes (the rulings).
+   *
+   * It changes every reading of lethal damage, through one place
+   * (`lethalDamageOf` / `lethalDamageLeft` in `characteristics.ts`): the
+   * state-based action (704.5g — damage marked at or over its power, and at
+   * least 1, so a 0-power creature dies only once it has damage marked: the
+   * ruling), the combat damage split and what tramples over (702.19b), the
+   * excess of "excess damage" (120.4a, 120.10), and the bots' arithmetic.
+   * Toughness 0 still puts it in the graveyard (704.5f, not a consequence of
+   * damage — the ruling), and deathtouch still makes any damage lethal
+   * (702.2b-c). See `docs/plans/lethal-damage-by-power.md`.
+   */
+  readonly lethalDamageByPower?: true;
+  /**
    * What this creature adds to a crew cost's total power (rule 702.122a —
    * an ability marked `crew`), and with `saddles` to a saddle cost's
    * (702.171a — marked `saddle`): "This creature crews Vehicles **as though

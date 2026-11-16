@@ -32,6 +32,7 @@ const creature = (
   power,
   toughness,
   damage: power,
+  lethal: toughness,
   keywords: new Set(keywords),
   colors: new Set(),
   types: ["creature"],

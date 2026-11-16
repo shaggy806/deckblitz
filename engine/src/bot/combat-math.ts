@@ -19,7 +19,13 @@
 
 import type { CardType, Keyword } from "../cards/define.js";
 import type { Color } from "../mana.js";
-import { combatDamageOf, computeCharacteristics, unblockedAssignmentOf, withComputedCache } from "../characteristics.js";
+import {
+  combatDamageOf,
+  computeCharacteristics,
+  lethalDamageOf,
+  unblockedAssignmentOf,
+  withComputedCache,
+} from "../characteristics.js";
 import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy } from "../combat/eligibility.js";
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -38,6 +44,11 @@ export interface CombatCreature {
    * question here about damage dealt reads; `power` stays the real power,
    * for valuing the creature. */
   readonly damage: number;
+  /** The damage that kills it (`lethalDamageOf`): its toughness, or its
+   * power — at least 1 — under Zilortha, Strength Incarnate. What every
+   * question here about what dies or what a blocker holds back reads;
+   * `toughness` stays the real toughness, for valuing the creature. */
+  readonly lethal: number;
   readonly keywords: ReadonlySet<Keyword>;
   readonly colors: ReadonlySet<Color>;
   readonly types: readonly CardType[];
@@ -105,6 +116,7 @@ function combatCreaturesUncached(
       power: c.power,
       toughness: c.toughness,
       damage: combatDamageOf(c),
+      lethal: lethalDamageOf(c),
       keywords: c.keywords,
       colors: c.colors,
       types: c.types,
@@ -222,7 +234,7 @@ function lifelinkGain(blocker: CombatCreature, attacker: CombatCreature): number
     strikesFirst(attacker) &&
     !strikesFirst(blocker) &&
     attacker.damage > 0 &&
-    (attacker.damage >= blocker.toughness || attacker.keywords.has("deathtouch"));
+    (attacker.damage >= blocker.lethal || attacker.keywords.has("deathtouch"));
   return diesFirst ? 0 : blocker.damage;
 }
 
@@ -234,8 +246,9 @@ function lifelinkGain(blocker: CombatCreature, attacker: CombatCreature): number
  * most are blocked first (ties to the one with fewer legal blockers), and each
  * takes the blocker useful against the fewest other attackers — so a reach
  * creature is saved for a flyer when a ground blocker would do. A trampler
- * takes the one with the most toughness instead, since only toughness holds it
- * back. Menace needs two. Close to exact at the board sizes that come up.
+ * takes the one with the most toughness instead, since only what's lethal to
+ * it holds it back (`lethal`: toughness, or power under Zilortha). Menace
+ * needs two. Close to exact at the board sizes that come up.
  *
  * Blockers with lifelink gain their controller life as they deal damage
  * (`gained`), and one left over joins a block already made for that alone.
@@ -275,15 +288,16 @@ export function damageThrough(
       .filter((b) => free.has(b))
       .sort((x, y) =>
         trample
-          ? blockers[y].toughness - blockers[x].toughness
-          : usefulness(x) - usefulness(y) || blockers[x].toughness - blockers[y].toughness,
+          ? blockers[y].lethal - blockers[x].lethal
+          : usefulness(x) - usefulness(y) || blockers[x].lethal - blockers[y].lethal,
       );
 
     let through = full;
     if (available.length >= needed && attacker.assignsPastBlockers !== true) {
       const chosen = available.slice(0, needed);
-      // Blocking only stops a trampler's damage up to the blockers' toughness.
-      const absorbed = chosen.reduce((sum, b) => sum + Math.max(0, blockers[b].toughness), 0);
+      // Blocking only stops a trampler's damage up to what's lethal to the
+      // blockers (702.19b): their toughness, or their power under Zilortha.
+      const absorbed = chosen.reduce((sum, b) => sum + Math.max(0, blockers[b].lethal), 0);
       const excess = trample ? Math.max(0, full - absorbed) : 0;
       // Worth spending the blockers only if they actually stop something.
       if (full - excess > 0) {
@@ -352,13 +366,13 @@ function poisonThrough(
       .filter((b) => free.has(b))
       .sort((x, y) =>
         trample
-          ? blockers[y].toughness - blockers[x].toughness
-          : usefulness(x) - usefulness(y) || blockers[x].toughness - blockers[y].toughness,
+          ? blockers[y].lethal - blockers[x].lethal
+          : usefulness(x) - usefulness(y) || blockers[x].lethal - blockers[y].lethal,
       );
     let given = unblocked(index);
     if (available.length >= needed && attacker.assignsPastBlockers !== true) {
       const chosen = available.slice(0, needed);
-      const absorbed = chosen.reduce((sum, b) => sum + Math.max(0, blockers[b].toughness), 0);
+      const absorbed = chosen.reduce((sum, b) => sum + Math.max(0, blockers[b].lethal), 0);
       const past = poisonGiven(attacker, trample ? Math.max(0, full - absorbed) : 0);
       if (past < given) {
         for (const b of chosen) free.delete(b);
