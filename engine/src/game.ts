@@ -47716,7 +47716,10 @@ controlledBy,
     if (isLand && terms.play !== true && terms.perType?.includes("land") !== true) return false;
     if (terms.yourTurnOnly === true && this.activePlayer !== player) return false;
     return this.withFace(cardId, face, () => {
-      const context = { you: player, source, castX: x };
+      // An `{ amount }` in the filter is counted from the permission's source,
+      // live: Arcade Gannon's "with mana value less than or equal to the
+      // number of quest counters on Arcade Gannon".
+      const context = { you: player, source, castX: x, amount: this.filterAmounts({ source, controller: player }) };
       if (terms.filter !== undefined && !matchesFilter(this.state, this.registry, cardId, terms.filter, context)) return false;
       return isLand || terms.spell === undefined || matchesFilter(this.state, this.registry, cardId, terms.spell, context);
     });

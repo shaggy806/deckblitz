@@ -334,6 +334,14 @@ one offer with no colour, and once the cost is paid the mana ability asks them �
 resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
 back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
 `test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+### A graveyard permission's mana value against counters on its source — built 2026-11-16
+
+The key `static:graveyard-cast-filter-amount`. A static permission's `filter` (and `spell`) now reads an
+`{ amount }` operand from the permission's source, live, as a card-held permission's already did
+(`Game.playTermsReach` passes `filterAmounts`): Arcade Gannon's "an artifact or Human spell from your
+graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon" (rank
+11154), on Karador's once-each-of-your-turns terms. `test/graveyard-cast-filter-amount.test.ts`.
+
 ### "Aura cards that were attached to it" from a graveyard — built 2026-11-16
 
 The key `effect:return-aura-cards-that-were-attached-from-graveyard`. The filter's `wasAttachedTo` now also

@@ -2746,7 +2746,9 @@
   "cost:cant-spend-mana-to-cast",
   "cost:self-cost-reduction-cap",
   "amount:cda-count-excluding-self",
-  "effect:return-aura-cards-that-were-attached-from-graveyard"
+  "effect:return-aura-cards-that-were-attached-from-graveyard",
+  "effect:return-aura-cards-that-were-attached-from-graveyard",
+  "static:graveyard-cast-filter-amount"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

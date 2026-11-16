@@ -44,7 +44,9 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside
  * - `filter`: which cards, read from the holder's side. Judged as the face
  *   played for a static's or a resolved effect's (601.3e, Ancient Greenwarden's
  *   ruling), as the card for one naming that card (Narset's "noncreature,
- *   nonland cards").
+ *   nonland cards"). An `{ amount }` operand in it (or in `spell`) is counted
+ *   from the permission's source, live: Arcade Gannon's "with mana value less
+ *   than or equal to the number of quest counters on Arcade Gannon".
  * - `spell`: which spells, always as the face cast (601.3e). Lands aren't spells.
  *
  * What it costs. Nothing here applies to a land, which has no cost:
