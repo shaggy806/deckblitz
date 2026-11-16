@@ -365,6 +365,16 @@ ability (two Coursers). A play naming one runs with `playOptions` narrowed to it
 everything read of the permission — its costs, what it spends, `spendAs`, its `PlayedUnder` — is that one's.
 The client's library-top buttons say "(via Courser of Kruphix)". The Fourth Doctor (rank 10460), beside
 Crystal Skull and Courser of Kruphix. `test/play-permission-choice.test.ts`.
+### A reveal per permanent destroyed, the finds entering together — built 2026-11-16
+
+The key `effect:reveal-until-per-destroyed-this-way` (family `effect:reveal-until-count`): no new
+effect. `reveal-until-count` gains `exile: "found"` (only the card found is exiled, the rest stay
+revealed in the library), its `count` read as the revealer's own (a `{ thisWay, who: "each" }`),
+and, inside a `for-each-player` of `choicesHeld`, its `put: "battlefield"` held (rule 101.4,
+`heldChoices.entries` / `shuffles`, entering from exile) so every player's finds enter as one
+event and the libraries shuffle after. One reveal until N matches turns up the same cards as N
+reveals with the earlier finds gone. Indomitable Creativity (rank 10801).
+`test/reveal-until-per-destroyed.test.ts`.
 
 ### One choice across a player's own zones, exiled at once — built 2026-11-16
 

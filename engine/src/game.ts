@@ -43617,7 +43617,7 @@ controlledBy,
           found.push(id);
           reached += measure === "mana-value" ? manaValueOfObject(this.registry, this.state.objects[id]) : 1;
         };
-        if (exile) {
+        if (exile === true) {
           // One at a time, face up: each is in exile before the next.
           while (reached < count && library.length > 0) {
             const top = library[0];
@@ -43633,7 +43633,23 @@ controlledBy,
           if (matches(id)) find(id);
         }
         if (revealed.length > 0) this.revealCards(owner, revealed, "library");
+        // "… until an artifact or creature card is revealed and exiles that
+        // card" (Indomitable Creativity): each one found, the rest staying
+        // where they were revealed.
+        if (exile === "found") for (const id of found) this.moveObject(id, "exile");
         return { revealed, found };
+      },
+      holdEntries: (owner, cards, tapped, shuffle) => {
+        const held = this.state.heldChoices;
+        if (held === undefined) return;
+        this.state.heldChoices = {
+          ...held,
+          entries: [
+            ...(held.entries ?? []),
+            ...(cards.length === 0 ? [] : [{ player: owner, objects: [...cards], ...(tapped ? { tapped: true as const } : {}) }]),
+          ],
+          ...(shuffle ? { shuffles: [...(held.shuffles ?? []), owner] } : {}),
+        };
       },
       putOntoBattlefieldTogether: (cards, tapped) => {
         const still = cards.filter((id) => this.state.objects[id] !== undefined);
@@ -60793,7 +60809,8 @@ controlledBy,
    * under its owner's control, or the effect's controller's where it says so
    * (`under` — Dredge the Mire). A card that has left its owner's hand (or
    * graveyard — Tempt with Immortality's returns — or the library a search
-   * found it in) since stays where it is. Those who searched then shuffle.
+   * found it in, or the exile a `reveal-until-count` put it in — Indomitable
+   * Creativity) since stays where it is. Those who searched then shuffle.
    */
   private enterHeldEntries(
     ids: readonly ObjectId[],
@@ -60808,7 +60825,7 @@ controlledBy,
   ): void {
     const entering = ids.filter((id) => {
       const from = this.state.objects[id]?.zone;
-      return from === "hand" || from === "graveyard" || from === "library";
+      return from === "hand" || from === "graveyard" || from === "library" || from === "exile";
     });
     for (const id of entering) {
       this.markEnteringWithoutAbilities(id, enterAs[id]);

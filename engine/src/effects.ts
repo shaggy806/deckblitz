@@ -4555,7 +4555,11 @@ export type EffectSpec =
        *
        * `whose` as `reveal-until`'s; the controller's when absent. `exile`:
        * each card exiled, face up, as it goes, rather than revealed
-       * (Auspicious Starrix). `put`: `"battlefield"` (absent;
+       * (Auspicious Starrix); `"found"`, only each card matching `filter`,
+       * as it's revealed, the rest staying revealed where they are —
+       * Indomitable Creativity's "reveals cards from the top of their library
+       * until an artifact or creature card is revealed and **exiles that
+       * card**", `put` then taking them from exile. `put`: `"battlefield"` (absent;
        * together, under their owner's control, each card's "as this enters"
        * choices asked first, rule 614.12 — `tapped` enters them tapped),
        * `"hand"` (Fathom Trawl), `"graveyard"` (Old Stickfingers' "put all
@@ -4567,14 +4571,23 @@ export type EffectSpec =
        * **total mana value** `count` or greater, rather than `count` of them
        * (rule 202.3) — Improvisation Capstone's "exile cards from the top of
        * your library until you exile cards with total mana value 4 or
-       * greater", Tasha's Hideous Laughter's 20. */
+       * greater", Tasha's Hideous Laughter's 20.
+       *
+       * Inside a `for-each-player` of `choicesHeld` (rule 101.4), `put:
+       * "battlefield"` waits for the last player: "**those players** put the
+       * exiled cards onto the battlefield, then shuffle" (Indomitable
+       * Creativity — its ruling, "all of the exiled cards are put onto the
+       * battlefield at the same time") is every player's found cards entering
+       * as one event, and a `rest: "shuffle"` each library shuffled after
+       * (`heldChoices.entries` / `shuffles`). Not with `anyNumber`, `thenEach`
+       * or `thenToDifferentOpponents`. */
       readonly kind: "reveal-until-count";
       readonly filter: CardFilter;
       readonly count: EffectAmount;
       readonly measure?: "mana-value";
       readonly rest: RevealedCardsGo;
       readonly whose?: number | PlayerRef;
-      readonly exile?: boolean;
+      readonly exile?: boolean | "found";
       readonly put?: "battlefield" | "hand" | "graveyard" | "with-rest";
       readonly tapped?: boolean;
       /** With `put: "battlefield"`: "put **any number of** those permanent
@@ -12245,9 +12258,15 @@ export interface EffectApi {
     owner: PlayerId,
     filter: CardFilter,
     count: number,
-    exile: boolean,
+    /** `"found"`: only the matching cards, each as it's revealed. */
+    exile: boolean | "found",
     measure?: "mana-value",
   ): { readonly revealed: readonly ObjectId[]; readonly found: readonly ObjectId[] };
+  /** Inside a hold (`choicesHeld`): `cards` wait to enter with every other
+   * player's at release (rule 101.4 — `heldChoices.entries`), each under
+   * its owner's control; with `shuffle`, `owner`'s library is shuffled
+   * after they have. */
+  holdEntries(owner: PlayerId, cards: readonly ObjectId[], tapped: boolean, shuffle: boolean): void;
   /** Put these cards onto the battlefield together, each under its owner's
    * control. `true` when it stopped first to ask an "as this enters"
    * choice (nothing has moved; do it again once that's answered). */
@@ -19916,14 +19935,34 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "reveal-until-count": {
       let progress = spec.progress;
       if (progress === undefined) {
-        const n = amountValue(spec.count, ctx);
-        if (n <= 0) return;
         const owner = revealingPlayer(spec.whose, ctx);
         if (owner === undefined) return;
-        progress = { owner, ...ctx.revealUntilCount(owner, spec.filter, n, spec.exile === true, spec.measure) };
+        // A per-player amount ("for each permanent destroyed this way, its
+        // controller reveals …") is the revealer's own.
+        const n = amountValue(spec.count, ctx, owner);
+        if (n <= 0) return;
+        progress = { owner, ...ctx.revealUntilCount(owner, spec.filter, n, spec.exile ?? false, spec.measure) };
       }
       const put = spec.put ?? "battlefield";
       const exiled = spec.exile === true;
+      // "Those players put the exiled cards onto the battlefield, then
+      // shuffle": every player's at once, after the last has revealed (rule
+      // 101.4 — the `for-each-player` releases them).
+      if (
+        put === "battlefield" &&
+        ctx.choicesHeld() &&
+        spec.anyNumber !== true &&
+        spec.thenEach === undefined &&
+        spec.thenToDifferentOpponents !== true
+      ) {
+        const found = new Set(progress.found);
+        const shuffleLater = spec.rest === "shuffle";
+        if (!shuffleLater) {
+          ctx.placeRevealed(progress.owner, progress.revealed.filter((id) => !found.has(id)), spec.rest, exiled);
+        }
+        ctx.holdEntries(progress.owner, progress.found, spec.tapped === true, shuffleLater);
+        return;
+      }
       // "Put any number of those cards onto the battlefield": the controller
       // picks which of the found cards enter; the rest go with the rest.
       if (put === "battlefield" && spec.anyNumber === true && progress.chosen === undefined) {
@@ -19949,7 +19988,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           return;
         }
       } else if (put === "hand" || put === "graveyard") {
-        ctx.placeRevealed(progress.owner, progress.found, put, exiled);
+        ctx.placeRevealed(progress.owner, progress.found, put, exiled || spec.exile === "found");
       }
       if (put === "with-rest") {
         ctx.placeRevealed(progress.owner, progress.revealed, spec.rest, exiled);
