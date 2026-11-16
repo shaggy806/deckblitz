@@ -1,13 +1,19 @@
 /**
  * Colour identity (rule 903.4 — ROADMAP Phase 9). A card's colour identity is
  * every colour in its mana cost *and* in any mana symbol in its rules text
- * (ability costs, reminder text, CDAs), plus its colour indicator. Used for
- * Commander deck validation: every card must be within the commander's
- * identity.
+ * (ability costs, CDAs), plus its colour indicator. Used for Commander deck
+ * validation: every card must be within the commander's identity.
  *
  * This is a lexical scan — every `{…}` symbol anywhere in the card's declared
  * text and ability costs — which covers the cases that matter without a full
- * Oracle-text parser.
+ * Oracle-text parser. **Reminder text is left out** (rule 903.4c): Crypt
+ * Ghast's extort reminder shows {W/B} and the card is black alone, and
+ * Trinisphere's example "{1}{B}" doesn't make it black. Reminder text is the
+ * text in parentheses (rule 207.2a), so that is what the scan skips; a land
+ * whose only mana symbols are its basic land types' reminder ("({T}: Add {R}
+ * or {G}.)") has those abilities from its types (rule 305.6), which are
+ * counted from the types themselves. `card:verify` checks every card's
+ * result against Scryfall's.
  */
 
 import type { CardDefinition } from "./cards.js";
@@ -15,10 +21,21 @@ import type { Color } from "./mana.js";
 import { COLORS } from "./mana.js";
 
 const SYMBOL = /\{([^}]*)\}/g;
+/** Reminder text: what's in parentheses (rule 207.2a). */
+const REMINDER = /\([^()]*\)/g;
+/** The mana each basic land type's intrinsic ability makes (rule 305.6). */
+const BASIC_LAND_TYPE_COLOR: Readonly<Record<string, Color>> = {
+  Plains: "W",
+  Island: "U",
+  Swamp: "B",
+  Mountain: "R",
+  Forest: "G",
+};
 
-/** Pull the W/U/B/R/G letters out of every `{…}` symbol in `text`. */
+/** Pull the W/U/B/R/G letters out of every `{…}` symbol in `text`, its
+ * reminder text aside (rule 903.4c). */
 function colorsInText(text: string, into: Set<Color>): void {
-  for (const match of text.matchAll(SYMBOL)) {
+  for (const match of text.replace(REMINDER, "").matchAll(SYMBOL)) {
     for (const ch of match[1].toUpperCase()) {
       if ((COLORS as readonly string[]).includes(ch)) into.add(ch as Color);
     }
@@ -37,7 +54,10 @@ export interface FaceLookup {
  * with several faces has every face's (rule 903.4d — a double-faced card's
  * back face counts, and so does an adventurer's spell half, being part of
  * the same card), read through `faces`; without a lookup only `def` itself
- * is read, which is right for a single-faced card and nothing else.
+ * is read, which is right for a single-faced card and nothing else. A
+ * preparation card's prepare spell is printed in its text box (rule 722.1),
+ * so its mana cost and text count too: Void Extrapolator is black with the
+ * {U/B} Omit Variables inset, and blue-black.
  */
 export function colorIdentityOf(def: CardDefinition, faces?: FaceLookup): Set<Color> {
   const identity = new Set<Color>();
@@ -46,6 +66,9 @@ export function colorIdentityOf(def: CardDefinition, faces?: FaceLookup): Set<Co
     for (const name of def.faces) {
       if (name !== def.name && faces.has(name)) addIdentityOf(faces.get(name), identity);
     }
+  }
+  if (faces !== undefined && def.prepareSpell !== null && faces.has(def.prepareSpell)) {
+    addIdentityOf(faces.get(def.prepareSpell), identity);
   }
   return identity;
 }
@@ -63,6 +86,14 @@ function addIdentityOf(def: CardDefinition, identity: Set<Color>): void {
   }
   for (const ability of def.triggered) colorsInText(ability.text, identity);
   for (const ability of def.static) colorsInText(ability.text, identity);
+  // A land with a basic land type has that type's mana ability whether or
+  // not it's printed (rule 305.6), usually as reminder text.
+  if (def.types.includes("land")) {
+    for (const subtype of def.subtypes) {
+      const color = BASIC_LAND_TYPE_COLOR[subtype];
+      if (color !== undefined) identity.add(color);
+    }
+  }
 }
 
 /** Sorted WUBRG string form ("", "WU", "WUBRG") — handy for display / compare. */

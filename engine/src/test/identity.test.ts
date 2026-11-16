@@ -114,3 +114,35 @@ describe("a multi-face card's identity is every face's (rule 903.4d)", () => {
     expect(r.violations.some((v) => v.includes(DOUBLE) && v.includes("colour identity"))).toBe(true);
   });
 });
+
+describe("reminder text isn't part of a card's identity (rule 903.4c)", () => {
+  const whole = (name: string): string => identityString(colorIdentityOf(reg.get(name), reg));
+
+  it("extort's {W/B} is reminder text: Crypt Ghast is black alone", () => {
+    expect(whole("Crypt Ghast")).toBe("B");
+    expect(whole("Blind Obedience")).toBe("W");
+    // A mono-black commander's deck may run it (Sworn to Darkness, Commander 2014).
+    const r = validateCommanderDeck({ commanders: ["Ob Nixilis of the Black Oath"], cards: ["Crypt Ghast"], size: 2 }, reg);
+    expect(r.violations).toEqual([]);
+  });
+
+  it("an example in reminder text adds nothing: Trinisphere is colourless", () => {
+    expect(whole("Trinisphere")).toBe("");
+  });
+
+  it("a keyword's cost outside the parentheses still counts", () => {
+    // "Eternalize {5}{U}{U} ({5}{U}{U}, Exile this card ...)".
+    expect(whole("Champion of Wits")).toBe("U");
+  });
+
+  it("a land's basic land types give it their colours, printed only as reminder text (rule 305.6)", () => {
+    expect(whole("Stomping Ground")).toBe("RG"); // "({T}: Add {R} or {G}.)"
+    expect(whole("Dryad Arbor")).toBe("G");
+    expect(whole("Urborg, Tomb of Yawgmoth")).toBe(""); // gives the type, has none
+  });
+
+  it("a preparation card's prepare spell is in its text box (rule 722.1)", () => {
+    expect(whole("Void Extrapolator")).toBe("UB"); // {1}{B}, with the {U/B} Omit Variables
+    expect(identityString(colorIdentityOf(reg.get("Void Extrapolator")))).toBe("B"); // no lookup, this face alone
+  });
+});

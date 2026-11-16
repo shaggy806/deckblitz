@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 // Cross-checks every card under cards/pool/ against its real Scryfall data:
-// mana cost, colors, supertypes/types/subtypes, power/toughness, loyalty.
+// mana cost, colors, supertypes/types/subtypes, power/toughness, loyalty,
+// and the colour identity `colorIdentityOf` works out (rule 903.4) against
+// Scryfall's `color_identity` (2026-11-16: it had counted reminder text, so
+// Crypt Ghast read white-black and two precons were refused as illegal).
 // Behaviour (abilities/effects) isn't checked here — only the objectively
 // comparable printed characteristics. Tokens (cards/tokens/) are skipped:
 // their names aren't unique/canonical on Scryfall.
@@ -39,6 +42,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 import { writeFileSync } from "node:fs";
 import { findCard } from "./oracle-snapshot.mjs";
+import { colorIdentityOf, identityString } from "../dist/identity.js";
 
 
 const USER_AGENT = "MTG-Engine-CardVerification/1.0";
@@ -494,6 +498,22 @@ function compareText(def, face) {
   return { missing, extra, similar, partial };
 }
 
+/**
+ * The card's colour identity as the engine works it out, against Scryfall's
+ * (rule 903.4): every face and a prepare spell counted, reminder text not
+ * (903.4c). Skipped for a meld result, which is no card of its own (Scryfall
+ * gives it its pair's identity), and when a run over part of the pool
+ * (`--limit`) doesn't hold the card's other faces.
+ */
+function identityIssue(def, card, faces) {
+  if (!Array.isArray(card.color_identity) || def.meldOf != null) return null;
+  const others = [...(def.faces ?? []), ...(def.prepareSpell != null ? [def.prepareSpell] : [])];
+  if (others.some((name) => !faces.has(name))) return null;
+  const ours = identityString(colorIdentityOf(def, faces));
+  const theirs = identityString(new Set(card.color_identity));
+  return ours === theirs ? null : `color identity: ours=${ours || "colorless"} scryfall=${theirs || "colorless"}`;
+}
+
 function compare(def, card) {
   const face = faceFor(card, def.name);
   const issues = [];
@@ -673,6 +693,7 @@ async function main() {
     byName.set(def.name.toLowerCase(), resolved ?? { __error: outcome.ok ? "fuzzy-mismatch" : outcome.status });
   }
 
+  const faces = new Map(entries.map((e) => [e.def.name, e.def]));
   const results = [];
   let checked = 0;
   let mismatched = 0;
@@ -690,6 +711,8 @@ async function main() {
     }
     checked += 1;
     const issues = compare(def, card);
+    const identity = identityIssue(def, card, faces);
+    if (identity !== null) issues.push(identity);
     const text = checkText ? compareText(def, faceFor(card, def.name)) : null;
     if (issues.length > 0) {
       mismatched += 1;
