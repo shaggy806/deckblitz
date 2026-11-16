@@ -1032,6 +1032,7 @@ import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
 import _poolZendikarIncarnate from "../pool/zendikar-incarnate.js";
 import _poolZephyrSpirit from "../pool/zephyr-spirit.js";
 import _poolZhangLiaoHeroOfHefei from "../pool/zhang-liao-hero-of-hefei.js";
+import _poolZilorthaStrengthIncarnate from "../pool/zilortha-strength-incarnate.js";
 import _poolZuoCiTheMockingSage from "../pool/zuo-ci-the-mocking-sage.js";
 import _tokens55DjinnArtifactToken from "../tokens/5-5-djinn-artifact-token.js";
 import _tokensBeastTokenCantAttackOrBlockAlone from "../tokens/beast-token-cant-attack-or-block-alone.js";
@@ -2087,6 +2088,7 @@ const shard: CardShard = {
     _poolZendikarIncarnate,
     _poolZephyrSpirit,
     _poolZhangLiaoHeroOfHefei,
+    _poolZilorthaStrengthIncarnate,
     _poolZuoCiTheMockingSage,
   ],
   tokens: [

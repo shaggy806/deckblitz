@@ -32357,6 +32357,7 @@ import _poolZiatorasEnvoy from "./pool/ziatoras-envoy.js";
 import _poolZiatorasProvingGround from "./pool/ziatoras-proving-ground.js";
 import _poolZidaneTantalusThief from "./pool/zidane-tantalus-thief.js";
 import _poolZilorthaApexOfIkoria from "./pool/zilortha-apex-of-ikoria.js";
+import _poolZilorthaStrengthIncarnate from "./pool/zilortha-strength-incarnate.js";
 import _poolZimoneAllQuestioning from "./pool/zimone-all-questioning.js";
 import _poolZimoneAndDina from "./pool/zimone-and-dina.js";
 import _poolZimoneInfiniteAnalyst from "./pool/zimone-infinite-analyst.js";
@@ -65582,6 +65583,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZiatorasProvingGround,
   _poolZidaneTantalusThief,
   _poolZilorthaApexOfIkoria,
+  _poolZilorthaStrengthIncarnate,
   _poolZimoneAllQuestioning,
   _poolZimoneAndDina,
   _poolZimoneInfiniteAnalyst,
@@ -98820,6 +98822,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ziatoras-proving-ground": _poolZiatorasProvingGround,
   "pool/zidane-tantalus-thief": _poolZidaneTantalusThief,
   "pool/zilortha-apex-of-ikoria": _poolZilorthaApexOfIkoria,
+  "pool/zilortha-strength-incarnate": _poolZilorthaStrengthIncarnate,
   "pool/zimone-all-questioning": _poolZimoneAllQuestioning,
   "pool/zimone-and-dina": _poolZimoneAndDina,
   "pool/zimone-infinite-analyst": _poolZimoneInfiniteAnalyst,
