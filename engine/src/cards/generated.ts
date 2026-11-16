@@ -14575,6 +14575,7 @@ import _poolKabiraOutrider from "./pool/kabira-outrider.js";
 import _poolKabiraPlateau from "./pool/kabira-plateau.js";
 import _poolKabiraTakedown from "./pool/kabira-takedown.js";
 import _poolKabiraVindicator from "./pool/kabira-vindicator.js";
+import _poolKaboom from "./pool/kaboom.js";
 import _poolKabutoMoth from "./pool/kabuto-moth.js";
 import _poolKadenaSlinkingSorcerer from "./pool/kadena-slinking-sorcerer.js";
 import _poolKadenasSilencer from "./pool/kadenas-silencer.js";
@@ -25679,6 +25680,7 @@ import _poolSoulcatchersAerie from "./pool/soulcatchers-aerie.js";
 import _poolSoulcipherBoard from "./pool/soulcipher-board.js";
 import _poolSoulcoilViper from "./pool/soulcoil-viper.js";
 import _poolSouldrinker from "./pool/souldrinker.js";
+import _poolSoulfireEruption from "./pool/soulfire-eruption.js";
 import _poolSoulfireGrandMaster from "./pool/soulfire-grand-master.js";
 import _poolSoulherder from "./pool/soulherder.js";
 import _poolSoulknifeSpy from "./pool/soulknife-spy.js";
@@ -25822,6 +25824,7 @@ import _poolSpectralProcession from "./pool/spectral-procession.js";
 import _poolSpectralReserves from "./pool/spectral-reserves.js";
 import _poolSpectralRider from "./pool/spectral-rider.js";
 import _poolSpectralSailor from "./pool/spectral-sailor.js";
+import _poolSpectralSearchlight from "./pool/spectral-searchlight.js";
 import _poolSpectralShepherd from "./pool/spectral-shepherd.js";
 import _poolSpectralShield from "./pool/spectral-shield.js";
 import _poolSpectralShift from "./pool/spectral-shift.js";
@@ -47797,6 +47800,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKabiraPlateau,
   _poolKabiraTakedown,
   _poolKabiraVindicator,
+  _poolKaboom,
   _poolKabutoMoth,
   _poolKadenaSlinkingSorcerer,
   _poolKadenasSilencer,
@@ -58901,6 +58905,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoulcipherBoard,
   _poolSoulcoilViper,
   _poolSouldrinker,
+  _poolSoulfireEruption,
   _poolSoulfireGrandMaster,
   _poolSoulherder,
   _poolSoulknifeSpy,
@@ -59044,6 +59049,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpectralReserves,
   _poolSpectralRider,
   _poolSpectralSailor,
+  _poolSpectralSearchlight,
   _poolSpectralShepherd,
   _poolSpectralShield,
   _poolSpectralShift,
@@ -81032,6 +81038,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kabira-plateau": _poolKabiraPlateau,
   "pool/kabira-takedown": _poolKabiraTakedown,
   "pool/kabira-vindicator": _poolKabiraVindicator,
+  "pool/kaboom": _poolKaboom,
   "pool/kabuto-moth": _poolKabutoMoth,
   "pool/kadena-slinking-sorcerer": _poolKadenaSlinkingSorcerer,
   "pool/kadenas-silencer": _poolKadenasSilencer,
@@ -92136,6 +92143,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soulcipher-board": _poolSoulcipherBoard,
   "pool/soulcoil-viper": _poolSoulcoilViper,
   "pool/souldrinker": _poolSouldrinker,
+  "pool/soulfire-eruption": _poolSoulfireEruption,
   "pool/soulfire-grand-master": _poolSoulfireGrandMaster,
   "pool/soulherder": _poolSoulherder,
   "pool/soulknife-spy": _poolSoulknifeSpy,
@@ -92279,6 +92287,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spectral-reserves": _poolSpectralReserves,
   "pool/spectral-rider": _poolSpectralRider,
   "pool/spectral-sailor": _poolSpectralSailor,
+  "pool/spectral-searchlight": _poolSpectralSearchlight,
   "pool/spectral-shepherd": _poolSpectralShepherd,
   "pool/spectral-shield": _poolSpectralShield,
   "pool/spectral-shift": _poolSpectralShift,

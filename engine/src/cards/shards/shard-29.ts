@@ -797,6 +797,7 @@ import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSparkshaperVisionary from "../pool/sparkshaper-visionary.js";
 import _poolSpecialMove from "../pool/special-move.js";
 import _poolSpeciesGorger from "../pool/species-gorger.js";
+import _poolSpectralSearchlight from "../pool/spectral-searchlight.js";
 import _poolSpellweaverDuo from "../pool/spellweaver-duo.js";
 import _poolSphereOfSafety from "../pool/sphere-of-safety.js";
 import _poolSphereOfTheSuns from "../pool/sphere-of-the-suns.js";
@@ -1829,6 +1830,7 @@ const shard: CardShard = {
     _poolSparkshaperVisionary,
     _poolSpecialMove,
     _poolSpeciesGorger,
+    _poolSpectralSearchlight,
     _poolSpellweaverDuo,
     _poolSphereOfSafety,
     _poolSphereOfTheSuns,
