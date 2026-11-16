@@ -693,6 +693,7 @@ import _poolRootSnare from "../pool/root-snare.js";
 import _poolRootwaterDiver from "../pool/rootwater-diver.js";
 import _poolRootwaterThief from "../pool/rootwater-thief.js";
 import _poolRotcrownGhoul from "../pool/rotcrown-ghoul.js";
+import _poolRowansTalent from "../pool/rowans-talent.js";
 import _poolRoxxonBrutes from "../pool/roxxon-brutes.js";
 import _poolRuneOfProtectionWhite from "../pool/rune-of-protection-white.js";
 import _poolSabSunenLuxaEmbodied from "../pool/sab-sunen-luxa-embodied.js";
@@ -1732,6 +1733,7 @@ const shard: CardShard = {
     _poolRootwaterDiver,
     _poolRootwaterThief,
     _poolRotcrownGhoul,
+    _poolRowansTalent,
     _poolRoxxonBrutes,
     _poolRuneOfProtectionWhite,
     _poolSabSunenLuxaEmbodied,

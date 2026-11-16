@@ -2621,6 +2621,11 @@ export type TriggerKind =
        */
       readonly on: "activates-ability";
       readonly who: "attached" | "you" | "opponent";
+      /** With `who: "attached"`: "whenever **you** activate a loyalty ability
+       * of enchanted planeswalker" (Rowan's Talent) — activated by this
+       * permanent's controller. Without it, by anyone. The ability clauses
+       * below (`loyalty` and the rest) narrow an attached one too. */
+      readonly activator?: "you";
       /** Mana abilities too (rule 605): every card that doesn't say "if it
        * isn't a mana ability" — Elrond, Moon-Reader's "whenever you activate
        * an ability of a creature", Avalanche of Sector 7's "an ability of an

@@ -22872,6 +22872,7 @@ import _poolRowanTreefolk from "./pool/rowan-treefolk.js";
 import _poolRowansBattleguard from "./pool/rowans-battleguard.js";
 import _poolRowansGrimSearch from "./pool/rowans-grim-search.js";
 import _poolRowansStalwarts from "./pool/rowans-stalwarts.js";
+import _poolRowansTalent from "./pool/rowans-talent.js";
 import _poolRowdyCrew from "./pool/rowdy-crew.js";
 import _poolRowdyResearch from "./pool/rowdy-research.js";
 import _poolRowdySnowballers from "./pool/rowdy-snowballers.js";
@@ -56080,6 +56081,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRowansBattleguard,
   _poolRowansGrimSearch,
   _poolRowansStalwarts,
+  _poolRowansTalent,
   _poolRowdyCrew,
   _poolRowdyResearch,
   _poolRowdySnowballers,
@@ -89301,6 +89303,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rowans-battleguard": _poolRowansBattleguard,
   "pool/rowans-grim-search": _poolRowansGrimSearch,
   "pool/rowans-stalwarts": _poolRowansStalwarts,
+  "pool/rowans-talent": _poolRowansTalent,
   "pool/rowdy-crew": _poolRowdyCrew,
   "pool/rowdy-research": _poolRowdyResearch,
   "pool/rowdy-snowballers": _poolRowdySnowballers,

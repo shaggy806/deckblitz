@@ -35735,13 +35735,27 @@ export class Game {
         // A mana ability (rule 605.3b) only for one that says so (`orMana`).
         if (event.onStack ? event.ability === undefined : spec.orMana !== true) return false;
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
-        if (spec.who !== "attached") {
+        if (spec.who === "attached") {
+          // "An ability of equipped creature", "a loyalty ability of
+          // enchanted planeswalker": its host's, read as below.
+          // "Whenever **you** activate …" (`activator`, Rowan's Talent): by
+          // this permanent's controller, not the host's (an Aura on an
+          // opponent's planeswalker).
+          const host = this.state.objects[event.source];
+          if (self.zone !== "battlefield" || host?.zone !== "battlefield" || self.attachedTo !== event.source) {
+            return false;
+          }
+          if (spec.activator === "you" && event.player !== self.controller) return false;
+        }
+        {
           // On the battlefield — or in a graveyard for an ability that works
           // only there, the only kind the trigger scan asks of a graveyard
           // card (rule 113.6k; Afterburner Expert's "return this card from
           // your graveyard").
-          if (self.zone !== "battlefield" && self.zone !== "graveyard") return false;
-          if ((spec.who === "you") !== (event.player === self.controller)) return false;
+          if (spec.who !== "attached") {
+            if (self.zone !== "battlefield" && self.zone !== "graveyard") return false;
+            if ((spec.who === "you") !== (event.player === self.controller)) return false;
+          }
           // "An ability of a card in your graveyard": activated from there,
           // wherever its cost has since put the card.
           if (
@@ -35816,12 +35830,6 @@ export class Game {
               }))
           );
         }
-        const host = this.state.objects[event.source];
-        return (
-          self.zone === "battlefield" &&
-          host?.zone === "battlefield" &&
-          self.attachedTo === event.source
-        );
       }
       case "step-begins":
         return (

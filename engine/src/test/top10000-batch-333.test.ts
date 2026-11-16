@@ -1,16 +1,38 @@
 /**
- * Batch 333 (author-top-cards, 2026-11-16): the freed cards the lead
- * authored — Preacher and Wish — and the duration they showed short:
- * "for as long as ~ remains tapped" and "…you control ~" on an activated
- * ability are checked continually from activation (`GameObject.untaps`,
- * `LastKnownRefs.sourceSteady`, rule 611.2b and the rulings of Preacher,
- * Rubinia Soulsinger and Entrancing Lyre).
+ * Batch 333 (author-top-cards, 2026-11-16), the cards the lead authored:
+ * - Preacher and Wish, and the duration they showed short: "for as long as
+ *   ~ remains tapped" and "…you control ~" on an activated ability are
+ *   checked continually from activation (`GameObject.untaps`,
+ *   `LastKnownRefs.sourceSteady`, rule 611.2b and the rulings of Preacher,
+ *   Rubinia Soulsinger and Entrancing Lyre).
+ * - Rowan's Talent: an attached `activates-ability` trigger narrowed by the
+ *   ability clauses (`loyalty`) and by who activated (`activator: "you"`).
  */
 
 import { describe, expect, it } from "vitest";
 
+import { computeCharacteristics } from "../characteristics.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, lands, nextTurn, pickModes, ref, settle, spawn, table, toHand, watchTargets, zone } from "./harness.js";
+import {
+  A,
+  B,
+  activate,
+  cast,
+  counters,
+  hand,
+  lands,
+  loyalty,
+  nextTurn,
+  pickModes,
+  ref,
+  registryOf,
+  settle,
+  spawn,
+  table,
+  toHand,
+  watchTargets,
+  zone,
+} from "./harness.js";
 import type { Game } from "../game.js";
 
 const controllerOf = (game: Game, id: ObjectId) => game.state.objects[id].controller;
@@ -110,5 +132,48 @@ describe("Wish", () => {
     nextTurn(game);
     nextTurn(game);
     expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === bears)).toBe(false);
+  });
+});
+
+describe("Rowan's Talent", () => {
+  it("copies each loyalty ability you activate of the enchanted planeswalker, adding no loyalty for the copy", () => {
+    const { game } = table();
+    const jace = spawn(game, "Jace Beleren");
+    game.state.objects[jace].counters.loyalty = 3;
+    lands(game, "Mountain", 4);
+    cast(game, toHand(game, "Rowan's Talent"), { targets: [ref(jace)] });
+    const mine = hand(game).length;
+    const bobs = hand(game, B).length;
+    loyalty(game, jace, 2); // each player draws a card, twice
+    expect(hand(game)).toHaveLength(mine + 2);
+    expect(hand(game, B)).toHaveLength(bobs + 2);
+    expect(counters(game, jace, "loyalty")).toBe(5);
+  });
+
+  it("gives the granted +1, which is copied too", () => {
+    const { game } = table();
+    const jace = spawn(game, "Jace Beleren");
+    game.state.objects[jace].counters.loyalty = 3;
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Mountain", 4);
+    cast(game, toHand(game, "Rowan's Talent"), { targets: [ref(jace)] });
+    activate(game, jace, 3, { targets: [ref(bears)] }); // after Jace's three printed
+    expect(counters(game, jace, "loyalty")).toBe(4);
+    // +2/+0 from the ability and +2/+0 from its copy, kept on the Bears.
+    const bearsNow = computeCharacteristics(game.state, registryOf(game), bears);
+    expect(bearsNow.power).toBe(6);
+    expect([...bearsNow.keywords]).toEqual(expect.arrayContaining(["first-strike", "trample"]));
+  });
+
+  it("on an opponent's planeswalker, their activations aren't copied", () => {
+    const { game } = table();
+    const jace = spawn(game, "Jace Beleren", B);
+    game.state.objects[jace].counters.loyalty = 3;
+    lands(game, "Mountain", 4);
+    cast(game, toHand(game, "Rowan's Talent"), { targets: [ref(jace)] });
+    nextTurn(game);
+    const mine = hand(game).length;
+    loyalty(game, jace, 2, { player: B });
+    expect(hand(game)).toHaveLength(mine + 1);
   });
 });
