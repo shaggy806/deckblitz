@@ -2943,7 +2943,12 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   (Tempt with Bunnies: the same draw-and-Rabbit `sequence` as yours, the
   opponents' `effect` and the `ifDid`; an offer that can be taken and not
   done, as Tempt with Immortality's return, checks it in `ifDid` with a
-  `this-way` condition of `"that-player"`).
+  `this-way` condition of `"that-player"`). "Any opponent may …. If a player
+  does / If they do, …" with **one** result however many do is not `ifDid`
+  (once per player) but a `sequence`: the `each-player-may`, then a
+  `conditional` on what was done `this-way` (`what: "sacrificed"` for
+  Desecration Demon, `"tapped"` for Reservoir Kraken's `tapPermanent`
+  option), `atLeast: 1`.
   `resultsFor` keeps the follow-ups to a scope: Kynaios and Tiro's "then each
   **opponent** who didn't draws a card" asks `"each-player"` with
   `resultsFor: "each-opponent"`. `rounds: EffectAmount` asks each player that many times in a row
