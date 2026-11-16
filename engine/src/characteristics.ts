@@ -869,9 +869,13 @@ function evalStaticCondition(
         const that = condition.asTheyLeave === true ? opts.thatPlayer : conditionPlayerOf(state, "that-player", opts);
         return that !== undefined && has(that);
       }
-      return condition.who === "you"
-        ? has(you)
-        : state.turnOrder.some((p) => p !== you && state.players[p]?.hasLost !== true && has(p));
+      if (condition.who === "you") return has(you);
+      if (condition.who === "opponent") {
+        return state.turnOrder.some((p) => p !== you && state.players[p]?.hasLost !== true && has(p));
+      }
+      // One player named another way — "its controller" of a target.
+      const named = conditionPlayerOf(state, condition.who, opts, source);
+      return named !== undefined && has(named);
     }
     case "life-total": {
       const within = (p: PlayerId): boolean => lifeWithinBounds(state, state.players[p]?.life ?? 0, condition);

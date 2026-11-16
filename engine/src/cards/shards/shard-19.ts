@@ -35,6 +35,7 @@ import _poolAncientTomb from "../pool/ancient-tomb.js";
 import _poolAngelicArbiter from "../pool/angelic-arbiter.js";
 import _poolAngelicExaltation from "../pool/angelic-exaltation.js";
 import _poolAngrathCaptainOfChaos from "../pool/angrath-captain-of-chaos.js";
+import _poolAnointWithAffliction from "../pool/anoint-with-affliction.js";
 import _poolAnrakyrTheTraveller from "../pool/anrakyr-the-traveller.js";
 import _poolApexOfPower from "../pool/apex-of-power.js";
 import _poolArashinCleric from "../pool/arashin-cleric.js";
@@ -1121,6 +1122,7 @@ const shard: CardShard = {
     _poolAngelicArbiter,
     _poolAngelicExaltation,
     _poolAngrathCaptainOfChaos,
+    _poolAnointWithAffliction,
     _poolAnrakyrTheTraveller,
     _poolApexOfPower,
     _poolArashinCleric,

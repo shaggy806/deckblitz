@@ -2700,7 +2700,8 @@
   "effect:grant-undaunted-next-spell",
   "zone:play-from-graveyard-this-turn-enters-tapped",
   "trigger:activate-loyalty-ability-of-enchanted",
-  "bug:cda-turn-stat"
+  "bug:cda-turn-stat",
+  "condition:target-controller-player-counters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

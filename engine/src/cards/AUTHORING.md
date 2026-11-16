@@ -6663,7 +6663,10 @@ clause (section 9):
   poison counters") is `{ counter: "poison", who: "opponent", atLeast: 3 }`.
   `"that-player"` is the player a resolving effect is about — impulse-exile's
   `whoseIf` (Ixhel's "each opponent who has three or more poison counters",
-  §6); a static has no such player, and reads it as false.
+  §6); a static has no such player, and reads it as false. Any other
+  `ConditionPlayer` names one player: Bring the Ending's "counter that spell
+  instead if **its controller** has three or more poison counters" is `who: {
+  controllerOf: 0 }`, the targeted spell's controller.
 - `{ kind: "threshold" }` — 7+ cards in your graveyard.
 - `{ kind: "hand-size", atMost?, atLeast?, who? }` — cards in your hand,
   inclusive (Flubs, the Fool); `who: "each-player"` is every player still in

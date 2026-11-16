@@ -964,6 +964,7 @@ import _poolAnnihilatingGlare from "./pool/annihilating-glare.js";
 import _poolAnnoyedAltisaur from "./pool/annoyed-altisaur.js";
 import _poolAnnul from "./pool/annul.js";
 import _poolAnodetLurker from "./pool/anodet-lurker.js";
+import _poolAnointWithAffliction from "./pool/anoint-with-affliction.js";
 import _poolAnoint from "./pool/anoint.js";
 import _poolAnointedChorister from "./pool/anointed-chorister.js";
 import _poolAnointedDeacon from "./pool/anointed-deacon.js";
@@ -3495,6 +3496,7 @@ import _poolBrinelinTheMoonKraken from "./pool/brinelin-the-moon-kraken.js";
 import _poolBringBack from "./pool/bring-back.js";
 import _poolBringDown from "./pool/bring-down.js";
 import _poolBringLow from "./pool/bring-low.js";
+import _poolBringTheEnding from "./pool/bring-the-ending.js";
 import _poolBringToLife from "./pool/bring-to-life.js";
 import _poolBringToLight from "./pool/bring-to-light.js";
 import _poolBringToTrial from "./pool/bring-to-trial.js";
@@ -34174,6 +34176,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnnoyedAltisaur,
   _poolAnnul,
   _poolAnodetLurker,
+  _poolAnointWithAffliction,
   _poolAnoint,
   _poolAnointedChorister,
   _poolAnointedDeacon,
@@ -36705,6 +36708,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBringBack,
   _poolBringDown,
   _poolBringLow,
+  _poolBringTheEnding,
   _poolBringToLife,
   _poolBringToLight,
   _poolBringToTrial,
@@ -67397,6 +67401,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/annoyed-altisaur": _poolAnnoyedAltisaur,
   "pool/annul": _poolAnnul,
   "pool/anodet-lurker": _poolAnodetLurker,
+  "pool/anoint-with-affliction": _poolAnointWithAffliction,
   "pool/anoint": _poolAnoint,
   "pool/anointed-chorister": _poolAnointedChorister,
   "pool/anointed-deacon": _poolAnointedDeacon,
@@ -69928,6 +69933,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bring-back": _poolBringBack,
   "pool/bring-down": _poolBringDown,
   "pool/bring-low": _poolBringLow,
+  "pool/bring-the-ending": _poolBringTheEnding,
   "pool/bring-to-life": _poolBringToLife,
   "pool/bring-to-light": _poolBringToLight,
   "pool/bring-to-trial": _poolBringToTrial,

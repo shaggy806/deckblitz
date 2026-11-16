@@ -1222,12 +1222,15 @@ export type StaticCondition =
    * `"that-player"` is the player a resolving effect is about (the
    * `"that-player"` scope): impulse-exile's `whoseIf` — Ixhel, Scion of
    * Atraxa's "each opponent **who has three or more poison counters**". Only
-   * a resolution knows that player; anywhere else it's false.
+   * a resolution knows that player; anywhere else it's false. Any other
+   * {@link ConditionPlayer} names one player the same way: `{ controllerOf: 0 }`
+   * is Bring the Ending's "if **its controller** has three or more poison
+   * counters", the controller of the targeted spell.
    */
   | {
       readonly kind: "player-counters";
       readonly counter: HeldPlayerCounter;
-      readonly who: "you" | "opponent" | "that-player";
+      readonly who: "you" | "opponent" | ConditionPlayer;
       readonly atLeast: number;
       /** With `"that-player"`: still that player as they lose the game, where
        * a player who has left is otherwise nobody — Miss Highwater's "for as

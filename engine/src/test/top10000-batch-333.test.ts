@@ -12,10 +12,11 @@
 import { describe, expect, it } from "vitest";
 
 import { computeCharacteristics } from "../characteristics.js";
-import type { ObjectId } from "../primitives.js";
+import type { ObjectId, PlayerId } from "../primitives.js";
 import {
   A,
   B,
+  C,
   activate,
   cast,
   counters,
@@ -193,5 +194,56 @@ describe("Duelist of the Mind", () => {
     // Bob's draws are Bob's.
     const bobs = spawn(game, "Duelist of the Mind", B);
     expect(power(bobs)).toBe(0);
+  });
+});
+
+describe("Bring the Ending", () => {
+  // Alice casts Divination; Bob answers with Bring the Ending.
+  const play = (poison: number, pays: boolean, poisoned: PlayerId = A) => {
+    const { game, a } = table({ players: 3 });
+    lands(game, "Island", 5);
+    lands(game, "Island", 2, B);
+    game.state.players[poisoned].counters.poison = poison;
+    let asked = 0;
+    a.chooseModesFn = () => {
+      asked += 1;
+      return pays ? [0] : [];
+    };
+    const divination = toHand(game, "Divination");
+    cast(game, divination, { settle: false });
+    const before = hand(game).length;
+    game.advanceUntil((s) => s.priority.holder === B);
+    cast(game, toHand(game, "Bring the Ending", B), { player: B, targets: [ref(divination)] });
+    // Divination's two cards drawn, or not.
+    return { countered: hand(game).length === before, asked };
+  };
+
+  it("counters the spell unless its controller pays {2}", () => {
+    expect(play(0, true)).toEqual({ countered: false, asked: 1 });
+    expect(play(0, false)).toEqual({ countered: true, asked: 1 });
+  });
+
+  it("corrupted: counters it outright, nothing asked, when its controller has three poison counters", () => {
+    expect(play(3, true)).toEqual({ countered: true, asked: 0 });
+    expect(play(2, true)).toEqual({ countered: false, asked: 1 });
+    // Another opponent of Bob's poisoned is no one's business here.
+    expect(play(3, true, C)).toEqual({ countered: false, asked: 1 });
+  });
+});
+
+describe("Anoint with Affliction", () => {
+  it("exiles a creature of mana value 3 or less, and a bigger one only if its controller is corrupted", () => {
+    const { game } = table({ players: 3 });
+    lands(game, "Swamp", 6);
+    const bears = spawn(game, "Grizzly Bears", B);
+    const angel = spawn(game, "Serra Angel", B);
+    const carols = spawn(game, "Serra Angel", C);
+    game.state.players[C].counters.poison = 3; // not the Angel's controller
+    cast(game, toHand(game, "Anoint with Affliction"), { targets: [ref(bears)] });
+    cast(game, toHand(game, "Anoint with Affliction"), { targets: [ref(angel)] });
+    expect(zone(game, bears)).toBe("exile");
+    expect(zone(game, angel)).toBe("battlefield");
+    cast(game, toHand(game, "Anoint with Affliction"), { targets: [ref(carols)] });
+    expect(zone(game, carols)).toBe("exile");
   });
 });

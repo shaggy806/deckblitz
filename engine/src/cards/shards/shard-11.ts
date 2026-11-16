@@ -124,6 +124,7 @@ import _poolBreakingOfTheFellowship from "../pool/breaking-of-the-fellowship.js"
 import _poolBreechesTheBlastmaker from "../pool/breeches-the-blastmaker.js";
 import _poolBreedingPool from "../pool/breeding-pool.js";
 import _poolBriarHydra from "../pool/briar-hydra.js";
+import _poolBringTheEnding from "../pool/bring-the-ending.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
 import _poolBroodOfCockroaches from "../pool/brood-of-cockroaches.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
@@ -1169,6 +1170,7 @@ const shard: CardShard = {
     _poolBreechesTheBlastmaker,
     _poolBreedingPool,
     _poolBriarHydra,
+    _poolBringTheEnding,
     _poolBrittleEffigy,
     _poolBroodOfCockroaches,
     _poolBroodWeaver,
