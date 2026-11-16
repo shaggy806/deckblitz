@@ -707,6 +707,7 @@ import _poolRavenousDemon from "../pool/ravenous-demon.js";
 import _poolRayOfCommand from "../pool/ray-of-command.js";
 import _poolRayOfRevelation from "../pool/ray-of-revelation.js";
 import _poolRealityHemorrhage from "../pool/reality-hemorrhage.js";
+import _poolReap from "../pool/reap.js";
 import _poolReaperOfTheWilds from "../pool/reaper-of-the-wilds.js";
 import _poolRebuffTheWicked from "../pool/rebuff-the-wicked.js";
 import _poolRebuke from "../pool/rebuke.js";
@@ -1774,6 +1775,7 @@ const shard: CardShard = {
     _poolRayOfCommand,
     _poolRayOfRevelation,
     _poolRealityHemorrhage,
+    _poolReap,
     _poolReaperOfTheWilds,
     _poolRebuffTheWicked,
     _poolRebuke,

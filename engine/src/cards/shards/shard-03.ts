@@ -854,6 +854,7 @@ import _poolTowerOfTheMagistrate from "../pool/tower-of-the-magistrate.js";
 import _poolTreacherousTerrain from "../pool/treacherous-terrain.js";
 import _poolTreetopSentries from "../pool/treetop-sentries.js";
 import _poolTrenchGorger from "../pool/trench-gorger.js";
+import _poolTrialOfATimeLord from "../pool/trial-of-a-time-lord.js";
 import _poolTriumphantSurge from "../pool/triumphant-surge.js";
 import _poolTrumpetingHerd from "../pool/trumpeting-herd.js";
 import _poolTurnTheTide from "../pool/turn-the-tide.js";
@@ -1816,6 +1817,7 @@ const shard: CardShard = {
     _poolTreacherousTerrain,
     _poolTreetopSentries,
     _poolTrenchGorger,
+    _poolTrialOfATimeLord,
     _poolTriumphantSurge,
     _poolTrumpetingHerd,
     _poolTurnTheTide,

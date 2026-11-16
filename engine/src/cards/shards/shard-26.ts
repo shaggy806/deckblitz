@@ -712,6 +712,7 @@ import _poolRikalaHomaridKing from "../pool/rikala-homarid-king.js";
 import _poolRingOfMaruf from "../pool/ring-of-maruf.js";
 import _poolRiteOfRuin from "../pool/rite-of-ruin.js";
 import _poolRiteOfTheRagingStorm from "../pool/rite-of-the-raging-storm.js";
+import _poolRiverSong from "../pool/river-song.js";
 import _poolRiverpyreVerge from "../pool/riverpyre-verge.js";
 import _poolRoadsideReliquary from "../pool/roadside-reliquary.js";
 import _poolRoast from "../pool/roast.js";
@@ -1774,6 +1775,7 @@ const shard: CardShard = {
     _poolRingOfMaruf,
     _poolRiteOfRuin,
     _poolRiteOfTheRagingStorm,
+    _poolRiverSong,
     _poolRiverpyreVerge,
     _poolRoadsideReliquary,
     _poolRoast,

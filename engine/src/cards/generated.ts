@@ -19081,6 +19081,7 @@ import _poolOathOfScholars from "./pool/oath-of-scholars.js";
 import _poolOathOfTeferi from "./pool/oath-of-teferi.js";
 import _poolOathOfTheAncientWood from "./pool/oath-of-the-ancient-wood.js";
 import _poolOathOfTheGreyHost from "./pool/oath-of-the-grey-host.js";
+import _poolOathkeeperTakenosDaisho from "./pool/oathkeeper-takenos-daisho.js";
 import _poolOathswornGiant from "./pool/oathsworn-giant.js";
 import _poolOathswornKnight from "./pool/oathsworn-knight.js";
 import _poolOathswornVampire from "./pool/oathsworn-vampire.js";
@@ -21790,6 +21791,7 @@ import _poolReapIntellect from "./pool/reap-intellect.js";
 import _poolReapThePast from "./pool/reap-the-past.js";
 import _poolReapTheSeagraf from "./pool/reap-the-seagraf.js";
 import _poolReapWhatIsSown from "./pool/reap-what-is-sown.js";
+import _poolReap from "./pool/reap.js";
 import _poolReaperFromTheAbyss from "./pool/reaper-from-the-abyss.js";
 import _poolReaperKing from "./pool/reaper-king.js";
 import _poolReaperOfFlightMoonsilver from "./pool/reaper-of-flight-moonsilver.js";
@@ -22637,6 +22639,7 @@ import _poolRiverMerfolk from "./pool/river-merfolk.js";
 import _poolRiverOfTears from "./pool/river-of-tears.js";
 import _poolRiverSerpent from "./pool/river-serpent.js";
 import _poolRiverSneak from "./pool/river-sneak.js";
+import _poolRiverSong from "./pool/river-song.js";
 import _poolRiverSongsDiary from "./pool/river-songs-diary.js";
 import _poolRiverchurnMonument from "./pool/riverchurn-monument.js";
 import _poolRiverfallMimic from "./pool/riverfall-mimic.js";
@@ -29331,6 +29334,7 @@ import _poolTrevasCharm from "./pool/trevas-charm.js";
 import _poolTrevasRuins from "./pool/trevas-ruins.js";
 import _poolTriSentinelActOfVengeance from "./pool/tri-sentinel-act-of-vengeance.js";
 import _poolTriadOfFates from "./pool/triad-of-fates.js";
+import _poolTrialOfATimeLord from "./pool/trial-of-a-time-lord.js";
 import _poolTrialOfAgony from "./pool/trial-of-agony.js";
 import _poolTrialOfAmbition from "./pool/trial-of-ambition.js";
 import _poolTrialOfKnowledge from "./pool/trial-of-knowledge.js";
@@ -52335,6 +52339,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOathOfTeferi,
   _poolOathOfTheAncientWood,
   _poolOathOfTheGreyHost,
+  _poolOathkeeperTakenosDaisho,
   _poolOathswornGiant,
   _poolOathswornKnight,
   _poolOathswornVampire,
@@ -55044,6 +55049,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReapThePast,
   _poolReapTheSeagraf,
   _poolReapWhatIsSown,
+  _poolReap,
   _poolReaperFromTheAbyss,
   _poolReaperKing,
   _poolReaperOfFlightMoonsilver,
@@ -55891,6 +55897,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRiverOfTears,
   _poolRiverSerpent,
   _poolRiverSneak,
+  _poolRiverSong,
   _poolRiverSongsDiary,
   _poolRiverchurnMonument,
   _poolRiverfallMimic,
@@ -62585,6 +62592,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrevasRuins,
   _poolTriSentinelActOfVengeance,
   _poolTriadOfFates,
+  _poolTrialOfATimeLord,
   _poolTrialOfAgony,
   _poolTrialOfAmbition,
   _poolTrialOfKnowledge,
@@ -85602,6 +85610,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oath-of-teferi": _poolOathOfTeferi,
   "pool/oath-of-the-ancient-wood": _poolOathOfTheAncientWood,
   "pool/oath-of-the-grey-host": _poolOathOfTheGreyHost,
+  "pool/oathkeeper-takenos-daisho": _poolOathkeeperTakenosDaisho,
   "pool/oathsworn-giant": _poolOathswornGiant,
   "pool/oathsworn-knight": _poolOathswornKnight,
   "pool/oathsworn-vampire": _poolOathswornVampire,
@@ -88311,6 +88320,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reap-the-past": _poolReapThePast,
   "pool/reap-the-seagraf": _poolReapTheSeagraf,
   "pool/reap-what-is-sown": _poolReapWhatIsSown,
+  "pool/reap": _poolReap,
   "pool/reaper-from-the-abyss": _poolReaperFromTheAbyss,
   "pool/reaper-king": _poolReaperKing,
   "pool/reaper-of-flight-moonsilver": _poolReaperOfFlightMoonsilver,
@@ -89158,6 +89168,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/river-of-tears": _poolRiverOfTears,
   "pool/river-serpent": _poolRiverSerpent,
   "pool/river-sneak": _poolRiverSneak,
+  "pool/river-song": _poolRiverSong,
   "pool/river-songs-diary": _poolRiverSongsDiary,
   "pool/riverchurn-monument": _poolRiverchurnMonument,
   "pool/riverfall-mimic": _poolRiverfallMimic,
@@ -95852,6 +95863,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trevas-ruins": _poolTrevasRuins,
   "pool/tri-sentinel-act-of-vengeance": _poolTriSentinelActOfVengeance,
   "pool/triad-of-fates": _poolTriadOfFates,
+  "pool/trial-of-a-time-lord": _poolTrialOfATimeLord,
   "pool/trial-of-agony": _poolTrialOfAgony,
   "pool/trial-of-ambition": _poolTrialOfAmbition,
   "pool/trial-of-knowledge": _poolTrialOfKnowledge,
