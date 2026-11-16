@@ -51,7 +51,12 @@ kind of decision on decks that raise it:
 cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:judge -- --kind attacks --seeds 1-3 --decks "Token Triumph,Grave Danger,World Shaper,Mardu Surge;Token Triumph,Grave Danger;The Ur-Dragon,Lathril,Atraxa,Giada"
 ```
 
-`--kind payments | discards | attacks | blocks`; `--base` as above. Each deck
+`--kind payments | discards | attacks | blocks | removal`; `--base` as above.
+`removal` is what a removal is aimed at and whether it is fired, judged two
+of the decider's turns on (an engine shows later than a block); it shadows
+each seat with the old build, so a game takes about twice as long. Add
+`--to-end` to play each line to the end of the game and count who won, and
+`--weights '{"tokenEngines":4}'` to judge evaluation weights without a build. Each deck
 set (`;` between them) and seed is a game, played `--parallel` at a time
 (default 6) and totalled at the bottom; a game is a few seconds to four
 minutes. Each disagreement is played on by v2 and scored ("new better by 5.4

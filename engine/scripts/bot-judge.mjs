@@ -8,6 +8,7 @@
 //   npm run bot:judge -w engine -- --kind attacks --decks "Token Triumph,Grave Danger" --seeds 1-8
 //   npm run bot:judge -w engine -- --kind blocks --decks "Token Triumph,Grave Danger;World Shaper,Mardu Surge" --seeds 1-4
 //   npm run bot:judge -w engine -- --kind discards --decks "Edgar Markov,Y'shtola,Krenko,Pantlaza" --all
+//   npm run bot:judge -w engine -- --kind removal --decks "Edgar Markov,Giada,Ureni,Pantlaza" --seeds 1-6 --to-end
 //
 // `bot:diff` says what changed over the sample decks, which hardly raise some
 // decisions at all (an optional payment: 1 in 12,000 there, ten a game on the
@@ -23,6 +24,17 @@
 // - `--kind blocks`: a block declaration. Judged as the blocker's next turn
 //   begins: the damage it took, what it lost, and what the creatures it kept
 //   then did.
+// - `--kind removal`: what a removal is aimed at, and whether it is fired: a
+//   window where either build casts or activates something that destroys,
+//   exiles, bounces, burns or steals, at an opponent's permanent, or picks
+//   such a target for a trigger. The old build is a second controller for
+//   each seat, shown every decision the seat makes, so it has a turn's plan
+//   in hand as the playing one does (a build shadowing itself agrees at
+//   every decision). Twice the thinking, so a game takes about twice as
+//   long as the other kinds'. Judged as the decider's turn two
+//   rounds on begins (`--rounds N`): what an engine does shows later than
+//   what a block does. The evaluation that judges is the one that aims the
+//   removal today, so read the plain counts beside it, or use `--to-end`.
 //
 // **How much, not how often.** Each disagreement's gap is the decider's
 // evaluation after the new answer less after the old one, and the totals add
@@ -46,7 +58,12 @@
 // then the upgraded and starter ones, by substring), --seed N (default 1) or
 // --seeds, --parallel N, --max-turns N (default 60), --all (print the
 // decisions the builds agree on too), --no-judge (list the disagreements,
-// play nothing out).
+// play nothing out), --weights JSON (evaluation weights for the new side alone,
+// merged onto the defaults: a weight judged without a build of its own),
+// --rounds N (how many of the decider's turns on a line
+// is judged at, where the kind judges by rounds: 1, or 2 for removal),
+// --to-end (play each line to the end of the game as well and count who
+// won: slow, a game's remainder twice a disagreement).
 //
 // The judge is v2's own play and evaluation, and noisy for it: one mana less
 // has given a turn 36 points better. Trust a verdict where the two lines did
@@ -77,7 +94,7 @@ const flag = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : fallback;
 };
-const KINDS = ["payments", "discards", "attacks", "blocks"];
+const KINDS = ["payments", "discards", "attacks", "blocks", "removal"];
 const kind = flag("kind", "");
 if (!KINDS.includes(kind)) {
   console.error(`bot:judge needs --kind ${KINDS.join(" | ")}`);
@@ -86,7 +103,20 @@ if (!KINDS.includes(kind)) {
 const maxTurns = Number(flag("max-turns", "60"));
 const showAll = args.includes("--all");
 const judging = !args.includes("--no-judge");
+const toEnd = args.includes("--to-end");
+/** The decider's turns on at which a by-rounds kind is judged. */
+const rounds = Math.max(1, Number(flag("rounds", kind === "removal" ? "2" : "1")));
 const base = flag("base", "origin/main");
+// `--weights JSON`: evaluation weights merged onto the defaults for the new
+// side alone (the seats that play the game and the answer judged as "new"),
+// so a weight is judged against the base without a build of its own. The
+// lines are still played on and scored by the default weights: one judge for
+// both answers.
+const weightsFlag = flag("weights", null);
+const newWeights = weightsFlag === null ? null : { ...DEFAULT_WEIGHTS, ...JSON.parse(weightsFlag) };
+for (const key of Object.keys(newWeights ?? {})) {
+  if (!(key in DEFAULT_WEIGHTS)) throw new Error(`--weights: unknown weight "${key}"`);
+}
 
 /** "1-8", "1,3,5" or both mixed: the seeds to play. */
 const seedsOf = (text) =>
@@ -120,6 +150,9 @@ const newTally = () => ({
   newLivedOnly: 0,
   oldLivedOnly: 0,
   bothOut: 0,
+  /** With `--to-end`: the lines the decider went on to win. */
+  wonNew: 0,
+  wonOld: 0,
 });
 const signed = (n, digits = 1) => `${n >= 0 ? "+" : "−"}${Math.abs(n).toFixed(digits)}`;
 /** A tally in words: the counts, then how much. */
@@ -130,10 +163,11 @@ function summary(t) {
     t.newLivedOnly + t.oldLivedOnly + t.bothOut > 0
       ? `; the decider out of the game: only under the old answer ${t.newLivedOnly}, only under the new ${t.oldLivedOnly}, either way ${t.bothOut}`
       : "";
+  const won = toEnd ? `\n  played to the end: the decider won ${t.wonNew} of ${t.differ} under the new answer, ${t.wonOld} under the old` : "";
   return (
     `${t.asked} ${kind} decisions, ${t.differ} where the builds differ: new better ${t.newBetter}, old better ${t.oldBetter}, even ${t.even}\n` +
     `  net ${signed(t.points)} points for the new build (gained ${t.gained.toFixed(1)}, lost ${t.lost.toFixed(1)}; best ${signed(t.best)}, worst ${signed(t.worst)}); ` +
-    `its own life ${signed(t.ownLife, 0)}, its opponents' life ${signed(t.opponentsLife, 0)}${lived}`
+    `its own life ${signed(t.ownLife, 0)}, its opponents' life ${signed(t.opponentsLife, 0)}${lived}${won}`
   );
 }
 
@@ -144,7 +178,7 @@ if (jobs.length > 1) {
   // Built here once, so the games don't each start the same build.
   const baseline = baselineDist(base);
   const parallel = Math.max(1, Number(flag("parallel", "6")));
-  const passed = ["--kind", kind, "--base", base, "--max-turns", String(maxTurns), ...(showAll ? ["--all"] : []), ...(judging ? [] : ["--no-judge"])];
+  const passed = ["--kind", kind, "--base", base, "--max-turns", String(maxTurns), ...(showAll ? ["--all"] : []), ...(judging ? [] : ["--no-judge"]), ...(toEnd ? ["--to-end"] : []), "--rounds", String(rounds), ...(weightsFlag === null ? [] : ["--weights", weightsFlag])];
   console.log(`bot:judge — ${kind}, working build vs ${base} (${baseline.sha}): ${jobs.length} games, ${parallel} at a time`);
   const total = newTally();
   const started = Date.now();
@@ -224,9 +258,14 @@ const livesOf = (s) => seats.map((p) => (s.players[p].hasLost ? "out" : s.player
  * The decider's score there, its life and its opponents', whether it is out,
  * and what it cast on the way.
  */
-function playedOn(seat, first, round) {
+function playedOn(seat, first, round, wholeGame = false) {
   const snapshot = { ...game.snapshot(), eventLog: [] };
   const turn = snapshot.turn.number;
+  // `round`: false is the end of the turn, true the decider's next turn, a
+  // number that many of its turns on.
+  const wait = round === true ? 1 : round === false ? 0 : round;
+  let ownTurns = 0;
+  let counted = turn;
   const did = [];
   const controllers = {};
   for (const s of seats) {
@@ -246,17 +285,23 @@ function playedOn(seat, first, round) {
     sim.dispatch(first);
     sim.advanceUntil((st) => {
       if (st.result.over || st.players[seat].hasLost) return true;
+      if (wholeGame) return st.turn.number > maxTurns;
       if (st.turn.number === turn) return false;
-      if (!round) return true;
-      return st.turnOrder[st.turn.activePlayerIndex] === seat || st.turn.number > turn + seats.length + 1;
+      if (wait === 0) return true;
+      if (st.turnOrder[st.turn.activePlayerIndex] === seat && st.turn.number !== counted) {
+        counted = st.turn.number;
+        ownTurns += 1;
+      }
+      return ownTurns >= wait || st.turn.number > turn + wait * seats.length + 1;
     });
   } catch (error) {
-    return { score: NaN, died: false, life: 0, opponents: 0, note: `refused: ${String(error?.message ?? error).slice(0, 80)}` };
+    return { score: NaN, died: false, won: false, life: 0, opponents: 0, note: `refused: ${String(error?.message ?? error).slice(0, 80)}` };
   }
   const e = sim.state;
   return {
     score: evaluateState(e, registry, seat, DEFAULT_WEIGHTS),
     died: e.players[seat].hasLost,
+    won: e.result.over && e.result.winner === seat,
     life: e.players[seat].hasLost ? 0 : e.players[seat].life,
     opponents: seats.filter((p) => p !== seat).reduce((sum, p) => sum + (e.players[p].hasLost ? 0 : e.players[p].life), 0),
     note: `lives ${livesOf(e)}${did.length > 0 ? `; cast ${did.join(", ")}` : ""}`,
@@ -314,6 +359,13 @@ function report(seat, state, what, mine, theirs, say, first, round, context) {
       }
       const line = (o) => `${Number.isNaN(o.score) ? "—" : o.score.toFixed(1)}${o.died ? " OUT" : ""} (${o.note})`;
       verdict = `\n      played on: new ${line(a)}\n                 old ${line(b)}\n      => ${which}`;
+      if (toEnd) {
+        const [endA, endB] = [playedOn(seat, first(mine), round, true), playedOn(seat, first(theirs), round, true)];
+        if (endA.won) tally.wonNew += 1;
+        if (endB.won) tally.wonOld += 1;
+        const ended = (o) => (o.won ? "won" : o.died ? "out" : "undecided at the turn cap");
+        verdict += `\n      to the end: new ${ended(endA)} (${endA.note.split(";")[0]}), old ${ended(endB)} (${endB.note.split(";")[0]})`;
+      }
     }
   }
   console.log(
@@ -330,6 +382,27 @@ const landsOf = (s, seat) =>
     const o = s.objects[id];
     return o?.controller === seat && registry.has(o.cardName) && registry.get(o.cardName).types.includes("land");
   }).length;
+// Whether a card removes a permanent it targets, read off its definition
+// (its spell, a mode, a trigger or an ability): destroy, exile, bounce,
+// damage, steal, or put it into a library.
+const REMOVES = new Set(["destroy", "exile", "return-to-hand", "gain-control", "damage", "put-on-library", "shuffle-into-library"]);
+const removing = new Map();
+const removes = (name) => {
+  if (name === undefined || !registry.has(name)) return false;
+  let found = removing.get(name);
+  if (found === undefined) {
+    const def = registry.get(name);
+    const walk = (node) =>
+      node !== null &&
+      typeof node === "object" &&
+      (Array.isArray(node)
+        ? node.some(walk)
+        : (typeof node.kind === "string" && REMOVES.has(node.kind) && typeof node.target === "number") || Object.values(node).some(walk));
+    found = walk([def.effect, def.castModal, def.triggered, def.activated]);
+    removing.set(name, found);
+  }
+  return found;
+};
 /** A declaration's entries as names with counts, in a fixed order. */
 const counted = (names) => {
   const count = new Map();
@@ -339,9 +412,60 @@ const counted = (names) => {
 
 const controllers = {};
 for (const seat of seats) {
-  const bot = new EvalBotController(seat, registry);
-  const oldBot = () => new old.EvalBotController(seat, oldRegistry);
-  if (kind === "attacks") {
+  const newBot = () => new EvalBotController(seat, registry, newWeights === null ? {} : { weights: newWeights });
+  const bot = newBot();
+  // The old build reads the working game's state through its own module's
+  // caches, which that game's mutations never reach: cleared before it is
+  // asked anything, as `bot-diff-worker.mjs` does (a 7/7 read as 5/5 there).
+  const oldBot = () => {
+    old.invalidateComputedCache?.();
+    return new old.EvalBotController(seat, oldRegistry);
+  };
+  if (kind === "removal") {
+    // The old build as a second controller for this seat, shown every
+    // decision the seat makes, so it carries a turn's plan as the playing
+    // one does (`bot-diff-worker.mjs`'s way: asked afresh at each window, a
+    // removal cast as a step of a planned turn was never the fresh answer,
+    // and half the removals went unjudged). The same build shadowing itself
+    // answers the same at every decision.
+    const shadow = new old.EvalBotController(seat, oldRegistry);
+    const act = bot.act.bind(bot);
+    bot.act = (view) => {
+      const s = view.state;
+      const a = s.awaiting;
+      const mine = act(view);
+      let theirs;
+      try {
+        old.invalidateComputedCache?.();
+        theirs = shadow.act(view);
+      } catch {
+        return mine;
+      }
+      // Which card's removal a move aims at an opponent's permanent.
+      const sourceOf = (x) =>
+        x.type === "cast-spell"
+          ? s.objects[x.card]?.cardName
+          : x.type === "activate-ability"
+            ? s.objects[x.source]?.cardName
+            : x.type === "choose-targets" && a?.source !== undefined
+              ? s.objects[a.source]?.cardName
+              : undefined;
+      const aims = (x) => {
+        const source = sourceOf(x);
+        if (source === undefined || !removes(source) || x.targets === undefined) return false;
+        return [x.targets].flat(4).some((t) => {
+          if (t === null || t === undefined || t.kind !== "object") return false;
+          const o = s.objects[t.object];
+          return o !== undefined && o.zone === "battlefield" && o.controller !== seat;
+        });
+      };
+      if (aims(mine) || aims(theirs)) {
+        const source = a?.source !== undefined ? ` (${s.objects[a.source]?.cardName})` : "";
+        report(seat, s, `removal${source}`, mine, theirs, (x) => describeMove(s, x, registry), (x) => x, rounds, `hand: ${handOf(s, seat)}`);
+      }
+      return mine;
+    };
+  } else if (kind === "attacks") {
     const declare = bot.declareAttackers.bind(bot);
     bot.declareAttackers = (view) => {
       const s = view.state;
@@ -357,7 +481,7 @@ for (const seat of seats) {
       // Both nothing is no decision at all.
       if (mine.length > 0 || theirs.length > 0) {
         const first = (decl) => ({ type: "declare-attackers", player: seat, attackers: decl });
-        report(seat, s, "attack", mine, theirs, say, first, true, `hand: ${handOf(s, seat)}`);
+        report(seat, s, "attack", mine, theirs, say, first, rounds, `hand: ${handOf(s, seat)}`);
       }
       return mine;
     };
@@ -384,7 +508,7 @@ for (const seat of seats) {
             .map((id) => [s.objects[id].cardName, s.objects[id].stackCount ?? 1]),
         );
         const first = (decl) => ({ type: "declare-blockers", player: seat, blocks: decl });
-        report(seat, s, "block", mine, theirs, say, first, true, `attacked by: ${attackers}`);
+        report(seat, s, "block", mine, theirs, say, first, rounds, `attacked by: ${attackers}`);
       }
       return mine;
     };
@@ -410,14 +534,14 @@ for (const seat of seats) {
           ? (x) => (x.type === "discard" ? x.cards.map((id) => s.objects[id]?.cardName).sort().join(" + ") || "nothing" : x.type)
           : (x) => `${describeMove(s, x, registry)}${x.type === "pay-life-for-untapped" ? (x.pay ? " (pay)" : " (don't)") : x.type === "reveal-for-untapped" ? (x.reveal == null ? " (don't)" : " (reveal)") : ""}`;
       const what = `${a.kind}${source !== undefined ? ` (${source})` : ""}${a.cost !== undefined ? ` ${a.cost}` : ""}`;
-      report(seat, s, what, mine, theirs, say, (x) => x, kind === "discards", `${landsOf(s, seat)} lands; hand: ${handOf(s, seat)}`);
+      report(seat, s, what, mine, theirs, say, (x) => x, kind === "discards" ? rounds : false, `${landsOf(s, seat)} lands; hand: ${handOf(s, seat)}`);
       return mine;
     };
   }
   controllers[seat] = bot;
 }
 
-console.log(`bot:judge — ${kind}, working build vs ${base} (${baseline.sha}), seed ${seed}: ${seats.map((s) => label[s]).join(", ")}`);
+console.log(`bot:judge — ${kind}, working build${weightsFlag === null ? "" : ` with ${weightsFlag}`} vs ${base} (${baseline.sha}), seed ${seed}: ${seats.map((s) => label[s]).join(", ")}`);
 game = Game.create({
   seed,
   registry,

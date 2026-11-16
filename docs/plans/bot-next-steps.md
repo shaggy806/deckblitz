@@ -460,8 +460,21 @@ this log but the games a bot plays aiming by it. The same goes for salt as a des
 (bots that kill what players expect to see killed), which this measurement neither supports
 as strength nor rules out as feel.
 
-**Next, if any of it is to be built:** the instrument first. `bot:judge` has no kind for a
-removal's target, so no rule for aiming one (a commander and token-maker bonus, a salt
-weight, a hand list) can be judged by playing its changed choices on, which step 6 showed is
-the only reading to trust. Then the cheapest rule the data supports: weigh an opponent's
-commander and its token makers more when a removal picks among targets. In BACKLOG.
+**The instrument, built** (the user: "Build the judge first, we can ignore bot feel for
+now"). `bot:judge --kind removal`: every window where either build casts or activates
+something that destroys, exiles, bounces, burns or steals at an opponent's permanent, or
+picks such a target for a trigger. Each seat is shadowed by a second controller of the old
+build, shown every decision the seat makes, so both sides have a turn's plan in hand (asked
+afresh at each window instead, half the removals went unjudged: one cast as a step of a
+planned turn was never the fresh answer). A build shadowing itself agrees at every decision
+(checked: a strong-deck game, 0 of its removal decisions differing). A disagreement is
+played on to the decider's turn two rounds on (`--rounds`), since an engine shows later than
+a block does, and with `--to-end` to the end of the game as well, counting who won: the
+evaluation that judges is the one that aims the removal today, so the plain counts and the
+wins are the reading that isn't circular. `--weights JSON` puts evaluation weights on the
+new side alone, so a weight is judged without a build of its own. A game takes about twice
+as long as the other kinds' (the shadow thinks too), and a game raises few removal decisions
+(two to six), so a rule needs dozens of games to say anything.
+
+**Next:** the cheapest rule the data supports, judged with it: weigh an opponent's commander
+and its token makers more when a removal picks among targets. In BACKLOG.

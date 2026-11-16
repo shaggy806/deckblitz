@@ -163,13 +163,16 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `bot:bench`, `bot:scenarios`, `bot:benchmarks`, `bot:behaviour`, `bot:crackback`, `bot:ab`, `bot:diff`,
   `bot:replay`, `bot:anatomy` (where a decision's time goes, on `data/bot-positions/`), `bot:timings`
   (decision cost in bench games at the live budget): bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
-- `bot:judge -- --kind payments|discards|attacks|blocks --decks "A,B,C,D[;E,F]" [--seeds 1-8] [--parallel 6] [--base origin/main] [--all]`:
+- `bot:judge -- --kind payments|discards|attacks|blocks|removal --decks "A,B,C,D[;E,F]" [--seeds 1-8] [--parallel 6] [--base origin/main] [--weights JSON] [--to-end] [--all]`:
   one kind of decision on named decks, the working build's answer beside an older commit's at each, and each
   disagreement played on by v2 and scored. Several deck sets and seeds are a game each, played in parallel and totalled:
   the net in evaluation points (a block that saves 23 life and one that costs 1 come to +22, not one each), the
   decider's life and its opponents', and the lines only one answer lived through. For a decision the sample decks
   hardly raise (so `bot:diff` says nothing), and for whether a change was for the better; its verdicts are v2's own
-  play, so read the big gaps on their boards.
+  play, so read the big gaps on their boards. `--kind removal` (2026-11-15) is what a removal is aimed at and whether
+  it is fired, judged two of the decider's turns on (`--rounds`): the judge for any rule about which permanents to
+  answer. `--weights` judges evaluation weights on the new side without a build of their own; `--to-end` also plays
+  each line to the end of the game and counts who won.
 - `bot:outs -- --seeds 1-6 --decks "A,B,C,D[;…]" [--parallel 6]`: every turn a seat ends dead to one opponent's
   creatures whatever it blocks with, followed to its next turn and filed (died, not attacked, that board cut down,
   attacked and lived), with what it cast that turn and the wipes it and the others held. Says how often each out comes,
