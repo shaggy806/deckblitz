@@ -961,6 +961,8 @@ export type GameEvent =
       readonly byOwnAttack?: true;
       /** Its source entering caused it (`LastKnownRefs.byOwnEntry`). */
       readonly byOwnEntry?: true;
+      /** A permanent entering caused it (`LastKnownRefs.byEntry`). */
+      readonly byEntry?: true;
     })
   | (Base & {
       /** Identical tokens folded into one stack object (`Game.foldTokensInto`:

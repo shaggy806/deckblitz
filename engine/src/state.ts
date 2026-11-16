@@ -2664,6 +2664,13 @@ export interface LastKnownRefs {
    * "a creature entering under an opponent's control causes a triggered
    * ability of that creature to trigger" (Aboleth Spawn). */
   readonly byOwnEntry?: true;
+  /** Its trigger event was a permanent — any permanent, its source's own or
+   * another's — entering the battlefield (rule 603.2; what `doubleTriggers`'
+   * `"enters"` cause and Torpor Orb read): "whenever a permanent entering
+   * causes a triggered ability to trigger" (Strict Proctor). Not an "as this
+   * enters" replacement, which isn't a triggered ability (614.1c). Carried
+   * onto its `ability-triggered` event. */
+  readonly byEntry?: true;
 }
 
 /**

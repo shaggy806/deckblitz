@@ -76,6 +76,19 @@ export const TRIGGER_EVENTS = {
     when: (e) => e.byOwnEntry === true,
     object: (e) => e.object,
   }),
+  /** "Whenever a permanent entering causes a triggered ability to trigger"
+   * (Strict Proctor): any triggered ability, anyone's, whose trigger event
+   * was a permanent entering the battlefield — its own source's or another's
+   * ("whenever another creature enters", landfall), delayed ones too; never
+   * a leaves trigger, nor an "as this enters" replacement (614.1c). Its
+   * subject is that ability, put on the stack just now, so this triggers
+   * after it and resolves first (rule 603.3b); `"trigger-ability"` /
+   * `"trigger-object"` is it. */
+  "entry-triggers-ability": row({
+    type: "ability-triggered",
+    when: (e) => e.byEntry === true,
+    object: (e) => e.object,
+  }),
   /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
   forages: row({ type: "foraged", player: (e) => e.player }),
   /** "Whenever you roll one or more dice" (rule 706); the value is the

@@ -365,6 +365,19 @@ ability (two Coursers). A play naming one runs with `playOptions` narrowed to it
 everything read of the permission — its costs, what it spends, `spendAs`, its `PlayedUnder` — is that one's.
 The client's library-top buttons say "(via Courser of Kruphix)". The Fourth Doctor (rank 10460), beside
 Crystal Skull and Courser of Kruphix. `test/play-permission-choice.test.ts`.
+### "Whenever a permanent entering causes a triggered ability to trigger" — built 2026-11-16
+
+The key `trigger:ability-triggered-by-entering`: a `TRIGGER_EVENTS` row, `entry-triggers-ability`,
+over the `ability-triggered` event's new `byEntry` (from `LastKnownRefs.byEntry`, set wherever a
+trigger, printed, granted or delayed, fires on a `permanent-entered-battlefield` event — the event
+`doubleTriggers`' `"enters"` cause reads). Its subject is the ability as it goes on the stack, so the
+watcher goes on above it and resolves first (rule 603.3b, the ruling); an "as this enters"
+replacement is no trigger (614.1c). With `counter` of `"trigger-object"` under an `unless` chosen
+by `{ controllerOf: "trigger-object" }`: Strict Proctor (rank 10805). A trigger fired several
+times at once (Panharmonicon, a token stack) is no longer compacted into one stack object while a
+permanent watches triggered abilities go on the stack, so each instance is seen: this fixed Aboleth
+Spawn copying a doubled enters trigger once. `test/entry-triggers-ability.test.ts`.
+
 ### A reveal per permanent destroyed, the finds entering together — built 2026-11-16
 
 The key `effect:reveal-until-per-destroyed-this-way` (family `effect:reveal-until-count`): no new

@@ -33714,7 +33714,13 @@ export class Game {
       if (!this.triggerMatches(at.whenever, event, object)) continue;
       const triggerObject = this.eventTriggerObject(at.whenever, event);
       const atRefs = this.withAttackedTogether(this.refsAtTrigger(source, undefined, event, triggerObject), at.whenever, event, object);
-      const refs = event.type === "player-lost" ? this.withLoserPermanents(atRefs, event.player) : atRefs;
+      const refs =
+        event.type === "player-lost"
+          ? this.withLoserPermanents(atRefs, event.player)
+          : // A permanent entering caused it (Strict Proctor).
+            event.type === "permanent-entered-battlefield"
+            ? { ...(atRefs ?? {}), byEntry: true as const }
+            : atRefs;
       // Its "if" reads the event as its resolution will ("that player").
       if (!this.delayedIfHolds(trigger, triggerObject, refs)) continue;
       if (at.until === "while-exiled") {
@@ -34190,13 +34196,19 @@ export class Game {
           const refsNow = this.refsAtTrigger(live, lastSeen, event, triggerObject);
           // Its own source attacking caused it (Firebender Ascension).
           // Or its own source, a creature, entering (Aboleth Spawn).
+          // Any permanent entering caused it (Strict Proctor).
           const atTrigger = this.attackNamed(event, id)
             ? { ...(refsNow ?? {}), byOwnAttack: true as const }
-            : event.type === "permanent-entered-battlefield" &&
-                event.object === id &&
-                live.zone === "battlefield" &&
-                effectiveTypes(this.state, this.registry, live).includes("creature")
-              ? { ...(refsNow ?? {}), byOwnEntry: true as const }
+            : event.type === "permanent-entered-battlefield"
+              ? {
+                  ...(refsNow ?? {}),
+                  byEntry: true as const,
+                  ...(event.object === id &&
+                  live.zone === "battlefield" &&
+                  effectiveTypes(this.state, this.registry, live).includes("creature")
+                    ? { byOwnEntry: true as const }
+                    : {}),
+                }
               : refsNow;
           // "For each of them": which permanents the batched entry brought.
           const lastKnownRefs =
@@ -34782,15 +34794,20 @@ export class Game {
     trigger: PendingTrigger,
     multiplier: number,
   ): void {
+    // Compacting is invisible only while nothing watches triggered abilities
+    // go on the stack: each instance is one to Strict Proctor (countered on
+    // its own) or Aboleth Spawn (copied on its own).
+    const watched = multiplier > 1 && this.abilityTriggersWatched();
     if (multiplier <= 1) {
       this.state.pendingTriggers.push(trigger);
     } else if (
+      !watched &&
       ability.targets.length === 0 &&
       ability.effect !== null &&
       isCountScalableEffect(ability.effect)
     ) {
       this.state.pendingTriggers.push({ ...trigger, multiplier });
-    } else if (ability.targets.length === 0) {
+    } else if (!watched && ability.targets.length === 0) {
       // Copies that choose nothing are identical, so they go on the stack as
       // one object standing for them all, each still its own resolution.
       this.state.pendingTriggers.push({ ...trigger, copies: Math.min(multiplier, Game.MAX_EFFECT_INSTANCES) });
@@ -34798,6 +34815,22 @@ export class Game {
       const copies = Math.min(multiplier, Game.MAX_EFFECT_INSTANCES);
       for (let i = 0; i < copies; i += 1) this.state.pendingTriggers.push(trigger);
     }
+  }
+
+  /** Whether a permanent has an ability that triggers on a triggered ability
+   * going on the stack (a `TRIGGER_EVENTS` row over `ability-triggered` —
+   * Strict Proctor, Aboleth Spawn, Firebender Ascension). While one does, a
+   * trigger fired several times at once goes on the stack once per instance
+   * (`queueTrigger`), not as one object standing for them, so each instance
+   * triggers it (rule 603.2c). Read only for such a trigger: rare. */
+  private abilityTriggersWatched(): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      for (const ability of this.effectiveTriggered(id)) {
+        const on = ability.trigger;
+        if (on.on === "event" && TRIGGER_EVENTS[on.event].type === "ability-triggered") return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -37511,6 +37544,7 @@ export class Game {
         source: trigger.delayed.source,
         controller: trigger.controller,
         object: id,
+        ...(trigger.lastKnownRefs?.byEntry === true ? { byEntry: true as const } : {}),
       });
       return "done";
     }
@@ -38143,6 +38177,7 @@ export class Game {
       object: abilityId,
       ...(refs?.byOwnAttack === true ? { byOwnAttack: true as const } : {}),
       ...(refs?.byOwnEntry === true ? { byOwnEntry: true as const } : {}),
+      ...(refs?.byEntry === true ? { byEntry: true as const } : {}),
     });
     // Its targets are locked in as it goes on the stack (rule 603.3d), which
     // is when anything it targets "becomes the target of" an ability.
