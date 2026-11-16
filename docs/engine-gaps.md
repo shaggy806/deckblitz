@@ -111,13 +111,7 @@ shuffle them and cloak one, but an object keeps its id through the exile, so a c
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the
 leak. Needs a design call: a fresh id at the shuffle, or redaction in `view.ts`. Found 2026-11-04.
 
-**A token with riot is never asked.** A named token enters without the riot choice
-(`entersBattlefieldReplacement`, `game.ts`), though rule 702.136a gives it the choice as it enters. Found 2026-11-02.
-Spider-Punk ("Other Spiders you control have riot") is in the pool since B315 (2026-11-12), so the gap is live: checked
-2026-11-15, a Spider token made by Spider Spawning under it enters with no choice asked and no counter. Token copies are
-asked (2026-11-09); a named token would have to go through `enterTokenCopies`.
-
-**Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked at the two effects that make tokens as a resolution step, `create-token` and `create-token-copy` (a batch's copies aside). Tokens made inside another operation, amass (701.47), incubate, encore, myriad, populate and the like, go straight through `Game.createTokens`, which can't stop to ask: the replacement isn't offered for them, and only the tokens of a token doubler apply there (rule 614.1a). Moonlit Meditation's the only card with it so far.
+**Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked at the two effects that make tokens as a resolution step, `create-token` and `create-token-copy` (a batch's copies aside). Tokens made inside another operation, amass (701.47), incubate, encore, myriad, populate and the like, go straight through `Game.createTokens`, which can't stop to ask: the replacement isn't offered for them, and only the tokens of a token doubler apply there (rule 614.1a). Moonlit Meditation's the only card with it so far. The same callers pass `createTokens` no `followUp`, so a token of theirs that a static gives riot (rule 702.136a) isn't asked and takes haste; a `create-token` effect's token is asked since 2026-11-16.
 
 **"Each player may" acts on each answer before asking the next.** Rule 101.4: players choosing
 at the same time decide in APNAP order, then the actions happen together. `each-player-may`

@@ -10138,6 +10138,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Spider-Punk: a Spider token is asked about riot as it enters',
+    board({
+      you: { bf: ['Spider-Punk', 'Forest*5'], hand: ['Spider Spawning'], gy: ['Grizzly Bears', 'Hill Giant'] },
+      opp: [{}],
+    }),
+  ),
+  preset(
     'Domri, Chaos Bringer: mana that gives a creature spell riot',
     board({
       you: { bf: ['Domri, Chaos Bringer', 'Forest'], hand: ['Grizzly Bears'] },

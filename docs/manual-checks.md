@@ -6729,6 +6729,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Grizzly Bears, and choose haste when asked.
 - **Expect:** You're asked once, and while you choose, the other players see only that you're making a choice. The Bears enter with no counter and can attack this turn.
 
+### Spider-Punk: a Spider token is asked about riot as it enters
+
+- **Do:** Cast Spider Spawning. Choose "+1/+1 counter" the first time you're asked and haste the second.
+- **Expect:** You're asked twice, once for each Spider token, and neither token is on the battlefield until both are answered. One enters with a +1/+1 counter; the other has none and can attack this turn.
+
 ### Domri, Chaos Bringer: mana that gives a creature spell riot
 
 - **Do:** Use Domri's +1 and choose either color. Cast Grizzly Bears with that mana and your Forest.

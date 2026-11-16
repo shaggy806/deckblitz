@@ -43239,6 +43239,14 @@ controlledBy,
             textChanges,
             withCounters,
             attacksThisTurn,
+            // A token that stops to choose as it enters (riot) isn't in
+            // `made`: what follows goes with it instead.
+            {
+              source,
+              effectController: controller,
+              ...(thenCounters !== undefined && thenCounters.amount > 0 ? { thenCounters } : {}),
+              ...(attacking !== undefined ? { attacking } : {}),
+            },
           ));
           // "Sacrifice / exile them at the beginning of the next end step":
           // a delayed triggered ability over these tokens (rule 603.7).
@@ -47729,9 +47737,22 @@ controlledBy,
     /** They attack this turn if able, `at` that player (Furygale Flocking) —
      * until end of turn, part of making them. */
     attacksThisTurn?: { readonly at?: PlayerId },
+    /** What the effect making them still does with the tokens once they're
+     * there (the `create-token` effect's). Given, a token that has a choice
+     * to make as it enters stops to make it (riot a static will give it,
+     * rule 702.136a), nothing is returned, and these go with the tokens
+     * (`finishTokenCopies`). A caller that can't wait on an answer (amass,
+     * incubate) gives none, and such a token isn't asked. */
+    followUp?: {
+      readonly source: ObjectId;
+      readonly effectController: PlayerId;
+      readonly thenCounters?: { readonly kind: string; readonly amount: number };
+      readonly attacking?: ResolvedEnterAttacking;
+    },
   ): readonly ObjectId[] {
     if (withCounters !== undefined && withCounters.amount <= 0) withCounters = undefined;
     const def = this.registry.get(tokenName); // validate the token is a known definition
+    const creator = controller;
     controller = this.tokenCreatorAfterRedirects(controller);
     if (attachTo !== undefined) {
       if (attachTo === null || !this.canCreateAttached(def, attachTo, controller)) return [];
@@ -47818,27 +47839,50 @@ controlledBy,
               ]),
     ];
     // Devour is "as this enters" (rule 702.82a): a token with it stops to ask
-    // before it's there, as an entering token copy does.
-    if (def.devour !== null && total > 0) {
+    // before it's there, as an entering token copy does. So does a token
+    // that will have riot (rule 702.136a: "you may have this permanent enter
+    // with an additional +1/+1 counter on it"), its own or one a static
+    // gives it as it enters (614.12; Spider-Punk's "Other Spiders you
+    // control have riot"), where its maker can wait for the answer.
+    const entering: PlannedTokenCopies = {
+      controller,
+      copyName: tokenName,
+      created: true,
+      total,
+      replaced: plan.flatMap((t) => (t.name === null ? [] : [{ name: t.name, count: t.count }])),
+      modifiers,
+      riders,
+      tapped,
+      exileAtEndStep,
+      sacrificeAtEndStep,
+      atYourNextEndStep: false,
+      exileAtEndOfCombat: false,
+      sacrificeAtEndOfCombat: false,
+      ...(goadedForGameBy !== undefined ? { goadedForGameBy } : {}),
+      ...(this.mintingLink !== null ? { createdWith: this.mintingLink } : {}),
+      ...(withCounters !== undefined ? { withCounters } : {}),
+    };
+    if (
+      total > 0 &&
+      (def.devour !== null || (followUp !== undefined && attachTo === undefined && this.createdTokenHasRiot(entering)))
+    ) {
       this.carryOutTokenCopies([
-        {
-          controller,
-          copyName: tokenName,
-          created: true,
-          total,
-          replaced: plan.flatMap((t) => (t.name === null ? [] : [{ name: t.name, count: t.count }])),
-          modifiers,
-          riders,
-          tapped,
-          exileAtEndStep,
-          sacrificeAtEndStep,
-          atYourNextEndStep: false,
-          exileAtEndOfCombat: false,
-          sacrificeAtEndOfCombat: false,
-          ...(goadedForGameBy !== undefined ? { goadedForGameBy } : {}),
-          ...(this.mintingLink !== null ? { createdWith: this.mintingLink } : {}),
-          ...(withCounters !== undefined ? { withCounters } : {}),
-        },
+        followUp === undefined
+          ? entering
+          : {
+              ...entering,
+              source: followUp.source,
+              effectController: followUp.effectController,
+              ...(followUp.thenCounters !== undefined ? { thenCounters: followUp.thenCounters } : {}),
+              // "…tapped and attacking" (rule 508.4). One created under
+              // another player's control instead is tapped, but not
+              // attacking (Crafty Cutpurse's ruling).
+              ...(followUp.attacking === undefined
+                ? {}
+                : controller === creator
+                  ? { attacking: followUp.attacking }
+                  : { tapped: true }),
+            },
       ]);
       return [];
     }
@@ -47880,6 +47924,29 @@ controlledBy,
             ),
       ),
     ]);
+  }
+
+  /**
+   * Whether a named token of `planned` will have riot as it enters (rule
+   * 702.136a), so its controller is asked for the counter or haste first:
+   * its own, or one a static on the battlefield will give it there (614.12).
+   * Nothing grants riot on most boards, and then this is one pass over the
+   * battlefield; a token is minted to look only when something does.
+   */
+  private createdTokenHasRiot(planned: PlannedTokenCopies): boolean {
+    if (this.registry.get(planned.copyName).keywords.includes("riot")) return true;
+    const grants = this.state.zones.shared.battlefield.some((id) => {
+      const source = this.state.objects[id];
+      return (
+        source !== undefined &&
+        this.registry.get(rulesTextName(source)).static.some((ability) => ability.grantKeywords?.includes("riot") === true)
+      );
+    });
+    if (!grants) return false;
+    const probe = this.mintEnteringToken(planned);
+    const instances = enteringKeywordInstances(this.state, this.registry, this.state.objects[probe], "riot", planned.controller);
+    delete this.state.objects[probe];
+    return instances > 0;
   }
 
   /**
