@@ -625,6 +625,7 @@ import _poolOverwhelmingVictory from "../pool/overwhelming-victory.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPanicSpellbomb from "../pool/panic-spellbomb.js";
 import _poolParallaxTide from "../pool/parallax-tide.js";
+import _poolParanormalAnalyst from "../pool/paranormal-analyst.js";
 import _poolParasiticImplant from "../pool/parasitic-implant.js";
 import _poolPariah from "../pool/pariah.js";
 import _poolPaupersCage from "../pool/paupers-cage.js";
@@ -1689,6 +1690,7 @@ const shard: CardShard = {
     _poolPacksBetrayal,
     _poolPanicSpellbomb,
     _poolParallaxTide,
+    _poolParanormalAnalyst,
     _poolParasiticImplant,
     _poolPariah,
     _poolPaupersCage,

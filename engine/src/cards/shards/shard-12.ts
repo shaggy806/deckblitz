@@ -1004,6 +1004,7 @@ import _poolWitheringCurse from "../pool/withering-curse.js";
 import _poolWitsEnd from "../pool/wits-end.js";
 import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWolfridersSaddle from "../pool/wolfriders-saddle.js";
+import _poolWonderscapeSage from "../pool/wonderscape-sage.js";
 import _poolWrapInFlames from "../pool/wrap-in-flames.js";
 import _poolWrathOfMaritLage from "../pool/wrath-of-marit-lage.js";
 import _poolWrathfulRedDragon from "../pool/wrathful-red-dragon.js";
@@ -2043,6 +2044,7 @@ const shard: CardShard = {
     _poolWitsEnd,
     _poolWolfbat,
     _poolWolfridersSaddle,
+    _poolWonderscapeSage,
     _poolWrapInFlames,
     _poolWrathOfMaritLage,
     _poolWrathfulRedDragon,

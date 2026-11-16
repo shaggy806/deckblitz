@@ -19859,6 +19859,7 @@ import _poolParalyzingGrasp from "./pool/paralyzing-grasp.js";
 import _poolParameciaColoniex from "./pool/paramecia-coloniex.js";
 import _poolParanoidDelusions from "./pool/paranoid-delusions.js";
 import _poolParanoidParishBlade from "./pool/paranoid-parish-blade.js";
+import _poolParanormalAnalyst from "./pool/paranormal-analyst.js";
 import _poolParapetThrasher from "./pool/parapet-thrasher.js";
 import _poolParapetWatchers from "./pool/parapet-watchers.js";
 import _poolParapet from "./pool/parapet.js";
@@ -20044,6 +20045,7 @@ import _poolPeregrination from "./pool/peregrination.js";
 import _poolPeregrineDrake from "./pool/peregrine-drake.js";
 import _poolPeregrineGriffin from "./pool/peregrine-griffin.js";
 import _poolPeregrineMask from "./pool/peregrine-mask.js";
+import _poolPerennation from "./pool/perennation.js";
 import _poolPerennialBehemoth from "./pool/perennial-behemoth.js";
 import _poolPerfectIntimidation from "./pool/perfect-intimidation.js";
 import _poolPerfectedForm from "./pool/perfected-form.js";
@@ -29392,6 +29394,7 @@ import _poolTripleTriad from "./pool/triple-triad.js";
 import _poolTriplicateSpirits from "./pool/triplicate-spirits.js";
 import _poolTriplicateTitan from "./pool/triplicate-titan.js";
 import _poolTriskaidekaphile from "./pool/triskaidekaphile.js";
+import _poolTriskaidekaphobia from "./pool/triskaidekaphobia.js";
 import _poolTriskelavus from "./pool/triskelavus.js";
 import _poolTriskelion from "./pool/triskelion.js";
 import _poolTritonCavalry from "./pool/triton-cavalry.js";
@@ -31952,6 +31955,7 @@ import _poolWolverinePack from "./pool/wolverine-pack.js";
 import _poolWolverineRiders from "./pool/wolverine-riders.js";
 import _poolWonderManHollywoodHero from "./pool/wonder-man-hollywood-hero.js";
 import _poolWonder from "./pool/wonder.js";
+import _poolWonderscapeSage from "./pool/wonderscape-sage.js";
 import _poolWondrousCrucible from "./pool/wondrous-crucible.js";
 import _poolWondrousRevival from "./pool/wondrous-revival.js";
 import _poolWoodElves from "./pool/wood-elves.js";
@@ -53125,6 +53129,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolParameciaColoniex,
   _poolParanoidDelusions,
   _poolParanoidParishBlade,
+  _poolParanormalAnalyst,
   _poolParapetThrasher,
   _poolParapetWatchers,
   _poolParapet,
@@ -53310,6 +53315,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPeregrineDrake,
   _poolPeregrineGriffin,
   _poolPeregrineMask,
+  _poolPerennation,
   _poolPerennialBehemoth,
   _poolPerfectIntimidation,
   _poolPerfectedForm,
@@ -62658,6 +62664,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTriplicateSpirits,
   _poolTriplicateTitan,
   _poolTriskaidekaphile,
+  _poolTriskaidekaphobia,
   _poolTriskelavus,
   _poolTriskelion,
   _poolTritonCavalry,
@@ -65218,6 +65225,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWolverineRiders,
   _poolWonderManHollywoodHero,
   _poolWonder,
+  _poolWonderscapeSage,
   _poolWondrousCrucible,
   _poolWondrousRevival,
   _poolWoodElves,
@@ -86404,6 +86412,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/paramecia-coloniex": _poolParameciaColoniex,
   "pool/paranoid-delusions": _poolParanoidDelusions,
   "pool/paranoid-parish-blade": _poolParanoidParishBlade,
+  "pool/paranormal-analyst": _poolParanormalAnalyst,
   "pool/parapet-thrasher": _poolParapetThrasher,
   "pool/parapet-watchers": _poolParapetWatchers,
   "pool/parapet": _poolParapet,
@@ -86589,6 +86598,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/peregrine-drake": _poolPeregrineDrake,
   "pool/peregrine-griffin": _poolPeregrineGriffin,
   "pool/peregrine-mask": _poolPeregrineMask,
+  "pool/perennation": _poolPerennation,
   "pool/perennial-behemoth": _poolPerennialBehemoth,
   "pool/perfect-intimidation": _poolPerfectIntimidation,
   "pool/perfected-form": _poolPerfectedForm,
@@ -95937,6 +95947,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/triplicate-spirits": _poolTriplicateSpirits,
   "pool/triplicate-titan": _poolTriplicateTitan,
   "pool/triskaidekaphile": _poolTriskaidekaphile,
+  "pool/triskaidekaphobia": _poolTriskaidekaphobia,
   "pool/triskelavus": _poolTriskelavus,
   "pool/triskelion": _poolTriskelion,
   "pool/triton-cavalry": _poolTritonCavalry,
@@ -98497,6 +98508,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wolverine-riders": _poolWolverineRiders,
   "pool/wonder-man-hollywood-hero": _poolWonderManHollywoodHero,
   "pool/wonder": _poolWonder,
+  "pool/wonderscape-sage": _poolWonderscapeSage,
   "pool/wondrous-crucible": _poolWondrousCrucible,
   "pool/wondrous-revival": _poolWondrousRevival,
   "pool/wood-elves": _poolWoodElves,

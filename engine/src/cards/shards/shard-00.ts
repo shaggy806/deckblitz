@@ -614,6 +614,7 @@ import _poolParallaxInhibitor from "../pool/parallax-inhibitor.js";
 import _poolPasswallAdept from "../pool/passwall-adept.js";
 import _poolPathOfMettle from "../pool/path-of-mettle.js";
 import _poolPeaceStrider from "../pool/peace-strider.js";
+import _poolPerennation from "../pool/perennation.js";
 import _poolPettyTheft from "../pool/petty-theft.js";
 import _poolPhalanxTactics from "../pool/phalanx-tactics.js";
 import _poolPhantasmagorian from "../pool/phantasmagorian.js";
@@ -1661,6 +1662,7 @@ const shard: CardShard = {
     _poolPasswallAdept,
     _poolPathOfMettle,
     _poolPeaceStrider,
+    _poolPerennation,
     _poolPettyTheft,
     _poolPhalanxTactics,
     _poolPhantasmagorian,
