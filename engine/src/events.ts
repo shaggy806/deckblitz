@@ -72,6 +72,16 @@ export type GameEvent =
       readonly seed: number;
     })
   | (Base & {
+      /** The game restarted (rule 727 — Karn Liberated's −14): it ended with
+       * nobody winning, losing or drawing it, and `players` — those still in
+       * it — begin a new one, `by` first (727.1a). A `game-started` for the
+       * new game follows. `source` names the card whose effect did it. */
+      readonly type: "game-restarted";
+      readonly by: PlayerId;
+      readonly source: string;
+      readonly players: readonly PlayerId[];
+    })
+  | (Base & {
       readonly type: "turn-began";
       readonly turn: number;
       /** The round it begins in (`TurnState.round`). */

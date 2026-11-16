@@ -406,6 +406,10 @@ export interface PlayerView {
   /** Who the "highroll" (or a configured `startingPlayer`) chose to go
    * first — fixed for the life of the game, unlike `activePlayer`. */
   readonly startingPlayer: PlayerId;
+  /** How many times the game has restarted (rule 727 — Karn Liberated),
+   * absent before the first: a client starts its game screen afresh on a
+   * new value, as on a new game in the room. */
+  readonly restarts?: number;
   readonly activePlayer: PlayerId;
   readonly turn: TurnState;
   readonly priority: PriorityState;
@@ -1387,6 +1391,7 @@ function viewForUncached(
   return {
     turnOrder: [...state.turnOrder],
     startingPlayer: state.startingPlayer,
+    ...(state.restarts !== undefined ? { restarts: state.restarts } : {}),
     activePlayer: activePlayerOf(state),
     turn: { ...state.turn },
     priority: { ...state.priority, passed: [...state.priority.passed] },

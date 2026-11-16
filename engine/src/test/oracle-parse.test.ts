@@ -20365,3 +20365,29 @@ describe("'you may put a name sticker on it' (rule 123.6 — _____ Goblin, Wizar
     expect(JSON.stringify(saurus.effect ?? null)).not.toContain("put-sticker");
   });
 });
+
+describe("'Restart the game' (Karn Liberated — rule 727)", () => {
+  it("reads the −14 whole, and links the +4's and −3's exiles to it (rule 607.2a)", () => {
+    const karn = parseFace({
+      name: "Karn Liberated",
+      type_line: "Legendary Planeswalker — Karn",
+      mana_cost: "{7}",
+      loyalty: "6",
+      oracle_text:
+        "+4: Target player exiles a card from their hand.\n−3: Exile target permanent.\n−14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn. Then put those cards onto the battlefield under your control.",
+    } as never) as unknown as { activated: { effect: Record<string, unknown> }[] };
+    expect(karn.activated[0].effect).toEqual({
+      kind: "for-each-player",
+      who: { target: 0 },
+      effect: { kind: "look-and-choose", player: "that-player", zone: "hand", min: 1, max: 1, destination: "exile", leftover: "stay" },
+    });
+    expect(karn.activated[1].effect).toEqual({ kind: "exile", target: 0, linked: true });
+    expect(karn.activated[2].effect).toEqual({
+      kind: "restart-game",
+      leaveInExile: {
+        filter: { typesAnyOf: ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"], notSubtypes: ["Aura"] },
+      },
+      thenOntoBattlefield: true,
+    });
+  });
+});

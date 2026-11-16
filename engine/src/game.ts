@@ -515,6 +515,7 @@ import {
   sideboardOf,
   cloneGameState,
   clonePlain,
+  createGameState,
   createPlayerState,
   doorsFace,
   faceDownCardName,
@@ -599,6 +600,7 @@ import type {
   CastNowAsk,
   OtherChoiceAsk,
   MeldedInfo,
+  PregameOptions,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType, isPlaneswalkerType } from "./subtypes.js";
 import {
@@ -2921,56 +2923,20 @@ export class Game {
         config.controllers?.[player] ?? new AutomaticController(player);
     }
 
-    const state: GameState = {
-      seed,
-      rngState: rng.seed,
-      rules,
-      turnOrder,
-      startingPlayer,
-      players: {},
-      objects: {},
-      zones: {
-        perPlayer: {},
-        shared: { battlefield: [], stack: [], exile: [], command: [] },
-      },
-      turn: {
-        number: 0,
-        activePlayerIndex: turnOrder.indexOf(startingPlayer),
-        step: "untap",
-        isExtra: false,
-      },
-      priority: { active: false, holder: null, passed: [] },
-      result: { over: false, winner: null, reason: null },
-      awaiting: null,
-      revealedThisTurn: [],
-      decisionSource: null,
-      delayedTriggers: [],
-      pendingBlockerDeclarations: [],
-      pendingTriggers: [],
-      pendingTargetedTrigger: null,
-      deferredCommanderMove: null,
-      pendingCommanderMoves: [],
-      pendingPayLifeForUntapped: [],
-      commanderArrivals: [],
-      pendingDestruction: [],
-      pendingDiscards: [],
-      pendingSacrifices: [],
-      pendingSacrificeVictims: [],
-      suspendedResolutions: [],
-      hexproofPlayers: [],
-      activeReplacements: [],
-      extraTurns: [],
-      extraCombats: 0,
-      spellsCastThisTurn: 0,
-      dayNight: null,
-      monarch: null,
-      emblems: [],
-      combatDamage: null,
-      timestampSeq: 0,
-      eventLog: [],
-      eventSeq: 0,
-      nextObjectSeq: 0,
+    const state = createGameState(seed, rng.seed, rules, turnOrder, startingPlayer);
+    // How the pregame goes, for a restart to play the new game's the same
+    // way (rule 727.1 — `GameState.pregame`).
+    const byPlayerCount = [
+      ...(config.rules?.skipFirstDraw === undefined ? (["skipFirstDraw"] as const) : []),
+      ...(free === "multiplayer" ? (["freeFirstMulligan"] as const) : []),
+    ];
+    const pregame: PregameOptions = {
+      ...(config.mulligans === true ? { mulligans: true as const } : {}),
+      ...(config.shuffle === false ? { unshuffled: true as const } : {}),
+      ...(config.skipCompanionReveals === true ? { noCompanionReveals: true as const } : {}),
+      ...(byPlayerCount.length > 0 ? { byPlayerCount } : {}),
     };
+    if (Object.keys(pregame).length > 0) state.pregame = pregame;
 
     const game = new Game(state, registry, controllers, rng);
     game.setup(config.decks, config.shuffle ?? true, config.mulligans ?? false, config.skipCompanionReveals === true);
@@ -7405,6 +7371,7 @@ export class Game {
         for (const c of colorIdentityOf(this.registry.get(name), this.registry)) identity.add(c);
       }
       this.state.players[player].commanderIdentity = COLORS.filter((c) => identity.has(c));
+      if (commanderNames.length > 0) this.state.players[player].commanders = [...commanderNames];
       this.state.players[player].startingDeckSize = cards.length + commanderNames.length;
       this.state.zones.perPlayer[player] = {
         library: [],
@@ -7489,13 +7456,20 @@ export class Game {
       this.beginMulligans();
       return;
     }
-    for (const player of this.state.turnOrder) {
+    for (const player of this.playersInGame()) {
       for (let i = 0; i < this.state.rules.openingHandSize; i += 1) {
         this.drawCard(player, true);
       }
     }
 
     this.beginOpeningHandActions(0);
+  }
+
+  /** The players still in the game, in turn order: every player at the start
+   * of a game, and those a restarted one begins with (rule 727.1) — a player
+   * who had left the old game isn't in the new one (800.4a). */
+  private playersInGame(): PlayerId[] {
+    return this.state.turnOrder.filter((player) => this.state.players[player]?.hasLost !== true);
   }
 
   /** The cards `player` may reveal as a companion (rule 103.2b): theirs from
@@ -7529,6 +7503,7 @@ export class Game {
     const start = Math.max(0, order.indexOf(this.state.startingPlayer));
     for (let pos = from; pos < order.length; pos += 1) {
       const player = order[(start + pos) % order.length];
+      if (this.state.players[player]?.hasLost === true) continue;
       const eligible = this.companionChoices(player);
       if (eligible.length === 0) continue;
       this.askCompanionReveal(player, eligible, { next: pos + 1, opening });
@@ -7631,6 +7606,7 @@ export class Game {
     const start = Math.max(0, order.indexOf(this.state.startingPlayer));
     for (let pos = from; pos < order.length * 2; pos += 1) {
       const player = order[(start + Math.floor(pos / 2)) % order.length];
+      if (this.state.players[player]?.hasLost === true) continue;
       const reveal = pos % 2 === 1;
       const eligible = this.state.zones.perPlayer[player].hand.filter((id) => {
         const name = this.state.objects[id]?.cardName;
@@ -7657,6 +7633,9 @@ export class Game {
       return;
     }
     this.state.awaiting = null;
+    // A restart's "then": what it left in exile enters now, just before the
+    // first turn's untap step (rule 727.4).
+    if (this.state.restartHeld !== undefined && this.enterRestartHeld()) return;
     this.beginTurn();
   }
 
@@ -7753,14 +7732,15 @@ export class Game {
    */
   private beginMulligans(): void {
     const hands: Record<string, MulliganHandState> = {};
-    for (const player of this.state.turnOrder) {
+    const players = this.playersInGame();
+    for (const player of players) {
       for (let i = 0; i < this.state.rules.openingHandSize; i += 1) {
         this.drawCard(player);
       }
       hands[player] = { taken: 0, step: "decide" };
     }
-    this.state.awaiting = { kind: "mulligan", player: this.state.turnOrder[0], hands };
-    this.prepareForPriority(this.state.turnOrder[0]);
+    this.state.awaiting = { kind: "mulligan", player: players[0], hands };
+    this.prepareForPriority(players[0]);
   }
 
   /** After a mulligan-phase action: if anyone is still to act, keep the phase
@@ -30845,6 +30825,9 @@ export class Game {
       delete this.state.resolvingSource;
       delete this.state.resolvingController;
       delete this.state.resolvingTriggered;
+      // A `restart-game` effect's restart (rule 727), once what's left of
+      // the resolution has happened in the old game.
+      if (this.state.restartPending !== undefined && !this.state.result.over) this.restartGame();
     }
   }
 
@@ -31237,7 +31220,9 @@ export class Game {
     else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters, entry.enterAs, entry.tapped, entry.shuffles);
     else if (entry.kind === "token-copies") this.enterTokenCopies(entry);
     else if (entry.kind === "opening-hand") this.applyOpeningHand(entry.player, entry.objects, entry.next, entry.destination);
-    else this.finishZoneChoice(entry);
+    else if (entry.kind === "restart-held") {
+      if (!this.enterRestartHeld()) this.beginTurn();
+    } else this.finishZoneChoice(entry);
   }
 
   /**
@@ -42557,6 +42542,23 @@ controlledBy,
       },
       winGame: (player) => this.winGame(player, `won the game with ${this.effectSourceName(source)}`),
       loseGame: (players) => this.loseGame(players, `lost the game to ${this.effectSourceName(source)}`),
+      restartGame: (spec) => {
+        // "All non-Aura permanent cards exiled with Karn" (rule 607.2a): the
+        // linked cards, in the stint this ability refers to, read now.
+        const filter = spec.leaveInExile?.filter;
+        const leaveInExile =
+          filter === undefined
+            ? []
+            : objectSet("exiled-with-source")
+                .map((member) => member.object)
+                .filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: controller }));
+        this.state.restartPending = {
+          by: controller,
+          source: this.effectSourceName(source),
+          leaveInExile,
+          thenOntoBattlefield: spec.thenOntoBattlefield === true,
+        };
+      },
       gameOver: () => this.state.result.over,
       storm: (sourceId) => this.stormCopy(sourceId),
       cascade: (player, sourceId) => this.cascade(player, sourceId),
@@ -63313,6 +63315,262 @@ controlledBy,
     this.state.priority.active = false;
     this.state.priority.holder = null;
     this.state.priority.passed = [];
+  }
+
+  /**
+   * Restart the game (rule 727): a `restart-game` effect's restart, held in
+   * `GameState.restartPending` until the resolution it's part of is over. The
+   * game ends at once, and nobody wins, loses or draws it (727.1); the
+   * players still in it begin a new one by rule 103 — a player who had left
+   * isn't in it (800.4a, the rulings) — with the effect's controller the
+   * starting player (727.1a):
+   *
+   * - every card they own is in the new game (727.2), wherever it was: a
+   *   library, a hand, a graveyard, the battlefield (phased out too, and each
+   *   card of a merged or a melded permanent), the stack, exile, the command
+   *   zone, an Attraction deck or junkyard, a card brought in from outside the
+   *   game too. Their sideboards stay outside; tokens, copies, emblems and
+   *   dungeons are gone. Nobody's ownership changes (727.2);
+   * - the cards the effect exempts stay in exile, out of their owners' decks
+   *   (727.5) — a commander among them too, still that deck's commander
+   *   (727.5a);
+   * - each player's commander goes into the command zone (103.2c), and the
+   *   rest of their cards become their library, shuffled (103.3) — an
+   *   Attraction deck its own (103.3a);
+   * - nothing else of the old game is left: each card is a new object (rule
+   *   400.7), life is the starting total (103.4), and counters, emblems,
+   *   commander tax and commander damage, every effect, designation and
+   *   delayed ability, and the journal of what happened are gone (the
+   *   rulings);
+   * - what carries on is outside the game: the seating, the rules (those
+   *   `Game.create` settled from the number of players settled again —
+   *   `GameState.pregame`), the random stream, the event log with what it
+   *   knew of each old object (`publicStints`, each closed now), the sideboards,
+   *   and the players who had left, as they left.
+   *
+   * Then the new game's pregame is played as the old one's was (`pregame`):
+   * companions (103.2b), opening hands and mulligans (103.5), the opening
+   * hands' actions (103.6), and the effect's "then" just before the first
+   * turn's untap step (727.4, `restartHeld`). A player with fewer than seven
+   * cards to draw tried to draw from an empty library, and loses as the first
+   * upkeep's state-based actions are checked (727.3) — not before: they
+   * aren't checked while the pregame waits on a decision.
+   */
+  private restartGame(): void {
+    const pending = this.state.restartPending;
+    if (pending === undefined) return;
+    delete this.state.restartPending;
+    const players = this.playersInGame();
+    const inGame = new Set(players);
+    if (!inGame.has(pending.by)) return;
+    const was = {
+      objects: this.state.objects,
+      zones: this.state.zones,
+      phasedOut: this.state.phasedOut ?? [],
+      players: this.state.players,
+      outside: this.state.outside,
+      publicStints: this.state.publicStints,
+      eventLog: this.state.eventLog,
+      eventSeq: this.state.eventSeq,
+      nextObjectSeq: this.state.nextObjectSeq,
+      timestampSeq: this.state.timestampSeq,
+      seed: this.state.seed,
+      turnOrder: this.state.turnOrder,
+      pregame: this.state.pregame,
+      restarts: this.state.restarts ?? 0,
+    };
+
+    // Every card each player still in the game owns (727.2), in the order
+    // found: libraries, hands, graveyards, then the shared zones.
+    interface Card {
+      readonly name: string;
+      readonly owner: PlayerId;
+      commander: boolean;
+      readonly lights?: readonly number[];
+    }
+    const deck: Card[] = [];
+    const attractions: Card[] = [];
+    const exempt: Card[] = [];
+    const leave = new Set(pending.leaveInExile);
+    const take = (into: Card[], name: string, owner: PlayerId, commander: boolean, lights?: readonly number[]): void => {
+      if (!inGame.has(owner) || !this.registry.has(name)) return;
+      into.push({ name, owner, commander, ...(lights !== undefined ? { lights } : {}) });
+    };
+    const takeObject = (id: ObjectId): void => {
+      const object = was.objects[id];
+      if (object === undefined || object.kind !== "card") return;
+      // Each other card of a merged permanent (730.3) or a melded one
+      // (712.21) is a card of its own; a token among them is none.
+      for (const component of object.merged?.components ?? []) {
+        if (!("self" in component) && !component.token) take(deck, component.cardName, component.owner, false);
+      }
+      for (const other of object.melded?.with ?? []) take(deck, other.cardName, other.owner, false);
+      if (object.isToken || object.isCopy === true) return;
+      if (this.isAttractionCard(object)) {
+        take(attractions, object.cardName, object.owner, false, object.lights);
+        return;
+      }
+      take(leave.has(id) && object.zone === "exile" ? exempt : deck, object.cardName, object.owner, object.isCommander);
+    };
+    for (const player of was.turnOrder) {
+      const own = was.zones.perPlayer[player];
+      for (const id of [...(own?.library ?? []), ...(own?.hand ?? []), ...(own?.graveyard ?? [])]) takeObject(id);
+    }
+    for (const zone of ["battlefield", "stack", "exile", "command"] as const) {
+      for (const id of was.zones.shared[zone]) takeObject(id);
+    }
+    for (const id of was.phasedOut) takeObject(id);
+    for (const player of players) {
+      const ps = was.players[player];
+      for (const id of [...(ps.attractionDeck ?? []), ...(ps.junkyard ?? [])]) takeObject(id);
+    }
+    // A deck's commanders by name (rule 903.3), for a commander card that no
+    // longer says so itself — one a merged permanent scattered.
+    for (const player of players) {
+      for (const name of was.players[player].commanders ?? []) {
+        const mine = [...deck, ...exempt].filter((card) => card.owner === player && card.name === name);
+        if (mine.length > 0 && !mine.some((card) => card.commander)) mine[0].commander = true;
+      }
+    }
+
+    // The new game, before its pregame.
+    const by = was.pregame?.byPlayerCount ?? [];
+    const rules: GameRules = {
+      ...this.state.rules,
+      // A two-player game's 103.8a and a multiplayer game's 103.5c, for the
+      // players the new game begins with (100.1b).
+      ...(by.includes("skipFirstDraw") ? { skipFirstDraw: players.length === 2 } : {}),
+      ...(by.includes("freeFirstMulligan") ? { freeFirstMulligan: players.length > 2 } : {}),
+    };
+    const fresh = createGameState(was.seed, this.rng.seed, rules, was.turnOrder, pending.by);
+    fresh.eventLog = was.eventLog;
+    fresh.eventSeq = was.eventSeq;
+    fresh.nextObjectSeq = was.nextObjectSeq;
+    fresh.timestampSeq = was.timestampSeq;
+    fresh.restarts = was.restarts + 1;
+    if (was.pregame !== undefined) fresh.pregame = was.pregame;
+    // What the log knew of each old object, which is known no longer.
+    if (was.publicStints !== undefined) {
+      for (const stints of Object.values(was.publicStints)) {
+        const last = stints[stints.length - 1];
+        if (last !== undefined && last.until === undefined) last.until = was.eventSeq;
+      }
+      fresh.publicStints = was.publicStints;
+    }
+    // Sideboards stay outside the game (rule 400.11a), as they were.
+    if (was.outside !== undefined) {
+      fresh.outside = was.outside;
+      for (const ids of Object.values(was.outside)) {
+        for (const id of ids) if (was.objects[id] !== undefined) fresh.objects[id] = was.objects[id];
+      }
+    }
+    for (const player of was.turnOrder) {
+      const before = was.players[player];
+      const after = createPlayerState(player, rules);
+      after.printings = before.printings;
+      if (before.commanderIdentity !== undefined) after.commanderIdentity = before.commanderIdentity;
+      if (before.commanders !== undefined) after.commanders = before.commanders;
+      if (before.hasLost) {
+        // Out of the new game, as they left the old (800.4a).
+        after.hasLost = true;
+        after.lossReason = before.lossReason;
+        after.life = before.life;
+        after.counters = before.counters;
+      }
+      fresh.players[player] = after;
+      fresh.zones.perPlayer[player] = { library: [], hand: [], graveyard: [] };
+    }
+    const state = this.state as unknown as Record<string, unknown>;
+    for (const key of Object.keys(state)) delete state[key];
+    Object.assign(state, fresh);
+    invalidateComputedCache();
+    // Not game state, but the old game's: a loop of resolutions in it.
+    this.mandatoryResolutions = 0;
+    this.resolutionTrail = [];
+    this.loopBreakDemanded = false;
+
+    this.emit({ type: "game-restarted", by: pending.by, source: pending.source, players: [...players] });
+    const shuffleLibraries = was.pregame?.unshuffled !== true;
+    for (const player of players) {
+      const library: ObjectId[] = [];
+      let deckSize = 0;
+      for (const card of deck) {
+        if (card.owner !== player) continue;
+        deckSize += 1;
+        if (!card.commander) {
+          library.push(this.makeCardObject(card.name, player));
+          continue;
+        }
+        const id = this.makeCardObject(card.name, player, { zone: "command", isCommander: true });
+        this.state.zones.shared.command.push(id);
+      }
+      this.state.zones.perPlayer[player].library = shuffleLibraries ? shuffle(library, this.rng) : library;
+      // Its starting deck is the deck it begins this game with (103.2a).
+      if (was.players[player].startingDeckSize !== undefined) this.state.players[player].startingDeckSize = deckSize;
+      const pile: ObjectId[] = [];
+      for (const card of attractions) {
+        if (card.owner !== player) continue;
+        const id = this.makeCardObject(card.name, player, { zone: "command" });
+        if (card.lights !== undefined) this.state.objects[id].lights = card.lights;
+        pile.push(id);
+      }
+      if (pile.length > 0) this.state.players[player].attractionDeck = shuffleLibraries ? shuffle(pile, this.rng) : pile;
+    }
+    const held: ObjectId[] = [];
+    for (const card of exempt) {
+      const id = this.makeCardObject(card.name, card.owner, { zone: "exile", isCommander: card.commander });
+      this.state.zones.shared.exile.push(id);
+      this.openStint(id);
+      held.push(id);
+    }
+    if (pending.thenOntoBattlefield && held.length > 0) this.state.restartHeld = { player: pending.by, cards: held };
+    this.state.rngState = this.rng.seed;
+
+    this.emit({ type: "game-started", players: [...players], startingPlayer: pending.by, seed: this.state.seed });
+    const opening = was.pregame?.mulligans === true ? "mulligans" : "hands";
+    if (was.pregame?.noCompanionReveals === true) this.dealOpeningHands(opening);
+    else this.beginCompanionReveals(0, opening);
+  }
+
+  /**
+   * A restart's "then put those cards onto the battlefield under your
+   * control" (rule 727.4 — `GameState.restartHeld`): once the new game's
+   * pregame is done, just before the first turn's untap step, the cards it
+   * left in exile enter together under that player's control — each making
+   * its "as this enters" choices first (rule 614.12), asked one at a time
+   * before any moves, the entry parked while one is (`PendingEntry`'s
+   * `"restart-held"`). Whether it stopped to ask. The player is the starting
+   * player, whose first turn begins next: they've controlled these since it
+   * did, so none is summoning sick (302.6, the rulings), and one that entered
+   * tapped untaps in its untap step.
+   */
+  private enterRestartHeld(): boolean {
+    const held = this.state.restartHeld;
+    if (held === undefined) return false;
+    const player = held.player;
+    const entering = held.cards.filter((id) => this.state.objects[id]?.zone === "exile");
+    for (const id of entering) {
+      if (this.askEnterChoice(id, player)) {
+        this.state.suspendedResolutions.push({ effect: null, enter: { kind: "restart-held" } });
+        this.prepareForPriority(player);
+        return true;
+      }
+    }
+    delete this.state.restartHeld;
+    this.withEnterBatch(() => {
+      for (const id of entering) {
+        const under = player !== this.state.objects[id].owner ? player : undefined;
+        if (!this.moveObject(id, "battlefield", under !== undefined ? { under } : {})) continue;
+        const entered = this.state.objects[id];
+        // Kept there by a control effect, as a reanimation "under your
+        // control" is (see `putOntoBattlefieldByEffect`).
+        if (under !== undefined && entered?.zone === "battlefield" && entered.controller !== under) {
+          this.gainControlByEffect(under, { kind: "object", object: id }, false, true);
+        }
+        this.emit({ type: "permanent-entered-battlefield", object: id });
+      }
+    });
+    return false;
   }
 
   /**

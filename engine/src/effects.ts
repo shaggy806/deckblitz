@@ -7138,6 +7138,39 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Restart the game" (rule 727 — Karn Liberated's −14). The game ends at
+       * once, nobody winning, losing or drawing it (727.1), and every player
+       * still in it starts a new one by rule 103: each card they own goes into
+       * their library (727.2 — wherever it was, a card brought in from outside
+       * the game too; tokens and copies are gone), a commander into the command
+       * zone (103.2c), the libraries are shuffled, life is the starting total,
+       * seven cards are drawn and mulligans taken, and the effect's controller
+       * takes the first turn (727.1a). Nothing of the old game carries over —
+       * counters, emblems, commander tax and damage, effects, the monarch.
+       * `Game.restartGame` does it once this resolution is over; it has to be
+       * the resolution's last instruction (its "then" is `thenOntoBattlefield`).
+       */
+      readonly kind: "restart-game";
+      /**
+       * "…leaving in exile all [filter] cards exiled with [this]": the cards
+       * in exile linked to this source (rule 607.2a — `GameObject.exiledWith`,
+       * the `"exiled-with-source"` set) that match `filter` are exempted from
+       * the restart (727.5): out of their owners' decks, still in exile as the
+       * new game begins, a commander among them out of the command zone too
+       * (727.5a). A card whose owner has left the game left with them (800.4a).
+       */
+      readonly leaveInExile?: { readonly filter: CardFilter };
+      /**
+       * "Then put those cards onto the battlefield under your control": once
+       * the new game's pregame is done, just before its first untap step
+       * (727.4), the exempted cards enter together under the effect's
+       * controller — the starting player, so they've been under that player's
+       * control since their first turn began (the rulings).
+       */
+      readonly thenOntoBattlefield?: true;
+    }
+  | {
+      /**
        * "Flip a coin. If you win the flip, [won]. If you lose the flip,
        * [lost]." (rule 705) — the effect's controller flips, on the game's
        * seeded random stream, and `won` / `lost` are their effect after it.
@@ -13730,6 +13763,9 @@ export interface EffectApi {
   /** Each of `players` loses the game, at once, unless they can't — see the
    * `"lose-game"` {@link EffectSpec}. */
   loseGame(players: readonly PlayerId[]): void;
+  /** The game restarts once this resolution is over — see the
+   * `"restart-game"` {@link EffectSpec}. */
+  restartGame(spec: Extract<EffectSpec, { readonly kind: "restart-game" }>): void;
   /** Whether the game has ended — once it has, nothing more of a resolution
    * happens (rule 104.1). */
   gameOver(): boolean;
@@ -21137,6 +21173,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.loseGame(ctx.playersInScope(spec.who ?? "you"));
       return;
     }
+    case "restart-game":
+      ctx.restartGame(spec);
+      return;
     case "roll-dice": {
       // The planar die: there is none outside a Planechase game (rule 901.3),
       // so the instruction is ignored (101.3).

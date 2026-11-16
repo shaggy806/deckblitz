@@ -688,6 +688,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // "You win" has no target; "target opponent loses the game" harms it.
   "win-game": none,
   "lose-game": (n, v) => v.touch(n.target, "harm", MAJOR),
+  // Restarting the game (Karn Liberated's −14) has no target.
+  "restart-game": none,
   "roll-dice": (n, v) => {
     for (const row of n.table ?? []) v.child(row.effect);
     if (n.then) v.child(n.then);

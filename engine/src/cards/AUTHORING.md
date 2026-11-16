@@ -2582,6 +2582,18 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   A pact is a `delayed-trigger` at `{ step: "upkeep", whose: "you" }` of an `unless` with
   `chooser: "you"`, a mana option and `otherwise: { kind: "lose-game" }`
   (Pact of Negation, Summoner's Pact).
+- **`restart-game { leaveInExile?: { filter }, thenOntoBattlefield? }`** —
+  "Restart the game" (rule 727 — Karn Liberated's −14, the one card that
+  does): the game ends with nobody winning, and the players still in it
+  begin a new one, the effect's controller first, every card back in its
+  owner's deck and nothing else of the old game left. `leaveInExile` is
+  "leaving in exile all [filter] cards exiled with [this]" — the cards linked
+  to the source (`exiled-with-source`: an `exile`'s `linked: true`, a
+  `look-and-choose` to exile, which links by default); `thenOntoBattlefield`
+  is "then put those cards onto the battlefield under your control", done
+  just before the new game's first turn. It must be the ability's last
+  instruction. `Game.restartGame` does the rest (engine.md, the opening-hand
+  entry; `docs/plans/restart-the-game.md`).
 - **What an opponent's search comes to** is a static: `controlsOpponentsSearching: true` ("You control your opponents
   while they're searching their libraries"), `exilesOpponentsFinds: { spendAs? }` (they exile each card they find, for
   you to play; Opposition Agent), `opponentsSearchTop: { top }` (Aven Mindcensor). Every `search-library` obeys them unwritten.

@@ -335,6 +335,18 @@ event's `fromHand`, the hand's candidates redacted from the others' view), then 
 event. The choice is the `choose-from-zone` decision with `acrossZones` (a `keepChoice` answer); no more than
 `count` to give goes unasked. Lich's Mastery (rank 7967), Nicol Bolas, Dragon-God (3632), Descent into Madness.
 `test/exile-from-zones.test.ts`; design record `docs/plans/exile-from-zones.md`.
+### Restarting the game — built 2026-11-16
+
+The key `mechanic:restart-the-game` (rule 727, a major feature approved for batch 333): the
+`restart-game` effect ends the game with nobody winning it and begins a new one, by rule 103,
+with the players still in it — the effect's controller first, every card each owns back in their
+deck, commanders in the command zone, life, counters, commander tax and damage and every effect
+gone — leaving in exile the cards its `leaveInExile` filter takes from those linked to the source
+and putting them onto the battlefield under its controller just before the first turn
+(`thenOntoBattlefield`). `Game.restartGame`, `GameState.pregame` / `restarts` / `restartPending` /
+`restartHeld`; the server's auto-pass and the client's game screen read `restarts`. Karn
+Liberated (rank 7155), the one card that restarts the game. `test/restart-game.test.ts`;
+`docs/plans/restart-the-game.md`.
 
 ### "When each opponent casts their first spell of the game" — built 2026-11-14
 

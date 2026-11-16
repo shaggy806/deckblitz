@@ -9610,6 +9610,22 @@ export function parseEffect(text, outer) {
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
   const tempting = temptingOfferOf(text, outer);
   if (tempting !== null) return { effect: tempting, todo: [], hints: [] };
+  // "Restart the game, leaving in exile all non-Aura permanent cards exiled
+  // with Karn. Then put those cards onto the battlefield under your control."
+  // (Karn Liberated — rule 727, the one card that restarts the game.)
+  if (/^Restart the game, leaving in exile all non-Aura permanent cards exiled with (?:~|[A-Z][\w'-]+)\. Then put those cards onto the battlefield under your control\.$/.test(text)) {
+    return {
+      effect: {
+        kind: "restart-game",
+        leaveInExile: {
+          filter: { typesAnyOf: ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"], notSubtypes: ["Aura"] },
+        },
+        thenOntoBattlefield: true,
+      },
+      todo: [],
+      hints: [],
+    };
+  }
 
   // "You may put a name sticker on it. Add {R} for each unique vowel on that
   // sticker." (_____ Goblin; rule 123.6e), "…, then look at the top X cards
@@ -18704,12 +18720,17 @@ function parseFaceAsWritten(face, ctx = {}) {
   out.activated.forEach((a, i) => nameThisAbility(a.effect, { activated: i }));
   out.triggered.forEach((a, i) => nameThisAbility(a.effect, { triggered: i }));
   // "Cards exiled with ~" elsewhere on the card: its abilities that exile the
-  // top of a library are the other half of the link (rule 607.2a).
+  // top of a library are the other half of the link (rule 607.2a) — and so
+  // are a player's exile from their hand and an exile of a target, as Karn
+  // Liberated's +4 and −3 are its −14's.
   if (/\bexiled with\b/i.test(face.oracle_text ?? "")) {
     const linkedExile = (node) => {
       if (Array.isArray(node)) node.forEach(linkedExile);
       else if (node !== null && typeof node === "object") {
         if (node.kind === "exile-from-library" || node.kind === "impulse-exile") node.linked = true;
+        // (An exile "until ~ leaves the battlefield" is linked that way already.)
+        if (node.kind === "exile" && typeof node.target === "number" && node.untilSourceLeaves !== true) node.linked = true;
+        if (node.kind === "look-and-choose" && node.destination === "exile" && node.zone === "hand" && node.unlinked === true) delete node.unlinked;
         // "You may look at cards exiled with this creature" (Bane Alley
         // Broker): the chooser and whoever comes to control it.
         if (node.kind === "look-and-choose" && /\byou may look at cards exiled with\b/i.test(face.oracle_text ?? "")) delete node.faceDownLooks;

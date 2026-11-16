@@ -3100,6 +3100,14 @@ export interface PlayerState {
    */
   commanderIdentity?: readonly Color[];
   /**
+   * This player's deck's commanders by name, as dealt at setup (rule 903.3):
+   * what goes back into the command zone if the game restarts (rules 103.2c,
+   * 727.5a) — a commander card a merged permanent scattered no longer says
+   * so itself. Absent for a player with none, or a board built by hand,
+   * where `GameObject.isCommander` alone says.
+   */
+  commanders?: readonly string[];
+  /**
    * How many cards this player's starting deck had — its library and its
    * commanders, as dealt at setup (rule 103.1): what "if you had 200 or more
    * cards in your starting deck" (Whtz, the Bibliophile) reads. Absent on a
@@ -3142,6 +3150,14 @@ export const DEFAULT_RULES: GameRules = {
 export type GameRulesConfig = Omit<Partial<GameRules>, "freeFirstMulligan"> & {
   readonly freeFirstMulligan?: boolean | "multiplayer";
 };
+
+/** See {@link GameState.pregame}. */
+export interface PregameOptions {
+  readonly mulligans?: true;
+  readonly unshuffled?: true;
+  readonly noCompanionReveals?: true;
+  readonly byPlayerCount?: readonly ("skipFirstDraw" | "freeFirstMulligan")[];
+}
 
 /**
  * The rules a live Commander room plays under (rule 903.7: 40 starting life),
@@ -5573,6 +5589,13 @@ export type PendingEntry =
       readonly objects: readonly ObjectId[];
     }
   | {
+      /** The cards a restart left in exile, going onto the battlefield under
+       * `player`'s control before the new game's first turn (rule 727.4 —
+       * `GameState.restartHeld`), waiting on one's "as this enters" choice
+       * (a Clone's copy). */
+      readonly kind: "restart-held";
+    }
+  | {
       /** Cards a player chose to begin the game with on the battlefield from
        * their opening hand (rule 103.6a — the Leylines), waiting on one's "as
        * this enters" choice (Leyline of Transformation's creature type);
@@ -6136,6 +6159,42 @@ export interface GameState {
   turn: TurnState;
   priority: PriorityState;
   result: GameResult;
+  /**
+   * How this game's pregame (rule 103) was played, as `Game.create` was told,
+   * for a restart (rule 727.1) to play the new game's the same way: the
+   * mulligans asked, the libraries left in deck order (a test's), the
+   * companion reveals skipped, and which of `rules` `Game.create` settled from
+   * the number of players (a two-player game's 103.8a, a multiplayer game's
+   * 103.5c) — settled again from the players the new game begins with.
+   * Absent on a game from before 2026-11-16, which then restarts with the
+   * defaults.
+   */
+  pregame?: PregameOptions;
+  /** How many times the game has restarted (rule 727 — Karn Liberated): a
+   * turn number, an object id or anything else remembered from before tells
+   * a new game from the old by it. Absent before the first. */
+  restarts?: number;
+  /**
+   * A `restart-game` effect's restart (rule 727), waiting for the resolution
+   * it's part of to end — `Game.restartGame` then does it, before anything
+   * else happens: what's left of the old game's resolution (its ability
+   * leaving the stack) belongs to the old game. `by` is the effect's
+   * controller, the new game's starting player (727.1a); `leaveInExile` the
+   * cards it exempts (727.5); `thenOntoBattlefield` its "then" (727.4).
+   */
+  restartPending?: {
+    readonly by: PlayerId;
+    readonly source: string;
+    readonly leaveInExile: readonly ObjectId[];
+    readonly thenOntoBattlefield: boolean;
+  };
+  /**
+   * The cards a restart left in exile (rule 727.5) that its "then" puts onto
+   * the battlefield under `player`'s control once the new game's pregame is
+   * done, just before the first turn's untap step (727.4) — held through the
+   * mulligans and the opening-hand actions. Absent otherwise.
+   */
+  restartHeld?: { readonly player: PlayerId; readonly cards: readonly ObjectId[] };
   /**
    * Cards revealed to all players this turn (rule 701.16), so `viewFor` can
    * put their identity in *every* seat's view — a reveal is momentary, but a
@@ -7024,6 +7083,70 @@ export function hasCommander(state: GameState, player: PlayerId): boolean {
 export function revealedCompanion(state: GameState, player: PlayerId): ObjectId | null {
   const card = state.companions?.[player];
   return card !== undefined && state.objects[card]?.zone === "outside" ? card : null;
+}
+
+/**
+ * A game as it is before its pregame (rule 103): no players dealt, no
+ * objects, turn 0 with `startingPlayer` to take the first. `Game.create`
+ * builds every game from it, and a restart (rule 727) the new one.
+ */
+export function createGameState(
+  seed: number,
+  rngState: number,
+  rules: GameRules,
+  turnOrder: readonly PlayerId[],
+  startingPlayer: PlayerId,
+): GameState {
+  return {
+    seed,
+    rngState,
+    rules,
+    turnOrder: [...turnOrder],
+    startingPlayer,
+    players: {},
+    objects: {},
+    zones: {
+      perPlayer: {},
+      shared: { battlefield: [], stack: [], exile: [], command: [] },
+    },
+    turn: {
+      number: 0,
+      activePlayerIndex: turnOrder.indexOf(startingPlayer),
+      step: "untap",
+      isExtra: false,
+    },
+    priority: { active: false, holder: null, passed: [] },
+    result: { over: false, winner: null, reason: null },
+    awaiting: null,
+    revealedThisTurn: [],
+    decisionSource: null,
+    delayedTriggers: [],
+    pendingBlockerDeclarations: [],
+    pendingTriggers: [],
+    pendingTargetedTrigger: null,
+    deferredCommanderMove: null,
+    pendingCommanderMoves: [],
+    pendingPayLifeForUntapped: [],
+    commanderArrivals: [],
+    pendingDestruction: [],
+    pendingDiscards: [],
+    pendingSacrifices: [],
+    pendingSacrificeVictims: [],
+    suspendedResolutions: [],
+    hexproofPlayers: [],
+    activeReplacements: [],
+    extraTurns: [],
+    extraCombats: 0,
+    spellsCastThisTurn: 0,
+    dayNight: null,
+    monarch: null,
+    emblems: [],
+    combatDamage: null,
+    timestampSeq: 0,
+    eventLog: [],
+    eventSeq: 0,
+    nextObjectSeq: 0,
+  };
 }
 
 export function createPlayerState(id: PlayerId, rules: GameRules): PlayerState {
