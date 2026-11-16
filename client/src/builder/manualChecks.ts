@@ -13056,4 +13056,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Craw Wurm'] },
     }),
   ),
+  // --- A spell no mana can pay for (2026-11-16) --------------------------------
+  preset(
+    'Hogaak, Arisen Necropolis: five cards delved, two creatures for the rest',
+    board({
+      you: {
+        bf: ['Swamp*3', 'Walking Corpse', 'Llanowar Elves', 'Ornithopter*2'],
+        hand: ['Hogaak, Arisen Necropolis'],
+        gy: ['Opt', 'Shock', 'Forest', 'Grizzly Bears', 'Lightning Bolt'],
+      },
+    }),
+  ),
+  preset(
+    'Hogaak, Arisen Necropolis: seven creatures pay it alone in a 4-player game',
+    board({
+      you: {
+        bf: ['Swamp', 'Walking Corpse', 'Llanowar Elves', 'Ornithopter*5'],
+        hand: ['Hogaak, Arisen Necropolis'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

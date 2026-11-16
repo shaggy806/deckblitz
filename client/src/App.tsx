@@ -3009,11 +3009,17 @@ function Table({
       }
       const convoke = t.convokeOffer
       if (convoke !== undefined && action.type === 'cast-spell') {
+        // Each card delve exiled paid a generic mana a creature could have:
+        // one fewer creature can help.
+        const delved = action.delve?.length ?? 0
         setPendingConvoke({
           action,
-          offer: convoke,
-          // A spell mana alone can't pay starts from a set known to work.
-          picks: convoke.manaAffordable ? [] : convoke.proof.map((p) => p.creature),
+          offer: delved > 0 ? { ...convoke, maxCreatures: Math.max(0, convoke.maxCreatures - delved) } : convoke,
+          // A spell mana alone can't pay starts from a set known to work —
+          // with delve too (Hogaak), the set for the cards it exiles.
+          picks: convoke.manaAffordable
+            ? []
+            : (convoke.proofByDelve?.[delved] ?? convoke.proof).map((p) => p.creature),
         })
         return
       }

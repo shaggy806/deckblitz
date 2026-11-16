@@ -688,6 +688,12 @@ describe("when a spell may be cast or an ability activated", () => {
     expect(face("Instant", "This spell can't be copied.").cantBeCopied).toBe(true);
   });
 
+  it("reads a spell no mana may be spent on (Hogaak, Arisen Necropolis)", () => {
+    const hogaak = face("Legendary Creature — Avatar", "You can't spend mana to cast this spell.\nTrample");
+    expect(hogaak.cantSpendManaToCast).toBe(true);
+    expect(hogaak.keywords).toContain("trample");
+  });
+
   it("reads only your opponents activating", () => {
     const ability = face("Enchantment", "{3}: Destroy this enchantment. Only your opponents may activate this ability and only as a sorcery.").activated?.[0];
     expect(ability?.anyPlayer).toBe(true);

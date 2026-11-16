@@ -17076,6 +17076,9 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
     // "This spell can't be copied." (See Double — `cantBeCopied`).
     if (line === "~ can't be copied.") { out.cantBeCopied = true; continue; }
+    // "You can't spend mana to cast this spell." (Hogaak, Arisen Necropolis —
+    // `cantSpendManaToCast`: convoke and delve pay it all).
+    if (/^You can't spend mana to cast (?:~|this spell)\.$/.test(line)) { out.cantSpendManaToCast = true; continue; }
     // The Mirage block's flash-and-sacrifice (`flashThenSacrifice`).
     if (/^You may cast (?:~|this spell) as though it had flash\. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step\.$/.test(line)) {
       out.flashThenSacrifice = true;

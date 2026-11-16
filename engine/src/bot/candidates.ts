@@ -98,7 +98,13 @@ function castExtras(legal: CastSpellLegal): {
           // coloured pip only a creature could pay uncovered, so the cast
           // was refused in every simulation, and dispatched unscored under a
           // clock it threw (`bot-convoke.test.ts`).
-          const payment = convokeProofFor(convoke);
+          // With delve too (Hogaak), the payment for the most it delves, as
+          // `xValueOf` does (an offer with `proofByDelve` has no X).
+          const delved =
+            convoke.proofByDelve === undefined || legal.delve === undefined
+              ? undefined
+              : (delvePicks(legal.delve, 0, "most")?.length ?? 0);
+          const payment = convokeProofFor(convoke, 0, undefined, delved);
           return payment.length > 0 ? { convoke: payment } : {};
         })()
       : {}),

@@ -1719,6 +1719,8 @@ function castExtras(
 } {
   const sac = legal.sacrifice;
   const convokeInfo = legal.convoke;
+  // Delve as much as the cost at this X allows, oldest cards first.
+  const delve = legal.delve === undefined ? undefined : delvePicks(legal.delve, xValue, "most");
   return {
     ...(legal.kicked === true ? { kicked: true } : {}),
     ...(legal.kickCount !== undefined ? { kickCount: legal.kickCount } : {}),
@@ -1748,11 +1750,7 @@ function castExtras(
     ...(sac !== undefined && sac.choices.length > 0
       ? { sacrifice: sac.choices[pickIndex(sac.choices.length)] }
       : {}),
-    // Delve as much as the cost at this X allows, oldest cards first.
-    ...(() => {
-      const delve = legal.delve === undefined ? undefined : delvePicks(legal.delve, xValue, "most");
-      return delve !== undefined ? { delve } : {};
-    })(),
+    ...(delve !== undefined ? { delve } : {}),
     // Echo back the allocation `legalActions` proved castable rather than
     // inventing one. A convoke-only-affordable spell is offered on the
     // strength of that specific allocation, which may pay coloured pips with
@@ -1760,10 +1758,11 @@ function castExtras(
     // "generic" can leave the cost uncovered, which is correct rules
     // behaviour and used to crash the fuzzer. Colour-aware convoke payment is
     // covered directly by `convoke.test.ts`. An X spell takes the payment
-    // proved for its largest X, trimmed to the X actually chosen.
+    // proved for its largest X, trimmed to the X actually chosen; one with
+    // delve too, the payment for the cards it delves.
     ...(() => {
       if (convokeInfo === undefined) return {};
-      const convoke = convokeProofFor(convokeInfo, xValue);
+      const convoke = convokeProofFor(convokeInfo, xValue, undefined, delve?.length ?? 0);
       return convoke.length > 0 ? { convoke } : {};
     })(),
     // An assist variant (rule 702.132a) names the player asked to help.

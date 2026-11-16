@@ -112,7 +112,14 @@ export function randomCast(
       tap.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
     }
   }
-  const convoke = legal.convoke === undefined ? [] : convokeProofFor(legal.convoke, xValue ?? 0, distinctTargetCount(targets));
+  // Delve: only the fewest it needs, newest first — the other end from the
+  // bots' most-and-oldest, so the fuzzer walks both. No random draw, so
+  // seeds without a delve card replay unchanged.
+  const delve = legal.delve === undefined ? undefined : delvePicks(legal.delve, xValue ?? 0, "fewest");
+  const convoke =
+    legal.convoke === undefined
+      ? []
+      : convokeProofFor(legal.convoke, xValue ?? 0, distinctTargetCount(targets), delve?.length ?? 0);
   return {
     type: "cast-spell",
     player,
@@ -142,13 +149,7 @@ export function randomCast(
     ...(convoke.length > 0 ? { convoke } : {}),
     ...(legal.assist !== undefined ? { assist: legal.assist } : {}),
     ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
-    // Delve: only the fewest it needs, newest first — the other end from the
-    // bots' most-and-oldest, so the fuzzer walks both. No random draw, so
-    // seeds without a delve card replay unchanged.
-    ...(() => {
-      const delve = legal.delve === undefined ? undefined : delvePicks(legal.delve, xValue ?? 0, "fewest");
-      return delve !== undefined ? { delve } : {};
-    })(),
+    ...(delve !== undefined ? { delve } : {}),
     ...(legal.escapeExile !== undefined
       ? { escapeExile: legal.escapeExile.choices.slice(legal.escapeExile.choices.length - legal.escapeExile.count) }
       : {}),

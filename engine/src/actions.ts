@@ -1094,9 +1094,18 @@ export type ConvokeOffer = NonNullable<Extract<LegalAction, { kind: "cast-spell"
  * `xProof.payments` with the generic entries a smaller X doesn't need
  * dropped from the end. What's left is still enough: every generic dropped
  * is one the cost no longer has, and with fewer creatures tapped the mana
- * can pay whatever remains as well as it could before.
+ * can pay whatever remains as well as it could before. With `delved` cards
+ * exiled for delve as well, the payment proved for that many
+ * (`proofByDelve`), where the offer has one.
  */
-export function convokeProofFor(offer: ConvokeOffer, xValue = 0, targetCount?: number): ConvokePayment[] {
+export function convokeProofFor(
+  offer: ConvokeOffer,
+  xValue = 0,
+  targetCount?: number,
+  delved?: number,
+): ConvokePayment[] {
+  const withDelve = delved === undefined ? undefined : offer.proofByDelve?.[delved];
+  if (withDelve !== undefined) return [...withDelve];
   // Where the cost turns on how many targets are chosen (`proof` is for the
   // dearest count): the payment proved for this many.
   const counted = targetCount === undefined ? undefined : offer.proofByTargetCount?.[targetCount];
@@ -1696,6 +1705,13 @@ export type LegalAction =
          * cast with too many creatures tapped is refused, rule 702.51a).
          * Keyed by distinct target count. */
         readonly proofByTargetCount?: Readonly<Record<number, readonly ConvokePayment[]>>;
+        /** For a spell with delve as well (Hogaak, Arisen Necropolis — whose
+         * "you can't spend mana to cast this spell" leaves the two to pay it
+         * all) that mana alone can't pay: a payment that works with that many
+         * cards delved (the delve offer's first ones), keyed by the count,
+         * for each count that works — `[]` where delve and mana do it alone.
+         * `proof` is for none delved. */
+        readonly proofByDelve?: Readonly<Record<number, readonly ConvokePayment[]>>;
         /** Whether the spell can be paid for with mana alone. When it can't,
          * convoking isn't optional, and `proof` is a set that works. */
         readonly manaAffordable: boolean;

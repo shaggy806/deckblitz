@@ -648,6 +648,48 @@ export function reduceManaCost(
 }
 
 /**
+ * `cost` less one coloured mana symbol for each of `pays`: what convoke's
+ * "for each colored mana in this spell's total cost, you may tap an untapped
+ * creature of that color" takes off (rule 702.51a). A hybrid or Phyrexian
+ * symbol is a coloured one, of each of its colours (rules 107.4e-f), so a
+ * payment takes a plain symbol of its colour first, else a hybrid one with
+ * that colour among its halves — a twobrid `{2/W}` before the rest, as
+ * {@link reduceManaCost} takes them — matched so that each payment finds a
+ * symbol of its own. `null` when they can't all be placed.
+ */
+export function payColoredSymbols(cost: ManaCost, pays: readonly Color[]): ManaCost | null {
+  const colored = { ...cost.colored };
+  const rest: Color[] = [];
+  for (const color of pays) {
+    if (colored[color] > 0) colored[color] -= 1;
+    else rest.push(color);
+  }
+  if (rest.length === 0) return { ...cost, colored };
+  const pips = cost.hybrid;
+  // Twobrid pips first, so a payment takes one of those when it can.
+  const order = pips
+    .map((_pip, i) => i)
+    .sort((a, b) => Number(pips[b].some((o) => o.kind === "generic")) - Number(pips[a].some((o) => o.kind === "generic")));
+  const holder: (number | undefined)[] = pips.map(() => undefined);
+  const place = (payment: number, seen: boolean[]): boolean => {
+    for (const p of order) {
+      if (seen[p] || !pips[p].some((o) => o.kind === "color" && o.color === rest[payment])) continue;
+      seen[p] = true;
+      const other = holder[p];
+      if (other === undefined || place(other, seen)) {
+        holder[p] = payment;
+        return true;
+      }
+    }
+    return false;
+  };
+  for (let i = 0; i < rest.length; i += 1) {
+    if (!place(i, pips.map(() => false))) return null;
+  }
+  return { ...cost, colored, hybrid: pips.filter((_pip, p) => holder[p] === undefined) };
+}
+
+/**
  * A cost reduction by the mana symbols of a mana cost (rule 702.48c, offering's
  * "reduced by the sacrificed permanent's mana cost"), each hybrid pip's half
  * chosen: `text` the symbols it takes off, `""` for none.

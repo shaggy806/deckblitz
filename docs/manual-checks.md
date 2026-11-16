@@ -8646,3 +8646,13 @@ Each board's die comes up 4.
 ### Reap: an opponent with no black permanents leaves nothing to pick
 - **Do:** Cast Reap and click Bob.
 - **Expect:** No graveyard popup: Reap is cast at once and resolves with your two cards still in the graveyard — Bob's Craw Wurm isn't black.
+## A spell no mana can pay for (2026-11-16)
+
+### Hogaak, Arisen Necropolis: five cards delved, two creatures for the rest
+- **Do:** Cast Hogaak. In the popup pick all five graveyard cards and confirm. Then click "Convoke 2".
+- **Expect:** The popup reads "exile up to 5 (at least 3)". After it the bar reads "convoke — tap up to 2 creatures to help pay (2 chosen)", with Walking Corpse and Llanowar Elves picked. Hogaak enters; the five cards are in exile, and all three Swamps stay untapped.
+- **Not a bug:** There's no "Pay with mana" choice: Hogaak can't be paid for with mana.
+
+### Hogaak, Arisen Necropolis: seven creatures pay it alone in a 4-player game
+- **Do:** In this 4-player game, cast Hogaak, then click "Convoke 7".
+- **Expect:** No popup asks for graveyard cards. The bar reads "tap up to 7 creatures to help pay (7 chosen)", every creature of yours picked. Hogaak enters with all seven tapped and your Swamp untapped.

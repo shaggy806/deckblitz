@@ -478,6 +478,7 @@ import {
   colorSymbols,
   manaValue,
   parseManaCost,
+  payColoredSymbols,
   repeatedManaCost,
   withGenericReducedBy,
   reduceManaCost,
@@ -5600,6 +5601,68 @@ export class Game {
         while (fewest > 1 && castsWith(targetCount, delvePool.slice(0, fewest - 1))) fewest -= 1;
         return fewest;
       };
+      /** With convoke as well as delve (Hogaak, Arisen Necropolis, which
+       * can't spend mana at all): the convoke payment that, with the first
+       * `delved` of the pool exiled, makes this variant castable with
+       * `targetCount` targets — none where delve and mana do it alone, the
+       * most creatures can pay of the rest otherwise — or `null` if nothing
+       * does. */
+      const convokeAfterDelve = (targetCount: number, delved: number): PaidConvoke[] | null => {
+        const delve = delved > 0 ? delvePool.slice(0, delved) : undefined;
+        if (castsWith(targetCount, delve)) return [];
+        if (!this.tapsToPay(def, card, player)) return null;
+        const total = this.withFace(card, face ?? 0, () =>
+          this.castingCostOf(player, card, def, xFloor, variantCost, targetCount),
+        );
+        const proof = this.maxConvokeFor(
+          this.convokeCandidates(player, def, card),
+          this.reduceCostByDelve(total, delve, def),
+          def,
+          card,
+          player,
+        );
+        if (proof.length === 0) return null;
+        return this.whyCannotCastSpell(
+          player,
+          card,
+          via,
+          face ?? 0,
+          undefined,
+          kicked,
+          undefined,
+          overload,
+          free,
+          proof,
+          altCost === true,
+          costOption,
+          harmonizeTap !== undefined ? [harmonizeTap] : undefined,
+          graveyardGrant,
+          xFloor,
+          targetCount,
+          undefined,
+          false,
+          evoke ?? null,
+          delve,
+        ) === null
+          ? proof
+          : null;
+      };
+      /** Delve and convoke together: each number of cards delve may exile
+       * that, with creatures paying what it can of the rest, casts this
+       * variant (`convokeAfterDelve`), the fewest first. Empty when the
+       * card hasn't both. */
+      const delvingConvoking = (targetCount: number): { delved: number; proof: PaidConvoke[] }[] => {
+        if (delvePool.length === 0 || !this.tapsToPay(def, card, player)) return [];
+        const generic = this.withFace(card, face ?? 0, () =>
+          this.castingCostOf(player, card, def, xFloor, variantCost, targetCount),
+        ).generic;
+        const out: { delved: number; proof: PaidConvoke[] }[] = [];
+        for (let delved = 0; delved <= this.delveReach(delvePool, generic, def); delved += 1) {
+          const proof = convokeAfterDelve(targetCount, delved);
+          if (proof !== null) out.push({ delved, proof });
+        }
+        return out;
+      };
       /** Whether this variant can be cast with `targetCount` distinct
        * targets, and whether mana alone pays for it. */
       const castableAt = (targetCount: number, x = xFloor): { castable: boolean; manaAffordable: boolean } => {
@@ -5684,6 +5747,14 @@ export class Game {
         }
         // Delve: castable if exiling enough of the graveyard pays the rest.
         if (!castable && delvePool.length > 0 && fewestDelved(targetCount) !== null) castable = true;
+        // Both together, creatures paying what the cards leave (Hogaak): if
+        // anything does, the most delve can exile does.
+        if (!castable && delvePool.length > 0 && this.tapsToPay(def, card, player)) {
+          const generic = this.withFace(card, face ?? 0, () =>
+            this.castingCostOf(player, card, def, xFloor, variantCost, targetCount),
+          ).generic;
+          if (convokeAfterDelve(targetCount, this.delveReach(delvePool, generic, def)) !== null) castable = true;
+        }
         return { castable, manaAffordable };
       };
       // A "for each target" cost modification (Hinata, Dawn-Crowned) makes
@@ -6077,6 +6148,13 @@ export class Game {
       const capDivide =
         divide === undefined || totalByX === undefined ? divide : { ...divide, total: Math.max(...totalByX) };
       const offerSpecs = payableX === undefined ? specsAtX(specs, 0) : specs;
+      // Delve and convoke together where mana alone can't pay (Hogaak): each
+      // number of cards that works, with the creatures for the rest — the
+      // delve offer's `minCards` and the convoke offer's `proofByDelve`.
+      const jointDelve =
+        !manaAffordable && xPlan === null && (targetCount === undefined || targetCount.min === targetCount.max)
+          ? delvingConvoking(pricedAt)
+          : undefined;
       const offer: Extract<LegalAction, { kind: "cast-spell" }> = {
         kind: "cast-spell",
         card,
@@ -6298,7 +6376,10 @@ export class Game {
               // An {X} spell may have nothing generic at X=0 ({X}{R}) and
               // still delve for X: its ranges per X decide.
               if (maxCards === 0 && xPlan === null) return {};
-              const minCards = manaAffordable ? 0 : (fewestDelved(pricedAt) ?? maxCards);
+              // With convoke too, the fewest creatures and mana leave room for.
+              const minCards = manaAffordable
+                ? 0
+                : (jointDelve?.[0]?.delved ?? fewestDelved(pricedAt) ?? maxCards);
               // The March cycle's cards in hand (`delvePoolFor`).
               const reduces = def.additionalCost?.exileFromHandReduces;
               const handCount = delvePool.filter((id) => this.state.objects[id]?.zone === "hand").length;
@@ -6355,6 +6436,9 @@ export class Game {
                   // made unpaid). Otherwise it's the allocation `castableAt`
                   // proved.
                   proof: manaAffordable ? [] : this.maxConvokeFor(candidates, full, def, card, player),
+                  ...(jointDelve !== undefined && jointDelve.length > 0
+                    ? { proofByDelve: Object.fromEntries(jointDelve.map(({ delved, proof }) => [delved, proof])) }
+                    : {}),
                   ...(!manaAffordable && xPlan === null && targetCount !== undefined && targetCount.min < targetCount.max
                     ? {
                         proofByTargetCount: Object.fromEntries(
@@ -6373,7 +6457,10 @@ export class Game {
                   // Improvise pays only the generic part.
                   maxCreatures: this.improvisesOnly(def, card, player)
                     ? atMaxX.generic
-                    : atMaxX.generic + COLORS.reduce((n, c) => n + atMaxX.colored[c], 0),
+                    : atMaxX.generic +
+                      COLORS.reduce((n, c) => n + atMaxX.colored[c], 0) +
+                      // A hybrid symbol with a colour among its halves (rule 107.4e).
+                      atMaxX.hybrid.filter((pip) => pip.some((o) => o.kind === "color")).length,
                   ...(xPlan !== null
                     ? {
                         xProof: {
@@ -6760,7 +6847,9 @@ export class Game {
     player: PlayerId,
   ): PaidConvoke[] {
     const out: PaidConvoke[] = [];
-    const colorLeft = { ...cost.colored };
+    // The coloured symbols paid so far — a hybrid one among them (rule
+    // 107.4e) — placed by `payColoredSymbols`.
+    const paidColors: Color[] = [];
     let genericLeft = cost.generic;
     const kinds = this.tapPayKinds(def, card, player);
     for (const creature of candidates) {
@@ -6769,10 +6858,10 @@ export class Game {
         : computeCharacteristics(this.state, this.registry, creature).colors;
       // A compacted token stack helps once per token.
       for (let i = 0; i < (this.state.objects[creature].stackCount ?? 1); i += 1) {
-        const payColor = COLORS.find((c) => colors.has(c) && colorLeft[c] > 0);
+        const payColor = COLORS.find((c) => colors.has(c) && payColoredSymbols(cost, [...paidColors, c]) !== null);
         if (payColor !== undefined) {
           out.push({ creature, pays: payColor });
-          colorLeft[payColor] -= 1;
+          paidColors.push(payColor);
         } else if (genericLeft > 0) {
           out.push({ creature, pays: "generic" });
           genericLeft -= 1;
@@ -21400,6 +21489,11 @@ export class Game {
       convoked = resolved;
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
+    // "You can't spend mana to cast this spell" (Hogaak, Arisen Necropolis):
+    // what delve and convoke leave unpaid can't be paid (rule 601.2h).
+    if (def.cantSpendManaToCast === true && cheapestManaAmount(cost) > 0) {
+      return `${def.name} can't be cast with mana: convoke and delve must pay its whole cost`;
+    }
     const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) };
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant, modes);
     if (alternativeTaps !== undefined) {
@@ -21522,10 +21616,12 @@ export class Game {
       }
     }
     if (genericPay > cost.generic) return "convoke can't pay more generic mana than the cost has left";
-    for (const color of COLORS) {
-      if (colorPay[color] > cost.colored[color]) {
-        return `convoke can't pay more {${color}} than the cost has left`;
-      }
+    // A hybrid symbol is one of each of its colours (rule 107.4e): a
+    // creature of either pays it.
+    const paidColors = COLORS.flatMap((color) => Array.from({ length: colorPay[color] }, () => color));
+    if (payColoredSymbols(cost, paidColors) === null) {
+      const over = COLORS.find((color) => payColoredSymbols(cost, paidColors.filter((c) => c === color)) === null);
+      return `convoke can't pay more {${over ?? paidColors[0]}} than the cost has left`;
     }
     return null;
   }
@@ -21544,11 +21640,13 @@ export class Game {
     player: PlayerId,
   ): PaidConvoke[] | string {
     const kinds = this.tapPayKinds(def, card, player);
-    const colorLeft = { ...cost.colored };
+    // The coloured symbols named so far — hybrid ones among them (rule
+    // 107.4e), placed by `payColoredSymbols`.
+    const paidColors: Color[] = [];
     let genericLeft = cost.generic;
     for (const { pays } of convoke) {
       if (pays === "generic") genericLeft -= 1;
-      else if (pays !== undefined) colorLeft[pays] -= 1;
+      else if (pays !== undefined) paidColors.push(pays);
     }
     const out: PaidConvoke[] = [];
     for (const { creature, pays } of convoke) {
@@ -21561,9 +21659,9 @@ export class Game {
       const colors = !this.convokesForColor(creature, kinds)
         ? new Set<Color>()
         : computeCharacteristics(this.state, this.registry, creature).colors;
-      const color = COLORS.find((c) => colors.has(c) && colorLeft[c] > 0);
+      const color = COLORS.find((c) => colors.has(c) && payColoredSymbols(cost, [...paidColors, c]) !== null);
       if (color !== undefined) {
-        colorLeft[color] -= 1;
+        paidColors.push(color);
         out.push({ creature, pays: color });
       } else if (genericLeft > 0) {
         genericLeft -= 1;
@@ -21579,12 +21677,14 @@ export class Game {
    * `whyCannotConvoke`) — the remainder is paid with mana as usual. */
   private reduceCostByConvoke(cost: ManaCost, convoke: readonly PaidConvoke[]): ManaCost {
     let generic = cost.generic;
-    const colored = { ...cost.colored };
+    const paidColors: Color[] = [];
     for (const { pays } of convoke) {
       if (pays === "generic") generic -= 1;
-      else colored[pays] -= 1;
+      else paidColors.push(pays);
     }
-    return { ...cost, generic, colored };
+    // A creature of either colour pays a hybrid symbol (rule 107.4e).
+    const rest = payColoredSymbols(cost, paidColors) ?? cost;
+    return { ...rest, generic };
   }
 
   // --- assist (rule 702.132) ---------------------------------------------

@@ -5812,6 +5812,12 @@ export interface CardDefinition {
    * `colorIdentityOf` leaves them out — an exception the card itself makes to
    * rule 903.4, so only its mana symbols count. */
   readonly colorsOutsideIdentity?: true;
+  /** "You can't spend mana to cast this spell" (Hogaak, Arisen Necropolis):
+   * its total cost (rule 601.2f) is paid by what its convoke and delve pay
+   * (702.51a, 702.66a) or not at all — whatever they leave can't be paid
+   * (601.2h), so the cast is refused. Cast without paying its mana cost,
+   * there's nothing to pay. */
+  readonly cantSpendManaToCast?: true;
   /** An Attraction card's printings (rule 717.1): each lights a different set
    * of the numbers 1-6 ("Note that multiple Attraction cards with the same
    * English name may have different numbers lit up"), by collector number.
@@ -6406,6 +6412,8 @@ const PRINTED_ABILITY: {
   moreThanMeetsTheEye: (def) => def.moreThanMeetsTheEye !== undefined,
   cantBeCopied: (def) => def.cantBeCopied !== undefined,
   colorsOutsideIdentity: (def) => def.colorsOutsideIdentity === true,
+  // A static ability that functions on the stack (rule 604.5).
+  cantSpendManaToCast: (def) => def.cantSpendManaToCast === true,
   attractionLights: (def) => def.attractionLights !== undefined,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
@@ -6720,6 +6728,8 @@ interface CardDraft {
   cantBeCopied?: true;
   /** See {@link CardDefinition.colorsOutsideIdentity}. */
   colorsOutsideIdentity?: true;
+  /** See {@link CardDefinition.cantSpendManaToCast}. */
+  cantSpendManaToCast?: true;
   /** See {@link CardDefinition.attractionLights}. */
   attractionLights?: readonly AttractionPrinting[];
   harmonize?: { readonly cost: string };
@@ -7114,6 +7124,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.moreThanMeetsTheEye !== undefined ? { moreThanMeetsTheEye: draft.moreThanMeetsTheEye } : {}),
     ...(draft.cantBeCopied !== undefined ? { cantBeCopied: draft.cantBeCopied } : {}),
     ...(draft.colorsOutsideIdentity === true ? { colorsOutsideIdentity: true as const } : {}),
+    ...(draft.cantSpendManaToCast === true ? { cantSpendManaToCast: true as const } : {}),
     ...(draft.attractionLights !== undefined ? { attractionLights: draft.attractionLights } : {}),
   };
 }
