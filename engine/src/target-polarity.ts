@@ -822,6 +822,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Your own library thinned, or an opponent's known top undone.
   "shuffle-library": (n, v) => v.touch(n.target, "either", MINOR),
   foraged: none,
+  "dread-manifested": none,
   // The split's targets take the damage (Inferno Titan, Electrolyze).
   "damage-divided": (n, v) => v.touch(n.from, "harm", MAJOR),
   // +1/+1 counters help; a stun counter (Crashing Wave) harms.

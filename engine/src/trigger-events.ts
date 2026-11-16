@@ -47,6 +47,10 @@ export interface TriggerEventRow<T extends GameEvent["type"] = GameEvent["type"]
   by?(event: EventOf<T>): PlayerId | undefined;
   /** What `triggerValue` reads: "that much", "that many". */
   amount?(event: EventOf<T>): number;
+  /** The objects "them" means, each in its stint — the `"trigger-batch"`
+   * set of a trigger on it, one occurrence for them all: the cards manifest
+   * dread put into a graveyard. */
+  batch?(event: EventOf<T>): readonly { readonly object: ObjectId; readonly stint: number }[];
   /** The journal kind that records this event, per subject, for the timing
    * wrapper ("for the first time each turn"); the act journals itself just
    * before it emits. Absent, the wrapper can't count it. */
@@ -91,6 +95,11 @@ export const TRIGGER_EVENTS = {
   }),
   /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
   forages: row({ type: "foraged", player: (e) => e.player }),
+  /** "Whenever you manifest dread" (rule 701.62b — Paranormal Analyst): once
+   * the whole process is done, even if some or all of it was impossible.
+   * Its batch is the cards it put into a graveyard ("a card you put into
+   * your graveyard this way"). */
+  "manifests-dread": row({ type: "dread-manifested", player: (e) => e.player, batch: (e) => e.graveyard }),
   /** "Whenever you roll one or more dice" (rule 706); the value is the
    * result, the natural results plus the modifier (706.2). */
   "rolls-dice": row({ type: "dice-rolled", player: (e) => e.player, amount: (e) => rollOfEvent(e).total }),
@@ -292,6 +301,17 @@ export function triggerEventPlayer(event: GameEvent): PlayerId | undefined {
     if (r.when !== undefined && !r.when(event as never)) continue;
     const player = r.player?.(event as never);
     if (player !== undefined) return player;
+  }
+  return undefined;
+}
+
+/** The objects `event` holds as a batch, by the first row of its type that
+ * names one — "them" of a generic trigger (`"trigger-batch"`), or none. */
+export function triggerEventBatch(event: GameEvent): readonly { readonly object: ObjectId; readonly stint: number }[] | undefined {
+  for (const r of TRIGGER_EVENTS_BY_TYPE.get(event.type) ?? []) {
+    if (r.when !== undefined && !r.when(event as never)) continue;
+    const batch = r.batch?.(event as never);
+    if (batch !== undefined) return batch;
   }
   return undefined;
 }

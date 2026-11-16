@@ -637,6 +637,16 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** A player manifested dread (rule 701.62a), announced once the whole
+       * process is done — even if some or all of it was impossible (701.62b,
+       * an empty library). `graveyard`: the cards it put into a graveyard,
+       * each in its stint there — "a card you put into your graveyard this
+       * way" (Paranormal Analyst). */
+      readonly type: "dread-manifested";
+      readonly player: PlayerId;
+      readonly graveyard: readonly { readonly object: ObjectId; readonly stint: number }[];
+    })
+  | (Base & {
       /** A player paid mana to cast a spell (rule 700.14): the mana they had
        * spent on spells this turn went from `before` to `after` — what
        * "whenever you expend N" watches. Not for a spell cast for no mana. */

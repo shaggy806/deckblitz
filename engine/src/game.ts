@@ -433,7 +433,7 @@ import { delayedStep, delayedStepFires, isStepWatch, readDelayedAt, watchOutlast
 import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
 import { endsThisTurn, untilPointOf } from "./duration.js";
 import type { JournalEntry } from "./journal.js";
-import { TRIGGER_EVENTS, timingCountable, triggerEventObject, triggerEventPlayer, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
+import { TRIGGER_EVENTS, timingCountable, triggerEventBatch, triggerEventObject, triggerEventPlayer, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
 import {
   abilityCountThisTurn,
   appendJournal,
@@ -35314,6 +35314,9 @@ export class Game {
     const counters = event.type === "counter-added" ? [{ kind: event.counter, amount: event.amount }] : undefined;
     // "Those results": the roll it triggered on, whatever is rolled next.
     const roll = event.type === "dice-rolled" ? rollOfEvent(event) : undefined;
+    // "Them" of a generic trigger whose row names a batch: "a card you put
+    // into your graveyard this way" (Paranormal Analyst), each in its stint.
+    const batch = triggerEventBatch(event);
     if (
       roll === undefined &&
       sourceStint === undefined &&
@@ -35323,11 +35326,13 @@ export class Game {
       recipient === undefined &&
       player === undefined &&
       attackers === undefined &&
-      counters === undefined
+      counters === undefined &&
+      batch === undefined
     ) {
       return undefined;
     }
     return {
+      ...(batch !== undefined ? { sets: addToSet(undefined, "batch", batch) } : {}),
       ...(sourceStint !== undefined ? { source: sourceStint } : {}),
       ...(triggerStint !== undefined ? { triggerObject: triggerStint } : {}),
       ...(triggerSpell !== undefined ? { triggerSpell } : {}),
@@ -40089,6 +40094,19 @@ export class Game {
         }
       },
       foraged: () => this.emit({ type: "foraged", player: controller }),
+      // The cards that manifest dread put into a graveyard: whatever went to
+      // one since its look began, each in its stint there (rule 400.7) — one
+      // a replacement sent elsewhere never got there (Paranormal Analyst's
+      // ruling).
+      dreadManifested: (player, since) =>
+        this.emit({
+          type: "dread-manifested",
+          player,
+          graveyard: thisWayEntries(this.state, "put-into-graveyard", since).flatMap(({ object }) => {
+            const card = this.state.objects[object];
+            return card?.zone === "graveyard" ? [{ object, stint: card.zoneChangeCount ?? 0 }] : [];
+          }),
+        }),
       craftReturn: () => {
         // The card its cost exiled, still in exile from that move (rule
         // 400.7): one stint on from the battlefield stint it was activated in.

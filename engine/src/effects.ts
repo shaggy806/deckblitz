@@ -3873,6 +3873,15 @@ export type EffectSpec =
       readonly kind: "foraged";
     }
   | {
+      /** `player` has manifested dread (rule 701.62b), the look begun at
+       * event `since` — announced once it's done, for "whenever you manifest
+       * dread", with the cards it put into a graveyard. Written by the
+       * `manifest-dread` effect, not for card definitions. */
+      readonly kind: "dread-manifested";
+      readonly player: PlayerId;
+      readonly since: number;
+    }
+  | {
       /** `targets[a]` and `targets[b]` each deal damage equal to their power
        * to the other (rule 701.12). With `oneSided`, only `a` deals to `b`
        * (Rabid Bite) — and `b` may be any permanent that can be dealt damage,
@@ -12350,6 +12359,9 @@ export interface EffectApi {
   /** Announce that the effect's controller foraged — see the `foraged`
    * {@link EffectSpec}. */
   foraged(): void;
+  /** Announce that `player` manifested dread, the look begun at event
+   * `since` — see the `dread-manifested` {@link EffectSpec}. */
+  dreadManifested(player: PlayerId, since: number): void;
   /** Explore's reveal (rule 701.44a): `explorer`'s controller — its last,
    * if it has left — reveals the top card of their library, and a land card
    * goes to their hand. `null` when there's no such player any more. */
@@ -19562,6 +19574,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "foraged":
       ctx.foraged();
       return;
+    case "dread-manifested":
+      ctx.dreadManifested(spec.player, spec.since);
+      return;
     case "sacrifice-source": {
       // "Sacrifice ~. If you do, …" — the tail only applies when the sacrifice
       // actually happened (rule 603.4-adjacent: the source may have been
@@ -19743,8 +19758,16 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       let player: PlayerId | undefined = ctx.controller;
       if (who !== "you") player = resolvePlayerRef(who, ctx);
       if (player === undefined) return;
+      // Announced once the whole process is done, its choice answered — even
+      // if some or all of it was impossible (rule 701.62b): the tail waits
+      // behind the choice as a `sequence`'s next step would.
+      const pendingBefore = ctx.decisionPending();
+      const parked = ctx.parkedCount();
+      const done: EffectSpec = { kind: "dread-manifested", player, since: ctx.nextEventSeq() };
       ctx.lookAndChoose("library", 2, 1, 1, "manifest", "graveyard", undefined, false, undefined, false,
         undefined, undefined, undefined, undefined, player);
+      if (!pendingBefore && ctx.decisionPending()) ctx.resumeAfterDecisions(done, parked);
+      else applyEffectSpec(done, ctx);
       return;
     }
     case "manifest": {
