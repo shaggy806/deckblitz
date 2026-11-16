@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-970 already implemented / 30 missing
+971 already implemented / 29 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -764,7 +764,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  758  Oviya, Automech Artisan                         4317 decks  {3}{G}           Legendary Creature — Human Artificer
 [x]  759  Urza, Lord Protector                            4311 decks  {1}{W}{U}        Legendary Creature — Human Artificer
 [x]  760  Evelyn, the Covetous                            4307 decks  {2}{U/B}{B}{B/R} Legendary Creature — Vampire Rogue
-[ ]  761  Zilortha, Strength Incarnate                    4307 decks  {3}{R}{G}        Legendary Creature — Dinosaur
+[x]  761  Zilortha, Strength Incarnate                    4307 decks  {3}{R}{G}        Legendary Creature — Dinosaur
 [x]  762  Ludevic, Necro-Alchemist                        4303 decks  {1}{U}{R}        Legendary Creature — Human Wizard
 [x]  763  Ardyn, the Usurper                              4296 decks  {5}{B}{B}{B}     Legendary Creature — Elder Human Noble
 [x]  764  Rashmi and Ragavan                              4265 decks  {1}{G}{U}{R}     Legendary Creature — Elf Monkey
