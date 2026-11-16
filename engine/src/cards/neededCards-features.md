@@ -365,6 +365,16 @@ ability (two Coursers). A play naming one runs with `playOptions` narrowed to it
 everything read of the permission — its costs, what it spends, `spendAs`, its `PlayedUnder` — is that one's.
 The client's library-top buttons say "(via Courser of Kruphix)". The Fourth Doctor (rank 10460), beside
 Crystal Skull and Courser of Kruphix. `test/play-permission-choice.test.ts`.
+### A block requirement for this combat, if the source attacked this combat — found built 2026-11-16
+
+The keys `effect:forced-block-this-combat` and `condition:source-attacked-this-combat`: no engine
+code. "Target creature … blocks that Wolf this combat if able" is `restrict`'s `must-block` of the
+trigger object until end of combat (Fighter Class), and "if Tolsimir attacked this combat" an
+intervening `{ kind: "source", filter: { attackedThisCombat: true } }` (built 2026-11-03 —
+Kytheon): this combat phase's declaration, standing once removed from combat, never across an
+extra combat. Tolsimir, Midnight's Light (rank 10815), with its Voja Fenstalker token.
+`test/forced-block-this-combat.test.ts`.
+
 ### "Whenever a permanent entering causes a triggered ability to trigger" — built 2026-11-16
 
 The key `trigger:ability-triggered-by-entering`: a `TRIGGER_EVENTS` row, `entry-triggers-ability`,

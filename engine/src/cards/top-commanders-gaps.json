@@ -6,6 +6,8 @@
     "replacement:next-combat-damage-double-or-prevent",
     "amount:aggregate-graveyards-except-spell-being-cast",
     "effect:control-while-condition",
+    "effect:forced-block-this-combat",
+    "condition:source-attacked-this-combat",
     "trigger:ability-triggered-by-entering",
     "effect:reveal-until-per-destroyed-this-way",
     "mechanic:restart-the-game",
