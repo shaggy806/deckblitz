@@ -403,7 +403,11 @@ function DeckSlot({
       {deck ? (
         <>
           <CommanderArt commanders={deck.commanders} className="seat-deck-art" blankClass="blank" />
-          <span className="seat-deck-name">{deckLabel(deck.name)}</span>
+          {/* `data-deck`: the name as it travels ("<commander> by <creator>"
+              for a real player's deck), where the text is its title. */}
+          <span className="seat-deck-name" data-deck={deck.name}>
+            {deckLabel(deck.name)}
+          </span>
           <span className="seat-deck-commander" title={commanderNames || undefined}>
             {commanderNames || 'No commander'}
           </span>

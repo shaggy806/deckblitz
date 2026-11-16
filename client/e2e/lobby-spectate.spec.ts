@@ -145,10 +145,13 @@ test("the host picks each bot's deck by its strength: a precon, an upgraded prec
   await shots(host, 'lobby-add-bot-buttons')
   await host.getByRole('button', { name: 'Add upgraded bot' }).first().click()
   await expect(host.locator('.seat-deck-name', { hasText: '(Upgraded)' })).toHaveCount(1)
-  // Strong: a real player's deck, named for its creator.
+  // Strong: a real player's deck. Its name is "<commander> by <creator>" on
+  // the wire and the seat shows its creator's own title (2026-11-15).
   await grid.getByRole('button', { name: /Add player/ }).first().click()
   await host.getByRole('button', { name: 'Add strong bot' }).first().click()
-  await expect(host.locator('.seat-deck-name', { hasText: ' by ' })).toHaveCount(1)
+  const strong = host.locator('.seat-deck-name[data-deck*=" by "]')
+  await expect(strong).toHaveCount(1)
+  await expect(strong).not.toContainText(' by ')
   await shots(host, 'lobby-upgraded-bots')
   await host.context().close()
   await guest.context().close()
