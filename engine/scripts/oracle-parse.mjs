@@ -16357,6 +16357,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (line === "Doctor's companion") { out.pairing = { kind: "doctors-companion" }; continue; }
     if ((m = /^Ward ((?:\{[0-9WUBRGC]+\})+)$/.exec(line))) { out.triggered.push(wardAbility({ mana: m[1] })); continue; }
     if ((m = /^Ward—Pay (\d+) life\.$/.exec(line))) { out.triggered.push(wardAbility({ payLife: Number(m[1]) })); continue; }
+    // "Ward—Collect evidence 4" (Axebane Ferox): exiling cards with that much
+    // total mana value from the payer's graveyard (rule 701.59a).
+    if ((m = /^Ward—Collect evidence (\d+)\.$/.exec(line))) {
+      out.triggered.push({ ...wardAbility({ collectEvidence: Number(m[1]) }), text: `Ward—Collect evidence ${m[1]}.` });
+      continue;
+    }
     // A ward cost read as the ability resolves (rules 702.21a, 608.2h): "~ has
     // ward {X}, where X is the number of experience counters you have"
     // (Minthara, Merciless Soul), "Ward—Pay life equal to ~'s power" (Raubahn).

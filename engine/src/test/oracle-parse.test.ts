@@ -18395,6 +18395,16 @@ describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () 
     expect(raubahn.triggered[0].text).toBe("Ward—Pay life equal to Raubahn's power.");
   });
 
+  it("ward, collect evidence (Axebane Ferox)", () => {
+    const ferox = face(
+      "Axebane Ferox",
+      "Ward—Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)",
+    );
+    expect(ferox.complete).toBe(true);
+    expect(ferox.triggered[0].effect).toEqual({ kind: "ward", cost: { collectEvidence: 4 } });
+    expect(ferox.triggered[0].text).toBe("Ward—Collect evidence 4.");
+  });
+
   it("ward, pay life equal to this creature's power (Phyrexian Fleshgorger)", () => {
     const gorger = face("Phyrexian Fleshgorger", "Ward—Pay life equal to this creature's power.");
     expect(gorger.complete).toBe(true);

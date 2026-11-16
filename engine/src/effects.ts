@@ -1349,6 +1349,11 @@ export interface WardCost {
    * creature they control (rule 701.68a), choosing which as they pay — the
    * `blight` effect. Payable only while they control a creature (701.68b). */
   readonly blight?: number;
+  /** "Ward—Collect evidence 4" (Axebane Ferox): the payer exiles cards with
+   * total mana value 4 or more from their graveyard (rule 701.59a), choosing
+   * which as they pay — the `collect-evidence` effect, evidence collected.
+   * Payable only while their graveyard holds that much (701.59b). */
+  readonly collectEvidence?: number;
   /** "Ward {X}, where X is the number of experience counters you have"
    * (Minthara, Merciless Soul): a generic mana part whose size is read as the
    * ward ability resolves, from its controller's side — not as the permanent
@@ -1465,6 +1470,7 @@ export function wardCostText(cost: WardCost): string {
     parts.push(cost.discard === 1 ? `Discard a card${random}` : `Discard ${cost.discard} cards${random}`);
   }
   if (cost.blight !== undefined) parts.push(`Blight ${cost.blight}`);
+  if (cost.collectEvidence !== undefined) parts.push(`Collect evidence ${cost.collectEvidence}`);
   const onlyMana = cost.mana !== undefined && parts.length === 1 && cost.waterbend !== true;
   return onlyMana ? ` ${cost.mana}` : `—${parts.join(", ")}.`;
 }

@@ -59051,6 +59051,11 @@ controlledBy,
     if (cost.blight !== undefined) {
       parts.push({ kind: "blight", amount: cost.blight });
     }
+    // "Ward—Collect evidence 4" (rule 701.59a): from the payer's graveyard,
+    // already chosen to be paid, so not declined again.
+    if (cost.collectEvidence !== undefined) {
+      parts.push({ kind: "collect-evidence", amount: cost.collectEvidence, required: true });
+    }
     const spellName = printedCardName(spell);
     const what = spell.kind === "card" ? spellName : `${spellName}'s ability`;
     this.beginModesChoice(
@@ -59142,6 +59147,8 @@ controlledBy,
     ) {
       return false;
     }
+    // Enough mana value in their graveyard (701.59b).
+    if (cost.collectEvidence !== undefined && !this.canCollectEvidence(player, cost.collectEvidence)) return false;
     return true;
   }
 
