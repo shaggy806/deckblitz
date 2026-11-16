@@ -1186,6 +1186,60 @@ seat can see** (the top card under Future Sight's kind of permanent), where it u
 largest loss: what the log measured ("a commander in play comes before big turns") was true
 and still named the wrong target, because a commander removed comes back.
 
+### Decks the bots had never played (2026-11-16)
+
+The user asked for games on precons the site doesn't offer. Sixty-nine more Wizards precons
+the pool plays exactly as printed became **tooling precons** (`engine/scripts/tool-decks.mjs`,
+`data/tooling-precons.json`): seated by the `--decks` tools, read by scripts alone, never an
+engine export, so no player is offered one. One game on each of 18 pods (`bot:losses`)
+flagged 9 of 54 losses, against about one in ten on the usual pods, and two were causes the
+starter decks never raise.
+
+**Dead by the reserve is not dead.** `deadAnyway` asks whether the swing back kills with
+`crackbackMargin` life kept back. That reserve is right for calling a board safe and it was
+being used to call one lost, the third place this has turned up (the weights on later
+opponents and the sum over the table were the first two, the night before). Doom Prevails, on
+8 life with 6.5 coming through whatever it kept home, read itself as dead anyway, sent
+everything to finish a third player, and died to the fourth's 11 power with no blocker; its
+free creatures at home had it alive on 2. Three changes, one position:
+
+- the board "holding back" is measured on is the one the **least attack** leaves (`held`):
+  a goaded creature attacks in every declaration, so it is gone from home in every one;
+- a seat dead by the reserve and alive to the last point is **on its last points**, and the
+  attack to refuse is the one that leaves it dead outright (`loses`);
+- an attack that takes a player out stays exempt from the opponent-by-opponent reading only
+  while two opponents are left. With **one left**, that player has nobody else to swing at.
+
+Judged on twelve games (`bot:judge --kind attacks`), the result is in `COMPLETED.md`.
+
+**"Dead anyway" is checked against the swing played out.** The tap guard already asks a
+simulation whether the bot lives through the swing back (`survivesSwing`, built for an
+instant in hand). The attack declaration asked only the arithmetic. Keen Engineering, on 20
+life in front of Giada's Angels, was dead on paper (28 through eight blockers) and alive in
+its own simulation with every creature blocking; told "dead anyway", the attack sent two of
+its fliers at a third player, and it died by 8. Now, where one opponent has the bot dead
+alone on paper and the swing played out from the least attack says it lives, the attack the
+search chose is played out the same way, and one it doesn't live through is dropped for the
+least attack (`declareAttackersSearched`, `via: "held for the swing"`). Two simulations, and
+only on such a board. Not for a seat dead to the sum of the table: there the played-out
+swing seats the others at v1's attacks and would call nearly every board safe.
+
+The same game shows a cause this does not fix: the guard let the bot spend its Aetherize
+mana on Fall from Favor, because the simulation lived through the swing on blocks alone (on
+3 life, three creatures lost). The guard asks whether a play still lives, not what the life
+costs beside keeping the out (BACKLOG, "Bots").
+
+**Poison is counted.** The combat arithmetic knew life and commander damage. A bot on 199
+life read sixteen toxic Mites as 15 damage and died on ten counters. `damageThrough` now
+reports `poison` (infect's damage in place of the life, rule 702.90b; a toxic creature's
+total toxic value beside its damage, 702.164c), from a second pass of the same greedy blocks
+made against poison, and `isLethal` reads it with the counters the player has. Every reader
+of the arithmetic gets it: the crackback, a kill plan, the forced-block check, and the
+screens (`bot:losses`, `bot:outs`). A defender dead to neither life nor poison alone but to
+the two together, on different blocks, isn't seen.
+
+Left open by the same screen: three seats died with a wipe or a fog in hand (BACKLOG, "Bots").
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

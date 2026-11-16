@@ -967,6 +967,90 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "on its last points of life, doesn't take the kill that leaves it dead to the last opponent",
+    rule: "Dead by the life kept in reserve is not dead: holding back still buys a turn, so the one attack to refuse is the kill that leaves the bot dead outright to the only opponent left.",
+    run(weights, registry, makeBot) {
+      // From a watched game (the tooling precons, 2026-11-16, Doom Prevails
+      // against Goblin Storm, seed 1): on 8 life with one creature goaded,
+      // 6.5 coming through whatever it kept home, it read itself as dead
+      // anyway (two life in reserve), sent everything to finish the third
+      // player, and died to the fourth's 11 power with no blocker. With its
+      // free creatures home that swing left it on 2.
+      // Here: Carol goaded the Giant, so it attacks Bob whatever else does.
+      // Her five creatures (11 power, tapped from her own attack) get 6
+      // through the two Wurms (dead by the reserve on 8, alive on 2) and 11
+      // through none. The Wurms sent too kill Bob on 8 (15 power into one
+      // blocker).
+      const game = table(registry, [A, B, C], A);
+      game.state.players[A].life = 8;
+      game.state.players[B].life = 8;
+      game.state.objects[onBoard(game, "Hill Giant", A)].goadedBy = [C];
+      const wurms = [onBoard(game, "Craw Wurm", A), onBoard(game, "Craw Wurm", A)];
+      onBoard(game, "Craw Wurm", B);
+      onBoard(game, "Hill Giant", C, true);
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Grizzly Bears", C, true);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const view = viewOf(game, A);
+      const forced = view.legalActions().find((o) => o.kind === "declare-attackers")?.mustAttack.length ?? 0;
+      // The bot names what it chooses to send; the forced ones go either way.
+      const attackers = makeBot(A, registry, weights).declareAttackers(view);
+      const free = attackers.filter((d) => wurms.includes(d.attacker)).length;
+      return {
+        passed: forced === 1 && free === 0,
+        detail: `${forced} forced to attack; sent ${free} of its 2 free creatures as well`,
+      };
+    },
+  },
+  {
+    name: "dead on paper and alive in the swing played out, keeps home the blocker that makes it so",
+    rule: "The block arithmetic knows only creatures and can write off a board the bot lives through; where the swing back played out says it lives with everything home, an attack that breaks that is not a race worth running.",
+    run(weights, registry, makeBot) {
+      // From a screened loss (the tooling precons, 2026-11-16): Keen
+      // Engineering, dead on paper to Giada's Angels and alive in its own
+      // simulation with every creature blocking, sent two of them at a third
+      // player and died by 8.
+      // Here: three Wurms into one blocker are 12 through, dead on 10. With
+      // Doom Blade in hand and the mana for it, one attacker dies as they're
+      // declared, the Wurm at home blocks another, and 6 comes through.
+      // Bob's are tapped from his own attack, so the Wurm sent at him is six
+      // free damage; then the Blade leaves two unblocked, and the game.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 10;
+      lands(game, "Swamp", A, 2);
+      game.debugSpawn("Doom Blade", A, "hand");
+      onBoard(game, "Craw Wurm", A);
+      for (let i = 0; i < 3; i += 1) onBoard(game, "Craw Wurm", B, true);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      return {
+        passed: attackers.length === 0,
+        detail: attackers.length === 0 ? "kept the Wurm home" : "sent its one blocker at Bob's three tapped Wurms",
+      };
+    },
+  },
+  {
+    name: "keeps its blockers home against a board that kills on poison, whatever its life",
+    rule: "Ten poison counters lose the game at any life total: toxic and infect attackers are counted as poison in the swing back, not as damage to shrug off.",
+    run(weights, registry, makeBot) {
+      // From a screened loss (the tooling precons, 2026-11-16): on 199 life
+      // a bot read sixteen toxic Mites as 15 damage and died on ten poison.
+      // Here: Bob's twelve Crawling Choruses (1/1, toxic 1) are tapped from
+      // his own attack, so every Bear sent at him is free damage. On 40 life
+      // twelve damage is nothing; twelve counters are the game, and each
+      // Bear home is one fewer. Three home leave nine.
+      const game = table(registry, [A, B], A);
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Grizzly Bears", A);
+      for (let i = 0; i < 12; i += 1) onBoard(game, "Crawling Chorus", B, true);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const sent = attackers.reduce((n, d) => n + (d.count ?? 1), 0);
+      return {
+        passed: sent <= 1,
+        detail: `attacked with ${sent} of 4 Bears into twelve toxic 1/1s on 40 life`,
+      };
+    },
+  },
+  {
     name: "does not swing into a lethal crackback",
     rule: "Two free damage isn't worth dying to the swing back.",
     run(weights, registry, makeBot) {

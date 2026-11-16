@@ -2575,7 +2575,51 @@ export class EvalBotController extends HeuristicBotController {
     return this.onClock(() => withTrackRecordEvidence(view.state, () => this.declareAttackersSearched(view)));
   }
 
+  /**
+   * The attack the search chose, unless the swing back played out says it
+   * costs us a turn the arithmetic had written off.
+   *
+   * The block arithmetic is greedy and knows only creatures, so it can read
+   * a board as dead to one opponent's swing (`deadAnyway`, and so "race")
+   * that real blocks, or a spell in hand, live through. Where that is so with
+   * everything home (`survivesSwing`, the tap guard's own question), the
+   * chosen attack is played out the same way, and one that doesn't live is
+   * dropped for the least attack the rules allow. Keen Engineering, on 20
+   * life in front of Giada's Angels: the arithmetic had it dead, its tap
+   * guard's simulation had it alive on 3 with every creature blocking, and
+   * the attack declaration, told only "dead anyway", sent two of them at a
+   * third player. It died by 8 (the tooling precons, 2026-11-16).
+   *
+   * Only against an opponent who has us dead alone on paper: dead to the sum
+   * of the table is `diesSooner`'s, where the played-out swing (the others
+   * at v1's attacks) would call nearly every board safe.
+   */
   private declareAttackersSearched(view: ControllerView): readonly AttackerDeclaration[] {
+    const state = view.state;
+    const me = this.playerId;
+    const legal = view.legalActions().find((o): o is DeclareAttackersLegal => o.kind === "declare-attackers");
+    if (legal === undefined || legal.eligible.length === 0 || legal.defenders.length === 0) return this.attackersSearched(view);
+    this.swings = new WeakMap();
+    const declared = (attackers: readonly AttackerDeclaration[]): GameState | null =>
+      simulateCombat(state, this.cards, { type: "declare-attackers", player: me, attackers: withRequiredAttackers(attackers, legal) });
+    const held = declared([]);
+    const livesHeld =
+      held !== null &&
+      !held.result.over &&
+      this.crackbackLethal(held, false) &&
+      opponentsLethalAlone(held, this.cards, me).length > 0 &&
+      this.survivesSwing(held) === true;
+    const chosen = this.attackersSearched(view);
+    if (!livesHeld || chosen.length === 0) return chosen;
+    const after = declared(chosen);
+    // An attack that ends the game, or that the swing back played out from
+    // still lives through (an out in hand answers it either way), stands.
+    if (after === null || after.result.over || this.survivesSwing(after) === true) return chosen;
+    this.lastDecision = audit("attackers", null, "held for the swing");
+    return [];
+  }
+
+  private attackersSearched(view: ControllerView): readonly AttackerDeclaration[] {
     const legal = view
       .legalActions()
       .find((o): o is DeclareAttackersLegal => o.kind === "declare-attackers");
@@ -2592,32 +2636,50 @@ export class EvalBotController extends HeuristicBotController {
     // always has.
     const budget = this.budget();
 
+    // **Holding back, as far as the rules let us.** Creatures that must attack
+    // (goaded, "attacks each combat if able") are in every declaration, so
+    // the board to measure the others against is the one their attack leaves,
+    // not the one with everything home. Read on the board as it stood, a
+    // seat can look safe holding back when the least attack it may make
+    // already isn't, and then every declaration scores as unsafe and the
+    // safety check sorts nothing. Doom Prevails, on 8 life: its goaded 5/5
+    // died attacking, and with it went the flying its tokens blocked with
+    // (found watching the tooling precons, 2026-11-16; `onLastPoints` below
+    // is the rest of that game).
+    const forced = withRequiredAttackers([], legal);
+    const held =
+      forced.length === 0
+        ? state
+        : (timed(budget, () => simulateCombat(state, this.cards, { type: "declare-attackers", player: me, attackers: forced })) ??
+          state);
+
     // If the crackback kills us even when we hold everything back, holding
     // back buys nothing: drop the constraint and race. Read on the board as
     // it shows, without `crackbackGrowth`: scaled, a merely threatening board
     // would read as lost and turn the caution into an all-in race.
-    const deadAnyway = this.crackbackLethal(state, false);
+    const deadAnyway = this.crackbackLethal(held, false);
     // Dead to the table is not dead to each player at it (`diesSooner`): the
     // opponents it lives through with everything home still have their turns
     // to play before the one whose swing kills it. Racing is for when the
     // next swing kills it either way.
-    const spared = deadAnyway ? this.outlives(state) : [];
+    const spared = deadAnyway ? this.outlives(held) : [];
     // The opponents who have it dead alone. With some who don't, there is a
     // swing it lives through and an attack can still cost it that.
-    const killers = deadAnyway ? opponentsLethalAlone(state, this.cards, me) : [];
-    const toAct = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost).length;
+    const killers = deadAnyway ? opponentsLethalAlone(held, this.cards, me) : [];
+    const toAct = held.turnOrder.filter((p) => p !== me && !held.players[p].hasLost).length;
     const somethingToLose = spared.length > 0 || killers.length < toAct;
-    const others = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost);
+    const others = held.turnOrder.filter((p) => p !== me && !held.players[p].hasLost);
     const diesSooner = (after: GameState): boolean =>
       somethingToLose &&
       this.diesSooner(
         after,
         spared,
+        killers,
         // An attack that takes a player out is held to the opponents before
         // the killer alone: the table it leaves is another table. Judged
         // (2026-11-16), the kill on a player at 3 life that the wider
         // reading forbade was the better line.
-        others.some((p) => after.players[p]?.hasLost === true) ? null : killers,
+        others.some((p) => after.players[p]?.hasLost === true),
       );
     // `crackbackGrowth` only sorts attacks while holding back passes it. When
     // even no attack reads as unsafe scaled up (but not plainly — that's
@@ -2625,9 +2687,26 @@ export class EvalBotController extends HeuristicBotController {
     // value alone, and the climb could take a swing the plain check calls
     // lethal: measured, 25 such swings in 119 four-player games, 19 of them
     // deaths. Then the plain check sorts them, as it did before the scaling.
-    const grown = !this.crackbackLethal(state, true);
+    const grown = !this.crackbackLethal(held, true);
+    // **Dead by the reserve is not dead.** `deadAnyway` keeps `crackbackMargin`
+    // life back, which is right for calling a board safe and wrong for
+    // calling it lost: on 8 life with 6.5 coming through, a bot is on its
+    // last points, not out. Then holding back still buys a turn, and the one
+    // attack to refuse is the one that leaves it dead to the last point. The
+    // same game as `held`'s: read as dead anyway, the bot raced, and each
+    // race it could pick left it dead outright.
+    const onLastPoints = deadAnyway && !this.crackbackLethal(held, false, undefined, 0);
+    const loses = (after: GameState): boolean =>
+      (onLastPoints && this.crackbackLethal(after, false, undefined, 0)) || diesSooner(after);
 
-    const alpha = this.alphaStrike(state, legal, deadAnyway, grown, budget, somethingToLose ? diesSooner : undefined);
+    const alpha = this.alphaStrike(
+      state,
+      legal,
+      deadAnyway,
+      grown,
+      budget,
+      somethingToLose || onLastPoints ? loses : undefined,
+    );
     if (alpha !== null) {
       this.lastDecision = audit("attackers", budget);
       return alpha;
@@ -2651,7 +2730,7 @@ export class EvalBotController extends HeuristicBotController {
       const players = new Set(attackers.map((d) => defendingPlayer(d.defender)));
       const value = evaluateState(after, this.cards, me, w) + SPREAD_BONUS * Math.max(0, players.size - 1);
       if (after.result.over) return value;
-      if (deadAnyway) return diesSooner(after) ? UNSAFE + value : value;
+      if (deadAnyway) return loses(after) ? UNSAFE + value : value;
       return lessBystanders(after, this.crackbackLethal(after, grown) ? UNSAFE + value : value);
     };
 
@@ -3146,9 +3225,10 @@ export class EvalBotController extends HeuristicBotController {
     deadAnyway: boolean,
     grown: boolean,
     budget: SearchBudget,
-    /** Dead whatever stays home, but not to every opponent: whether the
-     * board after an attack is dead to one it lived through before (the
-     * attack decision's `diesSooner`). Left out, a kill is taken as it comes. */
+    /** Dead whatever stays home, but not to every opponent, or not to the
+     * last point of life: whether the board after an attack is dead to one
+     * it lived through before, or dead outright where holding back wasn't
+     * (the attack decision's `loses`). Left out, a kill is taken as it comes. */
     diesSooner?: (after: GameState) => boolean,
   ): AttackerDeclaration[] | null {
     const me = this.playerId;
@@ -3318,8 +3398,14 @@ export class EvalBotController extends HeuristicBotController {
   /** Would every opponent swinging at us before we untap again be lethal,
    * keeping `crackbackMargin` life in reserve — and, when `grown`, with the
    * damage through scaled up by `crackbackGrowth`? With `lost`, as though
-   * those blockers (or all of them) weren't home. */
-  private crackbackLethal(state: GameState, grown = true, lost?: ReadonlySet<ObjectId> | "all"): boolean {
+   * those blockers (or all of them) weren't home. `reserve` is the life
+   * kept back: 0 asks whether it is dead to the last point. */
+  private crackbackLethal(
+    state: GameState,
+    grown = true,
+    lost?: ReadonlySet<ObjectId> | "all",
+    reserve: number = this.weights.crackbackMargin,
+  ): boolean {
     const through = crackback(state, this.cards, this.playerId, this.weights.crackbackParanoia, lost, {
       weight: this.weights.crackbackKillShot,
       margin: this.weights.crackbackMargin,
@@ -3332,8 +3418,9 @@ export class EvalBotController extends HeuristicBotController {
             ...through,
             damage: through.damage * scale,
             commanderDamage: new Map([...through.commanderDamage].map(([c, n]) => [c, n * scale] as const)),
+            ...(through.poison !== undefined ? { poison: through.poison * scale } : {}),
           };
-    return isLethal(state, this.playerId, scaled, -this.weights.crackbackMargin);
+    return isLethal(state, this.playerId, scaled, -reserve);
   }
 
   /** `null` when the engine refused this concrete filling of a legal shape. */
@@ -3862,11 +3949,20 @@ export class EvalBotController extends HeuristicBotController {
    * again, on 26: dead by one point to three boards added up, to none of
    * them alone, it sent its 6/6 and the one board that then swung at it
    * dealt 27 (`bot:losses`, 2026-11-16).
+   *
+   * `tookOut`: the attack eliminated a player. That is not held to the
+   * second reading while two opponents are left, who have each other to
+   * swing at. **With one left it is**: that player has nobody else to
+   * attack, so a kill that leaves us dead to them alone wins the kill and
+   * loses the game. Doom Prevails, on 8 with one creature goaded, sent
+   * everything to finish the third player and died to the fourth's 11 power
+   * with no blocker; with the rest home it was on 2 after the same swing
+   * (watching the tooling precons, 2026-11-16).
    */
-  private diesSooner(state: GameState, spared: readonly PlayerId[], killers: readonly PlayerId[] | null): boolean {
-    // `killers` null: an attack that eliminated a player, which is not held
-    // to this reading.
-    if (killers !== null && opponentsLethalAlone(state, this.cards, this.playerId).some((p) => !killers.includes(p))) {
+  private diesSooner(state: GameState, spared: readonly PlayerId[], killers: readonly PlayerId[], tookOut: boolean): boolean {
+    const me = this.playerId;
+    const left = state.turnOrder.filter((p) => p !== me && state.players[p]?.hasLost !== true).length;
+    if ((!tookOut || left === 1) && opponentsLethalAlone(state, this.cards, me).some((p) => !killers.includes(p))) {
       return true;
     }
     const still = spared.filter((p) => state.players[p]?.hasLost !== true);

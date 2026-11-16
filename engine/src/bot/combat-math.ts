@@ -24,6 +24,7 @@ import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy } f
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
+import { POISON_LETHAL } from "../state.js";
 import { LANDWALK } from "../subtypes.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 
@@ -60,6 +61,10 @@ export interface CombatCreature {
   /** It may (or must) assign its combat damage as though it weren't blocked
    * (Thorn Elemental): a block stops none of it. */
   readonly assignsPastBlockers?: boolean;
+  /** Its total toxic value (rule 702.164b), when it has any: the poison
+   * counters a player it deals combat damage to gets, beside the damage.
+   * Infect is a keyword (`keywords`). */
+  readonly toxic?: number;
 }
 
 /** A token stack is expanded to at most this many copies — enough for any
@@ -124,6 +129,7 @@ function combatCreaturesUncached(
         : {}),
       ...(blocksDespiteLandwalk(state, registry, object) ? { blocksLandwalkers: true } : {}),
       ...(unblockedAssignmentOf(state, registry, id) !== null ? { assignsPastBlockers: true } : {}),
+      ...(c.toxic > 0 ? { toxic: c.toxic } : {}),
     };
     const copies = Math.min(object.stackCount ?? 1, MAX_COPIES);
     for (let i = 0; i < copies; i += 1) out.push(creature);
@@ -166,9 +172,32 @@ export function canBlock(blocker: CombatCreature, attacker: CombatCreature): boo
 const unblockedDamage = (attacker: CombatCreature): number =>
   Math.max(0, attacker.damage) * (attacker.keywords.has("double-strike") ? 2 : 1);
 
+/** The life a player loses to `dealt` combat damage from `attacker`: none
+ * from a source with infect, whose damage is poison counters instead (rule
+ * 702.90b). */
+const lifeLost = (attacker: CombatCreature, dealt: number): number => (attacker.keywords.has("infect") ? 0 : dealt);
+
+/** The poison counters a player gets from `dealt` combat damage by
+ * `attacker`: that many from a source with infect (rule 702.90b); its total
+ * toxic value each time it deals any (rule 702.164c), so twice from a double
+ * striker. */
+const poisonGiven = (attacker: CombatCreature, dealt: number): number =>
+  dealt <= 0
+    ? 0
+    : attacker.keywords.has("infect")
+      ? dealt
+      : (attacker.toxic ?? 0) * (attacker.keywords.has("double-strike") ? 2 : 1);
+
 export interface DamageThrough {
-  /** Total damage to the defending player. */
+  /** Total damage to the defending player that costs them life: a source
+   * with infect deals none (`poison`). */
   readonly damage: number;
+  /** The poison counters the defending player can't block their way out of
+   * (infect, toxic): the least the attackers give when the blocks are chosen
+   * against poison rather than damage. Left out when there are none.
+   * {@link isLethal} reads it beside the damage; a defender dead to neither
+   * alone but to the two together, on different blocks, isn't seen. */
+  readonly poison?: number;
   /** Of that, how much each commander dealt. */
   readonly commanderDamage: ReadonlyMap<ObjectId, number>;
   /** Life the defending player gains in the same combat from blockers with
@@ -266,8 +295,9 @@ export function damageThrough(
         through = excess;
       }
     }
-    damage += through;
+    damage += lifeLost(attacker, through);
     if (through > 0 && strikesFirst(attacker)) firstStrikeThrough = true;
+    // Counted as combat damage dealt, infect or not (rule 903.10a).
     if (attacker.isCommander && through > 0) {
       commanderDamage.set(attacker.id, (commanderDamage.get(attacker.id) ?? 0) + through);
     }
@@ -283,13 +313,69 @@ export function damageThrough(
       gained += best;
     }
   }
-  return gained > 0 && !firstStrikeThrough ? { damage, commanderDamage, gained } : { damage, commanderDamage };
+  const through: DamageThrough =
+    gained > 0 && !firstStrikeThrough ? { damage, commanderDamage, gained } : { damage, commanderDamage };
+  if (!attackers.some((attacker) => poisonGiven(attacker, 1) > 0)) return through;
+  const poison = poisonThrough(attackers, blockers, legal);
+  return poison > 0 ? { ...through, poison } : through;
 }
 
 /**
- * Does `through` kill `defender` — on life, or on 21 damage from any one
- * commander counting what they've already taken? `margin` is life the
- * defender is assumed to find from somewhere (a trick, a blocker from hand).
+ * {@link damageThrough}'s question asked of poison: the fewest poison
+ * counters `attackers` are sure to give a player who blocks against poison
+ * first — the same greedy blocks, the attackers that would give the most
+ * blocked first. Its own pass because the blocks differ: sixteen 1/1s with
+ * toxic 1 beside one 8/8 are sixteen blocks to make on poison and one on
+ * life. Found watching the tooling precons (2026-11-16): on 199 life, a bot
+ * read sixteen toxic Mites as 15 damage to shrug off and died on ten poison.
+ */
+function poisonThrough(
+  attackers: readonly CombatCreature[],
+  blockers: readonly CombatCreature[],
+  legal: readonly (readonly number[])[],
+): number {
+  const free = new Set(blockers.map((_, i) => i));
+  const unblocked = (i: number): number => poisonGiven(attackers[i], unblockedDamage(attackers[i]));
+  const order = attackers
+    .map((_, i) => i)
+    .filter((i) => unblocked(i) > 0)
+    .sort((x, y) => unblocked(y) - unblocked(x) || legal[x].length - legal[y].length);
+  const usefulness = (b: number): number => legal.filter((l) => l.includes(b)).length;
+
+  let poison = 0;
+  for (const index of order) {
+    const attacker = attackers[index];
+    const full = unblockedDamage(attacker);
+    const trample = attacker.keywords.has("trample");
+    const needed = attacker.keywords.has("menace") ? 2 : 1;
+    const available = legal[index]
+      .filter((b) => free.has(b))
+      .sort((x, y) =>
+        trample
+          ? blockers[y].toughness - blockers[x].toughness
+          : usefulness(x) - usefulness(y) || blockers[x].toughness - blockers[y].toughness,
+      );
+    let given = unblocked(index);
+    if (available.length >= needed && attacker.assignsPastBlockers !== true) {
+      const chosen = available.slice(0, needed);
+      const absorbed = chosen.reduce((sum, b) => sum + Math.max(0, blockers[b].toughness), 0);
+      const past = poisonGiven(attacker, trample ? Math.max(0, full - absorbed) : 0);
+      if (past < given) {
+        for (const b of chosen) free.delete(b);
+        given = past;
+      }
+    }
+    poison += given;
+  }
+  return poison;
+}
+
+/**
+ * Does `through` kill `defender` — on life, on 21 damage from any one
+ * commander counting what they've already taken, or on ten poison counters
+ * counting the ones they have (rule 704.5c)? `margin` is life the defender
+ * is assumed to find from somewhere (a trick, a blocker from hand); poison
+ * is counted to the counter.
  */
 export function isLethal(
   state: GameState,
@@ -303,7 +389,8 @@ export function isLethal(
   for (const [commander, amount] of through.commanderDamage) {
     if ((p.commanderDamageTaken[commander] ?? 0) + amount >= COMMANDER_DAMAGE_LETHAL) return true;
   }
-  return false;
+  const poison = through.poison ?? 0;
+  return poison > 0 && (p.counters.poison ?? 0) + poison >= POISON_LETHAL;
 }
 
 /** The steps of a turn in which its player's attack is still to be declared. */
@@ -384,12 +471,18 @@ function crackbackByOpponent(
 
   let damage = 0;
   let gained = 0;
+  let poison = 0;
   const commanderDamage = new Map<ObjectId, number>();
   const shared = Math.max(0, Math.min(1, paranoia));
   const killWeight = Math.max(0, Math.min(1, killShot.weight));
   // The one map throughout: `each` reads it as it stands, and the last
   // record told is the whole sum.
-  const sofar = (): DamageThrough => (gained > 0 ? { damage, commanderDamage, gained } : { damage, commanderDamage });
+  const sofar = (): DamageThrough => ({
+    damage,
+    commanderDamage,
+    ...(gained > 0 ? { gained } : {}),
+    ...(poison > 0 ? { poison } : {}),
+  });
   for (const [i, opponent] of opponents.entries()) {
     if (!(i > 0 && shared === 0 && killWeight === 0)) {
       const attackers = combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack);
@@ -399,6 +492,7 @@ function crackbackByOpponent(
       if (weight !== 0) {
         gained += (through.gained ?? 0) * weight;
         damage += through.damage * weight;
+        poison += (through.poison ?? 0) * weight;
         for (const [commander, amount] of through.commanderDamage) {
           commanderDamage.set(commander, (commanderDamage.get(commander) ?? 0) + amount * weight);
         }
