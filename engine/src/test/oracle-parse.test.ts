@@ -20530,3 +20530,33 @@ describe("'lethal damage … is determined by their power' (rule 613.11 — Zilo
     expect(zilortha.complete).toBe(true);
   });
 });
+
+describe("Control for as long as it matches (Shield Broker, Rootwater Matriarch)", () => {
+  const read = (typeLine: string, text: string) =>
+    parseFace({ name: "Test Card", type_line: typeLine, oracle_text: text } as never) as unknown as {
+      complete: boolean;
+      triggered: { targets: unknown[]; effect: unknown }[];
+      activated: { targets: unknown[]; effect: unknown }[];
+    };
+
+  it("reads a shield counter put on it, then control while it has one", () => {
+    const broker = read(
+      "Creature \u2014 Octopus Advisor",
+      "When this creature enters, put a shield counter on target noncommander creature you don't control. You gain control of that creature for as long as it has a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)",
+    );
+    expect(broker.triggered[0].targets).toEqual([{ kind: "permanent", whose: "opponent", filter: { type: "creature", isCommander: false } }]);
+    expect(broker.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "shield", amount: 1 },
+        { kind: "gain-control", target: 0, untilEndOfTurn: false, whileIt: { counters: { kind: "shield", compare: { op: "gte", n: 1 } } } },
+      ],
+    });
+  });
+
+  it("reads control while that creature is enchanted", () => {
+    const matriarch = read("Creature \u2014 Merfolk", "{T}: Gain control of target creature for as long as that creature is enchanted.");
+    expect(matriarch.activated[0].effect).toEqual({ kind: "gain-control", target: 0, untilEndOfTurn: false, whileIt: { enchanted: true } });
+    expect(matriarch.complete).toBe(true);
+  });
+});

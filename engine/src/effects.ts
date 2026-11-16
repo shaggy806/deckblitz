@@ -4971,6 +4971,16 @@ export type EffectSpec =
       /** "Gain control of that permanent **until the end of your next turn**"
        * (Stilt-Man, Towering Terror). With `untilEndOfTurn: false`. */
       readonly until?: PointDuration;
+      /** "…for as long as **it has a shield counter on it**" (Shield Broker:
+       * `{ counters: { kind: "shield", compare: { op: "gte", n: 1 } } }`), "…for
+       * as long as **that creature is enchanted**" (Rootwater Matriarch:
+       * `{ enchanted: true }`): the control effect lasts while the permanent
+       * whose control changed still matches this, read from the side of the
+       * player gaining control, and ends for good the first moment it doesn't
+       * — matching again later doesn't bring it back. Nothing at all if it
+       * doesn't match as the effect would begin (rule 611.2b). With
+       * `untilEndOfTurn: false`, and none of the other durations. */
+      readonly whileIt?: CardFilter;
     }
   | {
       /**
@@ -13132,6 +13142,7 @@ export interface EffectApi {
     whileSourceTapped?: boolean,
     whileYouControlSource?: boolean,
     until?: PointDuration,
+    whileIt?: CardFilter,
   ): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
    * each permanent's own owner, or a player at random for each; `controlledBy`
@@ -19531,6 +19542,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.whileSourceTapped === true,
           spec.whileYouControlSource === true,
           spec.until,
+          spec.whileIt,
         );
       }
       return;

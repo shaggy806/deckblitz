@@ -134,6 +134,11 @@ export interface ControlEffect {
   /** "Until the end of your next turn" (Stilt-Man, Towering Terror): see
    * `UntilPoint`. */
   readonly untilPoint?: UntilPoint;
+  /** "For as long as it has a shield counter on it" (Shield Broker), "for as
+   * long as that creature is enchanted" (Rootwater Matriarch): it ends the
+   * first moment the permanent stops matching this, read from `controller`'s
+   * side (rule 611.2b) — `gain-control`'s `whileIt`. */
+  readonly whileIt?: CardFilter;
 }
 
 /**
@@ -6994,6 +6999,11 @@ export interface GameState {
    * battlefield" for (a modifier's or control effect's `whileSource`) — so a
    * permanent leaving looks for effects to end only when it's one of these. */
   whileSourceIds?: ObjectId[];
+  /** The permanents with a control effect lasting "for as long as it
+   * [matches]" (`ControlEffect.whileIt`) — so every event looks for one to
+   * end only while there are any. One that has gone or lost the effect is
+   * dropped as it's next looked at. */
+  whileItControlIds?: ObjectId[];
   /** Rule 723, oldest first: "you control target player during that player's
    * next turn" (`control-player`), waiting for that turn and then working
    * through it. Read through `player-control.ts`. */

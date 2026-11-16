@@ -1051,6 +1051,7 @@ const TARGET_PHRASES = [
   // Deceiver Exarch, Wild Magic Surge.
   ["target permanent an opponent controls", { kind: "permanent", whose: "opponent", filter: {} }],
   ["target permanent you don't control", { kind: "permanent", whose: "opponent", filter: {} }],
+  ["target noncommander creature you don't control", { kind: "permanent", whose: "opponent", filter: { type: "creature", isCommander: false } }],
   ["target creature an opponent controls", "creature-an-opponent-controls"],
   ["target creature you don't control", "creature-an-opponent-controls"],
   ["target artifact an opponent controls", "artifact-an-opponent-controls"],
@@ -5670,6 +5671,17 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if ((m = re(`destroy (${TARGET})`).exec(s))) return { kind: "destroy", target: slot(m[1]) };
+  // "Gain control of target creature for as long as that creature is
+  // enchanted" (Rootwater Matriarch), "you gain control of that creature for
+  // as long as it has a shield counter on it" after the counter is put there
+  // (Shield Broker): control while it still matches (`whileIt`).
+  if ((m = re(`(?:you )?gain control of (${TARGET}|that creature) for as long as (?:that creature|it) (?:is (enchanted)|has an? ([a-z0-9/+-]+) counter on it)`).exec(s))) {
+    const target = /^that creature$/i.test(m[1]) ? (ctx.targets.length === 1 ? 0 : undefined) : slot(m[1]);
+    if (target !== undefined) {
+      const whileIt = m[2] !== undefined ? { enchanted: true } : { counters: { kind: m[3].toLowerCase(), compare: { op: "gte", n: 1 } } };
+      return { kind: "gain-control", target, untilEndOfTurn: false, whileIt };
+    }
+  }
   // "Gain control of target creature [until end of turn]" — for as long as
   // the effect lasts, which without a duration is the rest of the game.
   if ((m = re(`gain control of (${TARGET})( until end of turn)?`).exec(s))) {

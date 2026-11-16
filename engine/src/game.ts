@@ -41327,7 +41327,11 @@ export class Game {
           return Array<ObjectId>(turns).fill(id);
         });
       },
-      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource, until) => {
+      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource, until, whileIt) => {
+        if (whileIt !== undefined) {
+          this.gainControlByEffect(player, target, false, false, { whileIt });
+          return;
+        }
         if (until !== undefined) {
           this.gainControlByEffect(player, target, false, false, { untilPoint: untilPointOf(until, controller) });
           return;
@@ -59235,6 +59239,8 @@ controlledBy,
       readonly whileSource?: { readonly id: ObjectId; readonly zoneChangeCount: number };
       /** "Until the end of your next turn". */
       readonly untilPoint?: UntilPoint;
+      /** "For as long as it [matches]" — `ControlEffect.whileIt`. */
+      readonly whileIt?: CardFilter;
     } = {},
   ): void {
     if (target.kind !== "object") return;
@@ -59242,6 +59248,10 @@ controlledBy,
     const id = opts.split === false ? target.object : this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
+    // "For as long as it has a shield counter on it" with none on it as the
+    // effect would begin never starts (rule 611.2b).
+    const whileIt = opts.whileIt;
+    if (whileIt !== undefined && !matchesFilter(this.state, this.registry, id, whileIt, { you: player })) return;
     // Put onto the battlefield "under your control", but it enters under the
     // control of an opponent of your choice instead (rule 614.1d), and already
     // has: the effect that put it there has nothing to add.
@@ -59267,14 +59277,20 @@ controlledBy,
       ...(entered ? { entered: true } : {}),
       ...(whileSource !== undefined ? { whileSource } : {}),
       ...(opts.untilPoint !== undefined ? { untilPoint: opts.untilPoint } : {}),
+      ...(whileIt !== undefined ? { whileIt } : {}),
     };
+    if (whileIt !== undefined && this.state.whileItControlIds?.includes(id) !== true) {
+      this.state.whileItControlIds = [...(this.state.whileItControlIds ?? []), id];
+    }
     // What ends no later than this one, for the same player, is dropped:
     // anything when this one lasts for good; another until end of turn when
     // this is one; another for as long as the same permanent remains; one
     // until end of turn, or until this same point, when this lasts until a
-    // later turn's point. One that might outlast it stays, to apply again
-    // once this ends.
+    // later turn's point; one for as long as it matches the same filter when
+    // this one does. One that might outlast it stays, to apply again once
+    // this ends.
     const endsNoLater = (e: ControlEffect): boolean => {
+      if (whileIt !== undefined) return e.whileIt !== undefined && JSON.stringify(e.whileIt) === JSON.stringify(whileIt);
       if (opts.untilPoint !== undefined) {
         return e.untilEndOfTurn || JSON.stringify(e.untilPoint) === JSON.stringify(opts.untilPoint);
       }
@@ -69835,6 +69851,40 @@ controlledBy,
     if (controlEnded) this.recomputeControl();
   }
 
+  /** End every control effect lasting "for as long as it [matches]"
+   * (`ControlEffect.whileIt`) whose permanent no longer matches, read from
+   * the side of the player it gives control to — looked for after every
+   * event while there are any, since any change may end one (rule 611.2b):
+   * Shield Broker's as the last shield counter comes off, Rootwater
+   * Matriarch's as the last Aura does. Ended for good, so matching again
+   * doesn't bring it back. One whose permanent phases out ends too, since it
+   * can no longer see it (rule 702.26f). */
+  private endWhileItControl(): void {
+    const ids = this.state.whileItControlIds;
+    if (ids === undefined || this.dryRunningEvents) return;
+    let ended = false;
+    const kept = ids.filter((id) => {
+      const object = this.state.objects[id];
+      const effects = object?.controlEffects;
+      if (effects === undefined || !effects.some((e) => e.whileIt !== undefined)) return false;
+      const here = object.zone === "battlefield";
+      const left = effects.filter(
+        (e) => e.whileIt === undefined || (here && matchesFilter(this.state, this.registry, id, e.whileIt, { you: e.controller })),
+      );
+      if (left.length === effects.length) return true;
+      ended = true;
+      if (left.length > 0) object.controlEffects = left;
+      else delete object.controlEffects;
+      object.controlEndsAtCleanup = left.some((e) => e.untilEndOfTurn);
+      return left.some((e) => e.whileIt !== undefined);
+    });
+    if (kept.length > 0) this.state.whileItControlIds = kept;
+    else delete this.state.whileItControlIds;
+    if (!ended) return;
+    invalidateComputedCache();
+    this.recomputeControl();
+  }
+
   /** Drop `id`'s modifiers that lasted "for as long as it has a [kind]
    * counter on it" and now have none (rule 611.2b): ended for good, so a new
    * counter doesn't bring them back. */
@@ -69923,6 +69973,11 @@ controlledBy,
     // off (Blade of Shared Souls).
     if (full.type === "permanent-unattached") {
       this.endWhileSourceCondition(full.object, (w) => w.attachedTo === full.from);
+    }
+    // "For as long as it has a shield counter on it" and the rest of
+    // `ControlEffect.whileIt` end the first moment it stops being so.
+    if (this.state.whileItControlIds !== undefined && full.type !== "priority-passed" && full.type !== "priority-received") {
+      this.endWhileItControl();
     }
     // A state trigger triggers as soon as its state is true (rule 603.8),
     // mid-resolution too: these are what change the states cards name.

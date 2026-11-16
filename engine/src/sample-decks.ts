@@ -1216,9 +1216,7 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Thriving Isle", 1],
       ["Time Wipe", 1],
     ],
-    substitutions: [
-      sub("Shield Broker", "Act of Treason", "Takes an opponent's creature."),
-    ],
+    substitutions: [],
   }),
   precon({
     name: "Reign of Dragons",

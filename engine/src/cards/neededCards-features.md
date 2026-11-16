@@ -398,6 +398,16 @@ action (704.5g), combat damage assignment and trample (`combat/damage.ts`'s `let
 (`CombatCreature.lethal`, v1's blocks, `damageLands`, divisions, sweeps). Lethal by power is at least 1: a
 0-power creature dies only with damage marked (the ruling). Zilortha, Strength Incarnate (rank 8983).
 `test/lethal-damage-by-power.test.ts`; design record `docs/plans/lethal-damage-by-power.md`.
+### Control for as long as it matches — built 2026-11-16
+
+The key `effect:control-while-condition`: `gain-control`'s `whileIt`, a `CardFilter` the permanent whose
+control changed must go on matching, read from the gaining player's side (`ControlEffect.whileIt`). Nothing
+if it doesn't match as the control would begin (rule 611.2b); after every event while one exists
+(`GameState.whileItControlIds`, `Game.endWhileItControl`) it's over for good the first moment it doesn't,
+or as the permanent phases out (702.26f), and control is worked out again. Shield Broker (rank 10768: "for
+as long as it has a shield counter on it"), Rootwater Matriarch ("for as long as that creature is
+enchanted"); the scaffolder reads both lines and "target noncommander creature you don't control".
+`test/control-while-condition.test.ts`.
 
 ### "When each opponent casts their first spell of the game" — built 2026-11-14
 
