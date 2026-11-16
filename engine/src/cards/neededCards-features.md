@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Whenever ~ or a creature it's paired with is dealt damage" — built 2026-11-16
+
+The key `trigger:paired-creature-dealt-damage`: the `CardFilter` clause `pairedWithSource` — the creature the
+filter's source is paired with by soulbond (rule 702.95b, `pairedPartner`), read as it's asked. Donna Noble
+(rank 11101): a `dealt-damage` trigger with `who: "any"` and `filter: { anyOf: [{ isSource: true },
+{ pairedWithSource: true }] }`, one trigger per permanent dealt damage, so both at once trigger it twice and
+lethal damage still does (the rulings). `test/paired-dealt-damage.test.ts`. The same clause says "the creature
+it's paired with" anywhere a filter is read from the paired permanent's side.
+
 ### "Whenever a spell or ability is put onto the stack" — built 2026-11-16
 
 The key `trigger:spell-or-ability-put-on-stack`: the `TRIGGER_EVENTS` row `put-on-stack`. A row may now

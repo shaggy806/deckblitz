@@ -670,6 +670,15 @@ export interface CardFilter {
    */
   readonly hostOfSource?: boolean;
   /**
+   * It's (or isn't) the creature the one applying the filter is **paired
+   * with** by soulbond (rule 702.95b) — Donna Noble's "whenever Donna Noble
+   * or a creature it's paired with is dealt damage" (`anyOf` with
+   * `isSource`). Read against `FilterContext.source` as both are now, on the
+   * battlefield (`pairedPartner`); without a source, or one unpaired, nothing
+   * matches.
+   */
+  readonly pairedWithSource?: boolean;
+  /**
    * It is (or isn't) the one applying the filter itself — `FilterContext.
    * source`. Mostly inside `attachedTo`: Goblin Gaveleer's "+2/+0 for each
    * Equipment **attached to it**" counts `{ subtype: "Equipment",
@@ -2656,6 +2665,11 @@ export function matchesFilter(
       by.zone === "battlefield" &&
       by.attachedTo === live.id;
     if (host !== filter.hostOfSource) return false;
+  }
+  if (filter.pairedWithSource !== undefined) {
+    const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const partner = by === undefined ? undefined : pairedPartner(state, by);
+    if ((live !== undefined && partner?.id === live.id) !== filter.pairedWithSource) return false;
   }
   if (filter.saddledSource !== undefined || filter.saddledBy !== undefined) {
     // Rule 702.171c: only a creature on the battlefield now can have saddled
