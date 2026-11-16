@@ -42,6 +42,7 @@ import _poolArcticFoxes from "../pool/arctic-foxes.js";
 import _poolArgothianElder from "../pool/argothian-elder.js";
 import _poolArnynDeathbloomBotanist from "../pool/arnyn-deathbloom-botanist.js";
 import _poolArtfulTakedown from "../pool/artful-takedown.js";
+import _poolArtificialEvolution from "../pool/artificial-evolution.js";
 import _poolAshBarrens from "../pool/ash-barrens.js";
 import _poolAshasFavor from "../pool/ashas-favor.js";
 import _poolAshnodFleshMechanist from "../pool/ashnod-flesh-mechanist.js";
@@ -1139,6 +1140,7 @@ const shard: CardShard = {
     _poolArgothianElder,
     _poolArnynDeathbloomBotanist,
     _poolArtfulTakedown,
+    _poolArtificialEvolution,
     _poolAshBarrens,
     _poolAshasFavor,
     _poolAshnodFleshMechanist,

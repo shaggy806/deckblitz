@@ -1406,6 +1406,7 @@ import _poolArtificersDragon from "./pool/artificers-dragon.js";
 import _poolArtificersEpiphany from "./pool/artificers-epiphany.js";
 import _poolArtificersIntuition from "./pool/artificers-intuition.js";
 import _poolArtificialAnomaly from "./pool/artificial-anomaly.js";
+import _poolArtificialEvolution from "./pool/artificial-evolution.js";
 import _poolArtifistAcumen from "./pool/artifist-acumen.js";
 import _poolArtillerize from "./pool/artillerize.js";
 import _poolArtilleryBlast from "./pool/artillery-blast.js";
@@ -18631,6 +18632,7 @@ import _poolNeverwinterHydra from "./pool/neverwinter-hydra.js";
 import _poolNevinyrralUrborgTyrant from "./pool/nevinyrral-urborg-tyrant.js";
 import _poolNevinyrralsDisk from "./pool/nevinyrrals-disk.js";
 import _poolNewBenalia from "./pool/new-benalia.js";
+import _poolNewBlood from "./pool/new-blood.js";
 import _poolNewFrontiers from "./pool/new-frontiers.js";
 import _poolNewGenerationsTechnique from "./pool/new-generations-technique.js";
 import _poolNewHorizons from "./pool/new-horizons.js";
@@ -34625,6 +34627,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArtificersEpiphany,
   _poolArtificersIntuition,
   _poolArtificialAnomaly,
+  _poolArtificialEvolution,
   _poolArtifistAcumen,
   _poolArtillerize,
   _poolArtilleryBlast,
@@ -51850,6 +51853,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNevinyrralUrborgTyrant,
   _poolNevinyrralsDisk,
   _poolNewBenalia,
+  _poolNewBlood,
   _poolNewFrontiers,
   _poolNewGenerationsTechnique,
   _poolNewHorizons,
@@ -67857,6 +67861,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/artificers-epiphany": _poolArtificersEpiphany,
   "pool/artificers-intuition": _poolArtificersIntuition,
   "pool/artificial-anomaly": _poolArtificialAnomaly,
+  "pool/artificial-evolution": _poolArtificialEvolution,
   "pool/artifist-acumen": _poolArtifistAcumen,
   "pool/artillerize": _poolArtillerize,
   "pool/artillery-blast": _poolArtilleryBlast,
@@ -85082,6 +85087,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nevinyrral-urborg-tyrant": _poolNevinyrralUrborgTyrant,
   "pool/nevinyrrals-disk": _poolNevinyrralsDisk,
   "pool/new-benalia": _poolNewBenalia,
+  "pool/new-blood": _poolNewBlood,
   "pool/new-frontiers": _poolNewFrontiers,
   "pool/new-generations-technique": _poolNewGenerationsTechnique,
   "pool/new-horizons": _poolNewHorizons,

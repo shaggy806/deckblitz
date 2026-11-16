@@ -547,6 +547,7 @@ import _poolNephaliaDrownyard from "../pool/nephalia-drownyard.js";
 import _poolNessianGameWarden from "../pool/nessian-game-warden.js";
 import _poolNeurokReplica from "../pool/neurok-replica.js";
 import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
+import _poolNewBlood from "../pool/new-blood.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
 import _poolNikaraLairScavenger from "../pool/nikara-lair-scavenger.js";
 import _poolNimDevourer from "../pool/nim-devourer.js";
@@ -1578,6 +1579,7 @@ const shard: CardShard = {
     _poolNessianGameWarden,
     _poolNeurokReplica,
     _poolNeutralizeTheGuards,
+    _poolNewBlood,
     _poolNezumiInformant,
     _poolNikaraLairScavenger,
     _poolNimDevourer,
