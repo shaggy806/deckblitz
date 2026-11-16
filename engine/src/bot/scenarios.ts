@@ -5544,6 +5544,40 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "casts its board wipe when the board in front of it kills it next turn",
+    rule: "A play that takes the bot off a lethal board comes before anything that leaves it dead.",
+    position(registry) {
+      // Holds what is right on a small board, for whoever takes up the two
+      // screened losses it was built from (`bot:losses`, 2026-11-16, BACKLOG):
+      // Chaos Incarnate on 22 with one blocker in front of 27 power held
+      // Deadly Tempest and paid eight mana for two Theater of Horrors pings;
+      // Family Matters held Calamity of Cinders and cast two creatures. Both
+      // died to the next swing. Here: Bob's four Wurms put 18 through Alice's
+      // one blocker, and she is on 16 with the Tempest in hand and the mana
+      // for it or for two pings. She holds it through combat and casts it:
+      // the real boards, at four players, differ in something this doesn't.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 16;
+      lands(game, "Swamp", A, 4);
+      lands(game, "Mountain", A, 4);
+      onBoard(game, "Theater of Horrors", A);
+      onBoard(game, "Grizzly Bears", A);
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Craw Wurm", B);
+      const tempest = game.debugSpawn("Deadly Tempest", A, "hand");
+      // After combat: before it, a wipe is held on purpose (`heldForCombat`).
+      game.advanceUntil((s) => (s.turn.step === "postcombat-main" && s.priority.holder === A) || s.result.over);
+      if (game.state.turn.step !== "postcombat-main") return { passed: false, detail: `never reached the second main phase (${game.state.turn.step})` };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === tempest,
+          detail: `chose ${describeAction(action).slice(0, 160)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "takes unleash's counter with nothing to block",
     rule: "Unleash's counter costs the block: a creature that is the only thing between its controller and a lethal attack enters without it.",
     position(registry) {
