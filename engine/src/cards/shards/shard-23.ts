@@ -720,6 +720,7 @@ import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRoilingVortex from "../pool/roiling-vortex.js";
 import _poolRoninShadowStalker from "../pool/ronin-shadow-stalker.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
+import _poolRootwaterMatriarch from "../pool/rootwater-matriarch.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
 import _poolRotCurseRakshasa from "../pool/rot-curse-rakshasa.js";
 import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
@@ -1770,6 +1771,7 @@ const shard: CardShard = {
     _poolRoilingVortex,
     _poolRoninShadowStalker,
     _poolRooftopAssassin,
+    _poolRootwaterMatriarch,
     _poolRoryWilliams,
     _poolRotCurseRakshasa,
     _poolRotFarmMortipede,

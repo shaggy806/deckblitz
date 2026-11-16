@@ -410,6 +410,7 @@ import _poolHissingMiasma from "../pool/hissing-miasma.js";
 import _poolHivestone from "../pool/hivestone.js";
 import _poolHopeCharm from "../pool/hope-charm.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
+import _poolHostileHostel from "../pool/hostile-hostel.js";
 import _poolHowlingGale from "../pool/howling-gale.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
@@ -1456,6 +1457,7 @@ const shard: CardShard = {
     _poolHivestone,
     _poolHopeCharm,
     _poolHornetHarasser,
+    _poolHostileHostel,
     _poolHowlingGale,
     _poolHowlsquadHeavy,
     _poolHuatlisFinalStrike,

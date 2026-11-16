@@ -186,6 +186,7 @@ import _poolCourtOfCunning from "../pool/court-of-cunning.js";
 import _poolCovertOperative from "../pool/covert-operative.js";
 import _poolCracklingTriton from "../pool/crackling-triton.js";
 import _poolCreatureBond from "../pool/creature-bond.js";
+import _poolCreepingInn from "../pool/creeping-inn.js";
 import _poolCrowOfDarkTidings from "../pool/crow-of-dark-tidings.js";
 import _poolCrudeRampart from "../pool/crude-rampart.js";
 import _poolCrystalCarapace from "../pool/crystal-carapace.js";
@@ -1252,6 +1253,7 @@ const shard: CardShard = {
     _poolCovertOperative,
     _poolCracklingTriton,
     _poolCreatureBond,
+    _poolCreepingInn,
     _poolCrowOfDarkTidings,
     _poolCrudeRampart,
     _poolCrystalCarapace,

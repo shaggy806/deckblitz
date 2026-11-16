@@ -617,6 +617,7 @@ import _poolOneClownBand from "../pool/one-clown-band.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOskarRubbishReclaimer from "../pool/oskar-rubbish-reclaimer.js";
 import _poolOutlawsMerriment from "../pool/outlaws-merriment.js";
 import _poolOvertaker from "../pool/overtaker.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOskarRubbishReclaimer,
     _poolOutlawsMerriment,
     _poolOvertaker,
     _poolOzaisCruelty,

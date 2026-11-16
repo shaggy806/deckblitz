@@ -410,6 +410,7 @@ import _poolImmobilizerEldrazi from "../pool/immobilizer-eldrazi.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
+import _poolImpulsiveManeuvers from "../pool/impulsive-maneuvers.js";
 import _poolInTheTrenches from "../pool/in-the-trenches.js";
 import _poolInameAsOne from "../pool/iname-as-one.js";
 import _poolInevitableEnd from "../pool/inevitable-end.js";
@@ -1443,6 +1444,7 @@ const shard: CardShard = {
     _poolImotekhTheStormlord,
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,
+    _poolImpulsiveManeuvers,
     _poolInTheTrenches,
     _poolInameAsOne,
     _poolInevitableEnd,

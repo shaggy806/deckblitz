@@ -526,6 +526,7 @@ import _poolMasterOfTheVeil from "../pool/master-of-the-veil.js";
 import _poolMasterSplicer from "../pool/master-splicer.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
+import _poolMavindaStudentsAdvocate from "../pool/mavinda-students-advocate.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
 import _poolMazesEnd from "../pool/mazes-end.js";
 import _poolMeddlingYouths from "../pool/meddling-youths.js";
@@ -757,6 +758,7 @@ import _poolShapeshifter from "../pool/shapeshifter.js";
 import _poolShardOfBrokenGlass from "../pool/shard-of-broken-glass.js";
 import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShatterskullTheHammerPass from "../pool/shatterskull-the-hammer-pass.js";
+import _poolShieldBroker from "../pool/shield-broker.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
 import _poolShrineOfBurningRage from "../pool/shrine-of-burning-rage.js";
@@ -1547,6 +1549,7 @@ const shard: CardShard = {
     _poolMasterSplicer,
     _poolMatterbendingMage,
     _poolMausoleumWanderer,
+    _poolMavindaStudentsAdvocate,
     _poolMawOfTheMire,
     _poolMazesEnd,
     _poolMeddlingYouths,
@@ -1778,6 +1781,7 @@ const shard: CardShard = {
     _poolShardOfBrokenGlass,
     _poolShatteredYard,
     _poolShatterskullTheHammerPass,
+    _poolShieldBroker,
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
     _poolShrineOfBurningRage,
