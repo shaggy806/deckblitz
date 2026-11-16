@@ -1042,6 +1042,7 @@ import _tokensPilotTokenCrewsVehicles from "../tokens/pilot-token-crews-vehicles
 import _tokensRedHumanTokenHaste from "../tokens/red-human-token-haste.js";
 import _tokensSalamanderWarriorToken from "../tokens/salamander-warrior-token.js";
 import _tokensUnicornToken from "../tokens/unicorn-token.js";
+import _tokensVojaFenstalker from "../tokens/voja-fenstalker.js";
 
 const shard: CardShard = {
   pool: [
@@ -2086,6 +2087,7 @@ const shard: CardShard = {
     _tokensRedHumanTokenHaste,
     _tokensSalamanderWarriorToken,
     _tokensUnicornToken,
+    _tokensVojaFenstalker,
   ],
 };
 

@@ -13673,6 +13673,7 @@ import _poolIndoctrinationAttendant from "./pool/indoctrination-attendant.js";
 import _poolIndominusRexAlpha from "./pool/indominus-rex-alpha.js";
 import _poolIndomitableAncients from "./pool/indomitable-ancients.js";
 import _poolIndomitableArchangel from "./pool/indomitable-archangel.js";
+import _poolIndomitableCreativity from "./pool/indomitable-creativity.js";
 import _poolIndomitableMight from "./pool/indomitable-might.js";
 import _poolIndomitableWill from "./pool/indomitable-will.js";
 import _poolIndoraptorThePerfectHybrid from "./pool/indoraptor-the-perfect-hybrid.js";
@@ -26789,6 +26790,7 @@ import _poolStrengthOfUnity from "./pool/strength-of-unity.js";
 import _poolStrengthOfWill from "./pool/strength-of-will.js";
 import _poolStrengthTestingHammer from "./pool/strength-testing-hammer.js";
 import _poolStressDream from "./pool/stress-dream.js";
+import _poolStrictProctor from "./pool/strict-proctor.js";
 import _poolStridehangarAutomaton from "./pool/stridehangar-automaton.js";
 import _poolStriderHarness from "./pool/strider-harness.js";
 import _poolStriderRangerOfTheNorth from "./pool/strider-ranger-of-the-north.js";
@@ -28948,6 +28950,7 @@ import _poolTolarianWinds from "./pool/tolarian-winds.js";
 import _poolTollOfTheInvasion from "./pool/toll-of-the-invasion.js";
 import _poolTollsOfWar from "./pool/tolls-of-war.js";
 import _poolTolsimirFriendToWolves from "./pool/tolsimir-friend-to-wolves.js";
+import _poolTolsimirMidnightsLight from "./pool/tolsimir-midnights-light.js";
 import _poolTolsimirWolfblood from "./pool/tolsimir-wolfblood.js";
 import _poolTomBertAndWilliam from "./pool/tom-bert-and-william.js";
 import _poolTomBombadil from "./pool/tom-bombadil.js";
@@ -33164,6 +33167,7 @@ import _tokensVehicleToken from "./tokens/vehicle-token.js";
 import _tokensVibraniumToken from "./tokens/vibranium-token.js";
 import _tokensVillainToken from "./tokens/villain-token.js";
 import _tokensVirtuousRoleToken from "./tokens/virtuous-role-token.js";
+import _tokensVojaFenstalker from "./tokens/voja-fenstalker.js";
 import _tokensVojaFriendToElves from "./tokens/voja-friend-to-elves.js";
 import _tokensVoja from "./tokens/voja.js";
 import _tokensVolosJournalToken from "./tokens/volos-journal-token.js";
@@ -46917,6 +46921,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIndominusRexAlpha,
   _poolIndomitableAncients,
   _poolIndomitableArchangel,
+  _poolIndomitableCreativity,
   _poolIndomitableMight,
   _poolIndomitableWill,
   _poolIndoraptorThePerfectHybrid,
@@ -60033,6 +60038,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStrengthOfWill,
   _poolStrengthTestingHammer,
   _poolStressDream,
+  _poolStrictProctor,
   _poolStridehangarAutomaton,
   _poolStriderHarness,
   _poolStriderRangerOfTheNorth,
@@ -62192,6 +62198,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTollOfTheInvasion,
   _poolTollsOfWar,
   _poolTolsimirFriendToWolves,
+  _poolTolsimirMidnightsLight,
   _poolTolsimirWolfblood,
   _poolTomBertAndWilliam,
   _poolTomBombadil,
@@ -66414,6 +66421,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensVibraniumToken,
   _tokensVillainToken,
   _tokensVirtuousRoleToken,
+  _tokensVojaFenstalker,
   _tokensVojaFriendToElves,
   _tokensVoja,
   _tokensVolosJournalToken,
@@ -80174,6 +80182,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/indominus-rex-alpha": _poolIndominusRexAlpha,
   "pool/indomitable-ancients": _poolIndomitableAncients,
   "pool/indomitable-archangel": _poolIndomitableArchangel,
+  "pool/indomitable-creativity": _poolIndomitableCreativity,
   "pool/indomitable-might": _poolIndomitableMight,
   "pool/indomitable-will": _poolIndomitableWill,
   "pool/indoraptor-the-perfect-hybrid": _poolIndoraptorThePerfectHybrid,
@@ -93290,6 +93299,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/strength-of-will": _poolStrengthOfWill,
   "pool/strength-testing-hammer": _poolStrengthTestingHammer,
   "pool/stress-dream": _poolStressDream,
+  "pool/strict-proctor": _poolStrictProctor,
   "pool/stridehangar-automaton": _poolStridehangarAutomaton,
   "pool/strider-harness": _poolStriderHarness,
   "pool/strider-ranger-of-the-north": _poolStriderRangerOfTheNorth,
@@ -95449,6 +95459,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/toll-of-the-invasion": _poolTollOfTheInvasion,
   "pool/tolls-of-war": _poolTollsOfWar,
   "pool/tolsimir-friend-to-wolves": _poolTolsimirFriendToWolves,
+  "pool/tolsimir-midnights-light": _poolTolsimirMidnightsLight,
   "pool/tolsimir-wolfblood": _poolTolsimirWolfblood,
   "pool/tom-bert-and-william": _poolTomBertAndWilliam,
   "pool/tom-bombadil": _poolTomBombadil,
@@ -99665,6 +99676,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/vibranium-token": _tokensVibraniumToken,
   "tokens/villain-token": _tokensVillainToken,
   "tokens/virtuous-role-token": _tokensVirtuousRoleToken,
+  "tokens/voja-fenstalker": _tokensVojaFenstalker,
   "tokens/voja-friend-to-elves": _tokensVojaFriendToElves,
   "tokens/voja": _tokensVoja,
   "tokens/volos-journal-token": _tokensVolosJournalToken,

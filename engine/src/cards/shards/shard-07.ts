@@ -422,6 +422,7 @@ import _poolInameLifeAspect from "../pool/iname-life-aspect.js";
 import _poolIncisorGlider from "../pool/incisor-glider.js";
 import _poolInciteRebellion from "../pool/incite-rebellion.js";
 import _poolIndestructibleAura from "../pool/indestructible-aura.js";
+import _poolIndomitableCreativity from "../pool/indomitable-creativity.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
 import _poolInfectedDefector from "../pool/infected-defector.js";
 import _poolInfestationSage from "../pool/infestation-sage.js";
@@ -1481,6 +1482,7 @@ const shard: CardShard = {
     _poolIncisorGlider,
     _poolInciteRebellion,
     _poolIndestructibleAura,
+    _poolIndomitableCreativity,
     _poolInfantryVeteran,
     _poolInfectedDefector,
     _poolInfestationSage,

@@ -846,6 +846,7 @@ import _poolStonespeakerCrystal from "../pool/stonespeaker-crystal.js";
 import _poolStonySilence from "../pool/stony-silence.js";
 import _poolStormFront from "../pool/storm-front.js";
 import _poolStorytellerPixie from "../pool/storyteller-pixie.js";
+import _poolStrictProctor from "../pool/strict-proctor.js";
 import _poolStudyHall from "../pool/study-hall.js";
 import _poolSubcommanderTpol from "../pool/subcommander-tpol.js";
 import _poolSubdue from "../pool/subdue.js";
@@ -1877,6 +1878,7 @@ const shard: CardShard = {
     _poolStonySilence,
     _poolStormFront,
     _poolStorytellerPixie,
+    _poolStrictProctor,
     _poolStudyHall,
     _poolSubcommanderTpol,
     _poolSubdue,

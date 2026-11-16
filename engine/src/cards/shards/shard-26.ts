@@ -929,6 +929,7 @@ import _poolTirelessTracker from "../pool/tireless-tracker.js";
 import _poolTitanForge from "../pool/titan-forge.js";
 import _poolTitheTaker from "../pool/tithe-taker.js";
 import _poolToArms from "../pool/to-arms.js";
+import _poolTolsimirMidnightsLight from "../pool/tolsimir-midnights-light.js";
 import _poolTorrentOfFire from "../pool/torrent-of-fire.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
 import _poolTourachsGate from "../pool/tourachs-gate.js";
@@ -1989,6 +1990,7 @@ const shard: CardShard = {
     _poolTitanForge,
     _poolTitheTaker,
     _poolToArms,
+    _poolTolsimirMidnightsLight,
     _poolTorrentOfFire,
     _poolTorrentialGearhulk,
     _poolTourachsGate,
