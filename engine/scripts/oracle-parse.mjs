@@ -9650,6 +9650,12 @@ export function parseEffect(text, outer) {
         effect: readsIt
           ? { ...put, count: "unique-vowels", then: after.effect }
           : { kind: "sequence", effects: [put, after.effect] },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
+
   // "Choose a player. That player adds {G}{G}{G}." (Valleymaker), "A player of
   // your choice adds {C}." (Victory Chimes), "… adds one mana of any color they
   // choose." (Spectral Searchlight): in a mana ability (no target, rule 605.1a)
