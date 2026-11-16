@@ -2714,7 +2714,8 @@
   "static:lethal-damage-by-power",
   "condition:single-source-dealt-n-damage-this-turn",
   "condition:single-source-dealt-n-damage-this-turn",
-  "decision:ward-collect-evidence"
+  "decision:ward-collect-evidence",
+  "effect:cant-be-attacked-except-by-filter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

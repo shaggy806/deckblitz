@@ -7570,7 +7570,15 @@ The `prevent-damage` family makes the same record.
   `sequence`): each draw, as it would happen, asks the drawing player "Draw a
   card" or the option `text` names after the card's name (rule 616.1); beside
   a mandatory one of theirs (Underrealm Lich) the draw is replaced either way,
-  so the choice is between the two. `draw-replacement-may.test.ts`.
+  so the choice is between the two. `draw-replacement-may.test.ts`. "If you
+  would draw a card **during your draw step**" is the static's `condition`
+  (`{ kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure",
+  steps: ["draw"] }] }`), and what a skip brings is its effect: Island
+  Sanctuary's "until your next turn, you can't be attacked except by
+  creatures with flying and/or islandwalk" is a `restrict` over `{ type:
+  "creature", not: { anyOf: [{ keyword: "flying" }, { keyword: "islandwalk"
+  }] } }` with `[{ kind: "cant-attack", at: "you" }]` and `duration:
+  "until-your-next-turn"` (`island-sanctuary.test.ts`).
   `{ event: "would-draw", who: "you", instead: "win-game", whileLibraryEmpty:
   true }` is Laboratory Maniac's "if you would draw a card while your library
   has no cards in it, you win the game instead" (rule 614.11: it applies
