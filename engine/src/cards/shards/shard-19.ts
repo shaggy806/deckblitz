@@ -657,6 +657,7 @@ import _poolNephaliaSeakite from "../pool/nephalia-seakite.js";
 import _poolNetworkTerminal from "../pool/network-terminal.js";
 import _poolNewBenalia from "../pool/new-benalia.js";
 import _poolNezumiRonin from "../pool/nezumi-ronin.js";
+import _poolNicolBolasDragonGod from "../pool/nicol-bolas-dragon-god.js";
 import _poolNighthawkDarkDefender from "../pool/nighthawk-dark-defender.js";
 import _poolNightveilSpecter from "../pool/nightveil-specter.js";
 import _poolNightwingShade from "../pool/nightwing-shade.js";
@@ -1744,6 +1745,7 @@ const shard: CardShard = {
     _poolNetworkTerminal,
     _poolNewBenalia,
     _poolNezumiRonin,
+    _poolNicolBolasDragonGod,
     _poolNighthawkDarkDefender,
     _poolNightveilSpecter,
     _poolNightwingShade,

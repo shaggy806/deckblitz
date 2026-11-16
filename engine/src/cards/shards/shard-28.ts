@@ -214,6 +214,7 @@ import _poolDefossilize from "../pool/defossilize.js";
 import _poolDemonfire from "../pool/demonfire.js";
 import _poolDemonsHerald from "../pool/demons-herald.js";
 import _poolDenryKlinEditorInChief from "../pool/denry-klin-editor-in-chief.js";
+import _poolDescentIntoMadness from "../pool/descent-into-madness.js";
 import _poolDesert from "../pool/desert.js";
 import _poolDiamondKnight from "../pool/diamond-knight.js";
 import _poolDinoDna from "../pool/dino-dna.js";
@@ -1268,6 +1269,7 @@ const shard: CardShard = {
     _poolDemonfire,
     _poolDemonsHerald,
     _poolDenryKlinEditorInChief,
+    _poolDescentIntoMadness,
     _poolDesert,
     _poolDiamondKnight,
     _poolDinoDna,

@@ -474,6 +474,7 @@ import _poolLesserGargadon from "../pool/lesser-gargadon.js";
 import _poolLethalProtection from "../pool/lethal-protection.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
+import _poolLichsMastery from "../pool/lichs-mastery.js";
 import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
 import _poolLighthouseChronologist from "../pool/lighthouse-chronologist.js";
 import _poolLightningJavelin from "../pool/lightning-javelin.js";
@@ -1533,6 +1534,7 @@ const shard: CardShard = {
     _poolLethalProtection,
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
+    _poolLichsMastery,
     _poolLifecraftAwakening,
     _poolLighthouseChronologist,
     _poolLightningJavelin,

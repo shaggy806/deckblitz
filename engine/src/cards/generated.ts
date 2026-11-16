@@ -6747,6 +6747,7 @@ import _poolDescendantOfStorms from "./pool/descendant-of-storms.js";
 import _poolDescendantsFury from "./pool/descendants-fury.js";
 import _poolDescendantsPath from "./pool/descendants-path.js";
 import _poolDescentIntoAvernus from "./pool/descent-into-avernus.js";
+import _poolDescentIntoMadness from "./pool/descent-into-madness.js";
 import _poolDescentOfTheDragons from "./pool/descent-of-the-dragons.js";
 import _poolDesculptingBlast from "./pool/desculpting-blast.js";
 import _poolDesdemonaFreedomsEdge from "./pool/desdemona-freedoms-edge.js";
@@ -15811,6 +15812,7 @@ import _poolLichKnightsConquest from "./pool/lich-knights-conquest.js";
 import _poolLichLordOfUnx from "./pool/lich-lord-of-unx.js";
 import _poolLichenthrope from "./pool/lichenthrope.js";
 import _poolLichsCaress from "./pool/lichs-caress.js";
+import _poolLichsMastery from "./pool/lichs-mastery.js";
 import _poolLichsMirror from "./pool/lichs-mirror.js";
 import _poolLichsRelic from "./pool/lichs-relic.js";
 import _poolLichsTomb from "./pool/lichs-tomb.js";
@@ -18668,6 +18670,7 @@ import _poolNickFuryAgentOfSHIELD from "./pool/nick-fury-agent-of-s-h-i-e-l-d.js
 import _poolNickFurySpymaster from "./pool/nick-fury-spymaster.js";
 import _poolNickValentinePrivateEye from "./pool/nick-valentine-private-eye.js";
 import _poolNicoMinoruRunaway from "./pool/nico-minoru-runaway.js";
+import _poolNicolBolasDragonGod from "./pool/nicol-bolas-dragon-god.js";
 import _poolNicolBolasGodPharaoh from "./pool/nicol-bolas-god-pharaoh.js";
 import _poolNicolBolasPlaneswalker from "./pool/nicol-bolas-planeswalker.js";
 import _poolNicolBolasTheArisen from "./pool/nicol-bolas-the-arisen.js";
@@ -39960,6 +39963,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDescendantsFury,
   _poolDescendantsPath,
   _poolDescentIntoAvernus,
+  _poolDescentIntoMadness,
   _poolDescentOfTheDragons,
   _poolDesculptingBlast,
   _poolDesdemonaFreedomsEdge,
@@ -49024,6 +49028,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLichLordOfUnx,
   _poolLichenthrope,
   _poolLichsCaress,
+  _poolLichsMastery,
   _poolLichsMirror,
   _poolLichsRelic,
   _poolLichsTomb,
@@ -51881,6 +51886,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNickFurySpymaster,
   _poolNickValentinePrivateEye,
   _poolNicoMinoruRunaway,
+  _poolNicolBolasDragonGod,
   _poolNicolBolasGodPharaoh,
   _poolNicolBolasPlaneswalker,
   _poolNicolBolasTheArisen,
@@ -73186,6 +73192,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/descendants-fury": _poolDescendantsFury,
   "pool/descendants-path": _poolDescendantsPath,
   "pool/descent-into-avernus": _poolDescentIntoAvernus,
+  "pool/descent-into-madness": _poolDescentIntoMadness,
   "pool/descent-of-the-dragons": _poolDescentOfTheDragons,
   "pool/desculpting-blast": _poolDesculptingBlast,
   "pool/desdemona-freedoms-edge": _poolDesdemonaFreedomsEdge,
@@ -82250,6 +82257,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lich-lord-of-unx": _poolLichLordOfUnx,
   "pool/lichenthrope": _poolLichenthrope,
   "pool/lichs-caress": _poolLichsCaress,
+  "pool/lichs-mastery": _poolLichsMastery,
   "pool/lichs-mirror": _poolLichsMirror,
   "pool/lichs-relic": _poolLichsRelic,
   "pool/lichs-tomb": _poolLichsTomb,
@@ -85107,6 +85115,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nick-fury-spymaster": _poolNickFurySpymaster,
   "pool/nick-valentine-private-eye": _poolNickValentinePrivateEye,
   "pool/nico-minoru-runaway": _poolNicoMinoruRunaway,
+  "pool/nicol-bolas-dragon-god": _poolNicolBolasDragonGod,
   "pool/nicol-bolas-god-pharaoh": _poolNicolBolasGodPharaoh,
   "pool/nicol-bolas-planeswalker": _poolNicolBolasPlaneswalker,
   "pool/nicol-bolas-the-arisen": _poolNicolBolasTheArisen,
