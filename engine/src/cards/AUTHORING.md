@@ -966,7 +966,11 @@ attached to this creature **other than Animal Friend**", `in: { attachmentsOf:
 effect amount's `forTarget: slot` reads it from a target player's side
 (Ferrafor's "creatures target player controls"). A static's
 `grantPtPerCount: { aggregate, pt }` is "+X/+0, where X is …" (Carrion Grub;
-Emissary Escort with the aggregate's `excludeSelf`)),
+Emissary Escort with the aggregate's `excludeSelf`), and a CDA's
+`setBasePtFromCount.countOf` takes one with `excludeSelf` too — Pestilence
+Rats' "the number of **other** Rats on the battlefield" is `{ aggregate:
+"count", filter: { subtype: "Rat" }, excludeSelf: true }`, a stack's other
+tokens still counted),
 `{ countersOn: ref, counter? }` (how many counters of one kind are on it —
 every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died

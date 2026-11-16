@@ -4842,7 +4842,13 @@ export function countValue(
     if ("amongPlayers" in spec) return staticPlayerAggregate(state, registry, controller, spec);
     if ("sum" in spec) return spec.sum.reduce((n, part) => n + countValue(part, state, registry, controller, source), 0);
     if ("aggregate" in spec) {
-      return Math.max(0, aggregateOver(state, registry, aggregateMatches(state, registry, spec, controller, { source }), spec));
+      // "The number of **other** Rats" (Pestilence Rats): the permanent whose
+      // CDA this is left out — a token stack's other tokens still count.
+      const except = spec.excludeSelf === true && source !== undefined ? [source] : [];
+      return Math.max(
+        0,
+        aggregateOver(state, registry, aggregateMatches(state, registry, spec, controller, { source, except }), spec),
+      );
     }
     if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
     if ("basicLandTypes" in spec) return basicLandTypesAmong(state, registry, controller);

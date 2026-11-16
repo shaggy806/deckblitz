@@ -3580,7 +3580,8 @@ export interface AggregateSource {
  *
  * `filter` is evaluated from the ability's controller's perspective, as
  * `countOf` is. `excludeSelf` is "**other** creatures you control" (the
- * battlefield only). `in` is where the set comes from — see
+ * battlefield only) — in a CDA's count too, "the number of other Rats on
+ * the battlefield" (Pestilence Rats). `in` is where the set comes from — see
  * {@link AggregateZone}; a list is their union, each object once. Aven
  * Heartstabber's "five or more mana values among cards in your graveyard"
  * is a `distinct` `"mana-value"` `in: "graveyards"`.

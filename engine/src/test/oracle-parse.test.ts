@@ -707,6 +707,19 @@ describe("when a spell may be cast or an ability activated", () => {
     });
   });
 
+  it("reads a power equal to the number of other Rats on the battlefield (Pestilence Rats)", () => {
+    const rats = face(
+      "Creature — Rat",
+      "This creature's power is equal to the number of other Rats on the battlefield. (For example, as long as there are two other Rats on the battlefield, this creature's power and toughness are 2/3.)",
+    );
+    expect(rats.static?.[0]?.setBasePtFromCount).toEqual({
+      countOf: { aggregate: "count", filter: { subtype: "Rat" }, excludeSelf: true },
+      plusPower: 0,
+      plusToughness: 0,
+      only: "power",
+    });
+  });
+
   it("reads only your opponents activating", () => {
     const ability = face("Enchantment", "{3}: Destroy this enchantment. Only your opponents may activate this ability and only as a sorcery.").activated?.[0];
     expect(ability?.anyPlayer).toBe(true);

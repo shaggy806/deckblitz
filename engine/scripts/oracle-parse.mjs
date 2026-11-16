@@ -23397,6 +23397,20 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "~'s power is equal to the number of other Rats on the battlefield"
+  // (Pestilence Rats): anyone's, never itself (`excludeSelf`).
+  if ((m = /^~'s power is equal to the number of other ([A-Z]\w+?)s on the battlefield\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: {
+        countOf: { aggregate: "count", filter: { subtype: m[1] }, excludeSelf: true },
+        plusPower: 0,
+        plusToughness: 0,
+        only: "power",
+      },
+      text,
+    };
+  }
   // A count of different names (a `distinct` aggregate) as a CDA: Awakened
   // Amalgam's "… the number of differently named lands you control".
   if ((m = /^~'s power and toughness are each equal to the number of differently named (.+?) you control\.$/.exec(line))) {
