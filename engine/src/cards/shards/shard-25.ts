@@ -147,6 +147,7 @@ import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
 import _poolChancellorOfTheTangle from "../pool/chancellor-of-the-tangle.js";
 import _poolChandraHeartOfFire from "../pool/chandra-heart-of-fire.js";
+import _poolChandraRoaringFlame from "../pool/chandra-roaring-flame.js";
 import _poolChaoticGoo from "../pool/chaotic-goo.js";
 import _poolChargingTroll from "../pool/charging-troll.js";
 import _poolCharredFoyer from "../pool/charred-foyer.js";
@@ -1155,6 +1156,7 @@ const shard: CardShard = {
     _poolChampionOfArashin,
     _poolChancellorOfTheTangle,
     _poolChandraHeartOfFire,
+    _poolChandraRoaringFlame,
     _poolChaoticGoo,
     _poolChargingTroll,
     _poolCharredFoyer,

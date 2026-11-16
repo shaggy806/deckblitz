@@ -1822,6 +1822,7 @@ import _poolAwesomePresence from "./pool/awesome-presence.js";
 import _poolAwokenDemon from "./pool/awoken-demon.js";
 import _poolAwokenHorror from "./pool/awoken-horror.js";
 import _poolAxebaneBeast from "./pool/axebane-beast.js";
+import _poolAxebaneFerox from "./pool/axebane-ferox.js";
 import _poolAxebaneGuardian from "./pool/axebane-guardian.js";
 import _poolAxebaneStag from "./pool/axebane-stag.js";
 import _poolAxegrinderGiant from "./pool/axegrinder-giant.js";
@@ -4407,6 +4408,7 @@ import _poolChandraBoldPyromancer from "./pool/chandra-bold-pyromancer.js";
 import _poolChandraChillOfCompliance from "./pool/chandra-chill-of-compliance.js";
 import _poolChandraDressedToKill from "./pool/chandra-dressed-to-kill.js";
 import _poolChandraFireArtisan from "./pool/chandra-fire-artisan.js";
+import _poolChandraFireOfKaladesh from "./pool/chandra-fire-of-kaladesh.js";
 import _poolChandraFlamecaller from "./pool/chandra-flamecaller.js";
 import _poolChandraFlamesCatalyst from "./pool/chandra-flames-catalyst.js";
 import _poolChandraFlamesFury from "./pool/chandra-flames-fury.js";
@@ -4417,6 +4419,7 @@ import _poolChandraLegacyOfFire from "./pool/chandra-legacy-of-fire.js";
 import _poolChandraNalaar from "./pool/chandra-nalaar.js";
 import _poolChandraNovicePyromancer from "./pool/chandra-novice-pyromancer.js";
 import _poolChandraPyrogenius from "./pool/chandra-pyrogenius.js";
+import _poolChandraRoaringFlame from "./pool/chandra-roaring-flame.js";
 import _poolChandraSparkHunter from "./pool/chandra-spark-hunter.js";
 import _poolChandraTheFirebrand from "./pool/chandra-the-firebrand.js";
 import _poolChandraTorchOfDefiance from "./pool/chandra-torch-of-defiance.js";
@@ -7373,6 +7376,7 @@ import _poolDragonBellMonk from "./pool/dragon-bell-monk.js";
 import _poolDragonBlood from "./pool/dragon-blood.js";
 import _poolDragonBreath from "./pool/dragon-breath.js";
 import _poolDragonBroodmother from "./pool/dragon-broodmother.js";
+import _poolDragonCultist from "./pool/dragon-cultist.js";
 import _poolDragonCursedHalls from "./pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "./pool/dragon-egg.js";
 import _poolDragonEngine from "./pool/dragon-engine.js";
@@ -14130,6 +14134,7 @@ import _poolIsildursFatefulStrike from "./pool/isildurs-fateful-strike.js";
 import _poolIsiluCarrierOfTwilight from "./pool/isilu-carrier-of-twilight.js";
 import _poolIslandFishJasconius from "./pool/island-fish-jasconius.js";
 import _poolIslandOfWakWak from "./pool/island-of-wak-wak.js";
+import _poolIslandSanctuary from "./pool/island-sanctuary.js";
 import _poolIsland from "./pool/island.js";
 import _poolIslebackSpawn from "./pool/isleback-spawn.js";
 import _poolIsochronScepter from "./pool/isochron-scepter.js";
@@ -35048,6 +35053,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAwokenDemon,
   _poolAwokenHorror,
   _poolAxebaneBeast,
+  _poolAxebaneFerox,
   _poolAxebaneGuardian,
   _poolAxebaneStag,
   _poolAxegrinderGiant,
@@ -37633,6 +37639,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChandraChillOfCompliance,
   _poolChandraDressedToKill,
   _poolChandraFireArtisan,
+  _poolChandraFireOfKaladesh,
   _poolChandraFlamecaller,
   _poolChandraFlamesCatalyst,
   _poolChandraFlamesFury,
@@ -37643,6 +37650,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChandraNalaar,
   _poolChandraNovicePyromancer,
   _poolChandraPyrogenius,
+  _poolChandraRoaringFlame,
   _poolChandraSparkHunter,
   _poolChandraTheFirebrand,
   _poolChandraTorchOfDefiance,
@@ -40599,6 +40607,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDragonBlood,
   _poolDragonBreath,
   _poolDragonBroodmother,
+  _poolDragonCultist,
   _poolDragonCursedHalls,
   _poolDragonEgg,
   _poolDragonEngine,
@@ -47356,6 +47365,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIsiluCarrierOfTwilight,
   _poolIslandFishJasconius,
   _poolIslandOfWakWak,
+  _poolIslandSanctuary,
   _poolIsland,
   _poolIslebackSpawn,
   _poolIsochronScepter,
@@ -68287,6 +68297,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/awoken-demon": _poolAwokenDemon,
   "pool/awoken-horror": _poolAwokenHorror,
   "pool/axebane-beast": _poolAxebaneBeast,
+  "pool/axebane-ferox": _poolAxebaneFerox,
   "pool/axebane-guardian": _poolAxebaneGuardian,
   "pool/axebane-stag": _poolAxebaneStag,
   "pool/axegrinder-giant": _poolAxegrinderGiant,
@@ -70872,6 +70883,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chandra-chill-of-compliance": _poolChandraChillOfCompliance,
   "pool/chandra-dressed-to-kill": _poolChandraDressedToKill,
   "pool/chandra-fire-artisan": _poolChandraFireArtisan,
+  "pool/chandra-fire-of-kaladesh": _poolChandraFireOfKaladesh,
   "pool/chandra-flamecaller": _poolChandraFlamecaller,
   "pool/chandra-flames-catalyst": _poolChandraFlamesCatalyst,
   "pool/chandra-flames-fury": _poolChandraFlamesFury,
@@ -70882,6 +70894,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chandra-nalaar": _poolChandraNalaar,
   "pool/chandra-novice-pyromancer": _poolChandraNovicePyromancer,
   "pool/chandra-pyrogenius": _poolChandraPyrogenius,
+  "pool/chandra-roaring-flame": _poolChandraRoaringFlame,
   "pool/chandra-spark-hunter": _poolChandraSparkHunter,
   "pool/chandra-the-firebrand": _poolChandraTheFirebrand,
   "pool/chandra-torch-of-defiance": _poolChandraTorchOfDefiance,
@@ -73838,6 +73851,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dragon-blood": _poolDragonBlood,
   "pool/dragon-breath": _poolDragonBreath,
   "pool/dragon-broodmother": _poolDragonBroodmother,
+  "pool/dragon-cultist": _poolDragonCultist,
   "pool/dragon-cursed-halls": _poolDragonCursedHalls,
   "pool/dragon-egg": _poolDragonEgg,
   "pool/dragon-engine": _poolDragonEngine,
@@ -80595,6 +80609,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/isilu-carrier-of-twilight": _poolIsiluCarrierOfTwilight,
   "pool/island-fish-jasconius": _poolIslandFishJasconius,
   "pool/island-of-wak-wak": _poolIslandOfWakWak,
+  "pool/island-sanctuary": _poolIslandSanctuary,
   "pool/island": _poolIsland,
   "pool/isleback-spawn": _poolIslebackSpawn,
   "pool/isochron-scepter": _poolIsochronScepter,

@@ -901,6 +901,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Catlike Curiosity": "https://cards.scryfall.io/art_crop/back/a/3/a3ff628a-ef8e-45c4-84e7-a33ec28f025a.jpg",
   "Cecil, Redeemed Paladin": "https://cards.scryfall.io/art_crop/back/0/2/026e7167-d665-43d0-a51e-8df2d68cdb5e.jpg",
   "Chalice of Death": "https://cards.scryfall.io/art_crop/back/e/4/e432b156-baf0-48a1-b8fb-1aa18bfbf7de.jpg",
+  "Chandra, Roaring Flame": "https://cards.scryfall.io/art_crop/back/b/0/b0d6caf0-4fa8-4ec5-b7f4-1307474d1b13.jpg",
   "Chaos, the Endless": "https://cards.scryfall.io/art_crop/back/d/d/dd463dbe-5f2c-4d4f-86f8-ad8ff407af62.jpg",
   "Chapel Shieldgeist": "https://cards.scryfall.io/art_crop/back/2/0/20e94e17-2e4c-41cd-8cc5-39ab41037287.jpg",
   "Charring Bite": "https://cards.scryfall.io/art_crop/back/2/9/2999e3b1-6510-42b2-9429-28c07a64a44f.jpg",

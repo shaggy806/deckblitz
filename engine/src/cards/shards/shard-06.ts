@@ -158,6 +158,7 @@ import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolChampionsVictory from "../pool/champions-victory.js";
 import _poolChancellorOfTheSpires from "../pool/chancellor-of-the-spires.js";
+import _poolChandraFireOfKaladesh from "../pool/chandra-fire-of-kaladesh.js";
 import _poolChandraNovicePyromancer from "../pool/chandra-novice-pyromancer.js";
 import _poolChandrasSpitfire from "../pool/chandras-spitfire.js";
 import _poolChaosDragon from "../pool/chaos-dragon.js";
@@ -261,6 +262,7 @@ import _poolDomrisNodorog from "../pool/domris-nodorog.js";
 import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
 import _poolDragToTheBottom from "../pool/drag-to-the-bottom.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
+import _poolDragonCultist from "../pool/dragon-cultist.js";
 import _poolDragonGrip from "../pool/dragon-grip.js";
 import _poolDragonlordKolaghan from "../pool/dragonlord-kolaghan.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
@@ -1193,6 +1195,7 @@ const shard: CardShard = {
     _poolCentaurHealer,
     _poolChampionsVictory,
     _poolChancellorOfTheSpires,
+    _poolChandraFireOfKaladesh,
     _poolChandraNovicePyromancer,
     _poolChandrasSpitfire,
     _poolChaosDragon,
@@ -1296,6 +1299,7 @@ const shard: CardShard = {
     _poolDoomsTimePlatform,
     _poolDragToTheBottom,
     _poolDragToTheRoots,
+    _poolDragonCultist,
     _poolDragonGrip,
     _poolDragonlordKolaghan,
     _poolDrainTheWell,
