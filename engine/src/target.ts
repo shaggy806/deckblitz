@@ -507,6 +507,22 @@ export type TargetSpec =
        * before it's sacrificed). The count is fixed from then on, like any
        * group's ({@link concreteTargetSpecs}); see {@link specsWithAmounts}. */
       readonly max?: EffectAmount;
+      /** On a spell, `max` reads the target chosen for this **earlier
+       * slot** — Reap's "return up to X target cards from your graveyard to
+       * your hand, where X is the number of black permanents **target
+       * opponent** controls as you cast this spell" (`max: { countOf: {
+       * colors: ["B"], controlledBy: "you" }, forTarget: 0 }`). The count is
+       * read once that slot's target is announced, and fixed from then on
+       * (rule 601.2c: "Once the number of targets the spell has is
+       * determined, that number doesn't change" — the ruling). As the spell
+       * is offered the engine reads it for each of the slot's candidates into
+       * `maxFor`, so a client knows the bound for whichever it picks. */
+      readonly maxReadsSlot?: number;
+      /** Set by the engine, never authored: `max` read for each candidate of
+       * `slot` (see `maxReadsSlot`). The group takes at most the `n` of the
+       * target chosen there — none while nothing is — read by
+       * {@link groupBounds} given the targets chosen so far. */
+      readonly maxFor?: GroupMaxFor;
       /** At least this many: `"x"` with `max: "x"` is exactly X — Curse of
        * the Swine's "exile **X** target creatures"; on an ability, any
        * amount, as `max` (Lost in the Maze's "tap X target creatures"). */
@@ -563,6 +579,14 @@ export type TargetSpec =
  * without them narrows nothing by these relations (the engine still refuses
  * a choice that breaks one).
  */
+/** An "any number of" group's `max` read for each candidate of an earlier
+ * slot (the group's `maxFor`, from its `maxReadsSlot`): Reap's count for
+ * each opponent it could target. */
+export interface GroupMaxFor {
+  readonly slot: number;
+  readonly by: readonly { readonly target: TargetRef; readonly n: number }[];
+}
+
 export interface TargetFacts {
   readonly controllerOf: (ref: TargetRef) => PlayerId | undefined;
   readonly powerOf: (ref: TargetRef) => number;
@@ -839,7 +863,9 @@ export function specsWithAmounts(
   const read = (a: EffectAmount | undefined) => (a === undefined || typeof a === "number" ? a : (value(a) ?? a));
   return specs.map((spec) => {
     if (typeof spec !== "object" || spec.kind !== "any-number") return spec;
-    const max = read(spec.max);
+    // A `max` read from another slot's target waits for that target
+    // (`maxReadsSlot` — the cast reads it into `maxFor`).
+    const max = spec.maxReadsSlot !== undefined ? spec.max : read(spec.max);
     const min = read(spec.min);
     const total = read(spec.maxTotalManaValue);
     return {
@@ -851,13 +877,25 @@ export function specsWithAmounts(
   });
 }
 
-/** A group's numeric bounds; an unfixed `"x"` bounds nothing. */
-export function groupBounds(spec: TargetSpec): { readonly min: number; readonly max: number } {
+/** A group's numeric bounds; an unfixed `"x"` bounds nothing. A bound read
+ * from an earlier slot's target (`maxFor` — Reap) is the chosen target's,
+ * `chosen` being the targets chosen so far in the list's own order; nothing
+ * chosen there yet, it takes none. Without `chosen`, the most any candidate
+ * allows — the most the group could ever hold. */
+export function groupBounds(
+  spec: TargetSpec,
+  chosen?: readonly (TargetRef | null | undefined)[],
+): { readonly min: number; readonly max: number } {
   if (typeof spec !== "object" || spec.kind !== "any-number") return { min: 0, max: Number.POSITIVE_INFINITY };
-  return {
-    min: typeof spec.min === "number" ? spec.min : 0,
-    max: typeof spec.max === "number" ? spec.max : Number.POSITIVE_INFINITY,
-  };
+  const min = typeof spec.min === "number" ? spec.min : 0;
+  if (spec.maxFor !== undefined) {
+    const { slot, by } = spec.maxFor;
+    if (chosen === undefined) return { min, max: by.reduce((most, entry) => Math.max(most, entry.n), 0) };
+    const at = chosen[slot];
+    const entry = at === null || at === undefined ? undefined : by.find((e) => sameTargetRef(e.target, at));
+    return { min, max: entry?.n ?? 0 };
+  }
+  return { min, max: typeof spec.max === "number" ? spec.max : Number.POSITIVE_INFINITY };
 }
 
 /** Where a list's "any number of target …" group is (see the `any-number`
@@ -1426,9 +1464,10 @@ export function slotOptions(
     const taken = picked
       .slice(group)
       .filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
-    // A group already at its `max` takes no more.
+    // A group already at its `max` takes no more — the max of the target
+    // an earlier slot named, where it's read from one (Reap).
     const spec = specs[group];
-    if (taken.length >= groupBounds(spec).max) {
+    if (taken.length >= groupBounds(spec, picked).max) {
       return [];
     }
     let left = (options[group] ?? []).filter(

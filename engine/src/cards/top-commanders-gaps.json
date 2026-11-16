@@ -2739,7 +2739,8 @@
   "effect:exile-to-library-bottom-linked",
   "effect:exile-to-library-bottom-linked",
   "replacement:draw-from-bottom",
-  "condition:trigger-card-characteristics-in-new-zone"
+  "condition:trigger-card-characteristics-in-new-zone",
+  "decision:target-count-from-other-target"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

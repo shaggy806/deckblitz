@@ -20150,7 +20150,7 @@ export class Game {
     // and Mass Mutiny's errata to "up to one" to be castable), an empty
     // seat needs none.
     const source = card === undefined ? undefined : this.state.objects[card];
-    return this.spellSpecsWithAmounts(this.declaredTargetSpecs(def, modes, kicked), def, kicked, caster).map((spec) =>
+    return this.spellSpecsWithAmounts(this.declaredTargetSpecs(def, modes, kicked), def, kicked, caster, card).map((spec) =>
       this.emptySeatOptional(spec, caster, source),
     );
   }
@@ -20159,20 +20159,38 @@ export class Game {
    * a target count "for each time this spell was kicked" (Comet Storm) or
    * "as you cast this spell" (Aether Burst) is fixed as its targets are
    * chosen, the kicks already announced (rules 601.2b–c). Its `"x"` waits for
-   * the X (`specsAtX`). */
+   * the X (`specsAtX`). One read from an earlier slot's target ("where X is
+   * the number of black permanents target opponent controls" — Reap's
+   * `maxReadsSlot`) is read for each candidate of that slot into `maxFor`,
+   * the bound the target announced there gives it (601.2c). */
   private spellSpecsWithAmounts(
     specs: readonly TargetSpec[],
     def: CardDefinition,
     kicked: boolean | number,
     caster: PlayerId,
+    card?: ObjectId,
   ): readonly TargetSpec[] {
     if (!groupReadsCastAmount(specs)) return specs;
     const kicks = typeof kicked !== "number" ? (kicked ? 1 : 0) : def.kicker?.second === undefined ? kicked : kicked === 3 ? 2 : 1;
-    const ctx = {
-      ...this.makeResolutionContext(asObjectId("spell-being-cast"), caster, [], 0),
+    const ctxWith = (targets: ResolvedTargets) => ({
+      ...this.makeResolutionContext(asObjectId("spell-being-cast"), caster, targets, 0),
       sourceTimesKicked: () => kicks,
-    };
-    return specsWithAmounts(specs, (amount) => (xMultiple(amount) !== undefined ? undefined : amountValue(amount, ctx)));
+    });
+    const ctx = ctxWith([]);
+    const read = specsWithAmounts(specs, (amount) => (xMultiple(amount) !== undefined ? undefined : amountValue(amount, ctx)));
+    return read.map((spec) => {
+      if (typeof spec !== "object" || spec.kind !== "any-number" || spec.maxReadsSlot === undefined) return spec;
+      const slot = spec.maxReadsSlot;
+      const max = spec.max;
+      const slotSpec = specs[slot];
+      if (max === undefined || slotSpec === undefined || slot >= anyNumberSlot(specs)) return spec;
+      const candidates = this.targetOptionsFor([slotSpec], caster, this.cardSource(def, card))[0] ?? [];
+      const by = candidates.map((target) => {
+        const targets: ResolvedTargets = Array.from({ length: slot + 1 }, (_unused, i) => (i === slot ? target : undefined));
+        return { target, n: Math.max(0, Math.floor(amountValue(max, ctxWith(targets)))) };
+      });
+      return { ...spec, maxFor: { slot, by } };
+    });
   }
 
   private declaredTargetSpecs(

@@ -4033,6 +4033,14 @@ max: 3`). On a spell an amount is read as it's cast, the kicks announced:
 Comet Storm's "choose any target, then choose another target for each time
 this spell was kicked" is `min` and `max` both `{ sum: [{ timesKicked: "source"
 }, 1] }`, Aether Burst's "up to X … as you cast this spell" a `max`.
+A `max` read from **another of the spell's targets** adds `maxReadsSlot: n`,
+that slot coming first: Reap's "up to X target cards from your graveyard,
+where X is the number of black permanents target opponent controls as you
+cast this spell" is `targets: ["opponent", { kind: "any-number", of: {
+kind: "card-in-graveyard", whose: "you" }, max: { countOf: { colors: ["B"],
+controlledBy: "you" }, forTarget: 0 }, maxReadsSlot: 0 }]` — the count read
+for each candidate as the spell is offered (`maxFor`), fixed once the target
+is announced (601.2c).
 `maxTotalPower: N` is "with total power N or less" (Reunion of the
 House): the members' powers where they're targeted add up to at most N, as
 they're chosen (the offer's choosers narrow by it through `TargetFacts`) and

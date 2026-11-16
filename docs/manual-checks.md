@@ -8633,3 +8633,16 @@ Each board's die comes up 4.
 ### Channel: the button is yours alone, and gone at the end of your turn, in a 4-player game
 - **Do:** In this 4-player game, cast Channel, then pass the turn.
 - **Expect:** Only your panel has "Pay 1 life: Add {C}."; no one else's ever shows it. It's gone once Bob's turn begins.
+## A target count set by another target (2026-11-16)
+
+### Reap: no more cards than Bob's black permanents
+- **Do:** Cast Reap: click Bob, then in the graveyard popup click Grizzly Bears, Hill Giant and Gray Ogre, then Confirm.
+- **Expect:** The popup reads "choose 0–2": Bob has Gravedigger and Phyrexian Arena, and his Craw Wurm isn't black. Gray Ogre won't take a third pick ("2 picked", Confirm (2)). Grizzly Bears and Hill Giant come to your hand; Gray Ogre stays in the graveyard.
+
+### Reap: each opponent's own count in a 4-player game
+- **Do:** In this 4-player game, cast Reap: click Carol, then in the graveyard popup click Grizzly Bears, then Hill Giant, then Confirm.
+- **Expect:** The popup reads "choose 0–1" (Carol's one black permanent, Vampire Nighthawk): clicking Hill Giant moves the pick to it. Hill Giant comes to your hand.
+
+### Reap: an opponent with no black permanents leaves nothing to pick
+- **Do:** Cast Reap and click Bob.
+- **Expect:** No graveyard popup: Reap is cast at once and resolves with your two cards still in the graveyard — Bob's Craw Wurm isn't black.

@@ -44,18 +44,22 @@ export function targetCombos(
     // only ever cast for X of 1.
     const spec = specs[i];
     if (typeof spec === "object" && spec.kind === "any-number") {
-      const { min, max } = groupBounds(spec);
       const end: readonly null[] = i < optionLists.length - 1 ? [null] : [];
-      const most = Number.isFinite(max) ? Math.min(max, options.length) : options.length;
-      const prefixes = Array.from({ length: most }, (_, k) => options.slice(0, k + 1));
-      // None of them only where none is a number the group allows (not
-      // Inferno Titan's "one, two, or three targets").
-      const tails: TargetRef[][] = [[], ...prefixes, ...options.slice(1).map((ref) => [ref])].filter(
-        (tail) => tail.length >= min,
-      );
+      // The bounds of this combination: a `max` read from an earlier slot's
+      // target is that target's (Reap's opponent).
+      const tailsFor = (combo: readonly (TargetRef | null)[]): TargetRef[][] => {
+        const { min, max } = groupBounds(spec, combo);
+        const most = Number.isFinite(max) ? Math.min(max, options.length) : options.length;
+        const prefixes = Array.from({ length: most }, (_, k) => options.slice(0, k + 1));
+        // None of them only where none is a number the group allows (not
+        // Inferno Titan's "one, two, or three targets").
+        return [[], ...prefixes, ...(most >= 1 ? options.slice(1).map((ref) => [ref]) : [])].filter(
+          (tail) => tail.length >= min,
+        );
+      };
       const next: (TargetRef | null)[][] = [];
       for (const combo of combos) {
-        for (const tail of tails) {
+        for (const tail of tailsFor(combo)) {
           if (next.length >= limit) break;
           next.push([...combo, ...tail, ...end]);
         }

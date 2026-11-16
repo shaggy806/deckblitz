@@ -13035,4 +13035,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Channel: the button is yours alone, and gone at the end of your turn, in a 4-player game',
     board({ you: { bf: ['Forest*2'], hand: ['Channel'] }, opp: [{}, {}, {}] }),
   ),
+  preset(
+    "Reap: no more cards than Bob's black permanents",
+    board({
+      you: { bf: ['Forest*2'], hand: ['Reap'], gy: ['Grizzly Bears', 'Hill Giant', 'Gray Ogre'] },
+      opp: { bf: ['Gravedigger', 'Phyrexian Arena', 'Craw Wurm'] },
+    }),
+  ),
+  preset(
+    "Reap: each opponent's own count in a 4-player game",
+    board({
+      you: { bf: ['Forest*2'], hand: ['Reap'], gy: ['Grizzly Bears', 'Hill Giant', 'Gray Ogre'] },
+      opp: [{ bf: ['Gravedigger', 'Phyrexian Arena'] }, { bf: ['Vampire Nighthawk'] }, { bf: ['Craw Wurm'] }],
+    }),
+  ),
+  preset(
+    'Reap: an opponent with no black permanents leaves nothing to pick',
+    board({
+      you: { bf: ['Forest*2'], hand: ['Reap'], gy: ['Grizzly Bears', 'Hill Giant'] },
+      opp: { bf: ['Craw Wurm'] },
+    }),
+  ),
 ]

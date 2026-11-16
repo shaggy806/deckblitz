@@ -1288,7 +1288,7 @@ export function invalidTargetReason(
     const spans = targetSpans(specs, chosen);
     for (const [slot, spec] of specs.entries()) {
       if (typeof spec !== "object" || spec.kind !== "any-number") continue;
-      const { min, max } = groupBounds(spec);
+      const { min, max } = groupBounds(spec, chosen);
       const members = spans[slot].members;
       if (members > max) return `${name} takes at most ${max} of those targets`;
       if (members < min) return `${name} takes at least ${min} of those targets`;

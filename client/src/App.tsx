@@ -3442,11 +3442,15 @@ function Table({
             return
           }
           const grouped = anyNumberSlot([spec]) === 0
+          // A group that may take none at all — "up to X" at an X of 0, or
+          // Reap's count for an opponent with no black permanents — is
+          // passed over like one with no candidates.
           const empty =
             grouped &&
-            (picked.length === start
-              ? (t.options[slot] ?? []).length === 0
-              : slotOptions(t.specs, t.options, picked.length, picked, t.facts).length === 0)
+            (groupBounds(spec, picked).max === 0 ||
+              (picked.length === start
+                ? (t.options[slot] ?? []).length === 0
+                : slotOptions(t.specs, t.options, picked.length, picked, t.facts).length === 0))
           if (!empty) {
             commit(picked)
             return
@@ -8523,11 +8527,13 @@ function Table({
             inTargetGroup(activeTargeting)
               ? {
                   // An "any number of" group: every member at once, up to
-                  // its most ("up to three target creature cards").
+                  // its most ("up to three target creature cards") — the
+                  // most the target picked before it allows, where it's
+                  // read from one (Reap's opponent).
                   min: 0,
                   max: Math.min(
                     zoneTargetIds.length,
-                    groupBounds(currentSpec(activeTargeting) ?? 'creature').max -
+                    groupBounds(currentSpec(activeTargeting) ?? 'creature', activeTargeting.picked).max -
                       (activeTargeting.picked.length - groupStartOf(activeTargeting)),
                   ),
                   eligible: zoneTargetIds,
