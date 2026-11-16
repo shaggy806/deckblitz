@@ -56677,6 +56677,20 @@ controlledBy,
     return false;
   }
 
+  /** Could `id` enter attached to `host` under `player` — an Aura only to
+   * what it can legally enchant (rule 303.4i), anything else always (it
+   * enters unattached, 303.4h) — asked before a choice, so nothing is set. */
+  private couldEnterAttached(id: ObjectId, host: EnterAttachHost, player: PlayerId): boolean {
+    const card = this.state.objects[id];
+    if (card === undefined) return false;
+    const def = this.registry.get(printedCardName(card));
+    if (!def.subtypes.includes("Aura")) return true;
+    if (host !== null && typeof host === "object") {
+      return "among" in host ? true : this.canEnchantPlayer(id, host.player, player, def);
+    }
+    return host !== null && this.canEnchant(id, host, player, def);
+  }
+
   /**
    * Ready `id` to be put onto the battlefield under `player` attached to
    * `host` (see {@link EnterAttachHost}). An Aura enchants a permanent or
@@ -60686,13 +60700,18 @@ controlledBy,
       });
       return false;
     }
+    // "…attached to target creature": an Aura card that can't legally enchant
+    // it isn't offered (rule 303.4i; Cass, Hand of Vengeance's ruling).
+    const host = destination === "battlefield" ? opts.attachTo : undefined;
+    const offered = host === undefined ? eligible : eligible.filter((id) => this.couldEnterAttached(id, host, player));
+    if (offered.length === 0) return false;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
-      ids: eligible,
-      eligible,
-      min: opts.upTo === true ? 0 : Math.min(count, eligible.length),
-      max: Math.min(count, eligible.length),
+      ids: offered,
+      eligible: offered,
+      min: opts.upTo === true ? 0 : Math.min(count, offered.length),
+      max: Math.min(count, offered.length),
       destination,
       leftover: "stay",
       ...(together !== undefined ? { together } : {}),

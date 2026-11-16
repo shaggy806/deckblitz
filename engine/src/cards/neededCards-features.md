@@ -334,6 +334,16 @@ one offer with no colour, and once the cost is paid the mana ability asks them �
 resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
 back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
 `test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+### "Aura cards that were attached to it" from a graveyard — built 2026-11-16
+
+The key `effect:return-aura-cards-that-were-attached-from-graveyard`. The filter's `wasAttachedTo` now also
+matches, in a graveyard, the card a permanent attached to it became, moved straight there from that stint
+(rule 400.7f: an Aura put there with the creature, or after it as a state-based action, 704.5m) — not one
+that left before it died, nor an opponent's in their own graveyard. `return-from-graveyard`'s `attachedTo`
+with `upTo` offers only the Aura cards that could legally enchant the host (rule 303.4i, the ruling).
+Cass, Hand of Vengeance (rank 11135), whose "then attach any number of Equipment that were attached to it"
+was Zack Fair's `attach` `choose`. `test/return-aura-cards-that-were-attached.test.ts`.
+
 ### "The number of creature cards exiled with this creature" — marked built 2026-11-16
 
 The key `amount:exiled-with-source-count` needed no engine code: the aggregate amount over the linked set,

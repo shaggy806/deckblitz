@@ -1154,7 +1154,10 @@ export interface CardFilter {
    * was sacrificed to pay for it), Rhuk, Hexgold Nabber's "all Equipment
    * attached to **that creature**" when it dies. Only the same objects still
    * on the battlefield (rule 400.7) — an Equipment that has left and come
-   * back is a new one. An effect's filter only: bound to `wasAttachedToAny`
+   * back is a new one — or a card that went from that stint straight to a
+   * graveyard: Cass, Hand of Vengeance's "Aura cards that were attached to
+   * it", put there with the creature or after it (rule 400.7f). An effect's
+   * filter only: bound to `wasAttachedToAny`
    * as the effect applies (`bindDynamicCompares`); unbound, it matches
    * nothing.
    */
@@ -3133,12 +3136,16 @@ export function matchesFilter(
     if (pile.indexOf(id) <= pile.indexOf(from.id)) return false;
   }
   // "That was attached to it" (an effect's bound `wasAttachedTo`): the same
-  // object, still on the battlefield (rule 400.7).
+  // object, still on the battlefield (rule 400.7) — or the card it became in
+  // a graveyard, moved straight there from that stint (rule 400.7f: an Aura
+  // put there with the permanent it enchanted, or after it by 704.5m).
   if (filter.wasAttachedTo !== undefined && filter.wasAttachedToAny === undefined) return false;
   if (filter.wasAttachedToAny !== undefined) {
-    if (live === undefined || live.zone !== "battlefield") return false;
+    if (live === undefined) return false;
     const stint = live.zoneChangeCount ?? 0;
-    if (!filter.wasAttachedToAny.some((a) => a.object === id && a.stint === stint)) return false;
+    const was =
+      live.zone === "battlefield" ? stint : live.zone === "graveyard" && !live.isToken ? stint - 1 : undefined;
+    if (was === undefined || !filter.wasAttachedToAny.some((a) => a.object === id && a.stint === was)) return false;
   }
   if (filter.attachedToRef !== undefined || filter.attachedToPlayer !== undefined) {
     if (live === undefined || live.zone !== "battlefield") return false;
