@@ -21019,6 +21019,7 @@ import _poolPullThroughTheWeft from "./pool/pull-through-the-weft.js";
 import _poolPullUnder from "./pool/pull-under.js";
 import _poolPull from "./pool/pull.js";
 import _poolPullingTeeth from "./pool/pulling-teeth.js";
+import _poolPulmonicSliver from "./pool/pulmonic-sliver.js";
 import _poolPulsarSquadronAce from "./pool/pulsar-squadron-ace.js";
 import _poolPulsatingIllusion from "./pool/pulsating-illusion.js";
 import _poolPulseOfLlanowar from "./pool/pulse-of-llanowar.js";
@@ -54253,6 +54254,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPullUnder,
   _poolPull,
   _poolPullingTeeth,
+  _poolPulmonicSliver,
   _poolPulsarSquadronAce,
   _poolPulsatingIllusion,
   _poolPulseOfLlanowar,
@@ -87500,6 +87502,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pull-under": _poolPullUnder,
   "pool/pull": _poolPull,
   "pool/pulling-teeth": _poolPullingTeeth,
+  "pool/pulmonic-sliver": _poolPulmonicSliver,
   "pool/pulsar-squadron-ace": _poolPulsarSquadronAce,
   "pool/pulsating-illusion": _poolPulsatingIllusion,
   "pool/pulse-of-llanowar": _poolPulseOfLlanowar,
