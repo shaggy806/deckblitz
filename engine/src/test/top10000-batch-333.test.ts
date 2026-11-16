@@ -177,3 +177,21 @@ describe("Rowan's Talent", () => {
     expect(hand(game)).toHaveLength(mine + 1);
   });
 });
+
+describe("Duelist of the Mind", () => {
+  it("has power equal to the cards its controller drew this turn, in the hand too", () => {
+    const { game } = table();
+    const duelist = spawn(game, "Duelist of the Mind");
+    const inHand = toHand(game, "Duelist of the Mind");
+    const power = (id: ObjectId) => computeCharacteristics(game.state, registryOf(game), id).power;
+    const drawnBefore = power(duelist);
+    lands(game, "Island", 3);
+    cast(game, toHand(game, "Divination"));
+    expect(power(duelist)).toBe(drawnBefore + 2);
+    expect(power(inHand)).toBe(drawnBefore + 2);
+    expect(computeCharacteristics(game.state, registryOf(game), duelist).toughness).toBe(3);
+    // Bob's draws are Bob's.
+    const bobs = spawn(game, "Duelist of the Mind", B);
+    expect(power(bobs)).toBe(0);
+  });
+});

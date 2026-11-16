@@ -6057,6 +6057,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     its controller controls (Nishoba Brawler, `only: "power"`).
   - `{ partySize: "you" }` — party: the creatures in its controller's party,
     0 to 4 (rule 700.8 — Archpriest of Iona, `only: "power"`).
+  - `{ turnStat: TurnStat }` — its controller's running total this turn:
+    Duelist of the Mind's "power is equal to the number of cards you've
+    drawn this turn" (`{ turnStat: "cards-drawn" }`, `only: "power"`).
 
   It applies in every zone (rule 604.3), so the card has that size in a
   library, hand, graveyard or the command zone too; "you" is its controller,

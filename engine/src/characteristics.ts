@@ -4816,6 +4816,7 @@ export function countValue(
     if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
     if ("basicLandTypes" in spec) return basicLandTypesAmong(state, registry, controller);
     if ("partySize" in spec) return partySizeOf(state, registry, controller);
+    if ("turnStat" in spec) return turnStatOf(state, controller, spec.turnStat);
     return allGraveyards().filter((id) =>
       matchesFilter(state, registry, id, spec.countInGraveyard, { you: controller }),
     ).length;

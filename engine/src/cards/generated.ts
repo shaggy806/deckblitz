@@ -7711,6 +7711,7 @@ import _poolDuelingCoach from "./pool/dueling-coach.js";
 import _poolDuelingGrounds from "./pool/dueling-grounds.js";
 import _poolDuelingRapier from "./pool/dueling-rapier.js";
 import _poolDuelistOfDeepFaith from "./pool/duelist-of-deep-faith.js";
+import _poolDuelistOfTheMind from "./pool/duelist-of-the-mind.js";
 import _poolDuelistsFlame from "./pool/duelists-flame.js";
 import _poolDuelistsHeritage from "./pool/duelists-heritage.js";
 import _poolDuergarAssailant from "./pool/duergar-assailant.js";
@@ -40920,6 +40921,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDuelingGrounds,
   _poolDuelingRapier,
   _poolDuelistOfDeepFaith,
+  _poolDuelistOfTheMind,
   _poolDuelistsFlame,
   _poolDuelistsHeritage,
   _poolDuergarAssailant,
@@ -74142,6 +74144,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dueling-grounds": _poolDuelingGrounds,
   "pool/dueling-rapier": _poolDuelingRapier,
   "pool/duelist-of-deep-faith": _poolDuelistOfDeepFaith,
+  "pool/duelist-of-the-mind": _poolDuelistOfTheMind,
   "pool/duelists-flame": _poolDuelistsFlame,
   "pool/duelists-heritage": _poolDuelistsHeritage,
   "pool/duergar-assailant": _poolDuergarAssailant,

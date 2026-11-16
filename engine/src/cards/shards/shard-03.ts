@@ -212,6 +212,7 @@ import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDromokasCommand from "../pool/dromokas-command.js";
 import _poolDruidsCall from "../pool/druids-call.js";
+import _poolDuelistOfTheMind from "../pool/duelist-of-the-mind.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
 import _poolDwarvenLightsmith from "../pool/dwarven-lightsmith.js";
@@ -1173,6 +1174,7 @@ const shard: CardShard = {
     _poolDreamTwist,
     _poolDromokasCommand,
     _poolDruidsCall,
+    _poolDuelistOfTheMind,
     _poolDustBowl,
     _poolDwarvenDemolitionTeam,
     _poolDwarvenLightsmith,

@@ -2699,7 +2699,8 @@
   "effect:play-from-outside-the-game",
   "effect:grant-undaunted-next-spell",
   "zone:play-from-graveyard-this-turn-enters-tapped",
-  "trigger:activate-loyalty-ability-of-enchanted"
+  "trigger:activate-loyalty-ability-of-enchanted",
+  "bug:cda-turn-stat"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

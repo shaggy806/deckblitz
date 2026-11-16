@@ -782,7 +782,12 @@ export type CountSpec =
    * Archpriest of Iona's "power is equal to the number of creatures in your
    * party"). `characteristics.ts`'s `partySizeOf`; see the `EffectAmount` of
    * the same name. */
-  | { readonly partySize: "you" };
+  | { readonly partySize: "you" }
+  /** Its controller's running total this turn — Duelist of the Mind's "power
+   * is equal to the number of cards you've drawn this turn" (`{ turnStat:
+   * "cards-drawn" }` with `only: "power"`), read in every zone as a CDA is
+   * (rule 604.3): in a hand, its owner's. See {@link TurnStat}. */
+  | { readonly turnStat: TurnStat };
 
 /**
  * A per-player running total the engine keeps for the current turn, readable
