@@ -3,7 +3,7 @@
 // the engine, the controllers and the bot can all ask the same questions.
 
 import { anyNumberSlot, groupReadsX, hasClosedGroup, isOptionalSpec, xMultiple } from "./target.js";
-import type { ObjectId } from "./primitives.js";
+import type { ObjectId, PlayerId } from "./primitives.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 
 /** The range of distinct-target counts a spell may be cast with and afford,
@@ -226,7 +226,8 @@ export interface XCostOffer {
    * none cap X at `maxXUnreduced` — the cost is locked in with the targets
    * (rule 601.2f), so more would be refused. */
   readonly maxXUnreduced?: number;
-  readonly reducingTargets?: readonly ObjectId[];
+  /** By id, a player's too (the one a Curse enchants — Infectious Curse). */
+  readonly reducingTargets?: readonly (ObjectId | PlayerId)[];
   /** Targets that make the spell cost more (`targetedBySpellsCost`' mana —
    * Boreal Elemental's "{2} more"), and how far each one lowers the most X
    * can be: `maxX` is what's left with none of them chosen. */
@@ -289,7 +290,7 @@ export function maxXForTargets(
   max = Math.max(0, max);
   const reducing = xCost.reducingTargets;
   if (xCost.maxXUnreduced === undefined || reducing === undefined) return max;
-  const earns = targets.some((t) => t?.kind === "object" && reducing.includes(t.object));
+  const earns = targets.some((t) => t != null && reducing.includes(t.kind === "object" ? t.object : t.player));
   return earns ? max : Math.min(max, xCost.maxXUnreduced);
 }
 

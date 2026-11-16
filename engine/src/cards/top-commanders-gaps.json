@@ -2733,7 +2733,8 @@
   "amount:exiled-with-source-count",
   "effect:player-mana-ability-until-eot",
   "effect:player-mana-ability-until-eot",
-  "effect:choose-new-targets-any-number"
+  "effect:choose-new-targets-any-number",
+  "static:cost-reduction-targeting-enchanted-player"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

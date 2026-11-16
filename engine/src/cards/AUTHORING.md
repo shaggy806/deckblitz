@@ -6443,7 +6443,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     (601.2c, 601.2f); a spell only affordable with it is offered with only the
     targets that earn it. For "cost more", `targetedBySpellsCost`, which also
     takes `targetingYou: true` (Monastery Siege's "target you or a permanent
-    you control").
+    you control"). `targetingEnchantedPlayer: true` — only a spell with the
+    player this Aura enchants among its targets (Infectious Curse's "spells
+    you cast that target enchanted player cost {1} less"), read and offered
+    the same way: a player earns it as an object does.
   - `castFrom` may be a list, and `castFromAnyones: true` reads any player's
     graveyard (Aven Interrupter's "from graveyards or from exile").
 - Casting and activation rules on a static: `activateAsThoughHaste: CardFilter`

@@ -4027,6 +4027,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     /** Only a spell with this permanent among its targets — Spellwild Ouphe's
      * "spells that target this creature cost {2} less". */
     readonly targetingSource?: boolean;
+    /** Only a spell with the player this Aura enchants among its targets —
+     * Infectious Curse's "spells you cast that target enchanted player cost
+     * {1} less to cast". Read off the chosen targets, as `targetingSource` is,
+     * and offered the same way: a spell affordable only with it is offered
+     * with only the targets that earn it. */
+    readonly targetingEnchantedPlayer?: boolean;
     /** Coloured pips removed from the cost ("Cleric spells you cast cost
      * {W}{B} less" — Edgewalker), as a mana string of coloured symbols.
      * Each symbol takes a matching coloured pip, else a hybrid pip that

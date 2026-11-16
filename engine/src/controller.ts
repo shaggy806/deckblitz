@@ -1674,14 +1674,14 @@ export function fitCastTargets(
 function withReducingTarget(
   chosen: (TargetRef | null)[],
   options: readonly (readonly TargetRef[])[],
-  reducing: readonly ObjectId[],
+  reducing: readonly (ObjectId | PlayerId)[],
   atLeast: number,
 ): (TargetRef | null)[] | null {
-  const earns = (ref: TargetRef | null | undefined): boolean => ref?.kind === "object" && reducing.includes(ref.object);
+  const idOf = (ref: TargetRef): ObjectId | PlayerId => (ref.kind === "object" ? ref.object : ref.player);
+  const earns = (ref: TargetRef | null | undefined): boolean => ref != null && reducing.includes(idOf(ref));
   const out = [...chosen];
   while (out.filter(earns).length < atLeast) {
-    const taken = (ref: TargetRef): boolean =>
-      out.some((c) => c?.kind === "object" && ref.kind === "object" && c.object === ref.object);
+    const taken = (ref: TargetRef): boolean => out.some((c) => c != null && idOf(c) === idOf(ref));
     let placed = false;
     for (let i = 0; i < options.length && !placed; i += 1) {
       if (earns(out[i])) continue;

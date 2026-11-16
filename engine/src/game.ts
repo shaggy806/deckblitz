@@ -872,7 +872,12 @@ function amountReadsSacrificed(amount: EffectAmount): boolean {
 }
 
 function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boolean {
-  return mod.targeting !== undefined || mod.targetingSource === true;
+  return mod.targeting !== undefined || mod.targetingSource === true || mod.targetingEnchantedPlayer === true;
+}
+
+/** A target's id: the object's, or the player's (the two never collide). */
+function targetRefId(ref: TargetRef): ObjectId | PlayerId {
+  return ref.kind === "object" ? ref.object : ref.player;
 }
 
 /** A `would-draw` replacement that makes the draw an effect: whose, and the
@@ -17813,12 +17818,12 @@ export class Game {
     const taxOf = new Map<ObjectId, number>();
     const onceOf = new Map<ObjectId, readonly TargetTaxShare[]>();
     const taxOfPlayer = new Map<PlayerId, number>();
-    const earners = new Set<ObjectId>();
+    const earners = new Set<ObjectId | PlayerId>();
     const reduces = this.spellPricedByTargets(def, player, card);
     const look = (specs: readonly TargetSpec[]): void => {
       for (const ref of this.targetOptionsFor(specs, player, source).flat()) {
-        if (reduces && specs.length > 1 && ref.kind === "object" && this.targetsEarnReduction(def, player, card, [ref])) {
-          earners.add(ref.object);
+        if (reduces && specs.length > 1 && this.targetsEarnReduction(def, player, card, [ref])) {
+          earners.add(targetRefId(ref));
         }
         if (ref.kind === "player") {
           if (!taxOfPlayer.has(ref.player)) taxOfPlayer.set(ref.player, this.targetingCost(player, [ref]).generic);
@@ -17871,7 +17876,7 @@ export class Game {
         const earned =
           reduces &&
           (this.targetsEarnReduction(def, player, card, [ref]) ||
-            [...earners].some((id) => ref.kind !== "object" || id !== ref.object));
+            [...earners].some((id) => id !== targetRefId(ref)));
         return tax <= (earned ? whenEarned : atFullPrice);
       },
     };
@@ -18357,10 +18362,10 @@ export class Game {
     targetCount: number,
     options: readonly (readonly TargetRef[])[],
     maxX: number,
-  ): { maxXUnreduced: number; reducingTargets: ObjectId[] } | Record<string, never> {
+  ): { maxXUnreduced: number; reducingTargets: (ObjectId | PlayerId)[] } | Record<string, never> {
     const reducing = options
       .flat()
-      .flatMap((ref) => (ref.kind === "object" && this.targetsEarnReduction(def, player, cardId, [ref]) ? [ref.object] : []));
+      .flatMap((ref) => (this.targetsEarnReduction(def, player, cardId, [ref]) ? [targetRefId(ref)] : []));
     if (reducing.length === 0) return {};
     this.targetCostReductionOff = true;
     let unreduced: number;
@@ -18467,17 +18472,23 @@ export class Game {
     return this.reachingCostModifications(player, cardId).some(
       ({ source, mod }) =>
         isTargetKeyed(mod) &&
-        targets.some((t) => t?.kind === "object" && this.modificationKeyedTo(mod, source, t.object)),
+        targets.some((t) => t != null && this.modificationKeyedTo(mod, source, t)),
     );
   }
 
   /** Whether a target-keyed `costModification` of `source` is earned by
-   * `object` being targeted. */
+   * `target` being targeted: `source` itself (`targetingSource`), the player
+   * it enchants (`targetingEnchantedPlayer` — Infectious Curse), or an object
+   * matching `targeting`. */
   private modificationKeyedTo(
     mod: NonNullable<StaticAbility["costModification"]>,
     source: GameObject,
-    object: ObjectId,
+    target: TargetRef,
   ): boolean {
+    if (target.kind === "player") {
+      return mod.targetingEnchantedPlayer === true && source.attachedToPlayer === target.player;
+    }
+    const object = target.object;
     if (mod.targetingSource === true && object === source.id) return true;
     return (
       mod.targeting !== undefined &&
@@ -18713,13 +18724,14 @@ export class Game {
     cardId: ObjectId,
     options: readonly (readonly TargetRef[])[],
     fullPriceCastable: () => boolean,
-  ): ObjectId[] | undefined {
+  ): (ObjectId | PlayerId)[] | undefined {
     if (!this.spellPricedByTargets(def, player, cardId)) return undefined;
+    // A player earns it too: the one an Aura enchants (Infectious Curse).
     const earning = [
       ...new Set(
         options
           .flat()
-          .flatMap((ref) => (ref.kind === "object" && this.targetsEarnReduction(def, player, cardId, [ref]) ? [ref.object] : [])),
+          .flatMap((ref) => (this.targetsEarnReduction(def, player, cardId, [ref]) ? [targetRefId(ref)] : [])),
       ),
     ];
     if (earning.length === 0) return undefined;
@@ -18741,12 +18753,16 @@ export class Game {
    */
   private earnersNeeded(
     player: PlayerId,
-    earning: readonly ObjectId[],
+    earning: readonly (ObjectId | PlayerId)[],
     slots: number,
     costOf: (targets: readonly TargetRef[]) => ManaCost,
   ): number | undefined {
-    const worth = (id: ObjectId): number => manaValue(costOf([{ kind: "object", object: id }]));
-    const best = [...earning].sort((a, b) => worth(a) - worth(b)).map((object): TargetRef => ({ kind: "object", object }));
+    const refOf = (id: ObjectId | PlayerId): TargetRef =>
+      this.state.players[id as PlayerId] !== undefined
+        ? { kind: "player", player: id as PlayerId }
+        : { kind: "object", object: id as ObjectId };
+    const worth = (id: ObjectId | PlayerId): number => manaValue(costOf([refOf(id)]));
+    const best = [...earning].sort((a, b) => worth(a) - worth(b)).map(refOf);
     for (let k = 1; k <= Math.min(slots, best.length); k += 1) {
       if (this.payMana(player, costOf(best.slice(0, k))) !== null) return k;
     }
@@ -19043,7 +19059,7 @@ export class Game {
       if (isTargetKeyed(mod)) {
         if (targets !== undefined) {
           const earning = new Set(
-            targets.flatMap((t) => (t?.kind === "object" && this.modificationKeyedTo(mod, source, t.object) ? [t.object] : [])),
+            targets.flatMap((t) => (t != null && this.modificationKeyedTo(mod, source, t) ? [targetRefId(t)] : [])),
           );
           times = mod.perTarget === true ? earning.size : Math.min(1, earning.size);
         } else if (this.targetCostReductionOff) {
@@ -19052,7 +19068,7 @@ export class Game {
           !this.targetCostReductionAssumed &&
           !this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined, false, false, player, cardId), player, this.cardSource(def, cardId, xValue))
             .flat()
-            .some((ref) => ref.kind === "object" && this.modificationKeyedTo(mod, source, ref.object))
+            .some((ref) => this.modificationKeyedTo(mod, source, ref))
         ) {
           times = 0;
         }

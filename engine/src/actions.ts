@@ -1467,7 +1467,7 @@ export type LegalAction =
         readonly minXByTargetCount?: readonly number[];
         /** See `XCostOffer.maxXUnreduced`. */
         readonly maxXUnreduced?: number;
-        readonly reducingTargets?: readonly ObjectId[];
+        readonly reducingTargets?: readonly (ObjectId | PlayerId)[];
         /** See `XCostOffer.targetTaxes`. */
         readonly targetTaxes?: readonly { readonly object: ObjectId; readonly x: number }[];
       };
@@ -1488,8 +1488,10 @@ export type LegalAction =
        * it targets …" reduction (`targetCostReduction`) and more than one
        * slot, or an optional one, could earn it: one of the cast's targets
        * must be among these, or the cast is refused (`fitCastTargets` keeps
-       * one). An X spell says it in `xCost.reducingTargets` instead. */
-      readonly reducingTargets?: readonly ObjectId[];
+       * one). An X spell says it in `xCost.reducingTargets` instead. A
+       * player is one by id: the one a Curse enchants (Infectious Curse's
+       * "spells you cast that target enchanted player cost {1} less"). */
+      readonly reducingTargets?: readonly (ObjectId | PlayerId)[];
       /** How many of `reducingTargets` the cast must name, when one isn't
        * enough (two Spellwild Ouphes at once — rule 601.2f). */
       readonly reducingTargetsAtLeast?: number;
