@@ -275,13 +275,7 @@ and Shiko or the other spell; haste enablers in the crackback were measured and 
   `scoreAlone`); and v1's own land pick, up to 1.1 s with Ramunap Excavator offering 26 graveyard
   lands, each look ~90 ms (`lookAfterPlay`). Each overrun holds every other room on its shard as
   long (`docs/plans/room-shards.md`, "The one-second budget").
-- **Bots and token stacks: divided damage and gang blocks** (the user, 2026-10-18). Neither bot
-  ever sets a cast's `division`, so divided damage always splits evenly over distinct targets (v1
-  aims a group at one target; v2's `targetCombos` spreads over 1, 2, 3 distinct ones) — Inferno
-  Titan never goes 1 + 1 + 1 at three 1/1s, which the engine refuses anyway while a stack can't
-  fill two slots of one target group ("Distinct targets in one token stack", Engine rules gaps).
-  (Gang blocks with two tokens of one stack are done, 2026-11-15: `COMPLETED.md`, "blocks with a
-  whole token stack".)
+- **Bots and token stacks: three tokens of one stack as three targets** (the user, 2026-10-18; what the divided-damage fix of 2026-11-15 left, `COMPLETED.md`, "divides damage to kill"). A bot's candidates now carry the shares of a divided amount, but Inferno Titan still never goes 1 + 1 + 1 at three 1/1s of one token stack: the engine refuses a stack filling two slots of one target group ("Distinct targets in one token stack", Engine rules gaps). v1's own answer still aims a divided group at one target (it is the floor v2's search starts from, and what a rollout's seats play). And a group's candidates are the best one, two, three… of the ranked targets, so the split that skips the best creature to kill three small ones is never listed (`decisions/shared/target-combos.ts`).
 - **More training scenarios.** About 175 hand-built scenarios, all of them gating
   (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
   live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which

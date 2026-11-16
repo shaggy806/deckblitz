@@ -55,6 +55,7 @@ import {
 } from "../target-polarity.js";
 import { ActivationCap, isFreeCost } from "./activation-cap.js";
 import { candidateActions } from "./candidates.js";
+import { withDivisions } from "./divisions.js";
 import { findUntapPlans } from "./untap-plans.js";
 import { collapseTwins } from "./twins.js";
 import type { TargetRef } from "../target.js";
@@ -651,7 +652,7 @@ function bestDecision(
   // the card itself. v1's answer is made from what we could know.
   if (view.state.awaiting?.kind === "choose-modes" && view.state.awaiting.guess !== undefined) return inherited;
   const legal = view.legalActions().find((l) => l.kind !== "pass-priority");
-  const candidates =
+  const listed =
     legal === undefined
       ? null
       : decisionCandidates(
@@ -663,6 +664,10 @@ function bestDecision(
           // drains its player, rule 728.1): proliferate them only onto opponents.
           (player) => (view.state.players[player]?.counters.poison ?? 0) + (view.state.players[player]?.counters.rad ?? 0),
         );
+  // A trigger's divided amount (Dragonlord Atarka's 5): each choice of two
+  // targets or more with the shares worth trying, not the even split an
+  // answer without a `division` is given.
+  const candidates = listed === null || legal === undefined ? listed : withComputedCache(() => withDivisions(view.state, cards, legal, listed));
   if (candidates === null || candidates.length === 0) return inherited;
 
   const score = (action: Action): number | null => {
@@ -1933,7 +1938,8 @@ export class EvalBotController extends HeuristicBotController {
         // spell to answer (`holdsCreatureFetch`): sooner only gives up blocks.
         if (this.holdsCreatureFetch(view.state, legal)) continue;
         const due = this.isSacrificeForCardsDue(view.state, legal) || this.isSuspendDue(legal);
-        const aimed = candidateActions(aimOffer(view.state, this.cards, player, legal), player);
+        // A divided amount's candidates each carry their shares (`withDivisions`).
+        const aimed = withDivisions(view.state, this.cards, legal, candidateActions(aimOffer(view.state, this.cards, player, legal), player));
         for (const action of this.withSacrificeChoices(view.state, legal, aimed)) {
           // A draw aimed at a player is a cantrip aimed at us (Compulsive
           // Research's "target player draws three").

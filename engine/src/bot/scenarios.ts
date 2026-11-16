@@ -5260,6 +5260,66 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "divides Dragonlord Atarka's 5 to kill the 4/4 and the 1/1",
+    rule: "Damage divided as you choose is divided to kill: each target what is lethal to it, not an even share and not all of it on one.",
+    position(registry) {
+      // Reported from a live game (2026-11-15): "bots still don't understand
+      // splitting damage". A bot's Dragonlord Atarka dealt all 5 to Gisa and
+      // Geralf, a 4/4. Neither bot ever named a division, so the engine split
+      // a divided amount evenly: over the 4/4 and a 1/1 that is 3 and 2, which
+      // kills only the 1/1, and the search rightly preferred all 5 on the
+      // 4/4. 4 and 1 kills both and was never a candidate.
+      const game = table(registry, [A, B], A);
+      const big = onBoard(game, "Gisa and Geralf", B);
+      const small = onBoard(game, "Llanowar Elves", B);
+      game.debugSpawn("Dragonlord Atarka", A, "battlefield", { announceEntry: true });
+      game.advanceUntil((s) => s.awaiting !== null || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-targets" || game.state.awaiting.player !== A) {
+        return { passed: false, detail: "Atarka's trigger never asked for its targets" };
+      }
+      return {
+        game,
+        player: A,
+        judge(action) {
+          if (action.type !== "choose-targets") return { passed: false, detail: describeAction(action).slice(0, 200) };
+          const aimed = action.targets.flat().filter((t): t is TargetRef => t !== null && t !== undefined);
+          const at = (id: ObjectId): number => {
+            const i = aimed.findIndex((t) => t.kind === "object" && t.object === id);
+            return i < 0 ? 0 : (action.division?.[i] ?? Math.floor(5 / aimed.length));
+          };
+          return { passed: at(big) >= 4 && at(small) >= 1, detail: `${at(big)} to the 4/4, ${at(small)} to the 1/1` };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "casts Forked Lightning for 3 and 1 to kill the 3/3 and the 1/1",
+    rule: "A spell's divided damage is divided to kill, as a trigger's is: the shares are chosen with the targets.",
+    position(registry) {
+      // The same fault in a cast (BACKLOG since 2026-10-18: "neither bot ever
+      // sets a cast's `division`"). 4 damage over a Hill Giant and Llanowar
+      // Elves split evenly is 2 and 2: the Giant lives. 3 and 1 kills both.
+      const game = table(registry, [A, B], A);
+      lands(game, "Mountain", A, 4);
+      const giant = onBoard(game, "Hill Giant", B);
+      const elves = onBoard(game, "Llanowar Elves", B);
+      const lightning = game.debugSpawn("Forked Lightning", A, "hand");
+      return {
+        game,
+        player: A,
+        judge(action) {
+          if (action.type !== "cast-spell" || action.card !== lightning) return { passed: false, detail: describeAction(action).slice(0, 200) };
+          const aimed = (action.targets ?? []).filter((t): t is TargetRef => t !== null && t !== undefined);
+          const at = (id: ObjectId): number => {
+            const i = aimed.findIndex((t) => t.kind === "object" && t.object === id);
+            return i < 0 ? 0 : (action.division?.[i] ?? Math.floor(4 / aimed.length));
+          };
+          return { passed: at(giant) >= 3 && at(elves) >= 1, detail: `${at(giant)} to the 3/3, ${at(elves)} to the 1/1` };
+        },
+      };
+    },
+  }),
+  asked({
     name: "chumps with one token of a stack, not the stack",
     rule: "A chump block against lethal takes one token; the rest of a stack stays home.",
     position(registry) {

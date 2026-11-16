@@ -4,6 +4,27 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-15 — Dragonlord Atarka's 5 all on one creature
+
+Status: fixed 2026-11-15 (its scenarios gate).
+
+- **Seen:** a live game, round 4. A bot cast Dragonlord Atarka and its trigger dealt all 5 to
+  Gisa and Geralf, a 4/4. The user: "bots still don't understand splitting damage".
+- **Right:** divide it to kill: 4 on the 4/4 and 1 on something 1 kills.
+- **Why:** dividing is two choices, the targets and the shares (rules 601.2d, 603.3d), and the
+  bots made only the first. An answer with no `division` is split as evenly as it goes
+  (`divisionOf`): over a 4/4 and a 1/1 that is 3 and 2, the 4/4 lives, and the search rightly
+  scored all 5 on the 4/4 above it. 4 and 1 was never a candidate. The same for a cast (Forked
+  Lightning, Arc Lightning) and an activation.
+- **Scenarios:** "divides Dragonlord Atarka's 5 to kill the 4/4 and the 1/1" and "casts Forked
+  Lightning for 3 and 1 to kill the 3/3 and the 1/1" (gate; each read all of it on the bigger
+  creature without the fix).
+- **Fix (built):** `bot/divisions.ts`. Each candidate naming two targets or more carries its
+  shares: every target what is lethal to it, the cheapest kills first, and the dearest first
+  where that differs; the search plays both out. What it leaves is in BACKLOG ("three tokens of
+  one stack as three targets"): the engine's refusal of one stack in two slots, v1's own answer,
+  and splits that skip the best creature.
+
 ## 2026-11-14 — Reanimate on a one-drop, instead of waiting for something stronger
 
 Status: fixed 2026-11-14 (its scenarios gate), for reanimation and then removal, steal effects, Clones, X spells and tutors to the top of the library.
