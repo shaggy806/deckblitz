@@ -5940,6 +5940,13 @@ export type EffectSpec =
        * as this resolves, read from the effect's controller's side.
        * `{ graveyardOf }`: all the cards in that player's graveyard, a player
        * slot (none with an "up to one" left empty, or gone illegal) or a scope.
+       * `{ exiledWithSource }`: every card exiled with this effect's source
+       * (rule 607.2a — `GameObject.exiledWith`, in the stint the resolving
+       * ability refers to), those it exiled "until it leaves" included (rule
+       * 610.3 — `exiledUntil`): Trial of a Time Lord's "the owner of each card
+       * exiled with this Saga puts that card on the bottom of their library",
+       * each owner arranging their own (401.4). One sent back is no longer
+       * exiled, so nothing returns it when the source leaves (the ruling).
        *
        * `"bottom-random"` is "on the bottom of their library **in a random
        * order**" (Endurance): nothing to arrange, since the effect fixes the
@@ -5952,7 +5959,8 @@ export type EffectSpec =
       readonly what:
         | { readonly targetsFrom: number }
         | { readonly all: CardFilter }
-        | { readonly graveyardOf: number | PlayerScope };
+        | { readonly graveyardOf: number | PlayerScope }
+        | { readonly exiledWithSource: true };
       readonly position: "top" | "bottom" | "owner-chooses" | "shuffle" | "bottom-random" | { readonly fromTop: number };
       /** The resolving spell goes with them — "shuffle **Serene Remembrance
        * and** up to three target cards from a single graveyard into their
@@ -20584,7 +20592,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                 : scopedOrTargetedPlayers(spec.what.graveyardOf, ctx).flatMap((t) =>
                     t?.kind === "player" ? [...ctx.cardsIn(t.player, "graveyard")] : [],
                   )
-              : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
+              : "exiledWithSource" in spec.what
+                ? [...ctx.cardsExiledWithSource(true)]
+                : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
         if (spec.withSource === true) {
           const self = objectRefAct("source", ctx);
           if (self?.kind === "object") objects.push(self.object);

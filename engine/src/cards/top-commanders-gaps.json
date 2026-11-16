@@ -2735,7 +2735,8 @@
   "effect:player-mana-ability-until-eot",
   "effect:choose-new-targets-any-number",
   "static:cost-reduction-targeting-enchanted-player",
-  "effect:each-opponent-may-single-result"
+  "effect:each-opponent-may-single-result",
+  "effect:exile-to-library-bottom-linked"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
