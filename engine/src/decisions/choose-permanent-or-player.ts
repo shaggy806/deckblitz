@@ -9,6 +9,12 @@
  * The raise is `Game.beginChoosePermanentOrPlayer`, reached from a
  * `choose-permanents` effect with `orPlayers`; the answer applies that
  * effect's `then` to the one chosen as target 0.
+ *
+ * It also asks which of a resolution's own targets is handled next — a
+ * `turnOrder` `for-each-target` (Soulfire Eruption's ruling: in turn order,
+ * the caster ordering each player's group as it resolves). That raise,
+ * `pickOnly`, is the `pickNextTarget` resolution method, and its answer is
+ * only recorded: the resolution parked beneath reads it (rule 608.2d).
  */
 
 import type { Action, LegalAction } from "../actions.js";
@@ -29,7 +35,7 @@ export const choosePermanentOrPlayer = defineDecision({
       source: awaiting.source,
       eligible: [...awaiting.eligible],
       prompt: awaiting.prompt,
-      polarity: slotPolarities(awaiting.then, 1)[0] ?? "either",
+      polarity: slotPolarities(awaiting.then, (awaiting.pickOnly?.slot ?? 0) + 1)[awaiting.pickOnly?.slot ?? 0] ?? "either",
     },
   ],
 

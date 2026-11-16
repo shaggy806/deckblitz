@@ -75,6 +75,7 @@ import type { BoundObject, EffectProhibition, Prohibition } from "./prohibitions
 import type { ObjectRef, PlayerRef } from "./refs.js";
 import type { StickerCount } from "./stickers.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
+import { sameTargetRef } from "./target.js";
 import {
   isAttachAll,
   isAttachChoice,
@@ -2609,6 +2610,41 @@ export type EffectSpec =
       readonly group?: number;
       readonly effect: EffectSpec;
       readonly simultaneous?: boolean;
+      /**
+       * The members are handled one at a time **in turn order**, the
+       * controller choosing the order within each player's group as it
+       * resolves (rule 608.2f) — the rulings of Soulfire Eruption and Kaboom!: "those
+       * targets will be handled one at a time in turn order. Start with
+       * targets that are either the player whose turn it is … or permanents
+       * that player controls. You choose the relative order of targets within
+       * that group." A player member is in their own group, a permanent in
+       * its controller's (as the resolution begins); the groups go from the
+       * active player in turn order (APNAP), and in a group of two or more
+       * the controller picks the next member each time, after the one before
+       * it is done (the `choose-permanent-or-player` decision, its answer
+       * only recorded) — so a top card revealed by then is seen before the
+       * pick (the second ruling). Not with `simultaneous`.
+       */
+      readonly turnOrder?: true;
+      /**
+       * Each member's turn is its own "this way" (as a `repeat`'s pass is):
+       * "for each of them, exile the top card of your library, then … deals
+       * damage equal to **that card's** mana value" (Soulfire Eruption) reads
+       * only the card that member's turn exiled. Restored once the last
+       * member is done, so what follows reads them all. Not with
+       * `simultaneous`.
+       */
+      readonly ownThisWay?: true;
+      /** Engine-built, never authored: a `turnOrder` or `ownThisWay` one
+       * part-way. `groups`: the members still to handle (target indices), a
+       * group a player, in the order they go; `outer`: the resolution's own
+       * "this way" start, restored at the end; `askedAt`: the event the
+       * controller's pick among `groups[0]` is read from, once answered. */
+      readonly progress?: {
+        readonly groups: readonly (readonly number[])[];
+        readonly outer: number;
+        readonly askedAt?: number;
+      };
     }
   | {
       /**
@@ -12539,6 +12575,15 @@ export interface EffectApi {
     except: readonly ObjectId[],
     chooser: PlayerId,
   ): void;
+  /** A `turnOrder` `for-each-target`'s pick: raise the
+   * `choose-permanent-or-player` decision for the controller over `among`
+   * (some of this resolution's own targets), its answer only recorded —
+   * read back with {@link targetPickedSince}. `effect` is what the one
+   * picked will meet at slot `slot`, for the offer's side. */
+  pickNextTarget(among: readonly TargetRef[], effect: EffectSpec, slot: number, prompt: string): void;
+  /** The permanent or player the controller picked for this source's
+   * effect since event `since` — the last such answer — or `undefined`. */
+  targetPickedSince(since: number): TargetRef | undefined;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
    * Nothing, if they control no creature (rule 701.68b). */
@@ -15012,6 +15057,168 @@ function facesVillainousByController(effect: EffectSpec, from: number): boolean 
   if (effect.kind !== "each-player-may" || effect.villainous !== true) return false;
   const who = effect.who;
   return typeof who === "object" && "controllerOf" in who && who.controllerOf === from;
+}
+
+/** A `for-each-target`'s members — target indices, in target order: every
+ * target from slot `from` still there, or with `group`, that group's. */
+function forEachTargetMembers(spec: Extract<EffectSpec, { kind: "for-each-target" }>, ctx: ResolutionContext): number[] {
+  const members: number[] = [];
+  if (spec.group === undefined) {
+    for (let index = spec.from; index < ctx.targets.length; index += 1) {
+      if (ctx.targets[index] !== undefined) members.push(index);
+    }
+    return members;
+  }
+  // One of several groups in a row: each ends at an empty slot, which a
+  // member found illegal as it resolved (blanked too, rule 608.2b) isn't.
+  const illegal = ctx.illegalTargets ?? [];
+  const ends = (index: number): boolean => ctx.targets[index] === undefined && !illegal.includes(index);
+  let index = spec.from;
+  for (let skipped = 0; skipped < spec.group && index < ctx.targets.length; index += 1) {
+    if (ends(index)) skipped += 1;
+  }
+  for (; index < ctx.targets.length && !ends(index); index += 1) {
+    if (ctx.targets[index] !== undefined) members.push(index);
+  }
+  return members;
+}
+
+/** A `for-each-target`'s members in the order they're handled when nobody
+ * chooses it. */
+function orderedForEachTargetMembers(
+  spec: Extract<EffectSpec, { kind: "for-each-target" }>,
+  ctx: ResolutionContext,
+): number[] {
+  const members = forEachTargetMembers(spec, ctx);
+  // Target players each told to do the same thing act — and make their
+  // choices — in APNAP order, whatever order they were targeted in (rule
+  // 101.4): Priest of Forgotten Gods' "any number of target players each
+  // … sacrifice a creature" asks the active player first, then the
+  // rest in turn order.
+  if (members.length > 0 && members.every((index) => ctx.targets[index]?.kind === "player")) {
+    const order = ctx.playersInScope("each-player");
+    const rank = (index: number): number => {
+      const target = ctx.targets[index];
+      const at = target?.kind === "player" ? order.indexOf(target.player) : -1;
+      return at < 0 ? order.length : at;
+    };
+    members.sort((a, b) => rank(a) - rank(b));
+  } else if (facesVillainousByController(spec.effect, spec.from)) {
+    // Each member's controller faces a villainous choice: those players
+    // face theirs one at a time in APNAP order, whatever order the
+    // targets were chosen in (rule 701.55d) — Hunted by The Family's "for
+    // each of them, that creature's controller faces a villainous
+    // choice". One player's several go in target order (a stable sort).
+    const order = ctx.playersInScope("each-player");
+    const rank = (index: number): number => {
+      const target = ctx.targets[index];
+      const player = target === undefined ? undefined : ctx.controllerOf(target);
+      const at = player === undefined ? -1 : order.indexOf(player);
+      return at < 0 ? order.length : at;
+    };
+    members.sort((a, b) => rank(a) - rank(b));
+  }
+  return members;
+}
+
+/**
+ * A `for-each-target` with `turnOrder` or `ownThisWay`: one member at a time,
+ * each bound to slot `from` as a `for-target` step is. Parked with its
+ * `progress` whenever a member's effect stops to ask, or the controller is
+ * asked which member of a group goes next, and resumed from there.
+ *
+ * `turnOrder` (Soulfire Eruption's and Kaboom!'s rulings; rule 608.2f: an
+ * action that can't be processed simultaneously goes in APNAP order first,
+ * then the controller orders the actions on a player and what they control):
+ * each member in its player's group — a player's own, a permanent's (or
+ * spell's) controller's as the resolution begins — the groups from the
+ * active player in turn order, and within a group of two or more the
+ * controller picks the next member, one at a time, after the one before it
+ * is done. The pick is a choice made as the spell resolves (rule 608.2d), not
+ * a target: it's among the targets already chosen.
+ */
+function applyForEachTargetInTurn(spec: Extract<EffectSpec, { kind: "for-each-target" }>, ctx: ResolutionContext): void {
+  let progress = spec.progress;
+  if (progress === undefined) {
+    let groups: (readonly number[])[];
+    if (spec.turnOrder === true) {
+      const members = forEachTargetMembers(spec, ctx);
+      const playerOf = (index: number): PlayerId | undefined => {
+        const target = ctx.targets[index];
+        if (target === undefined) return undefined;
+        return target.kind === "player" ? target.player : ctx.controllerOf(target);
+      };
+      const order = ctx.playersInScope("each-player");
+      groups = order.map((player) => members.filter((index) => playerOf(index) === player));
+      // A member no player in the game stands for — none should be (a player
+      // who leaves takes what they own and gives back what they control, rule
+      // 800.4a): last, in target order.
+      const strays = members.filter((index) => {
+        const player = playerOf(index);
+        return player === undefined || !order.includes(player);
+      });
+      groups.push(...strays.map((index) => [index]));
+    } else {
+      groups = orderedForEachTargetMembers(spec, ctx).map((index) => [index]);
+    }
+    groups = groups.filter((group) => group.length > 0);
+    if (groups.length === 0) return;
+    progress = { groups, outer: ctx.thisWaySince() };
+  }
+  for (;;) {
+    const groups: readonly (readonly number[])[] = progress.groups;
+    const group: readonly number[] | undefined = groups[0];
+    if (group === undefined) {
+      // Done: what follows reads everything the members did (`ownThisWay`).
+      if (spec.ownThisWay === true) ctx.scopeThisWay(progress.outer);
+      return;
+    }
+    let next: number | undefined;
+    if (progress.askedAt !== undefined) {
+      const picked = ctx.targetPickedSince(progress.askedAt);
+      next = picked === undefined ? undefined : group.find((index) => {
+        const target = ctx.targets[index];
+        return target !== undefined && sameTargetRef(target, picked);
+      });
+      // Nothing came back (nothing was there to pick): the group in target order.
+      next ??= group[0];
+    } else if (group.length === 1) {
+      next = group[0];
+    } else {
+      const among = group.flatMap((index) => {
+        const target = ctx.targets[index];
+        return target === undefined ? [] : [target];
+      });
+      const asking: EffectSpec = { ...spec, progress: { groups, outer: progress.outer, askedAt: ctx.nextEventSeq() } };
+      // Something earlier still waits: ask once it's answered.
+      if (ctx.decisionPending()) {
+        ctx.resumeAfterDecisions({ ...spec, progress });
+        return;
+      }
+      ctx.pickNextTarget(among, spec.effect, spec.from, "Choose which of these targets is handled next");
+      if (ctx.decisionPending()) {
+        ctx.resumeAfterDecisions(asking);
+        return;
+      }
+      next = group[0];
+    }
+    const member = next;
+    // Every group kept is non-empty, so there's always one.
+    if (member === undefined) return;
+    const left: (readonly number[])[] = [group.filter((index) => index !== member), ...groups.slice(1)].filter(
+      (g) => g.length > 0,
+    );
+    progress = { groups: left, outer: progress.outer };
+    // `ownThisWay`: this member's turn is its own "this way".
+    const run = spec.ownThisWay === true ? ctx.scopeThisWay(ctx.nextEventSeq()) : ctx;
+    const parked = run.parkedCount();
+    const pendingBefore = run.decisionPending();
+    applyEffectSpec({ kind: "for-target", from: spec.from, index: member, effect: spec.effect }, run);
+    if (!pendingBefore && run.decisionPending()) {
+      run.resumeAfterDecisions({ ...spec, progress }, parked);
+      return;
+    }
+  }
 }
 
 function asksNothing(effect: EffectSpec): boolean {
@@ -18414,56 +18621,15 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "for-each-target": {
+      if (spec.turnOrder === true || spec.ownThisWay === true || spec.progress !== undefined) {
+        applyForEachTargetInTurn(spec, ctx);
+        return;
+      }
       // One step per member still there, each binding it to slot `from` —
       // as steps of a `sequence`, so a member's effect that stops to ask
       // something holds the rest until it's answered.
-      const members: number[] = [];
-      if (spec.group === undefined) {
-        for (let index = spec.from; index < ctx.targets.length; index += 1) {
-          if (ctx.targets[index] !== undefined) members.push(index);
-        }
-      } else {
-        // One of several groups in a row: each ends at an empty slot, which a
-        // member found illegal as it resolved (blanked too, rule 608.2b) isn't.
-        const illegal = ctx.illegalTargets ?? [];
-        const ends = (index: number): boolean => ctx.targets[index] === undefined && !illegal.includes(index);
-        let index = spec.from;
-        for (let skipped = 0; skipped < spec.group && index < ctx.targets.length; index += 1) {
-          if (ends(index)) skipped += 1;
-        }
-        for (; index < ctx.targets.length && !ends(index); index += 1) {
-          if (ctx.targets[index] !== undefined) members.push(index);
-        }
-      }
+      const members = orderedForEachTargetMembers(spec, ctx);
       if (members.length === 0) return;
-      // Target players each told to do the same thing act — and make their
-      // choices — in APNAP order, whatever order they were targeted in (rule
-      // 101.4): Priest of Forgotten Gods' "any number of target players each
-      // … sacrifice a creature" asks the active player first, then the
-      // rest in turn order.
-      if (members.every((index) => ctx.targets[index]?.kind === "player")) {
-        const order = ctx.playersInScope("each-player");
-        const rank = (index: number): number => {
-          const target = ctx.targets[index];
-          const at = target?.kind === "player" ? order.indexOf(target.player) : -1;
-          return at < 0 ? order.length : at;
-        };
-        members.sort((a, b) => rank(a) - rank(b));
-      } else if (facesVillainousByController(spec.effect, spec.from)) {
-        // Each member's controller faces a villainous choice: those players
-        // face theirs one at a time in APNAP order, whatever order the
-        // targets were chosen in (rule 701.55d) — Hunted by The Family's "for
-        // each of them, that creature's controller faces a villainous
-        // choice". One player's several go in target order (a stable sort).
-        const order = ctx.playersInScope("each-player");
-        const rank = (index: number): number => {
-          const target = ctx.targets[index];
-          const player = target === undefined ? undefined : ctx.controllerOf(target);
-          const at = player === undefined ? -1 : order.indexOf(player);
-          return at < 0 ? order.length : at;
-        };
-        members.sort((a, b) => rank(a) - rank(b));
-      }
       const steps: EffectSpec[] = members.map((index) => ({
         kind: "for-target",
         from: spec.from,

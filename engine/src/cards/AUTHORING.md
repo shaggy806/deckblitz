@@ -4164,7 +4164,7 @@ members two ways:
   of: "mana-value", filter: {}, in: "exiled-with-source" }` (their total, per
   its ruling) as the token's `basePt`; `of: "power"` is their power (Redemptor
   Dreadnought).
-- `{ kind: "for-each-target", from: n, effect, simultaneous? }` — `effect`
+- `{ kind: "for-each-target", from: n, effect, simultaneous?, turnOrder?, ownThisWay? }` — `effect`
   once per member, each bound in turn to slot `n`, where `effect` is written
   for a single target: Mindbreak Trap's "exile any number of target spells"
   is `{ kind: "for-each-target", from: 0, effect: { kind: "exile", target: 0 },
@@ -4174,6 +4174,19 @@ members two ways:
   in APNAP order whatever order they were targeted in (rule 101.4), so "any
   number of target players each … sacrifice a creature" (Priest of Forgotten
   Gods) asks the active player first, then the rest in turn order.
+  `turnOrder: true` is a ruling that says the targets are "handled one at a
+  time in turn order", players and permanents together, "you choose the
+  relative order of targets within that group" (Soulfire Eruption, Kaboom!):
+  each member in its player's group (a permanent in its controller's), the
+  groups from the active player in turn order, and in a group of two or more
+  the controller picks the next member as it resolves, after the one before
+  it is done (rule 608.2f; `choose-permanent-or-player`, nothing targeted). `ownThisWay:
+  true` gives each member's turn its own "this way", for "for each of them,
+  exile the top card of your library, then … damage equal to **that card's**
+  mana value": the `thisWay: "exiled"` sum inside reads that turn's card
+  alone, and what follows the loop reads them all (Soulfire Eruption). Read
+  the card's rulings for the order before reaching for `turnOrder`: without
+  one, the default order above is the rules'.
 - a `flicker`'s `target: { from: n }` — every member exiled together and
   returned together (Eerie Interlude, Brago, King Eternal).
 

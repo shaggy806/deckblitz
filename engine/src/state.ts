@@ -4745,6 +4745,14 @@ export type AwaitingDecision =
       readonly source: ObjectId;
       readonly x: number;
       readonly thenResolution?: ChoosePermanentsResolution;
+      /** Which of its own targets a resolution handles next — a `turnOrder`
+       * `for-each-target`'s pick within one player's group (Soulfire
+       * Eruption's ruling). The answer is only recorded, as the
+       * `permanent-or-player-chosen` event: the resolution parked beneath
+       * reads it and carries on. `then` is the effect the one picked will
+       * meet at target slot `slot`, read for the offer's side, never applied
+       * here. */
+      readonly pickOnly?: { readonly slot: number };
     }
   | {
       /**

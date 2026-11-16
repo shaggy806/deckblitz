@@ -42132,6 +42132,26 @@ controlledBy,
           targetZones,
           lastKnownRefs: refs,
         }),
+      pickNextTarget: (among, effect, slot, prompt) => {
+        if (among.length === 0) return;
+        this.state.awaiting = {
+          kind: "choose-permanent-or-player",
+          player: controller,
+          eligible: [...among],
+          prompt,
+          then: effect,
+          source,
+          x,
+          pickOnly: { slot },
+        };
+      },
+      targetPickedSince: (since) => {
+        let picked: TargetRef | undefined;
+        for (const event of this.eventsSince(since)) {
+          if (event.type === "permanent-or-player-chosen" && event.source === source) picked = event.chosen;
+        }
+        return picked;
+      },
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(opts.payingCost !== undefined ? { priorityTo: opts.payingCost } : {}), ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
@@ -53746,6 +53766,13 @@ controlledBy,
     }
     this.state.awaiting = null;
     const { then, source, x, thenResolution: resumed } = awaiting;
+    if (awaiting.pickOnly !== undefined) {
+      // Which of its own targets a resolution handles next: recorded, and the
+      // resolution parked beneath reads it as it resumes.
+      this.emit({ type: "permanent-or-player-chosen", player, source, chosen: choice });
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     let chosen: TargetRef | undefined = choice;
     let zone: ZoneType | null = null;
     if (choice.kind === "object") {

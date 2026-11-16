@@ -2707,7 +2707,9 @@
   "effect:each-opponent-exiles-card-from-hand-or-permanent",
   "effect:each-player-exiles-permanents-or-hand-cards",
   "mechanic:name-stickers",
-  "effect:text-change-creature-type-words"
+  "effect:text-change-creature-type-words",
+  "effect:for-each-target-turn-order-chosen-at-resolution",
+  "effect:for-each-target-apnap-order"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

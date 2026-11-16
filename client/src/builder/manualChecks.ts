@@ -12912,4 +12912,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       ],
     }),
   ),
+  // --- Targets handled player by player (2026-11-16) ---------------------------
+  preset(
+    "Soulfire Eruption: you pick which of Bob's targets goes first",
+    board({
+      you: { bf: ['Mountain*10'], hand: ['Soulfire Eruption'], lib: ['Lightning Bolt', 'Hill Giant'] },
+      opp: { bf: ['Ancient Brontodon'] },
+    }),
+  ),
+  preset(
+    "Soulfire Eruption: one player's targets at a time in a 4-player game",
+    board({
+      you: {
+        bf: ['Mountain*9'],
+        hand: ['Soulfire Eruption'],
+        lib: ['Lightning Bolt', 'Grizzly Bears', 'Hill Giant', 'Craw Wurm'],
+      },
+      opp: [{}, { bf: ['Ancient Brontodon'] }, {}],
+    }),
+  ),
+  preset(
+    "Kaboom!: a target's own question comes before the next pick",
+    board({
+      you: { bf: ['Mountain*5'], hand: ['Kaboom!'], lib: ['Forest', 'Lightning Bolt', 'Hill Giant'] },
+      opp: { bf: ['Jace Beleren'] },
+    }),
+  ),
 ]

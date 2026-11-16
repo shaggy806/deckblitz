@@ -8547,3 +8547,16 @@ A board's player with a card that puts stickers plays with the first three of Un
 ### Karn Liberated: −14 in a 4-player game sends a commander home
 - **Do:** In this 4-player game, use Karn's −14 and keep your new hand.
 - **Expect:** Everyone takes the mulligans again. Then it's turn 1, yours: Bob's Kenrith is back in his command zone, Carol's Serra Angel is on your side, and Dave's Hill Giant is gone. Everyone is at 40 life.
+## Targets handled player by player, in an order you pick (2026-11-16)
+
+### Soulfire Eruption: you pick which of Bob's targets goes first
+- **Do:** Cast Soulfire Eruption: click Bob, then his Ancient Brontodon, then Done. When asked, click Ancient Brontodon.
+- **Expect:** As it resolves the banner reads "Soulfire Eruption: Choose which of these targets is handled next — click a highlighted permanent or player.", Bob and his Brontodon lit. The Brontodon takes 1 (Lightning Bolt, the top card) and Bob 4 (Hill Giant, the next), down to 36. Both cards sit in exile, and the Bolt can be cast from there (open your exile and click it).
+
+### Soulfire Eruption: one player's targets at a time in a 4-player game
+- **Do:** In this 4-player game, cast Soulfire Eruption at Dave, Carol's Ancient Brontodon, Bob and Carol, then Done. When asked, click Carol.
+- **Expect:** Only one question, over Carol and her Brontodon alone. Bob loses 1, Carol 2, her Brontodon takes 4 and Dave loses 6: Bob's turn comes first after yours, whatever order you targeted them in.
+
+### Kaboom!: a target's own question comes before the next pick
+- **Do:** Cast Kaboom!: click Bob, then his Jace Beleren, then Done. When asked, click Jace Beleren, then put the two revealed cards on the bottom in either order.
+- **Expect:** Jace is revealed a Forest and Lightning Bolt and drops to 2 loyalty; you're asked their order on the bottom before anything is revealed for Bob. Then Bob is revealed the Hill Giant and goes to 36.
