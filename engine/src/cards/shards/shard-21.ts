@@ -608,6 +608,7 @@ import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPatternBufferPreservation from "../pool/pattern-buffer-preservation.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
 import _poolPerplex from "../pool/perplex.js";
+import _poolPestilenceRats from "../pool/pestilence-rats.js";
 import _poolPetalmaneBaku from "../pool/petalmane-baku.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
 import _poolPhantasmalMount from "../pool/phantasmal-mount.js";
@@ -1606,6 +1607,7 @@ const shard: CardShard = {
     _poolPatternBufferPreservation,
     _poolPeemaOutrider,
     _poolPerplex,
+    _poolPestilenceRats,
     _poolPetalmaneBaku,
     _poolPhantasmalImage,
     _poolPhantasmalMount,

@@ -12955,6 +12955,7 @@ import _poolHobgoblinMantledMarauder from "./pool/hobgoblin-mantled-marauder.js"
 import _poolHofriGhostforge from "./pool/hofri-ghostforge.js";
 import _poolHogMonkeyRampage from "./pool/hog-monkey-rampage.js";
 import _poolHogMonkey from "./pool/hog-monkey.js";
+import _poolHogaakArisenNecropolis from "./pool/hogaak-arisen-necropolis.js";
 import _poolHokoriDustDrinker from "./pool/hokori-dust-drinker.js";
 import _poolHoldAtBay from "./pool/hold-at-bay.js";
 import _poolHoldForQuestioning from "./pool/hold-for-questioning.js";
@@ -15797,6 +15798,7 @@ import _poolLeylineImmersion from "./pool/leyline-immersion.js";
 import _poolLeylineInvocation from "./pool/leyline-invocation.js";
 import _poolLeylineOfAbundance from "./pool/leyline-of-abundance.js";
 import _poolLeylineOfAnticipation from "./pool/leyline-of-anticipation.js";
+import _poolLeylineOfCombustion from "./pool/leyline-of-combustion.js";
 import _poolLeylineOfHope from "./pool/leyline-of-hope.js";
 import _poolLeylineOfLifeforce from "./pool/leyline-of-lifeforce.js";
 import _poolLeylineOfLightning from "./pool/leyline-of-lightning.js";
@@ -20094,6 +20096,7 @@ import _poolPestbroodSloth from "./pool/pestbrood-sloth.js";
 import _poolPesteredWellguard from "./pool/pestered-wellguard.js";
 import _poolPestermite from "./pool/pestermite.js";
 import _poolPestilenceDemon from "./pool/pestilence-demon.js";
+import _poolPestilenceRats from "./pool/pestilence-rats.js";
 import _poolPestilence from "./pool/pestilence.js";
 import _poolPestilentCauldron from "./pool/pestilent-cauldron.js";
 import _poolPestilentHaze from "./pool/pestilent-haze.js";
@@ -30146,6 +30149,7 @@ import _poolValgavothTerrorEater from "./pool/valgavoth-terror-eater.js";
 import _poolValgavothsFaithful from "./pool/valgavoths-faithful.js";
 import _poolValgavothsLair from "./pool/valgavoths-lair.js";
 import _poolValgavothsOnslaught from "./pool/valgavoths-onslaught.js";
+import _poolValiantChangeling from "./pool/valiant-changeling.js";
 import _poolValiantEndeavor from "./pool/valiant-endeavor.js";
 import _poolValiantGuard from "./pool/valiant-guard.js";
 import _poolValiantKnight from "./pool/valiant-knight.js";
@@ -46213,6 +46217,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHofriGhostforge,
   _poolHogMonkeyRampage,
   _poolHogMonkey,
+  _poolHogaakArisenNecropolis,
   _poolHokoriDustDrinker,
   _poolHoldAtBay,
   _poolHoldForQuestioning,
@@ -49055,6 +49060,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeylineInvocation,
   _poolLeylineOfAbundance,
   _poolLeylineOfAnticipation,
+  _poolLeylineOfCombustion,
   _poolLeylineOfHope,
   _poolLeylineOfLifeforce,
   _poolLeylineOfLightning,
@@ -53352,6 +53358,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPesteredWellguard,
   _poolPestermite,
   _poolPestilenceDemon,
+  _poolPestilenceRats,
   _poolPestilence,
   _poolPestilentCauldron,
   _poolPestilentHaze,
@@ -63404,6 +63411,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolValgavothsFaithful,
   _poolValgavothsLair,
   _poolValgavothsOnslaught,
+  _poolValiantChangeling,
   _poolValiantEndeavor,
   _poolValiantGuard,
   _poolValiantKnight,
@@ -79484,6 +79492,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hofri-ghostforge": _poolHofriGhostforge,
   "pool/hog-monkey-rampage": _poolHogMonkeyRampage,
   "pool/hog-monkey": _poolHogMonkey,
+  "pool/hogaak-arisen-necropolis": _poolHogaakArisenNecropolis,
   "pool/hokori-dust-drinker": _poolHokoriDustDrinker,
   "pool/hold-at-bay": _poolHoldAtBay,
   "pool/hold-for-questioning": _poolHoldForQuestioning,
@@ -82326,6 +82335,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leyline-invocation": _poolLeylineInvocation,
   "pool/leyline-of-abundance": _poolLeylineOfAbundance,
   "pool/leyline-of-anticipation": _poolLeylineOfAnticipation,
+  "pool/leyline-of-combustion": _poolLeylineOfCombustion,
   "pool/leyline-of-hope": _poolLeylineOfHope,
   "pool/leyline-of-lifeforce": _poolLeylineOfLifeforce,
   "pool/leyline-of-lightning": _poolLeylineOfLightning,
@@ -86623,6 +86633,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pestered-wellguard": _poolPesteredWellguard,
   "pool/pestermite": _poolPestermite,
   "pool/pestilence-demon": _poolPestilenceDemon,
+  "pool/pestilence-rats": _poolPestilenceRats,
   "pool/pestilence": _poolPestilence,
   "pool/pestilent-cauldron": _poolPestilentCauldron,
   "pool/pestilent-haze": _poolPestilentHaze,
@@ -96675,6 +96686,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/valgavoths-faithful": _poolValgavothsFaithful,
   "pool/valgavoths-lair": _poolValgavothsLair,
   "pool/valgavoths-onslaught": _poolValgavothsOnslaught,
+  "pool/valiant-changeling": _poolValiantChangeling,
   "pool/valiant-endeavor": _poolValiantEndeavor,
   "pool/valiant-guard": _poolValiantGuard,
   "pool/valiant-knight": _poolValiantKnight,

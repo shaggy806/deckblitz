@@ -541,6 +541,7 @@ import _poolLeadenFists from "../pool/leaden-fists.js";
 import _poolLeoninDenGuard from "../pool/leonin-den-guard.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLeylineAxe from "../pool/leyline-axe.js";
+import _poolLeylineOfCombustion from "../pool/leyline-of-combustion.js";
 import _poolLeylineOfTheVoid from "../pool/leyline-of-the-void.js";
 import _poolLiarsPendulum from "../pool/liars-pendulum.js";
 import _poolLife from "../pool/life.js";
@@ -1640,6 +1641,7 @@ const shard: CardShard = {
     _poolLeoninDenGuard,
     _poolLeoninLightbringer,
     _poolLeylineAxe,
+    _poolLeylineOfCombustion,
     _poolLeylineOfTheVoid,
     _poolLiarsPendulum,
     _poolLife,

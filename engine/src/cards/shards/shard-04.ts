@@ -906,6 +906,7 @@ import _poolUnflinchingHortimancer from "../pool/unflinching-hortimancer.js";
 import _poolUnimpededTrespasser from "../pool/unimpeded-trespasser.js";
 import _poolUnstableExperiment from "../pool/unstable-experiment.js";
 import _poolUrsineFylgja from "../pool/ursine-fylgja.js";
+import _poolValiantChangeling from "../pool/valiant-changeling.js";
 import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
@@ -1924,6 +1925,7 @@ const shard: CardShard = {
     _poolUnimpededTrespasser,
     _poolUnstableExperiment,
     _poolUrsineFylgja,
+    _poolValiantChangeling,
     _poolValorOfTheWorthy,
     _poolVampireChampion,
     _poolVaultSkirge,
