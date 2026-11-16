@@ -12994,4 +12994,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ human: true, bf: ['Muscle Sliver'] }, { bf: ['Winged Sliver'] }, { bf: ['Grizzly Bears'] }],
     }),
   ),
+  // --- Which permission a card is played under (2026-11-16) ------------------
+  preset(
+    "The Fourth Doctor: cast the top card under the Doctor's permission or the Skull's",
+    board({
+      you: { bf: ['The Fourth Doctor', 'Crystal Skull, Isu Spyglass', 'Island*4'], lib: ['Sol Ring', 'Mind Stone'] },
+    }),
+  ),
+  preset(
+    "The Fourth Doctor: a legendary land under Courser's permission or the Doctor's, in a 4-player game",
+    board({
+      you: { bf: ['The Fourth Doctor', 'Courser of Kruphix', 'Island*2'], lib: ["Gaea's Cradle", 'Sol Ring'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

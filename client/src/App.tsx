@@ -279,9 +279,22 @@ function graveyardVariantLabel(
 /** A menu item or button for one way of playing a card, naming the card too:
  * "Cast Patron of the Akki (offering sacrificing Goblin Piker: -{1}{R})". */
 function castWayLabel(a: CastAction | LandAction, view: PlayerView): string {
-  const variant = graveyardVariantLabel(a, view, false)
+  // A way naming another permanent's permission (another player's hand under
+  // two permissions) says whose: only offers with a choice name one.
+  const variant = graveyardVariantLabel(a, view, true)
   const space = variant.indexOf(' ')
   return `${a.kind === 'play-land' ? 'Play' : 'Cast'} ${a.cardName}${space < 0 ? '' : ` (${variant.slice(space + 1)})`}`
+}
+
+/** " (via Courser of Kruphix)" for a way that names another permanent's
+ * permission to play the card — the engine offers one per permission when
+ * several reach a card on top of a library (The Fourth Doctor's once-a-turn
+ * play beside Courser's), so the buttons tell them apart. Nothing otherwise. */
+function permissionSourceSuffix(a: CastAction | LandAction, view: PlayerView): string {
+  const source = a.graveyardGrant?.source
+  if (source === undefined || source === a.card) return ''
+  const name = view.objects[source]?.cardName
+  return name === undefined ? '' : ` (via ${name})`
 }
 
 /** A row of a hand card's menu of ways to play it (the user, 2026-11-14: "a
@@ -4721,17 +4734,23 @@ function Table({
           flipIn={flipIn}
         />
         {plots.length > 0 ? <div className="library-top-actions">{plotButtons(obj.id, plots)}</div> : null}
-        {faceOpts.length > 1 || faceOpts.some(needsOwnButton)
-          ? faceOpts.map((a, i) => (
+        {/* A column beside the card, as the plot buttons are: a way each. */}
+        {faceOpts.length > 1 || faceOpts.some(needsOwnButton) ? (
+          <div className="library-top-actions">
+            {faceOpts.map((a, i) => (
               <button key={i} type="button" onClick={() => playFace(a)}>
                 {needsOwnButton(a) ? (
                   <Symbols text={castWayLabel(a, view)} />
                 ) : (
-                  <>{a.kind === 'play-land' ? 'Play' : 'Cast'} {a.cardName}</>
+                  <>
+                    {a.kind === 'play-land' ? 'Play' : 'Cast'} {a.cardName}
+                    {permissionSourceSuffix(a, view)}
+                  </>
                 )}
               </button>
-            ))
-          : null}
+            ))}
+          </div>
+        ) : null}
       </>
     )
   }

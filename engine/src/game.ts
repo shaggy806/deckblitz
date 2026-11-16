@@ -3134,6 +3134,11 @@ export class Game {
         this.passPriority(action.player);
         break;
       case "play-land":
+        // Under the permission it names, from anywhere but a graveyard.
+        if (this.playGrantToScope(action.card, action.graveyardGrant)) {
+          this.withCastGrantScope(action.card, action.graveyardGrant, () => this.dispatchOne(action));
+          break;
+        }
         this.playLand(action.player, action.card, action.face ?? 0, action.graveyardGrant);
         break;
       case "suspend":
@@ -3166,6 +3171,12 @@ export class Game {
         this.withLifeChoice(action.phyrexianLife, () => this.cycleCard(action.player, action.card));
         break;
       case "cast-spell":
+        // Under the permission it names, from anywhere but a graveyard
+        // (`playGrantChoices`), for all that follows.
+        if (isPermissionCast(action.via) && this.playGrantToScope(action.card, action.graveyardGrant)) {
+          this.withCastGrantScope(action.card, action.graveyardGrant, () => this.dispatchOne(action));
+          break;
+        }
         // "Choose X": X is the number of modes chosen (`atModesX`).
         if (this.atModesX(action) !== action) {
           this.dispatchOne(this.atModesX(action));
@@ -3419,6 +3430,9 @@ export class Game {
           ? null
           : `${action.player} does not have priority`;
       case "play-land":
+        if (this.playGrantToScope(action.card, action.graveyardGrant)) {
+          return this.withCastGrantScope(action.card, action.graveyardGrant, () => this.canDispatch(action));
+        }
         return this.whyCannotPlayLand(
           action.player,
           action.card,
@@ -3444,6 +3458,9 @@ export class Game {
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
+        if (isPermissionCast(action.via) && this.playGrantToScope(action.card, action.graveyardGrant)) {
+          return this.withCastGrantScope(action.card, action.graveyardGrant, () => this.canDispatch(action));
+        }
         if (this.atModesX(action) !== action) return this.canDispatch(this.atModesX(action));
         if (action.altCostIndex !== undefined && this.altCostPick !== action.altCostIndex) {
           return this.withAltCostPick(action.altCostIndex, () => this.canDispatch(action));
@@ -4017,27 +4034,32 @@ export class Game {
         if (!this.mayPlayFromExile(player, card, face ?? 0)) continue;
         const def = this.faceDef(card, face ?? 0);
         const faceProp = face !== undefined ? { face } : {};
-        if (def.types.includes("land")) {
-          // "You may *play* them" includes lands; "cast spells from among
-          // them" doesn't (`mayPlayFromExile`). Still costs the land drop.
-          if (this.whyCannotPlayLand(player, card, face ?? 0) === null) {
-            out.push({ kind: "play-land", card, cardName: def.name, ...faceProp });
+        // More than one permission reaching it: an offer under each
+        // (`playGrantChoices`).
+        for (const grant of this.playGrantChoices(player, card, face ?? 0)) {
+          if (def.types.includes("land")) {
+            // "You may *play* them" includes lands; "cast spells from among
+            // them" doesn't (`mayPlayFromExile`). Still costs the land drop.
+            if (this.whyCannotPlayLandUnder(player, card, face ?? 0, grant) === null) {
+              out.push({ kind: "play-land", card, cardName: def.name, ...faceProp, ...(grant !== undefined ? { graveyardGrant: grant } : {}) });
+            }
+            continue;
           }
-          continue;
-        }
-        // Under a `perType` group (Aminatou's Augury), one offer per type it
-        // could be cast as, naming the type it spends (the ruling: an
-        // artifact creature as either).
-        const typed = this.impulseGroupTypes(player, card, face ?? 0);
-        for (const asType of typed !== undefined && typed.length > 0 ? typed : [undefined]) {
-          out.push(
-            ...this.castSpellActions(player, card, def.name, def, {
-              via: "impulse",
-              ...faceProp,
-              costString: def.manaCost,
-              ...(asType !== undefined ? { graveyardGrant: { source: card, asType } } : {}),
-            }),
-          );
+          // Under a `perType` group (Aminatou's Augury), one offer per type it
+          // could be cast as, naming the type it spends (the ruling: an
+          // artifact creature as either).
+          const typed = grant === undefined || grant.source === card ? this.impulseGroupTypes(player, card, face ?? 0) : undefined;
+          for (const asType of typed !== undefined && typed.length > 0 ? typed : [undefined]) {
+            const named = asType !== undefined ? { source: card, asType } : grant;
+            out.push(
+              ...this.castSpellActions(player, card, def.name, def, {
+                via: "impulse",
+                ...faceProp,
+                costString: def.manaCost,
+                ...(named !== undefined ? { graveyardGrant: named } : {}),
+              }),
+            );
+          }
         }
       }
     }
@@ -4051,19 +4073,23 @@ export class Game {
           if (this.playOptions(player, card, face ?? 0).length === 0) continue;
           const def = this.faceDef(card, face ?? 0);
           const faceProp = face !== undefined ? { face } : {};
-          if (def.types.includes("land")) {
-            if (this.whyCannotPlayLand(player, card, face ?? 0) === null) {
-              out.push({ kind: "play-land", card, cardName: def.name, ...faceProp });
+          for (const grant of this.playGrantChoices(player, card, face ?? 0)) {
+            const grantProp = grant !== undefined ? { graveyardGrant: grant } : {};
+            if (def.types.includes("land")) {
+              if (this.whyCannotPlayLandUnder(player, card, face ?? 0, grant) === null) {
+                out.push({ kind: "play-land", card, cardName: def.name, ...faceProp, ...grantProp });
+              }
+              continue;
             }
-            continue;
+            out.push(
+              ...this.castSpellActions(player, card, def.name, def, {
+                via: "other-hand",
+                ...faceProp,
+                costString: def.manaCost,
+                ...grantProp,
+              }),
+            );
           }
-          out.push(
-            ...this.castSpellActions(player, card, def.name, def, {
-              via: "other-hand",
-              ...faceProp,
-              costString: def.manaCost,
-            }),
-          );
         }
       }
     }
@@ -4076,13 +4102,18 @@ export class Game {
           if (this.playOptions(player, card, face ?? 0).length === 0) continue;
           const def = this.faceDef(card, face ?? 0);
           const faceProp = face !== undefined ? { face } : {};
-          if (def.types.includes("land")) {
-            if (this.whyCannotPlayLand(player, card, face ?? 0) === null) {
-              out.push({ kind: "play-land", card, cardName: def.name, ...faceProp });
+          for (const grant of this.playGrantChoices(player, card, face ?? 0)) {
+            const grantProp = grant !== undefined ? { graveyardGrant: grant } : {};
+            if (def.types.includes("land")) {
+              if (this.whyCannotPlayLandUnder(player, card, face ?? 0, grant) === null) {
+                out.push({ kind: "play-land", card, cardName: def.name, ...faceProp, ...grantProp });
+              }
+              continue;
             }
-            continue;
+            out.push(
+              ...this.castSpellActions(player, card, def.name, def, { via: "other-hand", ...faceProp, costString: def.manaCost, ...grantProp }),
+            );
           }
-          out.push(...this.castSpellActions(player, card, def.name, def, { via: "other-hand", ...faceProp, costString: def.manaCost }));
         }
       }
     }
@@ -4277,31 +4308,39 @@ export class Game {
     // included. Still consumes the land drop / sorcery timing.
     // Another player's too, where a resolved rule reaches it (Xanathar,
     // Guild Kingpin).
+    // More than one permission reaching it (Courser of Kruphix beside The
+    // Fourth Doctor): an offer under each (`playGrantChoices`).
     const castsFromTop = this.reachesZone(player, "library-top");
     for (const libraryTop of castsFromTop ? this.libraryTopsFor(player) : this.state.zones.perPlayer[player].library.slice(0, 1)) {
       for (const face of this.modalFaces(libraryTop)) {
         const def = this.faceDef(libraryTop, face ?? 0);
-        if (def.types.includes("land")) {
-          if (this.whyCannotPlayLand(player, libraryTop, face ?? 0) === null) {
-            out.push({
-              kind: "play-land",
-              card: libraryTop,
-              cardName: def.name,
-              ...(face !== undefined ? { face } : {}),
-            });
+        const grants = castsFromTop ? this.playGrantChoices(player, libraryTop, face ?? 0) : [undefined];
+        for (const grant of grants) {
+          const grantProp = grant !== undefined ? { graveyardGrant: grant } : {};
+          if (def.types.includes("land")) {
+            if (this.whyCannotPlayLandUnder(player, libraryTop, face ?? 0, grant) === null) {
+              out.push({
+                kind: "play-land",
+                card: libraryTop,
+                cardName: def.name,
+                ...(face !== undefined ? { face } : {}),
+                ...grantProp,
+              });
+            }
+            continue;
           }
-          continue;
+          // A `castFromLibraryTop` static (Glarb, Sigarda) — a spell its
+          // filter takes, as from the hand otherwise.
+          if (!castsFromTop) continue;
+          out.push(
+            ...this.castSpellActions(player, libraryTop, def.name, def, {
+              via: "library-top",
+              ...(face !== undefined ? { face } : {}),
+              costString: def.manaCost,
+              ...grantProp,
+            }),
+          );
         }
-        // A `castFromLibraryTop` static (Glarb, Sigarda) — a spell its
-        // filter takes, as from the hand otherwise.
-        if (!castsFromTop) continue;
-        out.push(
-          ...this.castSpellActions(player, libraryTop, def.name, def, {
-            via: "library-top",
-            ...(face !== undefined ? { face } : {}),
-            costString: def.manaCost,
-          }),
-        );
       }
     }
 
@@ -15236,6 +15275,14 @@ export class Game {
     }
   }
 
+  /** {@link whyCannotPlayLand} for a land played under the permission
+   * `grant` names, from anywhere but a graveyard (`playGrantChoices`). */
+  private whyCannotPlayLandUnder(player: PlayerId, cardId: ObjectId, face: number, grant: GraveyardGrant | undefined): string | null {
+    return this.playGrantToScope(cardId, grant)
+      ? this.withCastGrantScope(cardId, grant, () => this.whyCannotPlayLand(player, cardId, face, grant))
+      : this.whyCannotPlayLand(player, cardId, face, grant);
+  }
+
   private whyCannotPlayLand(
     player: PlayerId,
     cardId: ObjectId,
@@ -15617,9 +15664,10 @@ export class Game {
     graveyardGrant?: GraveyardGrant,
   ): string | null {
     const zones = this.state.zones.perPlayer[player];
-    if (graveyardGrant !== undefined) {
+    if (graveyardGrant !== undefined && this.state.objects[cardId]?.zone === "graveyard") {
       // A named graveyard permission (Muldrotha's land allowance) must be one
-      // that applies to this card right now.
+      // that applies to this card right now. One named elsewhere narrows
+      // `playOptions` below to itself (`playGrantToScope`).
       if (this.findGraveyardGrant(player, cardId, face, graveyardGrant) === null) {
         return `${player} has no such permission to play that card from their graveyard`;
       }
@@ -15701,10 +15749,10 @@ export class Game {
     // graveyard, the grant found above says it: "if you do, it enters tapped"
     // (Kaldring, the Rimestaff — a replacement on its entry, rule 614.1d).
     let tapped = graveyardTerms?.landsEnterTapped === true;
+    // Another's hand or outside the game too (none from the player's own
+    // hand). The one the play names, if it names one (`playGrantToScope`).
     let underPermission: PlayOption | undefined;
-    if (from === "exile") {
-      underPermission = this.chosenPlayOption(player, cardId, face, "paid");
-    } else if (from === "library") {
+    if (from !== "graveyard") {
       underPermission = this.chosenPlayOption(player, cardId, face, "paid");
     }
     if (underPermission !== undefined) {
@@ -20840,17 +20888,18 @@ export class Game {
     }
     // It names the permission a graveyard-permission cast spends, or which of
     // several escapes, flashbacks, harmonizes or sneaks such a cast uses — or
-    // the type an impulse cast spends of a `perType` group (Aminatou's Augury).
+    // the type an impulse cast spends of a `perType` group (Aminatou's Augury),
+    // or which of several permissions a cast from exile, a library's top or
+    // another hand is under (`playGrantChoices`).
     if (
       graveyardGrant !== undefined &&
-      via !== "graveyard-permission" &&
-      via !== "impulse" &&
+      !isPermissionCast(via) &&
       via !== "escape" &&
       via !== "flashback" &&
       via !== "harmonize" &&
       via !== "sneak"
     ) {
-      return "a graveyard permission only names a graveyard-permission, escape, flashback, harmonize or sneak cast";
+      return "a permission is named only by a permission, escape, flashback, harmonize or sneak cast";
     }
     if (escapeExile !== undefined && via !== "escape" && via !== "graveyard-permission") {
       return "only an escape cast, or a graveyard permission's, exiles cards from the graveyard to pay for it";
@@ -21492,7 +21541,10 @@ export class Game {
       graveyardGrant?: GraveyardGrant;
     },
   ): LegalAction[] {
-    if (opts.via === "graveyard-permission" && this.castGrantScope?.card !== card) {
+    if (
+      (opts.via === "graveyard-permission" && this.castGrantScope?.card !== card) ||
+      (isPermissionCast(opts.via) && this.playGrantToScope(card, opts.graveyardGrant))
+    ) {
       return this.withCastGrantScope(card, opts.graveyardGrant, () => this.castSpellActions(player, card, cardName, def, opts));
     }
     // "Of an opponent's choice" (rules 601.2c, 700.2e): a variant per
@@ -46878,6 +46930,13 @@ controlledBy,
    * `castSpell` and `castSpellActions` (`withCastGrantScope`). */
   private castGrantScope: { readonly card: ObjectId; readonly grant: GraveyardGrant | undefined } | null = null;
 
+  /** Whether a play of `card` names a permission that `playOptions` should
+   * narrow to for the play (`playGrantChoices`): one from anywhere but a
+   * graveyard, not already in its scope. */
+  private playGrantToScope(card: ObjectId, grant: GraveyardGrant | undefined): boolean {
+    return grant !== undefined && this.castGrantScope?.card !== card && this.state.objects[card]?.zone !== "graveyard";
+  }
+
   private withCastGrantScope<T>(card: ObjectId, grant: GraveyardGrant | undefined, run: () => T): T {
     const before = this.castGrantScope;
     this.castGrantScope = { card, grant };
@@ -47096,7 +47155,48 @@ controlledBy,
         out.push({ terms: play, carrier: { kind: "static", source, play } });
       }
     }
+    // A play that names its permission (`withCastGrantScope`) from anywhere
+    // but a graveyard, whose grants are `graveyardGrantsFor`'s: that one
+    // alone, for everything the play reads of it (601.3).
+    const scope = this.castGrantScope;
+    if (scope !== null && scope.card === cardId && scope.grant !== undefined && card.zone !== "graveyard") {
+      const named = scope.grant.source;
+      return out.filter((option) => this.playOptionSource(option, cardId) === named);
+    }
     return out;
+  }
+
+  /** What a play under `option` names as its permission's source
+   * (`GraveyardGrant.source`): the permanent whose static it is, the source
+   * of the effect that gave it, or — a permission kept on the card or in its
+   * own text — the card itself. */
+  private playOptionSource(option: PlayOption, cardId: ObjectId): ObjectId {
+    const { carrier } = option;
+    if (carrier.kind === "static") return carrier.source.id;
+    if (carrier.kind === "effect") return carrier.play.source;
+    return cardId;
+  }
+
+  /**
+   * The permissions a play of `cardId` as `face` from anywhere but a
+   * graveyard is offered under, one offer each: which of several reaching a
+   * card it's played under is its player's choice (601.3), and it matters
+   * when one spends a "once each turn" or brings a "when you do" (The Fourth
+   * Doctor beside Courser of Kruphix). The one a play naming none would use
+   * comes first. `[undefined]` — one offer, naming none — when only one
+   * permission reaches the card, or every one that does is the same ability
+   * (two Coursers). A graveyard's are `graveyardGrantsFor`'s.
+   */
+  private playGrantChoices(player: PlayerId, cardId: ObjectId, face: number): readonly (GraveyardGrant | undefined)[] {
+    const options = this.playOptions(player, cardId, face);
+    if (options.length < 2 || options.every((option) => option.terms === options[0].terms)) return [undefined];
+    const first = this.chosenPlayOption(player, cardId, face, "paid") ?? options[0];
+    const sources: ObjectId[] = [];
+    for (const option of [first, ...options]) {
+      const source = this.playOptionSource(option, cardId);
+      if (!sources.includes(source)) sources.push(source);
+    }
+    return sources.length < 2 ? [undefined] : sources.map((source) => ({ source }));
   }
 
   /** The zone a permission would reach `card` from, for `player`: `null` when

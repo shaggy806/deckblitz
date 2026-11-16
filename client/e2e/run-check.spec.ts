@@ -226,6 +226,9 @@ async function runStep(page: Page, step: string): Promise<boolean> {
         if ((await findId(page, 'hand', arg)) !== null) return runStep(page, `hand:${arg}`)
         const commander = await findId(page, 'command', arg)
         if (commander !== null) return visibleFirst(page.locator(`.commander-tile-wrap[data-obj-id="${commander}"] .commander-tile`))
+        // A library's top card where it's shown (Courser of Kruphix).
+        const top = page.locator('.library-top', { has: page.locator('.ct-name', { hasText: pattern(arg) }) })
+        if (await visibleFirst(top.locator('.card-tile'))) return true
         if (Date.now() > limit) return false
       }
     }

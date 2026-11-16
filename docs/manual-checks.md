@@ -8599,3 +8599,13 @@ Each board's die comes up 4.
 - **Do:** In this 4-player game, cast Wrath of God. Pick Pulmonic Sliver and confirm. As Bob, confirm with nothing picked.
 - **Expect:** Dave's Grizzly Bears goes to his graveyard at once. You're asked first, about Pulmonic Sliver alone, then Bob about his Muscle Sliver alone, then Carol about her Winged Sliver. The three Slivers stay on the battlefield until Carol has answered; then Pulmonic Sliver goes to your library, Bob's Muscle Sliver to his graveyard and Carol's Winged Sliver to her library (her bot keeps its own card), together.
 - **Not a bug:** The Bears leave before the Slivers on screen; in the rules they all left at once, and anything that triggers on them sees one event.
+
+## Which permission a card is played under (2026-11-16)
+
+### The Fourth Doctor: cast the top card under the Doctor's permission or the Skull's
+- **Do:** Click "Cast Sol Ring (via The Fourth Doctor)" by the top card of your library, and pay.
+- **Expect:** Two buttons by your top card, "Cast Sol Ring (via Crystal Skull, Isu Spyglass)" and "Cast Sol Ring (via The Fourth Doctor)". Cast through the Doctor, Sol Ring resolves and you get a Food token. The next card, Mind Stone, has no buttons: a click on it casts it under the Skull's, and no second Food comes.
+
+### The Fourth Doctor: a legendary land under Courser's permission or the Doctor's, in a 4-player game
+- **Do:** In this 4-player game, click "Play Gaea's Cradle (via Courser of Kruphix)" by the top card of your library.
+- **Expect:** Two buttons by your top card, one via Courser of Kruphix and one via The Fourth Doctor. Played through Courser, Gaea's Cradle enters, you gain 1 life from Courser, and no Food comes. A click on the next card, Sol Ring, still casts it through the Doctor, and a Food comes then.

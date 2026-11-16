@@ -334,6 +334,17 @@ one offer with no colour, and once the cost is paid the mana ability asks them �
 resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
 back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
 `test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+### Choosing which permission a play is under, from any zone — built 2026-11-16
+
+The key `zone:choose-play-permission-any-zone`. Which of several permissions reaching a card a play is made
+under is the player's (rule 601.3); a graveyard's were offered one each already (`graveyardGrantsFor`), and
+now a library's top, exile, another player's hand and the sideboard are too: `Game.playGrantChoices` gives
+one offer per permission's source, the one a play naming none would use first, carried as the offer's
+`graveyardGrant` (`{ source }`) — none when one permission reaches the card or all that do are the same
+ability (two Coursers). A play naming one runs with `playOptions` narrowed to it (`playGrantToScope`), so
+everything read of the permission — its costs, what it spends, `spendAs`, its `PlayedUnder` — is that one's.
+The client's library-top buttons say "(via Courser of Kruphix)". The Fourth Doctor (rank 10460), beside
+Crystal Skull and Courser of Kruphix. `test/play-permission-choice.test.ts`.
 
 ### One choice across a player's own zones, exiled at once — built 2026-11-16
 

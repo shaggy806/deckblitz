@@ -8,7 +8,7 @@
 //     [--steps steps.json] [--shots <dir>] [--reuse]
 //
 // Steps: cast:<hand card> (or hand:), card:<card in a popup, on the board,
-// in hand or in the command zone>, stack:<entry on the stack>, click:<button or menu item text>,
+// in hand, in the command zone or shown on top of a library>, stack:<entry on the stack>, click:<button or menu item text>,
 // player:<name>, x:<n> (the choose-X box, before its click:Confirm), pass, wait
 // (for the bots, up to 30 s: until a decision is yours, or a stack seen
 // has emptied), unfollow (stay in this seat while another of yours must act).
