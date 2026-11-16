@@ -25,7 +25,9 @@
  * one it was planned on, rather than searched again.
  *
  * It never plans with a card that was in our library
- * when it began: the rollout knows what a draw finds, and we don't.
+ * when it began: the rollout knows what a draw finds, and we don't. The one
+ * exception is the top card where the seat can see it (`unknownCards`): a
+ * card shown there and playable from there is known, as a card in hand is.
  */
 
 import type { Action } from "../actions.js";
@@ -34,6 +36,7 @@ import type { ControllerView, PlayerController } from "../controller.js";
 import { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
+import { ownLibraryTopSeen } from "../view.js";
 import {
   CombatRolloutController,
   DefendingRolloutController,
@@ -109,6 +112,24 @@ export function boardKey(state: GameState, me: PlayerId): string {
   const life = state.turnOrder.map((p) => state.players[p]?.life ?? 0).join(",");
   const pool = state.players[me]?.manaPool.length ?? 0;
   return `${state.turn.number}|${state.turn.step}|${battlefield}|${hand}|${life}|${pool}`;
+}
+
+/**
+ * The cards no planned line may use: our library as planning begins, since
+ * the simulation knows its order and we don't — but for its top card when
+ * the seat can see it (Future Sight, Oracle of Mul Daya, Glarb:
+ * `ownLibraryTopSeen`). That one the seat knows, and a plan that left it out
+ * priced a payment by a turn with no use for the mana while a spell it
+ * could cast sat in plain sight (the gate's "pays a shock land's life to
+ * cast the spell it sees on top of its library"; several of the bots' decks
+ * carry such a permanent). The card under it stays unknown: the plan turns
+ * it up, the seat hasn't yet.
+ */
+export function unknownCards(state: GameState, registry: CardRegistry, me: PlayerId): Set<ObjectId> {
+  const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
+  const seen = ownLibraryTopSeen(state, registry, me);
+  if (seen !== null) unknown.delete(seen);
+  return unknown;
 }
 
 /** The ids of the cards a move uses, for the library check. */
@@ -239,8 +260,9 @@ export function planTurn(
   firsts: readonly Action[],
   hooks: TurnPlanHooks,
   limits: TurnPlanLimits,
-  /** Cards no line may use: what was in our library when planning began. */
-  unknown: ReadonlySet<ObjectId> = new Set(state.zones.perPlayer[me]?.library ?? []),
+  /** Cards no line may use: what was in our library when planning began,
+   * unseen (`unknownCards`). */
+  unknown: ReadonlySet<ObjectId> = unknownCards(state, registry, me),
   /** Score nothing unless some first move, once resolved, leaves another
    * to make: then every line is one move the caller already weighed, and
    * finding that out costs only the moves resolved. Finished games are

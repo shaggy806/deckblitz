@@ -3533,6 +3533,39 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "pays a shock land's life to cast the spell it sees on top of its library",
+    rule: "A card the seat can see on top of its library and may play is planned with, as a card in hand is.",
+    position(registry) {
+      // The turn planned after a payment left out every card of the library
+      // (2026-11-16), the one the seat is looking at included, so the life
+      // looked spent for nothing. Future Sight shows Rampant Growth on top;
+      // with one Forest out, only an untapped Stomping Ground casts it this
+      // turn. (Thought on 2026-11-15 to be why an Ur-Dragon bot left its
+      // Stomping Ground tapped and then cast a Farseek: that list has no way
+      // to play from the top, so that one has another cause, not yet found.)
+      const game = table(registry, [A, B, C, D], A);
+      onBoard(game, "Future Sight", A);
+      lands(game, "Forest", A, 1);
+      const growth = game.debugSpawn("Rampant Growth", A, "library");
+      const library = game.state.zones.perPlayer[A].library;
+      library.splice(library.indexOf(growth), 1);
+      library.unshift(growth);
+      const ground = game.debugSpawn("Stomping Ground", A, "hand");
+      game.dispatch({ type: "play-land", player: A, card: ground });
+      if (game.state.awaiting?.kind !== "pay-life-for-untapped") {
+        return { passed: false, detail: "Stomping Ground never asked to pay 2 life" };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "pay-life-for-untapped" && action.pay,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "lets Stomping Ground enter tapped with nothing to cast",
     rule: "A shock land's 2 life buys nothing when no spell this turn needs the land untapped.",
     position(registry) {
@@ -5315,6 +5348,59 @@ const SCENARIOS: readonly BotScenario[] = [
             return i < 0 ? 0 : (action.division?.[i] ?? Math.floor(4 / aimed.length));
           };
           return { passed: at(giant) >= 3 && at(elves) >= 1, detail: `${at(giant)} to the 3/3, ${at(elves)} to the 1/1` };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "takes riot's haste when the attack it allows is lethal",
+    rule: "Riot's choice is the board's: haste when the creature attacking this turn wins, the counter when it can't attack this turn.",
+    position(registry) {
+      // The bots took the first option ("+1/+1 counter") every time: no
+      // search weighed a word menu asked as a permanent enters (2026-11-16,
+      // found fixing riot on tokens). Bob is at 2 with no blockers: a hasty
+      // 2/2 kills him now, and a 3/3 that waits a turn does not.
+      const game = table(registry, [A, B], A);
+      game.state.players[B].life = 2;
+      lands(game, "Mountain", A, 1);
+      lands(game, "Forest", A, 1);
+      const goblin = game.debugSpawn("Zhur-Taa Goblin", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: goblin, targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type" || s.result.over);
+      return {
+        game,
+        player: A,
+        judge(action) {
+          return {
+            passed: action.type === "choose-creature-type" && action.creatureType === "Haste",
+            detail: describeAction(action).slice(0, 120),
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "takes riot's counter when the creature can't attack this turn",
+    rule: "Riot's choice is the board's: haste when the creature attacking this turn wins, the counter when it can't attack this turn.",
+    position(registry) {
+      // The other half: after combat, haste is worth nothing, and the search
+      // that now weighs the two must not talk itself out of the counter.
+      const game = table(registry, [A, B], A);
+      game.state.players[B].life = 2;
+      lands(game, "Mountain", A, 1);
+      lands(game, "Forest", A, 1);
+      const goblin = game.debugSpawn("Zhur-Taa Goblin", A, "hand");
+      game.advanceUntil((s) => s.turn.step === "postcombat-main" && s.priority.holder === A);
+      game.dispatch({ type: "cast-spell", player: A, card: goblin, targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type" || s.result.over);
+      return {
+        game,
+        player: A,
+        judge(action) {
+          return {
+            passed: action.type === "choose-creature-type" && action.creatureType === "+1/+1 counter",
+            detail: describeAction(action).slice(0, 120),
+          };
         },
       };
     },

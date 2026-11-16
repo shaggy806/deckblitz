@@ -144,10 +144,14 @@ not when it doesn't. The best single change is an extort paid that finished a pl
 worst is one of four identical Smothering Tithe triggers in one draw step, three of which
 came out better by 1.7: the judge's noise.
 
-**Left.** The planner never plans with a card in our library, so a card it may play from
-there is invisible to this price. The Ur-Dragon's bot left Stomping Ground tapped where the
-old answer paid and then cast a Farseek that wasn't in its hand (old better by 7.1; off the
-top of the library by the look of it, not checked). `KEPT_PER_MANA` stays for the decisions the plan can't price. And v2's turn
+**Left.** The planner never planned with a card in our library, so a card it may play from
+there was invisible to this price: fixed 2026-11-16 for the top card the seat can see
+(`unknownCards`, the gate's "pays a shock land's life to cast the spell it sees on top of
+its library"; Oracle of Mul Daya, Augur of Autumn, Thundermane Dragon, Bolas's Citadel and
+Conspicuous Snoop are in the bots' decks). The Ur-Dragon's bot left Stomping Ground tapped
+where the old answer paid and then cast a Farseek that wasn't in its hand (old better by
+7.1). That was guessed to be a card off the top of the library, and isn't: its list has
+nothing that plays from there. Its cause is still to find (replay that game's turn). `KEPT_PER_MANA` stays for the decisions the plan can't price. And v2's turn
 still isn't steady in mana.
 
 ## 3. Watched games, one archetype at a time
@@ -476,5 +480,31 @@ new side alone, so a weight is judged without a build of its own. A game takes a
 as long as the other kinds' (the shadow thinks too), and a game raises few removal decisions
 (two to six), so a rule needs dozens of games to say anything.
 
-**Next:** the cheapest rule the data supports, judged with it: weigh an opponent's commander
-and its token makers more when a removal picks among targets. In BACKLOG.
+**The rule judged, 2026-11-16: not kept as it stands.** "Weigh an opponent's commander and
+its token makers more when a removal picks among targets" was built two ways and judged with
+`--weights '{"opposingCommander":5,"opposingTokenEngines":4}' --to-end`.
+
+- *As terms of the evaluation* (21 games): better each of the five times it only changed
+  which permanent a removal took, worse both times it fired a removal in place of developing.
+  So the premium was moved out of the evaluation.
+- *On the aim alone* (`bot/aim.ts`: added only where one removal chooses among its own
+  targets; 23 games on five pods before it was stopped, about 0.75 changed aims a game): 17
+  changed aims, **3 better, 4 worse, 10 even**. Played to the end, the decider won under the
+  new aim and not the old twice, and under the old and not the new twice.
+
+| the new aim | changed | better | worse | even |
+|---|---|---|---|---|
+| an opponent's commander | 12 | 2 (8.0; the old aim out of the game) | 4 (2.1, 11.1, 189.8; the new aim out of the game) | 6 |
+| a token maker that isn't one | 4 | 1 (39.1) | 0 | 3 |
+| neither (the two builds' own noise) | 1 | 0 | 0 | 1 |
+
+The commander half is the one that fails, and the largest loss says why: Tear Asunder exiled
+Teval, the Balanced Scale where the old aim exiled River Kelpie. A commander removed goes to
+the command zone and comes back for two more mana (rules 903.9a, 903.8), so a removal spent on it
+buys a turn or two, where the same removal on an engine that isn't the commander is for
+good. What the log measured (a commander in play comes before big turns) is true and doesn't
+make it the right target. The token-maker half has four cases, too few to say.
+
+**Next:** token makers alone (`{"opposingTokenEngines":4}`), over enough games to have a few
+dozen changed aims; and for commanders, only removal that keeps one away (a tuck, a theft, an
+Aura that locks it down), if anything. The weights stay 0 until a run says otherwise.

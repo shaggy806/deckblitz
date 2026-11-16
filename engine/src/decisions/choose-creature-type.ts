@@ -125,6 +125,11 @@ export const chooseCreatureType = defineDecision({
       ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
       ...(awaiting.looked !== undefined ? { looked: [...awaiting.looked] } : {}),
       ...(awaiting.then !== undefined && !awaiting.catalog ? { resolving: true as const } : {}),
+      ...(awaiting.riot === true
+        ? { entersWith: "riot" as const }
+        : awaiting.unleash === true
+          ? { entersWith: "unleash" as const }
+          : {}),
       // Only a catalog choice needs suggestions; a short fixed list is
       // already its own menu. Never one it leaves out ("other than Wall" —
       // Imagecrafter): a bot answers with a suggestion.
@@ -188,9 +193,12 @@ export const chooseCreatureType = defineDecision({
   // rollout sees the difference between one named creature type and
   // another, so every candidate scores the same and searching only costs
   // time. A resolving effect's short menu is different: Sudden Demise's
-  // colour is which creatures take the damage.
+  // colour is which creatures take the damage. So is riot's or unleash's
+  // (`entersWith`): haste is the attack this turn, the counter is size, and
+  // an unleashed creature can't block — the board says which, and a rollout
+  // sees it.
   candidates: (legal, player): Action[] => {
-    if (legal.kind !== "choose-creature-type" || legal.resolving !== true) return [];
+    if (legal.kind !== "choose-creature-type" || (legal.resolving !== true && legal.entersWith === undefined)) return [];
     return legal.options.map((creatureType) => ({ type: "choose-creature-type", player, creatureType }));
   },
 

@@ -84,7 +84,7 @@ import {
   withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
-import { boardKey, nextTurnValue, passLine, planTurn, restOfTurnValue } from "./turn-plan.js";
+import { boardKey, nextTurnValue, passLine, planTurn, restOfTurnValue, unknownCards } from "./turn-plan.js";
 import type { PlanStep, PlannedLine, ScoredFirst, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
 export interface EvalBotOptions {
@@ -2386,7 +2386,7 @@ export class EvalBotController extends HeuristicBotController {
     const payment = asked?.kind === "choose-modes" && asked.cost !== undefined && asked.guess === undefined;
     if (!payment && asked?.kind !== "pay-life-for-untapped") return undefined;
     if (state.turnOrder[state.turn.activePlayerIndex] !== me || !PLANNABLE_STEPS.has(state.turn.step)) return undefined;
-    const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
+    const unknown = unknownCards(state, this.cards, me);
     const hooks = this.planHooks();
     // The hooks read the last priority decision's pass for an interaction's
     // score; these lines are valued plainly.
@@ -3484,7 +3484,7 @@ export class EvalBotController extends HeuristicBotController {
       ...this.planLimits(),
       clock: { out: () => outOfTime(budget), timed: <T>(simulate: () => T): T => timed(budget, simulate) },
     };
-    const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
+    const unknown = unknownCards(state, this.cards, me);
     const asScored = this.plansAsScored();
     const lines = planTurn(
       state,

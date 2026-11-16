@@ -991,6 +991,56 @@ interface Sight {
   readonly ownLibraryTop: boolean;
 }
 
+/** The card on top of `player`'s library, if `viewer` can see it, else
+ * `null`: revealed to everyone, or one `viewer` alone may look at. */
+function seenLibraryTop(
+  state: GameState,
+  registry: CardRegistry,
+  viewer: PlayerId,
+  player: PlayerId,
+  sight: Sight,
+): ObjectId | null {
+  const revealsTop =
+    sight.libraryTops.has(player) ||
+    state.zones.shared.battlefield.some((id) => {
+      const object = state.objects[id];
+      return object.controller === player && registry.get(rulesTextName(object)).revealsOwnLibraryTop;
+    });
+  // "You may look at the top card of your library any time" (Glarb,
+  // Calamity's Augur — rule 401.5): shown in its owner's own view only.
+  // "You may look at the top card of their library any time" (Xanathar,
+  // Guild Kingpin): another player's, in the looker's view alone.
+  const looksAtTheirs =
+    player !== viewer &&
+    (state.playerEffects ?? []).some((e) => e.owner === viewer && e.looksAtLibraryTopOf?.includes(player) === true);
+  const looksAtTop =
+    looksAtTheirs ||
+    (player === viewer &&
+      (sight.ownLibraryTop ||
+        // For a while, from a resolved effect (The Belligerent).
+        (state.playerEffects ?? []).some((e) => e.owner === player && e.looksAtOwnLibraryTop === true) ||
+        state.zones.shared.battlefield.some((id) => {
+          const object = state.objects[id];
+          return (
+            object.controller === player &&
+            !hasLostAbilities(state, registry, object) &&
+            registry.get(rulesTextName(object)).looksAtOwnLibraryTop
+          );
+        })));
+  return revealsTop || looksAtTop ? (state.zones.perPlayer[player]?.library[0] ?? null) : null;
+}
+
+/**
+ * The card on top of `player`'s own library when they can see it (a
+ * permanent revealing it, or letting them look: Oracle of Mul Daya, Future
+ * Sight, Glarb), else `null`. What `viewFor(player).revealedLibraryTop`
+ * holds for their own library, without building the view: a bot plans with
+ * the card it can see there, and with no other card of its library.
+ */
+export function ownLibraryTopSeen(state: GameState, registry: CardRegistry, player: PlayerId): ObjectId | null {
+  return seenLibraryTop(state, registry, player, player, sightOf(state, registry, player));
+}
+
 function sightOf(state: GameState, registry: CardRegistry, viewer: PlayerId): Sight {
   const hands = new Set<PlayerId>();
   const libraryTops = new Set<PlayerId>();
@@ -1247,34 +1297,7 @@ function viewForUncached(
     // A junkyard is face up in the command zone (rule 717.6a): everyone's.
     visibleIds.push(...(playerState.junkyard ?? []));
 
-    const revealsTop =
-      sight.libraryTops.has(player) ||
-      state.zones.shared.battlefield.some((id) => {
-        const object = state.objects[id];
-        return object.controller === player && registry.get(rulesTextName(object)).revealsOwnLibraryTop;
-      });
-    // "You may look at the top card of your library any time" (Glarb,
-    // Calamity's Augur — rule 401.5): shown in its owner's own view only.
-    // "You may look at the top card of their library any time" (Xanathar,
-    // Guild Kingpin): another player's, in the looker's view alone.
-    const looksAtTheirs =
-      player !== viewer &&
-      (state.playerEffects ?? []).some((e) => e.owner === viewer && e.looksAtLibraryTopOf?.includes(player) === true);
-    const looksAtTop =
-      looksAtTheirs ||
-      (player === viewer &&
-      (sight.ownLibraryTop ||
-        // For a while, from a resolved effect (The Belligerent).
-        (state.playerEffects ?? []).some((e) => e.owner === player && e.looksAtOwnLibraryTop === true) ||
-        state.zones.shared.battlefield.some((id) => {
-          const object = state.objects[id];
-          return (
-            object.controller === player &&
-            !hasLostAbilities(state, registry, object) &&
-            registry.get(rulesTextName(object)).looksAtOwnLibraryTop
-          );
-        })));
-    const topCard = revealsTop || looksAtTop ? (zones.library[0] ?? null) : null;
+    const topCard = seenLibraryTop(state, registry, viewer, player, sight);
     revealedLibraryTop[player] = topCard;
     if (topCard !== null) visibleIds.push(topCard);
 

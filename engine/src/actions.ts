@@ -2244,6 +2244,12 @@ export type LegalAction =
        * card type, Tideshaper Mystic's land type): what it does next hangs on
        * the answer, so a bot searches the options. */
       readonly resolving?: true;
+      /** Riot's "+1/+1 counter or haste", or unleash's counter, as `source`
+       * is about to enter (rules 702.136a, 702.98a). Which answer is right
+       * is the board's to say (haste is an attack this turn; an unleashed
+       * creature can't block), so a bot searches the two as it does a
+       * resolving choice's. */
+      readonly entersWith?: "riot" | "unleash";
       /**
        * The creature types most represented among the chooser's own cards
        * (hand, library, graveyard, command zone) and everything on the
