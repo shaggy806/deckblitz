@@ -22289,6 +22289,17 @@ function parseStatic(line, text) {
         text,
       };
     }
+    // Its own abilities given to the others (Kasmina, Enigma Sage: "each
+    // other planeswalker you control has the loyalty abilities of ~").
+    const given = /^Each other (.+?) you control has the (activated|loyalty) abilities of ~\.$/.exec(line);
+    const givenFilter = given === null ? null : parseTypePhrase(given[1]);
+    if (givenFilter !== null && Object.keys(givenFilter).length > 0) {
+      return {
+        affects: { scope: "filter", filter: { ...givenFilter, controlledBy: "you" }, excludeSelf: true },
+        grantsActivatedOf: { zone: "source", filter: {}, ...(given[2] === "loyalty" ? { only: "loyalty" } : {}) },
+        text,
+      };
+    }
   }
   // "Mana of any type can be spent to activate ~'s abilities" (Sharkey,
   // Tyrant of the Shire) / "… as though it were mana of any color to pay the

@@ -25599,6 +25599,7 @@ export class Game {
         return card?.zone === "exile" && (card.zoneChangeCount ?? 0) === chosen!.stint ? [chosen!.card] : [];
       }
       case "battlefield":
+      case "source":
         return [];
     }
   }
@@ -25691,11 +25692,14 @@ export class Game {
         take(ability, { kind: "card-activated", cardName, index, ...(spec.onceEach === true ? { from: cardId } : {}) }),
       );
     };
-    if (spec.zone !== "battlefield") {
+    if (spec.zone !== "battlefield" && spec.zone !== "source") {
       for (const cardId of this.cardsAGrantReads(source, spec)) ofCard(cardId);
     } else {
-      for (const id of this.state.zones.shared.battlefield) {
-        if (id === source.id) continue;
+      // Every other permanent, or this one alone, given to the others it
+      // reaches (Kasmina, Enigma Sage).
+      const permanents = spec.zone === "source" ? [source.id] : this.state.zones.shared.battlefield;
+      for (const id of permanents) {
+        if (spec.zone === "battlefield" && id === source.id) continue;
         const object = this.state.objects[id];
         if (object === undefined || !matchesFilter(this.state, this.registry, id, spec.filter, ctx)) continue;
         const instances = object.stackCount ?? 1;

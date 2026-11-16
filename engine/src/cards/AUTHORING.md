@@ -6108,7 +6108,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   you control that don't have the same name as this creature" uses the
   filter's `sameNameAsSource: false`) — a permanent with everything it has,
   granted abilities included; several such statics apply in dependency order
-  (rule 613.8). The source itself is never read, nor abilities with a `zone`.
+  (rule 613.8). The source itself is never read, nor abilities with a `zone` —
+  except by `"source"`, which reads this permanent alone, all it has, for the
+  others it `affects` (Kasmina, Enigma Sage's "each other planeswalker you
+  control has the loyalty abilities of Kasmina": `affects` other planeswalkers
+  you control with `excludeSelf`, `filter: {}`, `only: "loyalty"`; on another
+  planeswalker each one is that one's, its "this planeswalker" included, rule
+  201.5b).
   `withTriggered` takes the cards' triggered abilities too, without those working
   only from another zone (Idris, Koh); `onceEach` is "you may activate each of
   those abilities only once each turn", kept per card (Mairsil).

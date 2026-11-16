@@ -7342,6 +7342,18 @@ describe("has all activated abilities of … (grantsActivatedOf)", () => {
     expect(koh.static[0].grantsActivatedOf).toEqual({ zone: "chosen-exiled", filter: {}, withTriggered: true });
   });
 
+  it("gives its own loyalty abilities to each other planeswalker you control (Kasmina, Enigma Sage)", () => {
+    const kasmina = face(
+      "Kasmina, Enigma Sage",
+      "Legendary Planeswalker — Kasmina",
+      "Each other planeswalker you control has the loyalty abilities of Kasmina.",
+    );
+    expect(kasmina.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "planeswalker", controlledBy: "you" }, excludeSelf: true },
+      grantsActivatedOf: { zone: "source", filter: {}, only: "loyalty" },
+    });
+  });
+
   it("leaves a chosen permanent's abilities to a person", () => {
     const fence = face(
       "Scheming Fence",

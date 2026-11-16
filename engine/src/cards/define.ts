@@ -2951,7 +2951,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    *   305.6), so a Forest card gives "{T}: Add {G}";
    * - `zone: "chosen-exiled"` — the card this permanent last chose with
    *   `choose-exiled-card`, while it stays in exile (Koh, the Face Stealer's
-   *   "the last chosen card").
+   *   "the last chosen card");
+   * - `zone: "source"` — **this permanent itself**, given to the others it
+   *   `affects` (Kasmina, Enigma Sage's "each other planeswalker you control
+   *   has the loyalty abilities of Kasmina", `affects` other planeswalkers
+   *   you control, `only: "loyalty"`, `filter: {}`): all it has, as
+   *   `"battlefield"` reads each permanent — its printed abilities unless it
+   *   lost them, and those granted to it (a Talent's on it included). Each
+   *   granted ability works from the permanent that has it — its "this
+   *   planeswalker" is that one (rule 201.5b; Kasmina's ruling) — and so is
+   *   paid from that one's loyalty.
    *
    * `withTriggered` takes the cards' triggered abilities too ("all activated
    * and triggered abilities of the exiled card": Idris, Soul of the TARDIS),
@@ -2974,7 +2983,7 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * permanent per turn (rule 606.3), paid from this permanent's loyalty.
    */
   readonly grantsActivatedOf?: {
-    readonly zone: "battlefield" | "graveyard" | "library-top" | "exile" | "exiled-with" | "chosen-exiled";
+    readonly zone: "battlefield" | "graveyard" | "library-top" | "exile" | "exiled-with" | "chosen-exiled" | "source";
     readonly filter: CardFilter;
     readonly except?: "mana" | "loyalty";
     readonly only?: "loyalty";
