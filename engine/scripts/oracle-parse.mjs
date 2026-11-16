@@ -20788,6 +20788,12 @@ function costEachAmount(phrase) {
     "basic land type among lands you control": { basicLandTypes: "you" },
     // Oskar, Rubbish Reclaimer: cast from the graveyard, itself left out.
     "different mana value among cards in your graveyard": { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+    // A changeling is every creature type (rule 702.73a — Valiant Changeling).
+    "creature type among creatures you control": {
+      aggregate: "distinct",
+      of: { subtypesOf: "creature" },
+      filter: { type: "creature", controlledBy: "you" },
+    },
   }[phrase];
   if (fixed !== undefined) return fixed;
   let m;
@@ -20943,6 +20949,14 @@ function selfCostLine(line) {
   if ((m = /^During your turn, ~ costs ((?:\{[^}]+\})+) less to cast\.$/.exec(line))) {
     const one = reducing(m[1], { kind: "your-turn" });
     return one === null ? null : { selfCostReduction: one };
+  }
+  // "This effect can't reduce the amount of mana ~ costs by more than {5}"
+  // (Valiant Changeling): the lesser of the count and the cap, so a cost
+  // increase past it still leaves mana to pay (rule 601.2f).
+  if ((m = /^(~ costs \{1\} less to cast for each .+\.) This effect can't reduce the amount of mana ~ costs by more than \{(\d+)\}\.$/.exec(line))) {
+    const one = selfCostLine(m[1])?.selfCostReduction;
+    if (one === undefined || Array.isArray(one) || one.reduceGeneric === undefined || one.reduceColored !== undefined) return null;
+    return { selfCostReduction: { ...one, reduceGeneric: { leastOf: [one.reduceGeneric, Number(m[2])] } } };
   }
   if ((m = /^~ costs ((?:\{[^}]+\})+) less to cast for each (.+)\.$/.exec(line))) {
     const each = costEachAmount(m[2]);

@@ -694,6 +694,19 @@ describe("when a spell may be cast or an ability activated", () => {
     expect(hogaak.keywords).toContain("trample");
   });
 
+  it("reads a cost reduction per creature type, capped (Valiant Changeling)", () => {
+    const changeling = face(
+      "Creature — Shapeshifter",
+      "This spell costs {1} less to cast for each creature type among creatures you control. This effect can't reduce the amount of mana this spell costs by more than {5}.",
+    );
+    expect(changeling.selfCostReduction).toEqual({
+      condition: { kind: "controls", filter: {}, atLeast: 0 },
+      reduceGeneric: {
+        leastOf: [{ aggregate: "distinct", of: { subtypesOf: "creature" }, filter: { type: "creature", controlledBy: "you" } }, 5],
+      },
+    });
+  });
+
   it("reads only your opponents activating", () => {
     const ability = face("Enchantment", "{3}: Destroy this enchantment. Only your opponents may activate this ability and only as a sorcery.").activated?.[0];
     expect(ability?.anyPlayer).toBe(true);
