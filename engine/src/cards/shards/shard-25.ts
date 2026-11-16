@@ -633,6 +633,7 @@ import _poolPossessedNomad from "../pool/possessed-nomad.js";
 import _poolPouncingWurm from "../pool/pouncing-wurm.js";
 import _poolPowerArmor from "../pool/power-armor.js";
 import _poolPrahvSpiresOfOrder from "../pool/prahv-spires-of-order.js";
+import _poolPreacher from "../pool/preacher.js";
 import _poolPriceOfLoyalty from "../pool/price-of-loyalty.js";
 import _poolPrideSovereign from "../pool/pride-sovereign.js";
 import _poolPrimevalProtector from "../pool/primeval-protector.js";
@@ -1640,6 +1641,7 @@ const shard: CardShard = {
     _poolPouncingWurm,
     _poolPowerArmor,
     _poolPrahvSpiresOfOrder,
+    _poolPreacher,
     _poolPriceOfLoyalty,
     _poolPrideSovereign,
     _poolPrimevalProtector,

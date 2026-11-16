@@ -20626,6 +20626,7 @@ import _poolPravaOfTheSteelLegion from "./pool/prava-of-the-steel-legion.js";
 import _poolPrayerOfBinding from "./pool/prayer-of-binding.js";
 import _poolPreWarFormalwear from "./pool/pre-war-formalwear.js";
 import _poolPreacherOfTheSchism from "./pool/preacher-of-the-schism.js";
+import _poolPreacher from "./pool/preacher.js";
 import _poolPrecinctCaptain from "./pool/precinct-captain.js";
 import _poolPrecipitousDrop from "./pool/precipitous-drop.js";
 import _poolPreciseRedaction from "./pool/precise-redaction.js";
@@ -31785,6 +31786,7 @@ import _poolWirewoodSavage from "./pool/wirewood-savage.js";
 import _poolWirewoodSymbiote from "./pool/wirewood-symbiote.js";
 import _poolWisdomOfAges from "./pool/wisdom-of-ages.js";
 import _poolWisecrack from "./pool/wisecrack.js";
+import _poolWish from "./pool/wish.js";
 import _poolWishclawTalisman from "./pool/wishclaw-talisman.js";
 import _poolWishcoinCrab from "./pool/wishcoin-crab.js";
 import _poolWishfulMerfolk from "./pool/wishful-merfolk.js";
@@ -53832,6 +53834,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPrayerOfBinding,
   _poolPreWarFormalwear,
   _poolPreacherOfTheSchism,
+  _poolPreacher,
   _poolPrecinctCaptain,
   _poolPrecipitousDrop,
   _poolPreciseRedaction,
@@ -64991,6 +64994,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWirewoodSymbiote,
   _poolWisdomOfAges,
   _poolWisecrack,
+  _poolWish,
   _poolWishclawTalisman,
   _poolWishcoinCrab,
   _poolWishfulMerfolk,
@@ -87051,6 +87055,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/prayer-of-binding": _poolPrayerOfBinding,
   "pool/pre-war-formalwear": _poolPreWarFormalwear,
   "pool/preacher-of-the-schism": _poolPreacherOfTheSchism,
+  "pool/preacher": _poolPreacher,
   "pool/precinct-captain": _poolPrecinctCaptain,
   "pool/precipitous-drop": _poolPrecipitousDrop,
   "pool/precise-redaction": _poolPreciseRedaction,
@@ -98210,6 +98215,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wirewood-symbiote": _poolWirewoodSymbiote,
   "pool/wisdom-of-ages": _poolWisdomOfAges,
   "pool/wisecrack": _poolWisecrack,
+  "pool/wish": _poolWish,
   "pool/wishclaw-talisman": _poolWishclawTalisman,
   "pool/wishcoin-crab": _poolWishcoinCrab,
   "pool/wishful-merfolk": _poolWishfulMerfolk,

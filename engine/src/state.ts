@@ -440,6 +440,16 @@ export interface GameObject {
    * controller's `PlayerState.previousUpkeepSeq`.
    */
   controlSinceSeq?: number;
+  /** How many times this permanent has become untapped, and how many times
+   * its control has changed — absent while none. An activated ability takes
+   * both as it's activated (`LastKnownRefs.sourceSteady`), so "for as long as
+   * ~ remains tapped" and "for as long as you control ~" are checked
+   * continually from then: an untap or a change of control before it
+   * resolves ends the duration before it starts, even if it's tapped again
+   * or comes back (rule 611.2b; the rulings of Preacher, Old Man of the Sea,
+   * Rubinia Soulsinger, Seasinger, Entrancing Lyre). */
+  untaps?: number;
+  controlChanges?: number;
   /** The card this permanent last chose with `choose-exiled-card`, in the stint
    * it had then (Koh, the Face Stealer's "the last chosen card"). Not the same
    * object once it leaves exile (rule 400.7). Cleared on any zone change. */
@@ -2483,6 +2493,10 @@ export interface LastKnownRefs {
    * which says what the ability can act on: "return this card" finds the card
    * in the graveyard it went to, in a later stint. */
   readonly sourceWas?: number;
+  /** For an activated ability of a permanent: its source's `untaps` and
+   * `controlChanges` as it was activated, for the durations checked
+   * continually from activation (`GameObject.untaps`). */
+  readonly sourceSteady?: { readonly untaps: number; readonly controlChanges: number };
   readonly triggerObject?: number;
   /** For a fired delayed ability: the resolution that set it up
    * (`DelayedTrigger.madeIn`). */

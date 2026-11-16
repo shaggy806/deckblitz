@@ -11293,6 +11293,7 @@ export class Game {
       return false;
     }
     object.tapped = false;
+    object.untaps = (object.untaps ?? 0) + 1;
     this.emit({ type: "permanent-untapped", object: id, ...(untapStepOf !== undefined ? { untapStepOf } : {}) });
     this.endWhileTappedEffects(id);
     return true;
@@ -27049,10 +27050,18 @@ export class Game {
       this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes], modal: true });
     }
     const granterRef = granterOfRef(grantedAbility);
+    // Its source as it's activated (602.2i), its costs paid: "for as long as
+    // ~ remains tapped" and "…you control ~" are checked from here on.
+    const steadyFrom = sourceStint !== undefined ? this.state.objects[sourceId] : undefined;
+    const sourceSteady =
+      steadyFrom !== undefined && steadyFrom.zone === "battlefield" && (steadyFrom.zoneChangeCount ?? 0) === sourceStint
+        ? { untaps: steadyFrom.untaps ?? 0, controlChanges: steadyFrom.controlChanges ?? 0 }
+        : undefined;
     if (sourceStint !== undefined || paidSets !== undefined || granterRef !== undefined || manaSpentOnThis.length > 0) {
       this.state.objects[abilityId].lastKnownRefs = {
         ...(manaSpentOnThis.length > 0 ? { manaSpent: manaSpentOnThis } : {}),
         ...(sourceStint !== undefined ? { source: sourceStint } : {}),
+        ...(sourceSteady !== undefined ? { sourceSteady } : {}),
         ...(paidSets !== undefined ? { sets: paidSets } : {}),
         ...(granterRef !== undefined ? { granter: granterRef } : {}),
       };
@@ -37769,15 +37778,22 @@ export class Game {
         const stint = object?.zoneChangeCount ?? 0;
         // "For as long as ~ remains tapped" with it untapped already, or
         // "for as long as you control ~" with someone else controlling it:
-        // nothing (rule 611.2b).
+        // nothing (rule 611.2b). An activated ability's is checked
+        // continually from activation: an untap or a change of control
+        // since ended it before it began, even if it's tapped again or
+        // back by now (the rulings of Preacher, Rubinia Soulsinger,
+        // Seasinger, Entrancing Lyre).
         const tapped = duration === "while-source-tapped" || duration === "while-you-control-source-tapped";
         const yours = duration === "while-you-control-source" || duration === "while-you-control-source-tapped";
         const theirs = duration === "while-its-controller-controls-source";
+        const steady = refs.sourceSteady;
         if (
           object?.zone === "battlefield" &&
           (refs.source === undefined || refs.source === stint) &&
-          (!tapped || object.tapped) &&
-          (!yours || object.controller === controller)
+          (!tapped || (object.tapped && (steady === undefined || (object.untaps ?? 0) === steady.untaps))) &&
+          (!yours ||
+            (object.controller === controller &&
+              (steady === undefined || (object.controlChanges ?? 0) === steady.controlChanges)))
         ) {
           here = {
             id: source,
@@ -58167,6 +58183,7 @@ controlledBy,
         object.controller = controller;
         object.summoningSick = true;
         object.controlSinceSeq = this.state.timestampSeq;
+        object.controlChanges = (object.controlChanges ?? 0) + 1;
         // A change of control removes it from combat (rule 506.4), its
         // attacker's list of blockers included.
         this.removeFromCombat(id);
@@ -58289,6 +58306,7 @@ controlledBy,
     object.controller = player;
     object.summoningSick = true;
     object.controlSinceSeq = this.state.timestampSeq;
+    object.controlChanges = (object.controlChanges ?? 0) + 1;
     // A change of control removes it from combat (rule 506.4), its
     // attacker's list of blockers included.
     this.removeFromCombat(id);
