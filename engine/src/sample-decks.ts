@@ -2035,7 +2035,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Stolen by the Fae", "Generous Gift"],
       ["Aetherize", "Counterspell"],
       ["Calamity of Cinders", "Purphoros, God of the Forge"],
-      ["Act of Treason", "Rumor Gatherer"],
+      ["Shield Broker", "Rumor Gatherer"],
       ["Echoing Assault", "Elesh Norn, Mother of Machines"],
       ["Storm of Souls", "Mondrak, Glory Dominus"],
       ["Junk Winder", "Brudiclad, Telchor Engineer"],
