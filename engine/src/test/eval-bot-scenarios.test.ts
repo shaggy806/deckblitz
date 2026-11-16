@@ -106,6 +106,8 @@ describe("features", () => {
       "landCap",
       "opponent",
       "otherOpponents",
+      "opposingCommander",
+      "opposingTokenEngines",
       "eliminations",
       "crackbackParanoia",
       "crackbackMargin",

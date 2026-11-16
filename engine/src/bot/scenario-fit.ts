@@ -357,6 +357,8 @@ export const FIT_FIXED: readonly WeightKey[] = [
   "crackbackGrowth",
   "crackbackKillShot",
   "idlePower",
+  "opposingCommander",
+  "opposingTokenEngines",
 ];
 
 export const FIT_TIED: readonly (readonly [WeightKey, WeightKey])[] = [["idlePower", "power"]];

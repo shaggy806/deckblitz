@@ -65,6 +65,8 @@ export const SHIPPED_2026_09_27C: Champion = {
     opponent: 1,
     eliminations: 0,
     otherOpponents: 0.5,
+    opposingCommander: 0,
+    opposingTokenEngines: 0,
     crackbackParanoia: 0.5,
     crackbackMargin: 2,
     crackbackGrowth: 0,

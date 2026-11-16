@@ -68,6 +68,8 @@ export const RAMP: Champion = {
     opponent: 1,
     eliminations: 0,
     otherOpponents: 0.25,
+    opposingCommander: 0,
+    opposingTokenEngines: 0,
     crackbackParanoia: 0.75,
     crackbackMargin: 4,
     crackbackGrowth: 0,

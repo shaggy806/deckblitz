@@ -55,6 +55,7 @@ import {
 } from "../target-polarity.js";
 import { ActivationCap, isFreeCost } from "./activation-cap.js";
 import { candidateActions } from "./candidates.js";
+import { aimPremium } from "./aim.js";
 import { withDivisions } from "./divisions.js";
 import { findUntapPlans } from "./untap-plans.js";
 import { collapseTwins } from "./twins.js";
@@ -682,12 +683,13 @@ function bestDecision(
   };
   let best = inherited;
   const inheritedScore = score(inherited);
-  let bestScore = inheritedScore === null ? -Infinity : inheritedScore + keptBy;
+  let bestScore = inheritedScore === null ? -Infinity : inheritedScore + keptBy + aim(inherited);
   const seen = JSON.stringify(inherited);
   for (const candidate of candidates) {
     if (spent(budget)) break;
     if (JSON.stringify(candidate) === seen) continue;
-    const value = score(candidate);
+    const scored = score(candidate);
+    const value = scored === null ? null : scored + aim(candidate);
     if (value !== null && value > bestScore) {
       best = candidate;
       bestScore = value;
@@ -715,6 +717,12 @@ function rankValue(state: GameState, cards: CardRegistry, ref: TargetRef): numbe
   return ref.kind === "object" ? stats + RANK_ENGINE * engineScore(state, cards, ref.object) : stats;
 }
 
+  // Where the answer is a removal's targets, what its aim is worth past the
+  // evaluation (`aimPremium`): every candidate here is the same removal.
+  const aim = (action: Action): number =>
+    legal !== undefined && legal.kind === "choose-targets" && action.type === "choose-targets"
+      ? aimPremium(view.state, cards, weights, me, legal.cardName, action.targets)
+      : 0;
 /**
  * `legal` with each target slot's options in the order worth simulating:
  * the side the slot's effect belongs on first, most valuable first
@@ -1788,6 +1796,9 @@ export class EvalBotController extends HeuristicBotController {
     // `payoffBeforeWipe` is not asked here (the bot audit's Q1, retired
     // 2026-11-10).
     if (best.type === "pass-priority" && landfall !== undefined) {
+    // The removal chosen, aimed again among its own targets (`reaimed`): not
+    // a batch's or an untap plan's first activation, which stand as scored.
+    if (batch === null && plan === null) best = this.reaimed(view.state, best, scored);
       const land = landRule();
       if (land !== null) return land;
     }
@@ -2076,6 +2087,37 @@ export class EvalBotController extends HeuristicBotController {
       .filter((choice) => (seen.has(choice.key) ? false : (seen.add(choice.key), true)))
       .sort((a, b) => b.size - a.size)
       .map((choice) => choice.id);
+  /**
+   * `best`, or the same cast or activation at other targets where its aim
+   * is worth more there (`aimPremium`: an opponent's commander, its token
+   * makers). Only among the fillings of that one spell or ability that the
+   * search scored, each by its own score and its premium: which removal to
+   * fire, and whether to, were decided without it.
+   */
+  private reaimed(state: GameState, best: Action, scored: ReadonlyMap<Action, number>): Action {
+    const w = this.weights;
+    if (w.opposingCommander === 0 && w.opposingTokenEngines === 0) return best;
+    if (best.type !== "cast-spell" && best.type !== "activate-ability") return best;
+    const base = scored.get(best);
+    if (base === undefined) return best;
+    const sourceOf = (a: Action): string | undefined =>
+      a.type === "cast-spell" ? state.objects[a.card]?.cardName : a.type === "activate-ability" ? state.objects[a.source]?.cardName : undefined;
+    const targetsOf = (a: Action) => (a.type === "cast-spell" || a.type === "activate-ability" ? a.targets : undefined);
+    /** The move with its targets and their shares left out: equal for two
+     * fillings of one spell or ability. */
+    const shape = (a: Action): string => JSON.stringify({ ...a, targets: undefined, division: undefined });
+    const mine = shape(best);
+    const premium = (a: Action): number => aimPremium(state, this.cards, w, this.playerId, sourceOf(a), targetsOf(a));
+    let top = best;
+    let topValue = base + premium(best);
+    for (const [action, score] of scored) {
+      if (action === best || action.type !== best.type || shape(action) !== mine) continue;
+      const value = score + premium(action);
+      if (value > topValue) [top, topValue] = [action, value];
+    }
+    return top;
+  }
+
     const out: Action[] = [];
     for (const action of actions) {
       if (action.type !== "cast-spell" && action.type !== "activate-ability") {

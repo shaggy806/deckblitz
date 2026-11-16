@@ -204,6 +204,20 @@ export interface EvalWeights {
   /** How much the *average* of every other living opponent subtracts. Zero
    * at a two-player table, where there's no one else. */
   readonly otherOpponents: number;
+  /** Not evaluation terms: what an opponent's commander, and each token a
+   * round its token makers make, add to a removal's aim at them, where a
+   * removal chooses among its targets (`bot/aim.ts`). Whether the removal
+   * is fired at all is still the plain evaluation's: judged as terms of the
+   * evaluation itself (2026-11-15, `bot:judge --kind removal`), they were
+   * better every time they changed which permanent a removal took and worse
+   * every time they fired one in place of developing.
+   * From `bot:engines` (`docs/plans/bot-next-steps.md` step 7): of
+   * everything on a board, a commander in play and then a token maker are
+   * what come before a turn that brings far more than the board showed
+   * (+7.4% and +5.6% to the chance of one on the strong decks, anything else
+   * under 2%), and salt, EDHREC rank and `engineScore` say nothing. */
+  readonly opposingCommander: number;
+  readonly opposingTokenEngines: number;
   /**
    * Not evaluation terms: the attack builder's crackback check
    * (`combat-math.ts`). How much of each opponent's all-out swing to expect
@@ -465,6 +479,8 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // leader first. Hand-tuned (step 8); what's still missing is a term for the
   // threat to *us* — BACKLOG, "Removal only for the leader".
   otherOpponents: 0.5,
+  opposingCommander: 0,
+  opposingTokenEngines: 0,
   crackbackParanoia: 0.5,
   crackbackMargin: 2,
   crackbackGrowth: 0.5,

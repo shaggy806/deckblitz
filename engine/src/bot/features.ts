@@ -750,7 +750,7 @@ const tokenMemo = new WeakMap<CardDefinition, EngineRate>();
  * v2 than by v1 — Hero of Bladehold priced as a 3/4 — because nothing counted
  * what they keep making. Rated like {@link drawRate}.
  */
-function tokenRate(registry: CardRegistry, def: CardDefinition, opponents: number): number {
+export function tokenRate(registry: CardRegistry, def: CardDefinition, opponents: number): number {
   let rate = tokenMemo.get(def);
   if (rate === undefined) {
     rate = engineRate(
