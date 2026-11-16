@@ -13,7 +13,7 @@ import { keywordCostString } from "./keyword-values.js";
 import type { KeywordCostsPaid, KeywordValue, KeywordValueName } from "./keyword-values.js";
 import { playCostMode, playSpendsSomething, playGrantOf } from "./play-permission.js";
 import type { CardPlayPermission, EffectPlay, PlayedUnder, PlayFrom, PlayGrant, PlayTerms, StaticPlay } from "./play-permission.js";
-import { objectRefRead, resolvePlayerRef, tokenRiders } from "./effects.js";
+import { objectRefAct, objectRefRead, resolvePlayerRef, tokenRiders } from "./effects.js";
 import {
   abilityLifeCost,
   chosenCounterCost,
@@ -39101,6 +39101,15 @@ export class Game {
       // "If the sacrificed creature was …", "if that Equipment was attached to
       // a creature": the object the ref reads, as it was (608.2h).
       if (condition.kind === "object-matches") {
+        // "If it's a Samurai card": the card where it is now, as the
+        // instruction it gates would find it (Oathkeeper's ruling).
+        if (condition.now === true) {
+          const now = objectRefAct(condition.object, context);
+          return (
+            now?.kind === "object" &&
+            matchesFilter(this.state, this.registry, now.object, condition.filter, { you: controller, source, x })
+          );
+        }
         const read = objectRefRead(condition.object, context);
         return read?.kind === "object" && matchesKnown(read.object, condition.filter);
       }

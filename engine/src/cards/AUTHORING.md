@@ -753,7 +753,10 @@ any variant, printed or granted — hexproof or a "hexproof from [quality]" (702
 activated ability (605.1a); `tapCost: true` one with {T} in its cost (Magewright's Stone; a basic
 land type's intrinsic mana ability counts, "tap an untapped creature you control" doesn't). `castFrom` takes `{ not: ZoneType }`. `aboveSourceInGraveyard` reads
 graveyard order (404.2). Condition `{ kind: "object-matches", object: ObjectRef, filter }` is the general
-"if that object is ...", `{ paid: "sacrificed" }` among its objects.
+"if that object is ...", `{ paid: "sacrificed" }` among its objects — as it last existed (608.2h); with
+`now: true` the object where it is now, the one the ref acts on: Oathkeeper, Takeno's Daisho's "return that
+card to the battlefield under your control if it's a Samurai card" asks the card in the graveyard (the
+ruling), false once it has moved on.
 
 `EffectSpec` (`effects.ts`) is the declarative vocabulary for what a spell or
 ability does on resolution. A `target:` field is an **index into `targets[]`**

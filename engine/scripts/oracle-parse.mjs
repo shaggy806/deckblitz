@@ -1929,6 +1929,9 @@ export function parseTrigger(clause) {
   // Two abilities, one for each event (Gulping Scraptrap, Chaos Defiler).
   if (/^When ~ enters or dies$/.test(c)) return [...self("enters-battlefield"), ...self("dies")];
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");
+  // "When enchanted creature dies" (False Demise), "whenever equipped creature
+  // dies" (Oathkeeper, Takeno's Daisho): what this is attached to.
+  if (/^When(?:ever)? (?:enchanted|equipped) creature dies$/.test(c)) return [{ on: "dies", who: "attached" }];
   if (/^When(?:ever)? ~ leaves the battlefield$/.test(c)) return self("leaves-battlefield");
   // Changes of control (rule 603.10d): Khârn the Betrayer, Risky Move, Zidane.
   if (/^When you lose control of ~$/.test(c)) return self("loses-control");
@@ -3403,6 +3406,27 @@ export function parseSentence(sentence, ctx) {
   // a put-into-a-graveyard trigger is about, found in that graveyard and
   // nowhere else (rule 400.7 — Undead Alchemist). The token is made whether
   // or not the card was still there (Undead Alchemist's ruling).
+  // "Return that card to the battlefield under your control" (False Demise):
+  // the card the creature it was attached to became, in the graveyard; "… if
+  // it's a Samurai card" (Oathkeeper, Takeno's Daisho) asks that of the card
+  // there as this resolves (`object-matches` `now` — the ruling).
+  const hostCard =
+    ctx?.hostDied === true && ctx.targets.length === 0
+      ? /^return that card to the battlefield under your control(?: if it's an? (.+?) card)?\.$/i.exec(s)
+      : null;
+  if (hostCard !== null) {
+    const put = { kind: "put-onto-battlefield", target: "trigger-object", underYourControl: true };
+    if (hostCard[1] === undefined) return put;
+    const filter = parseTypePhrase(hostCard[1]);
+    if (filter === null) return null;
+    return { kind: "conditional", condition: { kind: "object-matches", object: "trigger-object", filter, now: true }, then: put };
+  }
+  // "When enchanted creature dies, return this card to its owner's hand"
+  // (Angelic Destiny): the Aura, put into the graveyard as its creature left
+  // (rule 704.5m), from there.
+  if (ctx?.hostDied === true && ctx.targets.length === 0 && /^return (?:this card|~) to its owner's hand\.$/i.test(s)) {
+    return { kind: "return-to-hand", target: "source", from: "graveyard" };
+  }
   const exileThatCard =
     ctx?.cardEvent === true && ctx.it === "trigger-object" && ctx.targets.length === 0
       ? /^exile that card(?: and (create .+))?\.$/i.exec(s)
@@ -18521,6 +18545,8 @@ function parseFaceAsWritten(face, ctx = {}) {
           ...(triggers.every((t) => t.on === "cast-spell") ? { castSpell: true } : {}),
           // "That card" of a card put into a graveyard.
           ...(triggers.every((t) => t.on === "put-into-graveyard" && t.batched !== true) ? { cardEvent: true } : {}),
+          // "That card" of the creature this was attached to, which died.
+          ...(triggers.every((t) => t.on === "dies" && t.who === "attached") ? { hostDied: true } : {}),
           ...(triggers.every((t) => t.on === "evolves" && t.who === "self") ? { evolved: true } : {}),
           ...(thatPlayerOf(triggers) !== undefined ? { thatPlayer: thatPlayerOf(triggers) } : {}),
           // "Those creatures": the attackers of an attack read as one batch.
@@ -20172,6 +20198,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     departed: ctx.departed,
     ...(ctx.castSpell === true ? { castSpell: true } : {}),
     ...(ctx.cardEvent === true ? { cardEvent: true } : {}),
+    ...(ctx.hostDied === true ? { hostDied: true } : {}),
     ...(ctx.evolved === true ? { evolved: true } : {}),
     divided,
     // A cost that discards one card: "the discarded card" is that card.

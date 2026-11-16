@@ -20609,3 +20609,25 @@ describe("drawing from the bottom, and a scry, surveil or search trigger (River 
     expect(river.complete).toBe(true);
   });
 });
+
+describe("'whenever equipped creature dies, return that card … if it's a Samurai card' (Oathkeeper, Takeno's Daisho)", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Host", type_line: "Artifact — Equipment", oracle_text }, { tokenFor: () => null });
+  const put = { kind: "put-onto-battlefield", target: "trigger-object", underYourControl: true };
+  it("asks the card in the graveyard, `object-matches` with `now`", () => {
+    const oath = face(
+      "Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.",
+    );
+    expect(oath.triggered[0].trigger).toEqual({ on: "dies", who: "attached" });
+    expect(oath.triggered[0].effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "object-matches", object: "trigger-object", filter: { subtype: "Samurai" }, now: true },
+      then: put,
+    });
+  });
+  it("reads False Demise's plain return", () => {
+    const demise = face("When enchanted creature dies, return that card to the battlefield under your control.");
+    expect(demise.triggered[0].trigger).toEqual({ on: "dies", who: "attached" });
+    expect(demise.triggered[0].effect).toEqual(put);
+  });
+});

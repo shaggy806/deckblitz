@@ -1834,8 +1834,16 @@ export type StaticCondition =
    * reads it (rule 608.2h): "if the sacrificed creature was a Thrull" (`{ paid:
    * "sacrificed" }`), "if that Equipment was attached to a creature" (`{
    * hostOf: 0 }`). False with nothing to read.
+   *
+   * `now`: the object as it is **now**, in the zone it went to — the one the
+   * ref would act on — not as it last existed (608.2h): Oathkeeper, Takeno's
+   * Daisho's "whenever equipped creature dies, return that card to the
+   * battlefield under your control **if it's a Samurai card**", asked of the
+   * card in the graveyard (the ruling: its creature type there, not the
+   * creature's as it died). False once it has moved on from there, a new
+   * object (rule 400.7).
    */
-  | { readonly kind: "object-matches"; readonly object: ObjectRef; readonly filter: CardFilter }
+  | { readonly kind: "object-matches"; readonly object: ObjectRef; readonly filter: CardFilter; readonly now?: true }
   /**
    * "If this is the **Nth time this ability has resolved this turn**" (Omnath,
    * Locus of Creation; Ms. Bumbleflower; Tannuk). `n` counts the resolution

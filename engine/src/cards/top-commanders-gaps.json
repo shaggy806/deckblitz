@@ -2738,7 +2738,8 @@
   "effect:each-opponent-may-single-result",
   "effect:exile-to-library-bottom-linked",
   "effect:exile-to-library-bottom-linked",
-  "replacement:draw-from-bottom"
+  "replacement:draw-from-bottom",
+  "condition:trigger-card-characteristics-in-new-zone"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
