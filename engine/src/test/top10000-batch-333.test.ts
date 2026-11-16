@@ -24,6 +24,7 @@ import {
   lands,
   loyalty,
   nextTurn,
+  pickFromZone,
   pickModes,
   ref,
   registryOf,
@@ -31,6 +32,7 @@ import {
   spawn,
   table,
   toHand,
+  toLibrary,
   watchTargets,
   zone,
 } from "./harness.js";
@@ -245,5 +247,43 @@ describe("Anoint with Affliction", () => {
     expect(zone(game, angel)).toBe("battlefield");
     cast(game, toHand(game, "Anoint with Affliction"), { targets: [ref(carols)] });
     expect(zone(game, carols)).toBe("exile");
+  });
+});
+
+describe("Signal the Clans", () => {
+  const setUp = (seed = 1) => {
+    const { game, a } = table({ seed });
+    lands(game, "Mountain", 1);
+    lands(game, "Forest", 1);
+    const bears = toLibrary(game, "Grizzly Bears");
+    const bears2 = toLibrary(game, "Grizzly Bears");
+    const giant = toLibrary(game, "Hill Giant");
+    const angel = toLibrary(game, "Serra Angel");
+    return { game, a, bears, bears2, giant, angel };
+  };
+
+  it("three of different names: one of them, at random, to the hand; the rest stay in the library", () => {
+    const seen = new Set<string>();
+    for (let seed = 1; seed <= 12; seed += 1) {
+      const { game, a, bears, giant, angel } = setUp(seed);
+      pickFromZone(a, bears, giant, angel);
+      const before = hand(game).length;
+      cast(game, toHand(game, "Signal the Clans"));
+      const taken = [bears, giant, angel].filter((id) => zone(game, id) === "hand");
+      expect(taken).toHaveLength(1);
+      expect(hand(game).length).toBe(before + 1);
+      expect([bears, giant, angel].filter((id) => zone(game, id) === "library")).toHaveLength(2);
+      seen.add(game.state.objects[taken[0]].cardName);
+    }
+    expect(seen.size).toBeGreaterThan(1);
+  });
+
+  it("two of a name revealed: nothing to the hand", () => {
+    const { game, a, bears, bears2, giant } = setUp();
+    pickFromZone(a, bears, bears2, giant);
+    const before = hand(game).length;
+    cast(game, toHand(game, "Signal the Clans"));
+    expect(hand(game).length).toBe(before);
+    expect([bears, bears2, giant].every((id) => zone(game, id) === "library")).toBe(true);
   });
 });

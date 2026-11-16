@@ -24738,6 +24738,7 @@ import _poolSigiledStarfish from "./pool/sigiled-starfish.js";
 import _poolSigiledSwordOfValeron from "./pool/sigiled-sword-of-valeron.js";
 import _poolSignInBlood from "./pool/sign-in-blood.js";
 import _poolSignalPest from "./pool/signal-pest.js";
+import _poolSignalTheClans from "./pool/signal-the-clans.js";
 import _poolSignalingRoar from "./pool/signaling-roar.js";
 import _poolSignatureSlam from "./pool/signature-slam.js";
 import _poolSignpostScarecrow from "./pool/signpost-scarecrow.js";
@@ -57950,6 +57951,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSigiledSwordOfValeron,
   _poolSignInBlood,
   _poolSignalPest,
+  _poolSignalTheClans,
   _poolSignalingRoar,
   _poolSignatureSlam,
   _poolSignpostScarecrow,
@@ -91175,6 +91177,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sigiled-sword-of-valeron": _poolSigiledSwordOfValeron,
   "pool/sign-in-blood": _poolSignInBlood,
   "pool/signal-pest": _poolSignalPest,
+  "pool/signal-the-clans": _poolSignalTheClans,
   "pool/signaling-roar": _poolSignalingRoar,
   "pool/signature-slam": _poolSignatureSlam,
   "pool/signpost-scarecrow": _poolSignpostScarecrow,
