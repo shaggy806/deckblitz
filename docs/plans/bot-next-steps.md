@@ -1,6 +1,7 @@
 # Bots: the next steps
 
-Status: **in progress** (written 2026-11-15; steps 1, 2 and 4 built the same day, and step 5,
+Status: **in progress** (written 2026-11-15; steps 1, 2 and 4 built the same day, step 6, the
+swing-back margin, measured and left as it is, and step 5,
 added that day from the user, checked and its own-hand half built; step 3 open, now read
 through step 4's screen). The
 plan of record
@@ -348,3 +349,62 @@ held for a pump. A sorcery-speed out on its own turn (its own wipe over a board 
 creatures: Grave Danger cast Crippling Fear instead of Necromantic Selection and died) is the
 evaluation's call and didn't reproduce on a small board. An attack, dead on the board, still
 races. And whether the bots wipe for a table's sake is unmeasured.
+
+## 6. The swing-back margin
+
+**Why.** After the two fixes, nearly every loss the screen flagged was one shape: a bot attacks
+or taps with a margin that is safe on the board as it stands, and the board grows before it
+untaps. The margin is one number for every opponent (`crackbackGrowth`, the damage through
+times 1.5). The idea was to scale it by what each opponent could add: cards in hand, lands.
+
+**Measured first, and the idea was wrong** (2026-11-15; `npm run bot:crackback -w engine --
+--pool upgraded --games 96 --workers 8`, 94 games finishing, each swing now logging every
+opponent's hand, lands, board power and what that opponent then dealt; `--pool upgraded` is
+new, the bench seatings on each deck's upgraded build). 1,659 attack decisions, 1,189 that
+sent something, 162 of those dead before untapping.
+
+- *What an opponent holds predicts nothing.* When an opponent attacked, it dealt 5 or more
+  over what its board projected in 21%, 17%, 20% and 21% of attacks at 0-1, 2-3, 4-6 and 7+
+  cards in hand; 20%, 20%, 20% and 14% at 0-5, 6-8, 9-11 and 12+ lands. On average the
+  projection is right (10.3 projected, 10.8 dealt). Nor does how much its board grew the
+  round before (17% to 28%, in no order).
+- *A haste enabler does.* An opponent showing one (Lightning Greaves, Swiftfoot Boots, Dragon
+  Tempest, Arena of Glory, Crashing Drawbridge) went over by 5 or more in 33% of its attacks
+  against 18%, dealing 11.8 for 8.9 projected.
+- *The margin is not where the deaths are.* On the bot's own reading it was already dead
+  whatever it held back at 173 decisions, and 76% of those died whether it then sent
+  everything (73%), some (77%) or nothing (77%): racing costs nothing there. Where the
+  reading was safe after what it sent, 4.5% of full swings died, 9.5% of partial ones and
+  7.4% of the turns it sent nothing: a full swing that passes the check dies less often than
+  staying home does. Of the 93 that died out of a safe reading, 46 took more from one
+  opponent than that opponent's whole board had in power at the swing, 21 took damage past
+  blockers that were gone by then, 19 were chipped by several, 7 were drained.
+- *What a stricter rule would buy,* read back over the logged swings: doubling the damage
+  through instead of half again calls 12 more of the deaths unsafe and 84 more swings that
+  lived; 2 a castable card, 9 and 51; 8 for an opponent showing a haste enabler, 10 and 15
+  (4: 5 and 5; 10: no more than 8).
+
+**Tried: the enabler alone, and not shipped.** Each opponent showing a haste enabler added 8
+to the grown reading, weighted as the rest of its swing is (a weight, `crackbackHaste`, a
+`showsHasteEnabler` in `combat-math.ts`; built, tested, and taken out again). Judged by
+`bot:judge --kind attacks` against the build without it: 11 games on three pods changed one
+attack, and the 16 games in which the log says the rule changes a verdict changed eleven
+more. Of the twelve: two better for it (one a death avoided, one by 6.5 points), five worse
+(one a death caused: it called off Atarka's attack that killed a player, and the bot died
+anyway; the others by 9.3, 3.5, 2.0 and 2.0 points, each an attack not made), five even
+(three of them out of the game either way). A death for a death, and 6.5 points for 16.8.
+
+**What the count read back over a log can't say** is what the attack not made costs, and the
+log itself says it: a full swing that passes the check dies less often than a turn spent at
+home. The read-back counted ten deaths "caught"; played out, the bot that stayed home died as
+often and its opponents kept their life. So the margin stays as it is, and the lesson is for
+the next idea of this kind: a rule that forbids attacks is judged by playing its changed
+decisions on, not by counting the deaths behind the attacks it would have forbidden.
+
+**What the measurement does point at.** Half the eliminations (131 of about 250) were dead on
+the bot's own reading at their last attack decision whatever they did: lost earlier, on the
+board. And of the deaths out of a safe reading, half were one opponent dealing more than its
+whole board had in power a turn before: an engine already on the battlefield (Lathliss and
+her tokens, Eshki's counters, Titania's Elementals, a Towering Titan), not a hand. That is a
+question about which permanents the bots answer and when, not about how they attack. In
+BACKLOG.

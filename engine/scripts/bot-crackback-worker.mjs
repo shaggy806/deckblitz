@@ -9,6 +9,7 @@ import {
   DEFAULT_WEIGHTS,
   EvalBotController,
   Game,
+  STARTER_DECKS,
   activePlayerOf,
   combatCreatures,
   createDefaultRegistry,
@@ -87,9 +88,23 @@ function hasteEnablers(state, player) {
 
 const nativeHaste = (name) => registry.has(name) && (registry.get(name).keywords ?? []).includes("haste");
 
-parentPort.on("message", ({ seed, players, weights: overrides }) => {
+/** The lands `player` controls: the mana its next turn has, near enough. */
+const landsOf = (state, player) =>
+  state.zones.shared.battlefield.filter((id) => {
+    const o = state.objects[id];
+    return o?.controller === player && registry.has(o.cardName) && registry.get(o.cardName).types.includes("land");
+  }).length;
+
+parentPort.on("message", ({ seed, players, weights: overrides, pool }) => {
   const weights = { ...DEFAULT_WEIGHTS, ...overrides };
-  const { seats, decks } = tableFor(seed, players);
+  const table = tableFor(seed, players);
+  const { seats } = table;
+  // `--pool upgraded`: the same seatings, each deck its upgraded build (what
+  // a blitz deals), where it has one.
+  const decks =
+    pool === "upgraded"
+      ? table.decks.map((deck) => STARTER_DECKS.find((d) => d.name === `${deck.name} (Upgraded)`) ?? deck)
+      : table.decks;
   const records = [];
   /** Per seat, its latest swing still waiting for the board it hands over. */
   const awaitingHandoff = new Map();
@@ -152,6 +167,23 @@ parentPort.on("message", ({ seed, players, weights: overrides }) => {
         swinging: threat(state, seat, home, weights),
         handoff: null,
         hasteEnablers: opponentsAfter(state, seat).flatMap((o) => hasteEnablers(state, o)),
+        // Each opponent as it stood at the swing: what it could add before
+        // its own attack (cards in hand, lands to cast them with) beside
+        // what its board put through the blockers kept home. For whether a
+        // hand predicts the damage the board alone undersold
+        // (`docs/plans/bot-next-steps.md`, "The swing-back margin").
+        opponents: opponentsAfter(state, seat).map((o) => {
+          const attackers = combatCreatures(state, registry, o, false).filter((c) => c.canAttack);
+          return {
+            seat: o,
+            hand: state.zones.perPlayer[o].hand.length,
+            lands: landsOf(state, o),
+            creatures: attackers.length,
+            power: attackers.reduce((sum, c) => sum + Math.max(0, c.damage), 0),
+            through: Math.round(damageThrough(attackers, home).damage),
+            enabler: hasteEnablers(state, o).length > 0,
+          };
+        }),
         eventIndex: game?.events.length ?? 0,
         onBoard: opponentsAfter(state, seat).flatMap((o) => combatCreatures(state, registry, o, false).map((c) => c.id)),
         died: null,
@@ -186,6 +218,10 @@ parentPort.on("message", ({ seed, players, weights: overrides }) => {
     const took = { onBoard: 0, arrived: 0, noncombat: 0, lifeLost: 0, hastyNative: 0, hastyGranted: 0 };
     const hasty = [];
     const sources = new Set();
+    /** Per opponent: the combat damage it dealt the attacker, and whether it
+     * attacked it at all. */
+    const from = {};
+    const attackedBy = new Set();
     let opponentsTurn = false;
     let enteredThisTurn = new Set();
     let reachedNextTurn = false;
@@ -214,11 +250,13 @@ parentPort.on("message", ({ seed, players, weights: overrides }) => {
         break;
       }
       if (!opponentsTurn) continue;
+      if (e.type === "player-attacked" && e.defender === rec.seat) attackedBy.add(e.player);
       if (e.type === "permanent-entered-battlefield" || e.type === "control-changed") enteredThisTurn.add(e.object);
       if (e.type === "damage-dealt" && e.target.kind === "player" && e.target.player === rec.seat && e.amount > 0) {
         const name = state.objects[e.source]?.cardName ?? null;
         const controller = state.objects[e.source]?.controller;
         if (controller !== undefined) sources.add(controller);
+        if (e.combat && e.by !== undefined) from[e.by] = (from[e.by] ?? 0) + e.amount;
         if (!e.combat) took.noncombat += e.amount;
         else if (onBoard.has(e.source)) took.onBoard += e.amount;
         else took.arrived += e.amount;
@@ -234,6 +272,11 @@ parentPort.on("message", ({ seed, players, weights: overrides }) => {
     // A swing that ended the game in the attacker's favour has no crackback to
     // measure.
     rec.unresolved = rec.died === null && !reachedNextTurn && state.result.winner === rec.seat;
+    rec.took = took;
+    for (const o of rec.opponents) {
+      o.attacked = attackedBy.has(o.seat);
+      o.dealt = from[o.seat] ?? 0;
+    }
     delete rec.eventIndex;
     delete rec.onBoard;
   }

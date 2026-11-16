@@ -31,6 +31,7 @@
 // of 70. It's what `EvalWeights.crackbackGrowth` came from.
 //
 // Flags: --games N (default 200), --players 2-4 (4), --workers N (cores - 2),
+// --pool bench|upgraded (the bench decks, or each one's upgraded build),
 // --first SEED (1), --weights JSON (merged onto DEFAULT_WEIGHTS, every seat),
 // --timeout SECONDS per game (900), --out FILE (resumable NDJSON, default
 // .scratch/crackback-v2-<players>p.ndjson), --report FILE (report only).
@@ -63,7 +64,10 @@ const weights = weightsFlag === null ? null : JSON.parse(weightsFlag);
 for (const key of Object.keys(weights ?? {})) {
   if (!(key in DEFAULT_WEIGHTS)) throw new Error(`--weights: unknown weight "${key}"`);
 }
-const out = reportOnly ?? flag("out", join(ROOT, ".scratch", `crackback-v2-${players}p.ndjson`));
+// `--pool upgraded` seats each deck's upgraded build (what a blitz deals).
+const pool = flag("pool", "bench");
+if (pool !== "bench" && pool !== "upgraded") throw new Error(`--pool: "${pool}" is not bench or upgraded`);
+const out = reportOnly ?? flag("out", join(ROOT, ".scratch", `crackback-v2-${players}p${pool === "bench" ? "" : `-${pool}`}.ndjson`));
 
 const readRows = (file) =>
   existsSync(file)
@@ -138,7 +142,7 @@ function run() {
         record({ seed, weights, error: `timeout after ${timeoutMs / 1000}s` });
         stop();
       }, timeoutMs);
-      worker.postMessage({ seed, players, weights });
+      worker.postMessage({ seed, players, weights, pool });
     };
     worker.on("message", (row) => {
       clearTimeout(timer);
