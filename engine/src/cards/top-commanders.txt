@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-972 already implemented / 28 missing
+973 already implemented / 27 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -1000,7 +1000,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  994  Ruhan of the Fomori                             2916 decks  {1}{U}{R}{W}     Legendary Creature — Giant Warrior
 [x]  995  Donatello, the Brains                           2913 decks  {2}{U}           Legendary Creature — Mutant Ninja Turtle
 [x]  996  Kaust, Eyes of the Glade                        2908 decks  {R/W}{G}         Legendary Creature — Dryad Detective
-[ ]  997  Oskar, Rubbish Reclaimer                        2903 decks  {3}{U}{B}        Legendary Creature — Human Wizard
+[x]  997  Oskar, Rubbish Reclaimer                        2903 decks  {3}{U}{B}        Legendary Creature — Human Wizard
 [x]  998  Lilah, Undefeated Slickshot                     2901 decks  {1}{U}{R}        Legendary Creature — Human Rogue
 [x]  999  Glissa, the Traitor                             2897 decks  {B}{G}{G}        Legendary Creature — Phyrexian Zombie Elf
 [x] 1000  Rona, Herald of Invasion                        2897 decks  {1}{U}           Legendary Creature — Human Wizard // Legendary Creature — Phyrexian Wizard
