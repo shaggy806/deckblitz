@@ -62,7 +62,13 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside
  *   removing a counter from a creature you control"): additional costs (601.2f),
  *   paid in full or not offered (601.2h).
  * - `tax`: "costs {N} more" for a spell cast this way, an increase (601.2f);
- *   `opponentsOnly`, not for the player whose effect gave it (Soul Partition).
+ *   `opponentsOnly`, not for the player whose effect gave it (Soul Partition);
+ *   `unlessTargets`, "if that spell doesn't target [a creature you control],
+ *   it costs {8} more to cast this way" (Mavinda, Students' Advocate): none
+ *   when one of its targets matches, from the caster's side — fixed once the
+ *   targets are chosen (601.2c), and an offer that can't pay it gives only
+ *   the targets that spare it. Read from exile (a permission on the card) and
+ *   from a graveyard (the permission the cast names).
  * - `reduce`: "spells you cast this way cost {N} less" (generic only).
  * - `affinity`: "if you do, it has affinity for [those]" (Chiss-Goria, Forge
  *   Tyrant's "for artifacts", `{ type: "artifact" }`): a spell cast under this
@@ -170,7 +176,7 @@ export interface PlayTerms {
   readonly discard?: number;
   readonly do?: EffectSpec;
   readonly costIncreasePerOther?: CardFilter;
-  readonly tax?: { readonly generic: number; readonly opponentsOnly?: true };
+  readonly tax?: { readonly generic: number; readonly opponentsOnly?: true; readonly unlessTargets?: CardFilter };
   readonly reduce?: number;
   readonly affinity?: CardFilter;
   readonly undaunted?: true;

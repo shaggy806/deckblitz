@@ -334,6 +334,17 @@ one offer with no colour, and once the cost is paid the mana ability asks them �
 resolved (rules 605.3b, 608.2d, 405.6c); then their pick goes to their pool and the activator gets priority
 back. v1 answers with the colour its hand wants (`chooseManaSplit`). Spectral Searchlight (rank 7854).
 `test/mana-ability-they-choose.test.ts`; design record `docs/plans/mana-ability-other-player-choice.md`.
+### A permission's "costs {N} more unless it targets …" — built 2026-11-16
+
+The key `cost:granted-graveyard-cast-increase-unless-targets`. A permission's `tax` takes `unlessTargets`
+(a `CardFilter`): the increase isn't owed when one of the cast's targets matches, from the caster's side,
+fixed once the targets are chosen (rules 601.2c, 601.2f). It rides the target-earned reduction machinery
+(`targetsEarnReduction`, `spellPricedByTargets`), so an offer that can't pay the tax gives only the targets
+that spare it. A permission's `tax` is now read for a graveyard cast too — the permission the cast names
+(`namedGraveyardPermission`, under `castGrantScope`, which `canDispatch` now sets as `castSpell` does), so a
+flashback of the same card isn't taxed. Mavinda, Students' Advocate (rank 10647).
+`test/permission-tax-unless-targets.test.ts`.
+
 ### Choosing which permission a play is under, from any zone — built 2026-11-16
 
 The key `zone:choose-play-permission-any-zone`. Which of several permissions reaching a card a play is made

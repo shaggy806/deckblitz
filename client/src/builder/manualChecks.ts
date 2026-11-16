@@ -13008,4 +13008,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    "Mavinda, Students' Advocate: a spell from your graveyard costs {8} more unless it targets your creature",
+    board({
+      you: { bf: ["Mavinda, Students' Advocate", 'Grizzly Bears', 'Forest*2'], gy: ['Giant Growth'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

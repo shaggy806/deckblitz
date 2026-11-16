@@ -8609,3 +8609,7 @@ Each board's die comes up 4.
 ### The Fourth Doctor: a legendary land under Courser's permission or the Doctor's, in a 4-player game
 - **Do:** In this 4-player game, click "Play Gaea's Cradle (via Courser of Kruphix)" by the top card of your library.
 - **Expect:** Two buttons by your top card, one via Courser of Kruphix and one via The Fourth Doctor. Played through Courser, Gaea's Cradle enters, you gain 1 life from Courser, and no Food comes. A click on the next card, Sol Ring, still casts it through the Doctor, and a Food comes then.
+
+### Mavinda, Students' Advocate: a spell from your graveyard costs {8} more unless it targets your creature
+- **Do:** Use Mavinda's ability on Giant Growth in your graveyard. Then cast Giant Growth from your graveyard at your Grizzly Bears.
+- **Expect:** With your two Forests, only your own creatures (Mavinda and your Grizzly Bears) light up as targets, not Bob's Bears: at Bob's it would cost {8}{G}. It resolves for {G}, your Bears are 5/5, and Giant Growth goes to exile, not your graveyard.

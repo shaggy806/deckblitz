@@ -3458,7 +3458,13 @@ export class Game {
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
-        if (isPermissionCast(action.via) && this.playGrantToScope(action.card, action.graveyardGrant)) {
+        // Judged under the permission it names, as `castSpell` makes it: a
+        // graveyard's (what it costs, `namedGraveyardPermission`), or one
+        // from anywhere else (`playGrantChoices`).
+        if (
+          (action.via === "graveyard-permission" && this.castGrantScope?.card !== action.card) ||
+          (isPermissionCast(action.via) && this.playGrantToScope(action.card, action.graveyardGrant))
+        ) {
           return this.withCastGrantScope(action.card, action.graveyardGrant, () => this.canDispatch(action));
         }
         if (this.atModesX(action) !== action) return this.canDispatch(this.atModesX(action));
@@ -18206,10 +18212,15 @@ export class Game {
     // "A spell cast this way costs {2} more to cast" (Elite Spellbinder), of
     // the permission it's cast under: an increase, before any reduction (rule
     // 601.2f). Not the granter's own under `opponentsOnly` (Soul Partition).
-    const ownTax = ownPermission?.terms.tax;
+    // From a graveyard, of the permission the cast names (Mavinda, Students'
+    // Advocate's "costs {8} more to cast this way"), and none at all when
+    // one of the cast's targets spares it (`unlessTargets`).
+    const taxedUnder = ownPermission ?? (exiled?.zone === "graveyard" ? this.namedGraveyardPermission(player, cardId, def, xValue) : undefined);
+    const ownTax = taxedUnder?.terms.tax;
     const permissionTax =
       ownTax !== undefined &&
-      !(ownTax.opponentsOnly === true && ownPermission?.carrier.kind === "card" && ownPermission.carrier.permission.granter === player)
+      !(ownTax.opponentsOnly === true && taxedUnder?.carrier.kind === "card" && taxedUnder.carrier.permission.granter === player) &&
+      !this.permissionTaxSpared(ownTax, def, player, cardId, xValue, targets)
         ? ownTax.generic
         : 0;
     // "This spell costs {N} less to cast if it targets …" (Price of Fame).
@@ -18348,9 +18359,71 @@ export class Game {
     );
   }
 
+  /** The permission a cast of `cardId` from a graveyard names — the one it's
+   * being offered or made under (`castGrantScope`, set around a
+   * graveyard-permission cast and its offers alone, so a flashback is never
+   * priced under it). */
+  private namedGraveyardPermission(player: PlayerId, cardId: ObjectId, def: CardDefinition, x = 0): PlayOption | undefined {
+    const object = this.state.objects[cardId];
+    const scope = this.castGrantScope;
+    if (object?.zone !== "graveyard" || scope?.card !== cardId) return undefined;
+    const face = Math.max(0, object.faces?.indexOf(def.name) ?? 0);
+    return this.findGraveyardGrant(player, cardId, face, scope.grant, x)?.option;
+  }
+
+  /** What spares a spell the tax of the permission it's cast under, when
+   * that tax has an `unlessTargets` (Mavinda, Students' Advocate's "a
+   * creature you control"): from exile the permission on the card, from a
+   * graveyard the one the cast names. */
+  private permissionTaxSparedBy(player: PlayerId, cardId: ObjectId, def: CardDefinition): CardFilter | undefined {
+    const object = this.state.objects[cardId];
+    if (object?.zone === "graveyard") return this.namedGraveyardPermission(player, cardId, def)?.terms.tax?.unlessTargets;
+    if (object?.zone !== "exile" || object.playPermission?.tax?.unlessTargets === undefined) return undefined;
+    const face = Math.max(0, object.faces?.indexOf(def.name) ?? 0);
+    return this.playOptions(player, cardId, face).find((o) => o.carrier.kind === "card")?.terms.tax?.unlessTargets;
+  }
+
+  /** Whether one of `targets` is an object matching `filter`, read from the
+   * caster's side. */
+  private targetsMatch(
+    filter: CardFilter,
+    player: PlayerId,
+    cardId: ObjectId,
+    targets: readonly (TargetRef | null | undefined)[],
+  ): boolean {
+    return targets.some(
+      (t) => t?.kind === "object" && matchesFilter(this.state, this.registry, t.object, filter, { you: player, source: cardId }),
+    );
+  }
+
+  /** Whether a permission's `tax` is spared this cast: its `unlessTargets`
+   * matched by one of the targets chosen (rule 601.2c — the cost is fixed
+   * once they are, 601.2f), or, while the cast is only being offered, by one
+   * it could choose, as a `targetCostReduction` is assumed earned. */
+  private permissionTaxSpared(
+    tax: NonNullable<PlayTerms["tax"]>,
+    def: CardDefinition,
+    player: PlayerId,
+    cardId: ObjectId,
+    xValue: number,
+    targets: readonly (TargetRef | null | undefined)[] | undefined,
+  ): boolean {
+    const filter = tax.unlessTargets;
+    if (filter === undefined) return false;
+    if (targets !== undefined) return this.targetsMatch(filter, player, cardId, targets);
+    if (this.targetCostReductionOff) return false;
+    if (this.targetCostReductionAssumed) return true;
+    return this.targetOptionsFor(
+      this.effectiveTargetSpecs(def, undefined, false, false, player, cardId),
+      player,
+      this.cardSource(def, cardId, xValue),
+    ).some((slot) => this.targetsMatch(filter, player, cardId, slot));
+  }
+
   /** Whether `targets` earn anything that a spell's targets take off its cost:
-   * its own `targetCostReduction`, or a `costModification` keyed to them
-   * (Killian, Ink Duelist) that reaches it. */
+   * its own `targetCostReduction`, a `costModification` keyed to them
+   * (Killian, Ink Duelist) that reaches it, or sparing it the tax of the
+   * permission it's cast under (Mavinda, Students' Advocate). */
   private targetsEarnReduction(
     def: CardDefinition,
     player: PlayerId,
@@ -18358,6 +18431,8 @@ export class Game {
     targets: readonly (TargetRef | null | undefined)[],
   ): boolean {
     if (this.targetsEarnOwnReduction(def, player, cardId, targets)) return true;
+    const spares = this.permissionTaxSparedBy(player, cardId, def);
+    if (spares !== undefined && this.targetsMatch(spares, player, cardId, targets)) return true;
     return this.reachingCostModifications(player, cardId).some(
       ({ source, mod }) =>
         isTargetKeyed(mod) &&
@@ -18384,6 +18459,7 @@ export class Game {
    * almost never true, so the static half is memoised per cache region. */
   private spellPricedByTargets(def: CardDefinition, player: PlayerId, cardId: ObjectId): boolean {
     if (def.targetCostReduction !== null) return true;
+    if (this.permissionTaxSparedBy(player, cardId, def) !== undefined) return true;
     if (!this.targetKeyedCostModsInPlay()) return false;
     return this.reachingCostModifications(player, cardId).some(({ mod }) => isTargetKeyed(mod));
   }
