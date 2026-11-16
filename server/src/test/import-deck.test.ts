@@ -1,8 +1,15 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { colorIdentityOf, createDefaultRegistry, defineCard, withinIdentity } from "engine";
-import { commanderCandidates, evaluateDecklist, formatCheck, parseDecklistText, runImportJob } from "../import-deck.js";
+import {
+  commanderCandidates,
+  evaluateDecklist,
+  formatCheck,
+  parseDecklistText,
+  runImportJob,
+  settleCommanders,
+} from "../import-deck.js";
 import { chosenCommandersOf, commandersJobText, suggestJobText } from "../import-route.js";
-import type { DeckFormatReport, ImportedCardReport } from "protocol";
+import type { CommanderCandidate, DeckFormatReport, ImportedCardReport } from "protocol";
 
 const registry = createDefaultRegistry();
 
@@ -926,6 +933,30 @@ describe("runImportJob", () => {
     expect(stray.commanderCandidates).toHaveLength(5);
   });
 
+  it("asks nothing when the list's colours leave one card that could lead", async () => {
+    // Wilson is the first legend met, and the guess; only Atraxa's identity
+    // holds the whole list (rule 903.5c), so the list is read as Atraxa's.
+    const format = await formatOf(
+      ["1 Forest", "1 Island", "1 Plains", "1 Swamp", "1 Wilson, Refined Grizzly", "1 Atraxa, Praetors' Voice"].join("\n"),
+    );
+    expect(format.commanders).toEqual(["Atraxa, Praetors' Voice"]);
+    expect(format.commanderCandidates).toBeUndefined();
+  });
+
+  it("asks nothing of a list sorted by name with only its first card out of place", async () => {
+    const rest = ["1 Azusa, Lost but Seeking", "1 Forest", "1 Llanowar Elves", "1 Sol Ring", "1 Wilson, Refined Grizzly"];
+    const led = await formatOf(["1 Selvala, Heart of the Wilds", ...rest].join("\n"));
+    expect(led.commanders).toEqual(["Selvala, Heart of the Wilds"]);
+    expect(led.commanderCandidates).toBeUndefined();
+    // Sorted from its first line, the order says nothing: three green legends.
+    const sorted = await formatOf([...rest.slice(0, 4), "1 Selvala, Heart of the Wilds", rest[4]].join("\n"));
+    expect(sorted.commanderCandidates?.map((c) => c.name)).toEqual([
+      "Azusa, Lost but Seeking",
+      "Selvala, Heart of the Wilds",
+      "Wilson, Refined Grizzly",
+    ]);
+  });
+
   it("carries only a list of one or two names ahead of the list", () => {
     expect(commandersJobText(undefined, "1 Forest")).toBe("1 Forest");
     expect(commandersJobText(["a", "b", "c"], "1 Forest")).toBe("1 Forest");
@@ -1008,6 +1039,97 @@ describe("runImportJob", () => {
     expect(failed.out.rejected).toBeNull();
     expect(failed.out.lines.at(-1)).toEqual({ type: "error", error: "tags unreadable" });
     expect(failed.out.ended).toBe(1);
+  });
+});
+
+describe("settleCommanders", () => {
+  const lead = (name: string, pairsWith: readonly string[] = []): CommanderCandidate => ({
+    name,
+    implemented: true,
+    manaCost: null,
+    typeLine: "Legendary Creature",
+    pairsWith,
+  });
+  /** A colour identity for each name; a name left out is unknown. */
+  const identities =
+    (table: Record<string, string>) =>
+    (name: string): readonly ("W" | "U" | "B" | "R" | "G")[] | undefined =>
+      name in table ? ([...table[name]] as ("W" | "U" | "B" | "R" | "G")[]) : undefined;
+
+  it("names the one candidate whose colours hold the whole list", () => {
+    const names = ["Forest", "Green Legend", "Island", "Simic Legend"];
+    const settled = settleCommanders(
+      names,
+      [lead("Green Legend"), lead("Simic Legend")],
+      identities({ Forest: "G", Island: "U", "Green Legend": "G", "Simic Legend": "GU" }),
+    );
+    expect(settled).toEqual({ commanders: ["Simic Legend"] });
+  });
+
+  it("asks only about the candidates whose colours fit", () => {
+    const names = ["Colourless Legend", "Forest", "Green One", "Green Two"];
+    const settled = settleCommanders(
+      names,
+      [lead("Colourless Legend"), lead("Green One"), lead("Green Two")],
+      identities({ "Colourless Legend": "", Forest: "G", "Green One": "G", "Green Two": "G" }),
+    );
+    expect(settled).toEqual({ candidates: [lead("Green One"), lead("Green Two")] });
+  });
+
+  it("asks about them all when the colours fit none, and rules nothing out by a colour it doesn't know", () => {
+    const all = [lead("Green One"), lead("Red One")];
+    const none = settleCommanders(["Forest", "Green One", "Mountain", "Red One"], all, identities({ Forest: "G", Mountain: "R", "Green One": "G", "Red One": "R" }));
+    expect(none).toEqual({ candidates: all });
+    // "Unknown" is a card the lookup found nothing for: it may hold anything.
+    const unknown = settleCommanders(
+      ["Forest", "Green One", "Mountain", "Unknown"],
+      [lead("Green One"), lead("Unknown")],
+      identities({ Forest: "G", Mountain: "R", "Green One": "G" }),
+    );
+    expect(unknown).toEqual({ commanders: ["Unknown"] });
+  });
+
+  it("names a pair when only the two together hold the list (rule 702.124c)", () => {
+    const names = ["Forest", "Island", "Partner A", "Partner B", "Plains", "Swamp"];
+    const identityOf = identities({ Forest: "G", Island: "U", Plains: "W", Swamp: "B", "Partner A": "GU", "Partner B": "WB" });
+    const settled = settleCommanders(names, [lead("Partner A", ["Partner B"]), lead("Partner B", ["Partner A"])], identityOf);
+    expect(settled).toEqual({ commanders: ["Partner A", "Partner B"] });
+    // A third partner that completes the colours as well: still a question,
+    // each lead with the partners that fit beside it.
+    const three = settleCommanders(
+      [...names, "Partner C"],
+      [lead("Partner A", ["Partner B", "Partner C"]), lead("Partner B", ["Partner A"]), lead("Partner C", ["Partner A"])],
+      (name) => (name === "Partner C" ? ["W", "B"] : identityOf(name)),
+    );
+    expect(three).toEqual({
+      candidates: [lead("Partner A", ["Partner B", "Partner C"]), lead("Partner B", ["Partner A"]), lead("Partner C", ["Partner A"])],
+    });
+  });
+
+  describe("by the list's order", () => {
+    const green = identities({ Azusa: "G", Forest: "G", Selvala: "G", "Sol Ring": "", Wilson: "G", "Æther Vial": "" });
+    const all = [lead("Azusa"), lead("Selvala"), lead("Wilson")];
+    const byOrder = (names: readonly string[], candidates = all) => settleCommanders(names, candidates, green);
+
+    it("names a first card that is the only one out of place", () => {
+      expect(byOrder(["Selvala", "Azusa", "Forest", "Sol Ring", "Wilson"])).toEqual({ commanders: ["Selvala"] });
+      // Sorted as sites sort an accent or a ligature.
+      expect(byOrder(["Selvala", "Æther Vial", "Azusa", "Forest", "Wilson"])).toEqual({ commanders: ["Selvala"] });
+    });
+
+    it("says nothing for a list sorted from its first line, or with another card out of place", () => {
+      expect(byOrder(["Azusa", "Forest", "Selvala", "Sol Ring", "Wilson"])).toEqual({ candidates: all });
+      expect(byOrder(["Selvala", "Forest", "Azusa", "Sol Ring", "Wilson"])).toEqual({ candidates: all });
+    });
+
+    it("says nothing when the first card can't be the commander", () => {
+      expect(byOrder(["Sol Ring", "Azusa", "Forest", "Selvala", "Wilson"])).toEqual({ candidates: all });
+    });
+
+    it("names a pair written as the first two lines", () => {
+      const pair = [lead("Azusa"), lead("Selvala", ["Wilson"]), lead("Wilson", ["Selvala"])];
+      expect(byOrder(["Wilson", "Selvala", "Azusa", "Forest", "Sol Ring"], pair)).toEqual({ commanders: ["Wilson", "Selvala"] });
+    });
   });
 });
 

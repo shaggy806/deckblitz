@@ -37,6 +37,7 @@
 import { createServer } from "node:http";
 import { WebSocketServer } from "ws";
 import { COMPRESSION, attachTransport } from "../dist/transport.js";
+import { handleImportRoute } from "../dist/import-route.js";
 
 const PORT = Number(process.env.PORT ?? 4000);
 const CONTROL_PORT = Number(process.env.CONTROL_PORT ?? 4099);
@@ -45,7 +46,22 @@ const SHARDS = Number((shardsAt >= 0 ? process.argv[shardsAt + 1] : undefined) ?
 if (!Number.isInteger(SHARDS) || SHARDS < 0) throw new Error(`--shards needs a whole number, 0 or more (got ${SHARDS})`);
 const SETUP = new URL("./dev-rooms-shard.mjs", import.meta.url);
 
-const httpServer = createServer();
+/** The rooms' host, once it's made: it reads a pasted list where it keeps
+ * the card pool, as the real server's does (`src/index.ts`). */
+let roomHost;
+const httpServer = createServer((req, res) => {
+  // `POST /import-deck`: a blitz and the deck builder's import. Without it
+  // the request was never answered, and a pasted list sat at "Reading your
+  // list…" for good (found 2026-11-15).
+  if (
+    roomHost !== undefined &&
+    handleImportRoute(req, res, (text, sink) => roomHost.importDeck(text, sink), process.env.CLIENT_ORIGIN ?? "*")
+  ) {
+    return;
+  }
+  res.writeHead(404);
+  res.end();
+});
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
 
 /**
@@ -67,7 +83,8 @@ if (SHARDS === 0) {
   const manager = new RoomManager({ capture: captureLogs({ dir: DEFAULT_CAPTURE_DIR, registry }) });
   const rooms = setup({ manager, registry, index: 0, count: 1 });
   // A developer's server: the scenario builder is on too.
-  attachTransport(wss, new InProcessRoomHost(manager, { builder: true }));
+  roomHost = new InProcessRoomHost(manager, { builder: true });
+  attachTransport(wss, roomHost);
   command = async (cmd) => {
     try {
       const out = rooms.control(cmd);
@@ -88,6 +105,7 @@ if (SHARDS === 0) {
   await host.start();
   console.log(`${SHARDS} room shard(s) ready in ${((Date.now() - started) / 1000).toFixed(1)} s`);
   attachTransport(wss, host);
+  roomHost = host;
   const unpack = (reply) =>
     reply.ok
       ? { ok: true, result: JSON.parse(reply.json), dropConnections: reply.dropConnections === true }

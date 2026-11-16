@@ -10,7 +10,10 @@ import './commander-picker.css'
  * doesn't say (an alphabetical export has no `Commander` section and no
  * trailing commander line) and more than one of its cards could be: the
  * import used to guess the first legend it met (the user, 2026-11-12). The
- * candidates come from the import's `format.commanderCandidates`; the answer
+ * candidates come from the import's `format.commanderCandidates`, which the
+ * server sends only when the list's colours and order don't settle it, and
+ * narrowed to the cards whose colour identity holds the list (its
+ * `settleCommanders`, 2026-11-15); the answer
  * goes back through `importDecklist`'s `commanders`, so the stand-ins are
  * chosen for the right colours.
  *

@@ -1064,6 +1064,111 @@ export function commanderCandidates(
   }));
 }
 
+/** Ways a list's names may have been sorted: sites disagree on accents and
+ * on whether punctuation and spaces count. */
+const SORT_KEYS: readonly ((name: string) => string)[] = (() => {
+  const plain = (name: string): string =>
+    name
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/æ/g, "ae");
+  return [
+    (name) => name.toLowerCase(),
+    plain,
+    (name) => plain(name).replace(/[^a-z0-9 ]/g, ""),
+    (name) => plain(name).replace(/[^a-z0-9]/g, ""),
+  ];
+})();
+
+/** Whether `names` read as an alphabetical list, under any one of the ways
+ * sites sort ({@link SORT_KEYS}). */
+function alphabetical(names: readonly string[]): boolean {
+  return SORT_KEYS.some((key) => {
+    const keys = names.map(key);
+    return keys.every((k, i) => i === 0 || keys[i - 1] <= k);
+  });
+}
+
+/**
+ * Whether a list that doesn't name its commander says it anyway, so nobody
+ * has to be asked (the user, 2026-11-15). `names` is the list in its order,
+ * `candidates` are {@link commanderCandidates}'s, and `identityOf` is a
+ * card's colour identity where it's known. Two things say it:
+ *
+ * - **The colours.** Every card of a deck is inside its commander's colour
+ *   identity (rule 903.5c), so a card whose identity doesn't hold the whole
+ *   list's can't be the commander, alone or beside one of its partners
+ *   (rule 702.124c: a pair's identity is both cards'). One candidate left is
+ *   the commander. A card of unknown identity rules nothing out.
+ * - **The order.** A list sorted by name with only its first card out of
+ *   place has that card first because it leads, when it's a candidate the
+ *   colours allow.
+ *
+ * Returns the commanders when the list says them, else the candidates still
+ * worth asking about: those the colours allow, each with the partners that
+ * still fit, or all of them when the colours leave fewer than two (a list
+ * with cards outside every legend's identity says nothing by its colours).
+ */
+export function settleCommanders(
+  names: readonly string[],
+  candidates: readonly CommanderCandidate[],
+  identityOf: (name: string) => readonly Color[] | undefined,
+): { readonly commanders: readonly string[] } | { readonly candidates: readonly CommanderCandidate[] } {
+  const whole = new Set<Color>();
+  for (const name of names) for (const c of identityOf(name) ?? []) whole.add(c);
+  const holds = (...commanders: string[]): boolean => {
+    const identity = new Set<Color>();
+    for (const name of commanders) {
+      const colors = identityOf(name);
+      // Unknown: nothing says it doesn't.
+      if (colors === undefined) return true;
+      for (const c of colors) identity.add(c);
+    }
+    return [...whole].every((c) => identity.has(c));
+  };
+  /** A candidate the colours allow, with the partners they allow it. */
+  const fitted = candidates.flatMap((c): (CommanderCandidate & { readonly alone: boolean })[] => {
+    if (holds(c.name)) return [{ ...c, alone: true }];
+    const partners = c.pairsWith.filter((p) => holds(c.name, p));
+    return partners.length > 0 ? [{ ...c, pairsWith: partners, alone: false }] : [];
+  });
+  if (fitted.length === 0) return { candidates };
+  const strip = ({ alone: _alone, ...c }: (typeof fitted)[number]): CommanderCandidate => c;
+
+  /** `lead` and who stands beside it, when the list says that much: nobody
+   * for a lead whose identity holds the list, unless the two are the list's
+   * first two lines (as `guessCommanders` reads a pair); the one partner
+   * that completes its colours otherwise. `null` when it's still a question. */
+  const withPartner = (lead: (typeof fitted)[number]): readonly string[] | null => {
+    if (!lead.alone) return lead.pairsWith.length === 1 ? [lead.name, lead.pairsWith[0]] : null;
+    const top = names.slice(0, 2);
+    const beside = top.includes(lead.name) ? lead.pairsWith.find((p) => top.includes(p)) : undefined;
+    return beside === undefined ? [lead.name] : [lead.name, beside];
+  };
+
+  // The colours: one candidate left, or the two halves of one pair.
+  if (fitted.length === 1) {
+    const commanders = withPartner(fitted[0]);
+    if (commanders !== null) return { commanders };
+  }
+  if (fitted.length === 2 && fitted.every((c) => !c.alone && c.pairsWith.length === 1)) {
+    const [a, b] = fitted;
+    if (a.pairsWith[0] === b.name && b.pairsWith[0] === a.name) return { commanders: [a.name, b.name] };
+  }
+  // The order: only the first card out of place in a list sorted by name.
+  const first = fitted.find((c) => c.name === names[0]);
+  if (first !== undefined && names.length >= 4 && !alphabetical(names)) {
+    const commanders = withPartner(first);
+    // A pair at the top leaves the rest sorted from the third line on.
+    const rest = names.slice(commanders !== null && commanders.length === 2 && commanders[1] === names[1] ? 2 : 1);
+    if (commanders !== null && alphabetical(rest)) return { commanders };
+  }
+  // Fewer than two left and still no answer (one lead, several partners that
+  // complete its colours): the question as it would have been asked.
+  return { candidates: fitted.length > 1 ? fitted.map(strip) : candidates };
+}
+
 /** An `Attractions` section's lines as report rows: whether the pool has each
  * as an Attraction (rule 717.1), and the printing its collector number names,
  * when the card has that one — else its first, whose lights it then brings. */
@@ -1181,18 +1286,61 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
     const parsed = parseDecklistText(asked.text, deps.registry);
     const { entries, sideboard, attractions } = parsed;
     const chosen = asked.commanders.filter((name) => entries.some((e) => e.name === name));
-    const commanders = chosen.length > 0 ? chosen : parsed.commanders;
-    const commanderSource = chosen.length > 0 ? "section" : parsed.commanderSource;
+    let commanders = chosen.length > 0 ? chosen : parsed.commanders;
+    let commanderSource = chosen.length > 0 ? "section" : parsed.commanderSource;
     streaming = true;
     const total = entries.length + sideboard.length;
     sink.line({ type: "progress", done: 0, total, name: null });
-    const evaluate = { commanders, tags: deps.tags(), cardData: deps.cardData() };
-    const cards = await evaluateDecklist(
+    let evaluate = { commanders, tags: deps.tags(), cardData: deps.cardData() };
+    let cards = await evaluateDecklist(
       entries,
       deps.registry,
       (p) => sink.line({ type: "progress", ...p, total }),
       evaluate,
     );
+    let checked = formatCheck(entries, deps.registry, commanders, commanderSource);
+    // A list that names no commander has its guessed: when more than one of
+    // its cards could be it, the report says which, for the client to ask.
+    // (`formatCheck` guesses when it trusts none of the list's own: there
+    // were none, or a trailing line's card can't be a commander.)
+    const guessed = !commanders.some((name) => checked.commanders.includes(name));
+    let candidates = guessed
+      ? commanderCandidates(cards, deps.registry, (name) => evaluate.cardData?.(name)?.keywords ?? [])
+      : [];
+    if (candidates.length > 1) {
+      // Unless the list says which by its colours or its order
+      // (`settleCommanders`). The cards the pool lacks were looked up by the
+      // evaluation above, so asking again costs nothing.
+      const looked = await lookupScryfallMany(
+        entries.filter((e) => !deps.registry.has(e.name)).map((e) => e.name),
+        undefined,
+        evaluate.cardData,
+      );
+      const settled = settleCommanders(
+        entries.map((e) => e.name),
+        candidates,
+        (name) =>
+          deps.registry.has(name)
+            ? [...colorIdentityOf(deps.registry.get(name), deps.registry)]
+            : looked.get(name)?.colorIdentity,
+      );
+      if ("commanders" in settled) {
+        candidates = [];
+        const said = settled.commanders;
+        // Not the card the guess took: the list is read again as one that
+        // names its commander, as it is after the player's answer, so the
+        // stand-ins are chosen for the right colours.
+        if (said.length !== checked.commanders.length || said.some((name) => !checked.commanders.includes(name))) {
+          commanders = said;
+          commanderSource = "section";
+          evaluate = { ...evaluate, commanders };
+          cards = await evaluateDecklist(entries, deps.registry, undefined, evaluate);
+          checked = formatCheck(entries, deps.registry, commanders, commanderSource);
+        }
+      } else {
+        candidates = [...settled.candidates];
+      }
+    }
     // The sideboard's rows the same way, after the deck's (its stand-ins
     // chosen among themselves).
     const side =
@@ -1204,7 +1352,6 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
             (p) => sink.line({ type: "progress", ...p, done: entries.length + p.done, total }),
             evaluate,
           );
-    const checked = formatCheck(entries, deps.registry, commanders, commanderSource);
     const attractionRows = attractionReports(attractions, deps.registry);
     // The Attraction deck's own rules (717.2a) beside the 99's, over the
     // cards it will hold: only an Attraction the pool has is kept.
@@ -1215,14 +1362,6 @@ export async function runImportJob(text: string, deps: ImportDeps, sink: ImportS
             attractionRows.flatMap((r) => (r.implemented ? Array.from({ length: r.count }, () => r.name) : [])),
             deps.registry,
           );
-    // A list that names no commander has its guessed: when more than one of
-    // its cards could be it, the report says which, for the client to ask.
-    // (`formatCheck` guesses when it trusts none of the list's own: there
-    // were none, or a trailing line's card can't be a commander.)
-    const guessed = !commanders.some((name) => checked.commanders.includes(name));
-    const candidates = guessed
-      ? commanderCandidates(cards, deps.registry, (name) => evaluate.cardData?.(name)?.keywords ?? [])
-      : [];
     const format: DeckFormatReport = {
       ...checked,
       ...(attractionProblems.length === 0
