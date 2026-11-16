@@ -3082,7 +3082,10 @@ export interface GameRules {
   openingHandSize: number;
   maxHandSize: number;
   maxLandsPerTurn: number;
-  /** In a two-player game the player who goes first skips their first draw. */
+  /** The player who goes first skips the draw step of their first turn: a
+   * two-player game's rule (103.8a), and no multiplayer game's (103.8c).
+   * `Game.create` settles it from the number of players when a config
+   * doesn't say; a config that does is taken at its word (a test's setup). */
   skipFirstDraw: boolean;
   /** The traditional Commander mulligan rule: a player's first mulligan each
    * game doesn't require putting a card on the bottom of their library —

@@ -2849,6 +2849,13 @@ export class Game {
       ...DEFAULT_RULES,
       ...config.rules,
       freeFirstMulligan: free === "multiplayer" ? turnOrder.length > 2 : free,
+      // Rule 103.8a: the player who plays first skips the draw step of their
+      // first turn in a two-player game; 103.8c: "in all other multiplayer
+      // games, no player skips the draw step of their first turn". Unless the
+      // config says, it is the player count that does: the default was on for
+      // every game, and a four-player Commander game's starter missed a card
+      // (a bug report, 2026-11-15).
+      skipFirstDraw: config.rules?.skipFirstDraw ?? turnOrder.length === 2,
     };
     const startingPlayer = config.startingPlayer ?? turnOrder[0];
     if (!turnOrder.includes(startingPlayer)) {

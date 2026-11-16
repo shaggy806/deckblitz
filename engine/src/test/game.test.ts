@@ -138,6 +138,23 @@ describe("turn-based actions", () => {
     expect(game.eventsOfType("draw-from-empty-library")).toHaveLength(0);
   });
 
+  it("has no player skip their first draw in a game of more than two players", () => {
+    // Rule 103.8c: "In all other multiplayer games, no player skips the draw
+    // step of their first turn" (103.8a's skip is a two-player game's). A
+    // blitz, one player and three bots, had its starting player miss the
+    // first draw (a bug report, 2026-11-15).
+    for (const players of [3, 4]) {
+      const seats = ["alice", "bob", "carol", "dave"].slice(0, players).map(asPlayerId);
+      const game = Game.create({ seed: 42, decks: seats.map((player) => ({ player, cards: deck(40) })) });
+      expect(game.state.rules.skipFirstDraw).toBe(false);
+      game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "draw");
+      const draws = game.eventsOfType("card-drawn").filter((e) => e.player === seats[0]);
+      expect(draws).toHaveLength(7 + 1);
+    }
+    // Two players: the starting player still skips it (rule 103.8a).
+    expect(newGame().state.rules.skipFirstDraw).toBe(true);
+  });
+
   it("does not skip the first draw when the rule is disabled", () => {
     const game = newGame({ rules: { skipFirstDraw: false } });
     game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "draw");

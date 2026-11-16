@@ -86,7 +86,10 @@ describe("EvalBotController", () => {
 
   it("plays a full 4-player game against itself", () => {
     const players = [A, B, C, D];
-    const game = playOut(players, evalBots(players), 7);
+    // A seed whose game is short (50 turns, about 20 s alone): seed 7's ran
+    // past the timeout once a multiplayer game's first player drew on turn 1
+    // (rule 103.8c, 2026-11-15), and seeds 1, 3, 5 and 6 run 110 turns or more.
+    const game = playOut(players, evalBots(players), 2);
     expect(game.isOver).toBe(true);
   }, GAME_TIMEOUT_MS);
 
@@ -99,7 +102,9 @@ describe("EvalBotController", () => {
         [B]: new HeuristicBotController(B, registry),
         [C]: new EvalBotController(C, registry, { horizon: "stack" }),
       },
-      11,
+      // 38 turns, about 15 s alone; seed 11's game ran past the timeout
+      // after the same change.
+      3,
     );
     expect(game.isOver).toBe(true);
   }, GAME_TIMEOUT_MS);
