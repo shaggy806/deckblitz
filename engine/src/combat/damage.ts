@@ -43,17 +43,19 @@ export function liveBlockersOf(state: GameState, attackerId: ObjectId): ObjectId
 }
 
 /** How much damage counts as lethal to `blockerId` right now: its remaining
- * toughness, or 1 from a deathtouch attacker (rule 702.2b). */
+ * toughness, or 1 from a deathtouch attacker (rule 702.2c) — and none from
+ * either once it has lethal damage marked (an indestructible one), since
+ * 702.19b takes "damage already marked on the creature" into account. */
 export function lethalFor(
   state: GameState,
   registry: CardRegistry,
   attackerId: ObjectId,
   blockerId: ObjectId,
 ): number {
-  if (objHasKeyword(state, registry, attackerId, "deathtouch")) return 1;
   const marked = state.objects[blockerId].damageMarked;
   const toughness = computeCharacteristics(state, registry, blockerId).toughness;
-  return Math.max(0, toughness - marked);
+  const left = Math.max(0, toughness - marked);
+  return objHasKeyword(state, registry, attackerId, "deathtouch") ? Math.min(1, left) : left;
 }
 
 /**
