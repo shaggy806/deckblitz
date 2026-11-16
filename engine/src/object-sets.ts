@@ -53,8 +53,20 @@ export interface SetMember {
  * you exiled, rule 702.97a; Dodgy Jalopy's ruling). `"beheld"` is what a
  * behold cost took (rule 701.4a), a card revealed from the hand (kept as it
  * was there) or a permanent chosen (read as it is, or as it last existed
- * once it has left — Dragon's Fire's "the power of that card or creature"). */
-export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "revealed" | "tapped" | "unattached" | "beheld";
+ * once it has left — Dragon's Fire's "the power of that card or creature").
+ * `"returned"` is what a "return a permanent you control to its owner's hand"
+ * cost took, read as it last existed on the battlefield (rule 608.2h —
+ * Wonderscape Sage's "unless that land had a nonbasic land type"). */
+export type PaidKind =
+  | "sacrificed"
+  | "discarded"
+  | "exiled"
+  | "exiled-self"
+  | "revealed"
+  | "tapped"
+  | "unattached"
+  | "beheld"
+  | "returned";
 
 /**
  * A set of objects, by where it comes from:

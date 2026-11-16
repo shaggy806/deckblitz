@@ -28849,11 +28849,15 @@ export class Game {
     const filter: CardFilter = { ...cost.filter, controlledBy: "you" };
     const eligible = this.battlefieldMatching(player, filter).filter((id) => ability !== undefined || id !== source);
     if (permanentCount(this.state, eligible) <= cost.count) {
+      const returnedFrom: Record<ObjectId, number> = {};
       for (const id of eligible) {
         if (ability !== undefined) this.recordReturnedAttacking(ability, id);
+        returnedFrom[id] = this.state.objects[id]?.zoneChangeCount ?? 0;
         const n = this.state.objects[id]?.stackCount ?? 1;
         for (let i = 0; i < n; i += 1) this.returnToHandByEffect({ kind: "object", object: id });
       }
+      // "That land" (`{ paid: "returned" }`), as it last existed there.
+      if (ability !== undefined) this.recordPaid(ability, "returned", eligible, returnedFrom);
       return;
     }
     this.beginChoosePermanents(
@@ -55061,7 +55065,15 @@ controlledBy,
     }
     const { then, source, x, priorityTo, costOf, blight, bolster, thenResolution: resumed } = awaiting;
     this.state.awaiting = null;
-    if (costOf !== undefined) for (const id of chosen) this.recordReturnedAttacking(costOf, id);
+    // A return-to-hand cost's choice: what each was attacking, and the stint
+    // each leaves, for "that land" once it's back in the hand.
+    const returnedFrom: Record<ObjectId, number> = {};
+    if (costOf !== undefined) {
+      for (const id of chosen) {
+        this.recordReturnedAttacking(costOf, id);
+        returnedFrom[id] = this.state.objects[id]?.zoneChangeCount ?? 0;
+      }
+    }
     // A blight's creature is singled out of its stack before the counters
     // go on, so its `then` reads the blighted one (rule 701.68c) — and a
     // bolstered one, so only that token gets them (701.39a).
@@ -55146,6 +55158,8 @@ controlledBy,
         }
       }),
     ));
+    // "That land" (`{ paid: "returned" }`), as it last existed there.
+    if (costOf !== undefined) this.recordPaid(costOf, "returned", chosen, returnedFrom);
     if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
   }
 

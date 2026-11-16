@@ -4804,7 +4804,8 @@ export type AwaitingDecision =
       readonly asEntersRemoveCounters?: true;
       /** Set when the choice pays an activated ability's `returnToHand`
        * cost: that ability on the stack, which records what the returned
-       * creature was attacking (`LastKnownRefs.returnedAttacking`). */
+       * creature was attacking (`LastKnownRefs.returnedAttacking`) and the
+       * permanents returned (`{ paid: "returned" }`). */
       readonly costOf?: ObjectId;
       /** Set when the choice is which creature blights this many (rule
        * 701.68a — `Game.beginBlight`): exactly one of the player's

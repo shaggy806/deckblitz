@@ -58,6 +58,13 @@ export const LAND_TYPES: readonly string[] = [
   "Urza's",
 ];
 
+/** The nonbasic land types (rule 205.3i): every land type but Forest,
+ * Island, Mountain, Plains and Swamp — a filter's `subtypes` for "a nonbasic
+ * land type" (Wonderscape Sage). */
+export const NONBASIC_LAND_TYPES: readonly string[] = LAND_TYPES.filter(
+  (type) => type !== "Forest" && type !== "Island" && type !== "Mountain" && type !== "Plains" && type !== "Swamp",
+);
+
 /** Each landwalk keyword and the land type it walks (rule 702.14). */
 export const LANDWALK: ReadonlyArray<readonly [Keyword, string]> = [
   ["plainswalk", "Plains"],
