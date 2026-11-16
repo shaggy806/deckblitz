@@ -990,6 +990,7 @@ import _poolWingedSliver from "../pool/winged-sliver.js";
 import _poolWirewoodSavage from "../pool/wirewood-savage.js";
 import _poolWistfulness from "../pool/wistfulness.js";
 import _poolWitchEngine from "../pool/witch-engine.js";
+import _poolWizardsOfThe from "../pool/wizards-of-the.js";
 import _poolWrackWithMadness from "../pool/wrack-with-madness.js";
 import _poolWrathOfGod from "../pool/wrath-of-god.js";
 import _poolWrensRunVanquisher from "../pool/wrens-run-vanquisher.js";
@@ -2024,6 +2025,7 @@ const shard: CardShard = {
     _poolWirewoodSavage,
     _poolWistfulness,
     _poolWitchEngine,
+    _poolWizardsOfThe,
     _poolWrackWithMadness,
     _poolWrathOfGod,
     _poolWrensRunVanquisher,

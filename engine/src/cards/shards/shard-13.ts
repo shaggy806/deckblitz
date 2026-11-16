@@ -349,6 +349,7 @@ import _poolGoblinMutant from "../pool/goblin-mutant.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGoblinRazerunners from "../pool/goblin-razerunners.js";
 import _poolGoblinTaskmaster from "../pool/goblin-taskmaster.js";
+import _poolGoblin from "../pool/goblin.js";
 import _poolGodFavoredGeneral from "../pool/god-favored-general.js";
 import _poolGraveServitude from "../pool/grave-servitude.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
@@ -1358,6 +1359,7 @@ const shard: CardShard = {
     _poolGoblinPiker,
     _poolGoblinRazerunners,
     _poolGoblinTaskmaster,
+    _poolGoblin,
     _poolGodFavoredGeneral,
     _poolGraveServitude,
     _poolGreatHornKrushok,

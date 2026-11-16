@@ -2543,6 +2543,7 @@ import _poolBiovisionary from "./pool/biovisionary.js";
 import _poolBiowasteBlob from "./pool/biowaste-blob.js";
 import _poolBirchloreRangers from "./pool/birchlore-rangers.js";
 import _poolBirdAdmirer from "./pool/bird-admirer.js";
+import _poolBirdGetsTheWorm from "./pool/bird-gets-the-worm.js";
 import _poolBirdMaiden from "./pool/bird-maiden.js";
 import _poolBirdsOfParadise from "./pool/birds-of-paradise.js";
 import _poolBirgiGodOfStorytelling from "./pool/birgi-god-of-storytelling.js";
@@ -11462,6 +11463,7 @@ import _poolGoblinWarrens from "./pool/goblin-warrens.js";
 import _poolGoblinWelder from "./pool/goblin-welder.js";
 import _poolGoblinWizard from "./pool/goblin-wizard.js";
 import _poolGoblinWizardry from "./pool/goblin-wizardry.js";
+import _poolGoblin from "./pool/goblin.js";
 import _poolGoblinsOfTheFlarg from "./pool/goblins-of-the-flarg.js";
 import _poolGoblinslide from "./pool/goblinslide.js";
 import _poolGodEternalBontu from "./pool/god-eternal-bontu.js";
@@ -31864,6 +31866,7 @@ import _poolWizardMentor from "./pool/wizard-mentor.js";
 import _poolWizardReplica from "./pool/wizard-replica.js";
 import _poolWizardsLightning from "./pool/wizards-lightning.js";
 import _poolWizardsOfThay from "./pool/wizards-of-thay.js";
+import _poolWizardsOfThe from "./pool/wizards-of-the.js";
 import _poolWizardsRetort from "./pool/wizards-retort.js";
 import _poolWizardsRockets from "./pool/wizards-rockets.js";
 import _poolWizardsSchool from "./pool/wizards-school.js";
@@ -35759,6 +35762,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBiowasteBlob,
   _poolBirchloreRangers,
   _poolBirdAdmirer,
+  _poolBirdGetsTheWorm,
   _poolBirdMaiden,
   _poolBirdsOfParadise,
   _poolBirgiGodOfStorytelling,
@@ -44678,6 +44682,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinWelder,
   _poolGoblinWizard,
   _poolGoblinWizardry,
+  _poolGoblin,
   _poolGoblinsOfTheFlarg,
   _poolGoblinslide,
   _poolGodEternalBontu,
@@ -65080,6 +65085,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWizardReplica,
   _poolWizardsLightning,
   _poolWizardsOfThay,
+  _poolWizardsOfThe,
   _poolWizardsRetort,
   _poolWizardsRockets,
   _poolWizardsSchool,
@@ -68988,6 +68994,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/biowaste-blob": _poolBiowasteBlob,
   "pool/birchlore-rangers": _poolBirchloreRangers,
   "pool/bird-admirer": _poolBirdAdmirer,
+  "pool/bird-gets-the-worm": _poolBirdGetsTheWorm,
   "pool/bird-maiden": _poolBirdMaiden,
   "pool/birds-of-paradise": _poolBirdsOfParadise,
   "pool/birgi-god-of-storytelling": _poolBirgiGodOfStorytelling,
@@ -77907,6 +77914,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goblin-welder": _poolGoblinWelder,
   "pool/goblin-wizard": _poolGoblinWizard,
   "pool/goblin-wizardry": _poolGoblinWizardry,
+  "pool/goblin": _poolGoblin,
   "pool/goblins-of-the-flarg": _poolGoblinsOfTheFlarg,
   "pool/goblinslide": _poolGoblinslide,
   "pool/god-eternal-bontu": _poolGodEternalBontu,
@@ -98309,6 +98317,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wizard-replica": _poolWizardReplica,
   "pool/wizards-lightning": _poolWizardsLightning,
   "pool/wizards-of-thay": _poolWizardsOfThay,
+  "pool/wizards-of-the": _poolWizardsOfThe,
   "pool/wizards-retort": _poolWizardsRetort,
   "pool/wizards-rockets": _poolWizardsRockets,
   "pool/wizards-school": _poolWizardsSchool,
