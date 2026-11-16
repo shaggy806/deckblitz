@@ -5582,6 +5582,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   each card they draw" (rule 701.20a): every card the permanent's
   `chosenPlayer` draws is shown to every player as it's drawn, whoever
   controls the permanent.
+- `drawsFromBottom: "you"` — River Song's "You draw cards from the bottom
+  of your library rather than the top": every card its controller draws, by
+  any draw, is the bottom card instead of the top one (rule 121.1). Otherwise
+  an ordinary draw — replaced, counted and failed on an empty library as any.
 - `devotionBonus: 1` — Altar of the Pantheon's "Your devotion to each color
   and each combination of colors is increased by one" (rule 700.5a): counted
   by every devotion its controller has, even once it has lost its abilities

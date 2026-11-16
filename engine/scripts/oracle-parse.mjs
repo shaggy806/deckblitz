@@ -2854,6 +2854,15 @@ export function parseTrigger(clause) {
   }
   if (/^Whenever you face a dilemma$/.test(c)) return [{ on: "faces-dilemma", who: "you" }];
   if (/^Whenever an opponent searches their library$/.test(c)) return [{ on: "event", event: "searches-library", who: "opponent" }];
+  // River Song's "whenever an opponent scries, surveils, or searches their
+  // library": one scry-or-surveil trigger (rule 701.22, 701.25) and the
+  // search's own, as "enters or attacks" is two — no event is both.
+  if (/^Whenever an opponent scries, surveils, or searches their library$/.test(c)) {
+    return [
+      { on: "scries", who: "opponent", orSurveil: true },
+      { on: "event", event: "searches-library", who: "opponent" },
+    ];
+  }
 
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
@@ -6364,6 +6373,11 @@ export function parseSentence(sentence, ctx) {
   // (Manabarbs): the player the event names.
   if (ctx.thatPlayer === "trigger-player" && (m = re(`~ deals ${N} damage to that player`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: "trigger-player" };
+  }
+  // "Then River Song deals damage to that player equal to its power": its
+  // power as this part resolves, after the counter before it.
+  if (ctx.thatPlayer === "trigger-player" && re(`(?:then )?~ deals damage to that player equal to its power`).test(s)) {
+    return { kind: "damage", amount: { powerOf: "source" }, who: "trigger-player" };
   }
   // A second "target" tied to the first's player (Searing Blaze's shape; the
   // word twice, so one creature planeswalker may be both — rule 115.3).
@@ -18302,7 +18316,11 @@ function parseFaceAsWritten(face, ctx = {}) {
     // triggered ability made as it resolves (rule 603.7 — Repeated
     // Reverberation), read with the spell's other lines below.
     if (/^(When|Whenever|At )/.test(line) && !(isSpell && /^When you next cast /.test(line))) {
-      const comma = line.indexOf(", ");
+      // A condition with commas of its own (River Song's "whenever an
+      // opponent scries, surveils, or searches their library") ends at the
+      // comma after it.
+      const listed = /^Whenever an opponent scries, surveils, or searches their library, /.exec(line);
+      const comma = listed !== null ? listed[0].length - 2 : line.indexOf(", ");
       let clause = comma > 0 ? line.slice(0, comma) : line;
       // "Whenever ~ attacks while saddled" (rule 702.171b): saddled is part
       // of the trigger condition (603.1), asked as it attacks — not an
@@ -19629,8 +19647,10 @@ function thatPlayerOf(triggers) {
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
   // Who activated it (Avalanche of Sector 7, Immolation Shaman).
   if (triggers.every((t) => t.on === "activates-ability" && t.who === "opponent")) return "trigger-player";
-  // Who searched (Ob Nixilis, Unshackled).
-  if (triggers.every((t) => t.on === "event" && t.event === "searches-library")) return "trigger-player";
+  // Who searched (Ob Nixilis, Unshackled), or scried or surveilled too (River Song).
+  if (triggers.every((t) => (t.on === "event" && t.event === "searches-library") || (t.on === "scries" && t.who === "opponent"))) {
+    return "trigger-player";
+  }
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "player")) return "trigger-player";
   // "Whenever an opponent is dealt 3 or more damage by a single source, that
   // player discards a card" (Pain Magnification).
@@ -23283,6 +23303,11 @@ function parseStatic(line, text) {
   // Booby Trap's "the chosen player reveals each card they draw".
   if (line === "The chosen player reveals each card they draw.") {
     return { affects: { scope: "self" }, revealsDraws: "chosen-player", text };
+  }
+  // River Song's Meet in Reverse: every draw of its controller's is the
+  // bottom card (rule 121.1 changed).
+  if (line === "You draw cards from the bottom of your library rather than the top.") {
+    return { affects: { scope: "self" }, drawsFromBottom: "you", text };
   }
   // Cursed Rack's "the chosen player's maximum hand size is four".
   if ((m = new RegExp(`^The chosen player's maximum hand size is ${N}\\.$`).exec(line)) && typeof numberOf(m[1]) === "number") {

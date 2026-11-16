@@ -3417,6 +3417,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * the chosen player draws a card with the chosen name") reads a public
    * card. Read off the battlefield, whoever controls it. */
   readonly revealsDraws?: "chosen-player";
+  /** "**You draw cards from the bottom of your library** rather than the
+   * top" (River Song's Meet in Reverse): every card this permanent's
+   * controller draws, by any draw — the draw step's, an effect's, a cost's —
+   * is the bottom card of their library, not the top one rule 121.1 names.
+   * Otherwise a draw like any other (the ruling): a replacement of the draw
+   * still applies, it counts as drawn, and an empty library is still an
+   * attempt to draw from one. Read off the battlefield like
+   * `revealsFirstDrawEachTurn`. */
+  readonly drawsFromBottom?: "you";
   /** "**You** have hexproof" (rule 702.11d — Shalai, Voice of Plenty): this
    * permanent's controller can't be the target of spells or abilities their
    * opponents control. Like `noMaxHandSize`, a property of the player, read

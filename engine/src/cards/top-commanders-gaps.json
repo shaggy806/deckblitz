@@ -2736,7 +2736,9 @@
   "effect:choose-new-targets-any-number",
   "static:cost-reduction-targeting-enchanted-player",
   "effect:each-opponent-may-single-result",
-  "effect:exile-to-library-bottom-linked"
+  "effect:exile-to-library-bottom-linked",
+  "effect:exile-to-library-bottom-linked",
+  "replacement:draw-from-bottom"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -35081,6 +35081,10 @@ export class Game {
     } else if (event.type === "library-searched") {
       // Who searched (Ob Nixilis, Unshackled: "that player sacrifices …").
       player = event.player;
+    } else if (event.type === "scried") {
+      // Who scried or surveilled (River Song: "deals damage to that player"),
+      // whatever they did with the cards.
+      player = event.player;
     } else if (event.type === "attackers-declared") {
       // The attacking player (Firemane Commando's "they draw a card").
       player = event.player;
@@ -65821,7 +65825,8 @@ controlledBy,
       this.emit({ type: "draw-from-empty-library", player });
       return;
     }
-    const id = library[0];
+    // The top card (rule 121.1), or the bottom one under River Song.
+    const id = this.drawsFromBottom(player) ? library[library.length - 1] : library[0];
     this.moveObject(id, "hand");
     // Drawn, not "put into your hand" by an instruction that says so — the
     // `"put-into-hand"` this-way kind leaves draws to `"drawn"`.
@@ -65884,6 +65889,19 @@ controlledBy,
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         if (ability.revealsFirstDrawEachTurn === true && this.staticActive(source, ability)) return true;
+      }
+    }
+    return false;
+  }
+
+  /** Whether `player` controls a permanent that has them draw from the
+   * bottom of their library (`drawsFromBottom` — River Song). */
+  private drawsFromBottom(player: PlayerId): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.drawsFromBottom === "you" && this.staticActive(source, ability)) return true;
       }
     }
     return false;

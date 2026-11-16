@@ -20579,3 +20579,33 @@ describe("Oskar, Rubbish Reclaimer's lines", () => {
     expect(oskar.complete).toBe(true);
   });
 });
+
+describe("drawing from the bottom, and a scry, surveil or search trigger (River Song)", () => {
+  it("reads Meet in Reverse as `drawsFromBottom`, and Spoilers as two triggers over one effect", () => {
+    const reverse = "Meet in Reverse — You draw cards from the bottom of your library rather than the top.";
+    const spoilers =
+      "Spoilers — Whenever an opponent scries, surveils, or searches their library, put a +1/+1 counter on River Song. Then River Song deals damage to that player equal to its power.";
+    const river = parseFace({
+      name: "River Song",
+      type_line: "Legendary Creature — Human Time Lord Rogue",
+      mana_cost: "{1}{U}{R}",
+      oracle_text: `${reverse}\n${spoilers}`,
+      power: "2",
+      toughness: "2",
+    });
+    expect(river.static).toEqual([{ affects: { scope: "self" }, drawsFromBottom: "you", text: reverse }]);
+    const effect = {
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        { kind: "damage", amount: { powerOf: "source" }, who: "trigger-player" },
+      ],
+    };
+    expect(river.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "scries", who: "opponent", orSurveil: true },
+      { on: "event", event: "searches-library", who: "opponent" },
+    ]);
+    expect(river.triggered.map((t: { effect: unknown }) => t.effect)).toEqual([effect, effect]);
+    expect(river.complete).toBe(true);
+  });
+});
