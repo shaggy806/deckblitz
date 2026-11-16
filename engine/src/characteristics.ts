@@ -1421,14 +1421,14 @@ function evalStaticCondition(
       const stint =
         opts.sourceLastKnown?.zoneChangeCount ??
         (source.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source.lastKnown?.zoneChangeCount);
+      // "Chandra has dealt": what this object dealt in the same stint.
+      if (condition.bySelf === true && stint === undefined) return false;
       return (
-        damageDealtThisTurn(
-          state,
-          seats,
-          condition.combat,
-          condition.colors,
-          condition.toSelf === true ? { to: { kind: "object", object: source.id }, toStint: stint } : {},
-        ) >= condition.atLeast
+        damageDealtThisTurn(state, seats, condition.combat, condition.colors, {
+          ...(condition.toSelf === true ? { to: { kind: "object", object: source.id }, toStint: stint } : {}),
+          ...(condition.bySelf === true && stint !== undefined ? { from: { object: source.id, stint } } : {}),
+          ...(condition.oneSource === true ? { oneSource: true } : {}),
+        }) >= condition.atLeast
       );
     }
     case "turn-history": {
@@ -2124,10 +2124,18 @@ export function damageDealtThisTurn(
     readonly by?: DamageSourceClause;
     /** Who "other" is, with `by.other`. */
     readonly source?: ObjectId;
+    /** Only what this object dealt in this stint of it (rule 400.7). */
+    readonly from?: { readonly object: ObjectId; readonly stint: number };
+    /** The most any one source dealt rather than the sum: each object in
+     * each stint its own source, and an entry a token stack dealt as one
+     * (`count`, its tokens each dealing a share) read as one token's. */
+    readonly oneSource?: true;
   } = {},
 ): number {
   let n = 0;
+  const bySource = read.oneSource === true ? new Map<string, number>() : undefined;
   for (const dealt of entriesThisTurn(state, "damage")) {
+    if (read.from !== undefined && (dealt.object !== read.from.object || dealt.stint !== read.from.stint)) continue;
     if (dealt.player === undefined || !players.includes(dealt.player)) continue;
     if (combat !== undefined && (dealt.combat !== undefined) !== combat) continue;
     if (colors !== undefined && dealt.was?.colors.some((c) => colors.includes(c)) !== true) continue;
@@ -2143,9 +2151,16 @@ export function damageDealtThisTurn(
     if (by?.type !== undefined && dealt.was?.types.includes(by.type) !== true) continue;
     if (by?.name !== undefined && dealt.was?.name !== by.name) continue;
     if (by?.other === true && dealt.object === read.source) continue;
-    n += dealt.amount ?? 0;
+    // One source's: a token of a stack that dealt it as one dealt its share.
+    const share = read.from !== undefined || bySource !== undefined ? (dealt.amount ?? 0) / (dealt.count ?? 1) : (dealt.amount ?? 0);
+    if (bySource !== undefined) {
+      const key = `${dealt.object}@${dealt.stint ?? ""}`;
+      bySource.set(key, (bySource.get(key) ?? 0) + share);
+      continue;
+    }
+    n += share;
   }
-  return n;
+  return bySource === undefined ? n : Math.max(0, ...bySource.values());
 }
 
 /** How a {@link journalCount} reads beyond its list: the zones a

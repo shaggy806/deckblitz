@@ -6987,7 +6987,17 @@ clause (section 9):
   noncombat damage this turn" (an activated ability's `condition`) is
   `{ colors: ["R"], combat: false, atLeast: 4 }`. Each damage event is
   recorded against its source's controller with the source's colours as it
-  dealt it — a departed source's as it last existed.
+  dealt it — a departed source's as it last existed. `toSelf` is only what
+  was dealt to this permanent (the Zuberas). **One source's damage:**
+  `oneSource: true` is the most any one source dealt — all of it, at
+  different times and to different things — rather than the sum: Dragon
+  Cultist's "if a source you controlled dealt 5 or more damage this turn"
+  (`{ oneSource: true, atLeast: 5 }`); `bySelf: true` is only what this
+  object dealt in its stint (rule 400.7): Chandra, Fire of Kaladesh's "if
+  Chandra has dealt 3 or more damage this turn" (`{ who: "any-player",
+  bySelf: true, atLeast: 3 }`, a `conditional` after the ability's own
+  damage). Each object in each stint is its own source, and a token stack's
+  tokens that dealt combat damage as one share it. The scaffolder reads both.
 - `{ kind: "cast-this-turn", who?, filter?, atLeast?, atMost? }` — how many of
   the spells `who` (`"you"` by default, `"opponent"`, `"any"`) cast this turn
   match `filter`, each read **as it was cast** (`PlayerState.spellsCastThisTurnAs`,

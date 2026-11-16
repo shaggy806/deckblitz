@@ -52,7 +52,9 @@ export type JournalKind =
    * `targetWas`: each as declared. */
   | "blocked"
   /** A source `player` controlled dealt `amount` damage to `target`; `was`:
-   * the source as it dealt it; `combat`: the combat phase, for combat damage. */
+   * the source as it dealt it; `combat`: the combat phase, for combat damage;
+   * `count`: a token stack's tokens that dealt it as one (an unblocked
+   * counted attacking stack), each `amount / count`. */
   | "damage"
   /** `player` put `amount` counters of `counter` on a permanent (every token of
    * a stack counted); `was`: the permanent as they went on. */

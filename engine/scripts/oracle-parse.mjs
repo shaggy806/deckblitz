@@ -5821,8 +5821,9 @@ export function parseSentence(sentence, ctx) {
     return { kind: "flicker", target: "source", faceDown: true };
   }
   // "Exile Urabrask, then return it to the battlefield transformed under its
-  // owner's control" (rule 712.14a).
-  if (re("exile ~, then return (?:it|him|her|them) to the battlefield transformed under (?:its|his|her|their) owner's control").test(s)) {
+  // owner's control" (rule 712.14a). "Exile her, …" after "If Chandra has
+  // dealt …" (Chandra, Fire of Kaladesh): a person's pronoun is the card's.
+  if (re("exile (?:~|him|her), then return (?:it|him|her|them) to the battlefield transformed under (?:its|his|her|their) owner's control").test(s)) {
     return { kind: "flicker", target: "source", transformed: true };
   }
   // Yarus: returned face down unless it's an instant or sorcery card, then up.
@@ -19086,6 +19087,15 @@ const TURN_TALLY_IFS = {
     toSelf: true,
     atLeast: 4,
   },
+  // One source's damage this turn: the most any one source its controller
+  // controlled dealt (Dragon Cultist), and what this object dealt in its
+  // stint, whoever controlled it (Chandra, Fire of Kaladesh).
+  ...Object.fromEntries(
+    [2, 3, 4, 5, 6, 7, 8, 9, 10].flatMap((n) => [
+      [`if a source you controlled dealt ${n} or more damage this turn,`, { kind: "damage-dealt-this-turn", oneSource: true, atLeast: n }],
+      [`if ~ has dealt ${n} or more damage this turn,`, { kind: "damage-dealt-this-turn", who: "any-player", bySelf: true, atLeast: n }],
+    ]),
+  ),
   // Dragon Whelp's: activations of this ability so far this turn, resolved
   // or not.
   "if this ability has been activated four or more times this turn,": { kind: "activated-this-turn", atLeast: 4 },

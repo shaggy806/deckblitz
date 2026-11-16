@@ -2711,7 +2711,8 @@
   "effect:for-each-target-turn-order-chosen-at-resolution",
   "effect:for-each-target-apnap-order",
   "effect:other-player-adds-mana-choice",
-  "static:lethal-damage-by-power"
+  "static:lethal-damage-by-power",
+  "condition:single-source-dealt-n-damage-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -8950,6 +8950,40 @@ describe("counters put or removed this way", () => {
     expect(zubera.triggered[0].effect).toMatchObject({ kind: "draw", amount: 3 });
   });
 
+  it("reads the damage one source dealt this turn: any source of yours, or this one", () => {
+    const cultist = parseFace(
+      {
+        name: "Dragon Cultist",
+        type_line: "Legendary Enchantment — Background",
+        oracle_text:
+          'Commander creatures you own have "At the beginning of your end step, if a source you controlled dealt 5 or more damage this turn, create a 4/4 red Dragon creature token with flying."',
+      },
+      { tokenFor: () => "Dragon Token (Dragonback Assault)" },
+    );
+    expect(cultist.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } });
+    expect(cultist.static[0].grantsTriggered[0].condition).toEqual({
+      kind: "damage-dealt-this-turn",
+      oneSource: true,
+      atLeast: 5,
+    });
+    const chandra = face(
+      "Chandra, Fire of Kaladesh",
+      "Legendary Creature — Human Shaman",
+      "{T}: Chandra deals 1 damage to target player or planeswalker. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.",
+    );
+    expect(chandra.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: 1, target: 0 },
+        {
+          kind: "conditional",
+          condition: { kind: "damage-dealt-this-turn", who: "any-player", bySelf: true, atLeast: 3 },
+          then: { kind: "flicker", target: "source", transformed: true },
+        },
+      ],
+    });
+  });
+
   it("reads what's exiled or returned as it enters, and the counters that come of it", () => {
     const replacementOf = (name: string, line: string) => face(name, "Creature — Horror", line).static[0].replacement;
     expect(

@@ -1517,6 +1517,19 @@ export type StaticCondition =
       /** Only what was dealt to this permanent, in its stint: "if 4 or more
        * damage was dealt to it this turn" (the Zuberas, `who: "any-player"`). */
       readonly toSelf?: true;
+      /** Only what this object dealt, in the stint it's in or last had (rule
+       * 400.7) — to anything, combat damage included: Chandra, Fire of
+       * Kaladesh's "if Chandra has dealt 3 or more damage this turn" (`who:
+       * "any-player"`, whoever controlled her as she dealt it). */
+      readonly bySelf?: true;
+      /** One source dealt it all: the most any one source dealt this turn —
+       * all of it, though it was dealt at different times and to different
+       * things — reaches `atLeast`, rather than the sum of every source's.
+       * Dragon Cultist's "if **a source** you controlled dealt 5 or more
+       * damage this turn" (its ruling). Each object in each stint is its own
+       * source (rule 400.7), and the tokens of a stack that dealt damage as
+       * one share what it dealt. */
+      readonly oneSource?: true;
       readonly atLeast: number;
     }
   | {

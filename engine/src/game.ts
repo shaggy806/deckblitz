@@ -57766,6 +57766,9 @@ controlledBy,
           ...(dealer !== undefined ? { player: dealer } : {}),
           object: event.source,
           ...(was !== undefined ? { stint: was.zoneChangeCount, was } : {}),
+          // A counted attacking stack's tokens dealt it as one event, each
+          // its share: that many sources (one source's read divides).
+          ...(event.sources !== undefined && event.sources > 1 ? { count: event.sources } : {}),
           amount: event.amount,
           ...(event.excess !== undefined && event.excess > 0 ? { excess: event.excess } : {}),
           target: event.target,
