@@ -2750,7 +2750,11 @@
   "effect:return-aura-cards-that-were-attached-from-graveyard",
   "static:graveyard-cast-filter-amount",
   "effect:spend-snow-as-any-color",
-  "effect:act-on-discarded-card"
+  "effect:act-on-discarded-card",
+  "effect:put-onto-battlefield-multiple-counter-kinds",
+  "trigger:manifests-dread",
+  "cost:returned-for-cost-lki",
+  "scope:each-player-with-life-total"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
