@@ -17875,7 +17875,9 @@ function rememberSets(
 ): { readonly [name: string]: readonly SetMember[] } {
   const out: Record<string, readonly SetMember[]> = {};
   for (const [name, { set, filter }] of Object.entries(remember)) {
-    const members = ctx.objectSet(set);
+    // Out of a set of permanents, each is remembered as one (`SetMember.permanent`).
+    const permanents = !isCardSet(set);
+    const members = ctx.objectSet(set).map((m): SetMember => (permanents ? { ...m, permanent: true } : m));
     out[name] = filter === undefined ? members : members.filter((m) => ctx.memberMatches(m, filter));
   }
   return out;
@@ -23041,7 +23043,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // A set of permanents (a trigger's batch, what's attached, a target
       // group) is copied as permanents; every other set is of cards.
       const ofSet = isObjectSetRef(spec.of) ? spec.of : undefined;
-      const permanentSet = ofSet !== undefined && !isCardSet(ofSet);
+      // A remembered set is what it was remembered out of (`SetMember.permanent`).
+      const rememberedPermanents =
+        typeof ofSet === "object" && "remembered" in ofSet
+          ? ((members) => members.length > 0 && members.every((m) => m.permanent === true))(ctx.objectSet(ofSet))
+          : false;
+      const permanentSet = ofSet !== undefined && (!isCardSet(ofSet) || rememberedPermanents);
       const ofCards =
         (ofSet !== undefined && !permanentSet) || (typeof spec.of === "object" && ("eachExiled" in spec.of || "eachInGraveyard" in spec.of));
       const handedTo = spec.who === undefined || spec.who === "you" ? undefined : spec.who;

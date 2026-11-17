@@ -352,6 +352,15 @@ Now a `then` that reads the damage's source (`"trigger-object"`, `"trigger-contr
 `reflexive-trigger` is owed once per source (`thenPerSource`, `Game.damageBatch.shieldThens`; rule 603.2c) —
 which also fixes Comeuppance against two attackers. Judgment of Alexander (rank 11898).
 `test/prevented-this-way-whenever.test.ts`.
+### Token copies of a sacrificed Aura, attached to each attacker — built 2026-11-17
+
+The key `effect:aura-token-copies-attached`: a reflexive trigger's `remember` marks the members it takes out
+of a set of permanents (`SetMember.permanent`, in `rememberSets`), and `create-token-copy` of that
+`{ remembered }` set copies them as permanents, as they last existed (rule 608.2h) — a sacrificed token Aura
+included — rather than as cards. The rest was there: a `may`'s `cost` + `costSacrifice`, `for-each-permanent`
+binding each attacker to slot 0, and `attachedTo` (Arna Kennerüd's). Three Dog, Galaxy News DJ (rank 12122).
+`test/aura-token-copies-attached.test.ts`.
+
 ### Counters a modular ability puts, replaced — built 2026-11-17
 
 The key `replacement:counter-replacement-by-modular-ability`: a `would-add-counter` replacement's

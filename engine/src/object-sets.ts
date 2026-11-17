@@ -38,6 +38,11 @@ export interface SetMember {
   readonly stint: number;
   readonly count?: number;
   readonly was?: LastKnownInfo;
+  /** Remembered (`RememberSpec`) out of a set of permanents (`isCardSet`
+   * false): a `create-token-copy` of the `{ remembered }` set copies it as
+   * the permanent, as it last existed once it has left (rule 608.2h) — Three
+   * Dog, Galaxy News DJ's "a copy of that Aura" after it was sacrificed. */
+  readonly permanent?: true;
   /** Shown to everyone in a hidden zone (a card revealed this way, or
    * revealed for a cost): what it is can be read there too. Any other member
    * in a library or a hand is unknown to a read (rule 701.17c's public-zone
