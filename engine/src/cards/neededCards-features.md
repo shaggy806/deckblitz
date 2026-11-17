@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Snow mana of a spell's own colors — built 2026-11-17
+
+The key `condition:snow-mana-of-spell-colors`: a `ManaSpentClause`'s `ofItsColors`, counting only spent mana of one
+of the object's own colours as it is now (rule 105.2) — each spent unit already records its type and its source.
+Boreal Outrider (rank 13205): a `trigger-object` intervening "if" on `{ from: { supertype: "snow" }, ofItsColors:
+true }` (rule 107.4h), and Chocobo Camp's `enters-with-counters`. `test/snow-mana-of-spell-colors.test.ts`.
+
 ### Flashback costs that cost more or less — built 2026-11-17
 
 The key `cost:flashback-cost-modification-static`: `SpellCastClause.via`, a cost modification that reaches only a

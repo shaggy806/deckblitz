@@ -197,9 +197,14 @@ export function filterAtX(filter: CardFilter, x: number): CardFilter {
 }
 
 /** One condition on the mana spent on something: {@link ManaSpentQuery} says
- * what to count, `amount` how much must be there (absent, at least one). */
+ * what to count, `amount` how much must be there (absent, at least one).
+ * `ofItsColors` counts only mana of one of the object's own colours as it is
+ * now (rule 105.2; a spell on the stack, read as it is) — Boreal Outrider's
+ * "if {S} of any of that spell's colors was spent to cast it" is `{ from: {
+ * supertype: "snow" }, ofItsColors: true }`: a colourless object has none. */
 export interface ManaSpentClause extends ManaSpentQuery {
   readonly amount?: NumCompare;
+  readonly ofItsColors?: true;
 }
 
 /** Does a `NumCompare` carry a {@link DynamicOperand}? */
@@ -2872,8 +2877,16 @@ export function matchesFilter(
     const source = ctx.source === undefined ? undefined : state.objects[ctx.source];
     const isFromSource = (origin: ManaOrigin): boolean =>
       source !== undefined && origin.object === ctx.source && origin.stint === (source.zoneChangeCount ?? 0);
+    // "Of any of that spell's colors": its colours as it is now, narrowing
+    // any type the clause names.
+    const ofColorsOf = (clause: ManaSpentClause): ManaSpentQuery => {
+      const own = live !== undefined ? [...effectiveColors(state, registry, live)] : [...lki!.colors];
+      const named =
+        clause.colorWord !== undefined ? [clause.colorWord] : clause.type === undefined ? undefined : typeof clause.type === "string" ? [clause.type] : clause.type;
+      return { ...clause, colorWord: undefined, type: own.filter((c) => named === undefined || named.includes(c)) };
+    };
     for (const clause of filter.manaSpent) {
-      const n = spentManaCount(spent, clause, isFromSource);
+      const n = spentManaCount(spent, clause.ofItsColors === true ? ofColorsOf(clause) : clause, isFromSource);
       if (clause.amount === undefined ? n < 1 : !compareNum(n, clause.amount, ctx.x, dynamic)) return false;
     }
   }
