@@ -18775,7 +18775,7 @@ export class Game {
     if (perActX !== undefined && (this.additionalCostActX(def) !== undefined || this.reducingGraveyardExile(def) !== undefined)) {
       reduction += perActX * Math.max(0, Math.floor(xValue));
     }
-    const total = reduceManaCost(
+    const reducedTotal = reduceManaCost(
       {
         ...base,
         generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax + permissionTax,
@@ -18790,6 +18790,16 @@ export class Game {
       reduction,
       colored,
     );
+    // "Spend only black mana on X" (Consume Spirit): what's left of X in the
+    // generic part is paid as that many symbols of the colour, as an
+    // activated ability's `xSpendOnly` is — a reduction has taken the cost's
+    // other generic mana first.
+    const only = def.xSpendOnly;
+    const onX = only === undefined ? 0 : Math.min(reducedTotal.generic, printed.x * Math.max(0, xValue));
+    const total: ManaCost =
+      onX === 0
+        ? reducedTotal
+        : { ...reducedTotal, generic: reducedTotal.generic - onX, colored: { ...reducedTotal.colored, [only!]: reducedTotal.colored[only!] + onX } };
     // "Each spell that would cost less than three mana to cast costs three
     // mana to cast" (Trinisphere): applied to the total once it's determined
     // (rule 601.2f), the difference as generic mana.

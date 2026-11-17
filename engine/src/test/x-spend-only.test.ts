@@ -14,7 +14,7 @@ import type { LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { changeDefinitionText } from "../text-change.js";
-import { A, B, activate, lands, life, ref, registryOf, spawn, table, zone } from "./harness.js";
+import { A, B, activate, cast, lands, life, ref, registryOf, spawn, table, toHand, zone } from "./harness.js";
 
 const xOffer = (game: Game, source: ObjectId): Extract<LegalAction, { kind: "activate-ability" }> | undefined => {
   for (const action of game.legalActions(A)) {
@@ -87,5 +87,54 @@ describe("Crimson Hellkite — {X}, {T} with only red mana on X", () => {
     activate(game, hellkite, 0, { x: 3, targets: [ref(giant)] });
     expect(zone(game, giant)).toBe("graveyard");
     expect(game.state.objects[hellkite].tapped).toBe(true);
+  });
+});
+
+/** The cast offer for `card` with an X range, if there is one. */
+const castXOffer = (game: Game, card: ObjectId): Extract<LegalAction, { kind: "cast-spell" }> | undefined => {
+  for (const action of game.legalActions(A)) {
+    if (action.kind === "cast-spell" && action.card === card && action.xCost !== undefined) return action;
+  }
+  return undefined;
+};
+
+describe("Consume Spirit — spend only black mana on X, on a spell (`CardDefinition.xSpendOnly`)", () => {
+  it("offers X only as high as the black mana left after {1}{B}, and deals X and gains X", () => {
+    const { game } = table();
+    const giant = spawn(game, "Hill Giant", B);
+    lands(game, "Swamp", 3);
+    lands(game, "Mountain", 2);
+    const spirit = toHand(game, "Consume Spirit");
+    // {B} and two X from the Swamps, the {1} from a Mountain.
+    expect(castXOffer(game, spirit)?.xCost?.maxX).toBe(2);
+    expect(() => cast(game, spirit, { x: 3, targets: [ref(giant)] })).toThrow(/pay|mana/i);
+    const before = life(game, A);
+    cast(game, spirit, { x: 2, targets: [ref(B)] });
+    expect(life(game, B)).toBe(18);
+    expect(life(game, A)).toBe(before + 2);
+    // The Swamps paid, and a Mountain the {1}.
+    expect(game.battlefield.filter((id) => game.state.objects[id].cardName === "Mountain" && !game.state.objects[id].tapped)).toHaveLength(1);
+  });
+
+  it("without black mana beyond its {B}, X is 0", () => {
+    const { game } = table();
+    lands(game, "Swamp", 1);
+    lands(game, "Mountain", 4);
+    const spirit = toHand(game, "Consume Spirit");
+    expect(castXOffer(game, spirit)?.xCost?.maxX ?? 0).toBe(0);
+    expect(() => cast(game, spirit, { x: 1, targets: [ref(B)] })).toThrow(/pay|mana/i);
+    cast(game, spirit, { x: 0, targets: [ref(B)] });
+    expect(life(game, B)).toBe(20);
+    expect(zone(game, spirit)).toBe("graveyard");
+  });
+
+  it("all black: five Swamps pay X = 3", () => {
+    const { game } = table();
+    lands(game, "Swamp", 5);
+    const spirit = toHand(game, "Consume Spirit");
+    expect(castXOffer(game, spirit)?.xCost?.maxX).toBe(3);
+    cast(game, spirit, { x: 3, targets: [ref(B)] });
+    expect(life(game, B)).toBe(17);
+    expect(life(game, A)).toBe(23);
   });
 });

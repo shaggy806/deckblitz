@@ -5439,6 +5439,17 @@ export interface CardDefinition {
    */
   readonly maxX?: EffectAmount;
   /**
+   * "Spend only black mana on X" on a spell with {X} in its mana cost
+   * (Consume Spirit): the X part of its total cost is paid with mana of this
+   * colour alone — each X one mana of it, as a coloured symbol is (rule
+   * 107.4a), so the X offered goes only as high as that mana does. As an
+   * activated ability's `AbilityCost.xSpendOnly`: what lowers the cost's
+   * generic mana takes the rest of the generic part first, then X
+   * (`Game.castingCostOf`); a cost with no {X} (an alternative cost, X 0,
+   * rule 107.3b) has nothing it restricts.
+   */
+  readonly xSpendOnly?: "W" | "U" | "B" | "R" | "G";
+  /**
    * "X can't be 0" on a spell with {X} in its mana cost (Mind Grind): the
    * least X its caster may announce (rule 601.2b). Cast while paying neither
    * its mana cost nor an alternative cost with X in it, the only legal X is 0
@@ -6483,6 +6494,7 @@ const PRINTED_ABILITY: {
   opponentChoosesTargets: (def) => def.opponentChoosesTargets.length > 0,
   selfCostReduction: (def) => def.selfCostReduction !== null,
   maxX: (def) => def.maxX !== undefined,
+  xSpendOnly: (def) => def.xSpendOnly !== undefined,
   minX: (def) => def.minX !== undefined,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
@@ -6807,6 +6819,8 @@ interface CardDraft {
   selfCostReduction?: SelfCostReduction | readonly SelfCostReduction[];
   /** See {@link CardDefinition.maxX}. */
   maxX?: EffectAmount;
+  /** See {@link CardDefinition.xSpendOnly}. */
+  xSpendOnly?: "W" | "U" | "B" | "R" | "G";
   /** See {@link CardDefinition.minX}. */
   minX?: number;
   costPerExtraTarget?: string;
@@ -7256,6 +7270,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.alsoSubtypes !== undefined ? { alsoSubtypes: draft.alsoSubtypes } : {}),
     ...(draft.flashIf !== undefined ? { flashIf: draft.flashIf } : {}),
     ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
+    ...(draft.xSpendOnly !== undefined ? { xSpendOnly: draft.xSpendOnly } : {}),
     ...(draft.minX !== undefined ? { minX: draft.minX } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     ...(draft.chooseNumberOnEnter === true ? { chooseNumberOnEnter: true as const } : {}),

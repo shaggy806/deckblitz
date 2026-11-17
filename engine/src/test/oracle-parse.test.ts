@@ -19112,6 +19112,30 @@ describe("spend only one colour of mana on an ability's X (Crypt Rats)", () => {
   });
 });
 
+describe("spend only one colour of mana on a spell's X (Consume Spirit)", () => {
+  it("the card's xSpendOnly, the whole card read", () => {
+    const spirit = parseFace(
+      {
+        name: "Consume Spirit",
+        type_line: "Sorcery",
+        mana_cost: "{X}{1}{B}",
+        oracle_text: "Spend only black mana on X.\nConsume Spirit deals X damage to any target and you gain X life.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(spirit.complete).toBe(true);
+    expect(spirit.xSpendOnly).toBe("B");
+  });
+
+  it("is left to a person on a spell with no {X}", () => {
+    const face = parseFace(
+      { name: "Test Spell", type_line: "Sorcery", mana_cost: "{1}{B}", oracle_text: "Spend only black mana on X.\nDraw a card." },
+      { tokenFor: () => null },
+    );
+    expect(face.xSpendOnly).toBeUndefined();
+  });
+});
+
 describe("an alternative cost for the spells you cast (Jodah, Conspiracy Unraveler)", () => {
   const face = (oracle_text: string) =>
     parseFace({ name: "Test Sphinx", type_line: "Creature — Sphinx", mana_cost: "{5}{U}{U}", oracle_text }, { tokenFor: () => null });

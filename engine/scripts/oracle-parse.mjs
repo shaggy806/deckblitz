@@ -17841,6 +17841,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
     // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
     if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
+    // "Spend only black mana on X." on a spell with {X} in its mana cost
+    // (Consume Spirit, Drain Life) — the card's `xSpendOnly`.
+    if (isSpell && /\{X\}/.test(face.mana_cost ?? "") && (m = /^Spend only (white|blue|black|red|green) mana on X\.$/.exec(line))) {
+      out.xSpendOnly = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[1]];
+      continue;
+    }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.
     if ((m = /^Impending (\d+)—((?:\{[^}]+\})+)$/.exec(line))) {
       out.impending = { count: Number(m[1]), cost: m[2] };

@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Spend only one colour of mana on a spell's X — built 2026-11-17
+
+The key `cost:x-spend-color-restriction`: `CardDefinition.xSpendOnly`, Crypt Rats' `AbilityCost.xSpendOnly` on a
+spell — `Game.castingCostOf` turns what's left of X in the generic part into that many symbols of the colour (rule
+107.4a), after reductions take the other generic mana, so the offered X stops where that mana does. Consume Spirit
+(rank 13471); the scaffolder reads the line (Drain Life's too). Soul Burn's "black and/or red" and its life read
+(`amount:colored-mana-spent-on-x`) aren't built. `test/x-spend-only.test.ts`.
+
 ### Collect evidence rather than pay the mana cost for spells — built 2026-11-17
 
 The key `cost:alt-cost-collect-evidence-for-spells`: `alternativeCostForSpells.collectEvidence` (rule 701.59a),

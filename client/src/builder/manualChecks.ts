@@ -13303,4 +13303,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  // --- Spend only black mana on a spell's X (2026-11-17) ---------------------------
+  preset(
+    'Consume Spirit: X only as high as the black mana',
+    board({
+      you: { bf: ['Swamp*3', 'Mountain*2'], hand: ['Consume Spirit'] },
+    }),
+  ),
 ]

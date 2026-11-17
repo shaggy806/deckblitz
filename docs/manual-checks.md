@@ -8783,3 +8783,9 @@ Each board's die comes up 4.
 ### Conspiracy Unraveler: cast a spell by collecting evidence 10
 - **Do:** Cast Hill Giant from your hand by its "collect evidence 10" offer (you have no lands). In the popup pick Gray Merchant of Asphodel, Hill Giant and Grizzly Bears from your graveyard and confirm.
 - **Expect:** The offer costs no mana. The popup asks for cards with total mana value 10 or greater; with all three (11) chosen they're exiled and Hill Giant enters.
+
+## Spend only black mana on a spell's X (2026-11-17)
+
+### Consume Spirit: X only as high as the black mana
+- **Do:** Cast Consume Spirit at Bob, choosing the largest X it offers.
+- **Expect:** X goes up to 2, not 4: the Swamps pay {B} and X, a Mountain the {1}. Bob loses 2 life and you gain 2; one Mountain stays untapped.
