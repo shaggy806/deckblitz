@@ -361,6 +361,13 @@ already ran as a `prevent-half` step, spent as a "next time" shield. Two apply o
 what's left (the ruling: 5 → 3 → 2). Fixed with it: a partial prevention step (`prevent-n`, `prevent-all-but`,
 `prevent-half`) that prevents none of the damage no longer uses its shield up (rule 609.7b). Dark Sphere (rank
 11702). `test/chosen-source-prevent-half.test.ts`.
+### Spells a player casts this turn cost more — found built 2026-11-17
+
+The key `effect:player-spell-tax-this-turn` needed no engine code: an `each-player-may` of the active player's
+runs its `effect` as that player's ("you" in it is them), so a `timed-static` `costModification` with `when: {
+caster: "you" }` inside it taxes the player who took it, for the turn (rule 601.2f), behind a `this-way`
+`drawn` conditional for "if they do". Academy Loremaster (rank 12384). `test/player-spell-tax-this-turn.test.ts`.
+
 ### Foretelling for less, on any turn, the first each turn free; exiled from your hand or by your effect — built 2026-11-17
 
 The keys `static:foretell-cost-zero-first-each-turn`, `static:foretell-cost-reduction-any-turn` and

@@ -24,6 +24,7 @@
     "static:foretell-cost-zero-first-each-turn",
     "static:foretell-cost-reduction-any-turn",
     "trigger:exiled-from-hand-or-by-your-effect",
+    "effect:player-spell-tax-this-turn",
     "bug:simultaneous-move-with-choice",
     "effect:phase-out-while-you-control-source",
     "effect:mill-from-bottom",
