@@ -59972,7 +59972,7 @@ controlledBy,
       const { source, prohibition } = live;
       if (enteringWith?.has(source.id) === true) return false;
       if (prohibition.kind !== undefined && prohibition.kind !== kind) return false;
-      if ("player" in on) return prohibition.who !== undefined && whoBinds(this.state, source, prohibition.who, on.player);
+      if ("player" in on) return prohibition.who !== undefined && whoBinds(this.state, this.registry, source, prohibition.who, on.player);
       return reachesObject(this.state, this.registry, live, on.object);
     });
   }

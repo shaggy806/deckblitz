@@ -18108,6 +18108,23 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "play-land", who: who }], text: printed(raw) });
       continue;
     }
+    // "Each opponent who controls more creatures than you can't cast creature
+    // spells. The same is true for artifacts and enchantments." / "… more
+    // lands than you can't play lands." (Ward of Bones): `{ who: "opponents",
+    // controlsMore }`, one comparison a type.
+    if ((m = /^Each opponent who controls more lands than you can't play lands\.$/.exec(line))) {
+      const who = { who: "opponents", controlsMore: { type: "land" } };
+      out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "play-land", who }], text: printed(raw) });
+      continue;
+    }
+    if (
+      (m = /^Each opponent who controls more (creature|artifact|enchantment)s than you can't cast \1 spells\.(?: The same is true for (creature|artifact|enchantment)s(?: and (creature|artifact|enchantment)s)?\.)?$/.exec(line))
+    ) {
+      const types = [m[1], m[2], m[3]].filter(Boolean);
+      const prohibits = types.map((type) => ({ act: "cast", who: { who: "opponents", controlsMore: { type } }, filter: { type } }));
+      out.static.push({ affects: { scope: "self" }, prohibits, text: printed(raw) });
+      continue;
+    }
     if ((m = /^(Your opponents|Players) can't cast spells from anywhere other than their hands\.$/.exec(line))) {
       const who = m[1] === "Players" ? "each-player" : "opponents";
       out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "cast", who: who, notFrom: ["hand"] }], text: printed(raw) });

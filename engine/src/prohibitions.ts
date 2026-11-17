@@ -22,7 +22,7 @@ import {
 import { defendingPlayerOf } from "./combat/eligibility.js";
 import { entriesThisTurn } from "./journal.js";
 import type { PlayerScope } from "./effects.js";
-import { matchesFilter, type CardFilter } from "./filter.js";
+import { matchesFilter, weightedMatches, type CardFilter } from "./filter.js";
 import type { ObjectRef } from "./refs.js";
 import { rulesTextName } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -64,9 +64,21 @@ export interface PlayersWhoDid {
   readonly thisTurn: TurnDid | { readonly stat: "attacked"; readonly against: "you" };
 }
 
+/**
+ * "Each opponent **who controls more creatures than you** can't cast creature
+ * spells" (Ward of Bones): the players `who` names who each control more
+ * permanents matching `controlsMore` than the source's controller does, a
+ * token stack counted as every token in it. Asked as the gate is read, so it
+ * comes and goes with the board.
+ */
+export interface PlayersWhoControlMore {
+  readonly who: StaticWho;
+  readonly controlsMore: CardFilter;
+}
+
 /** What's stored: a static's words, those players by what each did this
- * turn, or the players an effect named. */
-export type ProhibitedPlayer = StaticWho | PlayersWhoDid | BoundPlayers;
+ * turn or by what each controls, or the players an effect named. */
+export type ProhibitedPlayer = StaticWho | PlayersWhoDid | PlayersWhoControlMore | BoundPlayers;
 
 /** One permanent in the stint an effect named it (rule 400.7). */
 export interface BoundObject {
@@ -333,13 +345,36 @@ function attackedPlayerThisTurn(state: GameState, player: PlayerId, you: PlayerI
   );
 }
 
+/** How many permanents matching `filter` `player` controls, from their side;
+ * a token stack is every token in it. */
+function controlledMatching(state: GameState, registry: CardRegistry, player: PlayerId, filter: CardFilter): number {
+  return weightedMatches(
+    state,
+    state.zones.shared.battlefield,
+    (id) => state.objects[id].controller === player && matchesFilter(state, registry, id, filter, { you: player }),
+  ).reduce((n, m) => n + m.weight, 0);
+}
+
 /** Whether `who`, as `source`'s controller reads it, names `player`. */
-export function whoBinds(state: GameState, source: GameObject, who: ProhibitedPlayer, player: PlayerId): boolean {
+export function whoBinds(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  who: ProhibitedPlayer,
+  player: PlayerId,
+): boolean {
   if (typeof who === "object") {
     if ("players" in who) return who.players.includes(player);
+    if ("controlsMore" in who) {
+      return (
+        whoBinds(state, registry, source, who.who, player) &&
+        controlledMatching(state, registry, player, who.controlsMore) >
+          controlledMatching(state, registry, source.controller, who.controlsMore)
+      );
+    }
     const did = who.thisTurn;
     return (
-      whoBinds(state, source, who.who, player) &&
+      whoBinds(state, registry, source, who.who, player) &&
       ("against" in did
         ? attackedPlayerThisTurn(state, player, source.controller)
         : turnStatOf(state, player, did.stat) >= (did.atLeast ?? 1))
@@ -374,7 +409,7 @@ export function prohibitionsOnPlayer<A extends ProhibitionAct>(
 ): readonly LiveProhibition<A>[] {
   return liveProhibitions(state, registry, act).filter(({ source, prohibition }) => {
     const who = (prohibition as { readonly who?: ProhibitedPlayer }).who;
-    return who !== undefined && whoBinds(state, source, who, player);
+    return who !== undefined && whoBinds(state, registry, source, who, player);
   });
 }
 
@@ -537,7 +572,7 @@ export function targetProhibited(
     }
     return ref.kind === "object"
       ? reachesObject(state, registry, live, ref.object)
-      : prohibition.who !== undefined && whoBinds(state, source, prohibition.who, ref.player);
+      : prohibition.who !== undefined && whoBinds(state, registry, source, prohibition.who, ref.player);
   });
 }
 

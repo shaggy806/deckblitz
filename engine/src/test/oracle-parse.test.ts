@@ -19792,6 +19792,22 @@ describe("keywords of the exiled cards used to craft it", () => {
     expect((face.static[0].sharesKeywords as { keywords: string[] }).keywords).toHaveLength(12);
   });
 
+  it("reads Ward of Bones' can'ts for each opponent who controls more of a type", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Artifact",
+      oracle_text:
+        "Each opponent who controls more creatures than you can't cast creature spells. The same is true for artifacts and enchantments.\nEach opponent who controls more lands than you can't play lands.",
+    } as never) as unknown as { static: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    const cast = (type: string) => ({ act: "cast", who: { who: "opponents", controlsMore: { type } }, filter: { type } });
+    expect(face.static[0]).toMatchObject({ affects: { scope: "self" }, prohibits: [cast("creature"), cast("artifact"), cast("enchantment")] });
+    expect(face.static[1]).toMatchObject({
+      affects: { scope: "self" },
+      prohibits: [{ act: "play-land", who: { who: "opponents", controlsMore: { type: "land" } } }],
+    });
+  });
+
   it("reads Diligent Farmhand's card that counts as a Muscle Burst in a graveyard", () => {
     const face = parseFace({
       name: "Test Card",

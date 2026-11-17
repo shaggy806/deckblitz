@@ -2702,6 +2702,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   attack with creatures" is `cant-attack` on `{ type: "creature", controlledBy: "opponent", controllerThisTurn: … }`). Angelic Arbiter. What
   the player did before the permanent arrived counts (the journal). "Each opponent who **attacked you or a planeswalker you control** this
   turn can't cast spells" is `thisTurn: { stat: "attacked", against: "you" }` (Sandswirl Wanderglyph: a battle isn't one).
+- **"Each opponent who controls more creatures than you can't cast creature spells"** is a prohibition's `who: { who: "opponents",
+  controlsMore: { type: "creature" } }` (`PlayersWhoControlMore`): each opponent's count of permanents matching it against the source's
+  controller's, read as the gate is (Ward of Bones, with artifacts, enchantments and "can't play lands" beside it).
 - **"Controlled by a player who was dealt combat damage by three or more Pirates this turn"** is a filter clause over that controller's
   journal list, `controllerTurnHistory: { what: "combat-damaged-by", filter: { subtype: "Pirate" }, atLeast: 3 }` (any `JournalWhat`,
   `window?`; the `turn-history` condition's count, asked of the one player). Each source counts once for a player however often it dealt
