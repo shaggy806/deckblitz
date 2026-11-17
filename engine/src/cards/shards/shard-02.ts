@@ -107,6 +107,7 @@ import _poolBulette from "../pool/bulette.js";
 import _poolBulkUp from "../pool/bulk-up.js";
 import _poolBurnAway from "../pool/burn-away.js";
 import _poolCabalCoffers from "../pool/cabal-coffers.js";
+import _poolCairnWanderer from "../pool/cairn-wanderer.js";
 import _poolCallForBlood from "../pool/call-for-blood.js";
 import _poolCampaignOfVengeance from "../pool/campaign-of-vengeance.js";
 import _poolCaptainBenjaminSisko from "../pool/captain-benjamin-sisko.js";
@@ -1153,6 +1154,7 @@ const shard: CardShard = {
     _poolBulkUp,
     _poolBurnAway,
     _poolCabalCoffers,
+    _poolCairnWanderer,
     _poolCallForBlood,
     _poolCampaignOfVengeance,
     _poolCaptainBenjaminSisko,

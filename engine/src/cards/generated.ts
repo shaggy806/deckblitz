@@ -3825,6 +3825,7 @@ import _poolCageOfHands from "./pool/cage-of-hands.js";
 import _poolCagedSun from "./pool/caged-sun.js";
 import _poolCagedZombie from "./pool/caged-zombie.js";
 import _poolCagemail from "./pool/cagemail.js";
+import _poolCairnWanderer from "./pool/cairn-wanderer.js";
 import _poolCaitSithFortuneTeller from "./pool/cait-sith-fortune-teller.js";
 import _poolCalamitousCaveIn from "./pool/calamitous-cave-in.js";
 import _poolCalamitousTide from "./pool/calamitous-tide.js";
@@ -6955,6 +6956,7 @@ import _poolDigsiteEngineer from "./pool/digsite-engineer.js";
 import _poolDihadaBinderOfWills from "./pool/dihada-binder-of-wills.js";
 import _poolDihadasPloy from "./pool/dihadas-ploy.js";
 import _poolDiligentExcavator from "./pool/diligent-excavator.js";
+import _poolDiligentFarmhand from "./pool/diligent-farmhand.js";
 import _poolDiligentZookeeper from "./pool/diligent-zookeeper.js";
 import _poolDiluvianPrimordial from "./pool/diluvian-primordial.js";
 import _poolDimOubliette from "./pool/dim-oubliette.js";
@@ -19927,6 +19929,7 @@ import _poolParch from "./pool/parch.js";
 import _poolPardicArsonist from "./pool/pardic-arsonist.js";
 import _poolPardicCollaborator from "./pool/pardic-collaborator.js";
 import _poolPardicDragon from "./pool/pardic-dragon.js";
+import _poolPardicFirecat from "./pool/pardic-firecat.js";
 import _poolPardicLancer from "./pool/pardic-lancer.js";
 import _poolPardicMiner from "./pool/pardic-miner.js";
 import _poolPardicSwordsmith from "./pool/pardic-swordsmith.js";
@@ -28897,6 +28900,7 @@ import _poolTilonallisKnight from "./pool/tilonallis-knight.js";
 import _poolTilonallisSkinshifter from "./pool/tilonallis-skinshifter.js";
 import _poolTilonallisSummoner from "./pool/tilonallis-summoner.js";
 import _poolTimberGorge from "./pool/timber-gorge.js";
+import _poolTimberPaladin from "./pool/timber-paladin.js";
 import _poolTimberProtector from "./pool/timber-protector.js";
 import _poolTimberShredder from "./pool/timber-shredder.js";
 import _poolTimberWolves from "./pool/timber-wolves.js";
@@ -31267,6 +31271,7 @@ import _poolWarchanterSkald from "./pool/warchanter-skald.js";
 import _poolWarchiefGiant from "./pool/warchief-giant.js";
 import _poolWarclampMastiff from "./pool/warclamp-mastiff.js";
 import _poolWarcryPhoenix from "./pool/warcry-phoenix.js";
+import _poolWardOfBones from "./pool/ward-of-bones.js";
 import _poolWardOfLights from "./pool/ward-of-lights.js";
 import _poolWardOfPiety from "./pool/ward-of-piety.js";
 import _poolWardSliver from "./pool/ward-sliver.js";
@@ -37184,6 +37189,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCagedSun,
   _poolCagedZombie,
   _poolCagemail,
+  _poolCairnWanderer,
   _poolCaitSithFortuneTeller,
   _poolCalamitousCaveIn,
   _poolCalamitousTide,
@@ -40314,6 +40320,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDihadaBinderOfWills,
   _poolDihadasPloy,
   _poolDiligentExcavator,
+  _poolDiligentFarmhand,
   _poolDiligentZookeeper,
   _poolDiluvianPrimordial,
   _poolDimOubliette,
@@ -53286,6 +53293,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPardicArsonist,
   _poolPardicCollaborator,
   _poolPardicDragon,
+  _poolPardicFirecat,
   _poolPardicLancer,
   _poolPardicMiner,
   _poolPardicSwordsmith,
@@ -62256,6 +62264,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTilonallisSkinshifter,
   _poolTilonallisSummoner,
   _poolTimberGorge,
+  _poolTimberPaladin,
   _poolTimberProtector,
   _poolTimberShredder,
   _poolTimberWolves,
@@ -64626,6 +64635,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWarchiefGiant,
   _poolWarclampMastiff,
   _poolWarcryPhoenix,
+  _poolWardOfBones,
   _poolWardOfLights,
   _poolWardOfPiety,
   _poolWardSliver,
@@ -70556,6 +70566,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/caged-sun": _poolCagedSun,
   "pool/caged-zombie": _poolCagedZombie,
   "pool/cagemail": _poolCagemail,
+  "pool/cairn-wanderer": _poolCairnWanderer,
   "pool/cait-sith-fortune-teller": _poolCaitSithFortuneTeller,
   "pool/calamitous-cave-in": _poolCalamitousCaveIn,
   "pool/calamitous-tide": _poolCalamitousTide,
@@ -73686,6 +73697,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dihada-binder-of-wills": _poolDihadaBinderOfWills,
   "pool/dihadas-ploy": _poolDihadasPloy,
   "pool/diligent-excavator": _poolDiligentExcavator,
+  "pool/diligent-farmhand": _poolDiligentFarmhand,
   "pool/diligent-zookeeper": _poolDiligentZookeeper,
   "pool/diluvian-primordial": _poolDiluvianPrimordial,
   "pool/dim-oubliette": _poolDimOubliette,
@@ -86658,6 +86670,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pardic-arsonist": _poolPardicArsonist,
   "pool/pardic-collaborator": _poolPardicCollaborator,
   "pool/pardic-dragon": _poolPardicDragon,
+  "pool/pardic-firecat": _poolPardicFirecat,
   "pool/pardic-lancer": _poolPardicLancer,
   "pool/pardic-miner": _poolPardicMiner,
   "pool/pardic-swordsmith": _poolPardicSwordsmith,
@@ -95628,6 +95641,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tilonallis-skinshifter": _poolTilonallisSkinshifter,
   "pool/tilonallis-summoner": _poolTilonallisSummoner,
   "pool/timber-gorge": _poolTimberGorge,
+  "pool/timber-paladin": _poolTimberPaladin,
   "pool/timber-protector": _poolTimberProtector,
   "pool/timber-shredder": _poolTimberShredder,
   "pool/timber-wolves": _poolTimberWolves,
@@ -97998,6 +98012,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/warchief-giant": _poolWarchiefGiant,
   "pool/warclamp-mastiff": _poolWarclampMastiff,
   "pool/warcry-phoenix": _poolWarcryPhoenix,
+  "pool/ward-of-bones": _poolWardOfBones,
   "pool/ward-of-lights": _poolWardOfLights,
   "pool/ward-of-piety": _poolWardOfPiety,
   "pool/ward-sliver": _poolWardSliver,

@@ -981,6 +981,7 @@ import _poolVulshokBattlemaster from "../pool/vulshok-battlemaster.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
 import _poolWallOfVipers from "../pool/wall-of-vipers.js";
 import _poolWanderingChampion from "../pool/wandering-champion.js";
+import _poolWardOfBones from "../pool/ward-of-bones.js";
 import _poolWarmongerHellkite from "../pool/warmonger-hellkite.js";
 import _poolWarpArtifact from "../pool/warp-artifact.js";
 import _poolWastelandRaider from "../pool/wasteland-raider.js";
@@ -2029,6 +2030,7 @@ const shard: CardShard = {
     _poolVulshokFactory,
     _poolWallOfVipers,
     _poolWanderingChampion,
+    _poolWardOfBones,
     _poolWarmongerHellkite,
     _poolWarpArtifact,
     _poolWastelandRaider,

@@ -208,6 +208,7 @@ import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDesperatePlea from "../pool/desperate-plea.js";
 import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDewdropSpy from "../pool/dewdrop-spy.js";
+import _poolDiligentFarmhand from "../pool/diligent-farmhand.js";
 import _poolDisasterRadius from "../pool/disaster-radius.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDisturbingConversion from "../pool/disturbing-conversion.js";
@@ -1312,6 +1313,7 @@ const shard: CardShard = {
     _poolDesperatePlea,
     _poolDevouringStrossus,
     _poolDewdropSpy,
+    _poolDiligentFarmhand,
     _poolDisasterRadius,
     _poolDiscipleOfMalice,
     _poolDisturbingConversion,
