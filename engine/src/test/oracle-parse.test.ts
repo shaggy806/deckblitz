@@ -21812,3 +21812,17 @@ describe("the first card cycled each turn (Valiant Rescuer)", () => {
     ]);
   });
 });
+
+describe("clash with an opponent, if you win (Scattering Stroke's sentence pair)", () => {
+  it("the clash effect, the rest its won branch", () => {
+    const r = parseEffect("Draw a card. Clash with an opponent. If you win, draw a card.", { targets: [], tokenFor: () => null, onStack: true });
+    expect(r.todo).toEqual([]);
+    expect(r.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 1 },
+        { kind: "clash", won: { kind: "draw", amount: 1 } },
+      ],
+    });
+  });
+});

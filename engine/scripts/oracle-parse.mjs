@@ -8721,6 +8721,28 @@ function playerImpulseAt(sentences, i, ctx) {
   };
 }
 
+/** "Clash with an opponent. If you win, …[ Otherwise, ….]" at `i` (rule
+ * 701.30 — Lash Out, Pulling Teeth): the `clash` effect with its `won` and
+ * `lost` branches and how many sentences it took, or `null` unless each
+ * branch parses. */
+function clashAt(sentences, i, ctx) {
+  if (!/^clash with an opponent\.$/i.test(sentences[i])) return null;
+  // A leaves trigger's "return this card" is the card where it went
+  // (Ringskipper), which the branch's own templates don't read: left to author.
+  if (ctx?.departed !== undefined) return null;
+  const clause = (text) => {
+    const effect = parseSentence(`${text[0].toUpperCase()}${text.slice(1)}`, ctx);
+    return effect === null || effect === undefined ? null : effect;
+  };
+  const win = /^if you win, (.+)$/i.exec(sentences[i + 1] ?? "");
+  const won = win === null ? null : clause(win[1]);
+  if (won === null) return null;
+  const otherwise = /^otherwise, (.+)$/i.exec(sentences[i + 2] ?? "");
+  if (otherwise === null) return { effect: { kind: "clash", won }, used: 2 };
+  const lost = clause(otherwise[1]);
+  return lost === null ? null : { effect: { kind: "clash", won, lost }, used: 3 };
+}
+
 /** The impulse sentence pair at `i`, or `null`: the top card exiled with its
  * permission (`impulse-exile`), or a targeted card exiled from your graveyard
  * with one (`exile`'s `mayPlay`; `sourceDid` isn't something that says). */
@@ -11190,6 +11212,15 @@ export function parseEffect(text, outer) {
       parsed.push(effect);
       hints.push({ sentence, effect });
       skip = 1;
+      continue;
+    }
+    // "Clash with an opponent. If you win, <effect>.[ Otherwise, <effect>.]"
+    // (rule 701.30): the `clash` effect, the rest its `won` (and `lost`).
+    const clash = clashAt(sentences, i, ctx);
+    if (clash !== null) {
+      parsed.push(clash.effect);
+      hints.push({ sentence, effect: clash.effect });
+      skip = clash.used - 1;
       continue;
     }
     // "Exile the top card of your library. You may play that card until you

@@ -870,7 +870,10 @@ and `0` for a player target). A spell **on the stack** counts its chosen {X}
 (rule 202.3e — Kaervek reading a Fireball cast for 3 sees 4), and a target
 that was a spell and has since left the stack is read as it last existed
 there, X included (Mana Drain's "that spell's mana value" after countering
-it). Anything else reads X as 0, so Reanimate on a Stonecoil Serpent costs no
+it; Scattering Stroke's the same from a `delayed-trigger` set up in a
+`clash`'s `won` branch, its `add-mana` inside a `may` asked as it resolves —
+the delayed ability keeps its creator's targets, and their stack stints).
+Anything else reads X as 0, so Reanimate on a Stonecoil Serpent costs no
 life; or
 `{ triggerValue: true }` — a number the firing event supplied to a **triggered
 ability**: the entering / attacking creature's power (Terror of the Peaks:
