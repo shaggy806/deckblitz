@@ -9756,6 +9756,7 @@ import _poolFiremindVessel from "./pool/firemind-vessel.js";
 import _poolFiremindsForesight from "./pool/fireminds-foresight.js";
 import _poolFiremindsResearch from "./pool/fireminds-research.js";
 import _poolFiresOfInvention from "./pool/fires-of-invention.js";
+import _poolFiresOfMountDoom from "./pool/fires-of-mount-doom.js";
 import _poolFiresOfUndeath from "./pool/fires-of-undeath.js";
 import _poolFiresOfVictory from "./pool/fires-of-victory.js";
 import _poolFiresOfYavimaya from "./pool/fires-of-yavimaya.js";
@@ -15845,6 +15846,7 @@ import _poolLeonardoBigBrother from "./pool/leonardo-big-brother.js";
 import _poolLeonardoCuttingEdge from "./pool/leonardo-cutting-edge.js";
 import _poolLeonardoDaVinci from "./pool/leonardo-da-vinci.js";
 import _poolLeonardoLeaderInBlue from "./pool/leonardo-leader-in-blue.js";
+import _poolLeonardoSewerSamurai from "./pool/leonardo-sewer-samurai.js";
 import _poolLeonardoTheBalance from "./pool/leonardo-the-balance.js";
 import _poolLeonardoWorldlyWarrior from "./pool/leonardo-worldly-warrior.js";
 import _poolLeonardosTechnique from "./pool/leonardos-technique.js";
@@ -43228,6 +43230,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFiremindsForesight,
   _poolFiremindsResearch,
   _poolFiresOfInvention,
+  _poolFiresOfMountDoom,
   _poolFiresOfUndeath,
   _poolFiresOfVictory,
   _poolFiresOfYavimaya,
@@ -49317,6 +49320,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeonardoCuttingEdge,
   _poolLeonardoDaVinci,
   _poolLeonardoLeaderInBlue,
+  _poolLeonardoSewerSamurai,
   _poolLeonardoTheBalance,
   _poolLeonardoWorldlyWarrior,
   _poolLeonardosTechnique,
@@ -76713,6 +76717,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fireminds-foresight": _poolFiremindsForesight,
   "pool/fireminds-research": _poolFiremindsResearch,
   "pool/fires-of-invention": _poolFiresOfInvention,
+  "pool/fires-of-mount-doom": _poolFiresOfMountDoom,
   "pool/fires-of-undeath": _poolFiresOfUndeath,
   "pool/fires-of-victory": _poolFiresOfVictory,
   "pool/fires-of-yavimaya": _poolFiresOfYavimaya,
@@ -82802,6 +82807,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leonardo-cutting-edge": _poolLeonardoCuttingEdge,
   "pool/leonardo-da-vinci": _poolLeonardoDaVinci,
   "pool/leonardo-leader-in-blue": _poolLeonardoLeaderInBlue,
+  "pool/leonardo-sewer-samurai": _poolLeonardoSewerSamurai,
   "pool/leonardo-the-balance": _poolLeonardoTheBalance,
   "pool/leonardo-worldly-warrior": _poolLeonardoWorldlyWarrior,
   "pool/leonardos-technique": _poolLeonardosTechnique,

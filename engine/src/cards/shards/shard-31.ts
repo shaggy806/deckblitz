@@ -310,6 +310,7 @@ import _poolFierceInvocation from "../pool/fierce-invocation.js";
 import _poolFightAsOne from "../pool/fight-as-one.js";
 import _poolFinalStrike from "../pool/final-strike.js";
 import _poolFirdochCore from "../pool/firdoch-core.js";
+import _poolFiresOfMountDoom from "../pool/fires-of-mount-doom.js";
 import _poolFistOfSuns from "../pool/fist-of-suns.js";
 import _poolFlameJavelin from "../pool/flame-javelin.js";
 import _poolFlameRift from "../pool/flame-rift.js";
@@ -1415,6 +1416,7 @@ const shard: CardShard = {
     _poolFightAsOne,
     _poolFinalStrike,
     _poolFirdochCore,
+    _poolFiresOfMountDoom,
     _poolFistOfSuns,
     _poolFlameJavelin,
     _poolFlameRift,
