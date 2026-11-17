@@ -8688,3 +8688,13 @@ Each board's die comes up 4.
 ### Chaotic Transformation: in a 4-player game, Bob picks the order of his own
 - **Do:** In this 4-player game, cast Chaotic Transformation: click Bob's Sol Ring, then his Llanowar Elves, and skip the rest. Switch to Bob and pass; in his popup pick Llanowar Elves and confirm.
 - **Expect:** You aren't asked: Bob's popup "Chaotic Transformation — Choose which of these targets is handled next" shows his two exiled cards. After the Elves, Ornithopter (the first creature) enters under Bob's control; Bob then reveals his whole library for an artifact and finds none, so Grizzly Bears stays there.
+
+## A card chosen from among those that left a graveyard (2026-11-17)
+
+### Spirit of Resilience: a graveyard exiled, then a copy of a creature card from among it
+- **Do:** Play Bojuka Bog, targeting yourself. In Spirit of Resilience's popup pick Grizzly Bears and confirm.
+- **Expect:** The popup offers Grizzly Bears and Sol Ring, both in exile, not Lightning Bolt. Spirit of Resilience gets a +1/+1 counter and becomes Grizzly Bears, a 3/3, until end of turn.
+
+### Spirit of Resilience: in a 4-player game, a creature card reanimated is found on the battlefield
+- **Do:** In this 4-player game, cast Reanimate on Hill Giant. In Spirit of Resilience's popup pick Hill Giant and confirm.
+- **Expect:** The popup shows Hill Giant, on the battlefield. Spirit of Resilience gets a +1/+1 counter and becomes a Hill Giant, a 4/4; you lose 4 life.

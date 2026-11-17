@@ -121,8 +121,10 @@ export type LookAndChooseZone =
   | "command"
   | "exile"
   /** `revealed`: the cards a `"revealed-this-way"` names, in a library or a
-   * hand; otherwise cards in a graveyard. */
-  | { readonly cards: readonly ObjectId[]; readonly revealed?: true }
+   * hand; `found`: a `"trigger-batch"`'s, already narrowed to those found
+   * face up in a public zone, wherever that is; otherwise cards in a
+   * graveyard. */
+  | { readonly cards: readonly ObjectId[]; readonly revealed?: true; readonly found?: true }
   | {
       readonly exiled: readonly ObjectId[];
       /** Its `"exiled-this-way"`: the chooser was told to look at them, so a
@@ -11740,7 +11742,15 @@ export type EffectSpec =
         /** The cards this resolution revealed from a library or hand, still
          * there as the same objects (Gift of Perfection's "assimilate one of
          * the creature cards revealed this way", among every opponent's). */
-        | "revealed-this-way";
+        | "revealed-this-way"
+        /** The cards a "one or more cards leave your graveyard" trigger fired
+         * on, each found where it went — only in a public zone, and only
+         * while it's still the object it became there (rule 400.7e) — face
+         * up (a card exiled face down has no characteristics, rule 406.3a):
+         * Spirit of Resilience's "an artifact or creature card from among
+         * those cards". `filter` is read against each card as it was in the
+         * graveyard, and what isn't chosen stays where it is. */
+        | "trigger-batch";
       /** With `zone: "targets"`: the ones still in exile as the objects they
        * were (rule 400.7), that could return: "you can't pick a card that can't
        * legally be returned to the battlefield" (Dimensional Breach's ruling), so
@@ -12895,8 +12905,9 @@ export interface EffectApi {
   pickAtRandom(count: number, pick: (index: number) => RandomPick): number;
   /** Whether the card `id` matches `filter`, read from the effect's
    * controller's side — `choose-random-card`'s filter over a hand or the
-   * cards exiled with the source. */
-  cardMatches(id: ObjectId, filter: CardFilter): boolean;
+   * cards exiled with the source; with `was`, read as that snapshot (a
+   * trigger batch's card as it was in the graveyard). */
+  cardMatches(id: ObjectId, filter: CardFilter, was?: LastKnownInfo): boolean;
   /** Show `card`, in `owner`'s hand, as `choose-random-card`'s `show` says:
    * `"reveal"` to every player (rule 701.20a), `"look"` to the effect's
    * controller alone — a look they close, as `look-at-hand`'s is. */
@@ -24071,7 +24082,22 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                       .flatMap((m) => (ctx.stintNow(m.object) === m.stint ? [m.object] : [])),
                     revealed: true as const,
                   }
-                : spec.zone;
+                : spec.zone === "trigger-batch"
+                  ? {
+                      // Still the object it became where it went (rule 400.7e),
+                      // and what it was as a card in the graveyard; the zone
+                      // and face are `lookAndChoose`'s to read.
+                      cards: ctx
+                        .objectSet("trigger-batch")
+                        .flatMap((m) =>
+                          ctx.stintNow(m.object) === m.stint &&
+                          (spec.filter === undefined || ctx.cardMatches(m.object, spec.filter, m.was))
+                            ? [m.object]
+                            : [],
+                        ),
+                      found: true as const,
+                    }
+                  : spec.zone;
       const pendingBefore = ctx.decisionPending();
       ctx.lookAndChoose(
         zone,
@@ -24080,7 +24106,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         amountValue(spec.max, ctx),
         spec.destination,
         spec.leftover,
-        spec.filter,
+        // A trigger's batch was matched above, each card as it was.
+        spec.zone === "trigger-batch" ? undefined : spec.filter,
         spec.enterTapped === true,
         spec.then,
         spec.reveal ?? false,

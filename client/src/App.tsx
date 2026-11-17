@@ -8499,6 +8499,9 @@ function Table({
             ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
             ...(zoneChoiceAction.destination === 'reveal' ? { noneLabel: 'Reveal none' } : {}),
             ...(zoneChoiceAction.destination === 'exile' ? { noneLabel: 'Exile none' } : {}),
+            // Chosen where it is, for what follows (Spirit of Resilience's copy):
+            // nothing is put anywhere.
+            ...(zoneChoiceAction.destination === 'stay' ? { noneLabel: 'Choose none' } : {}),
             ...(zoneChoiceAction.openingHand === true && zoneChoiceAction.destination !== 'reveal' ? { noneLabel: 'Keep them in hand' } : {}),
             // A look alone (Glasses of Urza): closing it is the answer.
             ...(zoneChoiceAction.max === 0 ? { noneLabel: 'Done' } : {}),

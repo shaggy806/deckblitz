@@ -363,6 +363,16 @@ as one event — `choose-permanents`' `thenTogether` for cards in a zone. Avatar
 this card to its owner's hand and up to one creature card milled this way to the battlefield" leaves the
 graveyard as one `cards-left-graveyard`, and the Aura returns with no creature card chosen.
 `test/look-and-choose-then-always.test.ts`.
+### A card chosen from among those a batched trigger fired on — built 2026-11-17
+
+The key `decision:choose-from-batch`, as a `look-and-choose` zone, `"trigger-batch"`, and no new
+decision. A batched `leaves-graveyard` trigger now records its batch (`sets.batch`, each card as the
+object it became where it went, with its graveyard snapshot as `was`). The zone offers the members
+found where they went — a public zone only, the same object still, face up (rules 400.7e, 406.3a)
+— its `filter` read on each as it was (`cardMatches`' `was`), or as it is with no snapshot (a
+`put-into-exile` batch's, not yet proved by a card). Spirit of Resilience (rank 12506). Kaya, Spirits' Justice also waits on
+`effect:look-and-choose-unlinked-exile`. `test/trigger-batch-found.test.ts`.
+
 ### Each player orders their own exiled permanents — built 2026-11-17
 
 The key `decision:order-per-target-reveal-until`, as three `for-each-target` fields and no new

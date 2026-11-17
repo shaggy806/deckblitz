@@ -34632,6 +34632,28 @@ export class Game {
                         })),
                       ),
                     }
+                : // "From among those cards" (Spirit of Resilience): the
+                  // cards that left the graveyard at once and counted, each
+                  // as the object it became where it went (rule 400.7e) and
+                  // as it was there.
+                  ability.trigger.on === "leaves-graveyard" &&
+                    ability.trigger.perCard !== true &&
+                    event.type === "cards-left-graveyard"
+                  ? {
+                      ...(atTrigger ?? {}),
+                      sets: addToSet(
+                        atTrigger?.sets,
+                        "batch",
+                        this.graveyardLeavers(ability.trigger, event.objects, object).map((card) => {
+                          const was = this.graveyardDepartures?.get(card);
+                          return {
+                            object: card,
+                            stint: this.state.objects[card]?.zoneChangeCount ?? 0,
+                            ...(was !== undefined ? { was } : {}),
+                          };
+                        }),
+                      ),
+                    }
                 : // "Exile one of them from your graveyard" (Conspiracy
                   // Theorist): the cards discarded at once that matched,
                   // each as the object it is in the graveyard.
@@ -40162,12 +40184,13 @@ export class Game {
       pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
       // An `{ amount }` in it is read in this resolution (Triple Triad's
       // "lesser mana value than" the card exiled this way).
-      cardMatches: (id, filter) =>
+      cardMatches: (id, filter, was) =>
         this.state.objects[id] !== undefined &&
         matchesFilter(this.state, this.registry, id, filter, {
           you: controller,
           source,
           amount: (amount, each) => amountValue(amount, context, each),
+          ...(was !== undefined ? { snapshot: was } : {}),
         }),
       showCardFromHand: (owner, card, how) => {
         if (this.state.objects[card]?.zone !== "hand") return;
@@ -45668,10 +45691,23 @@ controlledBy,
     const zoneCards =
       typeof zone === "object"
         ? ("cards" in zone ? zone.cards : []).filter((id) => {
-            const where = this.state.objects[id]?.zone;
+            const object = this.state.objects[id];
+            const where = object?.zone;
             // Cards revealed this way are where they were revealed (Gift of
             // Perfection's, in libraries).
-            return "revealed" in zone && zone.revealed === true ? where === "library" || where === "hand" : where === "graveyard";
+            if ("revealed" in zone && zone.revealed === true) return where === "library" || where === "hand";
+            // A trigger's batch, found where each went: a public zone only
+            // (rule 400.7e), face up — a card exiled face down has no
+            // characteristics (406.3a), nor a face-down permanent but what
+            // its rules give it (708.2).
+            if ("found" in zone && zone.found === true) {
+              return (
+                (where === "battlefield" || where === "stack" || where === "exile" || where === "command" || where === "graveyard") &&
+                object?.exiledFaceDown === undefined &&
+                object?.faceDown === undefined
+              );
+            }
+            return where === "graveyard";
           })
         : zone === "graveyards"
         ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p].graveyard)

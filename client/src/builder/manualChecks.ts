@@ -13131,4 +13131,22 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       ],
     }),
   ),
+  // --- A card chosen from among those that left a graveyard (2026-11-17) ---------
+  preset(
+    'Spirit of Resilience: a graveyard exiled, then a copy of a creature card from among it',
+    board({
+      you: {
+        bf: ['Spirit of Resilience'],
+        hand: ['Bojuka Bog'],
+        gy: ['Grizzly Bears', 'Sol Ring', 'Lightning Bolt'],
+      },
+    }),
+  ),
+  preset(
+    'Spirit of Resilience: in a 4-player game, a creature card reanimated is found on the battlefield',
+    board({
+      you: { bf: ['Spirit of Resilience', 'Swamp'], hand: ['Reanimate'], gy: ['Hill Giant'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]
