@@ -5269,6 +5269,16 @@ export function parseSentence(sentence, ctx) {
       ],
     };
   }
+  // "On each creature you control with modular" (Arcbound Overseer): a keyword
+  // ability read off each one's text box (`CardFilter.hasKeyword`).
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on each creature you control with (morph|madness|fading|unearth|awaken|modular)`).exec(s))) {
+    return {
+      kind: "add-counter-all",
+      filter: { type: "creature", controlledBy: "you", hasKeyword: m[3] },
+      counter: m[2].toLowerCase(),
+      amount: amount(m[1]),
+    };
+  }
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
     const n = amount(m[1]);
     const counter = m[2].toLowerCase();

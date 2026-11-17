@@ -2155,9 +2155,10 @@ export type CardKeyword =
   | "partner" | "devoid" | "doctors-companion";
 
 /** Whether a printed line of `def`'s text is this keyword ability: for the
- * keywords a card authors as their parts, with no field of their own. */
+ * keywords a card authors as their parts, with no field of their own. A dash
+ * ends the keyword too: "Modular—Sunburst" is modular (Arcbound Wanderer). */
 function hasKeywordLine(def: CardDefinition, keyword: string): boolean {
-  return new RegExp(`(^|\\n)${keyword}( |\\n|$)`).test(def.text);
+  return new RegExp(`(^|\\n)${keyword}( |—|\\n|$)`).test(def.text);
 }
 
 /** One row per keyword, so a new one is a row: `live` is there for what a

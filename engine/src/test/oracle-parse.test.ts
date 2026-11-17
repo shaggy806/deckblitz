@@ -21035,3 +21035,14 @@ describe("life under half the starting total", () => {
     });
   });
 });
+
+describe("each creature you control with a keyword read off its text box", () => {
+  it("a +1/+1 counter on each creature you control with modular (Arcbound Overseer)", () => {
+    expect(parseEffect("Put a +1/+1 counter on each creature you control with modular.", ctx()).effect).toEqual({
+      kind: "add-counter-all",
+      filter: { type: "creature", controlledBy: "you", hasKeyword: "modular" },
+      counter: "+1/+1",
+      amount: 1,
+    });
+  });
+});

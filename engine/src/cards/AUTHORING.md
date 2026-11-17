@@ -743,7 +743,8 @@ chosen land**" (Canoptek Wraith) is a `choose-permanents` with `remember: true` 
 followed by a `search-library` whose filter is `sameNameWith: { thisWay: "chosen" }`: the pick is
 this resolution's even after the source was sacrificed, and with nothing chosen nothing matches.
 `greatestInZone` and `greatestAmongItsController` take `least: true`. `hasKeyword: CardKeyword` is one
-row per printed keyword read off the text box (morph, madness, kicker, flashback, cycling, fading, ...);
+row per printed keyword read off the text box (morph, madness, kicker, flashback, cycling, fading, ...;
+`"modular"` is "Modular N" or "Modular—Sunburst" — Arcbound Overseer's "each creature you control with modular");
 `keyword` is still the computed evergreen list. `hasKeyword: "partner"` is partner or "partner with",
 not the other partner abilities (702.124f); `hasKeyword: "doctors-companion"` is doctor's companion (702.124m —
 Rose Noble's "a creature spell with doctor's companion"). `hasKeyword: "devoid"` is the printed devoid line (702.114a),
