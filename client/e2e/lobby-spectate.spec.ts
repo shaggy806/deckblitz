@@ -50,6 +50,35 @@ async function twoPlayerRoom(browser: Browser): Promise<{ host: Page; guest: Pag
   return { host, guest, room }
 }
 
+test("the drifting backdrop carries on from the main menu into the waiting room and back, not from its start", async ({
+  browser,
+}) => {
+  // Each screen mounts a backdrop of its own, so the drift began again at
+  // every change of screen and the art behind the page jumped (the user,
+  // 2026-11-17).
+  const page = await newPage(browser)
+  const drift = () =>
+    page.evaluate(() => {
+      const layer = document.querySelector('.landing-backdrop-layer')
+      return Number(layer?.getAnimations()[0]?.currentTime ?? Number.NaN)
+    })
+  await page.goto('/')
+  await expect(page.getByRole('button', { name: 'Create a game' })).toBeVisible()
+  await page.waitForTimeout(2500)
+  const onMenu = await drift()
+  expect(onMenu).toBeGreaterThan(1500)
+  await page.getByRole('button', { name: 'Create a game' }).click()
+  await expect(page.locator('.seat-board')).toBeVisible()
+  const inLobby = await drift()
+  // On from where the menu's had got to, by no more than the click took.
+  expect(inLobby).toBeGreaterThanOrEqual(onMenu)
+  expect(inLobby).toBeLessThan(onMenu + 5000)
+  await page.getByRole('button', { name: /Main menu/ }).click()
+  await expect(page.getByRole('button', { name: 'Create a game' })).toBeVisible()
+  expect(await drift()).toBeGreaterThanOrEqual(inLobby)
+  await page.context().close()
+})
+
 test('the seat board keeps four places: adding a player moves no one', async ({ browser }) => {
   const host = await newPage(browser)
   const errors = pageErrors(host)

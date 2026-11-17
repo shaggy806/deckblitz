@@ -2,6 +2,17 @@ import { useCallback } from 'react'
 import './landing.css'
 
 /**
+ * How far into its drift (ms) the last backdrop to leave the page had got.
+ * Each menu screen mounts a backdrop of its own — the landing page, the seat
+ * picker, the waiting room — so going from one to the next started the loop
+ * again from its first frame, and the art behind the page jumped (the user,
+ * 2026-11-17: its position should persist between the main menu and the
+ * lobby). The next one starts here instead: the same picture, still moving.
+ * Kept across a game too, so the menu comes back where it was left.
+ */
+let driftAt: number | null = null
+
+/**
  * A callback ref for the drifting backdrop: holds its animation still while
  * the page is hidden. A compositor animation keeps time in a hidden tab
  * without drawing, so alt-tabbing back showed the frame from when it was
@@ -18,6 +29,9 @@ import './landing.css'
 function useHeldWhileHidden(): (el: HTMLElement | null) => void {
   return useCallback((el: HTMLElement | null) => {
     if (el === null) return
+    // Carries on from where the last backdrop had got to (`driftAt`), before
+    // its first paint.
+    if (driftAt !== null) for (const animation of el.getAnimations()) animation.currentTime = driftAt
     const hold = () => {
       for (const animation of el.getAnimations()) {
         if (document.hidden) animation.pause()
@@ -26,8 +40,13 @@ function useHeldWhileHidden(): (el: HTMLElement | null) => void {
     }
     hold()
     document.addEventListener('visibilitychange', hold)
-    // React 19 runs the ref's returned cleanup as the element goes.
-    return () => document.removeEventListener('visibilitychange', hold)
+    // React 19 runs the ref's returned cleanup as the element goes, while it
+    // is still in the page and its animation still has its time.
+    return () => {
+      const at = el.getAnimations()[0]?.currentTime
+      if (typeof at === 'number') driftAt = at
+      document.removeEventListener('visibilitychange', hold)
+    }
   }, [])
 }
 
