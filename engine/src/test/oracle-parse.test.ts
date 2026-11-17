@@ -7149,6 +7149,37 @@ describe("a discard for each card drawn unless a permanent is sacrificed (Read t
   });
 });
 
+describe("a card for each target player who didn't discard one of a kind (Hollow Marauder)", () => {
+  it("reads the discards at once, then each target asked what they discarded this way", () => {
+    const marauder = parseFace(
+      {
+        name: "Hollow Marauder",
+        type_line: "Creature — Specter Rogue",
+        oracle_text:
+          "This spell costs {1} less to cast for each creature card in your graveyard.\nFlying\nWhen this creature enters, any number of target opponents each discard a card. For each of those opponents who didn't discard a card with mana value 4 or greater, draw a card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(marauder.complete).toBe(true);
+    expect(marauder.triggered[0].targets).toEqual([{ kind: "any-number", of: "opponent" }]);
+    expect(marauder.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "discard", target: 0, amount: 1 } },
+        {
+          kind: "for-each-target",
+          from: 0,
+          effect: {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "discarded", who: { target: 0 }, filter: { manaValue: { op: "gte", n: 4 } }, atMost: 0 },
+            then: { kind: "draw", amount: 1 },
+          },
+        },
+      ],
+    });
+  });
+});
+
 describe("energy paid in an amount the player chooses (costEnergyX)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

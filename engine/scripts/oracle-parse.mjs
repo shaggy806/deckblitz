@@ -11651,6 +11651,44 @@ export function parseEffect(text, outer) {
       }
       continue;
     }
+    // "Any number of target opponents each discard a card. For each of those
+    // opponents who didn't discard a card with mana value 4 or greater, draw
+    // a card." (Hollow Marauder): the discards at once, then each target
+    // asked in turn what they discarded this way.
+    const eachDiscards = /^any number of target (players|opponents) each discard a card\.$/i.exec(sentence);
+    const didnt =
+      eachDiscards === null
+        ? null
+        : /^for each of those (?:players|opponents) who didn't discard an? (?:(.+?) )?card(?: with mana value (\d+) or greater)?, draw a card\.$/i.exec(
+            sentences[i + 1] ?? "",
+          );
+    const didntFilter =
+      didnt === null
+        ? null
+        : {
+            ...(didnt[1] === undefined ? {} : (parseTypePhrase(didnt[1], { cards: true }) ?? { unparsed: true })),
+            ...(didnt[2] === undefined ? {} : { manaValue: { op: "gte", n: Number(didnt[2]) } }),
+          };
+    if (eachDiscards !== null && didntFilter !== null && didntFilter.unparsed === undefined && Object.keys(didntFilter).length > 0) {
+      const slot = ctx.target({ kind: "any-number", of: eachDiscards[1].toLowerCase() === "players" ? "player" : "opponent" });
+      for (const effect of [
+        { kind: "for-each-target", from: slot, simultaneous: true, effect: { kind: "discard", target: slot, amount: 1 } },
+        {
+          kind: "for-each-target",
+          from: slot,
+          effect: {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "discarded", who: { target: slot }, filter: didntFilter, atMost: 0 },
+            then: { kind: "draw", amount: 1 },
+          },
+        },
+      ]) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
+      skip = 1;
+      continue;
+    }
     // A removal of counters and "that many" after it (`countersRemovedAt`).
     const removedThen = countersRemovedAt(sentences, i, ctx);
     if (removedThen !== null) {

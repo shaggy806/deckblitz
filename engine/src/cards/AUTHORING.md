@@ -4290,7 +4290,12 @@ members two ways:
   cards" mills them at once — Riverchurn Monument). A group of *players* goes
   in APNAP order whatever order they were targeted in (rule 101.4), so "any
   number of target players each … sacrifice a creature" (Priest of Forgotten
-  Gods) asks the active player first, then the rest in turn order.
+  Gods) asks the active player first, then the rest in turn order. "For each
+  of those opponents who didn't discard a card with mana value 4 or greater,
+  draw a card" (Hollow Marauder) is a second `for-each-target` over the same
+  group after the simultaneous discards, its `conditional` asking `{ kind:
+  "this-way", what: "discarded", who: { target: 0 }, filter, atMost: 0 }` of
+  each member (an empty hand counts; an illegal member is skipped, rule 608.2b).
   `turnOrder: true` is a ruling that says the targets are "handled one at a
   time in turn order", players and permanents together, "you choose the
   relative order of targets within that group" (Soulfire Eruption, Kaboom!):

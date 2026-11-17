@@ -2816,7 +2816,8 @@
   "effect:remove-counters-from-among",
   "effect:remove-counters-from-among",
   "effect:discard-unless-sacrifice-per-card",
-  "effect:attach-to-chosen-creature"
+  "effect:attach-to-chosen-creature",
+  "effect:count-target-players-not-done-this-way"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
