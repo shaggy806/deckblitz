@@ -5313,6 +5313,16 @@ export function parseSentence(sentence, ctx) {
     return host === undefined ? null : { kind: "create-token", token, count: 1, attachedTo: host };
   }
   const KWS = `${KW}(?:(?:, | and |, and )${KW})*`;
+  // "Create two 1/1 white Soldier creature tokens that are tapped and
+  // attacking" (Hero of Bladehold, Undercellar Sweep): each attacking what
+  // its controller chooses (rule 508.4).
+  if ((m = re(`create ${N} ([^"“]+?) tokens? (?:that are|that's) tapped and attacking`).exec(s)) && !/ or | and an? |\btokens? and | with /.test(m[2])) {
+    const name = ctx.tokenFor?.(m[2]) ?? null;
+    const count = amount(m[1]);
+    if (name !== null && typeof count === "number") {
+      return { kind: "create-token", token: name, count, tapped: true, attacking: "choose" };
+    }
+  }
   if ((m = re(`create ${N} (tapped )?([^"“]+?) tokens?(?: with (${KWS}))?`).exec(s)) && !/ or | and an? |\btokens? and /.test(m[3])) {
     // "An X/X green Treefolk": the X the spell was cast with, as its base
     // P/T. An X defined some other way ("where X is …") isn't read.
@@ -20149,6 +20159,14 @@ const INTERVENING_IFS = {
   "if tribute wasn't paid,": { kind: "tribute-not-paid" },
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
   "if you have the initiative,": { kind: "initiative", who: "you" },
+  // Undercellar Sweep: a player a creature of yours is attacking (rule 506.3).
+  "if you or a player you're attacking has the initiative,": {
+    kind: "any",
+    of: [
+      { kind: "initiative", who: "you" },
+      { kind: "of-player", player: "an-attacked-player", condition: { kind: "initiative", who: "you" } },
+    ],
+  },
   // Still exiled with it, not ever (Smirking Spelljacker, Evercoat Ursine).
   "if a card is exiled with it,": { kind: "exiled-with-source", atLeast: 1, now: true },
   "if there are cards exiled with it,": { kind: "exiled-with-source", atLeast: 1, now: true },

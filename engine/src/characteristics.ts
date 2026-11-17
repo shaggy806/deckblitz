@@ -1097,6 +1097,24 @@ function evalStaticCondition(
             evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: p }),
         );
       }
+      if (condition.player === "an-attacked-player") {
+        // A player a creature of yours is attacking now — the player, not
+        // their planeswalker or battle (rule 506.3) — so an intervening if
+        // asks it again as it resolves (603.4).
+        const attacked = new Set<string>();
+        for (const id of state.zones.shared.battlefield) {
+          const object = state.objects[id];
+          if (object !== undefined && object.controller === you && object.attacking !== null && object.attacking !== undefined) {
+            attacked.add(object.attacking);
+          }
+        }
+        return state.turnOrder.some(
+          (p) =>
+            attacked.has(p) &&
+            state.players[p]?.hasLost !== true &&
+            evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: p }),
+        );
+      }
       const player = conditionPlayerOf(state, condition.player, opts, source);
       return (
         player !== undefined && evalStaticCondition(state, registry, source, condition.condition, { ...opts, asPlayer: player })

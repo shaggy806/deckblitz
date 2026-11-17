@@ -7069,7 +7069,12 @@ clause (section 9):
   802.2a), which a static can read: Bouncing Beebles' "can't be blocked as
   long as defending player controls an artifact" (nobody while it isn't
   attacking; "can't attack unless defending player …" is
-  `unlessDefender` on a `cant-attack` record instead, asked per attack declared). Works
+  `unlessDefender` on a `cant-attack` record instead, asked per attack declared),
+  or `"an-attacked-player"` — at least one player a creature you control is
+  attacking now, the player and not their planeswalker (rule 506.3):
+  Undercellar Sweep's "if you or **a player you're attacking** has the
+  initiative" is an `any` of `{ kind: "initiative", who: "you" }` and this over
+  it. Works
   as an intervening-if (asked with the trigger's "that player" as it
   triggers and resolves), a `conditional`, an activation condition; on a
   static, only `"active-player"`, `"defending-player"` and `"host-controller"`

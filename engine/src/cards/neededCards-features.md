@@ -363,6 +363,13 @@ Abolish-style discard already fit) and paid where the own one is, as the cost is
 read at the offer as the face cast (a split card's half) — so a colorless spell has none. Only the mana cost is
 replaced: additional costs are still paid (its ruling). Dream Halls (rank 12409, `anyPlayer`).
 `test/alt-cost-grant-discard.test.ts`.
+### "If you or a player you're attacking has the initiative" — built 2026-11-17
+
+The key `condition:attacked-player-has-initiative`: `of-player`'s `player: "an-attacked-player"` — the inner
+condition holds for at least one player a creature you control is attacking now (the player, not their planeswalker
+or battle — rules 506.3, 508.3a), so an intervening if asks it again as it resolves (603.4). Undercellar Sweep
+(rank 13100) is it `any` with the plain `initiative`. `test/attacked-player-condition.test.ts`.
+
 ### "If defending player controls no …" — found built 2026-11-17
 
 The key `condition:filter-controlled-by-trigger-player` needed no engine code: an attack trigger's `of-player` over

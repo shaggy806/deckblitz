@@ -21811,6 +21811,29 @@ describe("an attack trigger's intervening if on the players attacked", () => {
       condition: { kind: "not", of: { kind: "controls", filter: { subtype: "Glimmer", type: "creature" }, atLeast: 1 } },
     });
   });
+
+  it("reads Undercellar Sweep's \"if you or a player you're attacking has the initiative\"", () => {
+    const face = parseFace(
+      {
+        name: "Undercellar Sweep",
+        type_line: "Enchantment",
+        oracle_text:
+          "When this enchantment enters, you take the initiative.\nWhenever you attack, if you or a player you're attacking has the initiative, you create two 1/1 white Soldier creature tokens that are tapped and attacking.",
+      },
+      { tokenFor: () => "Soldier Token" },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[1].condition).toEqual({
+      kind: "any",
+      of: [
+        { kind: "initiative", who: "you" },
+        { kind: "of-player", player: "an-attacked-player", condition: { kind: "initiative", who: "you" } },
+      ],
+    });
+    // "You create … tokens that are tapped and attacking": each attacking
+    // what its controller chooses (rule 508.4).
+    expect(face.triggered[1].effect).toEqual({ kind: "create-token", token: "Soldier Token", count: 2, tapped: true, attacking: "choose" });
+  });
 });
 
 describe("transfigure", () => {

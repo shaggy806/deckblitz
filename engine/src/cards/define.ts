@@ -1367,8 +1367,11 @@ export type StaticCondition =
        * — Guul Draz Specter's "as long as an opponent has no cards in hand".
        * `"a-player"`: for at least one player still in the game, you included
        * — Thoughtbound Primoc's "if a player controls more Wizards than each
-       * other player". */
-      readonly player: ConditionPlayer | "an-opponent" | "a-player";
+       * other player". `"an-attacked-player"`: for at least one player a
+       * creature **you** control is attacking now — the player, not their
+       * planeswalker or battle (rules 506.3, 508.3a) — Undercellar Sweep's
+       * "if you or **a player you're attacking** has the initiative". */
+      readonly player: ConditionPlayer | "an-opponent" | "a-player" | "an-attacked-player";
       readonly condition: StaticCondition;
     }
   /**
