@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-981 already implemented / 19 missing
+982 already implemented / 18 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -864,7 +864,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  858  Erinis, Gloom Stalker                           3574 decks  {2}{G}           Legendary Creature — Halfling Ranger
 [x]  859  Volo, Itinerant Scholar                         3563 decks  {2}{U}           Legendary Creature — Human Wizard
 [x]  860  Samwise Gamgee                                  3555 decks  {G}{W}           Legendary Creature — Halfling Peasant
-[ ]  861  Ranar the Ever-Watchful                         3553 decks  {2}{W}{U}        Legendary Creature — Spirit Warrior
+[x]  861  Ranar the Ever-Watchful                         3553 decks  {2}{W}{U}        Legendary Creature — Spirit Warrior
 [x]  862  Valgavoth, Terror Eater                         3549 decks  {6}{B}{B}{B}     Legendary Creature — Elder Demon
 [x]  863  Ghired, Conclave Exile                          3546 decks  {2}{R}{G}{W}     Legendary Creature — Human Shaman
 [x]  864  Katara, Waterbending Master                     3539 decks  {1}{U}           Legendary Creature — Human Warrior Ally
