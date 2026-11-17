@@ -5,6 +5,7 @@
     "effect:control-while-player-is-monarch",
     "static:prohibit-per-opponent-comparison",
     "filter:counts-as-named-card",
+    "effect:reveal-until-each-opponent-linked",
     "mechanic:transfigure",
     "static:split-second-if-kicked",
     "zone:graveyard-commander-trigger",

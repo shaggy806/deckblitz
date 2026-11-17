@@ -21708,3 +21708,43 @@ describe("transfigure", () => {
     expect(face.activated).toEqual([transfigure("{1}{B}{B}")]);
   });
 });
+
+describe("each opponent exiles until a nonland card, linked", () => {
+  it("reads Krang & Shredder whole: the exile linked for its disappear's cast", () => {
+    const face = parseFace(
+      {
+        name: "Krang & Shredder",
+        type_line: "Legendary Creature — Utrom Human Ninja",
+        oracle_text:
+          "Whenever Krang & Shredder enter or attack, each opponent exiles cards from the top of their library until they exile a nonland card.\nDisappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, you may cast a card exiled with Krang & Shredder without paying its mana cost.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    const exile = {
+      kind: "for-each-player",
+      who: "each-opponent",
+      effect: { kind: "reveal-until", whose: "that-player", filter: { notTypes: ["land"] }, exile: true, rest: "stay", linked: true },
+    };
+    expect(face.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { on: "attacks", who: "self" },
+      { on: "step-begins", step: "end", who: "you" },
+    ]);
+    expect(face.triggered[0].effect).toEqual(exile);
+    expect(face.triggered[1].effect).toEqual(exile);
+    expect(face.triggered[2].effect).toEqual({ kind: "cast-now", from: "exiled-with-source", free: true });
+  });
+
+  it("leaves the exile unlinked on a card that never names it again", () => {
+    const face = parseFace(
+      {
+        name: "Test Seer",
+        type_line: "Creature — Human",
+        oracle_text: "When this creature enters, each opponent exiles cards from the top of their library until they exile a nonland card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.triggered[0].effect.effect.linked).toBeUndefined();
+  });
+});

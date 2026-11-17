@@ -1985,7 +1985,8 @@ export function parseTrigger(clause) {
     return [{ on: "becomes-tapped", who: "you-control", filter, batched: true }];
   }
   if (/^When(?:ever)? ~ enters$/.test(c)) return self("enters-battlefield");
-  if (/^When(?:ever)? ~ enters or attacks$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
+  // "Enter or attack" for a pair's name (Krang & Shredder, Aang and Katara).
+  if (/^When(?:ever)? ~ (?:enters or attacks|enter or attack)$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
   // Two abilities, one for each event (Gulping Scraptrap, Chaos Defiler).
   if (/^When ~ enters or dies$/.test(c)) return [...self("enters-battlefield"), ...self("dies")];
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");
@@ -4861,8 +4862,24 @@ export function parseSentence(sentence, ctx) {
   }
   // "You may cast the exiled card without paying its mana cost" (Smirking
   // Spelljacker), alone.
-  if (re(`you may cast the exiled card without paying its mana cost`).test(s)) {
+  // "You may cast a card exiled with ~ without paying its mana cost" (Krang &
+  // Shredder's disappear): one of them, chosen as it resolves.
+  if (re(`you may cast (?:the exiled card|a card exiled with ~) without paying its mana cost`).test(s)) {
     return { kind: "cast-now", from: "exiled-with-source", free: true };
+  }
+  // "Each opponent exiles cards from the top of their library until they
+  // exile a nonland card" (Krang & Shredder; Fevered Suspicion's first
+  // sentence): each library in turn order, every card staying in exile —
+  // linked to ~ when the card says "exiled with" elsewhere (`linkedExile`).
+  const eachExiles = re(`each opponent exiles cards from the top of their library until they exile an? (.+?) card`).exec(s);
+  if (eachExiles !== null) {
+    const filter = parseTypePhrase(eachExiles[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      kind: "for-each-player",
+      who: "each-opponent",
+      effect: { kind: "reveal-until", whose: "that-player", filter, exile: true, rest: "stay" },
+    };
   }
   // "Draw a card, then discard a card. … You may cast the discarded card
   // without paying its mana cost" (Malcolm, Alluring Scoundrel): the card this
@@ -19443,6 +19460,8 @@ function parseFaceAsWritten(face, ctx = {}) {
       if (Array.isArray(node)) node.forEach(linkedExile);
       else if (node !== null && typeof node === "object") {
         if (node.kind === "exile-from-library" || node.kind === "impulse-exile") node.linked = true;
+        // An exile until a card is found (Krang & Shredder), every card linked.
+        if (node.kind === "reveal-until" && node.exile === true) node.linked = true;
         // (An exile "until ~ leaves the battlefield" is linked that way already.)
         if (node.kind === "exile" && typeof node.target === "number" && node.untilSourceLeaves !== true) node.linked = true;
         if (node.kind === "look-and-choose" && node.destination === "exile" && node.zone === "hand" && node.unlinked === true) delete node.unlinked;
