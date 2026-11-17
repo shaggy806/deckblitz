@@ -572,6 +572,12 @@ permanent chosen as the filtering source entered (`chosenPermanent`, in its stin
 and a `grantsActivatedOf` (`zone: "battlefield"`, `except: "loyalty"`) can name it. Scheming Fence (rank 12877).
 `test/chosen-permanent-abilities.test.ts`.
 
+### Entering as an enchantment in addition, with a counter — found built 2026-11-17
+
+The key `replacement:enters-with-additional-card-type` needed no engine code: `look-and-choose`'s `enterAs: {
+addTypes }` beside `withCounters` (rule 614.12 — constellation sees it). Arbiter of the Ideal (rank 12939).
+`test/inspired-enters-as-enchantment.test.ts`.
+
 ### A face-down pile from a graveyard, or with its source, manifested — built 2026-11-17
 
 The keys `effect:manifest-from-exile` and `effect:manifest-exiled-pile`, one general change to
