@@ -1094,8 +1094,11 @@ function runDamageSteps(
     if (step.ifAtMost !== undefined && each() > step.ifAtMost) continue;
     if (step.ifAtLeast !== undefined && each() < step.ifAtLeast) continue;
     // A prevention shield isn't used up by damage that can't be prevented
-    // (615.12).
-    if (step.spends !== undefined && !(unpreventable && step.kind.startsWith("prevent"))) spends.push(step.spends);
+    // (615.12), or by any it prevents none of — "prevent half, rounded
+    // down" of 1 damage (609.7b): those three spend below, as they prevent.
+    const partial = step.kind === "prevent-n" || step.kind === "prevent-all-but" || step.kind === "prevent-half";
+    if (step.spends !== undefined && !partial && !(unpreventable && step.kind.startsWith("prevent"))) spends.push(step.spends);
+    const before = total;
     switch (step.kind) {
       case "times":
         total *= step.by;
@@ -1169,6 +1172,7 @@ function runDamageSteps(
         break;
       }
     }
+    if (partial && step.spends !== undefined && total < before) spends.push(step.spends);
   }
   return { dealt: Math.max(0, total), ...rest() };
 }
@@ -45571,7 +45575,12 @@ controlledBy,
             ? { zoneChangeCount: this.state.objects[protect.object]?.zoneChangeCount ?? 0 }
             : {};
         this.state.activeReplacements.push({
-          replacement: preventionRecord(),
+          // Dark Sphere's "prevent half that damage, rounded down": the
+          // shield's step is a `prevent-half` (`damageSteps`).
+          replacement:
+            more?.half !== undefined
+              ? { event: "would-deal-damage", instead: { prevent: { half: more.half } } }
+              : preventionRecord(),
           owner: controller,
           source,
           expires: "end-of-turn",

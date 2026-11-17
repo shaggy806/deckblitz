@@ -7411,7 +7411,8 @@ export function parseSentence(sentence, ctx) {
   }
   // A source of your choice (rule 609.7): the Circles of Protection.
   // "Of the chosen color" (Story Circle): the colour chosen as it entered.
-  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice( of the chosen color)? would deal damage to you this turn, prevent that damage`).exec(s))) {
+  // "Prevent half that damage, rounded down" (Dark Sphere): `half`.
+  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice( of the chosen color)? would deal damage to you this turn, prevent (?:that damage|half that damage, rounded (down|up))`).exec(s))) {
     if (m[1] !== undefined && m[2] !== undefined) return null;
     return {
       kind: "prevent-damage-from-chosen-source",
@@ -7419,6 +7420,7 @@ export function parseSentence(sentence, ctx) {
       ...(m[2] !== undefined ? { filter: { ofChosenColor: true } } : {}),
       to: "you",
       amount: "next-time",
+      ...(m[3] !== undefined ? { half: m[3].toLowerCase() } : {}),
     };
   }
   // "… would deal damage this turn, prevent that damage": any recipient

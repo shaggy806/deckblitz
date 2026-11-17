@@ -10306,6 +10306,14 @@ export type EffectSpec =
        * used up (Kor Chant; Prahv's and Burrenton Forge-Tender's are `to:
        * "any"`, Auriok Replica's `to: "you"`). */
       readonly amount: "next-time" | number | "all";
+      /** Half of that damage instead of all of it, rounded as it says: "the
+       * next time a source of your choice would deal damage to you this
+       * turn, prevent half that damage, rounded down" (Dark Sphere) is `{
+       * to: "you", amount: "next-time", half: "down" }`. Two such shields
+       * apply one after the other, each to what's left (the ruling: 5 → 3 →
+       * 2). One that would prevent none of it (1 damage, rounded down) isn't
+       * used up (rule 609.7b). Not with a number `amount` or a redirection. */
+      readonly half?: "up" | "down";
       /** Only the damage prevented from a source that matches this, as the
        * damage would be dealt, gains life: "If damage from a black source is
        * prevented this way, you gain that much life" (Shadowbane); needs
@@ -14667,6 +14675,8 @@ export interface EffectApi {
       readonly thenTargets?: readonly (TargetRef | null)[];
       readonly redirectToSource?: "itself" | "controller";
       readonly gainLifeFrom?: CardFilter;
+      /** Only half of the damage, rounded this way (Dark Sphere). */
+      readonly half?: "up" | "down";
     },
   ): void;
   /** `target`'s text has every `change.from` replaced by `change.to` — see
@@ -23344,6 +23354,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ...(spec.ownTargets !== undefined ? { thenTargets: spec.ownTargets } : {}),
               ...(spec.redirectToSource !== undefined ? { redirectToSource: spec.redirectToSource } : {}),
               ...(spec.gainLifeFrom !== undefined ? { gainLifeFrom: spec.gainLifeFrom } : {}),
+              ...(spec.half !== undefined ? { half: spec.half } : {}),
             },
           );
         }

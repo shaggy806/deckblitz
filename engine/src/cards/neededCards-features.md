@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A chosen source's next damage, half of it prevented — built 2026-11-17
+
+The key `effect:chosen-source-shield-prevent-half`: `prevent-damage-from-chosen-source`'s `half: "up" | "down"`
+makes the shield's replacement `{ prevent: { half } }` (`Game`'s `preventDamageFrom`), which `damageSteps`
+already ran as a `prevent-half` step, spent as a "next time" shield. Two apply one after the other, each to
+what's left (the ruling: 5 → 3 → 2). Fixed with it: a partial prevention step (`prevent-n`, `prevent-all-but`,
+`prevent-half`) that prevents none of the damage no longer uses its shield up (rule 609.7b). Dark Sphere (rank
+11702). `test/chosen-source-prevent-half.test.ts`.
+
 ### Counters a card enters with if it matches a filter there — built 2026-11-17
 
 The key `effect:enters-with-counters-if-x-cost`, as the general test it is: an `EnterCounter`'s `ifMatches`
