@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Pay any amount of life" by you alone — built 2026-11-17
+
+The key `effect:pay-any-amount-of-life`: `players-pay-any-amount`'s `who: "you"`, the effect's controller alone asked
+how much (a `choose-number` up to what they can pay, rule 119.4; 0 among the amounts, 107.1c and 119.4b), `then`
+reading it as `"x"`. Plunge into Darkness (rank 12697) is authored on it, with entwine and its other mode, Renounce's
+"sacrifice any number" for creatures. Not scaffolded: the scaffolder reads neither mode's sentences (nor Renounce's,
+nor "look at the top N cards … put one into your hand and the rest …"). `test/pay-any-amount-of-life.test.ts`.
+
 ### The power of the creature chosen or the card revealed as a cost — found built 2026-11-17
 
 The key `effect:beheld-object-amount` needed no engine code: "choose a creature you control or reveal a creature card

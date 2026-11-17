@@ -3261,7 +3261,7 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   that does the same thing per value with no state is still fine as a
   resolution-time `modal` (Addle, By Invitation Only). The scaffolder reads
   Persecute's, Sudden Demise's, Blood Oath's and Ichormoon Gauntlet's lines.
-- **`players-pay-any-amount { resource, startingWithYou?, untilNoOnePays?, then?, each? }`** —
+- **`players-pay-any-amount { resource, who?, startingWithYou?, untilNoOnePays?, then?, each? }`** —
   "each player may pay any amount of mana" as it resolves, one at a time, each
   knowing what those before them paid, from the active player, or from you with
   `startingWithYou` (join forces). Mana is a `choose-modes` with an `{X}`, life
@@ -3272,6 +3272,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   them: Liege of the Hollows' `create-token { count: "x", who: "that-player" }`.
   `untilNoOnePays` is Plague of Vermin's "repeat this process until no one pays
   life". It asks every player: a `may` with `cost: "{X}"` is one player's.
+  `who: "you"` asks the effect's controller alone — "**pay any amount of life**,
+  then look at that many cards from the top of your library" (Plunge into
+  Darkness: `then` a `look-and-choose { count: "x" }`), 0 among the amounts
+  (rules 107.1c, 119.4b), up to what they can pay (119.4).
 - **`bid-life { who, opening, then?, ifYouWin? }`** — "each player may bid life":
   you open at `opening` (a number, or `"any"` for Pain's Reward's "a bid of any
   number"), then in turn order each other bidder may top it, a yes or no and then

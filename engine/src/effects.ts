@@ -10866,9 +10866,15 @@ export type EffectSpec =
        * `untilNoOnePays`: "Repeat this process until no one pays life" — a
        * whole round in which nobody pays ends it, and one player declining
        * doesn't (Plague of Vermin's ruling).
+       *
+       * `who: "you"`: the effect's controller alone — Plunge into Darkness's
+       * "pay any amount of life, then look at that many cards from the top
+       * of your library", 0 among the amounts (rules 107.1c, 119.4b), so not
+       * asked at all with nothing to pay.
        */
       readonly kind: "players-pay-any-amount";
       readonly resource: "mana" | "life";
+      readonly who?: "you";
       readonly startingWithYou?: true;
       readonly untilNoOnePays?: true;
       readonly then?: EffectSpec;
@@ -16147,6 +16153,7 @@ function applyPlayersPayAnyAmount(
   ctx: ResolutionContext,
 ): void {
   const round = (): readonly PlayerId[] => {
+    if (spec.who === "you") return [ctx.controller];
     const players = ctx.playersInScope("each-player");
     return spec.startingWithYou === true ? eachPlayerMayAsks("each-player", ctx, true) : ctx.apnap(players);
   };
