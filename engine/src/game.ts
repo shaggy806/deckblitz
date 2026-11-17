@@ -604,6 +604,7 @@ import type {
   TokenLink,
   ParkedSteps,
   PendingEntry,
+  SearchSplit,
   PendingTrigger,
   PhasedOutStatus,
   TriggerOrderEntry,
@@ -12522,6 +12523,7 @@ export class Game {
     if (
       awaiting.order !== true &&
       awaiting.searchRest === undefined &&
+      awaiting.searchNext === undefined &&
       awaiting.discardToLibrary === undefined &&
       !(awaiting.max === 0 && chosen.length === 0)
     ) {
@@ -12563,7 +12565,13 @@ export class Game {
     this.applyChooseFromZoneThen(awaiting, player, chosen);
     // A search whose finds go card by card: where each goes is asked now.
     if (awaiting.searchInstead !== undefined) {
-      this.beginSearchInstead(awaiting, player, chosen);
+      this.beginSearchInstead(awaiting, player, chosen, awaiting.searchInstead);
+      return;
+    }
+    // A split with another after it: that one is over the finds this one
+    // left, still in the library.
+    if (awaiting.searchNext !== undefined) {
+      this.beginSearchInstead(awaiting, player, leftover, awaiting.searchNext);
       return;
     }
     // "Then put any number of land cards from among them onto the
@@ -12615,17 +12623,40 @@ export class Game {
    * going to the search's own — and then the shuffle (`searchRest`). Asked
    * only when it is a choice; every qualifying find of an `"all"`, a single
    * find of a `"one"` (rule 609.3) or nothing qualifying moves at once.
+   * A split with another after it (`next`) moves its picks alone, and the
+   * next is asked over the finds it left (`searchNext`); the last carries
+   * the rest and the shuffle.
    */
   private beginSearchInstead(
     awaiting: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
     player: PlayerId,
     finds: readonly ObjectId[],
+    instead: SearchSplit,
   ): void {
-    const instead = awaiting.searchInstead;
-    if (instead === undefined) return;
+    const after: SearchSplit | undefined =
+      instead.next === undefined
+        ? undefined
+        : {
+            ...instead.next,
+            to: instead.to,
+            ...(instead.toTapped === true ? { toTapped: true as const } : {}),
+            shuffle: instead.shuffle,
+            x: instead.x,
+          };
+    // "Under an opponent's control" (Verdant Mastery): which opponent is the
+    // effect's controller's choice as this instruction is followed (its
+    // ruling), asked first, and not with one; with none left in the game the
+    // instruction can't be followed, and nothing is put (rule 609.3).
+    const anOpponentOf = typeof instead.under === "object" ? instead.under.anOpponentOf : undefined;
+    const opponents =
+      anOpponentOf === undefined
+        ? []
+        : this.state.turnOrder.filter((p) => p !== anOpponentOf && this.state.players[p]?.hasLost !== true);
     const filter = instead.filter;
     const eligible =
-      filter === undefined
+      anOpponentOf !== undefined && opponents.length === 0
+        ? []
+        : filter === undefined
         ? [...finds]
         : finds.filter((id) =>
             // "If the revealed card is the chosen type" (Celestial Reunion):
@@ -12643,7 +12674,6 @@ export class Game {
         : exactly !== undefined
           ? [Math.min(exactly, eligible.length), Math.min(exactly, eligible.length)]
           : [0, eligible.length];
-    const under = instead.under !== undefined && instead.under !== player ? instead.under : undefined;
     const source = awaiting.thenSource === undefined ? undefined : this.state.objects[awaiting.thenSource];
     // Another player choosing: the cards are still the searcher's.
     const whose = instead.chooser === undefined ? "your" : "their";
@@ -12655,42 +12685,76 @@ export class Game {
           : to === "library"
             ? `back into ${whose} library, shuffled`
             : `onto the battlefield${tapped ? " tapped" : ""}${controller === null ? "" : ` under ${controller} control`}`;
-    const picked = where(
-      instead.destination,
-      instead.enterTapped === true,
-      under === undefined ? null : `${source === undefined ? "its controller's" : `${nameOf(source)}'s controller's`}`,
-    );
-    const rest = where(instead.to, instead.toTapped === true, under === undefined ? null : "your");
-    const prompt =
-      instead.pick === "one"
-        ? `Choose one to put ${picked} — the ${finds.length === 2 ? "other goes" : "rest go"} ${rest}`
-        : exactly !== undefined
-          ? `Choose ${exactly} to put ${picked} — the ${finds.length === exactly + 1 ? "other goes" : "rest go"} ${rest}`
-        : eligible.length === 1 && finds.length === 1
-          ? `Choose it to put it ${picked}, or nothing to put it ${rest}`
-          : `Choose any of them to put ${picked} — the rest go ${rest}`;
-    const next: Extract<AwaitingDecision, { kind: "choose-from-zone" }> = {
-      kind: "choose-from-zone",
-      player,
-      ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
-      ids: [...finds],
-      eligible,
-      min,
-      max,
-      // Back into the library the search shuffles once the rest have moved.
-      destination: instead.destination === "library" ? "library-bottom" : instead.destination,
-      leftover: "stay",
-      ...(instead.enterTapped === true && instead.destination === "battlefield" ? { enterTapped: true } : {}),
-      ...(under !== undefined && instead.destination === "battlefield" ? { enterUnder: under } : {}),
-      ...(awaiting.enterWithCounters !== undefined ? { enterWithCounters: awaiting.enterWithCounters } : {}),
-      ...(awaiting.thenSource !== undefined ? { thenSource: awaiting.thenSource } : {}),
-      searchRest: {
-        destination: instead.to,
-        ...(instead.toTapped === true ? { enterTapped: true as const } : {}),
-        shuffle: instead.shuffle,
-      },
-      prompt,
+    const named = (p: PlayerId): string => `${p.charAt(0).toUpperCase()}${p.slice(1)}`;
+    const decisionUnder = (under: PlayerId | undefined): Extract<AwaitingDecision, { kind: "choose-from-zone" }> => {
+      const picked = where(
+        instead.destination,
+        instead.enterTapped === true,
+        under === undefined
+          ? null
+          : anOpponentOf !== undefined
+            ? `${named(under)}'s`
+            : `${source === undefined ? "its controller's" : `${nameOf(source)}'s controller's`}`,
+      );
+      const rest = where(instead.to, instead.toTapped === true, under === undefined ? null : "your");
+      const count = instead.pick === "one" ? "one" : exactly !== undefined ? `${exactly}` : undefined;
+      const prompt =
+        after !== undefined
+          ? count !== undefined
+            ? `Choose ${count} to put ${picked}`
+            : `Choose any of them to put ${picked}`
+          : count !== undefined
+            ? `Choose ${count} to put ${picked} — the ${finds.length === (exactly ?? 1) + 1 ? "other goes" : "rest go"} ${rest}`
+            : eligible.length === 1 && finds.length === 1
+              ? `Choose it to put it ${picked}, or nothing to put it ${rest}`
+              : `Choose any of them to put ${picked} — the rest go ${rest}`;
+      return {
+        kind: "choose-from-zone",
+        player,
+        ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
+        ids: [...finds],
+        eligible,
+        min,
+        max,
+        // Back into the library the search shuffles once the rest have moved.
+        destination: instead.destination === "library" ? "library-bottom" : instead.destination,
+        leftover: "stay",
+        ...(instead.enterTapped === true && instead.destination === "battlefield" ? { enterTapped: true } : {}),
+        ...(under !== undefined && instead.destination === "battlefield" ? { enterUnder: under } : {}),
+        ...(awaiting.enterWithCounters !== undefined ? { enterWithCounters: awaiting.enterWithCounters } : {}),
+        ...(awaiting.thenSource !== undefined ? { thenSource: awaiting.thenSource } : {}),
+        ...(after !== undefined
+          ? { searchNext: after }
+          : {
+              searchRest: {
+                destination: instead.to,
+                ...(instead.toTapped === true ? { enterTapped: true as const } : {}),
+                shuffle: instead.shuffle,
+              },
+            }),
+        prompt,
+      };
     };
+    if (anOpponentOf !== undefined && opponents.length > 1 && eligible.length > 0) {
+      // Which opponent first, then which find (`offerZoneChoice` carries a
+      // forced one out at once).
+      this.makeResolutionContext(awaiting.thenSource ?? asObjectId("choose-from-zone-source"), anOpponentOf, [], 0).chooseModes(
+        1,
+        1,
+        opponents.map((opponent) => ({
+          text: `Choose ${named(opponent)}`,
+          effect: { kind: "about-player", player: opponent, effect: { kind: "offer-zone-choice", decision: decisionUnder(opponent) } },
+        })),
+      );
+      return;
+    }
+    const under =
+      anOpponentOf !== undefined
+        ? opponents[0]
+        : typeof instead.under === "string" && instead.under !== player
+          ? instead.under
+          : undefined;
+    const next = decisionUnder(under);
     if (min === max && min === eligible.length) {
       this.finishZoneChoice({ kind: "zone-choice", awaiting: next, player, chosen: eligible });
       return;
@@ -45983,6 +46047,17 @@ controlledBy,
         );
       },
       offerZoneChoice: (decision) => {
+        // A search's split under the opponent just chosen, with nothing to
+        // choose between (one find, "put one of them"): carried out at once,
+        // as `beginSearchInstead` does a forced split.
+        if (
+          (decision.searchRest !== undefined || decision.searchNext !== undefined) &&
+          decision.min === decision.max &&
+          decision.max === decision.eligible.length
+        ) {
+          this.finishZoneChoice({ kind: "zone-choice", awaiting: decision, player: decision.player, chosen: decision.eligible });
+          return;
+        }
         this.state.awaiting = decision;
       },
       lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked, needsMin, attachTo, mayPlay, together, split, more) => {

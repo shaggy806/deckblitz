@@ -4148,12 +4148,13 @@ export type AwaitingDecision =
        * destination (`searchRest` on it). `to`/`toTapped`: where the others
        * go, the search's own destination; `shuffle`: whose library to
        * shuffle once they've moved (none for a graveyard alone). */
-      readonly searchInstead?: ResolvedSearchInstead & {
-        readonly to: "battlefield" | "hand" | "graveyard";
-        readonly toTapped?: true;
-        readonly shuffle: PlayerId | null;
-        readonly x: number;
-      };
+      readonly searchInstead?: SearchSplit;
+      /** A split of a search's finds that has another after it (a list
+       * `instead`, Verdant Mastery): this choice's picks move alone, as their
+       * own instruction, and every other card of `ids` — still in the
+       * library — goes to the next split's choice, which `searchRest` the
+       * last one carries. */
+      readonly searchNext?: SearchSplit;
       /** That second choice: the cards picked go to `destination`, every
        * other card of `ids` to `searchRest.destination` (entering tapped
        * with `enterTapped`, under their owner's control), and then
@@ -5704,6 +5705,18 @@ export type SuspendedResolution =
         readonly manaColors?: readonly ManaType[];
       };
     };
+
+/** A library search's finds going card by card (`search-library`'s
+ * `instead`), as a `choose-from-zone` carries it: the split, and `to`/
+ * `toTapped` — where the finds no split takes go, the search's own
+ * destination — `shuffle` — whose library to shuffle once they've all moved
+ * (none for a graveyard alone) — and the search's X. */
+export type SearchSplit = ResolvedSearchInstead & {
+  readonly to: "battlefield" | "hand" | "graveyard";
+  readonly toTapped?: true;
+  readonly shuffle: PlayerId | null;
+  readonly x: number;
+};
 
 /**
  * A permanent part of the way onto the battlefield, stopped to make an "as

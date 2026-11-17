@@ -218,7 +218,22 @@ export interface SearchMore {
  *   go.
  * - `under: "you"`: those picked enter under the **effect's controller's**
  *   control while the rest enter under the searcher's (Rootweaver Druid's
- *   opponent searching, in an `each-player-may`'s `ifDid`).
+ *   opponent searching, in an `each-player-may`'s `ifDid`). `"an-opponent"`:
+ *   under the control of an opponent of the effect's controller, which one
+ *   their choice as this instruction is followed, the finds in view (Verdant
+ *   Mastery's "put one of them onto the battlefield tapped under an
+ *   opponent's control" — its ruling: "you choose which opponent … as the
+ *   spell resolves"); not asked with one opponent.
+ *
+ * A **list** of them is several splits made one after another, each its own
+ * instruction over the finds the ones before it left, and the last one's
+ * other finds going to the search's `destination` with its picks: Verdant
+ * Mastery's "Put one of them onto the battlefield tapped under an opponent's
+ * control if the {3}{G} cost was paid. Put two of them onto the battlefield
+ * tapped under your control and the rest into your hand" — the first split
+ * moves its card, then the second its two with the rest. A split whose
+ * `condition` doesn't hold is skipped. The library is shuffled once, after
+ * the last.
  *
  * Not combined with the search's `then`, `restDestination`,
  * `all`, `attachedToSource` or a library-top / exile destination.
@@ -230,16 +245,20 @@ export interface SearchInstead {
   readonly condition?: StaticCondition;
   readonly pick: "all" | "any" | "one" | { readonly exactly: number };
   readonly chooser?: ChooserRef;
-  readonly under?: "you";
+  readonly under?: "you" | "an-opponent";
 }
-/** A {@link SearchInstead} as `beginLibrarySearch` takes it. */
+/** A {@link SearchInstead} as `beginLibrarySearch` takes it. `under`'s
+ * `anOpponentOf` is `"an-opponent"`, the effect's controller named; `next`
+ * is the split made after this one, over the finds it leaves (a list's next
+ * member whose condition held). */
 export interface ResolvedSearchInstead {
   readonly destination: "battlefield" | "hand" | "graveyard" | "library";
   readonly enterTapped?: true;
   readonly filter?: CardFilter;
   readonly pick: "all" | "any" | "one" | { readonly exactly: number };
   readonly chooser?: PlayerId | "an-opponent";
-  readonly under?: PlayerId;
+  readonly under?: PlayerId | { readonly anOpponentOf: PlayerId };
+  readonly next?: ResolvedSearchInstead;
 }
 /**
  * What a `search-library`'s finds must be *together* — see its `together`.
@@ -11775,8 +11794,9 @@ export type EffectSpec =
       readonly attachedToSource?: boolean;
       /** Each find sent to a destination of its own — by a condition on the
        * card or the game, by the searcher's choice, or a split with the rest
-       * going elsewhere or to another controller. See {@link SearchInstead}. */
-      readonly instead?: SearchInstead;
+       * going elsewhere or to another controller — or a list of such
+       * splits made one after another. See {@link SearchInstead}. */
+      readonly instead?: SearchInstead | readonly SearchInstead[];
       /** Battlefield-bound finds enter **with these counters** on them (rule
        * 122.6): Neoform's "with an additional +1/+1 counter on it", Vision
        * Quest's "X additional +1/+1 counters" (a live amount), Magmatic
@@ -17723,6 +17743,40 @@ function scopedController(
  * (rule 303.4), the filter its host is chosen from as it enters, `null` for
  * nothing there (it has left — rule 400.7 — or the slot was found illegal,
  * 608.2b), or `undefined` for no `attachedTo` at all. */
+/** A `search-library`'s `instead` as the search takes it: each split's
+ * `condition` read now — nothing between the search and the put could change
+ * it ("…if you control a land named Wastes", "if the {3}{G} cost was paid"),
+ * and one that doesn't hold is skipped, every find it would have taken left
+ * to the next split or the search's `destination` — and the splits of a list
+ * chained through `next`, in order. */
+function resolvedSearchInstead(
+  instead: SearchInstead | readonly SearchInstead[] | undefined,
+  ctx: ResolutionContext,
+): ResolvedSearchInstead | undefined {
+  if (instead === undefined) return undefined;
+  const splits: readonly SearchInstead[] = Array.isArray(instead) ? instead : [instead as SearchInstead];
+  let next: ResolvedSearchInstead | undefined;
+  for (const split of [...splits].reverse()) {
+    if (split.condition !== undefined && !ctx.conditionMet(split.condition)) continue;
+    const chooser =
+      split.chooser === undefined || split.chooser === "an-opponent" ? split.chooser : chooserPlayer(split.chooser, ctx);
+    next = {
+      destination: split.destination,
+      pick: split.pick,
+      ...(split.enterTapped === true ? { enterTapped: true as const } : {}),
+      ...(split.filter !== undefined ? { filter: split.filter } : {}),
+      ...(split.under === "you"
+        ? { under: ctx.controller }
+        : split.under === "an-opponent"
+          ? { under: { anOpponentOf: ctx.controller } }
+          : {}),
+      ...(chooser === undefined ? {} : { chooser }),
+      ...(next !== undefined ? { next } : {}),
+    };
+  }
+  return next;
+}
+
 /** A choice's `together` as it's raised: a mana value cap's amount read now. */
 function resolvedTogether(
   together: SearchTogether | undefined,
@@ -24369,23 +24423,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           // "…if you control a land named Wastes": read now — nothing between
           // the search and the put could change it. Not holding, every find
           // goes to `destination`.
-          ...(spec.instead !== undefined &&
-          (spec.instead.condition === undefined || ctx.conditionMet(spec.instead.condition))
-            ? {
-                instead: {
-                  destination: spec.instead.destination,
-                  pick: spec.instead.pick,
-                  ...(spec.instead.enterTapped === true ? { enterTapped: true as const } : {}),
-                  ...(spec.instead.filter !== undefined ? { filter: spec.instead.filter } : {}),
-                  ...(spec.instead.under === "you" ? { under: ctx.controller } : {}),
-                  ...((who) => (who === undefined ? {} : { chooser: who }))(
-                    spec.instead.chooser === undefined || spec.instead.chooser === "an-opponent"
-                      ? spec.instead.chooser
-                      : chooserPlayer(spec.instead.chooser, ctx),
-                  ),
-                },
-              }
-            : {}),
+          ...((instead) => (instead === undefined ? {} : { instead }))(resolvedSearchInstead(spec.instead, ctx)),
           ...(spec.withCounters !== undefined
             ? { withCounters: { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx) } }
             : {}),
