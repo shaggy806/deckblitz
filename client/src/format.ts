@@ -411,6 +411,12 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} puts their companion, ${name(event.object)}, into their hand`
     case 'card-cycled':
       return `${who(event.player)} cycles ${name(event.object)}`
+    // A Room's door (rule 709.5h), as it entered with the door cast, by its
+    // unlock cost or by an effect; a Class's level (716.2a).
+    case 'door-unlocked':
+      return `${who(event.player)} unlocks the ${event.door} door of ${name(event.object)}${event.fully ? ', fully unlocking it' : ''}`
+    case 'class-level-gained':
+      return `${name(event.object)} becomes level ${event.level}`
     case 'escape-cost-paid':
       return `${name(event.object)} escapes (exiling ${event.exiled.length} cards)`
     case 'spell-fizzled':

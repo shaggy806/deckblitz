@@ -20,6 +20,17 @@ describe('describeEvent', () => {
     ).toBe('Toby restarts the game with Karn Liberated: a new game begins, Toby first')
   })
 
+  it("says a Room's door unlocked and a Class's level in words, not as the event's JSON", () => {
+    const say = (fields: Record<string, unknown>) => describeEvent(event(fields), nameOf, seats)
+    expect(say({ type: 'door-unlocked', object: 'o1', door: 'right', player: p1, fully: true })).toBe(
+      'Toby unlocks the right door of card:o1, fully unlocking it',
+    )
+    expect(say({ type: 'door-unlocked', object: 'o1', door: 'left', player: p2, fully: false })).toBe(
+      'P2 unlocks the left door of card:o1',
+    )
+    expect(say({ type: 'class-level-gained', object: 'o1', level: 2 })).toBe('card:o1 becomes level 2')
+  })
+
   it('says who gained control of a spell', () => {
     expect(
       describeEvent(event({ type: 'spell-control-changed', object: 'o1', controller: p1, previousController: p2 }), nameOf, seats),
