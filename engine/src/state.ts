@@ -1159,6 +1159,10 @@ export interface GameObject {
    * are checked again (608.2b), and "that player" of modes they chose.
    * Cleared on any zone change. */
   otherChooser?: PlayerId;
+  /** On an ability on the stack: the player it named as it was activated,
+   * not targeted (`ActivatedAbility.namesPlayer` — Lodestone Bauble's "a
+   * player's graveyard"), its `"that-player"` as it resolves. */
+  namedPlayer?: PlayerId;
   /** How a spell's divided amount was split among its group's targets as it
    * was cast (rule 601.2d — `CardDefinition.divided`), one per target in
    * order. Cleared on any zone change. */
@@ -3336,6 +3340,11 @@ export interface GiftAsk {
    * 5 life" as a cost (Roar of Jukai's splice — `KickerAlsoCost`). That much
    * for whoever is picked. */
   readonly gainLife?: number;
+  /** Not a gift but the same question, "which player?" — any player, the
+   * activator too: the player an ability names as it's activated
+   * (`ActivatedAbility.namesPlayer`), `spell` then that ability on the stack,
+   * kept as its `namedPlayer`. */
+  readonly names?: true;
 }
 
 /**

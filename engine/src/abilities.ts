@@ -778,6 +778,19 @@ export interface ActivatedAbility {
    * Test Pilot). See `TriggeredAbility.targetsAtRandom`. Nothing is offered to
    * choose: the action names no targets, and they're picked as it's activated. */
   readonly targetsAtRandom?: true;
+  /**
+   * "Put up to four target basic land cards from **a player's** graveyard on
+   * top of their library … **That player** draws a card" (Lodestone Bauble):
+   * a player is chosen as it's activated, not targeted — chosen even with no
+   * targets (its ruling). With a target in the group at slot `group` (whose
+   * members share a player, `sameController`), it's that target's player;
+   * with none, the activator is asked before anyone gets priority (a
+   * `choose-modes` of `about-player` modes, every player in the game — the
+   * gift's question, `GiftAsk.names`). Kept on the ability object
+   * (`GameObject.namedPlayer`), copied with it, and read as `"that-player"`
+   * as it resolves (a delayed ability it makes keeps it).
+   */
+  readonly namesPlayer?: { readonly group: number };
   readonly effect: EffectSpec | null;
   readonly resolve: SpellResolver | null;
   readonly text: string;

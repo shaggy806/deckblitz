@@ -8795,3 +8795,13 @@ Each board's die comes up 4.
 ### Escape Detection: freerunning by returning a blue creature
 - **Do:** Attack Bob with Agate-Blade Assassin and let it deal damage (Bob's Grizzly Bears is tapped). In your postcombat main cast Escape Detection by its freerunning offer, targeting Bob's Grizzly Bears; when asked, pick Phantom Warrior to return.
 - **Expect:** Before combat it can't be cast (you have no lands for {1}{U}{U}). After the damage the freerunning offer costs no mana; you choose between Merfolk Looter and Phantom Warrior, Phantom Warrior goes to your hand, Grizzly Bears to Bob's, and you draw a card.
+
+## A player chosen, not targeted, as an ability is activated (2026-11-17)
+
+### Lodestone Bauble: with no targets, a player is still chosen
+- **Do:** Activate Lodestone Bauble without picking any land, then choose Bob.
+- **Expect:** After the targets, a question asks which player, offering Alice and Bob. Once it resolves nothing moves; at the start of Bob's next upkeep Bob draws a card.
+
+### Lodestone Bauble: in a 4-player game, the lands go back on top of their owner's library
+- **Do:** In this 4-player game, activate Lodestone Bauble targeting both lands in Carol's graveyard.
+- **Expect:** No question about a player. Both lands go on top of Carol's library; at the start of Bob's upkeep Carol draws one of them.

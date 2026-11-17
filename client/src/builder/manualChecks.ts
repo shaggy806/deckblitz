@@ -13318,4 +13318,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [{ name: 'Grizzly Bears', tapped: true }] },
     }),
   ),
+  preset(
+    'Lodestone Bauble: with no targets, a player is still chosen',
+    board({
+      you: { bf: ['Lodestone Bauble', 'Wastes'] },
+      opp: { gy: ['Forest', 'Island'] },
+    }),
+  ),
+  preset(
+    "Lodestone Bauble: in a 4-player game, the lands go back on top of their owner's library",
+    board({
+      you: { bf: ['Lodestone Bauble', 'Wastes'] },
+      opp: [{}, { gy: ['Forest', 'Island'] }, {}],
+      fill: 1,
+    }),
+  ),
 ]

@@ -2927,7 +2927,8 @@
   "effect:create-tokens-distributed-among-opponents",
   "effect:create-tokens-distributed-among-opponents",
   "effect:distribute-counters-among-source-and-chosen",
-  "effect:extra-turn-to-greatest-exiled-repeat-ties"
+  "effect:extra-turn-to-greatest-exiled-repeat-ties",
+  "decision:untargeted-player-chosen-with-targets"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

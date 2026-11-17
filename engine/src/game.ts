@@ -25057,7 +25057,12 @@ export class Game {
       minModes: 1,
       maxModes: 1,
       modes: candidates.map((to) => ({
-        text: ask.gainLife !== undefined ? `Have ${to} gain ${ask.gainLife} life` : `Promise the gift to ${to}`,
+        text:
+          ask.names === true
+            ? `Choose ${to}`
+            : ask.gainLife !== undefined
+              ? `Have ${to} gain ${ask.gainLife} life`
+              : `Promise the gift to ${to}`,
         effect: { kind: "about-player", player: to, effect: { kind: "sequence", effects: [] } },
       })),
       x: 0,
@@ -25069,7 +25074,11 @@ export class Game {
   /** `to` is the opponent asked for: the gift is promised to them, or they
    * gain the life that's the cost (`GiftAsk.gainLife`). */
   private answerGiftAsk(ask: GiftAsk, to: PlayerId): void {
-    if (ask.gainLife !== undefined) this.changeLife(to, ask.gainLife);
+    if (ask.names === true) {
+      // The player an ability names as it's activated (`namesPlayer`).
+      const ability = this.state.objects[ask.spell];
+      if (ability !== undefined && ability.zone === "stack") ability.namedPlayer = to;
+    } else if (ask.gainLife !== undefined) this.changeLife(to, ask.gainLife);
     else this.promiseGift(ask.spell, ask.player, to);
   }
 
@@ -28442,6 +28451,18 @@ export class Game {
     if (ability.crew === true) this.state.objects[abilityId].crewedWith = [...tapped];
     // The opponent who chose some of its targets (rules 602.2b, 601.2c).
     if (this.otherChoice?.for === sourceId) this.state.objects[abilityId].otherChooser = this.otherChoice.chooser;
+    // "From a player's graveyard … that player" (Lodestone Bauble): a player
+    // chosen, not targeted, as it's activated — its group's targets' own,
+    // or with none, asked before anyone gets priority (its ruling).
+    if (ability.namesPlayer !== undefined) {
+      const member = chosen.slice(ability.namesPlayer.group).find((ref) => ref?.kind === "object");
+      const owner = member?.kind === "object" ? this.state.objects[member.object]?.owner : undefined;
+      if (owner !== undefined) this.state.objects[abilityId].namedPlayer = owner;
+      else {
+        const candidates = this.state.turnOrder.filter((p) => this.state.players[p]?.hasLost === false);
+        (this.state.pendingGifts ??= []).push({ spell: abilityId, player, candidates, priorityTo: player, names: true });
+      }
+    }
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
     // Forge Anew's "the first equip ability you activate", Advancing the
@@ -34163,7 +34184,10 @@ export class Game {
         if (ability.resolve !== null) {
           ability.resolve(context);
         } else if (ability.effect !== null) {
-          applyEffectSpec(ability.effect, context);
+          // The player it named as it was activated is its "that player"
+          // (`ActivatedAbility.namesPlayer`).
+          const named = object.namedPlayer;
+          applyEffectSpec(ability.effect, named !== undefined ? context.aboutPlayer(named) : context);
         }
       });
     } finally {
