@@ -1107,10 +1107,14 @@ export interface CardFilter {
    * filter doesn't count itself); Bride's Gown's "an Equipment named Groom's
    * Finery is attached to a creature you control" a `controls` of a creature
    * with this. Read as it is now: one that has left has nothing attached.
+   * `atMost` caps the count: "as long as this creature is enchanted by
+   * **exactly one Aura**" (Timber Paladin) is `{ filter: { subtype: "Aura" },
+   * atLeast: 1, atMost: 1 }`.
    */
   readonly attachments?: {
     readonly filter?: CardFilter;
     readonly atLeast?: number;
+    readonly atMost?: number;
     readonly otherThanSource?: true;
   };
   /**
@@ -3167,7 +3171,7 @@ export function matchesFilter(
   }
   if (filter.attachments !== undefined) {
     if (live === undefined || live.zone !== "battlefield") return false;
-    const { filter: of, atLeast = 1, otherThanSource } = filter.attachments;
+    const { filter: of, atLeast = 1, atMost, otherThanSource } = filter.attachments;
     const { snapshot: _snapshot, lastKnown: _lastKnown, layered: _layered, ...attachedCtx } = ctx;
     let attached = 0;
     for (const other of state.zones.shared.battlefield) {
@@ -3175,7 +3179,7 @@ export function matchesFilter(
       if (otherThanSource === true && other === ctx.source) continue;
       if (of === undefined || matchesFilter(state, registry, other, of, attachedCtx)) attached += 1;
     }
-    if (attached < atLeast) return false;
+    if (attached < atLeast || (atMost !== undefined && attached > atMost)) return false;
   }
   // "Attached to it / that creature" (an effect's bound target slot) and
   // "attached to you" (rule 303.4): on the battlefield, as it is now.

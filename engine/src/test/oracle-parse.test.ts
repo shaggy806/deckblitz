@@ -19792,6 +19792,33 @@ describe("keywords of the exiled cards used to craft it", () => {
     expect((face.static[0].sharesKeywords as { keywords: string[] }).keywords).toHaveLength(12);
   });
 
+  it("reads Timber Paladin's, by how many Auras enchant it", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Artifact Creature — Knight",
+      oracle_text:
+        "As long as this creature is enchanted by exactly one Aura, it has base power and toughness 3/3.\nAs long as this creature is enchanted by exactly two Auras, it has base power and toughness 5/5 and vigilance.\nAs long as this creature is enchanted by three or more Auras, it has base power and toughness 10/10, vigilance, and trample.",
+    } as never) as unknown as { static: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    const aura = { subtype: "Aura" };
+    expect(face.static).toEqual([
+      expect.objectContaining({
+        condition: { kind: "source", filter: { attachments: { filter: aura, atLeast: 1, atMost: 1 } } },
+        setBasePt: { power: 3, toughness: 3 },
+      }),
+      expect.objectContaining({
+        condition: { kind: "source", filter: { attachments: { filter: aura, atLeast: 2, atMost: 2 } } },
+        setBasePt: { power: 5, toughness: 5 },
+        grantKeywords: ["vigilance"],
+      }),
+      expect.objectContaining({
+        condition: { kind: "source", filter: { attachments: { filter: aura, atLeast: 3 } } },
+        setBasePt: { power: 10, toughness: 10 },
+        grantKeywords: ["vigilance", "trample"],
+      }),
+    ]);
+  });
+
   it("reads Cairn Wanderer's, from the creature cards in every graveyard", () => {
     const face = parseFace({
       name: "Test Card",

@@ -24471,6 +24471,24 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "As long as this creature is enchanted by exactly two Auras, it has base
+  // power and toughness 5/5 and vigilance" / "three or more Auras, … 10/10,
+  // vigilance, and trample" (Timber Paladin): a `source` condition counting
+  // the Auras attached to it, `atMost` for "exactly".
+  if ((m = new RegExp(`^As long as (?:~|this creature) is enchanted by (exactly )?(one|two|three|four|five) (?:or more )?Auras?, it has base power and toughness (\\d+)/(\\d+)(?: and ${KW}|, ${KW}, and ${KW})?\\.$`, "i").exec(line))) {
+    const n = ["one", "two", "three", "four", "five"].indexOf(m[2].toLowerCase()) + 1;
+    const orMore = / or more /i.test(line);
+    if (m[1] !== undefined || orMore) {
+      const kws = [m[5], m[6], m[7]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+      return {
+        affects: { scope: "self" },
+        condition: { kind: "source", filter: { attachments: { filter: { subtype: "Aura" }, atLeast: n, ...(orMore ? {} : { atMost: n }) } } },
+        setBasePt: { power: Number(m[3]), toughness: Number(m[4]) },
+        ...(kws.length ? { grantKeywords: kws } : {}),
+        text,
+      };
+    }
+  }
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
     return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
