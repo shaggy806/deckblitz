@@ -12238,13 +12238,16 @@ export class Game {
       // hidden until they're exiled — the players after know how many
       // (rule 101.4a), and which permanents and graveyard cards (101.4b).
       const hidden = awaiting.acrossZones === true ? chosen.filter((id) => this.state.objects[id]?.zone === "hand") : [];
-      this.emit({
-        type: "cards-chosen-from-zone",
-        player,
-        objects: chosen.filter((id) => !hidden.includes(id)),
-        ...(awaiting.acrossZones === true ? { chosenOnly: true as const } : {}),
-        ...(hidden.length > 0 ? { fromHand: hidden.length } : {}),
-      });
+      // A vote's pick (Custodi Squire) is told as the vote it casts.
+      if (awaiting.voteOf === undefined) {
+        this.emit({
+          type: "cards-chosen-from-zone",
+          player,
+          objects: chosen.filter((id) => !hidden.includes(id)),
+          ...(awaiting.acrossZones === true ? { chosenOnly: true as const } : {}),
+          ...(hidden.length > 0 ? { fromHand: hidden.length } : {}),
+        });
+      }
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
@@ -44823,6 +44826,10 @@ controlledBy,
           // A vote is for one permanent: one token of a stack, singled out.
           const one = this.splitOneFromStack(choice.permanent);
           cast = { object: one, zoneChangeCount: this.state.objects[one]?.zoneChangeCount ?? 0 };
+        } else if ("card" in choice) {
+          const card = this.state.objects[choice.card];
+          if (card?.zone !== "graveyard") return;
+          cast = { object: choice.card, zoneChangeCount: card.zoneChangeCount ?? 0 };
         } else {
           cast = choice;
         }
@@ -44848,7 +44855,9 @@ controlledBy,
       additionalVotes: (player) => this.additionalVotes(player),
       votedPermanentHere: (object, zoneChangeCount) => {
         const it = this.state.objects[object];
-        return it?.zone === "battlefield" && (it.zoneChangeCount ?? 0) === zoneChangeCount;
+        // Any move since makes it a new object (rule 400.7): a permanent
+        // still on the battlefield, or a card voted for still in its graveyard.
+        return (it?.zone === "battlefield" || it?.zone === "graveyard") && (it.zoneChangeCount ?? 0) === zoneChangeCount;
       },
       revealUntilCount: (owner, filter, count, exile, measure) => {
         const library = this.state.zones.perPlayer[owner]?.library ?? [];
@@ -47973,6 +47982,36 @@ controlledBy,
         prompt: secret ? "Secretly choose a number" : "Choose a number",
         then: { kind: "cast-vote", voter: player, choice: "number" },
         resume: { controller, targets: [], x, triggerValue: 0, targetZones: [], refs: {} },
+      };
+      return;
+    }
+    if ("graveyardCard" in what) {
+      // A card in the effect's controller's graveyard (Custodi Squire), picked
+      // from it there; the pick is kept for the vote, which casts it.
+      const graveyard = this.state.zones.perPlayer[controller]?.graveyard ?? [];
+      const eligible = graveyard.filter((id) =>
+        matchesFilter(this.state, this.registry, id, what.graveyardCard, { you: controller, source }),
+      );
+      if (eligible.length === 0) return;
+      const whose = player === controller ? "your" : `${controller.charAt(0).toUpperCase()}${controller.slice(1)}'s`;
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player,
+        ids: [...graveyard],
+        eligible,
+        min: extra === true ? 0 : 1,
+        max: 1,
+        destination: "stay",
+        leftover: "stay",
+        prompt:
+          extra !== false
+            ? extra === true
+              ? "Vote an additional time (or choose none)"
+              : "Vote an additional time"
+            : `${verb} a card in ${whose} graveyard`,
+        keepChoice: true,
+        voteOf: source,
+        ...(player !== controller ? { forPlayer: controller } : {}),
       };
       return;
     }

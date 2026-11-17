@@ -3095,8 +3095,12 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `upTo: 1`; with `choose`, `count: 3` is "chooses three", one vote a permanent;
   `keep: true` says what's chosen is spared, for how it's asked: "each player
   chooses a creature they control. Destroy the rest" (Divine Reckoning) is this
-  and a `destroy-all` of `{ type: "creature", notThisWay: "chosen" }`) or
-  `{ player: "any" | "another" }`. A player with a "while voting, you may
+  and a `destroy-all` of `{ type: "creature", notThisWay: "chosen" }`),
+  `{ graveyardCard: <filter read from your side> }` (a card in your graveyard,
+  picked from it: Custodi Squire's "votes for an artifact, creature, or
+  enchantment card in your graveyard", then a `for-each-voted` of `which:
+  "most"` returning each to your hand — a card that left the graveyard since
+  isn't found) or `{ player: "any" | "another" }`. A player with a "while voting, you may
   vote an additional time" (`static: [{ votesAdditionalTime: true }]` — Tivit)
   may cast one more vote per such permanent (701.38d); one with a "while
   voting, you get an additional vote" (`getsAdditionalVote: true` — Brago's

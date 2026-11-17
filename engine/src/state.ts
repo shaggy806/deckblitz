@@ -3936,6 +3936,12 @@ export type AwaitingDecision =
        * `GameState.keptByChoice` for the resolving effect, which resumes
        * once it's answered — as a `choose-permanents`' `keepChoice` is. */
       readonly keepChoice?: true;
+      /** With `keepChoice`: the pick is a vote (rule 701.38) in the vote the
+       * resolving `source` holds (`GameState.voting`'s key) — Custodi Squire's
+       * "votes for an artifact, creature, or enchantment card in your
+       * graveyard" — so a player who chooses how others vote answers it
+       * (`player-control.ts`'s `isVoteQuestion`). */
+      readonly voteOf?: ObjectId;
       /** Cards that go with the chosen ones whatever is picked — a
        * `search-library`'s `all`: the matches in a graveyard, a public zone,
        * which must be found (rule 701.23b), while the hidden zones' are

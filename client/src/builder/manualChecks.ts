@@ -13258,4 +13258,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { gy: ['Grizzly Bears', 'Serra Angel'], human: true },
     }),
   ),
+  // --- A vote for a card in your graveyard (2026-11-17) ----------------------------
+  preset(
+    'Custodi Squire: each player votes for a card in your graveyard, a tie returns both',
+    board({
+      you: { bf: ['Plains*5'], hand: ['Custodi Squire'], gy: ['Sol Ring', 'Grizzly Bears', 'Lightning Bolt'] },
+      opp: { gy: ['Hill Giant'], human: true },
+    }),
+  ),
+  preset(
+    'Custodi Squire: in a 4-player game, the most votes wins',
+    board({
+      you: { bf: ['Plains*5'], hand: ['Custodi Squire'], gy: ['Sol Ring', 'Grizzly Bears'] },
+      opp: [{ human: true }, { human: true }, { human: true }],
+    }),
+  ),
 ]

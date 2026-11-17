@@ -9127,6 +9127,38 @@ function chosenAndTheRest(text) {
       ],
     };
   }
+  // A vote for a card in your graveyard (Custodi Squire): "Starting with you,
+  // each player votes for an artifact, creature, or enchantment card in your
+  // graveyard. Return each card with the most votes or tied for most votes to
+  // your hand."
+  if (
+    (m =
+      /^starting with you, each player votes for an? (.+?) card in your graveyard\. Return each card with the most votes or tied for most votes to your hand\.$/i.exec(
+        text,
+      ))
+  ) {
+    // "an artifact, creature, or enchantment": a list of card types, any one.
+    const listed = /^([a-z]+(?:, [a-z]+)+), or ([a-z]+)$/i.exec(m[1]);
+    const types = listed === null ? [] : [...listed[1].split(", "), listed[2]].map((t) => t.toLowerCase());
+    const cardTypes = ["artifact", "battle", "creature", "enchantment", "instant", "land", "planeswalker", "sorcery"];
+    const voted =
+      listed !== null && types.every((t) => cardTypes.includes(t))
+        ? { typesAnyOf: types }
+        : parseTypePhrase(m[1], { cards: true });
+    if (voted === null) return null;
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", for: { graveyardCard: voted } },
+        {
+          kind: "for-each-voted",
+          which: "most",
+          simultaneous: true,
+          effect: { kind: "return-to-hand", target: 0, from: "graveyard" },
+        },
+      ],
+    };
+  }
   return null;
 }
 

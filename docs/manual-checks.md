@@ -8759,3 +8759,13 @@ Each board's die comes up 4.
 ### Boneyard Parley: Bob's creature cards come back under your control
 - **Do:** Cast Boneyard Parley on all three creature cards and confirm. As Bob, move Serra Angel to Pile 1 and confirm. Back as Alice, click "Choose pile" under Pile 1.
 - **Expect:** The three are exiled before Bob separates them ("the chosen pile goes onto the battlefield; the other goes into the graveyard"). Serra Angel enters under your control; Hill Giant goes to your graveyard and Grizzly Bears to Bob's.
+
+## A vote for a card in your graveyard (2026-11-17)
+
+### Custodi Squire: each player votes for a card in your graveyard, a tie returns both
+- **Do:** Cast Custodi Squire. In the popup pick Sol Ring and confirm; as Bob, pick Grizzly Bears and confirm.
+- **Expect:** Your popup is "Vote for a card in your graveyard", Bob's "Vote for a card in Alice's graveyard": Sol Ring and Grizzly Bears can be picked, Lightning Bolt can't, and Bob's Hill Giant isn't shown. The History says "Custodi Squire — Alice votes for Sol Ring", then Bob's. Tied, both return to your hand.
+
+### Custodi Squire: in a 4-player game, the most votes wins
+- **Do:** Cast Custodi Squire. Vote Sol Ring; as Bob vote Grizzly Bears; as Carol and Dave vote Sol Ring.
+- **Expect:** You vote first, then Bob, Carol and Dave in turn. "Custodi Squire — voting done: Alice → Sol Ring, Bob → Grizzly Bears, Carol → Sol Ring, Dave → Sol Ring"; only Sol Ring returns to your hand.

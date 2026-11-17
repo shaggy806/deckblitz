@@ -9539,6 +9539,14 @@ export type EffectSpec =
         /** A player still in the game — `"another"`: other than the voter
          * (Mob Verdict's "votes for another player"). */
         | { readonly player: "any" | "another" }
+        /** A card in the effect's controller's graveyard matching this, read
+         * from their side — "each player votes for an artifact, creature, or
+         * enchantment card **in your graveyard**" (Custodi Squire). Asked as
+         * a `choose-from-zone` of that graveyard; the vote is for the card as
+         * it lies there, which `for-each-voted` acts on only while it's still
+         * there (rule 400.7). A player with nothing to vote for casts none
+         * (rule 701.38a's "must vote" has nothing to vote for). */
+        | { readonly graveyardCard: CardFilter }
         /** A creature type (rule 205.3m) — only with `choose`: Harsh
          * Mercy's "each player chooses a creature type". The type is the
          * vote's `text`; `CHOSEN_THIS_WAY` reads it back. */
@@ -9583,6 +9591,10 @@ export type EffectSpec =
        * picks its result (Illusion of Choice), or one they get (Brago's
        * Representative). */
       readonly toAsk?: readonly { readonly player: PlayerId; readonly extra: boolean | "taken"; readonly about?: PlayerId }[];
+      /** Set by the engine on the copy parked behind a `graveyardCard`
+       * question: the voter whose pick, kept by the `choose-from-zone`, is
+       * cast as their vote as this resumes. */
+      readonly castKept?: PlayerId;
     }
   | {
       /** One vote being cast — the effect of the option a voter picks. Built
@@ -12702,8 +12714,9 @@ export interface EffectApi {
    * vote going on as `take` or `decline` (the Ballot Broker ruling); `false`,
    * asking nothing, when they choose their own. */
   askAdditionalVote(player: PlayerId, take: EffectSpec, decline: EffectSpec): boolean;
-  /** Record `voter`'s vote — a `permanent` being one on the battlefield. */
-  castVote(voter: PlayerId, choice: VoteChoice | { readonly permanent: ObjectId }): void;
+  /** Record `voter`'s vote — a `permanent` being one on the battlefield, a
+   * `card` one in a graveyard. */
+  castVote(voter: PlayerId, choice: VoteChoice | { readonly permanent: ObjectId } | { readonly card: ObjectId }): void;
   /** Every vote is in: reveal them (a secret vote's) and fire "whenever
    * players finish voting". */
   finishVoting(): void;
@@ -12711,8 +12724,8 @@ export interface EffectApi {
    * `votesAdditionalTime` statics they control — and how many they get
    * (`getsAdditionalVote`, cast without being asked whether). */
   additionalVotes(player: PlayerId): { readonly may: number; readonly must: number };
-  /** Whether a permanent voted for is still on the battlefield as the same
-   * object (rule 400.7). */
+  /** Whether a permanent voted for is still on the battlefield, or a card
+   * voted for still in its graveyard, as the same object (rule 400.7). */
   votedPermanentHere(object: ObjectId, zoneChangeCount: number): boolean;
   /** Reveal from the top of `owner`'s library until `count` cards matching
    * `filter` are revealed — or, with `measure`, until their total mana value
@@ -16109,7 +16122,10 @@ function applyRedistributeLifeTotals(
  * additional votes straight after their first (701.38d). The rest is parked
  * as a copy carrying `toAsk` whenever a question waits for its answer.
  */
-function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionContext): void {
+function applyVote(whole: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionContext): void {
+  const { castKept, ...spec } = whole;
+  // A card in a graveyard, picked by a `choose-from-zone`: cast as the vote.
+  if (castKept !== undefined) for (const card of ctx.takeKept()) ctx.castVote(castKept, { card });
   let toAsk = spec.toAsk;
   if (toAsk === undefined && spec.choose === true) {
     // "Each player chooses …": no additional votes — it isn't a vote.
@@ -16163,7 +16179,7 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
     const pendingBefore = ctx.decisionPending();
     ctx.askVote(ask.player, spec, ask.extra, ask.about);
     if (!pendingBefore && ctx.decisionPending()) {
-      ctx.resumeAfterDecisions({ ...spec, toAsk }, parked);
+      ctx.resumeAfterDecisions({ ...spec, toAsk, ...("graveyardCard" in spec.for ? { castKept: ask.player } : {}) }, parked);
       return;
     }
   }

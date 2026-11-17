@@ -17198,6 +17198,23 @@ describe("manifest or cloak with a choosable source, piles in exile, a return fa
     });
   });
 
+  it("reads a vote for a card in your graveyard (Custodi Squire)", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Spirit Cleric",
+      mana_cost: "{4}{W}",
+      oracle_text:
+        "Flying\nWill of the council — When this creature enters, starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. Return each card with the most votes or tied for most votes to your hand.",
+    });
+    expect(parsed.triggered[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "vote", for: { graveyardCard: { typesAnyOf: ["artifact", "creature", "enchantment"] } } },
+        { kind: "for-each-voted", which: "most", simultaneous: true, effect: { kind: "return-to-hand", target: 0, from: "graveyard" } },
+      ],
+    });
+  });
+
   it("reads cards exiled, then separated into piles", () => {
     const ultimatum = read(
       "Sorcery",

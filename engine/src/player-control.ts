@@ -92,9 +92,14 @@ export function isVoteQuestion(state: GameState): boolean {
       ? awaiting.modes.length > 0 && awaiting.modes.every((mode) => mode.effect.kind === "cast-vote")
       : awaiting.kind === "choose-permanents"
         ? awaiting.then?.kind === "cast-vote"
-        : false;
-  if (!castsVote || !("source" in awaiting) || awaiting.source === undefined) return false;
-  const held = state.voting?.[awaiting.source];
+        : awaiting.kind === "choose-from-zone"
+          ? awaiting.voteOf !== undefined
+          : false;
+  // A card picked in a graveyard names its vote's source as `voteOf`.
+  const source =
+    awaiting.kind === "choose-from-zone" ? awaiting.voteOf : "source" in awaiting ? awaiting.source : undefined;
+  if (!castsVote || source === undefined) return false;
+  const held = state.voting?.[source];
   return held !== undefined && held.choice !== true;
 }
 
