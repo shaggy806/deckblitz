@@ -11636,6 +11636,7 @@ import _poolGorehornMinotaurs from "./pool/gorehorn-minotaurs.js";
 import _poolGorehornRaider from "./pool/gorehorn-raider.js";
 import _poolGoremand from "./pool/goremand.js";
 import _poolGoretuskFirebeast from "./pool/goretusk-firebeast.js";
+import _poolGorexTheTombshell from "./pool/gorex-the-tombshell.js";
 import _poolGorgerWurm from "./pool/gorger-wurm.js";
 import _poolGorgingVulture from "./pool/gorging-vulture.js";
 import _poolGorgonFlail from "./pool/gorgon-flail.js";
@@ -12740,6 +12741,7 @@ import _poolHeraldOfHadar from "./pool/herald-of-hadar.js";
 import _poolHeraldOfHoofbeats from "./pool/herald-of-hoofbeats.js";
 import _poolHeraldOfIlharg from "./pool/herald-of-ilharg.js";
 import _poolHeraldOfKozilek from "./pool/herald-of-kozilek.js";
+import _poolHeraldOfLeshrac from "./pool/herald-of-leshrac.js";
 import _poolHeraldOfSecretStreams from "./pool/herald-of-secret-streams.js";
 import _poolHeraldOfSerra from "./pool/herald-of-serra.js";
 import _poolHeraldOfSlaanesh from "./pool/herald-of-slaanesh.js";
@@ -23509,6 +23511,7 @@ import _poolSarulfRealmEater from "./pool/sarulf-realm-eater.js";
 import _poolSarulfsPackmate from "./pool/sarulfs-packmate.js";
 import _poolSaruliCaretaker from "./pool/saruli-caretaker.js";
 import _poolSaruliGatekeepers from "./pool/saruli-gatekeepers.js";
+import _poolSarumanOfManyColors from "./pool/saruman-of-many-colors.js";
 import _poolSarumanTheWhiteHand from "./pool/saruman-the-white-hand.js";
 import _poolSarumanTheWhite from "./pool/saruman-the-white.js";
 import _poolSarumansTrickery from "./pool/sarumans-trickery.js";
@@ -25400,6 +25403,7 @@ import _poolSliverOverlord from "./pool/sliver-overlord.js";
 import _poolSliverQueen from "./pool/sliver-queen.js";
 import _poolSliversmith from "./pool/sliversmith.js";
 import _poolSlobadGoblinTinkerer from "./pool/slobad-goblin-tinkerer.js";
+import _poolSlobadIronGoblin from "./pool/slobad-iron-goblin.js";
 import _poolSlogurkTheOverslime from "./pool/slogurk-the-overslime.js";
 import _poolSloppityBilepiper from "./pool/sloppity-bilepiper.js";
 import _poolSlowMotion from "./pool/slow-motion.js";
@@ -44987,6 +44991,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGorehornRaider,
   _poolGoremand,
   _poolGoretuskFirebeast,
+  _poolGorexTheTombshell,
   _poolGorgerWurm,
   _poolGorgingVulture,
   _poolGorgonFlail,
@@ -46091,6 +46096,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeraldOfHoofbeats,
   _poolHeraldOfIlharg,
   _poolHeraldOfKozilek,
+  _poolHeraldOfLeshrac,
   _poolHeraldOfSecretStreams,
   _poolHeraldOfSerra,
   _poolHeraldOfSlaanesh,
@@ -56860,6 +56866,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSarulfsPackmate,
   _poolSaruliCaretaker,
   _poolSaruliGatekeepers,
+  _poolSarumanOfManyColors,
   _poolSarumanTheWhiteHand,
   _poolSarumanTheWhite,
   _poolSarumansTrickery,
@@ -58751,6 +58758,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSliverQueen,
   _poolSliversmith,
   _poolSlobadGoblinTinkerer,
+  _poolSlobadIronGoblin,
   _poolSlogurkTheOverslime,
   _poolSloppityBilepiper,
   _poolSlowMotion,
@@ -78351,6 +78359,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gorehorn-raider": _poolGorehornRaider,
   "pool/goremand": _poolGoremand,
   "pool/goretusk-firebeast": _poolGoretuskFirebeast,
+  "pool/gorex-the-tombshell": _poolGorexTheTombshell,
   "pool/gorger-wurm": _poolGorgerWurm,
   "pool/gorging-vulture": _poolGorgingVulture,
   "pool/gorgon-flail": _poolGorgonFlail,
@@ -79455,6 +79464,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/herald-of-hoofbeats": _poolHeraldOfHoofbeats,
   "pool/herald-of-ilharg": _poolHeraldOfIlharg,
   "pool/herald-of-kozilek": _poolHeraldOfKozilek,
+  "pool/herald-of-leshrac": _poolHeraldOfLeshrac,
   "pool/herald-of-secret-streams": _poolHeraldOfSecretStreams,
   "pool/herald-of-serra": _poolHeraldOfSerra,
   "pool/herald-of-slaanesh": _poolHeraldOfSlaanesh,
@@ -90224,6 +90234,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sarulfs-packmate": _poolSarulfsPackmate,
   "pool/saruli-caretaker": _poolSaruliCaretaker,
   "pool/saruli-gatekeepers": _poolSaruliGatekeepers,
+  "pool/saruman-of-many-colors": _poolSarumanOfManyColors,
   "pool/saruman-the-white-hand": _poolSarumanTheWhiteHand,
   "pool/saruman-the-white": _poolSarumanTheWhite,
   "pool/sarumans-trickery": _poolSarumansTrickery,
@@ -92115,6 +92126,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sliver-queen": _poolSliverQueen,
   "pool/sliversmith": _poolSliversmith,
   "pool/slobad-goblin-tinkerer": _poolSlobadGoblinTinkerer,
+  "pool/slobad-iron-goblin": _poolSlobadIronGoblin,
   "pool/slogurk-the-overslime": _poolSlogurkTheOverslime,
   "pool/sloppity-bilepiper": _poolSloppityBilepiper,
   "pool/slow-motion": _poolSlowMotion,

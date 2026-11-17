@@ -392,6 +392,7 @@ import _poolGoblinRoughrider from "../pool/goblin-roughrider.js";
 import _poolGoblinSettler from "../pool/goblin-settler.js";
 import _poolGodoBanditWarlord from "../pool/godo-bandit-warlord.js";
 import _poolGoldenHind from "../pool/golden-hind.js";
+import _poolGorexTheTombshell from "../pool/gorex-the-tombshell.js";
 import _poolGorgingVulture from "../pool/gorging-vulture.js";
 import _poolGorillaBerserkers from "../pool/gorilla-berserkers.js";
 import _poolGoringWarplow from "../pool/goring-warplow.js";
@@ -1424,6 +1425,7 @@ const shard: CardShard = {
     _poolGoblinSettler,
     _poolGodoBanditWarlord,
     _poolGoldenHind,
+    _poolGorexTheTombshell,
     _poolGorgingVulture,
     _poolGorillaBerserkers,
     _poolGoringWarplow,

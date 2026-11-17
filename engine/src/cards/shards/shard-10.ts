@@ -406,6 +406,7 @@ import _poolHaveABite from "../pool/have-a-bite.js";
 import _poolHaviTheAllFather from "../pool/havi-the-all-father.js";
 import _poolHazeOfPollen from "../pool/haze-of-pollen.js";
 import _poolHellrider from "../pool/hellrider.js";
+import _poolHeraldOfLeshrac from "../pool/herald-of-leshrac.js";
 import _poolHeraldOfWar from "../pool/herald-of-war.js";
 import _poolHermitDruid from "../pool/hermit-druid.js";
 import _poolHeroOfTheWinds from "../pool/hero-of-the-winds.js";
@@ -1453,6 +1454,7 @@ const shard: CardShard = {
     _poolHaviTheAllFather,
     _poolHazeOfPollen,
     _poolHellrider,
+    _poolHeraldOfLeshrac,
     _poolHeraldOfWar,
     _poolHermitDruid,
     _poolHeroOfTheWinds,
