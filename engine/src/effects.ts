@@ -7406,8 +7406,11 @@ export type EffectSpec =
        * next matching spell the controller casts uses it up, whenever it's
        * cast. A filter's `ofChosenType` is the source's chosen creature type
        * as this resolves, fixed from then on (Progenitor's Icon — nothing
-       * chosen, no effect). */
-      readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true };
+       * chosen, no effect). `play`: "the next creature **card** you **play**"
+       * (Scout's Warning) — a land card it matches may be played as though it
+       * had flash too (rule 702.8a: any time you could cast an instant, still
+       * only on your own turn, 305.3), and playing one uses a `next` up. */
+      readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true; readonly play?: true };
       /** A rule for this effect's duration (rule 611.2c): the controller may
        * play cards from `from` on these terms, those that get there later
        * included (Liliana, Untouched by Death's "you may cast Zombie spells

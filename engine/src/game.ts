@@ -15710,10 +15710,38 @@ export class Game {
   ): string | null {
     return (
       this.whyCannotAct(player) ??
-      this.whyNotSorcerySpeed(player, "play a land") ??
+      this.whyNotLandPlayTime(player, cardId, face) ??
       this.landDropReason(player) ??
       this.landPlayableReason(player, cardId, face, graveyardGrant)
     );
+  }
+
+  /** When `player` may play the land `cardId` as face `face`: in a main phase
+   * of their turn with the stack empty (rules 116.2a, 305.1) — or, played as
+   * though it had flash, any time they could cast an instant (702.8a), still
+   * only on their own turn (305.3): a land card that has flash where it is
+   * (rule 113.6 — Dryad Arbor under Teferi, Mage of Zhalfir's "creature cards
+   * you own that aren't on the battlefield have flash"), or one a `play`
+   * permission reaches ("the next creature card you play this turn can be
+   * played as though it had flash" — Scout's Warning, whose ruling keeps
+   * Dryad Arbor off an opponent's turn). */
+  private whyNotLandPlayTime(player: PlayerId, cardId: ObjectId, face: number): string | null {
+    const why = this.whyNotSorcerySpeed(player, "play a land");
+    if (why === null || this.activePlayer !== player) return why;
+    return this.withFace(cardId, face, () => this.playsLandAsThoughFlash(player, cardId)) ? null : why;
+  }
+
+  /** {@link whyNotLandPlayTime}'s flash: the card's own, or a `play`
+   * permission of `player`'s whose filter it matches (as the face played). */
+  private playsLandAsThoughFlash(player: PlayerId, cardId: ObjectId): boolean {
+    const permits = (this.state.playerEffects ?? []).some(
+      (e) =>
+        e.owner === player &&
+        e.castAsThoughFlash?.play === true &&
+        (e.castAsThoughFlash.filter === undefined ||
+          matchesFilter(this.state, this.registry, cardId, e.castAsThoughFlash.filter, { you: player })),
+    );
+    return permits || hasKeywordOffBattlefield(this.state, this.registry, cardId, "flash");
   }
 
   /** Whether a land may be played from `player`'s graveyard with nothing to
@@ -16179,6 +16207,9 @@ export class Game {
       this.spendPlay(underPermission, undefined, this.faceDef(cardId, face).types);
       playedUnder = this.playedUnder(underPermission);
     }
+    // "The next creature card you play this turn" (Scout's Warning): a land
+    // it reaches is that card, whenever it's played.
+    this.withFace(cardId, face, () => this.spendNextSpellFlash(player, cardId, true));
     this.state.objects[cardId].face = face;
     this.journal({ kind: "land-played", player, object: cardId, from });
     // A land isn't cast, so "if you cast a … spell this way, it gains"
@@ -53544,13 +53575,16 @@ controlledBy,
   /** "The next [filter] spell you cast this turn can be cast as though it had
    * flash" (Quicken): `player` has just cast `cardId` (rule 601.2i), so each
    * of their `next` flash permissions it matches ends — however it was cast,
-   * and all of them at once (Quicken's rulings). */
-  private spendNextSpellFlash(player: PlayerId, cardId: ObjectId): void {
+   * and all of them at once (Quicken's rulings). With `land`, `cardId` is a
+   * land just played, which ends only those that reach a card played
+   * (`play` — Scout's Warning). */
+  private spendNextSpellFlash(player: PlayerId, cardId: ObjectId, land = false): void {
     const effects = this.state.playerEffects;
     if (effects === undefined) return;
     const spent = (e: (typeof effects)[number]): boolean =>
       e.owner === player &&
       e.castAsThoughFlash?.next === true &&
+      (!land || e.castAsThoughFlash.play === true) &&
       (e.castAsThoughFlash.filter === undefined ||
         matchesFilter(this.state, this.registry, cardId, e.castAsThoughFlash.filter, { you: player }));
     if (effects.some(spent)) this.state.playerEffects = effects.filter((e) => !spent(e));

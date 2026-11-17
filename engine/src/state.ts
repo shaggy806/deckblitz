@@ -6205,8 +6205,11 @@ export interface PlayerEffect {
    * matching spell `owner` casts: the first one cast after this effect began
    * ends it, whenever and however it's cast (Quicken's ruling — "even if you
    * cast that sorcery at a time you normally could"), and several such
-   * effects all end on that one spell. See `Game.castsAsThoughFlash`. */
-  readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true };
+   * effects all end on that one spell. See `Game.castsAsThoughFlash`. With
+   * `play`, a land card it matches may be played as though it had flash too,
+   * on `owner`'s own turn, and a `next` ends on that land (Scout's Warning —
+   * `Game.whyNotLandPlayTime`). */
+  readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true; readonly play?: true };
   /** A rule for a while: `owner` may play cards from `from` on these terms
    * (rules 601.3, 611.2c). See `play-permission.ts`. */
   readonly mayPlay?: EffectPlay;

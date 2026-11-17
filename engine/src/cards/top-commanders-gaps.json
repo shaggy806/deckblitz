@@ -6,6 +6,7 @@
     "cost:x-spend-color-restriction",
     "cost:alt-cost-collect-evidence-for-spells",
     "condition:snow-mana-of-spell-colors",
+    "effect:next-creature-spell-flash-this-turn",
     "zone:cast-chosen-card-exiled-this-way",
     "effect:search-instead-rest-to-library",
     "replacement:as-enters-choose-card-type-of-exiled",
