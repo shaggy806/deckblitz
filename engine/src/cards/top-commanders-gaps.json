@@ -2913,7 +2913,8 @@
   "effect:for-each-permanent-coin-flip",
   "effect:copy-exception-set-all-subtypes",
   "effect:copy-exception-toxic",
-  "effect:return-from-graveyard-set-types-food"
+  "effect:return-from-graveyard-set-types-food",
+  "condition:revealed-shares-type-with-spell"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
