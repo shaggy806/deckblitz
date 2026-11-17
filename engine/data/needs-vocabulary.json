@@ -9505,9 +9505,6 @@
   "trigger:exiled-from-hand-or-by-your-effect": {
    "example": "Ranar the Ever-Watchful"
   },
-  "trigger:exiled-creatures-you-control-or-graveyard-cards": {
-   "example": "Kaya, Spirits' Justice: one put-into-exile batch of creatures you control exiled from the battlefield (as they last existed, tokens included) and creature cards exiled from your graveyard"
-  },
   "keyword:hexproof-from-planeswalkers": {
    "example": "Eradicator Valkyrie"
   },

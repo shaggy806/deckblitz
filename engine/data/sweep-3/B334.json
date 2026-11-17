@@ -1078,14 +1078,5 @@
    "test": "engine/src/test/targets-in-targeted-players-graveyard.test.ts"
   }
  ],
- "blocked": [
-  {
-   "name": "Kaya, Spirits' Justice",
-   "needs": [
-    "trigger:exiled-creatures-you-control-or-graveyard-cards"
-   ],
-   "size": "small",
-   "why": "Re-keyed (B334): its trigger counts creatures you control exiled from the battlefield (as they last existed, tokens included) and creature cards exiled from your graveyard as one batch; put-into-exile reads owners (exileArrivals) and noteExileArrival skips tokens. effect:look-and-choose-unlinked-exile, its old key, is built. Handed to the triggers-journal lane late in the run."
-  }
- ]
+ "blocked": []
 }
