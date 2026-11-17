@@ -835,6 +835,7 @@ import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
 import _poolSpinyStarfish from "../pool/spiny-starfish.js";
+import _poolSpiritOfResilience from "../pool/spirit-of-resilience.js";
 import _poolSpite from "../pool/spite.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSpittingSliver from "../pool/spitting-sliver.js";
@@ -1901,6 +1902,7 @@ const shard: CardShard = {
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,
     _poolSpinyStarfish,
+    _poolSpiritOfResilience,
     _poolSpite,
     _poolSpitebellows,
     _poolSpittingSliver,

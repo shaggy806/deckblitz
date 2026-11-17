@@ -4493,6 +4493,7 @@ import _poolChaosphere from "./pool/chaosphere.js";
 import _poolChaoticBacklash from "./pool/chaotic-backlash.js";
 import _poolChaoticGoo from "./pool/chaotic-goo.js";
 import _poolChaoticStrike from "./pool/chaotic-strike.js";
+import _poolChaoticTransformation from "./pool/chaotic-transformation.js";
 import _poolChapelGeist from "./pool/chapel-geist.js";
 import _poolChapelShieldgeist from "./pool/chapel-shieldgeist.js";
 import _poolChaplainOfAlms from "./pool/chaplain-of-alms.js";
@@ -15790,6 +15791,7 @@ import _poolLeoninSurveyor from "./pool/leonin-surveyor.js";
 import _poolLeoninVanguard from "./pool/leonin-vanguard.js";
 import _poolLeoninWarleader from "./pool/leonin-warleader.js";
 import _poolLeopardSpottedJiao from "./pool/leopard-spotted-jiao.js";
+import _poolLeoriSparktouchedHunter from "./pool/leori-sparktouched-hunter.js";
 import _poolLeosGuidance from "./pool/leos-guidance.js";
 import _poolLeovoldEmissaryOfTrest from "./pool/leovold-emissary-of-trest.js";
 import _poolLeovoldsOperative from "./pool/leovolds-operative.js";
@@ -26106,6 +26108,7 @@ import _poolSpiritMantle from "./pool/spirit-mantle.js";
 import _poolSpiritMascot from "./pool/spirit-mascot.js";
 import _poolSpiritMirror from "./pool/spirit-mirror.js";
 import _poolSpiritOfMalevolence from "./pool/spirit-of-malevolence.js";
+import _poolSpiritOfResilience from "./pool/spirit-of-resilience.js";
 import _poolSpiritOfResistance from "./pool/spirit-of-resistance.js";
 import _poolSpiritOfTheAldergard from "./pool/spirit-of-the-aldergard.js";
 import _poolSpiritOfTheHearth from "./pool/spirit-of-the-hearth.js";
@@ -37799,6 +37802,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChaoticBacklash,
   _poolChaoticGoo,
   _poolChaoticStrike,
+  _poolChaoticTransformation,
   _poolChapelGeist,
   _poolChapelShieldgeist,
   _poolChaplainOfAlms,
@@ -49096,6 +49100,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeoninVanguard,
   _poolLeoninWarleader,
   _poolLeopardSpottedJiao,
+  _poolLeoriSparktouchedHunter,
   _poolLeosGuidance,
   _poolLeovoldEmissaryOfTrest,
   _poolLeovoldsOperative,
@@ -59412,6 +59417,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpiritMascot,
   _poolSpiritMirror,
   _poolSpiritOfMalevolence,
+  _poolSpiritOfResilience,
   _poolSpiritOfResistance,
   _poolSpiritOfTheAldergard,
   _poolSpiritOfTheHearth,
@@ -71118,6 +71124,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chaotic-backlash": _poolChaoticBacklash,
   "pool/chaotic-goo": _poolChaoticGoo,
   "pool/chaotic-strike": _poolChaoticStrike,
+  "pool/chaotic-transformation": _poolChaoticTransformation,
   "pool/chapel-geist": _poolChapelGeist,
   "pool/chapel-shieldgeist": _poolChapelShieldgeist,
   "pool/chaplain-of-alms": _poolChaplainOfAlms,
@@ -82415,6 +82422,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leonin-vanguard": _poolLeoninVanguard,
   "pool/leonin-warleader": _poolLeoninWarleader,
   "pool/leopard-spotted-jiao": _poolLeopardSpottedJiao,
+  "pool/leori-sparktouched-hunter": _poolLeoriSparktouchedHunter,
   "pool/leos-guidance": _poolLeosGuidance,
   "pool/leovold-emissary-of-trest": _poolLeovoldEmissaryOfTrest,
   "pool/leovolds-operative": _poolLeovoldsOperative,
@@ -92731,6 +92739,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spirit-mascot": _poolSpiritMascot,
   "pool/spirit-mirror": _poolSpiritMirror,
   "pool/spirit-of-malevolence": _poolSpiritOfMalevolence,
+  "pool/spirit-of-resilience": _poolSpiritOfResilience,
   "pool/spirit-of-resistance": _poolSpiritOfResistance,
   "pool/spirit-of-the-aldergard": _poolSpiritOfTheAldergard,
   "pool/spirit-of-the-hearth": _poolSpiritOfTheHearth,

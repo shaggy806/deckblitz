@@ -150,6 +150,7 @@ import _poolChamberOfManipulation from "../pool/chamber-of-manipulation.js";
 import _poolChandraNalaar from "../pool/chandra-nalaar.js";
 import _poolChaosWand from "../pool/chaos-wand.js";
 import _poolChaosWarp from "../pool/chaos-warp.js";
+import _poolChaoticTransformation from "../pool/chaotic-transformation.js";
 import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
 import _poolCharnelhoardWurm from "../pool/charnelhoard-wurm.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
@@ -496,6 +497,7 @@ import _poolLeafkinAvenger from "../pool/leafkin-avenger.js";
 import _poolLeechingLicid from "../pool/leeching-licid.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
+import _poolLeoriSparktouchedHunter from "../pool/leori-sparktouched-hunter.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
 import _poolLeylineOfSanctity from "../pool/leyline-of-sanctity.js";
 import _poolLeylineOfTheMeek from "../pool/leyline-of-the-meek.js";
@@ -1202,6 +1204,7 @@ const shard: CardShard = {
     _poolChandraNalaar,
     _poolChaosWand,
     _poolChaosWarp,
+    _poolChaoticTransformation,
     _poolCharismaBobblehead,
     _poolCharnelhoardWurm,
     _poolChatterOfTheSquirrel,
@@ -1548,6 +1551,7 @@ const shard: CardShard = {
     _poolLeechingLicid,
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
+    _poolLeoriSparktouchedHunter,
     _poolLeylineInvocation,
     _poolLeylineOfSanctity,
     _poolLeylineOfTheMeek,
