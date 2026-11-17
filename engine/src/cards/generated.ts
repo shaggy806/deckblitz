@@ -3320,6 +3320,7 @@ import _poolBrackishTrudge from "./pool/brackish-trudge.js";
 import _poolBrackwaterElemental from "./pool/brackwater-elemental.js";
 import _poolBradBoimlerEagerEnsign from "./pool/brad-boimler-eager-ensign.js";
 import _poolBragoKingEternal from "./pool/brago-king-eternal.js";
+import _poolBragosRepresentative from "./pool/bragos-representative.js";
 import _poolBraidOfFire from "./pool/braid-of-fire.js";
 import _poolBraidsArisenNightmare from "./pool/braids-arisen-nightmare.js";
 import _poolBraidsCabalMinion from "./pool/braids-cabal-minion.js";
@@ -12061,6 +12062,7 @@ import _poolGrozoth from "./pool/grozoth.js";
 import _poolGrubNotoriousAuntie from "./pool/grub-notorious-auntie.js";
 import _poolGrubStoriedMatriarch from "./pool/grub-storied-matriarch.js";
 import _poolGrubsCommand from "./pool/grubs-command.js";
+import _poolGrudgeKeeper from "./pool/grudge-keeper.js";
 import _poolGruesomeDeformity from "./pool/gruesome-deformity.js";
 import _poolGruesomeDiscovery from "./pool/gruesome-discovery.js";
 import _poolGruesomeEncore from "./pool/gruesome-encore.js";
@@ -22426,6 +22428,7 @@ import _poolReverseDamage from "./pool/reverse-damage.js";
 import _poolReverseEngineer from "./pool/reverse-engineer.js";
 import _poolReversePolarity from "./pool/reverse-polarity.js";
 import _poolReverseThePolarity from "./pool/reverse-the-polarity.js";
+import _poolReverseTheSands from "./pool/reverse-the-sands.js";
 import _poolRevitalize from "./pool/revitalize.js";
 import _poolRevitalizingRepast from "./pool/revitalizing-repast.js";
 import _poolRevivalExperiment from "./pool/revival-experiment.js";
@@ -25017,6 +25020,7 @@ import _poolSinisterPossession from "./pool/sinister-possession.js";
 import _poolSinisterSabotage from "./pool/sinister-sabotage.js";
 import _poolSinisterStarfish from "./pool/sinister-starfish.js";
 import _poolSinisterStrength from "./pool/sinister-strength.js";
+import _poolSinisterWaltz from "./pool/sinister-waltz.js";
 import _poolSinkIntoStupor from "./pool/sink-into-stupor.js";
 import _poolSinkIntoTakenuma from "./pool/sink-into-takenuma.js";
 import _poolSinkholeSurveyor from "./pool/sinkhole-surveyor.js";
@@ -36694,6 +36698,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrackwaterElemental,
   _poolBradBoimlerEagerEnsign,
   _poolBragoKingEternal,
+  _poolBragosRepresentative,
   _poolBraidOfFire,
   _poolBraidsArisenNightmare,
   _poolBraidsCabalMinion,
@@ -45435,6 +45440,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrubNotoriousAuntie,
   _poolGrubStoriedMatriarch,
   _poolGrubsCommand,
+  _poolGrudgeKeeper,
   _poolGruesomeDeformity,
   _poolGruesomeDiscovery,
   _poolGruesomeEncore,
@@ -55800,6 +55806,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReverseEngineer,
   _poolReversePolarity,
   _poolReverseThePolarity,
+  _poolReverseTheSands,
   _poolRevitalize,
   _poolRevitalizingRepast,
   _poolRevivalExperiment,
@@ -58391,6 +58398,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSinisterSabotage,
   _poolSinisterStarfish,
   _poolSinisterStrength,
+  _poolSinisterWaltz,
   _poolSinkIntoStupor,
   _poolSinkIntoTakenuma,
   _poolSinkholeSurveyor,
@@ -70081,6 +70089,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brackwater-elemental": _poolBrackwaterElemental,
   "pool/brad-boimler-eager-ensign": _poolBradBoimlerEagerEnsign,
   "pool/brago-king-eternal": _poolBragoKingEternal,
+  "pool/bragos-representative": _poolBragosRepresentative,
   "pool/braid-of-fire": _poolBraidOfFire,
   "pool/braids-arisen-nightmare": _poolBraidsArisenNightmare,
   "pool/braids-cabal-minion": _poolBraidsCabalMinion,
@@ -78822,6 +78831,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grub-notorious-auntie": _poolGrubNotoriousAuntie,
   "pool/grub-storied-matriarch": _poolGrubStoriedMatriarch,
   "pool/grubs-command": _poolGrubsCommand,
+  "pool/grudge-keeper": _poolGrudgeKeeper,
   "pool/gruesome-deformity": _poolGruesomeDeformity,
   "pool/gruesome-discovery": _poolGruesomeDiscovery,
   "pool/gruesome-encore": _poolGruesomeEncore,
@@ -89187,6 +89197,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reverse-engineer": _poolReverseEngineer,
   "pool/reverse-polarity": _poolReversePolarity,
   "pool/reverse-the-polarity": _poolReverseThePolarity,
+  "pool/reverse-the-sands": _poolReverseTheSands,
   "pool/revitalize": _poolRevitalize,
   "pool/revitalizing-repast": _poolRevitalizingRepast,
   "pool/revival-experiment": _poolRevivalExperiment,
@@ -91778,6 +91789,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sinister-sabotage": _poolSinisterSabotage,
   "pool/sinister-starfish": _poolSinisterStarfish,
   "pool/sinister-strength": _poolSinisterStrength,
+  "pool/sinister-waltz": _poolSinisterWaltz,
   "pool/sink-into-stupor": _poolSinkIntoStupor,
   "pool/sink-into-takenuma": _poolSinkIntoTakenuma,
   "pool/sinkhole-surveyor": _poolSinkholeSurveyor,

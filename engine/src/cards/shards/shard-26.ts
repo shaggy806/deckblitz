@@ -802,6 +802,7 @@ import _poolSilverskinArmor from "../pool/silverskin-armor.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSingingTree from "../pool/singing-tree.js";
+import _poolSinisterWaltz from "../pool/sinister-waltz.js";
 import _poolSivrissNightmareSpeaker from "../pool/sivriss-nightmare-speaker.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
@@ -1871,6 +1872,7 @@ const shard: CardShard = {
     _poolSilverstrike,
     _poolSimicLocket,
     _poolSingingTree,
+    _poolSinisterWaltz,
     _poolSivrissNightmareSpeaker,
     _poolSkeletalChangeling,
     _poolSkred,

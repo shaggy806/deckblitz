@@ -97,6 +97,7 @@ import _poolBonebindOrator from "../pool/bonebind-orator.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBother from "../pool/bother.js";
 import _poolBouncersBeatdown from "../pool/bouncers-beatdown.js";
+import _poolBragosRepresentative from "../pool/bragos-representative.js";
 import _poolBramblefortFink from "../pool/bramblefort-fink.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
@@ -379,6 +380,7 @@ import _poolGrothamaAllDevouring from "../pool/grothama-all-devouring.js";
 import _poolGroundAssault from "../pool/ground-assault.js";
 import _poolGrowingRanks from "../pool/growing-ranks.js";
 import _poolGrowthCurve from "../pool/growth-curve.js";
+import _poolGrudgeKeeper from "../pool/grudge-keeper.js";
 import _poolGruesomeDeformity from "../pool/gruesome-deformity.js";
 import _poolGruulTurf from "../pool/gruul-turf.js";
 import _poolGryffsBoon from "../pool/gryffs-boon.js";
@@ -1100,6 +1102,7 @@ const shard: CardShard = {
     _poolBoonOfEmrakul,
     _poolBother,
     _poolBouncersBeatdown,
+    _poolBragosRepresentative,
     _poolBramblefortFink,
     _poolBrawnAmadeusCho,
     _poolBrazenBlademaster,
@@ -1382,6 +1385,7 @@ const shard: CardShard = {
     _poolGroundAssault,
     _poolGrowingRanks,
     _poolGrowthCurve,
+    _poolGrudgeKeeper,
     _poolGruesomeDeformity,
     _poolGruulTurf,
     _poolGryffsBoon,
