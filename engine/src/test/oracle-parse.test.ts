@@ -21543,3 +21543,30 @@ describe("a cast trigger's count as counters to enter with", () => {
     expect(face.complete).toBe(false);
   });
 });
+
+describe("activated abilities of cards in your graveyard cost less (Embalmer's Tools, Convergence of Dominion)", () => {
+  const face = (name: string, oracle_text: string) =>
+    parseFace({ name, type_line: "Artifact", mana_cost: "{3}", oracle_text }, { tokenFor: () => null });
+
+  it("creature cards, {1} less, without a floor", () => {
+    const tools = face("Embalmer's Tools", "Activated abilities of creature cards in your graveyard cost {1} less to activate.");
+    expect(tools.complete).toBe(true);
+    expect(tools.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      abilityCostModification: { applies: { type: "creature", inZone: "graveyard", ownedBy: "you" }, anyZone: true, reduceGeneric: 1 },
+    });
+    expect(tools.static[0].abilityCostModification.leavesOneMana).toBeUndefined();
+  });
+
+  it("every card, {2} less down to one mana, while you control your commander", () => {
+    const node = face(
+      "Convergence of Dominion",
+      "Dynastic Command Node — As long as you control your commander, activated abilities of cards in your graveyard cost {2} less to activate. This effect can't reduce the mana in that ability's activation cost to less than one mana.",
+    );
+    expect(node.complete).toBe(true);
+    expect(node.static[0]).toMatchObject({
+      condition: { kind: "controls", filter: { isCommander: true, controlledBy: "you", ownedBy: "you" }, atLeast: 1 },
+      abilityCostModification: { applies: { inZone: "graveyard", ownedBy: "you" }, anyZone: true, reduceGeneric: 2, leavesOneMana: true },
+    });
+  });
+});

@@ -4210,7 +4210,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * cost {1} less". `applies` filters the Room. */
     readonly unlock?: true;
     /** "Activated abilities of **sources** with the chosen name" (Skyseer's
-     * Chariot): abilities of cards in every zone, not only permanents'. */
+     * Chariot): abilities of cards in every zone, not only permanents'.
+     * With `applies: { inZone: "graveyard", ownedBy: "you" }`, "activated
+     * abilities of [creature] cards in your graveyard" (Embalmer's Tools,
+     * Convergence of Dominion): totalled while the card is still there,
+     * before a cost that exiles it is paid (rules 602.2b, 601.2f). */
     readonly anyZone?: true;
     /**
      * Only abilities of one kind, named by its keyword or symbol (rule

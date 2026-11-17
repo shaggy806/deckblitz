@@ -361,6 +361,14 @@ already ran as a `prevent-half` step, spent as a "next time" shield. Two apply o
 what's left (the ruling: 5 → 3 → 2). Fixed with it: a partial prevention step (`prevent-n`, `prevent-all-but`,
 `prevent-half`) that prevents none of the damage no longer uses its shield up (rule 609.7b). Dark Sphere (rank
 11702). `test/chosen-source-prevent-half.test.ts`.
+### Activated abilities of cards in your graveyard cost less — found built 2026-11-17
+
+The key `static:graveyard-ability-cost-reduction` needed no engine code: `abilityCostModification`'s
+`anyZone` with `applies: { inZone: "graveyard", ownedBy: "you" }` (a `type` for "creature cards"), totalled
+while the card is still in the graveyard, before an exile cost moves it (rules 602.2b, 601.2f). Convergence
+of Dominion (rank 12109, `leavesOneMana`, while you control your commander) and Embalmer's Tools (13156). The
+scaffolder reads the line, and "As long as you control your commander, " leads any static it reads
+(Lieutenant). `test/graveyard-ability-cost-reduction.test.ts`.
 
 ### Counters a card enters with if it matches a filter there — built 2026-11-17
 

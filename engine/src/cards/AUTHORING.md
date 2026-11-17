@@ -6656,6 +6656,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   "the first activated ability of an artifact you activate each turn costs
   {2} less", `{ applies: { type: "artifact" }, byYou: true, reduceGeneric: 2,
   firstEachTurn: true }`)
+  (`anyZone: true` with `applies: { type?, inZone: "graveyard", ownedBy:
+  "you" }`: "activated abilities of [creature] cards in your graveyard cost
+  {1} less" — Embalmer's Tools; Convergence of Dominion adds `leavesOneMana`
+  and the Lieutenant `condition`. Unearth, embalm, a Reassembling Skeleton's
+  return: priced while the card is still there, before an exile cost moves it)
   (`ninjutsu: true`: only ninjutsu abilities its controller activates, the
   card in a hand or the command zone — Silver-Fur Master, `applies: {}`)
   — the same for *activation* costs (rule 602.2b): "Activated abilities of

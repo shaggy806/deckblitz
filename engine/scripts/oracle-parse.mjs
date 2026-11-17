@@ -19678,6 +19678,9 @@ const STATIC_CONDITION_PREFIXES = [
   ["As long as ~ is untapped, ", { kind: "source", filter: { tapped: false } }],
   // Queen Mother Ramonda.
   ["As long as you're the monarch, ", { kind: "monarch", who: "you" }],
+  // Lieutenant (an ability word, rule 207.2c), and Convergence of Dominion's
+  // "Dynastic Command Node": a commander you own (rule 903.3).
+  ["As long as you control your commander, ", { kind: "controls", filter: { isCommander: true, controlledBy: "you", ownedBy: "you" }, atLeast: 1 }],
   // Corrupted (an ability word, rule 207.2c): Bonepicker Skirge, Skrelv's Hive.
   ["As long as an opponent has three or more poison counters, ", { kind: "player-counters", counter: "poison", who: "opponent", atLeast: 3 }],
   // Anya, Merciless Angel: strictly under half, which may be a fraction.
@@ -22105,6 +22108,26 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // "Activated abilities of [creature] cards in your graveyard cost {N} less
+  // to activate" (Embalmer's Tools; Convergence of Dominion's, kept to one
+  // mana): a card's ability while it's in its owner's graveyard (rule 602.2b).
+  if (
+    (m =
+      /^Activated abilities of (creature )?cards in your graveyard cost \{(\d+)\} less to activate\.( This effect can't reduce the mana in that ability's activation cost to less than one mana\.)?$/.exec(
+        line,
+      ))
+  ) {
+    return {
+      affects: { scope: "self" },
+      abilityCostModification: {
+        applies: { ...(m[1] !== undefined ? { type: "creature" } : {}), inZone: "graveyard", ownedBy: "you" },
+        anyZone: true,
+        reduceGeneric: Number(m[2]),
+        ...(m[3] !== undefined ? { leavesOneMana: true } : {}),
+      },
+      text,
+    };
   }
   // Its abilities' half (Kopala).
   if ((m = /^Abilities your opponents activate that target an? (.+?) you control cost \{(\d+)\} more to activate\.$/.exec(line))) {
