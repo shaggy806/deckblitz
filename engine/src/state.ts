@@ -98,6 +98,11 @@ export interface PhasedOutStatus {
    * a permanent doesn't phase in during an untap step (610.4a). `tapped`:
    * "tap that creature as it phases in this way". */
   readonly until?: { readonly source: ObjectId; readonly zoneChangeCount: number; readonly tapped?: boolean };
+  /** "It can't phase in for as long as you control this Saga" (The Phasing
+   * of Zhalfir): it skips its untap steps while this lasts, and is removed
+   * the first moment it doesn't (rule 611.2b — `Game.endPhaseInHolds`), the
+   * permanent then phasing in at the next one as usual. */
+  readonly held?: WhileSource;
   /** It phased out under a player who has since left the game, and that
    * player's next turn would have begun: it phases in during the next untap
    * step (rule 702.26n). */

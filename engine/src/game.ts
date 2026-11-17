@@ -11660,6 +11660,7 @@ export class Game {
     if (this.state.whileSourceIds?.includes(id) !== true) return;
     const over = (w: WhileSource | undefined): boolean => w !== undefined && w.id === id && ended(w);
     this.endPlayerWhileSource(over);
+    this.endPhaseInHolds(over);
     const expired: ObjectId[] = [];
     let controlEnded = false;
     for (const other of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
@@ -44615,21 +44616,29 @@ controlledBy,
             ...(what.tappedOnReturn === true ? { tapped: true } : {}),
           };
         }
+        // "It can't phase in for as long as you control this Saga": nothing
+        // held if that already isn't so (rule 611.2b), and it phases out all
+        // the same.
+        let held: WhileSource | undefined;
+        if (what.cantPhaseIn !== undefined) {
+          const kept = lastingHere(what.cantPhaseIn);
+          if (typeof kept === "object" && "whileSource" in kept && kept.whileSource !== null) held = kept.whileSource;
+        }
         if (what.filter !== undefined) {
           // Every match at once, a token stack whole.
-          this.phaseOut(this.battlefieldMatching(what.scopeTo ?? controller, what.filter), until);
+          this.phaseOut(this.battlefieldMatching(what.scopeTo ?? controller, what.filter), until, held);
           return;
         }
         if (what.attachedToSource === true) {
           // "Equipped creature phases out": the one it's attached to now.
           const src = this.state.objects[source];
           const host = src?.zone === "battlefield" ? src.attachedTo : null;
-          if (host !== null && host !== undefined) this.phaseOut([host], until);
+          if (host !== null && host !== undefined) this.phaseOut([host], until, held);
           return;
         }
         const target = what.target;
         if (target?.kind !== "object" || this.state.objects[target.object]?.zone !== "battlefield") return;
-        this.phaseOut([this.splitOneFromStack(target.object)], until);
+        this.phaseOut([this.splitOneFromStack(target.object)], until, held);
       },
       become: (target, patch, duration) => this.become(target, patch, lastingHere(duration)),
       becomeAll: (filter, patch, duration, { exceptSource, scopeTo }) => {
@@ -56098,10 +56107,11 @@ controlledBy,
    * leaves-the-battlefield trigger fires (702.26d). It's removed from combat
    * (506.4); a "for as long as" effect tracking it ends (702.26f); its
    * `lastKnown` is it as it last existed, for whatever still reads it as gone
-   * (608.2h). `until` is a "phases out until …" (610.4), on those phased out
-   * directly. Returns what phased out, those phased out directly first.
+   * (608.2h). `until` is a "phases out until …" (610.4), and `held` a "can't
+   * phase in for as long as …", on those phased out directly. Returns what
+   * phased out, those phased out directly first.
    */
-  private phaseOut(ids: readonly ObjectId[], until?: PhasedOutStatus["until"]): ObjectId[] {
+  private phaseOut(ids: readonly ObjectId[], until?: PhasedOutStatus["until"], held?: WhileSource): ObjectId[] {
     const battlefield = this.state.zones.shared.battlefield;
     const direct = ids.filter((id, i) => ids.indexOf(id) === i && !objectProhibited(this.state, this.registry, "phase-out", id) && this.state.objects[id]?.zone === "battlefield");
     if (direct.length === 0) return [];
@@ -56135,6 +56145,7 @@ controlledBy,
           ? { host: { id: attachedTo.id, zoneChangeCount: attachedTo.zoneChangeCount ?? 0 } }
           : {}),
         ...(host === undefined && until !== undefined ? { until } : {}),
+        ...(host === undefined && held !== undefined ? { held } : {}),
         ...(object.lastKnown !== undefined ? { priorLastKnown: object.lastKnown } : {}),
       };
       const snapshot = snapshots.get(id);
@@ -56276,7 +56287,8 @@ controlledBy,
    * untap step begins: every phased-in permanent with phasing the active
    * player controls phases out, and every permanent that phased out under
    * their control phases in — simultaneously. Not one waiting "until"
-   * something happens (610.4a), nor one that phased out indirectly (it comes
+   * something happens (610.4a), nor one that can't phase in for as long as
+   * something lasts (`held`), nor one that phased out indirectly (it comes
    * with its host), nor one whose owner has left the game (it left with them,
    * 702.26k). One that phased out under a player who has since left phases in
    * now if that player's turn would have begun (702.26n — `released`).
@@ -56292,7 +56304,9 @@ controlledBy,
     const incoming = phasedOutIds(this.state).filter((id) => {
       const object = this.state.objects[id];
       const status = object?.phasedOut;
-      if (status === undefined || status.with !== undefined || status.until !== undefined) return false;
+      if (status === undefined || status.with !== undefined || status.until !== undefined || status.held !== undefined) {
+        return false;
+      }
       if (this.state.players[object.owner]?.hasLost !== false) return false;
       return status.controller === active || status.released === true;
     });
@@ -70834,6 +70848,20 @@ controlledBy,
     if (changed) invalidateComputedCache();
   }
 
+  /** End every "can't phase in for as long as" (`PhasedOutStatus.held`)
+   * whose source `over` says has stopped remaining (rule 611.2b — The
+   * Phasing of Zhalfir's Saga leaving, changing hands or phasing out): the
+   * permanent stays phased out, and phases in at its next untap step. */
+  private endPhaseInHolds(over: (w: WhileSource) => boolean): void {
+    for (const id of phasedOutIds(this.state)) {
+      const object = this.state.objects[id];
+      const status = object?.phasedOut;
+      if (status?.held === undefined || !over(status.held)) continue;
+      const { held: _held, ...rest } = status;
+      object.phasedOut = rest;
+    }
+  }
+
   /** Remember that some effect lasts for as long as `id` remains on the
    * battlefield, so its leaving ends it (`endWhileSourceEffects`). */
   private noteWhileSource(id: ObjectId): void {
@@ -70864,6 +70892,7 @@ controlledBy,
     );
     if (this.state.whileSourceIds.length === 0) delete this.state.whileSourceIds;
     this.endPlayerWhileSource(over);
+    this.endPhaseInHolds(over);
     const expired: ObjectId[] = [];
     let controlEnded = false;
     // A phased-out permanent's effects end too (rule 702.26f).

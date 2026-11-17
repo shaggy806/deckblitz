@@ -8906,6 +8906,17 @@ export type EffectSpec =
       readonly controlledByTarget?: number;
       readonly untilSourceLeaves?: boolean;
       readonly tappedOnReturn?: boolean;
+      /** "It **can't phase in for as long as** you control this Saga" (The
+       * Phasing of Zhalfir): what phases out directly skips its controller's
+       * untap steps (rule 502.1) while the source, in the stint the effect
+       * refers to, stays on the battlefield — and, with
+       * `"while-you-control-source"`, under the effect's controller — then
+       * phases in at the next one as usual (the ruling). Ended for good the
+       * first moment it isn't so (rule 611.2b), the source phasing out included
+       * (702.26f: the duration ignores phased-out objects); nothing at all if
+       * it already isn't so as this resolves, and the permanent still phases
+       * out. */
+      readonly cantPhaseIn?: "while-source" | "while-you-control-source";
     }
   | {
       /** "Manifest the top card of your library" (rule 701.40), or cloak it
@@ -14197,6 +14208,7 @@ export interface EffectApi {
     readonly scopeTo?: PlayerId;
     readonly untilSourceLeaves?: boolean;
     readonly tappedOnReturn?: boolean;
+    readonly cantPhaseIn?: "while-source" | "while-you-control-source";
   }): void;
   /** `player` manifests (or cloaks) the top card of their library — see the
    * `"manifest"` {@link EffectSpec}; `library` is another player's library
@@ -22314,6 +22326,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const until = {
         ...(spec.untilSourceLeaves === true ? { untilSourceLeaves: true } : {}),
         ...(spec.tappedOnReturn === true ? { tappedOnReturn: true } : {}),
+        ...(spec.cantPhaseIn !== undefined ? { cantPhaseIn: spec.cantPhaseIn } : {}),
       };
       if (spec.filter !== undefined) {
         // "Each creature target player controls": nobody's, once that

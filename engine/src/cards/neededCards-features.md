@@ -325,6 +325,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "It can't phase in for as long as you control this Saga" — built 2026-11-17
+
+The key `effect:phase-out-while-you-control-source`: `phase-out`'s `cantPhaseIn` (`"while-you-control-source"` or
+`"while-source"`), kept as `PhasedOutStatus.held`, a `WhileSource` read as the effect resolves (nothing held if
+it already isn't so — rule 611.2b). The phasing step (rule 502.1) skips a held permanent; `Game.endPhaseInHolds`
+drops the hold where every other "for as long as" ends — the source leaving or phasing out
+(`endWhileSourceEffects`, 702.26f) and changing hands (`endWhileControlledEffects`) — so it phases in at its
+controller's next untap step (the ruling). The Phasing of Zhalfir (rank 11374). `test/phase-in-held.test.ts`.
+Teferi, Timeless Voyager's "until the end of your next turn, they can't phase in" and The Pandorica's "for as
+long as The Pandorica remains tapped" would widen `cantPhaseIn` to those durations.
+
 ### A simultaneous move that needs a choice first — built 2026-11-17
 
 The key `bug:simultaneous-move-with-choice`: `look-and-choose`'s `thenAlways`, which runs `then` with nothing

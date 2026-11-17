@@ -3,6 +3,7 @@
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
     "bug:simultaneous-move-with-choice",
+    "effect:phase-out-while-you-control-source",
     "trigger:becomes-target-of-ability-targeting-only-it",
     "static:opponents-cant-play-from-graveyard",
     "cost:cumulative-upkeep-counter-on-opponents-creature",
