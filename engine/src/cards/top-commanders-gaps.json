@@ -2812,7 +2812,8 @@
   "condition:was-monarch-as-turn-began",
   "amount:creatures-dealt-combat-damage-to-player-this-turn",
   "trigger:reveal-this-way-reflexive",
-  "effect:copy-counter-kinds-just-put"
+  "effect:copy-counter-kinds-just-put",
+  "effect:remove-counters-from-among"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -7109,6 +7109,22 @@ describe("counters of chosen kinds removed (remove-counters, a target's orPlayer
     expect(JSON.stringify(shadow.effect)).toContain('"anyController":true');
     expect(JSON.stringify(shadow.effect)).toContain('"kind":"lose-life","amount":{"thisWay":"counters-removed"}');
   });
+
+  it("reads Galloping Lizrog's 'from among creatures you control' and 'If you do, … twice that many'", () => {
+    const lizrog = face(
+      "Galloping Lizrog",
+      "Creature — Frog Lizard",
+      "Trample\nWhen this creature enters, you may remove any number of +1/+1 counters from among creatures you control. If you do, put twice that many +1/+1 counters on this creature.",
+    );
+    expect(lizrog.complete).toBe(true);
+    expect(lizrog.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "remove-counters", from: { type: "creature" }, counter: "+1/+1", count: "any", among: true },
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: { product: [{ thisWay: "counters-removed" }, 2] } },
+      ],
+    });
+  });
 });
 
 describe("energy paid in an amount the player chooses (costEnergyX)", () => {

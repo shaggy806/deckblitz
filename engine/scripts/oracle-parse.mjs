@@ -5504,6 +5504,15 @@ export function parseSentence(sentence, ctx) {
   if (re(`remove any number of counters from among permanents on the battlefield`).test(s)) {
     return { kind: "remove-counters", from: {}, anyController: true, counter: "any", count: "any", among: true };
   }
+  // "You may remove any number of +1/+1 counters from among creatures you
+  // control" (Galloping Lizrog): the controller's own, none at all included,
+  // so the "may" asks nothing more.
+  if ((m = re(`(?:you may )?remove any number of (?:([+-]\\d+/[+-]\\d+|[a-z]+) )?counters from among (.+?) you control`).exec(s))) {
+    const from = parseTypePhrase(m[2]);
+    if (from !== null) {
+      return { kind: "remove-counters", from, counter: m[1]?.toLowerCase() ?? "any", count: "any", among: true };
+    }
+  }
   // "Put its counters on …" / "put those counters on …" of a permanent that
   // left (rule 122.8): each kind it had, put on — the ability's own object
   // (a self dies or leaves trigger) or the one its trigger names.
@@ -12836,12 +12845,17 @@ function energyAmountAt(sentences, i, ctx) {
  * Draw that many cards." (Take), "Target player loses all poison counters.
  * ~ deals that much damage to that player." (Leeches) — the count is the
  * resolution's `thisWay: "counters-removed"` (a player's counters included,
- * rule 122.1). `{ effects, used }`, or null.
+ * rule 122.1). "You may remove any number of +1/+1 counters from among
+ * creatures you control. If you do, put twice that many +1/+1 counters on
+ * this creature." (Galloping Lizrog): with any number removed, none at all
+ * is not doing it, and twice none puts none, so the "if you do" asks
+ * nothing; "twice that many" is the count times 2. `{ effects, used }`, or
+ * null.
  */
 function countersRemovedAt(sentences, i, ctx) {
   const next = sentences[i + 1];
   if (next === undefined || /\bX\b/.test(next) || !/\bthat (?:many|much)\b/i.test(next)) return null;
-  if (!/^(?:remove|target (?:player|opponent) loses all|you lose all)\b/i.test(sentences[i])) return null;
+  if (!/^(?:(?:you may )?remove|target (?:player|opponent) loses all|you lose all)\b/i.test(sentences[i])) return null;
   const before = ctx.targets.length;
   const fail = () => {
     ctx.targets.length = before;
@@ -12849,17 +12863,26 @@ function countersRemovedAt(sentences, i, ctx) {
   };
   const removal = parseSentence(sentences[i], ctx);
   if (removal === null || containsUndefined(removal)) return fail();
-  if (!["remove-counter", "remove-counter-all", "remove-player-counters"].includes(removal.kind)) return fail();
+  const anyNumber = removal.kind === "remove-counters" && removal.count === "any";
+  if (!anyNumber && !["remove-counter", "remove-counter-all", "remove-player-counters"].includes(removal.kind)) return fail();
+  const ifDone = /^if you do, /i.exec(next);
+  if (ifDone !== null && !anyNumber) return fail();
+  const twice = /\btwice that many\b/i.test(next);
+  if (twice && /\bthat (?:many|much)\b/i.test(next.replace(/\btwice that many\b/gi, ""))) return fail();
   // "…to that player": the player the removal targeted, read as a target of
   // its own and folded back onto that slot.
   const thatPlayer = typeof removal.target === "number" && /\bthat player\b/i.test(next);
-  const text = next.replace(/\bthat (?:many|much)\b/gi, "X").replace(/\bthat player\b/i, "target player");
+  const stripped = ifDone === null ? next : next.slice(ifDone[0].length).replace(/^./, (c) => c.toUpperCase());
+  const text = stripped
+    .replace(/\btwice that many\b/gi, "X")
+    .replace(/\bthat (?:many|much)\b/gi, "X")
+    .replace(/\bthat player\b/i, "target player");
   const own = ctx.targets.length;
   const inner = parseSentence(text, ctx);
   if (inner === null || containsUndefined(inner) || !JSON.stringify(inner).includes('"x"')) return fail();
   if (thatPlayer && ctx.targets.length !== own + 1) return fail();
   if (thatPlayer) ctx.targets.length = own;
-  const removed = { thisWay: "counters-removed" };
+  const removed = twice ? { product: [{ thisWay: "counters-removed" }, 2] } : { thisWay: "counters-removed" };
   const swap = (v, key) =>
     v === "x"
       ? removed
