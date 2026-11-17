@@ -42456,8 +42456,8 @@ controlledBy,
         this.rotateControlByEffect(controller, filter, direction, exceptSource ? this.oneTokenSpared(source) : undefined),
       giveControlTogether: (moves) => this.giveControlTogether(moves),
       exchangeControl: (first, second) => this.exchangeControl(first, second),
-      exchangeControlAll: (filter, other, untilEndOfTurn) =>
-        this.exchangeControlAll(controller, filter, other, untilEndOfTurn),
+      exchangeControlAll: (filter, other, untilEndOfTurn, between) =>
+        this.exchangeControlAll(controller, filter, other, untilEndOfTurn, between),
       grantCantBeSacrificed: (target, duration) =>
         this.grantCantBeSacrificed(target, lastingHere(duration)),
       prohibitSacrificeBy: (object, player, duration) => this.prohibitSacrificeBy(object, player, lastingHere(duration)),
@@ -61151,13 +61151,24 @@ controlledBy,
    * matches (from `you`'s side) that `you` control goes to `other`, and what
    * `other` controls comes to `you` — both sets fixed first, then moved at
    * once with one timestamp (rule 613.7b). A token stack changes hands whole.
+   * `between`: another player in `you`'s place, the filter still read from
+   * `you`'s side (Cultural Exchange's two target players).
    */
-  private exchangeControlAll(you: PlayerId, filter: CardFilter, other: PlayerId, untilEndOfTurn: boolean): void {
-    if (other === you || this.state.players[other]?.hasLost !== false) return;
+  private exchangeControlAll(
+    you: PlayerId,
+    filter: CardFilter,
+    other: PlayerId,
+    untilEndOfTurn: boolean,
+    between?: PlayerId,
+  ): void {
+    const side = between ?? you;
+    if (other === side || this.state.players[other]?.hasLost !== false || this.state.players[side]?.hasLost !== false) {
+      return;
+    }
     const matched = this.battlefieldMatching(you, filter);
     const moves = [
-      ...matched.filter((id) => this.state.objects[id]?.controller === you).map((id) => ({ id, to: other })),
-      ...matched.filter((id) => this.state.objects[id]?.controller === other).map((id) => ({ id, to: you })),
+      ...matched.filter((id) => this.state.objects[id]?.controller === side).map((id) => ({ id, to: other })),
+      ...matched.filter((id) => this.state.objects[id]?.controller === other).map((id) => ({ id, to: side })),
     ];
     if (moves.length === 0) return;
     this.state.timestampSeq += 1;

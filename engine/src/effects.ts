@@ -5227,6 +5227,18 @@ export type EffectSpec =
       readonly filter: CardFilter;
       readonly with: PlayerRef;
       readonly untilEndOfTurn: boolean;
+      /**
+       * The other side, when it isn't the effect's controller: Cultural
+       * Exchange's "Choose any number of creatures target player controls.
+       * Choose the same number of creatures another target player controls.
+       * **Those players exchange control of those creatures**" is `between:
+       * { target: 0 }, with: { target: 1 }` over `{ thisWay: "chosen" }` —
+       * each chosen creature one of them controls goes to the other, at once
+       * with one timestamp. `filter` is still read from the effect's
+       * controller's side. Nothing if either is no longer in the game or an
+       * illegal target (608.2b), or they're the same player.
+       */
+      readonly between?: PlayerRef;
     }
   | {
       /** "For each of those permanents, choose a different opponent. Each
@@ -13602,7 +13614,7 @@ export interface EffectApi {
    * exchanged. */
   exchangeControl(first: TargetRef, second: TargetRef): boolean;
   /** See the `"exchange-control-all"` {@link EffectSpec}. */
-  exchangeControlAll(filter: CardFilter, other: PlayerId, untilEndOfTurn: boolean): void;
+  exchangeControlAll(filter: CardFilter, other: PlayerId, untilEndOfTurn: boolean, between?: PlayerId): void;
   /** `target` gains "This creature can't be sacrificed" — see the
    * `"cant-be-sacrificed"` {@link EffectSpec}. */
   grantCantBeSacrificed(target: TargetRef, duration: PermanentDuration): void;
@@ -20312,9 +20324,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "exchange-control-all": {
-      if (typeof spec.with === "object" && "target" in spec.with && illegalSlot(spec.with.target, ctx)) return;
+      const illegal = (ref: PlayerRef | undefined): boolean =>
+        typeof ref === "object" && "target" in ref && illegalSlot(ref.target, ctx);
+      if (illegal(spec.with) || illegal(spec.between)) return;
       const other = resolvePlayerRef(spec.with, ctx);
-      if (other !== undefined) ctx.exchangeControlAll(spec.filter, other, spec.untilEndOfTurn);
+      const between = spec.between === undefined ? undefined : resolvePlayerRef(spec.between, ctx);
+      if (other === undefined || (spec.between !== undefined && between === undefined)) return;
+      ctx.exchangeControlAll(spec.filter, other, spec.untilEndOfTurn, between);
       return;
     }
     case "cant-be-sacrificed": {

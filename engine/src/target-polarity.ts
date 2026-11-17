@@ -459,7 +459,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.then);
     v.child(n.otherwise);
   },
-  "exchange-control-all": (n, v) => v.touch(n.with, "harm", DECISIVE),
+  "exchange-control-all": (n, v) => {
+    v.touch(n.with, "harm", DECISIVE);
+    // Cultural Exchange's first player: yours is the side to be on.
+    if (n.between !== undefined) v.touch(n.between, "help", DECISIVE);
+  },
   "cant-be-sacrificed": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "help", MINOR);
   },
