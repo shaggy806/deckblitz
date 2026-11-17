@@ -2820,7 +2820,8 @@
   "effect:count-target-players-not-done-this-way",
   "keyword:imprint-two-cast-copy-other",
   "keyword:imprint-two-cast-copy-other",
-  "effect:reveal-until-two-cast-one-hand-one"
+  "effect:reveal-until-two-cast-one-hand-one",
+  "zone:graveyard-static"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

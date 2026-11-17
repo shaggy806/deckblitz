@@ -25326,6 +25326,8 @@ export class Game {
       const lost = hasLostAbilities(this.state, this.registry,source);
       this.registry.get(rulesTextName(source)).static.forEach((ability, staticIndex) => {
         if (lost && !hasLayerFourPart(ability)) return;
+        // One that works only from a graveyard does nothing here (rule 113.6b).
+        if (ability.fromGraveyard === true) return;
         if (ability.grantsTriggered !== undefined) {
           out.push({ source, ability, staticIndex, abilities: ability.grantsTriggered });
         }
@@ -25601,6 +25603,8 @@ export class Game {
       const lost = hasLostAbilities(this.state, this.registry,source);
       this.registry.get(rulesTextName(source)).static.forEach((ability, staticIndex) => {
         if (lost && !hasLayerFourPart(ability)) return;
+        // One that works only from a graveyard does nothing here (rule 113.6b).
+        if (ability.fromGraveyard === true) return;
         if (ability.grantsActivated !== undefined) {
           out.push({ source, ability, staticIndex, abilities: ability.grantsActivated });
         }
@@ -25613,6 +25617,21 @@ export class Game {
         if (ability.grantsActivated === undefined) continue;
         const abilities = ability.grantsActivated;
         out.push({ source, ability, staticIndex: -1, abilities, refs: abilities.map((a) => ({ kind: "modifier-activated", ability: a })) });
+      }
+    }
+    // A card's static working only from its owner's graveyard (rule 113.6b),
+    // "you" its owner — Riftstone Portal's "as long as this card is in your
+    // graveyard, lands you control have '{T}: Add {G} or {W}.'" Its ref is
+    // the card's static, as a permanent's is.
+    for (const player of this.state.turnOrder) {
+      if (this.state.players[player]?.hasLost === true) continue;
+      for (const id of this.state.zones.perPlayer[player]?.graveyard ?? []) {
+        const source = this.state.objects[id];
+        if (source === undefined || !this.registry.has(rulesTextName(source))) continue;
+        this.registry.get(rulesTextName(source)).static.forEach((ability, staticIndex) => {
+          if (ability.fromGraveyard !== true || ability.grantsActivated === undefined) return;
+          out.push({ source, ability, staticIndex, abilities: ability.grantsActivated });
+        });
       }
     }
     // An emblem's (rule 113.6p): "Mountains you control have '{T}: …'" (Koth of
@@ -67652,25 +67671,46 @@ controlledBy,
     // Other permanents' replacements (rule 614.12). Never its own — a
     // permanent's ability over a general set of permanents doesn't modify how
     // that permanent itself enters — and never one entering alongside it,
-    // which isn't on the battlefield yet.
+    // which isn't on the battlefield yet. And a card's that works only from
+    // its owner's graveyard (rule 113.6b), "you" its owner: Dearly Departed's
+    // "as long as this creature is in your graveyard, each Human creature you
+    // control enters with an additional +1/+1 counter on it" — one counter
+    // for each such card (its ruling).
+    const enterSources: { readonly source: GameObject; readonly you: PlayerId; readonly fromGraveyard: boolean }[] = [];
     for (const sourceId of this.state.zones.shared.battlefield) {
-      if (sourceId === id || this.enterBatch?.has(sourceId) === true) continue;
       const source = this.state.objects[sourceId];
-      if (source === undefined || hasLostAbilities(this.state, this.registry,source)) continue;
+      if (source !== undefined) enterSources.push({ source, you: source.controller, fromGraveyard: false });
+    }
+    for (const player of this.state.turnOrder) {
+      for (const cardId of this.state.zones.perPlayer[player]?.graveyard ?? []) {
+        const card = this.state.objects[cardId];
+        if (card === undefined || !this.registry.has(rulesTextName(card))) continue;
+        if (!this.registry.get(rulesTextName(card)).static.some((a) => a.fromGraveyard === true && a.replacement !== undefined)) continue;
+        enterSources.push({ source: card, you: player, fromGraveyard: true });
+      }
+    }
+    for (const { source, you, fromGraveyard } of enterSources) {
+      const sourceId = source.id;
+      if (sourceId === id || this.enterBatch?.has(sourceId) === true) continue;
+      if (!fromGraveyard && hasLostAbilities(this.state, this.registry,source)) continue;
       // An eliminated player's permanents stop affecting the game (see
       // `matchesFilter`).
-      if (this.state.players[source.controller]?.hasLost === true) continue;
+      if (this.state.players[you]?.hasLost === true) continue;
       // Its own statics and those granted it (Master Chef's commander has
       // "other creatures you control enter with an additional +1/+1 counter").
       const printedStatics = this.registry.get(rulesTextName(source)).static;
-      const granted = grantedStatics(this.state, this.registry, source, (a) => a.replacement?.event === "others-enter-battlefield");
+      const granted = fromGraveyard
+        ? []
+        : grantedStatics(this.state, this.registry, source, (a) => a.replacement?.event === "others-enter-battlefield");
       for (const ability of granted.length === 0 ? printedStatics : [...printedStatics, ...granted]) {
         const r = ability.replacement;
         if (r?.event !== "others-enter-battlefield") continue;
+        // One that works only from a graveyard works nowhere else (113.6b).
+        if ((ability.fromGraveyard === true) !== fromGraveyard) continue;
         if (!this.staticActive(source, ability)) continue;
         // `source` for a clause about the replacement's permanent — Metallic
         // Mimic's "of the chosen type".
-        if (!matchesFilter(this.state, this.registry, id, r.filter, { you: source.controller, source: sourceId })) {
+        if (!matchesFilter(this.state, this.registry, id, r.filter, { you, source: sourceId })) {
           continue;
         }
         if (r.tapped === true) {
@@ -67684,7 +67724,7 @@ controlledBy,
         if (r.attacking === true) attacking = true;
         if (r.counters !== undefined) {
           // A compacted stack of such permanents is that many replacements.
-          const each = this.enteringCounterAmount(sourceId, source.controller, id, r.counters.amount);
+          const each = this.enteringCounterAmount(sourceId, you, id, r.counters.amount);
           addCounters(r.counters.kind, each * (source.stackCount ?? 1));
         }
         // "For each kind of counter on [this], … enters with a counter of

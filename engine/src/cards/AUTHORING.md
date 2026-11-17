@@ -6370,11 +6370,15 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   owner's graveyard (rule 113.6b) — never from the battlefield — "you" being
   the owner, and ordered by the timestamp the card got entering the
   graveyard (rule 613.7d; Anger's ruling). The rest of the "as long as" is
-  an ordinary `condition`. Only what folds into characteristics reaches that
-  far (a keyword, a P/T bonus, a restriction): a granted ability from the
-  graveyard (Riftstone Portal's mana ability for lands) doesn't yet, and
-  any other part — a replacement, a type change — would work from the
-  battlefield instead, so `pool.test.ts` refuses one.
+  an ordinary `condition`. What folds into characteristics reaches that far
+  (a keyword, a P/T bonus, a restriction), and so do `grantsActivated`
+  (Riftstone Portal's "lands you control have '{T}: Add {G} or {W}'" — the
+  grant scans read every graveyard) and an `"others-enter-battlefield"`
+  replacement's counters, tapping and types (Dearly Departed's "each Human
+  creature you control enters with an additional +1/+1 counter", one counter
+  per card there). Any other part — another replacement, a type change, a
+  granted trigger — would work from the battlefield instead, so
+  `pool.test.ts` refuses one.
 - `attackAsThoughHaste: true` — the affected creatures "can attack as though
   they had haste" (Instill Energy on `"attached"`): they may be declared as
   attackers though summoning sick (rules 302.6, 702.10b). It gives no haste:

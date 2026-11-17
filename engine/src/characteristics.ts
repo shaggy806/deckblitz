@@ -5239,6 +5239,22 @@ function scanAbilityGrantSources(state: GameState, registry: CardRegistry): read
       (out ??= []).push({ source, ability });
     }
   }
+  // A card's static that works only from its owner's graveyard (rule
+  // 113.6b), "you" its owner: Riftstone Portal's "as long as this card is in
+  // your graveyard, lands you control have '{T}: Add {G} or {W}.'"
+  for (const player of state.turnOrder) {
+    if (state.players[player]?.hasLost === true) continue;
+    for (const sourceId of state.zones.perPlayer[player]?.graveyard ?? []) {
+      const source = state.objects[sourceId];
+      if (source === undefined) continue;
+      const printed = printedCardName(source);
+      const text = rulesTextName(source);
+      if (text !== printed && !registry.has(printed)) continue;
+      const graveyardGrants = staticsInfo(registry, text)?.graveyardGrants;
+      if (graveyardGrants === undefined) continue;
+      for (const ability of graveyardGrants) (out ??= []).push({ source, ability });
+    }
+  }
   // An emblem's: "Mountains you control have '{T}: …'" (Koth of the Hammer).
   for (const { source, ability } of emblemStatics(state)) {
     if (ability.grantsActivated !== undefined || ability.grantsTriggered !== undefined) {
@@ -5745,8 +5761,11 @@ interface StaticsInfo {
   readonly outside: readonly StaticAbility[];
   /** What {@link colorSetSources} takes (a `setColors`). */
   readonly layer5: readonly StaticAbility[];
-  /** What {@link abilityGrantSources} takes. */
+  /** What {@link abilityGrantSources} takes from the battlefield. */
   readonly grants: readonly StaticAbility[];
+  /** What it takes from a graveyard: a `fromGraveyard` static's
+   * `grantsActivated` (Riftstone Portal). */
+  readonly graveyardGrants: readonly StaticAbility[];
   /** What {@link staticAbilityLosses} takes (`loseAllAbilities`). */
   readonly loseAll: readonly StaticAbility[];
   /** What {@link staticGrantSources} takes (`grantsStatic`). */
@@ -5776,7 +5795,10 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     outside: statics.filter((a) => a.outsideBattlefield !== undefined),
     selfOutside: statics.filter((a) => a.selfOutsideBattlefield !== undefined),
     layer5: statics.filter((a) => a.setColors !== undefined || a.addColors !== undefined || a.setsChosenColor === true),
-    grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
+    grants: statics.filter(
+      (a) => a.fromGraveyard !== true && (a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
+    ),
+    graveyardGrants: statics.filter((a) => a.fromGraveyard === true && a.grantsActivated !== undefined),
     loseAll: statics.filter((a) => a.loseAllAbilities === true),
     grantsStatic: statics.filter((a) => a.grantsStatic !== undefined),
     ptRestrictions: statics.filter((a) => a.fromGraveyard !== true && isPtScopedRestriction(a)),

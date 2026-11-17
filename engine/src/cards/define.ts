@@ -2307,7 +2307,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * Valor, Filth): the static functions only while its card is in its
    * owner's graveyard (rule 113.6b), never on the battlefield, "you" being
    * its owner. Only a grant to permanents reaches that far yet — a keyword,
-   * a P/T bonus, a restriction (`contributingStaticSources`).
+   * a P/T bonus, a restriction (`contributingStaticSources`), or an
+   * activated ability: Riftstone Portal's "lands you control have '{T}: Add
+   * {G} or {W}'" (`grantsActivated`, read from every graveyard by the grant
+   * scans — `abilityGrantSources`, `Game.activatedGrantSources`). On the
+   * battlefield such a static does nothing.
    */
   readonly fromGraveyard?: true;
   /** A replacement effect (rule 614) — see `replacements.ts`. `affects` is

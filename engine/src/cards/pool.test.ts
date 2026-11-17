@@ -21,7 +21,7 @@ import { describe, expect, it } from "vitest";
 import { isTriggeredManaAbility } from "../abilities.js";
 import { CARD_SHARD_COUNT, cardShardOf, loadCardShard } from "./card-shards.js";
 import { isCardFront, isDeckableCard, isTokenCard } from "./classify.js";
-import type { CardDefinition } from "./define.js";
+import type { CardDefinition, StaticAbility } from "./define.js";
 import { EMBLEM_DEFINITIONS } from "./emblem.js";
 import { LOCKED_ROOM_DEFINITION } from "./locked-room.js";
 import { FACE_DOWN_DEFINITIONS } from "./face-down.js";
@@ -371,22 +371,34 @@ describe("exile until this leaves the battlefield", () => {
 
 describe("statics that work from the graveyard", () => {
   // Rule 113.6b: `fromGraveyard` makes a static work only while its card is
-  // in a graveyard. Only the layer fold's grants to permanents
-  // (`contributingStaticSources`) look in graveyards for one and pass it by
-  // on the battlefield; any other part — a replacement, a type change, a
-  // cost change, a granted ability — would still work from the battlefield
-  // and never from the graveyard, so a card that needs one waits for the
-  // engine.
-  it("carry only what the layer fold reads from a graveyard", () => {
-    const folded = new Set([
+  // in a graveyard. The layer fold's grants to permanents
+  // (`contributingStaticSources`), the granted activated abilities
+  // (`abilityGrantSources`, `Game.activatedGrantSources` — Riftstone Portal)
+  // and the "enters with" replacements read where a permanent enters
+  // (Dearly Departed's counters) look in graveyards for one and pass it by on
+  // the battlefield; any other part — another replacement, a type change, a
+  // cost change, a granted triggered ability — would still work from the
+  // battlefield and never from the graveyard, so a card that needs one waits
+  // for the engine.
+  it("carry only what is read from a graveyard", () => {
+    const read = new Set([
       "affects", "condition", "fromGraveyard", "text",
       "grantPt", "grantPtPerCount", "grantKeywords", "grantToxic", "restrictions",
       "combatDamageByToughness", "canAttackAsThoughNoDefender", "cantBeSacrificed", "protection", "setBasePt",
+      "grantsActivated",
     ]);
+    const enters = (ability: StaticAbility): boolean => {
+      const r = ability.replacement;
+      return r?.event === "others-enter-battlefield" && r.exileInstead === undefined && r.asCopyOf === undefined;
+    };
     const stray = POOL_CARDS.flatMap((def) =>
       def.static
         .filter((ability) => ability.fromGraveyard === true)
-        .flatMap((ability) => Object.keys(ability).filter((key) => !folded.has(key)).map((key) => `${def.name}: ${key}`)),
+        .flatMap((ability) =>
+          Object.keys(ability)
+            .filter((key) => !read.has(key) && !(key === "replacement" && enters(ability)))
+            .map((key) => `${def.name}: ${key}`),
+        ),
     );
     expect(stray).toEqual([]);
   });
