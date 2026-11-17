@@ -1443,7 +1443,15 @@ the beginning of the next end step, reveal … until you reveal **that many**
 creature cards" counts `{ remembered: "exiled" }`; Resplendent Marshal's
 reflexive "shares a creature type with **the exiled card**" names its creator's
 `{ thisWay: "exiled" }` the same way, since a reflexive ability's own this way
-is empty. A delayed ability also keeps its creator's X and "that player". The `this-way` condition (§10) asks the same
+is empty. A delayed ability also keeps its creator's X and "that player", and
+its target slots: Rescue from the Underworld's "return that card **and the
+sacrificed card** to the battlefield under your control at the beginning of
+your next upkeep" is a `delayed-trigger` with `remember: { sacrificed: { set: {
+paid: "sacrificed" } } }` over a `simultaneous` `sequence` of two
+`put-onto-battlefield`s, `target: 0` and `{ remembered: "sacrificed" }` — the
+cost's card kept in the stint it went to (a graveyard, or exile under a
+replacement; a token in none), so either one that has left since stays put,
+and both enter at once (rule 603.6a). The `this-way` condition (§10) asks the same
 question as an "if" — Hakbal's "you may put a land card from your hand onto
 the battlefield. If you don't, draw a card" is a `look-and-choose` from the
 hand, then a `conditional` on `{ kind: "this-way", what:
