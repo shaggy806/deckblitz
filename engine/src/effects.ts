@@ -2835,6 +2835,20 @@ export type EffectSpec =
        * it as target 0. `upTo` and `min` are read as 1; `together`,
        * `random`, `remember`, `keepTargets` and `thenTogether` aren't read. */
       readonly orPlayers?: PlayerScope;
+      /** "Choose **a source** [you control]" (rule 609.7a), not only a
+       * permanent: exactly one permanent, spell on the stack, object an
+       * ability on the stack or a waiting replacement or delayed trigger
+       * refers to, or face-up object in the command zone, matching `filter`
+       * from its controller's side — the `prevent-damage-from-chosen-source`
+       * choice — and `then` applied to it as target 0. Desperate Gambit's
+       * "choose a source you control and flip a coin": `{ filter: {
+       * controlledBy: "you" }, min: 1, upTo: 1, damageSource: true, then: {
+       * kind: "flip-coin", … } }`, each branch a `replacement-effect` with
+       * `fromObject: 0` — which, chosen as a permanent spell, also covers the
+       * permanent it becomes (609.7a). `upTo` and `min` are read as 1, and
+       * the other choice fields aren't read. Nothing happens with no source
+       * to choose. */
+      readonly damageSource?: true;
     }
   | {
       /** Set only by the engine — a `choose-permanents`' `remember`, applied
@@ -14659,7 +14673,7 @@ export interface EffectApi {
   /** Ask for a source of damage (rule 609.7a) — the permanents and spells
    * on the stack matching `filter` — and apply `then` to it as target 0. See
    * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
-  chooseDamageSource(filter: CardFilter, then: EffectSpec): void;
+  chooseDamageSource(filter: CardFilter, then: EffectSpec, prompt?: string): void;
   /** A one-shot shield on `protect` against damage from `source` only — see
    * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
   preventDamageFrom(
@@ -19416,6 +19430,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "choose-permanents": {
+      // "Choose a source you control" (rule 609.7a): permanents, spells and
+      // what's referred to, as the chosen-source shield's choice.
+      if (spec.damageSource === true) {
+        ctx.chooseDamageSource(spec.filter, spec.then, spec.prompt);
+        return;
+      }
       const chooser = spec.chooser === undefined ? ctx.controller : chooserPlayer(spec.chooser, ctx);
       if (chooser === undefined) return;
       let except: readonly ObjectId[] =

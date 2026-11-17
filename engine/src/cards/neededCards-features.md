@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A source you control chosen, its next damage doubled or prevented on a flip — built 2026-11-17
+
+The key `effect:chosen-source-next-damage-doubled`: `choose-permanents`' `damageSource: true` asks the
+chosen-source shield's choice (rule 609.7a: permanents, spells on the stack, what an ability on the stack refers
+to) with any `then`, the source as target 0 — here a `flip-coin` whose branches are Impulsive Maneuvers'
+`replacement-effect` shields (`next: true`, `fromObject: 0`), any damage, not only combat. A `replacement-effect`'s
+`fromObject` that's a spell on the stack now follows it to the permanent it becomes (`orBecomes`, as the
+prevention shield's). Desperate Gambit (rank 12081). `test/chosen-source-double-or-prevent.test.ts`.
+
 ### "Whenever damage from a creature is prevented this way", once per creature — built 2026-11-17
 
 The key `trigger:damage-prevented-this-way` needed no new vocabulary: Comeuppance's split `damage-rule`s (the

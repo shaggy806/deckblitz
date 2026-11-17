@@ -45408,7 +45408,12 @@ controlledBy,
             ? { then: { spec: then, by: source, controller, targets: targets.map((t) => t ?? null), ...(countsUnprevented ? { countsUnprevented: true as const } : {}) } }
             : {}),
           ...(object !== undefined ? { zoneChangeCount: object.zoneChangeCount ?? 0 } : {}),
-          ...(from !== undefined ? { from: { object: from.id, zoneChangeCount: from.zoneChangeCount ?? 0, you: controller } } : {}),
+          // A spell on the stack — a source chosen as one (Desperate Gambit) —
+          // covers the permanent it becomes too (rule 609.7a), as the
+          // chosen-source shield's does.
+          ...(from !== undefined
+            ? { from: { object: from.id, zoneChangeCount: from.zoneChangeCount ?? 0, ...(from.zone === "stack" ? { orBecomes: true as const } : {}), you: controller } }
+            : {}),
         });
       },
       unpreventably: (fn) => {
@@ -45516,7 +45521,7 @@ controlledBy,
         this.state.activeReplacements.push({ ...made, target, left: amount, ...stint, madeIn: since });
         this.emit({ type: "prevention-shield-created", target, amount });
       },
-      chooseDamageSource: (filter, then) => {
+      chooseDamageSource: (filter, then, prompt) => {
         // Rule 609.7a: a permanent, a spell on the stack, the source of an
         // ability on the stack that has left the battlefield — a creature
         // that died with its "deals damage" trigger waiting, read as it last
@@ -45570,7 +45575,7 @@ controlledBy,
           eligible,
           min: 1,
           max: 1,
-          prompt: "Choose a source of damage",
+          prompt: prompt ?? "Choose a source of damage",
           then,
           source,
           x,
