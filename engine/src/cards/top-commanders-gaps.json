@@ -2937,7 +2937,9 @@
   "effect:return-exiled-with-counter",
   "static:grant-jump-start-to-graveyard-cards",
   "filter:has-unearth",
-  "replacement:enters-with-counter-via-static-graveyard-permission"
+  "replacement:enters-with-counter-via-static-graveyard-permission",
+  "replacement:enters-with-counter-via-static-graveyard-permission",
+  "trigger:played-card-exiled-this-way"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
