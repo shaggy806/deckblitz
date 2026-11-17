@@ -5268,8 +5268,14 @@ scope.
 turn, further events don't trigger it — which also makes "whenever **one or
 more** …" exact on a per-object trigger, since the first of a batch triggers
 it and the rest can't. Per ability of one object: a permanent that leaves
-and returns may trigger again. A "one or more … enter" with no once-a-turn
-limit is `batched: true` on the `enters-battlefield` trigger instead.
+and returns may trigger again. One a static grants (`grantsTriggered`) is
+kept per grant — the granting permanent in its stint, and which ability —
+so two grantors give two abilities, each once a turn, and a new grantor's
+is a new one (Cursed Wombat's "Permanents you control have 'Whenever one or
+more +1/+1 counters are put on this permanent, put an additional +1/+1
+counter on it. This ability triggers only once each turn.'"). A "one or
+more … enter" with no once-a-turn limit is `batched: true` on the
+`enters-battlefield` trigger instead.
 
 **`condition?`** (`StaticCondition`, the same union section 10 documents) is an
 **intervening-if** clause — rule 603.4, "When ~ enters, **if** you control a

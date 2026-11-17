@@ -34389,11 +34389,11 @@ export class Game {
           !this.enterBatchAlreadyFired(ability.trigger, `${id}#${index}`) &&
           !(
             ability.oncePerTurn === true &&
-            this.triggeredOnceThisTurn(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount)
+            this.triggeredOnceThisTurn(live, this.onceWhich(ability, index, ref), lastSeen?.zoneChangeCount)
           ) &&
           !(
             ability.triggersOnlyOnce === true &&
-            triggeredOnceEver(this.state, this.onceKey(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount))
+            triggeredOnceEver(this.state, this.onceKey(live, this.onceWhich(ability, index, ref), lastSeen?.zoneChangeCount))
           ) &&
           // "… Do this only once each turn" (rule 603.2h): once its controller
           // has done it this turn, the ability doesn't trigger at all.
@@ -34686,11 +34686,11 @@ export class Game {
             // "When ~ enters and whenever …, triggers only once each turn"
             // is one ability printed as two entries (`sameAbilityAs`): its
             // once a turn is shared (MACH-1, Swooping Scoundrel).
-            this.markTriggeredOnce(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount);
+            this.markTriggeredOnce(live, this.onceWhich(ability, index, ref), lastSeen?.zoneChangeCount);
           }
           // "This ability triggers only once": this firing is its one.
           if (ability.triggersOnlyOnce === true) {
-            noteTriggeredOnceEver(this.state, this.onceKey(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount));
+            noteTriggeredOnceEver(this.state, this.onceKey(live, this.onceWhich(ability, index, ref), lastSeen?.zoneChangeCount));
           }
           // "Whenever one or more … enter": this firing is the entry's one
           // (see `enterBatchAlreadyFired`), whatever the batch count.
@@ -35049,16 +35049,35 @@ export class Game {
     if (this.state.delayedTriggers.length > 0) this.fireWheneverWatchers(event);
   }
 
-  /** Has `object`'s `oncePerTurn` triggered ability `index` triggered yet
-   * this turn, as this object? `stint` is the battlefield `zoneChangeCount`
-   * of a source that has just left and is looking back (its dies trigger
-   * seeing the rest of a wrath): it is still the object that triggered
-   * earlier this turn, though its move has already bumped the count. */
-  private triggeredOnceThisTurn(object: GameObject, index: number, stint?: number): boolean {
-    return abilityCountThisTurn(this.state, "triggered", this.onceKey(object, index, stint)) > 0;
+  /** Has `object`'s `oncePerTurn` triggered ability `which` (see
+   * {@link onceWhich}) triggered yet this turn, as this object? `stint` is
+   * the battlefield `zoneChangeCount` of a source that has just left and is
+   * looking back (its dies trigger seeing the rest of a wrath): it is still
+   * the object that triggered earlier this turn, though its move has already
+   * bumped the count. */
+  private triggeredOnceThisTurn(object: GameObject, which: number | string, stint?: number): boolean {
+    return abilityCountThisTurn(this.state, "triggered", this.onceKey(object, which, stint)) > 0;
   }
 
-  private markTriggeredOnce(object: GameObject, index: number, stint?: number): void {
+  /**
+   * Which of an object's triggered abilities a "triggers only once each
+   * turn" (or "only once") is kept under: its index in the object's list —
+   * `sameAbilityAs`'s, for one ability written as two entries — or, for one a
+   * static grants, that grant: the granting permanent in its stint, which
+   * static and which of its abilities. Two such permanents grant two
+   * abilities, each once a turn, and another one's — or the same one's back
+   * again (rule 400.7) — is a new ability, wherever it sits in the list
+   * (Cursed Wombat's rulings).
+   */
+  private onceWhich(ability: TriggeredAbility, index: number, ref: GrantedAbilityRef | undefined): number | string {
+    if (ref?.kind === "static" && ref.granter !== undefined) {
+      const which = ability.sameAbilityAs ?? ref.index;
+      return `granted:${ref.cardName}:${ref.staticIndex}:${ref.list}:${which}@${ref.granter}~${ref.granterStint ?? 0}`;
+    }
+    return ability.sameAbilityAs ?? index;
+  }
+
+  private markTriggeredOnce(object: GameObject, index: number | string, stint?: number): void {
     // Straight to the journal, not through `Game.journal`: this runs inside
     // `detectTriggers`' cache region, and nothing cached reads `triggered`
     // entries (only this trigger scan does), so clearing the cache here
@@ -35088,10 +35107,11 @@ export class Game {
     return this.modesChosenFor(this.triggerTurnKey(sourceId, index, ref, false), false).length > 0;
   }
 
-  /** The journal's key for `object`'s triggered ability `index` in `stint`
-   * (its battlefield stint; see `triggeredOnceThisTurn`). */
-  private onceKey(object: GameObject, index: number, stint?: number): string {
-    return `${object.id}~${stint ?? object.zoneChangeCount ?? 0}#triggered:${index}`;
+  /** The journal's key for `object`'s triggered ability `which` (see
+   * {@link onceWhich}) in `stint` (its battlefield stint; see
+   * `triggeredOnceThisTurn`). */
+  private onceKey(object: GameObject, which: number | string, stint?: number): string {
+    return `${object.id}~${stint ?? object.zoneChangeCount ?? 0}#triggered:${which}`;
   }
 
   /**
