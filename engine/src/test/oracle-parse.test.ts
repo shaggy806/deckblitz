@@ -9185,6 +9185,21 @@ describe("counters put or removed this way", () => {
     });
     // A total it can't read leaves the line alone.
     expect(face("Test", "Sorcery", "Distribute X +1/+1 counters among any number of creatures you control, where X is your luck.").complete).toBe(false);
+    // "Among it and any number of commanders": the source always one of them.
+    const stumpsquall = face(
+      "Stumpsquall Hydra",
+      "Creature — Hydra",
+      "When this creature enters, distribute X +1/+1 counters among it and any number of commanders.",
+    );
+    expect(stumpsquall.triggered[0].effect).toEqual({
+      kind: "counters-distributed",
+      counter: "+1/+1",
+      total: "x",
+      filter: { isCommander: true, isSource: false },
+      withSource: true,
+      among: "commanders",
+    });
+    expect(stumpsquall.complete).toBe(true);
   });
 
   it("reads Thief of Blood's removal as it enters and the counters it enters with", () => {

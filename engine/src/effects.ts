@@ -8945,11 +8945,20 @@ export type EffectSpec =
        * Maelstrom): at least one is chosen when any matches, rather than
        * "any number" of them. */
       readonly atLeastOne?: true;
+      /** "Among **it** and any number of commanders" (Stumpsquall Hydra):
+       * the effect's source, while it's still the permanent the ability came
+       * from (rule 400.7), is always one of them and gets at least one; the
+       * others are chosen from `filter` (give it `isSource: false`), up to
+       * the total less one. With the source gone, the others alone, any
+       * number of them, none included (the card's ruling). */
+      readonly withSource?: true;
       /** Engine-built, never authored: the total read as it began, the
-       * permanents chosen (a token stack once per token), and the shares
-       * chosen so far, in that order. */
+       * source when `withSource` holds it (`lead`), the permanents chosen (a
+       * token stack once per token), and the shares chosen so far, in that
+       * order. */
       readonly progress?: {
         readonly total: number;
+        readonly lead?: ObjectId;
         readonly picked?: readonly ObjectId[];
         readonly shares?: readonly number[];
       };
@@ -16480,14 +16489,34 @@ function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distribu
       // That player gone or the target illegal: nobody to distribute among.
       if (side === undefined) return;
     }
+    // "Among it and …" (`withSource`): the source, only while it's still the
+    // permanent the ability came from (rule 400.7).
+    const lead =
+      spec.withSource === true &&
+      ctx.sourceLost !== true &&
+      ctx.onBattlefield(ctx.source) &&
+      ctx.stintNow(ctx.source) === ctx.sourceStintNow()
+        ? ctx.source
+        : undefined;
     const below = ctx.parkedCount();
     const among = spec.among ?? "permanents";
-    const howMany = spec.atLeastOne === true ? (total === 1 ? "one of the" : `one to ${total}`) : "any number of";
-    const prompt = `Distribute ${total} ${kind}${total === 1 ? "" : "s"} among ${howMany} ${among}: choose which get them`;
-    const options = { ...(side !== undefined ? { side } : {}), ...(spec.atLeastOne === true ? { atLeastOne: true as const } : {}) };
-    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, options)) {
-      ctx.resumeAfterDecisions({ ...spec, progress: { total } }, below);
+    const howMany =
+      lead !== undefined
+        ? `${ctx.objectName(lead)} and any number of`
+        : spec.atLeastOne === true
+          ? total === 1
+            ? "one of the"
+            : `one to ${total}`
+          : "any number of";
+    const prompt = `Distribute ${total} ${kind}${total === 1 ? "" : "s"} among ${howMany} ${among}: choose which ${lead !== undefined ? "others " : ""}get them`;
+    const options = { ...(side !== undefined ? { side } : {}), ...(spec.atLeastOne === true && lead === undefined ? { atLeastOne: true as const } : {}) };
+    const others = lead === undefined ? total : total - 1;
+    if (others > 0 && ctx.askChoosePermanentsKept(spec.filter, others, prompt, options)) {
+      ctx.resumeAfterDecisions({ ...spec, progress: { total, ...(lead !== undefined ? { lead } : {}) } }, below);
+      return;
     }
+    // Nothing else to choose: all of them on the source.
+    if (lead !== undefined) ctx.addCounter(ctx.singleOut({ kind: "object", object: lead }), spec.counter, total);
     return;
   }
   distributeShares(
@@ -16519,6 +16548,7 @@ function distributeShares(
   progress: {
     readonly total: number;
     readonly chooser?: PlayerId;
+    readonly lead?: ObjectId;
     readonly picked?: readonly ObjectId[];
     readonly shares?: readonly number[];
   },
@@ -16527,7 +16557,8 @@ function distributeShares(
   again: (shares: readonly number[], picked: readonly ObjectId[]) => EffectSpec,
   done: (picked: readonly ObjectId[], shares: readonly number[]) => void,
 ): void {
-  const picked = progress.picked ?? ctx.takeKept();
+  // A `lead` (the source of "among it and …") comes first, before the picks.
+  const picked = progress.picked ?? [...(progress.lead !== undefined ? [progress.lead] : []), ...ctx.takeKept()];
   if (picked.length === 0) return;
   const shares = [...(progress.shares ?? [])];
   if (progress.picked !== undefined) shares.push(Math.max(1, Math.floor(ctx.x)));

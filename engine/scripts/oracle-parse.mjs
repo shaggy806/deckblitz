@@ -3202,6 +3202,22 @@ function dividedDamageOf(s, ctx) {
  * any other sentence, `null` for one of these it can't read.
  */
 function distributedCountersOf(s, ctx) {
+  // "Distribute X +1/+1 counters among it and any number of commanders"
+  // (Stumpsquall Hydra): the X paid, the source always one of them
+  // (`withSource`), the others chosen as it resolves.
+  const withIt = /^(?:~ |[Ii]t )?[Dd]istribute X ([+-]\d+\/[+-]\d+|[a-z]+) counters among (?:it|~) and any number of (.+?)\.$/.exec(s);
+  if (withIt !== null) {
+    const filter = withIt[2] === "commanders" ? { isCommander: true } : parseTypePhrase(withIt[2]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return {
+      kind: "counters-distributed",
+      counter: withIt[1].toLowerCase(),
+      total: "x",
+      filter: { ...filter, isSource: false },
+      withSource: true,
+      among: withIt[2],
+    };
+  }
   const m =
     /^(?:~ |[Ii]t )?[Dd]istribute (?:X ([+-]\d+\/[+-]\d+|[a-z]+) counters|a number of ([+-]\d+\/[+-]\d+|[a-z]+) counters equal to (.+?)) among any number of (other )?(target )?(.+?)(?:, where X is (.+?))?\.$/.exec(s);
   if (m === null) return undefined;

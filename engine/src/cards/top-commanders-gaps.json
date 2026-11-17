@@ -2924,7 +2924,9 @@
   "effect:prohibit-non-mana-abilities-one-shot",
   "effect:turn-restriction-except-target",
   "amount:spell-target-count",
-  "effect:create-tokens-distributed-among-opponents"
+  "effect:create-tokens-distributed-among-opponents",
+  "effect:create-tokens-distributed-among-opponents",
+  "effect:distribute-counters-among-source-and-chosen"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

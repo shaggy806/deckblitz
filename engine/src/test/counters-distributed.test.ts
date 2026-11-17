@@ -250,3 +250,90 @@ describe("counters distributed among permanents chosen as it resolves (rule 608.
     expect(game.state.zones.perPlayer[A].hand.length).toBe(hand + 1);
   });
 });
+
+describe("among the source and chosen permanents (`withSource` — Stumpsquall Hydra)", () => {
+  /** Alice casts Stumpsquall Hydra for X; a commander of each player's and a
+   * non-commander are on the battlefield. */
+  const castHydra = (x: number, commanders = true) => {
+    const game = setUp();
+    for (let i = 0; i < x; i += 1) game.debugSpawn("Forest", A, "battlefield");
+    const mine = ready(game, "Grizzly Bears");
+    const theirs = ready(game, "Hill Giant", B);
+    const plain = ready(game, "Grizzly Bears", B);
+    if (commanders) {
+      game.state.objects[mine].isCommander = true;
+      game.state.objects[theirs].isCommander = true;
+    }
+    const card = game.debugSpawn("Stumpsquall Hydra", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card, targets: [], xValue: x });
+    // The spell resolves, its trigger goes on the stack and resolves.
+    waitFor(game, "choose-permanents");
+    return { game, hydra: card, mine, theirs, plain };
+  };
+
+  it("the Hydra always gets at least one; the rest go among any commanders, anyone's", () => {
+    const { game, hydra, mine, theirs, plain } = castHydra(5);
+    const awaiting = game.state.awaiting;
+    expect(awaiting?.kind).toBe("choose-permanents");
+    if (awaiting?.kind !== "choose-permanents") return;
+    // Commanders only, the Hydra not among the choices (it's always in), at most X - 1.
+    expect([...awaiting.eligible].sort()).toEqual([mine, theirs].sort());
+    expect(awaiting.max).toBe(2);
+    expect(awaiting.min).toBe(0);
+    choosePermanents(game, [theirs]);
+    // The Hydra's share first: at most 4, leaving one for bob's commander.
+    const first = game.state.awaiting;
+    expect(first?.kind === "choose-number" ? [first.min, first.max, first.prompt] : undefined).toEqual([
+      1,
+      4,
+      "How many +1/+1 counters on Stumpsquall Hydra? (5 left to distribute)",
+    ]);
+    chooseNumber(game, 2);
+    game.advanceUntil(quiet);
+    expect(plus(game, hydra)).toBe(2);
+    expect(plus(game, theirs)).toBe(3);
+    expect(plus(game, mine)).toBe(0);
+    expect(plus(game, plain)).toBe(0);
+  });
+
+  it("choosing no commanders puts every counter on the Hydra", () => {
+    const { game, hydra, mine, theirs } = castHydra(3);
+    choosePermanents(game, []);
+    game.advanceUntil(quiet);
+    expect(plus(game, hydra)).toBe(3);
+    expect(plus(game, mine) + plus(game, theirs)).toBe(0);
+  });
+
+  it("with no commander on the battlefield nobody is asked: all of them on the Hydra", () => {
+    const game = setUp();
+    for (let i = 0; i < 4; i += 1) game.debugSpawn("Forest", A, "battlefield");
+    const card = game.debugSpawn("Stumpsquall Hydra", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card, targets: [], xValue: 4 });
+    game.advanceUntil(quiet);
+    expect(plus(game, card)).toBe(4);
+  });
+
+  it("with the Hydra gone, any number of commanders — none of them included (its ruling)", () => {
+    const game = setUp();
+    for (let i = 0; i < 4; i += 1) game.debugSpawn("Forest", A, "battlefield");
+    const mine = ready(game, "Grizzly Bears");
+    game.state.objects[mine].isCommander = true;
+    const card = game.debugSpawn("Stumpsquall Hydra", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card, targets: [], xValue: 4 });
+    // The trigger waits on the stack; the Hydra leaves first.
+    game.advanceUntil((s) => (s.objects[card]?.zone === "battlefield" && s.zones.shared.stack.length > 0) || quiet(s));
+    expect(game.state.objects[card].zone).toBe("battlefield");
+    expect(game.state.zones.shared.stack.length).toBe(1);
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [obj(card)]);
+    waitFor(game, "choose-permanents");
+    const awaiting = game.state.awaiting;
+    expect(awaiting?.kind).toBe("choose-permanents");
+    if (awaiting?.kind !== "choose-permanents") return;
+    expect(awaiting.eligible).toEqual([mine]);
+    expect(awaiting.max).toBe(1);
+    expect(awaiting.min).toBe(0);
+    choosePermanents(game, [mine]);
+    game.advanceUntil(quiet);
+    expect(plus(game, mine)).toBe(4);
+  });
+});
