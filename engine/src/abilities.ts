@@ -2077,6 +2077,13 @@ export type TriggerKind =
        * reading aren't for these; a `once: "per-event"` count is of players
        * alone. */
       readonly orBattle?: true;
+      /** "…dealt to you **or a planeswalker you control**" (Vengeful
+       * Pharaoh): a planeswalker dealt damage is a recipient of its own, like
+       * an `orBattle` battle, when its controller is a player `to` allows
+       * (`"you"`: the ability's controller). The card's rulings: damage to
+       * you and to a planeswalker of yours at once is two triggers, several
+       * creatures hitting you at once one. No trigger player for it. */
+      readonly orPlaneswalker?: true;
     }
   | {
       /** This creature was declared as a blocker — the mirror of `attacks`

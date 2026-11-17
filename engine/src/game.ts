@@ -34718,6 +34718,31 @@ export class Game {
    * its own is queued as an ability that chooses them as it goes on the
    * stack; one without acts on the creating ability's.
    */
+  /** Whether a permanent dealt damage is a recipient a `deals-damage-batch`
+   * trigger counts: a battle for an `orBattle` one ("…to a player or
+   * battle", no player narrowing), a planeswalker for an `orPlaneswalker`
+   * one when `to` allows its controller ("…to you or a planeswalker you
+   * control"). */
+  private damagedBatchObjectCounts(
+    spec: Extract<TriggerSpec, { on: "deals-damage-batch" }>,
+    object: ObjectId,
+    self: GameObject,
+  ): boolean {
+    const permanent = this.state.objects[object];
+    if (permanent === undefined) return false;
+    const types = effectiveTypes(this.state, this.registry, permanent);
+    if (spec.orBattle === true && (spec.to === undefined || spec.to === "player") && types.includes("battle")) return true;
+    if (spec.orPlaneswalker !== true || !types.includes("planeswalker")) return false;
+    const controller = permanent.controller;
+    return spec.to === "opponent"
+      ? controller !== self.controller
+      : spec.to === "you"
+        ? controller === self.controller
+        : spec.to === "enchanted-player"
+          ? controller === self.attachedToPlayer
+          : true;
+  }
+
   /** Add `event`'s damage to what a `deals-damage-batch` trigger is owed for
    * the damage event under way: one entry per watcher (`watcher`) and, unless
    * it fires once per event, per recipient — a player, or a battle for an
@@ -37526,10 +37551,9 @@ export class Game {
           to.kind === "object"
             ? // "…to a player or battle" (Zurgo and Ojutai): a battle is a
               // recipient of its own; the player narrowings don't name one.
-              spec.orBattle !== true ||
-              (spec.to !== undefined && spec.to !== "player") ||
-              this.state.objects[to.object] === undefined ||
-              !effectiveTypes(this.state, this.registry, this.state.objects[to.object]!).includes("battle")
+              // "…to you or a planeswalker you control" (Vengeful Pharaoh): a
+              // planeswalker is, when `to` allows its controller.
+              !this.damagedBatchObjectCounts(spec, to.object, self)
             : (spec.to === "opponent" && to.player === self.controller) ||
               (spec.to === "you" && to.player !== self.controller) ||
               (spec.to === "enchanted-player" && to.player !== self.attachedToPlayer)
