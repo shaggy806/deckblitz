@@ -994,6 +994,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Flameheart Werewolf": "https://cards.scryfall.io/art_crop/back/3/3/33e542ce-1106-489d-9563-bd62886b8ed3.jpg",
   "Flameshape": "https://cards.scryfall.io/art_crop/back/9/b/9b0d29a1-7da9-4fb3-8536-8ff8d8acae0b.jpg",
   "Flamethrower Sonata": "https://cards.scryfall.io/art_crop/back/8/7/87463b68-3642-41c7-a11c-67d524759b60.jpg",
+  "Flamewar, Streetwise Operative": "https://cards.scryfall.io/art_crop/back/8/7/876d9732-9201-4327-8748-7c87ec55453f.jpg",
   "Follow Him": "https://cards.scryfall.io/art_crop/back/3/1/31fed516-04e1-4453-b955-dfbd32bab2f3.jpg",
   "Forktail Sweep": "https://cards.scryfall.io/art_crop/back/3/d/3d74937b-c87f-4894-8f00-36e4d6844ebd.jpg",
   "Forsaken Thresher": "https://cards.scryfall.io/art_crop/back/a/2/a27b9d82-f613-4789-9e8b-f37db5597027.jpg",

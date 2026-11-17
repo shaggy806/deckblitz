@@ -605,6 +605,7 @@ import _poolNightsquadCommando from "../pool/nightsquad-commando.js";
 import _poolNinjaPizza from "../pool/ninja-pizza.js";
 import _poolNissaStewardOfElements from "../pool/nissa-steward-of-elements.js";
 import _poolNissasJudgment from "../pool/nissas-judgment.js";
+import _poolNivMizzetSupreme from "../pool/niv-mizzet-supreme.js";
 import _poolNobleSteeds from "../pool/noble-steeds.js";
 import _poolNorikaYamazakiThePoet from "../pool/norika-yamazaki-the-poet.js";
 import _poolNornsChoirmaster from "../pool/norns-choirmaster.js";
@@ -1680,6 +1681,7 @@ const shard: CardShard = {
     _poolNinjaPizza,
     _poolNissaStewardOfElements,
     _poolNissasJudgment,
+    _poolNivMizzetSupreme,
     _poolNobleSteeds,
     _poolNorikaYamazakiThePoet,
     _poolNornsChoirmaster,

@@ -9862,6 +9862,8 @@ import _poolFlamethrowerSonata from "./pool/flamethrower-sonata.js";
 import _poolFlametongueKavu from "./pool/flametongue-kavu.js";
 import _poolFlametongueYearling from "./pool/flametongue-yearling.js";
 import _poolFlamewakePhoenix from "./pool/flamewake-phoenix.js";
+import _poolFlamewarBrashVeteran from "./pool/flamewar-brash-veteran.js";
+import _poolFlamewarStreetwiseOperative from "./pool/flamewar-streetwise-operative.js";
 import _poolFlamewaveInvoker from "./pool/flamewave-invoker.js";
 import _poolFlamewright from "./pool/flamewright.js";
 import _poolFlamingFistOfficer from "./pool/flaming-fist-officer.js";
@@ -14104,6 +14106,7 @@ import _poolInvertPolarity from "./pool/invert-polarity.js";
 import _poolInvertTheSkies from "./pool/invert-the-skies.js";
 import _poolInvert from "./pool/invert.js";
 import _poolInvertedIceberg from "./pool/inverted-iceberg.js";
+import _poolInverterOfTruth from "./pool/inverter-of-truth.js";
 import _poolInvestigatorsJournal from "./pool/investigators-journal.js";
 import _poolInvigorate from "./pool/invigorate.js";
 import _poolInvigoratedRampage from "./pool/invigorated-rampage.js";
@@ -18970,6 +18973,7 @@ import _poolNivMizzetGhostCounsel from "./pool/niv-mizzet-ghost-counsel.js";
 import _poolNivMizzetGuildpact from "./pool/niv-mizzet-guildpact.js";
 import _poolNivMizzetParun from "./pool/niv-mizzet-parun.js";
 import _poolNivMizzetReborn from "./pool/niv-mizzet-reborn.js";
+import _poolNivMizzetSupreme from "./pool/niv-mizzet-supreme.js";
 import _poolNivMizzetTheFiremind from "./pool/niv-mizzet-the-firemind.js";
 import _poolNivMizzetVisionary from "./pool/niv-mizzet-visionary.js";
 import _poolNivarScienceAcademy from "./pool/nivar-science-academy.js";
@@ -43326,6 +43330,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlametongueKavu,
   _poolFlametongueYearling,
   _poolFlamewakePhoenix,
+  _poolFlamewarBrashVeteran,
+  _poolFlamewarStreetwiseOperative,
   _poolFlamewaveInvoker,
   _poolFlamewright,
   _poolFlamingFistOfficer,
@@ -47568,6 +47574,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInvertTheSkies,
   _poolInvert,
   _poolInvertedIceberg,
+  _poolInverterOfTruth,
   _poolInvestigatorsJournal,
   _poolInvigorate,
   _poolInvigoratedRampage,
@@ -52434,6 +52441,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNivMizzetGuildpact,
   _poolNivMizzetParun,
   _poolNivMizzetReborn,
+  _poolNivMizzetSupreme,
   _poolNivMizzetTheFiremind,
   _poolNivMizzetVisionary,
   _poolNivarScienceAcademy,
@@ -76803,6 +76811,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flametongue-kavu": _poolFlametongueKavu,
   "pool/flametongue-yearling": _poolFlametongueYearling,
   "pool/flamewake-phoenix": _poolFlamewakePhoenix,
+  "pool/flamewar-brash-veteran": _poolFlamewarBrashVeteran,
+  "pool/flamewar-streetwise-operative": _poolFlamewarStreetwiseOperative,
   "pool/flamewave-invoker": _poolFlamewaveInvoker,
   "pool/flamewright": _poolFlamewright,
   "pool/flaming-fist-officer": _poolFlamingFistOfficer,
@@ -81045,6 +81055,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/invert-the-skies": _poolInvertTheSkies,
   "pool/invert": _poolInvert,
   "pool/inverted-iceberg": _poolInvertedIceberg,
+  "pool/inverter-of-truth": _poolInverterOfTruth,
   "pool/investigators-journal": _poolInvestigatorsJournal,
   "pool/invigorate": _poolInvigorate,
   "pool/invigorated-rampage": _poolInvigoratedRampage,
@@ -85911,6 +85922,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/niv-mizzet-guildpact": _poolNivMizzetGuildpact,
   "pool/niv-mizzet-parun": _poolNivMizzetParun,
   "pool/niv-mizzet-reborn": _poolNivMizzetReborn,
+  "pool/niv-mizzet-supreme": _poolNivMizzetSupreme,
   "pool/niv-mizzet-the-firemind": _poolNivMizzetTheFiremind,
   "pool/niv-mizzet-visionary": _poolNivMizzetVisionary,
   "pool/nivar-science-academy": _poolNivarScienceAcademy,

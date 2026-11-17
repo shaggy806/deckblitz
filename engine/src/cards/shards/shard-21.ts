@@ -306,6 +306,7 @@ import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
 import _poolFlamethrowerSonata from "../pool/flamethrower-sonata.js";
+import _poolFlamewarBrashVeteran from "../pool/flamewar-brash-veteran.js";
 import _poolFlamewright from "../pool/flamewright.js";
 import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
 import _poolFlickerform from "../pool/flickerform.js";
@@ -1312,6 +1313,7 @@ const shard: CardShard = {
     _poolFlameOfAnor,
     _poolFlameshape,
     _poolFlamethrowerSonata,
+    _poolFlamewarBrashVeteran,
     _poolFlamewright,
     _poolFleetingEffigy,
     _poolFlickerform,

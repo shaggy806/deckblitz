@@ -328,6 +328,7 @@ import _poolFishersTalent from "../pool/fishers-talent.js";
 import _poolFlailingDrake from "../pool/flailing-drake.js";
 import _poolFlameOn from "../pool/flame-on.js";
 import _poolFlameSweep from "../pool/flame-sweep.js";
+import _poolFlamewarStreetwiseOperative from "../pool/flamewar-streetwise-operative.js";
 import _poolFlareOfFortitude from "../pool/flare-of-fortitude.js";
 import _poolFlatline from "../pool/flatline.js";
 import _poolFleecemaneLion from "../pool/fleecemane-lion.js";
@@ -1370,6 +1371,7 @@ const shard: CardShard = {
     _poolFlailingDrake,
     _poolFlameOn,
     _poolFlameSweep,
+    _poolFlamewarStreetwiseOperative,
     _poolFlareOfFortitude,
     _poolFlatline,
     _poolFleecemaneLion,
