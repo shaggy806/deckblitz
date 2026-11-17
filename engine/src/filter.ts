@@ -1650,19 +1650,7 @@ export function stackObjectTargetsMatch(
   ctx: FilterContext,
 ): boolean {
   if (spell.zone !== "stack") return false;
-  const auto = new Set(spell.autoTargetSlots ?? []);
-  // A target that has changed zones since it was targeted is a new object
-  // (rule 400.7) the spell doesn't target — the Rebuff the Wicked ruling.
-  const gone = (i: number): boolean => {
-    const t = spell.targets?.[i];
-    const stint = spell.targetStints?.[i];
-    if (t?.kind !== "object" || stint === undefined || stint === null) return false;
-    return (state.objects[t.object]?.zoneChangeCount ?? 0) !== stint;
-  };
-  type Aimed = TargetRef | { readonly kind: "gone" };
-  const targets = (spell.targets ?? []).flatMap((t, i): Aimed[] =>
-    t === undefined || t === null || auto.has(i) ? [] : gone(i) ? [{ kind: "gone" }] : [t],
-  );
+  const { targets, suchAOne } = aimedTargets(state, registry, spell, clause, ctx);
   if (targets.length === 0) return false;
   // "With a single target" (115.9a): the targets as chosen, gone or not.
   if (clause.count !== undefined) {
@@ -1678,13 +1666,60 @@ export function stackObjectTargetsMatch(
     );
     if (!same) return false;
   }
+  return clause.only === true ? targets.every(suchAOne) : targets.some(suchAOne);
+}
+
+/** How many different permanents and players among a stack object's targets
+ * meet `clause`'s `permanent`, `player` and `source` — a cast trigger's
+ * `countMatchingTargets` (Arcee, Acrobatic Coupe's "that many"). `count`,
+ * `single` and `only` ask about the whole set and aren't read here. */
+export function stackObjectTargetsMatching(
+  state: GameState,
+  registry: CardRegistry,
+  spell: GameObject,
+  clause: SpellTargetsFilter,
+  ctx: FilterContext,
+): number {
+  if (spell.zone !== "stack") return 0;
+  const { targets, suchAOne } = aimedTargets(state, registry, spell, clause, ctx);
+  const counted = new Set<string>();
+  for (const t of targets) {
+    if (t.kind !== "gone" && suchAOne(t)) counted.add(t.kind === "player" ? `player:${t.player}` : `object:${t.object}`);
+  }
+  return counted.size;
+}
+
+/** A stack object's target, or one that changed zones since it was targeted. */
+type Aimed = TargetRef | { readonly kind: "gone" };
+
+/** The stack object's chosen targets (auto-chosen slots left out) and whether
+ * one meets `clause`'s `permanent`, `player` and `source`. */
+function aimedTargets(
+  state: GameState,
+  registry: CardRegistry,
+  spell: GameObject,
+  clause: SpellTargetsFilter,
+  ctx: FilterContext,
+): { readonly targets: readonly Aimed[]; readonly suchAOne: (t: Aimed) => boolean } {
+  const auto = new Set(spell.autoTargetSlots ?? []);
+  // A target that has changed zones since it was targeted is a new object
+  // (rule 400.7) the spell doesn't target — the Rebuff the Wicked ruling.
+  const gone = (i: number): boolean => {
+    const t = spell.targets?.[i];
+    const stint = spell.targetStints?.[i];
+    if (t?.kind !== "object" || stint === undefined || stint === null) return false;
+    return (state.objects[t.object]?.zoneChangeCount ?? 0) !== stint;
+  };
+  const targets = (spell.targets ?? []).flatMap((t, i): Aimed[] =>
+    t === undefined || t === null || auto.has(i) ? [] : gone(i) ? [{ kind: "gone" }] : [t],
+  );
   const inner: FilterContext = {
     you: ctx.you,
     ...(ctx.x !== undefined ? { x: ctx.x } : {}),
     ...(ctx.amount !== undefined ? { amount: ctx.amount } : {}),
     ...(ctx.source !== undefined ? { source: ctx.source } : {}),
   };
-  const suchAOne = (t: (typeof targets)[number]): boolean => {
+  const suchAOne = (t: Aimed): boolean => {
     if (t.kind === "gone") return false;
     if (t.kind === "player") {
       if (clause.player === undefined || clause.source === true) return false;
@@ -1697,7 +1732,7 @@ export function stackObjectTargetsMatch(
     if (clause.source !== undefined && (t.object === ctx.source) !== clause.source) return false;
     return clause.permanent === undefined || matchesFilter(state, registry, t.object, clause.permanent, inner);
   };
-  return clause.only === true ? targets.every(suchAOne) : targets.some(suchAOne);
+  return { targets, suchAOne };
 }
 
 export interface FilterContext {

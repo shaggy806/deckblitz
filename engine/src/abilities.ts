@@ -2655,6 +2655,13 @@ export type TriggerKind =
        * "whenever you cast a spell with one or more targets". `{ triggerValue:
        * true }` is then how many targets it has ("draw that many cards"). */
       readonly withTargets?: boolean;
+      /** Make `{ triggerValue: true }` how many different permanents and
+       * players among the spell's targets meet `filter.targets` (its
+       * `permanent`, `player` and `source`), read as it's cast — Arcee,
+       * Acrobatic Coupe's "whenever you cast a spell that targets one or more
+       * creatures or Vehicles you control, put **that many** +1/+1 counters":
+       * a target that leaves before the trigger resolves still counted. */
+      readonly countMatchingTargets?: true;
       /** Only a spell with this "when you cast this spell" keyword ability as
        * it's cast, printed or granted — Aurora Phoenix's "whenever you cast a
        * spell **with cascade**" (rule 702.85a). Read off the abilities the

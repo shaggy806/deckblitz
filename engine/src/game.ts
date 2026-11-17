@@ -391,9 +391,10 @@ import {
   printedManaCost,
   setCouldProduceReader,
   stackObjectTargetsMatch,
+  stackObjectTargetsMatching,
   weightedMatches,
 } from "./filter.js";
-import type { AggregateReads, AggregateSpec, CardFilter, WeightedMatch } from "./filter.js";
+import type { AggregateReads, AggregateSpec, CardFilter, SpellTargetsFilter, WeightedMatch } from "./filter.js";
 import {
   addToSet,
   memberCount,
@@ -34581,6 +34582,10 @@ export class Game {
               : // "Draw that many cards": how many targets the spell has.
                 trigger.on === "cast-spell" && trigger.withTargets === true && event.type === "spell-cast"
               ? this.spellTargetCount(event.object)
+              : // "That many": how many of its targets meet the trigger's
+                // `filter.targets`, as it's cast (Arcee, Acrobatic Coupe).
+                trigger.on === "cast-spell" && trigger.countMatchingTargets === true && event.type === "spell-cast"
+              ? this.matchingSpellTargets(event.object, trigger.filter?.targets, object)
               : // "For each other instant and sorcery spell you've cast
                 // before it this turn" (Thousand-Year Storm).
                 trigger.on === "cast-spell" && trigger.countCastBefore !== undefined && event.type === "spell-cast"
@@ -51613,6 +51618,16 @@ controlledBy,
     if (spell === undefined) return 0;
     const auto = new Set(spell.autoTargetSlots ?? []);
     return (spell.targets ?? []).filter((t, i) => t !== undefined && !auto.has(i)).length;
+  }
+
+  /** How many different permanents and players among the spell `id`'s targets
+   * meet `clause`, from `watcher`'s side — a cast trigger's
+   * `countMatchingTargets`. No clause: every target, as `spellTargetCount`. */
+  private matchingSpellTargets(id: ObjectId, clause: SpellTargetsFilter | undefined, watcher: GameObject): number {
+    const spell = this.state.objects[id];
+    if (spell === undefined) return 0;
+    if (clause === undefined) return this.spellTargetCount(id);
+    return stackObjectTargetsMatching(this.state, this.registry, spell, clause, { you: watcher.controller, source: watcher.id });
   }
 
   /** How many spells matching `filter` `caster` cast this turn before the
