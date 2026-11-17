@@ -903,6 +903,7 @@ import _poolThornOfTheBlackRose from "../pool/thorn-of-the-black-rose.js";
 import _poolThornling from "../pool/thornling.js";
 import _poolThoughtHemorrhage from "../pool/thought-hemorrhage.js";
 import _poolThrabenCharm from "../pool/thraben-charm.js";
+import _poolThreeDogGalaxyNewsDj from "../pool/three-dog-galaxy-news-dj.js";
 import _poolThrillOfPossibility from "../pool/thrill-of-possibility.js";
 import _poolThroneOfDeath from "../pool/throne-of-death.js";
 import _poolThroughTheBreach from "../pool/through-the-breach.js";
@@ -1968,6 +1969,7 @@ const shard: CardShard = {
     _poolThornling,
     _poolThoughtHemorrhage,
     _poolThrabenCharm,
+    _poolThreeDogGalaxyNewsDj,
     _poolThrillOfPossibility,
     _poolThroneOfDeath,
     _poolThroughTheBreach,

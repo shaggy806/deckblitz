@@ -957,6 +957,7 @@ import _poolTumbleMagnet from "../pool/tumble-magnet.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
 import _poolTwistedImage from "../pool/twisted-image.js";
+import _poolTwistsAndTurns from "../pool/twists-and-turns.js";
 import _poolUlamogsNullifier from "../pool/ulamogs-nullifier.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
 import _poolUndercityInformer from "../pool/undercity-informer.js";
@@ -1039,6 +1040,7 @@ import _poolYasminKhan from "../pool/yasmin-khan.js";
 import _poolYavimayaCoast from "../pool/yavimaya-coast.js";
 import _poolYearOfHell from "../pool/year-of-hell.js";
 import _poolYouFindSomePrisoners from "../pool/you-find-some-prisoners.js";
+import _poolZabazTheGlimmerwasp from "../pool/zabaz-the-glimmerwasp.js";
 import _poolZealousDisplay from "../pool/zealous-display.js";
 import _poolZealousStrike from "../pool/zealous-strike.js";
 import _poolZephyrWinder from "../pool/zephyr-winder.js";
@@ -2033,6 +2035,7 @@ const shard: CardShard = {
     _poolTurbulentWilderness,
     _poolTwistReality,
     _poolTwistedImage,
+    _poolTwistsAndTurns,
     _poolUlamogsNullifier,
     _poolUltimateGreenGoblin,
     _poolUndercityInformer,
@@ -2115,6 +2118,7 @@ const shard: CardShard = {
     _poolYavimayaCoast,
     _poolYearOfHell,
     _poolYouFindSomePrisoners,
+    _poolZabazTheGlimmerwasp,
     _poolZealousDisplay,
     _poolZealousStrike,
     _poolZephyrWinder,

@@ -1155,6 +1155,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Moonscarred Werewolf": "https://cards.scryfall.io/art_crop/back/e/e/ee539a5e-2d10-4666-9b52-5064562dd233.jpg",
   "Morning Apparition": "https://cards.scryfall.io/art_crop/back/2/d/2d3687e2-09e0-4753-aa02-88a19bde3330.jpg",
   "Murkwater Pathway": "https://cards.scryfall.io/art_crop/back/b/4/b4b99ebb-0d54-4fe5-a495-979aaa564aa8.jpg",
+  "Mycoid Maze": "https://cards.scryfall.io/art_crop/back/3/c/3cdf691e-96a5-45c7-9b94-6f04af81c8e4.jpg",
   "Mystic Monstrosity": "https://cards.scryfall.io/art_crop/back/1/1/115a9a44-131d-45f3-852a-40fd18e4afb6.jpg",
   "Mystic Peak": "https://cards.scryfall.io/art_crop/back/2/4/24d4f26e-7f96-4b38-867e-4fac819b2679.jpg",
   "Nameless Conqueror": "https://cards.scryfall.io/art_crop/back/5/1/517392f6-d3fd-4c59-8317-2a3595ab7562.jpg",

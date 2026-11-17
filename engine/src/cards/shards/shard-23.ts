@@ -482,6 +482,7 @@ import _poolKorCelebrant from "../pool/kor-celebrant.js";
 import _poolKorChant from "../pool/kor-chant.js";
 import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
 import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js";
+import _poolKrangShredder from "../pool/krang-shredder.js";
 import _poolKravensLastHunt from "../pool/kravens-last-hunt.js";
 import _poolKrovikanMist from "../pool/krovikan-mist.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
@@ -1539,6 +1540,7 @@ const shard: CardShard = {
     _poolKorChant,
     _poolKorSkyfisher,
     _poolKorlashHeirToBlackblade,
+    _poolKrangShredder,
     _poolKravensLastHunt,
     _poolKrovikanMist,
     _poolKukemssaPirates,

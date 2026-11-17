@@ -640,6 +640,7 @@ import _poolOdylicWraith from "../pool/odylic-wraith.js";
 import _poolOffenderAtLarge from "../pool/offender-at-large.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
 import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
+import _poolOkoTheRingleader from "../pool/oko-the-ringleader.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
 import _poolOmen from "../pool/omen.js";
@@ -1702,6 +1703,7 @@ const shard: CardShard = {
     _poolOffenderAtLarge,
     _poolOfferImmortality,
     _poolOildeepGearhulk,
+    _poolOkoTheRingleader,
     _poolOmenOfTheDead,
     _poolOmenOfTheSun,
     _poolOmen,

@@ -567,6 +567,7 @@ import _poolMobileHomestead from "../pool/mobile-homestead.js";
 import _poolMoggMob from "../pool/mogg-mob.js";
 import _poolMoleculeMan from "../pool/molecule-man.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
+import _poolMoltenDisaster from "../pool/molten-disaster.js";
 import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
 import _poolMonkIdealist from "../pool/monk-idealist.js";
 import _poolMoonlightHunt from "../pool/moonlight-hunt.js";
@@ -1597,6 +1598,7 @@ const shard: CardShard = {
     _poolMoggMob,
     _poolMoleculeMan,
     _poolMollyHayesRunaway,
+    _poolMoltenDisaster,
     _poolMomentOfTriumph,
     _poolMonkIdealist,
     _poolMoonlightHunt,

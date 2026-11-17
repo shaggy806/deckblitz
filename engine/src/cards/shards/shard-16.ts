@@ -317,6 +317,7 @@ import _poolFlashConscription from "../pool/flash-conscription.js";
 import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
+import _poolFleshwrither from "../pool/fleshwrither.js";
 import _poolFlickerwisp from "../pool/flickerwisp.js";
 import _poolFloodwaterDam from "../pool/floodwater-dam.js";
 import _poolFlourishingDefenses from "../pool/flourishing-defenses.js";
@@ -1422,6 +1423,7 @@ const shard: CardShard = {
     _poolFledglingGriffin,
     _poolFleetingImage,
     _poolFleetingMemories,
+    _poolFleshwrither,
     _poolFlickerwisp,
     _poolFloodwaterDam,
     _poolFlourishingDefenses,

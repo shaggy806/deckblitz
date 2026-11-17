@@ -621,6 +621,7 @@ import _poolMosquitoGuard from "../pool/mosquito-guard.js";
 import _poolMoxiteRefinery from "../pool/moxite-refinery.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
+import _poolMycoidMaze from "../pool/mycoid-maze.js";
 import _poolMycosynthFiend from "../pool/mycosynth-fiend.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
 import _poolNantukoMonastery from "../pool/nantuko-monastery.js";
@@ -1723,6 +1724,7 @@ const shard: CardShard = {
     _poolMoxiteRefinery,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
+    _poolMycoidMaze,
     _poolMycosynthFiend,
     _poolMyojinOfBloomingDawn,
     _poolNantukoMonastery,

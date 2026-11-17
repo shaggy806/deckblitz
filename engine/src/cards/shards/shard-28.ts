@@ -438,6 +438,7 @@ import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
 import _poolJayaBallard from "../pool/jaya-ballard.js";
 import _poolJewelThief from "../pool/jewel-thief.js";
 import _poolJhessianThief from "../pool/jhessian-thief.js";
+import _poolJocastaAutomatonAvenger from "../pool/jocasta-automaton-avenger.js";
 import _poolJointAssault from "../pool/joint-assault.js";
 import _poolJotunOwlKeeper from "../pool/jotun-owl-keeper.js";
 import _poolJovensFerrets from "../pool/jovens-ferrets.js";
@@ -1497,6 +1498,7 @@ const shard: CardShard = {
     _poolJayaBallard,
     _poolJewelThief,
     _poolJhessianThief,
+    _poolJocastaAutomatonAvenger,
     _poolJointAssault,
     _poolJotunOwlKeeper,
     _poolJovensFerrets,
