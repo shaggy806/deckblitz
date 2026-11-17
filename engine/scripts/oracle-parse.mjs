@@ -19251,6 +19251,11 @@ const STATIC_CONDITION_PREFIXES = [
   ["As long as you're the monarch, ", { kind: "monarch", who: "you" }],
   // Corrupted (an ability word, rule 207.2c): Bonepicker Skirge, Skrelv's Hive.
   ["As long as an opponent has three or more poison counters, ", { kind: "player-counters", counter: "poison", who: "opponent", atLeast: 3 }],
+  // Anya, Merciless Angel: strictly under half, which may be a fraction.
+  [
+    "As long as an opponent's life total is less than half their starting life total, ",
+    { kind: "life-total", who: "opponent", atMost: "below-half-starting" },
+  ],
   // Murders at Karlov Manor's "five or more mana values among cards in your
   // graveyard" (Aven Heartstabber): a `distinct` aggregate there.
   ["As long as there are five or more mana values among cards in your graveyard, ", FIVE_MANA_VALUES],
@@ -20817,6 +20822,22 @@ function perAmountStaticOf(line, text) {
   }
   if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each basic land type among lands you control\\.$`).exec(line))) {
     return { affects: subjectOf(m[1]), grantPtPerCount: { basicLandTypes: true, pt: pair(m[2], m[3]) }, text };
+  }
+  // "…for each opponent whose life total is less than half their starting
+  // life total" (Anya, Merciless Angel): strictly under half.
+  if (
+    (m = new RegExp(
+      `^${P}([+-]\\d+)/([+-]\\d+) for each opponent whose life total is less than half their starting life total\\.$`,
+    ).exec(line))
+  ) {
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: {
+        opponents: { where: { kind: "life-total", who: "that-player", atMost: "below-half-starting" } },
+        pt: pair(m[2], m[3]),
+      },
+      text,
+    };
   }
   if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for every (\\w+) cards in your graveyard\\.$`).exec(line))) {
     const step = numberOf(m[4]);

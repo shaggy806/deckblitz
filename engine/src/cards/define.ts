@@ -1304,7 +1304,10 @@ export type StaticCondition =
    * A life total, inclusive bounds: Bilbo, Birthday Celebrant's "activate
    * only if you have 111 or more life" is `atLeast: 111`; "if you have at
    * most half your starting life total" is `atMost: "half-starting"`
-   * (rounded down). `who` is `"you"` (default), `"opponent"` (some opponent
+   * (rounded down); "less than half their starting life total" is `atMost:
+   * "below-half-starting"` — strictly under half, a fraction allowed, so a
+   * starting 41's half is 20½ and 20 or less is under it (Anya, Merciless
+   * Angel's ruling). `who` is `"you"` (default), `"opponent"` (some opponent
    * does), `"each-opponent"` (every opponent does) or `"that-player"` — the
    * player a trigger or a `for-each-player` is about, read as it resolves
    * (Ezio Auditore da Firenze's "if that player has 10 or less life").
@@ -1318,7 +1321,7 @@ export type StaticCondition =
        * "greater than or equal to your starting life total" `{ startingPlus:
        * 0 }`, Cosmos Elixir's "greater than" `{ startingPlus: 1 }`. */
       readonly atLeast?: number | LifeFromStarting;
-      readonly atMost?: number | "half-starting" | LifeFromStarting;
+      readonly atMost?: number | "half-starting" | "below-half-starting" | LifeFromStarting;
     }
   /**
    * Another condition, read as though a different player were its "you" —
@@ -2533,8 +2536,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     /** Domain: the basic land types among lands that player controls — Manaforce
      * Mace's "+1/+1 for each basic land type among lands you control". */
     readonly basicLandTypes?: true;
-    /** The opponents that player has still in the game. */
-    readonly opponents?: true;
+    /** The opponents that player has still in the game. `{ where }` counts
+     * only those a condition holds for, each read as `"that-player"` (the
+     * `countPlayers` amount's `where`): Anya, Merciless Angel's "+3/+3 for
+     * each opponent whose life total is less than half their starting life
+     * total" is `{ where: { kind: "life-total", who: "that-player", atMost:
+     * "below-half-starting" } }`. */
+    readonly opponents?: true | { readonly where: StaticCondition };
     /** Count from **the affected permanent's controller's** side: every "you"
      * in the count is them — Disturbing Conversion's "-X/-0, where X is the
      * number of cards in its controller's graveyard". */

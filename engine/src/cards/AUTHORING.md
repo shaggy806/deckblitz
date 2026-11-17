@@ -999,7 +999,12 @@ control, a creature of two of them counted in whichever role makes the party
 largest, 700.8b — Malakir Blood-Priest; the same form is a
 `selfCostReduction` amount, Deadly Alliance, and a CDA count, Archpriest of
 Iona; `grantPtPerCount: { partySize: true }` is Ravager's Mace's "+1/+0 for
-each creature in your party"; "if you have a full party" (700.8c) is the
+each creature in your party"; `grantPtPerCount: { opponents: true }` is "for
+each opponent you have" (Blazing Sunsteel), and `opponents: { where }` only
+the opponents a condition holds for, each its `"that-player"` — Anya,
+Merciless Angel's "+3/+3 for each opponent whose life total is less than half
+their starting life total" (`where: { kind: "life-total", who: "that-player",
+atMost: "below-half-starting" }`); "if you have a full party" (700.8c) is the
 condition `{ kind: "full-party" }`, Linvala, Shield of Sea Gate's
 intervening if; "if two or more players have lost the game" is `{ kind:
 "players-lost", atLeast: 2 }`, Hot Pursuit's), **undaunted** (rule 702.125a — Coastal Breach, Curtains'
@@ -6888,7 +6893,10 @@ clause (section 9):
 - `{ kind: "life-total", who?, atLeast?, atMost? }` — a life total, inclusive:
   Bilbo, Birthday Celebrant's "activate only if you have 111 or more life"
   is `atLeast: 111`; "at most half your starting life total" is `atMost:
-  "half-starting"` (rounded down). `who` is `"you"` (default), `"opponent"`
+  "half-starting"` (rounded down); "**less than** half their starting life
+  total" is `atMost: "below-half-starting"`, strictly under a half that may
+  be a fraction (20 or less under a starting 41 — Anya, Merciless Angel's
+  ruling). `who` is `"you"` (default), `"opponent"`
   (some opponent), `"each-opponent"` (every opponent) or `"that-player"` — the
   player a trigger or `for-each-player` is about, in a `conditional` (Ezio
   Auditore da Firenze's "if that player has 10 or less life"). A bound may be

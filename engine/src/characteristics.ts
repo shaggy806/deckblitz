@@ -493,8 +493,15 @@ export function lifeWithinBounds(
   condition: Extract<StaticCondition, { kind: "life-total" }>,
 ): boolean {
   const start = state.rules.startingLife;
-  const bound = (b: number | "half-starting" | LifeFromStarting | undefined): number | undefined =>
-    b === undefined || typeof b === "number" ? b : b === "half-starting" ? Math.floor(start / 2) : start + b.startingPlus;
+  const bound = (b: number | "half-starting" | "below-half-starting" | LifeFromStarting | undefined): number | undefined =>
+    b === undefined || typeof b === "number"
+      ? b
+      : b === "half-starting"
+        ? Math.floor(start / 2)
+        : // Strictly under half, which may be a fraction: 20 or less under 20½.
+          b === "below-half-starting"
+          ? Math.ceil(start / 2) - 1
+          : start + b.startingPlus;
   const atLeast = bound(condition.atLeast);
   const atMost = bound(condition.atMost);
   return (atLeast === undefined || life >= atLeast) && (atMost === undefined || life <= atMost);
@@ -6073,8 +6080,14 @@ function collectStaticEffects(
           ? unspentManaOf(state, side, per.unspentMana.type)
           : per.basicLandTypes === true
           ? basicLandTypesAmong(state, registry, side)
-          : per.opponents === true
-          ? state.turnOrder.filter((p) => p !== side && state.players[p]?.hasLost !== true).length
+          : per.opponents !== undefined
+          ? state.turnOrder.filter(
+              (p) =>
+                p !== side &&
+                state.players[p]?.hasLost !== true &&
+                // `{ where }`: each opponent as "that player".
+                (per.opponents === true || staticConditionMet(state, registry, source, per.opponents!.where, { thatPlayer: p })),
+            ).length
           : per.aggregate !== undefined
           ? aggregateMatching(per.aggregate)
           : per.cardsInHand !== undefined

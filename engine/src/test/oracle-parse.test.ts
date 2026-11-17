@@ -20832,3 +20832,25 @@ describe("combat damage to its owner", () => {
     ]);
   });
 });
+
+describe("life under half the starting total", () => {
+  const face = (name: string, oracle_text: string) =>
+    parseFace({ name, type_line: "Legendary Creature — Angel", mana_cost: "{3}{R}{W}", oracle_text }, { tokenFor: () => null });
+
+  it("each opponent, and an opponent, under half their starting life total (Anya, Merciless Angel)", () => {
+    const anya = face(
+      "Anya, Merciless Angel",
+      "Anya gets +3/+3 for each opponent whose life total is less than half their starting life total.\nAs long as an opponent's life total is less than half their starting life total, Anya has indestructible.",
+    );
+    expect(anya.complete).toBe(true);
+    expect(anya.static[0].grantPtPerCount).toEqual({
+      opponents: { where: { kind: "life-total", who: "that-player", atMost: "below-half-starting" } },
+      pt: [3, 3],
+    });
+    expect(anya.static[1]).toMatchObject({
+      affects: { scope: "self" },
+      condition: { kind: "life-total", who: "opponent", atMost: "below-half-starting" },
+      grantKeywords: ["indestructible"],
+    });
+  });
+});

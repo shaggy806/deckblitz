@@ -2767,7 +2767,8 @@
   "decision:ward-poison-counters",
   "decision:ward-poison-counters",
   "filter:land-could-produce-mana-type",
-  "trigger:combat-damage-to-owner"
+  "trigger:combat-damage-to-owner",
+  "condition:life-less-than-half-starting"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
