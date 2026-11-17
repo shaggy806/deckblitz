@@ -21623,3 +21623,47 @@ describe("loyalty abilities of planeswalkers you control twice this turn (Urza A
     });
   });
 });
+
+describe("your commander's triggers, and a graveyard card's return", () => {
+  it("reads Jocasta, Automaton Avenger whole", () => {
+    const face = parseFace(
+      {
+        name: "Jocasta, Automaton Avenger",
+        type_line: "Legendary Artifact Creature — Robot Hero",
+        oracle_text:
+          "Flying\nWhenever your commander deals combat damage to a player, put a +1/+1 counter on Jocasta.\nWhenever you attack with your commander, if this card is in your graveyard, you may return it to the battlefield tapped and attacking.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({ on: "deals-combat-damage-to-player", who: "any", filter: { isCommander: true, ownedBy: "you" } });
+    expect(face.triggered[1]).toMatchObject({
+      fromGraveyard: true,
+      condition: { kind: "source-zone", zones: ["graveyard"], sameObject: true },
+      trigger: { on: "attack-with", who: "you", atLeast: 1, filter: { isCommander: true, ownedBy: "you" } },
+      effect: { kind: "may", effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true, attacking: "choose" } },
+    });
+  });
+
+  it("returns the card to its owner's hand, and leaves a return not of the graveyard card unread", () => {
+    const hand = parseFace(
+      {
+        name: "Test Horror",
+        type_line: "Creature — Horror",
+        oracle_text: "At the beginning of your upkeep, if this card is in your graveyard, you may return it to your hand.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(hand.triggered[0].fromGraveyard).toBe(true);
+    expect(hand.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Return Test Horror to your hand?",
+      effect: { kind: "return-to-hand", target: "source", from: "graveyard" },
+    });
+    const plain = parseFace(
+      { name: "Test Bird", type_line: "Creature — Bird", oracle_text: "Whenever you attack, return ~ from your graveyard to the battlefield tapped and attacking." },
+      { tokenFor: () => null },
+    );
+    expect(plain.complete).toBe(false);
+  });
+});

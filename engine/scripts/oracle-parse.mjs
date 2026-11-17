@@ -2176,6 +2176,14 @@ export function parseTrigger(clause) {
   if (/^When(?:ever)? ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
+  // "Your commander" is a commander you own (Archivist of Gondor, Jocasta,
+  // Automaton Avenger), whoever controls it.
+  if (/^When(?:ever)? your commander deals combat damage to a player$/.test(c)) {
+    return [{ on: "deals-combat-damage-to-player", who: "any", filter: { isCommander: true, ownedBy: "you" } }];
+  }
+  if (/^Whenever you attack with your commander$/.test(c)) {
+    return [{ on: "attack-with", who: "you", atLeast: 1, filter: { isCommander: true, ownedBy: "you" } }];
+  }
   // Edric, Spymaster of Trest's and Firkraag, Cunning Instigator's: once per
   // creature, whoever controls it, the player one of the source controller's
   // opponents.
@@ -3564,6 +3572,22 @@ export function parseSentence(sentence, ctx) {
   // (rule 704.5m), from there.
   if (ctx?.hostDied === true && ctx.targets.length === 0 && /^return (?:this card|~) to its owner's hand\.$/i.test(s)) {
     return { kind: "return-to-hand", target: "source", from: "graveyard" };
+  }
+  // A graveyard trigger's own card (Jocasta, Automaton Avenger): "return ~
+  // [from your graveyard] to the battlefield [tapped] [and attacking]" — its
+  // controller choosing what it attacks (rule 508.4) — or "to your hand".
+  const graveyardSelf =
+    ctx?.graveyardSelf === true
+      ? /^return ~(?: from your graveyard)? to (?:your hand|the battlefield( tapped)?((?: and)? attacking)?)\.$/i.exec(s)
+      : null;
+  if (graveyardSelf !== null) {
+    if (/to your hand\.$/i.test(s)) return { kind: "return-to-hand", target: "source", from: "graveyard" };
+    return {
+      kind: "put-onto-battlefield",
+      target: "source",
+      ...(graveyardSelf[1] !== undefined ? { enterTapped: true } : {}),
+      ...(graveyardSelf[2] !== undefined ? { attacking: "choose" } : {}),
+    };
   }
   const exileThatCard =
     ctx?.cardEvent === true && ctx.it === "trigger-object" && ctx.targets.length === 0
@@ -19061,6 +19085,14 @@ function parseFaceAsWritten(face, ctx = {}) {
           // excess damage this turn" (Maarika, Overclocked Electromancer): the
           // recipient's, asked once the whole event is dealt (rule 120.10).
           triggers = triggers.map((t) => ({ ...t, toFilter: { ...t.toFilter, excessDamageThisTurn: true } }));
+        } else if (clause === "if ~ is in your graveyard,") {
+          // A trigger of the card in its owner's graveyard (Blood Operative,
+          // Jocasta): it works only there (`fromGraveyard`), and the
+          // intervening if is asked again of that same card as it resolves
+          // (rule 603.4). "It" in the rest is the card.
+          base.fromGraveyard = true;
+          base.condition = { kind: "source-zone", zones: ["graveyard"], sameObject: true };
+          rest = rest.replace(/\breturn it to\b/, "return ~ to");
         } else if (clause.toLowerCase() === "if it's not their turn," && triggers.every((t) => t.on === "draws")) {
           // "Whenever an opponent draws …, if it's not their turn": the
           // drawing player's turn (Zurzoth, Chaos Rider).
@@ -20814,6 +20846,8 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(ctx.cardEvent === true ? { cardEvent: true } : {}),
     ...(ctx.hostDied === true ? { hostDied: true } : {}),
     ...(ctx.evolved === true ? { evolved: true } : {}),
+    // A trigger of the card in its graveyard: "return ~ …" is from there.
+    ...(ability.fromGraveyard === true ? { graveyardSelf: true } : {}),
     divided,
     // A cost that discards one card: "the discarded card" is that card.
     ...(ability.cost?.discard?.count === 1 ? { costDiscarded: true } : {}),

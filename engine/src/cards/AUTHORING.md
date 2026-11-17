@@ -5414,7 +5414,16 @@ the card's owner; a card that reached the graveyard in the event being checked
 (it died alongside the creature whose death fires it) wasn't there to see it;
 and `"source"` finds the card only if it's the same object when the ability
 resolves (rule 400.7), a "you may" included. Never filter a return on the
-card's own name: that reaches another copy of it.
+card's own name: that reaches another copy of it. An intervening "**if this
+card is in your graveyard**" (rule 603.4) adds `condition: { kind:
+"source-zone", zones: ["graveyard"], sameObject: true }` (Blood Operative;
+Jocasta, Automaton Avenger's "whenever you attack with your commander, if
+this card is in your graveyard, you may return it to the battlefield tapped
+and attacking" — `attack-with` with `filter: { isCommander: true, ownedBy:
+"you" }`, then `put-onto-battlefield` of `"source"` with `enterTapped` and
+`attacking: "choose"`). The scaffolder reads that if, and "return it/~ [from
+your graveyard] to the battlefield [tapped and attacking] / to your hand"
+after it.
 
 **`fromExile: true`** is the same for a card in exile (face up): Senu,
 Keen-Eyed Protector's "when a legendary creature you control attacks and isn't
