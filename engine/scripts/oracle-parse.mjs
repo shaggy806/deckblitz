@@ -9400,6 +9400,8 @@ const MANA_SPEND_PURPOSE_LINES = {
     purposes: ["equip-ability"],
   },
   "Spend this mana only to activate power-up abilities.": { purposes: ["power-up-ability"] },
+  // Any activated ability, of a permanent or a card anywhere (The Enigma Jewel, Pit Automaton).
+  "Spend this mana only to activate abilities.": { abilityOf: {}, abilityOfAnyZone: true },
   "Spend this mana only to cast an instant or sorcery spell or to gain a Class level.": {
     spell: { typesAnyOf: ["instant", "sorcery"] },
     purposes: ["class-level"],
@@ -14760,18 +14762,25 @@ function counterIntoAt(sentences, i, ctx) {
  * a `whenever` watch, `once`), and "When you next cast an instant spell, cast
  * a sorcery spell, or activate a loyalty ability this turn, copy that spell
  * or ability twice. You may choose new targets for the copies." (Repeated
- * Reverberation: `nextSpell` with `orNextAbility: { loyalty }`). */
+ * Reverberation: `nextSpell` with `orNextAbility: { loyalty }`). "When you
+ * next activate an exhaust ability that isn't a mana ability this turn, copy
+ * it." (Pit Automaton) is the same watch on an exhaust ability (rule
+ * 702.177), which never sees a mana ability. */
 function copyNextLoyaltyAt(sentences, i) {
   const s = sentences[i];
   const next = sentences[i + 1] ?? "";
+  const exhaust = /^when you next activate an exhaust ability that isn't a mana ability this turn, copy it\.$/i.test(s);
   if (
-    /^copy the next loyalty ability you activate this turn when you activate it\.$/i.test(s) &&
+    (exhaust || /^copy the next loyalty ability you activate this turn when you activate it\.$/i.test(s)) &&
     /^you may choose new targets for the copy\.$/i.test(next)
   ) {
     return {
       effect: {
         kind: "delayed-trigger",
-        at: { whenever: { on: "activates-ability", who: "you", loyalty: true }, once: true },
+        at: {
+          whenever: { on: "activates-ability", who: "you", ...(exhaust ? { exhaust: true } : { loyalty: true }) },
+          once: true,
+        },
         effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true },
         text: "Copy that ability. You may choose new targets for the copy.",
       },

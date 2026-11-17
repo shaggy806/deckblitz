@@ -19917,6 +19917,30 @@ describe("the next loyalty ability copied", () => {
     }
   });
 
+  it("reads Pit Automaton's next exhaust ability copied, and its mana spent only on abilities", () => {
+    const face = parseFace({
+      name: "Test Automaton",
+      type_line: "Artifact Creature — Construct",
+      power: "0",
+      toughness: "4",
+      oracle_text:
+        "Defender\n{T}: Add {C}{C}. Spend this mana only to activate abilities.\n{2}, {T}: When you next activate an exhaust ability that isn't a mana ability this turn, copy it. You may choose new targets for the copy.",
+    });
+    expect(face.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "C",
+      amount: 2,
+      spendOnly: { abilityOf: {}, abilityOfAnyZone: true, text: "Spend this mana only to activate abilities." },
+    });
+    expect(face.activated[1].effect).toEqual({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "activates-ability", who: "you", exhaust: true }, once: true },
+      effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true },
+      text: "Copy that ability. You may choose new targets for the copy.",
+    });
+    expect(face.activated[1].__todo).toBeUndefined();
+  });
+
   it("reads Repeated Reverberation", () => {
     const face = parseFace({
       name: "Test Reverberation",

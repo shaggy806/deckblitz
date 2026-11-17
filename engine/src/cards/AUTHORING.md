@@ -1805,7 +1805,10 @@ loyalty ability this turn" (Repeated Reverberation, each copy step with
 `count: 2`). "Copy the **next loyalty ability** you activate this turn when
 you activate it" alone (Jaya's Phoenix) is the `whenever` watch below with
 `once`: `at: { whenever: { on: "activates-ability", who: "you", loyalty: true
-}, once: true }` over a `copy-ability` of `"trigger-ability"`.
+}, once: true }` over a `copy-ability` of `"trigger-ability"`. "When you next
+activate an **exhaust ability** that isn't a mana ability this turn, copy it"
+(Pit Automaton) is the same watch with `exhaust: true` in place of `loyalty`
+(`activates-ability` never sees a mana ability).
 
 **"Whenever …, for the rest of the turn."** `at: { whenever: TriggerSpec,
 until?: "your-next-turn", targets? }` is "until end of turn, whenever …",

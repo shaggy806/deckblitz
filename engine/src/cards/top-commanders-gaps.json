@@ -2826,7 +2826,8 @@
   "keyword:imprint-two-cast-copy-other",
   "effect:reveal-until-two-cast-one-hand-one",
   "zone:graveyard-static",
-  "zone:play-from-graveyard-your-turn"
+  "zone:play-from-graveyard-your-turn",
+  "effect:delayed-trigger-next-activation"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
