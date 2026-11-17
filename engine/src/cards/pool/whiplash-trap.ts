@@ -18,11 +18,8 @@ export default defineCard({
   text: "If an opponent had two or more creatures enter the battlefield under their control this turn, you may pay {U} rather than pay this spell's mana cost.\nReturn two target creatures to their owners' hands.",
   alternativeCost: {
     mana: "{U}",
-    condition: {
-      kind: "of-player",
-      player: "an-opponent",
-      condition: { kind: "turn-history", what: "entered", who: "you", filter: { type: "creature" }, atLeast: 2 },
-    },
+    // One opponent's own two: a creature each for two opponents isn't it.
+    condition: { kind: "turn-history", what: "entered", who: "opponent", filter: { type: "creature" }, atLeast: 2 },
   },
   targets: ["creature", { kind: "other", of: "creature", than: { slots: [0] } }],
   effect: {

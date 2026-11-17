@@ -1449,21 +1449,26 @@ function evalStaticCondition(
       // who may have left the game since (Ramses, Assassin Lord).
       const toPlayer = condition.against === undefined ? undefined : conditionPlayerOf(state, condition.against, opts, source, true);
       if (condition.against !== undefined && toPlayer === undefined) return false;
-      const n = journalCount(
-        state,
-        registry,
-        seats,
-        condition.what,
-        condition.filter,
-        you,
-        condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
-        toPlayer !== undefined ? { ...condition, toPlayer } : condition,
-        // "If it dealt …": this object, in its stint, as it last existed once gone.
-        condition.selfOnly === true
-          ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
-          : undefined,
-      );
-      return n >= (condition.atLeast ?? 1);
+      const countOver = (over: readonly PlayerId[]): number =>
+        journalCount(
+          state,
+          registry,
+          over,
+          condition.what,
+          condition.filter,
+          you,
+          condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
+          toPlayer !== undefined ? { ...condition, toPlayer } : condition,
+          // "If it dealt …": this object, in its stint, as it last existed once gone.
+          condition.selfOnly === true
+            ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
+            : undefined,
+        );
+      const atLeast = condition.atLeast ?? 1;
+      // "If **an opponent** had two or more creatures enter": one opponent's
+      // own count, never the opponents' together (one each from two of them
+      // isn't two for either). Your own and every player's are one count.
+      return condition.who === "opponent" ? seats.some((p) => countOver([p]) >= atLeast) : countOver(seats) >= atLeast;
     }
     case "attacked-you-last-turn": {
       // Each player's own most recent turn: `them` declared a creature attacking

@@ -238,6 +238,116 @@ describe("triggered mana abilities", () => {
   });
 });
 
+describe("definition traps", () => {
+  // Shapes that type-check and run, and do something other than what the
+  // author meant, with nothing said. Each is refused here, by name, so the
+  // card is written the way that works.
+  type Node = { readonly [key: string]: unknown };
+  const isNode = (v: unknown): v is Node => typeof v === "object" && v !== null;
+  /** Every object in a definition, depth first. */
+  const walk = (value: unknown, visit: (node: Node) => void): void => {
+    if (Array.isArray(value)) for (const item of value) walk(item, visit);
+    else if (isNode(value)) {
+      visit(value);
+      for (const child of Object.values(value)) walk(child, visit);
+    }
+  };
+  const every = [...POOL_CARDS, ...TOKEN_CARDS];
+
+  it("`sameAbilityAs` names another entry of the same list", () => {
+    const wrong = every
+      .filter((def) =>
+        (def.triggered ?? []).some(
+          (ability, i, list) =>
+            ability.sameAbilityAs !== undefined && (ability.sameAbilityAs === i || list[ability.sameAbilityAs] === undefined),
+        ),
+      )
+      .map((def) => def.name);
+    expect(wrong).toEqual([]);
+  });
+
+  // "Opponent" is read from the ability's controller, as "you" is in Oracle
+  // text, not from the player `targetsChosenBy` has choose. "Its controller
+  // chooses target permanent another player controls" (Confusion in the
+  // Ranks) is `controlledByRef`, relative to the chooser. The one card that
+  // means the controller's opponents: Bladegriff Prototype's "of that
+  // player's choice that one of **your** opponents controls".
+  it("a target someone else chooses doesn't say `whose: \"opponent\"`", () => {
+    const wrong = every
+      .filter((def) =>
+        (def.triggered ?? []).some(
+          (ability) => ability.targetsChosenBy !== undefined && /"whose":"opponent"/.test(JSON.stringify(ability.targets)),
+        ),
+      )
+      .map((def) => def.name);
+    expect(wrong).toEqual(["Bladegriff Prototype"]);
+  });
+
+  // `choose-random-card`'s find replaces every target as target 0 unless it
+  // is given a `slot` (or a `count`), so a `then` reading target 1 or later
+  // reads nothing.
+  it("a random card's `then` reads no target past 0 without a `slot`", () => {
+    const wrong = every
+      .filter((def) => {
+        let bad = false;
+        walk(def, (node) => {
+          if (node.kind !== "choose-random-card" || node.slot !== undefined || node.count !== undefined) return;
+          if (/"(target|from|controllerOf|ownerOf)":[1-9]/.test(JSON.stringify(node.then ?? null))) bad = true;
+        });
+        return bad;
+      })
+      .map((def) => def.name);
+    expect(wrong).toEqual([]);
+  });
+
+  // `exile` reaches a card in a hand only with `fromHand` (a target bounced
+  // in response stays where it went), so a card picked at random from a hand
+  // and then exiled without it stays in the hand.
+  it("a card picked at random from a hand is exiled with `fromHand`", () => {
+    const wrong = every
+      .filter((def) => {
+        let bad = false;
+        walk(def, (node) => {
+          if (node.kind !== "choose-random-card" || node.zone !== "hand") return;
+          const picked = typeof node.slot === "number" ? node.slot : 0;
+          walk(node.then ?? null, (inner) => {
+            if (inner.kind === "exile" && inner.target === picked && inner.fromHand !== true) bad = true;
+          });
+        });
+        return bad;
+      })
+      .map((def) => def.name);
+    expect(wrong).toEqual([]);
+  });
+
+  // A `look-and-choose` that can choose nothing (`max: 0`) over the cards
+  // exiled this way never applies its `leftover`: move them with the effect
+  // that moves them.
+  it("no look-and-choose over the cards exiled this way has `max: 0`", () => {
+    const wrong = every
+      .filter((def) => {
+        let bad = false;
+        walk(def, (node) => {
+          if (node.kind === "look-and-choose" && node.zone === "exiled-this-way" && node.max === 0) bad = true;
+        });
+        return bad;
+      })
+      .map((def) => def.name);
+    expect(wrong).toEqual([]);
+  });
+
+  it("the walker reaches a nested effect, so the audits above read what's there", () => {
+    let seen = 0;
+    walk(
+      every.find((def) => def.name === "Wondrous Crucible"),
+      (node) => {
+        if (node.kind === "choose-random-card") seen += 1;
+      },
+    );
+    expect(seen).toBe(1);
+  });
+});
+
 describe("exile until this leaves the battlefield", () => {
   // `exile { untilSourceLeaves }` returns the card itself as the source
   // leaves — rule 610.3's one-shot effect, not a triggered ability. A

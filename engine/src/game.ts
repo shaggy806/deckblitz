@@ -874,6 +874,13 @@ function amountReadsSacrificed(amount: EffectAmount): boolean {
   return JSON.stringify(amount).includes('"paid":"unattached"');
 }
 
+/** The one index two entries joined by `sameAbilityAs` are counted under:
+ * the lower of an entry's own and the one it names, so it holds whichever
+ * entry names the other, and when each names the other (Aang and Katara). */
+function sameAbilityIndex(same: number | undefined, index: number): number {
+  return same === undefined ? index : Math.min(same, index);
+}
+
 function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boolean {
   return mod.targeting !== undefined || mod.targetingSource === true || mod.targetingEnchantedPlayer === true;
 }
@@ -33694,7 +33701,7 @@ export class Game {
     const which =
       granted?.kind === "static"
         ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
-        : `${chapter ? "chapter" : "triggered"}:${same ?? abilityIndex}`;
+        : `${chapter ? "chapter" : "triggered"}:${sameAbilityIndex(same, abilityIndex)}`;
     return `${sourceId}@${source?.zoneChangeCount ?? 0}#${which}`;
   }
 
@@ -33710,7 +33717,7 @@ export class Game {
     const which =
       granted?.kind === "static"
         ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
-        : `${object.abilityKind}:${same ?? index}`;
+        : `${object.abilityKind}:${sameAbilityIndex(same, index)}`;
     // Per object, one stint in a zone (rule 400.7): not a timestamp, which an
     // Equipment becoming attached or a permanent transforming renews (613.7e, g).
     return `${object.sourceObjectId ?? object.id}@${object.sourceZoneChangeCount ?? 0}#${which}`;
@@ -35140,10 +35147,10 @@ export class Game {
    */
   private onceWhich(ability: TriggeredAbility, index: number, ref: GrantedAbilityRef | undefined): number | string {
     if (ref?.kind === "static" && ref.granter !== undefined) {
-      const which = ability.sameAbilityAs ?? ref.index;
+      const which = sameAbilityIndex(ability.sameAbilityAs, ref.index);
       return `granted:${ref.cardName}:${ref.staticIndex}:${ref.list}:${which}@${ref.granter}~${ref.granterStint ?? 0}`;
     }
-    return ability.sameAbilityAs ?? index;
+    return sameAbilityIndex(ability.sameAbilityAs, index);
   }
 
   private markTriggeredOnce(object: GameObject, index: number | string, stint?: number): void {
