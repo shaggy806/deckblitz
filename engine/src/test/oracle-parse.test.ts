@@ -21061,3 +21061,25 @@ describe("blocking as though untapped", () => {
     });
   });
 });
+
+describe("opponents' spells and loyalty abilities, for a turn", () => {
+  it("can't cast spells or activate planeswalkers' loyalty abilities this turn (Revel in Silence, Silence)", () => {
+    expect(parseEffect("Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.", ctx()).effect).toEqual({
+      kind: "prohibit",
+      prohibits: [
+        { act: "cast", who: "each-opponent" },
+        { act: "activate", who: "each-opponent", of: { type: "planeswalker" }, only: "loyalty" },
+      ],
+    });
+    expect(parseEffect("Your opponents can't cast spells this turn.", ctx()).effect).toEqual({
+      kind: "prohibit",
+      prohibits: [{ act: "cast", who: "each-opponent" }],
+    });
+  });
+
+  it("an opponent activates an ability that isn't a mana ability (Flamescroll Celebrant)", () => {
+    expect(parseTrigger("Whenever an opponent activates an ability that isn't a mana ability")).toEqual([
+      { on: "activates-ability", who: "opponent" },
+    ]);
+  });
+});

@@ -2793,7 +2793,8 @@
   "keyword:blitz-extensions",
   "filter:has-modular",
   "filter:has-modular",
-  "static:block-while-tapped"
+  "static:block-while-tapped",
+  "effect:prohibit-loyalty-abilities-one-shot"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

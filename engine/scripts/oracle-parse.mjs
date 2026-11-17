@@ -2435,6 +2435,12 @@ export function parseTrigger(clause) {
   // (Avalanche of Sector 7), "… of a creature" (Elrond, Moon-Reader): a
   // permanent's ability, a mana ability too unless "that isn't a mana
   // ability" (rule 605); "they control" the activator's own permanent.
+  // Any ability that uses the stack, from any zone, loyalty abilities and
+  // cycling included (Flamescroll Celebrant, Locus of Enlightenment):
+  // `activates-ability` never sees a mana ability (rule 605.3b).
+  if ((m = /^Whenever (you activate|an opponent activates) an ability that isn't a mana ability$/.exec(c))) {
+    return [{ on: "activates-ability", who: m[1] === "you activate" ? "you" : "opponent" }];
+  }
   if ((m = /^Whenever (you activate|an opponent activates) an ability of an? (.+?)( they control)?( that isn't a mana ability)?$/.exec(c))) {
     const source = parseTypePhrase(m[2]);
     if (source !== null && Object.keys(source).length > 0) {
@@ -8342,6 +8348,18 @@ export function parseSentence(sentence, ctx) {
   if ((m = re("(target player|target opponent) becomes the monarch").exec(s))) return { kind: "become-monarch", who: slot(m[1]) };
   // "You can't become the monarch this turn" (rule 725.4).
   if (re("you can't become the monarch this turn").test(s)) return { kind: "prohibit", prohibits: [{ act: "become-monarch", who: "you" }] };
+  // "Your opponents can't cast spells this turn" (Silence), "… or activate
+  // planeswalkers' loyalty abilities this turn" (Revel in Silence): loyalty
+  // abilities alone (rule 606.1), mana abilities untouched.
+  if ((m = re("your opponents can't cast spells( or activate planeswalkers' loyalty abilities)? this turn").exec(s))) {
+    return {
+      kind: "prohibit",
+      prohibits: [
+        { act: "cast", who: "each-opponent" },
+        ...(m[1] !== undefined ? [{ act: "activate", who: "each-opponent", of: { type: "planeswalker" }, only: "loyalty" }] : []),
+      ],
+    };
+  }
   // "Target player can't play lands this turn" (Turf Wound, Pardic Miner —
   // rule 305.2).
   if ((m = re("(target player|target opponent|you) can't play lands this turn").exec(s))) {
