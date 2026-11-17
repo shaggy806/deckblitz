@@ -747,7 +747,7 @@ export type GameEvent =
       readonly permission?: PlayedUnder;
       /** Cast from exile: the permanent, in its stint, the card was exiled
        * with (rule 607.2a — its `exiledWith` or `exiledUntil` link), read
-       * before the move ended it. Read by `plays-card`'s `exiledWithThis`
+       * before the move ended it. Read by `plays-card`'s `fromLinkedExile`
        * (Prowl, Stoic Strategist). */
       readonly exiledWith?: PlayedUnder;
       /** The caster's spell count *including* this spell (the storm count —

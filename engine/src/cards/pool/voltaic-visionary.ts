@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 27194. Front face. The top card is exiled with this creature
 // (`linked`, rule 607.2a) so "when you play a card exiled with this creature"
-// (`plays-card`'s `exiledWithThis`) knows it; it transforms before the spell
+// (`plays-card`'s `fromLinkedExile`) knows it; it transforms before the spell
 // resolves (the ruling: a trigger on casting).
 
 const ACTIVATED_TEXT =
@@ -36,7 +36,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "plays-card", who: "you", exiledWithThis: true },
+      trigger: { on: "plays-card", who: "you", fromLinkedExile: true },
       targets: [],
       effect: { kind: "transform", target: "source" },
       resolve: null,

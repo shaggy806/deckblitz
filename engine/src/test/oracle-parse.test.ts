@@ -2187,10 +2187,10 @@ describe("costs and triggers", () => {
 
   it("a card played that was exiled with this (Prowl, Stoic Strategist; Voltaic Visionary)", () => {
     expect(parseTrigger("Whenever a player plays a card exiled with ~")).toEqual([
-      { on: "plays-card", who: "any", exiledWithThis: true },
+      { on: "plays-card", who: "any", fromLinkedExile: true },
     ]);
     expect(parseTrigger("When you play a card exiled with this creature")).toEqual([
-      { on: "plays-card", who: "you", exiledWithThis: true },
+      { on: "plays-card", who: "you", fromLinkedExile: true },
     ]);
   });
 

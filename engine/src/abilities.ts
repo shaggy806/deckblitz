@@ -1361,7 +1361,7 @@ export type TriggerKind =
        * permission: Prowl, Stoic Strategist's "whenever a player plays a card
        * exiled with Prowl", Voltaic Visionary's "when you play a card exiled
        * with this creature" (the event's `exiledWith`). */
-      readonly exiledWithThis?: true;
+      readonly fromLinkedExile?: true;
     }
   | {
       /**

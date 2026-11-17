@@ -36350,7 +36350,7 @@ export class Game {
         // "A card exiled with ~": exiled with this permanent in the stint
         // it's in now, as it was played (Prowl, Stoic Strategist).
         if (
-          spec.exiledWithThis === true &&
+          spec.fromLinkedExile === true &&
           (event.exiledWith?.source !== self.id || event.exiledWith.stint !== (self.zoneChangeCount ?? 0))
         ) {
           return false;
@@ -47577,7 +47577,7 @@ controlledBy,
   /** The permanent, in its stint, the card `id` in exile was exiled with
    * (rule 607.2a): its `exiledWith` link, or its `exiledUntil` one. Read as
    * it's played, before the move ends both — what the `spell-cast` /
-   * `land-played` event says (`plays-card`'s `exiledWithThis`). */
+   * `land-played` event says (`plays-card`'s `fromLinkedExile`). */
   private exiledWithLink(id: ObjectId): PlayedUnder | undefined {
     const card = this.state.objects[id];
     if (card?.zone !== "exile") return undefined;

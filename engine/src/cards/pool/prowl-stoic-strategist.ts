@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 // convert is transform. The attack trigger exiles with Prowl (`linked`, rule
 // 607.2a — either face's abilities are linked, 607.1b) and lets the card's
 // owner play it while it stays exiled; "whenever a player plays a card exiled
-// with Prowl" is `plays-card`'s `exiledWithThis`, which only this face has
+// with Prowl" is `plays-card`'s `fromLinkedExile`, which only this face has
 // (the ruling: it triggers only while Prowl is Prowl, Stoic Strategist).
 
 const ATTACK_TEXT =
@@ -38,7 +38,7 @@ export default defineCard({
       text: ATTACK_TEXT,
     },
     {
-      trigger: { on: "plays-card", who: "any", exiledWithThis: true },
+      trigger: { on: "plays-card", who: "any", fromLinkedExile: true },
       targets: [],
       effect: {
         kind: "sequence",

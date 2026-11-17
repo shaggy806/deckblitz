@@ -2093,7 +2093,7 @@ export function parseTrigger(clause) {
   // "When you play a card exiled with this creature" (Voltaic Visionary): a
   // card in exile linked to it as it was played (rule 607.2a).
   if ((m = /^When(?:ever)? (a player|you) plays? a card exiled with (?:~|this creature)$/.exec(c))) {
-    return [{ on: "plays-card", who: m[1] === "you" ? "you" : "any", exiledWithThis: true }];
+    return [{ on: "plays-card", who: m[1] === "you" ? "you" : "any", fromLinkedExile: true }];
   }
   // Mutate (rule 702.140d).
   if (/^Whenever ~ mutates$/.test(c)) return self("mutates");

@@ -1,5 +1,5 @@
 /**
- * `plays-card`'s `exiledWithThis`: "whenever a player plays a card exiled
+ * `plays-card`'s `fromLinkedExile`: "whenever a player plays a card exiled
  * with ~" (Prowl, Stoic Strategist) — a land played or a spell cast whose card
  * was in exile linked to this permanent's present stint (rule 607.2a; either
  * face's abilities linked, 607.1b), read off the `land-played` / `spell-cast`
