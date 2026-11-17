@@ -9721,6 +9721,7 @@ import _poolFiresOfYavimaya from "./pool/fires-of-yavimaya.js";
 import _poolFirescreamer from "./pool/firescreamer.js";
 import _poolFireshrieker from "./pool/fireshrieker.js";
 import _poolFireslinger from "./pool/fireslinger.js";
+import _poolFiresongAndSunspeaker from "./pool/firesong-and-sunspeaker.js";
 import _poolFirespitterWhelp from "./pool/firespitter-whelp.js";
 import _poolFirespout from "./pool/firespout.js";
 import _poolFirestormHellkite from "./pool/firestorm-hellkite.js";
@@ -19699,6 +19700,7 @@ import _poolOverabundance from "./pool/overabundance.js";
 import _poolOverbeingOfMyth from "./pool/overbeing-of-myth.js";
 import _poolOverburden from "./pool/overburden.js";
 import _poolOverchargedAmalgam from "./pool/overcharged-amalgam.js";
+import _poolOverclockedElectromancer from "./pool/overclocked-electromancer.js";
 import _poolOvercome from "./pool/overcome.js";
 import _poolOvercooked from "./pool/overcooked.js";
 import _poolOvereagerApprentice from "./pool/overeager-apprentice.js";
@@ -20436,6 +20438,7 @@ import _poolPiruTheVolatile from "./pool/piru-the-volatile.js";
 import _poolPistonFistCyclops from "./pool/piston-fist-cyclops.js";
 import _poolPistonSledge from "./pool/piston-sledge.js";
 import _poolPistusStrike from "./pool/pistus-strike.js";
+import _poolPitAutomaton from "./pool/pit-automaton.js";
 import _poolPitFight from "./pool/pit-fight.js";
 import _poolPitImp from "./pool/pit-imp.js";
 import _poolPitKeeper from "./pool/pit-keeper.js";
@@ -21901,6 +21904,7 @@ import _poolRecklessAirStrike from "./pool/reckless-air-strike.js";
 import _poolRecklessAmplimancer from "./pool/reckless-amplimancer.js";
 import _poolRecklessAssault from "./pool/reckless-assault.js";
 import _poolRecklessBarbarian from "./pool/reckless-barbarian.js";
+import _poolRecklessBlaze from "./pool/reckless-blaze.js";
 import _poolRecklessBrute from "./pool/reckless-brute.js";
 import _poolRecklessBushwhacker from "./pool/reckless-bushwhacker.js";
 import _poolRecklessCharge from "./pool/reckless-charge.js";
@@ -43076,6 +43080,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFirescreamer,
   _poolFireshrieker,
   _poolFireslinger,
+  _poolFiresongAndSunspeaker,
   _poolFirespitterWhelp,
   _poolFirespout,
   _poolFirestormHellkite,
@@ -53054,6 +53059,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOverbeingOfMyth,
   _poolOverburden,
   _poolOverchargedAmalgam,
+  _poolOverclockedElectromancer,
   _poolOvercome,
   _poolOvercooked,
   _poolOvereagerApprentice,
@@ -53791,6 +53797,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPistonFistCyclops,
   _poolPistonSledge,
   _poolPistusStrike,
+  _poolPitAutomaton,
   _poolPitFight,
   _poolPitImp,
   _poolPitKeeper,
@@ -55256,6 +55263,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRecklessAmplimancer,
   _poolRecklessAssault,
   _poolRecklessBarbarian,
+  _poolRecklessBlaze,
   _poolRecklessBrute,
   _poolRecklessBushwhacker,
   _poolRecklessCharge,
@@ -76444,6 +76452,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/firescreamer": _poolFirescreamer,
   "pool/fireshrieker": _poolFireshrieker,
   "pool/fireslinger": _poolFireslinger,
+  "pool/firesong-and-sunspeaker": _poolFiresongAndSunspeaker,
   "pool/firespitter-whelp": _poolFirespitterWhelp,
   "pool/firespout": _poolFirespout,
   "pool/firestorm-hellkite": _poolFirestormHellkite,
@@ -86422,6 +86431,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/overbeing-of-myth": _poolOverbeingOfMyth,
   "pool/overburden": _poolOverburden,
   "pool/overcharged-amalgam": _poolOverchargedAmalgam,
+  "pool/overclocked-electromancer": _poolOverclockedElectromancer,
   "pool/overcome": _poolOvercome,
   "pool/overcooked": _poolOvercooked,
   "pool/overeager-apprentice": _poolOvereagerApprentice,
@@ -87159,6 +87169,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/piston-fist-cyclops": _poolPistonFistCyclops,
   "pool/piston-sledge": _poolPistonSledge,
   "pool/pistus-strike": _poolPistusStrike,
+  "pool/pit-automaton": _poolPitAutomaton,
   "pool/pit-fight": _poolPitFight,
   "pool/pit-imp": _poolPitImp,
   "pool/pit-keeper": _poolPitKeeper,
@@ -88624,6 +88635,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reckless-amplimancer": _poolRecklessAmplimancer,
   "pool/reckless-assault": _poolRecklessAssault,
   "pool/reckless-barbarian": _poolRecklessBarbarian,
+  "pool/reckless-blaze": _poolRecklessBlaze,
   "pool/reckless-brute": _poolRecklessBrute,
   "pool/reckless-bushwhacker": _poolRecklessBushwhacker,
   "pool/reckless-charge": _poolRecklessCharge,

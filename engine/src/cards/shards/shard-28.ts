@@ -605,6 +605,7 @@ import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
 import _poolOrvarTheAllForm from "../pool/orvar-the-all-form.js";
 import _poolOsseousSticktwister from "../pool/osseous-sticktwister.js";
 import _poolOutmuscle from "../pool/outmuscle.js";
+import _poolOverclockedElectromancer from "../pool/overclocked-electromancer.js";
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
 import _poolOxOfAgonas from "../pool/ox-of-agonas.js";
 import _poolPacificationArray from "../pool/pacification-array.js";
@@ -1662,6 +1663,7 @@ const shard: CardShard = {
     _poolOrvarTheAllForm,
     _poolOsseousSticktwister,
     _poolOutmuscle,
+    _poolOverclockedElectromancer,
     _poolOvergrownBattlement,
     _poolOxOfAgonas,
     _poolPacificationArray,
