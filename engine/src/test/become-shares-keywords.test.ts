@@ -11,7 +11,7 @@
 import { describe, expect, it } from "vitest";
 
 import { computeCharacteristics } from "../characteristics.js";
-import { A, B, cast, destroy, keywords, lands, ref, registryOf, spawn, table, toHand, toStep, zone } from "./harness.js";
+import { A, B, cast, destroy, keywords, lands, quiet, ref, registryOf, spawn, table, toHand, toStep, zone } from "./harness.js";
 
 const protectionOf = (game: ReturnType<typeof table>["game"], id: string) =>
   computeCharacteristics(game.state, registryOf(game), id as never).protectionFrom;
@@ -78,6 +78,19 @@ describe("Concerted Effort", () => {
     expect(c.landwalk).toEqual([{ type: "land", notSupertype: "basic" }]);
     expect(c.keywords.has("landwalk")).toBe(true);
     expect([...c.protectionFrom.colors]).toEqual(["G"]);
+  });
+
+  it("Odric, Lunarch Marshal shares skulk, and a 'hexproof from' as itself, not as hexproof", () => {
+    const { game } = table();
+    spawn(game, "Odric, Lunarch Marshal");
+    spawn(game, "Knight of Grace");
+    spawn(game, "Furtive Homunculus");
+    const bears = spawn(game, "Grizzly Bears");
+    game.advanceUntil((s) => s.turn.step === "begin-combat" && quiet(s));
+    const c = computeCharacteristics(game.state, registryOf(game), bears);
+    expect([...c.keywords]).toEqual(expect.arrayContaining(["first-strike", "skulk"]));
+    expect(c.keywords.has("hexproof")).toBe(false);
+    expect([...c.hexproofFrom.colors]).toEqual(["B"]);
   });
 
   it("shares nothing when no creature you control has any of it", () => {

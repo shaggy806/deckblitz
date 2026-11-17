@@ -1,6 +1,4 @@
 import { defineCard } from "../define.js";
-import type { EffectSpec } from "../../effects.js";
-import type { Keyword } from "../define.js";
 
 const COMBAT_TEXT =
   "At the beginning of each combat, creatures you control gain first strike until end of turn if " +
@@ -8,34 +6,10 @@ const COMBAT_TEXT =
   "strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.";
 
 // Each keyword is asked on resolution (the rulings), and the creatures that
-// gain it are the ones there then. Skulk is left out: the engine has no
-// skulk, so no creature can have it and its sentence can never apply — a
-// card that grants skulk would have to add it here.
-const SHARED: readonly Keyword[] = [
-  "first-strike",
-  "flying",
-  "deathtouch",
-  "double-strike",
-  "haste",
-  "hexproof",
-  "indestructible",
-  "lifelink",
-  "menace",
-  "reach",
-  "trample",
-  "vigilance",
-];
-
-const share = (keyword: Keyword): EffectSpec => ({
-  kind: "conditional",
-  condition: { kind: "controls", filter: { type: "creature", keyword }, atLeast: 1 },
-  then: {
-    kind: "grant-keyword-all",
-    filter: { type: "creature", controlledBy: "you" },
-    keyword,
-    duration: "end-of-turn",
-  },
-});
+// gain it are the ones there then: a `become` whose `sharesKeywords` reads the
+// creatures you control once, one effect and one timestamp (rule 613.7b). A
+// "hexproof from [quality]" is a hexproof ability (702.11d-e), shared as itself
+// (Bleeding Effect's ruling on the same wording).
 
 export default defineCard({
   name: "Odric, Lunarch Marshal",
@@ -51,7 +25,29 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "begin-combat", who: "any" },
       targets: [],
-      effect: { kind: "sequence", effects: SHARED.map(share) },
+      effect: {
+        kind: "become",
+        filter: { type: "creature", controlledBy: "you" },
+        duration: "end-of-turn",
+        sharesKeywords: {
+          from: { type: "creature", controlledBy: "you" },
+          keywords: [
+            "first-strike",
+            "flying",
+            "deathtouch",
+            "double-strike",
+            "haste",
+            "hexproof",
+            "indestructible",
+            "lifelink",
+            "menace",
+            "reach",
+            "skulk",
+            "trample",
+            "vigilance",
+          ],
+        },
+      },
       resolve: null,
       text: COMBAT_TEXT,
     },

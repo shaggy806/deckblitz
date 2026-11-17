@@ -20037,6 +20037,21 @@ describe("keywords of the exiled cards used to craft it", () => {
       },
     });
   });
+
+  it("reads Odric, Lunarch Marshal's, first strike first, hexproof and skulk among them", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Human Soldier",
+      oracle_text:
+        "At the beginning of each combat, creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.",
+    } as never) as unknown as { triggered: { effect: { sharesKeywords: { keywords: string[]; protection?: true } } }[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    const shared = face.triggered[0].effect.sharesKeywords;
+    expect(shared.keywords).toEqual([
+      "first-strike", "flying", "deathtouch", "double-strike", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "skulk", "trample", "vigilance",
+    ]);
+    expect(shared.protection).toBeUndefined();
+  });
 });
 
 describe("a land played or a spell cast from anywhere other than the hand", () => {

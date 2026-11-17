@@ -10139,14 +10139,15 @@ export function parseEffect(text, outer) {
   if (tempting !== null) return { effect: tempting, todo: [], hints: [] };
   // "Creatures you control gain flying until end of turn if a creature you
   // control has flying. The same is true for fear, …, landwalk, protection, …"
-  // (Concerted Effort): a `become` whose `sharesKeywords` reads the creatures
-  // you control as it resolves, each landwalk and protection ability among them.
+  // (Concerted Effort; Odric, Lunarch Marshal's first strike first): a
+  // `become` whose `sharesKeywords` reads the creatures you control as it
+  // resolves — each landwalk and protection ability among them, and with
+  // hexproof each "hexproof from" too.
   {
-    const w = /^Creatures you control gain flying until end of turn if a creature you control has flying\. The same is true for (.+)\.$/.exec(text);
-    const words = w === null ? [] : w[1].split(/, and |, | and /);
-    const listed = words.filter((word) => word !== "protection" && word !== "landwalk").map((word) => word.replace(/ /g, "-"));
-    // Not hexproof: its "hexproof from" variants aren't shared.
-    const known = new Set(["first-strike", "double-strike", "deathtouch", "haste", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance", "shroud", "fear"]);
+    const w = /^Creatures you control gain ([a-z ]+) until end of turn if a creature you control has \1\. The same is true for (.+)\.$/.exec(text);
+    const words = w === null ? [] : [w[1], ...w[2].split(/, and |, | and /)];
+    const listed = words.filter((word) => word !== "protection" && word !== "landwalk").map((word) => KEYWORDS[word]);
+    const known = new Set(["flying", "first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "skulk", "trample", "vigilance", "shroud", "fear"]);
     if (w !== null && listed.every((keyword) => known.has(keyword))) {
       const yours = { type: "creature", controlledBy: "you" };
       return {
@@ -10156,7 +10157,7 @@ export function parseEffect(text, outer) {
           duration: "end-of-turn",
           sharesKeywords: {
             from: yours,
-            keywords: ["flying", ...listed],
+            keywords: listed,
             ...(words.includes("protection") ? { protection: true } : {}),
             ...(words.includes("landwalk") ? { landwalk: true } : {}),
           },

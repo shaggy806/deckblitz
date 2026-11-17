@@ -101,11 +101,14 @@ export interface CharacteristicsPatch<Pt> extends TypePatch, ColorPatch {
 }
 
 /** A patch with its amounts read — and, from a `become`'s `sharesKeywords`
- * (read as it resolves, rule 608.2h), the protection and landwalk abilities
- * it gains beside its `keywords`: no card writes these two itself. */
+ * (read as it resolves, rule 608.2h), the protection, "hexproof from" and
+ * landwalk abilities it gains beside its `keywords`: no card writes these
+ * itself. */
 export type ResolvedPatch = CharacteristicsPatch<number> & {
   /** Protection it gains (layer 6, rule 702.16), as a `PtModifier`'s. */
   readonly protection?: NonNullable<PtModifier["protection"]>;
+  /** "Hexproof from [quality]" it gains (702.11d), as a `PtModifier`'s. */
+  readonly hexproofFrom?: NonNullable<PtModifier["hexproofFrom"]>;
   /** Landwalk of a kind no named keyword covers it gains (702.14a), each land
    * as a filter, as a `PtModifier`'s. */
   readonly landwalk?: readonly CardFilter[];
@@ -209,6 +212,7 @@ export function patchModifier(
     ...(patch.loseKeywordAbilities !== undefined ? { loseKeywordAbilities: [...patch.loseKeywordAbilities] } : {}),
     ...(patch.toxic !== undefined ? { toxic: patch.toxic } : {}),
     ...(patch.protection !== undefined ? { protection: patch.protection } : {}),
+    ...(patch.hexproofFrom !== undefined ? { hexproofFrom: patch.hexproofFrom } : {}),
     ...(patch.landwalk !== undefined && patch.landwalk.length > 0 ? { landwalk: [...patch.landwalk] } : {}),
     ...(patch.activated !== undefined && patch.activated.length > 0 ? { grantsActivated: [...patch.activated] } : {}),
     ...(patch.triggered !== undefined && patch.triggered.length > 0 ? { grantsTriggered: [...patch.triggered] } : {}),

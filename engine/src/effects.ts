@@ -7333,7 +7333,9 @@ export type EffectSpec =
        * landwalk, protection, trample, and vigilance" (Concerted Effort:
        * `filter` and `from` both the creatures you control). Read once, before
        * anything gains them (608.2h), granted ones counting; what's gained
-       * stays when the creature it came from leaves (its ruling).
+       * stays when the creature it came from leaves (its ruling). With
+       * `"hexproof"` listed, each "hexproof from [quality]" among them is
+       * shared as itself (702.11d-e — Odric, Lunarch Marshal).
        */
       readonly sharesKeywords?: {
         readonly from: CardFilter;
@@ -14308,6 +14310,7 @@ export interface EffectApi {
   ): {
     readonly keywords: readonly Keyword[];
     readonly protection?: ResolvedPatch["protection"];
+    readonly hexproofFrom?: ResolvedPatch["hexproofFrom"];
     readonly landwalk: readonly CardFilter[];
   };
   /** Every permanent matching `filter` as this begins becomes what `patch`
@@ -21816,6 +21819,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...read,
           ...(keywords.length > 0 ? { keywords } : {}),
           ...(shared.protection !== undefined ? { protection: shared.protection } : {}),
+          ...(shared.hexproofFrom !== undefined ? { hexproofFrom: shared.hexproofFrom } : {}),
           ...(shared.landwalk.length > 0 ? { landwalk: shared.landwalk } : {}),
         };
         // Nothing among them to share, and nothing else to become.

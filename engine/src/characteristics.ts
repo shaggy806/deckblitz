@@ -1977,7 +1977,10 @@ function sharedKeywordsOf(
  * keyword one of them has; with `landwalk`, each landwalk ability among them
  * (702.14a — a named one as its keyword, any other as its land); with
  * `protection`, every protection ability among them (702.16a), merged — a
- * colour, card type, player or quality any of them has protection from.
+ * colour, card type, player or quality any of them has protection from;
+ * with `"hexproof"` listed, each "hexproof from [quality]" too, a hexproof
+ * ability (702.11d-e) shared as itself (Bleeding Effect's ruling: "creatures
+ * you control gain those specific variants").
  * Granted abilities count as printed ones do (Concerted Effort's ruling: "one
  * creature with flying and protection from red, one with islandwalk and
  * protection from green" gives all three both). A static's "doesn't remove"
@@ -1991,6 +1994,7 @@ export function sharedAbilitiesOnBattlefield(
 ): {
   readonly keywords: readonly Keyword[];
   readonly protection?: NonNullable<PtModifier["protection"]>;
+  readonly hexproofFrom?: NonNullable<PtModifier["hexproofFrom"]>;
   readonly landwalk: readonly CardFilter[];
 } {
   const keywords = new Set<Keyword>();
@@ -2000,9 +2004,20 @@ export function sharedAbilitiesOnBattlefield(
   const filters = new Map<string, CardFilter>();
   const bound = new Map<string, { readonly filter: CardFilter; readonly source: ObjectId }>();
   const players = new Set<PlayerId>();
+  const hexColors = new Set<Color>();
+  const hexTypes = new Set<CardType>();
+  const hexFilters = new Map<string, CardFilter>();
+  const variants = share.keywords.includes("hexproof");
   for (const id of from) {
     const c = computeCharacteristics(state, registry, id);
     for (const keyword of share.keywords) if (c.keywords.has(keyword)) keywords.add(keyword);
+    // The "hexproof from" instances that are the keyword (702.11d) — not a
+    // printed "can't be the target of …" (`qualified`), which isn't hexproof.
+    if (variants) {
+      for (const color of c.hexproofFrom.colors) hexColors.add(color);
+      for (const type of c.hexproofFrom.types) hexTypes.add(type);
+      for (const filter of c.hexproofFrom.filters) hexFilters.set(JSON.stringify(filter), filter);
+    }
     if (share.landwalk === true) {
       for (const [keyword] of LANDWALK) if (c.keywords.has(keyword)) keywords.add(keyword);
       for (const land of c.landwalk) landwalk.set(JSON.stringify(land), land);
@@ -2023,8 +2038,20 @@ export function sharedAbilitiesOnBattlefield(
   const filter: CardFilter | undefined =
     unbound.length === 0 ? undefined : everything ? {} : unbound.length === 1 ? unbound[0] : { anyOf: unbound };
   const any = colors.size > 0 || types.size > 0 || filter !== undefined || bound.size > 0 || players.size > 0;
+  const hexUnbound = [...hexFilters.values()];
+  const hexFilter: CardFilter | undefined =
+    hexUnbound.length === 0 ? undefined : hexUnbound.length === 1 ? hexUnbound[0] : { anyOf: hexUnbound };
   return {
     keywords: [...keywords],
+    ...(hexColors.size > 0 || hexTypes.size > 0 || hexFilter !== undefined
+      ? {
+          hexproofFrom: {
+            ...(hexColors.size > 0 ? { colors: [...hexColors] } : {}),
+            ...(hexTypes.size > 0 ? { types: [...hexTypes] } : {}),
+            ...(hexFilter !== undefined ? { filter: hexFilter } : {}),
+          },
+        }
+      : {}),
     ...(any
       ? {
           protection: {
