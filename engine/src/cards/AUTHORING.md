@@ -7108,7 +7108,13 @@ clause (section 9):
   "any-player"`, `filter: { subtype: "Zombie" }`), Blitzball's "an opponent …
   by a legendary creature" (`who: "opponent"`), and `selfOnly` for this permanent
   alone, in the stint it's in or left: Wave of Rats' "if it dealt combat damage
-  to a player this turn". `what: "excess-damaged"` is the permanents `who`
+  to a player this turn". `what: "dealt-combat-damage-to-player"` is the other
+  side of it: the sources `who` controlled that dealt any player combat
+  damage, each once however often (double strike), read as it dealt it —
+  Excess's "a Treasure token for each creature you controlled that dealt combat
+  damage to a player this turn" is a `{ turnHistory:
+  "dealt-combat-damage-to-player", who: "you", filter: { type: "creature" } }`
+  count, those since gone or changed hands included. `what: "excess-damaged"` is the permanents `who`
   controlled that were dealt excess damage (rule 120.4a), each read as it was
   dealt it, though it has died or changed hands since: Rith, Liberated
   Primeval's "if a creature or planeswalker an opponent controlled was dealt

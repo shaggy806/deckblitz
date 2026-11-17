@@ -370,6 +370,14 @@ export type JournalWhat =
   /** A source dealt combat damage to this player, one entry a source a combat
    * damage step: the list is the damaged player's. */
   | "combat-damaged-by"
+  /** A source dealt combat damage to a player, once per source and stint
+   * however often it did: the list is the source's controller's as it dealt
+   * it, and a filter reads the source as it was then — Excess's "for each
+   * creature you controlled that dealt combat damage to a player this turn"
+   * (`filter: { type: "creature" }`), those since gone or changed hands
+   * included (its ruling). A counted token stack's entry is every token in
+   * it. */
+  | "dealt-combat-damage-to-player"
   /** A permanent was dealt excess damage (rule 120.4a), one entry a source
    * an event: the list is the permanent's controller's as it was dealt it,
    * and a filter reads the permanent as it was then, though it has died
@@ -484,6 +492,11 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     whose: "target",
     match: (e) => e.combat !== undefined && e.target?.kind === "player",
     oncePerList: true,
+  },
+  "dealt-combat-damage-to-player": {
+    kind: "damage",
+    match: (e) => e.combat !== undefined && e.target?.kind === "player",
+    distinct: true,
   },
   "excess-damaged": {
     kind: "damage",
