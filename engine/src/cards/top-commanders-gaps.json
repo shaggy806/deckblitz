@@ -2923,7 +2923,8 @@
   "effect:prohibit-non-mana-abilities-one-shot",
   "effect:prohibit-non-mana-abilities-one-shot",
   "effect:turn-restriction-except-target",
-  "amount:spell-target-count"
+  "amount:spell-target-count",
+  "effect:create-tokens-distributed-among-opponents"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -4871,6 +4871,27 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       },
     });
     expect(shards.complete).toBe(true);
+    // Varchild's War-Riders: an opponent chosen per age counter creates the token.
+    const riders = face(`Cumulative upkeep—Have an opponent create a 1/1 red Survivor creature token. ${reminder}`, "Creature — Human Warrior");
+    expect(riders.triggered[0].effect).toMatchObject({
+      then: {
+        effects: [
+          {},
+          {
+            options: [
+              {
+                doing: {
+                  kind: "repeat",
+                  times: { countersOn: "source" },
+                  effect: { kind: "choose-opponent", then: { kind: "create-token", token: "Servo Token", count: 1, who: "that-player" } },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    });
+    expect(riders.complete).toBe(true);
     const ancient = face(`Trample\nCumulative upkeep—Put a +1/+1 counter on a creature an opponent controls. ${reminder}`, "Creature — Treefolk");
     expect(ancient.triggered[0].effect).toMatchObject({
       then: {

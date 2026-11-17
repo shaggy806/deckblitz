@@ -226,9 +226,10 @@ function pitchExile(what) {
 /**
  * A keyword the engine runs as an ability or a card field rather than a
  * `Keyword` — what it adds to the face, or `null`. Each shape is the one the
- * pool's own cards use (the helper, or the card field).
+ * pool's own cards use (the helper, or the card field). `tokenFor` names a
+ * token from its description, as `parseFace`'s `ctx.tokenFor` does.
  */
-function keywordPart(part, faceName, typeLine = "") {
+function keywordPart(part, faceName, typeLine = "", tokenFor = undefined) {
   const p = part.trim();
   let m;
   // Sunburst (rule 702.44a): +1/+1 counters on a creature, charge counters
@@ -258,6 +259,16 @@ function keywordPart(part, faceName, typeLine = "") {
   if ((m = /^cumulative upkeep—an opponent gains (\d+) life\.?$/i.exec(p))) {
     const gain = { kind: "gain-life", amount: Number(m[1]), who: "that-player" };
     return { triggered: [cumulativeUpkeep({ doing: { kind: "choose-opponent", then: gain }, text: `An opponent gains ${m[1]} life` })] };
+  }
+  // "Have an opponent create a 1/1 red Survivor creature token" (Varchild's
+  // War-Riders): an opponent chosen per age counter, who creates the token.
+  if ((m = /^cumulative upkeep—(have an opponent create an? (.+? token))\.?$/i.exec(p))) {
+    const token = tokenFor?.(m[2]) ?? null;
+    if (token !== null) {
+      const create = { kind: "create-token", token, count: 1, who: "that-player" };
+      const text = m[1][0].toUpperCase() + m[1].slice(1);
+      return { triggered: [cumulativeUpkeep({ doing: { kind: "choose-opponent", then: create }, text })] };
+    }
   }
   if (/^cumulative upkeep—flip a coin\.?$/i.test(p)) {
     return { triggered: [cumulativeUpkeep({ doing: { kind: "flip-coin" }, text: "Flip a coin" })] };
@@ -17221,11 +17232,11 @@ function parseFaceAsWritten(face, ctx = {}) {
     };
     const isProwess = (p) => p.toLowerCase() === "prowess";
     const known = (p) =>
-      KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p, face.name, face.type_line) !== null;
+      KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p, face.name, face.type_line, ctx.tokenFor) !== null;
     // Two typecyclings on one line ("Mountaincycling {2}, forestcycling {2}")
     // are two abilities, `cycling` and `moreCycling`; anything else twice is a
     // person's.
-    const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p, face.name, face.type_line)?.card ?? {}) : []));
+    const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p, face.name, face.type_line, ctx.tokenFor)?.card ?? {}) : []));
     const twice =
       cardFields.some((f, i) => f !== "cycling" && cardFields.indexOf(f) !== i) ||
       // Morph on a land (Zoetic Cavern): a land is played, never cast, and the
@@ -17242,7 +17253,7 @@ function parseFaceAsWritten(face, ctx = {}) {
         else if (protectionOf(p) !== null) out.static.push(protectionOf(p));
         else if (wardOf(p) !== null) out.triggered.push(wardAbility(wardOf(p)));
         else {
-          const k = keywordPart(p, face.name, face.type_line);
+          const k = keywordPart(p, face.name, face.type_line, ctx.tokenFor);
           out.keywords.push(...(k.keywords ?? []));
           out.triggered.push(...(k.triggered ?? []));
           out.activated.push(...(k.activated ?? []));

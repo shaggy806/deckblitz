@@ -6,7 +6,7 @@
  * for each counter.
  */
 import { describe, expect, it } from "vitest";
-import { A, B, C, counters, life, nextTurn, pickModes, spawn, table, zone } from "./harness.js";
+import { A, B, C, counters, keywords, life, named, nextTurn, pickModes, spawn, table, tokensNamed, zone } from "./harness.js";
 
 describe("cumulative upkeep paid by an act", () => {
   it("Wall of Shards: the opponent gains 1 life per age counter, or the Wall is sacrificed", () => {
@@ -65,5 +65,49 @@ describe("cumulative upkeep paid by an act", () => {
     expect(life(game, C)).toBe(22);
     expect(life(game, B)).toBe(21);
     expect(asked.length).toBeGreaterThan(0);
+  });
+
+  it("Varchild's War-Riders: an opponent creates (and owns) a Survivor per age counter, each chosen on its own", () => {
+    const { game, a } = table({ players: 3 });
+    const riders = spawn(game, "Varchild's War-Riders");
+    expect(keywords(game, riders)).toContain("trample");
+    // First upkeep, one counter: carol gets the token.
+    a.chooseModesFn = (_view, _min, _max, texts) => {
+      const pick = texts.findIndex((t) => t.includes(C) || /carol/i.test(t));
+      return [pick >= 0 ? pick : 0];
+    };
+    nextTurn(game);
+    nextTurn(game);
+    nextTurn(game);
+    expect(counters(game, riders, "age")).toBe(1);
+    expect(tokensNamed(game, "Survivor Token", C)).toBe(1);
+    expect(tokensNamed(game, "Survivor Token", B)).toBe(0);
+    expect(tokensNamed(game, "Survivor Token", A)).toBe(0);
+    // Next, two counters: bob then carol — the tokens split between them.
+    const order = [B, C];
+    let opponentQuestions = 0;
+    a.chooseModesFn = (_view, _min, _max, texts) => {
+      const who = order[opponentQuestions];
+      const pick = texts.findIndex((t) => t.includes(who) || t.toLowerCase().includes(who === C ? "carol" : "bob"));
+      if (pick < 0) return [0];
+      opponentQuestions++;
+      return [pick];
+    };
+    nextTurn(game);
+    nextTurn(game);
+    nextTurn(game);
+    expect(counters(game, riders, "age")).toBe(2);
+    expect(opponentQuestions).toBe(2);
+    expect(tokensNamed(game, "Survivor Token", B)).toBe(1);
+    expect(tokensNamed(game, "Survivor Token", C)).toBe(2);
+    const survivor = named(game, "Survivor Token", B)[0];
+    expect(game.state.objects[survivor].owner).toBe(B);
+    // Unpaid, it's sacrificed and nobody gets a token.
+    pickModes(a);
+    nextTurn(game);
+    nextTurn(game);
+    nextTurn(game);
+    expect(zone(game, riders)).toBe("graveyard");
+    expect(tokensNamed(game, "Survivor Token")).toBe(3);
   });
 });
