@@ -84,6 +84,10 @@ const TERMS = [
   "exileAfter",
   "bottomAfter",
   "gainsHaste",
+  // Read in `castSpell` off the permission a spell was cast under: its
+  // `gainsHaste`, `gainsTriggered` and `entersWith` (Mikey & Don, Party
+  // Planners) reach only a spell it matches.
+  "gainsIf",
   "landsEnterTapped",
   "entersTapped",
   "entersWith",
