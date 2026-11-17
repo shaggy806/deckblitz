@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Put the bottom card of your library into your graveyard" — built 2026-11-17
+
+The key `effect:mill-from-bottom`, built as what it is — not a mill (rule 701.17a takes the top cards, and
+nothing that reads milling sees this): the `bottom-of-library` effect, the bottom card handed to `then` as
+target 0 (`top-of-graveyard`'s shape, `ResolutionContext.libraryBottom`), "it" followed by its slot wherever
+a move put it — Leyline of the Void's exile, and onto the battlefield from there (Grenzo's ruling). Grenzo,
+Dungeon Warden (rank 11375, top-1000 commander #603; Grenzo's last known power once it has gone) and Cellar
+Door (`whose: 0`, a target player's). The scaffolder reads both (`bottomOfLibraryAt`).
+`test/bottom-of-library.test.ts`.
+
 ### "It can't phase in for as long as you control this Saga" — built 2026-11-17
 
 The key `effect:phase-out-while-you-control-source`: `phase-out`'s `cantPhaseIn` (`"while-you-control-source"` or

@@ -3097,6 +3097,28 @@ export type EffectSpec =
       readonly then: EffectSpec;
     }
   | {
+      /**
+       * The bottom card of a library (rule 401.1), going to `then` as target
+       * 0: nothing targets it and nobody chooses it. Grenzo, Dungeon Warden's
+       * "put the bottom card of your library into your graveyard. If it's a
+       * creature card with power less than or equal to Grenzo's power, put it
+       * onto the battlefield" is a `then` of `put-into-graveyard` and a
+       * `conditional` on target 0: "it" follows the card to wherever the move
+       * put it, as a slot's object does — into exile with Leyline of the Void
+       * out, and onto the battlefield from there (the ruling). Not a mill
+       * (rule 701.17a: milling takes the top cards), so nothing that reads
+       * milling sees it. `whose`: a slot holding a player — Cellar Door's
+       * "**target player** puts the bottom card of their library into their
+       * graveyard" — or a `PlayerRef`; the effect's controller's by default.
+       * Nobody's, and nothing done, with that player gone or the slot
+       * illegal. With an empty library `then` runs with slot 0 empty, as
+       * `reveal-top`'s does.
+       */
+      readonly kind: "bottom-of-library";
+      readonly whose?: number | PlayerRef;
+      readonly then: EffectSpec;
+    }
+  | {
       /** "Then reorder your graveyard as you choose" (Fossil Find): the
        * effect's controller arranges their whole pile. Asked only while
        * something in the game reads a graveyard's order; otherwise it's a
@@ -13054,6 +13076,8 @@ export interface EffectApi {
   setDoor(object: ObjectId, door: "left" | "right", lock: boolean): void;
   /** The top `count` cards of `player`'s library, top first. */
   libraryTop(player: PlayerId, count: number, reveal?: boolean): readonly ObjectId[];
+  /** The bottom card of `player`'s library, if any — see `bottom-of-library`. */
+  libraryBottom(player: PlayerId): ObjectId | undefined;
   /** `times` copies of each of `cards` (rule 707.12), made in the card's
    * zone and owned by the controller, for casting; the new objects' ids.
    * `into: "hand"`: in the controller's hand instead, of a card anywhere. */
@@ -19081,6 +19105,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (card === undefined) return;
       if (spec.ifIt !== undefined && !ctx.cardMatches(card, spec.ifIt)) return;
       applyEffectSpec(spec.then, ctx.withTargets([{ kind: "object", object: card }]));
+      return;
+    }
+    case "bottom-of-library": {
+      const whose = spec.whose ?? "you";
+      let owner: PlayerId | undefined;
+      if (typeof whose !== "number") owner = resolvePlayerRef(whose, ctx);
+      else {
+        const ref = ctx.targets[whose];
+        owner = ref?.kind === "player" && !illegalSlot(whose, ctx) ? ref.player : undefined;
+      }
+      if (owner === undefined || !ctx.playersInScope("each-player").includes(owner)) return;
+      const card = ctx.libraryBottom(owner);
+      applyEffectSpec(spec.then, ctx.withTargets(card === undefined ? [] : [{ kind: "object", object: card }]));
       return;
     }
     case "reorder-graveyard":

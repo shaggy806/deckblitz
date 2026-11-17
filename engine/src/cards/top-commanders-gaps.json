@@ -4,6 +4,7 @@
  "built": [
     "bug:simultaneous-move-with-choice",
     "effect:phase-out-while-you-control-source",
+    "effect:mill-from-bottom",
     "trigger:becomes-target-of-ability-targeting-only-it",
     "static:opponents-cant-play-from-graveyard",
     "cost:cumulative-upkeep-counter-on-opponents-creature",

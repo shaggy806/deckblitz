@@ -11568,7 +11568,7 @@ export function parseEffect(text, outer) {
       skip = toCounters.used - 1;
       continue;
     }
-    const arrival = graveyardArrivalAt(sentences, i, ctx);
+    const arrival = graveyardArrivalAt(sentences, i, ctx) ?? bottomOfLibraryAt(sentences, i, ctx);
     if (arrival !== null) {
       parsed.push(arrival.effect);
       hints.push({ sentence, effect: arrival.effect });
@@ -13069,6 +13069,48 @@ function preventToCountersAt(sentences, i, ctx) {
       },
       duration: "end-of-turn",
       object: target,
+    },
+    used: 2,
+  };
+}
+
+/**
+ * "Put the bottom card of your library into your graveyard. If it's a
+ * creature card with power less than or equal to ~'s power, put it onto the
+ * battlefield" (Grenzo, Dungeon Warden), "Target player puts the bottom card
+ * of their library into their graveyard. If it's a creature card, you create
+ * a 2/2 black Zombie creature token" (Cellar Door): `bottom-of-library`, its
+ * card as target 0 of a move and a `conditional` read where the move put it.
+ */
+function bottomOfLibraryAt(sentences, i, ctx) {
+  const m = /^(put|target player puts) the bottom card of (?:your|their) library into (?:your|their) graveyard\.$/i.exec(sentences[i] ?? "");
+  if (m === null) return null;
+  const then = /^if it's an? (.+?) card( with power less than or equal to ~'s power)?, (.+)\.$/i.exec(sentences[i + 1] ?? "");
+  if (then === null) return null;
+  const types = parseTypePhrase(then[1], { cards: true });
+  if (types === null || Object.keys(types).length === 0) return null;
+  const filter = then[2] === undefined ? types : { ...types, power: { op: "lte", n: { amount: { powerOf: "source" } } } };
+  const clause = then[3];
+  let doing;
+  if (/^put it onto the battlefield$/i.test(clause)) doing = { kind: "put-onto-battlefield", target: 0 };
+  else {
+    const you = /^you (.+)$/i.exec(clause);
+    if (you === null) return null;
+    doing = parseSentence(`${you[1][0].toUpperCase()}${you[1].slice(1)}.`, { ...ctx, it: undefined, departed: undefined });
+    if (doing === null || doing === undefined) return null;
+  }
+  const whose = m[1].toLowerCase() === "put" ? undefined : ctx.target("player");
+  return {
+    effect: {
+      kind: "bottom-of-library",
+      ...(whose !== undefined ? { whose } : {}),
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "put-into-graveyard", target: 0 },
+          { kind: "conditional", condition: { kind: "target", index: 0, filter }, then: doing },
+        ],
+      },
     },
     used: 2,
   };

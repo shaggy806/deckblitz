@@ -284,6 +284,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.then.kind === "exile" || n.then.kind === "put-onto-battlefield") v.touch(n.whose, "harm", MINOR);
   },
   "reorder-graveyard": none,
+  // Its `then` reads the bottom card as target 0. A targeted player's bottom
+  // card put into their graveyard (Cellar Door) is no plain harm or help:
+  // filling a graveyard is a cost to some decks and fuel to others.
+  "bottom-of-library": none,
   "choose-random-card": (n, v) => {
     if (typeof n.whose !== "number") return;
     if (n.zone === "hand" || (n.then?.kind === "put-onto-battlefield" && n.then.underYourControl === true)) {

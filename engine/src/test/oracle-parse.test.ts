@@ -12151,6 +12151,65 @@ describe("a graveyard's order", () => {
   });
 });
 
+describe("the bottom card of a library", () => {
+  it("reads Grenzo's move and its power check, and Cellar Door's target player and token", () => {
+    const grenzo = parseFace(
+      {
+        name: "Test Warden",
+        type_line: "Creature — Goblin",
+        oracle_text:
+          "{2}: Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to Test Warden's power, put it onto the battlefield.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(grenzo.complete).toBe(true);
+    expect(grenzo.activated[0].effect).toEqual({
+      kind: "bottom-of-library",
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "put-into-graveyard", target: 0 },
+          {
+            kind: "conditional",
+            condition: {
+              kind: "target",
+              index: 0,
+              filter: { type: "creature", power: { op: "lte", n: { amount: { powerOf: "source" } } } },
+            },
+            then: { kind: "put-onto-battlefield", target: 0 },
+          },
+        ],
+      },
+    });
+    const door = parseFace(
+      {
+        name: "Test Door",
+        type_line: "Artifact",
+        oracle_text:
+          "{3}, {T}: Target player puts the bottom card of their library into their graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.",
+      },
+      { tokenFor: () => "Zombie Token" },
+    );
+    expect(door.complete).toBe(true);
+    expect(door.activated[0].targets).toEqual(["player"]);
+    expect(door.activated[0].effect).toEqual({
+      kind: "bottom-of-library",
+      whose: 0,
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "put-into-graveyard", target: 0 },
+          {
+            kind: "conditional",
+            condition: { kind: "target", index: 0, filter: { type: "creature" } },
+            then: { kind: "create-token", token: "Zombie Token", count: 1 },
+          },
+        ],
+      },
+    });
+  });
+});
+
 describe("the most common color among permanents", () => {
   const face = (type_line: string, oracle_text: string, name = "Test Common") =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

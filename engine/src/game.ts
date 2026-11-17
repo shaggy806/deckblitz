@@ -44040,6 +44040,7 @@ controlledBy,
         if (reveal === true) this.revealCards(player, top, "library");
         return top;
       },
+      libraryBottom: (player) => this.state.zones.perPlayer[player]?.library.at(-1),
       revealUntil: (owner, spec) => {
         const found = this.revealUntil(owner, controller, spec);
         // "Exiled with this" (rule 607.2a): each card it exiled, in the stint
