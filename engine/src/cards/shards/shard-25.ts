@@ -455,6 +455,7 @@ import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKarplusanWolverine from "../pool/karplusan-wolverine.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
 import _poolKavuHowler from "../pool/kavu-howler.js";
+import _poolKayaSpiritsJustice from "../pool/kaya-spirits-justice.js";
 import _poolKazanduTuskcaller from "../pool/kazandu-tuskcaller.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKeeperOfTresserhorn from "../pool/keeper-of-tresserhorn.js";
@@ -1471,6 +1472,7 @@ const shard: CardShard = {
     _poolKarplusanWolverine,
     _poolKataraTheFearless,
     _poolKavuHowler,
+    _poolKayaSpiritsJustice,
     _poolKazanduTuskcaller,
     _poolKazuulsFury,
     _poolKeeperOfTresserhorn,

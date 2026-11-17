@@ -354,6 +354,7 @@ import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGabrielAngelfire from "../pool/gabriel-angelfire.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
 import _poolGalvanicAlchemist from "../pool/galvanic-alchemist.js";
+import _poolGandalfWestwardVoyager from "../pool/gandalf-westward-voyager.js";
 import _poolGarrukApexPredator from "../pool/garruk-apex-predator.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
 import _poolGateHound from "../pool/gate-hound.js";
@@ -1397,6 +1398,7 @@ const shard: CardShard = {
     _poolGabrielAngelfire,
     _poolGalionElvenkingsButler,
     _poolGalvanicAlchemist,
+    _poolGandalfWestwardVoyager,
     _poolGarrukApexPredator,
     _poolGarrukWildspeaker,
     _poolGateHound,

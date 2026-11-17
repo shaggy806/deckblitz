@@ -7917,6 +7917,7 @@ import _poolDyingToServe from "./pool/dying-to-serve.js";
 import _poolDyingWail from "./pool/dying-wail.js";
 import _poolDyingWish from "./pool/dying-wish.js";
 import _poolDynacharge from "./pool/dynacharge.js";
+import _poolDynaheirInvokerAdept from "./pool/dynaheir-invoker-adept.js";
 import _poolDynamicSoar from "./pool/dynamic-soar.js";
 import _poolDynamiteDiver from "./pool/dynamite-diver.js";
 import _poolDynavoltTower from "./pool/dynavolt-tower.js";
@@ -8986,6 +8987,7 @@ import _poolExploreTheVastlands from "./pool/explore-the-vastlands.js";
 import _poolExplore from "./pool/explore.js";
 import _poolExplorersCache from "./pool/explorers-cache.js";
 import _poolExplorersScope from "./pool/explorers-scope.js";
+import _poolExplosionOfRiches from "./pool/explosion-of-riches.js";
 import _poolExplosion from "./pool/explosion.js";
 import _poolExplosiveApparatus from "./pool/explosive-apparatus.js";
 import _poolExplosiveCrystal from "./pool/explosive-crystal.js";
@@ -10641,6 +10643,7 @@ import _poolGandalfSparkStarter from "./pool/gandalf-spark-starter.js";
 import _poolGandalfTheGrey from "./pool/gandalf-the-grey.js";
 import _poolGandalfTheWhite from "./pool/gandalf-the-white.js";
 import _poolGandalfWanderingWizard from "./pool/gandalf-wandering-wizard.js";
+import _poolGandalfWestwardVoyager from "./pool/gandalf-westward-voyager.js";
 import _poolGandalfWhiteRider from "./pool/gandalf-white-rider.js";
 import _poolGandalfsSanction from "./pool/gandalfs-sanction.js";
 import _poolGangOfDevils from "./pool/gang-of-devils.js";
@@ -13620,6 +13623,7 @@ import _poolImodanesRecruiter from "./pool/imodanes-recruiter.js";
 import _poolImoenMysticTrickster from "./pool/imoen-mystic-trickster.js";
 import _poolImotekhTheStormlord from "./pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "./pool/imoti-celebrant-of-bounty.js";
+import _poolImpactResonance from "./pool/impact-resonance.js";
 import _poolImpactTremors from "./pool/impact-tremors.js";
 import _poolImpale from "./pool/impale.js";
 import _poolImpalerShrike from "./pool/impaler-shrike.js";
@@ -14876,6 +14880,7 @@ import _poolKayaGeistHunter from "./pool/kaya-geist-hunter.js";
 import _poolKayaGhostAssassin from "./pool/kaya-ghost-assassin.js";
 import _poolKayaIntangibleSlayer from "./pool/kaya-intangible-slayer.js";
 import _poolKayaOrzhovUsurper from "./pool/kaya-orzhov-usurper.js";
+import _poolKayaSpiritsJustice from "./pool/kaya-spirits-justice.js";
 import _poolKayaTheInexorable from "./pool/kaya-the-inexorable.js";
 import _poolKayasGhostform from "./pool/kayas-ghostform.js";
 import _poolKayasGuile from "./pool/kayas-guile.js";
@@ -41368,6 +41373,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDyingWail,
   _poolDyingWish,
   _poolDynacharge,
+  _poolDynaheirInvokerAdept,
   _poolDynamicSoar,
   _poolDynamiteDiver,
   _poolDynavoltTower,
@@ -42437,6 +42443,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExplore,
   _poolExplorersCache,
   _poolExplorersScope,
+  _poolExplosionOfRiches,
   _poolExplosion,
   _poolExplosiveApparatus,
   _poolExplosiveCrystal,
@@ -44092,6 +44099,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGandalfTheGrey,
   _poolGandalfTheWhite,
   _poolGandalfWanderingWizard,
+  _poolGandalfWestwardVoyager,
   _poolGandalfWhiteRider,
   _poolGandalfsSanction,
   _poolGangOfDevils,
@@ -47071,6 +47079,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolImoenMysticTrickster,
   _poolImotekhTheStormlord,
   _poolImotiCelebrantOfBounty,
+  _poolImpactResonance,
   _poolImpactTremors,
   _poolImpale,
   _poolImpalerShrike,
@@ -48327,6 +48336,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKayaGhostAssassin,
   _poolKayaIntangibleSlayer,
   _poolKayaOrzhovUsurper,
+  _poolKayaSpiritsJustice,
   _poolKayaTheInexorable,
   _poolKayasGhostform,
   _poolKayasGuile,
@@ -74832,6 +74842,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dying-wail": _poolDyingWail,
   "pool/dying-wish": _poolDyingWish,
   "pool/dynacharge": _poolDynacharge,
+  "pool/dynaheir-invoker-adept": _poolDynaheirInvokerAdept,
   "pool/dynamic-soar": _poolDynamicSoar,
   "pool/dynamite-diver": _poolDynamiteDiver,
   "pool/dynavolt-tower": _poolDynavoltTower,
@@ -75901,6 +75912,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/explore": _poolExplore,
   "pool/explorers-cache": _poolExplorersCache,
   "pool/explorers-scope": _poolExplorersScope,
+  "pool/explosion-of-riches": _poolExplosionOfRiches,
   "pool/explosion": _poolExplosion,
   "pool/explosive-apparatus": _poolExplosiveApparatus,
   "pool/explosive-crystal": _poolExplosiveCrystal,
@@ -77556,6 +77568,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gandalf-the-grey": _poolGandalfTheGrey,
   "pool/gandalf-the-white": _poolGandalfTheWhite,
   "pool/gandalf-wandering-wizard": _poolGandalfWanderingWizard,
+  "pool/gandalf-westward-voyager": _poolGandalfWestwardVoyager,
   "pool/gandalf-white-rider": _poolGandalfWhiteRider,
   "pool/gandalfs-sanction": _poolGandalfsSanction,
   "pool/gang-of-devils": _poolGangOfDevils,
@@ -80535,6 +80548,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/imoen-mystic-trickster": _poolImoenMysticTrickster,
   "pool/imotekh-the-stormlord": _poolImotekhTheStormlord,
   "pool/imoti-celebrant-of-bounty": _poolImotiCelebrantOfBounty,
+  "pool/impact-resonance": _poolImpactResonance,
   "pool/impact-tremors": _poolImpactTremors,
   "pool/impale": _poolImpale,
   "pool/impaler-shrike": _poolImpalerShrike,
@@ -81791,6 +81805,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kaya-ghost-assassin": _poolKayaGhostAssassin,
   "pool/kaya-intangible-slayer": _poolKayaIntangibleSlayer,
   "pool/kaya-orzhov-usurper": _poolKayaOrzhovUsurper,
+  "pool/kaya-spirits-justice": _poolKayaSpiritsJustice,
   "pool/kaya-the-inexorable": _poolKayaTheInexorable,
   "pool/kayas-ghostform": _poolKayasGhostform,
   "pool/kayas-guile": _poolKayasGuile,

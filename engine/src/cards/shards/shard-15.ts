@@ -408,6 +408,7 @@ import _poolIdentityThief from "../pool/identity-thief.js";
 import _poolIdleThoughts from "../pool/idle-thoughts.js";
 import _poolIfhBiffEfreet from "../pool/ifh-biff-efreet.js";
 import _poolImmobilizingInk from "../pool/immobilizing-ink.js";
+import _poolImpactResonance from "../pool/impact-resonance.js";
 import _poolImpedeMomentum from "../pool/impede-momentum.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
@@ -1398,6 +1399,7 @@ const shard: CardShard = {
     _poolIdleThoughts,
     _poolIfhBiffEfreet,
     _poolImmobilizingInk,
+    _poolImpactResonance,
     _poolImpedeMomentum,
     _poolImpossibleInferno,
     _poolImprovisedClub,

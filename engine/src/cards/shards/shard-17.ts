@@ -278,6 +278,7 @@ import _poolEvolutionVat from "../pool/evolution-vat.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
+import _poolExplosionOfRiches from "../pool/explosion-of-riches.js";
 import _poolExplosiveApparatus from "../pool/explosive-apparatus.js";
 import _poolExtractionSpecialist from "../pool/extraction-specialist.js";
 import _poolFableOfWolfAndOwl from "../pool/fable-of-wolf-and-owl.js";
@@ -1313,6 +1314,7 @@ const shard: CardShard = {
     _poolExhibitionMagician,
     _poolExpeditionChampion,
     _poolExpelTheInterlopers,
+    _poolExplosionOfRiches,
     _poolExplosiveApparatus,
     _poolExtractionSpecialist,
     _poolFableOfWolfAndOwl,
