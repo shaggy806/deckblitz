@@ -331,6 +331,7 @@ export const CREATURE_TYPE_WORD_KEYS: ReadonlySet<string> = new Set([
   "notSubtypes",
   "addSubtypes",
   "setSubtypes",
+  "setAllSubtypes",
   "removeSubtypes",
   "subtypesAnyOf",
   "alsoSubtypes",

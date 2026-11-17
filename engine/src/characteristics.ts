@@ -2957,11 +2957,15 @@ function layerSixLossAt(state: GameState, registry: CardRegistry, object: GameOb
  * (rule 305.7 — Blood Moon's "nonbasic lands are Mountains", Convincing
  * Mirage's chosen type), as opposed to adding one "in addition". */
 export function setsBasicLandType(ability: StaticAbility): boolean {
-  return ability.setsChosenLandType === true || (ability.setSubtypes ?? []).some(isBasicLandType);
+  return (
+    ability.setsChosenLandType === true ||
+    (ability.setSubtypes ?? []).some(isBasicLandType) ||
+    (ability.setAllSubtypes ?? []).some(isBasicLandType)
+  );
 }
 
 function modifierSetsBasicLandType(modifier: PtModifier): boolean {
-  return (modifier.setSubtypes ?? []).some(isBasicLandType);
+  return (modifier.setSubtypes ?? []).some(isBasicLandType) || (modifier.setAllSubtypes ?? []).some(isBasicLandType);
 }
 
 /** The last {@link anyLandTypeSetter} answer, and what it was for. */
@@ -3806,6 +3810,12 @@ function applyModifierTypes(
   if (modifier.loseLandTypes) st = st.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s));
   if (modifier.loseCreatureTypes) st = st.filter((s) => subtypeKind(s) !== "creature");
   if (modifier.addTypes && modifier.addTypes.length > 0) t = union(t, modifier.addTypes);
+  if (modifier.setAllSubtypes) {
+    // "Except it's a legendary Alien" (The Eleventh Hour's ruling): every
+    // subtype goes, of every kind, and these are its subtypes — a copy's only
+    // those that go with its types (rule 205.3d), as `addSubtypes` below.
+    st = modifier.copiable === true ? modifier.setAllSubtypes.filter((s) => subtypeFitsTypes(s, t)) : [...modifier.setAllSubtypes];
+  }
   if (modifier.addSubtypes && modifier.addSubtypes.length > 0) {
     // A copy exception's subtypes are fixed with the copiable values (rule
     // 707.9b), and an object can't gain a subtype that doesn't go with one of
@@ -4107,6 +4117,8 @@ function foldLayerFourOnce(
       const kinds = new Set(set.map(subtypeKind));
       subtypes = [...subtypes.filter((s) => !kinds.has(subtypeKind(s))), ...set];
     }
+    // Every subtype, of every kind, replaced (`TypePatch.setAllSubtypes`).
+    if (ability.setAllSubtypes !== undefined) subtypes = [...ability.setAllSubtypes];
     if (ability.removeSubtypes !== undefined) {
       const removed = ability.removeSubtypes;
       subtypes = subtypes.filter((s) => !removed.includes(s));
@@ -4233,6 +4245,7 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.addSupertypes !== undefined ||
     ability.removeSupertypes !== undefined ||
     ability.setSubtypes !== undefined ||
+    ability.setAllSubtypes !== undefined ||
     ability.removeSubtypes !== undefined ||
     ability.setTypes !== undefined ||
     ability.removeTypes !== undefined ||
@@ -5504,6 +5517,7 @@ function printedLandTypesHold(state: GameState, registry: CardRegistry, object: 
     (m) =>
       m.setTypes !== undefined ||
       m.setSubtypes !== undefined ||
+      m.setAllSubtypes !== undefined ||
       (m.addTypes?.length ?? 0) > 0 ||
       (m.addSubtypes?.length ?? 0) > 0 ||
       m.loseLandTypes === true ||

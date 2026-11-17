@@ -37,6 +37,12 @@ export interface TypePatch {
    * a Frog" takes every creature type and leaves "Equipment" alone. Applied
    * before `addSubtypes`. */
   readonly setSubtypes?: readonly string[];
+  /** Subtypes that replace **every** subtype it has, of every kind, its card
+   * types kept: "except it's a legendary **Alien** named Prisoner Zero" (The
+   * Eleventh Hour — the ruling: a copy "will lose any non-Alien subtypes it
+   * has, such as Human or Vehicle"). Applied after `addTypes`; a copy's are
+   * only those that go with its types (rule 205.3d). */
+  readonly setAllSubtypes?: readonly string[];
   /** Subtypes it has in addition to its others. `EVERY_CREATURE_TYPE` is
    * "all creature types" (Amoeboid Changeling). */
   readonly addSubtypes?: readonly string[];
@@ -177,6 +183,7 @@ export function changesTypes(patch: TypePatch): boolean {
     (patch.addTypes !== undefined && patch.addTypes.length > 0) ||
     patch.removeTypes !== undefined ||
     patch.setSubtypes !== undefined ||
+    patch.setAllSubtypes !== undefined ||
     (patch.addSubtypes !== undefined && patch.addSubtypes.length > 0) ||
     patch.removeSubtypes !== undefined
   );
@@ -197,6 +204,7 @@ export function patchModifier(
     ...(patch.addTypes !== undefined && patch.addTypes.length > 0 ? { addTypes: [...patch.addTypes] } : {}),
     ...(patch.removeTypes !== undefined ? { removeTypes: [...patch.removeTypes] } : {}),
     ...(patch.setSubtypes !== undefined ? { setSubtypes: [...patch.setSubtypes] } : {}),
+    ...(patch.setAllSubtypes !== undefined ? { setAllSubtypes: [...patch.setAllSubtypes] } : {}),
     ...(patch.addSubtypes !== undefined && patch.addSubtypes.length > 0 ? { addSubtypes: [...patch.addSubtypes] } : {}),
     ...(patch.removeSubtypes !== undefined ? { removeSubtypes: [...patch.removeSubtypes] } : {}),
     ...(patch.loseLandTypes === true ? { loseLandTypes: true as const } : {}),

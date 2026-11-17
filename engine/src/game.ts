@@ -50890,6 +50890,7 @@ controlledBy,
       if (m.setTypes !== undefined) copiedTypes = m.setTypes;
       if (m.addTypes !== undefined) copiedTypes = [...copiedTypes, ...m.addTypes];
       if (m.setSubtypes !== undefined) copiedSubtypes = m.setSubtypes;
+      if (m.setAllSubtypes !== undefined) copiedSubtypes = m.setAllSubtypes;
       if (m.addSubtypes !== undefined) copiedSubtypes = [...copiedSubtypes, ...m.addSubtypes];
     }
     const plan = this.tokenEventPlan(controller, { types: copiedTypes, subtypes: copiedSubtypes }, count);
@@ -54276,9 +54277,9 @@ controlledBy,
         type: "types-added",
         object: id,
         types: [...(patch.setTypes ?? []), ...(patch.addTypes ?? [])],
-        subtypes: [...(patch.setSubtypes ?? []), ...(patch.addSubtypes ?? [])],
+        subtypes: [...(patch.setSubtypes ?? []), ...(patch.setAllSubtypes ?? []), ...(patch.addSubtypes ?? [])],
         duration,
-        ...(patch.setTypes !== undefined || patch.removeTypes !== undefined || patch.removeSubtypes !== undefined || patch.setSubtypes !== undefined
+        ...(patch.setTypes !== undefined || patch.removeTypes !== undefined || patch.removeSubtypes !== undefined || patch.setSubtypes !== undefined || patch.setAllSubtypes !== undefined
           ? { replaces: true as const }
           : {}),
       });

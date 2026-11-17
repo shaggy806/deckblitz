@@ -2910,7 +2910,8 @@
   "effect:separate-exiled-cards-into-piles",
   "effect:vote-for-card-in-graveyard",
   "effect:look-and-choose-unlinked-exile",
-  "effect:for-each-permanent-coin-flip"
+  "effect:for-each-permanent-coin-flip",
+  "effect:copy-exception-set-all-subtypes"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
@@ -3384,7 +3385,7 @@
   "effect:copy-exceptions": {
    "size": "large",
    "ui": false,
-   "description": "Copy effects with exceptions, stored as copiable values (rule 707.9b): add or override card types, subtypes and colours, set base P/T, grant abilities, and 'except it has this card's other abilities' (Sakashima). Copies of those copies inherit the exceptions. Not covered (B237): conditional exceptions (effect:copy-exception-if-creature, -if-copied-lacks-ability), a granted static or unprinted triggered ability, or replacing every subtype (setSubtypes keeps other kinds)."
+   "description": "Copy effects with exceptions, stored as copiable values (rule 707.9b): add or override card types, subtypes and colours, set base P/T, grant abilities, and 'except it has this card's other abilities' (Sakashima). Copies of those copies inherit the exceptions. Not covered (B237): conditional exceptions (effect:copy-exception-if-creature, -if-copied-lacks-ability), a granted static or unprinted triggered ability. Replacing every subtype is `setAllSubtypes` (2026-11-17, The Eleventh Hour)."
   },
   "effect:copy-permanent-spell": {
    "size": "medium",

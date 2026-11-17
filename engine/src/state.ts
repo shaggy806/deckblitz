@@ -1961,6 +1961,9 @@ export interface PtModifier {
    * (rule 205.1a — a Frog loses its creature types, not an Equipment's
    * artifact type). Applied before `addSubtypes`. */
   setSubtypes?: string[];
+  /** Layer 4 — subtypes that replace every subtype it has, of every kind
+   * (`TypePatch.setAllSubtypes` — The Eleventh Hour's "a legendary Alien"). */
+  setAllSubtypes?: string[];
   /** Layer 5 — colours this modifier adds ("becomes red in addition to its
    * other colours"). */
   addColors?: Color[];
