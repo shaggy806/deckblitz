@@ -18,7 +18,8 @@ export const WORKER_LIMITS = Object.freeze({
 // A worker comparing two builds (`bot-diff.mjs`) holds two card pools, each
 // some 33,000 definitions now, and under 768 MB two of six four-player games
 // ended "JS heap out of memory" (2026-11-15). Twice the cap, for the six
-// workers `bot:diff` runs at most.
+// workers `bot:diff` runs at most — and for `bot:ab` (2026-11-16), which holds
+// two builds the same way and sizes its workers to the free memory.
 export const TWO_BUILD_LIMITS = Object.freeze({
   maxOldGenerationSizeMb: 1536,
   maxYoungGenerationSizeMb: 32,

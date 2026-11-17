@@ -20,6 +20,7 @@ import os from "node:os";
 import { join, dirname } from "node:path";
 
 import { ROOT, baselineDist, workingDist } from "./baseline-build.mjs";
+import { TWO_BUILD_LIMITS } from "./worker-limits.mjs";
 import { runPool } from "./worker-pool.mjs";
 
 const args = process.argv.slice(2);
@@ -31,7 +32,13 @@ const base = flag("base", "origin/main");
 const bot = flag("bot", "v2");
 const players = Math.min(4, Math.max(2, Number(flag("players", "4"))));
 const games = Math.ceil(Number(flag("games", "400")) / players) * players;
-const workers = Number(flag("workers", String(Math.max(1, os.cpus().length - 2))));
+// Each worker holds two builds, so two card pools, under a cap of 1.5 GB
+// (`TWO_BUILD_LIMITS`): as many as the cores, and no more than the free
+// memory holds at 1.7 GB each with 3 GB left over. At the one-build cap
+// every game of an 18-worker run ended "JS heap out of memory" (2026-11-16,
+// a 32 GB machine).
+const fitMemory = Math.floor((os.freemem() / 2 ** 30 - 3) / 1.7);
+const workers = Number(flag("workers", String(Math.max(1, Math.min(os.cpus().length - 2, fitMemory)))));
 const timeoutMs = Number(flag("timeout", "1500")) * 1000;
 const budget = flag("budget", null);
 const baseline = baselineDist(base);
@@ -88,6 +95,7 @@ runPool({
   jobs: queue,
   workers,
   timeoutMs,
+  resourceLimits: TWO_BUILD_LIMITS,
   onMessage: (row) => record(row),
   onLost: (seed, reason) =>
     record(reason === "timeout" ? { seed, outcome: "timeout" } : { seed, outcome: "error", error: reason }),
