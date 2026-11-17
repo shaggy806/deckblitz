@@ -666,6 +666,20 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 334 (2026-11-17, `author-top-cards overnight`, ranks 11022–13755)** — 156
+  cards, every triaged card in that range but those waiting on the user, from 34 lane agents
+  (`COMPLETED.md` lists the features). About half the keys needed no engine code: the triage
+  records predated what now runs them, so `card:find` the Oracle line before believing a key.
+  Left by rank: **Zevlor, Elturel Exile** (13560, `effect:copy-spell-retarget-another-opponent`),
+  **Clara Oswald** (13608, `mechanic:commander-chosen-color-pregame` — a pregame choice, likely
+  major), **Leonardo, Sewer Samurai** (13632), **Vengeful Pharaoh** (13655), **Invasion Plans**
+  (13689, the attacking player choosing blocks — likely a new decision), then 13760 on. Waiting
+  on the user: Cryptic Spires (10790, a deck-construction choice), and the majors left for later
+  — Exchange of Words, Starlight Spectacular, Malik, Grim Manipulator, The Toymaker's Trap,
+  Command Performance. Re-key: **Soul Burn** ("black and/or red" on X wants hybrid pips and
+  `amount:colored-mana-spent-on-x`); **Mana Web** (B333's note). Kaya, Spirits' Justice was
+  re-keyed (`trigger:exiled-creatures-you-control-or-graveyard-cards`) and built in the same run.
+  **Swindler's Scheme** shares Gandalf's key but wants an opponent casting your revealed card free.
 - **Batch 333 (2026-11-16, `author-top-cards`, the rank goal's last ten and ranks 10460–11328)** —
   89 card files, nothing left blocked. The ten majors the user approved finished the rank goal
   (`cards:goal` lists nothing to rank 10,000); then each card past 10,000 in rank order got the

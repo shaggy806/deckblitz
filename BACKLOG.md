@@ -44,18 +44,21 @@ section keeps only what to do next.
   nothing — the user approved all ten last cards' majors and they were built. **Past rank 10,000**
   the order is still EDHREC rank: the triaged cards' keys (`rank-goal.mjs --rank 20000 --keys`),
   through `author-top-cards` as B333 did (lead plus worktree agents, a group of four cards each)
-  or `build-family overnight lanes`. **Next by rank** (B333 reached 11328 but skipped these four):
-  Leori, Sparktouched Hunter (11022, `decision:choose-planeswalker-type`), Sanwell, Avenger Ace
-  (11028, `effect:exile-top-cast-from-among-rest-bottom`), Avatar Destiny (11322,
-  `bug:simultaneous-move-with-choice`), Avacyn's Judgment (11326, re-read: no key recorded); then
-  11400 on. Cryptic Spires (10790) needs a deck-construction choice (circle two colours) — ask the
-  user. New cards come through `author-top-cards` once a snapshot refresh brings untriaged ones
+  or `build-family overnight lanes`. **B334 (2026-11-17, overnight, lane agents) reached 13755.**
+  **Next by rank:** Zevlor, Elturel Exile (13560, `effect:copy-spell-retarget-another-opponent`),
+  Clara Oswald (13608, `mechanic:commander-chosen-color-pregame` — a pregame choice, likely a
+  major to ask about), Leonardo, Sewer Samurai (13632), Vengeful Pharaoh (13655), Invasion Plans
+  (13689, the attacking player choosing blocks — likely a new decision); then 13760 on
+  (`rank-goal.mjs --rank 20000 --keys`). Soul Burn wants re-keying (hybrid pips on X). Each lane's
+  hand-off notes are in `engine/.cache/lanes/<lane>.md` (this PC only). Cryptic Spires (10790)
+  needs a deck-construction choice (circle two colours) — ask the user. New cards come through `author-top-cards` once a snapshot refresh brings untriaged ones
   (`cards:needs -- --next 60`). Three decisions wait on the user: Starlight Spectacular's
   ordering, Malik's secret choice and Exchange of Words (`B308.json`, `B309.json`). **The
-  freed-card queue holds four** (`cards:needs -- --stale`: Lumbering Battlement, Vortex Elemental;
-  Mana Web and Search the City need re-keying first — `docs/card-blockers.md`, batch 333;
-  `author-freed`). The starter precons' last stand-in, Explosion of Riches (for Fireball), goes as
-  its original lands. How the keys were worked down to here (the lanes runs, B310-B330, the freed-card batches)
+  freed-card queue holds eight** (`cards:needs -- --stale`: Crown of the Ages, Enchantment
+  Alteration, Lumbering Battlement, Oracle en-Vec, Vortex Elemental; Swindler's Scheme needs more
+  than Gandalf's key, and Mana Web and Search the City need re-keying first — `docs/card-blockers.md`,
+  batches 333-334; `author-freed`). The starter precons have no stand-ins left (Explosion of Riches landed in B334).
+  How the keys were worked down to here (the lanes runs, B310-B330, the freed-card batches)
   is in `COMPLETED.md`.
 - **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
@@ -94,6 +97,7 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
+- **B334's small gaps** — what the overnight lane agents reported and left: cost exiles inside a resolution counted as "exiled this way", a simultaneous reanimation beside a Clone's choice, a few unread grants, two bot reads, scaffolder lines (`docs/engine-gaps.md`).
 - **Opposition Agent and a search of every library** — Jace, Architect of Thought's −8 (`eachLibrary`) begins the Agent's search control, but the Agent's "may play those cards" isn't granted for a find from the searcher's own library (`docs/engine-gaps.md`).
 - **An object's own "instead" against an exile replacement isn't asked** — Blightsteel Colossus's shuffle and Gravebane Zombie's library top are applied ahead of Rest in Peace or a finality counter without the owner choosing (rule 616.1e), and a Quintorius-cast spell countered by another spell's resolution goes to the library bottom unasked (`docs/engine-gaps.md`).
 - **A `trigger-value` condition reads false while triggering** — B327: it can't be an intervening "if" (rule 603.4); Atomwheel Acrobats waits on `trigger:rolls-at-most` (`docs/engine-gaps.md`).
@@ -271,6 +275,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **B334's prompt and log wording** — a `choose-modes` answer logged as "chose mode(s) 2", Gorex's "choose X", the graveyard blitz offer, a few popup titles (`docs/client-gaps.md`).
 - **Read through a couple of games' history logs, and let a finished game's full log be downloaded** (the user, 2026-11-15): go through the history tab's log for a couple of games and make sure everything reads sensibly (`client/src/ui/EventLog.tsx`). And add an option on the end screen of a game to download a full log, with all information revealed, not just what your seat could see (so it comes from the room's whole game, not the seat's redacted view).
 
 

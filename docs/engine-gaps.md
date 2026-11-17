@@ -19,7 +19,13 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   `fromGraveyard` `grantsTriggered` isn't read from graveyards (Riftstone Portal's `grantsActivated` is). A
   static's `grantsActivated` with `onlyBy: "granter"` falls back to the permanent's controller (only a
   resolving grant binds the granter; no card needs it yet). Bot cost estimates made outside the cast offer
-  don't see `SpellCastClause.via` (Catalyst Stone's flashback reduction).
+  don't see `SpellCastClause.via` (Catalyst Stone's flashback reduction). A copy of Lodestone Bauble's
+  ability that chooses new targets keeps the named player and isn't held to that player's graveyard
+  (`ActivatedAbility.namesPlayer`). The bots answer a look-and-choose `destination: "stay"` pick blindly (in a
+  live check Dawnbreak Reclaimer's opponent handed back an arbitrary creature). The scaffolder can't read
+  "sacrifice any number of X", "look at the top N, put one into your hand and the rest …", Saga chapters, or
+  Nightmare Shepherd's "you may exile it. If you do, create a token copy"; the scenario builder can't start a
+  3-4 player board with `fill: 0` (the first player's turn-1 draw loses the table, rule 103.8a).
 
 - **B294's small gaps** (2026-11-09, what the re-attempt's agents and reader reported while writing cards).
   Built since: `CardFilter.notThisWay`'s player scope (`thisWayBy: "you"`, 2026-11-12: Deadly Brew, Rise of the
