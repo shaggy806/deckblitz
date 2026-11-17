@@ -8799,9 +8799,10 @@ Each board's die comes up 4.
 ## A player chosen, not targeted, as an ability is activated (2026-11-17)
 
 ### Lodestone Bauble: with no targets, a player is still chosen
-- **Do:** Activate Lodestone Bauble without picking any land, then choose Bob.
-- **Expect:** After the targets, a question asks which player, offering Alice and Bob. Once it resolves nothing moves; at the start of Bob's next upkeep Bob draws a card.
+- **Do:** Activate Lodestone Bauble, click Choose none in the lands popup, then click Choose Bob.
+- **Expect:** After Choose none the banner reads "Lodestone Bauble — choose one" with Choose Alice and Choose Bob. Once it resolves nothing moves (Bob's Forest and Island stay in his graveyard); at the start of Bob's turn Lodestone Bauble's trigger goes on the stack and Bob draws a card, then draws again for his turn.
+- **Not a bug:** The History says "That player draws a card" rather than naming Bob.
 
 ### Lodestone Bauble: in a 4-player game, the lands go back on top of their owner's library
-- **Do:** In this 4-player game, activate Lodestone Bauble targeting both lands in Carol's graveyard.
-- **Expect:** No question about a player. Both lands go on top of Carol's library; at the start of Bob's upkeep Carol draws one of them.
+- **Do:** In this 4-player game, activate Lodestone Bauble, pick Forest and Island in the popup (both Carol's) and click Confirm.
+- **Expect:** No question about a player. Carol's graveyard empties and her library goes from 1 to 3; at the start of Bob's turn Lodestone Bauble's trigger goes on the stack and Carol draws a card (the History: "Carol draws a card", then "Bob draws a card").
