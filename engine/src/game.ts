@@ -39735,7 +39735,9 @@ export class Game {
       // Hero's Blade doesn't go onto the creature that left and returned.
       ...(triggerObject !== undefined &&
       (refs.triggerObjectAfterLeaving !== undefined
-        ? this.state.objects[triggerObject]?.zoneChangeCount !== refs.triggerObjectAfterLeaving
+        ? // A card that has never moved has no count yet: its first stint, 0.
+          this.state.objects[triggerObject] === undefined ||
+          (this.state.objects[triggerObject].zoneChangeCount ?? 0) !== refs.triggerObjectAfterLeaving
         : refs.triggerObject !== undefined &&
           (this.state.objects[triggerObject]?.zone !== "battlefield" ||
             (this.state.objects[triggerObject]?.zoneChangeCount ?? 0) !== refs.triggerObject))
@@ -41416,18 +41418,27 @@ export class Game {
           // the creating ability's.
           ...((value ?? triggerValue) !== 0 ? { triggerValue: value ?? triggerValue } : {}),
           // What the spec's `about` names takes the trigger object's place,
-          // and is followed from this stint (rule 400.7).
+          // and is followed from this stint (rule 400.7): a permanent while
+          // it stays on the battlefield, a card anywhere else (Priority
+          // Boarding's revealed card, in the library) while it stays there.
           ...(about === null
             ? // About nothing: not the creating ability's trigger object either.
               { lastKnownRefs: { ...refs, triggerObjectAfterLeaving: undefined, triggerObject: undefined } }
             : about !== undefined
             ? {
                 triggerObject: about,
-                lastKnownRefs: {
-                  ...refs,
-                  triggerObjectAfterLeaving: undefined,
-                  triggerObject: this.state.objects[about]?.zoneChangeCount ?? 0,
-                },
+                lastKnownRefs:
+                  this.state.objects[about]?.zone === "battlefield" || this.state.objects[about] === undefined
+                    ? {
+                        ...refs,
+                        triggerObjectAfterLeaving: undefined,
+                        triggerObject: this.state.objects[about]?.zoneChangeCount ?? 0,
+                      }
+                    : {
+                        ...refs,
+                        triggerObject: undefined,
+                        triggerObjectAfterLeaving: this.state.objects[about]?.zoneChangeCount ?? 0,
+                      },
               }
             : {
                 ...(triggerObject !== undefined ? { triggerObject } : {}),

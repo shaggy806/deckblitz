@@ -2805,7 +2805,8 @@
   "condition:hand-size-at-turn-start",
   "condition:monarch-as-turn-began",
   "condition:was-monarch-as-turn-began",
-  "amount:creatures-dealt-combat-damage-to-player-this-turn"
+  "amount:creatures-dealt-combat-damage-to-player-this-turn",
+  "trigger:reveal-this-way-reflexive"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
