@@ -267,7 +267,9 @@ export interface PlayGrant extends PlayTerms {
  *   turn, spent on the permanent, by whoever's turn it is). A play under it
  *   is announced with the permanent (`spell-cast` / `land-played`'s
  *   `permission`), for the permanent's "when they do" (`plays-card`'s
- *   `underThis`).
+ *   `underThis`). Its `filter` is read from the side of the player using it:
+ *   Ian Malcolm, Chaotician's "from among the cards **they don't own**" is
+ *   `ownedBy: "opponent"`.
  */
 export interface StaticPlay extends PlayTerms {
   readonly from: Exclude<PlayFrom, "hand">;

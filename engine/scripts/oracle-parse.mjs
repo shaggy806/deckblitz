@@ -21558,6 +21558,21 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "During each player's turn, that player may cast a spell from among the
+  // cards they don't own exiled with ~, and mana of any type can be spent to
+  // cast it." (Ian Malcolm, Chaotician): every player's permission
+  // (`eachPlayer`), on their own turn, over the linked cards someone else
+  // owns (the filter read from the casting player's side).
+  if (
+    line ===
+    "During each player's turn, that player may cast a spell from among the cards they don't own exiled with ~, and mana of any type can be spent to cast it."
+  ) {
+    return {
+      affects: { scope: "self" },
+      mayPlay: { from: "exile", filter: { ownedBy: "opponent" }, linked: true, eachPlayer: true, yourTurnOnly: true, spendAs: "any-type" },
+      text,
+    };
+  }
   // "[During your turn, ]you may play cards exiled with ~[. If you cast a
   // spell this way, pay life equal to its mana value rather than pay its mana
   // cost.]" (Valgavoth, Terror Eater).

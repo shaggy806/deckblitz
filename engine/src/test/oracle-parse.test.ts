@@ -9405,6 +9405,23 @@ describe("exiled this way, then a pick or the rest moved on", () => {
     });
   });
 
+  it("reads Ian Malcolm, Chaotician's each-player permission over the linked cards they don't own", () => {
+    const ian = face(
+      "Ian Malcolm, Chaotician",
+      "Legendary Creature — Human Scientist",
+      "Whenever a player draws their second card each turn, that player exiles the top card of their library.\nDuring each player's turn, that player may cast a spell from among the cards they don't own exiled with Ian Malcolm, and mana of any type can be spent to cast it.",
+    );
+    expect(ian.complete).toBe(true);
+    expect(ian.static[0].mayPlay).toEqual({
+      from: "exile",
+      filter: { ownedBy: "opponent" },
+      linked: true,
+      eachPlayer: true,
+      yourTurnOnly: true,
+      spendAs: "any-type",
+    });
+  });
+
   it("reads Muse Vortex's instants and sorceries to the hand and the rest under", () => {
     const vortex = face(
       "Muse Vortex",
