@@ -1307,7 +1307,10 @@ export interface CardFilter {
    * `thisCombat` keeps only the entries of the combat phase under way (an
    * attack's or a block's, rule 506.1): "if that creature had to attack this
    * combat" (Firkraag, Cunning Instigator: `{ what: "had-to-attack",
-   * thisCombat: true }`).
+   * thisCombat: true }`), "target creature or planeswalker card in your
+   * graveyard **that wasn't put there this combat**" (Storrev, Devkarin Lich:
+   * a `not` of `{ what: "to-graveyard", thisCombat: true }` — a card put
+   * there in an earlier combat phase this turn, or outside combat, is in).
    */
   readonly journaled?: {
     readonly what: JournalWhat;

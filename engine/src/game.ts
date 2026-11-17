@@ -60133,6 +60133,11 @@ controlledBy,
   private recordJournal(event: GameEvent): void {
     const add = (entry: Omit<JournalEntry, "turn">): void => this.journal(entry);
     const stintOf = (id: ObjectId): number => this.state.objects[id]?.zoneChangeCount ?? 0;
+    // A card put into a graveyard during a combat phase (rule 506.1: its five
+    // steps) carries that phase, for "that wasn't put there this combat"
+    // (Storrev, Devkarin Lich — a `journaled` clause with `thisCombat`).
+    const duringCombat = (): { combat?: number } =>
+      PHASE_OF_STEP[this.state.turn.step] === "combat" ? { combat: this.state.turn.combatPhases ?? 1 } : {};
     switch (event.type) {
       case "blocker-declared": {
         const blocker = this.state.objects[event.blocker];
@@ -60182,7 +60187,9 @@ controlledBy,
           ...(object !== undefined && object.zone !== "battlefield" ? { arrived: object.zoneChangeCount ?? 0 } : {}),
         };
         add({ kind: "left", player: lki.controller, to: event.toZone, ...left });
-        if (event.toZone === "graveyard") add({ kind: "to-graveyard", player: lki.owner, from: "battlefield", ...left });
+        if (event.toZone === "graveyard") {
+          add({ kind: "to-graveyard", player: lki.owner, from: "battlefield", ...left, ...duringCombat() });
+        }
         return;
       }
       case "permanent-sacrificed": {
@@ -60273,6 +60280,7 @@ controlledBy,
             from,
             arrived: card.zoneChangeCount ?? 0,
             ...(how !== undefined ? { how } : {}),
+            ...duringCombat(),
           });
         }
         return;

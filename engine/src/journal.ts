@@ -201,7 +201,9 @@ export interface JournalEntry {
   readonly targetStint?: number;
   readonly targetWas?: LastKnownInfo;
   /** The combat phase it happened in (`TurnState.combatPhases`), for attacks,
-   * blocks and combat damage. */
+   * blocks and combat damage — and for a card put into a graveyard during a
+   * combat phase (`to-graveyard`, by any means: "wasn't put there this
+   * combat"). */
   readonly combat?: number;
   /** The kind of counter (`counters-put`). */
   readonly counter?: string;
