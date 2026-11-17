@@ -13223,4 +13223,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ life: 10 }, { life: 20 }, { life: 30 }],
     }),
   ),
+  // --- A search's finds split twice, one to an opponent (2026-11-17) ---------------
+  preset(
+    'Verdant Mastery: in a 4-player game, you choose which opponent gets a land',
+    board({
+      you: { bf: ['Forest*4'], hand: ['Verdant Mastery'], lib: ['Forest', 'Island', 'Swamp', 'Plains', 'Wastes'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  // --- Your graveyard chosen from by an opponent (2026-11-17) ----------------------
+  preset(
+    'Dawnbreak Reclaimer: Bob chooses the creature card of yours that may return',
+    board({
+      you: { bf: ['Dawnbreak Reclaimer'], gy: ['Grizzly Bears', 'Llanowar Elves'] },
+      opp: { gy: ['Hill Giant', 'Lightning Bolt'] },
+    }),
+  ),
 ]

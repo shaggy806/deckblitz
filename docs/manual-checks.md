@@ -8736,3 +8736,16 @@ Each board's die comes up 4.
 ### Reverse the Sands: in a 4-player game, one question a player from the totals left
 - **Do:** In this 4-player game, cast Reverse the Sands. Click "Alice gets 30 life (has 5)", then "Bob gets 5 life (has 10)", then "Carol gets 10 life (has 20)".
 - **Expect:** Each question offers only the totals not yet given: Bob's three, then Carol's two. Dave isn't asked. Afterwards you have 30, Bob 5, Carol 10 and Dave 20.
+
+## A search's finds split twice, one to an opponent (2026-11-17)
+
+### Verdant Mastery: in a 4-player game, you choose which opponent gets a land
+- **Do:** In this 4-player game, cast Verdant Mastery (only its {3}{G} cost is affordable). Pick all four basic lands, click "Choose Carol", pick Plains, then Island and Swamp.
+- **Expect:** Once the four are revealed, the banner "Verdant Mastery — choose one" offers "Choose Bob", "Choose Carol" and "Choose Dave". Then the popup "Choose one to put onto the battlefield tapped under Carol's control", then "Choose 2 to put onto the battlefield tapped — the other goes into your hand". Plains enters tapped under Carol's control, Island and Swamp tapped under yours, and Forest goes to your hand.
+- **Not a bug:** The History says "Alice chose mode(s) 2" for the opponent chosen.
+
+## Your graveyard chosen from by an opponent (2026-11-17)
+
+### Dawnbreak Reclaimer: Bob chooses the creature card of yours that may return
+- **Do:** Click "No attacks". In the popup pick Bob's Hill Giant and confirm; once Bob has chosen, click Yes.
+- **Expect:** The popup shows both graveyards, but only Hill Giant can be picked (not your creatures or Bob's Lightning Bolt). Bob chooses Grizzly Bears or Llanowar Elves, then you're asked "Return the chosen cards to the battlefield under their owners' control?". After Yes, Hill Giant is on Bob's side and the card Bob chose on yours.
