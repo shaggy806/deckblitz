@@ -2895,9 +2895,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * ones (swampwalk) as keywords, any other ("nonbasic landwalk") as its land.
    * The static's `affects` says who has them: `"self"`, or `"attached"` for
    * "equipped creature has …" (Eater of Virtue).
+   *
+   * `from: { graveyard }` is the cards matching it in every graveyard instead
+   * — "as long as a creature card with flying is in a graveyard, this creature
+   * has flying. The same is true for …" (Cairn Wanderer: `{ graveyard: { type:
+   * "creature" } }`; its ruling: all cards in all graveyards, each landwalk and
+   * protection ability among them).
    */
   readonly sharesKeywords?: {
-    readonly from: "exiled-with-source";
+    readonly from: "exiled-with-source" | { readonly graveyard: CardFilter };
     readonly filter?: CardFilter;
     readonly keywords: readonly Keyword[];
     readonly protection?: true;

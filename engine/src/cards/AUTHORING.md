@@ -6470,7 +6470,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   battlefield — for the legend rule and for every "legendary" filter
   (`supertypesOf`). A storm copy is a token once it resolves (rule 707.10f).
   `affects` is irrelevant.
-- `sharesKeywords: { from: "exiled-with-source", filter?, keywords, protection?, landwalk? }` — "This
+- `sharesKeywords: { from: "exiled-with-source" | { graveyard }, filter?, keywords, protection?, landwalk? }` — "This
   creature has flying as long as an exiled card used to craft it has flying. The same is true
   for first strike, …" (Wretched Bonemass; "a card exiled with it" is the same set): each of
   `keywords` some card exiled with the static's source has now, for as long as one does (rules
@@ -6478,6 +6478,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   have too (rule 702.11d-e), `protection: true` is "protection" in the list — every
   protection ability of theirs (rule 702.16a) — and `landwalk: true` is "landwalk": every
   landwalk of theirs, swampwalk or "nonbasic landwalk" (702.14a, Death-Mask Duplicant).
+  `from: { graveyard: { type: "creature" } }` reads every graveyard's matching cards instead:
+  "as long as a creature card with flying is in a graveyard, this creature has flying. The
+  same is true for …" (Cairn Wanderer).
   `affects` says who gets them: `"attached"` for Eater of Virtue's "equipped creature has
   flying" (its dies trigger exiles with `linked: true`).
 - `protection: { outsideCommanderIdentity? }` — Commander's Plate's "each color that's not in your commander's color identity", the static's controller's as it is now: nothing with no commander (rule 903.4f), every colour with a colourless one. Beside the rest of the shape:

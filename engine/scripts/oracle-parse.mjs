@@ -23035,11 +23035,15 @@ function parseStatic(line, text) {
   // Scavengers' "a card exiled with it"; "As long as a card exiled with ~ has
   // flying, ~ / equipped creature has flying" — Death-Mask Duplicant, Eater of
   // Virtue): `sharesKeywords` over the cards exiled with it, "protection"
-  // every protection ability of theirs, "landwalk" every landwalk.
+  // every protection ability of theirs, "landwalk" every landwalk. "As long
+  // as a creature card with flying is in a graveyard, ~ has flying" (Cairn
+  // Wanderer) reads every graveyard's creature cards instead.
   {
+    const fromGraveyard = /^As long as a creature card with flying is in a graveyard, (~) has flying\. The same is true for (.+)\.$/.exec(line);
     const w =
       /^(~) has flying as long as (?:an exiled card used to craft it|a card exiled with it) has flying\. The same is true for (.+)\.$/.exec(line) ??
-      /^As long as a card exiled with (?:~|it|this creature) has flying, (~|equipped creature) has flying\. The same is true for (.+)\.$/.exec(line);
+      /^As long as a card exiled with (?:~|it|this creature) has flying, (~|equipped creature) has flying\. The same is true for (.+)\.$/.exec(line) ??
+      fromGraveyard;
     const words = w === null ? [] : w[2].split(/, and |, | and /);
     const listed = words.filter((word) => word !== "protection" && word !== "landwalk").map((word) => word.replace(/ /g, "-"));
     const known = new Set(["first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance", "defender", "flash", "shroud", "fear"]);
@@ -23047,7 +23051,7 @@ function parseStatic(line, text) {
       return {
         affects: { scope: w[1] === "equipped creature" ? "attached" : "self" },
         sharesKeywords: {
-          from: "exiled-with-source",
+          from: fromGraveyard !== null ? { graveyard: { type: "creature" } } : "exiled-with-source",
           keywords: ["flying", ...listed],
           ...(words.includes("protection") ? { protection: true } : {}),
           ...(words.includes("landwalk") ? { landwalk: true } : {}),

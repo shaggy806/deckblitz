@@ -19791,6 +19791,24 @@ describe("keywords of the exiled cards used to craft it", () => {
     });
     expect((face.static[0].sharesKeywords as { keywords: string[] }).keywords).toHaveLength(12);
   });
+
+  it("reads Cairn Wanderer's, from the creature cards in every graveyard", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Shapeshifter",
+      oracle_text:
+        "As long as a creature card with flying is in a graveyard, this creature has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.",
+    } as never) as unknown as { static: Record<string, unknown>[] };
+    expect(face.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      sharesKeywords: {
+        from: { graveyard: { type: "creature" } },
+        keywords: ["flying", "fear", "first-strike", "double-strike", "deathtouch", "haste", "lifelink", "reach", "trample", "shroud", "vigilance"],
+        protection: true,
+        landwalk: true,
+      },
+    });
+  });
 });
 
 describe("a land played or a spell cast from anywhere other than the hand", () => {
