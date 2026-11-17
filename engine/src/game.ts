@@ -44794,8 +44794,20 @@ controlledBy,
         }
       },
       manifestTop: (player, kind, library) => this.manifestTop(player, kind, library ?? player),
-      cloakExiledPile: (libraryTop, tapped) =>
-        this.cloakExiledPile(controller, targets.flatMap((t) => (t === undefined || t === null ? [] : [t])), libraryTop, tapped),
+      cloakExiledPile: (libraryTop, tapped, also) =>
+        this.cloakExiledPile(
+          controller,
+          [
+            ...targets.flatMap((t) => (t === undefined || t === null ? [] : [t])),
+            // "Exile it and …" (Jeskai Infiltrator): only while it's still the
+            // permanent the ability refers to (its ruling).
+            ...(also?.source === true && sourceStillOn() ? [{ kind: "object" as const, object: source }] : []),
+          ],
+          libraryTop,
+          tapped,
+          also?.manifest === true ? "manifest" : "cloak",
+          also?.graveyard,
+        ),
       turnFaceUp: (target) => {
         if (target.kind === "object") this.turnFaceUpByEffect(target.object);
       },
@@ -57568,12 +57580,30 @@ controlledBy,
    * pile (rule 406.3, one event), the pile shuffled, and each of its cards
    * cloaked in that random order. A token ceases to exist in exile (rule
    * 111.8); a merged or melded permanent is every card it became (730.3c).
+   * `kind: "manifest"` manifests them instead (rule 701.40a); `graveyard`
+   * adds each card in that player's graveyard matching its filter, leaving
+   * the graveyard together (Ghastly Conscription), manifested under
+   * `controller` whoever owns it (701.40a, 110.2a).
    */
-  private cloakExiledPile(controller: PlayerId, targets: readonly TargetRef[], libraryTop: number, tapped: boolean): void {
+  private cloakExiledPile(
+    controller: PlayerId,
+    targets: readonly TargetRef[],
+    libraryTop: number,
+    tapped: boolean,
+    kind: "manifest" | "cloak" = "cloak",
+    graveyard?: { readonly player: PlayerId; readonly filter: CardFilter },
+  ): void {
     if (this.state.players[controller]?.hasLost !== false) return;
     const since = this.state.eventSeq;
     const pile: ObjectId[] = [];
     const objects = targets.flatMap((t) => (t.kind === "object" ? [t.object] : []));
+    // Read before anything moves: `moveObject` edits the graveyard as it goes.
+    const fromGraveyard =
+      graveyard === undefined
+        ? []
+        : (this.state.zones.perPlayer[graveyard.player]?.graveyard ?? []).filter((id) =>
+            matchesFilter(this.state, this.registry, id, graveyard.filter, { you: controller }),
+          );
     this.withLeaveBatch(() => {
       this.snapshotLeaving(objects);
       for (const named of objects) {
@@ -57593,11 +57623,19 @@ controlledBy,
         this.moveObject(id, "exile");
         if (this.state.objects[id]?.zone === "exile") pile.push(id);
       }
+      if (fromGraveyard.length > 0) {
+        this.withGraveyardLeaveBatch(() => {
+          for (const id of fromGraveyard) {
+            this.moveObject(id, "exile");
+            if (this.state.objects[id]?.zone === "exile") pile.push(id);
+          }
+        });
+      }
     });
     this.turnExiledFaceDown(pile, [], since);
     const shuffled = shuffle(pile, this.rng);
     this.state.rngState = this.rng.seed;
-    for (const id of shuffled) this.putFaceDownAs(controller, id, "cloak", { tapped });
+    for (const id of shuffled) this.putFaceDownAs(controller, id, kind, { tapped });
   }
 
   /**

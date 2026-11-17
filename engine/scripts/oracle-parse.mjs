@@ -16122,6 +16122,33 @@ function pilesAt(sentences, i, ctx) {
     ctx.target({ kind: "permanent", filter: { type: "creature", token: false, ownedBy: "you" } });
     return { effect: { kind: "cloak-exiled-pile", libraryTop: top, enterTapped: true }, used: 2 };
   }
+  // "Exile all creature cards from target player's graveyard in a face-down
+  // pile, shuffle that pile, then manifest those cards." (Ghastly
+  // Conscription): the graveyard's matching cards are the pile.
+  const graveyardPile =
+    /^exile all (.+?) cards from target player's graveyard in a face-down pile, shuffle that pile, then (manifest|cloak) those cards\.$/i.exec(
+      s(0),
+    );
+  if (graveyardPile !== null) {
+    const filter = parseTypePhrase(graveyardPile[1], { cards: true });
+    if (filter === null) return null;
+    const of = ctx.target("player");
+    const manifest = graveyardPile[2].toLowerCase() === "manifest" ? { manifest: true } : {};
+    return { effect: { kind: "cloak-exiled-pile", ...manifest, graveyard: { of, filter } }, used: 1 };
+  }
+  // "Exile it and the top card of your library in a face-down pile, shuffle
+  // that pile, then manifest those cards." (Jeskai Infiltrator's trigger,
+  // "it" being itself): the source joins the pile.
+  const sourcePile = new RegExp(
+    `^exile (?:it|~) and the top (?:card|${N} cards) of your library in a face-down pile, shuffle that pile, then (manifest|cloak) those cards\\.$`,
+    "i",
+  ).exec(s(0));
+  if (sourcePile !== null && (ctx.it === undefined || ctx.it === "source")) {
+    const top = sourcePile[1] === undefined ? 1 : numberOf(sourcePile[1]);
+    if (typeof top !== "number") return null;
+    const manifest = sourcePile[2].toLowerCase() === "manifest" ? { manifest: true } : {};
+    return { effect: { kind: "cloak-exiled-pile", ...manifest, source: true, libraryTop: top }, used: 1 };
+  }
   // "Reveal the top N …. An opponent separates those cards into two piles.
   // Put one pile into your hand and the other into your graveyard."
   let m = new RegExp(`^reveal the top ${N} cards of your library\\.$`, "i").exec(s(0));

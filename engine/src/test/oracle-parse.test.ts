@@ -21163,6 +21163,33 @@ describe("a cast trigger's count as counters to enter with", () => {
     });
   });
 
+  it("a graveyard's creature cards, and the source with the top card, manifested from a pile (Ghastly Conscription, Jeskai Infiltrator)", () => {
+    const ghastly = parseFace(
+      {
+        name: "Ghastly Conscription",
+        type_line: "Sorcery",
+        mana_cost: "{5}{B}{B}",
+        oracle_text:
+          "Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(ghastly.complete).toBe(true);
+    expect(ghastly.targets).toEqual(["player"]);
+    expect(ghastly.effect).toEqual({ kind: "cloak-exiled-pile", manifest: true, graveyard: { of: 0, filter: { type: "creature" } } });
+    const jeskai = parseFace(
+      {
+        name: "Jeskai Infiltrator",
+        type_line: "Creature — Human Monk",
+        mana_cost: "{2}{U}",
+        oracle_text:
+          "When Jeskai Infiltrator deals combat damage to a player, exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(jeskai.triggered[0].effect).toEqual({ kind: "cloak-exiled-pile", manifest: true, source: true, libraryTop: 1 });
+  });
+
   it("X stays unread in a trigger that isn't the spell's cast (an enters trigger)", () => {
     const face = parseFace(
       { name: "Test Beast", type_line: "Creature — Beast", mana_cost: "{X}{B}", oracle_text: "When this creature enters, each player sacrifices X creatures." },

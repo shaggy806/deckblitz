@@ -9031,6 +9031,20 @@ export type EffectSpec =
       readonly kind: "cloak-exiled-pile";
       readonly libraryTop?: EffectAmount;
       readonly enterTapped?: true;
+      /** "…then **manifest** those cards" (rule 701.40a): each is manifested
+       * — a plain face-down 2/2 — rather than cloaked (Jeskai Infiltrator,
+       * Ghastly Conscription). */
+      readonly manifest?: true;
+      /** "Exile **it** and the top card of your library …" (Jeskai
+       * Infiltrator): this source joins the pile, if it's still the permanent
+       * the ability refers to as this resolves — else the rest go alone (its
+       * ruling). */
+      readonly source?: true;
+      /** "Exile all creature cards from target player's graveyard in a
+       * face-down pile" (Ghastly Conscription): every card in that player's
+       * graveyard matching `filter` joins the pile, leaving the graveyard
+       * together. `of` is the target slot holding the player. */
+      readonly graveyard?: { readonly of: number; readonly filter: CardFilter };
     }
   | {
       /**
@@ -14307,9 +14321,18 @@ export interface EffectApi {
    * it comes from (its `from`). */
   manifestTop(player: PlayerId, kind: "manifest" | "cloak", library?: PlayerId): void;
   /** See the `"cloak-exiled-pile"` {@link EffectSpec}: this resolution's
-   * target permanents and the top `libraryTop` cards of the effect's
-   * controller's library. */
-  cloakExiledPile(libraryTop: number, tapped: boolean): void;
+   * target permanents, the top `libraryTop` cards of the effect's
+   * controller's library, and what `also` adds — the source, a player's
+   * graveyard cards — cloaked, or manifested (`also.manifest`). */
+  cloakExiledPile(
+    libraryTop: number,
+    tapped: boolean,
+    also?: {
+      readonly manifest?: boolean;
+      readonly source?: boolean;
+      readonly graveyard?: { readonly player: PlayerId; readonly filter: CardFilter };
+    },
+  ): void;
   /** Turn the permanent `target` face down — see the `"turn-face-down"`
    * {@link EffectSpec}. */
   turnFaceDown(target: TargetRef, as?: FaceDownAs, textChanges?: readonly TextChange[]): void;
@@ -20040,12 +20063,23 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       return;
     }
-    case "cloak-exiled-pile":
+    case "cloak-exiled-pile": {
+      // "Target player's graveyard": nothing from it once that slot is
+      // illegal (rule 608.2b).
+      const graveyardOf = spec.graveyard === undefined ? undefined : ctx.targets[spec.graveyard.of];
       ctx.cloakExiledPile(
         spec.libraryTop === undefined ? 0 : Math.floor(amountValue(spec.libraryTop, ctx)),
         spec.enterTapped === true,
+        {
+          ...(spec.manifest === true ? { manifest: true } : {}),
+          ...(spec.source === true ? { source: true } : {}),
+          ...(spec.graveyard !== undefined && graveyardOf?.kind === "player"
+            ? { graveyard: { player: graveyardOf.player, filter: spec.graveyard.filter } }
+            : {}),
+        },
       );
       return;
+    }
     case "turn-face-down": {
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.turnFaceDown(target, spec.as, spec.faceDownTextChanges);

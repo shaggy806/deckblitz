@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A face-down pile from a graveyard, or with its source, manifested — built 2026-11-17
+
+The keys `effect:manifest-from-exile` and `effect:manifest-exiled-pile`, one general change to
+`cloak-exiled-pile` (`Game.cloakExiledPile`): `manifest` (rule 701.40a, in place of cloak), `graveyard: { of,
+filter }` (each matching card in the slot's player's graveyard joins the pile, one graveyard leave) and `source`
+(the source joins, only while it's still the permanent the ability refers to). Ghastly Conscription (rank
+11682; an opponent's creature cards manifested under the caster) and Jeskai Infiltrator (19284; gone before its
+trigger resolves, only the library card — its ruling). The scaffolder reads both lines.
+`test/manifest-exiled-pile.test.ts`.
+
 ### A card name noted on a permanent, and a copy made of it — built 2026-11-17
 
 The key `effect:noted-card-name-copy` (rule 707.14): `put-onto-battlefield`'s `noteName` keeps the card's name
