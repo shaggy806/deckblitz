@@ -15,6 +15,7 @@ import { publicNameAt } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
 import { flyIntoHand, flyOutOfHand, liftFromHand, placeLiftedSpotlight } from './handMotion.ts'
 import { closeStackGap } from './stackDepth.ts'
+import { revealGrid } from './revealLayout.ts'
 import { diceStrikeMs, throwDice } from './diceRoll.ts'
 import { defToVisible } from './defToVisible.ts'
 import { loadCard, peekCard } from '../cards/cardData.ts'
@@ -39,7 +40,7 @@ import {
   MOVE_STEP_MS,
   PHASE_STEP_MS,
   CARD_HOLD_MS,
-  REVEAL_STEP_MS,
+  revealHoldMs,
   DICE_STEP_MS,
   MULLIGAN_RETURN_MS,
   SHUFFLE_STEP_MS,
@@ -120,6 +121,65 @@ interface Reveal {
   readonly key: string
   readonly caption: string
   readonly cards: readonly VisibleObject[]
+  /** How long it's held up, before `animScale`: longer the more cards
+   * there are to read (`revealHoldMs`). */
+  readonly ms: number
+}
+
+/**
+ * The reveals showing, one under another near the top of the screen, sized
+ * so every card of every one is on it (`revealLayout.ts`): the grid is
+ * measured against the layer here and handed to App.css as `--reveal-cols`
+ * and `--reveal-fit` on the tray, before paint and again when the window is
+ * resized. Several can be up at once (a reveal isn't paced, so the game goes
+ * on under it), and they share the room: each used to be drawn at the same
+ * spot, one over the other.
+ */
+function RevealTray({ reveals }: { readonly reveals: readonly Reveal[] }) {
+  const trayRef = useRef<HTMLDivElement>(null)
+  const counts = reveals.map((r) => r.cards.length).join(',')
+  useLayoutEffect(() => {
+    const tray = trayRef.current
+    const layer = tray?.parentElement
+    if (!tray || !layer) return
+    const fit = () => {
+      const probe = tray.querySelector<HTMLElement>('.reveal-probe')
+      const group = tray.querySelector<HTMLElement>('.reveal-show')
+      const caption = tray.querySelector<HTMLElement>('.reveal-caption')
+      const cards = tray.querySelector<HTMLElement>('.reveal-cards')
+      if (!probe || !group || !caption || !cards) return
+      const px = (value: string) => Number.parseFloat(value) || 0
+      const grid = revealGrid(counts.split(',').map(Number), {
+        width: layer.clientWidth * 0.96,
+        // Down to a little above the bottom edge, from where the tray starts.
+        height: layer.clientHeight * 0.96 - tray.offsetTop,
+        full: probe.getBoundingClientRect().width,
+        gap: px(getComputedStyle(cards).columnGap),
+        caption: caption.offsetHeight + px(getComputedStyle(group).rowGap),
+        between: px(getComputedStyle(tray).rowGap),
+      })
+      tray.style.setProperty('--reveal-cols', String(grid.cols))
+      tray.style.setProperty('--reveal-fit', `${Math.floor(grid.cardW)}px`)
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [counts])
+  return (
+    <div className="reveal-tray" ref={trayRef}>
+      <div className="reveal-probe" aria-hidden="true" />
+      {reveals.map((r) => (
+        <div key={r.key} className="reveal-show" style={{ '--reveal-ms': `${r.ms}ms` } as CSSProperties}>
+          <div className="reveal-caption">{r.caption}</div>
+          <div className="reveal-cards">
+            {r.cards.map((obj) => (
+              <CardTile key={obj.id} obj={obj} layout="art-first" />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
 }
 
 interface PlayedCard {
@@ -2861,13 +2921,14 @@ export function AnimationLayer({
         if (cards.length === 0) return
         const key = `reveal-${ev.seq}`
         const who = playerLabel(ev.player, seatsRef.current)
+        const ms = revealHoldMs(cards.length)
         setReveals((cur) => [
           ...cur,
-          { key, caption: `${who} reveals from their ${ev.from}`, cards },
+          { key, caption: `${who} reveals from their ${ev.from}`, cards, ms },
         ])
         window.setTimeout(() => {
           setReveals((cur) => cur.filter((r) => r.key !== key))
-        }, scaled(REVEAL_STEP_MS))
+        }, scaled(ms))
       } else if (ev.type === 'card-drawn') {
         const flight = drawFlight(ev.player)
         if (!flight) return
@@ -3133,16 +3194,7 @@ export function AnimationLayer({
               <CardTile obj={c.obj} layout="art-first" />
             </div>
           ))}
-          {reveals.map((r) => (
-            <div key={r.key} className="reveal-show">
-              <div className="reveal-caption">{r.caption}</div>
-              <div className="reveal-cards">
-                {r.cards.map((obj) => (
-                  <CardTile key={obj.id} obj={obj} layout="art-first" />
-                ))}
-              </div>
-            </div>
-          ))}
+          {reveals.length > 0 ? <RevealTray reveals={reveals} /> : null}
           {activeBanner ? (
             <div
               key={activeBanner.key}

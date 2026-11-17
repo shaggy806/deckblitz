@@ -260,6 +260,17 @@ export const CROWN_STEP_MS = 640
  * banner because there's a card face to actually take in, and unpaced — the
  * information is already in the History log, so nobody has to catch it. */
 export const REVEAL_STEP_MS = 2600
+/** What each card past the first adds to a reveal's hold, and where it stops
+ * growing. Ten cards had the one card's 2.6 s between them (the user,
+ * 2026-11-17: an opponent's large reveal "happens too quickly"); a reveal is
+ * unpaced, so a longer one holds nothing up. */
+export const REVEAL_EXTRA_CARD_MS = 500
+export const REVEAL_MAX_MS = 10_000
+/** A reveal of `cards` cards is held up this long (before `animScale`):
+ * 2.6 s for one, 7.1 s for ten, 10 s from sixteen up. */
+export function revealHoldMs(cards: number): number {
+  return Math.min(REVEAL_MAX_MS, REVEAL_STEP_MS + Math.max(0, cards - 1) * REVEAL_EXTRA_CARD_MS)
+}
 /** A die roll thrown onto the table (`ui/diceRoll.ts`): the dice tumble in
  * and bounce for the first 60%, then rest showing what was rolled, long
  * enough to read, before the roll's effects play. Paced: the game waits. */
@@ -780,7 +791,7 @@ function slotFor(ev: GameEvent, phase: { current: Phase }, reduced: boolean, hit
     return reduced ? { event: ev, kind: 'sound', duration: 0 } : { event: ev, kind: 'shuffle', duration: SHUFFLE_STEP_MS }
   }
   if (ev.type === 'cards-revealed') {
-    return { event: ev, kind: 'reveal', duration: REVEAL_STEP_MS }
+    return { event: ev, kind: 'reveal', duration: revealHoldMs(ev.objects.length) }
   }
   if (ev.type === 'turn-began') {
     phase.current = 'beginning'

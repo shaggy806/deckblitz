@@ -4590,15 +4590,47 @@
    Rendered after the play/draw overlays so that on the rare frame where a
    reveal and a cast animation are both up, the reveal — the one carrying
    information somebody else needs — is the one on top.
-   2.6s matches animationSchedule.ts's REVEAL_STEP_MS. */
-.reveal-show {
+   How long one is up is `--reveal-ms` (animationSchedule.ts's `revealHoldMs`:
+   longer the more cards it shows), with a fade in and out of fixed lengths
+   at its ends rather than tenths of the whole: ten cards' hold would
+   otherwise spend two seconds fading.
+   Every reveal showing is in one tray, one under another, and the tray's
+   cards are sized and wrapped so all of them are on screen (`--reveal-cols`
+   and `--reveal-fit`, measured by AnimationLayer's `RevealTray`): ten cards
+   in the one unwrapped row there was ran off both edges of a 1920px screen. */
+.reveal-tray {
   position: absolute;
   top: clamp(56px, 11vh, 120px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: clamp(6px, 1.2vh, 14px);
+  /* A revealed card when nothing makes it smaller: bigger than a board card
+     so it can actually be read across the table, but smaller than the play
+     animation's — this is information, not a beat. Capped against viewport
+     height for the usual reason (a card box is 1.4x its width and the two
+     axes scale independently). */
+  --reveal-full: min(calc(var(--card-w-max) * 1.4), 26vh);
+  --reveal-w: var(--reveal-fit, var(--reveal-full));
+  --reveal-gap: 8px;
+}
+/* What RevealTray measures `--reveal-full` by: a custom property's own
+   computed value is its text, not a length. */
+.reveal-probe {
+  position: absolute;
+  visibility: hidden;
+  width: var(--reveal-full);
+  height: 0;
+}
+.reveal-show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 6px;
-  animation: reveal-show calc(2600ms * var(--anim-scale, 1)) ease-out forwards;
+  animation:
+    reveal-in calc(260ms * var(--anim-scale, 1)) ease-out both,
+    reveal-out calc(520ms * var(--anim-scale, 1)) ease-in
+      calc((var(--reveal-ms, 2600ms) - 520ms) * var(--anim-scale, 1)) forwards;
 }
 .reveal-caption {
   font-size: var(--text-md);
@@ -4609,14 +4641,15 @@
 }
 .reveal-cards {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--reveal-gap);
+  /* `--reveal-cols` cards to a row, a short last row centred under the
+     rest. The 1px is slack for the widths' rounding. */
+  max-width: calc(var(--reveal-cols, 99) * (var(--reveal-w) + var(--reveal-gap)) - var(--reveal-gap) + 1px);
 }
 .reveal-cards .card-tile {
-  /* Bigger than a board card so it can actually be read across the table,
-     but smaller than the play animation's — this is information, not a beat.
-     Capped against viewport height for the usual reason (a card box is 1.4x
-     its width and the two axes scale independently). */
-  --card-w: min(calc(var(--card-w-max) * 1.4), 26vh);
+  --card-w: var(--reveal-w);
   --ct-scale: calc(var(--card-w) / var(--card-w-max) * var(--ui));
   width: var(--card-w);
   border-color: color-mix(in srgb, var(--gold) 80%, transparent);
@@ -4629,30 +4662,36 @@
 .reveal-cards .card-tile:disabled {
   opacity: 1;
 }
-@keyframes reveal-show {
-  0% {
+@keyframes reveal-in {
+  from {
     opacity: 0;
     transform: translateY(-14px) scale(0.92);
   }
-  10%,
-  80% {
+  to {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-  100% {
+}
+@keyframes reveal-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
     opacity: 0;
     transform: translateY(-8px) scale(0.97);
   }
 }
+/* There at once, and only fading as it goes. */
 :root[data-reduce-motion] .reveal-show {
-  animation: reveal-fade calc(2600ms * var(--anim-scale, 1)) linear forwards;
+  animation: reveal-fade calc(520ms * var(--anim-scale, 1)) linear
+    calc((var(--reveal-ms, 2600ms) - 520ms) * var(--anim-scale, 1)) forwards;
 }
 @keyframes reveal-fade {
-  0%,
-  80% {
+  from {
     opacity: 1;
   }
-  100% {
+  to {
     opacity: 0;
   }
 }

@@ -48,6 +48,31 @@ const EXILE_BOARD = {
   },
 };
 
+/** RVEAL's and RVEA4's `setup`: `player`'s library stacked so that, after
+ * the card they draw for the turn, nine noncreature cards sit over a
+ * creature — a "reveal until you reveal a creature card" shows ten. The
+ * `watcher`'s opening hand goes back to their library, so passing the turn
+ * to `player` never stops at a discard to hand size (at four players the
+ * first player draws). */
+const revealTen = (player, watcher) => (game) => {
+  handOfSpellsOnly(watcher)(game);
+  // Each goes on top, so the last spawned is the top card.
+  const fromTheTop = [
+    "Island", // the turn's draw
+    "Sol Ring",
+    "Counterspell",
+    "Cultivate",
+    "Swords to Plowshares",
+    "Rhystic Study",
+    "Lightning Bolt",
+    "Command Tower",
+    "Arcane Signet",
+    "Doom Blade",
+    "Colossal Dreadmaw",
+  ];
+  for (const name of [...fromTheTop].reverse()) game.debugSpawn(name, player, "library");
+};
+
 /** A `setup` that puts `player`'s opening hand of basics back into their
  * library, leaving only the scenario's cards in hand: few enough to pass the
  * turn without discarding to hand size first. */
@@ -1159,6 +1184,29 @@ export default {
     battlefield: { alice: ["Forest", "Forest", "Island"] },
     setup: landsOnlyForest,
     bots: { bob: {}, carol: {}, dave: {} },
+  },
+
+  RVEAL: {
+    about:
+      "2p. An opponent reveals ten cards at once: bob casts Mass Polymorph on his turn (pass " +
+      "yours) with one Grizzly Bears out, and his library is stacked nine noncreature cards " +
+      "deep over a Colossal Dreadmaw, so he reveals all ten. The user's report (2026-11-17): a " +
+      "large reveal by an opponent goes by too quickly to read.",
+    players: ["alice", "bob"],
+    lands: { alice: 3, bob: 1 },
+    battlefield: { bob: ["Grizzly Bears", ...Array(6).fill("Island")] },
+    hand: { bob: ["Mass Polymorph"] },
+    setup: revealTen("bob", "alice"),
+    bots: { bob: { casts: [{ name: "Mass Polymorph" }] } },
+  },
+  RVEA4: {
+    about: "4p. RVEAL in the quadrant layout: bob reveals ten cards on his turn (pass yours).",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 3, bob: 1, carol: 3, dave: 3 },
+    battlefield: { bob: ["Grizzly Bears", ...Array(6).fill("Island")] },
+    hand: { bob: ["Mass Polymorph"] },
+    setup: revealTen("bob", "alice"),
+    bots: { bob: { casts: [{ name: "Mass Polymorph" }] }, carol: {}, dave: {} },
   },
 
 };
