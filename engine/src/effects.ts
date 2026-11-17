@@ -5688,6 +5688,19 @@ export type EffectSpec =
        */
       readonly others?: true;
       /**
+       * "If it has the same name as one of the cards exiled with this
+       * artifact, you may copy **the other**" (Spellweaver Helix, with
+       * `sameNameWith: "trigger-object"`): one of `from`'s cards matching
+       * this filter — the one the ability is about — is left out, and the
+       * rest are the other. Read from the effect's controller's side, bound
+       * as it applies (rule 201.2a for a name). Two that match share what
+       * the filter reads, so either is the one, and a single copy is made
+       * of the other (Helix's ruling: two imprinted cards of the same name
+       * make one copy, not two). With none matching there is no other, and
+       * nothing is offered.
+       */
+      readonly exceptOneMatching?: CardFilter;
+      /**
        * With `repeat`: "you may cast any number of spells **with total mana
        * value 10 or less** from among them" (Primeval Spawn): a running total
        * — only a spell whose mana value (at X = 0, rule 107.3b, as the spell
@@ -16901,6 +16914,13 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
     if (spec.others === true) {
       const justExiled = new Set(ctx.cardsExiledThisWay());
       cards = cards.filter((id) => !justExiled.has(id));
+    }
+    // "Copy **the other**": the one card the ability is about is passed
+    // over, and with no such card there's no other.
+    if (spec.exceptOneMatching !== undefined) {
+      const filter = spec.exceptOneMatching;
+      const one = cards.findIndex((id) => ctx.cardMatches(id, filter));
+      cards = one < 0 ? [] : cards.filter((_, index) => index !== one);
     }
     if (spec.copies !== undefined) {
       cards = ctx.copyCards(cards, Math.max(0, Math.floor(amountValue(spec.copies, ctx))), spec.copiesIn);

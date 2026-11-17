@@ -2817,7 +2817,8 @@
   "effect:remove-counters-from-among",
   "effect:discard-unless-sacrifice-per-card",
   "effect:attach-to-chosen-creature",
-  "effect:count-target-players-not-done-this-way"
+  "effect:count-target-players-not-done-this-way",
+  "keyword:imprint-two-cast-copy-other"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
