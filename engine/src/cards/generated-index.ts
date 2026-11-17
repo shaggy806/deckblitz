@@ -882,6 +882,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Bone Offering": "https://cards.scryfall.io/art_crop/back/3/7/37bd2e21-b292-4c86-bd01-010d4a1af7b2.jpg",
   "Boulder Rush": "https://cards.scryfall.io/art_crop/back/a/3/a3d13d84-01e4-4429-93db-e5afff811527.jpg",
   "Boulderloft Pathway": "https://cards.scryfall.io/art_crop/back/0/5/0511e232-2a72-40f5-a400-4f7ebc442d17.jpg",
+  "Braided Quipu": "https://cards.scryfall.io/art_crop/back/6/8/68a6ede0-6d57-4e29-9e3b-3569ab7f0bcd.jpg",
   "Braingeyser": "23b33d16-dbaa-4742-9317-eac745f772ac",
   "Brainstorm": "ec7d6864-7b6b-4f74-8474-9b9ec96b1d33",
   "Branch of Boseiju": "https://cards.scryfall.io/art_crop/back/1/1/1144014b-f13b-4397-97ed-a8de46371a2c.jpg",

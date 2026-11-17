@@ -155,6 +155,7 @@ import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolCommuneWithNature from "../pool/commune-with-nature.js";
 import _poolComplaintsClerk from "../pool/complaints-clerk.js";
+import _poolConcertedEffort from "../pool/concerted-effort.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
 import _poolConstructACosmicCube from "../pool/construct-a-cosmic-cube.js";
@@ -1222,6 +1223,7 @@ const shard: CardShard = {
     _poolCombatCourier,
     _poolCommuneWithNature,
     _poolComplaintsClerk,
+    _poolConcertedEffort,
     _poolConclaveEvangelist,
     _poolConsign,
     _poolConstructACosmicCube,

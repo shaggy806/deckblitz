@@ -3322,6 +3322,8 @@ import _poolBradBoimlerEagerEnsign from "./pool/brad-boimler-eager-ensign.js";
 import _poolBragoKingEternal from "./pool/brago-king-eternal.js";
 import _poolBragosRepresentative from "./pool/bragos-representative.js";
 import _poolBraidOfFire from "./pool/braid-of-fire.js";
+import _poolBraidedNet from "./pool/braided-net.js";
+import _poolBraidedQuipu from "./pool/braided-quipu.js";
 import _poolBraidsArisenNightmare from "./pool/braids-arisen-nightmare.js";
 import _poolBraidsCabalMinion from "./pool/braids-cabal-minion.js";
 import _poolBraidsConjurerAdept from "./pool/braids-conjurer-adept.js";
@@ -5202,6 +5204,7 @@ import _poolConcentrate from "./pool/concentrate.js";
 import _poolConcentratedFire from "./pool/concentrated-fire.js";
 import _poolConcertedCare from "./pool/concerted-care.js";
 import _poolConcertedDefense from "./pool/concerted-defense.js";
+import _poolConcertedEffort from "./pool/concerted-effort.js";
 import _poolConcessionStand from "./pool/concession-stand.js";
 import _poolConchHorn from "./pool/conch-horn.js";
 import _poolConciliatorsDuelist from "./pool/conciliators-duelist.js";
@@ -5960,6 +5963,7 @@ import _poolCurseOfTheBloodyTome from "./pool/curse-of-the-bloody-tome.js";
 import _poolCurseOfTheCabal from "./pool/curse-of-the-cabal.js";
 import _poolCurseOfTheForsaken from "./pool/curse-of-the-forsaken.js";
 import _poolCurseOfTheNightlyHunt from "./pool/curse-of-the-nightly-hunt.js";
+import _poolCurseOfThePiercedHeart from "./pool/curse-of-the-pierced-heart.js";
 import _poolCurseOfTheRestlessDead from "./pool/curse-of-the-restless-dead.js";
 import _poolCurseOfTheSwine from "./pool/curse-of-the-swine.js";
 import _poolCurseOfTheWerefox from "./pool/curse-of-the-werefox.js";
@@ -28072,6 +28076,7 @@ import _poolTerror from "./pool/terror.js";
 import _poolTerrusWurm from "./pool/terrus-wurm.js";
 import _poolTersaLightshatter from "./pool/tersa-lightshatter.js";
 import _poolTervigon from "./pool/tervigon.js";
+import _poolTesakJudithsHellhound from "./pool/tesak-judiths-hellhound.js";
 import _poolTesharAncestorsApostle from "./pool/teshar-ancestors-apostle.js";
 import _poolTestOfConviction from "./pool/test-of-conviction.js";
 import _poolTestOfCourage from "./pool/test-of-courage.js";
@@ -36728,6 +36733,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBragoKingEternal,
   _poolBragosRepresentative,
   _poolBraidOfFire,
+  _poolBraidedNet,
+  _poolBraidedQuipu,
   _poolBraidsArisenNightmare,
   _poolBraidsCabalMinion,
   _poolBraidsConjurerAdept,
@@ -38608,6 +38615,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolConcentratedFire,
   _poolConcertedCare,
   _poolConcertedDefense,
+  _poolConcertedEffort,
   _poolConcessionStand,
   _poolConchHorn,
   _poolConciliatorsDuelist,
@@ -39366,6 +39374,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfTheCabal,
   _poolCurseOfTheForsaken,
   _poolCurseOfTheNightlyHunt,
+  _poolCurseOfThePiercedHeart,
   _poolCurseOfTheRestlessDead,
   _poolCurseOfTheSwine,
   _poolCurseOfTheWerefox,
@@ -61478,6 +61487,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTerrusWurm,
   _poolTersaLightshatter,
   _poolTervigon,
+  _poolTesakJudithsHellhound,
   _poolTesharAncestorsApostle,
   _poolTestOfConviction,
   _poolTestOfCourage,
@@ -70147,6 +70157,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brago-king-eternal": _poolBragoKingEternal,
   "pool/bragos-representative": _poolBragosRepresentative,
   "pool/braid-of-fire": _poolBraidOfFire,
+  "pool/braided-net": _poolBraidedNet,
+  "pool/braided-quipu": _poolBraidedQuipu,
   "pool/braids-arisen-nightmare": _poolBraidsArisenNightmare,
   "pool/braids-cabal-minion": _poolBraidsCabalMinion,
   "pool/braids-conjurer-adept": _poolBraidsConjurerAdept,
@@ -72027,6 +72039,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/concentrated-fire": _poolConcentratedFire,
   "pool/concerted-care": _poolConcertedCare,
   "pool/concerted-defense": _poolConcertedDefense,
+  "pool/concerted-effort": _poolConcertedEffort,
   "pool/concession-stand": _poolConcessionStand,
   "pool/conch-horn": _poolConchHorn,
   "pool/conciliators-duelist": _poolConciliatorsDuelist,
@@ -72785,6 +72798,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-the-cabal": _poolCurseOfTheCabal,
   "pool/curse-of-the-forsaken": _poolCurseOfTheForsaken,
   "pool/curse-of-the-nightly-hunt": _poolCurseOfTheNightlyHunt,
+  "pool/curse-of-the-pierced-heart": _poolCurseOfThePiercedHeart,
   "pool/curse-of-the-restless-dead": _poolCurseOfTheRestlessDead,
   "pool/curse-of-the-swine": _poolCurseOfTheSwine,
   "pool/curse-of-the-werefox": _poolCurseOfTheWerefox,
@@ -94897,6 +94911,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/terrus-wurm": _poolTerrusWurm,
   "pool/tersa-lightshatter": _poolTersaLightshatter,
   "pool/tervigon": _poolTervigon,
+  "pool/tesak-judiths-hellhound": _poolTesakJudithsHellhound,
   "pool/teshar-ancestors-apostle": _poolTesharAncestorsApostle,
   "pool/test-of-conviction": _poolTestOfConviction,
   "pool/test-of-courage": _poolTestOfCourage,

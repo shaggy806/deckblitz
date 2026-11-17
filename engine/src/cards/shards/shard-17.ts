@@ -183,6 +183,7 @@ import _poolCrushTheWeak from "../pool/crush-the-weak.js";
 import _poolCryptolithFragment from "../pool/cryptolith-fragment.js";
 import _poolCrystalGolem from "../pool/crystal-golem.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
+import _poolCurseOfThePiercedHeart from "../pool/curse-of-the-pierced-heart.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
 import _poolCutYourLosses from "../pool/cut-your-losses.js";
 import _poolDampingField from "../pool/damping-field.js";
@@ -1215,6 +1216,7 @@ const shard: CardShard = {
     _poolCryptolithFragment,
     _poolCrystalGolem,
     _poolCurioVendor,
+    _poolCurseOfThePiercedHeart,
     _poolCursedFlesh,
     _poolCutYourLosses,
     _poolDampingField,

@@ -889,6 +889,7 @@ import _poolTempleThief from "../pool/temple-thief.js";
 import _poolTemptWithImmortality from "../pool/tempt-with-immortality.js";
 import _poolTemptWithMayhem from "../pool/tempt-with-mayhem.js";
 import _poolTerritorialRoc from "../pool/territorial-roc.js";
+import _poolTesakJudithsHellhound from "../pool/tesak-judiths-hellhound.js";
 import _poolTetzinGnomeChampion from "../pool/tetzin-gnome-champion.js";
 import _poolTeysaKarlov from "../pool/teysa-karlov.js";
 import _poolThalakosScout from "../pool/thalakos-scout.js";
@@ -1949,6 +1950,7 @@ const shard: CardShard = {
     _poolTemptWithImmortality,
     _poolTemptWithMayhem,
     _poolTerritorialRoc,
+    _poolTesakJudithsHellhound,
     _poolTetzinGnomeChampion,
     _poolTeysaKarlov,
     _poolThalakosScout,

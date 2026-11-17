@@ -116,6 +116,7 @@ import _poolBorrowedTime from "../pool/borrowed-time.js";
 import _poolBottleGnomes from "../pool/bottle-gnomes.js";
 import _poolBoundaryLandsRanger from "../pool/boundary-lands-ranger.js";
 import _poolBradBoimlerEagerEnsign from "../pool/brad-boimler-eager-ensign.js";
+import _poolBraidedQuipu from "../pool/braided-quipu.js";
 import _poolBrawlersPlate from "../pool/brawlers-plate.js";
 import _poolBrazenFreebooter from "../pool/brazen-freebooter.js";
 import _poolBreathOfLife from "../pool/breath-of-life.js";
@@ -1165,6 +1166,7 @@ const shard: CardShard = {
     _poolBottleGnomes,
     _poolBoundaryLandsRanger,
     _poolBradBoimlerEagerEnsign,
+    _poolBraidedQuipu,
     _poolBrawlersPlate,
     _poolBrazenFreebooter,
     _poolBreathOfLife,
