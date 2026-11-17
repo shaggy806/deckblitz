@@ -14,6 +14,10 @@ interface RunCheck {
   readonly check: string
   readonly steps: readonly string[]
   readonly shots: string
+  /** A scenario's JSON to play in place of a manual check's board. */
+  readonly scenario?: string
+  /** The window's size, where the config's 1366x768 isn't what's wanted. */
+  readonly size?: { readonly width: number; readonly height: number }
 }
 
 interface Snapshot {
@@ -23,6 +27,9 @@ interface Snapshot {
   readonly badges: readonly string[]
   readonly players: readonly string[]
   readonly stack: readonly string[]
+  /** The stack as drawn, top first: each entry's label, card and targets —
+   * a "prompted by" card among them, which isn't on the stack. */
+  readonly drawn: readonly string[]
   readonly log: readonly string[]
   /** What this seat is told while it waits on another: the line by the pass
    * buttons, and each panel's. */
@@ -87,6 +94,11 @@ function snapshot(page: Page): Promise<Snapshot> {
       return `${id}${id === dv?.seat ? ' (you)' : ''}: life ${p.life}, hand ${p.handSize}, graveyard ${p.graveyardSize}, exile ${exile}, library ${p.librarySize}${p.hasLost ? ', lost' : ''}`
     })
     const stack = view === null ? [] : view.zones.stack.map(nameOf)
+    const drawn = [...document.querySelectorAll('.stack-overlay .stack-entry')].map((entry) =>
+      [line(entry.querySelector('.stack-entry-label')), tileName(entry), line(entry.querySelector('.stack-targets'))]
+        .filter((part) => part !== '')
+        .join(' | '),
+    )
     const log = dv?.log ?? []
     const banner = line(document.querySelector('.decision-banner'))
     const title = line(document.querySelector('.bp-check-title'))
@@ -99,6 +111,7 @@ function snapshot(page: Page): Promise<Snapshot> {
       badges,
       players,
       stack,
+      drawn,
       log,
       waiting: [...document.querySelectorAll('.priority-waiting, .pp-waiting')].map(line),
       key,
@@ -154,6 +167,7 @@ function print(label: string, s: Snapshot, shot: string): void {
   if (s.badges.length > 0) out.push(`  badges: ${s.badges.join('; ')}`)
   for (const p of s.players) out.push(`  ${p}`)
   out.push(`  stack: ${s.stack.length > 0 ? s.stack.join(', ') : '—'}`)
+  if (s.drawn.length > 0) out.push(`  stack drawn (top first): ${s.drawn.join(' / ')}`)
   if (s.waiting.length > 0) out.push(`  waiting: ${s.waiting.join(' / ')}`)
   if (s.log.length > 0) out.push(`  log: ${s.log.join(' / ')}`)
   out.push(`  shot: ${shot}`)
@@ -247,7 +261,9 @@ async function runStep(page: Page, step: string): Promise<boolean> {
           (await visibleFirst(page.locator('button, [role="menuitem"], [role="button"]', { hasText: pattern(arg) }))) ||
           // A cost is mana symbols, images whose alt text is only in the name
           // ("Equip {0}" beside "Equip {2}").
-          (await visibleFirst(page.getByRole('menuitem', { name: pattern(arg) }).or(page.getByRole('button', { name: pattern(arg) }))))
+          (await visibleFirst(page.getByRole('menuitem', { name: pattern(arg) }).or(page.getByRole('button', { name: pattern(arg) })))) ||
+          // Last, a labelled box: a setting ("Order my own triggers").
+          (await visibleFirst(page.locator('label', { hasText: pattern(arg) })))
         ) {
           return true
         }
@@ -294,13 +310,27 @@ test('run a manual check', async ({ page }) => {
     return path
   }
 
-  await page.goto(`/?check=${encodeURIComponent(run.check)}`)
+  if (run.size !== undefined) await page.setViewportSize(run.size)
   const panel = page.locator('.builder-panel')
-  await expect(panel.locator('.bp-check-title')).toBeVisible({ timeout: 30_000 })
-  const title = (await panel.locator('.bp-check-title').innerText()).replace(/^✓\s*/, '').trim()
-  if (!title.toLowerCase().includes(run.check.trim().toLowerCase())) {
-    console.log(`FAILED: no manual check's title contains "${run.check}"`)
-    throw new Error('no such manual check')
+  let title = 'a scenario'
+  if (run.scenario !== undefined) {
+    // A board of its own, through the builder's Import.
+    await page.goto('/')
+    await page.getByRole('button', { name: /Scenario builder/ }).click()
+    await expect(panel.locator('.bp-mode')).toHaveText('Building', { timeout: 30_000 })
+    await panel.getByRole('button', { name: 'Import…' }).click()
+    await panel.locator('.bp-import textarea').fill(run.scenario)
+    await panel.locator('.bp-import').getByRole('button', { name: 'Load it' }).click()
+    await expect(panel.locator('.bp-import')).toHaveCount(0, { timeout: 10_000 })
+    await panel.getByRole('button', { name: /Start play/ }).click()
+  } else {
+    await page.goto(`/?check=${encodeURIComponent(run.check)}`)
+    await expect(panel.locator('.bp-check-title')).toBeVisible({ timeout: 30_000 })
+    title = (await panel.locator('.bp-check-title').innerText()).replace(/^✓\s*/, '').trim()
+    if (!title.toLowerCase().includes(run.check.trim().toLowerCase())) {
+      console.log(`FAILED: no manual check's title contains "${run.check}"`)
+      throw new Error('no such manual check')
+    }
   }
   await expect(panel.locator('.bp-mode')).toHaveText('Playing', { timeout: 30_000 })
   // The drawer covers the board's right side: out of the way.
