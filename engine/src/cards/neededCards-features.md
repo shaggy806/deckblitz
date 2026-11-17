@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A token made by changed text is the changed colour — found built 2026-11-17
+
+The key `effect:text-change-token-colors` was built on 2026-11-09 (commit c5364f006, `create-token`'s
+`tokenTextChanges`, rule 612.4) without its key marked. Marked now, with its three cards authored on the
+existing `change-text`: Whim of Volrath (rank 11380, buyback), Trait Doctoring (13535, cipher) and Glamerdye
+(retrace, on a spell or a permanent, indefinitely). `test/text-change-token-colors.test.ts` (Mobilization's
+Soldier made blue, white again once Whim's turn is over; Raise the Alarm's made black).
+
 ### "Put the bottom card of your library into your graveyard" — built 2026-11-17
 
 The key `effect:mill-from-bottom`, built as what it is — not a mill (rule 701.17a takes the top cards, and
