@@ -3470,6 +3470,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * optional, asked after their first). Read off the battlefield like
    * `keepsUnspentMana`; `affects` is ignored. */
   readonly votesAdditionalTime?: boolean;
+  /** "While voting, you get an additional vote" (Brago's Representative —
+   * rule 701.38d): as its controller votes, they cast one more vote for each
+   * of these they control, at the same time — not optional, unlike
+   * `votesAdditionalTime`'s. Read off the battlefield the same way; `affects`
+   * is ignored. */
+  readonly getsAdditionalVote?: true;
   /** "The first spell you cast during each of your turns has assist" (Yume,
    * Chronicler of Valor — rule 702.132): its controller's spell cast while
    * it's their turn and they've cast no other spell this turn. Read off the

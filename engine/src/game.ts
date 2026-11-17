@@ -47582,8 +47582,9 @@ controlledBy,
     controller: PlayerId,
     player: PlayerId,
     spec: Extract<EffectSpec, { kind: "vote" }>,
-    /** `"taken"`: an additional vote its voter has said they'll cast, its
-     * result picked by another player (Illusion of Choice) — not optional. */
+    /** `"taken"`: an additional vote that isn't optional — one its voter has
+     * said they'll cast, its result picked by another player (Illusion of
+     * Choice), or one they get (Brago's Representative). */
     extra: boolean | "taken",
     x: number,
     /** "For each player, choose …": the player this question is about. */
@@ -47687,17 +47688,22 @@ controlledBy,
   }
 
   /** How many additional votes `player` may cast (rule 701.38d): one for
-   * each "while voting, you may vote an additional time" they control. */
-  private additionalVotes(player: PlayerId): number {
-    let n = 0;
+   * each "while voting, you may vote an additional time" they control; and
+   * how many they get, one for each "you get an additional vote". */
+  private additionalVotes(player: PlayerId): { may: number; must: number } {
+    let may = 0;
+    let must = 0;
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
-        if (ability.votesAdditionalTime === true && this.staticActive(source, ability)) n += source.stackCount ?? 1;
+        if (ability.votesAdditionalTime !== true && ability.getsAdditionalVote !== true) continue;
+        if (!this.staticActive(source, ability)) continue;
+        if (ability.votesAdditionalTime === true) may += source.stackCount ?? 1;
+        if (ability.getsAdditionalVote === true) must += source.stackCount ?? 1;
       }
     }
-    return n;
+    return { may, must };
   }
 
   /** Whether `id` is a battle with a player who can be its protector (rule

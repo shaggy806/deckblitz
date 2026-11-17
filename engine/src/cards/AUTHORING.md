@@ -3078,7 +3078,9 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   and a `destroy-all` of `{ type: "creature", notThisWay: "chosen" }`) or
   `{ player: "any" | "another" }`. A player with a "while voting, you may
   vote an additional time" (`static: [{ votesAdditionalTime: true }]` — Tivit)
-  may cast one more vote per such permanent (701.38d). The steps after it
+  may cast one more vote per such permanent (701.38d); one with a "while
+  voting, you get an additional vote" (`getsAdditionalVote: true` — Brago's
+  Representative) casts one more per such permanent, not optional. The steps after it
   read the votes:
   - `{ votesFor: i }` — option `i`'s votes (Selvala's Stampede's "for each
     wild vote" with `reveal-until-count`);

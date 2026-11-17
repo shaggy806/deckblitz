@@ -17409,6 +17409,16 @@ describe("mana that adds counters to what it casts", () => {
     expect(face.static[1].votesAdditionalTime).toBe(true);
   });
 
+  it("Brago's Representative: an additional vote it gets, not one it may cast", () => {
+    const face = read(
+      "Creature — Human Advisor",
+      "While voting, you get an additional vote. (The votes can be for different choices or for the same choice.)",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.static[0].getsAdditionalVote).toBe(true);
+    expect(face.static[0].votesAdditionalTime).toBeUndefined();
+  });
+
   it("Tekuthal, Inquiry Dominus", () => {
     const face = read(
       "Legendary Creature — Phyrexian Horror",

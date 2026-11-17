@@ -9375,7 +9375,9 @@ export type EffectSpec =
        * each player votes for time or knowledge" (Plea for Power). A player
        * who controls a "while voting, you may vote an additional time"
        * (`StaticAbility.votesAdditionalTime`) may cast one more vote for each,
-       * asked straight after their first (701.38d).
+       * asked straight after their first (701.38d); one who controls a
+       * "while voting, you get an additional vote" (`getsAdditionalVote` —
+       * Brago's Representative) casts one more for each, not optional.
        *
        * Every vote is in by the time the next step of the effect happens,
        * which reads them: `{ votesFor }`, `{ votesReceived }`, the `vote-won`
@@ -9474,8 +9476,10 @@ export type EffectSpec =
       readonly startingWith?: "you" | "active-player" | "next-opponent" | "you-then-active-player";
       /** Set by the engine on the copy it parks between one vote and the
        * next: the votes still to ask for, each with whether it's an
-       * additional, optional one — `"taken"`, one its voter has said they'll
-       * cast while someone else picks its result (Illusion of Choice). */
+       * additional, optional one — `"taken"`, an additional one that isn't
+       * optional: one its voter has said they'll cast while someone else
+       * picks its result (Illusion of Choice), or one they get (Brago's
+       * Representative). */
       readonly toAsk?: readonly { readonly player: PlayerId; readonly extra: boolean | "taken"; readonly about?: PlayerId }[];
     }
   | {
@@ -12570,8 +12574,9 @@ export interface EffectApi {
    * players finish voting". */
   finishVoting(): void;
   /** How many additional votes `player` may cast — the
-   * `votesAdditionalTime` statics they control. */
-  additionalVotes(player: PlayerId): number;
+   * `votesAdditionalTime` statics they control — and how many they get
+   * (`getsAdditionalVote`, cast without being asked whether). */
+  additionalVotes(player: PlayerId): { readonly may: number; readonly must: number };
   /** Whether a permanent voted for is still on the battlefield as the same
    * object (rule 400.7). */
   votedPermanentHere(object: ObjectId, zoneChangeCount: number): boolean;
@@ -15916,10 +15921,15 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
   }
   if (toAsk === undefined) {
     ctx.beginVoting(spec.secret === true);
-    toAsk = eachPlayerMayAsks("each-player", ctx, true).flatMap((player) => [
-      { player, extra: false },
-      ...Array.from({ length: ctx.additionalVotes(player) }, () => ({ player, extra: true })),
-    ]);
+    toAsk = eachPlayerMayAsks("each-player", ctx, true).flatMap((player) => {
+      // The votes a player gets, then the ones they may cast (701.38d).
+      const additional = ctx.additionalVotes(player);
+      return [
+        { player, extra: false },
+        ...Array.from({ length: additional.must }, () => ({ player, extra: "taken" as const })),
+        ...Array.from({ length: additional.may }, () => ({ player, extra: true })),
+      ];
+    });
   }
   while (toAsk.length > 0) {
     const ask = toAsk[0];

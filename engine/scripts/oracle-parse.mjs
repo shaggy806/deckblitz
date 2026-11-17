@@ -22941,6 +22941,10 @@ function parseStatic(line, text) {
   if (line === "While voting, you may vote an additional time.") {
     return { affects: { scope: "self" }, votesAdditionalTime: true, text };
   }
+  // Brago's Representative: an additional vote it gets, not optional.
+  if (line === "While voting, you get an additional vote.") {
+    return { affects: { scope: "self" }, getsAdditionalVote: true, text };
+  }
   // Topography Tracker (rules 701.44, 614.5).
   if (line === "If a creature you control would explore, instead it explores, then it explores again.") {
     return {
