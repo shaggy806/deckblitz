@@ -13326,6 +13326,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Fencing Ace: no second strike at a player the first strike killed',
+    board({
+      you: { bf: ['Fencing Ace', { name: 'Basilisk Collar', attach: 'Fencing Ace' }] },
+      opp: [{ life: 1 }, {}],
+    }),
+  ),
+  preset(
     "Lodestone Bauble: in a 4-player game, the lands go back on top of their owner's library",
     board({
       you: { bf: ['Lodestone Bauble', 'Wastes'] },

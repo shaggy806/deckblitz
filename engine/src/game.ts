@@ -15494,7 +15494,18 @@ export class Game {
       }
     }
 
-    return assignments;
+    // Rule 800.4e: "If combat damage would be assigned to a player who has
+    // left the game, that damage isn't assigned." A multiplayer game goes on
+    // past a player the first combat damage step killed (state-based actions
+    // run between the two steps, rule 510.4), and the second step — a double
+    // striker's second strike, a creature without first strike beside it,
+    // trample over a blocker — dealt its damage to them all the same: life
+    // further below 0, lifelink and "deals combat damage to a player" a
+    // second time (a live game, 2026-11-17: 18 life, 22 double-striking
+    // power, -26).
+    return assignments.filter(
+      ({ target }) => target.kind !== "player" || this.state.players[target.player]?.hasLost !== true,
+    );
   }
 
   private dealCombatAssignments(

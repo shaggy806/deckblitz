@@ -8803,6 +8803,10 @@ Each board's die comes up 4.
 - **Expect:** After Choose none the banner reads "Lodestone Bauble — choose one" with Choose Alice and Choose Bob. Once it resolves nothing moves (Bob's Forest and Island stay in his graveyard); at the start of Bob's turn Lodestone Bauble's trigger goes on the stack and Bob draws a card, then draws again for his turn.
 - **Not a bug:** The History says "That player draws a card" rather than naming Bob.
 
+### Fencing Ace: no second strike at a player the first strike killed
+- **Do:** Attack Bob, who is on 1 life, with Fencing Ace (double strike, wearing Basilisk Collar for lifelink). Pass until the turn's second main phase.
+- **Expect:** Bob loses after the first strike and Carol plays on. Your life went up by 1, not 2, and the History has Fencing Ace dealing 1 to Bob once.
+
 ### Lodestone Bauble: in a 4-player game, the lands go back on top of their owner's library
 - **Do:** In this 4-player game, activate Lodestone Bauble, pick Forest and Island in the popup (both Carol's) and click Confirm.
 - **Expect:** No question about a player. Carol's graveyard empties and her library goes from 1 to 3; at the start of Bob's turn Lodestone Bauble's trigger goes on the stack and Carol draws a card (the History: "Carol draws a card", then "Bob draws a card").
