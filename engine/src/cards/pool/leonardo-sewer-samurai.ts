@@ -45,7 +45,7 @@ export default defineCard({
   subtypes: ["Mutant", "Ninja", "Turtle", "Samurai"],
   power: 3,
   toughness: 3,
-  keywords: ["double strike"],
+  keywords: ["double-strike"],
   sneak: { cost: "{2}{W}{W}" },
   text: `Sneak {2}{W}{W}\nDouble strike\n${CAST_TEXT}`,
   static: [
