@@ -21013,7 +21013,7 @@ export class Game {
       const restore = this.enterKickedReduction(cardId, this.faceDef(cardId, face), kicked);
       try {
         return this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve);
+          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve, targets);
       } finally {
         restore();
       }
@@ -21023,7 +21023,7 @@ export class Game {
       const restore = this.enterPricedVia(cardId, via, graveyardGrant);
       try {
         return this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve);
+          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve, targets);
       } finally {
         restore();
       }
