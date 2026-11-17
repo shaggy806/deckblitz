@@ -4,6 +4,100 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-17 — Garruk's Uprising cast after Dragonhawk, on an empty board
+
+Status: fixed 2026-11-17 (its two scenarios gate).
+
+- **Seen:** a live game, read from its exported log (seed 4022047087, four players, the seat
+  named Player 1). Round five. A Wrath of God two turns before had emptied the board, Ureni and
+  Miirym with it. The seat had Stomping Ground, Bountiful Landscape, Shivan Reef, Forest and the
+  turn's Mossfire Valley, Arcane Signet, and Frontier Siege on Khans: eight mana in its first
+  main phase, the eighth from Mossfire Valley's filter. In hand were Garruk's Uprising,
+  Dragonhawk, Fate's Tempest, Terror of the Peaks, Scourge of Valkas and Atarka, World Render.
+  It cast Dragonhawk (which exiled Bloom Tender), then the Uprising (which drew an Island), and
+  Bloom Tender from exile in its second main phase. The user: "played Garruk's Uprising after
+  Dragonhawk instead of before it."
+- **Not held too long:** the Uprising was drawn on turn 7 and no earlier turn could cast it
+  beside what the seat cast instead: Arcane Signet on two lands, Frontier Siege on four mana
+  (the Uprising alone was the other choice, and the Siege is the better one), Ureni on exactly
+  seven with {G}{G} left for the second main phase.
+- **Right:** the Uprising first, then Dragonhawk. **On this board both orders draw one card**:
+  cast second, the Uprising's own enters-draw sees the Dragon, so the turn lost nothing. What
+  the order changes is what that card depends on. The enters-draw has an intervening "if" (rule
+  603.4): a removal spell on the Dragon in response and there is no card, where "whenever a
+  creature … enters" has triggered by then whatever becomes of the creature. And with a
+  power-4 creature already out it is two cards against one; there v2 already cast the Uprising
+  first, since its enters-draw makes it a good first move by itself.
+- **Why:** two things in the turn plan (`planLines`, `bot/turn-plan.ts`), found by tracing the
+  rebuilt board.
+  1. Its lines begin from the three best single moves (`PLAN_BEAM`), each scored with the turn
+     passed after it. The Uprising alone is an enchantment that does nothing: 5.9 over passing,
+     beside Dragonhawk's 14.2, Atarka's 11.6, Terror's 9.5 and Scourge's 9.2, the worst of
+     five. So no line beginning with it was played at all; the plan had Dragonhawk-then-Uprising
+     at 22.5 over passing and no other order to set beside it.
+  2. With only the two cards in hand both orders are tried, and they score the same to the last
+     digit (48.665 each). Lines are sorted by value, a tie keeps the order they were found in,
+     and the better first move's lines are found first: the Dragon's.
+  `payoffFirst` named the Uprising throughout (v1 alone casts it first here, then Terror of the
+  Peaks), but since the bot audit's Q7 (2026-11-10) it only puts the payoff first among the
+  one-move search's candidates, where it wins ties. The plan had no such rule.
+- **Scenario:** "casts Garruk's Uprising before the Dragon it would see enter, with three more
+  creatures castable" (gate): the live board. Read "chose alice's Dragonhawk, Fate's Tempest"
+  with the fix switched off.
+- **Fix (built):** once the plan has its line, a payoff (`payoffFirst`'s) that the line casts
+  after its first move is moved to the front and the line played again (`replayLine`: each
+  move resolved, the turn passed out, scored as any line). That order replaces the line when it
+  scores no worse and passes the same crackback check (`lineSafe`). It reorders the moves of the
+  line already chosen, so it can't change which cards are cast, and costs one more line's
+  simulations, only when the chosen line holds the payoff further back. The strictly better
+  case comes with it: Dragon Tempest or Beast Whisperer behind three stronger first moves was
+  never tried first either. `scenario-fit.ts`' replay is told (`lastPayoffAhead`), since it
+  otherwise plays the first of the best.
+- **"No worse" had to mean more than the score.** The first version compared the two lines'
+  values, and passed on the scenario's library of forty Forests. On the live game's own library
+  (Bloom Tender on top, the Island under it) it still cast the Dragon first: the Dragon first
+  exiles Bloom Tender and draws the Island, the Uprising first draws one and exiles the other,
+  and the evaluation prices a land in hand 0.4 over a spell. The rollouts turn the library up
+  in its real order and the seat doesn't know it, so that difference is nothing it could act
+  on; three of four library tops tried went the wrong way by it. So an end that differs only in
+  which cards of the library went where also counts as no worse (`sameKnownEnd`: every
+  player's life and counters, every permanent, the size of every hand, library, graveyard and
+  of exile). The scenario now stacks the live library's top two. The planner's other
+  comparisons still read the library's order that way; noted in BACKLOG ("Bots").
+- **What the decision diff found: the reordered plan was not kept.** With the reorder alone,
+  `bot:diff` against `origin/main` disagreed once in 12,114 decisions on the bench decks (none
+  in 8,584 on four decks that run these payoffs): seed 2, turn 30, Aligned Heart ahead of
+  Caldera Pyremaw, so the Dragon is the second spell and the Heart's Flurry sees it. Read on
+  its board, that turn came out worse. The Heart went on the stack under a cast trigger of the
+  bot's own; `holdPass` passes on a searched cast when it is the one new object on the stack,
+  and two made the window a searched one. The search there can't see the plan: it cast Abrade
+  in response and cracked five Lander tokens, and the Dragon the plan still held had no mana.
+  The old order had hidden this, the dear spell being paid for before any window opened. It is
+  older than the reorder: on a small board (Monastery Mentor out; Aligned Heart, Caldera
+  Pyremaw and Abrade in hand; eight lands) `origin/main` casts the Heart first by itself, then
+  Abrade in answer to its own Mentor trigger, and keeps the Dragon in hand.
+- **Second fix (built):** a step of the turn plan resolving, with more of the plan to come, is
+  passed on rather than searched (`planResolving`): our own main phase, nothing asked, a stack
+  of nothing but our own spells and abilities. The line was scored with each step resolved
+  before the next. An opponent's spell or ability on the stack is searched as ever, so is our
+  own wipe (`holdPass`'s exception), and so is the plan's last step. Scenario: "casts the
+  Dragon its plan holds after Aligned Heart, not Abrade in answer to its own cast trigger"
+  (gate; `origin/main` ends that turn with the Pyremaw in hand).
+- **Checked:** the gate, 277 of 277, with both boards. `bot:diff` against `origin/main`, v2,
+  every row read on its board (the game replayed on the working build): six turns differ on the
+  bench decks (12 rows in 11,840 decisions over six games), and one turn (2 rows) in 8,808
+  decisions on four decks that run these payoffs (`--decks`, new for this: Ureni,
+  and the upgraded Draconic Destruction, Tramplesaurus Rex and Temur Roar). One is the reorder:
+  Aligned Heart, the Pyremaw from the plan as the second spell, then Abrade. The others are the
+  bot passing where it used to answer its own spell: Idol of Oblivion's draw and a Nullmage
+  Shepherd activation, both then made as the plan's last step (the Shepherd after the convoke
+  spell it would have taken creatures from); Frantic Search cast once Prismari Command has
+  resolved, not over it; a Rhonas pump skipped for four more creatures from the plan; and
+  Thrill of Possibility, twice left uncast for the plan's Dragon and its Signet. Those two are
+  a judgment call, the plan's against the one-move search's. Not benched: the seed 2 game went
+  on from its turn 30 to another winner, which is one game and says nothing either way. v1 is
+  untouched.
+
 ## 2026-11-16 — Terror of the Peaks' triggers at the creatures, when all of them at the player is lethal
 
 Status: fixed 2026-11-16 (its scenarios gate).

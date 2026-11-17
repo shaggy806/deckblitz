@@ -26,6 +26,16 @@ cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:diff -- --base origi
 - Zero disagreements is a real answer when the change can't show at that
   table (a four-token cap in two-player games); say so rather than doubting
   the tool — `--base` an older commit to check it sees anything.
+- `--decks "A,B,C,D"` seats named decks (strong, starter and tooling
+  precons, matched as `bot:watch` matches them) in every game, in place of
+  the bench decks: for a change those seldom raise (a payoff's cast order,
+  2026-11-17: once in 12,000 decisions on the bench decks, so it was also
+  diffed on four decks that run Garruk's Uprising and Beast Whisperer).
+- **Read each disagreement on its board, and the turn after it.** A row says
+  what the first move was, not how the turn went: that payoff's one row
+  looked right (the payoff before the Dragon) and the turn was worse, the
+  plan being dropped in the next window. Replay the seed on the working
+  build and print the seat's turn before calling a row right.
 
 ## Reading it
 

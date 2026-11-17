@@ -11,12 +11,14 @@
 // --games N (default 6 for v2, 40 for v1), --first SEED (default 1),
 // --players 2-4 (default 4), --parallel N (default 6 — each worker holds two
 // card pools and two searching bots, its heap capped by `worker-limits.mjs`),
+// --decks "A,B,C,D" (those decks instead of the bench decks' seatings),
 // --out FILE (NDJSON of every disagreement).
 
 import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 import { ROOT, baselineDist, workingDist } from "./baseline-build.mjs";
+import { findDeck } from "./tool-decks.mjs";
 import { TWO_BUILD_LIMITS } from "./worker-limits.mjs";
 import { runPool } from "./worker-pool.mjs";
 
@@ -29,7 +31,12 @@ const base = flag("base", "origin/main");
 const bot = flag("bot", "v2");
 const games = Number(flag("games", bot === "v1" ? "40" : "6"));
 const first = Number(flag("first", "1"));
-const players = Math.min(4, Math.max(2, Number(flag("players", "4"))));
+// --decks "A,B,C,D": those decks (`tool-decks.mjs`: strong, starter, tooling
+// precons), a seat each, in every game, for a change the bench decks hardly
+// raise; the seed still decides the shuffles and who goes first.
+const named = flag("decks", null)?.split(",").map((name) => name.trim()) ?? null;
+named?.forEach(findDeck);
+const players = named?.length ?? Math.min(4, Math.max(2, Number(flag("players", "4"))));
 const parallel = Number(flag("parallel", "6"));
 const baseline = baselineDist(base);
 const out = flag("out", join(ROOT, ".scratch", `diff-${bot}-${baseline.sha}.ndjson`));
@@ -59,7 +66,7 @@ function report() {
 
 runPool({
   url,
-  workerData: { working: working.dist, baseline: baseline.dist, bot, players },
+  workerData: { working: working.dist, baseline: baseline.dist, bot, players, decks: named },
   jobs: queue,
   workers: parallel,
   resourceLimits: TWO_BUILD_LIMITS,

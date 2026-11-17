@@ -93,7 +93,16 @@ import {
   withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
-import { boardKey, nextTurnValue, passLine, planTurn, restOfTurnValue, unknownCards } from "./turn-plan.js";
+import {
+  boardKey,
+  nextTurnValue,
+  passLine,
+  planTurn,
+  replayLine,
+  restOfTurnValue,
+  sameKnownEnd,
+  unknownCards,
+} from "./turn-plan.js";
 import type { PlanStep, PlannedLine, ScoredFirst, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
 export interface EvalBotOptions {
@@ -338,7 +347,7 @@ export interface DecisionAudit {
   readonly simulations: number;
   readonly ms: number;
   /** Which path answered: `"search"`, or the shortcut taken instead of one
-   * (`"batch replay"`, `"held pass"`, `"no candidates"`, `"payoff first"`,
+   * (`"batch replay"`, `"held pass"`, `"plan resolving"`, `"no candidates"`, `"payoff first"`,
    * `"reducer first"`, `"landfall first"`, `"fetch"`, `"only land"`, `"land search"`,
    * `"v1's answer"`; under a clock `"v1's cast"` and `"no time"`, an expired
    * search's unscored answer — `unscoredCast`). A capture records it (`server/src/capture.ts`), so a
@@ -1201,6 +1210,11 @@ export class EvalBotController extends HeuristicBotController {
   /** The candidates that tied with passing but weren't worth acting on alone
    * (`scoreAlone`), so the tie stayed with passing — for the replay. */
   lastRefusedTies: Action[] = [];
+  /** The payoff the last turn plan moved to the front of its line
+   * (`planLines`), the move that line began with, and whether the two orders
+   * ended the same but for cards the seat can't know (`sameKnownEnd`) — for
+   * the replay, which otherwise plays the first of the best. */
+  lastPayoffAhead: { readonly action: Action; readonly over: Action; readonly same: boolean } | null = null;
   /** The candidates the last priority search ranked unsafe for the
    * crackback (`tapsIntoCrackback`), for the replay. */
   lastUnsafe: Action[] = [];
@@ -1363,6 +1377,11 @@ export class EvalBotController extends HeuristicBotController {
       this.lastDecision = audit("priority", null, "turn plan replay");
       return this.acted(view, fromTurnPlan);
     }
+    if (this.planResolving(view.state)) {
+      this.lastDecision = audit("priority", null, "plan resolving");
+      this.rememberPass(view);
+      return { type: "pass-priority", player: this.playerId };
+    }
     const fromPlan = this.continuePlan(view);
     if (fromPlan !== null) {
       this.lastDecision = audit("priority", null, "plan replay");
@@ -1386,6 +1405,7 @@ export class EvalBotController extends HeuristicBotController {
       if (this.passMemoMode === "on") {
         this.lastUnsafe = [];
         this.lastRefusedTies = [];
+        this.lastPayoffAhead = null;
         this.lastPassFallback = early.cantrip;
         this.lastDecision = audit("priority", null, "pass memo");
         return this.settle(view, answer);
@@ -1429,6 +1449,7 @@ export class EvalBotController extends HeuristicBotController {
     this.passEndsOpen = false;
     this.passAloneOutcome = null;
     this.lastRefusedTies = [];
+    this.lastPayoffAhead = null;
     // A cast payoff in play or about to be (Shiko and Narset's Flurry, a
     // prowess creature, Young Pyromancer): the rollouts play the rest of our
     // turn (`"acting"`), or a cheap first spell is never worth the second
@@ -1823,7 +1844,7 @@ export class EvalBotController extends HeuristicBotController {
     // only the time every single move, batch and untap plan has left.
     const followed =
       this.planMode !== null
-        ? this.planLines(view, candidates, scored, mustKill, heldForCombat, best, bestScore, budget)
+        ? this.planLines(view, candidates, scored, mustKill, heldForCombat, best, bestScore, budget, payoff)
         : null;
     if (followed !== null) {
       best = followed.action;
@@ -3705,6 +3726,7 @@ export class EvalBotController extends HeuristicBotController {
     best: Action,
     bestScore: number,
     budget: SearchBudget,
+    payoff: Action | null = null,
   ): { readonly action: Action; readonly score: number } | null {
     this.lastFollowUp = null;
     const state = view.state;
@@ -3838,6 +3860,45 @@ export class EvalBotController extends HeuristicBotController {
       if (safe === undefined || !(safe.value > bar + TIE)) return null;
       chosen = safe;
     }
+    // **The payoff first, when that costs nothing.** A payoff the line casts
+    // after its first move (`payoffFirst`'s: Garruk's Uprising behind the
+    // Dragon it would see enter) is moved to the front and the line played
+    // again; it replaces the line when it scores no worse. The planner
+    // itself seldom tries that order: its lines start from the best few
+    // first moves (`PLAN_BEAM`), and a payoff alone is an enchantment that
+    // does nothing yet. And when it does, the two orders can tie (the
+    // Uprising's own enters-draw sees the Dragon cast before it, on an
+    // empty board: a card either way), and the tie went to the creature —
+    // which the draw then depends on staying alive (a live misplay,
+    // 2026-11-17). The one-move search has always given the payoff its
+    // ties (`preferred`, above).
+    const payoffAt =
+      payoff?.type === "cast-spell"
+        ? chosen.steps.findIndex((step) => step !== "combat" && step.type === "cast-spell" && step.card === payoff.card)
+        : -1;
+    if (payoff !== null && payoffAt > 0 && !outOfTime(budget)) {
+      const steps = [payoff, ...chosen.steps.slice(0, payoffAt), ...chosen.steps.slice(payoffAt + 1)];
+      const moved = timed(budget, () => replayLine(state, this.cards, me, steps, hooks));
+      // "No worse" is also an end that differs only in which cards of our
+      // library went where (`sameKnownEnd`): the two orders draw and exile
+      // in a different order, the rollouts know the library's and the seat
+      // doesn't, and a land drawn where the other order drew a spell is 0.4
+      // either way — which sent the Dragon first again on the live game's
+      // own library.
+      const same = moved !== null && sameKnownEnd(moved.end, chosen.end, me);
+      const over = chosen.steps[0];
+      if (
+        moved !== null &&
+        over !== undefined &&
+        over !== "combat" &&
+        (same || moved.value >= chosen.value - TIE) &&
+        this.lineSafe(moved, budget)
+      ) {
+        this.trace?.(payoff, moved.end);
+        this.lastPayoffAhead = { action: payoff, over, same };
+        chosen = moved;
+      }
+    }
     const [first, ...rest] = chosen.steps;
     if (first === undefined) return null;
     if (sameStep(first, best) && rest.length === 0) return null;
@@ -3929,6 +3990,42 @@ export class EvalBotController extends HeuristicBotController {
       return null;
     }
     return step;
+  }
+
+  /**
+   * Whether this window is a step of the turn plan resolving with more of
+   * the plan to come: our own main phase, nothing asked, and a stack of
+   * nothing but our own spells and abilities — the step and whatever it
+   * triggered. The line was scored with each step resolved before the next
+   * (`simulateSettled`), so the window is passed, not searched: a search
+   * here can't see the plan, and spends its mana.
+   *
+   * `holdPass` already passes on a searched cast alone on the stack. A cast
+   * trigger beside it made the window a searched one: Aligned Heart, moved
+   * ahead of Caldera Pyremaw as the payoff (`planLines`), went on the stack
+   * under a cast trigger, and the search there cast Abrade in response and
+   * cracked five Lander tokens — no mana for the Dragon the plan still held
+   * (the bench decks' seed 2, turn 30, read off `bot:diff`, 2026-11-17).
+   * The Dragon first had hidden it: the dear spell was paid for before any
+   * window opened.
+   *
+   * An opponent's spell or ability on the stack is a new question, searched
+   * as ever, and so is our own wipe taking a creature of ours (`holdPass`'s
+   * exception). The plan's last step is searched as before: nothing is left
+   * to protect.
+   */
+  private planResolving(state: GameState): boolean {
+    const plan = this.turnPlan;
+    const me = this.playerId;
+    if (plan === null || plan.steps.length === 0 || state.turn.number !== plan.turn) return false;
+    if (state.turnOrder[state.turn.activePlayerIndex] !== me || state.awaiting !== null) return false;
+    if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return false;
+    const stack = state.zones.shared.stack;
+    return (
+      stack.length > 0 &&
+      stack.every((id) => state.objects[id]?.controller === me) &&
+      !this.ownWipeOnStack(state)
+    );
   }
 
   /**

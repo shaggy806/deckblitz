@@ -3607,6 +3607,36 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "casts the Dragon its plan holds after Aligned Heart, not Abrade in answer to its own cast trigger",
+    rule: "While a step of the turn plan resolves with more of the plan to come, its mana isn't spent in a window that can't see the plan.",
+    run(weights, registry, makeBot) {
+      // Read off a decision diff (2026-11-17, the bench decks' seed 2, turn
+      // 30), where putting Aligned Heart before Caldera Pyremaw cost the
+      // Dragon. The plan is the Heart, then the Pyremaw: all eight lands, the
+      // Dragon the second spell, so the Heart's Flurry makes a Monk. But the
+      // Heart goes on the stack under Monastery Mentor's trigger, two objects
+      // where `holdPass` passes on one, so that window was searched: it cast
+      // Abrade at the Elves in response, a second spell with no Heart out to
+      // see it, and left three lands for a five-mana Dragon. This board did
+      // the same before the payoff was ever moved (the search casts the Heart
+      // first here by itself). Fixed: a planned step resolving with more of
+      // the plan to come is passed on (`planResolving`).
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 4);
+      lands(game, "Plains", A, 4);
+      onBoard(game, "Monastery Mentor", A);
+      const heart = game.debugSpawn("Aligned Heart", A, "hand");
+      const dragon = game.debugSpawn("Caldera Pyremaw", A, "hand");
+      game.debugSpawn("Abrade", A, "hand");
+      onBoard(game, "Llanowar Elves", B);
+      onBoard(game, "Sol Ring", B);
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const out = (id: ObjectId): boolean => game.state.objects[id]?.zone === "battlefield";
+      const casts = taken.flatMap((action) => (action.type === "cast-spell" ? [cardOf(game, action.card)] : []));
+      return { passed: out(heart) && out(dragon), detail: `cast ${casts.join(", then ") || "nothing"}` };
+    },
+  },
+  {
     name: "stations with a creature it can spare from the crackback",
     rule: "With life to spare, a creature tapped to station costs only its block: still worth Hearthhull's next band.",
     run(weights, registry, makeBot) {
@@ -6558,6 +6588,92 @@ const SCENARIOS: readonly BotScenario[] = [
         judge: (action) => ({
           passed: action.type === "cast-spell" && action.card === tempest,
           detail: `chose ${action.type === "cast-spell" ? `Cast ${game.state.objects[action.card]?.cardName}` : action.type}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "casts Garruk's Uprising before the Dragon it would see enter, with three more creatures castable",
+    rule: "An enters payoff goes down before the creature it would see enter when both are cast this turn anyway: the card then doesn't depend on the creature staying alive.",
+    position(registry) {
+      // Reported from a live game (2026-11-17, from its exported log: seed
+      // 4022047087, round five of four players). A Wrath of God had emptied
+      // the board, and the bot, on eight mana (five lands, Arcane Signet,
+      // Frontier Siege's {G}{G}, Mossfire Valley's filter making the eighth),
+      // cast Dragonhawk and then Garruk's Uprising. The user: "played
+      // Garruk's Uprising after Dragonhawk instead of before it." Either
+      // order draws one card on this board — cast after the Dragon, the
+      // Uprising's own enters-draw sees it — but that draw has an intervening
+      // "if" (rule 603.4): kill the Dragon in response and there is no card,
+      // where "whenever a creature … enters" has triggered already. The turn
+      // plan never tried the Uprising first: its lines begin with the three
+      // best single moves (`PLAN_BEAM`), and with four creatures castable the
+      // Uprising alone is the worst of five. With only these two cards in
+      // hand both orders were tried, scored the same to the last digit, and
+      // the tie went to the Dragon, the better first move by itself. Fixed:
+      // the plan's chosen line is played again with its payoff (`payoffFirst`)
+      // at the front, and taken that way when it scores no worse, or ends
+      // the same but for cards the seat can't know (`planLines`).
+      const game = Game.create({
+        seed: 3,
+        registry,
+        decks: [
+          // A commander's colour identity is what Arcane Signet taps for.
+          { player: A, cards: Array<string>(40).fill("Forest"), commanders: ["Ureni of the Unwritten"] },
+          forestDeck(B),
+          forestDeck(C),
+          forestDeck(D),
+        ],
+      });
+      game.advanceUntil(
+        (s) =>
+          s.turnOrder[s.turn.activePlayerIndex] === A && s.priority.holder === A && s.turn.step === "precombat-main",
+      );
+      game.state.turn.number = 17; // alice's fifth turn
+      for (const player of [A, B, C, D]) game.state.zones.perPlayer[player].hand = [];
+      // Ureni died to the Wrath: {2} more, nine in all, past this turn's mana.
+      game.state.players[A].commanderCastCounts = { "Ureni of the Unwritten": 1 } as never;
+      for (const land of ["Stomping Ground", "Bountiful Landscape", "Shivan Reef", "Forest", "Mossfire Valley"]) {
+        const id = onBoard(game, land, A);
+        // Stomping Ground asks for its 2 life even when spawned; it has been
+        // out for turns, so untapped.
+        if (game.state.awaiting?.kind === "pay-life-for-untapped") {
+          game.dispatch({ type: "pay-life-for-untapped", player: A, pay: false });
+        }
+        game.state.objects[id].tapped = false;
+      }
+      appendJournal(game.state, { kind: "land-played", player: A });
+      onBoard(game, "Arcane Signet", A);
+      // Khans: {G}{G} as the main phase began, still in the pool.
+      game.state.objects[onBoard(game, "Frontier Siege", A)].chosenOnEnter = "Khans";
+      game.state.players[A].manaPool.push({ type: "G" }, { type: "G" });
+      const uprising = game.debugSpawn("Garruk's Uprising", A, "hand");
+      for (const card of ["Terror of the Peaks", "Atarka, World Render", "Dragonhawk, Fate's Tempest", "Scourge of Valkas"]) {
+        game.debugSpawn(card, A, "hand");
+      }
+      // The top of the library as it lay in the live game. The plan's
+      // rollouts turn it up and the seat can't know it: the Dragon first
+      // exiles Bloom Tender and draws the Island, the Uprising first draws
+      // one and exiles the other, and a land in hand where the other order
+      // has a spell is 0.4 — which sent the Dragon first again, on a library
+      // of nothing but Forests the only board the first fix was right on.
+      const top = ["Bloom Tender", "Island"].map((name) => game.debugSpawn(name, A, "library"));
+      const library = game.state.zones.perPlayer[A].library;
+      game.state.zones.perPlayer[A].library = [...top, ...library.filter((id) => !top.includes(id))];
+      game.state.players[A].life = 36;
+      game.state.players[B].life = 33;
+      game.state.players[C].life = 38;
+      game.state.players[D].life = 29;
+      onBoard(game, "Marwyn, the Nurturer", D);
+      if (game.state.awaiting !== null || game.state.priority.holder !== A) {
+        return { passed: false, detail: "alice never had priority in her main phase" };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === uprising,
+          detail: `chose ${action.type === "cast-spell" ? cardOf(game, action.card) : describeAction(action)}`,
         }),
       };
     },

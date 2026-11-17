@@ -67,6 +67,10 @@ export interface ScenarioRecord {
   readonly refusedTies?: readonly Action[];
   /** Candidates ranked below every safe one for the crackback (`lastUnsafe`). */
   readonly unsafe?: readonly Action[];
+  /** The payoff the turn plan moved to the front of its line, the move the
+   * line began with before, and whether the two orders ended the same but
+   * for hidden cards (`lastPayoffAhead`). */
+  readonly payoffAhead?: { readonly action: Action; readonly over: Action; readonly same: boolean } | null;
   /** v1's answer to a decision, and how much another had to beat it by
    * (`lastKept`): a payment declined to keep a spell castable. */
   readonly kept?: { readonly action: Action; readonly by: number } | null;
@@ -119,6 +123,7 @@ export function recordScenario(
     tiesAct: bot.lastTiesAct,
     refusedTies: bot.lastRefusedTies,
     unsafe: bot.lastUnsafe,
+    payoffAhead: bot.lastPayoffAhead,
     // Only a decision's: a priority window doesn't set or clear it.
     kept: exact ? null : bot.lastKept,
     open: exact ? [] : bot.lastOpenAnswers,
@@ -157,6 +162,19 @@ export function replayChoice(record: ScenarioRecord, weights: EvalWeights): numb
       bestScore = score;
     }
   });
+  // The plan's line with its payoff moved to the front (traced last, under
+  // the payoff) replaces the line it was made from — the best, when that
+  // begins with `over` — if it scores no worse, or ended the same but for
+  // hidden cards (`planLines`).
+  const ahead = record.payoffAhead;
+  if (ahead != null && key(record.answers[best]?.action) === key(ahead.over)) {
+    let at = -1;
+    record.answers.forEach((answer, i) => {
+      if (answer.outcome !== null && key(answer.action) === key(ahead.action)) at = i;
+    });
+    const moved = record.answers[at]?.outcome;
+    if (moved != null && (ahead.same || scoreOutcome(moved, w) >= bestScore - TIE)) best = at;
+  }
   // A held wipe that scored best is played as a pass, and then no cantrip
   // spends its mana (`EvalBotController`'s priority search).
   const held = new Set((record.heldAsPass ?? []).map((a) => JSON.stringify(a)));

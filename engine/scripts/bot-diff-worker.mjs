@@ -7,8 +7,9 @@ import { parentPort, workerData } from "node:worker_threads";
 
 import { importBuild } from "./baseline-build.mjs";
 import { tableFor } from "./bot-seating.mjs";
+import { findDeck } from "./tool-decks.mjs";
 
-const { working, baseline, bot, players } = workerData;
+const { working, baseline, bot, players, decks: named } = workerData;
 const W = await importBuild(working);
 const B = await importBuild(baseline);
 const regW = W.createDefaultRegistry();
@@ -19,7 +20,10 @@ const make = (lib, registry, seat) =>
 function play(seed) {
   let decisions = 0;
   let diffs = 0;
-  const { seats, decks } = tableFor(seed, players);
+  const table = tableFor(seed, players);
+  const seats = table.seats;
+  // `--decks`: the named decks, a seat each, in place of the seed's seating.
+  const decks = named === null || named === undefined ? table.decks : named.map(findDeck);
   const controllers = {};
   for (const seat of seats) {
     const current = make(W, regW, seat);

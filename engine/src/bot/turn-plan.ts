@@ -425,6 +425,78 @@ export function planTurn(
   return done();
 }
 
+/**
+ * `steps` played in order from `state` as `planTurn` plays a line — each move
+ * resolved, `"combat"` passed through — then the turn passed out and scored:
+ * the line those steps make. `null` when the engine refuses one of them
+ * there, one never comes back to us, or the game ends on the way. For an
+ * order of a line's moves `planTurn` never tried: its beam starts from the
+ * best few first moves, and a payoff alone is seldom one of them
+ * (`EvalBotController.planLines` moves it to the front).
+ */
+export function replayLine(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  steps: readonly PlanStep[],
+  hooks: TurnPlanHooks,
+): PlannedLine | null {
+  let game = Game.fromSnapshot(state, { registry });
+  const boards: string[] = [];
+  const before: GameState[] = [];
+  for (const step of steps) {
+    boards.push(boardKey(game.state, me));
+    before.push(game.state);
+    const next =
+      step === "combat" ? throughCombat(game.state, registry, me) : simulateSettled(game.state, registry, me, step);
+    if (next === null || next.state.result.over) return null;
+    game = next;
+  }
+  const end = passOut(game.state, registry, me);
+  return end === null ? null : { steps, boards, before, value: hooks.value(end, { steps, before }), end };
+}
+
+/**
+ * Whether two ends of the same turn differ only in what the seat can't know
+ * as it plans: which cards of its library went where. Every player's life
+ * and counters, every permanent (its controller, name, counters, how many a
+ * stack stands for, and for ours whether it's tapped) and the size of every
+ * hand, library and graveyard and of exile are the same.
+ *
+ * A plan's rollouts turn the library up in its real order, which the seat
+ * doesn't know. Two orders of the same moves — a draw before an exile, or
+ * after it — then end with different cards in hand and score a little apart
+ * (a land for a spell: 0.4) for no reason the seat could act on.
+ */
+export function sameKnownEnd(a: GameState, b: GameState, me: PlayerId): boolean {
+  if (a.result.over || b.result.over) return false;
+  const permanents = (state: GameState): string =>
+    state.zones.shared.battlefield
+      .map((id) => {
+        const o = state.objects[id];
+        if (o === undefined) return "";
+        const tapped = o.controller === me ? o.tapped : "";
+        return `${o.controller}|${o.cardName}|${JSON.stringify(o.counters)}|${o.stackCount ?? 1}|${tapped}`;
+      })
+      .sort()
+      .join(";");
+  const players = (state: GameState): string =>
+    state.turnOrder
+      .map((p) => {
+        const player = state.players[p];
+        const zones = state.zones.perPlayer[p];
+        const sizes = `${zones?.hand.length}|${zones?.library.length}|${zones?.graveyard.length}`;
+        return `${player?.life}|${player?.hasLost}|${JSON.stringify(player?.counters)}|${sizes}`;
+      })
+      .join(";");
+  return (
+    a.zones.shared.exile.length === b.zones.shared.exile.length &&
+    a.zones.shared.stack.length === b.zones.shared.stack.length &&
+    players(a) === players(b) &&
+    permanents(a) === permanents(b)
+  );
+}
+
 /** Passing, as a line of no steps: the turn passed out from `state`. `null`
  * if the rollout fell over. */
 export function passLine(state: GameState, registry: CardRegistry, me: PlayerId, hooks: TurnPlanHooks): PlannedLine | null {

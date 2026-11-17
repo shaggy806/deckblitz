@@ -1240,6 +1240,48 @@ the two together, on different blocks, isn't seen.
 
 Left open by the same screen: three seats died with a wipe or a fog in hand (BACKLOG, "Bots").
 
+**The turn plan casts a payoff before what it pays off (2026-11-17).** A live game: on an
+empty board with eight mana, Dragonhawk and then Garruk's Uprising, where a player casts the
+Uprising first. Both orders draw one card there (cast second, the Uprising's own enters-draw
+sees the Dragon), so nothing was lost that turn; but that draw has an intervening "if" (rule
+603.4) and the other doesn't, and the plan had not weighed the orders at all. Its lines start
+from the three best single moves, each scored with the turn passed after it, and a payoff
+alone is the worst move in a hand of creatures: no line began with the Uprising. With only
+the two cards in hand both orders were tried, scored the same to the last digit, and the tie
+went to the Dragon. `payoffFirst` named the Uprising throughout, but since the audit's Q7 it
+only wins ties in the one-move search. Now the plan's chosen line is played once more with
+its payoff at the front (`replayLine`) and taken that way when it scores no worse and passes
+the crackback check. Kept narrow on purpose: it reorders the moves of the line already
+chosen, so it can't change which cards are cast, and costs one line. The same gap covers the
+strictly better case (Dragon Tempest behind several castable Dragons). `bot:diff` took
+`--decks` for this, the bench decks raising it once in six games.
+
+**A plan's scores read the library's order, and the seat can't.** The first version of that
+rule compared the two lines' values and was right only on a library of Forests. On the live
+game's library the two orders ended with different cards in hand (a draw before an exile, or
+after it), 0.4 apart for a land against a spell, and three library tops of four sent the
+Dragon first again. A plan may not *use* a card of the library it hasn't seen (`unknownCards`),
+but every line's value still counts whichever cards its rollout drew. For this rule, an end
+that differs only in which library cards went where counts as the same (`sameKnownEnd`).
+Lines chosen between by less than a card's identity elsewhere in the planner are still
+chosen by the library's order: left open (BACKLOG, "Bots").
+
+**A plan in progress isn't searched over while its own step resolves.** The decision diff for
+the reorder disagreed once on the bench decks, and that one, read on its board, was a worse
+turn: Aligned Heart went ahead of Caldera Pyremaw as intended, and the Dragon was never cast.
+The Heart had gone on the stack under a cast trigger of ours. `holdPass` passes on a searched
+cast when it is the one new object on the stack; with two, the window was searched, by a
+search that can't see the plan, and it spent the Dragon's mana on Abrade in response and five
+Lander tokens. `origin/main` does the same on a small board without any reorder; casting the
+dear spell first had been hiding it. So while a step of the plan resolves and more of the plan
+is to come, a stack of nothing but our own spells and abilities is passed on (`planResolving`).
+The diff then shows the cost as well as the gain: where the old bot answered its own spell
+with an instant or an activation (Thrill of Possibility, Idol of Oblivion's draw, a Rhonas
+pump), the new one keeps to its plan and does those after, with whatever mana the plan left.
+That is the plan's judgment against the one-move search's; the planner weighed those moves as
+steps and put them later or left them out. Worth a `bot:judge`-style look if a deck is found
+that lives on answering its own spells.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until
@@ -1301,4 +1343,11 @@ scenario that can decide it.
   games, `bot:diff`), where the old search cast Shiko. Bench level; worth a scenario from a live
   game before changing it. `payoffFirst` (2026-10-08) tries a spell-count payoff first, which
   may have settled it.
+- **A plan kept while its own spell resolves** (since `planResolving`, 2026-11-17): with more
+  of its turn plan to come, the bot no longer answers its own spell and its triggers (an
+  instant cast over them, an activation). In the decision diff that meant Thrill of
+  Possibility twice not cast in a turn whose plan spent the mana on a Dragon and a Signet. If
+  a live game shows an instant or an ability the bot should have used in that window and
+  never got back to, capture it: the scenario says whether the planner should price that move
+  as a step, or the rule needs an exception for moves that cost the plan nothing.
 - **Haste enablers in the crackback** (2026-10-05, low): `combat-math.ts`'s `crackback` sees only creatures on the board; haste decided 10 of 70 crackback deaths, and an opponent's visible enabler (Swiftfoot Boots, Anger in a graveyard, Dragon Tempest, Crashing Drawbridge) raised the death rate about a point, inside the noise. **Measured again and tried, 2026-11-15** (`bot-next-steps.md`, step 6): on the upgraded decks an opponent showing an enabler went 5 or more over its board's projection in 33% of its attacks against 18%, so 8 was added to the grown crackback for each such opponent; judged over twelve changed attacks it was two better, five worse and five even, a death avoided for a death caused, and it was taken out. Closed: the attack not made costs what the margin saves.
