@@ -4843,6 +4843,13 @@ export function parseSentence(sentence, ctx) {
     const whose = { "that player": "trigger-player", "each opponent": "each-opponent", "each player": "each-player" }[m[1].toLowerCase()];
     return { kind: "exile-from-library", whose, allBut: 0 };
   }
+  // Your whole library (Leveler), face down for nobody to see (Inverter of
+  // Truth), then your graveyard shuffled in as the new one (Inverter).
+  if ((m = /^exile all cards from your library( face down)?(, then shuffle all cards from your graveyard into your library)?\.$/i.exec(s))) {
+    const exile = { kind: "exile-from-library", whose: "you", allBut: 0, ...(m[1] !== undefined ? { faceDown: true } : {}) };
+    if (m[2] === undefined) return exile;
+    return { kind: "sequence", effects: [exile, { kind: "shuffle-graveyard-into-library", target: "you" }] };
+  }
   // "Exile the top seven cards of that player's library, then put a creature
   // card from among them onto the battlefield under your control" (Lord of
   // the Void): the player a combat damage trigger names; the put isn't

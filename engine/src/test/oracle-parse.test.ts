@@ -20738,6 +20738,19 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ]);
   });
 
+  it("reads a whole library exiled, face down, then the graveyard shuffled in (Leveler, Inverter of Truth)", () => {
+    expect(parseSentence("Exile all cards from your library.", {})).toEqual({ kind: "exile-from-library", whose: "you", allBut: 0 });
+    expect(
+      parseSentence("Exile all cards from your library face down, then shuffle all cards from your graveyard into your library.", {}),
+    ).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", whose: "you", allBut: 0, faceDown: true },
+        { kind: "shuffle-graveyard-into-library", target: "you" },
+      ],
+    });
+  });
+
   it("reads an exile from the bottom of a library (The Temporal Anchor, Arvinox)", () => {
     const anchor = parseFace({
       name: "Test Card",
