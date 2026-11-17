@@ -2818,7 +2818,9 @@
   "effect:discard-unless-sacrifice-per-card",
   "effect:attach-to-chosen-creature",
   "effect:count-target-players-not-done-this-way",
-  "keyword:imprint-two-cast-copy-other"
+  "keyword:imprint-two-cast-copy-other",
+  "keyword:imprint-two-cast-copy-other",
+  "effect:reveal-until-two-cast-one-hand-one"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

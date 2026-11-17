@@ -5701,6 +5701,16 @@ export type EffectSpec =
        */
       readonly exceptOneMatching?: CardFilter;
       /**
+       * Only `from`'s cards matching this, judged as each **card** lies there
+       * (read from the effect's controller's side, bound as it applies) —
+       * where `spell` judges the face cast (601.3e). "Exile cards … until you
+       * exile two nonland cards with mana value 4 or less. You may cast one of
+       * **those two cards**" (Invasion of Alara, `from: "exiled-this-way"`):
+       * the cards found, never another card exiled on the way whose cheaper
+       * face or half would pass as the spell.
+       */
+      readonly filter?: CardFilter;
+      /**
        * With `repeat`: "you may cast any number of spells **with total mana
        * value 10 or less** from among them" (Primeval Spawn): a running total
        * — only a spell whose mana value (at X = 0, rule 107.3b, as the spell
@@ -8752,6 +8762,10 @@ export type EffectSpec =
       /** What they're distributed among, for the prompts ("creatures you
        * control"). */
       readonly among?: string;
+      /** "Among **one, two, or three** creatures you control" (Awaken the
+       * Maelstrom): at least one is chosen when any matches, rather than
+       * "any number" of them. */
+      readonly atLeastOne?: true;
       /** Engine-built, never authored: the total read as it began, the
        * permanents chosen (a token stack once per token), and the shares
        * chosen so far, in that order. */
@@ -16105,8 +16119,10 @@ function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distribu
     }
     const below = ctx.parkedCount();
     const among = spec.among ?? "permanents";
-    const prompt = `Distribute ${total} ${kind}${total === 1 ? "" : "s"} among any number of ${among}: choose which get them`;
-    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, { ...(side !== undefined ? { side } : {}) })) {
+    const howMany = spec.atLeastOne === true ? (total === 1 ? "one of the" : `one to ${total}`) : "any number of";
+    const prompt = `Distribute ${total} ${kind}${total === 1 ? "" : "s"} among ${howMany} ${among}: choose which get them`;
+    const options = { ...(side !== undefined ? { side } : {}), ...(spec.atLeastOne === true ? { atLeastOne: true as const } : {}) };
+    if (ctx.askChoosePermanentsKept(spec.filter, total, prompt, options)) {
       ctx.resumeAfterDecisions({ ...spec, progress: { total } }, below);
     }
     return;
@@ -16921,6 +16937,11 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       const filter = spec.exceptOneMatching;
       const one = cards.findIndex((id) => ctx.cardMatches(id, filter));
       cards = one < 0 ? [] : cards.filter((_, index) => index !== one);
+    }
+    // Which cards, as they lie (`spell` is the face cast).
+    if (spec.filter !== undefined) {
+      const filter = spec.filter;
+      cards = cards.filter((id) => ctx.cardMatches(id, filter));
     }
     if (spec.copies !== undefined) {
       cards = ctx.copyCards(cards, Math.max(0, Math.floor(amountValue(spec.copies, ctx))), spec.copiesIn);
