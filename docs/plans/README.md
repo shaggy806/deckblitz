@@ -85,5 +85,10 @@ the Attraction deck and junkyard are lists beside the zones rather than zones, w
 to the card object, how a roll to visit goes through the one dice roll, and what the client and
 server need to fill the deck from a decklist and draw it.
 
+`rules-audit-2026-11` (**first slice done**, 2026-11-17) checks the engine against the
+Comprehensive Rules from the rules its source never cites (`npm run rules:uncited -w engine`):
+players who leave the game, combat and the turn's skip rules, with three violations fixed
+(800.4e, 508.8, 506.8f), what was probed and is sound, and the slices to take next.
+
 `verify-speed-audit` (**partly built**) times `npm run verify` step by step and ranks
 what would make it faster without changing what it catches, with the coverage holes found on the way.

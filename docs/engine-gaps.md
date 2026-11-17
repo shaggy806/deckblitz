@@ -6,6 +6,14 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A player who loses while they owe a decision** (2026-11-17, the rules audit, `docs/plans/rules-audit-2026-11.md`).
+  Rules 800.4f-h: a cost a departed player would pay isn't paid, a choice an object asks of them goes to another
+  player its controller picks, and a choice a rule asks of them goes to the next player in turn order. None is
+  modeled. `Game.whyCannotConcede` refuses a concession from a player who owes a decision (the server answers it
+  for them first), so conceding never reaches it. What can: a player losing to state-based actions while a
+  resolution is waiting on a choice of theirs (a suspended resolution with their life at 0), or losing with a
+  "may pay" of theirs still to come in the same resolution ("each opponent may pay"). Not reproduced; write the
+  failing test first (`engine/src/test/player-left-audit.test.ts` has the setup).
 - **B334's small gaps** (2026-11-17, what the overnight lane agents reported while building keys; none checked
   beyond the agent's own reading). `thisWay: "exiled"` also counts cards a spell cast *during* the resolution
   exiled as its cost, because `exileCause` sees `resolvingController` (game.ts ~70509): Invasion of Alara's hand

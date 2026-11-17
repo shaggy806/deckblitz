@@ -149,6 +149,9 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   vocabulary (`data/needs-vocabulary.json`): what blocks the most cards, what's been built since.
   Cards flagged "Build ASAP" in the library's dev view (`data/build-asap.json`) come first in
   `--by-rank`, `--next` and `--stale --next`; `--asap` lists them with where each stands.
+- `rules:uncited -- 506 508 800 | --all`: the Comprehensive Rules' rules that `src/` never cites (outside the
+  pool and the tests), by section: the leads of a rules audit (`docs/plans/rules-audit-2026-11.md`). Uncited is
+  a lead, not a verdict.
 - `decks:stand-ins`: the sample decks' stand-ins left, deck by deck, with each one's blockers;
   `-- --implemented` deletes those whose original is now in the pool (and fixes BACKLOG's count).
 - `card:scaffold -- "Name"`: writes a draft card file into `cards/scaffold/`.

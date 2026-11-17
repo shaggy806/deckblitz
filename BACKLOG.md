@@ -98,6 +98,8 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
+- **The rules audit's next slices** (2026-11-17, `docs/plans/rules-audit-2026-11.md`): the first slice (players who leave, combat, skip rules) fixed 800.4e, 508.8 and 506.8f. Left: seven uncited leads not yet probed (506.3c-d, 603.6c, 104.3f, 704.5x-y, 704.5r/t, 802.3b, 603.2g), then casting and resolving (601-608), replacement and prevention (614-616), Commander (903) and the keywords' uncited subrules. `npm run rules:uncited -w engine` lists the leads.
+- **A player who loses while they owe a decision** — rules 800.4f-h (another player pays nothing or chooses for them) aren't modeled; a concession is refused until the decision is answered, so only a state-based loss with a choice open reaches it (`docs/engine-gaps.md`).
 - **B334's small gaps** — what the overnight lane agents reported and left: cost exiles inside a resolution counted as "exiled this way", a simultaneous reanimation beside a Clone's choice, a few unread grants, two bot reads, scaffolder lines (`docs/engine-gaps.md`).
 - **Opposition Agent and a search of every library** — Jace, Architect of Thought's −8 (`eachLibrary`) begins the Agent's search control, but the Agent's "may play those cards" isn't granted for a find from the searcher's own library (`docs/engine-gaps.md`).
 - **An object's own "instead" against an exile replacement isn't asked** — Blightsteel Colossus's shuffle and Gravebane Zombie's library top are applied ahead of Rest in Peace or a finality counter without the owner choosing (rule 616.1e), and a Quintorius-cast spell countered by another spell's resolution goes to the library bottom unasked (`docs/engine-gaps.md`).
