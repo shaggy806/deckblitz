@@ -1266,6 +1266,16 @@ function drawReplacementReaches(r: DrawRedirectReplacement, event: WouldDrawEven
 const shieldLeft = (shield: ActiveReplacement): number =>
   shield.next === true ? Number.MAX_SAFE_INTEGER : (shield.left ?? 0);
 
+/** A prevention shield's follow-up owed once per source of a simultaneous
+ * event rather than once for all of it: one about the damage's source
+ * ("deals that much damage to that creature" — Comeuppance; "that source's
+ * controller"), which would otherwise be done to the first source alone, or
+ * a triggered one ("whenever damage from a creature is prevented this way" —
+ * Judgment of Alexander), which triggers once per occurrence in the event
+ * (rule 603.2c). */
+const thenPerSource = (spec: EffectSpec): boolean =>
+  spec.kind === "reflexive-trigger" || /"trigger-(?:object|controller)"/.test(JSON.stringify(spec));
+
 /** A shield neither counted nor once-only: all of the damage it covers, for
  * as long as it lasts (Gideon Jura's "prevent all damage … this turn"). */
 const shieldTakesAll = (shield: ActiveReplacement): boolean => shield.next !== true && shield.left === undefined;
@@ -2562,8 +2572,9 @@ export class Game {
      * to every creature — and go once it's dealt. */
     readonly nextTimeSpent: ActiveReplacement[];
     /** "If damage is prevented this way, …" owed for this event, per shield:
-     * once, for all it prevented (rule 615.5). */
-    readonly shieldThens: Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }>;
+     * once, for all it prevented (rule 615.5) — or once per source, for a
+     * follow-up about that source or a triggered one (`thenPerSource`). */
+    readonly shieldThens: Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }[]>;
     /** Whether damage to a player is dealt as though its source had a
      * keyword (`allDamageAsThough`), as it stood before any of this event's
      * damage was dealt, by `keyword:player`. */
@@ -63609,8 +63620,10 @@ controlledBy,
           if (owed === undefined) {
             this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, thatMany, source);
           } else {
-            const same = owed.get(t);
-            if (same === undefined) owed.set(t, { prevented: thatMany, source });
+            const entries = owed.get(t) ?? [];
+            if (entries.length === 0) owed.set(t, entries);
+            const same = thenPerSource(t.spec) ? entries.find((e) => e.source === source) : entries[0];
+            if (same === undefined) entries.push({ prevented: thatMany, source });
             else same.prevented += thatMany;
           }
         }
@@ -64088,7 +64101,7 @@ controlledBy,
     const batch = {
       lifelink: new Map<ObjectId, { controller: PlayerId; amount: number }>(),
       nextTimeSpent: [] as ActiveReplacement[],
-      shieldThens: new Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }>(),
+      shieldThens: new Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }[]>(),
       asThoughTo: new Map<string, boolean>(),
       dealtDamage: new Map<
         string,
@@ -64118,8 +64131,8 @@ controlledBy,
     } finally {
       this.damageBatch = null;
     }
-    for (const [t, { prevented, source }] of batch.shieldThens) {
-      this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
+    for (const [t, owed] of batch.shieldThens) {
+      for (const { prevented, source } of owed) this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
     }
     if (batch.nextTimeSpent.length > 0) {
       this.state.activeReplacements = this.state.activeReplacements.filter((s) => !batch.nextTimeSpent.includes(s));

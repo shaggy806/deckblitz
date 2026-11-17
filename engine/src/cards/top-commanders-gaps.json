@@ -6,6 +6,7 @@
     "filter:counts-as-named-card",
     "condition:source-enchanted-by-n-auras",
     "static:keywords-from-graveyard-creature-cards",
+    "trigger:damage-prevented-this-way",
     "effect:chosen-source-shield-prevent-half",
     "effect:enters-with-counters-if-x-cost",
     "effect:manifest-from-exile",

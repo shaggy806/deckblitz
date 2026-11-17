@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Whenever damage from a creature is prevented this way", once per creature — built 2026-11-17
+
+The key `trigger:damage-prevented-this-way` needed no new vocabulary: Comeuppance's split `damage-rule`s (the
+creature rule's `then` a `reflexive-trigger`, as New Way Forward's) say it. What was missing was per source: a
+shield's `then` in one simultaneous event (combat) was owed once for the whole event, to the first source alone.
+Now a `then` that reads the damage's source (`"trigger-object"`, `"trigger-controller"`) or is a
+`reflexive-trigger` is owed once per source (`thenPerSource`, `Game.damageBatch.shieldThens`; rule 603.2c) —
+which also fixes Comeuppance against two attackers. Judgment of Alexander (rank 11898).
+`test/prevented-this-way-whenever.test.ts`.
+
 ### A chosen source's next damage, half of it prevented — built 2026-11-17
 
 The key `effect:chosen-source-shield-prevent-half`: `prevent-damage-from-chosen-source`'s `half: "up" | "down"`
