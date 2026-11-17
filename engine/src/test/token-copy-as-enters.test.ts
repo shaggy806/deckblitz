@@ -5,22 +5,27 @@
  */
 import { describe, expect, it } from "vitest";
 
+import type { ChooseNumberOffer } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
+import { nameOf } from "../state.js";
 import { viewFor } from "../view.js";
 import {
   A,
   activate,
   B,
   cast,
+  counters,
   keywords,
   lands,
+  life,
   pt,
   ref,
   settle,
   spawn,
   subtypes,
   table,
+  toGraveyard,
   toHand,
   types,
   zone,
@@ -300,5 +305,70 @@ describe("a token copy's as-enters choices", () => {
     expect(asked).toBe(false);
     expect(tokens(game, "Clone")).toHaveLength(0);
     expect(tokens(game)).toHaveLength(1);
+  });
+
+  it("pays its own life as it enters, and its Minions are that big (Phyrexian Processor)", () => {
+    const { game, a } = table({ life: 20 });
+    const processor = spawn(game, "Phyrexian Processor");
+    const offers: ChooseNumberOffer[] = [];
+    a.chooseNumberFn = (_view, offer) => {
+      offers.push(offer);
+      return 5;
+    };
+    replicate(game, processor);
+    expect(offers).toHaveLength(1);
+    expect([offers[0].min, offers[0].max]).toEqual([0, 20]);
+    expect(life(game, A)).toBe(15);
+    const [token] = tokens(game, "Phyrexian Processor");
+    expect(game.state.objects[token].chosenOnEnter).toBe("5");
+    // The one it copied entered paying 0: the number is each one's own.
+    expect(game.state.objects[processor].chosenOnEnter).toBe("0");
+    lands(game, "Wastes", 4);
+    activate(game, token, 0);
+    settle(game);
+    const minion = game.battlefield.find((id) => game.state.objects[id].cardName === "Phyrexian Minion Token (Black 0/0)")!;
+    expect(pt(game, minion)).toEqual({ power: 5, toughness: 5 });
+  });
+
+  it("may exile two creature cards and enter as a copy of one (The Mimeoplasm)", () => {
+    const { game, a } = table();
+    const ooze = spawn(game, "The Mimeoplasm");
+    game.state.objects[ooze].counters["+1/+1"] = 1;
+    const bears = toGraveyard(game, "Grizzly Bears");
+    const angel = toGraveyard(game, "Serra Angel", B);
+    const offered: (readonly ObjectId[])[] = [];
+    a.chooseFromZoneFn = (_view, eligible) => {
+      offered.push(eligible);
+      return offered.length === 1 ? [bears, angel] : [angel];
+    };
+    replicate(game, ooze);
+    expect(offered).toEqual([
+      [bears, angel],
+      [bears, angel],
+    ]);
+    expect(zone(game, bears)).toBe("exile");
+    expect(zone(game, angel)).toBe("exile");
+    const [token] = tokens(game);
+    expect(nameOf(game.state.objects[token])).toBe("Serra Angel");
+    // Serra Angel's 4/4 with the Bears' power in +1/+1 counters.
+    expect(counters(game, token)).toBe(2);
+    expect(pt(game, token)).toEqual({ power: 6, toughness: 6 });
+    // The Mimeoplasm it copied is still itself.
+    expect(nameOf(game.state.objects[ooze])).toBe("The Mimeoplasm");
+  });
+
+  it("declining The Mimeoplasm's exile leaves a token of it as printed, which the legend rule takes", () => {
+    const { game, a } = table();
+    const ooze = spawn(game, "The Mimeoplasm");
+    game.state.objects[ooze].counters["+1/+1"] = 1;
+    const bears = toGraveyard(game, "Grizzly Bears");
+    const angel = toGraveyard(game, "Serra Angel", B);
+    a.chooseFromZoneFn = () => [];
+    replicate(game, ooze);
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(zone(game, angel)).toBe("graveyard");
+    // A 0/0 with no counters: it dies as it arrives.
+    expect(tokens(game)).toHaveLength(0);
+    expect(zone(game, ooze)).toBe("battlefield");
   });
 });
