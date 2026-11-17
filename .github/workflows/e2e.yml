@@ -21,14 +21,20 @@ concurrency:
 jobs:
   smoke:
     runs-on: ubuntu-24.04
-    timeout-minutes: ${{ github.event_name != 'pull_request' && 45 || 20 }}
+    timeout-minutes: 25
     # dev-rooms' rooms on the main thread (0) and on a worker thread (1), as
-    # the server's --shards runs them (docs/plans/room-shards.md).
+    # the server's --shards runs them (docs/plans/room-shards.md), each in
+    # four parts side by side (Playwright's --shard, which deals out the spec
+    # files by their test counts). One job a mode ran the whole suite one test
+    # after another — the tests share one dev-rooms, so a job can't run two at
+    # once — and took 22-25 minutes, which a deploy waited out; CI beside it
+    # is done in nine (2026-11-17). Every part starts its own dev-rooms.
     strategy:
       fail-fast: false
       matrix:
         shards: [0, 1]
-    name: smoke (shards ${{ matrix.shards }})
+        part: [1, 2, 3, 4]
+    name: smoke (shards ${{ matrix.shards }}, part ${{ matrix.part }} of 4)
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -41,13 +47,13 @@ jobs:
       - run: npx playwright install --with-deps chromium
         working-directory: client
       # Starts dev-rooms and the Vite dev server itself (client/playwright.config.ts).
-      - run: npm run ${{ github.event_name != 'pull_request' && 'test:e2e:full' || 'test:e2e' }} -w client
+      - run: npm run ${{ github.event_name != 'pull_request' && 'test:e2e:full' || 'test:e2e' }} -w client -- --shard=${{ matrix.part }}/4
         env:
           DEV_ROOMS_SHARDS: ${{ matrix.shards }}
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: playwright-report-shards-${{ matrix.shards }}
+          name: playwright-report-shards-${{ matrix.shards }}-part-${{ matrix.part }}
           path: |
             client/playwright-report
             client/test-results

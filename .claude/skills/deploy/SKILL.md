@@ -35,7 +35,8 @@ bundle, so say what failed (the run's page, github.com/shaggy806/deckblitz/actio
 
 **And the whole Playwright suite should have passed.** Since 2026-11-14 a push to `main` runs
 all of it on GitHub (`test:e2e:full`, the tutorials and the larger screens included), in the E2E
-workflow beside CI, about 17 minutes, twice (dev-rooms on the main thread and on a worker). E2E
+workflow beside CI, about 10 minutes: eight jobs side by side, a quarter of the suite each, for
+dev-rooms on the main thread and on a worker (one job a mode took 22-25, till 2026-11-17). E2E
 `completed success` is that. `in_progress`/`queued`: wait for it as for CI. `completed failure`:
 open the run (github.com/shaggy806/deckblitz/actions) and see what failed; a failure stops the
 deploy unless it's a load timeout that passes when re-run alone (`gh run rerun <id> --failed`).

@@ -243,7 +243,8 @@ export type FromShard =
 - **dev-rooms**: `ShardConfig.setup`/`shardCount` and `control` both ways;
   `scripts/dev-rooms-shard.mjs`; `list` fans out (shard order now, not `dev-scenarios.mjs`
   order), other ops route by code, `eval` runs in the owning worker; `DEV_ROOMS_SHARDS` in the
-  Playwright config and an e2e matrix over 0 and 1 in CI (jobs "smoke (shards 0/1)").
+  Playwright config and an e2e matrix over 0 and 1 in CI (jobs "smoke (shards 0/1)", each in four parts since
+  2026-11-17: "smoke (shards 0, part 1 of 4)").
 - **Step 9's code half**: the default stays 0; `DEPLOYMENT.md`'s unit sets `SHARDS=1` for the
   2-vCPU box (removing the line is the rollback); `load-test.mjs --status <url>` polls
   `/status.json` and reports main's and each shard's delay p99, busy and heap per stage.
