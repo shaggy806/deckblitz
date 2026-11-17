@@ -55,6 +55,7 @@ import _poolAttuneWithAether from "../pool/attune-with-aether.js";
 import _poolAuraShards from "../pool/aura-shards.js";
 import _poolAutumnsVeil from "../pool/autumns-veil.js";
 import _poolAvenWarcraft from "../pool/aven-warcraft.js";
+import _poolAwakenTheMaelstrom from "../pool/awaken-the-maelstrom.js";
 import _poolAwokenDemon from "../pool/awoken-demon.js";
 import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
 import _poolAzoriusChancery from "../pool/azorius-chancery.js";
@@ -1109,6 +1110,7 @@ const shard: CardShard = {
     _poolAuraShards,
     _poolAutumnsVeil,
     _poolAvenWarcraft,
+    _poolAwakenTheMaelstrom,
     _poolAwokenDemon,
     _poolAzizaMageTowerCaptain,
     _poolAzoriusChancery,

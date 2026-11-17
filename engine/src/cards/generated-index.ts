@@ -839,6 +839,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Avatar Roku": "https://cards.scryfall.io/art_crop/back/9/5/95f2f5af-d405-4534-8683-5a9001f997b4.jpg",
   "Avatar Yangchen": "https://cards.scryfall.io/art_crop/back/a/6/a60e8f23-90b2-4bc6-bd54-a95055556389.jpg",
   "Awaken the Blood Avatar": "https://cards.scryfall.io/art_crop/back/b/a/ba09360a-067e-48a5-bdc5-a19fd066a785.jpg",
+  "Awaken the Maelstrom": "https://cards.scryfall.io/art_crop/back/3/1/318c363b-61cc-4e2f-8f86-a4287539ea07.jpg",
   "Awakened Skyclave": "https://cards.scryfall.io/art_crop/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg",
   "Awoken Demon": "https://cards.scryfall.io/art_crop/back/a/b/abd587d8-2f71-4b3c-960a-d362133e967b.jpg",
   "Awoken Horror": "https://cards.scryfall.io/art_crop/back/7/2/7269d533-cb3f-498e-b97f-eb6c49e170c3.jpg",

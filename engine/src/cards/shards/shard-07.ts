@@ -327,6 +327,7 @@ import _poolFuriousStrength from "../pool/furious-strength.js";
 import _poolFurnaceScamp from "../pool/furnace-scamp.js";
 import _poolFutureSight from "../pool/future-sight.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
+import _poolGallopingLizrog from "../pool/galloping-lizrog.js";
 import _poolGalvanizingTenor from "../pool/galvanizing-tenor.js";
 import _poolGargoyleSentinel from "../pool/gargoyle-sentinel.js";
 import _poolGarrisonSergeant from "../pool/garrison-sergeant.js";
@@ -1388,6 +1389,7 @@ const shard: CardShard = {
     _poolFurnaceScamp,
     _poolFutureSight,
     _poolGalecasterColossus,
+    _poolGallopingLizrog,
     _poolGalvanizingTenor,
     _poolGargoyleSentinel,
     _poolGarrisonSergeant,

@@ -412,6 +412,7 @@ import _poolInsatiableGorgers from "../pool/insatiable-gorgers.js";
 import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
 import _poolIntermediateChirography from "../pool/intermediate-chirography.js";
+import _poolInvasionOfAlara from "../pool/invasion-of-alara.js";
 import _poolInventiveIteration from "../pool/inventive-iteration.js";
 import _poolInvigoratingSurge from "../pool/invigorating-surge.js";
 import _poolIridescentTiger from "../pool/iridescent-tiger.js";
@@ -1449,6 +1450,7 @@ const shard: CardShard = {
     _poolInspiredInsurgent,
     _poolInspiringCaptain,
     _poolIntermediateChirography,
+    _poolInvasionOfAlara,
     _poolInventiveIteration,
     _poolInvigoratingSurge,
     _poolIridescentTiger,

@@ -838,6 +838,7 @@ import _poolSorcerousSight from "../pool/sorcerous-sight.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpawnbroker from "../pool/spawnbroker.js";
 import _poolSpectralCloak from "../pool/spectral-cloak.js";
+import _poolSpellweaverHelix from "../pool/spellweaver-helix.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
 import _poolSpikedPitTrap from "../pool/spiked-pit-trap.js";
 import _poolSpindriftDrake from "../pool/spindrift-drake.js";
@@ -1910,6 +1911,7 @@ const shard: CardShard = {
     _poolSparkTrooper,
     _poolSpawnbroker,
     _poolSpectralCloak,
+    _poolSpellweaverHelix,
     _poolSpiderManWebSpinner,
     _poolSpikedPitTrap,
     _poolSpindriftDrake,

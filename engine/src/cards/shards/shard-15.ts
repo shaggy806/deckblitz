@@ -393,6 +393,7 @@ import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
+import _poolHollowMarauder from "../pool/hollow-marauder.js";
 import _poolHomicidalBrute from "../pool/homicidal-brute.js";
 import _poolHomingLightning from "../pool/homing-lightning.js";
 import _poolHomurasEssence from "../pool/homuras-essence.js";
@@ -672,6 +673,7 @@ import _poolRazakethsRite from "../pool/razakeths-rite.js";
 import _poolRazorGolem from "../pool/razor-golem.js";
 import _poolRazorPendulum from "../pool/razor-pendulum.js";
 import _poolRazormaneMasticore from "../pool/razormane-masticore.js";
+import _poolReadTheRunes from "../pool/read-the-runes.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolReclamationSpecialist from "../pool/reclamation-specialist.js";
@@ -1380,6 +1382,7 @@ const shard: CardShard = {
     _poolHighlandWeald,
     _poolHillGiant,
     _poolHillGigas,
+    _poolHollowMarauder,
     _poolHomicidalBrute,
     _poolHomingLightning,
     _poolHomurasEssence,
@@ -1659,6 +1662,7 @@ const shard: CardShard = {
     _poolRazorGolem,
     _poolRazorPendulum,
     _poolRazormaneMasticore,
+    _poolReadTheRunes,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
     _poolReclamationSpecialist,

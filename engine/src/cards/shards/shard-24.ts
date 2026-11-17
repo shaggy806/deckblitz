@@ -945,6 +945,7 @@ import _poolVanishIntoEternity from "../pool/vanish-into-eternity.js";
 import _poolVaporSnare from "../pool/vapor-snare.js";
 import _poolVastwoodGorger from "../pool/vastwood-gorger.js";
 import _poolVastwoodSurge from "../pool/vastwood-surge.js";
+import _poolVault101BirthdayParty from "../pool/vault-101-birthday-party.js";
 import _poolVerdantForce from "../pool/verdant-force.js";
 import _poolVeteranArmorer from "../pool/veteran-armorer.js";
 import _poolViashinoBey from "../pool/viashino-bey.js";
@@ -1985,6 +1986,7 @@ const shard: CardShard = {
     _poolVaporSnare,
     _poolVastwoodGorger,
     _poolVastwoodSurge,
+    _poolVault101BirthdayParty,
     _poolVerdantForce,
     _poolVeteranArmorer,
     _poolViashinoBey,

@@ -848,6 +848,7 @@ import _poolTestOfIdentity from "../pool/test-of-identity.js";
 import _poolTestOfLoyalty from "../pool/test-of-loyalty.js";
 import _poolTheBeaconOfKahless from "../pool/the-beacon-of-kahless.js";
 import _poolTheCaretaker from "../pool/the-caretaker.js";
+import _poolTheEighthDoctor from "../pool/the-eighth-doctor.js";
 import _poolTheFiligreeSylex from "../pool/the-filigree-sylex.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheRani from "../pool/the-rani.js";
@@ -1870,6 +1871,7 @@ const shard: CardShard = {
     _poolTestOfLoyalty,
     _poolTheBeaconOfKahless,
     _poolTheCaretaker,
+    _poolTheEighthDoctor,
     _poolTheFiligreeSylex,
     _poolTheLordOfTheEagles,
     _poolTheRani,
