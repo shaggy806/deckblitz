@@ -24965,8 +24965,12 @@ export class Game {
       // "Sacrifice **another** black creature" (Ayara) — `otherOnly` keeps the
       // source out of its own sacrifice cost. Its targets are left alone.
       if (ability.otherOnly === true && id === sourceId) return false;
-      // Exiled rather than sacrificed, what can't be sacrificed still pays.
-      const payable = (ability.cost.exilesSacrifice === true || this.canBeSacrificed(id)) && !this.sacrificeCostProhibited(player, id);
+      // Exiled rather than sacrificed, what can't be sacrificed still pays,
+      // and a rule against sacrificing for a cost has nothing to stop (rule
+      // 701.21a; Food Chain under Angel of Jubilation), as for a spell's
+      // exile (`additionalCostSacrifices`).
+      const payable =
+        ability.cost.exilesSacrifice === true || (this.canBeSacrificed(id) && !this.sacrificeCostProhibited(player, id));
       if (sac === "creature-you-control") {
         // What's a creature *now*: an animated land can be sacrificed, a
         // creature that stopped being one can't.

@@ -81,6 +81,21 @@ describe("exiling a creature you control (Food Chain)", () => {
     expect(zone(game, bears)).toBe("exile");
     expect(game.eventsOfType("permanent-sacrificed")).toEqual([]);
   });
+
+  it("is paid while players can't sacrifice creatures to activate abilities (Angel of Jubilation)", () => {
+    // The cost exiles, so a rule against sacrificing has nothing to stop
+    // (rule 701.21a); a sacrifice outlet beside it stays shut.
+    const { game } = table();
+    spawn(game, "Angel of Jubilation", B);
+    const chain = spawn(game, "Food Chain", A);
+    const altar = spawn(game, "Ashnod's Altar", A);
+    const bears = spawn(game, "Grizzly Bears", A);
+    expect(game.canDispatch({ type: "activate-ability", player: A, source: altar, abilityIndex: 0, targets: [], sacrifice: bears })).not.toBeNull();
+    expect(offersOf(game, chain).find((o) => o.manaColors?.[0] === "G")?.sacrifice?.choices).toEqual([bears]);
+    game.dispatch({ type: "activate-ability", player: A, source: chain, abilityIndex: 0, targets: [], sacrifice: bears, manaColors: ["G"] });
+    expect(zone(game, bears)).toBe("exile");
+    expect(pool(game).length).toBe(3);
+  });
 });
 
 describe("exiling a creature as a stack ability's cost (City of Shadows)", () => {
@@ -96,6 +111,15 @@ describe("exiling a creature as a stack ability's cost (City of Shadows)", () =>
     nextTurn(game);
     activate(game, city, 1);
     expect(pool(game).map((m) => m.type)).toEqual(["C"]);
+  });
+
+  it("is paid under your own Yasharn, Implacable Earth", () => {
+    const { game } = table();
+    spawn(game, "Yasharn, Implacable Earth", A);
+    const city = spawn(game, "City of Shadows", A);
+    const bears = spawn(game, "Grizzly Bears", A);
+    game.dispatch({ type: "activate-ability", player: A, source: city, abilityIndex: 0, targets: [], sacrifice: bears });
+    expect(zone(game, bears)).toBe("exile");
   });
 });
 
@@ -119,6 +143,17 @@ describe("as an additional cost (Necrotic Fumes)", () => {
     const theirs = spawn(game, "Hill Giant", B);
     const fumes = toHand(game, "Necrotic Fumes");
     expect(game.canDispatch({ type: "cast-spell", player: A, card: fumes, targets: [ref(theirs)] })).not.toBeNull();
+  });
+
+  it("is cast while players can't sacrifice creatures to cast spells (Angel of Jubilation)", () => {
+    const { game } = table();
+    lands(game, "Swamp", 3);
+    spawn(game, "Angel of Jubilation", B);
+    const mine = spawn(game, "Grizzly Bears", A);
+    const theirs = spawn(game, "Hill Giant", B);
+    const fumes = toHand(game, "Necrotic Fumes");
+    cast(game, fumes, { targets: [ref(theirs)], sacrifice: mine });
+    expect(zone(game, mine)).toBe("exile");
   });
 });
 
