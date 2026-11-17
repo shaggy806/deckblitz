@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-982 already implemented / 18 missing
+984 already implemented / 16 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -870,7 +870,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  864  Katara, Waterbending Master                     3539 decks  {1}{U}           Legendary Creature — Human Warrior Ally
 [x]  865  Gyome, Master Chef                              3531 decks  {2}{B}{G}        Legendary Creature — Troll Warlock
 [x]  866  Zellix, Sanity Flayer                           3529 decks  {2}{U}           Legendary Creature — Horror
-[ ]  867  Zabaz, the Glimmerwasp                          3519 decks  {1}              Legendary Artifact Creature — Insect
+[x]  867  Zabaz, the Glimmerwasp                          3519 decks  {1}              Legendary Artifact Creature — Insect
 [x]  868  Damia, Sage of Stone                            3516 decks  {4}{B}{G}{U}     Legendary Creature — Gorgon Wizard
 [x]  869  Edric, Spymaster of Trest                       3515 decks  {1}{G}{U}        Legendary Creature — Elf Rogue
 [x]  870  Street Urchin                                   3513 decks  {1}{R}           Legendary Enchantment — Background
@@ -909,7 +909,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  903  Killian, Ink Duelist                            3315 decks  {W}{B}           Legendary Creature — Human Warlock
 [x]  904  Ich-Tekik, Salvage Splicer                      3309 decks  {4}{G}           Legendary Creature — Phyrexian Human Artificer
 [x]  905  Gilgamesh, Master-at-Arms                       3308 decks  {4}{R}{R}        Legendary Creature — Human Samurai
-[ ]  906  Three Dog, Galaxy News DJ                       3305 decks  {1}{R}{W}        Legendary Creature — Human Bard
+[x]  906  Three Dog, Galaxy News DJ                       3305 decks  {1}{R}{W}        Legendary Creature — Human Bard
 [x]  907  Cloud, Planet's Champion                        3304 decks  {3}{R}{W}        Legendary Creature — Human Soldier Mercenary
 [x]  908  Jared Carthalion, True Heir                     3292 decks  {R}{G}{W}        Legendary Creature — Human Warrior
 [x]  909  Aegar, the Freezing Flame                       3289 decks  {1}{U}{R}        Legendary Creature — Giant Wizard
