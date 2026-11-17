@@ -413,6 +413,7 @@ import _poolInsist from "../pool/insist.js";
 import _poolInsolentNeonate from "../pool/insolent-neonate.js";
 import _poolInspiringBard from "../pool/inspiring-bard.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
+import _poolIntimidationBolt from "../pool/intimidation-bolt.js";
 import _poolIntoTheWilds from "../pool/into-the-wilds.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
 import _poolInvent from "../pool/invent.js";
@@ -1431,6 +1432,7 @@ const shard: CardShard = {
     _poolInsolentNeonate,
     _poolInspiringBard,
     _poolInstantRamen,
+    _poolIntimidationBolt,
     _poolIntoTheWilds,
     _poolInvasionSubmersible,
     _poolInvent,

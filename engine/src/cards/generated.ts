@@ -52,6 +52,7 @@ import _poolAberrantMindSorcerer from "./pool/aberrant-mind-sorcerer.js";
 import _poolAberrantResearcher from "./pool/aberrant-researcher.js";
 import _poolAberrantReturn from "./pool/aberrant-return.js";
 import _poolAberrant from "./pool/aberrant.js";
+import _poolAbeyance from "./pool/abeyance.js";
 import _poolAbhorrentOculus from "./pool/abhorrent-oculus.js";
 import _poolAbhorrentOverlord from "./pool/abhorrent-overlord.js";
 import _poolAbidingGrace from "./pool/abiding-grace.js";
@@ -1176,6 +1177,8 @@ import _poolArcboundTracker from "./pool/arcbound-tracker.js";
 import _poolArcboundWanderer from "./pool/arcbound-wanderer.js";
 import _poolArcboundWhelp from "./pool/arcbound-whelp.js";
 import _poolArcboundWorker from "./pool/arcbound-worker.js";
+import _poolArceeAcrobaticCoupe from "./pool/arcee-acrobatic-coupe.js";
+import _poolArceeSharpshooter from "./pool/arcee-sharpshooter.js";
 import _poolArchOfOrazca from "./pool/arch-of-orazca.js";
 import _poolArchaeologicalDig from "./pool/archaeological-dig.js";
 import _poolArchaeomancer from "./pool/archaeomancer.js";
@@ -14006,6 +14009,7 @@ import _poolInterventionPact from "./pool/intervention-pact.js";
 import _poolIntervention from "./pool/intervention.js";
 import _poolIntetTheDreamer from "./pool/intet-the-dreamer.js";
 import _poolIntiSeneschalOfTheSun from "./pool/inti-seneschal-of-the-sun.js";
+import _poolIntimidationBolt from "./pool/intimidation-bolt.js";
 import _poolIntimidationCampaign from "./pool/intimidation-campaign.js";
 import _poolIntimidationTactics from "./pool/intimidation-tactics.js";
 import _poolIntimidation from "./pool/intimidation.js";
@@ -33508,6 +33512,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAberrantResearcher,
   _poolAberrantReturn,
   _poolAberrant,
+  _poolAbeyance,
   _poolAbhorrentOculus,
   _poolAbhorrentOverlord,
   _poolAbidingGrace,
@@ -34632,6 +34637,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArcboundWanderer,
   _poolArcboundWhelp,
   _poolArcboundWorker,
+  _poolArceeAcrobaticCoupe,
+  _poolArceeSharpshooter,
   _poolArchOfOrazca,
   _poolArchaeologicalDig,
   _poolArchaeomancer,
@@ -47462,6 +47469,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIntervention,
   _poolIntetTheDreamer,
   _poolIntiSeneschalOfTheSun,
+  _poolIntimidationBolt,
   _poolIntimidationCampaign,
   _poolIntimidationTactics,
   _poolIntimidation,
@@ -66977,6 +66985,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aberrant-researcher": _poolAberrantResearcher,
   "pool/aberrant-return": _poolAberrantReturn,
   "pool/aberrant": _poolAberrant,
+  "pool/abeyance": _poolAbeyance,
   "pool/abhorrent-oculus": _poolAbhorrentOculus,
   "pool/abhorrent-overlord": _poolAbhorrentOverlord,
   "pool/abiding-grace": _poolAbidingGrace,
@@ -68101,6 +68110,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arcbound-wanderer": _poolArcboundWanderer,
   "pool/arcbound-whelp": _poolArcboundWhelp,
   "pool/arcbound-worker": _poolArcboundWorker,
+  "pool/arcee-acrobatic-coupe": _poolArceeAcrobaticCoupe,
+  "pool/arcee-sharpshooter": _poolArceeSharpshooter,
   "pool/arch-of-orazca": _poolArchOfOrazca,
   "pool/archaeological-dig": _poolArchaeologicalDig,
   "pool/archaeomancer": _poolArchaeomancer,
@@ -80931,6 +80942,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/intervention": _poolIntervention,
   "pool/intet-the-dreamer": _poolIntetTheDreamer,
   "pool/inti-seneschal-of-the-sun": _poolIntiSeneschalOfTheSun,
+  "pool/intimidation-bolt": _poolIntimidationBolt,
   "pool/intimidation-campaign": _poolIntimidationCampaign,
   "pool/intimidation-tactics": _poolIntimidationTactics,
   "pool/intimidation": _poolIntimidation,

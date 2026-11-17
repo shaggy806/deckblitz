@@ -39,6 +39,7 @@ import _poolArcadesTheStrategist from "../pool/arcades-the-strategist.js";
 import _poolArcaneSubtraction from "../pool/arcane-subtraction.js";
 import _poolArcboundHybrid from "../pool/arcbound-hybrid.js";
 import _poolArcboundWanderer from "../pool/arcbound-wanderer.js";
+import _poolArceeSharpshooter from "../pool/arcee-sharpshooter.js";
 import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
 import _poolArchonOfCoronation from "../pool/archon-of-coronation.js";
 import _poolArchonOfSunsGrace from "../pool/archon-of-suns-grace.js";
@@ -1113,6 +1114,7 @@ const shard: CardShard = {
     _poolArcaneSubtraction,
     _poolArcboundHybrid,
     _poolArcboundWanderer,
+    _poolArceeSharpshooter,
     _poolArchmageOfRunes,
     _poolArchonOfCoronation,
     _poolArchonOfSunsGrace,

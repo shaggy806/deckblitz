@@ -820,6 +820,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Apex Observatory": "https://cards.scryfall.io/art_crop/back/1/5/15304957-dbb5-4010-a0a6-27343d4c20a3.jpg",
   "Aquatic Ingress": "https://cards.scryfall.io/art_crop/back/d/0/d0f31357-3fd2-4355-acad-05d253a04b4a.jpg",
   "Arcade Gannon": "https://scryfall.com/card/pip/92",
+  "Arcee, Acrobatic Coupe": "https://cards.scryfall.io/art_crop/back/2/1/21462db4-7739-4853-845f-0c2aa38fd2a6.jpg",
   "Archdemon of Greed": "https://cards.scryfall.io/art_crop/back/6/a/6aef77b3-4b38-4902-9f7a-dc18b5bb9da9.jpg",
   "Architect of Restoration": "https://cards.scryfall.io/art_crop/back/a/1/a11a33ae-e7fa-4bd4-8cd8-3a3239a29bcc.jpg",
   "Archive Haunt": "https://cards.scryfall.io/art_crop/back/8/3/832288fd-8031-4c2b-ad3e-b1ec9f94d379.jpg",
