@@ -657,7 +657,12 @@ export const renown = (n: number): TriggeredAbility => {
  * counter on a creature an opponent controls" }` — Sheltering Ancient: each
  * counter chosen on its own, and with nothing to put them on it can't be
  * paid) or an act (`{ doing: { kind: "flip-coin" }, text: "Flip a coin" }`,
- * done that many times over as a `repeat`),
+ * done that many times over as a `repeat`), or an act on a different
+ * permanent for each age counter (`{ choose: { type: "land", controlledBy:
+ * "opponent" }, then: { kind: "gain-control", target: 0, untilEndOfTurn:
+ * false }, text: "Gain control of a land you don't control" }` — Herald of
+ * Leshrac: that many chosen at once, each a different one, and with fewer
+ * than that to choose from it can't be paid),
  * paid once per age counter as it resolves — all of it or none (no partial
  * payments). Each instance triggers on its own and counts every age counter
  * (702.24b). Put the keyword line in `text` as well.
@@ -668,7 +673,8 @@ export const cumulativeUpkeep = (
     | { readonly life: number }
     | { readonly sacrifice: CardFilter; readonly text: string }
     | { readonly putCounter: string; readonly on: CardFilter; readonly text: string }
-    | { readonly doing: EffectSpec; readonly text: string },
+    | { readonly doing: EffectSpec; readonly text: string }
+    | { readonly choose: CardFilter; readonly then: EffectSpec; readonly text: string },
 ): TriggeredAbility => {
   const ages = { countersOn: "source", counter: "age" } as const;
   const label = typeof cost === "string" ? cost : "life" in cost ? `—Pay ${cost.life} life` : `—${cost.text}`;
@@ -684,7 +690,24 @@ export const cumulativeUpkeep = (
         ? { payLife: cost.life, times: ages, text: `Pay ${cost.life} life for each age counter` }
         : "doing" in cost
           ? { doing: { kind: "repeat", times: ages, effect: cost.doing }, text: `${cost.text} for each age counter` }
-          : "putCounter" in cost
+          : "choose" in cost
+            ? // "Gain control of a land you don't control" for each age
+              // counter (Herald of Leshrac): one permanent per counter, each a
+              // different one (its ruling — the same land twice would be one
+              // already yours), all chosen before any is acted on (rule
+              // 702.24a); offered only with that many to choose (`mayBeDone`).
+              {
+                doing: {
+                  kind: "choose-permanents",
+                  filter: cost.choose,
+                  min: ages,
+                  upTo: ages,
+                  then: cost.then,
+                  prompt: `${cost.text} for each age counter (a different one each)`,
+                },
+                text: `${cost.text} for each age counter`,
+              }
+            : "putCounter" in cost
             ? { putCounter: cost.putCounter, on: cost.on, times: ages, text: cost.text }
             : { sacrifice: cost.sacrifice, times: ages, text: cost.text };
   return {

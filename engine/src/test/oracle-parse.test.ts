@@ -4825,6 +4825,29 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       },
     });
     expect(ancient.complete).toBe(true);
+    const herald = face(`Flying\nCumulative upkeep—Gain control of a land you don't control. ${reminder}`, "Creature — Avatar");
+    expect(herald.triggered[0].effect).toMatchObject({
+      then: {
+        effects: [
+          {},
+          {
+            options: [
+              {
+                doing: {
+                  kind: "choose-permanents",
+                  filter: { type: "land", controlledBy: "opponent" },
+                  min: { countersOn: "source", counter: "age" },
+                  upTo: { countersOn: "source", counter: "age" },
+                  then: { kind: "gain-control", target: 0, untilEndOfTurn: false },
+                },
+                text: "Gain control of a land you don't control for each age counter",
+              },
+            ],
+          },
+        ],
+      },
+    });
+    expect(herald.complete).toBe(true);
   });
 
   it("echo (rule 702.30a): a mana cost, a discard or two lands, once after it comes under your control", () => {

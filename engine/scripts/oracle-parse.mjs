@@ -272,6 +272,16 @@ function keywordPart(part, faceName, typeLine = "") {
       return { triggered: [cumulativeUpkeep({ putCounter: counter, on, text })] };
     }
   }
+  // Control of a different permanent it doesn't control per age counter,
+  // chosen together (Herald of Leshrac).
+  if ((m = /^cumulative upkeep—(gain control of an? ([a-z ]+?) you don't control)\.?$/i.exec(p))) {
+    const typed = parseTypePhrase(m[2]);
+    if (typed !== null && Object.keys(typed).length > 0) {
+      const text = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+      const then = { kind: "gain-control", target: 0, untilEndOfTurn: false };
+      return { triggered: [cumulativeUpkeep({ choose: { ...typed, controlledBy: "opponent" }, then, text })] };
+    }
+  }
   // Echo [cost] (rule 702.30a): its upkeep trigger, "if this came under your
   // control since the beginning of your last upkeep".
   if ((m = new RegExp(`^echo ${COST}$`, "i").exec(p))) return { triggered: [echo(m[1])] };

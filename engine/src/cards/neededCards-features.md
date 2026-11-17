@@ -364,6 +364,17 @@ reads what the trigger did. Gluttonous Hellkite (rank 11505): each player sacrif
 has left the stack (its rulings). The scaffolder reads it (`thisCast`: X in a cast trigger, and "~ enters
 with N +1/+1 counters on it for each … sacrificed/exiled/… this way").
 `test/cast-trigger-sacrifice-counters.test.ts`.
+### Cumulative upkeep paid in control of lands you don't control — built 2026-11-17
+
+The key `cost:cumulative-upkeep-gain-control-land` (family `keyword:cumulative-upkeep`):
+`cumulativeUpkeep({ choose, then, text })`, a `doing` of one `choose-permanents` whose `min` and `upTo` are
+the age counters — a different permanent for each, all chosen as it resolves (none targeted), then each acted
+on (rule 702.24a). `mayBeDone` now reads a `choose-permanents`' `min`: with fewer to choose from it can't be
+done in full, so as a cost it isn't offered and the permanent is sacrificed (the ruling: age counters
+outnumbering the lands you don't control). The scaffolder reads "Cumulative upkeep—Gain control of a [type]
+you don't control". Herald of Leshrac (rank 11691), with its +1/+1 per land you control but don't own and its
+leaves trigger handing every such land back (`gain-control-all`, `who: "owner"`).
+`test/cumulative-upkeep-gain-control.test.ts`.
 
 ### A token made by changed text is the changed colour — found built 2026-11-17
 

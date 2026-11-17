@@ -18738,6 +18738,25 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // card (an empty library revealed nothing), or "into your hand" with nothing
   // exiled this way: an impossible option isn't one to choose (rule 608.2d).
   if (action.kind === "put-into-graveyard") return objectRefAct(action.target, ctx)?.kind === "object";
+  // "You may tap three untapped creatures you control", cumulative upkeep's
+  // "gain control of a land you don't control" for each age counter (Herald
+  // of Leshrac): at least `min` permanents chosen, which can't be done in
+  // full with fewer to choose from (rule 702.24a: no partial payments). Read
+  // for the effect's controller choosing from the whole battlefield; another
+  // chooser, one seat's permanents or a set-wide rule isn't read here.
+  if (
+    action.kind === "choose-permanents" &&
+    action.min !== undefined &&
+    action.chooser === undefined &&
+    action.controlledByPlayer === undefined &&
+    action.together === undefined &&
+    action.random !== true &&
+    action.orPlayers === undefined
+  ) {
+    const min = Math.max(0, Math.floor(amountValue(action.min, ctx)));
+    const except = action.exceptTriggerObject === true && ctx.triggerObject !== undefined ? [ctx.triggerObject] : [];
+    if (min > 0) return ctx.eachPermanentMatching(action.filter, action.exceptSource === true, except, undefined).length >= min;
+  }
   // "You may have that player gain control of equipped creature" while the
   // Equipment is on nothing, or once what it was on has gone: there is no
   // such creature to hand over (Assault Suit asked at every opponent's
