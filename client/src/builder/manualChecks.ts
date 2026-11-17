@@ -13286,7 +13286,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({
       you: { bf: ['Ormos, Archive Keeper', 'Island*3'], hand: ['Shock', 'Forest', 'Grizzly Bears'], lib: ['Wastes', 'Wastes'] },
       opp: [{}, {}, {}],
-      fill: 0,
+      // One basic each: with none, a 4-player board's first player draws
+      // from an empty library on turn 1 (rule 103.8a skips that draw only
+      // in a two-player game).
+      fill: 1,
     }),
   ),
 ]

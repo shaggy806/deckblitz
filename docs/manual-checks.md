@@ -8776,5 +8776,5 @@ Each board's die comes up 4.
 - **Expect:** The banner reads "Ormos, Archive Keeper: Discard 3 cards with different names". Once one Shock is picked the other isn't lit and clicking it does nothing. Afterwards you draw five cards, and the other Shock is still in your hand.
 
 ### Ormos, Archive Keeper: in a 4-player game, draws from an empty library become counters
-- **Do:** In this 4-player game, activate Ormos, Archive Keeper's ability. Pick Shock, Forest and Grizzly Bears and click Discard.
-- **Expect:** You draw the two cards your library has, then Ormos gets fifteen +1/+1 counters (a 20/20) in place of the other three draws. You don't lose the game.
+- **Do:** In this 4-player game, activate Ormos, Archive Keeper's ability.
+- **Expect:** Your three cards, all of different names, are discarded without a question. You draw the three cards your library has (two Wastes and a Plains), then Ormos gets five +1/+1 counters twice (a 15/15) in place of the other two draws. You don't lose the game.
