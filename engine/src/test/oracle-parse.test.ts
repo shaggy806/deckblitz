@@ -21667,3 +21667,28 @@ describe("your commander's triggers, and a graveyard card's return", () => {
     expect(plain.complete).toBe(false);
   });
 });
+
+describe("split second if this spell was kicked", () => {
+  it("reads Molten Disaster whole", () => {
+    const face = parseFace(
+      {
+        name: "Molten Disaster",
+        type_line: "Sorcery",
+        oracle_text:
+          "Kicker {R} (You may pay an additional {R} as you cast this spell.)\nIf this spell was kicked, it has split second. (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nMolten Disaster deals X damage to each creature without flying and each player.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.kicker).toEqual({ cost: "{R}" });
+    expect(face.splitSecond).toEqual({ kind: "self-kicked" });
+  });
+
+  it("leaves a spell's kicker unread without that line", () => {
+    const face = parseFace(
+      { name: "Test Burn", type_line: "Instant", oracle_text: "Kicker {R}\nTest Burn deals 2 damage to any target. If this spell was kicked, it deals 4 damage instead." },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(false);
+  });
+});

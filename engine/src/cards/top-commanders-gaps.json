@@ -5,6 +5,7 @@
     "effect:control-while-player-is-monarch",
     "static:prohibit-per-opponent-comparison",
     "filter:counts-as-named-card",
+    "static:split-second-if-kicked",
     "zone:graveyard-commander-trigger",
     "effect:return-from-graveyard-attacking",
     "condition:source-enchanted-by-n-auras",

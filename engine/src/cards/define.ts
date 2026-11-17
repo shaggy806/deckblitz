@@ -5514,8 +5514,11 @@ export interface CardDefinition {
   readonly asCast: readonly AsCastFact[];
   /** Split second (rule 702.61): as long as this spell is on the stack,
    * players can't cast other spells or activate abilities that aren't mana
-   * abilities. Triggered abilities still trigger. */
-  readonly splitSecond: boolean;
+   * abilities. Triggered abilities still trigger. A condition is "**if**
+   * [it holds], this spell has split second" — Molten Disaster's "if this
+   * spell was kicked" (`{ kind: "self-kicked" }`) — read from the spell's
+   * side whenever split second is asked, as `cantBeCountered`'s is. */
+  readonly splitSecond: boolean | StaticCondition;
   /** This permanent may enter as a copy of another permanent its controller
    * chooses (Clone — rule 707.9) — see {@link CopyOnEnter}. `null` for a
    * normal card. */
@@ -6463,7 +6466,7 @@ const PRINTED_ABILITY: {
   controlEnchanted: (def) => def.controlEnchanted !== false,
   castOnlyIf: (def) => def.castOnlyIf !== null,
   asCast: (def) => def.asCast.length > 0,
-  splitSecond: (def) => def.splitSecond,
+  splitSecond: (def) => def.splitSecond !== false,
   asTransformsInto: (def) => def.asTransformsInto !== null,
   choosePlayerOnTransform: (def) => def.choosePlayerOnTransform !== undefined,
   copyOnEnter: (def) => def.copyOnEnter !== null,
@@ -6792,7 +6795,7 @@ interface CardDraft {
   controlEnchanted?: boolean | "monarch";
   castOnlyIf?: StaticCondition;
   asCast?: readonly AsCastFact[];
-  splitSecond?: boolean;
+  splitSecond?: boolean | StaticCondition;
   asTransformsInto?: EffectSpec;
   choosePlayerOnTransform?: "player" | "opponent";
   copyOnEnter?: CopyOnEnter;

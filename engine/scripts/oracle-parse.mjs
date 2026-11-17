@@ -17389,6 +17389,16 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Split second (rule 702.61a), on a spell of any type (Sudden Shock,
     // Sudden Substitution).
     if (line === "Split second") { out.splitSecond = true; continue; }
+    // "Kicker [cost]" then "If this spell was kicked, it has split second"
+    // (Molten Disaster): a split second gated on the kick, read from the
+    // spell's side (`self-kicked`). Only this pair: a spell's other "if this
+    // spell was kicked" stays a person's.
+    if (isSpell && (m = /^Kicker ((?:\{[^}]+\})+)$/.exec(line)) && normalize(lines[i + 1] ?? "", face.name) === "If ~ was kicked, it has split second.") {
+      out.kicker = { cost: m[1] };
+      out.splitSecond = { kind: "self-kicked" };
+      i += 1;
+      continue;
+    }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Paradigm (rule 702.192a): the spell's last part, then exiled.
     if (isSpell && line === "Paradigm") { paradigm = true; continue; }

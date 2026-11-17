@@ -2494,11 +2494,15 @@ export function turnCastGrantReaches(
   return grant.filter === undefined || matchesFilter(state, registry, cardId, grant.filter, { you: player });
 }
 
-/** Whether `spell`, on the stack, has split second (rule 702.61): printed, or
- * given by a `grantsToSpells` static on the battlefield. */
+/** Whether `spell`, on the stack, has split second (rule 702.61): printed —
+ * always, or while a condition read from the spell's side holds (Molten
+ * Disaster's "if this spell was kicked") — or given by a `grantsToSpells`
+ * static on the battlefield. */
 export function spellHasSplitSecond(state: GameState, registry: CardRegistry, spell: GameObject): boolean {
   if (spell.kind !== "card") return false;
-  if (registry.get(rulesTextName(spell)).splitSecond) return true;
+  const printed = registry.get(rulesTextName(spell)).splitSecond;
+  if (printed === true) return true;
+  if (printed !== false && staticConditionMet(state, registry, spell, printed)) return true;
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
     if (source === undefined) continue;
