@@ -2329,6 +2329,15 @@ export type TriggerKind =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly from?: readonly ZoneType[];
+      /** An arrival from the battlefield counts as the **permanent** it was:
+       * whose by its controller as it last existed there and matched by
+       * `filter` as it was there (rule 603.10a), a token included — Kaya,
+       * Spirits' Justice's "whenever one or more **creatures you control**
+       * and/or creature cards in your graveyard are put into exile" (`who:
+       * "you"`, `from: ["battlefield", "graveyard"]`, `filter: { type:
+       * "creature" }`): one trigger for both halves of one move. An arrival
+       * from anywhere else is still a card, whose by its owner. */
+      readonly controlledFromBattlefield?: true;
       /** "Whenever a spell or ability **you control** causes one or more
        * cards to be exiled from an opponent's library" (The Madcap Jester):
        * only an exile a resolving spell or ability of this permanent's

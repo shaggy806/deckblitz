@@ -2918,7 +2918,8 @@
   "condition:revealed-shares-type-with-spell",
   "effect:drawn-this-way-trigger",
   "amount:greatest-damage-by-one-source-this-turn",
-  "trigger:next-activated-ability-mana-spent"
+  "trigger:next-activated-ability-mana-spent",
+  "trigger:exiled-creatures-you-control-or-graveyard-cards"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

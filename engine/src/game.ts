@@ -2917,7 +2917,7 @@ export class Game {
   private graveyardArrivalHow: "surveil" | null = null;
   /** The same for cards put into exile, collected alongside — see
    * `withGraveyardEnterBatch`. */
-  private exileEnterBatch: { object: ObjectId; from: ZoneType; owner: PlayerId }[] | null = null;
+  private exileEnterBatch: { object: ObjectId; from: ZoneType; owner: PlayerId; token?: true }[] | null = null;
   /** While a `cards-left-graveyard` event is being announced, each of its
    * cards as it was in the graveyard — what a `leaves-graveyard` trigger's
    * filter is matched against (rule 603.10a). `null` the rest of the time. */
@@ -34548,7 +34548,11 @@ export class Game {
                   0,
                 )
               : trigger.on === "put-into-exile" && event.type === "cards-put-into-exile"
-              ? this.exileArrivals(trigger, event.arrivals, object).length
+              ? // A token stack counted (`controlledFromBattlefield`) as each of its tokens.
+                this.exileArrivals(trigger, event.arrivals, object).reduce(
+                  (n, id) => n + (this.state.objects[id]?.isToken === true ? (this.state.objects[id]?.stackCount ?? 1) : 1),
+                  0,
+                )
               : // "…for each card discarded this way".
                 trigger.on === "discards" && event.type === "cards-discarded"
               ? this.discardedMatching(trigger, event.objects, object, event.unrevealed).length
@@ -60435,7 +60439,10 @@ controlledBy,
         return;
       }
       case "cards-put-into-exile":
-        for (const arrival of event.arrivals) add({ kind: "put-into-exile", player: arrival.owner, object: arrival.object });
+        // Cards: a token is no card (rule 111.1).
+        for (const arrival of event.arrivals) {
+          if (arrival.token !== true) add({ kind: "put-into-exile", player: arrival.owner, object: arrival.object });
+        }
         return;
       case "permanent-tapped": {
         const permanent = this.state.objects[event.object];
@@ -71468,8 +71475,10 @@ controlledBy,
     if (to === "graveyard" && previousZone !== "graveyard" && !object.isToken) {
       this.noteGraveyardArrival(id, previousZone);
     }
-    // …or into exile.
-    if (to === "exile" && previousZone !== "exile" && !object.isToken) {
+    // …or into exile — a token from the battlefield too, marked, for a
+    // trigger that counts permanents exiled (it ceases to exist there at the
+    // next state-based check, rule 704.5d).
+    if (to === "exile" && previousZone !== "exile" && (!object.isToken || previousZone === "battlefield")) {
       this.noteExileArrival(id, previousZone);
     }
     // …or into a hand: the `"put-into-hand"` this-way kind's record (a draw
@@ -71514,7 +71523,7 @@ controlledBy,
       return null;
     }
     const batch: { object: ObjectId; from: ZoneType }[] = [...(held?.seed?.graveyard ?? [])];
-    const exiled: { object: ObjectId; from: ZoneType; owner: PlayerId }[] = [...(held?.seed?.exile ?? [])];
+    const exiled: { object: ObjectId; from: ZoneType; owner: PlayerId; token?: true }[] = [...(held?.seed?.exile ?? [])];
     this.graveyardEnterBatch = batch;
     this.exileEnterBatch = exiled;
     try {
@@ -71612,7 +71621,12 @@ controlledBy,
    * twin, announced with the rest of the move under way, or on its own.
    * Exile is one shared zone, so each arrival names whose card it is. */
   private noteExileArrival(id: ObjectId, from: ZoneType): void {
-    const arrival = { object: id, from, owner: this.state.objects[id].owner };
+    const arrival = {
+      object: id,
+      from,
+      owner: this.state.objects[id].owner,
+      ...(this.state.objects[id].isToken ? { token: true as const } : {}),
+    };
     if (this.exileEnterBatch !== null) {
       this.exileEnterBatch.push(arrival);
     } else {
@@ -71653,18 +71667,26 @@ controlledBy,
    * it says, matching `filter` there. */
   private exileArrivals(
     spec: Extract<TriggerSpec, { on: "put-into-exile" }>,
-    arrivals: readonly { readonly object: ObjectId; readonly from: ZoneType }[],
+    arrivals: readonly { readonly object: ObjectId; readonly from: ZoneType; readonly token?: true }[],
     self: GameObject,
   ): readonly ObjectId[] {
     return arrivals
-      .filter(({ object: id, from }) => {
+      .filter(({ object: id, from, token }) => {
         const card = this.state.objects[id];
         if (card === undefined || card.zone !== "exile") return false;
         if (spec.from !== undefined && !spec.from.includes(from)) return false;
-        if (!this.matchesWhoPlayer(spec.who, card.owner, self)) return false;
+        // "Creatures you control … are put into exile": a permanent, as it
+        // last existed (603.10a), a token too; otherwise only a card counts.
+        const asPermanent = spec.controlledFromBattlefield === true && from === "battlefield";
+        if (token === true && !asPermanent) return false;
+        const whose = asPermanent ? (card.lastKnown?.controller ?? card.controller) : card.owner;
+        if (!this.matchesWhoPlayer(spec.who, whose, self)) return false;
         return (
           spec.filter === undefined ||
-          matchesFilter(this.state, this.registry, id, spec.filter, { you: self.controller })
+          matchesFilter(this.state, this.registry, id, spec.filter, {
+            you: self.controller,
+            ...(asPermanent && card.lastKnown !== undefined ? { lastKnown: true } : {}),
+          })
         );
       })
       .map(({ object }) => object);

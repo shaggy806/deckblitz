@@ -1781,12 +1781,17 @@ export type GameEvent =
        * zone, so it's the owner that says whose library (or graveyard) a
        * card left — public even for a card exiled face down (rule 406.3
        * hides only its face), and still known once the card has gone back
-       * (cascade's misses, rule 702.85a). Tokens aren't cards. */
+       * (cascade's misses, rule 702.85a). Tokens aren't cards (rule 111.1):
+       * a token put into exile from the battlefield in the same move is
+       * there marked `token`, for a trigger that counts permanents (a
+       * `put-into-exile` with `controlledFromBattlefield`) and skipped by
+       * everything that counts cards. */
       readonly type: "cards-put-into-exile";
       readonly arrivals: readonly {
         readonly object: ObjectId;
         readonly from: ZoneType;
         readonly owner: PlayerId;
+        readonly token?: true;
       }[];
       /** The controller of the spell or ability whose effect exiled them;
        * absent outside a resolution (a cost, a state-based action). */

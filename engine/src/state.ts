@@ -2892,7 +2892,12 @@ export interface LeftBattlefield {
  * once (`cards-put-into-graveyard`, `cards-put-into-exile`). */
 export interface HeldArrivals {
   readonly graveyard: readonly { readonly object: ObjectId; readonly from: ZoneType }[];
-  readonly exile: readonly { readonly object: ObjectId; readonly from: ZoneType; readonly owner: PlayerId }[];
+  readonly exile: readonly {
+    readonly object: ObjectId;
+    readonly from: ZoneType;
+    readonly owner: PlayerId;
+    readonly token?: true;
+  }[];
 }
 
 /** One permanent waiting on the battlefield for its controller's answer to an

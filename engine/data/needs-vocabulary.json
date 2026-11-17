@@ -8857,6 +8857,10 @@
    "family": "effect:copy-ability",
    "example": "Dynaheir, Invoker Adept"
   },
+  "trigger:exiled-creatures-you-control-or-graveyard-cards": {
+   "family": "trigger:put-into-graveyard",
+   "example": "One put-into-exile trigger over creatures you control exiled from the battlefield (as they last existed, tokens included) and creature cards exiled from your graveyard, as one batch (Kaya, Spirits' Justice): put-into-exile's controlledFromBattlefield."
+  },
   "trigger:one-or-more-become-blocked-batch": {
    "family": "trigger:combat-trigger-extensions",
    "example": "Hezrou"

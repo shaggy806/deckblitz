@@ -260,8 +260,9 @@ export function thisWayEntries(
         if (event.type === "permanent-left-battlefield" && event.toZone === "exile") {
           add(event.object, leftBy(event.object), true);
         } else if (event.type === "cards-put-into-exile") {
-          for (const { object, from } of event.arrivals) {
-            add(object, from === "battlefield" ? leftBy(object) : ownerOf(object), from === "battlefield");
+          // A token's own leave event has counted it (a card's too: `seen`).
+          for (const { object, from, token } of event.arrivals) {
+            if (token !== true) add(object, from === "battlefield" ? leftBy(object) : ownerOf(object), from === "battlefield");
           }
         }
         break;
