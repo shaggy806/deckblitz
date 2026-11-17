@@ -1972,6 +1972,75 @@ function sharedKeywordsOf(
 }
 
 /**
+ * What a `become`'s `sharesKeywords` gives, read once as it resolves (rule
+ * 608.2h) from the permanents `from` names as they are now: each listed
+ * keyword one of them has; with `landwalk`, each landwalk ability among them
+ * (702.14a — a named one as its keyword, any other as its land); with
+ * `protection`, every protection ability among them (702.16a), merged — a
+ * colour, card type, player or quality any of them has protection from.
+ * Granted abilities count as printed ones do (Concerted Effort's ruling: "one
+ * creature with flying and protection from red, one with islandwalk and
+ * protection from green" gives all three both). A static's "doesn't remove"
+ * (702.16n) is the static's, not the ability's, and isn't shared.
+ */
+export function sharedAbilitiesOnBattlefield(
+  state: GameState,
+  registry: CardRegistry,
+  from: readonly ObjectId[],
+  share: { readonly keywords: readonly Keyword[]; readonly protection?: true; readonly landwalk?: true },
+): {
+  readonly keywords: readonly Keyword[];
+  readonly protection?: NonNullable<PtModifier["protection"]>;
+  readonly landwalk: readonly CardFilter[];
+} {
+  const keywords = new Set<Keyword>();
+  const landwalk = new Map<string, CardFilter>();
+  const colors = new Set<Color>();
+  const types = new Set<CardType>();
+  const filters = new Map<string, CardFilter>();
+  const bound = new Map<string, { readonly filter: CardFilter; readonly source: ObjectId }>();
+  const players = new Set<PlayerId>();
+  for (const id of from) {
+    const c = computeCharacteristics(state, registry, id);
+    for (const keyword of share.keywords) if (c.keywords.has(keyword)) keywords.add(keyword);
+    if (share.landwalk === true) {
+      for (const [keyword] of LANDWALK) if (c.keywords.has(keyword)) keywords.add(keyword);
+      for (const land of c.landwalk) landwalk.set(JSON.stringify(land), land);
+    }
+    if (share.protection === true) {
+      const p = c.protectionFrom;
+      for (const color of p.colors) colors.add(color);
+      for (const type of p.types) types.add(type);
+      for (const filter of p.filters) filters.set(JSON.stringify(filter), filter);
+      for (const b of p.boundFilters) bound.set(JSON.stringify(b), b);
+      for (const player of p.players) players.add(player);
+    }
+  }
+  // Protection from everything (an empty filter, 702.16j) covers every other
+  // quality a filter could name.
+  const unbound = [...filters.values()];
+  const everything = unbound.some((filter) => Object.keys(filter).length === 0);
+  const filter: CardFilter | undefined =
+    unbound.length === 0 ? undefined : everything ? {} : unbound.length === 1 ? unbound[0] : { anyOf: unbound };
+  const any = colors.size > 0 || types.size > 0 || filter !== undefined || bound.size > 0 || players.size > 0;
+  return {
+    keywords: [...keywords],
+    ...(any
+      ? {
+          protection: {
+            ...(colors.size > 0 ? { colors: [...colors] } : {}),
+            ...(types.size > 0 ? { types: [...types] } : {}),
+            ...(filter !== undefined ? { filter } : {}),
+            ...(players.size > 0 ? { fromPlayers: [...players] } : {}),
+            ...(bound.size > 0 ? { boundFilters: [...bound.values()] } : {}),
+          },
+        }
+      : {}),
+    landwalk: [...landwalk.values()],
+  };
+}
+
+/**
  * Keyword counters (rule 122.1b): a permanent with a flying, lifelink,
  * vigilance… counter on it has that keyword, in layer 6 alongside every other
  * ability-adding effect. The counter's kind is the keyword's own name here
@@ -6648,6 +6717,7 @@ function computeCharacteristicsUncached(
         protOtherTypes.add(t);
       }
       if (modifier.protection.filter !== undefined) protFilters.push(modifier.protection.filter);
+      for (const bound of modifier.protection.boundFilters ?? []) protBoundFilters.push(bound);
       // Fixed as it resolved; a static's own "opponents" is `protectionPlayers`'.
       const players = modifier.protection.fromPlayers;
       if (players !== undefined && players !== "opponents") for (const p of players) protPlayers.add(p);
@@ -6661,6 +6731,11 @@ function computeCharacteristicsUncached(
     }
     // Granted toxic adds an instance (rule 702.164b), lost the same way.
     if (granted && modifier.toxic !== undefined) toxic += modifier.toxic;
+    // Granted landwalk of an unnamed kind, gone with a later loss of
+    // landwalk (rule 702.14).
+    if (granted && modifier.landwalk !== undefined && !lostAfter(losses, "landwalk", modifier.timestamp)) {
+      landwalk.push(...modifier.landwalk);
+    }
     // Rules about it rather than abilities it has: no loss of abilities
     // ends them.
     if (modifier.canAttackAsThoughNoDefender === true) canAttackAsThoughNoDefender = true;

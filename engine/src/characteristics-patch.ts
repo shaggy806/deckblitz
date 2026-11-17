@@ -10,6 +10,7 @@
 
 import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
 import type { CardType, Keyword, LosableKeyword, StaticAbility, Supertype } from "./cards/define.js";
+import type { CardFilter } from "./filter.js";
 import type { AffectSpec } from "./cards/define.js";
 import type { Color } from "./mana.js";
 import type { PtModifier } from "./state.js";
@@ -99,8 +100,16 @@ export interface CharacteristicsPatch<Pt> extends TypePatch, ColorPatch {
   readonly toughness?: Pt;
 }
 
-/** A patch with its amounts read. */
-export type ResolvedPatch = CharacteristicsPatch<number>;
+/** A patch with its amounts read — and, from a `become`'s `sharesKeywords`
+ * (read as it resolves, rule 608.2h), the protection and landwalk abilities
+ * it gains beside its `keywords`: no card writes these two itself. */
+export type ResolvedPatch = CharacteristicsPatch<number> & {
+  /** Protection it gains (layer 6, rule 702.16), as a `PtModifier`'s. */
+  readonly protection?: NonNullable<PtModifier["protection"]>;
+  /** Landwalk of a kind no named keyword covers it gains (702.14a), each land
+   * as a filter, as a `PtModifier`'s. */
+  readonly landwalk?: readonly CardFilter[];
+};
 
 /**
  * What a copy effect makes different about its copy (rule 707.9b): every field
@@ -199,6 +208,8 @@ export function patchModifier(
     ...(patch.cantHaveKeywords !== undefined ? { cantHaveKeywords: [...patch.cantHaveKeywords] } : {}),
     ...(patch.loseKeywordAbilities !== undefined ? { loseKeywordAbilities: [...patch.loseKeywordAbilities] } : {}),
     ...(patch.toxic !== undefined ? { toxic: patch.toxic } : {}),
+    ...(patch.protection !== undefined ? { protection: patch.protection } : {}),
+    ...(patch.landwalk !== undefined && patch.landwalk.length > 0 ? { landwalk: [...patch.landwalk] } : {}),
     ...(patch.activated !== undefined && patch.activated.length > 0 ? { grantsActivated: [...patch.activated] } : {}),
     ...(patch.triggered !== undefined && patch.triggered.length > 0 ? { grantsTriggered: [...patch.triggered] } : {}),
     ...(patch.static !== undefined && patch.static.length > 0 ? { grantsStatic: [...patch.static] } : {}),

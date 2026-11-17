@@ -1287,6 +1287,8 @@ function becomeTouch(n: Extract<EffectSpec, { kind: "become" }>): { side: Polari
   const body = n.power !== undefined || n.toughness !== undefined || n.keywords !== undefined || (n.addTypes ?? []).includes("creature");
   if (body) return { side: becomePolarity(n), weight: MAJOR };
   if (n.loseKeywords !== undefined) return { side: n.loseKeywords.every((k) => k === "defender") ? "help" : "harm", weight: MINOR };
+  // Keywords and protection shared from other permanents (Concerted Effort).
+  if (n.sharesKeywords !== undefined) return { side: "help", weight: MINOR };
   return { side: "either", weight: MINOR };
 }
 

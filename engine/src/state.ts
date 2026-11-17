@@ -1892,7 +1892,17 @@ export interface PtModifier {
     /** Protection from these players (rule 702.16k), fixed as it resolved
      * (`ProtectionQualities.fromPlayers`). */
     readonly fromPlayers?: "opponents" | readonly PlayerId[];
+    /** Qualities each read with its own object as the filter's source — a
+     * protection shared from a creature that had it from a static ("creatures
+     * of the chosen type" — Riders of Gavony; a `become`'s `sharesKeywords`),
+     * as `Characteristics.protectionFrom.boundFilters`. */
+    readonly boundFilters?: readonly { readonly filter: CardFilter; readonly source: ObjectId }[];
   };
+  /** Layer 6 — landwalk of a kind no named keyword covers it grants (rule
+   * 702.14a), each land as a filter — a `become`'s `sharesKeywords`
+   * (Concerted Effort): gone with a later loss of all abilities or of
+   * landwalk, like a granted keyword. */
+  landwalk?: readonly CardFilter[];
   /** Layer 6 — hexproof from a quality it grants (rule 702.11d — a
    * `grant-protection` with `asHexproof`), gone with a later loss of all
    * abilities or of hexproof (702.11e). */

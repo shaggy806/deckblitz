@@ -225,6 +225,7 @@ import {
   withChangeling,
   lethalDamageOf,
   lethalDamageLeft,
+  sharedAbilitiesOnBattlefield,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
 import {
@@ -45221,6 +45222,8 @@ controlledBy,
         this.phaseOut([this.splitOneFromStack(target.object)], until, held);
       },
       become: (target, patch, duration) => this.become(target, patch, lastingHere(duration)),
+      sharedAbilities: (from, share) =>
+        sharedAbilitiesOnBattlefield(this.state, this.registry, this.battlefieldMatching(controller, from), share),
       becomeAll: (filter, patch, duration, { exceptSource, scopeTo }) => {
         // One effect, one timestamp, over what matches now (rules 613.7b,
         // 611.2c): every match is fixed before the first one changes, and a

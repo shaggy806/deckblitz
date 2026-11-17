@@ -7323,6 +7323,24 @@ export type EffectSpec =
        * gone illegal (rule 608.2b). */
       readonly controlledByTarget?: number;
       readonly duration: PermanentDuration;
+      /**
+       * It also gains each of `keywords` that a permanent matching `from` has
+       * as this resolves — with `landwalk`, each landwalk ability among them
+       * (rule 702.14a), with `protection` each protection ability (702.16a) —
+       * the one-shot form of a static's `sharesKeywords`: "creatures you
+       * control gain flying until end of turn if a creature you control has
+       * flying. The same is true for fear, first strike, double strike,
+       * landwalk, protection, trample, and vigilance" (Concerted Effort:
+       * `filter` and `from` both the creatures you control). Read once, before
+       * anything gains them (608.2h), granted ones counting; what's gained
+       * stays when the creature it came from leaves (its ruling).
+       */
+      readonly sharesKeywords?: {
+        readonly from: CardFilter;
+        readonly keywords: readonly Keyword[];
+        readonly protection?: true;
+        readonly landwalk?: true;
+      };
     } & CharacteristicsPatch<EffectAmount>)
   | {
       /**
@@ -14280,6 +14298,16 @@ export interface EffectApi {
   grantActivatedOf(target: TargetRef | CardFilter, of: TargetRef, duration: PermanentDuration, spendAs?: SpendAs): void;
   /** `target` becomes what `patch` says — see the `"become"` {@link EffectSpec}. */
   become(target: TargetRef, patch: ResolvedPatch, duration: PermanentDuration): void;
+  /** What a `become`'s `sharesKeywords` gives: read now from the battlefield
+   * permanents matching `from`, from this effect's controller's side. */
+  sharedAbilities(
+    from: CardFilter,
+    share: { readonly keywords: readonly Keyword[]; readonly protection?: true; readonly landwalk?: true },
+  ): {
+    readonly keywords: readonly Keyword[];
+    readonly protection?: ResolvedPatch["protection"];
+    readonly landwalk: readonly CardFilter[];
+  };
   /** Every permanent matching `filter` as this begins becomes what `patch`
    * says, under one timestamp — see the `"become"` {@link EffectSpec}. */
   becomeAll(
@@ -21758,8 +21786,21 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "become": {
-      const { kind: _kind, target: on, filter, exceptSource, controlledByTarget, duration, ...patch } = spec;
-      const read = readPatch(patch, ctx);
+      const { kind: _kind, target: on, filter, exceptSource, controlledByTarget, duration, sharesKeywords, ...patch } = spec;
+      let read = readPatch(patch, ctx);
+      if (sharesKeywords !== undefined) {
+        const { from, ...share } = sharesKeywords;
+        const shared = ctx.sharedAbilities(from, share);
+        const keywords = [...new Set([...(read.keywords ?? []), ...shared.keywords])];
+        read = {
+          ...read,
+          ...(keywords.length > 0 ? { keywords } : {}),
+          ...(shared.protection !== undefined ? { protection: shared.protection } : {}),
+          ...(shared.landwalk.length > 0 ? { landwalk: shared.landwalk } : {}),
+        };
+        // Nothing among them to share, and nothing else to become.
+        if (Object.keys(read).length === 0) return;
+      }
       if (filter !== undefined) {
         const scopeTo = scopedController(controlledByTarget, ctx);
         if (controlledByTarget !== undefined && scopeTo === undefined) return;

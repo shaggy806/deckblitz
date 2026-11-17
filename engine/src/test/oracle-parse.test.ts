@@ -19964,6 +19964,27 @@ describe("keywords of the exiled cards used to craft it", () => {
       },
     });
   });
+
+  it("reads Concerted Effort's until-end-of-turn grant as a `become` sharing from the creatures you control", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text:
+        "At the beginning of each upkeep, creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance.",
+    } as never) as unknown as { triggered: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "become",
+      filter: { type: "creature", controlledBy: "you" },
+      duration: "end-of-turn",
+      sharesKeywords: {
+        from: { type: "creature", controlledBy: "you" },
+        keywords: ["flying", "fear", "first-strike", "double-strike", "trample", "vigilance"],
+        protection: true,
+        landwalk: true,
+      },
+    });
+  });
 });
 
 describe("a land played or a spell cast from anywhere other than the hand", () => {

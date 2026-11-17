@@ -2738,6 +2738,7 @@
   "effect:turn-face-up-or-exile-and-cast",
   "static:grants-replacement-effect",
   "static:keywords-of-linked-exile",
+  "effect:share-protection-and-landwalk",
   "effect:random-player-per-permanent",
   "replacement:enters-tapped-if-x",
   "effect:cast-now-grants-abilities",
