@@ -36,7 +36,7 @@ export const choosePile = defineDecision({
         ...(awaiting.faceDown === true ? { faceDown: true } : {}),
         fates: awaiting.fates,
         worth: pileWorth(ctx, seen),
-        whose: pileWhose(ctx, all),
+        whose: pileWhose(ctx, all, awaiting.fates, awaiting.source),
       },
     ];
   },

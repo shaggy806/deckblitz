@@ -8749,3 +8749,13 @@ Each board's die comes up 4.
 ### Dawnbreak Reclaimer: Bob chooses the creature card of yours that may return
 - **Do:** Click "No attacks". In the popup pick Bob's Hill Giant and confirm; once Bob has chosen, click Yes.
 - **Expect:** The popup shows both graveyards, but only Hill Giant can be picked (not your creatures or Bob's Lightning Bolt). Bob chooses Grizzly Bears or Llanowar Elves, then you're asked "Return the chosen cards to the battlefield under their owners' control?". After Yes, Hill Giant is on Bob's side and the card Bob chose on yours.
+
+## Cards exiled, then separated into piles (2026-11-17)
+
+### Brilliant Ultimatum: play a land and cast spells free from the pile you choose
+- **Do:** Cast Brilliant Ultimatum. As Bob, move Forest, Divination and Island to Pile 1 and confirm. Back as Alice, click "Choose pile" under Pile 1, pick Forest and click "Play Forest", then "Cast Divination (free)".
+- **Expect:** Bob's popup reads "… Alice chooses one, and the chosen pile lets its lands be played and its spells be cast free". Yours then reads "you may play or cast one of these without paying its mana cost". After Forest, Island isn't offered (one land a turn); Divination draws you two. Island, Grizzly Bears and Lightning Bolt stay in exile.
+
+### Boneyard Parley: Bob's creature cards come back under your control
+- **Do:** Cast Boneyard Parley on all three creature cards and confirm. As Bob, move Serra Angel to Pile 1 and confirm. Back as Alice, click "Choose pile" under Pile 1.
+- **Expect:** The three are exiled before Bob separates them ("the chosen pile goes onto the battlefield; the other goes into the graveyard"). Serra Angel enters under your control; Hill Giant goes to your graveyard and Grizzly Bears to Bob's.

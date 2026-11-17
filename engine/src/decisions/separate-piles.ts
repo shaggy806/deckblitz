@@ -32,7 +32,7 @@ export const separatePiles = defineDecision({
       ...(awaiting.faceDown === true ? { faceDown: true } : {}),
       fates: awaiting.fates,
       worth: pileWorth(ctx, awaiting.objects),
-      whose: pileWhose(ctx, awaiting.objects),
+      whose: pileWhose(ctx, awaiting.objects, awaiting.fates, awaiting.source),
     },
   ],
 

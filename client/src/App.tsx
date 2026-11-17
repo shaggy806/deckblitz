@@ -970,6 +970,7 @@ const PILE_FATE_TEXT: Record<SeparatePilesAction['fates']['chosen'], string> = {
   other: 'is affected',
   'turned-face-up': 'is turned face up',
   'cast-or-hand': 'lets a spell from it be cast free, and the rest go into the hand',
+  'play-free': 'lets its lands be played and its spells be cast free',
 }
 
 /** "The chosen pile goes into the hand, the other into the graveyard." */
@@ -8409,7 +8410,10 @@ function Table({
 
       {mode === 'cast-now' && castNowAction && castNowPicking && castNowPick === null ? (
         <ZoneViewer
-          title={`${game.nameOf(castNowAction.source)} — you may cast ${
+          title={`${game.nameOf(castNowAction.source)} — you may ${
+            // A land among them is played, not cast (Brilliant Ultimatum, Gix).
+            (castNowAction.lands ?? []).length > 0 ? 'play or cast' : 'cast'
+          } ${
             castNowAction.cards.length === 1 ? 'this spell' : 'one of these'
           }${castNowAction.byPayingLife === true
             ? ' by paying life equal to its mana value'

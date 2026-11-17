@@ -16646,6 +16646,79 @@ function pilesAt(sentences, i, ctx) {
       used: 3,
     };
   }
+  // Cards exiled first, then separated there (`{ thisWay: "exiled" }`):
+  // "Exile the top N cards of your library. An opponent separates those
+  // cards into two piles. You may play lands and cast spells from one of
+  // those piles. If you cast a spell this way, you cast it without paying its
+  // mana cost." (Brilliant Ultimatum)
+  m = new RegExp(`^exile the top ${N} cards of your library\\.$`, "i").exec(s(0));
+  if (
+    m !== null &&
+    /^an opponent separates those cards into two piles\.$/i.test(s(1)) &&
+    /^you may play lands and cast spells from one of those piles\.$/i.test(s(2)) &&
+    /^if you cast a spell this way, you cast it without paying its mana cost\.$/i.test(s(3))
+  ) {
+    const n = numberOf(m[1]);
+    if (typeof n !== "number") return null;
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "exile-from-library", amount: n },
+          {
+            kind: "separate-into-piles",
+            objects: { thisWay: "exiled" },
+            separator: "an-opponent",
+            chooser: "you",
+            chosen: {
+              together: { kind: "cast-now", from: "targets", play: true, free: true, repeat: true },
+              word: "play-free",
+            },
+          },
+        ],
+      },
+      used: 4,
+    };
+  }
+  // "Exile up to N target creature cards from graveyards. An opponent
+  // separates those cards into two piles. Put all cards from the pile of your
+  // choice onto the battlefield under your control and the rest into their
+  // owners' graveyards." (Boneyard Parley); "Exile up to N target permanent
+  // cards from your graveyard and separate them into two piles. An opponent
+  // chooses one of those piles. Put that pile into your hand and the other
+  // into your graveyard." (Split the Spoils)
+  m = new RegExp(
+    `^exile up to ${N} target (.+?) cards from (graveyards|your graveyard)( and separate them into two piles)?\\.$`,
+    "i",
+  ).exec(s(0));
+  if (m !== null) {
+    const n = numberOf(m[1]);
+    const youSeparate = m[4] !== undefined;
+    const fates = youSeparate
+      ? /^an opponent chooses one of those piles\.$/i.test(s(1)) &&
+        /^put that pile into your hand and the other into your graveyard\.$/i.test(s(2))
+        ? { chooser: "an-opponent", ...handGraveyard }
+        : null
+      : /^an opponent separates those cards into two piles\.$/i.test(s(1)) &&
+          /^put all cards from the pile of your choice onto the battlefield under your control and the rest into their owners' graveyards\.$/i.test(
+            s(2),
+          )
+        ? { separator: "an-opponent", chooser: "you", chosen: "battlefield", rest: "graveyard" }
+        : null;
+    const of = graveyardTargetOf(`target ${m[2]} card from ${m[3].toLowerCase() === "graveyards" ? "a graveyard" : "your graveyard"}`);
+    if (typeof n !== "number" || fates === null || of === undefined) return null;
+    const slot = ctx.target({ kind: "any-number", of, max: n });
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "for-each-target", from: slot, effect: { kind: "exile", target: 0 }, simultaneous: true },
+          { kind: "separate-into-piles", objects: { thisWay: "exiled" }, ...fates },
+        ],
+      },
+      used: 3,
+    };
+  }
   // "Reveal (Look at) the top N … and separate them into two piles (a
   // face-down pile and a face-up pile). An opponent chooses one of those
   // piles. Put that pile into your hand and the other into your graveyard."

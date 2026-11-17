@@ -12335,13 +12335,19 @@ export type { CopyExceptions } from "./characteristics-patch.js";
  * - `{ graveyard }`: every card in the effect's controller's graveyard
  *   matching it — Death or Glory's "all creature cards in your graveyard".
  * - `"targets"`: the resolving spell's own target cards still legal, in a
- *   graveyard (Split the Spoils' "up to five target permanent cards from
- *   your graveyard").
+ *   graveyard.
+ * - `{ thisWay: "exiled" }`: the cards this resolution exiled before it,
+ *   still in exile (rule 400.7: the effect that moved them finds them there)
+ *   — "**Exile** up to five target permanent cards from your graveyard **and
+ *   separate them** into two piles" (Split the Spoils), "Exile the top five
+ *   cards of your library. An opponent separates **those cards**" (Brilliant
+ *   Ultimatum). Separated face up, as they were exiled.
  */
 export type PileObjects =
   | { readonly libraryTop: EffectAmount; readonly reveal?: true }
   | { readonly permanents: CardFilter; readonly whose: PlayerRef }
   | { readonly graveyard: CardFilter }
+  | { readonly thisWay: "exiled" }
   | "targets";
 
 /**
@@ -12355,7 +12361,10 @@ export type PileObjects =
  * byItsController: true } }`. `{ together }` applies its effect once, with the
  * pile's objects in the target slots from 0 — Abstract Performance's "You may
  * cast a spell from among them without paying its mana cost. Put the rest into
- * your hand" — `word` saying what that amounts to. `"library-bottom"` is "the
+ * your hand" — `word` saying what that amounts to; Brilliant Ultimatum's "you
+ * may play lands and cast spells from one of those piles … without paying its
+ * mana cost" is `{ together: { kind: "cast-now", from: "targets", play: true,
+ * free: true, repeat: true }, word: "play-free" }`. `"library-bottom"` is "the
  * other on the bottom of your library **in any order**" (Jace, Architect of
  * Thought): each owner arranges their own cards (rule 401.4), asked only when
  * the order is a choice.
@@ -12382,7 +12391,9 @@ export interface ExilePileSpec {
  * sacrifice, destruction, exile, a bounce) and `"other"` for anything else.
  * `"turned-face-up"`: Hostile Negotiations' "turn a pile of your choice face
  * up". `"cast-or-hand"`: one spell from it may be cast free, the rest go to the
- * hand (Abstract Performance).
+ * hand (Abstract Performance). `"play-free"`: its lands may be played and its
+ * spells cast without paying their mana costs, the rest staying where they are
+ * (Brilliant Ultimatum).
  */
 export type PileFateWord =
   | "hand"
@@ -12393,7 +12404,8 @@ export type PileFateWord =
   | "lose"
   | "other"
   | "turned-face-up"
-  | "cast-or-hand";
+  | "cast-or-hand"
+  | "play-free";
 
 /**
  * A keyword ability given to a card in a graveyard (rule 604.1 — a static's
@@ -12442,7 +12454,9 @@ export type ResolvedPileObjects =
   | { readonly libraryTop: number; readonly reveal: boolean }
   | { readonly permanents: CardFilter; readonly whose: PlayerId | undefined }
   | { readonly graveyard: CardFilter }
-  | { readonly cards: readonly ObjectId[] };
+  /** Cards still in `zone`: the spell's own targets in a graveyard, or what
+   * this resolution exiled. */
+  | { readonly cards: readonly ObjectId[]; readonly zone: "graveyard" | "exile" };
 
 /** See the `look-and-choose` effect's `leftoverIf`. */
 export interface GuessProposition {
@@ -24094,8 +24108,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const what = spec.objects;
         const begun = ctx.beginPiles(
           what === "targets"
-            ? { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
-            : "libraryTop" in what
+            ? { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])), zone: "graveyard" }
+            : "thisWay" in what
+              ? { cards: ctx.thisWay(what.thisWay).map((entry) => entry.object), zone: "exile" }
+              : "libraryTop" in what
               ? { libraryTop: amountValue(what.libraryTop, ctx), reveal: what.reveal === true }
               : "permanents" in what
                 ? { permanents: what.permanents, whose: resolvePlayerRef(what.whose, ctx) }

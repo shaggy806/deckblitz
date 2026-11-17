@@ -42950,8 +42950,16 @@ controlledBy,
           );
           return { objects, lookers: everyone };
         }
-        // The spell's own target cards, still in a graveyard (rule 608.2b).
-        return { objects: what.cards.filter((id) => this.state.objects[id]?.zone === "graveyard"), lookers: everyone };
+        // The spell's own target cards, still in a graveyard (rule 608.2b);
+        // the cards this resolution exiled, still in exile (rule 400.7) and
+        // face up.
+        return {
+          objects: what.cards.filter((id) => {
+            const card = this.state.objects[id];
+            return card?.zone === what.zone && card.exiledFaceDown === undefined;
+          }),
+          lookers: everyone,
+        };
       },
       askSeparatePiles: (separator, objects, chooser, faceDown, fates, anOpponentChooses) => {
         if (this.state.players[separator]?.hasLost !== false) return false;

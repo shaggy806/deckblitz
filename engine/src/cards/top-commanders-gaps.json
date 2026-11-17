@@ -2888,7 +2888,8 @@
   "effect:delayed-trigger-next-activation",
   "amount:excess-damage-of-trigger-event",
   "trigger:gains-life-from-source-filter",
-  "trigger:watched-object-own-controller"
+  "trigger:watched-object-own-controller",
+  "effect:separate-exiled-cards-into-piles"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -29,13 +29,25 @@ export function pileWorth(ctx: DecisionReadCtx, ids: readonly ObjectId[]): Recor
   return worth;
 }
 
-/** Who each object is about: a permanent's controller, a card's owner. */
-export function pileWhose(ctx: DecisionReadCtx, ids: readonly ObjectId[]): Record<ObjectId, PlayerId> {
+/** Who each object is about: a permanent's controller, a card's owner — or,
+ * when a pile's fate is `"battlefield"` (under the effect's controller's
+ * control: Boneyard Parley's creature cards from every graveyard), a card's
+ * as the effect's controller's, the player who would get it. */
+export function pileWhose(
+  ctx: DecisionReadCtx,
+  ids: readonly ObjectId[],
+  fates?: { readonly chosen: PileFateWord; readonly rest?: PileFateWord },
+  source?: ObjectId,
+): Record<ObjectId, PlayerId> {
+  const enteringUnder =
+    fates !== undefined && (fates.chosen === "battlefield" || fates.rest === "battlefield") && source !== undefined
+      ? ctx.state.objects[source]?.controller
+      : undefined;
   const whose: Record<ObjectId, PlayerId> = {};
   for (const id of ids) {
     const object = ctx.state.objects[id];
     if (object === undefined) continue;
-    whose[id] = object.zone === "battlefield" ? object.controller : object.owner;
+    whose[id] = object.zone === "battlefield" ? object.controller : (enteringUnder ?? object.owner);
   }
   return whose;
 }
@@ -73,7 +85,12 @@ export function pileFateValue(
   unseen = 2,
 ): number {
   if (fate === undefined) return 0;
-  const sign = fate === "hand" || fate === "battlefield" || fate === "cast-or-hand" ? 1 : fate === "lose" ? -1 : 0;
+  const sign =
+    fate === "hand" || fate === "battlefield" || fate === "cast-or-hand" || fate === "play-free"
+      ? 1
+      : fate === "lose"
+        ? -1
+        : 0;
   if (sign === 0) return 0;
   let value = 0;
   for (const id of pile) {

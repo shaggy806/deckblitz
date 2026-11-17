@@ -17198,6 +17198,61 @@ describe("manifest or cloak with a choosable source, piles in exile, a return fa
     });
   });
 
+  it("reads cards exiled, then separated into piles", () => {
+    const ultimatum = read(
+      "Sorcery",
+      "Exile the top five cards of your library. An opponent separates those cards into two piles. You may play lands and cast spells from one of those piles. If you cast a spell this way, you cast it without paying its mana cost.",
+    );
+    expect(ultimatum.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", amount: 5 },
+        {
+          kind: "separate-into-piles",
+          objects: { thisWay: "exiled" },
+          separator: "an-opponent",
+          chooser: "you",
+          chosen: { together: { kind: "cast-now", from: "targets", play: true, free: true, repeat: true }, word: "play-free" },
+        },
+      ],
+    });
+    const parley = read(
+      "Sorcery",
+      "Exile up to five target creature cards from graveyards. An opponent separates those cards into two piles. Put all cards from the pile of your choice onto the battlefield under your control and the rest into their owners' graveyards.",
+    );
+    expect(parley.targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "any", filter: { type: "creature" } }, max: 5 },
+    ]);
+    expect(parley.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "for-each-target", from: 0, effect: { kind: "exile", target: 0 }, simultaneous: true },
+        {
+          kind: "separate-into-piles",
+          objects: { thisWay: "exiled" },
+          separator: "an-opponent",
+          chooser: "you",
+          chosen: "battlefield",
+          rest: "graveyard",
+        },
+      ],
+    });
+    const spoils = read(
+      "Sorcery",
+      "Exile up to five target permanent cards from your graveyard and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. (Piles can be empty.)",
+    );
+    expect(spoils.targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "you", filter: { notTypes: ["instant", "sorcery"] } }, max: 5 },
+    ]);
+    expect(spoils.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "for-each-target", from: 0, effect: { kind: "exile", target: 0 }, simultaneous: true },
+        { kind: "separate-into-piles", objects: { thisWay: "exiled" }, chooser: "an-opponent", chosen: "hand", rest: "graveyard" },
+      ],
+    });
+  });
+
   it("reads a flicker back face down and Yarus's return", () => {
     const shore = read(
       "Creature — Elemental",

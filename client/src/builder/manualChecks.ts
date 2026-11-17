@@ -13239,4 +13239,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { gy: ['Hill Giant', 'Lightning Bolt'] },
     }),
   ),
+  // --- Cards exiled, then separated into piles (2026-11-17) ------------------------
+  preset(
+    'Brilliant Ultimatum: play a land and cast spells free from the pile you choose',
+    board({
+      you: {
+        bf: ['Plains*2', 'Island*3', 'Swamp*2'],
+        hand: ['Brilliant Ultimatum'],
+        lib: ['Forest', 'Divination', 'Grizzly Bears', 'Island', 'Lightning Bolt'],
+      },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    "Boneyard Parley: Bob's creature cards come back under your control",
+    board({
+      you: { bf: ['Swamp*7'], hand: ['Boneyard Parley'], gy: ['Hill Giant'] },
+      opp: { gy: ['Grizzly Bears', 'Serra Angel'], human: true },
+    }),
+  ),
 ]
