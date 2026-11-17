@@ -21570,3 +21570,17 @@ describe("activated abilities of cards in your graveyard cost less (Embalmer's T
     });
   });
 });
+
+describe("loyalty abilities of planeswalkers you control twice this turn (Urza Assembles the Titans)", () => {
+  it("Oath of Teferi's static as a timed static for the turn", () => {
+    const line = "You may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.";
+    const r = parseEffect(line, { targets: [], tokenFor: () => null, onStack: true });
+    expect(r.todo).toEqual([]);
+    expect(r.effect).toEqual({
+      kind: "timed-static",
+      duration: "end-of-turn",
+      static: [{ affects: { scope: "self" }, loyaltyActivationsEachTurn: 2, text: line }],
+      text: line,
+    });
+  });
+});

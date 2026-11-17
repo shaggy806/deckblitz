@@ -6610,7 +6610,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   ("as though those creatures had haste" — Thousand-Year Elixir, rule 302.6: {T}
   and {Q} costs only, mana abilities too); `loyaltyActivationsEachTurn: 2` (Oath
   of Teferi, rule 606.3; `{ times: 2, of: "self" }` for the permanent's own
-  alone — Urza, Planeswalker's "the loyalty abilities of Urza"); `boastsEachOfYourTurns: 2` (Birgi, God of Storytelling,
+  alone — Urza, Planeswalker's "the loyalty abilities of Urza"; a `timed-static`
+  carrying `2` is "…planeswalkers you control twice **this turn**", every one
+  you control that turn, later arrivals too — Urza Assembles the Titans'
+  chapter III, rule 611.2c); `boastsEachOfYourTurns: 2` (Birgi, God of Storytelling,
   rule 702.142b); `activate`'s `only: "loyalty"` (The Immortal Sun),
   its `except: ["loyalty"]` (Overwhelming Splendor) and
   `cast`'s `unless: "sorcery-timing"` ("each opponent can cast spells only any time

@@ -377,6 +377,10 @@ describe("what is read off an emblem", () => {
     "costModification",
     "untapLimit",
     "loyaltyAtInstantSpeed",
+    // `controlsActiveStatic`: Urza Assembles the Titans' "twice this turn"
+    // (a timed static), and boasting twice.
+    "loyaltyActivationsEachTurn",
+    "boastsEachOfYourTurns",
     // The untap and draw steps (Teferi, Who Slows the Sunset).
     "untapsDuringOthersUntap",
     "drawsInOpponentsDrawStep",

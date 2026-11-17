@@ -2643,7 +2643,9 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * how many times this permanent's controller may. Two of them are still
    * twice (its ruling). `{ times: 2, of: "self" }` is this permanent's own
    * loyalty abilities alone: "You may activate the loyalty abilities of
-   * **Urza** twice each turn rather than only once" (Urza, Planeswalker). */
+   * **Urza** twice each turn rather than only once" (Urza, Planeswalker).
+   * `2` in a `timed-static` is "…twice **this turn**" (Urza Assembles the
+   * Titans' chapter III), read off the emblem it rides. */
   readonly loyaltyActivationsEachTurn?: 2 | { readonly times: 2; readonly of: "self" };
   /** "Creatures you control can boast **twice** during each of your turns
    * rather than once" (Birgi, God of Storytelling, rule 702.142b): how many

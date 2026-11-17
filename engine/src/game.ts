@@ -30087,14 +30087,19 @@ export class Game {
   }
 
   /** Whether a permanent `player` controls has a static ability `which`,
-   * applying now. */
+   * applying now — or an emblem of theirs does (rule 113.6p), a `timed-static`
+   * "this turn" one among them: Urza Assembles the Titans' "you may activate
+   * the loyalty abilities of planeswalkers you control twice this turn", a
+   * rule for the turn that reaches planeswalkers arriving later (611.2c). */
   private controlsActiveStatic(player: PlayerId, which: (ability: StaticAbility) => boolean): boolean {
-    return this.state.zones.shared.battlefield.some((id) => {
+    const onBattlefield = this.state.zones.shared.battlefield.some((id) => {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player) return false;
       if (hasLostAbilities(this.state, this.registry, source)) return false;
       return this.registry.get(rulesTextName(source)).static.some((ability) => which(ability) && this.staticActive(source, ability));
     });
+    if (onBattlefield || this.state.emblems.length === 0) return onBattlefield;
+    return emblemStatics(this.state, player).some(({ source, ability }) => which(ability) && this.staticActive(source, ability));
   }
 
   /**

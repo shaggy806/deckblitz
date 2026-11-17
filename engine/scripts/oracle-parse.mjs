@@ -7670,6 +7670,13 @@ export function parseSentence(sentence, ctx) {
   if (re("you may activate loyalty abilities of ~ twice this turn rather than only once").test(s)) {
     return { kind: "loyalty-activations", target: "source", times: 2, duration: "end-of-turn" };
   }
+  // "…of planeswalkers you control twice this turn" (Urza Assembles the
+  // Titans): Oath of Teferi's static for the turn, every planeswalker you
+  // control that turn — a rule, so later arrivals too (rule 611.2c).
+  if (re("you may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once").test(s)) {
+    const said = s.charAt(0).toUpperCase() + s.slice(1);
+    return { kind: "timed-static", duration: "end-of-turn", static: [{ affects: { scope: "self" }, loyaltyActivationsEachTurn: 2, text: said }], text: said };
+  }
   // "You may activate ~'s loyalty ability two more times this turn" (Comet,
   // Stellar Pup): additive, its printed loyalty abilities only.
   if ((m = re("you may activate ~'s loyalty abilit(?:y|ies) (one|two|three|four) more times? this turn").exec(s))) {

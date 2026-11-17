@@ -361,6 +361,16 @@ already ran as a `prevent-half` step, spent as a "next time" shield. Two apply o
 what's left (the ruling: 5 → 3 → 2). Fixed with it: a partial prevention step (`prevent-n`, `prevent-all-but`,
 `prevent-half`) that prevents none of the damage no longer uses its shield up (rule 609.7b). Dark Sphere (rank
 11702). `test/chosen-source-prevent-half.test.ts`.
+### Loyalty abilities of planeswalkers you control twice this turn — built 2026-11-17
+
+The key `effect:loyalty-twice-all-your-planeswalkers-this-turn`: a `timed-static` carrying Oath of Teferi's
+`loyaltyActivationsEachTurn: 2` for the turn. `Game.controlsActiveStatic` now reads its controller's emblems
+too (rule 113.6p), which a timed static rides, so every planeswalker they control that turn is reached,
+later arrivals included (rule 611.2c: a rule, not a characteristic); twice beside Oath is still twice (the
+ruling). The scaffolder reads the sentence. Urza Assembles the Titans (rank 12140), with its scry 4 and
+revealed planeswalker into the hand, and a planeswalker of mana value 6 or less from the hand.
+`test/loyalty-twice-all-this-turn.test.ts`.
+
 ### Activated abilities of cards in your graveyard cost less — found built 2026-11-17
 
 The key `static:graveyard-ability-cost-reduction` needed no engine code: `abilityCostModification`'s

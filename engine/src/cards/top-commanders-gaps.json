@@ -20,6 +20,7 @@
     "cost:ward-discard-filter",
     "cost:cumulative-upkeep-gain-control-land",
     "static:graveyard-ability-cost-reduction",
+    "effect:loyalty-twice-all-your-planeswalkers-this-turn",
     "bug:simultaneous-move-with-choice",
     "effect:phase-out-while-you-control-source",
     "effect:mill-from-bottom",
