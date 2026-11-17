@@ -5,6 +5,15 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **B334's prompt and log wording** (found 2026-11-17 by the overnight lane agents). A `choose-modes` asked to
+  pick an opponent or a life total logs as "Alice chose mode(s) 2" in the History (Verdant Mastery, Baleful
+  Mastery, every `offerToAnOpponent`, Reverse the Sands): the log should name the choice. Gorex, the Tombshell's
+  X prompt says "choose X" where it means "how many creature cards to exile" (an `xCost` flag and a label;
+  Harvest Pyre's is the same). The graveyard blitz offer (Sabin, Tenacious Underdog) shows a generic "Cast
+  (blitz)" without its discard or life part. The graveyard-card vote's popup (Custodi Squire) has no source
+  name in its title. Boneyard Parley's pile fate reads "goes onto the battlefield" without "under your control".
+  The Foretell button shows no cost now that Ranar and Cosmos Charger change it.
+
 - **The Pass bar sits over the rightmost hand cards** (found 2026-11-11). At 1366x768 the fixed
   `.priority-actions` bar (Pass, Pass Turn, Auto-pass) covers the lower edges of the fan's last cards, and in the
   lowered tray their whole peek: the pointer moving onto that part of a card is over the bar, outside

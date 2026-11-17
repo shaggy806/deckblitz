@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-984 already implemented / 16 missing
+985 already implemented / 15 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -608,7 +608,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  602  Tamiyo, Inquisitive Student                     5527 decks  {U}              Legendary Creature — Moonfolk Wizard // Legendary Planeswalker — Tamiyo
 [x]  603  Grenzo, Dungeon Warden                          5522 decks  {X}{B}{R}        Legendary Creature — Goblin Rogue
 [x]  604  Karona, False God                               5518 decks  {1}{W}{U}{B}{R}{G} Legendary Creature — Avatar
-[ ]  605  Galea, Kindler of Hope                          5513 decks  {1}{G}{W}{U}     Legendary Creature — Elf Knight
+[x]  605  Galea, Kindler of Hope                          5513 decks  {1}{G}{W}{U}     Legendary Creature — Elf Knight
 [x]  606  Taii Wakeen, Perfect Shot                       5510 decks  {R}{W}           Legendary Creature — Human Mercenary
 [x]  607  Kros, Defense Contractor                        5508 decks  {1}{G}{W}{U}     Legendary Creature — Cat Advisor
 [x]  608  Faldorn, Dread Wolf Herald                      5503 decks  {1}{R}{G}        Legendary Creature — Human Druid

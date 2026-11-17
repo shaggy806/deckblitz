@@ -6,6 +6,21 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **B334's small gaps** (2026-11-17, what the overnight lane agents reported while building keys; none checked
+  beyond the agent's own reading). `thisWay: "exiled"` also counts cards a spell cast *during* the resolution
+  exiled as its cost, because `exileCause` sees `resolvingController` (game.ts ~70509): Invasion of Alara's hand
+  and library-bottom steps, and Gix's and Herald of Amity's shapes, would take them. `counters-distributed`
+  without `atLeastOne` still lets a player choose no creatures for a total above 0 (Blessing of Frost, Feast of
+  the Victorious Dead). A `for-each-target` `simultaneous` `put-onto-battlefield` (Moldgraf Millipede's shape)
+  puts one card onto the battlefield while a Clone among them is still choosing what to copy, so it could copy
+  that card. Bleeding Effect doesn't share a graveyard creature card's "hexproof from [quality]" (its
+  2024-07-05 ruling); `become.sharesKeywords` with a graveyard `from` would cover it. A permission's filter
+  now judges a bestow cast as cast (702.103d, B334); prototype and face-down casts probably still aren't. A
+  `fromGraveyard` `grantsTriggered` isn't read from graveyards (Riftstone Portal's `grantsActivated` is). A
+  static's `grantsActivated` with `onlyBy: "granter"` falls back to the permanent's controller (only a
+  resolving grant binds the granter; no card needs it yet). Bot cost estimates made outside the cast offer
+  don't see `SpellCastClause.via` (Catalyst Stone's flashback reduction).
+
 - **B294's small gaps** (2026-11-09, what the re-attempt's agents and reader reported while writing cards).
   Built since: `CardFilter.notThisWay`'s player scope (`thisWayBy: "you"`, 2026-11-12: Deadly Brew, Rise of the
   Witch-king), and Firion is authored. Left, reported and never checked (audited 2026-11-15: every card named
