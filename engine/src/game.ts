@@ -41182,6 +41182,8 @@ export class Game {
             : {}),
           ...(read?.by !== undefined ? { by: read.by, source } : {}),
           ...(read?.excess === true ? { excess: true as const } : {}),
+          ...(read?.oneSource === true ? { oneSource: true as const } : {}),
+          ...(read?.oneRecipient === true ? { oneRecipient: true as const } : {}),
         });
       },
       // The opponents attacked as attackers were declared this combat

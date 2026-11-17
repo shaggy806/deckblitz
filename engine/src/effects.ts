@@ -1310,6 +1310,17 @@ export type EffectAmount =
        * share it out, but their excess sums to what they dealt together past
        * lethal damage (rule 120.10). */
       readonly excess?: true;
+      /** The most any one source dealt (all of it, to anything, at any time
+       * this turn) rather than the sum — each object in each stint its own
+       * source (rule 400.7), a token of a stack that dealt it as one its
+       * share. */
+      readonly oneSource?: true;
+      /** The most dealt to any one permanent or player, each permanent in
+       * each stint its own. With `oneSource`, the most one source dealt to
+       * one of them: Impact Resonance's "the greatest amount of damage dealt
+       * by a source to a permanent or player this turn" (`who:
+       * "each-player"`; its ruling: Earthquake's 5 to each of six is 5). */
+      readonly oneRecipient?: true;
     }
   | {
       readonly thisWay: ThisWayKind;
@@ -12877,6 +12888,8 @@ export interface EffectApi {
       readonly to?: "you" | "source" | "trigger-recipient";
       readonly by?: DamageSourceClause;
       readonly excess?: true;
+      readonly oneSource?: true;
+      readonly oneRecipient?: true;
     },
   ): number;
   /** See the `{ turnHistory }` {@link EffectAmount}: a journal read. */
@@ -17654,6 +17667,8 @@ export function signedAmountValue(
       ...(amount.to !== undefined ? { to: amount.to } : {}),
       ...(amount.by !== undefined ? { by: amount.by } : {}),
       ...(amount.excess === true ? { excess: true as const } : {}),
+      ...(amount.oneSource === true ? { oneSource: true as const } : {}),
+      ...(amount.oneRecipient === true ? { oneRecipient: true as const } : {}),
     });
   }
   if ("turnHistory" in amount) {

@@ -2261,12 +2261,18 @@ export function damageDealtThisTurn(
      * each stint its own source, and an entry a token stack dealt as one
      * (`count`, its tokens each dealing a share) read as one token's. */
     readonly oneSource?: true;
+    /** The most dealt to any one permanent or player rather than the sum:
+     * each permanent in each stint its own recipient (rule 400.7). With
+     * `oneSource`, the most one source dealt to one of them — Impact
+     * Resonance's "the greatest amount of damage dealt by a source to a
+     * permanent or player this turn". */
+    readonly oneRecipient?: true;
     /** Only the excess part of each (the entry's `excess`, rule 120.4a). */
     readonly excess?: true;
   } = {},
 ): number {
   let n = 0;
-  const bySource = read.oneSource === true ? new Map<string, number>() : undefined;
+  const bySource = read.oneSource === true || read.oneRecipient === true ? new Map<string, number>() : undefined;
   for (const dealt of entriesThisTurn(state, "damage")) {
     if (read.from !== undefined && (dealt.object !== read.from.object || dealt.stint !== read.from.stint)) continue;
     if (dealt.player === undefined || !players.includes(dealt.player)) continue;
@@ -2286,9 +2292,15 @@ export function damageDealtThisTurn(
     if (by?.other === true && dealt.object === read.source) continue;
     // One source's: a token of a stack that dealt it as one dealt its share.
     const dealtAmount = read.excess === true ? (dealt.excess ?? 0) : (dealt.amount ?? 0);
-    const share = read.from !== undefined || bySource !== undefined ? dealtAmount / (dealt.count ?? 1) : dealtAmount;
+    const share = read.from !== undefined || read.oneSource === true ? dealtAmount / (dealt.count ?? 1) : dealtAmount;
     if (bySource !== undefined) {
-      const key = `${dealt.object}@${dealt.stint ?? ""}`;
+      const recipient =
+        dealt.target === undefined
+          ? ""
+          : dealt.target.kind === "player"
+            ? `player:${dealt.target.player}`
+            : `${dealt.target.object}@${dealt.targetStint ?? ""}`;
+      const key = `${read.oneSource === true ? `${dealt.object}@${dealt.stint ?? ""}` : ""}>${read.oneRecipient === true ? recipient : ""}`;
       bySource.set(key, (bySource.get(key) ?? 0) + share);
       continue;
     }

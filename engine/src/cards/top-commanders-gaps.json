@@ -2916,7 +2916,8 @@
   "effect:return-from-graveyard-set-types-food",
   "condition:revealed-shares-type-with-spell",
   "condition:revealed-shares-type-with-spell",
-  "effect:drawn-this-way-trigger"
+  "effect:drawn-this-way-trigger",
+  "amount:greatest-damage-by-one-source-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
