@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-976 already implemented / 24 missing
+978 already implemented / 22 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -606,7 +606,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  600  Bjorna, Nightfall Alchemist                     5541 decks  {U}{R}           Legendary Creature — Human
 [x]  601  Candlekeep Sage                                 5529 decks  {2}{U}           Legendary Enchantment — Background
 [x]  602  Tamiyo, Inquisitive Student                     5527 decks  {U}              Legendary Creature — Moonfolk Wizard // Legendary Planeswalker — Tamiyo
-[ ]  603  Grenzo, Dungeon Warden                          5522 decks  {X}{B}{R}        Legendary Creature — Goblin Rogue
+[x]  603  Grenzo, Dungeon Warden                          5522 decks  {X}{B}{R}        Legendary Creature — Goblin Rogue
 [x]  604  Karona, False God                               5518 decks  {1}{W}{U}{B}{R}{G} Legendary Creature — Avatar
 [ ]  605  Galea, Kindler of Hope                          5513 decks  {1}{G}{W}{U}     Legendary Creature — Elf Knight
 [x]  606  Taii Wakeen, Perfect Shot                       5510 decks  {R}{W}           Legendary Creature — Human Mercenary
@@ -622,7 +622,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  616  Solphim, Mayhem Dominus                         5457 decks  {2}{R}{R}        Legendary Creature — Phyrexian Horror
 [x]  617  Syr Vondam, Sunstar Exemplar                    5456 decks  {W}{B}           Legendary Creature — Human Knight
 [x]  618  Riku of Two Reflections                         5447 decks  {2}{G}{U}{R}     Legendary Creature — Human Wizard
-[ ]  619  Ian Malcolm, Chaotician                         5441 decks  {1}{U}{R}        Legendary Creature — Human Scientist
+[x]  619  Ian Malcolm, Chaotician                         5441 decks  {1}{U}{R}        Legendary Creature — Human Scientist
 [x]  620  Asmoranomardicadaistinaculdacar                 5439 decks                   Legendary Creature — Human Wizard
 [x]  621  Minthara, Merciless Soul                        5434 decks  {2}{W}{B}        Legendary Creature — Elf Cleric
 [x]  622  Radagast of Rhosgobel                           5433 decks  {2}{G}{G}        Legendary Creature — Avatar Wizard
