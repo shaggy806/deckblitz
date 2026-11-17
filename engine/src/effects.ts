@@ -16177,8 +16177,12 @@ function applyPlayersPayAnyAmount(
     const amount = Math.max(0, Math.floor(ctx.x));
     if (amount > 0) {
       // Mana was paid as the question was answered; life is paid here, its
-      // answer read only now (rule 119.4: paying it is losing it).
-      if (spec.resource === "life") ctx.loseLife(paying, amount);
+      // answer read only now (rule 119.4: paying it is losing it), and
+      // announced as a payment ("whenever you pay life" — Font of Agonies).
+      if (spec.resource === "life") {
+        ctx.loseLife(paying, amount);
+        ctx.lifePaid(paying, amount);
+      }
       paid = [...paid, { player: paying, amount }];
       anyPaid = true;
     }

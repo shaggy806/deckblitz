@@ -15,6 +15,7 @@ import {
   A,
   B,
   cast,
+  counters,
   graveyard,
   hand,
   lands,
@@ -56,6 +57,16 @@ describe("Plunge into Darkness", () => {
     expect(zone(game, top)).toBe("exile");
     expect(zone(game, third)).toBe("exile");
     expect(zone(game, bottom)).toBe("library");
+  });
+
+  it("the life is paid, for 'whenever you pay life' (Font of Agonies)", () => {
+    const { game } = table();
+    lands(game, "Swamp", 2);
+    const font = spawn(game, "Font of Agonies");
+    cast(game, toHand(game, "Plunge into Darkness"), { modes: [1], settle: false });
+    payLife(game, A, 3);
+    settle(game);
+    expect(counters(game, font, "blood")).toBe(3);
   });
 
   it("paying 0 looks at nothing", () => {
