@@ -2815,7 +2815,8 @@
   "effect:copy-counter-kinds-just-put",
   "effect:remove-counters-from-among",
   "effect:remove-counters-from-among",
-  "effect:discard-unless-sacrifice-per-card"
+  "effect:discard-unless-sacrifice-per-card",
+  "effect:attach-to-chosen-creature"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

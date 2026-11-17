@@ -61471,9 +61471,17 @@ controlledBy,
       return false;
     }
     // "…attached to target creature": an Aura card that can't legally enchant
-    // it isn't offered (rule 303.4i; Cass, Hand of Vengeance's ruling).
+    // it isn't offered (rule 303.4i; Cass, Hand of Vengeance's ruling). Onto
+    // the battlefield with nothing named, an Aura with nothing it could
+    // enchant isn't offered either (303.4g; Vault 101: Birthday Party's
+    // ruling: "you can't choose to put it onto the battlefield at all").
     const host = destination === "battlefield" ? opts.attachTo : undefined;
-    const offered = host === undefined ? eligible : eligible.filter((id) => this.couldEnterAttached(id, host, player));
+    const offered =
+      host !== undefined
+        ? eligible.filter((id) => this.couldEnterAttached(id, host, player))
+        : destination === "battlefield"
+          ? eligible.filter((id) => this.couldEnterBattlefield(id, opts.underOwners === true ? undefined : player))
+          : eligible;
     if (offered.length === 0) return false;
     this.state.awaiting = {
       kind: "choose-from-zone",
