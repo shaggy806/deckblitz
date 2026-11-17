@@ -6,6 +6,7 @@
     "trigger:first-cycle-each-turn",
     "effect:delayed-return-target-and-sacrificed-card",
     "amount:trigger-batch-total-power-last-known",
+    "cost:alternative-cost-discard-shares-color",
     "effect:control-while-player-is-monarch",
     "effect:token-copy-each-other",
     "replacement:explore-replacement-scry-first",

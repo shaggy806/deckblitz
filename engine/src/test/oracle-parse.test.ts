@@ -3994,6 +3994,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       flash: true,
       filter: { type: "creature", manaValue: { op: "lte", n: 3 } },
     });
+    // Dream Halls: a discard sharing a color, every player's spells.
+    expect(grantOf("Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.")).toEqual({
+      mana: "{0}",
+      anyPlayer: true,
+      discard: { sharesColor: true, text: "a card that shares a color with that spell" },
+    });
     expect(grantOf("Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost.")).toEqual({
       mana: "{0}",
       oncePerTurn: true,

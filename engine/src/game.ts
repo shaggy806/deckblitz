@@ -838,6 +838,15 @@ interface AlternativeCostOffer {
   readonly returnToHand?: { readonly filter: CardFilter; readonly count?: number; readonly text: string };
   /** Energy paid with it — an `alternativeCostForSpells`' `energy`. */
   readonly payEnergy?: number;
+  /** A card discarded with it: a card's own (Abolish's Plains card, Foil's
+   * `others`) or a grant's (Dream Halls' card that shares a color with the
+   * spell, `sharesColor`) — bound to the spell by `altCostDiscardFilter`. */
+  readonly discard?: {
+    readonly filter?: CardFilter;
+    readonly sharesColor?: true;
+    readonly others?: number;
+    readonly text: string;
+  };
   /** Life equal to the spell's mana value, paid with it (rule 119.4). */
   readonly payLifeManaValue?: true;
   /** Who is had to gain how much life for it (Invigorate). */
@@ -6376,6 +6385,13 @@ export class Game {
                     ...(def.alternativeCost.also !== undefined ? [def.alternativeCost.also.text] : []),
                   ].join(", "),
                 }
+              : altCost === true && (!ownAltPaid || def.alternativeCost === null) && alternative?.discard !== undefined
+                ? {
+                    altCostText: [
+                      ...(alternative.mana !== "{0}" ? [`pay ${alternative.mana}`] : []),
+                      `discard ${alternative.discard.text}`,
+                    ].join(", "),
+                  }
               : altCost === true && alternative?.payEnergy !== undefined
                 ? {
                     altCostText: [
@@ -24441,11 +24457,14 @@ export class Game {
     }
     // "Discard a Plains card rather than pay" (Abolish), "an Island card and
     // another card" (Foil): chosen as the cost is paid (601.2h), the
-    // filtered card first, then the others from what's left.
-    const altDiscard = altCost ? this.ownAltCost(def)?.discard : undefined;
+    // filtered card first, then the others from what's left. A grant's
+    // (Dream Halls) the same, its card sharing a color with the spell now on
+    // the stack.
+    const altDiscard = altCost ? (this.ownAltCost(def)?.discard ?? alternativeCost?.discard) : undefined;
     if (altDiscard !== undefined) {
+      const altDiscardFilter = this.altCostDiscardFilter(altDiscard, cardId);
       this.payCostDiscard(cardId, cardId, () => {
-        this.discardByEffect({ kind: "player", player }, 1, false, altDiscard.filter);
+        this.discardByEffect({ kind: "player", player }, 1, false, altDiscardFilter);
         if ((altDiscard.others ?? 0) > 0) this.discardByEffect({ kind: "player", player }, altDiscard.others ?? 0);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
@@ -60490,9 +60509,20 @@ controlledBy,
           }),
         )
       ) {
+        // "Discard a card that shares a color with that spell" (Dream Halls):
+        // only while the hand holds one besides the spell, read as the spell
+        // it would be (601.2h, 601.3e).
+        if (
+          grant.discard !== undefined &&
+          this.withFace(cardId, Math.max(0, card?.faces?.indexOf(def.name) ?? 0), () =>
+            this.discardCandidates(caster, this.altCostDiscardFilter(grant.discard!, cardId), cardId).length === 0)
+        ) {
+          continue;
+        }
         seen.add(ability);
         out.push({
           mana: grant.mana,
+          ...(grant.discard !== undefined ? { discard: grant.discard } : {}),
           ...(grant.energy !== undefined ? { payEnergy: grant.energy } : {}),
           ...(grant.flash === true ? { flash: true as const } : {}),
           ...(grant.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
@@ -60520,6 +60550,19 @@ controlledBy,
     // permission, for life (see above).
     if (libraryTopPayLife) out.push({ mana: "{0}", payLifeManaValue: true });
     return out;
+  }
+
+  /** The cards an alternative cost's discard may take for `spell`: its
+   * `filter`, and with `sharesColor` a color in common with the spell as it
+   * is now (rule 105.2) — none for a colorless one. */
+  private altCostDiscardFilter(
+    discard: NonNullable<AlternativeCostOffer["discard"]>,
+    spell: ObjectId,
+  ): CardFilter | undefined {
+    if (discard.sharesColor !== true) return discard.filter;
+    const object = this.state.objects[spell];
+    const colors = object === undefined ? [] : [...effectiveColors(this.state, this.registry, object)];
+    return { ...(discard.filter ?? {}), sharesColorBound: { objects: [spell], colors } };
   }
 
   /** The `alternativeCostForSpells` statics reaching `caster`'s spells: their

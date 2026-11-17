@@ -22175,6 +22175,19 @@ function parseStatic(line, text) {
       };
     }
   }
+  // "Rather than pay the mana cost for a spell, its controller may discard a
+  // card that shares a color with that spell" (Dream Halls).
+  if (line === "Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.") {
+    return {
+      affects: { scope: "self" },
+      alternativeCostForSpells: {
+        mana: "{0}",
+        anyPlayer: true,
+        discard: { sharesColor: true, text: "a card that shares a color with that spell" },
+      },
+      text,
+    };
+  }
   // "Once during each of your turns, you may cast an instant or sorcery spell
   // from your hand without paying its mana cost" (Zaffai and the Tempests), "a
   // spell from your hand or the top of your library" (One with the Multiverse).

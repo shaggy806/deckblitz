@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A granted alternative cost of a discarded card that shares a color — built 2026-11-17
+
+The key `cost:alternative-cost-discard-shares-color`: `alternativeCostForSpells` takes `discard: { filter?,
+sharesColor?, text }` (rule 118.9), carried on the offer (`AlternativeCostOffer.discard`, which a card's own
+Abolish-style discard already fit) and paid where the own one is, as the cost is paid with the spell on the stack
+(601.2h). `sharesColor` binds a `sharesColorBound` to the spell's colors (`Game.altCostDiscardFilter`; rule 105.2),
+read at the offer as the face cast (a split card's half) — so a colorless spell has none. Only the mana cost is
+replaced: additional costs are still paid (its ruling). Dream Halls (rank 12409, `anyPlayer`).
+`test/alt-cost-grant-discard.test.ts`.
+
 ### Control for as long as a player is the monarch — built 2026-11-17
 
 The key `effect:control-while-player-is-monarch`: `gain-control`'s `whileMonarch` (a `PlayerRef`, read as it

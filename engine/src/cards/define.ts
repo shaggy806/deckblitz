@@ -3244,10 +3244,21 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * `{ amount }` reads it, so "mana value X or less, where X is the number of
    * time counters on this" (As Foretold) and "… the number of creatures you
    * control" (Omnipresence) are `manaValue: { op: "lte", n: { amount } }`.
+   *
+   * `discard` is a card discarded from the caster's hand as the cost: Dream
+   * Halls' "rather than pay the mana cost for a spell, its controller may
+   * discard a card that shares a color with that spell" (`mana: "{0}"`,
+   * `anyPlayer`, `discard: { sharesColor: true, text }`). Chosen as the cost
+   * is paid, the spell on the stack (601.2h); `sharesColor` is a color in
+   * common with the spell as it's cast (rule 105.2 — its face, rule 601.3e),
+   * so a colorless spell has no such card and isn't offered it, and
+   * `filter` narrows the card further. Only the mana cost is replaced: the
+   * spell's additional costs are still paid (its ruling).
    */
   readonly alternativeCostForSpells?: {
     readonly mana: string;
     readonly filter?: CardFilter;
+    readonly discard?: { readonly filter?: CardFilter; readonly sharesColor?: true; readonly text: string };
     readonly energy?: number;
     readonly flash?: true;
     readonly payLifeManaValue?: true;

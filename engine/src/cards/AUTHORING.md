@@ -5961,7 +5961,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   rest go to the bottom. The cascade's exiled cards are `zone:
   "exiled-this-way"`: Averna's is a `look-and-choose` of `min: 0`, `max: 1`,
   `filter: { type: "land" }`, `destination: "battlefield"`, `enterTapped`.
-- `alternativeCostForSpells: { mana, filter?, energy?, flash?, payLifeManaValue?, oncePerTurn?, yourTurnOnly?, fromHand?, fromZones?, anyPlayer? }` — an alternative cost (rule
+- `alternativeCostForSpells: { mana, filter?, discard?, energy?, flash?, payLifeManaValue?, oncePerTurn?, yourTurnOnly?, fromHand?, fromZones?, anyPlayer? }` — an alternative cost (rule
   118.9) for the spells you cast: Jodah, Archmage Eternal's "you may pay
   {W}{U}{B}{R}{G} rather than pay the mana cost for spells you cast" is `{
   mana: "{W}{U}{B}{R}{G}" }`. Offered as the `altCost` variant of any spell
@@ -5994,6 +5994,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   { notTypes: ["instant", "sorcery"] } }`, offered only while the caster has
   eight. `flash: true` is "if you cast a spell this way, you may cast it as
   though it had flash" (Primal Prayers, rule 601.3c).
+  `discard: { filter?, sharesColor?, text }` is a card discarded from the
+  caster's hand: Dream Halls' "rather than pay the mana cost for a spell, its
+  controller may discard a card that shares a color with that spell" is `{
+  mana: "{0}", anyPlayer: true, discard: { sharesColor: true, text: "a card
+  that shares a color with that spell" } }`. Chosen as the cost is paid
+  (601.2h); `sharesColor` reads the spell as cast (a split card's half), so a
+  colorless spell isn't offered it. The offer says `altCostText: "discard …"`.
 - **Combat rules** — `restrictions: [...]` (rules 508.1c, 508.1d, 509.1b, 509.1c; `combat/rules.ts`). Each entry is a **word** where the rule has no parameters, and a **record** where it has any; a word is the only spelling of a rule that says no more than its kind (a pool test refuses `{ kind: "cant-attack" }`). `affects` says which creatures, `condition` when; a record reads "you" as this permanent's controller, and is read as attackers or blockers are declared, so a scope may ask about power and toughness.
 
   | Record | Fields | Says |
