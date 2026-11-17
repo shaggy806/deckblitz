@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-975 already implemented / 25 missing
+976 already implemented / 24 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -651,7 +651,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  645  Slicer, Hired Muscle                            5179 decks  {4}{R}           Legendary Artifact Creature — Robot // Legendary Artifact — Vehicle
 [x]  646  Xu-Ifit, Osteoharmonist                         5179 decks  {1}{B}{B}        Legendary Creature — Human Wizard
 [x]  647  G'raha Tia, Scion Reborn                        5173 decks  {W}{U}{B}        Legendary Creature — Cat Wizard
-[ ]  648  The Serpent Society                             5164 decks  {1}{B}{G}        Legendary Creature — Human Snake Villain
+[x]  648  The Serpent Society                             5164 decks  {1}{B}{G}        Legendary Creature — Human Snake Villain
 [x]  649  Gwenom, Remorseless                             5160 decks  {3}{B}{B}        Legendary Creature — Symbiote Spider Hero
 [x]  650  Vishgraz, the Doomhive                          5156 decks  {2}{W}{B}{G}     Legendary Creature — Phyrexian Insect
 [x]  651  Ukkima, Stalking Shadow                         5155 decks  {1}{U}{B}        Legendary Creature — Whale Wolf
