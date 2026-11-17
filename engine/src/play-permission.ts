@@ -124,7 +124,7 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside
  *   gains haste" with no duration stated (Strago and Relm), which lasts for
  *   as long as it's that object (rules 611.2a, 400.7).
  * - `gainsIf`: "if you cast **a creature spell** this way, it gains …"
- *   (Strago and Relm): `gainsTriggered` reaches only a spell matching this
+ *   (Strago and Relm): `gainsTriggered` and `entersWith` reach only a spell matching this
  *   as it's cast (rule 400.7h) — a creature card cast as its noncreature
  *   face gains nothing. `gainsHaste` asks for a creature spell anyway.
  * - `landsEnterTapped`: "each land played this way enters tapped".
@@ -133,8 +133,11 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside
  *   resolves into enters tapped — a replacement effect on its entry (rule
  *   614.1d), kept on the spell (`GameObject.entersTappedAsCast`) for as long
  *   as it's that spell (400.7). Spells only: a land is `landsEnterTapped`'s.
- * - `entersWith`: a permanent spell or land played this way enters with these
- *   counters (Cemetery Prowler's finality counters).
+ * - `entersWith`: a permanent spell cast this way enters with these counters
+ *   (Noctis, Prince of Lucis's finality counter); with `gainsIf`, only a spell
+ *   matching it as it's cast — Mikey & Don, Party Planners' "if you cast a
+ *   creature spell this way, that creature enters with an additional +1/+1
+ *   counter on it".
  * - `gainsTriggered`: "if you do, it gains '[trigger]'" (Serra Paragon): the
  *   spell cast this way, and the permanent it becomes (rule 400.7 — a
  *   `castRider`), or the land played this way as it enters, has these for as

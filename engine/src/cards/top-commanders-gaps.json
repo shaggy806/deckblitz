@@ -2788,7 +2788,8 @@
   "trigger:activates-loyalty-of-attached",
   "filter:linked-exile-grant-card-type",
   "effect:random-cards-exiled-together",
-  "effect:exile-top-cast-from-among-rest-bottom"
+  "effect:exile-top-cast-from-among-rest-bottom",
+  "zone:cast-from-library-top-enters-counter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

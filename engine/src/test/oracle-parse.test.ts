@@ -9405,6 +9405,22 @@ describe("exiled this way, then a pick or the rest moved on", () => {
     });
   });
 
+  it("reads Mikey & Don, Party Planners' subtype list from the library top and its creature spells' +1/+1 counter", () => {
+    const mikey = face(
+      "Mikey & Don, Party Planners",
+      "Legendary Creature — Mutant Ninja Turtle",
+      "You may play lands and cast Mutant, Ninja, or Turtle spells from the top of your library. If you cast a creature spell this way, that creature enters with an additional +1/+1 counter on it.",
+    );
+    expect(mikey.complete).toBe(true);
+    expect(mikey.static[0].mayPlay).toEqual({
+      from: "library-top",
+      play: true,
+      spell: { anyOf: [{ subtype: "Mutant" }, { subtype: "Ninja" }, { subtype: "Turtle" }] },
+      entersWith: { kind: "+1/+1", amount: 1 },
+      gainsIf: { type: "creature" },
+    });
+  });
+
   it("reads Ian Malcolm, Chaotician's each-player permission over the linked cards they don't own", () => {
     const ian = face(
       "Ian Malcolm, Chaotician",

@@ -23892,7 +23892,15 @@ export class Game {
     // Kess's "if a spell cast this way would be put into your graveyard,
     // exile it instead" — set after the move to the stack, which clears it.
     if (permissionTerms?.exileAfter === true) object.exileIfWouldGoToGraveyard = true;
-    if (permissionTerms?.entersWith !== undefined) {
+    // "If you cast a creature spell this way, that creature enters with an
+    // additional +1/+1 counter" (Mikey & Don, Party Planners): only a spell
+    // the permission's `gainsIf` matches as it was cast (rule 400.7h), and
+    // only as a counter it enters with (rule 614.1c).
+    if (
+      permissionTerms?.entersWith !== undefined &&
+      (permissionTerms.gainsIf === undefined ||
+        matchesFilter(this.state, this.registry, cardId, permissionTerms.gainsIf, { you: player }))
+    ) {
       object.entersWithCounters = [...(object.entersWithCounters ?? []), { ...permissionTerms.entersWith }];
     }
     // Edgar, Master Machinist's "if you cast a spell this way, that artifact

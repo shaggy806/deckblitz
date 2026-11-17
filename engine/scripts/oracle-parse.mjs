@@ -23993,15 +23993,27 @@ function parseStatic(line, text) {
     if (filter !== null) return { affects: { scope: "self" }, mayPlay: { from: "library-top", filter, oncePerTurn: true }, text };
   }
   // Future Sight, Traveling Chocobo's Birds; Bolas's Citadel's "… pay life
-  // equal to its mana value rather than pay its mana cost".
-  if ((m = /^You may play lands and cast (?:([A-Z][a-z]+) )?spells from the top of your library\.( If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.)?$/.exec(line))) {
+  // equal to its mana value rather than pay its mana cost"; Mikey & Don, Party
+  // Planners' "Mutant, Ninja, or Turtle spells … If you cast a creature spell
+  // this way, that creature enters with an additional +1/+1 counter on it"
+  // (`entersWith`, for a spell `gainsIf` matches).
+  if (
+    (m =
+      /^You may play lands and cast (?:([A-Z][a-z]+(?:(?:, [A-Z][a-z]+)*,? or [A-Z][a-z]+)?) )?spells from the top of your library\.( If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.| If you cast a creature spell this way, that creature enters with an additional \+1\/\+1 counter on it\.)?$/.exec(
+        line,
+      ))
+  ) {
+    const subtypes = m[1] === undefined ? [] : m[1].split(/,? or |, /);
+    const counter = m[2] !== undefined && m[2].includes("+1/+1 counter");
     return {
       affects: { scope: "self" },
       mayPlay: {
         from: "library-top",
         play: true,
-        ...(m[1] === undefined ? {} : { spell: { subtype: m[1] } }),
-        ...(m[2] !== undefined ? { byPayingLife: true } : {}),
+        ...(subtypes.length === 1 ? { spell: { subtype: subtypes[0] } } : {}),
+        ...(subtypes.length > 1 ? { spell: { anyOf: subtypes.map((subtype) => ({ subtype })) } } : {}),
+        ...(m[2] !== undefined && !counter ? { byPayingLife: true } : {}),
+        ...(counter ? { entersWith: { kind: "+1/+1", amount: 1 }, gainsIf: { type: "creature" } } : {}),
       },
       text,
     };
