@@ -20468,6 +20468,24 @@ describe("the next loyalty ability copied", () => {
     expect(face.activated[1].__todo).toBeUndefined();
   });
 
+  it("reads Dynaheir's next ability activated by spending four or more mana, copied", () => {
+    const face = parseFace({
+      name: "Test Invoker",
+      type_line: "Legendary Creature — Human Wizard",
+      power: "4",
+      toughness: "4",
+      oracle_text:
+        "{T}: When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, copy that ability. You may choose new targets for the copy.",
+    });
+    expect(face.activated[0].effect).toEqual({
+      kind: "delayed-trigger",
+      at: { whenever: { on: "activates-ability", who: "you", manaSpentAtLeast: 4 }, once: true },
+      effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true },
+      text: "Copy that ability. You may choose new targets for the copy.",
+    });
+    expect(face.activated[0].__todo).toBeUndefined();
+  });
+
   it("reads Repeated Reverberation", () => {
     const face = parseFace({
       name: "Test Reverberation",

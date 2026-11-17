@@ -2762,6 +2762,13 @@ export type TriggerKind =
        * trigger value (`{ triggerValue: true }`) is how much: "you may pay
        * **that much** life again". */
       readonly lifePaidToActivate?: true;
+      /** "By spending **four or more mana** to activate it" (Dynaheir,
+       * Invoker Adept's delayed "when you next activate an ability that isn't
+       * a mana ability this turn"): the mana that paid its own cost (rules
+       * 602.2b, 601.2h — the event's `manaSpent`), at least this much. Fixed
+       * as it triggers, so asked once. An ability paid for with less neither
+       * fires a `once` watch nor uses it up. */
+      readonly manaSpentAtLeast?: number;
       /** "An ability that **targets a creature or player**" (Ertha Jo,
        * Frontier Mentor): what the ability on the stack targets, as its
        * targets were chosen (rule 602.2b) — the same clause a spell's

@@ -15165,20 +15165,34 @@ function counterIntoAt(sentences, i, ctx) {
  * Reverberation: `nextSpell` with `orNextAbility: { loyalty }`). "When you
  * next activate an exhaust ability that isn't a mana ability this turn, copy
  * it." (Pit Automaton) is the same watch on an exhaust ability (rule
- * 702.177), which never sees a mana ability. */
+ * 702.177), which never sees a mana ability; "When you next activate an
+ * ability that isn't a mana ability this turn by spending four or more mana
+ * to activate it, copy that ability." (Dynaheir, Invoker Adept) on one with
+ * that much mana spent on its own cost (`manaSpentAtLeast`). */
 function copyNextLoyaltyAt(sentences, i) {
   const s = sentences[i];
   const next = sentences[i + 1] ?? "";
   const exhaust = /^when you next activate an exhaust ability that isn't a mana ability this turn, copy it\.$/i.test(s);
+  const spending =
+    /^when you next activate an ability that isn't a mana ability this turn by spending (\w+) or more mana to activate it, copy that ability\.$/i.exec(
+      s,
+    );
+  const manaSpent = spending === null ? undefined : NUMBERS[spending[1].toLowerCase()];
   if (
-    (exhaust || /^copy the next loyalty ability you activate this turn when you activate it\.$/i.test(s)) &&
+    (exhaust ||
+      manaSpent !== undefined ||
+      /^copy the next loyalty ability you activate this turn when you activate it\.$/i.test(s)) &&
     /^you may choose new targets for the copy\.$/i.test(next)
   ) {
     return {
       effect: {
         kind: "delayed-trigger",
         at: {
-          whenever: { on: "activates-ability", who: "you", ...(exhaust ? { exhaust: true } : { loyalty: true }) },
+          whenever: {
+            on: "activates-ability",
+            who: "you",
+            ...(exhaust ? { exhaust: true } : manaSpent !== undefined ? { manaSpentAtLeast: manaSpent } : { loyalty: true }),
+          },
           once: true,
         },
         effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true },

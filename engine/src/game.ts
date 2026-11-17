@@ -17971,7 +17971,7 @@ export class Game {
 
     const payment = this.payMana(player, this.cyclingCost(player, cardId));
     if (payment === null) throw new Error(`${player} cannot pay the cycling cost of ${def.name}`);
-    this.executePayment(player, payment);
+    const cyclingManaSpent = this.executePayment(player, payment).length;
     // Cycling's cost discards the card (rule 702.29a: "[Cost], Discard this
     // card"), so it is a discard to everything watching for one — Archfiend
     // of Ifnir's "whenever you cycle or discard another card", Waste Not —
@@ -17998,6 +17998,7 @@ export class Game {
       ability: abilityId,
       fromZone: "hand",
       ...(payment.life > 0 ? { lifePaid: payment.life } : {}),
+      ...(cyclingManaSpent > 0 ? { manaSpent: cyclingManaSpent } : {}),
     });
     this.afterPlayerAction(player);
   }
@@ -28504,6 +28505,7 @@ export class Game {
         ? { sacrificedToActivate: true as const }
         : {}),
       ...(lifePaidToActivate > 0 ? { lifePaid: lifePaidToActivate } : {}),
+      ...(manaSpentOnThis.length > 0 ? { manaSpent: manaSpentOnThis.length } : {}),
     });
     // What it was activated targeting, each permanent as it was: "the first
     // activated ability you activate … that targets a creature you control"
@@ -37646,6 +37648,7 @@ export class Game {
         if (event.onStack ? event.ability === undefined : spec.orMana !== true) return false;
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
         if (spec.lifePaidToActivate === true && (event.lifePaid ?? 0) <= 0) return false;
+        if (spec.manaSpentAtLeast !== undefined && (event.manaSpent ?? 0) < spec.manaSpentAtLeast) return false;
         if (spec.who === "attached") {
           // "An ability of equipped creature", "a loyalty ability of
           // enchanted planeswalker": its host's, read as below.

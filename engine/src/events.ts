@@ -932,6 +932,10 @@ export type GameEvent =
        * Warped Sengir's "if life was paid to activate it, you may pay that
        * much life again". */
       readonly lifePaid?: number;
+      /** How much mana was spent to activate it (rules 602.2b, 601.2h): what
+       * paid its own cost, one for each mana. Absent for none. Dynaheir,
+       * Invoker Adept's "by spending four or more mana to activate it". */
+      readonly manaSpent?: number;
     })
   | (Base & {
       /**
