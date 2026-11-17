@@ -44155,7 +44155,19 @@ controlledBy,
         }
         return made;
       },
-      copyCardNamed: (name, outside) => {
+      copyCardNamed: (named, outside) => {
+        // "The card with the noted name" (rule 707.14): the name noted on the
+        // source in the stint this ability refers to — as it last existed,
+        // if it has left since. None noted (a copy of it), no copy.
+        let name: string | undefined;
+        if (typeof named === "string") name = named;
+        else {
+          const object = this.state.objects[source];
+          const stint = refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
+          if (object !== undefined && object.zone === "battlefield" && (object.zoneChangeCount ?? 0) === stint) name = object.notedName;
+          else if (stint !== undefined) name = this.lastKnownOfStint(source, stint)?.notedName;
+        }
+        if (name === undefined || !this.registry.has(name)) return [];
         const zone = outside ? "outside" : "exile";
         const copy = this.makeCardObject(name, controller, { zone });
         this.state.objects[copy].isCopy = true;
@@ -57325,6 +57337,9 @@ controlledBy,
     }
     // Set after the move, which clears it: this is the permanent it follows.
     if (exileIfItWouldLeave === true) entered.exileIfItWouldLeave = true;
+    // "Note the name of target … card … and put it onto the battlefield"
+    // (rule 707.14): the card's name, on the permanent it became.
+    if (types?.noteName === true) entered.notedName = entered.cardName;
     // "It gains 'If this creature would leave …'": an ability, on a modifier
     // that layer 6 reads in timestamp order (613.1f).
     if (exileIfItWouldLeave === "ability") {
@@ -68697,6 +68712,7 @@ controlledBy,
     return {
       zoneChangeCount: object.zoneChangeCount ?? 0,
       ...(object.classLevel !== undefined ? { classLevel: object.classLevel } : {}),
+      ...(object.notedName !== undefined ? { notedName: object.notedName } : {}),
       ...(object.linkedExile !== undefined ? { linkedExile: object.linkedExile } : {}),
       name,
       owner: object.owner,
@@ -70046,8 +70062,9 @@ controlledBy,
     object.intoHandAsItResolves = undefined;
     object.returnToHandAsItResolves = undefined;
     // Its "exile it if it would leave" replacement was about the permanent
-    // that just left (rule 400.7).
+    // that just left (rule 400.7), and so was a name noted on it.
     object.exileIfItWouldLeave = undefined;
+    object.notedName = undefined;
     object.exileIfDiesTurn = undefined;
     object.adaptAsThoughNoCountersTurn = undefined;
     // So was having transformed (rule 701.28f) — and entering transformed

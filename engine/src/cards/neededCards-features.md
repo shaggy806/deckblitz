@@ -325,6 +325,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A card name noted on a permanent, and a copy made of it — built 2026-11-17
+
+The key `effect:noted-card-name-copy` (rule 707.14): `put-onto-battlefield`'s `noteName` keeps the card's name
+on the permanent it becomes (`GameObject.notedName`, cleared by any zone change, kept in `LastKnownInfo`), and
+`cast-now`'s `copyOfCardNamed: { noted: "source" }` makes the copy from it (outside the game, Garth One-Eye's
+way). Magar of the Magic Strings (rank 11536): the face-down 3/3 with its two abilities is a new `FaceDownAs`
+internal definition, so a Clone of it is that 3/3 with no noted name and copies nothing (the ruling); its
+"if this creature would leave the battlefield, exile it instead of putting it anywhere else" is a static of its
+own, `StaticAbility.exileIfLeaves`, read by `hasExileIfLeavesAbility` and lost with its abilities.
+`test/noted-card-name-copy.test.ts`. The scaffolder isn't taught the line (one card).
+
 ### A cast trigger's count as the spell's counters to enter with — found built 2026-11-17
 
 The key `replacement:enters-with-counters-per-cast-trigger-sacrifice` needed no engine code: a

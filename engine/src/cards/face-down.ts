@@ -13,6 +13,10 @@ import { defineCard } from "./define.js";
 import type { CardDefinition } from "./define.js";
 import { ward } from "./helpers.js";
 
+const NOTED_COPY_TEXT =
+  "Whenever this creature deals combat damage to a player, you may create a copy of the card with the noted name. You may cast the copy without paying its mana cost.";
+const EXILE_IF_LEAVES_TEXT = "If this creature would leave the battlefield, exile it instead of putting it anywhere else.";
+
 export const FACE_DOWN_DEFINITIONS: readonly CardDefinition[] = [
   defineCard({
     name: FACE_DOWN_CARDS.manifest,
@@ -67,5 +71,26 @@ export const FACE_DOWN_DEFINITIONS: readonly CardDefinition[] = [
     types: ["land"],
     subtypes: ["Forest"],
     text: "",
+  }),
+  // Magar of the Magic Strings' "It's a 3/3 creature with …" (rule 707.14):
+  // the two abilities are its copiable values, the noted name isn't (the
+  // ruling) — a copy of it makes no copy of anything.
+  defineCard({
+    name: FACE_DOWN_AS_CARDS["3/3 creature that copies the noted card"],
+    colors: [],
+    types: ["creature"],
+    power: 3,
+    toughness: 3,
+    text: `${NOTED_COPY_TEXT}\n${EXILE_IF_LEAVES_TEXT}`,
+    triggered: [
+      {
+        trigger: { on: "deals-combat-damage-to-player", who: "self" },
+        targets: [],
+        effect: { kind: "cast-now", copyOfCardNamed: { noted: "source" }, copyOutsideTheGame: true, free: true },
+        resolve: null,
+        text: NOTED_COPY_TEXT,
+      },
+    ],
+    static: [{ affects: { scope: "self" }, exileIfLeaves: true, text: EXILE_IF_LEAVES_TEXT }],
   }),
 ];

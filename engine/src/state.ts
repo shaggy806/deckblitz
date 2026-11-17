@@ -1327,6 +1327,15 @@ export interface GameObject {
    * cleared by that same move — the card that lands in exile is a new object
    * the replacement no longer applies to (rule 400.7). */
   exileIfItWouldLeave?: boolean;
+  /** "Note the name of target instant or sorcery card in your graveyard and
+   * put it onto the battlefield face down" (Magar of the Magic Strings, rule
+   * 707.14): the registry name of the card as it was put onto the
+   * battlefield (`put-onto-battlefield`'s `noteName`), read by "create a copy
+   * of the card with the noted name" (`cast-now`'s `copyOfCardNamed: {
+   * noted: "source" }`). Not a copiable value (the ruling), so a copy of the
+   * permanent has none; cleared by any zone change (rule 400.7), and kept in
+   * its last-known information (`LastKnownInfo.notedName`). */
+  notedName?: string;
   /** "If that creature would die this turn, exile it instead" (Lava Coil —
    * rule 614.1a): the turn number it was said on. `moveObject` exiles the
    * permanent instead of putting it into a graveyard from the battlefield
@@ -2255,6 +2264,9 @@ export interface LastKnownInfo {
   readonly zoneChangeCount: number;
   /** Its Class level (`GameObject.classLevel`), if it had one. */
   readonly classLevel?: number;
+  /** The card name noted on it (`GameObject.notedName` — Magar of the Magic
+   * Strings), if any. */
+  readonly notedName?: string;
   /** The name its characteristics came from (`printedCardName`): the card it
    * was a copy of, or the face that was up. Its abilities are read off this,
    * unless `textName` says otherwise. */
@@ -7524,10 +7536,19 @@ export type FaceDownKind = "manifest" | "cloak" | "morph" | "disguise" | "effect
  * creatures" (Illithid Harvester), "They're 5/5 artifact
  * creatures" (Tezzeret, Cruel Machinist), "It's a Forest land" (Yedora,
  * Grave Gardener — a land with Forest's intrinsic "{T}: Add {G}", rule
- * 305.6, and nothing else). Each is an internal definition
- * (`cards/face-down.ts`), named in {@link FACE_DOWN_AS_CARDS}; a new set of
- * listed characteristics is a new member and a new definition. */
-export type FaceDownAs = "2/2 Cyberman artifact creature" | "2/2 Horror creature" | "5/5 artifact creature" | "Forest land";
+ * 305.6, and nothing else), "It's a 3/3 creature with 'Whenever this
+ * creature deals combat damage to a player, you may create a copy of the
+ * card with the noted name …' and 'If this creature would leave the
+ * battlefield, exile it instead …'" (Magar of the Magic Strings — its two
+ * abilities are copiable values, the noted name isn't). Each is an internal
+ * definition (`cards/face-down.ts`), named in {@link FACE_DOWN_AS_CARDS}; a
+ * new set of listed characteristics is a new member and a new definition. */
+export type FaceDownAs =
+  | "2/2 Cyberman artifact creature"
+  | "2/2 Horror creature"
+  | "5/5 artifact creature"
+  | "Forest land"
+  | "3/3 creature that copies the noted card";
 
 /** The registry names of the {@link FaceDownAs} definitions. */
 export const FACE_DOWN_AS_CARDS: Readonly<Record<FaceDownAs, string>> = {
@@ -7535,6 +7556,7 @@ export const FACE_DOWN_AS_CARDS: Readonly<Record<FaceDownAs, string>> = {
   "2/2 Horror creature": "Face-Down Horror (2/2 Creature)",
   "5/5 artifact creature": "Face-Down Artifact Creature (5/5)",
   "Forest land": "Face-Down Forest Land",
+  "3/3 creature that copies the noted card": "Face-Down Creature (3/3, Copies the Noted Card)",
 };
 
 /** The registry name of what a face-down object is (rule 708.2): the

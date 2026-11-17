@@ -2846,6 +2846,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly damageLeavesOneLoyalty?: true;
   /**
+   * "If this creature would leave the battlefield, exile it instead of
+   * putting it anywhere else" as an ability of its own (rule 614.1a — Magar
+   * of the Magic Strings' face-down 3/3, whose ability it is, so a copy of
+   * it has it too): `affects: { scope: "self" }`. Read by
+   * `hasExileIfLeavesAbility` beside the granted kind
+   * (`PtModifier.grantsExileIfLeaves`), and lost with its abilities.
+   */
+  readonly exileIfLeaves?: true;
+  /**
    * "[This] isn't legendary if it's a token" (Aeve, Progenitor Ooze): a
    * type-changing effect on itself (layer 4), so while this permanent is a
    * token on the battlefield it has no legendary supertype — not for the

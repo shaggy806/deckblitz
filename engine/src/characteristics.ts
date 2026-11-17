@@ -3455,8 +3455,17 @@ function staticGrantSources(state: GameState, registry: CardRegistry): readonly 
 /** Whether `object` has the granted ability "If this creature would leave the
  * battlefield, exile it instead of putting it anywhere else" (see
  * `PtModifier.grantsExileIfLeaves`) — not lost to a later loss of all
- * abilities (rule 613.1f). */
+ * abilities (rule 613.1f) — or as an ability of its own
+ * (`StaticAbility.exileIfLeaves`, Magar's face-down 3/3), lost with its
+ * abilities. */
 export function hasExileIfLeavesAbility(state: GameState, registry: CardRegistry, object: GameObject): boolean {
+  if (
+    object.zone === "battlefield" &&
+    registry.get(rulesTextName(object)).static.some((s) => s.exileIfLeaves === true) &&
+    !hasLostAbilities(state, registry, object)
+  ) {
+    return true;
+  }
   if (!object.modifiers.some((m) => m.grantsExileIfLeaves === true)) return false;
   const lostAt = abilitiesLostAt(state, registry, object);
   return object.modifiers.some((m) => m.grantsExileIfLeaves === true && modifierGrantApplies(m, lostAt));

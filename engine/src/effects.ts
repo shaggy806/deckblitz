@@ -4583,6 +4583,13 @@ export type EffectSpec =
       /** Only built by a text change (`text-change.ts`): what it made of
        * `faceDown`'s words ("Cyberman" made "Vampire"). */
       readonly faceDownTextChanges?: readonly TextChange[];
+      /** "**Note the name of** target instant or sorcery card in your
+       * graveyard and put it onto the battlefield face down" (Magar of the
+       * Magic Strings, rule 707.14): the card's name is noted on the
+       * permanent it becomes (`GameObject.notedName`), for "a copy of the
+       * card with the noted name" (`cast-now`'s `copyOfCardNamed: { noted:
+       * "source" }`). */
+      readonly noteName?: true;
       /** "…if it's a permanent card" (Yarus, Roar of the Old Gods), the card
        * itself and not what it was as a face-down permanent: an instant or
        * sorcery card stays where it is, though `faceDown` alone would let it
@@ -5754,8 +5761,12 @@ export type EffectSpec =
        * 702.192a) and offered, with no card behind it: nothing else here is
        * asked for. Paradigm's emblem casts it free; Garth One-Eye's "create a
        * copy of the card with the chosen name. You may cast the copy" pays
-       * its costs (the ruling), as any `cast-now` without `free` does. */
-      readonly copyOfCardNamed?: string;
+       * its costs (the ruling), as any `cast-now` without `free` does.
+       * `{ noted: "source" }` is the name noted on this ability's source
+       * (`GameObject.notedName`, as it last existed if it has left — Magar of
+       * the Magic Strings' face-down 3/3, rule 707.14): nothing is made when
+       * it has none (a copy of that permanent, the ruling). */
+      readonly copyOfCardNamed?: string | { readonly noted: "source" };
       /** With `copyOfCardNamed`: the copy is created outside the game rather
        * than in exile (rule 707.13 — Garth One-Eye), and cast from there. */
       readonly copyOutsideTheGame?: true;
@@ -12055,6 +12066,10 @@ export interface EnterTypes extends ResolvedPatch {
    * `faceDown`'s words ("Cyberman" made "Vampire", "Forest" made "Island" —
    * rule 612), kept on the permanent as `GameObject.faceDown.textChanges`. */
   readonly faceDownTextChanges?: readonly TextChange[];
+  /** Its card's name is noted on it as it enters (`put-onto-battlefield`'s
+   * `noteName` — Magar of the Magic Strings, rule 707.14): not a
+   * characteristic, so nothing but `put-onto-battlefield` reads it. */
+  readonly noteName?: true;
 }
 
 /** What a spell's copy gains — see `copy-spell`'s `gains`. */
@@ -13136,8 +13151,9 @@ export interface EffectApi {
   copyCards(cards: readonly ObjectId[], times: number, into?: "hand"): readonly ObjectId[];
   /** A copy of the card named `name`, created in exile (or, `outside`,
    * outside the game — rule 707.13), owned by the effect's controller — see
-   * the `cast-now`'s `copyOfCardNamed`. */
-  copyCardNamed(name: string, outside: boolean): readonly ObjectId[];
+   * the `cast-now`'s `copyOfCardNamed`. `{ noted: "source" }`: the name
+   * noted on the source (rule 707.14), none made if it has none. */
+  copyCardNamed(name: string | { readonly noted: "source" }, outside: boolean): readonly ObjectId[];
   /** See the `"choose-creature-type"` {@link EffectSpec}. */
   chooseCreatureType(
     then: EffectSpec,
@@ -20199,7 +20215,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.setTypes !== undefined ||
             spec.addSubtypes !== undefined ||
             spec.faceDown !== undefined ||
-            spec.enterAs !== undefined
+            spec.enterAs !== undefined ||
+            spec.noteName === true
             ? {
                 ...spec.enterAs,
                 ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
@@ -20208,6 +20225,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                   : {}),
                 ...(spec.faceDown !== undefined ? { faceDown: spec.faceDown } : {}),
                 ...(spec.faceDownTextChanges !== undefined ? { faceDownTextChanges: spec.faceDownTextChanges } : {}),
+                ...(spec.noteName === true ? { noteName: true as const } : {}),
               }
             : undefined,
           resolveEnterAttacking(spec.attacking, ctx),
