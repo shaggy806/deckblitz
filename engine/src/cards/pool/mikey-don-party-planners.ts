@@ -10,16 +10,16 @@ import { ward } from "../helpers.js";
 // enters with (rule 614.1c).
 //
 // Rulings:
-//   [2026-03-06] If the top card of your library changes while you're casting a spell, playing a
+//   [2026-01-27] If the top card of your library changes while you're casting a spell, playing a
 //     land, activating an ability, or taking a special action, you can't look at the new top card
 //     until you finish doing so. This means that if you cast the top card of your library, you
 //     can't look at the next one until you're done paying for that spell.
-//   [2026-03-06] Mikey & Don's last ability allows you to cast the top card of your library if the
+//   [2026-01-27] Mikey & Don's last ability allows you to cast the top card of your library if the
 //     resulting spell is a Mutant, Ninja, or Turtle spell. You pay all required costs, and timing
 //     restrictions apply. If that spell is an instant (most likely a kindred instant) or has
 //     flash, you'll be able to cast it any time you could cast an instant, even on an opponent's
 //     turn.
-//   [2026-03-06] Mikey & Don's second ability lets you look at the top card of your library
+//   [2026-01-27] Mikey & Don's second ability lets you look at the top card of your library
 //     whenever you want (with one restriction—see below), even if you don't have priority. This
 //     action doesn't use the stack. Knowing what that card is becomes part of the information you
 //     have access to, just like you can look at the cards in your hand.
