@@ -1,8 +1,10 @@
 # Rules audit, November 2026
 
-Status: **first slice done** (2026-11-17): players who leave the game, combat, and the turn's
-skip rules. Three violations found and fixed, a fourth recorded for a design call; the rest
-probed and sound. The slices to take next are at the end.
+Status: **two slices done** (2026-11-17). The first (players who leave the game, combat, the
+turn's skip rules) found three violations, fixed, and a fourth recorded for a design call. The
+second (casting, resolving, how a multiplayer game goes on) found none in the engine and one in
+the client's log wording. Thirty-four probes stay as tests. The slices to take next are at the
+end.
 
 ## Why
 
@@ -74,6 +76,33 @@ Settled by reading: a band can't be declared at different defenders (802.3b,
 Already cited and implemented, read but not probed again: 800.4a-d, 800.4i-m, 725.4, 726.4,
 103.5c and 103.8 (the multiplayer mulligan and first draw, which 800.6 and 800.7 restate).
 
+## Second slice: casting, resolving, and how a game goes on (same day)
+
+No new violation. The uncited rules of 601, 602, 605, 608 and 614-616 are nearly all definitions
+or restate a sibling the source does cite (602.5a is 302.6; 903.5d is implemented through 305.6
+in `identity.ts`; 119.8 and 614.7a are cited or written out). So the slice probed behaviour
+instead, where a two-player test suite looks least. All of it holds, and the probes stay:
+
+- `multiplayer-flow-audit.test.ts`: a player lost during their own turn (the turn finishes
+  without them, the next player gets theirs: 800.4j); the attacking player lost in their own
+  combat; two players lost together leaving a winner; every player lost at once, a draw (104.4a).
+- `combat-rules-audit.test.ts`, three more: a double-striking trampler whose blocker died to its
+  first strike sends the second strike all at the player (702.19e); a blocked double striker
+  without trample deals nothing more (510.1c); a creature given first strike after the first
+  damage step still deals its damage in the second (510.4).
+- `stack-and-sba-audit.test.ts`: a spell whose only target is gone does nothing, its card draw
+  included (608.2b); a creature taken this turn can't attack (302.6); an empty library loses
+  nothing until a draw from it (104.3c, 704.5b); the legend rule's choice (704.5j); +1/+1 and
+  -1/-1 counters going together (704.5q); triggers of two players stacked active player first
+  (603.3b).
+
+**The exported log, read by script.** Life totals follow from one line to the next throughout;
+nothing happens to a player after they lose but the second strikes 800.4e fixed; no player is
+given priority in an untap or cleanup step; every turn's steps are in order, with the two extra
+combat steps on each of the eighteen turns nobody attacked (508.8). What the scan did find is the
+client's: 27 of the engine's 207 event types had no sentence and printed as their JSON, fixed in
+`client/src/format.ts` with a switch the build now checks is exhaustive.
+
 ## Known and not modeled
 
 - **800.4f-h**: a player who has left being asked to pay or choose. `Game.whyCannotConcede`
@@ -101,11 +130,15 @@ Uncited, plausible, and not probed, in the order I'd take them:
 By how far the citations fall short and how much play runs through them (`rules:uncited --
 --all`):
 
-1. **601-608**, casting and resolving: 601 is 17 of 27 cited, 602 is 7 of 19, 608 is 13 of 24.
-   Every game runs through these.
-2. **614-616**, replacement and prevention: 614 is 18 of 37, 615 is 7 of 15.
-3. **903**, Commander: 18 of 49, a third of the rest being Brawl and Draft.
-4. **702**, keywords: 496 of 771. Long, and each keyword has its own test file; take the
-   uncited subrules of the twenty most-played keywords first.
-5. **More logs.** An exported log from any long multiplayer game is worth a read for steps,
-   triggers and damage that shouldn't be there.
+1. **More logs, first.** Both violations that mattered came out of one exported log, not out
+   of the rulebook: a log is every event, so a step, a trigger or a hit that shouldn't be there
+   is a line in it. A log with every hand revealed (BACKLOG, Client / UI) would show more. The
+   scans used here are a few lines each: life arithmetic, events after a loss, each turn's steps.
+2. **702**, keywords: 496 of 771 cited. Long, and each keyword has its own test file; take the
+   uncited subrules of the twenty most-played keywords first, probing interactions between two
+   keywords rather than one alone.
+3. **903**, Commander: 18 of 49, a third of the rest being Brawl and Draft. Merged and melded
+   commanders (903.3c, 903.9c) are the uncited ones with behaviour.
+4. **614-616** by interaction: two replacement effects on one event, with the affected player's
+   choice (616.1a-g). The single-effect cases are cited and tested.
+5. **601-608** has little left: its uncited rules were read in the second slice.

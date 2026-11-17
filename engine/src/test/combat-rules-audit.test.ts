@@ -2,7 +2,22 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, C, destroy, life, pickFromZone, ref, spawn, table, toHand, tokensNamed, toStep, zone } from "./harness.js";
+import {
+  A,
+  B,
+  C,
+  destroy,
+  grant,
+  life,
+  pickFromZone,
+  ref,
+  spawn,
+  table,
+  toHand,
+  tokensNamed,
+  toStep,
+  zone,
+} from "./harness.js";
 
 /**
  * A rules audit (2026-11-17): combat rules the engine's source never cited,
@@ -72,6 +87,52 @@ describe("combat rules, audited", () => {
     const before = life(game, B);
     toStep(game, "postcombat-main");
     expect(life(game, B)).toBe(before);
+  });
+
+  it("a double-striking trampler whose blocker died to its first strike sends the second all at the player (rule 702.19e)", () => {
+    // Colossal Dreadmaw, 6/6 trample, with double strike, blocked by Grizzly
+    // Bears: 2 to the Bears and 4 over in the first step; the Bears gone, all
+    // 6 at the player in the second.
+    const { game, a, b } = table();
+    const maw = spawn(game, "Colossal Dreadmaw");
+    const bears = spawn(game, "Grizzly Bears", B);
+    grant(game, maw, "double-strike");
+    const before = life(game, B);
+    blocked(game, a, b, [maw], [{ blocker: bears, attacker: maw }]);
+    toStep(game, "postcombat-main");
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(life(game, B)).toBe(before - 4 - 6);
+  });
+
+  it("a blocked double striker without trample deals nothing more once its blocker is dead (rule 510.1c)", () => {
+    const { game, a, b } = table();
+    const giant = spawn(game, "Hill Giant");
+    const bears = spawn(game, "Grizzly Bears", B);
+    grant(game, giant, "double-strike");
+    const before = life(game, B);
+    blocked(game, a, b, [giant], [{ blocker: bears, attacker: giant }]);
+    toStep(game, "postcombat-main");
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(life(game, B)).toBe(before);
+    expect(zone(game, giant)).toBe("battlefield");
+  });
+
+  it("a creature given first strike after the first damage step still deals its damage in the second (rule 510.4)", () => {
+    // It had neither first strike nor double strike as the first step began.
+    const { game, a } = table();
+    const ace = spawn(game, "Fencing Ace"); // double strike: makes a first step
+    const bears = spawn(game, "Grizzly Bears");
+    a.declareAttackersFn = () => [
+      { attacker: ace, defender: B },
+      { attacker: bears, defender: B },
+    ];
+    const before = life(game, B);
+    game.advanceUntil(
+      (s) => s.turn.step === "combat-damage" && s.awaiting === null && s.priority.holder === A && life(game, B) === before - 1,
+    );
+    grant(game, bears, "first-strike");
+    toStep(game, "postcombat-main");
+    expect(life(game, B)).toBe(before - 1 - 1 - 2);
   });
 
   it("a creature put onto the battlefield attacking a player who has left enters, and isn't attacking (rule 506.3c)", () => {
