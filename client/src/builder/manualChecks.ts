@@ -13208,4 +13208,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- Life totals redistributed (2026-11-17) ---------------------------------------
+  preset(
+    "Reverse the Sands: you take Bob's life total and he gets yours",
+    board({
+      you: { life: 5, bf: ['Plains*8'], hand: ['Reverse the Sands'] },
+      opp: { life: 30 },
+    }),
+  ),
+  preset(
+    'Reverse the Sands: in a 4-player game, one question a player from the totals left',
+    board({
+      you: { life: 5, bf: ['Plains*8'], hand: ['Reverse the Sands'] },
+      opp: [{ life: 10 }, { life: 20 }, { life: 30 }],
+    }),
+  ),
 ]

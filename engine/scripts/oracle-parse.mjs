@@ -5044,6 +5044,8 @@ export function parseSentence(sentence, ctx) {
   }
   // "Double your life total" (rule 701.10d: a gain or loss up to twice what
   // it is — Live Long and Prosper, Angelic Enforcer's attack trigger).
+  // Reverse the Sands (rule 119.5).
+  if (/^redistribute any number of players' life totals\.?$/i.test(s)) return { kind: "redistribute-life-totals" };
   if (/^double your life total\.?$/i.test(s)) {
     return { kind: "set-life-total", who: "you", amount: { product: [{ lifeTotal: "you" }, 2] } };
   }

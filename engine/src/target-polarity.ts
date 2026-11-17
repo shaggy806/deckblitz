@@ -492,6 +492,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.first !== undefined && typeof n.first === "object") v.touch(n.first, "either", MAJOR);
     if (typeof n.second === "object") v.touch(n.second, "either", MAJOR);
   },
+  // No targets: the controller gives out the totals as it resolves.
+  "redistribute-life-totals": none,
   mill: (n, v) => v.touch(n.target, "harm", MINOR),
   // A refill for a self-mill deck, an answer to a graveyard deck: either way.
   "shuffle-graveyard-into-library": (n, v) => v.touch(n.target, "either", MINOR),

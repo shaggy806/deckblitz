@@ -12991,6 +12991,8 @@ describe("exchanges with a life total", () => {
 
   it("reads two players' life totals", () => {
     expect(effectOf("Exchange life totals with target opponent.")).toEqual({ kind: "exchange-life-totals", second: { target: 0 } });
+    // Reverse the Sands.
+    expect(effectOf("Redistribute any number of players' life totals.")).toEqual({ kind: "redistribute-life-totals" });
     expect(effectOf("Two target players exchange life totals.")).toEqual({
       kind: "exchange-life-totals",
       first: { target: 0 },

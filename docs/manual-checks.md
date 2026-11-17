@@ -8726,3 +8726,13 @@ Each board's die comes up 4.
 ### Spirit of Resilience: in a 4-player game, a creature card reanimated is found on the battlefield
 - **Do:** In this 4-player game, cast Reanimate on Hill Giant. In Spirit of Resilience's popup pick Hill Giant and confirm.
 - **Expect:** The popup shows Hill Giant, on the battlefield. Spirit of Resilience gets a +1/+1 counter and becomes a Hill Giant, a 4/4; you lose 4 life.
+
+## Life totals redistributed (2026-11-17)
+
+### Reverse the Sands: you take Bob's life total and he gets yours
+- **Do:** Cast Reverse the Sands. Click "Alice gets 30 life (has 5)".
+- **Expect:** The banner offers "Alice keeps 5 life" and "Alice gets 30 life (has 5)", names not seat numbers. Afterwards you have 30 life and Bob 5; Bob isn't asked anything.
+
+### Reverse the Sands: in a 4-player game, one question a player from the totals left
+- **Do:** In this 4-player game, cast Reverse the Sands. Click "Alice gets 30 life (has 5)", then "Bob gets 5 life (has 10)", then "Carol gets 10 life (has 20)".
+- **Expect:** Each question offers only the totals not yet given: Bob's three, then Carol's two. Dave isn't asked. Afterwards you have 30, Bob 5, Carol 10 and Dave 20.

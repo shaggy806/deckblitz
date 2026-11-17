@@ -5305,10 +5305,12 @@ function Table({
       } else game.dispatch(action)
     }
     // A choice among players (Tasigur's "you choose an opponent") reads with
-    // their names; the engine's own text names the seat.
+    // their names; the engine's own text names the seat. So does a mode
+    // naming seats that isn't about one of them (Reverse the Sands' "p2 gets
+    // 5 life").
     const modeLabel = (i: number): ReactNode => {
       const player = modePlayers?.[i] ?? null
-      if (player === null) return <Symbols text={modeTexts[i]} />
+      if (player === null) return <Symbols text={withNames(modeTexts[i], game.seats, game.nameOf)} />
       // A mode naming its player in its own words (a gift's "Promise the
       // gift to …") keeps them; otherwise it's "Choose …".
       return modeTexts[i].includes(player)

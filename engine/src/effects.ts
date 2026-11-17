@@ -7974,6 +7974,32 @@ export type EffectSpec =
       readonly second: PlayerRef;
     }
   | {
+      /**
+       * "Redistribute any number of players' life totals" (Reverse the
+       * Sands): the effect's controller gives each player still in the game
+       * one of the life totals they all had as this began, each total to one
+       * player — a total can't be split (the ruling), and a player not chosen
+       * keeps their own — then each gains or loses the difference, all at
+       * once (rule 119.5), so replacement effects may change those amounts
+       * and triggers see them. A player who can't gain life can't be given a
+       * higher total, nor one who can't lose life a lower one (rules
+       * 119.7–8). Asked as a `choose-modes` per player, starting with the
+       * controller and going on in turn order, of only the totals left that
+       * still let every later player be given one — equal totals one option
+       * (the card can't tell them apart) — and not asked where only one is
+       * left.
+       */
+      readonly kind: "redistribute-life-totals";
+      /** Set by the engine on the copy each answer resumes: the players in
+       * the order they're asked about, their life totals as it began, and the
+       * totals given to the first of them so far. */
+      readonly progress?: {
+        readonly players: readonly PlayerId[];
+        readonly totals: readonly number[];
+        readonly given: readonly number[];
+      };
+    }
+  | {
       /** `target` (an instant/sorcery card in a graveyard, via the
        * `"instant-or-sorcery-in-your-graveyard"` target spec) gains flashback
        * until end of turn for a cost equal to its mana cost — Snapcaster Mage
@@ -13996,6 +14022,12 @@ export interface EffectApi {
   exchangeLifeStat(target: TargetRef, player: PlayerId, stat: "power" | "toughness"): void;
   /** See the `"exchange-life-totals"` {@link EffectSpec}. */
   exchangeLifeTotals(first: PlayerId, second: PlayerId): void;
+  /** Whether `player` can't be given a higher life total, or a lower one, by
+   * an exchange or a redistribution (rules 119.7–8). */
+  lifeTotalLocks(player: PlayerId): { readonly cantGain: boolean; readonly cantLose: boolean };
+  /** Each player's life total becomes the one given — they gain or lose the
+   * difference (rule 119.5), all at once. See `"redistribute-life-totals"`. */
+  setLifeTotals(totals: readonly { readonly player: PlayerId; readonly life: number }[]): void;
   /** See the `"unless"` {@link EffectSpec}. */
   unless(
     chooser:
@@ -15891,6 +15923,58 @@ function applyEachPlayerMay(
       return;
     }
   }
+}
+
+/**
+ * A `"redistribute-life-totals"`: one question per player from the
+ * controller on, each a `choose-modes` of the totals left that still let
+ * every later player be given one; the answer resumes a copy carrying
+ * `progress`. Once every player has a total, they all change at once.
+ */
+function applyRedistributeLifeTotals(
+  spec: Extract<EffectSpec, { kind: "redistribute-life-totals" }>,
+  ctx: ResolutionContext,
+): void {
+  const players = spec.progress?.players ?? eachPlayerMayAsks("each-player", ctx, true);
+  const totals = spec.progress?.totals ?? players.map((player) => ctx.lifeTotalOf(player));
+  const given = [...(spec.progress?.given ?? [])];
+  const locks = players.map((player) => ctx.lifeTotalLocks(player));
+  // Rules 119.7–8: no higher total for one who can't gain life, no lower
+  // one for one who can't lose it.
+  const allowed = (at: number, total: number): boolean =>
+    (total <= totals[at] || !locks[at].cantGain) && (total >= totals[at] || !locks[at].cantLose);
+  const without = (list: readonly number[], total: number): readonly number[] => {
+    const at = list.indexOf(total);
+    return [...list.slice(0, at), ...list.slice(at + 1)];
+  };
+  // The totals the player at `at` may be given out of `left`, with every
+  // later player still given one.
+  const givable = (at: number, left: readonly number[]): number[] =>
+    [...new Set(left)].filter(
+      (total) => allowed(at, total) && (at + 1 === players.length || givable(at + 1, without(left, total)).length > 0),
+    );
+  while (given.length < players.length) {
+    const at = given.length;
+    const options = givable(at, given.reduce(without, totals));
+    // Their own total first, then the highest down.
+    options.sort((a, b) => (a === totals[at] ? -1 : b === totals[at] ? 1 : b - a));
+    if (options.length === 0) return;
+    if (options.length === 1) {
+      given.push(options[0]);
+      continue;
+    }
+    const player = players[at];
+    ctx.chooseModes(
+      1,
+      1,
+      options.map((total) => ({
+        text: total === totals[at] ? `${player} keeps ${total} life` : `${player} gets ${total} life (has ${totals[at]})`,
+        effect: { kind: "redistribute-life-totals", progress: { players, totals, given: [...given, total] } },
+      })),
+    );
+    return;
+  }
+  ctx.setLifeTotals(players.map((player, i) => ({ player, life: given[i] })));
 }
 
 /**
@@ -22199,6 +22283,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (first !== undefined && second !== undefined) ctx.exchangeLifeTotals(first, second);
       return;
     }
+    case "redistribute-life-totals":
+      applyRedistributeLifeTotals(spec, ctx);
+      return;
     case "grant-triggered": {
       const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;

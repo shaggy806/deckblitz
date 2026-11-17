@@ -473,6 +473,22 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "gain-life":
       if (effect.toControllerOfTarget !== undefined || typeof effect.who === "object") return 0;
       return onPlayers(playersIn(effect.who ?? "you", ctx), LIFE_POINT * sizeOf(effect.amount, 2), ctx);
+    case "redistribute-life-totals": {
+      // Once asked, what the totals given so far change, each player's
+      // gain or loss from our seat (the totals not yet given are the same
+      // for every answer). Before, the most we could take: the highest.
+      const progress = effect.progress;
+      if (progress === undefined) {
+        const lives = ctx.state.turnOrder.filter((p) => !ctx.state.players[p].hasLost).map((p) => ctx.state.players[p].life);
+        const mine = ctx.state.players[ctx.me]?.life ?? 0;
+        return onPlayers([ctx.me], LIFE_POINT * Math.max(0, Math.max(mine, ...lives) - mine), ctx);
+      }
+      return progress.given.reduce((sum, life, i) => {
+        const player = progress.players[i];
+        const delta = life - progress.totals[i];
+        return sum + onPlayers([player], delta >= 0 ? LIFE_POINT * delta : lifeLoss(ctx.state, player, -delta), ctx);
+      }, 0);
+    }
     case "lose-life":
       if (effect.target !== undefined || effect.toControllerOfTarget !== undefined || typeof effect.who === "object") return 0;
       return lifeLossTo(playersIn(effect.who ?? "you", ctx), sizeHere(effect.amount, 2, ctx), ctx);

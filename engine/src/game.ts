@@ -43835,6 +43835,19 @@ controlledBy,
       },
       exchangeLifeStat: (target, player, stat) => this.exchangeLifeStat(player, target, stat),
       exchangeLifeTotals: (first, second) => this.exchangeLifeTotals(first, second),
+      lifeTotalLocks: (player) => ({
+        cantGain: this.playerCantGainLife(player),
+        cantLose: playerCantLoseLife(this.state, this.registry, player),
+      }),
+      // Rule 119.5: each gains or loses the difference, one simultaneous
+      // change (rule 603.2c).
+      setLifeTotals: (totals) =>
+        this.withLifeLossBatch(() => {
+          for (const { player, life } of totals) {
+            const now = this.state.players[player];
+            if (now !== undefined && !now.hasLost) this.changeLifeOf([player], life - now.life, controller);
+          }
+        }),
       putInCommandZone: (target) => {
         // A commander still here as the same object (rule 400.7 — the
         // target slot's stint is checked as it resolves).
