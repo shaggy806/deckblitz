@@ -299,6 +299,7 @@ import _poolFurnacePunisher from "../pool/furnace-punisher.js";
 import _poolFurybladeVampire from "../pool/furyblade-vampire.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
 import _poolFyndhornPollen from "../pool/fyndhorn-pollen.js";
+import _poolGaleaKindlerOfHope from "../pool/galea-kindler-of-hope.js";
 import _poolGallantFowlknight from "../pool/gallant-fowlknight.js";
 import _poolGalvanicIteration from "../pool/galvanic-iteration.js";
 import _poolGalvanicKey from "../pool/galvanic-key.js";
@@ -1269,6 +1270,7 @@ const shard: CardShard = {
     _poolFurybladeVampire,
     _poolFyndhornBow,
     _poolFyndhornPollen,
+    _poolGaleaKindlerOfHope,
     _poolGallantFowlknight,
     _poolGalvanicIteration,
     _poolGalvanicKey,

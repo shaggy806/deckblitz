@@ -815,6 +815,7 @@ import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
 import _poolSoulExchange from "../pool/soul-exchange.js";
 import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
+import _poolSparkOfCreativity from "../pool/spark-of-creativity.js";
 import _poolSparkRupture from "../pool/spark-rupture.js";
 import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
@@ -1865,6 +1866,7 @@ const shard: CardShard = {
     _poolSoulExchange,
     _poolSoulOfInnistrad,
     _poolSowingMycospawn,
+    _poolSparkOfCreativity,
     _poolSparkRupture,
     _poolSpectralInterference,
     _poolSphinxOfFalseConclusions,

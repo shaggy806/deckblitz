@@ -4445,6 +4445,7 @@ import _poolChandraLegacyOfFire from "./pool/chandra-legacy-of-fire.js";
 import _poolChandraNalaar from "./pool/chandra-nalaar.js";
 import _poolChandraNovicePyromancer from "./pool/chandra-novice-pyromancer.js";
 import _poolChandraPyrogenius from "./pool/chandra-pyrogenius.js";
+import _poolChandraPyromaster from "./pool/chandra-pyromaster.js";
 import _poolChandraRoaringFlame from "./pool/chandra-roaring-flame.js";
 import _poolChandraSparkHunter from "./pool/chandra-spark-hunter.js";
 import _poolChandraTheFirebrand from "./pool/chandra-the-firebrand.js";
@@ -10565,6 +10566,7 @@ import _poolGalazethPrismari from "./pool/galazeth-prismari.js";
 import _poolGaleForce from "./pool/gale-force.js";
 import _poolGaleSwooper from "./pool/gale-swooper.js";
 import _poolGaleWaterdeepProdigy from "./pool/gale-waterdeep-prodigy.js";
+import _poolGaleaKindlerOfHope from "./pool/galea-kindler-of-hope.js";
 import _poolGalecasterColossus from "./pool/galecaster-colossus.js";
 import _poolGaledrifter from "./pool/galedrifter.js";
 import _poolGalepowderMage from "./pool/galepowder-mage.js";
@@ -25890,6 +25892,7 @@ import _poolSparkElemental from "./pool/spark-elemental.js";
 import _poolSparkHarvest from "./pool/spark-harvest.js";
 import _poolSparkJolt from "./pool/spark-jolt.js";
 import _poolSparkMage from "./pool/spark-mage.js";
+import _poolSparkOfCreativity from "./pool/spark-of-creativity.js";
 import _poolSparkReaper from "./pool/spark-reaper.js";
 import _poolSparkRupture from "./pool/spark-rupture.js";
 import _poolSparkSpray from "./pool/spark-spray.js";
@@ -29950,6 +29953,7 @@ import _poolUndeadLeotau from "./pool/undead-leotau.js";
 import _poolUndeadMinotaur from "./pool/undead-minotaur.js";
 import _poolUndeadServant from "./pool/undead-servant.js";
 import _poolUndeadSlayer from "./pool/undead-slayer.js";
+import _poolUndeadSprinter from "./pool/undead-sprinter.js";
 import _poolUndeadWarchief from "./pool/undead-warchief.js";
 import _poolUnderTheSkin from "./pool/under-the-skin.js";
 import _poolUndercellarMyconid from "./pool/undercellar-myconid.js";
@@ -37860,6 +37864,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChandraNalaar,
   _poolChandraNovicePyromancer,
   _poolChandraPyrogenius,
+  _poolChandraPyromaster,
   _poolChandraRoaringFlame,
   _poolChandraSparkHunter,
   _poolChandraTheFirebrand,
@@ -43980,6 +43985,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGaleForce,
   _poolGaleSwooper,
   _poolGaleWaterdeepProdigy,
+  _poolGaleaKindlerOfHope,
   _poolGalecasterColossus,
   _poolGaledrifter,
   _poolGalepowderMage,
@@ -59305,6 +59311,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSparkHarvest,
   _poolSparkJolt,
   _poolSparkMage,
+  _poolSparkOfCreativity,
   _poolSparkReaper,
   _poolSparkRupture,
   _poolSparkSpray,
@@ -63365,6 +63372,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUndeadMinotaur,
   _poolUndeadServant,
   _poolUndeadSlayer,
+  _poolUndeadSprinter,
   _poolUndeadWarchief,
   _poolUnderTheSkin,
   _poolUndercellarMyconid,
@@ -71288,6 +71296,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chandra-nalaar": _poolChandraNalaar,
   "pool/chandra-novice-pyromancer": _poolChandraNovicePyromancer,
   "pool/chandra-pyrogenius": _poolChandraPyrogenius,
+  "pool/chandra-pyromaster": _poolChandraPyromaster,
   "pool/chandra-roaring-flame": _poolChandraRoaringFlame,
   "pool/chandra-spark-hunter": _poolChandraSparkHunter,
   "pool/chandra-the-firebrand": _poolChandraTheFirebrand,
@@ -77408,6 +77417,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gale-force": _poolGaleForce,
   "pool/gale-swooper": _poolGaleSwooper,
   "pool/gale-waterdeep-prodigy": _poolGaleWaterdeepProdigy,
+  "pool/galea-kindler-of-hope": _poolGaleaKindlerOfHope,
   "pool/galecaster-colossus": _poolGalecasterColossus,
   "pool/galedrifter": _poolGaledrifter,
   "pool/galepowder-mage": _poolGalepowderMage,
@@ -92733,6 +92743,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spark-harvest": _poolSparkHarvest,
   "pool/spark-jolt": _poolSparkJolt,
   "pool/spark-mage": _poolSparkMage,
+  "pool/spark-of-creativity": _poolSparkOfCreativity,
   "pool/spark-reaper": _poolSparkReaper,
   "pool/spark-rupture": _poolSparkRupture,
   "pool/spark-spray": _poolSparkSpray,
@@ -96793,6 +96804,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/undead-minotaur": _poolUndeadMinotaur,
   "pool/undead-servant": _poolUndeadServant,
   "pool/undead-slayer": _poolUndeadSlayer,
+  "pool/undead-sprinter": _poolUndeadSprinter,
   "pool/undead-warchief": _poolUndeadWarchief,
   "pool/under-the-skin": _poolUnderTheSkin,
   "pool/undercellar-myconid": _poolUndercellarMyconid,

@@ -982,6 +982,7 @@ import _poolUltimatePrice from "../pool/ultimate-price.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUmbraMystic from "../pool/umbra-mystic.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
+import _poolUndeadSprinter from "../pool/undead-sprinter.js";
 import _poolUnderTheSkin from "../pool/under-the-skin.js";
 import _poolUndercoverSkrull from "../pool/undercover-skrull.js";
 import _poolUnforgivingOne from "../pool/unforgiving-one.js";
@@ -2074,6 +2075,7 @@ const shard: CardShard = {
     _poolUltronTheAnnihilator,
     _poolUmbraMystic,
     _poolUncoverTheMoonLetters,
+    _poolUndeadSprinter,
     _poolUnderTheSkin,
     _poolUndercoverSkrull,
     _poolUnforgivingOne,

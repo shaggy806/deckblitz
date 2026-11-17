@@ -142,6 +142,7 @@ import _poolCentaurArcher from "../pool/centaur-archer.js";
 import _poolCentaurCourser from "../pool/centaur-courser.js";
 import _poolCentaurNurturer from "../pool/centaur-nurturer.js";
 import _poolChainLightning from "../pool/chain-lightning.js";
+import _poolChandraPyromaster from "../pool/chandra-pyromaster.js";
 import _poolChandrasIncinerator from "../pool/chandras-incinerator.js";
 import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
@@ -1248,6 +1249,7 @@ const shard: CardShard = {
     _poolCentaurCourser,
     _poolCentaurNurturer,
     _poolChainLightning,
+    _poolChandraPyromaster,
     _poolChandrasIncinerator,
     _poolChargeThrough,
     _poolChargingWarBoar,
