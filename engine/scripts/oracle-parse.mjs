@@ -2049,6 +2049,8 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ attacks a player$/.test(c)) return self("attacks").map((t) => ({ ...t, defender: "player" }));
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
+  // Chrome Companion, Sanwell, Avenger Ace.
+  if (/^Whenever ~ becomes tapped$/.test(c)) return self("becomes-tapped");
   // "That creature": the one it blocks (Wall of Dust).
   if (/^Whenever ~ blocks a creature$/.test(c)) return [{ on: "blocks", who: "self", object: "blocked" }];
   if (/^Whenever ~ attacks alone$/.test(c)) return [{ on: "attacks-alone", who: "self" }];
@@ -11286,13 +11288,21 @@ export function parseEffect(text, outer) {
     // — a free cast from the cards exiled this way, as this resolves — and
     // then "Then put the rest on the bottom of your library in a random
     // order.", the cards still exiled (Muse Vortex's instants and sorceries
-    // not cast go to the hand first).
+    // not cast go to the hand first). Without "without paying its mana
+    // cost", every cost is paid: Sanwell, Avenger Ace's "You may cast a
+    // Vehicle or artifact creature spell from among them."
     if (parsed.at(-1)?.kind === "exile-from-library") {
-      const castM = /^you may cast an? (.+?) spell (with mana value x or less )?from among them without paying its mana cost\.$/i.exec(sentence);
-      const filter = castM === null ? null : parseTypePhrase(castM[1]);
+      const castM = /^you may cast an? (.+?) spell (with mana value x or less )?from among them( without paying its mana cost)?\.$/i.exec(sentence);
+      const orPhrase = (phrase) => {
+        const one = parseTypePhrase(phrase);
+        if (one !== null) return one;
+        const parts = phrase.split(/,? or |, /i).map((part) => parseTypePhrase(part));
+        return parts.length > 1 && parts.every((part) => part !== null && Object.keys(part).length > 0) ? { anyOf: parts } : null;
+      };
+      const filter = castM === null ? null : orPhrase(castM[1]);
       if (castM !== null && filter !== null && Object.keys(filter).length > 0) {
         const spell = castM[2] === undefined ? filter : { ...filter, manaValue: { op: "lte", n: { amount: "x" } } };
-        const castNow = { kind: "cast-now", from: "exiled-this-way", free: true, spell };
+        const castNow = { kind: "cast-now", from: "exiled-this-way", ...(castM[3] !== undefined ? { free: true } : {}), spell };
         parsed.push(castNow);
         hints.push({ sentence, effect: castNow });
         continue;

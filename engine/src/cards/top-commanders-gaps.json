@@ -2787,7 +2787,8 @@
   "effect:delayed-trigger-on-play-this-way",
   "trigger:activates-loyalty-of-attached",
   "filter:linked-exile-grant-card-type",
-  "effect:random-cards-exiled-together"
+  "effect:random-cards-exiled-together",
+  "effect:exile-top-cast-from-among-rest-bottom"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

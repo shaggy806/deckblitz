@@ -9388,6 +9388,23 @@ describe("exiled this way, then a pick or the rest moved on", () => {
     expect(face("Test Card", "Sorcery", "Draw a card. Then put the rest on the bottom of your library in a random order.").complete).toBe(false);
   });
 
+  it("reads Sanwell, Avenger Ace's becomes-tapped exile and paid cast of an or-typed spell from among them", () => {
+    const sanwell = face(
+      "Sanwell, Avenger Ace",
+      "Legendary Creature — Human Pilot",
+      "Whenever Sanwell becomes tapped, exile the top six cards of your library. You may cast a Vehicle or artifact creature spell from among them. Then put the rest on the bottom of your library in a random order.",
+    );
+    expect(sanwell.triggered[0].trigger).toEqual({ on: "becomes-tapped", who: "self" });
+    expect(sanwell.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", amount: 6 },
+        { kind: "cast-now", from: "exiled-this-way", spell: { anyOf: [{ subtype: "Vehicle" }, { types: ["artifact", "creature"] }] } },
+        { kind: "move-exiled-this-way", to: "library-bottom" },
+      ],
+    });
+  });
+
   it("reads Muse Vortex's instants and sorceries to the hand and the rest under", () => {
     const vortex = face(
       "Muse Vortex",
