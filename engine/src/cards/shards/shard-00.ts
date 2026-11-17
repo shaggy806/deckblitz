@@ -231,6 +231,7 @@ import _poolDepthshakerTitan from "../pool/depthshaker-titan.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDesolationAngel from "../pool/desolation-angel.js";
+import _poolDesperateGambit from "../pool/desperate-gambit.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
 import _poolDingusEgg from "../pool/dingus-egg.js";
 import _poolDireDowndraft from "../pool/dire-downdraft.js";
@@ -451,6 +452,7 @@ import _poolJayasFirenado from "../pool/jayas-firenado.js";
 import _poolJefferiesTube from "../pool/jefferies-tube.js";
 import _poolJoinTheDead from "../pool/join-the-dead.js";
 import _poolJubilation from "../pool/jubilation.js";
+import _poolJudgmentOfAlexander from "../pool/judgment-of-alexander.js";
 import _poolJukaiMessenger from "../pool/jukai-messenger.js";
 import _poolJuniperOrderDruid from "../pool/juniper-order-druid.js";
 import _poolKabiraCrossroads from "../pool/kabira-crossroads.js";
@@ -1280,6 +1282,7 @@ const shard: CardShard = {
     _poolDesertTwister,
     _poolDesertsDue,
     _poolDesolationAngel,
+    _poolDesperateGambit,
     _poolDinaSoulSteeper,
     _poolDingusEgg,
     _poolDireDowndraft,
@@ -1500,6 +1503,7 @@ const shard: CardShard = {
     _poolJefferiesTube,
     _poolJoinTheDead,
     _poolJubilation,
+    _poolJudgmentOfAlexander,
     _poolJukaiMessenger,
     _poolJuniperOrderDruid,
     _poolKabiraCrossroads,

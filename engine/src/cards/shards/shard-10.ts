@@ -203,6 +203,7 @@ import _poolCustodyBattle from "../pool/custody-battle.js";
 import _poolDaggerOfTheWorthy from "../pool/dagger-of-the-worthy.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
+import _poolDarkSphere from "../pool/dark-sphere.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
 import _poolDaruSpiritualist from "../pool/daru-spiritualist.js";
@@ -1251,6 +1252,7 @@ const shard: CardShard = {
     _poolDaggerOfTheWorthy,
     _poolDaggerdromeImp,
     _poolDanithaSwordOfHope,
+    _poolDarkSphere,
     _poolDarkness,
     _poolDarksteelSplicer,
     _poolDaruSpiritualist,

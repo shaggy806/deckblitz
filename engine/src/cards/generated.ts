@@ -6181,6 +6181,7 @@ import _poolDarkRemedy from "./pool/dark-remedy.js";
 import _poolDarkRevenant from "./pool/dark-revenant.js";
 import _poolDarkRitual from "./pool/dark-ritual.js";
 import _poolDarkSalvation from "./pool/dark-salvation.js";
+import _poolDarkSphere from "./pool/dark-sphere.js";
 import _poolDarkSupplicant from "./pool/dark-supplicant.js";
 import _poolDarkSuspicions from "./pool/dark-suspicions.js";
 import _poolDarkTemper from "./pool/dark-temper.js";
@@ -6827,6 +6828,7 @@ import _poolDesperateCastaways from "./pool/desperate-castaways.js";
 import _poolDesperateCharge from "./pool/desperate-charge.js";
 import _poolDesperateFarmer from "./pool/desperate-farmer.js";
 import _poolDesperateFuturescribe from "./pool/desperate-futurescribe.js";
+import _poolDesperateGambit from "./pool/desperate-gambit.js";
 import _poolDesperateLunge from "./pool/desperate-lunge.js";
 import _poolDesperateMeasures from "./pool/desperate-measures.js";
 import _poolDesperateParry from "./pool/desperate-parry.js";
@@ -10629,6 +10631,7 @@ import _poolGargoyleCastle from "./pool/gargoyle-castle.js";
 import _poolGargoyleFlock from "./pool/gargoyle-flock.js";
 import _poolGargoyleSentinel from "./pool/gargoyle-sentinel.js";
 import _poolGarlandKnightOfCornelia from "./pool/garland-knight-of-cornelia.js";
+import _poolGarlandRoyalKidnapper from "./pool/garland-royal-kidnapper.js";
 import _poolGarnaBloodfistOfKeld from "./pool/garna-bloodfist-of-keld.js";
 import _poolGarnaTheBloodflame from "./pool/garna-the-bloodflame.js";
 import _poolGarnetPrincessOfAlexandria from "./pool/garnet-princess-of-alexandria.js";
@@ -14555,6 +14558,7 @@ import _poolJudgeMagisterGabranth from "./pool/judge-magister-gabranth.js";
 import _poolJudgeOfCurrents from "./pool/judge-of-currents.js";
 import _poolJudgesFamiliar from "./pool/judges-familiar.js";
 import _poolJudgmentBolt from "./pool/judgment-bolt.js";
+import _poolJudgmentOfAlexander from "./pool/judgment-of-alexander.js";
 import _poolJudithCarnageConnoisseur from "./pool/judith-carnage-connoisseur.js";
 import _poolJudithTheScourgeDiva from "./pool/judith-the-scourge-diva.js";
 import _poolJudoonEnforcers from "./pool/judoon-enforcers.js";
@@ -39545,6 +39549,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDarkRevenant,
   _poolDarkRitual,
   _poolDarkSalvation,
+  _poolDarkSphere,
   _poolDarkSupplicant,
   _poolDarkSuspicions,
   _poolDarkTemper,
@@ -40191,6 +40196,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDesperateCharge,
   _poolDesperateFarmer,
   _poolDesperateFuturescribe,
+  _poolDesperateGambit,
   _poolDesperateLunge,
   _poolDesperateMeasures,
   _poolDesperateParry,
@@ -43993,6 +43999,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGargoyleFlock,
   _poolGargoyleSentinel,
   _poolGarlandKnightOfCornelia,
+  _poolGarlandRoyalKidnapper,
   _poolGarnaBloodfistOfKeld,
   _poolGarnaTheBloodflame,
   _poolGarnetPrincessOfAlexandria,
@@ -47919,6 +47926,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJudgeOfCurrents,
   _poolJudgesFamiliar,
   _poolJudgmentBolt,
+  _poolJudgmentOfAlexander,
   _poolJudithCarnageConnoisseur,
   _poolJudithTheScourgeDiva,
   _poolJudoonEnforcers,
@@ -72922,6 +72930,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dark-revenant": _poolDarkRevenant,
   "pool/dark-ritual": _poolDarkRitual,
   "pool/dark-salvation": _poolDarkSalvation,
+  "pool/dark-sphere": _poolDarkSphere,
   "pool/dark-supplicant": _poolDarkSupplicant,
   "pool/dark-suspicions": _poolDarkSuspicions,
   "pool/dark-temper": _poolDarkTemper,
@@ -73568,6 +73577,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/desperate-charge": _poolDesperateCharge,
   "pool/desperate-farmer": _poolDesperateFarmer,
   "pool/desperate-futurescribe": _poolDesperateFuturescribe,
+  "pool/desperate-gambit": _poolDesperateGambit,
   "pool/desperate-lunge": _poolDesperateLunge,
   "pool/desperate-measures": _poolDesperateMeasures,
   "pool/desperate-parry": _poolDesperateParry,
@@ -77370,6 +77380,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gargoyle-flock": _poolGargoyleFlock,
   "pool/gargoyle-sentinel": _poolGargoyleSentinel,
   "pool/garland-knight-of-cornelia": _poolGarlandKnightOfCornelia,
+  "pool/garland-royal-kidnapper": _poolGarlandRoyalKidnapper,
   "pool/garna-bloodfist-of-keld": _poolGarnaBloodfistOfKeld,
   "pool/garna-the-bloodflame": _poolGarnaTheBloodflame,
   "pool/garnet-princess-of-alexandria": _poolGarnetPrincessOfAlexandria,
@@ -81296,6 +81307,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/judge-of-currents": _poolJudgeOfCurrents,
   "pool/judges-familiar": _poolJudgesFamiliar,
   "pool/judgment-bolt": _poolJudgmentBolt,
+  "pool/judgment-of-alexander": _poolJudgmentOfAlexander,
   "pool/judith-carnage-connoisseur": _poolJudithCarnageConnoisseur,
   "pool/judith-the-scourge-diva": _poolJudithTheScourgeDiva,
   "pool/judoon-enforcers": _poolJudoonEnforcers,
