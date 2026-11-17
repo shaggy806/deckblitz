@@ -44,12 +44,13 @@ section keeps only what to do next.
   nothing — the user approved all ten last cards' majors and they were built. **Past rank 10,000**
   the order is still EDHREC rank: the triaged cards' keys (`rank-goal.mjs --rank 20000 --keys`),
   through `author-top-cards` as B333 did (lead plus worktree agents, a group of four cards each)
-  or `build-family overnight lanes`. **B334 (2026-11-17, overnight, lane agents) reached 13755.**
-  **Next by rank:** Zevlor, Elturel Exile (13560, `effect:copy-spell-retarget-another-opponent`),
-  Clara Oswald (13608, `mechanic:commander-chosen-color-pregame` — a pregame choice, likely a
-  major to ask about), Leonardo, Sewer Samurai (13632), Vengeful Pharaoh (13655), Invasion Plans
-  (13689, the attacking player choosing blocks — likely a new decision); then 13760 on
-  (`rank-goal.mjs --rank 20000 --keys`). Soul Burn wants re-keying (hybrid pips on X). Each lane's
+  or `build-family overnight lanes`. **B334 (2026-11-17, overnight, lane agents) reached 13755, and a few past it.**
+  **Next by rank:** Zevlor, Elturel Exile (13560, `effect:copy-spell-retarget-another-opponent`) and
+  Wan Shi Tong, All-Knowing (13881, `trigger:cards-put-into-library`), both researched with a plan
+  (`docs/card-blockers.md`, batch 334); Clara Oswald (13608, `mechanic:commander-chosen-color-pregame`
+  — a pregame choice, likely a major to ask about), Invasion Plans (13689, the attacking player
+  choosing blocks — likely a new decision), Mystic Barrier (13783), Stitcher Geralf (13868); then
+  13884 on (`rank-goal.mjs --rank 20000 --keys`). Soul Burn wants re-keying (hybrid pips on X). Each lane's
   hand-off notes are in `engine/.cache/lanes/<lane>.md` (this PC only). Cryptic Spires (10790)
   needs a deck-construction choice (circle two colours) — ask the user. New cards come through `author-top-cards` once a snapshot refresh brings untriaged ones
   (`cards:needs -- --next 60`). Three decisions wait on the user: Starlight Spectacular's

@@ -666,14 +666,20 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
-- **Batch 334 (2026-11-17, `author-top-cards overnight`, ranks 11022–13755)** — 156
-  cards, every triaged card in that range but those waiting on the user, from 34 lane agents
-  (`COMPLETED.md` lists the features). About half the keys needed no engine code: the triage
-  records predated what now runs them, so `card:find` the Oracle line before believing a key.
-  Left by rank: **Zevlor, Elturel Exile** (13560, `effect:copy-spell-retarget-another-opponent`),
-  **Clara Oswald** (13608, `mechanic:commander-chosen-color-pregame` — a pregame choice, likely
-  major), **Leonardo, Sewer Samurai** (13632), **Vengeful Pharaoh** (13655), **Invasion Plans**
-  (13689, the attacking player choosing blocks — likely a new decision), then 13760 on. Waiting
+- **Batch 334 (2026-11-17, `author-top-cards overnight`, ranks 11022–14017)** — 162
+  cards, every triaged card to 13755 but those waiting on the user, then Vengeful Pharaoh, The
+  Pandorica, Oath of Kaya, Meticulous Excavation, Leonardo and Fires of Mount Doom, from 38 lane
+  agents (`COMPLETED.md` lists the features). About half the keys needed no engine code: the
+  triage records predated what now runs them, so `card:find` the Oracle line before believing a key.
+  Left by rank, two researched but not started (the lane notes in `engine/.cache/lanes/` have the
+  plan): **Zevlor, Elturel Exile** (13560, `effect:copy-spell-retarget-another-opponent` — a
+  per-opponent `copy-spell` grouping beside `CopyForEach`, one `choose-permanent-or-player` per other
+  opponent) and **Wan Shi Tong, All-Knowing** (13881, `trigger:cards-put-into-library` — a batched
+  `cards-put-into-library` event beside `withGraveyardEnterBatch`'s exile list, not counting
+  scry/surveil reorders, with Brainstorm's put-back wrapped in the batch); **Clara Oswald** (13608,
+  `mechanic:commander-chosen-color-pregame` — a pregame choice, likely major), **Invasion Plans**
+  (13689, the attacking player choosing blocks — likely a new decision), Mystic Barrier (13783),
+  Stitcher Geralf (13868), then 13884 on. Waiting
   on the user: Cryptic Spires (10790, a deck-construction choice), and the majors left for later
   — Exchange of Words, Starlight Spectacular, Malik, Grim Manipulator, The Toymaker's Trap,
   Command Performance. Re-key: **Soul Burn** ("black and/or red" on X wants hybrid pips and
