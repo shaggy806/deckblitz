@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A simultaneous move that needs a choice first — built 2026-11-17
+
+The key `bug:simultaneous-move-with-choice`: `look-and-choose`'s `thenAlways`, which runs `then` with nothing
+chosen (or nothing to choose) too, its slot 0 empty (the decision carries it as `thenAlways`). With
+`destination: "stay"` the card is chosen first and `then`, a `simultaneous` `sequence`, moves it and the rest
+as one event — `choose-permanents`' `thenTogether` for cards in a zone. Avatar Destiny (rank 11322): "return
+this card to its owner's hand and up to one creature card milled this way to the battlefield" leaves the
+graveyard as one `cards-left-graveyard`, and the Aura returns with no creature card chosen.
+`test/look-and-choose-then-always.test.ts`.
+
 ### "Each foretold card you own in exile" — built 2026-11-16
 
 The key `filter:foretold`: the `CardFilter` clause `foretold` (rule 702.143c-d — a card in exile, face down,

@@ -11912,9 +11912,19 @@ export type EffectSpec =
        * step" is the shape: the card put onto the battlefield isn't a target
        * of the spell, so nothing downstream could otherwise refer to it.
        *
-       * Skipped entirely when nothing was chosen.
+       * Skipped entirely when nothing was chosen — unless `thenAlways`.
        */
       readonly then?: EffectSpec;
+      /** `then` runs with nothing chosen too, over an empty slot 0: one
+       * instruction that moves the chosen cards **and** something else, which
+       * still happens with none chosen or none to choose. Avatar Destiny's
+       * "return this card to its owner's hand **and** up to one creature card
+       * milled this way to the battlefield" is `destination: "stay"`, then a
+       * `simultaneous` `sequence` of both moves: the card is chosen first,
+       * then both leave the graveyard as one event (one `cards-left-graveyard`)
+       * — a simultaneous sequence can't hold a step that asks, so the choice
+       * goes before it. The shape of `choose-permanents`' `thenTogether`. */
+      readonly thenAlways?: true;
       /** The cards picked are what's at stake, not what's gained: `then` may
        * take them away (Sylvan Library), so a bot picks its worst. */
       readonly givesUp?: true;
@@ -14660,6 +14670,7 @@ export interface EffectApi {
       readonly prompt?: string;
       readonly givesUp?: true;
       readonly leftoverCounters?: { readonly kind: string; readonly amount: number };
+      readonly thenAlways?: true;
     },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
@@ -23950,6 +23961,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                     revealed: true as const,
                   }
                 : spec.zone;
+      const pendingBefore = ctx.decisionPending();
       ctx.lookAndChoose(
         zone,
         spec.count === undefined ? undefined : amountValue(spec.count, ctx),
@@ -23993,8 +24005,15 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}),
           ...(spec.givesUp === true ? { givesUp: true as const } : {}),
           ...(spec.leftoverCounters !== undefined ? { leftoverCounters: spec.leftoverCounters } : {}),
+          ...(spec.thenAlways === true ? { thenAlways: true as const } : {}),
         },
       );
+      // Nothing to choose from, so nothing asked: the instruction's other
+      // part still happens (Avatar Destiny's "return this card … and up to
+      // one creature card").
+      if (spec.thenAlways === true && spec.then !== undefined && !pendingBefore && !ctx.decisionPending()) {
+        applyEffectSpec(spec.then, ctx.withTargets([]));
+      }
       return;
     }
     case "offer-zone-choice":

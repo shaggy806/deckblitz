@@ -12947,8 +12947,10 @@ export class Game {
     // its targets, since they were never targets of the spell itself. Nothing
     // chosen means nothing to say it about. Unseen finds are nothing found, and
     // it runs: what it says of them does nothing, and the rest still happens.
+    // A `thenAlways` one runs over none chosen as well (Avatar Destiny's
+    // "return this card … and up to one creature card").
     const then = awaiting.then;
-    if (then !== undefined && (chosen.length > 0 || unseen)) {
+    if (then !== undefined && (chosen.length > 0 || unseen || awaiting.thenAlways === true)) {
       const ctx = this.makeResolutionContext(
         awaiting.thenSource ?? asObjectId("choose-from-zone-source"),
         player,
@@ -45502,6 +45504,7 @@ controlledBy,
           more?.prompt,
           more?.givesUp === true,
           more?.leftoverCounters,
+          more?.thenAlways === true,
         );
       },
     };
@@ -45581,6 +45584,8 @@ controlledBy,
     givesUp = false,
     /** See `look-and-choose`'s `leftoverCounters`. */
     leftoverCounters?: { readonly kind: string; readonly amount: number },
+    /** See `look-and-choose`'s `thenAlways`. */
+    thenAlways = false,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -45638,6 +45643,7 @@ controlledBy,
         ...(then?.effect !== undefined ? { then: then.effect } : {}),
         ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
         ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
+        ...(thenAlways && then?.effect !== undefined ? { thenAlways: true as const } : {}),
       };
       if (anOpponentPicks) this.offerToAnOpponent(decision, player, source);
       else this.state.awaiting = decision;
@@ -45786,6 +45792,7 @@ controlledBy,
       ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
       ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
       ...(then?.player !== undefined ? { thenPlayer: then.player } : {}),
+      ...(thenAlways && then?.effect !== undefined ? { thenAlways: true as const } : {}),
       ...(leftoverIf !== undefined ? { leftoverIf } : {}),
       ...(leftoverCounters !== undefined && leftover === "exile" ? { leftoverCounters } : {}),
       ...(secondPick !== undefined ? { secondPick } : {}),
