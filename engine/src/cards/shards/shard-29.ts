@@ -29,6 +29,7 @@ import _poolAngelicPurge from "../pool/angelic-purge.js";
 import _poolApothecaryGeist from "../pool/apothecary-geist.js";
 import _poolAppealAuthority from "../pool/appeal-authority.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
+import _poolArbiterOfTheIdeal from "../pool/arbiter-of-the-ideal.js";
 import _poolArcBlade from "../pool/arc-blade.js";
 import _poolArcOfFortune from "../pool/arc-of-fortune.js";
 import _poolArcReactor from "../pool/arc-reactor.js";
@@ -1067,6 +1068,7 @@ const shard: CardShard = {
     _poolApothecaryGeist,
     _poolAppealAuthority,
     _poolApproachOfTheSecondSun,
+    _poolArbiterOfTheIdeal,
     _poolArcBlade,
     _poolArcOfFortune,
     _poolArcReactor,

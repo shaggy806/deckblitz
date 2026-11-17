@@ -1105,6 +1105,7 @@ import _poolArbaazMir from "./pool/arbaaz-mir.js";
 import _poolArbalestElite from "./pool/arbalest-elite.js";
 import _poolArbalestEngineers from "./pool/arbalest-engineers.js";
 import _poolArbiterOfKnollridge from "./pool/arbiter-of-knollridge.js";
+import _poolArbiterOfTheIdeal from "./pool/arbiter-of-the-ideal.js";
 import _poolArbiterOfWoe from "./pool/arbiter-of-woe.js";
 import _poolArborAdherent from "./pool/arbor-adherent.js";
 import _poolArborArmament from "./pool/arbor-armament.js";
@@ -19634,6 +19635,7 @@ import _poolOriqLoremage from "./pool/oriq-loremage.js";
 import _poolOrissSamiteGuardian from "./pool/oriss-samite-guardian.js";
 import _poolOrmendahlProfanePrince from "./pool/ormendahl-profane-prince.js";
 import _poolOrmendahlTheCorrupter from "./pool/ormendahl-the-corrupter.js";
+import _poolOrmosArchiveKeeper from "./pool/ormos-archive-keeper.js";
 import _poolOrnamentalCourage from "./pool/ornamental-courage.js";
 import _poolOrnateKanzashi from "./pool/ornate-kanzashi.js";
 import _poolOrneryDilophosaur from "./pool/ornery-dilophosaur.js";
@@ -20335,6 +20337,7 @@ import _poolPhyrexianGremlins from "./pool/phyrexian-gremlins.js";
 import _poolPhyrexianHulk from "./pool/phyrexian-hulk.js";
 import _poolPhyrexianHydra from "./pool/phyrexian-hydra.js";
 import _poolPhyrexianInfiltrator from "./pool/phyrexian-infiltrator.js";
+import _poolPhyrexianIngester from "./pool/phyrexian-ingester.js";
 import _poolPhyrexianIronfoot from "./pool/phyrexian-ironfoot.js";
 import _poolPhyrexianIronworks from "./pool/phyrexian-ironworks.js";
 import _poolPhyrexianJuggernaut from "./pool/phyrexian-juggernaut.js";
@@ -21205,6 +21208,7 @@ import _poolPursueGlory from "./pool/pursue-glory.js";
 import _poolPursueThePast from "./pool/pursue-the-past.js";
 import _poolPursuedWhale from "./pool/pursued-whale.js";
 import _poolPursuitOfFlight from "./pool/pursuit-of-flight.js";
+import _poolPursuitOfKnowledge from "./pool/pursuit-of-knowledge.js";
 import _poolPusKami from "./pool/pus-kami.js";
 import _poolPushPull from "./pool/push-pull.js";
 import _poolPushTheLimit from "./pool/push-the-limit.js";
@@ -23750,6 +23754,7 @@ import _poolScepterOfInsight from "./pool/scepter-of-insight.js";
 import _poolSceptreOfEternalGlory from "./pool/sceptre-of-eternal-glory.js";
 import _poolSchemaThief from "./pool/schema-thief.js";
 import _poolSchemingAspirant from "./pool/scheming-aspirant.js";
+import _poolSchemingFence from "./pool/scheming-fence.js";
 import _poolSchemingSilvertongue from "./pool/scheming-silvertongue.js";
 import _poolSchemingSymmetry from "./pool/scheming-symmetry.js";
 import _poolSchismotivate from "./pool/schismotivate.js";
@@ -34530,6 +34535,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArbalestElite,
   _poolArbalestEngineers,
   _poolArbiterOfKnollridge,
+  _poolArbiterOfTheIdeal,
   _poolArbiterOfWoe,
   _poolArborAdherent,
   _poolArborArmament,
@@ -53059,6 +53065,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOrissSamiteGuardian,
   _poolOrmendahlProfanePrince,
   _poolOrmendahlTheCorrupter,
+  _poolOrmosArchiveKeeper,
   _poolOrnamentalCourage,
   _poolOrnateKanzashi,
   _poolOrneryDilophosaur,
@@ -53760,6 +53767,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianHulk,
   _poolPhyrexianHydra,
   _poolPhyrexianInfiltrator,
+  _poolPhyrexianIngester,
   _poolPhyrexianIronfoot,
   _poolPhyrexianIronworks,
   _poolPhyrexianJuggernaut,
@@ -54630,6 +54638,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPursueThePast,
   _poolPursuedWhale,
   _poolPursuitOfFlight,
+  _poolPursuitOfKnowledge,
   _poolPusKami,
   _poolPushPull,
   _poolPushTheLimit,
@@ -57175,6 +57184,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSceptreOfEternalGlory,
   _poolSchemaThief,
   _poolSchemingAspirant,
+  _poolSchemingFence,
   _poolSchemingSilvertongue,
   _poolSchemingSymmetry,
   _poolSchismotivate,
@@ -67968,6 +67978,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arbalest-elite": _poolArbalestElite,
   "pool/arbalest-engineers": _poolArbalestEngineers,
   "pool/arbiter-of-knollridge": _poolArbiterOfKnollridge,
+  "pool/arbiter-of-the-ideal": _poolArbiterOfTheIdeal,
   "pool/arbiter-of-woe": _poolArbiterOfWoe,
   "pool/arbor-adherent": _poolArborAdherent,
   "pool/arbor-armament": _poolArborArmament,
@@ -86497,6 +86508,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oriss-samite-guardian": _poolOrissSamiteGuardian,
   "pool/ormendahl-profane-prince": _poolOrmendahlProfanePrince,
   "pool/ormendahl-the-corrupter": _poolOrmendahlTheCorrupter,
+  "pool/ormos-archive-keeper": _poolOrmosArchiveKeeper,
   "pool/ornamental-courage": _poolOrnamentalCourage,
   "pool/ornate-kanzashi": _poolOrnateKanzashi,
   "pool/ornery-dilophosaur": _poolOrneryDilophosaur,
@@ -87198,6 +87210,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-hulk": _poolPhyrexianHulk,
   "pool/phyrexian-hydra": _poolPhyrexianHydra,
   "pool/phyrexian-infiltrator": _poolPhyrexianInfiltrator,
+  "pool/phyrexian-ingester": _poolPhyrexianIngester,
   "pool/phyrexian-ironfoot": _poolPhyrexianIronfoot,
   "pool/phyrexian-ironworks": _poolPhyrexianIronworks,
   "pool/phyrexian-juggernaut": _poolPhyrexianJuggernaut,
@@ -88068,6 +88081,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pursue-the-past": _poolPursueThePast,
   "pool/pursued-whale": _poolPursuedWhale,
   "pool/pursuit-of-flight": _poolPursuitOfFlight,
+  "pool/pursuit-of-knowledge": _poolPursuitOfKnowledge,
   "pool/pus-kami": _poolPusKami,
   "pool/push-pull": _poolPushPull,
   "pool/push-the-limit": _poolPushTheLimit,
@@ -90613,6 +90627,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sceptre-of-eternal-glory": _poolSceptreOfEternalGlory,
   "pool/schema-thief": _poolSchemaThief,
   "pool/scheming-aspirant": _poolSchemingAspirant,
+  "pool/scheming-fence": _poolSchemingFence,
   "pool/scheming-silvertongue": _poolSchemingSilvertongue,
   "pool/scheming-symmetry": _poolSchemingSymmetry,
   "pool/schismotivate": _poolSchismotivate,

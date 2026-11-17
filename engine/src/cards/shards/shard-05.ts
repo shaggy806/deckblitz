@@ -641,6 +641,7 @@ import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOraclesGift from "../pool/oracles-gift.js";
 import _poolOrcishOriflamme from "../pool/orcish-oriflamme.js";
 import _poolOrganicExtinction from "../pool/organic-extinction.js";
+import _poolOrmosArchiveKeeper from "../pool/ormos-archive-keeper.js";
 import _poolOrnitharch from "../pool/ornitharch.js";
 import _poolOverwhelmingRemorse from "../pool/overwhelming-remorse.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
@@ -1675,6 +1676,7 @@ const shard: CardShard = {
     _poolOraclesGift,
     _poolOrcishOriflamme,
     _poolOrganicExtinction,
+    _poolOrmosArchiveKeeper,
     _poolOrnitharch,
     _poolOverwhelmingRemorse,
     _poolOverwhelmingStampede,

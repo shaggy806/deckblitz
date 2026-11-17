@@ -711,6 +711,7 @@ import _poolSavageLandDinosaur from "../pool/savage-land-dinosaur.js";
 import _poolSavageSmash from "../pool/savage-smash.js";
 import _poolSavageTwister from "../pool/savage-twister.js";
 import _poolSavingGrasp from "../pool/saving-grasp.js";
+import _poolSchemingFence from "../pool/scheming-fence.js";
 import _poolScorchSpitter from "../pool/scorch-spitter.js";
 import _poolScorpionSentinel from "../pool/scorpion-sentinel.js";
 import _poolScourgeOfValkas from "../pool/scourge-of-valkas.js";
@@ -1752,6 +1753,7 @@ const shard: CardShard = {
     _poolSavageSmash,
     _poolSavageTwister,
     _poolSavingGrasp,
+    _poolSchemingFence,
     _poolScorchSpitter,
     _poolScorpionSentinel,
     _poolScourgeOfValkas,
