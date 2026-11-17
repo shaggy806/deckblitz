@@ -4,6 +4,41 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-16 — Terror of the Peaks' triggers at the creatures, when all of them at the player is lethal
+
+Status: open.
+
+- **Seen:** live games, more than once. Several creatures enter together under a bot's Terror of
+  the Peaks, their triggers add up to an opponent's life, and the bot kills that opponent's
+  creatures with them. The user: "I keep seeing the bots kill an opponent's board before they
+  point any damage at face even when the cumulative total of the stack would be lethal."
+- **Right:** all of it at the player: they lose, and their creatures go with them.
+- **Why:** the triggers go on the stack one at a time, each asking for its target with the ones
+  after it still waiting (rule 603.3d). v1 plans them together (`planDamage`,
+  `target-polarity.ts`, 2026-10-07), but the plan counts only what the damage kills among
+  *permanents*: a player is never one of its kills (`damageToKill` is null for one), and damage
+  already on the stack at a player isn't counted (`damageOnStack` maps objects). v2 searches each
+  target, but inside a rollout the triggers still to come are aimed by v1 (`choose-targets` is
+  not in `NESTED_DECISION_KINDS`), so by that same plan: at the first trigger, no line it plays
+  has the rest at the player, and 3 at a player on 9 loses to killing a 3/3. On the scenario's
+  board (three triggers of 3, bob on 9 behind Serra Angel, Hill Giant and Grizzly Bears, a Hill
+  Giant each for carol and dave) v1 alone aims Angel, Angel, bob; v2 aims a Hill Giant of each
+  opponent's. With the first trigger put at bob by hand v2 sends the other two there: the second
+  one's rollout has a single trigger left, which v1 aims at bob here whatever is on the stack (it
+  did in its own run too), so that line does end with bob dead. One trigger that kills alone
+  already goes at the player (the 2026-10-14 entry).
+- **Scenario:** "sends three Terror of the Peaks triggers at a player they kill between them"
+  (training; reads wrong: "aimed at bob's Hill Giant, dave's Hill Giant, carol's Hill Giant").
+- **Likely fix:** make a player a kill in `planDamage`, ahead of every permanent: an opponent
+  needs their life less the damage already on the stack at them (a second map beside
+  `damageOnStack`), and takes the cheapest set of the chunks that covers it, as a permanent does;
+  if the trigger being aimed is in that set it goes at the player. Asked for a single chunk too
+  (the last trigger), where `planDamage` now returns before planning. v1's answer is then the
+  player, every rollout aims the later triggers there, and v2 keeps it. It reads the life total
+  only: prevention, "can't lose" and life gained in response aren't seen, so a plan can come up
+  short against those, as a lethal attack can. The gate's four planning scenarios have the
+  opponent far above the damage and shouldn't move; check with `bot:scenarios` and `bot:diff`.
+
 ## 2026-11-15 — Dragonlord Atarka's 5 all on one creature
 
 Status: fixed 2026-11-15 (its scenarios gate).

@@ -330,6 +330,56 @@ function bothDamageTriggers(
   };
 }
 
+/**
+ * Every damage trigger from one payoff as `entering` creatures enter under it
+ * together at a four-player table, bob on `life` with `across` in play: all
+ * aimed by the bot as the rooms seat it (its full search), passing if every
+ * one goes at bob.
+ */
+function everyDamageTriggerAtBob(
+  registry: CardRegistry,
+  weights: EvalWeights,
+  spec: {
+    readonly payoff: string;
+    readonly entering: readonly string[];
+    readonly across: readonly string[];
+    readonly life: number;
+  },
+): ScenarioResult {
+  const game = table(registry, [A, B, C, D], A);
+  onBoard(game, spec.payoff, A);
+  game.state.players[B].life = spec.life;
+  for (const name of spec.across) onBoard(game, name, B);
+  // The others have boards of their own, so bob's isn't the only one to aim at.
+  onBoard(game, "Hill Giant", C);
+  onBoard(game, "Hill Giant", D);
+  for (const name of spec.entering) game.debugSpawn(name, A, "battlefield", { announceEntry: true });
+  const bot = new EvalBotController(A, registry, { weights });
+  const name = (ref: TargetRef | null | undefined): string =>
+    ref?.kind === "object"
+      ? cardOf(game, ref.object)
+      : ref?.kind === "player"
+        ? ref.player
+        : "nothing";
+  const aimed: (TargetRef | null)[] = [];
+  for (let i = 0; i < 30 && aimed.length < spec.entering.length; i += 1) {
+    game.advanceUntil((s) => s.awaiting !== null || s.result.over);
+    if (game.state.awaiting === null || game.state.result.over) break;
+    const action = bot.act(viewOf(game, A));
+    if (game.state.awaiting.kind === "choose-targets") {
+      aimed.push(action.type === "choose-targets" ? (action.targets[0] ?? null) : null);
+    }
+    game.dispatch(action);
+  }
+  if (aimed.length < spec.entering.length) {
+    return { passed: false, detail: `only ${aimed.length} of ${spec.entering.length} triggers asked for a target` };
+  }
+  return {
+    passed: aimed.every((ref) => ref?.kind === "player" && ref.player === B),
+    detail: `aimed at ${aimed.map(name).join(", ")}`,
+  };
+}
+
 function toSecondMain(game: Game): ScenarioResult | null {
   game.advanceUntil(
     (s) =>
@@ -2574,6 +2624,34 @@ const SCENARIOS: readonly BotScenario[] = [
         entering: ["Shivan Dragon", "Shivan Dragon"],
         across: ["Colossal Dreadmaw", "Craw Wurm"],
         right: "Colossal Dreadmaw",
+      });
+    },
+  },
+  {
+    name: "sends three Terror of the Peaks triggers at a player they kill between them",
+    kind: "training",
+    rule: "Damage triggers that go on the stack together are counted together against a player's life too: if all of it kills them, it all goes at them, not at their creatures.",
+    run(weights, registry) {
+      // Reported from live games (2026-11-16, no capture): "I keep seeing the
+      // bots kill an opponent's board before they point any damage at face
+      // even when the cumulative total of the stack would be lethal." Three
+      // Hill Giants enter under Terror of the Peaks: three triggers of 3, and
+      // bob is on 9 with Serra Angel, Hill Giant and Grizzly Bears. All 9 at
+      // bob ends them, creatures and all.
+      //
+      // The triggers are planned together (`planDamage`), but the plan only
+      // counts what the damage kills among permanents: a player is never one
+      // of its kills, and the damage on the stack at a player isn't counted
+      // (`damageOnStack`). So two triggers take the Angel and the third the
+      // Giant. The search doesn't find it either: each trigger's rollout aims
+      // the ones after it by the same plan, so no line it plays has all three
+      // at bob. One trigger that kills a player alone does go at them
+      // (`rankTargets`, "aims Terror of the Peaks' 7 at a player on 4").
+      return everyDamageTriggerAtBob(registry, weights, {
+        payoff: "Terror of the Peaks",
+        entering: ["Hill Giant", "Hill Giant", "Hill Giant"],
+        across: ["Serra Angel", "Hill Giant", "Grizzly Bears"],
+        life: 9,
       });
     },
   },
