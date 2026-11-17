@@ -11,6 +11,7 @@ import {
   enter,
   lands,
   life,
+  pickModes,
   pickTargets,
   ref,
   settle,
@@ -190,5 +191,54 @@ describe("Radiant Performer", () => {
     settle(game);
     expect(life(game, B)).toBe(19);
     expect(life(game, A)).toBe(20);
+  });
+});
+
+describe("Agrus Kos, Eternal Soldier", () => {
+  it("an ability aimed at Agrus alone is copied, paid for, for each other creature you control it could target", () => {
+    const { game, a } = table();
+    const agrus = spawn(game, "Agrus Kos, Eternal Soldier");
+    const pyromancer = spawn(game, "Prodigal Pyromancer");
+    const bears = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    const mountains = lands(game, "Mountain", 2);
+    pickModes(a, 0);
+    let offered: readonly ObjectId[] = [];
+    a.choosePermanentsFn = (_view, eligible) => {
+      offered = eligible;
+      return eligible;
+    };
+    activate(game, pyromancer, 0, { targets: [ref(agrus)] });
+    // Not Agrus (the other creatures), not Bob's Bears (yours): the Pyromancer
+    // and your Bears, in the order chosen.
+    expect([...offered].sort()).toEqual([pyromancer, bears].sort());
+    expect(mountains.every((m) => game.state.objects[m].tapped)).toBe(true);
+    expect(game.state.objects[agrus].damageMarked).toBe(1);
+    expect(game.state.objects[bears].damageMarked).toBe(1);
+    expect(zone(game, pyromancer)).toBe("graveyard");
+    expect(game.state.objects[theirs].damageMarked).toBe(0);
+  });
+
+  it("declining to pay copies nothing", () => {
+    const { game, a } = table();
+    const agrus = spawn(game, "Agrus Kos, Eternal Soldier");
+    const pyromancer = spawn(game, "Prodigal Pyromancer");
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Mountain", 2);
+    pickModes(a);
+    activate(game, pyromancer, 0, { targets: [ref(agrus)] });
+    expect(game.state.objects[agrus].damageMarked).toBe(1);
+    expect(game.state.objects[bears].damageMarked).toBe(0);
+    expect(zone(game, pyromancer)).toBe("battlefield");
+  });
+
+  it("a spell aimed at Agrus doesn't trigger it", () => {
+    const { game } = table();
+    const agrus = spawn(game, "Agrus Kos, Eternal Soldier");
+    lands(game, "Mountain", 3);
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(agrus)], settle: false });
+    expect(game.state.zones.shared.stack.length).toBe(1);
+    settle(game);
+    expect(game.state.objects[agrus].damageMarked).toBe(3);
   });
 });

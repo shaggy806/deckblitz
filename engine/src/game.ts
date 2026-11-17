@@ -36496,6 +36496,7 @@ export class Game {
           // "… of an activated ability" (Professor Hojo): never a triggered one.
           (spec.abilityOnly !== "activated" || this.state.objects[event.stackObject]?.abilityKind === "activated");
         if (event.type === "player-targeted") {
+          if (spec.onlyTargetingIt === true) return false;
           // "Whenever you become the target" (Amulet of Safekeeping), "a
           // player or permanent" (Loki).
           return (
@@ -36512,7 +36513,21 @@ export class Game {
           (event.spell !== true || spec.orSpell === true) &&
           !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self) &&
-          this.triggerFilterOk(spec.filter, event.object, self)
+          this.triggerFilterOk(spec.filter, event.object, self) &&
+          // "… an ability that targets only it" (Agrus Kos): one object,
+          // however many slots name it (rule 115.9c).
+          (spec.onlyTargetingIt !== true ||
+            (this.state.objects[event.stackObject] !== undefined &&
+              stackObjectTargetsMatch(
+                this.state,
+                this.registry,
+                this.state.objects[event.stackObject],
+                { only: true, single: true, permanent: {} },
+                { you: self.controller },
+              ) &&
+              (this.state.objects[event.stackObject].targets ?? []).some(
+                (t) => t?.kind === "object" && t.object === event.object,
+              )))
         );
       }
       case "attacks":
@@ -37242,7 +37257,10 @@ export class Game {
               ? event.attacker
               : event.blocker
             : event.type === "object-targeted"
-            ? event.object
+            ? // Or what targeted it: "copy that ability" (Agrus Kos).
+              trigger.on === "becomes-target" && trigger.objectIsTargeter === true
+              ? event.stackObject
+              : event.object
             : // The ability just activated: "copy that ability".
               event.type === "ability-activated"
               ? event.ability

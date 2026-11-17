@@ -1530,6 +1530,15 @@ export type TriggerKind =
        * only an activated ability, never a triggered one: "become the target
        * of an activated ability" (Professor Hojo). */
       readonly abilityOnly?: true | "activated";
+      /** "Becomes the target of an ability **that targets only it**" (Agrus
+       * Kos, Eternal Soldier): every target the spell or ability has, as it's
+       * put on the stack, is this permanent — one object, chosen in several
+       * slots or one (rule 115.9c). Not with `player`. */
+      readonly onlyTargetingIt?: true;
+      /** The spell or ability that targeted it is the trigger object, not
+       * the permanent: "copy **that ability**" (Agrus Kos — `copy-ability`'s
+       * `"trigger-ability"`), as it last was on the stack once it has gone. */
+      readonly objectIsTargeter?: true;
     }
   | {
       /**

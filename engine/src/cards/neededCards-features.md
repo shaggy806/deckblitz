@@ -402,9 +402,11 @@ targets), `copy-spell`'s `forEachItCouldTarget` works on a target slot as well a
 `forEachItCouldTarget` — is copied once per permanent or player legal for each of its targets, judged from
 its source (`Game.retargetedAbility`; rule 707.10d). With players among two or more, the copier orders them
 a copy at a time (`choose-permanent-or-player`, the last made unasked); permanents alone stay one
-`choose-permanents`. Radiant Performer (rank 11213) and Radiate (13992). Agrus Kos, Eternal Soldier still
-waits on `trigger:becomes-target-of-ability-targeting-only-it`.
-`test/copy-for-each-permanent-or-player.test.ts`.
+`choose-permanents`. Radiant Performer (rank 11213) and Radiate (13992). Then the key
+`trigger:becomes-target-of-ability-targeting-only-it`: `becomes-target`'s `onlyTargetingIt` (every target of
+the spell or ability is this one permanent, rule 115.9c) and `objectIsTargeter` (the targeting spell or
+ability is the trigger object, so `copy-ability`'s `"trigger-ability"` copies it) — Agrus Kos, Eternal Soldier
+(12584). `test/copy-for-each-permanent-or-player.test.ts`.
 
 ### Another player's choice inside a mana ability — built 2026-11-16
 
