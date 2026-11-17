@@ -5458,7 +5458,10 @@ to others with `grantsTriggered: [ward(...)]`. `cost` is a `WardCost` —
 `{ mana: "{2}", payLife: 2 }` (Ward—{2}, Pay 2 life.),
 `{ sacrifice: { filter, count?, text: "Sacrifice a Food" } }`,
 `{ discard: 1 }`, `{ discard: 1, discardAtRandom: true }` (Ward—Discard a card
-at random: Alpharael, Stonechosen — nobody picks which), `{ blight: 2 }` (Ward—Blight 2: the payer puts two -1/-1
+at random: Alpharael, Stonechosen — nobody picks which), `{ discard: 1, discardOf: { filter: {
+typesAnyOf: ["enchantment", "instant", "sorcery"] }, what: "an enchantment, instant, or sorcery card" } }`
+(Ward—Discard an enchantment, instant, or sorcery card: Saruman of Many Colors — only such a card
+pays it, so with none in hand it can't be paid), `{ blight: 2 }` (Ward—Blight 2: the payer puts two -1/-1
 counters on a creature they control, rule 701.68a — payable only with one,
 701.68b), `{ collectEvidence: 4 }` (Ward—Collect evidence 4, Axebane Ferox: the payer
 exiles cards with total mana value 4 or more from their graveyard, rule 701.59a — payable only

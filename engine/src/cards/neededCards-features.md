@@ -364,6 +364,16 @@ reads what the trigger did. Gluttonous Hellkite (rank 11505): each player sacrif
 has left the stack (its rulings). The scaffolder reads it (`thisCast`: X in a cast trigger, and "~ enters
 with N +1/+1 counters on it for each … sacrificed/exiled/… this way").
 `test/cast-trigger-sacrifice-counters.test.ts`.
+### Ward—discard a card of some types — built 2026-11-17
+
+The key `cost:ward-discard-filter` (family `decision:ward-cost-options`): `WardCost.discardOf { filter, what }` —
+only cards matching `filter` pay the ward's discard, payable only with that many in hand (rule 118.3; the
+ruling), the payer picking which. The scaffolder reads "Ward—Discard a card." and "Ward—Discard a(n) [type, type,
+or type] card.". Saruman of Many Colors (rank 11805), whose second-spell trigger needed nothing new: each opponent
+mills two, a `this-way` `milled` condition gating a `reflexive-trigger` whose `value` is the spell's mana value
+(`{ manaValueOf: "trigger-object" }`, read by its target filter as `triggerValue`), then `exile` and `cast-now`
+of a copy, free (an enchantment's copy a token, rule 707.12). `test/ward-discard-filter.test.ts`.
+
 ### Cumulative upkeep paid in control of lands you don't control — built 2026-11-17
 
 The key `cost:cumulative-upkeep-gain-control-land` (family `keyword:cumulative-upkeep`):

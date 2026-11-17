@@ -7,6 +7,7 @@
     "effect:manifest-exiled-pile",
     "effect:noted-card-name-copy",
     "replacement:enters-with-counters-per-cast-trigger-sacrifice",
+    "cost:ward-discard-filter",
     "cost:cumulative-upkeep-gain-control-land",
     "bug:simultaneous-move-with-choice",
     "effect:phase-out-while-you-control-source",

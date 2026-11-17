@@ -18790,6 +18790,23 @@ describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () 
     expect(society.triggered[0].text).toBe("Ward—Get five poison counters.");
   });
 
+  it("ward, discard a card, or one of some types (Arna Kennerüd, Saruman of Many Colors)", () => {
+    const arna = face("Arna Kennerüd, Skycaptain", "Ward—Discard a card.");
+    expect(arna.complete).toBe(true);
+    expect(arna.triggered[0].effect).toEqual({ kind: "ward", cost: { discard: 1 } });
+    expect(arna.triggered[0].text).toBe("Ward—Discard a card.");
+    const saruman = face("Saruman of Many Colors", "Ward—Discard an enchantment, instant, or sorcery card.");
+    expect(saruman.complete).toBe(true);
+    expect(saruman.triggered[0].effect).toEqual({
+      kind: "ward",
+      cost: {
+        discard: 1,
+        discardOf: { filter: { typesAnyOf: ["enchantment", "instant", "sorcery"] }, what: "an enchantment, instant, or sorcery card" },
+      },
+    });
+    expect(saruman.triggered[0].text).toBe("Ward—Discard an enchantment, instant, or sorcery card.");
+  });
+
   it("ward, pay life equal to this creature's power (Phyrexian Fleshgorger)", () => {
     const gorger = face("Phyrexian Fleshgorger", "Ward—Pay life equal to this creature's power.");
     expect(gorger.complete).toBe(true);

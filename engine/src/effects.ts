@@ -1348,6 +1348,12 @@ export interface WardCost {
   /** With `discard`: "Discard a card **at random**" (Alpharael,
    * Stonechosen) — no one picks which. */
   readonly discardAtRandom?: boolean;
+  /** With `discard`: only cards matching `filter` — "Ward—Discard **an
+   * enchantment, instant, or sorcery card**" (Saruman of Many Colors).
+   * Payable only with that many such cards in hand (rule 118.3; its ruling),
+   * the payer picking which. `what` is the cards as printed after "Discard",
+   * the count included ("an enchantment, instant, or sorcery card"). */
+  readonly discardOf?: { readonly filter: CardFilter; readonly what: string };
   /** "Ward—Blight 2" (Auntie Ool): the payer puts two -1/-1 counters on a
    * creature they control (rule 701.68a), choosing which as they pay — the
    * `blight` effect. Payable only while they control a creature (701.68b). */
@@ -1476,7 +1482,13 @@ export function wardCostText(cost: WardCost): string {
   if (cost.sacrifice !== undefined) parts.push(cost.sacrifice.text);
   if (cost.discard !== undefined) {
     const random = cost.discardAtRandom === true ? " at random" : "";
-    parts.push(cost.discard === 1 ? `Discard a card${random}` : `Discard ${cost.discard} cards${random}`);
+    parts.push(
+      cost.discardOf !== undefined
+        ? `Discard ${cost.discardOf.what}${random}`
+        : cost.discard === 1
+          ? `Discard a card${random}`
+          : `Discard ${cost.discard} cards${random}`,
+    );
   }
   if (cost.blight !== undefined) parts.push(`Blight ${cost.blight}`);
   if (cost.collectEvidence !== undefined) parts.push(`Collect evidence ${cost.collectEvidence}`);

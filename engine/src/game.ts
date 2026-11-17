@@ -60856,6 +60856,7 @@ controlledBy,
         target: "you",
         amount: cost.discard,
         ...(cost.discardAtRandom === true ? { random: true } : {}),
+        ...(cost.discardOf !== undefined ? { filter: cost.discardOf.filter } : {}),
       });
     }
     // "Ward—Blight 2" (rule 701.68a): the payer's own creature.
@@ -60958,7 +60959,10 @@ controlledBy,
     }
     if (
       cost.discard !== undefined &&
-      this.state.zones.perPlayer[player].hand.length < cost.discard
+      // "Discard an enchantment, instant, or sorcery card": only those count.
+      (cost.discardOf !== undefined
+        ? this.discardCandidates(player, cost.discardOf.filter).length
+        : this.state.zones.perPlayer[player].hand.length) < cost.discard
     ) {
       return false;
     }

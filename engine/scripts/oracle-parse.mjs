@@ -16814,6 +16814,21 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.triggered.push({ ...wardAbility({ collectEvidence: Number(m[1]) }), text: `Ward—Collect evidence ${m[1]}.` });
       continue;
     }
+    // "Ward—Discard a card." (Arna Kennerüd), "Ward—Discard an enchantment,
+    // instant, or sorcery card." (Saruman of Many Colors): only a card of one
+    // of those types pays it (`discardOf`).
+    if (/^Ward—Discard a card\.$/.test(line)) {
+      out.triggered.push({ ...wardAbility({ discard: 1 }), text: line });
+      continue;
+    }
+    if ((m = /^Ward—Discard (an? ([a-z, ]+?) card)\.$/.exec(line))) {
+      const kinds = m[2].split(/,? or |, /);
+      if (kinds.every((kind) => CARD_TYPES.includes(kind))) {
+        const filter = kinds.length === 1 ? { type: kinds[0] } : { typesAnyOf: kinds };
+        out.triggered.push({ ...wardAbility({ discard: 1, discardOf: { filter, what: m[1] } }), text: line });
+        continue;
+      }
+    }
     // "Ward—Get five poison counters" (The Serpent Society): the payer gets
     // them (rule 122.1f).
     if ((m = /^Ward—Get (a|one|two|three|four|five|six|seven|eight|nine|ten) poison counters?\.$/.exec(line))) {
