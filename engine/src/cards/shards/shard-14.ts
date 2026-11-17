@@ -198,6 +198,7 @@ import _poolDarkslickDrake from "../pool/darkslick-drake.js";
 import _poolDauthiCutthroat from "../pool/dauthi-cutthroat.js";
 import _poolDavenantHealer from "../pool/davenant-healer.js";
 import _poolDawnOfANewAge from "../pool/dawn-of-a-new-age.js";
+import _poolDawnbreakReclaimer from "../pool/dawnbreak-reclaimer.js";
 import _poolDawnhandEulogist from "../pool/dawnhand-eulogist.js";
 import _poolDawnstrikePaladin from "../pool/dawnstrike-paladin.js";
 import _poolDaybreakCombatants from "../pool/daybreak-combatants.js";
@@ -1233,6 +1234,7 @@ const shard: CardShard = {
     _poolDauthiCutthroat,
     _poolDavenantHealer,
     _poolDawnOfANewAge,
+    _poolDawnbreakReclaimer,
     _poolDawnhandEulogist,
     _poolDawnstrikePaladin,
     _poolDaybreakCombatants,

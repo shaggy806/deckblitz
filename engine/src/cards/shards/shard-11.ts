@@ -137,6 +137,7 @@ import _poolCabalPaladin from "../pool/cabal-paladin.js";
 import _poolCabalRitual from "../pool/cabal-ritual.js";
 import _poolCabalShrine from "../pool/cabal-shrine.js";
 import _poolCabarettiCourtyard from "../pool/cabaretti-courtyard.js";
+import _poolCaitCageBrawler from "../pool/cait-cage-brawler.js";
 import _poolCalixGuidedByFate from "../pool/calix-guided-by-fate.js";
 import _poolCallToGlory from "../pool/call-to-glory.js";
 import _poolCallerOfGales from "../pool/caller-of-gales.js";
@@ -1186,6 +1187,7 @@ const shard: CardShard = {
     _poolCabalRitual,
     _poolCabalShrine,
     _poolCabarettiCourtyard,
+    _poolCaitCageBrawler,
     _poolCalixGuidedByFate,
     _poolCallToGlory,
     _poolCallerOfGales,

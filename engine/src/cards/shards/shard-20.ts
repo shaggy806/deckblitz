@@ -219,6 +219,7 @@ import _poolCrush from "../pool/crush.js";
 import _poolCrushingPain from "../pool/crushing-pain.js";
 import _poolCrystalDragon from "../pool/crystal-dragon.js";
 import _poolCullingMark from "../pool/culling-mark.js";
+import _poolCulturalExchange from "../pool/cultural-exchange.js";
 import _poolCurseOfStalkedPrey from "../pool/curse-of-stalked-prey.js";
 import _poolDandan from "../pool/dandan.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
@@ -1322,6 +1323,7 @@ const shard: CardShard = {
     _poolCrushingPain,
     _poolCrystalDragon,
     _poolCullingMark,
+    _poolCulturalExchange,
     _poolCurseOfStalkedPrey,
     _poolDandan,
     _poolDanithaNewBenaliasLight,

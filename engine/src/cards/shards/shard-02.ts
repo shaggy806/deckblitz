@@ -972,6 +972,7 @@ import _poolVampireNocturnus from "../pool/vampire-nocturnus.js";
 import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
 import _poolVassalSoul from "../pool/vassal-soul.js";
 import _poolVelukanDragon from "../pool/velukan-dragon.js";
+import _poolVerdantMastery from "../pool/verdant-mastery.js";
 import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolVexingArcanix from "../pool/vexing-arcanix.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
@@ -2019,6 +2020,7 @@ const shard: CardShard = {
     _poolVanguardOfTheRestless,
     _poolVassalSoul,
     _poolVelukanDragon,
+    _poolVerdantMastery,
     _poolVerixBladewing,
     _poolVexingArcanix,
     _poolViashinoCutthroat,

@@ -3828,6 +3828,7 @@ import _poolCagedSun from "./pool/caged-sun.js";
 import _poolCagedZombie from "./pool/caged-zombie.js";
 import _poolCagemail from "./pool/cagemail.js";
 import _poolCairnWanderer from "./pool/cairn-wanderer.js";
+import _poolCaitCageBrawler from "./pool/cait-cage-brawler.js";
 import _poolCaitSithFortuneTeller from "./pool/cait-sith-fortune-teller.js";
 import _poolCalamitousCaveIn from "./pool/calamitous-cave-in.js";
 import _poolCalamitousTide from "./pool/calamitous-tide.js";
@@ -5887,6 +5888,7 @@ import _poolCultivatorColossus from "./pool/cultivator-colossus.js";
 import _poolCultivatorDrone from "./pool/cultivator-drone.js";
 import _poolCultivatorOfBlades from "./pool/cultivator-of-blades.js";
 import _poolCultivatorsCaravan from "./pool/cultivators-caravan.js";
+import _poolCulturalExchange from "./pool/cultural-exchange.js";
 import _poolCulvertAmbusher from "./pool/culvert-ambusher.js";
 import _poolCumberStone from "./pool/cumber-stone.js";
 import _poolCunningAdvisor from "./pool/cunning-advisor.js";
@@ -6295,6 +6297,7 @@ import _poolDawnOfHope from "./pool/dawn-of-hope.js";
 import _poolDawnOfTheDead from "./pool/dawn-of-the-dead.js";
 import _poolDawnToDusk from "./pool/dawn-to-dusk.js";
 import _poolDawn from "./pool/dawn.js";
+import _poolDawnbreakReclaimer from "./pool/dawnbreak-reclaimer.js";
 import _poolDawnbringerCharioteers from "./pool/dawnbringer-charioteers.js";
 import _poolDawnbringerCleric from "./pool/dawnbringer-cleric.js";
 import _poolDawnfeatherEagle from "./pool/dawnfeather-eagle.js";
@@ -30555,6 +30558,7 @@ import _poolVerdantField from "./pool/verdant-field.js";
 import _poolVerdantForce from "./pool/verdant-force.js";
 import _poolVerdantHaven from "./pool/verdant-haven.js";
 import _poolVerdantKraken from "./pool/verdant-kraken.js";
+import _poolVerdantMastery from "./pool/verdant-mastery.js";
 import _poolVerdantOutrider from "./pool/verdant-outrider.js";
 import _poolVerdantRebirth from "./pool/verdant-rebirth.js";
 import _poolVerdantSuccession from "./pool/verdant-succession.js";
@@ -37225,6 +37229,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCagedZombie,
   _poolCagemail,
   _poolCairnWanderer,
+  _poolCaitCageBrawler,
   _poolCaitSithFortuneTeller,
   _poolCalamitousCaveIn,
   _poolCalamitousTide,
@@ -39284,6 +39289,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCultivatorDrone,
   _poolCultivatorOfBlades,
   _poolCultivatorsCaravan,
+  _poolCulturalExchange,
   _poolCulvertAmbusher,
   _poolCumberStone,
   _poolCunningAdvisor,
@@ -39692,6 +39698,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDawnOfTheDead,
   _poolDawnToDusk,
   _poolDawn,
+  _poolDawnbreakReclaimer,
   _poolDawnbringerCharioteers,
   _poolDawnbringerCleric,
   _poolDawnfeatherEagle,
@@ -63952,6 +63959,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVerdantForce,
   _poolVerdantHaven,
   _poolVerdantKraken,
+  _poolVerdantMastery,
   _poolVerdantOutrider,
   _poolVerdantRebirth,
   _poolVerdantSuccession,
@@ -70635,6 +70643,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/caged-zombie": _poolCagedZombie,
   "pool/cagemail": _poolCagemail,
   "pool/cairn-wanderer": _poolCairnWanderer,
+  "pool/cait-cage-brawler": _poolCaitCageBrawler,
   "pool/cait-sith-fortune-teller": _poolCaitSithFortuneTeller,
   "pool/calamitous-cave-in": _poolCalamitousCaveIn,
   "pool/calamitous-tide": _poolCalamitousTide,
@@ -72694,6 +72703,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cultivator-drone": _poolCultivatorDrone,
   "pool/cultivator-of-blades": _poolCultivatorOfBlades,
   "pool/cultivators-caravan": _poolCultivatorsCaravan,
+  "pool/cultural-exchange": _poolCulturalExchange,
   "pool/culvert-ambusher": _poolCulvertAmbusher,
   "pool/cumber-stone": _poolCumberStone,
   "pool/cunning-advisor": _poolCunningAdvisor,
@@ -73102,6 +73112,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dawn-of-the-dead": _poolDawnOfTheDead,
   "pool/dawn-to-dusk": _poolDawnToDusk,
   "pool/dawn": _poolDawn,
+  "pool/dawnbreak-reclaimer": _poolDawnbreakReclaimer,
   "pool/dawnbringer-charioteers": _poolDawnbringerCharioteers,
   "pool/dawnbringer-cleric": _poolDawnbringerCleric,
   "pool/dawnfeather-eagle": _poolDawnfeatherEagle,
@@ -97362,6 +97373,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/verdant-force": _poolVerdantForce,
   "pool/verdant-haven": _poolVerdantHaven,
   "pool/verdant-kraken": _poolVerdantKraken,
+  "pool/verdant-mastery": _poolVerdantMastery,
   "pool/verdant-outrider": _poolVerdantOutrider,
   "pool/verdant-rebirth": _poolVerdantRebirth,
   "pool/verdant-succession": _poolVerdantSuccession,
