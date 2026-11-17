@@ -192,6 +192,7 @@ import _poolCrudeRampart from "../pool/crude-rampart.js";
 import _poolCrystalCarapace from "../pool/crystal-carapace.js";
 import _poolCrystalVein from "../pool/crystal-vein.js";
 import _poolCurfew from "../pool/curfew.js";
+import _poolCursedWombat from "../pool/cursed-wombat.js";
 import _poolCutDown from "../pool/cut-down.js";
 import _poolCyclonusTheSaboteur from "../pool/cyclonus-the-saboteur.js";
 import _poolDainIronfoot from "../pool/dain-ironfoot.js";
@@ -1260,6 +1261,7 @@ const shard: CardShard = {
     _poolCrystalCarapace,
     _poolCrystalVein,
     _poolCurfew,
+    _poolCursedWombat,
     _poolCutDown,
     _poolCyclonusTheSaboteur,
     _poolDainIronfoot,

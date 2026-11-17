@@ -941,6 +941,7 @@ import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
 import _poolVoiceOfTheWoods from "../pool/voice-of-the-woods.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
 import _poolVolcanicSalvo from "../pool/volcanic-salvo.js";
+import _poolVoltaicVisionary from "../pool/voltaic-visionary.js";
 import _poolVoraciousReader from "../pool/voracious-reader.js";
 import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
@@ -1953,6 +1954,7 @@ const shard: CardShard = {
     _poolVoiceOfTheWoods,
     _poolVolcanicFissure,
     _poolVolcanicSalvo,
+    _poolVoltaicVisionary,
     _poolVoraciousReader,
     _poolVoyagerGlidecar,
     _poolVraskaSchemingGorgon,

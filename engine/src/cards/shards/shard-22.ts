@@ -981,6 +981,7 @@ import _poolViviensJaguar from "../pool/viviens-jaguar.js";
 import _poolViviensTalent from "../pool/viviens-talent.js";
 import _poolVoidShatter from "../pool/void-shatter.js";
 import _poolVolcanicTorrent from "../pool/volcanic-torrent.js";
+import _poolVoltChargedBerserker from "../pool/volt-charged-berserker.js";
 import _poolVoraciousVampire from "../pool/voracious-vampire.js";
 import _poolVowOfFlight from "../pool/vow-of-flight.js";
 import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
@@ -2042,6 +2043,7 @@ const shard: CardShard = {
     _poolViviensTalent,
     _poolVoidShatter,
     _poolVolcanicTorrent,
+    _poolVoltChargedBerserker,
     _poolVoraciousVampire,
     _poolVowOfFlight,
     _poolVulshokBattlegear,

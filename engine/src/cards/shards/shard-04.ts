@@ -426,6 +426,7 @@ import _poolKamahlFistOfKrosa from "../pool/kamahl-fist-of-krosa.js";
 import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKaronasZealot from "../pool/karonas-zealot.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
+import _poolKasminaEnigmaSage from "../pool/kasmina-enigma-sage.js";
 import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
 import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKeeperOfKeys from "../pool/keeper-of-keys.js";
@@ -1445,6 +1446,7 @@ const shard: CardShard = {
     _poolKariZevsExpertise,
     _poolKaronasZealot,
     _poolKarumonixTheRatKing,
+    _poolKasminaEnigmaSage,
     _poolKeenEyedRaven,
     _poolKeenSense,
     _poolKeeperOfKeys,

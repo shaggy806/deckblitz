@@ -44,6 +44,7 @@ import _poolArcumDagsson from "../pool/arcum-dagsson.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArmedDangerous from "../pool/armed-dangerous.js";
 import _poolArmoryGuard from "../pool/armory-guard.js";
+import _poolArniMetalbrow from "../pool/arni-metalbrow.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
 import _poolAscentOfTheWorthy from "../pool/ascent-of-the-worthy.js";
 import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
@@ -1104,6 +1105,7 @@ const shard: CardShard = {
     _poolArgothianEnchantress,
     _poolArmedDangerous,
     _poolArmoryGuard,
+    _poolArniMetalbrow,
     _poolArtfulDodge,
     _poolAscentOfTheWorthy,
     _poolAshioksForerunner,

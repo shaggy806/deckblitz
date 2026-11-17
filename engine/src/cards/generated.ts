@@ -1376,6 +1376,7 @@ import _poolArmyOfTheDamned from "./pool/army-of-the-damned.js";
 import _poolArnaKennerudSkycaptain from "./pool/arna-kennerud-skycaptain.js";
 import _poolArniBrokenbrow from "./pool/arni-brokenbrow.js";
 import _poolArniHumbleScribe from "./pool/arni-humble-scribe.js";
+import _poolArniMetalbrow from "./pool/arni-metalbrow.js";
 import _poolArniRenownedChampion from "./pool/arni-renowned-champion.js";
 import _poolArniSlaysTheTroll from "./pool/arni-slays-the-troll.js";
 import _poolArnimZolaBioFanatic from "./pool/arnim-zola-bio-fanatic.js";
@@ -5961,6 +5962,7 @@ import _poolCursedRonin from "./pool/cursed-ronin.js";
 import _poolCursedScroll from "./pool/cursed-scroll.js";
 import _poolCursedTotem from "./pool/cursed-totem.js";
 import _poolCursedWindbreaker from "./pool/cursed-windbreaker.js";
+import _poolCursedWombat from "./pool/cursed-wombat.js";
 import _poolCurtainOfLight from "./pool/curtain-of-light.js";
 import _poolCurtainsCall from "./pool/curtains-call.js";
 import _poolCurzonDaxBoundByBlood from "./pool/curzon-dax-bound-by-blood.js";
@@ -14750,6 +14752,7 @@ import _poolKasimirTheLoneWolf from "./pool/kasimir-the-lone-wolf.js";
 import _poolKaslaTheBrokenHalo from "./pool/kasla-the-broken-halo.js";
 import _poolKaslemsStonetree from "./pool/kaslems-stonetree.js";
 import _poolKaslemsStrider from "./pool/kaslems-strider.js";
+import _poolKasminaEnigmaSage from "./pool/kasmina-enigma-sage.js";
 import _poolKasminaEnigmaticMentor from "./pool/kasmina-enigmatic-mentor.js";
 import _poolKasminasTransmutation from "./pool/kasminas-transmutation.js";
 import _poolKassandraEagleBearer from "./pool/kassandra-eagle-bearer.js";
@@ -20971,6 +20974,8 @@ import _poolProvokeTheTrolls from "./pool/provoke-the-trolls.js";
 import _poolProvoke from "./pool/provoke.js";
 import _poolProwcatcherSpecialist from "./pool/prowcatcher-specialist.js";
 import _poolProwessOfTheFair from "./pool/prowess-of-the-fair.js";
+import _poolProwlPursuitVehicle from "./pool/prowl-pursuit-vehicle.js";
+import _poolProwlStoicStrategist from "./pool/prowl-stoic-strategist.js";
 import _poolProwlerClawedThief from "./pool/prowler-clawed-thief.js";
 import _poolProwlerMisguidedMentor from "./pool/prowler-misguided-mentor.js";
 import _poolProwlersHelm from "./pool/prowlers-helm.js";
@@ -30891,10 +30896,12 @@ import _poolVolrathsGardens from "./pool/volraths-gardens.js";
 import _poolVolrathsStronghold from "./pool/volraths-stronghold.js";
 import _poolVolsheTideturner from "./pool/volshe-tideturner.js";
 import _poolVoltCharge from "./pool/volt-charge.js";
+import _poolVoltChargedBerserker from "./pool/volt-charged-berserker.js";
 import _poolVoltaicBrawler from "./pool/voltaic-brawler.js";
 import _poolVoltaicConstruct from "./pool/voltaic-construct.js";
 import _poolVoltaicKey from "./pool/voltaic-key.js";
 import _poolVoltaicServant from "./pool/voltaic-servant.js";
+import _poolVoltaicVisionary from "./pool/voltaic-visionary.js";
 import _poolVoltaicWhip from "./pool/voltaic-whip.js";
 import _poolVoltstormAngel from "./pool/voltstorm-angel.js";
 import _poolVolunteerMilitia from "./pool/volunteer-militia.js";
@@ -34651,6 +34658,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArnaKennerudSkycaptain,
   _poolArniBrokenbrow,
   _poolArniHumbleScribe,
+  _poolArniMetalbrow,
   _poolArniRenownedChampion,
   _poolArniSlaysTheTroll,
   _poolArnimZolaBioFanatic,
@@ -39236,6 +39244,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCursedScroll,
   _poolCursedTotem,
   _poolCursedWindbreaker,
+  _poolCursedWombat,
   _poolCurtainOfLight,
   _poolCurtainsCall,
   _poolCurzonDaxBoundByBlood,
@@ -48025,6 +48034,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKaslaTheBrokenHalo,
   _poolKaslemsStonetree,
   _poolKaslemsStrider,
+  _poolKasminaEnigmaSage,
   _poolKasminaEnigmaticMentor,
   _poolKasminasTransmutation,
   _poolKassandraEagleBearer,
@@ -54246,6 +54256,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProvoke,
   _poolProwcatcherSpecialist,
   _poolProwessOfTheFair,
+  _poolProwlPursuitVehicle,
+  _poolProwlStoicStrategist,
   _poolProwlerClawedThief,
   _poolProwlerMisguidedMentor,
   _poolProwlersHelm,
@@ -64166,10 +64178,12 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVolrathsStronghold,
   _poolVolsheTideturner,
   _poolVoltCharge,
+  _poolVoltChargedBerserker,
   _poolVoltaicBrawler,
   _poolVoltaicConstruct,
   _poolVoltaicKey,
   _poolVoltaicServant,
+  _poolVoltaicVisionary,
   _poolVoltaicWhip,
   _poolVoltstormAngel,
   _poolVolunteerMilitia,
@@ -67939,6 +67953,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arna-kennerud-skycaptain": _poolArnaKennerudSkycaptain,
   "pool/arni-brokenbrow": _poolArniBrokenbrow,
   "pool/arni-humble-scribe": _poolArniHumbleScribe,
+  "pool/arni-metalbrow": _poolArniMetalbrow,
   "pool/arni-renowned-champion": _poolArniRenownedChampion,
   "pool/arni-slays-the-troll": _poolArniSlaysTheTroll,
   "pool/arnim-zola-bio-fanatic": _poolArnimZolaBioFanatic,
@@ -72524,6 +72539,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cursed-scroll": _poolCursedScroll,
   "pool/cursed-totem": _poolCursedTotem,
   "pool/cursed-windbreaker": _poolCursedWindbreaker,
+  "pool/cursed-wombat": _poolCursedWombat,
   "pool/curtain-of-light": _poolCurtainOfLight,
   "pool/curtains-call": _poolCurtainsCall,
   "pool/curzon-dax-bound-by-blood": _poolCurzonDaxBoundByBlood,
@@ -81313,6 +81329,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kasla-the-broken-halo": _poolKaslaTheBrokenHalo,
   "pool/kaslems-stonetree": _poolKaslemsStonetree,
   "pool/kaslems-strider": _poolKaslemsStrider,
+  "pool/kasmina-enigma-sage": _poolKasminaEnigmaSage,
   "pool/kasmina-enigmatic-mentor": _poolKasminaEnigmaticMentor,
   "pool/kasminas-transmutation": _poolKasminasTransmutation,
   "pool/kassandra-eagle-bearer": _poolKassandraEagleBearer,
@@ -87534,6 +87551,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/provoke": _poolProvoke,
   "pool/prowcatcher-specialist": _poolProwcatcherSpecialist,
   "pool/prowess-of-the-fair": _poolProwessOfTheFair,
+  "pool/prowl-pursuit-vehicle": _poolProwlPursuitVehicle,
+  "pool/prowl-stoic-strategist": _poolProwlStoicStrategist,
   "pool/prowler-clawed-thief": _poolProwlerClawedThief,
   "pool/prowler-misguided-mentor": _poolProwlerMisguidedMentor,
   "pool/prowlers-helm": _poolProwlersHelm,
@@ -97454,10 +97473,12 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/volraths-stronghold": _poolVolrathsStronghold,
   "pool/volshe-tideturner": _poolVolsheTideturner,
   "pool/volt-charge": _poolVoltCharge,
+  "pool/volt-charged-berserker": _poolVoltChargedBerserker,
   "pool/voltaic-brawler": _poolVoltaicBrawler,
   "pool/voltaic-construct": _poolVoltaicConstruct,
   "pool/voltaic-key": _poolVoltaicKey,
   "pool/voltaic-servant": _poolVoltaicServant,
+  "pool/voltaic-visionary": _poolVoltaicVisionary,
   "pool/voltaic-whip": _poolVoltaicWhip,
   "pool/voltstorm-angel": _poolVoltstormAngel,
   "pool/volunteer-militia": _poolVolunteerMilitia,
