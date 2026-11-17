@@ -1954,7 +1954,7 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
       ["Rakshasa Debaser", "Massacre Wurm"],
       ["Wild Ricochet", "Syr Konrad, the Grim"],
       ["Dredge the Mire", "Rakdos, Lord of Riots"],
-      ["Fireball", "Gray Merchant of Asphodel"],
+      ["Explosion of Riches", "Gray Merchant of Asphodel"],
       ["Mana Geyser", "Terror of the Peaks"],
       ["Spiteful Visions", "Mahadi, Emporium Master"],
       ["Dictate of the Twin Gods", "Thran Dynamo"],
