@@ -4091,6 +4091,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(golem.activated[0].cost).toEqual({ mana: "{6}", tap: false, do: { kind: "roll-dice", sides: 8 } });
     expect(golem.activated[0].effect).toEqual({ kind: "monstrosity", amount: { roll: "total" } });
     expect(face("{3}{G}{G}{G}: Monstrosity 3.", "Creature — Giant").activated[0].effect).toEqual({ kind: "monstrosity", amount: 3 });
+    // Imprint's exile from hand, read back as "the exiled card" (Soul Foundry,
+    // Isochron Scepter's mana value cap).
+    const imprintOf = (line: string) => face(line, "Artifact").triggered[0].effect;
+    const imprint = { kind: "look-and-choose", zone: "hand", min: 0, max: 1, destination: "exile", leftover: "stay" };
+    expect(imprintOf("Imprint — When this artifact enters, you may exile a creature card from your hand.")).toEqual({
+      ...imprint,
+      filter: { type: "creature" },
+    });
+    expect(imprintOf("Imprint — When this artifact enters, you may exile an instant card with mana value 2 or less from your hand.")).toEqual({
+      ...imprint,
+      filter: { type: "instant", manaValue: { op: "lte", n: 2 } },
+    });
   });
 
   it("tribute (rule 702.104): the keyword and its \"if tribute wasn't paid\" trigger", () => {

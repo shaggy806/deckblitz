@@ -4442,6 +4442,23 @@ export function parseSentence(sentence, ctx) {
     const amount = m[1] !== "X" ? Number(m[1]) : m[2] !== undefined ? { roll: "total" } : "x";
     return { kind: "monstrosity", amount };
   }
+  // Imprint's "you may exile a creature card from your hand" (Soul Foundry,
+  // Elite Arcanist), "… an instant card with mana value 2 or less …"
+  // (Isochron Scepter): up to one into exile, "the exiled card" after.
+  if ((m = /^You may exile an? (.+?) card( with mana value (\d+) or less)? from your hand\.$/.exec(s))) {
+    const filter = parseTypePhrase(m[1], { cards: true });
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        kind: "look-and-choose",
+        zone: "hand",
+        min: 0,
+        max: 1,
+        destination: "exile",
+        leftover: "stay",
+        filter: m[3] === undefined ? filter : { ...filter, manaValue: { op: "lte", n: Number(m[3]) } },
+      };
+    }
+  }
   const re = sentenceRe;
   const amount = (w) => numberOf(w);
   const slot = (phrase) => {

@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### X the mana value of the linked exiled card — found built 2026-11-17
+
+The key `cost:x-equals-linked-exiled-mana-value` needed no engine code: `ActivatedAbility.xIs: { manaValueOf:
+"exiled-with-source" }` (Prototype Portal's, rule 107.3c) says it. Soul Foundry (rank 12575, `create-token-copy`) and
+Elite Arcanist (17625, Isochron Scepter's free `cast-now` of a copy) are authored on it. The scaffolder now reads
+imprint's "you may exile a[n] … card [with mana value N or less] from your hand" (a `look-and-choose` into exile).
+`test/ability-defined-x.test.ts`.
+
 ### A die rolled as an activated ability's cost, its result the ability's own — built 2026-11-17
 
 The key `cost:roll-die-as-cost`: the `roll-dice` row `COST_ACTS` already had (paid last, 601.2h) works as

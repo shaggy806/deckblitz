@@ -10,7 +10,9 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
-import { A, activate, cast, lands, named, pickFromZone, table, toHand, zone } from "./harness.js";
+import { manaValueOfObject } from "../filter.js";
+
+import { A, B, activate, cast, enter, lands, life, named, pickFromZone, ref, registryOf, table, toHand, zone } from "./harness.js";
 
 function portalOffers(game: Game, portal: ObjectId) {
   return game.legalActions(A).filter((action) => action.kind === "activate-ability" && action.source === portal);
@@ -79,5 +81,64 @@ describe("Prototype Portal: X is the mana value of the exiled card", () => {
     expect(portalOffers(game, portal)).toHaveLength(1);
     activate(game, portal, 0, { x: 0 });
     expect(named(game, "Ornithopter")).toHaveLength(1);
+  });
+});
+
+describe("Soul Foundry: a token copy of the imprinted creature card, X its mana value", () => {
+  it("copies the exiled creature card at exactly its mana value, the token keeping that mana cost", () => {
+    const { game, a } = table();
+    lands(game, "Wastes", 7);
+    const bears = toHand(game, "Grizzly Bears");
+    pickFromZone(a, bears);
+    cast(game, toHand(game, "Soul Foundry"));
+    expect(zone(game, bears)).toBe("exile");
+    const foundry = named(game, "Soul Foundry")[0];
+    const offers = game.legalActions(A).filter((action) => action.kind === "activate-ability" && action.source === foundry);
+    expect(offers).toHaveLength(1);
+    expect(offers[0].kind === "activate-ability" && offers[0].xCost).toEqual({ minX: 2, maxX: 2 });
+    expect(() => activate(game, foundry, 0, { x: 1 })).toThrow(/X = 2/);
+    activate(game, foundry, 0, { x: 2 });
+    const tokens = named(game, "Grizzly Bears");
+    expect(tokens).toHaveLength(1);
+    const token = game.state.objects[tokens[0]];
+    expect(token.isToken).toBe(true);
+    // Its ruling: the copy has the card's mana cost, so its mana value.
+    expect(manaValueOfObject(registryOf(game), token)).toBe(2);
+    expect(zone(game, bears)).toBe("exile");
+  });
+
+  it("imprints only a creature card", () => {
+    const { game, a } = table();
+    lands(game, "Wastes", 4);
+    toHand(game, "Hedron Archive");
+    const bears = toHand(game, "Grizzly Bears");
+    const imprint = pickFromZone(a, bears);
+    cast(game, toHand(game, "Soul Foundry"));
+    expect(imprint.offered).toEqual([bears]);
+  });
+});
+
+describe("Elite Arcanist: cast a copy of the exiled instant, X its mana value", () => {
+  it("copies the exiled instant at exactly its mana value and casts the copy for free", () => {
+    const { game, a } = table();
+    lands(game, "Island", 1);
+    const bolt = toHand(game, "Lightning Bolt");
+    toHand(game, "Grizzly Bears");
+    const imprint = pickFromZone(a, bolt);
+    const arcanist = enter(game, "Elite Arcanist");
+    expect(imprint.offered).toEqual([bolt]);
+    expect(zone(game, bolt)).toBe("exile");
+    let cast_ = 0;
+    a.chooseCastNowFn = (_view, offer) => {
+      const way = offer.casts[0];
+      if (way === undefined) return null;
+      cast_ += 1;
+      return { type: "cast-spell", player: A, card: way.card, targets: [ref(B)], via: way.via, ...(offer.free ? { free: true } : {}) };
+    };
+    expect(() => activate(game, arcanist, 0, { x: 0 })).toThrow(/X = 1/);
+    activate(game, arcanist, 0, { x: 1 });
+    expect(cast_).toBe(1);
+    expect(life(game, B)).toBe(17);
+    expect(zone(game, bolt)).toBe("exile");
   });
 });
