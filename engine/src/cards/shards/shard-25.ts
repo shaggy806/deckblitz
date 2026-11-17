@@ -929,6 +929,7 @@ import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
 import _poolUrbanUtopia from "../pool/urban-utopia.js";
 import _poolUrborgEmissary from "../pool/urborg-emissary.js";
 import _poolUrzaChiefArtificer from "../pool/urza-chief-artificer.js";
+import _poolValiantRescuer from "../pool/valiant-rescuer.js";
 import _poolVampireAristocrat from "../pool/vampire-aristocrat.js";
 import _poolVampireNeonate from "../pool/vampire-neonate.js";
 import _poolVampiricRites from "../pool/vampiric-rites.js";
@@ -1942,6 +1943,7 @@ const shard: CardShard = {
     _poolUrbanUtopia,
     _poolUrborgEmissary,
     _poolUrzaChiefArtificer,
+    _poolValiantRescuer,
     _poolVampireAristocrat,
     _poolVampireNeonate,
     _poolVampiricRites,

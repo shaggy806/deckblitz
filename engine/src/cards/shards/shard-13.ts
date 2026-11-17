@@ -973,6 +973,7 @@ import _poolWingedTempleOfOrazca from "../pool/winged-temple-of-orazca.js";
 import _poolWingfoldPteron from "../pool/wingfold-pteron.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
+import _poolWitchKingSkyScourge from "../pool/witch-king-sky-scourge.js";
 import _poolWithengarUnbound from "../pool/withengar-unbound.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
 import _poolWolfhuntersQuiver from "../pool/wolfhunters-quiver.js";
@@ -1990,6 +1991,7 @@ const shard: CardShard = {
     _poolWingfoldPteron,
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
+    _poolWitchKingSkyScourge,
     _poolWithengarUnbound,
     _poolWizardsRockets,
     _poolWolfhuntersQuiver,

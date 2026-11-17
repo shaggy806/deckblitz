@@ -22254,6 +22254,7 @@ import _poolRequisitionRaid from "./pool/requisition-raid.js";
 import _poolRequitingHex from "./pool/requiting-hex.js";
 import _poolRerouteSystems from "./pool/reroute-systems.js";
 import _poolRescind from "./pool/rescind.js";
+import _poolRescueFromTheUnderworld from "./pool/rescue-from-the-underworld.js";
 import _poolRescueGirlFirstResponder from "./pool/rescue-girl-first-responder.js";
 import _poolRescueLeopard from "./pool/rescue-leopard.js";
 import _poolRescuePepperPotts from "./pool/rescue-pepper-potts.js";
@@ -23695,6 +23696,7 @@ import _poolScatterTheSeeds from "./pool/scatter-the-seeds.js";
 import _poolScatterToTheWinds from "./pool/scatter-to-the-winds.js";
 import _poolScatteredGroves from "./pool/scattered-groves.js";
 import _poolScatteredThoughts from "./pool/scattered-thoughts.js";
+import _poolScatteringStroke from "./pool/scattering-stroke.js";
 import _poolScattershotArcher from "./pool/scattershot-archer.js";
 import _poolScattershot from "./pool/scattershot.js";
 import _poolScavengedBlade from "./pool/scavenged-blade.js";
@@ -30269,6 +30271,7 @@ import _poolValiantChangeling from "./pool/valiant-changeling.js";
 import _poolValiantEndeavor from "./pool/valiant-endeavor.js";
 import _poolValiantGuard from "./pool/valiant-guard.js";
 import _poolValiantKnight from "./pool/valiant-knight.js";
+import _poolValiantRescuer from "./pool/valiant-rescuer.js";
 import _poolValiantVeteran from "./pool/valiant-veteran.js";
 import _poolValkiGodOfLies from "./pool/valki-god-of-lies.js";
 import _poolValkmiraProtectorsShield from "./pool/valkmira-protectors-shield.js";
@@ -31975,6 +31978,7 @@ import _poolWitchHunt from "./pool/witch-hunt.js";
 import _poolWitchHunter from "./pool/witch-hunter.js";
 import _poolWitchKingBringerOfRuin from "./pool/witch-king-bringer-of-ruin.js";
 import _poolWitchKingOfAngmar from "./pool/witch-king-of-angmar.js";
+import _poolWitchKingSkyScourge from "./pool/witch-king-sky-scourge.js";
 import _poolWitchMawNephilim from "./pool/witch-maw-nephilim.js";
 import _poolWitchOfTheMoors from "./pool/witch-of-the-moors.js";
 import _poolWitchbaneOrb from "./pool/witchbane-orb.js";
@@ -55641,6 +55645,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRequitingHex,
   _poolRerouteSystems,
   _poolRescind,
+  _poolRescueFromTheUnderworld,
   _poolRescueGirlFirstResponder,
   _poolRescueLeopard,
   _poolRescuePepperPotts,
@@ -57082,6 +57087,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScatterToTheWinds,
   _poolScatteredGroves,
   _poolScatteredThoughts,
+  _poolScatteringStroke,
   _poolScattershotArcher,
   _poolScattershot,
   _poolScavengedBlade,
@@ -63656,6 +63662,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolValiantEndeavor,
   _poolValiantGuard,
   _poolValiantKnight,
+  _poolValiantRescuer,
   _poolValiantVeteran,
   _poolValkiGodOfLies,
   _poolValkmiraProtectorsShield,
@@ -65362,6 +65369,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWitchHunter,
   _poolWitchKingBringerOfRuin,
   _poolWitchKingOfAngmar,
+  _poolWitchKingSkyScourge,
   _poolWitchMawNephilim,
   _poolWitchOfTheMoors,
   _poolWitchbaneOrb,
@@ -89041,6 +89049,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/requiting-hex": _poolRequitingHex,
   "pool/reroute-systems": _poolRerouteSystems,
   "pool/rescind": _poolRescind,
+  "pool/rescue-from-the-underworld": _poolRescueFromTheUnderworld,
   "pool/rescue-girl-first-responder": _poolRescueGirlFirstResponder,
   "pool/rescue-leopard": _poolRescueLeopard,
   "pool/rescue-pepper-potts": _poolRescuePepperPotts,
@@ -90482,6 +90491,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scatter-to-the-winds": _poolScatterToTheWinds,
   "pool/scattered-groves": _poolScatteredGroves,
   "pool/scattered-thoughts": _poolScatteredThoughts,
+  "pool/scattering-stroke": _poolScatteringStroke,
   "pool/scattershot-archer": _poolScattershotArcher,
   "pool/scattershot": _poolScattershot,
   "pool/scavenged-blade": _poolScavengedBlade,
@@ -97056,6 +97066,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/valiant-endeavor": _poolValiantEndeavor,
   "pool/valiant-guard": _poolValiantGuard,
   "pool/valiant-knight": _poolValiantKnight,
+  "pool/valiant-rescuer": _poolValiantRescuer,
   "pool/valiant-veteran": _poolValiantVeteran,
   "pool/valki-god-of-lies": _poolValkiGodOfLies,
   "pool/valkmira-protectors-shield": _poolValkmiraProtectorsShield,
@@ -98762,6 +98773,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/witch-hunter": _poolWitchHunter,
   "pool/witch-king-bringer-of-ruin": _poolWitchKingBringerOfRuin,
   "pool/witch-king-of-angmar": _poolWitchKingOfAngmar,
+  "pool/witch-king-sky-scourge": _poolWitchKingSkyScourge,
   "pool/witch-maw-nephilim": _poolWitchMawNephilim,
   "pool/witch-of-the-moors": _poolWitchOfTheMoors,
   "pool/witchbane-orb": _poolWitchbaneOrb,

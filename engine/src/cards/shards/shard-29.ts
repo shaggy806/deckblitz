@@ -722,6 +722,7 @@ import _poolScarabOfTheUnseen from "../pool/scarab-of-the-unseen.js";
 import _poolScarlandThrinax from "../pool/scarland-thrinax.js";
 import _poolScatterArc from "../pool/scatter-arc.js";
 import _poolScatterRay from "../pool/scatter-ray.js";
+import _poolScatteringStroke from "../pool/scattering-stroke.js";
 import _poolScavengingGhoul from "../pool/scavenging-ghoul.js";
 import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
@@ -1759,6 +1760,7 @@ const shard: CardShard = {
     _poolScarlandThrinax,
     _poolScatterArc,
     _poolScatterRay,
+    _poolScatteringStroke,
     _poolScavengingGhoul,
     _poolSchoolDaze,
     _poolScorpionSeethingStriker,

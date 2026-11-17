@@ -657,6 +657,7 @@ import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRelicBind from "../pool/relic-bind.js";
 import _poolRelicSeeker from "../pool/relic-seeker.js";
 import _poolReplicatingRing from "../pool/replicating-ring.js";
+import _poolRescueFromTheUnderworld from "../pool/rescue-from-the-underworld.js";
 import _poolResoluteArchangel from "../pool/resolute-archangel.js";
 import _poolResoundingThunder from "../pool/resounding-thunder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
@@ -1670,6 +1671,7 @@ const shard: CardShard = {
     _poolRelicBind,
     _poolRelicSeeker,
     _poolReplicatingRing,
+    _poolRescueFromTheUnderworld,
     _poolResoluteArchangel,
     _poolResoundingThunder,
     _poolRestlessCottage,
