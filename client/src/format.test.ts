@@ -31,6 +31,12 @@ describe('describeEvent', () => {
     expect(say({ type: 'class-level-gained', object: 'o1', level: 2 })).toBe('card:o1 becomes level 2')
   })
 
+  it("says evidence was collected in words, not as the event's JSON", () => {
+    expect(describeEvent(event({ type: 'evidence-collected', player: p1, objects: ['o1', 'o2'], amount: 10 }), nameOf, seats)).toBe(
+      'Toby collects evidence 10',
+    )
+  })
+
   it('says who gained control of a spell', () => {
     expect(
       describeEvent(event({ type: 'spell-control-changed', object: 'o1', controller: p1, previousController: p2 }), nameOf, seats),

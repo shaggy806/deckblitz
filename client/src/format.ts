@@ -325,6 +325,10 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.object)} is turned face down`
     case 'permanent-turned-face-up':
       return `${who(event.player)} turns ${name(event.object)} face up`
+    case 'evidence-collected':
+      // The cards exiled are logged as they move; this is the "whenever you
+      // collect evidence" moment (rule 701.59a).
+      return `${who(event.player)} collects evidence ${event.amount}`
     case 'cards-chosen-from-zone':
       // Chosen and not moved (a `stay` choice — Sylvan Library's two cards):
       // what's done with them comes next. Named as any other: a hand card is
