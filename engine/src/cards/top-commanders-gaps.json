@@ -30,6 +30,7 @@
     "effect:random-choice-among-targets",
     "effect:redistribute-life-totals",
     "effect:search-split-to-opponent-battlefield",
+    "effect:you-and-defending-player-loot-compare",
     "effect:opponents-who-voted-otherwise-scope",
     "static:extra-vote",
     "effect:enters-with-counters-if-x-cost",
