@@ -2863,6 +2863,10 @@ export interface ReflexiveTrigger {
    * triggered ability's `divided` — announced as it's put on the stack
    * (rules 603.12, 603.3d, 601.2d), after the creating resolution is done. */
   readonly divided?: TriggeredAbility["divided"];
+  /** "Target opponent chosen at random" (Explosion of Riches): the game
+   * picks its targets as it's put on the stack, as a triggered ability's
+   * `targetsAtRandom` (rule 603.3d). */
+  readonly targetsAtRandom?: true;
 }
 
 /** A kind of counter a player can have (rule 122.1), apart from energy — see

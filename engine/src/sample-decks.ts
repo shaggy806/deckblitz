@@ -107,12 +107,6 @@ function printingsFor(
 const list = (entries: readonly (readonly [string, number])[]): string[] =>
   entries.flatMap(([name, count]) => Array<string>(count).fill(name));
 
-const sub = (original: string, substitute: string, reason: string): PreconSubstitution => ({
-  original,
-  substitute,
-  reason,
-});
-
 function precon(deck: {
   readonly name: string;
   readonly bench?: boolean;
@@ -1039,7 +1033,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Worn Powerstone", 1],
     ],
     substitutions: [
-      sub("Explosion of Riches", "Fireball", "Top-end damage spell aimed at opponents."),
     ],
   }),
   precon({

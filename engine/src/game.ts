@@ -42086,7 +42086,7 @@ export class Game {
           value: { sentinel, resume },
         };
       },
-      reflexiveTrigger: (specs, effect, text, value, divided, about, remembered) => {
+      reflexiveTrigger: (specs, effect, text, value, divided, about, remembered, atRandom) => {
         // Rule 603.12: it triggers now and waits, like any trigger, to be put
         // on the stack the next time a player would receive priority. It
         // knows what its creator knew, and the sets it was told to remember.
@@ -42141,6 +42141,7 @@ export class Game {
             effect,
             text,
             ...(divided !== undefined ? { divided } : {}),
+            ...(atRandom === true ? { targetsAtRandom: true as const } : {}),
           },
         });
       },

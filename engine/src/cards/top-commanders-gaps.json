@@ -2914,7 +2914,9 @@
   "effect:copy-exception-set-all-subtypes",
   "effect:copy-exception-toxic",
   "effect:return-from-graveyard-set-types-food",
-  "condition:revealed-shares-type-with-spell"
+  "condition:revealed-shares-type-with-spell",
+  "condition:revealed-shares-type-with-spell",
+  "effect:drawn-this-way-trigger"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -6106,6 +6106,16 @@ export type EffectSpec =
        * thisWay: "counters-placed" }, round: "down" }`), twice under
        * Doubling Season, never if fewer than two went on. */
       readonly times?: EffectAmount;
+      /**
+       * "Target opponent **chosen at random**" in the reflexive ability, as a
+       * triggered ability's `targetsAtRandom`: the game picks each slot's
+       * target as it's put on the stack (rules 603.12, 603.3d), among the
+       * legal ones. Explosion of Riches' "whenever a card is drawn this way,
+       * … deals 5 damage to target opponent chosen at random from among your
+       * opponents": `times` `{ thisWay: "drawn" }`, each ability its own pick
+       * (its ruling).
+       */
+      readonly targetsAtRandom?: true;
     }
   | {
       /**
@@ -13484,6 +13494,8 @@ export interface EffectApi {
     about?: ObjectId | null,
     /** The sets it remembers (`remember`), captured now. */
     remembered?: { readonly [name: string]: readonly SetMember[] },
+    /** Its targets are chosen at random (`targetsAtRandom`). */
+    atRandom?: true,
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
@@ -24519,6 +24531,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.divided,
           about?.kind === "object" ? about.object : noArmy ? null : undefined,
           spec.remember === undefined ? undefined : rememberSets(spec.remember, ctx),
+          spec.targetsAtRandom,
         );
       }
       return;
