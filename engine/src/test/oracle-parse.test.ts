@@ -21083,3 +21083,22 @@ describe("opponents' spells and loyalty abilities, for a turn", () => {
     ]);
   });
 });
+
+describe("entered under your control this turn, and dying with a counter", () => {
+  it("a +1/+1 counter on each creature that entered the battlefield under your control this turn (Shaile, Dean of Radiance)", () => {
+    expect(
+      parseEffect("Put a +1/+1 counter on each creature that entered the battlefield under your control this turn.", ctx()).effect,
+    ).toEqual({
+      kind: "add-counter-all",
+      filter: { type: "creature", journaled: { what: "entered", by: "you" } },
+      counter: "+1/+1",
+      amount: 1,
+    });
+  });
+
+  it("a creature you control with a +1/+1 counter on it dies (Embrose, Dean of Shadow)", () => {
+    expect(parseTrigger("Whenever a creature you control with a +1/+1 counter on it dies")).toEqual([
+      { on: "dies", who: "you-control", filter: { type: "creature", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } } },
+    ]);
+  });
+});

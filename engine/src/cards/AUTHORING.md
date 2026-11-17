@@ -3745,7 +3745,11 @@ controlled continuously since the beginning of the turn"), Keldon Twilight's
 sacrifice. `enteredThisTurn` /
 `attackedThisTurn` are a permanent's history this turn — "creatures that
 entered this turn", Kratos, God of War's "creatures that player controls that
-**didn't attack** this turn" (`attackedThisTurn: false`);
+**didn't attack** this turn" (`attackedThisTurn: false`); "each creature that
+entered the battlefield **under your control** this turn" is `journaled: { what:
+"entered", by: "you" }` — the entries in your own record, each its controller as it
+entered, whoever controls it now (Shaile, Dean of Radiance and its ruling; no
+`controlledBy`);
 `attackedThisCombat` is this combat phase's declaration, standing though it has left combat since (rule 506.4), never one put onto the battlefield attacking: "if this creature attacked or blocked this combat" is the helper `ATTACKED_OR_BLOCKED_THIS_COMBAT`, an `anyOf` with `blockedThisTurn`'s `thisCombat`;
 `attackedYouThisTurn` is the filtering player, not a planeswalker of theirs (Jabari's Influence), and "a creature is attacking you" as a condition is `controls` with `anyController` over `attackingYou` (Heroic Return's cost, Swat Away's);
 `attackedDuringControllersLastTurn` is its present controller's last finished turn (`controllersLastTurn`; Halls of Mist, Tangle Kelp through `attachedTo`);

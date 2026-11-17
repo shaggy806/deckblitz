@@ -2562,6 +2562,15 @@ export function parseTrigger(clause) {
     if (filter === null) return null;
     return [{ on: "enters-battlefield", who: "any", filter: { ...filter, controlledBy: "opponent", tapped: false } }];
   }
+  // "Whenever a creature you control with a +1/+1 counter on it dies"
+  // (Embrose, Dean of Shadow; Meltstrider Eulogist): the counter as it last
+  // was on the battlefield (rule 603.10a).
+  if ((m = /^Whenever an? (.+?) you control with an? ([+-]\d+\/[+-]\d+) counter on it dies$/.exec(c))) {
+    const kind = parseTypePhrase(m[1]);
+    if (kind !== null && Object.keys(kind).length > 0) {
+      return [{ on: "dies", who: "you-control", filter: { ...kind, counters: { kind: m[2], compare: { op: "gte", n: 1 } } } }];
+    }
+  }
   if (
     (m =
       /^Whenever (a|an|another) (.+?)(?: (you control|an opponent controls))? (enters|dies|attacks|leaves the battlefield|is put into a graveyard from the battlefield)$/.exec(
@@ -5281,6 +5290,17 @@ export function parseSentence(sentence, ctx) {
     return {
       kind: "add-counter-all",
       filter: { type: "creature", controlledBy: "you", hasKeyword: m[3] },
+      counter: m[2].toLowerCase(),
+      amount: amount(m[1]),
+    };
+  }
+  // "On each creature that entered the battlefield under your control this
+  // turn" (Shaile, Dean of Radiance): your own record of entries, whoever
+  // controls it now (the ruling).
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on each creature that entered the battlefield under your control this turn`).exec(s))) {
+    return {
+      kind: "add-counter-all",
+      filter: { type: "creature", journaled: { what: "entered", by: "you" } },
       counter: m[2].toLowerCase(),
       amount: amount(m[1]),
     };

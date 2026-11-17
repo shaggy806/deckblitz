@@ -2794,7 +2794,8 @@
   "filter:has-modular",
   "filter:has-modular",
   "static:block-while-tapped",
-  "effect:prohibit-loyalty-abilities-one-shot"
+  "effect:prohibit-loyalty-abilities-one-shot",
+  "filter:entered-under-your-control-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
