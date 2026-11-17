@@ -11,6 +11,7 @@
     "replacement:draw-replacement-counters",
     "static:gain-activated-abilities-of-chosen-permanent",
     "replacement:enters-with-additional-card-type",
+    "static:pt-from-linked-exiled-card",
     "effect:delayed-trigger-fixed-amount",
     "trigger:first-cycle-each-turn",
     "effect:delayed-return-target-and-sacrificed-card",

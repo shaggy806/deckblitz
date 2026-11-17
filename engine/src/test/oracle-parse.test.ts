@@ -4472,6 +4472,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(dragon.triggered[0].effect).toMatchObject({ kind: "may", effect: { destination: "exile", linked: true } });
   });
 
+  it("imprint's exile is linked when a static reads the exiled creature card (Phyrexian Ingester)", () => {
+    const ingester = parseFace({
+      name: "Phyrexian Ingester",
+      type_line: "Creature — Phyrexian Beast",
+      oracle_text:
+        "Imprint — When this creature enters, you may exile target nontoken creature.\nThis creature gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.",
+    });
+    expect(ingester.triggered[0].effect).toMatchObject({ kind: "may", effect: { kind: "exile", target: 0, linked: true } });
+  });
+
   it("a card at random from a hand, or from the cards exiled with ~ (Urza's Bauble, Hired Torturer, Skyship Weatherlight)", () => {
     expect(parseEffect("Look at a card at random in target player's hand.", ctx()).effect).toEqual({
       kind: "choose-random-card",

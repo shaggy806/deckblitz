@@ -578,6 +578,13 @@ The key `replacement:enters-with-additional-card-type` needed no engine code: `l
 addTypes }` beside `withCounters` (rule 614.12 — constellation sees it). Arbiter of the Ideal (rank 12939).
 `test/inspired-enters-as-enchantment.test.ts`.
 
+### +X/+Y from the linked exiled creature card — found built 2026-11-17
+
+The key `static:pt-from-linked-exiled-card` needed no engine code: two `grantPtPerCount` sums (`of: "power"`, `of:
+"toughness"`) over `in: "exiled-with-source"`, a negative power adding nothing (rule 107.1b). Phyrexian Ingester
+(rank 13050); the scaffolder now links imprint's exile when the text reads "the exiled creature card's".
+`test/imprint-pt-bonus.test.ts`.
+
 ### A face-down pile from a graveyard, or with its source, manifested — built 2026-11-17
 
 The keys `effect:manifest-from-exile` and `effect:manifest-exiled-pile`, one general change to

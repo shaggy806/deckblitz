@@ -19772,6 +19772,8 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Hoarding Dragon's "you may put the exiled card into its owner's hand".
     /\bput the exiled card into\b/.test(oracleText) ||
     /\bsame name as the exiled card\b/.test(oracleText) ||
+    // Phyrexian Ingester's "+X/+Y, where X is the exiled creature card's power".
+    /\bthe exiled creature card's\b/.test(oracleText) ||
     (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))
   ) {
     const linkExiles = (node) => {
