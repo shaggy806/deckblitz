@@ -287,6 +287,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The Pass bar sits over the rightmost hand cards** (2026-11-11): at 1366x768 their lower edges and the lowered tray's last cards are under it, so the pointer reaching them leaves the hand and the raised tray drops.
 - **The scenario builder's damage cap ignores Zilortha** (2026-11-16, B333): `BuilderPanel.tsx`'s `selectedDamageMax` reads toughness, not lethal damage by power; the server refuses with the reason.
 - **A deck can't name its sticker sheets** (2026-11-16, B333): the deck builder and import don't set `DeckList.stickerSheets` (rule 123.2a), so a deck with a sticker card brings all 48.
+- **A trigger asked again doesn't say which one it is** (2026-11-16, the check of prompts beside other triggers): Panharmonicon's second trigger, or a Blood Artist's fifth, asks in the same words as the first; nothing counts them.
 - **The scenario builder can't hold the initiative or a dungeon position** — "Edit from here" drops both (`ScenarioSpec`), so a check of them has to reach them in play.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).

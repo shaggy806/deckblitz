@@ -181,10 +181,14 @@ export function Stack({
             run.find((member) => isTargetable(member)) ??
             (departedSource !== undefined && isTargetable(departedSource) ? departedSource : id)
           const isTop = depth === 0
-          // Only the top entry says whose it is and what it targets (App.css,
-          // `.shows-lines`); under a "prompted by" card, which isn't on the
-          // stack, the real top entry says it too.
-          const showsLines = depth === (ghost ? 1 : 0) || isTop
+          // Only the card in front says whose it is and what it targets
+          // (App.css, `.shows-lines`) — a "prompted by" card when there is
+          // one. The entry under that card used to say it too, and its lines
+          // sat against a card that hid its own: "prompted by" over "Alice ·
+          // Soul Warden's ability" over a Ravenous Chupacabra asking for its
+          // target read as Soul Warden asking (the check of 2026-11-16). It
+          // says them when hovered, as any buried entry does.
+          const showsLines = isTop
           // Custom properties (`stackDepthVars`), not the `top`/`right`/
           // `transform`/`opacity`/`z-index` properties directly -- same trick
           // the hand fan uses (see App.tsx's HAND_FAN_STEP_DEG comment) so

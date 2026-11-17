@@ -38,6 +38,30 @@ describe('decisionGhostOf', () => {
     expect(decisionGhostOf(under)).toBe(mask)
   })
 
+  it("draws the card over an earlier one of its own triggers while another is put on the stack", () => {
+    // Panharmonicon's second Ravenous Chupacabra trigger asks for its target
+    // with the first already on the stack and aimed: that entry isn't what's
+    // asking, so the card is drawn above it (the check of 2026-11-16).
+    const chupacabra = 'obj-12' as ObjectId
+    const first = 'obj-301' as ObjectId
+    const placing = {
+      decisionSource: { object: chupacabra, cardName: 'Ravenous Chupacabra' },
+      awaiting: { kind: 'choose-targets', source: chupacabra },
+      zones: { stack: [first] },
+      objects: {
+        [chupacabra]: { cardName: 'Ravenous Chupacabra' },
+        [first]: { kind: 'ability', sourceObjectId: chupacabra },
+      },
+    } as unknown as PlayerView
+    expect(decisionGhostOf(placing)).toBe(chupacabra)
+    // Its modes announced as it goes on the stack, likewise; modes chosen as
+    // an ability resolves are that ability's on top asking.
+    const modes = { ...placing, awaiting: { kind: 'choose-modes', source: chupacabra, announcing: true } } as unknown as PlayerView
+    expect(decisionGhostOf(modes)).toBe(chupacabra)
+    const resolving = { ...placing, awaiting: { kind: 'choose-modes', source: chupacabra } } as unknown as PlayerView
+    expect(decisionGhostOf(resolving)).toBeNull()
+  })
+
   it('draws nothing once a later frame is playing over the board', () => {
     // A bug report (2026-10-05): the "prompted by" card stayed on top while
     // the next frame's abilities resolved and left the stack under it.

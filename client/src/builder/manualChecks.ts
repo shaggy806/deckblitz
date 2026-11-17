@@ -12142,8 +12142,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
-    'Overgrown Tomb: "prompted by" has a line of its own above the stack',
+    'Overgrown Tomb: only "prompted by" is written above the stack',
     board({ you: { bf: ['Windswept Heath'], lib: ['Forest', 'Overgrown Tomb', 'Forest'] } }),
+  ),
+  // A question asked beside another trigger (2026-11-16).
+  preset(
+    'Ravenous Chupacabra: only "prompted by" is written above a trigger asking for its target',
+    board({
+      you: { bf: ['Soul Warden', 'Swamp*4'], hand: ['Ravenous Chupacabra'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Panharmonicon: a second trigger asks under its own "prompted by" card',
+    board({
+      you: { bf: ['Panharmonicon', 'Swamp*4'], hand: ['Ravenous Chupacabra'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
   ),
   // Mystery Booster Commander's last card (2026-11-12).
   preset(

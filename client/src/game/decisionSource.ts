@@ -13,6 +13,21 @@
  */
 import type { ObjectId, PlayerView } from 'engine/client'
 
+/** The decision is asked as a triggered ability goes on the stack (rule
+ * 603.3c-d) — its targets, its modes, or who chooses its targets — and not
+ * by anything resolving: the ability asking isn't on the stack yet. (The
+ * other `choose-targets` — a copy's new targets, a spell's changed ones —
+ * name a stack object as their source, which never reaches this.) */
+function placingTrigger(view: PlayerView): boolean {
+  const awaiting = view.awaiting
+  if (!awaiting) return false
+  return (
+    awaiting.kind === 'choose-targets' ||
+    (awaiting.kind === 'choose-modes' && awaiting.announcing === true) ||
+    (awaiting.kind === 'choose-creature-type' && awaiting.targetChooserFor === true)
+  )
+}
+
 /** The object to draw as the decision's cause, or `null` if there's nothing
  * extra to draw — nothing pending, the cause is already on the stack, or the
  * card isn't in a zone this viewer can see (the decision strip still names it
@@ -25,9 +40,13 @@ export function decisionGhostOf(view: PlayerView, answered = false): ObjectId | 
   // A permanent's ability resolving and asking: the ability itself is on top
   // of the stack (it leaves only once it's done, rule 608.2n) and is drawn
   // as that permanent's card, so another copy of the card above it would be
-  // a card that isn't on the stack sitting on top of it.
+  // a card that isn't on the stack sitting on top of it. Not so for a trigger
+  // still being put there: the entry on top is an earlier one of the same
+  // permanent's (Panharmonicon's second Ravenous Chupacabra trigger, a Blood
+  // Artist's for each creature a Wrath took), already aimed, and without the
+  // card above it the question read as that entry's asked a second time.
   const top = view.zones.stack[view.zones.stack.length - 1]
-  if (top !== undefined && view.objects[top]?.sourceObjectId === source.object) return null
+  if (top !== undefined && view.objects[top]?.sourceObjectId === source.object && !placingTrigger(view)) return null
   if (!view.objects[source.object]) return null
   return source.object
 }

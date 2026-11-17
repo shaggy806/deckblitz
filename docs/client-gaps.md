@@ -85,3 +85,12 @@ too little or too much; the server refuses an illegal board with the reason.
 123.2a has a deck that plays stickers bring its own sheets (at least ten). `DeckList.stickerSheets`
 takes them, but the deck builder and the import set none, so a deck with a sticker card brings all
 48 Unfinity sheets and three are dealt at random from those.
+
+**A trigger asked again doesn't say which one it is.** Found 2026-11-16 (the check of prompts
+beside other triggers): each trigger put on the stack asks for its own targets (rule 603.3d), so
+Panharmonicon's second Ravenous Chupacabra trigger, or a Blood Artist's for each of five creatures
+a Wrath took, asks "Choose targets for …" in the same words each time. The stack now draws the
+"prompted by" card over the ones already placed (`game/decisionSource.ts`), which shows a new
+question is being asked, but nothing says "2 of 5". The engine knows how many of the same ability
+are still waiting (`GameState.pendingTriggers` beside `pendingTargetedTrigger`); the `choose-targets`
+decision could carry the count for the banner.

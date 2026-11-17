@@ -28,6 +28,17 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## A question asked beside another trigger (2026-11-16)
+
+### Ravenous Chupacabra: only "prompted by" is written above a trigger asking for its target
+- **Do:** Cast Ravenous Chupacabra.
+- **Expect:** While it asks for its target, the stack shows Ravenous Chupacabra outlined in blue with one line above it, "PROMPTED BY". Soul Warden's ability is the card behind it, and says "… · Soul Warden's ability" only when hovered.
+
+### Panharmonicon: a second trigger asks under its own "prompted by" card
+- **Do:** Cast Ravenous Chupacabra and aim its trigger at Hill Giant.
+- **Expect:** It asks for a target again, for its second trigger: Ravenous Chupacabra in blue under "PROMPTED BY" once more, the first trigger's card behind it and its arrow at Hill Giant.
+- **Not a bug:** Both may aim at Hill Giant; the second then does nothing.
+
 ## The site check's fixes (2026-11-11)
 
 ### Windswept Heath: its finds are sorted, the same card as one tile
@@ -39,9 +50,9 @@ engine terms. A second thing to check is a second test.
 - **Do:** Use Myriad Landscape. Click the Forest tile three times.
 - **Expect:** The tile reads "✓ 1 of 4", then "✓ 2 of 4", then goes back to "×4" with nothing picked.
 
-### Overgrown Tomb: "prompted by" has a line of its own above the stack
+### Overgrown Tomb: only "prompted by" is written above the stack
 - **Do:** Use Windswept Heath and find Overgrown Tomb.
-- **Expect:** While it asks about paying 2 life, the stack shows two lines that don't touch: "PROMPTED BY", and under it "… · Windswept Heath's ability". The eye button sits above both.
+- **Expect:** While it asks about paying 2 life, the stack shows one line, "PROMPTED BY", above Overgrown Tomb, with the eye button above it. Windswept Heath's ability is the card behind, and says whose it is only when hovered.
 
 ### Game menu: leaving a game being played asks first
 - **Do:** Open **Game** in the top strip and press "Leave the room…". Press Cancel.
