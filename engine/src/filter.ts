@@ -1727,6 +1727,11 @@ export interface FilterContext {
   /** The object is a spell being cast, still in the zone it's cast from (a
    * targeting spell's `TargetSource.spell`): what `isSpell` reads then. */
   readonly asSpell?: true;
+  /** The name of the resolving spell whose effect applies the filter (not an
+   * ability's): a `name` clause of that name also matches a graveyard card
+   * whose `countsAsNamedFor` names it (Diligent Farmhand: "effects from
+   * spells named Muscle Burst count it as a card named Muscle Burst"). */
+  readonly spellName?: string;
   /**
    * The object is being matched from *inside* the layer fold that computes
    * its characteristics — a static ability's `filter` scope (see
@@ -2200,6 +2205,21 @@ const CARD_KEYWORD_READS = {
   devoid: (def) => hasKeywordLine(def, "Devoid"),
 } as const satisfies Record<CardKeyword, (def: CardDefinition, live: GameObject | undefined) => boolean>;
 
+/** Whether `live`, a card in a graveyard, counts as a card named `name` for
+ * the resolving spell of that name applying the filter — its graveyard
+ * static's `countsAsNamedFor` (Diligent Farmhand, Pardic Firecat; rule
+ * 113.6b: it works there alone). */
+function countsAsNamed(
+  registry: CardRegistry,
+  live: GameObject | undefined,
+  name: string,
+  ctx: FilterContext,
+): boolean {
+  if (ctx.spellName !== name || live === undefined || live.zone !== "graveyard") return false;
+  if (!registry.has(rulesTextName(live))) return false;
+  return registry.get(rulesTextName(live)).static.some((s) => s.fromGraveyard === true && s.countsAsNamedFor === name);
+}
+
 /** Does object `id` satisfy every clause of `filter`?
  *
  * With a snapshot in play (`FilterContext.lastKnown` / `.snapshot`) every
@@ -2411,7 +2431,7 @@ export function matchesFilter(
   }
   // The name it has — a copy exception's, if one renamed it (`nameOf`).
   const named = live !== undefined ? nameOf(live) : (lki!.renamed ?? lki!.name);
-  if (filter.name !== undefined && named !== filter.name) return false;
+  if (filter.name !== undefined && named !== filter.name && !countsAsNamed(registry, live, filter.name, ctx)) return false;
   if (filter.sameNameAsAny !== undefined) {
     // A nameless object (face down, rule 708.2a) shares a name with nothing;
     // one name in common is enough — a split card's either half (201.2a).

@@ -379,13 +379,14 @@ describe("statics that work from the graveyard", () => {
   // the battlefield; any other part — another replacement, a type change, a
   // cost change, a granted triggered ability — would still work from the
   // battlefield and never from the graveyard, so a card that needs one waits
-  // for the engine.
+  // for the engine. `countsAsNamedFor` is read by `matchesFilter` from a
+  // graveyard alone (Diligent Farmhand).
   it("carry only what is read from a graveyard", () => {
     const read = new Set([
       "affects", "condition", "fromGraveyard", "text",
       "grantPt", "grantPtPerCount", "grantKeywords", "grantToxic", "restrictions",
       "combatDamageByToughness", "canAttackAsThoughNoDefender", "cantBeSacrificed", "protection", "setBasePt",
-      "grantsActivated",
+      "grantsActivated", "countsAsNamedFor",
     ]);
     const enters = (ability: StaticAbility): boolean => {
       const r = ability.replacement;

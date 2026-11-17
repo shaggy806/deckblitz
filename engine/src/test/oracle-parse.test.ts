@@ -19792,6 +19792,17 @@ describe("keywords of the exiled cards used to craft it", () => {
     expect((face.static[0].sharesKeywords as { keywords: string[] }).keywords).toHaveLength(12);
   });
 
+  it("reads Diligent Farmhand's card that counts as a Muscle Burst in a graveyard", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human Druid",
+      oracle_text:
+        "If this card is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst.",
+    } as never) as unknown as { static: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]).toMatchObject({ affects: { scope: "self" }, fromGraveyard: true, countsAsNamedFor: "Muscle Burst" });
+  });
+
   it("reads Timber Paladin's, by how many Auras enchant it", () => {
     const face = parseFace({
       name: "Test Card",

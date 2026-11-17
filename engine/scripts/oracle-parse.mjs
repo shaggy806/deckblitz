@@ -23039,6 +23039,15 @@ function parseStatic(line, text) {
   // as a creature card with flying is in a graveyard, ~ has flying" (Cairn
   // Wanderer) reads every graveyard's creature cards instead.
   {
+    // "If this card is in a graveyard, effects from spells named Muscle Burst
+    // count it as a card named Muscle Burst" (Diligent Farmhand, Pardic
+    // Firecat): a graveyard static's `countsAsNamedFor`.
+    const named = /^If (?:this card|~) is in a graveyard, effects from spells named ([A-Z][^,.]*) count it as a card named ([A-Z][^,.]*)\.$/.exec(line);
+    if (named !== null && named[1] === named[2]) {
+      return { affects: { scope: "self" }, fromGraveyard: true, countsAsNamedFor: named[1], text };
+    }
+  }
+  {
     const fromGraveyard = /^As long as a creature card with flying is in a graveyard, (~) has flying\. The same is true for (.+)\.$/.exec(line);
     const w =
       /^(~) has flying as long as (?:an exiled card used to craft it|a card exiled with it) has flying\. The same is true for (.+)\.$/.exec(line) ??

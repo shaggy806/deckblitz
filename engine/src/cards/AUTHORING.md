@@ -6388,6 +6388,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   per card there). Any other part — another replacement, a type change, a
   granted trigger — would work from the battlefield instead, so
   `pool.test.ts` refuses one.
+- `countsAsNamedFor: "Muscle Burst"` (with `fromGraveyard: true`) — "**if this
+  card is in a graveyard, effects from spells named Muscle Burst count it as
+  a card named Muscle Burst**" (Diligent Farmhand; Pardic Firecat's Flame
+  Burst): a `name` filter a resolving spell of that name applies matches the
+  card too (`FilterContext.spellName`, given by the spell's own resolution
+  context to `countInGraveyard`), so Muscle Burst's "cards named Muscle Burst
+  in all graveyards" counts it. Rule 113.6b: from a graveyard alone.
 - `attackAsThoughHaste: true` — the affected creatures "can attack as though
   they had haste" (Instill Energy on `"attached"`): they may be declared as
   attackers though summoning sick (rules 302.6, 702.10b). It gives no haste:

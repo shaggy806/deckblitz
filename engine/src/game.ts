@@ -39106,6 +39106,11 @@ export class Game {
     // The spell whose cost is being worked out: on the stack, out of every
     // graveyard count (`pricedSpell`).
     const pricedOnStack = opts.pricedSpell === true ? opts.priced : undefined;
+    // A spell's own resolution — it's the top of the stack, not an ability —
+    // for "effects from spells named …" (`FilterContext.spellName`).
+    const stackTop = this.state.zones.shared.stack[this.state.zones.shared.stack.length - 1];
+    const spellName =
+      stackTop === source && this.state.objects[source]?.kind === "card" ? nameOf(this.state.objects[source]) : undefined;
     const expectedZoneOf = (target: TargetRef): ZoneType | null => {
       if (target.kind !== "object") return null;
       const i = (opts.readTargets ?? targets).findIndex(
@@ -40291,7 +40296,12 @@ export class Game {
         let n = 0;
         for (const player of this.state.turnOrder) {
           for (const id of this.state.zones.perPlayer[player].graveyard) {
-            if (id !== except && matchesFilter(this.state, this.registry, id, filter, { you })) n += 1;
+            if (
+              id !== except &&
+              matchesFilter(this.state, this.registry, id, filter, { you, ...(spellName !== undefined ? { spellName } : {}) })
+            ) {
+              n += 1;
+            }
           }
         }
         return n;

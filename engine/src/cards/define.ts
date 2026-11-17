@@ -2314,6 +2314,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * battlefield such a static does nothing.
    */
   readonly fromGraveyard?: true;
+  /**
+   * "If this card is in a graveyard, effects from spells named Muscle Burst
+   * count it as a card named Muscle Burst" (Diligent Farmhand; Pardic
+   * Firecat's Flame Burst): with `fromGraveyard`, a `name` filter asked by a
+   * resolving spell of that name matches this card too, wherever it's read
+   * from — Muscle Burst's "the number of cards named Muscle Burst in all
+   * graveyards" counts it (rule 113.6b: the ability works only there).
+   * Read by `matchesFilter` through `FilterContext.spellName`.
+   */
+  readonly countsAsNamedFor?: string;
   /** A replacement effect (rule 614) — see `replacements.ts`. `affects` is
    * irrelevant to one: each `ReplacementSpec` names what it reaches itself
    * (`scope: "self"` is the convention). */
