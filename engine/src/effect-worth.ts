@@ -184,6 +184,7 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "each-other-opponent":
       return opponentsOf(state, controller).filter((p) => p !== ctx.triggerPlayer);
     case "opponents-who-voted-with-you":
+    case "opponents-who-voted-otherwise":
     case "opponents-who-rolled-highest":
     case "you-and-opponents-who-voted-with-you":
     case "each-friend":

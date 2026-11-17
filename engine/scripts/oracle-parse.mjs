@@ -2388,6 +2388,8 @@ export function parseTrigger(clause) {
   // "Whenever a player loses the game" (Blood Tyrant, Ramses, Assassin Lord):
   // the `loses-game` row, "they" the player who lost.
   if (c === "Whenever a player loses the game") return [{ on: "event", event: "loses-game", who: "any" }];
+  // Erestor of the Council, Model of Unity, Grudge Keeper (rule 701.38).
+  if (c === "Whenever players finish voting") return [{ on: "event", event: "voting-finishes" }];
   // "Whenever you win a clash" (Marvo, Deep Operative), "whenever you clash".
   if (c === "Whenever you win a clash") return [{ on: "clashes", who: "you", won: true }];
   if (c === "Whenever you clash") return [{ on: "clashes", who: "you" }];
@@ -5048,6 +5050,10 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(?:you )?gain ${N} life`).exec(s))) return { kind: "gain-life", amount: amount(m[1]) };
   if ((m = re(`each opponent loses ${N} life`).exec(s))) {
     return { kind: "lose-life", amount: amount(m[1]), who: "each-opponent" };
+  }
+  // Grudge Keeper, after "whenever players finish voting".
+  if ((m = re(`each opponent who voted for a choice you didn't vote for loses ${N} life`).exec(s))) {
+    return { kind: "lose-life", amount: amount(m[1]), who: "opponents-who-voted-otherwise" };
   }
   if ((m = re(`(target player|target opponent) loses ${N} life`).exec(s))) {
     return { kind: "lose-life", amount: amount(m[2]), target: slot(m[1]) };

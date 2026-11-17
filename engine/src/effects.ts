@@ -2242,6 +2242,13 @@ export type PlayerScope =
    * resolution held, or the one that fired a "whenever players finish
    * voting" trigger. Nobody, with no vote. */
   | "opponents-who-voted-with-you"
+  /** "Each opponent who voted for a choice **you didn't vote for**" (Grudge
+   * Keeper): each opponent with a vote for a choice none of the effect's
+   * controller's votes was for, in turn order, each once however many such
+   * votes they cast (the rulings) — read off the same vote. An opponent with
+   * more than one vote can be in this scope and `"opponents-who-voted-with-you"`
+   * both. Nobody, with no vote. */
+  | "opponents-who-voted-otherwise"
   /** "Each player rolls a d20. If one or more **opponents had the highest
    * result** …" (Chaos Dragon): each opponent of the effect's controller
    * whose roll, among every roll this resolution has made, had the highest

@@ -3153,9 +3153,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   chosen, after each has made its "as this enters" choices.
 
   "Whenever players finish voting" is the `{ on: "event", event: "voting-finishes" }` trigger,
-  whose ability reads that vote: the `"opponents-who-voted-with-you"` and
-  `"you-and-opponents-who-voted-with-you"` scopes and `{
-  opponentsVotedOtherwise: true }` (Erestor of the Council, Model of Unity).
+  whose ability reads that vote: the `"opponents-who-voted-with-you"`,
+  `"you-and-opponents-who-voted-with-you"` and `"opponents-who-voted-otherwise"`
+  scopes and `{ opponentsVotedOtherwise: true }` (Erestor of the Council, Model
+  of Unity, Grudge Keeper's "each opponent who voted for a choice you didn't
+  vote for loses 2 life").
   Not yet: a voter's own choice after the vote ("the voter chooses a
   creature they control" — Elrond of the White Council), "a permanent owned
   by the voter" (Expropriate).

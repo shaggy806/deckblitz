@@ -894,6 +894,31 @@ function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boo
   return mod.targeting !== undefined || mod.targetingSource === true || mod.targetingEnchantedPlayer === true;
 }
 
+/** The player scopes only a resolution can read (`makeResolutionContext`'s
+ * `scoped`): a vote's voters, a source's chosen player, the players this
+ * resolution dealt damage to, a ref made of accessors. `scopedPlayers` gives
+ * nobody for them. */
+const RESOLUTION_SCOPES: ReadonlySet<PlayerScope> = new Set<PlayerScope>([
+  "opponents-who-voted-with-you",
+  "opponents-who-voted-otherwise",
+  "opponents-who-rolled-highest",
+  "you-and-opponents-who-voted-with-you",
+  "each-friend",
+  "each-foe",
+  "players-dealt-damage-this-way",
+  "players-who-lost-control-this-way",
+  "damaged-players",
+  "attacked-players",
+  "you-and-attacked-players",
+  "chosen-player",
+  "other-chosen-player",
+  "enchanted-player",
+]);
+
+function onlyAResolutionReads(who: PlayerScope): boolean {
+  return typeof who === "object" || RESOLUTION_SCOPES.has(who);
+}
+
 /** A target's id: the object's, or the player's (the two never collide). */
 function targetRefId(ref: TargetRef): ObjectId | PlayerId {
   return ref.kind === "object" ? ref.object : ref.player;
@@ -39434,18 +39459,23 @@ export class Game {
           (p) => totals.get(p) === highest,
         );
       }
-      if (who !== "opponents-who-voted-with-you" && who !== "you-and-opponents-who-voted-with-you") {
+      if (
+        who !== "opponents-who-voted-with-you" &&
+        who !== "you-and-opponents-who-voted-with-you" &&
+        who !== "opponents-who-voted-otherwise"
+      ) {
         return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, false, refs.triggerSpellController);
       }
-      const withYou = opponentsVoting(
+      // With you, or for a choice none of your votes was for (Grudge Keeper).
+      const voters = opponentsVoting(
         votes(),
         controller,
         this.scopedPlayers(controller, "each-opponent", triggerObject, triggerLastKnown(), refs.player),
-        true,
+        who !== "opponents-who-voted-otherwise",
       );
-      if (who === "opponents-who-voted-with-you") return withYou;
+      if (who !== "you-and-opponents-who-voted-with-you") return voters;
       return this.scopedPlayers(controller, "each-player", triggerObject, triggerLastKnown(), refs.player).filter(
-        (p) => p === controller || withYou.includes(p),
+        (p) => p === controller || voters.includes(p),
       );
     };
     // "Enchanted creature" as this resolves: what the source is attached
@@ -45771,12 +45801,10 @@ controlledBy,
       // "Each opponent loses 2 life": one simultaneous loss (rule 603.2c).
       changeLifeScoped: (who, delta) =>
         this.withLifeLossBatch(() =>
-          // A source's chosen player(s) only a resolution knows.
-          typeof who === "object" ||
-          who === "chosen-player" ||
-          who === "other-chosen-player" ||
-          who === "enchanted-player"
-            ? scoped(who).forEach((player) => this.changeLife(player, delta))
+          // The players only a resolution knows: a source's chosen player, a
+          // vote's voters (Grudge Keeper), …
+          onlyAResolutionReads(who)
+            ? this.changeLifeOf(scoped(who), delta, controller)
             : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
         ),
       searchEachLibrary: (owners, filter, destination, then) =>
@@ -64583,24 +64611,7 @@ controlledBy,
     if (who === "you") return [controller];
     // Only a resolution knows a vote's votes, its source's chosen player and
     // any ref made of accessors (`makeResolutionContext`).
-    if (
-      typeof who === "object" ||
-      who === "opponents-who-voted-with-you" ||
-      who === "opponents-who-rolled-highest" ||
-      who === "you-and-opponents-who-voted-with-you" ||
-      who === "each-friend" ||
-      who === "each-foe" ||
-      who === "players-dealt-damage-this-way" ||
-      who === "players-who-lost-control-this-way" ||
-      who === "damaged-players" ||
-      who === "attacked-players" ||
-      who === "you-and-attacked-players" ||
-      who === "chosen-player" ||
-      who === "other-chosen-player" ||
-      who === "enchanted-player"
-    ) {
-      return [];
-    }
+    if (onlyAResolutionReads(who)) return [];
     // "The player to your left / right": the next player in turn order, or
     // the one before, among those still in the game (rule 101.4).
     if (who === "player-to-your-left" || who === "player-to-your-right") {
@@ -64694,7 +64705,18 @@ controlledBy,
     triggerSpellController?: PlayerId,
   ): void {
     if (delta === 0) return;
-    for (const p of this.scopedPlayers(controller, who, triggerObject, triggerLastKnown, triggerPlayer, false, triggerSpellController)) {
+    this.changeLifeOf(
+      this.scopedPlayers(controller, who, triggerObject, triggerLastKnown, triggerPlayer, false, triggerSpellController),
+      delta,
+      controller,
+    );
+  }
+
+  /** Each of `players` gains or loses `delta` life by an effect `controller`
+   * controls (the loss tallied, `life-changed`'s `byEffectOf`). */
+  private changeLifeOf(players: readonly PlayerId[], delta: number, controller: PlayerId): void {
+    if (delta === 0) return;
+    for (const p of players) {
       if (delta < 0) this.loseLifeTallied(p, -delta, undefined, controller);
       else this.changeLife(p, delta);
     }

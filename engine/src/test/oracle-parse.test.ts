@@ -17419,6 +17419,16 @@ describe("mana that adds counters to what it casts", () => {
     expect(face.static[0].votesAdditionalTime).toBeUndefined();
   });
 
+  it("Grudge Keeper: whenever players finish voting, the opponents who voted otherwise", () => {
+    const face = read(
+      "Creature — Zombie Wizard",
+      "Whenever players finish voting, each opponent who voted for a choice you didn't vote for loses 2 life.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({ on: "event", event: "voting-finishes" });
+    expect(face.triggered[0].effect).toEqual({ kind: "lose-life", amount: 2, who: "opponents-who-voted-otherwise" });
+  });
+
   it("Tekuthal, Inquiry Dominus", () => {
     const face = read(
       "Legendary Creature — Phyrexian Horror",
