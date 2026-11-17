@@ -6120,7 +6120,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   exile with brain counters on them", a `counters` filter), `"exiled-with"` (the
   cards exiled with this permanent's stint, by an `exile { linked }` or
   `untilSourceLeaves`, rule 607.2a: Steward of the Harvest, Hazel's Brewmaster
-  with `affects` over its Foods; a Forest card gives "{T}: Add {G}"),
+  with `affects` over its Foods; a Forest card gives "{T}: Add {G}"; the
+  filter reads the card in exile, so Dark Impostor's `{ type: "creature" }`
+  gives nothing for an animated land it exiled — a land card there),
   `"chosen-exiled"` (Koh's "the last chosen card", from `choose-exiled-card`) or
   `"battlefield"` (Experiment
   Kraj's "each other creature with a +1/+1 counter on it"; Marvin's "creatures
