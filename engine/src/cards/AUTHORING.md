@@ -941,11 +941,14 @@ cards in graveyards instead, `ownedBy: "you"` for yours — Aven Heartstabber's
 condition, Sewer Crocodile's the `condition` on an activated ability's
 `costReduction`. **Any set** (2026-10-31): `in` is `"battlefield"` (the
 default), `"graveyards"`, `"exile"` (a card exiled face down matches only an
-owner-only filter, rule 406.3a) or `"attackers"` — the attackers that counted
+owner-only filter, rule 406.3a) or `"trigger-batch"` — the attackers that counted
 for the `attacks-batch`/`attack-with`/`attacks-player` trigger that fired, read as it resolves
-(as last on the battlefield if gone; filter `{}`, the trigger already
+(as last on the battlefield if gone, rule 608.2h; filter `{}`, the trigger already
 narrowed them: Shriekwood Devourer's "the greatest power among those
-creatures", Vulpine Harvester's "their total power"); a list is a union, and
+creatures", Vulpine Harvester's "their total power", Witch-king, Sky Scourge's
+"exile the top X cards …, where X is their total power" of "whenever you attack
+with one or more Wraiths", an `attack-with` of `atLeast: 1` and `filter: {
+subtype: "Wraith" }`); a list is a union, and
 `plus: [{ filter, in? }]` adds a set with a filter of its own (Ambitious
 Dragonborn's "creatures you control and creature cards in your graveyard");
 `aggregate: "greatest-shared-creature-type"` is how many of them share the type most

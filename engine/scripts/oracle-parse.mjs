@@ -2381,6 +2381,12 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever you attack with (two|three|four|five|six|seven|eight|nine|ten) or more creatures$/.exec(c))) {
     return [{ on: "attack-with", who: "you", atLeast: NUMBERS[m[1]] }];
   }
+  // "Whenever you attack with one or more Wraiths" (Witch-king, Sky Scourge):
+  // once per declaration, the matching attackers its batch ("their").
+  if ((m = /^Whenever you attack with one or more (.+)$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null) return [{ on: "attack-with", who: "you", atLeast: 1, filter }];
+  }
   if ((m = /^When(?:ever)? you attack with exactly (two|three|four|five) creatures$/.exec(c))) {
     return [{ on: "attack-with", who: "you", exactly: NUMBERS[m[1]] }];
   }
@@ -8728,6 +8734,17 @@ function impulseWindowAt(sentences, i, ctx) {
     when.upTo === undefined
   ) {
     return { kind: "impulse-exile", amount: 1, whose: "damaged-players", ...when, ...(play ? { play: true } : {}) };
+  }
+  // "Exile the top X cards of your library, where X is their total power" of
+  // an attack read as one batch (Witch-king, Sky Scourge): the attackers'
+  // total power, each read as it last existed once it has left (rule 608.2h).
+  if (
+    ctx?.attackBatch === true &&
+    /^exile the top X cards of your library, where X is their total power\.$/i.test(sentences[i]) &&
+    when.upTo === undefined
+  ) {
+    const amount = { aggregate: "sum", of: "power", filter: {}, in: "trigger-batch" };
+    return { kind: "impulse-exile", amount, ...when, ...(play ? { play: true } : {}) };
   }
   // "Exile the top two cards of your library. Until your next end step, you
   // may play one of those cards." (Unlucky Witness).

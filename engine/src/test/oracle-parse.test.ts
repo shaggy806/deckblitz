@@ -21779,3 +21779,28 @@ describe("each opponent exiles until a nonland card, linked", () => {
     expect(face.triggered[0].effect.effect.linked).toBeUndefined();
   });
 });
+
+describe("the top X cards, X the attacking Wraiths' total power (Witch-king, Sky Scourge)", () => {
+  it("an attack-with batch of a type, and their total power as an aggregate over it", () => {
+    const king = parseFace(
+      {
+        name: "Witch-king, Sky Scourge",
+        type_line: "Legendary Creature — Wraith Noble",
+        mana_cost: "{5}{B}{R}",
+        oracle_text:
+          "Whenever you attack with one or more Wraiths, exile the top X cards of your library, where X is their total power. You may play those cards this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(king.complete).toBe(true);
+    expect(king.triggered[0]).toMatchObject({
+      trigger: { on: "attack-with", who: "you", atLeast: 1, filter: { subtype: "Wraith" } },
+      effect: {
+        kind: "impulse-exile",
+        amount: { aggregate: "sum", of: "power", filter: {}, in: "trigger-batch" },
+        duration: "end-of-turn",
+        play: true,
+      },
+    });
+  });
+});
