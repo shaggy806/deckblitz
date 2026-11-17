@@ -978,6 +978,7 @@ import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
 import _poolValkoIndorian from "../pool/valko-indorian.js";
 import _poolValleyRally from "../pool/valley-rally.js";
 import _poolVanishment from "../pool/vanishment.js";
+import _poolVarchildsWarRiders from "../pool/varchilds-war-riders.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
 import _poolVaultPlunderer from "../pool/vault-plunderer.js";
@@ -2049,6 +2050,7 @@ const shard: CardShard = {
     _poolValkoIndorian,
     _poolValleyRally,
     _poolVanishment,
+    _poolVarchildsWarRiders,
     _poolVarinaLichQueen,
     _poolVaultOfTheArchangel,
     _poolVaultPlunderer,

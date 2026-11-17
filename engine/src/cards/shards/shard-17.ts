@@ -892,6 +892,7 @@ import _poolThunderingRebuke from "../pool/thundering-rebuke.js";
 import _poolThunderscapeMaster from "../pool/thunderscape-master.js";
 import _poolTideDrifter from "../pool/tide-drifter.js";
 import _poolTideSkimmer from "../pool/tide-skimmer.js";
+import _poolTimesifter from "../pool/timesifter.js";
 import _poolTitanOfEternalFire from "../pool/titan-of-eternal-fire.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTolarianEntrancer from "../pool/tolarian-entrancer.js";
@@ -1928,6 +1929,7 @@ const shard: CardShard = {
     _poolThunderscapeMaster,
     _poolTideDrifter,
     _poolTideSkimmer,
+    _poolTimesifter,
     _poolTitanOfEternalFire,
     _poolTitaniaNaturesForce,
     _poolTolarianEntrancer,

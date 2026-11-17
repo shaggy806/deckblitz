@@ -16253,6 +16253,7 @@ import _poolLocustSpray from "./pool/locust-spray.js";
 import _poolLocustSwarm from "./pool/locust-swarm.js";
 import _poolLocutusOfBorg from "./pool/locutus-of-borg.js";
 import _poolLocutusTheOneWhoSpeaks from "./pool/locutus-the-one-who-speaks.js";
+import _poolLodestoneBauble from "./pool/lodestone-bauble.js";
 import _poolLodestoneGolem from "./pool/lodestone-golem.js";
 import _poolLodestoneMyr from "./pool/lodestone-myr.js";
 import _poolLodestoneNeedle from "./pool/lodestone-needle.js";
@@ -27030,6 +27031,7 @@ import _poolStudy from "./pool/study.js";
 import _poolStuffedBear from "./pool/stuffed-bear.js";
 import _poolStuffyDoll from "./pool/stuffy-doll.js";
 import _poolStumpStomp from "./pool/stump-stomp.js";
+import _poolStumpsquallHydra from "./pool/stumpsquall-hydra.js";
 import _poolStunSniper from "./pool/stun-sniper.js";
 import _poolStun from "./pool/stun.js";
 import _poolStunningReversal from "./pool/stunning-reversal.js";
@@ -29029,6 +29031,7 @@ import _poolTimelyHordemate from "./pool/timely-hordemate.js";
 import _poolTimelyInterference from "./pool/timely-interference.js";
 import _poolTimelyReinforcements from "./pool/timely-reinforcements.js";
 import _poolTimelyWard from "./pool/timely-ward.js";
+import _poolTimesifter from "./pool/timesifter.js";
 import _poolTimestreamNavigator from "./pool/timestream-navigator.js";
 import _poolTimetwister from "./pool/timetwister.js";
 import _poolTimidDrake from "./pool/timid-drake.js";
@@ -30439,6 +30442,7 @@ import _poolVaporkin from "./pool/vaporkin.js";
 import _poolVaporousDjinn from "./pool/vaporous-djinn.js";
 import _poolVarchildBetrayerOfKjeldor from "./pool/varchild-betrayer-of-kjeldor.js";
 import _poolVarchildsCrusader from "./pool/varchilds-crusader.js";
+import _poolVarchildsWarRiders from "./pool/varchilds-war-riders.js";
 import _poolVariableChaser from "./pool/variable-chaser.js";
 import _poolVarinaLichQueen from "./pool/varina-lich-queen.js";
 import _poolVarisSilverymoonRanger from "./pool/varis-silverymoon-ranger.js";
@@ -49713,6 +49717,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLocustSwarm,
   _poolLocutusOfBorg,
   _poolLocutusTheOneWhoSpeaks,
+  _poolLodestoneBauble,
   _poolLodestoneGolem,
   _poolLodestoneMyr,
   _poolLodestoneNeedle,
@@ -60490,6 +60495,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStuffedBear,
   _poolStuffyDoll,
   _poolStumpStomp,
+  _poolStumpsquallHydra,
   _poolStunSniper,
   _poolStun,
   _poolStunningReversal,
@@ -62489,6 +62495,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTimelyInterference,
   _poolTimelyReinforcements,
   _poolTimelyWard,
+  _poolTimesifter,
   _poolTimestreamNavigator,
   _poolTimetwister,
   _poolTimidDrake,
@@ -63899,6 +63906,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVaporousDjinn,
   _poolVarchildBetrayerOfKjeldor,
   _poolVarchildsCrusader,
+  _poolVarchildsWarRiders,
   _poolVariableChaser,
   _poolVarinaLichQueen,
   _poolVarisSilverymoonRanger,
@@ -83186,6 +83194,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/locust-swarm": _poolLocustSwarm,
   "pool/locutus-of-borg": _poolLocutusOfBorg,
   "pool/locutus-the-one-who-speaks": _poolLocutusTheOneWhoSpeaks,
+  "pool/lodestone-bauble": _poolLodestoneBauble,
   "pool/lodestone-golem": _poolLodestoneGolem,
   "pool/lodestone-myr": _poolLodestoneMyr,
   "pool/lodestone-needle": _poolLodestoneNeedle,
@@ -93963,6 +93972,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stuffed-bear": _poolStuffedBear,
   "pool/stuffy-doll": _poolStuffyDoll,
   "pool/stump-stomp": _poolStumpStomp,
+  "pool/stumpsquall-hydra": _poolStumpsquallHydra,
   "pool/stun-sniper": _poolStunSniper,
   "pool/stun": _poolStun,
   "pool/stunning-reversal": _poolStunningReversal,
@@ -95962,6 +95972,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/timely-interference": _poolTimelyInterference,
   "pool/timely-reinforcements": _poolTimelyReinforcements,
   "pool/timely-ward": _poolTimelyWard,
+  "pool/timesifter": _poolTimesifter,
   "pool/timestream-navigator": _poolTimestreamNavigator,
   "pool/timetwister": _poolTimetwister,
   "pool/timid-drake": _poolTimidDrake,
@@ -97372,6 +97383,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vaporous-djinn": _poolVaporousDjinn,
   "pool/varchild-betrayer-of-kjeldor": _poolVarchildBetrayerOfKjeldor,
   "pool/varchilds-crusader": _poolVarchildsCrusader,
+  "pool/varchilds-war-riders": _poolVarchildsWarRiders,
   "pool/variable-chaser": _poolVariableChaser,
   "pool/varina-lich-queen": _poolVarinaLichQueen,
   "pool/varis-silverymoon-ranger": _poolVarisSilverymoonRanger,

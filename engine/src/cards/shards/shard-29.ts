@@ -477,6 +477,7 @@ import _poolLightfootRogue from "../pool/lightfoot-rogue.js";
 import _poolLightningCoils from "../pool/lightning-coils.js";
 import _poolLightwalker from "../pool/lightwalker.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
+import _poolLodestoneBauble from "../pool/lodestone-bauble.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLongshotSquad from "../pool/longshot-squad.js";
 import _poolLostAuramancers from "../pool/lost-auramancers.js";
@@ -1517,6 +1518,7 @@ const shard: CardShard = {
     _poolLightningCoils,
     _poolLightwalker,
     _poolLivingLiesOfLoki,
+    _poolLodestoneBauble,
     _poolLonelySandbar,
     _poolLongshotSquad,
     _poolLostAuramancers,

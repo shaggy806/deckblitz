@@ -852,6 +852,7 @@ import _poolStoneCatapult from "../pool/stone-catapult.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
 import _poolStormOfMemories from "../pool/storm-of-memories.js";
 import _poolStudentOfElements from "../pool/student-of-elements.js";
+import _poolStumpsquallHydra from "../pool/stumpsquall-hydra.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
 import _poolSuddenInsight from "../pool/sudden-insight.js";
@@ -1903,6 +1904,7 @@ const shard: CardShard = {
     _poolStonecoilSerpent,
     _poolStormOfMemories,
     _poolStudentOfElements,
+    _poolStumpsquallHydra,
     _poolSublimeEpiphany,
     _poolSubtleStrike,
     _poolSuddenInsight,
