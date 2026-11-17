@@ -671,6 +671,7 @@ import _poolQueenMotherRamonda from "../pool/queen-mother-ramonda.js";
 import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolQuintoriusLoremaster from "../pool/quintorius-loremaster.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
+import _poolRadiantPerformer from "../pool/radiant-performer.js";
 import _poolRadiantSerraArchangel from "../pool/radiant-serra-archangel.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaidersSpoils from "../pool/raiders-spoils.js";
@@ -1736,6 +1737,7 @@ const shard: CardShard = {
     _poolQueensAgent,
     _poolQuintoriusLoremaster,
     _poolRadiantDestiny,
+    _poolRadiantPerformer,
     _poolRadiantSerraArchangel,
     _poolRaftSecurityOfficer,
     _poolRaidersSpoils,

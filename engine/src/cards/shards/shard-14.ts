@@ -766,6 +766,7 @@ import _poolShapeTheSands from "../pool/shape-the-sands.js";
 import _poolShardOfTheVoidDragon from "../pool/shard-of-the-void-dragon.js";
 import _poolShatterTheSource from "../pool/shatter-the-source.js";
 import _poolShatter from "../pool/shatter.js";
+import _poolShelteringAncient from "../pool/sheltering-ancient.js";
 import _poolShelteringLight from "../pool/sheltering-light.js";
 import _poolShelteringWord from "../pool/sheltering-word.js";
 import _poolShieldOfDutyAndReason from "../pool/shield-of-duty-and-reason.js";
@@ -1800,6 +1801,7 @@ const shard: CardShard = {
     _poolShardOfTheVoidDragon,
     _poolShatterTheSource,
     _poolShatter,
+    _poolShelteringAncient,
     _poolShelteringLight,
     _poolShelteringWord,
     _poolShieldOfDutyAndReason,

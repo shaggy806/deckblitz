@@ -913,6 +913,7 @@ import _poolTimberGorge from "../pool/timber-gorge.js";
 import _poolTimeReversal from "../pool/time-reversal.js";
 import _poolTinybonesBaubleBurglar from "../pool/tinybones-bauble-burglar.js";
 import _poolTivitSellerOfSecrets from "../pool/tivit-seller-of-secrets.js";
+import _poolTomikDistinguishedAdvokist from "../pool/tomik-distinguished-advokist.js";
 import _poolTorchCourier from "../pool/torch-courier.js";
 import _poolTormentedAngel from "../pool/tormented-angel.js";
 import _poolTowerGeist from "../pool/tower-geist.js";
@@ -1976,6 +1977,7 @@ const shard: CardShard = {
     _poolTimeReversal,
     _poolTinybonesBaubleBurglar,
     _poolTivitSellerOfSecrets,
+    _poolTomikDistinguishedAdvokist,
     _poolTorchCourier,
     _poolTormentedAngel,
     _poolTowerGeist,

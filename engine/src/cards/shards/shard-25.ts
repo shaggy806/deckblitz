@@ -653,6 +653,7 @@ import _poolQueenKaylaBinKroog from "../pool/queen-kayla-bin-kroog.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
 import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
 import _poolRadiantArchangel from "../pool/radiant-archangel.js";
+import _poolRadiate from "../pool/radiate.js";
 import _poolRakdosIckspitter from "../pool/rakdos-ickspitter.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
@@ -1663,6 +1664,7 @@ const shard: CardShard = {
     _poolQuilledWolf,
     _poolRadagastWizardOfWilds,
     _poolRadiantArchangel,
+    _poolRadiate,
     _poolRakdosIckspitter,
     _poolRakdosLocket,
     _poolRakeclawGargantuan,

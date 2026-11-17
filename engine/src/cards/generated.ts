@@ -425,6 +425,7 @@ import _poolAgonizingRemorse from "./pool/agonizing-remorse.js";
 import _poolAgonizingSyphon from "./pool/agonizing-syphon.js";
 import _poolAgonyWarp from "./pool/agony-warp.js";
 import _poolAgoraphobia from "./pool/agoraphobia.js";
+import _poolAgrusKosEternalSoldier from "./pool/agrus-kos-eternal-soldier.js";
 import _poolAgrusKosSpiritOfJustice from "./pool/agrus-kos-spirit-of-justice.js";
 import _poolAgrusKosWojekVeteran from "./pool/agrus-kos-wojek-veteran.js";
 import _poolAhnCropChampion from "./pool/ahn-crop-champion.js";
@@ -18675,6 +18676,7 @@ import _poolNewGenerationsTechnique from "./pool/new-generations-technique.js";
 import _poolNewHorizons from "./pool/new-horizons.js";
 import _poolNewPerspectives from "./pool/new-perspectives.js";
 import _poolNewPrahvGuildmage from "./pool/new-prahv-guildmage.js";
+import _poolNewWayForward from "./pool/new-way-forward.js";
 import _poolNewsHelicopter from "./pool/news-helicopter.js";
 import _poolNexos from "./pool/nexos.js";
 import _poolNexusMentality from "./pool/nexus-mentality.js";
@@ -21365,6 +21367,7 @@ import _poolRadiantGrace from "./pool/radiant-grace.js";
 import _poolRadiantGrove from "./pool/radiant-grove.js";
 import _poolRadiantKavu from "./pool/radiant-kavu.js";
 import _poolRadiantLotus from "./pool/radiant-lotus.js";
+import _poolRadiantPerformer from "./pool/radiant-performer.js";
 import _poolRadiantPurge from "./pool/radiant-purge.js";
 import _poolRadiantRestraints from "./pool/radiant-restraints.js";
 import _poolRadiantScrollwielder from "./pool/radiant-scrollwielder.js";
@@ -21374,6 +21377,7 @@ import _poolRadiantStrike from "./pool/radiant-strike.js";
 import _poolRadiantSummit from "./pool/radiant-summit.js";
 import _poolRadiantsDragoons from "./pool/radiants-dragoons.js";
 import _poolRadiantsJudgment from "./pool/radiants-judgment.js";
+import _poolRadiate from "./pool/radiate.js";
 import _poolRadiatingLightning from "./pool/radiating-lightning.js";
 import _poolRadicalIdea from "./pool/radical-idea.js";
 import _poolRadioactiveMan from "./pool/radioactive-man.js";
@@ -24473,6 +24477,7 @@ import _poolShelteredAerie from "./pool/sheltered-aerie.js";
 import _poolShelteredByGhosts from "./pool/sheltered-by-ghosts.js";
 import _poolShelteredThicket from "./pool/sheltered-thicket.js";
 import _poolShelteredValley from "./pool/sheltered-valley.js";
+import _poolShelteringAncient from "./pool/sheltering-ancient.js";
 import _poolShelteringBoughs from "./pool/sheltering-boughs.js";
 import _poolShelteringLandscape from "./pool/sheltering-landscape.js";
 import _poolShelteringLight from "./pool/sheltering-light.js";
@@ -29014,6 +29019,7 @@ import _poolTomeRaider from "./pool/tome-raider.js";
 import _poolTomeScour from "./pool/tome-scour.js";
 import _poolTomeShredder from "./pool/tome-shredder.js";
 import _poolTomeboundLich from "./pool/tomebound-lich.js";
+import _poolTomikDistinguishedAdvokist from "./pool/tomik-distinguished-advokist.js";
 import _poolTomikIzzetSparkmage from "./pool/tomik-izzet-sparkmage.js";
 import _poolTomikOrzhovLawmage from "./pool/tomik-orzhov-lawmage.js";
 import _poolTomikWielderOfLaw from "./pool/tomik-wielder-of-law.js";
@@ -33716,6 +33722,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAgonizingSyphon,
   _poolAgonyWarp,
   _poolAgoraphobia,
+  _poolAgrusKosEternalSoldier,
   _poolAgrusKosSpiritOfJustice,
   _poolAgrusKosWojekVeteran,
   _poolAhnCropChampion,
@@ -51966,6 +51973,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNewHorizons,
   _poolNewPerspectives,
   _poolNewPrahvGuildmage,
+  _poolNewWayForward,
   _poolNewsHelicopter,
   _poolNexos,
   _poolNexusMentality,
@@ -54656,6 +54664,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRadiantGrove,
   _poolRadiantKavu,
   _poolRadiantLotus,
+  _poolRadiantPerformer,
   _poolRadiantPurge,
   _poolRadiantRestraints,
   _poolRadiantScrollwielder,
@@ -54665,6 +54674,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRadiantSummit,
   _poolRadiantsDragoons,
   _poolRadiantsJudgment,
+  _poolRadiate,
   _poolRadiatingLightning,
   _poolRadicalIdea,
   _poolRadioactiveMan,
@@ -57764,6 +57774,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShelteredByGhosts,
   _poolShelteredThicket,
   _poolShelteredValley,
+  _poolShelteringAncient,
   _poolShelteringBoughs,
   _poolShelteringLandscape,
   _poolShelteringLight,
@@ -62305,6 +62316,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTomeScour,
   _poolTomeShredder,
   _poolTomeboundLich,
+  _poolTomikDistinguishedAdvokist,
   _poolTomikIzzetSparkmage,
   _poolTomikOrzhovLawmage,
   _poolTomikWielderOfLaw,
@@ -67020,6 +67032,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/agonizing-syphon": _poolAgonizingSyphon,
   "pool/agony-warp": _poolAgonyWarp,
   "pool/agoraphobia": _poolAgoraphobia,
+  "pool/agrus-kos-eternal-soldier": _poolAgrusKosEternalSoldier,
   "pool/agrus-kos-spirit-of-justice": _poolAgrusKosSpiritOfJustice,
   "pool/agrus-kos-wojek-veteran": _poolAgrusKosWojekVeteran,
   "pool/ahn-crop-champion": _poolAhnCropChampion,
@@ -85270,6 +85283,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/new-horizons": _poolNewHorizons,
   "pool/new-perspectives": _poolNewPerspectives,
   "pool/new-prahv-guildmage": _poolNewPrahvGuildmage,
+  "pool/new-way-forward": _poolNewWayForward,
   "pool/news-helicopter": _poolNewsHelicopter,
   "pool/nexos": _poolNexos,
   "pool/nexus-mentality": _poolNexusMentality,
@@ -87960,6 +87974,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/radiant-grove": _poolRadiantGrove,
   "pool/radiant-kavu": _poolRadiantKavu,
   "pool/radiant-lotus": _poolRadiantLotus,
+  "pool/radiant-performer": _poolRadiantPerformer,
   "pool/radiant-purge": _poolRadiantPurge,
   "pool/radiant-restraints": _poolRadiantRestraints,
   "pool/radiant-scrollwielder": _poolRadiantScrollwielder,
@@ -87969,6 +87984,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/radiant-summit": _poolRadiantSummit,
   "pool/radiants-dragoons": _poolRadiantsDragoons,
   "pool/radiants-judgment": _poolRadiantsJudgment,
+  "pool/radiate": _poolRadiate,
   "pool/radiating-lightning": _poolRadiatingLightning,
   "pool/radical-idea": _poolRadicalIdea,
   "pool/radioactive-man": _poolRadioactiveMan,
@@ -91068,6 +91084,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sheltered-by-ghosts": _poolShelteredByGhosts,
   "pool/sheltered-thicket": _poolShelteredThicket,
   "pool/sheltered-valley": _poolShelteredValley,
+  "pool/sheltering-ancient": _poolShelteringAncient,
   "pool/sheltering-boughs": _poolShelteringBoughs,
   "pool/sheltering-landscape": _poolShelteringLandscape,
   "pool/sheltering-light": _poolShelteringLight,
@@ -95609,6 +95626,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tome-scour": _poolTomeScour,
   "pool/tome-shredder": _poolTomeShredder,
   "pool/tomebound-lich": _poolTomeboundLich,
+  "pool/tomik-distinguished-advokist": _poolTomikDistinguishedAdvokist,
   "pool/tomik-izzet-sparkmage": _poolTomikIzzetSparkmage,
   "pool/tomik-orzhov-lawmage": _poolTomikOrzhovLawmage,
   "pool/tomik-wielder-of-law": _poolTomikWielderOfLaw,
