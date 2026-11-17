@@ -42158,9 +42158,12 @@ export class Game {
           return Array<ObjectId>(turns).fill(id);
         });
       },
-      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource, until, whileIt) => {
-        if (whileIt !== undefined) {
-          this.gainControlByEffect(player, target, false, false, { whileIt });
+      gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource, until, whileIt, whileMonarch) => {
+        if (whileIt !== undefined || whileMonarch !== undefined) {
+          this.gainControlByEffect(player, target, false, false, {
+            ...(whileIt !== undefined ? { whileIt } : {}),
+            ...(whileMonarch !== undefined ? { whileMonarch } : {}),
+          });
           return;
         }
         if (until !== undefined) {
@@ -60577,10 +60580,16 @@ controlledBy,
       readonly untilPoint?: UntilPoint;
       /** "For as long as it [matches]" — `ControlEffect.whileIt`. */
       readonly whileIt?: CardFilter;
+      /** "For as long as they're the monarch" — `ControlEffect.whileMonarch`. */
+      readonly whileMonarch?: PlayerId;
     } = {},
   ): void {
     if (target.kind !== "object") return;
     if (this.state.players[player]?.hasLost !== false) return;
+    // "For as long as they're the monarch" when they aren't now never starts
+    // (rule 611.2b).
+    const whileMonarch = opts.whileMonarch;
+    if (whileMonarch !== undefined && this.state.monarch !== whileMonarch) return;
     const id = opts.split === false ? target.object : this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
@@ -60614,8 +60623,9 @@ controlledBy,
       ...(whileSource !== undefined ? { whileSource } : {}),
       ...(opts.untilPoint !== undefined ? { untilPoint: opts.untilPoint } : {}),
       ...(whileIt !== undefined ? { whileIt } : {}),
+      ...(whileMonarch !== undefined ? { whileMonarch } : {}),
     };
-    if (whileIt !== undefined && this.state.whileItControlIds?.includes(id) !== true) {
+    if ((whileIt !== undefined || whileMonarch !== undefined) && this.state.whileItControlIds?.includes(id) !== true) {
       this.state.whileItControlIds = [...(this.state.whileItControlIds ?? []), id];
     }
     // What ends no later than this one, for the same player, is dropped:
@@ -60626,6 +60636,7 @@ controlledBy,
     // this one does. One that might outlast it stays, to apply again once
     // this ends.
     const endsNoLater = (e: ControlEffect): boolean => {
+      if (whileMonarch !== undefined) return e.whileMonarch === whileMonarch && e.whileIt === undefined;
       if (whileIt !== undefined) return e.whileIt !== undefined && JSON.stringify(e.whileIt) === JSON.stringify(whileIt);
       if (opts.untilPoint !== undefined) {
         return e.untilEndOfTurn || JSON.stringify(e.untilPoint) === JSON.stringify(opts.untilPoint);
@@ -71397,25 +71408,30 @@ controlledBy,
    * Shield Broker's as the last shield counter comes off, Rootwater
    * Matriarch's as the last Aura does. Ended for good, so matching again
    * doesn't bring it back. One whose permanent phases out ends too, since it
-   * can no longer see it (rule 702.26f). */
+   * can no longer see it (rule 702.26f). So does one lasting "for as long as
+   * they're the monarch" (`ControlEffect.whileMonarch`) once that player
+   * isn't (Garland, Royal Kidnapper). */
   private endWhileItControl(): void {
     const ids = this.state.whileItControlIds;
     if (ids === undefined || this.dryRunningEvents) return;
     let ended = false;
+    const conditional = (e: ControlEffect): boolean => e.whileIt !== undefined || e.whileMonarch !== undefined;
     const kept = ids.filter((id) => {
       const object = this.state.objects[id];
       const effects = object?.controlEffects;
-      if (effects === undefined || !effects.some((e) => e.whileIt !== undefined)) return false;
+      if (effects === undefined || !effects.some(conditional)) return false;
       const here = object.zone === "battlefield";
       const left = effects.filter(
-        (e) => e.whileIt === undefined || (here && matchesFilter(this.state, this.registry, id, e.whileIt, { you: e.controller })),
+        (e) =>
+          (e.whileIt === undefined || (here && matchesFilter(this.state, this.registry, id, e.whileIt, { you: e.controller }))) &&
+          (e.whileMonarch === undefined || (here && this.state.monarch === e.whileMonarch)),
       );
       if (left.length === effects.length) return true;
       ended = true;
       if (left.length > 0) object.controlEffects = left;
       else delete object.controlEffects;
       object.controlEndsAtCleanup = left.some((e) => e.untilEndOfTurn);
-      return left.some((e) => e.whileIt !== undefined);
+      return left.some(conditional);
     });
     if (kept.length > 0) this.state.whileItControlIds = kept;
     else delete this.state.whileItControlIds;

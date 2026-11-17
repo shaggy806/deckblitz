@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Control for as long as a player is the monarch — built 2026-11-17
+
+The key `effect:control-while-player-is-monarch`: `gain-control`'s `whileMonarch` (a `PlayerRef`, read as it
+resolves) is `ControlEffect.whileMonarch`, kept on `whileItControlIds` beside `whileIt` and ended in
+`Game.endWhileItControl` the first moment that player isn't the monarch (rule 725.3) — for good. Nothing if they
+already aren't as it resolves (611.2b, the ruling). Garland, Royal Kidnapper (rank 11948), whose "creatures you
+control but don't own … can't be sacrificed" was already a filter static's `cantBeSacrificed`.
+`test/control-while-monarch.test.ts`.
+
 ### A source you control chosen, its next damage doubled or prevented on a flip — built 2026-11-17
 
 The key `effect:chosen-source-next-damage-doubled`: `choose-permanents`' `damageSource: true` asks the

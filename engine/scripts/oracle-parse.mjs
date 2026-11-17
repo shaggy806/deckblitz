@@ -5903,6 +5903,16 @@ export function parseSentence(sentence, ctx) {
       return { kind: "gain-control", target, untilEndOfTurn: false, whileIt };
     }
   }
+  // "…for as long as they're the monarch" (Garland, Royal Kidnapper, on a
+  // "becomes the monarch" trigger), "…you're the monarch": `whileMonarch`.
+  if ((m = re(`gain control of (target creature that player controls|${TARGET}) for as long as (they're|you're) the monarch`).exec(s))) {
+    const theirs = /^target creature that player controls$/i.test(m[1]);
+    if (theirs && ctx.thatPlayer !== "trigger-player") return null;
+    const target = theirs ? ctx.target({ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }) : slot(m[1]);
+    if (target !== undefined) {
+      return { kind: "gain-control", target, untilEndOfTurn: false, whileMonarch: /^you/i.test(m[2]) ? "you" : "trigger-player" };
+    }
+  }
   // "Gain control of target creature [until end of turn]" — for as long as
   // the effect lasts, which without a duration is the rest of the game.
   if ((m = re(`gain control of (${TARGET})( until end of turn)?`).exec(s))) {

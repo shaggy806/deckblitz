@@ -5145,6 +5145,15 @@ export type EffectSpec =
        * doesn't match as the effect would begin (rule 611.2b). With
        * `untilEndOfTurn: false`, and none of the other durations. */
       readonly whileIt?: CardFilter;
+      /** "…for as long as **they're the monarch**" (Garland, Royal
+       * Kidnapper's `"trigger-player"`): the player read as it resolves, and
+       * the control effect ends for good the first moment they aren't the
+       * monarch (rule 725.3) — becoming it again doesn't bring it back.
+       * Nothing at all if they aren't the monarch as it would begin (rule
+       * 611.2b; the ruling: a player who stopped being the monarch while the
+       * ability waited). With `untilEndOfTurn: false`, and none of the other
+       * durations. */
+      readonly whileMonarch?: PlayerRef;
     }
   | {
       /**
@@ -13497,6 +13506,8 @@ export interface EffectApi {
     whileYouControlSource?: boolean,
     until?: PointDuration,
     whileIt?: CardFilter,
+    /** "For as long as [this player] is the monarch". */
+    whileMonarch?: PlayerId,
   ): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
    * each permanent's own owner, or a player at random for each; `controlledBy`
@@ -20059,6 +20070,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const target = objectRefAct(spec.target, ctx);
       if (target === undefined || illegalSlot(spec.target, ctx)) return;
       const player = resolvePlayerRef(spec.who ?? "you", ctx);
+      // "For as long as they're the monarch": that player, read now.
+      const monarch = spec.whileMonarch === undefined ? undefined : resolvePlayerRef(spec.whileMonarch, ctx);
+      if (spec.whileMonarch !== undefined && monarch === undefined) return;
       if (player !== undefined) {
         ctx.gainControl(
           target,
@@ -20069,6 +20083,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.whileYouControlSource === true,
           spec.until,
           spec.whileIt,
+          monarch,
         );
       }
       return;

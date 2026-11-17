@@ -934,7 +934,7 @@ describe("what a spell costs: amounts, colours and targets", () => {
   });
 });
 
-type Ctx = { targets: unknown[]; target: (spec: unknown) => number; tokenFor: () => string | null; onStack?: boolean };
+type Ctx = { targets: unknown[]; target: (spec: unknown) => number; tokenFor: () => string | null; onStack?: boolean; thatPlayer?: string };
 const ctx = (overrides: Partial<Ctx> = {}): Ctx => {
   const targets: unknown[] = [];
   return { targets, target: (spec) => targets.push(spec) - 1, tokenFor: () => null, ...overrides };
@@ -6672,6 +6672,19 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
         { kind: "prohibit", prohibits: [{ act: "become-monarch", who: "you" }] },
       ],
     });
+  });
+
+  it("reads 'gain control of target creature that player controls for as long as they're the monarch'", () => {
+    // The scaffolder doesn't read the "becomes the monarch" trigger itself:
+    // its effect, under a trigger whose player is "that player".
+    const c = ctx({ thatPlayer: "trigger-player" });
+    expect(parseEffect("Gain control of target creature that player controls for as long as they're the monarch.", c).effect).toEqual({
+      kind: "gain-control",
+      target: 0,
+      untilEndOfTurn: false,
+      whileMonarch: "trigger-player",
+    });
+    expect(c.targets).toEqual([{ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }]);
   });
 
   it("reads 'if damage would be dealt to that creature this turn, prevent that damage and put that many +1/+1 counters on it'", () => {

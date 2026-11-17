@@ -144,6 +144,10 @@ export interface ControlEffect {
    * first moment the permanent stops matching this, read from `controller`'s
    * side (rule 611.2b) — `gain-control`'s `whileIt`. */
   readonly whileIt?: CardFilter;
+  /** "For as long as they're the monarch" (Garland, Royal Kidnapper): it
+   * ends the first moment this player isn't the monarch — `gain-control`'s
+   * `whileMonarch`, kept beside `whileIt` on `whileItControlIds`. */
+  readonly whileMonarch?: PlayerId;
 }
 
 /**
