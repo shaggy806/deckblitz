@@ -10,6 +10,7 @@
     "cost:x-equals-linked-exiled-mana-value",
     "cost:roll-die-as-cost",
     "cost:alternative-cost-discard-shares-color",
+    "condition:filter-controlled-by-trigger-player",
     "effect:delayed-sacrifice-each-returned-this-way",
     "effect:player-effect-target-player",
     "effect:attacks-if-able-during-target-player-next-turn",

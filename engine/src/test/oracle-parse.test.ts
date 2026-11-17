@@ -21793,6 +21793,26 @@ describe("a mass return from your graveyard, sacrificed at the next end step", (
   });
 });
 
+describe("an attack trigger's intervening if on the players attacked", () => {
+  it("reads Fear of the Dark's \"if defending player controls no Glimmer creatures\"", () => {
+    const face = parseFace(
+      {
+        name: "Fear of the Dark",
+        type_line: "Enchantment Creature — Nightmare",
+        oracle_text:
+          "Whenever this creature attacks, if defending player controls no Glimmer creatures, it gains menace and deathtouch until end of turn. (A creature with menace can't be blocked except by two or more creatures.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].condition).toEqual({
+      kind: "of-player",
+      player: "that-player",
+      condition: { kind: "not", of: { kind: "controls", filter: { subtype: "Glimmer", type: "creature" }, atLeast: 1 } },
+    });
+  });
+});
+
 describe("transfigure", () => {
   it("reads Fleshwrither whole, as the helper's ability", () => {
     const face = parseFace(

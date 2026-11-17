@@ -20346,6 +20346,14 @@ function playerStateIf(clause, triggers) {
   if (/^if (that player|defending player) is poisoned,$/.test(c)) {
     return ofThat({ kind: "player-counters", counter: "poison", who: "you", atLeast: 1 });
   }
+  // "If defending player controls no Walls," (Siege Dragon), "… no Glimmer
+  // creatures," (Fear of the Dark): read with the clause's own case, so a
+  // subtype stays one.
+  m = /^if (?:that player|defending player) controls no (.+),$/i.exec(clause);
+  const none = m === null ? null : parseTypePhrase(m[1]);
+  if (none !== null && Object.keys(none).length > 0) {
+    return ofThat({ kind: "not", of: { kind: "controls", filter: none, atLeast: 1 } });
+  }
   // "If no opponent has more life than that player," (the Baldur's Gate
   // Backgrounds): the attacker's opponents against the one attacked, the
   // attacker's own life left out (the rulings), which `each-opponent` under
