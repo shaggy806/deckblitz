@@ -2919,7 +2919,8 @@
   "effect:drawn-this-way-trigger",
   "amount:greatest-damage-by-one-source-this-turn",
   "trigger:next-activated-ability-mana-spent",
-  "trigger:exiled-creatures-you-control-or-graveyard-cards"
+  "trigger:exiled-creatures-you-control-or-graveyard-cards",
+  "effect:prohibit-non-mana-abilities-one-shot"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
