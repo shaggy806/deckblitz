@@ -40993,6 +40993,7 @@ export class Game {
       investigated: (player, times) => {
         for (let i = 0; i < times && i < Game.MAX_EFFECT_INSTANCES; i += 1) this.emit({ type: "investigated", player });
       },
+      cumulativeUpkeepUnpaid: () => this.emit({ type: "cumulative-upkeep-unpaid", player: controller, object: source }),
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
       addMana: (player, mana, amount, spec) => {
         this.addMana(

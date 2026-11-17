@@ -325,6 +325,20 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Cumulative upkeep paid from the top of the library, and "when a player doesn't pay" it — built 2026-11-17
+
+The keys `cost:cumulative-upkeep-exile-library-top` and `trigger:cumulative-upkeep-not-paid`. The first is
+`cumulativeUpkeep({ doing: { kind: "exile-from-library", amount: 1 }, text })`, a `repeat` per age counter, which
+`mayBeDone` now reads: a `repeat` of a fixed number of passes of a mill or an exile from the top of a library can be
+done only with that many cards (rules 702.24a, 118.3). The second is the `cumulative-upkeep-unpaid` event (a
+`TRIGGER_EVENTS` row, its object the permanent and its player the one who didn't pay), announced by the engine-written
+`cumulative-upkeep-unpaid` effect, the first step of the helper's "if you don't", before the sacrifice: Thought Lash
+(rank 12790) triggers on it as `who: "self"`, then sacrificed as usual (the ruling). The scaffolder reads all three of
+Thought Lash's lines. Heart of Bogardan, authored before as a `reflexive-trigger` inside a hand-written upkeep's "if
+you don't", moved onto it: two abilities as printed, X read from its age counters as it last existed (608.2h).
+Cumulative upkeep written by hand (Illusionary Wall and five others) doesn't announce it.
+`test/cumulative-upkeep-unpaid.test.ts`.
+
 ### "Pay any amount of life" by you alone — built 2026-11-17
 
 The key `effect:pay-any-amount-of-life`: `players-pay-any-amount`'s `who: "you"`, the effect's controller alone asked

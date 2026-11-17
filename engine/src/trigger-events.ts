@@ -272,6 +272,11 @@ export const TRIGGER_EVENTS = {
   /** "Whenever you investigate" (rule 701.16a — Erdwal Illuminator): once
    * per investigation, journaled for "for the first time each turn". */
   investigates: row({ type: "investigated", player: (e) => e.player, journaled: "investigated" }),
+  /** "When a player doesn't pay this enchantment's cumulative upkeep"
+   * (Thought Lash — rule 702.24a): the permanent whose upkeep went unpaid,
+   * and the player who didn't pay it ("that player"), as the sacrifice it
+   * owes begins — whether or not the sacrifice happens. */
+  "cumulative-upkeep-unpaid": row({ type: "cumulative-upkeep-unpaid", object: (e) => e.object, player: (e) => e.player }),
   /** "Whenever you pay life" (rule 119.4 — Font of Agonies): any payment
    * of more than 0, a cost's or an effect's; the value is how much. */
   "pays-life": row({ type: "life-paid", player: (e) => e.player, amount: (e) => e.amount }),

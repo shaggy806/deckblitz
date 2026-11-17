@@ -101,6 +101,15 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** `player` didn't pay `object`'s cumulative upkeep (rule 702.24a):
+       * announced as its "if you don't" begins, before the sacrifice, so
+       * "when a player doesn't pay this enchantment's cumulative upkeep"
+       * (Thought Lash) triggers while it's still there. */
+      readonly type: "cumulative-upkeep-unpaid";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** `controller` begins making `controlled`'s decisions (rule 723). */
       readonly type: "player-control-began";
       readonly controlled: PlayerId;

@@ -22013,6 +22013,27 @@ describe("the first card cycled each turn (Valiant Rescuer)", () => {
   });
 });
 
+describe("cumulative upkeep from the top of the library, and 'when a player doesn't pay' it (Thought Lash)", () => {
+  it("the act per age counter, the unpaid event as a trigger, and a whole library exiled", () => {
+    const lash = parseFace(
+      {
+        name: "Thought Lash",
+        type_line: "Enchantment",
+        mana_cost: "{2}{U}{U}",
+        oracle_text:
+          "Cumulative upkeep—Exile the top card of your library. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen a player doesn't pay this enchantment's cumulative upkeep, that player exiles all cards from their library.\nExile the top card of your library: Prevent the next 1 damage that would be dealt to you this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(lash.complete).toBe(true);
+    expect(lash.triggered[1]).toMatchObject({
+      trigger: { on: "event", event: "cumulative-upkeep-unpaid", who: "self" },
+      effect: { kind: "exile-from-library", whose: "trigger-player", allBut: 0 },
+    });
+    expect(JSON.stringify(lash.triggered[0].effect)).toContain('"kind":"exile-from-library"');
+  });
+});
+
 describe("behold in its older words (Monstrous Emergence)", () => {
   it("choose one you control or reveal one from your hand, and the power of what was chosen or revealed", () => {
     const emergence = parseFace(

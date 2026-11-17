@@ -10000,6 +10000,15 @@ export type EffectSpec =
       readonly value: "day" | "night";
     }
   | {
+      /** Cumulative upkeep wasn't paid (rule 702.24a): the
+       * `cumulative-upkeep-unpaid` event, naming this effect's controller and
+       * its source, for "when a player doesn't pay this enchantment's
+       * cumulative upkeep" (Thought Lash). The first step of the "if you
+       * don't" `cumulativeUpkeep` writes, before the sacrifice: written by
+       * that helper, never by a card. */
+      readonly kind: "cumulative-upkeep-unpaid";
+    }
+  | {
       /** "Then **note** your life total" (Sigarda's Splendor): the source
        * permanent keeps `amount`, read now, as the number it last noted —
        * `GameObject.chosenOnEnter`, where a `choose-value`'s `remember` and
@@ -12907,6 +12916,9 @@ export interface EffectApi {
   lifePaid(player: PlayerId, amount: number): void;
   /** Announce `times` investigations by `player` (`create-token`'s `investigate`). */
   investigated(player: PlayerId, times: number): void;
+  /** Announce that this effect's controller didn't pay its source's
+   * cumulative upkeep (`cumulative-upkeep-unpaid`). */
+  cumulativeUpkeepUnpaid(): void;
   /** Change life for a whole scope (`gain-life` / `lose-life` with `who`). */
   changeLifeScoped(who: PlayerScope, delta: number): void;
   /** The concrete types a {@link BoardManaList} names right now, read from
@@ -19046,6 +19058,25 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
       return has >= amountValue(action.amount, ctx, ref.player);
     });
   }
+  // Cards from the top of a library a fixed number of times over — the
+  // cumulative upkeep "exile the top card of your library" for each age
+  // counter (Thought Lash): all of it or none (rule 702.24a), so only with
+  // that many cards to take (118.3).
+  if (
+    action.kind === "repeat" &&
+    action.times !== undefined &&
+    action.again === undefined &&
+    action.mayAgain === undefined &&
+    (action.effect.kind === "mill" || (action.effect.kind === "exile-from-library" && action.effect.allBut === undefined))
+  ) {
+    const pass = action.effect;
+    const times = Math.max(0, Math.floor(amountValue(action.times, ctx)));
+    const from = pass.kind === "mill" ? pass.target : (pass.whose ?? "you");
+    return scopedOrTargetedPlayers(from, ctx).every(
+      (ref) =>
+        ref.kind !== "player" || ctx.librarySizeOf(ref.player) >= times * amountValue(pass.amount ?? 1, ctx, ref.player),
+    );
+  }
   // "Any opponent may have you put that card into your graveyard" with no such
   // card (an empty library revealed nothing), or "into your hand" with nothing
   // exiled this way: an impossible option isn't one to choose (rule 608.2d).
@@ -23431,6 +23462,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "day-night":
       ctx.setDayNight(spec.value);
+      return;
+    case "cumulative-upkeep-unpaid":
+      ctx.cumulativeUpkeepUnpaid();
       return;
     case "note": {
       if (spec.amount !== undefined) {

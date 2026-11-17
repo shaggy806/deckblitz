@@ -657,7 +657,8 @@ export const renown = (n: number): TriggeredAbility => {
  * counter on a creature an opponent controls" }` — Sheltering Ancient: each
  * counter chosen on its own, and with nothing to put them on it can't be
  * paid) or an act (`{ doing: { kind: "flip-coin" }, text: "Flip a coin" }`,
- * done that many times over as a `repeat`), or an act on a different
+ * done that many times over as a `repeat` — Thought Lash's "exile the top
+ * card of your library" never with fewer cards than that), or an act on a different
  * permanent for each age counter (`{ choose: { type: "land", controlledBy:
  * "opponent" }, then: { kind: "gain-control", target: 0, untilEndOfTurn:
  * false }, text: "Gain control of a land you don't control" }` — Herald of
@@ -665,7 +666,8 @@ export const renown = (n: number): TriggeredAbility => {
  * than that to choose from it can't be paid),
  * paid once per age counter as it resolves — all of it or none (no partial
  * payments). Each instance triggers on its own and counts every age counter
- * (702.24b). Put the keyword line in `text` as well.
+ * (702.24b). Unpaid, it first announces so (`cumulative-upkeep-unpaid`),
+ * then is sacrificed. Put the keyword line in `text` as well.
  */
 export const cumulativeUpkeep = (
   cost:
@@ -720,7 +722,15 @@ export const cumulativeUpkeep = (
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: "source", counter: "age", amount: 1 },
-          { kind: "unless", chooser: "you", options: [option], otherwise: { kind: "sacrifice-source" } },
+          {
+            kind: "unless",
+            chooser: "you",
+            options: [option],
+            // "If you don't" begins by saying so — "when a player doesn't pay
+            // this enchantment's cumulative upkeep" (Thought Lash) triggers
+            // whether or not the sacrifice happens.
+            otherwise: { kind: "sequence", effects: [{ kind: "cumulative-upkeep-unpaid" }, { kind: "sacrifice-source" }] },
+          },
         ],
       },
     },

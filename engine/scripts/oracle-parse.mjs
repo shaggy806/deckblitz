@@ -262,6 +262,10 @@ function keywordPart(part, faceName, typeLine = "") {
   if (/^cumulative upkeep—flip a coin\.?$/i.test(p)) {
     return { triggered: [cumulativeUpkeep({ doing: { kind: "flip-coin" }, text: "Flip a coin" })] };
   }
+  // Thought Lash: never with fewer cards than age counters (`mayBeDone`).
+  if (/^cumulative upkeep—exile the top card of your library\.?$/i.test(p)) {
+    return { triggered: [cumulativeUpkeep({ doing: { kind: "exile-from-library", amount: 1 }, text: "Exile the top card of your library" })] };
+  }
   // A counter on a permanent of the payer's choice per age counter, each
   // chosen on its own (Sheltering Ancient).
   if ((m = /^cumulative upkeep—(put an? (?:[+-]\d+\/[+-]\d+|[a-z]+) counter on an? ([a-z ]+?)(?: (you control|an opponent controls))?)\.?$/i.exec(p))) {
@@ -2955,6 +2959,11 @@ export function parseTrigger(clause) {
   if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
   // Rule 119.4: any payment of life (Font of Agonies).
   if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
+  // Rule 702.24a: announced as the upkeep's "if you don't" begins (Thought
+  // Lash, Heart of Bogardan); "that player" is who didn't pay.
+  if (/^When a player doesn't pay (?:~|this (?:creature|permanent|artifact|enchantment|land))'s cumulative upkeep$/.test(c)) {
+    return [{ on: "event", event: "cumulative-upkeep-unpaid", who: "self" }];
+  }
   // Rule 702.26b-c; phasing out looks back (603.10b) — Teferi's Imp.
   if ((m = /^When(?:ever)? (?:~|this (?:creature|permanent|artifact|enchantment|land)) phases (out|in)$/.exec(c))) {
     return [{ on: "event", event: m[1] === "out" ? "phases-out" : "phases-in", who: "self" }];
@@ -4790,6 +4799,12 @@ export function parseSentence(sentence, ctx) {
   if ((m = re("(that player|each opponent|each player) exiles the top card of their library").exec(s))) {
     const whose = { "that player": "trigger-player", "each opponent": "each-opponent", "each player": "each-player" }[m[1].toLowerCase()];
     return { kind: "exile-from-library", whose, amount: 1 };
+  }
+  // A whole library: all but none of it (Thought Lash's "that player exiles
+  // all cards from their library").
+  if ((m = re("(that player|each opponent|each player) exiles all cards from their library").exec(s))) {
+    const whose = { "that player": "trigger-player", "each opponent": "each-opponent", "each player": "each-player" }[m[1].toLowerCase()];
+    return { kind: "exile-from-library", whose, allBut: 0 };
   }
   // "Exile the top seven cards of that player's library, then put a creature
   // card from among them onto the battlefield under your control" (Lord of
@@ -19670,14 +19685,6 @@ function parseFaceAsWritten(face, ctx = {}) {
   if (/echo cost is paid/i.test(face.oracle_text ?? "")) {
     for (const t of out.triggered) {
       if (/^Echo\b/.test(t.text ?? "")) t.__todo = [...(t.__todo ?? []), "its echo has to say when the cost is paid"];
-    }
-  }
-  // "When a player doesn't pay this enchantment's cumulative upkeep" (Heart of
-  // Bogardan) is the upkeep's own "if you don't", which `cumulativeUpkeep()`'s
-  // `unless` never says: the author writes the upkeep with it.
-  if (/doesn't pay [^.]*cumulative upkeep/i.test(face.oracle_text ?? "")) {
-    for (const t of out.triggered) {
-      if (/^Cumulative upkeep\b/.test(t.text ?? "")) t.__todo = [...(t.__todo ?? []), "its cumulative upkeep has to say what happens when it isn't paid"];
     }
   }
   out.complete =
