@@ -325,6 +325,18 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Only [a player] may activate this ability" — built 2026-11-17
+
+The key `cost:activate-only-owner`: `ActivatedAbility.onlyBy` (rule 602.1b; 602.2's "unless the object specifically
+says otherwise") — `"owner"`, its owner alone whoever controls it (Personal Incarnation, rank 30805), and in a
+granted ability `"granter"`, the "only you" of the granting effect's own text, bound to that effect's controller as
+`grant-activated` / `grant-activated-all` resolves (`{ player }`, `onlyByGranter`): Martyrdom (rank 12750) — its
+caster keeps it through a change of control of the creature, whose new controller can't activate it. `Game`'s
+`mayActivateAs` is the one gate (`pushActivations`, `whyCannotActivate`; `othersMayActivate` the cheap test before
+another player's permanent's abilities are gathered); an activator who isn't the controller reads the ability's
+"you" as themself (602.2a), as `anyPlayer`'s does. The scaffolder reads Personal Incarnation's three lines.
+`test/activate-only-by.test.ts`.
+
 ### X the mana value of the linked exiled card — found built 2026-11-17
 
 The key `cost:x-equals-linked-exiled-mana-value` needed no engine code: `ActivatedAbility.xIs: { manaValueOf:

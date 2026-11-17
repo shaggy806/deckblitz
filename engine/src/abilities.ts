@@ -794,6 +794,18 @@ export interface ActivatedAbility {
    * Oft-Nabbed Goat): an opponent of the permanent's controller may, as with
    * `anyPlayer`, and its controller may not. */
   readonly onlyOpponents?: true;
+  /**
+   * "Only [a player] may activate this ability" (rule 602.1b; 602.2's "unless
+   * the object specifically says otherwise"): that player, whoever controls
+   * the permanent, and nobody else. `"owner"` is "Only Personal Incarnation's
+   * owner may activate this ability". `"granter"`, in an ability an effect
+   * grants, is the "only you" in that effect's own text — Martyrdom's "target
+   * creature you control gains '…' Only you may activate this ability" —
+   * bound as it's granted to that effect's controller (`{ player }`, which
+   * a gain of control of the creature doesn't change; unbound, its
+   * controller). Whoever activates it controls it (602.2a).
+   */
+  readonly onlyBy?: "owner" | "granter" | { readonly player: PlayerId };
   /** One of reconfigure's two abilities (rule 702.151a — the `reconfigure`
    * helper): what lets an Equipment that's a creature equip (301.5c). */
   readonly reconfigure?: "attach" | "unattach";

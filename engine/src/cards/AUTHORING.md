@@ -6660,7 +6660,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `cast`'s `unless: "sorcery-timing"` ("each opponent can cast spells only any time
   they could cast a sorcery" — Teferi, Time Raveler). On an activated ability,
   `onlyOpponents: true` with `anyPlayer: true` ("only your opponents may
-  activate this ability" — Detention Vortex). A legendary instant or sorcery
+  activate this ability" — Detention Vortex); `onlyBy: "owner"` ("Only this
+  creature's owner may activate this ability" — Personal Incarnation: its owner
+  alone, whoever controls it, rule 602.1b), and in a `grant-activated` ability
+  `onlyBy: "granter"`, the "only you" of the granting effect's own text (Martyrdom),
+  bound to that effect's controller as it resolves. A legendary instant or sorcery
   needs nothing: rule 205.4e is the engine's own check. "As though it had flash
   if you pay {2} more to cast it" is `kicker: { cost: "{2}", keyword: "flash",
   flash: true }` (Rout; rule 601.3c), never a kicked spell to anything else. A

@@ -5020,6 +5020,10 @@ export function parseSentence(sentence, ctx) {
   if (/^they lose half their life, rounded up\.$/i.test(s)) {
     return { kind: "lose-life", who: "trigger-player", amount: { half: { lifeTotal: "each" }, round: "up" } };
   }
+  // Personal Incarnation's dies trigger: "its owner", not its controller.
+  if (/^its owner loses half their life, rounded up\.$/i.test(s)) {
+    return { kind: "lose-life", who: { ownerOf: "source" }, amount: { half: { lifeTotal: "each" }, round: "up" } };
+  }
   // Graveyard order (rule 404.2): Soldevi Digger, Phyrexian Furnace, Guiding
   // Spirit; Fossil Find's "then reorder".
   if ((m = re(`put the top card of your graveyard on the bottom of your library`).exec(s))) {
@@ -7519,10 +7523,11 @@ export function parseSentence(sentence, ctx) {
     return { kind: "prevent-damage", target: slot(m[1] ?? m[2]), amount: "all" };
   }
   // A redirection (rule 614.9): the en-Kor creatures, Daughter of Autumn.
-  if ((m = re(`the next ${N} damage that would be dealt (?:to (~|${TARGET}) this turn|this turn to (~|${TARGET})) is dealt to (~|${TARGET}) instead`).exec(s))) {
+  // "… is dealt to its owner instead" (Personal Incarnation): the source's.
+  if ((m = re(`the next ${N} damage that would be dealt (?:to (~|${TARGET}) this turn|this turn to (~|${TARGET})) is dealt to (~|its owner|${TARGET}) instead`).exec(s))) {
     const from = m[2] ?? m[3];
     const target = from === "~" ? "source" : slot(from);
-    const redirectTo = m[4] === "~" ? "source" : slot(m[4]);
+    const redirectTo = m[4] === "~" ? "source" : m[4] === "its owner" ? { ownerOf: "source" } : slot(m[4]);
     if (target === undefined || redirectTo === undefined) return null;
     return { kind: "prevent-damage", target, amount: amount(m[1]), redirectTo };
   }
@@ -18920,6 +18925,12 @@ function parseFaceAsWritten(face, ctx = {}) {
         ability.anyPlayer = true;
         ability.onlyOpponents = true;
         if (sorcery !== undefined) ability.sorcerySpeed = true;
+        return "";
+      });
+      // "Only this creature's owner may activate this ability" (Personal
+      // Incarnation — rule 602.1b): its owner, whoever controls it.
+      rest = rest.replace(/ Only (?:~|this \w+)'s owner may activate this ability\.$/, () => {
+        ability.onlyBy = "owner";
         return "";
       });
       // Coven's "Activate only if you control three or more creatures with

@@ -799,6 +799,13 @@ const ADVANCE_BUDGET = 200_000;
 /** What a companion costs to put into your hand (rule 702.139a). */
 const COMPANION_COST = "{3}";
 
+/** An activated ability an effect grants, its "only you may activate this
+ * ability" (`onlyBy: "granter"` — Martyrdom) bound to that effect's
+ * controller, who stays the one player who may (rule 602.1b). */
+function onlyByGranter(ability: ActivatedAbility, granter: PlayerId): ActivatedAbility {
+  return ability.onlyBy === "granter" ? { ...ability, onlyBy: { player: granter } } : ability;
+}
+
 /** Resolutions with nobody acting before a repeating cycle of them is a
  * loop of mandatory actions — a draw (rule 104.4b, `noteMandatoryResolution`).
  * Far past any real chain: a storm count or a token engine resolves dozens. */
@@ -4961,14 +4968,14 @@ export class Game {
       if (onlySource !== undefined && source !== onlySource) continue;
       const object = this.state.objects[source];
       const own = object.controller === player;
-      // Cheaply first: only a printed "any player may activate" ability
-      // (none is ever granted) opens another player's permanent.
-      if (!own && !this.registry.get(rulesTextName(object)).activated.some((a) => a.anyPlayer === true)) continue;
+      // Cheaply first: only a printed "any player may activate" ability, one
+      // its owner alone may, or one granted to a player alone, opens
+      // another player's permanent.
+      if (!own && !this.othersMayActivate(object, player)) continue;
       this.effectiveActivated(source, abilityGrantors).forEach((ability, index) => {
         // Another player's permanent: only what says any player may activate
         // it (rule 602.2). Its controller's own: not what only opponents may.
-        if (!own && ability.anyPlayer !== true) return;
-        if (own && ability.onlyOpponents === true) return;
+        if (!this.mayActivateAs(ability, object, player)) return;
         // "Add one mana of any color" (Command Tower) is one ability with
         // several outcomes; enumerate it once per outcome so activating it on
         // its own is a real choice rather than whatever the engine's default
@@ -27008,12 +27015,12 @@ export class Game {
       if (source.zone !== "battlefield") {
         return "that permanent is not on the battlefield";
       }
-      // "Any player may activate this ability" (rule 602.2).
-      if (source.controller !== player && ability.anyPlayer !== true) {
+      // "Any player may activate this ability" (rule 602.2), "only its
+      // owner may" (602.1b).
+      if (!this.mayActivateAs(ability, source, player)) {
+        if (ability.onlyBy !== undefined) return `only one player may activate that ability, and it isn't ${player}`;
+        if (source.controller === player) return `only ${player}'s opponents may activate that ability`;
         return `${player} does not control that permanent`;
-      }
-      if (source.controller === player && ability.onlyOpponents === true) {
-        return `only ${player}'s opponents may activate that ability`;
       }
       // What was granted it after it lost them, it has (rule 613.7) — those
       // are left out of `effectiveActivated` when they came before.
@@ -27056,7 +27063,9 @@ export class Game {
       !staticConditionMet(
         this.state,
         this.registry,
-        ability.anyPlayer === true && source.controller !== player ? { ...source, controller: player } : source,
+        (ability.anyPlayer === true || ability.onlyBy !== undefined) && source.controller !== player
+          ? { ...source, controller: player }
+          : source,
         ability.condition,
         { includeSelf: true },
       )
@@ -27529,6 +27538,35 @@ export class Game {
       }
     }
     return null;
+  }
+
+  /**
+   * Whether `player` may activate `ability` of the permanent `source` (rule
+   * 602.2: its controller, unless the object says otherwise): "only [a
+   * player] may activate this ability" names that player alone (602.1b —
+   * its owner, or the player an effect granting it bound); "any player may"
+   * opens it to everyone; "only your opponents may" closes it to its
+   * controller.
+   */
+  private mayActivateAs(ability: ActivatedAbility, source: GameObject, player: PlayerId): boolean {
+    const only = ability.onlyBy;
+    if (only !== undefined) {
+      if (only === "owner") return source.owner === player;
+      if (only === "granter") return source.controller === player;
+      return only.player === player;
+    }
+    if (source.controller !== player) return ability.anyPlayer === true;
+    return ability.onlyOpponents !== true;
+  }
+
+  /** Whether any of `object`'s activated abilities could be another player's
+   * to activate — the cheap test before its abilities are gathered: a printed
+   * one any player may, one its owner alone may (and `player` owns it), or
+   * one granted to one player alone (Martyrdom). */
+  private othersMayActivate(object: GameObject, player: PlayerId): boolean {
+    const printed = this.registry.get(rulesTextName(object)).activated;
+    if (printed.some((a) => a.anyPlayer === true || (a.onlyBy === "owner" && object.owner === player))) return true;
+    return object.modifiers.some((m) => m.grantsActivated?.some((a) => a.onlyBy !== undefined) === true);
   }
 
   private activateAbility(
@@ -44056,7 +44094,7 @@ controlledBy,
           power: 0,
           toughness: 0,
           keywords: [],
-          grantsActivated: [ability],
+          grantsActivated: [onlyByGranter(ability, controller)],
           ...durationFields(kept),
         });
       },
@@ -44092,6 +44130,7 @@ controlledBy,
         // One effect, one timestamp (rule 613.7b), however many it reaches.
         const timestamp = this.freshTimestamp();
         const kept = lastingHere(duration);
+        const granted = onlyByGranter(ability, controller);
         for (const id of this.battlefieldMatching(controller, filter)) {
           const object = this.state.objects[id];
           if (object === undefined || !durationBegins(object, kept)) continue;
@@ -44100,7 +44139,7 @@ controlledBy,
             power: 0,
             toughness: 0,
             keywords: [],
-            grantsActivated: [ability],
+            grantsActivated: [granted],
             ...durationFields(kept),
           });
         }

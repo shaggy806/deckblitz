@@ -4103,6 +4103,24 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       ...imprint,
       filter: { type: "instant", manaValue: { op: "lte", n: 2 } },
     });
+    // "Only this creature's owner may activate this ability" (rule 602.1b),
+    // its damage to its owner, and its owner's life as it dies.
+    const incarnation = face(
+      "{0}: The next 1 damage that would be dealt to this creature this turn is dealt to its owner instead. Only this creature's owner may activate this ability.\nWhen this creature dies, its owner loses half their life, rounded up.",
+      "Creature — Avatar Incarnation",
+    );
+    expect(incarnation.activated[0].onlyBy).toBe("owner");
+    expect(incarnation.activated[0].effect).toEqual({
+      kind: "prevent-damage",
+      target: "source",
+      amount: 1,
+      redirectTo: { ownerOf: "source" },
+    });
+    expect(incarnation.triggered[0].effect).toEqual({
+      kind: "lose-life",
+      who: { ownerOf: "source" },
+      amount: { half: { lifeTotal: "each" }, round: "up" },
+    });
   });
 
   it("tribute (rule 702.104): the keyword and its \"if tribute wasn't paid\" trigger", () => {
