@@ -361,6 +361,21 @@ already ran as a `prevent-half` step, spent as a "next time" shield. Two apply o
 what's left (the ruling: 5 → 3 → 2). Fixed with it: a partial prevention step (`prevent-n`, `prevent-all-but`,
 `prevent-half`) that prevents none of the damage no longer uses its shield up (rule 609.7b). Dark Sphere (rank
 11702). `test/chosen-source-prevent-half.test.ts`.
+### Foretelling for less, on any turn, the first each turn free; exiled from your hand or by your effect — built 2026-11-17
+
+The keys `static:foretell-cost-zero-first-each-turn`, `static:foretell-cost-reduction-any-turn` and
+`trigger:exiled-from-hand-or-by-your-effect`. A `foretelling: { less?, anyTurn?, firstEachTurnFree? }` static
+changes foretell's special action for its controller (rules 702.143a, 116.2h; `Game.foretellCost`, read by
+`whyCannotForetell` and `foretellCard`): {1} less for each Cosmos Charger (two make it {0}, its ruling), on any
+player's turn with priority, and {0} for the first card foretold each turn (Ranar the Ever-Watchful) — the
+journal's new `foretold` kind, the special action alone (702.143c). `leaves-battlefield` takes `byEffectOf:
+"you"`, off a new `LeftBattlefield.byEffectOf` (and the `permanent-left-battlefield` event's), recorded as each
+permanent leaves from the resolving spell or ability's controller. Ranar's trigger is two entries joined by
+`sameAbilityAs`; a once-a-move trigger (`firesOncePerMove`) that has fired for the leave batch under way
+doesn't fire again for its sibling (`Game.moveAlreadyFired`, rule 603.2c), so one move exiling cards from
+your hand and permanents makes one Spirit. The scaffolder reads both statics. Ranar (rank 12158, top-1000
+commander #861), Cosmos Charger (12644). `test/foretelling-statics.test.ts`.
+
 ### Loyalty abilities of planeswalkers you control twice this turn — built 2026-11-17
 
 The key `effect:loyalty-twice-all-your-planeswalkers-this-turn`: a `timed-static` carrying Oath of Teferi's

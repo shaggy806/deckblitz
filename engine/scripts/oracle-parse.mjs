@@ -18184,6 +18184,21 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, plotCostReduction: Number(m[1]), text: printed(raw) });
       continue;
     }
+    // Foretelling's special action (rules 702.143a, 116.2h): Cosmos Charger's
+    // "costs {1} less and can be done on any player's turn", Ranar the
+    // Ever-Watchful's "the first card you foretell each turn costs {0}".
+    if ((m = /^Foretelling cards from your hand costs \{(\d+)\} less( and can be done on any player's turn)?\.$/.exec(line))) {
+      out.static.push({
+        affects: { scope: "self" },
+        foretelling: { less: Number(m[1]), ...(m[2] !== undefined ? { anyTurn: true } : {}) },
+        text: printed(raw),
+      });
+      continue;
+    }
+    if (line === "The first card you foretell each turn costs {0} to foretell.") {
+      out.static.push({ affects: { scope: "self" }, foretelling: { firstEachTurnFree: true }, text: printed(raw) });
+      continue;
+    }
     // Fblthp, Lost on the Range: plot given to the top card of your library,
     // and the special action taken from there (rule 702.170a).
     if (line === "The top card of your library has plot. The plot cost is equal to its mana cost.") {

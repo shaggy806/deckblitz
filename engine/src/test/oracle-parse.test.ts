@@ -21571,6 +21571,23 @@ describe("activated abilities of cards in your graveyard cost less (Embalmer's T
   });
 });
 
+describe("foretelling changed by a permanent (Cosmos Charger, Ranar the Ever-Watchful)", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Foreteller", type_line: "Creature — Spirit", mana_cost: "{3}{U}", oracle_text }, { tokenFor: () => null });
+
+  it("{1} less, on any player's turn", () => {
+    const charger = face("Foretelling cards from your hand costs {1} less and can be done on any player's turn.");
+    expect(charger.complete).toBe(true);
+    expect(charger.static[0]).toMatchObject({ affects: { scope: "self" }, foretelling: { less: 1, anyTurn: true } });
+  });
+
+  it("the first each turn for {0}", () => {
+    const ranar = face("The first card you foretell each turn costs {0} to foretell.");
+    expect(ranar.complete).toBe(true);
+    expect(ranar.static[0]).toMatchObject({ affects: { scope: "self" }, foretelling: { firstEachTurnFree: true } });
+  });
+});
+
 describe("loyalty abilities of planeswalkers you control twice this turn (Urza Assembles the Titans)", () => {
   it("Oath of Teferi's static as a timed static for the turn", () => {
     const line = "You may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.";

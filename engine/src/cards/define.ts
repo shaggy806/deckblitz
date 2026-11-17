@@ -4155,6 +4155,20 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * card from hand (rule 702.170a, a special action, 116.2k), never coloured
    * mana (rule 118.7a). `affects` is ignored. */
   readonly plotCostReduction?: number;
+  /** Foretelling changed for this permanent's controller — the special action
+   * of paying {2} and exiling a card with foretell from their hand face down,
+   * on their own turn (rules 702.143a, 116.2h). Read only while it's on the
+   * battlefield (Cosmos Charger's ruling). `affects` is ignored.
+   * - `less`: "Foretelling cards from your hand costs {1} less" (Cosmos
+   *   Charger) — generic mana off the {2}, each such static its own (two
+   *   Chargers make it {0}, the ruling), never below {0}.
+   * - `anyTurn`: "…and can be done on any player's turn" (Cosmos Charger):
+   *   any time they have priority.
+   * - `firstEachTurnFree`: "The first card you foretell each turn costs {0}
+   *   to foretell" (Ranar the Ever-Watchful): while they haven't foretold a
+   *   card this turn (the journal's `foretold`; casting a foretold card isn't
+   *   foretelling — rule 702.143c and the ruling). */
+  readonly foretelling?: { readonly less?: number; readonly anyTurn?: true; readonly firstEachTurnFree?: true };
   /** "You may plot nonland cards from the top of your library" (Fblthp, Lost
    * on the Range): its controller may take plot's special action (rule
    * 702.170a, 116.2k) on the top card of their library matching `filter`, as

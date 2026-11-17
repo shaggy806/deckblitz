@@ -1288,6 +1288,13 @@ export type TriggerKind =
        * read as it last existed and a permanent leaving in that event seeing it
        * too (rule 603.10a). `{ triggerValue: true }` is how many. */
       readonly batched?: true;
+      /** "…or **a spell or ability you control exiles** one or more
+       * permanents from the battlefield" (Ranar the Ever-Watchful, with
+       * `to: ["exile"]`, `batched` and `who: "any"`): only a leave the effect
+       * of a resolving spell or ability of this permanent's controller made
+       * (`LeftBattlefield.byEffectOf`), tokens and other players' permanents
+       * included — not a cost or a state-based action, as `put-into-exile`'s. */
+      readonly byEffectOf?: "you";
     }
   | {
       /** A player gained life (Ajani's Pridemate). `who` is whose life.

@@ -1526,6 +1526,9 @@ export type GameEvent =
        * its materials, or a mana ability's cost paid for it): Market Gnome's
        * "while you're activating a craft ability". */
       readonly craftBy?: PlayerId;
+      /** The controller of the spell or ability whose effect took it off the
+       * battlefield (`LeftBattlefield.byEffectOf`). */
+      readonly byEffectOf?: PlayerId;
     })
   | (Base & {
       readonly type: "permanent-attached";

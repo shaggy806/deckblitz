@@ -149,6 +149,10 @@ export type JournalKind =
   | "crime"
   /** `player` cycled `object` (702.29c). */
   | "cycled"
+  /** `player` foretold `object`: took foretell's special action, exiling it
+   * from their hand face down (rules 702.143a, 702.143c) — not a card that
+   * became foretold another way (702.143d). */
+  | "foretold"
   /** `player` flipped a coin (rule 705): `flip` how it landed, `seq` the
    * event's. An ignored flip never happened (706.6's way) and isn't here. */
   | "flipped"

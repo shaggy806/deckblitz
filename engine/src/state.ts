@@ -2858,6 +2858,11 @@ export type PlayerCounterKind = "poison" | "experience" | "rad" | "contract";
 export interface LeftBattlefield {
   readonly object: ObjectId;
   readonly to: "graveyard" | "exile" | "hand" | "library" | "command";
+  /** The controller of the spell or ability whose effect took it off the
+   * battlefield, as it resolved; absent for a cost, a state-based action or
+   * a turn-based action — "a spell or ability you control exiles one or more
+   * permanents" (Ranar the Ever-Watchful). */
+  readonly byEffectOf?: PlayerId;
 }
 
 /** The cards a simultaneous event has put into graveyards and exile so far,

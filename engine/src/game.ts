@@ -876,6 +876,13 @@ function amountReadsSacrificed(amount: EffectAmount): boolean {
   return JSON.stringify(amount).includes('"paid":"unattached"');
 }
 
+/** A trigger that fires once for a whole simultaneous move, whatever it
+ * moved: "whenever one or more cards are put into exile", "whenever one or
+ * more … leave the battlefield". */
+function firesOncePerMove(spec: TriggerSpec): boolean {
+  return spec.on === "put-into-exile" || (spec.on === "leaves-battlefield" && spec.batched === true);
+}
+
 /** The one index two entries joined by `sameAbilityAs` are counted under:
  * the lower of an entry's own and the one it names, so it holds whichever
  * entry names the other, and when each names the other (Aang and Katara). */
@@ -2798,6 +2805,10 @@ export class Game {
   /** Batched `sacrifice` triggers that have fired, each with the leave batch
    * it fired in (`enterBatchAlreadyFired`). Transient, like `leaveBatch`. */
   private readonly sacrificeBatchFired = new Map<string, object>();
+  /** Once-a-move triggers that have fired, keyed by ability (two entries
+   * joined by `sameAbilityAs` sharing a key), each with the leave batch it
+   * fired in (`moveAlreadyFired`). Transient, like `leaveBatch`. */
+  private readonly moveBatchFired = new Map<string, object>();
   private tapBatchHeld = false;
   private lastTapSeq = -2;
   /** Resolutions since a player last did anything but pass priority, and
@@ -18207,7 +18218,6 @@ export class Game {
   private whyCannotForetell(player: PlayerId, cardId: ObjectId): string | null {
     const blocked = this.whyCannotAct(player);
     if (blocked !== null) return blocked;
-    if (this.activePlayer !== player) return "can only foretell on your own turn";
     if (!this.state.zones.perPlayer[player].hand.includes(cardId)) {
       return `${player} does not have that card in hand`;
     }
@@ -18215,10 +18225,41 @@ export class Game {
     if (def.foretell === null && this.grantedForetellReduction(this.state.objects[cardId]) === null) {
       return `${def.name} does not have foretell`;
     }
-    if (this.payMana(player, parseManaCost(Game.FORETELL_COST), undefined, undefined, FORETELL_PURPOSE) === null) {
+    const foretelling = this.foretellingStatics(player);
+    // "…and can be done on any player's turn" (Cosmos Charger).
+    if (this.activePlayer !== player && !foretelling.some((f) => f.anyTurn === true)) {
+      return "can only foretell on your own turn";
+    }
+    if (this.payMana(player, this.foretellCost(player, foretelling), undefined, undefined, FORETELL_PURPOSE) === null) {
       return `${player} cannot pay the foretell cost`;
     }
     return null;
+  }
+
+  /** The `foretelling` statics of `player`'s permanents in force — nearly
+   * always none. */
+  private foretellingStatics(player: PlayerId): readonly NonNullable<StaticAbility["foretelling"]>[] {
+    return this.activeStaticsOf(player, (a) => a.foretelling !== undefined).flatMap(({ ability }) =>
+      ability.foretelling === undefined ? [] : [ability.foretelling],
+    );
+  }
+
+  /** What foretelling a card costs `player` now (rule 702.143a: {2}),
+   * changed by their `foretelling` statics (rule 601.2f's order): {0} while
+   * the first card they foretell this turn is still to come (Ranar the
+   * Ever-Watchful), and otherwise {1} less for each "costs {1} less" (Cosmos
+   * Charger), never below {0} (rule 118.7a). */
+  private foretellCost(player: PlayerId, foretelling = this.foretellingStatics(player)): ManaCost {
+    const cost = parseManaCost(Game.FORETELL_COST);
+    if (foretelling.length === 0) return cost;
+    if (
+      foretelling.some((f) => f.firstEachTurnFree === true) &&
+      !entriesThisTurn(this.state, "foretold").some((e) => e.player === player)
+    ) {
+      return { ...cost, generic: 0 };
+    }
+    const less = foretelling.reduce((n, f) => n + (f.less ?? 0), 0);
+    return { ...cost, generic: Math.max(0, cost.generic - less) };
   }
 
   /** How far a `grantsToHand` static's foretell reduces the mana cost of
@@ -18246,7 +18287,7 @@ export class Game {
     if (why !== null) throw new Error(why);
     const object = this.state.objects[cardId];
 
-    const payment = this.payMana(player, parseManaCost(Game.FORETELL_COST), undefined, undefined, FORETELL_PURPOSE);
+    const payment = this.payMana(player, this.foretellCost(player), undefined, undefined, FORETELL_PURPOSE);
     if (payment === null) throw new Error(`${player} cannot pay the foretell cost`);
 
     // Foretold through a grant, it keeps the cost the grant gave it, whatever
@@ -18261,6 +18302,8 @@ export class Game {
     if (grantedReduction !== null) object.foretoldReducedBy = grantedReduction;
     // Face down in exile: nobody else knows what it is any more.
     this.forgetStints([cardId], since);
+    // "The first card you foretell each turn" (Ranar the Ever-Watchful).
+    this.journal({ kind: "foretold", player, object: cardId });
     this.emit({ type: "card-foretold", player, object: cardId });
     this.afterPlayerAction(player);
   }
@@ -34671,6 +34714,7 @@ export class Game {
         if (
           this.triggerMatches(ability.trigger, event, object) &&
           !this.enterBatchAlreadyFired(ability.trigger, `${id}#${index}`) &&
+          !this.moveAlreadyFired(ability, `${id}#${sameAbilityIndex(ability.sameAbilityAs, index)}`) &&
           !(
             ability.oncePerTurn === true &&
             this.triggeredOnceThisTurn(live, this.onceWhich(ability, index, ref), lastSeen?.zoneChangeCount)
@@ -35009,6 +35053,9 @@ export class Game {
           if (ability.trigger.on === "sacrifice" && ability.trigger.batched === true) {
             if (this.leaveBatch === null) this.sacrificeBatchFired.clear();
             else this.sacrificeBatchFired.set(`${id}#${index}`, this.leaveBatch);
+          }
+          if (this.leaveBatch !== null && firesOncePerMove(ability.trigger)) {
+            this.moveBatchFired.set(`${id}#${sameAbilityIndex(ability.sameAbilityAs, index)}`, this.leaveBatch);
           }
           // Each token of the watcher's own stack has the ability, and each
           // triggers (rule 603.2) — except for counters a batch entering
@@ -36154,6 +36201,21 @@ export class Game {
    * event involves), announced one permanent at a time by `withEnterBatch`;
    * an entry outside a batch is its own event.
    */
+  /**
+   * A once-a-move trigger (`firesOncePerMove`) of an ability that has already
+   * fired for the simultaneous move under way, `key` naming the ability: two
+   * entries joined by `sameAbilityAs` share it. "Whenever one or more cards
+   * are put into exile from your hand **or** a spell or ability you control
+   * exiles one or more permanents from the battlefield" (Ranar the
+   * Ever-Watchful) is one ability written as two entries, and one move that
+   * does both — announced as its `cards-put-into-exile`, then its
+   * `permanents-left`, inside one leave batch — is one event: it triggers
+   * once (rule 603.2c).
+   */
+  private moveAlreadyFired(ability: TriggeredAbility, key: string): boolean {
+    return this.leaveBatch !== null && firesOncePerMove(ability.trigger) && this.moveBatchFired.get(key) === this.leaveBatch;
+  }
+
   private enterBatchAlreadyFired(spec: TriggerSpec, key: string): boolean {
     if (spec.on === "becomes-tapped") return spec.batched === true && this.tapBatchFired.has(key);
     // "Whenever you sacrifice one or more Foods" (Camellia): once per
@@ -36207,6 +36269,12 @@ export class Game {
     );
   }
 
+  /** Who controls a watching permanent — as it last existed on the
+   * battlefield, when it left in the event it sees (rule 603.10a). */
+  private watcherController(self: GameObject): PlayerId {
+    return self.zone === "battlefield" ? self.controller : (self.lastKnown?.controller ?? self.controller);
+  }
+
   /** The permanents of a `permanents-left` event a batched `leaves-battlefield`
    * trigger is about. */
   private leftBatchMatching(
@@ -36216,8 +36284,9 @@ export class Game {
   ): ObjectId[] {
     return event.left
       .filter(
-        ({ object, to }) =>
+        ({ object, to, byEffectOf }) =>
           (spec.to === undefined || spec.to.includes(to)) &&
+          (spec.byEffectOf === undefined || byEffectOf === this.watcherController(self)) &&
           !(spec.otherOnly === true && object === self.id) &&
           this.matchesWho(spec.who, object, self, true) &&
           this.triggerFilterOk(spec.filter, object, self, true),
@@ -36721,6 +36790,7 @@ export class Game {
         return (
           event.type === "permanent-left-battlefield" &&
           (spec.to === undefined || spec.to.includes(event.toZone)) &&
+          (spec.byEffectOf === undefined || event.byEffectOf === this.watcherController(self)) &&
           // "While you're activating a craft ability": this ability's
           // controller, as it last existed if it has left.
           (spec.whileActivatingCraft !== true ||
@@ -70637,8 +70707,12 @@ controlledBy,
       leavingBattlefield &&
       (to === "graveyard" || to === "exile" || to === "hand" || to === "library" || to === "command")
     ) {
+      // Whose spell or ability's effect took it, if one did (Ranar the
+      // Ever-Watchful's "a spell or ability you control exiles …").
+      const cause = this.exileCause();
+      const left: LeftBattlefield = { object: id, to, ...cause };
       this.leaveBatch?.left.push(id);
-      this.leaveBatch?.moved.push({ object: id, to });
+      this.leaveBatch?.moved.push(left);
       // A token split off a stack names the stack, while it still stands:
       // the client draws the leave as the stack going down by one.
       const stack = object.splitFrom;
@@ -70649,6 +70723,7 @@ controlledBy,
         toZone: to,
         ...(fromStack !== undefined ? { stack: fromStack } : {}),
         ...(this.craftActivator !== undefined ? { craftBy: this.craftActivator } : {}),
+        ...cause,
       });
       // "Whenever one or more … die": when the whole event is done, or now
       // for a death of its own.
@@ -70656,7 +70731,7 @@ controlledBy,
         if (this.leaveBatch !== null) this.leaveBatch.died.push(id);
         else this.emit({ type: "permanents-died", died: [id], left: [id] });
       }
-      if (this.leaveBatch === null) this.emit({ type: "permanents-left", left: [{ object: id, to }] });
+      if (this.leaveBatch === null) this.emit({ type: "permanents-left", left: [left] });
       // "For as long as [this] remains on the battlefield" ends — once what
       // leaves with it has left, in a simultaneous event.
       if (this.state.whileSourceIds?.includes(id) === true) {
@@ -70849,8 +70924,9 @@ controlledBy,
   }
 
   /** Who caused cards to be exiled now, for `cards-put-into-exile`'s
-   * `byEffectOf`: the controller of the spell or ability resolving, whose
-   * effect it is. Nothing outside a resolution — a cost (delve), a
+   * `byEffectOf`, or a permanent to leave the battlefield, for
+   * `LeftBattlefield`'s: the controller of the spell or ability resolving,
+   * whose effect it is. Nothing outside a resolution — a cost (delve), a
    * state-based action. */
   private exileCause(): { readonly byEffectOf?: PlayerId } {
     const by = this.state.resolvingController;
