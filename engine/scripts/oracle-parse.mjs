@@ -4380,6 +4380,12 @@ export function parseSentence(sentence, ctx) {
   if (sentenceRe(`for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard`).test(s)) {
     return { kind: "exile-from-zones", zones: ["battlefield", "hand", "graveyard"], count: { triggerValue: true } };
   }
+  // Monstrosity N (rule 701.37a); "Monstrosity X, where X is the result"
+  // reads the die its cost rolled (Clay Golem) — before the "where X" bar.
+  if ((m = /^Monstrosity (\d+|X)(, where X is the result)?\.$/.exec(s))) {
+    const amount = m[1] !== "X" ? Number(m[1]) : m[2] !== undefined ? { roll: "total" } : "x";
+    return { kind: "monstrosity", amount };
+  }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
     !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s) &&
@@ -4436,12 +4442,6 @@ export function parseSentence(sentence, ctx) {
   // Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on it,
   // put N +1/+1 counters on it."
   if ((m = /^Adapt (\d+)\.$/.exec(s))) return { kind: "adapt", amount: Number(m[1]) };
-  // Monstrosity N (rule 701.37a); "Monstrosity X, where X is the result"
-  // reads the die its cost rolled (Clay Golem).
-  if ((m = /^Monstrosity (\d+|X)(, where X is the result)?\.$/.exec(s))) {
-    const amount = m[1] !== "X" ? Number(m[1]) : m[2] !== undefined ? { roll: "total" } : "x";
-    return { kind: "monstrosity", amount };
-  }
   // Imprint's "you may exile a creature card from your hand" (Soul Foundry,
   // Elite Arcanist), "… an instant card with mana value 2 or less …"
   // (Isochron Scepter): up to one into exile, "the exiled card" after.
