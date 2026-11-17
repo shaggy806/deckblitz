@@ -1082,6 +1082,8 @@ const TARGET_PHRASES = [
   ["target creature that blocked this turn", { kind: "permanent", filter: { type: "creature", blockedThisTurn: { relation: "blocked" } } }],
   ["target creature or planeswalker an opponent controls", { kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["creature", "planeswalker"]} }],
   ["target creature or planeswalker", { kind: "permanent", whose: "any", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
+  // The old wording kept where planeswalkers and battles are left out (Firesong and Sunspeaker).
+  ["target creature or player", "creature-or-player"],
   ["target nonland permanent an opponent controls", "nonland-permanent-an-opponent-controls"],
   ["target nonland permanent you don't control", "nonland-permanent-an-opponent-controls"],
   ["target nonland permanent you control", { kind: "permanent", whose: "you", filter: { notTypes: ["land"] } }],
@@ -2832,6 +2834,14 @@ export function parseTrigger(clause) {
     return [{ on: "draws", who: "chosen-player", filter: { chosenName: true } }];
   }
   if (/^Whenever you gain life$/.test(c)) return [{ on: "gains-life", who: "you" }];
+  // "Whenever a white instant or sorcery spell causes you to gain life"
+  // (Firesong and Sunspeaker): a gain made as such a spell resolves.
+  if ((m = /^Whenever an? (?:(white|blue|black|red|green) )?(.+?) spell causes you to gain life$/.exec(c))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    const color = m[1] === undefined ? undefined : COLOR_LETTER[m[1]];
+    return [{ on: "gains-life", who: "you", bySpell: { ...filter, ...(color !== undefined ? { colors: [color] } : {}) } }];
+  }
   // Expend N (rule 700.14) and "whenever you forage" (701.61a).
   if ((m = /^Whenever you expend (\d+)$/.exec(c))) return [{ on: "expend", who: "you", amount: Number(m[1]) }];
   if (/^Whenever you forage$/.test(c)) return [{ on: "event", event: "forages", who: "you" }];
@@ -22470,6 +22480,20 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "filter", filter: { type: "creature", token: false, controlledBy: "you" } },
       grantKeywords: ["riot"],
+      text,
+    };
+  }
+  // "Instant and sorcery spells you control have lifelink" (Heartflame
+  // Duelist), "Red instant and sorcery spells …" (Firesong and Sunspeaker).
+  m = /^(?:(White|Blue|Black|Red|Green) i|I)nstant and sorcery spells you control have lifelink\.$/.exec(line);
+  if (m !== null) {
+    const color = m[1] === undefined ? undefined : COLOR_LETTER[m[1].toLowerCase()];
+    return {
+      affects: { scope: "self" },
+      grantsToSpells: {
+        filter: { typesAnyOf: ["instant", "sorcery"], ...(color !== undefined ? { colors: [color] } : {}) },
+        keywords: ["lifelink"],
+      },
       text,
     };
   }

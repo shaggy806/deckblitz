@@ -19931,6 +19931,30 @@ describe("excess damage to a creature this turn, and energy paid", () => {
   });
 });
 
+describe("a gain a spell caused", () => {
+  it("reads Firesong and Sunspeaker whole", () => {
+    const face = parseFace({
+      name: "Test Firesong",
+      type_line: "Legendary Creature — Minotaur Cleric",
+      power: "4",
+      toughness: "6",
+      oracle_text:
+        "Red instant and sorcery spells you control have lifelink.\nWhenever a white instant or sorcery spell causes you to gain life, Test Firesong deals 3 damage to target creature or player.",
+    });
+    expect(face.static[0].grantsToSpells).toEqual({
+      filter: { typesAnyOf: ["instant", "sorcery"], colors: ["R"] },
+      keywords: ["lifelink"],
+    });
+    expect(face.triggered[0].trigger).toEqual({
+      on: "gains-life",
+      who: "you",
+      bySpell: { typesAnyOf: ["instant", "sorcery"], colors: ["W"] },
+    });
+    expect(face.triggered[0].targets).toEqual(["creature-or-player"]);
+    expect(face.triggered[0].effect).toEqual({ kind: "damage", amount: 3, target: 0 });
+  });
+});
+
 describe("the next loyalty ability copied", () => {
   it("reads Jaya's Phoenix's delayed copy, once for a player and once for a planeswalker", () => {
     const face = parseFace({

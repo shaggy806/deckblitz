@@ -373,6 +373,8 @@ export function timingCountable(spec: TriggerSpec): boolean {
       // "Your third die each turn": counted die by die (`diceRolledThisTurn`).
       return spec.event === "rolls-die" || TRIGGER_EVENTS[spec.event].journaled !== undefined;
     case "gains-life":
+      // A `life-gained` entry doesn't say which spell caused it.
+      return spec.bySpell === undefined;
     case "loses-life":
     case "draws":
     case "cast-spell":

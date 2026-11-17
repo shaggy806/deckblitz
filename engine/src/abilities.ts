@@ -1296,6 +1296,16 @@ export type TriggerKind =
        * things at once is one event. */
       readonly on: "gains-life";
       readonly who: TriggerWho;
+      /** "Whenever **a white instant or sorcery spell** causes you to gain
+       * life" (Firesong and Sunspeaker): only a gain a spell matching this
+       * caused, whoever controls it — one made as that spell resolves (a copy
+       * too): its effect's gain, damage its effect dealt or had a source deal
+       * with lifelink, or an event of its effect a replacement turned into a
+       * gain (the rulings). Not a triggered ability of the spell or card
+       * (Renewed Faith's cycling trigger), nor a mana ability activated as it
+       * resolves. The spell is read as it is then, on the stack. The journal
+       * keeps no cause, so the timing wrapper can't count these. */
+      readonly bySpell?: CardFilter;
     }
   | {
       /** "Whenever you expend N" (rule 700.14): paying for a spell took the

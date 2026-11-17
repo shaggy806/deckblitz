@@ -1570,6 +1570,13 @@ export type GameEvent =
        * ability whose effect it was. Absent for damage's (119.2), a cost's,
        * and a gain. */
       readonly byEffectOf?: PlayerId;
+      /** A gain a spell caused (Firesong and Sunspeaker's rulings): the spell
+       * resolving as it was gained — its effect's gain, lifelink damage its
+       * effect dealt, or an event of its effect a replacement turned into a
+       * gain. Absent for a loss, and for a gain anything else caused (a
+       * triggered ability, combat damage, a mana ability activated as the
+       * spell resolves). */
+      readonly bySpell?: ObjectId;
     })
   | (Base & {
       /** An activated mana ability of `object` resolved (rule 605.3b —

@@ -2541,6 +2541,12 @@ export class Game {
    * only spans their resolutions; a parked one is known by its `leaveStack`. */
   private resolvingAbilities: ObjectId[] = [];
 
+  /** How many mana abilities are resolving right now (`resolveManaAbility`,
+   * nested for one paid for inside another): a life gain meanwhile isn't the
+   * resolving spell's (`life-changed`'s `bySpell`). Not game state, like
+   * `resolvingAbilities`. */
+  private manaAbilitiesResolving = 0;
+
   /** What simultaneous damage owes once it has all been dealt (see {@link
    * withDamageBatch}): lifelink life gain per source, and the "whenever this
    * is dealt damage" triggers, once per permanent however many sources hit
@@ -28233,11 +28239,23 @@ export class Game {
     }
   }
 
+  /** {@link resolveManaAbilityNow}, counted in `manaAbilitiesResolving`: what
+   * a mana ability does (Pristine Talisman's life) is its own doing, not a
+   * spell's that asked for a payment as it resolved. */
+  private resolveManaAbility(...args: Parameters<Game["resolveManaAbilityNow"]>): void {
+    this.manaAbilitiesResolving += 1;
+    try {
+      this.resolveManaAbilityNow(...args);
+    } finally {
+      this.manaAbilitiesResolving -= 1;
+    }
+  }
+
   /** A mana ability's effect, its cost paid: it resolves immediately and never
    * uses the stack (rule 605.3b) — handed what the cost sacrificed or tapped,
    * read as it last existed (608.2h): Priest of Yawgmoth's "the sacrificed
    * artifact's mana value". */
-  private resolveManaAbility(
+  private resolveManaAbilityNow(
     sourceId: ObjectId,
     player: PlayerId,
     ability: ActivatedAbility,
@@ -30431,7 +30449,18 @@ export class Game {
     this.emit({ type: "counter-added", object: id, counter: kind, amount: count, by, after: object.counters[kind] });
   }
 
+  /** {@link useManaSourceNow}, counted in `manaAbilitiesResolving`, as
+   * `resolveManaAbility` is: a payment's mana abilities do their own doing. */
   private useManaSource(step: ManaPlanStep): void {
+    this.manaAbilitiesResolving += 1;
+    try {
+      this.useManaSourceNow(step);
+    } finally {
+      this.manaAbilitiesResolving -= 1;
+    }
+  }
+
+  private useManaSourceNow(step: ManaPlanStep): void {
     // A mana ability the payer has rather than a permanent (Channel).
     const held = heldManaSourceOf(step.source);
     if (held !== undefined) {
@@ -31794,6 +31823,8 @@ export class Game {
     } else {
       delete this.state.resolvingSource;
     }
+    if (top !== undefined && top.kind !== "ability") this.state.resolvingSpell = top.id;
+    else delete this.state.resolvingSpell;
     if (top !== undefined) this.state.resolvingController = top.controller;
     if (top?.kind === "ability" && (top.abilityKind === "triggered" || top.abilityKind === "chapter")) {
       this.state.resolvingTriggered = true;
@@ -31882,6 +31913,7 @@ export class Game {
       delete this.state.repeatSince;
       delete this.state.repeatPass;
       delete this.state.resolvingSource;
+      delete this.state.resolvingSpell;
       delete this.state.resolvingController;
       delete this.state.resolvingTriggered;
       // A `restart-game` effect's restart (rule 727), once what's left of
@@ -36491,7 +36523,9 @@ export class Game {
         return (
           event.type === "life-changed" &&
           event.delta > 0 &&
-          this.matchesWhoPlayer(spec.who, event.player, self)
+          this.matchesWhoPlayer(spec.who, event.player, self) &&
+          (spec.bySpell === undefined ||
+            (event.bySpell !== undefined && this.triggerFilterOk(spec.bySpell, event.bySpell, self)))
         );
       case "loses-life":
         return (
@@ -64380,6 +64414,11 @@ controlledBy,
       }
     }
     playerState.life += delta;
+    // A gain while a spell resolves is that spell's doing — what its effect
+    // did, a replacement changed, or lifelink damage it dealt or instructed
+    // (Firesong and Sunspeaker's rulings) — unless a mana ability activated
+    // meanwhile did it.
+    const bySpell = delta > 0 && this.manaAbilitiesResolving === 0 ? this.state.resolvingSpell : undefined;
     // The event's journal entry is the turn's tally, so every path counts —
     // damage, a drain, a cost paid — as an amount: "lost life this turn" is
     // `> 0`, but "lost 4 or more life this turn" (Y'shtola) needs the number.
@@ -64389,6 +64428,7 @@ controlledBy,
       delta,
       life: playerState.life,
       ...(delta < 0 && byEffectOf !== undefined ? { byEffectOf } : {}),
+      ...(bySpell !== undefined ? { bySpell } : {}),
     });
   }
 

@@ -7052,6 +7052,11 @@ export interface GameState {
    * a permanent it puts onto the battlefield records as `entry.by`. Absent
    * while a spell resolves, and between resolutions. */
   resolvingSource?: EntrySource;
+  /** While a spell resolves (across the decisions it waits on, like
+   * `resolutionSince`): that spell — a copy of one too. What a life gain it
+   * causes names (`life-changed`'s `bySpell`, Firesong and Sunspeaker).
+   * Absent while an ability resolves, and between resolutions. */
+  resolvingSpell?: ObjectId;
   /** While a spell or ability resolves (across the decisions it waits on, like
    * `resolutionSince`): who controls it — not whoever part of it is being done
    * by, a "that player may search" running in that player's name. */
