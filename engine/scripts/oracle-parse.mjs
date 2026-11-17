@@ -3651,6 +3651,17 @@ export function parseSentence(sentence, ctx) {
       count: 1,
     };
   }
+  // "For each other nonland permanent you control, create a token that's a
+  // copy of that permanent" (Oko, the Ringleader's −5): the source is left
+  // out by `isSource: false`, not by name, so another Oko is still copied.
+  if (/^for each other nonland permanent you control, create a token that's a copy of that permanent\.$/i.test(s)) {
+    return {
+      kind: "create-token-copy",
+      of: { each: { notTypes: ["land"], controlledBy: "you", isSource: false } },
+      count: 1,
+      who: "you",
+    };
+  }
   // Dance with Calamity: "As many times as you choose, you may exile the top
   // card of your library." — a `may`, then "again?" after each card; and "If
   // the total mana value of the cards exiled this way is 13 or less, you may

@@ -21438,6 +21438,19 @@ describe("life under half the starting total", () => {
   });
 });
 
+describe("a token copy of each other nonland permanent you control (Oko, the Ringleader)", () => {
+  it("leaves the source out by isSource, not by name", () => {
+    expect(
+      parseEffect("For each other nonland permanent you control, create a token that's a copy of that permanent.", ctx()).effect,
+    ).toEqual({
+      kind: "create-token-copy",
+      of: { each: { notTypes: ["land"], controlledBy: "you", isSource: false } },
+      count: 1,
+      who: "you",
+    });
+  });
+});
+
 describe("each creature you control with a keyword read off its text box", () => {
   it("a +1/+1 counter on each creature you control with modular (Arcbound Overseer)", () => {
     expect(parseEffect("Put a +1/+1 counter on each creature you control with modular.", ctx()).effect).toEqual({

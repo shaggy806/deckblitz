@@ -352,6 +352,13 @@ Now a `then` that reads the damage's source (`"trigger-object"`, `"trigger-contr
 `reflexive-trigger` is owed once per source (`thenPerSource`, `Game.damageBatch.shieldThens`; rule 603.2c) —
 which also fixes Comeuppance against two attackers. Judgment of Alexander (rank 11898).
 `test/prevented-this-way-whenever.test.ts`.
+### A token copy of each other permanent you control — built 2026-11-17
+
+The key `effect:token-copy-each-other` needed no engine code: `create-token-copy`'s `{ each }` filter is read with
+the source (`permanentsMatching`), so "each other nonland permanent you control" is `isSource: false`, not a
+`notName` that would skip a second Oko. The scaffolder reads the line. Oko, the Ringleader (rank 12255), whose
+combat copy is Muddle's `become-copy` with hexproof as an exception. `test/token-copy-each-other.test.ts`.
+
 ### Scry before a creature explores — built 2026-11-17
 
 The key `replacement:explore-replacement-scry-first`: a `would-explore` replacement's `also` (`ModifiedEvent`'s,
