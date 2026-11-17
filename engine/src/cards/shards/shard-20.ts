@@ -270,6 +270,7 @@ import _poolDragonsApproach from "../pool/dragons-approach.js";
 import _poolDragoonsLance from "../pool/dragoons-lance.js";
 import _poolDramatistsPuppet from "../pool/dramatists-puppet.js";
 import _poolDreadhordeArcanist from "../pool/dreadhorde-arcanist.js";
+import _poolDreamHalls from "../pool/dream-halls.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
 import _poolDreamstalkerManticore from "../pool/dreamstalker-manticore.js";
@@ -1372,6 +1373,7 @@ const shard: CardShard = {
     _poolDragoonsLance,
     _poolDramatistsPuppet,
     _poolDreadhordeArcanist,
+    _poolDreamHalls,
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,
     _poolDreamstalkerManticore,

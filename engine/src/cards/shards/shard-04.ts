@@ -122,6 +122,7 @@ import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCitanulCentaurs from "../pool/citanul-centaurs.js";
+import _poolClayGolem from "../pool/clay-golem.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolClockworkHydra from "../pool/clockwork-hydra.js";
 import _poolCloudsLimitBreak from "../pool/clouds-limit-break.js";
@@ -1146,6 +1147,7 @@ const shard: CardShard = {
     _poolChasmDrake,
     _poolChillOfTheGrave,
     _poolCitanulCentaurs,
+    _poolClayGolem,
     _poolCleverConjurer,
     _poolClockworkHydra,
     _poolCloudsLimitBreak,

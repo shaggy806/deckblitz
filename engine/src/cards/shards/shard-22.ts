@@ -514,6 +514,7 @@ import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMarhaultElsdragon from "../pool/marhault-elsdragon.js";
 import _poolMarkOfEviction from "../pool/mark-of-eviction.js";
 import _poolMarkOfTheOni from "../pool/mark-of-the-oni.js";
+import _poolMartyrdom from "../pool/martyrdom.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
@@ -1580,6 +1581,7 @@ const shard: CardShard = {
     _poolMarhaultElsdragon,
     _poolMarkOfEviction,
     _poolMarkOfTheOni,
+    _poolMartyrdom,
     _poolMaskOfAvacyn,
     _poolMaskOfTheSchemer,
     _poolMassManipulation,

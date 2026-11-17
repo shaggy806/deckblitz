@@ -258,6 +258,7 @@ import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
 import _poolEdgewallPack from "../pool/edgewall-pack.js";
 import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
 import _poolEldraziRepurposer from "../pool/eldrazi-repurposer.js";
+import _poolEliteArcanist from "../pool/elite-arcanist.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
 import _poolEmergencyRegeneration from "../pool/emergency-regeneration.js";
@@ -1272,6 +1273,7 @@ const shard: CardShard = {
     _poolEdgewallPack,
     _poolEldraziDevastator,
     _poolEldraziRepurposer,
+    _poolEliteArcanist,
     _poolElvenLyre,
     _poolElvishHexhunter,
     _poolEmergencyRegeneration,

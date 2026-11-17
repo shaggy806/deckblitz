@@ -642,6 +642,7 @@ import _poolPatrolHound from "../pool/patrol-hound.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPegasusRefuge from "../pool/pegasus-refuge.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
+import _poolPersonalIncarnation from "../pool/personal-incarnation.js";
 import _poolPestilentSouleater from "../pool/pestilent-souleater.js";
 import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
 import _poolPheresBandWarchief from "../pool/pheres-band-warchief.js";
@@ -1673,6 +1674,7 @@ const shard: CardShard = {
     _poolPatronOfTheVein,
     _poolPegasusRefuge,
     _poolPeregrineDrake,
+    _poolPersonalIncarnation,
     _poolPestilentSouleater,
     _poolPharaohRamaTut,
     _poolPheresBandWarchief,

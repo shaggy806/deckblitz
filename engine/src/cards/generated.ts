@@ -4822,6 +4822,7 @@ import _poolClawsOfWirewood from "./pool/claws-of-wirewood.js";
 import _poolClawsOut from "./pool/claws-out.js";
 import _poolClayChampion from "./pool/clay-champion.js";
 import _poolClayFiredBricks from "./pool/clay-fired-bricks.js";
+import _poolClayGolem from "./pool/clay-golem.js";
 import _poolClayRevenant from "./pool/clay-revenant.js";
 import _poolClayStatue from "./pool/clay-statue.js";
 import _poolCleanfall from "./pool/cleanfall.js";
@@ -7574,6 +7575,7 @@ import _poolDreamDevourer from "./pool/dream-devourer.js";
 import _poolDreamEater from "./pool/dream-eater.js";
 import _poolDreamFighter from "./pool/dream-fighter.js";
 import _poolDreamFracture from "./pool/dream-fracture.js";
+import _poolDreamHalls from "./pool/dream-halls.js";
 import _poolDreamHarvest from "./pool/dream-harvest.js";
 import _poolDreamPillager from "./pool/dream-pillager.js";
 import _poolDreamProwler from "./pool/dream-prowler.js";
@@ -8197,6 +8199,7 @@ import _poolElimGarakSimpleTailor from "./pool/elim-garak-simple-tailor.js";
 import _poolEliminateTheCompetition from "./pool/eliminate-the-competition.js";
 import _poolEliminateTheImpossible from "./pool/eliminate-the-impossible.js";
 import _poolEliminate from "./pool/eliminate.js";
+import _poolEliteArcanist from "./pool/elite-arcanist.js";
 import _poolEliteArchers from "./pool/elite-archers.js";
 import _poolEliteArrester from "./pool/elite-arrester.js";
 import _poolEliteCatWarrior from "./pool/elite-cat-warrior.js";
@@ -16995,6 +16998,7 @@ import _poolMartyrOfDusk from "./pool/martyr-of-dusk.js";
 import _poolMartyrOfFrost from "./pool/martyr-of-frost.js";
 import _poolMartyrOfSands from "./pool/martyr-of-sands.js";
 import _poolMartyrOfSpores from "./pool/martyr-of-spores.js";
+import _poolMartyrdom from "./pool/martyrdom.js";
 import _poolMartyredRusalka from "./pool/martyred-rusalka.js";
 import _poolMartyrsBond from "./pool/martyrs-bond.js";
 import _poolMartyrsCause from "./pool/martyrs-cause.js";
@@ -20157,6 +20161,7 @@ import _poolPersistentNightmare from "./pool/persistent-nightmare.js";
 import _poolPersistentPetitioners from "./pool/persistent-petitioners.js";
 import _poolPersistentSpecimen from "./pool/persistent-specimen.js";
 import _poolPersonOfInterest from "./pool/person-of-interest.js";
+import _poolPersonalIncarnation from "./pool/personal-incarnation.js";
 import _poolPersonalSanctuary from "./pool/personal-sanctuary.js";
 import _poolPersonalTutor from "./pool/personal-tutor.js";
 import _poolPersonify from "./pool/personify.js";
@@ -25747,6 +25752,7 @@ import _poolSoulDiviner from "./pool/soul-diviner.js";
 import _poolSoulEnervation from "./pool/soul-enervation.js";
 import _poolSoulExchange from "./pool/soul-exchange.js";
 import _poolSoulFeast from "./pool/soul-feast.js";
+import _poolSoulFoundry from "./pool/soul-foundry.js";
 import _poolSoulGuideGryff from "./pool/soul-guide-gryff.js";
 import _poolSoulGuideLantern from "./pool/soul-guide-lantern.js";
 import _poolSoulImmolation from "./pool/soul-immolation.js";
@@ -38213,6 +38219,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClawsOut,
   _poolClayChampion,
   _poolClayFiredBricks,
+  _poolClayGolem,
   _poolClayRevenant,
   _poolClayStatue,
   _poolCleanfall,
@@ -40965,6 +40972,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDreamEater,
   _poolDreamFighter,
   _poolDreamFracture,
+  _poolDreamHalls,
   _poolDreamHarvest,
   _poolDreamPillager,
   _poolDreamProwler,
@@ -41588,6 +41596,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEliminateTheCompetition,
   _poolEliminateTheImpossible,
   _poolEliminate,
+  _poolEliteArcanist,
   _poolEliteArchers,
   _poolEliteArrester,
   _poolEliteCatWarrior,
@@ -50386,6 +50395,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMartyrOfFrost,
   _poolMartyrOfSands,
   _poolMartyrOfSpores,
+  _poolMartyrdom,
   _poolMartyredRusalka,
   _poolMartyrsBond,
   _poolMartyrsCause,
@@ -53548,6 +53558,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPersistentPetitioners,
   _poolPersistentSpecimen,
   _poolPersonOfInterest,
+  _poolPersonalIncarnation,
   _poolPersonalSanctuary,
   _poolPersonalTutor,
   _poolPersonify,
@@ -59138,6 +59149,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoulEnervation,
   _poolSoulExchange,
   _poolSoulFeast,
+  _poolSoulFoundry,
   _poolSoulGuideGryff,
   _poolSoulGuideLantern,
   _poolSoulImmolation,
@@ -71617,6 +71629,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/claws-out": _poolClawsOut,
   "pool/clay-champion": _poolClayChampion,
   "pool/clay-fired-bricks": _poolClayFiredBricks,
+  "pool/clay-golem": _poolClayGolem,
   "pool/clay-revenant": _poolClayRevenant,
   "pool/clay-statue": _poolClayStatue,
   "pool/cleanfall": _poolCleanfall,
@@ -74369,6 +74382,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dream-eater": _poolDreamEater,
   "pool/dream-fighter": _poolDreamFighter,
   "pool/dream-fracture": _poolDreamFracture,
+  "pool/dream-halls": _poolDreamHalls,
   "pool/dream-harvest": _poolDreamHarvest,
   "pool/dream-pillager": _poolDreamPillager,
   "pool/dream-prowler": _poolDreamProwler,
@@ -74992,6 +75006,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/eliminate-the-competition": _poolEliminateTheCompetition,
   "pool/eliminate-the-impossible": _poolEliminateTheImpossible,
   "pool/eliminate": _poolEliminate,
+  "pool/elite-arcanist": _poolEliteArcanist,
   "pool/elite-archers": _poolEliteArchers,
   "pool/elite-arrester": _poolEliteArrester,
   "pool/elite-cat-warrior": _poolEliteCatWarrior,
@@ -83790,6 +83805,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/martyr-of-frost": _poolMartyrOfFrost,
   "pool/martyr-of-sands": _poolMartyrOfSands,
   "pool/martyr-of-spores": _poolMartyrOfSpores,
+  "pool/martyrdom": _poolMartyrdom,
   "pool/martyred-rusalka": _poolMartyredRusalka,
   "pool/martyrs-bond": _poolMartyrsBond,
   "pool/martyrs-cause": _poolMartyrsCause,
@@ -86952,6 +86968,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/persistent-petitioners": _poolPersistentPetitioners,
   "pool/persistent-specimen": _poolPersistentSpecimen,
   "pool/person-of-interest": _poolPersonOfInterest,
+  "pool/personal-incarnation": _poolPersonalIncarnation,
   "pool/personal-sanctuary": _poolPersonalSanctuary,
   "pool/personal-tutor": _poolPersonalTutor,
   "pool/personify": _poolPersonify,
@@ -92542,6 +92559,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soul-enervation": _poolSoulEnervation,
   "pool/soul-exchange": _poolSoulExchange,
   "pool/soul-feast": _poolSoulFeast,
+  "pool/soul-foundry": _poolSoulFoundry,
   "pool/soul-guide-gryff": _poolSoulGuideGryff,
   "pool/soul-guide-lantern": _poolSoulGuideLantern,
   "pool/soul-immolation": _poolSoulImmolation,
