@@ -94,6 +94,26 @@ export function largestOneEach(together: ZoneChoiceTogether, eligible: readonly 
   return matched;
 }
 
+/** `"distinct"`: how many of `eligible` one answer can surely hold — a set
+ * whose cards share no tag, built greedily with the cards of fewest tags
+ * first: the most there is when each card has one tag (a name), and never
+ * more than some answer holds when one has two (a split card's names). A
+ * search's `min` is held to it, so "exactly two cards that have different
+ * names" (Burning-Rune Demon) over a library of one name still has an
+ * answer. */
+export function largestDistinct(together: ZoneChoiceTogether, eligible: readonly ObjectId[]): number {
+  const seen = new Set<string>();
+  let held = 0;
+  const byTags = [...new Set(eligible)].sort((x, y) => (together.tags[x]?.length ?? 0) - (together.tags[y]?.length ?? 0));
+  for (const id of byTags) {
+    const tags = together.tags[id] ?? [];
+    if (tags.length === 0 || tags.some((tag) => seen.has(tag))) continue;
+    for (const tag of tags) seen.add(tag);
+    held += 1;
+  }
+  return held;
+}
+
 /**
  * The indices of some `min` to `max` of `values` (none negative — mana
  * values) that add up to from `atLeast` to `atMost`, or `null` when no such

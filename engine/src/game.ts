@@ -371,7 +371,7 @@ import type {
   GraveyardKeywordGrant,
   ZoneChoiceSplitCase,
 } from "./effects.js";
-import { EVERY_CARD_TYPE, largestOneEach, oneOfEachSlots, type ZoneChoiceTogether } from "./zone-choice-together.js";
+import { EVERY_CARD_TYPE, largestDistinct, largestOneEach, oneOfEachSlots, type ZoneChoiceTogether } from "./zone-choice-together.js";
 import {
   aggregateMatches,
   aggregateOver,
@@ -47061,6 +47061,11 @@ controlledBy,
       : together !== undefined && "oneEach" in together
         ? Math.min(max, together.oneEach.length)
         : max;
+    // "Exactly two cards … that have different names" (Burning-Rune Demon):
+    // no more must be found than some answer can hold, or a library of one
+    // name would leave the search with no answer (a stated quality may be
+    // left unfound anyway — rule 701.23b).
+    const reach = set?.rule === "distinct" ? largestDistinct(set, eligible) : eligible.length;
     const exiled = destination === "exile" || destination === "exile-face-down";
     // Finds that go card by card (`instead`): this choice only picks them,
     // and its answer asks where each goes (`beginSearchInstead`), the
@@ -47086,7 +47091,7 @@ controlledBy,
         ...(forbidden ? { searchForbidden: true as const } : {}),
         ids: eligible,
         eligible,
-        min: Math.min(least, most, eligible.length),
+        min: Math.min(least, most, reach),
         max: Math.min(most, eligible.length),
         destination: "stay",
         leftover: "stay",
@@ -47108,7 +47113,7 @@ controlledBy,
       ...(forbidden ? { searchForbidden: true as const } : {}),
       ids: eligible,
       eligible,
-      min: Math.min(least, most, eligible.length),
+      min: Math.min(least, most, reach),
       max: Math.min(most, eligible.length),
       ...(set !== undefined ? { together: set } : {}),
       destination,
