@@ -2363,7 +2363,10 @@
 }
 @keyframes stack-arrive {
   from {
-    translate: 18px -26px;
+    /* From up and to the right by a share of the card, as the pile's steps
+       are (`stackDepth.ts`): 18px and 26px at any size were a nudge on a
+       large card. */
+    translate: calc(var(--card-w) * 0.08) calc(var(--card-w) * -0.115);
     scale: 1.14;
   }
   to {
