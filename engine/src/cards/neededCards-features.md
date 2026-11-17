@@ -7307,6 +7307,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A CDA over devotion (2026-11-04).** `bug:cda-devotion`, no engine code: `setBasePtFromCount` reads `{ devotionTo }` in every zone already (Tymaret's shape). Daxos, Blessed by the Sun.
 
+**Twice a count as a CDA (2026-11-17, found built).** `bug:cda-count-multiplier`, no engine code: "twice the number of …" is the `CountSpec` `{ sum: [count, count] }` (the Dog Illusion token's shape), still a layer-7b set; the scaffolder reads three counts and "the first instant or sorcery spell you cast each turn costs {N} less". Melek, Reforged Researcher; Territorial Maro; Masumaro, First to Live.
+
 **Each opponent chooses fame or fortune (2026-11-04).** `effect:fame-or-fortune`, no engine code: a `vote` with `choose` over named options, `for-each-vote` per option, and `choose-permanents` of `controlledByPlayer: "that-player"` for what isn't targeted. Seize the Spotlight.
 
 **The chosen type in addition (2026-11-04).** `static:is-chosen-type`, no engine code: `addsChosenCreatureType` beside an `ofChosenType` lord (Metallic Mimic and Morophon's lines), both read by the scaffolder. Adaptive Automaton.

@@ -22262,3 +22262,32 @@ describe("clash with an opponent, if you win (Scattering Stroke's sentence pair)
     });
   });
 });
+
+describe("twice a count as a CDA, and the first instant or sorcery each turn cheaper (Melek)", () => {
+  it("the count added to itself, and a firstEachTurn discount", () => {
+    const melek = parseFace(
+      {
+        name: "Melek, Reforged Researcher",
+        type_line: "Legendary Creature — Weird Detective",
+        mana_cost: "{3}{U}{R}",
+        power: "*",
+        toughness: "*",
+        oracle_text:
+          "Melek's power and toughness are each equal to twice the number of instant and sorcery cards in your graveyard.\nThe first instant or sorcery spell you cast each turn costs {3} less to cast.",
+      },
+      { tokenFor: () => null },
+    );
+    const counted = { countInGraveyard: { typesAnyOf: ["instant", "sorcery"], ownedBy: "you" } };
+    expect(melek.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: { sum: [counted, counted] }, plusPower: 0, plusToughness: 0 },
+    });
+    expect(melek.static[1]).toMatchObject({
+      costModification: {
+        applies: { typesAnyOf: ["instant", "sorcery"] },
+        reduceGeneric: 3,
+        when: { caster: "you", firstEachTurn: true },
+      },
+    });
+  });
+});

@@ -22164,6 +22164,12 @@ function spellCostStaticOf(line, text) {
   if (/^Spells you cast cost \{1\} less to cast for each card type they share with cards exiled with (?:~|this creature|this permanent)\.$/.test(line)) {
     return made({ applies: {}, when: { caster: "you" }, reduceGeneric: { cardTypesSharedWith: "exiled-with-source", of: "priced" } });
   }
+  // "The first instant or sorcery spell you cast each turn costs {3} less to
+  // cast" (Melek, Reforged Researcher): skipped once one has been cast.
+  if ((m = /^The first (instant or sorcery|creature) spell you cast each turn costs \{(\d+)\} less to cast\.$/.exec(line))) {
+    const applies = m[1] === "creature" ? { type: "creature" } : { typesAnyOf: ["instant", "sorcery"] };
+    return made({ applies, reduceGeneric: Number(m[2]), caster: "you", firstEachTurn: true });
+  }
   if ((m = /^Spells you cast from your graveyard( or from exile)? cost \{(\d+)\} less to cast\.$/.exec(line))) {
     return made({ applies: {}, caster: "you", castFrom: m[1] !== undefined ? ["graveyard", "exile"] : "graveyard", reduceGeneric: Number(m[2]) });
   }
@@ -24663,6 +24669,22 @@ function parseStatic(line, text) {
   }
   // Domain (an ability word, rule 207.2c): Nishoba Brawler's "~'s power is
   // equal to the number of basic land types among lands you control" (a CDA).
+  // "… each equal to **twice** the number of …" (Melek, Reforged Researcher;
+  // Territorial Maro; Masumaro, First to Live): the count added to itself.
+  if ((m = /^~'s power and toughness are each equal to twice the number of (.+)\.$/.exec(line))) {
+    const counted = {
+      "instant and sorcery cards in your graveyard": { countInGraveyard: { typesAnyOf: ["instant", "sorcery"], ownedBy: "you" } },
+      "cards in your hand": "cards-in-your-hand",
+      "basic land types among lands you control": { basicLandTypes: "you" },
+    }[m[1]];
+    if (counted !== undefined) {
+      return {
+        affects: { scope: "self" },
+        setBasePtFromCount: { countOf: { sum: [counted, counted] }, plusPower: 0, plusToughness: 0 },
+        text,
+      };
+    }
+  }
   if (line === "~'s power is equal to the number of basic land types among lands you control.") {
     return {
       affects: { scope: "self" },

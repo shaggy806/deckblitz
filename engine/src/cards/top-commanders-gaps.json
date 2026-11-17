@@ -2527,6 +2527,7 @@
   "amount:attached-to-source-last-known",
   "bug:cda-cards-exiled-with",
   "bug:cda-sum-of-counts",
+  "bug:cda-count-multiplier",
   "cost:exiled-card-ref",
   "effect:cost-exiled-cards-this-way",
   "amount:highest-life-total",

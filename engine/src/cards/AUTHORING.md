@@ -6332,6 +6332,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   - `{ countInGraveyard: CardFilter }` — cards in **all** graveyards matching
     the filter (Mortivore: `{ type: "creature" }`); add `ownedBy: "you"` for
     "in your graveyard".
+  - `{ sum: CountSpec[] }` — counts added. "**Twice** the number of …" is a
+    count added to itself (Melek, Reforged Researcher: `{ sum: [spells,
+    spells] }`; Masumaro, First to Live; Territorial Maro), still a 7b set.
   - `"cards-in-largest-opponent-hand"` (Adamaro, First to Desire), `"cards-in-all-graveyards"` (Lord of Extinction), `"cards-in-all-hands"` (Werewolf of Ancient Hunger), `"cards-in-your-hand"`
     (Psychosis Crawler), `"your-life-total"` (Serra Avatar's "power and
     toughness are each equal to your life total" — negative at negative life,
