@@ -4184,7 +4184,7 @@ export type AwaitingDecision =
        * `shuffle`'s library is shuffled (rule 701.24a). The picks were
        * announced by the first choice. */
       readonly searchRest?: {
-        readonly destination: "battlefield" | "hand" | "graveyard";
+        readonly destination: "battlefield" | "hand" | "graveyard" | "library-bottom";
         readonly enterTapped?: true;
         readonly shuffle: PlayerId | null;
       };
@@ -5735,7 +5735,8 @@ export type SuspendedResolution =
  * destination — `shuffle` — whose library to shuffle once they've all moved
  * (none for a graveyard alone) — and the search's X. */
 export type SearchSplit = ResolvedSearchInstead & {
-  readonly to: "battlefield" | "hand" | "graveyard";
+  /** `"library"`: shuffled into it (Turtles Forever's "the rest"). */
+  readonly to: "battlefield" | "hand" | "graveyard" | "library";
   readonly toTapped?: true;
   readonly shuffle: PlayerId | null;
   readonly x: number;

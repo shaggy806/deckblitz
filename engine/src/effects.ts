@@ -11680,8 +11680,23 @@ export type EffectSpec =
        * down (rule 406.3), only the searcher may look at it. `"stay"`: the
        * find doesn't move; `then` does something with it where it is —
        * Knowledge Exploitation's "you may cast that card without paying its
-       * mana cost", cast from the library (its ruling). */
-      readonly destination: "hand" | "battlefield" | "library-top" | "graveyard" | "exile" | "exile-face-down" | "stay";
+       * mana cost", cast from the library (its ruling).
+       *
+       * `"library"`, only with `instead`: the finds no split takes are
+       * shuffled into the library — Turtles Forever's "an opponent chooses
+       * two of them. Put the chosen cards into your hand and **shuffle the
+       * rest into your library**", where a find from outside the game goes
+       * into the library too and one from it goes back before the shuffle.
+       * Without `instead` nothing would move, and nothing is searched. */
+      readonly destination:
+        | "hand"
+        | "battlefield"
+        | "library-top"
+        | "graveyard"
+        | "exile"
+        | "exile-face-down"
+        | "stay"
+        | "library";
       /** An amount: "search your library for **X** cards" (Insidious Dreams)
        * must find X while there are X (rule 701.23d — no quality named). */
       readonly min: EffectAmount;

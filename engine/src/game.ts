@@ -12760,7 +12760,8 @@ export class Game {
           ? { searchNext: after }
           : {
               searchRest: {
-                destination: instead.to,
+                // Back into the library the search shuffles once they've moved.
+                destination: instead.to === "library" ? "library-bottom" : instead.to,
                 ...(instead.toTapped === true ? { enterTapped: true as const } : {}),
                 shuffle: instead.shuffle,
               },
@@ -46912,7 +46913,7 @@ controlledBy,
   private beginLibrarySearch(
     player: PlayerId,
     filter: CardFilter,
-    destination: "hand" | "battlefield" | "library-top" | "graveyard" | "exile" | "exile-face-down" | "stay",
+    destination: "hand" | "battlefield" | "library-top" | "graveyard" | "exile" | "exile-face-down" | "stay" | "library",
     min: number,
     max: number,
     enterTapped: boolean,
@@ -46928,6 +46929,9 @@ controlledBy,
       readonly enterAlong?: readonly ObjectId[];
     },
   ): void {
+    // "Shuffle the rest into your library" is only the rest of an `instead`
+    // split: alone it would move nothing.
+    if (destination === "library" && more?.instead === undefined) return;
     // Whose zones: the searcher's own, or another player's ("search target
     // opponent's library") — the searcher still decides, and the filter is
     // read from their side.
@@ -47031,12 +47035,15 @@ controlledBy,
     // and its answer asks where each goes (`beginSearchInstead`), the
     // shuffle waiting for those moves.
     const instead =
-      more?.instead !== undefined && (destination === "hand" || destination === "battlefield" || destination === "graveyard")
+      more?.instead !== undefined &&
+      (destination === "hand" || destination === "battlefield" || destination === "graveyard" || destination === "library")
         ? {
             ...more.instead,
             to: destination,
             ...(enterTapped && destination === "battlefield" ? { toTapped: true as const } : {}),
-            shuffle: shuffles ? owner : null,
+            // "Shuffle the rest into your library" shuffles it whatever was
+            // searched.
+            shuffle: shuffles || destination === "library" ? owner : null,
             x,
           }
         : undefined;
@@ -47061,6 +47068,8 @@ controlledBy,
       };
       return;
     }
+    // "The rest into the library" is an `instead`'s (refused above alone).
+    if (destination === "library") return;
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
