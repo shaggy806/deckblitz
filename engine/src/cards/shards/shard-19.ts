@@ -322,6 +322,7 @@ import _poolExpunge from "../pool/expunge.js";
 import _poolExquisiteArchangel from "../pool/exquisite-archangel.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
+import _poolEyeOfDuskmantle from "../pool/eye-of-duskmantle.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
 import _poolFacesOfThePast from "../pool/faces-of-the-past.js";
 import _poolFaeFlight from "../pool/fae-flight.js";
@@ -1410,6 +1411,7 @@ const shard: CardShard = {
     _poolExquisiteArchangel,
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
+    _poolEyeOfDuskmantle,
     _poolFabledPassage,
     _poolFacesOfThePast,
     _poolFaeFlight,

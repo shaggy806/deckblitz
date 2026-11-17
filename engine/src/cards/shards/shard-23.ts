@@ -225,6 +225,7 @@ import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
 import _poolDollmakersShopPorcelainGallery from "../pool/dollmakers-shop-porcelain-gallery.js";
 import _poolDolmenGate from "../pool/dolmen-gate.js";
 import _poolDominionInfiltration from "../pool/dominion-infiltration.js";
+import _poolDonnaNoble from "../pool/donna-noble.js";
 import _poolDoomgape from "../pool/doomgape.js";
 import _poolDoublecast from "../pool/doublecast.js";
 import _poolDownpour from "../pool/downpour.js";
@@ -1276,6 +1277,7 @@ const shard: CardShard = {
     _poolDollmakersShopPorcelainGallery,
     _poolDolmenGate,
     _poolDominionInfiltration,
+    _poolDonnaNoble,
     _poolDoomgape,
     _poolDoublecast,
     _poolDownpour,

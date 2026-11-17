@@ -30,6 +30,7 @@ import _poolAlabasterHostIntercessor from "../pool/alabaster-host-intercessor.js
 import _poolAlandraSkyDreamer from "../pool/alandra-sky-dreamer.js";
 import _poolAlarum from "../pool/alarum.js";
 import _poolAlchemistsAssistant from "../pool/alchemists-assistant.js";
+import _poolAlrundGodOfTheCosmos from "../pool/alrund-god-of-the-cosmos.js";
 import _poolAltarsLight from "../pool/altars-light.js";
 import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
 import _poolAmok from "../pool/amok.js";
@@ -1042,6 +1043,7 @@ const shard: CardShard = {
     _poolAlandraSkyDreamer,
     _poolAlarum,
     _poolAlchemistsAssistant,
+    _poolAlrundGodOfTheCosmos,
     _poolAltarsLight,
     _poolAminatouTheFateshifter,
     _poolAmok,

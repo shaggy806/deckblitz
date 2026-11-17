@@ -673,6 +673,7 @@ import _poolAlpineMeadow from "./pool/alpine-meadow.js";
 import _poolAlpineMoon from "./pool/alpine-moon.js";
 import _poolAlpineWatchdog from "./pool/alpine-watchdog.js";
 import _poolAlquistProftMasterSleuth from "./pool/alquist-proft-master-sleuth.js";
+import _poolAlrundGodOfTheCosmos from "./pool/alrund-god-of-the-cosmos.js";
 import _poolAlrundsEpiphany from "./pool/alrunds-epiphany.js";
 import _poolAlseidOfLifesBounty from "./pool/alseid-of-lifes-bounty.js";
 import _poolAltacBloodseeker from "./pool/altac-bloodseeker.js";
@@ -7263,6 +7264,7 @@ import _poolDonatellosScienceLesson from "./pool/donatellos-science-lesson.js";
 import _poolDonatellosTechnique from "./pool/donatellos-technique.js";
 import _poolDone from "./pool/done.js";
 import _poolDongZhouTheTyrant from "./pool/dong-zhou-the-tyrant.js";
+import _poolDonnaNoble from "./pool/donna-noble.js";
 import _poolDonnieAprilAdorkableDuo from "./pool/donnie-april-adorkable-duo.js";
 import _poolDontMakeASound from "./pool/dont-make-a-sound.js";
 import _poolDontMove from "./pool/dont-move.js";
@@ -8996,6 +8998,7 @@ import _poolExultantCultist from "./pool/exultant-cultist.js";
 import _poolExultantSkymarcher from "./pool/exultant-skymarcher.js";
 import _poolEyeCollector from "./pool/eye-collector.js";
 import _poolEyeGouge from "./pool/eye-gouge.js";
+import _poolEyeOfDuskmantle from "./pool/eye-of-duskmantle.js";
 import _poolEyeOfJace from "./pool/eye-of-jace.js";
 import _poolEyeOfMalcator from "./pool/eye-of-malcator.js";
 import _poolEyeOfNidhogg from "./pool/eye-of-nidhogg.js";
@@ -11940,6 +11943,7 @@ import _poolGrindstone from "./pool/grindstone.js";
 import _poolGrinningDemon from "./pool/grinning-demon.js";
 import _poolGrinningIgnus from "./pool/grinning-ignus.js";
 import _poolGripOfAmnesia from "./pool/grip-of-amnesia.js";
+import _poolGripOfChaos from "./pool/grip-of-chaos.js";
 import _poolGripOfDesolation from "./pool/grip-of-desolation.js";
 import _poolGripOfPhyresis from "./pool/grip-of-phyresis.js";
 import _poolGripOfTheRoil from "./pool/grip-of-the-roil.js";
@@ -12215,6 +12219,7 @@ import _poolHailstormValkyrie from "./pool/hailstorm-valkyrie.js";
 import _poolHairStrungKoto from "./pool/hair-strung-koto.js";
 import _poolHajarLoyalBodyguard from "./pool/hajar-loyal-bodyguard.js";
 import _poolHakbalOfTheSurgingSoul from "./pool/hakbal-of-the-surging-soul.js";
+import _poolHakkaWhisperingRaven from "./pool/hakka-whispering-raven.js";
 import _poolHakodaSelflessCommander from "./pool/hakoda-selfless-commander.js";
 import _poolHaktosTheUnscarred from "./pool/haktos-the-unscarred.js";
 import _poolHalamDjinn from "./pool/halam-djinn.js";
@@ -33943,6 +33948,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAlpineMoon,
   _poolAlpineWatchdog,
   _poolAlquistProftMasterSleuth,
+  _poolAlrundGodOfTheCosmos,
   _poolAlrundsEpiphany,
   _poolAlseidOfLifesBounty,
   _poolAltacBloodseeker,
@@ -40533,6 +40539,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDonatellosTechnique,
   _poolDone,
   _poolDongZhouTheTyrant,
+  _poolDonnaNoble,
   _poolDonnieAprilAdorkableDuo,
   _poolDontMakeASound,
   _poolDontMove,
@@ -42266,6 +42273,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExultantSkymarcher,
   _poolEyeCollector,
   _poolEyeGouge,
+  _poolEyeOfDuskmantle,
   _poolEyeOfJace,
   _poolEyeOfMalcator,
   _poolEyeOfNidhogg,
@@ -45210,6 +45218,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrinningDemon,
   _poolGrinningIgnus,
   _poolGripOfAmnesia,
+  _poolGripOfChaos,
   _poolGripOfDesolation,
   _poolGripOfPhyresis,
   _poolGripOfTheRoil,
@@ -45485,6 +45494,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHairStrungKoto,
   _poolHajarLoyalBodyguard,
   _poolHakbalOfTheSurgingSoul,
+  _poolHakkaWhisperingRaven,
   _poolHakodaSelflessCommander,
   _poolHaktosTheUnscarred,
   _poolHalamDjinn,
@@ -67226,6 +67236,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/alpine-moon": _poolAlpineMoon,
   "pool/alpine-watchdog": _poolAlpineWatchdog,
   "pool/alquist-proft-master-sleuth": _poolAlquistProftMasterSleuth,
+  "pool/alrund-god-of-the-cosmos": _poolAlrundGodOfTheCosmos,
   "pool/alrunds-epiphany": _poolAlrundsEpiphany,
   "pool/alseid-of-lifes-bounty": _poolAlseidOfLifesBounty,
   "pool/altac-bloodseeker": _poolAltacBloodseeker,
@@ -73816,6 +73827,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/donatellos-technique": _poolDonatellosTechnique,
   "pool/done": _poolDone,
   "pool/dong-zhou-the-tyrant": _poolDongZhouTheTyrant,
+  "pool/donna-noble": _poolDonnaNoble,
   "pool/donnie-april-adorkable-duo": _poolDonnieAprilAdorkableDuo,
   "pool/dont-make-a-sound": _poolDontMakeASound,
   "pool/dont-move": _poolDontMove,
@@ -75549,6 +75561,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/exultant-skymarcher": _poolExultantSkymarcher,
   "pool/eye-collector": _poolEyeCollector,
   "pool/eye-gouge": _poolEyeGouge,
+  "pool/eye-of-duskmantle": _poolEyeOfDuskmantle,
   "pool/eye-of-jace": _poolEyeOfJace,
   "pool/eye-of-malcator": _poolEyeOfMalcator,
   "pool/eye-of-nidhogg": _poolEyeOfNidhogg,
@@ -78493,6 +78506,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grinning-demon": _poolGrinningDemon,
   "pool/grinning-ignus": _poolGrinningIgnus,
   "pool/grip-of-amnesia": _poolGripOfAmnesia,
+  "pool/grip-of-chaos": _poolGripOfChaos,
   "pool/grip-of-desolation": _poolGripOfDesolation,
   "pool/grip-of-phyresis": _poolGripOfPhyresis,
   "pool/grip-of-the-roil": _poolGripOfTheRoil,
@@ -78768,6 +78782,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hair-strung-koto": _poolHairStrungKoto,
   "pool/hajar-loyal-bodyguard": _poolHajarLoyalBodyguard,
   "pool/hakbal-of-the-surging-soul": _poolHakbalOfTheSurgingSoul,
+  "pool/hakka-whispering-raven": _poolHakkaWhisperingRaven,
   "pool/hakoda-selfless-commander": _poolHakodaSelflessCommander,
   "pool/haktos-the-unscarred": _poolHaktosTheUnscarred,
   "pool/halam-djinn": _poolHalamDjinn,
