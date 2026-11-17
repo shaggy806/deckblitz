@@ -11477,6 +11477,18 @@ export function parseEffect(text, outer) {
     // card from your graveyard" with a permission for a duration.
     const impulse = impulseWindowAt(sentences, i, ctx) ?? playerImpulseAt(sentences, i, ctx);
     if (impulse !== null) {
+      // "… When you play a card this way, ~ deals 2 damage to each player."
+      // (Fires of Mount Doom): the permission's `whenCast` with `lands`.
+      const played = /^When you play a card this way, (.+)$/.exec(sentences[i + 2] ?? "");
+      const whenPlayed =
+        played === null || impulse.kind !== "impulse-exile" ? null : parseSentence(`${played[1][0].toUpperCase()}${played[1].slice(1)}`, ctx);
+      if (whenPlayed !== null && whenPlayed !== undefined) {
+        const withTrigger = { ...impulse, whenCast: { lands: true, effect: whenPlayed, text: sentences[i + 2] } };
+        parsed.push(withTrigger);
+        hints.push({ sentence, effect: withTrigger });
+        skip = 2;
+        continue;
+      }
       parsed.push(impulse);
       hints.push({ sentence, effect: impulse });
       skip = 1;
@@ -25072,6 +25084,26 @@ function parseStatic(line, text) {
       return {
         affects: { scope: "self" },
         mayPlay: { from: "library-top", filter, ...(top[2] !== undefined ? { flash: true } : {}) },
+        text,
+      };
+    }
+  }
+  // "During your turn, you may cast creature spells with power or toughness 1
+  // or less from your graveyard. If you cast a spell this way, that creature
+  // enters with a finality counter on it." (Leonardo, Sewer Samurai): the
+  // spells judged as cast (`spell`), the counter the permission's `entersWith`.
+  if ((m = /^During your turn, you may cast (\w+) spells with power or toughness (\d+) or less from your graveyard\. If you cast a spell this way, that \1 enters with an? (\w+) counter on it\.(?: \(If a creature with a finality counter on it would die, exile it instead\.\))?$/.exec(line))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      const n = Number(m[2]);
+      return {
+        affects: { scope: "self" },
+        mayPlay: {
+          from: "graveyard",
+          spell: { ...filter, anyOf: [{ power: { op: "lte", n } }, { toughness: { op: "lte", n } }] },
+          yourTurnOnly: true,
+          entersWith: { kind: m[3], amount: 1 },
+        },
         text,
       };
     }

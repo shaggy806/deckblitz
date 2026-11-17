@@ -9707,6 +9707,37 @@ describe("exiled this way, then a pick or the rest moved on", () => {
     });
   });
 
+  it("reads Leonardo, Sewer Samurai's your-turn graveyard casts by power or toughness and their finality counter", () => {
+    const leo = face(
+      "Leonardo, Sewer Samurai",
+      "Legendary Creature — Mutant Ninja Turtle Samurai",
+      "During your turn, you may cast creature spells with power or toughness 1 or less from your graveyard. If you cast a spell this way, that creature enters with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)",
+    );
+    expect(leo.complete).toBe(true);
+    expect(leo.static[0].mayPlay).toEqual({
+      from: "graveyard",
+      spell: { type: "creature", anyOf: [{ power: { op: "lte", n: 1 } }, { toughness: { op: "lte", n: 1 } }] },
+      yourTurnOnly: true,
+      entersWith: { kind: "finality", amount: 1 },
+    });
+  });
+
+  it("reads Fires of Mount Doom's 'when you play a card this way' as the impulse exile's whenCast with lands", () => {
+    const fires = face(
+      "Fires of Mount Doom",
+      "Legendary Enchantment",
+      "{2}{R}: Exile the top card of your library. You may play that card this turn. When you play a card this way, Fires of Mount Doom deals 2 damage to each player.",
+    );
+    expect(fires.complete).toBe(true);
+    expect(fires.activated[0].effect).toMatchObject({
+      kind: "impulse-exile",
+      amount: 1,
+      duration: "end-of-turn",
+      play: true,
+      whenCast: { lands: true, effect: { kind: "damage", amount: 2, who: "each-player" } },
+    });
+  });
+
   it("reads blitz: its cost, a discard or life beside the mana, and the graveyard cast", () => {
     const blitzOf = (name: string, text: string) => face(name, "Creature — Human Warrior", text).blitz;
     expect(blitzOf("Test Card", "Blitz {3}{R}")).toEqual({ cost: "{3}{R}" });
