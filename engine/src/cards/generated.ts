@@ -1721,6 +1721,7 @@ import _poolAvariceAmulet from "./pool/avarice-amulet.js";
 import _poolAvariceTotem from "./pool/avarice-totem.js";
 import _poolAvariciousDragon from "./pool/avaricious-dragon.js";
 import _poolAvatarAang from "./pool/avatar-aang.js";
+import _poolAvatarDestiny from "./pool/avatar-destiny.js";
 import _poolAvatarEnthusiasts from "./pool/avatar-enthusiasts.js";
 import _poolAvatarKuruk from "./pool/avatar-kuruk.js";
 import _poolAvatarKyoshiEarthbender from "./pool/avatar-kyoshi-earthbender.js";
@@ -4268,6 +4269,7 @@ import _poolCelestialSword from "./pool/celestial-sword.js";
 import _poolCelestialUnicorn from "./pool/celestial-unicorn.js";
 import _poolCelestineTheLivingSaint from "./pool/celestine-the-living-saint.js";
 import _poolCelestusSanctifier from "./pool/celestus-sanctifier.js";
+import _poolCellarDoor from "./pool/cellar-door.js";
 import _poolCementShoes from "./pool/cement-shoes.js";
 import _poolCemeteryDesecrator from "./pool/cemetery-desecrator.js";
 import _poolCemeteryGate from "./pool/cemetery-gate.js";
@@ -11120,6 +11122,7 @@ import _poolGlamdringFoeHammer from "./pool/glamdring-foe-hammer.js";
 import _poolGlamdring from "./pool/glamdring.js";
 import _poolGlamerGifter from "./pool/glamer-gifter.js";
 import _poolGlamerSpinners from "./pool/glamer-spinners.js";
+import _poolGlamerdye from "./pool/glamerdye.js";
 import _poolGlamermite from "./pool/glamermite.js";
 import _poolGlamorousGrapplers from "./pool/glamorous-grapplers.js";
 import _poolGlamorousOutlaw from "./pool/glamorous-outlaw.js";
@@ -11881,6 +11884,7 @@ import _poolGremlinInfestation from "./pool/gremlin-infestation.js";
 import _poolGremlinMine from "./pool/gremlin-mine.js";
 import _poolGremlinTamer from "./pool/gremlin-tamer.js";
 import _poolGrendelSpawnOfKnull from "./pool/grendel-spawn-of-knull.js";
+import _poolGrenzoDungeonWarden from "./pool/grenzo-dungeon-warden.js";
 import _poolGrenzoHavocRaiser from "./pool/grenzo-havoc-raiser.js";
 import _poolGrenzosCutthroat from "./pool/grenzos-cutthroat.js";
 import _poolGrenzosRuffians from "./pool/grenzos-ruffians.js";
@@ -28316,6 +28320,7 @@ import _poolTheOoze from "./pool/the-ooze.js";
 import _poolTheOzolith from "./pool/the-ozolith.js";
 import _poolThePartingOfTheWays from "./pool/the-parting-of-the-ways.js";
 import _poolThePeregrineDynamo from "./pool/the-peregrine-dynamo.js";
+import _poolThePhasingOfZhalfir from "./pool/the-phasing-of-zhalfir.js";
 import _poolThePrideOfHullClade from "./pool/the-pride-of-hull-clade.js";
 import _poolThePrimaVista from "./pool/the-prima-vista.js";
 import _poolThePrincessTakesFlight from "./pool/the-princess-takes-flight.js";
@@ -29214,6 +29219,7 @@ import _poolTrainingCompound from "./pool/training-compound.js";
 import _poolTrainingDrone from "./pool/training-drone.js";
 import _poolTrainingGrounds from "./pool/training-grounds.js";
 import _poolTrainingRegimen from "./pool/training-regimen.js";
+import _poolTraitDoctoring from "./pool/trait-doctoring.js";
 import _poolTraitorousBlood from "./pool/traitorous-blood.js";
 import _poolTraitorousGreed from "./pool/traitorous-greed.js";
 import _poolTraitorousInstinct from "./pool/traitorous-instinct.js";
@@ -31538,6 +31544,7 @@ import _poolWhenWeWereYoung from "./pool/when-we-were-young.js";
 import _poolWhereAncientsTread from "./pool/where-ancients-tread.js";
 import _poolWhetstone from "./pool/whetstone.js";
 import _poolWhetwheel from "./pool/whetwheel.js";
+import _poolWhimOfVolrath from "./pool/whim-of-volrath.js";
 import _poolWhimwader from "./pool/whimwader.js";
 import _poolWhipOfErebos from "./pool/whip-of-erebos.js";
 import _poolWhipSergeant from "./pool/whip-sergeant.js";
@@ -33011,6 +33018,7 @@ import _tokensPhyrexianMiteToken from "./tokens/phyrexian-mite-token.js";
 import _tokensPhyrexianMyrTokenMyrSire from "./tokens/phyrexian-myr-token-myr-sire.js";
 import _tokensPhyrexianMyrToken from "./tokens/phyrexian-myr-token.js";
 import _tokensPhyrexianSaprolingToken from "./tokens/phyrexian-saproling-token.js";
+import _tokensPhyrexianTokenThePhasingOfZhalfir from "./tokens/phyrexian-token-the-phasing-of-zhalfir.js";
 import _tokensPhyrexianToken from "./tokens/phyrexian-token.js";
 import _tokensPhyrexianWurmDeathtouch from "./tokens/phyrexian-wurm-deathtouch.js";
 import _tokensPhyrexianWurmLifelink from "./tokens/phyrexian-wurm-lifelink.js";
@@ -35019,6 +35027,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvariceTotem,
   _poolAvariciousDragon,
   _poolAvatarAang,
+  _poolAvatarDestiny,
   _poolAvatarEnthusiasts,
   _poolAvatarKuruk,
   _poolAvatarKyoshiEarthbender,
@@ -37566,6 +37575,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCelestialUnicorn,
   _poolCelestineTheLivingSaint,
   _poolCelestusSanctifier,
+  _poolCellarDoor,
   _poolCementShoes,
   _poolCemeteryDesecrator,
   _poolCemeteryGate,
@@ -44418,6 +44428,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlamdring,
   _poolGlamerGifter,
   _poolGlamerSpinners,
+  _poolGlamerdye,
   _poolGlamermite,
   _poolGlamorousGrapplers,
   _poolGlamorousOutlaw,
@@ -45179,6 +45190,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGremlinMine,
   _poolGremlinTamer,
   _poolGrendelSpawnOfKnull,
+  _poolGrenzoDungeonWarden,
   _poolGrenzoHavocRaiser,
   _poolGrenzosCutthroat,
   _poolGrenzosRuffians,
@@ -61614,6 +61626,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheOzolith,
   _poolThePartingOfTheWays,
   _poolThePeregrineDynamo,
+  _poolThePhasingOfZhalfir,
   _poolThePrideOfHullClade,
   _poolThePrimaVista,
   _poolThePrincessTakesFlight,
@@ -62512,6 +62525,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrainingDrone,
   _poolTrainingGrounds,
   _poolTrainingRegimen,
+  _poolTraitDoctoring,
   _poolTraitorousBlood,
   _poolTraitorousGreed,
   _poolTraitorousInstinct,
@@ -64836,6 +64850,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhereAncientsTread,
   _poolWhetstone,
   _poolWhetwheel,
+  _poolWhimOfVolrath,
   _poolWhimwader,
   _poolWhipOfErebos,
   _poolWhipSergeant,
@@ -66315,6 +66330,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensPhyrexianMyrTokenMyrSire,
   _tokensPhyrexianMyrToken,
   _tokensPhyrexianSaprolingToken,
+  _tokensPhyrexianTokenThePhasingOfZhalfir,
   _tokensPhyrexianToken,
   _tokensPhyrexianWurmDeathtouch,
   _tokensPhyrexianWurmLifelink,
@@ -68330,6 +68346,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/avarice-totem": _poolAvariceTotem,
   "pool/avaricious-dragon": _poolAvariciousDragon,
   "pool/avatar-aang": _poolAvatarAang,
+  "pool/avatar-destiny": _poolAvatarDestiny,
   "pool/avatar-enthusiasts": _poolAvatarEnthusiasts,
   "pool/avatar-kuruk": _poolAvatarKuruk,
   "pool/avatar-kyoshi-earthbender": _poolAvatarKyoshiEarthbender,
@@ -70877,6 +70894,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/celestial-unicorn": _poolCelestialUnicorn,
   "pool/celestine-the-living-saint": _poolCelestineTheLivingSaint,
   "pool/celestus-sanctifier": _poolCelestusSanctifier,
+  "pool/cellar-door": _poolCellarDoor,
   "pool/cement-shoes": _poolCementShoes,
   "pool/cemetery-desecrator": _poolCemeteryDesecrator,
   "pool/cemetery-gate": _poolCemeteryGate,
@@ -77729,6 +77747,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glamdring": _poolGlamdring,
   "pool/glamer-gifter": _poolGlamerGifter,
   "pool/glamer-spinners": _poolGlamerSpinners,
+  "pool/glamerdye": _poolGlamerdye,
   "pool/glamermite": _poolGlamermite,
   "pool/glamorous-grapplers": _poolGlamorousGrapplers,
   "pool/glamorous-outlaw": _poolGlamorousOutlaw,
@@ -78490,6 +78509,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gremlin-mine": _poolGremlinMine,
   "pool/gremlin-tamer": _poolGremlinTamer,
   "pool/grendel-spawn-of-knull": _poolGrendelSpawnOfKnull,
+  "pool/grenzo-dungeon-warden": _poolGrenzoDungeonWarden,
   "pool/grenzo-havoc-raiser": _poolGrenzoHavocRaiser,
   "pool/grenzos-cutthroat": _poolGrenzosCutthroat,
   "pool/grenzos-ruffians": _poolGrenzosRuffians,
@@ -94925,6 +94945,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-ozolith": _poolTheOzolith,
   "pool/the-parting-of-the-ways": _poolThePartingOfTheWays,
   "pool/the-peregrine-dynamo": _poolThePeregrineDynamo,
+  "pool/the-phasing-of-zhalfir": _poolThePhasingOfZhalfir,
   "pool/the-pride-of-hull-clade": _poolThePrideOfHullClade,
   "pool/the-prima-vista": _poolThePrimaVista,
   "pool/the-princess-takes-flight": _poolThePrincessTakesFlight,
@@ -95823,6 +95844,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/training-drone": _poolTrainingDrone,
   "pool/training-grounds": _poolTrainingGrounds,
   "pool/training-regimen": _poolTrainingRegimen,
+  "pool/trait-doctoring": _poolTraitDoctoring,
   "pool/traitorous-blood": _poolTraitorousBlood,
   "pool/traitorous-greed": _poolTraitorousGreed,
   "pool/traitorous-instinct": _poolTraitorousInstinct,
@@ -98147,6 +98169,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/where-ancients-tread": _poolWhereAncientsTread,
   "pool/whetstone": _poolWhetstone,
   "pool/whetwheel": _poolWhetwheel,
+  "pool/whim-of-volrath": _poolWhimOfVolrath,
   "pool/whimwader": _poolWhimwader,
   "pool/whip-of-erebos": _poolWhipOfErebos,
   "pool/whip-sergeant": _poolWhipSergeant,
@@ -99620,6 +99643,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/phyrexian-myr-token-myr-sire": _tokensPhyrexianMyrTokenMyrSire,
   "tokens/phyrexian-myr-token": _tokensPhyrexianMyrToken,
   "tokens/phyrexian-saproling-token": _tokensPhyrexianSaprolingToken,
+  "tokens/phyrexian-token-the-phasing-of-zhalfir": _tokensPhyrexianTokenThePhasingOfZhalfir,
   "tokens/phyrexian-token": _tokensPhyrexianToken,
   "tokens/phyrexian-wurm-deathtouch": _tokensPhyrexianWurmDeathtouch,
   "tokens/phyrexian-wurm-lifelink": _tokensPhyrexianWurmLifelink,

@@ -330,6 +330,7 @@ import _poolGiltLeafsEmbrace from "../pool/gilt-leafs-embrace.js";
 import _poolGingerQueenOfSweets from "../pool/ginger-queen-of-sweets.js";
 import _poolGlacialCrevasses from "../pool/glacial-crevasses.js";
 import _poolGlacierGodmaw from "../pool/glacier-godmaw.js";
+import _poolGlamerdye from "../pool/glamerdye.js";
 import _poolGlassworks from "../pool/glassworks.js";
 import _poolGlint from "../pool/glint.js";
 import _poolGloomfangMauler from "../pool/gloomfang-mauler.js";
@@ -359,6 +360,7 @@ import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
 import _poolGravegouger from "../pool/gravegouger.js";
 import _poolGreaterHarvester from "../pool/greater-harvester.js";
 import _poolGreensideWatcher from "../pool/greenside-watcher.js";
+import _poolGrenzoDungeonWarden from "../pool/grenzo-dungeon-warden.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
 import _poolGruulBeastmaster from "../pool/gruul-beastmaster.js";
 import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
@@ -1312,6 +1314,7 @@ const shard: CardShard = {
     _poolGingerQueenOfSweets,
     _poolGlacialCrevasses,
     _poolGlacierGodmaw,
+    _poolGlamerdye,
     _poolGlassworks,
     _poolGlint,
     _poolGloomfangMauler,
@@ -1341,6 +1344,7 @@ const shard: CardShard = {
     _poolGravegouger,
     _poolGreaterHarvester,
     _poolGreensideWatcher,
+    _poolGrenzoDungeonWarden,
     _poolGrimoireOfTheDead,
     _poolGruulBeastmaster,
     _poolGruulGuildmage,

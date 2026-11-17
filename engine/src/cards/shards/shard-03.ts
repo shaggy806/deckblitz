@@ -956,6 +956,7 @@ import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
 import _tokensOrbToken from "../tokens/orb-token.js";
 import _tokensOxToken from "../tokens/ox-token.js";
+import _tokensPhyrexianTokenThePhasingOfZhalfir from "../tokens/phyrexian-token-the-phasing-of-zhalfir.js";
 import _tokensPlantToken from "../tokens/plant-token.js";
 import _tokensScrapToken from "../tokens/scrap-token.js";
 import _tokensSharkToken from "../tokens/shark-token.js";
@@ -1922,6 +1923,7 @@ const shard: CardShard = {
     _tokensMutantToken,
     _tokensOrbToken,
     _tokensOxToken,
+    _tokensPhyrexianTokenThePhasingOfZhalfir,
     _tokensPlantToken,
     _tokensScrapToken,
     _tokensSharkToken,

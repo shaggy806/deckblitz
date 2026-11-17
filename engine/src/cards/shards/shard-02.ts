@@ -924,6 +924,7 @@ import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
 import _poolTowerOfCoireall from "../pool/tower-of-coireall.js";
 import _poolToweringBaloth from "../pool/towering-baloth.js";
 import _poolTrailblazersBoots from "../pool/trailblazers-boots.js";
+import _poolTraitDoctoring from "../pool/trait-doctoring.js";
 import _poolTransitMage from "../pool/transit-mage.js";
 import _poolTrevasRuins from "../pool/trevas-ruins.js";
 import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
@@ -1968,6 +1969,7 @@ const shard: CardShard = {
     _poolTowerOfCoireall,
     _poolToweringBaloth,
     _poolTrailblazersBoots,
+    _poolTraitDoctoring,
     _poolTransitMage,
     _poolTrevasRuins,
     _poolTributeToTheWild,

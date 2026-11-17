@@ -53,6 +53,7 @@ import _poolAuraOfDominion from "../pool/aura-of-dominion.js";
 import _poolAuraThief from "../pool/aura-thief.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvalanche from "../pool/avalanche.js";
+import _poolAvatarDestiny from "../pool/avatar-destiny.js";
 import _poolAvenHeartstabber from "../pool/aven-heartstabber.js";
 import _poolAvengersDisassembled from "../pool/avengers-disassembled.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
@@ -1098,6 +1099,7 @@ const shard: CardShard = {
     _poolAuraThief,
     _poolAuroraShifter,
     _poolAvalanche,
+    _poolAvatarDestiny,
     _poolAvenHeartstabber,
     _poolAvengersDisassembled,
     _poolAvengersQuinjet,
