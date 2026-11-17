@@ -17563,6 +17563,18 @@ function parseFaceAsWritten(face, ctx = {}) {
       };
       continue;
     }
+    // Gorex, the Tombshell: cards from the graveyard, how many announced as
+    // X, each taking this off; exiled with the permanent it becomes.
+    if (
+      (m = /^As an additional cost to cast ~, you may exile any number of (.+?) cards from your graveyard\. ~ costs \{(\d+)\} less to cast for each card exiled this way\.$/.exec(line)) &&
+      discardFilterOf(m[1]) !== null
+    ) {
+      out.additionalCost = {
+        exileFromGraveyard: { count: "x", filter: discardFilterOf(m[1]), ...(isSpell ? {} : { linked: true }) },
+        reducesPerX: Number(m[2]),
+      };
+      continue;
+    }
     // Explosive Singularity: any number tapped as it's cast, each taking
     // this off the total cost.
     if (

@@ -5853,6 +5853,12 @@ export class Game {
         sacrificeReducesFilter === undefined && def.additionalCost?.reducesPerX !== undefined
           ? this.additionalCostActX(def)
           : undefined;
+      // "Exile any number of creature cards from your graveyard; {2} less for
+      // each" (Gorex, the Tombshell): offered the same way too.
+      const reducingExile =
+        sacrificeReducesFilter === undefined && reducingAct === undefined
+          ? this.reducingGraveyardExile(def)
+          : undefined;
       let sacrificeRange: { readonly least: number; readonly most: number } | null = null;
       // "Exile a red card with mana value X from your hand rather than pay"
       // (the Shoals): X is announced as it's cast (rules 107.3a, 601.2b), so
@@ -5927,17 +5933,21 @@ export class Game {
         if (xs.length === 0) continue;
         perX = xs;
         manaAffordable = true;
-      } else if (sacrificeReducesFilter !== undefined || reducingAct !== undefined) {
+      } else if (sacrificeReducesFilter !== undefined || reducingAct !== undefined || reducingExile !== undefined) {
         // "Sacrifice any number …; {2} less for each" (Dargo): castable if
         // some number sacrificed pays the rest — the fewest, and the most,
         // that do (each one more is cheaper in mana, and one fewer to tap).
         // "Remove any number of +1/+1 counters …; {2} less for each"
-        // (Hierophant Bio-Titan) likewise, up to the counters there are.
+        // (Hierophant Bio-Titan) likewise, up to the counters there are, and
+        // "exile any number of creature cards from your graveyard" (Gorex),
+        // up to the cards there — past what lowers the cost too (its ruling).
         let n = 0;
         if (sacrificeReducesFilter !== undefined) {
           for (const id of this.costSacrificeCandidates(player, [{ filter: sacrificeReducesFilter }], undefined)) {
             n += this.state.objects[id]?.stackCount ?? 1;
           }
+        } else if (reducingExile !== undefined) {
+          n = this.graveyardCostCandidates(player, reducingExile.filter, card).length;
         } else {
           n = Math.min(
             costActMaxX(reducingAct!, this.makeResolutionContext(card, player, [])) ?? 0,
@@ -6611,7 +6621,9 @@ export class Game {
                         ? {
                             maxX: sacrificeX,
                             ...(sacrificeRange.least > 0 ? { minX: sacrificeRange.least } : {}),
-                            ...(reducingAct === undefined
+                            ...(reducingExile !== undefined
+                              ? {}
+                              : reducingAct === undefined
                               ? { sacrifice: true as const }
                               : reducingAct.kind === "remove-counters"
                                 ? { removesCounters: true as const }
@@ -18520,8 +18532,9 @@ export class Game {
     }
     // "{2} less for each counter removed this way" (Hierophant Bio-Titan): X
     // is how many the act as the cost takes, announced as it's cast (601.2b).
+    // "{2} less for each card exiled this way" (Gorex, the Tombshell) too.
     const perActX = def.additionalCost?.reducesPerX;
-    if (perActX !== undefined && this.additionalCostActX(def) !== undefined) {
+    if (perActX !== undefined && (this.additionalCostActX(def) !== undefined || this.reducingGraveyardExile(def) !== undefined)) {
       reduction += perActX * Math.max(0, Math.floor(xValue));
     }
     const total = reduceManaCost(
@@ -19828,6 +19841,16 @@ export class Game {
   private additionalCostActX(def: CardDefinition): EffectSpec | undefined {
     const act = def.additionalCost?.also?.do;
     return act !== undefined && costActReadsX(act) ? act : undefined;
+  }
+
+  /** A spell's "you may exile any number of creature cards from your
+   * graveyard. This spell costs {2} less to cast for each card exiled this
+   * way" (Gorex, the Tombshell): its `exileFromGraveyard` of X cards with a
+   * `reducesPerX`, X announced as it's cast (rule 601.2b) and each card
+   * taking that much generic off the total cost (601.2f). */
+  private reducingGraveyardExile(def: CardDefinition): { readonly filter?: CardFilter } | undefined {
+    const exile = def.additionalCost?.exileFromGraveyard;
+    return def.additionalCost?.reducesPerX !== undefined && exile?.count === "x" ? exile : undefined;
   }
 
   private xPlanFor(

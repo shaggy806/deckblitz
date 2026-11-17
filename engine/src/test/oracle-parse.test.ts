@@ -17756,6 +17756,23 @@ describe("counters removed as a spell's cost, each taking {2} off", () => {
       reducesPerX: 2,
     });
   });
+
+  it("reads Gorex, the Tombshell's creature cards exiled from the graveyard", () => {
+    const face = parseFace({
+      name: "Gorex, the Tombshell",
+      type_line: "Legendary Creature — Zombie Turtle",
+      mana_cost: "{6}{B}{B}",
+      colors: ["B"],
+      power: "4",
+      toughness: "4",
+      oracle_text:
+        "As an additional cost to cast this spell, you may exile any number of creature cards from your graveyard. This spell costs {2} less to cast for each card exiled this way.\nDeathtouch\nWhenever Gorex attacks or dies, choose a card at random exiled with Gorex and put that card into its owner's hand.",
+    });
+    expect(face.additionalCost).toEqual({
+      exileFromGraveyard: { count: "x", filter: { type: "creature" }, linked: true },
+      reducesPerX: 2,
+    });
+  });
 });
 
 describe("the greatest number of cards a player discarded", () => {

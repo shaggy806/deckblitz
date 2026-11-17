@@ -4744,6 +4744,12 @@ export interface CardDefinition {
      * count, and any number may be chosen, even past what lowers the cost
      * further (the ruling). Offered as `xCost.removesCounters` when the act
      * removes counters.
+     *
+     * With `exileFromGraveyard` of `count: "x"` instead: "you may **exile any
+     * number of creature cards from your graveyard. This spell costs {2}
+     * less to cast for each card exiled this way**" (Gorex, the Tombshell) —
+     * X is how many, up to the matching cards there, offered from the fewest
+     * that pay to the most there are.
      */
     readonly reducesPerX?: number;
     /**

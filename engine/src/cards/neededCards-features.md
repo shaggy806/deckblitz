@@ -364,6 +364,17 @@ reads what the trigger did. Gluttonous Hellkite (rank 11505): each player sacrif
 has left the stack (its rulings). The scaffolder reads it (`thisCast`: X in a cast trigger, and "~ enters
 with N +1/+1 counters on it for each … sacrificed/exiled/… this way").
 `test/cast-trigger-sacrifice-counters.test.ts`.
+### Exile any number of creature cards from your graveyard, {2} less each — built 2026-11-17
+
+The key `cost:exile-from-graveyard-reduces-cost` (family `cost:exile-from-graveyard-additional`):
+`additionalCost.reducesPerX` now also reads an `exileFromGraveyard` of `count: "x"` (`Game.reducingGraveyardExile`):
+X announced as it's cast (rule 601.2b), offered through Dargo's range branch from the fewest cards that pay to
+the most there are (past what lowers it further — the ruling), each taking that much generic off the total cost
+after any increase such as commander tax (601.2f), never the coloured part. The cards are chosen as it's paid
+and `linked` to the permanent (607.2a). The scaffolder reads "you may exile any number of [type] cards from your
+graveyard. ~ costs {N} less to cast for each card exiled this way". Gorex, the Tombshell (rank 11986), its
+attack and dies triggers handing a linked card back at random. `test/exile-from-graveyard-reduces-cost.test.ts`.
+
 ### A mana ability adding mana equal to the sacrificed artifact's mana value — found built 2026-11-17
 
 The key `effect:mana-ability-sacrificed-amount` was built as `amount:mana-ability-sacrificed-object` (commit
