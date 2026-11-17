@@ -40,23 +40,22 @@ the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists 
 section keeps only what to do next.
 
 - **The rank goal (the user's, 2026-11-11): every card to EDHREC rank 10,000, but for those needing
-  a major engine change.** `npm run -s cards:goal -w engine` lists what's left, best rank first,
-  each with its open need keys and its size. **10 cards are left (2026-11-15), and every small key
-  is built:** seven majors to ask the user about before building (Nicol Bolas, Dragon-God's +1,
-  left major by the user; New Blood; _____ Goblin's stickers; Karn Liberated's restart of the game;
-  Pulmonic Sliver's asked graveyard replacement; Night Shift of the Living Dead's choice inside a
-  die roll; Zilortha, Strength Incarnate) and three the runs skipped (Soulfire Eruption and
-  Spectral Searchlight, sized small but really major; Lich's Mastery, one implementation group
-  with Nicol Bolas's). **Past rank 10,000** the order is still EDHREC rank: the triaged cards'
-  keys through `build-family overnight lanes` (`rank-goal.mjs --rank 20000 --keys`; next by rank
-  Rowan's Talent, Signal the Clans, Bring the Ending; each lane's share is `rank-goal.mjs --lane
-  <lane> --keys`, the lanes' hand-off notes in `engine/.cache/lanes/`), and new cards through
-  `author-top-cards` once a snapshot refresh brings untriaged ones (`cards:needs -- --next 60`;
-  B328-B330 emptied it). Two decisions past the goal wait on the user: Starlight Spectacular's
-  ordering and Malik's secret choice (`B308.json`, `B309.json`). **The freed-card queue holds two
-  cards** to re-read (`cards:needs -- --stale`, 2026-11-15: Preacher and Wish; `author-freed`).
-  The nine starter precons' 4 stand-ins (`engine/data/sweep-3/PC-*.json`) go as their originals
-  land. How the keys were worked down to here (the lanes runs, B310-B330, the freed-card batches)
+  a major engine change.** **Reached 2026-11-16 (B333):** `npm run -s cards:goal -w engine` lists
+  nothing — the user approved all ten last cards' majors and they were built. **Past rank 10,000**
+  the order is still EDHREC rank: the triaged cards' keys (`rank-goal.mjs --rank 20000 --keys`),
+  through `author-top-cards` as B333 did (lead plus worktree agents, a group of four cards each)
+  or `build-family overnight lanes`. **Next by rank** (B333 reached 11328 but skipped these four):
+  Leori, Sparktouched Hunter (11022, `decision:choose-planeswalker-type`), Sanwell, Avenger Ace
+  (11028, `effect:exile-top-cast-from-among-rest-bottom`), Avatar Destiny (11322,
+  `bug:simultaneous-move-with-choice`), Avacyn's Judgment (11326, re-read: no key recorded); then
+  11400 on. Cryptic Spires (10790) needs a deck-construction choice (circle two colours) — ask the
+  user. New cards come through `author-top-cards` once a snapshot refresh brings untriaged ones
+  (`cards:needs -- --next 60`). Three decisions wait on the user: Starlight Spectacular's
+  ordering, Malik's secret choice and Exchange of Words (`B308.json`, `B309.json`). **The
+  freed-card queue holds four** (`cards:needs -- --stale`: Lumbering Battlement, Vortex Elemental;
+  Mana Web and Search the City need re-keying first — `docs/card-blockers.md`, batch 333;
+  `author-freed`). The starter precons' last stand-in, Explosion of Riches (for Fireball), goes as
+  its original lands. How the keys were worked down to here (the lanes runs, B310-B330, the freed-card batches)
   is in `COMPLETED.md`.
 - **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
@@ -99,7 +98,6 @@ section keeps only what to do next.
 - **A token copy skips "exile first" and "pay any amount of life" as it enters** — The Mimeoplasm's `exileFirst` and Phyrexian Processor's `payLife` are asked only of a card entering, the same gap as Vizier of Many Faces (`docs/engine-gaps.md`).
 - **An object's own "instead" against an exile replacement isn't asked** — Blightsteel Colossus's shuffle and Gravebane Zombie's library top are applied ahead of Rest in Peace or a finality counter without the owner choosing (rule 616.1e), and a Quintorius-cast spell countered by another spell's resolution goes to the library bottom unasked (`docs/engine-gaps.md`).
 - **A `turn-history` condition with `who: "opponent"` sums over every opponent** — B327: "an opponent had two or more creatures enter" passes on one each from two opponents; and a `trigger-value` condition reads false while triggering, so it can't be an intervening "if" (`docs/engine-gaps.md`).
-- **Which permission a play from outside a graveyard uses is the engine's pick** — `chosenPlayOption` takes the one that spends nothing, so The Fourth Doctor's once-a-turn permission and its Food never come beside Courser of Kruphix or Crystal Skull; graveyards already offer one choice per permission (`docs/engine-gaps.md`, key `zone:choose-play-permission-any-zone`, the card's patch in `engine/.cache/patches/`).
 - **A card exiled with time counters but not by suspend isn't heard as suspended** — rule 702.62b counts any card with suspend and a time counter in exile (Alaundo the Seer's), but the `whileSuspended` scan covers only cards suspended by suspend (`docs/engine-gaps.md`).
 - **Transforming keeps a permanent's timestamp** — rule 613.7g gives it a new one each time it transforms or converts; and created tokens record no entry source, so "created with [this ability]" (607.2c) can't be read for them (`docs/engine-gaps.md`).
 - **Definition traps that fail silently** — B298: "opponent" on a `targetsChosenBy` trigger is read from the ability's controller, not the chooser; a spell's any-number bound other than a literal `"x"` becomes 0; `exile` of a card in hand without `fromHand` does nothing; `look-and-choose` over `exiled-this-way` with `max: 0` skips `leftover` (`docs/engine-gaps.md`).
@@ -131,6 +129,7 @@ there and move this line to `COMPLETED.md`.
 - **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone** (702.152a, 702.109a, 702.190a, 702.188a, 702.162a).
 - **Replacement order is chosen for the affected player, never asked** (616.1): among them two opponents' Crafty Cutpurses on one token (first in turn order), the Words cycle's next draw before a Notion Thief or a draw multiplier, and a token minted under two "enter as a copy of" effects that differ (Essence of the Wild beside Mystic Reflection). (2026-11-09: the `replacement-order` decision asks for damage, combat, destroy, and the `add-counter`, `counters-divided` and `gain-life` effects; entering counters, costs, lifelink, player counters, connive, proliferate and events that can't wait still take the best order.)
 - **The rest of leaving the game** (800.4g–h): a choice asked of a player who has left is skipped, not handed to another player.
+- **A Notion Thief redirect isn't keyed for rule 614.5** (2026-11-16, B333): with Chains of Mephistopheles and two Thieves of different controllers, a redirect can apply again to the card Chains makes a player draw (3+ players only; `docs/engine-gaps.md`).
 
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
@@ -270,6 +269,7 @@ and Shiko or the other spell; haste enablers in the crackback were measured and 
 - **The About page doesn't say how a creator can have a strong deck removed** (2026-11-11): the
   site has no contact route; the user's call what it should be
   (`docs/plans/strong-bot-decks.md`).
+- **v2 gives up a permanent to keep a hand card in `exile-from-zones` choices** (2026-11-16, B333): in the Lich's Mastery and Nicol Bolas checks Carol exiled her Hill Giant over an uncastable Shock and Bob his only Forest; v1 picks the hand card. The evaluation's price on a hand card against a permanent, not the feature — judge with `bot:judge --kind answers`.
 
 ## Client / UI
 
@@ -285,6 +285,8 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The Pass bar sits over the rightmost hand cards** (2026-11-11): at 1366x768 their lower edges and the lowered tray's last cards are under it, so the pointer reaching them leaves the hand and the raised tray drops.
+- **The scenario builder's damage cap ignores Zilortha** (2026-11-16, B333): `BuilderPanel.tsx`'s `selectedDamageMax` reads toughness, not lethal damage by power; the server refuses with the reason.
+- **A deck can't name its sticker sheets** (2026-11-16, B333): the deck builder and import don't set `DeckList.stickerSheets` (rule 123.2a), so a deck with a sticker card brings all 48.
 - **The scenario builder can't hold the initiative or a dungeon position** — "Edit from here" drops both (`ScenarioSpec`), so a check of them has to reach them in play.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).

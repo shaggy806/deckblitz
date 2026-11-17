@@ -75,3 +75,13 @@ The scenario builder's
 `ScenarioSpec` (`protocol/src/scenario.ts`) has no field for the initiative or a dungeon
 position. "Edit from here" drops both, so a manual check has to reach them in play: cast an
 initiative card.
+
+**The scenario builder's damage cap ignores Zilortha.** Found 2026-11-16 (B333): under Zilortha,
+Strength Incarnate lethal damage is judged by power (`lethalDamageOf`), but `BuilderPanel.tsx`'s
+`selectedDamageMax` still caps a creature's marked damage below its toughness, so the panel offers
+too little or too much; the server refuses an illegal board with the reason.
+
+**A deck can't name its sticker sheets.** Found 2026-11-16 (B333, `docs/plans/stickers.md`): rule
+123.2a has a deck that plays stickers bring its own sheets (at least ten). `DeckList.stickerSheets`
+takes them, but the deck builder and the import set none, so a deck with a sticker card brings all
+48 Unfinity sheets and three are dealt at random from those.

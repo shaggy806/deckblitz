@@ -1,0 +1,720 @@
+{
+ "batch": "B333",
+ "status": "done",
+ "ranks": "author-top-cards, 2026-11-16: the untriaged queue was empty, so the batch took the best-ranked cards missing from the pool in EDHREC order. The rank goal's ten (ranks 3632-8983, all majors the user approved this session): Nicol Bolas, Dragon-God and Lich's Mastery (exile-from-zones), New Blood (creature-type text change), _____ Goblin (name stickers), Karn Liberated (restarting the game, rule 727), Soulfire Eruption (targets in turn order), Spectral Searchlight (another player's colour inside a mana ability), Pulmonic Sliver (an optional graveyard replacement asked as the move happens), Night Shift of the Living Dead (a die shifted after the roll) and Zilortha (lethal damage by power) - so every card to EDHREC rank 10,000 is now in the pool. Then the triaged cards past rank 10,000 in rank order to 11328 (Preacher and Wish from the freed queue), each with the small feature it waited on, plus the cards that shared a key. Built by the lead and fourteen worktree agents (9 majors, 14 groups of small keys); design records in docs/plans for each major.",
+ "authored": [
+  {
+   "name": "Accursed Witch",
+   "files": [
+    "engine/src/cards/pool/accursed-witch.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cost-reduction-targeting-enchanted-player.test.ts"
+  },
+  {
+   "name": "Agrus Kos, Eternal Soldier",
+   "files": [
+    "engine/src/cards/pool/agrus-kos-eternal-soldier.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/copy-for-each-permanent-or-player.test.ts"
+  },
+  {
+   "name": "Alrund, God of the Cosmos",
+   "files": [
+    "engine/src/cards/pool/alrund-god-of-the-cosmos.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/foretold-filter.test.ts"
+  },
+  {
+   "name": "Anoint with Affliction",
+   "files": [
+    "engine/src/cards/pool/anoint-with-affliction.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/top10000-batch-333.test.ts"
+  },
+  {
+   "name": "Anya, Merciless Angel",
+   "files": [
+    "engine/src/cards/pool/anya-merciless-angel.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/life-below-half-starting.test.ts"
+  },
+  {
+   "name": "Apple of Eden, Isu Relic",
+   "files": [
+    "engine/src/cards/pool/apple-of-eden-isu-relic.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-trigger-on-play-this-way.test.ts"
+  },
+  {
+   "name": "Arcade Gannon",
+   "files": [
+    "engine/src/cards/pool/arcade-gannon.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/graveyard-cast-filter-amount.test.ts"
+  },
+  {
+   "name": "Arni Metalbrow",
+   "files": [
+    "engine/src/cards/pool/arni-metalbrow.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/enters-attacking-trigger.test.ts"
+  },
+  {
+   "name": "Artificial Evolution",
+   "files": [
+    "engine/src/cards/pool/artificial-evolution.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Axebane Ferox",
+   "files": [
+    "engine/src/cards/pool/axebane-ferox.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "_____ Bird Gets the Worm",
+   "files": [
+    "engine/src/cards/pool/bird-gets-the-worm.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/decisions/registry.test.ts"
+  },
+  {
+   "name": "Boltbender",
+   "files": [
+    "engine/src/cards/pool/boltbender.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/choose-new-targets-any-number.test.ts"
+  },
+  {
+   "name": "Break the Ice",
+   "files": [
+    "engine/src/cards/pool/break-the-ice.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/could-produce-filter.test.ts"
+  },
+  {
+   "name": "Bring the Ending",
+   "files": [
+    "engine/src/cards/pool/bring-the-ending.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/top10000-batch-333.test.ts"
+  },
+  {
+   "name": "Cass, Hand of Vengeance",
+   "files": [
+    "engine/src/cards/pool/cass-hand-of-vengeance.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/return-aura-cards-that-were-attached.test.ts"
+  },
+  {
+   "name": "Chains of Mephistopheles",
+   "files": [
+    "engine/src/cards/pool/chains-of-mephistopheles.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/draw-replaced-by-discard.test.ts"
+  },
+  {
+   "name": "Chandra, Fire of Kaladesh",
+   "files": [
+    "engine/src/cards/pool/chandra-fire-of-kaladesh.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Chandra, Roaring Flame",
+   "files": [
+    "engine/src/cards/pool/chandra-roaring-flame.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Channel",
+   "files": [
+    "engine/src/cards/pool/channel.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/player-mana-ability.test.ts"
+  },
+  {
+   "name": "Creeping Inn",
+   "files": [
+    "engine/src/cards/pool/creeping-inn.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/hostile-hostel.test.ts"
+  },
+  {
+   "name": "Cursed Wombat",
+   "files": [
+    "engine/src/cards/pool/cursed-wombat.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/granted-once-per-turn-per-grantor.test.ts"
+  },
+  {
+   "name": "Dark Impostor",
+   "files": [
+    "engine/src/cards/pool/dark-impostor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/linked-exile-grant-card-type.test.ts"
+  },
+  {
+   "name": "Descent into Madness",
+   "files": [
+    "engine/src/cards/pool/descent-into-madness.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-from-zones.test.ts"
+  },
+  {
+   "name": "Donna Noble",
+   "files": [
+    "engine/src/cards/pool/donna-noble.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/paired-dealt-damage.test.ts"
+  },
+  {
+   "name": "Dragon Cultist",
+   "files": [
+    "engine/src/cards/pool/dragon-cultist.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Draugr Necromancer",
+   "files": [
+    "engine/src/cards/pool/draugr-necromancer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/spend-snow-as-any-color.test.ts"
+  },
+  {
+   "name": "Duelist of the Mind",
+   "files": [
+    "engine/src/cards/pool/duelist-of-the-mind.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/top10000-batch-333.test.ts"
+  },
+  {
+   "name": "Elspeth's Talent",
+   "files": [
+    "engine/src/cards/pool/elspeths-talent.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/activates-loyalty-of-attached.test.ts"
+  },
+  {
+   "name": "Eye of Duskmantle",
+   "files": [
+    "engine/src/cards/pool/eye-of-duskmantle.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/surveilled-this-turn.test.ts"
+  },
+  {
+   "name": "_____ Goblin",
+   "files": [
+    "engine/src/cards/pool/goblin.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/decisions/registry.test.ts"
+  },
+  {
+   "name": "Grip of Chaos",
+   "files": [
+    "engine/src/cards/pool/grip-of-chaos.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/put-on-stack-trigger.test.ts"
+  },
+  {
+   "name": "Hakka, Whispering Raven",
+   "files": [
+    "engine/src/cards/pool/hakka-whispering-raven.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/foretold-filter.test.ts"
+  },
+  {
+   "name": "Hogaak, Arisen Necropolis",
+   "files": [
+    "engine/src/cards/pool/hogaak-arisen-necropolis.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cant-spend-mana-to-cast.test.ts"
+  },
+  {
+   "name": "Hostile Hostel",
+   "files": [
+    "engine/src/cards/pool/hostile-hostel.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/hostile-hostel.test.ts"
+  },
+  {
+   "name": "Impulsive Maneuvers",
+   "files": [
+    "engine/src/cards/pool/impulsive-maneuvers.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/next-combat-damage-double-or-prevent.test.ts"
+  },
+  {
+   "name": "Indomitable Creativity",
+   "files": [
+    "engine/src/cards/pool/indomitable-creativity.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-until-per-destroyed.test.ts"
+  },
+  {
+   "name": "Infectious Curse",
+   "files": [
+    "engine/src/cards/pool/infectious-curse.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cost-reduction-targeting-enchanted-player.test.ts"
+  },
+  {
+   "name": "Island Sanctuary",
+   "files": [
+    "engine/src/cards/pool/island-sanctuary.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/island-sanctuary.test.ts"
+  },
+  {
+   "name": "Kaboom!",
+   "files": [
+    "engine/src/cards/pool/kaboom.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/for-each-target-turn-order.test.ts"
+  },
+  {
+   "name": "Karn Liberated",
+   "files": [
+    "engine/src/cards/pool/karn-liberated.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Kasmina, Enigma Sage",
+   "files": [
+    "engine/src/cards/pool/kasmina-enigma-sage.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/grant-own-loyalty-abilities.test.ts"
+  },
+  {
+   "name": "Kusari-Gama",
+   "files": [
+    "engine/src/cards/pool/kusari-gama.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/damage-all-except-trigger-recipient.test.ts"
+  },
+  {
+   "name": "Leonardo da Vinci",
+   "files": [
+    "engine/src/cards/pool/leonardo-da-vinci.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/act-on-discarded-card.test.ts"
+  },
+  {
+   "name": "Leyline of Combustion",
+   "files": [
+    "engine/src/cards/pool/leyline-of-combustion.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/becomes-target-batched.test.ts"
+  },
+  {
+   "name": "Lich's Mastery",
+   "files": [
+    "engine/src/cards/pool/lichs-mastery.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-from-zones.test.ts"
+  },
+  {
+   "name": "Mavinda, Students' Advocate",
+   "files": [
+    "engine/src/cards/pool/mavinda-students-advocate.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/permission-tax-unless-targets.test.ts"
+  },
+  {
+   "name": "New Blood",
+   "files": [
+    "engine/src/cards/pool/new-blood.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "New Way Forward",
+   "files": [
+    "engine/src/cards/pool/new-way-forward.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/prevention-reflexive-trigger.test.ts"
+  },
+  {
+   "name": "Nicol Bolas, Dragon-God",
+   "files": [
+    "engine/src/cards/pool/nicol-bolas-dragon-god.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-from-zones.test.ts"
+  },
+  {
+   "name": "Night Shift of the Living Dead",
+   "files": [
+    "engine/src/cards/pool/night-shift-of-the-living-dead.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Oathkeeper, Takeno's Daisho",
+   "files": [
+    "engine/src/cards/pool/oathkeeper-takenos-daisho.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/object-matches-now.test.ts"
+  },
+  {
+   "name": "Obsidian Charmaw",
+   "files": [
+    "engine/src/cards/pool/obsidian-charmaw.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/could-produce-filter.test.ts"
+  },
+  {
+   "name": "Oskar, Rubbish Reclaimer",
+   "files": [
+    "engine/src/cards/pool/oskar-rubbish-reclaimer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/graveyard-count-spell-being-cast.test.ts"
+  },
+  {
+   "name": "Paranormal Analyst",
+   "files": [
+    "engine/src/cards/pool/paranormal-analyst.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/manifests-dread-trigger.test.ts"
+  },
+  {
+   "name": "Perennation",
+   "files": [
+    "engine/src/cards/pool/perennation.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/put-onto-battlefield-counter-kinds.test.ts"
+  },
+  {
+   "name": "Pestilence Rats",
+   "files": [
+    "engine/src/cards/pool/pestilence-rats.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cda-count-excluding-self.test.ts"
+  },
+  {
+   "name": "Preacher",
+   "files": [
+    "engine/src/cards/pool/preacher.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/top10000-batch-333.test.ts"
+  },
+  {
+   "name": "Prowl, Pursuit Vehicle",
+   "files": [
+    "engine/src/cards/pool/prowl-pursuit-vehicle.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Prowl, Stoic Strategist",
+   "files": [
+    "engine/src/cards/pool/prowl-stoic-strategist.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Pulmonic Sliver",
+   "files": [
+    "engine/src/cards/pool/pulmonic-sliver.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/optional-graveyard-replacement.test.ts"
+  },
+  {
+   "name": "Radiant Performer",
+   "files": [
+    "engine/src/cards/pool/radiant-performer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/copy-for-each-permanent-or-player.test.ts"
+  },
+  {
+   "name": "Radiate",
+   "files": [
+    "engine/src/cards/pool/radiate.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/copy-for-each-permanent-or-player.test.ts"
+  },
+  {
+   "name": "Reap",
+   "files": [
+    "engine/src/cards/pool/reap.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/target-count-from-other-target.test.ts"
+  },
+  {
+   "name": "Reservoir Kraken",
+   "files": [
+    "engine/src/cards/pool/reservoir-kraken.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/each-opponent-may-single-result.test.ts"
+  },
+  {
+   "name": "River Song",
+   "files": [
+    "engine/src/cards/pool/river-song.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/draw-from-bottom.test.ts"
+  },
+  {
+   "name": "Rootwater Matriarch",
+   "files": [
+    "engine/src/cards/pool/rootwater-matriarch.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/control-while-condition.test.ts"
+  },
+  {
+   "name": "Rowan's Talent",
+   "files": [
+    "engine/src/cards/pool/rowans-talent.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/top10000-batch-333.test.ts"
+  },
+  {
+   "name": "Sheltering Ancient",
+   "files": [
+    "engine/src/cards/pool/sheltering-ancient.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cumulative-upkeep-counter.test.ts"
+  },
+  {
+   "name": "Shield Broker",
+   "files": [
+    "engine/src/cards/pool/shield-broker.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/control-while-condition.test.ts"
+  },
+  {
+   "name": "Signal the Clans",
+   "files": [
+    "engine/src/cards/pool/signal-the-clans.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/top10000-batch-333.test.ts"
+  },
+  {
+   "name": "Soulfire Eruption",
+   "files": [
+    "engine/src/cards/pool/soulfire-eruption.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/for-each-target-turn-order.test.ts"
+  },
+  {
+   "name": "Spectral Searchlight",
+   "files": [
+    "engine/src/cards/pool/spectral-searchlight.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/mana-ability-they-choose.test.ts"
+  },
+  {
+   "name": "Strict Proctor",
+   "files": [
+    "engine/src/cards/pool/strict-proctor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/entry-triggers-ability.test.ts"
+  },
+  {
+   "name": "The Beast, Deathless Prince",
+   "files": [
+    "engine/src/cards/pool/the-beast-deathless-prince.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/combat-damage-to-owner.test.ts"
+  },
+  {
+   "name": "The Fourth Doctor",
+   "files": [
+    "engine/src/cards/pool/the-fourth-doctor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/play-permission-choice.test.ts"
+  },
+  {
+   "name": "The Serpent Society",
+   "files": [
+    "engine/src/cards/pool/the-serpent-society.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Tolsimir, Midnight's Light",
+   "files": [
+    "engine/src/cards/pool/tolsimir-midnights-light.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/forced-block-this-combat.test.ts"
+  },
+  {
+   "name": "Tomik, Distinguished Advokist",
+   "files": [
+    "engine/src/cards/pool/tomik-distinguished-advokist.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/opponents-cant-play-from-graveyard.test.ts"
+  },
+  {
+   "name": "Trial of a Time Lord",
+   "files": [
+    "engine/src/cards/pool/trial-of-a-time-lord.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exiled-with-source-to-libraries.test.ts"
+  },
+  {
+   "name": "Triskaidekaphobia",
+   "files": [
+    "engine/src/cards/pool/triskaidekaphobia.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/each-player-with-life-total.test.ts"
+  },
+  {
+   "name": "Valiant Changeling",
+   "files": [
+    "engine/src/cards/pool/valiant-changeling.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Volt-Charged Berserker",
+   "files": [
+    "engine/src/cards/pool/volt-charged-berserker.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Voltaic Visionary",
+   "files": [
+    "engine/src/cards/pool/voltaic-visionary.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Wish",
+   "files": [
+    "engine/src/cards/pool/wish.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/top10000-batch-333.test.ts"
+  },
+  {
+   "name": "Wizards of the _____",
+   "files": [
+    "engine/src/cards/pool/wizards-of-the.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/decisions/registry.test.ts"
+  },
+  {
+   "name": "Wonderscape Sage",
+   "files": [
+    "engine/src/cards/pool/wonderscape-sage.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/returned-for-cost-lki.test.ts"
+  },
+  {
+   "name": "Xenosquirrels",
+   "files": [
+    "engine/src/cards/pool/xenosquirrels.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/oracle-parse.test.ts"
+  },
+  {
+   "name": "Yavimaya Bloomsage",
+   "files": [
+    "engine/src/cards/pool/yavimaya-bloomsage.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/player-mana-ability.test.ts"
+  },
+  {
+   "name": "Zilortha, Strength Incarnate",
+   "files": [
+    "engine/src/cards/pool/zilortha-strength-incarnate.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/eval-bot-combat.test.ts"
+  }
+ ],
+ "blocked": []
+}

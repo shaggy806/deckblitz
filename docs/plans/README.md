@@ -16,6 +16,23 @@ way round — Teval mills itself — read off the game state by every bot).
 substituted. `smarter-bots` (v2, one-ply search, what live rooms seat) is the search that stays: `bot-effect-knowledge` (**in progress**) is the plan of record for the bots — v2 on an effect-aware base (which side of the table each target belongs on, a v1 that targets by it, v2's candidates ordered by it, the evaluation terms that follow, weights tuned to hand-built right answers), with v3 retired; read it before changing how a bot picks actions. `bot-next-steps` (**in progress**, 2026-11-15) is the order of the bot work after that night's session, and why it isn't a longer clock (the bots use a tenth of the second they have, and every misplay found reproduces with no clock): a rollout's defender that blocks the way v2 does (built), mana priced by v2's own turn planner, watched games one archetype at a time, a screen for suspicious losses, and playing to its outs. `bot-v3-search` (rollout search over sampled worlds, **retired** — seated for a day, then benched, found broken and retired) records why v3 was tried and why it lost: a plan walker that cast one spell a turn, and parity at best once fixed. `token-stack-choices` (**in progress**) designs picking some members of a token stack, the last stack gap after the counting and whole-stack fixes: sacrifice N, tap costs, convoke and splitting a stack across attackers or blockers are built; choosing which of a stack proliferate touches, and naming one stack more than once for distinct targets, are not. Its "Folding back" section records how tokens split off a stack go back into one once they're identical again, as soon as nothing is waiting. `commander-replacement` records how rule 903.9 is asked (never skipped: queued when it can't be asked yet, re-asked when overwritten), the older bugs found alongside it, all since fixed, and the move from the pre-2020 replacement to the current rule, where a commander dies first and a state-based action then offers the command zone. `damage-assignment-order` (**implemented**) records that Foundations removed damage assignment order, so a blocked creature's damage is divided freely among its blockers (trample still needs lethal on each first), and how the engine dropped its `order-blockers` decision and lethal-in-order validator for it. `legibility-of-play` (**shipped**) orders BACKLOG's animation and pacing list: a frame gets a before and an after half, tile effects are CSS animations on mount, and one viewer-owned timing scale. Server-side deck save/share
 is still unscoped.
 
+Batch 333's majors (**done**, 2026-11-16, each approved by the user): `exile-from-zones` (one
+choice across a player's own zones — permanents, hand, graveyard — exiled at once in turn order,
+hand picks hidden: Lich's Mastery, Nicol Bolas, Dragon-God, Descent into Madness);
+`text-change-creature-types` (creature-type text changes, and why a word changes only where its
+line prints it: New Blood, Artificial Evolution); `stickers` (name stickers: why the sheets are data
+pinned against the snapshot, why a deck with a sticker card brings every sheet, how a name is built
+with stickers and a blank filled); `restart-the-game` (rule 727 for Karn Liberated: the state
+rebuilt in place after the resolution, what carries over, the pregame replayed, the server and
+client keyed on the restart count); `for-each-target-turn-order` (Soulfire Eruption's and Kaboom!'s
+targets one player's group at a time, rule 608.2f, through `choose-permanent-or-player`'s
+`pickOnly`); `mana-ability-other-player-choice` (Spectral Searchlight's "they choose" as an
+engine-answered `choose-modes`, off the stack with nobody holding priority);
+`optional-graveyard-replacement` (Pulmonic Sliver's "you may … instead", the move held as 903.9b's
+is, each controller asked in APNAP order, the owner arranging); `die-roll-shifts` (Night Shift's
+shift after the roll, rule 706.2a, asked inside every roll); `lethal-damage-by-power` (Zilortha:
+every reading of lethal damage through one helper, and why lethal by power is at least 1).
+
 `upgraded-decks` (**shipped, second pass 2026-11-11**) records how every precon's upgrade was built by hand (one strong mana base, spells chosen for what the bots play well, EDHREC as a source of candidates only), the bench that measured them, and what's open.
 
 `strong-bot-decks` (**shipped as an optional pool, closed**, 2026-11-11): eight real bracket 4 decks from Archidekt, credited to their creators, that a room's bots can be dealt. The pilot failed its gate twice, so a blitz deals the upgraded precons instead and the wider build was dropped.

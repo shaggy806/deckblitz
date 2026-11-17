@@ -666,6 +666,19 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 333 (2026-11-16, `author-top-cards`, the rank goal's last ten and ranks 10460–11328)** —
+  89 card files, nothing left blocked. The ten majors the user approved finished the rank goal
+  (`cards:goal` lists nothing to rank 10,000); then each card past 10,000 in rank order got the
+  small key it waited on, fourteen groups by worktree agents (`COMPLETED.md` lists them). Leads
+  the reports left: **Mana Web** waits on "could produce any type that land could produce", read
+  as that land last existed (608.2h) — a narrow key past `filter:land-could-produce-mana-type`;
+  **Search the City** is filed under `trigger:plays-card-exiled-with-source` but its trigger is "a
+  card with the same name as an exiled card" — re-key it; **Shaman's Trance** still waits on
+  `effect:cast-now-from-each-opponent-graveyard`; **Vedalken Squirrel-Whacker** would be one more
+  option on Night Shift's `shiftRoll` question (exchange a result with base P/T); **Lumbering
+  Battlement** and **Vortex Elemental** are freed (`--stale`). Most of the 48 `mechanic:stickers`
+  records need only name stickers plus one small key each (the stickers agent's notes:
+  `docs/plans/stickers.md`) and want re-keying.
 - **Batch 332 (2026-11-14/15, `author-by-set TRK,TRC`, Star Trek's second run)** — 18 of the 19
   B331 left authored, each on a feature of its own (`COMPLETED.md` lists them). Star Trek Commander
   is whole; Star Trek's one left is All Good Things..., which waits on rulings for "all cards
