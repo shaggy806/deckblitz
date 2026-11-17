@@ -14608,6 +14608,11 @@ export interface EffectApi {
    * effect refers to, noted so its leaving or changing hands ends the effect —
    * or `null` when that already isn't so (rule 611.2b). */
   whileSourceHere(duration: "while-source" | "while-you-control-source"): WhileSource | null;
+  /** `object` for a player-side "for as long as it remains tapped" (a
+   * `{ whileTapped }` duration — Braided Net): on the battlefield and tapped
+   * now, noted so its untapping or leaving ends the effect — or `null`, and
+   * the effect does nothing (rule 611.2b). */
+  whileTappedHere(object: ObjectId): WhileSource | null;
   /** Create `count` token(s) that are copies of the permanent `of` — see the
    * `"create-token-copy"` {@link EffectSpec}. */
   createTokenCopy(
@@ -18403,6 +18408,19 @@ function eachPlayerMaySearchForbidden(
   return searcher !== null && cantSearchThisLibrary(action, searcher, ctx);
 }
 
+/** `resolvePlayerDuration`'s read of what a player-side duration lasts "for
+ * as long as": the source (`whileSourceHere`), or the object a `{ whileTapped
+ * }` names, acted on as it is now (an illegal target names nothing). */
+function durationHere(
+  ctx: ResolutionContext,
+): (duration: "while-source" | "while-you-control-source" | { readonly whileTapped: ObjectRef }) => WhileSource | null {
+  return (duration) => {
+    if (typeof duration === "string") return ctx.whileSourceHere(duration);
+    const object = objectRefAct(duration.whileTapped, ctx);
+    return object?.kind === "object" ? ctx.whileTappedHere(object.object) : null;
+  };
+}
+
 /**
  * The one player a {@link PlayerRef} names, or `undefined` for nobody. The
  * accessors read their object (`objectRefRead`), so each works once it has
@@ -22147,7 +22165,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "player-effect": {
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), durationHere(ctx));
       if (lasts === undefined) return;
       // "Target player …": theirs, and nobody's once that target is gone.
       const to = spec.to === undefined ? undefined : ctx.targets[spec.to];
@@ -22291,7 +22309,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       applyTakeTurnsChoosing(spec, ctx);
       return;
     case "prohibit": {
-      const lasts = resolvePlayerDuration(spec.duration ?? "end-of-turn", ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
+      const lasts = resolvePlayerDuration(spec.duration ?? "end-of-turn", ctx.controller, (ref) => resolvePlayerRef(ref, ctx), durationHere(ctx));
       if (lasts === undefined) return;
       const bound = spec.prohibits.flatMap((written) => bindProhibition(written, ctx));
       if (bound.length === 0) return;
@@ -22342,7 +22360,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           (spec.duration ?? "end-of-turn") as PlayerDuration,
           ctx.controller,
           (ref) => resolvePlayerRef(ref, ctx),
-          ctx.whileSourceHere,
+          durationHere(ctx),
         );
         if (lasts === undefined) return;
         ctx.restrictOverGame(
@@ -23537,7 +23555,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "timed-static": {
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), durationHere(ctx));
       if (lasts !== undefined && "expires" in lasts) ctx.addTimedStatic(spec.text, spec.static, lasts.expires);
       return;
     }
@@ -23547,7 +23565,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "replacement-effect": {
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), durationHere(ctx));
       if (lasts === undefined || !("expires" in lasts)) return;
       const left = spec.next === undefined || spec.next === true ? undefined : amountValue(spec.next, ctx);
       if (left !== undefined && left <= 0) return;

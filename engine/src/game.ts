@@ -45270,6 +45270,12 @@ controlledBy,
         const kept = lastingHere(duration);
         return typeof kept === "object" && "whileSource" in kept ? kept.whileSource : null;
       },
+      whileTappedHere: (id) => {
+        const object = this.state.objects[id];
+        if (object?.zone !== "battlefield" || !object.tapped) return null;
+        this.noteWhileSource(id);
+        return { id, zoneChangeCount: object.zoneChangeCount ?? 0, tapped: true };
+      },
       createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges, withCounters, attacksThisTurn) => {
         const link = linkedToSource === true ? tokenLinkToSource() : null;
         // "The tokens are goaded for the rest of the game": by this effect's

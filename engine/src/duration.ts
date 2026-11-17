@@ -169,6 +169,7 @@ export type PlayerDuration = Extract<
   | { readonly duringTurnOf: DurationPlayer }
   | "while-source"
   | "while-you-control-source"
+  | { readonly whileTapped: ObjectRef }
 >;
 
 /** What a copy effect with a duration can last (`become-copy`'s `until`,
@@ -324,7 +325,8 @@ export function resolvePlayerDuration(
   duration: PlayerDuration,
   you: PlayerId,
   playerOf: (ref: DurationPlayer) => PlayerId | undefined,
-  sourceHere: (duration: "while-source" | "while-you-control-source") => WhileSource | null = () => null,
+  sourceHere: (duration: "while-source" | "while-you-control-source" | { readonly whileTapped: ObjectRef }) => WhileSource | null = () =>
+    null,
 ):{ readonly expires: Expiry } | { readonly during: PlayerId } | undefined {
   switch (duration) {
     case "while-source":
@@ -345,6 +347,12 @@ export function resolvePlayerDuration(
       return { expires: { untilPoint: untilPointOf(duration, you) } };
     case "during-your-next-turn":
       return { during: you };
+  }
+  // "For as long as it remains tapped" (Braided Net): that permanent, in this
+  // stint, tapped as the effect begins (611.2b), or nothing.
+  if ("whileTapped" in duration) {
+    const whileSource = sourceHere(duration);
+    return whileSource === null ? undefined : { expires: { whileSource } };
   }
   if ("untilTurnOf" in duration) {
     const player = playerOf(duration.untilTurnOf);
