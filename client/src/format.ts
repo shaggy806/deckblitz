@@ -100,6 +100,12 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'player-attacked',
   'player-attacked-unblocked',
   'planeswalker-attacked',
+  // Each says again what another line has said: the mana added, the life
+  // lost, the commander's move as its owner chose it, the fight.
+  'mana-ability-resolved',
+  'life-paid',
+  'commander-put-into-command-zone',
+  'creature-fought',
   // Every blocker already has its own `blocker-declared` line.
   'attacker-blocked',
   'attackers-blocked',
@@ -758,8 +764,77 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
         ? `${name(event.object)} stays in ${zone}`
         : `${name(event.object)} goes to its owner's ${event.from}`
     }
-    default:
-      return JSON.stringify(event)
+    // The events below had no sentence and printed as their JSON (the user's
+    // exported logs, 2026-11-17: every mana ability, and each commander's
+    // move to the command zone).
+    case 'commander-put-into-command-zone':
+      return `${name(event.object)} is put into ${possessive(who(event.owner))} command zone from the ${event.from}`
+    case 'mana-ability-resolved':
+      return `${name(event.object)}'s mana ability resolves`
+    case 'mana-expended':
+      return `${who(event.player)} has spent ${event.after} mana this turn`
+    case 'life-paid':
+      return `${who(event.player)} pays ${event.amount} life`
+    case 'untap-step-untapped':
+      return `${who(event.player)} untaps ${event.count} permanent(s)`
+    case 'player-attacked-unblocked':
+      return `${who(event.player)} attacks ${who(event.defender)} with ${event.attackers.length} unblocked`
+    case 'planeswalker-attacked':
+      return `${who(event.player)} attacks ${name(event.planeswalker)} with ${event.attackers.length}`
+    case 'chapter-triggered':
+      return `${name(event.saga)}'s ${event.final ? 'final ' : ''}chapter ability triggers`
+    case 'permanent-attached-to-player':
+      return `${name(event.source)} attaches to ${who(event.player)}`
+    case 'permanent-mutated':
+      return `${name(event.object)} mutates`
+    case 'keywords-lost':
+      return `${name(event.object)} loses ${event.keywords.join(', ')}`
+    case 'became-crewed':
+      return event.crew.length > 0
+        ? `${name(event.object)} becomes crewed by ${event.crew.map(name).join(', ')}`
+        : `${name(event.object)} becomes crewed`
+    case 'creature-fought':
+      return `${name(event.object)} fights ${name(event.opponent)}`
+    case 'creatures-fought':
+      return `${event.objects.map(name).join(' and ')} fight`
+    case 'explored':
+      return event.revealed === null
+        ? `${name(event.object)} explores`
+        : `${name(event.object)} explores: ${name(event.revealed)}${event.land ? ', a land' : ''}`
+    case 'connived':
+      return `${name(event.object)} connives${event.nonland > 0 ? ` (${event.nonland} nonland discarded)` : ''}`
+    case 'investigated':
+      return `${who(event.player)} investigates`
+    case 'foraged':
+      return `${who(event.player)} forages`
+    case 'amassed':
+      return `${who(event.player)} amasses (${name(event.object)})`
+    case 'discovered':
+      return event.hit === null
+        ? `${who(event.player)} discovers ${event.amount} and finds nothing`
+        : `${who(event.player)} discovers ${event.amount}: ${name(event.hit)}`
+    case 'clashed':
+      return `${who(event.player)} clashes and ${event.won ? 'wins' : "doesn't win"}`
+    case 'bent':
+      return `${who(event.player)} ${event.how}bends`
+    case 'case-solved':
+      return `${name(event.object)} is solved`
+    case 'dread-manifested':
+      return `${who(event.player)} manifests dread`
+    case 'cumulative-upkeep-unpaid':
+      return `${who(event.player)} doesn't pay ${possessive(name(event.object))} cumulative upkeep`
+    // Never logged: each asks the triggers about deaths and leaves that have
+    // their own events (`Game.emit`).
+    case 'permanents-died':
+    case 'permanents-left':
+      return ''
+    default: {
+      // Every event has a sentence: one added to the engine without a case
+      // here fails the build on this line. Its JSON is still what a client
+      // older than its server shows.
+      const unworded: never = event
+      return JSON.stringify(unworded)
+    }
   }
 }
 

@@ -288,3 +288,45 @@ describe('log lines that name where a thing went or came from', () => {
     expect(asked).toEqual([p1])
   })
 })
+
+describe('events that used to print as their JSON', () => {
+  // A live game's exported log (2026-11-17) had a JSON line for every mana
+  // ability and each commander's move: 27 of the engine's event types had no
+  // sentence. The switch is exhaustive now, so the build checks the rest.
+  const say = (fields: Record<string, unknown>) => describeEvent(event(fields), nameOf, seats)
+
+  it('words them', () => {
+    expect(say({ type: 'commander-put-into-command-zone', object: 'o1', owner: p1, from: 'graveyard' })).toBe(
+      "card:o1 is put into Toby's command zone from the graveyard",
+    )
+    expect(say({ type: 'mana-ability-resolved', object: 'o1', player: p1, amount: 1 })).toBe(
+      "card:o1's mana ability resolves",
+    )
+    expect(say({ type: 'mana-expended', player: p1, before: 0, after: 5 })).toBe('Toby has spent 5 mana this turn')
+    expect(say({ type: 'life-paid', player: p1, amount: 2 })).toBe('Toby pays 2 life')
+    expect(say({ type: 'untap-step-untapped', player: p1, count: 5 })).toBe('Toby untaps 5 permanent(s)')
+    expect(say({ type: 'player-attacked-unblocked', player: p1, defender: p2, attackers: ['o1', 'o2'] })).toBe(
+      'Toby attacks P2 with 2 unblocked',
+    )
+    expect(say({ type: 'explored', object: 'o1', player: p1, revealed: 'o2', land: true })).toBe(
+      'card:o1 explores: card:o2, a land',
+    )
+    expect(say({ type: 'discovered', player: p1, amount: 4, hit: null })).toBe('Toby discovers 4 and finds nothing')
+    expect(say({ type: 'creatures-fought', objects: ['o1', 'o2'] })).toBe('card:o1 and card:o2 fight')
+    expect(say({ type: 'bent', player: p1, how: 'water' })).toBe('Toby waterbends')
+  })
+
+  it('never falls back to JSON for them', () => {
+    for (const type of ['investigated', 'foraged', 'clashed', 'case-solved', 'chapter-triggered', 'keywords-lost']) {
+      const line = say({ type, player: p1, object: 'o1', saga: 'o1', won: true, final: false, keywords: ['flying'] })
+      expect(line.startsWith('{')).toBe(false)
+    }
+  })
+
+  it('keeps the ones that repeat another line out of the concise log', () => {
+    for (const type of ['mana-ability-resolved', 'life-paid', 'commander-put-into-command-zone', 'creature-fought']) {
+      expect(isDetailOnlyEvent(event({ type }))).toBe(true)
+    }
+    expect(isDetailOnlyEvent(event({ type: 'explored' }))).toBe(false)
+  })
+})
