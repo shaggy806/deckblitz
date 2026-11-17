@@ -7,7 +7,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, spawn, table, zone } from "./harness.js";
+import { A, B, cast, ref, spawn, table, toHand, zone } from "./harness.js";
 
 const black = (game: ReturnType<typeof table>["game"]): number =>
   game.state.players[A].manaPool.filter((unit) => unit.type === "B").length;
@@ -31,5 +31,33 @@ describe("Priest of Yawgmoth", () => {
     game.dispatch({ type: "activate-ability", player: A, source: priest, abilityIndex: 0, targets: [], sacrifice: relic });
     expect(zone(game, relic)).toBe("graveyard");
     expect(black(game)).toBe(0);
+  });
+});
+
+describe("Slobad, Iron Goblin", () => {
+  const red = (game: ReturnType<typeof table>["game"]): number =>
+    game.state.players[A].manaPool.filter((unit) => unit.type === "R").length;
+
+  it("adds {R} equal to the sacrificed artifact's mana value, spent on an artifact spell", () => {
+    const { game } = table();
+    const slobad = spawn(game, "Slobad, Iron Goblin");
+    const stone = spawn(game, "Mind Stone");
+    game.dispatch({ type: "activate-ability", player: A, source: slobad, abilityIndex: 0, targets: [], sacrifice: stone });
+    expect(zone(game, stone)).toBe("graveyard");
+    expect(red(game)).toBe(2);
+    const another = toHand(game, "Mind Stone");
+    cast(game, another);
+    expect(zone(game, another)).toBe("battlefield");
+    expect(red(game)).toBe(0);
+  });
+
+  it("can't spend it on a spell that isn't an artifact", () => {
+    const { game } = table();
+    const slobad = spawn(game, "Slobad, Iron Goblin");
+    const stone = spawn(game, "Mind Stone");
+    game.dispatch({ type: "activate-ability", player: A, source: slobad, abilityIndex: 0, targets: [], sacrifice: stone });
+    expect(red(game)).toBe(2);
+    expect(() => cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(B)] })).toThrow(/refused/);
+    expect(red(game)).toBe(2);
   });
 });

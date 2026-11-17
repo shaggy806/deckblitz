@@ -364,6 +364,13 @@ reads what the trigger did. Gluttonous Hellkite (rank 11505): each player sacrif
 has left the stack (its rulings). The scaffolder reads it (`thisCast`: X in a cast trigger, and "~ enters
 with N +1/+1 counters on it for each … sacrificed/exiled/… this way").
 `test/cast-trigger-sacrifice-counters.test.ts`.
+### A mana ability adding mana equal to the sacrificed artifact's mana value — found built 2026-11-17
+
+The key `effect:mana-ability-sacrificed-amount` was built as `amount:mana-ability-sacrificed-object` (commit
+fd2b89452, Priest of Yawgmoth): a mana ability reads what its own cost sacrificed, `{ manaValueOf: { paid:
+"sacrificed" } }`. Marked now, with Slobad, Iron Goblin (rank 11983) authored on it and an `add-mana` `spendOnly`
+for artifact spells and artifacts' abilities. `test/mana-ability-sacrificed.test.ts`.
+
 ### Ward—discard a card of some types — built 2026-11-17
 
 The key `cost:ward-discard-filter` (family `decision:ward-cost-options`): `WardCost.discardOf { filter, what }` —
