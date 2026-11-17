@@ -18,7 +18,14 @@ export default defineCard({
     {
       cost: { mana: "{4}", tap: false },
       targets: [],
-      effect: { kind: "modify-pt", target: "source", power: { powerOf: "source" }, toughness: 0, duration: "end-of-turn" },
+      // A doubling: a negative power gets more negative (rule 701.10c).
+      effect: {
+        kind: "modify-pt",
+        target: "source",
+        power: { powerOf: "source", doubling: true },
+        toughness: 0,
+        duration: "end-of-turn",
+      },
       resolve: null,
       text: DOUBLE_TEXT,
       anyPlayer: true,

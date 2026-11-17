@@ -118,6 +118,19 @@ describe("negative amounts (rule 107.1b)", () => {
     expect(power(game, bears)).toBe(-4);
   });
 
+  it("doubling its own negative power makes it more negative (Casey Jones, Asphalt Hooligan, rule 701.10c)", () => {
+    const game = setUp();
+    const casey = spawn(game, "Casey Jones, Asphalt Hooligan");
+    game.debugApplyEffect(A, { kind: "modify-pt", target: 0, power: -4, toughness: 0, duration: "end-of-turn" }, [
+      obj(casey),
+    ]);
+    expect(power(game, casey)).toBe(-2);
+    for (let i = 0; i < 4; i += 1) spawn(game, "Island");
+    game.dispatch({ type: "activate-ability", player: A, source: casey, abilityIndex: 0, targets: [] });
+    game.advanceUntil(quiet);
+    expect(power(game, casey)).toBe(-4);
+  });
+
   it("the difference between a negative power and a toughness is taken as written (Doran's X)", () => {
     const game = setUp();
     const bears = shrunkBears(game);
