@@ -12153,6 +12153,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
     }),
   ),
+  // The Fog keeps your windows your own: with nothing to cast, each would pass itself.
+  preset(
+    'Suture Priest: Resolve stack carries on after "Yes to all"',
+    board({
+      you: { bf: ['Suture Priest', 'Mountain*3', 'Forest'], hand: ['Hordeling Outburst', 'Fog'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
   preset(
     'Panharmonicon: a second trigger asks under its own "prompted by" card',
     board({

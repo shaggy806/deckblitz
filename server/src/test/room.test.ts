@@ -473,6 +473,77 @@ describe("Room", () => {
       skipManaStops(room, conn, true);
       expect(room.game.state.zones.shared.stack).toHaveLength(1);
     });
+
+    /** Suture Priest watching Hordeling Outburst's three Goblins enter: three
+     * identical "you may gain 1 life" triggers, in a room whose seat has a
+     * real window (the Fog), with the Outburst on the stack. */
+    function threeMays() {
+      const room = makeRoom();
+      const { connection: aliceConn } = fakeConnection();
+      const { connection: bobConn } = fakeConnection();
+      room.claimSeat(ALICE, "alice-token", aliceConn);
+      room.claimSeat(BOB, "bob-token", bobConn);
+      const active = room.game.activePlayer;
+      const conn = active === ALICE ? aliceConn : bobConn;
+      room.game.debugSpawn("Forest", active, "battlefield");
+      room.game.debugSpawn("Fog", active, "hand");
+      room.game.debugSpawn("Suture Priest", active, "battlefield");
+      room.game.debugSpawn("Hordeling Outburst", active, "stack");
+      const triggersLeft = () =>
+        room.game.state.zones.shared.stack.reduce((n, id) => n + (room.game.state.objects[id].stackCount ?? 1), 0);
+      return { room, active, conn, triggersLeft, life: () => room.game.state.players[active].life };
+    }
+
+    it('carries on once the question that stopped it is answered "to all"', () => {
+      // The user's report (2026-11-16): Resolve stack, then "Yes to all" on
+      // the first of the identical triggers, left the rest on the stack. The
+      // question ended the one-shot, as any decision does, and the answer
+      // that said "and the same for the rest" didn't bring it back.
+      const { room, active, conn, triggersLeft, life } = threeMays();
+      const before = life();
+      room.requestResolveAll(conn);
+      // Stopped at the first trigger's "you may", all three still there.
+      expect(room.game.state.awaiting).toMatchObject({ kind: "choose-modes", player: active });
+      expect(triggersLeft()).toBe(3);
+
+      room.dispatch(conn, { type: "choose-modes", player: active, modes: [0], forAll: true });
+      expect(triggersLeft()).toBe(0);
+      expect(life()).toBe(before + 3);
+    });
+
+    it("stays stopped after an answer for the one trigger alone", () => {
+      // A plain "Yes" answers this trigger only: the next asks its own
+      // question, and until then the window is the seat's ("stops on anything
+      // real", docs/plans/resolve-all-stack.md).
+      const { room, active, conn, triggersLeft, life } = threeMays();
+      const before = life();
+      room.requestResolveAll(conn);
+      room.dispatch(conn, { type: "choose-modes", player: active, modes: [0] });
+      expect(triggersLeft()).toBe(2);
+      expect(life()).toBe(before + 1);
+      expect(room.game.state.awaiting).toBeNull();
+    });
+
+    it('is not started by a "to all" answer on its own', () => {
+      // Reached by passing once, not by Resolve stack: the answer stands for
+      // the identical triggers, and when each resolves is still the seat's.
+      const { room, active, conn, triggersLeft, life } = threeMays();
+      const before = life();
+      for (let i = 0; i < 6 && room.game.state.awaiting === null; i += 1) {
+        const holder = room.game.state.priority.holder;
+        if (holder !== active) break;
+        room.dispatch(conn, { type: "pass-priority", player: active });
+      }
+      expect(room.game.state.awaiting).toMatchObject({ kind: "choose-modes", player: active });
+      room.dispatch(conn, { type: "choose-modes", player: active, modes: [0], forAll: true });
+      expect(triggersLeft()).toBe(2);
+      expect(life()).toBe(before + 1);
+      // Each pass then resolves one without asking again.
+      room.dispatch(conn, { type: "pass-priority", player: active });
+      expect(triggersLeft()).toBe(1);
+      expect(life()).toBe(before + 2);
+      expect(room.game.state.awaiting).toBeNull();
+    });
   });
 
   describe("auto-pass interruptions", () => {

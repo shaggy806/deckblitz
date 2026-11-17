@@ -39,6 +39,11 @@ engine terms. A second thing to check is a second test.
 - **Expect:** It asks for a target again, for its second trigger: Ravenous Chupacabra in blue under "PROMPTED BY" once more, the first trigger's card behind it and its arrow at Hill Giant.
 - **Not a bug:** Both may aim at Hill Giant; the second then does nothing.
 
+### Suture Priest: Resolve stack carries on after "Yes to all"
+- **Do:** Cast Hordeling Outburst and press "Resolve stack (1)". When Suture Priest asks "Gain 1 life?", press "Yes to all 3".
+- **Expect:** All three triggers resolve with no more clicks: the stack empties and you are at 43 life.
+- **Not a bug:** After a plain "Yes" the stack stops with two triggers left: the next one asks its own question.
+
 ## The site check's fixes (2026-11-11)
 
 ### Windswept Heath: its finds are sorted, the same card as one tile

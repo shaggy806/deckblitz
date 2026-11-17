@@ -110,6 +110,15 @@ interface Seat {
    * is an event, so the check is a scan of what has been emitted since.
    */
   resolveAllFrom: number | null;
+  /**
+   * The seat's resolve-all was ended by a question of its own that is still
+   * waiting: `from` is what {@link resolveAllFrom} held, `at` the event-log
+   * length as the question was found (nothing is emitted while a decision is
+   * pending, so a different length means that question has been answered).
+   * An answer "to all" — the same for the identical triggers under this one
+   * — brings the resolve-all back (`Room.resolveAllResumedBy`).
+   */
+  resolveAllAsked: { readonly from: number; readonly at: number } | null;
   /** The claimer's chosen name, or `null` to fall back to the seat's own
    * label ("Alice", "Bob", ...). */
   displayName: string | null;
@@ -575,6 +584,7 @@ export class Room {
       pass: NO_PASS_SETTINGS,
       stoppedAt: null,
       resolveAllFrom: null,
+      resolveAllAsked: null,
       displayName: null,
       ackedSeq: 0,
       acksFrames: false,
@@ -804,6 +814,7 @@ export class Room {
     from.autoPassFrom = null;
     from.autoPassPausedAt = null;
     from.resolveAllFrom = null;
+    from.resolveAllAsked = null;
     this.lastActivityAt = Date.now();
     this.settle();
   }
@@ -869,9 +880,33 @@ export class Room {
       );
     }
     this.refuseIfGuided(seat, action);
+    const resolveAllFrom = this.resolveAllResumedBy(seat, action);
     this.game.dispatch(action);
+    if (resolveAllFrom !== null && this.game.state.zones.shared.stack.length > 0) {
+      this.seatFor(seat).resolveAllFrom = resolveAllFrom;
+    }
     this.lastActivityAt = Date.now();
     this.settle();
+  }
+
+  /**
+   * Where `seat`'s resolve-all picks up again if `action` is the answer that
+   * brings it back, or `null`. A question of the seat's own ends a
+   * resolve-all (`autoAdvanceHumanSeat`): after an ordinary answer the window
+   * is the seat's again. But "the same for all of them" (`choose-modes`'
+   * `forAll`: "Yes to all 3" on the first of three identical triggers) says
+   * the rest need nothing more, and the player had already asked for the
+   * stack to resolve — the two shortcuts left the other triggers sitting on
+   * the stack until Resolve stack was pressed again (the user, 2026-11-16).
+   * It carries on from where it was armed, so everything since is still
+   * scanned for a reason to stop, this answer's own effects included.
+   */
+  private resolveAllResumedBy(seat: PlayerId, action: Action): number | null {
+    const state = this.seatFor(seat);
+    const asked = state.resolveAllAsked;
+    state.resolveAllAsked = null;
+    if (asked === null || asked.at !== this.game.events.length) return null;
+    return action.type === "choose-modes" && action.forAll === true ? asked.from : null;
   }
 
   private refuseIfGuided(seat: PlayerId, request: Action | "pass-turn" | "auto-pass"): void {
@@ -1388,7 +1423,11 @@ export class Room {
       }
       // A decision owed by the resolving seat is exactly what "stops on
       // anything real" means, so a pending resolve-all ends here rather than
-      // surviving to pass the window after it.
+      // surviving to pass the window after it — unless the answer is "the
+      // same for all of them", which `dispatch` reads this back for.
+      if (seat.resolveAllFrom !== null) {
+        seat.resolveAllAsked = { from: seat.resolveAllFrom, at: this.game.events.length };
+      }
       seat.resolveAllFrom = null;
       return false; // a real decision, or this seat's auto-pass just ran out
     }

@@ -56,6 +56,18 @@ arming (`Room.resolveAllStop`, now over the shared `interruptSince`):
 That list, minus the stack-empty ending and plus an attack aimed at this
 seat, is now shared with auto-pass — see `auto-pass-interruptions.md`.
 
+**One answer brings it back** (2026-11-16): "the same for all of them". The
+"Yes to all 3" on the first of three identical triggers came two weeks after
+this (`choose-modes`' `forAll`), and the two shortcuts fought: Resolve stack
+stopped at the first trigger's question, as above, and after "Yes to all" the
+other two sat on the stack until Resolve stack was pressed again — the user
+took it for the button failing. A question that ends a resolve-all is now
+remembered until it's answered (`Seat.resolveAllAsked`), and a `forAll`
+answer re-arms it from where it was first armed (`Room.resolveAllResumedBy`),
+so everything since is still scanned for a reason to stop. Any other answer
+leaves the window with the seat, as before; and a "to all" answer reached by
+passing, with no resolve-all asked for, starts none.
+
 `owner`, not `controller`, in the last two: `moveObject` has already reset
 control to the owner by the time the event is read. The side effect is that a
 permanent this seat had *stolen* leaving doesn't stop it, which is the right
