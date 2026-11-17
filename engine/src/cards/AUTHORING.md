@@ -3435,8 +3435,14 @@ discardedThisTurn, drawnThisTurn, enteredThisTurn, turnedFaceUpThisTurn, control
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
-nameUnlike, sameNameWith, sameNameAsTriggerObject, sharesColorWith, ofChosenType, targets, greatestAmongItsController, greatestInZone }`,
-every present clause ANDed. `greatestInZone: { of, among }` is one comparison over
+nameUnlike, sameNameWith, sameNameAsTriggerObject, sharesColorWith, ofChosenType, targets, greatestAmongItsController, greatestInZone, couldProduce }`,
+every present clause ANDed. `couldProduce: "C"` is "a land that could produce {C}" (rule 106.7):
+one of the permanent's mana abilities would make that type if it resolved now, replacement
+effects included and whether or not it could be activated, so a tapped land counts — Obsidian
+Charmaw's `countOf: { type: "land", controlledBy: "opponent", couldProduce: "C" }`, Break the
+Ice's "land that is snow or could produce {C}" (`anyOf: [{ supertype: "snow" }, { couldProduce:
+"C" }]`). The game answers it (`Game.couldProduce`): on the battlefield only, never inside the
+layer fold (a static's scope). `greatestInZone: { of, among }` is one comparison over
 everything in the object's zone that matches `among`, ties all counted (`strictly`: none,
 Selvala, Heart of the Wilds' "greater than each other creature's power"): over every
 permanent, whoever controls it, on the battlefield — Topple's "target creature with the

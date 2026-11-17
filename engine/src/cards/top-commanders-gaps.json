@@ -2764,7 +2764,9 @@
   "trigger:spell-or-ability-put-on-stack",
   "trigger:paired-creature-dealt-damage",
   "filter:foretold",
-  "decision:ward-poison-counters"
+  "decision:ward-poison-counters",
+  "decision:ward-poison-counters",
+  "filter:land-could-produce-mana-type"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

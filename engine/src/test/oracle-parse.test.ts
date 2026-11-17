@@ -759,6 +759,25 @@ describe("what a spell costs: amounts, colours and targets", () => {
     };
   const self = (text: string): unknown => face("Sorcery", text).selfCostReduction;
 
+  it("a count of lands your opponents control that could produce {C} (Obsidian Charmaw)", () => {
+    expect(
+      self("This spell costs {1} less to cast for each land your opponents control that could produce {C}."),
+    ).toEqual({
+      condition: always,
+      reduceGeneric: { countOf: { type: "land", couldProduce: "C", controlledBy: "opponent" } },
+    });
+    expect(self("This spell costs {1} less to cast for each creature your opponents control.")).toEqual({
+      condition: always,
+      reduceGeneric: { countOf: { type: "creature", controlledBy: "opponent" } },
+    });
+    expect(parseTypePhrase("land that is snow or could produce {C}")).toEqual({
+      type: "land",
+      anyOf: [{ supertype: "snow" }, { couldProduce: "C" }],
+    });
+    // A card elsewhere than the battlefield produces nothing (rule 106.7).
+    expect(parseTypePhrase("land that could produce {C}", { cards: true })).toBeNull();
+  });
+
   it("reads a count of what a spell costs less for", () => {
     expect(self("This spell costs {1} less to cast for each counter among players and permanents.")).toEqual({
       condition: always,

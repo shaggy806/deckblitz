@@ -696,6 +696,17 @@ function flashSpellsFilter(words) {
 }
 
 export function parseTypePhrase(phrase, { cards = false } = {}) {
+  // "Land that could produce {C}" (Obsidian Charmaw), "land that is snow or
+  // could produce {C}" (Break the Ice): `couldProduce` (rule 106.7), of a
+  // permanent only.
+  const produce = /^(.+?) that (is snow or )?could produce \{([WUBRGC])\}$/.exec(phrase.trim());
+  if (produce !== null) {
+    const base = cards ? null : parseTypePhrase(produce[1]);
+    if (base === null) return null;
+    return produce[2] !== undefined
+      ? { ...base, anyOf: [{ supertype: "snow" }, { couldProduce: produce[3] }] }
+      : { ...base, couldProduce: produce[3] };
+  }
   const words = phrase.trim().split(/\s+/);
   const filter = {};
   const types = [];
@@ -20910,6 +20921,13 @@ function costEachAmount(phrase) {
       countOf: { ...filter, ...(color !== undefined ? { colors: [color] } : {}), controlledBy: "you" },
       ...(m[1] !== undefined ? { excludeSelf: true } : {}),
     };
+  }
+  // "For each land your opponents control that could produce {C}" (Obsidian
+  // Charmaw), "for each creature your opponents control" (Wall Off).
+  if ((m = /^(.+?) your opponents control( that could produce \{[WUBRGC]\})?$/.exec(phrase))) {
+    const filter = parseTypePhrase(`${m[1]}${m[2] ?? ""}`);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return { countOf: { ...filter, controlledBy: "opponent" } };
   }
   return null;
 }

@@ -386,6 +386,7 @@ import {
   matchesFilter,
   ownerOnly,
   printedManaCost,
+  setCouldProduceReader,
   stackObjectTargetsMatch,
   weightedMatches,
 } from "./filter.js";
@@ -2836,6 +2837,8 @@ export class Game {
     this.registry = registry;
     this.controllers = controllers;
     this.rng = rng;
+    // A `couldProduce` filter clause (rule 106.7) asks this game.
+    setCouldProduceReader(this.state, (id) => this.couldProduce(id, new Set()));
     // Built here rather than per call: `state` and `registry` are fixed for
     // the life of a `Game`, and `state` is mutated in place rather than
     // replaced, so one object stays current. `decisionHost` binds the very

@@ -36,7 +36,7 @@ import type { EffectAmount, ThisWayKind } from "./effects.js";
 import type { CardDefinition, TurnDid } from "./cards/define.js";
 import { goadersOf, isGoaded } from "./goad.js";
 import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
-import type { Color, ManaCost, ManaOrigin, ManaSpentQuery } from "./mana.js";
+import type { Color, ManaCost, ManaOrigin, ManaSpentQuery, ManaType } from "./mana.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost, spentManaCount } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
@@ -1526,6 +1526,32 @@ export interface CardFilter {
    * of `{ not: { anyOf: [{ keyword: "flying" }, { keyword: "reach" }] } }`.
    */
   readonly not?: CardFilter;
+  /**
+   * A permanent that **could produce** mana of this type (rule 106.7): one of
+   * its mana abilities would make it if it resolved now, replacement effects
+   * included, whether or not it could be activated — "each land your
+   * opponents control that could produce {C}" (Obsidian Charmaw; its ruling:
+   * a tapped land counts), "target land that is snow or could produce {C}"
+   * (Break the Ice). Read by the game playing the state (`Game.couldProduce`,
+   * through {@link setCouldProduceReader}); on the battlefield only, and not
+   * inside the layer fold, where it fails closed.
+   */
+  readonly couldProduce?: ManaType;
+}
+
+/**
+ * Every type of mana a permanent could produce (rule 106.7), as the `Game`
+ * playing `state` reads it — its mana abilities as they are now, a live
+ * amount and any replacement effect included, which only the game can answer
+ * (`Game.couldProduce`). Each `Game` sets its own when it's made (its state
+ * is fixed for its life and mutated in place); a state with no game reading
+ * it has none, and a `couldProduce` clause fails closed there.
+ */
+const couldProduceReaders = new WeakMap<GameState, (id: ObjectId) => readonly ManaType[]>();
+
+/** Set the `couldProduce` reader for `state` — `Game`'s constructor. */
+export function setCouldProduceReader(state: GameState, read: (id: ObjectId) => readonly ManaType[]): void {
+  couldProduceReaders.set(state, read);
 }
 
 /**
@@ -3343,7 +3369,8 @@ export function matchesFilter(
         filter.totalPowerToughness !== undefined ||
         filter.basePower !== undefined ||
         filter.baseToughness !== undefined ||
-        filter.greatestAmongItsController !== undefined
+        filter.greatestAmongItsController !== undefined ||
+        filter.couldProduce !== undefined
       ) {
         return false;
       }
@@ -3444,6 +3471,14 @@ export function matchesFilter(
     if (!has) return false;
   }
 
+
+  // "A land that could produce {C}" (rule 106.7): last, being the dearest
+  // read — the game asks its mana abilities.
+  if (filter.couldProduce !== undefined) {
+    if (layered !== undefined || live === undefined || live.zone !== "battlefield") return false;
+    const read = couldProduceReaders.get(state);
+    if (read === undefined || !read(id).includes(filter.couldProduce)) return false;
+  }
 
   // "With the greatest power among creatures that player controls": none of
   // its controller's other matching permanents has more.
