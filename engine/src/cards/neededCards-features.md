@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A cast trigger's count as the spell's counters to enter with — found built 2026-11-17
+
+The key `replacement:enters-with-counters-per-cast-trigger-sacrifice` needed no engine code: a
+`this-cast` trigger's `enters-with-counters` on `"source"` (its source is the spell, Naya Soulbeast's shape)
+reads what the trigger did. Gluttonous Hellkite (rank 11505): each player sacrifices X, then `{ product: [2,
+{ thisWay: "sacrificed" }] }` — what was actually sacrificed, a token from a stack each, nothing once the spell
+has left the stack (its rulings). The scaffolder reads it (`thisCast`: X in a cast trigger, and "~ enters
+with N +1/+1 counters on it for each … sacrificed/exiled/… this way").
+`test/cast-trigger-sacrifice-counters.test.ts`.
+
 ### A token made by changed text is the changed colour — found built 2026-11-17
 
 The key `effect:text-change-token-colors` was built on 2026-11-09 (commit c5364f006, `create-token`'s

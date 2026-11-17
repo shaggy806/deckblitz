@@ -3436,6 +3436,21 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "This creature enters with two +1/+1 counters on it for each creature
+  // sacrificed this way" in a "when you cast this spell" trigger (Gluttonous
+  // Hellkite): the spell is left the counters to enter with
+  // (`enters-with-counters` on `"source"`, Naya Soulbeast's), counted from what
+  // the trigger did.
+  const castCounters =
+    ctx?.thisCast === true
+      ? sentenceRe(`~ enters with ${N} (\\+1/\\+1) counters? on it for each (?:creature|card|permanent) (sacrificed|revealed|discarded|milled|exiled|destroyed) this way`).exec(s)
+      : null;
+  if (castCounters !== null) {
+    const per = numberOf(castCounters[1]);
+    if (typeof per !== "number") return null;
+    const counted = { thisWay: castCounters[3].toLowerCase() };
+    return { kind: "enters-with-counters", target: "source", counter: castCounters[2], amount: per === 1 ? counted : { product: [per, counted] } };
+  }
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
@@ -6855,7 +6870,8 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(each player|each opponent|target player|target opponent) sacrifices ${N} (.+?)(?: of their choice)?`).exec(s))) {
     const count = amount(m[2]);
     const filter = parseTypePhrase(m[3]);
-    if (typeof count !== "number" || filter === null) return null;
+    // X in a "when you cast this spell" trigger is the spell's (rule 107.3m).
+    if ((typeof count !== "number" && !(count === "x" && ctx.thisCast === true)) || filter === null) return null;
     const who = { "each player": "each-player", "each opponent": "each-opponent" }[m[1].toLowerCase()];
     if (who !== undefined) return { kind: "sacrifice", who, filter, count };
     // The engine reads the player from the first target, so a player named
@@ -18806,6 +18822,9 @@ function parseFaceAsWritten(face, ctx = {}) {
           departed: departedOf(triggers),
           // "Copy it" in a cast trigger: the spell cast (`"trigger-spell"`).
           ...(triggers.every((t) => t.on === "cast-spell") ? { castSpell: true } : {}),
+          // "When you cast this spell": its X is the spell's, and "~ enters
+          // with" is the spell's counters to enter with.
+          ...(triggers.every((t) => t.on === "this-cast") ? { thisCast: true } : {}),
           // "That card" of a card put into a graveyard.
           ...(triggers.every((t) => t.on === "put-into-graveyard" && t.batched !== true) ? { cardEvent: true } : {}),
           // "That card" of the creature this was attached to, which died.
@@ -20502,6 +20521,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     it: ctx.it,
     departed: ctx.departed,
     ...(ctx.castSpell === true ? { castSpell: true } : {}),
+    ...(ctx.thisCast === true ? { thisCast: true } : {}),
     ...(ctx.cardEvent === true ? { cardEvent: true } : {}),
     ...(ctx.hostDied === true ? { hostDied: true } : {}),
     ...(ctx.evolved === true ? { evolved: true } : {}),

@@ -21137,3 +21137,37 @@ describe("entered under your control this turn, and dying with a counter", () =>
     ]);
   });
 });
+
+describe("a cast trigger's count as counters to enter with", () => {
+  it("each player sacrifices X, then two counters for each sacrificed this way (Gluttonous Hellkite)", () => {
+    const face = parseFace(
+      {
+        name: "Gluttonous Hellkite",
+        type_line: "Creature — Dragon",
+        mana_cost: "{X}{X}{B}{R}{G}",
+        oracle_text:
+          "When you cast this spell, each player sacrifices X creatures. This creature enters with two +1/+1 counters on it for each creature sacrificed this way.\nFlying, trample",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "this-cast" },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "sacrifice", who: "each-player", filter: { type: "creature" }, count: "x" },
+          { kind: "enters-with-counters", target: "source", counter: "+1/+1", amount: { product: [2, { thisWay: "sacrificed" }] } },
+        ],
+      },
+    });
+  });
+
+  it("X stays unread in a trigger that isn't the spell's cast (an enters trigger)", () => {
+    const face = parseFace(
+      { name: "Test Beast", type_line: "Creature — Beast", mana_cost: "{X}{B}", oracle_text: "When this creature enters, each player sacrifices X creatures." },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(false);
+  });
+});
