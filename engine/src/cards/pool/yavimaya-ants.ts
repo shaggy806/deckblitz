@@ -37,7 +37,7 @@ export default defineCard({
                   text: "Pay {G}{G} for each age counter",
                 },
               ],
-              otherwise: { kind: "sacrifice-source" },
+              otherwise: { kind: "sequence", effects: [{ kind: "cumulative-upkeep-unpaid" }, { kind: "sacrifice-source" }] },
             },
           ],
         },

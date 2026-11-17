@@ -33,7 +33,7 @@ export default defineCard({
                   text: "Sacrifice a land",
                 },
               ],
-              otherwise: { kind: "sacrifice-source" },
+              otherwise: { kind: "sequence", effects: [{ kind: "cumulative-upkeep-unpaid" }, { kind: "sacrifice-source" }] },
             },
           ],
         },

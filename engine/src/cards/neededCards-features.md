@@ -336,7 +336,7 @@ done only with that many cards (rules 702.24a, 118.3). The second is the `cumula
 (rank 12790) triggers on it as `who: "self"`, then sacrificed as usual (the ruling). The scaffolder reads all three of
 Thought Lash's lines. Heart of Bogardan, authored before as a `reflexive-trigger` inside a hand-written upkeep's "if
 you don't", moved onto it: two abilities as printed, X read from its age counters as it last existed (608.2h).
-Cumulative upkeep written by hand (Illusionary Wall and five others) doesn't announce it.
+The 33 cumulative upkeeps written out by hand (Illusionary Wall's, Psychic Vortex's) announce it too.
 `test/cumulative-upkeep-unpaid.test.ts`.
 
 ### "Pay any amount of life" by you alone — built 2026-11-17

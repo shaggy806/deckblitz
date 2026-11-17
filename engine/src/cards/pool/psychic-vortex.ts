@@ -38,7 +38,7 @@ export default defineCard({
               kind: "may",
               prompt: "Draw a card for each age counter on Psychic Vortex? (If you don't, sacrifice it.)",
               effect: { kind: "draw", amount: { countersOn: "source", counter: "age" } },
-              else: { kind: "sacrifice-source" },
+              else: { kind: "sequence", effects: [{ kind: "cumulative-upkeep-unpaid" }, { kind: "sacrifice-source" }] },
             },
           ],
         },
