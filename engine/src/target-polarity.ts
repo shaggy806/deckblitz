@@ -967,7 +967,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "get-energy": none,
   "pay-energy": none,
   "cost-paid": none,
-  "create-emblem": none,
+  // "Target player gets an emblem with …": a boon (Will Kenrith's copies)
+  // or a curse (Ob Nixilis Reignited's), which only the emblem's own
+  // abilities say — the board's call.
+  "create-emblem": (n, v) => v.touch(n.to, "either", MINOR),
   // "Players can't gain life this turn": no target of its own.
   "timed-static": none,
   epic: none,
