@@ -8693,7 +8693,7 @@ Each board's die comes up 4.
 
 ### Spirit of Resilience: a graveyard exiled, then a copy of a creature card from among it
 - **Do:** Play Bojuka Bog, targeting yourself. In Spirit of Resilience's popup pick Grizzly Bears and confirm.
-- **Expect:** The popup offers Grizzly Bears and Sol Ring, both in exile, not Lightning Bolt. Spirit of Resilience gets a +1/+1 counter and becomes Grizzly Bears, a 3/3, until end of turn.
+- **Expect:** The popup offers Grizzly Bears and Sol Ring, both in exile, not Lightning Bolt, with a "Choose none" button. Spirit of Resilience gets a +1/+1 counter and becomes Grizzly Bears, a 3/3, until end of turn; the History reads "Spirit of Resilience becomes a copy of Grizzly Bears", not "enters".
 
 ### Spirit of Resilience: in a 4-player game, a creature card reanimated is found on the battlefield
 - **Do:** In this 4-player game, cast Reanimate on Hill Giant. In Spirit of Resilience's popup pick Hill Giant and confirm.

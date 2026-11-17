@@ -1319,6 +1319,9 @@ export type GameEvent =
       /** Chosen as it was turned face up, not as it entered (Vesuvan
        * Shapeshifter — `CopyOnEnter.orTurnedFaceUp`). */
       readonly asTurnedFaceUp?: true;
+      /** A permanent already there **became** the copy (the `become-copy`
+       * effect — Lazav, Spirit of Resilience): nothing entered (rule 707.4). */
+      readonly became?: true;
     })
   | (Base & {
       /** `player` manifested (rule 701.40) — or cloaked (701.58) — the top

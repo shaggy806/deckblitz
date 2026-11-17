@@ -38,6 +38,10 @@ describe("Spirit of Resilience", () => {
     expect(counters(game, spirit)).toBe(1);
     expect(name(game, spirit)).toBe("Grizzly Bears");
     expect(pt(game, spirit)).toEqual({ power: 3, toughness: 3 });
+    // It became the copy; nothing entered (rule 707.4) — what the log says.
+    expect(game.state.eventLog.filter((e) => e.type === "permanent-copied")).toEqual([
+      expect.objectContaining({ object: spirit, copyOf: "Grizzly Bears", became: true }),
+    ]);
     // The chosen card stays in exile.
     expect(zone(game, bears)).toBe("exile");
     // Until end of turn: itself again, its counter kept.

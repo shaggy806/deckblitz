@@ -50214,7 +50214,7 @@ controlledBy,
     }
     if (changed.length === 0) return;
     invalidateComputedCache();
-    for (const id of changed) this.emit({ type: "permanent-copied", object: id, copyOf: source.copyOf });
+    for (const id of changed) this.emit({ type: "permanent-copied", object: id, copyOf: source.copyOf, became: true });
   }
 
   /**

@@ -47,6 +47,17 @@ describe('describeEvent', () => {
     expect(chose({ kind: 'object', object: 'o2' })).toBe('Toby chooses card:o2 for card:o1')
   })
 
+  it('says a permanent becomes a copy, not that it enters as one, when it was already there (rule 707.4)', () => {
+    const copied = (became?: true) =>
+      describeEvent(
+        event({ type: 'permanent-copied', object: 'o1', copyOf: 'Grizzly Bears', ...(became ? { became } : {}) }),
+        nameOf,
+        seats,
+      )
+    expect(copied(true)).toBe('card:o1 becomes a copy of Grizzly Bears')
+    expect(copied()).toBe('card:o1 enters as a copy of Grizzly Bears')
+  })
+
   it('announces the name a name sticker makes (rule 123.6b)', () => {
     expect(
       describeEvent(
