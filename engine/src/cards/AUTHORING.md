@@ -920,7 +920,10 @@ controller"), `"trigger-player"` (Emissary of Hope's "that player"),
 `filter.ts` — "X is the **total power** of creatures you control", "the
 **greatest mana value** among permanents you control", Tom Bombadil's "four
 or more **lore counters among Sagas you control**" (`of: { counters: "lore"
-}` in an `aggregate` condition). Computed values, so anthems and counters
+}` in an `aggregate` condition); `of: "unlocked-doors"` is a Room's unlocked
+doors, 0 to 2 (Misty Salon's "the number of **unlocked doors among Rooms you
+control**", Rampaging Soulrager's "two or more" in an `aggregate`
+condition). Computed values, so anthems and counters
 count; mana value off the printed cost with `{X}` as 0. A **sum counts a
 token stack once per token** — twenty 1/1 Goblins in one stack are 20 power.
 A max over no permanents is 0, and the amount is clamped at 0, rule 107.1b;

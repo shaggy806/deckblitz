@@ -915,6 +915,10 @@ export function aggregatePhraseOf(phrase) {
   } else if ((m = /^the number of counters (?:on|among) (.+)$/.exec(phrase))) {
     head = { aggregate: "sum", of: "counters" };
     rest = m[1];
+  } else if ((m = /^the number of unlocked doors among (.+)$/.exec(phrase))) {
+    // Misty Salon's "the number of unlocked doors among Rooms you control".
+    head = { aggregate: "sum", of: "unlocked-doors" };
+    rest = m[1];
   } else if ((m = /^the total number of (.+)$/.exec(phrase))) {
     head = { aggregate: "count" };
     rest = m[1];

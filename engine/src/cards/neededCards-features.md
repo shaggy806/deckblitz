@@ -391,6 +391,16 @@ suggests the chooser's own planeswalkers' types, as Deification's on-enter one d
 searches no rollouts over that eighty-type menu (its `candidates` are none) and names the first
 suggestion. Leori, Sparktouched Hunter (rank 11022): a delayed `activates-ability` watch with the
 chosen type in its `source`, for the rest of the turn. `test/choose-planeswalker-type.test.ts`.
+### The number of unlocked doors among Rooms you control — built 2026-11-17
+
+The key `effect:amount-unlocked-doors`. Smoky Lounge // Misty Salon (rank 11616): the `AggregateOf`
+`"unlocked-doors"` (`GameObject.doors`, rule 709.5c; `LastKnownInfo.doors` once gone), summed over `{
+subtype: "Room", controlledBy: "you" }` for Misty Salon's X/X Spirit, and in an `aggregate` condition for
+Rampaging Soulrager's "+3/+0 as long as there are two or more unlocked doors among Rooms you control".
+Smoky Lounge's "Spend this mana only to cast Room spells and unlock doors" needed nothing new (`spendOnly`'s
+`spell` and the `"unlock-door"` purpose). The scaffolder's aggregate phrase reads it.
+`test/unlocked-doors-amount.test.ts`.
+
 ### "If life was paid to activate it, … that much life again" — built 2026-11-17
 
 The key `amount:life-paid-to-activate`. Verrak, Warped Sengir (rank 11607). The `ability-activated` event

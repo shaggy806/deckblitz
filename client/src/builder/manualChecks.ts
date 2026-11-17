@@ -6793,6 +6793,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Misty Salon: the Spirit counts every unlocked door among your Rooms',
+    board({
+      you: { bf: ['Smoky Lounge // Misty Salon', 'Unholy Annex // Ritual Chamber', 'Mountain*3', 'Island*4'] },
+    }),
+  ),
+  preset(
     'Unholy Annex: without a Demon it costs you life',
     board({
       you: { bf: ['Unholy Annex // Ritual Chamber', 'Swamp*3'] },

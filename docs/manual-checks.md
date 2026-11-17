@@ -4545,6 +4545,10 @@ engine terms. A second thing to check is a second test.
 - **Do:** Unlock Ritual Chamber ({3}{B}{B}).
 - **Expect:** You get a 6/6 flying Demon.
 
+### Misty Salon: the Spirit counts every unlocked door among your Rooms
+- **Do:** Unlock Smoky Lounge ({2}{R}), then Misty Salon ({3}{U}).
+- **Expect:** Misty Salon's trigger makes a 2/2 blue flying Spirit: both of this Room's doors are unlocked, and Unholy Annex // Ritual Chamber, still locked, adds none.
+
 ### Unholy Annex: without a Demon it costs you life
 - **Do:** Unlock Unholy Annex, then pass to your end step.
 - **Expect:** At your end step you lose 2 life.

@@ -19733,6 +19733,23 @@ describe("exiling cards with total mana value N or greater as a cost", () => {
   });
 });
 
+describe("the number of unlocked doors among Rooms you control", () => {
+  it("is read as an aggregate of unlocked doors (Misty Salon's X)", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Spirit",
+      oracle_text: "This creature gets +X/+0, where X is the number of unlocked doors among Rooms you control.",
+    } as never) as unknown as { static: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]).toMatchObject({
+      grantPtPerCount: {
+        aggregate: { aggregate: "sum", of: "unlocked-doors", filter: { subtype: "Room", controlledBy: "you" } },
+        pt: [1, 0],
+      },
+    });
+  });
+});
+
 describe("a cost's X defined by the ability", () => {
   it("reads Prototype Portal's X as the exiled card's mana value", () => {
     const face = parseFace({

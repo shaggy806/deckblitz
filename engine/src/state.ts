@@ -2290,6 +2290,9 @@ export interface LastKnownInfo {
   readonly manaCost?: string | null;
   /** The mana spent to cast it, if it was cast (`GameObject.manaSpent`). */
   readonly manaSpent?: readonly SpentMana[];
+  /** A Room's unlocked doors as it was (`GameObject.doors`), for the
+   * `"unlocked-doors"` aggregate once it has gone. */
+  readonly doors?: { readonly left: boolean; readonly right: boolean };
   readonly isToken: boolean;
   readonly isCommander: boolean;
   readonly tapped: boolean;

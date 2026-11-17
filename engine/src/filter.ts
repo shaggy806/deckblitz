@@ -3578,6 +3578,11 @@ export type AggregateOf =
   | "mana-value"
   | "counters"
   | { readonly counters: string }
+  /** How many of a Room's doors are unlocked (rule 709.5c — 0, 1 or 2; a
+   * permanent that isn't a Room has none): Misty Salon's "the number of
+   * **unlocked doors among Rooms you control**" is a sum of it. One gone
+   * is read as it last existed (`LastKnownInfo.doors`). */
+  | "unlocked-doors"
   /** The chroma read (an ability word, rule 207.2c): that colour's mana symbols
    * in the object's mana cost, a hybrid or Phyrexian one counting once
    * (`colorSymbols`) — Umbra Stalker's "the number of black mana symbols in the
@@ -3926,6 +3931,10 @@ export function aggregateValueOf(
   }
   if (typeof of === "object") return state.objects[id]?.counters[of.counters] ?? 0;
   if (of === "counters") return totalCounters(state.objects[id]?.counters);
+  if (of === "unlocked-doors") {
+    const doors = state.objects[id]?.doors;
+    return doors === undefined ? 0 : (doors.left ? 1 : 0) + (doors.right ? 1 : 0);
+  }
   if (of === "mana-value") {
     // On the stack, {X} is the value chosen for it (rule 202.3e): a spell
     // cast this way counts as cast.
@@ -3953,6 +3962,7 @@ function matchValueOf(state: GameState, registry: CardRegistry, m: WeightedMatch
   }
   if (typeof of === "object") return known.counters[of.counters] ?? 0;
   if (of === "counters") return totalCounters(known.counters);
+  if (of === "unlocked-doors") return known.doors === undefined ? 0 : (known.doors.left ? 1 : 0) + (known.doors.right ? 1 : 0);
   if (of === "mana-value") return known.manaValue;
   return of === "power" ? known.power : known.toughness;
 }
