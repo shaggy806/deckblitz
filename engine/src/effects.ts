@@ -7341,6 +7341,15 @@ export type EffectSpec =
        * Grace). Anything a player can't do for a while is a `prohibit`.
        */
       readonly kind: "player-effect";
+      /** The player in this target slot has the effect, not the controller —
+       * Will Kenrith's "**target player** draws two cards. Until your next
+       * turn, instant, sorcery, and planeswalker spells **that player** casts
+       * cost {2} less to cast": what the effect says of its player
+       * (`reduceSpells`, `castFromHandFree`, `castAsThoughFlash`, `mayPlay`, …)
+       * is theirs. `duration` and any scope are still read from the
+       * controller's side ("until **your** next turn" is the controller's).
+       * Nothing, once that target has become illegal (rule 608.2b). */
+      readonly to?: number;
       /** See `PlayerDuration`: `"until-end-of-combat"` is gone as the combat
        * phase ends (rule 500.5a, 506.1) — "they can't attack you this combat"
        * (Champions of Minas Tirith); `"permanent"` the rest of the game;
@@ -22099,8 +22108,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "player-effect": {
       const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
       if (lasts === undefined) return;
+      // "Target player …": theirs, and nobody's once that target is gone.
+      const to = spec.to === undefined ? undefined : ctx.targets[spec.to];
+      if (spec.to !== undefined && to?.kind !== "player") return;
       ctx.addPlayerEffect({
-        owner: ctx.controller,
+        owner: to?.kind === "player" ? to.player : ctx.controller,
         // A `during` effect is held until that turn (`laterPlayerEffects`).
         expires: "expires" in lasts ? lasts.expires : "end-of-turn",
         ...(spec.noMaxHandSize !== undefined ? { noMaxHandSize: ctx.playersInScope(spec.noMaxHandSize) } : {}),

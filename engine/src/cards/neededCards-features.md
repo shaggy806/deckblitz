@@ -363,6 +363,14 @@ Abolish-style discard already fit) and paid where the own one is, as the cost is
 read at the offer as the face cast (a split card's half) — so a colorless spell has none. Only the mana cost is
 replaced: additional costs are still paid (its ruling). Dream Halls (rank 12409, `anyPlayer`).
 `test/alt-cost-grant-discard.test.ts`.
+### A player effect a target player has — built 2026-11-17
+
+The key `effect:player-effect-target-player`: `player-effect`'s `to` (a target slot) makes the effect that
+player's (`PlayerEffect.owner`), its `duration` still read from the controller's side — Will Kenrith's "target
+player draws two cards. Until your next turn, instant, sorcery, and planeswalker spells that player casts cost {2}
+less to cast" (rank 12661). Its partner Rowan Kenrith (rank 13730, `effect:attacks-if-able-during-target-player-next-turn`)
+needed no new effect: Taunt's `restrict` with the plain `"must-attack"`. An `activates-ability` trigger now works
+on an emblem in the command zone (rule 114.4 — Rowan's −8). `test/player-effect-to-target-player.test.ts`.
 
 ### Control for as long as a player is the monarch — built 2026-11-17
 

@@ -37404,9 +37404,10 @@ export class Game {
           // On the battlefield — or in a graveyard for an ability that works
           // only there, the only kind the trigger scan asks of a graveyard
           // card (rule 113.6k; Afterburner Expert's "return this card from
-          // your graveyard").
+          // your graveyard") — or an emblem in the command zone (rule 114.4:
+          // Rowan Kenrith's "whenever you activate an ability").
           if (spec.who !== "attached") {
-            if (self.zone !== "battlefield" && self.zone !== "graveyard") return false;
+            if (self.zone !== "battlefield" && self.zone !== "graveyard" && self.kind !== "emblem") return false;
             if ((spec.who === "you") !== (event.player === self.controller)) return false;
           }
           // "An ability of a card in your graveyard": activated from there,

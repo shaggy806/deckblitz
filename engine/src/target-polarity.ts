@@ -696,7 +696,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "reselect-attack": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "either", MAJOR);
   },
-  "player-effect": none,
+  // "Spells target player casts cost {2} less" (Will Kenrith): theirs.
+  "player-effect": (n, v) => v.touch(n.to, "help", MINOR),
   // What a resolved replacement will do is what its targets get (Words of
   // War's 2 damage).
   heal: (n, v) => v.touch(n.target, "help", MINOR),

@@ -10,6 +10,8 @@
     "cost:x-equals-linked-exiled-mana-value",
     "cost:roll-die-as-cost",
     "cost:alternative-cost-discard-shares-color",
+    "effect:player-effect-target-player",
+    "effect:attacks-if-able-during-target-player-next-turn",
     "effect:control-while-player-is-monarch",
     "effect:token-copy-each-other",
     "replacement:explore-replacement-scry-first",
