@@ -1579,8 +1579,13 @@ export type UnlessOption =
   /** "…unless the player puts a -1/-1 counter on a creature they control"
    * (Thelon's Chant): one counter of the kind `putCounter` names, on a
    * permanent of the chooser's matching `on`, their choice of which. "You" in
-   * `on` is the chooser. */
-  | { readonly putCounter: string; readonly on: CardFilter; readonly text: string }
+   * `on` is the chooser. `times`: cumulative upkeep's "Put a +1/+1 counter on
+   * a creature an opponent controls" for each age counter (Sheltering
+   * Ancient) — that many counters, each its own choice of which (rule
+   * 702.24a: the same one again, or another), offered while there's one to
+   * put them on; `count` is that number, fixed as the effect applies (only
+   * the engine sets it). */
+  | ({ readonly putCounter: string; readonly on: CardFilter; readonly count?: number; readonly text: string } & UnlessTimes)
   /** "…unless you return an untapped Plains you control to its owner's hand"
    * (Karoo): a permanent matching this, the chooser's choice of which. "You" is
    * the chooser. */
@@ -15137,6 +15142,10 @@ function bindUnlessTimes(option: BoundUnlessOption, ctx: ResolutionContext): Bou
     };
   }
   if ("payLife" in option) return { payLife: option.payLife * n, text: `Pay ${option.payLife * n} life` };
+  if ("putCounter" in option) {
+    const count = (option.count ?? 1) * n;
+    return { putCounter: option.putCounter, on: option.on, count, text: `${option.text} (${count})` };
+  }
   if ("sacrifice" in option) {
     const count = (option.count ?? 1) * n;
     return {

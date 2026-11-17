@@ -4806,6 +4806,25 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       },
     });
     expect(shards.complete).toBe(true);
+    const ancient = face(`Trample\nCumulative upkeep—Put a +1/+1 counter on a creature an opponent controls. ${reminder}`, "Creature — Treefolk");
+    expect(ancient.triggered[0].effect).toMatchObject({
+      then: {
+        effects: [
+          {},
+          {
+            options: [
+              {
+                putCounter: "+1/+1",
+                on: { type: "creature", controlledBy: "opponent" },
+                times: { countersOn: "source", counter: "age" },
+                text: "Put a +1/+1 counter on a creature an opponent controls",
+              },
+            ],
+          },
+        ],
+      },
+    });
+    expect(ancient.complete).toBe(true);
   });
 
   it("echo (rule 702.30a): a mana cost, a discard or two lands, once after it comes under your control", () => {

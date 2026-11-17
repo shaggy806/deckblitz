@@ -365,6 +365,16 @@ clause is "cards in your graveyard you've surveilled this turn" — the same obj
 seen, left on top and put there later (the ruling). A graveyard permission's `byPayingLife` now works as
 from exile and a library's top: the only way under it (118.9a; X 0, 107.3b), read from the permission the
 cast names. Eye of Duskmantle (rank 11084). `test/surveilled-this-turn.test.ts`.
+### Cumulative upkeep paid in counters on an opponent's creature — built 2026-11-16
+
+The key `cost:cumulative-upkeep-counter-on-opponents-creature` (family `keyword:cumulative-upkeep`): the
+`putCounter` unless option takes `times` (bound into a `count`), done as a `repeat` of one chosen permanent
+per counter — each its own choice, the same one again allowed, none targeted (rule 702.24a) — and offered
+while there's one to put them on, so with no opponent's creature it can't be paid and the permanent is
+sacrificed. `cumulativeUpkeep({ putCounter, on, text })`; the scaffolder reads "Cumulative upkeep—Put a
+[counter] counter on a [type] [you control | an opponent controls]". Sheltering Ancient (rank 11238).
+`test/cumulative-upkeep-counter.test.ts`.
+
 ### "When damage is prevented this way", on the stack — found built 2026-11-16
 
 The key `replacement:prevention-reflexive-trigger` needed no engine code: a prevention shield's `then` that

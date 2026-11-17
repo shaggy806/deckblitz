@@ -46850,7 +46850,9 @@ controlledBy,
       }
       if ("payLife" in option) return this.canPayLife(player, option.payLife, "not-a-cost");
       if ("payEnergy" in option) return this.state.players[player].energy >= option.payEnergy;
-      if ("putCounter" in option) return hasPermanent(option.on);
+      // None to put, nothing to pay; else one to put them on (each its own
+      // choice, the same one again allowed).
+      if ("putCounter" in option) return option.count === 0 || hasPermanent(option.on);
       if ("returnToHand" in option) return hasPermanent(option.returnToHand);
       if ("tapPermanent" in option) return hasPermanent(option.tapPermanent);
       if ("sacrificeThat" in option) {
@@ -46946,7 +46948,19 @@ controlledBy,
             : "sacrificeThat" in option
             ? { kind: "sacrifice-target", target: option.sacrificeThat }
             : "putCounter" in option
-            ? chosenPermanent(option.on, { kind: "add-counter", target: 0, counter: option.putCounter, amount: 1 }, option.text)
+            ? (option.count ?? 1) === 1
+              ? chosenPermanent(option.on, { kind: "add-counter", target: 0, counter: option.putCounter, amount: 1 }, option.text)
+              : // Cumulative upkeep's, once per age counter, each chosen
+                // as it's put (rule 702.24a).
+                {
+                  kind: "repeat",
+                  times: option.count ?? 1,
+                  effect: chosenPermanent(
+                    option.on,
+                    { kind: "add-counter", target: 0, counter: option.putCounter, amount: 1 },
+                    `Choose where a ${option.putCounter} counter goes (${option.count} in all, each chosen in turn)`,
+                  ),
+                }
             : "returnToHand" in option
             ? chosenPermanent(option.returnToHand, { kind: "return-to-hand", target: 0 }, option.text)
             : "tapPermanent" in option

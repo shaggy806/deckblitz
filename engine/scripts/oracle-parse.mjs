@@ -261,6 +261,17 @@ function keywordPart(part, faceName, typeLine = "") {
   if (/^cumulative upkeep—flip a coin\.?$/i.test(p)) {
     return { triggered: [cumulativeUpkeep({ doing: { kind: "flip-coin" }, text: "Flip a coin" })] };
   }
+  // A counter on a permanent of the payer's choice per age counter, each
+  // chosen on its own (Sheltering Ancient).
+  if ((m = /^cumulative upkeep—(put an? (?:[+-]\d+\/[+-]\d+|[a-z]+) counter on an? ([a-z ]+?)(?: (you control|an opponent controls))?)\.?$/i.exec(p))) {
+    const counter = /^put an? ([+-]\d+\/[+-]\d+|[a-z]+) counter/i.exec(m[1])[1];
+    const typed = parseTypePhrase(m[2]);
+    if (typed !== null && Object.keys(typed).length > 0) {
+      const on = m[3] === undefined ? typed : { ...typed, controlledBy: /^you/i.test(m[3]) ? "you" : "opponent" };
+      const text = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+      return { triggered: [cumulativeUpkeep({ putCounter: counter, on, text })] };
+    }
+  }
   // Echo [cost] (rule 702.30a): its upkeep trigger, "if this came under your
   // control since the beginning of your last upkeep".
   if ((m = new RegExp(`^echo ${COST}$`, "i").exec(p))) return { triggered: [echo(m[1])] };

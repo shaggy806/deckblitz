@@ -651,9 +651,13 @@ export const renown = (n: number): TriggeredAbility => {
  * if this permanent is on the battlefield, put an age counter on this
  * permanent. Then you may pay [cost] for each age counter on it. If you
  * don't, sacrifice it." `cost` is a mana cost (`"{U}"`), life (`{ life: 1 }`)
- * a sacrifice (`{ sacrifice: { type: "land" }, text: "Sacrifice a land" }`)
- * or an act (`{ doing: { kind: "flip-coin" }, text: "Flip a coin" }`, done
- * that many times over as a `repeat`),
+ * a sacrifice (`{ sacrifice: { type: "land" }, text: "Sacrifice a land" }`),
+ * a counter put on a permanent of the payer's choice (`{ putCounter: "+1/+1",
+ * on: { type: "creature", controlledBy: "opponent" }, text: "Put a +1/+1
+ * counter on a creature an opponent controls" }` — Sheltering Ancient: each
+ * counter chosen on its own, and with nothing to put them on it can't be
+ * paid) or an act (`{ doing: { kind: "flip-coin" }, text: "Flip a coin" }`,
+ * done that many times over as a `repeat`),
  * paid once per age counter as it resolves — all of it or none (no partial
  * payments). Each instance triggers on its own and counts every age counter
  * (702.24b). Put the keyword line in `text` as well.
@@ -663,6 +667,7 @@ export const cumulativeUpkeep = (
     | string
     | { readonly life: number }
     | { readonly sacrifice: CardFilter; readonly text: string }
+    | { readonly putCounter: string; readonly on: CardFilter; readonly text: string }
     | { readonly doing: EffectSpec; readonly text: string },
 ): TriggeredAbility => {
   const ages = { countersOn: "source", counter: "age" } as const;
@@ -679,7 +684,9 @@ export const cumulativeUpkeep = (
         ? { payLife: cost.life, times: ages, text: `Pay ${cost.life} life for each age counter` }
         : "doing" in cost
           ? { doing: { kind: "repeat", times: ages, effect: cost.doing }, text: `${cost.text} for each age counter` }
-          : { sacrifice: cost.sacrifice, times: ages, text: cost.text };
+          : "putCounter" in cost
+            ? { putCounter: cost.putCounter, on: cost.on, times: ages, text: cost.text }
+            : { sacrifice: cost.sacrifice, times: ages, text: cost.text };
   return {
     trigger: { on: "step-begins", step: "upkeep", who: "you" },
     targets: [],
