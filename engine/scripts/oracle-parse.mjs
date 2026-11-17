@@ -23031,6 +23031,18 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Twists and Turns: the replacement's own scry first, then the exploration.
+  if ((m = /^If a creature you control would explore, instead you scry (\d+), then that creature explores\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-explore",
+        filter: { type: "creature", controlledBy: "you" },
+        instead: { modify: {}, also: { kind: "scry", amount: Number(m[1]) } },
+      },
+      text,
+    };
+  }
   // Leyline of the Guildpact (rule 613.1e); Prismatic Omen (rule 305.7).
   if (line === "Each nonland permanent you control is all colors.") {
     return { affects: { scope: "filter", filter: { notTypes: ["land"], controlledBy: "you" } }, setColors: ["W", "U", "B", "R", "G"], text };

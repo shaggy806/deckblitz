@@ -352,6 +352,14 @@ Now a `then` that reads the damage's source (`"trigger-object"`, `"trigger-contr
 `reflexive-trigger` is owed once per source (`thenPerSource`, `Game.damageBatch.shieldThens`; rule 603.2c) —
 which also fixes Comeuppance against two attackers. Judgment of Alexander (rank 11898).
 `test/prevented-this-way-whenever.test.ts`.
+### Scry before a creature explores — built 2026-11-17
+
+The key `replacement:explore-replacement-scry-first`: a `would-explore` replacement's `also` (`ModifiedEvent`'s,
+"instead you scry 1, then that creature explores") is done first, by its controller, then the explorations —
+`Game.exploreTimes` became `Game.exploreReplacements` (`{ times, before }`), and a token stack of them counts as
+that many (for `times` too). Two Twists scry twice (the ruling); with Topography Tracker the scry still comes
+first. Twists and Turns // Mycoid Maze (rank 12154). `test/explore-scry-first.test.ts`.
+
 ### Token copies of a sacrificed Aura, attached to each attacker — built 2026-11-17
 
 The key `effect:aura-token-copies-attached`: a reflexive trigger's `remember` marks the members it takes out

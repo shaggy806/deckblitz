@@ -254,8 +254,11 @@ export interface ProliferateReplacement {
  * explorations one after another (rule 701.44a), each with its own reveal,
  * its own choice and its own "whenever a creature explores" (701.44b). The
  * replacement applies once to each instruction and not to the explorations it
- * makes (rule 614.5), so several multiply. Applied by the `explore` effect
- * through `Game.exploreTimes`.
+ * makes (rule 614.5), so several multiply. `also` is done first, by this
+ * permanent's controller: "if a creature you control would explore, instead
+ * you scry 1, then that creature explores" (Twists and Turns) is `{ modify:
+ * {}, also: { kind: "scry", amount: 1 } }`, and two of them scry twice (its
+ * ruling). Applied by the `explore` effect through `Game.exploreReplacements`.
  */
 export interface ExploreReplacement {
   readonly event: "would-explore";

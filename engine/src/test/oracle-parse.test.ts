@@ -19387,6 +19387,20 @@ describe("if a creature you control would explore, instead it explores, then it 
       instead: { modify: { times: 2 } },
     });
   });
+
+  it("reads Twists and Turns' scry first", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Enchantment",
+      oracle_text: "If a creature you control would explore, instead you scry 1, then that creature explores.",
+    }) as unknown as { complete: boolean; static: { replacement: unknown }[] };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]?.replacement).toEqual({
+      event: "would-explore",
+      filter: { type: "creature", controlledBy: "you" },
+      instead: { modify: {}, also: { kind: "scry", amount: 1 } },
+    });
+  });
 });
 
 describe("combat damage to a player become that player's mill", () => {

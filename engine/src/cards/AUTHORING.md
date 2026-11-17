@@ -6738,6 +6738,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   control would explore, instead it explores, then it explores again" (Topography Tracker; `filter: { type:
   "creature", controlledBy: "you" }`, the explorer as it last was if it has left): each instruction to explore
   becomes that many whole explorations (rule 701.44a), and several multiply (rule 614.5). The scaffolder reads it.
+  `instead: { modify: {}, also: { kind: "scry", amount: 1 } }` is Twists and Turns' "instead you scry 1, then
+  that creature explores": each such replacement's `also` first, by its controller, then the explorations (two
+  of them scry twice, its ruling; with Topography Tracker the scry still comes first). `explore-scry-first.test.ts`.
 - `replacement: { event: "would-copy-spell", additional }` — "If you would copy
   a spell one or more times, instead copy it that many times plus an additional
   time. You may choose new targets for the additional copy" (Twinning Staff):

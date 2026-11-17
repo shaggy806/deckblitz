@@ -12691,9 +12691,15 @@ export interface EffectApi {
    * if it has left — reveals the top card of their library, and a land card
    * goes to their hand. `null` when there's no such player any more. */
   exploreReveal(explorer: ObjectId): Omit<ExploreResult, "explorer"> | null;
-  /** How many times `explorer` explores when it would once: 1, times each
-   * `would-explore` replacement that applies to it (rule 614.5). */
-  exploreTimes(explorer: ObjectId): number;
+  /** What `explorer` does when it would explore once (rule 614.5): `times`
+   * whole explorations, 1 times each `would-explore` replacement's `times`
+   * that applies to it, after `before` — each such replacement's `also`
+   * ("instead you scry 1, then that creature explores" — Twists and Turns),
+   * with the player whose replacement it is. */
+  exploreReplacements(explorer: ObjectId): {
+    readonly times: number;
+    readonly before: readonly { readonly effect: EffectSpec; readonly controller: PlayerId }[];
+  };
   /** How many times `player` faces a villainous choice when they would once:
    * 1, plus what each `would-face-villainous-choice` replacement that
    * applies to them adds (rule 701.55c). */
@@ -21819,17 +21825,26 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (read?.kind !== "object") return;
       // "If a creature you control would explore, instead it explores, then
       // it explores again": this one instruction becomes that many whole
-      // explorations, none of them replaced again (rule 614.5).
+      // explorations, none of them replaced again (rule 614.5). "Instead you
+      // scry 1, then that creature explores" (Twists and Turns): each
+      // replacement's own effect first, by its controller — the explorer's
+      // controller, whom the replacement's "you control" names, and who
+      // explores (rule 701.44a) — then the explorations, each step waiting
+      // for the one before's decisions.
       if (spec.replaced !== true) {
-        const instead = ctx.exploreTimes(read.object);
-        if (instead > 1) {
+        const { times, before } = ctx.exploreReplacements(read.object);
+        if (times > 1 || before.length > 0) {
           const once: EffectSpec = {
             kind: "explore",
             target: spec.target,
             ...(spec.object !== undefined ? { object: spec.object } : {}),
             replaced: true,
           };
-          applyEffectSpec({ kind: "sequence", effects: Array.from({ length: instead }, () => once) }, ctx);
+          const by = before[0]?.controller;
+          applyEffectSpec(
+            { kind: "sequence", effects: [...before.map((b) => b.effect), ...Array.from({ length: times }, () => once)] },
+            by === undefined || by === ctx.controller ? ctx : ctx.asPlayer(by),
+          );
           return;
         }
       }

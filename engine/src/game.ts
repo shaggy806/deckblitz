@@ -40707,7 +40707,7 @@ export class Game {
         if (land) this.moveObject(top, "hand");
         return { player, revealed: top, land, revealedName: printedCardName(this.state.objects[top]) };
       },
-      exploreTimes: (explorer) => this.exploreTimes(explorer),
+      exploreReplacements: (explorer) => this.exploreReplacements(explorer),
       villainousChoiceTimes: (player) => this.villainousChoiceTimes(player),
       exploreToGraveyard: (card) => {
         const object = this.state.objects[card];
@@ -54278,15 +54278,23 @@ controlledBy,
     return Math.min(times, Game.MAX_EFFECT_INSTANCES);
   }
 
-  /** How many times `explorer` explores when it would once: each
-   * `would-explore` permanent whose filter it matches — from that permanent's
-   * controller's side, as it last existed if it has left (rule 701.44c) —
-   * multiplies it (rule 614.5; Topography Tracker). */
-  private exploreTimes(explorer: ObjectId): number {
+  /** What `explorer` does when it would explore once: each `would-explore`
+   * permanent whose filter it matches — from that permanent's controller's
+   * side, as it last existed if it has left (rule 701.44c) — multiplies the
+   * explorations (rule 614.5; Topography Tracker) and puts its `also` before
+   * them (Twists and Turns' "instead you scry 1, then that creature
+   * explores"; two of them are two scries, the ruling). A token stack of
+   * them is that many replacements. Whichever order they're applied in, the
+   * `also`s come first and the explorations multiply, so none is asked. */
+  private exploreReplacements(explorer: ObjectId): {
+    readonly times: number;
+    readonly before: readonly { readonly effect: EffectSpec; readonly controller: PlayerId }[];
+  } {
     let times = 1;
+    const before: { readonly effect: EffectSpec; readonly controller: PlayerId }[] = [];
     // A token that has ceased to exist is read from its snapshot.
     const ceased = this.state.objects[explorer] === undefined ? this.state.ceasedTokens?.[explorer] : undefined;
-    if (this.state.objects[explorer] === undefined && ceased === undefined) return 1;
+    if (this.state.objects[explorer] === undefined && ceased === undefined) return { times, before };
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, source)) continue;
@@ -54295,10 +54303,17 @@ controlledBy,
         if (replacement?.event !== "would-explore" || !this.staticActive(source, ability)) continue;
         const read = { you: source.controller, source: id, ...(ceased !== undefined ? { snapshot: ceased } : { lastKnown: true }) };
         if (!matchesFilter(this.state, this.registry, explorer, replacement.filter, read)) continue;
-        times = Math.min(times * (replacement.instead.modify.times ?? 1), Game.MAX_EFFECT_INSTANCES);
+        const copies = source.stackCount ?? 1;
+        times = Math.min(times * (replacement.instead.modify.times ?? 1) ** copies, Game.MAX_EFFECT_INSTANCES);
+        const also = replacement.instead.also;
+        if (also !== undefined) {
+          for (let i = 0; i < copies && before.length < Game.MAX_EFFECT_INSTANCES; i += 1) {
+            before.push({ effect: also, controller: source.controller });
+          }
+        }
       }
     }
-    return times;
+    return { times, before };
   }
 
   /** One more counter of each kind already on `target` (rule 701.34a's step,
