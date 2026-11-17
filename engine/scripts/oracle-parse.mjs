@@ -4403,6 +4403,7 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^Monstrosity (\d+|X)(, where X is the result)?\.$/.exec(s))) {
     const amount = m[1] !== "X" ? Number(m[1]) : m[2] !== undefined ? { roll: "total" } : "x";
     return { kind: "monstrosity", amount };
+  }
   // "Add {R} for each attacking creature" (Tesak, Judith's Hellhound), "Add
   // {G} for each creature you control" (Gaea's Cradle, Battle Hymn): counted
   // as it resolves.
