@@ -1,7 +1,7 @@
 {
  "batch": 334,
  "status": "in-progress",
- "ranks": "author-top-cards overnight, 2026-11-17: the triaged cards past EDHREC rank 10,000 in rank order (11022 on), each with the small feature it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop). Built: bug:simultaneous-move-with-choice (look-and-choose thenAlways), effect:phase-out-while-you-control-source (phase-out cantPhaseIn), effect:mill-from-bottom (bottom-of-library), decision:choose-planeswalker-type, decision:order-per-target-reveal-until (for-each-target groupChooses/only/eachObjectOnce), decision:choose-from-batch (look-and-choose zone trigger-batch), effect:exile-top-cast-from-among-rest-bottom, zone:cast-from-library-top-enters-counter (entersWith gated by gainsIf), keyword:blitz-extensions (blitz also and fromGraveyard); effect:text-change-token-colors found built. Skipped for the user: Cryptic Spires (deck-construction colours), Exchange of Words and Starlight Spectacular (majors left for later), Mana Web and Huatli, Warrior Poet (to re-key).",
+ "ranks": "author-top-cards overnight, 2026-11-17: the triaged cards past EDHREC rank 10,000 in rank order (11022 on), each with the small feature it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop). Built: bug:simultaneous-move-with-choice (look-and-choose thenAlways), effect:phase-out-while-you-control-source (phase-out cantPhaseIn), effect:mill-from-bottom (bottom-of-library), decision:choose-planeswalker-type, decision:order-per-target-reveal-until (for-each-target groupChooses/only/eachObjectOnce), decision:choose-from-batch (look-and-choose zone trigger-batch), effect:exile-top-cast-from-among-rest-bottom, zone:cast-from-library-top-enters-counter (entersWith gated by gainsIf), keyword:blitz-extensions (blitz also and fromGraveyard), filter:has-modular, static:block-while-tapped (readyToBlock), effect:divided-total-by-alternative-cost (Avacyn's Judgment's new key), cost:exile-from-graveyard-mana-symbol-total, amount:life-paid-to-activate, effect:amount-unlocked-doors; found built: effect:text-change-token-colors, effect:prohibit-loyalty-abilities-one-shot, filter:entered-under-your-control-this-turn. Fixed on the way: a madness or miracle cast's offer read X from the printed cost. Skipped for the user: Cryptic Spires (deck-construction colours), Exchange of Words and Starlight Spectacular (majors left for later), Mana Web and Huatli, Warrior Poet (to re-key).",
  "authored": [
   {
    "name": "Avatar Destiny",
@@ -123,6 +123,82 @@
    ],
    "tested": true,
    "test": "engine/src/test/blitz-extensions.test.ts"
+  },
+  {
+   "name": "Arcbound Overseer",
+   "files": [
+    "engine/src/cards/pool/arcbound-overseer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/has-modular.test.ts"
+  },
+  {
+   "name": "Masako the Humorless",
+   "files": [
+    "engine/src/cards/pool/masako-the-humorless.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/block-as-though-untapped.test.ts"
+  },
+  {
+   "name": "Flamescroll Celebrant // Revel in Silence",
+   "files": [
+    "engine/src/cards/pool/flamescroll-celebrant.ts",
+    "engine/src/cards/pool/revel-in-silence.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/prohibit-loyalty-abilities-one-shot.test.ts"
+  },
+  {
+   "name": "Shaile, Dean of Radiance // Embrose, Dean of Shadow",
+   "files": [
+    "engine/src/cards/pool/shaile-dean-of-radiance.ts",
+    "engine/src/cards/pool/embrose-dean-of-shadow.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/entered-under-your-control-this-turn.test.ts"
+  },
+  {
+   "name": "Avacyn's Judgment",
+   "files": [
+    "engine/src/cards/pool/avacyns-judgment.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/divided-total-reading-x.test.ts"
+  },
+  {
+   "name": "Baron Helmut Zemo",
+   "files": [
+    "engine/src/cards/pool/baron-helmut-zemo.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-total-mana-value-cost.test.ts"
+  },
+  {
+   "name": "Verrak, Warped Sengir",
+   "files": [
+    "engine/src/cards/pool/verrak-warped-sengir.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/life-paid-to-activate.test.ts"
+  },
+  {
+   "name": "Smoky Lounge // Misty Salon",
+   "files": [
+    "engine/src/cards/pool/smoky-lounge-misty-salon.ts",
+    "engine/src/cards/pool/smoky-lounge.ts",
+    "engine/src/cards/pool/misty-salon.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/unlocked-doors-amount.test.ts"
+  },
+  {
+   "name": "Rampaging Soulrager",
+   "files": [
+    "engine/src/cards/pool/rampaging-soulrager.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/unlocked-doors-amount.test.ts"
   }
  ],
  "blocked": []
