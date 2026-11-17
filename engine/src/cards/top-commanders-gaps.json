@@ -2779,7 +2779,8 @@
   "bug:stacking-draw-replacements",
   "effect:delayed-trigger-on-play-this-way",
   "trigger:activates-loyalty-of-attached",
-  "filter:linked-exile-grant-card-type"
+  "filter:linked-exile-grant-card-type",
+  "effect:random-cards-exiled-together"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

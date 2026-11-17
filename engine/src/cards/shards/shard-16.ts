@@ -124,6 +124,7 @@ import _poolCallTheBloodline from "../pool/call-the-bloodline.js";
 import _poolCallToHeel from "../pool/call-to-heel.js";
 import _poolCallToTheGrave from "../pool/call-to-the-grave.js";
 import _poolCanoptekTombSentinel from "../pool/canoptek-tomb-sentinel.js";
+import _poolCapriciousHellraiser from "../pool/capricious-hellraiser.js";
 import _poolCapricopian from "../pool/capricopian.js";
 import _poolCaptainsTutelage from "../pool/captains-tutelage.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
@@ -1223,6 +1224,7 @@ const shard: CardShard = {
     _poolCallToHeel,
     _poolCallToTheGrave,
     _poolCanoptekTombSentinel,
+    _poolCapriciousHellraiser,
     _poolCapricopian,
     _poolCaptainsTutelage,
     _poolCarnivorousMossBeast,

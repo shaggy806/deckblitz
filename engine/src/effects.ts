@@ -5489,7 +5489,12 @@ export type EffectSpec =
         /** The cards chosen so far in this resolution, still in a hand —
          * Extract Brain's "target opponent chooses X cards from their hand.
          * Look at those cards. You may cast a spell **from among them**" (a
-         * `look-and-choose` of theirs with `destination: "stay"`).
+         * `look-and-choose` of theirs with `destination: "stay"`). Or still
+         * in exile, chosen among the cards this resolution exiled:
+         * Capricious Hellraiser's "exile three cards at random … Choose a
+         * noncreature, nonland card from among them and copy it" (with
+         * `copies`; the choice is of a card as it lies there, where
+         * `spell` would read the face cast).
          * Controlled by the caster, owned as before (rule 108.3). */
         | "chosen-this-way"
         /** The cards this resolution had a player discard, still where the
@@ -16662,12 +16667,14 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
     } else if (from === "drawn-this-way") {
       cards = ctx.cardsDrawnThisWay();
     } else if (from === "chosen-this-way") {
-      // Still the same cards in that hand (rule 400.7).
+      // Still the same cards where they were chosen (rule 400.7): in that
+      // hand, or in exile among the cards this resolution put there.
+      const exiled = new Set(ctx.cardsExiledThisWay());
       cards = [
         ...new Set(
           ctx
             .thisWay("chosen")
-            .filter((entry) => ctx.cardsIn(entry.player, "hand").includes(entry.object))
+            .filter((entry) => exiled.has(entry.object) || ctx.cardsIn(entry.player, "hand").includes(entry.object))
             .map((entry) => entry.object),
         ),
       ];

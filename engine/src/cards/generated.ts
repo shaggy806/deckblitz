@@ -3961,6 +3961,7 @@ import _poolCapitalGuard from "./pool/capital-guard.js";
 import _poolCapitalPunishment from "./pool/capital-punishment.js";
 import _poolCaprichrome from "./pool/caprichrome.js";
 import _poolCapriciousEfreet from "./pool/capricious-efreet.js";
+import _poolCapriciousHellraiser from "./pool/capricious-hellraiser.js";
 import _poolCapriciousSliver from "./pool/capricious-sliver.js";
 import _poolCapriciousSorcerer from "./pool/capricious-sorcerer.js";
 import _poolCapricopian from "./pool/capricopian.js";
@@ -37258,6 +37259,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCapitalPunishment,
   _poolCaprichrome,
   _poolCapriciousEfreet,
+  _poolCapriciousHellraiser,
   _poolCapriciousSliver,
   _poolCapriciousSorcerer,
   _poolCapricopian,
@@ -70568,6 +70570,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/capital-punishment": _poolCapitalPunishment,
   "pool/caprichrome": _poolCaprichrome,
   "pool/capricious-efreet": _poolCapriciousEfreet,
+  "pool/capricious-hellraiser": _poolCapriciousHellraiser,
   "pool/capricious-sliver": _poolCapriciousSliver,
   "pool/capricious-sorcerer": _poolCapriciousSorcerer,
   "pool/capricopian": _poolCapricopian,
