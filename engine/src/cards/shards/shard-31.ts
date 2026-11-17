@@ -904,6 +904,7 @@ import _poolSunkenPalace from "../pool/sunken-palace.js";
 import _poolSunseedNurturer from "../pool/sunseed-nurturer.js";
 import _poolSunspringExpedition from "../pool/sunspring-expedition.js";
 import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
+import _poolSupperForSpiders from "../pool/supper-for-spiders.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSwirlingSpriggan from "../pool/swirling-spriggan.js";
@@ -2007,6 +2008,7 @@ const shard: CardShard = {
     _poolSunseedNurturer,
     _poolSunspringExpedition,
     _poolSuperAdaptoid,
+    _poolSupperForSpiders,
     _poolSurrakDragonclaw,
     _poolSwarmyard,
     _poolSwirlingSpriggan,

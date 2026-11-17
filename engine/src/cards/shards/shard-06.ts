@@ -447,6 +447,7 @@ import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
 import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
+import _poolHuatliWarriorPoet from "../pool/huatli-warrior-poet.js";
 import _poolHuddleUp from "../pool/huddle-up.js";
 import _poolHuntersFeast from "../pool/hunters-feast.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
@@ -1489,6 +1490,7 @@ const shard: CardShard = {
     _poolHourOfReckoning,
     _poolHowlingGalefang,
     _poolHuatliRadiantChampion,
+    _poolHuatliWarriorPoet,
     _poolHuddleUp,
     _poolHuntersFeast,
     _poolHypnoticGrifter,

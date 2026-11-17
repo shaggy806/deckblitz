@@ -52,6 +52,7 @@ import _poolAuguryAdept from "../pool/augury-adept.js";
 import _poolAuraOfDominion from "../pool/aura-of-dominion.js";
 import _poolAuraThief from "../pool/aura-thief.js";
 import _poolAuroraShifter from "../pool/aurora-shifter.js";
+import _poolAuthorOfShadows from "../pool/author-of-shadows.js";
 import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvatarDestiny from "../pool/avatar-destiny.js";
 import _poolAvenHeartstabber from "../pool/aven-heartstabber.js";
@@ -1102,6 +1103,7 @@ const shard: CardShard = {
     _poolAuraOfDominion,
     _poolAuraThief,
     _poolAuroraShifter,
+    _poolAuthorOfShadows,
     _poolAvalanche,
     _poolAvatarDestiny,
     _poolAvenHeartstabber,

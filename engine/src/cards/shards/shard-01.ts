@@ -863,6 +863,7 @@ import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
 import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
 import _poolThallidShellDweller from "../pool/thallid-shell-dweller.js";
 import _poolThassasRebuff from "../pool/thassas-rebuff.js";
+import _poolTheEleventhHour from "../pool/the-eleventh-hour.js";
 import _poolTheHolodeck from "../pool/the-holodeck.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
@@ -1888,6 +1889,7 @@ const shard: CardShard = {
     _poolThaliaTheSurvivor,
     _poolThallidShellDweller,
     _poolThassasRebuff,
+    _poolTheEleventhHour,
     _poolTheHolodeck,
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,

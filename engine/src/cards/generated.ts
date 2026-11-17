@@ -1022,6 +1022,7 @@ import _poolApesOfRath from "./pool/apes-of-rath.js";
 import _poolApexAltisaur from "./pool/apex-altisaur.js";
 import _poolApexDevastator from "./pool/apex-devastator.js";
 import _poolApexHawks from "./pool/apex-hawks.js";
+import _poolApexObservatory from "./pool/apex-observatory.js";
 import _poolApexOfPower from "./pool/apex-of-power.js";
 import _poolApexWitchstalker from "./pool/apex-witchstalker.js";
 import _poolApheliaViperWhisperer from "./pool/aphelia-viper-whisperer.js";
@@ -1691,6 +1692,7 @@ import _poolAuspiciousArrival from "./pool/auspicious-arrival.js";
 import _poolAuspiciousStarrix from "./pool/auspicious-starrix.js";
 import _poolAustereCommand from "./pool/austere-command.js";
 import _poolAutarchMammoth from "./pool/autarch-mammoth.js";
+import _poolAuthorOfShadows from "./pool/author-of-shadows.js";
 import _poolAuthorityOfTheConsuls from "./pool/authority-of-the-consuls.js";
 import _poolAuthority from "./pool/authority.js";
 import _poolAutochthonWurm from "./pool/autochthon-wurm.js";
@@ -9055,6 +9057,7 @@ import _poolEyeOfJace from "./pool/eye-of-jace.js";
 import _poolEyeOfMalcator from "./pool/eye-of-malcator.js";
 import _poolEyeOfNidhogg from "./pool/eye-of-nidhogg.js";
 import _poolEyeOfNowhere from "./pool/eye-of-nowhere.js";
+import _poolEyeOfOjerTaq from "./pool/eye-of-ojer-taq.js";
 import _poolEyeOfRamos from "./pool/eye-of-ramos.js";
 import _poolEyeOfSingularity from "./pool/eye-of-singularity.js";
 import _poolEyeOfTheStorm from "./pool/eye-of-the-storm.js";
@@ -13260,6 +13263,7 @@ import _poolHuatliDinosaurKnight from "./pool/huatli-dinosaur-knight.js";
 import _poolHuatliPoetOfUnity from "./pool/huatli-poet-of-unity.js";
 import _poolHuatliRadiantChampion from "./pool/huatli-radiant-champion.js";
 import _poolHuatliTheSunsHeart from "./pool/huatli-the-suns-heart.js";
+import _poolHuatliWarriorPoet from "./pool/huatli-warrior-poet.js";
 import _poolHuatlisFinalStrike from "./pool/huatlis-final-strike.js";
 import _poolHuatlisRaptor from "./pool/huatlis-raptor.js";
 import _poolHuatlisSnubhorn from "./pool/huatlis-snubhorn.js";
@@ -15118,6 +15122,7 @@ import _poolKinsbaileCourier from "./pool/kinsbaile-courier.js";
 import _poolKinsbaileSkirmisher from "./pool/kinsbaile-skirmisher.js";
 import _poolKinscaerHarpoonist from "./pool/kinscaer-harpoonist.js";
 import _poolKinscaerSentry from "./pool/kinscaer-sentry.js";
+import _poolKinzuOfTheBleakCoven from "./pool/kinzu-of-the-bleak-coven.js";
 import _poolKioraBehemothBeckoner from "./pool/kiora-behemoth-beckoner.js";
 import _poolKioraBestsTheSeaGod from "./pool/kiora-bests-the-sea-god.js";
 import _poolKioraMasterOfTheDepths from "./pool/kiora-master-of-the-depths.js";
@@ -23851,6 +23856,7 @@ import _poolScoutTheCity from "./pool/scout-the-city.js";
 import _poolScoutTheWilderness from "./pool/scout-the-wilderness.js";
 import _poolScoutingHawk from "./pool/scouting-hawk.js";
 import _poolScoutingTrek from "./pool/scouting-trek.js";
+import _poolScoutsWarning from "./pool/scouts-warning.js";
 import _poolScrabblingClaws from "./pool/scrabbling-claws.js";
 import _poolScrabblingSkullcrab from "./pool/scrabbling-skullcrab.js";
 import _poolScragnoth from "./pool/scragnoth.js";
@@ -27273,6 +27279,7 @@ import _poolSuperiorSpiderMan from "./pool/superior-spider-man.js";
 import _poolSupernaturalRescue from "./pool/supernatural-rescue.js";
 import _poolSupernaturalStamina from "./pool/supernatural-stamina.js";
 import _poolSuplex from "./pool/suplex.js";
+import _poolSupperForSpiders from "./pool/supper-for-spiders.js";
 import _poolSupplantForm from "./pool/supplant-form.js";
 import _poolSupplementationNode from "./pool/supplementation-node.js";
 import _poolSupplyCaravan from "./pool/supply-caravan.js";
@@ -28290,6 +28297,7 @@ import _poolTheElderDragonWar from "./pool/the-elder-dragon-war.js";
 import _poolTheElderspell from "./pool/the-elderspell.js";
 import _poolTheEldestReborn from "./pool/the-eldest-reborn.js";
 import _poolTheEleventhDoctor from "./pool/the-eleventh-doctor.js";
+import _poolTheEleventhHour from "./pool/the-eleventh-hour.js";
 import _poolTheEmperorOfPalamecia from "./pool/the-emperor-of-palamecia.js";
 import _poolTheEnd from "./pool/the-end.js";
 import _poolTheEndstone from "./pool/the-endstone.js";
@@ -29713,6 +29721,7 @@ import _poolTurtlePower from "./pool/turtle-power.js";
 import _poolTurtleSeals from "./pool/turtle-seals.js";
 import _poolTurtleTracks from "./pool/turtle-tracks.js";
 import _poolTurtleVan from "./pool/turtle-van.js";
+import _poolTurtlesForever from "./pool/turtles-forever.js";
 import _poolTurtlesInTime from "./pool/turtles-in-time.js";
 import _poolTurtleshellChangeling from "./pool/turtleshell-changeling.js";
 import _poolTuskedColossodon from "./pool/tusked-colossodon.js";
@@ -32997,6 +33006,7 @@ import _tokensHumanRogueToken from "./tokens/human-rogue-token.js";
 import _tokensHumanSoldierTokenTorensFistOfTheAngels from "./tokens/human-soldier-token-torens-fist-of-the-angels.js";
 import _tokensHumanSoldierToken from "./tokens/human-soldier-token.js";
 import _tokensHumanTokenCantPhaseIn from "./tokens/human-token-cant-phase-in.js";
+import _tokensHumanTokenDoctorSpellsCostLess from "./tokens/human-token-doctor-spells-cost-less.js";
 import _tokensHumanToken from "./tokens/human-token.js";
 import _tokensHumanWarriorToken31TrampleHaste from "./tokens/human-warrior-token-3-1-trample-haste.js";
 import _tokensHumanWarriorToken from "./tokens/human-warrior-token.js";
@@ -34463,6 +34473,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolApexAltisaur,
   _poolApexDevastator,
   _poolApexHawks,
+  _poolApexObservatory,
   _poolApexOfPower,
   _poolApexWitchstalker,
   _poolApheliaViperWhisperer,
@@ -35132,6 +35143,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAuspiciousStarrix,
   _poolAustereCommand,
   _poolAutarchMammoth,
+  _poolAuthorOfShadows,
   _poolAuthorityOfTheConsuls,
   _poolAuthority,
   _poolAutochthonWurm,
@@ -42496,6 +42508,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEyeOfMalcator,
   _poolEyeOfNidhogg,
   _poolEyeOfNowhere,
+  _poolEyeOfOjerTaq,
   _poolEyeOfRamos,
   _poolEyeOfSingularity,
   _poolEyeOfTheStorm,
@@ -46701,6 +46714,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHuatliPoetOfUnity,
   _poolHuatliRadiantChampion,
   _poolHuatliTheSunsHeart,
+  _poolHuatliWarriorPoet,
   _poolHuatlisFinalStrike,
   _poolHuatlisRaptor,
   _poolHuatlisSnubhorn,
@@ -48559,6 +48573,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKinsbaileSkirmisher,
   _poolKinscaerHarpoonist,
   _poolKinscaerSentry,
+  _poolKinzuOfTheBleakCoven,
   _poolKioraBehemothBeckoner,
   _poolKioraBestsTheSeaGod,
   _poolKioraMasterOfTheDepths,
@@ -57292,6 +57307,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScoutTheWilderness,
   _poolScoutingHawk,
   _poolScoutingTrek,
+  _poolScoutsWarning,
   _poolScrabblingClaws,
   _poolScrabblingSkullcrab,
   _poolScragnoth,
@@ -60714,6 +60730,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSupernaturalRescue,
   _poolSupernaturalStamina,
   _poolSuplex,
+  _poolSupperForSpiders,
   _poolSupplantForm,
   _poolSupplementationNode,
   _poolSupplyCaravan,
@@ -61731,6 +61748,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheElderspell,
   _poolTheEldestReborn,
   _poolTheEleventhDoctor,
+  _poolTheEleventhHour,
   _poolTheEmperorOfPalamecia,
   _poolTheEnd,
   _poolTheEndstone,
@@ -63154,6 +63172,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTurtleSeals,
   _poolTurtleTracks,
   _poolTurtleVan,
+  _poolTurtlesForever,
   _poolTurtlesInTime,
   _poolTurtleshellChangeling,
   _poolTuskedColossodon,
@@ -66444,6 +66463,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensHumanSoldierTokenTorensFistOfTheAngels,
   _tokensHumanSoldierToken,
   _tokensHumanTokenCantPhaseIn,
+  _tokensHumanTokenDoctorSpellsCostLess,
   _tokensHumanToken,
   _tokensHumanWarriorToken31TrampleHaste,
   _tokensHumanWarriorToken,
@@ -67917,6 +67937,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/apex-altisaur": _poolApexAltisaur,
   "pool/apex-devastator": _poolApexDevastator,
   "pool/apex-hawks": _poolApexHawks,
+  "pool/apex-observatory": _poolApexObservatory,
   "pool/apex-of-power": _poolApexOfPower,
   "pool/apex-witchstalker": _poolApexWitchstalker,
   "pool/aphelia-viper-whisperer": _poolApheliaViperWhisperer,
@@ -68586,6 +68607,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/auspicious-starrix": _poolAuspiciousStarrix,
   "pool/austere-command": _poolAustereCommand,
   "pool/autarch-mammoth": _poolAutarchMammoth,
+  "pool/author-of-shadows": _poolAuthorOfShadows,
   "pool/authority-of-the-consuls": _poolAuthorityOfTheConsuls,
   "pool/authority": _poolAuthority,
   "pool/autochthon-wurm": _poolAutochthonWurm,
@@ -75950,6 +75972,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/eye-of-malcator": _poolEyeOfMalcator,
   "pool/eye-of-nidhogg": _poolEyeOfNidhogg,
   "pool/eye-of-nowhere": _poolEyeOfNowhere,
+  "pool/eye-of-ojer-taq": _poolEyeOfOjerTaq,
   "pool/eye-of-ramos": _poolEyeOfRamos,
   "pool/eye-of-singularity": _poolEyeOfSingularity,
   "pool/eye-of-the-storm": _poolEyeOfTheStorm,
@@ -80155,6 +80178,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/huatli-poet-of-unity": _poolHuatliPoetOfUnity,
   "pool/huatli-radiant-champion": _poolHuatliRadiantChampion,
   "pool/huatli-the-suns-heart": _poolHuatliTheSunsHeart,
+  "pool/huatli-warrior-poet": _poolHuatliWarriorPoet,
   "pool/huatlis-final-strike": _poolHuatlisFinalStrike,
   "pool/huatlis-raptor": _poolHuatlisRaptor,
   "pool/huatlis-snubhorn": _poolHuatlisSnubhorn,
@@ -82013,6 +82037,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kinsbaile-skirmisher": _poolKinsbaileSkirmisher,
   "pool/kinscaer-harpoonist": _poolKinscaerHarpoonist,
   "pool/kinscaer-sentry": _poolKinscaerSentry,
+  "pool/kinzu-of-the-bleak-coven": _poolKinzuOfTheBleakCoven,
   "pool/kiora-behemoth-beckoner": _poolKioraBehemothBeckoner,
   "pool/kiora-bests-the-sea-god": _poolKioraBestsTheSeaGod,
   "pool/kiora-master-of-the-depths": _poolKioraMasterOfTheDepths,
@@ -90746,6 +90771,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scout-the-wilderness": _poolScoutTheWilderness,
   "pool/scouting-hawk": _poolScoutingHawk,
   "pool/scouting-trek": _poolScoutingTrek,
+  "pool/scouts-warning": _poolScoutsWarning,
   "pool/scrabbling-claws": _poolScrabblingClaws,
   "pool/scrabbling-skullcrab": _poolScrabblingSkullcrab,
   "pool/scragnoth": _poolScragnoth,
@@ -94168,6 +94194,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/supernatural-rescue": _poolSupernaturalRescue,
   "pool/supernatural-stamina": _poolSupernaturalStamina,
   "pool/suplex": _poolSuplex,
+  "pool/supper-for-spiders": _poolSupperForSpiders,
   "pool/supplant-form": _poolSupplantForm,
   "pool/supplementation-node": _poolSupplementationNode,
   "pool/supply-caravan": _poolSupplyCaravan,
@@ -95185,6 +95212,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-elderspell": _poolTheElderspell,
   "pool/the-eldest-reborn": _poolTheEldestReborn,
   "pool/the-eleventh-doctor": _poolTheEleventhDoctor,
+  "pool/the-eleventh-hour": _poolTheEleventhHour,
   "pool/the-emperor-of-palamecia": _poolTheEmperorOfPalamecia,
   "pool/the-end": _poolTheEnd,
   "pool/the-endstone": _poolTheEndstone,
@@ -96608,6 +96636,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/turtle-seals": _poolTurtleSeals,
   "pool/turtle-tracks": _poolTurtleTracks,
   "pool/turtle-van": _poolTurtleVan,
+  "pool/turtles-forever": _poolTurtlesForever,
   "pool/turtles-in-time": _poolTurtlesInTime,
   "pool/turtleshell-changeling": _poolTurtleshellChangeling,
   "pool/tusked-colossodon": _poolTuskedColossodon,
@@ -99892,6 +99921,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/human-soldier-token-torens-fist-of-the-angels": _tokensHumanSoldierTokenTorensFistOfTheAngels,
   "tokens/human-soldier-token": _tokensHumanSoldierToken,
   "tokens/human-token-cant-phase-in": _tokensHumanTokenCantPhaseIn,
+  "tokens/human-token-doctor-spells-cost-less": _tokensHumanTokenDoctorSpellsCostLess,
   "tokens/human-token": _tokensHumanToken,
   "tokens/human-warrior-token-3-1-trample-haste": _tokensHumanWarriorToken31TrampleHaste,
   "tokens/human-warrior-token": _tokensHumanWarriorToken,

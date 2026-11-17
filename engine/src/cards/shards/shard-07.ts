@@ -762,6 +762,7 @@ import _poolScamperingScorcher from "../pool/scampering-scorcher.js";
 import _poolScavengerFolk from "../pool/scavenger-folk.js";
 import _poolScorpionsSting from "../pool/scorpions-sting.js";
 import _poolScourAllPossibilities from "../pool/scour-all-possibilities.js";
+import _poolScoutsWarning from "../pool/scouts-warning.js";
 import _poolScrapworkMutt from "../pool/scrapwork-mutt.js";
 import _poolScurrilousSentry from "../pool/scurrilous-sentry.js";
 import _poolScuzzbackMarauders from "../pool/scuzzback-marauders.js";
@@ -1827,6 +1828,7 @@ const shard: CardShard = {
     _poolScavengerFolk,
     _poolScorpionsSting,
     _poolScourAllPossibilities,
+    _poolScoutsWarning,
     _poolScrapworkMutt,
     _poolScurrilousSentry,
     _poolScuzzbackMarauders,

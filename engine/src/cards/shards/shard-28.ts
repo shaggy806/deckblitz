@@ -457,6 +457,7 @@ import _poolKhenraCharioteer from "../pool/khenra-charioteer.js";
 import _poolKhorvathsFury from "../pool/khorvaths-fury.js";
 import _poolKingCrab from "../pool/king-crab.js";
 import _poolKinjallisSunwing from "../pool/kinjallis-sunwing.js";
+import _poolKinzuOfTheBleakCoven from "../pool/kinzu-of-the-bleak-coven.js";
 import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKlingonStrikeForce from "../pool/klingon-strike-force.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
@@ -1518,6 +1519,7 @@ const shard: CardShard = {
     _poolKhorvathsFury,
     _poolKingCrab,
     _poolKinjallisSunwing,
+    _poolKinzuOfTheBleakCoven,
     _poolKithkinSpellduster,
     _poolKlingonStrikeForce,
     _poolKnotvineMystic,

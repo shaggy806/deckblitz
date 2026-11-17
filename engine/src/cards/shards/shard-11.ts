@@ -1035,6 +1035,7 @@ import _tokensElementalShamanTokenHaste from "../tokens/elemental-shaman-token-h
 import _tokensElementalToken from "../tokens/elemental-token.js";
 import _tokensGreenElementalToken22 from "../tokens/green-elemental-token-2-2.js";
 import _tokensHeroTokenBlackMagesRod from "../tokens/hero-token-black-mages-rod.js";
+import _tokensHumanTokenDoctorSpellsCostLess from "../tokens/human-token-doctor-spells-cost-less.js";
 import _tokensNecronWarriorToken from "../tokens/necron-warrior-token.js";
 import _tokensOgreToken from "../tokens/ogre-token.js";
 import _tokensPhyrexianBeastTokenEzurisPredation from "../tokens/phyrexian-beast-token-ezuris-predation.js";
@@ -2089,6 +2090,7 @@ const shard: CardShard = {
     _tokensElementalToken,
     _tokensGreenElementalToken22,
     _tokensHeroTokenBlackMagesRod,
+    _tokensHumanTokenDoctorSpellsCostLess,
     _tokensNecronWarriorToken,
     _tokensOgreToken,
     _tokensPhyrexianBeastTokenEzurisPredation,

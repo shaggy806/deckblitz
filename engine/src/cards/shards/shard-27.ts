@@ -897,6 +897,7 @@ import _poolTrueNameNemesis from "../pool/true-name-nemesis.js";
 import _poolTrustyMachete from "../pool/trusty-machete.js";
 import _poolTruthOrConsequences from "../pool/truth-or-consequences.js";
 import _poolTurtleBlimp from "../pool/turtle-blimp.js";
+import _poolTurtlesForever from "../pool/turtles-forever.js";
 import _poolTwinmawStormbrood from "../pool/twinmaw-stormbrood.js";
 import _poolTwinsOfMaurerEstate from "../pool/twins-of-maurer-estate.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
@@ -1913,6 +1914,7 @@ const shard: CardShard = {
     _poolTrustyMachete,
     _poolTruthOrConsequences,
     _poolTurtleBlimp,
+    _poolTurtlesForever,
     _poolTwinmawStormbrood,
     _poolTwinsOfMaurerEstate,
     _poolTyriteSanctum,

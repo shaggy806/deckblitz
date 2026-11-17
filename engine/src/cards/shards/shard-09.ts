@@ -282,6 +282,7 @@ import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
 import _poolExuberantFirestoker from "../pool/exuberant-firestoker.js";
+import _poolEyeOfOjerTaq from "../pool/eye-of-ojer-taq.js";
 import _poolEyeblightsEnding from "../pool/eyeblights-ending.js";
 import _poolEyetwitch from "../pool/eyetwitch.js";
 import _poolFabledHero from "../pool/fabled-hero.js";
@@ -1355,6 +1356,7 @@ const shard: CardShard = {
     _poolExcoriate,
     _poolExpensiveTaste,
     _poolExuberantFirestoker,
+    _poolEyeOfOjerTaq,
     _poolEyeblightsEnding,
     _poolEyetwitch,
     _poolFabledHero,

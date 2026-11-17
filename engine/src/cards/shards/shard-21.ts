@@ -26,6 +26,7 @@ import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
 import _poolAnimateLand from "../pool/animate-land.js";
 import _poolAnointedDeacon from "../pool/anointed-deacon.js";
+import _poolApexObservatory from "../pool/apex-observatory.js";
 import _poolAphettoVulture from "../pool/aphetto-vulture.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -1031,6 +1032,7 @@ const shard: CardShard = {
     _poolAngelsTrumpet,
     _poolAnimateLand,
     _poolAnointedDeacon,
+    _poolApexObservatory,
     _poolAphettoVulture,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
