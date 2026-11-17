@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-978 already implemented / 22 missing
+979 already implemented / 21 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -465,7 +465,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  459  Ixhel, Scion of Atraxa                          6997 decks  {1}{W}{B}{G}     Legendary Creature — Phyrexian Angel
 [x]  460  Juri, Master of the Revue                       6991 decks  {B}{R}           Legendary Creature — Human Shaman
 [x]  461  Astarion, the Decadent                          6984 decks  {4}{W}{B}        Legendary Creature — Vampire Elf Rogue
-[ ]  462  Magar of the Magic Strings                      6971 decks  {1}{B}{R}        Legendary Creature — Minotaur Performer
+[x]  462  Magar of the Magic Strings                      6971 decks  {1}{B}{R}        Legendary Creature — Minotaur Performer
 [x]  463  Aminatou, the Fateshifter                       6970 decks  {W}{U}{B}        Legendary Planeswalker — Aminatou
 [x]  464  The Mimeoplasm                                  6962 decks  {2}{B}{G}{U}     Legendary Creature — Ooze
 [x]  465  Brudiclad, Telchor Engineer                     6945 decks  {4}{U}{R}        Legendary Artifact Creature — Phyrexian Artificer
