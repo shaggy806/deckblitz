@@ -391,6 +391,16 @@ suggests the chooser's own planeswalkers' types, as Deification's on-enter one d
 searches no rollouts over that eighty-type menu (its `candidates` are none) and names the first
 suggestion. Leori, Sparktouched Hunter (rank 11022): a delayed `activates-ability` watch with the
 chosen type in its `source`, for the rest of the turn. `test/choose-planeswalker-type.test.ts`.
+### A divided total that reads the cost the spell is cast for — built 2026-11-17
+
+The key `effect:divided-total-by-alternative-cost`. Avacyn's Judgment (rank 11326): "2 damage divided …
+If this spell's madness cost was paid, it deals X damage divided … instead". A `divided.total` is read as
+the division is announced (rule 601.2d), before the spell records which cost it was cast for, so
+`self-alternative-cost-paid` asked of it then answered "no": `Game.ownAlternativeCostPaid` says which as the
+offer and the cast are worked out, and `dividedNow`'s `castFor` hands it to the condition (a
+`makeResolutionContext` option). Found on the way and fixed on its own: a madness, miracle or fixed
+`byPaying` cast's offer read X off the mana cost, not the cost paid (From Under the Floorboards' {X}{B}{B}
+had no `xCost`; Entreat the Angels' X was capped by {X}{X}{W}{W}{W}). `test/divided-total-reading-x.test.ts`.
 
 ### "Each foretold card you own in exile" — built 2026-11-16
 

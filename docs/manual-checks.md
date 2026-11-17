@@ -7730,6 +7730,18 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Shatterskull Smashing (its spell face) with X = 6, targeting Bob's Craw Wurm and Hill Giant. Leave the split at 6 each.
 - **Expect:** The division step shares out 12, not 6, and both creatures die.
 
+### Avacyn's Judgment: X divided when cast for its madness cost
+- **Do:** Activate Hell Mongrel's "Discard a card" and discard Avacyn's Judgment. As the madness trigger resolves, cast it with X = 3, targeting Bob's Grizzly Bears, Hill Giant and Bob, 1 each.
+- **Expect:** X goes up to 3 (four Mountains, {X}{R}). The division step shares out 3, not 2. Bob goes to 39 and each creature has 1 damage.
+
+### Avacyn's Judgment: X divided for its madness cost, four players
+- **Do:** Activate Hell Mongrel's "Discard a card" and discard Avacyn's Judgment. Cast it with X = 3, targeting Bob's Grizzly Bears and Dave's Hill Giant: the Bears 2, the Giant 1.
+- **Expect:** The division step shares out 3. The Bears die; the Giant survives with 1 damage.
+
+### Avacyn's Judgment: 2 divided when cast for its mana cost
+- **Do:** Cast Avacyn's Judgment from your hand, targeting Bob's Grizzly Bears and Bob, 1 each.
+- **Expect:** No X is asked. The division step shares out 2; a third target can't be added. Bob goes to 39 and the Bears have 1 damage.
+
 ## An attack tax in Phyrexian mana (2026-11-06)
 
 ### Norn's Annex: paying its {W/P} with life rather than your Plains

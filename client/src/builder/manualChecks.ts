@@ -11439,6 +11439,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Craw Wurm', 'Hill Giant'] },
     }),
   ),
+  preset(
+    "Avacyn's Judgment: X divided when cast for its madness cost",
+    board({
+      you: { bf: ['Hell Mongrel', 'Mountain*4'], hand: ["Avacyn's Judgment"] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    "Avacyn's Judgment: X divided for its madness cost, four players",
+    board({
+      you: { bf: ['Hell Mongrel', 'Mountain*4'], hand: ["Avacyn's Judgment"] },
+      opp: [{ bf: ['Grizzly Bears'] }, {}, { bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    "Avacyn's Judgment: 2 divided when cast for its mana cost",
+    board({
+      you: { bf: ['Mountain*2'], hand: ["Avacyn's Judgment"] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
   // --- An attack tax in Phyrexian mana (2026-11-06) --------------------------
   preset(
     "Norn's Annex: paying its {W/P} with life rather than your Plains",

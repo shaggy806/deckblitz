@@ -9,14 +9,18 @@
 
 import { describe, expect, it } from "vitest";
 
-import type { LegalAction } from "../actions.js";
+import type { Action, LegalAction } from "../actions.js";
+import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { maxXForTargets } from "../target-count.js";
-import { A, B, cast, lands, life, ref, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, cast, lands, life, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+
+type CastSpellOffer = Extract<LegalAction, { kind: "cast-spell" }>;
+type CastSpellAction = Extract<Action, { type: "cast-spell" }>;
 
 const castOffer = (game: Game, card: ObjectId) =>
-  game.legalActions(A).find((a): a is Extract<LegalAction, { kind: "cast-spell" }> => a.kind === "cast-spell" && a.card === card);
+  game.legalActions(A).find((a): a is CastSpellOffer => a.kind === "cast-spell" && a.card === card);
 const damage = (game: Game, id: ObjectId): number => game.state.objects[id].damageMarked;
 
 describe("Shatterskull Smashing: X, or twice X at 6 or more, divided among up to two", () => {
@@ -107,5 +111,76 @@ describe("Meteor Shower: X plus 1 divided among any number of targets", () => {
     lands(game, "Mountain", 1);
     cast(game, toHand(game, "Meteor Shower"), { x: 0, targets: [ref(bears)] });
     expect(damage(game, bears)).toBe(1);
+  });
+});
+
+describe("Avacyn's Judgment: 2 divided, or X if its madness cost was paid", () => {
+  /** Discards `card`; the seat answers madness's cast with what `cast`
+   * returns from the offer (or declines, for `null`). */
+  const discardWithMadness = (
+    game: Game,
+    seat: ScriptedController,
+    card: ObjectId,
+    cast: (offer: CastSpellOffer) => Omit<CastSpellAction, "type" | "player" | "card" | "via"> | null,
+  ): CastSpellOffer[] => {
+    const seen: CastSpellOffer[] = [];
+    seat.chooseCastNowFn = (_view, offer) => {
+      const way = offer.casts[0]!;
+      seen.push(way);
+      const answer = cast(way);
+      return answer === null ? null : { type: "cast-spell", player: seat.playerId, card: way.card, via: way.via, ...answer };
+    };
+    seat.chooseDiscardsFn = () => [card];
+    game.debugApplyEffect(A, { kind: "discard", target: "you", amount: 1 });
+    settle(game);
+    return seen;
+  };
+
+  it("cast for its mana cost: 2 divided, so no more than two targets", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    const elves = spawn(game, "Llanowar Elves", B);
+    lands(game, "Mountain", 2);
+    const card = toHand(game, "Avacyn's Judgment");
+    const offer = castOffer(game, card);
+    expect(offer?.divide?.total).toBe(2);
+    expect(offer?.divide?.totalByX).toBeUndefined();
+    expect(() =>
+      cast(game, card, { targets: [ref(bears), ref(giant), ref(elves)], division: [1, 1, 1] }),
+    ).toThrow();
+    cast(game, card, { targets: [ref(bears), ref(B)], division: [1, 1] });
+    expect(damage(game, bears)).toBe(1);
+    expect(life(game, B)).toBe(19);
+  });
+
+  it("discarded and cast for {X}{R}: X divided, offered at each X", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const giant = spawn(game, "Hill Giant", B);
+    lands(game, "Mountain", 5);
+    const card = toHand(game, "Avacyn's Judgment");
+    const seen = discardWithMadness(game, a, card, () => ({
+      xValue: 4,
+      targets: [ref(bears), ref(giant), ref(B)],
+      division: [2, 1, 1],
+    }));
+    expect(seen[0]?.divide?.totalByX).toEqual([0, 1, 2, 3, 4]);
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(damage(game, giant)).toBe(1);
+    expect(life(game, B)).toBe(19);
+    expect(zone(game, card)).toBe("graveyard");
+  });
+
+  it("for its madness cost, X 1 is 1, not 2: it can't be split in two", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Mountain", 3);
+    const card = toHand(game, "Avacyn's Judgment");
+    const seen = discardWithMadness(game, a, card, () => ({ xValue: 1, targets: [ref(bears)], division: [1] }));
+    // Two targets need X 2 at least: one point each (rule 601.2d).
+    expect(seen[0]?.xCost?.minXByTargetCount?.slice(0, 3)).toEqual([0, 1, 2]);
+    expect(damage(game, bears)).toBe(1);
+    expect(life(game, B)).toBe(20);
   });
 });

@@ -6166,10 +6166,11 @@ export class Game {
       const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
       // A divided total that reads X ("X plus 1"): one per X, which bounds
       // the number of targets as "up to X" does — at least 1 each.
+      const castFor = this.ownAlternativeCostPaid(def, player, card, via, altCost === true) ?? "none";
       const totalByX =
         def.divided === null || payableX === undefined
           ? undefined
-          : this.dividedTotalsByX(def.divided, card, player, payableX);
+          : this.dividedTotalsByX(def.divided, card, player, payableX, castFor);
       const xGroup =
         payableX !== undefined && targetCount === undefined && (groupReadsX(specs) || totalByX !== undefined)
           ? this.xGroupOffer(specs, options, payableX, xFloor, totalByX)
@@ -6179,7 +6180,8 @@ export class Game {
       // A divided total read as it would be cast (rule 601.2d), capping its
       // group at one target per point — an X total waits for the X chosen,
       // and one read from X caps at the most any X gives.
-      const dividedAtZero = def.divided === null ? undefined : this.dividedNow(def.divided, card, player, undefined);
+      const dividedAtZero =
+        def.divided === null ? undefined : this.dividedNow(def.divided, card, player, undefined, undefined, castFor);
       const divide =
         dividedAtZero === undefined || totalByX === undefined ? dividedAtZero : { ...dividedAtZero, totalByX };
       const capDivide =
@@ -23503,12 +23505,7 @@ export class Game {
     // Which of its own alternative costs this is, for "if the {2}{R}{R} cost
     // was paid" (rule 118.9) and "if this spell's madness cost was paid"
     // (702.35b), while the offer that says so can still be read.
-    const paidCost: "printed" | "madness" | undefined =
-      altCost && def.alternativeCost !== null && this.ownAltCost(def) !== null
-        ? "printed"
-        : via === "effect" && this.castNowOffer(player, cardId)?.madness !== undefined
-          ? "madness"
-          : undefined;
+    const paidCost = this.ownAlternativeCostPaid(def, player, cardId, via, altCost);
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant, modes);
     // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
     // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
@@ -23596,7 +23593,7 @@ export class Game {
     const chosenDivision =
       def.divided === null
         ? undefined
-        : spellDivision(this.dividedNow(def.divided, cardId, player, chosenX), targets, division);
+        : spellDivision(this.dividedNow(def.divided, cardId, player, chosenX, undefined, paidCost ?? "none"), targets, division);
     if (typeof chosenDivision === "string") throw new Error(`${def.name}: ${chosenDivision}`);
 
     const castingFromCommand = this.isCastableCommander(player, cardId);
@@ -38468,12 +38465,18 @@ export class Game {
      * paid: "unattached" }` (Captain America's "that Equipment's mana
      * value"). */
     unattached?: ObjectId,
+    /** A spell being cast: which of its own alternative costs it's cast for
+     * (`ownAlternativeCostPaid`, `"none"` for its mana cost), which it
+     * hasn't recorded yet — Avacyn's Judgment's "X … instead" if its
+     * madness cost was paid. */
+    castFor?: "printed" | "madness" | "none",
   ): Omit<D, "total"> & { readonly total: number } {
     if (divided.x === true) return { ...divided, total: x ?? 0 };
     if (typeof divided.total === "number") return { ...divided, total: divided.total };
     const refs: LastKnownRefs =
       unattached === undefined ? {} : { sets: addToSet(undefined, { paid: "unattached" }, this.paidMembers("unattached", [unattached])) };
-    const ctx = this.makeResolutionContext(source, controller, [], x ?? 0, 0, undefined, 1, 0, [], refs);
+    const ctx = this.makeResolutionContext(source, controller, [], x ?? 0, 0, undefined, 1, 0, [], refs,
+      castFor === undefined ? {} : { castFor });
     return { ...divided, total: Math.max(0, amountValue(divided.total, ctx)) };
   }
 
@@ -38488,9 +38491,13 @@ export class Game {
     card: ObjectId,
     player: PlayerId,
     payableX: number,
+    castFor: "printed" | "madness" | "none",
   ): number[] | undefined {
     if (divided.x === true || typeof divided.total === "number") return undefined;
-    const totals = Array.from({ length: payableX + 1 }, (_v, x) => this.dividedNow(divided, card, player, x).total);
+    const totals = Array.from(
+      { length: payableX + 1 },
+      (_v, x) => this.dividedNow(divided, card, player, x, undefined, castFor).total,
+    );
     return totals.every((t) => t === totals[0]) ? undefined : totals;
   }
 
@@ -38909,6 +38916,10 @@ export class Game {
       /** Where "this way" starts, for a mana ability whose first instruction
        * waited on a decision (`Game.manaRevealFirst`). */
       readonly since?: number;
+      /** The source is a spell being cast for this alternative cost of its
+       * own, or `"none"` (`Game.dividedNow`'s): `self-alternative-cost-paid`
+       * reads it, as the spell hasn't recorded it yet. */
+      readonly castFor?: "printed" | "madness" | "none";
     } = {},
   ): ResolutionContext {
     const refs = lastKnownRefs;
@@ -39622,6 +39633,11 @@ export class Game {
       if (condition.kind === "not") return !conditionMet(condition.of);
       if (condition.kind === "all") return condition.of.every(conditionMet);
       if (condition.kind === "any") return condition.of.some(conditionMet);
+      // A spell being cast, read before it records which cost it was cast
+      // for (Avacyn's Judgment's total, divided as it's cast — 601.2d).
+      if (condition.kind === "self-alternative-cost-paid" && opts.castFor !== undefined) {
+        return opts.castFor === (condition.madness === true ? "madness" : "printed");
+      }
       // Resolution happens outside the layer fold, so the source can count
       // itself ("if creatures you control have total power 10 or greater"
       // includes the creature asking) without recursing.
@@ -59872,6 +59888,24 @@ controlledBy,
    * any later entry is a granted one (or another opponent to gain the life). */
   private ownAltCost(def: CardDefinition): CardDefinition["alternativeCost"] {
     return (this.altCostPick ?? 0) === 0 ? def.alternativeCost : null;
+  }
+
+  /** Which of its own alternative costs a spell is cast for, as the
+   * `self-alternative-cost-paid` condition reads it once it's cast: its
+   * printed one, "if the {2}{R}{R} cost was paid" (rule 118.9), or its
+   * madness cost, "if this spell's madness cost was paid" (702.35b) — or
+   * `undefined` for neither. Read while the offer that says so can still be,
+   * and as the cast is worked out, before the spell records it: a total
+   * divided as it's cast reads it (Avacyn's Judgment, rule 601.2d). */
+  private ownAlternativeCostPaid(
+    def: CardDefinition,
+    player: PlayerId,
+    card: ObjectId,
+    via: CastVia | undefined,
+    altCost: boolean,
+  ): "printed" | "madness" | undefined {
+    if (altCost && def.alternativeCost !== null && this.ownAltCost(def) !== null) return "printed";
+    return via === "effect" && this.castNowOffer(player, card)?.madness !== undefined ? "madness" : undefined;
   }
 
   /** Run `fn` judging or paying the `index`th of a card's alternative costs. */

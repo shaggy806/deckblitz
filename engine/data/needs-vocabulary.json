@@ -14992,6 +14992,11 @@
    "description": "An activated ability's divided has no x: true, and a total of 'x' is read at X 0 in the offer whenever X varies, capping the group at no targets.",
    "example": "Huatli, Warrior Poet"
   },
+  "effect:divided-total-by-alternative-cost": {
+   "family": "effect:divide-among-targets",
+   "description": "A spell's divided total read as it's cast (rule 601.2d) asks which of its own costs it's cast for before the spell records it: 'X instead if its madness cost was paid'.",
+   "example": "Avacyn's Judgment"
+  },
   "effect:divided-total-by-kicker": {
    "family": "effect:prevention-divided",
    "description": "The kicker takes targets and effect but no divided, and the offer's total is read before kicked is known.",
