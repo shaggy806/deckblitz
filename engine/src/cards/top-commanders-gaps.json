@@ -2935,7 +2935,8 @@
   "effect:exile-library-face-down",
   "effect:exile-library-face-down",
   "effect:return-exiled-with-counter",
-  "static:grant-jump-start-to-graveyard-cards"
+  "static:grant-jump-start-to-graveyard-cards",
+  "filter:has-unearth"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
