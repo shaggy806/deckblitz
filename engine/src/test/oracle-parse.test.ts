@@ -7127,6 +7127,28 @@ describe("counters of chosen kinds removed (remove-counters, a target's orPlayer
   });
 });
 
+describe("a discard for each card drawn unless a permanent is sacrificed (Read the Runes)", () => {
+  it("reads the sacrifices chosen up to the cards drawn, then the rest discarded", () => {
+    const runes = parseFace(
+      {
+        name: "Read the Runes",
+        type_line: "Instant",
+        oracle_text: "Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(runes.complete).toBe(true);
+    expect(runes.effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: "x" },
+        { kind: "choose-permanents", filter: { controlledBy: "you" }, upTo: { thisWay: "drawn" }, then: { kind: "sacrifice-target", target: 0 } },
+        { kind: "discard", target: "you", amount: { difference: [{ thisWay: "drawn" }, { thisWay: "sacrificed" }] } },
+      ],
+    });
+  });
+});
+
 describe("energy paid in an amount the player chooses (costEnergyX)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

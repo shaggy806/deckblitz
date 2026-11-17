@@ -11632,6 +11632,25 @@ export function parseEffect(text, outer) {
     }
     // A choice among the spell's own targets as it resolves (Incriminate,
     // Barrin's Spite): two or three sentences, one `choose-among-targets`.
+    // "For each card drawn this way, discard a card unless you sacrifice a
+    // permanent." (Read the Runes): its ruling's order — the sacrifices
+    // chosen, up to one a card drawn, then the rest of the count discarded.
+    if (/^for each card drawn this way, discard a card unless you sacrifice a permanent\.$/i.test(sentence)) {
+      for (const effect of [
+        {
+          kind: "choose-permanents",
+          filter: { controlledBy: "you" },
+          upTo: { thisWay: "drawn" },
+          then: { kind: "sacrifice-target", target: 0 },
+          prompt: "Sacrifice any number of permanents, up to one for each card drawn — discard a card for each you don't",
+        },
+        { kind: "discard", target: "you", amount: { difference: [{ thisWay: "drawn" }, { thisWay: "sacrificed" }] } },
+      ]) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
+      continue;
+    }
     // A removal of counters and "that many" after it (`countersRemovedAt`).
     const removedThen = countersRemovedAt(sentences, i, ctx);
     if (removedThen !== null) {

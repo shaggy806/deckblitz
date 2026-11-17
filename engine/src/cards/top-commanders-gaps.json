@@ -2813,7 +2813,9 @@
   "amount:creatures-dealt-combat-damage-to-player-this-turn",
   "trigger:reveal-this-way-reflexive",
   "effect:copy-counter-kinds-just-put",
-  "effect:remove-counters-from-among"
+  "effect:remove-counters-from-among",
+  "effect:remove-counters-from-among",
+  "effect:discard-unless-sacrifice-per-card"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
