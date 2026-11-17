@@ -3843,6 +3843,15 @@ export function parseSentence(sentence, ctx) {
   if ((m = sentenceRe(`amass ([A-Z][a-z]+) X, where X is that excess damage`).exec(s))) {
     return { kind: "amass", amount: { triggerValue: true }, creatureType: m[1].replace(/ves$/, "f").replace(/s$/, "") };
   }
+  // "You get X {E}, where X is that excess damage" after "if that creature was
+  // dealt excess damage this turn" (Overclocked Electromancer): the
+  // recipient's excess this turn, from every source.
+  if (ctx?.excessRecipient === true && sentenceRe(`you get X \\{E\\}, where X is that excess damage`).test(s)) {
+    return {
+      kind: "get-energy",
+      amount: { damageDealtThisTurn: true, who: "each-player", to: "trigger-recipient", excess: true },
+    };
+  }
   // "A creature spell": one cast, then it's used up (Chainer's ruling).
   if (sentenceRe(`you may cast a creature spell from your graveyard this turn`).test(s)) {
     return { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "graveyard", filter: { type: "creature" }, upTo: 1 } };
@@ -7607,6 +7616,13 @@ export function parseSentence(sentence, ctx) {
     if (target === undefined) return null;
     const restriction = { attack: "cant-attack", block: "cant-block", "be blocked": "cant-be-blocked" }[m[2].toLowerCase()];
     return { kind: "restrict", target, restrictions: [restriction], duration: "until-end-of-combat" };
+  }
+  // "Double its power until end of turn" (Overclocked Electromancer, Wolverine,
+  // Claws Out): +X/+0, X its power as this resolves (the rulings).
+  if ((m = re(`double (~'s|its) power until end of turn`).exec(s))) {
+    const target = m[1] === "~'s" ? "source" : ctx?.targets.length === 0 ? ctx.it : undefined;
+    if (target !== "source" && target !== "trigger-object") return null;
+    return { kind: "modify-pt", target, power: { powerOf: target, doubling: true }, toughness: 0, duration: "end-of-turn" };
   }
   if ((m = re(`~ gains (banding|first strike|flying|trample|vigilance) until end of combat`).exec(s))) {
     return { kind: "grant-keyword", target: "source", keyword: m[1].toLowerCase().replace(" ", "-"), duration: "until-end-of-combat" };
@@ -13956,6 +13972,17 @@ function exiledCardPickAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "You may pay {E}{E}{E}. If you do, put a +1/+1 counter on this creature."
+  // (Overclocked Electromancer, Thriving Rhino): energy paid as it resolves.
+  const payEnergy = /^you may pay ((?:\{E\})+)\.$/i.exec(first);
+  if (payEnergy !== null && done !== null) {
+    const effect = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    if (effect === null || containsUndefined(effect)) return null;
+    return {
+      effect: { kind: "may", prompt: `Pay ${payEnergy[1]}?`, costEnergy: payEnergy[1].length / 3, effect },
+      used: 2,
+    };
+  }
   // "You may pay 2 life. If you do, draw a card." (Sanguine Spy).
   const payLife = /^you may pay (\d+) life\.$/i.exec(first);
   if (payLife !== null && done !== null) {
@@ -18948,6 +18975,14 @@ function parseFaceAsWritten(face, ctx = {}) {
           // self half of "this or another" too).
           if (departedOf(triggers) === "source") base.condition = { kind: "self-counters", compare: { op: "gte", n: 1 } };
           else triggers = triggers.map((t) => ({ ...t, filter: { ...t.filter, counters: { compare: { op: "gte", n: 1 } } } }));
+        } else if (
+          clause.toLowerCase() === "if that creature was dealt excess damage this turn," &&
+          triggers.every((t) => t.on === "deals-damage" && t.to === "creature")
+        ) {
+          // "Whenever ~ deals damage to a creature, if that creature was dealt
+          // excess damage this turn" (Maarika, Overclocked Electromancer): the
+          // recipient's, asked once the whole event is dealt (rule 120.10).
+          triggers = triggers.map((t) => ({ ...t, toFilter: { ...t.toFilter, excessDamageThisTurn: true } }));
         } else if (clause.toLowerCase() === "if it's not their turn," && triggers.every((t) => t.on === "draws")) {
           // "Whenever an opponent draws …, if it's not their turn": the
           // drawing player's turn (Zurzoth, Chaos Rider).
@@ -19006,6 +19041,10 @@ function parseFaceAsWritten(face, ctx = {}) {
             : {}),
           // "One of them": the sources of a batched damage trigger.
           ...(triggers.every((t) => t.on === "deals-damage-batch") ? { damageBatch: true } : {}),
+          // "That excess damage": what the recipient was dealt past lethal.
+          ...(triggers.every((t) => t.on === "deals-damage" && t.toFilter?.excessDamageThisTurn === true)
+            ? { excessRecipient: true }
+            : {}),
           // "A card you put into your graveyard this way": the cards the
           // manifest dread put there, its batch.
           ...(triggers.every((t) => t.on === "event" && t.event === "manifests-dread") ? { dreadBatch: true } : {}),
@@ -20709,6 +20748,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(ctx.attackBatch === true ? { attackBatch: true } : {}),
     ...(ctx.damageBatch === true ? { damageBatch: true } : {}),
     ...(ctx.dreadBatch === true ? { dreadBatch: true } : {}),
+    ...(ctx.excessRecipient === true ? { excessRecipient: true } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });
   if (r.effect !== null && theirSlots !== undefined && theirSlots.length > 0) ability.opponentChoosesTargets = theirSlots;

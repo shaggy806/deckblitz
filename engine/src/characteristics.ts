@@ -2147,6 +2147,8 @@ export function damageDealtThisTurn(
      * each stint its own source, and an entry a token stack dealt as one
      * (`count`, its tokens each dealing a share) read as one token's. */
     readonly oneSource?: true;
+    /** Only the excess part of each (the entry's `excess`, rule 120.4a). */
+    readonly excess?: true;
   } = {},
 ): number {
   let n = 0;
@@ -2169,7 +2171,8 @@ export function damageDealtThisTurn(
     if (by?.name !== undefined && dealt.was?.name !== by.name) continue;
     if (by?.other === true && dealt.object === read.source) continue;
     // One source's: a token of a stack that dealt it as one dealt its share.
-    const share = read.from !== undefined || bySource !== undefined ? (dealt.amount ?? 0) / (dealt.count ?? 1) : (dealt.amount ?? 0);
+    const dealtAmount = read.excess === true ? (dealt.excess ?? 0) : (dealt.amount ?? 0);
+    const share = read.from !== undefined || bySource !== undefined ? dealtAmount / (dealt.count ?? 1) : dealtAmount;
     if (bySource !== undefined) {
       const key = `${dealt.object}@${dealt.stint ?? ""}`;
       bySource.set(key, (bySource.get(key) ?? 0) + share);

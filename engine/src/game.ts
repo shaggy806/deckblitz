@@ -2580,6 +2580,16 @@ export class Game {
       string,
       { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number; exactlyHit?: boolean }
     >;
+    /** `deals-damage` triggers whose `toFilter` asks whether the recipient
+     * was dealt excess damage this turn: asked as the batch settles, once
+     * every source dealing damage at once has dealt it (rule 120.10). */
+    readonly excessChecks: {
+      ability: TriggeredAbility;
+      trigger: PendingTrigger;
+      multiplier: number;
+      recipient: ObjectId;
+      excess: boolean;
+    }[];
   } | null = null;
 
   /** `counters-put` triggers owed for the simultaneous placement under way
@@ -35274,6 +35284,16 @@ export class Game {
             }
             return;
           }
+          // "If that creature was dealt excess damage this turn" is asked
+          // once every source dealing damage at once has dealt it (rule
+          // 120.10): the rest of `toFilter` was asked now, that part as the
+          // batch settles.
+          const excessAsked =
+            ability.trigger.on === "deals-damage" ? ability.trigger.toFilter?.excessDamageThisTurn : undefined;
+          if (excessAsked !== undefined && damageBatch !== null && event.type === "damage-dealt" && event.target.kind === "object") {
+            damageBatch.excessChecks.push({ ability, trigger: base, multiplier, recipient: event.target.object, excess: excessAsked });
+            return;
+          }
           this.queueTrigger(ability, base, multiplier);
         }
       });
@@ -37638,7 +37658,13 @@ export class Game {
               : recipient.lastKnown?.toughness;
         if (toughness === undefined || event.amount / (event.sources ?? 1) !== toughness) return false;
       }
-      if (!this.triggerFilterOk(spec.toFilter, target.object, self)) return false;
+      // Inside a damage batch, whether it was dealt excess damage waits for
+      // the batch to settle (`excessChecks`, rule 120.10).
+      const toFilter =
+        this.damageBatch !== null && spec.toFilter?.excessDamageThisTurn !== undefined
+          ? (({ excessDamageThisTurn: _asLater, ...rest }) => rest)(spec.toFilter)
+          : spec.toFilter;
+      if (!this.triggerFilterOk(toFilter, target.object, self)) return false;
     }
     if (spec.toItsTarget === true) {
       if (source === undefined || source.zone !== "stack" || source.kind !== "card") return false;
@@ -40566,10 +40592,21 @@ export class Game {
         // last existed once it has left.
         const stint =
           refs.source ?? departedSource()?.zoneChangeCount ?? this.state.objects[source]?.zoneChangeCount ?? 0;
+        // "To that creature": the triggering event's recipient, in the stint
+        // it was dealt the damage in; nothing outside such a trigger.
+        const recipient = read?.to === "trigger-recipient" ? refs.recipient : undefined;
+        if (read?.to === "trigger-recipient" && recipient === undefined) return 0;
         return damageDealtThisTurn(this.state, players, combat, colors, {
           ...(read?.to === "you" ? { to: { kind: "player" as const, player: controller } } : {}),
           ...(read?.to === "source" ? { to: { kind: "object" as const, object: source }, toStint: stint } : {}),
+          ...(recipient !== undefined
+            ? {
+                to: recipient.target,
+                ...(recipient.target.kind === "object" ? { toStint: recipient.zoneChangeCount ?? 0 } : {}),
+              }
+            : {}),
           ...(read?.by !== undefined ? { by: read.by, source } : {}),
+          ...(read?.excess === true ? { excess: true as const } : {}),
         });
       },
       // The opponents attacked as attackers were declared this combat
@@ -64013,6 +64050,7 @@ controlledBy,
         string,
         { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number; exactlyHit?: boolean }
       >(),
+      excessChecks: [] as NonNullable<Game["damageBatch"]>["excessChecks"],
     };
     this.damageBatch = batch;
     try {
@@ -64041,6 +64079,12 @@ controlledBy,
           : undefined;
       return atLeast === undefined || (trigger.triggerValue ?? 0) >= atLeast;
     };
+    // Each in the order it was dealt, now every source has dealt its part.
+    for (const { ability, trigger, multiplier, recipient, excess } of batch.excessChecks) {
+      if (matchesFilter(this.state, this.registry, recipient, { excessDamageThisTurn: excess }, { you: trigger.controller })) {
+        this.queueTrigger(ability, trigger, multiplier);
+      }
+    }
     for (const { ability, trigger, multiplier } of batch.dealtDamage.values()) {
       if (enough(ability, trigger)) this.queueTrigger(ability, trigger, multiplier);
     }

@@ -2827,7 +2827,9 @@
   "effect:reveal-until-two-cast-one-hand-one",
   "zone:graveyard-static",
   "zone:play-from-graveyard-your-turn",
-  "effect:delayed-trigger-next-activation"
+  "effect:delayed-trigger-next-activation",
+  "effect:delayed-trigger-next-activation",
+  "amount:excess-damage-of-trigger-event"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

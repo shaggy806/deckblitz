@@ -19893,6 +19893,44 @@ describe("a cost's X defined by the ability", () => {
   });
 });
 
+describe("excess damage to a creature this turn, and energy paid", () => {
+  it("reads Overclocked Electromancer whole", () => {
+    const face = parseFace({
+      name: "Test Electromancer",
+      type_line: "Creature — Lizard Wizard",
+      power: "2",
+      toughness: "2",
+      oracle_text:
+        "At the beginning of combat on your turn, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on this creature.\nWhenever this creature attacks, double its power until end of turn.\nWhenever this creature deals combat damage to a creature, if that creature was dealt excess damage this turn, you get X {E}, where X is that excess damage.",
+    });
+    expect(face.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Pay {E}{E}{E}?",
+      costEnergy: 3,
+      effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+    });
+    expect(face.triggered[1].effect).toEqual({
+      kind: "modify-pt",
+      target: "source",
+      power: { powerOf: "source", doubling: true },
+      toughness: 0,
+      duration: "end-of-turn",
+    });
+    expect(face.triggered[2].trigger).toEqual({
+      on: "deals-damage",
+      who: "self",
+      to: "creature",
+      combat: true,
+      toFilter: { excessDamageThisTurn: true },
+    });
+    expect(face.triggered[2].effect).toEqual({
+      kind: "get-energy",
+      amount: { damageDealtThisTurn: true, who: "each-player", to: "trigger-recipient", excess: true },
+    });
+    for (const t of face.triggered) expect(t.__todo).toBeUndefined();
+  });
+});
+
 describe("the next loyalty ability copied", () => {
   it("reads Jaya's Phoenix's delayed copy, once for a player and once for a planeswalker", () => {
     const face = parseFace({

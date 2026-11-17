@@ -1268,11 +1268,20 @@ export type EffectAmount =
       readonly colors?: readonly Color[];
       /** Only what was dealt to the effect's controller ("to you so far this
        * turn" — Reverse Polarity) or its source, in the stint this refers to
-       * ("to this creature this turn" — Blazing Effigy). Whoever controlled what
+       * ("to this creature this turn" — Blazing Effigy), or to the triggering
+       * event's recipient (`LastKnownRefs.recipient`, in the stint it was
+       * dealt the damage in — "that creature"). Whoever controlled what
        * dealt it is `who`: `"each-player"` is all of it. */
-      readonly to?: "you" | "source";
+      readonly to?: "you" | "source" | "trigger-recipient";
       /** Only by these sources, as they were as they dealt it. */
       readonly by?: DamageSourceClause;
+      /** Only the excess part of it (rule 120.4a — the journal's damage
+       * entry's `excess`): Overclocked Electromancer's "if that creature was
+       * dealt excess damage this turn, you get X {E}, where X is **that excess
+       * damage**" (`to: "trigger-recipient"`). Sources dealing damage at once
+       * share it out, but their excess sums to what they dealt together past
+       * lethal damage (rule 120.10). */
+      readonly excess?: true;
     }
   | {
       readonly thisWay: ThisWayKind;
@@ -12638,7 +12647,11 @@ export interface EffectApi {
     players: readonly PlayerId[],
     combat?: boolean,
     colors?: readonly Color[],
-    read?: { readonly to?: "you" | "source"; readonly by?: DamageSourceClause },
+    read?: {
+      readonly to?: "you" | "source" | "trigger-recipient";
+      readonly by?: DamageSourceClause;
+      readonly excess?: true;
+    },
   ): number;
   /** See the `{ turnHistory }` {@link EffectAmount}: a journal read. */
   journalCount(
@@ -17315,6 +17328,7 @@ export function signedAmountValue(
     return ctx.damageDealtThisTurn(players, amount.combat, amount.colors, {
       ...(amount.to !== undefined ? { to: amount.to } : {}),
       ...(amount.by !== undefined ? { by: amount.by } : {}),
+      ...(amount.excess === true ? { excess: true as const } : {}),
     });
   }
   if ("turnHistory" in amount) {
