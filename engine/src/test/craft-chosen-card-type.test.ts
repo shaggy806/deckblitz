@@ -14,6 +14,7 @@ import { matchesFilter } from "../filter.js";
 import type { ObjectId } from "../primitives.js";
 import { printedCardName } from "../state.js";
 import type { Game } from "../game.js";
+import { completeTogether } from "../zone-choice-together.js";
 import { A, activate, cast, lands, named, pickFromZone, registryOf, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
 /** Craft the Eye with `materials` (cards in A's graveyard or permanents),
@@ -77,6 +78,35 @@ describe("Apex Observatory: a card type shared among the exiled cards used to cr
     untap(game, eye);
     activate(game, eye, 0);
     expect(() => cast(game, toHand(game, "Mind Stone"), { altCost: true })).toThrow(/cost|alternative|free/i);
+  });
+});
+
+describe("craft with two that share a card type: a pick that can't share", () => {
+  it("is rebuilt round a type enough materials share (situation fuzzer, seed 5)", () => {
+    const { game, a } = table();
+    lands(game, "Wastes", 6);
+    const eye = spawn(game, "Eye of Ojer Taq");
+    const spear = spawn(game, "Lightning Spear");
+    const offered: string[][] = [];
+    a.chooseCreatureTypeFn = (_view, _source, options) => {
+      offered.push([...options]);
+      return options[0];
+    };
+    // An artifact no other material shares a type with, and a land.
+    a.chooseFromZoneFn = (_view, eligible) => [
+      spear,
+      eligible.find((id) => game.state.objects[id]?.cardName === "Wastes")!,
+    ];
+    activate(game, eye, 1);
+    expect(printedCardName(game.state.objects[eye])).toBe("Apex Observatory");
+    expect(zone(game, spear)).toBe("battlefield");
+    expect(offered).toEqual([["land"]]);
+  });
+
+  it("completeTogether keeps a preferred card's shared tag only where enough cards have it", () => {
+    const together = { rule: "share" as const, tags: { a: ["artifact"], b: ["land"], c: ["land"] }, text: "two that share a card type" };
+    const ids = ["a", "b", "c"] as unknown as ObjectId[];
+    expect(completeTogether(together, [ids[0], ids[1]], ids, 2, 2)).toEqual([ids[1], ids[2]]);
   });
 });
 

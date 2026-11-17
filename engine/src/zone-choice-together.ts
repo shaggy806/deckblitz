@@ -322,5 +322,16 @@ export function completeTogether(
     if (kept.includes(id) || !eligible.includes(id)) continue;
     if (fitsTogether(together, [...kept, id])) kept.push(id);
   }
+  // "Two that share a card type" (Eye of Ojer Taq's craft): the first card
+  // kept may share a tag with too few others — an artifact beside lands — so
+  // the set is built round a tag enough cards have instead, the preferred
+  // cards' tags first, never left short of `min`.
+  if (kept.length < min && together.rule === "share") {
+    const order = [...new Set([...preferred, ...eligible])].filter((id) => eligible.includes(id));
+    for (const tag of new Set(order.flatMap((id) => together.tags[id] ?? []))) {
+      const sharing = order.filter((id) => (together.tags[id] ?? []).includes(tag));
+      if (sharing.length >= min) return sharing.slice(0, want);
+    }
+  }
   return kept;
 }
