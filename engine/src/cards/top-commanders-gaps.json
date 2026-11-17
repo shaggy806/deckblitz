@@ -1128,6 +1128,7 @@
   "keyword:ninjutsu",
   "effect:cast-any-number-from-exiled",
   "effect:cast-copies-of-exiled",
+  "effect:choose-exiled-card-cast-copies",
   "effect:cast-copy-of-card",
   "effect:cast-now-library-top-amount",
   "effect:copy-card-and-cast",
