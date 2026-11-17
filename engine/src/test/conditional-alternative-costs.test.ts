@@ -305,6 +305,22 @@ describe("if this spell's madness cost was paid", () => {
     expect(zombies.every((id) => game.state.objects[id].tapped)).toBe(true);
   });
 
+  it("From Under the Floorboards: its madness offer carries the X of {X}{B}{B}", () => {
+    // The offer read X off the mana cost, {3}{B}{B}, which has none: a
+    // player was never asked for X.
+    const { game, a } = table();
+    lands(game, "Swamp", 4);
+    const card = toHand(game, "From Under the Floorboards");
+    let maxX: number | undefined;
+    a.chooseCastNowFn = (_view, offer) => {
+      maxX = offer.casts[0]?.xCost?.maxX;
+      return null;
+    };
+    discardOne(game, a, card);
+    expect(maxX).toBe(2);
+    expect(zone(game, card)).toBe("graveyard");
+  });
+
   it("cast for its mana cost: three, and 3 life", () => {
     const { game } = table();
     lands(game, "Swamp", 5);

@@ -5576,9 +5576,16 @@ export class Game {
       // A splice variant is priced and targeted with its spliced cards'.
       const undoSplice = this.enterSplice(card, face ?? 0, splice);
       try {
+      // Madness's cost (rule 702.35b), miracle's (702.94a) and a fixed
+      // `byPaying`, as `castCostString` reads them: an {X} in one is
+      // announced (107.3), so the offer carries its X (From Under the
+      // Floorboards' {X}{B}{B}).
+      const offeredCost = altOffer?.madness ?? altOffer?.miracle ?? altOffer?.byPaying;
       const printedOrPrototype =
         altOffer?.suspendCost === true
           ? (def.suspend?.cost ?? null)
+          : offeredCost !== undefined
+            ? offeredCost
           : prototype === true && def.prototype !== null && costString === def.manaCost ? def.prototype.cost : costString;
       /** Whether this variant can be cast with `targetCount` distinct
        * targets, and whether mana alone pays for it. */

@@ -52,6 +52,20 @@ describe("Avacyn Restored batch 1 — miracle cards, and the scoping fix", () =>
     expect(tokensNamed(game, "4/4 Angel Token", A)).toBe(2);
   });
 
+  it("its miracle offer's X is the miracle cost's, not the mana cost's {X}{X}", () => {
+    // Four Plains pay {X}{W}{W} at X 2; read off {X}{X}{W}{W}{W}, X was 0.
+    const { game, a } = table();
+    lands(game, "Plains", 4);
+    toLibrary(game, "Entreat the Angels");
+    let maxX: number | undefined;
+    a.chooseCastNowFn = (_view, offer) => {
+      maxX = offer.casts[0]?.xCost?.maxX;
+      return null;
+    };
+    drawFirst(game);
+    expect(maxX).toBe(2);
+  });
+
   it("Metamorphosis Fanatic for {1}{B} returns a creature card with a lifelink counter", () => {
     const { game, a } = table();
     lands(game, "Swamp", 2);
