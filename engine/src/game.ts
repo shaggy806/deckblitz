@@ -15925,6 +15925,9 @@ export class Game {
     // (`gainsIf`) never reaches it.
     const landTerms = graveyardTerms ?? underPermission?.terms;
     const gainsTriggered = landTerms?.gainsIf === undefined ? landTerms?.gainsTriggered : undefined;
+    // "Whenever you play a land or cast a spell this way" (Apple of Eden,
+    // Isu Relic): a land played under the permission triggers it too.
+    const whenPlayed = landTerms?.whenCast?.lands === true ? landTerms.whenCast : undefined;
     this.finishLandPlay({
       kind: "land",
       object: cardId,
@@ -15933,8 +15936,37 @@ export class Game {
       ...(tapped ? { tapped: true as const } : {}),
       ...(gainsTriggered !== undefined ? { gainsTriggered } : {}),
       ...(playedUnder !== undefined ? { permission: playedUnder } : {}),
+      ...(whenPlayed !== undefined ? { whenPlayed } : {}),
     });
     this.afterPlayerAction(player);
+  }
+
+  /** A permission's "whenever you play a land or cast a spell this way"
+   * (`whenCast` with `lands` — Apple of Eden, Isu Relic) for the land `land`
+   * that `player` just played under it: the effect's delayed triggered
+   * ability (rule 603.7), set up and triggered at once, the land its trigger
+   * object — only for the player the permission was given to by that effect's
+   * controller, as `whenCast` is for a spell. */
+  private triggerWhenPlayed(whenCast: NonNullable<PlayTerms["whenCast"]>, player: PlayerId, land: ObjectId): void {
+    const by = whenCast.by;
+    if (by === undefined || by.controller !== player) return;
+    const before = this.state.delayedTriggers.length;
+    this.createDelayedTrigger(by.id, player, { nextSpell: {} }, whenCast.effect, whenCast.text, [], [], {
+      refs: { source: by.zoneChangeCount },
+    });
+    const made = this.state.delayedTriggers[before];
+    if (made === undefined) return;
+    this.state.delayedTriggers.splice(before, 1);
+    if (!this.delayedIfHolds(made, land)) return;
+    this.state.pendingTriggers.push({
+      sourceObjectId: made.source,
+      cardName: made.sourceName,
+      abilityIndex: 0,
+      controller: made.controller,
+      triggerObject: land,
+      lastKnownRefs: { triggerObject: this.state.objects[land]?.zoneChangeCount ?? 0 },
+      delayed: made,
+    });
   }
 
   /**
@@ -15984,6 +16016,9 @@ export class Game {
       ...(entry.permission !== undefined ? { permission: entry.permission } : {}),
       ...(exiledWith !== undefined ? { exiledWith } : {}),
     });
+    // "Whenever you play a land … this way": the permission's delayed
+    // triggered ability (rule 603.7) triggers on this land, now played.
+    if (entry.whenPlayed !== undefined) this.triggerWhenPlayed(entry.whenPlayed, player, cardId);
     // Lake of the Dead that wasn't paid for never entered (`EnterInstead`).
     if (entered) this.emit({ type: "permanent-entered-battlefield", object: cardId });
   }
@@ -41377,7 +41412,9 @@ export class Game {
             src.exiledWithCount = { stint, count: sofar + exiled.length };
           }
         }
-        if (faceDown === true) this.turnExiledFaceDown(exiled, [], since);
+        // Face down, nobody looking — or, having looked, the effect's
+        // controller, who may go on looking (rule 406.3).
+        if (faceDown !== undefined) this.turnExiledFaceDown(exiled, faceDown === "looked" ? [controller] : [], since);
       },
       sacrificeAll: (players, filter) => {
         // Every one at once, nobody choosing (rule 603.10a — each one's dies

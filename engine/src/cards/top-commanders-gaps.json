@@ -2770,7 +2770,8 @@
   "trigger:combat-damage-to-owner",
   "condition:life-less-than-half-starting",
   "replacement:draw-replaced-by-discard-then-draw",
-  "bug:stacking-draw-replacements"
+  "bug:stacking-draw-replacements",
+  "effect:delayed-trigger-on-play-this-way"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

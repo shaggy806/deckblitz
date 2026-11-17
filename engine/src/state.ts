@@ -43,7 +43,7 @@ import type { DelayedStepWatch } from "./delayed-at.js";
 import type { Expiry, UntilCast, UntilPoint, WatchExpiry, WhileSource } from "./duration.js";
 import type { RollInProgress, RollRecord, RollShiftOption } from "./random-results.js";
 import type { ReplacementSpec } from "./replacements.js";
-import type { CardPlayPermission, CastNowTerms, EffectPlay, PlayedUnder } from "./play-permission.js";
+import type { CardPlayPermission, CastNowTerms, EffectPlay, PlayedUnder, PlayTerms } from "./play-permission.js";
 import type { Journal } from "./journal.js";
 import type { ObjectSets, SetMember } from "./object-sets.js";
 export type { JournalOrigin, JournalWhat } from "./journal.js";
@@ -5689,6 +5689,10 @@ export type PendingEntry =
       /** The permanent whose permission it's played under, for the
        * `land-played` event. */
       readonly permission?: PlayedUnder;
+      /** "Whenever you play a land or cast a spell this way" (the
+       * permission's `whenCast` with `lands` — Apple of Eden, Isu Relic):
+       * triggered as the land is played. */
+      readonly whenPlayed?: NonNullable<PlayTerms["whenCast"]>;
     }
   | {
       /** The answer to a `choose-from-zone` decision, not yet carried out

@@ -4553,8 +4553,12 @@ export type EffectSpec =
        * owner included: "target player exiles all cards from their hand face
        * down" (Suppress). `linked` is "the exiled cards" of Induced Amnesia's
        * other ability; a `delayed-trigger`'s `about: "exiled"` is "those
-       * cards" (Ignorant Bliss). They have no characteristics there (406.3a). */
-      readonly faceDown?: true;
+       * cards" (Ignorant Bliss). They have no characteristics there (406.3a).
+       * `"looked"`: "look at target opponent's hand and exile those cards face
+       * down" (Apple of Eden, Isu Relic — after a `look-at-hand`): the effect's
+       * controller may go on looking at them while they stay exiled (406.3),
+       * and play them under a permission that reaches them (406.3b). */
+      readonly faceDown?: true | "looked";
       /** "…**until this artifact leaves the battlefield**" (Idol of Endurance
        * — rule 610.3): nothing is exiled if the source has already left
        * (610.3b); when it leaves, each card goes back to its owner's graveyard,
@@ -13026,7 +13030,7 @@ export interface EffectApi {
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
-  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only", untilSourceLeaves?: boolean, faceDown?: true): void;
+  exileGraveyard(target: TargetRef, filter?: CardFilter, linked?: boolean, fromHand?: "also" | "only", untilSourceLeaves?: boolean, faceDown?: true | "looked"): void;
   /** See `exile`'s `fromHand`. */
   exileFromHand(card: ObjectId): void;
   /** Each of `players` sacrifices every permanent matching `filter` they

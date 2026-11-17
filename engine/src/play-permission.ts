@@ -153,6 +153,10 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside
  *   kept on the card only (`grant-play`, `impulse-exile`, an `exile`'s
  *   `mayPlay`), spells only: The Ruinous Powers' "when you cast a spell this
  *   way, its owner loses life equal to its mana value" is an `impulse-exile`'s.
+ *   With `lands`, a land played this way too: Apple of Eden, Isu Relic's
+ *   "until end of turn, whenever you play a land or cast a spell this way,
+ *   its owner draws a card" over a permission lasting the turn — one trigger
+ *   a card, as each card is played this way once (400.7).
  */
 export interface PlayTerms {
   readonly play?: boolean;
@@ -206,6 +210,10 @@ export interface PlayTerms {
   readonly whenCast?: {
     readonly effect: EffectSpec;
     readonly text: string;
+    /** "Whenever you **play a land or** cast a spell this way" (Apple of
+     * Eden, Isu Relic): a land played under the permission triggers it too,
+     * as it's played (rule 305.1), the land its trigger object. */
+    readonly lands?: true;
     /** Written by the engine as the permission is given, never authored:
      * the permanent whose effect gave it, in its stint then, and that
      * effect's controller — "you". */
