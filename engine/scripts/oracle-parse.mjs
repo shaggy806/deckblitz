@@ -1769,6 +1769,17 @@ export function parseCost(text) {
     ) {
       cost.collectEvidence = { totalManaValue: Number(m[2]), filter: graveyardKindOf(m[1]) };
     }
+    // "Exile any number of black cards from your graveyard with fifteen or
+    // more black mana symbols among their mana costs" (Baron Helmut Zemo):
+    // the same payment, each card counted by one color's mana symbols.
+    else if (
+      (m = /^Exile any number of (.+?) cards from your graveyard with (\d+|one|two|three|four|five|six|seven|eight|nine|ten|fifteen) or more (white|blue|black|red|green) mana symbols among their mana costs$/.exec(part)) &&
+      (COLOR_WORD[m[1]] !== undefined || graveyardKindOf(m[1]) !== null)
+    ) {
+      const atLeast = m[2] === "fifteen" ? 15 : numberOf(m[2]);
+      const filter = COLOR_WORD[m[1]] !== undefined ? { colors: [COLOR_WORD[m[1]]] } : graveyardKindOf(m[1]);
+      cost.collectEvidence = { totalManaSymbols: { color: COLOR_WORD[m[3]], atLeast }, filter };
+    }
     // "Collect evidence 3" (rule 701.59a — Forensic Researcher, Cryptex).
     else if ((m = /^Collect evidence (\d+)$/.exec(part))) cost.collectEvidence = Number(m[1]);
     // "Tap enchanted land" (Earthlore): the one permanent the source is on.

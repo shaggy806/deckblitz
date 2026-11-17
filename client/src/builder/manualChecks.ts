@@ -7577,6 +7577,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Baron Helmut Zemo: boasting with fifteen black mana symbols, three copies cast',
+    board({
+      you: {
+        bf: ['Baron Helmut Zemo'],
+        gy: [
+          'Sign in Blood',
+          'Hymn to Tourach',
+          'Necropotence',
+          'Phyrexian Obliterator',
+          'Dismember',
+          'Gray Merchant of Asphodel',
+          'Lightning Bolt',
+        ],
+      },
+    }),
+  ),
+  preset(
+    "Baron Helmut Zemo: fourteen black mana symbols aren't enough",
+    board({
+      you: {
+        bf: ['Baron Helmut Zemo'],
+        gy: ['Sign in Blood', 'Hymn to Tourach', 'Necropotence', 'Phyrexian Obliterator', 'Dismember', 'Deathrite Shaman', 'Lightning Bolt'],
+      },
+    }),
+  ),
+  preset(
     'Cenote Scout: exploring a nonland card',
     board({
       you: { bf: ['Forest'], hand: ['Cenote Scout'], lib: ['Hill Giant', 'Forest'] },

@@ -5623,7 +5623,12 @@ export type EffectSpec =
          * "cast a spell from among cards in exile with page counters on
          * them" — a spell cast from among another player's is the caster's
          * to control and its owner's still (rule 108.3). */
-        | { readonly exiledWithCounter: string };
+        | { readonly exiledWithCounter: string }
+        /** The members of a set still where the set found them (rule
+         * 400.7): "copy **those exiled cards**", the cards a cost exiled
+         * (Baron Helmut Zemo's boast, `{ set: { paid: "exiled" } }` with
+         * `copies`). Controlled by the caster, owned as before (rule 108.3). */
+        | { readonly set: ObjectSetRef };
       /**
        * "You may play lands and cast spells **from among** cards exiled this
        * way" — any number of them, one after another while this resolves
@@ -16825,6 +16830,12 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.exiledOwnedWithCounter(ctx.controller, from.exiledOwnedWithCounter);
     } else if (typeof from === "object" && "exiledWithCounter" in from) {
       cards = ctx.exiledOwnedWithCounter(undefined, from.exiledWithCounter);
+    } else if (typeof from === "object" && "set" in from) {
+      cards = [
+        ...new Set(
+          ctx.objectSet(from.set).flatMap((member) => (ctx.stintNow(member.object) === member.stint ? [member.object] : [])),
+        ),
+      ];
     } else {
       cards = typeof from === "object" ? looked : ctx.cardsIn(ctx.controller, from);
     }

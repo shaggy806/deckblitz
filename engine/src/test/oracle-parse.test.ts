@@ -19713,6 +19713,24 @@ describe("exiling cards with total mana value N or greater as a cost", () => {
       },
     });
   });
+
+  it("reads Baron Helmut Zemo's cost: fifteen or more black mana symbols among their mana costs", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human",
+      oracle_text:
+        "Exile any number of black cards from your graveyard with fifteen or more black mana symbols among their mana costs: Draw a card.",
+    } as never) as unknown as { activated: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.activated[0]).toMatchObject({
+      cost: {
+        mana: null,
+        tap: false,
+        collectEvidence: { totalManaSymbols: { color: "B", atLeast: 15 }, filter: { colors: ["B"] } },
+      },
+      effect: { kind: "draw", amount: 1 },
+    });
+  });
 });
 
 describe("a cost's X defined by the ability", () => {

@@ -5027,6 +5027,14 @@ engine terms. A second thing to check is a second test.
 - **Do:** With no cards in hand, pass to your end step, then on to your next upkeep.
 - **Expect:** At your end step the Case shows a **solved** chip. From then on its upkeep trigger works: at your next upkeep it triggers.
 
+### Baron Helmut Zemo: boasting with fifteen black mana symbols, three copies cast
+- **Do:** Attack Bob with Baron Helmut Zemo, then take its boast: pick the six black cards in the popup and confirm. Cast the copy of Sign in Blood at Bob, then the copies of Phyrexian Obliterator and Necropotence.
+- **Expect:** The popup asks for cards "with 15 or more black mana symbols among their mana costs", and Confirm waits for all six; Lightning Bolt can't be picked. After the third copy no more is offered. Bob draws two; Phyrexian Obliterator and Necropotence tokens are yours; the six cards stay in exile.
+
+### Baron Helmut Zemo: fourteen black mana symbols aren't enough
+- **Do:** Attack Bob with Baron Helmut Zemo.
+- **Expect:** No boast is offered, so combat runs on without stopping for you: Bob goes to 37 and your seven cards stay in the graveyard. Its black cards have fourteen black mana symbols (Deathrite Shaman's {B/G} and Dismember's {B/P}{B/P} count once each).
+
 ## Explore, Map tokens, discover and craft (2026-10-16)
 
 ### Cenote Scout: exploring a nonland card

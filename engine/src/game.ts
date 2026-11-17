@@ -37,6 +37,7 @@ import type {
   PutFromExileCost,
   ActivatedAbility,
   CraftMaterials,
+  EvidenceAmong,
   DefenderLife,
   SacrificeCost,
   SacrificeCostPart,
@@ -673,6 +674,7 @@ import {
 import type { ThisWayEntry } from "./this-way.js";
 import {
   changeSubtypes,
+  COLOR_WORDS,
   creatureTypeWordsIn,
   splitChangedTokenName,
   textWords,
@@ -27229,9 +27231,11 @@ export class Game {
       // Rule 701.59b: not enough in the graveyard, no collecting.
       const evidence = evidenceCostOf(ability.cost.collectEvidence, sourceId);
       if (!this.canCollectEvidence(player, evidence.amount, evidence.among)) {
-        return evidence.among !== undefined
-          ? `${player}'s graveyard lacks cards with total mana value ${evidence.amount} for ${def.name}'s cost`
-          : `${player}'s graveyard can't collect evidence ${evidence.amount} for ${def.name}'s cost`;
+        return evidence.among?.symbolsOf !== undefined
+          ? `${player}'s graveyard lacks cards with ${evidence.amount} ${COLOR_WORDS[evidence.among.symbolsOf]} mana symbols for ${def.name}'s cost`
+          : evidence.among !== undefined
+            ? `${player}'s graveyard lacks cards with total mana value ${evidence.amount} for ${def.name}'s cost`
+            : `${player}'s graveyard can't collect evidence ${evidence.amount} for ${def.name}'s cost`;
       }
     }
     if (ability.cost.craft !== undefined) {
@@ -28062,6 +28066,7 @@ export class Game {
           priorityTo: player,
           among: evidence.among,
           exileLink,
+          costExileFor: abilityId,
         }),
       );
     }
@@ -54559,14 +54564,26 @@ controlledBy,
 
   /** Whether `player` could collect evidence `amount` (rule 701.59b): their
    * graveyard holds cards with that much total mana value. */
-  private canCollectEvidence(player: PlayerId, amount: number, among?: { filter: CardFilter; except: ObjectId }): boolean {
+  private canCollectEvidence(player: PlayerId, amount: number, among?: EvidenceAmong): boolean {
     const graveyard =
       among !== undefined
         ? this.graveyardCostCandidates(player, among.filter, among.except)
         : (this.state.zones.perPlayer[player]?.graveyard ?? []);
     let total = 0;
-    for (const id of graveyard) total += manaValueOfObject(this.registry, this.state.objects[id]);
+    for (const id of graveyard) total += this.evidenceWorth(id, among);
     return total >= amount;
+  }
+
+  /** What one card adds to a collect-evidence total: its mana value (rule
+   * 701.59a), or with `among.symbolsOf` its mana symbols of that color — a
+   * hybrid or Phyrexian one once (107.4e-f, as devotion reads them, 700.5;
+   * the `manaSymbols` amount's read) — Baron Helmut Zemo's "black mana
+   * symbols among their mana costs". */
+  private evidenceWorth(id: ObjectId, among: EvidenceAmong | undefined): number {
+    const object = this.state.objects[id];
+    if (object === undefined) return 0;
+    if (among?.symbolsOf === undefined) return manaValueOfObject(this.registry, object);
+    return colorSymbols(parseManaCost(printedManaCost(this.registry, object)), [among.symbolsOf]);
   }
 
   /**
@@ -54597,11 +54614,16 @@ controlledBy,
       readonly priorityTo?: PlayerId;
       /** A mana ability's cost (Cryptex): its mana, once this is answered. */
       readonly thenManaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"];
-      /** Only these cards, and no evidence collected. */
-      readonly among?: { readonly filter: CardFilter; readonly except: ObjectId } | undefined;
+      /** Only these cards, and no evidence collected; with `symbolsOf`,
+       * counted by their mana symbols of that color (`evidenceWorth`). */
+      readonly among?: EvidenceAmong | undefined;
       /** The cards exiled are exiled with this source, in this stint (rule
        * 607.2a — `AbilityCost.collectEvidenceLinked`). */
       readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined;
+      /** The ability on the stack whose cost this pays: the cards exiled are
+       * its `{ paid: "exiled" }` ("copy those exiled cards" — Baron Helmut
+       * Zemo). */
+      readonly costExileFor?: ObjectId;
     } = {},
   ): void {
     const among = opts.among;
@@ -54616,9 +54638,7 @@ controlledBy,
       this.emit({ type: "evidence-collected", player, objects: [], amount });
       return;
     }
-    const tags = Object.fromEntries(
-      eligible.map((id) => [id, [String(manaValueOfObject(this.registry, this.state.objects[id]))]]),
-    );
+    const tags = Object.fromEntries(eligible.map((id) => [id, [String(this.evidenceWorth(id, among))]]));
     this.state.awaiting = {
       kind: "choose-from-zone",
       player,
@@ -54634,10 +54654,13 @@ controlledBy,
         atLeast: amount,
         ...(opts.optional === true ? { orNone: true } : {}),
         text:
-          among !== undefined
-            ? `with total mana value ${amount} or greater`
-            : `with total mana value ${amount} or greater (collect evidence ${amount})`,
+          among?.symbolsOf !== undefined
+            ? `with ${amount} or more ${COLOR_WORDS[among.symbolsOf]} mana symbols among their mana costs`
+            : among !== undefined
+              ? `with total mana value ${amount} or greater`
+              : `with total mana value ${amount} or greater (collect evidence ${amount})`,
       },
+      ...(opts.costExileFor !== undefined ? { costExileFor: opts.costExileFor } : {}),
       ...(among === undefined ? { collectEvidence: amount } : {}),
       ...(opts.required === true ? { collectEvidenceRequired: true as const } : {}),
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),

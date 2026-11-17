@@ -23,6 +23,7 @@ import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import type { DieTest } from "./random-results.js";
 import type { TriggerEventName } from "./trigger-events.js";
+import type { Color } from "./mana.js";
 
 /** A non-mana, non-tap component of an ability cost that sacrifices a permanent. */
 export type SacrificeCost =
@@ -680,9 +681,22 @@ export interface AbilityCost {
    * number of historic cards from your graveyard with total mana value 30 or
    * greater" (The Capitoline Triad) is `{ totalManaValue: 30, filter }`.
    * Activatable only while the matching cards there hold that much (rule
-   * 602.2b, paid as 601.2h); the source never counts.
+   * 602.2b, paid as 601.2h); the source never counts. Its
+   * `totalManaSymbols` counts each card's mana symbols of one color in its
+   * mana cost instead (rule 107.4; a hybrid or Phyrexian one once, as
+   * devotion reads them, 700.5): "Exile any number of black cards from your
+   * graveyard with fifteen or more black mana symbols among their mana
+   * costs" (Baron Helmut Zemo) is `{ totalManaSymbols: { color: "B",
+   * atLeast: 15 }, filter: { colors: ["B"] } }`. The cards exiled are
+   * `{ paid: "exiled" }` to the effect, either way.
    */
-  readonly collectEvidence?: number | { readonly totalManaValue: number; readonly filter: CardFilter };
+  readonly collectEvidence?:
+    | number
+    | { readonly totalManaValue: number; readonly filter: CardFilter }
+    | {
+        readonly totalManaSymbols: { readonly color: Color; readonly atLeast: number };
+        readonly filter: CardFilter;
+      };
   /**
    * The cards `collectEvidence` exiles are exiled **with this permanent**
    * (rule 607.2a — `GameObject.exiledWith`, in the stint it's in as the cost
@@ -3077,10 +3091,23 @@ export function isEquipAbility(ability: ActivatedAbility): boolean {
 export function evidenceCostOf(
   cost: NonNullable<AbilityCost["collectEvidence"]>,
   source: ObjectId,
-): { readonly amount: number; readonly among?: { readonly filter: CardFilter; readonly except: ObjectId } } {
-  return typeof cost === "number"
-    ? { amount: cost }
-    : { amount: cost.totalManaValue, among: { filter: cost.filter, except: source } };
+): { readonly amount: number; readonly among?: EvidenceAmong } {
+  if (typeof cost === "number") return { amount: cost };
+  if ("totalManaValue" in cost) return { amount: cost.totalManaValue, among: { filter: cost.filter, except: source } };
+  return {
+    amount: cost.totalManaSymbols.atLeast,
+    among: { filter: cost.filter, except: source, symbolsOf: cost.totalManaSymbols.color },
+  };
+}
+
+/** The cards a record `collectEvidence` is paid from — those matching
+ * `filter`, never `except` (the ability's own source) — and, with
+ * `symbolsOf`, what each adds to the total: its mana symbols of that color
+ * rather than its mana value. */
+export interface EvidenceAmong {
+  readonly filter: CardFilter;
+  readonly except: ObjectId;
+  readonly symbolsOf?: Color;
 }
 
 /** A mana ability adds mana, has no targets, and never uses the stack. A cost

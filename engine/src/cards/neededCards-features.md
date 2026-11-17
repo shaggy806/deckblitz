@@ -391,6 +391,19 @@ suggests the chooser's own planeswalkers' types, as Deification's on-enter one d
 searches no rollouts over that eighty-type menu (its `candidates` are none) and names the first
 suggestion. Leori, Sparktouched Hunter (rank 11022): a delayed `activates-ability` watch with the
 chosen type in its `source`, for the rest of the turn. `test/choose-planeswalker-type.test.ts`.
+### A graveyard exile cost counted in one color's mana symbols — built 2026-11-17
+
+The key `cost:exile-from-graveyard-mana-symbol-total`. Baron Helmut Zemo (rank 11489, flagged "Build ASAP"):
+"Boast — Exile any number of black cards from your graveyard with fifteen or more black mana symbols among
+their mana costs: Copy those exiled cards. You may cast up to three of the copies without paying their mana
+costs." `AbilityCost.collectEvidence`'s record takes `totalManaSymbols: { color, atLeast }` beside
+`totalManaValue` (`EvidenceAmong.symbolsOf`, `Game.evidenceWorth`: `colorSymbols` over the printed mana cost,
+a hybrid or Phyrexian symbol once, rule 107.4e-f, as devotion reads them), paid through the same "total"
+zone choice; an ability's collect-evidence cost now records its cards as `{ paid: "exiled" }`, and
+`cast-now` takes `from: { set }` (the members still where the set found them), so "copy those exiled
+cards" is `{ set: { paid: "exiled" } }` with `copies: 1`, `repeat`, `upTo: 3`. Its scaffolder line is
+read. `test/exile-total-mana-value-cost.test.ts`.
+
 ### A divided total that reads the cost the spell is cast for — built 2026-11-17
 
 The key `effect:divided-total-by-alternative-cost`. Avacyn's Judgment (rank 11326): "2 damage divided …
