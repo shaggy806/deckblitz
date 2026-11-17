@@ -160,6 +160,12 @@ export const TRIGGER_EVENTS = {
   "claims-prize": row({ type: "prize-claimed", player: (e) => e.player }),
   /** "Whenever a player loses the game" (rule 104.3): the player who lost. */
   "loses-game": row({ type: "player-lost", player: (e) => e.player }),
+  /** A creature was put onto the battlefield attacking (rule 508.4), once
+   * what it attacks is settled: the subject is that creature. It never
+   * attacked (508.3a), so an `attacks` trigger misses it — "whenever a
+   * creature you control attacks or enters attacking" (Arni Metalbrow) is
+   * both, one ability written as two entries (`sameAbilityAs`). */
+  "enters-attacking": row({ type: "entered-attacking", object: (e) => e.object }),
   /** "Whenever you surveil" (rule 701.25) — once per surveil, however many
    * cards; one of 0 isn't one. The value is how many were looked at. */
   surveils: row({ type: "scried", when: (e) => e.mode === "surveil", player: (e) => e.player, amount: (e) => e.looked }),

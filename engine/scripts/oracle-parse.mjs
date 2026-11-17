@@ -2081,6 +2081,14 @@ export function parseTrigger(clause) {
     return [{ on: "state", state: m[1] === "no" ? { kind: "not", of: controls } : controls }];
   }
   if (/^Whenever ~ attacks or blocks$/.test(c)) return [...self("attacks"), ...self("blocks")];
+  // "Attacks or enters attacking" (Arni Metalbrow): a declared attacker, and
+  // one put onto the battlefield attacking (rule 508.4), which never attacked.
+  if (c === "Whenever a creature you control attacks or enters attacking") {
+    return [
+      { on: "attacks", who: "you-control", filter: { type: "creature" } },
+      { on: "event", event: "enters-attacking", who: "you-control", filter: { type: "creature" } },
+    ];
+  }
   // "Whenever a player plays a card exiled with ~" (Prowl, Stoic Strategist),
   // "When you play a card exiled with this creature" (Voltaic Visionary): a
   // card in exile linked to it as it was played (rule 607.2a).

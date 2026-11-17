@@ -2194,6 +2194,13 @@ describe("costs and triggers", () => {
     ]);
   });
 
+  it("attacks or enters attacking (Arni Metalbrow)", () => {
+    expect(parseTrigger("Whenever a creature you control attacks or enters attacking")).toEqual([
+      { on: "attacks", who: "you-control", filter: { type: "creature" } },
+      { on: "event", event: "enters-attacking", who: "you-control", filter: { type: "creature" } },
+    ]);
+  });
+
   it("triggers", () => {
     expect(parseTrigger("When ~ enters")).toEqual([{ on: "enters-battlefield", who: "self" }]);
     expect(parseTrigger("Whenever ~ enters or attacks")).toHaveLength(2);
