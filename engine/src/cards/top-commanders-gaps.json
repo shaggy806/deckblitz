@@ -2890,7 +2890,8 @@
   "trigger:gains-life-from-source-filter",
   "trigger:watched-object-own-controller",
   "effect:separate-exiled-cards-into-piles",
-  "effect:vote-for-card-in-graveyard"
+  "effect:vote-for-card-in-graveyard",
+  "effect:look-and-choose-unlinked-exile"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
