@@ -3431,7 +3431,13 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   (`sacrifice-target`, `grant-keyword`, … `target: "chosen"`) and a static's
   `affects: { scope: "chosen" }` — only while it's still that object (rule
   400.7), as the source last existed once it has left (Bodyguard sacrificed
-  for its own cost). `attach: true` enters an Equipment attached to it
+  for its own cost). In a static's filter it's the `CardFilter` clause
+  `chosenBySource: true` (the stint too): Scheming Fence's "activated
+  abilities of the chosen permanent can't be activated" is `prohibits: [{
+  act: "activate", who: "each-player", of: { chosenBySource: true } }]`, and
+  "has all activated abilities of the chosen permanent except for loyalty
+  abilities" `grantsActivatedOf: { zone: "battlefield", filter: {
+  chosenBySource: true }, except: "loyalty" }`. `attach: true` enters an Equipment attached to it
   (Grifter's Blade — unattached if it can't equip it, rule 301.5e);
   `counter: "phylactery"` puts one such counter on it (Phylactery Lich). The
   scaffolder reads "As ~ enters, choose another creature you control.", "The

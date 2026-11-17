@@ -679,6 +679,17 @@ export interface CardFilter {
    */
   readonly pairedWithSource?: boolean;
   /**
+   * It's (or isn't) **the permanent chosen** as the one applying the filter
+   * entered (its `GameObject.chosenPermanent`, `choosePermanentOnEnter`), in
+   * the stint it was chosen in (rule 400.7) and on the battlefield — Scheming
+   * Fence's "activated abilities of the chosen permanent can't be activated"
+   * (`prohibits`) and "has all activated abilities of the chosen permanent"
+   * (`grantsActivatedOf`). Read against `FilterContext.source` as it is now;
+   * without a source, or nothing chosen, nothing matches. A static that
+   * reaches only the chosen permanent is `affects: { scope: "chosen" }`.
+   */
+  readonly chosenBySource?: boolean;
+  /**
    * It is (or isn't) the one applying the filter itself — `FilterContext.
    * source`. Mostly inside `attachedTo`: Goblin Gaveleer's "+2/+0 for each
    * Equipment **attached to it**" counts `{ subtype: "Equipment",
@@ -2729,6 +2740,16 @@ export function matchesFilter(
     const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
     const partner = by === undefined ? undefined : pairedPartner(state, by);
     if ((live !== undefined && partner?.id === live.id) !== filter.pairedWithSource) return false;
+  }
+  if (filter.chosenBySource !== undefined) {
+    const chosen = ctx.source === undefined ? undefined : state.objects[ctx.source]?.chosenPermanent;
+    const is =
+      live !== undefined &&
+      live.zone === "battlefield" &&
+      chosen !== undefined &&
+      chosen.id === live.id &&
+      chosen.stint === (live.zoneChangeCount ?? 0);
+    if (is !== filter.chosenBySource) return false;
   }
   if (filter.saddledSource !== undefined || filter.saddledBy !== undefined) {
     // Rule 702.171c: only a creature on the battlefield now can have saddled

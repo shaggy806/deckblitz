@@ -565,6 +565,13 @@ of Knowledge (20961, Abundance's optional `may`); the scaffolder reads "Discard 
 a cost and "If you would draw a card, you may … instead" as an optional replacement (it had made it a mandatory one
 whose effect was a "may"). `test/discard-different-names.test.ts`.
 
+### The chosen permanent in a static's filter — built 2026-11-17
+
+The key `static:gain-activated-abilities-of-chosen-permanent`: the `CardFilter` clause `chosenBySource` — the
+permanent chosen as the filtering source entered (`chosenPermanent`, in its stint, rule 400.7) — so a `prohibits`
+and a `grantsActivatedOf` (`zone: "battlefield"`, `except: "loyalty"`) can name it. Scheming Fence (rank 12877).
+`test/chosen-permanent-abilities.test.ts`.
+
 ### A face-down pile from a graveyard, or with its source, manifested — built 2026-11-17
 
 The keys `effect:manifest-from-exile` and `effect:manifest-exiled-pile`, one general change to

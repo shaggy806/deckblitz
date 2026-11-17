@@ -9,6 +9,7 @@
     "effect:beheld-object-amount",
     "cost:discard-different-names",
     "replacement:draw-replacement-counters",
+    "static:gain-activated-abilities-of-chosen-permanent",
     "effect:delayed-trigger-fixed-amount",
     "trigger:first-cycle-each-turn",
     "effect:delayed-return-target-and-sacrificed-card",
