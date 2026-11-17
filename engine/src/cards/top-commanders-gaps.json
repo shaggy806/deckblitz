@@ -2799,7 +2799,12 @@
   "filter:has-modular",
   "static:block-while-tapped",
   "effect:prohibit-loyalty-abilities-one-shot",
-  "filter:entered-under-your-control-this-turn"
+  "filter:entered-under-your-control-this-turn",
+  "amount:life-total-at-turn-start",
+  "amount:untapped-lands-at-turn-start",
+  "condition:hand-size-at-turn-start",
+  "condition:monarch-as-turn-began",
+  "condition:was-monarch-as-turn-began"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -224,6 +224,36 @@ export interface JournalEntry {
 export interface JournalTurn {
   readonly number: number;
   readonly player: PlayerId;
+  /** How the table stood as the turn began, before its untap step — what
+   * "as the turn began" and "at the beginning of this turn" read (the
+   * `*-as-turn-began` `TurnStat`s). Absent on a state saved before it was
+   * kept. */
+  readonly began?: TurnBegan;
+}
+
+/** The table as a turn began (see {@link JournalTurn.began}). */
+export interface TurnBegan {
+  /** Each player still in the game then. */
+  readonly seats: Partial<Record<PlayerId, SeatAsTurnBegan>>;
+  /** The monarch then (rule 725), if any. */
+  readonly monarch?: PlayerId;
+}
+
+/** One player as a turn began. */
+export interface SeatAsTurnBegan {
+  readonly life: number;
+  readonly cardsInHand: number;
+  /** The untapped lands they controlled, a token stack as every token in it
+   * (Power Surge: "the number of untapped lands they controlled at the
+   * beginning of this turn"). */
+  readonly untappedLands: number;
+}
+
+/** How the table stood as the current turn began, if the journal kept it. */
+export function asTurnBegan(state: GameState): TurnBegan | undefined {
+  const turns = state.journal?.turns;
+  const last = turns?.[turns.length - 1];
+  return last !== undefined && last.number === state.turn.number ? last.began : undefined;
 }
 
 /** The game's record of what has happened (see the module comment). */
@@ -517,9 +547,9 @@ export function appendJournal(state: GameState, entry: Omit<JournalEntry, "turn"
  * everything before the earliest of the last turn and each player's own last
  * turn. At four players that keeps one round.
  */
-export function beginJournalTurn(state: GameState, number: number, player: PlayerId): void {
+export function beginJournalTurn(state: GameState, number: number, player: PlayerId, began?: TurnBegan): void {
   const journal = (state.journal ??= emptyJournal());
-  journal.turns.push({ number, player });
+  journal.turns.push(began === undefined ? { number, player } : { number, player, began });
   let keepFrom = number - 1;
   for (const seat of state.turnOrder) {
     if (state.players[seat]?.hasLost === true) continue;

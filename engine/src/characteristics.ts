@@ -113,6 +113,7 @@ import { CREATURE_TYPES } from "./creature-types.js";
 import {
   JOURNAL_VIEWS,
   abilityCountThisTurn,
+  asTurnBegan,
   combatDamagedByNamed,
   cycledNamedCount,
   entriesThisTurn,
@@ -2085,6 +2086,10 @@ const TURN_STAT_READS: { readonly [S in TurnStat]: (state: GameState, player: Pl
     PHASE_OF_STEP[state.turn.step] !== "combat" ? 0 : powerAttackedWith(state, player, state.turn.combatPhases ?? 1),
   "energy-paid-or-lost": (state, player) => journalTotal(state, "energy-lost", player, "amount"),
   "dilemmas-faced": (state, player) => journalTotal(state, "faced-dilemma", player, "count"),
+  "life-as-turn-began": (state, player) => asTurnBegan(state)?.seats[player]?.life ?? 0,
+  "cards-in-hand-as-turn-began": (state, player) => asTurnBegan(state)?.seats[player]?.cardsInHand ?? 0,
+  "untapped-lands-as-turn-began": (state, player) => asTurnBegan(state)?.seats[player]?.untappedLands ?? 0,
+  "monarch-as-turn-began": (state, player) => (asTurnBegan(state)?.monarch === player ? 1 : 0),
 };
 
 /** How many units of mana are unspent in `player`'s pool (rule 106.4), of

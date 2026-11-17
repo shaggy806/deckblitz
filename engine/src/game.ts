@@ -434,7 +434,7 @@ import type { DelayedStepWatch } from "./delayed-at.js";
 import { delayedStep, delayedStepFires, isStepWatch, readDelayedAt, watchOutlastsItsTurn } from "./delayed-at.js";
 import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
 import { endsThisTurn, untilPointOf } from "./duration.js";
-import type { JournalEntry } from "./journal.js";
+import type { JournalEntry, SeatAsTurnBegan, TurnBegan } from "./journal.js";
 import { TRIGGER_EVENTS, timingCountable, triggerEventBatch, triggerEventObject, triggerEventPlayer, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
 import {
   abilityCountThisTurn,
@@ -10259,6 +10259,27 @@ export class Game {
     return true;
   }
 
+  /** How the table stands as a turn begins, for the journal's turn record
+   * (`JournalTurn.began`): each player still in the game's life, hand and
+   * untapped lands, and the monarch. */
+  private tableAsTurnBegins(): TurnBegan {
+    const seats: Partial<Record<PlayerId, SeatAsTurnBegan>> = {};
+    for (const player of this.state.turnOrder) {
+      const seat = this.state.players[player];
+      if (seat === undefined || seat.hasLost) continue;
+      seats[player] = {
+        life: seat.life,
+        cardsInHand: this.state.zones.perPlayer[player]?.hand.length ?? 0,
+        untappedLands: permanentCount(
+          this.state,
+          this.battlefieldMatching(player, { type: "land", controlledBy: "you", tapped: false }),
+        ),
+      };
+    }
+    const monarch = this.state.monarch;
+    return monarch === null ? { seats } : { seats, monarch };
+  }
+
   private beginTurn(): void {
     if (this.askTurnBegin()) return;
     this.state.turn.number += 1;
@@ -10454,9 +10475,10 @@ export class Game {
       this.state.players[player].spellsCastThisTurnAs = [];
       this.state.players[player].usedGraveyardThisTurn = false;
     }
-    // The journal notes whose turn this is and lets go of what no window can
-    // name any more (`journal.ts`).
-    beginJournalTurn(this.state, this.state.turn.number, this.activePlayer);
+    // The journal notes whose turn this is, how the table stands as it begins
+    // (before its untap step: "as the turn began"), and lets go of what no
+    // window can name any more (`journal.ts`).
+    beginJournalTurn(this.state, this.state.turn.number, this.activePlayer, this.tableAsTurnBegins());
     if (this.state.turn.isExtra) appendJournal(this.state, { kind: "extra-turn-began", player: this.activePlayer });
     // Nothing waits on a departed ability across turns: the stack is empty.
     delete this.state.departedAbilities;
@@ -64252,9 +64274,12 @@ controlledBy,
       return this.state.players[controller]?.hasLost === false ? [controller, ...them] : them;
     }
     if (who === "trigger-player" || who === "that-player") {
-      return triggerPlayer === undefined || this.state.players[triggerPlayer]?.hasLost !== false
-        ? []
-        : [triggerPlayer];
+      // Counting what happened to that player reads them after they've left
+      // the game (rule 800.4i: their last known information) — Sengir, the
+      // Dark Baron's "that player's life total as the turn began".
+      if (triggerPlayer === undefined) return [];
+      if (includeDeparted) return this.state.players[triggerPlayer] === undefined ? [] : [triggerPlayer];
+      return this.state.players[triggerPlayer]?.hasLost !== false ? [] : [triggerPlayer];
     }
     if (who === "trigger-controller") {
       const p =

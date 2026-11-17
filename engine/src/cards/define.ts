@@ -896,7 +896,23 @@ export type TurnStat =
    * Caretaker's "if you faced a dilemma this turn". One a choice of a modal
    * spell's or ability's modes (rule 700.2), as the `faces-dilemma` trigger
    * counts them. */
-  | "dilemmas-faced";
+  | "dilemmas-faced"
+  /** The player's life total as this turn began (`JournalTurn.began`) —
+   * Sengir, the Dark Baron's "that player's life total as the turn began".
+   * Not a running total but a value fixed when the turn began, before its
+   * untap step: kept for a player who has since left the game. */
+  | "life-as-turn-began"
+  /** The cards in the player's hand as this turn began — Mindstorm Crown's
+   * "if you had no cards in hand at the beginning of this turn". */
+  | "cards-in-hand-as-turn-began"
+  /** The untapped lands the player controlled as this turn began, before its
+   * untap step — Power Surge's "the number of untapped lands they controlled
+   * at the beginning of this turn" (its ruling: known even if Power Surge
+   * wasn't on the battlefield then). */
+  | "untapped-lands-as-turn-began"
+  /** 1 if the player was the monarch as this turn began (rule 725), else 0 —
+   * Knights of the Black Rose's "if you were the monarch as the turn began". */
+  | "monarch-as-turn-began";
 
 /**
  * Counters put on permanents this turn — the `countersPutThisTurn` amount and

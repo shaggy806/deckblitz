@@ -1096,7 +1096,18 @@ exile this turn", `who: "any-player"`) — summed over the scope,
 default `"you"`: Kydele's "for each card you've drawn this turn", or the life
 your opponents lost this turn as `who: "each-opponent"`; Aetherflux Reservoir's
 "1 life for each spell you've cast this turn" as `"spells-cast"`, which counts
-countered spells too),
+countered spells too). **"As the turn began" / "at the beginning of this turn"**
+is a value the journal kept as the turn began, before its untap step
+(`JournalTurn.began`), read as four more words: `"life-as-turn-began"`
+(Sengir, the Dark Baron's "that player's life total as the turn began",
+`who: "trigger-player"` — kept for a player who has since left the game, rule
+800.4i), `"cards-in-hand-as-turn-began"` (Mindstorm Crown's "if you had no
+cards in hand at the beginning of this turn", an `amounts` condition against
+0), `"untapped-lands-as-turn-began"` (Power Surge's "the number of untapped
+lands they controlled at the beginning of this turn", `who: "active-player"`)
+and `"monarch-as-turn-began"` (1 for the monarch then — Knights of the Black
+Rose's "if you were the monarch as the turn began" is the `turn-stat`
+condition `{ stat: "monarch-as-turn-began", who: "you", atLeast: 1 }`),
 `{ playersWithTurnStat: TurnStat, who: PlayerScope }` (how many players in the
 scope have a nonzero total — "for each opponent who lost life this turn";
 Tymna the Weaver's "the number of opponents that were dealt combat damage this
