@@ -545,6 +545,7 @@ import _poolMarshalsAnthem from "../pool/marshals-anthem.js";
 import _poolMartyredRusalka from "../pool/martyred-rusalka.js";
 import _poolMartyrsOfKorlis from "../pool/martyrs-of-korlis.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
+import _poolMasakoTheHumorless from "../pool/masako-the-humorless.js";
 import _poolMasterTrinketeer from "../pool/master-trinketeer.js";
 import _poolMasteryOfTheUnseen from "../pool/mastery-of-the-unseen.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
@@ -1646,6 +1647,7 @@ const shard: CardShard = {
     _poolMartyredRusalka,
     _poolMartyrsOfKorlis,
     _poolMarwynTheClearcutter,
+    _poolMasakoTheHumorless,
     _poolMasterTrinketeer,
     _poolMasteryOfTheUnseen,
     _poolMawOfKozilek,

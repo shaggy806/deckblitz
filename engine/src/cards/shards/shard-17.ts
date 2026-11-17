@@ -707,6 +707,7 @@ import _poolRestlessBloodseeker from "../pool/restless-bloodseeker.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
 import _poolRestore from "../pool/restore.js";
 import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
+import _poolRevelInSilence from "../pool/revel-in-silence.js";
 import _poolRhoxMaulers from "../pool/rhox-maulers.js";
 import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
 import _poolRiptideGearhulk from "../pool/riptide-gearhulk.js";
@@ -756,6 +757,7 @@ import _poolShackles from "../pool/shackles.js";
 import _poolShadowProphecy from "../pool/shadow-prophecy.js";
 import _poolShadowsLair from "../pool/shadows-lair.js";
 import _poolShahOfNaarIsle from "../pool/shah-of-naar-isle.js";
+import _poolShaileDeanOfRadiance from "../pool/shaile-dean-of-radiance.js";
 import _poolShatterwingPegasus from "../pool/shatterwing-pegasus.js";
 import _poolShelldockIsle from "../pool/shelldock-isle.js";
 import _poolSheoldred from "../pool/sheoldred.js";
@@ -1734,6 +1736,7 @@ const shard: CardShard = {
     _poolRestlessBones,
     _poolRestore,
     _poolReturnToTheLightRealms,
+    _poolRevelInSilence,
     _poolRhoxMaulers,
     _poolRimekinRecluse,
     _poolRiptideGearhulk,
@@ -1783,6 +1786,7 @@ const shard: CardShard = {
     _poolShadowProphecy,
     _poolShadowsLair,
     _poolShahOfNaarIsle,
+    _poolShaileDeanOfRadiance,
     _poolShatterwingPegasus,
     _poolShelldockIsle,
     _poolSheoldred,

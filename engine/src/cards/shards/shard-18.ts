@@ -28,6 +28,7 @@ import _poolAndraditeLeech from "../pool/andradite-leech.js";
 import _poolAngelOfSerenity from "../pool/angel-of-serenity.js";
 import _poolAnimusOfNightsReach from "../pool/animus-of-nights-reach.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
+import _poolArcboundOverseer from "../pool/arcbound-overseer.js";
 import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
 import _poolArchmagesCharm from "../pool/archmages-charm.js";
@@ -1064,6 +1065,7 @@ const shard: CardShard = {
     _poolAngelOfSerenity,
     _poolAnimusOfNightsReach,
     _poolAppliedGeometry,
+    _poolArcboundOverseer,
     _poolArchaicsAgony,
     _poolArchfiendOfDespair,
     _poolArchmagesCharm,

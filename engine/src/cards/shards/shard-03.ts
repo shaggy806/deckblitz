@@ -233,6 +233,7 @@ import _poolEmberBeast from "../pool/ember-beast.js";
 import _poolEmberGale from "../pool/ember-gale.js";
 import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
 import _poolEmbolden from "../pool/embolden.js";
+import _poolEmbroseDeanOfShadow from "../pool/embrose-dean-of-shadow.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
@@ -1198,6 +1199,7 @@ const shard: CardShard = {
     _poolEmberGale,
     _poolEmberwildeCaptain,
     _poolEmbolden,
+    _poolEmbroseDeanOfShadow,
     _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,

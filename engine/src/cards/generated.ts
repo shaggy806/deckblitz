@@ -1160,6 +1160,7 @@ import _poolArcboundHybrid from "./pool/arcbound-hybrid.js";
 import _poolArcboundJavelineer from "./pool/arcbound-javelineer.js";
 import _poolArcboundLancer from "./pool/arcbound-lancer.js";
 import _poolArcboundMouser from "./pool/arcbound-mouser.js";
+import _poolArcboundOverseer from "./pool/arcbound-overseer.js";
 import _poolArcboundPrototype from "./pool/arcbound-prototype.js";
 import _poolArcboundRavager from "./pool/arcbound-ravager.js";
 import _poolArcboundReclaimer from "./pool/arcbound-reclaimer.js";
@@ -8335,6 +8336,7 @@ import _poolEmbraalGearSmasher from "./pool/embraal-gear-smasher.js";
 import _poolEmbraceOblivion from "./pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "./pool/embrace-the-paradox.js";
 import _poolEmbraceTheUnknown from "./pool/embrace-the-unknown.js";
+import _poolEmbroseDeanOfShadow from "./pool/embrose-dean-of-shadow.js";
 import _poolEmeraldCharm from "./pool/emerald-charm.js";
 import _poolEmeraldCollector from "./pool/emerald-collector.js";
 import _poolEmeraldDragon from "./pool/emerald-dragon.js";
@@ -9801,6 +9803,7 @@ import _poolFlamerushRider from "./pool/flamerush-rider.js";
 import _poolFlamesOfTheBloodHand from "./pool/flames-of-the-blood-hand.js";
 import _poolFlamesOfTheFirebrand from "./pool/flames-of-the-firebrand.js";
 import _poolFlamesOfTheRazeBoar from "./pool/flames-of-the-raze-boar.js";
+import _poolFlamescrollCelebrant from "./pool/flamescroll-celebrant.js";
 import _poolFlameshadowConjuring from "./pool/flameshadow-conjuring.js";
 import _poolFlameshape from "./pool/flameshape.js";
 import _poolFlameshot from "./pool/flameshot.js";
@@ -16975,6 +16978,7 @@ import _poolMarwynTheNurturer from "./pool/marwyn-the-nurturer.js";
 import _poolMarwynThePreserver from "./pool/marwyn-the-preserver.js";
 import _poolMaryJaneWatson from "./pool/mary-jane-watson.js";
 import _poolMaryReadAndAnneBonny from "./pool/mary-read-and-anne-bonny.js";
+import _poolMasakoTheHumorless from "./pool/masako-the-humorless.js";
 import _poolMascotExhibition from "./pool/mascot-exhibition.js";
 import _poolMascotInterception from "./pool/mascot-interception.js";
 import _poolMaskOfAvacyn from "./pool/mask-of-avacyn.js";
@@ -22353,6 +22357,7 @@ import _poolReveillark from "./pool/reveillark.js";
 import _poolReveilleSquad from "./pool/reveille-squad.js";
 import _poolRevekaWizardSavant from "./pool/reveka-wizard-savant.js";
 import _poolRevelInRiches from "./pool/revel-in-riches.js";
+import _poolRevelInSilence from "./pool/revel-in-silence.js";
 import _poolRevelOfTheFallenGod from "./pool/revel-of-the-fallen-god.js";
 import _poolRevelRuiner from "./pool/revel-ruiner.js";
 import _poolRevelationOfPower from "./pool/revelation-of-power.js";
@@ -24358,6 +24363,7 @@ import _poolShadyInformant from "./pool/shady-informant.js";
 import _poolShadyTraveler from "./pool/shady-traveler.js";
 import _poolShagratLootBearer from "./pool/shagrat-loot-bearer.js";
 import _poolShahOfNaarIsle from "./pool/shah-of-naar-isle.js";
+import _poolShaileDeanOfRadiance from "./pool/shaile-dean-of-radiance.js";
 import _poolShakeTheFoundations from "./pool/shake-the-foundations.js";
 import _poolShakedownHeavy from "./pool/shakedown-heavy.js";
 import _poolShalaiAndHallar from "./pool/shalai-and-hallar.js";
@@ -34474,6 +34480,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArcboundJavelineer,
   _poolArcboundLancer,
   _poolArcboundMouser,
+  _poolArcboundOverseer,
   _poolArcboundPrototype,
   _poolArcboundRavager,
   _poolArcboundReclaimer,
@@ -41649,6 +41656,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmbraceOblivion,
   _poolEmbraceTheParadox,
   _poolEmbraceTheUnknown,
+  _poolEmbroseDeanOfShadow,
   _poolEmeraldCharm,
   _poolEmeraldCollector,
   _poolEmeraldDragon,
@@ -43115,6 +43123,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlamesOfTheBloodHand,
   _poolFlamesOfTheFirebrand,
   _poolFlamesOfTheRazeBoar,
+  _poolFlamescrollCelebrant,
   _poolFlameshadowConjuring,
   _poolFlameshape,
   _poolFlameshot,
@@ -50289,6 +50298,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarwynThePreserver,
   _poolMaryJaneWatson,
   _poolMaryReadAndAnneBonny,
+  _poolMasakoTheHumorless,
   _poolMascotExhibition,
   _poolMascotInterception,
   _poolMaskOfAvacyn,
@@ -55667,6 +55677,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReveilleSquad,
   _poolRevekaWizardSavant,
   _poolRevelInRiches,
+  _poolRevelInSilence,
   _poolRevelOfTheFallenGod,
   _poolRevelRuiner,
   _poolRevelationOfPower,
@@ -57672,6 +57683,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShadyTraveler,
   _poolShagratLootBearer,
   _poolShahOfNaarIsle,
+  _poolShaileDeanOfRadiance,
   _poolShakeTheFoundations,
   _poolShakedownHeavy,
   _poolShalaiAndHallar,
@@ -67801,6 +67813,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arcbound-javelineer": _poolArcboundJavelineer,
   "pool/arcbound-lancer": _poolArcboundLancer,
   "pool/arcbound-mouser": _poolArcboundMouser,
+  "pool/arcbound-overseer": _poolArcboundOverseer,
   "pool/arcbound-prototype": _poolArcboundPrototype,
   "pool/arcbound-ravager": _poolArcboundRavager,
   "pool/arcbound-reclaimer": _poolArcboundReclaimer,
@@ -74976,6 +74989,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/embrace-oblivion": _poolEmbraceOblivion,
   "pool/embrace-the-paradox": _poolEmbraceTheParadox,
   "pool/embrace-the-unknown": _poolEmbraceTheUnknown,
+  "pool/embrose-dean-of-shadow": _poolEmbroseDeanOfShadow,
   "pool/emerald-charm": _poolEmeraldCharm,
   "pool/emerald-collector": _poolEmeraldCollector,
   "pool/emerald-dragon": _poolEmeraldDragon,
@@ -76442,6 +76456,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flames-of-the-blood-hand": _poolFlamesOfTheBloodHand,
   "pool/flames-of-the-firebrand": _poolFlamesOfTheFirebrand,
   "pool/flames-of-the-raze-boar": _poolFlamesOfTheRazeBoar,
+  "pool/flamescroll-celebrant": _poolFlamescrollCelebrant,
   "pool/flameshadow-conjuring": _poolFlameshadowConjuring,
   "pool/flameshape": _poolFlameshape,
   "pool/flameshot": _poolFlameshot,
@@ -83616,6 +83631,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/marwyn-the-preserver": _poolMarwynThePreserver,
   "pool/mary-jane-watson": _poolMaryJaneWatson,
   "pool/mary-read-and-anne-bonny": _poolMaryReadAndAnneBonny,
+  "pool/masako-the-humorless": _poolMasakoTheHumorless,
   "pool/mascot-exhibition": _poolMascotExhibition,
   "pool/mascot-interception": _poolMascotInterception,
   "pool/mask-of-avacyn": _poolMaskOfAvacyn,
@@ -88994,6 +89010,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reveille-squad": _poolReveilleSquad,
   "pool/reveka-wizard-savant": _poolRevekaWizardSavant,
   "pool/revel-in-riches": _poolRevelInRiches,
+  "pool/revel-in-silence": _poolRevelInSilence,
   "pool/revel-of-the-fallen-god": _poolRevelOfTheFallenGod,
   "pool/revel-ruiner": _poolRevelRuiner,
   "pool/revelation-of-power": _poolRevelationOfPower,
@@ -90999,6 +91016,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shady-traveler": _poolShadyTraveler,
   "pool/shagrat-loot-bearer": _poolShagratLootBearer,
   "pool/shah-of-naar-isle": _poolShahOfNaarIsle,
+  "pool/shaile-dean-of-radiance": _poolShaileDeanOfRadiance,
   "pool/shake-the-foundations": _poolShakeTheFoundations,
   "pool/shakedown-heavy": _poolShakedownHeavy,
   "pool/shalai-and-hallar": _poolShalaiAndHallar,
