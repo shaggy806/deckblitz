@@ -212,6 +212,10 @@ describe("a player who has left the game", () => {
     expect(game.state.objects[bears].controller).toBe(A);
   });
 
+  // Not here, and not yet right (rule 603.6c, `docs/engine-gaps.md`): another
+  // player's "whenever a creature leaves the battlefield" (Extractor Demon)
+  // doesn't trigger for the creatures a departing player takes with them.
+
   it("makes 'whenever a player loses the game' trigger, conceding included (rule 603.9)", () => {
     const { game } = table({ players: 3 });
     const tyrant = spawn(game, "Blood Tyrant");

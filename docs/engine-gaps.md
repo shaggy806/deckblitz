@@ -6,6 +6,20 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A departing player's permanents don't trigger "leaves the battlefield"** (2026-11-17, the rules audit,
+  `docs/plans/rules-audit-2026-11.md`). Rule 603.6c: leaves-the-battlefield abilities trigger "when a phased-in
+  permanent leaves the game because its owner leaves the game". `Game.leaveGame` leaves what the player owned on
+  the board, inert (`inGame`), and announces nothing, so another player's "whenever another creature leaves the
+  battlefield" (Extractor Demon; sixteen cards watch any permanent, twelve an enchanted one) never hears it.
+  Reproduction: three players, alice's Extractor Demon, bob's Grizzly Bears, `game.concede(B)`: no
+  `ability-triggered` for the Demon. Dies triggers are right not to fire (nothing went to a graveyard), and the
+  departing player's own leave triggers are theirs and never go on the stack (800.4d). A design call, not a
+  patch: the permanents stay on the battlefield as objects, so an event that says they left needs every reader
+  of `permanent-left-battlefield` looked at (its `toZone` has no "left the game"; the client draws a tile going
+  somewhere; the journal counts permanents that left), and an effect that then reaches for "that card" must not
+  find it still there. Outline: an internal, unlogged event for each such permanent (as `permanents-left` is),
+  matched only by `leaves-battlefield` triggers of players still in the game with no `to`, and the object
+  marked gone for whatever the trigger does next.
 - **A player who loses while they owe a decision** (2026-11-17, the rules audit, `docs/plans/rules-audit-2026-11.md`).
   Rules 800.4f-h: a cost a departed player would pay isn't paid, a choice an object asks of them goes to another
   player its controller picks, and a choice a rule asks of them goes to the next player in turn order. None is

@@ -1,8 +1,8 @@
 # Rules audit, November 2026
 
 Status: **first slice done** (2026-11-17): players who leave the game, combat, and the turn's
-skip rules. Three violations found and fixed; the rest probed and sound. The slices to take
-next are at the end.
+skip rules. Three violations found and fixed, a fourth recorded for a design call; the rest
+probed and sound. The slices to take next are at the end.
 
 ## Why
 
@@ -39,6 +39,13 @@ seems to happen in it.
 Three older tests encoded the old step flow and were brought to the rule (`game.test.ts`,
 `cmdr-ruric-thar.test.ts`, `additional-upkeep-steps.test.ts`).
 
+**Found and recorded, not fixed: 603.6c.** Leaves-the-battlefield abilities trigger "when a
+phased-in permanent leaves the game because its owner leaves the game", and another player's
+"whenever another creature leaves the battlefield" (Extractor Demon) doesn't trigger for what a
+departing player owned. `Game.leaveGame` leaves those permanents on the board, inert, and
+announces nothing. It needs a design call about how they are represented, not a patch;
+`docs/engine-gaps.md` has the reproduction and an outline, `BACKLOG.md` the line.
+
 ## What was probed and is sound
 
 Kept as tests in `player-left-audit.test.ts` and `combat-rules-audit.test.ts`.
@@ -56,7 +63,13 @@ Combat: a blocker tapped after it blocks still deals and takes damage, and an at
 after it attacks is still attacking (506.4b); a blocked attacker whose blocker is gone deals
 nothing to the player (509.1h, 510.1c); an attacker that changes controller leaves combat (506.4); a
 creature put onto the battlefield attacking doesn't trigger "whenever a creature attacks"
-(508.2a, Hero of Bladehold beside Hellrider).
+(508.2a, Hero of Bladehold beside Hellrider); one put there "attacking that opponent" after
+that opponent has left enters and attacks nobody (506.3c, Kaalia of the Vast), while one with no
+player named goes at an opponent still in the game (508.4, Hero of Bladehold's Soldiers).
+
+Settled by reading: a band can't be declared at different defenders (802.3b,
+`combat/banding.ts`); a battle whose protector has left the game is covered by
+`battles.test.ts` (704.5x-y).
 
 Already cited and implemented, read but not probed again: 800.4a-d, 800.4i-m, 725.4, 726.4,
 103.5c and 103.8 (the multiplayer mulligan and first draw, which 800.6 and 800.7 restate).
@@ -77,15 +90,10 @@ Already cited and implemented, read but not probed again: 800.4a-d, 800.4i-m, 72
 
 Uncited, plausible, and not probed, in the order I'd take them:
 
-- **506.3c-d**: a creature put onto the battlefield attacking a player who isn't in the game, or
-  during the declare blockers step or later (it's unblocked, 506.3d).
-- **603.6c**: leaves-the-battlefield abilities of a departing player's permanents trigger for
-  the players who stay ("whenever a creature leaves the battlefield").
+- **506.3d**: a creature put onto the battlefield attacking during the declare blockers step or
+  later is unblocked (ninjutsu's usual case is tested; the general one isn't).
 - **104.3f**: a player who would win and lose at once loses.
-- **704.5x-y**: a battle whose protector has left the game gets a new one, or goes to the
-  graveyard.
 - **704.5r, 704.5t**: counter caps; a completed dungeon leaving the command zone.
-- **802.3b**: creatures in a band can't attack different players.
 - **603.2g**: an event that was prevented or replaced triggers nothing.
 
 ## Next slices

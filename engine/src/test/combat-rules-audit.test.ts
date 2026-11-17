@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, destroy, life, ref, spawn, table, toStep, zone } from "./harness.js";
+import { A, B, C, destroy, life, pickFromZone, ref, spawn, table, toHand, tokensNamed, toStep, zone } from "./harness.js";
 
 /**
  * A rules audit (2026-11-17): combat rules the engine's source never cited,
@@ -72,6 +72,41 @@ describe("combat rules, audited", () => {
     const before = life(game, B);
     toStep(game, "postcombat-main");
     expect(life(game, B)).toBe(before);
+  });
+
+  it("a creature put onto the battlefield attacking a player who has left enters, and isn't attacking (rule 506.3c)", () => {
+    // Kaalia of the Vast: "…onto the battlefield tapped and attacking that
+    // opponent", her trigger on the stack as that opponent concedes.
+    const { game, a } = table({ players: 3 });
+    const kaalia = spawn(game, "Kaalia of the Vast");
+    const dragon = toHand(game, "Shivan Dragon");
+    pickFromZone(a, dragon);
+    a.declareAttackersFn = () => [{ attacker: kaalia, defender: B }];
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && s.awaiting === null && s.priority.holder === A);
+    expect(game.state.zones.shared.stack.length).toBeGreaterThan(0);
+    game.concede(B);
+    const carol = life(game, C);
+    toStep(game, "postcombat-main");
+    expect(zone(game, dragon)).toBe("battlefield");
+    expect(game.state.objects[dragon].tapped).toBe(true);
+    expect(life(game, C)).toBe(carol);
+    const hits = game.state.eventLog.filter((e) => e.type === "damage-dealt" && e.combat);
+    expect(hits).toHaveLength(0);
+  });
+
+  it("a creature put onto the battlefield attacking with no player named goes at one still in the game (rule 508.4)", () => {
+    // Hero of Bladehold's Soldiers are "tapped and attacking": their
+    // controller says whom. With the player the Hero attacked gone, that is
+    // the opponent left, for 2 each with battle cry.
+    const { game, a } = table({ players: 3 });
+    const hero = spawn(game, "Hero of Bladehold");
+    a.declareAttackersFn = () => [{ attacker: hero, defender: B }];
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && s.awaiting === null && s.priority.holder === A);
+    game.concede(B);
+    const carol = life(game, C);
+    toStep(game, "postcombat-main");
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
+    expect(life(game, C)).toBe(carol - 4);
   });
 
   it("a creature put onto the battlefield attacking doesn't trigger 'whenever a creature attacks' (rule 508.2a)", () => {
