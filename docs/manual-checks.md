@@ -8678,3 +8678,13 @@ Each board's die comes up 4.
 ### Radiate: a Bolt copied for each other creature and player, ordered a copy at a time
 - **Do:** Switch to Bob and Lightning Bolt your Grizzly Bears. Back as Alice, respond with Radiate, clicking the Bolt on the stack. When asked, choose Bob, then his Hill Giant.
 - **Expect:** "Order the copies of Lightning Bolt: choose what the next copy targets" offers you, Bob and Bob's Hill Giant, not your Grizzly Bears (the Bolt already targets them). After two picks the last copy is made without asking. Everything resolves: you and Bob each lose 3 life (37), the Bears and the Hill Giant in graveyards.
+
+## Each player orders their own exiled permanents (2026-11-17)
+
+### Chaotic Transformation: you pick which of your exiled permanents is replaced first
+- **Do:** Cast Chaotic Transformation: click your Sol Ring, then your Llanowar Elves, and skip the other three targets. In the popup, pick Sol Ring and confirm.
+- **Expect:** The popup "Chaotic Transformation — Choose which of these targets is handled next" shows Sol Ring and Llanowar Elves, both in exile. After Sol Ring, Ornithopter (the first artifact) enters, then Grizzly Bears for the Elves.
+
+### Chaotic Transformation: in a 4-player game, Bob picks the order of his own
+- **Do:** In this 4-player game, cast Chaotic Transformation: click Bob's Sol Ring, then his Llanowar Elves, and skip the rest. Switch to Bob and pass; in his popup pick Llanowar Elves and confirm.
+- **Expect:** You aren't asked: Bob's popup "Chaotic Transformation — Choose which of these targets is handled next" shows his two exiled cards. After the Elves, Ornithopter (the first creature) enters under Bob's control; Bob then reveals his whole library for an artifact and finds none, so Grizzly Bears stays there.

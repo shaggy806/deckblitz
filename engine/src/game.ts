@@ -43295,11 +43295,13 @@ controlledBy,
           targetZones,
           lastKnownRefs: refs,
         }),
-      pickNextTarget: (among, effect, slot, prompt) => {
+      pickNextTarget: (among, effect, slot, prompt, chooser) => {
         if (among.length === 0) return;
         this.state.awaiting = {
           kind: "choose-permanent-or-player",
-          player: controller,
+          // A `groupChooses` group's own player; one who has left the game
+          // can't choose, so the controller does.
+          player: chooser !== undefined && this.state.players[chooser]?.hasLost !== true ? chooser : controller,
           eligible: [...among],
           prompt,
           then: effect,

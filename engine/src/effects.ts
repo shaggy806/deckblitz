@@ -2659,6 +2659,35 @@ export type EffectSpec =
        */
       readonly turnOrder?: true;
       /**
+       * With `turnOrder`: each group's order is chosen by **its own player**
+       * — the player targeted, or the one who controls (or last controlled)
+       * the permanents in it — not by the controller. Chaotic
+       * Transformation's ruling: "If a player controls multiple permanents
+       * that were exiled this way, that player first chooses which target
+       * they're considering, then they reveal cards … They then repeat this
+       * process for the remaining targets they controlled." The same
+       * one-at-a-time pick, asked of that player; a member that has left the
+       * battlefield is picked from a popup of the cards where they went.
+       */
+      readonly groupChooses?: true;
+      /**
+       * Only the members that match this as the loop begins, each read as a
+       * `conditional`'s `{ kind: "target" }` reads it (a permanent that has
+       * left, as it last existed there; a filter clause about this
+       * resolution, about the card where it went): `{ thisWay: "exiled" }`
+       * is "for each permanent **exiled this way**" (Chaotic Transformation),
+       * leaving out a target a replacement effect sent somewhere else
+       * instead (rule 614.1a).
+       */
+      readonly only?: CardFilter;
+      /**
+       * "For each **permanent**": an object chosen for two of the targets —
+       * which rule 115.3 allows once for each instance of the word "target"
+       * (an artifact creature as both "up to one target artifact" and "up to
+       * one target creature") — is one member, at its first slot.
+       */
+      readonly eachObjectOnce?: true;
+      /**
        * Each member's turn is its own "this way" (as a `repeat`'s pass is):
        * "for each of them, exile the top card of your library, then … deals
        * damage equal to **that card's** mana value" (Soulfire Eruption) reads
@@ -12799,11 +12828,12 @@ export interface EffectApi {
     chooser: PlayerId,
   ): void;
   /** A `turnOrder` `for-each-target`'s pick: raise the
-   * `choose-permanent-or-player` decision for the controller over `among`
-   * (some of this resolution's own targets), its answer only recorded —
-   * read back with {@link targetPickedSince}. `effect` is what the one
-   * picked will meet at slot `slot`, for the offer's side. */
-  pickNextTarget(among: readonly TargetRef[], effect: EffectSpec, slot: number, prompt: string): void;
+   * `choose-permanent-or-player` decision for the controller — or
+   * `chooser`, a `groupChooses` group's own player — over `among` (some of
+   * this resolution's own targets), its answer only recorded — read back
+   * with {@link targetPickedSince}. `effect` is what the one picked will
+   * meet at slot `slot`, for the offer's side. */
+  pickNextTarget(among: readonly TargetRef[], effect: EffectSpec, slot: number, prompt: string, chooser?: PlayerId): void;
   /** The permanent or player the controller picked for this source's
    * effect since event `since` — the last such answer — or `undefined`. */
   targetPickedSince(since: number): TargetRef | undefined;
@@ -15315,8 +15345,30 @@ function facesVillainousByController(effect: EffectSpec, from: number): boolean 
 }
 
 /** A `for-each-target`'s members — target indices, in target order: every
- * target from slot `from` still there, or with `group`, that group's. */
+ * target from slot `from` still there, or with `group`, that group's; with
+ * `only`, those matching it, and with `eachObjectOnce`, an object once. */
 function forEachTargetMembers(spec: Extract<EffectSpec, { kind: "for-each-target" }>, ctx: ResolutionContext): number[] {
+  const members = forEachTargetSlots(spec, ctx);
+  const only = spec.only;
+  const kept =
+    only === undefined
+      ? members
+      : members.filter((index) =>
+          ctx.withTargetAt(spec.from, index).conditionMet({ kind: "target", index: spec.from, filter: only }),
+        );
+  if (spec.eachObjectOnce !== true) return kept;
+  const seen = new Set<ObjectId>();
+  return kept.filter((index) => {
+    const target = ctx.targets[index];
+    if (target?.kind !== "object") return true;
+    if (seen.has(target.object)) return false;
+    seen.add(target.object);
+    return true;
+  });
+}
+
+/** Every slot of a `for-each-target`'s targets it covers that holds one. */
+function forEachTargetSlots(spec: Extract<EffectSpec, { kind: "for-each-target" }>, ctx: ResolutionContext): number[] {
   const members: number[] = [];
   if (spec.group === undefined) {
     for (let index = spec.from; index < ctx.targets.length; index += 1) {
@@ -15450,7 +15502,16 @@ function applyForEachTargetInTurn(spec: Extract<EffectSpec, { kind: "for-each-ta
         ctx.resumeAfterDecisions({ ...spec, progress });
         return;
       }
-      ctx.pickNextTarget(among, spec.effect, spec.from, "Choose which of these targets is handled next");
+      // `groupChooses`: the group's own player picks (a player member is
+      // their own group; a permanent's is its controller's, as it last was).
+      const first = ctx.targets[group[0]];
+      const chooser =
+        spec.groupChooses === true && first !== undefined
+          ? first.kind === "player"
+            ? first.player
+            : ctx.controllerOf(first)
+          : undefined;
+      ctx.pickNextTarget(among, spec.effect, spec.from, "Choose which of these targets is handled next", chooser);
       if (ctx.decisionPending()) {
         ctx.resumeAfterDecisions(asking);
         return;

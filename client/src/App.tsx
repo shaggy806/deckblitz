@@ -4195,6 +4195,15 @@ function Table({
     mode === 'choose-enchant' && enchantAction
       ? enchantAction.options.filter((id) => !view.zones.battlefield.includes(id))
       : []
+  // And for which of a resolution's own targets goes next, when they've left
+  // the battlefield (Chaotic Transformation's exiled permanents, their
+  // controller picking which is replaced first).
+  const permanentOrPlayerCardIds =
+    mode === 'choose-permanent-or-player' && permanentOrPlayerAction
+      ? permanentOrPlayerAction.eligible.flatMap((t) =>
+          t.kind === 'object' && !view.zones.battlefield.includes(t.object) ? [t.object] : [],
+        )
+      : []
   const zoneTargetKey = activeTargeting
     ? `${activeTargeting.kind}:${activeTargeting.source}:${activeTargeting.abilityIndex}:${activeTargeting.picked.length}`
     : null
@@ -5151,8 +5160,16 @@ function Table({
       <div className="controls">
         <span>
           {view.decisionSource?.cardName ?? game.nameOf(permanentOrPlayerAction.source)}:{' '}
-          {permanentOrPlayerAction.prompt} — click {permanents && players ? 'a highlighted permanent or player' : players ? 'a player' : 'a highlighted permanent'}.
+          {permanentOrPlayerAction.prompt} —{' '}
+          {permanentOrPlayerCardIds.length > 0
+            ? 'choose one of the cards shown.'
+            : `click ${permanents && players ? 'a highlighted permanent or player' : players ? 'a player' : 'a highlighted permanent'}.`}
         </span>
+        {permanentOrPlayerCardIds.length > 0 && decisionCollapsed ? (
+          <button type="button" onClick={() => setDecisionCollapsed(false)}>
+            Show choices
+          </button>
+        ) : null}
       </div>
     )
   } else if (mode === 'order-triggers' && triggerOrderAction) {
@@ -8616,6 +8633,34 @@ function Table({
             eligible: enchantGraveyardIds,
             onConfirm: (chosen) => {
               if (chosen[0] !== undefined) game.dispatch({ type: 'choose-enchant', player: seat, enchant: chosen[0] })
+            },
+          }}
+          collapsed={decisionCollapsed}
+          onCollapse={() => setDecisionCollapsed(true)}
+        />
+      ) : null}
+
+      {mode === 'choose-permanent-or-player' && permanentOrPlayerAction && permanentOrPlayerCardIds.length > 0 ? (
+        // Which of a resolution's own targets goes next, when they're cards
+        // off the battlefield now (Chaotic Transformation's exiled
+        // permanents): picked from a popup of just those.
+        <ZoneViewer
+          key={`permanent-or-player:${permanentOrPlayerAction.source}:${permanentOrPlayerCardIds.join(',')}`}
+          title={`${view.decisionSource?.cardName ?? game.nameOf(permanentOrPlayerAction.source)} — ${permanentOrPlayerAction.prompt}`}
+          ids={permanentOrPlayerCardIds}
+          resolve={(id) => view.objects[id]}
+          selection={{
+            min: 1,
+            max: 1,
+            eligible: permanentOrPlayerCardIds,
+            onConfirm: (chosen) => {
+              if (chosen[0] !== undefined) {
+                game.dispatch({
+                  type: 'choose-permanent-or-player',
+                  player: seat,
+                  choice: { kind: 'object', object: chosen[0] },
+                })
+              }
             },
           }}
           collapsed={decisionCollapsed}

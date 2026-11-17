@@ -13109,4 +13109,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       turn: 0,
     }),
   ),
+  // --- Each player orders their own exiled permanents (2026-11-17) ---------------
+  preset(
+    'Chaotic Transformation: you pick which of your exiled permanents is replaced first',
+    board({
+      you: {
+        bf: ['Mountain*6', 'Sol Ring', 'Llanowar Elves'],
+        hand: ['Chaotic Transformation'],
+        lib: ['Ornithopter', 'Grizzly Bears'],
+      },
+    }),
+  ),
+  preset(
+    'Chaotic Transformation: in a 4-player game, Bob picks the order of his own',
+    board({
+      you: { bf: ['Mountain*6'], hand: ['Chaotic Transformation'] },
+      opp: [
+        { human: true, bf: ['Sol Ring', 'Llanowar Elves'], lib: ['Ornithopter', 'Grizzly Bears'] },
+        {},
+        {},
+      ],
+    }),
+  ),
 ]

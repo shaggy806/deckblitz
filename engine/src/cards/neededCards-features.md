@@ -363,6 +363,16 @@ as one event — `choose-permanents`' `thenTogether` for cards in a zone. Avatar
 this card to its owner's hand and up to one creature card milled this way to the battlefield" leaves the
 graveyard as one `cards-left-graveyard`, and the Aura returns with no creature card chosen.
 `test/look-and-choose-then-always.test.ts`.
+### Each player orders their own exiled permanents — built 2026-11-17
+
+The key `decision:order-per-target-reveal-until`, as three `for-each-target` fields and no new
+decision. `groupChooses` (with `turnOrder`): each group's own player picks the next member, the
+`pickNextTarget` raise of `choose-permanent-or-player` taking a `chooser`; the client picks a member
+off the battlefield from a popup (`permanentOrPlayerCardIds` in `App.tsx`). `only: CardFilter`: the
+members matching it as the loop begins ("for each permanent exiled this way"). `eachObjectOnce`: one
+object chosen for two targets (rule 115.3) is one member. Chaotic Transformation (rank 11860).
+`test/for-each-target-group-chooses.test.ts`.
+
 ### A planeswalker type chosen as an ability resolves — found built 2026-11-17
 
 The key `decision:choose-planeswalker-type` needed no engine code: the `choose-creature-type`

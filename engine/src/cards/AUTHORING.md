@@ -4276,7 +4276,19 @@ members two ways:
   mana value": the `thisWay: "exiled"` sum inside reads that turn's card
   alone, and what follows the loop reads them all (Soulfire Eruption). Read
   the card's rulings for the order before reaching for `turnOrder`: without
-  one, the default order above is the rules'.
+  one, the default order above is the rules'. `groupChooses: true` (with
+  `turnOrder`) has each group's own player pick its order instead of the
+  controller — Chaotic Transformation's ruling, "that player first chooses
+  which target they're considering"; a member that has left the battlefield
+  is picked from a popup of the cards. `only: CardFilter` keeps the members
+  matching it as the loop begins, each read as a `conditional`'s `{ kind:
+  "target" }` reads it: `{ thisWay: "exiled" }` is "for each permanent
+  **exiled this way**". `eachObjectOnce: true` is "for each **permanent**":
+  one object chosen for two targets (rule 115.3 — an artifact creature as both
+  "up to one target artifact" and "up to one target creature") is one member.
+  Chaotic Transformation is all three, after a `simultaneous` exile of its
+  five optional slots, its `effect` a `reveal-until` of `whose: { controllerOf:
+  0 }` and `filter: { sharesCardTypeWith: 0 }`.
 - a `flicker`'s `target: { from: n }` — every member exiled together and
   returned together (Eerie Interlude, Brago, King Eternal).
 
