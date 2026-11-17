@@ -539,6 +539,7 @@ import _poolMerchantOfTheVale from "../pool/merchant-of-the-vale.js";
 import _poolMerenOfClanNelToth from "../pool/meren-of-clan-nel-toth.js";
 import _poolMeteorGolem from "../pool/meteor-golem.js";
 import _poolMeteoricMace from "../pool/meteoric-mace.js";
+import _poolMeticulousExcavation from "../pool/meticulous-excavation.js";
 import _poolMightBeyondReason from "../pool/might-beyond-reason.js";
 import _poolMightMakesRight from "../pool/might-makes-right.js";
 import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
@@ -1565,6 +1566,7 @@ const shard: CardShard = {
     _poolMerenOfClanNelToth,
     _poolMeteorGolem,
     _poolMeteoricMace,
+    _poolMeticulousExcavation,
     _poolMightBeyondReason,
     _poolMightMakesRight,
     _poolMightformHarmonizer,

@@ -17442,6 +17442,7 @@ import _poolMethodsOfTheMighty from "./pool/methods-of-the-mighty.js";
 import _poolMeticulousArchive from "./pool/meticulous-archive.js";
 import _poolMeticulousArtisan from "./pool/meticulous-artisan.js";
 import _poolMeticulousCommons from "./pool/meticulous-commons.js";
+import _poolMeticulousExcavation from "./pool/meticulous-excavation.js";
 import _poolMetrognome from "./pool/metrognome.js";
 import _poolMetropolisAngel from "./pool/metropolis-angel.js";
 import _poolMetropolisReformer from "./pool/metropolis-reformer.js";
@@ -19194,6 +19195,7 @@ import _poolOathOfEorl from "./pool/oath-of-eorl.js";
 import _poolOathOfGhouls from "./pool/oath-of-ghouls.js";
 import _poolOathOfGideon from "./pool/oath-of-gideon.js";
 import _poolOathOfJace from "./pool/oath-of-jace.js";
+import _poolOathOfKaya from "./pool/oath-of-kaya.js";
 import _poolOathOfLieges from "./pool/oath-of-lieges.js";
 import _poolOathOfLiliana from "./pool/oath-of-liliana.js";
 import _poolOathOfLimDul from "./pool/oath-of-lim-dul.js";
@@ -28461,6 +28463,7 @@ import _poolTheOmenkeel from "./pool/the-omenkeel.js";
 import _poolTheOneRing from "./pool/the-one-ring.js";
 import _poolTheOoze from "./pool/the-ooze.js";
 import _poolTheOzolith from "./pool/the-ozolith.js";
+import _poolThePandorica from "./pool/the-pandorica.js";
 import _poolThePartingOfTheWays from "./pool/the-parting-of-the-ways.js";
 import _poolThePeregrineDynamo from "./pool/the-peregrine-dynamo.js";
 import _poolThePhasingOfZhalfir from "./pool/the-phasing-of-zhalfir.js";
@@ -30564,6 +30567,7 @@ import _poolVengefulDead from "./pool/vengeful-dead.js";
 import _poolVengefulDevil from "./pool/vengeful-devil.js";
 import _poolVengefulDreams from "./pool/vengeful-dreams.js";
 import _poolVengefulFirebrand from "./pool/vengeful-firebrand.js";
+import _poolVengefulPharaoh from "./pool/vengeful-pharaoh.js";
 import _poolVengefulPossession from "./pool/vengeful-possession.js";
 import _poolVengefulReaper from "./pool/vengeful-reaper.js";
 import _poolVengefulRebel from "./pool/vengeful-rebel.js";
@@ -50910,6 +50914,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeticulousArchive,
   _poolMeticulousArtisan,
   _poolMeticulousCommons,
+  _poolMeticulousExcavation,
   _poolMetrognome,
   _poolMetropolisAngel,
   _poolMetropolisReformer,
@@ -52662,6 +52667,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOathOfGhouls,
   _poolOathOfGideon,
   _poolOathOfJace,
+  _poolOathOfKaya,
   _poolOathOfLieges,
   _poolOathOfLiliana,
   _poolOathOfLimDul,
@@ -61929,6 +61935,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheOneRing,
   _poolTheOoze,
   _poolTheOzolith,
+  _poolThePandorica,
   _poolThePartingOfTheWays,
   _poolThePeregrineDynamo,
   _poolThePhasingOfZhalfir,
@@ -64032,6 +64039,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVengefulDevil,
   _poolVengefulDreams,
   _poolVengefulFirebrand,
+  _poolVengefulPharaoh,
   _poolVengefulPossession,
   _poolVengefulReaper,
   _poolVengefulRebel,
@@ -84391,6 +84399,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/meticulous-archive": _poolMeticulousArchive,
   "pool/meticulous-artisan": _poolMeticulousArtisan,
   "pool/meticulous-commons": _poolMeticulousCommons,
+  "pool/meticulous-excavation": _poolMeticulousExcavation,
   "pool/metrognome": _poolMetrognome,
   "pool/metropolis-angel": _poolMetropolisAngel,
   "pool/metropolis-reformer": _poolMetropolisReformer,
@@ -86143,6 +86152,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oath-of-ghouls": _poolOathOfGhouls,
   "pool/oath-of-gideon": _poolOathOfGideon,
   "pool/oath-of-jace": _poolOathOfJace,
+  "pool/oath-of-kaya": _poolOathOfKaya,
   "pool/oath-of-lieges": _poolOathOfLieges,
   "pool/oath-of-liliana": _poolOathOfLiliana,
   "pool/oath-of-lim-dul": _poolOathOfLimDul,
@@ -95410,6 +95420,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-one-ring": _poolTheOneRing,
   "pool/the-ooze": _poolTheOoze,
   "pool/the-ozolith": _poolTheOzolith,
+  "pool/the-pandorica": _poolThePandorica,
   "pool/the-parting-of-the-ways": _poolThePartingOfTheWays,
   "pool/the-peregrine-dynamo": _poolThePeregrineDynamo,
   "pool/the-phasing-of-zhalfir": _poolThePhasingOfZhalfir,
@@ -97513,6 +97524,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vengeful-devil": _poolVengefulDevil,
   "pool/vengeful-dreams": _poolVengefulDreams,
   "pool/vengeful-firebrand": _poolVengefulFirebrand,
+  "pool/vengeful-pharaoh": _poolVengefulPharaoh,
   "pool/vengeful-possession": _poolVengefulPossession,
   "pool/vengeful-reaper": _poolVengefulReaper,
   "pool/vengeful-rebel": _poolVengefulRebel,

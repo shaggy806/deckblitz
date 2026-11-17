@@ -940,6 +940,7 @@ import _poolTheEarthKing from "../pool/the-earth-king.js";
 import _poolTheEverChangingDane from "../pool/the-ever-changing-dane.js";
 import _poolTheMadcapJester from "../pool/the-madcap-jester.js";
 import _poolTheMostDangerousGamer from "../pool/the-most-dangerous-gamer.js";
+import _poolThePandorica from "../pool/the-pandorica.js";
 import _poolThePrincessTakesFlight from "../pool/the-princess-takes-flight.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
 import _poolTheSwarmlord from "../pool/the-swarmlord.js";
@@ -2044,6 +2045,7 @@ const shard: CardShard = {
     _poolTheEverChangingDane,
     _poolTheMadcapJester,
     _poolTheMostDangerousGamer,
+    _poolThePandorica,
     _poolThePrincessTakesFlight,
     _poolTheReaverCleaver,
     _poolTheSwarmlord,

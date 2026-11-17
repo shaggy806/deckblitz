@@ -570,6 +570,7 @@ import _poolNumotTheDevastator from "../pool/numot-the-devastator.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
 import _poolNyxbornColossus from "../pool/nyxborn-colossus.js";
 import _poolOasisGardener from "../pool/oasis-gardener.js";
+import _poolOathOfKaya from "../pool/oath-of-kaya.js";
 import _poolOathOfLiliana from "../pool/oath-of-liliana.js";
 import _poolObsessiveAstronomer from "../pool/obsessive-astronomer.js";
 import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
@@ -918,6 +919,7 @@ import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
 import _poolVeilstoneAmulet from "../pool/veilstone-amulet.js";
+import _poolVengefulPharaoh from "../pool/vengeful-pharaoh.js";
 import _poolVenomizedCat from "../pool/venomized-cat.js";
 import _poolVenomousFangs from "../pool/venomous-fangs.js";
 import _poolVergeRangers from "../pool/verge-rangers.js";
@@ -1596,6 +1598,7 @@ const shard: CardShard = {
     _poolNyxWeaver,
     _poolNyxbornColossus,
     _poolOasisGardener,
+    _poolOathOfKaya,
     _poolOathOfLiliana,
     _poolObsessiveAstronomer,
     _poolOdunosRiverTrawler,
@@ -1944,6 +1947,7 @@ const shard: CardShard = {
     _poolVampireChampion,
     _poolVaultSkirge,
     _poolVeilstoneAmulet,
+    _poolVengefulPharaoh,
     _poolVenomizedCat,
     _poolVenomousFangs,
     _poolVergeRangers,
