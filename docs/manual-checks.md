@@ -8778,3 +8778,8 @@ Each board's die comes up 4.
 ### Ormos, Archive Keeper: in a 4-player game, draws from an empty library become counters
 - **Do:** In this 4-player game, activate Ormos, Archive Keeper's ability.
 - **Expect:** Your three cards, all of different names, are discarded without a question. You draw the three cards your library has (two Wastes and a Plains), then Ormos gets five +1/+1 counters twice (a 15/15) in place of the other two draws. You don't lose the game.
+## Collect evidence rather than pay the mana cost (2026-11-17)
+
+### Conspiracy Unraveler: cast a spell by collecting evidence 10
+- **Do:** Cast Hill Giant from your hand by its "collect evidence 10" offer (you have no lands). In the popup pick Gray Merchant of Asphodel, Hill Giant and Grizzly Bears from your graveyard and confirm.
+- **Expect:** The offer costs no mana. The popup asks for cards with total mana value 10 or greater; with all three (11) chosen they're exiled and Hill Giant enters.

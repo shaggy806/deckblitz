@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Collect evidence rather than pay the mana cost for spells — built 2026-11-17
+
+The key `cost:alt-cost-collect-evidence-for-spells`: `alternativeCostForSpells.collectEvidence` (rule 701.59a),
+offered while the graveyard holds that much besides the spell (701.59b), queued as an `AlsoCostAsk.collectEvidence`
+so it's asked once the spell is on the stack (601.2h). Beside a spell's own "you may collect evidence N"
+(Crimestopper Sprite), both are paid from cards set apart (the ruling): the cast is offered only while some split
+of the graveyard pays both (`canCollectEvidenceApart`, a subset sum), and the first choice is capped (`together`'s
+`atMost`) to leave the second's. Conspiracy Unraveler (rank 13438); the scaffolder reads Jodah's line too.
+`test/alt-cost-collect-evidence.test.ts`.
+
 ### Snow mana of a spell's own colors — built 2026-11-17
 
 The key `condition:snow-mana-of-spell-colors`: a `ManaSpentClause`'s `ofItsColors`, counting only spent mana of one

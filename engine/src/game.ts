@@ -858,6 +858,9 @@ interface AlternativeCostOffer {
   };
   /** Life equal to the spell's mana value, paid with it (rule 119.4). */
   readonly payLifeManaValue?: true;
+  /** Evidence collected with it — an `alternativeCostForSpells`'
+   * `collectEvidence` (Conspiracy Unraveler, rule 701.59a). */
+  readonly collectEvidence?: number;
   /** Who is had to gain how much life for it (Invigorate). */
   readonly gainLife?: { readonly players: readonly PlayerId[]; readonly amount: number };
   /** The permanent whose once-a-turn grant a cast for it spends. */
@@ -6416,6 +6419,13 @@ export class Game {
                     altCostText: [
                       ...(alternative.mana !== "{0}" ? [`pay ${alternative.mana}`] : []),
                       `discard ${alternative.discard.text}`,
+                    ].join(", "),
+                  }
+              : altCost === true && (!ownAltPaid || def.alternativeCost === null) && alternative?.collectEvidence !== undefined
+                ? {
+                    altCostText: [
+                      ...(alternative.mana !== "{0}" ? [`pay ${alternative.mana}`] : []),
+                      `collect evidence ${alternative.collectEvidence}`,
                     ].join(", "),
                   }
               : altCost === true && alternative?.payEnergy !== undefined
@@ -21643,6 +21653,14 @@ export class Game {
     ) {
       return `${player}'s graveyard can't collect evidence ${def.kicker.collectEvidence ?? 0} for ${def.name}`;
     }
+    // Beside an alternative cost's "collect evidence 10" (Conspiracy
+    // Unraveler): both from the graveyard, from cards set apart (its ruling).
+    const altEvidence = kicked && def.kicker?.keyword === "collect-evidence" && altCost
+      ? this.alternativeCostOf(cardId, def, via, player)?.collectEvidence
+      : undefined;
+    if (altEvidence !== undefined && !this.canCollectEvidenceApart(player, def.kicker!.collectEvidence ?? 0, altEvidence, cardId)) {
+      return `${player}'s graveyard can't collect evidence ${def.kicker!.collectEvidence ?? 0} and ${altEvidence} for ${def.name}`;
+    }
     // Bargain (rule 702.166a): only with an artifact, enchantment or token
     // to sacrifice — and one still there once the mana is paid, checked
     // with the rest of the sacrifice below (`spellSacrificeParts`).
@@ -24655,6 +24673,19 @@ export class Game {
       ],
       via === "effect" ? this.activePlayer : player,
     );
+    // "Collect evidence 10 rather than pay the mana cost" (Conspiracy
+    // Unraveler — rule 701.59a): which cards, chosen as the cost is paid, the
+    // spell on the stack (601.2h), in turn with the cast's other parts, so a
+    // spell's own "you may collect evidence N" is asked apart from it.
+    const altEvidence = altCost ? alternativeCost?.collectEvidence : undefined;
+    if (altEvidence !== undefined) {
+      (this.state.pendingAlsoCosts ??= []).push({
+        spell: cardId,
+        player,
+        priorityTo: via === "effect" ? this.activePlayer : player,
+        collectEvidence: altEvidence,
+      });
+    }
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
     const flashbackDiscards = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
     const flashbackDiscard = flashbackDiscards === "x" ? chosenX : flashbackDiscards;
@@ -24735,8 +24766,14 @@ export class Game {
     if (blightCost !== undefined) this.beginBlight(player, cardId, blightCost, { x: chosenX, priorityTo });
     // "You may collect evidence N" taken (rule 701.59a): which cards, chosen
     // now, as the cost is paid (601.2h).
+    // Beside an alternative cost's evidence (Conspiracy Unraveler), asked
+    // next: this leaves enough for it.
     if (kicked && def.kicker?.keyword === "collect-evidence" && def.kicker.collectEvidence !== undefined) {
-      this.beginCollectEvidence(player, cardId, def.kicker.collectEvidence, { x: chosenX, priorityTo });
+      this.beginCollectEvidence(player, cardId, def.kicker.collectEvidence, {
+        x: chosenX,
+        priorityTo,
+        ...(altEvidence !== undefined ? { leave: altEvidence } : {}),
+      });
     }
     // A keyword cost's own "collect evidence N" (Detective's Phoenix's
     // "Bestow—{R}, Collect evidence 6").
@@ -49641,6 +49678,9 @@ controlledBy,
         this.payGraveyardExileCost(player, spell, exileFromGraveyard, priorityTo, spell),
       );
     }
+    if (ask.collectEvidence !== undefined) {
+      this.beginCollectEvidence(player, spell, ask.collectEvidence, { x: this.state.objects[spell]?.xValue ?? 0, priorityTo });
+    }
   }
 
   /** Whether everything `offer` offers could pay it: `count` permanents, or
@@ -55370,6 +55410,25 @@ controlledBy,
     return total >= amount;
   }
 
+  /** Whether `player` could collect evidence `first` and then `second` from
+   * what's left (rule 701.59a twice, as one cast's two costs — Conspiracy
+   * Unraveler's beside a spell's own): some cards totaling `first` to the
+   * graveyard's total less `second`, a subset sum, `except` the spell. */
+  private canCollectEvidenceApart(player: PlayerId, first: number, second: number, except: ObjectId): boolean {
+    const worths = (this.state.zones.perPlayer[player]?.graveyard ?? [])
+      .filter((id) => id !== except)
+      .map((id) => this.evidenceWorth(id, undefined));
+    const total = worths.reduce((n, w) => n + w, 0);
+    if (total < first + second) return false;
+    const reachable = new Uint8Array(total + 1);
+    reachable[0] = 1;
+    for (const w of worths) {
+      for (let s = total - w; s >= 0; s -= 1) if (reachable[s] === 1) reachable[s + w] = 1;
+    }
+    for (let s = first; s <= total - second; s += 1) if (reachable[s] === 1) return true;
+    return false;
+  }
+
   /** What one card adds to a collect-evidence total: its mana value (rule
    * 701.59a), or with `among.symbolsOf` its mana symbols of that color — a
    * hybrid or Phyrexian one once (107.4e-f, as devotion reads them, 700.5;
@@ -55420,6 +55479,10 @@ controlledBy,
        * its `{ paid: "exiled" }` ("copy those exiled cards" — Baron Helmut
        * Zemo). */
       readonly costExileFor?: ObjectId;
+      /** Evidence the same cast collects next, from what this leaves
+       * (Conspiracy Unraveler's beside a spell's own): the cards chosen may
+       * total no more than leaves that much behind. */
+      readonly leave?: number;
     } = {},
   ): void {
     const among = opts.among;
@@ -55428,6 +55491,8 @@ controlledBy,
     // may be picked.
     const ids = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== among?.except);
     const eligible = among !== undefined ? this.graveyardCostCandidates(player, among.filter, among.except) : ids;
+    const leave = opts.leave ?? 0;
+    const cap = leave > 0 ? eligible.reduce((n, id) => n + this.evidenceWorth(id, among), 0) - leave : undefined;
     // Collect evidence 0 from an empty graveyard: nothing to choose, and
     // evidence is collected all the same.
     if (opts.required === true && among === undefined && eligible.length === 0) {
@@ -55448,9 +55513,12 @@ controlledBy,
         rule: "total",
         tags,
         atLeast: amount,
+        ...(cap !== undefined ? { atMost: cap } : {}),
         ...(opts.optional === true ? { orNone: true } : {}),
         text:
-          among?.symbolsOf !== undefined
+          cap !== undefined
+            ? `with total mana value ${amount} to ${cap}, so ${leave} is left to collect next (collect evidence ${amount})`
+            : among?.symbolsOf !== undefined
             ? `with ${amount} or more ${COLOR_WORDS[among.symbolsOf]} mana symbols among their mana costs`
             : among !== undefined
               ? `with total mana value ${amount} or greater`
@@ -60884,10 +60952,20 @@ controlledBy,
         ) {
           continue;
         }
+        // "Collect evidence 10 rather than pay" (Conspiracy Unraveler): only
+        // with that much in the graveyard besides the spell, which is on the
+        // stack by the time it's paid (701.59b, 601.2a).
+        if (
+          grant.collectEvidence !== undefined &&
+          !this.canCollectEvidence(caster, grant.collectEvidence, { filter: {}, except: cardId })
+        ) {
+          continue;
+        }
         seen.add(ability);
         out.push({
           mana: grant.mana,
           ...(grant.discard !== undefined ? { discard: grant.discard } : {}),
+          ...(grant.collectEvidence !== undefined ? { collectEvidence: grant.collectEvidence } : {}),
           ...(grant.energy !== undefined ? { payEnergy: grant.energy } : {}),
           ...(grant.flash === true ? { flash: true as const } : {}),
           ...(grant.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),

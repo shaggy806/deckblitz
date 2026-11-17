@@ -22494,6 +22494,16 @@ function parseStatic(line, text) {
       };
     }
   }
+  // "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells you
+  // cast" (Jodah, Archmage Eternal), "you may collect evidence 10 rather than
+  // …" (Conspiracy Unraveler — rule 701.59a): an alternative cost (118.9).
+  if ((m = /^You may (?:pay ((?:\{[^}]+\})+)|collect evidence (\d+)) rather than pay the mana cost for spells you cast\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      alternativeCostForSpells: m[1] !== undefined ? { mana: m[1] } : { mana: "{0}", collectEvidence: Number(m[2]) },
+      text,
+    };
+  }
   // A free cast by an alternative cost (rule 118.9), with its limits.
   if (line === "You may cast spells from your hand without paying their mana costs.") {
     return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } }, text };

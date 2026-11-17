@@ -3264,11 +3264,23 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * so a colorless spell has no such card and isn't offered it, and
    * `filter` narrows the card further. Only the mana cost is replaced: the
    * spell's additional costs are still paid (its ruling).
+   *
+   * `collectEvidence` is Conspiracy Unraveler's "you may collect evidence 10
+   * rather than pay the mana cost for spells you cast" (`mana: "{0}"`): the
+   * caster exiles cards with total mana value that much or more from their
+   * graveyard (rule 701.59a), chosen as the cost is paid, the spell already
+   * on the stack (601.2h) — so a spell cast from the graveyard is never among
+   * them. Offered only while the graveyard holds that much besides the
+   * spell (701.59b); beside a spell's own "you may collect evidence N"
+   * (Crimestopper Sprite) both are paid, from cards set apart, and the
+   * evidence is collected twice. It isn't that spell's "if evidence was
+   * collected" (rule 701.59c: linked to its own cost).
    */
   readonly alternativeCostForSpells?: {
     readonly mana: string;
     readonly filter?: CardFilter;
     readonly discard?: { readonly filter?: CardFilter; readonly sharesColor?: true; readonly text: string };
+    readonly collectEvidence?: number;
     readonly energy?: number;
     readonly flash?: true;
     readonly payLifeManaValue?: true;

@@ -5986,10 +5986,16 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   rest go to the bottom. The cascade's exiled cards are `zone:
   "exiled-this-way"`: Averna's is a `look-and-choose` of `min: 0`, `max: 1`,
   `filter: { type: "land" }`, `destination: "battlefield"`, `enterTapped`.
-- `alternativeCostForSpells: { mana, filter?, discard?, energy?, flash?, payLifeManaValue?, oncePerTurn?, yourTurnOnly?, fromHand?, fromZones?, anyPlayer? }` — an alternative cost (rule
+- `alternativeCostForSpells: { mana, filter?, discard?, collectEvidence?, energy?, flash?, payLifeManaValue?, oncePerTurn?, yourTurnOnly?, fromHand?, fromZones?, anyPlayer? }` — an alternative cost (rule
   118.9) for the spells you cast: Jodah, Archmage Eternal's "you may pay
   {W}{U}{B}{R}{G} rather than pay the mana cost for spells you cast" is `{
-  mana: "{W}{U}{B}{R}{G}" }`. Offered as the `altCost` variant of any spell
+  mana: "{W}{U}{B}{R}{G}" }`. Conspiracy Unraveler's "you may collect evidence
+  10 rather than pay …" is `{ mana: "{0}", collectEvidence: 10 }` (rule
+  701.59a): offered while the graveyard holds that much besides the spell,
+  the cards chosen once it's on the stack; beside a spell's own "you may
+  collect evidence N" (Crimestopper Sprite) both are paid from cards set
+  apart, the first choice capped to leave the second's. The scaffolder reads
+  both lines. Offered as the `altCost` variant of any spell
   cast for its mana cost — from hand, the command zone (commander tax still
   applies), exile or a graveyard permission — but never of one cast for
   another alternative cost (flashback, escape, foretell, disturb, a free

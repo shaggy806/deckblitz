@@ -19112,6 +19112,25 @@ describe("spend only one colour of mana on an ability's X (Crypt Rats)", () => {
   });
 });
 
+describe("an alternative cost for the spells you cast (Jodah, Conspiracy Unraveler)", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Sphinx", type_line: "Creature — Sphinx", mana_cost: "{5}{U}{U}", oracle_text }, { tokenFor: () => null });
+
+  it("pay a mana cost rather than pay the mana cost", () => {
+    const jodah = face("You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells you cast.");
+    expect(jodah.complete).toBe(true);
+    expect(jodah.static[0].alternativeCostForSpells).toEqual({ mana: "{W}{U}{B}{R}{G}" });
+  });
+
+  it("collect evidence 10 rather than pay the mana cost", () => {
+    const sphinx = face(
+      "Flying\nYou may collect evidence 10 rather than pay the mana cost for spells you cast. (To collect evidence 10, exile cards with total mana value 10 or greater from your graveyard.)",
+    );
+    expect(sphinx.complete).toBe(true);
+    expect(sphinx.static[0].alternativeCostForSpells).toEqual({ mana: "{0}", collectEvidence: 10 });
+  });
+});
+
 describe("creatures attacking your opponents and/or planeswalkers they control (Roar of Resistance)", () => {
   it("the whole card: the token haste static, and the paid pump over the attackers aimed at opponents", () => {
     const roar = parseFace(

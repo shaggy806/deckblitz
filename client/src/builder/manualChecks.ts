@@ -13292,4 +13292,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       fill: 1,
     }),
   ),
+  // --- Collect evidence rather than pay the mana cost (2026-11-17) -----------------
+  preset(
+    'Conspiracy Unraveler: cast a spell by collecting evidence 10',
+    board({
+      you: {
+        bf: ['Conspiracy Unraveler'],
+        hand: ['Hill Giant'],
+        gy: ['Gray Merchant of Asphodel', 'Hill Giant', 'Grizzly Bears'],
+      },
+    }),
+  ),
 ]
