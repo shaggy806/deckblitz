@@ -36532,6 +36532,14 @@ export class Game {
       }
       case "discards":
         return event.type === "cards-discarded" ? this.discardsBefore(spec, event.player, event.objects, self) : undefined;
+      case "cycles":
+        // "Whenever you cycle another card for the first time each turn"
+        // (Valiant Rescuer): the cards that player cycled earlier this turn
+        // (rule 702.29c), journaled as each was cycled. "Another" leaves
+        // nothing out: a card cycled from a hand was another object than the
+        // permanent watching (rule 400.7), even the same card.
+        if (event.type !== "card-cycled") return undefined;
+        return count("cycled", (e) => e.player === event.player) - 1;
       case "attack-with": {
         // An attack "with one or more creatures" is counted by combat: the
         // earlier declarations of theirs this turn that would have fired it.

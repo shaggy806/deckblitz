@@ -2157,9 +2157,17 @@ export function parseTrigger(clause) {
   // Mutate (rule 702.140d).
   if (/^Whenever ~ mutates$/.test(c)) return self("mutates");
   if (/^Whenever a creature you control mutates$/.test(c)) return [{ on: "mutates", who: "you-control" }];
-  // Cycling (rule 702.29): "whenever you cycle a card / another card".
-  if ((m = /^Whenever you cycle (a|another) card$/.exec(c))) {
-    return [{ on: "cycles", who: "you", ...(m[1] === "another" ? { otherOnly: true } : {}) }];
+  // Cycling (rule 702.29): "whenever you cycle a card / another card", "…
+  // for the first time each turn" (Valiant Rescuer) the timing wrapper.
+  if ((m = /^Whenever you cycle (a|another) card( for the first time each turn)?$/.exec(c))) {
+    return [
+      {
+        on: "cycles",
+        who: "you",
+        ...(m[1] === "another" ? { otherOnly: true } : {}),
+        ...(m[2] !== undefined ? { firstTimeEachTurn: true } : {}),
+      },
+    ];
   }
   if (c === "When you cycle this card") return [{ on: "this-cycled" }];
   // Foretell (rule 702.143a): "whenever you foretell a card".

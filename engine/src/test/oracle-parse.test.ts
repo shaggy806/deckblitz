@@ -21804,3 +21804,11 @@ describe("the top X cards, X the attacking Wraiths' total power (Witch-king, Sky
     });
   });
 });
+
+describe("the first card cycled each turn (Valiant Rescuer)", () => {
+  it("the cycle trigger with the timing wrapper", () => {
+    expect(parseTrigger("Whenever you cycle another card for the first time each turn")).toEqual([
+      { on: "cycles", who: "you", otherOnly: true, firstTimeEachTurn: true },
+    ]);
+  });
+});

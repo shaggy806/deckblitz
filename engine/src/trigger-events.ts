@@ -382,6 +382,7 @@ export function timingCountable(spec: TriggerSpec): boolean {
     case "becomes-saddled":
     case "put-into-graveyard":
     case "discards":
+    case "cycles":
       return true;
     case "becomes-target":
       // The journal's `targeted` entry doesn't keep the spell, so a
