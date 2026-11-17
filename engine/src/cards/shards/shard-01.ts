@@ -531,6 +531,7 @@ import _poolMavindaStudentsAdvocate from "../pool/mavinda-students-advocate.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
 import _poolMazesEnd from "../pool/mazes-end.js";
 import _poolMeddlingYouths from "../pool/meddling-youths.js";
+import _poolMelekReforgedResearcher from "../pool/melek-reforged-researcher.js";
 import _poolMemorialToGlory from "../pool/memorial-to-glory.js";
 import _poolMengHuoBarbarianKing from "../pool/meng-huo-barbarian-king.js";
 import _poolMentalMisstep from "../pool/mental-misstep.js";
@@ -1555,6 +1556,7 @@ const shard: CardShard = {
     _poolMawOfTheMire,
     _poolMazesEnd,
     _poolMeddlingYouths,
+    _poolMelekReforgedResearcher,
     _poolMemorialToGlory,
     _poolMengHuoBarbarianKing,
     _poolMentalMisstep,

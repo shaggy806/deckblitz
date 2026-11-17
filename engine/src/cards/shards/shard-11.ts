@@ -275,6 +275,7 @@ import _poolEliminate from "../pool/eliminate.js";
 import _poolElrondOfTheWhiteCouncil from "../pool/elrond-of-the-white-council.js";
 import _poolElvishRegrower from "../pool/elvish-regrower.js";
 import _poolEmberwildeAugur from "../pool/emberwilde-augur.js";
+import _poolEmbiggen from "../pool/embiggen.js";
 import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEmissaryOfHope from "../pool/emissary-of-hope.js";
 import _poolEmpyrialArmor from "../pool/empyrial-armor.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolElrondOfTheWhiteCouncil,
     _poolElvishRegrower,
     _poolEmberwildeAugur,
+    _poolEmbiggen,
     _poolEmeritusOfWoe,
     _poolEmissaryOfHope,
     _poolEmpyrialArmor,

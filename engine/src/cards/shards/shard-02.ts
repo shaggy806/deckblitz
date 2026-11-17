@@ -89,6 +89,7 @@ import _poolBodyDouble from "../pool/body-double.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
 import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
 import _poolBoostedSloop from "../pool/boosted-sloop.js";
+import _poolBorealOutrider from "../pool/boreal-outrider.js";
 import _poolBoromirGondorsHope from "../pool/boromir-gondors-hope.js";
 import _poolBoughsideWanderers from "../pool/boughside-wanderers.js";
 import _poolBoundingKrasis from "../pool/bounding-krasis.js";
@@ -1139,6 +1140,7 @@ const shard: CardShard = {
     _poolBogWraith,
     _poolBoonOfTheWishGiver,
     _poolBoostedSloop,
+    _poolBorealOutrider,
     _poolBoromirGondorsHope,
     _poolBoughsideWanderers,
     _poolBoundingKrasis,

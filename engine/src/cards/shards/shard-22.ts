@@ -159,6 +159,7 @@ import _poolConcertedEffort from "../pool/concerted-effort.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
 import _poolConstructACosmicCube from "../pool/construct-a-cosmic-cube.js";
+import _poolConsumeSpirit from "../pool/consume-spirit.js";
 import _poolConsumeStrength from "../pool/consume-strength.js";
 import _poolConsumingVortex from "../pool/consuming-vortex.js";
 import _poolContestedWarZone from "../pool/contested-war-zone.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolConclaveEvangelist,
     _poolConsign,
     _poolConstructACosmicCube,
+    _poolConsumeSpirit,
     _poolConsumeStrength,
     _poolConsumingVortex,
     _poolContestedWarZone,

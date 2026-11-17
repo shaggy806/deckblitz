@@ -850,6 +850,7 @@ import _poolSubtlety from "../pool/subtlety.js";
 import _poolSubversion from "../pool/subversion.js";
 import _poolSuddenStorm from "../pool/sudden-storm.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
+import _poolSufferThePast from "../pool/suffer-the-past.js";
 import _poolSulfurousBlast from "../pool/sulfurous-blast.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
@@ -1914,6 +1915,7 @@ const shard: CardShard = {
     _poolSubversion,
     _poolSuddenStorm,
     _poolSuddenStrength,
+    _poolSufferThePast,
     _poolSulfurousBlast,
     _poolSunSentinel,
     _poolSungracePegasus,

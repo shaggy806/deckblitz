@@ -865,6 +865,7 @@ import _poolTelekinesis from "../pool/telekinesis.js";
 import _poolTempleOfKhonshu from "../pool/temple-of-khonshu.js";
 import _poolTemporaryTruce from "../pool/temporary-truce.js";
 import _poolTemptWithDiscovery from "../pool/tempt-with-discovery.js";
+import _poolTerritorialMaro from "../pool/territorial-maro.js";
 import _poolTestOfTalents from "../pool/test-of-talents.js";
 import _poolTezzeretMasterOfTheBridge from "../pool/tezzeret-master-of-the-bridge.js";
 import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
@@ -1899,6 +1900,7 @@ const shard: CardShard = {
     _poolTempleOfKhonshu,
     _poolTemporaryTruce,
     _poolTemptWithDiscovery,
+    _poolTerritorialMaro,
     _poolTestOfTalents,
     _poolTezzeretMasterOfTheBridge,
     _poolTezzeretsTouch,

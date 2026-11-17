@@ -247,6 +247,7 @@ import _poolEnigmaDrake from "../pool/enigma-drake.js";
 import _poolEntanglingTrap from "../pool/entangling-trap.js";
 import _poolEquestrianSkill from "../pool/equestrian-skill.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
+import _poolEscapeDetection from "../pool/escape-detection.js";
 import _poolEsperStormblade from "../pool/esper-stormblade.js";
 import _poolEssenceFracture from "../pool/essence-fracture.js";
 import _poolEternalStudent from "../pool/eternal-student.js";
@@ -1286,6 +1287,7 @@ const shard: CardShard = {
     _poolEntanglingTrap,
     _poolEquestrianSkill,
     _poolErietteOfTheCharmedApple,
+    _poolEscapeDetection,
     _poolEsperStormblade,
     _poolEssenceFracture,
     _poolEternalStudent,

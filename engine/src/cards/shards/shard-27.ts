@@ -217,6 +217,7 @@ import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDoorkeeper from "../pool/doorkeeper.js";
 import _poolDoorman from "../pool/doorman.js";
 import _poolDoorsOfDurin from "../pool/doors-of-durin.js";
+import _poolDrafnasRestoration from "../pool/drafnas-restoration.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
 import _poolDragonlordsPrerogative from "../pool/dragonlords-prerogative.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolDoorkeeper,
     _poolDoorman,
     _poolDoorsOfDurin,
+    _poolDrafnasRestoration,
     _poolDragonCursedHalls,
     _poolDragonEgg,
     _poolDragonlordsPrerogative,

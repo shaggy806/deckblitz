@@ -169,6 +169,7 @@ import _poolCommencementOfFestivities from "../pool/commencement-of-festivities.
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConflux from "../pool/conflux.js";
 import _poolConsignToDream from "../pool/consign-to-dream.js";
+import _poolConspiracyUnraveler from "../pool/conspiracy-unraveler.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolContagiousVorrac from "../pool/contagious-vorrac.js";
 import _poolCopperTablet from "../pool/copper-tablet.js";
@@ -1211,6 +1212,7 @@ const shard: CardShard = {
     _poolConciliatorsDuelist,
     _poolConflux,
     _poolConsignToDream,
+    _poolConspiracyUnraveler,
     _poolConsumingAetherborn,
     _poolContagiousVorrac,
     _poolCopperTablet,
