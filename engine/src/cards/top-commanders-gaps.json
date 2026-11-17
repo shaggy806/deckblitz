@@ -9,6 +9,7 @@
     "decision:choose-from-batch",
     "decision:order-per-target-reveal-until",
     "decision:choose-planeswalker-type",
+    "amount:life-paid-to-activate",
     "cost:exile-from-graveyard-mana-symbol-total",
     "effect:divided-total-by-alternative-cost",
     "trigger:becomes-target-of-ability-targeting-only-it",

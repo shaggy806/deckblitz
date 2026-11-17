@@ -2269,6 +2269,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Verrak, Warped Sengir: pay the life again to copy the ability',
+    board({
+      you: { bf: ['Verrak, Warped Sengir', "Arguel's Blood Fast", 'Swamp*2'] },
+    }),
+  ),
+  preset(
     "Illusionist's Bracers: copies the equipped creature's ability",
     board({
       you: { bf: ['Prodigal Sorcerer', { name: "Illusionist's Bracers", attach: 'Prodigal Sorcerer' }] },

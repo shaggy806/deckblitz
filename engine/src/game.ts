@@ -17679,7 +17679,15 @@ export class Game {
     // wherever the discard put it, which a search's prompt names.
     const abilityId = this.mintAbilityObject(cardId, def.name, player, "activated", 0, []);
     this.state.objects[abilityId].grantedAbility = { kind: "cycling", cardName: def.name };
-    this.emit({ type: "ability-activated", source: cardId, player, onStack: true, ability: abilityId, fromZone: "hand" });
+    this.emit({
+      type: "ability-activated",
+      source: cardId,
+      player,
+      onStack: true,
+      ability: abilityId,
+      fromZone: "hand",
+      ...(payment.life > 0 ? { lifePaid: payment.life } : {}),
+    });
     this.afterPlayerAction(player);
   }
 
@@ -27564,6 +27572,9 @@ export class Game {
     const manaSpentOnThis = this.executePayment(player, payment);
     const lifeCost = this.activatedAbilityLifeCost(player, sourceId, ability, chosenX) ?? 0;
     if (lifeCost > 0) this.payLife(player, lifeCost);
+    // The life its own cost paid, Phyrexian mana's included (rules 119.4,
+    // 107.4f), for "if life was paid to activate it" (Verrak).
+    const lifePaidToActivate = lifeCost + payment.life;
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
       const asked = ability.cost.removeCounter.count;
@@ -27916,6 +27927,7 @@ export class Game {
       (sacrificeVictim !== null || sacrificeParts?.some((part) => part.count > 0) === true)
         ? { sacrificedToActivate: true as const }
         : {}),
+      ...(lifePaidToActivate > 0 ? { lifePaid: lifePaidToActivate } : {}),
     });
     // What it was activated targeting, each permanent as it was: "the first
     // activated ability you activate … that targets a creature you control"
@@ -33948,7 +33960,11 @@ export class Game {
                   // how much the life total moved.
                   (trigger.on === "gains-life" || trigger.on === "loses-life") && event.type === "life-changed"
                   ? Math.abs(event.delta)
-                  : undefined
+                  : // "Pay that much life again" (Verrak): the life the
+                    // ability's own cost paid.
+                    trigger.on === "activates-ability" && event.type === "ability-activated"
+                    ? event.lifePaid
+                    : undefined
     );
   }
 
@@ -36959,6 +36975,7 @@ export class Game {
         // A mana ability (rule 605.3b) only for one that says so (`orMana`).
         if (event.onStack ? event.ability === undefined : spec.orMana !== true) return false;
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
+        if (spec.lifePaidToActivate === true && (event.lifePaid ?? 0) <= 0) return false;
         if (spec.who === "attached") {
           // "An ability of equipped creature", "a loyalty ability of
           // enchanted planeswalker": its host's, read as below.

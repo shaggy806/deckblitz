@@ -917,6 +917,12 @@ export type GameEvent =
        * A Treasure sacrificed for the mana that paid it is another ability's
        * cost (the ruling), and doesn't count. */
       readonly sacrificedToActivate?: true;
+      /** The life its own cost paid (rule 119.4): a life cost and Phyrexian
+       * mana paid with life (107.4f) — not a mana ability's that helped pay
+       * it, which is that ability's cost (605.3a). Absent for none. Verrak,
+       * Warped Sengir's "if life was paid to activate it, you may pay that
+       * much life again". */
+      readonly lifePaid?: number;
     })
   | (Base & {
       /**

@@ -391,6 +391,14 @@ suggests the chooser's own planeswalkers' types, as Deification's on-enter one d
 searches no rollouts over that eighty-type menu (its `candidates` are none) and names the first
 suggestion. Leori, Sparktouched Hunter (rank 11022): a delayed `activates-ability` watch with the
 chosen type in its `source`, for the rest of the turn. `test/choose-planeswalker-type.test.ts`.
+### "If life was paid to activate it, … that much life again" — built 2026-11-17
+
+The key `amount:life-paid-to-activate`. Verrak, Warped Sengir (rank 11607). The `ability-activated` event
+carries `lifePaid`, the life the ability's own cost paid (its life cost and Phyrexian mana paid with life,
+rules 119.4, 107.4f; a mana ability's that helped pay it is that ability's, 605.3a); the `activates-ability`
+trigger's `lifePaidToActivate` asks it, and its trigger value is it, so "pay that much life again" is a
+`may` with `costLife: { triggerValue: true }` over `copy-ability`. `test/life-paid-to-activate.test.ts`.
+
 ### A graveyard exile cost counted in one color's mana symbols — built 2026-11-17
 
 The key `cost:exile-from-graveyard-mana-symbol-total`. Baron Helmut Zemo (rank 11489, flagged "Build ASAP"):

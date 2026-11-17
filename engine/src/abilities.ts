@@ -2721,6 +2721,13 @@ export type TriggerKind =
        * its cost moved it (the event's `fromZone`). */
       readonly sourceZone?: "graveyard";
       readonly sacrificedToActivate?: true;
+      /** "If life was paid to activate it" (Verrak, Warped Sengir): its own
+       * cost paid life — a life cost, or Phyrexian mana paid with life (rules
+       * 119.4, 107.4f) — and not a mana ability's that helped pay it. Fixed
+       * as it triggers, so asked once (603.4 can't change the answer). Its
+       * trigger value (`{ triggerValue: true }`) is how much: "you may pay
+       * **that much** life again". */
+      readonly lifePaidToActivate?: true;
       /** "An ability that **targets a creature or player**" (Ertha Jo,
        * Frontier Mentor): what the ability on the stack targets, as its
        * targets were chosen (rule 602.2b) — the same clause a spell's

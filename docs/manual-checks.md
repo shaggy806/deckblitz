@@ -1523,6 +1523,10 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Inferno Titan and divide its enters trigger's 3 damage. With the trigger on the stack, use the Engine's {2} ability on it.
 - **Expect:** The copy keeps the same division of damage; only its targets may change.
 
+### Verrak, Warped Sengir: pay the life again to copy the ability
+- **Do:** Activate Arguel's Blood Fast's "Pay 2 life: Draw a card". Answer Yes to Verrak's "Pay that much life again to copy that ability?".
+- **Expect:** You go to 38 as you activate it, then 36 for the copy, and draw two cards.
+
 ### Illusionist's Bracers: copies the equipped creature's ability
 - **Do:** Activate Prodigal Sorcerer (wearing the Bracers) targeting the opponent. When the copy asks for new targets, pick their Llanowar Elves.
 - **Expect:** The Bracers trigger on their own. The Elves die and the opponent loses 1.
