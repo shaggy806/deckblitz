@@ -3118,9 +3118,13 @@ export type EffectSpec =
        * cards this resolution has exiled from a graveyard, still in exile,
        * `whose` unread: Mysterious Stranger's "if two or more cards are
        * exiled this way, choose one of them at random and copy it".
+       * `zone: "targets"` picks among the effect's own targets still legal
+       * as it resolves (rule 608.2b blanks the rest), `whose` unread:
+       * Sinister Waltz's "choose three target creature cards in your
+       * graveyard. Return two of them at random to the battlefield".
        */
       readonly kind: "choose-random-card";
-      readonly zone: "graveyard" | "hand" | "exiled-with-source" | "exiled-this-way";
+      readonly zone: "graveyard" | "hand" | "exiled-with-source" | "exiled-this-way" | "targets";
       /** Whose graveyard or hand: the effect's controller's (the default),
        * `"that-player"`, a target slot holding a player, or a player named
        * through a target ("target creature's controller reveals a card at
@@ -3149,6 +3153,11 @@ export type EffectSpec =
       /** What's done with the picked card; nothing for a bare reveal or
        * look. */
       readonly then?: EffectSpec;
+      /** Only with `count`: what's done, after `then`, with the candidates
+       * **not** picked, as targets 0, 1, … — Sinister Waltz's "and put **the
+       * other** on the bottom of your library". Nothing when every one was
+       * picked (its ruling: with only two targets still legal, both return). */
+      readonly others?: EffectSpec;
     }
   | {
       /**
@@ -19494,6 +19503,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       } else if (spec.zone === "exiled-this-way") {
         const filter = spec.filter;
         cards = ctx.cardsExiledThisWay().filter((id) => filter === undefined || ctx.cardMatches(id, filter));
+      } else if (spec.zone === "targets") {
+        // Its own targets still legal: an illegal one is already blank
+        // (rule 608.2b).
+        const filter = spec.filter;
+        cards = ctx.targets.flatMap((ref) =>
+          ref?.kind === "object" && (filter === undefined || ctx.cardMatches(ref.object, filter)) ? [ref.object] : [],
+        );
       } else {
         const whose = spec.whose ?? "you";
         if (whose === "you") owner = ctx.controller;
@@ -19523,7 +19539,15 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           picked.push({ kind: "object", object: among[at] });
           left = among.filter((_, i) => i !== at);
         }
+        const parked = ctx.parkedCount();
+        const pendingBefore = ctx.decisionPending();
         if (spec.then !== undefined && picked.length > 0) applyEffectSpec(spec.then, ctx.withTargets(picked));
+        if (spec.others !== undefined && left.length > 0) {
+          // "… and the other": after `then`, its answers first if it asks.
+          const others = ctx.withTargets(left.map((object) => ({ kind: "object", object })));
+          if (!pendingBefore && ctx.decisionPending()) others.resumeAfterDecisions(spec.others, parked);
+          else applyEffectSpec(spec.others, others);
+        }
         return;
       }
       const chosen = cards[ctx.pickAtRandom(cards.length, (i) => ({ kind: "card", object: cards[i] }))];

@@ -292,6 +292,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (typeof n.whose === "number") v.touch(n.whose, "either", MINOR);
   },
   "choose-random-card": (n, v) => {
+    // Picked among its own targets (Sinister Waltz): any of them may be the
+    // one `then` does its thing to, so what it does to its slot 0 it does to
+    // them all.
+    if (n.zone === "targets") {
+      if (n.then !== undefined) v.childOfGroup(0, n.then);
+      return;
+    }
     if (typeof n.whose !== "number") return;
     if (n.zone === "hand" || (n.then?.kind === "put-onto-battlefield" && n.then.underYourControl === true)) {
       v.touch(n.whose, "harm", MINOR);

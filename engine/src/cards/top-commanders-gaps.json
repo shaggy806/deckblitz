@@ -10,6 +10,7 @@
     "effect:chosen-source-next-damage-doubled",
     "trigger:damage-prevented-this-way",
     "effect:chosen-source-shield-prevent-half",
+    "effect:random-choice-among-targets",
     "effect:redistribute-life-totals",
     "effect:opponents-who-voted-otherwise-scope",
     "static:extra-vote",
