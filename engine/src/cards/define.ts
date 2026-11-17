@@ -12,6 +12,7 @@
  * escape hatch). Vanilla permanents need neither.
  */
 
+import type { CastVia } from "../actions.js";
 import type { KeywordValue } from "../keyword-values.js";
 import type { DieTest, RollShift } from "../random-results.js";
 import type { TriggerEventName } from "../trigger-events.js";
@@ -283,6 +284,12 @@ export interface SpellCastClause {
   /** Only a kicked spell (702.33d — announced before the total is worked out,
    * 601.2b before 601.2f). */
   readonly kicked?: true;
+  /** Only a spell cast this way, the cost it pays announced before the total
+   * is worked out (601.2b before 601.2f): `"flashback"` is "flashback costs
+   * you pay cost {2} less" (Catalyst Stone — rule 702.34a), the card's own
+   * flashback or one another card grants (Snapcaster Mage's), never
+   * jump-start's (702.133a), cast from the graveyard the same way. */
+  readonly via?: CastVia;
   /** Only the caster's first spell each turn matching the static's filter — an
    * earlier one uses it up even if it was cast before this arrived. */
   readonly firstEachTurn?: boolean;

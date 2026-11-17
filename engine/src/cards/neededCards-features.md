@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Flashback costs that cost more or less — built 2026-11-17
+
+The key `cost:flashback-cost-modification-static`: `SpellCastClause.via`, a cost modification that reaches only a
+spell cast that way — `"flashback"` a cast paying a flashback cost, the card's own or one another card grants
+(Snapcaster Mage's), never jump-start's (rules 702.34a, 702.133a, 601.2f). `Game.pricedVia` says how the cast being
+priced is made, set as `castSpellVariants` offers each variant and as `whyCannotCastSpell` and `castSpell` check and
+make it (the `kickedCast` probe's pattern). Catalyst Stone (rank 13106) is authored on it, "your opponents pay cost {2}
+more" too; the scaffolder reads both lines. A cost a bot estimates outside the offer doesn't see it.
+`test/flashback-cost-modification.test.ts`.
+
 ### Cumulative upkeep paid from the top of the library, and "when a player doesn't pay" it — built 2026-11-17
 
 The keys `cost:cumulative-upkeep-exile-library-top` and `trigger:cumulative-upkeep-not-paid`. The first is

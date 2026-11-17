@@ -5660,6 +5660,8 @@ export class Game {
       const undoHarmonize = via === "harmonize" ? this.enterHarmonizeTap(harmonizeTap) : () => {};
       // A kicked variant's own reduction (a bargained Ice Out's {1}).
       const undoKickedReduction = this.enterKickedReduction(card, def, kicked);
+      // How it's cast, for "flashback costs you pay" (Catalyst Stone).
+      const undoPricedVia = this.enterPricedVia(card, via, graveyardGrant);
       // A splice variant is priced and targeted with its spliced cards'.
       const undoSplice = this.enterSplice(card, face ?? 0, splice);
       try {
@@ -6790,6 +6792,7 @@ export class Game {
         undoPrototype();
         undoHarmonize();
         undoKickedReduction();
+        undoPricedVia();
         if (kickCount !== undefined && out.length === offeredBefore) kickFailed.add(kickKey);
         // The optional life it pays, on every offer this variant made.
         if (optionalLife !== undefined) {
@@ -19649,6 +19652,13 @@ export class Game {
     if (clause.exceptOnCastersTurn === true && player === this.activePlayer) return false;
     if (clause.yourTurnOnly === true && player !== this.activePlayer) return false;
     if (clause.kicked === true && this.kickedCast?.card !== cardId) return false;
+    // "Flashback costs you pay" (Catalyst Stone): only a cast paying one —
+    // the card's own or a granted one, never jump-start's (702.133a).
+    if (clause.via !== undefined) {
+      const priced = this.pricedVia;
+      if (priced === null || priced.card !== cardId || priced.via !== clause.via) return false;
+      if (clause.via === "flashback" && this.flashbackOf(cardId, priced.grant)?.keyword !== undefined) return false;
+    }
     if (clause.castFrom !== undefined || clause.notFromCastersHand === true) {
       // Where it's cast from: where it is now or, already on the stack, where
       // it came from.
@@ -21001,6 +21011,16 @@ export class Game {
     // if it's bargained" — `kicker.reduceGeneric`): priced as that variant.
     if (this.kickedReductionStale(cardId, face, kicked)) {
       const restore = this.enterKickedReduction(cardId, this.faceDef(cardId, face), kicked);
+      try {
+        return this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
+          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve);
+      } finally {
+        restore();
+      }
+    }
+    // How it's cast ("flashback costs you pay" — Catalyst Stone): priced so.
+    if (this.pricedViaStale(cardId, via, graveyardGrant)) {
+      const restore = this.enterPricedVia(cardId, via, graveyardGrant);
       try {
         return this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
           altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve);
@@ -23087,6 +23107,31 @@ export class Game {
       this.kickedCast = before;
     };
   }
+  /**
+   * How the cast being priced is being made — its `via`, and the graveyard
+   * grant a flashback comes from — while that cast is offered, checked or
+   * made, for a cost modification that reaches only one way of casting
+   * (`SpellCastClause.via`: Catalyst Stone's "flashback costs you pay",
+   * rules 601.2b, 601.2f). `null` otherwise, when no such clause is met.
+   */
+  private pricedVia: { readonly card: ObjectId; readonly via: CastVia | undefined; readonly grant: GraveyardGrant | undefined } | null =
+    null;
+  /** Price whatever runs next for `card` as cast `via` — see
+   * {@link pricedVia}. Returns the restore. */
+  private enterPricedVia(card: ObjectId, via: CastVia | undefined, grant: GraveyardGrant | undefined): () => void {
+    const before = this.pricedVia;
+    this.pricedVia = { card, via, grant };
+    return () => {
+      this.pricedVia = before;
+    };
+  }
+  /** Whether {@link pricedVia} isn't casting `card` `via` — the casting
+   * check and the cast then set it and ask again. */
+  private pricedViaStale(card: ObjectId, via: CastVia | undefined, grant: GraveyardGrant | undefined): boolean {
+    if (this.state.objects[card] === undefined) return false;
+    const priced = this.pricedVia;
+    return priced === null || priced.card !== card || priced.via !== via || priced.grant?.source !== grant?.source;
+  }
   /** Whether {@link kickedCast} isn't what casting `card` with
    * `kicked` should be priced at — the casting check and the cast then set
    * it and ask again. */
@@ -23709,6 +23754,18 @@ export class Game {
     // cost below is priced with it off (rule 601.2f).
     if (this.kickedReductionStale(cardId, face, kicked)) {
       const restore = this.enterKickedReduction(cardId, this.faceDef(cardId, face), kicked);
+      try {
+        this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve);
+      } finally {
+        restore();
+      }
+      return;
+    }
+    // How it's cast ("flashback costs you pay" — Catalyst Stone): every cost
+    // below is priced so (rule 601.2f).
+    if (this.pricedViaStale(cardId, via, graveyardGrant)) {
+      const restore = this.enterPricedVia(cardId, via, graveyardGrant);
       try {
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
           convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve);

@@ -21959,6 +21959,20 @@ function spellCostStaticOf(line, text) {
   if ((m = /^(White|Blue|Black|Red|Green) spells you cast cost ((?:\{[WUBRG]\})+) more to cast\.$/.exec(line))) {
     return made({ applies: { colors: [COLOR_WORD[m[1].toLowerCase()]] }, caster: "you", increaseColored: m[2] });
   }
+  // "Flashback costs you pay cost {2} less" / "… your opponents pay cost {2}
+  // more" (Catalyst Stone): a cast paying a flashback cost (`when.via`).
+  if ((m = /^Flashback costs (you|your opponents) pay cost \{(\d+)\} (less|more)\.$/.exec(line))) {
+    const amount = Number(m[2]);
+    return {
+      affects: { scope: "self" },
+      costModification: {
+        applies: {},
+        ...(m[3] === "less" ? { reduceGeneric: amount } : { increaseGeneric: amount }),
+        when: { caster: m[1] === "you" ? "you" : "opponent", via: "flashback" },
+      },
+      text: line,
+    };
+  }
   // The Defilers: an optional additional cost of life (rule 601.2b), the
   // reduction only with it paid (`optionalLife`).
   if (

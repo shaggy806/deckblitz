@@ -6632,6 +6632,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   - `castFrom: ZoneType` — only spells cast from that zone: Green Goblin's
     "spells you cast from your graveyard cost {2} less to cast" is `{ applies:
     {}, caster: "you", castFrom: "graveyard", reduceGeneric: 2 }`.
+  - `via: CastVia` (in `when`) — only a spell cast that way: Catalyst Stone's
+    "flashback costs you pay cost {2} less" is `{ applies: {}, reduceGeneric:
+    2, when: { caster: "you", via: "flashback" } }` (rule 702.34a: a flashback
+    cost is the alternative cost paid; 601.2f). A flashback another card grants
+    counts (Snapcaster Mage's), jump-start doesn't (702.133a). Read from the
+    cast being offered, checked or made (`Game.pricedVia`), so a cost a bot
+    estimates outside those doesn't see it. The scaffolder reads both lines.
   - `perTarget: true` — the amounts are "for each target" (Hinata,
     Dawn-Crowned): multiplied by the number of *distinct* players and objects
     the spell is cast targeting (the card's ruling — one creature named by two

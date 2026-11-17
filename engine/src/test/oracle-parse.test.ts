@@ -22013,6 +22013,25 @@ describe("the first card cycled each turn (Valiant Rescuer)", () => {
   });
 });
 
+describe("flashback costs that cost more or less (Catalyst Stone)", () => {
+  it("a cost modification reaching only a cast paying a flashback cost, yours and your opponents'", () => {
+    const stone = parseFace(
+      {
+        name: "Catalyst Stone",
+        type_line: "Artifact",
+        mana_cost: "{2}",
+        oracle_text: "Flashback costs you pay cost {2} less.\nFlashback costs your opponents pay cost {2} more.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(stone.complete).toBe(true);
+    expect(stone.static.map((s: { costModification?: unknown }) => s.costModification)).toEqual([
+      { applies: {}, reduceGeneric: 2, when: { caster: "you", via: "flashback" } },
+      { applies: {}, increaseGeneric: 2, when: { caster: "opponent", via: "flashback" } },
+    ]);
+  });
+});
+
 describe("cumulative upkeep from the top of the library, and 'when a player doesn't pay' it (Thought Lash)", () => {
   it("the act per age counter, the unpaid event as a trigger, and a whole library exiled", () => {
     const lash = parseFace(
