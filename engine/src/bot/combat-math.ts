@@ -26,7 +26,7 @@ import {
   unblockedAssignmentOf,
   withComputedCache,
 } from "../characteristics.js";
-import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy } from "../combat/eligibility.js";
+import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy, readyToBlock } from "../combat/eligibility.js";
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
@@ -108,7 +108,10 @@ function combatCreaturesUncached(
   for (const id of state.zones.shared.battlefield) {
     const object = state.objects[id];
     if (object === undefined || object.controller !== player) continue;
-    if (untappedOnly && object.tapped) continue;
+    // Tapped, it can't block — unless it can as though it were untapped
+    // (Masako the Humorless).
+    const ready = readyToBlock(state, registry, object);
+    if (untappedOnly && !ready) continue;
     const c = computeCharacteristics(state, registry, id);
     if (!c.types.includes("creature")) continue;
     const creature: CombatCreature = {
@@ -122,7 +125,7 @@ function combatCreaturesUncached(
       types: c.types,
       protectionColors: c.protectionFrom.colors,
       protectionTypes: c.protectionFrom.types,
-      canBlock: !object.tapped && !c.restrictions.has("cant-block"),
+      canBlock: ready && !c.restrictions.has("cant-block"),
       canAttack:
         (!c.keywords.has("defender") || c.canAttackAsThoughNoDefender) &&
         !c.restrictions.has("cant-attack") &&

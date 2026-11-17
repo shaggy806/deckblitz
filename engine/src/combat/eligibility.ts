@@ -148,6 +148,31 @@ function blocksAsThoughShadow(state: GameState, registry: CardRegistry, blocker:
   );
 }
 
+/** Whether `blocker` can block now as far as being tapped goes: it's untapped
+ * (rule 509.1a), or a static lets it block as though it were (Masako the
+ * Humorless, `StaticAbility.blocksAsThoughUntapped`). The statics are memoized
+ * per cache region; the bots' blocker reads ask this too. */
+export function readyToBlock(state: GameState, registry: CardRegistry, blocker: GameObject): boolean {
+  if (!blocker.tapped) return true;
+  const sources = computedCacheMemo("blocks-as-though-untapped", () => {
+    const out: { readonly source: GameObject; readonly ability: StaticAbility }[] = [];
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      if (hasLostAbilities(state, registry, source)) continue;
+      for (const ability of registry.get(rulesTextName(source)).static) {
+        if (ability.blocksAsThoughUntapped === true) out.push({ source, ability });
+      }
+    }
+    return out;
+  });
+  return sources.some(
+    ({ source, ability }) =>
+      staticAffects(state, registry, ability.affects, source, blocker) &&
+      (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition)),
+  );
+}
+
 /** The land types among the lands `player` controls — what a landwalker
  * attacking them is checked against. */
 export function landTypesControlledBy(
@@ -442,7 +467,7 @@ function whyThisCannotBlock(
   if (blocker.controller !== player) {
     return `${blockerDef.name} is not controlled by the defender`;
   }
-  if (blocker.tapped) return `${blockerDef.name} is tapped and cannot block`;
+  if (!readyToBlock(state, registry, blocker)) return `${blockerDef.name} is tapped and cannot block`;
   if (computeCharacteristics(state, registry, blockerId).types.includes("battle")) {
     return `${blockerDef.name} is a battle and cannot block`;
   }

@@ -23372,6 +23372,10 @@ function parseStatic(line, text) {
   if (line === "~ can block creatures with shadow as though it had shadow." || line === "~ can block creatures with shadow as though they didn't have shadow.") {
     return { affects: { scope: "self" }, blocksAsThoughShadow: true, text };
   }
+  // A permission past rule 509.1a's "must be untapped" (Masako the Humorless).
+  if (line === "Tapped creatures you control can block as though they were untapped.") {
+    return { affects: { scope: "creatures-you-control" }, blocksAsThoughUntapped: true, text };
+  }
   // Rule 509.1c's requirement as a static; "attacks or blocks" is both, each
   // meeting only its own kind of combat.
   if (line === "~ blocks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-block"], text };

@@ -3719,6 +3719,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * it may block and leaves everything else, so it still can't be blocked by
    * nor block what it couldn't. */
   readonly blocksAsThoughShadow?: true;
+  /** The affected creatures "can block as though they were untapped" (Masako
+   * the Humorless): a permission on the blocker past rule 509.1a's "must be
+   * untapped". It lifts that one requirement and nothing else — a tapped
+   * creature that can't block, or can't block a flier, still can't (Masako's
+   * ruling). */
+  readonly blocksAsThoughUntapped?: true;
   /** Landwalk of a kind (rule 702.14) for the affected creatures, its land as
    * a filter: "nonbasic landwalk" is `{ type: "land", notSupertype: "basic" }`
    * (Dryad Sophisticate, Trailblazer's Boots), "artifact landwalk" `{ types:

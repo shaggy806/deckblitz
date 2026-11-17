@@ -2791,7 +2791,9 @@
   "effect:exile-top-cast-from-among-rest-bottom",
   "zone:cast-from-library-top-enters-counter",
   "keyword:blitz-extensions",
-  "filter:has-modular"
+  "filter:has-modular",
+  "filter:has-modular",
+  "static:block-while-tapped"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -50,7 +50,7 @@ import { manaValue, parseManaCost } from "../mana.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { POISON_LETHAL, printedCardName, rulesTextName, settledTally } from "../state.js";
 import { HARMFUL_COUNTERS } from "../target-polarity.js";
-import { playersAttackableNextTurn } from "../combat/eligibility.js";
+import { playersAttackableNextTurn, readyToBlock } from "../combat/eligibility.js";
 import { canBlock, combatCreatures } from "./combat-math.js";
 import { handQuality as handQualityOf } from "./hand-worth.js";
 import type { CombatCreature } from "./combat-math.js";
@@ -1250,7 +1250,7 @@ function playerFeaturesUncached(
       // does something besides.
       if (object.isToken && damage <= 1 && c.toughness <= 1) smallTokens += n;
       combatKeywords += count(c, COMBAT_KEYWORDS) * n;
-      if (!object.tapped && !c.restrictions.has("cant-block")) {
+      if (readyToBlock(state, registry, object) && !c.restrictions.has("cant-block")) {
         untappedCreatures += deterring === null ? n : Math.min(n, deterring.get(id) ?? 0);
       }
       // A creature that can't attack deals none of its power: Pacifism, a

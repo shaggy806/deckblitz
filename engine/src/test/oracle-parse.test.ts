@@ -21046,3 +21046,18 @@ describe("each creature you control with a keyword read off its text box", () =>
     });
   });
 });
+
+describe("blocking as though untapped", () => {
+  it("tapped creatures you control can block as though they were untapped (Masako the Humorless)", () => {
+    const masako = parseFace(
+      { name: "Masako the Humorless", type_line: "Legendary Creature — Human Advisor", mana_cost: "{2}{W}", oracle_text: "Flash\nTapped creatures you control can block as though they were untapped." },
+      { tokenFor: () => null },
+    );
+    expect(masako.complete).toBe(true);
+    expect(masako.static[0]).toEqual({
+      affects: { scope: "creatures-you-control" },
+      blocksAsThoughUntapped: true,
+      text: "Tapped creatures you control can block as though they were untapped.",
+    });
+  });
+});
