@@ -1000,9 +1000,10 @@ export interface GameObject {
     /** Riot's choices (rule 702.136a), one for each instance (702.136b): an
      * additional +1/+1 counter, or haste. */
     readonly riot?: readonly ("counter" | "haste")[];
-    /** Unleash's choice (rule 702.98a): whether it enters with the
-     * additional +1/+1 counter. */
-    readonly unleash?: boolean;
+    /** Unleash's choices (rule 702.98a), one for each instance, printed or
+     * granted as it enters (Tesak's "other Dogs you control have unleash"):
+     * whether it enters with that additional +1/+1 counter. */
+    readonly unleash?: readonly boolean[];
     /** Its controller's answer to "you may have this land enter tapped"
      * (`EntersBattlefieldReplacement.mayEnterTapped`). */
     readonly enterTapped?: boolean;

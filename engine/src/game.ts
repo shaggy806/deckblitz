@@ -8829,7 +8829,7 @@ export class Game {
                   riot: [...(source.enterChoice?.riot ?? []), creatureType === RIOT_COUNTER ? ("counter" as const) : ("haste" as const)],
                 }
               : awaiting.unleash === true
-                ? { ...source.enterChoice, unleash: creatureType === UNLEASH_OPTIONS[0] }
+                ? { ...source.enterChoice, unleash: [...(source.enterChoice?.unleash ?? []), creatureType === UNLEASH_OPTIONS[0]] }
                 : awaiting.enterTapped === true
                   ? { ...source.enterChoice, enterTapped: creatureType === MAY_ENTER_TAPPED_OPTIONS[1] }
                   : awaiting.asEntersCounter === true
@@ -16485,8 +16485,16 @@ export class Game {
       return { kind: "riot" };
     }
     // Unleash (rule 702.98a): "you may have this permanent enter with an
-    // additional +1/+1 counter on it" — printed or copied, as riot.
-    if (answered?.unleash === undefined && becoming.keywords.includes("unleash")) return { kind: "unleash" };
+    // additional +1/+1 counter on it" — printed or copied, and what a static
+    // will give it there (614.12 — Tesak's "other Dogs you control have
+    // unleash"), as riot; each instance is its own replacement effect.
+    if (
+      (answered?.unleash?.length ?? 0) <
+      (becoming.keywords.includes("unleash") ? 1 : 0) +
+        enteringKeywordInstances(this.state, this.registry, object, "unleash", under ?? object.controller)
+    ) {
+      return { kind: "unleash" };
+    }
     // "You may have this land enter tapped. If you do, …" (Mariposa Military
     // Base) — printed, or a copy's.
     if (answered?.enterTapped === undefined) {
@@ -50097,24 +50105,32 @@ controlledBy,
   }
 
   /**
-   * Whether a named token of `planned` will have riot as it enters (rule
-   * 702.136a), so its controller is asked for the counter or haste first:
-   * its own, or one a static on the battlefield will give it there (614.12).
-   * Nothing grants riot on most boards, and then this is one pass over the
+   * Whether a named token of `planned` will have riot (rule 702.136a) or
+   * unleash (702.98a) as it enters, so its controller is asked for the
+   * counter first: its own, or one a static on the battlefield will give it
+   * there (614.12 — Spider-Punk's "other Spiders", Tesak's "other Dogs").
+   * Nothing grants either on most boards, and then this is one pass over the
    * battlefield; a token is minted to look only when something does.
    */
   private createdTokenHasRiot(planned: PlannedTokenCopies): boolean {
-    if (this.registry.get(planned.copyName).keywords.includes("riot")) return true;
-    const grants = this.state.zones.shared.battlefield.some((id) => {
-      const source = this.state.objects[id];
-      return (
-        source !== undefined &&
-        this.registry.get(rulesTextName(source)).static.some((ability) => ability.grantKeywords?.includes("riot") === true)
-      );
-    });
-    if (!grants) return false;
+    const asked: readonly Keyword[] = ["riot", "unleash"];
+    const own = this.registry.get(planned.copyName).keywords;
+    if (asked.some((keyword) => own.includes(keyword))) return true;
+    const granted = asked.filter((keyword) =>
+      this.state.zones.shared.battlefield.some((id) => {
+        const source = this.state.objects[id];
+        return (
+          source !== undefined &&
+          this.registry.get(rulesTextName(source)).static.some((ability) => ability.grantKeywords?.includes(keyword) === true)
+        );
+      }),
+    );
+    if (granted.length === 0) return false;
     const probe = this.mintEnteringToken(planned);
-    const instances = enteringKeywordInstances(this.state, this.registry, this.state.objects[probe], "riot", planned.controller);
+    const instances = granted.reduce(
+      (n, keyword) => n + enteringKeywordInstances(this.state, this.registry, this.state.objects[probe], keyword, planned.controller),
+      0,
+    );
     delete this.state.objects[probe];
     return instances > 0;
   }
@@ -67561,7 +67577,7 @@ controlledBy,
     riot?: readonly ("counter" | "haste")[],
     devoured?: number,
     tributePaid?: boolean,
-    unleash?: boolean,
+    unleash?: readonly boolean[],
     amplified?: number,
     asEntersDone?: number,
     asEntersCounters?: readonly string[],
@@ -67954,7 +67970,7 @@ controlledBy,
     riot?: readonly ("counter" | "haste")[],
     devoured?: number,
     tributePaid?: boolean,
-    unleash?: boolean,
+    unleash?: readonly boolean[],
     amplified?: number,
     asEntersDone?: number,
     asEntersCounters?: readonly string[],
@@ -68163,10 +68179,11 @@ controlledBy,
       if (asCounters > 0) addCounters("+1/+1", asCounters);
       riotHaste = riot === undefined || riot.includes("haste");
     }
-    // Unleash (rule 702.98a): the +1/+1 counter its controller chose as it
-    // was about to enter. Entering some way that never asked (a token copy),
-    // nobody had it enter with the counter.
-    if (!ownLost && def.keywords.includes("unleash") && unleash === true) addCounters("+1/+1", 1);
+    // Unleash (rule 702.98a): the +1/+1 counters its controller chose as it
+    // was about to enter, one an instance, printed or granted. Entering some
+    // way that never asked (a token copy), nobody had it enter with one.
+    const unleashed = ownLost ? 0 : (unleash ?? []).filter((yes) => yes).length;
+    if (unleashed > 0) addCounters("+1/+1", unleashed);
     // Tribute (rule 702.104a): the counters the chosen opponent put on it as
     // it was about to enter (`askEnterChoice`). Entering some way that never
     // asked (a token copy), nobody paid it.

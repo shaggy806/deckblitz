@@ -577,10 +577,11 @@ spell are asked the same way, each instance apart (rule 702.136b); only a token 
 counter" as the permanent is about to enter (a fixed-menu
 `choose-creature-type` with `unleash`), and the keyword's other half is a
 `cant-block` restriction in the layer fold while it has any +1/+1 counter
-(Rakdos Cackler, Gore-House Chainwalker). The enter choice is printed or
-copied only, as riot's: a static granting unleash to others ("other Dogs you
-control have unleash" — Tesak) isn't asked as they enter (§15).
-`unleash-detain.test.ts`.
+(Rakdos Cackler, Gore-House Chainwalker). A static granting unleash ("other
+Dogs you control have unleash" — Tesak, Judith's Hellhound: `grantKeywords:
+["unleash"]`) is asked as each enters, a created token too (rule 614.12), and
+each instance is asked apart, as riot's are (`enterChoice.unleash` holds one
+answer an instance). `unleash-detain.test.ts`, `granted-unleash.test.ts`.
 
 **Flanking** (rule 702.25): `flanking` in `keywords` *and* the `flanking()`
 helper in `triggered` — the keyword is what "a creature without flanking"

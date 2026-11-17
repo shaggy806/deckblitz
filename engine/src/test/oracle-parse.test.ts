@@ -5969,6 +5969,36 @@ describe("templates for features built since the parser began (2026-10-11)", () 
   });
 });
 
+describe("Tesak, Judith's Hellhound's lines", () => {
+  it("reads 'Other Dogs you control have unleash', the counters-on-them anthem and the attackers' mana", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Elemental Dog",
+      mana_cost: "{3}{R}",
+      oracle_text:
+        "Unleash (You may have this creature enter with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)\nOther Dogs you control have unleash.\nCreatures you control with counters on them have haste.\nWhenever Test Card attacks, add {R} for each attacking creature.",
+    } as never) as unknown as { static: Record<string, unknown>[]; triggered: Record<string, unknown>[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { subtype: "Dog", controlledBy: "you" }, excludeSelf: true },
+      grantKeywords: ["unleash"],
+    });
+    expect(face.static[1]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", counters: { compare: { op: "gte", n: 1 } } } },
+      grantKeywords: ["haste"],
+    });
+    expect(face.triggered[0].effect).toEqual({ kind: "add-mana", mana: "R", amount: { countOf: { type: "creature", attacking: true } } });
+  });
+
+  it("leaves 'Other Elves' alone: its singular isn't the plural less an s", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Elf",
+      oracle_text: "Other Elves you control have riot.",
+    } as never) as unknown as { complete: boolean };
+    expect(face.complete).toBe(false);
+  });
+});
 describe("block limits, lost abilities and chosen types (B249)", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text }, { tokenFor: () => null });

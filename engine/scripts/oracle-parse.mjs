@@ -4403,6 +4403,12 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^Monstrosity (\d+|X)(, where X is the result)?\.$/.exec(s))) {
     const amount = m[1] !== "X" ? Number(m[1]) : m[2] !== undefined ? { roll: "total" } : "x";
     return { kind: "monstrosity", amount };
+  // "Add {R} for each attacking creature" (Tesak, Judith's Hellhound), "Add
+  // {G} for each creature you control" (Gaea's Cradle, Battle Hymn): counted
+  // as it resolves.
+  if ((m = /^add \{([WUBRGC])\} for each (attacking creature|creature you control)\.$/i.exec(s))) {
+    const filter = m[2] === "attacking creature" ? { type: "creature", attacking: true } : { type: "creature", controlledBy: "you" };
+    return { kind: "add-mana", mana: m[1], amount: { countOf: filter } };
   }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
@@ -24804,6 +24810,27 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "creatures-you-control", ...(m[1] ? { excludeSelf: true } : {}) },
       grantKeywords: [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
+      text,
+    };
+  }
+  // "Other Dogs you control have unleash" (Tesak, Judith's Hellhound),
+  // "Other Spiders you control have riot" (Spider-Punk): a keyword asked as
+  // it enters, asked of each other permanent of that subtype as it enters
+  // under you (rule 614.12). (Not "Elves", "Heroes": their singular isn't the
+  // plural less its "s".)
+  if ((m = /^Other ([A-Z][a-z]+[^e])s you control have (riot|unleash)\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { subtype: m[1], controlledBy: "you" }, excludeSelf: true },
+      grantKeywords: [m[2]],
+      text,
+    };
+  }
+  // "Creatures you control with counters on them have haste" (Tesak; Dominion
+  // Supervisor's trample).
+  if ((m = new RegExp(`^Creatures you control with counters on them have ${KW}\\.$`).exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", counters: { compare: { op: "gte", n: 1 } } } },
+      grantKeywords: [KEYWORDS[m[1].toLowerCase()]],
       text,
     };
   }

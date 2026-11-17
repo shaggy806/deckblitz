@@ -1010,6 +1010,7 @@
   "effect:prevent-damage-to-you-by-filter-this-turn",
   "trigger:enchanted-player-step-begins",
   "keyword:unleash",
+  "static:grant-enter-choice-keyword",
   "keyword:detain",
   "keyword:fuse",
   "keyword:emerge",
