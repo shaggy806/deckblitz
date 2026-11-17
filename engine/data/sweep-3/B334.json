@@ -1,7 +1,7 @@
 {
  "batch": 334,
  "status": "in-progress",
- "ranks": "author-top-cards overnight, 2026-11-17: the triaged cards past EDHREC rank 10,000 in rank order (11022 on), each with the small feature it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop). Built: bug:simultaneous-move-with-choice (look-and-choose thenAlways), effect:phase-out-while-you-control-source (phase-out cantPhaseIn), effect:mill-from-bottom (bottom-of-library), decision:choose-planeswalker-type, decision:order-per-target-reveal-until (for-each-target groupChooses/only/eachObjectOnce), decision:choose-from-batch (look-and-choose zone trigger-batch), effect:exile-top-cast-from-among-rest-bottom, zone:cast-from-library-top-enters-counter (entersWith gated by gainsIf), keyword:blitz-extensions (blitz also and fromGraveyard), filter:has-modular, static:block-while-tapped (readyToBlock), effect:divided-total-by-alternative-cost (Avacyn's Judgment's new key), cost:exile-from-graveyard-mana-symbol-total, amount:life-paid-to-activate, effect:amount-unlocked-doors; found built: effect:text-change-token-colors, effect:prohibit-loyalty-abilities-one-shot, filter:entered-under-your-control-this-turn. Fixed on the way: a madness or miracle cast's offer read X from the printed cost. Skipped for the user: Cryptic Spires (deck-construction colours), Exchange of Words and Starlight Spectacular (majors left for later), Mana Web and Huatli, Warrior Poet (to re-key).",
+ "ranks": "author-top-cards overnight, 2026-11-17: the triaged cards past EDHREC rank 10,000 in rank order (11022 on), each with the small feature it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop). Built: bug:simultaneous-move-with-choice (look-and-choose thenAlways), effect:phase-out-while-you-control-source (phase-out cantPhaseIn), effect:mill-from-bottom (bottom-of-library), decision:choose-planeswalker-type, decision:order-per-target-reveal-until (for-each-target groupChooses/only/eachObjectOnce), decision:choose-from-batch (look-and-choose zone trigger-batch), effect:exile-top-cast-from-among-rest-bottom, zone:cast-from-library-top-enters-counter (entersWith gated by gainsIf), keyword:blitz-extensions (blitz also and fromGraveyard), filter:has-modular, static:block-while-tapped (readyToBlock), effect:divided-total-by-alternative-cost (Avacyn's Judgment's new key), cost:exile-from-graveyard-mana-symbol-total, amount:life-paid-to-activate, effect:amount-unlocked-doors, amount:life-total-at-turn-start + amount:untapped-lands-at-turn-start + condition:hand-size-at-turn-start + condition:monarch-as-turn-began + condition:was-monarch-as-turn-began (JournalTurn.began), amount:creatures-dealt-combat-damage-to-player-this-turn, trigger:reveal-this-way-reflexive, effect:copy-counter-kinds-just-put, effect:noted-card-name-copy (rule 707.14), effect:manifest-from-exile + effect:manifest-exiled-pile, effect:enters-with-counters-if-x-cost (EnterCounter.ifMatches); found built: effect:text-change-token-colors, effect:prohibit-loyalty-abilities-one-shot, filter:entered-under-your-control-this-turn, replacement:enters-with-counters-per-cast-trigger-sacrifice. Fixed on the way: a madness or miracle cast's offer read X from the printed cost. Skipped for the user: Cryptic Spires (deck-construction colours), Exchange of Words and Starlight Spectacular (majors left for later), Mana Web and Huatli, Warrior Poet (to re-key).",
  "authored": [
   {
    "name": "Avatar Destiny",
@@ -199,6 +199,104 @@
    ],
    "tested": true,
    "test": "engine/src/test/unlocked-doors-amount.test.ts"
+  },
+  {
+   "name": "Sengir, the Dark Baron",
+   "files": [
+    "engine/src/cards/pool/sengir-the-dark-baron.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-turn-began.test.ts"
+  },
+  {
+   "name": "Power Surge",
+   "files": [
+    "engine/src/cards/pool/power-surge.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-turn-began.test.ts"
+  },
+  {
+   "name": "Mindstorm Crown",
+   "files": [
+    "engine/src/cards/pool/mindstorm-crown.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-turn-began.test.ts"
+  },
+  {
+   "name": "Knights of the Black Rose",
+   "files": [
+    "engine/src/cards/pool/knights-of-the-black-rose.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-turn-began.test.ts"
+  },
+  {
+   "name": "Indulge // Excess",
+   "files": [
+    "engine/src/cards/pool/indulge-excess.ts",
+    "engine/src/cards/pool/indulge.ts",
+    "engine/src/cards/pool/excess.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/dealt-combat-damage-to-player.test.ts"
+  },
+  {
+   "name": "Priority Boarding",
+   "files": [
+    "engine/src/cards/pool/priority-boarding.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-this-way-reflexive.test.ts"
+  },
+  {
+   "name": "Aragorn, Company Leader",
+   "files": [
+    "engine/src/cards/pool/aragorn-company-leader.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/copy-counter-kinds-just-put.test.ts"
+  },
+  {
+   "name": "Gluttonous Hellkite",
+   "files": [
+    "engine/src/cards/pool/gluttonous-hellkite.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cast-trigger-sacrifice-counters.test.ts"
+  },
+  {
+   "name": "Magar of the Magic Strings",
+   "files": [
+    "engine/src/cards/pool/magar-of-the-magic-strings.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/noted-card-name-copy.test.ts"
+  },
+  {
+   "name": "Ghastly Conscription",
+   "files": [
+    "engine/src/cards/pool/ghastly-conscription.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/manifest-exiled-pile.test.ts"
+  },
+  {
+   "name": "Jeskai Infiltrator",
+   "files": [
+    "engine/src/cards/pool/jeskai-infiltrator.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/manifest-exiled-pile.test.ts"
+  },
+  {
+   "name": "The First Tyrannic War",
+   "files": [
+    "engine/src/cards/pool/the-first-tyrannic-war.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/enters-with-counters-if-x-cost.test.ts"
   }
  ],
  "blocked": []
