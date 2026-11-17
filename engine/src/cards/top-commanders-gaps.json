@@ -2528,6 +2528,7 @@
   "bug:cda-cards-exiled-with",
   "bug:cda-sum-of-counts",
   "bug:cda-count-multiplier",
+  "amount:type-count",
   "cost:exiled-card-ref",
   "effect:cost-exiled-cards-this-way",
   "amount:highest-life-total",

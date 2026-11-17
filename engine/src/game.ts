@@ -41611,6 +41611,13 @@ export class Game {
         const object = this.state.objects[target.object];
         return object === undefined ? [] : effectiveSubtypes(this.state, this.registry, object);
       },
+      supertypesOf: (target) => {
+        if (target.kind !== "object") return [];
+        const lki = lastKnownOf(target);
+        if (lki !== undefined) return lki.supertypes;
+        const object = this.state.objects[target.object];
+        return object === undefined ? [] : effectiveSupertypes(this.state, this.registry, object);
+      },
       sacrificeTarget: (target, byItsController) => {
         if (target.kind !== "object") return;
         // One that can't be sacrificed just stays (rule 701.21a) — checked

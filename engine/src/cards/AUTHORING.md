@@ -863,6 +863,10 @@ player in a target slot's (Commander's Insight);
 that permanent (`choose-creature-type`'s `note`): Volo, Itinerant Scholar's
 "draw a card for each creature type noted for target permanent you control
 named Volo's Journal". `0` for a new object (rule 400.7).
+`{ typeCountOf: ref }` — how many supertypes, card types and subtypes that
+object has, added up, as it is now (as it last existed if it has left):
+Embiggen's "gets +1/+1 for each supertype, card type, and subtype it has".
+Every subtype counts; a changeling's is every creature type (rule 702.73a).
 
 `{ manaValueOf: ref }` — the mana value of whatever a target slot (or
 `"source"` / `"trigger-object"` / `"sacrificed"`) points at, as it last

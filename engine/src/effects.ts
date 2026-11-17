@@ -20,6 +20,7 @@ import type {
   StaticAbility,
   StaticCondition,
   CountersPutSpec,
+  Supertype,
   TurnStat,
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes, TypeShareReference } from "./filter.js";
@@ -28,7 +29,7 @@ import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { differentManaSplits, reduceGenericInCost, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { noteStateMutation } from "./characteristics.js";
-import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
+import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType, subtypeCount } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
@@ -704,6 +705,14 @@ export type EffectAmount =
    * target permanent you control named Volo's Journal". `0` for one that's
    * a new object since (rule 400.7) or a player. */
   | { readonly notedCreatureTypes: ObjectRef }
+  /** How many supertypes, card types and subtypes one object has, added up —
+   * Embiggen's "gets +1/+1 for each supertype, card type, and subtype it has",
+   * read as the effect resolves (the ruling: fixed from then on). As it is
+   * now, or as it last existed if it has left (rule 608.2h). Every subtype
+   * counts, creature type or not (the ruling); a changeling has every creature
+   * type (rule 702.73a), each one counted (`subtypeCount`). "Token" is none of
+   * the three. 0 for a player. */
+  | { readonly typeCountOf: ObjectRef }
   /**
    * That colour's mana symbols in one object's mana cost, a hybrid or Phyrexian
    * one counting once — chroma (an ability word, rule 207.2c): Fiery
@@ -13223,6 +13232,9 @@ export interface EffectApi {
    * with its every-creature-type marker. For binding
    * `CardFilter.sharesCreatureTypeWith`. */
   subtypesOf(target: TargetRef): readonly string[];
+  /** The supertypes of what `target` points at, the same way. For the
+   * `typeCountOf` amount. */
+  supertypesOf(target: TargetRef): readonly Supertype[];
   /** See the `"return-to-hand"` {@link EffectSpec} — `from` defaults to the
    * battlefield. */
   returnToHand(target: TargetRef, from?: ReturnToHandZone | "where-discarded", now?: true): void;
@@ -17770,6 +17782,11 @@ export function signedAmountValue(
   if ("notedCreatureTypes" in amount) {
     const ref = objectRefRead(amount.notedCreatureTypes, ctx);
     return ref?.kind === "object" ? ctx.notedCreatureTypeCount(ref.object) : 0;
+  }
+  if ("typeCountOf" in amount) {
+    const ref = objectRefRead(amount.typeCountOf, ctx);
+    if (ref?.kind !== "object") return 0;
+    return ctx.supertypesOf(ref).length + ctx.cardTypesOf(ref).length + subtypeCount(ctx.subtypesOf(ref));
   }
   if ("manaSymbolsOf" in amount) {
     const ref = objectRefRead(amount.manaSymbolsOf, ctx);

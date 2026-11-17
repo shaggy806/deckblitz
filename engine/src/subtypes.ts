@@ -156,6 +156,18 @@ export function hasSubtype(subtypes: readonly string[], subtype: string): boolea
   return false;
 }
 
+/** How many different subtypes a list stands for, each marker counted as
+ * every type of its kind — a changeling is every creature type (rule
+ * 702.73a), so each of rule 205.3m's counts. Embiggen's "for each … subtype
+ * it has" (the `typeCountOf` amount). */
+export function subtypeCount(subtypes: readonly string[]): number {
+  if (!subtypes.some(isTypeMarker)) return new Set(subtypes).size;
+  const all = new Set(withoutTypeMarkers(subtypes));
+  if (subtypes.includes(EVERY_CREATURE_TYPE)) for (const t of CREATURE_TYPES) all.add(t);
+  if (subtypes.includes(EVERY_LAND_TYPE)) for (const t of LAND_TYPES) all.add(t);
+  return all.size;
+}
+
 /** `subtypes` without the markers — the subtypes a type line prints. */
 export function withoutTypeMarkers(subtypes: readonly string[]): readonly string[] {
   return subtypes.some(isTypeMarker) ? subtypes.filter((s) => !isTypeMarker(s)) : subtypes;

@@ -7309,6 +7309,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Twice a count as a CDA (2026-11-17, found built).** `bug:cda-count-multiplier`, no engine code: "twice the number of …" is the `CountSpec` `{ sum: [count, count] }` (the Dog Illusion token's shape), still a layer-7b set; the scaffolder reads three counts and "the first instant or sorcery spell you cast each turn costs {N} less". Melek, Reforged Researcher; Territorial Maro; Masumaro, First to Live.
 
+**A count of an object's types (2026-11-17).** `amount:type-count`: the `{ typeCountOf: ObjectRef }` amount, its supertypes, card types and subtypes added (`ResolutionContext.supertypesOf`; `subtypes.ts`'s `subtypeCount` counts a changeling's marker as every creature type). Embiggen (a changeling is a Brushwagg, so never its target).
+
 **Each opponent chooses fame or fortune (2026-11-04).** `effect:fame-or-fortune`, no engine code: a `vote` with `choose` over named options, `for-each-vote` per option, and `choose-permanents` of `controlledByPlayer: "that-player"` for what isn't targeted. Seize the Spotlight.
 
 **The chosen type in addition (2026-11-04).** `static:is-chosen-type`, no engine code: `addsChosenCreatureType` beside an `ofChosenType` lord (Metallic Mimic and Morophon's lines), both read by the scaffolder. Adaptive Automaton.
