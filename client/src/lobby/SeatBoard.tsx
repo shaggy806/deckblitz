@@ -150,6 +150,15 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
     s.claimed || s.isBot
       ? playerLabel(s.player, game.seats)
       : `Player ${game.seats.indexOf(s) + 1}`
+  // How many bots "Fill with bots" would seat: one in every seat nobody
+  // holds, and one in each place the table has left up to four. None until
+  // my own seat is settled (taken on arrival, or given up to watch): the
+  // server fills every open seat, and the one I'm about to take is still
+  // open to it.
+  const botSeats =
+    joined || game.spectating
+      ? MAX_SEATS - game.seats.length + game.seats.filter((s) => !s.claimed && !s.isBot).length
+      : 0
 
   // The request still waiting on the server (`NetworkGame.lobbyBusy`): the
   // board takes no clicks till it's answered, and the control pressed says so.
@@ -324,7 +333,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
         </div>
 
         <aside className="overlay-box seat-board-side">
-          <RoomSettingsPanel game={game} seatLabel={seatLabel} />
+          <RoomSettingsPanel game={game} seatLabel={seatLabel} botSeats={botSeats} />
 
           <div className="seat-board-footer">
             {host ? (

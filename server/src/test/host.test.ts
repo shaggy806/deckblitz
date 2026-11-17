@@ -100,6 +100,7 @@ describe("room host", () => {
     for (const message of [
       { type: "add-bot", roomId, seat: ALICE },
       { type: "add-seat", roomId },
+      { type: "fill-bots", roomId },
       { type: "start-game", roomId },
       { type: "set-bot-speed", roomId, speed: "slow" },
       { type: "set-room-settings", roomId, settings: { startingLife: 20 } },

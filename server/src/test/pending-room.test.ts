@@ -298,6 +298,34 @@ describe("PendingRoom", () => {
     expect(room.toGameConfig().decks.find((d) => d.player === BOB)?.cards).toEqual(["Forest", "Forest"]);
   });
 
+  it("fillWithBots seats a bot in every open seat and adds seats to four, dealing the decks in seat order", () => {
+    const room = pendingRoom();
+    room.claimSeat(ALICE, "alice-token", { send: () => {} });
+    const first = { cards: ["Forest", "Forest"], commanders: ["Ureni of the Unwritten"], name: "First" };
+    const second = { cards: ["Island", "Island"], commanders: ["Ureni of the Unwritten"], name: "Second" };
+    expect(room.fillWithBots([first, second])).toEqual([BOB, SEATS[2].id, SEATS[3].id]);
+    const seats = room.seatStatuses();
+    expect(seats.map((s) => s.player)).toEqual(SEATS.map((s) => s.id));
+    expect(seats.map((s) => s.isBot)).toEqual([false, true, true, true]);
+    // The decks sent, in seat order; past them, the seat's own starter.
+    expect(seats.slice(1).map((s) => s.deck?.name)).toEqual(["First", "Second", SEATS[3].name]);
+    // Each bot under its own name, and Alice's seat as she left it.
+    expect(new Set(seats.slice(1).map((s) => s.displayName)).size).toBe(3);
+    expect(seats[0].claimed).toBe(true);
+    expect(room.isReady()).toBe(true);
+  });
+
+  it("fillWithBots fills only what nobody holds, and refuses a table with nothing left to fill", () => {
+    const room = pendingRoom(3);
+    room.claimSeat(ALICE, "alice-token", { send: () => {} });
+    room.addBot(SEATS[2].id);
+    const before = room.seatStatuses()[2];
+    expect(room.fillWithBots()).toEqual([BOB, SEATS[3].id]);
+    // The bot already seated keeps its deck and its name.
+    expect(room.seatStatuses()[2]).toEqual(before);
+    expect(() => room.fillWithBots()).toThrow("no seat is left to fill");
+  });
+
   it("names a bot after a character of its deck's colours, and renames it when its deck changes colour", () => {
     const room = pendingRoom();
     room.addBot(BOB, { cards: ["Forest"], commanders: ["Ureni of the Unwritten"], name: "Temur" });
@@ -566,5 +594,16 @@ describe("PendingRoom: Commander-legal decks only", () => {
     expect(() => room.addBot(BOB, twoForests)).toThrow(/only Commander-legal decks/);
     room.addBot(BOB);
     expect(room.seatStatuses()[1].isBot).toBe(true);
+  });
+
+  it("on, a fill with one illegal deck changes nothing: no seat added, no bot seated", () => {
+    const room = pendingRoom();
+    room.claimSeat(ALICE, "alice-token", { send: () => {} });
+    room.setSettings({ commanderLegalOnly: true });
+    const legal = { cards: SEATS[1].cards, commanders: SEATS[1].commanders, name: SEATS[1].name };
+    // The second of three is the bad one: the first must not have sat down.
+    expect(() => room.fillWithBots([legal, twoForests])).toThrow(/only Commander-legal decks/);
+    expect(room.seatStatuses().map((s) => s.isBot)).toEqual([false, false]);
+    expect(room.fillWithBots([legal])).toHaveLength(3);
   });
 });

@@ -8,11 +8,27 @@ import type { SeatStatus, WireDeck } from 'protocol'
 export type BotDeckPool = 'precon' | 'upgraded' | 'strong'
 
 /** The pools in the order the lobby offers them, each with its button's
- * label and what it says on hover. */
-export const BOT_DECK_POOLS: readonly { pool: BotDeckPool; label: string; hint: string }[] = [
-  { pool: 'precon', label: 'Precon', hint: 'Add a bot playing a random precon, as printed' },
-  { pool: 'upgraded', label: 'Upgraded', hint: 'Add a bot playing a random upgraded precon' },
-  { pool: 'strong', label: 'Strong', hint: "Add a bot playing a real player's deck (credited on the About page)" },
+ * label and what it says on hover: on a seat's own button (`hint`), and on
+ * the one that fills the whole table at that strength (`fillHint`). */
+export const BOT_DECK_POOLS: readonly { pool: BotDeckPool; label: string; hint: string; fillHint: string }[] = [
+  {
+    pool: 'precon',
+    label: 'Precon',
+    hint: 'Add a bot playing a random precon, as printed',
+    fillHint: 'Fill the table to four with bots, each playing a random precon, as printed',
+  },
+  {
+    pool: 'upgraded',
+    label: 'Upgraded',
+    hint: 'Add a bot playing a random upgraded precon',
+    fillHint: 'Fill the table to four with bots, each playing a random upgraded precon',
+  },
+  {
+    pool: 'strong',
+    label: 'Strong',
+    hint: "Add a bot playing a real player's deck (credited on the About page)",
+    fillHint: "Fill the table to four with bots, each playing a real player's deck (credited on the About page)",
+  },
 ]
 
 /** The decks a pool deals from: the precons, the upgraded precons, or the

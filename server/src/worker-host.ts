@@ -136,6 +136,7 @@ const ROOM_MESSAGES = new Set([
   "set-bot-deck",
   "add-seat",
   "remove-seat",
+  "fill-bots",
   "set-ready",
   "leave-room",
   "start-game",

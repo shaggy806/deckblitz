@@ -363,6 +363,31 @@ describe("room server (end to end over WebSocket)", () => {
     expect(shrunk.seats.map((s) => s.player)).toEqual([ALICE, BOB]);
   });
 
+  it("fill-bots makes a full table of bots in one refresh, and says so when nothing is left to fill", async () => {
+    const ws = await openSocket();
+    const next = messageQueue(ws);
+    ws.send(JSON.stringify({ type: "create-room" }));
+    const created = await next();
+    if (created.type !== "room-created") throw new Error("unreachable");
+    const roomId = created.roomId;
+    ws.send(JSON.stringify({ type: "claim-seat", roomId, seat: ALICE, clientToken: "alice" }));
+    await next();
+
+    const deck = { cards: SEATS[3].cards, commanders: SEATS[3].commanders, name: "Dealt first" };
+    ws.send(JSON.stringify({ type: "fill-bots", roomId, decks: [deck] }));
+    // One answer for the three bots: the next message is the whole table.
+    const filled = await next();
+    if (filled.type !== "room-joined") throw new Error("unreachable");
+    expect(filled.seats.map((s) => s.player)).toEqual([ALICE, BOB, CAROL, DAVE]);
+    expect(filled.seats.map((s) => s.isBot)).toEqual([false, true, true, true]);
+    expect(filled.seats[1].deck?.name).toBe("Dealt first");
+
+    ws.send(JSON.stringify({ type: "fill-bots", roomId }));
+    const full = await next();
+    if (full.type !== "error") throw new Error("unreachable");
+    expect(full.message).toMatch(/no seat is left to fill/);
+  });
+
   it("refuses to drop a seat below two, or one a player is sitting in", async () => {
     const ws = await openSocket();
     const next = messageQueue(ws);

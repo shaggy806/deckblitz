@@ -518,6 +518,35 @@ export class PendingRoom {
     this.lastActivityAt = Date.now();
   }
 
+  /**
+   * Makes the table a full one of bots: every seat nobody holds gets a bot,
+   * and seats are added up to `SEATS.length`, each with one. `decks` are
+   * dealt in seat order; a bot past the end plays its seat's positional
+   * starter, as {@link addBot} with no deck does. All or nothing: every deck
+   * is checked before a seat changes, so one refused leaves the table as it
+   * was. Returns the seats filled.
+   */
+  fillWithBots(decks: readonly PendingDeck[] = []): PlayerId[] {
+    const taken = new Set(this.seats.map((s) => s.player));
+    // In seating order, as the table will sit once the new seats are in.
+    const filling = SEATS.map((s) => s.id).filter((id) => {
+      if (!taken.has(id)) return true;
+      const seat = this.seatFor(id);
+      return seat.clientToken === null && !seat.isBot;
+    });
+    if (filling.length === 0) throw new Error("no seat is left to fill");
+    const dealt = filling.map((player, i) => decks[i] ?? this.fallbackDeck(player));
+    for (const deck of dealt) {
+      assertDeckIsBuildable(deck);
+      this.assertDeckAllowed(deck);
+    }
+    filling.forEach((player, i) => {
+      if (!taken.has(player)) this.addSeat();
+      this.addBot(player, dealt[i]);
+    });
+    return filling;
+  }
+
   /** Changes an already-bot-filled seat's deck — the seat-picker's "pick
    * which deck this bot plays" control. Rejects a seat that isn't currently
    * a bot (a human's own deck is only set via `claimSeat`). */

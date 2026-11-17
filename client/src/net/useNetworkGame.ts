@@ -365,6 +365,10 @@ export interface NetworkGame {
   /** Fills an open seat with a basic heuristic bot instead of a human.
    * Omitted `deck` falls back to that seat's positional starter deck. */
   addBot: (seat: PlayerId, deck?: WireDeck, pool?: string) => void
+  /** Makes the table a full one of bots in one request: every seat nobody
+   * holds gets a bot, and seats are added up to four, each with one. `decks`
+   * are dealt to them in seat order, one per bot. */
+  fillBots: (decks: readonly WireDeck[], pool?: string) => void
   /** Adds one more seat to the table, up to four — how the table is sized,
    * now that the landing page doesn't ask. Only usable before the game
    * starts. */
@@ -383,7 +387,7 @@ export interface NetworkGame {
   startGame: () => void
   /**
    * The seat board's request still waiting on the server, by key
-   * (`'add-seat'`, `'add-bot:<seat>:<pool>'`, `'remove-seat:<seat>'`,
+   * (`'add-seat'`, `'add-bot:<seat>:<pool>'`, `'fill-bots:<pool>'`, `'remove-seat:<seat>'`,
    * `'ready'`, `'deck:<seat>'`, `'settings'`, `'start'`), or `null`. While
    * one waits, the seat board's other requests are ignored: each changes
    * the board only once the server answers (a `room-joined` refresh, or an
@@ -1240,6 +1244,19 @@ export function useNetworkGame(): NetworkGame {
     [send, noteSentDeck, lobbyRequest],
   )
 
+  const fillBots = useCallback(
+    (decks: readonly WireDeck[], pool?: string) => {
+      const id = roomIdRef.current
+      if (id === null) return
+      // One message, so one answer: the server seats them all or none. The
+      // decks aren't noted as sent (which seat gets which is the server's to
+      // say); a game moved into this tab finds each by its name, which every
+      // bot pool's deck has (`lobby/localStart.ts`).
+      lobbyRequest(`fill-bots:${pool ?? ''}`, () => send({ type: 'fill-bots', roomId: id, decks }))
+    },
+    [send, lobbyRequest],
+  )
+
   const setBotDeck = useCallback(
     (seat: PlayerId, deck: WireDeck) => {
       const id = roomIdRef.current
@@ -1574,6 +1591,7 @@ export function useNetworkGame(): NetworkGame {
     setBotTakeover,
     sendPassSettings,
     addBot,
+    fillBots,
     setBotDeck,
     addSeat,
     lobbyBusy,

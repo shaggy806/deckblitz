@@ -631,6 +631,28 @@ export class RoomService {
         }
         return;
       }
+      case "fill-bots": {
+        // A waiting room's by construction, like sizing the table: it adds
+        // seats as well as filling them.
+        const room = this.requirePendingRoom(message.roomId);
+        try {
+          requireHost(room, connection, "add bots");
+          room.fillWithBots(message.decks);
+        } catch (err) {
+          connection.send({
+            type: "error",
+            message: err instanceof Error ? err.message : String(err),
+          });
+          return;
+        }
+        this.broadcastPending(room);
+        // Same as `add-bot` above: a host who holds no seat isn't in
+        // `connectedSeats()`, so the broadcast never reaches them.
+        if (room.seatOf(connection) === null && room.unseatedHost() !== connection) {
+          connection.send(this.joined(room, connection));
+        }
+        return;
+      }
       case "set-ready": {
         const room = this.requirePendingRoom(message.roomId);
         try {

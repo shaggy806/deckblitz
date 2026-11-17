@@ -3,6 +3,7 @@ import type { PlayerId } from 'engine/client'
 import type { RoomSettings, SeatStatus } from 'protocol'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { BOT_SPEEDS } from '../ui/botSpeeds.ts'
+import { BOT_DECK_POOLS, randomBotDecks } from './randomBotDeck.ts'
 
 /** The range the server accepts (`PendingRoom.setSettings`). */
 const LIFE_MIN = 1
@@ -16,13 +17,22 @@ const LIFE_PRESETS = [20, 30, 40] as const
  * the bots play — under the seats. The host's to change; everyone else sees
  * what the game will be, as plain text, since the server would refuse their
  * change anyway.
+ *
+ * The host's last row is not a setting but a shortcut: "Fill with bots", one
+ * button per strength of deck, which makes the table a full four with a bot
+ * of that strength in every seat nobody holds (the user's ask, 2026-11-17:
+ * a seat's own "+ Bot" buttons took an "Add player" and a bot's click for
+ * each of three opponents). `botSeats` is how many bots that would seat — the
+ * buttons are there but off at none, so the box keeps its height.
  */
 export function RoomSettingsPanel({
   game,
   seatLabel,
+  botSeats,
 }: {
   readonly game: NetworkGame
   readonly seatLabel: (seat: SeatStatus) => string
+  readonly botSeats: number
 }) {
   const settings = game.roomSettings
   if (settings === null) return null
@@ -130,6 +140,31 @@ export function RoomSettingsPanel({
             <span className="rs-value">{speedLabel}</span>
           )}
         </div>
+
+        {host ? (
+          <div className="rs-field">
+            <span className="rs-label">Fill with bots</span>
+            <div className="rs-options" role="group" aria-label="Fill with bots">
+              {BOT_DECK_POOLS.map(({ pool, label, fillHint }) => (
+                <button
+                  key={pool}
+                  type="button"
+                  className={`seg-option${game.lobbyBusy === `fill-bots:${pool}` ? ' pending' : ''}`}
+                  title={botSeats === 0 ? 'Every seat is taken' : fillHint}
+                  aria-label={`Fill with ${label.toLowerCase()} bots`}
+                  disabled={botSeats === 0}
+                  onClick={() => {
+                    // A different deck for each, and none already at the table.
+                    const taken = game.seats.flatMap((s) => (s.deck === null ? [] : [s.deck.name]))
+                    game.fillBots(randomBotDecks(botSeats, taken, Math.random, pool), pool)
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </div>
     </section>
   )

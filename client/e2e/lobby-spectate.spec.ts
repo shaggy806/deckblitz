@@ -157,6 +157,59 @@ test("the host picks each bot's deck by its strength: a precon, an upgraded prec
   await guest.context().close()
 })
 
+test('the host fills the table with bots of one strength in one click: a bot for every place left', async ({ browser }) => {
+  const host = await newPage(browser)
+  const errors = pageErrors(host)
+  const sent: string[] = []
+  host.on('websocket', (ws) =>
+    ws.on('framesent', ({ payload }) => {
+      const type = typeof payload === 'string' ? /"type":"([a-z-]+)"/.exec(payload)?.[1] : undefined
+      if (type === 'fill-bots' || type === 'add-bot' || type === 'add-seat') sent.push(type)
+    }),
+  )
+  await host.goto('/')
+  await host.getByRole('button', { name: 'Create a game' }).click()
+  await expect(host.getByRole('button', { name: 'Ready', exact: true })).toBeVisible()
+  const room = await roomOf(host)
+  if (room === null) throw new Error('no room code')
+  const guest = await newPage(browser)
+  await guest.goto(`/?room=${room}`)
+  await expect(guest.getByRole('button', { name: 'Ready', exact: true })).toBeVisible()
+
+  const fill = (page: Page) => page.getByRole('group', { name: 'Fill with bots' })
+  await expect(fill(host).getByRole('button')).toHaveCount(3)
+  // The host's to do: the guest has no such buttons.
+  await expect(fill(guest)).toHaveCount(0)
+  await shots(host, 'lobby-fill-bots')
+
+  // Two people at a table of two, so no seat is open: the fill adds the two
+  // seats and a bot in each, on different upgraded precons. Double-clicked,
+  // it's still one request.
+  const grid = host.locator('.seat-board-grid')
+  await fill(host).getByRole('button', { name: 'Fill with upgraded bots' }).dblclick()
+  await expect(grid.locator('.seat-panel')).toHaveCount(4)
+  await expect(grid.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(2)
+  const decks = await grid.locator('.seat-deck-name', { hasText: '(Upgraded)' }).allTextContents()
+  expect(new Set(decks).size).toBe(2)
+  await expect(guest.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(2)
+  // Nothing left to fill: the buttons stay where they were, off.
+  await expect(fill(host).getByRole('button', { name: 'Fill with strong bots' })).toBeDisabled()
+  expect(sent).toEqual(['fill-bots'])
+  await shots(host, 'lobby-filled-with-bots')
+
+  // A bot's seat removed leaves a place, and the next fill takes only that:
+  // a real player's deck this time, beside the upgraded one still there.
+  await host.getByRole('button', { name: 'Remove seat 4' }).click()
+  await expect(grid.locator('.seat-panel')).toHaveCount(3)
+  await fill(host).getByRole('button', { name: 'Fill with strong bots' }).click()
+  await expect(grid.locator('.seat-panel')).toHaveCount(4)
+  await expect(grid.locator('.seat-deck-name[data-deck*=" by "]')).toHaveCount(1)
+  await expect(grid.locator('.seat-deck-name', { hasText: '(Upgraded)' })).toHaveCount(1)
+  expect(errors).toEqual([])
+  await host.context().close()
+  await guest.context().close()
+})
+
 test('a full room can be watched: the seat board, then the game with no hand', async ({ browser }) => {
   // A waiting room grows a seat for each newcomer up to four, so it's full
   // at four: the host and three bots.

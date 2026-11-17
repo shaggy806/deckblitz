@@ -286,6 +286,18 @@ export type ClientMessage =
       readonly seat: PlayerId;
     }
   | {
+      /** Makes a waiting room a full table of bots in one go — the seat
+       * board's "Fill with bots": every seat nobody holds gets a bot, and
+       * seats are added up to four, each with one. `decks` are dealt to them
+       * in seat order (the client sends one per bot, all of one strength); a
+       * bot past the end plays its seat's positional starter, as an
+       * `add-bot` with no deck does. All or nothing: a deck refused, or a
+       * table with no seat left to fill, changes nothing. Host only. */
+      readonly type: "fill-bots";
+      readonly roomId: string;
+      readonly decks?: readonly WireDeck[];
+    }
+  | {
       /** Toggles the caller's own already-claimed seat between ready and not
        * — the seat-picker's "Ready"/"Un-ready" button once a deck's already
        * locked in. Only valid before the room's game exists. */
