@@ -114,6 +114,16 @@ test('a local blitz plays against three bots in the page, never on the room serv
   expect(stats.readyMs).toBeGreaterThan(0)
   expect(stats.games).toBe(1)
 
+  // The History is the same panel as a server room's, Export log included:
+  // the file is named for this room.
+  await page.getByRole('button', { name: 'History', exact: true }).click()
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('.event-log').getByRole('button', { name: 'Export log' }).click(),
+  ])
+  expect(download.suggestedFilename()).toMatch(new RegExp(`^gamelog-${roomId}-\\d+\\.txt$`))
+  await page.keyboard.press('Escape')
+
   // It was all in this tab: nothing about the game went to the room server.
   expect(typesOf(sent)).toEqual([])
   expect(sent.some((s) => s.includes(roomId!))).toBe(false)

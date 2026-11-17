@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+
 import { expect, test, type APIRequestContext } from '@playwright/test'
 
 // The History popup's log scrolls under a sticky "Log" header. A bug report
@@ -91,3 +93,39 @@ test('the History lists the whole game after many frames, and again after a relo
   expect(slices[0]).toBe(0)
   expect(await history()).toEqual(after)
 })
+
+// A bug report (2026-11-17): "the History tab's Export log button is
+// missing". A log left the page only by selecting the Detailed view and
+// pasting it, each line's number on a line of its own. The button saves every
+// event as a text file, whichever view is showing (`ui/logExport.ts`).
+for (const room of ['TWOAA', 'FOURP']) {
+  test(`Export log saves every line of the History as a text file (${room})`, async ({ page, request }) => {
+    await control(request, { op: 'reset', room })
+    await page.goto(`/?room=${room}`)
+    await page.getByRole('button', { name: 'History', exact: true }).click()
+    const box = page.locator('.event-log')
+    await expect(box.locator('li').first()).toBeVisible()
+    // The panel opens concise; the file is the whole log all the same.
+    const concise = await box.locator('li').count()
+    const [download] = await Promise.all([
+      page.waitForEvent('download'),
+      box.getByRole('button', { name: 'Export log' }).click(),
+    ])
+    expect(download.suggestedFilename()).toMatch(new RegExp(`^gamelog-${room}-\\d+\\.txt$`))
+    const lines = readFileSync(await download.path(), 'utf8').split('\n')
+    expect(lines.pop()).toBe('')
+    expect(lines.length).toBeGreaterThan(concise)
+    expect(lines[0]).toMatch(/^0\t.+ vs .+ · .+ first · seed \d+$/)
+    // Each line is the Detailed view's: its number, a tab, its sentence.
+    await box.getByLabel('Detailed').check()
+    const detailed = await box.locator('li').allTextContents()
+    expect(detailed.slice(0, lines.length)).toEqual(lines.map((line) => line.replace('\t', '')))
+    // The button is inside the panel at this size, beside the switch.
+    const inside = await box.getByRole('button', { name: 'Export log' }).evaluate((button) => {
+      const panel = button.closest('.history-box')?.getBoundingClientRect()
+      const at = button.getBoundingClientRect()
+      return panel !== undefined && at.left >= panel.left && at.right <= panel.right && at.width > 0
+    })
+    expect(inside).toBe(true)
+  })
+}

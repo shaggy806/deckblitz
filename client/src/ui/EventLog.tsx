@@ -7,6 +7,7 @@ import { requestCards, useCardData } from '../cards/cardData.ts'
 import type { SeenPrinting } from '../game/seenPrintings.ts'
 import { CardTile } from './CardTile.tsx'
 import { defToVisible } from './defToVisible.ts'
+import { downloadText, logFileName, logText } from './logExport.ts'
 import { markCard, splitMarked } from './logMarks.ts'
 import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
@@ -28,6 +29,9 @@ export interface EventLogProps {
   readonly nameAt: NameAt
   /** The room's seats, for the players' display names. */
   readonly seats: readonly SeatStatus[]
+  /** The room the game is in, for the name of the file "Export log" saves
+   * (`logFileName`). */
+  readonly roomId?: string | null
   /** Each named card's own printing, so its preview is the card the board
    * showed and not the name's default art. Without it, the default. */
   readonly printingOf?: PrintingOf
@@ -171,8 +175,13 @@ function EventText({
  *
  * The choice is per-session rather than persisted — it's a debugging mode,
  * and the useful default is the one you get on every fresh visit.
+ *
+ * "Export log" saves the log as a text file (`logExport.ts`): every event,
+ * whichever view is showing. It is part of the log, so it is wherever the
+ * log is — any seat or spectator, a game in progress or over, a room on the
+ * server or one in the page.
  */
-export function EventLog({ events, nameAt, seats, printingOf, onSelect, onSelectCard }: EventLogProps) {
+export function EventLog({ events, nameAt, seats, roomId, printingOf, onSelect, onSelectCard }: EventLogProps) {
   const boxRef = useRef<HTMLDivElement>(null)
   const [detailed, setDetailed] = useState(false)
   const lookup = useCardData()
@@ -210,14 +219,25 @@ export function EventLog({ events, nameAt, seats, printingOf, onSelect, onSelect
     <div className={detailed ? 'event-log detailed' : 'event-log'} ref={boxRef} onScroll={noteScroll}>
       <div className="event-log-head">
         <h3>Log</h3>
-        <label className="event-log-toggle">
-          <input
-            type="checkbox"
-            checked={detailed}
-            onChange={(e) => setDetailed(e.target.checked)}
-          />
-          Detailed
-        </label>
+        <div className="event-log-tools">
+          <button
+            type="button"
+            className="event-log-export"
+            disabled={events.length === 0}
+            title="Save the whole log as a text file: every line, numbered"
+            onClick={() => downloadText(logFileName(roomId ?? null, events), logText(events, nameAt, seats))}
+          >
+            Export log
+          </button>
+          <label className="event-log-toggle">
+            <input
+              type="checkbox"
+              checked={detailed}
+              onChange={(e) => setDetailed(e.target.checked)}
+            />
+            Detailed
+          </label>
+        </div>
       </div>
       <ul>
         {shown.map((event) => (

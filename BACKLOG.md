@@ -277,7 +277,7 @@ animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When a
 delete its detail there and move this line to `COMPLETED.md`.
 
 - **B334's prompt and log wording** — a `choose-modes` answer logged as "chose mode(s) 2", Gorex's "choose X", the graveyard blitz offer, a few popup titles (`docs/client-gaps.md`).
-- **Read through a couple of games' history logs, and let a finished game's full log be downloaded** (the user, 2026-11-15): go through the history tab's log for a couple of games and make sure everything reads sensibly (`client/src/ui/EventLog.tsx`). And add an option on the end screen of a game to download a full log, with all information revealed, not just what your seat could see (so it comes from the room's whole game, not the seat's redacted view).
+- **Read through a couple of games' history logs, and let a finished game's full log be downloaded** (the user, 2026-11-15): go through the history tab's log for a couple of games and make sure everything reads sensibly (`client/src/ui/EventLog.tsx`). And add an option on the end screen of a game to download a full log, with all information revealed, not just what your seat could see (so it comes from the room's whole game, not the seat's redacted view). The History panel's "Export log" (2026-11-17, `client/src/ui/logExport.ts`) saves the log as the seat saw it, and its text and file name are there to reuse; what's left is the server sending a finished game's unredacted events, and the end screen's button.
 
 
 

@@ -2182,6 +2182,21 @@
   background: var(--panel);
   padding: 8px 0 2px;
 }
+/* The log's own controls, together on the right of its title: Export log,
+   then the Detailed switch. */
+.event-log-tools {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 0.9vw, 14px);
+  margin-bottom: 4px;
+}
+/* A small button, the switch's size: the History head above already holds
+   two full-sized ones, and the panel is 300px at its narrowest. */
+.event-log-export {
+  font-size: var(--text-xs);
+  padding: 0.15em 0.7em;
+  white-space: nowrap;
+}
 .event-log-toggle {
   display: flex;
   align-items: center;
@@ -2190,7 +2205,6 @@
   color: var(--muted);
   cursor: pointer;
   user-select: none;
-  margin-bottom: 4px;
 }
 .event-log-toggle input {
   margin: 0;

@@ -1860,6 +1860,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
                 abilitySourcesOf(view.events),
               )}
               seats={game.seats}
+              roomId={game.roomId}
               printingOf={printingSeen}
               onSelect={(event) => {
                 // The board is in view beside the panel: point the entry's
