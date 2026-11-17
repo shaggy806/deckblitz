@@ -138,6 +138,20 @@ const COMBAT_STEPS: ReadonlySet<Step> = new Set<Step>([
 ]);
 
 /**
+ * Whether this combat phase has had no attacker: none declared (the journal's
+ * `attacked` entries of this phase, which a creature removed from combat since
+ * doesn't take back) and none attacking now (one put onto the battlefield
+ * attacking, rule 508.4, is never declared). Its declare blockers and combat
+ * damage steps are then skipped (rule 508.8), and blockers are never declared
+ * in it (506.8f).
+ */
+export function nothingAttackedThisCombat(state: GameState): boolean {
+  if (state.zones.shared.battlefield.some((id) => state.objects[id]?.attacking != null)) return false;
+  const phase = state.turn.combatPhases ?? 1;
+  return !entriesThisTurn(state, "attacked").some((entry) => (entry.combat ?? 1) === phase);
+}
+
+/**
  * Ids whose static `condition` is currently being evaluated. A condition that
  * reads other permanents' *computed* characteristics (`controls` / `metalcraft`)
  * can loop back here — two Kird Apes each ask "does the other satisfy my
@@ -1413,6 +1427,13 @@ function evalStaticCondition(
       const step = state.turn.step;
       const inCombat = COMBAT_STEPS.has(step);
       if (condition.steps !== undefined && !condition.steps.includes(step)) return false;
+      // Rule 506.8f: "only during combat after blockers are declared" (the
+      // declare blockers step and the two after it) can't be done in a
+      // combat whose declare blockers step was skipped — one with no
+      // attacker (508.8), which still has an end of combat step.
+      if (step === "end-combat" && condition.steps?.includes("declare-blockers") === true && nothingAttackedThisCombat(state)) {
+        return false;
+      }
       if (condition.duringCombat === true && !inCombat) return false;
       if (condition.afterCombat === true) {
         const combats = state.turn.combatPhases ?? 0;

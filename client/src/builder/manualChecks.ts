@@ -13326,6 +13326,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Grizzly Bears: a combat with no attack has no blockers or damage step',
+    board({
+      you: { bf: ['Grizzly Bears'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
     'Fencing Ace: no second strike at a player the first strike killed',
     board({
       you: { bf: ['Fencing Ace', { name: 'Basilisk Collar', attach: 'Fencing Ace' }] },

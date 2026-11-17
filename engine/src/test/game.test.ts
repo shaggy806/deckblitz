@@ -69,9 +69,11 @@ describe("turn and step progression", () => {
   it("walks every step of turn 1 in order", () => {
     const game = newGame();
     game.advanceUntil((s) => s.turn.number === 2);
+    // Nobody attacks on turn 1: the declare blockers and combat damage steps
+    // are skipped (rule 508.8).
     const steps = game
       .eventsOfType("step-began")
-      .slice(0, 12)
+      .slice(0, 10)
       .map((event) => event.step);
     expect(steps).toEqual([
       "untap",
@@ -80,8 +82,6 @@ describe("turn and step progression", () => {
       "precombat-main",
       "begin-combat",
       "declare-attackers",
-      "declare-blockers",
-      "combat-damage",
       "end-combat",
       "postcombat-main",
       "end",

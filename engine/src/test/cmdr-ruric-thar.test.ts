@@ -253,7 +253,9 @@ describe("Ruric Thar, the Unbowed", () => {
     const { game } = makeGame();
     const ruric = spawnRuricThar(game, A, { summoningSick: false, tapped: true });
 
-    game.advanceUntil((s) => s.turn.step === "declare-blockers");
+    // With no attacker there is no declare blockers step (rule 508.8).
+    game.advanceUntil((s) => s.turn.step === "end-combat");
+    expect(game.state.turn.number).toBe(1);
     expect(game.state.objects[ruric].attacking).toBe(null);
 
     game.advanceUntil((s) => s.turn.step === "postcombat-main");

@@ -8803,6 +8803,11 @@ Each board's die comes up 4.
 - **Expect:** After Choose none the banner reads "Lodestone Bauble — choose one" with Choose Alice and Choose Bob. Once it resolves nothing moves (Bob's Forest and Island stay in his graveyard); at the start of Bob's turn Lodestone Bauble's trigger goes on the stack and Bob draws a card, then draws again for his turn.
 - **Not a bug:** The History says "That player draws a card" rather than naming Bob.
 
+### Grizzly Bears: a combat with no attack has no blockers or damage step
+- **Do:** Pass priority one step at a time (Pass, not Pass Turn) through your combat without attacking.
+- **Expect:** After the declare attackers step (DA) the strip goes straight to end of combat (EC): DB and CD never light, and nobody is given priority in them. The History's Detailed view has no "[combat] declare-blockers" or "[combat] combat-damage" line for the turn.
+- **Not a bug:** On a turn where a creature does attack, all five steps are there.
+
 ### Fencing Ace: no second strike at a player the first strike killed
 - **Do:** Attack Bob, who is on 1 life, with Fencing Ace (double strike, wearing Basilisk Collar for lifelink). Pass until the turn's second main phase.
 - **Expect:** Bob loses after the first strike and Carol plays on. Your life went up by 1, not 2, and the History has Fencing Ace dealing 1 to Bob once.

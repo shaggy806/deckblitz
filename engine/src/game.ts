@@ -159,6 +159,7 @@ import {
   restrictionsOf,
   colorsAmongPermanents,
   computeCharacteristics,
+  nothingAttackedThisCombat,
   effectiveSupertypes,
   copiableKeywordAbilities,
   copiableTypesOf,
@@ -11456,12 +11457,28 @@ export class Game {
       this.enterStep("cleanup");
       return;
     }
+    // Rule 508.8: "If no creatures are declared as attackers or put onto the
+    // battlefield attacking, skip the declare blockers and combat damage
+    // steps." Both were played, a round of priority each, in every combat
+    // with no attack (a rules audit, 2026-11-17, off a live game's log).
+    if (this.state.turn.step === "declare-attackers" && this.nothingAttackedThisCombat()) {
+      this.enterStep("end-combat");
+      return;
+    }
     const next = nextStep(this.state.turn.step);
     if (next === null) {
       this.beginTurn();
     } else {
       this.enterStep(next);
     }
+  }
+
+  /** Whether this combat phase has had no attacker: none declared (the
+   * journal's `attacked` entries of this phase, which a creature removed from
+   * combat since doesn't take back) and none attacking now (one put onto the
+   * battlefield attacking, rule 508.4, is never declared). Rule 508.8. */
+  private nothingAttackedThisCombat(): boolean {
+    return nothingAttackedThisCombat(this.state);
   }
 
   private performTurnBasedActions(step: Step): void {

@@ -101,7 +101,10 @@ describe("additional upkeep steps (Obeka, Splitter of Seconds)", () => {
 
   it("a phase added after the same combat later goes first (rule 500.8)", () => {
     const { game } = setUp();
-    game.advanceUntil((s) => s.turn.step === "combat-damage");
+    // Nobody attacks, so the combat has no declare blockers or combat damage
+    // step (rule 508.8): the first phase is added in the declare attackers
+    // step, and the combat added after it has three steps too.
+    game.advanceUntil((s) => s.turn.step === "declare-attackers");
     game.debugApplyEffect(A, { kind: "additional-upkeep-steps", amount: 1 });
     game.advanceUntil((s) => s.turn.step === "end-combat");
     game.debugApplyEffect(A, { kind: "additional-combat", afterThisPhase: true });
@@ -110,8 +113,6 @@ describe("additional upkeep steps (Obeka, Splitter of Seconds)", () => {
     expect(stepsSince(game, from)).toEqual([
       "begin-combat",
       "declare-attackers",
-      "declare-blockers",
-      "combat-damage",
       "end-combat",
       "upkeep",
       "postcombat-main",
