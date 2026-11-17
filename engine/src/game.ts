@@ -14724,6 +14724,29 @@ export class Game {
           });
         }
       }
+      // Each planeswalker attacked (rule 508.3b), in the order first
+      // declared — "whenever an opponent attacks a planeswalker you control"
+      // (Oath of Kaya) triggers once for each.
+      const walkers: ObjectId[] = [];
+      for (const d of declaredNow) {
+        const walker = this.state.objects[d.defender as ObjectId];
+        if (
+          walker?.zone === "battlefield" &&
+          !walkers.includes(walker.id) &&
+          effectiveTypes(this.state, this.registry, walker).includes("planeswalker")
+        ) {
+          walkers.push(walker.id);
+        }
+      }
+      for (const walker of walkers) {
+        this.emit({
+          type: "planeswalker-attacked",
+          player: this.activePlayer,
+          planeswalker: walker,
+          controller: this.state.objects[walker]!.controller,
+          attackers: declaredNow.filter((d) => d.defender === walker).map((d) => d.id),
+        });
+      }
     }
     // "You may exert this creature as it attacks" (rule 701.43d): an
     // optional cost to attack (508.1g), asked of each such attacker before
@@ -19810,6 +19833,7 @@ export class Game {
     if (event.type === "attacker-declared" || event.type === "attacked-alone") return event.attacker === id;
     if (event.type === "attackers-declared") return event.attackers.includes(id);
     if (event.type === "player-attacked") return event.attackers.includes(id) || event.planeswalkerAttackers?.includes(id) === true;
+    if (event.type === "planeswalker-attacked") return event.attackers.includes(id);
     return false;
   }
 
@@ -19833,6 +19857,7 @@ export class Game {
           if (event.type === "attacker-declared" || event.type === "attacked-alone") return [event.attacker];
           // A whole declaration: any attacker of the filter's kind caused it.
           if (event.type === "player-attacked") return [...event.attackers, ...(event.planeswalkerAttackers ?? [])];
+          if (event.type === "planeswalker-attacked") return event.attackers;
           return event.type === "attackers-declared" ? event.attackers : undefined;
         case "combat-damage-to-player":
           return event.type === "damage-dealt" && event.combat && event.target.kind === "player"
@@ -36129,6 +36154,9 @@ export class Game {
       recipient = this.attackedRecipient(event.defender);
     } else if (event.type === "player-attacked" || event.type === "player-attacked-unblocked") {
       player = event.defender;
+    } else if (event.type === "planeswalker-attacked") {
+      // "Deals 2 damage to that player" (Oath of Kaya): the attacking one.
+      player = event.player;
     } else if (event.type === "permanent-tapped-for-mana") {
       // "That player" of "whenever a player taps a land for mana" (Manabarbs).
       player = event.player;
@@ -37404,6 +37432,12 @@ export class Game {
           (spec.defenderHasInitiative !== true || this.state.initiative === event.defender) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))
+        );
+      case "planeswalker-attacked":
+        return (
+          event.type === "planeswalker-attacked" &&
+          this.matchesWhoPlayer(spec.who, event.player, self) &&
+          this.matchesWhoPlayer(spec.defender, event.controller, self)
         );
       case "attacks-batch":
         return (

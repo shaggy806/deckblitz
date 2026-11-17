@@ -1403,6 +1403,11 @@ Proving: Containment Priest. Test: `enter-exile-instead.test.ts`.
   Companion // Lukka, Wayward Bonder. Oath of Kaya, recorded with the same key,
   triggers once per planeswalker attacked: it needs a per-planeswalker shape.
   `test/opponent-attacks-your-planeswalkers.test.ts`.
+- `trigger:opponent-attacks-each-of-your-planeswalkers` (2026-11-17) — the
+  `planeswalker-attacked` trigger off a `planeswalker-attacked` event, one per
+  planeswalker attacked (rule 508.3b), emitted after the `player-attacked`
+  events; `who` the attacker, `defender` the planeswalker's controller, the
+  attacker the `"trigger-player"`. Oath of Kaya. `test/planeswalker-attacked.test.ts`.
 - `amount:counters-moved-this-way` — no new amount: `move-counters`' `ifMoved`
   now runs after an `"all"` or single move too (it ran only after `"any"`), and
   "that much" is `{ thisWay: "counters-removed" }`. Black Panther, Wakandan

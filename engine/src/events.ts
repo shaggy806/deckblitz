@@ -1205,6 +1205,20 @@ export type GameEvent =
       readonly planeswalkerAttackers?: readonly ObjectId[];
     })
   | (Base & {
+      /** One planeswalker the declaration attacks (rule 508.3b) — once per
+       * planeswalker with at least one creature declared attacking it, after
+       * the `player-attacked` events, for "whenever an opponent attacks a
+       * planeswalker you control with one or more creatures" (Oath of Kaya,
+       * whose ruling has it trigger once for each). `controller` is who
+       * controlled it as the attackers were declared. */
+      readonly type: "planeswalker-attacked";
+      /** The attacking (active) player. */
+      readonly player: PlayerId;
+      readonly planeswalker: ObjectId;
+      readonly controller: PlayerId;
+      readonly attackers: readonly ObjectId[];
+    })
+  | (Base & {
       /** Exactly one creature was declared as an attacker this combat (rule
        * 702.111a — Exalted, needed-cards P15). Emitted once, after every
        * `attacker-declared` event for the same declaration. */

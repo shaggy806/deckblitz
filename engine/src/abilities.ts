@@ -1810,6 +1810,19 @@ export type TriggerKind =
       readonly defenderHasInitiative?: boolean;
     }
   | {
+      /** "Whenever an opponent attacks a planeswalker you control with one or
+       * more creatures" (Oath of Kaya): **once per planeswalker attacked**
+       * (rule 508.3b; the card's ruling), off `planeswalker-attacked` — Mila,
+       * Crafty Companion's once-a-declaration wording is `attack-with`'s
+       * `attackingYourPlaneswalkers`. `who` is the attacking player and
+       * `defender` the planeswalker's controller as it was attacked, each
+       * relative to this permanent's controller. The attacking player is the
+       * `"trigger-player"` ("deals 2 damage to that player"). */
+      readonly on: "planeswalker-attacked";
+      readonly who: TriggerWho;
+      readonly defender: TriggerWho;
+    }
+  | {
       /** Exalted (rule 702.111a — needed-cards P15): a creature you control
        * attacked alone this combat — exactly one attacker was declared.
        * `who: "you-control"` = the lone attacker is yours. The attacker isn't
