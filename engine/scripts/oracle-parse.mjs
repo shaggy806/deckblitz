@@ -10762,6 +10762,22 @@ export function parseEffect(text, outer) {
     }
     ctx.targets.length = slots;
   }
+  // "You may put a creature card from your hand onto the battlefield. If its
+  // mana cost contains {X}, it enters with a number of +1/+1 counters on it
+  // equal to the number of lands you control." (The First Tyrannic War): the
+  // put's `withCounters`, only if it matches as it is on the battlefield
+  // (`ifMatches: { xInManaCost: true }`, rule 614.12).
+  const entersIfX = /^(.+? onto the battlefield\.) If its mana cost contains \{X\}, it enters with a number of (\+1\/\+1) counters on it equal to (.+)\.$/.exec(text);
+  if (entersIfX !== null) {
+    const slots = ctx.targets.length;
+    const put = parseSentence(entersIfX[1], ctx);
+    const amount = dividedTotalOf(entersIfX[3]);
+    const puts = put?.kind === "put-onto-battlefield" || (put?.kind === "look-and-choose" && put.destination === "battlefield");
+    if (puts && put.withCounters === undefined && amount !== null) {
+      return { effect: { ...put, withCounters: [{ kind: entersIfX[2], amount, ifMatches: { xInManaCost: true } }] }, todo: [], hints: [] };
+    }
+    ctx.targets.length = slots;
+  }
   // "If that mana is spent on a multicolored creature spell, that creature
   // enters with an additional +1/+1 counter on it" (Guildmages' Forum, Animal
   // Attendant); "if you spend this mana to cast your commander, it enters with

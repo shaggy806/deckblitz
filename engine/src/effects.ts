@@ -4511,7 +4511,8 @@ export type EffectSpec =
        * counter: "revival" }, 1] }`, the counters it died with (608.2h).
        * A list is several kinds, all put on as it enters (rule 122.6 —
        * Perennation's "with a hexproof counter and an indestructible counter
-       * on it"), each `ifType` / `ifSubtype` read as `ifCreature` is. */
+       * on it"), each `ifType` / `ifSubtype` / `ifMatches` read as
+       * `ifCreature` is. */
       readonly withCounters?:
         | { readonly kind: string; readonly amount: EffectAmount; readonly ifCreature?: true }
         | readonly {
@@ -4519,6 +4520,7 @@ export type EffectSpec =
             readonly amount: EffectAmount;
             readonly ifType?: CardType;
             readonly ifSubtype?: string;
+            readonly ifMatches?: CardFilter;
           }[];
       /** "If it would leave the battlefield, exile it instead of putting it
        * anywhere else" (Whip of Erebos) — sets
@@ -11893,7 +11895,11 @@ export type EffectSpec =
        * battlefield with three +1/+1 counters on it"), as
        * `put-onto-battlefield`'s `withCounters` are. A list: several kinds,
        * each amount read as it resolves, each `ifType` / `ifSubtype` read as
-       * the card would be on the battlefield (Chief Montgomery Scott). */
+       * the card would be on the battlefield (Chief Montgomery Scott), and
+       * `ifMatches` the same way — The First Tyrannic War's "if its mana cost
+       * contains {X}, it enters with a number of +1/+1 counters on it equal
+       * to the number of lands you control" is `ifMatches: { xInManaCost:
+       * true }` (a copy's mana cost, if it enters as one — the ruling). */
       readonly withCounters?:
         | { readonly kind: string; readonly amount: number }
         | readonly {
@@ -11901,6 +11907,7 @@ export type EffectSpec =
             readonly amount: EffectAmount;
             readonly ifType?: CardType;
             readonly ifSubtype?: string;
+            readonly ifMatches?: CardFilter;
           }[];
       /** …and with these types and colours in addition to their own, in
        * place as they enter (as `put-onto-battlefield`'s are — rule 614.12):
@@ -17997,6 +18004,7 @@ function enterCountersOf(
     readonly ifCreature?: true;
     readonly ifType?: CardType;
     readonly ifSubtype?: string;
+    readonly ifMatches?: CardFilter;
   };
   const each: readonly One[] = Array.isArray(spec) ? (spec as readonly One[]) : [spec as One];
   return each.map((c) => {
@@ -18006,6 +18014,7 @@ function enterCountersOf(
       amount: Math.max(0, amountValue(c.amount, ctx)),
       ...(ifType !== undefined ? { ifType } : {}),
       ...(c.ifSubtype !== undefined ? { ifSubtype: c.ifSubtype } : {}),
+      ...(c.ifMatches !== undefined ? { ifMatches: c.ifMatches } : {}),
     };
   });
 }

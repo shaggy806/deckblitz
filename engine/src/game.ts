@@ -61527,6 +61527,7 @@ controlledBy,
       if (c.amount <= 0) continue;
       if (c.ifType !== undefined && !effectiveTypes(this.state, this.registry, this.state.objects[id]).includes(c.ifType)) continue;
       if (c.ifSubtype !== undefined && !hasSubtype(effectiveSubtypes(this.state, this.registry, this.state.objects[id]), c.ifSubtype)) continue;
+      if (c.ifMatches !== undefined && !matchesFilter(this.state, this.registry, id, c.ifMatches, { you: player })) continue;
       this.addCounter({ kind: "object", object: id }, c.kind, c.amount, true, player);
     }
   }

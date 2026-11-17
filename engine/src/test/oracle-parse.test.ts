@@ -21190,6 +21190,24 @@ describe("a cast trigger's count as counters to enter with", () => {
     expect(jeskai.triggered[0].effect).toEqual({ kind: "cloak-exiled-pile", manifest: true, source: true, libraryTop: 1 });
   });
 
+  it("counters it enters with only if its mana cost contains {X} (The First Tyrannic War's chapter I)", () => {
+    const r = parseEffect(
+      "You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.",
+      { targets: [], tokenFor: () => null, onStack: true },
+    );
+    expect(r.todo).toEqual([]);
+    expect(r.effect).toEqual({
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 0,
+      max: 1,
+      destination: "battlefield",
+      leftover: "stay",
+      filter: { type: "creature" },
+      withCounters: [{ kind: "+1/+1", amount: { countOf: { type: "land", controlledBy: "you" } }, ifMatches: { xInManaCost: true } }],
+    });
+  });
+
   it("X stays unread in a trigger that isn't the spell's cast (an enters trigger)", () => {
     const face = parseFace(
       { name: "Test Beast", type_line: "Creature — Beast", mana_cost: "{X}{B}", oracle_text: "When this creature enters, each player sacrifices X creatures." },

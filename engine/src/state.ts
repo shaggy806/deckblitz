@@ -5263,12 +5263,16 @@ export type AwaitingDecision =
  * ("with a finality counter on it"): one kind, or several, each with an
  * `ifType` / `ifSubtype` read as it is on the battlefield (rule 614.12 —
  * Chief Montgomery Scott's "X additional +1/+1 counters on it if it's a
- * creature and X additional charge counters on it if it's a Spacecraft"). */
+ * creature and X additional charge counters on it if it's a Spacecraft").
+ * `ifMatches` is any other test of it there: The First Tyrannic War's "if
+ * its mana cost contains {X}" is `{ xInManaCost: true }` — a copy's mana
+ * cost, if it enters as a copy (the ruling). */
 export interface EnterCounter {
   readonly kind: string;
   readonly amount: number;
   readonly ifType?: CardType;
   readonly ifSubtype?: string;
+  readonly ifMatches?: CardFilter;
 }
 export type EnterCounters = EnterCounter | readonly EnterCounter[];
 

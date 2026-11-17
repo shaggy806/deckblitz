@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Counters a card enters with if it matches a filter there — built 2026-11-17
+
+The key `effect:enters-with-counters-if-x-cost`, as the general test it is: an `EnterCounter`'s `ifMatches`
+(any `CardFilter`, beside `ifType` / `ifSubtype`), judged as the permanent is on the battlefield (rule 614.12)
+by `Game.enterWithCounters`, on `look-and-choose`'s and `put-onto-battlefield`'s `withCounters` lists. The
+First Tyrannic War (rank 11683): chapter I's "if its mana cost contains {X}" is `{ xInManaCost: true }` — a
+Clone entering as a copy of an {X} creature gets them, of one without, none (the ruling).
+`test/enters-with-counters-if-x-cost.test.ts`.
+
 ### A face-down pile from a graveyard, or with its source, manifested — built 2026-11-17
 
 The keys `effect:manifest-from-exile` and `effect:manifest-exiled-pile`, one general change to
