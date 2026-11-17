@@ -1,0 +1,129 @@
+{
+ "batch": 334,
+ "status": "in-progress",
+ "ranks": "author-top-cards overnight, 2026-11-17: the triaged cards past EDHREC rank 10,000 in rank order (11022 on), each with the small feature it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop). Built: bug:simultaneous-move-with-choice (look-and-choose thenAlways), effect:phase-out-while-you-control-source (phase-out cantPhaseIn), effect:mill-from-bottom (bottom-of-library), decision:choose-planeswalker-type, decision:order-per-target-reveal-until (for-each-target groupChooses/only/eachObjectOnce), decision:choose-from-batch (look-and-choose zone trigger-batch), effect:exile-top-cast-from-among-rest-bottom, zone:cast-from-library-top-enters-counter (entersWith gated by gainsIf), keyword:blitz-extensions (blitz also and fromGraveyard); effect:text-change-token-colors found built. Skipped for the user: Cryptic Spires (deck-construction colours), Exchange of Words and Starlight Spectacular (majors left for later), Mana Web and Huatli, Warrior Poet (to re-key).",
+ "authored": [
+  {
+   "name": "Avatar Destiny",
+   "files": [
+    "engine/src/cards/pool/avatar-destiny.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/look-and-choose-then-always.test.ts"
+  },
+  {
+   "name": "The Phasing of Zhalfir",
+   "files": [
+    "engine/src/cards/pool/the-phasing-of-zhalfir.ts",
+    "engine/src/cards/tokens/phyrexian-token-the-phasing-of-zhalfir.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/phase-in-held.test.ts"
+  },
+  {
+   "name": "Grenzo, Dungeon Warden",
+   "files": [
+    "engine/src/cards/pool/grenzo-dungeon-warden.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/bottom-of-library.test.ts"
+  },
+  {
+   "name": "Cellar Door",
+   "files": [
+    "engine/src/cards/pool/cellar-door.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/bottom-of-library.test.ts"
+  },
+  {
+   "name": "Whim of Volrath",
+   "files": [
+    "engine/src/cards/pool/whim-of-volrath.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/text-change-token-colors.test.ts"
+  },
+  {
+   "name": "Trait Doctoring",
+   "files": [
+    "engine/src/cards/pool/trait-doctoring.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/text-change-token-colors.test.ts"
+  },
+  {
+   "name": "Glamerdye",
+   "files": [
+    "engine/src/cards/pool/glamerdye.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/text-change-token-colors.test.ts"
+  },
+  {
+   "name": "Leori, Sparktouched Hunter",
+   "files": [
+    "engine/src/cards/pool/leori-sparktouched-hunter.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/choose-planeswalker-type.test.ts"
+  },
+  {
+   "name": "Chaotic Transformation",
+   "files": [
+    "engine/src/cards/pool/chaotic-transformation.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/for-each-target-group-chooses.test.ts"
+  },
+  {
+   "name": "Spirit of Resilience",
+   "files": [
+    "engine/src/cards/pool/spirit-of-resilience.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/trigger-batch-found.test.ts"
+  },
+  {
+   "name": "Sanwell, Avenger Ace",
+   "files": [
+    "engine/src/cards/pool/sanwell-avenger-ace.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-top-cast-paid.test.ts"
+  },
+  {
+   "name": "Ian Malcolm, Chaotician",
+   "files": [
+    "engine/src/cards/pool/ian-malcolm-chaotician.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cast-unowned-exiled-with.test.ts"
+  },
+  {
+   "name": "Mikey & Don, Party Planners",
+   "files": [
+    "engine/src/cards/pool/mikey-don-party-planners.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/library-top-enters-counter.test.ts"
+  },
+  {
+   "name": "Sabin, Master Monk",
+   "files": [
+    "engine/src/cards/pool/sabin-master-monk.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/blitz-extensions.test.ts"
+  },
+  {
+   "name": "Tenacious Underdog",
+   "files": [
+    "engine/src/cards/pool/tenacious-underdog.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/blitz-extensions.test.ts"
+  }
+ ],
+ "blocked": []
+}
