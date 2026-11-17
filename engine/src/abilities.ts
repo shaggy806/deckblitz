@@ -2202,11 +2202,18 @@ export type TriggerKind =
        * `perCard` is "whenever a player mills **a** nonland card" (Glowing
        * One): once per matching card milled, each its own trigger object
        * (rule 603.2c — the card's ruling: four nonland cards milled at once
-       * trigger it four times), whoever milled with `who: "any"`. */
+       * trigger it four times), whoever milled with `who: "any"`.
+       *
+       * `perPlayer` is "whenever **a player mills** one or more creature
+       * cards" (Zellix, Sanity Flayer) with `who: "any"`: each player's mill
+       * is its own occurrence (rule 603.2c), so a mill several players do at
+       * once triggers it once for each of them whose cards match, where
+       * "one or more cards are milled" is once for them all. */
       readonly on: "mills";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly perCard?: true;
+      readonly perPlayer?: true;
     }
   | {
       /** A player faced a dilemma — Elim Garak, Simple Tailor's "whenever

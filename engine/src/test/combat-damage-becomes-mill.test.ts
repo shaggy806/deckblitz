@@ -9,7 +9,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, attack, graveyard, life, named, settle, spawn, table, toLibrary, tokensNamed, zone } from "./harness.js";
+import { A, B, C, attack, graveyard, life, named, settle, spawn, table, toLibrary, toStep, tokensNamed, zone } from "./harness.js";
 
 const ALCHEMIST = "Undead Alchemist";
 const library = (game: ReturnType<typeof table>["game"], player = B): number => game.state.zones.perPlayer[player].library.length;
@@ -69,6 +69,60 @@ describe("Undead Alchemist", () => {
     expect(zone(game, bears)).toBe("exile");
     expect(tokensNamed(game, "Zombie Token", A)).toBe(2);
     expect(named(game, ALCHEMIST)).toHaveLength(2);
+  });
+
+  it("two Zombies' damage to one player is one mill: combat damage is dealt at once (rule 510.2)", () => {
+    const { game, a } = table();
+    spawn(game, ALCHEMIST);
+    spawn(game, "Zellix, Sanity Flayer");
+    const first = spawn(game, "Walking Corpse");
+    const second = spawn(game, "Walking Corpse");
+    // A creature card in each Zombie's two.
+    toLibrary(game, "Grizzly Bears", B);
+    toLibrary(game, "Island", B);
+    toLibrary(game, "Island", B);
+    toLibrary(game, "Hill Giant", B);
+    const before = library(game);
+    attack(game, a, [first, second]);
+    expect(life(game, B)).toBe(20);
+    expect(library(game)).toBe(before - 4);
+    // "Whenever a player mills one or more creature cards": once, for the
+    // four cards the modified event milled (rule 614.6), not once a Zombie.
+    expect(tokensNamed(game, "Horror Token (Black 1/1)", A)).toBe(1);
+    // The Alchemist's own trigger is per card: a Zombie for each.
+    expect(tokensNamed(game, "Zombie Token", A)).toBe(2);
+  });
+
+  it("the cards two Zombies mill arrive in the graveyard together (Sidisi, Brood Tyrant)", () => {
+    const { game, a } = table();
+    spawn(game, ALCHEMIST);
+    // The defending player's own "one or more creature cards are put into
+    // your graveyard from your library".
+    spawn(game, "Sidisi, Brood Tyrant", B);
+    const first = spawn(game, "Walking Corpse");
+    const second = spawn(game, "Walking Corpse");
+    toLibrary(game, "Grizzly Bears", B);
+    toLibrary(game, "Island", B);
+    toLibrary(game, "Island", B);
+    toLibrary(game, "Hill Giant", B);
+    attack(game, a, [first, second]);
+    expect(tokensNamed(game, "Zombie Token", B)).toBe(1);
+  });
+
+  it("each player's mill is its own: two Zombies at two players are two mills", () => {
+    const { game, a } = table({ players: 3 });
+    spawn(game, ALCHEMIST);
+    spawn(game, "Zellix, Sanity Flayer");
+    const first = spawn(game, "Walking Corpse");
+    const second = spawn(game, "Walking Corpse");
+    toLibrary(game, "Grizzly Bears", B);
+    toLibrary(game, "Grizzly Bears", C);
+    a.declareAttackersFn = () => [
+      { attacker: first, defender: B },
+      { attacker: second, defender: C },
+    ];
+    toStep(game, "postcombat-main", A);
+    expect(tokensNamed(game, "Horror Token (Black 1/1)", A)).toBe(2);
   });
 
   it("doesn't see a creature card milled from its controller's own library", () => {

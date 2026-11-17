@@ -34959,6 +34959,7 @@ export class Game {
           if (
             ability.trigger.on === "mills" &&
             ability.trigger.who === "any" &&
+            ability.trigger.perPlayer !== true &&
             event.type === "cards-milled" &&
             this.millBatch !== null
           ) {
@@ -63607,9 +63608,17 @@ controlledBy,
       result = fn();
       // Each player's mill is announced once every one of them has milled:
       // a card milled at the same time as an opponent's is already in its
-      // graveyard to see theirs (Infesting Radroach's ruling).
+      // graveyard to see theirs (Infesting Radroach's ruling). What one
+      // player milled in several parts of it is one mill (two Zombies'
+      // combat damage under Undead Alchemist).
       this.millAnnouncements = null;
-      for (const { player, objects } of announced) this.emit({ type: "cards-milled", player, objects });
+      const byPlayer = new Map<PlayerId, ObjectId[]>();
+      for (const { player, objects } of announced) {
+        const milled = byPlayer.get(player);
+        if (milled === undefined) byPlayer.set(player, [...objects]);
+        else milled.push(...objects);
+      }
+      for (const [player, objects] of byPlayer) this.emit({ type: "cards-milled", player, objects });
     } finally {
       this.millAnnouncements = null;
       this.millBatch = null;
@@ -63663,8 +63672,13 @@ controlledBy,
     this.damageBatch = batch;
     try {
       // Wither's and infect's counters go on with the damage (rule 120.3d);
-      // the life it costs players is one loss (rule 603.2c).
-      this.withCounterBatch(() => this.withLifeLossBatch(fn));
+      // the life it costs players is one loss (rule 603.2c). What replaced
+      // damage became happens with it too (rule 614.6): two Zombies' combat
+      // damage under Undead Alchemist is one mill for the player they hit,
+      // and its cards one arrival in the graveyard.
+      this.withGraveyardEnterBatch(() => {
+        this.withMillBatch(() => this.withCounterBatch(() => this.withLifeLossBatch(fn)));
+      });
     } finally {
       this.damageBatch = null;
     }

@@ -20,7 +20,7 @@ export default defineCard({
   text: `${HIVE_TEXT}\n${MILL_TEXT}\n${BACKGROUND_TEXT}`,
   triggered: [
     {
-      trigger: { on: "mills", who: "any", filter: { type: "creature" } },
+      trigger: { on: "mills", who: "any", filter: { type: "creature" }, perPlayer: true },
       targets: [],
       effect: { kind: "create-token", token: "Horror Token (Black 1/1)", count: 1 },
       resolve: null,

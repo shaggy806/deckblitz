@@ -122,15 +122,12 @@ Found 2026-11-06, building Tempt with Bunnies.
 
 **`thenCounters` reaches tokens a replacement adds.** `finishTokenCopies` (`game.ts`) puts a token copy's `thenCounters` on every token in `made`, which holds the copies and the tokens a would-create-token replacement added (Chatterfang's Squirrels) in one flat list. Tokens made *instead* should keep them (Divine Visitation's ruling: what the creating effect specifies still applies); tokens made *in addition* should not. `withCounters` already tells them apart through `PlannedTokens.inPlace` (2026-11-11, Littjara Mirrorlake); `thenCounters` needs `made` split the same way.
 
-**Combat damage replaced one attacker at a time.** `dealDamage` runs a `would-deal-damage` `instead: { effect }` once per source, so two Zombies hitting one player under Undead Alchemist make two mill events in sequence. Combat damage is dealt at once (rule 510.2); if the mills count as one event, a "whenever one or more cards are put into a graveyard from a library" trigger (Sidisi, The Wise Mothman) should fire once. Untested either way (2026-11-11).
-
 **A door's unlock timestamp is read by some statics only.** `staticTimestamp` (`characteristics.ts`, Steaming Sauna's ruling, 2026-11-11) is read in `scanContributingStaticSources` and `Game.maxHandSizeOf`. A door static that grants a type (layer 4) or changes another rule would still take the Room's own timestamp; no Room in the pool has one. A Room whose text box was exchanged also falls back to the Room's timestamp.
 
 **A back face spawned by name isn't a working permanent.** `debugSpawn("The Myriad Pools")` could not tap for mana; spawning the front and transforming it worked. Seen only in a test (B297); not chased.
 
 **Opposition Agent and a search of every library.** Jace, Architect of Thought's −8 searches each player's library through one `choose-from-zone` (`search-library`'s `eachLibrary`, `Game.beginEachLibrarySearch`, 2026-11-13). If an opponent controls Opposition Agent, its search control begins when the searcher's own library is searched, but the Agent's "you may play those cards for as long as they remain exiled" isn't granted for a find from that library: the find is cast through `cast-now` as Jace says, never offered to the Agent's controller.
 
-**A token copy skips "exile first" and "pay any amount of life" as it enters.** `CopyOnEnter.exileFirst` (The Mimeoplasm) and `AsEntersAction.payLife: "any"` (Phyrexian Processor), both 2026-11-13, are asked when a card enters; a token copy of either enters without the question, as a token copy of Vizier of Many Faces already does. Rule 614.1c applies to a token entering as it does to a card.
 
 
 
