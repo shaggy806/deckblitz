@@ -2926,7 +2926,8 @@
   "amount:spell-target-count",
   "effect:create-tokens-distributed-among-opponents",
   "effect:create-tokens-distributed-among-opponents",
-  "effect:distribute-counters-among-source-and-chosen"
+  "effect:distribute-counters-among-source-and-chosen",
+  "effect:extra-turn-to-greatest-exiled-repeat-ties"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

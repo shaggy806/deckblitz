@@ -8246,6 +8246,9 @@ export type EffectSpec =
        * (Time Warp: "target player takes an extra turn after this one"). */
       readonly kind: "take-extra-turn";
       readonly target?: number;
+      /** A player named another way — `"that-player"`: the winner of an
+       * `exile-top-contest` (Timesifter). */
+      readonly who?: PlayerRef;
       /** "Skip the untap step of that turn" (Savor the Moment — rule
        * 614.10): that extra turn's untap step, and no other, is skipped. */
       readonly skipUntapStep?: true;
@@ -10989,6 +10992,21 @@ export type EffectSpec =
         readonly topping?: PlayerId;
         readonly bidding?: PlayerId;
       };
+    }
+  | {
+      /**
+       * "Each player exiles the top card of their library. The player who
+       * exiled the card with the greatest mana value [`then`]. If two or more
+       * players' cards are tied for greatest, the tied players repeat this
+       * process until the tie is broken" (Timesifter). Each pass, every
+       * player still in exiles their top card; a player who fails to exile
+       * one (an empty library) is out (the card's ruling: "can't take the
+       * extra turn"). Only the tied players go again (its ruling). `then`
+       * follows, the controller's, with the `"that-player"` scope naming the
+       * one left — nothing when nobody exiled a card.
+       */
+      readonly kind: "exile-top-contest";
+      readonly then: EffectSpec;
     }
   | {
       /**
@@ -16462,6 +16480,36 @@ function applyGuess(spec: Extract<EffectSpec, { kind: "guess" }>, ctx: Resolutio
 const MAX_REPEATS = 200;
 
 /**
+ * An `exile-top-contest` (Timesifter): each pass, every player still in
+ * exiles the top card of their library, in turn order (rule 101.4); one who
+ * exiles nothing (an empty library, or the card went elsewhere) is out. The
+ * greatest mana value among the cards exiled wins (a land's is 0, the
+ * card's ruling); a tie sends only the tied players round again. The one
+ * left gets `then`, as the `"that-player"` scope. Each pass exiles a card
+ * per player, so libraries run out and the loop ends; `MAX_REPEATS` guards it.
+ */
+function applyExileTopContest(spec: Extract<EffectSpec, { kind: "exile-top-contest" }>, ctx: ResolutionContext): void {
+  let contenders = ctx.apnap(ctx.playersInScope("each-player"));
+  for (let pass = 0; pass < MAX_REPEATS && contenders.length > 0; pass += 1) {
+    const exiled: { readonly player: PlayerId; readonly value: number }[] = [];
+    for (const player of contenders) {
+      const [top] = ctx.libraryTop(player, 1);
+      if (top === undefined) continue;
+      ctx.exileFromLibrary({ kind: "player", player }, { top: 1 });
+      if (!ctx.cardMatches(top, { inZone: "exile" })) continue;
+      exiled.push({ player, value: ctx.manaValueOf({ kind: "object", object: top }) });
+    }
+    if (exiled.length === 0) return;
+    const greatest = Math.max(...exiled.map((e) => e.value));
+    contenders = exiled.filter((e) => e.value === greatest).map((e) => e.player);
+    if (contenders.length === 1) {
+      applyEffectSpec(spec.then, ctx.aboutPlayer(contenders[0]));
+      return;
+    }
+  }
+}
+
+/**
  * A `repeat`: each pass is `effect` with "this way" begun at the pass
  * (`ctx.scopeThisWay`), so a condition after it reads that pass alone. A
  * pass that stops to ask parks the rest of the process as a copy carrying
@@ -20783,6 +20831,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "guess":
       applyGuess(spec, ctx);
       return;
+    case "exile-top-contest":
+      applyExileTopContest(spec, ctx);
+      return;
     case "choose-value": {
       const chooser = spec.who === undefined ? undefined : resolvePlayerRef(spec.who, ctx);
       if (spec.who !== undefined && chooser === undefined) return;
@@ -22671,7 +22722,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "take-extra-turn": {
       const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
       if (spec.target !== undefined && target?.kind !== "player") return;
-      ctx.takeExtraTurn(target?.kind === "player" ? target.player : ctx.controller, spec.skipUntapStep === true, spec.thatTurn);
+      const who = spec.who === undefined ? undefined : resolvePlayerRef(spec.who, ctx);
+      if (spec.who !== undefined && who === undefined) return;
+      ctx.takeExtraTurn(target?.kind === "player" ? target.player : (who ?? ctx.controller), spec.skipUntapStep === true, spec.thatTurn);
       return;
     }
     case "skip-turn": {

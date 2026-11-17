@@ -10228,6 +10228,14 @@ export function parseEffect(text, outer) {
   if (massGrant !== null) return { effect: massGrant, todo: [], hints: [] };
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
+  // Timesifter's three sentences: one contest, ties repeated.
+  if (
+    /^Each player exiles the top card of their library\. The player who exiled the card with the greatest mana value takes an extra turn after this one\. If two or more players' cards are tied for greatest, the tied players repeat this process until the tie is broken\.$/.test(
+      text,
+    )
+  ) {
+    return { effect: { kind: "exile-top-contest", then: { kind: "take-extra-turn", who: "that-player" } }, todo: [], hints: [] };
+  }
   const tempting = temptingOfferOf(text, outer);
   if (tempting !== null) return { effect: tempting, todo: [], hints: [] };
   // "Creatures you control gain flying until end of turn if a creature you

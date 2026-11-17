@@ -640,7 +640,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return onObjectRef(effect.target, sign, ctx);
     }
     case "take-extra-turn":
-      return effect.target === undefined ? onPlayers(you, 3 * CARD, ctx) : 0;
+      return effect.target === undefined && effect.who === undefined ? onPlayers(you, 3 * CARD, ctx) : 0;
     case "skip-turn":
       // The mirror of an extra turn: a turn gone.
       if (typeof effect.who === "number") return 0;

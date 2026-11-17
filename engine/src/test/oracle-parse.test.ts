@@ -9202,6 +9202,17 @@ describe("counters put or removed this way", () => {
     expect(stumpsquall.complete).toBe(true);
   });
 
+  it("reads Timesifter's contest: the greatest mana value exiled takes an extra turn, ties repeated", () => {
+    const timesifter = face(
+      "Timesifter",
+      "Artifact",
+      "At the beginning of each upkeep, each player exiles the top card of their library. The player who exiled the card with the greatest mana value takes an extra turn after this one. If two or more players' cards are tied for greatest, the tied players repeat this process until the tie is broken.",
+    );
+    expect(timesifter.triggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "any" });
+    expect(timesifter.triggered[0].effect).toEqual({ kind: "exile-top-contest", then: { kind: "take-extra-turn", who: "that-player" } });
+    expect(timesifter.complete).toBe(true);
+  });
+
   it("reads Thief of Blood's removal as it enters and the counters it enters with", () => {
     const thief = face(
       "Thief of Blood",

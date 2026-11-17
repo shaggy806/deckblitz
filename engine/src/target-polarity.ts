@@ -213,6 +213,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.ifRight);
     v.child(n.ifWrong);
   },
+  // Whoever exiles the greatest mana value: anyone, no target.
+  "exile-top-contest": none,
   "for-each-vote": (n, v) => v.child(n.effect),
   "with-choices": (n, v) => v.child(n.effect),
   repeat: (n, v) => v.child(n.effect),

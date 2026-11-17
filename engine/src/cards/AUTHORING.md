@@ -1670,6 +1670,7 @@ sentences. None of these is a target, so hexproof doesn't stop them.
 | `additional-combat` … `onlyAttackers?` | `CardFilter` | With `afterThisPhase`: "only land creatures can attack during that combat phase" (Bumi, Unleashed — `{ type: "land" }`): as that phase begins, a creature not matching it (read from your side as attackers are declared) can't attack until its end of combat — no other combat that turn (rule 508.1c). "Only **the chosen creatures** can attack during that combat phase" (Last Night Together) is `{ inSet: { targets: [0, 1] } }`, the targets bound as it resolves (rule 400.7). From a main phase, `afterThisPhase` is "after this main phase", no main phase added. |
 | `additional-combat` … `atBeginning?` | `{ effect, text }` | "At the beginning of that combat, untap all creatures you control" (Moraug, Fury of Akoum): a delayed ability on that one phase. From a precombat main, `afterThisPhase` comes before the turn's own combat (rule 500.8). |
 | `additional-combat` … `afterSecondMain?` | `true` | Without `afterThisPhase`: "after the second main phase this turn" (World at War): nothing once that phase is over. |
+| `take-extra-turn` … `who?` | `PlayerRef` | A player named another way than a target slot: `"that-player"`, the winner of an `exile-top-contest` (Timesifter). |
 | `take-extra-turn` … `thatTurn?` | `{ damageCantBePrevented?, atEndStep?: { effect, text } }` | What the effect says about that turn alone, taken up as it begins and lost with it if it's skipped: "at the beginning of that turn's end step, you lose the game" (Warrior's Oath, Final Fortune), "during that turn, damage can't be prevented" (Alchemist's Gambit). The scaffolder reads both. |
 | `additional-combat` twice, in a `conditional` on `turn-structure`, with a `delayed-trigger` | `at: { whenever: { on: "step-begins", step: "begin-combat", who: "any" } }` | "After this main phase, there are two additional combat phases. At the beginning of each combat this turn, untap all creatures that attacked this turn" (Full Throttle): `afterThisPhase` twice is no main phase between them, the condition is the nothing they add outside a main phase, and a `whenever` delayed ability has "this turn" as its duration, so it triggers in every combat left (rule 603.7b). |
 | `remove-from-combat` … `unblockSoleBlocked?`, `thenMayBlock?` | `true` | "Creatures it was blocking that had become blocked by only that creature become unblocked", "You may have it block an attacking creature of your choice" (False Orders). The filter clause `controlledByDefendingPlayer` is that spell's "creature defending player controls", with no attacker of its own to read one from. |
@@ -3313,6 +3314,14 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   (a `cast-now { from: "chosen-this-way", free: true, else }` for "you may cast
   it … if you don't"). A bot guesses from how much of your unseen hand and
   library matches, never the card.
+- **`exile-top-contest { then }`** — "each player exiles the top card of their
+  library. The player who exiled the card with the greatest mana value
+  [`then`]. If two or more players' cards are tied for greatest, the tied
+  players repeat this process until the tie is broken" (Timesifter, whose
+  `then` is `take-extra-turn { who: "that-player" }`). No choices: only the
+  tied players go again; one who exiles nothing (a library run out) is out;
+  nobody exiling anything is nothing. `then` is yours, with the winner as
+  `"that-player"`. The scaffolder reads Timesifter's line.
 - **Choosing a card name** (rule 201.4 — `card-names.ts`; the
   `choose-card-name` decision, a search popup over every card name the
   registry holds, tokens and split cards' wholes aside, the suggestions picked
