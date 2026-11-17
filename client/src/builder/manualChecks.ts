@@ -13077,4 +13077,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- A spell copied for each permanent or player it could target (2026-11-16) ---
+  preset(
+    'Radiate: a Bolt copied for each other creature and player, ordered a copy at a time',
+    board({
+      you: { bf: ['Mountain*5', 'Grizzly Bears'], hand: ['Radiate'] },
+      opp: { human: true, bf: ['Mountain', 'Hill Giant'], hand: ['Lightning Bolt'] },
+      turn: 0,
+    }),
+  ),
 ]

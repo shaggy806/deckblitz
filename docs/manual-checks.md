@@ -8656,3 +8656,9 @@ Each board's die comes up 4.
 ### Hogaak, Arisen Necropolis: seven creatures pay it alone in a 4-player game
 - **Do:** In this 4-player game, cast Hogaak, then click "Convoke 7".
 - **Expect:** No popup asks for graveyard cards. The bar reads "tap up to 7 creatures to help pay (7 chosen)", every creature of yours picked. Hogaak enters with all seven tapped and your Swamp untapped.
+
+## A spell copied for each permanent or player it could target (2026-11-16)
+
+### Radiate: a Bolt copied for each other creature and player, ordered a copy at a time
+- **Do:** Switch to Bob and Lightning Bolt your Grizzly Bears. Back as Alice, respond with Radiate, clicking the Bolt on the stack. When asked, choose Bob, then his Hill Giant.
+- **Expect:** "Order the copies of Lightning Bolt: choose what the next copy targets" offers you, Bob and Bob's Hill Giant, not your Grizzly Bears (the Bolt already targets them). After two picks the last copy is made without asking. Everything resolves: you and Bob each lose 3 life (37), the Bears and the Hill Giant in graveyards.
