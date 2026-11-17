@@ -9421,6 +9421,22 @@ describe("exiled this way, then a pick or the rest moved on", () => {
     });
   });
 
+  it("reads blitz: its cost, a discard or life beside the mana, and the graveyard cast", () => {
+    const blitzOf = (name: string, text: string) => face(name, "Creature — Human Warrior", text).blitz;
+    expect(blitzOf("Test Card", "Blitz {3}{R}")).toEqual({ cost: "{3}{R}" });
+    const underdog = face(
+      "Tenacious Underdog",
+      "Creature — Human Warrior",
+      "Blitz—{2}{B}{B}, Pay 2 life. (If you cast this spell for its blitz cost, it gains haste and \"When this creature dies, draw a card.\" Sacrifice it at the beginning of the next end step.)\nYou may cast this card from your graveyard using its blitz ability.",
+    );
+    expect(underdog.complete).toBe(true);
+    expect(underdog.blitz).toEqual({ cost: "{2}{B}{B}", also: { text: "Pay 2 life", payLife: 2 }, fromGraveyard: true });
+    expect(blitzOf("Sabin, Master Monk", "Blitz—{2}{R}{R}, Discard a card.")).toEqual({
+      cost: "{2}{R}{R}",
+      also: { text: "Discard a card", discard: 1 },
+    });
+  });
+
   it("reads Ian Malcolm, Chaotician's each-player permission over the linked cards they don't own", () => {
     const ian = face(
       "Ian Malcolm, Chaotician",

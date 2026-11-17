@@ -2789,7 +2789,8 @@
   "filter:linked-exile-grant-card-type",
   "effect:random-cards-exiled-together",
   "effect:exile-top-cast-from-among-rest-bottom",
-  "zone:cast-from-library-top-enters-counter"
+  "zone:cast-from-library-top-enters-counter",
+  "keyword:blitz-extensions"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -5886,7 +5886,19 @@ export interface CardDefinition {
    * `cast-spell` (`via: "blitz"`). A copy of it gets none of that (the
    * rulings). `null` for none.
    */
-  readonly blitz: { readonly cost: string } | null;
+  readonly blitz: {
+    readonly cost: string;
+    /** The blitz cost's part that isn't mana — "Blitz—{2}{R}{R}, Discard a
+     * card" (Sabin, Master Monk), "Blitz—{2}{B}{B}, Pay 2 life" (Tenacious
+     * Underdog): paid with the mana as the spell is cast (rule 601.2h), as a
+     * kicker's `also` is, and gating the cast as the mana does (119.4). */
+    readonly also?: KickerAlsoCost;
+    /** "You may cast this card from your graveyard using its blitz ability"
+     * (Sabin, Tenacious Underdog): its owner may also cast it from their
+     * graveyard for its blitz cost — a spell cast from a graveyard in every
+     * way, stopped by what stops those. */
+    readonly fromGraveyard?: true;
+  } | null;
   /**
    * Dash (rule 702.109a — Ragavan, Nimble Pilferer): "You may cast this card
    * by paying [cost] rather than its mana cost"; a permanent cast that way has
@@ -6757,7 +6769,7 @@ interface CardDraft {
   foretell?: { readonly cost: string };
   plot?: { readonly cost: string };
   warp?: NonNullable<CardDefinition["warp"]>;
-  blitz?: { readonly cost: string };
+  blitz?: NonNullable<CardDefinition["blitz"]>;
   dash?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };
   freerunning?: { readonly cost: string };

@@ -4089,10 +4089,15 @@ export class Game {
 
     // "You may cast this card from your graveyard using its warp ability"
     // (Timeline Culler): its warp cost, from its owner's graveyard too.
+    // And "… using its blitz ability" (Sabin, Master Monk, Tenacious
+    // Underdog): its blitz cost, from its owner's graveyard too.
     for (const card of this.state.zones.perPlayer[player].graveyard) {
       const def = this.registry.get(this.state.objects[card].cardName);
-      if (def.warp?.fromGraveyard !== true) continue;
-      out.push(...this.castSpellActions(player, card, def.name, def, { via: "warp", costString: def.warp.cost }));
+      if (def.warp?.fromGraveyard === true) {
+        out.push(...this.castSpellActions(player, card, def.name, def, { via: "warp", costString: def.warp.cost }));
+      }
+      const blitzCost = def.blitz?.fromGraveyard === true ? this.blitzCostOf(card, def, player) : null;
+      if (blitzCost !== null) out.push(...this.castSpellActions(player, card, def.name, def, { via: "blitz", costString: blitzCost }));
     }
 
     // "Impulse draw" — a card exiled face-up with permission to play it, for
@@ -21095,9 +21100,17 @@ export class Game {
     } else if (via === "blitz") {
       // Rule 702.152a — for its blitz cost, from the hand or a commander from
       // the command zone: an alternative cost, so no other one goes with it
-      // (118.9a).
-      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
-        return `${player} does not have that card in hand`;
+      // (118.9a). From its owner's graveyard too, where the card says so
+      // (Sabin, Master Monk).
+      const inGraveyard = this.state.zones.perPlayer[player].graveyard.includes(cardId);
+      if (
+        !this.state.zones.perPlayer[player].hand.includes(cardId) &&
+        !this.isCastableCommander(player, cardId) &&
+        !(inGraveyard && def.blitz?.fromGraveyard === true)
+      ) {
+        return inGraveyard
+          ? `${def.name} can't be cast from a graveyard for its blitz cost`
+          : `${player} does not have that card in hand`;
       }
       if (this.blitzCostOf(cardId, def, player) === null) return `${def.name} does not have blitz`;
       if (overload || free || altCost) return `blitz is an alternative cost, and can't be combined with another`;
@@ -21311,7 +21324,7 @@ export class Game {
       cardId,
       def,
       this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption, via, graveyardGrant, modes),
-      altCost,
+      altCost || via === "blitz",
     );
     if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
@@ -23473,6 +23486,8 @@ export class Game {
     // graveyard cast (Timeline Culler).
     const ownWarp = via === "warp" ? def.warp : null;
     const warpedFromGraveyard = ownWarp !== null && this.state.zones.perPlayer[player].graveyard.includes(cardId);
+    // Its own blitz from its graveyard (Sabin, Master Monk), the same.
+    const blitzedFromGraveyard = via === "blitz" && this.state.zones.perPlayer[player].graveyard.includes(cardId);
     // Prowl, printed or granted (Hunting Velociraptor), for "if its prowl
     // cost was paid".
     // Read now: a grant "from your hand" no longer reaches it on the stack.
@@ -23752,7 +23767,8 @@ export class Game {
       via === "graveyard-permission" ||
       via === "mayhem" ||
       via === "aftermath" ||
-      warpedFromGraveyard
+      warpedFromGraveyard ||
+      blitzedFromGraveyard
     ) {
       this.state.players[player].usedGraveyardThisTurn = true;
     }
@@ -48645,8 +48661,13 @@ controlledBy,
       this.castNowOffer(this.state.objects[cardId]?.owner, cardId)?.madness !== undefined
         ? def.madness.also
         : undefined;
+    // A printed blitz cost's part that isn't mana (Sabin, Master Monk's
+    // "Discard a card", Tenacious Underdog's "Pay 2 life"), when it's cast for
+    // that blitz cost (rule 702.152a) — a granted blitz is its mana alone.
+    const blitzAlso = via === "blitz" ? def.blitz?.also : undefined;
     const additional = [
       ...(madnessAlso !== undefined ? [madnessAlso] : []),
+      ...(blitzAlso !== undefined ? [blitzAlso] : []),
       ...(own !== undefined ? [own] : []),
       ...(branch !== undefined ? [branch] : []),
       ...(altAlso !== undefined ? [altAlso] : []),
@@ -59782,9 +59803,13 @@ controlledBy,
    */
   private blitzCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
     if (this.state.players[player] === undefined) return null;
+    // "You may cast this card from your graveyard using its blitz ability"
+    // (Sabin, Master Monk): its own blitz cost, from its owner's graveyard.
+    const fromGraveyard =
+      def.blitz?.fromGraveyard === true && this.state.zones.perPlayer[player].graveyard.includes(cardId);
     // Rule 702.152a — "you may cast this card by paying [cost]": from the
     // hand, or a commander from the command zone (its tax still added).
-    if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+    if (!fromGraveyard && !this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
       return null;
     }
     const cost = def.blitz?.cost ?? this.spellKeywordCosts(player, cardId, def, "blitz")[0] ?? null;

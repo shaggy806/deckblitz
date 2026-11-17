@@ -17105,6 +17105,24 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.warp = { ...out.warp, fromGraveyard: true };
       continue;
     }
+    // Blitz [cost] (rule 702.152a): an alternative cost — haste, "when this creature dies, draw a card", sacrificed
+    // at the next end step. "Blitz—{2}{R}{R}, Discard a card." (Sabin, Master Monk), "Blitz—{2}{B}{B}, Pay 2 life."
+    // (Tenacious Underdog): the cost's part that isn't mana (`also`).
+    if ((m = /^Blitz(?: ((?:\{[^}]+\})+)|—((?:\{[^}]+\})+), (Discard a card|Pay (\d+) life)\.)$/.exec(line))) {
+      const also =
+        m[3] === undefined ? null : m[4] !== undefined ? { text: m[3], payLife: Number(m[4]) } : { text: m[3], discard: 1 };
+      out.blitz = {
+        cost: m[1] ?? m[2],
+        ...(also !== null ? { also } : {}),
+        ...(out.blitz?.fromGraveyard === true ? { fromGraveyard: true } : {}),
+      };
+      continue;
+    }
+    // "You may cast this card from your graveyard using its blitz ability." (Sabin, Tenacious Underdog).
+    if (/^You may cast (?:this card|~) from your graveyard using its blitz ability\.$/.test(line)) {
+      out.blitz = { ...out.blitz, fromGraveyard: true };
+      continue;
+    }
     // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
     if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.
