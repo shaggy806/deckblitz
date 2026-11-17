@@ -5639,6 +5639,21 @@ export class Game {
       variants.length = 0;
       variants.push(...kept);
     }
+    // A bestow card under a permission whose filter reaches it one way only
+    // (rule 702.103d): Galea's "Aura … spells" bestowed alone, Eladamri's
+    // "creature spells" never bestowed.
+    if (isPermissionCast(via) && def.overload?.keyword === "bestow" && (face ?? 0) === 0) {
+      const reaches = new Map<boolean, boolean>();
+      const kept = variants.filter((v) => {
+        const bestow = v.overload === true;
+        if (!reaches.has(bestow)) {
+          reaches.set(bestow, this.withBestowPick(bestow, () => this.permissionCastReaches(player, card, via, face ?? 0, graveyardGrant)));
+        }
+        return reaches.get(bestow) === true;
+      });
+      variants.length = 0;
+      variants.push(...kept);
+    }
     const pickBefore = this.altCostPick;
     const lifePickBefore = this.optionalLifePick;
     const keywordPickBefore = this.keywordCostsPick;
@@ -20987,6 +21002,15 @@ export class Game {
           altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, true, evoke, delve),
       );
     }
+    // A permission's filter reads a bestow cast as the bestowed Aura spell it
+    // would be (rule 702.103d), any other as the card (`bestowPick`).
+    if (isPermissionCast(via) && this.bestowPick !== overload) {
+      return this.withBestowPick(overload, () =>
+        this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
+          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve,
+          targets),
+      );
+    }
     // Face down (morph, megamorph, disguise — rules 702.37c, 702.168a): judged
     // as the face-down 2/2 spell it would be — no abilities, so sorcery
     // timing unless something lets creature spells be cast as though they
@@ -22321,6 +22345,42 @@ export class Game {
   /** Which of `alternativeCostsOf` the cast being judged or paid for is using,
    * past the first (`Action.altCostIndex`), only for as long as that takes. */
   private altCostPick: number | undefined;
+
+  /** Whether the permission cast being judged or made is cast bestowed (rule
+   * 702.103d: only its characteristics as the bestowed Aura spell say whether
+   * a permission's filter reaches it), only for as long as that takes;
+   * `undefined` while no one cast is (an offer's first look, which takes
+   * either). See `permissionJudgedAsCast`. */
+  private bestowPick: boolean | undefined;
+
+  /** Do `run` with `bestowPick` set. */
+  private withBestowPick<T>(bestow: boolean, run: () => T): T {
+    const before = this.bestowPick;
+    this.bestowPick = bestow;
+    try {
+      return run();
+    } finally {
+      this.bestowPick = before;
+    }
+  }
+
+  /** A permission's filter over `cardId` as it would be cast (rules 601.3e,
+   * 702.103d): a card with bestow cast bestowed is judged as the Aura
+   * enchantment spell it becomes, not a creature — Galea, Kindler of Hope's
+   * "Aura and Equipment spells" reaches it only bestowed, Eladamri,
+   * Korvecdal's "creature spells" only not. With no cast picked yet, either. */
+  private permissionJudgedAsCast(cardId: ObjectId, face: number, judge: () => boolean): boolean {
+    const card = this.state.objects[cardId];
+    const bestows =
+      face === 0 &&
+      card !== undefined &&
+      card.bestowed !== true &&
+      this.registry.has(rulesTextName(card)) &&
+      this.registry.get(rulesTextName(card)).overload?.keyword === "bestow";
+    if (!bestows || this.bestowPick === false) return judge();
+    if (this.bestowPick === true) return this.withBestowed(cardId, true, judge);
+    return judge() || this.withBestowed(cardId, true, judge);
+  }
 
   /** The permanents whose optional life cost (`costModification.optionalLife`
    * — the Defilers) the cast being judged or paid for pays
@@ -23692,6 +23752,15 @@ export class Game {
     // spend reads it (`spendAsFor`).
     if (via === "graveyard-permission" && this.castGrantScope?.card !== cardId) {
       this.withCastGrantScope(cardId, graveyardGrant, () =>
+        this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve),
+      );
+      return;
+    }
+    // The permission it's cast under reaches it as the spell it is: a bestow
+    // cast as the bestowed Aura spell (rule 702.103d — `bestowPick`).
+    if (isPermissionCast(via) && this.bestowPick !== overload) {
+      this.withBestowPick(overload, () =>
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
           convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve),
       );
@@ -48515,7 +48584,11 @@ controlledBy,
       // Lands aren't spells.
       (isLand ||
         own.spell === undefined ||
-        this.withFace(cardId, face, () => matchesFilter(this.state, this.registry, cardId, own.spell!, { you: player, castX: x })))
+        this.withFace(cardId, face, () =>
+          this.permissionJudgedAsCast(cardId, face, () =>
+            matchesFilter(this.state, this.registry, cardId, own.spell!, { you: player, castX: x }),
+          ),
+        ))
     ) {
       out.push({ terms: own, carrier: { kind: "card", permission: own } });
     }
@@ -48677,13 +48750,17 @@ controlledBy,
   ): boolean {
     if (isLand && terms.play !== true && terms.perType?.includes("land") !== true) return false;
     if (terms.yourTurnOnly === true && this.activePlayer !== player) return false;
+    if (terms.filter === undefined && (isLand || terms.spell === undefined)) return true;
     return this.withFace(cardId, face, () => {
       // An `{ amount }` in the filter is counted from the permission's source,
       // live: Arcade Gannon's "with mana value less than or equal to the
       // number of quest counters on Arcade Gannon".
       const context = { you: player, source, castX: x, amount: this.filterAmounts({ source, controller: player }) };
-      if (terms.filter !== undefined && !matchesFilter(this.state, this.registry, cardId, terms.filter, context)) return false;
-      return isLand || terms.spell === undefined || matchesFilter(this.state, this.registry, cardId, terms.spell, context);
+      // A bestow card as the spell it would be cast as (702.103d).
+      return this.permissionJudgedAsCast(cardId, face, () => {
+        if (terms.filter !== undefined && !matchesFilter(this.state, this.registry, cardId, terms.filter, context)) return false;
+        return isLand || terms.spell === undefined || matchesFilter(this.state, this.registry, cardId, terms.spell, context);
+      });
     });
   }
 
@@ -48937,6 +49014,21 @@ controlledBy,
     const options = this.playOptions(player, card, face);
     const using = options[0]?.terms.using;
     return using !== undefined && options.every((option) => option.terms.using === using) ? using : undefined;
+  }
+
+  /** Whether a permission the cast names (or, naming none, any that's left
+   * in scope) reaches `card` as `face` from where it is — with `bestowPick`
+   * set, as the spell it would be cast as (rule 702.103d). */
+  private permissionCastReaches(
+    player: PlayerId,
+    card: ObjectId,
+    via: "graveyard-permission" | "impulse" | "library-top" | "other-hand",
+    face: number,
+    grant: GraveyardGrant | undefined,
+  ): boolean {
+    if (via === "graveyard-permission") return this.findGraveyardGrant(player, card, face, grant) !== null;
+    if (via === "library-top") return this.libraryTopCastPermissions(player, card, face).length > 0;
+    return this.playOptions(player, card, face).length > 0;
   }
 
   /** The permission `grant` names among `graveyardGrantsFor`, or — for a

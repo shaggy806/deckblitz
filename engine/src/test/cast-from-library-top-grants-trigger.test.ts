@@ -87,6 +87,22 @@ describe("Galea, Kindler of Hope", () => {
     expect(attachedTo(game, splitter)).toBeUndefined();
   });
 
+  it("a bestow creature card on top is cast only bestowed: an Aura spell then (rule 702.103d)", () => {
+    const { game } = table();
+    spawn(game, "Galea, Kindler of Hope");
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Plains", 4);
+    const eidolon = toLibrary(game, "Hopeful Eidolon");
+    const offers = castOffers(game, eidolon);
+    expect(offers.length).toBeGreaterThan(0);
+    expect(offers.every((o) => o.kind === "cast-spell" && o.overload === true)).toBe(true);
+    const plain = { type: "cast-spell", player: A, card: eidolon, targets: [], via: "library-top" } as const;
+    expect(game.canDispatch(plain)).toMatch(/top of their library/);
+    cast(game, eidolon, { via: "library-top", overload: true, targets: [ref(bears)] });
+    expect(zone(game, eidolon)).toBe("battlefield");
+    expect(attachedTo(game, eidolon)).toBe(bears);
+  });
+
   it("the spell gains the ability as the cast trigger resolves, not as it's cast", () => {
     const { game, a } = table();
     spawn(game, "Galea, Kindler of Hope");
@@ -100,5 +116,35 @@ describe("Galea, Kindler of Hope", () => {
     pickTargets(a, bears);
     settle(game);
     expect(attachedTo(game, splitter)).toBe(bears);
+  });
+});
+
+describe("a permission's filter reads a bestow cast bestowed (rule 702.103d)", () => {
+  it("Eladamri's \"creature spells\" never casts a bestow card bestowed: it's an Aura spell then", () => {
+    const { game } = table();
+    spawn(game, "Eladamri, Korvecdal");
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Plains", 4);
+    const eidolon = toLibrary(game, "Hopeful Eidolon");
+    const offers = castOffers(game, eidolon);
+    expect(offers.length).toBeGreaterThan(0);
+    expect(offers.every((o) => o.kind === "cast-spell" && o.overload !== true)).toBe(true);
+    const bestowed = { type: "cast-spell", player: A, card: eidolon, targets: [ref(bears)], via: "library-top", overload: true } as const;
+    expect(game.canDispatch(bestowed)).toMatch(/top of their library/);
+    cast(game, eidolon, { via: "library-top" });
+    expect(zone(game, eidolon)).toBe("battlefield");
+    expect(attachedTo(game, eidolon)).toBeUndefined();
+  });
+
+  it("beside Galea, either: each permission reaches it one way", () => {
+    const { game } = table();
+    spawn(game, "Galea, Kindler of Hope");
+    spawn(game, "Eladamri, Korvecdal");
+    spawn(game, "Grizzly Bears");
+    lands(game, "Plains", 4);
+    const eidolon = toLibrary(game, "Hopeful Eidolon");
+    const offers = castOffers(game, eidolon);
+    expect(offers.some((o) => o.kind === "cast-spell" && o.overload === true)).toBe(true);
+    expect(offers.some((o) => o.kind === "cast-spell" && o.overload !== true)).toBe(true);
   });
 });
