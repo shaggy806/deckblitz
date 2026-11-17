@@ -6,6 +6,7 @@
     "effect:phase-out-while-you-control-source",
     "effect:mill-from-bottom",
     "effect:text-change-token-colors",
+    "decision:choose-planeswalker-type",
     "trigger:becomes-target-of-ability-targeting-only-it",
     "static:opponents-cant-play-from-graveyard",
     "cost:cumulative-upkeep-counter-on-opponents-creature",

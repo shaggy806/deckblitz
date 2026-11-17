@@ -3138,7 +3138,12 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   popup with the chooser's most common creature types as suggestions. A
   *permanent* that remembers its type is `chooseCreatureTypeOnEnter` instead
   (Urza's Incubator), not this. `options` and `prompt` choose among a fixed
-  list as buttons. `sentinel: FIRST_CHOSEN_TYPE` puts the answer in that
+  list as buttons: "choose a planeswalker type" as it resolves is `options:
+  PLANESWALKER_TYPES, prompt: "choose a planeswalker type"` (rule 205.3j —
+  Leori, Sparktouched Hunter, whose `then` is a `delayed-trigger` watching
+  `activates-ability` with `source: { type: "planeswalker", subtype:
+  CHOSEN_CREATURE_TYPE }` for the rest of the turn), the chooser's own
+  planeswalkers' types suggested. `sentinel: FIRST_CHOSEN_TYPE` puts the answer in that
   placeholder instead, so a second choice can nest inside `then`: Vision
   Charm's "choose a land type and a basic land type. Each land of the first
   chosen type becomes the second chosen type". `note: true` is "**note** a

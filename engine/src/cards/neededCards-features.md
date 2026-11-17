@@ -363,6 +363,14 @@ as one event — `choose-permanents`' `thenTogether` for cards in a zone. Avatar
 this card to its owner's hand and up to one creature card milled this way to the battlefield" leaves the
 graveyard as one `cards-left-graveyard`, and the Aura returns with no creature card chosen.
 `test/look-and-choose-then-always.test.ts`.
+### A planeswalker type chosen as an ability resolves — found built 2026-11-17
+
+The key `decision:choose-planeswalker-type` needed no engine code: the `choose-creature-type`
+effect's fixed menu takes `options: PLANESWALKER_TYPES` (rule 205.3j), and its offer already
+suggests the chooser's own planeswalkers' types, as Deification's on-enter one does. The v2 bot
+searches no rollouts over that eighty-type menu (its `candidates` are none) and names the first
+suggestion. Leori, Sparktouched Hunter (rank 11022): a delayed `activates-ability` watch with the
+chosen type in its `source`, for the rest of the turn. `test/choose-planeswalker-type.test.ts`.
 
 ### "Each foretold card you own in exile" — built 2026-11-16
 

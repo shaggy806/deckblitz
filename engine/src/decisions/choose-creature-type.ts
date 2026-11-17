@@ -202,9 +202,12 @@ export const chooseCreatureType = defineDecision({
   // colour is which creatures take the damage. So is riot's or unleash's
   // (`entersWith`): haste is the attack this turn, the counter is size, and
   // an unleashed creature can't block — the board says which, and a rollout
-  // sees it.
+  // sees it. Not a menu of every planeswalker type (Leori, Sparktouched
+  // Hunter's, as it resolves): eighty rollouts for one answer, which the
+  // suggestions already give — the type of the planeswalkers in play.
   candidates: (legal, player): Action[] => {
     if (legal.kind !== "choose-creature-type" || (legal.resolving !== true && legal.entersWith === undefined)) return [];
+    if (legal.options.length > SUGGESTED_CREATURE_TYPES && legal.options.every(isPlaneswalkerType)) return [];
     return legal.options.map((creatureType) => ({ type: "choose-creature-type", player, creatureType }));
   },
 
