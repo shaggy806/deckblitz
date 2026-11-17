@@ -2147,6 +2147,10 @@ export function parseTrigger(clause) {
   if (c === "Whenever a creature deals combat damage to enchanted player") {
     return [{ on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toEnchantedPlayer: true }];
   }
+  // The Beast, Deathless Prince: the player who owns the creature.
+  if (c === "Whenever a creature deals combat damage to its owner") {
+    return [{ on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toOwner: true }];
+  }
   // "…to a player or planeswalker" (Psychic Frog, Jaya's Phoenix): an
   // attacker deals its combat damage to the one it attacks, so one trigger
   // for each recipient never fires twice for one damage event.

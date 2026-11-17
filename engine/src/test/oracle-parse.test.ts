@@ -20824,3 +20824,11 @@ describe("batch 333's need keys (Perennation, Paranormal Analyst, Wonderscape Sa
     });
   });
 });
+
+describe("combat damage to its owner", () => {
+  it("a creature dealing combat damage to its owner (The Beast, Deathless Prince)", () => {
+    expect(parseTrigger("Whenever a creature deals combat damage to its owner")).toEqual([
+      { on: "deals-combat-damage-to-player", who: "any", filter: { type: "creature" }, toOwner: true },
+    ]);
+  });
+});

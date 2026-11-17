@@ -2766,7 +2766,8 @@
   "filter:foretold",
   "decision:ward-poison-counters",
   "decision:ward-poison-counters",
-  "filter:land-could-produce-mana-type"
+  "filter:land-could-produce-mana-type",
+  "trigger:combat-damage-to-owner"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

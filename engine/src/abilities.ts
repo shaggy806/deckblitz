@@ -1957,6 +1957,11 @@ export type TriggerKind =
        * player dealt damage is the one this Curse enchants as the damage is
        * dealt — once for each creature that dealt it (the ruling). */
       readonly toEnchantedPlayer?: true;
+      /** "Whenever a creature deals combat damage to **its owner**" (The
+       * Beast, Deathless Prince, with `who: "any"`): the player dealt damage
+       * owns the creature that dealt it (rules 108.3, 111.2) — one its owner
+       * doesn't control, stolen or given away. */
+      readonly toOwner?: true;
       /** "…deals combat damage to a player **or battle**" (Furnace Reins,
        * Beamtown Beatstick): combat damage to a battle triggers it too. A
        * battle has no "that player" — use it only where the ability doesn't

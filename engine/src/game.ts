@@ -36627,6 +36627,9 @@ export class Game {
           (spec.toOpponent !== true || (event.target.kind === "player" && event.target.player !== self.controller)) &&
           (spec.toEnchantedPlayer !== true ||
             (event.target.kind === "player" && self.attachedToPlayer !== undefined && event.target.player === self.attachedToPlayer)) &&
+          // "…to its owner" (rules 108.3, 111.2): it never changes.
+          (spec.toOwner !== true ||
+            (event.target.kind === "player" && this.state.objects[event.source]?.owner === event.target.player)) &&
           (spec.toPlayerIf === undefined ||
             (event.target.kind === "player" &&
               staticConditionMet(this.state, this.registry, self, spec.toPlayerIf, { thatPlayer: event.target.player }))) &&

@@ -395,6 +395,7 @@ export function timingCountable(spec: TriggerSpec): boolean {
         spec.toPlayerIf === undefined &&
         spec.toPlayerControlsMore === undefined &&
         spec.toEnchantedPlayer !== true &&
+        spec.toOwner !== true &&
         spec.orBattle !== true
       );
     case "becomes-tapped":
