@@ -6743,6 +6743,38 @@ export function parseSentence(sentence, ctx) {
   if (ctx.targets.length === 1 && re("that card deals damage equal to its power to ~").test(s)) {
     return { kind: "damage", amount: { powerOf: 0 }, target: "source", from: 0 };
   }
+  // "At the beginning of enchanted player's upkeep, ~ deals 1 damage to that
+  // player or a planeswalker that player controls" (Curse of the Pierced
+  // Heart): untargeted, so you choose as it resolves — a mode, and for a
+  // planeswalker which (Vial Smasher the Fierce's shape).
+  if (ctx.thatPlayer !== undefined && (m = re(`~ deals ${N} damage to that player or a planeswalker that player controls`).exec(s))) {
+    const n = amount(m[1]);
+    const who = ctx.thatPlayer;
+    return {
+      kind: "modal",
+      minModes: 1,
+      maxModes: 1,
+      modes: [
+        { text: "Deal the damage to that player", effect: { kind: "damage", amount: n, who } },
+        {
+          text: "Deal the damage to a planeswalker that player controls",
+          onlyIf: { kind: "of-player", player: who, condition: { kind: "controls", filter: { type: "planeswalker" }, atLeast: 1 } },
+          effect: {
+            kind: "sequence",
+            effects: [
+              {
+                kind: "vote",
+                choose: true,
+                who: "you",
+                for: { permanent: { type: "planeswalker" }, about: who, prompt: "Choose a planeswalker that player controls to deal the damage to" },
+              },
+              { kind: "damage-all", filter: { thisWay: "chosen" }, amount: n },
+            ],
+          },
+        },
+      ],
+    };
+  }
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): the player the event names.
   if (ctx.thatPlayer === "trigger-player" && (m = re(`~ deals ${N} damage to that player`).exec(s))) {

@@ -5999,6 +5999,28 @@ describe("Tesak, Judith's Hellhound's lines", () => {
     expect(face.complete).toBe(false);
   });
 });
+
+describe("Curse of the Pierced Heart's line", () => {
+  it("reads 'that player or a planeswalker that player controls' as a mode, then a chosen planeswalker", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura Curse",
+      mana_cost: "{1}{R}",
+      oracle_text:
+        "Enchant player\nAt the beginning of enchanted player's upkeep, this Aura deals 1 damage to that player or a planeswalker that player controls.",
+    } as never) as unknown as { triggered: { effect: { kind: string; modes: { effect: unknown; onlyIf?: unknown }[] } }[]; complete: boolean };
+    expect(face.complete).toBe(true);
+    const effect = face.triggered[0].effect;
+    expect(effect.kind).toBe("modal");
+    expect(effect.modes[0].effect).toEqual({ kind: "damage", amount: 1, who: "active-player" });
+    expect(effect.modes[1].onlyIf).toEqual({
+      kind: "of-player",
+      player: "active-player",
+      condition: { kind: "controls", filter: { type: "planeswalker" }, atLeast: 1 },
+    });
+  });
+});
+
 describe("block limits, lost abilities and chosen types (B249)", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text }, { tokenFor: () => null });

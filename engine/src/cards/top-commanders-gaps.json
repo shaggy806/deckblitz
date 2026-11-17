@@ -472,6 +472,7 @@
   "effect:each-player-other-than-source-owner",
   "effect:cast-spell-trigger-spell-targets",
   "effect:curse-attach-player",
+  "effect:damage-player-or-their-planeswalker-choice",
   "target:permanent-controlled-by-target-slot",
   "effect:host-of-destroyed-target",
   "filter:attached-to-trigger-object",

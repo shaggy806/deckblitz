@@ -12528,9 +12528,11 @@ export interface ModeOption {
    * mana cost's alone.
    */
   readonly spreeCost?: string;
-  /** A resolution-time `random` modal's eligibility: the mode can be picked
-   * only while this holds, read as the effect applies (Crystalline Giant's
-   * "a kind of counter … that this creature doesn't have on it"). */
+  /** A resolution-time modal's eligibility: the mode can be picked only
+   * while this holds, read as the effect applies — a `random` one's
+   * (Crystalline Giant's "a kind of counter … that this creature doesn't have
+   * on it") or a chosen one's, offered only then (Curse of the Pierced
+   * Heart's "or a planeswalker that player controls"). */
   readonly onlyIf?: StaticCondition;
 }
 
@@ -23784,10 +23786,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         applyEffectSpec(mode.effect, ctx);
         return;
       }
+      // A mode with an `onlyIf` is offered only while it holds, read as this
+      // applies: "deals damage to that player or a planeswalker that player
+      // controls" (Vial Smasher the Fierce, Curse of the Pierced Heart) has no
+      // planeswalker to choose while they control none, and the damage isn't
+      // the controller's to withhold.
+      const open = spec.modes.some((mode) => mode.onlyIf !== undefined)
+        ? spec.modes.filter((mode) => mode.onlyIf === undefined || ctx.conditionMet(mode.onlyIf))
+        : spec.modes;
+      if (open.length === 0) return;
       ctx.chooseModes(
-        spec.minModes,
+        Math.min(spec.minModes, open.length),
         amountValue(spec.maxModes, ctx),
-        searchableModes(spec.modes, ctx),
+        searchableModes(open, ctx),
         undefined,
         undefined,
         spec.notChosenBefore === true ? "ever" : spec.notChosenThisTurn === true,
