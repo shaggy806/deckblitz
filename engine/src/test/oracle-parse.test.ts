@@ -20770,6 +20770,19 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(operative.triggered[0]?.effect).toEqual({ kind: "exile-from-library", amount: { triggerValue: true }, faceDown: true });
   });
 
+  it("reads jump-start given to graveyard cards of exactly two colors (Niv-Mizzet, Supreme)", () => {
+    const niv = parseFace({
+      name: "Niv-Mizzet, Supreme",
+      type_line: "Legendary Creature — Dragon Avatar",
+      oracle_text:
+        "Each instant and sorcery card in your graveyard that's exactly two colors has jump-start. (You may cast that card from your graveyard by discarding a card in addition to paying its other costs. Then exile it.)",
+    });
+    expect(niv.static[0]?.grantsToGraveyard).toEqual({
+      filter: { typesAnyOf: ["instant", "sorcery"], colorCount: 2 },
+      flashback: { cost: "mana-cost", keyword: "jump-start", discard: 1 },
+    });
+  });
+
   it("reads an exile from the bottom of a library (The Temporal Anchor, Arvinox)", () => {
     const anchor = parseFace({
       name: "Test Card",

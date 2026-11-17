@@ -3130,10 +3130,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * Miracle Worker: "each card in your graveyard has beam me up. The beam
      * me up cost is equal to that spell's mana cost. Scotty can't be beamed
      * up to cast a spell this way" — `isSource: false` in the return's filter
-     * is this permanent). */
+     * is this permanent). With `keyword: "jump-start"` and `discard: 1`,
+     * jump-start (rule 702.133a — Niv-Mizzet, Supreme's "each instant and
+     * sorcery card in your graveyard that's exactly two colors has
+     * jump-start"): `cost: "mana-cost"`, a card discarded beside it, as a
+     * printed jump-start's. */
     readonly flashback?: {
       readonly cost: string | "mana-cost";
-      readonly keyword?: "beam-me-up";
+      readonly keyword?: "beam-me-up" | "jump-start";
+      readonly discard?: number;
       readonly returnToHand?: { readonly filter: CardFilter; readonly count: number };
     };
     readonly escape?: { readonly cost: string | "mana-cost"; readonly exileCount: number };

@@ -60692,6 +60692,8 @@ controlledBy,
         cost,
         grantor: source.id,
         ...(spec.keyword !== undefined ? { keyword: spec.keyword } : {}),
+        // Jump-start's discard (Niv-Mizzet, Supreme).
+        ...(spec.discard !== undefined ? { discard: spec.discard } : {}),
         // "Scotty can't be beamed up": `isSource` is the granting permanent.
         ...(spec.returnToHand !== undefined
           ? { returnToHand: { ...spec.returnToHand, filter: { ...spec.returnToHand.filter, appliedBy: source.id } } }

@@ -5878,10 +5878,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   permanent's or emblem's controller draws, once for each such ability.
 - `mayPlay: { from: "graveyard", … }` — see **`mayPlay` / `grant-play` / `impulse-exile`** in §6. Each permission that applies is offered as its own `via: "graveyard-permission"` variant carrying a `graveyardGrant: { source, asType? }` the driver echoes back, so which one is spent is the player's choice (601.3). A land face is only offered under a permission that spends something (Muldrotha's `perType` with `"land"`); one that doesn't has nothing to name (Ramunap Excavator).
 
-- `grantsToGraveyard: { filter, flashback?: { cost, keyword?, returnToHand? }, escape?: { cost,
+- `grantsToGraveyard: { filter, flashback?: { cost, keyword?, discard?, returnToHand? }, escape?: { cost,
   exileCount } }` (beam me up: Scotty, Miracle Worker's `{ cost: "mana-cost", keyword: "beam-me-up",
   returnToHand: { filter: { type: "creature", isSource: false }, count: 1 } }` with the condition
-  `{ kind: "your-main-phase" }`) — cards in your graveyard matching `filter` **have**
+  `{ kind: "your-main-phase" }`; jump-start: Niv-Mizzet, Supreme's `{ cost: "mana-cost", keyword:
+  "jump-start", discard: 1 }` over `{ typesAnyOf: ["instant", "sorcery"], colorCount: 2 }`) — cards in your graveyard matching `filter` **have**
   flashback or escape (rule 604.1): Iroh, Grand Lotus's "during your turn,
   each instant and sorcery card in your graveyard has flashback. The
   flashback cost is equal to its mana cost" is `{ filter: { typesAnyOf:

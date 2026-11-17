@@ -21688,6 +21688,22 @@ function grantedCardsFilter(phrase, thats) {
 function outsideBattlefieldStaticOf(line, text) {
   let m;
   const self = { affects: { scope: "self" } };
+  // Jump-start, a printed one's shape (Niv-Mizzet, Supreme: "each instant and
+  // sorcery card in your graveyard that's exactly two colors has jump-start").
+  m = /^Each (.+?) card in your graveyard(?: that's exactly (one|two|three|four|five) colors?)? has jump-start\.(?: \(.*\))?$/.exec(line);
+  if (m !== null) {
+    const filter = grantedCardsFilter(m[1], undefined);
+    if (filter === null) return null;
+    const colors = m[2] === undefined ? 0 : ["one", "two", "three", "four", "five"].indexOf(m[2]) + 1;
+    return {
+      ...self,
+      grantsToGraveyard: {
+        filter: { ...filter, ...(colors > 0 ? { colorCount: colors } : {}) },
+        flashback: { cost: "mana-cost", keyword: "jump-start", discard: 1 },
+      },
+      text,
+    };
+  }
   m = new RegExp(
     `^(During your turn, )?(?:Each (.+?) card|(.+?) cards) in your graveyard(?: that's an? (.+?))? (?:has|have) (${GRAVEYARD_KEYWORD})` +
       "(?: ((?:\\{[^}]+\\})+)(, where X is its mana value)?)?(\\. (?:Its|The) \\w+ cost is equal to its mana cost)?\\.$",

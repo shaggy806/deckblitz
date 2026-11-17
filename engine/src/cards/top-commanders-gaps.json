@@ -2931,7 +2931,8 @@
   "decision:untargeted-player-chosen-with-targets",
   "effect:exile-library-face-down",
   "effect:exile-library-face-down",
-  "effect:return-exiled-with-counter"
+  "effect:return-exiled-with-counter",
+  "static:grant-jump-start-to-graveyard-cards"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
