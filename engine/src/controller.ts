@@ -4518,7 +4518,7 @@ export class HeuristicBotController extends AutomaticController {
     const damages = copied === null ? pendingTargetDamage(state, this.registry) : [];
     // And planned with the damage triggers still waiting behind it, whose
     // targets aren't chosen yet: two Terror triggers of 2 kill a 4/4 between
-    // them (`planDamage`).
+    // them, and three of 3 a player on 9, who comes first (`planDamage`).
     const own = damages[0];
     const planned =
       copied === null && legalOptions.length === 1 && polarities?.[0] === "harm" && own !== undefined

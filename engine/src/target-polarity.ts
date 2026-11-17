@@ -1889,8 +1889,26 @@ export function rankTargets(
   let pending: ReadonlyMap<ObjectId, number> | undefined;
   const pendingAt = (ref: TargetRef): number =>
     ref.kind === "object" ? ((pending ??= damageOnStack(state, registry)).get(ref.object) ?? 0) : 0;
+  // The same at a player (`damageOnStackAtPlayers`): damage that makes up
+  // their life with what's already aimed at them ends them, and a player
+  // already dead to what's coming takes no more.
+  let pendingPlayers: ReadonlyMap<PlayerId, number> | undefined;
+  const comingAt = (player: PlayerId): number =>
+    state.zones.shared.stack.length === 0
+      ? 0
+      : ((pendingPlayers ??= damageOnStackAtPlayers(state, registry)).get(player) ?? 0);
+  const mortal = (player: PlayerId): boolean =>
+    player !== me && !playerCantLoseLife(state, registry, player) && !playerCantLoseGame(state, registry, player);
+  // Dead to what's on the stack already: nothing more at them does anything,
+  // nor at a permanent of theirs, which leaves with them (rule 800.4a). A
+  // Dragon Tempest trigger behind the ones that ended a player went at that
+  // player's commander (`bot:diff`, 2026-11-16).
+  const ended = (player: PlayerId | undefined): boolean =>
+    player !== undefined && mortal(player) && comingAt(player) >= (state.players[player]?.life ?? Infinity);
   const lands = (ref: TargetRef): boolean => {
     if (damage === undefined || polarity !== "harm") return true;
+    if (ref.kind === "player") return !ended(ref.player);
+    if (ended(state.objects[ref.object]?.controller)) return false;
     const already = pendingAt(ref);
     if (already > 0 && ref.kind === "object" && damageLands(state, registry, ref, already)) return false;
     return damageLands(state, registry, ref, damage + already);
@@ -1899,14 +1917,13 @@ export function rankTargets(
   // whole board leaves with them (rule 800.4a): no creature of theirs, nor
   // anyone else's, is worth more (a live misplay, 2026-10-14: Terror of the
   // Peaks' 7 at the Avenger of Zendikar of a player on 4).
-  const lethal = (ref: TargetRef): boolean =>
-    damage !== undefined &&
-    polarity === "harm" &&
-    ref.kind === "player" &&
-    ref.player !== me &&
-    (state.players[ref.player]?.life ?? Infinity) <= damage &&
-    !playerCantLoseLife(state, registry, ref.player) &&
-    !playerCantLoseGame(state, registry, ref.player);
+  const lethal = (ref: TargetRef): boolean => {
+    if (damage === undefined || polarity !== "harm" || ref.kind !== "player" || !mortal(ref.player)) return false;
+    const life = state.players[ref.player]?.life ?? Infinity;
+    // With what's already on the stack at them; not once that alone is enough.
+    const coming = comingAt(ref.player);
+    return coming < life && life <= damage + coming;
+  };
   const scored = options.map((ref, index) => ({
     ref,
     index,
@@ -2062,6 +2079,72 @@ export function damageOnStack(state: GameState, registry: CardRegistry): Map<Obj
   return out;
 }
 
+/**
+ * The damage the spells and abilities on the stack are already sending at
+ * each player, read as {@link damageOnStack} reads it at permanents: three
+ * Terror of the Peaks triggers of 3 aimed at a player on 9 are their whole
+ * life between them, though none is alone.
+ */
+export function damageOnStackAtPlayers(state: GameState, registry: CardRegistry): Map<PlayerId, number> {
+  const out = new Map<PlayerId, number>();
+  for (const id of state.zones.shared.stack) {
+    const object = state.objects[id];
+    if (object === undefined || object.targets === null) continue;
+    if (object.delayedTrigger !== undefined || object.reflexiveTrigger !== undefined) continue;
+    const effect = stackEffectOf(registry, object);
+    if (effect === undefined) continue;
+    const damages = slotDamage(effect, {
+      x: object.xValue ?? 0,
+      triggerValue: object.triggerValue,
+      board: { state, registry, you: object.controller },
+    });
+    damages.forEach((amount, slot) => {
+      const target = object.targets?.[slot];
+      if (amount !== undefined && amount > 0 && target?.kind === "player") {
+        out.set(target.player, (out.get(target.player) ?? 0) + amount);
+      }
+    });
+  }
+  return out;
+}
+
+/**
+ * How much more damage ends `player` (rule 704.5a): their life less the
+ * damage already on its way to them. Null where damage can't (they can't
+ * lose life, or the game), and where what's on the stack is their whole life
+ * already — more at them would be wasted, as it is at a creature already
+ * dead to what's coming. Life is all it reads: prevention isn't seen.
+ */
+function damageToEnd(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  pending: ReadonlyMap<PlayerId, number>,
+): number | null {
+  const info = state.players[player];
+  if (info === undefined || info.hasLost) return null;
+  if (playerCantLoseLife(state, registry, player) || playerCantLoseGame(state, registry, player)) return null;
+  const need = info.life - (pending.get(player) ?? 0);
+  return need > 0 ? need : null;
+}
+
+/** The cheapest set of the `free` chunks (bit `i` is `chunks[i]`) that adds
+ * up to `need`, the earliest such set where several cost the same, or 0. */
+function cheapestCover(chunks: readonly number[], free: number, need: number): number {
+  let best = 0;
+  let bestSum = Infinity;
+  for (let mask = 1; mask < 1 << chunks.length; mask += 1) {
+    if ((mask & free) !== mask) continue;
+    let sum = 0;
+    for (let i = 0; i < chunks.length; i += 1) if (mask & (1 << i)) sum += chunks[i];
+    if (sum >= need && sum < bestSum) {
+      best = mask;
+      bestSum = sum;
+    }
+  }
+  return best;
+}
+
 /** Most waiting triggers a damage plan weighs (`planDamage` tries every
  * subset of them for each target). */
 const MAX_PLANNED_CHUNKS = 8;
@@ -2131,6 +2214,15 @@ function damageToKill(
  * leaves the first chunk free, for the usual aim to place. Each later
  * trigger plans again with the damage before it on the stack, so the plan
  * holds as they go on.
+ *
+ * An opponent the chunks end comes before every permanent (their whole
+ * board leaves with them, rule 800.4a), the one who takes the least first:
+ * their life less the damage already on the stack at them
+ * (`damageOnStackAtPlayers`). The plan counted only permanents, so three
+ * triggers of 3 killed the creatures of a player on 9, and v2, whose
+ * rollouts aim the triggers still to come by this plan, never played the
+ * line that ends them (live games, the user, 2026-11-16). Asked of a lone
+ * chunk too: the last trigger finishes what the ones on the stack started.
  */
 export function planDamage(
   state: GameState,
@@ -2140,26 +2232,50 @@ export function planDamage(
   chunks: readonly number[],
   value: (state: GameState, registry: CardRegistry, ref: TargetRef) => number = targetValue,
 ): TargetRef | null {
+  if (chunks.length === 0) return null;
+  let free = (1 << chunks.length) - 1;
+  const atPlayers = damageOnStackAtPlayers(state, registry);
+  const endable = options
+    .flatMap((ref) => (ref.kind === "player" && ref.player !== me ? [ref] : []))
+    .map((ref) => ({ ref, need: damageToEnd(state, registry, ref.player, atPlayers) }))
+    .filter((t): t is { ref: TargetRef & { kind: "player" }; need: number } => t.need !== null)
+    .sort((a, b) => a.need - b.need);
+  // Whoever the plan ends, or the stack's damage already does: their
+  // permanents leave with them, so no chunk is spent on one.
+  const ended = new Set<PlayerId>();
+  for (const ref of options) {
+    if (ref.kind !== "player" || ref.player === me) continue;
+    const info = state.players[ref.player];
+    if (
+      info !== undefined &&
+      !info.hasLost &&
+      (atPlayers.get(ref.player) ?? 0) >= info.life &&
+      !playerCantLoseLife(state, registry, ref.player) &&
+      !playerCantLoseGame(state, registry, ref.player)
+    ) {
+      ended.add(ref.player);
+    }
+  }
+  for (const target of endable) {
+    const best = cheapestCover(chunks, free, target.need);
+    if (best === 0) continue;
+    if (best & 1) return target.ref;
+    free &= ~best;
+    ended.add(target.ref.player);
+  }
   if (chunks.length < 2) return null;
   const pending = damageOnStack(state, registry);
   const killable = options
     .filter((ref) => sideOf(state, ref, me) === "opponent")
+    .filter((ref) => {
+      const controller = ref.kind === "object" ? state.objects[ref.object]?.controller : undefined;
+      return controller === undefined || !ended.has(controller);
+    })
     .map((ref) => ({ ref, need: damageToKill(state, registry, ref, pending), worth: value(state, registry, ref) }))
     .filter((t): t is { ref: TargetRef; need: number; worth: number } => t.need !== null)
     .sort((a, b) => b.worth - a.worth);
-  let free = (1 << chunks.length) - 1;
   for (const target of killable) {
-    let best = 0;
-    let bestSum = Infinity;
-    for (let mask = 1; mask < 1 << chunks.length; mask += 1) {
-      if ((mask & free) !== mask) continue;
-      let sum = 0;
-      for (let i = 0; i < chunks.length; i += 1) if (mask & (1 << i)) sum += chunks[i];
-      if (sum >= target.need && sum < bestSum) {
-        best = mask;
-        bestSum = sum;
-      }
-    }
+    const best = cheapestCover(chunks, free, target.need);
     if (best === 0) continue;
     if (best & 1) return target.ref;
     free &= ~best;

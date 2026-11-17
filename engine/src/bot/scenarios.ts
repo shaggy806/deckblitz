@@ -332,11 +332,12 @@ function bothDamageTriggers(
 
 /**
  * Every damage trigger from one payoff as `entering` creatures enter under it
- * together at a four-player table, bob on `life` with `across` in play: all
- * aimed by the bot as the rooms seat it (its full search), passing if every
- * one goes at bob.
+ * together at a four-player table, bob on `life` with `across` in play and a
+ * Hill Giant each for carol and dave: all aimed by the bot as the rooms seat
+ * it (its full search). `judge` is given how many went at bob himself and
+ * how many at a creature of his.
  */
-function everyDamageTriggerAtBob(
+function damageTriggersAroundBob(
   registry: CardRegistry,
   weights: EvalWeights,
   spec: {
@@ -344,6 +345,7 @@ function everyDamageTriggerAtBob(
     readonly entering: readonly string[];
     readonly across: readonly string[];
     readonly life: number;
+    readonly judge: (aim: { readonly atBob: number; readonly atHisCreatures: number }) => boolean;
   },
 ): ScenarioResult {
   const game = table(registry, [A, B, C, D], A);
@@ -361,23 +363,29 @@ function everyDamageTriggerAtBob(
       : ref?.kind === "player"
         ? ref.player
         : "nothing";
-  const aimed: (TargetRef | null)[] = [];
-  for (let i = 0; i < 30 && aimed.length < spec.entering.length; i += 1) {
+  // Read as each is aimed: what bob owns leaves the game with him.
+  const names: string[] = [];
+  let atBob = 0;
+  let atHisCreatures = 0;
+  for (let i = 0; i < 30 && names.length < spec.entering.length; i += 1) {
     game.advanceUntil((s) => s.awaiting !== null || s.result.over);
     if (game.state.awaiting === null || game.state.result.over) break;
     const action = bot.act(viewOf(game, A));
     if (game.state.awaiting.kind === "choose-targets") {
-      aimed.push(action.type === "choose-targets" ? (action.targets[0] ?? null) : null);
+      const ref = action.type === "choose-targets" ? (action.targets[0] ?? null) : null;
+      names.push(name(ref));
+      if (ref?.kind === "player" && ref.player === B) atBob += 1;
+      if (ref?.kind === "object" && game.state.objects[ref.object]?.controller === B) atHisCreatures += 1;
     }
     game.dispatch(action);
   }
-  if (aimed.length < spec.entering.length) {
-    return { passed: false, detail: `only ${aimed.length} of ${spec.entering.length} triggers asked for a target` };
+  if (names.length < spec.entering.length) {
+    return {
+      passed: false,
+      detail: `only ${names.length} of ${spec.entering.length} triggers asked for a target (${names.join(", ")})`,
+    };
   }
-  return {
-    passed: aimed.every((ref) => ref?.kind === "player" && ref.player === B),
-    detail: `aimed at ${aimed.map(name).join(", ")}`,
-  };
+  return { passed: spec.judge({ atBob, atHisCreatures }), detail: `aimed at ${names.join(", ")}` };
 }
 
 function toSecondMain(game: Game): ScenarioResult | null {
@@ -2629,7 +2637,6 @@ const SCENARIOS: readonly BotScenario[] = [
   },
   {
     name: "sends three Terror of the Peaks triggers at a player they kill between them",
-    kind: "training",
     rule: "Damage triggers that go on the stack together are counted together against a player's life too: if all of it kills them, it all goes at them, not at their creatures.",
     run(weights, registry) {
       // Reported from live games (2026-11-16, no capture): "I keep seeing the
@@ -2639,19 +2646,51 @@ const SCENARIOS: readonly BotScenario[] = [
       // bob is on 9 with Serra Angel, Hill Giant and Grizzly Bears. All 9 at
       // bob ends them, creatures and all.
       //
-      // The triggers are planned together (`planDamage`), but the plan only
-      // counts what the damage kills among permanents: a player is never one
-      // of its kills, and the damage on the stack at a player isn't counted
-      // (`damageOnStack`). So two triggers take the Angel and the third the
-      // Giant. The search doesn't find it either: each trigger's rollout aims
-      // the ones after it by the same plan, so no line it plays has all three
-      // at bob. One trigger that kills a player alone does go at them
-      // (`rankTargets`, "aims Terror of the Peaks' 7 at a player on 4").
-      return everyDamageTriggerAtBob(registry, weights, {
+      // The triggers were planned together (`planDamage`), but the plan only
+      // counted what the damage kills among permanents: a player was never
+      // one of its kills, and the damage on the stack at a player wasn't
+      // counted. v1 alone aimed Angel, Angel, bob. The search didn't find it
+      // either: each trigger's rollout aims the ones after it by v1's plan, so
+      // no line it played had all three at bob, and it killed a Hill Giant of
+      // each opponent's. An opponent the chunks end is now the plan's first
+      // kill, at their life less what's on the stack at them.
+      return damageTriggersAroundBob(registry, weights, {
         payoff: "Terror of the Peaks",
         entering: ["Hill Giant", "Hill Giant", "Hill Giant"],
         across: ["Serra Angel", "Hill Giant", "Grizzly Bears"],
         life: 9,
+        judge: ({ atBob }) => atBob === 3,
+      });
+    },
+  },
+  {
+    name: "sends at a player only the Terror of the Peaks triggers that kill them, the third elsewhere",
+    rule: "A player takes the cheapest set of the triggers that ends them; one they don't need isn't thrown at them or at creatures they lose anyway.",
+    run(weights, registry) {
+      // The same three triggers of 3 with bob on 6: two end him, and the
+      // third goes past him and his creatures (they leave with him), at
+      // another opponent or something of theirs.
+      return damageTriggersAroundBob(registry, weights, {
+        payoff: "Terror of the Peaks",
+        entering: ["Hill Giant", "Hill Giant", "Hill Giant"],
+        across: ["Serra Angel", "Hill Giant", "Grizzly Bears"],
+        life: 6,
+        judge: ({ atBob, atHisCreatures }) => atBob === 2 && atHisCreatures === 0,
+      });
+    },
+  },
+  {
+    name: "kills creatures with three Terror of the Peaks triggers that leave a player on 1",
+    rule: "Damage triggers that don't add up to a player's life are aimed at what they kill, as before: 9 at a player on 10 kills nothing.",
+    run(weights, registry) {
+      // The guard for the two above: bob on 10 lives through all 9, so the
+      // plan is the permanents' again and no trigger goes at him.
+      return damageTriggersAroundBob(registry, weights, {
+        payoff: "Terror of the Peaks",
+        entering: ["Hill Giant", "Hill Giant", "Hill Giant"],
+        across: ["Serra Angel", "Hill Giant", "Grizzly Bears"],
+        life: 10,
+        judge: ({ atBob }) => atBob === 0,
       });
     },
   },
