@@ -131,6 +131,7 @@ import _poolAcademyDrake from "./pool/academy-drake.js";
 import _poolAcademyElite from "./pool/academy-elite.js";
 import _poolAcademyInstructor from "./pool/academy-instructor.js";
 import _poolAcademyJourneymage from "./pool/academy-journeymage.js";
+import _poolAcademyLoremaster from "./pool/academy-loremaster.js";
 import _poolAcademyManufactor from "./pool/academy-manufactor.js";
 import _poolAcademyRaider from "./pool/academy-raider.js";
 import _poolAcademyRector from "./pool/academy-rector.js";
@@ -5359,6 +5360,7 @@ import _poolControvert from "./pool/controvert.js";
 import _poolConvalescence from "./pool/convalescence.js";
 import _poolConvalescentCare from "./pool/convalescent-care.js";
 import _poolConvenientTarget from "./pool/convenient-target.js";
+import _poolConvergenceOfDominion from "./pool/convergence-of-dominion.js";
 import _poolConversionApparatus from "./pool/conversion-apparatus.js";
 import _poolConversionChamber from "./pool/conversion-chamber.js";
 import _poolConversion from "./pool/conversion.js";
@@ -5480,6 +5482,7 @@ import _poolCosmiumCatalyst from "./pool/cosmium-catalyst.js";
 import _poolCosmiumConfluence from "./pool/cosmium-confluence.js";
 import _poolCosmiumKiln from "./pool/cosmium-kiln.js";
 import _poolCosmograndZenith from "./pool/cosmogrand-zenith.js";
+import _poolCosmosCharger from "./pool/cosmos-charger.js";
 import _poolCosmosElixir from "./pool/cosmos-elixir.js";
 import _poolCosmotronicWave from "./pool/cosmotronic-wave.js";
 import _poolCostOfBrilliance from "./pool/cost-of-brilliance.js";
@@ -8307,6 +8310,7 @@ import _poolElvishWarrior from "./pool/elvish-warrior.js";
 import _poolEmancipationAngel from "./pool/emancipation-angel.js";
 import _poolEmbalmedAscendant from "./pool/embalmed-ascendant.js";
 import _poolEmbalmedBrawler from "./pool/embalmed-brawler.js";
+import _poolEmbalmersTools from "./pool/embalmers-tools.js";
 import _poolEmbargo from "./pool/embargo.js";
 import _poolEmberBeast from "./pool/ember-beast.js";
 import _poolEmberEyeWolf from "./pool/ember-eye-wolf.js";
@@ -21638,6 +21642,7 @@ import _poolRamunapExcavator from "./pool/ramunap-excavator.js";
 import _poolRamunapHydra from "./pool/ramunap-hydra.js";
 import _poolRamunapRuins from "./pool/ramunap-ruins.js";
 import _poolRanAndShaw from "./pool/ran-and-shaw.js";
+import _poolRanarTheEverWatchful from "./pool/ranar-the-ever-watchful.js";
 import _poolRancidEarth from "./pool/rancid-earth.js";
 import _poolRancidRats from "./pool/rancid-rats.js";
 import _poolRancor from "./pool/rancor.js";
@@ -30169,6 +30174,7 @@ import _poolUrsineFylgja from "./pool/ursine-fylgja.js";
 import _poolUrsineMonstrosity from "./pool/ursine-monstrosity.js";
 import _poolUrtetRemnantOfMemnarch from "./pool/urtet-remnant-of-memnarch.js";
 import _poolUrukHaiBerserker from "./pool/uruk-hai-berserker.js";
+import _poolUrzaAssemblesTheTitans from "./pool/urza-assembles-the-titans.js";
 import _poolUrzaChiefArtificer from "./pool/urza-chief-artificer.js";
 import _poolUrzaLordHighArtificer from "./pool/urza-lord-high-artificer.js";
 import _poolUrzaLordProtector from "./pool/urza-lord-protector.js";
@@ -33499,6 +33505,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAcademyElite,
   _poolAcademyInstructor,
   _poolAcademyJourneymage,
+  _poolAcademyLoremaster,
   _poolAcademyManufactor,
   _poolAcademyRaider,
   _poolAcademyRector,
@@ -38727,6 +38734,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolConvalescence,
   _poolConvalescentCare,
   _poolConvenientTarget,
+  _poolConvergenceOfDominion,
   _poolConversionApparatus,
   _poolConversionChamber,
   _poolConversion,
@@ -38848,6 +38856,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCosmiumConfluence,
   _poolCosmiumKiln,
   _poolCosmograndZenith,
+  _poolCosmosCharger,
   _poolCosmosElixir,
   _poolCosmotronicWave,
   _poolCostOfBrilliance,
@@ -41675,6 +41684,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmancipationAngel,
   _poolEmbalmedAscendant,
   _poolEmbalmedBrawler,
+  _poolEmbalmersTools,
   _poolEmbargo,
   _poolEmberBeast,
   _poolEmberEyeWolf,
@@ -55006,6 +55016,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRamunapHydra,
   _poolRamunapRuins,
   _poolRanAndShaw,
+  _poolRanarTheEverWatchful,
   _poolRancidEarth,
   _poolRancidRats,
   _poolRancor,
@@ -63537,6 +63548,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrsineMonstrosity,
   _poolUrtetRemnantOfMemnarch,
   _poolUrukHaiBerserker,
+  _poolUrzaAssemblesTheTitans,
   _poolUrzaChiefArtificer,
   _poolUrzaLordHighArtificer,
   _poolUrzaLordProtector,
@@ -66880,6 +66892,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/academy-elite": _poolAcademyElite,
   "pool/academy-instructor": _poolAcademyInstructor,
   "pool/academy-journeymage": _poolAcademyJourneymage,
+  "pool/academy-loremaster": _poolAcademyLoremaster,
   "pool/academy-manufactor": _poolAcademyManufactor,
   "pool/academy-raider": _poolAcademyRaider,
   "pool/academy-rector": _poolAcademyRector,
@@ -72108,6 +72121,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/convalescence": _poolConvalescence,
   "pool/convalescent-care": _poolConvalescentCare,
   "pool/convenient-target": _poolConvenientTarget,
+  "pool/convergence-of-dominion": _poolConvergenceOfDominion,
   "pool/conversion-apparatus": _poolConversionApparatus,
   "pool/conversion-chamber": _poolConversionChamber,
   "pool/conversion": _poolConversion,
@@ -72229,6 +72243,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cosmium-confluence": _poolCosmiumConfluence,
   "pool/cosmium-kiln": _poolCosmiumKiln,
   "pool/cosmogrand-zenith": _poolCosmograndZenith,
+  "pool/cosmos-charger": _poolCosmosCharger,
   "pool/cosmos-elixir": _poolCosmosElixir,
   "pool/cosmotronic-wave": _poolCosmotronicWave,
   "pool/cost-of-brilliance": _poolCostOfBrilliance,
@@ -75056,6 +75071,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emancipation-angel": _poolEmancipationAngel,
   "pool/embalmed-ascendant": _poolEmbalmedAscendant,
   "pool/embalmed-brawler": _poolEmbalmedBrawler,
+  "pool/embalmers-tools": _poolEmbalmersTools,
   "pool/embargo": _poolEmbargo,
   "pool/ember-beast": _poolEmberBeast,
   "pool/ember-eye-wolf": _poolEmberEyeWolf,
@@ -88387,6 +88403,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ramunap-hydra": _poolRamunapHydra,
   "pool/ramunap-ruins": _poolRamunapRuins,
   "pool/ran-and-shaw": _poolRanAndShaw,
+  "pool/ranar-the-ever-watchful": _poolRanarTheEverWatchful,
   "pool/rancid-earth": _poolRancidEarth,
   "pool/rancid-rats": _poolRancidRats,
   "pool/rancor": _poolRancor,
@@ -96918,6 +96935,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ursine-monstrosity": _poolUrsineMonstrosity,
   "pool/urtet-remnant-of-memnarch": _poolUrtetRemnantOfMemnarch,
   "pool/uruk-hai-berserker": _poolUrukHaiBerserker,
+  "pool/urza-assembles-the-titans": _poolUrzaAssemblesTheTitans,
   "pool/urza-chief-artificer": _poolUrzaChiefArtificer,
   "pool/urza-lord-high-artificer": _poolUrzaLordHighArtificer,
   "pool/urza-lord-protector": _poolUrzaLordProtector,

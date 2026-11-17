@@ -7,6 +7,7 @@ import _poolAIMScientists from "../pool/a-i-m-scientists.js";
 import _poolAbbeyGriffin from "../pool/abbey-griffin.js";
 import _poolAbsoluteVirtue from "../pool/absolute-virtue.js";
 import _poolAbzanKinGuard from "../pool/abzan-kin-guard.js";
+import _poolAcademyLoremaster from "../pool/academy-loremaster.js";
 import _poolAccordersShield from "../pool/accorders-shield.js";
 import _poolAccursedHorde from "../pool/accursed-horde.js";
 import _poolAdamaroFirstToDesire from "../pool/adamaro-first-to-desire.js";
@@ -1023,6 +1024,7 @@ const shard: CardShard = {
     _poolAbbeyGriffin,
     _poolAbsoluteVirtue,
     _poolAbzanKinGuard,
+    _poolAcademyLoremaster,
     _poolAccordersShield,
     _poolAccursedHorde,
     _poolAdamaroFirstToDesire,

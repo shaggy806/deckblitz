@@ -185,6 +185,7 @@ import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
 import _poolConquer from "../pool/conquer.js";
 import _poolConsumingTide from "../pool/consuming-tide.js";
 import _poolControlledInstincts from "../pool/controlled-instincts.js";
+import _poolConvergenceOfDominion from "../pool/convergence-of-dominion.js";
 import _poolCoralHelm from "../pool/coral-helm.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCosmiumConfluence from "../pool/cosmium-confluence.js";
@@ -1253,6 +1254,7 @@ const shard: CardShard = {
     _poolConquer,
     _poolConsumingTide,
     _poolControlledInstincts,
+    _poolConvergenceOfDominion,
     _poolCoralHelm,
     _poolCorpseKnight,
     _poolCosmiumConfluence,

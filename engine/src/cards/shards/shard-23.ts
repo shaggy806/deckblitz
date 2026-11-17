@@ -679,6 +679,7 @@ import _poolRakingClaws from "../pool/raking-claws.js";
 import _poolRally from "../pool/rally.js";
 import _poolRalsStaticaster from "../pool/rals-staticaster.js";
 import _poolRamosianCaptain from "../pool/ramosian-captain.js";
+import _poolRanarTheEverWatchful from "../pool/ranar-the-ever-watchful.js";
 import _poolRangersFirebrand from "../pool/rangers-firebrand.js";
 import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
 import _poolRatsOfRath from "../pool/rats-of-rath.js";
@@ -1735,6 +1736,7 @@ const shard: CardShard = {
     _poolRally,
     _poolRalsStaticaster,
     _poolRamosianCaptain,
+    _poolRanarTheEverWatchful,
     _poolRangersFirebrand,
     _poolRaphMikeyTroublemakers,
     _poolRatsOfRath,

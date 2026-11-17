@@ -1008,6 +1008,7 @@ import _poolUnstableMutation from "../pool/unstable-mutation.js";
 import _poolUrbanRetreat from "../pool/urban-retreat.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
+import _poolUrzaAssemblesTheTitans from "../pool/urza-assembles-the-titans.js";
 import _poolUrzasTome from "../pool/urzas-tome.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
@@ -2109,6 +2110,7 @@ const shard: CardShard = {
     _poolUrbanRetreat,
     _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,
+    _poolUrzaAssemblesTheTitans,
     _poolUrzasTome,
     _poolUtromMonitor,
     _poolValentinaAllegraDeFontaine,

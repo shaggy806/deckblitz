@@ -293,6 +293,7 @@ import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenCache from "../pool/elven-cache.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolElvishHealer from "../pool/elvish-healer.js";
+import _poolEmbalmersTools from "../pool/embalmers-tools.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEndbringersRevel from "../pool/endbringers-revel.js";
 import _poolEndlessEvil from "../pool/endless-evil.js";
@@ -1384,6 +1385,7 @@ const shard: CardShard = {
     _poolElvenCache,
     _poolElvenRaftSteerer,
     _poolElvishHealer,
+    _poolEmbalmersTools,
     _poolEmrakulsMessenger,
     _poolEndbringersRevel,
     _poolEndlessEvil,
