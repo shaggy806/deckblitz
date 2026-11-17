@@ -18,6 +18,9 @@ interface RunCheck {
   readonly scenario?: string
   /** The window's size, where the config's 1366x768 isn't what's wanted. */
   readonly size?: { readonly width: number; readonly height: number }
+  /** Never pass priority for the seat: the run is about how the stack
+   * resolves (`pass`, `click:Resolve stack`), so each pass is a step. */
+  readonly hold?: boolean
 }
 
 interface Snapshot {
@@ -130,7 +133,7 @@ function snapshot(page: Page): Promise<Snapshot> {
  * comes as it resolves), and stopping at a decision of this seat's or its
  * priority over anything else. `wait` also waits out the bots, as long as
  * 30 s; any other step stops once the screen is still. */
-async function settle(page: Page, forBots: boolean): Promise<Snapshot> {
+async function settle(page: Page, forBots: boolean, hold = false): Promise<Snapshot> {
   const limit = Date.now() + (forBots ? 30_000 : 10_000)
   let last = await snapshot(page)
   let since = Date.now()
@@ -152,7 +155,8 @@ async function settle(page: Page, forBots: boolean): Promise<Snapshot> {
     // its caster's own targeted ability, 2026-10-30).
     if (now.playing) continue
     if (sawStack && now.stack.length === 0 && !now.deciding) return now
-    if (now.holding && now.ownTop && !now.deciding) {
+    // (Unless the run passes for itself, `hold`.)
+    if (!hold && now.holding && now.ownTop && !now.deciding) {
       // Not there or not enabled yet: the next round tries again.
       await page.getByRole('button', { name: /^Pass \(/ }).click({ timeout: 2_000 }).catch(() => undefined)
       since = Date.now()
@@ -338,13 +342,13 @@ test('run a manual check', async ({ page }) => {
   const hide = panel.getByTitle('Hide the builder')
   await hide.click({ timeout: 3_000 }).catch(() => hide.dispatchEvent('click'))
   console.log(`check: ${title}`)
-  print('start', await settle(page, true), await shoot(0, 'start'))
+  print('start', await settle(page, true, run.hold), await shoot(0, 'start'))
 
   for (const [i, step] of run.steps.entries()) {
     const found = await runStep(page, step)
     // Off the board, so a hover card doesn't cover the next target.
     await page.mouse.move(1, 1)
-    const s = await settle(page, step.trim().toLowerCase() === 'wait')
+    const s = await settle(page, step.trim().toLowerCase() === 'wait', run.hold)
     const shot = await shoot(i + 1, step)
     if (!found) {
       console.log(`FAILED step ${i + 1} "${step}": nothing to act on\n  banner: ${s.banner || '—'}\n  shot: ${shot}`)

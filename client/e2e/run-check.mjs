@@ -6,11 +6,13 @@
 //
 //   node client/e2e/run-check.mjs "<check title, or a piece of it>" [step ...]
 //     [--steps steps.json] [--shots <dir>] [--reuse]
-//     [--scenario board.json] [--size 1920x1080]
+//     [--scenario board.json] [--size 1920x1080] [--hold]
 //
 // --scenario plays a board that isn't a manual check: a scenario's JSON, as
 // the builder downloads it, loaded through the builder's Import (no check
-// title then). --size is the window's, 1366x768 without it.
+// title then). --size is the window's, 1366x768 without it. --hold never
+// passes priority for you, where the run is about how the stack resolves:
+// each pass is then a step (pass, click:Resolve stack).
 //
 // Steps: cast:<hand card> (or hand:), card:<card in a popup, on the board,
 // in hand, in the command zone or shown on top of a library>, stack:<entry on the stack>, click:<button, menu item or labelled box's text>,
@@ -40,6 +42,7 @@ const args = process.argv.slice(2)
 let check
 let shots = join(tmpdir(), 'run-check', new Date().toISOString().replace(/[:.]/g, '-'))
 let reuse = false
+let hold = false
 let scenario
 let size
 const steps = []
@@ -48,6 +51,7 @@ for (let i = 0; i < args.length; i += 1) {
   if (a === '--steps') steps.push(...JSON.parse(readFileSync(args[++i], 'utf8')))
   else if (a === '--shots') shots = resolve(args[++i])
   else if (a === '--reuse') reuse = true
+  else if (a === '--hold') hold = true
   else if (a === '--scenario') scenario = readFileSync(args[++i], 'utf8')
   else if (a === '--size') {
     const m = /^(\d+)x(\d+)$/.exec(args[++i] ?? '')
@@ -79,7 +83,14 @@ if (check === undefined && scenario === undefined) {
 
 const env = {
   ...process.env,
-  RUN_CHECK: JSON.stringify({ check: check ?? '', steps, shots, ...(scenario !== undefined ? { scenario } : {}), ...(size ? { size } : {}) }),
+  RUN_CHECK: JSON.stringify({
+    check: check ?? '',
+    steps,
+    shots,
+    ...(scenario !== undefined ? { scenario } : {}),
+    ...(size ? { size } : {}),
+    ...(hold ? { hold } : {}),
+  }),
 }
 if (!reuse) {
   env.E2E_WEB_PORT ??= '5183'
