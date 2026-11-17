@@ -4697,6 +4697,11 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   `sequence`. A step moving a card to or from a library keeps the ability from being a
   mana ability (605.1a). What it took reads back as `{ paid: … }`. Add a `COST_ACTS` row
   rather than a new `AbilityCost` field. A mana ability with a `do` is activated by hand.
+  `{ kind: "roll-dice", sides: 8 }` is "Roll a d8" in the cost (Clay Golem's "{6}, Roll
+  a d8: Monstrosity X, where X is the result"): rolled last as the cost is paid
+  (601.2h), and that roll is the ability's own (`LastKnownRefs.roll`), so the effect's
+  `{ roll: "total" }` reads it even after another roll — the same ability activated
+  again in response included.
 - `discard: { count, filter?, random? }` — `random: true` is "Discard a card at
   random" (Mage il-Vec, Ogre Shaman): picked at random as it's paid, nothing
   asked; a spell's "As an additional cost to cast this spell, discard a card at

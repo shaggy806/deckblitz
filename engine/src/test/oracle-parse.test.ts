@@ -4083,6 +4083,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(demon.triggered[0].condition).toEqual({ kind: "self-spectacle-paid" });
     const eel = face("{2}{U}: Adapt 2.", "Creature — Fish");
     expect(eel.activated[0].effect).toEqual({ kind: "adapt", amount: 2 });
+    // Monstrosity, and a die rolled as the cost whose result is X (Clay Golem).
+    const golem = face(
+      "{6}, Roll a d8: Monstrosity X, where X is the result. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)",
+      "Artifact Creature — Golem",
+    );
+    expect(golem.activated[0].cost).toEqual({ mana: "{6}", tap: false, do: { kind: "roll-dice", sides: 8 } });
+    expect(golem.activated[0].effect).toEqual({ kind: "monstrosity", amount: { roll: "total" } });
+    expect(face("{3}{G}{G}{G}: Monstrosity 3.", "Creature — Giant").activated[0].effect).toEqual({ kind: "monstrosity", amount: 3 });
   });
 
   it("tribute (rule 702.104): the keyword and its \"if tribute wasn't paid\" trigger", () => {

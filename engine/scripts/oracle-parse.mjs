@@ -1725,6 +1725,9 @@ export function parseCost(text) {
       cost.payLife = { each: Number(m[1]), per: "card-in-hand" };
     }
     else if (part === "Discard your hand") addCostAct(cost, { kind: "discard-hand", who: "you" });
+    // "Roll a d8" (Clay Golem): rolled as the cost is paid (601.2h, last),
+    // its result the ability's `{ roll }`.
+    else if ((m = /^Roll a d(\d+)$/.exec(part))) addCostAct(cost, { kind: "roll-dice", sides: Number(m[1]) });
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
     else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };
     // "Discard a card with mana value X" (Kozilek, the Great Distortion): X
@@ -4433,6 +4436,12 @@ export function parseSentence(sentence, ctx) {
   // Adapt N (rule 701.46a): "If this permanent has no +1/+1 counters on it,
   // put N +1/+1 counters on it."
   if ((m = /^Adapt (\d+)\.$/.exec(s))) return { kind: "adapt", amount: Number(m[1]) };
+  // Monstrosity N (rule 701.37a); "Monstrosity X, where X is the result"
+  // reads the die its cost rolled (Clay Golem).
+  if ((m = /^Monstrosity (\d+|X)(, where X is the result)?\.$/.exec(s))) {
+    const amount = m[1] !== "X" ? Number(m[1]) : m[2] !== undefined ? { roll: "total" } : "x";
+    return { kind: "monstrosity", amount };
+  }
   const re = sentenceRe;
   const amount = (w) => numberOf(w);
   const slot = (phrase) => {

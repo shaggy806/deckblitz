@@ -28334,7 +28334,8 @@ export class Game {
     this.withDecisionSource(source, () => applyEffectSpec({ kind: "sequence", effects: steps }, context));
   }
 
-  /** The objects a cost act took, by event, into `{ paid }` on its stack object. */
+  /** The objects a cost act took, by event, into `{ paid }` on its stack
+   * object, and the roll it made into its `roll`. */
   private recordCostActPaid(onto: ObjectId, since: number): void {
     const kinds: readonly (readonly [ThisWayKind, PaidKind])[] = [
       ["sacrificed", "sacrificed"],
@@ -28351,6 +28352,13 @@ export class Game {
       }
       this.recordPaid(onto, paid, entries.map((entry) => entry.object), leftFrom);
     }
+    // "{6}, Roll a d8: Monstrosity X, where X is the result" (Clay Golem): a
+    // roll made as the cost (601.2h, via 602.2b) is that ability's own, its
+    // `{ roll }` amounts reading it as it resolves even after another roll —
+    // one for the same ability activated again in response (its ruling).
+    const rolled = rollsSince(this.state, since).at(-1);
+    const stacked = this.state.objects[onto];
+    if (rolled !== undefined && stacked !== undefined) stacked.lastKnownRefs = { ...stacked.lastKnownRefs, roll: rolled };
   }
 
   /** {@link resolveManaAbilityNow}, counted in `manaAbilitiesResolving`: what

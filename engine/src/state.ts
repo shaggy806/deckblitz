@@ -2554,7 +2554,10 @@ export interface LastKnownRefs {
    * with the refs so a resolution parked on a decision still has it. */
   readonly manaSpent?: readonly SpentMana[];
   /** For a triggered ability on a roll: that roll, so "those results" are
-   * still its own if another is rolled before it resolves. */
+   * still its own if another is rolled before it resolves. For an activated
+   * ability whose cost rolls a die (`AbilityCost.do`'s `roll-dice` — Clay
+   * Golem's "{6}, Roll a d8: Monstrosity X, where X is the result"): the
+   * cost's roll, the same way. */
   readonly roll?: RollRecord;
   readonly source?: number;
   /** For a fired delayed ability: which stint of its source its effect reads

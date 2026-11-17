@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A die rolled as an activated ability's cost, its result the ability's own — built 2026-11-17
+
+The key `cost:roll-die-as-cost`: the `roll-dice` row `COST_ACTS` already had (paid last, 601.2h) works as
+`AbilityCost.do`; what was missing was whose roll the effect read. `Game.recordCostActPaid` now records the cost's
+roll on the stack object as `LastKnownRefs.roll` (the field a roll trigger already used), so `{ roll: "total" }`
+reads it as the ability resolves after any later roll — the same ability activated again in response included (its
+ruling). The scaffolder reads "Roll a dN" as a cost and "Monstrosity N / X / X, where X is the result". Clay Golem
+(rank 12483). `test/roll-die-cost.test.ts`.
+
 ### A granted alternative cost of a discarded card that shares a color — built 2026-11-17
 
 The key `cost:alternative-cost-discard-shares-color`: `alternativeCostForSpells` takes `discard: { filter?,
