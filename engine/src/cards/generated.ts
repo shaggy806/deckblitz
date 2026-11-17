@@ -1011,6 +1011,7 @@ import _poolAnuridScavenger from "./pool/anurid-scavenger.js";
 import _poolAnuridSwarmsnapper from "./pool/anurid-swarmsnapper.js";
 import _poolAnvilOfBogardan from "./pool/anvil-of-bogardan.js";
 import _poolAnvilwroughtRaptor from "./pool/anvilwrought-raptor.js";
+import _poolAnyaMercilessAngel from "./pool/anya-merciless-angel.js";
 import _poolAnzragTheQuakeMole from "./pool/anzrag-the-quake-mole.js";
 import _poolAnzragsRampage from "./pool/anzrags-rampage.js";
 import _poolAoTheDawnSky from "./pool/ao-the-dawn-sky.js";
@@ -3406,6 +3407,7 @@ import _poolBreakDownTheDoor from "./pool/break-down-the-door.js";
 import _poolBreakDown from "./pool/break-down.js";
 import _poolBreakOfDay from "./pool/break-of-day.js";
 import _poolBreakOpen from "./pool/break-open.js";
+import _poolBreakTheIce from "./pool/break-the-ice.js";
 import _poolBreakTheSpell from "./pool/break-the-spell.js";
 import _poolBreakThroughTheLine from "./pool/break-through-the-line.js";
 import _poolBreakTies from "./pool/break-ties.js";
@@ -19153,6 +19155,7 @@ import _poolObsessiveStitcher from "./pool/obsessive-stitcher.js";
 import _poolObsianusGolem from "./pool/obsianus-golem.js";
 import _poolObsidianAcolyte from "./pool/obsidian-acolyte.js";
 import _poolObsidianBattleAxe from "./pool/obsidian-battle-axe.js";
+import _poolObsidianCharmaw from "./pool/obsidian-charmaw.js";
 import _poolObsidianFireheart from "./pool/obsidian-fireheart.js";
 import _poolObsidianGiant from "./pool/obsidian-giant.js";
 import _poolObsidianObelisk from "./pool/obsidian-obelisk.js";
@@ -28090,6 +28093,7 @@ import _poolTheBattleOfBywater from "./pool/the-battle-of-bywater.js";
 import _poolTheBeaconOfKahless from "./pool/the-beacon-of-kahless.js";
 import _poolTheBeamtownBullies from "./pool/the-beamtown-bullies.js";
 import _poolTheBearsOfLittjara from "./pool/the-bears-of-littjara.js";
+import _poolTheBeastDeathlessPrince from "./pool/the-beast-deathless-prince.js";
 import _poolTheBelligerent from "./pool/the-belligerent.js";
 import _poolTheBestOfBothWorlds from "./pool/the-best-of-both-worlds.js";
 import _poolTheBiblioplex from "./pool/the-biblioplex.js";
@@ -28337,6 +28341,7 @@ import _poolTheSeedcore from "./pool/the-seedcore.js";
 import _poolTheSensationalSheHulk from "./pool/the-sensational-she-hulk.js";
 import _poolTheSentryGoldenGuardian from "./pool/the-sentry-golden-guardian.js";
 import _poolTheSeriema from "./pool/the-seriema.js";
+import _poolTheSerpentSociety from "./pool/the-serpent-society.js";
 import _poolTheSeventhDoctor from "./pool/the-seventh-doctor.js";
 import _poolTheShatteredStatesEra from "./pool/the-shattered-states-era.js";
 import _poolTheShire from "./pool/the-shire.js";
@@ -34293,6 +34298,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnuridSwarmsnapper,
   _poolAnvilOfBogardan,
   _poolAnvilwroughtRaptor,
+  _poolAnyaMercilessAngel,
   _poolAnzragTheQuakeMole,
   _poolAnzragsRampage,
   _poolAoTheDawnSky,
@@ -36688,6 +36694,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBreakDown,
   _poolBreakOfDay,
   _poolBreakOpen,
+  _poolBreakTheIce,
   _poolBreakTheSpell,
   _poolBreakThroughTheLine,
   _poolBreakTies,
@@ -52435,6 +52442,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolObsianusGolem,
   _poolObsidianAcolyte,
   _poolObsidianBattleAxe,
+  _poolObsidianCharmaw,
   _poolObsidianFireheart,
   _poolObsidianGiant,
   _poolObsidianObelisk,
@@ -61372,6 +61380,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheBeaconOfKahless,
   _poolTheBeamtownBullies,
   _poolTheBearsOfLittjara,
+  _poolTheBeastDeathlessPrince,
   _poolTheBelligerent,
   _poolTheBestOfBothWorlds,
   _poolTheBiblioplex,
@@ -61619,6 +61628,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheSensationalSheHulk,
   _poolTheSentryGoldenGuardian,
   _poolTheSeriema,
+  _poolTheSerpentSociety,
   _poolTheSeventhDoctor,
   _poolTheShatteredStatesEra,
   _poolTheShire,
@@ -67588,6 +67598,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/anurid-swarmsnapper": _poolAnuridSwarmsnapper,
   "pool/anvil-of-bogardan": _poolAnvilOfBogardan,
   "pool/anvilwrought-raptor": _poolAnvilwroughtRaptor,
+  "pool/anya-merciless-angel": _poolAnyaMercilessAngel,
   "pool/anzrag-the-quake-mole": _poolAnzragTheQuakeMole,
   "pool/anzrags-rampage": _poolAnzragsRampage,
   "pool/ao-the-dawn-sky": _poolAoTheDawnSky,
@@ -69983,6 +69994,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/break-down": _poolBreakDown,
   "pool/break-of-day": _poolBreakOfDay,
   "pool/break-open": _poolBreakOpen,
+  "pool/break-the-ice": _poolBreakTheIce,
   "pool/break-the-spell": _poolBreakTheSpell,
   "pool/break-through-the-line": _poolBreakThroughTheLine,
   "pool/break-ties": _poolBreakTies,
@@ -85730,6 +85742,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/obsianus-golem": _poolObsianusGolem,
   "pool/obsidian-acolyte": _poolObsidianAcolyte,
   "pool/obsidian-battle-axe": _poolObsidianBattleAxe,
+  "pool/obsidian-charmaw": _poolObsidianCharmaw,
   "pool/obsidian-fireheart": _poolObsidianFireheart,
   "pool/obsidian-giant": _poolObsidianGiant,
   "pool/obsidian-obelisk": _poolObsidianObelisk,
@@ -94667,6 +94680,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-beacon-of-kahless": _poolTheBeaconOfKahless,
   "pool/the-beamtown-bullies": _poolTheBeamtownBullies,
   "pool/the-bears-of-littjara": _poolTheBearsOfLittjara,
+  "pool/the-beast-deathless-prince": _poolTheBeastDeathlessPrince,
   "pool/the-belligerent": _poolTheBelligerent,
   "pool/the-best-of-both-worlds": _poolTheBestOfBothWorlds,
   "pool/the-biblioplex": _poolTheBiblioplex,
@@ -94914,6 +94928,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-sensational-she-hulk": _poolTheSensationalSheHulk,
   "pool/the-sentry-golden-guardian": _poolTheSentryGoldenGuardian,
   "pool/the-seriema": _poolTheSeriema,
+  "pool/the-serpent-society": _poolTheSerpentSociety,
   "pool/the-seventh-doctor": _poolTheSeventhDoctor,
   "pool/the-shattered-states-era": _poolTheShatteredStatesEra,
   "pool/the-shire": _poolTheShire,

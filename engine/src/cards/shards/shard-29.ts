@@ -879,6 +879,7 @@ import _poolTheMasterOfKeys from "../pool/the-master-of-keys.js";
 import _poolTheNiptonLottery from "../pool/the-nipton-lottery.js";
 import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
 import _poolTheSentryGoldenGuardian from "../pool/the-sentry-golden-guardian.js";
+import _poolTheSerpentSociety from "../pool/the-serpent-society.js";
 import _poolTheUrDragon from "../pool/the-ur-dragon.js";
 import _poolTheWarDoctor from "../pool/the-war-doctor.js";
 import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
@@ -1914,6 +1915,7 @@ const shard: CardShard = {
     _poolTheNiptonLottery,
     _poolTheQueenOfDale,
     _poolTheSentryGoldenGuardian,
+    _poolTheSerpentSociety,
     _poolTheUrDragon,
     _poolTheWarDoctor,
     _poolTheWaspWinsomeAvenger,

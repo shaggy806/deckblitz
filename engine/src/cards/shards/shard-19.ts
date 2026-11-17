@@ -672,6 +672,7 @@ import _poolOathOfChandra from "../pool/oath-of-chandra.js";
 import _poolOblivionSower from "../pool/oblivion-sower.js";
 import _poolOboshThePreypiercer from "../pool/obosh-the-preypiercer.js";
 import _poolObservantAlseid from "../pool/observant-alseid.js";
+import _poolObsidianCharmaw from "../pool/obsidian-charmaw.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOgreMarauder from "../pool/ogre-marauder.js";
 import _poolOgreSiegebreaker from "../pool/ogre-siegebreaker.js";
@@ -1761,6 +1762,7 @@ const shard: CardShard = {
     _poolOblivionSower,
     _poolOboshThePreypiercer,
     _poolObservantAlseid,
+    _poolObsidianCharmaw,
     _poolOgreBerserker,
     _poolOgreMarauder,
     _poolOgreSiegebreaker,

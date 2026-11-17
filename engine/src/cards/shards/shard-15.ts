@@ -831,6 +831,7 @@ import _poolTerrasymbiosis from "../pool/terrasymbiosis.js";
 import _poolTerravore from "../pool/terravore.js";
 import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
 import _poolTezzeretsAmbition from "../pool/tezzerets-ambition.js";
+import _poolTheBeastDeathlessPrince from "../pool/the-beast-deathless-prince.js";
 import _poolTheBelligerent from "../pool/the-belligerent.js";
 import _poolTheFourthDoctor from "../pool/the-fourth-doctor.js";
 import _poolTheHowlingAbomination from "../pool/the-howling-abomination.js";
@@ -1812,6 +1813,7 @@ const shard: CardShard = {
     _poolTerravore,
     _poolTerritorialHammerskull,
     _poolTezzeretsAmbition,
+    _poolTheBeastDeathlessPrince,
     _poolTheBelligerent,
     _poolTheFourthDoctor,
     _poolTheHowlingAbomination,

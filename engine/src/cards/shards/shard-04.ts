@@ -86,6 +86,7 @@ import _poolBorosFuryShield from "../pool/boros-fury-shield.js";
 import _poolBoulderbornDragon from "../pool/boulderborn-dragon.js";
 import _poolBraingeyser from "../pool/braingeyser.js";
 import _poolBrainstorm from "../pool/brainstorm.js";
+import _poolBreakTheIce from "../pool/break-the-ice.js";
 import _poolBribery from "../pool/bribery.js";
 import _poolBrineSeer from "../pool/brine-seer.js";
 import _poolBringToLight from "../pool/bring-to-light.js";
@@ -1106,6 +1107,7 @@ const shard: CardShard = {
     _poolBoulderbornDragon,
     _poolBraingeyser,
     _poolBrainstorm,
+    _poolBreakTheIce,
     _poolBribery,
     _poolBrineSeer,
     _poolBringToLight,
