@@ -579,6 +579,7 @@ import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
 import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
 import _poolMisterFantasticReedRichards from "../pool/mister-fantastic-reed-richards.js";
 import _poolMistfolk from "../pool/mistfolk.js";
+import _poolMistySalon from "../pool/misty-salon.js";
 import _poolMolderingKarok from "../pool/moldering-karok.js";
 import _poolMoleWorms from "../pool/mole-worms.js";
 import _poolMorselTheft from "../pool/morsel-theft.js";
@@ -1624,6 +1625,7 @@ const shard: CardShard = {
     _poolMistbladeShinobi,
     _poolMisterFantasticReedRichards,
     _poolMistfolk,
+    _poolMistySalon,
     _poolMolderingKarok,
     _poolMoleWorms,
     _poolMorselTheft,

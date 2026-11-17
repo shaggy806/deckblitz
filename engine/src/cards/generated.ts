@@ -1710,6 +1710,7 @@ import _poolAvacynThePurifier from "./pool/avacyn-the-purifier.js";
 import _poolAvacynianMissionaries from "./pool/avacynian-missionaries.js";
 import _poolAvacynianPriest from "./pool/avacynian-priest.js";
 import _poolAvacynsCollar from "./pool/avacyns-collar.js";
+import _poolAvacynsJudgment from "./pool/avacyns-judgment.js";
 import _poolAvacynsMemorial from "./pool/avacyns-memorial.js";
 import _poolAvacynsPilgrim from "./pool/avacyns-pilgrim.js";
 import _poolAvalancheCaller from "./pool/avalanche-caller.js";
@@ -2109,6 +2110,7 @@ import _poolBarkweaveCrusher from "./pool/barkweave-crusher.js";
 import _poolBarlsCage from "./pool/barls-cage.js";
 import _poolBaronAirshipKingdom from "./pool/baron-airship-kingdom.js";
 import _poolBaronBertramGraywater from "./pool/baron-bertram-graywater.js";
+import _poolBaronHelmutZemo from "./pool/baron-helmut-zemo.js";
 import _poolBaronSengir from "./pool/baron-sengir.js";
 import _poolBaronStruckerHydraOverlord from "./pool/baron-strucker-hydra-overlord.js";
 import _poolBaronyVampire from "./pool/barony-vampire.js";
@@ -17764,6 +17766,7 @@ import _poolMistyKnightHeroForHire from "./pool/misty-knight-hero-for-hire.js";
 import _poolMistyMountainsRaider from "./pool/misty-mountains-raider.js";
 import _poolMistyPalmsOasis from "./pool/misty-palms-oasis.js";
 import _poolMistyRainforest from "./pool/misty-rainforest.js";
+import _poolMistySalon from "./pool/misty-salon.js";
 import _poolMiteOverseer from "./pool/mite-overseer.js";
 import _poolMithrilCoat from "./pool/mithril-coat.js";
 import _poolMitoticManipulation from "./pool/mitotic-manipulation.js";
@@ -21586,6 +21589,7 @@ import _poolRampagingGrowth from "./pool/rampaging-growth.js";
 import _poolRampagingHippo from "./pool/rampaging-hippo.js";
 import _poolRampagingMonument from "./pool/rampaging-monument.js";
 import _poolRampagingRendhorn from "./pool/rampaging-rendhorn.js";
+import _poolRampagingSoulrager from "./pool/rampaging-soulrager.js";
 import _poolRampagingSpiketail from "./pool/rampaging-spiketail.js";
 import _poolRampagingWarMammoth from "./pool/rampaging-war-mammoth.js";
 import _poolRampagingWerewolf from "./pool/rampaging-werewolf.js";
@@ -25432,6 +25436,8 @@ import _poolSmoke from "./pool/smoke.js";
 import _poolSmokebraider from "./pool/smokebraider.js";
 import _poolSmokespewInvoker from "./pool/smokespew-invoker.js";
 import _poolSmokestack from "./pool/smokestack.js";
+import _poolSmokyLoungeMistySalon from "./pool/smoky-lounge-misty-salon.js";
+import _poolSmokyLounge from "./pool/smoky-lounge.js";
 import _poolSmolderInitiate from "./pool/smolder-initiate.js";
 import _poolSmolderingButcher from "./pool/smoldering-butcher.js";
 import _poolSmolderingCrater from "./pool/smoldering-crater.js";
@@ -30503,6 +30509,7 @@ import _poolVernalEquinox from "./pool/vernal-equinox.js";
 import _poolVernalFen from "./pool/vernal-fen.js";
 import _poolVernalSovereign from "./pool/vernal-sovereign.js";
 import _poolVeronicaDissidentScribe from "./pool/veronica-dissident-scribe.js";
+import _poolVerrakWarpedSengir from "./pool/verrak-warped-sengir.js";
 import _poolVertexPaladin from "./pool/vertex-paladin.js";
 import _poolVertigoSpawn from "./pool/vertigo-spawn.js";
 import _poolVertigo from "./pool/vertigo.js";
@@ -35030,6 +35037,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvacynianMissionaries,
   _poolAvacynianPriest,
   _poolAvacynsCollar,
+  _poolAvacynsJudgment,
   _poolAvacynsMemorial,
   _poolAvacynsPilgrim,
   _poolAvalancheCaller,
@@ -35429,6 +35437,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBarlsCage,
   _poolBaronAirshipKingdom,
   _poolBaronBertramGraywater,
+  _poolBaronHelmutZemo,
   _poolBaronSengir,
   _poolBaronStruckerHydraOverlord,
   _poolBaronyVampire,
@@ -51084,6 +51093,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMistyMountainsRaider,
   _poolMistyPalmsOasis,
   _poolMistyRainforest,
+  _poolMistySalon,
   _poolMiteOverseer,
   _poolMithrilCoat,
   _poolMitoticManipulation,
@@ -54906,6 +54916,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRampagingHippo,
   _poolRampagingMonument,
   _poolRampagingRendhorn,
+  _poolRampagingSoulrager,
   _poolRampagingSpiketail,
   _poolRampagingWarMammoth,
   _poolRampagingWerewolf,
@@ -58752,6 +58763,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSmokebraider,
   _poolSmokespewInvoker,
   _poolSmokestack,
+  _poolSmokyLoungeMistySalon,
+  _poolSmokyLounge,
   _poolSmolderInitiate,
   _poolSmolderingButcher,
   _poolSmolderingCrater,
@@ -63823,6 +63836,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVernalFen,
   _poolVernalSovereign,
   _poolVeronicaDissidentScribe,
+  _poolVerrakWarpedSengir,
   _poolVertexPaladin,
   _poolVertigoSpawn,
   _poolVertigo,
@@ -68363,6 +68377,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/avacynian-missionaries": _poolAvacynianMissionaries,
   "pool/avacynian-priest": _poolAvacynianPriest,
   "pool/avacyns-collar": _poolAvacynsCollar,
+  "pool/avacyns-judgment": _poolAvacynsJudgment,
   "pool/avacyns-memorial": _poolAvacynsMemorial,
   "pool/avacyns-pilgrim": _poolAvacynsPilgrim,
   "pool/avalanche-caller": _poolAvalancheCaller,
@@ -68762,6 +68777,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/barls-cage": _poolBarlsCage,
   "pool/baron-airship-kingdom": _poolBaronAirshipKingdom,
   "pool/baron-bertram-graywater": _poolBaronBertramGraywater,
+  "pool/baron-helmut-zemo": _poolBaronHelmutZemo,
   "pool/baron-sengir": _poolBaronSengir,
   "pool/baron-strucker-hydra-overlord": _poolBaronStruckerHydraOverlord,
   "pool/barony-vampire": _poolBaronyVampire,
@@ -84417,6 +84433,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/misty-mountains-raider": _poolMistyMountainsRaider,
   "pool/misty-palms-oasis": _poolMistyPalmsOasis,
   "pool/misty-rainforest": _poolMistyRainforest,
+  "pool/misty-salon": _poolMistySalon,
   "pool/mite-overseer": _poolMiteOverseer,
   "pool/mithril-coat": _poolMithrilCoat,
   "pool/mitotic-manipulation": _poolMitoticManipulation,
@@ -88239,6 +88256,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rampaging-hippo": _poolRampagingHippo,
   "pool/rampaging-monument": _poolRampagingMonument,
   "pool/rampaging-rendhorn": _poolRampagingRendhorn,
+  "pool/rampaging-soulrager": _poolRampagingSoulrager,
   "pool/rampaging-spiketail": _poolRampagingSpiketail,
   "pool/rampaging-war-mammoth": _poolRampagingWarMammoth,
   "pool/rampaging-werewolf": _poolRampagingWerewolf,
@@ -92085,6 +92103,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/smokebraider": _poolSmokebraider,
   "pool/smokespew-invoker": _poolSmokespewInvoker,
   "pool/smokestack": _poolSmokestack,
+  "pool/smoky-lounge-misty-salon": _poolSmokyLoungeMistySalon,
+  "pool/smoky-lounge": _poolSmokyLounge,
   "pool/smolder-initiate": _poolSmolderInitiate,
   "pool/smoldering-butcher": _poolSmolderingButcher,
   "pool/smoldering-crater": _poolSmolderingCrater,
@@ -97156,6 +97176,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vernal-fen": _poolVernalFen,
   "pool/vernal-sovereign": _poolVernalSovereign,
   "pool/veronica-dissident-scribe": _poolVeronicaDissidentScribe,
+  "pool/verrak-warped-sengir": _poolVerrakWarpedSengir,
   "pool/vertex-paladin": _poolVertexPaladin,
   "pool/vertigo-spawn": _poolVertigoSpawn,
   "pool/vertigo": _poolVertigo,

@@ -601,6 +601,7 @@ import _poolRaidersKarve from "../pool/raiders-karve.js";
 import _poolRakdosPitDragon from "../pool/rakdos-pit-dragon.js";
 import _poolRalsDispersal from "../pool/rals-dispersal.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
+import _poolRampagingSoulrager from "../pool/rampaging-soulrager.js";
 import _poolRampantFrogantua from "../pool/rampant-frogantua.js";
 import _poolRankleAndTorbran from "../pool/rankle-and-torbran.js";
 import _poolRashelFistOfTorm from "../pool/rashel-fist-of-torm.js";
@@ -716,6 +717,7 @@ import _poolSlinkingGiant from "../pool/slinking-giant.js";
 import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmeagolHelpfulGuide from "../pool/smeagol-helpful-guide.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
+import _poolSmokyLoungeMistySalon from "../pool/smoky-lounge-misty-salon.js";
 import _poolSnakeOfTheGoldenGrove from "../pool/snake-of-the-golden-grove.js";
 import _poolSnarlingUndorak from "../pool/snarling-undorak.js";
 import _poolSokenzanRenegade from "../pool/sokenzan-renegade.js";
@@ -1567,6 +1569,7 @@ const shard: CardShard = {
     _poolRakdosPitDragon,
     _poolRalsDispersal,
     _poolRampagingHippo,
+    _poolRampagingSoulrager,
     _poolRampantFrogantua,
     _poolRankleAndTorbran,
     _poolRashelFistOfTorm,
@@ -1682,6 +1685,7 @@ const shard: CardShard = {
     _poolSlitheringCryptid,
     _poolSmeagolHelpfulGuide,
     _poolSmokebraider,
+    _poolSmokyLoungeMistySalon,
     _poolSnakeOfTheGoldenGrove,
     _poolSnarlingUndorak,
     _poolSokenzanRenegade,

@@ -62,6 +62,7 @@ import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
 import _poolBargeIn from "../pool/barge-in.js";
 import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
+import _poolBaronHelmutZemo from "../pool/baron-helmut-zemo.js";
 import _poolBaskingRootwalla from "../pool/basking-rootwalla.js";
 import _poolBattlewiseAven from "../pool/battlewise-aven.js";
 import _poolBazaarKrovod from "../pool/bazaar-krovod.js";
@@ -1098,6 +1099,7 @@ const shard: CardShard = {
     _poolBargain,
     _poolBargeIn,
     _poolBarkKnuckleBoxer,
+    _poolBaronHelmutZemo,
     _poolBaskingRootwalla,
     _poolBattlewiseAven,
     _poolBazaarKrovod,

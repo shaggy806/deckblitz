@@ -811,6 +811,7 @@ import _poolSkyshipWeatherlight from "../pool/skyship-weatherlight.js";
 import _poolSkywardEyeProphets from "../pool/skyward-eye-prophets.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
+import _poolSmokyLounge from "../pool/smoky-lounge.js";
 import _poolSmolderInitiate from "../pool/smolder-initiate.js";
 import _poolSmolderingTar from "../pool/smoldering-tar.js";
 import _poolSmolderingWerewolf from "../pool/smoldering-werewolf.js";
@@ -1852,6 +1853,7 @@ const shard: CardShard = {
     _poolSkywardEyeProphets,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
+    _poolSmokyLounge,
     _poolSmolderInitiate,
     _poolSmolderingTar,
     _poolSmolderingWerewolf,

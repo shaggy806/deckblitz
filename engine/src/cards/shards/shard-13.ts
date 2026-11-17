@@ -922,6 +922,7 @@ import _poolVedalkenHumiliator from "../pool/vedalken-humiliator.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolVensersDiffusion from "../pool/vensers-diffusion.js";
+import _poolVerrakWarpedSengir from "../pool/verrak-warped-sengir.js";
 import _poolVeteranBodyguard from "../pool/veteran-bodyguard.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
 import _poolVibrantOutburst from "../pool/vibrant-outburst.js";
@@ -1935,6 +1936,7 @@ const shard: CardShard = {
     _poolVengeance,
     _poolVengefulRebel,
     _poolVensersDiffusion,
+    _poolVerrakWarpedSengir,
     _poolVeteranBodyguard,
     _poolViashinoSandsprinter,
     _poolVibrantOutburst,
