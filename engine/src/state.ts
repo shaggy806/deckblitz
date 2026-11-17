@@ -5713,6 +5713,9 @@ export type PendingEntry =
       /** "If you do, it gains '[trigger]'" — the permission's
        * `gainsTriggered`, the land's from the moment it enters. */
       readonly gainsTriggered?: readonly TriggeredAbility[];
+      /** "If you do, it gains 'If this permanent would leave the battlefield,
+       * exile it instead …'" — the permission's `gainsExileIfLeaves`. */
+      readonly exileIfLeaves?: true;
       /** The permanent whose permission it's played under, for the
        * `land-played` event. */
       readonly permission?: PlayedUnder;

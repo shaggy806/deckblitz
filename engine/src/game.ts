@@ -15973,6 +15973,7 @@ export class Game {
     // (`gainsIf`) never reaches it.
     const landTerms = graveyardTerms ?? underPermission?.terms;
     const gainsTriggered = landTerms?.gainsIf === undefined ? landTerms?.gainsTriggered : undefined;
+    const exileIfLeaves = landTerms?.gainsIf === undefined && landTerms?.gainsExileIfLeaves === true;
     // "Whenever you play a land or cast a spell this way" (Apple of Eden,
     // Isu Relic): a land played under the permission triggers it too.
     const whenPlayed = landTerms?.whenCast?.lands === true ? landTerms.whenCast : undefined;
@@ -15983,6 +15984,7 @@ export class Game {
       from,
       ...(tapped ? { tapped: true as const } : {}),
       ...(gainsTriggered !== undefined ? { gainsTriggered } : {}),
+      ...(exileIfLeaves ? { exileIfLeaves: true as const } : {}),
       ...(playedUnder !== undefined ? { permission: playedUnder } : {}),
       ...(whenPlayed !== undefined ? { whenPlayed } : {}),
     });
@@ -16052,6 +16054,19 @@ export class Game {
         toughness: 0,
         keywords: [],
         grantsTriggered: [...entry.gainsTriggered],
+        untilEndOfTurn: false,
+      });
+      invalidateComputedCache();
+    }
+    // The Eighth Doctor's "it gains 'If this permanent would leave the
+    // battlefield, exile it instead …'", for a land played this way.
+    if (entered && entry.exileIfLeaves === true && this.state.objects[cardId]?.zone === "battlefield") {
+      this.state.objects[cardId].modifiers.push({
+        timestamp: this.freshTimestamp(),
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        grantsExileIfLeaves: true,
         untilEndOfTurn: false,
       });
       invalidateComputedCache();
@@ -23907,6 +23922,21 @@ export class Game {
         toughness: 0,
         keywords: [],
         grantsTriggered: [...riders.gainsTriggered],
+        untilEndOfTurn: false,
+        castRider: true,
+      });
+      invalidateComputedCache();
+    }
+    // The Eighth Doctor's "if you do, it gains 'If this permanent would leave
+    // the battlefield, exile it instead …'": the spell, and the permanent it
+    // becomes (a `castRider`, rule 400.7).
+    if (gainsApply && permissionTerms?.gainsExileIfLeaves === true) {
+      object.modifiers.push({
+        timestamp: this.freshTimestamp(),
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        grantsExileIfLeaves: true,
         untilEndOfTurn: false,
         castRider: true,
       });

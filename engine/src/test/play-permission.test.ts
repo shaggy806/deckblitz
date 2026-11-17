@@ -92,6 +92,7 @@ const TERMS = [
   "entersTapped",
   "entersWith",
   "gainsTriggered",
+  "gainsExileIfLeaves",
   "becomes",
   "whenCast",
 ];

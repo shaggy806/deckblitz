@@ -142,6 +142,12 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside
  *   spell cast this way, and the permanent it becomes (rule 400.7 — a
  *   `castRider`), or the land played this way as it enters, has these for as
  *   long as it's that object.
+ * - `gainsExileIfLeaves`: "if you do, it gains '**If this permanent would
+ *   leave the battlefield, exile it instead of putting it anywhere else**'"
+ *   (The Eighth Doctor): the spell cast this way and the permanent it becomes
+ *   (a `castRider`), or the land played this way as it enters, have that
+ *   ability (`PtModifier.grantsExileIfLeaves`, layer 6 — lost with all
+ *   abilities, rule 613.1f) for as long as it's that object (rule 400.7).
  * - `becomes`: "if you do, it … is a Vampire in addition to its other types"
  *   (The Tomb of Aclazotz): the spell cast this way, on the stack and as the
  *   permanent it becomes (rule 400.7 — a `castRider`), for as long as it's
@@ -209,6 +215,7 @@ export interface PlayTerms {
   readonly entersTapped?: true;
   readonly entersWith?: { readonly kind: string; readonly amount: number };
   readonly gainsTriggered?: readonly TriggeredAbility[];
+  readonly gainsExileIfLeaves?: true;
   readonly becomes?: TypePatch;
   readonly whenCast?: {
     readonly effect: EffectSpec;
@@ -426,6 +433,7 @@ const PLAY_GRANT_KEYS = [
   "entersTapped",
   "entersWith",
   "gainsTriggered",
+  "gainsExileIfLeaves",
   "becomes",
   "whenCast",
   "duration",
