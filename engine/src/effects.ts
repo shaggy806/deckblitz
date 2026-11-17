@@ -6694,6 +6694,12 @@ export type EffectSpec =
        * every kind if several went on at once. */
       readonly of: ObjectRef | "trigger-placement";
       readonly target: ObjectRef | "created";
+      /** "Put **one of each of those kinds** of counters" (Aragorn, Company
+       * Leader's "whenever you put one or more counters on Aragorn, put one
+       * of each of those kinds of counters on up to one other target
+       * creature"): one counter of each kind `of` names, however many of it
+       * there were. */
+      readonly oneOfEach?: true;
     }
   | {
       /**
@@ -21610,8 +21616,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (of === undefined && spec.of !== "trigger-placement") return;
       // The same number of each kind it had (rule 122.8), each put as any
       // counter is — a -1/-1 among them too. Read once, before any goes on.
-      const kinds: readonly (readonly [string, number])[] =
+      const read: readonly (readonly [string, number])[] =
         of !== undefined ? Object.entries(ctx.counterKindsOf(of)) : ctx.triggerCounters().map((c) => [c.kind, c.amount] as const);
+      // "One of each of those kinds": each kind once, though two placements
+      // of it fired the trigger together (two wither creatures).
+      const kinds =
+        spec.oneOfEach === true
+          ? [...new Set(read.filter(([, n]) => n > 0).map(([kind]) => kind))].map((kind) => [kind, 1] as const)
+          : read;
       // One instruction: every kind goes on as one event (rule 603.2c).
       ctx.simultaneously(() => {
         for (const target of onto) {
