@@ -4339,7 +4339,15 @@ export function parseSentence(sentence, ctx) {
     // creating ability's own target is `watching`, what "self" in the trigger
     // reads as.
     const named = /^Whenever target creature /.test(clause);
-    const triggers = parseTrigger(named ? clause.replace("target creature", "~") : clause);
+    // "Whenever a creature [you control] dealt damage this way dies this
+    // turn" (Ghired's Belligerence, Reckless Blaze): each creature the
+    // resolution dealt damage, watched as "self"; "you control" read as it
+    // last existed (rule 603.10a).
+    const dealtThisWay = /^Whenever a creature( you control)? dealt damage this way dies$/.exec(clause);
+    const triggers =
+      dealtThisWay !== null
+        ? [{ on: "dies", who: "self", ...(dealtThisWay[1] !== undefined ? { filter: { controlledBy: "you" } } : {}) }]
+        : parseTrigger(named ? clause.replace("target creature", "~") : clause);
     if (triggers === null || triggers.length !== 1) return null;
     if (named && triggers[0].who !== "self") return null;
     const inner = { ...ctx, spell: false, targets: [], it: itOf(triggers), departed: departedOf(triggers) };
@@ -4357,6 +4365,7 @@ export function parseSentence(sentence, ctx) {
         ...(/^until your next turn$/i.test(m[1]) ? { until: "until-your-next-turn" } : {}),
         ...(inner.targets.length > 0 ? { targets: inner.targets } : {}),
         ...(named ? { watching: ctx.target("creature") } : {}),
+        ...(dealtThisWay !== null ? { watching: { thisWay: "dealt-damage" } } : {}),
       },
       effect,
       text: `${clause}${m[1] === "" ? " this turn" : ""}, ${m[3]}.`,

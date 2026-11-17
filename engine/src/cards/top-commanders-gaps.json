@@ -2830,7 +2830,8 @@
   "effect:delayed-trigger-next-activation",
   "effect:delayed-trigger-next-activation",
   "amount:excess-damage-of-trigger-event",
-  "trigger:gains-life-from-source-filter"
+  "trigger:gains-life-from-source-filter",
+  "trigger:watched-object-own-controller"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

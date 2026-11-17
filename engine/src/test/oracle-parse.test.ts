@@ -19955,6 +19955,32 @@ describe("a gain a spell caused", () => {
   });
 });
 
+describe("a creature you control dealt damage this way dies this turn", () => {
+  it("reads Reckless Blaze whole", () => {
+    const face = parseFace({
+      name: "Test Blaze",
+      type_line: "Sorcery — Lesson",
+      oracle_text:
+        "Test Blaze deals 5 damage to each creature. Whenever a creature you control dealt damage this way dies this turn, add {R}.",
+    });
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage-all", amount: 5, filter: { type: "creature" } },
+        {
+          kind: "delayed-trigger",
+          at: {
+            whenever: { on: "dies", who: "self", filter: { controlledBy: "you" } },
+            watching: { thisWay: "dealt-damage" },
+          },
+          effect: { kind: "add-mana", mana: "R", amount: 1 },
+          text: "Whenever a creature you control dealt damage this way dies this turn, add {R}.",
+        },
+      ],
+    });
+  });
+});
+
 describe("the next loyalty ability copied", () => {
   it("reads Jaya's Phoenix's delayed copy, once for a player and once for a planeswalker", () => {
     const face = parseFace({

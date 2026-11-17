@@ -1357,7 +1357,10 @@ this way" is a `double-counters-all` over `{ type: "creature", thisWay:
 "counters-put" }`, Spectacular Showdown's goad a `goad` with that filter — the
 kind isn't asked, so use it only when nothing else was put), and
 `"dealt-damage"` (permanents it dealt damage to, none prevented — Ghired's
-Belligerence, through a `delayed-trigger` `watching` them), `"counters-placed"` (counters it put on permanents, one by one, as many as
+Belligerence, through a `delayed-trigger` `watching` them; Reckless Blaze's
+"a creature **you control** dealt damage this way" is the `dies` trigger's
+`filter: { controlledBy: "you" }`, read off each watched creature as it last
+existed, "you" the delayed ability's controller), `"counters-placed"` (counters it put on permanents, one by one, as many as
 actually went on — Doubling Season's included; Craig Boone, Novac Guard),
 `"counters-removed"` (counters it removed, one by one — Take's "remove all
 +1/+1 counters from target creature you control. Draw that many cards"; with
