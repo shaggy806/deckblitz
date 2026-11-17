@@ -17145,7 +17145,7 @@ export function ptSetValue(amount: EffectAmount, ctx: ResolutionContext): number
  * sign: "-X/-X" is written `{ product: ["x", -1] }`, and its X is clamped at
  * 0 before the sign applies (rule 107.1b), as is the X of "+X/+X, where X is
  * its power". A doubling (`{ powerOf, doubling: true }`) reads the value as
- * it is: doubling a -2 power makes it -4 (rules 107.1b, 701.10d).
+ * it is: doubling a -2 power makes it -4 (rules 107.1b, 701.10c).
  */
 export function ptChangeValue(
   amount: EffectAmount,
@@ -17155,7 +17155,7 @@ export function ptChangeValue(
   if (typeof amount === "number") return amount;
   if (typeof amount === "object" && "product" in amount) {
     // "Triple its power": +X where X is twice its power, a -2 power made -6
-    // as a doubling is (rule 701.10d): a doubling read in a product keeps
+    // as a doubling is (rule 701.10c): a doubling read in a product keeps
     // its sign — `{ product: [2, { powerOf: 0, doubling: true }] }`.
     const signedRead = (a: EffectAmount): boolean =>
       typeof a === "object" && ("powerOf" in a || "toughnessOf" in a) && a.doubling === true;

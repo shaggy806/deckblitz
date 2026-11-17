@@ -108,7 +108,7 @@ describe("negative amounts (rule 107.1b)", () => {
     expect(toughness(game, bears)).toBe(2);
   });
 
-  it("doubling a negative power makes it more negative (Unleash Fury, rule 701.10d)", () => {
+  it("doubling a negative power makes it more negative (Unleash Fury, rule 701.10c)", () => {
     const game = setUp();
     const bears = shrunkBears(game);
     const fury = game.debugSpawn("Unleash Fury", A, "hand");

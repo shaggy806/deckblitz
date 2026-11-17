@@ -117,7 +117,7 @@ describe("Tifa's Limit Break: tiered, doubling or tripling power and toughness",
     expect(pt(game, bear)).toEqual({ power: 6, toughness: 6 });
   });
 
-  it("a negative power is tripled as it is (rule 701.10d): -1/3 becomes -3/9", () => {
+  it("a negative power is tripled as it is (rule 701.10c): -1/3 becomes -3/9", () => {
     const { game } = table();
     lands(game, "Forest", 8);
     const bear = spawn(game, "Grizzly Bears");
