@@ -30,6 +30,7 @@ import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
 import _poolAnjesRavager from "../pool/anjes-ravager.js";
 import _poolAqueousAria from "../pool/aqueous-aria.js";
+import _poolAragornCompanyLeader from "../pool/aragorn-company-leader.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
 import _poolArchangelOfWrath from "../pool/archangel-of-wrath.js";
 import _poolArchonOfAbsolution from "../pool/archon-of-absolution.js";
@@ -412,6 +413,7 @@ import _poolImprovisedClub from "../pool/improvised-club.js";
 import _poolImpsTaunt from "../pool/imps-taunt.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolIndoctrinationAttendant from "../pool/indoctrination-attendant.js";
+import _poolIndulge from "../pool/indulge.js";
 import _poolInfernalPet from "../pool/infernal-pet.js";
 import _poolIngeniousSmith from "../pool/ingenious-smith.js";
 import _poolInitiateOfBlood from "../pool/initiate-of-blood.js";
@@ -1015,6 +1017,7 @@ const shard: CardShard = {
     _poolAnglerDrake,
     _poolAnjesRavager,
     _poolAqueousAria,
+    _poolAragornCompanyLeader,
     _poolArcboundWhelp,
     _poolArchangelOfWrath,
     _poolArchonOfAbsolution,
@@ -1397,6 +1400,7 @@ const shard: CardShard = {
     _poolImpsTaunt,
     _poolIncandescentSoulstoke,
     _poolIndoctrinationAttendant,
+    _poolIndulge,
     _poolInfernalPet,
     _poolIngeniousSmith,
     _poolInitiateOfBlood,

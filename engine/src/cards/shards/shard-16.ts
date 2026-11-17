@@ -780,6 +780,7 @@ import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSelflessGlyphweaver from "../pool/selfless-glyphweaver.js";
 import _poolSemestersEnd from "../pool/semesters-end.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
+import _poolSengirTheDarkBaron from "../pool/sengir-the-dark-baron.js";
 import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
 import _poolSentinelsMark from "../pool/sentinels-mark.js";
 import _poolSerumPowder from "../pool/serum-powder.js";
@@ -1882,6 +1883,7 @@ const shard: CardShard = {
     _poolSelflessGlyphweaver,
     _poolSemestersEnd,
     _poolSenateCourier,
+    _poolSengirTheDarkBaron,
     _poolSentinelOfTheNamelessCity,
     _poolSentinelsMark,
     _poolSerumPowder,

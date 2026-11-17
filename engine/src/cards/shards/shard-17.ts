@@ -553,6 +553,7 @@ import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMindbenderSpores from "../pool/mindbender-spores.js";
 import _poolMindsparker from "../pool/mindsparker.js";
+import _poolMindstormCrown from "../pool/mindstorm-crown.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
 import _poolMirkwoodChanneler from "../pool/mirkwood-channeler.js";
@@ -1582,6 +1583,7 @@ const shard: CardShard = {
     _poolMilitaryIntelligence,
     _poolMindbenderSpores,
     _poolMindsparker,
+    _poolMindstormCrown,
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
     _poolMirkwoodChanneler,

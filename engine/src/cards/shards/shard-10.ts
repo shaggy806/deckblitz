@@ -300,6 +300,7 @@ import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
 import _poolEvilEyeOfUrborg from "../pool/evil-eye-of-urborg.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
+import _poolExcess from "../pool/excess.js";
 import _poolExocomp from "../pool/exocomp.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
 import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolEverflowingChalice,
     _poolEvilEyeOfUrborg,
     _poolExcavatedWall,
+    _poolExcess,
     _poolExocomp,
     _poolExtinguisherBattleship,
     _poolFairgroundsWarden,

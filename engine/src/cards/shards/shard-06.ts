@@ -457,6 +457,7 @@ import _poolImiStatue from "../pool/imi-statue.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
 import _poolImprovisedArmor from "../pool/improvised-armor.js";
+import _poolIndulgeExcess from "../pool/indulge-excess.js";
 import _poolInfernalCaretaker from "../pool/infernal-caretaker.js";
 import _poolInfernoTitan from "../pool/inferno-titan.js";
 import _poolInfuriate from "../pool/infuriate.js";
@@ -1496,6 +1497,7 @@ const shard: CardShard = {
     _poolImmovableRod,
     _poolImperialAerosaur,
     _poolImprovisedArmor,
+    _poolIndulgeExcess,
     _poolInfernalCaretaker,
     _poolInfernoTitan,
     _poolInfuriate,

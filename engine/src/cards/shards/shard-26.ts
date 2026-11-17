@@ -904,6 +904,7 @@ import _poolTheCityOnTheEdgeOfForever from "../pool/the-city-on-the-edge-of-fore
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheEnigmaJewel from "../pool/the-enigma-jewel.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
+import _poolTheFirstTyrannicWar from "../pool/the-first-tyrannic-war.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
 import _poolTheMouthOfSauron from "../pool/the-mouth-of-sauron.js";
@@ -1971,6 +1972,7 @@ const shard: CardShard = {
     _poolTheEchoverseFulcrum,
     _poolTheEnigmaJewel,
     _poolTheFireCrystal,
+    _poolTheFirstTyrannicWar,
     _poolTheGreatHenge,
     _poolTheMagicMirror,
     _poolTheMouthOfSauron,

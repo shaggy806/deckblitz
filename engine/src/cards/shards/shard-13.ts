@@ -461,6 +461,7 @@ import _poolKjeldoranHomeGuard from "../pool/kjeldoran-home-guard.js";
 import _poolKnacksawClique from "../pool/knacksaw-clique.js";
 import _poolKnightOfGrace from "../pool/knight-of-grace.js";
 import _poolKnightOfMeadowgrain from "../pool/knight-of-meadowgrain.js";
+import _poolKnightsOfTheBlackRose from "../pool/knights-of-the-black-rose.js";
 import _poolKorCauseOfVengeance from "../pool/kor-cause-of-vengeance.js";
 import _poolKotisSibsigChampion from "../pool/kotis-sibsig-champion.js";
 import _poolKrakenHatchling from "../pool/kraken-hatchling.js";
@@ -1475,6 +1476,7 @@ const shard: CardShard = {
     _poolKnacksawClique,
     _poolKnightOfGrace,
     _poolKnightOfMeadowgrain,
+    _poolKnightsOfTheBlackRose,
     _poolKorCauseOfVengeance,
     _poolKotisSibsigChampion,
     _poolKrakenHatchling,

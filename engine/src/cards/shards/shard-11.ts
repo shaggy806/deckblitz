@@ -364,6 +364,7 @@ import _poolGlacialGrasp from "../pool/glacial-grasp.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGlaringSpotlight from "../pool/glaring-spotlight.js";
 import _poolGloom from "../pool/gloom.js";
+import _poolGluttonousHellkite from "../pool/gluttonous-hellkite.js";
 import _poolGnostroVoiceOfTheCrags from "../pool/gnostro-voice-of-the-crags.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
 import _poolGoblinArchaeologist from "../pool/goblin-archaeologist.js";
@@ -1411,6 +1412,7 @@ const shard: CardShard = {
     _poolGlacialPlating,
     _poolGlaringSpotlight,
     _poolGloom,
+    _poolGluttonousHellkite,
     _poolGnostroVoiceOfTheCrags,
     _poolGoShintaiOfLifesOrigin,
     _poolGoblinArchaeologist,

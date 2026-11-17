@@ -630,6 +630,7 @@ import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
+import _poolPowerSurge from "../pool/power-surge.js";
 import _poolPredatoryHunger from "../pool/predatory-hunger.js";
 import _poolPredatoryUrge from "../pool/predatory-urge.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
@@ -1678,6 +1679,7 @@ const shard: CardShard = {
     _poolPledgeOfUnity,
     _poolPlunderingPirate,
     _poolPowerFist,
+    _poolPowerSurge,
     _poolPredatoryHunger,
     _poolPredatoryUrge,
     _poolPriestOfForgottenGods,
