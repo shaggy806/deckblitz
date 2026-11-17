@@ -2530,6 +2530,7 @@
   "bug:cda-count-multiplier",
   "amount:type-count",
   "filter:not-put-into-graveyard-this-combat",
+  "target:cards-from-targeted-players-graveyard",
   "cost:exiled-card-ref",
   "effect:cost-exiled-cards-this-way",
   "amount:highest-life-total",

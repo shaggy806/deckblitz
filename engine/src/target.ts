@@ -484,8 +484,10 @@ export type TargetSpec =
        * `"x"` is the spell's own X: "destroy **up to X** target artifacts"
        * (Pest Infestation). X is announced before targets are chosen (rule
        * 601.2b–c), so a choice is judged at the X it was cast with — see
-       * {@link specsAtX}. Only on a spell or activated ability whose group
-       * is its only slot (Shigeki, Jukai Visionary's channel). A whole
+       * {@link specsAtX}. On a spell or activated ability, its group the
+       * only slot (Shigeki, Jukai Visionary's channel) or after fixed ones
+       * ("exile X target cards from target player's graveyard" — Suffer the
+       * Past, with `sameController: { slot: 0 }`). A whole
        * multiple of X is `{ product: ["x", 2] }` — "exile **up to twice X**
        * target cards from graveyards" (Erebos's Intervention), judged the
        * same way ({@link xMultiple}).

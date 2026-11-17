@@ -7313,6 +7313,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Not put into a graveyard this combat (2026-11-17).** `filter:not-put-into-graveyard-this-combat`: a `to-graveyard` journal entry made during a combat phase carries that phase's `combat`, so `not: { journaled: { what: "to-graveyard", thisCombat: true } }` is "that wasn't put there this combat". Storrev, Devkarin Lich.
 
+**X target cards from target player's graveyard (2026-11-17, found built).** `target:cards-from-targeted-players-graveyard`, no engine code: an `any-number` group of `card-in-graveyard` with `min`/`max: "x"` and `sameController: { slot: 0 }` (Witness the Future's tie). Suffer the Past; Drafna's Restoration (any number, `put-on-libraries` of `{ targetsFrom: 1 }`: rule 401.4 has the cards' owner arrange them).
+
 **Each opponent chooses fame or fortune (2026-11-04).** `effect:fame-or-fortune`, no engine code: a `vote` with `choose` over named options, `for-each-vote` per option, and `choose-permanents` of `controlledByPlayer: "that-player"` for what isn't targeted. Seize the Spotlight.
 
 **The chosen type in addition (2026-11-04).** `static:is-chosen-type`, no engine code: `addsChosenCreatureType` beside an `ofChosenType` lord (Metallic Mimic and Morophon's lines), both read by the scaffolder. Adaptive Automaton.

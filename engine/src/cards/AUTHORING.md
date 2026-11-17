@@ -4250,7 +4250,9 @@ graveyard" (Nullmage Advocate) is that over `whose: "opponent"`, one
 opponent's — while `sameController: { slot: n }` ties every member to slot
 `n`'s player: "target player shuffles up to four target cards **from their
 graveyard**" (Witness the Future: `["player", { kind: "any-number", of: {
-kind: "card-in-graveyard" }, max: 4, sameController: { slot: 0 } }]`). The
+kind: "card-in-graveyard" }, max: 4, sameController: { slot: 0 } }]`), and
+"exile **X** target cards from target player's graveyard" (Suffer the Past)
+the same group with `min: "x", max: "x"`. The
 choosers narrow by it; as it resolves, a slot whose player is no longer the
 other's is illegal (rule 608.2b). A group must be the list's last slot, so
 two cards from one graveyard *before* another target (the Advocates' "…
