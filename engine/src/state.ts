@@ -5453,7 +5453,7 @@ export interface DelayedWheneverWatch {
   readonly once?: true;
   /** This permanent leaving its controller's control fires it too —
    * `DelayedWhenever.orLosesControl`. */
-  readonly orLosesControl?: { readonly object: ObjectId; readonly stint: number };
+  readonly orLosesControl?: { readonly object: ObjectId; readonly stint: number; readonly leavesOnly?: true };
   /** The turn it was made on. */
   readonly turn: number;
 }

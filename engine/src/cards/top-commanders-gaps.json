@@ -77,6 +77,7 @@
     "effect:player-spell-tax-this-turn",
     "bug:simultaneous-move-with-choice",
     "effect:phase-out-while-you-control-source",
+    "effect:phase-out-while-source-tapped",
     "effect:mill-from-bottom",
     "effect:text-change-token-colors",
     "decision:choose-from-batch",

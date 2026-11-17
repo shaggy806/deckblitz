@@ -45527,6 +45527,14 @@ controlledBy,
           }
         }
       },
+      phaseIn: (target) => {
+        // "That permanent phases in" (rule 702.26c): only one phased out
+        // directly; one out with its host comes back only with it (702.26g).
+        if (target.kind !== "object") return;
+        const object = this.state.objects[target.object];
+        if (object?.zone !== "phased-out" || object.phasedOut?.with !== undefined) return;
+        this.phaseIn([target.object]);
+      },
       phaseOut: (what) => {
         // "…until this leaves the battlefield" (rule 610.4): not at all if it
         // already has, or is back as a new object (610.4b-c). Phased out
@@ -59784,7 +59792,15 @@ controlledBy,
         ...(at.player !== undefined ? { player: at.player } : {}),
         ...(watching !== undefined ? { watching } : {}),
         ...(at.once === true ? { once: true as const } : {}),
-        ...(losing !== undefined ? { orLosesControl: { object: losing.id, stint: losing.zoneChangeCount ?? 0 } } : {}),
+        ...(losing !== undefined
+          ? {
+              orLosesControl: {
+                object: losing.id,
+                stint: losing.zoneChangeCount ?? 0,
+                ...(at.orLeavesOnly === true ? { leavesOnly: true as const } : {}),
+              },
+            }
+          : {}),
         turn: this.state.turn.number,
       };
     } else if ("thatCombat" in at) {
@@ -60112,7 +60128,14 @@ controlledBy,
       if ("whenever" in at && at.orLosesControl !== undefined) {
         // "When this creature becomes untapped or you lose control of it"
         // (Coffin Queen): whichever comes first.
-        if (at.orLosesControl.object !== event.object || at.orLosesControl.stint !== stint || trigger.controller !== from) {
+        // "…or leaves the battlefield" (The Pandorica): its leaving alone,
+        // whoever controls it then.
+        const leavesOnly = at.orLosesControl.leavesOnly === true;
+        if (
+          at.orLosesControl.object !== event.object ||
+          at.orLosesControl.stint !== stint ||
+          (leavesOnly ? !left : trigger.controller !== from)
+        ) {
           continue;
         }
         if (at.once === true) usedUp.push(trigger);

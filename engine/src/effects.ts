@@ -576,10 +576,21 @@ export interface DelayedWhenever {
    * With `once`, whichever comes first uses it up.
    */
   readonly orLosesControl?: ObjectRef;
+  /**
+   * "When The Pandorica becomes untapped **or leaves the battlefield**": this
+   * permanent — a slot, `"source"` or `"trigger-object"`, on the battlefield
+   * as this resolves — leaving the battlefield fires it too, whoever controls
+   * it then; a change of control doesn't. With `once`, whichever comes first
+   * uses it up. Not with `orLosesControl`.
+   */
+  readonly orLeaves?: ObjectRef;
 }
 
 /** A {@link DelayedWhenever} with what it names read as it's set up. */
-export type DelayedWheneverAt = Omit<DelayedWhenever, "watching" | "orLosesControl" | "byPlayer" | "until"> & {
+export type DelayedWheneverAt = Omit<DelayedWhenever, "watching" | "orLosesControl" | "orLeaves" | "byPlayer" | "until"> & {
+  /** With `orLosesControlOf`: only its leaving the battlefield fires it —
+   * `DelayedWhenever.orLeaves`. */
+  readonly orLeavesOnly?: true;
   readonly until?: WatchExpiry;
   /** Whose next turn `until` waits for, when it isn't the controller's. */
   readonly turnOf?: PlayerId;
@@ -9218,8 +9229,18 @@ export type EffectSpec =
        * first moment it isn't so (rule 611.2b), the source phasing out included
        * (702.26f: the duration ignores phased-out objects); nothing at all if
        * it already isn't so as this resolves, and the permanent still phases
-       * out. */
-      readonly cantPhaseIn?: "while-source" | "while-you-control-source";
+       * out. `"while-source-tapped"`: "for as long as The Pandorica **remains
+       * tapped**" — ended too as the source untaps (`endWhileTappedEffects`);
+       * nothing held if it's untapped as this resolves. */
+      readonly cantPhaseIn?: "while-source" | "while-you-control-source" | "while-source-tapped";
+    }
+  | {
+      /** "**That permanent phases in**" (rule 702.26c — The Pandorica's
+       * delayed trigger): a directly phased-out permanent phases in now, with
+       * whatever phased out indirectly with it (702.26g). Nothing if it
+       * isn't phased out, or phased out only with something else. */
+      readonly kind: "phase-in";
+      readonly target: ObjectRef;
     }
   | {
       /** "Manifest the top card of your library" (rule 701.40), or cloak it
@@ -14675,8 +14696,10 @@ export interface EffectApi {
     readonly scopeTo?: PlayerId;
     readonly untilSourceLeaves?: boolean;
     readonly tappedOnReturn?: boolean;
-    readonly cantPhaseIn?: "while-source" | "while-you-control-source";
+    readonly cantPhaseIn?: "while-source" | "while-you-control-source" | "while-source-tapped";
   }): void;
+  /** See the `"phase-in"` {@link EffectSpec}. */
+  phaseIn(target: TargetRef): void;
   /** `player` manifests (or cloaks) the top card of their library — see the
    * `"manifest"` {@link EffectSpec}; `library` is another player's library
    * it comes from (its `from`). */
@@ -21312,7 +21335,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           player = resolvePlayerRef(spec.at.byPlayer, ctx);
           if (player === undefined) return;
         }
-        const { watching, orLosesControl, byPlayer: _byPlayer, until: lasts, ...rest } = spec.at;
+        const { watching, orLosesControl: losesControl, orLeaves, byPlayer: _byPlayer, until: lasts, ...rest } = spec.at;
+        const orLosesControl = losesControl ?? orLeaves;
         // "Until the end of that player's next turn": whose, as this resolves.
         let turnOf: PlayerId | undefined;
         if (typeof lasts === "object") {
@@ -21359,6 +21383,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             ...(player !== undefined ? { player } : {}),
             ...(watched !== undefined ? { watched } : {}),
             ...(losing?.kind === "object" ? { orLosesControlOf: losing.object } : {}),
+            ...(losing?.kind === "object" && losesControl === undefined ? { orLeavesOnly: true as const } : {}),
           },
           spec.effect,
           spec.text,
@@ -23185,6 +23210,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.phaseOut({ target, ...until });
+      return;
+    }
+    case "phase-in": {
+      const target = objectRefAct(spec.target, ctx);
+      if (target !== undefined) ctx.phaseIn(target);
       return;
     }
     case "create-token":
