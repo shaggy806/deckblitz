@@ -50,6 +50,33 @@ function serverTraffic(page: Page): string[] {
   return sent
 }
 
+/**
+ * Alice passes her turns (Auto-pass stops at her own, so Pass Turn there)
+ * until a bot's permanent is on the board. When she is the one who goes
+ * first she ends that turn with eight cards, having played none, and the
+ * game waits on her cleanup discard: answered here. Unanswered, nothing ever
+ * reached the board and the test failed about one run in four, whenever the
+ * roll put her first ("fails on and off on main", 2026-11-16).
+ */
+async function passUntilTheBoardHasSomething(page: Page): Promise<void> {
+  await expect
+    .poll(
+      async () => {
+        const discard = page.locator('.decision-banner', { hasText: 'Discard to hand size' })
+        if (await discard.isVisible().catch(() => false)) {
+          // The fan overlaps its cards: a click sent to the tile itself.
+          await page.locator('.hand-card .card-tile').first().dispatchEvent('click')
+          await discard.getByRole('button', { name: 'Discard' }).click({ timeout: 2_000 }).catch(() => {})
+        }
+        const passTurn = page.getByRole('button', { name: 'Pass Turn' })
+        if (await passTurn.isEnabled().catch(() => false)) await passTurn.click().catch(() => {})
+        return page.locator('.board-entry').count()
+      },
+      { timeout: 60_000, intervals: [1_000] },
+    )
+    .toBeGreaterThan(0)
+}
+
 const typesOf = (sent: readonly string[]): string[] =>
   sent.map((s) => (JSON.parse(s) as { type: string }).type).filter((t) => t !== 'event-deltas')
 
@@ -72,21 +99,12 @@ test('a local blitz plays against three bots in the page, never on the room serv
   await expect(page.locator('[data-player-id]')).toHaveCount(4, { timeout: 20_000 })
 
   // The bots play. Alice keeps her hand if asked and never plays a card, so
-  // whatever reaches the battlefield is a bot's: pass her turns (Auto-pass
-  // stops at her own, so Pass Turn there) until something does.
+  // whatever reaches the battlefield is a bot's: pass her turns until
+  // something does.
   const keep = page.getByRole('button', { name: /^Keep/ })
   if (await keep.isVisible({ timeout: 5_000 }).catch(() => false)) await keep.click()
   await page.getByRole('button', { name: 'Auto-pass' }).click()
-  await expect
-    .poll(
-      async () => {
-        const passTurn = page.getByRole('button', { name: 'Pass Turn' })
-        if (await passTurn.isEnabled().catch(() => false)) await passTurn.click().catch(() => {})
-        return page.locator('.board-entry').count()
-      },
-      { timeout: 60_000, intervals: [1_000] },
-    )
-    .toBeGreaterThan(0)
+  await passUntilTheBoardHasSomething(page)
 
   // The numbers a slower machine is measured by (the plan's step 6).
   const stats = await page.evaluate(
@@ -115,16 +133,7 @@ test('a local game picks up again after a reload, where it was', async ({ page, 
   const keep = page.getByRole('button', { name: /^Keep/ })
   if (await keep.isVisible({ timeout: 5_000 }).catch(() => false)) await keep.click()
   await page.getByRole('button', { name: 'Auto-pass' }).click()
-  await expect
-    .poll(
-      async () => {
-        const passTurn = page.getByRole('button', { name: 'Pass Turn' })
-        if (await passTurn.isEnabled().catch(() => false)) await passTurn.click().catch(() => {})
-        return page.locator('.board-entry').count()
-      },
-      { timeout: 60_000, intervals: [1_000] },
-    )
-    .toBeGreaterThan(0)
+  await passUntilTheBoardHasSomething(page)
   // Let a save land (at most a second after a frame), then reload.
   await page.waitForTimeout(2_500)
   const before = await page.locator('.board-entry').count()

@@ -295,7 +295,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
-- **`local-blitz.spec.ts`'s reload test fails on and off on `main`** (2026-11-16): "a local game picks up again after a reload, where it was" polls 60 s for a permanent on the board and saw none, failing both tries in E2E runs 43931281602 and 43946444711 (before batch 333 landed) and 43993521490 (after it), passing in the four runs between. Read its trace and screenshot (the run's artifacts) before calling it load: a local game that stops advancing would look the same.
 - **`exile-from-library.spec.ts` times out under load** — its 4-player peel tests (lines 181, 245) failed three times on 2026-11-14 while four agents ran, and passed each time alone; a load flake in the Playwright quick set.
 - **`bot:ab` runs out of worker memory** (2026-11-11): 39 of the first 40 games ended "JS heap
   out of memory" at 18 workers, with no change to the state's shape between the two builds
