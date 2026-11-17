@@ -1256,6 +1256,30 @@ export const transmute = (cost: string, manaValue: number, text: string): Activa
 });
 
 /**
+ * Transfigure (rule 702.71a): "[Cost], Sacrifice this permanent: Search your
+ * library for a creature card with the same mana value as this permanent and
+ * put it onto the battlefield. Then shuffle your library. Activate only as a
+ * sorcery." Transmute's search from the battlefield (its ruling): the mana
+ * value is the sacrificed permanent's as it last existed there (rule 608.2h,
+ * `manaValueOf: "source"`), so a copy's own counts. Put the printed line, its
+ * reminder included, in the card's `text`.
+ */
+export const transfigure = (cost: string): ActivatedAbility => ({
+  cost: { mana: cost, tap: false, sacrifice: "self" },
+  sorcerySpeed: true,
+  targets: [],
+  effect: {
+    kind: "search-library",
+    filter: { type: "creature", manaValue: { op: "eq", n: { amount: { manaValueOf: "source" } } } },
+    destination: "battlefield",
+    min: 0,
+    max: 1,
+  },
+  resolve: null,
+  text: `Transfigure ${cost}`,
+});
+
+/**
  * Annihilator N (rule 702.86): "Whenever this creature attacks, defending
  * player sacrifices N permanents." The defending player is the one it
  * attacks, or the controller of the planeswalker it attacks. A triggered

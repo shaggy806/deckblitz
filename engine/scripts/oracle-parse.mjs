@@ -53,6 +53,7 @@ import {
   mobilize,
   myriad,
   outlast,
+  transfigure,
   persist,
   saddle,
   champion,
@@ -317,6 +318,8 @@ function keywordPart(part, faceName, typeLine = "") {
   if ((m = new RegExp(`^level up ${COST}$`, "i").exec(p))) return { activated: [levelUp(m[1])] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
+  // Transfigure [cost] (rule 702.71a): sacrifice it for a creature card of its mana value.
+  if ((m = new RegExp(`^transfigure ${COST}$`, "i").exec(p))) return { activated: [transfigure(m[1])] };
   if ((m = new RegExp(`^unearth ${COST}$`, "i").exec(p))) return { activated: [unearth(m[1])] };
   if ((m = /^fabricate (\d+)$/i.exec(p))) {
     // Angel of Invention's shape: the counters or that many Servos, chosen as it resolves.

@@ -14,7 +14,7 @@
 import { describe, expect, it } from "vitest";
 
 import { POOL_CARDS, createDefaultRegistry, defineCard } from "../cards.js";
-import { learn, soulbond } from "../cards/helpers.js";
+import { learn, soulbond, transfigure } from "../cards/helpers.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -21690,5 +21690,21 @@ describe("split second if this spell was kicked", () => {
       { tokenFor: () => null },
     );
     expect(face.complete).toBe(false);
+  });
+});
+
+describe("transfigure", () => {
+  it("reads Fleshwrither whole, as the helper's ability", () => {
+    const face = parseFace(
+      {
+        name: "Fleshwrither",
+        type_line: "Creature — Horror",
+        oracle_text:
+          "Transfigure {1}{B}{B} ({1}{B}{B}, Sacrifice this creature: Search your library for a creature card with the same mana value as this creature, put that card onto the battlefield, then shuffle. Transfigure only as a sorcery.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.activated).toEqual([transfigure("{1}{B}{B}")]);
   });
 });
