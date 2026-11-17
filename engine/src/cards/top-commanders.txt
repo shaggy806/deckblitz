@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-979 already implemented / 21 missing
+980 already implemented / 20 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -558,7 +558,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  552  Niv-Mizzet, Ghost Counsel                       6005 decks  {2}{W}{W}{B}{B}  Legendary Creature — Spirit Dragon
 [x]  553  Eirdu, Carrier of Dawn                          6004 decks  {3}{W}{W}        Legendary Creature — Elemental God // Legendary Creature — Elemental God
 [x]  554  Progenitus                                      6002 decks  {W}{W}{U}{U}{B}{B}{R}{R}{G}{G} Legendary Creature — Hydra Avatar
-[ ]  555  Saruman of Many Colors                          6001 decks  {3}{W}{U}{B}     Legendary Creature — Avatar Wizard
+[x]  555  Saruman of Many Colors                          6001 decks  {3}{W}{U}{B}     Legendary Creature — Avatar Wizard
 [x]  556  Uril, the Miststalker                           5999 decks  {2}{R}{G}{W}     Legendary Creature — Beast
 [x]  557  Gwen Stacy                                      5997 decks  {1}{R}           Legendary Creature — Human Performer Hero // Legendary Creature — Spider Human Hero
 [x]  558  Toph, Hardheaded Teacher                        5979 decks  {2}{R}{G}        Legendary Creature — Human Warrior Ally
