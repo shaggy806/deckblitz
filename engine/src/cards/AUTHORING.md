@@ -3266,7 +3266,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   Talion) is a `chooseOnEnter` menu of the numbers' words; "choose 2, 3, or 4
   **at random**" adds `chooseOnEnterAtRandom: true` (Haktos the Unscarred:
   drawn from the game's randomness before it enters, nobody asked, announced
-  as a `chosen-at-random` of kind `"option"`). A colour or number
+  as a `chosen-at-random` of kind `"option"`); "choose a card type **shared
+  among two exiled cards used to craft it**" adds `chooseOnEnterSharedByExiled:
+  true` (Apex Observatory: only the types two or more cards exiled with it
+  share are offered, and with none nothing is chosen). A colour or number
   that does the same thing per value with no state is still fine as a
   resolution-time `modal` (Addle, By Invitation Only). The scaffolder reads
   Persecute's, Sudden Demise's, Blood Oath's and Ichormoon Gauntlet's lines.
@@ -3907,6 +3910,10 @@ chosen color", Curse of Wizardry's "a spell of the chosen color" — and in a
 chosen color", Story Circle), the shield keeping the colour chosen as it
 resolved. Prefer it to one conditional copy per colour. Of **two** chosen
 colours (`chooseOnEnterCount: 2`) it matches either.
+`ofChosenCardType: true` is "of the chosen type" for a card type
+(`chooseOnEnter: CARD_TYPE_CHOICES`): Apex Observatory's "the next spell you
+cast this turn of the chosen type", which `grant-spells-this-turn` fixes as it
+resolves (it fixes `ofChosenColor` too).
 `onlyColorItsControllerChose: Color[]` reads a `vote` (`choose: true`) this
 resolution held instead, per permanent: one colour, the one its controller
 picked, option `i` being colour `i` (Selective Obliteration's "unless it's

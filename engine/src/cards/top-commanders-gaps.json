@@ -6,6 +6,8 @@
     "cost:x-spend-color-restriction",
     "cost:alt-cost-collect-evidence-for-spells",
     "condition:snow-mana-of-spell-colors",
+    "replacement:as-enters-choose-card-type-of-exiled",
+    "effect:next-spell-of-type-free-this-turn",
     "cost:flashback-cost-modification-static",
     "cost:cumulative-upkeep-exile-library-top",
     "trigger:cumulative-upkeep-not-paid",

@@ -379,6 +379,7 @@ import {
   attachmentsOf,
   compareNum,
   chosenColorsOf,
+  fixChosenCardType,
   fixChosenColor,
   manaValueOfObject,
   creaturesBlocking,
@@ -16297,6 +16298,23 @@ export class Game {
   }
 
   /**
+   * The options among `options` (card types) that two or more of the cards
+   * exiled with `id` share: the cards in exile linked to it (rule 607.2a) in
+   * the stint it's in now, as craft's materials are while the card they
+   * crafted is being returned (702.167c) — Apex Observatory's "a card type
+   * shared among two exiled cards used to craft it".
+   */
+  private sharedByExiledWith(id: ObjectId, options: readonly string[]): readonly string[] {
+    const stint = this.state.objects[id]?.zoneChangeCount ?? 0;
+    const linked = this.state.zones.shared.exile.filter((card) => {
+      const link = this.state.objects[card]?.exiledWith;
+      return link?.source === id && link.zoneChangeCount === stint;
+    });
+    const typesOf = linked.map((card) => effectiveTypes(this.state, this.registry, this.state.objects[card]));
+    return options.filter((option) => typesOf.filter((types) => types.includes(option as CardType)).length >= 2);
+  }
+
+  /**
    * The next "as this enters" choice the card `id` has to make on its way onto
    * the battlefield, or `null` once there's none left: a Clone's copy first
    * (rule 707.9), then — as whatever it's becoming — a creature type (Urza's
@@ -16398,15 +16416,21 @@ export class Game {
       if (becoming.chooseOnEnter !== null && becoming.chooseOnEnterAtRandom === true && becoming.chooseOnEnter.length > 0) {
         return { kind: "at-random", options: becoming.chooseOnEnter };
       }
-      if (becoming.chooseOnEnter !== null) {
+      // "A card type shared among two exiled cards used to craft it" (Apex
+      // Observatory): only those, and with none nothing is chosen.
+      const options =
+        becoming.chooseOnEnter !== null && becoming.chooseOnEnterSharedByExiled === true
+          ? this.sharedByExiledWith(id, becoming.chooseOnEnter)
+          : becoming.chooseOnEnter;
+      if (options !== null && options.length > 0) {
         const count = becoming.chooseOnEnterCount ?? 1;
         return {
           kind: "choose",
-          options: becoming.chooseOnEnter,
+          options,
           ...(count > 1 ? { prompt: chooseSeveralPrompt(count, 0) } : {}),
           ...(becoming.chooseOnEnterLook !== null ? { look: true as const } : {}),
           // "Choose a planeswalker type" (Deification): a long menu, named.
-          ...(becoming.chooseOnEnter.length > 0 && becoming.chooseOnEnter.every(isPlaneswalkerType)
+          ...(options.every(isPlaneswalkerType)
             ? { prompt: "choose a planeswalker type" }
             : {}),
         };
@@ -44433,6 +44457,11 @@ controlledBy,
       grantSpellsThisTurn: (grant) => {
         (this.state.spellGrantsThisTurn ??= []).push({
           ...grant,
+          // "Of the chosen type / color" read now, off the source, and fixed
+          // (rule 608.2h — Apex Observatory).
+          ...(grant.filter !== undefined
+            ? { filter: fixChosenCardType(this.state, fixChosenColor(this.state, grant.filter, source), source) }
+            : {}),
           player: controller,
           ...(grant.intoHandAsItResolves === true ? { source } : {}),
         });

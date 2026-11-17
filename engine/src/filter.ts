@@ -927,6 +927,16 @@ export interface CardFilter {
    */
   readonly ofChosenColor?: true;
   /**
+   * Is of the card type chosen for the permanent applying the filter (its
+   * `chosenOnEnter`, when that is a card type — `chooseOnEnter` over
+   * `CARD_TYPE_CHOICES`, via `FilterContext.source`): Apex Observatory's
+   * "the next spell you cast this turn **of the chosen type**". A source that
+   * has left the battlefield reads the type it had (rule 608.2h). With no
+   * source, or no card type chosen for it, nothing matches. A filter kept
+   * past the resolution that made it is fixed then (`fixChosenCardType`).
+   */
+  readonly ofChosenCardType?: true;
+  /**
    * It's **only the color its controller chose** in this resolution's
    * `vote` (with `choose`) — Selective Obliteration's "exile each permanent
    * unless it's colorless or it's only the color its controller chose": one
@@ -2147,6 +2157,45 @@ export function fixChosenColor(state: GameState, filter: CardFilter, source: Obj
   return rest.anyOf === undefined ? { ...rest, ...either } : { ...rest, anyOf: rest.anyOf.map((alt) => ({ ...alt, ...either })) };
 }
 
+/** `filter` with its `ofChosenCardType` read now, off `source`, into a fixed
+ * card type — as `fixChosenColor`, for a filter kept past the resolution that
+ * applied it (Apex Observatory's "the next spell you cast this turn of the
+ * chosen type"), which uses the type chosen as the ability resolved (rule
+ * 608.2h). With none chosen, the clause is kept and, read with no source,
+ * matches nothing. */
+export function fixChosenCardType(state: GameState, filter: CardFilter, source: ObjectId | undefined): CardFilter {
+  if (filter.ofChosenCardType !== true || source === undefined) return filter;
+  const chosen = chosenCardTypeOf(state, source);
+  if (chosen === undefined) return filter;
+  const { ofChosenCardType: _read, ...rest } = filter;
+  return { ...rest, types: [...(rest.types ?? []), chosen] };
+}
+
+/** The card types a "choose a card type" may answer (rule 205.2a) — as
+ * `effects.ts`'s `CARD_TYPE_CHOICES`, which this module can't import. */
+const CARD_TYPES_CHOSEN: readonly string[] = [
+  "artifact",
+  "battle",
+  "creature",
+  "enchantment",
+  "instant",
+  "kindred",
+  "land",
+  "planeswalker",
+  "sorcery",
+];
+
+/** The card type chosen for `source` as it entered (`chooseOnEnter` over
+ * `CARD_TYPE_CHOICES` — its `chosenOnEnter`), as it last was if it has left
+ * the battlefield (rule 608.2h). None when nothing was chosen, or what was
+ * chosen isn't a card type. */
+export function chosenCardTypeOf(state: GameState, source: ObjectId | undefined): CardType | undefined {
+  const from = source === undefined ? undefined : state.objects[source];
+  if (from === undefined) return undefined;
+  const chosen = from.chosenOnEnter ?? (from.zone !== "battlefield" ? from.lastKnown?.chosenOnEnter : null);
+  return chosen != null && CARD_TYPES_CHOSEN.includes(chosen) ? (chosen as CardType) : undefined;
+}
+
 /**
  * The colours chosen for `source` as it entered (`chooseOnEnter` over the
  * colours — its `chosenOnEnter`, then `chosenOnEnterAlso` when it chose two),
@@ -2385,6 +2434,11 @@ export function matchesFilter(
   }
   if (filter.typesAnyOf !== undefined && !filter.typesAnyOf.some((t) => types().includes(t))) {
     return false;
+  }
+  if (filter.ofChosenCardType === true) {
+    // As `ofChosenColor`: a source that has left reads its last choice.
+    const chosen = chosenCardTypeOf(state, ctx.source);
+    if (chosen === undefined || !types().includes(chosen)) return false;
   }
   if (
     filter.subtype !== undefined ||

@@ -5716,6 +5716,16 @@ export interface CardDefinition {
    */
   readonly chooseOnEnterAtRandom?: true;
   /**
+   * "As it enters, choose a card type **shared among two exiled cards used to
+   * craft it**" (Apex Observatory), with `chooseOnEnter: CARD_TYPE_CHOICES`:
+   * only the options that two or more of the cards exiled with it share are
+   * offered — the cards in exile linked to it in the stint it enters from
+   * (rule 607.2a; craft's materials, 702.167c, which `craft-return` carries on
+   * to the permanent it becomes). With none (a token was a material, so it
+   * isn't in exile — the ruling), nothing is asked and nothing is chosen.
+   */
+  readonly chooseOnEnterSharedByExiled?: true;
+  /**
    * "This enters **under the control of an opponent of your choice**" (Xantcha,
    * Sleeper Agent; Captive Audience), with `choosePlayerOnEnter: "opponent"`: a
    * replacement (rule 614.1d), so no player gets to act while it's yours. Asked
@@ -6540,6 +6550,7 @@ const PRINTED_ABILITY: {
   chooseTwoPlayersOnEnter: false,
   chooseOnEnterCount: false,
   chooseOnEnterAtRandom: false,
+  chooseOnEnterSharedByExiled: false,
   entersUnderChosenPlayer: false,
   choosePermanentOnEnter: (def) => def.choosePermanentOnEnter !== null,
   loyalty: false,
@@ -6869,6 +6880,8 @@ interface CardDraft {
   chooseNumberOnEnter?: true;
   /** See {@link CardDefinition.chooseOnEnterAtRandom}. */
   chooseOnEnterAtRandom?: true;
+  /** See {@link CardDefinition.chooseOnEnterSharedByExiled}. */
+  chooseOnEnterSharedByExiled?: true;
   choosePlayerOnEnter?: "player" | "opponent";
   secretChoiceOnEnter?: true;
   chooseTwoPlayersOnEnter?: true;
@@ -7282,6 +7295,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     ...(draft.chooseNumberOnEnter === true ? { chooseNumberOnEnter: true as const } : {}),
     ...(draft.chooseOnEnterAtRandom === true ? { chooseOnEnterAtRandom: true as const } : {}),
+    ...(draft.chooseOnEnterSharedByExiled === true ? { chooseOnEnterSharedByExiled: true as const } : {}),
     ...(draft.chooseTwoPlayersOnEnter === true ? { chooseTwoPlayersOnEnter: true as const } : {}),
     ...(draft.chooseOnEnterCount !== undefined && draft.chooseOnEnterCount > 1 ? { chooseOnEnterCount: draft.chooseOnEnterCount } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
