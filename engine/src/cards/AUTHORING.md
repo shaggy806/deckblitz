@@ -1446,7 +1446,10 @@ the beginning of the next end step, reveal … until you reveal **that many**
 creature cards" counts `{ remembered: "exiled" }`; Resplendent Marshal's
 reflexive "shares a creature type with **the exiled card**" names its creator's
 `{ thisWay: "exiled" }` the same way, since a reflexive ability's own this way
-is empty. A delayed ability also keeps its creator's X and "that player", and
+is empty; Push the Limit's "return all Mount and Vehicle cards … **Sacrifice
+them** at the beginning of the next end step" remembers `{ thisWay:
+"put-onto-battlefield" }` and sacrifices with `sacrifice-all`'s `filter: {
+inSet: { remembered: "returned" } }`. A delayed ability also keeps its creator's X and "that player", and
 its target slots: Rescue from the Underworld's "return that card **and the
 sacrificed card** to the battlefield under your control at the beginning of
 your next upkeep" is a `delayed-trigger` with `remember: { sacrificed: { set: {

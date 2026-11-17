@@ -21768,6 +21768,31 @@ describe("split second if this spell was kicked", () => {
   });
 });
 
+describe("a mass return from your graveyard, sacrificed at the next end step", () => {
+  it("reads Push the Limit whole: either subtype, and the delayed sacrifice of what returned", () => {
+    const face = parseFace(
+      {
+        name: "Push the Limit",
+        type_line: "Sorcery",
+        oracle_text:
+          "Return all Mount and Vehicle cards from your graveyard to the battlefield. Sacrifice them at the beginning of the next end step.\nVehicles you control become artifact creatures until end of turn. Creatures you control gain haste until end of turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.effect.effects.slice(0, 2)).toEqual([
+      { kind: "return-from-graveyard", filter: { anyOf: [{ subtype: "Mount" }, { subtype: "Vehicle" }] }, destination: "battlefield", count: "all" },
+      {
+        kind: "delayed-trigger",
+        at: { step: "end" },
+        remember: { returned: { set: { thisWay: "put-onto-battlefield" } } },
+        effect: { kind: "sacrifice-all", who: "you", filter: { inSet: { remembered: "returned" } } },
+        text: "Sacrifice them at the beginning of the next end step.",
+      },
+    ]);
+  });
+});
+
 describe("transfigure", () => {
   it("reads Fleshwrither whole, as the helper's ability", () => {
     const face = parseFace(

@@ -4189,6 +4189,24 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // Your own graveyard, every match: "return all creature cards from your
+  // graveyard to the battlefield" (Liliana, Death Wielder), "all Mount and
+  // Vehicle cards" (Push the Limit — either subtype). Not "permanent cards",
+  // whose authored shape names the permanent types (Return to the Light Realms).
+  if ((m = /^return all (.+?) cards from your graveyard to the battlefield( tapped)?\.$/i.exec(s)) && !/permanent/i.test(m[1])) {
+    const pair = /^([A-Z][a-z]+) and ([A-Z][a-z]+)$/.exec(m[1]);
+    const types =
+      graveyardReturnTypes(m[1]) ?? (pair === null ? null : { anyOf: [{ subtype: pair[1] }, { subtype: pair[2] }] });
+    if (types !== null) {
+      return {
+        kind: "return-from-graveyard",
+        filter: types,
+        destination: "battlefield",
+        count: "all",
+        ...(m[2] !== undefined ? { enterTapped: true } : {}),
+      };
+    }
+  }
   if ((m = /^each player returns (?:all|each) (.+?) cards? from their graveyard to the battlefield(?: with an additional (-1\/-1|\+1\/\+1) counter on it)?\.$/i.exec(s))) {
     const types = graveyardReturnTypes(m[1]);
     if (types !== null) {
@@ -12467,6 +12485,25 @@ export function parseEffect(text, outer) {
       const untap = { kind: "untap-all", filter: { thisWay: "control-effect" } };
       parsed.push(untap);
       hints.push({ sentence, effect: untap });
+      continue;
+    }
+    // "Sacrifice them at the beginning of the next end step." after a return
+    // to the battlefield (Push the Limit): the delayed ability remembers what
+    // the return put there, each sacrificed only in that stint (rule 603.7c).
+    if (
+      /^sacrifice them at the beginning of the next end step\.$/i.test(sentence) &&
+      priorStep?.kind === "return-from-graveyard" &&
+      priorStep.destination === "battlefield"
+    ) {
+      const delayed = {
+        kind: "delayed-trigger",
+        at: { step: "end" },
+        remember: { returned: { set: { thisWay: "put-onto-battlefield" } } },
+        effect: { kind: "sacrifice-all", who: "you", filter: { inSet: { remembered: "returned" } } },
+        text: sentence,
+      };
+      parsed.push(delayed);
+      hints.push({ sentence, effect: delayed });
       continue;
     }
     // "They gain haste until end of turn." after that untap (the same

@@ -363,6 +363,14 @@ Abolish-style discard already fit) and paid where the own one is, as the cost is
 read at the offer as the face cast (a split card's half) — so a colorless spell has none. Only the mana cost is
 replaced: additional costs are still paid (its ruling). Dream Halls (rank 12409, `anyPlayer`).
 `test/alt-cost-grant-discard.test.ts`.
+### A delayed sacrifice of everything a mass return put onto the battlefield — found built 2026-11-17
+
+The key `effect:delayed-sacrifice-each-returned-this-way` needed no engine code: a `delayed-trigger`'s `remember`
+over `{ thisWay: "put-onto-battlefield" }`, read by `sacrifice-all`'s `filter: { inSet: { remembered } }` — each
+member only in the stint it returned in (rule 603.7c), and only what its controller still controls. Push the Limit
+(rank 12850). The scaffolder reads "return all <types> cards from your graveyard to the battlefield" and the
+"sacrifice them at the beginning of the next end step" after it. `test/delayed-sacrifice-returned-this-way.test.ts`.
+
 ### A player effect a target player has — built 2026-11-17
 
 The key `effect:player-effect-target-player`: `player-effect`'s `to` (a target slot) makes the effect that
