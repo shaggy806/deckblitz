@@ -285,9 +285,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "reorder-graveyard": none,
   // Its `then` reads the bottom card as target 0. A targeted player's bottom
-  // card put into their graveyard (Cellar Door) is no plain harm or help:
-  // filling a graveyard is a cost to some decks and fuel to others.
-  "bottom-of-library": none,
+  // card put into their graveyard (Cellar Door) is no plain harm or help: a
+  // card milled from an opponent, or a creature card of your own for its
+  // Zombie and your graveyard.
+  "bottom-of-library": (n, v) => {
+    if (typeof n.whose === "number") v.touch(n.whose, "either", MINOR);
+  },
   "choose-random-card": (n, v) => {
     if (typeof n.whose !== "number") return;
     if (n.zone === "hand" || (n.then?.kind === "put-onto-battlefield" && n.then.underYourControl === true)) {
