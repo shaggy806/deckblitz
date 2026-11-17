@@ -885,6 +885,7 @@ import _poolThomilTheDestroyer from "../pool/thomil-the-destroyer.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
 import _poolThornbiteStaff from "../pool/thornbite-staff.js";
+import _poolThoughtLash from "../pool/thought-lash.js";
 import _poolThoughtStalkerWarlock from "../pool/thought-stalker-warlock.js";
 import _poolThrabenValiant from "../pool/thraben-valiant.js";
 import _poolThranduilTheElvenking from "../pool/thranduil-the-elvenking.js";
@@ -1925,6 +1926,7 @@ const shard: CardShard = {
     _poolThopterEngineer,
     _poolThopterFabricator,
     _poolThornbiteStaff,
+    _poolThoughtLash,
     _poolThoughtStalkerWarlock,
     _poolThrabenValiant,
     _poolThranduilTheElvenking,

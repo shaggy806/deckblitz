@@ -135,6 +135,7 @@ import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCaseyJonesAsphaltHooligan from "../pool/casey-jones-asphalt-hooligan.js";
 import _poolCastOff from "../pool/cast-off.js";
+import _poolCatalystStone from "../pool/catalyst-stone.js";
 import _poolCateranBrute from "../pool/cateran-brute.js";
 import _poolCateranSummons from "../pool/cateran-summons.js";
 import _poolCatharsis from "../pool/catharsis.js";
@@ -1198,6 +1199,7 @@ const shard: CardShard = {
     _poolCaseOfTheShatteredPact,
     _poolCaseyJonesAsphaltHooligan,
     _poolCastOff,
+    _poolCatalystStone,
     _poolCateranBrute,
     _poolCateranSummons,
     _poolCatharsis,

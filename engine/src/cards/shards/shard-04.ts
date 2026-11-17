@@ -529,6 +529,7 @@ import _poolMobJustice from "../pool/mob-justice.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
 import _poolMogissWarhound from "../pool/mogiss-warhound.js";
 import _poolMomentOfValor from "../pool/moment-of-valor.js";
+import _poolMonstrousEmergence from "../pool/monstrous-emergence.js";
 import _poolMoonlitAmbusher from "../pool/moonlit-ambusher.js";
 import _poolMoonlitStrider from "../pool/moonlit-strider.js";
 import _poolMoonriseIntruder from "../pool/moonrise-intruder.js";
@@ -1554,6 +1555,7 @@ const shard: CardShard = {
     _poolMockingbirdAceAgent,
     _poolMogissWarhound,
     _poolMomentOfValor,
+    _poolMonstrousEmergence,
     _poolMoonlitAmbusher,
     _poolMoonlitStrider,
     _poolMoonriseIntruder,

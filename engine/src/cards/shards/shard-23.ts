@@ -645,6 +645,7 @@ import _poolPiousEvangel from "../pool/pious-evangel.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
 import _poolPlayOfTheGame from "../pool/play-of-the-game.js";
 import _poolPledgeOfLoyalty from "../pool/pledge-of-loyalty.js";
+import _poolPlungeIntoDarkness from "../pool/plunge-into-darkness.js";
 import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
 import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
@@ -1703,6 +1704,7 @@ const shard: CardShard = {
     _poolPlasmancer,
     _poolPlayOfTheGame,
     _poolPledgeOfLoyalty,
+    _poolPlungeIntoDarkness,
     _poolPoisonBladeMentor,
     _poolPollenShieldHare,
     _poolPollutedMire,

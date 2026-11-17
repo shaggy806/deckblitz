@@ -4165,6 +4165,7 @@ import _poolCatacombSifter from "./pool/catacomb-sifter.js";
 import _poolCatacombSlug from "./pool/catacomb-slug.js";
 import _poolCatalog from "./pool/catalog.js";
 import _poolCatalystElemental from "./pool/catalyst-elemental.js";
+import _poolCatalystStone from "./pool/catalyst-stone.js";
 import _poolCatapultCaptain from "./pool/catapult-captain.js";
 import _poolCatapultFodder from "./pool/catapult-fodder.js";
 import _poolCatapultMaster from "./pool/catapult-master.js";
@@ -18002,6 +18003,7 @@ import _poolMonsterMashup from "./pool/monster-mashup.js";
 import _poolMonstrify from "./pool/monstrify.js";
 import _poolMonstrosityOfTheLake from "./pool/monstrosity-of-the-lake.js";
 import _poolMonstrousCarabid from "./pool/monstrous-carabid.js";
+import _poolMonstrousEmergence from "./pool/monstrous-emergence.js";
 import _poolMonstrousGrowth from "./pool/monstrous-growth.js";
 import _poolMonstrousHound from "./pool/monstrous-hound.js";
 import _poolMonstrousOnslaught from "./pool/monstrous-onslaught.js";
@@ -20610,6 +20612,7 @@ import _poolPlunder from "./pool/plunder.js";
 import _poolPlunderingBarbarian from "./pool/plundering-barbarian.js";
 import _poolPlunderingPirate from "./pool/plundering-pirate.js";
 import _poolPlunderingPredator from "./pool/plundering-predator.js";
+import _poolPlungeIntoDarkness from "./pool/plunge-into-darkness.js";
 import _poolPlungeIntoWinter from "./pool/plunge-into-winter.js";
 import _poolPoeticIngenuity from "./pool/poetic-ingenuity.js";
 import _poolPoetsQuill from "./pool/poets-quill.js";
@@ -28657,6 +28660,7 @@ import _poolThoughtGorger from "./pool/thought-gorger.js";
 import _poolThoughtHarvester from "./pool/thought-harvester.js";
 import _poolThoughtHemorrhage from "./pool/thought-hemorrhage.js";
 import _poolThoughtKnotSeer from "./pool/thought-knot-seer.js";
+import _poolThoughtLash from "./pool/thought-lash.js";
 import _poolThoughtMonitor from "./pool/thought-monitor.js";
 import _poolThoughtNibbler from "./pool/thought-nibbler.js";
 import _poolThoughtReflection from "./pool/thought-reflection.js";
@@ -37576,6 +37580,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCatacombSlug,
   _poolCatalog,
   _poolCatalystElemental,
+  _poolCatalystStone,
   _poolCatapultCaptain,
   _poolCatapultFodder,
   _poolCatapultMaster,
@@ -51413,6 +51418,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMonstrify,
   _poolMonstrosityOfTheLake,
   _poolMonstrousCarabid,
+  _poolMonstrousEmergence,
   _poolMonstrousGrowth,
   _poolMonstrousHound,
   _poolMonstrousOnslaught,
@@ -54021,6 +54027,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPlunderingBarbarian,
   _poolPlunderingPirate,
   _poolPlunderingPredator,
+  _poolPlungeIntoDarkness,
   _poolPlungeIntoWinter,
   _poolPoeticIngenuity,
   _poolPoetsQuill,
@@ -62068,6 +62075,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThoughtHarvester,
   _poolThoughtHemorrhage,
   _poolThoughtKnotSeer,
+  _poolThoughtLash,
   _poolThoughtMonitor,
   _poolThoughtNibbler,
   _poolThoughtReflection,
@@ -71000,6 +71008,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/catacomb-slug": _poolCatacombSlug,
   "pool/catalog": _poolCatalog,
   "pool/catalyst-elemental": _poolCatalystElemental,
+  "pool/catalyst-stone": _poolCatalystStone,
   "pool/catapult-captain": _poolCatapultCaptain,
   "pool/catapult-fodder": _poolCatapultFodder,
   "pool/catapult-master": _poolCatapultMaster,
@@ -84837,6 +84846,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/monstrify": _poolMonstrify,
   "pool/monstrosity-of-the-lake": _poolMonstrosityOfTheLake,
   "pool/monstrous-carabid": _poolMonstrousCarabid,
+  "pool/monstrous-emergence": _poolMonstrousEmergence,
   "pool/monstrous-growth": _poolMonstrousGrowth,
   "pool/monstrous-hound": _poolMonstrousHound,
   "pool/monstrous-onslaught": _poolMonstrousOnslaught,
@@ -87445,6 +87455,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/plundering-barbarian": _poolPlunderingBarbarian,
   "pool/plundering-pirate": _poolPlunderingPirate,
   "pool/plundering-predator": _poolPlunderingPredator,
+  "pool/plunge-into-darkness": _poolPlungeIntoDarkness,
   "pool/plunge-into-winter": _poolPlungeIntoWinter,
   "pool/poetic-ingenuity": _poolPoeticIngenuity,
   "pool/poets-quill": _poolPoetsQuill,
@@ -95492,6 +95503,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thought-harvester": _poolThoughtHarvester,
   "pool/thought-hemorrhage": _poolThoughtHemorrhage,
   "pool/thought-knot-seer": _poolThoughtKnotSeer,
+  "pool/thought-lash": _poolThoughtLash,
   "pool/thought-monitor": _poolThoughtMonitor,
   "pool/thought-nibbler": _poolThoughtNibbler,
   "pool/thought-reflection": _poolThoughtReflection,
