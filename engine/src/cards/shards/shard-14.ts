@@ -102,6 +102,7 @@ import _poolBloodthirstyConqueror from "../pool/bloodthirsty-conqueror.js";
 import _poolBlossomDryad from "../pool/blossom-dryad.js";
 import _poolBoltwingMarauder from "../pool/boltwing-marauder.js";
 import _poolBoneCairnButcher from "../pool/bone-cairn-butcher.js";
+import _poolBoneyardParley from "../pool/boneyard-parley.js";
 import _poolBontusMonument from "../pool/bontus-monument.js";
 import _poolBorgCube from "../pool/borg-cube.js";
 import _poolBorosSignet from "../pool/boros-signet.js";
@@ -1138,6 +1139,7 @@ const shard: CardShard = {
     _poolBlossomDryad,
     _poolBoltwingMarauder,
     _poolBoneCairnButcher,
+    _poolBoneyardParley,
     _poolBontusMonument,
     _poolBorgCube,
     _poolBorosSignet,

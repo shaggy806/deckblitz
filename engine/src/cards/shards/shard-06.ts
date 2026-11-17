@@ -129,6 +129,7 @@ import _poolBreakingPoint from "../pool/breaking-point.js";
 import _poolBriarberryCohort from "../pool/briarberry-cohort.js";
 import _poolBriarhorn from "../pool/briarhorn.js";
 import _poolBrilliantHalo from "../pool/brilliant-halo.js";
+import _poolBrilliantUltimatum from "../pool/brilliant-ultimatum.js";
 import _poolBrimstoneMage from "../pool/brimstone-mage.js";
 import _poolBrimstoneVandal from "../pool/brimstone-vandal.js";
 import _poolBrionStoutarm from "../pool/brion-stoutarm.js";
@@ -1170,6 +1171,7 @@ const shard: CardShard = {
     _poolBriarberryCohort,
     _poolBriarhorn,
     _poolBrilliantHalo,
+    _poolBrilliantUltimatum,
     _poolBrimstoneMage,
     _poolBrimstoneVandal,
     _poolBrionStoutarm,

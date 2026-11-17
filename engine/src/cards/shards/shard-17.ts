@@ -301,6 +301,7 @@ import _poolFestercreep from "../pool/festercreep.js";
 import _poolFetchQuest from "../pool/fetch-quest.js";
 import _poolFiddleheadKami from "../pool/fiddlehead-kami.js";
 import _poolFieryConclusion from "../pool/fiery-conclusion.js";
+import _poolFightingChance from "../pool/fighting-chance.js";
 import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
 import _poolFiresOfInvention from "../pool/fires-of-invention.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
@@ -1334,6 +1335,7 @@ const shard: CardShard = {
     _poolFetchQuest,
     _poolFiddleheadKami,
     _poolFieryConclusion,
+    _poolFightingChance,
     _poolFireNationAttacks,
     _poolFiresOfInvention,
     _poolFixWhatsBroken,

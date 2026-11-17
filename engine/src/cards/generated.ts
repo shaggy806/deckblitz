@@ -3167,6 +3167,7 @@ import _poolBonesplitter from "./pool/bonesplitter.js";
 import _poolBonethornValesk from "./pool/bonethorn-valesk.js";
 import _poolBoneyardDesecrator from "./pool/boneyard-desecrator.js";
 import _poolBoneyardLurker from "./pool/boneyard-lurker.js";
+import _poolBoneyardParley from "./pool/boneyard-parley.js";
 import _poolBoneyardScourge from "./pool/boneyard-scourge.js";
 import _poolBoneyardWurm from "./pool/boneyard-wurm.js";
 import _poolBonfireOfTheDamned from "./pool/bonfire-of-the-damned.js";
@@ -3497,6 +3498,7 @@ import _poolBrilliantHalo from "./pool/brilliant-halo.js";
 import _poolBrilliantPlan from "./pool/brilliant-plan.js";
 import _poolBrilliantRestoration from "./pool/brilliant-restoration.js";
 import _poolBrilliantSpectrum from "./pool/brilliant-spectrum.js";
+import _poolBrilliantUltimatum from "./pool/brilliant-ultimatum.js";
 import _poolBrilliantWings from "./pool/brilliant-wings.js";
 import _poolBrimazBlightOfOreskos from "./pool/brimaz-blight-of-oreskos.js";
 import _poolBrimazKingOfOreskos from "./pool/brimaz-king-of-oreskos.js";
@@ -5998,6 +6000,7 @@ import _poolCustodiLich from "./pool/custodi-lich.js";
 import _poolCustodiPeacekeeper from "./pool/custodi-peacekeeper.js";
 import _poolCustodiSoulbinders from "./pool/custodi-soulbinders.js";
 import _poolCustodiSoulcaller from "./pool/custodi-soulcaller.js";
+import _poolCustodiSquire from "./pool/custodi-squire.js";
 import _poolCustodianOfTheTrove from "./pool/custodian-of-the-trove.js";
 import _poolCustodyBattle from "./pool/custody-battle.js";
 import _poolCustomsDepot from "./pool/customs-depot.js";
@@ -9602,6 +9605,7 @@ import _poolFightToTheDeath from "./pool/fight-to-the-death.js";
 import _poolFightWithFire from "./pool/fight-with-fire.js";
 import _poolFight from "./pool/fight.js";
 import _poolFighterClass from "./pool/fighter-class.js";
+import _poolFightingChance from "./pool/fighting-chance.js";
 import _poolFightingDrake from "./pool/fighting-drake.js";
 import _poolFigureOfDestiny from "./pool/figure-of-destiny.js";
 import _poolFigureOfFable from "./pool/figure-of-fable.js";
@@ -15713,6 +15717,7 @@ import _poolLayOfTheLand from "./pool/lay-of-the-land.js";
 import _poolLayWaste from "./pool/lay-waste.js";
 import _poolLaylaHassan from "./pool/layla-hassan.js";
 import _poolLazavDimirMastermind from "./pool/lazav-dimir-mastermind.js";
+import _poolLazavFamiliarStranger from "./pool/lazav-familiar-stranger.js";
 import _poolLazavTheMultifarious from "./pool/lazav-the-multifarious.js";
 import _poolLazavWearerOfFaces from "./pool/lazav-wearer-of-faces.js";
 import _poolLazotepBehemoth from "./pool/lazotep-behemoth.js";
@@ -26275,6 +26280,7 @@ import _poolSplintersTechnique from "./pool/splinters-technique.js";
 import _poolSplitDecision from "./pool/split-decision.js";
 import _poolSplitTailMiko from "./pool/split-tail-miko.js";
 import _poolSplitTheParty from "./pool/split-the-party.js";
+import _poolSplitTheSpoils from "./pool/split-the-spoils.js";
 import _poolSplitUp from "./pool/split-up.js";
 import _poolSplitskinDoll from "./pool/splitskin-doll.js";
 import _poolSplittingHeadache from "./pool/splitting-headache.js";
@@ -36586,6 +36592,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBonethornValesk,
   _poolBoneyardDesecrator,
   _poolBoneyardLurker,
+  _poolBoneyardParley,
   _poolBoneyardScourge,
   _poolBoneyardWurm,
   _poolBonfireOfTheDamned,
@@ -36916,6 +36923,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrilliantPlan,
   _poolBrilliantRestoration,
   _poolBrilliantSpectrum,
+  _poolBrilliantUltimatum,
   _poolBrilliantWings,
   _poolBrimazBlightOfOreskos,
   _poolBrimazKingOfOreskos,
@@ -39417,6 +39425,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCustodiPeacekeeper,
   _poolCustodiSoulbinders,
   _poolCustodiSoulcaller,
+  _poolCustodiSquire,
   _poolCustodianOfTheTrove,
   _poolCustodyBattle,
   _poolCustomsDepot,
@@ -43021,6 +43030,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFightWithFire,
   _poolFight,
   _poolFighterClass,
+  _poolFightingChance,
   _poolFightingDrake,
   _poolFigureOfDestiny,
   _poolFigureOfFable,
@@ -49132,6 +49142,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLayWaste,
   _poolLaylaHassan,
   _poolLazavDimirMastermind,
+  _poolLazavFamiliarStranger,
   _poolLazavTheMultifarious,
   _poolLazavWearerOfFaces,
   _poolLazotepBehemoth,
@@ -59694,6 +59705,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSplitDecision,
   _poolSplitTailMiko,
   _poolSplitTheParty,
+  _poolSplitTheSpoils,
   _poolSplitUp,
   _poolSplitskinDoll,
   _poolSplittingHeadache,
@@ -70018,6 +70030,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bonethorn-valesk": _poolBonethornValesk,
   "pool/boneyard-desecrator": _poolBoneyardDesecrator,
   "pool/boneyard-lurker": _poolBoneyardLurker,
+  "pool/boneyard-parley": _poolBoneyardParley,
   "pool/boneyard-scourge": _poolBoneyardScourge,
   "pool/boneyard-wurm": _poolBoneyardWurm,
   "pool/bonfire-of-the-damned": _poolBonfireOfTheDamned,
@@ -70348,6 +70361,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brilliant-plan": _poolBrilliantPlan,
   "pool/brilliant-restoration": _poolBrilliantRestoration,
   "pool/brilliant-spectrum": _poolBrilliantSpectrum,
+  "pool/brilliant-ultimatum": _poolBrilliantUltimatum,
   "pool/brilliant-wings": _poolBrilliantWings,
   "pool/brimaz-blight-of-oreskos": _poolBrimazBlightOfOreskos,
   "pool/brimaz-king-of-oreskos": _poolBrimazKingOfOreskos,
@@ -72849,6 +72863,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/custodi-peacekeeper": _poolCustodiPeacekeeper,
   "pool/custodi-soulbinders": _poolCustodiSoulbinders,
   "pool/custodi-soulcaller": _poolCustodiSoulcaller,
+  "pool/custodi-squire": _poolCustodiSquire,
   "pool/custodian-of-the-trove": _poolCustodianOfTheTrove,
   "pool/custody-battle": _poolCustodyBattle,
   "pool/customs-depot": _poolCustomsDepot,
@@ -76453,6 +76468,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fight-with-fire": _poolFightWithFire,
   "pool/fight": _poolFight,
   "pool/fighter-class": _poolFighterClass,
+  "pool/fighting-chance": _poolFightingChance,
   "pool/fighting-drake": _poolFightingDrake,
   "pool/figure-of-destiny": _poolFigureOfDestiny,
   "pool/figure-of-fable": _poolFigureOfFable,
@@ -82564,6 +82580,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lay-waste": _poolLayWaste,
   "pool/layla-hassan": _poolLaylaHassan,
   "pool/lazav-dimir-mastermind": _poolLazavDimirMastermind,
+  "pool/lazav-familiar-stranger": _poolLazavFamiliarStranger,
   "pool/lazav-the-multifarious": _poolLazavTheMultifarious,
   "pool/lazav-wearer-of-faces": _poolLazavWearerOfFaces,
   "pool/lazotep-behemoth": _poolLazotepBehemoth,
@@ -93126,6 +93143,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/split-decision": _poolSplitDecision,
   "pool/split-tail-miko": _poolSplitTailMiko,
   "pool/split-the-party": _poolSplitTheParty,
+  "pool/split-the-spoils": _poolSplitTheSpoils,
   "pool/split-up": _poolSplitUp,
   "pool/splitskin-doll": _poolSplitskinDoll,
   "pool/splitting-headache": _poolSplittingHeadache,

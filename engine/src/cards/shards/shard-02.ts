@@ -518,6 +518,7 @@ import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaStorm from "../pool/lava-storm.js";
 import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLawmagesBinding from "../pool/lawmages-binding.js";
+import _poolLazavFamiliarStranger from "../pool/lazav-familiar-stranger.js";
 import _poolLeovoldEmissaryOfTrest from "../pool/leovold-emissary-of-trest.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLieutenantCommanderData from "../pool/lieutenant-commander-data.js";
@@ -1567,6 +1568,7 @@ const shard: CardShard = {
     _poolLavaStorm,
     _poolLavaleaper,
     _poolLawmagesBinding,
+    _poolLazavFamiliarStranger,
     _poolLeovoldEmissaryOfTrest,
     _poolLichsCaress,
     _poolLieutenantCommanderData,

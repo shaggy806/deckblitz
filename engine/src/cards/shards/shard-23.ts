@@ -192,6 +192,7 @@ import _poolCrownOfFlames from "../pool/crown-of-flames.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
 import _poolCryptidInspector from "../pool/cryptid-inspector.js";
 import _poolCunningAdvisor from "../pool/cunning-advisor.js";
+import _poolCustodiSquire from "../pool/custodi-squire.js";
 import _poolDanceWithDevils from "../pool/dance-with-devils.js";
 import _poolDapperShieldmate from "../pool/dapper-shieldmate.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
@@ -1251,6 +1252,7 @@ const shard: CardShard = {
     _poolCryptOfTheEternals,
     _poolCryptidInspector,
     _poolCunningAdvisor,
+    _poolCustodiSquire,
     _poolDanceWithDevils,
     _poolDapperShieldmate,
     _poolDaringEscape,

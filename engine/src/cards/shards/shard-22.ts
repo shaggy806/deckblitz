@@ -814,6 +814,7 @@ import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
 import _poolSpiderManifestation from "../pool/spider-manifestation.js";
 import _poolSpinnyRide from "../pool/spinny-ride.js";
 import _poolSplinterTwin from "../pool/splinter-twin.js";
+import _poolSplitTheSpoils from "../pool/split-the-spoils.js";
 import _poolSpockVoiceOfReason from "../pool/spock-voice-of-reason.js";
 import _poolSpoilsOfEvil from "../pool/spoils-of-evil.js";
 import _poolSpotterThopter from "../pool/spotter-thopter.js";
@@ -1882,6 +1883,7 @@ const shard: CardShard = {
     _poolSpiderManifestation,
     _poolSpinnyRide,
     _poolSplinterTwin,
+    _poolSplitTheSpoils,
     _poolSpockVoiceOfReason,
     _poolSpoilsOfEvil,
     _poolSpotterThopter,
