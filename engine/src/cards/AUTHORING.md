@@ -7683,7 +7683,16 @@ The `prevent-damage` family makes the same record.
   614.11: no loss for it), the card isn't drawn (no draw trigger or count),
   and each draw of several is finished, its choice answered, before the next
   (614.11a). It takes the exemptions too, and is applied before a "draw N"
-  on the same draw. Its effect mustn't draw unless it's `firstEachTurn`.
+  on the same draw. A card its effect draws is a new draw event: this
+  replacement can't replace it again, but any other can (rules 614.5, 616.2),
+  after a decision in the effect too (`ParkedSteps.replacing`), and "this
+  way" in it reads its own effect. Chains of Mephistopheles is `who:
+  "any-player"`, `exceptFirstInDrawStep: true`, and `{ effect: sequence of a
+  discard by "trigger-player", then a conditional on { kind: "this-way",
+  what: "discarded" } with a draw by "trigger-player", else a mill }`: two
+  each make the player discard first, and once one mills there's no draw
+  for the next (`draw-replaced-by-discard.test.ts`). A draw a Notion Thief
+  hands its controller is theirs to replace this way too.
   With `may: true` it's "you **may** instead" (Abundance, Pavel Chekov, First
   Posting; Obstinate Familiar's "you may skip that draw instead" is an empty
   `sequence`): each draw, as it would happen, asks the drawing player "Draw a

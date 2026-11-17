@@ -5654,6 +5654,8 @@ export type SuspendedResolution =
       readonly effect: null;
       readonly enter?: PendingEntry;
       readonly leaveStack?: ObjectId;
+      /** See `ParkedSteps.beforeDraws`. */
+      readonly beforeDraws?: true;
       /** A mana ability waiting on what its `do` cost asks (605.3b). */
       readonly manaAbility?: {
         readonly source: ObjectId;
@@ -5840,6 +5842,22 @@ export interface ParkedSteps {
    * while the rest runs: a "you may" asked after another decision in the
    * same resolution still offers "the same for all" (`standingModeAnswers`). */
   readonly resolvingTrigger?: { readonly object: ObjectId; readonly signature: string };
+  /** The replacements carrying out their own effect as these steps were
+   * parked (`Game.applyingReplacements`): the rest of a replacement's effect
+   * (Chains of Mephistopheles' "if the player discards a card this way, they
+   * draw a card", after the discard is chosen) is still that replacement's,
+   * so an event in it isn't replaced by it again (rule 614.5), and it's
+   * finished before a sequence of draws goes on (614.11a). */
+  readonly replacing?: readonly string[];
+  /** With `replacing`: the event the replacement's effect began at, what its
+   * "this way" reads (`GameState.resolutionSince`) — Chains of
+   * Mephistopheles' "if the player discards a card this way" is its own
+   * discard, not one of another Chains' before it. */
+  readonly thisWaySince?: number;
+  /** Parked by the replacement of a draw with more of its instruction's
+   * draws still to come (`GameState.pendingDraws`): finished before those
+   * resume (rule 614.11a), though parked above them. */
+  readonly beforeDraws?: true;
 }
 
 
@@ -6633,8 +6651,11 @@ export interface GameState {
   voting?: Record<ObjectId, { readonly secret: boolean; readonly votes: readonly Vote[]; readonly choice?: true }>;
   /** Draws waiting behind a dredge question (rule 702.52): the rest of an
    * instruction's draws, each made — and offered dredge again — one at a
-   * time once the question before it is answered (the ruling). */
-  pendingDraws?: { readonly player: PlayerId; readonly count: number }[];
+   * time once the question before it is answered (the ruling). `replacing`:
+   * the replacements already applied to the instruction they're part of
+   * (rule 614.5 — Quantum Riddler's "that many plus one"), and the ones
+   * whose effect made the instruction, kept as `ParkedSteps.replacing` is. */
+  pendingDraws?: { readonly player: PlayerId; readonly count: number; readonly replacing?: readonly string[] }[];
   /** Cards put into one player's graveyard at the same time, still to be
    * arranged by that player (rule 404.3) — queued only while something in the
    * game reads a graveyard's order (`Game.graveyardOrderIsRead`). Each is the

@@ -601,6 +601,7 @@ import type {
   MulliganHandState,
   EnteringTokenCopies,
   TokenLink,
+  ParkedSteps,
   PendingEntry,
   PendingTrigger,
   PhasedOutStatus,
@@ -2718,6 +2719,10 @@ export class Game {
   /** Replacements carrying out their own effect (rule 614.5), so an event
    * inside it isn't replaced by them again. Synchronous only. */
   private applyingReplacements = new Set<string>();
+  /** Set while the rest of a draw's replacement runs ahead of the draws
+   * waiting behind it (`ParkedSteps.beforeDraws`, rule 614.11a): a card it
+   * draws doesn't join the back of that queue. Synchronous only. */
+  private drawsAheadOfQueue = false;
   /** In the same event (see {@link shieldCountersSpent}), the "prevent that
    * damage and …" follow-ups owed: one per replacement and recipient, "that
    * many" the total it prevented, applied once the whole event is dealt —
@@ -10893,8 +10898,10 @@ export class Game {
         return;
       }
       // Draws waiting behind a dredge question: one at a time, each offered
-      // dredge again.
-      if ((this.state.pendingDraws?.length ?? 0) > 0) {
+      // dredge again — once what the replacement of the draw before them
+      // parked is done (rule 614.11a: Chains of Mephistopheles' "they draw a
+      // card" after the discard).
+      if ((this.state.pendingDraws?.length ?? 0) > 0 && this.state.suspendedResolutions.at(-1)?.beforeDraws !== true) {
         this.drawNextWaiting();
         continue;
       }
@@ -31703,7 +31710,8 @@ export class Game {
       s.awaiting !== null ||
       s.pendingDiscards.length > 0 ||
       (s.pendingDiscardsToLibrary?.length ?? 0) > 0 ||
-      (s.pendingDraws?.length ?? 0) > 0 ||
+      // Not draws a replacement running ahead of them holds up (rule 614.11a).
+      (!this.drawsAheadOfQueue && (s.pendingDraws?.length ?? 0) > 0) ||
       (s.pendingEnterAttacking?.length ?? 0) > 0 ||
       s.pendingSacrifices.length > 0 ||
       // Victims held for the rest of an `each-player-may`'s players (rule
@@ -31750,13 +31758,32 @@ export class Game {
       return;
     }
     const parked = this.state.suspendedResolutions.length;
+    // What the rest of a draw's replacement parks again still goes before
+    // the draws waiting behind it (rule 614.11a).
+    if (next.beforeDraws === true) {
+      const outer = this.drawsAheadOfQueue;
+      this.drawsAheadOfQueue = true;
+      try {
+        this.resumeParkedSteps(next, parked);
+      } finally {
+        this.drawsAheadOfQueue = outer;
+        this.holdDrawsBehind(parked);
+      }
+      return;
+    }
+    this.resumeParkedSteps(next, parked);
+  }
+
+  /** `resumeSuspendedResolution`'s steps: `next`'s, as the same spell or
+   * ability, with `parked` the count of suspended resolutions beneath them. */
+  private resumeParkedSteps(next: ParkedSteps, parked: number): void {
     const outerSourceTimestamp = this.resolvingSourceTimestamp;
     this.resolvingSourceTimestamp = next.sourceTimestamp ?? null;
     this.state.decisionSource = next.decisionSource;
     const outerTrigger = this.resolvingTrigger;
     this.resolvingTrigger = next.resolvingTrigger ?? null;
     try {
-      applyEffectSpec(
+      this.withThisWaySince(next.thisWaySince, () => this.withReplacing(next.replacing, () => applyEffectSpec(
         next.effect,
         this.makeResolutionContext(
           next.source,
@@ -31777,7 +31804,7 @@ export class Game {
             ...(next.division !== undefined ? { division: next.division } : {}),
           },
         ),
-      );
+      )));
     } finally {
       this.resolvingSourceTimestamp = outerSourceTimestamp;
       this.resolvingTrigger = outerTrigger;
@@ -39593,6 +39620,12 @@ export class Game {
           ...(timestamp !== null ? { sourceTimestamp: timestamp } : {}),
           decisionSource: this.state.decisionSource,
           ...(this.resolvingTrigger !== null ? { resolvingTrigger: this.resolvingTrigger } : {}),
+          // The rest of a replacement's effect is still that replacement's
+          // (rule 614.5), and its "this way" its own.
+          ...(this.applyingReplacements.size > 0 ? { replacing: [...this.applyingReplacements] } : {}),
+          ...(this.applyingReplacements.size > 0 && this.state.resolutionSince !== undefined
+            ? { thisWaySince: this.state.resolutionSince }
+            : {}),
         });
       },
       // A source that has left the battlefield deals its damage as it last
@@ -39742,11 +39775,16 @@ export class Game {
           : undefined;
       },
       draw: (player, baseCount) => {
-        const count = this.drawInstructionReplaced(player, baseCount);
+        const { count, applied } = this.drawInstructionReplaced(player, baseCount);
+        // What already applied to the instruction doesn't again to the draws
+        // it became, nor to any a replacement of one of them makes (rule
+        // 614.5): those, and what's carrying out its effect now.
+        const replacing = [...this.applyingReplacements, ...applied];
+        this.withReplacing(applied, () => {
         for (let i = 0; i < count; i += 1) {
           // Behind a dredge question: the rest wait their turn, in order.
           if (this.drawsWaiting()) {
-            (this.state.pendingDraws ??= []).push({ player, count: count - i });
+            this.queueDraws(player, count - i, replacing);
             return;
           }
           // A draw `player` can't make: nor can they the rest (Narset's "subsequent
@@ -39765,17 +39803,21 @@ export class Game {
             !this.state.activeReplacements.some((r) => r.replacement.event === "would-draw" && r.next === true && (r.owner === from || r.owner === player)) &&
             !this.drawEffectReplacementsFor(from, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).some((r) => r.may);
           const unasked = this.state.awaiting === null;
+          const parkedBefore = this.state.suspendedResolutions.length;
           this.drawCard(player);
           // A draw replaced by a win (Laboratory Maniac) ended the game.
           if (empty || this.state.result.over) break;
           // A draw replaced by an effect that asks something (Underrealm
-          // Lich's look at three): it's answered before the next card is
-          // drawn (rule 614.11a), so the rest wait their turn.
+          // Lich's look at three, Chains of Mephistopheles' discard): all of
+          // it is done before the next card is drawn (rule 614.11a), so the
+          // rest wait their turn behind what it parked.
           if (unasked && this.state.awaiting !== null && i + 1 < count) {
-            (this.state.pendingDraws ??= []).push({ player, count: count - i - 1 });
+            this.queueDraws(player, count - i - 1, replacing);
+            this.holdDrawsBehind(parkedBefore);
             return;
           }
         }
+        });
       },
       cantDrawMore: (player, more) => this.cantDrawMore(player, more),
       playersInScope(who) {
@@ -62609,6 +62651,10 @@ controlledBy,
         ? undefined
         : (target ?? undefined),
     );
+    // What it does "this way" is its own: what the event became, not the
+    // rest of a resolution it happens in, and something even outside one (a
+    // draw as a cost).
+    const since = this.state.eventSeq;
     const ctx = this.makeResolutionContext(
       source,
       controller,
@@ -62623,16 +62669,46 @@ controlledBy,
         ...(facts.player !== undefined ? { player: facts.player } : {}),
         ...(facts.recipient !== undefined ? { recipient: facts.recipient } : {}),
       },
+      { since },
     );
-    if (facts.inSweep === true ? this.decisionOutstanding() : this.state.awaiting !== null) {
-      ctx.resumeAfterDecisions(effect);
-      return;
-    }
-    if (facts.key !== undefined) this.applyingReplacements.add(facts.key);
+    // Parked whole behind a decision already asked, it's still this
+    // replacement's effect when it runs (`ParkedSteps.replacing`).
+    this.withThisWaySince(since, () =>
+      this.withReplacing(facts.key === undefined ? undefined : [facts.key], () => {
+        if (facts.inSweep === true ? this.decisionOutstanding() : this.state.awaiting !== null) {
+          ctx.resumeAfterDecisions(effect);
+          return;
+        }
+        applyEffectSpec(effect, ctx);
+      }),
+    );
+  }
+
+  /** Runs `run` with "this way" read from event `since` on
+   * (`GameState.resolutionSince`), then puts back what it was. */
+  private withThisWaySince<T>(since: number | undefined, run: () => T): T {
+    if (since === undefined) return run();
+    const outer = this.state.resolutionSince;
+    this.state.resolutionSince = since;
     try {
-      applyEffectSpec(effect, ctx);
+      return run();
     } finally {
-      if (facts.key !== undefined) this.applyingReplacements.delete(facts.key);
+      if (outer === undefined) delete this.state.resolutionSince;
+      else this.state.resolutionSince = outer;
+    }
+  }
+
+  /** Runs `run` with `keys` among the replacements carrying out their own
+   * effect (`applyingReplacements`, rule 614.5), taking back only the ones it
+   * added. */
+  private withReplacing<T>(keys: readonly string[] | undefined, run: () => T): T {
+    if (keys === undefined || keys.length === 0) return run();
+    const added = keys.filter((key) => !this.applyingReplacements.has(key));
+    for (const key of added) this.applyingReplacements.add(key);
+    try {
+      return run();
+    } finally {
+      for (const key of added) this.applyingReplacements.delete(key);
     }
   }
 
@@ -65528,8 +65604,13 @@ controlledBy,
     // Each draw is its own choice.
     if (this.state.replacementAnswers !== undefined) delete this.state.replacementAnswers[`draw:${player}`];
     if (redirected) {
-      // The draw is the Thief's controller's now, and theirs to replace.
-      if (!this.nextDrawReplaced(drawer, drawEvent)) this.drawCardRaw(drawer);
+      // The draw is the Thief's controller's now, a draw event of theirs, and
+      // theirs to replace (rule 616.2): "the next time", an effect (Chains of
+      // Mephistopheles, Underrealm Lich) or "draw N instead" — none of the
+      // Thieves again (614.5).
+      const theirs = this.noteWouldDraw(drawer);
+      if (this.nextDrawReplaced(drawer, theirs)) return;
+      this.drawReplacedByEffectOr(drawer, theirs);
       return;
     }
     // "If you would draw a card, instead look at the top three cards of your
@@ -65540,6 +65621,13 @@ controlledBy,
     // "If you would draw a card, you may instead …" (Abundance): asked of the
     // drawing player (rule 616.1), "Draw a card" among the options unless a
     // mandatory one of theirs replaces the draw anyway.
+    this.drawReplacedByEffectOr(player, drawEvent);
+  }
+
+  /** The rest of a draw of `player`'s, once nothing redirected it: an
+   * effect replacement — asked about when they've a choice to make — or
+   * else "draw N cards instead" and the draw itself. */
+  private drawReplacedByEffectOr(player: PlayerId, drawEvent: WouldDrawEvent): void {
     if (this.optionalDrawReplacementAsked(player, drawEvent)) return;
     const replacing = this.drawEffectReplacementFor(player, drawEvent);
     if (replacing !== null) {
@@ -65566,29 +65654,39 @@ controlledBy,
    * replacements that reach it ("if you would draw one or more cards"), and
    * 0 when one makes it an effect instead (Alms Collector). Each applies once
    * (rule 614.5); a player choosing the order would take these first. */
-  private drawInstructionReplaced(player: PlayerId, count: number): number {
-    if (count <= 0 || this.state.result.over) return count;
+  private drawInstructionReplaced(player: PlayerId, count: number): { readonly count: number; readonly applied: readonly string[] } {
+    if (count <= 0 || this.state.result.over) return { count, applied: [] };
     let n = count;
+    // Each by its key (`applyingReplacements`): one that applied to the
+    // instruction a replacement's draw came out of has had its opportunity
+    // (rule 614.5) — Quantum Riddler's "plus one" isn't added again to the
+    // card Chains of Mephistopheles has its player draw after a discard.
+    const applied: string[] = [];
     for (const id of this.staticSourceIds()) {
       const source = this.state.objects[id];
       if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.staticsOfSource(source)) {
+      const statics = this.staticsOfSource(source);
+      for (let index = 0; index < statics.length; index += 1) {
+        const ability = statics[index];
         const r = ability.replacement;
         if (r?.event !== "would-draw" || r.instruction === undefined || n < r.instruction.atLeast) continue;
         if (!(r.who === "any-player" || (r.who === "you") === (player === source.controller))) continue;
         if (!this.staticActive(source, ability)) continue;
+        const key = `draw-instruction:${id}:${source.zoneChangeCount ?? 0}:${index}`;
+        if (this.applyingReplacements.has(key)) continue;
         const becomes = insteadEffect(r.instead);
         if (becomes !== undefined) {
-          this.runReplacedBy(becomes.effect, source.id, source.controller, { x: n, player });
-          return 0;
+          this.withReplacing(applied, () => this.runReplacedBy(becomes.effect, source.id, source.controller, { x: n, player, key }));
+          return { count: 0, applied };
         }
         const change = insteadModify(r.instead);
         if (change === undefined) continue;
         n *= change.times ?? 1;
         if (change.plus !== undefined) n += this.replacementAmount(change.plus, source);
+        applied.push(key);
       }
     }
-    return n;
+    return { count: n, applied };
   }
 
   /** A draw replaced by an effect (rule 614.1a): `"x"` is 1, the card drawn
@@ -65729,15 +65827,26 @@ controlledBy,
   }
 
   /** Whether draws are waiting behind a dredge question, so the next one
-   * must wait too. */
+   * must wait too — not those queued behind the rest of a replacement that's
+   * running now (`drawsAheadOfQueue`), which go before them. */
   private drawsWaiting(): boolean {
     const awaiting = this.state.awaiting;
     return (
-      (this.state.pendingDraws?.length ?? 0) > 0 ||
+      (!this.drawsAheadOfQueue && (this.state.pendingDraws?.length ?? 0) > 0) ||
       (awaiting !== null &&
         awaiting.kind === "choose-modes" &&
         (awaiting.dredgeFor !== undefined || awaiting.nextDrawFor !== undefined))
     );
+  }
+
+  /** Queues `count` draws of `player`'s to wait their turn: ahead of those
+   * already waiting when the rest of a draw's replacement makes them
+   * (`drawsAheadOfQueue` — rule 614.11a), else behind. */
+  private queueDraws(player: PlayerId, count: number, replacing: readonly string[]): void {
+    const entry = { player, count, ...(replacing.length > 0 ? { replacing } : {}) };
+    const queue = (this.state.pendingDraws ??= []);
+    if (this.drawsAheadOfQueue) queue.unshift(entry);
+    else queue.push(entry);
   }
 
   /** The next draw waiting behind a dredge question: made now, and offered
@@ -65758,11 +65867,32 @@ controlledBy,
         // Each draw is the player's to replace or not (Abundance's ruling).
         this.drawEffectReplacementsFor(first.player, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).some((r) => r.may))
     ) {
-      queue.unshift({ player: first.player, count: first.count - 1 });
+      queue.unshift({ player: first.player, count: first.count - 1, ...(first.replacing !== undefined ? { replacing: first.replacing } : {}) });
     }
     if (queue.length === 0) delete this.state.pendingDraws;
     else this.state.pendingDraws = queue;
-    if (!gone) this.drawCard(first.player);
+    if (gone) return;
+    const parkedBefore = this.state.suspendedResolutions.length;
+    // This draw goes ahead of the rest of the queue, all of its replacement
+    // with it (rule 614.11a).
+    const outer = this.drawsAheadOfQueue;
+    this.drawsAheadOfQueue = true;
+    try {
+      this.withReplacing(first.replacing, () => this.drawCard(first.player));
+    } finally {
+      this.drawsAheadOfQueue = outer;
+    }
+    if ((this.state.pendingDraws?.length ?? 0) > 0) this.holdDrawsBehind(parkedBefore);
+  }
+
+  /** Marks what a draw's replacement parked — the suspended resolutions from
+   * `from` up — to be finished before the draws waiting behind it (rule
+   * 614.11a), whatever is parked beneath it later. */
+  private holdDrawsBehind(from: number): void {
+    const parked = this.state.suspendedResolutions;
+    for (let i = from; i < parked.length; i += 1) {
+      if (parked[i].beforeDraws !== true) parked[i] = { ...parked[i], beforeDraws: true };
+    }
   }
 
   /** Dredge (rule 702.52a): `player` mills N instead of drawing, and `card`

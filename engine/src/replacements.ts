@@ -1067,8 +1067,12 @@ export interface DrawRedirectReplacement {
    * it answered, before the next card is drawn (rule 614.11a). Taken before
    * any `set` on the same draw: of the orders the drawing player could pick
    * (rule 616.1), the engine takes the effect first (AUTHORING §15,
-   * "Replacement ordering"). The effect mustn't draw a card unless the
-   * replacement is `firstEachTurn`, which its own draw then can't meet again. */
+   * "Replacement ordering"). A card the effect draws is a new draw event,
+   * which this replacement can't replace again (rule 614.5) but any other may
+   * (616.2) — the rest of the effect after a decision in it included
+   * (`ParkedSteps.replacing`): Chains of Mephistopheles' "that player
+   * discards a card instead. If the player discards a card this way, they
+   * draw a card", two of which each make the player discard first. */
   readonly instead: "you-draw" | "win-game" | Instead;
   /** The whole instruction rather than each card: "if you would draw **one
    * or more** cards, you draw that many cards plus one instead" (Quantum
@@ -1093,8 +1097,9 @@ export interface DrawRedirectReplacement {
    * Thief; Teferi's Ageless Insight's and Bard, King of Dale's "draw two
    * cards instead"): not the first card a player draws during their own
    * turn's draw step, the turn-based draw or not — if that one was skipped,
-   * the next card they draw in the step is the first. With `who: "you"`
-   * (`draws` or `effect`) only. */
+   * the next card they draw in the step is the first. "They" is the drawing
+   * player, whoever's replacement it is (Hullbreacher's opponents, Chains of
+   * Mephistopheles' every player). */
   readonly exceptFirstInDrawStep?: boolean;
   /** "The first time you would draw a card each turn" (Reed Richards,
    * Smartest Man; Scion of Halaster): only the player's first draw event of
