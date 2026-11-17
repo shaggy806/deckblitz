@@ -150,6 +150,7 @@ import { emblemToVisible } from './ui/defToVisible.ts'
 import { CreatureTypePicker } from './ui/CreatureTypePicker.tsx'
 import { carryHover } from './ui/hoverCarry.ts'
 import { handPlacesBefore, slideHand } from './ui/handMotion.ts'
+import { glideTiles, tileSpotsBefore } from './ui/tileShift.ts'
 import { watchHandSweep } from './ui/handSweep.ts'
 import { motionPrefs } from './game/motionPrefs.ts'
 import { LibraryTopCard } from './ui/LibraryTopCard.tsx'
@@ -4933,6 +4934,26 @@ function Table({
     const glide = !handPainted.current && !prefs.reduced && document.visibilityState !== 'hidden'
     return slideHand(row, glide ? handBefore : null, prefs.animScale)
   }, [handCardGap, handIds.length, handBefore])
+  // The boards' tiles glide the same way (`tileShift.ts`): a permanent
+  // entering or leaving, or a stack splitting, moved every tile after it at
+  // the remount. Started in a microtask, so still before this board paints
+  // but after everything that measures it as it mounts — the layout effect
+  // that publishes the frame's second half is the parent's, and runs after
+  // this one: a flight aimed at a tile mid-glide would land where it was.
+  const [tilesBefore] = useState(tileSpotsBefore)
+  useLayoutEffect(() => {
+    const prefs = motionPrefs()
+    if (prefs.reduced || document.visibilityState === 'hidden') return
+    let cancel: (() => void) | null = null
+    let gone = false
+    queueMicrotask(() => {
+      if (!gone) cancel = glideTiles(tilesBefore, prefs.animScale)
+    })
+    return () => {
+      gone = true
+      cancel?.()
+    }
+  }, [tilesBefore])
 
   /** Sizes `boardEl`'s tiles to the largest width at which its rows still fit
    * the height its quadrant gives it (`.quadrant-body`'s content box),

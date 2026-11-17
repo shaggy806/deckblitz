@@ -6,6 +6,7 @@ import { useMotionPrefs } from '../game/motionPrefs.ts'
 import { arrowSources, shownTargets } from '../game/resolveAims.ts'
 import type { ResolveState } from '../game/resolveAims.ts'
 import { between, stackLoop } from './arrowGeometry.ts'
+import { restingRect } from './tileShift.ts'
 import type { Course } from './arrowGeometry.ts'
 
 /** One line to draw: what it joins, by key, and how it should look. */
@@ -208,8 +209,10 @@ export function ArrowLayer({
         const pair = `${s.kind}|${numberOf(a)}|${numberOf(b)}`
         if (seen.has(pair)) continue
         seen.add(pair)
-        const ra = a.getBoundingClientRect()
-        const rb = b.getBoundingClientRect()
+        // Where each will rest: a tile gliding to its new place on this board
+        // (`tileShift.ts`) is aimed at there, not wherever it is on the way.
+        const ra = restingRect(a)
+        const rb = restingRect(b)
         if (ra.width === 0 || rb.width === 0) continue
         // Between two stack entries the usual course would end under the
         // entry it leaves, so it goes round the pile instead (and over it).
