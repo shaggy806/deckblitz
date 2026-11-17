@@ -25,6 +25,7 @@ export default defineCard({
         },
       },
       resolve: null,
+      keywordOf: "modular",
       text: "Modular 1",
     },
   ],
@@ -32,6 +33,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: 1 } },
+      keywordOf: "modular",
       text: "Modular 1",
     },
   ],

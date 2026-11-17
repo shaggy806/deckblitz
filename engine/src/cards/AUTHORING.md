@@ -7658,7 +7658,11 @@ The `prevent-damage` family makes the same record.
   offered activations see the new type. Of several, the newest applies
   (rule 616.1). Not "one mana of a color of your choice instead of any other
   type and amount" (Harvest Mage).
-- `{ event: "would-add-counter", instead: { modify: { times?, plus?, half? } }, counterKind?, filter?, other?, byEffectOnly?, whoPuts?, onPlayers? }` —
+- `{ event: "would-add-counter", instead: { modify: { times?, plus?, half? } }, counterKind?, filter?, other?, byEffectOnly?, whoPuts?, onPlayers?, byKeywordAbility? }` —
+  `byKeywordAbility: "modular"` is "if **a modular triggered ability** would put" (Zabaz, the
+  Glimmerwasp): only counters put by a triggered ability stamped `keywordOf: "modular"` as it
+  resolves, never "enters with" counters. Every modular card stamps both its halves
+  `keywordOf: "modular"` (the scaffolder does; `modular-counter-replacement.test.ts` checks the pool).
   Doubling Season (`times: 2`). `filter` narrows which of your permanents
   it covers (Branching Evolution: `{ type: "creature" }`; Caradora's "a
   creature or Vehicle": `anyOf`). `plus: 1` in the `modify` is "that many plus one" (Hardened

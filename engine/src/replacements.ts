@@ -32,7 +32,7 @@
 
 import type { Keyword, StaticCondition } from "./cards/define.js";
 import type { BeholdSpec, EffectAmount, EffectSpec } from "./effects.js";
-import type { ResolvedPatch } from "./characteristics-patch.js";
+import type { KeywordAbilityName, ResolvedPatch } from "./characteristics-patch.js";
 import type { CardFilter } from "./filter.js";
 import type { CardType } from "./cards.js";
 import type { ObjectId } from "./primitives.js";
@@ -812,6 +812,12 @@ export interface CounterMultiplierReplacement {
   /** "…put on **another** creature you control" (Benevolent Hydra): never
    * this permanent itself. */
   readonly other?: true;
+  /** "If **a modular triggered ability** would put one or more +1/+1
+   * counters" (Zabaz, the Glimmerwasp): only counters put by a triggered
+   * ability stamped `keywordOf` this keyword, as it resolves (rule 702.43a's
+   * triggered half) — not a modular permanent's "enters with" counters, nor
+   * any other effect's. */
+  readonly byKeywordAbility?: KeywordAbilityName;
   readonly counterKind?: string;
   /** Narrows which of your permanents it applies to — Branching Evolution's
    * "on a **creature** you control" is `{ type: "creature" }`. Matched

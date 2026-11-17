@@ -3,6 +3,7 @@
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
     "effect:control-while-player-is-monarch",
+    "replacement:counter-replacement-by-modular-ability",
     "static:prohibit-per-opponent-comparison",
     "filter:counts-as-named-card",
     "effect:reveal-until-each-opponent-linked",

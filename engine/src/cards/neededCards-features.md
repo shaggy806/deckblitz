@@ -352,6 +352,14 @@ Now a `then` that reads the damage's source (`"trigger-object"`, `"trigger-contr
 `reflexive-trigger` is owed once per source (`thenPerSource`, `Game.damageBatch.shieldThens`; rule 603.2c) —
 which also fixes Comeuppance against two attackers. Judgment of Alexander (rank 11898).
 `test/prevented-this-way-whenever.test.ts`.
+### Counters a modular ability puts, replaced — built 2026-11-17
+
+The key `replacement:counter-replacement-by-modular-ability`: a `would-add-counter` replacement's
+`byKeywordAbility: "modular"` reaches only counters put by a triggered ability stamped `keywordOf: "modular"`
+as it resolves (`Game.keywordAbilityResolving`, read off `resolvingTrigger`, which a "you may" answered in
+`applyModesChoice` now restores as a parked step's is), never "enters with" counters. `KeywordAbilityName`
+takes `"modular"`, and all 22 modular cards (and the scaffolder's template) stamp both halves. Zabaz, the
+Glimmerwasp (rank 12121). `test/modular-counter-replacement.test.ts`.
 
 ### A chosen source's next damage, half of it prevented — built 2026-11-17
 

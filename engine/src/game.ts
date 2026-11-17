@@ -9558,7 +9558,19 @@ export class Game {
       modesBy === undefined ? lastKnownRefs : { ...lastKnownRefs, player },
       identity,
     );
-    for (const i of ordered) applyEffectSpec(modes[i].effect, context);
+    // The trigger the question was asked in is resolving again while its
+    // answer's effect runs, as a parked step's is (`resumeParkedSteps`):
+    // "if a modular triggered ability would put …" asks it (Zabaz, the
+    // Glimmerwasp, after modular's "you may").
+    const outerTrigger = this.resolvingTrigger;
+    if (awaiting.trigger !== undefined) {
+      this.resolvingTrigger = { object: awaiting.trigger.object, signature: awaiting.trigger.signature };
+    }
+    try {
+      for (const i of ordered) applyEffectSpec(modes[i].effect, context);
+    } finally {
+      this.resolvingTrigger = outerTrigger;
+    }
     // Logged once the payment has been made, and ahead of the counter.
     if (ward !== undefined) {
       this.emit(
@@ -68367,11 +68379,24 @@ controlledBy,
   ): readonly CounterStep[] {
     return this.counterReplacementStepList(kind, asCost, by ?? target.controller, (r, source, id) =>
       !(entering && id === target.id) &&
+      // A permanent's "enters with" counters aren't put by an ability
+      // resolving (modular's static half, rule 702.43a).
+      !(entering && r.byKeywordAbility !== undefined) &&
       !(r.other === true && id === target.id) &&
       (r.whoPuts !== undefined || r.anyController === true || source.controller === target.controller) &&
       (r.filter === undefined ||
         matchesFilter(this.state, this.registry, target.id, r.filter, { you: source.controller, source: id })),
     );
+  }
+
+  /** The keyword (`keywordOf`) of the triggered ability resolving right now,
+   * if it's one of a keyword's — what "if a modular triggered ability would
+   * put …" asks (Zabaz, the Glimmerwasp). `resolvingTrigger` is kept across a
+   * decision that parks the rest (modular's "you may"). */
+  private keywordAbilityResolving(): KeywordAbilityName | undefined {
+    const resolving = this.resolvingTrigger === null ? undefined : this.state.objects[this.resolvingTrigger.object];
+    if (resolving === undefined || resolving.kind !== "ability") return undefined;
+    return (this.stackAbilityOf(resolving) as Partial<TriggeredAbility>).keywordOf;
   }
 
   /** The steps a player has already chosen for this placement, in their order. */
@@ -68443,6 +68468,12 @@ controlledBy,
     reaches: (replacement: CounterMultiplierReplacement, source: GameObject, id: ObjectId) => boolean,
   ): readonly CounterStep[] {
     const steps: CounterStep[] = [];
+    // "If a modular triggered ability would put …" (Zabaz, the Glimmerwasp):
+    // which keyword's ability is putting these, read once.
+    let placing: KeywordAbilityName | undefined | null = null;
+    const byKeywordOk = (r: CounterMultiplierReplacement): boolean =>
+      r.byKeywordAbility === undefined ||
+      (!asCost && r.byKeywordAbility === (placing === null ? (placing = this.keywordAbilityResolving()) : placing));
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       const statics = this.registry.get(rulesTextName(object)).static;
@@ -68452,6 +68483,7 @@ controlledBy,
         if (
           r?.event === "would-add-counter" &&
           !(asCost && r.byEffectOnly === true) &&
+          byKeywordOk(r) &&
           (r.counterKind === undefined || r.counterKind === kind) &&
           (r.whoPuts === undefined || (r.whoPuts === "you") === (by === object.controller)) &&
           reaches(r, object, id) &&
@@ -68482,6 +68514,7 @@ controlledBy,
       const r = active.replacement;
       if (r.event !== "would-add-counter" || active.next === true || active.left !== undefined) return;
       if (asCost && r.byEffectOnly === true) return;
+      if (!byKeywordOk(r)) return;
       if (r.counterKind !== undefined && r.counterKind !== kind) return;
       if (this.state.players[active.owner]?.hasLost === true) return;
       const holder = { ...(this.state.objects[active.source] ?? { id: active.source }), controller: active.owner } as GameObject;

@@ -4935,6 +4935,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       counters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } },
     });
     expect(wanderer.triggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    // Both halves are modular's, for "if a modular triggered ability would
+    // put …" (Zabaz, the Glimmerwasp).
+    expect(wanderer.triggered[0].keywordOf).toBe("modular");
+    expect(wanderer.static[0].keywordOf).toBe("modular");
     expect(wanderer.complete).toBe(true);
   });
 

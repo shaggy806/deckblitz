@@ -363,11 +363,14 @@ function keywordPart(part, faceName, typeLine = "") {
     // creature or not (rule 702.44c).
     const n = m[1] !== undefined ? Number(m[1]) : { manaSpentOf: "source", count: "colors" };
     const label = typeof n === "number" ? `Modular ${n}` : "Modular—Sunburst";
+    // Both halves stamped `keywordOf`: "if a modular triggered ability would
+    // put …" (Zabaz, the Glimmerwasp) reads it.
     return {
       static: [
         {
           affects: { scope: "self" },
           replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: n } },
+          keywordOf: "modular",
           text: label,
         },
       ],
@@ -381,6 +384,7 @@ function keywordPart(part, faceName, typeLine = "") {
             effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { countersOn: "source", counter: "+1/+1" } },
           },
           resolve: null,
+          keywordOf: "modular",
           text: label,
         },
       ],
