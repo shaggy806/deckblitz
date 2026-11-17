@@ -545,6 +545,7 @@ import _poolMetathranAerostat from "../pool/metathran-aerostat.js";
 import _poolMidnightArsonist from "../pool/midnight-arsonist.js";
 import _poolMightOfAlara from "../pool/might-of-alara.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
+import _poolMikeyDonPartyPlanners from "../pool/mikey-don-party-planners.js";
 import _poolMilitantAngel from "../pool/militant-angel.js";
 import _poolMilitaryDiscipline from "../pool/military-discipline.js";
 import _poolMindSculpt from "../pool/mind-sculpt.js";
@@ -1585,6 +1586,7 @@ const shard: CardShard = {
     _poolMidnightArsonist,
     _poolMightOfAlara,
     _poolMigratoryRoute,
+    _poolMikeyDonPartyPlanners,
     _poolMilitantAngel,
     _poolMilitaryDiscipline,
     _poolMindSculpt,

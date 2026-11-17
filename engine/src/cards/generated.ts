@@ -13379,6 +13379,7 @@ import _poolHythoniaTheCruel from "./pool/hythonia-the-cruel.js";
 import _poolIAmIronMan from "./pool/i-am-iron-man.js";
 import _poolIKSNeghvarImperialFlagship from "./pool/i-k-s-neghvar-imperial-flagship.js";
 import _poolIanChesterton from "./pool/ian-chesterton.js";
+import _poolIanMalcolmChaotician from "./pool/ian-malcolm-chaotician.js";
 import _poolIanTheReckless from "./pool/ian-the-reckless.js";
 import _poolIbHalfheartGoblinTactician from "./pool/ib-halfheart-goblin-tactician.js";
 import _poolIcatianCrier from "./pool/icatian-crier.js";
@@ -17429,6 +17430,7 @@ import _poolMiirymSentinelWyrm from "./pool/miirym-sentinel-wyrm.js";
 import _poolMijaeDjinn from "./pool/mijae-djinn.js";
 import _poolMikaeusTheLunarch from "./pool/mikaeus-the-lunarch.js";
 import _poolMikaeusTheUnhallowed from "./pool/mikaeus-the-unhallowed.js";
+import _poolMikeyDonPartyPlanners from "./pool/mikey-don-party-planners.js";
 import _poolMikeyLeoChaosOrder from "./pool/mikey-leo-chaos-order.js";
 import _poolMikeyMonaMutantSitters from "./pool/mikey-mona-mutant-sitters.js";
 import _poolMikokoroCenterOfTheSea from "./pool/mikokoro-center-of-the-sea.js";
@@ -23161,6 +23163,7 @@ import _poolSabertoothMauler from "./pool/sabertooth-mauler.js";
 import _poolSabertoothNishoba from "./pool/sabertooth-nishoba.js";
 import _poolSabertoothOutrider from "./pool/sabertooth-outrider.js";
 import _poolSabertoothWyvern from "./pool/sabertooth-wyvern.js";
+import _poolSabinMasterMonk from "./pool/sabin-master-monk.js";
 import _poolSabotageStrategist from "./pool/sabotage-strategist.js";
 import _poolSabotender from "./pool/sabotender.js";
 import _poolSabretoothTiger from "./pool/sabretooth-tiger.js";
@@ -23419,6 +23422,7 @@ import _poolSanitariumSkeleton from "./pool/sanitarium-skeleton.js";
 import _poolSanitationAutomaton from "./pool/sanitation-automaton.js";
 import _poolSanityGnawers from "./pool/sanity-gnawers.js";
 import _poolSanityGrinding from "./pool/sanity-grinding.js";
+import _poolSanwellAvengerAce from "./pool/sanwell-avenger-ace.js";
 import _poolSaplingNursery from "./pool/sapling-nursery.js";
 import _poolSaplingOfColfenor from "./pool/sapling-of-colfenor.js";
 import _poolSapphireCharm from "./pool/sapphire-charm.js";
@@ -27903,6 +27907,7 @@ import _poolTenaciousDrone from "./pool/tenacious-drone.js";
 import _poolTenaciousHunter from "./pool/tenacious-hunter.js";
 import _poolTenaciousTomeseeker from "./pool/tenacious-tomeseeker.js";
 import _poolTenaciousTosk from "./pool/tenacious-tosk.js";
+import _poolTenaciousUnderdog from "./pool/tenacious-underdog.js";
 import _poolTenacity from "./pool/tenacity.js";
 import _poolTendThePests from "./pool/tend-the-pests.js";
 import _poolTendTheSprigs from "./pool/tend-the-sprigs.js";
@@ -46688,6 +46693,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIAmIronMan,
   _poolIKSNeghvarImperialFlagship,
   _poolIanChesterton,
+  _poolIanMalcolmChaotician,
   _poolIanTheReckless,
   _poolIbHalfheartGoblinTactician,
   _poolIcatianCrier,
@@ -50738,6 +50744,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMijaeDjinn,
   _poolMikaeusTheLunarch,
   _poolMikaeusTheUnhallowed,
+  _poolMikeyDonPartyPlanners,
   _poolMikeyLeoChaosOrder,
   _poolMikeyMonaMutantSitters,
   _poolMikokoroCenterOfTheSea,
@@ -56470,6 +56477,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSabertoothNishoba,
   _poolSabertoothOutrider,
   _poolSabertoothWyvern,
+  _poolSabinMasterMonk,
   _poolSabotageStrategist,
   _poolSabotender,
   _poolSabretoothTiger,
@@ -56728,6 +56736,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSanitationAutomaton,
   _poolSanityGnawers,
   _poolSanityGrinding,
+  _poolSanwellAvengerAce,
   _poolSaplingNursery,
   _poolSaplingOfColfenor,
   _poolSapphireCharm,
@@ -61212,6 +61221,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTenaciousHunter,
   _poolTenaciousTomeseeker,
   _poolTenaciousTosk,
+  _poolTenaciousUnderdog,
   _poolTenacity,
   _poolTendThePests,
   _poolTendTheSprigs,
@@ -80010,6 +80020,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/i-am-iron-man": _poolIAmIronMan,
   "pool/i-k-s-neghvar-imperial-flagship": _poolIKSNeghvarImperialFlagship,
   "pool/ian-chesterton": _poolIanChesterton,
+  "pool/ian-malcolm-chaotician": _poolIanMalcolmChaotician,
   "pool/ian-the-reckless": _poolIanTheReckless,
   "pool/ib-halfheart-goblin-tactician": _poolIbHalfheartGoblinTactician,
   "pool/icatian-crier": _poolIcatianCrier,
@@ -84060,6 +84071,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mijae-djinn": _poolMijaeDjinn,
   "pool/mikaeus-the-lunarch": _poolMikaeusTheLunarch,
   "pool/mikaeus-the-unhallowed": _poolMikaeusTheUnhallowed,
+  "pool/mikey-don-party-planners": _poolMikeyDonPartyPlanners,
   "pool/mikey-leo-chaos-order": _poolMikeyLeoChaosOrder,
   "pool/mikey-mona-mutant-sitters": _poolMikeyMonaMutantSitters,
   "pool/mikokoro-center-of-the-sea": _poolMikokoroCenterOfTheSea,
@@ -89792,6 +89804,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sabertooth-nishoba": _poolSabertoothNishoba,
   "pool/sabertooth-outrider": _poolSabertoothOutrider,
   "pool/sabertooth-wyvern": _poolSabertoothWyvern,
+  "pool/sabin-master-monk": _poolSabinMasterMonk,
   "pool/sabotage-strategist": _poolSabotageStrategist,
   "pool/sabotender": _poolSabotender,
   "pool/sabretooth-tiger": _poolSabretoothTiger,
@@ -90050,6 +90063,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sanitation-automaton": _poolSanitationAutomaton,
   "pool/sanity-gnawers": _poolSanityGnawers,
   "pool/sanity-grinding": _poolSanityGrinding,
+  "pool/sanwell-avenger-ace": _poolSanwellAvengerAce,
   "pool/sapling-nursery": _poolSaplingNursery,
   "pool/sapling-of-colfenor": _poolSaplingOfColfenor,
   "pool/sapphire-charm": _poolSapphireCharm,
@@ -94534,6 +94548,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tenacious-hunter": _poolTenaciousHunter,
   "pool/tenacious-tomeseeker": _poolTenaciousTomeseeker,
   "pool/tenacious-tosk": _poolTenaciousTosk,
+  "pool/tenacious-underdog": _poolTenaciousUnderdog,
   "pool/tenacity": _poolTenacity,
   "pool/tend-the-pests": _poolTendThePests,
   "pool/tend-the-sprigs": _poolTendTheSprigs,

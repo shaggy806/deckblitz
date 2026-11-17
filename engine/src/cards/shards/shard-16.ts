@@ -902,6 +902,7 @@ import _poolTemporalSpring from "../pool/temporal-spring.js";
 import _poolTemptingWitch from "../pool/tempting-witch.js";
 import _poolTemurBanner from "../pool/temur-banner.js";
 import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
+import _poolTenaciousUnderdog from "../pool/tenacious-underdog.js";
 import _poolTerashisVerdict from "../pool/terashis-verdict.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
 import _poolTerrorOfKruinPass from "../pool/terror-of-kruin-pass.js";
@@ -2002,6 +2003,7 @@ const shard: CardShard = {
     _poolTemptingWitch,
     _poolTemurBanner,
     _poolTemurTawnyback,
+    _poolTenaciousUnderdog,
     _poolTerashisVerdict,
     _poolTerohsFaithful,
     _poolTerrorOfKruinPass,

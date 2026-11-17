@@ -706,6 +706,7 @@ import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
 import _poolRustScarab from "../pool/rust-scarab.js";
 import _poolRuthlessCullblade from "../pool/ruthless-cullblade.js";
+import _poolSabinMasterMonk from "../pool/sabin-master-monk.js";
 import _poolSageAven from "../pool/sage-aven.js";
 import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
@@ -1690,6 +1691,7 @@ const shard: CardShard = {
     _poolRushOfAdrenaline,
     _poolRustScarab,
     _poolRuthlessCullblade,
+    _poolSabinMasterMonk,
     _poolSageAven,
     _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,

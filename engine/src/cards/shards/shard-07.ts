@@ -413,6 +413,7 @@ import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHydroform from "../pool/hydroform.js";
 import _poolHydromorphGull from "../pool/hydromorph-gull.js";
 import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
+import _poolIanMalcolmChaotician from "../pool/ian-malcolm-chaotician.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
 import _poolImmardTheStormcleaver from "../pool/immard-the-stormcleaver.js";
@@ -1473,6 +1474,7 @@ const shard: CardShard = {
     _poolHydroform,
     _poolHydromorphGull,
     _poolHystericalBlindness,
+    _poolIanMalcolmChaotician,
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
     _poolImmardTheStormcleaver,
