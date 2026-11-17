@@ -1743,6 +1743,13 @@ export function parseCost(text) {
       const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1], { cards: true });
       if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
       cost.discard = { count: 1, ...(filter !== undefined ? { filter } : {}) };
+    } else if ((m = new RegExp(`^Discard ${N} cards( with different names)?$`).exec(part))) {
+      // "Discard two cards", "Discard three cards with different names"
+      // (Ormos, Archive Keeper): which, chosen as it's paid — with no two of
+      // a name.
+      const count = numberOf(m[1]);
+      if (typeof count !== "number" || count < 2) return null;
+      cost.discard = { count, ...(m[2] !== undefined ? { differentNames: true } : {}) };
     } else if ((m = /^Remove all ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
       // Every one there, none allowed; the number removed is the ability's X
       // (Catti-brie of Mithral Hall).
@@ -22922,9 +22929,26 @@ function parseStatic(line, text) {
   if ((m = /^You have (hexproof|shroud)\.$/.exec(line))) {
     return { affects: { scope: "self" }, playerKeywords: [m[1]], text };
   }
+  // "If you would draw a card, you may put a study counter on this
+  // enchantment instead." (Pursuit of Knowledge): an optional replacement,
+  // asked draw by draw (rule 616.1) — declined, the card is drawn.
+  if ((m = /^If you would draw a card, you may (.+?) instead\.$/.exec(line))) {
+    const effect = parseEffect(`${m[1].charAt(0).toUpperCase()}${m[1].slice(1)}.`, { targets: [] });
+    const parsed = "kind" in effect ? { effect, todo: [] } : effect;
+    // The option's words as printed ("this enchantment", not "~").
+    const shown = /^If you would draw a card, you may (.+?) instead\.$/.exec(text)?.[1] ?? m[1];
+    if (parsed.effect !== null && parsed.todo.length === 0) {
+      return {
+        affects: { scope: "self" },
+        replacement: { event: "would-draw", who: "you", instead: { text: shown, effect: parsed.effect }, may: true },
+        text,
+      };
+    }
+  }
   if (
-    (m = /^If you would draw a card, instead (.+)$/.exec(line)) ??
-    (m = /^If you would draw a card, (.+?) instead\.( .+)?$/.exec(line))
+    !/^If you would draw a card, you may /.test(line) &&
+    ((m = /^If you would draw a card, instead (.+)$/.exec(line)) ??
+      (m = /^If you would draw a card, (.+?) instead\.( .+)?$/.exec(line)))
   ) {
     // "…, exile the top card of your library face down instead." (Asmodeus the
     // Archfiend): the one sentence, its period gone with "instead".

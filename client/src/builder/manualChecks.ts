@@ -13273,4 +13273,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ human: true }, { human: true }, { human: true }],
     }),
   ),
+  // --- Three cards with different names discarded (2026-11-17) -------------------
+  preset(
+    "Ormos, Archive Keeper: its cost's three cards must have different names",
+    board({
+      you: { bf: ['Ormos, Archive Keeper', 'Island*3'], hand: ['Shock', 'Shock', 'Forest', 'Grizzly Bears'] },
+      opp: {},
+    }),
+  ),
+  preset(
+    'Ormos, Archive Keeper: in a 4-player game, draws from an empty library become counters',
+    board({
+      you: { bf: ['Ormos, Archive Keeper', 'Island*3'], hand: ['Shock', 'Forest', 'Grizzly Bears'], lib: ['Wastes', 'Wastes'] },
+      opp: [{}, {}, {}],
+      fill: 0,
+    }),
+  ),
 ]

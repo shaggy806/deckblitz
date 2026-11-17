@@ -480,12 +480,17 @@ export interface AbilityCost {
    * Distortion; Knollspine Invocation): X is announced as it's activated
    * (rule 107.3a) though the mana cost needn't have `{X}`, the ability is
    * offered once per X with such a card to discard, and only those may pay.
+   * `differentNames` is "Discard three cards with different names" (Ormos,
+   * Archive Keeper): no two of the cards discarded share a name, and the
+   * ability is offered only with that many names in hand; the `discard`
+   * decision carries each offered card's name and refuses a repeat.
    */
   readonly discard?: {
     readonly count: number | "x";
     readonly filter?: CardFilter;
     readonly random?: boolean;
     readonly manaValueX?: boolean;
+    readonly differentNames?: true;
   };
   /**
    * Exile `count` cards from your graveyard, matching `filter` if given, as

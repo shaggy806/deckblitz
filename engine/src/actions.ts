@@ -2097,6 +2097,10 @@ export type LegalAction =
        * included (Neheb, Dreadhorde Champion). */
       readonly upTo?: true;
       readonly from: readonly ObjectId[];
+      /** "Discard three cards with different names" (Ormos, Archive
+       * Keeper): each card's name, in `from`'s order — no two cards
+       * discarded may share one. */
+      readonly differentNames?: readonly string[];
     }
   | {
       readonly kind: "choose-from-zone";

@@ -8769,3 +8769,12 @@ Each board's die comes up 4.
 ### Custodi Squire: in a 4-player game, the most votes wins
 - **Do:** Cast Custodi Squire. Vote Sol Ring; as Bob vote Grizzly Bears; as Carol and Dave vote Sol Ring.
 - **Expect:** You vote first, then Bob, Carol and Dave in turn. "Custodi Squire — voting done: Alice → Sol Ring, Bob → Grizzly Bears, Carol → Sol Ring, Dave → Sol Ring"; only Sol Ring returns to your hand.
+## Three cards with different names discarded (2026-11-17)
+
+### Ormos, Archive Keeper: its cost's three cards must have different names
+- **Do:** Activate Ormos, Archive Keeper's ability. Click both Shocks in your hand, then Forest and Grizzly Bears, and click Discard.
+- **Expect:** The banner reads "Ormos, Archive Keeper: Discard 3 cards with different names". Once one Shock is picked the other isn't lit and clicking it does nothing. Afterwards you draw five cards, and the other Shock is still in your hand.
+
+### Ormos, Archive Keeper: in a 4-player game, draws from an empty library become counters
+- **Do:** In this 4-player game, activate Ormos, Archive Keeper's ability. Pick Shock, Forest and Grizzly Bears and click Discard.
+- **Expect:** You draw the two cards your library has, then Ormos gets fifteen +1/+1 counters (a 20/20) in place of the other three draws. You don't lose the game.

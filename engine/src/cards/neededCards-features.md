@@ -551,6 +551,20 @@ First Tyrannic War (rank 11683): chapter I's "if its mana cost contains {X}" is 
 Clone entering as a copy of an {X} creature gets them, of one without, none (the ruling).
 `test/enters-with-counters-if-x-cost.test.ts`.
 
+### Discard cards with different names as a cost; a draw replaced by counters — built 2026-11-17
+
+The key `cost:discard-different-names`: `AbilityCost.discard.differentNames` — gated on that many names in hand,
+paid with the ordinary `discard` decision, whose awaiting carries `differentNames` and whose offer carries each
+card's name (`LegalAction.discard.differentNames`), refusing a repeat; the bots choose among one card of each name,
+the fuzzer draws no name twice, and the client won't pick a second card of a name. The key
+`replacement:draw-replacement-counters` needed no new vocabulary (`would-draw` `{ effect }` with
+`whileLibraryEmpty`), but the draw loop stopped at the first draw from an empty library unless an optional
+replacement could take it: now any effect replacement keeps it going, each draw replaced on its own (rule 614.11 —
+Out of the Tombs had returned one creature for a draw of several). Ormos, Archive Keeper (rank 12825) and Pursuit
+of Knowledge (20961, Abundance's optional `may`); the scaffolder reads "Discard N cards [with different names]" as
+a cost and "If you would draw a card, you may … instead" as an optional replacement (it had made it a mandatory one
+whose effect was a "may"). `test/discard-different-names.test.ts`.
+
 ### A face-down pile from a graveyard, or with its source, manifested — built 2026-11-17
 
 The keys `effect:manifest-from-exile` and `effect:manifest-exiled-pile`, one general change to

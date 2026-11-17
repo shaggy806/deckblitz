@@ -3534,9 +3534,14 @@ function Table({
         // A cost can name a kind of card ("Discard a creature card"): only
         // the offered ones can be picked.
         if (!discardAction.from.includes(id)) return
+        // "With different names" (Ormos, Archive Keeper): a card whose name
+        // is already picked can't be.
+        const names = discardAction.differentNames
+        const nameOf = (x: ObjectId) => names?.[discardAction.from.indexOf(x)]
         setDiscardPicks((cur) => {
           if (cur.includes(id)) return cur.filter((x) => x !== id)
           if (cur.length >= discardAction.count) return cur
+          if (names !== undefined && cur.some((x) => nameOf(x) === nameOf(id))) return cur
           return [...cur, id]
         })
         return
@@ -7095,7 +7100,7 @@ function Table({
                 discardAction.upTo === true && discardAction.count >= discardAction.from.length
                   ? ''
                   : ` card${discardAction.count === 1 ? '' : 's'}`
-              }`
+              }${discardAction.differentNames !== undefined ? ' with different names' : ''}`
             : 'Discard to hand size'}
           {discardAction.orOneOf !== undefined
             ? `, or one ${discardAction.orOneKind ?? 'qualifying'} card`
@@ -7940,6 +7945,12 @@ function Table({
           if (mode === 'discard') {
             highlight = discardAction?.from.includes(id) ?? false
             selected = discardPicks.includes(id)
+            // "With different names": a name already picked is spent.
+            const names = discardAction?.differentNames
+            if (highlight && !selected && names !== undefined && discardAction !== undefined) {
+              const nameAt = (x: ObjectId) => names[discardAction.from.indexOf(x)]
+              if (discardPicks.some((x) => nameAt(x) === nameAt(id))) highlight = false
+            }
           } else if (mode === 'put-on-bottom') {
             highlight = bottomAction?.from.includes(id) ?? false
             selected = bottomPicks.includes(id)

@@ -4731,7 +4731,9 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   source, and a hand with no more than that discards without asking. `count:
   "x"` is Gix, Yawgmoth Praetor's "Discard X cards": X is announced as it's
   activated though the mana has no `{X}`, capped by the cards there are to
-  discard (`xCost.maxX`).
+  discard (`xCost.maxX`). `differentNames: true` is "Discard three cards with
+  different names" (Ormos, Archive Keeper): offered only with that many names
+  in hand, the decision carrying each card's name and refusing a repeat.
   The player gets priority back once it's paid (rule 117.3c — the
   decision's `priorityTo`), on another player's turn too.
 - `reveal: { count, filter, text }` — "Reveal X white cards from your hand"

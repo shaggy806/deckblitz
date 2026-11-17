@@ -27495,7 +27495,13 @@ export class Game {
       // "A card with mana value X" reads the X announced; with none yet (the
       // ability only being offered), any such card will do.
       const payable = x === undefined ? filter : discardCostFilterAtX(ability.cost.discard, x);
-      if (this.discardCandidates(player, payable, sourceId).length < n) {
+      const candidates = this.discardCandidates(player, payable, sourceId);
+      // "Discard three cards with different names": that many names.
+      const offers =
+        ability.cost.discard.differentNames === true
+          ? new Set(candidates.map((id) => nameOf(this.state.objects[id]))).size
+          : candidates.length;
+      if (offers < n) {
         return `${player} has too few cards in hand to pay ${def.name}'s cost`;
       }
     }
@@ -28247,6 +28253,9 @@ export class Game {
             manaDiscard.count === "x" ? chosenX : manaDiscard.count,
             manaDiscard.random === true,
             discardCostFilterAtX(manaDiscard, chosenX),
+            undefined,
+            false,
+            manaDiscard.differentNames === true,
           ),
         );
         const asked = this.state.awaiting;
@@ -28438,7 +28447,15 @@ export class Game {
     if (costDiscard !== undefined) {
       const n = costDiscard.count === "x" ? chosenX : costDiscard.count;
       this.payCostDiscard(abilityId, sourceId, () => {
-        this.discardByEffect({ kind: "player", player }, n, costDiscard.random === true, discardCostFilterAtX(costDiscard, chosenX));
+        this.discardByEffect(
+          { kind: "player", player },
+          n,
+          costDiscard.random === true,
+          discardCostFilterAtX(costDiscard, chosenX),
+          undefined,
+          false,
+          costDiscard.differentNames === true,
+        );
       });
       this.costDiscardPriorityTo(player);
     }
@@ -62305,6 +62322,9 @@ controlledBy,
     /** "Discard any number of cards": up to `amount` cards ("up to three"),
      * or with `amount` 0 the whole hand, the player's pick of how many. */
     upTo = false,
+    /** "Discard three cards with different names" (a cost's — Ormos,
+     * Archive Keeper): no two of them share a name. */
+    differentNames = false,
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -62354,11 +62374,12 @@ controlledBy,
         ...(from !== null ? { source: from } : {}),
         ...(filter !== undefined ? { filter } : {}),
         ...(unlessOne !== undefined ? { unlessOne } : {}),
+        ...(differentNames ? { differentNames: true as const } : {}),
         ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       });
       return;
     }
-    this.discardNow(player, amount, filter, unlessOne);
+    this.discardNow(player, amount, filter, unlessOne, false, differentNames);
   }
 
   /**
@@ -62798,7 +62819,7 @@ controlledBy,
     const outerSource = this.state.decisionSource;
     if (next.source !== undefined) this.state.decisionSource = next.source;
     try {
-      this.discardNow(next.player, next.count, next.filter, next.unlessOne, next.upTo === true);
+      this.discardNow(next.player, next.count, next.filter, next.unlessOne, next.upTo === true, next.differentNames === true);
     } finally {
       this.costDiscardFor = outer;
       if (this.state.awaiting === null) this.state.decisionSource = outerSource;
@@ -62813,6 +62834,7 @@ controlledBy,
     filter?: CardFilter,
     unlessOne?: CardFilter,
     upTo = false,
+    differentNames = false,
   ): void {
     const hand = this.discardCandidates(player, filter);
     // "Any number of cards": a choice of how many whenever there's a card.
@@ -62847,6 +62869,7 @@ controlledBy,
       count: amount,
       fromEffect: true,
       ...(narrowed ? { eligible: hand } : {}),
+      ...(differentNames ? { differentNames: true as const } : {}),
       ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       ...(unlessOne !== undefined
         ? {

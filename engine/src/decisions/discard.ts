@@ -19,6 +19,7 @@
 
 import type { Action, LegalAction } from "../actions.js";
 import type { ObjectId } from "../primitives.js";
+import { nameOf } from "../state.js";
 import { defineDecision } from "./define.js";
 import { exactCount, noDuplicates, subsetOf } from "./shared/picks.js";
 import { combinations } from "./shared/subsets.js";
@@ -31,18 +32,24 @@ export const discard = defineDecision({
   // discard an effect caused has one.
   hasSource: (awaiting) => awaiting.fromEffect === true,
 
-  legal: (ctx, awaiting, player): LegalAction[] => [
-    {
-      kind: "discard",
-      count: awaiting.count,
-      // The whole hand, unless a cost names a kind of card ("Discard a
-      // creature card") — then only those.
-      from: [...(awaiting.eligible ?? ctx.state.zones.perPlayer[player].hand)],
-      ...(awaiting.orOneOf !== undefined ? { orOneOf: [...awaiting.orOneOf] } : {}),
-      ...(awaiting.orOneKind !== undefined ? { orOneKind: awaiting.orOneKind } : {}),
-      ...(awaiting.upTo === true ? { upTo: true as const } : {}),
-    },
-  ],
+  legal: (ctx, awaiting, player): LegalAction[] => {
+    // The whole hand, unless a cost names a kind of card ("Discard a
+    // creature card") — then only those.
+    const from = [...(awaiting.eligible ?? ctx.state.zones.perPlayer[player].hand)];
+    return [
+      {
+        kind: "discard",
+        count: awaiting.count,
+        from,
+        ...(awaiting.orOneOf !== undefined ? { orOneOf: [...awaiting.orOneOf] } : {}),
+        ...(awaiting.orOneKind !== undefined ? { orOneKind: awaiting.orOneKind } : {}),
+        ...(awaiting.upTo === true ? { upTo: true as const } : {}),
+        ...(awaiting.differentNames === true
+          ? { differentNames: from.map((id) => nameOf(ctx.state.objects[id])) }
+          : {}),
+      },
+    ];
+  },
 
   whyCannot: (ctx, action, player): string | null => {
     if (action.type !== "discard") return `${player} is not being asked to discard`;
@@ -75,7 +82,12 @@ export const discard = defineDecision({
       ) ??
       (awaiting.eligible === undefined
         ? null
-        : subsetOf(cards, awaiting.eligible, (id) => `${id} can't be discarded to pay this cost`))
+        : subsetOf(cards, awaiting.eligible, (id) => `${id} can't be discarded to pay this cost`)) ??
+      // "With different names".
+      (awaiting.differentNames === true &&
+      new Set(cards.map((id) => nameOf(ctx.state.objects[id]))).size < cards.length
+        ? `${player} must discard cards with different names`
+        : null)
     );
   },
 
@@ -85,7 +97,18 @@ export const discard = defineDecision({
   },
 
   ask: (controller, view, awaiting, player): Action => {
-    const hand = (awaiting.eligible ?? view.state.zones.perPlayer[player].hand).map((id) => view.state.objects[id]);
+    let hand = (awaiting.eligible ?? view.state.zones.perPlayer[player].hand).map((id) => view.state.objects[id]);
+    // "With different names": the controller chooses among one card of
+    // each name.
+    if (awaiting.differentNames === true) {
+      const seen = new Set<string>();
+      hand = hand.filter((object) => {
+        const name = nameOf(object);
+        if (seen.has(name)) return false;
+        seen.add(name);
+        return true;
+      });
+    }
     return { type: "discard", player, cards: controller.chooseDiscards(hand, awaiting.count, view) };
   },
 
@@ -94,7 +117,18 @@ export const discard = defineDecision({
    * card, and a capped list should keep the cheap ones. */
   candidates: (legal, player, limit, helpers): Action[] => {
     if (legal.kind !== "discard") return [];
-    const worstFirst = [...helpers.order(legal.from)].reverse();
+    let worstFirst = [...helpers.order(legal.from)].reverse();
+    // "With different names": the worst card of each name.
+    const names = legal.differentNames;
+    if (names !== undefined) {
+      const seen = new Set<string>();
+      worstFirst = worstFirst.filter((id) => {
+        const name = names[legal.from.indexOf(id)];
+        if (seen.has(name)) return false;
+        seen.add(name);
+        return true;
+      });
+    }
     // "Any number": every size, smallest first, the cap shared out in order.
     const sizes = legal.upTo === true ? Array.from({ length: legal.count + 1 }, (_, n) => n) : [legal.count];
     const out: Action[] = [];
@@ -118,12 +152,19 @@ export const discard = defineDecision({
     if (orOneOf.length > 0 && rng.pickIndex(2) === 0) {
       return { type: "discard", player, cards: [orOneOf[rng.pickIndex(orOneOf.length)]] };
     }
-    const pool = [...legal.from];
+    let pool = [...legal.from];
     const cards: ObjectId[] = [];
     // "Any number": how many is drawn too.
     const count = legal.upTo === true ? rng.pickIndex(legal.count + 1) : legal.count;
+    const names = legal.differentNames;
     for (let i = 0; i < count && pool.length > 0; i += 1) {
-      cards.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
+      const card = pool.splice(rng.pickIndex(pool.length), 1)[0];
+      cards.push(card);
+      // "With different names": none of its name left to draw.
+      if (names !== undefined) {
+        const name = names[legal.from.indexOf(card)];
+        pool = pool.filter((id) => names[legal.from.indexOf(id)] !== name);
+      }
     }
     return { type: "discard", player, cards };
   },

@@ -1466,6 +1466,13 @@ describe("costs and triggers", () => {
       tap: false,
       discard: { count: 1, filter: { type: "creature" } },
     });
+    // "Discard two cards", and with different names (Ormos, Archive Keeper).
+    expect(parseCost("{1}, Discard two cards")?.cost).toEqual({ mana: "{1}", tap: false, discard: { count: 2 } });
+    expect(parseCost("{1}{U}{U}, Discard three cards with different names")?.cost).toEqual({
+      mana: "{1}{U}{U}",
+      tap: false,
+      discard: { count: 3, differentNames: true },
+    });
     // Exert as a cost (rule 701.43 — Steward of Solidarity).
     expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, do: { kind: "exert", target: "source" } });
     expect(parseCost("{2}, Exile the top card of your library").cost).toEqual({ mana: "{2}", tap: false, do: { kind: "exile-from-library", amount: 1 } });
@@ -12194,6 +12201,19 @@ describe("a static acting on a player", () => {
       instead: {
         effect: { kind: "look-and-choose", zone: "library", count: 3, min: 1, max: 1, destination: "hand", leftover: "bottom-any-order" },
       },
+    });
+    // "You may … instead" (Pursuit of Knowledge): optional, asked draw by
+    // draw — not a mandatory replacement whose effect is a "may".
+    const pursuit = face("Enchantment", "If you would draw a card, you may put a study counter on this enchantment instead.");
+    expect(pursuit.complete).toBe(true);
+    expect(pursuit.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: {
+        text: "put a study counter on this enchantment",
+        effect: { kind: "add-counter", target: "source", counter: "study", amount: 1 },
+      },
+      may: true,
     });
   });
 

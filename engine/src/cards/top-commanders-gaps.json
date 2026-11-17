@@ -7,6 +7,8 @@
     "trigger:cumulative-upkeep-not-paid",
     "effect:pay-any-amount-of-life",
     "effect:beheld-object-amount",
+    "cost:discard-different-names",
+    "replacement:draw-replacement-counters",
     "effect:delayed-trigger-fixed-amount",
     "trigger:first-cycle-each-turn",
     "effect:delayed-return-target-and-sacrificed-card",
