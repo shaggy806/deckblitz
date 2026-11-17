@@ -4303,6 +4303,14 @@ export function parseSentence(sentence, ctx) {
     const r = revealedCardEffectOf(s, ctx);
     if (r !== undefined) return r;
   }
+  // "Damage equal to the power of the creature you chose or the card you
+  // revealed" where the cost beheld one (Monstrous Emergence): the
+  // `{ paid: "beheld" }` amount ref — a chosen creature's power as the spell
+  // resolves, or as it last existed; a revealed card's as it was in the hand.
+  if (ctx?.costBeheld === true && (m = /^~ deals damage equal to the power of the \w+ you chose or the card you revealed to (target [^.]+)\.$/.exec(s))) {
+    const spec = targetOf(m[1]);
+    if (spec !== undefined) return { kind: "damage", target: ctx.target(spec), amount: { powerOf: { paid: "beheld" } } };
+  }
   // "Damage equal to the exiled card's power" where the cost exiled it from a
   // graveyard (Corpse Explosion): the `{ paid: "exiled" }` amount ref.
   if (ctx?.costExiled === true && /^~ deals damage equal to the exiled card's power to each creature and each planeswalker\.$/.test(s)) {
@@ -18043,6 +18051,22 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.kicker = { cost: "", keyword: "behold", behold: beholdOf(m[1]) };
       continue;
     }
+    // Behold in its older words: "choose a creature you control or reveal a
+    // creature card from your hand" (Monstrous Emergence — rule 701.4a), the
+    // same quality both ways; what was chosen or revealed is read by "the
+    // power of the creature you chose or the card you revealed" below
+    // (`costBeheld`).
+    if (
+      castable &&
+      (m = /^As an additional cost to cast ~, choose (an? .+?) you control or reveal (an? .+?) card from your hand\.$/.exec(line))
+    ) {
+      const chosen = beholdOf(m[1]);
+      const revealed = beholdOf(m[2]);
+      if (chosen !== null && chosen.count === undefined && JSON.stringify(chosen.filter) === JSON.stringify(revealed?.filter)) {
+        out.additionalCost = { behold: { filter: chosen.filter, text: m[1] } };
+        continue;
+      }
+    }
     // Revealing a card from the hand as a spell's cost (rule 701.20a):
     // Lorwyn's "reveal a Kithkin card from your hand or pay {3}" (a choice of
     // whole costs), and Dragons of Tarkir's "you may reveal a Dragon card
@@ -19460,6 +19484,14 @@ function parseFaceAsWritten(face, ctx = {}) {
         out.additionalCost.behold.exile !== true &&
         (out.additionalCost.behold.count ?? 1) === 1
           ? { costRevealed: true }
+          : {}),
+        // "…, choose a creature you control or reveal a creature card from
+        // your hand": "the creature you chose or the card you revealed".
+        ...(out.additionalCost?.behold !== undefined &&
+        out.additionalCost.behold.fromHand !== true &&
+        out.additionalCost.behold.exile !== true &&
+        (out.additionalCost.behold.count ?? 1) === 1
+          ? { costBeheld: true }
           : {}),
       };
       let text = out.spellLines.map((l) => l.line).join(" ");

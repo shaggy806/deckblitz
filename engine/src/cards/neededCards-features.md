@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The power of the creature chosen or the card revealed as a cost — found built 2026-11-17
+
+The key `effect:beheld-object-amount` needed no engine code: "choose a creature you control or reveal a creature card
+from your hand" is behold a creature (rule 701.4a) in older words, an `additionalCost.behold`, and what it took is
+`{ paid: "beheld" }` (Dragon's Fire's): a chosen creature's power as the spell resolves, or as it last existed on the
+battlefield if it has left (the ruling); a revealed card's as it was in the hand. Monstrous Emergence (rank 12482) is
+authored on it, and the scaffolder reads its two lines (`costBeheld`). `test/beheld-power.test.ts`.
+
 ### "Only [a player] may activate this ability" — built 2026-11-17
 
 The key `cost:activate-only-owner`: `ActivatedAbility.onlyBy` (rule 602.1b; 602.2's "unless the object specifically

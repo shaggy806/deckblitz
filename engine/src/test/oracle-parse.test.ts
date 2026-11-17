@@ -22013,6 +22013,24 @@ describe("the first card cycled each turn (Valiant Rescuer)", () => {
   });
 });
 
+describe("behold in its older words (Monstrous Emergence)", () => {
+  it("choose one you control or reveal one from your hand, and the power of what was chosen or revealed", () => {
+    const emergence = parseFace(
+      {
+        name: "Monstrous Emergence",
+        type_line: "Sorcery",
+        mana_cost: "{1}{G}",
+        oracle_text:
+          "As an additional cost to cast this spell, choose a creature you control or reveal a creature card from your hand.\nMonstrous Emergence deals damage equal to the power of the creature you chose or the card you revealed to target creature.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(emergence.complete).toBe(true);
+    expect(emergence.additionalCost).toEqual({ behold: { filter: { type: "creature" }, text: "a creature" } });
+    expect(emergence.effect).toEqual({ kind: "damage", target: 0, amount: { powerOf: { paid: "beheld" } } });
+  });
+});
+
 describe("clash with an opponent, if you win (Scattering Stroke's sentence pair)", () => {
   it("the clash effect, the rest its won branch", () => {
     const r = parseEffect("Draw a card. Clash with an opponent. If you win, draw a card.", { targets: [], tokenFor: () => null, onStack: true });

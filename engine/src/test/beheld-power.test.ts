@@ -73,3 +73,44 @@ describe("Dragon's Fire", () => {
     expect(g2.state.objects[wurm2].damageMarked).toBe(2);
   });
 });
+
+// "Choose a creature you control or reveal a creature card from your hand" as
+// a mandatory additional cost: behold a creature, its power the damage.
+describe("Monstrous Emergence", () => {
+  it("a chosen creature's power, or a revealed creature card's", () => {
+    const { game, a } = table();
+    lands(game, "Forest", 4);
+    const bears = spawn(game, "Grizzly Bears");
+    const dreadmaw = toHand(game, "Colossal Dreadmaw");
+    const first = spawn(game, "Colossal Dreadmaw", B);
+    const second = spawn(game, "Colossal Dreadmaw", B);
+    const seen = pickFromZone(a, bears);
+    cast(game, toHand(game, "Monstrous Emergence"), { targets: [ref(first)] });
+    expect([...seen.offered].sort()).toEqual([bears, dreadmaw].sort());
+    expect(game.state.objects[first].damageMarked).toBe(2);
+    pickFromZone(a, dreadmaw);
+    cast(game, toHand(game, "Monstrous Emergence"), { targets: [ref(second)] });
+    expect(zone(game, dreadmaw)).toBe("hand");
+    expect(zone(game, second)).toBe("graveyard");
+  });
+
+  it("can't be cast with no creature to behold", () => {
+    const { game } = table();
+    lands(game, "Forest", 2);
+    spawn(game, "Grizzly Bears", B);
+    const wurm = spawn(game, "Colossal Dreadmaw", B);
+    expect(() => cast(game, toHand(game, "Monstrous Emergence"), { targets: [ref(wurm)] })).toThrow(/nothing to behold/);
+  });
+
+  it("the chosen creature's power as it last was, if it has left", () => {
+    const { game, a } = table();
+    lands(game, "Forest", 2);
+    const bears = spawn(game, "Grizzly Bears");
+    const wurm = spawn(game, "Colossal Dreadmaw", B);
+    pickFromZone(a, bears);
+    cast(game, toHand(game, "Monstrous Emergence"), { targets: [ref(wurm)], settle: false });
+    destroy(game, bears);
+    settle(game);
+    expect(game.state.objects[wurm].damageMarked).toBe(2);
+  });
+});
