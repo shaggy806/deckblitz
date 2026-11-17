@@ -19155,6 +19155,26 @@ describe("an alternative cost for the spells you cast (Jodah, Conspiracy Unravel
   });
 });
 
+describe("a freerunning cost that isn't mana (Escape Detection)", () => {
+  it("is freerunning's also, its mana {0}", () => {
+    const escape = parseFace(
+      {
+        name: "Escape Detection",
+        type_line: "Instant",
+        mana_cost: "{1}{U}{U}",
+        oracle_text:
+          "Freerunning—Return a blue creature you control to its owner's hand. (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nReturn target creature to its owner's hand.\nDraw a card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(escape.complete).toBe(true);
+    expect(escape.freerunning).toEqual({
+      cost: "{0}",
+      also: { text: "Return a blue creature you control to its owner's hand", returnToHand: { filter: { type: "creature", colors: ["U"] }, count: 1 } },
+    });
+  });
+});
+
 describe("creatures attacking your opponents and/or planeswalkers they control (Roar of Resistance)", () => {
   it("the whole card: the token haste static, and the paid pump over the attackers aimed at opponents", () => {
     const roar = parseFace(

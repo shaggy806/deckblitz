@@ -1547,7 +1547,10 @@ function kickerAlso(text) {
     return { text, sacrifice: { filter, count } };
   }
   if ((m = /^Return an? (.+?) you control to its owner's hand$/.exec(text))) {
-    const filter = parseTypePhrase(m[1]);
+    // Of a colour too: "a blue creature" (Escape Detection's freerunning).
+    const coloured = /^(white|blue|black|red|green) (.+)$/.exec(m[1]);
+    const typed = parseTypePhrase(coloured === null ? m[1] : coloured[2]);
+    const filter = typed === null || coloured === null ? typed : { ...typed, colors: [COLOR_WORD[coloured[1]]] };
     if (filter === null || Object.keys(filter).length === 0) return null;
     return { text, returnToHand: { filter, count: 1 } };
   }
@@ -17846,6 +17849,15 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (isSpell && /\{X\}/.test(face.mana_cost ?? "") && (m = /^Spend only (white|blue|black|red|green) mana on X\.$/.exec(line))) {
       out.xSpendOnly = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[1]];
       continue;
+    }
+    // A freerunning cost that isn't mana: "Freerunning—Return a blue creature
+    // you control to its owner's hand." (Escape Detection) — `freerunning.also`.
+    if ((m = /^Freerunning—(.+?)\.$/.exec(line))) {
+      const also = kickerAlso(m[1]);
+      if (also !== null) {
+        out.freerunning = { cost: "{0}", also };
+        continue;
+      }
     }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.
     if ((m = /^Impending (\d+)—((?:\{[^}]+\})+)$/.exec(line))) {

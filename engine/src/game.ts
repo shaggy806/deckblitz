@@ -21685,7 +21685,7 @@ export class Game {
       cardId,
       def,
       this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption, via, graveyardGrant, modes),
-      altCost || via === "blitz",
+      altCost || via === "blitz" || via === "freerunning",
     );
     if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
@@ -49513,9 +49513,14 @@ controlledBy,
     // "Discard a card", Tenacious Underdog's "Pay 2 life"), when it's cast for
     // that blitz cost (rule 702.152a) — a granted blitz is its mana alone.
     const blitzAlso = via === "blitz" ? def.blitz?.also : undefined;
+    // A printed freerunning cost's part that isn't mana (Escape Detection's
+    // "Return a blue creature you control to its owner's hand"), when it's
+    // cast for that cost (rule 702.173a) — a granted one is its mana alone.
+    const freerunningAlso = via === "freerunning" ? def.freerunning?.also : undefined;
     const additional = [
       ...(madnessAlso !== undefined ? [madnessAlso] : []),
       ...(blitzAlso !== undefined ? [blitzAlso] : []),
+      ...(freerunningAlso !== undefined ? [freerunningAlso] : []),
       ...(own !== undefined ? [own] : []),
       ...(branch !== undefined ? [branch] : []),
       ...(altAlso !== undefined ? [altAlso] : []),

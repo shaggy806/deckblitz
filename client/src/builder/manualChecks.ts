@@ -13310,4 +13310,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*3', 'Mountain*2'], hand: ['Consume Spirit'] },
     }),
   ),
+  // --- A freerunning cost that isn't mana (2026-11-17) -----------------------------
+  preset(
+    'Escape Detection: freerunning by returning a blue creature',
+    board({
+      you: { bf: ['Agate-Blade Assassin', 'Merfolk Looter', 'Phantom Warrior'], hand: ['Escape Detection'] },
+      opp: { bf: [{ name: 'Grizzly Bears', tapped: true }] },
+    }),
+  ),
 ]

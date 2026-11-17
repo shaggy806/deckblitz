@@ -6060,8 +6060,15 @@ export interface CardDefinition {
    * (`via: "freerunning"`) from the hand once that has happened this turn
    * (`TurnHistory.freerunning`). "If this spell's freerunning cost was paid"
    * is a `source` condition on `{ castVia: "freerunning" }`. `null` for none.
+   *
+   * `also` is the cost's part that isn't mana, as blitz's: "Freerunning—
+   * Return a blue creature you control to its owner's hand" (Escape
+   * Detection) is `cost: "{0}"` with `also: { text, returnToHand }` — paid
+   * as the spell is cast (601.2h), which ones chosen once it's on the stack,
+   * and offered only while it can be paid. A granted freerunning is its mana
+   * alone.
    */
-  readonly freerunning: { readonly cost: string } | null;
+  readonly freerunning: { readonly cost: string; readonly also?: KickerAlsoCost } | null;
   /**
    * Evoke (rule 702.74 — Mulldrifter): "You may cast this spell by paying
    * [cost] rather than paying its mana cost" and "When this permanent
@@ -6905,7 +6912,7 @@ interface CardDraft {
   blitz?: NonNullable<CardDefinition["blitz"]>;
   dash?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };
-  freerunning?: { readonly cost: string };
+  freerunning?: NonNullable<CardDefinition["freerunning"]>;
   evoke?: NonNullable<CardDefinition["evoke"]>;
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: MorphCost;

@@ -8789,3 +8789,9 @@ Each board's die comes up 4.
 ### Consume Spirit: X only as high as the black mana
 - **Do:** Cast Consume Spirit at Bob, choosing the largest X it offers.
 - **Expect:** X goes up to 2, not 4: the Swamps pay {B} and X, a Mountain the {1}. Bob loses 2 life and you gain 2; one Mountain stays untapped.
+
+## A freerunning cost that isn't mana (2026-11-17)
+
+### Escape Detection: freerunning by returning a blue creature
+- **Do:** Attack Bob with Agate-Blade Assassin and let it deal damage (Bob's Grizzly Bears is tapped). In your postcombat main cast Escape Detection by its freerunning offer, targeting Bob's Grizzly Bears; when asked, pick Phantom Warrior to return.
+- **Expect:** Before combat it can't be cast (you have no lands for {1}{U}{U}). After the damage the freerunning offer costs no mana; you choose between Merfolk Looter and Phantom Warrior, Phantom Warrior goes to your hand, Grizzly Bears to Bob's, and you draw a card.

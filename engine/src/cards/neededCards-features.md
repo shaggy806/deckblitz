@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A freerunning cost that isn't mana — built 2026-11-17
+
+The key `cost:freerunning-non-mana`: `freerunning.also`, a `KickerAlsoCost` as blitz's, paid as the spell is cast
+(601.2h) through `castAlsoCosts` and gating the cast through `whyCannotPayAlso` (rule 702.173a). Escape Detection
+(rank 13598): `cost: "{0}"` and "Return a blue creature you control to its owner's hand" as its `returnToHand`; the
+scaffolder reads the line. `test/freerunning.test.ts`.
+
 ### Spend only one colour of mana on a spell's X — built 2026-11-17
 
 The key `cost:x-spend-color-restriction`: `CardDefinition.xSpendOnly`, Crypt Rats' `AbilityCost.xSpendOnly` on a
