@@ -40524,12 +40524,15 @@ export class Game {
           // stack from emitting millions of identical events. Not while a
           // "next time you would draw" could take this one instead.
           const from = this.eventualDrawer(player);
-          // Nor while an optional "you may instead" (Abundance) could: each
-          // draw is the player's to replace or not (its ruling).
+          // Nor while an effect could replace it: an optional "you may
+          // instead" (Abundance) is the player's to apply or not, each draw
+          // (its ruling), and a mandatory one replaces every draw left, each
+          // on its own (rule 614.11 — Ormos, Archive Keeper's five counters a
+          // draw, Out of the Tombs' creature a draw).
           const empty =
             this.state.zones.perPlayer[from].library.length === 0 &&
             !this.state.activeReplacements.some((r) => r.replacement.event === "would-draw" && r.next === true && (r.owner === from || r.owner === player)) &&
-            !this.drawEffectReplacementsFor(from, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).some((r) => r.may);
+            this.drawEffectReplacementsFor(from, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).length === 0;
           const unasked = this.state.awaiting === null;
           const parkedBefore = this.state.suspendedResolutions.length;
           this.drawCard(player);

@@ -55,6 +55,20 @@ describe("a draw replaced by an effect", () => {
     expect(game.state.players[A].hasLost).toBe(false);
   });
 
+  it("Out of the Tombs: each draw of several from an empty library is replaced, one creature card apiece", () => {
+    const { game, a } = table();
+    spawn(game, "Out of the Tombs");
+    for (const id of [...library(game)]) game.debugMove(id, "exile");
+    for (const name of ["Grizzly Bears", "Hill Giant", "Savannah Lions"]) game.debugSpawn(name, A, "graveyard");
+    a.chooseFromZoneFn = (_view, eligible) => [eligible[0]];
+    game.debugApplyEffect(A, { kind: "draw", amount: 2 });
+    settle(game);
+    // Two draws, two creatures back — not one for the first draw and nothing
+    // for the second (rule 614.11).
+    expect(graveyard(game).length).toBe(1);
+    expect(game.state.players[A].hasLost).toBe(false);
+  });
+
   it("Underrealm Lich replaces the turn's draw too, and only its controller's", () => {
     const { game, a, b } = table();
     lands(game, "Island", 6);
