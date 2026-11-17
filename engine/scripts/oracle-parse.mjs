@@ -19796,6 +19796,20 @@ function selfGraveyardCast(line) {
   if (rest === "if you pay {1} more to cast it for each other creature card in your graveyard") {
     return { ...out, costIncreasePerOther: { type: "creature" } };
   }
+  // "… if a non-Zombie creature died this turn. If you do, this creature
+  // enters with a +1/+1 counter on it." (Undead Sprinter): the `if` read from
+  // the journal, the counter a rider of this permission alone (`entersWith`).
+  const died = /^if an? (.+?) died this turn(?:\. If you do, (?:~|this creature) enters with an? (\S+) counter on it)?$/.exec(rest);
+  if (died !== null && !m[1]) {
+    const non = /^non-([A-Z][a-z]+) creature$/.exec(died[1]);
+    const filter = non !== null ? { type: "creature", notSubtypes: [non[1]] } : parseTypePhrase(died[1]);
+    if (filter === null || filter.type !== "creature") return null;
+    return {
+      ...out,
+      if: { kind: "turn-history", what: "died", who: "any-player", filter },
+      ...(died[2] !== undefined ? { entersWith: { kind: died[2], amount: 1 } } : {}),
+    };
+  }
   // "… using its mutate ability" (Brokkos, Apex of Forever), "… its bestow
   // ability" (Detective's Phoenix): only for that keyword's cost.
   const using = /^using its (mutate|bestow) ability$/.exec(rest);

@@ -8234,6 +8234,19 @@ describe("a card's own graveyard permission with costs (castSelfFromGraveyard)",
     expect(read("Squee, the Immortal", "Legendary Creature — Goblin", "You may cast this card from your graveyard or from exile.")).toEqual({
       from: ["graveyard", "exile"],
     });
+    // "If a non-Zombie creature died this turn", read from the journal; "if you
+    // do", a counter that's this permission's alone.
+    expect(
+      read(
+        "Undead Sprinter",
+        "Creature — Zombie",
+        "Trample, haste\nYou may cast this card from your graveyard if a non-Zombie creature died this turn. If you do, this creature enters with a +1/+1 counter on it.",
+      ),
+    ).toEqual({
+      from: ["graveyard"],
+      if: { kind: "turn-history", what: "died", who: "any-player", filter: { type: "creature", notSubtypes: ["Zombie"] } },
+      entersWith: { kind: "+1/+1", amount: 1 },
+    });
     // A count of sacrifices isn't a cost the permission can take.
     expect(
       read(

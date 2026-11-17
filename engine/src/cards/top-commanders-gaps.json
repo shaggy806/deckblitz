@@ -1815,6 +1815,7 @@
   "effect:each-creature-deals-power-damage-to-target",
   "effect:each-permanent-deals-damage",
   "zone:graveyard-cast-permissions",
+  "zone:graveyard-cast-rider-own-permission",
   "zone:cast-from-any-graveyard",
   "zone:cast-self-from-graveyard",
   "zone:graveyard-self-cast-extra-cost",
