@@ -282,6 +282,7 @@ import _poolElektraFemmeFatale from "../pool/elektra-femme-fatale.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
 import _poolElixir from "../pool/elixir.js";
 import _poolEllivereOfTheWildCourt from "../pool/ellivere-of-the-wild-court.js";
+import _poolElspethsTalent from "../pool/elspeths-talent.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
 import _poolEmberwildeDjinn from "../pool/emberwilde-djinn.js";
 import _poolEndlessFootAssault from "../pool/endless-foot-assault.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolElementalistAdept,
     _poolElixir,
     _poolEllivereOfTheWildCourt,
+    _poolElspethsTalent,
     _poolElvenkingsHarper,
     _poolEmberwildeDjinn,
     _poolEndlessFootAssault,

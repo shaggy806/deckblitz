@@ -29,6 +29,7 @@ import _poolAngelicEnforcer from "../pool/angelic-enforcer.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolAppaAangsCompanion from "../pool/appa-aangs-companion.js";
 import _poolAppaTheVigilant from "../pool/appa-the-vigilant.js";
+import _poolAppleOfEdenIsuRelic from "../pool/apple-of-eden-isu-relic.js";
 import _poolArachnusWeb from "../pool/arachnus-web.js";
 import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
 import _poolArborColossus from "../pool/arbor-colossus.js";
@@ -1062,6 +1063,7 @@ const shard: CardShard = {
     _poolAntManScottLang,
     _poolAppaAangsCompanion,
     _poolAppaTheVigilant,
+    _poolAppleOfEdenIsuRelic,
     _poolArachnusWeb,
     _poolArbiterOfWoe,
     _poolArborColossus,

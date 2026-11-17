@@ -156,6 +156,7 @@ import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCemeteryGatekeeper from "../pool/cemetery-gatekeeper.js";
 import _poolCennsEnlistment from "../pool/cenns-enlistment.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
+import _poolChainsOfMephistopheles from "../pool/chains-of-mephistopheles.js";
 import _poolChampionsVictory from "../pool/champions-victory.js";
 import _poolChancellorOfTheSpires from "../pool/chancellor-of-the-spires.js";
 import _poolChandraFireOfKaladesh from "../pool/chandra-fire-of-kaladesh.js";
@@ -1194,6 +1195,7 @@ const shard: CardShard = {
     _poolCemeteryGatekeeper,
     _poolCennsEnlistment,
     _poolCentaurHealer,
+    _poolChainsOfMephistopheles,
     _poolChampionsVictory,
     _poolChancellorOfTheSpires,
     _poolChandraFireOfKaladesh,

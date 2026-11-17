@@ -187,6 +187,7 @@ import _poolCurseOfExhaustion from "../pool/curse-of-exhaustion.js";
 import _poolCurseOfThirst from "../pool/curse-of-thirst.js";
 import _poolCursedMirror from "../pool/cursed-mirror.js";
 import _poolCynicalLoner from "../pool/cynical-loner.js";
+import _poolDarkImpostor from "../pool/dark-impostor.js";
 import _poolDarkSalvation from "../pool/dark-salvation.js";
 import _poolDaruLancer from "../pool/daru-lancer.js";
 import _poolDashingBloodsucker from "../pool/dashing-bloodsucker.js";
@@ -1249,6 +1250,7 @@ const shard: CardShard = {
     _poolCurseOfThirst,
     _poolCursedMirror,
     _poolCynicalLoner,
+    _poolDarkImpostor,
     _poolDarkSalvation,
     _poolDaruLancer,
     _poolDashingBloodsucker,

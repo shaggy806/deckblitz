@@ -1051,6 +1051,7 @@ import _poolAppeal from "./pool/appeal.js";
 import _poolAppendageAmalgam from "./pool/appendage-amalgam.js";
 import _poolAppetiteForBrains from "./pool/appetite-for-brains.js";
 import _poolAppetiteForTheUnnatural from "./pool/appetite-for-the-unnatural.js";
+import _poolAppleOfEdenIsuRelic from "./pool/apple-of-eden-isu-relic.js";
 import _poolAppliedBiomancy from "./pool/applied-biomancy.js";
 import _poolAppliedGeometry from "./pool/applied-geometry.js";
 import _poolApprenticeNecromancer from "./pool/apprentice-necromancer.js";
@@ -4358,6 +4359,7 @@ import _poolChainersTorment from "./pool/chainers-torment.js";
 import _poolChainflailCentipede from "./pool/chainflail-centipede.js";
 import _poolChainflinger from "./pool/chainflinger.js";
 import _poolChainsOfCustody from "./pool/chains-of-custody.js";
+import _poolChainsOfMephistopheles from "./pool/chains-of-mephistopheles.js";
 import _poolChainsaw from "./pool/chainsaw.js";
 import _poolChainwebAracnir from "./pool/chainweb-aracnir.js";
 import _poolChainwhipCyclops from "./pool/chainwhip-cyclops.js";
@@ -6152,6 +6154,7 @@ import _poolDarkFavor from "./pool/dark-favor.js";
 import _poolDarkFortress from "./pool/dark-fortress.js";
 import _poolDarkHatchling from "./pool/dark-hatchling.js";
 import _poolDarkHeartOfTheWood from "./pool/dark-heart-of-the-wood.js";
+import _poolDarkImpostor from "./pool/dark-impostor.js";
 import _poolDarkInquiry from "./pool/dark-inquiry.js";
 import _poolDarkIntimations from "./pool/dark-intimations.js";
 import _poolDarkKnightsGreatsword from "./pool/dark-knights-greatsword.js";
@@ -8219,6 +8222,7 @@ import _poolElspethUndauntedHero from "./pool/elspeth-undaunted-hero.js";
 import _poolElspethsDevotee from "./pool/elspeths-devotee.js";
 import _poolElspethsNightmare from "./pool/elspeths-nightmare.js";
 import _poolElspethsSmite from "./pool/elspeths-smite.js";
+import _poolElspethsTalent from "./pool/elspeths-talent.js";
 import _poolElturelSurvivors from "./pool/elturel-survivors.js";
 import _poolElturgardRanger from "./pool/elturgard-ranger.js";
 import _poolElugeTheShorelessSea from "./pool/eluge-the-shoreless-sea.js";
@@ -34338,6 +34342,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAppendageAmalgam,
   _poolAppetiteForBrains,
   _poolAppetiteForTheUnnatural,
+  _poolAppleOfEdenIsuRelic,
   _poolAppliedBiomancy,
   _poolAppliedGeometry,
   _poolApprenticeNecromancer,
@@ -37645,6 +37650,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChainflailCentipede,
   _poolChainflinger,
   _poolChainsOfCustody,
+  _poolChainsOfMephistopheles,
   _poolChainsaw,
   _poolChainwebAracnir,
   _poolChainwhipCyclops,
@@ -39439,6 +39445,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDarkFortress,
   _poolDarkHatchling,
   _poolDarkHeartOfTheWood,
+  _poolDarkImpostor,
   _poolDarkInquiry,
   _poolDarkIntimations,
   _poolDarkKnightsGreatsword,
@@ -41506,6 +41513,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElspethsDevotee,
   _poolElspethsNightmare,
   _poolElspethsSmite,
+  _poolElspethsTalent,
   _poolElturelSurvivors,
   _poolElturgardRanger,
   _poolElugeTheShorelessSea,
@@ -67638,6 +67646,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/appendage-amalgam": _poolAppendageAmalgam,
   "pool/appetite-for-brains": _poolAppetiteForBrains,
   "pool/appetite-for-the-unnatural": _poolAppetiteForTheUnnatural,
+  "pool/apple-of-eden-isu-relic": _poolAppleOfEdenIsuRelic,
   "pool/applied-biomancy": _poolAppliedBiomancy,
   "pool/applied-geometry": _poolAppliedGeometry,
   "pool/apprentice-necromancer": _poolApprenticeNecromancer,
@@ -70945,6 +70954,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chainflail-centipede": _poolChainflailCentipede,
   "pool/chainflinger": _poolChainflinger,
   "pool/chains-of-custody": _poolChainsOfCustody,
+  "pool/chains-of-mephistopheles": _poolChainsOfMephistopheles,
   "pool/chainsaw": _poolChainsaw,
   "pool/chainweb-aracnir": _poolChainwebAracnir,
   "pool/chainwhip-cyclops": _poolChainwhipCyclops,
@@ -72739,6 +72749,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dark-fortress": _poolDarkFortress,
   "pool/dark-hatchling": _poolDarkHatchling,
   "pool/dark-heart-of-the-wood": _poolDarkHeartOfTheWood,
+  "pool/dark-impostor": _poolDarkImpostor,
   "pool/dark-inquiry": _poolDarkInquiry,
   "pool/dark-intimations": _poolDarkIntimations,
   "pool/dark-knights-greatsword": _poolDarkKnightsGreatsword,
@@ -74806,6 +74817,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elspeths-devotee": _poolElspethsDevotee,
   "pool/elspeths-nightmare": _poolElspethsNightmare,
   "pool/elspeths-smite": _poolElspethsSmite,
+  "pool/elspeths-talent": _poolElspethsTalent,
   "pool/elturel-survivors": _poolElturelSurvivors,
   "pool/elturgard-ranger": _poolElturgardRanger,
   "pool/eluge-the-shoreless-sea": _poolElugeTheShorelessSea,
