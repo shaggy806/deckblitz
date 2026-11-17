@@ -5957,7 +5957,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   or more players left leave nobody to attack (the Pramikon ruling).
 - `prohibits: [Prohibition]` — a "can't" (rule 101.2: it beats any "can"), one record per act (`prohibitions.ts`). Acts by a player take `who` (`"you"`, `"opponents"`, `"each-player"`, `"enchanted-player"`, `"enchanted-controller"`, `"defending-player"`):
   - `{ act: "cast", who, filter?, from?, notFrom?, limit?, unless? }` — `limit: 1` binds only once the player has cast that many matching spells this turn, each read as it was cast (Rule of Law; Ethersworn Canonist). `from`/`notFrom`: where the card is as the cast begins (Grafdigger's Cage; Drannith Magistrate). `unless: "sorcery-timing"` (Teferi, Time Raveler) and `"own-turn"` (Dosan). A `filter` amount is read from the prohibition's source, its `"each"` the spell's controller with `forItsController` — Lavinia, Azorius Renegade's "noncreature spells with mana value greater than the number of lands **that player** controls" is `manaValue: { op: "gt", n: { amount: { countOf: { type: "land", controlledBy: "you" }, forEachPlayer: true }, forItsController: true } }`.
-  - `{ act: "play-land", who, filter?, from?, notFrom? }`, rule 305.2.
+  - `{ act: "play-land", who, filter?, from?, notFrom? }`, rule 305.2. Tomik, Distinguished Advokist's "Your opponents can't play land cards from graveyards" is `{ act: "play-land", who: "opponents", from: ["graveyard"] }`, which a permission to play them (Crucible of Worlds) doesn't override (`opponents-cant-play-from-graveyard.test.ts`).
   - `{ act: "activate", who, of?, except?: ["mana", "loyalty"], only?: "loyalty" | "tap", anyZone?, unless? }` — `of` reaches permanents alone unless `anyZone` (Pithing Needle's "of sources"); no `of` is every permanent.
   - `{ act: "draw", who, perTurn }` — `0` is "can't draw cards"; it stops the draw before anything could replace it.
   - `{ act: "search", who, causedByThemselves?, ignoreCost? }`; `{ act: "lose-game", who, only?: "zero-life" }`; `{ act: "win-game", who }`; `{ act: "lose-life", who, from?: "damage" }` (`from: "damage"` is "damage doesn't cause you to lose life", rule 120.3a's result alone: the damage is dealt, and an effect's loss or a life payment goes through — Archon of Coronation); `{ act: "change-life", who }` (Platinum Emperion); `{ act: "become-monarch", who }`.
@@ -6475,7 +6475,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   (Volatile Stormdrake) is `{ abilitiesOnly: true }` alone — static abilities
   never target — and a loss of hexproof takes it (702.11e). A one-shot "…
   this turn" form isn't built.
-- `prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" }, by? }]` — "Cards in graveyards can't be the targets of spells or abilities" (Ground Seal; Tomik's `{ inZone: "graveyard", type: "land" }`, `by: "opponents"`).
+- `prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" }, by? }]` — "Cards in graveyards can't be the targets of spells or abilities" (Ground Seal; Tomik's `{ inZone: "graveyard", type: "land" }`, `by: "opponents"`, beside a second one over `{ inZone: "battlefield", type: "land" }` for "lands on the battlefield" — a land card in exile isn't reached).
 - `bandsWithOther: CardFilter` — "bands with other [quality]" (rule 702.22b),
   the quality as a filter: the Legends lands grant "bands with other legendary
   creatures" `{ type: "creature", supertype: "legendary" }` to a colour's

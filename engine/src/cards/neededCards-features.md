@@ -365,6 +365,15 @@ clause is "cards in your graveyard you've surveilled this turn" — the same obj
 seen, left on top and put there later (the ruling). A graveyard permission's `byPayingLife` now works as
 from exile and a library's top: the only way under it (118.9a; X 0, 107.3b), read from the permission the
 cast names. Eye of Duskmantle (rank 11084). `test/surveilled-this-turn.test.ts`.
+### Opponents can't play land cards from graveyards — found built 2026-11-16
+
+The key `static:opponents-cant-play-from-graveyard` needed no engine code: the `play-land` prohibition with
+`who: "opponents", from: ["graveyard"]`, which beats a permission to play them (rule 101.2 — Crucible of
+Worlds). Tomik, Distinguished Advokist (rank 11239), its middle ability two `be-targeted`
+prohibitions by opponents over lands on the battlefield and land cards in graveyards.
+`test/opponents-cant-play-from-graveyard.test.ts`. Shaman's Trance still waits on
+`effect:cast-now-from-each-opponent-graveyard`.
+
 ### Cumulative upkeep paid in counters on an opponent's creature — built 2026-11-16
 
 The key `cost:cumulative-upkeep-counter-on-opponents-creature` (family `keyword:cumulative-upkeep`): the
