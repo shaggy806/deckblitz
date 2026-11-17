@@ -946,6 +946,7 @@ import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUnbury from "../pool/unbury.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUncheckedGrowth from "../pool/unchecked-growth.js";
+import _poolUndercellarSweep from "../pool/undercellar-sweep.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUnderworldCerberus from "../pool/underworld-cerberus.js";
@@ -1994,6 +1995,7 @@ const shard: CardShard = {
     _poolUnbury,
     _poolUncagedFury,
     _poolUncheckedGrowth,
+    _poolUndercellarSweep,
     _poolUndercityScavenger,
     _poolUnderwaterTunnel,
     _poolUnderworldCerberus,

@@ -676,6 +676,7 @@ import _poolProtomatterPowder from "../pool/protomatter-powder.js";
 import _poolPsychicSpiral from "../pool/psychic-spiral.js";
 import _poolPulsatingIllusion from "../pool/pulsating-illusion.js";
 import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
+import _poolPushTheLimit from "../pool/push-the-limit.js";
 import _poolPutrefaction from "../pool/putrefaction.js";
 import _poolPutridPals from "../pool/putrid-pals.js";
 import _poolPyknite from "../pool/pyknite.js";
@@ -1709,6 +1710,7 @@ const shard: CardShard = {
     _poolPsychicSpiral,
     _poolPulsatingIllusion,
     _poolPuresteelPaladin,
+    _poolPushTheLimit,
     _poolPutrefaction,
     _poolPutridPals,
     _poolPyknite,

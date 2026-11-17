@@ -686,6 +686,7 @@ import _poolRootGreevil from "../pool/root-greevil.js";
 import _poolRootrunner from "../pool/rootrunner.js";
 import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
+import _poolRowanKenrith from "../pool/rowan-kenrith.js";
 import _poolRuhanOfTheFomori from "../pool/ruhan-of-the-fomori.js";
 import _poolRundveltHordemaster from "../pool/rundvelt-hordemaster.js";
 import _poolRuneOfProtectionBlue from "../pool/rune-of-protection-blue.js";
@@ -1700,6 +1701,7 @@ const shard: CardShard = {
     _poolRootrunner,
     _poolRotTideGargantua,
     _poolRotisserieElemental,
+    _poolRowanKenrith,
     _poolRuhanOfTheFomori,
     _poolRundveltHordemaster,
     _poolRuneOfProtectionBlue,

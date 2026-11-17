@@ -264,6 +264,7 @@ import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFaridehsFireball from "../pool/faridehs-fireball.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
 import _poolFavorableDestiny from "../pool/favorable-destiny.js";
+import _poolFearOfTheDark from "../pool/fear-of-the-dark.js";
 import _poolFeedbackBolt from "../pool/feedback-bolt.js";
 import _poolFesterleech from "../pool/festerleech.js";
 import _poolFinalJudgment from "../pool/final-judgment.js";
@@ -1287,6 +1288,7 @@ const shard: CardShard = {
     _poolFaridehsFireball,
     _poolFarmerCotton,
     _poolFavorableDestiny,
+    _poolFearOfTheDark,
     _poolFeedbackBolt,
     _poolFesterleech,
     _poolFinalJudgment,

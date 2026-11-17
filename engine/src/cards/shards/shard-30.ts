@@ -1026,6 +1026,7 @@ import _poolWightOfTheReliquary from "../pool/wight-of-the-reliquary.js";
 import _poolWildRicochet from "../pool/wild-ricochet.js";
 import _poolWildWasteland from "../pool/wild-wasteland.js";
 import _poolWildwoodPatrol from "../pool/wildwood-patrol.js";
+import _poolWillKenrith from "../pool/will-kenrith.js";
 import _poolWindStrider from "../pool/wind-strider.js";
 import _poolWindsOfRath from "../pool/winds-of-rath.js";
 import _poolWindseekerCentaur from "../pool/windseeker-centaur.js";
@@ -2089,6 +2090,7 @@ const shard: CardShard = {
     _poolWildRicochet,
     _poolWildWasteland,
     _poolWildwoodPatrol,
+    _poolWillKenrith,
     _poolWindStrider,
     _poolWindsOfRath,
     _poolWindseekerCentaur,

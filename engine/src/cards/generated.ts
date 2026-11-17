@@ -9354,6 +9354,7 @@ import _poolFearOfLostTeeth from "./pool/fear-of-lost-teeth.js";
 import _poolFearOfMissingOut from "./pool/fear-of-missing-out.js";
 import _poolFearOfSleepParalysis from "./pool/fear-of-sleep-paralysis.js";
 import _poolFearOfSurveillance from "./pool/fear-of-surveillance.js";
+import _poolFearOfTheDark from "./pool/fear-of-the-dark.js";
 import _poolFear from "./pool/fear.js";
 import _poolFearfulVillager from "./pool/fearful-villager.js";
 import _poolFearlessFledgling from "./pool/fearless-fledgling.js";
@@ -21192,6 +21193,7 @@ import _poolPursuedWhale from "./pool/pursued-whale.js";
 import _poolPursuitOfFlight from "./pool/pursuit-of-flight.js";
 import _poolPusKami from "./pool/pus-kami.js";
 import _poolPushPull from "./pool/push-pull.js";
+import _poolPushTheLimit from "./pool/push-the-limit.js";
 import _poolPush from "./pool/push.js";
 import _poolPutAway from "./pool/put-away.js";
 import _poolPutrefaction from "./pool/putrefaction.js";
@@ -23004,6 +23006,7 @@ import _poolRovingActuator from "./pool/roving-actuator.js";
 import _poolRovingHarper from "./pool/roving-harper.js";
 import _poolRovingKeep from "./pool/roving-keep.js";
 import _poolRowanFearlessSparkmage from "./pool/rowan-fearless-sparkmage.js";
+import _poolRowanKenrith from "./pool/rowan-kenrith.js";
 import _poolRowanScholarOfSparks from "./pool/rowan-scholar-of-sparks.js";
 import _poolRowanScionOfWar from "./pool/rowan-scion-of-war.js";
 import _poolRowanTreefolk from "./pool/rowan-treefolk.js";
@@ -29941,6 +29944,7 @@ import _poolUndeadSlayer from "./pool/undead-slayer.js";
 import _poolUndeadWarchief from "./pool/undead-warchief.js";
 import _poolUnderTheSkin from "./pool/under-the-skin.js";
 import _poolUndercellarMyconid from "./pool/undercellar-myconid.js";
+import _poolUndercellarSweep from "./pool/undercellar-sweep.js";
 import _poolUndercityDireRat from "./pool/undercity-dire-rat.js";
 import _poolUndercityEliminator from "./pool/undercity-eliminator.js";
 import _poolUndercityInformer from "./pool/undercity-informer.js";
@@ -31817,6 +31821,7 @@ import _poolWildwoodTracker from "./pool/wildwood-tracker.js";
 import _poolWilfredMott from "./pool/wilfred-mott.js";
 import _poolWilheltTheRotcleaver from "./pool/wilhelt-the-rotcleaver.js";
 import _poolWillForgedGolem from "./pool/will-forged-golem.js";
+import _poolWillKenrith from "./pool/will-kenrith.js";
 import _poolWillOTheWisp from "./pool/will-o-the-wisp.js";
 import _poolWillOfTheAbzan from "./pool/will-of-the-abzan.js";
 import _poolWillOfTheAllHunter from "./pool/will-of-the-all-hunter.js";
@@ -42755,6 +42760,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFearOfMissingOut,
   _poolFearOfSleepParalysis,
   _poolFearOfSurveillance,
+  _poolFearOfTheDark,
   _poolFear,
   _poolFearfulVillager,
   _poolFearlessFledgling,
@@ -54593,6 +54599,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPursuitOfFlight,
   _poolPusKami,
   _poolPushPull,
+  _poolPushTheLimit,
   _poolPush,
   _poolPutAway,
   _poolPutrefaction,
@@ -56405,6 +56412,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRovingHarper,
   _poolRovingKeep,
   _poolRowanFearlessSparkmage,
+  _poolRowanKenrith,
   _poolRowanScholarOfSparks,
   _poolRowanScionOfWar,
   _poolRowanTreefolk,
@@ -63342,6 +63350,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUndeadWarchief,
   _poolUnderTheSkin,
   _poolUndercellarMyconid,
+  _poolUndercellarSweep,
   _poolUndercityDireRat,
   _poolUndercityEliminator,
   _poolUndercityInformer,
@@ -65218,6 +65227,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWilfredMott,
   _poolWilheltTheRotcleaver,
   _poolWillForgedGolem,
+  _poolWillKenrith,
   _poolWillOTheWisp,
   _poolWillOfTheAbzan,
   _poolWillOfTheAllHunter,
@@ -76169,6 +76179,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fear-of-missing-out": _poolFearOfMissingOut,
   "pool/fear-of-sleep-paralysis": _poolFearOfSleepParalysis,
   "pool/fear-of-surveillance": _poolFearOfSurveillance,
+  "pool/fear-of-the-dark": _poolFearOfTheDark,
   "pool/fear": _poolFear,
   "pool/fearful-villager": _poolFearfulVillager,
   "pool/fearless-fledgling": _poolFearlessFledgling,
@@ -88007,6 +88018,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pursuit-of-flight": _poolPursuitOfFlight,
   "pool/pus-kami": _poolPusKami,
   "pool/push-pull": _poolPushPull,
+  "pool/push-the-limit": _poolPushTheLimit,
   "pool/push": _poolPush,
   "pool/put-away": _poolPutAway,
   "pool/putrefaction": _poolPutrefaction,
@@ -89819,6 +89831,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/roving-harper": _poolRovingHarper,
   "pool/roving-keep": _poolRovingKeep,
   "pool/rowan-fearless-sparkmage": _poolRowanFearlessSparkmage,
+  "pool/rowan-kenrith": _poolRowanKenrith,
   "pool/rowan-scholar-of-sparks": _poolRowanScholarOfSparks,
   "pool/rowan-scion-of-war": _poolRowanScionOfWar,
   "pool/rowan-treefolk": _poolRowanTreefolk,
@@ -96756,6 +96769,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/undead-warchief": _poolUndeadWarchief,
   "pool/under-the-skin": _poolUnderTheSkin,
   "pool/undercellar-myconid": _poolUndercellarMyconid,
+  "pool/undercellar-sweep": _poolUndercellarSweep,
   "pool/undercity-dire-rat": _poolUndercityDireRat,
   "pool/undercity-eliminator": _poolUndercityEliminator,
   "pool/undercity-informer": _poolUndercityInformer,
@@ -98632,6 +98646,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wilfred-mott": _poolWilfredMott,
   "pool/wilhelt-the-rotcleaver": _poolWilheltTheRotcleaver,
   "pool/will-forged-golem": _poolWillForgedGolem,
+  "pool/will-kenrith": _poolWillKenrith,
   "pool/will-o-the-wisp": _poolWillOTheWisp,
   "pool/will-of-the-abzan": _poolWillOfTheAbzan,
   "pool/will-of-the-all-hunter": _poolWillOfTheAllHunter,
