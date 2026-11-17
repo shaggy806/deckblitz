@@ -43,7 +43,10 @@ function wipes(effect: unknown): boolean {
   if (found === undefined) {
     found = Array.isArray(effect)
       ? effect.some(wipes)
-      : MASS.has((effect as { readonly kind?: unknown }).kind) || Object.values(effect).some(wipes);
+      : (MASS.has((effect as { readonly kind?: unknown }).kind) &&
+          // A return from exile is cards coming home, not a sweep (Flamewar).
+          (effect as { readonly from?: unknown }).from !== "exile") ||
+        Object.values(effect).some(wipes);
     massMemo.set(effect, found);
   }
   return found;

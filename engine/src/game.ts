@@ -41341,7 +41341,7 @@ export class Game {
           this.regenerateByEffect({ kind: "object", object: id });
         }
       },
-      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter, x, source),
+      returnToHandAll: (filter, scopeTo, from) => this.returnToHandAllByEffect(scopeTo ?? controller, filter, x, source, from),
       exileAll: (filter, airbend, except, untilSourceLeaves, linked, scopeTo) => {
         if (untilSourceLeaves !== true) {
           // "Exile … with this" (rule 607.2a): linked to the stint the
@@ -57530,7 +57530,21 @@ controlledBy,
     if (airbend) this.emit({ type: "bent", player: you, how: "air" });
   }
 
-  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0, source?: ObjectId): void {
+  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0, source?: ObjectId, from?: "exile"): void {
+    if (from === "exile") {
+      // Every card in exile `filter` takes, each to its owner's hand at once
+      // (Flamewar, Brash Veteran). A face-down one has no characteristics
+      // (rule 406.3a): only a filter asking what isn't one — its owner, its
+      // counters (rule 109.3) — can take it.
+      const cards = this.state.zones.shared.exile.filter((id) => {
+        const card = this.state.objects[id];
+        if (card === undefined || card.kind !== "card") return false;
+        if ((card.exiledFaceDown !== undefined || card.foretold === true) && !ownerOnly(filter)) return false;
+        return matchesFilter(this.state, this.registry, id, filter, { you, x });
+      });
+      for (const id of cards) this.returnCardToHand(id, "exile", undefined);
+      return;
+    }
     // One event, so each bounced permanent's leaves-the-battlefield ability
     // sees the rest go too (rule 603.10a). Snapshot: `returnToHandByEffect`
     // mutates the battlefield array as it goes. `x`: a filter's "mana value X

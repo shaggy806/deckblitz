@@ -3873,11 +3873,13 @@ export interface AggregateReads {
   readonly battlefieldMatch?: (id: ObjectId, filter: CardFilter) => boolean;
 }
 
-/** Whether a filter asks about nothing but whose a card is, and whether it's
- * foretold — what a card exiled face down (no characteristics, rule 406.3a)
- * can still match. */
+/** Whether a filter asks about nothing but whose a card is, whether it's
+ * foretold, and its counters — what a card exiled face down (no
+ * characteristics, rule 406.3a) can still match: neither its owner nor its
+ * counters are characteristics (rule 109.3). Flamewar, Brash Veteran's
+ * "exiled cards you own with intel counters on them", exiled face down. */
 export function ownerOnly(filter: CardFilter): boolean {
-  return Object.keys(filter).every((k) => k === "ownedBy" || k === "foretold");
+  return Object.keys(filter).every((k) => k === "ownedBy" || k === "foretold" || k === "counters");
 }
 
 /**

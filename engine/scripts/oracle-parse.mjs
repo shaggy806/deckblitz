@@ -4850,6 +4850,20 @@ export function parseSentence(sentence, ctx) {
     if (m[2] === undefined) return exile;
     return { kind: "sequence", effects: [exile, { kind: "shuffle-graveyard-into-library", target: "you" }] };
   }
+  // "Put all exiled cards you own with intel counters on them into your hand"
+  // (Flamewar, Brash Veteran): face down or not, whatever exiled them.
+  if ((m = /^put all exiled cards you own with ([a-z-]+) counters on them into your hand\.$/i.exec(s))) {
+    return {
+      kind: "return-to-hand-all",
+      from: "exile",
+      filter: { ownedBy: "you", counters: { kind: m[1].toLowerCase(), compare: { op: "gte", n: 1 } } },
+    };
+  }
+  // "Exile that many cards from the top of your library face down" (Flamewar,
+  // Streetwise Operative, of the combat damage it dealt).
+  if (re("exile that many cards from the top of your library face down").test(s)) {
+    return { kind: "exile-from-library", amount: { triggerValue: true }, faceDown: true };
+  }
   // "Exile the top seven cards of that player's library, then put a creature
   // card from among them onto the battlefield under your control" (Lord of
   // the Void): the player a combat damage trigger names; the put isn't

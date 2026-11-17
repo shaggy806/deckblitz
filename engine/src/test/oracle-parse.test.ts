@@ -20751,6 +20751,25 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     });
   });
 
+  it("reads Flamewar's intel cards: exiled face down by the damage dealt, then all of them put into your hand", () => {
+    const veteran = parseFace({
+      name: "Flamewar, Brash Veteran",
+      type_line: "Legendary Artifact Creature — Robot",
+      oracle_text: "{1}, Discard your hand: Put all exiled cards you own with intel counters on them into your hand.",
+    });
+    expect(veteran.activated[0]?.effect).toEqual({
+      kind: "return-to-hand-all",
+      from: "exile",
+      filter: { ownedBy: "you", counters: { kind: "intel", compare: { op: "gte", n: 1 } } },
+    });
+    const operative = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Artifact — Vehicle",
+      oracle_text: "Whenever ~ deals combat damage to a player, exile that many cards from the top of your library face down.",
+    });
+    expect(operative.triggered[0]?.effect).toEqual({ kind: "exile-from-library", amount: { triggerValue: true }, faceDown: true });
+  });
+
   it("reads an exile from the bottom of a library (The Temporal Anchor, Arvinox)", () => {
     const anchor = parseFace({
       name: "Test Card",

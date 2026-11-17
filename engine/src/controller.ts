@@ -5903,10 +5903,12 @@ function phasesOutOurs(effect: EffectSpec | null | undefined): boolean {
 function sweepsOf(effect: EffectSpec | null | undefined): Sweep[] {
   if (effect === null || effect === undefined) return [];
   switch (effect.kind) {
+    case "return-to-hand-all":
+      // From exile it's cards coming home, not a sweep (Flamewar).
+      return effect.from === "exile" ? [] : [effect];
     case "destroy-all":
     case "damage-all":
     case "exile-all":
-    case "return-to-hand-all":
       return [effect];
     case "sequence":
       return effect.effects.flatMap(sweepsOf);

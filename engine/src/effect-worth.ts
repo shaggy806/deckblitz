@@ -36,7 +36,8 @@ import type { CardDefinition } from "./cards/define.js";
 import { computeCharacteristics, lethalDamageLeft } from "./characteristics.js";
 import { polarityBias } from "./deck-bias.js";
 import type { EffectAmount, EffectSpec, ObjectRef, PlayerScope, ProtectionQualities } from "./effects.js";
-import { manaValueOfObject, matchesFilter } from "./filter.js";
+import type { CardFilter } from "./filter.js";
+import { manaValueOfObject, matchesFilter, ownerOnly } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameObject, GameState } from "./state.js";
@@ -270,6 +271,19 @@ type Sweep = Extract<
   { readonly kind: "destroy-all" | "damage-all" | "exile-all" | "return-to-hand-all" }
 >;
 
+/** How many cards the controller owns in exile that `filter` takes — a
+ * face-down one only by what it still shows (`ownerOnly`, rule 406.3a). */
+function exiledToHandCount(filter: CardFilter, ctx: WorthContext): number {
+  const cards = ctx.cards;
+  if (cards === undefined) return 0;
+  return ctx.state.zones.shared.exile.filter((id) => {
+    const card = ctx.state.objects[id];
+    if (card === undefined || card.kind !== "card" || card.owner !== ctx.controller) return false;
+    if ((card.exiledFaceDown !== undefined || card.foretold === true) && !ownerOnly(filter)) return false;
+    return matchesFilter(ctx.state, cards, id, filter, { you: ctx.controller });
+  }).length;
+}
+
 /**
  * Mass removal, as the board stands: what it takes from the opponents, shared
  * across them, less what it takes from `me` — a permanent the removal's 4, a
@@ -449,10 +463,14 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       );
     case "grant-protection":
       return "choose" in effect.from ? 0 : protectionWorth(effect.target, effect.from, ctx, effect.asHexproof === true);
+    case "return-to-hand-all":
+      // From exile it's no sweep: the controller's cards there come home, a
+      // card each (Flamewar, Brash Veteran's intel cards).
+      if (effect.from === "exile") return onPlayers(you, CARD * exiledToHandCount(effect.filter, ctx), ctx);
+      return sweepWorth(effect, ctx);
     case "destroy-all":
     case "damage-all":
     case "exile-all":
-    case "return-to-hand-all":
       return sweepWorth(effect, ctx);
     case "draw": {
       // A player named through a target ("its controller draws") is the
