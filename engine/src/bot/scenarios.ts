@@ -597,6 +597,102 @@ function handSizeAsked(
 }
 
 /** A scenario asked with one `act`, its `run` following from its position. */
+/**
+ * The seventh turn of a live game's Ureni seat (2026-11-17, read from its
+ * exported log), at its first main phase with the land played: eight lands,
+ * Arcane Signet, Frontier Siege's {G}{G} in the pool and Bloom Tender make
+ * fifteen mana; Garruk's Uprising, Dragonhawk and both Urenis are out;
+ * Terror of the Peaks, Atarka, Scourge of Valkas and four cheaper cards are
+ * in hand. The opponents' boards are as the log has them. The library is
+ * `top`, then `lands` of the deck's own Forests, then `under`, then the rest.
+ */
+function urenisSeventhTurn(
+  registry: CardRegistry,
+  top: readonly string[],
+  lands: number,
+  under: readonly string[],
+): Game {
+  const game = Game.create({
+    seed: 3,
+    registry,
+    decks: [
+      // A commander's colour identity is what Arcane Signet taps for.
+      { player: A, cards: Array<string>(40).fill("Forest"), commanders: ["Ureni of the Unwritten"] },
+      forestDeck(B),
+      forestDeck(C),
+      forestDeck(D),
+    ],
+  });
+  game.advanceUntil(
+    (s) => s.turnOrder[s.turn.activePlayerIndex] === A && s.priority.holder === A && s.turn.step === "precombat-main",
+  );
+  game.state.turn.number = 25; // alice's seventh turn
+  for (const player of [A, B, C, D]) game.state.zones.perPlayer[player].hand = [];
+  // Ureni is out (below): the command zone's copy is never the play.
+  game.state.players[A].commanderCastCounts = { "Ureni of the Unwritten": 6 } as never;
+  const out = (name: string, player: PlayerId): ObjectId => {
+    const id = onBoard(game, name, player);
+    if (game.state.awaiting?.kind === "pay-life-for-untapped") {
+      game.dispatch({ type: "pay-life-for-untapped", player, pay: false });
+    }
+    game.state.objects[id].tapped = false;
+    return id;
+  };
+  const mine = ["Stomping Ground", "Bountiful Landscape", "Shivan Reef", "Forest", "Mossfire Valley", "Island", "Island"];
+  for (const name of [...mine, "Mountain", "Arcane Signet"]) out(name, A);
+  game.state.objects[out("Frontier Siege", A)].chosenOnEnter = "Khans";
+  game.state.players[A].manaPool.push({ type: "G" }, { type: "G" });
+  for (const name of ["Garruk's Uprising", "Bloom Tender", "Dragonhawk, Fate's Tempest"]) out(name, A);
+  game.state.objects[out("Ureni of the Unwritten", A)].isCommander = true;
+  out("Ureni, the Song Unending", A);
+  appendJournal(game.state, { kind: "land-played", player: A });
+  const hand = ["Terror of the Peaks", "Atarka, World Render", "Scourge of Valkas", "Sakura-Tribe Elder"];
+  for (const name of [...hand, "Heroic Intervention", "Carnelian Orb of Dragonkind", "Fanatic of Rhonas"]) {
+    game.debugSpawn(name, A, "hand");
+  }
+  const above = top.map((name) => game.debugSpawn(name, A, "library"));
+  const below = under.map((name) => game.debugSpawn(name, A, "library"));
+  const forests = game.state.zones.perPlayer[A].library.filter((id) => !above.includes(id) && !below.includes(id));
+  game.state.zones.perPlayer[A].library = [...above, ...forests.slice(0, lands), ...below, ...forests.slice(lands)];
+  game.state.players[A].life = 36;
+  game.state.players[B].life = 27;
+  game.state.players[C].life = 34;
+  game.state.players[D].life = 18;
+  const bobs = ["Mountain", "Mountain", "Mountain", "Diamond City", "Krenko, Mob Boss", "Kiki-Jiki, Mirror Breaker"];
+  const carols = ["Plains", "Plains", "Emeria, the Sky Ruin", "Witch's Clinic", "Giada, Font of Hope", "Elspeth, Knight-Errant"];
+  const daves = ["Necroblossom Snarl", "Overgrown Tomb", "Forest", "Command Tower", "Swamp", "Eclipsed Realms"];
+  for (const name of [...bobs, "Goblin Token"]) out(name, B);
+  for (const name of [...carols, "Soldier Token"]) out(name, C);
+  for (const name of [...daves, "Skullclamp", "Lightning Greaves", "Staff of Domination", "Lathril, Blade of the Elves"]) {
+    out(name, D);
+  }
+  return game;
+}
+
+/** The spells `bot` casts for alice before her first main phase ends, each by
+ * name, the opponents passing. */
+function precombatCasts(game: Game, bot: PlayerController): string[] {
+  const casts: string[] = [];
+  const turn = game.state.turn.number;
+  const here = (s: Game["state"]): boolean =>
+    !s.result.over && s.turn.number === turn && s.turn.step === "precombat-main";
+  for (let i = 0; i < 200 && here(game.state); i += 1) {
+    const asking = game.state.awaiting;
+    if (asking !== null && asking.player !== A) {
+      game.advanceUntil((s) => s.awaiting === null || s.awaiting.player === A || !here(s));
+      continue;
+    }
+    if (asking === null && game.state.priority.holder !== A) {
+      game.advanceUntil((s) => s.awaiting !== null || s.priority.holder === A || !here(s));
+      continue;
+    }
+    const action = bot.act(viewOf(game, A));
+    if (action.type === "cast-spell") casts.push(cardOf(game, action.card));
+    game.dispatch(action);
+  }
+  return casts;
+}
+
 function asked(
   spec: Omit<BotScenario, "run" | "position"> & Required<Pick<BotScenario, "position">>,
 ): BotScenario {
@@ -6678,6 +6774,73 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  {
+    name: "casts Terror of the Peaks beside Scourge of Valkas, not Atarka: the engine before the bigger body",
+    rule: "A permanent that pays off every creature entering after it comes down ahead of a bigger body: its turns to come are worth more than the body.",
+    kind: "training",
+    run(weights, registry, makeBot) {
+      // Reported from a live game (2026-11-17, the same game and seat as the
+      // Garruk's Uprising board above, two turns on): "why did it play
+      // Scourge of Valkas before Terror of the Peaks?" On fifteen mana it
+      // cast Scourge, Atarka and Fanatic of Rhonas, and Terror stayed in hand
+      // to the end of the game. Scourge before Terror is a wash by itself (4
+      // and 5 from Scourge's trigger, or 5 from Scourge and 4 from Terror:
+      // the two lines score the same to the last digit). What left Terror in
+      // hand was Atarka as the second spell: Scourge then Atarka scores 1.7
+      // over Scourge then Terror, a 6/4 with double strike for the attack
+      // against a 5/4, and nothing in the evaluation prices what Terror does
+      // on the turns to come (`drawEngines` and `tokenEngines` price theirs).
+      // Terror, Scourge, Fanatic and the Elder is 14 of the 15 mana: 11
+      // damage from the triggers against 9, the same lethal attack on dave
+      // (22 in the air at 18; the double strike was overkill), and Atarka
+      // next turn under both.
+      const game = urenisSeventhTurn(registry, [], 0, []);
+      const casts = precombatCasts(game, makeBot(A, registry, weights));
+      return { passed: casts.includes("Terror of the Peaks"), detail: `cast ${casts.join(", then ") || "nothing"}` };
+    },
+  },
+  {
+    name: "casts the same first spell whatever order its library lies in (Scourge of Valkas, Atarka and Terror of the Peaks in hand)",
+    rule: "A seat can't know the order of its library: a choice must not turn on which cards a simulation would draw or exile from it.",
+    kind: "training",
+    run(weights, registry, makeBot) {
+      // Found rebuilding the board above. Every rollout of a line draws for
+      // Garruk's Uprising, exiles and plays for Dragonhawk's attack and looks
+      // at the top eight for Ureni, off the library in its real order, which
+      // the seat can't know. A plan may not *use* an unseen library card
+      // (`unknownCards`), but each line's value counts whatever its rollout
+      // turned up, and on this board the turn changes with that order alone.
+      // Over forty Forests: Scourge, Atarka, Fanatic, the live turn. With the
+      // log's cards under two draws and eight lands (Ureni's look found no
+      // Dragon in the game): Fanatic, Sakura-Tribe Elder, Heroic Intervention
+      // at the beginning of combat, and Blasphemous Act off Dragonhawk's
+      // exile after it. Open: play a decision's rollouts over a library
+      // shuffled for the purpose (BACKLOG, "Bots").
+      const first = (game: Game): string => {
+        const action = makeBot(A, registry, weights).act(viewOf(game, A));
+        return action.type === "cast-spell" ? cardOf(game, action.card) : describeAction(action);
+      };
+      const overForests = first(urenisSeventhTurn(registry, [], 0, []));
+      const asItLay = first(
+        urenisSeventhTurn(registry, ["Hellkite Courser", "Mountain"], 8, [
+          "Rhythm of the Wild",
+          "Kessig Wolf Run",
+          "Mountain",
+          "Cinder Glade",
+          "Island",
+          "Frontier Bivouac",
+          "Old Gnawbone",
+          "Blasphemous Act",
+          "Hinterland Harbor",
+          "Goldspan Dragon",
+        ]),
+      );
+      return {
+        passed: overForests === asItLay,
+        detail: `cast ${overForests} over a library of Forests, ${asItLay} over the game's`,
+      };
+    },
+  },
   asked({
     name: "casts Opt first so Shiko's Flurry copies the Lightning Bolt",
     rule: "With a second-spell payoff out, a cheap first spell turns the next one into two.",

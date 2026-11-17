@@ -4,6 +4,66 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-17 — Scourge of Valkas, then Atarka: Terror of the Peaks left in hand
+
+Status: open (two training scenarios).
+
+- **Seen:** the same live game and seat as the entry below, round seven (the user played the
+  seat until about the Wrath, then let a bot take over). Fifteen mana in the first main phase:
+  eight lands, Arcane Signet, Frontier Siege's {G}{G}, Bloom Tender. Out: Garruk's Uprising,
+  Dragonhawk, Ureni of the Unwritten and Ureni, the Song Unending. In hand: Terror of the Peaks
+  (since the opening hand), Atarka, World Render, Scourge of Valkas, Sakura-Tribe Elder, Fanatic
+  of Rhonas, Carnelian Orb of Dragonkind, Heroic Intervention. It cast Scourge (its 4 killed
+  Giada), Atarka (Scourge's 5 killed Krenko) and Fanatic of Rhonas, attacked joedf, on 18, with
+  three fliers Atarka had given double strike, and cast the Elder after combat. Terror was never
+  cast in the game. The user: "why did it play Scourge of Valkas before Terror of the Peaks?"
+- **Right:** Terror, Scourge, Fanatic and the Elder, 14 of the 15 mana: 11 damage from the
+  triggers (5 from Scourge, 4 + 1 + 1 from Terror) against the 9 it got, the same lethal attack
+  (22 in the air at a player on 18: the double strike was overkill), and Atarka the turn after
+  under both.
+- **Why, part one: Scourge before Terror is not itself the loss.** Scourge then Terror is 4 and
+  5 from Scourge's trigger; Terror then Scourge is 5 from Scourge and 4 from Terror. The plan
+  scores the two lines the same to the last digit. What left Terror in hand was the second
+  spell: Scourge then Atarka scores 1.7 over Scourge then Terror. Atarka is a 6/4 that doubles
+  this turn's attack; Terror is a 5/4, and its trigger is worth only what enters under it inside
+  the same line. Nothing in the evaluation prices what it does on the turns to come, as
+  `drawEngines` and `tokenEngines` price theirs.
+- **Why, part two: the turn depends on the library's hidden order.** Each rollout of a line
+  draws for Garruk's Uprising, exiles and plays for Dragonhawk's attack and looks at the top
+  eight for Ureni, off the library in its real order, which the seat can't know. On the rebuilt
+  board, changing only that order changes the turn. Forty Forests: Scourge, Atarka, Fanatic and
+  the Elder after combat, the live turn cast for cast. The log's cards on top (Hellkite Courser,
+  Mountain, then Dragonhawk's five): the same three, then Hellkite Courser and Terror after
+  combat. The same cards under two draws and eight lands (Ureni's look found no Dragon in the
+  game): Fanatic, the Elder, Heroic Intervention at the beginning of combat, and Blasphemous Act
+  off Dragonhawk's exile. A line's value moves by tens of points on what its rollout turned up
+  (144 against 118 for Scourge then Atarka, over two of those libraries); on one order, casting
+  Terror alone scored *below passing*, the pass being credited with a Hellkite Courser cast from
+  Dragonhawk's exile. A plan may not *use* an unseen library card (`unknownCards`), but every
+  line's value still counts them.
+- **Scenarios:** "casts Terror of the Peaks beside Scourge of Valkas, not Atarka: the engine
+  before the bigger body" (training; reads "cast Scourge of Valkas, then Atarka, World Render,
+  then Fanatic of Rhonas") and "casts the same first spell whatever order its library lies in"
+  (training; "cast Scourge of Valkas over a library of Forests, Fanatic of Rhonas over the
+  game's"). Both on `urenisSeventhTurn`, the board rebuilt from the log. The exact hidden cards
+  of that turn aren't in the log (eight of them went to the bottom unseen), so the reproduction
+  is of the casts, not of every number the live bot weighed.
+- **Fix (outline), two separate pieces; neither built.**
+  1. *The library's order.* Before a decision's rollouts, lay the part of the seat's library it
+     hasn't seen in an order shuffled for the purpose, the same for every line of that decision,
+     so no line is told apart by a card's place. One shuffle a decision is the cheap version:
+     the bot stops reading the real order, though a choice can still turn on the sample.
+     Several, averaged, is the proper one and costs that many times the simulations. The
+     opponents' hands and libraries are the same question. `bot/determinize.ts` is left from v3
+     for this. Risk: every bench figure moves, today's bot drawing on knowledge it shouldn't
+     have; it wants `bot:ab` and the gate. A major change: ask first.
+  2. *An engine's turns to come.* A feature beside `drawEngines` and `tokenEngines` for a
+     permanent whose trigger pays for every creature (or spell) that comes after it (Terror of
+     the Peaks, Scourge of Valkas, Dragon Tempest, Garruk's Uprising, Warstorm Surge), worth
+     something on the board before anything has entered under it. `entersPayoffFilters` already
+     finds them. Risk: priced too high, they go down ahead of what should be cast; fit it with
+     `bot:fit-scenarios` against the scenario and bench.
+
 ## 2026-11-17 — Garruk's Uprising cast after Dragonhawk, on an empty board
 
 Status: fixed 2026-11-17 (its two scenarios gate).
