@@ -20344,6 +20344,34 @@ describe("a target player's own search, its zones theirs to choose", () => {
   });
 });
 
+describe("a graveyard cast that holds only while a condition does", () => {
+  it("reads Viral Spawning's corrupted flashback and Glimpse the Cosmos's Giant permission", () => {
+    const spawning = parseFace({
+      name: "Viral Spawning",
+      type_line: "Sorcery",
+      oracle_text:
+        "Create a 3/3 green Phyrexian Beast creature token with toxic 1. (Players dealt combat damage by it also get a poison counter.)\nCorrupted — As long as an opponent has three or more poison counters and this card is in your graveyard, it has flashback {2}{G}. (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
+    } as never) as unknown as { flashback: unknown };
+    expect(spawning.flashback).toEqual({
+      cost: "{2}{G}",
+      if: { kind: "player-counters", counter: "poison", who: "opponent", atLeast: 3 },
+    });
+    const glimpse = parseFace({
+      name: "Glimpse the Cosmos",
+      type_line: "Sorcery",
+      oracle_text:
+        "Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.\nAs long as you control a Giant, you may cast this card from your graveyard by paying {U} rather than paying its mana cost. If you cast this card this way and it would be put into your graveyard, exile it instead.",
+    } as never) as unknown as { mayPlaySelf: unknown; complete: boolean };
+    expect(glimpse.mayPlaySelf).toEqual({
+      from: ["graveyard"],
+      byPaying: "{U}",
+      if: { kind: "controls", filter: { subtype: "Giant" }, atLeast: 1 },
+      exileAfter: true,
+    });
+    expect(glimpse.complete).toBe(true);
+  });
+});
+
 describe("counters that remain across zones, and a choice of counters", () => {
   it("reads Me, the Immortal whole, its two-letter short name as ~", () => {
     const face = parseFace({

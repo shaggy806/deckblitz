@@ -28,6 +28,7 @@ import {
   journalCount,
   journalReader,
   pairedPartner,
+  staticConditionMet,
   turnStatOf,
 } from "./characteristics.js";
 import type { CastVia } from "./actions.js";
@@ -2345,8 +2346,15 @@ const CARD_KEYWORD_READS = {
   disguise: (def) => def.morph?.keyword === "disguise",
   morph: (def) => def.morph !== null && def.morph.keyword !== "disguise",
   // Not jump-start or "beam me up", which the definition keeps in the same
-  // field (`flashback.keyword`) but are other keywords (rule 702.133).
-  flashback: (def, live) => live?.grantedFlashback != null || (def.flashback !== null && def.flashback.keyword === undefined),
+  // field (`flashback.keyword`) but are other keywords (rule 702.133). A
+  // conditional one only while it holds, in its owner's graveyard (Viral
+  // Spawning's "as long as … and this card is in your graveyard").
+  flashback: (def, live, state, registry) =>
+    live?.grantedFlashback != null ||
+    (def.flashback !== null &&
+      def.flashback.keyword === undefined &&
+      (def.flashback.if === undefined ||
+        (live?.zone === "graveyard" && staticConditionMet(state, registry, live, def.flashback.if)))),
   madness: (def) => def.madness !== null,
   warp: (def) => def.warp !== null,
   disturb: (def) => def.disturb !== null,
@@ -2365,7 +2373,10 @@ const CARD_KEYWORD_READS = {
   // its printed line is what tells a spell with devoid from any other
   // colorless one (Corrupted Crossroads's ruling).
   devoid: (def) => hasKeywordLine(def, "Devoid"),
-} as const satisfies Record<CardKeyword, (def: CardDefinition, live: GameObject | undefined) => boolean>;
+} as const satisfies Record<
+  CardKeyword,
+  (def: CardDefinition, live: GameObject | undefined, state: GameState, registry: CardRegistry) => boolean
+>;
 
 /** Whether `live`, a card in a graveyard, counts as a card named `name` for
  * the resolving spell of that name applying the filter — its graveyard
@@ -3341,7 +3352,7 @@ export function matchesFilter(
   if (filter.hasKeyword !== undefined) {
     const textName = live !== undefined ? rulesTextName(live) : lki?.name;
     const def = textName !== undefined && registry.has(textName) ? registry.get(textName) : undefined;
-    if (def === undefined || !CARD_KEYWORD_READS[filter.hasKeyword](def, live)) return false;
+    if (def === undefined || !CARD_KEYWORD_READS[filter.hasKeyword](def, live, state, registry)) return false;
     // A permanent that lost its abilities has none of these (Abandoned Sarcophagus's ruling).
     if (live?.zone === "battlefield" && hasLostAbilities(state, registry, live)) return false;
   }

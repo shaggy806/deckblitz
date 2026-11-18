@@ -5965,6 +5965,12 @@ export interface CardDefinition {
     /** `"jump-start"`, `"beam-me-up"`: the keyword this graveyard cast is
      * printed as, for its label. */
     readonly keyword?: "jump-start" | "beam-me-up";
+    /** "As long as [this holds] and this card is in your graveyard, it has
+     * flashback" (Viral Spawning's corrupted): the card has the flashback
+     * only while the condition holds, read live from the card's side — cast
+     * with it only then (`Game.flashbacksOf`), and "a card with flashback"
+     * only then and only in its owner's graveyard (`hasKeyword`). */
+    readonly if?: StaticCondition;
     /** Untapped creatures tapped as part of the cost, chosen with the cast (its
      * offer's `tapCost`), as an alternative cost's `tapCreatures` are:
      * "Flashback—Tap three untapped white creatures you control" (Battle

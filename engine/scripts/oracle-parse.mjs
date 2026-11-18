@@ -18096,6 +18096,16 @@ function parseFaceAsWritten(face, ctx = {}) {
       }
     }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
+    // "As long as an opponent has three or more poison counters and ~ is in
+    // your graveyard, it has flashback {2}{G}" (Viral Spawning's corrupted):
+    // a flashback only while the condition holds (`flashback.if`).
+    if ((m = /^(As long as .+?) and ~ is in your graveyard, it has flashback ((?:\{[^}]+\})+)\.$/.exec(line))) {
+      const prefix = STATIC_CONDITION_PREFIXES.find(([words]) => words === `${m[1]}, `);
+      if (prefix !== undefined) {
+        out.flashback = { cost: m[2], if: prefix[1] };
+        continue;
+      }
+    }
     // Jump-start (rule 702.133a): the graveyard cast for the card's own mana
     // cost, discarding a card.
     if (line === "Jump-start" && face.mana_cost) {
@@ -20600,6 +20610,23 @@ function graveyardCastCost(part) {
  * in your graveyard]." — a card's `mayPlaySelf`, or `null`.
  */
 function selfGraveyardCast(line) {
+  // "As long as you control a Giant, you may cast ~ from your graveyard by
+  // paying {U} rather than paying its mana cost. If you cast ~ this way and
+  // it would be put into your graveyard, exile it instead." (Glimpse the
+  // Cosmos): the permission while its owner controls one (`if`).
+  const controls =
+    /^As long as you control an? ([A-Z][a-z]+), (you may cast ~ from your graveyard .+?\.)( If you cast ~ this way and it would be put into your graveyard, exile it instead\.)?$/.exec(
+      line,
+    );
+  if (controls !== null) {
+    const rest = selfGraveyardCast(`${controls[2][0].toUpperCase()}${controls[2].slice(1)}`);
+    if (rest === null) return null;
+    return {
+      ...rest,
+      if: { kind: "controls", filter: { subtype: controls[1] }, atLeast: 1 },
+      ...(controls[3] !== undefined ? { exileAfter: true } : {}),
+    };
+  }
   // "… as long as you've rolled a 6 this turn. If you cast it this way and it
   // would be put into your graveyard, exile it instead." (Eelectrocute).
   const dice = /^You may cast ~ from your graveyard as long as (.+?)\.( If you cast it this way and it would be put into your graveyard, exile it instead\.)?$/.exec(line);

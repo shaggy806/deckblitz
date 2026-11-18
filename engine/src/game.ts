@@ -61894,7 +61894,8 @@ controlledBy,
       out.push(option);
     };
     const printed = this.registry.get(object.cardName).flashback;
-    if (printed !== null) {
+    // A conditional one only while its condition holds (Viral Spawning).
+    if (printed !== null && (printed.if === undefined || staticConditionMet(this.state, this.registry, object, printed.if))) {
       add(
         printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined &&
           printed.discard === undefined && printed.keyword === undefined && printed.tapCreatures === undefined &&
