@@ -523,6 +523,7 @@ import _poolMireKavu from "../pool/mire-kavu.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
 import _poolMishrasSelfReplicator from "../pool/mishras-self-replicator.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
+import _poolMistcaller from "../pool/mistcaller.js";
 import _poolMnemonicDeluge from "../pool/mnemonic-deluge.js";
 import _poolMockingDoppelganger from "../pool/mocking-doppelganger.js";
 import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
@@ -1544,6 +1545,7 @@ const shard: CardShard = {
     _poolMischievousPup,
     _poolMishrasSelfReplicator,
     _poolMistDancer,
+    _poolMistcaller,
     _poolMnemonicDeluge,
     _poolMockingDoppelganger,
     _poolMoltenGatekeeper,

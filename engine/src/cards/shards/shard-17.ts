@@ -93,6 +93,7 @@ import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
 import _poolBigPlay from "../pool/big-play.js";
 import _poolBiovisionary from "../pool/biovisionary.js";
 import _poolBirdsOfParadise from "../pool/birds-of-paradise.js";
+import _poolBitterFeud from "../pool/bitter-feud.js";
 import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodAspirant from "../pool/blood-aspirant.js";
 import _poolBloodCursedKnight from "../pool/blood-cursed-knight.js";
@@ -1134,6 +1135,7 @@ const shard: CardShard = {
     _poolBigPlay,
     _poolBiovisionary,
     _poolBirdsOfParadise,
+    _poolBitterFeud,
     _poolBlastZone,
     _poolBloodAspirant,
     _poolBloodCursedKnight,

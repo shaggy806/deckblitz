@@ -837,6 +837,7 @@ import _poolAncientImperiosaur from "./pool/ancient-imperiosaur.js";
 import _poolAncientKavu from "./pool/ancient-kavu.js";
 import _poolAncientLumberknot from "./pool/ancient-lumberknot.js";
 import _poolAncientOfTheEquinox from "./pool/ancient-of-the-equinox.js";
+import _poolAncientOoze from "./pool/ancient-ooze.js";
 import _poolAncientRunes from "./pool/ancient-runes.js";
 import _poolAncientSilverDragon from "./pool/ancient-silver-dragon.js";
 import _poolAncientSilverback from "./pool/ancient-silverback.js";
@@ -2597,6 +2598,7 @@ import _poolBitingRain from "./pool/biting-rain.js";
 import _poolBitingTether from "./pool/biting-tether.js";
 import _poolBitterChill from "./pool/bitter-chill.js";
 import _poolBitterDownfall from "./pool/bitter-downfall.js";
+import _poolBitterFeud from "./pool/bitter-feud.js";
 import _poolBitterOrdeal from "./pool/bitter-ordeal.js";
 import _poolBitterReunion from "./pool/bitter-reunion.js";
 import _poolBitterRevelation from "./pool/bitter-revelation.js";
@@ -3181,6 +3183,7 @@ import _poolBonesplitter from "./pool/bonesplitter.js";
 import _poolBonethornValesk from "./pool/bonethorn-valesk.js";
 import _poolBoneyardDesecrator from "./pool/boneyard-desecrator.js";
 import _poolBoneyardLurker from "./pool/boneyard-lurker.js";
+import _poolBoneyardMycodrax from "./pool/boneyard-mycodrax.js";
 import _poolBoneyardParley from "./pool/boneyard-parley.js";
 import _poolBoneyardScourge from "./pool/boneyard-scourge.js";
 import _poolBoneyardWurm from "./pool/boneyard-wurm.js";
@@ -17875,6 +17878,7 @@ import _poolMistSyndicateNaga from "./pool/mist-syndicate-naga.js";
 import _poolMistbindClique from "./pool/mistbind-clique.js";
 import _poolMistbladeShinobi from "./pool/mistblade-shinobi.js";
 import _poolMistbreathElder from "./pool/mistbreath-elder.js";
+import _poolMistcaller from "./pool/mistcaller.js";
 import _poolMistcutterHydra from "./pool/mistcutter-hydra.js";
 import _poolMisterFantasticReedRichards from "./pool/mister-fantastic-reed-richards.js";
 import _poolMisterFantastic from "./pool/mister-fantastic.js";
@@ -18119,6 +18123,7 @@ import _poolMonstrousOnslaught from "./pool/monstrous-onslaught.js";
 import _poolMonstrousRage from "./pool/monstrous-rage.js";
 import _poolMonstrousStep from "./pool/monstrous-step.js";
 import _poolMonstrousVortex from "./pool/monstrous-vortex.js";
+import _poolMonstrousWarLeech from "./pool/monstrous-war-leech.js";
 import _poolMonumentToEndurance from "./pool/monument-to-endurance.js";
 import _poolMonumentToPerfection from "./pool/monument-to-perfection.js";
 import _poolMonumentalCorruption from "./pool/monumental-corruption.js";
@@ -30344,6 +30349,7 @@ import _poolUrborgDrake from "./pool/urborg-drake.js";
 import _poolUrborgElf from "./pool/urborg-elf.js";
 import _poolUrborgEmissary from "./pool/urborg-emissary.js";
 import _poolUrborgJustice from "./pool/urborg-justice.js";
+import _poolUrborgLhurgoyf from "./pool/urborg-lhurgoyf.js";
 import _poolUrborgMindsucker from "./pool/urborg-mindsucker.js";
 import _poolUrborgPhantom from "./pool/urborg-phantom.js";
 import _poolUrborgRepossession from "./pool/urborg-repossession.js";
@@ -34430,6 +34436,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAncientKavu,
   _poolAncientLumberknot,
   _poolAncientOfTheEquinox,
+  _poolAncientOoze,
   _poolAncientRunes,
   _poolAncientSilverDragon,
   _poolAncientSilverback,
@@ -36190,6 +36197,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBitingTether,
   _poolBitterChill,
   _poolBitterDownfall,
+  _poolBitterFeud,
   _poolBitterOrdeal,
   _poolBitterReunion,
   _poolBitterRevelation,
@@ -36774,6 +36782,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBonethornValesk,
   _poolBoneyardDesecrator,
   _poolBoneyardLurker,
+  _poolBoneyardMycodrax,
   _poolBoneyardParley,
   _poolBoneyardScourge,
   _poolBoneyardWurm,
@@ -51468,6 +51477,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMistbindClique,
   _poolMistbladeShinobi,
   _poolMistbreathElder,
+  _poolMistcaller,
   _poolMistcutterHydra,
   _poolMisterFantasticReedRichards,
   _poolMisterFantastic,
@@ -51712,6 +51722,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMonstrousRage,
   _poolMonstrousStep,
   _poolMonstrousVortex,
+  _poolMonstrousWarLeech,
   _poolMonumentToEndurance,
   _poolMonumentToPerfection,
   _poolMonumentalCorruption,
@@ -63937,6 +63948,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrborgElf,
   _poolUrborgEmissary,
   _poolUrborgJustice,
+  _poolUrborgLhurgoyf,
   _poolUrborgMindsucker,
   _poolUrborgPhantom,
   _poolUrborgRepossession,
@@ -68036,6 +68048,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ancient-kavu": _poolAncientKavu,
   "pool/ancient-lumberknot": _poolAncientLumberknot,
   "pool/ancient-of-the-equinox": _poolAncientOfTheEquinox,
+  "pool/ancient-ooze": _poolAncientOoze,
   "pool/ancient-runes": _poolAncientRunes,
   "pool/ancient-silver-dragon": _poolAncientSilverDragon,
   "pool/ancient-silverback": _poolAncientSilverback,
@@ -69796,6 +69809,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/biting-tether": _poolBitingTether,
   "pool/bitter-chill": _poolBitterChill,
   "pool/bitter-downfall": _poolBitterDownfall,
+  "pool/bitter-feud": _poolBitterFeud,
   "pool/bitter-ordeal": _poolBitterOrdeal,
   "pool/bitter-reunion": _poolBitterReunion,
   "pool/bitter-revelation": _poolBitterRevelation,
@@ -70380,6 +70394,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bonethorn-valesk": _poolBonethornValesk,
   "pool/boneyard-desecrator": _poolBoneyardDesecrator,
   "pool/boneyard-lurker": _poolBoneyardLurker,
+  "pool/boneyard-mycodrax": _poolBoneyardMycodrax,
   "pool/boneyard-parley": _poolBoneyardParley,
   "pool/boneyard-scourge": _poolBoneyardScourge,
   "pool/boneyard-wurm": _poolBoneyardWurm,
@@ -85074,6 +85089,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mistbind-clique": _poolMistbindClique,
   "pool/mistblade-shinobi": _poolMistbladeShinobi,
   "pool/mistbreath-elder": _poolMistbreathElder,
+  "pool/mistcaller": _poolMistcaller,
   "pool/mistcutter-hydra": _poolMistcutterHydra,
   "pool/mister-fantastic-reed-richards": _poolMisterFantasticReedRichards,
   "pool/mister-fantastic": _poolMisterFantastic,
@@ -85318,6 +85334,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/monstrous-rage": _poolMonstrousRage,
   "pool/monstrous-step": _poolMonstrousStep,
   "pool/monstrous-vortex": _poolMonstrousVortex,
+  "pool/monstrous-war-leech": _poolMonstrousWarLeech,
   "pool/monument-to-endurance": _poolMonumentToEndurance,
   "pool/monument-to-perfection": _poolMonumentToPerfection,
   "pool/monumental-corruption": _poolMonumentalCorruption,
@@ -97543,6 +97560,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/urborg-elf": _poolUrborgElf,
   "pool/urborg-emissary": _poolUrborgEmissary,
   "pool/urborg-justice": _poolUrborgJustice,
+  "pool/urborg-lhurgoyf": _poolUrborgLhurgoyf,
   "pool/urborg-mindsucker": _poolUrborgMindsucker,
   "pool/urborg-phantom": _poolUrborgPhantom,
   "pool/urborg-repossession": _poolUrborgRepossession,

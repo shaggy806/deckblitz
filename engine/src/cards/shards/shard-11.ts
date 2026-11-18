@@ -578,6 +578,7 @@ import _poolMondoGecko from "../pool/mondo-gecko.js";
 import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
 import _poolMonologueTax from "../pool/monologue-tax.js";
 import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
+import _poolMonstrousWarLeech from "../pool/monstrous-war-leech.js";
 import _poolMoonringIsland from "../pool/moonring-island.js";
 import _poolMoonriseCleric from "../pool/moonrise-cleric.js";
 import _poolMoonsnarePrototype from "../pool/moonsnare-prototype.js";
@@ -1636,6 +1637,7 @@ const shard: CardShard = {
     _poolMondrakGloryDominus,
     _poolMonologueTax,
     _poolMonssGoblinRaiders,
+    _poolMonstrousWarLeech,
     _poolMoonringIsland,
     _poolMoonriseCleric,
     _poolMoonsnarePrototype,

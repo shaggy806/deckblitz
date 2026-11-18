@@ -986,6 +986,7 @@ import _poolUnlivingLegionnaire from "../pool/unliving-legionnaire.js";
 import _poolUnmake from "../pool/unmake.js";
 import _poolUnrulyCatapult from "../pool/unruly-catapult.js";
 import _poolUnwillingVessel from "../pool/unwilling-vessel.js";
+import _poolUrborgLhurgoyf from "../pool/urborg-lhurgoyf.js";
 import _poolUrzasChalice from "../pool/urzas-chalice.js";
 import _poolUrzasCommand from "../pool/urzas-command.js";
 import _poolUrzasMine from "../pool/urzas-mine.js";
@@ -2093,6 +2094,7 @@ const shard: CardShard = {
     _poolUnmake,
     _poolUnrulyCatapult,
     _poolUnwillingVessel,
+    _poolUrborgLhurgoyf,
     _poolUrzasChalice,
     _poolUrzasCommand,
     _poolUrzasMine,
