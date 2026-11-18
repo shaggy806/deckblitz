@@ -23587,6 +23587,31 @@ describe("a mill as it enters (replacement:as-enters-mill)", () => {
       }),
     ]);
   });
+
+  it("reads Monstrous War-Leech whole: four if kicked, and the greatest mana value in your graveyard", () => {
+    const leech = parseFace({
+      name: "Monstrous War-Leech",
+      type_line: "Creature — Leech Horror",
+      oracle_text:
+        "Kicker {U} (You may pay an additional {U} as you cast this spell.)\nAs this creature enters, if it was kicked, mill four cards. (To mill a card, put the top card of your library into your graveyard.)\nMonstrous War-Leech's power and toughness are each equal to the greatest mana value among cards in your graveyard.",
+      mana_cost: "{3}{B}",
+      colors: ["B"],
+      cmc: 4,
+    } as never) as unknown as { complete: boolean; static: readonly unknown[] };
+    expect(leech.complete).toBe(true);
+    expect(leech.static).toEqual([
+      expect.objectContaining({
+        replacement: { event: "enters-battlefield", asEnters: { mill: { ifCondition: { kind: "self-kicked" }, then: 4, else: 0 } } },
+      }),
+      expect.objectContaining({
+        setBasePtFromCount: {
+          countOf: { aggregate: "max", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },
+          plusPower: 0,
+          plusToughness: 0,
+        },
+      }),
+    ]);
+  });
 });
 
 describe("a CDA over the others (amount:cda-aggregate-sum-excluding-self)", () => {

@@ -3058,7 +3058,8 @@
   "replacement:chosen-players-damage-doubling",
   "replacement:as-enters-mill",
   "amount:cda-aggregate-sum-excluding-self",
-  "amount:cda-graveyard-count-excluding-self"
+  "amount:cda-graveyard-count-excluding-self",
+  "bug:cda-greatest-mana-value-in-graveyard"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

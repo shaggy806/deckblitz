@@ -7820,7 +7820,8 @@ clause (section 9):
   number of [filter]" (Sin, Unending Cataclysm: anyone's, chosen, counted by
   counters removed); `turnFaceDown: CardFilter` is "turn all other [filter]
   face down" (Ixidron: anyone's, nothing chosen). `mill: EffectAmount` is "mill
-  N cards" (Urborg Lhurgoyf's `{ product: [3, { timesKicked: "source" }] }`:
+  N cards" (Urborg Lhurgoyf's `{ product: [3, { timesKicked: "source" }] }`,
+  Monstrous War-Leech's `{ ifCondition: { kind: "self-kicked" }, then: 4, else: 0 }`:
   its controller's, nothing chosen, done before it moves so a CDA over the
   graveyard enters seeing them). `payLife: "any"` is "pay any
   amount of life" (Phyrexian Processor: a `choose-number` from 0 to its

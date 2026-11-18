@@ -24540,12 +24540,18 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };
   }
   // "As ~ enters, mill three cards for each time it was kicked." (Urborg
-  // Lhurgoyf — `AsEntersAction.mill`, rule 614.1c).
+  // Lhurgoyf — `AsEntersAction.mill`, rule 614.1c); "As ~ enters, if it was
+  // kicked, mill four cards." (Monstrous War-Leech).
   {
-    const w = /^As ~ enters, mill (a|\w+) cards?( for each time it was kicked)?\.$/.exec(line);
-    const n = w === null ? undefined : w[1] === "a" ? 1 : numberOf(w[1]);
-    if (typeof n === "number" && n > 0) {
-      const mill = w[2] === undefined ? n : { product: [n, { timesKicked: "source" }] };
+    const w = /^As ~ enters, (if it was kicked, )?mill (a|\w+) cards?( for each time it was kicked)?\.$/.exec(line);
+    const n = w === null ? undefined : w[2] === "a" ? 1 : numberOf(w[2]);
+    if (typeof n === "number" && n > 0 && (w[1] === undefined || w[3] === undefined)) {
+      const mill =
+        w[1] !== undefined
+          ? { ifCondition: { kind: "self-kicked" }, then: n, else: 0 }
+          : w[3] === undefined
+            ? n
+            : { product: [n, { timesKicked: "source" }] };
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", asEnters: { mill } }, text };
     }
   }
@@ -24665,12 +24671,14 @@ function parseStatic(line, text) {
   }
   // A total mana value as a whole CDA: Ancient Ooze's "~'s power and
   // toughness are each equal to the total mana value of other creatures you
-  // control" (`excludeSelf`, rule 604.3). A greatest is Karn, Legacy
-  // Reforged's `greatestManaValueOf`.
+  // control" (`excludeSelf`, rule 604.3); a greatest one over a graveyard,
+  // Monstrous War-Leech's "… the greatest mana value among cards in your
+  // graveyard". A greatest over the battlefield is Karn, Legacy Reforged's
+  // `greatestManaValueOf`.
   {
-    const w = /^~'s power and toughness are each equal to (the total mana value of .+)\.$/.exec(line);
+    const w = /^~'s power and toughness are each equal to (the (?:total mana value of|greatest mana value among) .+)\.$/.exec(line);
     const agg = w === null ? null : aggregatePhraseOf(w[1]);
-    if (agg !== null && agg.aggregate === "sum") {
+    if (agg !== null && (agg.aggregate === "sum" || (agg.aggregate === "max" && agg.in !== undefined))) {
       return { affects: { scope: "self" }, setBasePtFromCount: { countOf: agg, plusPower: 0, plusToughness: 0 }, text };
     }
   }

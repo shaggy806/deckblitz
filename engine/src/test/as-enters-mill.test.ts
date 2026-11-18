@@ -9,6 +9,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
+import type { ObjectId } from "../primitives.js";
 import { A, B, cast, graveyard, lands, pt, table, toGraveyard, toHand, toLibrary, zone } from "./harness.js";
 
 /** Grizzly Bears, Grizzly Bears, Forest on top of alice's library, then more
@@ -68,5 +69,39 @@ describe("Urborg Lhurgoyf", () => {
     cast(game, card, { kicked: true, kickCount: 3 });
     expect(graveyard(game)).toHaveLength(6);
     expect(pt(game, card)).toEqual({ power: 5, toughness: 6 });
+  });
+});
+
+// "If it was kicked, mill four" (`ifCondition: self-kicked`), and a CDA of the
+// greatest mana value among your graveyard's cards (a `max` aggregate `in:
+// "graveyards"`, bug:cda-greatest-mana-value-in-graveyard).
+describe("Monstrous War-Leech", () => {
+  const leech = (game: Game): ObjectId => {
+    lands(game, "Swamp", 4);
+    lands(game, "Island", 1);
+    toLibrary(game, "Forest");
+    toLibrary(game, "Hill Giant");
+    toLibrary(game, "Forest");
+    toLibrary(game, "Grizzly Bears");
+    return toHand(game, "Monstrous War-Leech");
+  };
+
+  it("unkicked, mills nothing and counts what was there, only yours", () => {
+    const { game } = table();
+    const card = leech(game);
+    toGraveyard(game, "Grizzly Bears", A);
+    toGraveyard(game, "Hill Giant", B);
+    cast(game, card);
+    expect(graveyard(game)).toHaveLength(1);
+    expect(pt(game, card)).toEqual({ power: 2, toughness: 2 });
+  });
+
+  it("kicked, mills four as it enters and enters counting them (the ruling)", () => {
+    const { game } = table();
+    const card = leech(game);
+    cast(game, card, { kicked: true });
+    expect(graveyard(game)).toHaveLength(4);
+    expect(zone(game, card)).toBe("battlefield");
+    expect(pt(game, card)).toEqual({ power: 4, toughness: 4 });
   });
 });
