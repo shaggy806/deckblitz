@@ -4782,6 +4782,17 @@ export interface AttractionPrinting {
   readonly lights: readonly number[];
 }
 
+/** Devour's N (rule 702.82a): a number, or `"devoured"` for "Devour X, where
+ * X is the number of creatures devoured this way" — X counters for each one
+ * devoured (Thromok the Insatiable). */
+export type DevourMultiplier = number | "devoured";
+
+/** The +1/+1 counters a devour ability gives for `devoured` permanents
+ * sacrificed (rule 702.82a). */
+export function devourCounters(multiplier: DevourMultiplier, devoured: number): number {
+  return devoured * (multiplier === "devoured" ? devoured : multiplier);
+}
+
 export interface CardDefinition {
   readonly name: string;
   /**
@@ -5703,11 +5714,13 @@ export interface CardDefinition {
    * number of creatures. This permanent enters with N +1/+1 counters on it
    * for each creature sacrificed this way." `filter` is what may be devoured
    * — `{ type: "creature" }`, or "devour land 3" / "devour Food 3"'s quality
-   * (702.82b), read from its controller's side; `multiplier` is N. Asked as
+   * (702.82b), read from its controller's side; `multiplier` is N, or
+   * `"devoured"` for "Devour X, where X is the number of creatures devoured
+   * this way" (Thromok the Insatiable: n devoured, n×n counters). Asked as
    * it's about to enter (rule 614.12) and sacrificed then, before it's on the
    * battlefield. `null` for none.
    */
-  readonly devour: { readonly multiplier: number; readonly filter: CardFilter } | null;
+  readonly devour: { readonly multiplier: DevourMultiplier; readonly filter: CardFilter } | null;
   /**
    * Amplify N (rule 702.38a): "As this object enters, reveal any number of
    * cards from your hand that share a creature type with it. This permanent
@@ -7008,7 +7021,7 @@ interface CardDraft {
   becomesOnEnter?: BecomesOnEnter;
   exchangeTextOnEnter?: CardFilter;
   shufflesIntoLibraryInstead?: boolean;
-  devour?: { readonly multiplier: number; readonly filter: CardFilter };
+  devour?: { readonly multiplier: DevourMultiplier; readonly filter: CardFilter };
   amplify?: number;
   tribute?: number;
   chooseCreatureTypeOnEnter?: boolean;

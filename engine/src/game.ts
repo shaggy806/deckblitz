@@ -105,6 +105,7 @@ import {
   enteringAuraDefinition,
   bestowedDefinition,
   casualtyReadsX,
+  devourCounters,
   enchantsGraveyardCard,
   licidDefinition,
   readsGraveyardOrder,
@@ -71104,7 +71105,8 @@ controlledBy,
     }
     // Devour (rule 702.82a): N +1/+1 counters for each permanent sacrificed
     // as it was about to enter (`askEnterChoice`).
-    if (!ownLost && def.devour !== null && devoured !== undefined) addCounters("+1/+1", devoured * def.devour.multiplier);
+    // "Devour X, where X is the number devoured this way" is X for each of X.
+    if (!ownLost && def.devour !== null && devoured !== undefined) addCounters("+1/+1", devourCounters(def.devour.multiplier, devoured));
     // Amplify (rule 702.38a): N for each card revealed as it was about to
     // enter (`askEnterChoice`).
     if (!ownLost && def.amplify !== null && amplified !== undefined) addCounters("+1/+1", amplified * def.amplify);

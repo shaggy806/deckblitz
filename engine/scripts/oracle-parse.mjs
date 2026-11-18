@@ -17946,6 +17946,13 @@ function parseFaceAsWritten(face, ctx = {}) {
     // plain ward; one part of anything else leaves the whole line to a person.
     // Recover's half-life cost has a comma of its own (Garza's Assassin).
     if (/^Recover—Pay half your life, rounded up\.?$/i.test(line)) { out.triggered.push(recover("half-life")); continue; }
+    // "Devour X, where X is the number of creatures devoured this way" (rule
+    // 702.82a — Thromok the Insatiable): X counters for each of X. Its comma
+    // isn't a keyword list's.
+    if (/^Devour X, where X is the number of creatures devoured this way\.?$/i.test(line)) {
+      out.devour = { multiplier: "devoured", filter: { type: "creature" } };
+      continue;
+    }
     // Volcano Hellion's echo, read as the echo trigger resolves (the ruling).
     if (/^~ has echo \{X\}, where X is your life total\.$/.test(line)) {
       out.triggered.push(echo({ payGeneric: { lifeTotal: "you" }, text: "Pay {X}" }));

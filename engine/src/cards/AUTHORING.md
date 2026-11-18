@@ -999,7 +999,9 @@ set, an aggregate `of: { manaSymbols }` `in: { thisWay }` (Phosphorescent Feast)
 affects, `ofAffected: { manaSymbols }` (Light from Within). What a permanent devoured
 (rule 702.82b): `{ devoured: "source", filter? }` (Marrow Chomper; Voracious Dragon's
 Goblins, as they last were) and the condition `{ kind: "self-devoured" }` (Hellkite
-Hatchling).
+Hatchling). Devour itself is the card field `devour: { multiplier, filter }` (rule
+702.82a); `multiplier: "devoured"` is "Devour X, where X is the number of creatures
+devoured this way", X counters for each of X (Thromok the Insatiable).
 `aggregate: "count"` counts them (Crackling Drake's "instant and sorcery cards
 you own in exile and in your graveyard" — `in: ["graveyards", "exile"]`);
 `excludeGranter: true` (an effect's amount, in a granted ability) leaves out

@@ -109,4 +109,37 @@ describe("devour", () => {
     expect(life(game, A)).toBe(22);
     expect(named(game, "Grizzly Bears").every((id) => zone(game, id) === "graveyard")).toBe(true);
   });
+
+  it("Thromok the Insatiable: devour X, X the number devoured — three devoured is nine counters (its ruling)", () => {
+    const { game, a } = table();
+    const eaten = [spawn(game, "Grizzly Bears"), spawn(game, "Llanowar Elves"), spawn(game, "Hill Giant")];
+    a.choosePermanentsFn = () => eaten;
+    lands(game, "Mountain", 3);
+    lands(game, "Forest", 2);
+    const thromok = toHand(game, "Thromok the Insatiable");
+    cast(game, thromok);
+    expect(eaten.every((id) => zone(game, id) === "graveyard")).toBe(true);
+    expect(zone(game, thromok)).toBe("battlefield");
+    expect(counters(game, thromok)).toBe(9);
+  });
+
+  it("Thromok devouring two enters with four counters; devouring none, it's a 0/0 and dies", () => {
+    const two = table();
+    const eaten = [spawn(two.game, "Grizzly Bears"), spawn(two.game, "Llanowar Elves")];
+    two.a.choosePermanentsFn = () => eaten;
+    lands(two.game, "Mountain", 3);
+    lands(two.game, "Forest", 2);
+    const thromok = toHand(two.game, "Thromok the Insatiable");
+    cast(two.game, thromok);
+    expect(counters(two.game, thromok)).toBe(4);
+
+    const none = table();
+    spawn(none.game, "Grizzly Bears");
+    none.a.choosePermanentsFn = () => [];
+    lands(none.game, "Mountain", 3);
+    lands(none.game, "Forest", 2);
+    const hungry = toHand(none.game, "Thromok the Insatiable");
+    cast(none.game, hungry);
+    expect(zone(none.game, hungry)).toBe("graveyard");
+  });
 });

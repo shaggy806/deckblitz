@@ -409,6 +409,7 @@
     "static:granted-static-cost-modification",
     "static:prohibit-spells-by-chosen-number",
     "mechanic:token-devour",
+    "mechanic:devour-x",
     "bug:aura-enters-transformed-asks-enchant",
     "static:prohibit-cast-by-face",
     "effect:spell-color-change-carries-to-permanent",

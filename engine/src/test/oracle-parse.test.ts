@@ -6101,6 +6101,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       "Creature — Halfling Citizen",
     );
     expect(hobbit.devour).toEqual({ multiplier: 3, filter: { type: "artifact", subtype: "Food" } });
+    const thromok = face(
+      "Devour X, where X is the number of creatures devoured this way (As this creature enters, you may sacrifice any number of creatures. It enters with X +1/+1 counters on it for each of those creatures.)",
+      "Legendary Creature — Hellion",
+    );
+    expect(thromok.devour).toEqual({ multiplier: "devoured", filter: { type: "creature" } });
+    expect(thromok.complete).toBe(true);
   });
 
   it("'any player may activate this ability' (rule 602.2) and 'unless any player pays' (Prophecy)", () => {
