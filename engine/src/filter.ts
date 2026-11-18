@@ -787,6 +787,16 @@ export interface CardFilter {
    */
   readonly sharesColorWith?: ShareReference;
   /**
+   * Shares a color with mana rather than an object: `"produced"` is the mana
+   * the permanent whose tapping for mana fired the resolving trigger produced
+   * (rule 106.12a) — C.A.M.P.'s "if that creature shares a color with the
+   * mana that land produced" (a `target` condition). Colorless mana is no
+   * color (rule 105.2c), so it shares none. A resolution binds it as it
+   * applies (`sharesColorBound`, with no reference objects); unbound,
+   * anywhere else, it matches nothing.
+   */
+  readonly sharesColorWithMana?: "produced";
+  /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each
    * opponent sacrifices a creature with the greatest power among creatures
@@ -2672,6 +2682,8 @@ export function matchesFilter(
       live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
     if (!filter.sharesColorBound.colors.some((col) => colors.has(col))) return false;
   }
+  // Only a resolution knows the mana; it binds this to `sharesColorBound`.
+  if (filter.sharesColorWithMana !== undefined) return false;
   if (filter.sharesColorWith !== undefined) {
     const others = liveReferenceObjects(state, registry, filter.sharesColorWith, ctx, live?.controller ?? lki?.controller);
     if (others === undefined || (ctx.layered !== undefined && filter.sharesColorWith !== "attached")) return false;

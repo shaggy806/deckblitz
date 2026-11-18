@@ -22647,3 +22647,33 @@ describe("the colors among the exiled cards used to craft it", () => {
     expect(tender.activated[0].effect).toEqual({ kind: "add-mana", mana: { eachColorAmong: { controlledBy: "you" } }, amount: 1 });
   });
 });
+
+describe("a creature sharing a color with the mana a land produced", () => {
+  it("is a target condition on a fortified land's tapped-for-mana trigger (C.A.M.P.)", () => {
+    const camp = parseFace(
+      {
+        name: "C.A.M.P.",
+        type_line: "Artifact — Fortification",
+        mana_cost: "{3}",
+        colors: [],
+        oracle_text:
+          "Whenever fortified land is tapped for mana, put a +1/+1 counter on target creature you control. If that creature shares a color with the mana that land produced, create a Junk token. (It's an artifact with \"{T}, Sacrifice this token: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.\")\nFortify {3} ({3}: Attach to target land you control. Fortify only as a sorcery.)",
+      },
+      { tokenFor: () => "Junk Token" },
+    );
+    expect(camp.triggered[0].trigger).toEqual({ on: "tapped-for-mana", who: "attached" });
+    expect(camp.triggered[0].targets).toEqual(["creature-you-control"]);
+    expect(camp.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+        {
+          kind: "conditional",
+          condition: { kind: "target", index: 0, filter: { sharesColorWithMana: "produced" } },
+          then: { kind: "create-token", token: "Junk Token", count: 1 },
+        },
+      ],
+    });
+    expect(camp.complete).toBe(true);
+  });
+});

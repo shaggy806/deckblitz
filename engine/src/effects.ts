@@ -15321,6 +15321,9 @@ export interface ResolutionContext extends EffectApi {
   /** The counters whose placement fired this trigger, kind by kind, if it
    * was one (`LastKnownRefs.counters`). */
   triggerCounters(): readonly { readonly kind: string; readonly amount: number }[];
+  /** The mana the permanent whose tapping for mana fired this trigger
+   * produced (rule 106.12a; `LastKnownRefs.manaProduced`), none otherwise. */
+  triggerManaProduced(): readonly ManaType[];
   /** How many real, independent firings this resolution stands for — see
    * `GameObject.stackMultiplier`. `1` outside a scaled resolution. Only
    * `create-token` / `create-token-copy` read it (the only effect kinds
@@ -18824,6 +18827,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "blockingRelation" in value ||
       "blockedThisTurn" in value ||
       "sharesColorWith" in value ||
+      "sharesColorWithMana" in value ||
       "attachedToObject" in value ||
       "attachedToPlayerRef" in value ||
       "controlledByRef" in value ||
@@ -19174,6 +19178,14 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const objects = shareReferenceObjects(reference as ShareReference, ctx);
       const colors = objects.flatMap((object) => ctx.colorsOf({ kind: "object", object }));
       walked = { ...rest, sharesColorBound: { objects, colors: [...new Set(colors)] } };
+    }
+    // "Shares a color with the mana that land produced" (C.A.M.P.): the
+    // colors of the mana its tapping for mana made, colorless none (rule
+    // 105.2c), with no reference object to match itself.
+    if (walked["sharesColorWithMana"] !== undefined) {
+      const { sharesColorWithMana: _mana, ...rest } = walked;
+      const colors = ctx.triggerManaProduced().filter((type): type is Color => type !== "C");
+      walked = { ...rest, sharesColorBound: { objects: [], colors: [...new Set(colors)] } };
     }
     // "All Auras attached to it", "all Equipment attached to that creature":
     // the object or player the ref reads; illegal or empty, nothing (rule

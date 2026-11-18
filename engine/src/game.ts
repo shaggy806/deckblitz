@@ -36304,6 +36304,10 @@ export class Game {
     // "The same number and kind of counters" (Captain Marvel, Apex Avenger):
     // what went on, one kind here and the rest joined by `withCounterBatch`.
     const counters = event.type === "counter-added" ? [{ kind: event.counter, amount: event.amount }] : undefined;
+    // "The mana that land produced" (C.A.M.P.): what the mana ability made
+    // as it resolved (rule 106.12a), not what is in the pool by the time
+    // this resolves.
+    const manaProduced = event.type === "permanent-tapped-for-mana" ? event.produced : undefined;
     // "Those results": the roll it triggered on, whatever is rolled next.
     const roll = event.type === "dice-rolled" ? rollOfEvent(event) : undefined;
     // "Them" of a generic trigger whose row names a batch: "a card you put
@@ -36319,6 +36323,7 @@ export class Game {
       player === undefined &&
       attackers === undefined &&
       counters === undefined &&
+      manaProduced === undefined &&
       batch === undefined
     ) {
       return undefined;
@@ -36336,6 +36341,7 @@ export class Game {
       ...(roll !== undefined ? { roll } : {}),
       ...(attackers !== undefined ? { attackers } : {}),
       ...(counters !== undefined ? { counters } : {}),
+      ...(manaProduced !== undefined ? { manaProduced } : {}),
     };
   }
 
@@ -40611,6 +40617,7 @@ export class Game {
       resolutionCount,
       objectSet: (ref, each) => objectSet(ref, each),
       triggerCounters: () => refs.counters ?? [],
+      triggerManaProduced: () => refs.manaProduced ?? [],
       memberMatches: (m, filter) => {
         const now = this.state.objects[m.object];
         if (m.was === undefined && now !== undefined && (now.zoneChangeCount ?? 0) === m.stint) {

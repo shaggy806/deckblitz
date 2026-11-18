@@ -2081,7 +2081,8 @@ export function parseTrigger(clause) {
   // Druid): rule 106.12a, as the mana ability resolves and produces mana.
   if (/^Whenever you tap ~ for mana$/.test(c)) return [{ on: "tapped-for-mana", who: "self" }];
   // An Aura's land (Fertile Ground, Market Festival).
-  if (/^Whenever enchanted land is tapped for mana$/.test(c)) return [{ on: "tapped-for-mana", who: "attached" }];
+  // An Aura's or a Fortification's land (C.A.M.P.'s "fortified land", rule 301.6).
+  if (/^Whenever (?:enchanted|fortified) land is tapped for mana$/.test(c)) return [{ on: "tapped-for-mana", who: "attached" }];
   // A filter's name read off the card linked to this one (rule 607.2a, the
   // exile linked below by "same name as the exiled card"): Extraplanar Lens,
   // Invader Parasite.
@@ -3567,6 +3568,17 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "If that creature shares a color with the mana that land produced, create
+  // a Junk token" (C.A.M.P.): a target condition read off the mana its tapping
+  // for mana made (`sharesColorWithMana`, rule 106.12a).
+  {
+    const m = ctx?.targets?.length === 1 ? /^if that creature shares a color with the mana that land produced, (.+\.)$/i.exec(s) : null;
+    if (m !== null) {
+      const then = parseSentence(`${m[1][0].toUpperCase()}${m[1].slice(1)}`, ctx);
+      if (then === null || then === undefined) return null;
+      return { kind: "conditional", condition: { kind: "target", index: 0, filter: { sharesColorWithMana: "produced" } }, then };
+    }
+  }
   // "This creature enters with two +1/+1 counters on it for each creature
   // sacrificed this way" in a "when you cast this spell" trigger (Gluttonous
   // Hellkite): the spell is left the counters to enter with

@@ -2707,6 +2707,12 @@ export interface LastKnownRefs {
    * put on a permanent at once are one event for it (rule 603.2c), so one
    * trigger carries them all. */
   readonly counters?: readonly { readonly kind: string; readonly amount: number }[];
+  /** For a trigger fired by a permanent being tapped for mana (rule
+   * 106.12a): the mana that ability produced, one entry per unit — C.A.M.P.'s
+   * "if that creature shares a color with the mana that land produced"
+   * (`CardFilter.sharesColorWithMana`). Read as it resolves, however long it
+   * waited on the stack. */
+  readonly manaProduced?: readonly ManaType[];
   /** This triggered ability triggered because its own source attacked — the
    * attack declaration named it (rule 508.1, the events Isshin's `"attacks"`
    * cause reads): "a creature you control attacking causes a triggered

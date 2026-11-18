@@ -3689,6 +3689,15 @@ sharesColorWith: 0 }`, Brightflame `damage-all` then `gain-life` of
 `{ damageDealtThisWay: true }`, Rally the Righteous `untap-all` then
 `modify-pt-all` over the same filter ("those creatures"). A colorless target
 goes alone; the others aren't targeted.
+`sharesColorWithMana: "produced"` shares a color with **mana**: the mana the
+permanent whose tapping for mana fired the resolving trigger produced (rule
+106.12a; colorless mana is none). C.A.M.P.'s "Whenever fortified land is tapped
+for mana, put a +1/+1 counter on target creature you control. If that creature
+shares a color with the mana that land produced, create a Junk token" is a
+`tapped-for-mana` trigger (`who: "attached"`; a target makes it no mana
+ability) whose second step is a `conditional` on `{ kind: "target", index: 0,
+filter: { sharesColorWithMana: "produced" } }`. Bound as the effect applies;
+anywhere else it matches nothing.
 `goaded` is goaded by anyone, however (a one-shot
 goad, one for the rest of the game, a static one), `suspected` rule
 701.60's designation, `saddled` rule 702.171b's and `monstrous` rule 701.37b's ("as long as this
