@@ -3037,6 +3037,7 @@
   "replacement:damage-to-you-becomes-exile-graveyard",
   "effect:attach-granting-aura",
   "static:aura-grants-ability-referencing-aura",
+  "effect:control-while-attached",
   "bug:look-and-choose-offers-unattachable-aura",
   "bug:look-and-choose-offers-unattachable-aura",
   "decision:owner-orders-library-bottom",

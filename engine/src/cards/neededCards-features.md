@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Control for as long as that Aura is attached to it — built 2026-11-18
+
+The key `effect:control-while-attached`: `gain-control`'s `whileAttached` (an `ObjectRef`) keeps the control effect's
+`WhileSource` as the Aura in its stint with `attachedTo` the permanent, the shape Blade of Shared Souls' copy already
+ended on `permanent-unattached` and on leaving; nothing if the Aura has gone or come off by resolution (611.2b, the
+ruling). The `becomes-attached` trigger takes `object: "attachment"`: the Aura is the trigger object ("that Aura's
+mana value", read by the host filter's amounts) and the host the recipient. Eriette, the Beguiler (rank 15272). Its
+line is the only one of its kind, so the scaffolder isn't taught it. `test/control-while-attached.test.ts`.
+
 ### An Aura's granted ability that moves or destroys the Aura — found built 2026-11-18
 
 The keys `effect:attach-granting-aura` and `static:aura-grants-ability-referencing-aura` needed no engine code: the

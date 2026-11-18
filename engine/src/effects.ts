@@ -5403,6 +5403,14 @@ export type EffectSpec =
        * ability waited). With `untilEndOfTurn: false`, and none of the other
        * durations. */
       readonly whileMonarch?: PlayerRef;
+      /** "…for as long as **that Aura is attached to it**" (Eriette, the
+       * Beguiler's `"trigger-object"`): the control effect lasts while that
+       * object, in its stint now, stays attached to the permanent whose
+       * control changed, and ends as it comes off or leaves (rule 611.2b).
+       * Nothing at all if it's gone or isn't attached to it as the effect
+       * would begin (the ruling). With `untilEndOfTurn: false`, and none of
+       * the other durations. */
+      readonly whileAttached?: ObjectRef;
     }
   | {
       /**
@@ -14176,6 +14184,10 @@ export interface EffectApi {
     /** "For as long as [this player] is the monarch". */
     whileMonarch?: PlayerId,
   ): void;
+  /** `player` gains control of `target` for as long as `attachment` stays
+   * attached to it — the `"gain-control"` {@link EffectSpec}'s
+   * `whileAttached`. Nothing if it isn't attached to it now (rule 611.2b). */
+  gainControlWhileAttached(target: TargetRef, player: PlayerId, attachment: ObjectId): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
    * each permanent's own owner, or a player at random for each; `controlledBy`
    * keeps only what that player controls. */
@@ -21137,6 +21149,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // "For as long as they're the monarch": that player, read now.
       const monarch = spec.whileMonarch === undefined ? undefined : resolvePlayerRef(spec.whileMonarch, ctx);
       if (spec.whileMonarch !== undefined && monarch === undefined) return;
+      // "For as long as that Aura is attached to it": that object, still the
+      // same one (rule 400.7), or nothing begins (611.2b).
+      if (spec.whileAttached !== undefined) {
+        const attachment = objectRefAct(spec.whileAttached, ctx);
+        if (attachment?.kind !== "object" || player === undefined) return;
+        ctx.gainControlWhileAttached(target, player, attachment.object);
+        return;
+      }
       if (player !== undefined) {
         ctx.gainControl(
           target,

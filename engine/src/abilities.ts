@@ -1297,6 +1297,15 @@ export type TriggerKind =
       readonly attachment?: CardFilter;
       /** What it became attached to. */
       readonly filter?: CardFilter;
+      /** `"attachment"`: the trigger object is what became attached ("that
+       * Aura"), and what it became attached to is the trigger's recipient
+       * ("that permanent", `"trigger-recipient"`) — Eriette, the Beguiler's
+       * "gain control of that permanent for as long as that Aura is attached
+       * to it". `filter`'s amounts then read the attachment as
+       * `"trigger-object"`: "a nonland permanent … with mana value less than
+       * or equal to **that Aura's** mana value" is `manaValue: { op: "lte",
+       * n: { amount: { manaValueOf: "trigger-object" } } }`. */
+      readonly object?: "attachment";
     }
   | {
       /** A permanent left the battlefield — for any destination (graveyard,

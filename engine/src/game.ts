@@ -36721,6 +36721,13 @@ export class Game {
           player = hit.controller;
         }
       }
+    } else if (event.type === "permanent-attached") {
+      // What it became attached to: "that permanent" of a trigger whose
+      // object is the Aura (Eriette, the Beguiler), in its stint now.
+      const host = this.state.objects[event.target];
+      if (host?.zone === "battlefield") {
+        recipient = { target: { kind: "object", object: event.target }, zoneChangeCount: host.zoneChangeCount ?? 0 };
+      }
     } else if (event.type === "permanent-entered-battlefield") {
       // "Whenever a land an opponent controls enters, if that player controls
       // more lands than you" (Archaeomancer's Map): who it entered under,
@@ -37928,7 +37935,9 @@ export class Game {
           (spec.who !== "self" || event.source === self.id) &&
           (spec.onto !== "self" || event.target === self.id) &&
           this.triggerFilterOk(spec.attachment, event.source, self) &&
-          this.triggerFilterOk(spec.filter, event.target, self)
+          // "With mana value less than or equal to that Aura's": with the
+          // attachment as the trigger object, the host's amounts read it.
+          this.triggerFilterOk(spec.filter, event.target, self, false, spec.object === "attachment" ? event.source : undefined)
         );
       case "becomes-unattached":
         // Its own leaving while attached is becoming unattached too (as it
@@ -38704,9 +38713,12 @@ export class Game {
     // A generic trigger's object is its row's (one occurrence of a
     // several-object event is queued with its own, in `detectTriggers`).
     if (trigger.on === "event") return triggerEventObject(event);
-    // "That creature": what the Equipment is now attached to.
+    // "That creature": what the Equipment is now attached to — or "that
+    // Aura", what became attached (`object: "attachment"`, its host the
+    // recipient).
     if (trigger.on === "becomes-attached") {
-      return event.type === "permanent-attached" ? event.target : undefined;
+      if (event.type !== "permanent-attached") return undefined;
+      return trigger.object === "attachment" ? event.source : event.target;
     }
     // "That permanent": what the Equipment was attached to.
     if (trigger.on === "becomes-unattached") {
@@ -38844,6 +38856,9 @@ export class Game {
     subject: ObjectId,
     self: GameObject,
     lastKnown = false,
+    /** The would-be trigger object where it isn't `subject` (a
+     * `becomes-attached` trigger's `object: "attachment"`). */
+    triggerObject: ObjectId = subject,
   ): boolean {
     return (
       filter === undefined ||
@@ -38856,7 +38871,7 @@ export class Game {
         amount: this.filterAmounts({
           source: self.id,
           controller: self.controller,
-          triggerObject: subject,
+          triggerObject,
         }),
       })
     );
@@ -43484,6 +43499,19 @@ export class Game {
         );
         if (typeof kept !== "object" || !("whileSource" in kept) || kept.whileSource === null) return;
         this.gainControlByEffect(player, target, false, false, { whileSource: kept.whileSource });
+      },
+      // "For as long as that Aura is attached to it" (Eriette, the
+      // Beguiler): a `WhileSource` of the Aura in its stint, `attachedTo`
+      // the permanent, ended as it comes off or leaves — nothing if it
+      // isn't attached to it now (rule 611.2b; the ruling).
+      gainControlWhileAttached: (target, player, attachment) => {
+        const aura = this.state.objects[attachment];
+        if (target.kind !== "object" || aura?.zone !== "battlefield" || aura.attachedTo !== target.object) return;
+        this.noteWhileSource(attachment);
+        this.gainControlByEffect(player, target, false, false, {
+          split: false,
+          whileSource: { id: attachment, zoneChangeCount: aura.zoneChangeCount ?? 0, attachedTo: target.object },
+        });
       },
       gainControlAll: (filter, untilEndOfTurn, who, exceptSource, controlledBy) =>
         this.gainControlAllByEffect(
@@ -62860,8 +62888,9 @@ controlledBy,
     opts: {
       readonly split?: boolean;
       readonly timestamp?: number;
-      /** "For as long as [that permanent] remains on the battlefield". */
-      readonly whileSource?: { readonly id: ObjectId; readonly zoneChangeCount: number };
+      /** "For as long as [that permanent] remains on the battlefield" — or
+       * remains attached to it (`attachedTo`, Eriette, the Beguiler). */
+      readonly whileSource?: WhileSource;
       /** "Until the end of your next turn". */
       readonly untilPoint?: UntilPoint;
       /** "For as long as it [matches]" — `ControlEffect.whileIt`. */
