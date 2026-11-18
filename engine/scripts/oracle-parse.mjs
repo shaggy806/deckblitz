@@ -23395,6 +23395,32 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Shared Fate: any player's draw, made by them — they choose the opponent
+  // and exile its top card face down, linked to this, theirs to look at.
+  if (line === "If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.") {
+    const exile = { kind: "exile-from-library", whose: "that-player", amount: 1, faceDown: "looked", linked: true };
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-draw",
+        who: "any-player",
+        instead: { effect: { kind: "as-player", who: "trigger-player", effect: { kind: "choose-opponent", then: exile } } },
+      },
+      text,
+    };
+  }
+  // …and each player plays only the cards they exiled with it.
+  if (
+    /^Each player may look at cards they exiled with (?:~|this (?:enchantment|artifact|creature)), and they may play lands and cast spells from among those cards\.$/.test(
+      line,
+    )
+  ) {
+    return {
+      affects: { scope: "self" },
+      mayPlay: { from: "exile", play: true, filter: {}, linked: true, eachPlayer: true, exiledByYou: true },
+      text,
+    };
+  }
   if (line === "If an opponent would lose life during your turn, they lose twice that much life instead.") {
     return {
       affects: { scope: "self" },

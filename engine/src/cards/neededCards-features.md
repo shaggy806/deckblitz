@@ -325,6 +325,17 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Each player plays the cards they exiled with it — found built 2026-11-18
+
+The key `static:each-player-plays-cards-they-exiled-with-source` needed no new vocabulary: a static `mayPlay` with
+`eachPlayer`, `exiledByYou` and `linked` together, and a `would-draw` replacement of `who: "any-player"` whose effect is
+an `as-player` of `"trigger-player"` around a `choose-opponent` and an `exile-from-library` (`faceDown: "looked"`,
+`linked`), so the exile is the drawing player's to look at (rule 406.3) and to play. Shared Fate (rank 14752). One fix:
+two such replacements from same-named permanents were deduplicated as identical, so the drawing player couldn't
+choose which Shared Fate replaces a draw (its ruling) — a replacement that links what it exiles to its permanent is now
+that permanent's own option, each labelled with its exiled count. The scaffolder reads both lines.
+`test/each-player-plays-cards-they-exiled.test.ts`.
+
 ### A card cast from your graveyard this turn by its own landfall — found built 2026-11-18
 
 The key `zone:grant-cast-self-from-graveyard-this-turn` needed no engine code: `grant-play` takes `cards: "source"`,

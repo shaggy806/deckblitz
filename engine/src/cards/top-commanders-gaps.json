@@ -1297,6 +1297,7 @@
   "cost:mana-ability-complex-costs",
   "keyword:exhaust",
   "zone:impulse-permission-options",
+  "static:each-player-plays-cards-they-exiled-with-source",
   "effect:allow-play-from-exile",
   "effect:mana-ability-side-effects",
   "trigger:leaves-battlefield-filter",

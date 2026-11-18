@@ -68587,14 +68587,27 @@ controlledBy,
   private optionalDrawReplacementAsked(player: PlayerId, event: WouldDrawEvent): boolean {
     const all = this.drawEffectReplacementsFor(player, event);
     const seen = new Set<string>();
-    const distinct = all.filter((r) => {
-      // A resolved replacement's source may be gone from the game.
-      const by = this.state.objects[r.source];
-      const key = JSON.stringify([by === undefined ? r.source : printedCardName(by), r.effect]);
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
+    // One that exiles cards with its own permanent (rule 607.2a) is that
+    // permanent's alone, so two of them are a choice: "if more than one
+    // Shared Fate is on the battlefield, you choose which one replaces each
+    // card draw" (its ruling), each said with the cards exiled with it so far.
+    const linksToSource = (effect: EffectSpec): boolean => JSON.stringify(effect).includes('"linked":true');
+    const distinct = all
+      .filter((r) => {
+        // A resolved replacement's source may be gone from the game.
+        const by = this.state.objects[r.source];
+        const key = JSON.stringify([by === undefined ? r.source : printedCardName(by), r.effect, linksToSource(r.effect) ? r.source : null]);
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .map((r, _, kept) => {
+        if (!linksToSource(r.effect) || kept.filter((other) => other.text === r.text).length < 2) return r;
+        const source = this.state.objects[r.source];
+        const stint = source?.zoneChangeCount ?? 0;
+        const linked = this.state.zones.shared.exile.filter((id) => this.linkedToStint(this.state.objects[id], r.source, stint)).length;
+        return { ...r, text: `${r.text} (${linked} card${linked === 1 ? "" : "s"} exiled with it)` };
+      });
     const musts = distinct.filter((r) => !r.may);
     if (!all.some((r) => r.may) && musts.length < 2) return false;
     const options: { readonly choice: "draw" | { readonly printed: ObjectId }; readonly text: string; readonly source: ObjectId }[] = [];

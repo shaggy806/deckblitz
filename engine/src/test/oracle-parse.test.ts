@@ -1300,6 +1300,41 @@ describe("a this-turn cast of the card itself from its graveyard (Skyclave Shade
   });
 });
 
+describe("each player's draw exiled by them, and the cards they exiled theirs to play (Shared Fate)", () => {
+  it("a draw replacement made by the drawing player, and a static every player holds", () => {
+    const fate = parseFace(
+      {
+        name: "Shared Fate",
+        type_line: "Enchantment",
+        mana_cost: "{4}{U}",
+        oracle_text:
+          "If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.\nEach player may look at cards they exiled with this enchantment, and they may play lands and cast spells from among those cards.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(fate.complete).toBe(true);
+    expect(fate.static[0]).toMatchObject({
+      replacement: {
+        event: "would-draw",
+        who: "any-player",
+        instead: {
+          effect: {
+            kind: "as-player",
+            who: "trigger-player",
+            effect: {
+              kind: "choose-opponent",
+              then: { kind: "exile-from-library", whose: "that-player", amount: 1, faceDown: "looked", linked: true },
+            },
+          },
+        },
+      },
+    });
+    expect(fate.static[1]).toMatchObject({
+      mayPlay: { from: "exile", play: true, filter: {}, linked: true, eachPlayer: true, exiledByYou: true },
+    });
+  });
+});
+
 describe("an emblem's grants", () => {
   const ult = (line: string) =>
     parseFace(
