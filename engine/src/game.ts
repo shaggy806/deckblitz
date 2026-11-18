@@ -10562,6 +10562,11 @@ export class Game {
       if ("leaves" in t.at || "losesControl" in t.at) return t.at.thisTurn !== true;
       // "When an exiled card enters this way" waits for its permanent to leave.
       if ("returnsUntilLeaves" in t.at) return true;
+      // A longer watch whose permanents have all left, or whose exiled cards
+      // have, ends with them: nothing it watches can act again (rule 400.7).
+      // Not before the turn is over — their leaving, and what that set off,
+      // may still have fired it.
+      if (this.watchOver(t)) return false;
       return "whenever" in t.at && watchOutlastsItsTurn(t.at.until) && t.at.inLastTurn !== true;
     });
     // Nothing has attacked this turn yet — whoever controls it. (The untap
@@ -35555,18 +35560,9 @@ export class Game {
             : atRefs;
       // Its "if" reads the event as its resolution will ("that player").
       if (!this.delayedIfHolds(trigger, triggerObject, refs)) continue;
-      if (at.until === "while-exiled") {
-        const stints = trigger.targetStints ?? [];
-        const anyLeft = trigger.targets.some(
-          (t, slot) =>
-            t?.kind === "object" &&
-            this.state.objects[t.object]?.zone === "exile" &&
-            (this.state.objects[t.object].zoneChangeCount ?? 0) === stints[slot],
-        );
-        if (!anyLeft) {
-          usedUp.push(trigger);
-          continue;
-        }
+      if (at.until === "while-exiled" && !this.anyStillExiledFor(trigger)) {
+        usedUp.push(trigger);
+        continue;
       }
       if (at.once === true) usedUp.push(trigger);
       const triggerValue = this.triggerValueOf(at.whenever, event, object);
@@ -35670,6 +35666,36 @@ export class Game {
    * that's left since, read as it last existed: a creature's own dies trigger
    * dealing damage is still that creature dealing it (rule 608.2h).
    */
+  /** A `"while-exiled"` delayed ability's cards: whether any it's about is
+   * still in exile as the object it was (rule 400.7). */
+  private anyStillExiledFor(trigger: DelayedTrigger): boolean {
+    const stints = trigger.targetStints ?? [];
+    return trigger.targets.some(
+      (t, slot) =>
+        t?.kind === "object" &&
+        this.state.objects[t.object]?.zone === "exile" &&
+        (this.state.objects[t.object].zoneChangeCount ?? 0) === stints[slot],
+    );
+  }
+
+  /** Whether a delayed "whenever" watch has nothing left to watch or wait
+   * for: every permanent it watches (`watching`) has left the battlefield in
+   * its stint — phasing out isn't leaving (702.26d) — or, `"while-exiled"`,
+   * none of the cards it's about is still in exile. Myra the Magnificent's
+   * "for as long as that Attraction is on the battlefield". */
+  private watchOver(trigger: DelayedTrigger): boolean {
+    const at = trigger.at;
+    if (!("whenever" in at)) return false;
+    if (at.until === "while-exiled" && !this.anyStillExiledFor(trigger)) return true;
+    return (
+      at.watching !== undefined &&
+      !at.watching.some(({ object: id, stint }) => {
+        const object = this.state.objects[id];
+        return object !== undefined && (object.zone === "battlefield" || object.zone === "phased-out") && (object.zoneChangeCount ?? 0) === stint;
+      })
+    );
+  }
+
   private watchedSubject(
     watching: readonly { readonly object: ObjectId; readonly stint: number }[],
     whenever: TriggerSpec,

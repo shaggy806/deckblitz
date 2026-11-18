@@ -591,7 +591,10 @@ export interface DelayedWhenever {
    * it — `{ thisWay: "dealt-damage" }` is "whenever **a creature dealt damage
    * this way** dies this turn" (Ghired's Belligerence). Each is watched for this stint on the battlefield
    * (rule 400.7); with none on the battlefield there's nothing to watch, and
-   * no trigger is made. "You" is still this ability's controller, who needn't
+   * no trigger is made. A watch that outlasts its turn ends as a turn begins
+   * once every one of them has left the battlefield (phasing out isn't
+   * leaving, 702.26d) — Myra the Magnificent's "for as long as that
+   * Attraction is on the battlefield". "You" is still this ability's controller, who needn't
    * control them. A source that's left since is judged as it last existed.
    */
   readonly watching?: ObjectRef | "targets";
