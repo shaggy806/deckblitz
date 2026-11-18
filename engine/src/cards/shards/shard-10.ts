@@ -984,6 +984,7 @@ import _poolWallOfBrambles from "../pool/wall-of-brambles.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
 import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js";
 import _poolWallOfKelp from "../pool/wall-of-kelp.js";
+import _poolWanShiTongAllKnowing from "../pool/wan-shi-tong-all-knowing.js";
 import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
 import _poolWarDance from "../pool/war-dance.js";
@@ -2035,6 +2036,7 @@ const shard: CardShard = {
     _poolWallOfFire,
     _poolWallOfForgottenPharaohs,
     _poolWallOfKelp,
+    _poolWanShiTongAllKnowing,
     _poolWandOfOrcus,
     _poolWanderingMusicians,
     _poolWarDance,

@@ -7864,6 +7864,7 @@ import _poolDustyParlor from "./pool/dusty-parlor.js";
 import _poolDusyutEarthcarver from "./pool/dusyut-earthcarver.js";
 import _poolDutifulAttendant from "./pool/dutiful-attendant.js";
 import _poolDutifulGriffin from "./pool/dutiful-griffin.js";
+import _poolDutifulKnowledgeSeeker from "./pool/dutiful-knowledge-seeker.js";
 import _poolDutifulReplicator from "./pool/dutiful-replicator.js";
 import _poolDutifulReturn from "./pool/dutiful-return.js";
 import _poolDutifulServants from "./pool/dutiful-servants.js";
@@ -15434,6 +15435,7 @@ import _poolKraumLudevicsOpus from "./pool/kraum-ludevics-opus.js";
 import _poolKraumViolentCacophony from "./pool/kraum-violent-cacophony.js";
 import _poolKravTheUnredeemed from "./pool/krav-the-unredeemed.js";
 import _poolKravenProudPredator from "./pool/kraven-proud-predator.js";
+import _poolKravenTheHunter from "./pool/kraven-the-hunter.js";
 import _poolKravensCats from "./pool/kravens-cats.js";
 import _poolKravensLastHunt from "./pool/kravens-last-hunt.js";
 import _poolKreeCommandos from "./pool/kree-commandos.js";
@@ -18892,6 +18894,7 @@ import _poolNihilisticGlee from "./pool/nihilistic-glee.js";
 import _poolNihilith from "./pool/nihilith.js";
 import _poolNikaraLairScavenger from "./pool/nikara-lair-scavenger.js";
 import _poolNikkoOnna from "./pool/nikko-onna.js";
+import _poolNikoAris from "./pool/niko-aris.js";
 import _poolNikoLightOfHope from "./pool/niko-light-of-hope.js";
 import _poolNikyaOfTheOldWays from "./pool/nikya-of-the-old-ways.js";
 import _poolNilsDisciplineEnforcer from "./pool/nils-discipline-enforcer.js";
@@ -26739,6 +26742,7 @@ import _poolStitchTogether from "./pool/stitch-together.js";
 import _poolStitchedAssistant from "./pool/stitched-assistant.js";
 import _poolStitchedDrake from "./pool/stitched-drake.js";
 import _poolStitchedMangler from "./pool/stitched-mangler.js";
+import _poolStitcherGeralf from "./pool/stitcher-geralf.js";
 import _poolStitchersApprentice from "./pool/stitchers-apprentice.js";
 import _poolStitchersGraft from "./pool/stitchers-graft.js";
 import _poolStitchersSupplier from "./pool/stitchers-supplier.js";
@@ -31295,6 +31299,7 @@ import _poolWallOff from "./pool/wall-off.js";
 import _poolWallop from "./pool/wallop.js";
 import _poolWalltopSentries from "./pool/walltop-sentries.js";
 import _poolWaltzOfRage from "./pool/waltz-of-rage.js";
+import _poolWanShiTongAllKnowing from "./pool/wan-shi-tong-all-knowing.js";
 import _poolWanShiTongLibrarian from "./pool/wan-shi-tong-librarian.js";
 import _poolWandOfDenial from "./pool/wand-of-denial.js";
 import _poolWandOfIth from "./pool/wand-of-ith.js";
@@ -33469,6 +33474,7 @@ import _tokensZombieTokenGeralfVisionaryStitcher from "./tokens/zombie-token-ger
 import _tokensZombieTokenGhoulishProcession from "./tokens/zombie-token-ghoulish-procession.js";
 import _tokensZombieTokenJadarGhoulcallerOfNephalia from "./tokens/zombie-token-jadar-ghoulcaller-of-nephalia.js";
 import _tokensZombieTokenOnWingsOfGold from "./tokens/zombie-token-on-wings-of-gold.js";
+import _tokensZombieTokenStitcherGeralf from "./tokens/zombie-token-stitcher-geralf.js";
 import _tokensZombieTokenTransmograntAltar from "./tokens/zombie-token-transmogrant-altar.js";
 import _tokensZombieTokenWilheltTheRotcleaver from "./tokens/zombie-token-wilhelt-the-rotcleaver.js";
 import _tokensZombieToken from "./tokens/zombie-token.js";
@@ -41338,6 +41344,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDusyutEarthcarver,
   _poolDutifulAttendant,
   _poolDutifulGriffin,
+  _poolDutifulKnowledgeSeeker,
   _poolDutifulReplicator,
   _poolDutifulReturn,
   _poolDutifulServants,
@@ -48908,6 +48915,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKraumViolentCacophony,
   _poolKravTheUnredeemed,
   _poolKravenProudPredator,
+  _poolKravenTheHunter,
   _poolKravensCats,
   _poolKravensLastHunt,
   _poolKreeCommandos,
@@ -52366,6 +52374,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNihilith,
   _poolNikaraLairScavenger,
   _poolNikkoOnna,
+  _poolNikoAris,
   _poolNikoLightOfHope,
   _poolNikyaOfTheOldWays,
   _poolNilsDisciplineEnforcer,
@@ -60213,6 +60222,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStitchedAssistant,
   _poolStitchedDrake,
   _poolStitchedMangler,
+  _poolStitcherGeralf,
   _poolStitchersApprentice,
   _poolStitchersGraft,
   _poolStitchersSupplier,
@@ -64769,6 +64779,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWallop,
   _poolWalltopSentries,
   _poolWaltzOfRage,
+  _poolWanShiTongAllKnowing,
   _poolWanShiTongLibrarian,
   _poolWandOfDenial,
   _poolWandOfIth,
@@ -66949,6 +66960,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensZombieTokenGhoulishProcession,
   _tokensZombieTokenJadarGhoulcallerOfNephalia,
   _tokensZombieTokenOnWingsOfGold,
+  _tokensZombieTokenStitcherGeralf,
   _tokensZombieTokenTransmograntAltar,
   _tokensZombieTokenWilheltTheRotcleaver,
   _tokensZombieToken,
@@ -74825,6 +74837,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dusyut-earthcarver": _poolDusyutEarthcarver,
   "pool/dutiful-attendant": _poolDutifulAttendant,
   "pool/dutiful-griffin": _poolDutifulGriffin,
+  "pool/dutiful-knowledge-seeker": _poolDutifulKnowledgeSeeker,
   "pool/dutiful-replicator": _poolDutifulReplicator,
   "pool/dutiful-return": _poolDutifulReturn,
   "pool/dutiful-servants": _poolDutifulServants,
@@ -82395,6 +82408,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kraum-violent-cacophony": _poolKraumViolentCacophony,
   "pool/krav-the-unredeemed": _poolKravTheUnredeemed,
   "pool/kraven-proud-predator": _poolKravenProudPredator,
+  "pool/kraven-the-hunter": _poolKravenTheHunter,
   "pool/kravens-cats": _poolKravensCats,
   "pool/kravens-last-hunt": _poolKravensLastHunt,
   "pool/kree-commandos": _poolKreeCommandos,
@@ -85853,6 +85867,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nihilith": _poolNihilith,
   "pool/nikara-lair-scavenger": _poolNikaraLairScavenger,
   "pool/nikko-onna": _poolNikkoOnna,
+  "pool/niko-aris": _poolNikoAris,
   "pool/niko-light-of-hope": _poolNikoLightOfHope,
   "pool/nikya-of-the-old-ways": _poolNikyaOfTheOldWays,
   "pool/nils-discipline-enforcer": _poolNilsDisciplineEnforcer,
@@ -93700,6 +93715,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stitched-assistant": _poolStitchedAssistant,
   "pool/stitched-drake": _poolStitchedDrake,
   "pool/stitched-mangler": _poolStitchedMangler,
+  "pool/stitcher-geralf": _poolStitcherGeralf,
   "pool/stitchers-apprentice": _poolStitchersApprentice,
   "pool/stitchers-graft": _poolStitchersGraft,
   "pool/stitchers-supplier": _poolStitchersSupplier,
@@ -98256,6 +98272,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wallop": _poolWallop,
   "pool/walltop-sentries": _poolWalltopSentries,
   "pool/waltz-of-rage": _poolWaltzOfRage,
+  "pool/wan-shi-tong-all-knowing": _poolWanShiTongAllKnowing,
   "pool/wan-shi-tong-librarian": _poolWanShiTongLibrarian,
   "pool/wand-of-denial": _poolWandOfDenial,
   "pool/wand-of-ith": _poolWandOfIth,
@@ -100430,6 +100447,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/zombie-token-ghoulish-procession": _tokensZombieTokenGhoulishProcession,
   "tokens/zombie-token-jadar-ghoulcaller-of-nephalia": _tokensZombieTokenJadarGhoulcallerOfNephalia,
   "tokens/zombie-token-on-wings-of-gold": _tokensZombieTokenOnWingsOfGold,
+  "tokens/zombie-token-stitcher-geralf": _tokensZombieTokenStitcherGeralf,
   "tokens/zombie-token-transmogrant-altar": _tokensZombieTokenTransmograntAltar,
   "tokens/zombie-token-wilhelt-the-rotcleaver": _tokensZombieTokenWilheltTheRotcleaver,
   "tokens/zombie-token": _tokensZombieToken,

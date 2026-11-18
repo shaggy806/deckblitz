@@ -252,6 +252,7 @@ import _poolDruidClass from "../pool/druid-class.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
 import _poolDrunauCorpseTrawler from "../pool/drunau-corpse-trawler.js";
 import _poolDuergarAssailant from "../pool/duergar-assailant.js";
+import _poolDutifulKnowledgeSeeker from "../pool/dutiful-knowledge-seeker.js";
 import _poolDwarvenMine from "../pool/dwarven-mine.js";
 import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
@@ -481,6 +482,7 @@ import _poolKragmaWarcaller from "../pool/kragma-warcaller.js";
 import _poolKrakenOfTheStraits from "../pool/kraken-of-the-straits.js";
 import _poolKrangTheAllPowerful from "../pool/krang-the-all-powerful.js";
 import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
+import _poolKravenTheHunter from "../pool/kraven-the-hunter.js";
 import _poolKrosanAvenger from "../pool/krosan-avenger.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKurosTaken from "../pool/kuros-taken.js";
@@ -1319,6 +1321,7 @@ const shard: CardShard = {
     _poolDruidOfTheAnima,
     _poolDrunauCorpseTrawler,
     _poolDuergarAssailant,
+    _poolDutifulKnowledgeSeeker,
     _poolDwarvenMine,
     _poolDwarvenRuins,
     _poolDwarvenWarriors,
@@ -1548,6 +1551,7 @@ const shard: CardShard = {
     _poolKrakenOfTheStraits,
     _poolKrangTheAllPowerful,
     _poolKrarkClanShaman,
+    _poolKravenTheHunter,
     _poolKrosanAvenger,
     _poolKumenaTyrantOfOrazca,
     _poolKurosTaken,

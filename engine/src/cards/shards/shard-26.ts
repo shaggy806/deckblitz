@@ -860,6 +860,7 @@ import _poolStaticSnare from "../pool/static-snare.js";
 import _poolStensiaMasquerade from "../pool/stensia-masquerade.js";
 import _poolStifle from "../pool/stifle.js";
 import _poolStingerflingSpider from "../pool/stingerfling-spider.js";
+import _poolStitcherGeralf from "../pool/stitcher-geralf.js";
 import _poolStockUp from "../pool/stock-up.js";
 import _poolStoicChampion from "../pool/stoic-champion.js";
 import _poolStomp from "../pool/stomp.js";
@@ -1071,6 +1072,7 @@ import _tokensSnakeToken54 from "../tokens/snake-token-5-4.js";
 import _tokensSpiritTokenRedWhite22 from "../tokens/spirit-token-red-white-2-2.js";
 import _tokensSurvivorToken from "../tokens/survivor-token.js";
 import _tokensVampireRogueToken from "../tokens/vampire-rogue-token.js";
+import _tokensZombieTokenStitcherGeralf from "../tokens/zombie-token-stitcher-geralf.js";
 import _tokensZombieToken from "../tokens/zombie-token.js";
 
 const shard: CardShard = {
@@ -1932,6 +1934,7 @@ const shard: CardShard = {
     _poolStensiaMasquerade,
     _poolStifle,
     _poolStingerflingSpider,
+    _poolStitcherGeralf,
     _poolStockUp,
     _poolStoicChampion,
     _poolStomp,
@@ -2145,6 +2148,7 @@ const shard: CardShard = {
     _tokensSpiritTokenRedWhite22,
     _tokensSurvivorToken,
     _tokensVampireRogueToken,
+    _tokensZombieTokenStitcherGeralf,
     _tokensZombieToken,
   ],
 };

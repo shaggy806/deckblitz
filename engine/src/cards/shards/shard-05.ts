@@ -619,6 +619,7 @@ import _poolNiblisOfFrost from "../pool/niblis-of-frost.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
 import _poolNightOfSoulsBetrayal from "../pool/night-of-souls-betrayal.js";
 import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
+import _poolNikoAris from "../pool/niko-aris.js";
 import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
 import _poolNiveaBelovedBattlemage from "../pool/nivea-beloved-battlemage.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
@@ -1654,6 +1655,7 @@ const shard: CardShard = {
     _poolNicoMinoruRunaway,
     _poolNightOfSoulsBetrayal,
     _poolNightbladeBrigade,
+    _poolNikoAris,
     _poolNirkanaCutthroat,
     _poolNiveaBelovedBattlemage,
     _poolNobleHierarch,
