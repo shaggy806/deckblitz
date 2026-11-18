@@ -4561,7 +4561,9 @@ stopped covering:
   Lozhan), "target creature token, player, or planeswalker" a `filter.anyOf`
   (Coalborn Entity, Cautery Sliver), "target opponent, creature an opponent
   controls, or planeswalker an opponent controls" `whose: "opponent"` with
-  `orPlayer: "opponent"`. The player part's own condition is `playerWith: {
+  `orPlayer: "opponent"`; "**another** target battle or opponent" (Invasion
+  of Regatha) is `{ kind: "other", of: { kind: "permanent", filter: { type:
+  "battle" }, orPlayer: "opponent" } }`, never the Siege itself. The player part's own condition is `playerWith: {
   turnStat }` (that stat of theirs this turn above 0): "any target **that was
   dealt damage this turn**" (Needle Drop) is the three types with
   `damagedThisTurnBy: {}`, `orPlayer: "any"` and `playerWith: { turnStat:
