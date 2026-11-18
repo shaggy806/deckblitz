@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, cast, hand, keywords, lands, pt, subtypes, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, C, cast, hand, keywords, lands, life, pt, ref, spawn, subtypes, table, toHand, toLibrary, zone } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -41,10 +41,43 @@ describe("Haunting Imitation", () => {
   it("returns to its owner's hand when no creature card is revealed", () => {
     const { game } = table();
     lands(game, "Island", 3);
+    toLibrary(game, "Lightning Bolt", A);
     toLibrary(game, "Lightning Bolt", B);
     const spell = toHand(game, "Haunting Imitation");
     cast(game, spell);
     expect(tokensOf(game)).toHaveLength(0);
+    expect(hand(game)).toContain(spell);
+  });
+});
+
+// "Target opponent reveals the top card of their library" (`reveal-top`'s
+// `of`), read back through `{ thisWay: "revealed" }`: Cerebral Eruption.
+describe("Cerebral Eruption", () => {
+  it("deals the revealed card's mana value to that player and each creature they control", () => {
+    const { game } = table();
+    lands(game, "Mountain", 4);
+    const mine = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    const giant = toLibrary(game, "Hill Giant", B);
+    const spell = toHand(game, "Cerebral Eruption");
+    cast(game, spell, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(16);
+    expect(life(game, A)).toBe(20);
+    expect(zone(game, theirs)).toBe("graveyard");
+    expect(zone(game, mine)).toBe("battlefield");
+    expect(game.state.zones.perPlayer[B].library[0]).toBe(giant);
+    expect(zone(game, spell)).toBe("graveyard");
+  });
+
+  it("returns to its owner's hand when a land card is revealed", () => {
+    const { game } = table();
+    lands(game, "Mountain", 4);
+    const theirs = spawn(game, "Grizzly Bears", B);
+    // Bob's library is all Wastes: a land, mana value 0.
+    const spell = toHand(game, "Cerebral Eruption");
+    cast(game, spell, { targets: [ref(B)] });
+    expect(life(game, B)).toBe(20);
+    expect(zone(game, theirs)).toBe("battlefield");
     expect(hand(game)).toContain(spell);
   });
 });

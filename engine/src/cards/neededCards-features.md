@@ -335,9 +335,10 @@ Cosmogoyf (rank 15341), counting itself in exile (the ruling). `test/cda-cards-o
 ### A token copy of each creature card revealed — built 2026-11-18
 
 The keys `effect:reveal-top-any-library` and `effect:token-copy-of-revealed-cards`. "Each player reveals the top card
-of their library" was already `reveal-top`'s `who` (701.20a), "target opponent reveals" its `of`, so the first key's
-other cards (Prophecy, Riddle of Lightning, Judge Unworthy, Cerebral Eruption, Planeswalker's Scorn and Favor) are
-`author-freed`'s. The fix: `create-token-copy`'s `ofMatching` was read only over a set of permanents, so a set of
+of their library" was already `reveal-top`'s `who` (701.20a), "target opponent reveals" its `of`: Cerebral Eruption
+proves it (`of: { target: 0 }`, the revealed card's mana value a `sum` over `{ thisWay: "revealed" }`, dealt in one
+`simultaneous` sequence), and the first key's other cards (Prophecy, Riddle of Lightning, Judge Unworthy,
+Planeswalker's Scorn and Favor) are `author-freed`'s. The fix: `create-token-copy`'s `ofMatching` was read only over a set of permanents, so a set of
 cards copied every member — it now keeps the cards matching too. Haunting Imitation (rank 15281):
 `of: { thisWay: "revealed" }, ofMatching: { type: "creature" }`, and an `amounts` condition on the creatures revealed
 returning the spell from the stack. `test/token-copy-of-revealed-cards.test.ts`.
