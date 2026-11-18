@@ -3084,7 +3084,8 @@
   "effect:leaves-act-on-permanent-put-there-by-source",
   "replacement:graveyard-to-library-bottom-instead",
   "effect:search-library-to-exile-linked",
-  "effect:exile-spell-with-delay-counters"
+  "effect:exile-spell-with-delay-counters",
+  "amount:exiled-as-cost-spell-mana-value"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

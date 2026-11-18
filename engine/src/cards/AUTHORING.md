@@ -5020,6 +5020,9 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   a `choose-from-zone`; a mana ability adds its mana with the answer (rule 605.3b).
 - `exileSpell: { filter? }` — "Exile an instant or sorcery spell you control" (Nivmagus Elemental):
   a spell or copy of yours off the stack, exiled and not countered. Not on a mana ability.
+  `{ paid: "exiled" }` reads it as it last was on the stack, its {X} as chosen (rule 202.3e): Synthesis
+  Pod's "mana value equal to 1 plus the exiled spell's mana value" is `manaValue: { op: "eq", n: {
+  amount: { sum: [{ manaValueOf: { paid: "exiled" } }, 1] } } }`.
 - `exileFromGraveyard: { count, filter?, singleGraveyard: true }` — "Exile two creature cards from a
   single graveyard" (Night Soil): any player's holding enough, all from one. At `count: 1` it's
   "Exile a Fungus card from **a** graveyard" (Thelon of Havenwood): any player's, nothing to keep

@@ -13197,12 +13197,13 @@ export class Game {
         // Face up. Imprint's "exile a card from your hand" links it to the
         // permanent whose ability exiled it (rule 607.2a); a cost's "exile
         // two cards from your graveyard" links it to nothing.
+        const asSpell = awaiting.costExileFor !== undefined ? this.spellsAsTheyAre([id]) : {};
         if (this.moveObject(id, "exile")) {
           const object = this.state.objects[id];
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
           if (awaiting.exileUntil !== undefined) object.exiledUntil = awaiting.exileUntil;
           if (playGrant !== undefined) object.playPermission = { ...playGrant };
-          if (awaiting.costExileFor !== undefined) this.recordCostExile(awaiting.costExileFor, [id]);
+          if (awaiting.costExileFor !== undefined) this.recordCostExile(awaiting.costExileFor, [id], asSpell);
           this.putCountersOnExiled(id, awaiting.exileWithCounters);
         }
         return;
@@ -29811,21 +29812,26 @@ export class Game {
     kind: PaidKind,
     objects: readonly ObjectId[],
     leftFrom: Readonly<Record<ObjectId, number>> = {},
+    asSpells: Readonly<Record<ObjectId, LastKnownInfo>> = {},
   ): void {
     const object = this.state.objects[objectId];
     if (object === undefined || objects.length === 0) return;
-    object.lastKnownRefs = { ...object.lastKnownRefs, sets: addToSet(object.lastKnownRefs?.sets, { paid: kind }, this.paidMembers(kind, objects, leftFrom)) };
+    object.lastKnownRefs = { ...object.lastKnownRefs, sets: addToSet(object.lastKnownRefs?.sets, { paid: kind }, this.paidMembers(kind, objects, leftFrom, asSpells)) };
   }
 
-  /** The set members `recordPaid` records — see it. */
+  /** The set members `recordPaid` records — see it. `asSpells`: spells
+   * exiled from the stack, each as it was there (`recordCostExile`). */
   private paidMembers(
     kind: PaidKind,
     objects: readonly ObjectId[],
     leftFrom: Readonly<Record<ObjectId, number>> = {},
+    asSpells: Readonly<Record<ObjectId, LastKnownInfo>> = {},
   ): SetMember[] {
     return objects.flatMap((id): SetMember[] => {
       const now = this.state.objects[id];
+      const asSpell = asSpells[id];
       if (now === undefined) {
+        if (asSpell !== undefined) return [{ object: id, stint: asSpell.zoneChangeCount, was: asSpell }];
         // A token that ceased to exist as it left (rule 111.7).
         const ceased = this.state.ceasedTokens?.[id];
         return ceased === undefined ? [] : [{ object: id, stint: ceased.zoneChangeCount, was: ceased }];
@@ -29833,11 +29839,13 @@ export class Game {
       const stint = now.zoneChangeCount ?? 0;
       const left = leftFrom[id];
       const was =
-        left !== undefined && now.lastKnown?.zoneChangeCount === left
-          ? now.lastKnown
-          : (kind === "revealed" || kind === "beheld") && now.zone === "hand"
-            ? this.takeLastKnown(id)
-            : undefined;
+        asSpell !== undefined
+          ? asSpell
+          : left !== undefined && now.lastKnown?.zoneChangeCount === left
+            ? now.lastKnown
+            : (kind === "revealed" || kind === "beheld") && now.zone === "hand"
+              ? this.takeLastKnown(id)
+              : undefined;
       return [{ object: id, stint, ...(was !== undefined ? { was } : {}) }];
     });
   }
@@ -30112,8 +30120,9 @@ export class Game {
   ): void {
     const eligible = this.spellExileCandidates(player, cost.filter);
     if (eligible.length <= 1) {
+      const asSpells = this.spellsAsTheyAre(eligible);
       for (const id of eligible) this.moveObject(id, "exile");
-      if (forStackObject !== undefined) this.recordCostExile(forStackObject, eligible);
+      if (forStackObject !== undefined) this.recordCostExile(forStackObject, eligible, asSpells);
       return;
     }
     this.state.awaiting = {
@@ -30131,10 +30140,30 @@ export class Game {
   }
 
   /** Remember `cards`, just exiled for `stackObject`'s cost, on it — what
-   * `{ paid: "exiled" }` reads as it resolves ("the exiled card"). */
-  private recordCostExile(stackObject: ObjectId, cards: readonly ObjectId[]): void {
+   * `{ paid: "exiled" }` reads as it resolves ("the exiled card"). A spell
+   * exiled from the stack (`AbilityCost.exileSpell`) is read as it was there
+   * (`asSpells`, from `spellsAsTheyAre` before the move): "the exiled
+   * spell's mana value" counts its {X} (rules 202.3e, 608.2h — Synthesis
+   * Pod), a copy's too though it has ceased to exist (704.5e). */
+  private recordCostExile(
+    stackObject: ObjectId,
+    cards: readonly ObjectId[],
+    asSpells: Readonly<Record<ObjectId, LastKnownInfo>> = {},
+  ): void {
     if (this.state.objects[stackObject]?.zone !== "stack") return;
-    this.recordPaid(stackObject, "exiled", cards);
+    this.recordPaid(stackObject, "exiled", cards, {}, asSpells);
+  }
+
+  /** Each of `ids` still on the stack as it is there, its mana value with
+   * its chosen {X} (rule 202.3e) — for `recordCostExile`. */
+  private spellsAsTheyAre(ids: readonly ObjectId[]): Record<ObjectId, LastKnownInfo> {
+    const out: Record<ObjectId, LastKnownInfo> = {};
+    for (const id of ids) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "stack") continue;
+      out[id] = { ...this.takeLastKnown(id), manaValue: this.manaValueOnStack(object) };
+    }
+    return out;
   }
 
   /**
