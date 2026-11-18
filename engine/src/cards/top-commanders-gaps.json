@@ -3091,7 +3091,8 @@
   "effect:becomes-color-of-mana-produced",
   "decision:each-player-names-before-reveals",
   "decision:each-player-names-before-reveals",
-  "effect:rotate-chosen-permanents"
+  "effect:rotate-chosen-permanents",
+  "effect:shuffle-chosen-graveyard-cards-into-libraries"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

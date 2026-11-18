@@ -6474,6 +6474,12 @@ export type EffectSpec =
        * exiled with this Saga puts that card on the bottom of their library",
        * each owner arranging their own (401.4). One sent back is no longer
        * exiled, so nothing returns it when the source leaves (the ruling).
+       * `{ inGraveyards }`: every card in any graveyard matching the filter,
+       * read from the effect's controller's side — The Three Seasons' "choose
+       * three cards in each graveyard. Their owners shuffle those cards into
+       * their libraries" is `{ thisWay: "chosen" }` after a `for-each-player`
+       * of `look-and-choose` `destination: "stay"`; an owner none of whose
+       * cards were chosen shuffles nothing (its ruling).
        *
        * `"bottom-random"` is "on the bottom of their library **in a random
        * order**" (Endurance): nothing to arrange, since the effect fixes the
@@ -6487,6 +6493,7 @@ export type EffectSpec =
         | { readonly targetsFrom: number }
         | { readonly all: CardFilter }
         | { readonly graveyardOf: number | PlayerScope }
+        | { readonly inGraveyards: CardFilter }
         | { readonly exiledWithSource: true };
       readonly position: "top" | "bottom" | "owner-chooses" | "shuffle" | "bottom-random" | { readonly fromTop: number };
       /** The resolving spell goes with them — "shuffle **Serene Remembrance
@@ -22374,7 +22381,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                   )
               : "exiledWithSource" in spec.what
                 ? [...ctx.cardsExiledWithSource(true)]
-                : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
+                : "inGraveyards" in spec.what
+                  ? [...ctx.graveyardCardsMatching(spec.what.inGraveyards)]
+                  : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
         if (spec.withSource === true) {
           const self = objectRefAct("source", ctx);
           if (self?.kind === "object") objects.push(self.object);
