@@ -1279,6 +1279,27 @@ describe("a hand put back and that many found (Head Games, Jester's Mask)", () =
   });
 });
 
+describe("a this-turn cast of the card itself from its graveyard (Skyclave Shade)", () => {
+  it("a graveyard landfall on your turn grants the card itself a cast this turn", () => {
+    const shade = parseFace(
+      {
+        name: "Skyclave Shade",
+        type_line: "Creature — Shade",
+        mana_cost: "{1}{B}",
+        oracle_text:
+          "Landfall — Whenever a land you control enters, if this card is in your graveyard and it's your turn, you may cast it from your graveyard this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(shade.complete).toBe(true);
+    expect(shade.triggered[0]).toMatchObject({
+      fromGraveyard: true,
+      condition: { kind: "all", of: [{ kind: "source-zone", zones: ["graveyard"], sameObject: true }, { kind: "your-turn" }] },
+      effect: { kind: "grant-play", cards: "source", duration: "end-of-turn" },
+    });
+  });
+});
+
 describe("an emblem's grants", () => {
   const ult = (line: string) =>
     parseFace(

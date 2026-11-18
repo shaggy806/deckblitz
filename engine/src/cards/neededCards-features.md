@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A card cast from your graveyard this turn by its own landfall — found built 2026-11-18
+
+The key `zone:grant-cast-self-from-graveyard-this-turn` needed no engine code: `grant-play` takes `cards: "source"`,
+so a `fromGraveyard` trigger gives the card itself the permission. Skyclave Shade (rank 14679): its landfall's
+intervening if is `all` of `source-zone` (`sameObject`) and `your-turn`, asked again on resolution (rule 603.4). The
+scaffolder reads "if ~ is in your graveyard and it's your turn" and "you may cast it from your graveyard this turn".
+`test/grant-cast-self-from-graveyard.test.ts`.
+
 ### Cards put into a library this way — built 2026-11-18
 
 The key `amount:cards-put-on-library-this-way`: the `"put-into-library"` this-way kind, read off the

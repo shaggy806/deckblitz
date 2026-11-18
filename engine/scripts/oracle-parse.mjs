@@ -16034,6 +16034,11 @@ function castNowTermsAt(sentences, i, ctx) {
       used: exiled ? 2 : 1,
     };
   }
+  // "You may cast ~ from your graveyard this turn" (Skyclave Shade's graveyard
+  // trigger, its "it" made the card): a permission over the card itself.
+  if (/^you may cast ~ from your graveyard this turn\.$/i.test(sentences[i])) {
+    return { effect: { kind: "grant-play", cards: "source", duration: "end-of-turn" }, used: 1 };
+  }
   // "You may play target snow permanent card from your graveyard this turn. If
   // you do, it enters tapped." (Kaldring, the Rimestaff): `play` reaches a land
   // too, and "it enters tapped" is both halves of the entry replacement.
@@ -19861,14 +19866,16 @@ function parseFaceAsWritten(face, ctx = {}) {
           // excess damage this turn" (Maarika, Overclocked Electromancer): the
           // recipient's, asked once the whole event is dealt (rule 120.10).
           triggers = triggers.map((t) => ({ ...t, toFilter: { ...t.toFilter, excessDamageThisTurn: true } }));
-        } else if (clause === "if ~ is in your graveyard,") {
+        } else if (clause === "if ~ is in your graveyard," || clause === "if ~ is in your graveyard and it's your turn,") {
           // A trigger of the card in its owner's graveyard (Blood Operative,
           // Jocasta): it works only there (`fromGraveyard`), and the
           // intervening if is asked again of that same card as it resolves
-          // (rule 603.4). "It" in the rest is the card.
+          // (rule 603.4). "It" in the rest is the card. "… and it's your
+          // turn" (Skyclave Shade) asks the turn too.
           base.fromGraveyard = true;
-          base.condition = { kind: "source-zone", zones: ["graveyard"], sameObject: true };
-          rest = rest.replace(/\breturn it to\b/, "return ~ to");
+          const inGraveyard = { kind: "source-zone", zones: ["graveyard"], sameObject: true };
+          base.condition = clause.endsWith("your turn,") ? { kind: "all", of: [inGraveyard, { kind: "your-turn" }] } : inGraveyard;
+          rest = rest.replace(/\breturn it to\b/, "return ~ to").replace(/\byou may cast it from your graveyard this turn\.$/, "you may cast ~ from your graveyard this turn.");
         } else if (clause.toLowerCase() === "if it's not their turn," && triggers.every((t) => t.on === "draws")) {
           // "Whenever an opponent draws …, if it's not their turn": the
           // drawing player's turn (Zurzoth, Chaos Rider).
