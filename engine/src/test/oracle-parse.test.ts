@@ -22465,3 +22465,23 @@ describe("choose left or right on each upkeep, the last chosen direction read (M
     expect(barrier.static[0]).toMatchObject({ affects: { scope: "self" }, attackOnlyNearestOpponent: true });
   });
 });
+
+describe("counter target spell if its controller is poisoned (Corrupted Resolve)", () => {
+  it("a conditional on the target's controller, read as it resolves", () => {
+    const resolve = parseFace(
+      { name: "Corrupted Resolve", type_line: "Instant", mana_cost: "{1}{U}", oracle_text: "Counter target spell if its controller is poisoned." },
+      { tokenFor: () => null },
+    );
+    expect(resolve.complete).toBe(true);
+    expect(resolve.targets).toEqual(["spell"]);
+    expect(resolve.effect).toEqual({
+      kind: "conditional",
+      condition: {
+        kind: "of-player",
+        player: { controllerOf: 0 },
+        condition: { kind: "player-counters", counter: "poison", who: "you", atLeast: 1 },
+      },
+      then: { kind: "counter", target: 0 },
+    });
+  });
+});

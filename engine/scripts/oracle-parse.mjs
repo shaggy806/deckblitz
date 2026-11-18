@@ -3336,6 +3336,19 @@ function turnTallyEffect(s, ctx) {
       then: { kind: "counter", target },
     };
   }
+  // Corrupted Resolve: asked as it resolves, of the spell's controller then.
+  if (/^counter target spell if its controller is poisoned\.$/i.test(s)) {
+    const target = ctx.target("spell");
+    return {
+      kind: "conditional",
+      condition: {
+        kind: "of-player",
+        player: { controllerOf: target },
+        condition: { kind: "player-counters", counter: "poison", who: "you", atLeast: 1 },
+      },
+      then: { kind: "counter", target },
+    };
+  }
   // Skulking Killer: the instruction about a target, on its controller having
   // no other creature as it resolves (the ruling).
   m = /^(target creature an opponent controls .+) if that opponent controls no other creatures\.$/i.exec(s);

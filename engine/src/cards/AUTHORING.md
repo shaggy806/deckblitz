@@ -7149,7 +7149,10 @@ clause (section 9):
   Muse's "at the beginning of each opponent's upkeep, if that player has two
   or fewer cards in hand" is `{ player: "active-player", condition: { kind:
   "hand-size", atMost: 2 } }`), `{ target: n }` (Hidetsugu's Second Rite's "if
-  target player has exactly 10 life"), `{ controllerOf: n }`, or
+  target player has exactly 10 life"), `{ controllerOf: n }` (a target
+  permanent's or spell's controller — Corrupted Resolve's "counter target
+  spell if its controller is poisoned" is a `conditional` of this over
+  `player-counters`), or
   `"defending-player"` — the player the source creature is attacking (rule
   802.2a), which a static can read: Bouncing Beebles' "can't be blocked as
   long as defending player controls an artifact" (nobody while it isn't
