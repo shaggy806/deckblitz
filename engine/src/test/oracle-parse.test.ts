@@ -23667,3 +23667,18 @@ describe("counters an opponent puts on a creature they control (Bold Plagiarist)
     });
   });
 });
+
+describe("a permanent of yours destroyed this turn by an opponent's spell or ability (Cobra Trap)", () => {
+  it("reads the alternative cost's condition from the journal's destroyed entries", () => {
+    const trap = parseFace({
+      name: "Cobra Trap",
+      type_line: "Instant — Trap",
+      oracle_text:
+        "If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay this spell's mana cost.\nCreate four 1/1 green Snake creature tokens.",
+    }) as unknown as { alternativeCost?: unknown };
+    expect(trap.alternativeCost).toEqual({
+      mana: "{G}",
+      condition: { kind: "turn-history", what: "destroyed", who: "you", filter: { notTypes: ["creature"] }, by: "opponent" },
+    });
+  });
+});

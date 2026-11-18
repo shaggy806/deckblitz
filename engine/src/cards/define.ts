@@ -1607,6 +1607,13 @@ export type StaticCondition =
        * subtype: "Assassin" } }`), each crewer as it was tapped (702.122c),
        * though it has left or changed since. */
       readonly doneBy?: CardFilter;
+      /** Only what a spell or ability you (`"you"`) or an opponent of yours
+       * (`"opponent"`) controlled did — Cobra Trap's "if a noncreature
+       * permanent under your control was destroyed this turn by a spell or
+       * ability an opponent controlled" (`{ what: "destroyed", filter: {
+       * notTypes: ["creature"] }, by: "opponent" }`). Only the views whose
+       * entries say who did it (`"destroyed"`'s effect destructions). */
+      readonly by?: "you" | "opponent";
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
       /** Only what was done to this player — an attack at them (the player,

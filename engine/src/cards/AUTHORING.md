@@ -7448,7 +7448,15 @@ clause (section 9):
   protects is neither. "Creatures attacking enchanted player" (Curse of
   Hospitality) is `attackingEnchantedPlayer: true`, the player the Curse
   enchants.
-- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, doneBy?, from?, notFrom?, against? }` —
+- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, doneBy?, by?, from?, notFrom?, against? }` —
+  (`what: "destroyed"` is each permanent `who` controlled that was destroyed —
+  rule 701.8b: a "destroy" effect, or the lethal-damage and deathtouch
+  state-based actions, never a sacrifice, 0 toughness or the legend rule —
+  read as it last existed; `by: "opponent" | "you"` keeps only those a spell
+  or ability that player controlled destroyed: Cobra Trap's "if a noncreature
+  permanent under your control was destroyed this turn by a spell or ability
+  an opponent controlled" is `{ what: "destroyed", who: "you", filter: {
+  notTypes: ["creature"] }, by: "opponent" }`.)
   (`window: "this-game"` reads the whole game's count of a view that is its kind, unfiltered
   — the journal's entries last only a round: H.M.S. Bounty's "haven't begun an extra turn this
   game" is `{ kind: "not", of: { kind: "turn-history", what: "extra-turn-began", window:

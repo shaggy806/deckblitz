@@ -36,6 +36,12 @@ export type JournalKind =
   | "left"
   /** `player` sacrificed a permanent. */
   | "sacrificed"
+  /** A permanent `player` controlled was destroyed (rule 701.8b: by a
+   * "destroy" effect, or by the state-based actions for lethal damage and
+   * deathtouch, 704.5g-h — not any other trip to a graveyard); `was` and
+   * `stint`: as it left; `by`: who controlled the spell or ability that
+   * destroyed it, for an effect's. */
+  | "destroyed"
   /** A card or token was put into the graveyard of `player`, its owner, from
    * `from`. From the battlefield, `was` and `stint` are as it left. */
   | "to-graveyard"
@@ -173,6 +179,9 @@ export interface JournalEntry {
    * only on damage from a source with nothing left to say who controlled it:
    * its recipient's reads still count it. */
   readonly player?: PlayerId;
+  /** Who did it, where that isn't `player`: the controller of the spell or
+   * ability that destroyed a permanent (`destroyed`). */
+  readonly by?: PlayerId;
   readonly object?: ObjectId;
   /** The stint of `object` the event concerns (its `zoneChangeCount` then):
    * the one it entered, left, attacked or was tapped in (rule 400.7). */
@@ -357,6 +366,11 @@ export type JournalWhat =
   /** A creature left the battlefield for a graveyard. */
   | "died"
   | "sacrificed"
+  /** A permanent was destroyed (rule 701.8b); the list is its controller's
+   * as it was, and a filter reads it as it last existed — Cobra Trap's "if a
+   * noncreature permanent under your control was destroyed this turn by a
+   * spell or ability an opponent controlled" (`turn-history`'s `by`). */
+  | "destroyed"
   /** A permanent left the battlefield for exile. */
   | "exiled"
   /** A permanent was put into its owner's hand from the battlefield (a
@@ -496,6 +510,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   left: { kind: "left" },
   died: { kind: "left", match: (e) => e.to === "graveyard" && e.was?.types.includes("creature") === true },
   sacrificed: { kind: "sacrificed" },
+  destroyed: { kind: "destroyed" },
   exiled: { kind: "left", match: (e) => e.to === "exile" },
   "put-into-hand": { kind: "left", whose: "owner", match: (e) => e.to === "hand" },
   descended: { kind: "to-graveyard", match: (e, read) => isPermanentCard(e, read) },

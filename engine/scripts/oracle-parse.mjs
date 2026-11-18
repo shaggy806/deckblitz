@@ -18269,6 +18269,23 @@ function parseFaceAsWritten(face, ctx = {}) {
       };
       continue;
     }
+    // "If a noncreature permanent under your control was destroyed this turn
+    // by a spell or ability an opponent controlled, you may pay {G} rather
+    // than pay this spell's mana cost" (Cobra Trap): the journal's
+    // `destroyed` entries (rule 701.8b), by an opponent's.
+    if (
+      !/Land/.test(face.type_line ?? "") &&
+      (m = /^If an? (.+?) under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay ((?:\{[^}]+\})+) rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))
+    ) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter !== null) {
+        out.alternativeCost = {
+          mana: m[2],
+          condition: { kind: "turn-history", what: "destroyed", who: "you", ...(Object.keys(filter).length > 0 ? { filter } : {}), by: "opponent" },
+        };
+        continue;
+      }
+    }
     // A mana alternative cost (rule 118.9), the rest a parameter: "You may pay
     // {2}{R}{R} rather than pay this spell's mana cost" (Fervent Mastery), "and
     // exile a creature card from your graveyard" (Stalwart Valkyrie), "if there

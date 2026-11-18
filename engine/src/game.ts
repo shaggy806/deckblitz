@@ -901,6 +901,13 @@ interface DamageApplied {
 }
 const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
 
+/** The `permanent-destroyed` reasons that are destructions (rule 701.8b): a
+ * "destroy" effect's, the lethal-damage and deathtouch state-based actions'
+ * (704.5g-h) and the Aura umbra armor destroys instead (702.89a). The rest
+ * (0 toughness, 0 loyalty, the legend rule, an unattached Aura …) put a
+ * permanent into a graveyard without destroying it. */
+const DESTRUCTION_REASONS: ReadonlySet<string> = new Set(["destroyed", "lethal damage", "deathtouch", "umbra armor"]);
+
 /** Whether a `costModification` applies only to a spell with certain targets. */
 /** A copy of `spec` with every token-making effect in it marked
  * `replacementAsked`: the tokens a `would-create-token` replacement's own
@@ -62149,6 +62156,24 @@ controlledBy,
         if (event.toZone === "graveyard") {
           add({ kind: "to-graveyard", player: lki.owner, from: "battlefield", ...left, ...duringCombat() });
         }
+        return;
+      }
+      case "permanent-destroyed": {
+        // Destroyed (rule 701.8b): by a "destroy" effect (`by`, who controls
+        // it) or by the lethal-damage and deathtouch state-based actions
+        // (704.5g-h) — the umbra armor Aura they destroy instead too. The
+        // other state-based trips to a graveyard aren't destructions.
+        if (event.by === undefined && !DESTRUCTION_REASONS.has(event.reason)) return;
+        const lki = this.state.objects[event.object]?.lastKnown ?? this.state.ceasedTokens?.[event.object];
+        if (lki === undefined) return;
+        add({
+          kind: "destroyed",
+          player: lki.controller,
+          object: event.object,
+          stint: lki.zoneChangeCount,
+          was: lki,
+          ...(event.by !== undefined ? { by: event.by } : {}),
+        });
         return;
       }
       case "permanent-sacrificed": {

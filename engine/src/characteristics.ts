@@ -2493,6 +2493,9 @@ export type JournalReadOptions = JournalOrigin & {
   readonly window?: JournalWindow;
   readonly toPlayer?: PlayerId;
   readonly doneBy?: CardFilter;
+  /** Only the entries whose `by` (who controlled the spell or ability that
+   * did it) was `you`, or an opponent of `you`'s. */
+  readonly by?: "you" | "opponent";
 };
 
 /**
@@ -2529,6 +2532,7 @@ export function journalCount(
     view.distinct !== true &&
     view.oncePerList !== true &&
     filter === undefined &&
+    options.by === undefined &&
     except === undefined &&
     only === undefined
   ) {
@@ -2544,6 +2548,8 @@ export function journalCount(
     if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
     if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
     if (options?.toPlayer !== undefined && (entry.target?.kind !== "player" || entry.target.player !== options.toPlayer)) continue;
+    // "By a spell or ability an opponent controlled" (Cobra Trap).
+    if (options?.by !== undefined && (entry.by === undefined || (entry.by === you) !== (options.by === "you"))) continue;
     // The one that did it, as it was then (rule 603.10a), beside a filter
     // on what it was done to: a crewer as it was tapped (702.122c).
     const doneBy = options?.doneBy;

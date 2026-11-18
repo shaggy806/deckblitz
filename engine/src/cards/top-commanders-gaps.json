@@ -3071,7 +3071,8 @@
   "amount:cda-graveyard-count-excluding-self",
   "bug:cda-greatest-mana-value-in-graveyard",
   "trigger:counters-put-by-opponent",
-  "effect:put-same-counters-as-trigger"
+  "effect:put-same-counters-as-trigger",
+  "condition:noncreature-permanent-destroyed-by-opponent-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
