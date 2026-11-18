@@ -3038,6 +3038,8 @@
   "effect:attach-granting-aura",
   "static:aura-grants-ability-referencing-aura",
   "effect:control-while-attached",
+  "effect:reveal-top-any-library",
+  "effect:token-copy-of-revealed-cards",
   "bug:look-and-choose-offers-unattachable-aura",
   "bug:look-and-choose-offers-unattachable-aura",
   "decision:owner-orders-library-bottom",

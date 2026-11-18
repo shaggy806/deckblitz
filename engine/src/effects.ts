@@ -10088,9 +10088,11 @@ export type EffectSpec =
        * tokens that are copies of …, where X is one plus the number of
        * instant and sorcery spells you've cast this turn". */
       readonly count: EffectAmount;
-      /** With a set of permanents in `of`: only its members matching this, as
-       * they are or last were — Miss Highwater's "for each **artifact and
-       * creature** they controlled" of a loss trigger's batch. */
+      /** With a set in `of`: only its members matching this, as they are or
+       * last were — Miss Highwater's "for each **artifact and creature** they
+       * controlled" of a loss trigger's batch; of a set of cards, as they are
+       * now — Haunting Imitation's "for each **creature card** revealed this
+       * way" (`of: { thisWay: "revealed" }`). */
       readonly ofMatching?: CardFilter;
       /** With `of: "exiled-with-source"`: "a card exiled with this" — one
        * of them, chosen as this resolves if there's more than one (Mimic
@@ -24153,7 +24155,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         return;
       }
       if (ofCards) {
-        const cards =
+        const all =
           ofSet === "exiled-with-source"
             ? ctx.cardsExiledWithSource(true)
             : typeof ofSet === "object" && "thisWay" in ofSet && ofSet.thisWay === "exiled" && ofSet.who === undefined
@@ -24161,6 +24163,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               : ofSet === undefined
                 ? []
                 : ctx.objectSet(ofSet).map((m) => m.object);
+        // "For each creature card revealed this way" (Haunting Imitation):
+        // only the cards matching, read as they are now.
+        const cards = spec.ofMatching === undefined ? all : all.filter((card) => ctx.cardMatches(card, spec.ofMatching!));
         if (spec.chooseOne === true && cards.length > 1) {
           // "A card exiled with this": which is chosen now, and the copy is
           // of that one wherever `then` finds it (it doesn't move).
