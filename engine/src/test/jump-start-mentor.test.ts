@@ -2,7 +2,22 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, attack, cast, counters, graveyard, hand, lands, spawn, table, toGraveyard, zone } from "./harness.js";
+import {
+  A,
+  attack,
+  cast,
+  counters,
+  graveyard,
+  hand,
+  lands,
+  ref,
+  spawn,
+  table,
+  toExile,
+  toGraveyard,
+  toHand,
+  zone,
+} from "./harness.js";
 
 // Jump-start (rule 702.133a): cast from your graveyard by discarding a card
 // in addition to its other costs, then exiled as it leaves the stack — the
@@ -24,6 +39,17 @@ describe("jump-start", () => {
     expect(hand(game).length).toBe(before - 1 + 1);
     expect(graveyard(game)).toHaveLength(1);
     expect(zone(game, idea)).toBe("exile");
+  });
+
+  it("isn't flashback: Runic Repetition can't target an exiled jump-start card", () => {
+    const { game } = table();
+    const idea = toExile(game, "Radical Idea");
+    const twice = toExile(game, "Think Twice");
+    lands(game, "Island", 3);
+    const spell = toHand(game, "Runic Repetition");
+    expect(() => cast(game, spell, { targets: [ref(idea)] })).toThrow(/target/);
+    cast(game, spell, { targets: [ref(twice)] });
+    expect(hand(game)).toContain(twice);
   });
 
   it("isn't offered with no card in hand to discard", () => {

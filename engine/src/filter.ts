@@ -2344,7 +2344,9 @@ const CARD_KEYWORD_READS = {
   awaken: (def) => def.overload?.keyword === "awaken",
   disguise: (def) => def.morph?.keyword === "disguise",
   morph: (def) => def.morph !== null && def.morph.keyword !== "disguise",
-  flashback: (def, live) => live?.grantedFlashback != null || def.flashback !== null,
+  // Not jump-start or "beam me up", which the definition keeps in the same
+  // field (`flashback.keyword`) but are other keywords (rule 702.133).
+  flashback: (def, live) => live?.grantedFlashback != null || (def.flashback !== null && def.flashback.keyword === undefined),
   madness: (def) => def.madness !== null,
   warp: (def) => def.warp !== null,
   disturb: (def) => def.disturb !== null,
