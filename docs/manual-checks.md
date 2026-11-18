@@ -8957,6 +8957,12 @@ Each board's die comes up 4.
 - **Do:** Cast Blood of the Martyr, then Pyroclasm. Take the damage for your own Grizzly Bears only.
 - **Expect:** Three questions, one for each creature, each naming whose it is ("Have the 2 damage Pyroclasm would deal to your Grizzly Bears dealt to you instead", then Bob's Grizzly Bears, then Carol's Hill Giant). You end at 38 with your Grizzly Bears alive; Bob's Grizzly Bears die and Carol's Hill Giant lives.
 
+## Sacrificing several of one folded tile (2026-11-18)
+
+### Wildfire: four of six identical Mountains are sacrificed from one tile
+- **Do:** Cast Wildfire. Click your tile of Mountains four times, then once more, then Confirm.
+- **Expect:** The banner counts 1/4, 2/4, 3/4, 4/4 and the tile's badge reads "☠ 4/6"; the fifth click leaves it at 4/4. After Confirm, four Mountains and Wildfire are in your graveyard and two Mountains are left.
+
 ## One of the chosen cards onto the battlefield, the others into your hand (2026-11-18)
 
 ### Selective Adaptation: the first card you pick goes onto the battlefield, the others into your hand

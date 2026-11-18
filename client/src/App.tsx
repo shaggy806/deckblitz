@@ -3625,6 +3625,15 @@ function Table({
         const found = ids.find((i) => permanentOrPlayerAction.eligible.some((t) => t.kind === 'object' && t.object === i))
         if (found) return found
       }
+      // A sacrifice of several: each member of a folded tile is its own pick
+      // (Wildfire's four lands out of six Mountains in one tile) — an
+      // eligible one not yet picked, or, once all are, one to un-pick.
+      if (mode === 'sacrifice' && sacrificeAction) {
+        const found =
+          ids.find((i) => sacrificeAction.eligible.includes(i) && !sacrificePicks.includes(i)) ??
+          ids.find((i) => sacrificePicks.includes(i))
+        if (found !== undefined) return found
+      }
       // A tile standing for several identical permanents: take a member not
       // already picked, so a second click picks the next one rather than
       // un-picking the first.
@@ -3646,7 +3655,7 @@ function Table({
       }
       return ids[0]
     },
-    [mode, activeTargeting, pendingSac, copyChoiceAction, permanentOrPlayerAction, separatePilesAction, pileIndexOf, lastPile, pileBrush, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, proliferatePicks],
+    [mode, activeTargeting, pendingSac, copyChoiceAction, permanentOrPlayerAction, separatePilesAction, pileIndexOf, lastPile, pileBrush, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, proliferatePicks, sacrificeAction, sacrificePicks],
   )
 
   const clickPermanent = useCallback(
@@ -4455,9 +4464,13 @@ function Table({
     } else if (mode === 'legend-rule' && legendAction) {
       highlight = legendAction.options.includes(id)
     } else if (mode === 'sacrifice' && sacrificeAction) {
-      const taken = sacrificePicks.filter((x) => x === id).length
-      const of = sacrificeAction.copies?.[id] ?? 1
-      highlight = sacrificeAction.eligible.includes(id) && taken === 0
+      // A tile can stand for several: identical permanents folded on the
+      // board (each its own pick) and a token stack the engine keeps as one
+      // (`copies`). Count what's taken against all the tile holds.
+      const members = ids.filter((i) => sacrificeAction.eligible.includes(i))
+      const taken = sacrificePicks.filter((x) => members.includes(x)).length
+      const of = members.reduce((n, i) => n + (sacrificeAction.copies?.[i] ?? 1), 0)
+      highlight = of > taken
       selected = taken > 0
       // A stack gives up some of itself, so the tile has to say how many —
       // "selected" alone can't tell three of nine from nine of nine.

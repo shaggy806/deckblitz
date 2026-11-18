@@ -13577,4 +13577,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  preset(
+    'Wildfire: four of six identical Mountains are sacrificed from one tile',
+    board({
+      you: { bf: ['Mountain*6'], hand: ['Wildfire'] },
+      opp: { bf: ['Forest*6'] },
+    }),
+  ),
 ]
