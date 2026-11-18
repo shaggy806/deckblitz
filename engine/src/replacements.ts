@@ -111,6 +111,7 @@ export type ReplacementSpec =
   | MillMultiplierReplacement
   | LifeGainReplacement
   | LifeLossReplacement
+  | LifePaymentReplacement
   | ProliferateReplacement
   | ExploreReplacement
   | SpellCopyReplacement
@@ -1213,6 +1214,27 @@ export interface LifeLossReplacement {
    * "that much" being `"x"`. Not read with the others above: a doubling
    * applies first and may be what brings it to 0. */
   readonly toZeroOrLess?: true;
+}
+
+/**
+ * A payment of life (rule 119.4 — a cost's, or an effect's "pay N life")
+ * replaced (rule 614.1a): "if you would pay life while your library has at
+ * least that many cards in it, exile that many cards from the top of your
+ * library instead" (Ashiok, Wicked Manipulator). The payment never happens
+ * (rule 614.6) — no life is lost, none paid, so no "whenever you pay life" —
+ * and `instead.effect` does, this permanent's controller's, `"x"` the life
+ * that would have been paid and "that player" the payer. The payment stays
+ * made, for an "if you do". Whether life can be paid is unchanged: no more
+ * than the payer's life total (the ruling), and the whole amount one way (no
+ * split, the ruling). `whileLibraryHasThatMany`: only while the payer's
+ * library holds at least that many cards; otherwise it's paid as usual.
+ * Applied by `Game.payLife`, through `Game.lifePaymentInstead`.
+ */
+export interface LifePaymentReplacement {
+  readonly event: "would-pay-life";
+  readonly who: "you" | "opponent" | "any-player";
+  readonly instead: { readonly effect: EffectSpec };
+  readonly whileLibraryHasThatMany?: true;
 }
 
 /**

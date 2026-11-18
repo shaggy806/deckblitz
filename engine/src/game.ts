@@ -261,6 +261,7 @@ import type {
   GraveyardExileReplacement,
   LifeGainReplacement,
   LifeLossReplacement,
+  LifePaymentReplacement,
   MillMultiplierReplacement,
   TurnBeginReplacement,
 } from "./replacements.js";
@@ -41734,7 +41735,7 @@ export class Game {
             : undefined,
           controller,
         ),
-      lifePaid: (player, amount) => this.lifePaid(player, amount),
+      payLife: (player, amount) => this.payLife(player, amount, controller),
       investigated: (player, times) => {
         for (let i = 0; i < times && i < Game.MAX_EFFECT_INSTANCES; i += 1) this.emit({ type: "investigated", player });
       },
@@ -66118,10 +66119,35 @@ controlledBy,
    * their life total — they lose that much life), announced as a payment
    * for "whenever you pay life" (Font of Agonies). Whether they can is the
    * caller's question (`canPayLife`). */
-  private payLife(player: PlayerId, amount: number): void {
+  private payLife(player: PlayerId, amount: number, byEffectOf?: PlayerId): void {
     if (amount <= 0) return;
-    this.changeLife(player, -amount);
+    // "Exile that many cards from the top of your library instead" (Ashiok,
+    // Wicked Manipulator): the payment never happens (rule 614.6).
+    const instead = this.lifePaymentInstead(player, amount);
+    if (instead !== undefined) {
+      this.runReplacedBy(instead.effect, instead.by.id, instead.by.controller, { x: amount, player, key: `life-payment:${instead.by.id}` });
+      return;
+    }
+    if (byEffectOf !== undefined) this.loseLifeTallied(player, amount, undefined, byEffectOf);
+    else this.changeLife(player, -amount);
     this.lifePaid(player, amount);
+  }
+
+  /** What `player`'s payment of `amount` life becomes instead (rule 614.6 —
+   * `LifePaymentReplacement`: Ashiok, Wicked Manipulator), and whose
+   * replacement it is, or `undefined`. Several are the same to the payer
+   * (rule 616.1): the first. One already being applied doesn't apply inside
+   * what it became (614.5). */
+  private lifePaymentInstead(
+    player: PlayerId,
+    amount: number,
+  ): { readonly effect: EffectSpec; readonly by: { readonly id: ObjectId; readonly controller: PlayerId } } | undefined {
+    for (const { r, by } of this.playerEventReplacements(player)) {
+      if (r.event !== "would-pay-life" || this.applyingReplacements.has(`life-payment:${by.id}`)) continue;
+      if (r.whileLibraryHasThatMany === true && (this.state.zones.perPlayer[player]?.library.length ?? 0) < amount) continue;
+      return { effect: r.instead.effect, by };
+    }
+    return undefined;
   }
 
   /** The announcement half of {@link payLife}, for a payment made as an
@@ -68844,8 +68870,8 @@ controlledBy,
    * `player`'s event — each one's `who` read from its controller's side. */
   private playerEventReplacements(
     player: PlayerId,
-  ): PlayerEventReplacement<MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement>[] {
-    const out: PlayerEventReplacement<MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement>[] = [];
+  ): PlayerEventReplacement<MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement | LifePaymentReplacement>[] {
+    const out: PlayerEventReplacement<MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement | LifePaymentReplacement>[] = [];
     // An emblem's or a timed static's too ("players can't gain life this
     // turn" — Skullcrack).
     for (const id of this.staticSourceIds()) {
@@ -68854,7 +68880,12 @@ controlledBy,
       if (hasLostAbilities(this.state, this.registry,source) || this.state.players[source.controller]?.hasLost === true) continue;
       for (const ability of this.staticsOfSource(source)) {
         const r = ability.replacement;
-        if (r === undefined || (r.event !== "would-mill" && r.event !== "would-gain-life" && r.event !== "would-lose-life")) continue;
+        if (
+          r === undefined ||
+          (r.event !== "would-mill" && r.event !== "would-gain-life" && r.event !== "would-lose-life" && r.event !== "would-pay-life")
+        ) {
+          continue;
+        }
         const reaches =
           r.who === "any-player" ||
           (r.who === "enchanted-player"

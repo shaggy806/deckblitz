@@ -8093,6 +8093,15 @@ The `prevent-damage` family makes the same record.
   again to what it became (rule 614.5). Its "transform this creature …. Then
   if this creature didn't transform this way, you lose the game" is
   `transform`'s `then` and `otherwise`.
+- `{ event: "would-pay-life", who, instead: { effect }, whileLibraryHasThatMany? }` — Ashiok,
+  Wicked Manipulator's "if you would pay life while your library has at least
+  that many cards in it, exile that many cards from the top of your library
+  instead" (`who: "you"`, `whileLibraryHasThatMany: true`, `{ kind:
+  "exile-from-library", whose: "you", amount: "x" }`). Every payment of life (rule
+  119.4) — a cost's, Phyrexian mana's, an effect's "pay N life" — goes through
+  `Game.payLife`, which runs the effect in its place (614.6): no life paid or lost,
+  no "whenever you pay life", and the payment still made for an "if you do".
+  Whether life can be paid is unchanged (no more than the life total).
 - `{ event: "would-gain-life", who, instead?: { modify: { plus?, times? } } | { effect }, prevent?, becomesLoss? }` — Bilbo, Birthday
   Celebrant's "if you would gain life, you gain that much life plus 1
   instead" (`who: "you"`, `modify: { plus: 1 }`), or "your opponents can't gain life"

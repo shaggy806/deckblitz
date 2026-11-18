@@ -13316,8 +13316,11 @@ export interface EffectApi {
   revealHand(player: PlayerId): void;
   gainLife(player: PlayerId, amount: number): void;
   loseLife(player: PlayerId, amount: number): void;
-  /** Announce the loss just made as a payment of life (`lose-life`'s `paid`). */
-  lifePaid(player: PlayerId, amount: number): void;
+  /** `player` pays `amount` life as this resolves (rule 119.4: they lose that
+   * much, announced as a payment — `lose-life`'s `paid`), or what a
+   * `would-pay-life` replacement makes it instead (Ashiok, Wicked
+   * Manipulator). Whether they can is the caller's question. */
+  payLife(player: PlayerId, amount: number): void;
   /** Announce `times` investigations by `player` (`create-token`'s `investigate`). */
   investigated(player: PlayerId, times: number): void;
   /** Announce that this effect's controller didn't pay its source's
@@ -16629,10 +16632,7 @@ function applyPlayersPayAnyAmount(
       // Mana was paid as the question was answered; life is paid here, its
       // answer read only now (rule 119.4: paying it is losing it), and
       // announced as a payment ("whenever you pay life" — Font of Agonies).
-      if (spec.resource === "life") {
-        ctx.loseLife(paying, amount);
-        ctx.lifePaid(paying, amount);
-      }
+      if (spec.resource === "life") ctx.payLife(paying, amount);
       paid = [...paid, { player: paying, amount }];
       anyPaid = true;
     }
@@ -20667,8 +20667,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         return;
       }
       if (spec.who === undefined || spec.who === "you") {
-        ctx.loseLife(ctx.controller, life);
-        if (spec.paid === true) ctx.lifePaid(ctx.controller, life);
+        if (spec.paid === true) ctx.payLife(ctx.controller, life);
+        else ctx.loseLife(ctx.controller, life);
       } else if (!readsEachPlayer(spec.amount)) ctx.changeLifeScoped(spec.who, -life);
       else {
         // "Each opponent loses half their life": each one's own amount,
