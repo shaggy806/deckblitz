@@ -763,6 +763,7 @@ import _poolAmuletOfKroog from "./pool/amulet-of-kroog.js";
 import _poolAmuletOfSafekeeping from "./pool/amulet-of-safekeeping.js";
 import _poolAmuletOfUnmaking from "./pool/amulet-of-unmaking.js";
 import _poolAmuletOfVigor from "./pool/amulet-of-vigor.js";
+import _poolAmyPond from "./pool/amy-pond.js";
 import _poolAmyRose from "./pool/amy-rose.js";
 import _poolAmzuSwarmsHunger from "./pool/amzu-swarms-hunger.js";
 import _poolAnHavvaConstable from "./pool/an-havva-constable.js";
@@ -1629,6 +1630,7 @@ import _poolAudaciousSwap from "./pool/audacious-swap.js";
 import _poolAudaciousThief from "./pool/audacious-thief.js";
 import _poolAudacity from "./pool/audacity.js";
 import _poolAudienceWithTrostani from "./pool/audience-with-trostani.js";
+import _poolAuditoreAmbush from "./pool/auditore-ambush.js";
 import _poolAugerSpree from "./pool/auger-spree.js";
 import _poolAugmenterPugilist from "./pool/augmenter-pugilist.js";
 import _poolAugmentingAutomaton from "./pool/augmenting-automaton.js";
@@ -9653,6 +9655,7 @@ import _poolFiligreeAttendant from "./pool/filigree-attendant.js";
 import _poolFiligreeCrawler from "./pool/filigree-crawler.js";
 import _poolFiligreeFamiliar from "./pool/filigree-familiar.js";
 import _poolFiligreeFracture from "./pool/filigree-fracture.js";
+import _poolFiligreeRacer from "./pool/filigree-racer.js";
 import _poolFiligreeSages from "./pool/filigree-sages.js";
 import _poolFiligreeVector from "./pool/filigree-vector.js";
 import _poolFillWithFright from "./pool/fill-with-fright.js";
@@ -11270,6 +11273,7 @@ import _poolGlimpseOfFreedom from "./pool/glimpse-of-freedom.js";
 import _poolGlimpseOfNature from "./pool/glimpse-of-nature.js";
 import _poolGlimpseOfTomorrow from "./pool/glimpse-of-tomorrow.js";
 import _poolGlimpseTheCore from "./pool/glimpse-the-core.js";
+import _poolGlimpseTheCosmos from "./pool/glimpse-the-cosmos.js";
 import _poolGlimpseTheFuture from "./pool/glimpse-the-future.js";
 import _poolGlimpseTheImpossible from "./pool/glimpse-the-impossible.js";
 import _poolGlimpseTheSunGod from "./pool/glimpse-the-sun-god.js";
@@ -17248,6 +17252,7 @@ import _poolMazirekKraulDeathPriest from "./pool/mazirek-kraul-death-priest.js";
 import _poolMazzyTrueswordPaladin from "./pool/mazzy-truesword-paladin.js";
 import _poolMbakuJabariChieftain from "./pool/mbaku-jabari-chieftain.js";
 import _poolMccoyNotABricklayer from "./pool/mccoy-not-a-bricklayer.js";
+import _poolMeTheImmortal from "./pool/me-the-immortal.js";
 import _poolMeadowboon from "./pool/meadowboon.js";
 import _poolMeagerMeal from "./pool/meager-meal.js";
 import _poolMeanderingRiver from "./pool/meandering-river.js";
@@ -30930,6 +30935,7 @@ import _poolViolentUrge from "./pool/violent-urge.js";
 import _poolVioletPall from "./pool/violet-pall.js";
 import _poolVipersKiss from "./pool/vipers-kiss.js";
 import _poolViralDrake from "./pool/viral-drake.js";
+import _poolViralSpawning from "./pool/viral-spawning.js";
 import _poolViridescentBog from "./pool/viridescent-bog.js";
 import _poolViridescentWisps from "./pool/viridescent-wisps.js";
 import _poolViridianAcolyte from "./pool/viridian-acolyte.js";
@@ -34319,6 +34325,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAmuletOfSafekeeping,
   _poolAmuletOfUnmaking,
   _poolAmuletOfVigor,
+  _poolAmyPond,
   _poolAmyRose,
   _poolAmzuSwarmsHunger,
   _poolAnHavvaConstable,
@@ -35185,6 +35192,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAudaciousThief,
   _poolAudacity,
   _poolAudienceWithTrostani,
+  _poolAuditoreAmbush,
   _poolAugerSpree,
   _poolAugmenterPugilist,
   _poolAugmentingAutomaton,
@@ -43209,6 +43217,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFiligreeCrawler,
   _poolFiligreeFamiliar,
   _poolFiligreeFracture,
+  _poolFiligreeRacer,
   _poolFiligreeSages,
   _poolFiligreeVector,
   _poolFillWithFright,
@@ -44826,6 +44835,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlimpseOfNature,
   _poolGlimpseOfTomorrow,
   _poolGlimpseTheCore,
+  _poolGlimpseTheCosmos,
   _poolGlimpseTheFuture,
   _poolGlimpseTheImpossible,
   _poolGlimpseTheSunGod,
@@ -50804,6 +50814,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMazzyTrueswordPaladin,
   _poolMbakuJabariChieftain,
   _poolMccoyNotABricklayer,
+  _poolMeTheImmortal,
   _poolMeadowboon,
   _poolMeagerMeal,
   _poolMeanderingRiver,
@@ -64486,6 +64497,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVioletPall,
   _poolVipersKiss,
   _poolViralDrake,
+  _poolViralSpawning,
   _poolViridescentBog,
   _poolViridescentWisps,
   _poolViridianAcolyte,
@@ -67888,6 +67900,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/amulet-of-safekeeping": _poolAmuletOfSafekeeping,
   "pool/amulet-of-unmaking": _poolAmuletOfUnmaking,
   "pool/amulet-of-vigor": _poolAmuletOfVigor,
+  "pool/amy-pond": _poolAmyPond,
   "pool/amy-rose": _poolAmyRose,
   "pool/amzu-swarms-hunger": _poolAmzuSwarmsHunger,
   "pool/an-havva-constable": _poolAnHavvaConstable,
@@ -68754,6 +68767,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/audacious-thief": _poolAudaciousThief,
   "pool/audacity": _poolAudacity,
   "pool/audience-with-trostani": _poolAudienceWithTrostani,
+  "pool/auditore-ambush": _poolAuditoreAmbush,
   "pool/auger-spree": _poolAugerSpree,
   "pool/augmenter-pugilist": _poolAugmenterPugilist,
   "pool/augmenting-automaton": _poolAugmentingAutomaton,
@@ -76778,6 +76792,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/filigree-crawler": _poolFiligreeCrawler,
   "pool/filigree-familiar": _poolFiligreeFamiliar,
   "pool/filigree-fracture": _poolFiligreeFracture,
+  "pool/filigree-racer": _poolFiligreeRacer,
   "pool/filigree-sages": _poolFiligreeSages,
   "pool/filigree-vector": _poolFiligreeVector,
   "pool/fill-with-fright": _poolFillWithFright,
@@ -78395,6 +78410,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glimpse-of-nature": _poolGlimpseOfNature,
   "pool/glimpse-of-tomorrow": _poolGlimpseOfTomorrow,
   "pool/glimpse-the-core": _poolGlimpseTheCore,
+  "pool/glimpse-the-cosmos": _poolGlimpseTheCosmos,
   "pool/glimpse-the-future": _poolGlimpseTheFuture,
   "pool/glimpse-the-impossible": _poolGlimpseTheImpossible,
   "pool/glimpse-the-sun-god": _poolGlimpseTheSunGod,
@@ -84373,6 +84389,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mazzy-truesword-paladin": _poolMazzyTrueswordPaladin,
   "pool/mbaku-jabari-chieftain": _poolMbakuJabariChieftain,
   "pool/mccoy-not-a-bricklayer": _poolMccoyNotABricklayer,
+  "pool/me-the-immortal": _poolMeTheImmortal,
   "pool/meadowboon": _poolMeadowboon,
   "pool/meager-meal": _poolMeagerMeal,
   "pool/meandering-river": _poolMeanderingRiver,
@@ -98055,6 +98072,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/violet-pall": _poolVioletPall,
   "pool/vipers-kiss": _poolVipersKiss,
   "pool/viral-drake": _poolViralDrake,
+  "pool/viral-spawning": _poolViralSpawning,
   "pool/viridescent-bog": _poolViridescentBog,
   "pool/viridescent-wisps": _poolViridescentWisps,
   "pool/viridian-acolyte": _poolViridianAcolyte,

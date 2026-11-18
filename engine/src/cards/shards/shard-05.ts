@@ -381,6 +381,7 @@ import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
 import _poolGlacialRevelation from "../pool/glacial-revelation.js";
 import _poolGlenElendraPranksters from "../pool/glen-elendra-pranksters.js";
 import _poolGlimmerbell from "../pool/glimmerbell.js";
+import _poolGlimpseTheCosmos from "../pool/glimpse-the-cosmos.js";
 import _poolGlissaHeraldOfPredation from "../pool/glissa-herald-of-predation.js";
 import _poolGlisterBairn from "../pool/glister-bairn.js";
 import _poolGloriousEnforcer from "../pool/glorious-enforcer.js";
@@ -1419,6 +1420,7 @@ const shard: CardShard = {
     _poolGlacialRevelation,
     _poolGlenElendraPranksters,
     _poolGlimmerbell,
+    _poolGlimpseTheCosmos,
     _poolGlissaHeraldOfPredation,
     _poolGlisterBairn,
     _poolGloriousEnforcer,

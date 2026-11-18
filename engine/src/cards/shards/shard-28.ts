@@ -969,6 +969,7 @@ import _poolVertexPaladin from "../pool/vertex-paladin.js";
 import _poolViashinoOutrider from "../pool/viashino-outrider.js";
 import _poolViashinoSandscout from "../pool/viashino-sandscout.js";
 import _poolViolentEruption from "../pool/violent-eruption.js";
+import _poolViralSpawning from "../pool/viral-spawning.js";
 import _poolVirtuesRuin from "../pool/virtues-ruin.js";
 import _poolVisceraDragger from "../pool/viscera-dragger.js";
 import _poolVishKalBloodArbiter from "../pool/vish-kal-blood-arbiter.js";
@@ -2034,6 +2035,7 @@ const shard: CardShard = {
     _poolViashinoOutrider,
     _poolViashinoSandscout,
     _poolViolentEruption,
+    _poolViralSpawning,
     _poolVirtuesRuin,
     _poolVisceraDragger,
     _poolVishKalBloodArbiter,

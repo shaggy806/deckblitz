@@ -42,6 +42,7 @@ import _poolAshmouthBlade from "../pool/ashmouth-blade.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAssault from "../pool/assault.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
+import _poolAuditoreAmbush from "../pool/auditore-ambush.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
 import _poolAureliaTheWarleader from "../pool/aurelia-the-warleader.js";
@@ -1086,6 +1087,7 @@ const shard: CardShard = {
     _poolAspectOfLamprey,
     _poolAssault,
     _poolAthreosGodOfPassage,
+    _poolAuditoreAmbush,
     _poolAuguryOwl,
     _poolAuratog,
     _poolAureliaTheWarleader,

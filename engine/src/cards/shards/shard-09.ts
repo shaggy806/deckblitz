@@ -25,6 +25,7 @@ import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAmnesia from "../pool/amnesia.js";
 import _poolAmrouScout from "../pool/amrou-scout.js";
+import _poolAmyPond from "../pool/amy-pond.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientBrassDragon from "../pool/ancient-brass-dragon.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
@@ -1105,6 +1106,7 @@ const shard: CardShard = {
     _poolAmethystDragon,
     _poolAmnesia,
     _poolAmrouScout,
+    _poolAmyPond,
     _poolAnUnexpectedParty,
     _poolAncientBrassDragon,
     _poolAncientImperiosaur,
