@@ -5717,8 +5717,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseTrigger("At the beginning of the chosen player's upkeep")).toEqual([
       { on: "step-begins", step: "upkeep", who: "chosen-player" },
     ]);
-    // "Choose two players" is another feature.
-    expect(face("As this creature enters, choose two players.", "Creature — Demon").choosePlayerOnEnter).toBeUndefined();
+    // "Choose two players" (Sower of Discord), and Bitter Feud's doubling
+    // between them (replacement:chosen-players-damage-doubling).
+    const sower = face("As this creature enters, choose two players.", "Creature — Demon");
+    expect(sower.choosePlayerOnEnter).toBe("player");
+    expect(sower.chooseTwoPlayersOnEnter).toBe(true);
+    const feud = face(
+      "As this enchantment enters, choose two players.\nIf a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.",
+      "Enchantment",
+    );
+    expect(feud.complete).toBe(true);
+    expect(feud.chooseTwoPlayersOnEnter).toBe(true);
+    expect(feud.static[0].replacement).toEqual({
+      event: "would-deal-damage",
+      to: "between-chosen-players",
+      instead: { modify: { times: 2 } },
+    });
   });
 
   it("a targeted player's own choice from hand (effect:target-player-puts-cards-from-hand-on-library)", () => {

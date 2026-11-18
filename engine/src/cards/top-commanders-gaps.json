@@ -3053,7 +3053,9 @@
   "cost:exile-from-graveyard-beside-sacrifice-several",
   "static:stations-using-toughness",
   "amount:damage-dealt-capped",
-  "effect:temporary-enter-exile-replacement"
+  "effect:temporary-enter-exile-replacement",
+  "effect:temporary-enter-exile-replacement",
+  "replacement:chosen-players-damage-doubling"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

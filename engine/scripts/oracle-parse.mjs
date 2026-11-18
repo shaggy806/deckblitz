@@ -19231,6 +19231,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       if (m[1] !== undefined) out.secretChoiceOnEnter = true;
       continue;
     }
+    // "As ~ enters, choose two players." (Sower of Discord, Bitter Feud):
+    // two different players (`chooseTwoPlayersOnEnter`).
+    if (line === "As ~ enters, choose two players.") {
+      out.choosePlayerOnEnter = "player";
+      out.chooseTwoPlayersOnEnter = true;
+      continue;
+    }
     // "As ~ enters, choose a nonland card name." (rule 201.4, asked as it
     // enters — 614.12), and the statics that read the name.
     if ((m = /^As ~ enters, choose (?:a|an|any) (.*?)card name\.$/.exec(line)) && cardNameFilterOf(m[1]) !== null) {
@@ -23921,6 +23928,14 @@ function parseStatic(line, text) {
   // and what they control.
   if (line === "If a source would deal damage to the chosen player or a permanent they control, it deals double that damage instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", to: "chosen-player-side", instead: { modify: { times: 2 } } }, text };
+  }
+  // Bitter Feud: between the two chosen players (`chooseTwoPlayersOnEnter`),
+  // either way.
+  if (
+    line ===
+    "If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead."
+  ) {
+    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", to: "between-chosen-players", instead: { modify: { times: 2 } } }, text };
   }
   // Containment Priest (rule 614.6, judged as it would exist — 614.12).
   if (line === "If a nontoken creature would enter and it wasn't cast, exile it instead.") {

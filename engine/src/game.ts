@@ -1046,7 +1046,7 @@ function lifeStepText(step: LifeGainStep): string {
 
 /** Who's replacing a damage event: a permanent, or a resolved effect's
  * source and controller. */
-type DamageReplacer = Pick<GameObject, "id" | "controller" | "attachedTo" | "attachedToPlayer" | "chosenPlayer">;
+type DamageReplacer = Pick<GameObject, "id" | "controller" | "attachedTo" | "attachedToPlayer" | "chosenPlayer" | "otherChosenPlayer">;
 
 /** A static barring deaths from causing triggers (Hushbringer), as
  * `Game.deathSuppressors` found it. */
@@ -65716,6 +65716,19 @@ controlledBy,
         if (by.chosenPlayer === undefined || recipientController !== by.chosenPlayer) return false;
         if (target.kind === "object" && this.state.objects[target.object]?.zone !== "battlefield") return false;
         break;
+      case "between-chosen-players": {
+        // A source one of the two chosen players controls (as it last
+        // existed, if it has left), to the other or a permanent they control
+        // (Bitter Feud); with two not chosen, nothing.
+        const one = by.chosenPlayer;
+        const other = by.otherChosenPlayer;
+        if (one === undefined || other === undefined) return false;
+        const from = sourceLastKnown?.controller ?? this.state.objects[source]?.controller;
+        const to = from === one ? other : from === other ? one : undefined;
+        if (to === undefined || recipientController !== to) return false;
+        if (target.kind === "object" && this.state.objects[target.object]?.zone !== "battlefield") return false;
+        break;
+      }
       case "your-side":
         // You, or a permanent you control (narrowed by `toFilter`, below).
         if (target.kind === "player") {

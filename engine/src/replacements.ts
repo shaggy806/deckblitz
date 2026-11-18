@@ -1300,7 +1300,13 @@ export interface DamageMultiplierReplacement {
    * the player this Aura is attached to (Curse of Bloodletting);
    * `"chosen-player-side"`: the player chosen for this permanent
    * (`GameObject.chosenPlayer` — `choosePlayerOnEnter`) or a permanent that
-   * player controls (Sawhorn Nemesis), nothing with nobody chosen. */
+   * player controls (Sawhorn Nemesis), nothing with nobody chosen;
+   * `"between-chosen-players"`: damage from a source one of the two players
+   * chosen for this permanent controls (`chooseTwoPlayersOnEnter`) to the
+   * other chosen player or a permanent that player controls — Bitter Feud's
+   * "if a source controlled by one of the chosen players would deal damage to
+   * the other chosen player or a permanent that player controls" — the
+   * source's controller as it last existed if it has left. */
   readonly to?:
     | "opponent"
     | "opponent-side"
@@ -1311,7 +1317,8 @@ export interface DamageMultiplierReplacement {
     | "your-side"
     | "attached"
     | "enchanted-player"
-    | "chosen-player-side";
+    | "chosen-player-side"
+    | "between-chosen-players";
   /** Not this permanent itself — "**other** permanents you control"
    * (Palisade Giant), "another creature you control" (Vigor). */
   readonly toOther?: true;

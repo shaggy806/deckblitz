@@ -8212,6 +8212,7 @@ The `prevent-damage` family makes the same record.
   `to: "your-side"` is you or a permanent you control (`toFilter` narrowing only the permanents — Hyperion's "you or a Hero you control"),
   `to: "attached"` / `fromAttached: true` the Aura's or Equipment's host (Inviolability; Muzzle), `toOther` "other permanents" (Palisade Giant);
   `to: "chosen-player-side"` the player chosen as it entered (`choosePlayerOnEnter`) or a permanent they control (Sawhorn Nemesis's doubling);
+  `to: "between-chosen-players"` damage from a source one of the two chosen players controls (`chooseTwoPlayersOnEnter`) to the other or a permanent the other controls, either way (Bitter Feud);
   `redirect: "self" | "attached" | "recipient-controller"` deals all of it there instead (Palisade Giant, Pariah, Treacherous Link — rule 614.9,
   once per event, 614.5); `instead: { prevent: 1 }` (Guardian Seraph, per source, 615.10), `{ prevent: { allBut: 1 } }` (Hyperion), `{ prevent: { half: "up" } }` (Gisela),
   `modify: { half: "down" }` (Ghosts of the Innocent — a replacement, so unpreventable damage is still halved), `ifAtMost: 3` with `prevent` (Callous Giant), `ifAtLeast: 3` with `modify: { set: 2 }` (Forethought Amulet).
