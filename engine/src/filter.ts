@@ -1442,8 +1442,11 @@ export interface CardFilter {
    * `GameObject.assistedBy`): "if another player spent mana to cast it"
    * (Yume, Chronicler of Valor). As it was last cast. */
   readonly assisted?: boolean;
-  /** …cast by **you** — "if you cast it" (Anti-Venom, Rocco, Tiamat). */
-  readonly castBy?: "you";
+  /** …cast by **you** — "if you cast it" (Anti-Venom, Rocco, Tiamat) — or
+   * by an opponent: "creatures **played by your opponents** enter tapped"
+   * (Uphill Battle, beside a `played` land under an opponent's control).
+   * Who cast it, not who controls it now. */
+  readonly castBy?: "you" | "opponent";
   /** …cast from this zone — "if it was cast from a graveyard". Asked of a
    * spell still on the stack, where it was cast from: Delayed Blast
    * Fireball's "if this spell was cast from exile". */
@@ -3160,6 +3163,7 @@ export function matchesFilter(
         : entry?.cast;
     if (filter.cast !== undefined && (cast !== undefined) !== filter.cast) return false;
     if (filter.castBy === "you" && cast?.by !== ctx.you) return false;
+    if (filter.castBy === "opponent" && (cast === undefined || cast.by === ctx.you)) return false;
     if (filter.castFrom !== undefined) {
       if (typeof filter.castFrom === "object" ? cast === undefined || cast.from === filter.castFrom.not : cast?.from !== filter.castFrom) return false;
     }

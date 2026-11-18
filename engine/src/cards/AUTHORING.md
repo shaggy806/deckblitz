@@ -3958,7 +3958,12 @@ this stint (`GameObject.entry`): played as a land (rule 305.1 — Deep Gnome
 Terramancer's "lands enter … without being played" is `played: false`), as a spell that was cast and resolved ("if you cast it"
 — Anti-Venom's enters trigger is `{ on: "enters-battlefield", who: "self",
 filter: { cast: true, castBy: "you" } }`, since whether it was cast never
-changes; a copy of a spell was never cast), cast from which zone (asked of a
+changes; a copy of a spell was never cast; `castBy: "opponent"` is cast by an
+opponent of the filter's side — Uphill Battle's "creatures played by your
+opponents enter tapped" is an `others-enter-battlefield` `tapped` over
+`{ type: "creature", anyOf: [{ castBy: "opponent" }, { played: true,
+controlledBy: "opponent" }] }`, judged as the creature would exist on the
+battlefield, rule 614.12), cast from which zone (asked of a
 spell still on the stack, where it's being cast from — Delayed Blast
 Fireball's "if this spell was cast from exile" is a `conditional` on `{ kind:
 "source", filter: { castFrom: "exile" } }`), under which permission (`castVia`

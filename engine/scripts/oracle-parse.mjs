@@ -25807,6 +25807,24 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "Creatures your opponents control enter tapped" (Authority of the
+  // Consuls); "creatures played by your opponents enter tapped" (Uphill
+  // Battle): cast by an opponent, or a creature land an opponent played
+  // (rules 305.1, 614.12).
+  if ((m = /^Creatures (your opponents control|played by your opponents) enter tapped\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "others-enter-battlefield",
+        filter:
+          m[1] === "your opponents control"
+            ? { type: "creature", controlledBy: "opponent" }
+            : { type: "creature", anyOf: [{ castBy: "opponent" }, { played: true, controlledBy: "opponent" }] },
+        tapped: true,
+      },
+      text,
+    };
+  }
   // "… for each land that entered the battlefield under your control this
   // turn" (Bioengineered Future): the turn history's list, ones gone included.
   if (line === "Each creature you control enters with an additional +1/+1 counter on it for each land that entered the battlefield under your control this turn.") {

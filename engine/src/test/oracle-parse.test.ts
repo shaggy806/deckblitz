@@ -23412,3 +23412,26 @@ describe("damage replaced by counters on this permanent, not prevented (Delaying
     });
   });
 });
+
+describe("creatures your opponents control, or played by them, enter tapped (Uphill Battle)", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line: "Enchantment", oracle_text, mana_cost: "{3}", colors: [], cmc: 3 } as never) as unknown as {
+      static: { replacement?: unknown }[];
+    };
+
+  it("reads played as cast by an opponent, or a creature land an opponent played", () => {
+    expect(face("Creatures played by your opponents enter tapped.").static[0]?.replacement).toEqual({
+      event: "others-enter-battlefield",
+      filter: { type: "creature", anyOf: [{ castBy: "opponent" }, { played: true, controlledBy: "opponent" }] },
+      tapped: true,
+    });
+  });
+
+  it("reads control as control, however it got there", () => {
+    expect(face("Creatures your opponents control enter tapped.").static[0]?.replacement).toEqual({
+      event: "others-enter-battlefield",
+      filter: { type: "creature", controlledBy: "opponent" },
+      tapped: true,
+    });
+  });
+});

@@ -3020,7 +3020,9 @@
   "effect:grant-jump-start",
   "static:counters-remain-across-zones",
   "keyword:conditional-flashback",
-  "replacement:damage-replaced-not-prevented"
+  "replacement:damage-replaced-not-prevented",
+  "replacement:damage-replaced-not-prevented",
+  "replacement:enters-tapped-if-cast"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
