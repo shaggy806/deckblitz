@@ -2946,7 +2946,8 @@
   "trigger:dies-greatest-power-lki",
   "effect:rechoose-direction-each-upkeep",
   "effect:rechoose-direction-each-upkeep",
-  "effect:protection-from-player-for-you-and-planeswalkers"
+  "effect:protection-from-player-for-you-and-planeswalkers",
+  "target:controlled-by-opponent-to-your-left"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

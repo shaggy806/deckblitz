@@ -982,8 +982,24 @@ export interface CardFilter {
    * existed if it has left — rule 608.2h): Stalking Leonin's "if it's
    * controlled by the chosen player". `"monarch"`: the monarch (rule 725),
    * nobody's while there is none: Fall from Favor's "unless that player is the
-   * monarch", about the enchanted creature's controller. */
-  readonly controlledBy?: "you" | "opponent" | "active-player" | "chooser" | "enchanted-player" | "chosen-player" | "monarch";
+   * monarch", about the enchanted creature's controller.
+   * `"player-to-your-left"` / `"player-to-your-right"`: the filtering player's
+   * neighbour — the next player in turn order, or the one before (rule 101.4),
+   * skipping players who have lost, as the `PlayerRef`s of those names are;
+   * nobody's with no other player left. Barroom Brawl's "target creature **the
+   * opponent to your left** controls" (no teams, so that's the player to your
+   * left — at two players, the other player, its ruling); a copy's "your" is
+   * the copy's controller's. */
+  readonly controlledBy?:
+    | "you"
+    | "opponent"
+    | "active-player"
+    | "chooser"
+    | "enchanted-player"
+    | "chosen-player"
+    | "monarch"
+    | "player-to-your-left"
+    | "player-to-your-right";
   /** Controlled by one of these players — set by the engine, never authored:
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
@@ -2253,6 +2269,17 @@ export function chosenColorsOf(state: GameState, source: ObjectId | undefined): 
 
 /** Is `value` of the quality `clause` asks for? A negative number has a parity
  * too: -1 is odd. */
+/** The player to `player`'s left (`step` 1: the next in turn order) or right
+ * (-1: the one before), among those still in the game (rule 101.4) — the
+ * `"player-to-your-left"` / `-right` refs' reading. `undefined` with nobody
+ * else left. */
+function neighbourOf(state: GameState, player: PlayerId, step: 1 | -1): PlayerId | undefined {
+  const players = state.turnOrder.filter((p) => p === player || state.players[p]?.hasLost === false);
+  const at = players.indexOf(player);
+  if (at < 0 || players.length < 2) return undefined;
+  return players[(at + step + players.length) % players.length];
+}
+
 function hasParity(state: GameState, value: number, clause: ParityClause, source: ObjectId | undefined): boolean {
   let quality: string | null | undefined = clause;
   if (clause === "chosen") {
@@ -2994,6 +3021,12 @@ export function matchesFilter(
   if (filter.controlledBy === "opponent" && controller === ctx.you) return false;
   if (filter.controlledBy === "active-player" && controller !== activePlayerOf(state)) return false;
   if (filter.controlledBy === "monarch" && controller !== state.monarch) return false;
+  if (
+    (filter.controlledBy === "player-to-your-left" || filter.controlledBy === "player-to-your-right") &&
+    controller !== neighbourOf(state, ctx.you, filter.controlledBy === "player-to-your-left" ? 1 : -1)
+  ) {
+    return false;
+  }
   if (filter.controlledBy === "chooser" && (ctx.chooser === undefined || controller !== ctx.chooser)) return false;
   if (filter.controlledBy === "enchanted-player") {
     const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];

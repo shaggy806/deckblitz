@@ -4420,7 +4420,12 @@ stopped covering:
 - `{ kind: "permanent", whose?: "any" | "you" | "opponent" | "trigger-player" | "defending-player", filter: CardFilter }`
   — a battlefield permanent matching an arbitrary filter. "Target creature
   with flying" / "without flying" (Clan Defiance), "target Dragon you
-  control", "target creature with power 4 or greater". `whose: "trigger-player"`
+  control", "target creature with power 4 or greater". "Target creature **the
+  opponent to your left** controls" (Barroom Brawl) is `whose: "opponent"` with
+  `filter: { type: "creature", controlledBy: "player-to-your-left" }` — the
+  next player in turn order still in the game (rule 101.4; no teams, so the
+  opponent), `"player-to-your-right"` the one before, read from the chooser's
+  side: a copy's are its controller's. `whose: "trigger-player"`
   is "target creature **that player** controls" on a triggered ability: the
   player its event names (Alela, Cunning Conqueror's player dealt combat
   damage), whose permanents alone are legal — and on an attack trigger whose
