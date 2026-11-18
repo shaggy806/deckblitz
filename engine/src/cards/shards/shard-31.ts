@@ -625,6 +625,7 @@ import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMycoidMaze from "../pool/mycoid-maze.js";
 import _poolMycosynthFiend from "../pool/mycosynth-fiend.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
+import _poolMysticBarrier from "../pool/mystic-barrier.js";
 import _poolNantukoMonastery from "../pool/nantuko-monastery.js";
 import _poolNashiMoonSagesScion from "../pool/nashi-moon-sages-scion.js";
 import _poolNathanDrakeTreasureHunter from "../pool/nathan-drake-treasure-hunter.js";
@@ -1731,6 +1732,7 @@ const shard: CardShard = {
     _poolMycoidMaze,
     _poolMycosynthFiend,
     _poolMyojinOfBloomingDawn,
+    _poolMysticBarrier,
     _poolNantukoMonastery,
     _poolNashiMoonSagesScion,
     _poolNathanDrakeTreasureHunter,

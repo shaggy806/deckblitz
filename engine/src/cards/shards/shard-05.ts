@@ -78,6 +78,7 @@ import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
 import _poolBaronSengir from "../pool/baron-sengir.js";
 import _poolBarrelingAttack from "../pool/barreling-attack.js";
+import _poolBarroomBrawl from "../pool/barroom-brawl.js";
 import _poolBasalThrull from "../pool/basal-thrull.js";
 import _poolBasilicaBellHaunt from "../pool/basilica-bell-haunt.js";
 import _poolBasilicaScreecher from "../pool/basilica-screecher.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolBarktoothWarbeard,
     _poolBaronSengir,
     _poolBarrelingAttack,
+    _poolBarroomBrawl,
     _poolBasalThrull,
     _poolBasilicaBellHaunt,
     _poolBasilicaScreecher,

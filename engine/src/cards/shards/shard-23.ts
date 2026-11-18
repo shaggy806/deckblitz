@@ -179,6 +179,7 @@ import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCorruptOfficial from "../pool/corrupt-official.js";
+import _poolCorruptedResolve from "../pool/corrupted-resolve.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCounterlash from "../pool/counterlash.js";
 import _poolCovetousElegy from "../pool/covetous-elegy.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolCoolButRude,
     _poolCoordinatedCharge,
     _poolCorruptOfficial,
+    _poolCorruptedResolve,
     _poolCostumeCloset,
     _poolCounterlash,
     _poolCovetousElegy,

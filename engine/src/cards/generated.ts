@@ -2146,6 +2146,7 @@ import _poolBarrinSUnmaking from "./pool/barrin-s-unmaking.js";
 import _poolBarrinTolarianArchmage from "./pool/barrin-tolarian-archmage.js";
 import _poolBarrinsCodex from "./pool/barrins-codex.js";
 import _poolBarrinsSpite from "./pool/barrins-spite.js";
+import _poolBarroomBrawl from "./pool/barroom-brawl.js";
 import _poolBarrowBlade from "./pool/barrow-blade.js";
 import _poolBarrowGhoul from "./pool/barrow-ghoul.js";
 import _poolBarrowNaughty from "./pool/barrow-naughty.js";
@@ -5478,6 +5479,7 @@ import _poolCorruptedConviction from "./pool/corrupted-conviction.js";
 import _poolCorruptedCrossroads from "./pool/corrupted-crossroads.js";
 import _poolCorruptedGrafstone from "./pool/corrupted-grafstone.js";
 import _poolCorruptedHarvester from "./pool/corrupted-harvester.js";
+import _poolCorruptedResolve from "./pool/corrupted-resolve.js";
 import _poolCorruptedRoots from "./pool/corrupted-roots.js";
 import _poolCorruptedShapeshifter from "./pool/corrupted-shapeshifter.js";
 import _poolCorruptedZendikon from "./pool/corrupted-zendikon.js";
@@ -8623,6 +8625,7 @@ import _poolEnvoyOfTheAncestors from "./pool/envoy-of-the-ancestors.js";
 import _poolEomerKingOfRohan from "./pool/eomer-king-of-rohan.js";
 import _poolEomerMarshalOfRohan from "./pool/eomer-marshal-of-rohan.js";
 import _poolEomerOfTheRiddermark from "./pool/eomer-of-the-riddermark.js";
+import _poolEonFrolicker from "./pool/eon-frolicker.js";
 import _poolEonHub from "./pool/eon-hub.js";
 import _poolEowynFearlessKnight from "./pool/eowyn-fearless-knight.js";
 import _poolEowynLadyOfRohan from "./pool/eowyn-lady-of-rohan.js";
@@ -18413,6 +18416,7 @@ import _poolMysteriousStranger from "./pool/mysterious-stranger.js";
 import _poolMysteriousTome from "./pool/mysterious-tome.js";
 import _poolMysteryKey from "./pool/mystery-key.js";
 import _poolMysticArchaeologist from "./pool/mystic-archaeologist.js";
+import _poolMysticBarrier from "./pool/mystic-barrier.js";
 import _poolMysticCompass from "./pool/mystic-compass.js";
 import _poolMysticConfluence from "./pool/mystic-confluence.js";
 import _poolMysticCrusader from "./pool/mystic-crusader.js";
@@ -35626,6 +35630,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBarrinTolarianArchmage,
   _poolBarrinsCodex,
   _poolBarrinsSpite,
+  _poolBarroomBrawl,
   _poolBarrowBlade,
   _poolBarrowGhoul,
   _poolBarrowNaughty,
@@ -38958,6 +38963,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCorruptedCrossroads,
   _poolCorruptedGrafstone,
   _poolCorruptedHarvester,
+  _poolCorruptedResolve,
   _poolCorruptedRoots,
   _poolCorruptedShapeshifter,
   _poolCorruptedZendikon,
@@ -42103,6 +42109,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEomerKingOfRohan,
   _poolEomerMarshalOfRohan,
   _poolEomerOfTheRiddermark,
+  _poolEonFrolicker,
   _poolEonHub,
   _poolEowynFearlessKnight,
   _poolEowynLadyOfRohan,
@@ -51893,6 +51900,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMysteriousTome,
   _poolMysteryKey,
   _poolMysticArchaeologist,
+  _poolMysticBarrier,
   _poolMysticCompass,
   _poolMysticConfluence,
   _poolMysticCrusader,
@@ -69119,6 +69127,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/barrin-tolarian-archmage": _poolBarrinTolarianArchmage,
   "pool/barrins-codex": _poolBarrinsCodex,
   "pool/barrins-spite": _poolBarrinsSpite,
+  "pool/barroom-brawl": _poolBarroomBrawl,
   "pool/barrow-blade": _poolBarrowBlade,
   "pool/barrow-ghoul": _poolBarrowGhoul,
   "pool/barrow-naughty": _poolBarrowNaughty,
@@ -72451,6 +72460,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/corrupted-crossroads": _poolCorruptedCrossroads,
   "pool/corrupted-grafstone": _poolCorruptedGrafstone,
   "pool/corrupted-harvester": _poolCorruptedHarvester,
+  "pool/corrupted-resolve": _poolCorruptedResolve,
   "pool/corrupted-roots": _poolCorruptedRoots,
   "pool/corrupted-shapeshifter": _poolCorruptedShapeshifter,
   "pool/corrupted-zendikon": _poolCorruptedZendikon,
@@ -75596,6 +75606,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/eomer-king-of-rohan": _poolEomerKingOfRohan,
   "pool/eomer-marshal-of-rohan": _poolEomerMarshalOfRohan,
   "pool/eomer-of-the-riddermark": _poolEomerOfTheRiddermark,
+  "pool/eon-frolicker": _poolEonFrolicker,
   "pool/eon-hub": _poolEonHub,
   "pool/eowyn-fearless-knight": _poolEowynFearlessKnight,
   "pool/eowyn-lady-of-rohan": _poolEowynLadyOfRohan,
@@ -85386,6 +85397,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mysterious-tome": _poolMysteriousTome,
   "pool/mystery-key": _poolMysteryKey,
   "pool/mystic-archaeologist": _poolMysticArchaeologist,
+  "pool/mystic-barrier": _poolMysticBarrier,
   "pool/mystic-compass": _poolMysticCompass,
   "pool/mystic-confluence": _poolMysticConfluence,
   "pool/mystic-crusader": _poolMysticCrusader,
