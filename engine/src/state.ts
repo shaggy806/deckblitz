@@ -125,6 +125,10 @@ export interface ControlEffect {
   readonly timestamp: number;
   /** Act of Treason's "until end of turn" — ends in the cleanup step. */
   readonly untilEndOfTurn: boolean;
+  /** "Until end of combat" (Tahngarth, First Mate): ends at the end of the
+   * combat phase (rule 500.5a) — `untilEndOfTurn` too, so cleanup ends it at
+   * the latest. */
+  readonly untilEndOfCombat?: true;
   /** The event it was made at — the `"control-effect"` this-way read. */
   readonly madeAtSeq?: number;
   /** Made by "put it onto the battlefield under your control" rather than a

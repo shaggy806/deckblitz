@@ -202,6 +202,7 @@
     "cost:spell-additional-cost-remove-counters",
     "effect:put-into-combat-attacking",
     "amount:defending-player-of-each-attacker",
+    "effect:put-into-combat-attacking-among-defenders",
     "effect:extra-combat-after-this-main-only-chosen-attack",
     "filter:player-other-than-owner",
     "filter:attached-to-enchanted-player",

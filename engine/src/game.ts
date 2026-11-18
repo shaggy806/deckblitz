@@ -13515,6 +13515,22 @@ export class Game {
     if (this.state.playerControl?.some((c) => c.during === "next-combat" && c.began !== undefined) === true) {
       this.state.playerControl = this.state.playerControl.filter((c) => c.during !== "next-combat" || c.began === undefined);
     }
+    // "Gain control of Tahngarth until end of combat": control falls to the
+    // latest effect still standing, else the owner (rule 613.7).
+    let controlEnded = false;
+    for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
+      const object = this.state.objects[id];
+      if (object.controlEffects?.some((e) => e.untilEndOfCombat === true) !== true) continue;
+      const left = object.controlEffects.filter((e) => e.untilEndOfCombat !== true);
+      if (left.length > 0) object.controlEffects = left;
+      else delete object.controlEffects;
+      object.controlEndsAtCleanup = left.some((e) => e.untilEndOfTurn);
+      controlEnded = true;
+    }
+    if (controlEnded) {
+      invalidateComputedCache();
+      this.recomputeControl();
+    }
     const expired: ObjectId[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
@@ -43549,6 +43565,10 @@ export class Game {
           });
           return;
         }
+        if (until === "until-end-of-combat") {
+          this.gainControlByEffect(player, target, true, false, { untilEndOfCombat: true });
+          return;
+        }
         if (until !== undefined) {
           this.gainControlByEffect(player, target, false, false, { untilPoint: untilPointOf(until, controller) });
           return;
@@ -57734,8 +57754,26 @@ controlledBy,
     if (!inCombat || controller !== this.activePlayer) return;
     const defenders = this.legalDefenders(controller);
     let options: (PlayerId | ObjectId)[];
+    let chooser = controller;
     if (how === "choose") {
       options = defenders;
+    } else if ("amongAttacked" in how) {
+      // "Choose a player or planeswalker that opponent is attacking"
+      // (Tahngarth, First Mate): what another creature is attacking now — a
+      // player, or a planeswalker, never a battle — chosen by the effect's
+      // controller, as the card says (508.4).
+      const attacked = new Set<PlayerId | ObjectId>();
+      for (const id of this.currentAttackers()) {
+        const target = this.state.objects[id].attacking;
+        if (target !== null && !ids.includes(id)) attacked.add(target);
+      }
+      options = defenders.filter(
+        (d) =>
+          attacked.has(d) &&
+          (this.state.players[d as PlayerId] !== undefined ||
+            effectiveTypes(this.state, this.registry, this.state.objects[d as ObjectId]).includes("planeswalker")),
+      );
+      chooser = how.chooser;
     } else if ("defender" in how) {
       // That one, if it can still be attacked: a player still in the game, a
       // planeswalker a defending player still controls (rule 508.4a).
@@ -57764,7 +57802,7 @@ controlledBy,
     if (choosing.length > 0) {
       const source = this.state.decisionSource ?? undefined;
       (this.state.pendingEnterAttacking ??= []).push({
-        player: controller,
+        player: chooser,
         creatures: choosing,
         ...(source !== undefined ? { source } : {}),
       });
@@ -63094,6 +63132,9 @@ controlledBy,
       readonly whileSource?: WhileSource;
       /** "Until the end of your next turn". */
       readonly untilPoint?: UntilPoint;
+      /** "Until end of combat" — `ControlEffect.untilEndOfCombat`, with
+       * `untilEndOfTurn`. */
+      readonly untilEndOfCombat?: true;
       /** "For as long as it [matches]" — `ControlEffect.whileIt`. */
       readonly whileIt?: CardFilter;
       /** "For as long as they're the monarch" — `ControlEffect.whileMonarch`. */
@@ -63138,6 +63179,7 @@ controlledBy,
       ...(entered ? { entered: true } : {}),
       ...(whileSource !== undefined ? { whileSource } : {}),
       ...(opts.untilPoint !== undefined ? { untilPoint: opts.untilPoint } : {}),
+      ...(opts.untilEndOfCombat === true ? { untilEndOfCombat: true as const } : {}),
       ...(whileIt !== undefined ? { whileIt } : {}),
       ...(whileMonarch !== undefined ? { whileMonarch } : {}),
     };
@@ -63158,6 +63200,8 @@ controlledBy,
         return e.untilEndOfTurn || JSON.stringify(e.untilPoint) === JSON.stringify(opts.untilPoint);
       }
       if (!untilEndOfTurn && whileSource === undefined) return true;
+      // One until end of combat outlasts nothing but another of its kind.
+      if (opts.untilEndOfCombat === true) return e.untilEndOfCombat === true;
       if (untilEndOfTurn) return e.untilEndOfTurn;
       return e.whileSource !== undefined && e.whileSource.id === whileSource!.id;
     };

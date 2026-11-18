@@ -2519,16 +2519,27 @@ export type ChooserRef =
  */
 export type EnterAttacking =
   | "choose"
-  | { readonly player: PlayerRef; readonly orTheirPlaneswalker?: boolean };
+  | { readonly player: PlayerRef; readonly orTheirPlaneswalker?: boolean }
+  /**
+   * "**Choose a player or planeswalker that opponent is attacking.** ~ is
+   * attacking that player or planeswalker" (Tahngarth, First Mate): the
+   * effect's controller chooses (the card says who, 508.4's "unless the
+   * effect … specifies"), not the creature's, among the players and
+   * planeswalkers at least one other creature is attacking as it resolves —
+   * never a battle, and never one every attacker has since stopped
+   * attacking (the rulings). With nothing to choose it isn't attacking.
+   */
+  | { readonly amongAttacked: true };
 
 /** {@link EnterAttacking} with its player resolved, as `Game` takes it —
  * or `defender`, one exact player, planeswalker or battle (ninjutsu's "the
  * same … as the creature that was returned", rule 702.49c), attacked only
- * if it can still be (508.4a). */
+ * if it can still be (508.4a). `amongAttacked` carries who chooses. */
 export type ResolvedEnterAttacking =
   | "choose"
   | { readonly player: PlayerId | undefined; readonly orTheirPlaneswalker: boolean }
-  | { readonly defender: PlayerId | ObjectId };
+  | { readonly defender: PlayerId | ObjectId }
+  | { readonly amongAttacked: true; readonly chooser: PlayerId };
 
 /** How a melded permanent enters, when its `meld` says: `tapped`, and
  * `attacking` as authored (kept for the effect asked again once a partner is
@@ -5390,8 +5401,12 @@ export type EffectSpec =
        * would begin. With `whileSourceTapped`, both (Rubinia Soulsinger). */
       readonly whileYouControlSource?: boolean;
       /** "Gain control of that permanent **until the end of your next turn**"
-       * (Stilt-Man, Towering Terror). With `untilEndOfTurn: false`. */
-      readonly until?: PointDuration;
+       * (Stilt-Man, Towering Terror). With `untilEndOfTurn: false`.
+       * `"until-end-of-combat"`: "that opponent gain[s] control of Tahngarth
+       * **until end of combat**" (Tahngarth, First Mate) — it ends at the end
+       * of the combat phase (rules 500.5a, 511.2), or at cleanup at the
+       * latest. */
+      readonly until?: PointDuration | "until-end-of-combat";
       /** "…for as long as **it has a shield counter on it**" (Shield Broker:
        * `{ counters: { kind: "shield", compare: { op: "gte", n: 1 } } }`), "…for
        * as long as **that creature is enchanted**" (Rootwater Matriarch:
@@ -14200,7 +14215,7 @@ export interface EffectApi {
     whileSource?: boolean,
     whileSourceTapped?: boolean,
     whileYouControlSource?: boolean,
-    until?: PointDuration,
+    until?: PointDuration | "until-end-of-combat",
     whileIt?: CardFilter,
     /** "For as long as [this player] is the monarch". */
     whileMonarch?: PlayerId,
@@ -19133,6 +19148,7 @@ function resolveEnterAttacking(
   ctx: ResolutionContext,
 ): ResolvedEnterAttacking | undefined {
   if (how === undefined || how === "choose") return how;
+  if ("amongAttacked" in how) return { amongAttacked: true, chooser: ctx.controller };
   return { player: resolvePlayerRef(how.player, ctx), orTheirPlaneswalker: how.orTheirPlaneswalker === true };
 }
 

@@ -511,13 +511,18 @@ export interface AttackTargetChoice {
  * The default answer to what creatures entering attacking attack: the
  * opponent with the least life among each one's options — damage finishes a
  * player sooner than it spreads — and a planeswalker only when no player is
- * on offer.
+ * on offer. Choosing for a creature someone else now controls (Tahngarth,
+ * First Mate), never the chooser or a planeswalker of theirs while anything
+ * else is on offer.
  */
 export function attackLowestLife(
   view: ControllerView,
   creatures: readonly EnterAttackingChoice[],
 ): readonly AttackTargetChoice[] {
-  return creatures.map(({ object, options }) => {
+  const mine = (o: PlayerId | ObjectId): boolean => o === view.player || view.state.objects[o as ObjectId]?.controller === view.player;
+  return creatures.map(({ object, options: offered }) => {
+    const others = offered.filter((o) => !mine(o));
+    const options = others.length > 0 ? others : offered;
     const players = options.filter((o) => view.state.players[o as PlayerId] !== undefined) as PlayerId[];
     const pick =
       players.length > 0
