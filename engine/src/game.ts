@@ -28073,7 +28073,13 @@ export class Game {
     }
     if (ability.cost.do !== undefined) {
       const act = ability.cost.do;
-      const payableAt = (at: number): boolean => costActPayable(act, this.makeResolutionContext(sourceId, player, [], at));
+      // A granted ability's act may name its granter — Fishing Pole's "Tap
+      // Fishing Pole" (rule 201.5a): read it as the paid act will (its stack
+      // object's `granter`), while it's still that permanent (400.7).
+      const granter = granterOfRef(this.activatedRefFor(sourceId, abilityIndex));
+      const actRefs: LastKnownRefs = granter === undefined ? {} : { granter };
+      const payableAt = (at: number): boolean =>
+        costActPayable(act, this.makeResolutionContext(sourceId, player, [], at, 0, undefined, 1, 0, [], actRefs));
       // No X announced yet, for an act whose X is a sum it must reach exactly
       // ("with total mana value X"): whatever X would pay, as far as it goes.
       const anyX =

@@ -3045,6 +3045,11 @@ export function parseTrigger(clause) {
   if (/^Whenever the final chapter ability of a Saga you control triggers$/.test(c)) {
     return [{ on: "event", event: "final-chapter-triggers", who: "you-control" }];
   }
+  // Rule 701.26b, any untapping: inspired (Pain Seer), and "whenever equipped
+  // creature becomes untapped" (Fishing Pole).
+  if ((m = /^Whenever (~|this (?:creature|artifact|land|permanent)|equipped creature|enchanted (?:creature|land|permanent)) becomes untapped$/.exec(c))) {
+    return [{ on: "event", event: "becomes-untapped", who: /^(?:equipped|enchanted)/.test(m[1]) ? "attached" : "self" }];
+  }
   // Rule 502.3: your untap step untapping it (The Ninth Doctor).
   if (/^Whenever (?:~|this (?:creature|artifact|land|permanent)) becomes untapped during your untap step$/.test(c)) {
     return [{ on: "event", event: "untaps-during-untap-step", who: "self", by: "you" }];
@@ -12461,6 +12466,30 @@ export function parseEffect(text, outer) {
       skip = fromHand.used - 1;
       continue;
     }
+    // "Remove a +1/+1 counter from ~. If you do, create a 2/2 black Zombie
+    // creature token." (Noosegraf Mob, Fishing Pole): the rest only once the
+    // counter comes off — none there, or the permanent gone, nothing.
+    const removeM = new RegExp(`^Remove ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? from ~\\.$`, "i").exec(sentence);
+    const ifRemovedM = removeM === null ? null : /^if you do, (.+)$/i.exec(sentences[i + 1] ?? "");
+    if (removeM !== null && ifRemovedM !== null) {
+      const n = numberOf(removeM[1]);
+      const then = typeof n !== "number" ? null : parseSentence(`${ifRemovedM[1][0].toUpperCase()}${ifRemovedM[1].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const counter = removeM[2].toLowerCase();
+        const effect = {
+          kind: "conditional",
+          condition: {
+            kind: "all",
+            of: [{ kind: "source-on-battlefield" }, { kind: "self-counters", counter, compare: { op: "gte", n } }],
+          },
+          then: { kind: "sequence", effects: [{ kind: "remove-counter", target: "source", counter, amount: n }, then] },
+        };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        skip = 1;
+        continue;
+      }
+    }
     // "Sacrifice ~. If you do, ~ deals 10 damage to that player." (Booby
     // Trap): the damage hangs on the sacrifice (`sacrifice-source`'s `then`),
     // dealt by the permanent as it last existed.
@@ -20410,14 +20439,17 @@ function granterNamingGrant(face, raw, ctx) {
   const sacrificeGranter = parts.includes(`Sacrifice ${G}`);
   // "{T}, Unattach Leonin Bola" (rule 701.3d): nothing else to pay is fine.
   const unattachGranter = parts.includes(`Unattach ${G}`);
-  const costParts = parts.filter((p) => p !== `Sacrifice ${G}` && p !== `Unattach ${G}`);
+  // "{1}, {T}, Tap Fishing Pole": the cost act of tapping the granter.
+  const tapGranter = parts.includes(`Tap ${G}`);
+  const costParts = parts.filter((p) => p !== `Sacrifice ${G}` && p !== `Unattach ${G}` && p !== `Tap ${G}`);
   const cost = costParts.join(", ");
   // Each sentence naming the granter, read as the bearer's and then
-  // pointed at the granter: "[it] deals …" (the damage's source) and
-  // "Return [it] to its owner's hand".
+  // pointed at the granter: "[it] deals …" (the damage's source),
+  // "Return [it] to its owner's hand" and "Put a … counter on [it]".
   const sentences = sentencesOf(s.slice(colon + 2));
   const fromGranter = new Set();
   const returnGranter = new Set();
+  const counterOnGranter = new Set();
   const rewritten = sentences.map((sentence, i) => {
     // "It deals" is the granter too (Razor Boomerang's ruling).
     const deals = new RegExp(`^(?:${G}|It) deals (.+)$`).exec(sentence);
@@ -20429,9 +20461,14 @@ function granterNamingGrant(face, raw, ctx) {
       returnGranter.add(i);
       return "Return this creature to its owner's hand.";
     }
+    const counter = new RegExp(`^Put (.+?) counters? on ${G}\\.$`).exec(sentence);
+    if (counter !== null) {
+      counterOnGranter.add(i);
+      return sentence.replace(G, "this creature");
+    }
     return sentence;
   });
-  if ((cost === "" && !unattachGranter) || cost.includes(G) || rewritten.some((r) => r.includes(G))) return null;
+  if ((cost === "" && !unattachGranter && !tapGranter) || cost.includes(G) || rewritten.some((r) => r.includes(G))) return null;
   // Blinding Powder's cost is the unattach alone: read with a stand-in.
   const read = parseFace({ name: "Granted Bearer", type_line: "Creature", oracle_text: `${cost === "" ? "{0}" : cost}: ${rewritten.join(" ")}` }, ctx);
   if (!read.complete || read.activated.length !== 1 || read.static.length + read.triggered.length + read.keywords.length > 0) return null;
@@ -20443,7 +20480,9 @@ function granterNamingGrant(face, raw, ctx) {
       ? effect?.kind === "damage" && effect.from === undefined ? { ...effect, from: "granter" } : null
       : returnGranter.has(i)
         ? effect?.kind === "return-to-hand" && effect.target === "source" ? { ...effect, target: "granter" } : null
-        : effect;
+        : counterOnGranter.has(i)
+          ? effect?.kind === "add-counter" && effect.target === "source" ? { ...effect, target: "granter" } : null
+          : effect;
   let effect;
   if (sentences.length === 1) effect = patch(ability.effect, 0);
   else if (ability.effect?.kind === "sequence" && ability.effect.effects.length === sentences.length) {
@@ -20451,6 +20490,8 @@ function granterNamingGrant(face, raw, ctx) {
     effect = effects.some((e) => e === null) ? null : { ...ability.effect, effects };
   } else effect = null;
   if (effect === null) return null;
+  // One cost act at a time: a tap of the granter beside another isn't read.
+  if (tapGranter && ability.cost.do !== undefined) return null;
   return {
     affects: { scope: "attached" },
     grantsActivated: [
@@ -20461,6 +20502,7 @@ function granterNamingGrant(face, raw, ctx) {
           ...(cost === "" ? { mana: null } : {}),
           ...(sacrificeGranter ? { sacrifice: "granter" } : {}),
           ...(unattachGranter ? { unattach: "granter" } : {}),
+          ...(tapGranter ? { do: { kind: "tap", target: "granter" } } : {}),
         },
         effect,
         text: inner,

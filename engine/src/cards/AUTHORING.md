@@ -4821,7 +4821,9 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   target: "source" }` (Shigeki), `{ kind: "discard-hand", who: "you" }` (Slate of
   Ancestry: an empty hand is a legal payment), `{ kind: "mill", target: "you", amount: 1
   }` (Millikin), `{ kind: "exile-from-library", amount: 1 }`, `{ kind: "put-on-library",
-  target: "source", position: "bottom" }`, `{ kind: "pay-energy", amount: "x" }` (X
+  target: "source", position: "bottom" }`, `{ kind: "tap", target: "granter" }` (Fishing
+  Pole's granted "Tap Fishing Pole": the granting permanent, payable while it's untapped),
+  `{ kind: "pay-energy", amount: "x" }` (X
   announced, capped by the energy there is), a `look-and-choose` from the hand, or
   `forageCost()` (only the ways that can be paid are offered). Several steps are a
   `sequence`. A step moving a card to or from a library keeps the ability from being a

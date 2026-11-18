@@ -2987,7 +2987,8 @@
   "trigger:dealt-damage-by-attacking-creature",
   "cost:exile-from-any-graveyard",
   "cost:exile-from-any-graveyard",
-  "cost:crew-alternative-remove-loyalty"
+  "cost:crew-alternative-remove-loyalty",
+  "cost:tap-granter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

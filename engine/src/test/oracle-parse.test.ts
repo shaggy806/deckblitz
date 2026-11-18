@@ -9735,13 +9735,22 @@ describe("the card discarded to pay a cost", () => {
       "{R}{W}, Unattach this Equipment: Draw a card.",
     );
     expect(sunforger.activated[0].cost).toEqual({ mana: "{R}{W}", tap: false, unattach: "self" });
-    // A granter named any other way is left to a person.
+    // Tapping the granter is the cost act `tap` of `"granter"`, and a counter
+    // put on it is the granter's (Fishing Pole).
     const pole = face(
       "Fishing Pole",
       "Artifact — Equipment",
       "Equipped creature has \"{1}, {T}, Tap Fishing Pole: Put a bait counter on Fishing Pole.\"",
     );
-    expect(pole.complete).toBe(false);
+    expect(pole.complete).toBe(true);
+    expect(pole.static[0].grantsActivated[0].cost).toEqual({ mana: "{1}", tap: true, do: { kind: "tap", target: "granter" } });
+    // A granter named any other way is left to a person.
+    const shown = face(
+      "Shown Pole",
+      "Artifact — Equipment",
+      "Equipped creature has \"{1}, {T}: Draw a card for each card named Shown Pole you control.\"",
+    );
+    expect(shown.complete).toBe(false);
   });
 
   it("leaves a discard the effect itself makes to a person", () => {
@@ -22971,5 +22980,41 @@ describe("an alternative cost for a Vehicle's own crew cost (Heart of Kiran)", (
       costText: "Remove a loyalty counter from a planeswalker you control",
     });
     expect(heart.complete).toBe(true);
+  });
+});
+
+describe("tapping the granter as a granted ability's cost (Fishing Pole)", () => {
+  it("drafts the grant, the untap trigger and its 'if you do'", () => {
+    const pole = parseFace(
+      {
+        name: "Fishing Pole",
+        type_line: "Artifact — Equipment",
+        mana_cost: "{1}",
+        colors: [],
+        oracle_text:
+          'Equipped creature has "{1}, {T}, Tap Fishing Pole: Put a bait counter on Fishing Pole."\nWhenever equipped creature becomes untapped, remove a bait counter from this Equipment. If you do, create a 1/1 blue Fish creature token.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)',
+      },
+      { tokenFor: () => "Fish Token" },
+    );
+    expect(pole.static[0].grantsActivated?.[0]).toMatchObject({
+      cost: { mana: "{1}", tap: true, do: { kind: "tap", target: "granter" } },
+      effect: { kind: "add-counter", target: "granter", counter: "bait", amount: 1 },
+    });
+    expect(pole.triggered[0].trigger).toEqual({ on: "event", event: "becomes-untapped", who: "attached" });
+    expect(pole.triggered[0].effect).toEqual({
+      kind: "conditional",
+      condition: {
+        kind: "all",
+        of: [{ kind: "source-on-battlefield" }, { kind: "self-counters", counter: "bait", compare: { op: "gte", n: 1 } }],
+      },
+      then: {
+        kind: "sequence",
+        effects: [
+          { kind: "remove-counter", target: "source", counter: "bait", amount: 1 },
+          { kind: "create-token", token: "Fish Token", count: 1 },
+        ],
+      },
+    });
+    expect(pole.complete).toBe(true);
   });
 });
