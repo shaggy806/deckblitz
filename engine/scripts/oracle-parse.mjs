@@ -3039,7 +3039,11 @@ export function parseTrigger(clause) {
   if (/^Whenever a spell or ability an opponent controls causes you to discard a card$/.test(c)) {
     return [{ on: "discards", who: "you", byOpponent: true, perCard: true }];
   }
-  if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
+  // "… for the first time each turn" (Whispering Snitch): the timing wrapper,
+  // counting the journal's surveils (the row's `journaledIf`).
+  if ((m = /^Whenever you surveil( for the first time each turn)?$/.exec(c))) {
+    return [{ on: "event", event: "surveils", who: "you", ...(m[1] ? { firstTimeEachTurn: true } : {}) }];
+  }
   // Rule 119.4: any payment of life (Font of Agonies).
   if (/^Whenever you pay life$/.test(c)) return [{ on: "event", event: "pays-life", who: "you" }];
   // Rule 702.24a: announced as the upkeep's "if you don't" begins (Thought
@@ -8500,6 +8504,17 @@ export function parseSentence(sentence, ctx) {
       effects: [
         { kind: "damage", amount: amount(m[1]), target: slot(m[2]) },
         { kind: "gain-life", amount: amount(m[3]) },
+      ],
+    };
+  }
+  // "This creature deals 1 damage to each opponent and you gain 1 life"
+  // (Whispering Snitch, Grasping Thrull).
+  if ((m = re(`(?:~|it) deals ${N} damage to each opponent and you gain ${N} life`).exec(s)) && (!/^it /i.test(s) || ctx.it === "source")) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: amount(m[1]), who: "each-opponent" },
+        { kind: "gain-life", amount: amount(m[2]) },
       ],
     };
   }

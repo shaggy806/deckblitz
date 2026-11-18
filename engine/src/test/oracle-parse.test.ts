@@ -23906,4 +23906,25 @@ describe("a library search that exiles its finds (Kaho, Minamo Historian; Myr In
     );
     expect(gau.triggered[0].condition).toEqual({ kind: "turn-stat", stat: "cards-left-graveyard", who: "you", atLeast: 1 });
   });
+
+  it("reads Whispering Snitch's first surveil each turn, and its drain", () => {
+    const snitch = parseFace(
+      {
+        name: "Whispering Snitch",
+        type_line: "Creature — Vampire Rogue",
+        mana_cost: "{1}{B}",
+        oracle_text: "Whenever you surveil for the first time each turn, this creature deals 1 damage to each opponent and you gain 1 life.",
+      },
+      { tokenFor: () => null },
+    ) as unknown as { complete: boolean; triggered: { trigger: unknown; effect: unknown }[] };
+    expect(snitch.complete).toBe(true);
+    expect(snitch.triggered[0].trigger).toEqual({ on: "event", event: "surveils", who: "you", firstTimeEachTurn: true });
+    expect(snitch.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: 1, who: "each-opponent" },
+        { kind: "gain-life", amount: 1 },
+      ],
+    });
+  });
 });

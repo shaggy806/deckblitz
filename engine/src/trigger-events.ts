@@ -17,7 +17,7 @@
 
 import type { TriggerSpec } from "./abilities.js";
 import type { GameEvent } from "./events.js";
-import type { JournalKind } from "./journal.js";
+import type { JournalEntry, JournalKind } from "./journal.js";
 import { rollOfEvent } from "./random-results.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 
@@ -69,6 +69,11 @@ export interface TriggerEventRow<T extends GameEvent["type"] = GameEvent["type"]
    * wrapper ("for the first time each turn"); the act journals itself just
    * before it emits. Absent, the wrapper can't count it. */
   readonly journaled?: JournalKind;
+  /** Which of the `journaled` kind's entries are this event, where the kind
+   * records more than it — a surveil's `scried` entry (`how: "surveil"`), not
+   * a scry's: "whenever you surveil for the first time each turn" (Whispering
+   * Snitch). Absent, every entry of the kind is. */
+  journaledIf?(entry: JournalEntry): boolean;
 }
 
 function row<T extends GameEvent["type"]>(r: TriggerEventRow<T>): TriggerEventRow {
@@ -199,8 +204,17 @@ export const TRIGGER_EVENTS = {
    * both, one ability written as two entries (`sameAbilityAs`). */
   "enters-attacking": row({ type: "entered-attacking", object: (e) => e.object }),
   /** "Whenever you surveil" (rule 701.25) — once per surveil, however many
-   * cards; one of 0 isn't one. The value is how many were looked at. */
-  surveils: row({ type: "scried", when: (e) => e.mode === "surveil", player: (e) => e.player, amount: (e) => e.looked }),
+   * cards; one of 0 isn't one. The value is how many were looked at.
+   * Journaled as a `scried` entry of `how: "surveil"`, for "for the first
+   * time each turn" (Whispering Snitch: surveils before it entered count). */
+  surveils: row({
+    type: "scried",
+    when: (e) => e.mode === "surveil",
+    player: (e) => e.player,
+    amount: (e) => e.looked,
+    journaled: "scried",
+    journaledIf: (entry) => entry.how === "surveil",
+  }),
   /** "Whenever you choose to put one or more cards on the bottom of your
    * library while scrying" (rule 701.22a — The Temporal Anchor): a scry
    * that bottomed any; the value is how many. */

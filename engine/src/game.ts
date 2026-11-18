@@ -37823,16 +37823,19 @@ export class Game {
     switch (spec.on) {
       case "event": {
         // A row that names what it journals: this object's (in this stint),
-        // or this player's.
-        const journaled = TRIGGER_EVENTS[spec.event].journaled;
+        // or this player's — of that kind's entries, those the row says are
+        // its event (`journaledIf`: a surveil's `scried`, not a scry's).
+        const row = TRIGGER_EVENTS[spec.event];
+        const journaled = row.journaled;
         const subjects = triggerEventSubjects(spec.event, event);
         if (journaled === undefined || subjects === undefined) return undefined;
+        const isRows = (e: JournalEntry): boolean => row.journaledIf === undefined || row.journaledIf(e);
         if (subjects.objects !== undefined) {
           const [id] = subjects.objects;
           const stint = stintOf(id);
-          return count(journaled, (e) => e.object === id && e.stint === stint) - 1;
+          return count(journaled, (e) => e.object === id && e.stint === stint && isRows(e)) - 1;
         }
-        return count(journaled, (e) => e.player === subjects.player) - 1;
+        return count(journaled, (e) => e.player === subjects.player && isRows(e)) - 1;
       }
       case "step-begins":
         // "Enchanted player's first upkeep each turn" (Paradox Haze): the
