@@ -401,6 +401,7 @@ import _poolGrizzledOutcasts from "../pool/grizzled-outcasts.js";
 import _poolGuildThief from "../pool/guild-thief.js";
 import _poolHagiMob from "../pool/hagi-mob.js";
 import _poolHapatraTheDesertFang from "../pool/hapatra-the-desert-fang.js";
+import _poolHappilyEverAfter from "../pool/happily-ever-after.js";
 import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
 import _poolHarshMentor from "../pool/harsh-mentor.js";
 import _poolHarvestFear from "../pool/harvest-fear.js";
@@ -1483,6 +1484,7 @@ const shard: CardShard = {
     _poolGuildThief,
     _poolHagiMob,
     _poolHapatraTheDesertFang,
+    _poolHappilyEverAfter,
     _poolHarmattanEfreet,
     _poolHarshMentor,
     _poolHarvestFear,

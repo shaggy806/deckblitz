@@ -422,6 +422,7 @@ import _poolJandorFortunedTraveler from "../pool/jandor-fortuned-traveler.js";
 import _poolJarlOfTheForsaken from "../pool/jarl-of-the-forsaken.js";
 import _poolJetsBrainwashing from "../pool/jets-brainwashing.js";
 import _poolJohannsStopgap from "../pool/johanns-stopgap.js";
+import _poolJollyGerbils from "../pool/jolly-gerbils.js";
 import _poolJulianBashirFrontierDoctor from "../pool/julian-bashir-frontier-doctor.js";
 import _poolJungleShrine from "../pool/jungle-shrine.js";
 import _poolJunkDiver from "../pool/junk-diver.js";
@@ -1440,6 +1441,7 @@ const shard: CardShard = {
     _poolJarlOfTheForsaken,
     _poolJetsBrainwashing,
     _poolJohannsStopgap,
+    _poolJollyGerbils,
     _poolJulianBashirFrontierDoctor,
     _poolJungleShrine,
     _poolJunkDiver,

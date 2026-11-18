@@ -8,6 +8,7 @@ import _poolAberrantReturn from "../pool/aberrant-return.js";
 import _poolAbuJafar from "../pool/abu-jafar.js";
 import _poolAbzanAscendancy from "../pool/abzan-ascendancy.js";
 import _poolAdditiveEvolution from "../pool/additive-evolution.js";
+import _poolAegisOfTheLegion from "../pool/aegis-of-the-legion.js";
 import _poolAetherHelix from "../pool/aether-helix.js";
 import _poolAetherRefinery from "../pool/aether-refinery.js";
 import _poolAjanisChosen from "../pool/ajanis-chosen.js";
@@ -1039,6 +1040,7 @@ const shard: CardShard = {
     _poolAbuJafar,
     _poolAbzanAscendancy,
     _poolAdditiveEvolution,
+    _poolAegisOfTheLegion,
     _poolAetherHelix,
     _poolAetherRefinery,
     _poolAjanisChosen,

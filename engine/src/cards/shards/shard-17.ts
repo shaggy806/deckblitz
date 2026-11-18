@@ -413,6 +413,7 @@ import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
 import _poolHeraldOfTheForgotten from "../pool/herald-of-the-forgotten.js";
 import _poolHerbologyInstructor from "../pool/herbology-instructor.js";
 import _poolHexgoldSlash from "../pool/hexgold-slash.js";
+import _poolHidetsuguConsumesAll from "../pool/hidetsugu-consumes-all.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHijack from "../pool/hijack.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
@@ -1452,6 +1453,7 @@ const shard: CardShard = {
     _poolHeraldOfTheForgotten,
     _poolHerbologyInstructor,
     _poolHexgoldSlash,
+    _poolHidetsuguConsumesAll,
     _poolHighspireBellRinger,
     _poolHijack,
     _poolHollowDogs,

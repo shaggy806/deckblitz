@@ -1025,6 +1025,7 @@ import _poolVenomBlast from "../pool/venom-blast.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVesselOfNascency from "../pool/vessel-of-nascency.js";
+import _poolVesselOfTheAllConsuming from "../pool/vessel-of-the-all-consuming.js";
 import _poolVeteranBrawlers from "../pool/veteran-brawlers.js";
 import _poolVeteransReflexes from "../pool/veterans-reflexes.js";
 import _poolVex from "../pool/vex.js";
@@ -2131,6 +2132,7 @@ const shard: CardShard = {
     _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,
     _poolVesselOfNascency,
+    _poolVesselOfTheAllConsuming,
     _poolVeteranBrawlers,
     _poolVeteransReflexes,
     _poolVex,

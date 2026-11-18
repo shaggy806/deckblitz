@@ -412,6 +412,7 @@ import _poolHenrikaDomnathi from "../pool/henrika-domnathi.js";
 import _poolHenryWuIngenGeneticist from "../pool/henry-wu-ingen-geneticist.js";
 import _poolHeraldOfSlaanesh from "../pool/herald-of-slaanesh.js";
 import _poolHeraldicBanner from "../pool/heraldic-banner.js";
+import _poolHerculesOlympianHero from "../pool/hercules-olympian-hero.js";
 import _poolHeroOfThePride from "../pool/hero-of-the-pride.js";
 import _poolHeroicCharge from "../pool/heroic-charge.js";
 import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
@@ -1467,6 +1468,7 @@ const shard: CardShard = {
     _poolHenryWuIngenGeneticist,
     _poolHeraldOfSlaanesh,
     _poolHeraldicBanner,
+    _poolHerculesOlympianHero,
     _poolHeroOfThePride,
     _poolHeroicCharge,
     _poolHexhavenDuelingArena,

@@ -257,6 +257,7 @@ import _poolAegisAutomaton from "./pool/aegis-automaton.js";
 import _poolAegisOfHonor from "./pool/aegis-of-honor.js";
 import _poolAegisOfTheGods from "./pool/aegis-of-the-gods.js";
 import _poolAegisOfTheHeavens from "./pool/aegis-of-the-heavens.js";
+import _poolAegisOfTheLegion from "./pool/aegis-of-the-legion.js";
 import _poolAegisOfTheMeek from "./pool/aegis-of-the-meek.js";
 import _poolAegisSculptor from "./pool/aegis-sculptor.js";
 import _poolAegisTurtle from "./pool/aegis-turtle.js";
@@ -12424,6 +12425,7 @@ import _poolHapatraVizierOfPoisons from "./pool/hapatra-vizier-of-poisons.js";
 import _poolHapatrasMark from "./pool/hapatras-mark.js";
 import _poolHaphazardBombardment from "./pool/haphazard-bombardment.js";
 import _poolHaplessResearcher from "./pool/hapless-researcher.js";
+import _poolHappilyEverAfter from "./pool/happily-ever-after.js";
 import _poolHappyHoganBodyguard from "./pool/happy-hogan-bodyguard.js";
 import _poolHappyHoganDauntlessDriver from "./pool/happy-hogan-dauntless-driver.js";
 import _poolHarabazDruid from "./pool/harabaz-druid.js";
@@ -12834,6 +12836,7 @@ import _poolHeraldsHorn from "./pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "./pool/heralds-of-tzeentch.js";
 import _poolHerbalPoultice from "./pool/herbal-poultice.js";
 import _poolHerbologyInstructor from "./pool/herbology-instructor.js";
+import _poolHerculesOlympianHero from "./pool/hercules-olympian-hero.js";
 import _poolHerculesPrinceOfPower from "./pool/hercules-prince-of-power.js";
 import _poolHerdBaloth from "./pool/herd-baloth.js";
 import _poolHerdGnarr from "./pool/herd-gnarr.js";
@@ -12950,6 +12953,7 @@ import _poolHideousLaughter from "./pool/hideous-laughter.js";
 import _poolHideousTaskmaster from "./pool/hideous-taskmaster.js";
 import _poolHideousVisage from "./pool/hideous-visage.js";
 import _poolHidetsuguAndKairi from "./pool/hidetsugu-and-kairi.js";
+import _poolHidetsuguConsumesAll from "./pool/hidetsugu-consumes-all.js";
 import _poolHidetsuguDevouringChaos from "./pool/hidetsugu-devouring-chaos.js";
 import _poolHidetsugusSecondRite from "./pool/hidetsugus-second-rite.js";
 import _poolHieroglyphicIllumination from "./pool/hieroglyphic-illumination.js";
@@ -14587,6 +14591,7 @@ import _poolJokulhaups from "./pool/jokulhaups.js";
 import _poolJokulmorder from "./pool/jokulmorder.js";
 import _poolJolenePlunderingPugilist from "./pool/jolene-plundering-pugilist.js";
 import _poolJoleneThePlunderQueen from "./pool/jolene-the-plunder-queen.js";
+import _poolJollyGerbils from "./pool/jolly-gerbils.js";
 import _poolJolraelEmpressOfBeasts from "./pool/jolrael-empress-of-beasts.js";
 import _poolJolraelMwonvuliRecluse from "./pool/jolrael-mwonvuli-recluse.js";
 import _poolJolraelVoiceOfZhalfir from "./pool/jolrael-voice-of-zhalfir.js";
@@ -30725,6 +30730,7 @@ import _poolVesselOfEphemera from "./pool/vessel-of-ephemera.js";
 import _poolVesselOfMalignity from "./pool/vessel-of-malignity.js";
 import _poolVesselOfNascency from "./pool/vessel-of-nascency.js";
 import _poolVesselOfParamnesia from "./pool/vessel-of-paramnesia.js";
+import _poolVesselOfTheAllConsuming from "./pool/vessel-of-the-all-consuming.js";
 import _poolVesselOfVolatility from "./pool/vessel-of-volatility.js";
 import _poolVestigeOfEmrakul from "./pool/vestige-of-emrakul.js";
 import _poolVesuva from "./pool/vesuva.js";
@@ -33800,6 +33806,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAegisOfHonor,
   _poolAegisOfTheGods,
   _poolAegisOfTheHeavens,
+  _poolAegisOfTheLegion,
   _poolAegisOfTheMeek,
   _poolAegisSculptor,
   _poolAegisTurtle,
@@ -45967,6 +45974,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHapatrasMark,
   _poolHaphazardBombardment,
   _poolHaplessResearcher,
+  _poolHappilyEverAfter,
   _poolHappyHoganBodyguard,
   _poolHappyHoganDauntlessDriver,
   _poolHarabazDruid,
@@ -46377,6 +46385,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeraldsOfTzeentch,
   _poolHerbalPoultice,
   _poolHerbologyInstructor,
+  _poolHerculesOlympianHero,
   _poolHerculesPrinceOfPower,
   _poolHerdBaloth,
   _poolHerdGnarr,
@@ -46493,6 +46502,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHideousTaskmaster,
   _poolHideousVisage,
   _poolHidetsuguAndKairi,
+  _poolHidetsuguConsumesAll,
   _poolHidetsuguDevouringChaos,
   _poolHidetsugusSecondRite,
   _poolHieroglyphicIllumination,
@@ -48130,6 +48140,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJokulmorder,
   _poolJolenePlunderingPugilist,
   _poolJoleneThePlunderQueen,
+  _poolJollyGerbils,
   _poolJolraelEmpressOfBeasts,
   _poolJolraelMwonvuliRecluse,
   _poolJolraelVoiceOfZhalfir,
@@ -64268,6 +64279,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVesselOfMalignity,
   _poolVesselOfNascency,
   _poolVesselOfParamnesia,
+  _poolVesselOfTheAllConsuming,
   _poolVesselOfVolatility,
   _poolVestigeOfEmrakul,
   _poolVesuva,
@@ -67356,6 +67368,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aegis-of-honor": _poolAegisOfHonor,
   "pool/aegis-of-the-gods": _poolAegisOfTheGods,
   "pool/aegis-of-the-heavens": _poolAegisOfTheHeavens,
+  "pool/aegis-of-the-legion": _poolAegisOfTheLegion,
   "pool/aegis-of-the-meek": _poolAegisOfTheMeek,
   "pool/aegis-sculptor": _poolAegisSculptor,
   "pool/aegis-turtle": _poolAegisTurtle,
@@ -79523,6 +79536,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hapatras-mark": _poolHapatrasMark,
   "pool/haphazard-bombardment": _poolHaphazardBombardment,
   "pool/hapless-researcher": _poolHaplessResearcher,
+  "pool/happily-ever-after": _poolHappilyEverAfter,
   "pool/happy-hogan-bodyguard": _poolHappyHoganBodyguard,
   "pool/happy-hogan-dauntless-driver": _poolHappyHoganDauntlessDriver,
   "pool/harabaz-druid": _poolHarabazDruid,
@@ -79933,6 +79947,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heralds-of-tzeentch": _poolHeraldsOfTzeentch,
   "pool/herbal-poultice": _poolHerbalPoultice,
   "pool/herbology-instructor": _poolHerbologyInstructor,
+  "pool/hercules-olympian-hero": _poolHerculesOlympianHero,
   "pool/hercules-prince-of-power": _poolHerculesPrinceOfPower,
   "pool/herd-baloth": _poolHerdBaloth,
   "pool/herd-gnarr": _poolHerdGnarr,
@@ -80049,6 +80064,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hideous-taskmaster": _poolHideousTaskmaster,
   "pool/hideous-visage": _poolHideousVisage,
   "pool/hidetsugu-and-kairi": _poolHidetsuguAndKairi,
+  "pool/hidetsugu-consumes-all": _poolHidetsuguConsumesAll,
   "pool/hidetsugu-devouring-chaos": _poolHidetsuguDevouringChaos,
   "pool/hidetsugus-second-rite": _poolHidetsugusSecondRite,
   "pool/hieroglyphic-illumination": _poolHieroglyphicIllumination,
@@ -81686,6 +81702,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jokulmorder": _poolJokulmorder,
   "pool/jolene-plundering-pugilist": _poolJolenePlunderingPugilist,
   "pool/jolene-the-plunder-queen": _poolJoleneThePlunderQueen,
+  "pool/jolly-gerbils": _poolJollyGerbils,
   "pool/jolrael-empress-of-beasts": _poolJolraelEmpressOfBeasts,
   "pool/jolrael-mwonvuli-recluse": _poolJolraelMwonvuliRecluse,
   "pool/jolrael-voice-of-zhalfir": _poolJolraelVoiceOfZhalfir,
@@ -97824,6 +97841,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vessel-of-malignity": _poolVesselOfMalignity,
   "pool/vessel-of-nascency": _poolVesselOfNascency,
   "pool/vessel-of-paramnesia": _poolVesselOfParamnesia,
+  "pool/vessel-of-the-all-consuming": _poolVesselOfTheAllConsuming,
   "pool/vessel-of-volatility": _poolVesselOfVolatility,
   "pool/vestige-of-emrakul": _poolVestigeOfEmrakul,
   "pool/vesuva": _poolVesuva,

@@ -1411,6 +1411,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Venom, Lethal Protector": "https://cards.scryfall.io/art_crop/back/f/3/f3455651-e643-445e-9489-51e4e24fca4c.jpg",
   "Venture Deeper": "https://cards.scryfall.io/art_crop/back/c/e/ceb7308d-608c-4ede-9496-d795fc5bb271.jpg",
   "Vertex Paladin": "https://cards.scryfall.io/art_crop/back/6/c/6c8c9c33-569c-4b67-a18d-4cd0f18d01f4.jpg",
+  "Vessel of the All-Consuming": "https://cards.scryfall.io/art_crop/back/8/e/8e910464-329a-4de1-930a-be85b1956676.jpg",
   "Vildin-Pack Alpha": "https://cards.scryfall.io/art_crop/back/f/0/f0af234d-ce14-49ac-b877-00b0dd1f11e2.jpg",
   "Village Reavers": "https://cards.scryfall.io/art_crop/back/1/b/1bf48d2b-eb68-4f47-a80a-4751a4fa20a7.jpg",
   "Vision of the Unspeakable": "https://cards.scryfall.io/art_crop/back/e/4/e4d52701-e0dc-474e-b08f-88147200d210.jpg",
