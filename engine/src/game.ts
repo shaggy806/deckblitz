@@ -53966,7 +53966,8 @@ controlledBy,
       // one peeled off for it.
       return sameTargetRef(picked, now) ? now : this.splitTargetRef(picked);
     });
-    this.retargetStackObject(id, found.slots, answer);
+    // Drawn at random: no player chose them (Psychic Battle doesn't see it).
+    this.retargetStackObject(id, found.slots, answer, null);
   }
 
   /** Change the spell or ability `id`'s targets in `slots` to `chosen`, one
@@ -53978,8 +53979,9 @@ controlledBy,
     id: ObjectId,
     slots: readonly number[],
     chosen: ResolvedTargets,
-    /** Who chose the new targets — its controller when nobody did. */
-    chooser?: PlayerId,
+    /** Who chose the new targets (its controller when not said); `null` for
+     * targets reselected at random, which no player chose. */
+    chooser?: PlayerId | null,
     /** See `announceTargetsChosen`. */
     unseenBy?: string,
   ): void {
@@ -54009,7 +54011,7 @@ controlledBy,
     } else {
       this.announceTargeted(changed, object.controller, id, true);
     }
-    this.announceTargetsChosen(changed, chooser ?? object.controller, id, [], unseenBy);
+    if (chooser !== null) this.announceTargetsChosen(changed, chooser ?? object.controller, id, [], unseenBy);
   }
 
   /** Storm (rule 702.40a): copy `sourceId` for each spell cast before it this
