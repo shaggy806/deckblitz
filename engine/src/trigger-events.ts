@@ -181,6 +181,14 @@ export const TRIGGER_EVENTS = {
   /** "Whenever you search your library" (rule 701.23): their own library
    * only (the rulings). */
   "searches-library": row({ type: "library-searched", when: (e) => e.owner === e.player, player: (e) => e.player }),
+  /** "Whenever an opponent shuffles their library" (Psychic Surgery, Cosi's
+   * Trickster — rule 701.24a): once per shuffle, the library's owner the one
+   * who shuffles it. A library of zero or one card still is (701.24e), and
+   * a search's "then shuffle" is one even with the found card kept out
+   * (701.24b); two shuffles are two (701.24f — Green Sun's Zenith's search
+   * and then itself, Psychic Surgery's ruling). "That library" is the
+   * `"trigger-player"`'s. */
+  "shuffles-library": row({ type: "library-shuffled", player: (e) => e.player }),
   /** "Whenever one or more cards are put into a library from anywhere" (Wan
    * Shi Tong, All-Knowing; `batched`): once per simultaneous move of cards
    * into libraries from other zones — never a scry, a surveil or a shuffle,

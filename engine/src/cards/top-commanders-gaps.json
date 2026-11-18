@@ -2971,7 +2971,8 @@
   "effect:separate-into-three-piles",
   "trigger:one-or-more-creatures-block",
   "filter:blocked-attacker",
-  "trigger:exiled-by-your-spell-or-ability"
+  "trigger:exiled-by-your-spell-or-ability",
+  "trigger:opponent-shuffles-library"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

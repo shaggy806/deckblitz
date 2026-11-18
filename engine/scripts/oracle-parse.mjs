@@ -3026,6 +3026,11 @@ export function parseTrigger(clause) {
   if (/^Whenever one or more cards are put into a library from anywhere$/.test(c)) {
     return [{ on: "event", event: "put-into-library", batched: true }];
   }
+  // Rule 701.24a, the library's owner shuffling it (Psychic Surgery, Cosi's
+  // Trickster).
+  if ((m = /^Whenever (an opponent|a player|you) shuffles? (?:their|your) library$/.exec(c))) {
+    return [{ on: "event", event: "shuffles-library", who: m[1] === "an opponent" ? "opponent" : m[1] === "you" ? "you" : "any" }];
+  }
   // Once each combat, as blockers are declared, if any are (Tide of War).
   if ((m = /^Whenever one or more creatures (you control )?block$/.exec(c))) {
     return [{ on: "event", event: "creatures-block", ...(m[1] === undefined ? {} : { who: "you-control" }), batched: true }];

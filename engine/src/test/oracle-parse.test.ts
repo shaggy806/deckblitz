@@ -20674,6 +20674,13 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ]);
   });
 
+  it("reads a player shuffling their library (Psychic Surgery, Cosi's Trickster)", () => {
+    expect(parseTrigger("Whenever an opponent shuffles their library")).toEqual([
+      { on: "event", event: "shuffles-library", who: "opponent" },
+    ]);
+    expect(parseTrigger("Whenever you shuffle your library")).toEqual([{ on: "event", event: "shuffles-library", who: "you" }]);
+  });
+
   it("reads creatures blocking, once a combat (Tide of War)", () => {
     expect(parseTrigger("Whenever one or more creatures block")).toEqual([
       { on: "event", event: "creatures-block", batched: true },
