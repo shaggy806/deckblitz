@@ -51908,6 +51908,13 @@ controlledBy,
    */
   private setCopiableValues(object: GameObject, values: CopyValues & { readonly copyOf: string }, ends?: CopyEnds): void {
     if (ends === undefined) {
+      // A static's copy effect on it (`copyOfChosen`) is replaced for good.
+      for (const copy of object.temporaryCopies ?? []) {
+        if (typeof copy.ends !== "object" || !("whileSource" in copy.ends)) continue;
+        const source = this.state.objects[copy.ends.whileSource.id];
+        const on = source?.staticCopyOn;
+        if (on?.id === object.id && on.stint === (object.zoneChangeCount ?? 0)) source.staticCopyOn = { ...on, superseded: true };
+      }
       delete object.temporaryCopies;
       delete object.copyBase;
     } else {
@@ -67067,6 +67074,55 @@ controlledBy,
     }
   }
 
+  /**
+   * What statics make a copy of (`StaticAbility.copyOfChosen` — Metamorphic
+   * Alteration's "enchanted creature is a copy of the chosen creature", rule
+   * 707.2): each such permanent attached to another begins its copy effect
+   * there once — the values `chosenCopy` locked in, kept as one of that
+   * permanent's `temporaryCopies` for as long as this stays attached to it
+   * (the `whileSource` end, `endWhileSourceCondition` as it comes off,
+   * `endWhileSourceEffects` as it leaves) — and again on the next permanent it
+   * becomes attached to, at that timestamp (rule 613.7e). Held off while it
+   * has lost its abilities, or is phased out (702.26f: `endWhileSourceEffects`),
+   * and begun again after. A copy effect without a duration that began on that
+   * permanent later replaces it for good (613.7a — `superseded`, marked by
+   * `setCopiableValues`), so it isn't begun again while still on that one.
+   */
+  private refreshStaticCopies(): void {
+    let changed = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const aura = this.state.objects[id];
+      if (aura?.chosenCopy === undefined || aura.attachedTo == null) continue;
+      const host = this.state.objects[aura.attachedTo];
+      if (host?.zone !== "battlefield") continue;
+      if (!this.registry.get(rulesTextName(aura)).static.some((ability) => ability.copyOfChosen === true)) continue;
+      const stint = aura.zoneChangeCount ?? 0;
+      const hostStint = host.zoneChangeCount ?? 0;
+      const ours = (ends: CopyEnds): boolean =>
+        typeof ends === "object" && "whileSource" in ends && ends.whileSource.id === id && ends.whileSource.zoneChangeCount === stint;
+      const has = host.temporaryCopies?.some((copy) => ours(copy.ends)) === true;
+      if (hasLostAbilities(this.state, this.registry, aura)) {
+        if (has) {
+          this.endTemporaryCopies(host, ours);
+          changed = true;
+        }
+        continue;
+      }
+      const on = aura.staticCopyOn;
+      if (has || (on?.id === host.id && on.stint === hostStint && on.superseded === true)) continue;
+      this.noteWhileSource(id);
+      this.setCopiableValues(
+        host,
+        { copyOf: aura.chosenCopy.copyOf, modifiers: aura.chosenCopy.modifiers.map((m) => ({ ...m })) },
+        { whileSource: { id, zoneChangeCount: stint, attachedTo: host.id } },
+      );
+      aura.staticCopyOn = { id: host.id, stint: hostStint };
+      changed = true;
+      this.emit({ type: "permanent-copied", object: host.id, copyOf: aura.chosenCopy.copyOf, became: true });
+    }
+    if (changed) invalidateComputedCache();
+  }
+
   private runStateBasedActionsUncached(): void {
     let changed = true;
     while (changed) {
@@ -67076,6 +67132,7 @@ controlledBy,
       if (this.state.awaiting !== null) return;
       changed = false;
       this.refreshStaticNames();
+      this.refreshStaticCopies();
 
       // Rule 903.9a: a commander put into a graveyard or exile since the last
       // check may go to the command zone. Its owner is asked once this check
@@ -72082,6 +72139,8 @@ controlledBy,
     delete object.otherChosenPlayer;
     delete object.secretChoice;
     delete object.chosenPermanent;
+    delete object.chosenCopy;
+    delete object.staticCopyOn;
     // A battle's protector was this stint's (rule 400.7).
     delete object.protector;
     // The "as this enters" choices made before this move (rule 614.12 —
@@ -72183,7 +72242,16 @@ controlledBy,
         // One token of a stack is chosen, so it's singled out.
         const chosen = this.state.objects[this.splitOneFromStack(picked)];
         object.chosenPermanent = { id: chosen.id, stint: chosen.zoneChangeCount ?? 0 };
-        const spec = this.registry.get(rulesTextName(object)).choosePermanentOnEnter;
+        const def = this.registry.get(rulesTextName(object));
+        // "Enchanted creature is a copy of the chosen creature" (Metamorphic
+        // Alteration): its copiable values locked in as it's chosen.
+        if (def.static.some((ability) => ability.copyOfChosen === true)) {
+          const values = this.copiableValuesOf(chosen.id, false, undefined);
+          if (values !== undefined) {
+            object.chosenCopy = { copyOf: values.copyOf, modifiers: values.modifiers.map((m) => ({ ...m, timestamp: -2 })) };
+          }
+        }
+        const spec = def.choosePermanentOnEnter;
         if (spec?.counter !== undefined) {
           this.addCounter({ kind: "object", object: chosen.id }, spec.counter, 1, false, object.controller);
         }

@@ -2977,6 +2977,20 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * Nothing while none is chosen. */
   readonly setsChosenName?: true;
   /**
+   * "Enchanted creature is a copy of the chosen creature" (Metamorphic
+   * Alteration, with `affects: { scope: "attached" }` and a
+   * `choosePermanentOnEnter`): a copy effect (layer 1, rule 707.2) on what
+   * this permanent is attached to, of the chosen permanent's copiable values
+   * locked in as it was chosen (`GameObject.chosenCopy` — the rulings: not
+   * what it becomes later, and whatever happens to it). Begun as this
+   * becomes attached to a permanent (its timestamp then, rule 613.7e), kept
+   * as one of that permanent's `temporaryCopies` for as long as this stays
+   * attached to it, and ended while this has lost its abilities
+   * (`Game.refreshStaticCopies`). A copy effect that begins later still
+   * wins (613.7a).
+   */
+  readonly copyOfChosen?: true;
+  /**
    * Toxic N granted in layer 6 (rule 702.164) — Karumonix, the Rat King's
    * "Other Rats you control have toxic 1". One more instance of toxic on each
    * affected creature, adding N to its total toxic value (702.164b) beside a

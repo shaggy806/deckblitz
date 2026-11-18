@@ -907,6 +907,18 @@ export interface GameObject {
    * {@link ObjectRef} and a static's `{ scope: "chosen" }` read.
    * Cleared on any zone change of this one. */
   chosenPermanent?: { readonly id: ObjectId; readonly stint: number };
+  /** The chosen permanent's copiable values (rule 707.2), locked in as it
+   * was chosen as this one entered — for a static's `copyOfChosen`
+   * (Metamorphic Alteration: "enchanted creature is a copy of the chosen
+   * creature"), which nothing that happens to the chosen one later changes
+   * (its rulings). Cleared on any zone change. */
+  chosenCopy?: CopyValues & { readonly copyOf: string };
+  /** The permanent this one's `copyOfChosen` copy effect was last begun on, in
+   * its stint (`Game.refreshStaticCopies`), and whether a copy effect without
+   * a duration has replaced it there for good since (`superseded`, rule
+   * 613.7a): then it isn't begun on that permanent again, only on the next
+   * this becomes attached to. Cleared on any zone change. */
+  staticCopyOn?: { readonly id: ObjectId; readonly stint: number; readonly superseded?: true };
   /** A battle's protector (rule 310.9): the player who defends it — chosen
    * as it entered (310.9a; for a Siege, one of its controller's opponents,
    * 310.12a). It's the defending player of any creature attacking it, and
