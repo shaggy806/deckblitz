@@ -6579,8 +6579,13 @@ export type EffectSpec =
        * the card chosen, as `exile`'s `mayPlay`: Psychic Intrusion's "you may
        * cast that card for as long as it remains exiled, and you may spend
        * mana as though it were mana of any color to cast that spell"
-       * (`{ duration: "while-exiled", spendAs: "any-color" }`). Not with
-       * `reveals`. Elite Spellbinder's "its owner may play it. A spell cast
+       * (`{ duration: "while-exiled", spendAs: "any-color" }`). With
+       * `reveals` too: Taster of Wares' "target opponent reveals X cards …
+       * You choose one of those cards. That player exiles it. If an instant
+       * or sorcery card is exiled this way, you may cast it for as long as
+       * you control this creature, and mana of any type can be spent" is `{
+       * duration: "while-you-control-source", filter: { typesAnyOf:
+       * ["instant", "sorcery"] }, spendAs: "any-type" }`. Elite Spellbinder's "its owner may play it. A spell cast
        * this way costs {2} more" is `{ duration: "while-exiled", play: true,
        * byOwner: true, tax: { generic: 2 } }`.
        */

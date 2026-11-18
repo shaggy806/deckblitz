@@ -43756,18 +43756,6 @@ controlledBy,
           to?.destination === "exile" && stint !== undefined && to.unlinked !== true
             ? { source, zoneChangeCount: stint }
             : undefined;
-        if (to?.reveals !== undefined) {
-          this.beginRevealFromHand(target, to.reveals.count, {
-            chooser: to.chooser ?? controller,
-            source,
-            picks: to.reveals.picks,
-            ...(filter !== undefined ? { filter } : {}),
-            ...(optional ? { optional: true as const } : {}),
-            ...(to.destination !== undefined ? { destination: to.destination } : {}),
-            ...(exileLink !== undefined ? { exileLink } : {}),
-          });
-          return;
-        }
         // "You may cast that card for as long as it remains exiled"
         // (Psychic Intrusion), as an `exile`'s `mayCast`.
         const mayPlay = to?.mayPlay;
@@ -43781,6 +43769,21 @@ controlledBy,
                 // The hand's owner owns what's in it (rule 400.3).
                 target.kind === "player" ? target.player : controller,
               );
+        if (to?.reveals !== undefined) {
+          this.beginRevealFromHand(target, to.reveals.count, {
+            chooser: to.chooser ?? controller,
+            source,
+            picks: to.reveals.picks,
+            ...(filter !== undefined ? { filter } : {}),
+            ...(optional ? { optional: true as const } : {}),
+            ...(to.destination !== undefined ? { destination: to.destination } : {}),
+            ...(exileLink !== undefined ? { exileLink } : {}),
+            // Taster of Wares' "you may cast it for as long as you control
+            // this creature": on the card the choice exiles.
+            ...(grant !== undefined && to.destination === "exile" ? { playGrant: grant } : {}),
+          });
+          return;
+        }
         // "Exile that card until this creature leaves the battlefield" (rule
         // 610.3): back to the hand it came from. With the source gone already
         // the hand is still shown, and nothing is chosen (610.3b).
@@ -48068,6 +48071,7 @@ controlledBy,
       destination: then.destination ?? "discard",
       ...(then.destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),
       ...(then.exileLink !== undefined ? { exileLink: then.exileLink } : {}),
+      ...(then.playGrant !== undefined ? { playGrant: then.playGrant } : {}),
       leftover: "stay",
     };
   }

@@ -3725,6 +3725,10 @@ export interface RevealedHandChoice {
   readonly optional?: true;
   readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
   readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+  /** With `destination: "exile"`: the permission over the card exiled —
+   * Taster of Wares' "if an instant or sorcery card is exiled this way, you
+   * may cast it for as long as you control this creature". */
+  readonly playGrant?: CardPlayPermission;
 }
 
 /**
