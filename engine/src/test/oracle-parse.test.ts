@@ -6126,6 +6126,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(leyline.effect.thenCounters).toEqual({ kind: "+1/+1", amount: { countOf: { type: "land", controlledBy: "you" } } });
   });
 
+  it("'each time target permanent would deal damage … this turn, it deals double that damage' (Overblaze)", () => {
+    const blaze = face(
+      "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.",
+      "Instant — Arcane",
+    );
+    expect(blaze.targets).toEqual(["permanent"]);
+    expect(blaze.effect).toEqual({
+      kind: "replacement-effect",
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } } },
+      duration: "end-of-turn",
+      fromObject: 0,
+    });
+    expect(blaze.complete).toBe(true);
+  });
+
   it("'any player may activate this ability' (rule 602.2) and 'unless any player pays' (Prophecy)", () => {
     const snake = face("{2}: This creature loses flying until end of turn. Any player may activate this ability.", "Creature — Snake");
     expect(snake.activated[0].anyPlayer).toBe(true);

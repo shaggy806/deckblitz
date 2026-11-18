@@ -7755,6 +7755,19 @@ export function parseSentence(sentence, ctx) {
       },
     };
   }
+  // "Each time target permanent would deal damage to a permanent or player
+  // this turn, it deals double that damage to that permanent or player
+  // instead" (Overblaze): every time this turn, the target's damage alone, in
+  // the stint it has now (`fromObject`, rule 400.7).
+  if (/^each time target (permanent|creature) would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead\.$/i.test(s)) {
+    const slot = ctx.target(/target creature/i.test(s) ? "creature" : "permanent");
+    return {
+      kind: "replacement-effect",
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } } },
+      duration: "end-of-turn",
+      fromObject: slot,
+    };
+  }
   // "This turn, each creature you control enters with an additional +1/+1
   // counter on it" (Zameck Guildmage, Combine Guildmage): Arlinn's
   // `others-enter-battlefield` for the turn (rule 611.2c).

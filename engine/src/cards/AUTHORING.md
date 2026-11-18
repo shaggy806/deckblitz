@@ -8005,7 +8005,9 @@ name, fixed as it resolves. Amounts in a `modify` are fixed as it resolves too; 
 damage" (Impulsive Maneuvers' two coin-flip outcomes) is `{ event: "would-deal-damage", combat: true, instead: { modify: {
 times: 2 } } }` / `instead: { prevent: true }` with `next: true`, `duration: "end-of-turn"` and `fromObject: "trigger-object"`:
 everything the creature deals in one combat damage step is one event, so the whole of it is changed and the shield is spent
-(first-strike damage alone, with double strike).
+(first-strike damage alone, with double strike). Without `next` it's every time: Overblaze's "each time target permanent would
+deal damage to a permanent or player this turn, it deals double that damage … instead" is `fromObject: 0` on a `"permanent"`
+target, `duration: "end-of-turn"` (the target in the stint it has as it resolves, rule 400.7).
 An `others-enter-battlefield` one that lasts (not `next`) gives each permanent entering its `counters` and `enterAs`, its filter read from the effect's controller's side, its source gone or not — Arlinn, the Pack's Hope's "until your next turn, … each creature you control enters with an additional +1/+1 counter on it"; Zameck Guildmage's "**this turn**, each creature you control enters with …" is the same with `duration: "end-of-turn"`.
 The `prevent-damage` family makes the same record.
 

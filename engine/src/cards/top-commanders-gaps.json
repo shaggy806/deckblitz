@@ -412,6 +412,7 @@
     "mechanic:devour-x",
     "effect:then-counters-read-after-create",
     "effect:token-copies-of-attachments",
+    "replacement:double-damage-from-target-this-turn",
     "bug:aura-enters-transformed-asks-enchant",
     "static:prohibit-cast-by-face",
     "effect:spell-color-change-carries-to-permanent",
