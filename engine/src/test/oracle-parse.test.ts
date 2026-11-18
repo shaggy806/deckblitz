@@ -23928,3 +23928,36 @@ describe("a library search that exiles its finds (Kaho, Minamo Historian; Myr In
     });
   });
 });
+
+describe("a graveyard card with awaken, and land creatures you control", () => {
+  it("reads Halimar Tidecaller whole", () => {
+    const tidecaller = parseFace(
+      {
+        name: "Halimar Tidecaller",
+        type_line: "Creature — Human Wizard Ally",
+        oracle_text:
+          "When this creature enters, you may return target card with awaken from your graveyard to your hand.\nLand creatures you control have flying.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(tidecaller.complete).toBe(true);
+    expect(tidecaller.triggered[0].targets).toEqual([{ kind: "card-in-graveyard", whose: "you", filter: { hasKeyword: "awaken" } }]);
+    expect(tidecaller.static[0]).toEqual({
+      affects: { scope: "filter", filter: { types: ["land", "creature"], controlledBy: "you" } },
+      grantKeywords: ["flying"],
+      text: "Land creatures you control have flying.",
+    });
+  });
+
+  it("leaves a keyword it doesn't read to a person", () => {
+    const line = parseFace(
+      {
+        name: "Test Card",
+        type_line: "Creature — Human",
+        oracle_text: "When this creature enters, return target card with escape from your graveyard to your hand.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(line.complete).toBe(false);
+  });
+});

@@ -1500,13 +1500,16 @@ function exileTargetOf(phrase) {
 
 function graveyardTargetOf(phrase) {
   // "…with mana value X plus 1" (Sidisi, Regent of the Mire): a sum on X.
-  const m = /^target (?:(.+?) )?card( with mana value X(?: plus (\d+))?)? from (your|a|an opponent's) graveyard$/i.exec(phrase);
+  // "Target card with awaken" (Halimar Tidecaller): a keyword ability read
+  // off the card's definition (`CardFilter.hasKeyword`).
+  const m = /^target (?:(.+?) )?card(?:( with mana value X(?: plus (\d+))?)| with (awaken|flashback|madness|unearth|disturb))? from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
   const parsed = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
   if (parsed === null) return undefined;
   const n = m[3] === undefined ? "x" : { amount: { sum: ["x", Number(m[3])] } };
-  const filter = m[2] === undefined ? parsed : { ...parsed, manaValue: { op: "eq", n } };
-  const whose = m[4] === "your" ? "you" : m[4] === "a" ? "any" : "opponent";
+  const valued = m[2] === undefined ? parsed : { ...parsed, manaValue: { op: "eq", n } };
+  const filter = m[4] === undefined ? valued : { ...valued, hasKeyword: m[4].toLowerCase() };
+  const whose = m[5] === "your" ? "you" : m[5] === "a" ? "any" : "opponent";
   return { kind: "card-in-graveyard", whose, ...(Object.keys(filter).length > 0 ? { filter } : {}) };
 }
 
@@ -6782,7 +6785,7 @@ export function parseSentence(sentence, ctx) {
     if (typeof t === "string" ? !/(^|-)spell$/.test(t) : t?.kind !== "spell") return null;
     return { kind: "spell-cant-be-countered", target: slot(m[1]) };
   }
-  if ((m = /^return (target .+? card from your graveyard) to your hand\.$/i.exec(s))) {
+  if ((m = /^return (target (?:.+? card|card with [a-z]+) from your graveyard) to your hand\.$/i.exec(s))) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "return-to-hand", target: i, from: "graveyard" };
   }
@@ -26422,6 +26425,15 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "creatures-you-control", ...(m[1] ? { excludeSelf: true } : {}) },
       grantKeywords: [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
+      text,
+    };
+  }
+  // "Land creatures you control have flying" (Tatyova, Steward of Tides;
+  // Halimar Tidecaller): permanents that are both, this one never among them.
+  if ((m = new RegExp(`^Land creatures you control have ${KW}(?: and ${KW})?\\.$`).exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { types: ["land", "creature"], controlledBy: "you" } },
+      grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
       text,
     };
   }

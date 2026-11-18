@@ -760,6 +760,7 @@ discard) then a `for-each-player` over `"each-opponent"` of a `conditional` on `
 "you" } } } }`: the condition's filter is bound as it's asked, and with no card of yours nothing shares.
 `greatestInZone` and `greatestAmongItsController` take `least: true`. `hasKeyword: CardKeyword` is one
 row per printed keyword read off the text box (morph, madness, kicker, flashback, cycling, fading, ...;
+`"awaken"` is a card with an awaken cost — Halimar Tidecaller's "target card with awaken from your graveyard";
 `"modular"` is "Modular N" or "Modular—Sunburst" — Arcbound Overseer's "each creature you control with modular");
 `keyword` is still the computed evergreen list. `hasKeyword: "partner"` is partner or "partner with",
 not the other partner abilities (702.124f); `hasKeyword: "doctors-companion"` is doctor's companion (702.124m —
